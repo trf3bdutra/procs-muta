@@ -12,4 +12,4 @@ Exportações dos catálogos auxiliares do app, importadas por `scripts/banco/im
 
 Para atualizar: exporte cada banco no app e rode `python3 scripts/construir.py ARQUIVOS.json`.
 
-Os modelos e os precedentes curados não ficam mais aqui: a base do app é `data/paradigmas.json` (ementário, parágrafos e citações). Os 202 modelos antigos foram retirados em 20/10/2026; a exportação deles está no histórico do repositório (commit a2ae68b).
+Os modelos e os precedentes curados não ficam aqui: a base do app é `data/paradigmas.json` (ementário, modelos-matriz, parágrafos e citações). Os 202 modelos-matriz retirados em 20/10/2026 foram restaurados em 21/10/2026 a partir do commit a2ae68b.

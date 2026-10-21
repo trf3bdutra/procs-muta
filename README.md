@@ -5,7 +5,7 @@ Construtor de Minutas e bancos do gabinete do Desembargador Federal Carlos Muta 
 ## Estrutura
 
 ```
-data/paradigmas.json   base do app: ementário (precedentes), parágrafos, citações (jurisprudência e normas), assuntos e redação
+data/paradigmas.json   base do app: ementário (precedentes), modelos-matriz (202), parágrafos, citações (jurisprudência e normas), assuntos e redação
 banco/                 catálogos auxiliares exportados do app
   assuntos.json        catálogo de assuntos (TPU/CNJ, seções, sinônimos)
   jurisprudencia.json  temas, súmulas e precedentes de referência
