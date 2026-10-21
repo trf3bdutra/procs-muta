@@ -5,9 +5,8 @@ Construtor de Minutas e bancos do gabinete do Desembargador Federal Carlos Muta 
 ## Estrutura
 
 ```
-banco/                 um arquivo por banco (é daqui que o construtor.html lê e grava)
-  precedentes.json     precedentes curados
-  modelos.json         modelos, inclusive os antigos modelos-matriz (hoje unificados)
+data/paradigmas.json   base do app: ementário (precedentes), parágrafos, citações (jurisprudência e normas), assuntos e redação
+banco/                 catálogos auxiliares exportados do app
   assuntos.json        catálogo de assuntos (TPU/CNJ, seções, sinônimos)
   jurisprudencia.json  temas, súmulas e precedentes de referência
   redacao.json         padrão de redação: conectivos, verbos, preferências, correções, alertas
