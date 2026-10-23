@@ -16,6 +16,7 @@ referencias/
   paragrafos.json              parágrafos-padrão
   citacoes.json                jurisprudência (TRF3, outros tribunais, superiores) e normas
   assuntos.json                assuntos (TPU/CNJ) e temas — o eixo que gera as coleções
+  magistrados.json             cadastro único de magistrados (TRF3 e 1º grau), com as grafias usadas em etiquetas
 padrao/
   manifesto.json               versão do padrão, contagem e hash de cada arquivo
   esquema.json                 formato obrigatório de cada categoria
@@ -27,6 +28,12 @@ scripts/migrar.py              migração única das bases antigas para o padrã
 **Identificador do precedente:** `acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie>` (ex.: `acd-50003247020244036004-20260928-ap`; `ed` para embargos de declaração). O id antigo (`par-…`) fica em `idAnterior`.
 
 **Coleções** não têm arquivo: são consultas por assunto + tema (+ período), feitas na hora pela biblioteca: `Paradigmas.criar().carregar()` e depois `colecao({ assunto, tema })`.
+
+**Magistrados:** cada precedente traz `relatorId`, `colegiado` (vogais que votaram, lidos do acórdão) e `primeiroGrau` (`juizo`, `juiz`, `magistradoId`). `porMagistrado("NEY")` reúne o que o magistrado relatou, julgou no colegiado ou sentenciou em 1º grau; o cadastro também resolve as etiquetas de impedimento e suspeição do acervo.
+
+**Temas:** os 17 temas da análise de veículos, saúde e concursos estão aprovados; os 673 do agrupamento automático estão *a revisar*, numerados em `prioridadeRevisao` (assuntos com mais precedentes primeiro).
+
+**Servidor no Replit:** mantém cópia própria dos bancos; na etapa 3 ele passa a importar desta base (pelos arquivos de compatibilidade enquanto não migrar).
 
 **Compatibilidade:** enquanto os apps não migram, `python3 gerar.py --compat` regrava `data/paradigmas.json` e `banco/*.json` a partir da base nova; `python3 gerar.py` confere, registro a registro, que a base nova reproduz esses arquivos sem perda. Ao fim da transição saem `banco/`, `catalogo-trf3/`, `index.html` e `data/paradigmas.json`.
 

@@ -2,7 +2,7 @@
  "padrao": "gabcmt",
  "versao": "1.0.0",
  "compatibilidade": "apps declaram a versão maior que leem (1); versão menor nova só acrescenta campos",
- "atualizadoEm": "2026-10-23T16:59:32Z",
+ "atualizadoEm": "2026-10-23T18:18:05Z",
  "areas": {
   "paradigmas": "processos já julgados pelo relator (precedentes, inteiros teores, modelos)",
   "referencias": "diretrizes, parágrafos-padrão, citações (jurisprudência e normas), assuntos e temas",
@@ -21,13 +21,13 @@
   },
   "paradigmas/precedentes.jsonl": {
    "registros": 1844,
-   "bytes": 13352040,
-   "sha256": "f101b83ca40694454d9f7e367ad8b093522b4a2716a0dae017c031407ed18b56"
+   "bytes": 13526190,
+   "sha256": "bee70b343888ffc3fb4bf48822ce838aac5f41fdf5e842dc7397a318ccb537a3"
   },
   "referencias/assuntos.json": {
    "registros": 556,
-   "bytes": 566260,
-   "sha256": "39bf91fbf5f21d25fcb99770c4d4157fdc2c2fc31f3cec9629db22eb98094787"
+   "bytes": 585652,
+   "sha256": "7ed78b6df3173ab4f5b8231d170404c57edf6ff23c407262c397b62de487e216"
   },
   "referencias/citacoes.json": {
    "registros": 98,
@@ -38,6 +38,11 @@
    "registros": 136,
    "bytes": 33105,
    "sha256": "4a87e5b0c775b4d7af2746287fd36bee727bf1896cdddaa5a58019122007c367"
+  },
+  "referencias/magistrados.json": {
+   "registros": 3,
+   "bytes": 1695,
+   "sha256": "7804ac17f6ee13768b9240128b7fa15c6576441e99433fa601717a7c4f25e00d"
   },
   "referencias/paragrafos.json": {
    "registros": 120,

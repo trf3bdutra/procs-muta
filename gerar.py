@@ -139,8 +139,9 @@ def precedente_antigo(r):
          "orgaoJulgador": r.get("orgao", ""), "assuntoOrigem": r.get("assuntoOrigem", ""),
          "statusCuradoria": cur.get("status", "bruto"), "urlFonte": r.get("urlFonte", "")}
     for c in ["tese", "fundamentacao", "causaPedir", "especificidades", "especificidadesTags", "preliminares", "honorarios",
-              "primeiroGrau", "parteNotavel", "papelNotavel", "processosAssociados"]:
+              "parteNotavel", "papelNotavel", "processosAssociados"]:
         v[c] = cur.get(c, "")
+    v["primeiroGrau"] = (r.get("primeiroGrau") or {}).get("juizo", "") if leg else ""
     for c in ["formatoModelo", "nomeModelo", "textoModelo", "esqueletoModelo", "paragrafosModelo"]:
         v[c] = mv.get(c, "")
     if leg:

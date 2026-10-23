@@ -4,105 +4,534 @@
  "title": "Padrão gabcmt 1.0 — paradigmas e referências",
  "description": "Formato obrigatório de cada categoria. Todo app lê e grava neste formato; gerar.py valida antes de publicar. Campos não listados são permitidos (extensões), mas não podem repetir com outro nome um campo já previsto.",
  "$defs": {
-  "data": {"type": "string", "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$", "description": "AAAA-MM-DD ou vazio"},
+  "data": {
+   "type": "string",
+   "pattern": "^(\\d{4}-\\d{2}-\\d{2})?$",
+   "description": "AAAA-MM-DD ou vazio"
+  },
   "curadoria": {
    "type": "object",
-   "required": ["status"],
+   "required": [
+    "status"
+   ],
    "properties": {
-    "status": {"enum": ["bruto", "revisado", "curado", "aprovado"]},
-    "tese": {"type": "string"}, "fundamentacao": {"type": "string"}, "causaPedir": {"type": "string"},
-    "especificidades": {"type": "string"}, "especificidadesTags": {"type": "string"},
-    "preliminares": {"type": "string"}, "honorarios": {"type": "string"},
-    "primeiroGrau": {"type": "string"}, "parteNotavel": {"type": "string"}, "papelNotavel": {"type": "string"},
-    "processosAssociados": {"type": "string"}
+    "status": {
+     "enum": [
+      "bruto",
+      "revisado",
+      "curado",
+      "aprovado"
+     ]
+    },
+    "tese": {
+     "type": "string"
+    },
+    "fundamentacao": {
+     "type": "string"
+    },
+    "causaPedir": {
+     "type": "string"
+    },
+    "especificidades": {
+     "type": "string"
+    },
+    "especificidadesTags": {
+     "type": "string"
+    },
+    "preliminares": {
+     "type": "string"
+    },
+    "honorarios": {
+     "type": "string"
+    },
+    "parteNotavel": {
+     "type": "string"
+    },
+    "papelNotavel": {
+     "type": "string"
+    },
+    "processosAssociados": {
+     "type": "string"
+    }
    }
   },
   "precedente": {
    "description": "paradigmas/precedentes.jsonl — um julgamento do relator por linha (ementário).",
    "type": "object",
-   "required": ["id", "processo", "especie", "relator", "dataJulgamento", "ementa", "curadoria", "inteiroTeor"],
+   "required": [
+    "id",
+    "processo",
+    "especie",
+    "relator",
+    "dataJulgamento",
+    "ementa",
+    "curadoria",
+    "inteiroTeor"
+   ],
    "properties": {
-    "id": {"type": "string", "pattern": "^acd-\\d{20}-(\\d{8}|semdata)-[a-z]+$", "description": "acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie: ap, ed, ai, agint, aprn, rn…>"},
-    "processo": {"type": "string", "pattern": "^\\d{7}-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4}$"},
-    "especie": {"type": "string", "description": "ApCiv, EDcl, AgInt, AI, ApelRemNec, RemNecCiv…"},
-    "classe": {"type": "string"}, "classeSigla": {"type": "string"}, "pronunciamento": {"type": "string"},
-    "orgao": {"type": "string"}, "relator": {"type": "string"},
-    "dataJulgamento": {"$ref": "#/$defs/data"}, "dataPublicacao": {"$ref": "#/$defs/data"},
-    "assunto": {"type": "string", "description": "nome do assunto em referencias/assuntos.json"},
-    "assuntoOrigem": {"type": "string"}, "temas": {"type": "string"}, "ramoDireito": {"type": "string"},
-    "ementaCabecalho": {"type": "string"}, "ementa": {"type": "string"},
-    "resultado": {"type": "string"}, "sentidoResultado": {"type": "string"},
-    "dispositivosCitados": {"type": "string"}, "jurisprudenciaCitada": {"type": "string"},
-    "curadoria": {"$ref": "#/$defs/curadoria"},
-    "catalogacao": {"type": "object", "description": "classificação automática (temaId, grauIgualdade, temaSugerido…); nunca editada à mão"},
-    "modeloVinculado": {"type": "object"},
-    "inteiroTeor": {"type": "boolean", "description": "true quando há texto em paradigmas/inteiros-teores/<ano>.jsonl"},
-    "fonte": {"type": "string"}, "urlFonte": {"type": "string"},
-    "idAnterior": {"type": "string", "description": "id no banco antigo (par-…); transição"},
-    "origens": {"type": "array", "items": {"type": "string"}},
-    "correcoes": {"type": "array", "items": {"type": "string"}, "description": "correções feitas na migração em relação ao banco antigo"},
-    "_legado": {"type": "object", "description": "desenho do registro antigo, para a compatibilidade; sai na etapa 4"}
+    "id": {
+     "type": "string",
+     "pattern": "^acd-\\d{20}-(\\d{8}|semdata)-[a-z]+$",
+     "description": "acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie: ap, ed, ai, agint, aprn, rn…>"
+    },
+    "processo": {
+     "type": "string",
+     "pattern": "^\\d{7}-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4}$"
+    },
+    "especie": {
+     "type": "string",
+     "description": "ApCiv, EDcl, AgInt, AI, ApelRemNec, RemNecCiv…"
+    },
+    "classe": {
+     "type": "string"
+    },
+    "classeSigla": {
+     "type": "string"
+    },
+    "pronunciamento": {
+     "type": "string"
+    },
+    "orgao": {
+     "type": "string"
+    },
+    "relator": {
+     "type": "string"
+    },
+    "dataJulgamento": {
+     "$ref": "#/$defs/data"
+    },
+    "dataPublicacao": {
+     "$ref": "#/$defs/data"
+    },
+    "assunto": {
+     "type": "string",
+     "description": "nome do assunto em referencias/assuntos.json"
+    },
+    "assuntoOrigem": {
+     "type": "string"
+    },
+    "temas": {
+     "type": "string"
+    },
+    "ramoDireito": {
+     "type": "string"
+    },
+    "ementaCabecalho": {
+     "type": "string"
+    },
+    "ementa": {
+     "type": "string"
+    },
+    "resultado": {
+     "type": "string"
+    },
+    "sentidoResultado": {
+     "type": "string"
+    },
+    "dispositivosCitados": {
+     "type": "string"
+    },
+    "jurisprudenciaCitada": {
+     "type": "string"
+    },
+    "curadoria": {
+     "$ref": "#/$defs/curadoria"
+    },
+    "catalogacao": {
+     "type": "object",
+     "description": "classificação automática (temaId, grauIgualdade, temaSugerido…); nunca editada à mão"
+    },
+    "modeloVinculado": {
+     "type": "object"
+    },
+    "inteiroTeor": {
+     "type": "boolean",
+     "description": "true quando há texto em paradigmas/inteiros-teores/<ano>.jsonl"
+    },
+    "fonte": {
+     "type": "string"
+    },
+    "urlFonte": {
+     "type": "string"
+    },
+    "idAnterior": {
+     "type": "string",
+     "description": "id no banco antigo (par-…); transição"
+    },
+    "origens": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "correcoes": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     },
+     "description": "correções feitas na migração em relação ao banco antigo"
+    },
+    "_legado": {
+     "type": "object",
+     "description": "desenho do registro antigo, para a compatibilidade; sai na etapa 4"
+    },
+    "primeiroGrau": {
+     "type": "object",
+     "description": "juízo e juiz de 1º grau (magistradoId → referencias/magistrados.json)",
+     "properties": {
+      "juizo": {
+       "type": "string"
+      },
+      "juiz": {
+       "type": "string"
+      },
+      "magistradoId": {
+       "type": "string"
+      }
+     }
+    },
+    "colegiado": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "pattern": "^mag-"
+     },
+     "description": "vogais que votaram (ids), lidos do acórdão"
+    },
+    "relatorId": {
+     "type": "string",
+     "pattern": "^mag-"
+    }
    }
   },
   "inteiroTeor": {
    "description": "paradigmas/inteiros-teores/<ano>.jsonl — texto integral (relatório, voto, ementa, acórdão).",
-   "type": "object", "required": ["id", "processo", "inteiroTeor"],
-   "properties": {"id": {"type": "string", "pattern": "^acd-"}, "processo": {"type": "string"}, "inteiroTeor": {"type": "string"}}
+   "type": "object",
+   "required": [
+    "id",
+    "processo",
+    "inteiroTeor"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^acd-"
+    },
+    "processo": {
+     "type": "string"
+    },
+    "inteiroTeor": {
+     "type": "string"
+    }
+   }
   },
   "modelo": {
    "description": "paradigmas/modelos.json — voto-padrão, voto-matriz, decisão, despacho.",
-   "type": "object", "required": ["id", "especieModelo", "pronunciamento", "assunto", "dataReferencia"],
+   "type": "object",
+   "required": [
+    "id",
+    "especieModelo",
+    "pronunciamento",
+    "assunto",
+    "dataReferencia"
+   ],
    "properties": {
-    "id": {"type": "string", "pattern": "^mod-"},
-    "especieModelo": {"enum": ["voto-padrao", "voto-matriz", "decisao", "despacho"]},
-    "pronunciamento": {"type": "string"}, "especie": {"type": "string"}, "assunto": {"type": "string"}, "temas": {"type": "string"},
-    "processo": {"type": "string", "description": "processo de referência (ou rótulo do modelo)"},
-    "processosAssociados": {"type": "string"},
-    "dataReferencia": {"$ref": "#/$defs/data"}, "atualizadoEm": {"type": "string"},
-    "historico": {"type": "array", "items": {"type": "object"}},
-    "textoModelo": {"type": "string"}, "esqueletoModelo": {}, "paragrafosModelo": {}
+    "id": {
+     "type": "string",
+     "pattern": "^mod-"
+    },
+    "especieModelo": {
+     "enum": [
+      "voto-padrao",
+      "voto-matriz",
+      "decisao",
+      "despacho"
+     ]
+    },
+    "pronunciamento": {
+     "type": "string"
+    },
+    "especie": {
+     "type": "string"
+    },
+    "assunto": {
+     "type": "string"
+    },
+    "temas": {
+     "type": "string"
+    },
+    "processo": {
+     "type": "string",
+     "description": "processo de referência (ou rótulo do modelo)"
+    },
+    "processosAssociados": {
+     "type": "string"
+    },
+    "dataReferencia": {
+     "$ref": "#/$defs/data"
+    },
+    "atualizadoEm": {
+     "type": "string"
+    },
+    "historico": {
+     "type": "array",
+     "items": {
+      "type": "object"
+     }
+    },
+    "textoModelo": {
+     "type": "string"
+    },
+    "esqueletoModelo": {},
+    "paragrafosModelo": {}
    }
   },
   "paragrafo": {
-   "type": "object", "required": ["id", "categoria", "titulo", "texto"],
-   "properties": {"id": {"type": "string"}, "categoria": {"type": "string"}, "titulo": {"type": "string"}, "texto": {"type": "string"},
-                  "status": {"type": "string"}, "variaveis": {"type": "array"}}
+   "type": "object",
+   "required": [
+    "id",
+    "categoria",
+    "titulo",
+    "texto"
+   ],
+   "properties": {
+    "id": {
+     "type": "string"
+    },
+    "categoria": {
+     "type": "string"
+    },
+    "titulo": {
+     "type": "string"
+    },
+    "texto": {
+     "type": "string"
+    },
+    "status": {
+     "type": "string"
+    },
+    "variaveis": {
+     "type": "array"
+    }
+   }
   },
   "citacao": {
-   "type": "object", "required": ["id", "categoria", "origem"],
+   "type": "object",
+   "required": [
+    "id",
+    "categoria",
+    "origem"
+   ],
    "properties": {
-    "id": {"type": "string"},
-    "categoria": {"enum": ["jurisprudencia", "norma"]},
-    "origem": {"enum": ["trf3", "outros-tribunais", "superiores", "legislacao"]},
-    "referencia": {"type": "string"}, "tribunal": {"type": "string"}, "tese": {"type": "string"},
-    "assunto": {"type": "string"}, "tema": {"type": "string"},
-    "sigla": {"type": "string"}, "nome": {"type": "string"}, "prosa": {"type": "string"}, "aliases": {"type": "array"}
+    "id": {
+     "type": "string"
+    },
+    "categoria": {
+     "enum": [
+      "jurisprudencia",
+      "norma"
+     ]
+    },
+    "origem": {
+     "enum": [
+      "trf3",
+      "outros-tribunais",
+      "superiores",
+      "legislacao"
+     ]
+    },
+    "referencia": {
+     "type": "string"
+    },
+    "tribunal": {
+     "type": "string"
+    },
+    "tese": {
+     "type": "string"
+    },
+    "assunto": {
+     "type": "string"
+    },
+    "tema": {
+     "type": "string"
+    },
+    "sigla": {
+     "type": "string"
+    },
+    "nome": {
+     "type": "string"
+    },
+    "prosa": {
+     "type": "string"
+    },
+    "aliases": {
+     "type": "array"
+    }
    }
   },
   "diretriz": {
-   "type": "object", "required": ["id", "tipo"],
-   "properties": {"id": {"type": "string"}, "tipo": {"type": "string", "description": "alerta, conectivo, verbo, preferência, correção…"},
-                  "escopo": {"type": "string"}, "preferir": {}, "evitar": {}, "mensagem": {"type": "string"}}
+   "type": "object",
+   "required": [
+    "id",
+    "tipo"
+   ],
+   "properties": {
+    "id": {
+     "type": "string"
+    },
+    "tipo": {
+     "type": "string",
+     "description": "alerta, conectivo, verbo, preferência, correção…"
+    },
+    "escopo": {
+     "type": "string"
+    },
+    "preferir": {},
+    "evitar": {},
+    "mensagem": {
+     "type": "string"
+    }
+   }
   },
   "assunto": {
-   "type": "object", "required": ["id", "nome"],
-   "properties": {"id": {"type": "string"}, "nome": {"type": "string"}, "secao": {"type": "string"}, "sinonimos": {"type": "array"},
-                  "codigoCNJ": {"type": "string"}, "ativo": {"type": "boolean"}}
+   "type": "object",
+   "required": [
+    "id",
+    "nome"
+   ],
+   "properties": {
+    "id": {
+     "type": "string"
+    },
+    "nome": {
+     "type": "string"
+    },
+    "secao": {
+     "type": "string"
+    },
+    "sinonimos": {
+     "type": "array"
+    },
+    "codigoCNJ": {
+     "type": "string"
+    },
+    "ativo": {
+     "type": "boolean"
+    }
+   }
   },
   "tema": {
-   "type": "object", "required": ["id", "rotulo", "status"],
-   "properties": {"id": {"type": "string", "pattern": "^tema-"}, "assunto": {"type": "string"}, "rotulo": {"type": "string"},
-                  "representante": {"type": "string"}, "quantidade": {"type": "integer"},
-                  "status": {"enum": ["a revisar", "aprovado", "descartado"]}, "origem": {"type": "string"}}
+   "type": "object",
+   "required": [
+    "id",
+    "rotulo",
+    "status"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^tema-"
+    },
+    "assunto": {
+     "type": "string"
+    },
+    "rotulo": {
+     "type": "string"
+    },
+    "representante": {
+     "type": "string"
+    },
+    "quantidade": {
+     "type": "integer"
+    },
+    "status": {
+     "enum": [
+      "a revisar",
+      "aprovado",
+      "descartado"
+     ]
+    },
+    "origem": {
+     "type": "string"
+    },
+    "prioridadeRevisao": {
+     "type": "integer"
+    }
+   }
+  },
+  "magistrado": {
+   "description": "referencias/magistrados.json — cadastro único de magistrados (TRF3 e 1º grau), com as grafias usadas em etiquetas e acórdãos.",
+   "type": "object",
+   "required": [
+    "id",
+    "nome",
+    "cargo",
+    "aliases"
+   ],
+   "properties": {
+    "id": {
+     "type": "string",
+     "pattern": "^mag-"
+    },
+    "nome": {
+     "type": "string"
+    },
+    "cargo": {
+     "type": "string"
+    },
+    "atuacao": {
+     "type": "array",
+     "items": {
+      "type": "object"
+     }
+    },
+    "aliases": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "fonte": {
+     "type": "string"
+    }
+   }
   }
  },
  "arquivos": {
-  "paradigmas/precedentes.jsonl": {"formato": "jsonl", "registro": "precedente"},
-  "paradigmas/inteiros-teores/*.jsonl": {"formato": "jsonl", "registro": "inteiroTeor"},
-  "paradigmas/modelos.json": {"formato": "json", "registro": "modelo"},
-  "referencias/paragrafos.json": {"formato": "json", "registro": "paragrafo"},
-  "referencias/citacoes.json": {"formato": "json", "registro": "citacao"},
-  "referencias/diretrizes.json": {"formato": "json", "registro": "diretriz"},
-  "referencias/assuntos.json": {"formato": "json", "registro": "assunto", "extra": {"temas": "tema"}}
+  "paradigmas/precedentes.jsonl": {
+   "formato": "jsonl",
+   "registro": "precedente"
+  },
+  "paradigmas/inteiros-teores/*.jsonl": {
+   "formato": "jsonl",
+   "registro": "inteiroTeor"
+  },
+  "paradigmas/modelos.json": {
+   "formato": "json",
+   "registro": "modelo"
+  },
+  "referencias/paragrafos.json": {
+   "formato": "json",
+   "registro": "paragrafo"
+  },
+  "referencias/citacoes.json": {
+   "formato": "json",
+   "registro": "citacao"
+  },
+  "referencias/diretrizes.json": {
+   "formato": "json",
+   "registro": "diretriz"
+  },
+  "referencias/assuntos.json": {
+   "formato": "json",
+   "registro": "assunto",
+   "extra": {
+    "temas": "tema"
+   }
+  },
+  "referencias/magistrados.json": {
+   "formato": "json",
+   "registro": "magistrado"
+  }
  }
 }

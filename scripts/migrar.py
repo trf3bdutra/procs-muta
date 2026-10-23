@@ -58,7 +58,49 @@ def especie_por_ementa(ementa, classe_sigla):
 
 
 CURADORIA = ["tese", "fundamentacao", "causaPedir", "especificidades", "especificidadesTags", "preliminares",
-             "honorarios", "primeiroGrau", "parteNotavel", "papelNotavel", "processosAssociados"]
+             "honorarios", "parteNotavel", "papelNotavel", "processosAssociados"]
+
+# cadastro de magistrados: nome oficial, cargo, atuação e as grafias que aparecem em etiquetas e acórdãos
+MAGISTRADOS = [
+    {"id": "mag-carlos-muta", "nome": "Luis Carlos Hiroki Muta", "cargo": "Desembargador Federal",
+     "atuacao": [{"orgao": "TRF3 · Turma Regional de Mato Grosso do Sul", "papel": "relator (gabinete A)"}],
+     "aliases": ["CARLOS MUTA", "Carlos Muta", "LUIS CARLOS HIROKI MUTA", "Des. Fed. Carlos Muta"],
+     "fonte": "acórdãos do portal do TRF3"},
+    {"id": "mag-jean-marcos", "nome": "Jean Marcos", "cargo": "Desembargador Federal",
+     "atuacao": [{"orgao": "TRF3 · Turma Regional de Mato Grosso do Sul", "papel": "vogal"}],
+     "aliases": ["JEAN MARCOS", "Jean Marcos", "JEAN", "Jean", "Dr. Jean", "DR. JEAN"],
+     "fonte": "acórdãos do portal do TRF3 (\"Votaram o Desembargador Federal JEAN MARCOS…\"); etiquetas de impedimento e suspeição"},
+    {"id": "mag-ney-gustavo-paes-de-andrade", "nome": "Ney Gustavo Paes de Andrade", "cargo": "Juiz Federal",
+     "atuacao": [{"orgao": "TRF3 · Turma Regional de Mato Grosso do Sul", "papel": "Juiz Federal Convocado (vogal)"},
+                 {"orgao": "Seção Judiciária de Mato Grosso do Sul", "papel": "1º grau", "varas": []}],
+     "aliases": ["NEY DE ANDRADE", "Ney de Andrade", "Ney Gustavo", "NEY", "Ney", "Dr. Ney", "DR. NEY", "Dr. Ney Gustavo"],
+     "fonte": "acórdãos do portal do TRF3 (\"Juiz Federal Convocado NEY DE ANDRADE\"); notícia TRF3 440284 (nome completo); "
+              "etiquetas de impedimento"},
+]
+
+
+def colegiado_do_texto(texto):
+    """Ids dos magistrados que votaram, a partir do 'Votaram …' do acórdão."""
+    m = re.search(r"Votaram ([^.]+)\.", texto or "")
+    ids = []
+    if m:
+        for mg in MAGISTRADOS:
+            if any(re.search(r"\b" + re.escape(a) + r"\b", m.group(1)) for a in mg["aliases"] if len(a) > 4):
+                ids.append(mg["id"])
+    return ids
+
+
+def juizo_do_texto(texto):
+    """Juízo de 1º grau mencionado no inteiro teor (vara federal ou comarca, na competência delegada)."""
+    t = texto or ""
+    m = re.search(r"JU[IÍ]ZO RECORRENTE:\s*([^\n]+)", t)
+    if m:
+        return m.group(1).strip()
+    rel = re.search(r"\bRELAT[ÓO]RIO\b(.+?)\bVOTO\b", t, re.S)
+    t = rel.group(1) if rel else ""
+    m = re.search(r"(\d+ª\s+Vara\s+(?:Federal|Previdenci[aá]ria|C[ií]vel|Gabinete)[^,.;\n]{0,60}|Vara\s+[ÚU]nica[^,.;\n]{0,60}|"
+                  r"Comarca\s+de\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ][\wÁÉÍÓÚÂÊÔÃÕÇáéíóúâêôãõç ]{2,40})", t, re.I)
+    return m.group(1).strip() if m else ""
 MODELO_VINC = ["formatoModelo", "nomeModelo", "textoModelo", "esqueletoModelo", "paragrafosModelo"]
 CATALOGACAO = ["temaId", "temaRotulo", "temaTamanho", "temaRepresentante", "similaridadeTema", "grauIgualdade",
                "modeloTextoId", "modeloTextoTamanho"]
@@ -87,10 +129,11 @@ def main(extras):
 
     def novo(proc):
         return {"id": "", "processo": proc, "especie": "", "classe": "", "classeSigla": "", "pronunciamento": "Voto",
-                "orgao": "", "relator": "CARLOS MUTA", "dataJulgamento": "", "dataPublicacao": "",
+                "orgao": "", "relator": "CARLOS MUTA", "relatorId": "mag-carlos-muta", "dataJulgamento": "", "dataPublicacao": "",
                 "assunto": "", "assuntoOrigem": "", "temas": "", "ramoDireito": "",
                 "ementaCabecalho": "", "ementa": "", "resultado": "", "sentidoResultado": "",
                 "dispositivosCitados": "", "jurisprudenciaCitada": "",
+                "primeiroGrau": {"juizo": "", "juiz": "", "magistradoId": ""}, "colegiado": [],
                 "curadoria": {"status": "bruto"}, "catalogacao": {}, "inteiroTeor": False,
                 "fonte": "", "urlFonte": "", "idAnterior": "", "origens": []}
 
@@ -120,6 +163,7 @@ def main(extras):
                   "dispositivosCitados": p.get("dispositivosCitados", ""), "jurisprudenciaCitada": p.get("jurisprudenciaCitada", ""),
                   "fonte": p.get("fonte", ""), "urlFonte": p.get("urlFonte", "")})
         cur = {k: p.get(k, "") for k in CURADORIA}
+        r["primeiroGrau"]["juizo"] = p.get("primeiroGrau", "")
         cur["status"] = p.get("statusCuradoria") or "curado"
         r["curadoria"] = cur
         mv = {k: p[k] for k in MODELO_VINC if not vazio(p.get(k))}
@@ -219,6 +263,9 @@ def main(extras):
             if a.get("proporcaoTextoReplicado") is not None:
                 r["catalogacao"]["proporcaoTextoReplicado"] = a["proporcaoTextoReplicado"]
             r["inteiroTeor"] = True
+            if not r["primeiroGrau"]["juizo"]:
+                r["primeiroGrau"]["juizo"] = juizo_do_texto(texto)
+            r["colegiado"] = sorted(set(r["colegiado"]) | set(colegiado_do_texto(texto)))
             textos[i] = texto
             origem[i].append(str(Path(arq).relative_to(RAIZ)) if str(arq).startswith(str(RAIZ)) else Path(arq).name)
 
@@ -288,6 +335,17 @@ def main(extras):
         tid = "tema-" + slug(assunto)[:30] + "-" + slug(sub)[:50]
         temas[tid] = {"id": tid, "assunto": assunto, "rotulo": sub, "representante": "", "quantidade": sum(ids.values()),
                       "status": "a revisar", "origem": "análise de 23/10/2026 (veículos, saúde e concursos)"}
+    # aprovados: os temas da análise de 23/10/2026; os demais seguem a ordem de revisão (assuntos com mais
+    # precedentes primeiro e, dentro do assunto, os temas maiores)
+    por_assunto = collections.Counter(r["assunto"] for r in lista)
+    ordem = sorted((t for t in temas.values() if not t["origem"].startswith("análise")),
+                   key=lambda t: (-por_assunto.get(t["assunto"], 0), -t["quantidade"]))
+    for k, t in enumerate(ordem, 1):
+        t["prioridadeRevisao"] = k
+    for t in temas.values():
+        if t["origem"].startswith("análise"):
+            t["status"] = "aprovado"
+    escrever("referencias/magistrados.json", "gabcmt.referencias.magistrados", MAGISTRADOS)
     escrever("referencias/assuntos.json", "gabcmt.referencias.assuntos", cat["assuntos"]["registros"],
              extra={"temas": sorted(temas.values(), key=lambda t: (t["assunto"], -t["quantidade"]))})
 

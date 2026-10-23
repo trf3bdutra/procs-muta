@@ -41,21 +41,22 @@
     });
 
     const estado = { manifesto: null, precedentes: [], porId: new Map(), modelos: [], paragrafos: [], citacoes: [],
-                     diretrizes: [], assuntos: [], temas: [], textos: new Map() };
+                     diretrizes: [], assuntos: [], temas: [], magistrados: [], textos: new Map() };
 
     async function carregar() {
       const man = JSON.parse(await lerTexto("padrao/manifesto.json"));
       const maior = parseInt(String(man.versao).split(".")[0], 10);
       if (maior !== VERSAO_MAIOR) throw new Error(`Base no padrão ${man.versao}; esta biblioteca lê o padrão ${VERSAO_MAIOR}.x.`);
       const json = async (rel) => JSON.parse(await lerTexto(rel));
-      const [prec, mod, par, cit, dir, ass] = await Promise.all([
+      const [prec, mod, par, cit, dir, ass, mag] = await Promise.all([
         lerTexto("paradigmas/precedentes.jsonl").then(linhas), json("paradigmas/modelos.json"),
         json("referencias/paragrafos.json"), json("referencias/citacoes.json"),
         json("referencias/diretrizes.json"), json("referencias/assuntos.json"),
+        json("referencias/magistrados.json").catch(() => ({ registros: [] })),
       ]);
       Object.assign(estado, { manifesto: man, precedentes: prec, porId: new Map(prec.map((p) => [p.id, p])),
         modelos: mod.registros, paragrafos: par.registros, citacoes: cit.registros, diretrizes: dir.registros,
-        assuntos: ass.registros, temas: ass.temas || [] });
+        assuntos: ass.registros, temas: ass.temas || [], magistrados: mag.registros });
       return api;
     }
 
@@ -98,6 +99,26 @@
       diretrizes: (f) => filtrar(estado.diretrizes, f),
       assuntos: () => estado.assuntos,
       temas: (assunto) => estado.temas.filter((t) => !assunto || contem(t.assunto, assunto)),
+      magistrados: () => estado.magistrados,
+      /** Acha o magistrado por id, nome ou qualquer grafia usada em etiquetas e acórdãos ("NEY", "Dr. Jean"…). */
+      magistrado(nome) {
+        const n = sem(nome).replace(/^(dr|dra|des|juiz|juiza)\.?\s+/, "").trim();
+        return estado.magistrados.find((m) => m.id === nome || sem(m.nome) === n ||
+          (m.aliases || []).some((a) => sem(a).replace(/^(dr|dra|des)\.?\s+/, "") === n)) || null;
+      },
+      /** Precedentes ligados ao magistrado: os que ele julgou em 1º grau e os de que participou no colegiado. */
+      porMagistrado(nome) {
+        const m = api.magistrado(nome);
+        if (!m) return { magistrado: null, primeiroGrau: [], colegiado: [] };
+        const nomes = [m.nome, ...(m.aliases || [])].map(sem);
+        return {
+          magistrado: m,
+          primeiroGrau: estado.precedentes.filter((p) => p.primeiroGrau && (p.primeiroGrau.magistradoId === m.id ||
+            (p.primeiroGrau.juiz && nomes.includes(sem(p.primeiroGrau.juiz))))),
+          relator: estado.precedentes.filter((p) => p.relatorId === m.id),
+          colegiado: estado.precedentes.filter((p) => (p.colegiado || []).includes(m.id)),
+        };
+      },
       /** Coleção = consulta por assunto + tema (+ período): reúne tudo o que a base tem sobre o ponto. */
       colecao(f = {}) {
         return { criterio: f, precedentes: api.precedentes(f), modelos: api.modelos(f), paragrafos: api.paragrafos(f),
