@@ -9,6 +9,10 @@ Fontes lidas (nenhuma é alterada):
   catalogo-trf3/inteiros-teores-*.json         inteiros teores (coleções)
   [opcional] --extra ARQ.json                  outras coleções de inteiros teores no mesmo formato
 
+ATENÇÃO: migração ÚNICA, já feita em 23/10/2026. Depois dela, data/paradigmas.json e banco/ passaram a ser GERADOS a
+partir da base nova (gerar.py --compat); rodar este script de novo leria a cópia gerada e desfaria edições feitas
+nos apps. Para trazer dados de fora, use  python3 gerar.py --importar ARQUIVO.json.
+
 Uso:  python3 scripts/migrar.py [--extra arquivo.json ...]
 Depois: python3 gerar.py  (valida, atualiza o manifesto e confere a compatibilidade)
 """
@@ -221,7 +225,7 @@ def main(extras):
         preencher(r, "dataPublicacao", iso(c.get("pub")))
         preencher(r, "ementa", c.get("ementa"))
         preencher(r, "ementaCabecalho", (c.get("ementa") or "").split("\n")[0])
-        preencher(r, "assunto", c.get("assunto") if c.get("assunto") != (c.get("ementa") or "").split("\n")[0] else "")
+        # no catálogo, "assunto" é só o começo da ementa (não é o assunto da TPU): não aproveita
         preencher(r, "temas", c.get("temas"))
         preencher(r, "dispositivosCitados", c.get("dispositivos"))
         preencher(r, "jurisprudenciaCitada", c.get("jurisprudencia"))
@@ -261,7 +265,8 @@ def main(extras):
                 r["catalogacao"]["assuntoSugerido"] = a.get("tema", "")
                 temas_analise[(a.get("tema", ""), a["subtipo"])][i] += 1
             if a.get("proporcaoTextoReplicado") is not None:
-                r["catalogacao"]["proporcaoTextoReplicado"] = a["proporcaoTextoReplicado"]
+                x = round(float(a["proporcaoTextoReplicado"]), 2)
+                r["catalogacao"]["proporcaoTextoReplicado"] = int(x) if x == int(x) else x   # 0 e 1 sem ".0": igual ao JS
             r["inteiroTeor"] = True
             if not r["primeiroGrau"]["juizo"]:
                 r["primeiroGrau"]["juizo"] = juizo_do_texto(texto)

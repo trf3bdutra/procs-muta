@@ -129,7 +129,7 @@ def precedente_antigo(r):
     leg = r.get("_legado")
     cur = r.get("curadoria", {})
     mv = r.get("modeloVinculado", {})
-    v = {"id": r.get("idAnterior") or "par-" + r["processo"].replace(".", "-"), "processo": r["processo"], "tipo": "Precedente",
+    v = {"id": r.get("idAnterior") or r["id"], "processo": r["processo"], "tipo": "Precedente",
          "pronunciamento": r.get("pronunciamento", ""), "especie": r.get("especie", ""),
          "assunto": r.get("assunto", ""), "temas": r.get("temas", ""), "resultado": r.get("resultado", ""),
          "sessao": leg["sessao"] if leg else dmy(r.get("dataJulgamento")), "fonte": r.get("fonte", ""),
@@ -205,16 +205,149 @@ def conferir_compat():
     return ok, rel, (prec, mods, cat), alterados[:10]
 
 
+def gravar_json2(p, doc):
+    """arquivos de compatibilidade: mesmo recuo (2) dos originais, para o diff mostrar só o que mudou"""
+    Path(p).write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
 def gravar_compat(prec, mods, cat):
     atual = ler_json(RAIZ / "data/paradigmas.json")
-    atual["bancos"]["Precedente"]["registros"] = prec
-    atual["bancos"]["Modelo-matriz"]["registros"] = mods
+    def na_ordem(antigos, novos):   # mantém a ordem do arquivo atual; os novos vão para o fim
+        pos = {x["id"]: i for i, x in enumerate(antigos)}
+        return sorted(novos, key=lambda x: pos.get(x["id"], len(pos)))
+    atual["bancos"]["Precedente"]["registros"] = na_ordem(atual["bancos"]["Precedente"]["registros"], prec)
+    atual["bancos"]["Modelo-matriz"]["registros"] = na_ordem(atual["bancos"]["Modelo-matriz"]["registros"], mods)
     for k, regs in cat.items():
         atual["catalogos"][k]["registros"] = regs
         b = ler_json(RAIZ / f"banco/{k}.json")
         b["registros"] = regs
-        gravar_json(RAIZ / f"banco/{k}.json", b)
-    gravar_json(RAIZ / "data/paradigmas.json", atual)
+        gravar_json2(RAIZ / f"banco/{k}.json", b)
+    gravar_json2(RAIZ / "data/paradigmas.json", atual)
+
+
+# ---------- formato antigo → padrão (espelha padrao/paradigmas.js · legado) ----------
+MAPA = [("processo", "processo"), ("especie", "especie"), ("classe", "classe"), ("classeSigla", "classeSigla"),
+        ("pronunciamento", "pronunciamento"), ("orgao", "orgaoJulgador"), ("assunto", "assunto"), ("assuntoOrigem", "assuntoOrigem"),
+        ("temas", "temas"), ("ramoDireito", "ramoDireito"), ("ementaCabecalho", "ementaCabecalho"), ("ementa", "ementaIntegral"),
+        ("resultado", "resultado"), ("dispositivosCitados", "dispositivosCitados"), ("jurisprudenciaCitada", "jurisprudenciaCitada"),
+        ("fonte", "fonte"), ("urlFonte", "urlFonte")]
+CUR = ["tese", "fundamentacao", "causaPedir", "especificidades", "especificidadesTags", "preliminares", "honorarios",
+       "parteNotavel", "papelNotavel", "processosAssociados"]
+MV = ["formatoModelo", "nomeModelo", "textoModelo", "esqueletoModelo", "paragrafosModelo"]
+ESP = {"ApCiv": "ap", "ApelRemNec": "aprn", "RemNecCiv": "rn", "AI": "ai", "EDcl": "ed", "AgInt": "agint", "CCCiv": "cc",
+       "AR": "ar", "MSCol": "ms", "SuspApel": "susp"}
+SUPERIORES = {"STF", "STJ", "TST", "TSE", "STM", "TNU"}
+
+
+def iso_de(d):
+    m = re.search(r"(\d{2})/(\d{2})/(\d{4})", d or "")
+    return f"{m.group(3)}-{m.group(2)}-{m.group(1)}" if m else (d if re.fullmatch(r"\d{4}-\d{2}-\d{2}", d or "") else "")
+
+
+def id_precedente(proc, julg, esp):
+    cod = ESP.get(esp) or re.sub(r"[^a-z0-9]", "", (esp or "").lower()) or "x"
+    return f"acd-{re.sub(r'\D', '', proc)}-{julg.replace('-', '') if julg else 'semdata'}-{cod}"
+
+
+def precedente_de_antigo(old, ex=None):
+    import copy
+    r = copy.deepcopy(ex) if ex else {
+        "id": "", "processo": old.get("processo", ""), "especie": "", "classe": "", "classeSigla": "", "pronunciamento": "Voto",
+        "orgao": "", "relator": "CARLOS MUTA", "relatorId": "mag-carlos-muta", "dataJulgamento": "", "dataPublicacao": "",
+        "assunto": "", "assuntoOrigem": "", "temas": "", "ramoDireito": "", "ementaCabecalho": "", "ementa": "", "resultado": "",
+        "sentidoResultado": "", "dispositivosCitados": "", "jurisprudenciaCitada": "",
+        "primeiroGrau": {"juizo": "", "juiz": "", "magistradoId": ""}, "colegiado": [], "curadoria": {"status": "curado"},
+        "catalogacao": {}, "inteiroTeor": False, "fonte": "", "urlFonte": "", "idAnterior": "", "origens": ["app"]}
+    leg = (ex or {}).get("_legado") or {"campos": [], "sessao": "", "data": "", "valores": {}}
+    valores = dict(leg.get("valores") or {})
+
+    def mudou(c, novo):
+        if c in valores:
+            if valores[c] == novo:
+                return False
+            del valores[c]
+        return True
+    for n, a in MAPA:
+        if a in old and mudou(a, old[a]):
+            r[n] = "" if old[a] is None else old[a]
+    if "sessao" in old:
+        r["dataJulgamento"] = iso_de(old["sessao"])
+    if "data" in old:
+        r["dataPublicacao"] = iso_de(old["data"])
+    r.setdefault("curadoria", {"status": "curado"})
+    for c in CUR:
+        if c in old:
+            r["curadoria"][c] = "" if old[c] is None else old[c]
+    if old.get("statusCuradoria"):
+        r["curadoria"]["status"] = old["statusCuradoria"]
+    if "primeiroGrau" in old:
+        r["primeiroGrau"] = {**(r.get("primeiroGrau") or {}), "juizo": old["primeiroGrau"] or ""}
+    mv = {c: old[c] for c in MV if old.get(c) not in (None, "")}
+    if mv:
+        r["modeloVinculado"] = mv
+    else:
+        r.pop("modeloVinculado", None)
+    if not r["id"]:
+        r["id"] = id_precedente(r["processo"], r["dataJulgamento"], r["especie"])
+    r["idAnterior"] = old["id"] if old.get("id") and not str(old["id"]).startswith("acd-") else r.get("idAnterior", "")
+    r["_legado"] = {"campos": list(old.keys()), "sessao": old.get("sessao", ""), "data": old.get("data", ""), "valores": valores}
+    return r
+
+
+def modelo_de_antigo(old, ex=None, quando=None):
+    quando = quando or datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    if ex and modelo_antigo(ex) == old:
+        return ex
+    p = (old.get("pronunciamento") or "").lower()
+    esp = ("voto-matriz" if (old.get("formatoModelo") or "").lower() == "modelo-matriz" else "voto-padrao") if p.startswith("voto") \
+        else "despacho" if "despacho" in p else "decisao"
+    hist = list((ex or {}).get("historico") or []) + ([{"em": quando, "alteracao": "editado num app (formato antigo)"}] if ex else [])
+    return {**old, "idAnterior": old["id"], "id": ex["id"] if ex else "mod-" + re.sub(r"^par-(matriz-)?", "", old["id"]),
+            "especieModelo": ex["especieModelo"] if ex else esp, "dataReferencia": old.get("data", ""), "atualizadoEm": quando,
+            "historico": hist}
+
+
+def citacao_de_antiga(j, categoria):
+    trib = (j.get("tribunal") or "").upper()
+    origem = "legislacao" if categoria == "norma" else "superiores" if trib in SUPERIORES else "trf3" if trib == "TRF3" else "outros-tribunais"
+    return {"categoria": categoria, "origem": origem, **j}
+
+
+def importar_precedentes(regs):
+    arq = RAIZ / "paradigmas/precedentes.jsonl"
+    atuais = ler_jsonl(arq)
+    por_ant = {r.get("idAnterior"): r for r in atuais if r.get("idAnterior")}
+    por_id = {r["id"]: r for r in atuais}
+    n = 0
+    for old in regs:
+        ex = por_ant.get(old.get("id")) or por_id.get(old.get("id"))
+        novo = precedente_de_antigo(old, ex)
+        if ex and json.dumps(novo, sort_keys=True) == json.dumps(ex, sort_keys=True):
+            continue
+        por_id.pop(ex["id"], None) if ex else None
+        por_id[novo["id"]] = novo
+        n += 1
+    lista = sorted(por_id.values(), key=lambda r: (r.get("dataJulgamento") or "0000", r["processo"]), reverse=True)
+    gravar_jsonl(arq, lista)
+    return n
+
+
+def importar_modelos(regs):
+    arq = RAIZ / "paradigmas/modelos.json"
+    doc = ler_json(arq)
+    por_ant = {m.get("idAnterior"): m for m in doc["registros"]}
+    por_id = {m["id"]: m for m in doc["registros"]}
+    n = 0
+    for old in regs:
+        ex = por_ant.get(old.get("id"))
+        novo = modelo_de_antigo(old, ex)
+        if novo is ex:
+            continue
+        por_id[novo["id"]] = novo
+        n += 1
+    doc["registros"] = list(por_id.values())
+    gravar_json(arq, doc)
+    return n
 
 
 # ---------- importação vinda dos apps ----------
@@ -236,12 +369,16 @@ def importar(caminhos):
             mesclar_json(RAIZ / destino[sch], regs)
         elif sch in ("gabA.jurisprudencia", "gabA.normas"):
             cat = "jurisprudencia" if sch.endswith("jurisprudencia") else "norma"
-            orig = (lambda j: "superiores" if (j.get("tribunal") or "").upper() in {"STF", "STJ", "TST", "TSE", "STM", "TNU"}
-                    else "trf3" if (j.get("tribunal") or "").upper() == "TRF3" else "outros-tribunais") if cat == "jurisprudencia" else (lambda j: "legislacao")
-            mesclar_json(RAIZ / "referencias/citacoes.json", [{"categoria": cat, "origem": orig(j), **j} for j in regs])
-        elif sch == "gabcmt.paradigmas.precedentes" or (sch == "gabA.paradigmas" and doc.get("banco_tipo") == "Precedente"):
-            raise SystemExit(f"{c}: importação de precedentes pelos apps entra na etapa 3 (Construtor adaptado); "
-                             "por ora use scripts/migrar.py")
+            mesclar_json(RAIZ / "referencias/citacoes.json", [citacao_de_antiga(j, cat) for j in regs])
+        elif sch == "gabA.precedentes" or (sch == "gabA.paradigmas" and doc.get("banco_tipo") == "Precedente"):
+            print(f"  precedentes alterados: {importar_precedentes(regs)}")
+        elif sch == "gabA.modelos" or (sch == "gabA.paradigmas" and doc.get("banco_tipo") in ("Modelo", "Modelo-matriz")):
+            print(f"  modelos alterados: {importar_modelos(regs)}")
+        elif sch == "gabcmt.catalogos" or (sch == "gabA.paradigmas" and "bancos" in doc):
+            for b in ("Precedente", "Modelo-matriz", "Modelo"):
+                regs_b = (doc.get("bancos", {}).get(b) or {}).get("registros") or []
+                if regs_b:
+                    print(f"  {b}: {importar_precedentes(regs_b) if b == 'Precedente' else importar_modelos(regs_b)} alterado(s)")
         else:
             raise SystemExit(f"{c}: schema não reconhecido ({sch})")
         print(f"importado: {c} ({len(regs)} registros, {sch})")

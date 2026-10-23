@@ -33,7 +33,17 @@ scripts/migrar.py              migração única das bases antigas para o padrã
 
 **Temas:** os 17 temas da análise de veículos, saúde e concursos estão aprovados; os 673 do agrupamento automático estão *a revisar*, numerados em `prioridadeRevisao` (assuntos com mais precedentes primeiro).
 
-**Servidor no Replit:** mantém cópia própria dos bancos; na etapa 3 ele passa a importar desta base (pelos arquivos de compatibilidade enquanto não migrar).
+## Apps (padrão 1.0)
+
+| App | Lê | Grava |
+|---|---|---|
+| `construtor.html` (Construtor de Minutas) | `paradigmas/` e `referencias/` pela biblioteca `padrao/paradigmas.js` (embutida); se a base nova falhar, `banco/` | um commit em `paradigmas/precedentes.jsonl`, `paradigmas/modelos.json`, `referencias/paragrafos.json` e `referencias/citacoes.json`, no formato do padrão |
+| `painel.html` (Painel Central) | acervo no repositório privado `gabcmt-dados` (`acervo/importado.json` + `acervo/operacional.json` + `trabalho.json`), com token | os mesmos arquivos e `produtividade/registros.json` (derivada do fluxo) |
+| Servidor no Replit | cópia própria (prevalece quando o Construtor é aberto por ele) | publica no formato antigo em `banco/`; o GitHub Actions importa para a base nova |
+
+O GitHub Actions (`.github/workflows/base.yml`) roda a cada gravação: importa o que veio em `banco/` no formato antigo, valida a base, atualiza o manifesto, regera `data/paradigmas.json` e `banco/` e confere os conversores (`scripts/testes/legado.js`).
+
+Para atualizar os apps depois de mudar a biblioteca ou os módulos: `python3 scripts/construtor/atualizar.py` e `python3 scripts/painel/atualizar.py painel.html` (também aceitam uma versão nova baixada do app). O Painel ganhou: sincronização com o repositório privado (token que pode ser lembrado no navegador), colunas "Juízo de 1º grau" e "Juiz de 1º grau" na triagem, busca por magistrado (acervo e precedentes; 1º grau e colegiado) e leitura correta das datas dd/mm/aaaa na importação de planilhas.
 
 **Compatibilidade:** enquanto os apps não migram, `python3 gerar.py --compat` regrava `data/paradigmas.json` e `banco/*.json` a partir da base nova; `python3 gerar.py` confere, registro a registro, que a base nova reproduz esses arquivos sem perda. Ao fim da transição saem `banco/`, `catalogo-trf3/`, `index.html` e `data/paradigmas.json`.
 
