@@ -4,7 +4,7 @@ const fs = require("fs"), P = require("../../padrao/paradigmas.js"), L = P.legad
 const canon = v => JSON.stringify(v, (k, x) => x && typeof x === "object" && !Array.isArray(x) ? Object.keys(x).sort().reduce((o, c) => (o[c] = x[c], o), {}) : x);
 const prec = fs.readFileSync("paradigmas/precedentes.jsonl", "utf8").split("\n").filter(Boolean).map(JSON.parse);
 const antigo = JSON.parse(fs.readFileSync("data/paradigmas.json", "utf8"));
-const porAnt = new Map(prec.map(p => [p.idAnterior, p]));
+const porAnt = new Map(prec.flatMap(p => [[p.id, p]].concat(p.idAnterior ? [[p.idAnterior, p]] : [])));
 let f = 0, g = 0, h = 0, falhas = [];
 // 1) novo → antigo reproduz data/paradigmas.json (mesmo critério do gerar.py)
 antigo.bancos.Precedente.registros.forEach(o => { const n = porAnt.get(o.id); const v = L.precedenteAntigo(n);
