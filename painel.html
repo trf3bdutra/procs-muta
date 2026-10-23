@@ -8035,7 +8035,9 @@ class Component extends DCLogic {
         }
         const env = (schema, regs2, extra) => JSON.stringify({ schema, versao: "1.0.0", atualizadoEm: t, ...(extra || {}), registros: regs2 }, null, 1) + "\n";
         const linhas = (schema, regs2) => "{\n \"schema\": " + JSON.stringify(schema) + ",\n \"versao\": \"1.0.0\",\n \"atualizadoEm\": " + JSON.stringify(t) + ",\n \"registros\": [\n" + regs2.map(x => "  " + JSON.stringify(x)).join(",\n") + "\n ]\n}\n";
-        const trab = { ...(remoto._trabalho || {}), schema: "gabcmt.trabalho", versao: "1.0.0", atualizadoEm: t, painel };
+        // relê o trabalho.json logo antes de gravar: o servidor (Replit) grava "sessoes" e "servidores" no mesmo arquivo
+        const trabAtual = (await lerArquivo(ARQ.trabalho)) || remoto._trabalho || {};
+        const trab = { ...trabAtual, schema: "gabcmt.trabalho", versao: "1.0.0", atualizadoEm: t, painel };
         // produtividade: registros "fluxo-…" refeitos a partir do fluxo; os demais (lançados à mão) ficam como estão
         const prodAnt = (await lerArquivo(ARQ.produtividade)) || { registros: [] };
         const prodFluxo = []; const impPorId = new Map(imps.map(i => [i.id, i]));

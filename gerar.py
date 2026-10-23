@@ -160,7 +160,9 @@ def modelo_antigo(m):
 
 
 def compat_docs():
-    prec = [precedente_antigo(r) for r in ler_jsonl(RAIZ / "paradigmas/precedentes.jsonl") if r.get("_legado")]
+    # todos os precedentes da base (os que vieram do banco antigo mantêm o desenho exato; os novos entram no fim):
+    # o servidor no Replit lê data/paradigmas.json e assim enxerga a base inteira
+    prec = [precedente_antigo(r) for r in ler_jsonl(RAIZ / "paradigmas/precedentes.jsonl")]
     prec.sort(key=lambda x: x["id"])
     mods = [modelo_antigo(m) for m in ler_json(RAIZ / "paradigmas/modelos.json")["registros"]]
     cit = ler_json(RAIZ / "referencias/citacoes.json")["registros"]
@@ -192,7 +194,7 @@ def conferir_compat():
                     enriquecidos += 1
                 else:
                     alterados.append((i, c))
-    rel.append(f"precedentes: {len(ap)} no banco atual, {len(np_)} gerados; faltando {len(faltam)}; "
+    rel.append(f"precedentes: {len(ap)} no banco atual, {len(np_)} gerados ({len(set(np_) - set(ap))} novos); faltando {len(faltam)}; "
                f"campos alterados {len(alterados)}; campos vazios agora preenchidos {enriquecidos}")
     am = {x["id"]: x for x in atual["bancos"]["Modelo-matriz"]["registros"]}
     nm = {x["id"]: x for x in mods}
