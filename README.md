@@ -2,7 +2,42 @@
 
 Construtor de Minutas e bancos do gabinete do Desembargador Federal Carlos Muta (Turma Regional de Mato Grosso do Sul, TRF3).
 
-## Estrutura
+## Padrão 1.0: a base comum (em transição)
+
+A base passa a ter três áreas, lidas por todos os apps do mesmo jeito. Duas ficam aqui; o **acervo** (processos que estão no gabinete) fica no repositório privado `brndutra/gabcmt-dados`.
+
+```
+paradigmas/                    processos já julgados pelo relator
+  precedentes.jsonl            ementário: 1 julgamento por linha (1.844), com curadoria e catalogação
+  inteiros-teores/2026.jsonl   texto integral (relatório, voto, ementa, acórdão), ligado pelo id
+  modelos.json                 voto-padrão · voto-matriz · decisão · despacho (202)
+referencias/
+  diretrizes.json              redação e estilística: vocabulário, conectivos, preferências, correções, alertas
+  paragrafos.json              parágrafos-padrão
+  citacoes.json                jurisprudência (TRF3, outros tribunais, superiores) e normas
+  assuntos.json                assuntos (TPU/CNJ) e temas — o eixo que gera as coleções
+  magistrados.json             cadastro único de magistrados (TRF3 e 1º grau), com as grafias usadas em etiquetas
+padrao/
+  manifesto.json               versão do padrão, contagem e hash de cada arquivo
+  esquema.json                 formato obrigatório de cada categoria
+  paradigmas.js                biblioteca comum de leitura (navegador e Node)
+gerar.py                       porta única: valida, atualiza o manifesto, importa e gera a compatibilidade
+scripts/migrar.py              migração única das bases antigas para o padrão 1.0
+```
+
+**Identificador do precedente:** `acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie>` (ex.: `acd-50003247020244036004-20260928-ap`; `ed` para embargos de declaração). O id antigo (`par-…`) fica em `idAnterior`.
+
+**Coleções** não têm arquivo: são consultas por assunto + tema (+ período), feitas na hora pela biblioteca: `Paradigmas.criar().carregar()` e depois `colecao({ assunto, tema })`.
+
+**Magistrados:** cada precedente traz `relatorId`, `colegiado` (vogais que votaram, lidos do acórdão) e `primeiroGrau` (`juizo`, `juiz`, `magistradoId`). `porMagistrado("NEY")` reúne o que o magistrado relatou, julgou no colegiado ou sentenciou em 1º grau; o cadastro também resolve as etiquetas de impedimento e suspeição do acervo.
+
+**Temas:** os 17 temas da análise de veículos, saúde e concursos estão aprovados; os 673 do agrupamento automático estão *a revisar*, numerados em `prioridadeRevisao` (assuntos com mais precedentes primeiro).
+
+**Servidor no Replit:** mantém cópia própria dos bancos; na etapa 3 ele passa a importar desta base (pelos arquivos de compatibilidade enquanto não migrar).
+
+**Compatibilidade:** enquanto os apps não migram, `python3 gerar.py --compat` regrava `data/paradigmas.json` e `banco/*.json` a partir da base nova; `python3 gerar.py` confere, registro a registro, que a base nova reproduz esses arquivos sem perda. Ao fim da transição saem `banco/`, `catalogo-trf3/`, `index.html` e `data/paradigmas.json`.
+
+## Estrutura antiga (em uso até a migração dos apps)
 
 ```
 data/paradigmas.json   base do app: ementário (precedentes), modelos-matriz (202), parágrafos, citações (jurisprudência e normas), assuntos e redação

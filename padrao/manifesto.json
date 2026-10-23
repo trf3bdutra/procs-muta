@@ -1,0 +1,53 @@
+{
+ "padrao": "gabcmt",
+ "versao": "1.0.0",
+ "compatibilidade": "apps declaram a versão maior que leem (1); versão menor nova só acrescenta campos",
+ "atualizadoEm": "2026-10-23T18:18:05Z",
+ "areas": {
+  "paradigmas": "processos já julgados pelo relator (precedentes, inteiros teores, modelos)",
+  "referencias": "diretrizes, parágrafos-padrão, citações (jurisprudência e normas), assuntos e temas",
+  "acervo": "repositório privado brndutra/gabcmt-dados"
+ },
+ "arquivos": {
+  "paradigmas/inteiros-teores/2026.jsonl": {
+   "registros": 138,
+   "bytes": 3312431,
+   "sha256": "203997bed4a4037decb318bafb54c1332dc17bb09e5bb91a9bfd14d65125ab51"
+  },
+  "paradigmas/modelos.json": {
+   "registros": 202,
+   "bytes": 1438500,
+   "sha256": "a22ff2ee107444cd14ddbcef4f6864d52aff31399cb455c9b36ce1d236fb2680"
+  },
+  "paradigmas/precedentes.jsonl": {
+   "registros": 1844,
+   "bytes": 13526190,
+   "sha256": "bee70b343888ffc3fb4bf48822ce838aac5f41fdf5e842dc7397a318ccb537a3"
+  },
+  "referencias/assuntos.json": {
+   "registros": 556,
+   "bytes": 585652,
+   "sha256": "7ed78b6df3173ab4f5b8231d170404c57edf6ff23c407262c397b62de487e216"
+  },
+  "referencias/citacoes.json": {
+   "registros": 98,
+   "bytes": 45815,
+   "sha256": "acfd1bc0db4bea5bb3ec5e56bd0fbf0dcc10c7dfb89e20f14f433976d1884b9f"
+  },
+  "referencias/diretrizes.json": {
+   "registros": 136,
+   "bytes": 33105,
+   "sha256": "4a87e5b0c775b4d7af2746287fd36bee727bf1896cdddaa5a58019122007c367"
+  },
+  "referencias/magistrados.json": {
+   "registros": 3,
+   "bytes": 1695,
+   "sha256": "7804ac17f6ee13768b9240128b7fa15c6576441e99433fa601717a7c4f25e00d"
+  },
+  "referencias/paragrafos.json": {
+   "registros": 120,
+   "bytes": 99204,
+   "sha256": "2af3de993344823584dfddaefc4f88de18764f7280f0a1370362db6621362e18"
+  }
+ }
+}
