@@ -38,6 +38,8 @@ Sem duplicidade: o que já está em `banco/precedentes.json` (ou é citado em `b
 
 Em `catalogo-trf3/inteiros-teores-2886-outubro-2026.json` está o acervo dos **inteiros teores** dos 58 acórdãos do relator sobre os 28,86% julgados em outubro de 2026 (relatório, voto, ementa e acórdão), copiados do portal de jurisprudência do TRF3.
 
+Em `catalogo-trf3/inteiros-teores-veiculos-saude-concursos-2025-2026.json` estão os **inteiros teores** de 80 acórdãos do relator julgados de 23/10/2025 a 23/10/2026 sobre liberação de veículos (51), medicamentos (1), tratamentos e procedimentos médicos (6) e certames/concursos (22), com tipo, resultado e proporção de texto replicado de cada um. A análise (tipos mais recorrentes, blocos de texto replicados, acórdãos quase idênticos e erros que se propagaram pelo modelo) está em [`catalogo-trf3/ANALISE-veiculos-saude-concursos-2025-2026.md`](catalogo-trf3/ANALISE-veiculos-saude-concursos-2025-2026.md).
+
 Campos acrescentados aos acórdãos do catálogo: `temaId`, `temaRotulo`, `temaTamanho`, `temaRepresentante`, `similaridadeTema`, `grauIgualdade` (idêntico, quase idêntico, similar, mesma questão, representante, único), `modeloTextoId`, `modeloTextoTamanho` e `sentidoResultado`. O agrupamento é automático; todos saem com `statusCuradoria: bruto`.
 
 ## Scripts
