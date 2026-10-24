@@ -1,0 +1,39 @@
+name: DataJud · atualização do acervo
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: datajud-acervo
+  cancel-in-progress: false
+jobs:
+  atualizar:
+    if: github.event.repository.private
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Testar atualização e preservação do acervo
+        run: python3 -m unittest discover -s datajud -p 'test_sincronizar_banco.py' -v
+      - name: Coletar, reconciliar e publicar
+        env:
+          DATAJUD_API_KEY: ${{ secrets.DATAJUD_API_KEY }}
+        run: |
+          git config user.name 'datajud-acervo[bot]'
+          git config user.email 'datajud-acervo[bot]@users.noreply.github.com'
+          for attempt in 1 2 3; do
+            base=$(git rev-parse origin/main 2>/dev/null || git rev-parse HEAD)
+            python3 datajud/sincronizar_banco.py --acervo . --aplicar --chave-wiki
+            git add banco/acervo.json banco/acervo.csv banco/datajud
+            if git diff --cached --quiet; then echo 'Acervo em dia; sem commit.'; exit 0; fi
+            git commit -m 'Acervo: atualização DataJud'
+            if git push origin HEAD:main; then exit 0; fi
+            git fetch origin main
+            if [ "$(git rev-parse origin/main)" = "$base" ]; then echo 'Push falhou sem avanço remoto; confira permissões.' >&2; exit 1; fi
+            if [ "$attempt" -eq 3 ]; then echo 'main continuou avançando; próxima execução tentará novamente.' >&2; exit 1; fi
+            git reset --hard origin/main
+          done
