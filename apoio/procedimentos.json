@@ -1,0 +1,252 @@
+{
+ "schema": "gabcmt.procedimentos",
+ "versao": 1,
+ "atualizadoEm": "2026-11-14T23:21:03+00:00",
+ "registros": [
+  {
+   "id": "pmwh13wittt2d",
+   "nome": "Admissibilidade - Ausência de dialeticidade",
+   "grupo": "Admissibilidade",
+   "descricao": "Razões recursais que não impugnam especificamente os fundamentos da decisão.",
+   "atos": [
+    "Decisão monocrática terminativa"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witla5q",
+   "nome": "Admissibilidade - Deserção",
+   "grupo": "Admissibilidade",
+   "descricao": "Ausência de preparo após intimação para regularização.",
+   "atos": [
+    "Decisão monocrática terminativa"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witjckv",
+   "nome": "Admissibilidade - Gratuidade de justiça",
+   "grupo": "Admissibilidade",
+   "descricao": "Análise do pedido de gratuidade formulado no recurso.",
+   "atos": [
+    "Despacho",
+    "Decisão monocrática"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witzutc",
+   "nome": "Admissibilidade - Intempestividade",
+   "grupo": "Admissibilidade",
+   "descricao": "Recurso interposto fora do prazo legal.",
+   "atos": [
+    "Decisão monocrática terminativa"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13withp8o",
+   "nome": "Encerramento - Homologação de acordo",
+   "grupo": "Encerramento",
+   "descricao": "Homologação de transação celebrada entre as partes.",
+   "atos": [
+    "Decisão monocrática terminativa"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witw91m",
+   "nome": "Encerramento - Homologação de desistência",
+   "grupo": "Encerramento",
+   "descricao": "Homologação de desistência do recurso ou da ação.",
+   "atos": [
+    "Decisão monocrática terminativa"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witmveu",
+   "nome": "Encerramento - Perda superveniente do objeto",
+   "grupo": "Encerramento",
+   "descricao": "Extinção por perda do objeto recursal.",
+   "atos": [
+    "Decisão monocrática terminativa"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witf3di",
+   "nome": "Incidentes - Conversão em diligência",
+   "grupo": "Incidentes",
+   "descricao": "Retorno dos autos para produção de prova ou esclarecimento.",
+   "atos": [
+    "Despacho",
+    "Voto"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witft4b",
+   "nome": "Incidentes - Declínio de competência",
+   "grupo": "Incidentes",
+   "descricao": "Remessa dos autos ao órgão competente.",
+   "atos": [
+    "Decisão monocrática terminativa"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13wit65tf",
+   "nome": "Incidentes - Habilitação de herdeiros",
+   "grupo": "Incidentes",
+   "descricao": "Sucessão processual por óbito da parte.",
+   "atos": [
+    "Despacho",
+    "Decisão monocrática"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13wityath",
+   "nome": "Incidentes - Juízo de retratação",
+   "grupo": "Incidentes",
+   "descricao": "Adequação do julgado a tese firmada em tema vinculante.",
+   "atos": [
+    "Decisão monocrática",
+    "Voto"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13wit108j",
+   "nome": "Incidentes - Sobrestamento — tema repetitivo ou repercussão geral",
+   "grupo": "Incidentes",
+   "descricao": "Suspensão do feito até julgamento de tema vinculante.",
+   "atos": [
+    "Despacho",
+    "Decisão monocrática"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witr7y0",
+   "nome": "Regularização Processual - Assinatura da peça",
+   "grupo": "Regularização Processual",
+   "descricao": "Regularizar peça apócrifa ou assinatura eletrônica inválida.",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13wit316h",
+   "nome": "Regularização Processual - Comprovante de residência",
+   "grupo": "Regularização Processual",
+   "descricao": "Juntar comprovante de residência atualizado para aferição de competência.",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13wit1frf",
+   "nome": "Regularização Processual - Custas",
+   "grupo": "Regularização Processual",
+   "descricao": "Intimar para recolher custas iniciais ou complementares.",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witim16",
+   "nome": "Regularização Processual - Documento de identificação",
+   "grupo": "Regularização Processual",
+   "descricao": "Juntar documento de identificação ou CPF da parte.",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13wit1zap",
+   "nome": "Regularização Processual - Preparo",
+   "grupo": "Regularização Processual",
+   "descricao": "Intimar para comprovar o recolhimento do preparo recursal ou complementá-lo, sob pena de deserção.",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witkjy6",
+   "nome": "Regularização Processual - Procuração",
+   "grupo": "Regularização Processual",
+   "descricao": "Intimar a parte para regularizar a representação processual, juntando instrumento de mandato.",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witjkd4",
+   "nome": "Regularização Processual - Representação de incapaz",
+   "grupo": "Regularização Processual",
+   "descricao": "Regularizar a representação de parte incapaz (curatela, tutela ou representante legal).",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  },
+  {
+   "id": "pmwh13witfumi",
+   "nome": "Regularização Processual - Substabelecimento",
+   "grupo": "Regularização Processual",
+   "descricao": "Regularizar cadeia de substabelecimentos do advogado subscritor.",
+   "atos": [
+    "Despacho"
+   ],
+   "etiquetas": [],
+   "modelos": [],
+   "ativo": true
+  }
+ ]
+}
