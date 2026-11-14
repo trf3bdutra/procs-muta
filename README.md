@@ -24,6 +24,8 @@ apoio/                         recursos de apoio à redação
   magistrados.json             cadastro de magistrados (TRF3 e 1º grau)
   assuntos.json                assuntos (TPU/CNJ) e temas
   repertorio.json              repertório jurisprudencial e normativo (campo categoria: jurisprudencia | Lei, Código…)
+  usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)
+  vade-mecum/                  Vade Mecum CMT (HTML), com os usos automáticos embutidos
 
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo
@@ -40,6 +42,9 @@ construtor.html · painel.html · index.html   apps (ver observação abaixo)
 ```
 python3 gerar.py                         valida tudo e atualiza padrao/manifesto.json
 python3 gerar.py --importar A.json …     mescla exportações dos apps por id e valida
+python3 scripts/repertorio/vincular.py apoio/vade-mecum/Vade_Mecum_CMT.html --html
+                                         localiza nos precedentes os temas, súmulas, julgados e artigos
+                                         do Vade Mecum e atualiza os usos (JSON, CSV e o próprio HTML)
 ```
 
 Nada é apagado na importação. O que vem de fora só entra se passar no esquema.
