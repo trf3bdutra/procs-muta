@@ -1,12 +1,10 @@
-# Base gabcmt (padrão 1.0): a cada gravação dos apps, valida, atualiza o manifesto e regera a compatibilidade.
-# - Construtor (GitHub Pages) grava direto em paradigmas/ e referencias/.
-# - Servidor no Replit (cópia própria) publica no formato antigo em banco/: aqui isso é importado para a base nova.
+# Base gabcmt (padrão 1.0): a cada gravação, valida a base e atualiza o manifesto.
 # Commits feitos por este fluxo (GITHUB_TOKEN) não disparam o fluxo de novo.
 name: Base gabcmt
 on:
   push:
     branches: [main]
-    paths: ["paradigmas/**", "referencias/**", "banco/**", "padrao/esquema.json", "padrao/paradigmas.js", "gerar.py"]
+    paths: ["precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "modelos/**", "apoio/**", "padrao/esquema.json", "padrao/paradigmas.js", "gerar.py"]
   workflow_dispatch:
 permissions:
   contents: write
@@ -26,23 +24,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: Importa o que o Replit publicou em banco/ (formato antigo)
-        run: |
-          ANTES="${{ github.event.before }}"
-          if [ -n "$ANTES" ] && git cat-file -e "$ANTES" 2>/dev/null; then
-            ARQS=$(git diff --name-only "$ANTES" HEAD -- banco/ | grep -E 'banco/(precedentes|modelos|paragrafos|jurisprudencia|normas|redacao|assuntos)\.json$' || true)
-            if [ -n "$ARQS" ]; then python3 gerar.py --importar $ARQS; fi
-          fi
-      - name: Valida, atualiza o manifesto e regera a compatibilidade
-        run: python3 gerar.py --compat
-      - name: Confere os conversores do formato antigo
-        run: node scripts/testes/legado.js
+      - name: Valida e atualiza o manifesto
+        run: python3 gerar.py
       - name: Grava
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git config user.name "base-gabcmt[bot]"
             git config user.email "base-gabcmt@users.noreply.github.com"
             git add -A
-            git commit -m "Base: validação, manifesto e compatibilidade (${GITHUB_SHA::7})"
+            git commit -m "Base: validação e manifesto (${GITHUB_SHA::7})"
             git push
           fi

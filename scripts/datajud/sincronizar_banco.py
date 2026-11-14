@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Atualiza banco/acervo.json no repositório gabcmt a partir do DataJud."""
+"""Atualiza acervo/acervo.json no repositório gabcmt a partir do DataJud."""
 import argparse
 import csv
 import hashlib
@@ -117,15 +117,15 @@ def exportar_csv(doc, caminho):
 
 def main():
     p=argparse.ArgumentParser();p.add_argument("--acervo",type=Path,required=True);p.add_argument("--orgao",default="91624");p.add_argument("--tribunal",default="trf3");p.add_argument("--aplicar",action="store_true");p.add_argument("--chave-wiki",action="store_true");a=p.parse_args()
-    root=a.acervo; path=root/"banco/acervo.json";doc=json.loads(path.read_text(encoding="utf-8"));sp=root/"banco/datajud/estado.json";state=json.loads(sp.read_text()) if sp.exists() else {}
+    root=a.acervo; path=root/"acervo/acervo.json";doc=json.loads(path.read_text(encoding="utf-8"));sp=root/"acervo/datajud/estado.json";state=json.loads(sp.read_text()) if sp.exists() else {}
     key=carregar_chave() or (chave_publica_wiki() if a.chave_wiki else None)
     coleta=ClienteDatajud(chave=key).coletar_orgao(a.orgao,a.tribunal,tamanho=200)
     novo,state,report=atualizar(doc,state,coleta)
     print(json.dumps({"coletaCompleta":True,"totais":report["totais"],"consultadoEm":report["consultadoEm"]}))
     if a.aplicar:
-        grava(path,novo);grava(sp,state);grava(root/"banco/datajud/ultimo-relatorio.json",report)
-        grava(root/"banco/datajud/relatorios"/(report["consultadoEm"][:10]+".json"),report)
-        exportar_csv(novo,root/"banco/acervo.csv")
+        grava(path,novo);grava(sp,state);grava(root/"acervo/datajud/ultimo-relatorio.json",report)
+        grava(root/"acervo/datajud/relatorios"/(report["consultadoEm"][:10]+".json"),report)
+        exportar_csv(novo,root/"acervo/acervo.csv")
 
 if __name__ == "__main__":
     try: main()

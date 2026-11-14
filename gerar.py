@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """Porta única da base gabcmt (padrão 1.0).
 
-  python3 gerar.py                 valida tudo, atualiza padrao/manifesto.json e confere a compatibilidade
-  python3 gerar.py --compat        além disso, regrava data/paradigmas.json e banco/*.json a partir da base nova
+  python3 gerar.py                 valida tudo e atualiza padrao/manifesto.json
   python3 gerar.py --importar A.json [B.json …]
                                    acrescenta/atualiza registros vindos dos apps (exportações gabA.* ou gabcmt.*),
                                    mesclando por id, e depois valida
@@ -89,8 +88,8 @@ def validar_tudo():
                     validar(r, ESQ["$defs"][nome_x], f"{rel}.{campo}[{k}]", erros)
         contagem[rel] = len(regs)
     # integridade cruzada: todo precedente com inteiroTeor=true tem texto, e todo texto tem precedente
-    prec = {r["id"]: r for r in ler_jsonl(RAIZ / "paradigmas/precedentes.jsonl")}
-    textos = {t["id"] for p in glob.glob(str(RAIZ / "paradigmas/inteiros-teores/*.jsonl")) for t in ler_jsonl(p)}
+    prec = {r["id"]: r for r in ler_jsonl(RAIZ / "precedentes/precedentes.jsonl")}
+    textos = {t["id"] for p in glob.glob(str(RAIZ / "precedentes/inteiros-teores/*.jsonl")) for t in ler_jsonl(p)}
     for i in textos - set(prec):
         erros.append(f"inteiro teor sem precedente: {i}")
     for i, r in prec.items():
@@ -104,9 +103,10 @@ def atualizar_manifesto(contagem):
     man = {"padrao": "gabcmt", "versao": VERSAO_PADRAO,
            "compatibilidade": "apps declaram a versão maior que leem (1); versão menor nova só acrescenta campos",
            "atualizadoEm": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-           "areas": {"paradigmas": "processos já julgados pelo relator (precedentes, inteiros teores, modelos)",
-                     "referencias": "diretrizes, parágrafos-padrão, citações (jurisprudência e normas), assuntos e temas",
-                     "acervo": "repositório privado brndutra/gabcmt-dados"},
+           "areas": {"acervo": "processos em tramitação no gabinete (acervo/)",
+                     "precedentes": "processos já julgados pelo relator: ementário, inteiros teores e catálogo CMT",
+                     "modelos": "modelos, modelos-matriz e parágrafos-padrão",
+                     "apoio": "diretrizes, magistrados, assuntos e temas, repertório jurisprudencial e normativo"},
            "arquivos": {}}
     for rel, n in sorted(contagem.items()):
         dados = (RAIZ / rel).read_bytes()
@@ -120,7 +120,7 @@ def atualizar_manifesto(contagem):
     return man
 
 
-# ---------- compatibilidade com os apps atuais (data/paradigmas.json e banco/*.json) ----------
+# ---------- conversores do formato antigo (usados na importação de exportações gabA.*) ----------
 def dmy(iso):
     return f"{iso[8:10]}/{iso[5:7]}/{iso[0:4]}" if iso else ""
 
@@ -157,74 +157,6 @@ def modelo_antigo(m):
         if v.get(c) in ("", [], None):
             v.pop(c, None)
     return v
-
-
-def compat_docs():
-    # todos os precedentes da base (os que vieram do banco antigo mantêm o desenho exato; os novos entram no fim):
-    # o servidor no Replit lê data/paradigmas.json e assim enxerga a base inteira
-    prec = [precedente_antigo(r) for r in ler_jsonl(RAIZ / "paradigmas/precedentes.jsonl")]
-    prec.sort(key=lambda x: x["id"])
-    mods = [modelo_antigo(m) for m in ler_json(RAIZ / "paradigmas/modelos.json")["registros"]]
-    cit = ler_json(RAIZ / "referencias/citacoes.json")["registros"]
-    tira = lambda x: {k: v for k, v in x.items() if k not in ("categoria", "origem")}
-    cat = {"assuntos": ler_json(RAIZ / "referencias/assuntos.json")["registros"],
-           "jurisprudencia": [tira(x) for x in cit if x["categoria"] == "jurisprudencia"],
-           "paragrafos": ler_json(RAIZ / "referencias/paragrafos.json")["registros"],
-           "normas": [tira(x) for x in cit if x["categoria"] == "norma"],
-           "redacao": ler_json(RAIZ / "referencias/diretrizes.json")["registros"]}
-    return prec, mods, cat
-
-
-def conferir_compat():
-    """Compara, registro a registro, o que a base nova gera com os arquivos que os apps leem hoje."""
-    prec, mods, cat = compat_docs()
-    rel = []
-    atual = ler_json(RAIZ / "data/paradigmas.json")
-    ap = {x["id"]: x for x in atual["bancos"]["Precedente"]["registros"]}
-    np_ = {x["id"]: x for x in prec}
-    faltam = set(ap) - set(np_)
-    alterados, enriquecidos = [], 0
-    for i, x in ap.items():
-        y = np_.get(i)
-        if not y:
-            continue
-        for c, v in x.items():
-            if y.get(c) != v:
-                if v in ("", None):
-                    enriquecidos += 1
-                else:
-                    alterados.append((i, c))
-    rel.append(f"precedentes: {len(ap)} no banco atual, {len(np_)} gerados ({len(set(np_) - set(ap))} novos); faltando {len(faltam)}; "
-               f"campos alterados {len(alterados)}; campos vazios agora preenchidos {enriquecidos}")
-    am = {x["id"]: x for x in atual["bancos"]["Modelo-matriz"]["registros"]}
-    nm = {x["id"]: x for x in mods}
-    dif_m = [i for i in am if nm.get(i) != am[i]]
-    rel.append(f"modelos-matriz: {len(am)} atuais, {len(nm)} gerados, diferentes {len(dif_m)}")
-    for k, regs in cat.items():
-        b = ler_json(RAIZ / f"banco/{k}.json")["registros"]
-        rel.append(f"{k}: {'idêntico' if b == regs else 'DIFERENTE'} ({len(regs)})")
-    ok = not faltam and not alterados and not dif_m and all("DIFERENTE" not in l for l in rel)
-    return ok, rel, (prec, mods, cat), alterados[:10]
-
-
-def gravar_json2(p, doc):
-    """arquivos de compatibilidade: mesmo recuo (2) dos originais, para o diff mostrar só o que mudou"""
-    Path(p).write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def gravar_compat(prec, mods, cat):
-    atual = ler_json(RAIZ / "data/paradigmas.json")
-    def na_ordem(antigos, novos):   # mantém a ordem do arquivo atual; os novos vão para o fim
-        pos = {x["id"]: i for i, x in enumerate(antigos)}
-        return sorted(novos, key=lambda x: pos.get(x["id"], len(pos)))
-    atual["bancos"]["Precedente"]["registros"] = na_ordem(atual["bancos"]["Precedente"]["registros"], prec)
-    atual["bancos"]["Modelo-matriz"]["registros"] = na_ordem(atual["bancos"]["Modelo-matriz"]["registros"], mods)
-    for k, regs in cat.items():
-        atual["catalogos"][k]["registros"] = regs
-        b = ler_json(RAIZ / f"banco/{k}.json")
-        b["registros"] = regs
-        gravar_json2(RAIZ / f"banco/{k}.json", b)
-    gravar_json2(RAIZ / "data/paradigmas.json", atual)
 
 
 # ---------- formato antigo → padrão (espelha padrao/paradigmas.js · legado) ----------
@@ -316,7 +248,7 @@ def citacao_de_antiga(j, categoria):
 
 
 def importar_precedentes(regs):
-    arq = RAIZ / "paradigmas/precedentes.jsonl"
+    arq = RAIZ / "precedentes/precedentes.jsonl"
     atuais = ler_jsonl(arq)
     por_ant = {r.get("idAnterior"): r for r in atuais if r.get("idAnterior")}
     por_id = {r["id"]: r for r in atuais}
@@ -335,7 +267,7 @@ def importar_precedentes(regs):
 
 
 def importar_modelos(regs):
-    arq = RAIZ / "paradigmas/modelos.json"
+    arq = RAIZ / "modelos/modelos.json"
     doc = ler_json(arq)
     por_ant = {m.get("idAnterior"): m for m in doc["registros"]}
     por_id = {m["id"]: m for m in doc["registros"]}
@@ -353,17 +285,22 @@ def importar_modelos(regs):
 
 
 # ---------- importação vinda dos apps ----------
+DESTINO_NOVO = {"referencias.diretrizes": "apoio/diretrizes.json", "referencias.magistrados": "apoio/magistrados.json",
+                "referencias.assuntos": "apoio/assuntos.json", "referencias.citacoes": "apoio/repertorio.json",
+                "referencias.paragrafos": "modelos/paragrafos.json", "paradigmas.modelos": "modelos/modelos.json"}
+
+
 def importar(caminhos):
     """Mescla exportações dos apps por id. Aceita gabcmt.* (formato novo) ou gabA.paradigmas/gabA.<catálogo> (antigo)."""
-    destino = {"gabA.redacao": "referencias/diretrizes.json", "gabA.paragrafos": "referencias/paragrafos.json",
-               "gabA.assuntos": "referencias/assuntos.json"}
+    destino = {"gabA.redacao": "apoio/diretrizes.json", "gabA.paragrafos": "modelos/paragrafos.json",
+               "gabA.assuntos": "apoio/assuntos.json"}
     for c in caminhos:
         doc = ler_json(c)
         sch = doc.get("schema", "")
         regs = doc.get("registros", [])
         if sch.startswith("gabcmt.") and sch.count(".") == 2:
             area, cat = sch.split(".")[1:]
-            alvo = RAIZ / f"{area}/{cat}.json"
+            alvo = RAIZ / DESTINO_NOVO.get(f"{area}.{cat}", f"{area}/{cat}.json")
             if not alvo.exists():
                 raise SystemExit(f"{c}: categoria desconhecida {sch}")
             mesclar_json(alvo, regs)
@@ -371,7 +308,7 @@ def importar(caminhos):
             mesclar_json(RAIZ / destino[sch], regs)
         elif sch in ("gabA.jurisprudencia", "gabA.normas"):
             cat = "jurisprudencia" if sch.endswith("jurisprudencia") else "norma"
-            mesclar_json(RAIZ / "referencias/citacoes.json", [citacao_de_antiga(j, cat) for j in regs])
+            mesclar_json(RAIZ / "apoio/repertorio.json", [citacao_de_antiga(j, cat) for j in regs])
         elif sch == "gabA.precedentes" or (sch == "gabA.paradigmas" and doc.get("banco_tipo") == "Precedente"):
             print(f"  precedentes alterados: {importar_precedentes(regs)}")
         elif sch == "gabA.modelos" or (sch == "gabA.paradigmas" and doc.get("banco_tipo") in ("Modelo", "Modelo-matriz")):
@@ -409,17 +346,6 @@ def main(args):
     print(f"base válida — padrão {man['versao']}")
     for rel, info in man["arquivos"].items():
         print(f"  {rel}: {info['registros']} registros")
-    ok, rel, docs, exemplos = conferir_compat()
-    print("compatibilidade com data/paradigmas.json e banco/:")
-    for l in rel:
-        print("  -", l)
-    if exemplos:
-        print("  exemplos de campos alterados:", exemplos)
-    if "--compat" in args:
-        gravar_compat(*docs)
-        print("arquivos de compatibilidade regravados")
-    elif not ok:
-        print("atenção: a base nova não reproduz exatamente os arquivos atuais (veja acima)")
 
 
 if __name__ == "__main__":

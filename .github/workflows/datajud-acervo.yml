@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - name: Testar atualização e preservação do acervo
-        run: python3 -m unittest discover -s datajud -p 'test_sincronizar_banco.py' -v
+        run: python3 -m unittest discover -s scripts/datajud -p 'test_sincronizar_banco.py' -v
       - name: Coletar, reconciliar e publicar
         env:
           DATAJUD_API_KEY: ${{ secrets.DATAJUD_API_KEY }}
@@ -27,8 +27,8 @@ jobs:
           git config user.email 'datajud-acervo[bot]@users.noreply.github.com'
           for attempt in 1 2 3; do
             base=$(git rev-parse origin/main 2>/dev/null || git rev-parse HEAD)
-            python3 datajud/sincronizar_banco.py --acervo . --aplicar --chave-wiki
-            git add banco/acervo.json banco/acervo.csv banco/datajud
+            python3 scripts/datajud/sincronizar_banco.py --acervo . --aplicar --chave-wiki
+            git add acervo/acervo.json acervo/acervo.csv acervo/datajud
             if git diff --cached --quiet; then echo 'Acervo em dia; sem commit.'; exit 0; fi
             git commit -m 'Acervo: atualização DataJud'
             if git push origin HEAD:main; then exit 0; fi
