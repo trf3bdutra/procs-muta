@@ -1,0 +1,181 @@
+{
+ "schema": "gabcmt.regras.etiquetas",
+ "versao": 1,
+ "atualizadoEm": "2026-11-14T23:47:01+00:00",
+ "registros": [
+  {
+   "id": "pad-ED",
+   "on": true,
+   "ef": "ED",
+   "v": "",
+   "termos": [
+    {
+     "t": "ED",
+     "m": "inicio"
+    },
+    {
+     "t": "EDcl",
+     "m": "inicio"
+    },
+    {
+     "t": "EmbDecl",
+     "m": "inicio"
+    },
+    {
+     "t": "Embargos de declaração",
+     "m": "inicio"
+    },
+    {
+     "t": "Embargo de declaração",
+     "m": "inicio"
+    },
+    {
+     "t": "intimar ED",
+     "m": "contem"
+    },
+    {
+     "t": "Acolher ED",
+     "m": "contem"
+    }
+   ],
+   "exceto": [
+    {
+     "t": "embargos a execucao",
+     "m": "contem"
+    },
+    {
+     "t": "embargos de terceiro",
+     "m": "contem"
+    },
+    {
+     "t": "embargos à execução",
+     "m": "contem"
+    }
+   ],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "padrão"
+  },
+  {
+   "id": "pad-AgInt",
+   "on": true,
+   "ef": "AgInt",
+   "v": "",
+   "termos": [
+    {
+     "t": "AgInt",
+     "m": "inicio"
+    },
+    {
+     "t": "AgRg",
+     "m": "inicio"
+    },
+    {
+     "t": "Agravo interno",
+     "m": "inicio"
+    },
+    {
+     "t": "Agravo regimental",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "Agravo interno contra decisão monocrática.",
+   "origem": "padrão"
+  },
+  {
+   "id": "pad-JR",
+   "on": true,
+   "ef": "JR",
+   "v": "",
+   "termos": [
+    {
+     "t": "JR",
+     "m": "inicio"
+    },
+    {
+     "t": "Juízo de retratação",
+     "m": "inicio"
+    },
+    {
+     "t": "Retratação",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "padrão"
+  },
+  {
+   "id": "pad-META",
+   "on": true,
+   "ef": "META",
+   "v": "",
+   "termos": [
+    {
+     "t": "META",
+     "m": "inicio"
+    },
+    {
+     "t": "Metas",
+     "m": "inicio"
+    },
+    {
+     "t": "META 2",
+     "m": "contem"
+    },
+    {
+     "t": "[META",
+     "m": "contem"
+    },
+    {
+     "t": "! META",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "padrão"
+  },
+  {
+   "id": "pad-ignorar",
+   "on": true,
+   "ef": "ignorar",
+   "v": "",
+   "termos": [
+    {
+     "t": "origem",
+     "m": "contem"
+    },
+    {
+     "t": "1º grau",
+     "m": "contem"
+    },
+    {
+     "t": "1o grau",
+     "m": "contem"
+    },
+    {
+     "t": "primeiro grau",
+     "m": "contem"
+    },
+    {
+     "t": "instância de origem",
+     "m": "contem"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "padrão"
+  }
+ ]
+}

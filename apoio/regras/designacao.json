@@ -1,0 +1,43 @@
+{
+ "schema": "gabcmt.regras.designacao",
+ "versao": 1,
+ "atualizadoEm": "2026-11-14T23:47:01+00:00",
+ "criterios": {
+  "ordem": [
+   "julg",
+   "tema",
+   "hist",
+   "esp",
+   "sec",
+   "pron"
+  ],
+  "on": {
+   "julg": {
+    "d": true,
+    "c": true
+   },
+   "tema": {
+    "d": true,
+    "c": true
+   },
+   "hist": {
+    "d": true,
+    "c": true
+   },
+   "esp": {
+    "d": true,
+    "c": true
+   },
+   "sec": {
+    "d": true,
+    "c": true
+   },
+   "pron": {
+    "d": true,
+    "c": true
+   }
+  },
+  "rows": {},
+  "equilibrar": true
+ }
+}
