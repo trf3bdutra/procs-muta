@@ -34,7 +34,8 @@ padrao/                        regras técnicas da base
 
 gerar.py                       valida a base, atualiza o manifesto e importa exportações dos apps
 scripts/                       rotinas auxiliares (DataJud, catálogo, modelos-matriz, apps)
-construtor.html · painel.html · index.html   apps (ver observação abaixo)
+cmt-monitor.html               CMT-monitor: acervo, sessões de julgamento, designação e regras
+construtor.html · index.html   apps (ver observação abaixo)
 ```
 
 ## Uso
@@ -60,4 +61,11 @@ Precedente: `acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie>` 
 
 ## Observação sobre os apps
 
-`construtor.html`, `painel.html` e `index.html` ainda leem e gravam no repositório `brndutra/gabcmt`, com a estrutura antiga de pastas. Para que passem a usar esta base, é preciso apontá-los para `trf3bdutra/procs-muta` e para os novos caminhos.
+O **CMT-monitor** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta base, com um token do GitHub com permissão *Contents* (leitura e gravação):
+
+- lê `acervo/acervo.json` (DataJud e planilhas) e `apoio/assuntos.json` (seção e ramo de cada assunto);
+- grava as sessões de julgamento (marcos, pauta, quem minuta e quem corrige) em `acervo/operacional.json`, campo `sessoes`;
+- grava as regras em `apoio/regras/etiquetas.json` (conversão de etiquetas) e `apoio/regras/designacao.json` (critérios de designação e correção), e a equipe em `apoio/equipe.json`;
+- tudo vai num único commit pelo botão "Gravar no procs-muta"; até lá, o trabalho fica no navegador.
+
+`construtor.html` e `index.html` ainda leem e gravam no repositório `brndutra/gabcmt`, com a estrutura antiga de pastas.
