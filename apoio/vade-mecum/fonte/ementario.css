@@ -513,3 +513,11 @@ details.rr ul{margin:4px 0 6px 16px;padding:0;font-size:12.5px}details.rr li{mar
 .rr-req{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 9px;margin:5px 0;font-size:12.5px}
 .rr-req p{margin:3px 0 0}.rr-req p.tc{color:var(--mut);font-size:12px}.rr-req a{color:var(--gold)}
 .pp-pg .ref,.pp-pg span.fill{display:inline;font-size:inherit;font-weight:inherit;letter-spacing:0;text-transform:none;color:inherit}
+.xdl{display:inline-flex;gap:6px}.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+/* Parágrafos-padrão: cores por onde o parágrafo entra */
+.pdot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--pc,var(--mut));margin-right:7px;vertical-align:0}
+.glist .pcat[aria-pressed=true]{box-shadow:inset 3px 0 0 var(--pc)}
+.n-grp h3.pgh{color:var(--pc)}
+.p-row{border-left-width:4px}
+.p-row .n-id{display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.n-m.pbl{background:var(--gold-soft);color:var(--gold)}
