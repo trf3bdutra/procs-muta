@@ -1,12 +1,18 @@
 # Publica o CMT-monitor no projeto trf3-muta da Vercel (trf3-muta.vercel.app).
 # Vão para a Vercel: o cmt-monitor.html (raiz), o CMT Compêndio público (/compendio/), a Pauta da equipe (/equipe/) e as funções
-# /api/* (login da equipe e leitura/gravação das pautas no procs-muta, com o GH_TOKEN guardado na Vercel). O Compêndio avançado não é publicado.
+# /api/* (login da equipe e leitura/gravação das pautas no procs-muta, com o GH_TOKEN guardado na Vercel), o editor do Compêndio (/editor/)
+# e a Enciclopédia, servida só pelo /api/compendio a quem tem o modo avançado (apoio/acessos.json).
 # Requer o segredo VERCEL_TOKEN (Settings › Secrets and variables › Actions).
 name: CMT-monitor na Vercel
 on:
   push:
     branches: [main]
-    paths: ["cmt-monitor.html", "apoio/cmt-compendio/cmt-compendio.html", "apoio/pauta-equipe/**", ".github/workflows/vercel-monitor.yml"]
+    paths: ["cmt-monitor.html", "apoio/cmt-compendio/cmt-compendio.html", "apoio/cmt-compendio/cmt-editor.html", "apoio/enciclopedia.json", "apoio/pauta-equipe/**", ".github/workflows/vercel-monitor.yml"]
+  # o commit do Base (feito com o GITHUB_TOKEN) não dispara outros workflows: publica de novo quando ele termina
+  workflow_run:
+    workflows: ["Base gabcmt"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,8 +25,11 @@ env:
 jobs:
   publicar:
     runs-on: ubuntu-latest
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -30,7 +39,9 @@ jobs:
           cp cmt-monitor.html site/public/index.html
           mkdir -p site/public/compendio && cp apoio/cmt-compendio/cmt-compendio.html site/public/compendio/index.html
           mkdir -p site/public/equipe site/api && cp apoio/pauta-equipe/index.html site/public/equipe/index.html && cp apoio/pauta-equipe/api/*.js site/api/
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","rewrites":[{"source":"/((?!api/|equipe|compendio).*)","destination":"/index.html"}]}\n' > site/vercel.json
+          mkdir -p site/public/editor && cp apoio/cmt-compendio/cmt-editor.html site/public/editor/index.html
+          cp apoio/enciclopedia.json site/api/_enciclopedia.json
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","rewrites":[{"source":"/((?!api/|equipe|compendio|editor).*)","destination":"/index.html"}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

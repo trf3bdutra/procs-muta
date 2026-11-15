@@ -49,4 +49,32 @@ async function gravarJson(rel, dados, sha, msg) {
   return gh('/contents/' + rel, { method: 'PUT', body: JSON.stringify({ message: msg, content: Buffer.from(JSON.stringify(dados, null, 1) + '\n').toString('base64'), sha, branch: RAMO }) });
 }
 const dataOk = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ''));
-module.exports = { norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk };
+/* acessos do CMT Compêndio (apoio/acessos.json): modo avançado e editor; vale o nome do login ou um apelido do cadastro da equipe */
+let ACC = null, ACC_T = 0;
+async function acessos(usuario) {
+  if (!ACC || Date.now() - ACC_T > 60e3) {
+    const [a, e] = await Promise.all([lerJson('apoio/acessos.json'), lerJson('apoio/equipe.json').catch(() => ({ dados: { registros: [] } }))]);
+    ACC = { a: a.dados, eq: e.dados.registros || [] }; ACC_T = Date.now();
+  }
+  const u = norm(usuario), reg = ACC.eq.find(r => [r.nome].concat(r.aliases || []).some(n => norm(n) === u));
+  const nomes = new Set([u].concat(reg ? [reg.nome].concat(reg.aliases || []).map(norm) : []));
+  const tem = lista => (lista || []).some(n => nomes.has(norm(n)));
+  return { avancado: tem(ACC.a.compendioAvancado), editor: tem(ACC.a.editor) };
+}
+/* arquivos grandes (mais de 1 MB) vêm pelo blob */
+async function lerGrande(rel) {
+  const o = await gh('/contents/' + rel + '?ref=' + RAMO);
+  let b64 = o.content && o.encoding === 'base64' ? o.content : '';
+  if (!b64) b64 = (await gh('/git/blobs/' + o.sha)).content;
+  return { txt: Buffer.from(b64, 'base64').toString('utf8'), sha: o.sha };
+}
+/* um commit com vários arquivos (Git Data API) */
+async function commitArquivos(arqs, msg) {
+  const ref = await gh('/git/ref/heads/' + RAMO), base = await gh('/git/commits/' + ref.object.sha);
+  const tree = await Promise.all(arqs.map(async f => ({ path: f.path, mode: '100644', type: 'blob', sha: (await gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: f.txt, encoding: 'utf-8' }) })).sha })));
+  const t = await gh('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
+  const c = await gh('/git/commits', { method: 'POST', body: JSON.stringify({ message: msg, tree: t.sha, parents: [ref.object.sha] }) });
+  await gh('/git/refs/heads/' + RAMO, { method: 'PATCH', body: JSON.stringify({ sha: c.sha }) });
+  return c;
+}
+module.exports = { norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };
