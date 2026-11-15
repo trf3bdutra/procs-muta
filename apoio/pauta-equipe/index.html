@@ -564,10 +564,12 @@ html[data-theme=dark] #v-pauta.ed .trb{--t-ok-ink:#0a1821}
 #v-pauta.ed .ed-strip .pt-c,#v-pauta.ed .ed-strip #sel-n{font-family:var(--emono);font-size:10.5px;color:var(--em);margin:0}
 #v-pauta.ed .ed-strip .pt-c b{font:inherit}#v-pauta.ed .ed-strip #pt-f{display:none}
 /* lista em linhas finas */
-#v-pauta.ed #lst.cards{border-top:1px solid var(--el);margin-top:0;display:block}
+#v-pauta.ed #lst.cards{border:1px solid var(--el);border-top:0;margin-top:0;display:block;background:var(--ew)}
+#v-pauta.ed #lst.cards .pc.edr:last-child{border-bottom:0}#v-pauta.ed #lst.cards .empty{background:transparent;border:0}
 #v-pauta.ed #lst .pc.edr{background:transparent;border:0;border-bottom:1px solid var(--el);border-radius:0;box-shadow:none;margin:0}
 #v-pauta.ed #lst .pc.edr.al{background:var(--eos)}
-#v-pauta.ed #lst .pc.edr.prt-sel{background:var(--ew);outline:0;box-shadow:inset 3px 0 0 var(--eg)}
+#v-pauta.ed #lst .pc.edr:hover{background:var(--ep)}
+#v-pauta.ed #lst .pc.edr.prt-sel{background:var(--egs);outline:0;box-shadow:inset 3px 0 0 var(--eg)}
 #v-pauta.ed #lst .pc.edr .rw{display:flex;flex-wrap:wrap;column-gap:18px;row-gap:8px;align-items:center;padding:10px 8px}
 #v-pauta.ed .edr .ga{display:flex;gap:10px;align-items:center;flex:1 1 380px;min-width:0}
 #v-pauta.ed .edr .gb{display:flex;gap:10px;align-items:flex-end;flex:1 1 620px;min-width:0}
@@ -664,6 +666,7 @@ html[data-theme=dark] #v-pauta.ed #trm-urq{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07a
 #v-pauta.ed .edr .stp .sp-as{cursor:default}#v-pauta.ed .edr .stp .sp[disabled]{cursor:default}
 #v-pauta.ed.mono #lst .pc.edr .rw{cursor:pointer}
 /* prontuário: pedido urgente como rodapé ativável */
+#prq .prt{min-height:0}#prq .prt-body{flex:1 1 auto;min-height:0;overflow-y:auto!important;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable}
 .prt-urgf{grid-column:1/-1;margin:10px -12px -12px;border-top:2px solid #bd4c38;background:#fbf3f0;padding:10px 12px 12px;display:flex;flex-direction:column;gap:8px}
 html[data-theme=dark] .prt-urgf{background:#2a1a18;border-top-color:#e07a6c}
 .prt-urgs{display:flex;align-items:center;gap:10px;font-size:12.5px;cursor:pointer}.prt-urgs input{width:34px!important;height:18px!important;accent-color:#bd4c38;flex:none}.prt-urgs b{flex:1}.prt-urgs small{color:var(--mut);font-size:11px}
@@ -680,6 +683,122 @@ html[data-theme=dark] .prt-urgf{background:#2a1a18;border-top-color:#e07a6c}
 .dv-dlg textarea,.dv-dlg select{border:1px solid #c8c3b6;background:#fff;color:#203b39;font:500 13px var(--font);padding:8px;border-radius:0;min-height:34px}
 .dv-r{display:flex;gap:10px}.dv-a{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
 html[data-theme=dark] .dv-dlg{background:#10222e;color:#ebeff1;border-color:#1e3747;border-top-color:#6eba8a}html[data-theme=dark] .dv-dlg textarea,html[data-theme=dark] .dv-dlg select{background:#0a1821;color:#ebeff1;border-color:#2c4a5c}
+
+/* ===== Monocráticas (editorial v2): estatísticas no painel, fila de urgências em painel próprio, abas por situação, faixa da etapa, prontuário em tela única ===== */
+#v-pauta:not(.mono) #trm-urq,#v-pauta:not(.ed) #msit{display:none!important}
+#v-pauta.ed.mono .trm-sel>#trm-st,#v-pauta.ed.mono #trm-per,#v-pauta.ed.mono #trm-ant,#v-pauta.ed.mono #trm-lb,#v-pauta.ed.mono #trm-prox,#v-pauta.ed.mono #trm-hoje{display:none!important}
+#v-pauta.ed.mono #trm .trb-h{align-items:center;gap:22px;flex-wrap:wrap}#v-pauta.ed.mono #trm .trb-h>div:first-child{flex:0 0 auto}
+#v-pauta.ed.mono #trm h1{font-size:32px;line-height:1.1;white-space:nowrap;margin:2px 0 4px}
+#v-pauta.ed.mono #trm .trm-c{flex:1 1 520px;min-width:0;display:block}
+#v-pauta.ed.mono #trm-k{display:flex;gap:16px;align-items:center;background:transparent;border:0;padding:0}
+#trm-k .mst{flex:1 1 0;min-width:0;padding:2px 0 2px 16px;border-left:1px solid var(--el)}#trm-k .mst.sem{border-left:2px solid var(--eo)}
+#trm-k .mst>div{display:flex;align-items:baseline;gap:6px;margin-bottom:5px}#trm-k .mst>div b{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--eo2)}#trm-k .mst>div span{font-size:10.5px;color:var(--em);white-space:nowrap}
+#trm-k .mst dl{margin:0;display:flex;gap:4px 12px;align-items:baseline;flex-wrap:wrap}#trm-k .mst dl>div{display:flex;align-items:baseline;gap:4px;white-space:nowrap}
+#trm-k .mst dd{margin:0;font:400 14px/1 var(--emono);color:var(--ei)}#trm-k .mst dt{font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--em)}
+#trm-k .mst .hi dd{font-size:17px;color:var(--eg)}#trm-k .mst .hi dt{color:var(--eg);font-weight:700}
+/* abas por situação (menores) */
+#v-pauta.ed.mono .ed-tg button{height:32px;min-width:32px;padding:0 12px;font-size:11.5px}#v-pauta.ed.mono .ed-tg button small{font-size:9.5px}#v-pauta.ed.mono .ed-tg button.ic3{padding:0 9px}
+#v-pauta.ed.mono #ed-tr #trm-reg{height:32px;padding:0 14px 0 12px;font-size:11.5px}
+/* linha da monocrática: opções na faixa lateral esquerda, dados só de leitura (definidos no prontuário), síntese e trilha à direita */
+#v-pauta.ed.mono #lst.cards{background:var(--ep)}
+#v-pauta.ed.mono #lst .pc.edr.mrw{position:relative;padding-left:36px;overflow:hidden;min-height:78px}
+#v-pauta.ed.mono #lst .pc.edr.prt-sel{background:var(--ew);outline:0;box-shadow:inset -2px 0 0 var(--eg)}
+#v-pauta.ed.mono #lst .pc.edr.mrw .rw{padding:5px 12px 5px 10px;row-gap:2px;column-gap:14px}
+.mrw .mr-o{position:absolute;top:0;bottom:0;left:0;width:32px;display:grid;grid-auto-rows:1fr;border-right:1px solid var(--el);background:var(--ew)}
+.mrw .mr-o .ic{width:32px;height:auto;min-height:25px;border:0;border-top:1px solid var(--el);border-radius:0;background:transparent;color:var(--em);display:grid;place-items:center;padding:0;opacity:.7;cursor:default}.mrw .mr-o .ic:first-child{border-top:0}
+.mrw .mr-o .ic svg{width:14px;height:14px}.mrw .mr-o .ic.on{opacity:1;background:var(--eos);color:var(--eo2)}.mrw .mr-o .ic.on.al{background:#fbe9e5;color:#bd4c38}.mrw .mr-o button.ic{cursor:pointer}.mrw .mr-o button.ic:hover{opacity:1;color:var(--eg)}
+#v-pauta.ed .edr.mrw .ga{flex:1 1 520px}#v-pauta.ed .edr.mrw .gb{flex:1 1 540px;max-width:700px;margin-left:auto;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:6px 10px}
+.mrw .mr-l1{display:flex;gap:4px 8px;align-items:center;max-width:100%;overflow:hidden}.mrw .mr-l1>*{flex:none}
+.mrw .mr-cl{font:400 10px var(--emono);border:1px solid var(--el2);padding:0 5px;color:var(--em);background:var(--ew);white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;text-transform:none;letter-spacing:0}
+.mrw .mr-ta{font-size:11.5px;color:var(--em);white-space:nowrap}.mrw .mr-l1 .mr-as{flex:0 1 auto;min-width:80px;font-size:11.5px;font-weight:600;color:var(--ei);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrw .mr-l1 .mt{font-size:11px;font-style:normal;white-space:nowrap}.mrw .mr-l2{display:flex;gap:5px;margin-top:3px}
+.mrw .e-urg{font:400 10px var(--emono);font-style:normal;padding:1px 7px;border:1px solid var(--el);background:var(--egs);color:var(--eg);white-space:nowrap}.mrw .e-urg.pend{background:#f6e3de;color:#923d30;border-color:#e0b8ae}
+.mrw .mr-ob{flex:1 1 120px;min-width:0;height:24px;border:0;border-bottom:1px dashed var(--el2);background:transparent;padding:0 2px;font:400 11.5px var(--font);color:var(--ei);border-radius:0}.mrw .mr-ob:focus{outline:0;border-bottom:1px solid var(--eg)}
+.mrw .mr-tg{display:inline-flex;flex:none;border:1px solid #d4c6a1;background:var(--eos);color:var(--eo2);font:400 10px var(--emono);white-space:nowrap}.mrw .mr-tg span{padding:2px 7px;border-left:1px solid #d4c6a1}.mrw .mr-tg span:first-child{border-left:0}.mrw .mr-tg b{font-weight:700}
+html[data-theme=dark] .mrw .mr-tg,html[data-theme=dark] .mrw .mr-tg span{border-color:var(--el2)}
+#v-pauta.ed.mono .edr.mrw .stp .sp{width:28px;height:28px}
+.mleg{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--em)}.mleg>b{font:400 9px var(--emono);letter-spacing:.14em;text-transform:uppercase}.mleg span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}.mleg i{display:inline-block}
+#v-pauta.ed.mono .edr .stp .sp{--b0:#bfe3d0;--b1:#8fcbb0;--b2:#1f6b50;border:1.5px dashed var(--b0);background:var(--ew);color:var(--b1)}
+#v-pauta.ed.mono .edr .stp button.sp:nth-of-type(2){--b0:#c2dcf3;--b1:#93bfe6;--b2:#27609a}#v-pauta.ed.mono .edr .stp button.sp:nth-of-type(3){--b0:#cfd1f5;--b1:#a6a9ea;--b2:#454bb0}#v-pauta.ed.mono .edr .stp .sp.sp-as{--b0:#e3cdf1;--b1:#c9a3e2;--b2:#7340a0}
+#v-pauta.ed.mono .edr .stp .sp.nx{border:1.5px solid var(--b1);background:var(--ew);color:var(--b2)}html[data-theme=dark] #v-pauta.ed.mono .edr .stp .sp.nx{color:var(--b1)}#v-pauta.ed.mono .edr .stp .sp.ok{border:1.5px solid var(--b1);background:var(--b0);color:var(--b2)}
+/* fila de urgências: barra (minimizada, padrão) e painel aberto */
+#v-pauta.ed #trm-urq{border:0;background:transparent;margin-top:26px}#v-pauta.ed.mono.prt-on #trm-urq .urq{display:block!important}
+.uz{--ur:#bd4c38;--ubg:#fbf3f0;--ul:#e0b8ae;display:flex;align-items:stretch;border:1px solid var(--ul);border-left:4px solid var(--ur);background:var(--ubg);color:var(--ei)}
+html[data-theme=dark] .uz,html[data-theme=dark] #v-pauta.ed.mono .urg.uzb{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07a6c}
+.uz-l{display:inline-flex;align-items:center;gap:7px;background:var(--ur);color:#fff;font:700 12.5px var(--font);letter-spacing:.02em;padding:0 14px 0 11px;min-height:38px;white-space:nowrap}
+.uz-m{flex:1;min-width:0;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:5px 10px;font-size:12.5px}.uz-m>span{white-space:nowrap}
+.uz-m .uz-f{display:inline-flex;padding-left:1px;flex:none}.uz-m .uz-f button{min-height:28px;padding:0 10px;border:1px solid var(--ul);margin-left:-1px;background:var(--ew);color:var(--ei);font:700 11.5px var(--font);cursor:pointer;white-space:nowrap;border-radius:0;position:relative}
+.uz-m .uz-f button small{font-weight:400;opacity:.8;font-size:10.5px;color:inherit}.uz-m .uz-f button[aria-pressed=true]{background:var(--ur);border-color:var(--ur);color:#fff;z-index:1}
+.uz-m input[type=search]{flex:1 1 160px;min-width:0;height:28px;border:1px solid var(--ul);background:var(--ew);padding:0 10px;font:400 11.5px var(--font);border-radius:0;color:var(--ei)}.uz-m b.n{font:400 14px var(--emono);color:var(--ur)}.uz-m small{font-size:11.5px;color:var(--em);white-space:nowrap}
+.uz-p{display:inline-flex;align-items:center;gap:6px;min-height:28px;border:1px solid var(--ul);background:var(--ew);padding:0 8px 0 0;cursor:pointer;font-size:11.5px;color:var(--ei);border-radius:0}
+.uz-p span{font:400 11px var(--emono);color:#fff;padding:6px 6px;background:var(--eo)}.uz-p.r span{background:var(--ur)}.uz-p i{font:700 11px var(--emono);font-style:normal}
+.uz-r{display:flex;gap:8px;align-items:center;padding:0 8px}.uz-r button{height:32px;border-radius:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 12.5px var(--font)}
+.uz-r .x{width:32px;border:1px solid var(--el2);background:var(--ew);color:var(--em);border-radius:7px}.uz-r .reg{border:1px solid var(--ur);background:var(--ur);color:#fff;padding:0 14px 0 10px;font-size:11.5px;gap:6px}
+#v-pauta.ed.mono .urg.uzb{--ur:#bd4c38;--ubg:#fbf3f0;--ul:#e0b8ae;border:1px solid var(--ul);border-top:0;border-left:4px solid var(--ur);background:var(--ubg);padding:0;margin:0;border-radius:0;box-shadow:none}
+.uzb .uz-s{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--ul)}
+.uzb .uz-f{display:inline-flex;padding-left:1px}.uzb .uz-f button{min-height:28px;padding:0 10px;border:1px solid var(--ul);margin-left:-1px;background:var(--ew);color:var(--ei);font:700 11.5px var(--font);cursor:pointer;white-space:nowrap;border-radius:0;position:relative}
+.uzb .uz-f button small{font-weight:400;opacity:.8}.uzb .uz-f button[aria-pressed=true]{background:var(--ur);border-color:var(--ur);color:#fff;z-index:1}
+.uzb .uz-s input[type=search]{flex:1 1 240px;min-width:0;height:28px;border:1px solid var(--ul);background:var(--ew);padding:0 10px;font-size:11.5px;border-radius:0;color:var(--ei)}
+#v-pauta.ed.mono .urg.uzb .urg-n{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:transparent;border:0;border-bottom:1px solid var(--ul);padding:8px 10px;margin:0}
+#v-pauta.ed.mono .urg.uzb .urg-n input,#v-pauta.ed.mono .urg.uzb .urg-n select{height:34px;min-width:0;flex:1 1 140px}#v-pauta.ed.mono .urg.uzb .urg-n input[name=cnj]{flex:0 0 200px}#v-pauta.ed.mono .urg.uzb .urg-n input[type=date]{flex:0 0 136px}
+#v-pauta.ed.mono .urg.uzb .urg-n .b.pri{height:34px;padding:0 16px 0 12px;font-weight:700}
+.uzb .ux{--s1:#c4533f;display:flex;gap:6px 12px;align-items:flex-end;flex-wrap:wrap;padding:5px 12px;border-bottom:1px solid #ecd3cb;background:#fefbf9}
+html[data-theme=dark] .uzb .ux{background:transparent;border-bottom-color:var(--ul)}
+.uzb .ux.pend{background:#fdf7f4}html[data-theme=dark] .uzb .ux.pend{background:rgba(224,122,108,.06)}.uzb .ux.s-prov{--s1:#d58a3c}.uzb .ux.s-ass{--s1:#cfae4a}.uzb .ux.s-apr{--s1:#977fa6}.uzb .ux.s-ass .ux-d{color:#3d3210}.uzb .ux.s-apr>*{opacity:.62}
+.uzb .ux-a{flex:1 1 250px;min-width:0;display:flex;gap:10px;align-items:center;align-self:center}.uzb .ux-d{flex:none;width:38px;text-align:center;font:400 11.5px var(--emono);color:#fff;padding:5px 0;background:var(--s1);display:inline-flex;justify-content:center}
+.uzb .ux-a>span:last-child{min-width:0;line-height:1.25}.uzb .ux-a .cnj{font:700 12px var(--emono);color:var(--ei)}.uzb .ux-a small{display:block;font-size:11px;color:var(--em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uzb .ux-a .fdb-b{width:22px;height:20px;border:1px solid var(--el2);background:var(--ew);border-radius:5px;margin-left:4px;font-size:11px;cursor:pointer;color:var(--em)}
+.uzb .ux-b{flex:4 1 830px;min-width:0;display:flex;gap:10px;align-items:flex-end}.uzb .ux-b label{display:flex;flex-direction:column;gap:1px;font-size:9.5px;font-weight:700;color:var(--em);flex:1 1 100px;min-width:0}.uzb .ux-b label.d{flex:0 0 122px}
+.uzb .ux-b .ro{display:flex;flex-direction:column;gap:1px;font-size:9.5px;font-weight:700;color:var(--em);flex:1 1 100px;min-width:0}.uzb .ux-b .ro.d{flex:0 0 122px}.uzb .ux-b .ro>span{height:28px;display:flex;align-items:center;font:400 11.5px var(--font);color:var(--ei);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-bottom:1px dotted var(--ul)}
+.uzb .ux-b input,.uzb .ux-b select{height:28px;min-width:0;width:100%;border:1px solid var(--el2);background:var(--ew);padding:0 6px;font:400 11.5px var(--font);color:var(--ei);border-radius:0}.uzb .ux-b .rv{height:28px;display:flex;align-items:center;font:400 11.5px var(--font);color:var(--ei)}
+.uzb .ux-c{display:flex;gap:4px;flex:none}.uzb .ux-c button{width:28px;height:28px;border:1px solid var(--el2);background:var(--ew);border-radius:7px;color:var(--em);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}.uzb .ux-c button.ok{background:var(--egs);color:var(--eg)}
+.uzb .uz-v{padding:14px 12px;color:var(--em);font-size:12.5px;margin:0}
+.uzb .uz-ft{padding:8px 12px;display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:var(--em)}.uzb .uz-ft>div{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.uzb .uz-ft .mleg{border:0;background:transparent;padding:0;margin-left:auto}
+#v-pauta.ed.mono .urg.uzb .urg-sg{margin:0}#v-pauta.ed.mono .urg.uzb .urg-sg summary{font:600 12.5px var(--font);color:var(--em);cursor:pointer}
+/* prontuário da monocrática: tela única, compacta; com urgência ligada o cartão do processo vira o cartão de urgência */
+#prq .prt.pmn .prt-tabs,#prq .prt.pmn .prt-ic,#prq .prt.pmn .prt-h small{display:none}#prq .prt.pmn .prt-h h2{font-size:17px;white-space:nowrap}
+#prq .prt.pmn .prt-id{display:flex;flex-direction:column;gap:5px;padding:7px 10px 8px;background:var(--ew);border:1px solid var(--el);border-left:4px solid var(--eg);border-radius:0}
+#prq .prt.pmn .prt-id.on{background:#fbf3f0;border-color:#e0b8ae;border-left-color:#bd4c38}html[data-theme=dark] #prq .prt.pmn .prt-id.on{background:#2a1a18;border-color:#5a3434;border-left-color:#e07a6c}
+#prq .prt.pmn .pi-1{display:flex;align-items:center;gap:8px}#prq .prt.pmn .pi-1 b{font:700 13px var(--emono)}#prq .prt.pmn .pi-1 .prt-urgt{margin-left:auto;font:400 10px var(--emono);padding:2px 6px;border:1px solid var(--el);background:var(--egs);color:var(--eg);white-space:nowrap;border-radius:0}
+#prq .prt.pmn .pi-1 .prt-urgt.pend{background:#f6e3de;color:#923d30;border-color:#e0b8ae}
+#prq .prt.pmn .pi-2{display:flex;align-items:center;gap:8px}#prq .prt.pmn .pi-2>span{flex:1;min-width:0;font-size:11.5px;color:var(--em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#prq .prt.pmn .prt-urgs{flex:none;display:inline-flex;flex-direction:row;align-items:center;gap:5px;font-size:11px;font-weight:700;color:#923d30;white-space:nowrap;cursor:pointer;margin:0;padding:0;border:0;background:transparent}#prq .prt.pmn .prt-urgs input{width:16px;height:16px;accent-color:#bd4c38;margin:0}
+#prq .prt.pmn .prt-urgc[hidden]{display:none}#prq .prt.pmn section{border:0;background:transparent;padding:0;margin:0;box-shadow:none}
+#prq .prt.pmn .grid,#prq .prt.pmn .prt-prod{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 6px}
+#prq .prt.pmn .f{display:flex;flex-direction:column;gap:1px;min-width:0;border:0;padding:0;background:transparent}#prq .prt.pmn .f>span{font-size:9.5px;font-weight:700;color:var(--em)}#prq .prt.pmn .f .v{min-width:0}
+#prq .prt.pmn .f:has([data-c=fundamento]),#prq .prt.pmn .f:has(textarea){grid-column:span 3}
+#prq .prt.pmn .f input,#prq .prt.pmn .f select,#prq .prt.pmn .f textarea{height:28px;min-height:28px;width:100%;min-width:0;border:1px solid var(--el2);background:var(--ew);padding:0 6px;font:600 11.5px var(--font);color:var(--ei);border-radius:0;resize:none}
+#prq .prt.pmn .f textarea{padding-top:5px;line-height:1.3}#prq .prt.pmn .f .rv{height:28px;display:flex;align-items:center;font:600 11.5px var(--font)}
+#prq .prt.pmn .pm-h{font:400 9px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2);border-bottom:1px solid var(--el);padding-bottom:2px;margin:8px 0 5px;display:block}
+#prq .prt.pmn .pm-as{display:flex;gap:4px}#prq .prt.pmn .pm-as button{flex:none;width:28px;height:28px;border:1px solid var(--eg);background:var(--eg);color:#fff;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+#prq .prt.pmn .prt-body{padding-top:2px}#prq .prt.pmn .prt-body .pn{display:block}#prq .prt.pmn .prt-body .pn section{display:block}
+#prq .prt.pmn .grid,#prq .prt.pmn .prt-prod{display:grid!important;grid-template-columns:1fr 1fr 1fr;gap:4px 6px;align-items:end}
+#prq .prt.pmn .prt-id.pc{flex:0 0 auto;height:auto;min-height:0;margin:0;box-shadow:none;border-radius:0;outline:0;cursor:default}#prq .prt.pmn .f>span{text-transform:none;letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#prq .prt.pmn .pi-2>span{text-transform:none;letter-spacing:0;font-weight:400}#prq .prt.pmn .f .mut{display:none}
+.uzb .pc.ux{border:0;border-bottom:1px solid #ecd3cb;border-radius:0;margin:0;outline:0}#prq .prt.pmn h3{display:none}#prq .prt.pmn .mut{font-size:10.5px}
+/* painel de urgências aberto (tabela completa): mesmo padrão visual das Monocráticas */
+#v-pauta.ed.mono .urg{--ur:#bd4c38;--ubg:#fbf3f0;--ul:#e0b8ae;border:1px solid var(--el);border-top:2px solid var(--ur);border-radius:0;background:var(--ubg);padding:12px 20px 14px;margin:-14px 0 14px;box-shadow:none}
+html[data-theme=dark] #v-pauta.ed.mono .urg{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07a6c}
+#v-pauta.ed.mono .urg-h .ola-ey{font:400 10px var(--emono);letter-spacing:.14em;color:var(--ur)}
+#v-pauta.ed.mono .urg-h h2{font-size:24px;font-weight:620;letter-spacing:-.03em;color:var(--ei)}
+#v-pauta.ed.mono .urg-h>.b,#v-pauta.ed.mono .urg .b{border-radius:0;border:1px solid var(--el2);background:var(--ew);color:var(--eo2);font-weight:700;font-size:12px;height:34px}
+#v-pauta.ed.mono .urg .b.pri{background:var(--ur);border-color:var(--ur);color:#fff}
+#v-pauta.ed.mono .urg .b.ok{background:var(--egs);border-color:var(--el);color:var(--eg)}
+#v-pauta.ed.mono .urg-k span{border:0;border-radius:0;padding:0 12px 0 0;font-size:12.5px;color:var(--ei);background:transparent}
+#v-pauta.ed.mono .urg-k b{font:400 14px var(--emono);color:var(--eo2)}#v-pauta.ed.mono .urg-k .al b{color:var(--ur)}
+#v-pauta.ed.mono .urg-h input[type=search],#v-pauta.ed.mono .urg-n input,#v-pauta.ed.mono .urg-n select,#v-pauta.ed.mono .urg-t select,#v-pauta.ed.mono .urg-t input{border:1px solid var(--el2);border-radius:0;background:var(--ew);color:var(--ei);font:600 12.5px var(--font);min-height:30px}
+#v-pauta.ed.mono .urg-n{border:1px solid var(--el);border-radius:0;background:var(--ep2);padding:8px 10px}
+#v-pauta.ed.mono .urg-n b{font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--ur)}
+#v-pauta.ed.mono .urg-t{background:var(--ew);border:1px solid var(--el);max-height:420px}
+#v-pauta.ed.mono .urg-t table{font-size:12.5px}
+#v-pauta.ed.mono .urg-t th{background:var(--ep);color:var(--em);font:400 9.5px var(--emono);letter-spacing:.12em;padding:9px 8px;border-bottom:1px solid var(--el)}
+#v-pauta.ed.mono .urg-t td{padding:8px;border-bottom:1px solid var(--el);background:transparent}
+#v-pauta.ed.mono .urg-t tr.pend td{background:var(--ubg)}#v-pauta.ed.mono .urg-t tr.pend td:first-child{box-shadow:inset 3px 0 0 var(--ur)}
+#v-pauta.ed.mono .urg-t .cnj{font:700 12px var(--emono);color:var(--ei)}#v-pauta.ed.mono .urg-t .pt{font-size:11.5px;color:var(--em)}
+#v-pauta.ed.mono .urg-t .dd{border-radius:0;font:400 10px var(--emono);background:var(--eos);color:var(--eo2);border:1px solid var(--el2);padding:2px 7px}
+#v-pauta.ed.mono .urg-t .dd.al{background:#f6e3de;color:#923d30;border-color:var(--ul)}
+#v-pauta.ed.mono .urg-sg summary{font:700 12.5px var(--font);color:var(--ei)}#v-pauta.ed.mono .urg-sg summary span{border-radius:0;font:400 10px var(--emono);background:var(--ew);border:1px solid var(--el)}
+#v-pauta.ed.mono .urg .eqx{border-radius:0}
 </style>
 <style id="cc-cal-css">
 .cc-esq{position:relative}
@@ -995,9 +1114,10 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
       <div class="trb-p" id="trb-p"></div></div>
       <div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
     <section class="trb trm" id="trm" aria-labelledby="trm-t"><div class="trb-in">
-      <div class="trb-h"><div><small class="trb-ey trm-ey">01 / Produzir</small><h1 id="trm-t">Decisões <em class="trm-em">monocráticas.</em></h1><p class="trb-d">Do registro à assinatura · indicadores pela data de cada etapa.</p></div>
-        <div class="trb-c trm-c"><div class="trm-sel"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b" id="trm-hoje" title="Voltar ao período atual: o mês ou a semana de hoje">Hoje</button><button class="b trm-reg" id="trm-reg" aria-expanded="false">+ Registrar monocrática</button></div><div class="trm-k" id="trm-k" role="group" aria-label="Indicadores do período"></div></div></div></div>
-      <div class="trm-urq" id="trm-urq"></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
+      <div class="trb-h"><div><small class="trb-ey trm-ey">01 / Produzir</small><h1 id="trm-t">Decisões <em class="trm-em">monocráticas.</em></h1><p class="trb-d">Do registro à assinatura.</p></div>
+        <div class="trb-c trm-c"><div class="trm-sel"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b" id="trm-hoje" title="Voltar ao período atual: o mês ou a semana de hoje">Hoje</button><button class="b trm-reg" id="trm-reg" aria-expanded="false" aria-label="Registrar monocrática" title="Registrar monocrática">+ Registrar</button></div><div class="trm-k" id="trm-k" role="group" aria-label="Estatísticas das monocráticas: semana, mês e total" title="Contagem pela data de cada etapa"></div></div></div></div>
+      <div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
+    <div class="trm-urq" id="trm-urq"></div>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <section class="urg" id="urg" hidden></section>
     <div class="ctl-sub" id="ctl-sub" role="tablist"><button data-sub="metas">Metas</button><button data-sub="sobr">Sobrestados</button><button data-sub="sens">Casos sensíveis</button></div>
@@ -1014,6 +1134,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
       <span class="pt-c"><b id="pt-n"></b> <small id="pt-f"></small><button class="b lk" id="f-limpa" title="Limpar filtros" aria-label="Limpar filtros"><svg class="ed-i" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="ed-t">Limpar filtros</span></button></span>
       <span class="sp"></span>
       <span class="seg hb-seg" id="esc" role="group" aria-label="Escopo"><button data-v="meus" aria-pressed="true">Meus</button><button data-v="todos" aria-pressed="false">Todos</button></span>
+      <span class="seg hb-seg" id="msit" role="group" aria-label="Situação das decisões" hidden><button data-v="minuta" aria-pressed="true">Para minuta <small></small></button><button data-v="assin" aria-pressed="false">Aguardando assinatura <small></small></button><button data-v="conc" aria-pressed="false">Concluídos <small></small></button><button data-v="todos" aria-pressed="false">Todos <small></small></button></span>
       <span class="seg hb-seg" id="modo"><button data-v="cards" aria-pressed="true" title="Cartões compactos">▤ Cartões</button><button data-v="planilha" aria-pressed="false" title="Planilha no padrão do Controle de Pauta">▦ Planilha</button></span>
       <span class="exb" role="group" aria-label="Exportar e importar"><button class="b ic3" id="exp-xlsx"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="b ic3" id="exp-meus" aria-label="Exportar só as minhas designações" title="Exportar só as minhas designações"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><path d="M18.5 7v9M15.5 13l3 3 3-3"/></svg></button><button class="b ic3" id="exp-mes" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M12 12.5v5.5M9.5 15.5 12 18l2.5-2.5"/></svg></button><button class="b ic3" id="imp-xlsx" hidden aria-label="Importar monocráticas" title="Importar monocráticas (planilha no padrão da exportação)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7 10l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="b ic3" id="exp-csv" hidden aria-label="Exportar em CSV os processos filtrados (sem filtro, toda a pauta)" title="Exportar em CSV os processos filtrados (sem filtro, toda a pauta)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/></svg></button><button class="b ic3" id="exp-copia" hidden aria-label="Copiar os processos: selecionados, filtrados ou toda a pauta" title="Copiar os processos: selecionados, filtrados ou toda a pauta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button><input type="file" id="imp-arq" accept=".xlsx" hidden></span>
     </div>
@@ -1148,6 +1269,11 @@ function carregar(silencioso){
 function marcaSeg(sel,v){Array.prototype.forEach.call(document.querySelectorAll(sel+' button'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===v));});}
 $('#ses').onchange=function(){if(nPend()||gravando){pedeSalvar('Salve ou descarte as alterações antes de trocar de sessão.');this.value=S.ses;return;}S.ses=this.value;S.aberto={};try{localStorage.setItem('eq_ses',S.ses);}catch(e){}carregar();};
 $('#ver').onclick=function(e){var b=e.target.closest('button');if(!b)return;S.lista=b.getAttribute('data-v');marcaSeg('#ver',S.lista);render();};
+/* Monocráticas (editorial): as abas são por situação. Para minuta = ainda com o gabinete (sem minuta, minutada ou revisada); aguardando assinatura = enviada; concluídos = assinada */
+/* sigla da classe para a linha (o nome completo fica na dica); classe fora da lista aparece por extenso */
+function siglaClasse(c){var n=nq(c);return /^apelacao\s*\/\s*remessa/.test(n)?'ApelRemNec':/^apelacao civel/.test(n)?'ApCiv':/^apelacao criminal/.test(n)?'ApCrim':/^agravo de instrumento/.test(n)?'AI':/^remessa necessaria/.test(n)?'RemNec':/^agravo interno/.test(n)?'AgInt':/^embargos de declaracao/.test(n)?'EDcl':/^mandado de seguranca/.test(n)?'MS':/^acao rescisoria/.test(n)?'AR':/^conflito de competencia/.test(n)?'CC':/^habeas corpus/.test(n)?'HC':/^tutela/.test(n)?'Tutela':c;}
+function msitDe(it){var e=etapa(it);return e==='Assinada'?'conc':e==='Liberado'?'assin':'minuta';}
+$('#msit').onclick=function(e){var b=e.target.closest('button');if(!b)return;S.msit=b.getAttribute('data-v');render();};
 $('#esc').onclick=function(e){var b=e.target.closest('button');if(!b)return;S.escopo=b.getAttribute('data-v');try{localStorage.setItem('eq_escopo',S.escopo);}catch(x){}marcaSeg('#esc',S.escopo);render();};
 var tq;$('#q').oninput=function(){var v=this.value;clearTimeout(tq);tq=setTimeout(function(){S.q=v;render();},220);};
 $('#q-k').onchange=function(){S.qk=this.value;render();};
@@ -1158,7 +1284,7 @@ $('#modo').onclick=function(e){var b=e.target.closest('button');if(!b)return;S.m
 document.addEventListener('change',function(e){var k=e.target.getAttribute&&e.target.getAttribute('data-c');if(k&&/^urg/.test(k)&&S.fonte==='mono')setTimeout(function(){var it=achar(e.target);if(it&&S.doc){var c=it.ctl||{};S.doc.urgs=(S.doc.todos||[]).filter(function(i){return (i.ctl||{}).urgTipo;});}render();},0);});
 $('#urg').addEventListener('click',function(e){var b;
   if((b=e.target.closest('[data-criar-mono]'))){var it=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-criar-mono');})[0];if(it)regMono(it.cnj,{mono:true,tipoAto:(it.ctl||{}).tipoAto||'Decisão de urgência'},'Monocrática registrada a partir da urgência.');return;}
-  if((b=e.target.closest('[data-ver-mono]'))){var k=b.getAttribute('data-ver-mono'),it=lista().filter(function(i){return dg(i.cnj)===k;})[0];if(it){S.escopo='todos';$('#ir-k').value='item';$('#ir-v').value=it.item;irPara();}return;}
+  if((b=e.target.closest('[data-ver-mono]'))){var k=b.getAttribute('data-ver-mono'),it=lista().filter(function(i){return dg(i.cnj)===k;})[0];if(it){S.escopo='todos';S.msit='todos';$('#ir-k').value='item';$('#ir-v').value=it.item;irPara();}return;}
   if(e.target.id==='urg-x'){S.urgTab=false;painelUrg();return;}
   if((b=e.target.closest('[data-tirar-urg]'))){var it2=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-tirar-urg');})[0];if(it2&&confirm('Excluir a urgência deste processo? A monocrática, se houver, continua.'))regMono(it2.cnj,{urgTipo:'',urgSit:'',urgData:'',urgObs:'',urgPedido:'',mono:!!it2.mono},'Urgência excluída.');return;}
   if((b=e.target.closest('[data-sug]'))){regMono(b.getAttribute('data-sug'),{urgTipo:tipoDaEtiqueta(b.getAttribute('data-et')),urgSit:'Pendente · não apreciada',urgObs:'Etiqueta do PJe: '+b.getAttribute('data-et')},'Urgência registrada.');return;}});
@@ -1295,9 +1421,9 @@ function metaDe(it){return (it.ctl||{}).meta||'';}
 function alertas(it){var c=it.ctl||{},A=[];if(c.tempest==='Intempestivo')A.push('Intempestivo');if(c.preparo==='Não recolhido')A.push('Preparo não recolhido');if(/^Irregular/.test(c.repres||''))A.push('Representação irregular');
   if(c.midias==='Faltantes')A.push('Mídias faltantes');if(c.mpf&&c.mpf!=='Sem hipótese'&&c.parecer&&c.parecer!=='Com parecer')A.push('Parecer do MPF pendente');return A;}
 function fmtCnj(s){return esc(s||'');}
-function filtrar(){var L=lista(),q=nq(S.q),e=nq(U.eu);
+function filtrar(){var L=lista(),q=nq(S.q),e=nq(U.eu),MS=S.fonte==='mono'&&!!$('#v-pauta')._ed;
   return L.filter(function(it){
-    if(S.escopo==='meus'&&!meu(it))return false;
+    if(MS){if((S.msit||'minuta')!=='todos'&&msitDe(it)!==(S.msit||'minuta'))return false;}else if(S.escopo==='meus'&&!meu(it))return false;
     if(S.fPri&&!(S.fonte==='mono'?urgDe(it):(it.ctl||{}).sopref))return false;if(S.fMeta&&!metaDe(it))return false;
     if(S.fResp&&nq(it.servidor)!==nq(S.fResp)&&nq(it.corretor)!==nq(S.fResp))return false;
     if(q){var cp=S.qk?[it[S.qk]]:[it.cnj,it.item,it.assunto,it.classe,it.partes,it.servidor,it.corretor,it.obs,(it.ctl||{}).intercor];if(nq(cp.join(' ')).indexOf(q)<0)return false;}
@@ -1334,7 +1460,7 @@ var EDM=[];
 function edLayout(on){var vp=$('#v-pauta');on=!!on;if(!!vp._ed===on)return;vp._ed=on;vp.classList.toggle('ed',on);$('#ed-tabs').hidden=$('#ed-strip').hidden=!on;
   if(!on){while(EDM.length){var m=EDM.pop();m[1].insertBefore(m[0],m[2]&&m[2].parentNode===m[1]?m[2]:null);}[].forEach.call(document.querySelectorAll('.ed-sep'),function(x){x.remove();});$('#exp-csv').hidden=$('#exp-copia').hidden=true;return;}
   var mv=function(el,dst){if(!el)return;EDM.push([el,el.parentNode,el.nextSibling]);dst.appendChild(el);},tl=$('#ed-tl'),tr=$('#ed-tr'),st=$('#ed-strip');
-  [$('#esc'),$('#exp-meus'),$('#exp-xlsx'),$('#exp-csv'),$('#exp-mes'),$('#imp-xlsx'),$('#exp-copia')].forEach(function(e){mv(e,tl);});mv($('#trm-reg'),tr);mv($('#urq'),$('#trm-urq'));$('#exp-csv').hidden=$('#exp-copia').hidden=false;
+  [$('#esc'),$('#msit'),$('#exp-meus'),$('#exp-xlsx'),$('#exp-csv'),$('#exp-mes'),$('#imp-xlsx'),$('#exp-copia')].forEach(function(e){mv(e,tl);});mv($('#trm-reg'),tr);mv($('#urq'),$('#trm-urq'));$('#exp-csv').hidden=$('#exp-copia').hidden=false;
   [document.querySelector('.pt-ir'),document.querySelector('.pt-q'),$('#f-resp'),$('#f-pri'),$('#f-meta'),$('#f-limpa')].forEach(function(e){mv(e,st);});
   var sp=document.createElement('span');sp.className='ed-sep';sp.setAttribute('aria-hidden','true');st.appendChild(sp);
   [document.querySelector('.pt-c'),$('#sel-n'),$('#sel-filt'),$('#sel-limpa')].forEach(function(e){mv(e,st);});}
@@ -1370,6 +1496,8 @@ function render(){
   /* na pauta (visual editorial) a listagem é só em lista; a planilha continua nas Monocráticas */
   var modo=ED?'cards':S.modo;$('#lst').className='lst '+modo;
   $('#lst').innerHTML=modo==='planilha'?(MO?planilhaMono(V):planilha(V)):V.map(cartao).join('');
+  var MSv=MO&&ED;$('#msit').hidden=!MSv;$('#esc').hidden=MSv;if(MSv){$('#exp-meus').hidden=true;var cM={minuta:0,assin:0,conc:0,todos:L.length};L.forEach(function(i){cM[msitDe(i)]++;});
+    [].forEach.call($('#msit').children,function(b){var v=b.getAttribute('data-v');b.setAttribute('aria-pressed',String((S.msit||'minuta')===v));b.querySelector('small').textContent=cM[v];});$('#ed-tl').className='ed-tg';}else if(ED)$('#exp-meus').hidden=false;
   var sx=S.prt&&$('#v-pauta').classList.contains('prt-on')&&document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(sx)sx.classList.add('prt-sel');
 }
 /* painel superior da pauta: título da sessão, marcos ligados pelo trilho (feito · hoje · próximo · futuro) e o progresso */
@@ -1507,13 +1635,16 @@ function cartao(it){
     var stM=[['Minutado',svm('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta'],['Corrigido',svm('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Revisão'],['Liberado',svm('<path d="M4 12l15-7-5 15-3-6z"/>'),'Para assinatura']]
       .map(function(x,i){var ok=i+1<=oM,tt=ok&&i+1===oM?x[2]+' · clique para desfazer':ok?x[2]:'Marcar: '+x[2].toLowerCase();return (i?'<i class="ln'+(ok?' ok':'')+'"></i>':'')+'<button class="sp'+(ok?' ok':i===oM?' nx':'')+'" data-a="et" data-v="'+(i+1===oM?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+tt+'" aria-label="'+tt+'" aria-pressed="'+ok+'"'+(asn?' disabled':'')+'>'+x[1]+'</button>';}).join('')+
       '<i class="ln'+(asn?' ok':'')+'"></i><span class="sp sp-as'+(asn?' ok':'')+'" role="img" title="'+(asn?'Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):''):'Assinatura: registrada na ficha do processo (Produção)')+'" aria-label="'+(asn?'Assinada':'Ainda não assinada')+'">'+svm('<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>')+'</span>';
-    return '<article class="pc cpt edr'+(meu(it)?' meu':'')+(A.length?' al':'')+'" data-k="'+k+'" title="Clique na linha para abrir o prontuário de produção"><div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar decisão '+esc(it.item||'')+'">'+
-      '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="cnj">'+fmtCnj(it.cnj)+'</span><span class="e-cl"> · '+esc(c.tipoAto||'tipo de ato não informado')+(urgDe(it)?' · <em class="e-urg'+(urgPend(it)?' pend':'')+'">'+esc(urgDe(it))+(urgPend(it)?' · não apreciada':'')+'</em>':'')+(metaDe(it)?' · <em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</span>'+
-      '<span class="e-a1" title="'+esc((it.assunto||'')+(it.partes?' · '+it.partes:''))+'"><b>'+esc(it.assunto||'assunto não informado')+'</b>'+(it.partes?' <span>· '+esc(it.partes)+'</span>':'')+'</span></div>'+
-      '<div class="ics"><span class="ic'+(urgDe(it)?' on '+(urgPend(it)?'al':'ic2'):'')+'" title="'+esc(urgDe(it)?'Pedido urgente: '+urgDe(it)+' · '+(c.urgSit||'pendente'):'Sem pedido urgente')+'"><b>!</b></span><span class="ic'+(A.length?' on al':'')+'" title="'+esc(A.length?A.join(' · '):'Sem alertas')+'">'+ICN.al+'</span><span class="ic'+(c.intercor?' on ic2':'')+'" title="'+esc(c.intercor?'Intercorrência: '+c.intercor:'Sem intercorrência')+'">'+ICN.ic+'</span><button class="ic e-dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></div></span>'+
-      '<span class="gb"><div class="rs"><label><small>Minutante</small>'+selR(it,'servidor')+'</label><label><small>Corretor</small>'+selR(it,'corretor')+'</label></div>'+
-      '<label class="dm"><small>Minutado em</small><input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'" title="Informar a data marca a decisão como minutada"></label>'+
-      '<div class="pr"><small>Produção</small><div class="stp" role="group" aria-label="Etapas de produção">'+stM+'</div></div></span></div></article>';}
+    var segs=[['Minutante','Min.',it.servidor],['Corretor','Cor.',it.corretor],['Minutado em','',it.dataMinuta?br(it.dataMinuta).slice(0,5):'']].filter(function(x){return x[2];});
+    return '<article class="pc cpt edr mrw ee'+oM+(meu(it)?' meu':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Com minuta','Revisada','Para assinatura','Assinada'][oM])+' · clique na linha para abrir o prontuário de produção">'+
+      '<span class="mr-o" role="group" aria-label="Sinalizações"><span class="ic'+(A.length?' on al':'')+'" title="'+esc(A.length?A.join(' · '):'Sem alertas')+'">'+ICN.al+'</span><span class="ic'+(c.intercor?' on ic2':'')+'" title="'+esc(c.intercor?'Intercorrência: '+c.intercor:'Sem intercorrência')+'">'+ICN.ic+'</span><button class="ic e-dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></span>'+
+      '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar decisão '+esc(it.item||'')+'">'+
+      '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="Tipo de julgamento (ato)'+(it.tarefa?' · tarefa no PJe: '+esc(it.tarefa):'')+'">'+esc(c.tipoAto||'tipo de ato não informado')+'</span>'+
+      '<span class="mr-as" title="'+esc('Assunto: '+(it.assunto||'não informado')+(it.partes?' · '+it.partes:''))+'">· '+esc(it.assunto||'assunto não informado')+'</span>'+(metaDe(it)?'<em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</span>'+
+      (urgDe(it)?'<span class="mr-l2"><em class="e-urg'+(urgPend(it)?' pend':'')+'" title="Pedido urgente: definido no prontuário">'+esc(urgDe(it))+(urgPend(it)?' · não apreciada':' · '+esc(c.urgSit||'apreciada'))+'</em></span>':'')+'</div></span>'+
+      '<span class="gb"><input class="mr-ob" data-d="obs" value="'+esc(it.obs||'')+'" placeholder="síntese ou observações…" aria-label="Síntese ou observações da decisão">'+
+      (segs.length?'<span class="mr-tg" title="'+esc(segs.map(function(x){return x[0]+' '+x[2];}).join(' · '))+' · definido no prontuário">'+segs.map(function(x){return '<span>'+(x[1]?x[1]+' ':'')+'<b>'+esc(x[2])+'</b></span>';}).join('')+'</span>':'')+
+      '<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stM+'</div></div></span></div></article>';}
   if(S.fonte!=='mono'&&$('#v-pauta')._ed){
     var sv=function(d){return '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';};
     var stE=[['Minutado',sv('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta entregue'],['Corrigido',sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Correção concluída'],['Liberado',sv('<path d="M4 12l15-7-5 15-3-6z"/>'),'Voto liberado']]
@@ -1576,6 +1707,7 @@ function painelUrg(){
   var TH='<thead><tr><th>Processo</th><th>Medida · nível</th><th>Pedido em · tarefa</th><th>Minutante</th><th>Apreciação</th><th>Apreciada em</th><th>Monocrática</th></tr></thead>';
   el.hidden=false;
   filaUrg();if(!S.urgTab){el.hidden=true;return;}
+  if($('#v-pauta')._ed){painelUrgEd(el);return;}el.className='urg';
   var ab=true;el.innerHTML='<div class="urg-h"><div><small class="ola-ey">Painel de urgências · tabela completa</small><h2>Liminares, tutelas e efeito suspensivo</h2></div><button class="b" id="urg-x">Fechar tabela</button></div>'+(ab?'':'<div class="urg-h" style="margin-top:8px"><div class="urg-k"><span class="'+(P0.length?'al':'')+'"><b>'+P0.length+'</b> aguardando apreciação</span></div></div>');if(!ab)return;el.innerHTML+='<div class="urg-h" style="margin-top:8px"><div class="urg-k"><span class="'+(P0.length?'al':'')+'"><b>'+P0.length+'</b> aguardando apreciação</span><span class="'+(mx>5?'al':'')+'"><b>'+(P0.length?mx:'—')+'</b> dias · o mais antigo</span><span><b>'+A.length+'</b> apreciados</span><span><b>'+L.filter(function(i){return i.mono;}).length+'</b> com monocrática</span><span><b>'+((S.doc&&S.doc.sugestoes)||[]).length+'</b> sugeridos pelo PJe</span></div>'+
     '<input type="search" id="urg-q" placeholder="Filtrar por processo, partes, assunto…" value="'+esc(S.uq||'')+'"></div>'+
     '<form class="urg-n" id="urg-n"><b>Registrar urgência</b><input name="cnj" placeholder="nº CNJ do processo" required><select name="tipo">'+CPM.urgTipo.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><select name="niv"><option value="">nível…</option>'+CPM.urgNivel.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><input type="date" name="ped" title="Data do pedido"><input name="obs" placeholder="observação (opcional)"><button class="b pri">Registrar</button></form>'+
@@ -1590,12 +1722,12 @@ function monoPer(){var p=S.mper||'mes',d=new Date((S.mref||hoje())+'T12:00:00Z')
   if(p==='mes'){var y=d.getUTCFullYear(),m=d.getUTCMonth();return {de:isoD(new Date(Date.UTC(y,m,1,12))),ate:isoD(new Date(Date.UTC(y,m+1,0,12))),lb:d.toLocaleDateString('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'})};}
   var a=new Date(+d-((d.getUTCDay()+6)%7)*864e5),b=new Date(+a+6*864e5);return {de:isoD(a),ate:isoD(b),lb:br(isoD(a)).slice(0,5)+' a '+br(isoD(b))};}
 var MIC={reg:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',min:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',rev:'<path d="M20 6 9 17l-5-5"/>',ass:'<path d="M3 21c3-1 5-4 6-7l3 3c-3 1-6 3-7 6z"/><path d="M14 4l6 6-5 5-6-6z"/>',fim:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>'};
-function bandaMono(){var I=(S.doc&&S.doc.itens)||[],P=monoPer(),em=function(v){v=(v||'').slice(0,10);return v&&v>=P.de&&v<=P.ate;};
-  var n=function(f){return I.filter(f).length;},reg=n(function(i){return em(i.monoEm||i.criadoEm);}),mi=n(function(i){return em(i.dataMinuta);}),co=n(function(i){return em(i.dataCorrecao);}),li=n(function(i){return em(i.dataLiberacao);}),as=n(function(i){return em(i.dataAssinatura);});
-  var k=function(t,v){return '<div class="tmk"><b>'+v+'</b><small>'+t+'</small></div>';};
-  $('#trm-k').innerHTML=k('Registradas',reg)+k('Minutadas',mi)+k('Para assinatura',li)+k('Assinadas',as);
-  $('#trm-lb').textContent=P.lb.charAt(0).toUpperCase()+P.lb.slice(1);marcaSeg('#trm-per',S.mper||'mes');$('#trm-ant').disabled=$('#trm-prox').disabled=(S.mper==='tudo');
-  $('#trm-st').textContent=$('#pt-st').textContent;$('#trm-reg').setAttribute('aria-expanded',String(!!S.monoForm));}
+function bandaMono(){var I=(S.doc&&S.doc.itens)||[],h=hoje(),d=new Date(h+'T12:00:00Z'),s0=new Date(+d-((d.getUTCDay()+6)%7)*864e5),s1=new Date(+s0+6*864e5),y=d.getUTCFullYear(),mm=d.getUTCMonth();
+  var R=[['Semana',br(isoD(s0)).slice(0,5)+' a '+br(isoD(s1)).slice(0,5),isoD(s0),isoD(s1),'sem'],['Mês',d.toLocaleDateString('pt-BR',{month:'long',timeZone:'UTC'}),isoD(new Date(Date.UTC(y,mm,1,12))),isoD(new Date(Date.UTC(y,mm+1,0,12))),''],['Total','desde o início','','9999-12-31','']];
+  $('#trm-k').innerHTML=R.map(function(r){var em=function(v){v=(v||'').slice(0,10);return v&&v>=r[2]&&v<=r[3];},n=function(f){return I.filter(f).length;};
+    var V=[['reg.',n(function(i){return em(i.monoEm||i.criadoEm);}),'Registradas'],['min.',n(function(i){return em(i.dataMinuta);}),'Minutadas'],['p/ ass.',n(function(i){return em(i.dataLiberacao);}),'Enviadas para assinatura'],['assin.',n(function(i){return em(i.dataAssinatura);}),'Assinadas']];
+    return '<div class="mst '+r[4]+'" role="group" aria-label="'+esc(r[0]+' · '+r[1])+'"><div><b>'+r[0]+'</b><span>'+esc(r[1])+'</span></div><dl>'+V.map(function(v,i){return '<div'+(i===3?' class="hi"':'')+' title="'+v[2]+'"><dd>'+v[1]+'</dd><dt>'+v[0]+'</dt></div>';}).join('')+'</dl></div>';}).join('');
+  $('#trm-reg').setAttribute('aria-expanded',String(!!S.monoForm));}
 $('#trm-per').onclick=function(e){var b=e.target.closest('button');if(!b)return;S.mper=b.getAttribute('data-v');S.mref=hoje();bandaMono();};
 ['#trm-ant','#trm-prox'].forEach(function(id,ix){$(id).onclick=function(){var d=new Date((S.mref||hoje())+'T12:00:00Z'),s=ix?1:-1;
   if((S.mper||'mes')==='mes')d=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+s,1,12));else d=new Date(+d+s*7*864e5);S.mref=isoD(d);bandaMono();};});
@@ -1641,7 +1773,18 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
     '<div class="prt-id"><b>'+esc(it.cnj)+'</b><small>'+esc([it.assunto,it.classe].filter(Boolean).join(' · '))+'</small><small class="prt-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</small>'+
     '<div class="prt-chs">'+chip('Minutante <b>'+esc(mins)+'</b>')+chip('Corretor <b>'+esc(cor)+'</b>')+chip('Etapa <b>'+esc(etLbl(et))+'</b>')+chip('Entrega <b>'+(pz?esc(br(pz).slice(0,5))+' · '+esc(quando(pz)):'—')+'</b>',dd!=null&&dd<0&&et==='A fazer'?'al':'')+chip('<b>'+A.length+'</b> alerta'+(A.length===1?'':'s'),A.length?'al':'')+'</div></div>'+
     '<div class="prt-tabs" role="tablist">'+abas.map(function(a,i){return '<button role="tab" data-prt-aba="'+i+'" aria-selected="'+(i===ab)+'"><span class="tn">'+(i+1)+' · </span>'+esc(a.nome)+'<small>'+a.ch+'/'+a.n+'<span> preenchidos</span></small></button>';}).join('')+'</div>'+
-    '<div class="pc prt-pc prt-body" data-k="'+S.prt+'">'+abas.map(function(a,i){return '<div class="pn prt-p" data-prt-p="'+i+'"'+(i===ab?'':' hidden')+'>'+(a.html||'<p class="mut">Nada a preencher nesta aba.</p>')+'</div>';}).join('')+'</div></section>';prtPos();}
+    '<div class="pc prt-pc prt-body" data-k="'+S.prt+'">'+abas.map(function(a,i){return '<div class="pn prt-p" data-prt-p="'+i+'"'+(i===ab?'':' hidden')+'>'+(a.html||'<p class="mut">Nada a preencher nesta aba.</p>')+'</div>';}).join('')+'</div></section>';
+  /* Monocráticas (editorial): sem abas, tudo numa tela; com a urgência ligada, o cartão do processo vira o cartão de urgência */
+  if(mono&&vp._ed){var P=el.querySelector('.prt'),c=it.ctl||{},uon=!!urgDe(it),sec=function(re){var x=secs.filter(function(q){var h=q.querySelector('h3');return re===0?q.classList.contains('urg-s'):h&&re.test(h.textContent);})[0];if(!x)return '';x=x.cloneNode(true);var h=x.querySelector('h3');if(h)h.remove();return x.outerHTML;};
+    var du=diasDesde(urgIni(it)),ff=function(r,x){return '<div class="f"><span>'+r+'</span><div class="v">'+x+'</div></div>';},dt=function(k){return '<input type="date" data-d="'+k+'" value="'+esc(it[k]||'')+'">';};
+    P.classList.add('pmn');
+    P.querySelector('.prt-id').outerHTML='<div class="prt-id pc prt-pc prt-urgf'+(uon?' on':'')+'" data-k="'+S.prt+'"><div class="pi-1"><b>'+esc(it.cnj)+'</b>'+(uon?'<span class="prt-urgt'+(urgPend(it)?' pend':'')+'">'+esc(urgPend(it)?'Não apreciada'+(du!=null?' · '+du+' d':''):(c.urgSit||'Apreciada'))+'</span>':'')+'</div>'+
+      '<div class="pi-2"><span title="'+esc([c.tipoAto,it.assunto,it.partes,it.tarefa].filter(Boolean).join(' · '))+'">'+esc([c.tipoAto||'tipo de ato não informado',it.tarefa].filter(Boolean).join(' · '))+'</span><label class="prt-urgs" title="'+(uon?'Desmarque para desligar o pedido urgente':'Marque para registrar liminar, tutela ou efeito suspensivo')+'"><input type="checkbox" data-urg-sw'+(uon?' checked':'')+'>Pedido urgente</label></div>'+
+      '<div class="prt-urgc"'+(uon?'':' hidden')+'>'+sec(0)+'</div></div>';
+    P.querySelector('.prt-body').innerHTML='<div class="pn"><span class="pm-h">Produção</span><div class="prt-prod">'+ff('Minutado em',dt('dataMinuta'))+ff('Revisado em',dt('dataCorrecao'))+ff('Para assinatura em',dt('dataLiberacao'))+
+      ff('Assinada em','<span class="pm-as">'+dt('dataAssinatura')+'<button data-a="assinar" aria-label="Confirmar assinatura (preenche com a data de hoje)" title="Confirmar assinatura (preenche com a data de hoje)"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></button></span>')+
+      ff('Minutante',selR(it,'servidor'))+ff('Corretor',selR(it,'corretor'))+'</div><span class="pm-h">Ato e fundamento · art. 932 do CPC</span>'+sec(/Ato e fundamento/)+'</div>';}
+  prtPos();}
 /* o painel fica parado na tela: mesma coluna da grade, preso ao topo (abaixo da barra) e ao rodapé da janela */
 var PRT_W=480;
 function prtPos(){var vp=$('#v-pauta'),a=$('#prq'),p=a&&a.querySelector('.prt');
@@ -1681,27 +1824,61 @@ function filaUrg(){var el=$('#urq');if(!el)return;if(S.fonte!=='mono'){el.innerH
     '<div class="uq-f"><button class="b" data-uq="reg">+ Registrar urgência</button><button class="b" data-uq="tab">'+(S.urgTab?'Fechar tabela':'Tabela completa')+'</button></div></section>';}
 $('#urq').addEventListener('click',function(e){var b=e.target.closest('[data-uq]');if(!b)return;var a=b.getAttribute('data-uq');
   if(a==='tab'){S.urgTab=!S.urgTab;}else{S.urgTab=true;if(a==='sug')S.sgAb=true;}painelUrg();
-  if(S.urgTab){var u=$('#urg');u.scrollIntoView({behavior:'smooth',block:'start'});if(a==='reg'){var c=u.querySelector('#urg-n [name=cnj]');if(c)setTimeout(function(){c.focus();},300);}}});
+  if(S.urgTab){var u=$('#urg');($('#v-pauta')._ed?$('#trm-urq'):u).scrollIntoView({behavior:'smooth',block:'start'});if(a==='reg'){var c=u.querySelector('#urg-n [name=cnj]');if(c)setTimeout(function(){c.focus();},300);}}});
+$('#urq').addEventListener('click',function(e){var b=e.target.closest('[data-ver-mono]');if(!b)return;var k=b.getAttribute('data-ver-mono'),it=lista().filter(function(i){return dg(i.cnj)===k;})[0];if(it){S.msit='todos';$('#ir-k').value='item';$('#ir-v').value=it.item;irPara();}});
 $('#urq').addEventListener('toggle',function(e){if(e.target.classList&&e.target.classList.contains('uq-ap'))S.uqAp=e.target.open;},true);
 /* Monocráticas (visual editorial): a fila de urgências é uma faixa do painel de cima. Com o prontuário aberto vira uma linha de pastilhas;
    a aba da margem inferior abre a tabela completa (a mesma de "Tabela completa"). */
+var UZ_SV=function(d){return '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';};
+/* estado da urgência para a faixa e os filtros: pendente (vermelho), em análise = aguardando providências (laranja), minuta pronta = aguardando assinatura (amarelo), apreciada (roxo) */
+function urgEst(it){var v=(it.ctl||{}).urgSit||'';return /^Apreciada/.test(v)?'apr':v==='Minuta pronta'?'ass':v==='Em análise'?'prov':'pend';}
 function filaUrgEd(el){
-  var L=(S.doc&&S.doc.urgs)||[],SG=(S.doc&&S.doc.sugestoes)||[],sv=function(d){return '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';};
+  var L=(S.doc&&S.doc.urgs)||[],SG=(S.doc&&S.doc.sugestoes)||[],sv=UZ_SV;
   var P0=L.filter(urgPend).sort(function(a,b){return String(urgIni(a)).localeCompare(String(urgIni(b)));}),A=L.filter(function(i){return !urgPend(i);});
-  var mx=P0.length?diasDesde(urgIni(P0[0])):null,comp=$('#v-pauta').classList.contains('prt-on');
+  var mx=P0.length?diasDesde(urgIni(P0[0])):null,ab=!!S.urgTab;
   var cor=function(it){var n=(it.ctl||{}).urgNivel||'',d=diasDesde(urgIni(it));return /Urgent[íi]ssima/.test(n)||d>5?'r':'o';};
-  var card=function(it){var c=it.ctl||{},d=diasDesde(urgIni(it)),k=dg(it.cnj);
-    return '<article class="ub-c pc '+cor(it)+'" data-k="'+k+'"><div class="ub-t"><b>'+(d==null?'—':d+' dia'+(d===1?'':'s'))+'</b><span>de espera</span>'+(c.urgNivel?'<em>'+esc(c.urgNivel.replace(/\s*\(.*$/,''))+'</em>':'')+'</div>'+
-      '<div class="ub-h"><b>'+esc(c.urgTipo)+'</b><span class="cnj">'+esc(it.cnj)+'</span></div>'+
-      '<dl class="ub-d"><div><dt>Pedido em</dt><dd>'+(urgIni(it)?esc(br(urgIni(it)).slice(0,5)):'—')+'</dd></div><div><dt>Minutante</dt><dd>'+esc(it.servidor||'—')+'</dd></div><div><dt>Corretor</dt><dd>'+esc(it.corretor||'—')+'</dd></div>'+
-      '<div><dt>Etapa</dt><dd>'+(it.mono?esc(etLbl(etapa(it))):'sem monocrática')+'</dd></div><div class="w2"><dt>Situação</dt><dd><select data-c="urgSit" aria-label="Situação da urgência">'+CPM.urgSit.map(function(x){return '<option'+(x===(c.urgSit||'Pendente · não apreciada')?' selected':'')+'>'+x+'</option>';}).join('')+'</select></dd></div></dl>'+
-      '<div class="ub-a"><button data-uq-com="'+k+'" title="Comunicar o desembargador: copia a mensagem pronta">'+sv('<path d="M4 5h16v11H9l-5 4z"/>')+' Comunicar des.</button>'+(it.mono?'<button data-ver-mono="'+k+'" title="Ver a decisão na lista">'+sv('<path d="M5 12h14M13 6l6 6-6 6"/>')+' Ver decisão</button>':'<button data-criar-mono="'+k+'">+ Monocrática</button>')+'<button class="ub-ic" data-fd-cnj="'+k+'" aria-label="Ficha do processo" title="Ficha do processo">'+sv('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>')+'</button></div></article>';};
-  var chip=function(it){var c=it.ctl||{},d=diasDesde(urgIni(it));return '<button class="ub-p '+cor(it)+'" data-ver-mono="'+dg(it.cnj)+'" title="'+esc(it.cnj+' · '+c.urgTipo)+'"><span>'+(d==null?'—':d+' d')+'</span><i>'+esc(String(it.cnj).slice(0,15))+'…</i><b>'+esc(c.urgTipo)+'</b></button>';};
-  el.innerHTML='<section class="ub'+(comp?' comp':'')+'" aria-label="Fila de urgências"><div class="ub-hd"><span class="ub-k">Fila de urgências</span>'+
-    '<span class="ub-s"><b>'+P0.length+'</b> não apreciada'+(P0.length===1?'':'s')+(comp?'':' · maior espera <b>'+(mx==null?'—':mx)+'</b> dia'+(mx===1?'':'s')+' · <button class="ub-lk" data-uq="sug">'+SG.length+' sugestões do PJe</button> · '+A.length+' apreciada'+(A.length===1?'':'s'))+'</span>'+
-    (comp?P0.slice(0,4).map(chip).join(''):'')+'<span class="sp"></span><button class="ub-reg" data-uq="reg">'+(comp?'+ Urgência':'+ Registrar urgência')+'</button></div>'+
-    (comp?'':'<div class="ub-l">'+(P0.slice(0,8).map(card).join('')||'<p class="mut">Nenhuma urgência aguardando apreciação. Use “Registrar urgência” ou as sugestões do PJe.</p>')+'</div>')+
-    '<div class="ub-x"><button data-uq="tab" aria-expanded="'+!!S.urgTab+'" aria-label="'+(S.urgTab?'Recolher a fila de urgências':'Expandir a fila de urgências: abre todas como lista')+'" title="'+(S.urgTab?'Recolher a fila de urgências':'Expandir a fila de urgências: abre todas como lista')+'">'+sv(S.urgTab?'<path d="M6 15l6-6 6 6"/>':'<path d="M6 9l6 6 6-6"/>')+'</button></div></section>';}
+  var chip=function(it){var c=it.ctl||{},d=diasDesde(urgIni(it));return '<button class="uz-p '+cor(it)+'" '+(it.mono?'data-ver-mono':'data-uq-ab')+'="'+dg(it.cnj)+'" title="'+esc(it.cnj+' · '+c.urgTipo+(it.mono?' · ver a decisão na lista':' · sem monocrática: abrir a fila'))+'"><span>'+(d==null?'—':d+' d')+'</span><i>'+esc(String(it.cnj).slice(0,15))+'…</i><b>'+esc(c.urgTipo)+'</b></button>';};
+  el.innerHTML='<section class="uz" aria-label="Fila de urgências'+(ab?'':' (minimizada)')+'"><span class="uz-l">'+sv('<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>')+'Fila de urgências</span>'+
+    '<div class="uz-m">'+(function(){var res=A.length+' apreciada'+(A.length===1?'':'s')+' · '+L.filter(function(i){return i.mono;}).length+' com monocrática · '+SG.length+' sugest'+(SG.length===1?'ão':'ões')+' do PJe';
+      if(!ab)return '<span><b class="n">'+P0.length+'</b> aguardando'+(P0.length?' · a mais antiga há <b class="n">'+(mx==null?'—':mx)+'</b> dia'+(mx===1?'':'s'):'')+'</span>'+P0.slice(0,4).map(chip).join('')+'<small>'+res+'</small>';
+      var q=nq(S.uq||''),Lq=L.filter(function(i){return !q||nq([i.cnj,i.partes,i.assunto,i.servidor,(i.ctl||{}).urgTipo].join(' ')).indexOf(q)>=0;}),nE={ass:0,prov:0,apr:0,todos:Lq.length},uf=S.uf||'todos';
+      Lq.forEach(function(i){var e=urgEst(i);if(e==='ass')nE.ass++;else if(e==='apr')nE.apr++;else nE.prov++;});
+      var pill=function(v,t){return '<button data-uf="'+v+'" aria-pressed="'+(uf===v)+'">'+t+' <small>'+nE[v]+'</small></button>';};
+      return '<span title="'+esc(res)+'"><b class="n">'+P0.length+'</b> aguardando'+(P0.length?' · <b class="n">'+(mx==null?'—':mx)+'</b> d':'')+'</span><span class="uz-f" role="group" aria-label="Filtrar a fila por situação">'+pill('ass','Aguardando assinatura')+pill('prov','Aguardando providências')+pill('apr','Concluídos')+pill('todos','Todos')+'</span>'+
+        '<input type="search" id="urg-q" placeholder="Filtrar por processo, partes, assunto…" aria-label="Filtrar urgências" value="'+esc(S.uq||'')+'">';})()+'</div>'+
+    '<span class="uz-r"><button class="x" data-uq="tab" aria-expanded="'+ab+'" aria-label="'+(ab?'Minimizar a fila de urgências':'Expandir a fila de urgências')+'" title="'+(ab?'Minimizar a fila de urgências':'Expandir a fila de urgências')+'">'+sv(ab?'<path d="M6 15l6-6 6 6"/>':'<path d="M6 9l6 6 6-6"/>')+'</button>'+
+    (ab?'':'<button class="reg" data-uq="reg" aria-label="Registrar urgência" title="Registrar urgência">'+sv('<path d="M12 5v14M5 12h14"/>')+'Registrar</button>')+'</span></section>';}
+/* corpo do painel aberto: filtros por estado, busca, nova urgência, uma linha por urgência com os campos, sugestões do PJe */
+function painelUrgEd(el){
+  var L=(S.doc&&S.doc.urgs)||[],q=nq(S.uq||''),sv=UZ_SV,uf=S.uf||'todos';
+  var Lq=L.filter(function(i){return !q||nq([i.cnj,i.partes,i.assunto,i.servidor,(i.ctl||{}).urgTipo].join(' ')).indexOf(q)>=0;});
+  var nE={ass:0,prov:0,apr:0,todos:Lq.length};Lq.forEach(function(i){var e=urgEst(i);if(e==='ass')nE.ass++;else if(e==='apr')nE.apr++;else nE.prov++;});
+  var Lf=Lq.filter(function(i){var e=urgEst(i);return uf==='todos'||(uf==='ass'?e==='ass':uf==='apr'?e==='apr':e==='pend'||e==='prov');});
+  var P0=Lf.filter(urgPend).sort(function(a,b){return String(urgIni(a)).localeCompare(String(urgIni(b)));}),A=Lf.filter(function(i){return !urgPend(i);}).sort(function(a,b){return String((b.ctl||{}).urgData||'').localeCompare(String((a.ctl||{}).urgData||''));});
+  var SG=((S.doc&&S.doc.sugestoes)||[]).filter(function(i){return !q||nq([i.cnj,i.partes,i.assunto,i.urgAuto].join(' ')).indexOf(q)>=0;});
+  var op=function(k,Ls,v,vz){return '<select data-c="'+k+'">'+(vz?'<option value="">'+vz+'</option>':'')+Ls.map(function(x){return '<option'+(x===v?' selected':'')+'>'+x+'</option>';}).join('')+'</select>';};
+  var lin=function(it){var c=it.ctl||{},d=diasDesde(urgIni(it)),k=dg(it.cnj),p=urgPend(it),e=urgEst(it),n=c.urgNivel||'';
+    return '<article class="pc ux s-'+e+(p?' pend':'')+'" data-k="'+k+'" title="'+esc({pend:'Pendente',prov:'Em análise · aguardando providências',ass:'Minuta pronta · aguardando assinatura',apr:'Apreciada'}[e])+'">'+
+      '<span class="ux-a">'+(p?'<span class="ux-d" title="'+esc({pend:'Pendente',prov:'Em análise · aguardando providências',ass:'Minuta pronta · aguardando assinatura'}[e]||'')+' · dias aguardando apreciação">'+(d==null?'—':d+' d')+'</span>':'<span class="ux-d" title="Urgência apreciada">'+sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>')+'</span>')+
+      '<span><span class="cnj">'+esc(it.cnj)+'</span><button class="fdb-b" data-fd-cnj="'+k+'" title="Ficha completa do processo" aria-label="Ficha completa do processo">▤</button><small title="'+esc([it.partes,it.assunto,it.tarefa].filter(Boolean).join(' · '))+'">'+esc([it.partes,it.tarefa].filter(Boolean).join(' · ')||'—')+'</small></span></span>'+
+      (it.mono?(function(){var ro=function(l,v,d){return '<span class="ro'+(d?' d':'')+'">'+l+'<span title="Preenchido no prontuário da monocrática">'+esc(v||'—')+'</span></span>';};
+        return '<span class="ux-b">'+ro('Medida',c.urgTipo)+ro('Nível',n)+ro('Pedido em',c.urgPedido?br(c.urgPedido):'',1)+ro('Minutante',it.servidor)+ro('Apreciação',c.urgSit||'Pendente · não apreciada')+ro('Apreciada em',c.urgData?br(c.urgData):'',1)+ro('Observação',c.urgObs)+'</span>';})():
+      '<span class="ux-b"><label>Medida'+op('urgTipo',CPM.urgTipo,c.urgTipo)+'</label><label>Nível'+op('urgNivel',CPM.urgNivel,n,'nível…')+'</label><label class="d">Pedido em<input type="date" data-c="urgPedido" value="'+esc(c.urgPedido||'')+'"></label>'+
+      '<label>Minutante'+selR(it,'servidor')+'</label><label>Apreciação'+op('urgSit',CPM.urgSit,c.urgSit||'Pendente · não apreciada')+'</label><label class="d">Apreciada em<input type="date" data-c="urgData" value="'+esc(c.urgData||'')+'"></label>'+
+      '<label>Observação<input data-c="urgObs" value="'+esc(c.urgObs||'')+'" placeholder="—"></label></span>')+
+      '<span class="ux-c">'+(it.mono?'<button class="ok" data-ver-mono="'+k+'" aria-label="Ver a monocrática vinculada na lista, para editar no prontuário" title="Monocrática vinculada: ver na lista e editar no prontuário">'+sv('<path d="M7 3h7l4 4v14H7z"/><path d="M9.5 14l2 2 3.5-4"/>')+'</button>':'<button data-criar-mono="'+k+'" aria-label="Criar monocrática para esta urgência" title="Criar monocrática para esta urgência">'+sv('<path d="M7 3h7l4 4v14H7z"/><path d="M12 11v6M9 14h6"/>')+'</button>')+
+      '<button data-uq-com="'+k+'" aria-label="Comunicar o desembargador" title="Comunicar o desembargador: copia a mensagem pronta">'+sv('<path d="M4 5h16v11H9l-5 4z"/>')+'</button><button data-tirar-urg="'+k+'" aria-label="Excluir a urgência" title="Excluir a urgência">'+sv('<path d="M6 6l12 12M18 6L6 18"/>')+'</button></span></article>';};
+  var pill=function(v,t,n){return '<button data-uf="'+v+'" aria-pressed="'+(uf===v)+'">'+t+' <small>'+n+'</small></button>';};
+  var leg=[['Pendente','#c4533f','#ecc4ba'],['Aguardando providências','#d58a3c','#f1d3b0'],['Aguardando assinatura','#cfae4a','#efe2b4'],['Apreciada','#977fa6','#dccfe3']].map(function(x){return '<span><i style="width:12px;height:12px;background:'+x[1]+'"></i>'+x[0]+'</span>';}).join('');
+  el.className='urg uzb';el.hidden=false;
+  el.innerHTML='<form class="urg-n" id="urg-n" aria-label="Registrar urgência"><b>Nova urgência</b><input name="cnj" placeholder="nº CNJ do processo" required aria-label="Número CNJ"><select name="tipo" aria-label="Medida">'+CPM.urgTipo.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><select name="niv" aria-label="Nível"><option value="">nível…</option>'+CPM.urgNivel.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><input type="date" name="ped" title="Data do pedido" aria-label="Data do pedido"><input name="obs" placeholder="observação (opcional)" aria-label="Observação"><button class="b pri">+ Registrar</button></form>'+
+    '<div class="uz-ls">'+(P0.concat(A).map(lin).join('')||'<p class="uz-v">Nenhuma urgência'+(q||uf!=='todos'?' com esse filtro':' registrada')+'.</p>')+'</div>'+
+    '<div class="uz-ft"><div><span>Não apreciadas primeiro, pelo pedido mais antigo · mostrando '+Lf.length+' de '+L.length+'</span><span class="mleg"><b>Cor da tag</b>'+leg+'</span></div>'+
+    (SG.length?'<details class="urg-sg"'+(S.sgAb?' open':'')+'><summary>Sugeridos pelas etiquetas do PJe <span>'+SG.length+'</span></summary><div class="urg-t"><table><thead><tr><th>Processo</th><th>Etiqueta</th><th>Tarefa</th><th></th></tr></thead><tbody>'+
+      SG.map(function(b){var d=diasDesde(b.desde);return '<tr><td><span class="cnj">'+esc(b.cnj)+'</span><small class="pt">'+esc(b.partes||'')+'</small></td><td>'+esc(b.urgAuto)+'</td><td><small>'+esc(b.tarefa)+'</small>'+(d!=null?'<b class="dd">'+d+' dias na tarefa</b>':'')+'</td><td><button class="b" data-sug="'+esc(b.cnj)+'" data-et="'+esc(b.urgAuto)+'">+ Registrar urgência</button></td></tr>';}).join('')+'</tbody></table></div></details>':'')+'</div>';}
+$('#urq').addEventListener('click',function(e){var b=e.target.closest('[data-uf]');if(!b)return;S.uf=b.getAttribute('data-uf');painelUrg();});
+$('#urq').addEventListener('input',function(e){if(e.target.id!=='urg-q')return;var v=e.target.value;clearTimeout(S.tuq);S.tuq=setTimeout(function(){S.uq=v;painelUrg();var q=$('#urg-q');if(q){q.focus();q.setSelectionRange(v.length,v.length);}},250);});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-uq-ab]');if(!b)return;S.urgTab=true;S.uf='todos';painelUrg();$('#trm-urq').scrollIntoView({behavior:'smooth',block:'start'});});
 /* comunicar o desembargador: sem canal próprio no app, a mensagem pronta vai para a área de transferência */
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-uq-com]');if(!b)return;var it=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-uq-com');})[0];if(!it)return;
   var c=it.ctl||{},d=diasDesde(urgIni(it)),tx='Urgência pendente de apreciação\nProcesso: '+it.cnj+'\nPedido: '+(c.urgTipo||'—')+(c.urgNivel?' · '+c.urgNivel:'')+'\nPedido em: '+(urgIni(it)?br(urgIni(it)):'—')+(d!=null?' · '+d+' dia'+(d===1?'':'s')+' de espera':'')+'\nSituação: '+(c.urgSit||'Pendente · não apreciada')+'\nMinutante: '+(it.servidor||'—')+(c.urgObs?'\nObservação: '+c.urgObs:'');
@@ -1934,7 +2111,7 @@ function corpo(it,tj){
 function achar(el){var a=el.closest('.pc');if(!a)return null;var k=a.getAttribute('data-k');return lista().concat((S.doc&&S.doc.todos)||[]).filter(function(i){return dg(i.cnj)===k;})[0]||null;}
 /* mudança de etapa (datas da minuta, correção/revisão e liberação/assinatura) grava na hora, sem esperar o Salvar;
    cliques seguidos vão em fila, na ordem; se falhar, a alteração cai na fila do Salvar */
-var ETAPA_K={dataMinuta:1,dataCorrecao:1,dataLiberacao:1},filaEtapa=Promise.resolve();
+var ETAPA_K={dataMinuta:1,dataCorrecao:1,dataLiberacao:1,dataAssinatura:1},filaEtapa=Promise.resolve();
 function marcar(it,campos){var ks=Object.keys(campos);if(ks.length&&ks.every(function(c){return ETAPA_K[c];})){etapaJa(it,campos);return;}marcarFila(it,campos);}
 function etapaJa(it,campos){var k=dg(it.cnj),q=PEND.get(k);
   if(q){Object.keys(campos).forEach(function(c){delete q.campos[c];});if(!Object.keys(q.campos).length)PEND.delete(k);}
@@ -1967,6 +2144,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
   if(a==='exp'){S.aberto[k]=!S.aberto[k];render();return;}
   if(a==='tirar-mono'){if(confirm('Retirar este processo das monocráticas? A urgência, se houver, continua registrada.'))regMono(it.cnj,{mono:false},'Retirado das monocráticas.');return;}
   if(a==='et'){setEtapa(it,b.getAttribute('data-v'));render();return;}
+  if(a==='assinar'){var hj=hoje(),m={dataAssinatura:hj};it.dataAssinatura=hj;['dataMinuta','dataCorrecao','dataLiberacao'].forEach(function(f){if(!it[f]){it[f]=hj;m[f]=hj;}});marcar(it,m);var ax=$('#prq');if(ax)ax.removeAttribute('data-k');render();return;}
   if(a==='undo'){if(it.dataLiberacao)it.dataLiberacao='';else if(it.dataCorrecao)it.dataCorrecao='';else it.dataMinuta='';marcar(it,{dataMinuta:it.dataMinuta,dataCorrecao:it.dataCorrecao,dataLiberacao:it.dataLiberacao});render();return;}
   if(a==='add'||a==='del'){var l=b.getAttribute('data-l'),C=cart(it);C[l]=C[l]||[];if(a==='add')C[l].push(l==='recursos'?{parte:'',tipo:'',id:'',contra:''}:{desc:'',id:'',data:''});else C[l].splice(+b.getAttribute('data-i'),1);var o={};o[l]=C[l];marcar(it,{cartao:o});render();return;}
   if(a==='ficha'){fichaDialogo(it.cnj,lista().map(function(i){return i.cnj;}));return;}
@@ -1984,6 +2162,7 @@ var SCOR=['#1f6f8b','#8a5cb8','#1a8a6a','#c46a1f','#b0406a','#3e72ad'];
 var CTRLV=['metas','sobr','sens'];
 function vista(v){if(v==='ctrl'||v==='controles')v=S.ctrlSub||'metas';if(v==='urg')v='mono';
   v=['pauta','mono'].concat(CTRLV).indexOf(v)>=0?v:'inicio';if(CTRLV.indexOf(v)>=0)S.ctrlSub=v;
+  if(S.prt&&(v==='inicio'||v!==S.fonte)){S.prt=null;S.prtAba=0;try{prontLateral();}catch(e){}}
   if(v==='pauta'&&U.eu&&S.calSig!=null)sessoesEquipe(false);$('#v-inicio').hidden=v!=='inicio';$('#v-pauta').hidden=v==='inicio';
   var f=v==='inicio'?S.fonte:v;if(v!=='inicio'&&f!==S.fonte){if(nPend()){salvarTudo();toast('Alterações salvas ao trocar de página.');}S.fonte=f;S.doc=null;S.aberto={};S.sel={};
     var vp=$('#v-pauta');['mono','metas','sobr','sens'].forEach(function(c){vp.classList.toggle(c,f===c);});vp.classList.toggle('ctl',CTRLV.indexOf(f)>=0);if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu)carregar();}

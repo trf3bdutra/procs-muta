@@ -75,6 +75,8 @@ const V = {
   dataMinuta: v => ({ producao: { 'MINUTADO': v } }),
   dataCorrecao: v => ({ producao: { 'Data da Revisão': v, 'CORRIGIDO': v ? 'Sim' : '' } }),
   dataLiberacao: v => ({ producao: { 'Data da Liberação': v, 'LIBERADO': v ? 'Sim' : '' } }),
+  /* assinatura da monocrática, confirmada no prontuário da Pauta da equipe */
+  dataAssinatura: v => ({ producao: { 'Data da Assinatura': v, 'Assinado': v ? 'Sim' : '' } }),
   /* urgências e monocráticas (aba Urgências / Monocráticas da Pauta da equipe) */
   /* Controles especiais · urgência: vocabulário único da ficha (padrao/ficha.json) */
   urgTipo: v => ({ triagem: { 'Urgência': v } }), urgNivel: v => ({ triagem: { 'Urgência - Nível': v } }), urgSit: v => ({ triagem: { 'Urgência - Apreciação': v } }),
