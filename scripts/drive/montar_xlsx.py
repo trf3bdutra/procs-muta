@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Monta os três .xlsx do Drive a partir de planilhas.json (saída de exportar.js):
-     Pautas.xlsx                (uma aba por sessão)
+"""Monta os .xlsx do Drive a partir de planilhas.json (saída de exportar.js):
      Monocraticas.xlsx          (uma aba por mês de registro)
      Controles_especiais.xlsx   (Metas, Sobrestados, Casos sensíveis)
+   (As pautas têm uma planilha por sessão, no molde Controle de Pauta: ver pautas_sessao.py.)
    Cabeçalho na linha 1 (fixo, com filtro), cores das etapas como na Pauta da equipe e nas planilhas de pauta:
    minutado verde, aviso amarelo, corrigido/revisado azul, liberado/para assinatura lilás.
    Também grava, para cada aba, um .tsv (usado pela tarefa diária para regravar os dados na mesma planilha).
@@ -24,7 +24,7 @@ def cor_da_linha(h, r):
     """mesma prioridade do app: liberado > corrigido > aviso > minutado"""
     v = lambda n: (r[h.index(n)] if n in h and h.index(n) < len(r) else '') or ''
     et = v('Etapa')
-    if et in ('Liberado', 'Para assinatura'): return COR['li']
+    if et in ('Liberado', 'Para assinatura', 'Assinada'): return COR['li']
     if et in ('Corrigido', 'Revisado'): return COR['co']
     if v('Pendências') or v('Alertas'): return COR['al']
     if et == 'Minutado': return COR['mi']
@@ -57,7 +57,7 @@ def aba(wb, nome, L):
 
 
 saida = {}
-for arquivo, grupo in (('Pautas.xlsx', 'pautas'), ('Monocraticas.xlsx', 'monocraticas'), ('Controles_especiais.xlsx', 'controles')):
+for arquivo, grupo in (('Monocraticas.xlsx', 'monocraticas'), ('Controles_especiais.xlsx', 'controles')):
     wb = Workbook(); wb.remove(wb.active); abas = []
     for nome, L in (D.get(grupo) or {'Sem dados': [['Sem dados']]}).items():
         t, tsv = aba(wb, nome, L)
