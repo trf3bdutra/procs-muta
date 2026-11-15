@@ -35,7 +35,7 @@ padrao/                        regras técnicas da base
 
 gerar.py                       valida a base, atualiza o manifesto e importa exportações dos apps
 scripts/                       rotinas auxiliares (DataJud, catálogo, modelos-matriz, apps)
-cmt-monitor.html               CMT-monitor: abas Início (Acervo Central), Acervo (painéis, indicadores e planilha), Triagem, Seleção Prévia e Pautas de julgamento; Configurações com as regras e a equipe
+cmt-monitor.html               CMT-monitor: abas Acervo (números, indicadores, situação, caixas, busca e cartão do processo), Triagem, Seleção Prévia, Pautas de julgamento e Planilha integral (só leitura); Configurações com as regras e a equipe
 cmt-fluxograma.html            CMT-fluxograma: fluxograma interativo, rotina do gabinete, competência e impedimentos, assuntos e procedimentos
 construtor.html · index.html   apps (ver observação abaixo)
 ```
@@ -65,7 +65,9 @@ Precedente: `acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie>` 
 
 O **CMT-monitor** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta base, com um token do GitHub com permissão *Contents* (leitura e gravação):
 
-- lê `acervo/fonte.json`, o acervo fonte (DataJud e planilhas) e `apoio/assuntos.json` (seção e ramo de cada assunto);
+- lê `acervo/fonte.json`, o acervo fonte (DataJud e planilhas); em cada informação repetida vale a coluna do PJe, depois a do Power BI, depois a do DataJud;
+- tira a seção e o ramo do assunto do CNJ: `apoio/assuntos-cnj.json` (árvore da TPU, atualizada toda segunda-feira pelo workflow `cnj-assuntos`) e `apoio/regras/secoes.json` (RI TRF3, art. 10); a etiqueta de seção do PJe só gera alerta quando diverge;
+- o acervo conta por padrão os processos ativos (sem arquivados, baixados, cancelados, fora de tramitação e eliminados); os que ainda não têm tarefa no PJe do gabinete aparecem em "A caminho do gabinete", fora das contagens;
 - grava o calendário de sessões (datas, hora e marcos) em `acervo/sessoes/calendario.json` e a pauta de cada sessão (item, quem minuta, quem corrige e as datas de minuta, correção e liberação) em `acervo/sessoes/AAAA-MM-DD.json`;
 - grava as regras em `apoio/regras/etiquetas.json` (conversão de etiquetas) e `apoio/regras/designacao.json` (critérios de designação e correção), e a equipe em `apoio/equipe.json`; as regras de impedimento e suspeição ficam em `apoio/regras/impedimentos.json` (sem CPF);
 - tudo vai num único commit pelo botão "Gravar no procs-muta"; até lá, o trabalho fica no navegador.
