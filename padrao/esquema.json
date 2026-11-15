@@ -32,11 +32,19 @@
     "causaPedir": {
      "type": "string"
     },
+    "subassunto": {
+     "type": "string",
+     "description": "Subassunto conferido na curadoria (área = ramoDireito › assunto › subassunto), como nos cards de processo."
+    },
     "especificidades": {
      "type": "string"
     },
     "especificidadesTags": {
      "type": "string"
+    },
+    "observacoes": {
+     "type": "string",
+     "description": "Notas sobre o registro (fonte, inteiro teor não juntado, conferências pendentes); não é especificidade de mérito."
     },
     "preliminares": {
      "type": "string"
