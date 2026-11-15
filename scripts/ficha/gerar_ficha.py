@@ -77,19 +77,40 @@ def _prod(a):
                 out['campos'].append(c)
         if destino: out['destino'] = destino
         return out
+    NOVO = lambda rot, ch, tipo, sec='producao', op=None: dict({'rotulo': rot, 'chave': ch, 'tipo': tipo, 'secao': sec}, **({'opcoes': op} if op else {}))
+    def com(k, **mud): c = dict(C[k]); c.update(mud); return c
+    TIPO_ATO = ['Decisão monocrática (art. 932)', 'Decisão de urgência', 'Despacho', 'Decisão de admissibilidade', 'Juízo de retratação', 'Homologação / extinção']
+    HIP932 = ['III · recurso inadmissível, prejudicado ou sem impugnação específica', 'IV a · contrário a súmula do STF, STJ ou do TRF', 'IV b · contrário a repetitivo do STF ou STJ',
+              'IV c · contrário a IRDR ou IAC', 'V a · decisão recorrida contrária a súmula', 'V b · decisão recorrida contrária a repetitivo', 'V c · decisão recorrida contrária a IRDR ou IAC', 'Não se aplica']
+    RES_MONO = ['Não conhecido', 'Negado provimento', 'Dado provimento', 'Parcialmente provido', 'Deferido', 'Indeferido', 'Parcialmente deferido', 'Prejudicado', 'Homologado', 'Extinto']
+    HONOR = ['Majorados', 'Mantidos', 'Invertidos', 'Fixados', 'Redistribuídos', 'Sem honorários recursais']
     a['seletor'] = {'secao': 'producao', 'chave': 'Destino', 'rotulo': 'Destino do julgamento',
                     'opcoes': [{'valor': '', 'rotulo': 'Sessão (colegiado)'}, {'valor': 'Monocrática', 'rotulo': 'Decisão monocrática'}],
-                    'regra': 'vazio = sessão: Pautado, Minutado, Corrigido, Liberado, Sessão; Monocrática: Minutado, Corrigido, Assinado, Publicado'}
+                    'regra': 'vazio = sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; '
+                             'Monocrática: designação, minuta, revisão, ato e fundamento (art. 932), decisão, assinatura e publicação'}
     a['grupos'] = [
         g('Designação e minuta', ['SERVIDOR', 'MINUTADO', 'Refinado']),
-        g('Revisão', ['CORRETOR', 'CORRIGIDO', 'Data da Revisão', 'Rev - Atenção', 'Rev - Ementa', 'Rev - Subementa', 'Rev - Mérito', 'Rev - Honorários', 'Rev - IDs', 'Rev - Nota de atenção']),
-        g('Relatório e voto', ['Relatório Padronizado', 'Adequação Ementa', 'Formatação Subementa', 'Voto - Resultado', 'Voto - Honorários', 'Tópico-síntese', 'Mídias Necessárias', 'Voto - Descrição'], 'sessao'),
+        g('Revisão', ['CORRETOR', 'CORRIGIDO', 'Data da Revisão', 'Rev - Atenção', 'Rev - Mérito', 'Rev - Honorários', 'Rev - IDs', 'Rev - Nota de atenção']),
+        # versão acórdão (sessão)
+        g('Revisão do acórdão (ementa)', ['Rev - Ementa', 'Rev - Subementa'], 'sessao'),
+        g('Relatório, voto e ementa', ['Relatório Padronizado', 'Adequação Ementa', 'Formatação Subementa', 'Voto - Resultado', 'Voto - Honorários', 'Tópico-síntese', 'Mídias Necessárias', 'Voto - Descrição'], 'sessao'),
         g('Liberação para a sessão', ['LIBERADO', 'Data da Liberação'], 'sessao'),
-        g('Decisão monocrática', ['Voto - Resultado', 'Voto - Honorários', 'Voto - Descrição', 'Assinado', 'Data da Assinatura', 'Decisão - ID', 'Publicado'], 'monocratica',
-          {'Voto - Resultado': 'Resultado da decisão', 'Voto - Honorários': 'Honorários na decisão', 'Voto - Descrição': 'Fundamentos da decisão'})]
+        {'grupo': 'Acórdão', 'destino': 'sessao', 'campos': [NOVO('ID do acórdão', 'Acórdão - ID', 'texto'), NOVO('Acórdão assinado', 'Acórdão - Assinado', 'simnao'),
+            NOVO('Acórdão publicado', 'Acórdão - Publicado', 'simnao'), NOVO('Data da publicação', 'Acórdão - Data da publicação', 'data'),
+            NOVO('Embargos de declaração opostos', 'Acórdão - ED opostos', 'simnao'), NOVO('Trânsito em julgado', 'Acórdão - Trânsito', 'data')]},
+        # versão monocrática (art. 932)
+        {'grupo': 'Ato e fundamento', 'destino': 'monocratica', 'campos': [NOVO('Tipo de ato', 'Mono - Tipo de ato', 'lista', op=TIPO_ATO),
+            NOVO('Hipótese do art. 932', 'Hipóteses Monocrática', 'lista', 'triagem', HIP932), NOVO('Precedente ou fundamento', 'Mono - Fundamento', 'texto-longo')]},
+        {'grupo': 'Decisão monocrática', 'destino': 'monocratica', 'campos': [com('Voto - Resultado', rotulo='Resultado', tipo='lista', opcoes=RES_MONO),
+            com('Voto - Honorários', rotulo='Honorários', tipo='lista', opcoes=HONOR), NOVO('Tópico-síntese', 'Tópico-síntese', 'texto'),
+            com('Voto - Descrição', rotulo='Fundamentos da decisão'), NOVO('Enviada para assinatura em', 'Data da Liberação', 'data'), com('Assinado', rotulo='Assinada'),
+            com('Data da Assinatura', rotulo='Data da assinatura'), com('Decisão - ID', rotulo='ID da decisão'), com('Publicado', rotulo='Publicada'),
+            NOVO('Data da publicação', 'Mono - Data da publicação', 'data')]}]
 for a in abas:
     if a['aba'] == 'Produção':
         _prod(a)
+    if a['aba'] == 'Pauta':
+        a['destino'] = 'sessao'   # a pauta só vale para o acórdão; a monocrática não vai à sessão
 ordem = ['Processo', 'Triagem', 'Produção', 'Pauta']
 abas.sort(key=lambda a: ordem.index(a['aba']) if a['aba'] in ordem else 99)
 out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.0.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py',

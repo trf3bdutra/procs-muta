@@ -634,18 +634,6 @@
        "secao": "producao"
       },
       {
-       "rotulo": "Ementa",
-       "chave": "Rev - Ementa",
-       "tipo": "simnao",
-       "secao": "producao"
-      },
-      {
-       "rotulo": "Subementa",
-       "chave": "Rev - Subementa",
-       "tipo": "simnao",
-       "secao": "producao"
-      },
-      {
        "rotulo": "Mérito",
        "chave": "Rev - Mérito",
        "tipo": "simnao",
@@ -672,7 +660,25 @@
      ]
     },
     {
-     "grupo": "Relatório e voto",
+     "grupo": "Revisão do acórdão (ementa)",
+     "campos": [
+      {
+       "rotulo": "Ementa",
+       "chave": "Rev - Ementa",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Subementa",
+       "chave": "Rev - Subementa",
+       "tipo": "simnao",
+       "secao": "producao"
+      }
+     ],
+     "destino": "sessao"
+    },
+    {
+     "grupo": "Relatório, voto e ementa",
      "campos": [
       {
        "rotulo": "Relatório padronizado",
@@ -745,17 +751,128 @@
      "destino": "sessao"
     },
     {
-     "grupo": "Decisão monocrática",
+     "grupo": "Acórdão",
+     "destino": "sessao",
      "campos": [
       {
-       "rotulo": "Resultado da decisão",
-       "chave": "Voto - Resultado",
+       "rotulo": "ID do acórdão",
+       "chave": "Acórdão - ID",
        "tipo": "texto",
        "secao": "producao"
       },
       {
-       "rotulo": "Honorários na decisão",
+       "rotulo": "Acórdão assinado",
+       "chave": "Acórdão - Assinado",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Acórdão publicado",
+       "chave": "Acórdão - Publicado",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Data da publicação",
+       "chave": "Acórdão - Data da publicação",
+       "tipo": "data",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Embargos de declaração opostos",
+       "chave": "Acórdão - ED opostos",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Trânsito em julgado",
+       "chave": "Acórdão - Trânsito",
+       "tipo": "data",
+       "secao": "producao"
+      }
+     ]
+    },
+    {
+     "grupo": "Ato e fundamento",
+     "destino": "monocratica",
+     "campos": [
+      {
+       "rotulo": "Tipo de ato",
+       "chave": "Mono - Tipo de ato",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Decisão monocrática (art. 932)",
+        "Decisão de urgência",
+        "Despacho",
+        "Decisão de admissibilidade",
+        "Juízo de retratação",
+        "Homologação / extinção"
+       ]
+      },
+      {
+       "rotulo": "Hipótese do art. 932",
+       "chave": "Hipóteses Monocrática",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "III · recurso inadmissível, prejudicado ou sem impugnação específica",
+        "IV a · contrário a súmula do STF, STJ ou do TRF",
+        "IV b · contrário a repetitivo do STF ou STJ",
+        "IV c · contrário a IRDR ou IAC",
+        "V a · decisão recorrida contrária a súmula",
+        "V b · decisão recorrida contrária a repetitivo",
+        "V c · decisão recorrida contrária a IRDR ou IAC",
+        "Não se aplica"
+       ]
+      },
+      {
+       "rotulo": "Precedente ou fundamento",
+       "chave": "Mono - Fundamento",
+       "tipo": "texto-longo",
+       "secao": "producao"
+      }
+     ]
+    },
+    {
+     "grupo": "Decisão monocrática",
+     "destino": "monocratica",
+     "campos": [
+      {
+       "rotulo": "Resultado",
+       "chave": "Voto - Resultado",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Não conhecido",
+        "Negado provimento",
+        "Dado provimento",
+        "Parcialmente provido",
+        "Deferido",
+        "Indeferido",
+        "Parcialmente deferido",
+        "Prejudicado",
+        "Homologado",
+        "Extinto"
+       ]
+      },
+      {
+       "rotulo": "Honorários",
        "chave": "Voto - Honorários",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Majorados",
+        "Mantidos",
+        "Invertidos",
+        "Fixados",
+        "Redistribuídos",
+        "Sem honorários recursais"
+       ]
+      },
+      {
+       "rotulo": "Tópico-síntese",
+       "chave": "Tópico-síntese",
        "tipo": "texto",
        "secao": "producao"
       },
@@ -766,13 +883,19 @@
        "secao": "producao"
       },
       {
-       "rotulo": "Assinado",
+       "rotulo": "Enviada para assinatura em",
+       "chave": "Data da Liberação",
+       "tipo": "data",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Assinada",
        "chave": "Assinado",
        "tipo": "simnao",
        "secao": "producao"
       },
       {
-       "rotulo": "Assinado em",
+       "rotulo": "Data da assinatura",
        "chave": "Data da Assinatura",
        "tipo": "data",
        "secao": "producao"
@@ -788,9 +911,14 @@
        "chave": "Publicado",
        "tipo": "simnao",
        "secao": "producao"
+      },
+      {
+       "rotulo": "Data da publicação",
+       "chave": "Mono - Data da publicação",
+       "tipo": "data",
+       "secao": "producao"
       }
-     ],
-     "destino": "monocratica"
+     ]
     }
    ],
    "seletor": {
@@ -807,7 +935,7 @@
       "rotulo": "Decisão monocrática"
      }
     ],
-    "regra": "vazio = sessão: Pautado, Minutado, Corrigido, Liberado, Sessão; Monocrática: Minutado, Corrigido, Assinado, Publicado"
+    "regra": "vazio = sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; Monocrática: designação, minuta, revisão, ato e fundamento (art. 932), decisão, assinatura e publicação"
    }
   },
   {
@@ -879,7 +1007,8 @@
       }
      ]
     }
-   ]
+   ],
+   "destino": "sessao"
   }
  ]
 }

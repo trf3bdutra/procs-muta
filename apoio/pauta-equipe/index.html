@@ -45,6 +45,14 @@ main{max-width:1320px;margin:0 auto;padding:18px 22px 60px}
 .kpi.al b{color:var(--red)}.kpi.ok b{color:var(--green)}.kpi.am b{color:var(--amber)}
 .ini-g{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}.ini-g .col{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))!important}
 #cc-cal.eq-cal{margin:0 0 12px}
+.fd-pl{display:flex;gap:5px;flex-wrap:wrap;margin-left:12px}.fdp{border:0;border-radius:999px;padding:3px 10px;font:700 11px var(--font);cursor:pointer;background:rgba(255,255,255,.14);color:#fff}
+.fdp.urg{background:#c0533a}.fdp.mono{background:#5b6bc0}.fdp.metas{background:#b8860b}.fdp.sobr{background:#6b7b88}.fdp.sens{background:#2f8a6b}.fdn{font-style:normal;background:#c0533a;color:#fff;border-radius:999px;padding:0 6px;font-size:10px;margin-left:3px}
+.fcp{border:1px solid var(--line);border-left:4px solid #9aa6b0;border-radius:12px;padding:10px 12px;background:var(--card);margin:6px 4px 10px}.fcp.urg{border-left-color:#c0533a}.fcp.mono{border-left-color:#5b6bc0}.fcp.metas{border-left-color:#b8860b}.fcp.sobr{border-left-color:#6b7b88}.fcp.sens{border-left-color:#2f8a6b}
+.fcp .fc-h small{display:block;font-size:11.5px;color:var(--mut);margin-top:1px}.fcg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 10px;margin-top:6px}
+.fcf{display:flex;flex-direction:column;gap:3px;font-size:11px;font-weight:700;color:var(--mut)}.fcf.w{grid-column:span 2}.fcf select,.fcf input{border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:13px var(--font);color:var(--ink);background:var(--soft)}
+.fc-inc{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:4px;padding:10px 12px;border:1px dashed var(--line);border-radius:10px}.fc-nota{font-size:11px;margin:6px 6px 2px}
+@media (max-width:900px){.fcg{grid-template-columns:1fr 1fr}}
+
 /* Controles: subabas Metas · Sobrestados · Casos sensíveis */
 #v-pauta .ctl-sub{display:none}#v-pauta.ctl .ctl-sub{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px;margin:0 0 12px}
 .ctl-sub button{border:0;background:transparent;border-radius:999px;padding:7px 16px;font:700 13px var(--font);color:var(--mut);cursor:pointer}.ctl-sub button[aria-selected=true]{background:var(--navy);color:#fff}
@@ -833,24 +841,62 @@ function fdCampo(c){var w=c.tipo==='texto-longo'?' w':'';
   else h='<input'+at+' value="'+esc(v)+'">';
   return '<label class="'+w+(id in FD.pend?' mud':'')+'">'+esc(c.rotulo)+h+'</label>';}
 function fdDestGrav(){return 'producao.Destino' in FD.pend?FD.pend['producao.Destino']:fdVal('producao','Destino');}
-function fdDestino(){if(FD.dest)return FD.dest;var d=fdDestGrav();return d==='Monocrática'?'monocratica':d?'sessao':(S.fonte==='mono'?'monocratica':'sessao');}
-/* controles da equipe na ficha: monocrática, urgência, meta e sobrestamento do mesmo processo (mesma base no procs-muta) */
-function fdControles(){var C=FD.ctl||{},m=C.mono,u=m&&m.ctl&&m.ctl.urgTipo?m:null,mt=C.metas,sb=C.sobrestados,sn=C.sensiveis,lin=function(r,v){return v?'<div class="fc-l"><span>'+r+'</span><b>'+esc(v)+'</b></div>':'';};
-  var bloco=function(t,vw,corpo,vazio){return '<section class="fc"><div class="fc-h"><h3>'+t+'</h3><button class="b" data-fd-ir="'+vw+'">Abrir em '+({mono:'Monocráticas',metas:'Controles › Metas',sobr:'Controles › Sobrestados',sens:'Controles › Casos sensíveis'}[vw]||t)+' ›</button></div>'+(corpo||'<p class="mut">'+vazio+'</p>')+'</section>';};
-  var c=(m&&m.ctl)||{};
-  return '<div class="fcs">'+
-    bloco('Monocráticas','mono',m&&m.mono?lin('Tipo de ato',c.tipoAto)+lin('Hipótese do art. 932',c.hip932)+lin('Fundamento',c.fundamento)+lin('Resultado',c.resJulg)+lin('Minutante',m.servidor)+lin('Minutado em',m.dataMinuta&&br(m.dataMinuta))+lin('Revisado em',m.dataCorrecao&&br(m.dataCorrecao))+lin('Para assinatura em',m.dataLiberacao&&br(m.dataLiberacao)):'','Sem monocrática registrada.')+
-    bloco('Urgências','mono',u?lin('Pedido',c.urgTipo)+lin('Situação',c.urgSit||'Pendente')+lin('Pedido em',c.urgPedido&&br(c.urgPedido))+lin('Apreciado em',c.urgData&&br(c.urgData))+lin('Observação',c.urgObs):'','Sem pedido urgente registrado.')+
-    bloco('Metas','metas',mt?lin('Controle',mt.ctrl)+lin('Próxima providência',mt.prox)+lin('Prazo',mt.prazo&&br(mt.prazo))+lin('Responsável',mt.resp)+lin('Observação',mt.obs):'','Sem acompanhamento de meta registrado.')+
-    bloco('Sobrestados','sobr',sb?lin('Motivo',sb.motivo)+lin('Tema ou precedente',sb.tema)+lin('Situação do precedente',sb.sitPrec)+lin('Previsão de retirada',sb.previsao?br(sb.previsao):sb.semPrev==='Sim'?'sem previsão':'')+lin('Próxima providência',sb.prox)+lin('Observação',sb.obs):'','Sem acompanhamento de sobrestamento registrado.')+
-    bloco('Casos sensíveis','sens',sn&&sn.excluido!=='Sim'?lin('Categoria',sn.cat)+lin('Quadro / motivo',sn.quadro)+lin('Decisão',sn.decisao)+lin('Cumprimento',sn.cumprimento)+lin('Última verificação',sn.ultimo&&br(sn.ultimo))+lin('Próxima verificação',sn.proxVer&&br(sn.proxVer))+lin('Observação',sn.obs):'','Sem acompanhamento de caso sensível registrado.')+'</div>';}
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-fd-cnj]');if(!b)return;var k=b.getAttribute('data-fd-cnj'),x=(MT.dados||[]).concat(SB.dados||[],SN.dados||[],lista(),(S.doc&&S.doc.todos)||[]).filter(function(i){return dg(i.cnj)===k;})[0];if(x)fichaAbre(x);});
+function fdDestino(){if(FD.dest)return FD.dest;var d=fdDestGrav();return d==='Monocrática'?'monocratica':d?'sessao':(S.fonte==='mono'||(FD.ctl&&FD.ctl.mono&&FD.ctl.mono.mono)?'monocratica':'sessao');}
+/* controles da equipe dentro da ficha: cada controle que abrange o processo ganha um painel com os seus campos, editáveis ali mesmo */
+var FCG={urg:'mono',mono:'mono',metas:'metas',sobr:'sobr',sens:'sens'};
+function fdCtlAtivos(){var C=FD.ctl||{},m=C.mono||{},N=C.naLista||{},A=[];
+  if(m.mono)A.push('mono');if((m.ctl||{}).urgTipo)A.push('urg');if(N.metas||C.metas)A.push('metas');if(N.sobrestados||C.sobrestados)A.push('sobr');
+  if((N.sensiveis||(C.sensiveis&&C.sensiveis.incluido))&&!(C.sensiveis&&C.sensiveis.excluido==='Sim'))A.push('sens');return A;}
+function fdCtlPills(){var C=FD.ctl||{},m=C.mono||{},N=C.naLista||{},A=fdCtlAtivos(),P=[];
+  if(A.indexOf('urg')>=0)P.push(['urg',((m.ctl||{}).urgSit&&(m.ctl||{}).urgSit!=='Pendente'?'Urgência · '+m.ctl.urgSit:'Urgência pendente')]);
+  if(A.indexOf('mono')>=0)P.push(['mono','Monocrática']);
+  if(A.indexOf('metas')>=0)P.push(['metas',((N.metas&&N.metas.metas)||[]).map(function(x){return 'Meta '+x;}).join(' · ')||'Meta']);
+  if(A.indexOf('sobr')>=0)P.push(['sobr','Sobrestado']);if(A.indexOf('sens')>=0)P.push(['sens','Caso sensível']);
+  return P.map(function(p){return '<button class="fdp '+p[0]+'" data-fd-aba="Controles">'+esc(p[1])+'</button>';}).join('');}
+function fdControles(){
+  var C=FD.ctl||{},m=C.mono||{},c=m.ctl||{},N=C.naLista||{},mt=C.metas||{},sb=C.sobrestados||{},sn=C.sensiveis||{},A=fdCtlAtivos();
+  var sel=function(g,k,L,v,ph){return '<select data-fcg="'+g+'" data-fck="'+k+'"><option value="">'+(ph||'—')+'</option>'+L.map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+(v&&L.indexOf(v)<0?'<option selected>'+esc(v)+'</option>':'')+'</select>';};
+  var inp=function(g,k,v,ph,tp){return '<input'+(tp?' type="'+tp+'"':'')+' data-fcg="'+g+'" data-fck="'+k+'" value="'+esc(v||'')+'" placeholder="'+esc(ph||'')+'">';};
+  var f=function(r,x,w){return '<label class="fcf'+(w?' w':'')+'"><span>'+r+'</span>'+x+'</label>';};
+  var pn=function(id,tit,sub,vw,corpo){return '<section class="fcp '+id+'"><div class="fc-h"><div><h3>'+tit+'</h3>'+(sub?'<small>'+sub+'</small>':'')+'</div><button class="b" data-fd-ir="'+vw+'">Abrir a página ›</button></div><div class="fcg">'+corpo+'</div></section>';};
+  var h='';
+  if(A.indexOf('urg')>=0)h+=pn('urg','Urgência','liminar, tutela de urgência, efeito suspensivo','mono',
+    f('Pedido',sel('urg','urgTipo',CPM.urgTipo,c.urgTipo))+f('Situação',sel('urg','urgSit',CPM.urgSit,c.urgSit||'Pendente'))+f('Pedido em',inp('urg','urgPedido',c.urgPedido,'','date'))+f('Apreciado em',inp('urg','urgData',c.urgData,'','date'))+f('Observação',inp('urg','urgObs',c.urgObs,'ex.: decisão ID …, comunicação ao juízo'),1));
+  if(A.indexOf('mono')>=0)h+=pn('mono','Monocrática','fluxo próprio: minutado, revisado, para assinatura','mono',
+    f('Tipo de ato',sel('mono','tipoAto',CPM.tipoAto,c.tipoAto))+f('Hipótese do art. 932',sel('mono','hip932',CPM.hip932,c.hip932))+f('Precedente ou fundamento',inp('mono','fundamento',c.fundamento,'súmula, tema, IRDR/IAC'),1)+
+    f('Resultado',sel('mono','resJulg',CPM.res,c.resJulg))+f('Honorários',sel('mono','honor',CP.honor,c.honor))+f('Minutado em',inp('mono','dataMinuta',m.dataMinuta,'','date'))+f('Revisado em',inp('mono','dataCorrecao',m.dataCorrecao,'','date'))+f('Para assinatura em',inp('mono','dataLiberacao',m.dataLiberacao,'','date')));
+  if(A.indexOf('metas')>=0){var bm=N.metas||{};h+=pn('metas','Meta do CNJ',((bm.metas||[]).map(function(x){return 'Meta '+x;}).join(', ')||'meta')+(bm.fase?' · '+esc(bm.fase):''),'metas',
+    f('Controle',sel('metas','ctrl',CTRL,mt.ctrl))+f('Próxima providência',inp('metas','prox',mt.prox,'próxima providência'),1)+f('Prazo',inp('metas','prazo',mt.prazo,'','date'))+f('Responsável',inp('metas','resp',mt.resp,'responsável'))+f('Observação',inp('metas','obs',mt.obs,'observação'),1));}
+  if(A.indexOf('sobr')>=0){var bs=N.sobrestados||{};h+=pn('sobr','Sobrestamento',esc(bs.tarefa||'')+((bs.temasAuto||[]).length?' · '+esc(bs.temasAuto.join(', ')):''),'sobr',
+    f('Motivo',sel('sobr','motivo',SBM,sb.motivo,bs.motivoAuto||'motivo…'))+f('Tema ou precedente',inp('sobr','tema',sb.tema,(bs.temasAuto||[]).join(', ')||'tema / precedente'))+f('Situação do precedente',sel('sobr','sitPrec',SBS,sb.sitPrec,'situação…'))+
+    f('Previsão de retirada',inp('sobr','previsao',sb.previsao,'','date'))+f('Sem previsão','<select data-fcg="sobr" data-fck="semPrev"><option value="">—</option><option'+(sb.semPrev==='Sim'?' selected':'')+'>Sim</option></select>')+f('Próxima providência',inp('sobr','prox',sb.prox,'próxima providência'),1)+f('Observação',inp('sobr','obs',sb.obs,'observação'),1));}
+  if(A.indexOf('sens')>=0){var bn=N.sensiveis||{};h+=pn('sens','Caso sensível',esc(sn.cat||bn.catAuto||'acompanhamento próximo'),'sens',
+    f('Categoria',sel('sens','cat',SNC,sn.cat,bn.catAuto||'categoria…'))+f('Quadro / motivo',inp('sens','quadro',sn.quadro,'quadro clínico / motivo'),1)+f('Decisão',sel('sens','decisao',SND,sn.decisao))+f('Cumprimento',sel('sens','cumprimento',SNU,sn.cumprimento))+
+    f('Última verificação',inp('sens','ultimo',sn.ultimo,'','date'))+f('Próxima verificação',inp('sens','proxVer',sn.proxVer,'','date'))+f('Próxima providência',inp('sens','prox',sn.prox,'próxima providência'),1)+f('Observação',inp('sens','obs',sn.obs,'observação'),1));}
+  var inc=[A.indexOf('urg')<0?'<button class="b" data-fc-inc="urg">+ Registrar urgência</button>':'',A.indexOf('mono')<0?'<button class="b" data-fc-inc="mono">+ Registrar monocrática</button>':'',A.indexOf('sens')<0?'<button class="b" data-fc-inc="sens">+ Incluir em casos sensíveis</button>':''].join('');
+  return (h||'<p class="mut" style="padding:8px">Nenhum controle específico abrange este processo.</p>')+(inc?'<div class="fc-inc"><span class="mut">Incluir este processo em:</span>'+inc+'</div>':'')+'<p class="mut fc-nota">Metas e sobrestados vêm do acervo (etiquetas e tarefa do PJe); o acompanhamento gravado aqui é o mesmo das páginas.</p>';}
+var FCP={},tFc=null;
+function fdCtlGrava(){var it=FD.it;Object.keys(FCP).forEach(function(g){var campos=FCP[g];delete FCP[g];var ep={mono:'mono',metas:'metas',sobr:'sobr',sens:'sens'}[g];fdSt('Gravando…','pend');
+  api('/api/pauta?'+ep+'=1',{method:'POST',body:JSON.stringify({cnj:it.cnj,campos:campos})}).then(function(){fdSt('Gravado','');}).catch(function(e){fdSt('Não gravou: '+e.message,'er');});});}
+document.addEventListener('change',function(e){var t=e.target;if(!t.getAttribute||!t.getAttribute('data-fcg')||!t.closest('#fd'))return;var g=FCG[t.getAttribute('data-fcg')],k=t.getAttribute('data-fck'),C=FD.ctl=FD.ctl||{};
+  if(g==='mono'){var m=C.mono=C.mono||{cnj:FD.it.cnj,ctl:{}};m.ctl=m.ctl||{};if(/^data/.test(k))m[k]=t.value;else m.ctl[k]=t.value;}
+  else{var key={metas:'metas',sobr:'sobrestados',sens:'sensiveis'}[g];C[key]=C[key]||{};C[key][k]=t.value;}
+  (FCP[g]=FCP[g]||{})[k]=t.value;fdSt('Alterações a gravar…','pend');clearTimeout(tFc);tFc=setTimeout(fdCtlGrava,700);});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-fc-inc]');if(b&&b.closest('#fd')){var g=b.getAttribute('data-fc-inc'),it=FD.it,C=FD.ctl=FD.ctl||{};
+    var ep=g==='sens'?'sens':'mono',campos=g==='urg'?{urgTipo:'Tutela de urgência',urgSit:'Pendente'}:g==='mono'?{mono:true}:{incluir:true};fdSt('Gravando…','pend');
+    api('/api/pauta?'+ep+'=1',{method:'POST',body:JSON.stringify({cnj:it.cnj,campos:campos})}).then(function(){
+      if(g==='sens'){C.sensiveis=Object.assign(C.sensiveis||{},{incluido:true,excluido:''});}else{var m=C.mono=C.mono||{cnj:it.cnj,ctl:{}};m.ctl=m.ctl||{};if(g==='mono')m.mono=true;else{m.ctl.urgTipo='Tutela de urgência';m.ctl.urgSit='Pendente';}}
+      fdSt('Gravado','');fdPills();fdRender();}).catch(function(x){fdSt('Não gravou: '+x.message,'er');});return;}
+  var p=e.target.closest&&e.target.closest('[data-fd-aba]');if(p&&p.closest('#fd')){FD.aba=p.getAttribute('data-fd-aba');fdRender();}});
+function fdPills(){var s=$('#fd .fd-pl');if(s)s.innerHTML=fdCtlPills();var t=$('#fd [data-fda="Controles"]');if(t){var n=fdCtlAtivos().length;t.innerHTML='Controles'+(n?' <i class="fdn">'+n+'</i>':'');}}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-fd-cnj]');if(!b)return;FD.abrirCtl=true;var k=b.getAttribute('data-fd-cnj'),x=(MT.dados||[]).concat(SB.dados||[],SN.dados||[],lista(),(S.doc&&S.doc.todos)||[]).filter(function(i){return dg(i.cnj)===k;})[0];if(x)fichaAbre(x);});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-fd-ir]');if(!b)return;var v=b.getAttribute('data-fd-ir');fdFecha();vista(v);});
 function fdRender(){var F=FD.F,o=$('#fd');if(!o)return;
   o.querySelectorAll('.fdt button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-fda')===FD.aba));});
   if(!F){o.querySelector('.fdb').innerHTML='<div class="empty">Lendo a ficha…</div>';return;}
   if(FD.aba==='Controles'){o.querySelector('.fdb').innerHTML=fdControles();return;}
   var A=F.abas.filter(function(a){return a.aba===FD.aba;})[0]||F.abas[0],h='';
+  if(A.destino&&A.destino!==fdDestino()){o.querySelector('.fdb').innerHTML='<div class="empty">'+(A.destino==='sessao'?'Processo com destino monocrático: não vai à pauta. Os dados de produção da decisão ficam em Produção › Decisão monocrática.':'Esta parte só vale para a decisão monocrática.')+'</div>';return;}
   if(A.seletor){var dn=fdDestino(),sv=fdDestGrav();
     h+='<div class="fdsel"><b>'+esc(A.seletor.rotulo)+'</b><span class="sg">'+A.seletor.opcoes.map(function(x){var k=x.valor==='Monocrática'?'monocratica':'sessao';return '<button data-fdd="'+esc(x.valor)+'" aria-pressed="'+(dn===k)+'">'+esc(x.rotulo)+'</button>';}).join('')+'</span>'+
       '<small>'+(sv?'Destino gravado: '+esc(sv):'Destino ainda não definido'+(S.fonte==='mono'?' · aberto pelas Monocráticas':''))+(FD.gestor?'':' · a troca aqui só muda a visão; quem define o destino é o gestor')+'</small></div>';}
@@ -859,11 +905,11 @@ function fdRender(){var F=FD.F,o=$('#fd');if(!o)return;
 function fdSt(t,c){var s=$('#fd .fd-st');if(s){s.textContent=t;s.className='fd-st'+(c?' '+c:'');}}
 function fichaAbre(it){FD.it=it;FD.F=null;FD.op=null;FD.fo=null;FD.pend={};FD.dest=null;
   var o=$('#fd');if(!o){o=document.createElement('div');o.id='fd';o.className='fd';o.setAttribute('role','dialog');o.setAttribute('aria-label','Ficha do processo');document.body.appendChild(o);}
-  o.hidden=false;o.innerHTML='<div class="fdc"><div class="fdh"><div><b>'+fmtCnj(it.cnj)+'</b><small>'+esc(it.assunto||'')+(it.classe?' · '+esc(it.classe):'')+'</small></div><span class="sp"></span><span class="fd-st"></span><button data-fdx>Fechar</button></div>'+
+  o.hidden=false;o.innerHTML='<div class="fdc"><div class="fdh"><div><b>'+fmtCnj(it.cnj)+'</b><small>'+esc(it.assunto||'')+(it.classe?' · '+esc(it.classe):'')+'</small></div><span class="fd-pl"></span><span class="sp"></span><span class="fd-st"></span><button data-fdx>Fechar</button></div>'+
     '<div class="fdt" role="tablist">'+['Processo','Triagem','Produção','Pauta','Controles'].map(function(a){return '<button role="tab" data-fda="'+a+'">'+a+'</button>';}).join('')+'</div><div class="fdb"></div></div>';
   fdRender();
-  api('/api/pauta?ficha='+encodeURIComponent(it.cnj)).then(function(j){if(FD.it!==it)return;FD.F=j.ficha;FD.op=j.operacional;FD.fo=j.fonte;FD.gestor=!!j.gestor;FD.ctl=j.controles||{};
-    fdSt(j.operacional?'':'Sem ficha ainda: será criada ao gravar');fdRender();}).catch(function(e){o.querySelector('.fdb').innerHTML='<div class="empty">Não foi possível ler a ficha: '+esc(e.message)+'</div>';});}
+  api('/api/pauta?ficha='+encodeURIComponent(it.cnj)).then(function(j){if(FD.it!==it)return;FD.F=j.ficha;FD.op=j.operacional;FD.fo=j.fonte;FD.gestor=!!j.gestor;FD.ctl=j.controles||{};if(FD.abrirCtl&&fdCtlAtivos().length)FD.aba='Controles';FD.abrirCtl=false;
+    fdSt(j.operacional?'':'Sem ficha ainda: será criada ao gravar');fdPills();fdRender();}).catch(function(e){o.querySelector('.fdb').innerHTML='<div class="empty">Não foi possível ler a ficha: '+esc(e.message)+'</div>';});}
 function fdGrava(){var P=FD.pend,ks=Object.keys(P),it=FD.it;if(!ks.length||!it)return;FD.pend={};fdSt('Gravando…','pend');
   api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:it.cnj,campos:P})}).then(function(j){if(FD.it!==it)return;FD.op=j.operacional||FD.op;fdSt((j.recusados||[]).length?'Gravado (sem permissão para: '+j.recusados.join(', ')+')':'Gravado na ficha','');if(!$('#fd').hidden)fdRender();})
   .catch(function(e){Object.keys(P).forEach(function(k){if(!(k in FD.pend))FD.pend[k]=P[k];});fdSt('Não gravou: '+e.message,'er');});}
