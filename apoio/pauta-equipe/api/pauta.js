@@ -10,6 +10,9 @@ module.exports = async (req, res) => {
   const data = req.query.data; if (!L.dataOk(data)) return res.status(400).json({ erro: 'data inválida' });
   const rel = 'acervo/sessoes/' + data + '.json';
   try {
+    /* só as pautas que o Monitor publicou para a equipe */
+    const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
+    if (!(cal.sessoes || []).some(s => s.date === data && s.publicada)) return res.status(403).json({ erro: 'Esta pauta ainda não foi publicada para a equipe.' });
     if (req.method === 'GET') { const { dados } = await L.lerJson(rel); return res.status(200).json(dados); }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const b = req.body || {}, alvo = dg(b.cnj), lista = b.lista === 'previa' ? 'previa' : 'itens', C = b.campos || {};

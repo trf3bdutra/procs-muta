@@ -1,0 +1,13 @@
+/* versão pública: identidade gêmea da Pauta da equipe (mesmo cabeçalho, paleta e tema) */
+:root{--bg:#0b1c28;--panel:#10273a;--card:#132a3b;--field:#183447;--ink:#e3ebf2;--mut:#9fb3c4;--line:#27465c;--gold:#e6c27a;--gold-ink:#14263c;--gold-soft:rgba(230,194,122,.14);--focus:#e6c27a}
+:root[data-theme="light"]{--bg:#eef2f4;--panel:#ffffff;--card:#ffffff;--field:#f6f8f9;--ink:#1e3448;--mut:#64778a;--line:#d8e1e8;--gold:#1f4c4f;--gold-ink:#ffffff;--gold-soft:rgba(31,76,79,.09);--focus:#1f4c4f}
+.top{background:linear-gradient(90deg,#173c47,#1f4c4f)!important;border-bottom:0!important;color:#eef4f1;padding:10px 22px!important}
+.brand.tw{flex-direction:row;align-items:center;gap:10px}.brand.tw span{font-weight:800;letter-spacing:.06em;font-size:13px;color:#eef4f1}.brand.tw em{color:#e6c27a;font-style:normal}
+.brand.tw i{width:22px;height:22px;border-radius:50%;background:#e6c27a;box-shadow:0 0 0 3px rgba(230,194,122,.2)}
+.top .tabs{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.18)!important}
+.top .tab{color:#cfe0db!important}.top .tab[aria-selected="true"]{background:#e6c27a!important;color:#14263c!important;box-shadow:none!important}
+.top .tab .car{stroke:currentColor}
+.top .status{color:#9fd6c2!important}.top .pill2{border-color:rgba(255,255,255,.25)!important}.top .pill2>*{color:#eef4f1!important}.top .pill2>*+*{border-color:rgba(255,255,255,.25)!important}.top .pill2>*:hover{background:rgba(255,255,255,.08)!important}
+.top .ico{border-color:rgba(255,255,255,.25)!important;color:#eef4f1!important}
+#openSheet{display:none!important}
+.hb-eq{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.25);color:#eef4f1;border-radius:999px;padding:6px 13px;font-weight:700;font-size:12px;text-decoration:none}.hb-eq:hover{background:rgba(255,255,255,.08)}
