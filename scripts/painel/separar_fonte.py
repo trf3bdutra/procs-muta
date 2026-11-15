@@ -31,7 +31,7 @@ def achatar(o):
     if "triagem" not in o:
         return o
     plano = {"processo": o["processo"], "pautas": o.get("pauta", {}).get("sessoes", [])}
-    for s in ("geral", "triagem", "producao", "pauta"):
+    for s in ("geral", "origem", "triagem", "producao", "pauta"):
         plano.update({k: v for k, v in (o.get(s) or {}).items() if k != "sessoes"})
     return plano
 
@@ -134,14 +134,20 @@ def main():
 # ---------- organização do operacional em seções ----------
 SECOES = {
     "triagem": ["Tempestividade", "Preparo", "Representação", "Regularidade", "MPF", "Mídias", "AJG", "DPU (controle)",
-                "Impedimento / Suspeição", "Contrarrazões - Situação", "META", "Dificuldade", "Seleção Prévia",
+                "Impedimento / Suspeição", "Observação do Impedimento", "META", "COMPLEXIDADE", "Dificuldade", "Seleção Prévia",
                 "_autoRestriction", "_magistradoRestricao", "_restricaoTipo", "_preparoAJG", "_preparoBeforeAJG",
                 "_ajgFromDpu", "_dpuAuto", "_ajgAuto", "_autoMetaTags"],
-    "producao": ["SERVIDOR", "MINUTADO", "_ementa", "_genV", "_recursos", "_contras", "_minutadoBy",
+    "producao": ["SERVIDOR", "MINUTADO", "CORRETOR", "CORRIGIDO", "Data da Revisão", "LIBERADO", "Data da Liberação",
+                 "_ementa", "_genV", "_minutadoBy",
                  "_minutadoSession", "_prontoParaCorrecao"],
-    "pauta": ["Status de Julgamento", "Sessão original", "Sessão Destino", "JULGAMENTO", "_pautaEntries", "_pautaHistory"],
+    "pauta": ["Status de Julgamento", "Sessão original", "Nova sessão de destino", "JULGAMENTO", "Motivo da remarcação",
+              "_pautaEntries", "_pautaHistory"],
 }
 GERAL = ["baixado", "fora_do_fonte"]
+ORIGEM = ["Contrarrazões - Situação", "_recursos", "_contras", "Sentença - Decisão", "Sentença - ID",
+          "Sentença - Honorários", "Sentença - Custas", "Sentença - Resultado", "Sentença - Fundamento",
+          "Sentença - Providências", "Responsável", "Próxima ação", "Observações"]
+RENOMEAR = {"Sessão Destino": "Nova sessão de destino", "Dificuldade": "COMPLEXIDADE"}
 
 
 def secionar(o):
@@ -149,22 +155,66 @@ def secionar(o):
     painel = o.pop("_painel", {}) or {}
     novo = {"processo": o.pop("processo")}
     plano = {**painel, **o}
-    for s in ("geral", "triagem", "producao", "pauta"):
+    for s in ("geral", "origem", "triagem", "producao", "pauta"):
         sub = plano.pop(s, None)
         if isinstance(sub, dict):
             plano.update({k: v for k, v in sub.items() if k != "sessoes"})
             if s == "pauta" and "sessoes" in sub:
                 plano["pautas"] = sub["sessoes"]
-    geral = {k: plano.pop(k) for k in GERAL if k in plano}
-    geral["atualizado_em"] = plano.pop("atualizado_em", "")
-    novo["geral"] = geral
+    for a, b in RENOMEAR.items():
+        if a in plano:
+            plano.setdefault(b, plano.pop(a))
+    if plano.get("Preparo") == "AJG":                          # AJG dispensa o preparo
+        plano["Preparo"] = "Dispensado"
+    imp = str(plano.get("Impedimento / Suspeição") or "")
+    if " — " in imp:                                            # "Impedimento — NEY" → tipo + observação
+        tipo, nome = imp.split(" — ", 1)
+        plano["Impedimento / Suspeição"] = tipo.strip()
+        if not nome.strip().startswith("/"):                   # "— /suspeição" na origem: sem magistrado indicado
+            plano.setdefault("Observação do Impedimento", nome.strip().title())
+    if str(plano.get("Observação do Impedimento", "")).startswith("/"):
+        plano.pop("Observação do Impedimento")
+    origem = {k: plano.pop(k) for k in GERAL if k in plano}
+    origem["atualizado_em"] = plano.pop("atualizado_em", "")
+    origem.update({k: plano.pop(k) for k in ORIGEM if k in plano and not vazio(plano[k])})
+    novo["origem"] = origem
     for s, campos in SECOES.items():
         novo[s] = {c: plano.pop(c) for c in campos if c in plano and not vazio(plano[c])}
     novo["pauta"]["sessoes"] = plano.pop("pautas", [])          # histórico: sessão, item, resultado
     for k in list(plano):                                       # o que sobrar vai para geral
         if not vazio(plano[k]):
-            novo["geral"][k] = plano.pop(k)
+            novo["origem"][k] = plano.pop(k)
     return novo
+
+
+def integrar_sessoes(raiz, regs):
+    """Traz das planilhas de sessão (acervo/sessoes/AAAA-MM-DD.json) servidor, corretor, datas, item e resultado."""
+    por = {"".join(c for c in r["processo"] if c.isdigit()): r for r in regs}
+    for arq in sorted((raiz / "acervo/sessoes").glob("2*.json")):
+        sessao = arq.stem
+        for it in json.loads(arq.read_text(encoding="utf-8")).get("itens", []):
+            r = por.get("".join(c for c in it.get("cnj", "") if c.isdigit()))
+            if not r:
+                continue
+            pr = r["producao"]
+            for de, para in (("servidor", "SERVIDOR"), ("corretor", "CORRETOR"), ("dataMinuta", "MINUTADO"),
+                             ("dataCorrecao", "Data da Revisão"), ("dataLiberacao", "Data da Liberação")):
+                if it.get(de):
+                    pr[para] = it[de]                           # a sessão mais recente prevalece
+            if it.get("dataCorrecao"):
+                pr["CORRIGIDO"] = "Sim"
+            if it.get("dataLiberacao"):
+                pr["LIBERADO"] = "Sim"
+            ses = r["pauta"].setdefault("sessoes", [])
+            e = next((x for x in ses if x.get("sessao") == sessao), None)
+            if not e:
+                e = {"sessao": sessao, "item": "", "resultado": ""}; ses.append(e)
+            e["item"] = e.get("item") or str(it.get("item") or "")
+            e["resultado"] = e.get("resultado") or str(it.get("resultado") or "")
+            if it.get("obs"):
+                e["obs"] = it["obs"]
+    for r in regs:
+        r["pauta"]["sessoes"].sort(key=lambda x: x["sessao"])
 
 
 def organizar(raiz=Path(".")):
@@ -172,8 +222,9 @@ def organizar(raiz=Path(".")):
     oper = json.loads(po.read_text(encoding="utf-8"))
     oper["schema_versao"] = 2
     oper["registros"] = [secionar(r) for r in oper["registros"]]
+    integrar_sessoes(raiz, oper["registros"])
     oper["secoes"] = {
-        "geral": "situação do registro (baixado, fora do fonte), atualização e demais informações gerais",
+        "origem": "aba Processo da Ficha: situação no acervo, sentença, recursos e contrarrazões, acompanhamento",
         "triagem": SECOES["triagem"], "producao": SECOES["producao"],
         "pauta": SECOES["pauta"] + ["sessoes: [{sessao, item, resultado}] · histórico de inclusões, retiradas e adiamentos"],
     }
