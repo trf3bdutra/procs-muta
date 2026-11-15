@@ -1,8 +1,8 @@
 {
  "schema": "gabcmt.padrao.ficha",
- "versao": "1.1.0",
+ "versao": "1.2.0",
  "origem": "padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py",
- "descricao": "Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
+ "descricao": "Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com \"tipo\": \"tabela\" são listas de linhas com as \"colunas\" indicadas. Grupos com \"quando\" só aparecem quando o campo indicado tem o valor. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
  "abas": [
   {
    "aba": "Processo",
@@ -59,6 +59,58 @@
        "chave": "Sentença - Providências",
        "tipo": "texto-longo",
        "secao": "origem"
+      },
+      {
+       "rotulo": "Data da sentença",
+       "chave": "Sentença - Data",
+       "tipo": "data",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Remessa necessária",
+       "chave": "Sentença - Reexame",
+       "tipo": "lista",
+       "secao": "origem",
+       "opcoes": [
+        "Sim",
+        "Não",
+        "Dispensada"
+       ]
+      },
+      {
+       "rotulo": "Tutela na sentença",
+       "chave": "Sentença - Tutela",
+       "tipo": "lista",
+       "secao": "origem",
+       "opcoes": [
+        "Concedida",
+        "Negada",
+        "Revogada",
+        "Não"
+       ]
+      }
+     ]
+    },
+    {
+     "grupo": "Origem",
+     "campos": [
+      {
+       "rotulo": "Juízo de origem",
+       "chave": "Origem - Juízo",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Julgador(a) de origem",
+       "chave": "Origem - Julgador",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Valor da causa",
+       "chave": "Origem - Valor da causa",
+       "tipo": "texto",
+       "secao": "origem"
       }
      ]
     },
@@ -72,6 +124,115 @@
        "secao": "origem",
        "calculado": true,
        "regra": "apresentadas/nao/omitir → rótulo"
+      },
+      {
+       "rotulo": "Recursos",
+       "chave": "Recursos",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "parte",
+         "rotulo": "Parte",
+         "tipo": "texto"
+        },
+        {
+         "chave": "ids",
+         "rotulo": "IDs",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "preliminares",
+         "rotulo": "Preliminares",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "teses",
+         "rotulo": "Teses / alegações",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "pedidos",
+         "rotulo": "Pedidos",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "merito",
+         "rotulo": "Mérito",
+         "tipo": "texto-longo"
+        }
+       ]
+      },
+      {
+       "rotulo": "Contrarrazões",
+       "chave": "Contrarrazões",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "parte",
+         "rotulo": "Parte",
+         "tipo": "texto"
+        },
+        {
+         "chave": "ids",
+         "rotulo": "IDs",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "preliminares",
+         "rotulo": "Preliminares",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "teses",
+         "rotulo": "Teses",
+         "tipo": "texto-longo"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "grupo": "Outras peças e ocorrências",
+     "campos": [
+      {
+       "rotulo": "Outras peças",
+       "chave": "Outras peças",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "tipo",
+         "rotulo": "Peça",
+         "tipo": "texto"
+        },
+        {
+         "chave": "ids",
+         "rotulo": "IDs",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "texto",
+         "rotulo": "Observação",
+         "tipo": "texto-longo"
+        }
+       ]
       }
      ]
     },
@@ -342,10 +503,15 @@
        "secao": "triagem"
       },
       {
-       "rotulo": "Prazo em dobro",
+       "rotulo": "Contagem do prazo",
        "chave": "Tempest - Dobro",
-       "tipo": "simnao",
-       "secao": "triagem"
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "1",
+        "2"
+       ],
+       "regra": "1 = simples · 2 = em dobro (Fazenda Pública, MP, Defensoria)"
       },
       {
        "rotulo": "Suspensões de prazo",
@@ -364,6 +530,34 @@
        "chave": "Impedimento / Suspeição",
        "tipo": "texto",
        "secao": "triagem"
+      },
+      {
+       "rotulo": "Procurações",
+       "chave": "Procurações",
+       "tipo": "tabela",
+       "secao": "triagem",
+       "colunas": [
+        {
+         "chave": "id",
+         "rotulo": "ID",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "validade",
+         "rotulo": "Validade",
+         "tipo": "texto"
+        },
+        {
+         "chave": "advogados",
+         "rotulo": "Advogados",
+         "tipo": "texto-longo"
+        }
+       ]
       }
      ]
     },
@@ -419,6 +613,18 @@
        "rotulo": "Observação do parecer",
        "chave": "Observação MPF",
        "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Data do parecer",
+       "chave": "MPF - Data",
+       "tipo": "data",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Conclusão do parecer (texto)",
+       "chave": "Parecer - Sentido (outro)",
+       "tipo": "texto",
        "secao": "triagem"
       }
      ]
@@ -521,6 +727,176 @@
        "rotulo": "Especificidades",
        "chave": "Especificidades",
        "tipo": "texto-longo",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Espécie e decisão impugnada",
+     "campos": [
+      {
+       "rotulo": "Espécie",
+       "chave": "Padrão - Espécie",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Embargos de declaração",
+        "Agravo interno",
+        "Juízo de retratação"
+       ],
+       "mapa": {
+        "ed": "Embargos de declaração",
+        "interno": "Agravo interno",
+        "retratacao": "Juízo de retratação"
+       }
+      },
+      {
+       "rotulo": "ID da decisão impugnada",
+       "chave": "Impugnada - ID",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Data do julgamento / decisão",
+       "chave": "Impugnada - Data",
+       "tipo": "data",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Órgão julgador",
+       "chave": "Impugnada - Órgão",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Relator(a)",
+       "chave": "Impugnada - Relator",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Síntese / ementa",
+       "chave": "Impugnada - Síntese",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Embargos de declaração",
+     "quando": {
+      "campo": "triagem.Padrão - Espécie",
+      "valor": "Embargos de declaração"
+     },
+     "campos": [
+      {
+       "rotulo": "Vício(s) apontado(s)",
+       "chave": "ED - Vício",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Ponto dos embargos",
+       "chave": "ED - Ponto",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Agravo interno",
+     "quando": {
+      "campo": "triagem.Padrão - Espécie",
+      "valor": "Agravo interno"
+     },
+     "campos": [
+      {
+       "rotulo": "Fundamentos do agravo interno",
+       "chave": "AgInt - Fundamentos",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Juízo de retratação",
+     "quando": {
+      "campo": "triagem.Padrão - Espécie",
+      "valor": "Juízo de retratação"
+     },
+     "campos": [
+      {
+       "rotulo": "Tribunal do precedente",
+       "chave": "Retratação - Tribunal",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "STF",
+        "STJ"
+       ]
+      },
+      {
+       "rotulo": "Tema",
+       "chave": "Retratação - Tema",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Precedente",
+       "chave": "Retratação - Precedente",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Síntese",
+       "chave": "Retratação - Síntese",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "ID da devolução",
+       "chave": "Retratação - Devolução ID",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Órgão da devolução",
+       "chave": "Retratação - Devolução órgão",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Mês da devolução",
+       "chave": "Retratação - Devolução mês",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Resultado dos embargos",
+       "chave": "Retratação - ED",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Rejeitados",
+        "Acolhidos",
+        "Parcialmente acolhidos",
+        "Não conhecidos"
+       ],
+       "mapa": {
+        "parcial": "Parcialmente acolhidos",
+        "naoconhecidos": "Não conhecidos"
+       }
+      },
+      {
+       "rotulo": "IDs dos embargos",
+       "chave": "Retratação - ED IDs",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Data dos embargos",
+       "chave": "Retratação - ED data",
+       "tipo": "data",
        "secao": "triagem"
       }
      ]

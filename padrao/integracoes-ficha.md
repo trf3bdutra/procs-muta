@@ -34,6 +34,12 @@ Chave de ligação: número CNJ (`processo`). Baixados e arquivados em definitiv
 
 **Diálogo da ficha** (o mesmo no CMT-monitor e na Pauta da equipe): `padrao/ficha-dialogo.js` + `padrao/ficha-dialogo.css`, no visual v198, desenhado a partir de `padrao/ficha.json`. `scripts/ficha/embutir.py` copia o módulo para `cmt-monitor.html` (com o adaptador `padrao/ficha-adaptador-monitor.js`, que grava direto na base pelo token) e para `apoio/pauta-equipe/index.html` (grava por `/api/pauta?ficha=1`). Na Pauta da equipe, a gaveta lateral passou a ser o prontuário de produção (preenchimento rápido); a ficha é o diálogo.
 
+**Inteiro teor (.txt do PJe)** na ficha: `padrao/inteiro-teor.js` (leitura, pré-seleção e sugestões do módulo v40 do app Gabinete CMT, sem mudança de regra). O painel tem três etapas (arquivo, documentos, conferência) e grava no operacional só os campos confirmados que existem no modelo; dados do acervo (PJe), recursos e outras peças aparecem na conferência, mas não são gravados. O .txt é lido só no navegador.
+
+**Calendário forense do gabinete** (`padrao/calendario-forense.js`, o do Controle de Pauta): feriados nacionais e da Justiça Federal (Lei 5.010/66), de MS, Carnaval, Semana Santa, Corpus Christi, recesso de 20/12 a 20/01 na contagem de prazos (CPC, art. 220), datas do calendário do gabinete marcadas “não conta para prazo” e suspensões do processo. O expediente fica em `acervo/sessoes/calendario.json` (`expediente`: `diasSemana`, `semExpediente`, `nomes`, `tipos`, `semPrazo`, `recesso`), editado no CMT-monitor (Sessões › Calendário do gabinete · expediente e prazos, com sugestão de feriados por ano). A ficha mostra a tempestividade calculada na Triagem; o inteiro teor, o prontuário de triagem do monitor e a prévia de prazo da Pauta da equipe usam a mesma contagem.
+
+**Campos da ficha 1.2.0**: sentença (data, reexame, tutela), origem (juízo, julgador, valor da causa), tabelas de recursos, contrarrazões, outras peças e procurações, data e conclusão livre do parecer do MPF, espécie (ED, agravo interno, juízo de retratação) com a decisão impugnada e os grupos próprios de cada espécie. `Tempest - Dobro` passa a 1 (simples) ou 2 (em dobro), como no CMT-monitor.
+
 Não há arquivos paralelos: a página Monocráticas, as urgências e a aba Controles especiais da Pauta da equipe leem e gravam esses campos no `acervo/operacional.json`.
 
 Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENTE", "VERIFICAR REPRESENTAÇÃO") não são gravados: campo vazio = ainda não verificado.
