@@ -114,15 +114,40 @@ ref = ler(RAIZ/'apoio/referencias-rapidas.json')
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref}
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
 
-t = (H/'template.html').read_text(encoding='utf-8')
-for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
+js_ = js
+EDJ = js(editorial)
+t0 = (H/'template.html').read_text(encoding='utf-8')
+JS = (H/'ementario.js').read_text(encoding='utf-8')
+def blob_sha(p):
+    b = p.read_bytes(); return hashlib.sha1(b'blob %d\0' % len(b) + b).hexdigest()
+def montar(editor):
+    t = t0
+    js = JS.replace('/*__EDITOR__*/', (H/'editor.js').read_text(encoding='utf-8') if editor else '')
+    css = (H/'ementario.css').read_text(encoding='utf-8') + ((H/'editor.css').read_text(encoding='utf-8') if editor else '')
+    pre = ''
+    if editor:
+        cab = lambda p: {k: v for k, v in ler(p).items() if k != 'registros'}
+        meta = {'repo': 'trf3bdutra/procs-muta', 'ramo': 'main', 'arquivos': {
+            'modelos': {'path': 'modelos/modelos.json', 'sha': blob_sha(RAIZ/'modelos/modelos.json'), 'head': cab(RAIZ/'modelos/modelos.json')},
+            'paragrafos': {'path': 'modelos/paragrafos.json', 'sha': blob_sha(RAIZ/'modelos/paragrafos.json'), 'head': cab(RAIZ/'modelos/paragrafos.json')},
+            'pecas': {'path': 'apoio/vade-mecum/fonte/editorial_pecas.json', 'sha': blob_sha(H/'editorial_pecas.json')},
+            'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')}}}
+        pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
+        js = 'window.VDM_EDITOR=true;\n' + js
+        t = t.replace('<title>Vade Mecum CMT</title>', '<title>Vade Mecum CMT · Editor</title>')
+    return t, js, css, pre
+def gerar_html(editor):
+    t, js, css, pre = montar(editor)
+    for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
              ('/*__DATA__*/', (H/'snapshot.json').read_text(encoding='utf-8').strip()),
-             ('/*__EDITORIAL__*/', js(editorial)),
+             ('/*__EDITORIAL__*/', EDJ),
              ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + gz + '</script>'),
-             ('</style>\n</head>', (H/'ementario.css').read_text(encoding='utf-8') + '</style>\n</head>'),
-             ('</script>\n</body>', '</script>\n<script>\n' + (H/'ementario.js').read_text(encoding='utf-8') + '</script>\n</body>')]:
-    assert t.count(a) == 1, a[:60]
-    t = t.replace(a, b)
-out = H.parent/'Vade_Mecum_CMT.html'
-out.write_text(t, encoding='utf-8')
-print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
+             ('</style>\n</head>', css + '</style>\n</head>'),
+             ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
+        assert t.count(a) == 1, a[:60]
+        t = t.replace(a, b)
+    out = H.parent/('Vade_Mecum_CMT_editor.html' if editor else 'Vade_Mecum_CMT.html')
+    out.write_text(t, encoding='utf-8')
+    print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
+gerar_html(False)
+gerar_html(True)
