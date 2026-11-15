@@ -153,13 +153,16 @@ html[data-theme=dark] .pk{--pk:#4e9bcb;--pk-s:#0c2839}html[data-theme=dark] .pk.
 .pt-mk{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding:12px 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:12px}
 .pt-mk .mi{display:flex;align-items:center;gap:10px}.pt-mk .mc{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#f7efe0;color:#9a6a16;font-size:12px;border:1px solid #ecd7a7}
 .pt-mk small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.pt-mk b{font-size:13px}.pt-mk .ses b{color:#b0741a}.pt-mk .pas{opacity:.6}
-.pt-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}.pt-c b{font-size:14px}.pt-c small{color:var(--mut);font-size:11.5px}
-.pt-ir,.pt-q{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;background:var(--card);overflow:hidden;height:34px}
+.pt-hd{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px 0;margin-bottom:10px}
+#v-pauta.ctl .pt-hd,#v-pauta.metas .pt-hd,#v-pauta.sobr .pt-hd,#v-pauta.urg .pt-hd{display:none!important}
+.pt-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:10px}.pt-bar.pt-fl{padding-top:10px;border-top:1px solid var(--line)}.pt-c b{font-size:16px}.pt-bar .sp{flex:1 1 0}.pt-c{display:inline-flex;align-items:baseline;gap:6px;margin-right:4px}
+.pt-c .b.lk{height:auto;padding:0;border:0;background:transparent;color:var(--blue);font-size:11.5px;text-decoration:underline;text-underline-offset:2px}.pt-c .b.lk[hidden]{display:none}html[data-theme=dark] .pt-c .b.lk{color:#a9cfe6}.pt-c b{font-size:14px}.pt-c small{color:var(--mut);font-size:11.5px}
+.pt-ir,.pt-q{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;background:var(--soft);overflow:hidden;height:34px}
 .pt-ir>span{display:flex;align-items:center;padding:0 10px;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);background:var(--soft);border-right:1px solid var(--line)}
 .pt-ir select,.pt-q select{border:0;border-right:1px solid var(--line);background:var(--soft);font:600 13px var(--font);color:var(--ink);padding:0 8px}.pt-ir input,.pt-q input{border:0;background:transparent;font:13px var(--font);color:var(--ink);padding:0 10px;width:170px}
-.pt-bar>.b,.pt-bar>select{height:34px}.pt-bar>select{border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font:13px var(--font);padding:0 8px;max-width:250px}
+.pt-bar>.b,.pt-bar>select{height:34px}.pt-bar>select{border:1px solid var(--line);border-radius:9px;background:var(--soft);color:var(--ink);font:13px var(--font);padding:0 8px;max-width:250px}
 #f-pri[aria-pressed=true],#f-meta[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)}#f-meta i{font-style:normal;font-weight:800;margin-left:3px}
-.pt-sel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0 10px;border-top:1px solid var(--line);margin-bottom:6px;font-size:12px}.pt-sel .sp{flex:1}
+.pt-sel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 -12px;padding:7px 12px;border-top:1px solid var(--line);background:var(--soft);border-radius:0 0 12px 12px;font-size:12px}.pt-sel .b{height:28px}#sel-n{font-weight:700;color:var(--ink);margin-right:2px}.pt-sel .sp{flex:1}
 /* cartão compacto */
 .lst.cards{display:flex;flex-direction:column;gap:8px}
 .pc.cpt{border-left:3px solid #c9bfe0;border-radius:12px;box-shadow:none}.pc.cpt.meu{border-left-color:var(--gold-d,#b0741a)}.pc.cpt.al{border-left-color:#c4953c}.pc.cpt.li{border-left-color:#8a5cb8}.pc.cpt.co{border-left-color:#2d6fa8}
@@ -580,18 +583,23 @@ html[data-theme=dark] .st.ok{background:#183447!important}
     <section class="metas" id="sobr"></section>
     <section class="metas" id="sens"></section>
     <div class="pt-mk" id="mk"></div>
+    <form class="urg-n mono-n" id="mono-n" hidden><b>Registrar monocrática</b><input name="cnj" placeholder="nº CNJ do processo" required><select name="tipo"><option value="">tipo de ato…</option></select><button class="b pri">Registrar</button></form>
+    <section class="pt-hd" aria-label="Filtros e seleção da lista">
     <div class="pt-bar">
-      <span class="pt-c"><b id="pt-n"></b> <small id="pt-f"></small></span>
+      <span class="pt-c"><b id="pt-n"></b> <small id="pt-f"></small><button class="b lk" id="f-limpa">Limpar filtros</button></span>
+      <span class="sp"></span>
+      <span class="seg" id="modo"><button data-v="cards" aria-pressed="true" title="Cartões compactos">▤ Cartões</button><button data-v="planilha" aria-pressed="false" title="Planilha no padrão do Controle de Pauta">▦ Planilha</button></span>
+      <button class="b" id="exp-xlsx">↓ Exportar</button>
+    </div>
+    <div class="pt-bar pt-fl">
       <span class="pt-ir"><span>Ir para</span><select id="ir-k"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="ir-v" placeholder="Digite o número e Enter"></span>
       <span class="pt-q"><select id="q-k"><option value="">Todos os campos</option><option value="assunto">Assunto</option><option value="partes">Partes</option><option value="classe">Classe</option><option value="obs">Detalhes</option><option value="cnj">Processo</option></select><input type="search" id="q" placeholder="Digite para filtrar"></span>
       <button class="b" id="f-pri" aria-pressed="false" title="Sustentação oral ou preferência">Prioridades</button><button class="b" id="f-meta" aria-pressed="false">Metas <i></i></button>
       <span class="seg" id="esc"><button data-v="meus" aria-pressed="true">Meus</button><button data-v="todos" aria-pressed="false">Todos</button></span>
-      <select id="f-resp" aria-label="Responsável"></select><button class="b" id="f-limpa">Limpar filtros</button>
-      <span class="seg" id="modo"><button data-v="cards" aria-pressed="true" title="Cartões compactos">▤ Cartões</button><button data-v="planilha" aria-pressed="false" title="Planilha no padrão do Controle de Pauta">▦ Planilha</button></span>
-      <button class="b" id="exp-xlsx">↓ Exportar</button>
+      <select id="f-resp" aria-label="Responsável"></select>
     </div>
-    <form class="urg-n mono-n" id="mono-n" hidden><b>Registrar monocrática</b><input name="cnj" placeholder="nº CNJ do processo" required><select name="tipo"><option value="">tipo de ato…</option></select><button class="b pri">Registrar</button></form>
     <div class="pt-sel"><span id="sel-n">0 selecionado(s)</span><button class="b" id="sel-filt">Selecionar filtrados</button><button class="b" id="sel-limpa">Limpar seleção</button><button class="b" id="sel-copia">Copiar processos</button><span class="sp"></span><small class="mut" id="pt-nota">A composição da pauta e os marcos são definidos no CMT-monitor.</small></div>
+    </section>
     <div class="lst cards" id="lst"></div>
   </main>
 </div>
@@ -834,7 +842,7 @@ function render(){
   $('#mk').innerHTML=MKI.map(function(x){var d=x[0]==='date'?S.ses:m[x[0]];return '<div class="mi'+(x[0]==='date'?' ses':'')+(d&&d<h&&x[0]!=='date'?' pas':'')+'"><span class="mc">'+x[2]+'</span><div><small>'+x[1]+'</small><b>'+(d?esc(br(d)):'—')+'</b></div></div>';}).join('');
   /* barra de filtros */
   var nf=[S.q,S.fPri,S.fMeta,S.fResp,S.escopo==='meus'].filter(Boolean).length;
-  $('#pt-n').textContent=V.length+' processo'+(V.length===1?'':'s');$('#pt-f').textContent=nf?nf+' filtro'+(nf>1?'s':'')+' ativo'+(nf>1?'s':''):'sem filtros ativos';
+  $('#f-limpa').hidden=!nf;$('#pt-n').textContent=V.length+' processo'+(V.length===1?'':'s');$('#pt-f').textContent=nf?nf+' filtro'+(nf>1?'s':'')+' ativo'+(nf>1?'s':''):'sem filtros ativos';
   $('#f-meta i').textContent=mt;$('#f-pri').setAttribute('aria-pressed',String(!!S.fPri));$('#f-meta').setAttribute('aria-pressed',String(!!S.fMeta));marcaSeg('#esc',S.escopo);marcaSeg('#modo',S.modo);
   var rs=$('#f-resp'),vr=S.fResp;rs.innerHTML='<option value="">Todos os responsáveis e revisores</option>'+nomesEquipe().map(function(x){return '<option'+(x===vr?' selected':'')+'>'+esc(x)+'</option>';}).join('');
   var ns=Object.keys(S.sel).filter(function(k){return S.sel[k];}).length;$('#sel-n').textContent=ns+' selecionado(s)';
