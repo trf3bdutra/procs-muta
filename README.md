@@ -14,6 +14,8 @@ acervo/                        processos em tramitação no gabinete
                                nomes de campo da Ficha: triagem, AJG/DPU, impedimento,
                                contrarrazões, META, elaboração e passagens por pauta (sessão, item e resultado)
   sessoes/                     calendario.json (calendário de sessões) e um arquivo por sessão (AAAA-MM-DD.json)
+  planilhas/                   cópia integral das planilhas do Google Sheets aposentadas: Controle de Pauta (espelho de 09/11),
+                               pautas do 2º e 6º bimestres, tarefas do PJe (22/06) e divergências de servidor e revisor a conferir
   datajud/                     estado da sincronização e relatórios de cada coleta
 
 precedentes/                   processos já julgados pelo relator
@@ -31,6 +33,8 @@ apoio/                         recursos de apoio à redação
   diretrizes.json              vocabulário, conectivos, preferências, correções, alertas
   magistrados.json             cadastro de magistrados (TRF3 e 1º grau)
   assuntos.json                assuntos (TPU/CNJ) e temas
+  vade-mecum.json              Vade Mecum do Compêndio (Assuntos, Temas, Súmulas, Jurisprudência, Normas, Regimento, Diretrizes,
+                               Usos no gabinete, Matriz PIS-Cofins); antes vinha da planilha do Google, agora a fonte é este arquivo
   repertorio.json              repertório jurisprudencial e normativo (campo categoria: jurisprudencia | Lei, Código…)
   acessos.json                 Quem tem o modo avançado do Compêndio e quem usa o editor (nomes da equipe da Pauta)
   enciclopedia.json            Enciclopédia do modo avançado (servida só pelo /api/compendio, após o login): recursos, guias, rotina, PJe, competência, matérias, léxico

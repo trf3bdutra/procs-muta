@@ -2,7 +2,7 @@
  "schema": "gabcmt.apoio.repertorioNormativoComplemento",
  "versao": "1.0.0",
  "atualizadoEm": "2026-11-15",
- "descricao": "Dispositivos do repertório normativo acrescentados pelo procs-muta (mesmas colunas da aba Normas da planilha do Vade Mecum). Somam-se aos da planilha na carga do Vade Mecum; código repetido na planilha prevalece.",
+ "descricao": "Dispositivos do repertório normativo acrescentados pelo procs-muta (mesmas colunas da aba Normas do Vade Mecum, apoio/vade-mecum.json). Somam-se aos do Vade Mecum na carga do Compêndio; código repetido no Vade Mecum prevalece.",
  "criterio": "Dispositivos mais citados nos precedentes do relator (precedentes.jsonl, campo dispositivosCitados) ainda ausentes do repertório.",
  "registros": [
   {

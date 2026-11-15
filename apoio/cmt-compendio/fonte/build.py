@@ -4,7 +4,7 @@ a partir desta pasta e da base do procs-muta. Acesso ao modo avançado e ao edit
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
-  snapshot.json · usos_auto.json                    cópia da planilha do Vade Mecum e usos localizados
+  ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
@@ -209,7 +209,7 @@ def montar(var):
 def gerar_html(var):
     t, js, css, pre = montar(var)
     for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
-             ('/*__DATA__*/', (H/'snapshot.json').read_text(encoding='utf-8').strip()),
+             ('/*__DATA__*/', (RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')),
              ('/*__EDITORIAL__*/', EDJ),
              ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + gz + '</script>'),
              ('</style>\n</head>', css + '</style>\n</head>'),
