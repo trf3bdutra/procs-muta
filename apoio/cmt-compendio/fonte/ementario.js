@@ -888,10 +888,19 @@ function xEmDisp(s){
   return '';}
 function xAuto(PT){AUTO={};var d=xDispTexto(PT);
   if(d){AUTO.resultado=xTerceira(d);var em=xEmDisp(d);if(em){AUTO['dispositivo da ementa']=em;AUTO['CONCLUSÃO']=em.split('.')[0].toUpperCase();}}
-  if(XD.ac){if(XD.ac[0])AUTO.CLASSE=XD.ac[0].toUpperCase();if(XD.ac[1])AUTO.ASSUNTO=XD.ac[1].toUpperCase();
+  xAutoCaso();}
+/* variáveis do caso: vêm do processo informado (acervo) e do recorrente; valem na Peça e nos modelos-matriz */
+var VARS_CASO=[['processo','Número do processo'],['CLASSE','Classe processual, do acervo'],['ASSUNTO','Assunto principal, do acervo'],['RAMO','Ramo do direito, pela árvore do CNJ'],
+  ['polo ativo','Polo ativo, do acervo'],['polo passivo','Polo passivo, do acervo'],['recorrente','Recorrente informado na barra da peça'],['o autor / a autora','Recorrente, na forma da peça'],['a agravante','Agravante, na forma da peça'],
+  ['resultado','Resultado, pelo dispositivo escolhido na peça'],['CONCLUSÃO','Conclusão do cabeçalho da ementa'],['dispositivo da ementa','Item IV da ementa, pelo dispositivo']];
+function xAutoCaso(){
+  if(XD.proc)AUTO.processo=XD.proc;
+  if(XD.ac){if(XD.ac[0])AUTO.CLASSE=XD.ac[0].toUpperCase();if(XD.ac[1])AUTO.ASSUNTO=XD.ac[1].toUpperCase();if(XD.ac[2])AUTO['polo ativo']=XD.ac[2];if(XD.ac[3])AUTO['polo passivo']=XD.ac[3];
     /* ramo: raiz do assunto principal na árvore do CNJ; ED, agravo interno e agravo de instrumento levam também o processual civil */
     var mt=XD.ac[4];if(mt)AUTO.RAMO=mt==='PROCESSUAL CIVIL'?'DIREITO PROCESSUAL CIVIL':(/^(ed|agint|ai)$/.test(XP.v[XP.pc]||'')?'DIREITO PROCESSUAL CIVIL E '+mt:'DIREITO '+mt);}
-  if(XD.rec){AUTO['o autor / a autora']=XD.rec;AUTO['a agravante']=XD.rec;}}
+  if(XD.rec){AUTO.recorrente=XD.rec;AUTO['o autor / a autora']=XD.rec;AUTO['a agravante']=XD.rec;}}
+window.VDM_varsCaso=function(){var L=VARS_CASO.map(function(v){return {nome:v[0],d:v[1],v:AUTO[v[0]]||''};});
+  Object.keys(PADR).forEach(function(k){L.push({nome:k,d:'Valor-padrão do gabinete',v:PADR[k]});});return L;};
 function xAutoAplica(){if(!XP._PT)return;xAuto(XP._PT);$$('#x-main .fill').forEach(function(f){var k=f.getAttribute('data-fk');if(FILL[k]||document.activeElement===f)return;var n=f.getAttribute('data-ph'),v=AUTO[n]||PADR[n]||'';if(f.textContent!==v)f.textContent=v;f.classList.toggle('ok',!!v);f.classList.toggle('auto',!!v);});}
 function xRascunho(){clearTimeout(xRascunho._t);xRascunho._t=setTimeout(function(){try{var F={};Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))F[k]=FILL[k];});localStorage.setItem(XRK,JSON.stringify({pc:XP.pc,v:XP.v,alt:XP.alt,abre:XP.abre,fora:XP.fora,res:XP.res,mrec:XP.mrec,vb:XP.vb,d:{proc:XD.proc,rec:XD.rec},F:F}));}catch(e){}},400);}
 (function(){try{var r=JSON.parse(localStorage.getItem(XRK)||'null');if(!r)return;['pc','v','alt','abre','fora','res','mrec','vb'].forEach(function(k){if(r[k])XP[k]=r[k];});if(r.F)Object.keys(r.F).forEach(function(k){FILL[k]=r.F[k];});if(r.d){XD.proc=r.d.proc||'';XD.rec=r.d.rec||'';}}catch(e){}})();
@@ -1286,8 +1295,15 @@ function mEmenta(m){
     if(!cur)cur={n:'Ementa',f:''};cur.f+=l+'\n';});
   if(cur&&cur.f.trim())bl(cur.n,cur.f);
   return out;}
+/* dados do caso na ficha do modelo: o processo preenche as variáveis ({{CLASSE}}, {{ASSUNTO}}, {{RAMO}}, {{polo ativo}}…) */
+function mCasoHtml(){var ac=XD.ac,info=ac?[ac[0],ac[1],[ac[2],ac[3]].filter(Boolean).join(' × ')].filter(Boolean).join(' · '):(XD.proc&&XD.naoAchou?'processo fora do acervo: variáveis do acervo ficam em aberto':'informe o processo para preencher as variáveis do caso');
+  return '<label class="m-caso"><span>Caso</span><input data-mproc placeholder="nº do processo" value="'+esc(XD.proc||'')+'" inputmode="numeric" aria-label="Número do processo do caso"><small>'+esc(info)+'</small></label>';}
+document.addEventListener('change',function(e){var t=e.target;if(!t.matches||!t.matches('[data-mproc]'))return;XD.proc=t.value.trim();XD.ac=null;XD.naoAchou=false;
+  var fim=function(){xRascunho();if(MS._m)mFolha(MS._m);};if(!XD.proc){fim();return;}
+  base().then(function(B){var n=xNumProc(XD.proc);XD.proc=n;XD.ac=(B.ac&&B.ac[n])||null;XD.naoAchou=!XD.ac;fim();}).catch(function(){XD.naoAchou=true;fim();});});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.matches&&e.target.matches('[data-mproc]')){e.preventDefault();e.target.blur();}});
 function mFolha(m){
-  var PT=mPartes(m),tp=mTipo(m),h='';
+  xAutoCaso();var PT=mPartes(m),tp=mTipo(m),h='';
   PT.forEach(function(pt){var lastG=null;
     if(pt.pj)h+='<div class="xpj">'+pt.pj+' <small>(inserido pelo PJe)</small><button class="xpjc" data-mcpp="'+pt.pj+'" title="Copiar '+esc(pt.pj==='ACÓRDÃO'?'proclamação':pt.pj.toLowerCase())+', com a formatação do PJe" aria-label="Copiar '+esc(pt.pj==='ACÓRDÃO'?'proclamação':pt.pj.toLowerCase())+'"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>';
     pt.trs.forEach(function(t){
@@ -1295,7 +1311,7 @@ function mFolha(m){
       if(t.n==='Sentença'&&sentNaAbertura(pt.trs,MS.alt))return;
       if(MS.fora[t.k]){h+='<button class="xopc fora" data-mvolta="'+esc(t.k)+'">+ '+esc(t.n)+' <small>· retirado</small></button>';return;}
       if(t.opc&&!MS.abre[t.k]){h+='<button class="xopc" data-mabre="'+esc(t.k)+'">+ '+esc(t.n)+' <small>· opcional</small></button>';return;}
-      var E=escolha(t,MS.alt),ai=E.ai,a=E.a||{f:''},ctx={k:m.id+'|'+t.k+'@'+E.key,i:0};
+      var E=escolha(t,MS.alt),ai=E.ai,a=E.a||{f:''},ctx={k:m.id+'|'+t.k+'@'+E.key,i:0,auto:true};
       h+='<div class="xblk'+(MS.blk===t.k?' on':'')+'" data-mk="'+esc(t.k)+'"><span class="xtg">'+(semRotulo(t.parte,t.n)?'':esc(t.n))+(t.opc?'<br><span class="xop" data-mfecha="'+esc(t.k)+'">recolher</span>':xFixo(t.parte,t)?'':'<br><span class="xop xret" data-mfora="'+esc(t.k)+'" title="Retirar da peça, da cópia e do .docx">retirar</span>')+'</span>'+
         (t.alts.length>1?'<div class="xalt">'+t.alts.map(function(x,i){return '<button data-malt="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===ai)+'" title="'+esc(x.lab)+'">'+esc(x.lab.length>34?x.lab.slice(0,33)+'…':x.lab)+'</button>';}).join('')+'</div>':'')+subSel(t,E,'data-msub')+
         (t.parte==='ementa'&&/^[IV]+\./.test(t.n)?'<p class="em"><b>'+esc(t.n)+'</b></p>':'')+
@@ -1304,7 +1320,7 @@ function mFolha(m){
   /* ficha à direita */
   var F=[['Pronunciamento',m.pronunciamento],['Apreciação',mApr(m)],['Classe',m.classe||m.classeSigla],['Assunto',m.assunto],['Temas',m.temas],['Resultado',m.resultado],['Causa de pedir',m.causaPedir],['Preliminares',m.preliminares],['Honorários',m.honorarios],['Situação',m.statusCuradoria]].filter(function(z){return z[1];});
   var mc=citados([m.temas,m.tese,m.fundamentacao,mTextoBase(m)].join('\n')),ro=roteiroDe(m.assunto);
-  var r='<div class="mfh"><span class="e-tag '+(tp==='Acórdão'?'A':tp==='Decisão'?'M':'')+'">'+esc(tp)+'</span><h3>'+esc(m.nomeModelo||m.id)+'</h3><div class="e-dacts"><button class="e-mini pri" data-mcpb>Copiar peça</button><button class="e-mini" data-mcpe>Copiar esqueleto</button><button class="e-mini" data-mdocx>.docx</button><button class="e-mini" data-mpdf>PDF</button>'+(window.VDM_EDITOR?'<button class="e-mini ed-in" data-edmod="'+esc(m.id)+'">Editar</button>':'')+'</div><div class="mtabs" role="tablist"><button role="tab" data-mtab="ficha" aria-selected="'+(MS.tab!=='ref')+'">Ficha</button><button role="tab" data-mtab="ref" aria-selected="'+(MS.tab==='ref')+'">Referências rápidas</button></div></div><div class="mfb">';
+  var r='<div class="mfh"><span class="e-tag '+(tp==='Acórdão'?'A':tp==='Decisão'?'M':'')+'">'+esc(tp)+'</span><h3>'+esc(m.nomeModelo||m.id)+'</h3>'+mCasoHtml()+'<div class="e-dacts"><button class="e-mini pri" data-mcpb>Copiar peça</button><button class="e-mini" data-mcpe>Copiar esqueleto</button><button class="e-mini" data-mdocx>.docx</button><button class="e-mini" data-mpdf>PDF</button>'+(window.VDM_EDITOR?'<button class="e-mini ed-in" data-edmod="'+esc(m.id)+'">Editar</button>':'')+'</div><div class="mtabs" role="tablist"><button role="tab" data-mtab="ficha" aria-selected="'+(MS.tab!=='ref')+'">Ficha</button><button role="tab" data-mtab="ref" aria-selected="'+(MS.tab==='ref')+'">Referências rápidas</button></div></div><div class="mfb">';
   if(MS.tab==='ref'){r+=rrHtml(m)+'</div>';}else{
   r+='<div class="pp-pg">'+F.map(function(z){return '<div><span>'+esc(z[0])+'</span>'+(z[0]==='Temas'?refs(z[1]):esc(z[1]))+'</div>';}).join('')+'</div>';
   if(m.tese)r+='<div class="xrg">Tese</div><div class="xri">'+refs(m.tese)+'</div>';
@@ -1396,7 +1412,7 @@ var CXPA={DIM:PDIM,DIMS:['cat','sub','tema','st','forma','uso','vin'],dm:{mapa:[
 function pAbrir(p){
   PS.sel=p.id;$$('#e-out .p-row').forEach(function(r){r.classList.toggle('sel',r.getAttribute('data-pid')===p.id);});
   var h='<div class="e-dhead"><div class="e-dtit"><span class="e-tag apr">'+esc(STL[p.status]||p.status||'Parágrafo')+'</span><span class="e-dname">'+esc(p.titulo||p.id)+'</span><button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div><p class="meta" style="margin:6px 0 0">'+esc([p.nivelCategoria,p.nivelSubsecao,p.nivelTema,p.nivelEspecificidade].filter(Boolean).join(' › '))+'</p>';
-  h+='<div class="n-of"><div class="lb ok">Texto</div><div class="e-box serif ok">'+comCampos(pVars(p.texto,false),{k:'par:'+p.id,i:0},refs)+'</div></div><div class="e-dacts"><button class="e-mini pri" data-pcp2>Copiar parágrafo</button>'+(window.VDM_EDITOR?'<button class="e-mini ed-in" data-edpar="'+esc(p.id)+'">Editar</button>':'')+'</div></div><div class="e-dbody">';
+  h+='<div class="n-of"><div class="lb ok">Texto</div><div class="e-box serif ok">'+comCampos(pVars(p.texto,false),(xAutoCaso(),{k:'par:'+p.id,i:0,auto:true}),refs)+'</div></div><div class="e-dacts"><button class="e-mini pri" data-pcp2>Copiar parágrafo</button>'+(window.VDM_EDITOR?'<button class="e-mini ed-in" data-edpar="'+esc(p.id)+'">Editar</button>':'')+'</div></div><div class="e-dbody">';
   if(p.uso)h+='<h3 class="e-sec">Quando usar</h3><div class="e-box">'+refs(p.uso)+'</div>';
   if(p.especificidadesTags)h+='<h3 class="e-sec">Especificidades</h3><div class="e-chipl">'+String(p.especificidadesTags).split(/;\s*/).filter(Boolean).map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div>';
   h+='<div class="pus">'+usosHtml([],(p._usos||[]).map(precPorId),'Parágrafo-padrão: '+(p.titulo||p.id),'Busca pelo trecho fixo nos '+n0(Object.keys((BASE&&BASE.it)||{}).length)+' inteiros teores da base.')+'</div>';
