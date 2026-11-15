@@ -5,8 +5,9 @@
    Também exporta espelho(), usado pela pauta e pelas monocráticas: o que a equipe registra no cartão vai para a ficha no mesmo commit. */
 const L = require('./_lib');
 const OP = 'acervo/operacional.json', FONTE = 'acervo/fonte.json', FICHA = 'padrao/ficha.json';
-const SECOES = ['origem', 'triagem', 'producao', 'pauta'];
-const SO_GESTOR = new Set(['producao.SERVIDOR', 'producao.CORRETOR', 'producao.Destino']);
+const SECOES = ['origem', 'triagem', 'producao', 'pauta', 'controles'];
+/* a designação é do gestor; o destino (sessão ou monocrática) a equipe registra, como na página Monocráticas */
+const SO_GESTOR = new Set(['producao.SERVIDOR', 'producao.CORRETOR']);
 const dg = s => String(s || '').replace(/\D/g, '');
 const agora = () => new Date().toISOString();
 let FIC = null, FIC_T = 0, FT = null, FT_T = 0;
@@ -65,8 +66,11 @@ const V = {
   dataCorrecao: v => ({ producao: { 'Data da Revisão': v, 'CORRIGIDO': v ? 'Sim' : '' } }),
   dataLiberacao: v => ({ producao: { 'Data da Liberação': v, 'LIBERADO': v ? 'Sim' : '' } }),
   /* urgências e monocráticas (aba Urgências / Monocráticas da Pauta da equipe) */
-  urgTipo: v => ({ triagem: { 'Urgência': { 'Tutela de urgência': 'Tutela de urgência', 'Tutela recursal (antecipação)': 'Tutela de urgência', 'Efeito suspensivo': 'Efeito suspensivo', 'Liminar': 'Pedido de liminar', 'Prioridade de saúde': 'Prioridade legal', 'Outro': 'Outra urgência' }[v] || '' } }),
-  urgSit: v => ({ triagem: { 'Urgência - Apreciação': v } }), urgData: v => ({ triagem: { 'Urgência - Data': v } }), urgObs: v => ({ triagem: { 'Urgência - Observação': v } }),
+  /* Controles especiais · urgência: vocabulário único da ficha (padrao/ficha.json) */
+  urgTipo: v => ({ triagem: { 'Urgência': v } }), urgNivel: v => ({ triagem: { 'Urgência - Nível': v } }), urgSit: v => ({ triagem: { 'Urgência - Apreciação': v } }),
+  urgPedido: v => ({ triagem: { 'Urgência - Data': v } }), urgData: v => ({ triagem: { 'Urgência - Apreciada em': v } }), urgObs: v => ({ triagem: { 'Urgência - Observação': v } }),
+  urgPainel: v => ({ triagem: { 'Urgência - Painel': v } }),
+  /* Controles especiais · monocrática: destino e observação ficam a cargo de _mono.js (a pauta também tem 'obs') */
   hip932: v => ({ triagem: { 'Hipóteses Monocrática': v } }),
   tipoAto: v => ({ producao: { 'Mono - Tipo de ato': v } }), fundamento: v => ({ producao: { 'Mono - Fundamento': v } })
 };
@@ -77,6 +81,63 @@ const VC = {
   'adm.dobro': v => ({ triagem: { 'Tempest - Dobro': v === true || v === 'true' ? 'Sim' : '' } }), 'adm.ajg': v => ({ triagem: { 'AJG': v === true || v === 'true' ? 'Sim' : '' } }),
   'jul.fund': v => ({ producao: { 'Voto - Descrição': v } }), 'jul.topico': v => ({ producao: { 'Tópico-síntese': v } })
 };
+/* ficha → campos do cartão (Monocráticas e urgências): o inverso de V, no vocabulário do app */
+const INV = {
+  tempest: r => r.triagem.Tempestividade, prelim: r => r.triagem['Prelim.'], intercor: r => r.triagem['Intercorrências'],
+  preparo: r => ({ 'Comprovado': 'Comprovado', 'Não Recolhido': 'Não recolhido', 'Não se Aplica': 'Não se aplica' }[r.triagem.Preparo] || (r.triagem.Preparo === 'Dispensado' ? (r.triagem.AJG === 'Sim' ? 'Justiça gratuita' : 'Isento (DPU/ente público)') : '')),
+  repres: r => { const v = r.triagem['Representação'], o = r.triagem['Observação da Representação'] || ''; return v === 'Regular' ? (/^Dispensada/.test(o) ? o : 'Regular') : v === 'Negativo' ? (/^Irregular/.test(o) ? o : 'Irregular') : ''; },
+  midias: r => ({ 'Juntada': 'Juntadas', 'Faltante': 'Faltantes', 'Não se Aplica': 'Não se aplica' }[r.triagem['Mídias']] || ''),
+  mpf: r => r.triagem['MPF - Custos Legis'] === 'Não' ? 'Sem hipótese' : r.triagem['MPF - Custos Legis'] === 'Sim' ? (r.triagem['Observação MPF'] || '') : '',
+  parecer: r => ({ 'Com Parecer': 'Com parecer', 'Sem Parecer': 'Aguardando parecer' }[r.triagem.MPF] || ''),
+  resJulg: r => r.producao['Voto - Resultado'], honor: r => r.producao['Voto - Honorários'], topico: r => r.producao['Tópico-síntese'],
+  hip932: r => r.triagem['Hipóteses Monocrática'], tipoAto: r => r.producao['Mono - Tipo de ato'], fundamento: r => r.producao['Mono - Fundamento'],
+  urgTipo: r => r.triagem['Urgência'], urgNivel: r => r.triagem['Urgência - Nível'], urgSit: r => r.triagem['Urgência - Apreciação'], urgPedido: r => r.triagem['Urgência - Data'],
+  urgData: r => r.triagem['Urgência - Apreciada em'], urgObs: r => r.triagem['Urgência - Observação'], urgPainel: r => r.triagem['Urgência - Painel']
+};
+function paraCtl(r) {
+  const o = {}, R = { triagem: (r && r.triagem) || {}, producao: (r && r.producao) || {} };
+  Object.keys(INV).forEach(k => { const v = INV[k](R); if (v) o[k] = v; });
+  return o;
+}
+/* regras dos Controles especiais, iguais em qualquer porta de entrada (ficha, páginas, CMT-monitor):
+   monocrática registrada ganha a data; urgência registrada ganha a data do pedido e a apreciação pendente; quem alterou o grupo fica anotado */
+function regras(r, out, u) {
+  const t = r.triagem = r.triagem || {}, p = r.producao = r.producao || {}, c = r.controles = r.controles || {}, hj = agora().slice(0, 10), mud = new Set(out);
+  if (mud.has('producao.Destino') && p.Destino === 'Monocrática' && !c['Monocrática - Registrada em']) { c['Monocrática - Registrada em'] = hj; out.push('controles.Monocrática - Registrada em'); }
+  if (mud.has('triagem.Urgência') && t['Urgência']) {
+    if (!t['Urgência - Data']) { t['Urgência - Data'] = hj; out.push('triagem.Urgência - Data'); }
+    if (!t['Urgência - Apreciação']) { t['Urgência - Apreciação'] = 'Pendente · não apreciada'; out.push('triagem.Urgência - Apreciação'); }
+  }
+  const grupos = new Set();
+  out.forEach(k => { const m = /^controles\.(Monocrática|Meta|Sobrestamento|Sensível) - /.exec(k); if (m) grupos.add(m[1]); });
+  if (mud.has('producao.Destino')) grupos.add('Monocrática');
+  if (u) grupos.forEach(g => { c[g + ' - Atualizado por'] = u; c[g + ' - Atualizado em'] = hj; });
+}
+/* ficha → cartão integral (inverso de VC): o valor gravado na ficha prevalece sobre o guardado no cartão */
+const VCI = { tipoJ: ['triagem', 'Tipo de Julgamento'], especificidades: ['triagem', 'Especificidades'], questoes: ['triagem', 'Alegações'],
+  'mpfx.sentido': ['triagem', 'Parecer - Sentido'], 'mpfx.id': ['triagem', 'ID do Parecer MPF'], 'adm.intim': ['triagem', 'Tempest - Publicação'],
+  'adm.prot': ['triagem', 'Tempest - Protocolo'], 'adm.prazo': ['triagem', 'Tempest - Prazo legal'], 'adm.dobro': ['triagem', 'Tempest - Dobro', 1], 'adm.ajg': ['triagem', 'AJG', 1],
+  'jul.fund': ['producao', 'Voto - Descrição'], 'jul.topico': ['producao', 'Tópico-síntese'] };
+function paraCartao(r, base) {
+  const c = JSON.parse(JSON.stringify(base || {}));
+  Object.keys(VCI).forEach(p => { const [s, k, b] = VCI[p], v = ((r && r[s]) || {})[k]; if (!v) return;
+    const ks = p.split('.'); let o = c; ks.slice(0, -1).forEach(x => { o = o[x] = (o[x] && typeof o[x] === 'object') ? o[x] : {}; }); o[ks[ks.length - 1]] = b ? v === 'Sim' : v; });
+  return c;
+}
+/* grava {secao: {chave: valor}} no registro do processo (cria se faltar), com nova tentativa se o arquivo mudou no meio */
+async function gravar(cnj, mud, msg, extra, u) {
+  const F = await ficha();
+  for (let t = 0; t < 4; t++) {
+    const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mud);
+    if (extra) extra(r, out);
+    if (!out.length) return { r, out };
+    regras(r, out, u);
+    doc.atualizado_em = agora();
+    try { await commitConferido([{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], msg + ' · ' + out.slice(0, 6).join(', ')); return { r, out }; }
+    catch (e) { if (e.status !== 409) throw e; }
+  }
+  const e = new Error('A ficha mudou várias vezes seguidas; tente de novo.'); e.status = 409; throw e;
+}
 function junta(a, b) { Object.keys(b).forEach(s => { a[s] = Object.assign(a[s] || {}, b[s]); }); return a; }
 function doCartao(campos, cartao) {
   const m = {};
@@ -96,7 +157,7 @@ async function espelho(arqPauta, cnj, campos, cartao, msg) {
   if (!Object.keys(mud).length) return commitConferido([arqPauta], msg);
   const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mud);
   const arqs = [arqPauta];
-  if (out.length) { doc.atualizado_em = agora(); arqs.push({ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }); }
+  if (out.length) { regras(r, out); doc.atualizado_em = agora(); arqs.push({ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }); }
   return commitConferido(arqs, msg + (out.length ? '\n\nFicha (operacional): ' + out.slice(0, 12).join(', ') : ''));
 }
 module.exports = async (req, res, u) => {
@@ -106,14 +167,11 @@ module.exports = async (req, res, u) => {
       const cnj = String(req.query.ficha || '');
       if (dg(cnj).length !== 20) return res.status(200).json({ ficha: F });
       const [{ doc }, fonte] = await Promise.all([lerOp(), fonteDe(cnj)]);
-      /* controles da equipe do mesmo processo: monocrática e urgência, meta, sobrestamento */
-      const opc = rel => L.lerJson(rel).then(x => (x.dados.registros || {})[dg(cnj)] || null).catch(() => null);
-      /* controles: o registro de acompanhamento e, para metas, sobrestados e casos sensíveis, se o processo está na lista (acervo) */
+      /* Controles especiais: o registro do operacional diz o que já foi registrado; as listas do acervo dizem se o processo entra na meta, no sobrestamento ou nos casos sensíveis */
       const naLista = mod => require(mod).base().then(B => (Array.isArray(B) ? B : B.lista).find(x => dg(x.cnj) === dg(cnj)) || null).catch(() => null);
-      const [mono, metas, sobrestados, sensiveis, bMeta, bSobr, bSens] = await Promise.all([opc('acervo/monocraticas.json'), opc('acervo/metas.json'), opc('acervo/sobrestados.json'), opc('acervo/sensiveis.json'),
-        naLista('./_metas'), naLista('./_sobr'), naLista('./_sens')]);
-      return res.status(200).json({ ficha: F, operacional: registro(doc, cnj, F, false) || null, fonte, gestor: L.gestor(u),
-        controles: { mono, metas, sobrestados, sensiveis, naLista: { metas: bMeta, sobrestados: bSobr, sensiveis: bSens } } });
+      const [bMeta, bSobr, bSens] = await Promise.all([naLista('./_metas'), naLista('./_sobr'), naLista('./_sens')]);
+      const op = registro(doc, cnj, F, false) || null;
+      return res.status(200).json({ ficha: F, operacional: op, fonte, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const b = req.body || {}, cnj = String(b.cnj || ''), C = b.campos || {}, E = editaveis(F), mud = {}, recus = [];
@@ -124,17 +182,20 @@ module.exports = async (req, res, u) => {
       const i = k.indexOf('.'); (mud[k.slice(0, i)] = mud[k.slice(0, i)] || {})[k.slice(i + 1)] = C[k];
     });
     if (!Object.keys(mud).length) return res.status(400).json({ erro: 'nenhum campo editável', recusados: recus });
-    for (let t = 0; t < 4; t++) {
-      const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mud);
-      if (!out.length) return res.status(200).json({ ok: true, semMudanca: true, operacional: r, recusados: recus });
-      doc.atualizado_em = agora();
-      try {
-        await commitConferido([{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], 'Ficha (' + u + '): ' + r.processo + ' · ' + out.slice(0, 6).join(', '));
-        return res.status(200).json({ ok: true, operacional: r, recusados: recus });
-      } catch (e) { if (e.status !== 409) throw e; }
-    }
-    res.status(409).json({ erro: 'A ficha mudou várias vezes seguidas; tente de novo.' });
-  } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
+    const { r, out } = await gravar(cnj, mud, 'Ficha (' + u + '): ' + cnj, null, u);
+    return res.status(200).json(Object.assign({ ok: true, operacional: r, recusados: recus }, out.length ? {} : { semMudanca: true }));
+  } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
+/* quais grupos dos Controles especiais valem para o processo */
+function ativos(op, lista) {
+  const t = (op && op.triagem) || {}, p = (op && op.producao) || {}, c = (op && op.controles) || {};
+  return { urgencia: !!t['Urgência'], monocratica: p.Destino === 'Monocrática', meta: !!lista.metas, sobrestamento: !!lista.sobrestados,
+    sensivel: c['Sensível - Excluído'] !== 'Sim' && (!!lista.sensiveis || c['Sensível - Incluído'] === 'Sim'), naLista: lista };
+}
 module.exports.espelho = espelho;
+module.exports.gravar = gravar;
+module.exports.paraCtl = paraCtl;
+module.exports.paraCartao = paraCartao;
+module.exports.lerOp = lerOp;
+module.exports.ativos = ativos;
 module.exports.doCartao = doCartao;

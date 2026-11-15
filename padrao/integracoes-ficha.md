@@ -20,6 +20,21 @@ Chave de ligação: número CNJ (`processo`). Baixados e arquivados em definitiv
 | Triagem | `triagem` |
 | Produção | `producao` |
 | Pauta | `pauta` (+ `pauta.sessoes`) |
+| Controles especiais | `controles` (+ urgência em `triagem` e destino em `producao`) |
+
+**Controles especiais** (grupos oficiais da ficha, gerados em `scripts/ficha/gerar_ficha.py`; mesmo modelo no CMT-monitor e na Pauta da equipe):
+
+| Grupo | Quando vale para o processo | Onde ficam os campos |
+|---|---|---|
+| Urgência | `Urgência` (medida) preenchido; sugestão pelas etiquetas do PJe | `triagem` · `Urgência`, `Urgência - Nível`, `Urgência - Data` (pedido), `Urgência - Apreciação`, `Urgência - Apreciada em`, `Urgência - Observação`, `Urgência - Painel` |
+| Monocrática | `producao.Destino` = `Monocrática` | `producao` (designação, minuta, revisão, ato e decisão) e `controles` · `Monocrática - Registrada em`, `Monocrática - Observação` |
+| Meta | etiqueta de meta do PJe ou `triagem.META`, fora dos sobrestados | `triagem.META` e `controles` · `Meta - *` |
+| Sobrestamento | tarefa de sobrestamento ou suspensão no PJe | `controles` · `Sobrestamento - *` |
+| Caso sensível | assunto ou etiqueta de saúde, ou `Sensível - Incluído` = Sim | `controles` · `Sensível - *` |
+
+**Diálogo da ficha** (o mesmo no CMT-monitor e na Pauta da equipe): `padrao/ficha-dialogo.js` + `padrao/ficha-dialogo.css`, no visual v198, desenhado a partir de `padrao/ficha.json`. `scripts/ficha/embutir.py` copia o módulo para `cmt-monitor.html` (com o adaptador `padrao/ficha-adaptador-monitor.js`, que grava direto na base pelo token) e para `apoio/pauta-equipe/index.html` (grava por `/api/pauta?ficha=1`). Na Pauta da equipe, a gaveta lateral passou a ser o prontuário de produção (preenchimento rápido); a ficha é o diálogo.
+
+Não há arquivos paralelos: a página Monocráticas, as urgências e a aba Controles especiais da Pauta da equipe leem e gravam esses campos no `acervo/operacional.json`.
 
 Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENTE", "VERIFICAR REPRESENTAÇÃO") não são gravados: campo vazio = ainda não verificado.
 

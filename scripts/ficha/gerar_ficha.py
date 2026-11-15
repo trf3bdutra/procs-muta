@@ -106,15 +106,68 @@ def _prod(a):
             com('Voto - Descrição', rotulo='Fundamentos da decisão'), NOVO('Enviada para assinatura em', 'Data da Liberação', 'data'), com('Assinado', rotulo='Assinada'),
             com('Data da Assinatura', rotulo='Data da assinatura'), com('Decisão - ID', rotulo='ID da decisão'), com('Publicado', rotulo='Publicada'),
             NOVO('Data da publicação', 'Mono - Data da publicação', 'data')]}]
+# Controles especiais: grupos oficiais da ficha para os processos sob acompanhamento próprio (seção "controles" do operacional;
+# a urgência e a monocrática usam os campos que já existem na triagem e na produção). Mesmo vocabulário no CMT-monitor e na Pauta da equipe.
+URG_MEDIDA = ['Tutela de urgência', 'Tutela de evidência', 'Antecipação da tutela recursal', 'Efeito suspensivo', 'Liminar em mandado de segurança',
+              'Reconsideração de liminar', 'Prioridade legal', 'Outra']
+URG_NIVEL = ['Urgentíssima (mesmo dia)', 'Urgente (24 h)', 'Prioritária (48 h)', 'Ordinária (5 dias)']
+URG_APREC = ['Pendente · não apreciada', 'Em análise', 'Minuta pronta', 'Apreciada · deferida', 'Apreciada · parcialmente deferida',
+             'Apreciada · indeferida', 'Apreciada · prejudicada', 'Apreciada · reconsiderada']
+META_SIT = ['Em andamento', 'Aguardando pauta', 'Pautado', 'Julgado · aguardando trânsito', 'Encerrado']
+SOBR_MOT = ['Tribunal superior (repetitivo ou repercussão geral)', 'IRDR ou IAC', 'Suspensão nacional (STF/STJ)', 'Decisão do relator', 'Acordo / conciliação', 'Outro motivo']
+SOBR_SIT = ['Afetado · aguardando julgamento', 'Julgado · aguardando publicação ou trânsito', 'Julgado · apto a retirar o sobrestamento', 'Cancelado ou desafetado · retirar', 'Sem informação']
+SENS_CAT = ['Saúde · medicamento', 'Saúde · oncológico', 'Saúde · cirurgia ou internação', 'Saúde · tratamento', 'Saúde · outro', 'Pessoa idosa',
+            'Criança ou adolescente', 'Pessoa com deficiência', 'Subsistência (verba alimentar)', 'Outro']
+SENS_DEC = ['Sem pedido de urgência', 'Liminar/tutela deferida', 'Liminar/tutela indeferida', 'Pedido pendente de apreciação', 'Decisão de mérito proferida']
+SENS_CUMP = ['Não se aplica', 'Cumprida', 'Pendente de cumprimento', 'Descumprimento noticiado', 'Bloqueio de valores / sequestro']
+def CE(rot, ch, tipo, op=None, sec='controles', **x):
+    c = {'rotulo': rot, 'chave': ch, 'tipo': tipo, 'secao': sec}
+    if op: c['opcoes'] = op
+    c.update(x); return c
+def _acomp(pref):
+    return [CE('Próxima providência', pref + ' - Próxima providência', 'texto'), CE('Responsável', pref + ' - Responsável', 'texto'),
+            CE('Observação', pref + ' - Observação', 'texto-longo'), CE('Atualizado por', pref + ' - Atualizado por', 'texto', editavel=False),
+            CE('Atualizado em', pref + ' - Atualizado em', 'data', editavel=False)]
+CONTROLES = {'aba': 'Controles especiais', 'secao': 'controles',
+  'descricao': 'Grupos oficiais de acompanhamento: urgência, monocrática, meta, sobrestamento e caso sensível. '
+               'Cada grupo vale para o processo quando a regra de inclusão é atendida; os campos ficam no próprio registro do operacional.',
+  'grupos': [
+   {'grupo': 'Urgência', 'controle': 'urgencia', 'inclusao': 'campo "Medida" preenchido (sugerida pelas etiquetas do PJe)', 'ativo': 'triagem.Urgência',
+    'campos': [CE('Medida', 'Urgência', 'lista', URG_MEDIDA, 'triagem'), CE('Nível', 'Urgência - Nível', 'lista', URG_NIVEL, 'triagem'),
+               CE('Pedido em', 'Urgência - Data', 'data', sec='triagem', regra='conta o prazo do nível'),
+               CE('Apreciação', 'Urgência - Apreciação', 'lista', URG_APREC, 'triagem'), CE('Apreciada em', 'Urgência - Apreciada em', 'data', sec='triagem'),
+               CE('Motivo / observação', 'Urgência - Observação', 'texto-longo', sec='triagem'),
+               CE('Lançar no painel de urgências', 'Urgência - Painel', 'simnao', sec='triagem')]},
+   {'grupo': 'Monocrática', 'controle': 'monocratica', 'inclusao': 'destino do julgamento = Monocrática (minuta feita ou possível)', 'ativo': 'producao.Destino=Monocrática',
+    'campos': [CE('Destino do julgamento', 'Destino', 'lista', ['Monocrática'], 'producao', regra='vazio = sessão (acórdão)'),
+               CE('Registrada em', 'Monocrática - Registrada em', 'data'), CE('Observação', 'Monocrática - Observação', 'texto-longo'),
+               CE('Atualizado por', 'Monocrática - Atualizado por', 'texto', editavel=False), CE('Atualizado em', 'Monocrática - Atualizado em', 'data', editavel=False)]},
+   {'grupo': 'Meta', 'controle': 'meta', 'inclusao': 'etiqueta de meta do CNJ no PJe ou campo META da triagem (sobrestados ficam no grupo Sobrestamento)', 'ativo': 'lista',
+    'campos': [CE('Metas do CNJ', 'META', 'texto', sec='triagem', regra='ex.: Meta 2; Meta 6'), CE('Situação', 'Meta - Situação', 'lista', META_SIT),
+               CE('Prazo da providência', 'Meta - Prazo da providência', 'data')] + _acomp('Meta')},
+   {'grupo': 'Sobrestamento', 'controle': 'sobrestamento', 'inclusao': 'tarefa de sobrestamento ou suspensão no PJe', 'ativo': 'lista',
+    'campos': [CE('Motivo', 'Sobrestamento - Motivo', 'lista', SOBR_MOT), CE('Tema ou precedente', 'Sobrestamento - Tema', 'texto', regra='ex.: Tema 1039 STJ'),
+               CE('Situação do precedente', 'Sobrestamento - Situação do precedente', 'lista', SOBR_SIT),
+               CE('Previsão de retirada', 'Sobrestamento - Previsão de retirada', 'data'), CE('Sem previsão de retirada', 'Sobrestamento - Sem previsão', 'simnao')] + _acomp('Sobrestamento')},
+   {'grupo': 'Caso sensível', 'controle': 'sensivel', 'inclusao': 'assunto ou etiqueta de saúde, ou inclusão manual', 'ativo': 'lista',
+    'campos': [CE('Categoria', 'Sensível - Categoria', 'lista', SENS_CAT), CE('Incluído manualmente', 'Sensível - Incluído', 'simnao'),
+               CE('Excluído do controle', 'Sensível - Excluído', 'simnao'), CE('Quadro / motivo', 'Sensível - Quadro', 'texto-longo'),
+               CE('Decisão', 'Sensível - Decisão', 'lista', SENS_DEC), CE('Cumprimento', 'Sensível - Cumprimento', 'lista', SENS_CUMP),
+               CE('Última verificação', 'Sensível - Última verificação', 'data'), CE('Próxima verificação', 'Sensível - Próxima verificação', 'data')] + _acomp('Sensível')}]}
 for a in abas:
+    if a['aba'] == 'Triagem':
+        a['grupos'] = [g for g in a['grupos'] if g['grupo'] != 'Urgência']   # a urgência passa ao grupo oficial dos Controles especiais
+        for g in a['grupos']:
+            g['campos'] = [c for c in g['campos'] if c['chave'] != 'META']    # a meta também
     if a['aba'] == 'Produção':
         _prod(a)
     if a['aba'] == 'Pauta':
         a['destino'] = 'sessao'   # a pauta só vale para o acórdão; a monocrática não vai à sessão
-ordem = ['Processo', 'Triagem', 'Produção', 'Pauta']
+abas.append(CONTROLES)
+ordem = ['Processo', 'Triagem', 'Produção', 'Controles especiais', 'Pauta']
 abas.sort(key=lambda a: ordem.index(a['aba']) if a['aba'] in ordem else 99)
-out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.0.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py',
-       'descricao': 'Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
+out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.1.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py',
+       'descricao': 'Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
        'abas': abas}
 (R / 'padrao/ficha.json').write_text(json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 n = sum(len(g['campos']) for a in abas for g in a['grupos'])
