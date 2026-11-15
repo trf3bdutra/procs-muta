@@ -527,3 +527,13 @@ details.rr ul{margin:4px 0 6px 16px;padding:0;font-size:12.5px}details.rr li{mar
 .us-l{list-style:none;margin:4px 0;padding:0;display:flex;flex-direction:column;gap:3px}
 .us-l li{display:flex;align-items:center;gap:7px;font-size:12px}.us-l b{font-family:ui-monospace,monospace;font-size:11.5px}
 .pus{margin-top:12px}
+/* retirar trecho da peça; parágrafo preferencial e variantes */
+.xret{color:#9a3d2e;opacity:0;transition:opacity .15s}
+.xblk:hover .xret,.xblk.on .xret,.xret:focus{opacity:1}
+.xopc.fora{color:#6b7280;border-color:#d8d8d8;text-decoration:none}
+.xopc.fora small{font-style:italic}
+.n-m.pst{background:#fbefd3;color:#7a5a17;border-color:#e8cf95}
+.p-row.p-pref{box-shadow:inset 3px 0 0 #d4ab58}
+.p-vars{list-style:none;margin:-2px 0 8px 22px}
+.p-vars>details>summary{cursor:pointer;font:600 12px Figtree,sans-serif;color:#8c6d38;padding:3px 0;list-style:revert}
+.p-vars .n-ls{margin:4px 0 0;border-left:2px solid #eadfc8;padding-left:8px}
