@@ -1767,7 +1767,7 @@ if(m[1]){var num=+m[2].replace(/\./g,''),tr=m[3],A=NL.filter(function(x){return 
 
 /* ================= navegação: subabas em menus suspensos no cabeçalho ================= */
 (function(){
-  var MAPA={rep:'#v-rep .sub',ement:'#e-sub',edit:'#x-sub'};
+  var MAPA={rep:'#v-rep .sub',ement:'#e-sub',edit:'#x-sub',enc:'#enc-sub'};
   var aberto=null;
   function fechaTodos(){$$('.tabw.open').forEach(function(w){w.classList.remove('open');w.querySelector('.tab').setAttribute('aria-expanded','false');});aberto=null;}
   function atual(v){var r=$(MAPA[v]);var b=r&&r.querySelector('[aria-selected="true"]');return b?b.textContent:'';}

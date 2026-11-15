@@ -339,7 +339,7 @@ document.addEventListener('click',function(e){
 
 /* ---------- navegação ---------- */
 var VIEW='temas';
-document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','edit','consulta'].forEach(function(v){var sv=$('#v-'+v);if(sv)sv.hidden=v!==VIEW;});$('#openSheet').hidden=VIEW==='ement';$('#openSheet').href=sheetUrl(VIEW==='temas'?(window.VDM_enunTab?window.VDM_enunTab():'Temas'):VIEW==='edit'?'Diretrizes':(window.VDM_repTab?window.VDM_repTab():'Jurisprudência'));if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','edit','consulta','enc'].forEach(function(v){var sv=$('#v-'+v);if(sv)sv.hidden=v!==VIEW;});$('#openSheet').hidden=VIEW==='ement'||VIEW==='enc';$('#openSheet').href=sheetUrl(VIEW==='temas'?(window.VDM_enunTab?window.VDM_enunTab():'Temas'):VIEW==='edit'?'Diretrizes':(window.VDM_repTab?window.VDM_repTab():'Jurisprudência'));if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
 function renderAll(){if(window.VDM_enun)window.VDM_enun();if(window.VDM_rep)window.VDM_rep();if(window.VDM_refresh)window.VDM_refresh();}
 
 /* Enunciados: código em ementario.js (lista, tabela, mapa e painel) */

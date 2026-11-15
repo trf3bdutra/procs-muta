@@ -149,6 +149,8 @@ t0 = (H/'template.html').read_text(encoding='utf-8')
 JS = (H/'ementario.js').read_text(encoding='utf-8')
 def blob_sha(p):
     b = p.read_bytes(); return hashlib.sha1(b'blob %d\0' % len(b) + b).hexdigest()
+ENC_SUBS = [('vias', 'Recursos'), ('qual', 'Qual via?'), ('guias', 'Guias práticos'), ('rotina', 'Rotina do gabinete'), ('pje', 'Caixas e fluxos do PJe'),
+            ('comp', 'Competência'), ('mat', 'Matérias'), ('lex', 'Léxico'), ('reg', 'Regimento')]
 def montar(editor):
     t = t0
     js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if editor else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8'))
@@ -180,6 +182,17 @@ def montar(editor):
             'pecas': {'path': 'apoio/cmt-compendio/fonte/editorial_pecas.json', 'sha': blob_sha(H/'editorial_pecas.json')},
             'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')}}}
         pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
+        # Enciclopédia (só no avançado): recursos, qual via, guias, rotina, PJe, competência, matérias e léxico
+        enc = (RAIZ/'apoio/enciclopedia.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')
+        pre += '<script type="application/json" id="enc-dados">' + enc + '</script>\n'
+        js += '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8')
+        css += (H/'enciclopedia.css').read_text(encoding='utf-8')
+        a = '    <button class="tab" role="tab" data-v="edit" aria-selected="false">Editorial</button>\n'
+        assert t.count(a) == 1
+        t = t.replace(a, a + '    <button class="tab" role="tab" data-v="enc" aria-selected="false">Enciclopédia</button>\n')
+        a = '<section id="v-consulta" hidden>'
+        assert t.count(a) == 1
+        t = t.replace(a, '<section id="v-enc" hidden>\n  <div class="sub" role="tablist" id="enc-sub">' + ''.join(f'<button data-s="{k}" aria-selected="{str(k == "vias").lower()}">{n}</button>' for k, n in ENC_SUBS) + '</div>\n  <div class="layout">\n    <aside id="enc-aside" aria-label="Navegação da enciclopédia"></aside>\n    <div class="content">\n      <div class="bar" id="enc-bar"><input class="q" id="enc-q" type="search" aria-label="Buscar na enciclopédia"></div>\n      <div id="enc-out"></div>\n    </div>\n  </div>\n</section>\n\n' + a)
         js = 'window.VDM_EDITOR=true;\n' + js
         t = t.replace('<title>CMT Compêndio</title>', '<title>CMT Compêndio · Avançado</title>')
         t = t.replace('<b>CMT Compêndio · Referenciais</b>', '<b>CMT Compêndio · Avançado</b>', 1)
