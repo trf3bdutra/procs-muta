@@ -1,4 +1,4 @@
-/* GET  /api/sessoes                 sessões publicadas para a equipe (acervo/sessoes/calendario.json) e o expediente
+/* GET  /api/sessoes                 sessões publicadas para a equipe (marcos e, se liberada, a listagem) (acervo/sessoes/calendario.json) e o expediente
    GET  /api/sessoes?agenda=1        agenda do calendário (acervo/sessoes/agenda.json: afazeres, alertas, eventos, prazos-limite, datas e ausências)
                                      e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json: aprovadas = confirmadas, pendentes = previstas)
    POST /api/sessoes?agenda=1 {itens, feitos}   grava a agenda (só o gestor; a mesma agenda do CMT-monitor) */
@@ -29,6 +29,7 @@ module.exports = async (req, res) => {
       return res.status(409).json({ erro: 'A agenda mudou várias vezes seguidas; tente de novo.' });
     }
     const { dados } = await L.lerJson('acervo/sessoes/calendario.json');
-    res.status(200).json({ sessoes: (dados.sessoes || []).filter(s => s.publicada).map(s => ({ date: s.date, nome: s.nome, hora: s.hora || '', processos: s.processos || 0, previa: s.processos ? 0 : (s.previa || 0), cor: s.cor || '', marcos: s.marcos || {} })), expediente: dados.expediente || null })
+    /* publicação em duas partes, feita no CMT-monitor: marcosPublicados mostra a sessão e os marcos à equipe; publicada libera a listagem da pauta */
+    res.status(200).json({ sessoes: (dados.sessoes || []).filter(s => s.publicada || s.marcosPublicados).map(s => ({ date: s.date, nome: s.nome, hora: s.hora || '', pauta: !!s.publicada, processos: s.publicada ? (s.processos || 0) : 0, previa: s.publicada && !s.processos ? (s.previa || 0) : 0, cor: s.cor || '', marcos: s.marcos || {} })), expediente: dados.expediente || null })
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };

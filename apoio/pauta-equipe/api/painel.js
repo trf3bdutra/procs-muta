@@ -1,13 +1,24 @@
 /* GET /api/painel  página inicial do servidor: calendário das pautas publicadas e todos os processos dele (minuta e correção) */
 const L = require('./_lib');
+const E = require('./_entregas');
+const FICHA = require('./_ficha');
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
   try {
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
-    const pubs = (cal.sessoes || []).filter(s => s.publicada);
+    /* calendário: sessões com marcos publicados; processos, progresso e "meus" só das pautas com listagem publicada */
+    const vis = (cal.sessoes || []).filter(s => s.publicada || s.marcosPublicados), pubs = vis.filter(s => s.publicada);
     const eu = L.norm(u), meus = [], prog = {};
-    const docs = await Promise.all(pubs.map(s => L.lerJson('acervo/sessoes/' + s.date + '.json').then(x => x.dados).catch(() => null)));
+    const detalhar = !!req.query.entregas;
+    const avisosFontes = [];
+    const requests = pubs.map(s => L.lerJson('acervo/sessoes/' + s.date + '.json').then(x => x.dados).catch(() => { avisosFontes.push('Pauta ' + s.date + ' indisponível'); return null; }));
+    // Monocráticas e diligências são lidas em paralelo apenas para o Início.
+    const adicionais = detalhar ? Promise.all([
+      FICHA.lerOp().then(x => x.doc).catch(() => { avisosFontes.push('Monocráticas e urgências indisponíveis'); return null; }),
+      L.lerJson('apoio/equipe-pendencias.json').then(x => x.dados).catch(e => { if (e.status !== 404) avisosFontes.push('Diligências indisponíveis'); return { registros: [] }; })
+    ]) : Promise.resolve([null, null]);
+    const [docs, extra] = await Promise.all([Promise.all(requests), adicionais]);
     pubs.forEach((s, i) => {
       const d = docs[i]; if (!d) return;
       const lista = (d.itens || []).length ? d.itens : (d.previa || []);
@@ -20,6 +31,13 @@ module.exports = async (req, res) => {
           resJulg: (it.ctl || {}).resJulg || '', previa: !(d.itens || []).length });
       });
     });
-    res.status(200).json({ usuario: u, sessoes: pubs.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', processos: s.processos || 0, previa: s.processos ? 0 : (s.previa || 0), marcos: s.marcos || {} })), expediente: cal.expediente || null, progresso: prog, meus });
+    const resposta = { usuario: u, sessoes: vis.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', pauta: !!s.publicada, processos: s.publicada ? (s.processos || 0) : 0, previa: s.publicada && !s.processos ? (s.previa || 0) : 0, marcos: s.marcos || {} })), expediente: cal.expediente || null, progresso: prog, meus };
+    if (detalhar) {
+      resposta.entregas = E.pautas(pubs, docs).concat(extra[0] ? E.monocraticas(extra[0]) : [], E.pendencias(extra[1] || { registros: [] }));
+      resposta.equipe = L.equipe();
+      resposta.fontes = { pautas: docs.filter(Boolean).length, pautasPublicadas: pubs.length, monocraticas: !!extra[0], pendencias: !!extra[1] };
+      resposta.avisosFontes = avisosFontes;
+    }
+    res.status(200).json(resposta);
   } catch (e) { res.status(500).json({ erro: e.message }); }
 };
