@@ -207,7 +207,14 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 - Modos de resultado: **Planilha** e **Triagem**. Na Triagem, cada processo aparece como o seu **Prontuário** (card triável).
 - Ao carregar, o motor lê `acervo/fonte.json` e sobrepõe `acervo/operacional.json` (`CMTOperacional.paraLinha`), convertendo os nomes da Ficha para os do app: `Nova sessão de destino` → `Sessão Destino`, `COMPLEXIDADE` → `Dificuldade`, `Preparo: Dispensado` com AJG/DPU → `AJG`, impedimento em tipo + nome → `Impedimento — Nome`.
 - **⇪ Gravar triagem** grava no `operacional.json`, num commit, só os processos alterados (`CMTOperacional.gravar`), com a conversão inversa e sem gravar valores padrão.
-- O Prontuário traz, além dos campos de antes: Urgência, MPF, Mídias, Seleção prévia e "Próximo passo » Destino" com servidor e corretor.
+- O Prontuário (redesenho B) tem cabeçalho cinza com seleção prévia (sessão + Enviar) e ações em ícones; alertas; e cinco grupos:
+  1. Admissibilidade: calculadora de tempestividade (`Tempest - Publicação`, `Tempest - Protocolo`, `Tempest - Prazo legal`, `Tempest - Dobro`, `Tempest - Suspensões`; dias úteis sem fins de semana, recesso 20/12–20/01, feriados nacionais e da JF, suspensões; com o protocolo, grava `Tempestividade`), preparo com DPU/AJG, representação e ID, contrarrazões, mídias.
+  2. Impedimento: tipo e magistrado.
+  3. Urgência (`Urgência` = medida, `Urgência - Nível`, `Urgência - Apreciação`, `Urgência - Observação`, `Urgência - Data`, `Urgência - Painel`) e MPF (parecer, custos legis).
+  4. Matéria: `Tipo de Julgamento` (automático pela classe), complexidade, metas (várias, separadas por `;` em `META`).
+  5. Encaminhamento: `Destino`, `Hipóteses Monocrática` (contagens das monocráticas do relator em 2026), sugestão automática e `O que falta sanar`.
+  - Etiquetas do PJe com S/E/O (Subassuntos = `Tema`, `Especificidades`, `Observações`) e `Síntese Processual`.
+  - Produção (minuta, correção, equipe, próximo passo) fica só no Controle de Pauta.
 - As sessões gravadas pela área Sessões vão para `pauta.sessoes` (formato em seções).
 
 ## Pendências de integração
