@@ -1,7 +1,8 @@
 /* Exporta para JSON as planilhas que espelham no Google Drive o que a equipe vê na Pauta da equipe:
-     pautas.json        uma aba por sessão liberada (exportação integral da pauta, padrão Controle de Pauta)
-     monocraticas.json  uma aba por mês de registro (exportação de todas as monocráticas)
-     controles.json     abas Metas (com encerrados), Sobrestados e Casos sensíveis
+     pautas        uma entrada por sessão liberada (exportação integral; pautas_sessao.py põe no molde Controle de Pauta)
+     monocraticas  uma aba por mês de registro (exportação de todas as monocráticas)
+     controles     abas Metas (com encerrados), Sobrestados e Casos sensíveis
+   (tudo em <pasta de saída>/planilhas.json)
    Como funciona: sobe a Pauta da equipe localmente, com as funções /api reais lendo esta cópia do repositório
    (GitHub simulado, SÓ LEITURA: nada é gravado), entra como gestor de teste local e aciona os mesmos botões
    de exportação do app; cada .xlsx baixado vira linhas (cabeçalho + valores).
