@@ -1378,7 +1378,7 @@ function gravarSensLote(){var lote=Array.from(SNP.values());SNP.clear();lote.red
 document.addEventListener('change',function(e){var t=e.target,k=t.getAttribute&&t.getAttribute('data-sn');if(!k)return;var tr=t.closest('tr[data-k]'),x=(SN.dados||[]).filter(function(i){return dg(i.cnj)===tr.getAttribute('data-k');})[0];if(!x)return;
   x.acomp[k]=t.value;var p=SNP.get(x.cnj)||{cnj:x.cnj,campos:{}};p.campos[k]=t.value;SNP.set(x.cnj,p);clearTimeout(tSn);tSn=setTimeout(gravarSensLote,700);if(/cat|decisao|cumprimento|ultimo|proxVer/.test(k))renderSens();});
 /* planilha no padrão do Controle de Pauta (pasta Pauta de Julgamento do Drive) */
-var PL=[['Item',52],['Processo',190],['Apreciação',110],['Classe',62],['Assunto',220],['Detalhes',220],['Pendências',150],['Etapa',112],['Minutado em',128],['Servidor',120],['Revisor',120],['Intervenção',150],['Parecer',140],['Preliminares',140],['Tempestividade',128],['Preparo',150],['Representação',150],['Mídias',118],['Resultado',160],['Consectários',96],['Honorários',150],['Tópico-síntese',100],['SO/Pref',104],['Desfecho',126],['Intercorrência',180],['Meta',70]];
+var PL=[['Item',52],['Processo',190],['Apreciação',110],['Classe',62],['Assunto',220],['Detalhes',220],['Síntese fática',240],['Observação',200],['Pendências',150],['Etapa',112],['Minutado em',128],['Servidor',120],['Revisor',120],['Intervenção',150],['Parecer',140],['Preliminares',140],['Tempestividade',128],['Preparo',150],['Representação',150],['Mídias',118],['Resultado',160],['Consectários',96],['Honorários',150],['Tópico-síntese',100],['SO/Pref',104],['Desfecho',126],['Intercorrência',180],['Meta',70]];
 var SOP=['Virtual','Presencial','Preferência'],DESF=['Julgado','Retirado de pauta','Adiado'];
 function planilha(V){
   var sc=function(it,k,L){var v=(it.ctl||{})[k]||'';return '<select data-c="'+k+'"><option value="">—</option>'+L.map(function(x){return '<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>';}).join('')+(v&&L.indexOf(v)<0?'<option selected>'+esc(v)+'</option>':'')+'</select>';};
@@ -1392,6 +1392,7 @@ function planilha(V){
       td(esc(aprec(it))+(mt?' · <em class="mt">META '+esc(mt.replace(/^M/,''))+'</em>':''))+td(esc(clSig(it.classe)))+
       td('<div class="wr" title="'+esc(it.assunto||'')+'">'+esc(it.assunto||'')+'</div>')+
       td('<textarea rows="1" data-d="obs" placeholder="anotações">'+esc(it.obs||'')+'</textarea>')+
+      td('<textarea rows="1" data-p="sintese" placeholder="síntese fática">'+esc(((c.cartao||{}).sintese)||'')+'</textarea>')+td('<textarea rows="1" data-p="obsGeral" placeholder="observação">'+esc(((c.cartao||{}).obsGeral)||'')+'</textarea>')+
       td(A.length?'<span class="pd">'+esc(A.join(' · '))+'</span>':'','pdc')+
       td(et==='Assinada'?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+br(it.dataAssinatura):'')+'</b>':'<select data-et>'+['A fazer','Minutado','Corrigido','Liberado'].map(function(x){return '<option'+(x===et?' selected':'')+'>'+x+'</option>';}).join('')+'</select>')+
       td('<input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'">')+td(selR(it,'servidor'))+td(selR(it,'corretor'))+
@@ -1413,7 +1414,7 @@ function planilhaMono(V){
       td(selR(it,'servidor'))+td(selR(it,'corretor'))+td(sc(it,'resJulg',CPM.res))+td(sc(it,'honor',CP.honor))+td(sc(it,'topico',CP.simnao))+td('<input data-c="intercor" value="'+esc(c.intercor||'')+'" placeholder="motivo / chamado">')+'</tr>';}).join('')+'</tbody></table></div>';
 }
 function linhaExpMono(it){var c=it.ctl||{};return [it.item,it.cnj,clSig(it.classe),it.assunto,it.tarefa,it.desde?br(it.desde):'',urgDe(it),c.tipoAto,c.hip932,it.obs,alertas(it).join(' · '),etLbl(etapa(it)),it.dataMinuta?br(it.dataMinuta):'',it.servidor,it.corretor,c.resJulg,c.honor,c.topico,c.intercor];}
-function linhaExp(it){var c=it.ctl||{};return [it.item,it.cnj,aprec(it)+(metaDe(it)?' · META '+metaDe(it):''),clSig(it.classe),it.assunto,it.obs,alertas(it).join(' · '),etapa(it),it.dataMinuta?br(it.dataMinuta):'',it.servidor,it.corretor,c.mpf,c.parecer,c.prelim,c.tempest,c.preparo,c.repres,c.midias,c.resJulg,c.consect,c.honor,c.topico,c.sopref,it.resultado,c.intercor,metaDe(it)];}
+function linhaExp(it){var c=it.ctl||{};return [it.item,it.cnj,aprec(it)+(metaDe(it)?' · META '+metaDe(it):''),clSig(it.classe),it.assunto,it.obs,(c.cartao||{}).sintese||'',(c.cartao||{}).obsGeral||'',alertas(it).join(' · '),etapa(it),it.dataMinuta?br(it.dataMinuta):'',it.servidor,it.corretor,c.mpf,c.parecer,c.prelim,c.tempest,c.preparo,c.repres,c.midias,c.resJulg,c.consect,c.honor,c.topico,c.sopref,it.resultado,c.intercor,metaDe(it)];}
 function corpo(it,tj){
   var G=function(p){return getP(it,p);};
   var inp=function(p,ph,t){return '<input data-p="'+p+'" type="'+(t||'text')+'" value="'+esc(G(p))+'" placeholder="'+esc(ph||'')+'">';};
@@ -1428,7 +1429,7 @@ function corpo(it,tj){
    '<section class="w"><h3><em>◈</em>Caracterização do caso <small>· alimenta a pesquisa no Compêndio</small></h3><div class="grid">'+
      f('Tipo de julgamento','<select data-p="tipoJ"><option value="">auto: '+esc(tipoJ({classe:it.classe,julgamento:it.julgamento}))+'</option>'+TJ.map(function(x){return '<option'+(x===C.tipoJ?' selected':'')+'>'+x+'</option>';}).join('')+'</select>')+
      f('Recurso relacionado',inp('relacionado','ex.: Apelação relacionada nº …'))+f('Subassuntos',ta('subassuntos','subassuntos (do inteiro teor)'))+f('Especificidades',ta('especificidades','peculiaridades do caso, distinções'))+
-     f('Questões controvertidas',ta('questoes','o que o recurso discute, ponto a ponto'))+f('Detalhes da pauta','<textarea rows="2" data-d="obs" placeholder="anotações (coluna Detalhes)">'+esc(it.obs||'')+'</textarea>')+'</div></section>'+
+     f('Questões controvertidas',ta('questoes','o que o recurso discute, ponto a ponto'))+f('Síntese fática',ta('sintese','fatos relevantes do caso, em poucas linhas'))+f('Observação',ta('obsGeral','observação geral sobre o processo'))+f('Detalhes da pauta','<textarea rows="2" data-d="obs" placeholder="anotações (coluna Detalhes)">'+esc(it.obs||'')+'</textarea>')+'</div></section>'+
    '<section><h3><em>§</em>Processo e origem</h3>'+
      f('Partes e papéis',pts.length?pts.map(function(p,i){return '<div class="row"><span style="flex:1 1 140px;font-size:11.5px">'+esc(p)+'</span>'+sx('papeis.'+i,['Autor(a)','Réu/ré','Terceiro'])+'</div>';}).join(''):'—')+
      f('Decisão na origem',sx('orig.tipo',['Decisão interlocutória','Sentença','Decisão monocrática','Acórdão']))+f('ID da decisão',inp('orig.id','ID'))+f('Data',inp('orig.data','','date'))+
