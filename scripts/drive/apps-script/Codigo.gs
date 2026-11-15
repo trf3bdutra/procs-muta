@@ -6,7 +6,7 @@
  *   - Monocráticas — Gabinete CMT: uma aba por mês de registro;
  *   - Controles especiais — Gabinete CMT: Metas, Sobrestados, Casos sensíveis.
  * Edição numa planilha → vai ao app na hora (gatilho "ao editar" de cada arquivo).
- * Mudança no app → chega à planilha em até 1 minuto (gatilho de tempo; fora do expediente, a cada 15 minutos).
+ * Mudança no app → o app avisa (doPost) e a planilha se atualiza na hora; o gatilho de cada minuto cobre avisos perdidos.
  * Colunas sem campo no app (processo, classe, assunto, tarefa, pendências, apreciação…) voltam ao valor do app na sincronização seguinte.
  *
  * Instalação: ver LEIAME.md nesta pasta. Em resumo: colar este código num projeto novo, preencher CMT_TOKEN em
@@ -103,12 +103,19 @@ function filaEnviar_() {
 }
 
 /* ============================ app → planilha ============================ */
-function sincronizar(forcar) {
-  var trava = LockService.getScriptLock(); if (!trava.tryLock(2000)) return;
+/* Aviso do app (implantação "App da Web"): a cada gravação no app, a planilha se atualiza na hora.
+   Só aceita a chamada com o mesmo token de CMT_TOKEN; espera a sincronização em andamento terminar. */
+function doPost(e) {
+  var b = {}; try { b = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (x) {}
+  var tok = PropertiesService.getScriptProperties().getProperty('CMT_TOKEN');
+  if (!tok || b.token !== tok) return ContentService.createTextOutput('negado');
+  sincronizar(false, 25000);
+  return ContentService.createTextOutput('ok');
+}
+function doGet() { return ContentService.createTextOutput('Planilhas ⇄ Pauta da equipe'); }
+function sincronizar(forcar, esperaMs) {
+  var trava = LockService.getScriptLock(); if (!trava.tryLock(esperaMs || 2000)) return;
   try {
-    var agora = new Date(), h = agora.getHours(), dia = agora.getDay();
-    var expediente = dia >= 1 && dia <= 5 && h >= 7 && h < 20;
-    if (forcar !== true && !expediente && agora.getMinutes() % 15) return;
     try { filaEnviar_(); } catch (e) {}
     var P = PropertiesService.getScriptProperties(), v = forcar === true ? '' : (P.getProperty('V') || '');
     var d = chamar_('get', v ? '&v=' + encodeURIComponent(v) : '');

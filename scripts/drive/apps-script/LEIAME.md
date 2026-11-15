@@ -3,8 +3,7 @@
 `Codigo.gs` liga as planilhas do Drive ao app, nos dois sentidos:
 
 - **planilha → app**: cada célula editada vai ao app na hora (gatilho "ao editar" de cada arquivo);
-- **app → planilha**: a cada minuto, em dia útil das 7h às 20h (fora disso, a cada 15 minutos), o script pergunta ao app se o
-  repositório mudou; se mudou, grava só as células diferentes. Célula editada há menos de 2,5 minutos não é sobrescrita.
+- **app → planilha**: a cada minuto, todos os dias, o script pergunta ao app se o repositório mudou; se mudou, grava só as células diferentes. Célula editada há menos de 2,5 minutos não é sobrescrita.
 
 Arquivos ligados: pautas (um por bimestre na pasta *CMT - Pautas de Julgamento*, uma aba por sessão, molde Controle de Pauta),
 *Monocráticas — Gabinete CMT* (uma aba por mês) e *Controles especiais — Gabinete CMT* (Metas, Sobrestados, Casos sensíveis).
