@@ -242,14 +242,19 @@ function iniciar(nome){
   U.eu=nome;$('#entrada').hidden=true;$('#app').hidden=false;$('#u-nome').textContent=nome;$('#u-ini').textContent=nome.slice(0,2).toUpperCase();
   try{S.escopo=localStorage.getItem('eq_escopo')||'meus';}catch(e){}
   marcaSeg('#esc',S.escopo);
-  api('/api/sessoes').then(function(j){S.cal=(j.sessoes||[]).slice().sort(function(a,b){return String(a.date).localeCompare(String(b.date));});S.exp=j.expediente||null;
+  sessoesEquipe(true);
+  P.dados=null;vista(/pauta/.test(location.hash)?'pauta':'inicio');
+  notificacoes();pendencias();
+  clearInterval(S.tCal);S.tCal=setInterval(function(){if(!document.hidden)sessoesEquipe(false);},60000);
+}
+/* pautas publicadas pelo Monitor: relidas ao entrar, ao abrir a aba Pauta e a cada minuto, para refletir na hora a liberação */
+function sessoesEquipe(primeira){
+  return api('/api/sessoes').then(function(j){var sig=JSON.stringify((j.sessoes||[]).map(function(s){return s.date+':'+s.processos+':'+s.previa;}));if(!primeira&&sig===S.calSig)return;S.calSig=sig;S.cal=(j.sessoes||[]).slice().sort(function(a,b){return String(a.date).localeCompare(String(b.date));});S.exp=j.expediente||null;
     var h=hoje(),fut=S.cal.filter(function(s){return s.date>=h&&(s.processos||s.previa);}),pref=null;try{pref=localStorage.getItem('eq_ses');}catch(e){}
     S.ses=(pref&&S.cal.some(function(s){return s.date===pref;}))?pref:(fut[0]||S.cal.filter(function(s){return s.processos;}).slice(-1)[0]||S.cal.slice(-1)[0]||{}).date||'';
     $('#ses').innerHTML=S.cal.slice().reverse().map(function(s){return '<option value="'+esc(s.date)+'"'+(s.date===S.ses?' selected':'')+'>Sessão de '+esc(br(s.date))+(s.hora?' · '+esc(s.hora):'')+(s.processos?' · '+s.processos+' itens':s.previa?' · pré-pauta '+s.previa:' · sem pauta')+'</option>';}).join('');
-    carregar();
-  }).catch(falha);
-  P.dados=null;vista(/pauta/.test(location.hash)?'pauta':'inicio');
-  notificacoes();pendencias();
+    if(primeira||!S.ses||!S.doc)carregar(!primeira);if(!primeira){P.dados=null;try{if(!$('#v-inicio').hidden)inicio();}catch(e){}}
+  }).catch(function(e){if(primeira)falha(e);});
 }
 function falha(e){if(e.status===401){entrada();return;}toast(e.message);$('#lst').innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
 function carregar(silencioso){
@@ -406,7 +411,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
 var P={dados:null,mes:'',aus:[],tipos:[]};
 var MK=[['pautarAte','Peço dia','#2d6fa8'],['inicioPreparacao','Início da preparação','#7352a5'],['entregaMinutas','Entrega das minutas','#c46a1f'],['liberacao','Liberação','#28744b']];
 var SCOR=['#1f6f8b','#8a5cb8','#1a8a6a','#c46a1f','#b0406a','#3e72ad'];
-function vista(v){v=v==='pauta'?'pauta':'inicio';$('#v-inicio').hidden=v!=='inicio';$('#v-pauta').hidden=v!=='pauta';
+function vista(v){v=v==='pauta'?'pauta':'inicio';if(v==='pauta'&&U.eu&&S.calSig!=null)sessoesEquipe(false);$('#v-inicio').hidden=v!=='inicio';$('#v-pauta').hidden=v!=='pauta';
   Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   try{history.replaceState(null,'','#'+v);}catch(e){}if(v==='inicio'&&!P.dados)painel();}
 document.querySelector('.tabs').addEventListener('click',function(e){var a=e.target.closest('[data-vw]');if(!a)return;e.preventDefault();vista(a.getAttribute('data-vw'));});
