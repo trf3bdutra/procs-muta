@@ -45,6 +45,12 @@ main{max-width:1320px;margin:0 auto;padding:18px 22px 60px}
 .kpi.al b{color:var(--red)}.kpi.ok b{color:var(--green)}.kpi.am b{color:var(--amber)}
 .ini-g{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}.ini-g .col{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))!important}
 #cc-cal.eq-cal{margin:0 0 12px}
+/* detalhes coloridos da barra, como no CMT-monitor: filete verde e régua azul em dois tons; ponto de cor em cada seção */
+#app header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#0083bd 0 50%,#76bae6 50% 100%);box-shadow:0 -1px 0 #1b7244;pointer-events:none}
+#app header .tabs a:before,#app header .eq-cmp:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin:0 7px 1px 0;vertical-align:middle;background:var(--dot,#e6c27a)}
+#app header .tabs a[data-vw="inicio"]{--dot:#e6c27a}#app header .tabs a[data-vw="pauta"]{--dot:#5fc4a8}#app header .eq-cmp{--dot:#e08a7a}
+#app header .tabs a[aria-current=page]:before{background:#14263c}
+
 /* ===== Pauta de Julgamento ===== */
 #v-pauta{max-width:1500px}
 .pt-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 0 12px}.pt-h h1{margin:2px 0 0;font-size:28px;letter-spacing:-.01em}.pt-st{font-size:12px;font-weight:700;color:var(--mut)}
@@ -942,7 +948,7 @@ document.addEventListener('click',function(e){if(e.target.closest('[data-fecha]'
   if(!e.target.closest('.drw')&&!e.target.closest('.hbx')&&!e.target.closest('#av-tudo')&&!e.target.closest('dialog')){$('#p-not').hidden=true;$('#p-pen').hidden=true;}});
 /* ================= avisos do gestor: título, texto, link, importância, onde aparece e quem recebe ================= */
 var AV={eq:[]};
-function avCarregar(){$('#av-comp').hidden=false;$('#av-hist').hidden=false;api('/api/avisos').then(function(j){AV.eq=j.equipe||[];AV.reg=j.registros||[];avHist();if($('#av-ppl').children.length)return;$('#av-ppl').innerHTML=AV.eq.map(function(n){return '<label><input type="checkbox" name="para" value="'+esc(n)+'"> '+esc(n)+'</label>';}).join('');avPrevia();}).catch(function(){});}
+function avCarregar(){$('#av-comp').hidden=false;$('#av-hist').hidden=false;api('/api/notificacoes?gestao=1').then(function(j){AV.eq=j.equipe||[];AV.reg=j.registros||[];avHist();if($('#av-ppl').children.length)return;$('#av-ppl').innerHTML=AV.eq.map(function(n){return '<label><input type="checkbox" name="para" value="'+esc(n)+'"> '+esc(n)+'</label>';}).join('');avPrevia();}).catch(function(){});}
 /* histórico: todos os avisos publicados (inclusive os vencidos); excluir tira do painel inicial e das notificações de todos */
 function avHist(){var L=AV.reg||[],hj=hoje();$('#av-hn').textContent='('+L.length+')';
   $('#av-hl').innerHTML=L.length?L.map(function(a){var venc=a.ate&&a.ate<hj;return itemNot({action:'aviso-geral',avId:a.id,time:a.time,title:a.title+(venc?' · vencido':''),message:a.message,link:a.link,linkTxt:a.linkTxt,nivel:a.nivel,painel:a.painel!==false,notificacao:a.notificacao!==false,para:a.para||[],ate:a.ate,fixo:a.fixo,user:a.user});}).join(''):'<p class="mut" style="font-size:12px">Nenhum aviso publicado.</p>';}
@@ -959,9 +965,9 @@ $('#f-av').addEventListener('submit',function(e){e.preventDefault();var f=e.targ
   if(!E.todos.checked&&!para.length){er.textContent='Escolha quem recebe ou marque Toda a equipe.';er.hidden=false;return;}
   var d={title:E.title.value,message:E.message.value,link:E.link.value,linkTxt:E.linkTxt.value,nivel:E.nivel.value,painel:E.painel.checked,notificacao:E.notificacao.checked,fixo:E.fixo.checked,ate:E.ate.value,para:para};
   var bt=f.querySelector('[type=submit]');bt.disabled=true;
-  api('/api/avisos',{method:'POST',body:JSON.stringify(d)}).then(function(){f.reset();toast('Aviso publicado.');notificacoes();avCarregar();}).catch(function(x){er.textContent=x.message;er.hidden=false;}).then(function(){bt.disabled=false;});});
+  api('/api/notificacoes?gestao=1',{method:'POST',body:JSON.stringify(d)}).then(function(){f.reset();toast('Aviso publicado.');notificacoes();avCarregar();}).catch(function(x){er.textContent=x.message;er.hidden=false;}).then(function(){bt.disabled=false;});});
 document.addEventListener('click',function(e){var b=e.target.closest('[data-av-del]');if(!b||!U.gestor)return;e.preventDefault();e.stopPropagation();if(!confirm('Excluir este aviso? Ele sai do painel inicial e das notificações de todos.'))return;
-  api('/api/avisos?id='+encodeURIComponent(b.dataset.avDel),{method:'DELETE'}).then(function(){toast('Aviso excluído: saiu do painel inicial e das notificações.');notificacoes();avCarregar();}).catch(function(x){toast(x.message);});},true);
+  api('/api/notificacoes?gestao=1&id='+encodeURIComponent(b.dataset.avDel),{method:'DELETE'}).then(function(){toast('Aviso excluído: saiu do painel inicial e das notificações.');notificacoes();avCarregar();}).catch(function(x){toast(x.message);});},true);
 /* ================= diligências: quadro A fazer · Em andamento · Em revisão · Concluída ================= */
 var PN={t:[],equipe:[],ed:null};
 var ETAPAS=[['todo','A fazer'],['doing','Em andamento'],['review','Em revisão'],['done','Concluída']],URK={Urgente:0,Alta:1,'Média':2,Baixa:3};

@@ -54,3 +54,8 @@ section>.pg-h .sub.pg-seg{display:inline-flex;gap:2px;padding:4px;margin:0;backg
 /* barra: marca e lado direito sem quebra; no modo avançado (mais seções) a pill do Compêndio desce para uma segunda linha em telas médias */
 .brand.tw span{white-space:nowrap}.top .right,.ac-chip{flex-wrap:nowrap!important;white-space:nowrap}
 @media (max-width:1680px){html.modo-av .top{flex-wrap:wrap!important;row-gap:8px}html.modo-av .top .eq-cpn{order:3}html.modo-av .top .eqsp{display:block}}
+
+/* detalhes coloridos da barra, como no CMT-monitor e na Pauta da equipe */
+.top{position:sticky}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#0083bd 0 50%,#76bae6 50% 100%);box-shadow:0 -1px 0 #1b7244;pointer-events:none}
+.eqtabs>a:before,.eqtabs .eq-cmp:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin:0 7px 1px 0;vertical-align:middle;background:var(--dot,#e6c27a)}
+.eqtabs>a[href*="#inicio"]{--dot:#e6c27a}.eqtabs>a[href*="#pauta"]{--dot:#5fc4a8}.eqtabs .eq-cmp{--dot:#e08a7a}.eqtabs .eq-cmp[aria-current=page]:before{background:#14263c}
