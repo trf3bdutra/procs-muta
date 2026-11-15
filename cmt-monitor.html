@@ -12385,7 +12385,7 @@ else setTimeout(ready, 0);
     var L = CAL && (CAL.sessoes || CAL.registros || []);
     if (!L || !L.length) return '<p class="p-empty">Calendário de sessões não carregado.</p>';
     var hoje = new Date().toISOString().slice(0, 10), cont = {};
-    (OPER || []).forEach(function (r) { (r.pautas || []).forEach(function (p) { cont[p.sessao] = (cont[p.sessao] || 0) + 1; }); });
+    (OPER || []).forEach(function (r) { ((r.pauta && r.pauta.sessoes) || r.pautas || []).forEach(function (p) { cont[p.sessao] = (cont[p.sessao] || 0) + 1; }); });
     var dt = function (s) { return s.date || s.data || ''; };
     var fut = L.filter(function (s) { return dt(s) >= hoje; }).sort(function (a, b) { return dt(a) < dt(b) ? -1 : 1; }).slice(0, 4);
     if (!fut.length) return '<p class="p-empty">Nenhuma sessão futura no calendário.</p>';
@@ -12480,7 +12480,7 @@ else setTimeout(ready, 0);
     var resto = ordem.filter(function (k) { return k !== 'Processo' && k !== 'processo'; }).map(function (k) { return { k: k, t: k, g: origemDe(k, ref), raw: 1 }; });
     var gi = function (g) { return ORIG.findIndex(function (x) { return x[0] === g; }); };
     resto.sort(function (a, b) { return gi(a.g) - gi(b.g); });
-    var op = [{ k: '·pautas', t: 'Sessões por que passou', g: 'oper', v: function (o) { var r = OPER && OPER.find(function (x) { return dig(x.processo) === dig(o.p); }); return r ? r.pautas.map(function (p) { return p.sessao.split('-').reverse().join('/') + (p.item ? ' · item ' + p.item : '') + (p.resultado ? ' · ' + p.resultado : ''); }).join(' | ') : ''; } }];
+    var op = [{ k: '·pautas', t: 'Sessões por que passou', g: 'oper', v: function (o) { var r = OPER && OPER.find(function (x) { return dig(x.processo) === dig(o.p); }); return r ? ((r.pauta && r.pauta.sessoes) || r.pautas || []).map(function (p) { return p.sessao.split('-').reverse().join('/') + (p.item ? ' · item ' + p.item : '') + (p.resultado ? ' · ' + p.resultado : ''); }).join(' | ') : ''; } }];
     return P.concat(resto, op);
   }
   function valor(c, o, r) {

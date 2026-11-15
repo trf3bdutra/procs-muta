@@ -26,6 +26,16 @@ PADRAO = {
 }
 
 
+def achatar(o):
+    """Registro em seções → plano (para a separação); registro plano passa intacto."""
+    if "triagem" not in o:
+        return o
+    plano = {"processo": o["processo"], "pautas": o.get("pauta", {}).get("sessoes", [])}
+    for s in ("geral", "triagem", "producao", "pauta"):
+        plano.update({k: v for k, v in (o.get(s) or {}).items() if k != "sessoes"})
+    return plano
+
+
 def vazio(v):
     return v is None or v == "" or v is False or v == [] or v == {}
 
@@ -45,7 +55,7 @@ def main():
     pf, po = raiz / "acervo/fonte.json", raiz / "acervo/operacional.json"
     fonte = json.loads(pf.read_text(encoding="utf-8"))
     oper = json.loads(po.read_text(encoding="utf-8"))
-    por_cnj = {r["processo"]: r for r in oper.get("registros", [])}
+    por_cnj = {r["processo"]: achatar(r) for r in oper.get("registros", [])}
     movidos = descartados = 0
 
     for r in fonte["registros"]:
@@ -76,7 +86,7 @@ def main():
         return ("baixados ao juízo" in t or "arquivo permanente" in t or "baixados por" in t
                 or r.get("ultimo_movimento") in ("Arquivado Definitivamente", "Baixa Definitiva"))
     def com_trabalho(o):
-        return bool(o.get("pautas")) or any(k not in ("processo", "pautas", "atualizado_em", "baixado", "fora_do_fonte")
+        return bool(o.get("pautas")) or any(not vazio(o[k]) and k not in ("processo", "pautas", "atualizado_em", "baixado", "fora_do_fonte")
                                             for k in o)
     ativos = {r["processo"] for r in fonte["registros"] if not baixado(r)}
     baixados = {r["processo"] for r in fonte["registros"]} - ativos
@@ -119,5 +129,59 @@ def main():
           f"registros operacionais: {len(oper['registros'])}")
 
 
+
+
+# ---------- organização do operacional em seções ----------
+SECOES = {
+    "triagem": ["Tempestividade", "Preparo", "Representação", "Regularidade", "MPF", "Mídias", "AJG", "DPU (controle)",
+                "Impedimento / Suspeição", "Contrarrazões - Situação", "META", "Dificuldade", "Seleção Prévia",
+                "_autoRestriction", "_magistradoRestricao", "_restricaoTipo", "_preparoAJG", "_preparoBeforeAJG",
+                "_ajgFromDpu", "_dpuAuto", "_ajgAuto", "_autoMetaTags"],
+    "producao": ["SERVIDOR", "MINUTADO", "_ementa", "_genV", "_recursos", "_contras", "_minutadoBy",
+                 "_minutadoSession", "_prontoParaCorrecao"],
+    "pauta": ["Status de Julgamento", "Sessão original", "Sessão Destino", "JULGAMENTO", "_pautaEntries", "_pautaHistory"],
+}
+GERAL = ["baixado", "fora_do_fonte"]
+
+
+def secionar(o):
+    """Registro plano → {processo, geral, triagem, producao, pauta}. Idempotente."""
+    painel = o.pop("_painel", {}) or {}
+    novo = {"processo": o.pop("processo")}
+    plano = {**painel, **o}
+    for s in ("geral", "triagem", "producao", "pauta"):
+        sub = plano.pop(s, None)
+        if isinstance(sub, dict):
+            plano.update({k: v for k, v in sub.items() if k != "sessoes"})
+            if s == "pauta" and "sessoes" in sub:
+                plano["pautas"] = sub["sessoes"]
+    geral = {k: plano.pop(k) for k in GERAL if k in plano}
+    geral["atualizado_em"] = plano.pop("atualizado_em", "")
+    novo["geral"] = geral
+    for s, campos in SECOES.items():
+        novo[s] = {c: plano.pop(c) for c in campos if c in plano and not vazio(plano[c])}
+    novo["pauta"]["sessoes"] = plano.pop("pautas", [])          # histórico: sessão, item, resultado
+    for k in list(plano):                                       # o que sobrar vai para geral
+        if not vazio(plano[k]):
+            novo["geral"][k] = plano.pop(k)
+    return novo
+
+
+def organizar(raiz=Path(".")):
+    po = raiz / "acervo/operacional.json"
+    oper = json.loads(po.read_text(encoding="utf-8"))
+    oper["schema_versao"] = 2
+    oper["registros"] = [secionar(r) for r in oper["registros"]]
+    oper["secoes"] = {
+        "geral": "situação do registro (baixado, fora do fonte), atualização e demais informações gerais",
+        "triagem": SECOES["triagem"], "producao": SECOES["producao"],
+        "pauta": SECOES["pauta"] + ["sessoes: [{sessao, item, resultado}] · histórico de inclusões, retiradas e adiamentos"],
+    }
+    oper.pop("colunas", None)
+    po.write_text(json.dumps(oper, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print("operacional organizado em seções:", len(oper["registros"]), "registros")
+
+
 if __name__ == "__main__":
     main()
+    organizar(Path(".") if len(__import__("sys").argv) < 3 else Path(__import__("sys").argv[2]))
