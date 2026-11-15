@@ -1,7 +1,8 @@
 /* Avisos e notificações do gestor (acesso restrito: CMT_GESTOR). Arquivo apoio/equipe-avisos.json, o mesmo que o CMT-monitor usa.
-   GET    /api/avisos             todos os avisos (gestão)
-   POST   /api/avisos {title, message, link, linkTxt, nivel, painel, notificacao, para[], ate, fixo}
-   DELETE /api/avisos?id=…        retira um aviso */
+   Servido por /api/notificacoes?gestao=1 (o plano Hobby da Vercel aceita no máximo 12 funções; arquivos com _ não contam).
+   GET    /api/notificacoes?gestao=1             todos os avisos (gestão)
+   POST   /api/notificacoes?gestao=1 {title, message, link, linkTxt, nivel, painel, notificacao, para[], ate, fixo}
+   DELETE /api/notificacoes?gestao=1&id=…        retira um aviso */
 const L = require('./_lib');
 const ARQ = 'apoio/equipe-avisos.json', NIVEIS = ['info', 'importante', 'urgente'];
 async function ler() { try { return await L.lerJson(ARQ); } catch (e) { if (e.status === 404) return { dados: { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] }, sha: undefined }; throw e; } }

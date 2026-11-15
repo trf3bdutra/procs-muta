@@ -4,6 +4,7 @@
 const L = require('./_lib');
 const opc = rel => L.lerJson(rel).then(x => x.dados).catch(() => null);
 module.exports = async (req, res) => {
+  if (req.query && req.query.gestao) return require('./_avisos')(req, res);
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
   try {
