@@ -41,7 +41,7 @@ const extra = r => { try { return JSON.parse((r.controles || {})[EXTRA] || '{}')
 function item(r) {
   const p = r.producao || {}, c = r.controles || {}, x = extra(r), ctl = Object.assign({}, x, FICHA.paraCtl(r));
   if (ctl.urgTipo) { ctl.urgEm = ctl.urgPedido || ''; }
-  const cart = FICHA.paraCartao(r, x.cartao); if (Object.keys(cart).length) ctl.cartao = cart;
+  const cart = FICHA.cartaoDaFicha(r, x.cartao); if (Object.keys(cart).length) ctl.cartao = cart;
   ctl.editadoPor = c['Monocrática - Atualizado por'] || ''; ctl.editadoEm = c['Monocrática - Atualizado em'] || '';
   return { cnj: r.processo, mono: p.Destino === 'Monocrática', monoEm: c['Monocrática - Registrada em'] || '', obs: c['Monocrática - Observação'] || '',
     servidor: p.SERVIDOR || '', corretor: p.CORRETOR || '', dataMinuta: p.MINUTADO || '', dataCorrecao: p['Data da Revisão'] || '', dataLiberacao: p['Data da Liberação'] || '', ctl };

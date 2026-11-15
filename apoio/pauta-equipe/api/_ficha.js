@@ -72,8 +72,61 @@ const V = {
   urgPainel: v => ({ triagem: { 'Urgência - Painel': v } }),
   /* Controles especiais · monocrática: destino e observação ficam a cargo de _mono.js (a pauta também tem 'obs') */
   hip932: v => ({ triagem: { 'Hipóteses Monocrática': v } }),
-  tipoAto: v => ({ producao: { 'Mono - Tipo de ato': v } }), fundamento: v => ({ producao: { 'Mono - Fundamento': v } })
+  tipoAto: v => ({ producao: { 'Mono - Tipo de ato': v } }), fundamento: v => ({ producao: { 'Mono - Fundamento': v } }),
+  /* registro da monocrática marca o destino na ficha; urgPedido é o nome usado pelo formulário de urgência */
+  mono: v => ({ producao: { 'Destino': v && v !== 'false' ? 'Monocrática' : '' } })
 };
+/* ficha → cartão (volta): só o que tem correspondência sem ambiguidade; o cartão guarda o vocabulário da equipe */
+const LISTAS = {
+  resJulg: ['Provido', 'Parcialmente provido', 'Desprovido', 'Não conhecido', 'Prejudicado', 'Rejeitados', 'Acolhidos sem efeito infringente', 'Acolhidos com efeito infringente', 'Retratação exercida', 'Acórdão mantido'],
+  honor: ['Majorados', 'Mantidos', 'Invertidos', 'Fixados', 'Redistribuídos', 'Sem honorários recursais'], prelim: ['Sem preliminares', 'Há preliminares', 'Preliminar de ofício'], simnao: ['Sim', 'Não']
+};
+const naLista = (L, v) => L.find(x => x.toLowerCase() === String(v || '').trim().toLowerCase()) || null;
+function paraCartao(mud, it) {
+  const c = (it && it.ctl) || {}, d = {}, k = {}, cart = {}, t = mud.triagem || {}, p = mud.producao || {}, tem = (o, x) => Object.prototype.hasOwnProperty.call(o, x);
+  if (tem(t, 'Tempestividade')) k.tempest = /^(Tempestivo|Intempestivo)$/.test(t.Tempestividade) ? t.Tempestividade : '';
+  if (tem(t, 'Preparo')) k.preparo = { 'Comprovado': 'Comprovado', 'Não Recolhido': 'Não recolhido', 'Não se Aplica': 'Não se aplica' }[t.Preparo] ||
+    (t.Preparo === 'Dispensado' ? (/^(Justiça gratuita|Isento)/.test(c.preparo || '') ? c.preparo : 'Justiça gratuita') : '');
+  if (tem(t, 'Representação')) k.repres = t['Representação'] === 'Regular' ? (/^Dispensada/.test(c.repres || '') ? c.repres : 'Regular') : t['Representação'] === 'Negativo' ? 'Irregular – intimar' : '';
+  if (tem(t, 'Mídias')) k.midias = { 'Juntada': 'Juntadas', 'Faltante': 'Faltantes', 'Não se Aplica': 'Não se aplica' }[t['Mídias']] || '';
+  if (tem(t, 'MPF')) k.parecer = t.MPF === 'Com Parecer' ? 'Com parecer' : t.MPF === 'Sem Parecer' ? (/^(Aguardando|Intimado)/.test(c.parecer || '') ? c.parecer : 'Aguardando parecer') : '';
+  if (tem(t, 'Prelim.') && (naLista(LISTAS.prelim, t['Prelim.']) || !t['Prelim.'])) k.prelim = naLista(LISTAS.prelim, t['Prelim.']) || '';
+  if (tem(t, 'Intercorrências')) k.intercor = t['Intercorrências'];
+  if (tem(p, 'Voto - Resultado') && (naLista(LISTAS.resJulg, p['Voto - Resultado']) || !p['Voto - Resultado'])) k.resJulg = naLista(LISTAS.resJulg, p['Voto - Resultado']) || '';
+  if (tem(p, 'Voto - Honorários') && (naLista(LISTAS.honor, p['Voto - Honorários']) || !p['Voto - Honorários'])) k.honor = naLista(LISTAS.honor, p['Voto - Honorários']) || '';
+  if (tem(p, 'Tópico-síntese') && naLista(LISTAS.simnao, p['Tópico-síntese'])) k.topico = naLista(LISTAS.simnao, p['Tópico-síntese']);
+  if (tem(p, 'MINUTADO') && /^(\d{4}-\d{2}-\d{2})?$/.test(p.MINUTADO)) d.dataMinuta = p.MINUTADO;
+  if (tem(p, 'Data da Revisão') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Revisão'])) d.dataCorrecao = p['Data da Revisão'];
+  if (tem(p, 'Data da Liberação') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Liberação'])) d.dataLiberacao = p['Data da Liberação'];
+  if (tem(p, 'SERVIDOR')) d.servidor = p.SERVIDOR;
+  if (tem(p, 'CORRETOR')) d.corretor = p.CORRETOR;
+  const C2 = { 'Especificidades': 'especificidades', 'Alegações': 'questoes', 'Tipo de Julgamento': 'tipoJ' };
+  Object.keys(C2).forEach(x => { if (tem(t, x)) cart[C2[x]] = t[x]; });
+  if (tem(t, 'Parecer - Sentido') || tem(t, 'ID do Parecer MPF')) { cart.mpfx = Object.assign({}, (c.cartao || {}).mpfx); if (tem(t, 'Parecer - Sentido')) cart.mpfx.sentido = t['Parecer - Sentido']; if (tem(t, 'ID do Parecer MPF')) cart.mpfx.id = t['ID do Parecer MPF']; }
+  if (tem(t, 'Tempest - Publicação') || tem(t, 'Tempest - Protocolo')) { cart.adm = Object.assign({}, (c.cartao || {}).adm); if (tem(t, 'Tempest - Publicação')) cart.adm.intim = t['Tempest - Publicação']; if (tem(t, 'Tempest - Protocolo')) cart.adm.prot = t['Tempest - Protocolo']; }
+  if (tem(p, 'Voto - Descrição')) { cart.jul = Object.assign({}, (c.cartao || {}).jul, { fund: p['Voto - Descrição'] }); }
+  return { d, k, cart };
+}
+/* aplica a volta num item da pauta ou das monocráticas; devolve true se mudou */
+function aplicaCartao(it, v, u) {
+  let m = false; it.ctl = it.ctl || {};
+  Object.keys(v.d).forEach(x => { if ((it[x] || '') !== v.d[x]) { it[x] = v.d[x]; m = true; } });
+  Object.keys(v.k).forEach(x => { const val = v.k[x]; if ((it.ctl[x] || '') !== val) { if (val) it.ctl[x] = val; else delete it.ctl[x]; m = true; } });
+  if (Object.keys(v.cart).length) { const ant = it.ctl.cartao || {}; Object.keys(v.cart).forEach(x => { if (JSON.stringify(ant[x]) !== JSON.stringify(v.cart[x])) { ant[x] = v.cart[x]; m = true; } }); it.ctl.cartao = ant; }
+  if (m) { it.ctl.editadoPor = u; it.ctl.editadoEm = agora(); }
+  return m;
+}
+/* arquivos onde o processo aparece hoje: pautas de sessões de hoje em diante e monocráticas/urgências */
+async function ondeEsta(cnj) {
+  const k = dg(cnj), hoje = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10), out = [];
+  const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
+  for (const s of (cal.sessoes || []).filter(s => s.date >= hoje)) {
+    try { const rel = 'acervo/sessoes/' + s.date + '.json', { dados, sha } = await L.lerJson(rel);
+      const its = (dados.itens || []).concat(dados.previa || []).filter(i => dg(i.cnj) === k); if (its.length) out.push({ path: rel, dados, sha, its }); } catch (e) { if (e.status !== 404) throw e; }
+  }
+  /* monocráticas e urgências não têm arquivo próprio: leem o operacional, gravado neste mesmo commit */
+  return out;
+}
 const VC = {
   tipoJ: v => ({ triagem: { 'Tipo de Julgamento': v } }), especificidades: v => ({ triagem: { 'Especificidades': v } }), questoes: v => ({ triagem: { 'Alegações': v } }),
   'mpfx.sentido': v => ({ triagem: { 'Parecer - Sentido': v } }), 'mpfx.id': v => ({ triagem: { 'ID do Parecer MPF': v } }),
@@ -118,14 +171,14 @@ const VCI = { tipoJ: ['triagem', 'Tipo de Julgamento'], especificidades: ['triag
   'mpfx.sentido': ['triagem', 'Parecer - Sentido'], 'mpfx.id': ['triagem', 'ID do Parecer MPF'], 'adm.intim': ['triagem', 'Tempest - Publicação'],
   'adm.prot': ['triagem', 'Tempest - Protocolo'], 'adm.prazo': ['triagem', 'Tempest - Prazo legal'], 'adm.dobro': ['triagem', 'Tempest - Dobro', 1], 'adm.ajg': ['triagem', 'AJG', 1],
   'jul.fund': ['producao', 'Voto - Descrição'], 'jul.topico': ['producao', 'Tópico-síntese'] };
-function paraCartao(r, base) {
+function cartaoDaFicha(r, base) {
   const c = JSON.parse(JSON.stringify(base || {}));
   Object.keys(VCI).forEach(p => { const [s, k, b] = VCI[p], v = ((r && r[s]) || {})[k]; if (!v) return;
     const ks = p.split('.'); let o = c; ks.slice(0, -1).forEach(x => { o = o[x] = (o[x] && typeof o[x] === 'object') ? o[x] : {}; }); o[ks[ks.length - 1]] = b ? v === 'Sim' : v; });
   return c;
 }
 /* grava {secao: {chave: valor}} no registro do processo (cria se faltar), com nova tentativa se o arquivo mudou no meio */
-async function gravar(cnj, mud, msg, extra, u) {
+async function gravar(cnj, mud, msg, extra, u, outros) {
   const F = await ficha();
   for (let t = 0; t < 4; t++) {
     const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mud);
@@ -133,7 +186,8 @@ async function gravar(cnj, mud, msg, extra, u) {
     if (!out.length) return { r, out };
     regras(r, out, u);
     doc.atualizado_em = agora();
-    try { await commitConferido([{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], msg + ' · ' + out.slice(0, 6).join(', ')); return { r, out }; }
+    const arqs = [{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], mais = outros ? await outros(r, out) : [];
+    try { await commitConferido(arqs.concat(mais), msg + ' · ' + out.slice(0, 6).join(', ') + (mais.length ? '\n\nCartão atualizado em: ' + mais.map(x => x.path).join(', ') : '')); return { r, out }; }
     catch (e) { if (e.status !== 409) throw e; }
   }
   const e = new Error('A ficha mudou várias vezes seguidas; tente de novo.'); e.status = 409; throw e;
@@ -182,8 +236,17 @@ module.exports = async (req, res, u) => {
       const i = k.indexOf('.'); (mud[k.slice(0, i)] = mud[k.slice(0, i)] || {})[k.slice(i + 1)] = C[k];
     });
     if (!Object.keys(mud).length) return res.status(400).json({ erro: 'nenhum campo editável', recusados: recus });
-    const { r, out } = await gravar(cnj, mud, 'Ficha (' + u + '): ' + cnj, null, u);
-    return res.status(200).json(Object.assign({ ok: true, operacional: r, recusados: recus }, out.length ? {} : { semMudanca: true }));
+    /* volta: o que tem correspondência no cartão é gravado também na pauta das sessões onde o processo está, no mesmo commit */
+    const cart = [];
+    const { r, out } = await gravar(cnj, mud, 'Ficha (' + u + '): ' + cnj, null, u, async () => {
+      const arqs = []; cart.length = 0;
+      for (const a of await ondeEsta(cnj)) {
+        let mudou = false; a.its.forEach(it => { if (aplicaCartao(it, paraCartao(mud, it), u)) mudou = true; });
+        if (mudou) { a.dados.atualizadoEm = agora(); arqs.push({ path: a.path, txt: JSON.stringify(a.dados, null, 1) + '\n', sha: a.sha }); cart.push(a.path); }
+      }
+      return arqs;
+    });
+    return res.status(200).json(Object.assign({ ok: true, operacional: r, recusados: recus, cartoes: cart }, out.length ? {} : { semMudanca: true }));
   } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
 /* quais grupos dos Controles especiais valem para o processo */
@@ -195,7 +258,8 @@ function ativos(op, lista) {
 module.exports.espelho = espelho;
 module.exports.gravar = gravar;
 module.exports.paraCtl = paraCtl;
-module.exports.paraCartao = paraCartao;
+module.exports.cartaoDaFicha = cartaoDaFicha;
 module.exports.lerOp = lerOp;
 module.exports.ativos = ativos;
 module.exports.doCartao = doCartao;
+module.exports.paraCartao = paraCartao;
