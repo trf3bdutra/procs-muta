@@ -35,7 +35,7 @@ padrao/                        regras técnicas da base
 
 gerar.py                       valida a base, atualiza o manifesto e importa exportações dos apps
 scripts/                       rotinas auxiliares (DataJud, catálogo, modelos-matriz, apps)
-cmt-monitor.html               CMT-monitor: abas Acervo (página do Acervo Central com indicadores, fases e tarefas do PJe, busca, critérios e cartões; painel esquerdo com o acervo do gabinete e os dados; painel direito com as estatísticas do filtro), Triagem, Seleção Prévia, Pautas de julgamento e Planilha integral (só leitura); Configurações com as regras e a equipe
+cmt-monitor.html               CMT-monitor: menu Acervo com três páginas (Acervo Central: cartão Acervo filtrado com as situações, busca, critérios, fases e tarefas do PJe e cartões, painel esquerdo com o acervo do gabinete e os dados, painel direito com as estatísticas do filtro; Panorama geral: indicadores, visão geral, painel por blocos e relatórios, sobre o acervo ativo inteiro; Planilha integral, só leitura), Triagem, Seleção Prévia e Pautas de julgamento; Configurações com as regras e a equipe
 cmt-fluxograma.html            CMT-fluxograma: fluxograma interativo, rotina do gabinete, competência e impedimentos, assuntos e procedimentos
 construtor.html · index.html   apps (ver observação abaixo)
 ```
@@ -67,7 +67,7 @@ O **CMT-monitor** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta 
 
 - lê `acervo/fonte.json`, o acervo fonte (DataJud e planilhas); em cada informação repetida vale a coluna do PJe, depois a do Power BI, depois a do DataJud;
 - tira a seção e o ramo do assunto do CNJ: `apoio/assuntos-cnj.json` (árvore da TPU, atualizada toda segunda-feira pelo workflow `cnj-assuntos`) e `apoio/regras/secoes.json` (RI TRF3, art. 10); a etiqueta de seção do PJe só gera alerta quando diverge;
-- `acervo/blocos-destinos.html`: painel por blocos e destinos prováveis (retrato de 04/11/2026, sem CPF), aberto pelo Acervo › Painel por blocos;
+- `acervo/blocos-destinos.html`: painel por blocos e destinos prováveis (retrato de 04/11/2026, sem CPF), exibido em Acervo › Panorama geral;
 - o acervo conta por padrão os processos ativos (sem arquivados, baixados, cancelados, fora de tramitação e eliminados); os que ainda não têm tarefa no PJe do gabinete aparecem em "A caminho do gabinete", fora das contagens;
 - grava o calendário de sessões (datas, hora e marcos) em `acervo/sessoes/calendario.json` e a pauta de cada sessão (item, quem minuta, quem corrige e as datas de minuta, correção e liberação) em `acervo/sessoes/AAAA-MM-DD.json`;
 - grava as regras em `apoio/regras/etiquetas.json` (conversão de etiquetas) e `apoio/regras/designacao.json` (critérios de designação e correção), e a equipe em `apoio/equipe.json`; as regras de impedimento e suspeição ficam em `apoio/regras/impedimentos.json` (sem CPF);
