@@ -28,7 +28,7 @@ jobs:
           for attempt in 1 2 3; do
             base=$(git rev-parse origin/main 2>/dev/null || git rev-parse HEAD)
             python3 scripts/datajud/sincronizar_banco.py --acervo . --aplicar --chave-wiki
-            git add acervo/acervo.json acervo/acervo.csv acervo/datajud
+            git add acervo/fonte.json acervo/fonte.csv acervo/datajud
             if git diff --cached --quiet; then echo 'Acervo em dia; sem commit.'; exit 0; fi
             git commit -m 'Acervo: atualização DataJud'
             if git push origin HEAD:main; then exit 0; fi

@@ -1,7 +1,8 @@
 {
  "schema": "gabcmt.regras.designacao",
  "versao": 1,
- "atualizadoEm": "2026-11-14T23:47:01+00:00",
+ "atualizadoEm": "2026-11-15T00:15:08+00:00",
+ "origem": "CMT-Triagem (regras-designacao-e-correcao.xlsx)",
  "criterios": {
   "ordem": [
    "julg",
@@ -37,7 +38,968 @@
     "c": true
    }
   },
-  "rows": {},
+  "rows": {
+   "esp:3ª secao": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "3ª Seção"
+   },
+   "esp:alteracao do coeficiente de calculo do beneficio": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "Alteração do coeficiente de cálculo do benefício"
+   },
+   "esp:ambiental": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Ambiental"
+   },
+   "esp:anulacao e correcao de provas / questoes": {
+    "d": "Rodrigo",
+    "c": "Saffioti",
+    "cap": "Anulação e Correção de Provas / Questões"
+   },
+   "esp:aposentadoria especial (art. 57/8)": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Aposentadoria Especial (Art. 57/8)"
+   },
+   "esp:aposentadoria por incapacidade permanente": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Aposentadoria por Incapacidade Permanente"
+   },
+   "esp:aposentadoria por tempo de contribuicao (art. 55/6)": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   },
+   "esp:ato lesivo ao patrimonio artistico, estetico, historico ou turistico": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico"
+   },
+   "esp:averbacao/computo de tempo de servico rural (empregado/empregador)": {
+    "d": "Debora",
+    "c": "",
+    "cap": "Averbação/Cômputo de tempo de serviço rural (empregado/empregador)"
+   },
+   "esp:beneficio assistencial (art. 203,v cf/88)": {
+    "d": "Dalete",
+    "c": "",
+    "cap": "Benefício Assistencial (Art. 203,V CF/88)"
+   },
+   "esp:calculo do fator previdenciario - lei 9.876/99": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Cálculo do fator previdenciário - Lei 9.876/99"
+   },
+   "esp:cessao de creditos nao-tributarios": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Cessão de créditos não-tributários"
+   },
+   "esp:cofins": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Cofins"
+   },
+   "esp:conselhos regionais e afins (anuidade)": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Conselhos Regionais e Afins (Anuidade)"
+   },
+   "esp:contratos bancarios": {
+    "d": "",
+    "c": "Vanilda",
+    "cap": "Contratos Bancários"
+   },
+   "esp:contribuicoes previdenciarias": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Contribuições Previdenciárias"
+   },
+   "esp:convalidacao de estudos e reconhecimento de diploma": {
+    "d": "Victor",
+    "c": "Vanilda",
+    "cap": "Convalidação de Estudos e Reconhecimento de Diploma"
+   },
+   "esp:correcao monetaria de diferencas pagas em atraso": {
+    "d": "Rodrigo",
+    "c": "",
+    "cap": "Correção Monetária de Diferenças Pagas em Atraso"
+   },
+   "esp:direitos indigenas": {
+    "d": "",
+    "c": "Saffioti",
+    "cap": "Direitos Indígenas"
+   },
+   "esp:esbulho / turbacao / ameaca": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Esbulho / Turbação / Ameaça"
+   },
+   "esp:fgts/fundo de garantia por tempo de servico": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "FGTS/Fundo de Garantia Por Tempo de Serviço"
+   },
+   "esp:fundo de saude do exercito - fusex": {
+    "d": "",
+    "c": "Vanilda",
+    "cap": "Fundo de Saúde do Exército - FUSEX"
+   },
+   "esp:hibrida (art. 48/106)": {
+    "d": "Debora",
+    "c": "",
+    "cap": "Híbrida (Art. 48/106)"
+   },
+   "esp:impostos": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Impostos"
+   },
+   "esp:incapacidade laborativa permanente": {
+    "d": "Dalete",
+    "c": "",
+    "cap": "Incapacidade Laborativa Permanente"
+   },
+   "esp:indenizacao por dano moral": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Indenização por Dano Moral"
+   },
+   "esp:indice de 28,86% lei 8.622/1993 e 8.627/1993": {
+    "d": "Rodrigo",
+    "c": "Bruno",
+    "cap": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   },
+   "esp:inquerito / processo / recurso administrativo": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Inquérito / Processo / Recurso Administrativo"
+   },
+   "esp:irpj/imposto de renda de pessoa juridica": {
+    "d": "José",
+    "c": "Vanilda",
+    "cap": "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   },
+   "esp:microempresa": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Microempresa"
+   },
+   "esp:multas e demais sancoes": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Multas e demais Sanções"
+   },
+   "esp:pensao por morte (art. 74/9)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Pensão por Morte (Art. 74/9)"
+   },
+   "esp:pessoa com deficiencia": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Pessoa com Deficiência"
+   },
+   "esp:professor": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Professor"
+   },
+   "esp:reintegracao": {
+    "d": "José",
+    "c": "",
+    "cap": "Reintegração"
+   },
+   "esp:remocao": {
+    "d": "Maria Eduarda",
+    "c": "",
+    "cap": "Remoção"
+   },
+   "esp:restituicao de area - funai": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Restituição de área - FUNAI"
+   },
+   "esp:rmi - renda mensal inicial": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "RMI - Renda Mensal Inicial"
+   },
+   "esp:rural (art. 48/51)": {
+    "d": "Debora",
+    "c": "",
+    "cap": "Rural (Art. 48/51)"
+   },
+   "esp:salario-maternidade (art. 71/73)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Salário-Maternidade (Art. 71/73)"
+   },
+   "esp:seguro-defeso ao pescado artesanal profissional": {
+    "d": "Dalete",
+    "c": "",
+    "cap": "Seguro-defeso ao pescado artesanal profissional"
+   },
+   "esp:urbana (art. 48/51)": {
+    "d": "Dalete",
+    "c": "",
+    "cap": "Urbana (Art. 48/51)"
+   },
+   "hist:alteracao do coeficiente de calculo do beneficio": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "Alteração do coeficiente de cálculo do benefício"
+   },
+   "hist:ambiental": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Ambiental"
+   },
+   "hist:aposentadoria especial (art. 57/8)": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Aposentadoria Especial (Art. 57/8)"
+   },
+   "hist:aposentadoria especial (art. 57/8); aposentadoria por tempo de contribuicao (art. 55/6); concessao; averbacao/computo/conversao de tempo de servico especial; honorarios advocaticios; custas": {
+    "d": "Rodrigo",
+    "c": "",
+    "cap": "Aposentadoria Especial (Art. 57/8); Aposentadoria por Tempo de Contribuição (Art. 55/6); Concessão; Averbação/Cômputo/Conversão de tempo de serviço especial; Honorários Advocatícios; Custas"
+   },
+   "hist:aposentadoria hibrida (art. 48/106)": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Aposentadoria Híbrida (Art. 48/106)"
+   },
+   "hist:aposentadoria por incapacidade permanente": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Aposentadoria por Incapacidade Permanente"
+   },
+   "hist:aposentadoria por tempo de contribuicao (art. 55/6)": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   },
+   "hist:aposentadoria rural (art. 48/51)": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Aposentadoria Rural (Art. 48/51)"
+   },
+   "hist:aposentadoria urbana (art. 48/51)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Aposentadoria Urbana (Art. 48/51)"
+   },
+   "hist:assistencia judiciaria gratuita; custas; nao padronizado": {
+    "d": "Debora",
+    "c": "",
+    "cap": "Assistência Judiciária Gratuita; Custas; Não padronizado"
+   },
+   "hist:auxilio por incapacidade temporaria": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Auxílio por Incapacidade Temporária"
+   },
+   "hist:auxilio-moradia": {
+    "d": "Maria Eduarda",
+    "c": "",
+    "cap": "Auxílio-Moradia"
+   },
+   "hist:averbacao/computo de tempo de servico rural (empregado/empregador)": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+   },
+   "hist:beneficio assistencial (art. 203,v cf/88)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Benefício Assistencial (Art. 203,V CF/88)"
+   },
+   "hist:calculo do fator previdenciario - lei 9.876/99": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Cálculo do fator previdenciário - Lei 9.876/99"
+   },
+   "hist:conselhos regionais e afins (anuidade)": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Conselhos Regionais e Afins (Anuidade)"
+   },
+   "hist:contribuicoes previdenciarias": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Contribuições Previdenciárias"
+   },
+   "hist:convalidacao de estudos e reconhecimento de diploma": {
+    "d": "Victor",
+    "c": "Vanilda",
+    "cap": "Convalidação de Estudos e Reconhecimento de Diploma"
+   },
+   "hist:correcao monetaria de diferencas pagas em atraso": {
+    "d": "Rodrigo",
+    "c": "",
+    "cap": "Correção Monetária de Diferenças Pagas em Atraso"
+   },
+   "hist:direito de imagem": {
+    "d": "Maria Eduarda",
+    "c": "",
+    "cap": "Direito de Imagem"
+   },
+   "hist:direitos indigenas": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Direitos Indígenas"
+   },
+   "hist:esbulho / turbacao / ameaca": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Esbulho / Turbação / Ameaça"
+   },
+   "hist:fgts/fundo de garantia por tempo de servico": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "FGTS/Fundo de Garantia Por Tempo de Serviço"
+   },
+   "hist:fies": {
+    "d": "Victor",
+    "c": "",
+    "cap": "FIES"
+   },
+   "hist:filho maior e invalido": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Filho Maior e Inválido"
+   },
+   "hist:impostos": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Impostos"
+   },
+   "hist:incapacidade laborativa permanente": {
+    "d": "Dalete",
+    "c": "",
+    "cap": "Incapacidade Laborativa Permanente"
+   },
+   "hist:indice de 28,86% lei 8.622/1993 e 8.627/1993": {
+    "d": "Rodrigo",
+    "c": "Bruno",
+    "cap": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   },
+   "hist:inquerito / processo / recurso administrativo": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Inquérito / Processo / Recurso Administrativo"
+   },
+   "hist:microempresa": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Microempresa"
+   },
+   "hist:multas e demais sancoes": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Multas e demais Sanções"
+   },
+   "hist:pensao por morte (art. 74/9)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Pensão por Morte (Art. 74/9)"
+   },
+   "hist:pessoa com deficiencia": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Pessoa com Deficiência"
+   },
+   "hist:professor": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Professor"
+   },
+   "hist:reajustes e revisoes especificos": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Reajustes e Revisões Específicos"
+   },
+   "hist:reforma": {
+    "d": "Maria Eduarda",
+    "c": "",
+    "cap": "Reforma"
+   },
+   "hist:reintegracao": {
+    "d": "José",
+    "c": "",
+    "cap": "Reintegração"
+   },
+   "hist:rmi - renda mensal inicial": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "RMI - Renda Mensal Inicial"
+   },
+   "hist:salario-maternidade (art. 71/73)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Salário-Maternidade (Art. 71/73)"
+   },
+   "hist:seguro-defeso ao pescado artesanal profissional": {
+    "d": "Dalete",
+    "c": "",
+    "cap": "Seguro-defeso ao pescado artesanal profissional"
+   },
+   "julg:agint": {
+    "d": "",
+    "c": "Vanilda",
+    "cap": "AgInt"
+   },
+   "julg:ed": {
+    "d": "",
+    "c": "Vanilda",
+    "cap": "ED"
+   },
+   "julg:jr": {
+    "d": "",
+    "c": "Vanilda",
+    "cap": "JR"
+   },
+   "julg:meta": {
+    "d": "",
+    "c": "Saffioti",
+    "cap": "META"
+   },
+   "pron:decisao monocratica": {
+    "d": "",
+    "c": "Saffioti",
+    "cap": "Decisão monocrática"
+   },
+   "sec:3ª secao": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "3ª Seção"
+   },
+   "tema:1/3 de ferias": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "1/3 de férias"
+   },
+   "tema:acesso": {
+    "d": "",
+    "c": "Vanilda",
+    "cap": "ACESSO"
+   },
+   "tema:ambiental": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Ambiental"
+   },
+   "tema:anulacao": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Anulação"
+   },
+   "tema:anulacao e correcao de provas / questoes": {
+    "d": "Rodrigo",
+    "c": "Saffioti",
+    "cap": "Anulação e Correção de Provas / Questões"
+   },
+   "tema:apelacao do inss apenas dos consectarios": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "apelação do INSS apenas dos consectários"
+   },
+   "tema:aposentadoria especial (art. 57/8)": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Aposentadoria Especial (Art. 57/8)"
+   },
+   "tema:aposentadoria hibrida (art. 48/106)": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Aposentadoria Híbrida (Art. 48/106)"
+   },
+   "tema:aposentadoria por idade (art. 48/51)": {
+    "d": "Debora",
+    "c": "Vanilda",
+    "cap": "Aposentadoria por Idade (Art. 48/51)"
+   },
+   "tema:aposentadoria por incapacidade permanente": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Aposentadoria por Incapacidade Permanente"
+   },
+   "tema:aposentadoria por tempo de contribuicao (art. 55/6)": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   },
+   "tema:aposentadoria rural (art. 48/51)": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Aposentadoria Rural (Art. 48/51)"
+   },
+   "tema:aposentadoria urbana (art. 48/51)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Aposentadoria Urbana (Art. 48/51)"
+   },
+   "tema:apreensao": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Apreensão"
+   },
+   "tema:aptc pcd": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "APTC PCD"
+   },
+   "tema:assistencia a saude": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Assistência à Saúde"
+   },
+   "tema:ato lesivo ao patrimonio artistico, estetico, historico ou turistico": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico"
+   },
+   "tema:auxilio por incapacidade temporaria": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Auxílio por Incapacidade Temporária"
+   },
+   "tema:averbacao/computo de tempo de servico rural (empregado/empregador)": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+   },
+   "tema:averbacao/computo/conversao de tempo de servico especial": {
+    "d": "Debora",
+    "c": "Saffioti",
+    "cap": "Averbação/Cômputo/Conversão de tempo de serviço especial"
+   },
+   "tema:calculo do fator previdenciario - lei 9.876/99": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Cálculo do fator previdenciário - Lei 9.876/99"
+   },
+   "tema:cedula de credito bancario": {
+    "d": "Rodrigo",
+    "c": "Vanilda",
+    "cap": "Cédula de Crédito Bancário"
+   },
+   "tema:cedula de credito rural": {
+    "d": "Rodrigo",
+    "c": "Saffioti",
+    "cap": "Cédula de Crédito Rural"
+   },
+   "tema:cessao de creditos nao-tributarios": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Cessão de créditos não-tributários"
+   },
+   "tema:cofins": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Cofins"
+   },
+   "tema:consectarios-juros": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "Consectários-juros"
+   },
+   "tema:conselhos regionais e afins (anuidade)": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Conselhos Regionais e Afins (Anuidade)"
+   },
+   "tema:contrato administrativo": {
+    "d": "Maria Eduarda",
+    "c": "Vanilda",
+    "cap": "Contrato Administrativo"
+   },
+   "tema:contribuicao de intervencao no dominio economico (cide)": {
+    "d": "José",
+    "c": "Saffioti",
+    "cap": "Contribuição de Intervenção no Domínio Econômico (CIDE)"
+   },
+   "tema:contribuicao sobre a folha de salarios": {
+    "d": "José",
+    "c": "Alexander",
+    "cap": "Contribuição sobre a folha de salários"
+   },
+   "tema:contribuicao social sobre o lucro liquido": {
+    "d": "José",
+    "c": "Renato",
+    "cap": "Contribuição Social sobre o Lucro Líquido"
+   },
+   "tema:contribuicoes para o sebrae, sesc, senac, senai e outros": {
+    "d": "José",
+    "c": "Saffioti",
+    "cap": "Contribuições para o SEBRAE, SESC, SENAC, SENAI e outros"
+   },
+   "tema:contribuicoes previdenciarias": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Contribuições Previdenciárias"
+   },
+   "tema:convalidacao de estudos e reconhecimento de diploma": {
+    "d": "Victor",
+    "c": "Vanilda",
+    "cap": "Convalidação de Estudos e Reconhecimento de Diploma"
+   },
+   "tema:credito rural": {
+    "d": "Rodrigo",
+    "c": "Vanilda",
+    "cap": "Crédito Rural"
+   },
+   "tema:dano ambiental": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Dano Ambiental"
+   },
+   "tema:dano ao erario": {
+    "d": "Maria Eduarda",
+    "c": "Vanilda",
+    "cap": "Dano ao Erário"
+   },
+   "tema:demarcacao": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Demarcação"
+   },
+   "tema:desconto em folha de pagamento/beneficio previdenciario": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Desconto em Folha de Pagamento/Benefício Previdenciário"
+   },
+   "tema:direitos indigenas": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Direitos Indígenas"
+   },
+   "tema:ed": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "ED"
+   },
+   "tema:ed aposentadoria por incapacidade permanente": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "ED Aposentadoria por Incapacidade Permanente"
+   },
+   "tema:ed aposentadoria por incapacidade sumula 47/tnu": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "ED Aposentadoria por Incapacidade Súmula 47/TNU"
+   },
+   "tema:ed calculo": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "ED cálculo"
+   },
+   "tema:ed consectarios - tema 1457 stf": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "ED consectários - tema 1457 STF"
+   },
+   "tema:ed indigena": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "ED indígena"
+   },
+   "tema:eletricidade - acima de 250 volts": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Eletricidade - acima de 250 volts"
+   },
+   "tema:emprestimo consignado": {
+    "d": "Maria Eduarda",
+    "c": "",
+    "cap": "Empréstimo consignado"
+   },
+   "tema:esbulho / turbacao / ameaca": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Esbulho / Turbação / Ameaça"
+   },
+   "tema:exame da ordem oab": {
+    "d": "Victor",
+    "c": "Renato",
+    "cap": "Exame da Ordem OAB"
+   },
+   "tema:exames de certificacao - diploma": {
+    "d": "Victor",
+    "c": "",
+    "cap": "Exames de certificação - Diploma"
+   },
+   "tema:expurgos inflacionarios / planos economicos": {
+    "d": "Rodrigo",
+    "c": "Saffioti",
+    "cap": "Expurgos Inflacionários / Planos Econômicos"
+   },
+   "tema:fgts/fundo de garantia por tempo de servico": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "FGTS/Fundo de Garantia Por Tempo de Serviço"
+   },
+   "tema:fies": {
+    "d": "Victor",
+    "c": "",
+    "cap": "FIES"
+   },
+   "tema:filho maior e invalido": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Filho Maior e Inválido"
+   },
+   "tema:fornecimento de medicamentos": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Fornecimento de medicamentos"
+   },
+   "tema:gestante / adotante / paternidade": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Gestante / Adotante / Paternidade"
+   },
+   "tema:icms/ imposto sobre circulacao de mercadorias": {
+    "d": "José",
+    "c": "",
+    "cap": "ICMS/ Imposto sobre Circulação de Mercadorias"
+   },
+   "tema:impostos": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Impostos"
+   },
+   "tema:inclusao indevida em cadastro de inadimplentes": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Inclusão Indevida em Cadastro de Inadimplentes"
+   },
+   "tema:indenizacao": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "indenização"
+   },
+   "tema:indenizacao por dano material": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Indenização por Dano Material"
+   },
+   "tema:indenizacao por dano moral": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Indenização por Dano Moral"
+   },
+   "tema:indice de 28,86% lei 8.622/1993 e 8.627/1993": {
+    "d": "Rodrigo",
+    "c": "Bruno",
+    "cap": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   },
+   "tema:ingresso e concurso": {
+    "d": "Rodrigo",
+    "c": "Vanilda",
+    "cap": "Ingresso e Concurso"
+   },
+   "tema:inquerito / processo / recurso administrativo": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Inquérito / Processo / Recurso Administrativo"
+   },
+   "tema:inscricao / documentacao": {
+    "d": "Victor",
+    "c": "Vanilda",
+    "cap": "Inscrição / Documentação"
+   },
+   "tema:irpj/imposto de renda de pessoa juridica": {
+    "d": "José",
+    "c": "Vanilda",
+    "cap": "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   },
+   "tema:isencao por doenca ou acidente em servico": {
+    "d": "José",
+    "c": "",
+    "cap": "Isenção por Doença ou Acidente em Serviço"
+   },
+   "tema:isonomia": {
+    "d": "Maria Eduarda",
+    "c": "",
+    "cap": "Isonomia"
+   },
+   "tema:levantamento de valor": {
+    "d": "Debora",
+    "c": "Saffioti",
+    "cap": "Levantamento de Valor"
+   },
+   "tema:liberacao de veiculo apreendido": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Liberação de Veículo Apreendido"
+   },
+   "tema:metrologica": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Metrológica"
+   },
+   "tema:microempresa": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Microempresa"
+   },
+   "tema:multas e demais sancoes": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "Multas e demais Sanções"
+   },
+   "tema:nulidade - assembleia geral": {
+    "d": "Maria Eduarda",
+    "c": "Vanilda",
+    "cap": "Nulidade - Assembleia Geral"
+   },
+   "tema:pensao por morte (art. 74/9)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Pensão por Morte (Art. 74/9)"
+   },
+   "tema:pessoa com deficiencia": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Pessoa com Deficiência"
+   },
+   "tema:pis": {
+    "d": "José",
+    "c": "Bruno",
+    "cap": "PIS"
+   },
+   "tema:planos de saude": {
+    "d": "Dalete",
+    "c": "",
+    "cap": "Planos de saúde"
+   },
+   "tema:prescricao e decadencia": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Prescrição e Decadência"
+   },
+   "tema:processo candidato a redistribuicao": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Processo Candidato à Redistribuição"
+   },
+   "tema:professor": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "Professor"
+   },
+   "tema:progressao funcional com intersticio de doze meses": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Progressão Funcional com Interstício de Doze Meses"
+   },
+   "tema:reajustes e revisoes especificos": {
+    "d": "Dalete",
+    "c": "Vanilda",
+    "cap": "Reajustes e Revisões Específicos"
+   },
+   "tema:refis/programa de recuperacao fiscal": {
+    "d": "José",
+    "c": "Saffioti",
+    "cap": "REFIS/Programa de Recuperação Fiscal"
+   },
+   "tema:reforma militar": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Reforma Militar"
+   },
+   "tema:registro de empresa": {
+    "d": "Maria Eduarda",
+    "c": "Bruno",
+    "cap": "Registro de Empresa"
+   },
+   "tema:registro profissional": {
+    "d": "Victor",
+    "c": "Renato",
+    "cap": "Registro Profissional"
+   },
+   "tema:remocao": {
+    "d": "Maria Eduarda",
+    "c": "",
+    "cap": "Remoção"
+   },
+   "tema:repasse de verbas publicas": {
+    "d": "Maria Eduarda",
+    "c": "Saffioti",
+    "cap": "Repasse de Verbas Públicas"
+   },
+   "tema:restituicao de area - funai": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Restituição de área - FUNAI"
+   },
+   "tema:revogacao/anulacao de multa ambiental": {
+    "d": "Rodrigo",
+    "c": "Vanilda",
+    "cap": "Revogação/Anulação de multa ambiental"
+   },
+   "tema:rmi - renda mensal inicial": {
+    "d": "Rodrigo",
+    "c": "Alexander",
+    "cap": "RMI - Renda Mensal Inicial"
+   },
+   "tema:rural (pensao por morte (art. 74/9))": {
+    "d": "Debora",
+    "c": "Vanilda",
+    "cap": "Rural (Pensão por Morte (Art. 74/9))"
+   },
+   "tema:rural + especial - operador de maquina pesada": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "rural + especial - operador de máquina pesada"
+   },
+   "tema:rural segurado especial e ruido": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "Rural Segurado Especial e ruído"
+   },
+   "tema:salario-maternidade (art. 71/73)": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Salário-Maternidade (Art. 71/73)"
+   },
+   "tema:sem modelo": {
+    "d": "",
+    "c": "Alexander",
+    "cap": "sem modelo"
+   },
+   "tema:sistema financeiro da habitacao": {
+    "d": "Rodrigo",
+    "c": "Saffioti",
+    "cap": "Sistema Financeiro da Habitação"
+   },
+   "tema:tempo especial ferroviario rffsa": {
+    "d": "Debora",
+    "c": "Alexander",
+    "cap": "tempo especial ferroviário RFFSA"
+   },
+   "tema:uniao estavel": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "união estável"
+   },
+   "tema:urbana (pensao por morte (art. 74/9))": {
+    "d": "Dalete",
+    "c": "Alexander",
+    "cap": "Urbana (Pensão por Morte (Art. 74/9))"
+   },
+   "tema:virus, bacterias e produtos quimicos": {
+    "d": "Maria Eduarda",
+    "c": "Alexander",
+    "cap": "Vírus, bactérias e produtos químicos"
+   }
+  },
   "equilibrar": true
  }
 }
