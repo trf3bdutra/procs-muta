@@ -1,12 +1,15 @@
 /* ================= VERSÃO AVANÇADA · EDITOR: modelos-matriz, parágrafos-padrão, peças do Editorial e diretrizes =================
    As alterações valem na hora nesta página e ficam guardadas como rascunho neste navegador até serem enviadas.
-   Para gravar: "Enviar ao GitHub" (commit em trf3bdutra/procs-muta; o token fica só na memória desta aba) ou
-   "Baixar arquivos" (.zip com os arquivos da base nos caminhos do repositório). */
+   Para gravar: no site do gabinete (/editor/), "Gravar no GitHub" envia ao servidor, que confere o acesso de editor (apoio/acessos.json)
+   e faz o commit em trf3bdutra/procs-muta; aberto como arquivo, o envio usa um token pessoal (só na memória desta aba);
+   "Baixar arquivos" gera o .zip com os arquivos da base nos caminhos do repositório. */
 var EDM=null;try{EDM=JSON.parse($('#editor-meta').textContent);}catch(e){EDM=null;}
-var EDS={col:'mod',id:null,q:'',tipoNovo:'preferencia',token:'',conf:null,dirty:false,prev:false,f:{mod:{},par:{},pec:{},dir:{}},
-  orig:{mod:{},par:{},pec:{},dir:{}},dlg:'',restaura:null,lido:false};
-var EDCOL={mod:'Modelos-matriz',par:'Parágrafos-padrão',pec:'Peças do Editorial',dir:'Diretrizes'};
-var EDARQ={mod:'modelos',par:'paragrafos',pec:'pecas',dir:'diretrizes'};
+var EDS={col:'mod',id:null,q:'',tipoNovo:'preferencia',token:'',conf:null,dirty:false,prev:false,f:{mod:{},par:{},pec:{},dir:{},nor:{}},
+  orig:{mod:{},par:{},pec:{},dir:{},nor:{}},dlg:'',restaura:null,lido:false};
+var EDCOL={mod:'Modelos-matriz',par:'Parágrafos-padrão',pec:'Peças do Editorial',dir:'Diretrizes',nor:'Normas'};
+var EDARQ={mod:'modelos',par:'paragrafos',pec:'pecas',dir:'diretrizes',nor:'normas'};
+/* gravação pelo servidor do site (login da Pauta da equipe + acesso de editor) */
+function edSrv(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
 var EDK='vdm-ed-rascunho-v1';
 /* mesmo formato do json.dumps do Python (separadores “, ” e “: ”), para o diff ficar limpo */
 function pyDumps(v){if(v===null||v===undefined)return 'null';if(Array.isArray(v))return '['+v.map(pyDumps).join(', ')+']';if(typeof v==='object')return '{'+Object.keys(v).map(function(k){return JSON.stringify(k)+': '+pyDumps(v[k]);}).join(', ')+'}';return JSON.stringify(v);}
@@ -16,6 +19,7 @@ function edListaDe(c){
   if(c==='mod')return (BASE&&BASE.mod)||[];
   if(c==='par')return (BASE&&BASE.par)||[];
   if(c==='pec')return ED.pecas.pecas;
+  if(c==='nor')return ED.normasComplemento||(ED.normasComplemento=[]);
   return ED.padrao.registros;}
 function edLista(){return edListaDe(EDS.col);}
 function edAcha(c,id){return edListaDe(c).filter(function(z){return z.id===id;})[0];}
@@ -23,6 +27,7 @@ function edTipoMod(r){var e=r.especieModelo||'';return /^voto/.test(e)?'Acórdã
 function edRot(c,r){
   if(c==='mod')return {t:r.nomeModelo||r.id,s:[edTipoMod(r),r.assunto,r.classeSigla||r.especie].filter(Boolean).join(' · ')};
   if(c==='par')return {t:r.titulo||r.id,s:[STL[r.status]||r.status,r.categoria,r.id].filter(Boolean).join(' · ')};
+  if(c==='nor')return {t:[r['Norma'],r['Dispositivo']?'art. '+r['Dispositivo']:''].filter(Boolean).join(', ')||r.id,s:[r['Assunto'],r.id].filter(Boolean).join(' · ')};
   if(c==='pec')return {t:r.t||r.id,s:[r.grupo,(r.elementos||[]).length+' trechos',r.id].filter(Boolean).join(' · ')};
   return {t:r.titulo||r.expressao||r.verbo||r.motivo||r.mensagem||r.id,s:[r.tipo,r.grupo,r.id].filter(Boolean).join(' · ')};}
 
@@ -66,13 +71,15 @@ var ED_DIR={preferencia:[['grupo','Grupo','t'],['titulo','Título','t'],['prefer
   conectivo:[['expressao','Expressão','t'],['funcao','Função','a'],['base','Base','t']],verbo:[['verbo','Verbo','t'],['construcao','Construção','a'],['emprego','Emprego','a'],['base','Base','t']],
   correcao:[['motivo','Motivo (como aparece no aviso)','a'],['padrao','Padrão (expressão regular)','t'],['flags','Flags','t'],['substituir','Substituir por','t']],
   alerta:[['mensagem','Mensagem','a'],['escopo','Onde (ementa, voto, relatório…)','t'],['padrao','Padrão (expressão regular)','t'],['flags','Flags','t']]};
+var ED_NOR=[['Código','Código (identificador)','t',null,1],['Diploma','Diploma','t',null,1],['Nome do diploma','Nome do diploma','t'],['Norma','Norma (como é citada)','t',null,1],['Dispositivo','Dispositivo','t',null,1],
+  ['Assunto','Assunto','t'],['Texto literal','Texto literal','A'],['Observação','Observação','a']];
 var ED_DIRPRE={preferencia:'red-dir-',conectivo:'red-con-',verbo:'red-vrb-',correcao:'red-cor-',alerta:'red-ale-'};
 function edSug(k){var c={};edLista().forEach(function(r){var v=r[k];if(typeof v==='string'&&v&&v.length<80)c[v]=(c[v]||0)+1;});return Object.keys(c).sort(function(a,b){return c[b]-c[a];}).slice(0,80);}
-function edCampo(r,f){var k=f[0],v=r[k],id='edf-'+k,h='<label class="edf'+(f[4]?' req':'')+'"><span>'+esc(f[1])+(f[4]?' <i>obrigatório</i>':'')+'</span>';
+function edCampo(r,f){var k=f[0],v=r[k],id='edf-'+k.replace(/[^A-Za-z0-9_-]/g,'_'),h='<label class="edf'+(f[4]?' req':'')+'"><span>'+esc(f[1])+(f[4]?' <i>obrigatório</i>':'')+'</span>';
   if(f[2]==='s')h+='<select id="'+id+'" data-k="'+k+'">'+(f[3].indexOf(v)<0&&v?'<option>'+esc(v)+'</option>':'')+f[3].map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';
   else if(f[2]==='a'||f[2]==='A')h+='<textarea id="'+id+'" data-k="'+k+'" class="ed-auto" rows="'+(f[2]==='A'?6:2)+'">'+esc(v==null?'':v)+'</textarea>';
   else if(f[2]==='j')h+='<textarea id="'+id+'" data-k="'+k+'" data-json="1" rows="4" spellcheck="false" class="mono ed-auto">'+esc(v==null?'':JSON.stringify(v,null,1))+'</textarea>';
-  else{var sg=edSug(k);h+='<input id="'+id+'" data-k="'+k+'" value="'+esc(v==null?'':v)+'"'+(sg.length?' list="edl-'+k+'"':'')+'>'+(sg.length?'<datalist id="edl-'+k+'">'+sg.map(function(o){return '<option value="'+esc(o)+'">';}).join('')+'</datalist>':'');}
+  else{var sg=edSug(k);h+='<input id="'+id+'" data-k="'+k+'" value="'+esc(v==null?'':v)+'"'+(sg.length?' list="'+id.replace('edf-','edl-')+'"':'')+'>'+(sg.length?'<datalist id="'+id.replace('edf-','edl-')+'">'+sg.map(function(o){return '<option value="'+esc(o)+'">';}).join('')+'</datalist>':'');}
   return h+'</label>';}
 
 /* ---------- esqueleto do modelo: tópicos com texto, ativo e opcional ---------- */
@@ -111,6 +118,7 @@ function edPrevia(){var c=EDS.col,h='';
       h+='<div class="edp-b"><span>'+esc(d.querySelector('.edt-t').value)+'</span>'+t.split(/\n+/).map(function(l){return '<p>'+edMarcaCampos(l)+'</p>';}).join('')+'</div>';});
     return h||'<p class="meta">Nenhum tópico ativo com texto.</p>';}
   if(c==='par'){var t=($('#edf-texto')||{}).value||'';return t.split(/\n+/).map(function(l){return '<p>'+edMarcaCampos(l)+'</p>';}).join('')||'<p class="meta">Sem texto.</p>';}
+  if(c==='nor'){var tl=($('#edf-Texto_literal')||{}).value||'';return tl.split(/\n+/).map(function(l){return '<p>'+esc(l)+'</p>';}).join('')||'<p class="meta">Sem texto literal.</p>';}
   if(c==='pec'){$$('#ed-els .edel').forEach(function(d){h+='<div class="edp-b"><span>'+esc(d.querySelector('.edt-t').value)+(d.querySelector('.ede-o').checked?' · opcional':'')+'</span>'+d.querySelector('.ede-f').value.split(/\n+/).filter(Boolean).map(function(l){return '<p>'+edMarcaCampos(l)+'</p>';}).join('')+'</div>';});return h;}
   return '<p class="meta">Sem pré-visualização para diretrizes.</p>';}
 function edMarcaCampos(l){return esc(l).replace(/\{\{([^}]*)\}\}|\{([^}|]*)(?:\|([^}]*))?\}|\[([^\]]*)\]/g,function(m,a,b,c2,d){return '<mark class="edp-f">'+esc(a||c2||b||d||'')+'</mark>';});}
@@ -127,12 +135,14 @@ function edFiltrar(L){var c=EDS.col,f=EDS.f[c],q=nz(EDS.q);
     if(c==='par'){if(f.st&&r.status!==f.st)return false;if(f.cat&&r.categoria!==f.cat)return false;}
     if(c==='dir'&&f.tipo&&r.tipo!==f.tipo)return false;
     if(c==='pec'&&f.g&&r.grupo!==f.g)return false;
-    if(!q)return true;var x=edRot(c,r);return nz(x.t+' '+x.s+' '+(r.texto||r.fundamentacao||r.preferir||r.resumo||'')).indexOf(q)>=0;});}
+    if(c==='nor'&&f.ass&&r['Assunto']!==f.ass)return false;
+    if(!q)return true;var x=edRot(c,r);return nz(x.t+' '+x.s+' '+(r.texto||r.fundamentacao||r.preferir||r.resumo||r['Texto literal']||'')).indexOf(q)>=0;});}
 function edOpc(L,k,cur,todos){var c={};L.forEach(function(r){var v=typeof k==='function'?k(r):r[k];if(v)c[v]=(c[v]||0)+1;});
   return '<option value="">'+todos+'</option>'+Object.keys(c).sort(function(a,b){return a.localeCompare(b,'pt');}).map(function(v){return '<option value="'+esc(v)+'"'+(v===cur?' selected':'')+'>'+esc(v)+' ('+c[v]+')</option>';}).join('');}
 function edFiltrosHtml(L){var c=EDS.col,f=EDS.f[c],h='';
   if(c==='mod')h='<div class="seg ed-seg">'+['','Acórdão','Decisão','Despacho'].map(function(t){var n=t?L.filter(function(r){return edTipoMod(r)===t;}).length:L.length;return '<button data-edf="tipo" data-v="'+t+'" aria-pressed="'+((f.tipo||'')===t)+'">'+(t||'Todos')+' <small>'+n+'</small></button>';}).join('')+'</div><select data-edfs="ass" aria-label="Assunto">'+edOpc(L.filter(function(r){return !f.tipo||edTipoMod(r)===f.tipo;}),'assunto',f.ass,'Todos os assuntos')+'</select>';
   else if(c==='par')h='<select data-edfs="st" aria-label="Situação">'+edOpc(L,function(r){return r.status;},f.st,'Todas as situações')+'</select><select data-edfs="cat" aria-label="Categoria">'+edOpc(L,'categoria',f.cat,'Todas as categorias')+'</select>';
+  else if(c==='nor')h='<select data-edfs="ass" aria-label="Assunto">'+edOpc(L,'Assunto',f.ass,'Todos os assuntos')+'</select>';
   else if(c==='dir')h='<select data-edfs="tipo" aria-label="Tipo">'+edOpc(L,'tipo',f.tipo,'Todos os tipos')+'</select>';
   else h='<select data-edfs="g" aria-label="Grupo">'+edOpc(L,'grupo',f.g,'Todos os grupos')+'</select>';
   return '<div class="ed-filt">'+h+'<label class="edck"><input type="checkbox" data-edfso'+(f.so?' checked':'')+'> só com alterações</label></div>';}
@@ -140,7 +150,7 @@ function edRender(){
   var o=$('#ed-ov');if(!o)return;var L=edLista(),F=edFiltrar(L),P=edPendentes();
   var top='<div class="ed-top"><b class="ed-tit">Editor</b><div class="seg ed-cols">'+Object.keys(EDCOL).map(function(c){return '<button data-edcol="'+c+'" aria-pressed="'+(EDS.col===c)+'">'+EDCOL[c]+(edSujo(c)?' <i class="ed-dot" title="Com alterações não enviadas"></i>':'')+'</button>';}).join('')+'</div><span style="flex:1"></span>'+
     '<button class="e-mini ed-pend'+(P.length?' on':'')+'" data-edpend title="Ver, abrir e desfazer as alterações">'+(P.length?P.length+(P.length>1?' alterações':' alteração'):'Sem alterações')+'</button><span class="meta">'+(P.length?'guardadas neste navegador':'')+'</span>'+
-    '<button class="btn ghost" data-edzip'+(P.length?'':' disabled')+'>Baixar arquivos</button><button class="btn" data-edgit'+(P.length?'':' disabled')+'>Enviar ao GitHub</button><button class="e-ib ed-help" data-edhelp title="Atalhos e ajuda" aria-label="Atalhos e ajuda">?</button><button class="e-dx" data-edx title="Fechar o editor (Esc)" aria-label="Fechar o editor">×</button></div>';
+    '<button class="btn ghost" data-edzip'+(P.length?'':' disabled')+'>Baixar arquivos</button><button class="btn" data-edgit'+(P.length?'':' disabled')+'>Gravar no GitHub</button><button class="e-ib ed-help" data-edhelp title="Atalhos e ajuda" aria-label="Atalhos e ajuda">?</button><button class="e-dx" data-edx title="Fechar o editor (Esc)" aria-label="Fechar o editor">×</button></div>';
   if(EDS.restaura)top+='<div class="ed-rest"><b>Há '+EDS.restaura.n+' alteraç'+(EDS.restaura.n>1?'ões':'ão')+' não enviada'+(EDS.restaura.n>1?'s':'')+'</b> de '+esc(edData(EDS.restaura.d.ts))+'.'+(EDS.restaura.mudou?' A base mudou desde então: confira antes de enviar.':'')+' <button class="e-mini pri" data-edrest>Restaurar</button><button class="e-mini" data-edrestx>Descartar</button></div>';
   var nov=EDS.col==='pec'?'':'<div class="ed-new">'+(EDS.col==='dir'?'<select data-edtipo aria-label="Tipo da diretriz nova">'+Object.keys(ED_DIR).map(function(t){return '<option'+(t===EDS.tipoNovo?' selected':'')+'>'+t+'</option>';}).join('')+'</select>':'')+'<button class="e-mini pri" data-ednovo>+ Novo</button></div>';
   var lst='<aside class="ed-list"><input type="search" id="ed-q" placeholder="Buscar…  ( / )" value="'+esc(EDS.q)+'" aria-label="Buscar registros">'+edFiltrosHtml(L)+nov+'<div class="ed-n">'+F.length+' de '+L.length+'</div><ul role="listbox">'+F.slice(0,500).map(function(r){var x=edRot(EDS.col,r),s=edSit(EDS.col,r.id);return '<li data-edid="'+esc(r.id)+'" class="'+(r.id===EDS.id?'on':'')+'" tabindex="0" role="option" aria-selected="'+(r.id===EDS.id)+'"><b>'+(s?'<i class="ed-sit s-'+s.replace('í','i')+'" title="'+s+'"></i>':'')+esc(x.t.length>90?x.t.slice(0,90)+'…':x.t)+'</b><small>'+esc(x.s)+'</small></li>';}).join('')+(F.length>500?'<li class="meta">Refine a busca para ver os demais.</li>':'')+'</ul></aside>';
@@ -165,6 +175,7 @@ function edForm(r){
     corpo=edEsq(r)+'<details class="edg" open><summary>Ficha do modelo</summary>'+dados+'</details><details class="edg"><summary>Parágrafos alternativos do modelo (JSON, avançado)</summary><textarea id="ed-pm" rows="6" class="mono ed-auto" spellcheck="false">'+esc(typeof r.paragrafosModelo==='string'?r.paragrafosModelo:JSON.stringify(r.paragrafosModelo||[]))+'</textarea></details>';}
   else if(c==='par')corpo='<div class="ed-grid">'+ED_PAR.map(function(f){return edCampo(r,f);}).join('')+'</div><p class="meta">Campos variáveis no texto: {nome} ou {nome|rótulo}; colchetes [ … ] viram campo a preencher.</p>';
   else if(c==='pec')corpo=edPeca(r);
+  else if(c==='nor')corpo='<div class="ed-grid">'+ED_NOR.map(function(f){return edCampo(r,f);}).join('')+'</div><p class="meta">Dispositivos que completam o repertório normativo da planilha do Vade Mecum; código repetido na planilha prevalece.</p>';
   else corpo='<div class="ed-grid">'+(ED_DIR[r.tipo]||[]).map(function(f){return edCampo(r,f);}).join('')+'</div>';
   return h+'<div class="ed-fcols"><div class="ed-fmain">'+corpo+'</div>'+(EDS.prev?'<aside class="ed-prev"><div class="edgh">Pré-visualização <small>campos em destaque</small></div><div id="ed-prev" class="serif"></div></aside>':'')+'</div>';}
 function edLerForm(r){
@@ -176,13 +187,17 @@ function edLerForm(r){
   if(EDS.col==='mod'){r.esqueletoModelo=edLerEsq(r);var pm=$('#ed-pm');if(pm){try{var pj=JSON.parse(pm.value||'[]'),pa=typeof r.paragrafosModelo==='string'?jp(r.paragrafosModelo):r.paragrafosModelo;if(JSON.stringify(pj)!==JSON.stringify(pa))r.paragrafosModelo=typeof r.paragrafosModelo==='string'?pyDumps(pj):pj;}catch(e){erro='JSON inválido nos parágrafos alternativos.';}}
     if(r.dataReferencia&&!/^\d{4}-\d{2}-\d{2}$/.test(r.dataReferencia))erro='Data de referência no formato AAAA-MM-DD.';if(!r.assunto)erro='Informe o assunto.';if(!r.nomeModelo)erro='Informe o nome do modelo.';}
   if(EDS.col==='par'&&(!r.titulo||!r.texto))erro='Título e texto são obrigatórios.';
+  if(EDS.col==='nor'){if(!r['Código']||!r['Norma']||!r['Dispositivo']||!r['Diploma'])erro='Código, diploma, norma e dispositivo são obrigatórios.';
+    else if(r['Código']!==r.id&&EDS.orig.nor[r.id]!=='__novo__')erro='O código de norma já gravada não muda: use Duplicar, ajuste o código na cópia e exclua a antiga.';else if(r['Código']!==r.id&&edAcha('nor',r['Código']))erro='Já existe a norma de código '+r['Código']+'.';else r.id=r['Código'];}
   if(EDS.col==='par'&&!r.categoria)r.categoria=[r.nivelCategoria,r.nivelSubsecao].filter(Boolean).join(' › ')||'Genéricos';
   return erro;}
 /* aplica o formulário aberto; silencioso = chamado ao trocar de registro, fechar ou enviar */
 function edAplicar(silencioso){var r=EDS.id&&edAcha(EDS.col,EDS.id);if(!r){EDS.dirty=false;return true;}
   var antes=edJ(r),copia=JSON.parse(antes),er=edLerForm(copia);
   if(er){toast(er);var d=$('#ed-dirty');if(d){d.hidden=false;d.textContent=er;}return false;}
-  if(edJ(copia)!==antes){if(EDS.col==='mod')copia.atualizadoEm=edAgora();edToca(EDS.col,r);edPoe(r,copia);edAtualizaVista();edGuarda();if(!silencioso)toast('Alterações aplicadas e guardadas neste navegador');}
+  if(edJ(copia)!==antes){if(EDS.col==='mod')copia.atualizadoEm=edAgora();edToca(EDS.col,r);
+    if(copia.id!==r.id){var oc=EDS.orig[EDS.col];delete oc[r.id];oc[copia.id]='__novo__';EDS.id=copia.id;}
+    edPoe(r,copia);edAtualizaVista();edGuarda();if(!silencioso)toast('Alterações aplicadas e guardadas neste navegador');}
   else if(!silencioso)toast('Nada mudou');
   EDS.dirty=false;return true;}
 function edMarcaSujo(){if(EDS.dirty)return;EDS.dirty=true;var d=$('#ed-dirty');if(d){d.hidden=false;d.textContent='alterações não aplicadas';}var b=$('[data-edsalvar]');if(b)b.classList.add('pulse');$$('[data-edgit],[data-edzip]').forEach(function(x){x.disabled=false;});}
@@ -191,11 +206,13 @@ function edNovo(){if(EDS.dirty&&!edAplicar(true))return;var c=EDS.col,L=edLista(
   if(c==='mod'){var ref=L.filter(function(m){var e=jp(m.esqueletoModelo);return e&&e._estrutura==='padrao';})[0],e=ref?jp(ref.esqueletoModelo):{_estrutura:'padrao',_topicos:[]},o={_estrutura:e._estrutura,_topicos:e._topicos};(e._topicos||[]).forEach(function(t){o[t.id]={texto:t.id==='fecho'?'É como voto.':'',ativo:!t.opcional};});
     var tp=EDS.f.mod.tipo==='Decisão'?'decisao':EDS.f.mod.tipo==='Despacho'?'despacho':'voto-matriz';
     r={id:'mod-modelo-ed-'+Date.now().toString(36),processo:'',tipo:'Modelo',pronunciamento:tp==='voto-matriz'?'Voto':tp==='despacho'?'Despacho':'Decisão monocrática terminativa',especie:'',assunto:EDS.f.mod.ass||'',temas:'',tese:'',fundamentacao:'',especificidades:'',resultado:'',fonte:'Editor do CMT Compêndio',formatoModelo:'Modelo-matriz',nomeModelo:'Novo modelo-matriz',textoModelo:'',esqueletoModelo:JSON.stringify(o),paragrafosModelo:'[]',classe:'',classeSigla:'',statusCuradoria:'',especieModelo:tp,dataReferencia:edHoje(),atualizadoEm:edAgora(),historico:[]};}
+  else if(c==='nor'){var cn='NOVA-'+Date.now().toString(36).toUpperCase();r={id:cn,'Código':cn,'Diploma':'','Nome do diploma':'','Norma':'','Dispositivo':'','Assunto':EDS.f.nor.ass||'','Texto literal':'','Observação':''};}
   else if(c==='par')r={id:'par.'+Date.now().toString(36),categoria:EDS.f.par.cat||'Genéricos',titulo:'Novo parágrafo-padrão',status:EDS.f.par.st||'padrao',texto:'',nivelTema:'',nivelEspecificidade:'',nivelCategoria:'Genéricos',nivelSubsecao:''};
   else{var t=EDS.tipoNovo,pre=ED_DIRPRE[t],mx=0;L.forEach(function(x){if(x.id.indexOf(pre)===0){var n=parseInt(x.id.slice(pre.length),10);if(n>mx)mx=n;}});r={id:pre+String(mx+1).padStart(2,'0'),tipo:t};ED_DIR[t].forEach(function(f){r[f[0]]='';});}
   L.unshift(r);edToca(c,r,true);EDS.id=r.id;EDS.q='';edAtualizaVista();edGuarda();edRender();var p=$('#ed-form input, #ed-form textarea');if(p)p.focus();}
 function edDup(r){if(EDS.dirty&&!edAplicar(true))return;var c=EDS.col,n=JSON.parse(JSON.stringify(r,function(k,v){return k.charAt(0)==='_'&&k!=='_topicos'&&k!=='_estrutura'?undefined:v;}));
   if(c==='mod'){n.id='mod-modelo-ed-'+Date.now().toString(36);n.nomeModelo=(n.nomeModelo||'')+' (cópia)';n.atualizadoEm=edAgora();n.historico=[];}
+  else if(c==='nor'){n.id=r.id+'-C'+Date.now().toString(36).slice(-3).toUpperCase();n['Código']=n.id;}
   else if(c==='par'){n.id=r.id+'.c'+Date.now().toString(36).slice(-3);n.titulo=(n.titulo||'')+' (cópia)';}
   else{var pre=ED_DIRPRE[r.tipo]||'red-x-',mx=0;edLista().forEach(function(x){if(x.id.indexOf(pre)===0){var k=parseInt(x.id.slice(pre.length),10);if(k>mx)mx=k;}});n.id=pre+String(mx+1).padStart(2,'0');}
   var L=edLista();L.splice(L.indexOf(r)+1,0,n);edToca(c,n,true);EDS.id=n.id;edAtualizaVista();edGuarda();edRender();toast('Cópia criada: '+n.id);}
@@ -244,7 +261,7 @@ document.addEventListener('click',function(e){
   if(e.target.closest('[data-edzip]')){if(EDS.dirty&&!edAplicar(true))return;edZip();return;}
   if(e.target.closest('[data-edgit]')){if(EDS.dirty&&!edAplicar(true))return;EDS.dlg=edDlgToken();edRender();var t=$('#ed-tok')||$('#ed-msg');if(t)t.focus();return;}
   if(e.target.closest('[data-eddlgx]')){EDS.dlg='';EDS.mantem=true;edRender();return;}
-  if(e.target.closest('[data-edenviar]')){var tk=$('#ed-tok');if(tk&&tk.value.trim())EDS.token=tk.value.trim();if(!EDS.token){toast('Informe o token');return;}var msg=($('#ed-msg')||{}).value||'';edEnviar(msg);return;}
+  if(e.target.closest('[data-edenviar]')){if(edSrv()){edEnviarSrv(($('#ed-msg')||{}).value||'');return;}var tk=$('#ed-tok');if(tk&&tk.value.trim())EDS.token=tk.value.trim();if(!EDS.token){toast('Informe o token');return;}var msg=($('#ed-msg')||{}).value||'';edEnviar(msg);return;}
 });
 var edPrevT;
 document.addEventListener('input',function(e){
@@ -275,15 +292,25 @@ function edArquivo(c){var a=EDM.arquivos[EDARQ[c]],agora=edAgora();
   if(c==='mod')return {path:a.path,txt:JSON.stringify({schema:a.head.schema,versao:a.head.versao,atualizadoEm:agora,registros:edLimpa(BASE.mod)},null,1)+'\n'};
   if(c==='par')return {path:a.path,txt:JSON.stringify({schema:a.head.schema,versao:a.head.versao,atualizadoEm:agora,registros:edLimpa(BASE.par)},null,1)+'\n'};
   if(c==='pec')return {path:a.path,txt:JSON.stringify(ED.pecas,null,2)+'\n'};
+  if(c==='nor'){var o={};Object.keys(a.head).forEach(function(k){o[k]=a.head[k];});o.atualizadoEm=agora.slice(0,10);o.registros=edLimpa(edListaDe('nor'));return {path:a.path,txt:JSON.stringify(o,null,1)+'\n'};}
   return {path:a.path,txt:JSON.stringify({schema:ED.padrao.schema,versao:ED.padrao.versao,atualizadoEm:agora,registros:ED.padrao.registros},null,1)+'\n'};}
 function edMudados(){return Object.keys(EDARQ).filter(edSujo).map(edArquivo);}
 function edZip(){var F=edMudados();if(!F.length)return;var bl=zipStore(F.map(function(f){return {n:f.path,d:f.txt};}));baixarBlob(new Blob([bl],{type:'application/zip'}),'cmt-compendio-alteracoes-'+edHoje()+'.zip');toast('Arquivos gerados nos caminhos do repositório; o rascunho continua guardado até o envio');}
 function edResumo(){var c={};edPendentes().forEach(function(l){var k=EDCOL[l.col];c[k]=(c[k]||0)+1;});return Object.keys(c).map(function(k){return k.toLowerCase()+': '+c[k];}).join('; ');}
-function edDlgToken(){var F=edMudados(),P=edPendentes();return '<div class="ed-dlg" role="dialog" aria-label="Enviar ao GitHub"><div class="ed-dlgc"><h3>Enviar ao GitHub</h3><p class="meta">Um commit em <b>'+esc(EDM.repo)+'</b> ('+esc(EDM.ramo)+') com '+F.map(function(f){return '<code>'+esc(f.path)+'</code>';}).join(', ')+'. Em seguida o GitHub valida a base e reconstrói o Compêndio.</p>'+
+function edDlgToken(){var F=edMudados(),P=edPendentes();return '<div class="ed-dlg" role="dialog" aria-label="Gravar no GitHub"><div class="ed-dlgc"><h3>Gravar no GitHub</h3><p class="meta">Um commit em <b>'+esc(EDM.repo)+'</b> ('+esc(EDM.ramo)+') com '+F.map(function(f){return '<code>'+esc(f.path)+'</code>';}).join(', ')+'. Em seguida o GitHub valida a base e reconstrói o Compêndio.</p>'+
   '<ul class="ed-logl">'+P.slice(0,14).map(function(l){return '<li>'+esc(EDCOL[l.col])+' · '+esc(l.sit)+' · '+esc(l.t.slice(0,70))+'</li>';}).join('')+(P.length>14?'<li>+ '+(P.length-14)+'</li>':'')+'</ul>'+
-  '<label class="edf"><span>Descrição do commit</span><input id="ed-msg" value="'+esc('Editor do CMT Compêndio: '+edResumo())+'"></label>'+(EDS.token?'<p class="meta">Token desta sessão já informado.</p>':'<label class="edf"><span>Token do GitHub (permissão Contents: leitura e escrita no repositório). Fica só na memória desta aba.</span><input id="ed-tok" type="password" autocomplete="off"></label>')+
+  '<label class="edf"><span>Descrição do commit</span><input id="ed-msg" value="'+esc('Editor do CMT Compêndio: '+edResumo())+'"></label>'+(edSrv()?'<p class="meta">Gravação pelo site do gabinete, em nome de <b>'+esc(window.CMT_ACESSO().usuario)+'</b>.</p>':EDS.token?'<p class="meta">Token desta sessão já informado.</p>':'<label class="edf"><span>Token do GitHub (permissão Contents: leitura e escrita no repositório). Fica só na memória desta aba.</span><input id="ed-tok" type="password" autocomplete="off"></label>')+
   '<div class="e-dacts"><button class="btn" data-edenviar>Enviar</button><button class="btn ghost" data-eddlgx>Cancelar</button></div><p class="meta" id="ed-st"></p></div></div>';}
 function edGh(caminho,opt){opt=opt||{};return fetch('https://api.github.com/repos/'+EDM.repo+'/'+caminho,{method:opt.method||'GET',cache:'no-store',headers:Object.assign({'Accept':'application/vnd.github+json','Authorization':'Bearer '+EDS.token,'X-GitHub-Api-Version':'2022-11-28'},opt.body?{'Content-Type':'application/json'}:{}),body:opt.body?JSON.stringify(opt.body):undefined}).then(function(r){if(!r.ok)return r.text().then(function(t){var m='';try{m=JSON.parse(t).message;}catch(e){m=t.slice(0,120);}throw new Error(r.status+' '+m);});return r.json();});}
+/* envio pelo servidor: só as operações (registro como está agora e como estava ao ser tocado); o servidor confere conflitos e faz o commit */
+function edEnviarSrv(msg){var P=edPendentes();if(!P.length)return;var C={};
+  P.forEach(function(p){var L=edListaDe(p.col),cur=edAcha(p.col,p.id);(C[p.col]=C[p.col]||[]).push(p.sit==='excluído'?{op:'del',id:p.id,orig:EDS.orig[p.col][p.id]}:{op:'set',id:p.id,rec:edLimpa(cur),orig:EDS.orig[p.col][p.id],idx:L.indexOf(cur)});});
+  var bt=$('[data-edenviar]');if(bt)bt.disabled=true;edSt('Gravando…');
+  fetch('/api/editor',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({msg:msg,colecoes:C})})
+  .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw new Error(j.erro||('HTTP '+r.status));return j;});})
+  .then(function(j){EDS.orig={mod:{},par:{},pec:{},dir:{},nor:{}};edGuarda();
+    EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Gravado</h3><p>'+j.alteracoes+' alteraç'+(j.alteracoes>1?'ões':'ão')+' no commit <a href="'+esc(j.url)+'" target="_blank" rel="noopener">'+esc(String(j.commit).slice(0,7))+'</a>. O GitHub valida a base e reconstrói o Compêndio em alguns minutos; até lá, esta página mostra a versão editada.</p><div class="e-dacts"><button class="btn" data-eddlgx>Fechar</button></div></div></div>';edRender();})
+  .catch(function(e){edSt('Não foi possível gravar: '+e.message);if(bt)bt.disabled=false;});}
 function edSt(t){var s=$('#ed-st');if(s)s.textContent=t;}
 function edEnviar(msg){
   var F=edMudados();if(!F.length)return;var ref,tree;edSt('Conferindo a versão no GitHub…');
@@ -296,12 +323,18 @@ function edEnviar(msg){
   .then(function(x){return edGh('git/commits',{method:'POST',body:{message:(msg||'Editor do CMT Compêndio')+'\n\nAlterações feitas no editor do CMT Compêndio.',tree:x.t.sha,parents:[ref]}}).then(function(c){return {c:c,T:x.T};});})
   .then(function(x){return edGh('git/refs/heads/'+EDM.ramo,{method:'PATCH',body:{sha:x.c.sha}}).then(function(){return x;});})
   .then(function(x){x.T.forEach(function(t){Object.keys(EDM.arquivos).forEach(function(k){if(EDM.arquivos[k].path===t.path)EDM.arquivos[k].sha=t.sha;});});
-    EDS.orig={mod:{},par:{},pec:{},dir:{}};edGuarda();EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Enviado</h3><p>Commit <a href="'+esc(x.c.html_url||('https://github.com/'+EDM.repo+'/commit/'+x.c.sha))+'" target="_blank" rel="noopener">'+esc(x.c.sha.slice(0,7))+'</a> gravado em '+esc(EDM.ramo)+'. O GitHub valida a base e reconstrói o Compêndio em alguns minutos.</p><div class="e-dacts"><button class="btn" data-eddlgx>Fechar</button></div></div></div>';edRender();})
+    EDS.orig={mod:{},par:{},pec:{},dir:{},nor:{}};edGuarda();EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Enviado</h3><p>Commit <a href="'+esc(x.c.html_url||('https://github.com/'+EDM.repo+'/commit/'+x.c.sha))+'" target="_blank" rel="noopener">'+esc(x.c.sha.slice(0,7))+'</a> gravado em '+esc(EDM.ramo)+'. O GitHub valida a base e reconstrói o Compêndio em alguns minutos.</p><div class="e-dacts"><button class="btn" data-eddlgx>Fechar</button></div></div></div>';edRender();})
   .catch(function(e){edSt('Não foi possível enviar: '+e.message);if(/^401|^403/.test(e.message))EDS.token='';});}
 document.body.classList.add('vdm-ed');
-/* entrada pelo cabeçalho; aviso de rascunho guardado */
-(function(){var h=$('#openSheet');var b='<a class="btn ed-ler" href="cmt-compendio.html" title="Abrir a versão de leitura do CMT Compêndio">Versão de leitura</a><button class="btn ed-btn" data-edabre title="Adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial e diretrizes">Editor</button>';if(h)h.insertAdjacentHTML('beforebegin',b);else document.body.insertAdjacentHTML('afterbegin',b);
-  try{var d=JSON.parse(localStorage.getItem(EDK)||'null');if(d&&d.cols){var n=0;Object.keys(d.cols).forEach(function(c){n+=Object.keys(d.cols[c]).length;});if(n){var bt=document.querySelector('[data-edabre]');if(bt){bt.insertAdjacentHTML('beforeend',' <i class="ed-badge" title="Alterações guardadas e não enviadas">'+n+'</i>');}}}}catch(e){}})();
+/* entrada pelo cabeçalho; aviso de rascunho guardado; na página do editor, abre sozinho (registro indicado no endereço: #mod=id) */
+(function(){var h=$('#openSheet');var b='<button class="btn ed-btn" data-edabre title="Adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial, diretrizes e normas">Editor</button>';if(h)h.insertAdjacentHTML('beforebegin',b);else document.body.insertAdjacentHTML('afterbegin',b);
+  try{var d=JSON.parse(localStorage.getItem(EDK)||'null');if(d&&d.cols){var n=0;Object.keys(d.cols).forEach(function(c){n+=Object.keys(d.cols[c]).length;});if(n){var bt=document.querySelector('[data-edabre]');if(bt){bt.insertAdjacentHTML('beforeend',' <i class="ed-badge" title="Alterações guardadas e não enviadas">'+n+'</i>');}}}}catch(e){}
+  function alvo(){var m=/^#(mod|par|pec|dir|nor)=(.+)$/.exec(location.hash||'');return m?[m[1],decodeURIComponent(m[2])]:[];}
+  function semAcesso(){var o=$('#ed-ov');if(!o){o=document.createElement('div');o.id='ed-ov';o.className='ed-ov';document.body.appendChild(o);}o.hidden=false;document.body.classList.add('ed-on');
+    var A=window.CMT_ACESSO?window.CMT_ACESSO():{};o.innerHTML='<div class="ed-top"><b class="ed-tit">Editor</b><span style="flex:1"></span><a class="btn ghost" href="/compendio/">Ir para o Compêndio</a></div><div class="empty ed-vazio"><p>'+(A.usuario?'O login <b>'+esc(A.usuario)+'</b> não tem acesso de editor.':'Entre com o login da Pauta da equipe para editar.')+'</p><p class="meta">Quem edita está em apoio/acessos.json, no procs-muta.</p>'+(A.usuario?'':'<p><button class="btn" data-acentra>Entrar</button></p>')+'</div>';}
+  if(!window.VDM_PAGINA_EDITOR)return;
+  function abre(){var a=alvo();if(edSrv()||!window.CMT_SITE){var o=$('#ed-ov');if(o&&!o.querySelector('.ed-body'))o.remove();edAbrir(a[0],a[1]);}else semAcesso();}
+  document.addEventListener('cmt-acesso',abre);window.addEventListener('hashchange',function(){var a=alvo();if(a.length&&(edSrv()||!window.CMT_SITE))edAbrir(a[0],a[1]);});})();
 /* ---------- campos preenchíveis e variáveis do caso: barra sobre o texto em edição e atalho @@ ---------- */
 var EDV={ta:null,ini:-1,q:'',sel:0,itens:[]};
 function edTxtAlvo(t){return t&&t.tagName==='TEXTAREA'&&t.closest&&t.closest('#ed-form')&&!t.classList.contains('mono');}

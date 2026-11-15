@@ -19,7 +19,7 @@
 .top .hb.ic{width:32px;height:32px;padding:0;display:inline-grid;place-items:center;position:relative;box-sizing:border-box}
 .top .bdg{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:99px;background:#e6c27a;color:#14263c;font:800 9.5px/17px Figtree,system-ui,sans-serif;font-style:normal;padding:0 4px;text-align:center;box-sizing:border-box}
 .top .ico{width:32px!important;height:32px!important;border-radius:999px!important}
-.top .chip-u{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;color:#eef4f1}.top .chip-u b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#e6c27a;color:#14263c;font-size:11px}
+
 .cp-sub{display:flex;justify-content:center;padding:10px 20px 0}.cp-sub .tabs{background:var(--panel)!important;border:1px solid var(--line)!important}.cp-sub .tab{color:var(--mut)!important}.cp-sub .tab[aria-selected="true"]{background:var(--gold)!important;color:var(--gold-ink)!important}
 aside{top:58px!important}
-@media (max-width:860px){.top{flex-wrap:wrap!important}.top .chip-u span{display:none}}
+@media (max-width:860px){.top{flex-wrap:wrap!important}}

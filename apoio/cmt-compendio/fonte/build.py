@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Monta apoio/cmt-compendio/cmt-compendio.html (público: Ementário, Editorial e Consulta) e cmt-compendio-avancado.html
-(avançado, de uso interno: todas as abas, edição e atalho para o CMT-monitor) a partir desta pasta e da base do procs-muta.
+"""Monta apoio/cmt-compendio/cmt-compendio.html (modo padrão; modo avançado liberado pelo login, mesmo código) e cmt-editor.html (editor)
+a partir desta pasta e da base do procs-muta. Acesso ao modo avançado e ao editor: apoio/acessos.json (funções em apoio/pauta-equipe/api).
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
@@ -151,70 +151,63 @@ def blob_sha(p):
     b = p.read_bytes(); return hashlib.sha1(b'blob %d\0' % len(b) + b).hexdigest()
 ENC_SUBS = [('vias', 'Recursos'), ('qual', 'Qual via?'), ('guias', 'Guias práticos'), ('rotina', 'Rotina do gabinete'), ('pje', 'Caixas e fluxos do PJe'),
             ('comp', 'Competência'), ('mat', 'Matérias'), ('lex', 'Léxico'), ('reg', 'Regimento')]
-def montar(editor):
+ENC_SECAO = ('<section id="v-enc" hidden>\n  <div class="sub" role="tablist" id="enc-sub">' + ''.join(f'<button data-s="{k}" aria-selected="{str(k == "vias").lower()}">{n}</button>' for k, n in ENC_SUBS) +
+             '</div>\n  <div class="layout">\n    <aside id="enc-aside" aria-label="Navegação da enciclopédia"></aside>\n    <div class="content">\n      <div class="bar" id="enc-bar"><input class="q" id="enc-q" type="search" aria-label="Buscar na enciclopédia"></div>\n      <div id="enc-out"></div>\n    </div>\n  </div>\n</section>\n\n')
+def troca(t, a, b):
+    assert t.count(a) == 1, a[:70]
+    return t.replace(a, b)
+def montar(var):
+    """var = 'compendio' (um só código: modo padrão para todos; modo avançado liberado pelo login, ver acesso.js)
+             'editor'    (página do editor: grava no procs-muta pelo servidor; /editor/)"""
     t = t0
-    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if editor else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8'))
-    css = (H/'ementario.css').read_text(encoding='utf-8') + ((H/'editor.css').read_text(encoding='utf-8') if editor else '') + (H/'consulta.css').read_text(encoding='utf-8')
-    if not editor:
-        # versão pública: só Ementário, Editorial e Consulta; Enunciados e Repertório ficam no avançado
-        for a in ('    <button class="tab" role="tab" data-v="temas" aria-selected="true">Enunciados</button>\n', '    <button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>\n'):
-            assert t.count(a) == 1, a; t = t.replace(a, '')
-        t = t.replace('<section id="v-temas">', '<section id="v-temas" hidden>', 1)
-        js = 'window.VDM_PUBLICO=true;\n' + js
-        # identidade gêmea da Pauta da equipe: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
-        css += (H/'publico.css').read_text(encoding='utf-8')
-        a = '<div class="brand"><small>TRF3 · Gabinete CMT</small><b>CMT Compêndio · Referenciais</b></div>'
-        assert t.count(a) == 1; t = t.replace(a, '<div class="brand tw"><i></i><span>GABINETE CMT · <em>EQUIPE</em></span></div>')
-        # barra unificada com a Pauta da equipe: mesmos botões; as seções do Compêndio descem para uma faixa logo abaixo
-        i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
-        secoes = t[i0:i1]; t = t[:i0] + t[i1:]
-        SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
-        eqtabs = '  <nav class="eqtabs" aria-label="Seções"><a href="/equipe/#inicio">Início</a><a href="/equipe/#pauta">Pauta</a><a href="/compendio/" aria-current="page">Compêndio</a></nav><span class="eqsp"></span>\n'
-        a = '</span></div>\n'
-        k = t.index('<div class="brand tw">'); k = t.index(a, k) + len(a); t = t[:k] + eqtabs + t[k:]
-        a = '  <div class="right">\n'
-        assert t.count(a) == 1
-        t = t.replace(a, a + '    <a class="hb ic hbx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<i class="bdg" id="eq-cnot" hidden></i></a>'
-                       '<a class="hb ic hbx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<i class="bdg" id="eq-cpen" hidden></i></a>\n')
-        a = '  </div>\n</header>\n'
-        assert t.count(a) == 1
-        t = t.replace(a, '    <span class="chip-u" id="eq-u" hidden><b id="eq-ini"></b><span id="eq-nome"></span></span><button class="hb" id="eq-sair" type="button" hidden>Sair</button><a class="hb" id="eq-entrar" href="/equipe/" hidden>Entrar</a>\n' + a + '<div class="cp-sub">\n' + secoes + '</div>\n', 1)
-        js += '\n' + (H/'eqnav.js').read_text(encoding='utf-8')
-        a = "try{var th=localStorage.getItem('vdm-theme');if(th)document.documentElement.setAttribute('data-theme',th);}catch(e){}"
-        assert t.count(a) == 1
-        t = t.replace(a, "try{var th=localStorage.getItem('cmt-eq-tema')||'light';document.documentElement.setAttribute('data-theme',th);}catch(e){}")
-        t = t.replace("<title>CMT Compêndio</title>", "<title>Compêndio · Gabinete CMT</title>", 1)
-        a = "localStorage.setItem('vdm-theme',nv);"
-        assert t.count(a) == 1; t = t.replace(a, "localStorage.setItem('vdm-theme',nv);localStorage.setItem('cmt-eq-tema',nv);")
+    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8'))
+    css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8')
+    # abas do modo avançado: Enunciados, Repertório e Enciclopédia (escondidas até o login com acesso)
+    t = troca(t, '<button class="tab" role="tab" data-v="temas" aria-selected="true">Enunciados</button>', '<button class="tab" role="tab" data-v="temas" aria-selected="false" data-av hidden>Enunciados</button>')
+    t = troca(t, '<button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>', '<button class="tab" role="tab" data-v="rep" aria-selected="false" data-av hidden>Repertório</button>')
+    a = '    <button class="tab" role="tab" data-v="edit" aria-selected="false">Editorial</button>\n'
+    t = troca(t, a, a + '    <button class="tab" role="tab" data-v="enc" aria-selected="false" data-av hidden>Enciclopédia</button>\n')
+    t = troca(t, '<section id="v-consulta" hidden>', ENC_SECAO + '<section id="v-consulta" hidden>')
+    t = t.replace('<section id="v-temas">', '<section id="v-temas" hidden>', 1)
+    js = 'window.VDM_PUBLICO=true;\n' + js + '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8') + '\n' + (H/'acesso.js').read_text(encoding='utf-8')
+    # identidade gêmea da Pauta da equipe: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
+    css += (H/'publico.css').read_text(encoding='utf-8') + (H/'acesso.css').read_text(encoding='utf-8')
+    t = troca(t, '<div class="brand"><small>TRF3 · Gabinete CMT</small><b>CMT Compêndio · Referenciais</b></div>',
+              '<div class="brand tw"><i></i><span>GABINETE CMT · <em>' + ('EDITOR' if var == 'editor' else 'EQUIPE') + '</em></span></div>')
+    a = '  <div class="right">\n'
+    SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
+    t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>◧ Monitor</a>\n'
+              '    <a class="hb ic hbx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<i class="bdg" id="eq-cnot" hidden></i></a>'
+              '<a class="hb ic hbx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<i class="bdg" id="eq-cpen" hidden></i></a>\n')
+    # barra unificada com a Pauta da equipe: Início, Pauta, Compêndio; as seções do Compêndio descem para uma faixa logo abaixo
+    i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
+    secoes = t[i0:i1]; t = t[:i0] + t[i1:]
+    k = t.index('<div class="brand tw">'); k = t.index('</span></div>\n', k) + len('</span></div>\n')
+    t = t[:k] + '  <nav class="eqtabs" aria-label="Seções"><a href="/equipe/#inicio">Início</a><a href="/equipe/#pauta">Pauta</a><a href="/compendio/" aria-current="page">Compêndio</a></nav><span class="eqsp"></span>\n' + t[k:]
+    a = '  </div>\n</header>\n'
+    t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a + '<div class="cp-sub">\n' + secoes + '</div>\n')
+    js += '\n' + (H/'eqnav.js').read_text(encoding='utf-8')
+    t = troca(t, "try{var th=localStorage.getItem('vdm-theme');if(th)document.documentElement.setAttribute('data-theme',th);}catch(e){}",
+              "try{var th=localStorage.getItem('cmt-eq-tema')||'light';document.documentElement.setAttribute('data-theme',th);}catch(e){}")
+    t = troca(t, "localStorage.setItem('vdm-theme',nv);", "localStorage.setItem('vdm-theme',nv);localStorage.setItem('cmt-eq-tema',nv);")
     pre = ''
-    if editor:
+    if var == 'editor':
         cab = lambda p: {k: v for k, v in ler(p).items() if k != 'registros'}
         meta = {'repo': 'trf3bdutra/procs-muta', 'ramo': 'main', 'arquivos': {
             'modelos': {'path': 'modelos/modelos.json', 'sha': blob_sha(RAIZ/'modelos/modelos.json'), 'head': cab(RAIZ/'modelos/modelos.json')},
             'paragrafos': {'path': 'modelos/paragrafos.json', 'sha': blob_sha(RAIZ/'modelos/paragrafos.json'), 'head': cab(RAIZ/'modelos/paragrafos.json')},
             'pecas': {'path': 'apoio/cmt-compendio/fonte/editorial_pecas.json', 'sha': blob_sha(H/'editorial_pecas.json')},
-            'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')}}}
+            'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')},
+            'normas': {'path': 'apoio/repertorio-normativo-complemento.json', 'sha': blob_sha(RAIZ/'apoio/repertorio-normativo-complemento.json'), 'head': cab(RAIZ/'apoio/repertorio-normativo-complemento.json')}}}
         pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
-        # Enciclopédia (só no avançado): recursos, qual via, guias, rotina, PJe, competência, matérias e léxico
-        enc = (RAIZ/'apoio/enciclopedia.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')
-        pre += '<script type="application/json" id="enc-dados">' + enc + '</script>\n'
-        js += '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8')
-        css += (H/'enciclopedia.css').read_text(encoding='utf-8')
-        a = '    <button class="tab" role="tab" data-v="edit" aria-selected="false">Editorial</button>\n'
-        assert t.count(a) == 1
-        t = t.replace(a, a + '    <button class="tab" role="tab" data-v="enc" aria-selected="false">Enciclopédia</button>\n')
-        a = '<section id="v-consulta" hidden>'
-        assert t.count(a) == 1
-        t = t.replace(a, '<section id="v-enc" hidden>\n  <div class="sub" role="tablist" id="enc-sub">' + ''.join(f'<button data-s="{k}" aria-selected="{str(k == "vias").lower()}">{n}</button>' for k, n in ENC_SUBS) + '</div>\n  <div class="layout">\n    <aside id="enc-aside" aria-label="Navegação da enciclopédia"></aside>\n    <div class="content">\n      <div class="bar" id="enc-bar"><input class="q" id="enc-q" type="search" aria-label="Buscar na enciclopédia"></div>\n      <div id="enc-out"></div>\n    </div>\n  </div>\n</section>\n\n' + a)
-        js = 'window.VDM_EDITOR=true;\n' + js
-        t = t.replace('<title>CMT Compêndio</title>', '<title>CMT Compêndio · Avançado</title>')
-        t = t.replace('<b>CMT Compêndio · Referenciais</b>', '<b>CMT Compêndio · Avançado</b>', 1)
-        a = '  <div class="right">\n'
-        assert t.count(a) == 1
-        t = t.replace(a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor">◧ Monitor</a>\n')
+        css += (H/'editor.css').read_text(encoding='utf-8')
+        js = 'window.VDM_EDITOR=true;window.VDM_PAGINA_EDITOR=true;\n' + js
+        t = t.replace('<title>CMT Compêndio</title>', '<title>Editor · Compêndio · Gabinete CMT</title>', 1)
+    else:
+        t = t.replace('<title>CMT Compêndio</title>', '<title>Compêndio · Gabinete CMT</title>', 1)
     return t, js, css, pre
-def gerar_html(editor):
-    t, js, css, pre = montar(editor)
+def gerar_html(var):
+    t, js, css, pre = montar(var)
     for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
              ('/*__DATA__*/', (H/'snapshot.json').read_text(encoding='utf-8').strip()),
              ('/*__EDITORIAL__*/', EDJ),
@@ -223,8 +216,11 @@ def gerar_html(editor):
              ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
         assert t.count(a) == 1, a[:60]
         t = t.replace(a, b)
-    out = H.parent/('cmt-compendio-avancado.html' if editor else 'cmt-compendio.html')
+    out = H.parent/('cmt-editor.html' if var == 'editor' else 'cmt-compendio.html')
     out.write_text(t, encoding='utf-8')
     print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
-gerar_html(False)
-gerar_html(True)
+gerar_html('compendio')
+gerar_html('editor')
+velho = H.parent/'cmt-compendio-avancado.html'
+if velho.exists():
+    velho.unlink()   # o modo avançado agora é o próprio cmt-compendio.html, liberado pelo login
