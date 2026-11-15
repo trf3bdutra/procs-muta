@@ -559,7 +559,7 @@ html[data-theme=dark] .st.ok{background:#183447!important}
 .cc-wr{border-left-width:2px;color:#8a98a3}
 .cc-c.cc-hoje .cc-n small{color:#fff;font-weight:500}.cc-wr{display:none}.cc-wv{display:none}
 .cc-tip{border-radius:12px;background:rgba(19,36,47,.96)}
-.cc-lg[hidden]{display:none!important}.cc-help{width:18px;height:18px;border-radius:50%;background:#f1f4f6;color:#8a98a3;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:help}.cc-sc.fo{background:#f1f4f6}.cc-sc{opacity:.75}.cc-sc.fo{opacity:1}.cc-c{min-height:64px}.cc-lane{height:16px}.cc{container-type:inline-size}.cc-top{display:grid;grid-template-columns:250px minmax(0,1fr) 270px;gap:18px;align-items:start}
+.cc-lg[hidden]{display:none!important}.cc-help{width:18px;height:18px;border-radius:50%;background:#f1f4f6;color:#8a98a3;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;cursor:help}.cc-sc.fo{background:#f1f4f6}.cc-sc{opacity:.75}.cc-sc.fo{opacity:1}.cc-c{min-height:64px}.cc-lane{height:16px}.cc{container-type:inline-size}.cc-top{display:grid;grid-template-columns:250px minmax(0,1fr);gap:18px;align-items:start}
 .cc-c.cc-sel{background:#eef4f8!important}.cc-c.cc-sel .cc-n{color:#13242f;text-decoration:underline 2px;text-underline-offset:3px}
 .cc-wc.cc-sel{box-shadow:0 0 0 1.5px #13242f}.cc-wc{cursor:pointer}
 .cc-sb{background:#fafbfc;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;position:sticky;top:10px}
@@ -575,10 +575,25 @@ html[data-theme=dark] .st.ok{background:#183447!important}
 .cc-sb-s li.now{color:#13242f;font-weight:700;background:#f4f7f9}.cc-sb-s li.now .ic{box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--c)}
 .cc-sb-s li.late .ic{border-color:#c0392b;background:#fdecea;color:#c0392b}.cc-sb-s li.late b{color:#c0392b}
 .cc-sb-s li.nd{opacity:.5;font-style:italic}.cc-sb-s li.nd .ic{border-style:dashed}
-.cc-ft{padding:0 20px 14px}.cc-ftb{border:0;background:#f1f4f6;border-radius:8px;padding:7px 12px;font:600 12px Figtree;color:#56656e;cursor:pointer;width:100%;text-align:left}
-.cc-ftc{margin-top:10px}
 .cc-pc{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:600;color:#56656e;margin-top:5px}.cc-pc-b{flex:1;height:4px;background:#eef1f4;border-radius:2px;display:flex;overflow:hidden}.cc-pc-b em{display:block;height:4px}
-.cc-dir .cc-sb-s{padding:8px 10px}.cc-dir .cc-sb-s ol{margin-top:5px;gap:0}.cc-dir .cc-sb-s li{padding:2px 4px;font-size:11px}.cc-dir .cc-sb-s li .ic{width:16px;height:16px;font-size:8.5px}.cc-dir{gap:8px;padding:10px}
+/* faixa das sessões: marcos das sessões ativas lado a lado, ou a linha do tempo */
+.cc-dir{grid-column:1/-1;position:static;gap:10px;padding:10px 12px 12px}
+.cc-dh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:30px}.cc-dh b{font-size:13px;font-weight:700;color:#13242f}.cc-dh small{font-size:11.5px;color:#8a98a3;font-weight:600}
+.cc-sg{margin-left:auto;display:inline-flex;background:#e9eef2;border-radius:9px;padding:2px;gap:2px}
+.cc-sg button{border:0;background:transparent;font:600 11.5px Figtree,system-ui,sans-serif;color:#56656e;padding:5px 11px;border-radius:7px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.cc-sg button:hover{color:#13242f}.cc-sg button.on{background:#fff;color:#13242f;box-shadow:0 1px 2px rgba(19,36,47,.14)}.cc-sg button:focus-visible{outline:2px solid #006291;outline-offset:1px}
+.cc-dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px}
+.cc-dtl{background:#fff;border-radius:10px;box-shadow:0 1px 2px rgba(19,36,47,.07);overflow-x:auto;overflow-y:hidden}
+.cc-dir .cc-sb-s{padding:10px 12px 8px}
+.cc-dir .cc-sb-s ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:10px;gap:0}
+.cc-dir .cc-sb-s li{flex-direction:column;align-items:center;text-align:center;gap:3px;padding:2px 2px 4px;font-size:10.5px;line-height:1.2;position:relative}
+.cc-dir .cc-sb-s li::before{content:'';position:absolute;top:13px;right:50%;width:100%;height:2px;background:#e3e8ec}
+.cc-dir .cc-sb-s li:first-child::before{display:none}
+.cc-dir .cc-sb-s li.done::before,.cc-dir .cc-sb-s li.now::before{background:var(--c)}
+.cc-dir .cc-sb-s li .ic{width:22px;height:22px;font-size:11px;position:relative;z-index:1;background:#fff}
+.cc-dir .cc-sb-s li.done .ic{background:var(--c);color:#fff}.cc-dir .cc-sb-s li.late .ic{background:#fdecea;color:#c0392b}
+.cc-dir .cc-sb-s li .nm{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.cc-dir .cc-sb-s li b{margin-left:0;font-size:10.5px}.cc-dir .cc-sb-s li.now{background:transparent}.cc-dir .cc-sb-s li.now b{color:var(--c)}
 .cc-td{background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 2px rgba(19,36,47,.07)}.cc-td-t{font-size:12.5px;font-weight:700;margin-bottom:6px;display:flex}.cc-td-t small{margin-left:auto;color:#8a98a3;font-weight:600}
 .cc-td-i{display:flex;gap:7px;align-items:flex-start;font-size:11.5px;line-height:1.4;padding:5px 2px;border-top:1px solid #f1f4f6;cursor:pointer}.cc-td-i input{margin-top:2px;accent-color:#006291}.cc-td-i em{font-style:normal;font-weight:600}.cc-td-i{border-top:0;border-left:3px solid var(--c,#c9d3da);background:#fafbfc;border-radius:0 6px 6px 0;padding:6px 8px;margin-top:5px}.cc-tag{display:inline-block;font-style:normal;font-size:9.5px;font-weight:800;color:#fff;border-radius:4px;padding:1px 6px;margin:0 6px 3px 0;letter-spacing:.02em}.cc-td-i.ok .cc-tag{opacity:.5}
 .cc-td-nx{font-size:10.5px;font-weight:700;color:#8a98a3;text-transform:uppercase;letter-spacing:.06em;margin:2px 0}.cc-td-i.ok span{text-decoration:line-through;color:#a0acb5}
@@ -1824,7 +1839,7 @@ function montar(el,cal,ex){
   }
   function semanas(vis){
     const ini=st.ini||iso(new Date(P(hoje)-14*DIA)), fim=iso(new Date(+P(ini)+70*DIA));
-    const X0=150, W=el.clientWidth-40-X0-20, x=d=>X0+(P(d)-P(ini))/(P(fim)-P(ini))*W;
+    const X0=150, W=el.clientWidth-40-24-X0-20, x=d=>X0+(P(d)-P(ini))/(P(fim)-P(ini))*W;
     const vs=vis.filter(s=>s.date>=ini&&(s.marcos.pautarAte||s.date)<=fim);
     let h='', H=34+vs.length*74;
     for(let d=P(ini);d<=P(fim);d=new Date(+d+DIA)) if(d.getDay()===1){const px=x(iso(d));h+=`<div class="cc-tk" style="left:${px}px"></div><div class="cc-tkl" style="left:${px+3}px">${F(iso(d))}</div>`;}
@@ -1935,21 +1950,23 @@ function montar(el,cal,ex){
   }
   function lateral(){
     const dia=st.dia||hoje, ativas=ses.filter(s=>marcos(s)[0].d<=dia&&s.date>=dia);
-    const est=(m)=>m.d<dia?'done':m.d===dia?'now':'fut';
+    const est=(m)=>m.d<dia?'done':m.d===dia?'now':'fut', MKC={pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação',date:'Sessão'};
     const card=s=>{const ms=marcos(s), p=prog(s), n=s.processos||0, nx=ms.find(m=>m.d>=dia), dd=nx?Math.round((P(nx.d)-P(dia))/DIA):0;
       return `<div class="cc-sb-s" data-ses="${s.date}" style="--c:${s.cor}">
         <div class="cc-sb-h"><i style="background:${s.cor}"></i><b>Sessão ${F(s.date)}</b>${s.hora?`<span>${s.hora}</span>`:''}<em>${nx?(dd===0?nx.n+' hoje':nx.n+' em '+dd+' d'):''}</em></div>
         ${n?`<div class="cc-pc"><span title="minutadas">✎ ${p.minutadas}/${n}</span><span title="corrigidas">✓ ${p.corrigidas}/${n}</span><span title="liberadas">⚿ ${p.liberadas}/${n}</span><i class="cc-pc-b"><em style="width:${Math.round(p.minutadas/n*100)}%;background:${s.cor}"></em><em style="width:${Math.round(p.liberadas/n*100)}%;background:${s.cor};opacity:.45"></em></i></div>`:'<div class="cc-sb-p" style="color:#c0392b">sem pauta</div>'}
         <ol>${MK.map(([k,nm,ic])=>{const d=k==='date'?s.date:s.marcos[k];
-          if(!d) return `<li class="nd"><span class="ic"><i class="ti ${ic}"></i></span>${nm}<b>a definir</b></li>`;
+          if(!d) return `<li class="nd"><span class="ic"><i class="ti ${ic}"></i></span><span class="nm">${MKC[k]||nm}</span><b>a definir</b></li>`;
           const e=est({d}), late=estado(s,{k,d})==='late'&&d<dia;
-          return `<li class="${e}${late?' late':''}" data-s="${s.date}" data-k="${k}"><span class="ic"><i class="ti ${ic}"></i></span>${nm}<b>${F(d)}</b></li>`;}).join('')}</ol></div>`;};
+          return `<li class="${e}${late?' late':''}" data-s="${s.date}" data-k="${k}" title="${nm} · ${F(d)}"><span class="ic"><i class="ti ${ic}"></i></span><span class="nm">${MKC[k]||nm}</span><b>${F(d)}</b></li>`;}).join('')}</ol></div>`;};
     const esq=`<div class="cc-sb cc-esq"><div class="cc-sb-t">${dia===hoje?'Hoje':cap0(FD(dia,{weekday:'long'}))}<span class="cc-dd">${FD(dia,{day:'numeric',month:'long'})}</span><small>${dia===hoje?'alertas e afazeres':'afazeres do dia'}</small><span class="cc-esq-b"><button class="cc-ib cc-tx" data-a="novo" title="Cadastrar afazer, alerta, evento, prazo-limite, data ou ausência" aria-label="Cadastrar">+</button><button class="cc-ib cc-tx" data-a="lista" title="Gerenciar cadastrados" aria-label="Gerenciar">☰</button></span></div>
       ${dia===hoje?`<div class="cc-al">${(st.alx?alertas():alertas().slice(0,1)).map(a=>`<div class="cc-a ${a[0]}" data-go="${a[3].date}"><i class="ti ${a[1]}"></i>${a[2]}</div>`).join('')||'<small style="color:#8a98a3">Nenhum marco crítico nos próximos 10 dias.</small>'}${alertas().length>1?`<button class="cc-pill" data-a="alx">${st.alx?'menos':'+'+(alertas().length-1)+' alertas'}</button>`:''}</div>`:''}
       ${(()=>{const L=afazeres(dia),fz=feitos(); if(!L.length){let d=dia,P2=[];for(let i=0;i<30&&!P2.length;i++){d=iso(new Date(+P(d)+DIA));P2=afazeres(d).map(x=>({...x,d}));} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>nenhum</small></div>${P2.length?`<div class="cc-td-nx">Próximos · ${F(P2[0].d)}</div>`+P2.map(x=>`<div class="cc-td-i" data-dia="${x.d}" style="--c:${x.s.cor}"><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></div>`).join(''):''}</div>`;} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>${L.filter(x=>fz[x.id]).length}/${L.length}</small></div>${L.map(x=>`<label class="cc-td-i${fz[x.id]?' ok':''}" style="--c:${x.s.cor}"><input type="checkbox" data-fz="${x.id}"${fz[x.id]?' checked':''}><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></label>`).join('')}</div>`;})()}
 </div>`;
     const dir=`<div class="cc-sb cc-dir">
-      ${ativas.map(card).join('')||'<div class="cc-wv" style="display:block">Nenhuma sessão em andamento neste dia.</div>'}</div>`;
+      <div class="cc-dh"><b>${st.tl?'Linha do tempo das sessões':'Sessões em andamento'}</b><small>${st.tl?'10 semanas · marcos de todas as sessões':(ativas.length?ativas.length+(ativas.length>1?' sessões':' sessão')+' · ':'')+(dia===hoje?'hoje':'em '+F(dia))}</small>
+        <span class="cc-sg" role="tablist"><button role="tab" class="${st.tl?'':'on'}" data-a="dvm" aria-selected="${!st.tl}"><i class="ti ti-layout-columns"></i>Marcos</button><button role="tab" class="${st.tl?'on':''}" data-a="dvt" aria-selected="${!!st.tl}" title="Linha do tempo (T)"><i class="ti ti-timeline"></i>Linha do tempo</button></span></div>
+      ${st.tl?`<div class="cc-dtl">${semanas(ses)}</div>`:`<div class="cc-dg">${ativas.map(card).join('')||'<div class="cc-wv" style="display:block">Nenhuma sessão em andamento neste dia.</div>'}</div>`}</div>`;
     return [esq,dir];
   }
   function dialogo(){
@@ -2010,7 +2027,6 @@ function montar(el,cal,ex){
       
       
       <div class="cc-body">${(()=>{const [e2,d2]=lateral();return `<div class="cc-top">${e2}<div>${mes(vis)}</div>${d2}</div>`})()}${semanaFaixa(vis)}</div>
-      <div class="cc-ft"><button class="cc-ftb" data-a="tl"><i class="ti ti-chevron-${st.tl?'down':'up'}"></i> Linha do tempo das sessões</button>${st.tl?`<div class="cc-ftc">${semanas(vis)}</div>`:''}</div>
       <div class="cc-lg" hidden>${MK.map(m=>`<span><i class="ti ${m[2]}"></i>${m[1]}</span>`).join('')}<span style="margin-left:auto">cheio = cumprido · pulsando = próximo · vermelho = vencido sem cumprir · tracejado = datas a definir · teclas ← → H A S M</span></div>
       <div class="cc-tip" hidden></div>${dialogo()}</div>`;
     t=el.querySelector('.cc-tip'); ajustaForm(); const f1=el.querySelector('form.cc-dl [name=titulo]'); if(f1&&!f1.value) f1.focus();
@@ -2022,7 +2038,7 @@ function montar(el,cal,ex){
       else if(k==='novo'){st.dlg={modo:'form',it:{tipo:'afazer',freq:'unica'}};}
       else if(k==='lista'){st.dlg={modo:'lista'};}
       else if(k==='fechar'){st.dlg=null;}
-      else if(k==='tl'){st.tl=!st.tl;ls.set('cc_tl',st.tl);}
+      else if(k==='tl'||k==='dvm'||k==='dvt'){st.tl=k==='tl'?!st.tl:k==='dvt';ls.set('cc_tl',st.tl);}
       else if(k==='min'){st.min=!st.min;ls.set('cc_min',st.min);}
       else if(k==='sem'||k==='mes'||k==='ambos'){st.vista=k;ls.set('cc_vista2',k);}
       else if(k==='hoje'){st.ini=null;st.mes=null;st.semRef=null;st.dia=null;}
@@ -2058,7 +2074,7 @@ function montar(el,cal,ex){
     const s=ses.find(x=>x.date===m.dataset.s), mk=marcos(s).find(x=>x.k===m.dataset.k); tip(e,s,mk);});
   el.addEventListener('mouseleave',()=>{if(t)t.hidden=true});
   window.addEventListener('cmt-agenda',()=>{ if(el.isConnected) render(); });
-  el.tabIndex=0; el.addEventListener('keydown',e=>{if(st.dlg){if(e.key==='Escape'){st.dlg=null;render();}return;} if(e.target.closest('input,select,textarea'))return; const pk={d:'dia',s:'sem',m:'mes'}[e.key]; if(pk){st.passo=pk;ls.set('cc_passo',pk);render();return;} const m={ArrowLeft:'prev',ArrowRight:'next',h:'hoje',t:'tl'}[e.key]; if(m){e.preventDefault(); el.querySelector(`[data-a="${m}"]`).click();}});
+  el.tabIndex=0; el.addEventListener('keydown',e=>{if(st.dlg){if(e.key==='Escape'){st.dlg=null;render();}return;} if(e.target.closest('input,select,textarea'))return; const pk={d:'dia',s:'sem',m:'mes'}[e.key]; if(pk){st.passo=pk;ls.set('cc_passo',pk);render();return;} const m={ArrowLeft:'prev',ArrowRight:'next',h:'hoje',t:'tl'}[e.key]; if(m){e.preventDefault(); const bt=el.querySelector(`[data-a="${m==='tl'?(st.tl?'dvm':'dvt'):m}"]`); if(bt) bt.click();}});
   addEventListener('resize',()=>render());
   render();
   return {render};
