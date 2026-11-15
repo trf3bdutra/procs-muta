@@ -135,7 +135,56 @@ html[data-theme=dark] .trb{--t-bg:#0a1821;--t-ln:#1e3747;--t-rs:#10222e;--t-ti:#
 .tp-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.tp-h small{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--t-mu)}.tp-h b{font-size:13px;color:var(--t-ti);white-space:nowrap}
 .tp-b{height:7px;border-radius:4px;background:var(--t-bar);overflow:hidden;margin-top:8px}.tp-b i{display:block;height:100%;background:var(--t-gab)}.tp.eu .tp-b i{background:var(--t-eu)}
 .trb-fil{display:flex;height:3px}.trb-fil i{flex:1;background:#006291}.trb-fil i+i{background:#207242}
-#v-pauta.mono .trb,#v-pauta.ctl .trb,#v-pauta.urg .trb{display:none!important}#v-pauta:not(.mono):not(.ctl):not(.urg) .pt-h,#v-pauta:not(.mono):not(.ctl):not(.urg) #mk{display:none}
+#v-pauta.mono #trb,#v-pauta.ctl .trb,#v-pauta.urg .trb{display:none!important}.trm{display:none}#v-pauta.mono .trm{display:block}#v-pauta.mono .pt-h,#v-pauta.mono .pt-top{display:none}
+/* Monocráticas: indicadores do período no painel superior */
+.trm-st{font-size:12px;font-weight:700;color:var(--t-mu);margin-right:6px}.trm-lb{min-width:150px;justify-content:center;color:var(--t-ti)}
+.trb-c .b.trm-reg{height:34px;padding:0 14px;background:var(--t-acao);border:1px solid var(--t-acao);color:var(--t-acao-ink);font-weight:750}
+.trb-c .b.ic2:disabled{opacity:1;color:var(--t-mu);background:var(--t-bg);cursor:not-allowed}
+.trm-k{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.tmk{background:var(--t-rs);border:1px solid var(--t-ln);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.tmk-h{display:flex;justify-content:space-between;align-items:center}.tmk-h small{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--t-mu)}.tmk-h svg{color:var(--t-acao)}
+.tmk b{font-size:26px;font-weight:750;color:var(--t-ti);line-height:1.15}.tmk span{font-size:12px;color:var(--t-mu)}
+@media (max-width:900px){.trm-k{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* corpo: lista à esquerda e fila de urgências à direita (só nas Monocráticas) */
+#v-pauta.mono .pt-corpo{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}#v-pauta:not(.mono) .urq{display:none}.pt-lista{min-width:0}
+@media (max-width:1100px){#v-pauta.mono .pt-corpo{grid-template-columns:1fr}}
+/* prontuário lateral da pauta: mesmo molde da fila de urgências, em azul */
+.prq{display:none}#v-pauta.prt-on:not(.mono):not(.ctl) .prq{display:block}
+.prt{background:#f2f7fb;border:1px solid #cfdfec;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;box-shadow:0 10px 30px #21394c1f}
+@media (min-width:1181px){.prt{position:fixed;z-index:15;top:72px;bottom:12px;overflow:hidden}}
+.prt-body{flex:1 1 auto;min-height:0;overflow:auto}.prt-body::-webkit-scrollbar{width:6px}
+/* campos compactos, rótulo acima, em duas colunas: cada aba cabe na tela sem rolagem */
+.prt-pc .pn{display:block}.prt-pc .pn section{border:0;background:transparent;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;align-content:start}
+.prt-pc .pn section+section{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}.prt-pc .pn section>h3{grid-column:1/-1;margin:0}.prt-p>section:only-child>h3{display:none}.xb-v{width:28px}.prt-pc .pn section.prt-dts{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pc.prt-body{overflow:auto}.prt-pc .grid{display:contents}.prt-pc .f{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding:0;border:0;min-width:0}.prt-pc .f>.v{width:100%}.prt-pc .f>span{font-size:10.5px;font-weight:800;color:var(--mut);letter-spacing:.02em}
+.prt-pc .f:has(textarea),.prt-pc .f:has(.row),.prt-pc .pn section>:not(.f):not(.grid):not(h3){grid-column:1/-1}
+.prt-pc input:not([type=checkbox]):not([type=radio]),.prt-pc select{height:30px;font-size:12.5px;width:100%;box-sizing:border-box}.prt-pc textarea{font-size:12.5px;height:34px;min-height:34px;width:100%;box-sizing:border-box;resize:vertical}
+.prt-pc .q{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;font-size:12px;padding:3px 0;border-top:1px dashed var(--line)}.prt-pc .q input[type=radio]{width:auto;height:auto;margin:0 3px 0 0}.prt-pc .q label{display:inline-flex;align-items:center;margin-left:6px;font-size:11.5px}.prt-pc .sub{grid-column:1/-1}.prt-pc .row{gap:6px}html[data-theme=dark] .prt{background:#10263a;border-color:#27465c}
+.prt-h{display:flex;gap:10px;align-items:center}.prt-ic{width:34px;height:34px;border-radius:8px;background:#005982;color:#fff;display:grid;place-items:center;flex-shrink:0}
+.prt-h h2{margin:0;font-size:16px;color:#005982}html[data-theme=dark] .prt-h h2{color:#a9cfe6}.prt-h small{display:block;color:var(--mut);font-size:11.5px}.prt-h .sp{flex:1}
+.prt-hb{display:flex;gap:4px}.prt-h button{width:30px;height:30px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font-size:15px;line-height:1}
+.prt-id{background:var(--card);border:1px solid var(--line);border-left:3px solid #005982;border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:2px}
+.prt-id b{font:700 12.5px var(--mono);color:var(--ink)}.prt-id small{font-size:11.5px;color:var(--mut)}.prt-pt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prt-chs{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.prt-ch{font-size:11px;color:var(--mut);background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:2px 8px}.prt-ch b{color:var(--ink);font:700 11px var(--font)}.prt-ch.al{background:#fbe7e0;border-color:#ecc9b8;color:#a7433d}.prt-ch.al b{color:#a7433d}
+html[data-theme=dark] .prt-ch.al{background:#4a2622;border-color:#5a3434;color:#f2a397}html[data-theme=dark] .prt-ch.al b{color:#f2a397}.prt-id small b{font:700 11.5px var(--font)}
+.prt .uq-k{margin:0}.prt .uq-m{padding:6px 8px}.prt .uq-m b{font-size:16px}.prt .uq-m.al b{color:#a7433d}
+.prt-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px}
+.prt-tabs button{border:0;background:transparent;border-radius:7px;padding:5px 4px;font:700 11.5px var(--font);color:var(--mut);cursor:pointer;line-height:1.25}.prt-tabs button small{display:block;font-size:10px;font-weight:700;opacity:.85}
+.prt-tabs button[aria-selected=true]{background:#005982;color:#fff}html[data-theme=dark] .prt-tabs button[aria-selected=true]{background:#4e9bcb;color:#061119}
+.pc.prt-pc{border:0;background:transparent;box-shadow:none;border-radius:0;overflow:visible}.prt-pc .pn{grid-template-columns:1fr}.prt-pc .grid{grid-template-columns:1fr}.prt-pc .f{grid-template-columns:112px minmax(0,1fr)}
+.prt-f{display:flex;gap:6px;flex-shrink:0}.prt-f .b{height:32px}.prt-f .b.lg{flex:1}
+#lst .pc.prt-sel{outline:2px solid #005982;outline-offset:1px}#lst tr.pc.prt-sel td{background:#e6f0f7}html[data-theme=dark] #lst tr.pc.prt-sel td{background:#163650}
+#lst.cards .pc .rw{cursor:pointer}
+@media (min-width:1181px){#v-pauta.prt-on #lst .pc.cpt .ics,#v-pauta.prt-on #lst .pc.cpt .rs{display:none}#v-pauta.prt-on #lst .pc.cpt .rw{grid-template-columns:28px 20px 34px minmax(0,1.2fr) minmax(0,1fr) auto 30px}}
+.uq{background:#fdf6f3;border:1px solid #ecc9b8;border-radius:12px;padding:12px;position:sticky;top:72px;max-height:calc(100vh - 88px);overflow:auto}html[data-theme=dark] .uq{background:#2a1c1f;border-color:#5a3434}
+.uq-h{display:flex;gap:10px;align-items:center}.uq-ic{width:34px;height:34px;border-radius:8px;background:#a7433d;color:#fff;display:grid;place-items:center;font-weight:900;font-size:17px;flex-shrink:0}
+.uq-h h2{margin:0;font-size:16px;color:#a7433d}.uq-h small{color:var(--mut);font-size:11.5px}html[data-theme=dark] .uq-h h2{color:#f2a397}
+.uq-k{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0}.uq-m{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;text-align:left;font:inherit;color:inherit}
+.uq-m b{display:block;font-size:20px;color:var(--ink)}.uq-m.al b{color:#a7433d}html[data-theme=dark] .uq-m.al b{color:#f2a397}.uq-m small{font-size:10.5px;font-weight:700;color:var(--mut)}button.uq-m{cursor:pointer}button.uq-m:hover{border-color:#a7433d}
+.uq-l{display:flex;flex-direction:column;gap:8px}.uq-c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:3px}.uq-c.pend{border-left:3px solid #a7433d}
+.uq-tp{display:flex;gap:6px;flex-wrap:wrap}.uq-t{background:#fbe7e0;color:#a7433d;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:800}html[data-theme=dark] .uq-t{background:#4a2622;color:#f2a397}.uq-n{background:var(--soft);color:var(--mut);border-radius:4px;padding:2px 7px;font-size:11px;font-weight:700}
+.uq-cnj{font:700 12px var(--mono);color:var(--ink);margin-top:3px}.uq-c small{font-size:11.5px;color:var(--mut)}.uq-c small b{color:var(--ink)}.uq-c small b.al{color:#a7433d}html[data-theme=dark] .uq-c small b.al{color:#f2a397}
+.uq-a{display:flex;gap:6px;margin-top:6px}.uq-a .b{flex:1;height:30px;font-size:12px}.uq-a .b.ok{background:#e3f0ea;color:#28744b;border-color:#9fd0b6}
+.uq-ap{margin-top:10px}.uq-ap summary{cursor:pointer;font-weight:800;font-size:12.5px;color:var(--mut);margin-bottom:8px}.uq-f{display:flex;gap:6px;margin-top:10px}.uq-f .b{flex:1;height:32px}.uq-v{font-size:12px;margin:4px 0}#v-pauta:not(.mono):not(.ctl):not(.urg) .pt-h,#v-pauta:not(.mono):not(.ctl):not(.urg) #mk{display:none}
 @media (max-width:900px){.trb-p{grid-template-columns:repeat(2,minmax(0,1fr))}.trb-mk{overflow-x:auto;grid-auto-columns:minmax(118px,1fr)}.trb h1{font-size:22px}}
 .pt-ses{background:var(--card);border:1px solid var(--line);border-left:3px solid #c4953c;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
 .pt-sl{display:flex;align-items:center;justify-content:space-between;gap:8px}.pt-sl small{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
@@ -573,6 +622,10 @@ html[data-theme=dark] .st.ok{background:#183447!important}
         <div class="trb-c"><span class="trb-tag" id="ses-tag"></span><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><label class="trb-sl">Sessão<select id="ses" aria-label="Sessão"></select></label><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span><small id="ses-sub" hidden></small></div></div>
       <ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
       <div class="trb-p" id="trb-p"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
+    <section class="trb trm" id="trm" aria-labelledby="trm-t"><div class="trb-in">
+      <div class="trb-h"><div><small class="trb-ey">Produção · Decisões monocráticas</small><h1 id="trm-t">Monocráticas</h1><p class="trb-d">Gestão de decisões, revisão e assinatura · indicadores pela data de cada etapa.</p></div>
+        <div class="trb-c"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b trm-reg" id="trm-reg" aria-expanded="false">+ Registrar monocrática</button></div></div>
+      <div class="trm-k" id="trm-k"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <div class="pt-top">
       <div class="pt-k" id="pt-k"></div>
@@ -583,6 +636,7 @@ html[data-theme=dark] .st.ok{background:#183447!important}
     <section class="metas" id="sobr"></section>
     <section class="metas" id="sens"></section>
     <div class="pt-mk" id="mk"></div>
+    <div class="pt-corpo"><div class="pt-lista">
     <form class="urg-n mono-n" id="mono-n" hidden><b>Registrar monocrática</b><input name="cnj" placeholder="nº CNJ do processo" required><select name="tipo"><option value="">tipo de ato…</option></select><button class="b pri">Registrar</button></form>
     <section class="pt-hd" aria-label="Filtros e seleção da lista">
     <div class="pt-bar">
@@ -601,6 +655,7 @@ html[data-theme=dark] .st.ok{background:#183447!important}
     <div class="pt-sel"><span id="sel-n">0 selecionado(s)</span><button class="b" id="sel-filt">Selecionar filtrados</button><button class="b" id="sel-limpa">Limpar seleção</button><button class="b" id="sel-copia">Copiar processos</button><span class="sp"></span><small class="mut" id="pt-nota">A composição da pauta e os marcos são definidos no CMT-monitor.</small></div>
     </section>
     <div class="lst cards" id="lst"></div>
+    </div><aside class="urq" id="urq" aria-label="Fila de urgências"></aside><aside class="prq" id="prq" aria-label="Prontuário do processo"></aside></div>
   </main>
 </div>
 <aside class="drw" id="p-not" hidden><div class="drw-h"><h2>Notificações</h2><button class="b" data-fecha>×</button></div>
@@ -713,7 +768,7 @@ document.addEventListener('change',function(e){var k=e.target.getAttribute&&e.ta
 $('#urg').addEventListener('click',function(e){var b;
   if((b=e.target.closest('[data-criar-mono]'))){var it=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-criar-mono');})[0];if(it)regMono(it.cnj,{mono:true,tipoAto:(it.ctl||{}).tipoAto||'Decisão de urgência'},'Monocrática registrada a partir da urgência.');return;}
   if((b=e.target.closest('[data-ver-mono]'))){var k=b.getAttribute('data-ver-mono'),it=lista().filter(function(i){return dg(i.cnj)===k;})[0];if(it){S.escopo='todos';$('#ir-k').value='item';$('#ir-v').value=it.item;irPara();}return;}
-  if(e.target.id==='urg-x'){S.urgAb=S.urgAb===false;painelUrg();return;}
+  if(e.target.id==='urg-x'){S.urgTab=false;painelUrg();return;}
   if((b=e.target.closest('[data-tirar-urg]'))){var it2=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-tirar-urg');})[0];if(it2&&confirm('Excluir a urgência deste processo? A monocrática, se houver, continua.'))regMono(it2.cnj,{urgTipo:'',urgSit:'',urgData:'',urgObs:'',urgPedido:'',mono:!!it2.mono},'Urgência excluída.');return;}
   if((b=e.target.closest('[data-sug]'))){regMono(b.getAttribute('data-sug'),{urgTipo:tipoDaEtiqueta(b.getAttribute('data-et')),urgSit:'Pendente · não apreciada',urgObs:'Etiqueta do PJe: '+b.getAttribute('data-et')},'Urgência registrada.');return;}});
 $('#metas').addEventListener('click',function(e){var b=e.target.closest('[data-mf]');if(b){var k=b.getAttribute('data-mf'),v=b.getAttribute('data-v');MT[k]=MT[k]===v?'':v;renderMetas();return;}
@@ -820,14 +875,14 @@ var ICN={pri:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke
   ic:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>'};
 function render(){
   var L=lista(),V=filtrar(),ss=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},m=ss.marcos||{},h=hoje(),MO=S.fonte==='mono',UR=S.fonte==='urg';
-  $('#pt-ey').textContent=UR?'Gabinete / Liminares e tutelas':MO?'Produção / Decisões monocráticas':'Produção / Pauta de julgamento';$('#pt-t').textContent=UR?'Urgências':MO?'Monocráticas':'Pauta de Julgamento';$('#f-pri').textContent=MO?'Urgências':'Prioridades';painelUrg();$('#pt-nota').textContent=MO?'A monocrática é registrada quando a minuta é feita ou pode ser feita. O pedido urgente se registra no cartão ou no painel de urgências acima.':'A composição da pauta e os marcos são definidos no CMT-monitor.';$('#mono-n').hidden=!MO;if(MO&&$('#mono-n').elements.tipo.options.length<2)$('#mono-n').elements.tipo.innerHTML='<option value="">tipo de ato…</option>'+CPM.tipoAto.map(function(x){return '<option>'+x+'</option>';}).join('');
+  $('#pt-ey').textContent=UR?'Gabinete / Liminares e tutelas':MO?'Produção / Decisões monocráticas':'Produção / Pauta de julgamento';$('#pt-t').textContent=UR?'Urgências':MO?'Monocráticas':'Pauta de Julgamento';$('#f-pri').textContent=MO?'Urgências':'Prioridades';painelUrg();$('#pt-nota').textContent=MO?'A monocrática é registrada quando a minuta é feita ou pode ser feita. O pedido urgente se registra no cartão ou na fila de urgências ao lado.':'A composição da pauta e os marcos são definidos no CMT-monitor.';$('#mono-n').hidden=!(MO&&S.monoForm);if(MO&&$('#mono-n').elements.tipo.options.length<2)$('#mono-n').elements.tipo.innerHTML='<option value="">tipo de ato…</option>'+CPM.tipoAto.map(function(x){return '<option>'+x+'</option>';}).join('');
   /* cabeçalho: sessão e números da sessão inteira */
   var fut=S.cal.filter(function(s){return s.date>=h;}).sort(function(a,b){return a.date.localeCompare(b.date);});
   $('#ses-tag').textContent=!S.ses?'':fut[0]&&fut[0].date===S.ses?'sessão mais próxima':S.ses<h?'sessão realizada':'sessão futura';
   $('#ses-sub').textContent=S.ses?br(S.ses)+(ss.hora?' · '+ss.hora:'')+' · '+diaSem(S.ses):'';
   var n=function(f){return L.filter(f).length;},jul=n(function(i){return /^julgad/i.test(i.resultado||'');}),adi=n(function(i){return /^adiad/i.test(i.resultado||'');}),ret=n(function(i){return /^retirad/i.test(i.resultado||'');});
   var mi=n(function(i){return i.dataMinuta;}),co=n(function(i){return i.dataCorrecao;}),li=n(function(i){return i.dataLiberacao;}),al=n(function(i){return alertas(i).length;}),ic=n(function(i){return (i.ctl||{}).intercor;}),sem=n(function(i){return !i.servidor||i.servidor==='—';}),mt=n(metaDe);
-  $('#pt-st').textContent=ic+' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'+(mt===1?'':'s');
+  $('#pt-st').textContent=ic+' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'+(mt===1?'':'s');if(MO)bandaMono();prontLateral();
   var det=function(k){if(!S.kx[k])return '';var o='';
     if(k==='p'){var c={};L.forEach(function(i){var a=MO?((i.ctl||{}).tipoAto||'tipo de ato não informado'):aprec(i);c[a]=(c[a]||0)+1;});o=Object.keys(c).map(function(a){return '<span><b>'+c[a]+'</b> '+esc(a)+'</span>';}).join('');}
     if(k==='m'){var r={};L.forEach(function(i){var s=i.servidor||'sem minutante';r[s]=r[s]||[0,0];r[s][0]++;if(i.dataMinuta)r[s][1]++;});o=Object.keys(r).sort().map(function(s){return '<span>'+esc(s)+' <b>'+r[s][1]+'/'+r[s][0]+'</b></span>';}).join('');}
@@ -921,7 +976,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 function fdPills(){var s=$('#fd .fd-pl');if(s)s.innerHTML=fdCtlPills();var t=$('#fd [data-fda="'+CE_ABA+'"]');if(t){var n=fdCtlAtivos().length;t.innerHTML=CE_ABA+(n?' <i class="fdn">'+n+'</i>':'');}}
 /* ficha única do processo: diálogo padrão (padrao/ficha-dialogo.js, o mesmo do CMT-monitor), lido e gravado pela API */
 function fichaDialogo(cnj,lst,aba){if(!window.CMTFicha){toast('Ficha indisponível nesta página.');return;}
-  CMTFicha.abrir(cnj,{aba:aba,lista:lst||[],avisar:function(t){toast(t);},
+  CMTFicha.abrir(cnj,{aba:aba,lista:lst||[],leitura:S.fonte!=='mono',avisar:function(t){toast(t);},
     carregar:function(c){return api('/api/pauta?ficha='+encodeURIComponent(c)).then(function(d){d.expediente=S.exp||null;return d;});},
     gravar:function(c,campos){return api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:c,campos:campos})});},
     irPara:function(g){vista(CE_VW[g]);}});}
@@ -971,14 +1026,14 @@ function cartao(it){
   var stp=[['Minutado','<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>'],['Corrigido','✓'],['Liberado','➤']]
     .map(function(x,i){return (i?'<i class="ln'+(i+1<=o?' ok':'')+'"></i>':'')+'<button class="sp'+(i+1<=o?' ok':'')+(i+1===o?' at':'')+'" data-a="et" data-v="'+(i+1===o?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+etLbl(x[0])+(i+1===o?' · clique para desfazer':'')+'">'+x[1]+'</button>';}).join('');
   var h='<article class="pc cpt'+(meu(it)?' meu':'')+(ab?' ab':'')+(A.length?' al':'')+(et==='Liberado'?' li':et==='Corrigido'?' co':'')+'" data-k="'+k+'"><div class="rw">'+
-    '<button class="xb" data-a="exp" title="'+(ab?'Recolher':'Abrir o cartão integral')+'">'+(ab?'˄':'˅')+'</button><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar">'+
+    (S.fonte==='mono'?'<button class="xb" data-a="exp" title="'+(ab?'Recolher':'Abrir o cartão integral')+'">'+(ab?'˄':'˅')+'</button>':'<span class="xb-v" aria-hidden="true"></span>')+'<input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar">'+
     '<div class="it">'+esc(it.item||'—')+'</div>'+
     '<div class="id"><span class="cnj">'+fmtCnj(it.cnj)+'</span><small>'+esc(it.partes||'')+'</small></div>'+
     '<div class="as"><b>'+esc(it.assunto||'assunto não informado')+'</b><small>'+esc(it.classe||'')+' · '+(S.fonte==='mono'?esc(it.tarefa||'')+(it.desde?' · desde '+esc(br(it.desde)):''):esc(aprec(it)))+(metaDe(it)?' · <em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</small></div>'+
     '<div class="ics">'+(S.fonte==='mono'?'<span class="ic'+(urgDe(it)?' on '+(urgPend(it)?'al':'ic2'):'')+'" title="'+esc(urgDe(it)?'Pedido urgente: '+urgDe(it)+' · '+((it.ctl||{}).urgSit||'pendente'):'Sem pedido urgente')+'"><b>!</b></span>':'<span class="ic'+(c.sopref?' on pri':'')+'" title="'+esc(c.sopref?'Sustentação oral / preferência: '+c.sopref:'Sem sustentação oral nem preferência')+'">'+ICN.pri+'</span>')+'<span class="ic'+(A.length?' on al':'')+'" title="'+esc(A.length?A.join(' · '):'Sem alertas de admissibilidade')+'">'+ICN.al+'</span><span class="ic'+(c.intercor?' on ic2':'')+'" title="'+esc(c.intercor?'Intercorrência: '+c.intercor:'Sem intercorrência')+'">'+ICN.ic+'</span></div>'+
     '<div class="rs"><label><small>Minutante</small>'+selR(it,'servidor')+'</label><label><small>Corretor</small>'+selR(it,'corretor')+'</label></div>'+
-    '<div class="pr"><small>Produção</small><div class="stp">'+stp+'</div></div><button class="xb fxb" data-a="pront" title="Prontuário de produção · preenchimento rápido">✎</button><button class="xb fxb" data-a="ficha" title="Ficha do processo">▤</button></div>';
-  if(!ab)return h+'</article>';
+    '<div class="pr"><small>Produção</small><div class="stp">'+stp+'</div></div>'+(S.fonte==='mono'?'<button class="xb fxb" data-a="pront" title="Prontuário de produção · preenchimento rápido">✎</button>':'')+'<button class="xb fxb" data-a="ficha" title="Ficha integral do processo (leitura)" aria-label="Ficha integral do processo">▤</button></div>';
+  if(!ab||S.fonte!=='mono')return h+'</article>';
   var dt=function(f){return '<input type="date" data-d="'+f+'" value="'+esc(it[f]||'')+'">';};
   return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b" data-a="ficha" title="Ficha completa do processo (a mesma do CMT-monitor)">▤ Ficha do processo</button><button class="b pri" data-a="comp" title="Consultar no Compêndio com os dados deste cartão">◈ Compêndio</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
 }
@@ -1010,7 +1065,7 @@ function corpoMono(it){
 }
 function urgTodos(){return (S.doc&&S.doc.todos)||[];}
 function painelUrg(){
-  var el=$('#urg');if(S.fonte!=='mono'){el.hidden=true;return;}
+  var el=$('#urg');if(S.fonte!=='mono'){el.hidden=true;filaUrg();return;}
   var L=(S.doc&&S.doc.urgs)||[],q=nq(S.uq||''),hj=hoje();
   var Lf=L.filter(function(i){return !q||nq([i.cnj,i.partes,i.assunto,i.servidor,(i.ctl||{}).urgTipo].join(' ')).indexOf(q)>=0;});
   var P0=Lf.filter(urgPend).sort(function(a,b){return String(urgIni(a)).localeCompare(String(urgIni(b)));}),A=Lf.filter(function(i){return !urgPend(i);}).sort(function(a,b){return String((b.ctl||{}).urgData||'').localeCompare(String((a.ctl||{}).urgData||''));});
@@ -1026,13 +1081,94 @@ function painelUrg(){
       '<td>'+(it.mono?'<button class="b ok" data-ver-mono="'+k+'">✓ Monocrática</button>':'<button class="b pri" data-criar-mono="'+k+'">+ Criar monocrática</button>')+'<button class="eqx" data-tirar-urg="'+k+'" title="Excluir a urgência">×</button></td></tr>';};
   var TH='<thead><tr><th>Processo</th><th>Medida · nível</th><th>Pedido em · tarefa</th><th>Minutante</th><th>Apreciação</th><th>Apreciada em</th><th>Monocrática</th></tr></thead>';
   el.hidden=false;
-  var ab=S.urgAb!==false;el.innerHTML='<div class="urg-h"><div><small class="ola-ey">Painel de urgências</small><h2>Liminares, tutelas e efeito suspensivo</h2></div><button class="b" id="urg-x">'+(ab?'Recolher':'Abrir')+'</button></div>'+(ab?'':'<div class="urg-h" style="margin-top:8px"><div class="urg-k"><span class="'+(P0.length?'al':'')+'"><b>'+P0.length+'</b> aguardando apreciação</span></div></div>');if(!ab)return;el.innerHTML+='<div class="urg-h" style="margin-top:8px"><div class="urg-k"><span class="'+(P0.length?'al':'')+'"><b>'+P0.length+'</b> aguardando apreciação</span><span class="'+(mx>5?'al':'')+'"><b>'+(P0.length?mx:'—')+'</b> dias · o mais antigo</span><span><b>'+A.length+'</b> apreciados</span><span><b>'+L.filter(function(i){return i.mono;}).length+'</b> com monocrática</span><span><b>'+((S.doc&&S.doc.sugestoes)||[]).length+'</b> sugeridos pelo PJe</span></div>'+
+  filaUrg();if(!S.urgTab){el.hidden=true;return;}
+  var ab=true;el.innerHTML='<div class="urg-h"><div><small class="ola-ey">Painel de urgências · tabela completa</small><h2>Liminares, tutelas e efeito suspensivo</h2></div><button class="b" id="urg-x">Fechar tabela</button></div>'+(ab?'':'<div class="urg-h" style="margin-top:8px"><div class="urg-k"><span class="'+(P0.length?'al':'')+'"><b>'+P0.length+'</b> aguardando apreciação</span></div></div>');if(!ab)return;el.innerHTML+='<div class="urg-h" style="margin-top:8px"><div class="urg-k"><span class="'+(P0.length?'al':'')+'"><b>'+P0.length+'</b> aguardando apreciação</span><span class="'+(mx>5?'al':'')+'"><b>'+(P0.length?mx:'—')+'</b> dias · o mais antigo</span><span><b>'+A.length+'</b> apreciados</span><span><b>'+L.filter(function(i){return i.mono;}).length+'</b> com monocrática</span><span><b>'+((S.doc&&S.doc.sugestoes)||[]).length+'</b> sugeridos pelo PJe</span></div>'+
     '<input type="search" id="urg-q" placeholder="Filtrar por processo, partes, assunto…" value="'+esc(S.uq||'')+'"></div>'+
     '<form class="urg-n" id="urg-n"><b>Registrar urgência</b><input name="cnj" placeholder="nº CNJ do processo" required><select name="tipo">'+CPM.urgTipo.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><select name="niv"><option value="">nível…</option>'+CPM.urgNivel.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><input type="date" name="ped" title="Data do pedido"><input name="obs" placeholder="observação (opcional)"><button class="b pri">Registrar</button></form>'+
     '<div class="urg-t"><table>'+TH+'<tbody>'+(P0.concat(A).map(lin).join('')||'<tr><td colspan="7" class="mut">Nenhuma urgência registrada'+(q?' com esse filtro':'')+'.</td></tr>')+'</tbody></table></div>'+
     (SG.length?'<details class="urg-sg"'+(S.sgAb?' open':'')+'><summary>Sugeridos pelas etiquetas do PJe <span>'+SG.length+'</span></summary><div class="urg-t"><table><thead><tr><th>Processo</th><th>Etiqueta</th><th>Tarefa</th><th></th></tr></thead><tbody>'+
       SG.map(function(b){var d=diasDesde(b.desde);return '<tr><td><span class="cnj">'+esc(b.cnj)+'</span><small class="pt">'+esc(b.partes||'')+'</small></td><td>'+esc(b.urgAuto)+'</td><td><small>'+esc(b.tarefa)+'</small>'+(d!=null?'<b class="dd">'+d+' dias na tarefa</b>':'')+'</td><td><button class="b" data-sug="'+esc(b.cnj)+'" data-et="'+esc(b.urgAuto)+'">Registrar urgência</button></td></tr>';}).join('')+'</tbody></table></div></details>':'');
 }
+/* Monocráticas: painel superior com os números do período (registradas, minutadas, revisadas, para assinatura) */
+function isoD(x){return x.toISOString().slice(0,10);}
+function monoPer(){var p=S.mper||'mes',d=new Date((S.mref||hoje())+'T12:00:00Z');
+  if(p==='tudo')return {de:'',ate:'9999-12-31',lb:'todo o período'};
+  if(p==='mes'){var y=d.getUTCFullYear(),m=d.getUTCMonth();return {de:isoD(new Date(Date.UTC(y,m,1,12))),ate:isoD(new Date(Date.UTC(y,m+1,0,12))),lb:d.toLocaleDateString('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'})};}
+  var a=new Date(+d-((d.getUTCDay()+6)%7)*864e5),b=new Date(+a+6*864e5);return {de:isoD(a),ate:isoD(b),lb:br(isoD(a)).slice(0,5)+' a '+br(isoD(b))};}
+var MIC={reg:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',min:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',rev:'<path d="M20 6 9 17l-5-5"/>',ass:'<path d="M3 21c3-1 5-4 6-7l3 3c-3 1-6 3-7 6z"/><path d="M14 4l6 6-5 5-6-6z"/>'};
+function bandaMono(){var I=(S.doc&&S.doc.itens)||[],P=monoPer(),em=function(v){v=(v||'').slice(0,10);return v&&v>=P.de&&v<=P.ate;};
+  var n=function(f){return I.filter(f).length;},reg=n(function(i){return em(i.monoEm||i.criadoEm);}),mi=n(function(i){return em(i.dataMinuta);}),co=n(function(i){return em(i.dataCorrecao);}),li=n(function(i){return em(i.dataLiberacao);});
+  var k=function(t,v,s,ic){return '<div class="tmk"><div class="tmk-h"><small>'+t+'</small><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+MIC[ic]+'</svg></div><b>'+v+'</b><span>'+s+'</span></div>';};
+  $('#trm-k').innerHTML=k('Registradas',reg,reg===1?'nova decisão':'novas decisões','reg')+k('Minutadas',mi,mi===1?'minuta elaborada':'minutas elaboradas','min')+k('Revisadas',co,co===1?'revisão realizada':'revisões realizadas','rev')+k('Para assinatura',li,li===1?'liberada para assinatura':'liberadas para assinatura','ass');
+  $('#trm-lb').textContent=P.lb.charAt(0).toUpperCase()+P.lb.slice(1);marcaSeg('#trm-per',S.mper||'mes');$('#trm-ant').disabled=$('#trm-prox').disabled=(S.mper==='tudo');
+  $('#trm-st').textContent=$('#pt-st').textContent;$('#trm-reg').setAttribute('aria-expanded',String(!!S.monoForm));}
+$('#trm-per').onclick=function(e){var b=e.target.closest('button');if(!b)return;S.mper=b.getAttribute('data-v');S.mref=hoje();bandaMono();};
+['#trm-ant','#trm-prox'].forEach(function(id,ix){$(id).onclick=function(){var d=new Date((S.mref||hoje())+'T12:00:00Z'),s=ix?1:-1;
+  if((S.mper||'mes')==='mes')d=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+s,1,12));else d=new Date(+d+s*7*864e5);S.mref=isoD(d);bandaMono();};});
+$('#trm-reg').onclick=function(){S.monoForm=!S.monoForm;$('#mono-n').hidden=!S.monoForm;bandaMono();if(S.monoForm){var c=$('#mono-n').elements.cnj;c.focus();}};
+/* prontuário lateral (Pautas): clique no processo abre o painel com 4 abas, com os mesmos campos do cartão */
+var PRT_ABAS=[['Admissibilidade',/Regularidade/],['Origem',/Processo e origem|Caracteriza/],['Recursos',/Recursos/],['Julgamento',/Julgamento/]];
+function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
+  var on=!!S.prt&&S.fonte!=='mono'&&CTRLV.indexOf(S.fonte)<0,it=on?lista().filter(function(i){return dg(i.cnj)===S.prt;})[0]:null;
+  [].forEach.call(document.querySelectorAll('#lst .prt-sel'),function(x){x.classList.remove('prt-sel');});
+  if(!it){vp.classList.remove('prt-on');el.innerHTML='';prtPos();return;}
+  vp.classList.add('prt-on');var sel=document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(sel)sel.classList.add('prt-sel');
+  var ativo=el.querySelector('.prt-pc')&&el.contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if(ativo&&el.getAttribute('data-k')===S.prt)return;
+  var tmp=document.createElement('div');tmp.innerHTML=corpo(it,tipoJ(it));var secs=[].slice.call(tmp.querySelectorAll('.pn > section'));
+  var abas=PRT_ABAS.map(function(a){var ss=secs.filter(function(s){var h=s.querySelector('h3');return h&&a[1].test(h.textContent);});
+    var n=0,ch=0;ss.forEach(function(s){[].forEach.call(s.querySelectorAll('input,select,textarea'),function(x){if(x.type==='button')return;n++;if(x.type==='checkbox'?x.checked:(x.value||'').trim())ch++;});});
+    return {nome:a[0],html:ss.map(function(s){return s.outerHTML;}).join(''),n:n,ch:ch};});
+  var dtp=function(f,r){return '<div class="f"><span>'+r+'</span><div class="v"><input type="date" data-d="'+f+'" value="'+esc(it[f]||'')+'"></div></div>';};
+  abas[3].html='<section class="prt-dts"><h3><em>✓</em>Produção</h3>'+dtp('dataMinuta','Minutado em')+dtp('dataCorrecao','Corrigido em')+dtp('dataLiberacao','Liberado em')+'</section>'+abas[3].html;
+  abas[3].n+=3;abas[3].ch+=['dataMinuta','dataCorrecao','dataLiberacao'].filter(function(f){return it[f];}).length;
+  var ab=Math.min(S.prtAba||0,3),V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),et=etapa(it),ssx=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},pz=(ssx.marcos||{}).entregaMinutas||'',dd=pz?dias(hoje(),pz):null,A=alertas(it);
+  var mins=it.servidor||'—',cor=it.corretor||'—';
+  el.setAttribute('data-k',S.prt);
+  var chip=function(tx,c){return '<span class="prt-ch'+(c?' '+c:'')+'">'+tx+'</span>';};
+  el.innerHTML='<section class="prt" aria-labelledby="prt-t"><div class="prt-h"><span class="prt-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>'+
+    '<div><h2 id="prt-t">Prontuário</h2><small>Item '+esc(it.item||'—')+' · sessão de '+esc(br(S.ses))+'</small></div><span class="sp"></span>'+
+    '<span class="pc prt-pc prt-hb" data-k="'+S.prt+'"><button data-a="ficha" aria-label="Ficha completa do processo" title="Ficha completa do processo">▤</button><button data-a="comp" aria-label="Consultar no Compêndio" title="Consultar no Compêndio com os dados deste processo">◈</button></span>'+
+    '<button data-prt="ant" aria-label="Processo anterior" title="Processo anterior"'+(ix>0?'':' disabled')+'>‹</button><button data-prt="prox" aria-label="Próximo processo" title="Próximo processo"'+(ix>=0&&ix<V.length-1?'':' disabled')+'>›</button><button data-prt="x" aria-label="Fechar o prontuário" title="Fechar (Esc)">×</button></div>'+
+    '<div class="prt-id"><b>'+esc(it.cnj)+'</b><small>'+esc([it.assunto,it.classe].filter(Boolean).join(' · '))+'</small><small class="prt-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</small>'+
+    '<div class="prt-chs">'+chip('Minutante <b>'+esc(mins)+'</b>')+chip('Corretor <b>'+esc(cor)+'</b>')+chip('Etapa <b>'+esc(etLbl(et))+'</b>')+chip('Entrega <b>'+(pz?esc(br(pz).slice(0,5))+' · '+esc(quando(pz)):'—')+'</b>',dd!=null&&dd<0&&et==='A fazer'?'al':'')+chip('<b>'+A.length+'</b> alerta'+(A.length===1?'':'s'),A.length?'al':'')+'</div></div>'+
+    '<div class="prt-tabs" role="tablist">'+abas.map(function(a,i){return '<button role="tab" data-prt-aba="'+i+'" aria-selected="'+(i===ab)+'">'+(i+1)+' · '+esc(a.nome)+'<small>'+a.ch+'/'+a.n+' preenchidos</small></button>';}).join('')+'</div>'+
+    '<div class="pc prt-pc prt-body" data-k="'+S.prt+'">'+abas.map(function(a,i){return '<div class="pn prt-p" data-prt-p="'+i+'"'+(i===ab?'':' hidden')+'>'+(a.html||'<p class="mut">Nada a preencher nesta aba.</p>')+'</div>';}).join('')+'</div></section>';prtPos();}
+/* o painel fica parado na tela: mesma coluna da grade, preso ao topo (abaixo da barra) e ao rodapé da janela */
+var PRT_W=480;
+function prtPos(){var vp=$('#v-pauta'),a=$('#prq'),p=a&&a.querySelector('.prt');
+  if(!p||window.innerWidth<1181||!vp.classList.contains('prt-on')){vp.style.paddingRight='';if(p)p.style.left=p.style.width=p.style.top='';return;}
+  vp.style.paddingRight='';var cs=getComputedStyle(vp),pr0=parseFloat(cs.paddingRight)||0,r=vp.getBoundingClientRect();vp.style.paddingRight=(pr0+PRT_W+16)+'px';
+  var hd=document.querySelector('#app header'),hb=hd?hd.getBoundingClientRect().bottom:60;p.style.left=(r.right-pr0-PRT_W)+'px';p.style.width=PRT_W+'px';p.style.top=(Math.max(hb,0)+12)+'px';}
+window.addEventListener('resize',prtPos);
+document.addEventListener('click',function(e){
+  var t=e.target,b=t.closest&&t.closest('[data-prt],[data-prt-aba]');
+  if(b&&b.closest('#prq')){if(b.hasAttribute('data-prt-aba')){S.prtAba=+b.getAttribute('data-prt-aba');[].forEach.call($('#prq').querySelectorAll('[data-prt-aba]'),function(x){x.setAttribute('aria-selected',String(x===b));});[].forEach.call($('#prq').querySelectorAll('[data-prt-p]'),function(x){x.hidden=x.getAttribute('data-prt-p')!==String(S.prtAba);});return;}
+    var a=b.getAttribute('data-prt');if(a==='x'){S.prt=null;prontLateral();return;}var V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),nx=V[ix+(a==='prox'?1:-1)];
+    if(nx){S.prt=dg(nx.cnj);prontLateral();var c=document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(c)c.scrollIntoView({behavior:'smooth',block:'nearest'});}return;}
+  if(S.fonte==='mono'||CTRLV.indexOf(S.fonte)>=0)return;
+  var pc=t.closest&&t.closest('#lst .pc');if(!pc||t.closest('button,input,select,textarea,a,label,.ex,.pn,summary'))return;
+  var k=pc.getAttribute('data-k');S.prt=S.prt===k&&$('#v-pauta').classList.contains('prt-on')?null:k;prontLateral();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&S.prt&&!document.querySelector('#fd:not([hidden]),.cmtfx-ov'))if(!(document.activeElement&&$('#prq').contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))){S.prt=null;prontLateral();}});
+/* fila de urgências (lateral das Monocráticas): pendentes primeiro, pelo pedido mais antigo */
+function filaUrg(){var el=$('#urq');if(!el)return;if(S.fonte!=='mono'){el.innerHTML='';return;}
+  var L=(S.doc&&S.doc.urgs)||[],SG=(S.doc&&S.doc.sugestoes)||[];
+  var P0=L.filter(urgPend).sort(function(a,b){return String(urgIni(a)).localeCompare(String(urgIni(b)));}),A=L.filter(function(i){return !urgPend(i);}).sort(function(a,b){return String((b.ctl||{}).urgData||'').localeCompare(String((a.ctl||{}).urgData||''));});
+  var mx=P0.length?diasDesde(urgIni(P0[0])):null;
+  var card=function(it,p){var c=it.ctl||{},d=diasDesde(urgIni(it)),k=dg(it.cnj);
+    return '<article class="uq-c'+(p?' pend':'')+'"><div class="uq-tp"><span class="uq-t">'+esc(c.urgTipo)+'</span>'+(c.urgNivel?'<span class="uq-n">'+esc(c.urgNivel)+'</span>':'')+'</div><b class="uq-cnj">'+esc(it.cnj)+'</b>'+
+      '<small>'+esc([it.assunto,it.partes].filter(Boolean).join(' · ')||'—')+'</small>'+
+      '<small>Responsável: <b>'+esc(it.servidor||'—')+'</b>'+(p?(d!=null?' · <b class="'+(d>5?'al':'')+'">'+d+' dia'+(d===1?'':'s')+' aguardando</b>':''):' · '+esc(c.urgSit||'apreciada')+(c.urgData?' em '+esc(br(c.urgData)):''))+'</small>'+
+      '<div class="uq-a"><button class="b" data-fd-cnj="'+k+'">Abrir ficha ›</button>'+(it.mono?'<button class="b ok" data-ver-mono="'+k+'">✓ Monocrática</button>':'<button class="b pri" data-criar-mono="'+k+'">+ Monocrática</button>')+'</div></article>';};
+  el.innerHTML='<section class="uq" aria-labelledby="uq-t"><div class="uq-h"><span class="uq-ic" aria-hidden="true">!</span><div><h2 id="uq-t">Fila de urgências</h2><small>Tutelas, liminares e efeito suspensivo</small></div></div>'+
+    '<div class="uq-k"><button class="uq-m'+(P0.length?' al':'')+'" data-uq="abre" title="Abrir a tabela completa"><b>'+P0.length+'</b><small>Não apreciadas</small></button><div class="uq-m'+(mx>5?' al':'')+'"><b>'+(mx==null?'—':mx)+'</b><small>Maior espera (dias)</small></div><button class="uq-m" data-uq="sug" title="Ver as sugestões das etiquetas do PJe"><b>'+SG.length+'</b><small>Sugestões do PJe</small></button></div>'+
+    '<div class="uq-l">'+(P0.map(function(i){return card(i,true);}).join('')||'<p class="mut uq-v">Nenhuma urgência aguardando apreciação. Use “Registrar urgência” ou as sugestões do PJe.</p>')+'</div>'+
+    (A.length?'<details class="uq-ap"'+(S.uqAp?' open':'')+'><summary>'+A.length+' apreciada'+(A.length===1?'':'s')+'</summary><div class="uq-l">'+A.slice(0,30).map(function(i){return card(i,false);}).join('')+'</div></details>':'')+
+    '<div class="uq-f"><button class="b" data-uq="reg">+ Registrar urgência</button><button class="b" data-uq="tab">'+(S.urgTab?'Fechar tabela':'Tabela completa')+'</button></div></section>';}
+$('#urq').addEventListener('click',function(e){var b=e.target.closest('[data-uq]');if(!b)return;var a=b.getAttribute('data-uq');
+  if(a==='tab'){S.urgTab=!S.urgTab;}else{S.urgTab=true;if(a==='sug')S.sgAb=true;}painelUrg();
+  if(S.urgTab){var u=$('#urg');u.scrollIntoView({behavior:'smooth',block:'start'});if(a==='reg'){var c=u.querySelector('#urg-n [name=cnj]');if(c)setTimeout(function(){c.focus();},300);}}});
+$('#urq').addEventListener('toggle',function(e){if(e.target.classList&&e.target.classList.contains('uq-ap'))S.uqAp=e.target.open;},true);
 function urgIni(it){var c=it.ctl||{};return c.urgPedido||(c.urgEm||'').slice(0,10)||it.desde||'';}
 function tipoDaEtiqueta(e){e=nq(e);return /suspensiv/.test(e)?'Efeito suspensivo':/reconsid/.test(e)?'Reconsideração de liminar':/liminar|mandado de seg/.test(e)?'Liminar em mandado de segurança':/antecip|recursal/.test(e)?'Antecipação da tutela recursal':/evidenc/.test(e)?'Tutela de evidência':/cirurg|medicam|saude|idos|prioridade/.test(e)?'Prioridade legal':'Tutela de urgência';}
 /* cria ou altera o registro na hora (monocrática ou urgência) e relê a lista */
@@ -3055,6 +3191,7 @@ window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABE
        irPara?:  controle => void        (botão "Abrir a página" dos Controles especiais)
        lista?:   [cnj, ...]              (anterior / próximo)
        avisar?:  (texto, tipo) => void
+       leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Pauta da equipe edita pelo prontuário lateral)
      })
    Regras dos Controles especiais (quando cada grupo vale): CMTFicha.controlesDe(fonte, operacional), as mesmas do servidor (api/_metas, _sobr, _sens). */
 (function () {
@@ -3248,7 +3385,7 @@ function cabecalho() {
   var nav = L.length > 1 && i >= 0 ? '<button type="button" class="fx-sq" data-fx="ant" title="Processo anterior (Alt+↑)">' + svg('back') + '</button><span class="fx-note">' + (i + 1) + ' de ' + L.length + '</span><button type="button" class="fx-sq" data-fx="prox" title="Próximo processo (Alt+↓)">' + svg('fwd') + '</button>' : '';
   return '<header class="fx-head"><span class="fx-ic">' + svg('ficha') + '</span>' +
     '<div class="fx-tt"><span>' + E(['Ficha do processo', cl, as].filter(Boolean).join(' · ')) + '</span><div class="fx-num"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2><button type="button" class="fx-sq" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' + (partes ? '<small>' + E(partes) + '</small>' : '') + '</div>' +
-    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor .txt</button>' : '') + nav + '</div>' +
+    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && !ST.ad.leitura ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor .txt</button>' : '') + nav + '</div>' +
     '<button type="button" class="fx-sq fx-x" data-fx="fechar" aria-label="Fechar" title="Fechar (Esc)">' + svg('x') + '</button></header>';
 }
 function faixa() {
@@ -3257,7 +3394,7 @@ function faixa() {
     (R.length ? R.map(function (r) { return '<span class="fx-chip t-' + r[2] + '"><i>' + E(r[0]) + '</i>' + E(r[1]) + '</span>'; }).join('') : '<span class="fx-dim">sem regras calculadas</span>') + '</div>' +
     '<ol class="fx-flow" aria-label="Fluxo do processo">' + FL.map(function (s, j) {
       return '<li class="' + (s.feito ? 'is-done' : s.atual ? 'is-cur' : 'is-todo') + '"' + (s.atual ? ' aria-current="step"' : '') + '><span class="fx-dot">' + (s.feito ? svg('ok') : s.atual ? '<i></i>' : '') + '</span>' + (j < FL.length - 1 ? '<span class="fx-line"></span>' : '') +
-        (s.destino ? '<select class="fx-dest-sel" data-fx-destino aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'Sessão'], ['Monocrática', 'Monocrática']].map(function (o) { return '<option value="' + o[0] + '"' + ((o[0] === 'Monocrática') === (destino() === 'monocratica') ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' : '<b>' + E(s.etapa) + '</b>') +
+        (s.destino ? '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'Sessão'], ['Monocrática', 'Monocrática']].map(function (o) { return '<option value="' + o[0] + '"' + ((o[0] === 'Monocrática') === (destino() === 'monocratica') ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' : '<b>' + E(s.etapa) + '</b>') +
         '<small>' + E([s.quem, s.quando].filter(Boolean).join(' · ')) + '</small></li>';
     }).join('') + '</ol></div>';
 }
@@ -3274,7 +3411,7 @@ function fichaView() {
   if (pode) nav = '<nav class="fx-nav" aria-label="Seções da ficha"><div class="fx-seg" role="tablist">' + abas().map(function (a) {
     return '<button type="button" role="tab" data-fx-tab="' + E(a[0]) + '" aria-selected="' + (ST.tab === a[0]) + '">' + E(a[1]) + (a[2] ? '<span class="fx-badge' + (a[3] ? ' is-ce' : '') + '">' + a[2] + '</span>' : '') + '</button>';
   }).join('') + '</div><span class="fx-grow"></span><div class="fx-seg fx-acts2" role="group" aria-label="Ficha completa e edição"><button type="button" data-fx="doc" aria-label="Ficha completa" title="Ficha completa · ler, imprimir ou salvar em PDF">' + svg('print') + '</button>' +
-    '<button type="button" data-fx="editar" aria-pressed="' + ST.edit + '" title="Liberar a edição dos campos do gabinete">' + svg('edit') + (ST.edit ? 'Editando' : 'Editar') + '</button></div></nav>';
+    (ST.ad.leitura ? '' : '<button type="button" data-fx="editar" aria-pressed="' + ST.edit + '" title="Liberar a edição dos campos do gabinete">' + svg('edit') + (ST.edit ? 'Editando' : 'Editar') + '</button>') + '</div></nav>';
   var n = Object.keys(ST.draft).length;
   return '<section class="fx-dlg' + (ST.teor ? ' has-teor' : '') + '" role="dialog" aria-modal="true" aria-labelledby="fx-titulo" tabindex="-1">' + cabecalho() + (pode ? faixa() : '') + nav +
     (ST.edit ? '<div class="fx-editbar" role="status">' + svg('edit') + 'Modo de edição: os campos do gabinete estão liberados. Os dados do acervo (PJe) e os campos calculados continuam bloqueados.</div>' : '') +
@@ -3535,7 +3672,7 @@ function gravarTeor() {
 
 /* ───── gravação ───── */
 function gravar(campos, msgOk) {
-  if (ST.busy) return Promise.resolve(false);
+  if (ST.busy || ST.ad.leitura) return Promise.resolve(false);
   ST.busy = true; render();
   return Promise.resolve().then(function () { return ST.ad.gravar(ST.cnj, campos); }).then(function (j) {
     j = j || {}; if (j.operacional) ST.d.operacional = j.operacional;
@@ -3556,6 +3693,7 @@ function onClick(ev) {
   if (a === 'ant') return passo(-1);
   if (a === 'prox') return passo(1);
   if (a === 'copiar-num') { if (navigator.clipboard) navigator.clipboard.writeText(ST.cnj).then(function () { avisar('Número copiado.', 'ok'); }, function () {}); return; }
+  if (a === 'editar' && ST.ad.leitura) return;
   if (a === 'editar') { if (ST.edit && Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas?')) return; ST.edit = !ST.edit; ST.draft = {}; if (ST.edit && ST.tab === 'resumo') ST.tab = 'Triagem'; render(); return; }
   if (a === 'descartar') { ST.draft = {}; ST.edit = false; ST.mostra = {}; render(); return; }
   if (a === 'salvar') { var K = Object.keys(ST.draft); if (!K.length) { ST.edit = false; render(); return; } var C = {}; K.forEach(function (k) { C[k] = ST.draft[k]; }); gravar(C, K.length + ' campo(s) da ficha gravado(s).').catch(function () {}); return; }
