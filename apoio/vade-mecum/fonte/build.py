@@ -30,10 +30,12 @@ editorial = {'padrao': {'schema': dir_.get('schema'), 'versao': dir_.get('versao
 editorial['normasComplemento'] = ler(RAIZ/'apoio/repertorio-normativo-complemento.json')['registros']
 # matrizes estruturais (recurso × resultado, sem matéria): moldes do Editorial
 def _js(v): return json.loads(v) if isinstance(v, str) else v
-editorial['matrizes'] = [{'id': m['id'], 'nome': m.get('nomeModelo', ''), 'resultado': m.get('resultado', ''), 'classe': m.get('classe', ''), 'fonte': m.get('fonte', ''),
-                          'esq': _js(m.get('esqueletoModelo')) or {},
-                          'par': [{k: p.get(k) for k in ('posicao', 'ordem', 'versao', 'titulo', 'texto')} for p in (_js(m.get('paragrafosModelo')) or [])]}
-                         for m in ler(RAIZ/'modelos/matrizes-estruturais.json')['registros']]
+def _mold(m):
+    return {'id': m['id'], 'nome': m.get('nomeModelo', ''), 'resultado': m.get('resultado', ''), 'classe': m.get('classe', ''), 'fonte': m.get('fonte', ''),
+            'esq': _js(m.get('esqueletoModelo')) or {},
+            'par': [{k: p.get(k) for k in ('posicao', 'ordem', 'versao', 'titulo', 'texto')} for p in (_js(m.get('paragrafosModelo')) or [])]}
+# só as matrizes estruturais (recurso × resultado); os padrões de ED do mesmo arquivo já estão como alternativas do Editorial (editorial_pecas.json)
+editorial['matrizes'] = [_mold(m) for m in ler(RAIZ/'modelos/matrizes-estruturais.json')['registros'] if m['id'].startswith('mod-matriz-trms-')]
 K = ['id', 'processo', 'classe', 'classeSigla', 'especie', 'pronunciamento', 'orgao', 'dataJulgamento', 'dataPublicacao', 'assunto', 'temas',
      'ramoDireito', 'ementa', 'resultado', 'sentidoResultado', 'dispositivosCitados', 'jurisprudenciaCitada']
 # inteiro teor: texto, arquivo, linha e partes do cabeçalho do PJe
