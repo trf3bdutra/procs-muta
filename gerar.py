@@ -266,16 +266,26 @@ def importar_precedentes(regs):
     return n
 
 
+def fora_dos_modelos():
+    """Ids que não voltam a modelos.json: matrizes estruturais (moldes do Editorial) e matrizes antigas excluídas."""
+    p = RAIZ / "modelos/matrizes-estruturais.json"
+    if not p.exists():
+        return set()
+    d = ler_json(p)
+    return {r["id"] for r in d["registros"]} | set(d.get("excluidos", []))
+
+
 def importar_modelos(regs):
     arq = RAIZ / "modelos/modelos.json"
     doc = ler_json(arq)
+    fora = fora_dos_modelos()
     por_ant = {m.get("idAnterior"): m for m in doc["registros"]}
     por_id = {m["id"]: m for m in doc["registros"]}
     n = 0
     for old in regs:
         ex = por_ant.get(old.get("id"))
         novo = modelo_de_antigo(old, ex)
-        if novo is ex:
+        if novo is ex or novo["id"] in fora:
             continue
         por_id[novo["id"]] = novo
         n += 1
@@ -325,6 +335,9 @@ def importar(caminhos):
 
 def mesclar_json(alvo, novos):
     doc = ler_json(alvo)
+    if Path(alvo).resolve() == (RAIZ / "modelos/modelos.json").resolve():
+        fora = fora_dos_modelos()
+        novos = [r for r in novos if r.get("id") not in fora]
     por_id = {r["id"]: r for r in doc["registros"]}
     for r in novos:
         por_id[r["id"]] = {**por_id.get(r["id"], {}), **r}
