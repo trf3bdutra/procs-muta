@@ -265,7 +265,10 @@ table.pl{border-collapse:separate;border-spacing:0;font-size:12px;min-width:100%
 table.pl th{position:sticky;top:0;z-index:2;background:#1f4c4f;color:#eef4f1;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-align:left;padding:8px;border-right:1px solid rgba(255,255,255,.12);white-space:nowrap}
 table.pl td{padding:5px 6px;border-bottom:1px solid var(--line);border-right:1px solid #eef1f4;vertical-align:top;background:var(--card)}
 table.pl .fx{position:sticky;left:0;z-index:1}table.pl th.fx{z-index:3}
-table.pl tr.et-co td{background:#e8f1fb}table.pl tr.et-li td{background:#f1eafa}table.pl tr.al td{background:#fff8de}table.pl tr.meu td.fx{box-shadow:inset 3px 0 0 #b0741a}
+table.pl tr.et-co td{background:#e8f1fb}
+/* intercorrência na planilha: marca discreta ao lado do item e o campo destacado */
+table.pl .icd{display:inline-grid;place-items:center;flex:0 0 16px;width:16px;min-width:16px;height:16px;line-height:1;padding:0;box-sizing:border-box;margin-left:4px;border-radius:999px;background:#c0533a;color:#fff;font:900 10px var(--font);vertical-align:1px;cursor:help}
+table.pl input[data-c=intercor]:not(:placeholder-shown){border-color:#e3a58f;background:#fff3ee;color:#8f3a24;font-weight:600}html[data-theme=dark] table.pl input[data-c=intercor]:not(:placeholder-shown){border-color:#7a3b2c;background:#3a221c;color:#f2a397}table.pl tr.et-li td{background:#f1eafa}table.pl tr.al td{background:#fff8de}table.pl tr.meu td.fx{box-shadow:inset 3px 0 0 #b0741a}
 table.pl .ix{display:flex;align-items:center;gap:6px;font-size:13px}table.pl .cnj{display:block;font:700 11.5px var(--mono);white-space:nowrap}table.pl .pt{display:block;font-size:10.5px;color:var(--mut);max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 table.pl .wr{max-width:210px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;line-height:1.3}
 table.pl select,table.pl input,table.pl textarea{width:100%;box-sizing:border-box;border:1px solid transparent;border-radius:6px;background:transparent;font:12px var(--font);color:var(--ink);padding:3px 4px}
@@ -1387,7 +1390,7 @@ function planilha(V){
     var cls=(et==='Liberado'||et==='Assinada')?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'';
     var td=function(x,w){return '<td'+(w?' class="'+w+'"':'')+'>'+x+'</td>';};
     return '<tr class="pc '+cls+(meu(it)?' meu':'')+'" data-k="'+k+'">'+
-      '<td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item||'—')+'</b></label></td>'+
+      '<td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item||'—')+'</b>'+((it.ctl||{}).intercor?'<span class="icd" title="Intercorrência: '+esc((it.ctl||{}).intercor)+'">!</span>':'')+'</label></td>'+
       td('<span class="cnj">'+fmtCnj(it.cnj)+'</span><small class="pt">'+esc(it.partes||'')+'</small>')+
       td(esc(aprec(it))+(mt?' · <em class="mt">META '+esc(mt.replace(/^M/,''))+'</em>':''))+td(esc(clSig(it.classe)))+
       td('<div class="wr" title="'+esc(it.assunto||'')+'">'+esc(it.assunto||'')+'</div>')+
@@ -1407,7 +1410,7 @@ function planilhaMono(V){
   var sc=function(it,k,L){var v=(it.ctl||{})[k]||'';return '<select data-c="'+k+'"><option value="">—</option>'+L.map(function(x){return '<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>';}).join('')+'</select>';};
   var th='<thead><tr>'+PLM.map(function(c,i){return '<th style="min-width:'+c[1]+'px;max-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead>';
   return '<div class="plw"><table class="pl">'+th+'<tbody>'+V.map(function(it){var k=dg(it.cnj),et=etapa(it),A=alertas(it),c=it.ctl||{},td=function(x){return '<td>'+x+'</td>';};
-    return '<tr class="pc '+((et==='Liberado'||et==='Assinada')?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'')+(meu(it)?' meu':'')+'" data-k="'+k+'"><td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item)+'</b></label></td>'+
+    return '<tr class="pc '+((et==='Liberado'||et==='Assinada')?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'')+(meu(it)?' meu':'')+'" data-k="'+k+'"><td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item)+'</b>'+((it.ctl||{}).intercor?'<span class="icd" title="Intercorrência: '+esc((it.ctl||{}).intercor)+'">!</span>':'')+'</label></td>'+
       td('<span class="cnj">'+fmtCnj(it.cnj)+'</span><small class="pt">'+esc(it.partes||'')+'</small>')+td(esc(clSig(it.classe)))+td('<div class="wr">'+esc(it.assunto||'')+'</div>')+td('<div class="wr">'+esc(it.tarefa||'')+'</div>')+td(it.desde?esc(br(it.desde)):'')+td(sc(it,'urgTipo',CPM.urgTipo)+(it.urgAuto&&!c.urgTipo?'<small class="pt">'+esc(it.urgAuto)+'</small>':''))+td(sc(it,'tipoAto',CPM.tipoAto))+td(sc(it,'hip932',CPM.hip932))+
       td('<textarea rows="1" data-d="obs" placeholder="anotações">'+esc(it.obs||'')+'</textarea>')+td(A.length?'<span class="pd">'+esc(A.join(' · '))+'</span>':'')+
       td(et==='Assinada'?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+br(it.dataAssinatura):'')+'</b>':'<select data-et>'+['A fazer','Minutado','Corrigido','Liberado'].map(function(x){return '<option value="'+x+'"'+(x===et?' selected':'')+'>'+etLbl(x)+'</option>';}).join('')+'</select>')+td('<input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'">')+
