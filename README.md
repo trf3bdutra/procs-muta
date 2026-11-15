@@ -22,10 +22,10 @@ precedentes/                   processos já julgados pelo relator
   catalogo-cmt/                catálogo CMT: acórdãos publicados do relator, por assunto e tema (comece por INDICE.md)
 
 modelos/                       tudo o que é modelo de texto
-  modelos.json                 modelos-matriz por tipo: acórdão (289), decisão (102), despacho (43)
+  modelos.json                 modelos-matriz por tipo: acórdão (253), decisão (102), despacho (43)
                                os de acórdão "mod-cat-*" vêm do catálogo: scripts/modelos-matriz/catalogo.py
   matrizes-estruturais.json    moldes por tipo de julgamento, usados no Editorial (e ids excluídos)
-  paragrafos.json              parágrafos-padrão (120)
+  paragrafos.json              parágrafos-padrão (328; os "rural.cr.*" e "pensao.cr.*" vêm dos recortes do Compêndio Rural)
 
 apoio/                         recursos de apoio à redação
   diretrizes.json              vocabulário, conectivos, preferências, correções, alertas
