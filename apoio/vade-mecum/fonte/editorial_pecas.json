@@ -1,0 +1,668 @@
+{
+  "fontes": {
+    "P": "Padrão de voto e relatório do gabinete",
+    "M": "Memória de minutas do gabinete (relatório, voto, ementa, acórdão, decisões e despachos)",
+    "R": "Banco de redação do gabinete (procs-muta · apoio/diretrizes.json)",
+    "D": "Manual CMT (planilha do Vade Mecum, aba Diretrizes)"
+  },
+  "pecas": [
+    {
+      "id": "acordao-completo",
+      "grupo": "Acórdão",
+      "t": "Acórdão: sequência da peça",
+      "resumo": "O acórdão reúne relatório, voto, ementa e acórdão, nesta ordem.",
+      "elementos": [
+        {
+          "n": "RELATÓRIO",
+          "f": "… É o relatório.",
+          "r": [
+            "Descreve o processo sem apreciar a prova nem antecipar a fundamentação."
+          ],
+          "fo": "M",
+          "ir": "relatorio"
+        },
+        {
+          "n": "VOTO",
+          "f": "O Desembargador Federal Carlos Muta (Relator):\nSenhores Desembargadores,\n… É como voto.",
+          "r": [
+            "Fundamenta e decide."
+          ],
+          "fo": "M",
+          "ir": "voto"
+        },
+        {
+          "n": "EMENTA",
+          "f": "CABEÇALHO\nI. CASO EM EXAME\nII. QUESTÃO EM DISCUSSÃO\nIII. RAZÕES DE DECIDIR\nIV. DISPOSITIVO",
+          "r": [
+            "Deriva do voto."
+          ],
+          "fo": "M",
+          "ir": "ementa"
+        },
+        {
+          "n": "ACÓRDÃO",
+          "f": "Vistos e relatados estes autos em que são partes as acima indicadas, …",
+          "r": [
+            "Espelha o dispositivo literalmente."
+          ],
+          "fo": "M",
+          "ir": "acordao"
+        }
+      ],
+      "notas": [
+        "Os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO são inseridos pelo PJe."
+      ],
+      "notas_fo": "P"
+    },
+    {
+      "id": "relatorio",
+      "grupo": "Acórdão",
+      "t": "Relatório",
+      "resumo": "Relatório conciso, objetivo e descritivo, com fórmulas fixas de abertura e encerramento. Sem adjetivação, apreciação da prova ou antecipação da fundamentação; as teses são atribuídas à parte.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Apelação: “Trata-se de apelação interposta em ação de […]”.\nAgravo de instrumento: “Trata-se de agravo de instrumento à decisão que, em […], […] (ID …).”",
+          "r": [
+            "Identifica o recurso e o objeto da ação."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Abertura (variante)",
+          "f": "Trata-se de apelação à sentença (ID …) que [verbo nuclear] …",
+          "r": [
+            "Honorários em nova frase."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "Sentença",
+          "f": "A sentença (ID …) …",
+          "r": [
+            "Resultado e, na mesma frase, honorários, base de cálculo, suspensão da exigibilidade e eventual multa."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Razões",
+          "f": "Apelou o autor/a autora (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "r": [
+            "Orações no infinitivo.",
+            "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
+            "Um parágrafo por recurso, sem conectivo.",
+            "“aduz” só para acréscimo."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Contrarrazões",
+          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "r": [
+            "Parágrafo próprio."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Ministério Público",
+          "f": "A Procuradoria Regional da República opinou […] (ID …).",
+          "r": [
+            "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
+            "Parecer de 1º grau: “Ministério Público Federal”."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Referências aos autos",
+          "f": "(ID …)\n(ID …, f. …/…)",
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É o relatório.",
+          "r": [
+            "Fecho em linhas próprias: contrarrazões, ocorrências, Procuradoria Regional da República e “É o relatório.”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "notas": [
+        "Não acrescentar fatos por força do modelo (gratuidade, multa, parecer).",
+        "Manter uniforme a identificação da parte.",
+        "Variantes: mandado de segurança, remessa necessária com apelação, embargos de declaração (“opostos contra acórdão assim ementado:” + ementa) e agravo interno."
+      ],
+      "notas_fo": "P+M"
+    },
+    {
+      "id": "voto",
+      "grupo": "Acórdão",
+      "t": "Voto",
+      "resumo": "Redação direta, com normas pertinentes e distinções jurídicas explicadas. Sequência: afirmação → fonte → avaliação da prova → consequência jurídica.",
+      "elementos": [
+        {
+          "n": "Cabeçalho",
+          "f": "O Desembargador Federal Carlos Muta (Relator):",
+          "r": [],
+          "fo": "P+M"
+        },
+        {
+          "n": "Vocativo",
+          "f": "Senhores Desembargadores,",
+          "r": [],
+          "fo": "P+M"
+        },
+        {
+          "n": "Abertura",
+          "f": "",
+          "r": [
+            "Admissibilidade ou sobrestamento; questão; sentença; norma."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "Sobrestamento sem suspensão",
+          "f": "Embora afetada a controvérsia, … não se determinou a suspensão …, pelo que se adentra ao exame do mérito devolvido.",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Transição ao mérito",
+          "f": "No mérito,\nSuperada a preliminar, passa-se à análise do mérito.",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Moldura jurídica",
+          "f": "",
+          "r": [
+            "Fundamentação geral antes do caso.",
+            "Normas e teses transcritas em parágrafo próprio, entre aspas e em itálico."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Exame do caso",
+          "f": "Na espécie,",
+          "r": [
+            "Marca a análise concreta.",
+            "Indica o ID de cada prova.",
+            "Distingue alegação de fato demonstrado (“narrou ter…”).",
+            "Preserva o grau de certeza da prova.",
+            "Vincula cada premissa decisiva ao ID."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Enfrentamento das alegações",
+          "f": "Nem se alegue que…\nContrariamente ao sustentado…",
+          "r": [
+            "Enfrentamento específico, ponto a ponto."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Precedente",
+          "f": "Em casos que tais, assim tem decidido esta Turma Regional:\nNeste sentido:\nclasse número, Rel. …, veículo de data: “ementa” (g.n.)",
+          "r": [
+            "Vem depois do raciocínio que sustenta: confirma, não inaugura.",
+            "Classe e número sem UF; nome regimental em caixa alta.",
+            "Ordem: STF → STJ → TRF-3 → outros; TNU vedada.",
+            "Veículo conforme a fonte (DJe, DJEN, e-DJF3, intimação via sistema)."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Síntese",
+          "f": "Em suma,\nAssim, nada colhe o recurso…",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Honorários recursais",
+          "f": "Pela sucumbência recursal, … condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC).",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Dispositivo",
+          "f": "Ante o exposto, …",
+          "r": [
+            "Direto e completo: resultado, ato anulado e extensão, destino dos autos, providências e situação do recurso.",
+            "Verbos por classe: recurso provido/desprovido; embargos de declaração acolhidos/rejeitados; segurança concedida/denegada."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É como voto.",
+          "r": [],
+          "fo": "P+M"
+        }
+      ],
+      "notas": [
+        "Fato → prova → norma → consequência.",
+        "Nunca alterar resultado em silêncio."
+      ],
+      "notas_fo": "M"
+    },
+    {
+      "id": "ementa",
+      "grupo": "Acórdão",
+      "t": "Ementa",
+      "resumo": "Modelo CNJ 154/2024 adaptado. Deriva do voto.",
+      "elementos": [
+        {
+          "n": "Cabeçalho",
+          "f": "RAMO. CLASSE. ASSUNTO. CONCLUSÃO.",
+          "r": [
+            "Negrito e caixa alta.",
+            "Ordem: ramo → classe → assunto → conclusão, em até 3 linhas."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "I. CASO EM EXAME",
+          "f": "",
+          "r": [
+            "Sem “Trata-se de”."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "II. QUESTÃO EM DISCUSSÃO",
+          "f": "… consiste em saber se …\nHá duas questões em discussão: (i) saber se …; e (ii) saber se …",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "III. RAZÕES DE DECIDIR",
+          "f": "",
+          "r": [
+            "Um fundamento por item."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "IV. DISPOSITIVO",
+          "f": "",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Itens",
+          "f": "1. …",
+          "r": [
+            "Números em negrito e contínuos.",
+            "Frases com até 40 palavras e menos de 5 vírgulas.",
+            "Sem ID."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "Rodapé",
+          "f": "__________\nDispositivos relevantes citados: …\nJurisprudência relevante citada: STF, …; STJ, …; e TRF-3, …",
+          "r": [
+            "Rótulos em itálico após “__________”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "notas": [
+        "Ementa sem recuo; subtítulos em negrito."
+      ],
+      "notas_fo": "P"
+    },
+    {
+      "id": "acordao",
+      "grupo": "Acórdão",
+      "t": "Acórdão (fórmula final)",
+      "resumo": "Espelha literalmente o dispositivo do voto.",
+      "elementos": [
+        {
+          "n": "Fórmula",
+          "f": "Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, [resultado], nos termos do voto do Desembargador Federal CARLOS MUTA (Relator). Votaram o Desembargador Federal JEAN MARCOS e o Juiz Federal Convocado NEY DE ANDRADE, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.",
+          "r": [
+            "O resultado repete o dispositivo do voto."
+          ],
+          "fo": "M"
+        }
+      ],
+      "notas": [],
+      "notas_fo": "M"
+    },
+    {
+      "id": "monocratica",
+      "grupo": "Monocrática",
+      "t": "Decisão monocrática",
+      "resumo": "Relatório, marco decisório, fundamentação e dispositivo em primeira pessoa, com a base legal.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Vistos.",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Relato",
+          "f": "Trata-se de …",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Marco decisório",
+          "f": "DECIDO.",
+          "r": [
+            "Separa o relatório da fundamentação."
+          ],
+          "fo": "M+R"
+        },
+        {
+          "n": "Fundamentação",
+          "f": "",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Dispositivo",
+          "f": "Ante o exposto, com esteio no artigo 932, III, do CPC, …",
+          "r": [
+            "Primeira pessoa e base legal."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "Comunicação",
+          "f": "Publique-se. Intime-se.",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Destino dos autos",
+          "f": "",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Local e data",
+          "f": "[VALIDAR]",
+          "r": [
+            "Conferir a fórmula de local e data: ver Tensões entre fontes."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "Assinatura",
+          "f": "NOME REGIMENTAL\ncargo",
+          "r": [],
+          "fo": "M"
+        }
+      ],
+      "notas": [],
+      "notas_fo": "M",
+      "exemplos": "M"
+    },
+    {
+      "id": "despacho",
+      "grupo": "Monocrática",
+      "t": "Despacho",
+      "resumo": "Sem fórmula de dispositivo.",
+      "elementos": [
+        {
+          "n": "Comunicação",
+          "f": "Intime-se.",
+          "r": [
+            "Sem “Ante o exposto”."
+          ],
+          "fo": "M"
+        }
+      ],
+      "notas": [],
+      "notas_fo": "M"
+    },
+    {
+      "id": "ed",
+      "grupo": "Variantes",
+      "t": "Embargos de declaração",
+      "resumo": "Rejeição em seis passos; correção de erro material de ofício; efeitos infringentes só com intimação prévia.",
+      "elementos": [
+        {
+          "n": "1. Vícios",
+          "f": "",
+          "r": [
+            "Vícios inexistentes ou error in judicando."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "2. Rediscussão",
+          "f": "Com efeito, resta evidenciado o intento de mera rediscussão…",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "3. Enfrentamento",
+          "f": "",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "4. Natureza do inconformismo",
+          "f": "Como se observa, não se trata de omissão…",
+          "r": [
+            "Indicar o recurso próprio."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "5. Prequestionamento",
+          "f": "… com os apontamentos destacados …",
+          "r": [
+            "Artigo 1.025 do CPC."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "6. Dispositivo",
+          "f": "Ante o exposto, rejeito os embargos de declaração.",
+          "r": [],
+          "fo": "M"
+        },
+        {
+          "n": "Erro material de ofício",
+          "f": "Não obstante, cumpre corrigir, de ofício, mero erro material do acórdão embargado para, sem qualquer efeito infringente, constar, como correto, que […]",
+          "r": [
+            "Não citar o artigo 494, I, do CPC."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Voto com correção",
+          "f": "rejeito [não conheço d]os embargos de declaração e corrijo, de ofício, o acórdão embargado, nos termos da fundamentação mencionada",
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Ementa com correção",
+          "f": "Erro material do acórdão embargado corrigido, de ofício[, sem efeitos infringentes]",
+          "r": [
+            "A ementa traz o resultado dos embargos."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Efeitos infringentes",
+          "f": "",
+          "r": [
+            "Mudança do resultado do julgado embargado.",
+            "Exige intimação prévia da parte contrária (artigo 1.023, § 2º, do CPC)."
+          ],
+          "fo": "P"
+        }
+      ],
+      "notas": [
+        "Embargos de declaração são acolhidos ou rejeitados, não “providos”."
+      ],
+      "notas_fo": "M"
+    },
+    {
+      "id": "agint",
+      "grupo": "Variantes",
+      "t": "Agravo interno",
+      "resumo": "Fundamentação per relationem e multa do artigo 1.021, § 4º, do CPC conforme o Tema 1.201/STJ.",
+      "elementos": [
+        {
+          "n": "Fundamentação",
+          "f": "",
+          "r": [
+            "Per relationem (Tema 1.306/STJ)."
+          ],
+          "fo": "M"
+        },
+        {
+          "n": "Multa: precedente qualificado",
+          "f": "",
+          "r": [
+            "Decisão agravada fundada em precedente qualificado do STJ ou do STF e distinção genérica: multa de 1% do valor atualizado da causa, fundamentada."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Multa: sem precedente qualificado",
+          "f": "não se impõe, no caso, a aplicação da multa",
+          "r": [
+            "Decisão agravada não fundada em precedente qualificado."
+          ],
+          "fo": "P"
+        }
+      ],
+      "notas": [],
+      "notas_fo": "P"
+    }
+  ],
+  "forma": [
+    {
+      "t": "Formatação para o PJe",
+      "fo": "P",
+      "r": [
+        "Arial 12, justificado, recuo de 2,5 cm na primeira linha, espaço entre parágrafos.",
+        "Transcrição longa: bloco em itálico, recuado 2,5 cm, entre aspas, com “[...]”.",
+        "Ementa sem recuo; cabeçalho em maiúsculas e negrito; subtítulos em negrito; número do item em negrito; rodapé com rótulos em itálico após “__________”.",
+        "Os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO são inseridos pelo PJe."
+      ]
+    },
+    {
+      "t": "Normas e referências",
+      "fo": "P+M",
+      "r": [
+        "Normas sem “nº” (Lei 8.213/1991).",
+        "“artigo” por extenso na redação autoral.",
+        "Órgãos por extenso no corpo.",
+        "Veículo do precedente conforme a fonte (DJe, DJEN, e-DJF3, intimação via sistema).",
+        "Datas em DD/MM/AAAA."
+      ]
+    },
+    {
+      "t": "Citação de precedente",
+      "fo": "P+M",
+      "r": [
+        "classe número, Rel. …, veículo de data: “ementa” (g.n.)",
+        "Classe e número sem UF; nome regimental em caixa alta.",
+        "Ordem: STF → STJ → TRF-3 → outros; TNU vedada.",
+        "Grifo indicado por “(g.n.)”."
+      ]
+    },
+    {
+      "t": "Enumeração e remissões",
+      "fo": "M",
+      "r": [
+        "Enumeração “(1) …; (2) …; e (3) …”.",
+        "Referência aos autos “(ID …, f. 5/9)”.",
+        "“a sentença”, sem “r.”.",
+        "“União”, sem “Federal”."
+      ]
+    }
+  ],
+  "evitar": {
+    "fo": "M",
+    "itens": [
+      "Nesse sentido",
+      "Por outro lado",
+      "Nesse diapasão",
+      "Além disto",
+      "Outrossim",
+      "Egrégio",
+      "Colendo",
+      "Carta Magna",
+      "mandamus",
+      "writ",
+      "decisum",
+      "in casu",
+      "ex vi",
+      "quantum",
+      "cristalino",
+      "indubitável",
+      "carência de ação",
+      "despacho saneador",
+      "Apelação julgada procedente",
+      "“provimento” de embargos de declaração",
+      "Mandado de Segurança provido",
+      "União Federal",
+      "A r. sentença",
+      "sem julgamento de mérito",
+      "auxílio-doença",
+      "Senhores Julgadores"
+    ]
+  },
+  "tensoes": [
+    {
+      "t": "Honorários no relato da sentença",
+      "a": "Na mesma frase do resultado da sentença.",
+      "afo": "P+D",
+      "b": "Em nova frase.",
+      "bfo": "M"
+    },
+    {
+      "t": "Abertura do relatório de apelação",
+      "a": "“Trata-se de apelação interposta em ação de […]”.",
+      "afo": "P",
+      "b": "“Trata-se de apelação à sentença (ID …) que …”; evitar “interposta em ação de”.",
+      "bfo": "R+D"
+    },
+    {
+      "t": "Grafia de ID no plural",
+      "a": "“IDs” (evitar “ID's”).",
+      "afo": "R",
+      "b": "“IDʼs” (não “IDs”).",
+      "bfo": "M"
+    },
+    {
+      "t": "Ministério Público no relatório",
+      "a": "Procuradoria Regional da República (Manual I.2.2.2).",
+      "afo": "M",
+      "b": "“O Ministério Público Federal” (Manual II.1.1.2).",
+      "bfo": "M"
+    },
+    {
+      "t": "Extensão dos itens da ementa",
+      "a": "Itens de embargos de declaração com 80 a 150 palavras.",
+      "afo": "M",
+      "b": "Limite de 40 palavras por frase.",
+      "bfo": "M"
+    },
+    {
+      "t": "Títulos da ementa",
+      "a": "“I. Caso em exame”.",
+      "afo": "M",
+      "b": "“I. CASO EM EXAME”.",
+      "bfo": "M"
+    },
+    {
+      "t": "Local nas decisões",
+      "a": "“Campo Grande, data da assinatura.” (Manual).",
+      "afo": "M",
+      "b": "“São Paulo, [data]” (Compêndio).",
+      "bfo": "M"
+    }
+  ]
+}
