@@ -1377,6 +1377,18 @@ function rpTree(L){
       as.forEach(function(z){if(!ca[z])return;tr+='<button class="a" data-rr="" data-ra="'+esc(z)+'" aria-pressed="'+(RP.ass===z)+'"><i style="background:'+esc((A.ASN[z]&&A.ASN[z]['Cor'])||'var(--mut)')+'"></i><span>'+esc(z)+'</span><small>'+ca[z]+'</small></button>';});}});
   return '<div class="n-tree">'+tr+'</div>';
 }
+/* diploma no painel: número (ou sigla) e título; ordem: Constituição e emendas, códigos, leis complementares, leis, decretos e atos */
+function dipTitulo(d,o){o=o||{};var nome=o.nome||'',norma=o.norma||'';
+  var num=/^(Constituição|Código Civil)/.test(d)?(norma&&norma!==d&&!/Constituição/.test(norma)?norma:d):d.replace(/\s*\(.*\)$/,'');
+  var tit=nome&&nz(nome)!==nz(num)&&nz(nome)!==nz(d)?nome:'';
+  if(/^(CPC|CTN)$/.test(d)){num=d+' · '+norma;}
+  if(d==='Código Civil'){num='CC · '+norma;tit=nome;}
+  if(d==='Constituição Federal'){num='CF/1988';tit='Constituição Federal';}
+  var TD={'EC 113/2021':'Regime de precatórios e atualização de débitos da Fazenda Pública','LC 118/2005':'Alterações no CTN (prescrição da repetição de indébito)'};if(TD[d])tit=TD[d];
+  return {num:num,tit:tit,full:[d,nome,norma].filter(Boolean).join(' · ')};}
+function dipOrdem(L){function r(d){return /^Constitui/.test(d)?0:/^EC /.test(d)?1:/^(CPC|CTN|Código)/.test(d)?2:/^LC /.test(d)?3:/^Lei /.test(d)?4:/^Decreto/.test(d)?5:6;}
+  function ano(d){var m=/\/(\d{4})/.exec(d);return m?+m[1]:0;}
+  return L.slice().sort(function(a,b){return r(a)-r(b)||ano(a)-ano(b)||a.localeCompare(b,'pt');});}
 function rpBusca(ph){return '<div class="lab">Buscar</div><input class="q n-q" id="r-q2" type="search" placeholder="'+ph+'" value="'+esc(RP.q[RP.sub]||'')+'" aria-label="Buscar no repertório">';}
 function rpAside(h){var as0=$('#r-aside'),st=as0.scrollTop,foco=document.activeElement&&document.activeElement.id==='r-q2',pos=foco?document.activeElement.selectionStart:0;as0.innerHTML=h;as0.scrollTop=st;if(foco){var qi=$('#r-q2');qi.focus();try{qi.setSelectionRange(pos,pos);}catch(e){}}}
 function rpRender(){
@@ -1390,8 +1402,8 @@ function rpRender(){
   a+='<div class="lab">Destaques</div><div class="n-chips">'+FLs.map(function(f){var n=L0.filter(function(x){return rpPassa(x)&&f[2](x);}).length;return '<button class="n-chip" data-rf="'+f[0]+'" aria-pressed="'+(!!RP.f[f[0]])+'">'+f[1]+'<small>'+n+'</small></button>';}).join('')+'</div>';
   var ba=L0.filter(function(x){return rpPassa(x,'ass');});
   if(RP.sub==='normas'){a+='<div class="lab">Organizar por</div><div class="n-chips"><button class="n-chip" data-ro="diploma" aria-pressed="'+(RP.org==='diploma')+'">Diploma</button><button class="n-chip" data-ro="assunto" aria-pressed="'+(RP.org==='assunto')+'">Assunto</button></div>';
-    if(RP.org==='diploma'){var dc={},dord=[];ba.forEach(function(x){if(!dc[x.dip]){dc[x.dip]=0;dord.push(x.dip);}dc[x.dip]++;});
-      a+='<div class="lab">Diplomas</div><div class="n-tree"><button data-rd="" aria-pressed="'+(!RP.dip)+'"><span>Todos os diplomas</span><small>'+ba.length+'</small></button>'+dord.map(function(d){return '<button data-rd="'+esc(d)+'" aria-pressed="'+(RP.dip===d)+'"><span>'+esc(d)+'</span><small>'+dc[d]+'</small></button>';}).join('')+'</div>';}
+    if(RP.org==='diploma'){var dc={},dord=[],dn={};ba.forEach(function(x){if(!dc[x.dip]){dc[x.dip]=0;dord.push(x.dip);dn[x.dip]={nome:x.raw['Nome do diploma']||'',norma:x.raw['Norma']||''};}dc[x.dip]++;});dord=dipOrdem(dord);
+      a+='<div class="lab">Diplomas</div><div class="n-tree n-dips"><button data-rd="" aria-pressed="'+(!RP.dip)+'"><span>Todos os diplomas</span><small>'+ba.length+'</small></button>'+dord.map(function(d){var t=dipTitulo(d,dn[d]);return '<button data-rd="'+esc(d)+'" aria-pressed="'+(RP.dip===d)+'" title="'+esc(t.full)+'"><span><b>'+esc(t.num)+'</b>'+(t.tit?'<em>'+esc(t.tit)+'</em>':'')+'</span><small>'+dc[d]+'</small></button>';}).join('')+'</div>';}
     else a+='<div class="lab">Ramos e assuntos</div>'+rpTree(ba);}
   else a+='<div class="lab">Ramos e assuntos</div>'+rpTree(ba);
   rpAside(a);
@@ -1409,6 +1421,7 @@ function rpRender(){
     var chave=RP.sub==='normas'&&RP.org==='diploma'?function(x){return x.dip;}:function(x){return RP.ass&&(x.asAll||[]).indexOf(RP.ass)>=0?RP.ass:x.ass;};
     V.forEach(function(x){var k=chave(x);if(!g[k]){g[k]=[];ordG.push(k);}g[k].push(x);});
     if(!(RP.sub==='normas'&&RP.org==='diploma'))ordG=A.AS.map(function(z){return z['Assunto'];}).filter(function(k){return g[k];}).concat(ordG.filter(function(k){return !A.ASN[k];}));
+    else ordG=dipOrdem(ordG);
     var h='',last=null;
     if(RP.sub==='juris'&&RP.ass&&/pis/i.test(RP.ass)&&(rpDB()['Matriz PIS-Cofins']||[]).length){var M={},MO=[];rpDB()['Matriz PIS-Cofins'].forEach(function(m){if(!M[m['Grupo']]){M[m['Grupo']]=[];MO.push(m['Grupo']);}M[m['Grupo']].push(m['Nota']);});h+='<details class="matriz" open><summary>Matriz de teses de PIS e Cofins</summary>'+MO.map(function(gg){return '<b>'+esc(gg)+'</b><ol>'+M[gg].map(function(n){return '<li>'+refs(n)+'</li>';}).join('')+'</ol>';}).join('')+'</details>';}
     ordG.forEach(function(k){var L=g[k];if(!(RP.sub==='normas'&&RP.org==='diploma')){var r=(A.ASN[k]&&A.ASN[k]['Ramo'])||'Outros';if(r!==last){h+='<div class="ramo-t">'+esc(r)+'</div>';last=r;}}

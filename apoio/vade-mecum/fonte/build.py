@@ -10,6 +10,7 @@ Fontes (todas no procs-muta):
   ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
   ../../../precedentes/precedentes.jsonl · inteiros-teores/*.jsonl   ementário do Relator
   ../../referencias-rapidas.json                   referências rápidas ao lado dos modelos
+  ../../repertorio-normativo-complemento.json      dispositivos do repertório normativo além dos da planilha
   ../../../acervo/fonte.json                        partes, advogados e dados do processo, quando o processo está no acervo
 Uso: python3 build.py
 """
@@ -25,6 +26,8 @@ rep = ler(RAIZ/'apoio/repertorio.json')
 editorial = {'padrao': {'schema': dir_.get('schema'), 'versao': dir_.get('versao'), 'atualizadoEm': dir_.get('atualizadoEm'), 'registros': dir_['registros']},
              'normas': [r for r in rep['registros'] if r.get('categoria') == 'norma'],
              'pecas': ler(H/'editorial_pecas.json')}
+# repertório normativo: dispositivos acrescentados no procs-muta (somam-se aos da planilha)
+editorial['normasComplemento'] = ler(RAIZ/'apoio/repertorio-normativo-complemento.json')['registros']
 # matrizes estruturais (recurso × resultado, sem matéria): moldes do Editorial
 def _js(v): return json.loads(v) if isinstance(v, str) else v
 editorial['matrizes'] = [{'id': m['id'], 'nome': m.get('nomeModelo', ''), 'resultado': m.get('resultado', ''), 'classe': m.get('classe', ''), 'fonte': m.get('fonte', ''),
