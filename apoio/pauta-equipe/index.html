@@ -170,7 +170,7 @@ table.pl textarea{resize:vertical;min-height:26px;max-width:210px}table.pl .pd{c
 .ola-ch{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.ola-ch span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--ink)}.ola-ch span b{color:var(--navy)}
 .ini-g .col{grid-template-columns:repeat(3,minmax(0,1fr))!important}@media (max-width:1000px){.ini-g .col{grid-template-columns:1fr!important}}
 .ini-g .cx{min-height:150px}
-#cc-cal.eq-cal [data-a="novo"],#cc-cal.eq-cal [data-a="lista"]{display:none!important}
+body:not(.gestor) #cc-cal.eq-cal [data-a="novo"],body:not(.gestor) #cc-cal.eq-cal [data-a="lista"]{display:none!important}
 .cx{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}.cx h2{margin:0 0 8px;font-size:14px}
 .cx-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}.cx-h h2{margin:0;flex:1}.cx-h .sp{flex:1}
 .cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.cal .dw{font-size:10px;font-weight:800;color:var(--mut);text-align:center;letter-spacing:.08em}
@@ -473,32 +473,15 @@ html[data-theme=dark] .st.ok{background:#183447!important}
 @container (max-width:720px){.cc-top{grid-template-columns:1fr}.cc-sb{position:static}.cc-wg{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 #cc-cal{margin:0 0 18px}
-/* ===== tema Central de Comando (painel azul-marinho com detalhes dourados) ===== */
-.cc{border-radius:24px!important;color:#fff;background:radial-gradient(520px 260px at 92% -30%,rgba(217,160,70,.38),transparent 70%),radial-gradient(480px 300px at 8% 140%,rgba(62,114,173,.55),transparent 70%),linear-gradient(135deg,#1b3553,#122840)!important;box-shadow:0 10px 30px rgba(18,40,64,.18)!important;font-family:Figtree,system-ui,sans-serif}
-.cc-h{background:transparent!important;padding:18px 22px 8px!important}
-.cc-h b{color:#fff;font-size:22px!important;font-weight:800!important;letter-spacing:-.02em}
-.cc-h b::before{content:"Pautas de julgamento";display:block;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#e6c27a;margin-bottom:2px}
-.cc-dt{background:rgba(255,255,255,.08)!important;color:#fff!important;border:1px solid rgba(255,255,255,.16)}
-.cc-help{background:rgba(255,255,255,.1)!important;color:#e6c27a!important}
-.cc-sp{background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.14)}
-.cc-pill{color:#dfe5ee!important;background:transparent!important}
-.cc-pill.on{background:#c4953c!important;color:#1f2442!important;box-shadow:none!important}
-.cc-ib{color:#dfe5ee!important;background:transparent!important}.cc-ib:hover{background:rgba(255,255,255,.1)!important}
-.cc-body{padding:8px 22px 16px!important}
-.cc-top>div:nth-child(2){background:#fff;border-radius:16px;padding:10px 12px;color:#14263c}
-.cc-esq,.cc-dir{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.14);border-radius:16px!important}
-.cc-sb-t{color:#fff}.cc-sb-t small{color:#e6c27a!important;text-transform:uppercase;letter-spacing:.12em;font-size:10px!important;font-weight:800}
-.cc-dd{color:#c9d3dc!important}
-.cc-esq .cc-pill{color:#e6c27a!important}
-.cc-esq .cc-ib{color:#fff!important}
-.cc-a{box-shadow:none}
-.cc-wk{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.14)}
-.cc-wt b{color:#fff}.cc-wt small{color:#c9d3dc}
-.cc-wk .cc-wc{color:#14263c}
-.cc-ft{padding:0 22px 18px!important}
-.cc-ftb{background:rgba(255,255,255,.08)!important;color:#e6c27a!important;border:1px solid rgba(255,255,255,.14)!important;letter-spacing:.06em}
-.cc-ftc{background:#fff;border-radius:16px;padding:10px;color:#14263c}
-.cc-dl,.cc-td,.cc-sb-s,.cc-wc,.cc-tip{color:#14263c}.cc-tip{color:#fff}.cc-td b,.cc-sb-s b{color:inherit}.cc-dt{padding:4px 10px!important;border-radius:8px}
+/* tema claro: o calendário segue a página (sem o painel azul-marinho) */
+
+/* agenda: prazos-limite, datas específicas e ausências (férias, licença, compensação…) */
+.cc-pz{font-size:10.5px;font-weight:700;color:#c0392b;background:#fdecea;border-radius:5px;padding:1px 5px;margin:2px 3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-dx{font-size:10.5px;font-weight:700;color:#5b3fa0;background:#f1ecfb;border-radius:5px;padding:1px 5px;margin:2px 3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-aus{font-size:10.5px;font-weight:600;color:#13242f;background:color-mix(in srgb,var(--c) 16%,#fff);border-left:3px solid var(--c);border-radius:4px;padding:1px 5px;margin:2px 3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cc-aus.prev{background:#fff;border:1px dashed var(--c);border-left:3px dashed var(--c)}
+.cc-evw.cc-pz,.cc-evw.cc-dx,.cc-evw.cc-aus{font-size:11.5px;padding:4px 7px;margin:4px 0 0;white-space:normal}
+.cc-seg{flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -1448,7 +1431,22 @@ setInterval(function(){if(!$('#app').hidden&&document.visibilityState==='visible
 api('/api/login').then(function(j){iniciar(j.usuario,j.gestor);}).catch(function(){entrada();});
 })();
 </script>
-<script id="cc-cal-lib">/* cópia do CMTCalendario do CMT-monitor (m.work.html): mesmo painel de sessões */
+<script id="cmt-agenda">
+/* Agenda do calendário na Pauta da equipe: afazeres, alertas, eventos, prazos-limite, datas e ausências em acervo/sessoes/agenda.json
+   (a mesma do CMT-monitor) e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json). Lê /api/sessoes?agenda=1; só o gestor grava. */
+(function(){ if(window.CMTAgenda) return;
+  var D={itens:null,feitos:null,aus:[]},ok=false,t=null,lsf=function(){try{return JSON.parse(localStorage.getItem('cc_feitos')||'{}')}catch(e){return {}}};
+  function get(k,d){ if(k==='feitos'&&!document.body.classList.contains('gestor')) return lsf(); return D[k]==null?d:D[k]; }
+  function set(k,v){ if(k==='feitos'&&!document.body.classList.contains('gestor')){try{localStorage.setItem('cc_feitos',JSON.stringify(v))}catch(e){} return;}
+    D[k]=v; clearTimeout(t); t=setTimeout(gravar,1200); }
+  function gravar(){ if(!document.body.classList.contains('gestor')) return; fetch('/api/sessoes?agenda=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({itens:D.itens||[],feitos:D.feitos||{}})})
+    .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.erro||r.status);if(typeof toast==='function')toast('Agenda gravada');});}).catch(function(e){if(typeof toast==='function')toast('Agenda não gravada: '+e.message);}); }
+  function carregar(){ if(ok) return; fetch('/api/sessoes?agenda=1',{credentials:'same-origin',cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(j){ok=true;D.itens=j.itens||[];D.feitos=j.feitos||{};D.aus=j.ausencias||[];window.dispatchEvent(new Event('cmt-agenda'));}).catch(function(){}); }
+  setInterval(carregar,2000); carregar();
+  window.CMTAgenda={get:get,set:set,gravar:gravar,carregar:carregar,ausencias:function(){return D.aus;}};
+})();
+</script><script id="cc-cal-lib">/* cópia do CMTCalendario do CMT-monitor (m.work.html): mesmo painel de sessões */
 
 /* =====================================================================
    CMTCalendario · painel de sessões para o topo do Monitor
@@ -1489,7 +1487,11 @@ function montar(el,cal,ex){
       }
       if(!s.marcos.inicioPreparacao&&s.date<iso(new Date(+P(hoje)+40*DIA))) A.push(['y','ti-calendar-question',`${F(s.date)} · preparação, minutas e liberação sem data`,s]);
     });
-    const U=doDia(hoje,'alerta').map(x=>['y','ti-bell',`${x.hora?x.hora+' · ':''}${x.quem?x.quem+': ':''}${x.o}${x.s.date?' · sessão '+F(x.s.date):''}`,x.s.date?x.s:{date:''}]);
+    const dd0=x=>Math.round((P(x)-P(hoje))/DIA), PZ=[];
+    itens().filter(i=>i.tipo==='prazo'&&i.data&&i.data>=hoje&&dd0(i.data)<=10).sort((a,b)=>a.data.localeCompare(b.data)).forEach(i=>{const n=dd0(i.data);
+      PZ.push(['r','ti-alert-triangle',`⚑ ${i.titulo} · prazo-limite ${n===0?'hoje':n===1?'amanhã':'em '+n+' dias ('+F(i.data)+')'}${i.quem?' · '+i.quem:''}`,{date:''}]);});
+    const AH=ausDia(hoje); if(AH.length) PZ.push(['y','ti-bell',`Ausentes hoje: ${AH.map(a=>a.quem+' ('+a.sub.toLowerCase()+(a.sit==='prevista'?', prevista':'')+')').join(', ')}`,{date:''}]);
+    const U=PZ.concat(doDia(hoje,'alerta').map(x=>['y','ti-bell',`${x.hora?x.hora+' · ':''}${x.quem?x.quem+': ':''}${x.o}${x.s.date?' · sessão '+F(x.s.date):''}`,x.s.date?x.s:{date:''}]));
     return U.concat(A.slice(0,4));
   }
   function tip(e,s,m){
@@ -1543,7 +1545,7 @@ function montar(el,cal,ex){
         const m=ms.find(x=>x.d===d); if(m){const e=estado(s,m); dot=bola(s,m,m.k==='date'?19:16)+`<span class="t" style="color:${e==='late'?'#c0392b':s.cor}">${({pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação',date:'Sessão '+F(s.date)})[m.k]}</span>`;}
         lanes+=`<div class="cc-lane">${l}${dot}</div>`;});
       const sR0=P(st.semRef||hoje), semR=sR0.getDay()%6?sR0:new Date(+sR0+(sR0.getDay()===6?2:1)*DIA), sg=iso(new Date(+semR-((semR.getDay()+6)%7)*DIA)), sd=iso(new Date(+P(sg)+6*DIA));
-      h+=`<div class="cc-c${fer[d]?' cc-fe':wd>=5?' cc-fds':''}${d===hoje?' cc-hoje':''}${d>=sg&&d<=sd?' cc-sw':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}" data-d="${d}"><span class="cc-n">${dd}${fer[d]?` <small>${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}</div>`;
+      h+=`<div class="cc-c${fer[d]?' cc-fe':wd>=5?' cc-fds':''}${d===hoje?' cc-hoje':''}${d>=sg&&d<=sd?' cc-sw':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}" data-d="${d}"><span class="cc-n">${dd}${fer[d]?` <small>${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}${extrasDia(d,'m')}</div>`;
     }
     return `<div class="cc-g">${h}</div>`;
   }
@@ -1556,13 +1558,13 @@ function montar(el,cal,ex){
       const corre=vis.filter(s=>{const ms=marcos(s);return d>ms[0].d&&d<s.date&&!evs.some(e=>e[0]===s)});
       return `<div class="cc-wc${d===hoje?' cc-hoje':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}${fer[d]?' cc-fe':i>=5?' cc-fds':''}" data-dia="${d}">
         <div class="cc-wh"><b>${FD(d,{weekday:'short'}).replace('.','')}, ${P(d).getDate()} ${FD(d,{month:'short'}).replace('.','')}</b>${d===hoje?'<span class="cc-hb">hoje</span>':''}${fer[d]?`<small>${fer[d]}</small>`:''}</div>
-        ${doDia(d,'evento').map(x=>`<div class="cc-evt cc-evw" style="--c:${x.s.cor}"><b>${x.hora||'dia todo'}</b> ${x.o}${x.s.date?' · sessão '+F(x.s.date):''}</div>`).join('')}
+        ${doDia(d,'evento').map(x=>`<div class="cc-evt cc-evw" style="--c:${x.s.cor}"><b>${x.hora||'dia todo'}</b> ${x.o}${x.s.date?' · sessão '+F(x.s.date):''}</div>`).join('')}${extrasDia(d,'w')}
         ${evs.map(([s,m])=>{const e=estado(s,m),p=prog(s),c=e==='late'?'#c0392b':s.cor;
           const det=m.k==='entregaMinutas'?`${p.minutadas}/${s.processos} minutadas`:m.k==='liberacao'?`${p.liberadas}/${s.processos} liberadas`:m.k==='pautarAte'?(s.processos?`${s.processos} pautados`:'sem pauta'):m.k==='inicioPreparacao'?`${s.processos} a minutar`:`${s.processos} processos`;
           return `<div class="cc-we" data-s="${s.date}" data-k="${m.k}" style="border-color:${c};background:${e==='done'?s.cor+'14':e==='late'?'#fdecea':'#fff'}">
             ${bola(s,m,22)}<div><b style="color:${c}">${m.n}</b><span>Sessão ${F(s.date)} · ${det}</span></div></div>`;}).join('')}
         ${corre.map(s=>`<div class="cc-wr" style="border-color:${s.cor}"><i style="background:${s.cor}"></i>${F(s.date)} em curso</div>`).join('')}
-        ${!evs.length&&!corre.length?'<div class="cc-wv">sem marcos</div>':''}</div>`;}).join('');
+        ${!evs.length&&!corre.length&&!extrasDia(d,'w')&&!doDia(d,'evento').length?'<div class="cc-wv">sem marcos</div>':''}</div>`;}).join('');
     return `<div class="cc-wk"><div class="cc-wt"><b>Semana de ${P(dias[0]).getDate()}${dias[0].slice(5,7)!==dias[4].slice(5,7)?' de '+MESL(dias[0]):''} a ${P(dias[4]).getDate()} de ${MESL(dias[4])}</b><small>clique num dia do mês para trocar a semana</small>
       <span class="cc-sp"><button class="cc-ib" data-a="wprev" title="Semana anterior"><i class="ti ti-chevron-left"></i></button><button class="cc-ib" data-a="wnext" title="Próxima semana"><i class="ti ti-chevron-right"></i></button></span></div>
       <div class="cc-wg">${cols}</div></div>`;
@@ -1582,6 +1584,25 @@ function montar(el,cal,ex){
   const diaUtil=(d,n)=>{let x=P(d);do{x=new Date(+x+n*DIA);}while(x.getDay()%6===0||FER.has(iso(x)));return iso(x);};
   const AG=()=>window.CMTAgenda; const itens=()=>AG()?AG().get('itens',[]):ls.get('cc_itens',[]), salvarItens=v=>AG()?AG().set('itens',v):ls.set('cc_itens',v);
   const GERAL={cor:'#56656e',date:null};
+  /* tipos de cadastro e ausências (férias, licença, compensação…): previstas (tracejado) ou confirmadas */
+  const TIPOS={afazer:['Afazer','#1a8a6a'],alerta:['Alerta','#c46a1f'],evento:['Evento','#3e72ad'],prazo:['Prazo-limite','#c0392b'],data:['Data','#7a5cc0'],ausencia:['Ausência','#5f6f7a']};
+  const AUS={'Férias':'#2f8f6b','Licença':'#b0406a','Compensação':'#c4953c','Folga compensatória':'#c4953c','Abono':'#3e72ad','Curso ou evento':'#7a5cc0','Outra':'#5f6f7a','Outro':'#5f6f7a'};
+  const AUSL=['Férias','Licença','Compensação','Abono','Curso ou evento','Outra'];
+  const ausExt=()=>{const A=ex.ausencias||(window.CMTAgenda&&window.CMTAgenda.ausencias?window.CMTAgenda.ausencias():[]);return Array.isArray(A)?A:[];};
+  function ausDia(dia){
+    if(P(dia).getDay()%6===0) return [];
+    const L=itens().filter(i=>i.tipo==='ausencia'&&i.data&&dia>=i.data&&dia<=(i.ate||i.data)).map(i=>({quem:i.quem||'',sub:i.sub||'Outra',sit:i.sit||'prevista',obs:i.titulo&&i.titulo!==i.sub?i.titulo:'',de:i.data,ate:i.ate||i.data,id:i.id}));
+    ausExt().filter(a=>a.de&&dia>=a.de&&dia<=(a.ate||a.de)).forEach(a=>L.push({quem:a.quem||'',sub:a.tipo||'Outra',sit:a.situacao||'prevista',obs:a.obs||'',de:a.de,ate:a.ate||a.de,ext:1}));
+    return L;
+  }
+  const corAus=a=>AUS[a.sub]||'#5f6f7a';
+  const tAus=a=>`${a.sub} · ${a.quem}${a.sit==='prevista'?' (prevista)':''}`;
+  function extrasDia(d,modo){
+    const aus=ausDia(d), pz=doDia(d,'prazo'), dt=doDia(d,'data'), w=modo==='w';
+    return pz.map(x=>`<div class="cc-pz${w?' cc-evw':''}" title="Prazo-limite${x.quem?' · '+x.quem:''}">⚑ ${x.hora?x.hora+' ':''}${x.o}${w&&x.quem?' · '+x.quem:''}</div>`).join('')
+      +dt.map(x=>`<div class="cc-dx${w?' cc-evw':''}" title="Data específica">◆ ${x.o}</div>`).join('')
+      +aus.map(a=>`<div class="cc-aus${a.sit==='prevista'?' prev':''}${w?' cc-evw':''}" style="--c:${corAus(a)}" title="${tAus(a)} · ${F(a.de)} a ${F(a.ate)}${a.obs?' · '+a.obs:''}">${w?'<b>'+a.sub+'</b> ':''}${w?a.quem:a.quem.split(' ')[0]+' · '+a.sub.slice(0,4)+'.'}</div>`).join('');
+  }
   /* ocorrências de um item cadastrado num dia: devolve [sessão|GERAL, ...] */
   function ocorre(it,dia){
     const ok=[], dw=P(dia).getDay();
@@ -1592,7 +1613,7 @@ function montar(el,cal,ex){
     if(hit) ok.push(it.ses&&it.ses!=='*'?(ses.find(s=>s.date===it.ses)||GERAL):GERAL);
     return ok;
   }
-  const doDia=(dia,tipo)=>itens().filter(i=>i.tipo===tipo).flatMap(it=>ocorre(it,dia).map(s=>({id:'u'+it.id+':'+dia+':'+(s.date||''),quem:it.quem||'',o:it.titulo,hora:it.hora||'',s,it}))).sort((a,b)=>(a.hora||'99').localeCompare(b.hora||'99'));
+  const doDia=(dia,tipo)=>itens().filter(i=>i.tipo===tipo&&i.tipo!=='ausencia').flatMap(it=>ocorre(it,dia).map(s=>({id:'u'+it.id+':'+dia+':'+(s.date||''),quem:it.quem||'',o:it.titulo,hora:it.hora||'',s,it}))).sort((a,b)=>(a.hora||'99').localeCompare(b.hora||'99'));
   const feitos=()=>AG()?AG().get('feitos',{}):ls.get('cc_feitos',{});
   function afazeres(dia){
     const L=[];
@@ -1611,7 +1632,7 @@ function montar(el,cal,ex){
           if(!d) return `<li class="nd"><span class="ic"><i class="ti ${ic}"></i></span>${nm}<b>a definir</b></li>`;
           const e=est({d}), late=estado(s,{k,d})==='late'&&d<dia;
           return `<li class="${e}${late?' late':''}" data-s="${s.date}" data-k="${k}"><span class="ic"><i class="ti ${ic}"></i></span>${nm}<b>${F(d)}</b></li>`;}).join('')}</ol></div>`;};
-    const esq=`<div class="cc-sb cc-esq"><div class="cc-sb-t">${dia===hoje?'Hoje':cap0(FD(dia,{weekday:'long'}))}<span class="cc-dd">${FD(dia,{day:'numeric',month:'long'})}</span><small>${dia===hoje?'alertas e afazeres':'afazeres do dia'}</small><span class="cc-esq-b"><button class="cc-ib cc-tx" data-a="novo" title="Cadastrar afazer, alerta ou evento" aria-label="Cadastrar">+</button><button class="cc-ib cc-tx" data-a="lista" title="Gerenciar cadastrados" aria-label="Gerenciar">☰</button></span></div>
+    const esq=`<div class="cc-sb cc-esq"><div class="cc-sb-t">${dia===hoje?'Hoje':cap0(FD(dia,{weekday:'long'}))}<span class="cc-dd">${FD(dia,{day:'numeric',month:'long'})}</span><small>${dia===hoje?'alertas e afazeres':'afazeres do dia'}</small><span class="cc-esq-b"><button class="cc-ib cc-tx" data-a="novo" title="Cadastrar afazer, alerta, evento, prazo-limite, data ou ausência" aria-label="Cadastrar">+</button><button class="cc-ib cc-tx" data-a="lista" title="Gerenciar cadastrados" aria-label="Gerenciar">☰</button></span></div>
       ${dia===hoje?`<div class="cc-al">${(st.alx?alertas():alertas().slice(0,1)).map(a=>`<div class="cc-a ${a[0]}" data-go="${a[3].date}"><i class="ti ${a[1]}"></i>${a[2]}</div>`).join('')||'<small style="color:#8a98a3">Nenhum marco crítico nos próximos 10 dias.</small>'}${alertas().length>1?`<button class="cc-pill" data-a="alx">${st.alx?'menos':'+'+(alertas().length-1)+' alertas'}</button>`:''}</div>`:''}
       ${(()=>{const L=afazeres(dia),fz=feitos(); if(!L.length){let d=dia,P2=[];for(let i=0;i<30&&!P2.length;i++){d=iso(new Date(+P(d)+DIA));P2=afazeres(d).map(x=>({...x,d}));} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>nenhum</small></div>${P2.length?`<div class="cc-td-nx">Próximos · ${F(P2[0].d)}</div>`+P2.map(x=>`<div class="cc-td-i" data-dia="${x.d}" style="--c:${x.s.cor}"><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></div>`).join(''):''}</div>`;} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>${L.filter(x=>fz[x.id]).length}/${L.length}</small></div>${L.map(x=>`<label class="cc-td-i${fz[x.id]?' ok':''}" style="--c:${x.s.cor}"><input type="checkbox" data-fz="${x.id}"${fz[x.id]?' checked':''}><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></label>`).join('')}</div>`;})()}
 </div>`;
@@ -1623,14 +1644,16 @@ function montar(el,cal,ex){
     if(!st.dlg) return '';
     if(st.dlg.modo==='lista'){
       const L=itens(), fq={unica:'uma vez',diaria:'dias úteis',semanal:'semanal',mensal:'mensal',sessao:'por sessão'};
-      return `<div class="cc-ov"><div class="cc-dl" role="dialog" aria-label="Cadastrados"><div class="cc-dl-h"><b>Afazeres, alertas e eventos</b><button class="cc-ib" data-a="fechar" aria-label="Fechar"><i class="ti ti-x"></i></button></div>
-        ${L.length?`<div class="cc-ls">${L.map(i=>`<div class="cc-li"><i class="cc-tag" style="background:${i.tipo==='alerta'?'#c46a1f':i.tipo==='evento'?'#3e72ad':'#1a8a6a'}">${i.tipo}</i><span><b>${i.titulo}</b><small>${i.quem?i.quem+' · ':''}${fq[i.freq]}${i.freq==='sessao'?' · '+(MK.find(m=>m[0]===i.marco)||['',''])[1]+(+i.desloc?(i.desloc>0?' +':' ')+i.desloc+' d úteis':''):i.data?' · desde '+F(i.data):''}${i.hora?' · '+i.hora:''}${i.ses&&i.ses!=='*'?' · sessão '+F(i.ses):i.ses==='*'?' · todas as sessões':''}</small></span><button class="cc-ib" data-ed="${i.id}" title="Editar"><i class="ti ti-pencil"></i></button><button class="cc-ib" data-del="${i.id}" title="Excluir"><i class="ti ti-x"></i></button></div>`).join('')}</div>`:'<p class="cc-vz">Nada cadastrado ainda.</p>'}
+      return `<div class="cc-ov"><div class="cc-dl" role="dialog" aria-label="Cadastrados"><div class="cc-dl-h"><b>Agenda do gabinete: afazeres, alertas, eventos, prazos, datas e ausências</b><button class="cc-ib" data-a="fechar" aria-label="Fechar"><i class="ti ti-x"></i></button></div>
+        ${L.length?`<div class="cc-ls">${L.map(i=>`<div class="cc-li"><i class="cc-tag" style="background:${i.tipo==='ausencia'?(AUS[i.sub]||'#5f6f7a'):((TIPOS[i.tipo]||[])[1]||'#1a8a6a')}">${(TIPOS[i.tipo]||[i.tipo])[0]}</i><span><b>${i.tipo==='ausencia'?(i.sub||'Ausência')+' · '+(i.quem||''):i.titulo}</b><small>${i.tipo==='ausencia'?F(i.data)+' a '+F(i.ate||i.data)+' · '+(i.sit==='confirmada'?'confirmada':'prevista')+(i.titulo&&i.titulo!==i.sub?' · '+i.titulo:''):(i.quem?i.quem+' · ':'')+fq[i.freq]}${i.freq==='sessao'?' · '+(MK.find(m=>m[0]===i.marco)||['',''])[1]+(+i.desloc?(i.desloc>0?' +':' ')+i.desloc+' d úteis':''):i.data&&i.tipo!=='ausencia'?(i.tipo==='prazo'||i.tipo==='data'?' · '+F(i.data):' · desde '+F(i.data)):''}${i.hora?' · '+i.hora:''}${i.ses&&i.ses!=='*'?' · sessão '+F(i.ses):i.ses==='*'?' · todas as sessões':''}</small></span><button class="cc-ib" data-ed="${i.id}" title="Editar"><i class="ti ti-pencil"></i></button><button class="cc-ib" data-del="${i.id}" title="Excluir"><i class="ti ti-x"></i></button></div>`).join('')}</div>`:'<p class="cc-vz">Nada cadastrado ainda.</p>'}
         <div class="cc-dl-f"><button class="cc-bt pri" data-a="novo">Cadastrar novo</button></div></div></div>`;
     }
     const i=st.dlg.it, o=(v,l,c)=>`<option value="${v}"${c===v?' selected':''}>${l}</option>`;
     return `<div class="cc-ov"><form class="cc-dl" role="dialog" aria-label="Cadastrar" novalidate>
       <div class="cc-dl-h"><b>${i.id?'Editar':'Cadastrar'}</b><button type="button" class="cc-ib" data-a="fechar" aria-label="Fechar"><i class="ti ti-x"></i></button></div>
-      <div class="cc-seg">${['afazer','alerta','evento'].map(t=>`<label><input type="radio" name="tipo" value="${t}"${i.tipo===t?' checked':''}><span>${t[0].toUpperCase()+t.slice(1)}</span></label>`).join('')}</div>
+      <div class="cc-seg">${Object.keys(TIPOS).map(t=>`<label><input type="radio" name="tipo" value="${t}"${i.tipo===t?' checked':''}><span>${TIPOS[t][0]}</span></label>`).join('')}</div>
+      <div class="cc-2 cc-q-aus"><label class="cc-f">Tipo de ausência<select name="sub">${AUSL.map(x=>o(x,x,i.sub||'Férias')).join('')}</select></label>
+      <label class="cc-f">Situação<select name="sit">${o('prevista','Prevista',i.sit||'prevista')}${o('confirmada','Confirmada',i.sit||'prevista')}</select></label></div>
       <label class="cc-f">Título<input name="titulo" value="${(i.titulo||'').replace(/"/g,'&quot;')}" placeholder="Concluir os julgados e encaminhar para assinatura"><em class="cc-er" data-er="titulo"></em></label>
       <div class="cc-2"><label class="cc-f">Responsável<input name="quem" value="${i.quem||''}" placeholder="Assessoria"></label>
       <label class="cc-f">Sessão vinculada<select name="ses">${o('','Nenhuma',i.ses||'')}${o('*','Todas as sessões',i.ses||'')}${ses.filter(x=>x.date>=iso(new Date(+P(hoje)-30*DIA))).map(x=>o(x.date,'Sessão '+F(x.date),i.ses||'')).join('')}</select></label></div>
@@ -1644,9 +1667,18 @@ function montar(el,cal,ex){
       <div class="cc-dl-f">${i.id?`<button type="button" class="cc-bt dan" data-del="${i.id}">Excluir</button>`:''}<span style="flex:1"></span><button type="button" class="cc-bt" data-a="fechar">Cancelar</button><button type="submit" class="cc-bt pri">Salvar</button></div>
     </form></div>`;
   }
-  function ajustaForm(){const fm=el.querySelector('form.cc-dl'); if(!fm) return; const fq=fm.freq.value;
+  function ajustaForm(){const fm=el.querySelector('form.cc-dl'); if(!fm) return;
+    const tp=(fm.querySelector('[name=tipo]:checked')||{}).value||'afazer', so=tp==='prazo'||tp==='data'||tp==='ausencia';
+    if(so) fm.freq.value='unica';
+    fm.querySelector('.cc-q-aus').hidden=tp!=='ausencia'; fm.freq.closest('.cc-2').hidden=so;
+    const lq=fm.quem.closest('label'); lq.firstChild.textContent=tp==='ausencia'?'Pessoa':'Responsável'; fm.quem.placeholder=tp==='ausencia'?'Nome do servidor':'Assessoria';
+    fm.ses.closest('label').hidden=tp==='ausencia';
+    fm.titulo.closest('label').firstChild.textContent=tp==='ausencia'?'Observação (opcional)':tp==='prazo'?'O que vence':'Título';
+    fm.titulo.placeholder=tp==='ausencia'?'ex.: férias aprovadas pela Presidência':tp==='prazo'?'ex.: entregar a relação de metas à Presidência':tp==='data'?'ex.: inspeção, correição, ponto facultativo':'Concluir os julgados e encaminhar para assinatura';
+    const fq=fm.freq.value;
     fm.querySelector('.cc-q-data').hidden=fq==='sessao'; fm.querySelector('.cc-q-ate').hidden=fq==='unica'; fm.querySelector('.cc-q-sem').hidden=fq!=='semanal'; fm.querySelector('.cc-q-ses').hidden=fq!=='sessao';
-    fm.querySelector('.cc-lb-data').textContent=fq==='unica'?'Data':'A partir de';}
+    fm.querySelector('.cc-lb-data').textContent=tp==='ausencia'?'De':tp==='prazo'?'Data-limite':fq==='unica'?'Data':'A partir de';
+    if(tp==='ausencia'){fm.querySelector('.cc-q-ate').hidden=false; fm.querySelector('.cc-q-ate').firstChild.textContent='Até';}}
   let t;
   function render(){
     const vis=ses;
@@ -1657,7 +1689,7 @@ function montar(el,cal,ex){
       : cap(new Date(+P((st.mes||hoje.slice(0,7))+'-15')).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}));
     el.innerHTML=`<div class="cc${st.min?' min':''}">
       <div class="cc-h"><button class="cc-ib" data-a="min" title="${st.min?'Expandir':'Recolher'}"><i class="ti ti-chevron-${st.min?'down':'up'}"></i></button>
-        <b>Calendário de sessões</b><span class="cc-dt">${tit}</span><span class="cc-help" title="Marco cheio = cumprido · pulsando = próximo · vermelho = vencido · tracejado = datas a definir. Clique na sessão para destacar o traçado; clique num marco para abrir a sessão em Pautas. Teclas: ← → anterior/próximo · D dia · S semana · M mês · H hoje · T linha do tempo">?</span>
+        <b>Calendário do gabinete</b><span class="cc-dt">${tit}</span><span class="cc-help" title="Marco cheio = cumprido · pulsando = próximo · vermelho = vencido · tracejado = datas a definir. Clique na sessão para destacar o traçado; clique num marco para abrir a sessão em Pautas. Teclas: ← → anterior/próximo · D dia · S semana · M mês · H hoje · T linha do tempo">?</span>
         <span class="cc-sp cc-ps">${[['dia','Dia'],['sem','Semana'],['mes','Mês']].map(([k,n])=>`<button class="cc-pill${st.passo===k?' on':''}" data-passo="${k}">${n}</button>`).join('')}</span>
         <span class="cc-sp"><button class="cc-ib" data-a="prev" title="${{dia:'Dia anterior',sem:'Semana anterior',mes:'Mês anterior'}[st.passo]}"><i class="ti ti-chevron-left"></i></button>
         <button class="cc-pill" data-a="hoje">Hoje</button>
@@ -1704,12 +1736,12 @@ function montar(el,cal,ex){
   function confirmDel(b){ if(b.dataset.sure){return true;} b.dataset.sure=1; b.textContent='Confirmar exclusão'; return false; }
   el.addEventListener('submit',e=>{const fm=e.target.closest('form.cc-dl'); if(!fm) return; e.preventDefault();
     const v=n=>fm[n]?fm[n].value.trim():'', fq=v('freq'), dias=[...fm.querySelectorAll('[name=dias]:checked')].map(x=>+x.value);
-    const er={}; if(!v('titulo')) er.titulo='Informe o título.'; if(fq!=='sessao'&&!v('data')) er.data='Informe a data.'; if(fq==='semanal'&&!dias.length) er.dias='Marque ao menos um dia.';
+    const tp=fm.querySelector('[name=tipo]:checked').value, er={}; if(!v('titulo')&&tp!=='ausencia') er.titulo='Informe o título.'; if(tp==='ausencia'&&!v('quem')) er.titulo='Informe a pessoa.'; if(tp==='ausencia'&&v('ate')&&v('ate')<v('data')) er.data='O fim não pode ser antes do início.'; if(fq!=='sessao'&&!v('data')) er.data='Informe a data.'; if(fq==='semanal'&&!dias.length) er.dias='Marque ao menos um dia.';
     fm.querySelectorAll('.cc-er').forEach(x=>x.textContent=er[x.dataset.er]||''); if(Object.keys(er).length) return;
-    const it={id:st.dlg.it.id||Date.now().toString(36),tipo:fm.querySelector('[name=tipo]:checked').value,titulo:v('titulo'),quem:v('quem'),ses:v('ses'),freq:fq,hora:v('hora'),data:fq==='sessao'?'':v('data'),ate:fq==='unica'||fq==='sessao'?'':v('ate'),dias:fq==='semanal'?dias:[],marco:fq==='sessao'?v('marco'):'',desloc:fq==='sessao'?(+v('desloc')||0):0};
+    const it={id:st.dlg.it.id||Date.now().toString(36),tipo:tp,sub:tp==='ausencia'?v('sub'):'',sit:tp==='ausencia'?v('sit'):'',titulo:v('titulo')||(tp==='ausencia'?v('sub'):''),quem:v('quem'),ses:v('ses'),freq:fq,hora:v('hora'),data:fq==='sessao'?'':v('data'),ate:tp==='ausencia'?(v('ate')||v('data')):fq==='unica'||fq==='sessao'?'':v('ate'),dias:fq==='semanal'?dias:[],marco:fq==='sessao'?v('marco'):'',desloc:fq==='sessao'?(+v('desloc')||0):0};
     const L=itens(), k=L.findIndex(i=>i.id===it.id); if(k>=0) L[k]=it; else L.push(it); salvarItens(L); st.dlg=null; render();});
   el.addEventListener('input',e=>{const er=e.target.name&&el.querySelector(`.cc-er[data-er="${e.target.name}"]`); if(er) er.textContent='';});
-  el.addEventListener('change',e=>{ if(e.target.name==='freq'){ajustaForm();return;} if(e.target.closest('form.cc-dl')) return;const c=e.target.closest('[data-fz]'); if(!c) return; const fz=feitos(); if(c.checked) fz[c.dataset.fz]=1; else delete fz[c.dataset.fz]; (AG()?AG().set('feitos',fz):ls.set('cc_feitos',fz)); render();});
+  el.addEventListener('change',e=>{ if(e.target.name==='freq'||e.target.name==='tipo'){ajustaForm();return;} if(e.target.closest('form.cc-dl')) return;const c=e.target.closest('[data-fz]'); if(!c) return; const fz=feitos(); if(c.checked) fz[c.dataset.fz]=1; else delete fz[c.dataset.fz]; (AG()?AG().set('feitos',fz):ls.set('cc_feitos',fz)); render();});
   el.addEventListener('mousemove',e=>{const m=e.target.closest('.cc-m'); if(!t) return; if(!m){t.hidden=true;return;}
     const s=ses.find(x=>x.date===m.dataset.s), mk=marcos(s).find(x=>x.k===m.dataset.k); tip(e,s,mk);});
   el.addEventListener('mouseleave',()=>{if(t)t.hidden=true});
