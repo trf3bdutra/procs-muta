@@ -1039,19 +1039,23 @@ function sessoesEquipe(primeira){
   }).catch(function(e){if(primeira)falha(e);});
 }
 function falha(e){if(e.status===401){entrada();return;}toast(e.message);$('#lst').innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
+/* cada leitura leva um número; resposta que chega depois de trocar de página ou de sessão é descartada
+   (sem isso, a resposta atrasada das Monocráticas podia ocupar a lista da Pauta, e vice-versa) */
+function vigente(n,f,ses){return n===S.req&&S.fonte===f&&(f==='mono'||S.ses===ses);}
 function carregar(silencioso){
+  var nReq=S.req=(S.req||0)+1,fReq=S.fonte,sReq=S.ses;
   if(S.fonte==='sobr'){$('#pt-ey').textContent='Controles especiais / Sobrestados e suspensos';$('#pt-t').textContent='Sobrestados';$('#pt-st').textContent='';return carregarSobr(silencioso);}
   if(S.fonte==='metas'){$('#pt-ey').textContent='Controles especiais / Metas do CNJ';$('#pt-t').textContent='Metas';$('#pt-st').textContent='';return carregarMetas(silencioso);}
   if(S.fonte==='sens'){$('#pt-ey').textContent='Controles especiais / Casos sensíveis';$('#pt-t').textContent='Casos sensíveis';$('#pt-st').textContent='';return carregarSens(silencioso);}
   if(S.fonte==='mono'){if(!silencioso)$('#lst').innerHTML='<div class="empty">Lendo…</div>';
-    return api('/api/pauta?mono=1').then(function(d){var T=d.itens||[];
+    return api('/api/pauta?mono=1').then(function(d){if(!vigente(nReq,fReq,sReq))return;var T=d.itens||[];
       var L=T.filter(function(i){return i.mono;}).sort(function(a,b){return String(a.monoEm).localeCompare(String(b.monoEm));});
       L.forEach(function(i,n){i.item=String(n+1);});var U2=T.filter(function(i){return (i.ctl||{}).urgTipo;});
       S.doc={itens:L,urgs:U2,todos:T,sugestoes:d.sugestoes||[],previa:[]};S.lista='itens';render();}).catch(falha);}
   if(!S.ses){var mq=(S.cal||[]).filter(function(s){return s.pauta===false&&s.date>=hoje();});$('#lst').innerHTML='<div class="empty">Nenhuma pauta publicada para a equipe ainda. O responsável libera cada pauta no CMT-monitor.'+(mq.length?'<br>Marcos já publicados: '+mq.map(function(s){return 'sessão de '+esc(br(s.date));}).join(', ')+' (veja o calendário na página inicial).':'')+'</div>';return;}
   if(!silencioso)$('#lst').innerHTML='<div class="empty">Lendo a pauta…</div>';
-  return api('/api/pauta?data='+S.ses).then(function(d){S.doc=d;var tem=(d.previa||[]).length&&(d.itens||[]).length;$('#ver').hidden=!tem;if(!tem)S.lista=(d.itens||[]).length?'itens':'previa';marcaSeg('#ver',S.lista);render();})
-    .catch(function(e){if(e.status===404){S.doc={itens:[],previa:[]};render();return;}falha(e);});
+  return api('/api/pauta?data='+S.ses).then(function(d){if(!vigente(nReq,fReq,sReq))return;S.doc=d;var tem=(d.previa||[]).length&&(d.itens||[]).length;$('#ver').hidden=!tem;if(!tem)S.lista=(d.itens||[]).length?'itens':'previa';marcaSeg('#ver',S.lista);render();})
+    .catch(function(e){if(!vigente(nReq,fReq,sReq))return;if(e.status===404){S.doc={itens:[],previa:[]};render();return;}falha(e);});
 }
 function marcaSeg(sel,v){Array.prototype.forEach.call(document.querySelectorAll(sel+' button'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===v));});}
 $('#ses').onchange=function(){if(PEND.size){toast('Aguarde a gravação terminar.');this.value=S.ses;return;}S.ses=this.value;S.aberto={};try{localStorage.setItem('eq_ses',S.ses);}catch(e){}carregar();};
