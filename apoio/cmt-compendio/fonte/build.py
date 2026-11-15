@@ -177,7 +177,8 @@ def montar(var):
     a = '  <div class="right">\n'
     SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
     t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>◧ Monitor</a>\n'
-              '    <a class="hb ic hbx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<i class="bdg" id="eq-cnot" hidden></i></a>'
+              '    <button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>'
+              '<a class="hb ic hbx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<i class="bdg" id="eq-cnot" hidden></i></a>'
               '<a class="hb ic hbx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<i class="bdg" id="eq-cpen" hidden></i></a>\n')
     # barra unificada com a Pauta da equipe (mesma pill): Início · Pauta · Compêndio, e as seções do Compêndio dentro da pill, ao lado do botão Compêndio
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
