@@ -156,7 +156,7 @@ function edArquivo(c){var a=EDM.arquivos[EDARQ[c]],agora=edAgora();
   if(c==='pec')return {path:a.path,txt:JSON.stringify(ED.pecas,null,2)+'\n'};
   return {path:a.path,txt:JSON.stringify({schema:ED.padrao.schema,versao:ED.padrao.versao,atualizadoEm:agora,registros:ED.padrao.registros},null,1)+'\n'};}
 function edMudados(){return Object.keys(EDS.sujo).filter(function(c){return EDS.sujo[c];}).map(edArquivo);}
-function edZip(){var F=edMudados();if(!F.length)return;var bl=zipStore(F.map(function(f){return {n:f.path,d:f.txt};}));baixarBlob(new Blob([bl],{type:'application/zip'}),'vade-mecum-alteracoes-'+edHoje()+'.zip');toast('Arquivos gerados nos caminhos do repositório');}
+function edZip(){var F=edMudados();if(!F.length)return;var bl=zipStore(F.map(function(f){return {n:f.path,d:f.txt};}));baixarBlob(new Blob([bl],{type:'application/zip'}),'cmt-compendio-alteracoes-'+edHoje()+'.zip');toast('Arquivos gerados nos caminhos do repositório');}
 function edResumo(){var c={};EDS.log.forEach(function(l){var k=EDCOL[l.col];c[k]=(c[k]||0)+1;});return Object.keys(c).map(function(k){return k.toLowerCase()+': '+c[k];}).join('; ');}
 function edDlgToken(){var F=edMudados();return '<div class="ed-dlg" role="dialog" aria-label="Enviar ao GitHub"><div class="ed-dlgc"><h3>Enviar ao GitHub</h3><p class="meta">Um commit em <b>'+esc(EDM.repo)+'</b> ('+esc(EDM.ramo)+') com '+F.map(function(f){return '<code>'+esc(f.path)+'</code>';}).join(', ')+'. Em seguida o GitHub valida a base e reconstrói o Compêndio.</p>'+
   '<ul class="ed-logl">'+EDS.log.slice(-12).map(function(l){return '<li>'+esc(EDCOL[l.col])+' · '+esc(l.acao)+' · '+esc(l.t.slice(0,70))+'</li>';}).join('')+(EDS.log.length>12?'<li>+ '+(EDS.log.length-12)+'</li>':'')+'</ul>'+

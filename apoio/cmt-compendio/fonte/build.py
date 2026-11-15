@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monta apoio/vade-mecum/cmt-compendio.html (leitura) e cmt-compendio-editor.html (editor) a partir desta pasta e da base do procs-muta.
+"""Monta apoio/cmt-compendio/cmt-compendio.html (leitura) e cmt-compendio-editor.html (editor) a partir desta pasta e da base do procs-muta.
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
@@ -136,7 +136,7 @@ def montar(editor):
         meta = {'repo': 'trf3bdutra/procs-muta', 'ramo': 'main', 'arquivos': {
             'modelos': {'path': 'modelos/modelos.json', 'sha': blob_sha(RAIZ/'modelos/modelos.json'), 'head': cab(RAIZ/'modelos/modelos.json')},
             'paragrafos': {'path': 'modelos/paragrafos.json', 'sha': blob_sha(RAIZ/'modelos/paragrafos.json'), 'head': cab(RAIZ/'modelos/paragrafos.json')},
-            'pecas': {'path': 'apoio/vade-mecum/fonte/editorial_pecas.json', 'sha': blob_sha(H/'editorial_pecas.json')},
+            'pecas': {'path': 'apoio/cmt-compendio/fonte/editorial_pecas.json', 'sha': blob_sha(H/'editorial_pecas.json')},
             'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')}}}
         pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
         js = 'window.VDM_EDITOR=true;\n' + js
