@@ -1,0 +1,36 @@
+# Publica o CMT-monitor no projeto trf3-muta da Vercel (trf3-muta.vercel.app).
+# Só o cmt-monitor.html vai para a Vercel, como index.html; o acervo continua privado no repositório.
+# Requer o segredo VERCEL_TOKEN (Settings › Secrets and variables › Actions).
+name: CMT-monitor na Vercel
+on:
+  push:
+    branches: [main]
+    paths: ["cmt-monitor.html", ".github/workflows/vercel-monitor.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: vercel-monitor
+  cancel-in-progress: true
+env:
+  VERCEL_ORG_ID: team_nyqcxKFhethUSdW52fbXcWpZ
+  VERCEL_PROJECT_ID: prj_RvxAJtVYRZd6rouWDzxewAyFE3bR
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Monta a pasta publicada
+        run: |
+          mkdir -p site/public
+          cp cmt-monitor.html site/public/index.html
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public"}\n' > site/vercel.json
+      - name: Publica
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          test -n "$VERCEL_TOKEN" || { echo "Falta o segredo VERCEL_TOKEN."; exit 1; }
+          npx --yes vercel@latest deploy site --prod --yes --token "$VERCEL_TOKEN"
