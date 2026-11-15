@@ -5,7 +5,8 @@ module.exports = async (req, res) => {
   const u = L.exigir(req, res); if (!u) return;
   try {
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
-    const pubs = (cal.sessoes || []).filter(s => s.publicada);
+    /* calendário: sessões com marcos publicados; processos, progresso e "meus" só das pautas com listagem publicada */
+    const vis = (cal.sessoes || []).filter(s => s.publicada || s.marcosPublicados), pubs = vis.filter(s => s.publicada);
     const eu = L.norm(u), meus = [], prog = {};
     const docs = await Promise.all(pubs.map(s => L.lerJson('acervo/sessoes/' + s.date + '.json').then(x => x.dados).catch(() => null)));
     pubs.forEach((s, i) => {
@@ -20,6 +21,6 @@ module.exports = async (req, res) => {
           resJulg: (it.ctl || {}).resJulg || '', previa: !(d.itens || []).length });
       });
     });
-    res.status(200).json({ usuario: u, sessoes: pubs.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', processos: s.processos || 0, previa: s.processos ? 0 : (s.previa || 0), marcos: s.marcos || {} })), expediente: cal.expediente || null, progresso: prog, meus });
+    res.status(200).json({ usuario: u, sessoes: vis.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', pauta: !!s.publicada, processos: s.publicada ? (s.processos || 0) : 0, previa: s.publicada && !s.processos ? (s.previa || 0) : 0, marcos: s.marcos || {} })), expediente: cal.expediente || null, progresso: prog, meus });
   } catch (e) { res.status(500).json({ erro: e.message }); }
 };
