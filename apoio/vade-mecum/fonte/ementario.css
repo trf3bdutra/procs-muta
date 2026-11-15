@@ -495,3 +495,5 @@ details.x-parte .x-doc{margin-bottom:10px}
 .fill{display:inline-block;min-width:1.4em;text-align:center;text-indent:0}
 .fill:empty::before{content:attr(data-ph);color:#6b5410}
 .fill:focus:empty::before{opacity:.55}
+.xpjc{margin-left:10px;border:1px solid #d8ccb3;background:#fff;color:#8c6d38;border-radius:999px;padding:1px 9px;font:700 10.5px Figtree,sans-serif;letter-spacing:0;cursor:pointer;vertical-align:1px}
+.xpjc:hover{background:#f4efe3}
