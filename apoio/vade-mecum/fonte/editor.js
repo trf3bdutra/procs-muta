@@ -1,7 +1,7 @@
 /* ================= VERSÃO EDITOR: adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial e diretrizes =================
-   Só entra no Vade_Mecum_CMT_editor.html. As alterações valem na hora nesta página; para gravar, "Enviar ao GitHub" faz um commit
+   Só entra no cmt-compendio-editor.html. As alterações valem na hora nesta página; para gravar, "Enviar ao GitHub" faz um commit
    em trf3bdutra/procs-muta (token informado na hora, guardado só na memória desta aba) ou "Baixar arquivos" gera um .zip com os
-   arquivos da base, nos caminhos do repositório. O GitHub valida a base e reconstrói o Vade Mecum depois do commit. */
+   arquivos da base, nos caminhos do repositório. O GitHub valida a base e reconstrói o Compêndio depois do commit. */
 var EDM=null;try{EDM=JSON.parse($('#editor-meta').textContent);}catch(e){EDM=null;}
 var EDS={col:'mod',id:null,q:'',tipoNovo:'preferencia',log:[],sujo:{},token:'',conf:null};
 var EDCOL={mod:'Modelos-matriz',par:'Parágrafos-padrão',pec:'Editorial (peças)',dir:'Diretrizes'};
@@ -68,7 +68,7 @@ function edLerPeca(p){
     var al=$$('.edalt',d).map(function(a){var o=jp(a.getAttribute('data-orig'))||{};o.lab=a.querySelector('.eda-l').value.trim();o.f=a.querySelector('.eda-f').value;return o;}).filter(function(a){return a.lab||a.f;});
     if(al.length)e.alts=al;else delete e.alts;if(d.querySelector('.ede-o').checked)e.opc=true;else delete e.opc;return e;});}
 /* ---------- painel ---------- */
-function edAbrir(col,id){EDS.col=col||EDS.col;EDS.id=id||null;EDS.conf=null;var o=$('#ed-ov');if(!o){o=document.createElement('div');o.id='ed-ov';o.className='ed-ov';o.setAttribute('role','dialog');o.setAttribute('aria-label','Editor do Vade Mecum');document.body.appendChild(o);}
+function edAbrir(col,id){EDS.col=col||EDS.col;EDS.id=id||null;EDS.conf=null;var o=$('#ed-ov');if(!o){o=document.createElement('div');o.id='ed-ov';o.className='ed-ov';o.setAttribute('role','dialog');o.setAttribute('aria-label','Editor do CMT Compêndio');document.body.appendChild(o);}
   o.hidden=false;document.body.classList.add('ed-on');base().then(edRender).catch(function(e){o.innerHTML='<p class="empty">Base indisponível ('+esc(e.message)+').</p>';});}
 function edFechar(){var o=$('#ed-ov');if(o)o.hidden=true;document.body.classList.remove('ed-on');}
 function edRender(){
@@ -107,7 +107,7 @@ function edMarca(acao,r){var c=EDS.col;EDS.sujo[c]=true;EDS.log.push({col:c,acao
 function edAtualizaVista(){try{PRECP=null;PRECI=null;if(!$('#v-edit').hidden)xRender();if(!$('#v-ement').hidden){if(EM.sub==='mod')mRender();else if(EM.sub==='par')pRender();}}catch(e){}}
 function edNovo(){var c=EDS.col,L=edLista(),r;
   if(c==='mod'){var ref=L.filter(function(m){var e=jp(m.esqueletoModelo);return e&&e._estrutura==='padrao';})[0],e=ref?jp(ref.esqueletoModelo):{_estrutura:'padrao',_topicos:[]},o={_estrutura:e._estrutura,_topicos:e._topicos};(e._topicos||[]).forEach(function(t){o[t.id]={texto:t.id==='fecho'?'É como voto.':'',ativo:!t.opcional};});
-    r={id:'mod-modelo-ed-'+Date.now().toString(36),processo:'',tipo:'Modelo',pronunciamento:'Voto',especie:'',assunto:'',temas:'',tese:'',fundamentacao:'',especificidades:'',resultado:'',fonte:'Editor do Vade Mecum',formatoModelo:'Modelo-matriz',nomeModelo:'Novo modelo-matriz',textoModelo:'',esqueletoModelo:JSON.stringify(o),paragrafosModelo:'[]',classe:'',classeSigla:'',statusCuradoria:'',especieModelo:'voto-matriz',dataReferencia:edHoje(),atualizadoEm:edAgora(),historico:[]};}
+    r={id:'mod-modelo-ed-'+Date.now().toString(36),processo:'',tipo:'Modelo',pronunciamento:'Voto',especie:'',assunto:'',temas:'',tese:'',fundamentacao:'',especificidades:'',resultado:'',fonte:'Editor do CMT Compêndio',formatoModelo:'Modelo-matriz',nomeModelo:'Novo modelo-matriz',textoModelo:'',esqueletoModelo:JSON.stringify(o),paragrafosModelo:'[]',classe:'',classeSigla:'',statusCuradoria:'',especieModelo:'voto-matriz',dataReferencia:edHoje(),atualizadoEm:edAgora(),historico:[]};}
   else if(c==='par')r={id:'par.'+Date.now().toString(36),categoria:'Genéricos',titulo:'Novo parágrafo-padrão',status:'padrao',texto:'',nivelTema:'',nivelEspecificidade:'',nivelCategoria:'Genéricos',nivelSubsecao:''};
   else{var t=EDS.tipoNovo,pre=ED_DIRPRE[t],mx=0;L.forEach(function(x){if(x.id.indexOf(pre)===0){var n=parseInt(x.id.slice(pre.length),10);if(n>mx)mx=n;}});r={id:pre+String(mx+1).padStart(2,'0'),tipo:t};ED_DIR[t].forEach(function(f){r[f[0]]='';});}
   L.unshift(r);EDS.id=r.id;edMarca('novo',r);edRender();}
@@ -158,9 +158,9 @@ function edArquivo(c){var a=EDM.arquivos[EDARQ[c]],agora=edAgora();
 function edMudados(){return Object.keys(EDS.sujo).filter(function(c){return EDS.sujo[c];}).map(edArquivo);}
 function edZip(){var F=edMudados();if(!F.length)return;var bl=zipStore(F.map(function(f){return {n:f.path,d:f.txt};}));baixarBlob(new Blob([bl],{type:'application/zip'}),'vade-mecum-alteracoes-'+edHoje()+'.zip');toast('Arquivos gerados nos caminhos do repositório');}
 function edResumo(){var c={};EDS.log.forEach(function(l){var k=EDCOL[l.col];c[k]=(c[k]||0)+1;});return Object.keys(c).map(function(k){return k.toLowerCase()+': '+c[k];}).join('; ');}
-function edDlgToken(){var F=edMudados();return '<div class="ed-dlg" role="dialog" aria-label="Enviar ao GitHub"><div class="ed-dlgc"><h3>Enviar ao GitHub</h3><p class="meta">Um commit em <b>'+esc(EDM.repo)+'</b> ('+esc(EDM.ramo)+') com '+F.map(function(f){return '<code>'+esc(f.path)+'</code>';}).join(', ')+'. Em seguida o GitHub valida a base e reconstrói o Vade Mecum.</p>'+
+function edDlgToken(){var F=edMudados();return '<div class="ed-dlg" role="dialog" aria-label="Enviar ao GitHub"><div class="ed-dlgc"><h3>Enviar ao GitHub</h3><p class="meta">Um commit em <b>'+esc(EDM.repo)+'</b> ('+esc(EDM.ramo)+') com '+F.map(function(f){return '<code>'+esc(f.path)+'</code>';}).join(', ')+'. Em seguida o GitHub valida a base e reconstrói o Compêndio.</p>'+
   '<ul class="ed-logl">'+EDS.log.slice(-12).map(function(l){return '<li>'+esc(EDCOL[l.col])+' · '+esc(l.acao)+' · '+esc(l.t.slice(0,70))+'</li>';}).join('')+(EDS.log.length>12?'<li>+ '+(EDS.log.length-12)+'</li>':'')+'</ul>'+
-  '<label class="edf"><span>Descrição do commit</span><input id="ed-msg" value="'+esc('Editor do Vade Mecum: '+edResumo())+'"></label>'+(EDS.token?'<p class="meta">Token desta sessão já informado.</p>':'<label class="edf"><span>Token do GitHub (permissão Contents: leitura e escrita no repositório). Fica só na memória desta aba.</span><input id="ed-tok" type="password" autocomplete="off"></label>')+
+  '<label class="edf"><span>Descrição do commit</span><input id="ed-msg" value="'+esc('Editor do CMT Compêndio: '+edResumo())+'"></label>'+(EDS.token?'<p class="meta">Token desta sessão já informado.</p>':'<label class="edf"><span>Token do GitHub (permissão Contents: leitura e escrita no repositório). Fica só na memória desta aba.</span><input id="ed-tok" type="password" autocomplete="off"></label>')+
   '<div class="e-dacts"><button class="btn" data-edenviar>Enviar</button><button class="btn ghost" data-eddlgx>Cancelar</button></div><p class="meta" id="ed-st"></p></div></div>';}
 function edGh(caminho,opt){opt=opt||{};return fetch('https://api.github.com/repos/'+EDM.repo+'/'+caminho,{method:opt.method||'GET',cache:'no-store',headers:Object.assign({'Accept':'application/vnd.github+json','Authorization':'Bearer '+EDS.token,'X-GitHub-Api-Version':'2022-11-28'},opt.body?{'Content-Type':'application/json'}:{}),body:opt.body?JSON.stringify(opt.body):undefined}).then(function(r){if(!r.ok)return r.text().then(function(t){var m='';try{m=JSON.parse(t).message;}catch(e){m=t.slice(0,120);}throw new Error(r.status+' '+m);});return r.json();});}
 function edSt(t){var s=$('#ed-st');if(s)s.textContent=t;}
@@ -172,11 +172,11 @@ function edEnviar(msg){
   .then(function(j){ref=j.object.sha;return edGh('git/commits/'+ref);})
   .then(function(j){tree=j.tree.sha;return Promise.all(F.map(function(f){return edGh('git/blobs',{method:'POST',body:{content:f.txt,encoding:'utf-8'}}).then(function(b){return {path:f.path,mode:'100644',type:'blob',sha:b.sha};});}));})
   .then(function(T){return edGh('git/trees',{method:'POST',body:{base_tree:tree,tree:T}}).then(function(t){return {t:t,T:T};});})
-  .then(function(x){return edGh('git/commits',{method:'POST',body:{message:(msg||'Editor do Vade Mecum')+'\n\nAlterações feitas no editor do Vade Mecum.',tree:x.t.sha,parents:[ref]}}).then(function(c){return {c:c,T:x.T};});})
+  .then(function(x){return edGh('git/commits',{method:'POST',body:{message:(msg||'Editor do CMT Compêndio')+'\n\nAlterações feitas no editor do CMT Compêndio.',tree:x.t.sha,parents:[ref]}}).then(function(c){return {c:c,T:x.T};});})
   .then(function(x){return edGh('git/refs/heads/'+EDM.ramo,{method:'PATCH',body:{sha:x.c.sha}}).then(function(){return x;});})
   .then(function(x){x.T.forEach(function(t){Object.keys(EDM.arquivos).forEach(function(k){if(EDM.arquivos[k].path===t.path)EDM.arquivos[k].sha=t.sha;});});
-    EDS.sujo={};EDS.log=[];EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Enviado</h3><p>Commit <a href="'+esc(x.c.html_url||('https://github.com/'+EDM.repo+'/commit/'+x.c.sha))+'" target="_blank" rel="noopener">'+esc(x.c.sha.slice(0,7))+'</a> gravado em '+esc(EDM.ramo)+'. O GitHub valida a base e reconstrói o Vade Mecum em alguns minutos.</p><div class="e-dacts"><button class="btn" data-eddlgx>Fechar</button></div></div></div>';edRender();})
+    EDS.sujo={};EDS.log=[];EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Enviado</h3><p>Commit <a href="'+esc(x.c.html_url||('https://github.com/'+EDM.repo+'/commit/'+x.c.sha))+'" target="_blank" rel="noopener">'+esc(x.c.sha.slice(0,7))+'</a> gravado em '+esc(EDM.ramo)+'. O GitHub valida a base e reconstrói o Compêndio em alguns minutos.</p><div class="e-dacts"><button class="btn" data-eddlgx>Fechar</button></div></div></div>';edRender();})
   .catch(function(e){edSt('Não foi possível enviar: '+e.message);if(/^401|^403/.test(e.message))EDS.token='';});}
 document.body.classList.add('vdm-ed');
 /* entrada pelo cabeçalho */
-(function(){var h=$('#openSheet');var b='<button class="btn ed-btn" data-edabre title="Adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial e diretrizes">Editor</button>';if(h)h.insertAdjacentHTML('beforebegin',b);else document.body.insertAdjacentHTML('afterbegin',b);})();
+(function(){var h=$('#openSheet');var b='<a class="btn ed-ler" href="cmt-compendio.html" title="Abrir a versão de leitura do CMT Compêndio">Versão de leitura</a><button class="btn ed-btn" data-edabre title="Adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial e diretrizes">Editor</button>';if(h)h.insertAdjacentHTML('beforebegin',b);else document.body.insertAdjacentHTML('afterbegin',b);})();

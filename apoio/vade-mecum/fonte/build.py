@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monta apoio/vade-mecum/Vade_Mecum_CMT.html a partir desta pasta e da base do procs-muta.
+"""Monta apoio/vade-mecum/cmt-compendio.html (leitura) e cmt-compendio-editor.html (editor) a partir desta pasta e da base do procs-muta.
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
@@ -140,7 +140,7 @@ def montar(editor):
             'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')}}}
         pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
         js = 'window.VDM_EDITOR=true;\n' + js
-        t = t.replace('<title>Vade Mecum CMT</title>', '<title>Vade Mecum CMT · Editor</title>')
+        t = t.replace('<title>CMT Compêndio</title>', '<title>CMT Compêndio · Editor</title>')
     return t, js, css, pre
 def gerar_html(editor):
     t, js, css, pre = montar(editor)
@@ -152,7 +152,7 @@ def gerar_html(editor):
              ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
         assert t.count(a) == 1, a[:60]
         t = t.replace(a, b)
-    out = H.parent/('Vade_Mecum_CMT_editor.html' if editor else 'Vade_Mecum_CMT.html')
+    out = H.parent/('cmt-compendio-editor.html' if editor else 'cmt-compendio.html')
     out.write_text(t, encoding='utf-8')
     print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
 gerar_html(False)
