@@ -1,0 +1,162 @@
+{
+ "schema": "gabcmt.regras-secao",
+ "schema_versao": 1,
+ "descricao": "Seção do TRF3 pelo assunto do CNJ (apoio/assuntos-cnj.json). Vale a regra do nó mais específico da cadeia do assunto. Assunto sem seção (processual) segue o assunto seguinte do processo: primeiro o principal, depois os demais. A etiqueta de seção do PJe não decide: só gera alerta quando diverge.",
+ "fonte_norma": "https://www.trf3.jus.br/documentos/seju/Competencias/COMPETENCIA_DAS_SECOES__2104__NOVA_VERSAO.pdf",
+ "regras": [
+  {
+   "no": "DIREITO PREVIDENCIÁRIO",
+   "codigo": 195,
+   "secao": "3ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 3º: previdência social"
+  },
+  {
+   "no": "DIREITO ASSISTENCIAL",
+   "codigo": 12734,
+   "secao": "3ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 3º: assistência social"
+  },
+  {
+   "no": "Servidor Público Civil",
+   "codigo": 10219,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: servidores civis"
+  },
+  {
+   "no": "Militar",
+   "codigo": 10324,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: servidores militares"
+  },
+  {
+   "no": "Empregado Público / Temporário",
+   "codigo": 10409,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: servidores civis"
+  },
+  {
+   "no": "Intervenção do Estado na Propriedade",
+   "codigo": 10120,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: desapropriação e apossamento administrativo"
+  },
+  {
+   "no": "Contribuições Previdenciárias",
+   "codigo": 6048,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: contribuições à seguridade social"
+  },
+  {
+   "no": "Funrural",
+   "codigo": 6040,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: Funrural"
+  },
+  {
+   "no": "Seguro Acidentes do Trabalho",
+   "codigo": 6038,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: contribuições à seguridade social"
+  },
+  {
+   "no": "FGTS/Fundo de Garantia Por Tempo de Serviço",
+   "codigo": 6085,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: FGTS"
+  },
+  {
+   "no": "FGTS/Fundo de Garantia por Tempo de Serviço",
+   "codigo": 10158,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: FGTS"
+  },
+  {
+   "no": "Aplicação INPC/IPCA - Atualização FGTS",
+   "codigo": 15066,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: FGTS"
+  },
+  {
+   "no": "Certificado de Regularidade - FGTS",
+   "codigo": 6002,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: FGTS"
+  },
+  {
+   "no": "FGTS",
+   "codigo": 10570,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: FGTS"
+  },
+  {
+   "no": "DIREITO CIVIL",
+   "codigo": 899,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: direito privado"
+  },
+  {
+   "no": "DIREITO DO TRABALHO",
+   "codigo": 864,
+   "secao": "1ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 1º: matéria trabalhista residual"
+  },
+  {
+   "no": "DIREITO DO CONSUMIDOR",
+   "codigo": 1156,
+   "secao": "1ª Seção",
+   "fundamento": "Não citado no art. 10; tratado como direito privado (contratos com a CEF)",
+   "validar": true
+  },
+  {
+   "no": "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "codigo": 9985,
+   "secao": "2ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 2º: matéria administrativa (salvo 1ª e 3ª Seções)"
+  },
+  {
+   "no": "DIREITO TRIBUTÁRIO",
+   "codigo": 14,
+   "secao": "2ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 2º: tributos em geral e contribuições (salvo 1ª Seção)"
+  },
+  {
+   "no": "DIREITO À EDUCAÇÃO",
+   "codigo": 12775,
+   "secao": "2ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 2º: ensino superior"
+  },
+  {
+   "no": "DIREITO INTERNACIONAL",
+   "codigo": 6191,
+   "secao": "2ª Seção",
+   "fundamento": "RI TRF3, art. 10, § 2º: nacionalidade e matéria constitucional"
+  },
+  {
+   "no": "DIREITO DA SAÚDE",
+   "codigo": 12480,
+   "secao": "2ª Seção",
+   "fundamento": "Não citado no art. 10; tratado como matéria administrativa (saúde pública)",
+   "validar": true
+  },
+  {
+   "no": "DIREITO AMBIENTAL",
+   "codigo": 10110,
+   "secao": "2ª Seção",
+   "fundamento": "Não citado no art. 10; tratado como nulidade de ato administrativo",
+   "validar": true
+  },
+  {
+   "no": "DIREITO PROCESSUAL CIVIL E DO TRABALHO",
+   "codigo": 8826,
+   "secao": null,
+   "fundamento": "Questão processual: segue a seção do outro assunto do processo"
+  },
+  {
+   "no": "QUESTÕES DE ALTA COMPLEXIDADE, GRANDE IMPACTO E REPERCUSSÃO",
+   "codigo": 12467,
+   "secao": null,
+   "fundamento": "Segue a seção do outro assunto do processo",
+   "validar": true
+  }
+ ]
+}
