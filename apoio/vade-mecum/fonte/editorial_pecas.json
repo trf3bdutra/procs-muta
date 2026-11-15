@@ -10,7 +10,7 @@
       "id": "acordao-completo",
       "grupo": "Acórdão",
       "t": "Acórdão",
-      "resumo": "O acórdão reúne relatório, voto, ementa e proclamação, nesta ordem.",
+      "resumo": "O acórdão reúne ementa, relatório, voto e proclamação, nesta ordem.",
       "elementos": [
         {
           "n": "RELATÓRIO",
@@ -224,7 +224,113 @@
           "n": "Honorários recursais",
           "f": "Pela sucumbência recursal, … condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC).",
           "r": [],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Autor com gratuidade",
+              "f": "Pela sucumbência recursal, [o autor / a autora] deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC)."
+            },
+            {
+              "lab": "INSS ou ré (previdenciário)",
+              "f": "Pela sucumbência recursal, a ré deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a Súmula 111/STJ, cuja incidência após a promulgação do CPC/2015 foi ratificada por ocasião do julgamento do Tema Repetitivo 1.105/STJ."
+            },
+            {
+              "lab": "União",
+              "f": "Pela sucumbência recursal, a União deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem."
+            },
+            {
+              "lab": "Sem majoração",
+              "f": "Por fim, deixa-se de determinar a majoração dos honorários advocatícios, nos termos do Tema 1.059/STJ."
+            },
+            {
+              "lab": "Agravo de instrumento",
+              "f": "Quanto aos honorários advocatícios, devem ser tratados na ação originária, já que se trata, nesta sede, apenas de agravo de instrumento contra decisão de natureza interlocutória, que não põe termo, portanto, ao processo."
+            },
+            {
+              "lab": "Inversão",
+              "f": "Em razão da reforma da sentença, impõe-se a inversão da sucumbência, [critérios: percentual, base, faixas do artigo 85, § 3º, do CPC; parcelas vencidas até a sentença no previdenciário — Súmula 111/STJ]."
+            }
+          ],
+          "info": {
+            "txt": "Majora-se apenas quando o recurso é integralmente desprovido ou não conhecido, contra decisão publicada a partir de 18/03/2016, com honorários fixados na origem contra o recorrente. Respeitam-se os limites dos §§ 2º e 3º do artigo 85 do CPC (Tema 1.059/STJ). Contrarrazões não são requisito.",
+            "cab": [
+              "Situação",
+              "Honorários recursais"
+            ],
+            "linhas": [
+              [
+                "Recurso desprovido ou não conhecido",
+                "Majoração de 1% (artigo 85, § 11, do CPC)"
+              ],
+              [
+                "Recurso provido ou parcialmente provido",
+                "Sem majoração; rever a sucumbência e inverter se o resultado mudou"
+              ],
+              [
+                "Sem honorários fixados na origem",
+                "Sem majoração"
+              ],
+              [
+                "Mandado de segurança",
+                "Sem honorários (artigo 25 da Lei 12.016/2009; Súmula 512/STF)"
+              ],
+              [
+                "Agravo de instrumento contra interlocutória",
+                "Tratados na ação originária"
+              ],
+              [
+                "Sentença anulada, extinção de ofício ou remessa à origem",
+                "Rever os honorários, sem majoração"
+              ]
+            ],
+            "base": "Skill honorarios-consectarios do gabinete"
+          }
+        },
+        {
+          "n": "Consectários",
+          "f": "… as parcelas vencidas devem ser pagas de uma única vez e corrigidas monetariamente e acrescidas de juros de mora, observando-se: (i) até a entrada em vigor da EC 113/2021, o entendimento firmado no Tema 810/STF; (ii) da entrada em vigor da EC 113/2021 até a EC 136/2025, a incidência exclusiva da taxa Selic, conforme assentado no Tema 1.419/STF; e (iii) a partir da EC 136/2025, os critérios previstos nos artigos 389, parágrafo único, e 406 do Código Civil, com correção monetária pelo INPC e juros de mora correspondentes à taxa Selic, deduzido o INPC.",
+          "r": [
+            "Contra a Fazenda Pública, os critérios variam por período.",
+            "Juros de mora em benefício desde a citação (Súmula 204/STJ); entre a conta e a requisição, Tema 96/STF.",
+            "Questão não devolvida: redação genérica, com os critérios do Manual de Cálculos vigente."
+          ],
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Por período",
+              "f": "… as parcelas vencidas devem ser pagas de uma única vez e corrigidas monetariamente e acrescidas de juros de mora, observando-se: (i) até a entrada em vigor da EC 113/2021, o entendimento firmado no Tema 810/STF; (ii) da entrada em vigor da EC 113/2021 até a EC 136/2025, a incidência exclusiva da taxa Selic, conforme assentado no Tema 1.419/STF; e (iii) a partir da EC 136/2025, os critérios previstos nos artigos 389, parágrafo único, e 406 do Código Civil, com correção monetária pelo INPC e juros de mora correspondentes à taxa Selic, deduzido o INPC."
+            },
+            {
+              "lab": "Questão não devolvida",
+              "f": "[Correção monetária e juros de mora segundo os critérios do Manual de Cálculos vigente.] [VALIDAR: redação genérica]"
+            }
+          ],
+          "info": {
+            "txt": "Os critérios contra a Fazenda Pública mudam com a EC 113/2021 e com a EC 136/2025. Juros de mora em benefício correm desde a citação (Súmula 204/STJ); entre a conta e a requisição, aplica-se o Tema 96/STF.",
+            "cab": [
+              "Período",
+              "Critério"
+            ],
+            "linhas": [
+              [
+                "Até 08/12/2021",
+                "Previdenciário: INPC (Tema 905/STJ). Administrativo e não tributário: IPCA-E (Tema 810/STF) e juros da poupança (artigo 1º-F da Lei 9.494/1997). Tributário: Selic (artigo 39, § 4º, da Lei 9.250/1995)."
+              ],
+              [
+                "De 09/12/2021 até a EC 136/2025",
+                "Selic exclusiva (artigo 3º da EC 113/2021; Tema 1.419/STF)."
+              ],
+              [
+                "A partir da EC 136/2025",
+                "Artigos 389, parágrafo único, e 406 do Código Civil: correção pelo INPC e juros pela Selic, deduzido o INPC. [VALIDAR a redação vigente com o Relator e o Manual de Cálculos; Tema 1.484/STF e ADI 7.873 pendentes]"
+              ],
+              [
+                "Requisitórios federais expedidos desde 09/09/2025",
+                "IPCA e juros simples de 2% ao ano, limitados à Selic (artigo 3º da EC 113/2021, na redação da EC 136/2025)."
+              ]
+            ],
+            "base": "Skill honorarios-consectarios do gabinete"
+          }
         },
         {
           "n": "Dispositivo",
