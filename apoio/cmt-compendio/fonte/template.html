@@ -142,6 +142,7 @@ code{font-size:12px;background:var(--field);padding:1px 5px;border-radius:4px;ov
     <button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>
     <button class="tab" role="tab" data-v="ement" aria-selected="false">Ementário</button>
     <button class="tab" role="tab" data-v="edit" aria-selected="false">Editorial</button>
+    <button class="tab" role="tab" data-v="dir" aria-selected="false">Diretrizes</button>
     <button class="tab" role="tab" data-v="consulta" aria-selected="false">Consulta</button>
   </nav>
   <div class="right">
@@ -188,16 +189,19 @@ code{font-size:12px;background:var(--field);padding:1px 5px;border-radius:4px;ov
 
 <section id="v-consulta" hidden><div class="cq-wrap"><h2 class="cq-h">Consulta do caso pautado</h2><p class="meta">Escolha a sessão e o item: o Compêndio lê o cartão do processo e reúne o material aplicável.</p><div id="cq"></div></div></section>
 
+<section id="v-dir" hidden>
+  <div class="pg-h"><div class="pg-t"><h1>Diretrizes</h1><p>Manual de redação do gabinete: estrutura das peças, frase, citação, vocabulário, grafias e formatação.</p></div></div>
+  <div class="xman" id="x-man"></div>
+</section>
+
 <section id="v-edit" hidden>
   <div class="pg-h"><div class="pg-t"><h1>Editorial</h1><p id="x-desc">Estrutura de cada peça, com fórmulas, regras e orientações de redação.</p></div>
     <div class="sub pg-seg" role="tablist" id="x-sub" aria-label="Editorial">
       <button data-s="pecas" aria-selected="true">Peças</button>
       <button data-s="mod" aria-selected="false">Modelos</button>
       <button data-s="par" aria-selected="false">Parágrafos</button>
-      <button data-s="dir" aria-selected="false">Diretrizes</button>
     </div>
   </div>
-  <div class="xman" id="x-man" hidden></div>
   <div class="xa" id="x-wrap">
     <aside class="xside" id="x-aside" aria-label="Peças e orientações"></aside>
     <div id="x-main"></div>
@@ -291,7 +295,7 @@ document.addEventListener('click',function(e){
 
 /* ---------- navegação ---------- */
 var VIEW='temas';
-document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','edit','consulta','enc'].forEach(function(v){var sv=$('#v-'+v);if(sv)sv.hidden=v!==VIEW;});if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','edit','dir','consulta','enc'].forEach(function(v){var sv=$('#v-'+v);if(sv)sv.hidden=v!==VIEW;});if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
 function renderAll(){if(window.VDM_enun)window.VDM_enun();if(window.VDM_rep)window.VDM_rep();if(window.VDM_refresh)window.VDM_refresh();}
 
 /* Enunciados: código em ementario.js (lista, tabela, mapa e painel) */

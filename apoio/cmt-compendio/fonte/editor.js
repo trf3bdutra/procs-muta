@@ -201,7 +201,7 @@ function edAplicar(silencioso){var r=EDS.id&&edAcha(EDS.col,EDS.id);if(!r){EDS.d
   else if(!silencioso)toast('Nada mudou');
   EDS.dirty=false;return true;}
 function edMarcaSujo(){if(EDS.dirty)return;EDS.dirty=true;var d=$('#ed-dirty');if(d){d.hidden=false;d.textContent='alterações não aplicadas';}var b=$('[data-edsalvar]');if(b)b.classList.add('pulse');$$('[data-edgit],[data-edzip]').forEach(function(x){x.disabled=false;});}
-function edAtualizaVista(){try{PRECP=null;PRECI=null;if(!$('#v-edit').hidden)xRender();}catch(e){}}
+function edAtualizaVista(){try{PRECP=null;PRECI=null;if(!$('#v-edit').hidden)xRender();if(!$('#v-dir').hidden)xManual();}catch(e){}}
 function edNovo(){if(EDS.dirty&&!edAplicar(true))return;var c=EDS.col,L=edLista(),r;
   if(c==='mod'){var ref=L.filter(function(m){var e=jp(m.esqueletoModelo);return e&&e._estrutura==='padrao';})[0],e=ref?jp(ref.esqueletoModelo):{_estrutura:'padrao',_topicos:[]},o={_estrutura:e._estrutura,_topicos:e._topicos};(e._topicos||[]).forEach(function(t){o[t.id]={texto:t.id==='fecho'?'É como voto.':'',ativo:!t.opcional};});
     var tp=EDS.f.mod.tipo==='Decisão'?'decisao':EDS.f.mod.tipo==='Despacho'?'despacho':'voto-matriz';

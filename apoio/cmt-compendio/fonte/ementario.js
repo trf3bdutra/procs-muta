@@ -469,8 +469,8 @@ var ED=null;
 try{ED=JSON.parse($('#editorial').textContent);}catch(e){ED=null;}
 var XS={sub:'estrutura',ed:'pecas',peca:'',grupo:'',vg:'palavras',q:''};
 /* Editorial reúne Peças, Modelos, Parágrafos e Diretrizes; Modelos e Parágrafos usam o painel de busca do Ementário, que muda de seção */
-var XDESC={pecas:'Estrutura de cada peça, com fórmulas, regras e orientações de redação.',mod:'Modelos-matriz de acórdão, decisão e despacho, prontos para preencher com os dados do caso.',par:'Parágrafos-padrão por matéria e situação, com campos que se preenchem com o caso.',dir:'Manual de redação do gabinete: preferências, conectivos, verbos, correções e alertas.'};
-function layoutEm(v){var L=$('#e-layout'),S=$(v);if(!L||!S||L.parentNode===S)return;if(v==='#v-edit')S.insertBefore(L,$('#x-man'));else S.appendChild(L);}
+var XDESC={pecas:'Estrutura de cada peça, com fórmulas, regras e orientações de redação.',mod:'Modelos-matriz de acórdão, decisão e despacho, prontos para preencher com os dados do caso.',par:'Parágrafos-padrão por matéria e situação, com campos que se preenchem com o caso.',};
+function layoutEm(v){var L=$('#e-layout'),S=$(v);if(!L||!S||L.parentNode===S)return;if(v==='#v-edit')S.insertBefore(L,$('#x-wrap'));else S.appendChild(L);}
 function man(){var db=window.VDM_DB&&window.VDM_DB();return ((db&&db['Diretrizes'])||[]).filter(function(r){return r['Código'];});}
 function manCap(c){return man().filter(function(r){return String(r['Capítulo']||'').indexOf(c)===0;});}
 function manTxt(r){return [r['Título'],r['Orientação'],r['Evitar'],r['Observação'],r['Grupo']].join(' ');}
@@ -483,15 +483,15 @@ function regs(t){return ((ED&&ED.padrao&&ED.padrao.registros)||[]).filter(functi
 function grp(r){return r.grupo||'Termos e grafias';}
 function xRender(){
   if(!ED){$('#x-main').innerHTML='<p class="empty">Dados do editorial indisponíveis.</p>';return;}
+  if(XS.ed==='dir'){XS.ed='pecas';var td=document.querySelector('.tab[data-v="dir"]');if(td){td.click();return;}}
   var ed=XS.ed||'pecas';$$('#x-sub button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===ed));});
   var xd=$('#x-desc');if(xd)xd.textContent=XDESC[ed]||'';
-  if(ed==='mod'||ed==='par'){$('#x-man').hidden=true;$('#x-wrap').hidden=true;layoutEm('#v-edit');EM.sub=ed;fecharIT();mostrar();return;}
+  if(ed==='mod'||ed==='par'){$('#x-wrap').hidden=true;layoutEm('#v-edit');EM.sub=ed;fecharIT();mostrar();return;}
   if($('#e-layout').parentNode===$('#v-edit'))layoutEm('#v-ement');
-  XS.sub=ed==='dir'?'dir':'estrutura';
-  var dir=XS.sub==='dir';$('#x-man').hidden=!dir;$('#x-wrap').hidden=dir;
+  XS.sub='estrutura';$('#x-wrap').hidden=false;
   if(window.VDM_marcaNav)window.VDM_marcaNav();
-  if(!dir&&XD.proc&&!XD.ac&&!XD.naoAchou&&!XD._busca){XD._busca=1;xBuscaProc();return;}
-  if(dir)xManual();else xPagina();
+  if(XD.proc&&!XD.ac&&!XD.naoAchou&&!XD._busca){XD._busca=1;xBuscaProc();return;}
+  xPagina();
 }
 $$('#x-sub button').forEach(function(b){b.addEventListener('click',function(){XS.ed=b.getAttribute('data-s');xRender();window.scrollTo(0,0);});});
 /* ===== Diretrizes em formato de manual: sumário à esquerda, capítulos numerados, busca e impressão ===== */
@@ -1827,13 +1827,14 @@ function irEmentario(f){
   EM.sub='prec';$$('#e-sub button').forEach(function(z){z.setAttribute('aria-selected',String(z.getAttribute('data-s')==='prec'));});var b=document.querySelector('.tab[data-v="ement"]');if(b)b.click();
 }
 var xFeito=false;
-window.VDM_refresh=function(){if(!$('#v-edit').hidden)xRender();};
+window.VDM_refresh=function(){if(!$('#v-edit').hidden)xRender();if(!$('#v-dir').hidden)xManual();};
 nRender();
 window.VDM_view=function(v){
   if(v==='temas')nRender();
   if(v==='rep')rpRender();
   if(v==='ement'){layoutEm('#v-ement');EM.sub='prec';$$('#e-sub button').forEach(function(z){z.setAttribute('aria-selected','true');});mostrar();}
   if(v==='edit'){if(!xFeito){xFeito=true;}xRender();}
+  if(v==='dir'){if(ED)xManual();else $('#x-man').innerHTML='<p class="empty">Dados do editorial indisponíveis.</p>';}
 };
 /*__EDITOR__*/
 })();

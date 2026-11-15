@@ -22,7 +22,9 @@
 
 aside{top:58px!important}
 @media (max-width:860px){.top{flex-wrap:wrap!important}}
-/* pill única com a Pauta da equipe: Início · Pauta · Compêndio, com as seções do Compêndio dentro da pill */
+/* barra comum com a Pauta da equipe: pill Início · Pauta e, separada, a pill do Compêndio com suas seções */
+.top .eqtabs+.eqtabs{margin-left:-4px}
+.eq-cpn .eq-grp{background:transparent;box-shadow:none;padding-right:0}
 .eqtabs{align-items:center;flex-wrap:nowrap}
 .eq-grp{display:inline-flex;align-items:center;gap:2px;border-radius:999px;background:rgba(230,194,122,.12);box-shadow:inset 0 0 0 1px rgba(230,194,122,.32);padding-right:3px}
 .eqtabs .eq-cmp{border-radius:999px;padding:7px 14px;font-weight:800;font-size:13px;color:#e6c27a;text-decoration:none;white-space:nowrap}
@@ -34,7 +36,7 @@ aside{top:58px!important}
 .top .eq-sec .tab:hover{color:#fff!important}
 .top .eq-sec .tab[aria-selected="true"]{background:rgba(255,255,255,.15)!important;color:#fff!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)!important}
 .top .eq-sec .tab .tab-cur{color:#e6c27a;font-weight:600}
-@media (max-width:1180px){.top{flex-wrap:wrap!important}.top .eqtabs{order:3;width:100%;justify-content:flex-start;overflow:visible}.top .eqsp{display:none}.top .right{margin-left:auto}}
+@media (max-width:1180px){.top{flex-wrap:wrap!important}.top .eq-cpn{order:3}.top .eqsp{display:none}.top .right{margin-left:auto}}
 @media (max-width:700px){.top .eqtabs{flex-wrap:wrap;border-radius:18px}.eq-grp{flex-wrap:wrap;border-radius:16px}.top .tabs.eq-sec{flex-wrap:wrap}}
 /* cabeçalho de cada seção (Ementário, Editorial) */
 .pg-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;padding:20px 24px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
