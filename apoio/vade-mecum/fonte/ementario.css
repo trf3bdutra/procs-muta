@@ -521,3 +521,9 @@ details.rr ul{margin:4px 0 6px 16px;padding:0;font-size:12.5px}details.rr li{mar
 .p-row{border-left-width:4px}
 .p-row .n-id{display:flex;flex-direction:column;gap:3px;align-items:flex-start}
 .n-m.pbl{background:var(--gold-soft);color:var(--gold)}
+.xalt.sub{margin-left:14px;background:#f4efe3;position:relative}
+.xalt.sub::before{content:"↳";position:absolute;left:-14px;top:1px;color:#8c6d38;font-size:12px}
+.xpjc{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;padding:0}
+.us-l{list-style:none;margin:4px 0;padding:0;display:flex;flex-direction:column;gap:3px}
+.us-l li{display:flex;align-items:center;gap:7px;font-size:12px}.us-l b{font-family:ui-monospace,monospace;font-size:11.5px}
+.pus{margin-top:12px}

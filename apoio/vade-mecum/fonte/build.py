@@ -88,6 +88,16 @@ for ln, r in enumerate((RAIZ/'precedentes/precedentes.jsonl').read_text(encoding
     prec.append(x)
 mod = ler(RAIZ/'modelos/modelos.json')['registros']
 par = ler(RAIZ/'modelos/paragrafos.json')['registros']
+# usos dos parágrafos-padrão: trecho fixo mais longo encontrado nos inteiros teores da base
+import unicodedata
+def nzp(t): return re.sub(r'[^a-z0-9]+', ' ', unicodedata.normalize('NFD', t or '').encode('ascii', 'ignore').decode().lower()).strip()
+ITN = [(k, nzp(v)) for k, v in it.items()]
+for p in par:
+    ch = [c for c in (nzp(x) for x in re.split(r'\{[^}]*\}|\[[^\]]*\]|…|\.\.\.', p.get('texto') or '')) if len(c) >= 35]
+    if not ch: continue
+    lg = max(ch, key=len)
+    u = [k for k, t in ITN if lg in t]
+    if u and len(u) <= 0.6 * len(ITN): p['_usos'] = u
 ref = ler(RAIZ/'apoio/referencias-rapidas.json')
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref}
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
