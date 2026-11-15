@@ -281,7 +281,11 @@ $('#reload').addEventListener('click',function(){loadLive(true);});
 var AS=[],ASN={},USOS={};
 /* Usos localizados automaticamente nos precedentes (procs-muta, scripts/repertorio/vincular.py) */
 var USOS_AUTO=(function(){try{return JSON.parse(document.getElementById('usos-auto').textContent);}catch(e){return [];}})();
+/* dispositivos do repertório normativo acrescentados no procs-muta: entram também quando a planilha é lida ao vivo */
+var NORMAS_COMP=null;
+function normasComp(){if(NORMAS_COMP)return NORMAS_COMP;try{NORMAS_COMP=JSON.parse(document.getElementById('editorial').textContent).normasComplemento||[];}catch(e){NORMAS_COMP=[];}return NORMAS_COMP;}
 function prep(){
+  var NL=DB['Normas']=(DB['Normas']||[]).slice(),tem={};NL.forEach(function(n){tem[n['Código']]=1;});normasComp().forEach(function(n){if(!tem[n['Código']])NL.push(n);});
   AS=(DB['Assuntos']||[]).slice().sort(function(a,b){return (+a['Ordem']||99)-(+b['Ordem']||99);});
   ASN={};AS.forEach(function(a){ASN[a['Assunto']]=a;});
   USOS={};(DB['Usos no gabinete']||[]).forEach(function(u){var k=(u['Código do item']||'').trim();if(!k)return;(USOS[k]=USOS[k]||[]).push(u);});

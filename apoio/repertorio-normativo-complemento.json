@@ -1,0 +1,459 @@
+{
+ "schema": "gabcmt.apoio.repertorioNormativoComplemento",
+ "versao": "1.0.0",
+ "atualizadoEm": "2026-11-15",
+ "descricao": "Dispositivos do repertório normativo acrescentados pelo procs-muta (mesmas colunas da aba Normas da planilha do Vade Mecum). Somam-se aos da planilha na carga do Vade Mecum; código repetido na planilha prevalece.",
+ "criterio": "Dispositivos mais citados nos precedentes do relator (precedentes.jsonl, campo dispositivosCitados) ainda ausentes do repertório.",
+ "registros": [
+  {
+   "Código": "L8213-15",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "15",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 15. Mantém a qualidade de segurado, independentemente de contribuições:\nI - sem limite de prazo, quem está em gozo de benefício, exceto do auxílio-acidente;\nII - até 12 (doze) meses após a cessação das contribuições, o segurado que deixar de exercer atividade remunerada abrangida pela Previdência Social ou estiver suspenso ou licenciado sem remuneração;\nIII - até 12 (doze) meses após cessar a segregação, o segurado acometido de doença de segregação compulsória;\nIV - até 12 (doze) meses após o livramento, o segurado retido ou recluso;\nV - até 3 (três) meses após o licenciamento, o segurado incorporado às Forças Armadas para prestar serviço militar;\nVI - até 6 (seis) meses após a cessação das contribuições, o segurado facultativo.\n§ 1º O prazo do inciso II será prorrogado para até 24 (vinte e quatro) meses se o segurado já tiver pago mais de 120 (cento e vinte) contribuições mensais sem interrupção que acarrete a perda da qualidade de segurado.\n§ 2º Os prazos do inciso II ou do § 1º serão acrescidos de 12 (doze) meses para o segurado desempregado, desde que comprovada essa situação pelo registro no órgão próprio do Ministério do Trabalho e da Previdência Social.\n§ 3º Durante os prazos deste artigo, o segurado conserva todos os seus direitos perante a Previdência Social.\n§ 4º A perda da qualidade de segurado ocorrerá no dia seguinte ao do término do prazo fixado no Plano de Custeio da Seguridade Social para recolhimento da contribuição referente ao mês imediatamente posterior ao do final dos prazos fixados neste artigo e seus parágrafos.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-16",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "16",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 16. São beneficiários do Regime Geral de Previdência Social, na condição de dependentes do segurado:\nI - o cônjuge, a companheira, o companheiro e o filho não emancipado, de qualquer condição, menor de 21 (vinte e um) anos ou inválido ou que tenha deficiência intelectual ou mental ou deficiência grave;\nII - os pais;\nIII - o irmão não emancipado, de qualquer condição, menor de 21 (vinte e um) anos ou inválido ou que tenha deficiência intelectual ou mental ou deficiência grave;\n§ 1º A existência de dependente de qualquer das classes deste artigo exclui do direito às prestações os das classes seguintes.\n§ 2º O enteado, o menor sob tutela e o menor sob guarda judicial equiparam-se a filho, mediante declaração do segurado e desde que não possuam condições suficientes para o próprio sustento e educação.\n§ 3º Considera-se companheira ou companheiro a pessoa que, sem ser casada, mantém união estável com o segurado ou com a segurada, de acordo com o § 3º do art. 226 da Constituição Federal.\n§ 4º A dependência econômica das pessoas indicadas no inciso I é presumida e a das demais deve ser comprovada\n§ 5º As provas de união estável e de dependência econômica exigem início de prova material contemporânea dos fatos, produzido em período não superior a 24 (vinte e quatro) meses anterior à data do óbito ou do recolhimento à prisão do segurado, não admitida a prova exclusivamente testemunhal, exceto na ocorrência de motivo de força maior ou caso fortuito, conforme disposto no regulamento.\n§ 6º Na hipótese da alínea c do inciso V do § 2º do art. 77 desta Lei, a par da exigência do § 5º deste artigo, deverá ser apresentado, ainda, início de prova material que comprove união estável por pelo menos 2 (dois) anos antes do óbito do segurado.\n§ 7º Será excluído definitivamente da condição de dependente quem tiver sido condenado criminalmente por sentença com trânsito em julgado, como autor, coautor ou partícipe de homicídio doloso, ou de tentativa desse crime, cometido contra a pessoa do segurado, ressalvados os absolutamente incapazes e os inimputáveis.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-25",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "25",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 25. A concessão das prestações pecuniárias do Regime Geral de Previdência Social depende dos seguintes períodos de carência, ressalvado o disposto no art. 26:\nI - auxílio-doença e aposentadoria por invalidez: 12 (doze) contribuições mensais;\nII - aposentadoria por idade, aposentadoria por tempo de serviço e aposentadoria especial: 180 contribuições mensais.\nIII - salário-maternidade para as seguradas de que tratam os incisos V e VII do caput do art. 11 e o art. 13 desta Lei: 10 (dez) contribuições mensais, respeitado o disposto no parágrafo único do art. 39 desta Lei; e\nIV - auxílio-reclusão: 24 (vinte e quatro) contribuições mensais.\nParágrafo único. Em caso de parto antecipado, o período de carência a que se refere o inciso III será reduzido em número de contribuições equivalente ao número de meses em que o parto foi antecipado.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-26",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "26",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 26. Independe de carência a concessão das seguintes prestações:\nI - pensão por morte, salário-família e auxílio-acidente;\nII - auxílio-doença e aposentadoria por invalidez nos casos de acidente de qualquer natureza ou causa e de doença profissional ou do trabalho, bem como nos casos de segurado que, após filiar-se ao RGPS, for acometido de alguma das doenças e afecções especificadas em lista elaborada pelos Ministérios da Saúde e da Previdência Social, atualizada a cada 3 (três) anos, de acordo com os critérios de estigma, deformação, mutilação, deficiência ou outro fator que lhe confira especificidade e gravidade que mereçam tratamento particularizado;\nIII - os benefícios concedidos na forma do inciso I do art. 39, aos segurados especiais referidos no inciso VII do art. 11 desta Lei;\nIV - serviço social;\nV - reabilitação profissional.\nVI – salário-maternidade para as seguradas empregada, trabalhadora avulsa e empregada doméstica.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-39",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "39",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 39. Para os segurados especiais, referidos no inciso VII do caput do art. 11 desta Lei, fica garantida a concessão:\nI - de aposentadoria por idade ou por invalidez, de auxílio-doença, de auxílio-reclusão ou de pensão, no valor de 1 (um) salário mínimo, e de auxílio-acidente, conforme disposto no art. 86 desta Lei, desde que comprovem o exercício de atividade rural, ainda que de forma descontínua, no período imediatamente anterior ao requerimento do benefício, igual ao número de meses correspondentes à carência do benefício requerido, observado o disposto nos arts. 38-A e 38-B desta Lei; ou\nII - dos benefícios especificados nesta Lei, observados os critérios e a forma de cálculo estabelecidos, desde que contribuam facultativamente para a Previdência Social, na forma estipulada no Plano de Custeio da Seguridade Social.\nParágrafo único. Para a segurada especial fica garantida a concessão do salário-maternidade no valor de 1 (um) salário mínimo, desde que comprove o exercício de atividade rural, ainda que de forma descontínua, nos 12 (doze) meses imediatamente anteriores ao do início do benefício.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-41-A",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "41-A",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 41-A. O valor dos benefícios em manutenção será reajustado, anualmente, na mesma data do reajuste do salário mínimo, pro rata, de acordo com suas respectivas datas de início ou do último reajustamento, com base no Índice Nacional de Preços ao Consumidor - INPC, apurado pela Fundação Instituto Brasileiro de Geografia e Estatística - IBGE.\n§ 1o Nenhum benefício reajustado poderá exceder o limite máximo do salário-de-benefício na data do reajustamento, respeitados os direitos adquiridos.\n§ 2o Os benefícios com renda mensal superior a um salário mínimo serão pagos do primeiro ao quinto dia útil do mês subseqüente ao de sua competência, observada a distribuição proporcional do número de beneficiários por dia de pagamento.\n§ 3o Os benefícios com renda mensal no valor de até um salário mínimo serão pagos no período compreendido entre o quinto dia útil que anteceder o final do mês de sua competência e o quinto dia útil do mês subseqüente, observada a distribuição proporcional dos beneficiários por dia de pagamento.\n§ 4o Para os efeitos dos §§ 2o e 3o deste artigo, considera-se dia útil aquele de expediente bancário com horário normal de atendimento.\n§ 5o O primeiro pagamento do benefício será efetuado até quarenta e cinco dias após a data da apresentação, pelo segurado, da documentação necessária a sua concessão.\n§ 6o Para os benefícios que tenham sido majorados devido à elevação do salário mínimo, o referido aumento deverá ser compensado no momento da aplicação do disposto no caput deste artigo, de acordo com normas a serem baixadas pelo Ministério da Previdência Social.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-42",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "42",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 42. A aposentadoria por invalidez, uma vez cumprida, quando for o caso, a carência exigida, será devida ao segurado que, estando ou não em gozo de auxílio-doença, for considerado incapaz e insusceptível de reabilitação para o exercício de atividade que lhe garanta a subsistência, e ser-lhe-á paga enquanto permanecer nesta condição.\n§ 1º A concessão de aposentadoria por invalidez dependerá da verificação da condição de incapacidade mediante exame médico-pericial a cargo da Previdência Social, podendo o segurado, às suas expensas, fazer-se acompanhar de médico de sua confiança.\n§ 1º-A. O exame médico-pericial previsto no § 1º deste artigo poderá ser realizado com o uso de tecnologia de telemedicina ou por análise documental conforme situações e requisitos definidos em regulamento.\n§ 2º A doença ou lesão de que o segurado já era portador ao filiar-se ao Regime Geral de Previdência Social não lhe conferirá direito à aposentadoria por invalidez, salvo quando a incapacidade sobrevier por motivo de progressão ou agravamento dessa doença ou lesão.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-45",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "45",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 45. O valor da aposentadoria por invalidez do segurado que necessitar da assistência permanente de outra pessoa será acrescido de 25% (vinte e cinco por cento).\nParágrafo único. O acréscimo de que trata este artigo:\na) será devido ainda que o valor da aposentadoria atinja o limite máximo legal;\nb) será recalculado quando o benefício que lhe deu origem for reajustado;\nc) cessará com a morte do aposentado, não sendo incorporável ao valor da pensão.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-48",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "48",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 48. A aposentadoria por idade será devida ao segurado que, cumprida a carência exigida nesta Lei, completar 65 (sessenta e cinco) anos de idade, se homem, e 60 (sessenta), se mulher.\n§ 1o Os limites fixados no caput são reduzidos para sessenta e cinqüenta e cinco anos no caso de trabalhadores rurais, respectivamente homens e mulheres, referidos na alínea a do inciso I, na alínea g do inciso V e nos incisos VI e VII do art. 11.\n§ 2o Para os efeitos do disposto no § 1o deste artigo, o trabalhador rural deve comprovar o efetivo exercício de atividade rural, ainda que de forma descontínua, no período imediatamente anterior ao requerimento do benefício, por tempo igual ao número de meses de contribuição correspondente à carência do benefício pretendido, computado o período a que se referem os incisos III a VIII do § 9o do art. 11 desta Lei.\n§ 3o Os trabalhadores rurais de que trata o § 1o deste artigo que não atendam ao disposto no § 2o deste artigo, mas que satisfaçam essa condição, se forem considerados períodos de contribuição sob outras categorias do segurado, farão jus ao benefício ao completarem 65 (sessenta e cinco) anos de idade, se homem, e 60 (sessenta) anos, se mulher.\n§ 4o Para efeito do § 3o deste artigo, o cálculo da renda mensal do benefício será apurado de acordo com o disposto no inciso II do caput do art. 29 desta Lei, considerando-se como salário-de-contribuição mensal do período como segurado especial o limite mínimo de salário-de-contribuição da Previdência Social.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-55",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "55",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 55. O tempo de serviço será comprovado na forma estabelecida no Regulamento, compreendendo, além do correspondente às atividades de qualquer das categorias de segurados de que trata o art. 11 desta Lei, mesmo que anterior à perda da qualidade de segurado:\nI - o tempo de serviço militar, inclusive o voluntário, e o previsto no § 1º do art. 143 da Constituição Federal, ainda que anterior à filiação ao Regime Geral de Previdência Social, desde que não tenha sido contado para inatividade remunerada nas Forças Armadas ou aposentadoria no serviço público;\nII - o tempo intercalado em que esteve em gozo de auxílio-doença ou aposentadoria por invalidez;\nIII - o tempo de contribuição efetuada como segurado facultativo;\nIV - o tempo de serviço referente ao exercício de mandato eletivo federal, estadual ou municipal, desde que não tenha sido contado para efeito de aposentadoria por outro regime de previdência social;\nV - o tempo de contribuição efetuado por segurado depois de ter deixado de exercer atividade remunerada que o enquadrava no art. 11 desta Lei;\nVI - o tempo de contribuição efetuado com base nos artigos 8º e 9º da Lei nº 8.162, de 8 de janeiro de 1991, pelo segurado definido no artigo 11, inciso I, alínea \"g\", desta Lei, sendo tais contribuições computadas para efeito de carência.\n§ 1º A averbação de tempo de serviço durante o qual o exercício da atividade não determinava filiação obrigatória ao anterior Regime de Previdência Social Urbana só será admitida mediante o recolhimento das contribuições correspondentes, conforme dispuser o Regulamento, observado o disposto no § 2º.\n§ 2º O tempo de serviço do segurado trabalhador rural, anterior à data de início de vigência desta Lei, será computado independentemente do recolhimento das contribuições a ele correspondentes, exceto para efeito de carência, conforme dispuser o Regulamento.\n§ 3º A comprovação do tempo de serviço para os fins desta Lei, inclusive mediante justificativa administrativa ou judicial, observado o disposto no art. 108 desta Lei, só produzirá efeito quando for baseada em início de prova material contemporânea dos fatos, não admitida a prova exclusivamente testemunhal, exceto na ocorrência de motivo de força maior ou caso fortuito, na forma prevista no regulamento.\n§ 4º Não será computado como tempo de contribuição, para efeito de concessão do benefício de que trata esta subseção, o período em que o segurado contribuinte individual ou facultativo tiver contribuído na forma do § 2o do art. 21 da Lei no 8.212, de 24 de julho de 1991, salvo se tiver complementado as contribuições na forma do § 3o do mesmo artigo.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-57",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "57",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 57. A aposentadoria especial será devida, uma vez cumprida a carência exigida nesta Lei, ao segurado que tiver trabalhado sujeito a condições especiais que prejudiquem a saúde ou a integridade física, durante 15 (quinze), 20 (vinte) ou 25 (vinte e cinco) anos, conforme dispuser a lei.\n§ 1º A aposentadoria especial, observado o disposto no art. 33 desta Lei, consistirá numa renda mensal equivalente a 100% (cem por cento) do salário-de-benefício.\n§ 2º A data de início do benefício será fixada da mesma forma que a da aposentadoria por idade, conforme o disposto no art. 49.\n§ 3º A concessão da aposentadoria especial dependerá de comprovação pelo segurado, perante o Instituto Nacional do Seguro Social–INSS, do tempo de trabalho permanente, não ocasional nem intermitente, em condições especiais que prejudiquem a saúde ou a integridade física, durante o período mínimo fixado.\n§ 4º O segurado deverá comprovar, além do tempo de trabalho, exposição aos agentes nocivos químicos, físicos, biológicos ou associação de agentes prejudiciais à saúde ou à integridade física, pelo período equivalente ao exigido para a concessão do benefício.\n§ 5º O tempo de trabalho exercido sob condições especiais que sejam ou venham a ser consideradas prejudiciais à saúde ou à integridade física será somado, após a respectiva conversão ao tempo de trabalho exercido em atividade comum, segundo critérios estabelecidos pelo Ministério da Previdência e Assistência Social, para efeito de concessão de qualquer benefício.\n§ 6º O benefício previsto neste artigo será financiado com os recursos provenientes da contribuição de que trata o inciso II do art. 22 da Lei nº 8.212, de 24 de julho de 1991, cujas alíquotas serão acrescidas de doze, nove ou seis pontos percentuais, conforme a atividade exercida pelo segurado a serviço da empresa permita a concessão de aposentadoria especial após quinze, vinte ou vinte e cinco anos de contribuição, respectivamente.\n§ 7º O acréscimo de que trata o parágrafo anterior incide exclusivamente sobre a remuneração do segurado sujeito às condições especiais referidas no caput.\n§ 8º Aplica-se o disposto no art. 46 ao segurado aposentado nos termos deste artigo que continuar no exercício de atividade ou operação que o sujeite aos agentes nocivos constantes da relação referida no art. 58 desta Lei.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-58",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "58",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 58. A relação dos agentes nocivos químicos, físicos e biológicos ou associação de agentes prejudiciais à saúde ou à integridade física considerados para fins de concessão da aposentadoria especial de que trata o artigo anterior será definida pelo Poder Executivo.\n§ 1º A comprovação da efetiva exposição do segurado aos agentes nocivos será feita mediante formulário, na forma estabelecida pelo Instituto Nacional do Seguro Social - INSS, emitido pela empresa ou seu preposto, com base em laudo técnico de condições ambientais do trabalho expedido por médico do trabalho ou engenheiro de segurança do trabalho nos termos da legislação trabalhista.\n§ 2º Do laudo técnico referido no parágrafo anterior deverão constar informação sobre a existência de tecnologia de proteção coletiva ou individual que diminua a intensidade do agente agressivo a limites de tolerância e recomendação sobre a sua adoção pelo estabelecimento respectivo.\n§ 3º A empresa que não mantiver laudo técnico atualizado com referência aos agentes nocivos existentes no ambiente de trabalho de seus trabalhadores ou que emitir documento de comprovação de efetiva exposição em desacordo com o respectivo laudo estará sujeita à penalidade prevista no art. 133 desta Lei.\n§ 4º A empresa deverá elaborar e manter atualizado perfil profissiográfico abrangendo as atividades desenvolvidas pelo trabalhador e fornecer a este, quando da rescisão do contrato de trabalho, cópia autêntica desse documento.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-59",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "59",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 59. O auxílio-doença será devido ao segurado que, havendo cumprido, quando for o caso, o período de carência exigido nesta Lei, ficar incapacitado para o seu trabalho ou para a sua atividade habitual por mais de 15 (quinze) dias consecutivos.\n§ 1º Não será devido o auxílio-doença ao segurado que se filiar ao Regime Geral de Previdência Social já portador da doença ou da lesão invocada como causa para o benefício, exceto quando a incapacidade sobrevier por motivo de progressão ou agravamento da doença ou da lesão.\n§ 2º Não será devido o auxílio-doença para o segurado recluso em regime fechado.\n§ 3º O segurado em gozo de auxílio-doença na data do recolhimento à prisão terá o benefício suspenso.\n§ 4º A suspensão prevista no § 3º deste artigo será de até 60 (sessenta) dias, contados da data do recolhimento à prisão, cessado o benefício após o referido prazo.\n§ 5º Na hipótese de o segurado ser colocado em liberdade antes do prazo previsto no § 4º deste artigo, o benefício será restabelecido a partir da data da soltura.\n§ 6º Em caso de prisão declarada ilegal, o segurado terá direito à percepção do benefício por todo o período devido.\n§ 7º O disposto nos §§ 2º, 3º, 4º, 5º e 6º deste artigo aplica-se somente aos benefícios dos segurados que forem recolhidos à prisão a partir da data de publicação desta Lei.\n§ 8º O segurado recluso em cumprimento de pena em regime aberto ou semiaberto terá direito ao auxílio-doença.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-71",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "71",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 71. O salário-maternidade é devido à segurada da Previdência Social, durante 120 (cento e vinte) dias, com início no período entre 28 (vinte e oito) dias antes do parto e a data de ocorrência deste, observadas as situações e condições previstas na legislação no que concerne à proteção à maternidade.\n§ 2º O salário-maternidade de que trata o caput deste artigo será prorrogado por 60 (sessenta) dias em razão de nascimento de criança com deficiência permanente decorrente de síndrome congênita associada Zika.\n§ 3º Na hipótese de internação hospitalar da segurada ou do recém-nascido que supere o prazo de 2 (duas) semanas, em decorrência de complicações médicas relacionadas ao parto, o salário-maternidade será devido durante o período de internação e por mais 120 (cento e vinte) dias após a alta, descontado o tempo de recebimento do benefício anterior ao parto.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-74",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "74",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 74. A pensão por morte será devida ao conjunto dos dependentes do segurado que falecer, aposentado ou não, a contar da data:\nI - do óbito, quando requerida em até 180 (cento e oitenta) dias após o óbito, para os filhos menores de 16 (dezesseis) anos, ou em até 90 (noventa) dias após o óbito, para os demais dependentes;\nII - do requerimento, quando requerida após o prazo previsto no inciso anterior;\nIII - da decisão judicial, no caso de morte presumida.\n§ 1º Perde o direito à pensão por morte o condenado criminalmente por sentença com trânsito em julgado, como autor, coautor ou partícipe de homicídio doloso, ou de tentativa desse crime, cometido contra a pessoa do segurado, ressalvados os absolutamente incapazes e os inimputáveis.\n§ 2o Perde o direito à pensão por morte o cônjuge, o companheiro ou a companheira se comprovada, a qualquer tempo, simulação ou fraude no casamento ou na união estável, ou a formalização desses com o fim exclusivo de constituir benefício previdenciário, apuradas em processo judicial no qual será assegurado o direito ao contraditório e à ampla defesa.\n§ 3º Ajuizada a ação judicial para reconhecimento da condição de dependente, este poderá requerer a sua habilitação provisória ao benefício de pensão por morte, exclusivamente para fins de rateio dos valores com outros dependentes, vedado o pagamento da respectiva cota até o trânsito em julgado da respectiva ação, ressalvada a existência de decisão judicial em contrário.\n§ 4º Nas ações em que o INSS for parte, este poderá proceder de ofício à habilitação excepcional da referida pensão, apenas para efeitos de rateio, descontando-se os valores referentes a esta habilitação das demais cotas, vedado o pagamento da respectiva cota até o trânsito em julgado da respectiva ação, ressalvada a existência de decisão judicial em contrário.\n§ 5º Julgada improcedente a ação prevista no § 3º ou § 4º deste artigo, o valor retido será corrigido pelos índices legais de reajustamento e será pago de forma proporcional aos demais dependentes, de acordo com as suas cotas e o tempo de duração de seus benefícios.\n§ 6º Em qualquer caso, fica assegurada ao INSS a cobrança dos valores indevidamente pagos em função de nova habilitação.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-77",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "77",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 77. A pensão por morte, havendo mais de um pensionista, será rateada entre todos em parte iguais.\n§ 1º Reverterá em favor dos demais a parte daquele cujo direito à pensão cessar.\n§ 2º O direito à percepção da cota individual cessará:\nI - pela morte do pensionista;\nII - para o filho, a pessoa a ele equiparada ou o irmão, de ambos os sexos, ao completar vinte e um anos de idade, salvo se for inválido ou tiver deficiência intelectual ou mental ou deficiência grave;\nIII - para filho ou irmão inválido, pela cessação da invalidez;\nIV - para filho ou irmão que tenha deficiência intelectual ou mental ou deficiência grave, pelo afastamento da deficiência, nos termos do regulamento;\nV - para cônjuge ou companheiro:\na) se inválido ou com deficiência, pela cessação da invalidez ou pelo afastamento da deficiência, respeitados os períodos mínimos decorrentes da aplicação das alíneas “b” e “c”;\nb) em 4 (quatro) meses, se o óbito ocorrer sem que o segurado tenha vertido 18 (dezoito) contribuições mensais ou se o casamento ou a união estável tiverem sido iniciados em menos de 2 (dois) anos antes do óbito do segurado;\nc) transcorridos os seguintes períodos, estabelecidos de acordo com a idade do beneficiário na data de óbito do segurado, se o óbito ocorrer depois de vertidas 18 (dezoito) contribuições mensais e pelo menos 2 (dois) anos após o início do casamento ou da união estável:\n1) 3 (três) anos, com menos de 21 (vinte e um) anos de idade;\n2) 6 (seis) anos, entre 21 (vinte e um) e 26 (vinte e seis) anos de idade;\n3) 10 (dez) anos, entre 27 (vinte e sete) e 29 (vinte e nove) anos de idade;\n4) 15 (quinze) anos, entre 30 (trinta) e 40 (quarenta) anos de idade;\n5) 20 (vinte) anos, entre 41 (quarenta e um) e 43 (quarenta e três) anos de idade;\n6) vitalícia, com 44 (quarenta e quatro) ou mais anos de idade.\nVI - pela perda do direito, na forma do § 1º do art. 74 desta Lei.\n§ 2o-A. Serão aplicados, conforme o caso, a regra contida na alínea “a” ou os prazos previstos na alínea “c”, ambas do inciso V do § 2o, se o óbito do segurado decorrer de acidente de qualquer natureza ou de doença profissional ou do trabalho, independentemente do recolhimento de 18 (dezoito) contribuições mensais ou da comprovação de 2 (dois) anos de casamento ou de união estável.\n§ 2o-B. Após o transcurso de pelo menos 3 (três) anos e desde que nesse período se verifique o incremento mínimo de um ano inteiro na média nacional única, para ambos os sexos, correspondente à expectativa de sobrevida da população brasileira ao nascer, poderão ser fixadas, em números inteiros, novas idades para os fins previstos na alínea “c” do inciso V do § 2o, em ato do Ministro de Estado da Previdência Social, limitado o acréscimo na comparação com as idades anteriores ao referido incremento.\n§ 3º Com a extinção da parte do último pensionista a pensão extinguir-se-á.\n§ 5o O tempo de contribuição a Regime Próprio de Previdência Social (RPPS) será considerado na contagem das 18 (dezoito) contribuições mensais de que tratam as alíneas “b” e “c” do inciso V do § 2o.\n§ 6º O exercício de atividade remunerada, inclusive na condição de microempreendedor individual, não impede a concessão ou manutenção da parte individual da pensão do dependente com deficiência intelectual ou mental ou com deficiência grave.\n§ 7º Se houver fundados indícios de autoria, coautoria ou participação de dependente, ressalvados os absolutamente incapazes e os inimputáveis, em homicídio, ou em tentativa desse crime, cometido contra a pessoa do segurado, será possível a suspensão provisória de sua parte no benefício de pensão por morte, mediante processo administrativo próprio, respeitados a ampla defesa e o contraditório, e serão devidas, em caso de absolvição, todas as parcelas corrigidas desde a data da suspensão, bem como a reativação imediata do benefício.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-86",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "86",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 86. O auxílio-acidente será concedido, como indenização, ao segurado quando, após consolidação das lesões decorrentes de acidente de qualquer natureza, resultarem seqüelas que impliquem redução da capacidade para o trabalho que habitualmente exercia.\n§ 1º O auxílio-acidente mensal corresponderá a cinqüenta por cento do salário-de-benefício e será devido, observado o disposto no § 5º, até a véspera do início de qualquer aposentadoria ou até a data do óbito do segurado.\n§ 2º O auxílio-acidente será devido a partir do dia seguinte ao da cessação do auxílio-doença, independentemente de qualquer remuneração ou rendimento auferido pelo acidentado, vedada sua acumulação com qualquer aposentadoria.\n§ 3º O recebimento de salário ou concessão de outro benefício, exceto de aposentadoria, observado o disposto no § 5º, não prejudicará a continuidade do recebimento do auxílio-acidente.\n§ 4º A perda da audição, em qualquer grau, somente proporcionará a concessão do auxílio-acidente, quando, além do reconhecimento de causalidade entre o trabalho e a doença, resultar, comprovadamente, na redução ou perda da capacidade para o trabalho que habitualmente exercia.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-106",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "106",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 106. A comprovação do exercício de atividade rural será feita, complementarmente à autodeclaração de que trata o § 2º e ao cadastro de que trata o § 1º, ambos do art. 38-B desta Lei, por meio de, entre outros:\nII – contrato de arrendamento, parceria ou comodato rural;\nIV - Declaração de Aptidão ao Programa Nacional de Fortalecimento da Agricultura Familiar, de que trata o inciso II do caput do art. 2º da Lei nº 12.188, de 11 de janeiro de 2010, ou por documento que a substitua;\nV – bloco de notas do produtor rural;\nVI – notas fiscais de entrada de mercadorias, de que trata o § 7o do art. 30 da Lei no 8.212, de 24 de julho de 1991, emitidas pela empresa adquirente da produção, com indicação do nome do segurado como vendedor;\nVII – documentos fiscais relativos a entrega de produção rural à cooperativa agrícola, entreposto de pescado ou outros, com indicação do segurado como vendedor ou consignante;\nVIII – comprovantes de recolhimento de contribuição à Previdência Social decorrentes da comercialização da produção;\nIX – cópia da declaração de imposto de renda, com indicação de renda proveniente da comercialização de produção rural; ou\nX – licença de ocupação ou permissão outorgada pelo Incra.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-142",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "142",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 142. Para o segurado inscrito na Previdência Social Urbana até 24 de julho de 1991, bem como para o trabalhador e o empregador rural cobertos pela Previdência Social Rural, a carência das aposentadorias por idade, por tempo de serviço e especial obedecerá à seguinte tabela, levando-se em conta o ano em que o segurado implementou todas as condições necessárias à obtenção do benefício:\nAno de implementação das condições | Meses de contribuição exigidos\n1991 | 60 meses\n1992 | 60 meses\n1993 | 66 meses\n1994 | 72 meses\n1995 | 78 meses\n1996 | 90 meses\n1997 | 96 meses\n1998 | 102 meses\n1999 | 108 meses\n2000 | 114 meses\n2001 | 120 meses\n2002 | 126 meses\n2003 | 132 meses\n2004 | 138 meses\n2005 | 144 meses\n2006 | 150 meses\n2007 | 156 meses\n2008 | 162 meses\n2009 | 168 meses\n2010 | 174 meses\n2011 | 180 meses",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8213-143",
+   "Diploma": "Lei 8.213/1991",
+   "Nome do diploma": "Lei de Benefícios da Previdência Social",
+   "Norma": "Lei 8.213/1991",
+   "Dispositivo": "143",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 143. O trabalhador rural ora enquadrado como segurado obrigatório no Regime Geral de Previdência Social, na forma da alínea \"a\" do inciso I, ou do inciso IV ou VII do art. 11 desta Lei, pode requerer aposentadoria por idade, no valor de um salário mínimo, durante quinze anos, contados a partir da data de vigência desta Lei, desde que comprove o exercício de atividade rural, ainda que descontínua, no período imediatamente anterior ao requerimento do benefício, em número de meses idêntico à carência do referido benefício.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8742-20-B",
+   "Diploma": "Lei 8.742/1993",
+   "Nome do diploma": "Lei Orgânica da Assistência Social (LOAS)",
+   "Norma": "Lei 8.742/1993",
+   "Dispositivo": "20-B",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 20-B. Na avaliação de outros elementos probatórios da condição de miserabilidade e da situação de vulnerabilidade de que trata o § 11 do art. 20 desta Lei, serão considerados os seguintes aspectos para ampliação do critério de aferição da renda familiar mensal per capita de que trata o § 11-A do referido artigo:\nI – o grau da deficiência;\nII – a dependência de terceiros para o desempenho de atividades básicas da vida diária; e\nIII – o comprometimento do orçamento do núcleo familiar de que trata o § 3º do art. 20 desta Lei exclusivamente com gastos médicos, com tratamentos de saúde, com fraldas, com alimentos especiais e com medicamentos do idoso ou da pessoa com deficiência não disponibilizados gratuitamente pelo SUS, ou com serviços não prestados pelo Suas, desde que comprovadamente necessários à preservação da saúde e da vida.\n§ 1º A ampliação de que trata o caput deste artigo ocorrerá na forma de escalas graduais, definidas em regulamento.\n§ 2º Aplicam-se à pessoa com deficiência os elementos constantes dos incisos I e III do caput deste artigo, e à pessoa idosa os constantes dos incisos II e III do caput deste artigo.\n§ 3º O grau da deficiência de que trata o inciso I do caput deste artigo será aferido por meio de instrumento de avaliação biopsicossocial, observados os termos dos §§ 1º e 2º do art. 2º da Lei nº 13.146, de 6 de julho de 2015 (Estatuto da Pessoa com Deficiência), e do § 6º do art. 20 e do art. 40-B desta Lei.\n§ 4º O valor referente ao comprometimento do orçamento do núcleo familiar com gastos de que trata o inciso III do caput deste artigo será definido em ato conjunto do Ministério da Cidadania, da Secretaria Especial de Previdência e Trabalho do Ministério da Economia e do INSS, a partir de valores médios dos gastos realizados pelas famílias exclusivamente com essas finalidades, facultada ao interessado a possibilidade de comprovação, conforme critérios definidos em regulamento, de que os gastos efetivos ultrapassam os valores médios.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L8742-21",
+   "Diploma": "Lei 8.742/1993",
+   "Nome do diploma": "Lei Orgânica da Assistência Social (LOAS)",
+   "Norma": "Lei 8.742/1993",
+   "Dispositivo": "21",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 21. O benefício de prestação continuada deve ser revisto a cada 2 (dois) anos para avaliação da continuidade das condições que lhe deram origem.\n§ 1º O pagamento do benefício cessa no momento em que forem superadas as condições referidas no caput, ou em caso de morte do beneficiário.\n§ 2º O benefício será cancelado quando se constatar irregularidade na sua concessão ou utilização.\n§ 3o O desenvolvimento das capacidades cognitivas, motoras ou educacionais e a realização de atividades não remuneradas de habilitação e reabilitação, entre outras, não constituem motivo de suspensão ou cessação do benefício da pessoa com deficiência.\n§ 4º A cessação do benefício de prestação continuada concedido à pessoa com deficiência não impede nova concessão do benefício, desde que atendidos os requisitos definidos em regulamento.\n§ 5º O beneficiário do benefício de prestação continuada é dispensado de avaliação médico-pericial periódica, desde que o impedimento de que trata o § 2º do art. 20 desta Lei seja permanente, irreversível ou irrecuperável, salvo quando houver fundamentada suspeita de fraude ou erro.\n§ 6º A revisão de que trata o caput deste artigo, para efeito de constatação de permanência de deficiência, ficará dispensada no caso de benefício de prestação continuada concedido em virtude de deficiência permanente decorrente de síndrome congênita associada à infecção pelo vírus Zika, desde que o impedimento de que trata o § 2º do art. 20 desta Lei seja permanente, irreversível ou irrecuperável.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-15",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "15",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 15. Ao segurado filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional, fica assegurado o direito à aposentadoria quando forem preenchidos, cumulativamente, os seguintes requisitos:\nI - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; e\nII - somatório da idade e do tempo de contribuição, incluídas as frações, equivalente a 86 (oitenta e seis) pontos, se mulher, e 96 (noventa e seis) pontos, se homem, observado o disposto nos §§ 1º e 2º.\n§ 1º A partir de 1º de janeiro de 2020, a pontuação a que se refere o inciso II do caput será acrescida a cada ano de 1 (um) ponto, até atingir o limite de 100 (cem) pontos, se mulher, e de 105 (cento e cinco) pontos, se homem.\n§ 2º A idade e o tempo de contribuição serão apurados em dias para o cálculo do somatório de pontos a que se referem o inciso II do caput e o § 1º.\n§ 3º Para o professor que comprovar exclusivamente 25 (vinte e cinco) anos de contribuição, se mulher, e 30 (trinta) anos de contribuição, se homem, em efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio, o somatório da idade e do tempo de contribuição, incluídas as frações, será equivalente a 81 (oitenta e um) pontos, se mulher, e 91 (noventa e um) pontos, se homem, aos quais serão acrescidos, a partir de 1º de janeiro de 2020, 1 (um) ponto a cada ano para o homem e para a mulher, até atingir o limite de 92 (noventa e dois) pontos, se mulher, e 100 (cem) pontos, se homem.\n§ 4º O valor da aposentadoria concedida nos termos do disposto neste artigo será apurado na forma da lei.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-16",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "16",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 16. Ao segurado filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional fica assegurado o direito à aposentadoria quando preencher, cumulativamente, os seguintes requisitos:\nI - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; e\nII - idade de 56 (cinquenta e seis) anos, se mulher, e 61 (sessenta e um) anos, se homem.\n§ 1º A partir de 1º de janeiro de 2020, a idade a que se refere o inciso II do caput será acrescida de 6 (seis) meses a cada ano, até atingir 62 (sessenta e dois) anos de idade, se mulher, e 65 (sessenta e cinco) anos de idade, se homem.\n§ 2º Para o professor que comprovar exclusivamente tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio, o tempo de contribuição e a idade de que tratam os incisos I e II do caput deste artigo serão reduzidos em 5 (cinco) anos, sendo, a partir de 1º de janeiro de 2020, acrescidos 6 (seis) meses, a cada ano, às idades previstas no inciso II do caput, até atingirem 57 (cinquenta e sete) anos, se mulher, e 60 (sessenta) anos, se homem.\n§ 3º O valor da aposentadoria concedida nos termos do disposto neste artigo será apurado na forma da lei.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-17",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "17",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 17. Ao segurado filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional e que na referida data contar com mais de 28 (vinte e oito) anos de contribuição, se mulher, e 33 (trinta e três) anos de contribuição, se homem, fica assegurado o direito à aposentadoria quando preencher, cumulativamente, os seguintes requisitos:\nI - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem; e\nII - cumprimento de período adicional correspondente a 50% (cinquenta por cento) do tempo que, na data de entrada em vigor desta Emenda Constitucional, faltaria para atingir 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem.\nParágrafo único. O benefício concedido nos termos deste artigo terá seu valor apurado de acordo com a média aritmética simples dos salários de contribuição e das remunerações calculada na forma da lei, multiplicada pelo fator previdenciário, calculado na forma do disposto nos §§ 7º a 9º do art. 29 da Lei nº 8.213, de 24 de julho de 1991.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-18",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "18",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 18. O segurado de que trata o inciso I do § 7º do art. 201 da Constituição Federal filiado ao Regime Geral de Previdência Social até a data de entrada em vigor desta Emenda Constitucional poderá aposentar-se quando preencher, cumulativamente, os seguintes requisitos:\nI - 60 (sessenta) anos de idade, se mulher, e 65 (sessenta e cinco) anos de idade, se homem; e\nII - 15 (quinze) anos de contribuição, para ambos os sexos.\n§ 1º A partir de 1º de janeiro de 2020, a idade de 60 (sessenta) anos da mulher, prevista no inciso I do caput, será acrescida em 6 (seis) meses a cada ano, até atingir 62 (sessenta e dois) anos de idade.\n§ 2º O valor da aposentadoria de que trata este artigo será apurado na forma da lei.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-19",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "19",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 19. Até que lei disponha sobre o tempo de contribuição a que se refere o inciso I do § 7º do art. 201 da Constituição Federal, o segurado filiado ao Regime Geral de Previdência Social após a data de entrada em vigor desta Emenda Constitucional será aposentado aos 62 (sessenta e dois) anos de idade, se mulher, 65 (sessenta e cinco) anos de idade, se homem, com 15 (quinze) anos de tempo de contribuição, se mulher, e 20(vinte) anos de tempo de contribuição, se homem.\n§ 1º Até que lei complementar disponha sobre a redução de idade mínima ou tempo de contribuição prevista nos §§ 1º e 8º do art. 201 da Constituição Federal, será concedida aposentadoria:\nI - aos segurados que comprovem o exercício de atividades com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação, durante, no mínimo, 15 (quinze), 20 (vinte) ou 25 (vinte e cinco) anos, nos termos do disposto nos arts. 57 e 58 da Lei nº 8.213, de 24 de julho de 1991, quando cumpridos:\na) 55 (cinquenta e cinco) anos de idade, quando se tratar de atividade especial de 15 (quinze) anos de contribuição;\nb) 58 (cinquenta e oito) anos de idade, quando se tratar de atividade especial de 20 (vinte) anos de contribuição; ou\nc) 60 (sessenta) anos de idade, quando se tratar de atividade especial de 25 (vinte e cinco) anos de contribuição;\nII - ao professor que comprove 25 (vinte e cinco) anos de contribuição exclusivamente em efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio e tenha 57 (cinquenta e sete) anos de idade, se mulher, e 60 (sessenta) anos de idade, se homem.\n§ 2º O valor das aposentadorias de que trata este artigo será apurado na forma da lei.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-20",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "20",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 20. O segurado ou o servidor público federal que se tenha filiado ao Regime Geral de Previdência Social ou ingressado no serviço público em cargo efetivo até a data de entrada em vigor desta Emenda Constitucional poderá aposentar-se voluntariamente quando preencher, cumulativamente, os seguintes requisitos:\nI - 57 (cinquenta e sete) anos de idade, se mulher, e 60 (sessenta) anos de idade, se homem;\nII - 30 (trinta) anos de contribuição, se mulher, e 35 (trinta e cinco) anos de contribuição, se homem;\nIII - para os servidores públicos, 20 (vinte) anos de efetivo exercício no serviço público e 5 (cinco) anos no cargo efetivo em que se der a aposentadoria;\nIV - período adicional de contribuição correspondente ao tempo que, na data de entrada em vigor desta Emenda Constitucional, faltaria para atingir o tempo mínimo de contribuição referido no inciso II.\n§ 1º Para o professor que comprovar exclusivamente tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio serão reduzidos, para ambos os sexos, os requisitos de idade e de tempo de contribuição em 5 (cinco) anos.\n§ 2º O valor das aposentadorias concedidas nos termos do disposto neste artigo corresponderá:\nI - em relação ao servidor público que tenha ingressado no serviço público em cargo efetivo até 31 de dezembro de 2003 e que não tenha feito a opção de que trata o § 16 do art. 40 da Constituição Federal, à totalidade da remuneração no cargo efetivo em que se der a aposentadoria, observado o disposto no § 8º do art. 4º; e\nII - em relação aos demais servidores públicos e aos segurados do Regime Geral de Previdência Social, ao valor apurado na forma da lei.\n§ 3º O valor das aposentadorias concedidas nos termos do disposto neste artigo não será inferior ao valor a que se refere o § 2º do art. 201 da Constituição Federal e será reajustado:\nI - de acordo com o disposto no art. 7º da Emenda Constitucional nº 41, de 19 de dezembro de 2003, se cumpridos os requisitos previstos no inciso I do § 2º;\nII - nos termos estabelecidos para o Regime Geral de Previdência Social, na hipótese prevista no inciso II do § 2º.\n§ 4º Aplicam-se às aposentadorias dos servidores dos Estados, do Distrito Federal e dos Municípios as normas constitucionais e infraconstitucionais anteriores à data de entrada em vigor desta Emenda Constitucional, enquanto não promovidas alterações na legislação interna relacionada ao respectivo regime próprio de previdência social.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-25",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "25",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 25. Será assegurada a contagem de tempo de contribuição fictício no Regime Geral de Previdência Social decorrente de hipóteses descritas na legislação vigente até a data de entrada em vigor desta Emenda Constitucional para fins de concessão de aposentadoria, observando-se, a partir da sua entrada em vigor, o disposto no § 14 do art. 201 da Constituição Federal.\n§ 1º Para fins de comprovação de atividade rural exercida até a data de entrada em vigor desta Emenda Constitucional, o prazo de que tratam os §§ 1º e 2º do art. 38-B da Lei nº 8.213, de 24 de julho de 1991, será prorrogado até a data em que o Cadastro Nacional de Informações Sociais (CNIS) atingir a cobertura mínima de 50% (cinquenta por cento) dos trabalhadores de que trata o § 8º do art. 195 da Constituição Federal, apurada conforme quantitativo da Pesquisa Nacional por Amostra de Domicílios Contínua (Pnad).\n§ 2º Será reconhecida a conversão de tempo especial em comum, na forma prevista na Lei nº 8.213, de 24 de julho de 1991, ao segurado do Regime Geral de Previdência Social que comprovar tempo de efetivo exercício de atividade sujeita a condições especiais que efetivamente prejudiquem a saúde, cumprido até a data de entrada em vigor desta Emenda Constitucional, vedada a conversão para o tempo cumprido após esta data.\n§ 3º Considera-se nula a aposentadoria que tenha sido concedida ou que venha a ser concedida por regime próprio de previdência social com contagem recíproca do Regime Geral de Previdência Social mediante o cômputo de tempo de serviço sem o recolhimento da respectiva contribuição ou da correspondente indenização pelo segurado obrigatório responsável, à época do exercício da atividade, pelo recolhimento de suas próprias contribuições previdenciárias.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "EC103-26",
+   "Diploma": "EC 103/2019",
+   "Nome do diploma": "Reforma da Previdência (Emenda Constitucional 103/2019)",
+   "Norma": "EC 103/2019",
+   "Dispositivo": "26",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 26. Até que lei discipline o cálculo dos benefícios do regime próprio de previdência social da União e do Regime Geral de Previdência Social, será utilizada a média aritmética simples dos salários de contribuição e das remunerações adotados como base para contribuições a regime próprio de previdência social e ao Regime Geral de Previdência Social, ou como base para contribuições decorrentes das atividades militares de que tratam os arts. 42 e 142 da Constituição Federal, atualizados monetariamente, correspondentes a 100% (cem por cento) do período contributivo desde a competência julho de 1994 ou desde o início da contribuição, se posterior àquela competência.\n§ 1º A média a que se refere o caput será limitada ao valor máximo do salário de contribuição do Regime Geral de Previdência Social para os segurados desse regime e para o servidor que ingressou no serviço público em cargo efetivo após a implantação do regime de previdência complementar ou que tenha exercido a opção correspondente, nos termos do disposto nos §§ 14 a 16 do art. 40 da Constituição Federal.\n§ 2º O valor do benefício de aposentadoria corresponderá a 60% (sessenta por cento) da média aritmética definida na forma prevista no caput e no § 1º, com acréscimo de 2 (dois) pontos percentuais para cada ano de contribuição que exceder o tempo de 20 (vinte) anos de contribuição nos casos:\nI - do inciso II do § 6º do art. 4º, do § 4º do art. 15, do § 3º do art. 16 e do § 2º do art. 18;\nII - do § 4º do art. 10, ressalvado o disposto no inciso II do § 3º e no § 4º deste artigo;\nIII - de aposentadoria por incapacidade permanente aos segurados do Regime Geral de Previdência Social, ressalvado o disposto no inciso II do § 3º deste artigo; e\nIV - do § 2º do art. 19 e do § 2º do art. 21, ressalvado o disposto no § 5º deste artigo.\n§ 3º O valor do benefício de aposentadoria corresponderá a 100% (cem por cento) da média aritmética definida na forma prevista no caput e no § 1º:\nI - no caso do inciso II do § 2º do art. 20;\nII - no caso de aposentadoria por incapacidade permanente, quando decorrer de acidente de trabalho, de doença profissional e de doença do trabalho.\n§ 4º O valor do benefício da aposentadoria de que trata o inciso III do § 1º do art. 10 corresponderá ao resultado do tempo de contribuição dividido por 20 (vinte) anos, limitado a um inteiro, multiplicado pelo valor apurado na forma do caput do § 2º deste artigo, ressalvado o caso de cumprimento de critérios de acesso para aposentadoria voluntária que resulte em situação mais favorável.\n§ 5º O acréscimo a que se refere o caput do § 2º será aplicado para cada ano que exceder 15 (quinze) anos de tempo de contribuição para os segurados de que tratam a alínea \"a\" do inciso I do § 1º do art. 19 e o inciso I do art. 21 e para as mulheres filiadas ao Regime Geral de Previdência Social.\n§ 6º Poderão ser excluídas da média as contribuições que resultem em redução do valor do benefício, desde que mantido o tempo mínimo de contribuição exigido, vedada a utilização do tempo excluído para qualquer finalidade, inclusive para o acréscimo a que se referem os §§ 2º e 5º, para a averbação em outro regime previdenciário ou para a obtenção dos proventos de inatividade das atividades de que tratam os arts. 42 e 142 da Constituição Federal.\n§ 7º Os benefícios calculados nos termos do disposto neste artigo serão reajustados nos termos estabelecidos para o Regime Geral de Previdência Social.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CF-201",
+   "Diploma": "Constituição Federal",
+   "Nome do diploma": "Constituição da República Federativa do Brasil de 1988",
+   "Norma": "Constituição Federal de 1988",
+   "Dispositivo": "201",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 201. A previdência social será organizada sob a forma do Regime Geral de Previdência Social, de caráter contributivo e de filiação obrigatória, observados critérios que preservem o equilíbrio financeiro e atuarial, e atenderá, na forma da lei, a:\nI - cobertura dos eventos de incapacidade temporária ou permanente para o trabalho e idade avançada;\nII - proteção à maternidade, especialmente à gestante;\nIII - proteção ao trabalhador em situação de desemprego involuntário;\nIV - salário-família e auxílio-reclusão para os dependentes dos segurados de baixa renda;\nV - pensão por morte do segurado, homem ou mulher, ao cônjuge ou companheiro e dependentes, observado o disposto no § 2º.\n§ 1º É vedada a adoção de requisitos ou critérios diferenciados para concessão de benefícios, ressalvada, nos termos de lei complementar, a possibilidade de previsão de idade e tempo de contribuição distintos da regra geral para concessão de aposentadoria exclusivamente em favor dos segurados:\nI - com deficiência, previamente submetidos a avaliação biopsicossocial realizada por equipe multiprofissional e interdisciplinar;\nII - cujas atividades sejam exercidas com efetiva exposição a agentes químicos, físicos e biológicos prejudiciais à saúde, ou associação desses agentes, vedada a caracterização por categoria profissional ou ocupação.\n§ 2º Nenhum benefício que substitua o salário de contribuição ou o rendimento do trabalho do segurado terá valor mensal inferior ao salário mínimo.\n§ 3º Todos os salários de contribuição considerados para o cálculo de benefício serão devidamente atualizados, na forma da lei.\n§ 4º É assegurado o reajustamento dos benefícios para preservar-lhes, em caráter permanente, o valor real, conforme critérios definidos em lei.\n§ 5º É vedada a filiação ao regime geral de previdência social, na qualidade de segurado facultativo, de pessoa participante de regime próprio de previdência.\n§ 6º A gratificação natalina dos aposentados e pensionistas terá por base o valor dos proventos do mês de dezembro de cada ano.\n§ 7º É assegurada aposentadoria no regime geral de previdência social, nos termos da lei, obedecidas as seguintes condições:\nI - 65 (sessenta e cinco) anos de idade, se homem, e 62 (sessenta e dois) anos de idade, se mulher, observado tempo mínimo de contribuição;\nII - 60 (sessenta) anos de idade, se homem, e 55 (cinquenta e cinco) anos de idade, se mulher, para os trabalhadores rurais e para os que exerçam suas atividades em regime de economia familiar, nestes incluídos o produtor rural, o garimpeiro e o pescador artesanal.\n§ 8º O requisito de idade a que se refere o inciso I do § 7º será reduzido em 5 (cinco) anos, para o professor que comprove tempo de efetivo exercício das funções de magistério na educação infantil e no ensino fundamental e médio fixado em lei complementar.\n§ 8º-A. O requisito de idade a que se refere o inciso I do § 7º deste artigo será de 57 (cinquenta e sete) anos de idade, se mulher, e 60 (sessenta) anos de idade, se homem, para o agente comunitário de saúde e o agente de combate às endemias que comprovem o mínimo de 25 (vinte e cinco) anos de tempo de contribuição e de efetivo exercício na respectiva atividade profissional.\n§ 9º Para fins de aposentadoria, será assegurada a contagem recíproca do tempo de contribuição entre o Regime Geral de Previdência Social e os regimes próprios de previdência social, e destes entre si, observada a compensação financeira, de acordo com os critérios estabelecidos em lei.\n§ 9º-A. O tempo de serviço militar exercido nas atividades de que tratam os arts. 42, 142 e 143 e o tempo de contribuição ao Regime Geral de Previdência Social ou a regime próprio de previdência social terão contagem recíproca para fins de inativação militar ou aposentadoria, e a compensação financeira será devida entre as receitas de contribuição referentes aos militares e as receitas de contribuição aos demais regimes.\n§ 10. Lei complementar poderá disciplinar a cobertura de benefícios não programados, inclusive os decorrentes de acidente do trabalho, a ser atendida concorrentemente pelo Regime Geral de Previdência Social e pelo setor privado.\n§ 11. Os ganhos habituais do empregado, a qualquer título, serão incorporados ao salário para efeito de contribuição previdenciária e conseqüente repercussão em benefícios, nos casos e na forma da lei.\n§ 12. Lei instituirá sistema especial de inclusão previdenciária, com alíquotas diferenciadas, para atender aos trabalhadores de baixa renda, inclusive os que se encontram em situação de informalidade, e àqueles sem renda própria que se dediquem exclusivamente ao trabalho doméstico no âmbito de sua residência, desde que pertencentes a famílias de baixa renda.\n§ 13. A aposentadoria concedida ao segurado de que trata o § 12 terá valor de 1 (um) salário-mínimo.\n§ 14. É vedada a contagem de tempo de contribuição fictício para efeito de concessão dos benefícios previdenciários e de contagem recíproca.\n§ 15. Lei complementar estabelecerá vedações, regras e condições para a acumulação de benefícios previdenciários.\n§ 16. Os empregados dos consórcios públicos, das empresas públicas, das sociedades de economia mista e das suas subsidiárias serão aposentados compulsoriamente, observado o cumprimento do tempo mínimo de contribuição, ao atingir a idade máxima de que trata o inciso II do § 1º do art. 40, na forma estabelecida em lei.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CF-203",
+   "Diploma": "Constituição Federal",
+   "Nome do diploma": "Constituição da República Federativa do Brasil de 1988",
+   "Norma": "Constituição Federal de 1988",
+   "Dispositivo": "203",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 203. A assistência social será prestada a quem dela necessitar, independentemente de contribuição à seguridade social, e tem por objetivos:\nI - a proteção à família, à maternidade, à infância, à adolescência e à velhice;\nII - o amparo às crianças e adolescentes carentes;\nIII - a promoção da integração ao mercado de trabalho;\nIV - a habilitação e reabilitação das pessoas portadoras de deficiência e a promoção de sua integração à vida comunitária;\nV - a garantia de um salário mínimo de benefício mensal à pessoa portadora de deficiência e ao idoso que comprovem não possuir meios de prover à própria manutenção ou de tê-la provida por sua família, conforme dispuser a lei.\nVI - a redução da vulnerabilidade socioeconômica de famílias em situação de pobreza ou de extrema pobreza.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CPC-3",
+   "Diploma": "CPC",
+   "Nome do diploma": "Código de Processo Civil",
+   "Norma": "Lei 13.105/2015",
+   "Dispositivo": "3",
+   "Assunto": "Processo, recursos e precedentes",
+   "Texto literal": "Art. 3º Não se excluirá da apreciação jurisdicional ameaça ou lesão a direito.\n§ 1º É permitida a arbitragem, na forma da lei.\n§ 2º O Estado promoverá, sempre que possível, a solução consensual dos conflitos.\n§ 3º A conciliação, a mediação e outros métodos de solução consensual de conflitos deverão ser estimulados por juízes, advogados, defensores públicos e membros do Ministério Público, inclusive no curso do processo judicial.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CPC-11",
+   "Diploma": "CPC",
+   "Nome do diploma": "Código de Processo Civil",
+   "Norma": "Lei 13.105/2015",
+   "Dispositivo": "11",
+   "Assunto": "Processo, recursos e precedentes",
+   "Texto literal": "Art. 11. Todos os julgamentos dos órgãos do Poder Judiciário serão públicos, e fundamentadas todas as decisões, sob pena de nulidade.\nParágrafo único. Nos casos de segredo de justiça, pode ser autorizada a presença somente das partes, de seus advogados, de defensores públicos ou do Ministério Público.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CPC-371",
+   "Diploma": "CPC",
+   "Nome do diploma": "Código de Processo Civil",
+   "Norma": "Lei 13.105/2015",
+   "Dispositivo": "371",
+   "Assunto": "Processo, recursos e precedentes",
+   "Texto literal": "Art. 371. O juiz apreciará a prova constante dos autos, independentemente do sujeito que a tiver promovido, e indicará na decisão as razões da formação de seu convencimento.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CPC-373",
+   "Diploma": "CPC",
+   "Nome do diploma": "Código de Processo Civil",
+   "Norma": "Lei 13.105/2015",
+   "Dispositivo": "373",
+   "Assunto": "Processo, recursos e precedentes",
+   "Texto literal": "Art. 373. O ônus da prova incumbe:\nI - ao autor, quanto ao fato constitutivo de seu direito;\nII - ao réu, quanto à existência de fato impeditivo, modificativo ou extintivo do direito do autor.\n§ 1º Nos casos previstos em lei ou diante de peculiaridades da causa relacionadas à impossibilidade ou à excessiva dificuldade de cumprir o encargo nos termos do caput ou à maior facilidade de obtenção da prova do fato contrário, poderá o juiz atribuir o ônus da prova de modo diverso, desde que o faça por decisão fundamentada, caso em que deverá dar à parte a oportunidade de se desincumbir do ônus que lhe foi atribuído.\n§ 2º A decisão prevista no § 1º deste artigo não pode gerar situação em que a desincumbência do encargo pela parte seja impossível ou excessivamente difícil.\n§ 3º A distribuição diversa do ônus da prova também pode ocorrer por convenção das partes, salvo quando:\nI - recair sobre direito indisponível da parte;\nII - tornar excessivamente difícil a uma parte o exercício do direito.\n§ 4º A convenção de que trata o § 3º pode ser celebrada antes ou durante o processo.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CPC-479",
+   "Diploma": "CPC",
+   "Nome do diploma": "Código de Processo Civil",
+   "Norma": "Lei 13.105/2015",
+   "Dispositivo": "479",
+   "Assunto": "Processo, recursos e precedentes",
+   "Texto literal": "Art. 479. O juiz apreciará a prova pericial de acordo com o disposto no art. 371, indicando na sentença os motivos que o levaram a considerar ou a deixar de considerar as conclusões do laudo, levando em conta o método utilizado pelo perito.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CPC-487",
+   "Diploma": "CPC",
+   "Nome do diploma": "Código de Processo Civil",
+   "Norma": "Lei 13.105/2015",
+   "Dispositivo": "487",
+   "Assunto": "Processo, recursos e precedentes",
+   "Texto literal": "Art. 487. Haverá resolução de mérito quando o juiz:\nI - acolher ou rejeitar o pedido formulado na ação ou na reconvenção;\nII - decidir, de ofício ou a requerimento, sobre a ocorrência de decadência ou prescrição;\nIII - homologar:\na) o reconhecimento da procedência do pedido formulado na ação ou na reconvenção;\nb) a transação;\nc) a renúncia à pretensão formulada na ação ou na reconvenção.\nParágrafo único. Ressalvada a hipótese do § 1º do art. 332, a prescrição e a decadência não serão reconhecidas sem que antes seja dada às partes oportunidade de manifestar-se.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CPC-927",
+   "Diploma": "CPC",
+   "Nome do diploma": "Código de Processo Civil",
+   "Norma": "Lei 13.105/2015",
+   "Dispositivo": "927",
+   "Assunto": "Processo, recursos e precedentes",
+   "Texto literal": "Art. 927. Os juízes e os tribunais observarão:\nI - as decisões do Supremo Tribunal Federal em controle concentrado de constitucionalidade;\nII - os enunciados de súmula vinculante;\nIII - os acórdãos em incidente de assunção de competência ou de resolução de demandas repetitivas e em julgamento de recursos extraordinário e especial repetitivos;\nIII-A – os acórdãos proferidos em julgamento de recurso especial submetido ao regime da relevância da questão de direito federal infraconstitucional;\nIV - os enunciados das súmulas do Supremo Tribunal Federal em matéria constitucional e do Superior Tribunal de Justiça em matéria infraconstitucional;\nV - a orientação do plenário ou do órgão especial aos quais estiverem vinculados.\n§ 1º Os juízes e os tribunais observarão o disposto no art. 10 e no art. 489, § 1º, quando decidirem com fundamento neste artigo.\n§ 2º A alteração de tese jurídica adotada em enunciado de súmula ou em julgamento de casos repetitivos poderá ser precedida de audiências públicas e da participação de pessoas, órgãos ou entidades que possam contribuir para a rediscussão da tese.\n§ 3º Na hipótese de alteração de jurisprudência dominante do Supremo Tribunal Federal e dos tribunais superiores ou daquela oriunda de julgamento de casos repetitivos, pode haver modulação dos efeitos da alteração no interesse social e no da segurança jurídica.\n§ 4º A modificação de enunciado de súmula, de jurisprudência pacificada ou de tese adotada em julgamento de casos repetitivos observará a necessidade de fundamentação adequada e específica, considerando os princípios da segurança jurídica, da proteção da confiança e da isonomia.\n§ 5º Os tribunais darão publicidade a seus precedentes, organizando-os por questão jurídica decidida e divulgando-os, preferencialmente, na rede mundial de computadores.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "D3048-30",
+   "Diploma": "Decreto 3.048/1999",
+   "Nome do diploma": "Regulamento da Previdência Social",
+   "Norma": "Decreto 3.048/1999",
+   "Dispositivo": "30",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 30. Independe de carência a concessão das seguintes prestações:\nI - pensão por morte, salário-família e auxílio-acidente de qualquer natureza, observado, quanto à pensão por morte, o disposto no inciso V do caput e nos § 3º e § 4º do art. 114;\nII - salário-maternidade, para as seguradas empregada, empregada doméstica e trabalhadora avulsa;\nIII - auxílio por incapacidade temporária e aposentadoria por incapacidade permanente nos casos de acidente de qualquer natureza ou causa e de doença profissional ou do trabalho e nos casos de segurado que, após filiar-se ao RGPS, seja acometido de alguma das doenças ou afecções especificadas em lista elaborada pelos Ministérios da Saúde e da Economia, atualizada a cada três anos, de acordo com os critérios de estigma, deformação, mutilação, deficiência ou outro fator que lhe confira especificidade e gravidade que mereçam tratamento particularizado;\nIV - aposentadoria por idade ou por invalidez, auxílio-doença, auxílio-reclusão ou pensão por morte aos segurados especiais, desde que comprovem o exercício de atividade rural no período imediatamente anterior ao requerimento do benefício, ainda que de forma descontínua, igual ao número de meses correspondente à carência do benefício requerido; e\nV - reabilitação profissional.\n§ 1º Entende-se como acidente de qualquer natureza ou causa aquele de origem traumática e por exposição a agentes exógenos, físicos, químicos ou biológicos, que acarrete lesão corporal ou perturbação funcional que cause a morte ou a perda ou a redução permanente ou temporária da capacidade laborativa.\n§ 2º Até que seja elaborada a lista de doenças ou afecções a que se refere o inciso III do caput, independerá de carência a concessão de auxílio por incapacidade temporária e de aposentadoria por incapacidade permanente ao segurado que, após filiar-se ao RGPS, seja acometido por alguma das seguintes doenças:\nI - tuberculose ativa;\nII - hanseníase;\nIII - alienação mental;\nIV - esclerose múltipla;\nV - hepatopatia grave;\nVI - neoplasia maligna;\nVII - cegueira;\nVIII - paralisia irreversível e incapacitante;\nIX - cardiopatia grave;\nX - doença de Parkinson;\nXI - espondiloartrose anquilosante;\nXII - nefropatia grave;\nXIII - estado avançado da doença de Paget (osteíte deformante);\nXIV - síndrome da imunodeficiência adquirida (aids); ou\nXV - contaminação por radiação, com base em conclusão da medicina especializada.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "D3048-188-P",
+   "Diploma": "Decreto 3.048/1999",
+   "Nome do diploma": "Regulamento da Previdência Social",
+   "Norma": "Decreto 3.048/1999",
+   "Dispositivo": "188-P",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 188-P. Ressalvado o direito de opção pelas aposentadorias de que tratam os art. 51, art. 64 e art. 188-I ao 188-L, uma vez cumprido o período de carência exigido, a aposentadoria especial será devida ao segurado empregado, trabalhador avulso e contribuinte individual, este último somente quando cooperado filiado a cooperativa de trabalho ou de produção, filiados ao RGPS até 13 de novembro de 2019, quando o somatório da sua idade e do seu tempo de contribuição e o tempo de efetiva exposição forem, respectivamente, de:\nI - sessenta e seis pontos e quinze anos de efetiva exposição;\nII - setenta e seis pontos e vinte anos de efetiva exposição; ou\nIII - oitenta e seis pontos e vinte e cinco anos de efetiva exposição.\n§ 1º A idade e o tempo de contribuição serão apurados em dias para o cálculo do somatório de pontos a que se refere o caput.\n§ 2º A data do início da aposentadoria de que trata este artigo será estabelecida em conformidade com o disposto no art. 52.\n§ 3º O valor da aposentadoria de que trata este artigo corresponderá a sessenta por cento do salário de benefício definido na forma prevista no art. 32, com acréscimo de dois pontos percentuais para cada ano de contribuição que exceder o tempo de vinte anos de contribuição, exceto na hipótese prevista no inciso I do caput, e das mulheres, cujo acréscimo será aplicado para cada ano que exceder quinze anos de tempo de contribuição.\n§ 4º A concessão da aposentadoria especial prevista neste artigo dependerá da comprovação, durante os períodos mínimos exigidos:\nI - do tempo de trabalho permanente, não ocasional nem intermitente; e\nII - da efetiva exposição do segurado a agentes químicos, físicos e biológicos prejudiciais à saúde ou à integridade física, ou a associação desses agentes, comprovada na forma prevista nos art. 64 ao art. 68.\n§ 5º A conversão de tempo de atividade sob condições especiais em tempo de atividade comum aplica-se somente ao trabalho prestado até 13 de novembro de 2019, em conformidade com o disposto na seguinte tabela:\n[VALIDAR: tabela de conversão não reproduzida; conferir no texto oficial]\n§ 6º A caracterização e a comprovação do tempo de atividade sob condições especiais obedecerão ao disposto na legislação em vigor à época da prestação do serviço.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CC-389",
+   "Diploma": "Código Civil",
+   "Nome do diploma": "Código Civil",
+   "Norma": "Lei 10.406/2002",
+   "Dispositivo": "389",
+   "Assunto": "Consectários e honorários",
+   "Texto literal": "Art. 389. Não cumprida a obrigação, responde o devedor por perdas e danos, mais juros, atualização monetária e honorários de advogado.\nParágrafo único. Na hipótese de o índice de atualização monetária não ter sido convencionado ou não estar previsto em lei específica, será aplicada a variação do Índice Nacional de Preços ao Consumidor Amplo (IPCA), apurado e divulgado pela Fundação Instituto Brasileiro de Geografia e Estatística (IBGE), ou do índice que vier a substituí-lo.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "CC-406",
+   "Diploma": "Código Civil",
+   "Nome do diploma": "Código Civil",
+   "Norma": "Lei 10.406/2002",
+   "Dispositivo": "406",
+   "Assunto": "Consectários e honorários",
+   "Texto literal": "Art. 406. Quando não forem convencionados, ou quando o forem sem taxa estipulada, ou quando provierem de determinação da lei, os juros serão fixados de acordo com a taxa legal.\n§ 1º A taxa legal corresponderá à taxa referencial do Sistema Especial de Liquidação e de Custódia (Selic), deduzido o índice de atualização monetária de que trata o parágrafo único do art. 389 deste Código.\n§ 2º A metodologia de cálculo da taxa legal e sua forma de aplicação serão definidas pelo Conselho Monetário Nacional e divulgadas pelo Banco Central do Brasil.\n§ 3º Caso a taxa legal apresente resultado negativo, este será considerado igual a 0 (zero) para efeito de cálculo dos juros no período de referência.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L13146-2",
+   "Diploma": "Lei 13.146/2015",
+   "Nome do diploma": "Estatuto da Pessoa com Deficiência",
+   "Norma": "Lei 13.146/2015",
+   "Dispositivo": "2",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 2º Considera-se pessoa com deficiência aquela que tem impedimento de longo prazo de natureza física, mental, intelectual ou sensorial, o qual, em interação com uma ou mais barreiras, pode obstruir sua participação plena e efetiva na sociedade em igualdade de condições com as demais pessoas.\n§ 1º A avaliação da deficiência, quando necessária, será biopsicossocial, realizada por equipe multiprofissional e interdisciplinar e considerará:\nI - os impedimentos nas funções e nas estruturas do corpo;\nII - os fatores socioambientais, psicológicos e pessoais;\nIII - a limitação no desempenho de atividades; e\nIV - a restrição de participação.\n§ 2º O Poder Executivo criará instrumentos para avaliação da deficiência.\n§ 3º O exame médico-pericial componente da avaliação biopsicossocial da deficiência de que trata o § 1º deste artigo poderá ser realizado com o uso de tecnologia de telemedicina ou por análise documental conforme situações e requisitos definidos em regulamento.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  },
+  {
+   "Código": "L10741-34",
+   "Diploma": "Lei 10.741/2003",
+   "Nome do diploma": "Estatuto da Pessoa Idosa",
+   "Norma": "Lei 10.741/2003",
+   "Dispositivo": "34",
+   "Assunto": "Benefícios previdenciários e assistenciais",
+   "Texto literal": "Art. 34. Às pessoas idosas, a partir de 65 (sessenta e cinco) anos, que não possuam meios para prover sua subsistência, nem de tê-la provida por sua família, é assegurado o benefício mensal de 1 (um) salário mínimo, nos termos da Loas.\nParágrafo único. O benefício já concedido a qualquer membro da família nos termos do caput não será computado para os fins do cálculo da renda familiar per capita a que se refere a Loas.",
+   "Observação": "Texto vigente extraído de planalto.gov.br em 15/11/2026 (sem trechos revogados e notas de redação)."
+  }
+ ]
+}
