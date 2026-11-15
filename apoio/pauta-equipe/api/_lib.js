@@ -41,13 +41,22 @@ async function gh(caminho, op = {}) {
   if (!r.ok) { let m = ''; try { m = (await r.json()).message || ''; } catch (e) {} const er = new Error('GitHub HTTP ' + r.status + (m ? ' · ' + m : '')); er.status = r.status; throw er; }
   return r.json();
 }
+/* planilhas do Google: avisa o Apps Script (implantação App da Web) que o repositório mudou, para atualizar na hora.
+   Não espera a sincronização terminar (corta em 1,5 s); gravação vinda da própria planilha não avisa. */
+async function avisarPlanilha(msg) {
+  const url = process.env.CMT_PLANILHA_WEBHOOK, tok = process.env.CMT_PLANILHA_TOKEN;
+  if (!url || !tok || /\(Planilha Google\)/.test(String(msg || ''))) return;
+  const c = new AbortController(), t = setTimeout(() => c.abort(), 1500);
+  try { await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: tok }), redirect: 'manual', signal: c.signal }); } catch (e) {} finally { clearTimeout(t); }
+}
 async function lerJson(rel) {
   const o = await gh('/contents/' + rel + '?ref=' + RAMO);
   const txt = Buffer.from(o.content, 'base64').toString('utf8');
   return { dados: JSON.parse(txt), sha: o.sha };
 }
 async function gravarJson(rel, dados, sha, msg) {
-  return gh('/contents/' + rel, { method: 'PUT', body: JSON.stringify({ message: msg, content: Buffer.from(JSON.stringify(dados, null, 1) + '\n').toString('base64'), sha, branch: RAMO }) });
+  const r = await gh('/contents/' + rel, { method: 'PUT', body: JSON.stringify({ message: msg, content: Buffer.from(JSON.stringify(dados, null, 1) + '\n').toString('base64'), sha, branch: RAMO }) });
+  await avisarPlanilha(msg); return r;
 }
 const gestor = u => String(process.env.CMT_GESTOR || 'Bruno').split(',').map(norm).filter(Boolean).includes(norm(u));
 const dataOk = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ''));
@@ -86,6 +95,7 @@ async function commitArquivos(arqs, msg) {
   const t = await gh('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
   const c = await gh('/git/commits', { method: 'POST', body: JSON.stringify({ message: msg, tree: t.sha, parents: [ref.object.sha] }) });
   await gh('/git/refs/heads/' + RAMO, { method: 'PATCH', body: JSON.stringify({ sha: c.sha }) });
+  await avisarPlanilha(msg);
   return c;
 }
 module.exports = { gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };
