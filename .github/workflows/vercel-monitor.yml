@@ -1,11 +1,12 @@
 # Publica o CMT-monitor no projeto trf3-muta da Vercel (trf3-muta.vercel.app).
-# Vão para a Vercel só o cmt-monitor.html (raiz) e o CMT Compêndio (/compendio/); o acervo continua privado no repositório.
+# Vão para a Vercel só o cmt-monitor.html (raiz), o CMT Compêndio público (/compendio/) e as pautas das sessões (/dados/sessoes/),
+# que a aba Consulta do Compêndio lê; o restante do acervo continua privado no repositório. O Compêndio avançado não é publicado.
 # Requer o segredo VERCEL_TOKEN (Settings › Secrets and variables › Actions).
 name: CMT-monitor na Vercel
 on:
   push:
     branches: [main]
-    paths: ["cmt-monitor.html", "apoio/cmt-compendio/cmt-compendio.html", ".github/workflows/vercel-monitor.yml"]
+    paths: ["cmt-monitor.html", "apoio/cmt-compendio/cmt-compendio.html", "acervo/sessoes/**", ".github/workflows/vercel-monitor.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -28,6 +29,7 @@ jobs:
           mkdir -p site/public
           cp cmt-monitor.html site/public/index.html
           mkdir -p site/public/compendio && cp apoio/cmt-compendio/cmt-compendio.html site/public/compendio/index.html
+          mkdir -p site/public/dados/sessoes && cp acervo/sessoes/*.json site/public/dados/sessoes/
           printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","rewrites":[{"source":"/(.*)","destination":"/index.html"}]}\n' > site/vercel.json
       - name: Publica
         env:

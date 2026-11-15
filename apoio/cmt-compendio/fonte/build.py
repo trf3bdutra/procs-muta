@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Monta apoio/cmt-compendio/cmt-compendio.html (leitura) e cmt-compendio-editor.html (editor) a partir desta pasta e da base do procs-muta.
+"""Monta apoio/cmt-compendio/cmt-compendio.html (público: Ementário, Editorial e Consulta) e cmt-compendio-avancado.html
+(avançado, de uso interno: todas as abas, edição e atalho para o CMT-monitor) a partir desta pasta e da base do procs-muta.
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
@@ -128,8 +129,14 @@ def blob_sha(p):
     b = p.read_bytes(); return hashlib.sha1(b'blob %d\0' % len(b) + b).hexdigest()
 def montar(editor):
     t = t0
-    js = JS.replace('/*__EDITOR__*/', (H/'editor.js').read_text(encoding='utf-8') if editor else '')
-    css = (H/'ementario.css').read_text(encoding='utf-8') + ((H/'editor.css').read_text(encoding='utf-8') if editor else '')
+    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if editor else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8'))
+    css = (H/'ementario.css').read_text(encoding='utf-8') + ((H/'editor.css').read_text(encoding='utf-8') if editor else '') + (H/'consulta.css').read_text(encoding='utf-8')
+    if not editor:
+        # versão pública: só Ementário, Editorial e Consulta; Enunciados e Repertório ficam no avançado
+        for a in ('    <button class="tab" role="tab" data-v="temas" aria-selected="true">Enunciados</button>\n', '    <button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>\n'):
+            assert t.count(a) == 1, a; t = t.replace(a, '')
+        t = t.replace('<section id="v-temas">', '<section id="v-temas" hidden>', 1)
+        js = 'window.VDM_PUBLICO=true;\n' + js
     pre = ''
     if editor:
         cab = lambda p: {k: v for k, v in ler(p).items() if k != 'registros'}
@@ -140,7 +147,11 @@ def montar(editor):
             'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')}}}
         pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
         js = 'window.VDM_EDITOR=true;\n' + js
-        t = t.replace('<title>CMT Compêndio</title>', '<title>CMT Compêndio · Editor</title>')
+        t = t.replace('<title>CMT Compêndio</title>', '<title>CMT Compêndio · Avançado</title>')
+        t = t.replace('<b>CMT Compêndio · Referenciais</b>', '<b>CMT Compêndio · Avançado</b>', 1)
+        a = '  <div class="right">\n'
+        assert t.count(a) == 1
+        t = t.replace(a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor">◧ Monitor</a>\n')
     return t, js, css, pre
 def gerar_html(editor):
     t, js, css, pre = montar(editor)
@@ -152,7 +163,7 @@ def gerar_html(editor):
              ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
         assert t.count(a) == 1, a[:60]
         t = t.replace(a, b)
-    out = H.parent/('cmt-compendio-editor.html' if editor else 'cmt-compendio.html')
+    out = H.parent/('cmt-compendio-avancado.html' if editor else 'cmt-compendio.html')
     out.write_text(t, encoding='utf-8')
     print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
 gerar_html(False)

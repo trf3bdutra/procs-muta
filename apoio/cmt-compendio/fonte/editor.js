@@ -1,5 +1,5 @@
 /* ================= VERSÃO EDITOR: adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial e diretrizes =================
-   Só entra no cmt-compendio-editor.html. As alterações valem na hora nesta página; para gravar, "Enviar ao GitHub" faz um commit
+   Só entra no cmt-compendio-avancado.html. As alterações valem na hora nesta página; para gravar, "Enviar ao GitHub" faz um commit
    em trf3bdutra/procs-muta (token informado na hora, guardado só na memória desta aba) ou "Baixar arquivos" gera um .zip com os
    arquivos da base, nos caminhos do repositório. O GitHub valida a base e reconstrói o Compêndio depois do commit. */
 var EDM=null;try{EDM=JSON.parse($('#editor-meta').textContent);}catch(e){EDM=null;}
