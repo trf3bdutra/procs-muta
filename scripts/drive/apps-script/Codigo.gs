@@ -104,12 +104,14 @@ function filaEnviar_() {
 
 /* ============================ app → planilha ============================ */
 /* Aviso do app (implantação "App da Web"): a cada gravação no app, a planilha se atualiza na hora.
-   Só aceita a chamada com o mesmo token de CMT_TOKEN; espera a sincronização em andamento terminar. */
+   Só aceita a chamada com o mesmo token de CMT_TOKEN. Avisos em sequência se juntam: se já há sincronização
+   rodando, o aviso só fica anotado e ela repete uma vez ao terminar (não uma por aviso). */
 function doPost(e) {
   var b = {}; try { b = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (x) {}
-  var tok = PropertiesService.getScriptProperties().getProperty('CMT_TOKEN');
+  var P = PropertiesService.getScriptProperties(), tok = P.getProperty('CMT_TOKEN');
   if (!tok || b.token !== tok) return ContentService.createTextOutput('negado');
-  sincronizar(false, 25000);
+  P.setProperty('AVISO', String(Date.now()));
+  sincronizar(false, 500);
   return ContentService.createTextOutput('ok');
 }
 function doGet() { return ContentService.createTextOutput('Planilhas ⇄ Pauta da equipe'); }
@@ -117,13 +119,19 @@ function sincronizar(forcar, esperaMs) {
   var trava = LockService.getScriptLock(); if (!trava.tryLock(esperaMs || 2000)) return;
   try {
     try { filaEnviar_(); } catch (e) {}
-    var P = PropertiesService.getScriptProperties(), v = forcar === true ? '' : (P.getProperty('V') || '');
-    var d = chamar_('get', v ? '&v=' + encodeURIComponent(v) : '');
-    if (d.igual) return;
-    (d.pautas || []).forEach(function (p) { aplicarPauta_(p, d.pautaCab); });
-    aplicarMono_(d.mono);
-    aplicarControles_(d.controles);
-    P.setProperty('V', d.v);
+    var P = PropertiesService.getScriptProperties();
+    for (var volta = 0; volta < 3; volta++) {
+      var inicio = Date.now(), v = forcar === true && !volta ? '' : (P.getProperty('V') || '');
+      var d = chamar_('get', v ? '&v=' + encodeURIComponent(v) : '');
+      if (!d.igual) {
+        (d.pautas || []).forEach(function (p) { aplicarPauta_(p, d.pautaCab); });
+        aplicarMono_(d.mono);
+        aplicarControles_(d.controles);
+        P.setProperty('V', d.v);
+      }
+      /* aviso do app chegou durante esta volta: repete (o repositório pode ter mudado de novo) */
+      if (Number(P.getProperty('AVISO') || 0) <= inicio) break;
+    }
   } finally { trava.releaseLock(); }
 }
 

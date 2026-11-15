@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     const requests = pubs.map(s => L.lerJson('acervo/sessoes/' + s.date + '.json').then(x => x.dados).catch(() => { avisosFontes.push('Pauta ' + s.date + ' indisponível'); return null; }));
     // Monocráticas e diligências são lidas em paralelo apenas para o Início.
     const adicionais = detalhar ? Promise.all([
-      FICHA.lerOp().then(x => x.doc).catch(() => { avisosFontes.push('Monocráticas e urgências indisponíveis'); return null; }),
+      FICHA.lerOpLeitura().then(x => x.doc).catch(() => { avisosFontes.push('Monocráticas e urgências indisponíveis'); return null; }),
       L.lerJson('apoio/equipe-pendencias.json').then(x => x.dados).catch(e => { if (e.status !== 404) avisosFontes.push('Diligências indisponíveis'); return { registros: [] }; })
     ]) : Promise.resolve([null, null]);
     const [docs, extra] = await Promise.all([Promise.all(requests), adicionais]);

@@ -29,6 +29,14 @@ async function fonteDe(cnj) {
   return FT[dg(cnj)] || null;
 }
 async function lerOp() { const { txt, sha } = await L.lerGrande(OP); return { doc: JSON.parse(txt), sha }; }
+/* só para consulta: o mesmo objeto é reaproveitado enquanto o arquivo não muda; NÃO alterar o doc devolvido
+   (gravações usam lerOp, que interpreta uma cópia própria) */
+let OPL = null;
+async function lerOpLeitura() {
+  const { txt, sha } = await L.lerGrande(OP);
+  if (!OPL || OPL.sha !== sha) OPL = { sha, doc: JSON.parse(txt) };
+  return { doc: OPL.doc, sha };
+}
 function registro(doc, cnj, F, criar) {
   const k = dg(cnj); let r = (doc.registros || []).find(x => dg(x.processo) === k);
   if (!r && criar) {
@@ -225,7 +233,7 @@ module.exports = async (req, res, u) => {
     if (req.method === 'GET') {
       const cnj = String(req.query.ficha || '');
       if (dg(cnj).length !== 20) return res.status(200).json({ ficha: F });
-      const [{ doc }, fonte] = await Promise.all([lerOp(), fonteDe(cnj)]);
+      const [{ doc }, fonte] = await Promise.all([lerOpLeitura(), fonteDe(cnj)]);
       /* Controles especiais: o registro do operacional diz o que já foi registrado; as listas do acervo dizem se o processo entra na meta, no sobrestamento ou nos casos sensíveis */
       const naLista = mod => require(mod).base().then(B => (Array.isArray(B) ? B : B.lista).find(x => dg(x.cnj) === dg(cnj)) || null).catch(() => null);
       const [bMeta, bSobr, bSens] = await Promise.all([naLista('./_metas'), naLista('./_sobr'), naLista('./_sens')]);
@@ -268,6 +276,7 @@ module.exports.gravar = gravar;
 module.exports.paraCtl = paraCtl;
 module.exports.cartaoDaFicha = cartaoDaFicha;
 module.exports.lerOp = lerOp;
+module.exports.lerOpLeitura = lerOpLeitura;
 module.exports.ativos = ativos;
 module.exports.doCartao = doCartao;
 module.exports.paraCartao = paraCartao;

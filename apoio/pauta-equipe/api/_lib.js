@@ -74,12 +74,17 @@ async function acessos(usuario) {
   const editor = tem(P.editor), avancado = editor || tem(P.avancado);
   return { perfil: editor ? 'editor' : avancado ? 'avancado' : 'equipe', avancado, editor };
 }
-/* arquivos grandes (mais de 1 MB) vêm pelo blob */
+/* arquivos grandes (mais de 1 MB) vêm pelo blob. O texto fica guardado nesta instância do servidor e só é baixado
+   de novo quando o arquivo muda no GitHub (a conferência do sha é uma consulta leve). */
+const GRANDE = new Map();
 async function lerGrande(rel) {
-  const o = await gh('/contents/' + rel + '?ref=' + RAMO);
+  const o = await gh('/contents/' + rel + '?ref=' + RAMO), c = GRANDE.get(rel);
+  if (c && c.sha === o.sha) return { txt: c.txt, sha: o.sha };
   let b64 = o.content && o.encoding === 'base64' ? o.content : '';
   if (!b64) b64 = (await gh('/git/blobs/' + o.sha)).content;
-  return { txt: Buffer.from(b64, 'base64').toString('utf8'), sha: o.sha };
+  const txt = Buffer.from(b64, 'base64').toString('utf8');
+  GRANDE.set(rel, { sha: o.sha, txt });
+  return { txt, sha: o.sha };
 }
 /* um commit com vários arquivos (Git Data API) */
 /* commit de vários arquivos; se um arquivo traz "sha" (o lido antes), confere que ainda é o mesmo no commit de base: se mudou, erro 409 para nova tentativa.
