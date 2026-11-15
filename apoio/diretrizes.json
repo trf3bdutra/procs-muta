@@ -119,9 +119,9 @@
    "id": "red-alv-10",
    "tipo": "alerta",
    "escopo": "voto",
-   "padrao": "\\bID'?s\\b(?=\\s|\\))",
+   "padrao": "\\bIDs\\b",
    "flags": "g",
-   "mensagem": "uniformização: use “IDs” (sem apóstrofo)"
+   "mensagem": "uniformização: use “ID’s”"
   },
   {
    "id": "red-alv-11",
@@ -154,6 +154,14 @@
    "padrao": "\\[PREENCHER[^\\]]*\\]",
    "flags": "g",
    "mensagem": "marcador de preenchimento não substituído"
+  },
+  {
+   "id": "red-alv-15",
+   "tipo": "alerta",
+   "escopo": "voto",
+   "padrao": "Senhores Desembargadores,\\s*\\n\\s*[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]",
+   "flags": "g",
+   "mensagem": "após o vocativo, o primeiro parágrafo inicia com minúscula"
   },
   {
    "id": "red-con-01",
@@ -727,8 +735,8 @@
    "regra": "R17",
    "grupo": "D. Frase e vocabulário",
    "titulo": "Uniformizar as formas oscilantes",
-   "preferir": "Neste (sentido, contexto); Além disso; Em casos que tais; IDs; (g.n.).",
-   "evitar": "Nesse · Além disto · ID's · (g. n.)",
+   "preferir": "Neste (sentido, contexto); Além disso; Em casos que tais; ID’s; (g.n.).",
+   "evitar": "Nesse · Além disto · IDs · (g. n.)",
    "base": "Diretrizes de minuta no padrão Carlos Muta (PDF, 12/10/2026)"
   },
   {
@@ -862,6 +870,16 @@
    "base": "Diretrizes de minuta no padrão Carlos Muta (PDF, 12/10/2026)"
   },
   {
+   "id": "red-dir-31",
+   "tipo": "preferencia",
+   "regra": "R31",
+   "grupo": "A. Estrutura",
+   "titulo": "Primeiro parágrafo após o vocativo em minúscula",
+   "preferir": "Após “Senhores Desembargadores,”, o primeiro parágrafo inicia com letra minúscula.",
+   "evitar": "Iniciar com maiúscula o parágrafo seguinte ao vocativo.",
+   "base": "Orientação do gabinete (15/11/2026)"
+  },
+  {
    "id": "red-pre-01",
    "tipo": "preferencia",
    "preferir": "União",
@@ -930,8 +948,8 @@
   {
    "id": "red-pre-12",
    "tipo": "preferencia",
-   "preferir": "IDs",
-   "evitar": "ID's"
+   "preferir": "ID’s",
+   "evitar": "IDs"
   },
   {
    "id": "red-pre-13",

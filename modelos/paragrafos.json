@@ -969,7 +969,15 @@
    "nivelTema": "Fixação",
    "nivelEspecificidade": "Padrão",
    "nivelCategoria": "Encerramento",
-   "nivelSubsecao": "Honorários"
+   "nivelSubsecao": "Honorários",
+   "vinculos": [
+    {
+     "parte": "paragrafo",
+     "ref": "hon.ajg",
+     "rotulo": "Se houver gratuidade de justiça",
+     "opcional": true
+    }
+   ]
   },
   {
    "id": "hon.majorar",
@@ -985,7 +993,27 @@
    "nivelTema": "Majoração recursal",
    "nivelEspecificidade": "Padrão",
    "nivelCategoria": "Encerramento",
-   "nivelSubsecao": "Honorários"
+   "nivelSubsecao": "Honorários",
+   "vinculos": [
+    {
+     "parte": "ementa",
+     "rotulo": "Item do dispositivo",
+     "texto": "Apelação desprovida, honorários recursais em acréscimo ao fixado na origem.",
+     "opcional": false
+    },
+    {
+     "parte": "ementa",
+     "rotulo": "Cabeçalho",
+     "texto": "… APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.",
+     "opcional": true
+    },
+    {
+     "parte": "paragrafo",
+     "ref": "hon.ajg",
+     "rotulo": "Se houver gratuidade de justiça",
+     "opcional": true
+    }
+   ]
   },
   {
    "id": "hon.manter",
@@ -1026,7 +1054,15 @@
    "nivelTema": "Redistribuição da sucumbência",
    "nivelEspecificidade": "Padrão",
    "nivelCategoria": "Encerramento",
-   "nivelSubsecao": "Honorários"
+   "nivelSubsecao": "Honorários",
+   "vinculos": [
+    {
+     "parte": "paragrafo",
+     "ref": "hon.ajg",
+     "rotulo": "Se houver gratuidade de justiça",
+     "opcional": true
+    }
+   ]
   },
   {
    "id": "hon.sem",

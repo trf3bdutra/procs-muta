@@ -1,0 +1,1375 @@
+{
+ "schema": "gabcmt.referencias.rapidas",
+ "versao": "1.0.0",
+ "atualizadoEm": "2026-11-15T00:00:00Z",
+ "descricao": "Referências rápidas exibidas ao lado dos modelos no Vade Mecum: vias recursais, assuntos recorrentes, requisitos de admissibilidade, léxico recursal, artigos-chave do Regimento e Seções do TRF3.",
+ "origem": "Conteúdo copiado da Central de Comando · GABCMT em 15/11/2026 e mantido no procs-muta, sem vínculo com a Central.",
+ "aviso": "Uso interno do gabinete. Conferir redação, vigência e modulação antes de minutar.",
+ "familias": {
+  "civel": {
+   "n": "Cíveis",
+   "s": "Do 1º Grau ao Tribunal"
+  },
+  "interno": {
+   "n": "Internos",
+   "s": "Dentro do Tribunal"
+  },
+  "exc": {
+   "n": "Excepcionais",
+   "s": "Rumo a STJ e STF"
+  }
+ },
+ "vias": [
+  {
+   "id": "apc",
+   "fam": "civel",
+   "nome": "Apelação Cível",
+   "prazo": "15 dias úteis (contrarrazões: 15)",
+   "contra": "Sentença cível do 1º Grau",
+   "orgao": "TRgMS / Turma",
+   "sust": "Cabível — 15 minutos",
+   "base": "CPC, arts. 1.009 a 1.014 · RITRF3, art. 226",
+   "ess": [
+    "Interposta no juízo de origem, que colhe as contrarrazões e remete os autos sem juízo de admissibilidade (art. 1.010, §3º).",
+    "Efeito suspensivo como regra; nas hipóteses do art. 1.012, §1º, o pedido de efeito suspensivo dirige-se ao Tribunal (§3º).",
+    "Parecer do MPF, quando cabível: 30 dias.",
+    "O Relator pode decidir monocraticamente (art. 932) ou levar o feito ao colegiado.",
+    "Contra indeferimento da inicial, improcedência liminar ou sentença sem mérito, o juiz pode retratar-se em 5 dias (arts. 331, 332, §3º, e 485, §7º); retratando-se, a apelação não sobe."
+   ],
+   "atn": "Composição ampliada (art. 942). Na apelação, basta o resultado não unânime para que o julgamento prossiga com mais dois julgadores; a exigência de reforma vale para o agravo de instrumento e a rescisória.",
+   "minuta": [
+    "Monocrática (art. 932): pretensão contrária ou alinhada a súmula, repetitivo, IRDR ou IAC; recurso inadmissível ou prejudicado.",
+    "Colegiado: minutar o tríptico — Relatório, Voto e Ementa."
+   ]
+  },
+  {
+   "id": "rn",
+   "fam": "civel",
+   "nome": "Remessa Necessária",
+   "prazo": "Sem prazo — sobe de ofício",
+   "contra": "Sentença contrária à Fazenda Pública ou que acolhe embargos à execução fiscal",
+   "orgao": "TRgMS / Turma",
+   "sust": "Não prevista no art. 937 (remessa autônoma); com apelação, segue a desta",
+   "base": "CPC, art. 496 · RITRF3, art. 230 · Súmulas 45 e 253/STJ",
+   "ess": [
+    "Não é recurso: é condição de eficácia da sentença, em proteção ao interesse público e ao patrimônio da Fazenda.",
+    "Alcança sentenças contra União, Estados, DF, Municípios e respectivas autarquias e fundações, e as que julgam procedentes embargos à execução fiscal.",
+    "Dispensa por alçada — 1.000 s.m. (União e entes federais) · 500 (Estados, DF, capitais) · 100 (demais Municípios) — ou por sentença fundada em precedente qualificado (§§3º e 4º).",
+    "Sem apelação, o juiz ordena a subida; se não o fizer, o Presidente do Tribunal avoca (§1º).",
+    "Sobe como remessa autônoma ou em conjunto com a apelação voluntária."
+   ],
+   "atn": "Limites. É vedado agravar a condenação imposta à Fazenda (Súmula 45/STJ); o Relator pode decidir monocraticamente (Súmula 253/STJ); a técnica do art. 942 não se aplica (art. 942, §4º, II).",
+   "minuta": [
+    "Monocrática quando presente precedente qualificado; do contrário, Relatório, Voto e Ementa.",
+    "Percurso idêntico ao da apelação: Preparar relatório e voto → Aptos para julgamento → [Sessão] Aguardando a sessão."
+   ]
+  },
+  {
+   "id": "ai",
+   "fam": "civel",
+   "nome": "Agravo de Instrumento",
+   "prazo": "15 dias úteis (resposta: 15)",
+   "contra": "Interlocutória de 1º Grau do art. 1.015 (taxatividade mitigada — Tema 988/STJ)",
+   "orgao": "Relator / Turma",
+   "sust": "Só contra tutelas de urgência ou evidência",
+   "base": "CPC, arts. 1.015 a 1.020 · RITRF3, arts. 33, XV, e 231",
+   "ess": [
+    "Dirigido diretamente ao Tribunal; em autos eletrônicos, dispensa as peças obrigatórias (art. 1.017, §5º).",
+    "Cabe, entre outras, contra decisões sobre tutela provisória, mérito do processo, rejeição de convenção de arbitragem e as proferidas em liquidação, cumprimento de sentença e execução (art. 1.015, p. ú.).",
+    "O Relator pode atribuir efeito suspensivo ou antecipar a tutela recursal (art. 1.019, I · RITRF3, art. 33, XV).",
+    "Agravado intimado para resposta em 15 dias; MPF, quando cabível, em 15 dias (art. 1.019, II e III).",
+    "Preferência de julgamento sobre a apelação do mesmo processo.",
+    "Se o juiz comunicar que reformou integralmente a decisão agravada, o Relator considera o agravo prejudicado (art. 1.018, §1º)."
+   ],
+   "atn": "Art. 942 no agravo. A composição ampliada só incide quando houver reforma de decisão que julgar parcialmente o mérito (art. 942, §3º, II).",
+   "minuta": []
+  },
+  {
+   "id": "ades",
+   "fam": "civel",
+   "nome": "Recurso Adesivo",
+   "prazo": "15 dias úteis — o mesmo prazo das contrarrazões",
+   "contra": "A mesma decisão do recurso principal, havendo sucumbência recíproca",
+   "orgao": "O mesmo do recurso principal",
+   "sust": "Segue a do recurso principal",
+   "base": "CPC, art. 997, §§1º e 2º · art. 1.010, §2º · RITRF3, art. 64, I",
+   "ess": [
+    "Não é espécie nova de recurso: é forma subordinada de interpor apelação, REsp ou RE (CPC, art. 997, §2º, II). Não cabe em agravo de instrumento, agravo interno, embargos de declaração ou recurso ordinário.",
+    "Pressupõe sucumbência recíproca: autor e réu vencidos em parte (art. 997, §1º).",
+    "Dirigido ao órgão perante o qual se interpôs o recurso principal, no prazo das contrarrazões (art. 997, §2º, I) — com as dobras legais da Fazenda, do MP e da Defensoria.",
+    "Exige os mesmos requisitos do recurso independente, inclusive preparo próprio, salvo isenção ou gratuidade (art. 997, §2º).",
+    "Interposto o adesivo, o recorrente principal é intimado para contrarrazões em 15 dias (art. 1.010, §2º)."
+   ],
+   "atn": "Subordinação. O adesivo não é conhecido se o principal for inadmitido ou se o recorrente principal desistir (art. 997, §2º, III). Se o principal for conhecido e desprovido no mérito, o adesivo é julgado normalmente. Preclusão: quem já apelou de forma autônoma não pode depois aderir.",
+   "minuta": [
+    "Relatório e voto tratam conjuntamente do mérito dos dois recursos.",
+    "Honorários recursais: avaliar cada recurso pelo seu resultado (art. 85, §11)."
+   ]
+  },
+  {
+   "id": "ain",
+   "fam": "interno",
+   "nome": "Agravo Interno",
+   "prazo": "15 dias úteis (contrarrazões: 15)",
+   "contra": "Decisão monocrática de Relator, Presidente ou Vice-Presidente",
+   "orgao": "Colegiado: Turma, Seção ou Órgão Especial",
+   "sust": "Só na hipótese do art. 937, §3º",
+   "base": "CPC, art. 1.021 · RITRF3, art. 247",
+   "ess": [
+    "Garante a colegialidade: leva ao órgão competente a decisão tomada individualmente.",
+    "Dirigido ao prolator, que pode retratar-se; mantida a decisão, o feito vai à mesa, sem pauta convencional.",
+    "O agravado responde em 15 dias (art. 1.021, §2º); é vedado limitar-se a reproduzir os fundamentos da decisão agravada (§3º).",
+    "Empate: prevalece a decisão agravada (RITRF3, art. 251, §1º).",
+    "Sustentação oral só contra decisão do Relator que extinga ação rescisória, mandado de segurança ou reclamação (CPC, art. 937, §3º)."
+   ],
+   "atn": "Multa. Agravo declarado manifestamente inadmissível ou improcedente em votação unânime sujeita o agravante a multa de 1% a 5% do valor da causa (art. 1.021, §4º).",
+   "minuta": []
+  },
+  {
+   "id": "agreg",
+   "fam": "interno",
+   "nome": "Agravo Regimental",
+   "prazo": "5 dias (prazo regimental)",
+   "contra": "Decisões em ritos regimentais específicos e atos da Presidência com impacto processual",
+   "orgao": "Colegiado, em mesa — em regra, Órgão Especial",
+   "sust": "Não",
+   "base": "RITRF3, arts. 250, 251, 279 e 356, §2º · Lei 8.437/1992, art. 4º · Lei 12.016/2009, art. 15",
+   "ess": [
+    "Instrumento dos ritos regimentais específicos: procedimentos que seguem o RITRF3, e não o fluxo ordinário do CPC.",
+    "Cabimento típico: decisão da Presidência em suspensão de liminar ou de segurança e em precatórios e RPVs (preterição, sequestro de verbas).",
+    "Prazo de 5 dias; o prolator pode retratar-se ou apresenta o feito em mesa, sem pauta, ao colegiado competente.",
+    "Empate: mantém-se a decisão agravada (art. 251, §1º).",
+    "Atos de administração pura da Presidência (férias, lotação, concurso) não desafiam agravo regimental, mas recurso administrativo."
+   ],
+   "atn": "Nomenclatura. Petição rotulada “agravo regimental” contra monocrática cível de Relator deve ser processada como agravo interno — conferir a tempestividade pelos 15 dias úteis do CPC (art. 1.021).",
+   "minuta": []
+  },
+  {
+   "id": "ed",
+   "fam": "interno",
+   "nome": "Embargos de Declaração",
+   "prazo": "5 dias úteis (contrarrazões: 5)",
+   "contra": "Qualquer decisão judicial",
+   "orgao": "O próprio prolator",
+   "sust": "Não",
+   "base": "CPC, arts. 1.022 a 1.026 · RITRF3, arts. 262 a 264",
+   "ess": [
+    "Corrigem obscuridade, contradição, omissão ou erro material.",
+    "Interrompem o prazo para a interposição de outros recursos (art. 1.026).",
+    "Com possível efeito infringente, intima-se o embargado para manifestar-se em 5 dias (art. 1.023, §2º).",
+    "Contra acórdão, julgados em mesa na sessão subsequente."
+   ],
+   "atn": "Protelatórios. Multa de até 2% do valor da causa; na reiteração, até 10%, condicionando-se novos recursos ao depósito (art. 1.026, §§2º e 3º · RITRF3, art. 264, p. ú.).",
+   "minuta": []
+  },
+  {
+   "id": "resp",
+   "fam": "exc",
+   "nome": "Recurso Especial",
+   "prazo": "15 dias úteis",
+   "contra": "Acórdão — contrariedade a lei federal ou divergência jurisprudencial",
+   "orgao": "STJ (admissibilidade na Vice-Presidência)",
+   "sust": "No STJ, conforme seu regimento",
+   "base": "CF, art. 105, III · CPC, arts. 1.029 a 1.041",
+   "ess": [
+    "Interposto perante a Vice-Presidência, em petição distinta do RE.",
+    "Exige prequestionamento; não admite reexame de fatos e provas nem de cláusulas contratuais (Súmulas 7 e 5/STJ).",
+    "Admitido, segue ao STJ pelo NURT."
+   ],
+   "atn": "A bifurcação. Negado com base em tema repetitivo → agravo interno ao Órgão Especial (art. 1.030, §2º). Inadmissão comum → agravo do art. 1.042.",
+   "minuta": []
+  },
+  {
+   "id": "re",
+   "fam": "exc",
+   "nome": "Recurso Extraordinário",
+   "prazo": "15 dias úteis",
+   "contra": "Acórdão — contrariedade à Constituição",
+   "orgao": "STF (admissibilidade na Vice-Presidência)",
+   "sust": "No STF, conforme seu regimento",
+   "base": "CF, art. 102, III e §3º · CPC, arts. 1.029 a 1.035",
+   "ess": [
+    "Exige demonstração de repercussão geral (CPC, art. 1.035, §2º).",
+    "Prequestionamento indispensável (Súmulas 282 e 356/STF); vedado o reexame de provas (Súmula 279/STF).",
+    "Interposto na Vice-Presidência, em petição distinta do REsp."
+   ],
+   "atn": "A bifurcação. Negado com base em tema de repercussão geral → agravo interno ao Órgão Especial. Inadmissão comum → agravo do art. 1.042.",
+   "minuta": []
+  },
+  {
+   "id": "aresp",
+   "fam": "exc",
+   "nome": "Agravo em REsp / RE",
+   "prazo": "15 dias úteis (resposta: 15)",
+   "contra": "Inadmissão de REsp ou RE fora das hipóteses de tese vinculante",
+   "orgao": "STJ / STF",
+   "sust": "Não",
+   "base": "CPC, art. 1.042",
+   "ess": [
+    "Protocolado na Vice-Presidência, mas dirigido ao Tribunal Superior; independe de custas.",
+    "O agravado responde em 15 dias; não havendo retratação, os autos sobem (art. 1.042, §§3º e 4º).",
+    "Interpostos REsp e RE, cabe um agravo para cada decisão de inadmissão."
+   ],
+   "atn": "Não confundir. Contra negativa fundada em repetitivo ou repercussão geral, o cabível é o agravo interno ao Órgão Especial — manejar o art. 1.042 é erro grosseiro.",
+   "minuta": []
+  }
+ ],
+ "assuntos": {
+  "grupos": [
+   {
+    "id": "exec",
+    "t": "Execuções",
+    "p": "A Seção segue o crédito executado: tributo → 2ª; contribuição previdenciária ou FGTS → 1ª; benefício previdenciário → 3ª."
+   },
+   {
+    "id": "prev",
+    "t": "Previdenciários",
+    "p": "3ª Seção. O grosso do acervo — muitas vezes vindo da competência delegada da Justiça Estadual."
+   },
+   {
+    "id": "multa",
+    "t": "Multas",
+    "p": "Em regra, 2ª Seção (nulidade de atos administrativos; conselhos profissionais)."
+   },
+   {
+    "id": "trib",
+    "t": "Tributários",
+    "p": "2ª Seção — salvo as contribuições ao custeio da Previdência, ao FUNRURAL e ao FGTS, que são da 1ª."
+   },
+   {
+    "id": "adm",
+    "t": "Administrativos",
+    "p": "Divididos entre a 1ª Seção (servidores, desapropriações, registros públicos, posse e domínio) e a 2ª Seção (licitações, atos administrativos em geral, conselhos, ensino superior), conforme a relação jurídica."
+   },
+   {
+    "id": "reg",
+    "t": "Regionais e outros frequentes",
+    "p": "O perfil que justificou a Turma: terra, ambiente, saúde e servidores."
+   }
+  ],
+  "itens": [
+   {
+    "g": "exec",
+    "t": "Execução fiscal",
+    "sec": "conforme o crédito",
+    "d": "Cobrança da Dívida Ativa por CDA (Lei 6.830/1980).",
+    "pts": [
+     "Embargos em 30 dias, com garantia do juízo (LEF, art. 16, §1º).",
+     "Exceção de pré-executividade: só matéria conhecível de ofício e sem dilação probatória (Súm. 393/STJ).",
+     "Alçada (LEF, art. 34): até 50 ORTN (≈ R$ 328,27 em jan/2001, corrigidos — Tema 395/STJ), não cabe apelação, só embargos infringentes ao próprio juízo e ED. Conferir antes de conhecer."
+    ],
+    "tags": [
+     "Súm. 393/STJ",
+     "Tema 395/STJ"
+    ]
+   },
+   {
+    "g": "exec",
+    "t": "Prescrição intercorrente",
+    "sec": "conforme o crédito",
+    "d": "Extinção pela inércia na execução fiscal paralisada.",
+    "pts": [
+     "Sem bens ou devedor localizados: suspensão de 1 ano e, findo esse prazo, 5 anos de prescrição (LEF, art. 40 · Súm. 314/STJ).",
+     "A suspensão começa automaticamente com a ciência da Fazenda; a Fazenda deve ser ouvida antes do reconhecimento (Tema 566/STJ)."
+    ],
+    "tags": [
+     "Súm. 314/STJ",
+     "Tema 566/STJ"
+    ]
+   },
+   {
+    "g": "exec",
+    "t": "Redirecionamento ao sócio",
+    "sec": "conforme o crédito",
+    "d": "Inclusão do administrador no polo passivo da execução.",
+    "pts": [
+     "Dissolução irregular presume-se quando a empresa deixa de funcionar no domicílio fiscal sem comunicação (Súm. 435/STJ).",
+     "Responde o sócio com poderes de administração na data da dissolução irregular (Tema 981/STJ); não o que se retirou regularmente antes dela (Tema 962/STJ).",
+     "Fundamento: atos com excesso de poderes ou infração de lei, contrato ou estatuto (CTN, art. 135, III). O mero inadimplemento não basta.",
+     "Prescrição para redirecionar: 5 anos da citação da empresa, se o ilícito for anterior; se posterior, conta-se do ato inequívoco de frustração da cobrança — sempre com inércia da Fazenda demonstrada (Tema 444/STJ)."
+    ],
+    "tags": [
+     "Súm. 435/STJ",
+     "Temas 444, 962 e 981/STJ"
+    ]
+   },
+   {
+    "g": "exec",
+    "t": "Cumprimento de sentença contra a Fazenda",
+    "sec": "segue a matéria da ação",
+    "d": "Execução de título judicial contra União, INSS e autarquias (CPC, arts. 534 e 535).",
+    "pts": [
+     "Impugnação em 30 dias; pagamento por precatório ou RPV (até 60 salários-mínimos na esfera federal — Lei 10.259/2001, art. 17, §1º).",
+     "Juros entre a data dos cálculos e a requisição são devidos (Tema 96/STF). Desde a EC 113/2021, Selic como índice único; nos requisitórios federais, a EC 136/2025 passou a prever IPCA + 2% a.a., limitado à Selic.",
+     "Sem honorários no cumprimento não impugnado que enseje precatório (CPC, art. 85, §7º)."
+    ],
+    "tags": [
+     "Tema 96/STF",
+     "EC 113/2021"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Vias e competência",
+    "sec": "3ª Seção (benefícios) · 1ª (custeio)",
+    "d": "Onde nasce e para onde sobe a causa previdenciária.",
+    "pts": [
+     "3ª Seção: benefícios previdenciários e assistência social. 1ª Seção: contribuições ao custeio da Previdência, FUNRURAL e FGTS.",
+     "JEF (até 60 salários-mínimos — Lei 10.259/2001, art. 3º): recurso inominado em 10 dias às Turmas Recursais; uniformização pela TRU.",
+     "Vara Federal (acima de 60 salários-mínimos ou rito comum): apelação ao TRF3 — inclusive à TRgMS.",
+     "Competência delegada: juiz estadual, em comarca sem vara federal, com apelação ao TRF3 (CF, art. 109, §§3º e 4º)."
+    ],
+    "tags": [
+     "CF 109, §§3º e 4º",
+     "Lei 10.259/2001"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Mapa das demandas",
+    "sec": "3ª Seção",
+    "d": "As quatro grandes famílias de ações previdenciárias e assistenciais.",
+    "pts": [
+     "Incapacidade: auxílio por incapacidade temporária e aposentadoria por incapacidade permanente — dependem de perícia médica.",
+     "Aposentadorias: idade (urbana, rural ou híbrida), tempo de contribuição, especial, pessoa com deficiência e regras de transição da EC 103/2019 — prova por CNIS, PPP e LTCAT.",
+     "Pensões e auxílios: pensão por morte, auxílio-reclusão, salário-maternidade.",
+     "Assistencial: BPC/LOAS do idoso (65+) ou da pessoa com deficiência — estudo social e, se deficiência, perícia médica.",
+     "Revisões e restabelecimento: revisão do teto, da RMI, reafirmação da DER, restabelecimento de benefício cessado."
+    ],
+    "tags": [
+     "EC 103/2019"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Ferramentas do TRF3",
+    "sec": "apoio à instrução",
+    "d": "Sistemas usados na instrução e no cálculo das causas previdenciárias.",
+    "pts": [
+     "SISPERJUD: agendamento de perícias e entrega eletrônica de laudos nos benefícios por incapacidade.",
+     "Cálculos institucionais (CECALC / GACO): contagem de tempo, conversão de tempo especial e simulação de RMI — preferir as ferramentas oficiais às calculadoras privadas.",
+     "GERID / INSS Digital: consulta ao CNIS e ao histórico contributivo por convênio com a Dataprev."
+    ],
+    "tags": [
+     "conforme material do gabinete"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Recursos e pagamento",
+    "sec": "3ª Seção",
+    "d": "Da sentença ao requisitório.",
+    "pts": [
+     "Contra a sentença: apelação (15 dias) ao TRF3; nos JEFs, recurso inominado (10 dias) à Turma Recursal. Contra interlocutória de tutela: agravo de instrumento (15 dias).",
+     "Remessa necessária: dispensada abaixo de 1.000 salários-mínimos contra o INSS (CPC, art. 496, §3º, I) — o caso típico de atrasados e implantação de benefício.",
+     "Pagamento: RPV até 60 salários-mínimos, em 60 dias da entrega da requisição (Lei 10.259/2001, art. 17, §1º); acima disso, precatório."
+    ],
+    "tags": [
+     "CPC 496, §3º, I",
+     "Lei 10.259/2001, art. 17"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Requisitos gerais e consectários",
+    "sec": "3ª Seção",
+    "d": "O que vale para quase todo benefício.",
+    "pts": [
+     "Exige-se prévio requerimento administrativo (Tema 350/STF), com as exceções ali fixadas.",
+     "Decadência de 10 anos para revisar o ato de concessão (Lei 8.213/1991, art. 103 · Tema 313/STF).",
+     "Correção pelo INPC (Tema 905/STJ) e juros da poupança até a EC 113/2021; depois, Selic (nos requisitórios, ver a EC 136/2025). Honorários sobre as parcelas vencidas até a sentença (Súm. 111/STJ · Tema 1.105/STJ), nas faixas do CPC, art. 85, §3º.",
+     "Tutela revogada: devolução dos valores, com desconto limitado a 30% do benefício (Tema 692/STJ)."
+    ],
+    "tags": [
+     "Tema 350/STF",
+     "Tema 905/STJ",
+     "Súm. 111/STJ"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Tempo especial",
+    "sec": "3ª Seção",
+    "d": "Reconhecimento de atividade insalubre para aposentadoria especial ou conversão.",
+    "pts": [
+     "Prova por PPP e laudo técnico. Ruído: acima de 80 dB até 5/3/1997; 90 dB até 18/11/2003; 85 dB depois — sem retroação (Tema 694/STJ).",
+     "EPI eficaz afasta a especialidade, salvo para ruído (Tema 555/STF).",
+     "Conversão de tempo especial em comum só até a EC 103/2019."
+    ],
+    "tags": [
+     "Tema 555/STF",
+     "Tema 694/STJ"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Rural e segurado especial",
+    "sec": "3ª Seção",
+    "d": "Aposentadoria por idade rural e cômputo de tempo rural.",
+    "pts": [
+     "Exige início de prova material; prova só testemunhal não basta (Súm. 149/STJ).",
+     "Testemunhos firmes podem estender o período para antes do documento mais antigo (Súm. 577/STJ)."
+    ],
+    "tags": [
+     "Súm. 149/STJ",
+     "Súm. 577/STJ"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Benefícios por incapacidade",
+    "sec": "3ª Seção",
+    "d": "Auxílio por incapacidade temporária e aposentadoria por incapacidade permanente.",
+    "pts": [
+     "Três requisitos: incapacidade (perícia), qualidade de segurado e carência — salvo as dispensas legais.",
+     "Sem requerimento administrativo prévio, o benefício judicial começa na citação (Súm. 576/STJ)."
+    ],
+    "tags": [
+     "Súm. 576/STJ"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "BPC/LOAS",
+    "sec": "3ª Seção",
+    "d": "Benefício assistencial à pessoa com deficiência ou idosa em situação de miserabilidade (Lei 8.742/1993, art. 20).",
+    "pts": [
+     "A renda per capita de 1/4 do salário-mínimo não é critério absoluto: a miserabilidade pode ser provada por outros meios (Tema 27/STF · Tema 185/STJ).",
+     "Estudo social e perícia médica costumam decidir a causa."
+    ],
+    "tags": [
+     "Tema 27/STF",
+     "Tema 185/STJ"
+    ]
+   },
+   {
+    "g": "prev",
+    "t": "Pensão por morte e revisões",
+    "sec": "3ª Seção",
+    "d": "Benefícios derivados e recálculos.",
+    "pts": [
+     "Pensão: qualidade de segurado do instituidor, dependência e duração conforme a idade do dependente (Lei 13.135/2015).",
+     "“Revisão da vida toda”: afastada pelo STF no julgamento das ADIs 2.110 e 2.111 (2024)."
+    ],
+    "tags": [
+     "ADIs 2.110 e 2.111"
+    ]
+   },
+   {
+    "g": "multa",
+    "t": "Multas ambientais",
+    "sec": "2ª Seção",
+    "d": "Autos de infração do IBAMA e do ICMBio (Lei 9.605/1998 · Dec. 6.514/2008).",
+    "pts": [
+     "Prescrição punitiva de 5 anos; intercorrente de 3 anos no processo administrativo paralisado (Lei 9.873/1999, art. 1º e §1º · Súm. 467/STJ).",
+     "Execução: 5 anos a partir da constituição definitiva (art. 1º-A).",
+     "A responsabilidade administrativa ambiental é subjetiva (STJ, EREsp 1.318.051); a civil é objetiva."
+    ],
+    "tags": [
+     "Lei 9.873/1999",
+     "Súm. 467/STJ"
+    ]
+   },
+   {
+    "g": "multa",
+    "t": "Conselhos profissionais",
+    "sec": "2ª Seção",
+    "d": "Anuidades e multas cobradas por conselhos de fiscalização (exceto OAB).",
+    "pts": [
+     "Anuidades têm natureza tributária: o valor exige lei (Tema 540/STF · Lei 12.514/2011).",
+     "Só se executa dívida de pelo menos 5 vezes o valor da anuidade (Lei 12.514/2011, art. 8º, red. Lei 14.195/2021)."
+    ],
+    "tags": [
+     "Tema 540/STF",
+     "Lei 12.514/2011"
+    ]
+   },
+   {
+    "g": "multa",
+    "t": "Trânsito, ANTT e agências",
+    "sec": "2ª Seção",
+    "d": "Multas de PRF, DNIT, ANTT, ANVISA, INMETRO e outras autarquias federais.",
+    "pts": [
+     "Trânsito: dupla notificação, da autuação e da penalidade (Súm. 312/STJ).",
+     "Prescrição da Lei 9.873/1999 para toda a Administração federal; controle de legalidade, motivação e proporcionalidade."
+    ],
+    "tags": [
+     "Súm. 312/STJ"
+    ]
+   },
+   {
+    "g": "multa",
+    "t": "Multa tributária",
+    "sec": "2ª Seção",
+    "d": "Limites constitucionais às penalidades fiscais (vedação ao confisco).",
+    "pts": [
+     "Multa moratória de 20% não é confiscatória (Tema 214/STF).",
+     "Multa punitiva qualificada limitada a 100% do tributo, podendo chegar a 150% na reincidência (Tema 863/STF)."
+    ],
+    "tags": [
+     "Tema 214/STF",
+     "Tema 863/STF"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "Vias e competência tributária",
+    "sec": "2ª Seção · 1ª (custeio)",
+    "d": "Quem julga e por onde chega a causa tributária.",
+    "pts": [
+     "2ª Seção (3ª, 4ª e 6ª Turmas): tributos em geral — IRPF/IRPJ, IPI, ITR, PIS/COFINS, CSLL, CIDE, taxas — e preços públicos (RITRF3, art. 10, §2º).",
+     "1ª Seção (1ª e 2ª Turmas): contribuições ao custeio da Previdência Social, FUNRURAL e FGTS (RITRF3, art. 10, §1º).",
+     "Duas vias: as ações do contribuinte (MS, anulatória, declaratória e repetição) e a execução fiscal promovida pela PGFN ou pelas autarquias (LEF)."
+    ],
+    "tags": [
+     "RITRF3, art. 10"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "Ações do contribuinte",
+    "sec": "2ª Seção (ou 1ª, se custeio)",
+    "d": "Mandado de segurança, anulatória e declaratória com repetição.",
+    "pts": [
+     "MS: direito líquido e certo, prova pré-constituída — certidão negativa ou positiva com efeitos de negativa, liberação de mercadorias, suspensão da exigibilidade. Sem honorários (Lei 12.016/2009, art. 25).",
+     "Anulatória: desconstitui lançamento ou auto de infração; costuma exigir perícia contábil. Suspende a exigibilidade com depósito integral e em dinheiro (CTN, art. 151, II · Súm. 112/STJ) ou com tutela provisória (CTN, art. 151, V).",
+     "Declaratória com repetição ou compensação: restituição por RPV ou precatório, ou compensação na Receita Federal após o trânsito (CTN, art. 170-A).",
+     "A LC 236/2026 ampliou o art. 151 do CTN: também suspendem a exigibilidade a transação, a mediação, a arbitragem tributária e o seguro-garantia ou fiança aceitos na execução fiscal."
+    ],
+    "tags": [
+     "CTN, art. 151",
+     "Súm. 112/STJ"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "Defesas na execução fiscal",
+    "sec": "conforme o crédito",
+    "d": "Embargos e exceção de pré-executividade, lado a lado.",
+    "pts": [
+     "Embargos: ação autônoma por dependência, com garantia do juízo (LEF, art. 16, §1º). Sentença de procedência contra a Fazenda sujeita-se à remessa necessária (CPC, art. 496, II), salvo as dispensas do art. 496, §§3º e 4º.",
+     "Exceção de pré-executividade: petição nos autos, sem garantia, só para matéria de ordem pública sem dilação probatória (Súm. 393/STJ) — prescrição, decadência, imunidade manifesta, vício formal da CDA, ilegitimidade flagrante.",
+     "Rejeitada a exceção: agravo de instrumento (CPC, art. 1.015, p. ú.). Acolhida com extinção da execução: apelação.",
+     "Alçada: execução de valor até 50 ORTN só admite embargos infringentes e de declaração (LEF, art. 34)."
+    ],
+    "tags": [
+     "LEF, art. 16",
+     "Súm. 393/STJ"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "Ferramentas da execução fiscal",
+    "sec": "apoio à instrução",
+    "d": "Pesquisa patrimonial e constrição nas Varas de Execução Fiscal.",
+    "pts": [
+     "SISBAJUD (ativos financeiros, inclusive a “teimosinha”), RENAJUD (veículos), CNIB (indisponibilidade de imóveis), SNIPER (patrimônio e grupos econômicos).",
+     "PSE Fiscal: programa do TRF3 para sanear o acervo suspenso pelo art. 40 da LEF e extinguir eletronicamente os feitos."
+    ],
+    "tags": [
+     "conforme material do gabinete"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "ICMS na base do PIS/COFINS",
+    "sec": "2ª Seção",
+    "d": "A “tese do século”.",
+    "pts": [
+     "O ICMS destacado não compõe a base de cálculo do PIS e da COFINS (Tema 69/STF), com efeitos a partir de 15/3/2017, ressalvadas as ações anteriores."
+    ],
+    "tags": [
+     "Tema 69/STF"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "Contribuição patronal sobre verbas",
+    "sec": "1ª Seção",
+    "d": "Incidência sobre a folha (contribuições ao custeio da Previdência).",
+    "pts": [
+     "Incide: terço constitucional de férias (Tema 985/STF, com modulação).",
+     "Não incide: salário-maternidade (Tema 72/STF), aviso prévio indenizado (Tema 478/STJ), 15 primeiros dias de afastamento por doença (Tema 738/STJ)."
+    ],
+    "tags": [
+     "Tema 985/STF",
+     "Tema 72/STF"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "IRPF — moléstia grave",
+    "sec": "2ª Seção",
+    "d": "Isenção dos proventos de aposentadoria (Lei 7.713/1988, art. 6º, XIV).",
+    "pts": [
+     "Dispensa laudo oficial, se provada por outros meios (Súm. 598/STJ), e não exige sintomas contemporâneos (Súm. 627/STJ).",
+     "Não alcança rendimentos de quem continua em atividade (Tema 1.037/STJ)."
+    ],
+    "tags": [
+     "Súm. 598 e 627/STJ"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "Repetição e compensação",
+    "sec": "2ª Seção (ou 1ª, se contribuição previdenciária)",
+    "d": "Devolução do tributo pago indevidamente.",
+    "pts": [
+     "Prazo de 5 anos (LC 118/2005 · Tema 4/STF).",
+     "Compensação só após o trânsito (CTN, art. 170-A); o MS serve para declarar o direito (Súm. 213/STJ).",
+     "Consectários: Selic desde o pagamento indevido, vedada a cumulação com outro índice (Lei 9.250/1995, art. 39, §4º · Tema 905/STJ, item 3.3).",
+     "No gabinete, matéria campeã de retornos da Vice-Presidência para juízo de retratação (CPC, art. 1.030, II).",
+     "O contribuinte pode optar entre precatório e compensação (Súm. 461/STJ)."
+    ],
+    "tags": [
+     "Súm. 213/STJ",
+     "Súm. 461/STJ"
+    ]
+   },
+   {
+    "g": "trib",
+    "t": "FUNRURAL",
+    "sec": "1ª Seção",
+    "d": "Contribuição do empregador rural pessoa física sobre a receita da comercialização.",
+    "pts": [
+     "Constitucional após a Lei 10.256/2001 (Tema 669/STF)."
+    ],
+    "tags": [
+     "Tema 669/STF"
+    ]
+   },
+   {
+    "g": "adm",
+    "t": "Servidores civis e militares",
+    "sec": "1ª Seção",
+    "d": "Relação funcional com a União, autarquias e Forças Armadas.",
+    "pts": [
+     "Concursos públicos federais: anulação de questões, vagas PCD, heteroidentificação, posse sub judice.",
+     "Direitos funcionais da Lei 8.112/1990: remoção, redistribuição, ajuda de custo, adicional de insalubridade, VPNI.",
+     "Anulação de sanções disciplinares (demissão, cassação de aposentadoria); reajustes, reformas e pensões militares.",
+     "Recursos típicos: agravo de instrumento contra liminares de posse ou remoção; apelação contra a sentença. Vedado ao Judiciário aumentar vencimentos por isonomia (SV 37)."
+    ],
+    "tags": [
+     "Lei 8.112/1990",
+     "SV 37"
+    ]
+   },
+   {
+    "g": "adm",
+    "t": "Licitações e contratos",
+    "sec": "2ª Seção",
+    "d": "Certames e contratos da Administração federal (Lei 14.133/2021).",
+    "pts": [
+     "Anulação de certames, reequilíbrio econômico-financeiro, penalidades contratuais — multa, impedimento, declaração de inidoneidade.",
+     "Na esfera administrativa, recurso em 3 dias úteis contra os atos da licitação (Lei 14.133/2021, art. 165)."
+    ],
+    "tags": [
+     "Lei 14.133/2021"
+    ]
+   },
+   {
+    "g": "adm",
+    "t": "Atos administrativos, fiscalização e ensino",
+    "sec": "2ª Seção",
+    "d": "Validade de atos da Administração, autos de infração e ensino superior.",
+    "pts": [
+     "Nulidade de atos administrativos em geral; autos de infração e multas de IBAMA, ANVISA, ANTT, CADE (ver o grupo Multas).",
+     "Conselhos de classe: inscrição, exercício profissional, anuidades.",
+     "Ensino superior: vagas, FIES, revalidação de diplomas, atos de reitores de universidades federais."
+    ],
+    "tags": [
+     "RITRF3, art. 10, §2º"
+    ]
+   },
+   {
+    "g": "adm",
+    "t": "Improbidade administrativa",
+    "sec": "2ª Seção — fora da TRgMS",
+    "d": "Ações do MPF ou do ente público contra agentes e terceiros (Lei 8.429/1992, alterada pela Lei 14.230/2021).",
+    "pts": [
+     "Matéria da 2ª Seção do TRF3, mas excluída da competência da Turma Regional de MS (Res. PRES 33/2025, art. 1º). Feito de improbidade que chegue ao gabinete: verificar a redistribuição."
+    ],
+    "tags": [
+     "Lei 14.230/2021",
+     "Res. PRES 33/2025"
+    ]
+   },
+   {
+    "g": "reg",
+    "t": "Terras indígenas e conflitos fundiários",
+    "sec": "conforme o pedido",
+    "d": "Demarcações, possessórias e comunidades tradicionais — razão de ser da Turma.",
+    "pts": [
+     "Competência federal (CF, art. 109, XI); atuação da FUNAI e do MPF.",
+     "O STF rejeitou o marco temporal (Tema 1.031/STF, 2023); a Lei 14.701/2023 está sob exame do STF — conferir o estado atual.",
+     "Posse e domínio → 1ª Seção; validade de ato administrativo → 2ª. Verificar a Seção pela natureza do pedido."
+    ],
+    "tags": [
+     "Tema 1.031/STF",
+     "Lei 14.701/2023"
+    ]
+   },
+   {
+    "g": "reg",
+    "t": "Desapropriação e reforma agrária",
+    "sec": "1ª Seção",
+    "d": "Desapropriações e apossamentos administrativos (LC 76/1993).",
+    "pts": [
+     "Juros compensatórios de 6% ao ano (ADI 2.332).",
+     "Atenção ao valor da indenização e à prova pericial."
+    ],
+    "tags": [
+     "ADI 2.332"
+    ]
+   },
+   {
+    "g": "reg",
+    "t": "Dano ambiental (cível)",
+    "sec": "conforme o pedido",
+    "d": "Reparação civil do dano ao meio ambiente.",
+    "pts": [
+     "Responsabilidade objetiva e obrigação propter rem: o adquirente responde (Súm. 623/STJ).",
+     "A pretensão de reparação é imprescritível (Tema 999/STF)."
+    ],
+    "tags": [
+     "Súm. 623/STJ",
+     "Tema 999/STF"
+    ]
+   },
+   {
+    "g": "reg",
+    "t": "Saúde e medicamentos",
+    "sec": "verificar",
+    "d": "Fornecimento de medicamentos e tratamentos pelo SUS.",
+    "pts": [
+     "Observar as Súmulas Vinculantes 60 e 61 (Temas 1.234 e 6 do STF).",
+     "Na SJMS, o 4º Núcleo de Justiça 4.0 – Saúde tem competência exclusiva para demandas específicas de saúde."
+    ],
+    "tags": [
+     "SV 60 e 61"
+    ]
+   },
+   {
+    "g": "reg",
+    "t": "FGTS e servidores",
+    "sec": "1ª Seção",
+    "d": "Correção de contas e direitos funcionais.",
+    "pts": [
+     "FGTS: a remuneração deve garantir ao menos o IPCA, com efeitos prospectivos (ADI 5.090, 2024).",
+     "Servidores: vedado ao Judiciário aumentar vencimentos por isonomia (SV 37)."
+    ],
+    "tags": [
+     "ADI 5.090",
+     "SV 37"
+    ]
+   }
+  ]
+ },
+ "requisitos": {
+  "intr": {
+   "t": "Requisitos intrínsecos",
+   "p": "O direito de recorrer: pode esta pessoa interpor este recurso?",
+   "i": [
+    {
+     "t": "Cabimento",
+     "pl": "O recurso escolhido é o correto contra aquela decisão: sentença → apelação; interlocutória → agravo.",
+     "tc": "Fungibilidade só com dúvida objetiva e sem erro grosseiro. Apelação contra interlocutória ou agravo contra sentença, em regra, não se aproveitam."
+    },
+    {
+     "t": "Legitimidade",
+     "pl": "Só recorrem as partes, o terceiro prejudicado e o Ministério Público.",
+     "tc": "CPC, art. 996: o terceiro deve demonstrar que a decisão atinge direito de que se afirma titular; o MP recorre como parte ou fiscal da ordem jurídica."
+    },
+    {
+     "t": "Interesse recursal",
+     "pl": "É preciso ter perdido algo (sucumbência). Quem obteve tudo o que pediu não tem interesse em recorrer.",
+     "tc": "Mede-se pela utilidade e necessidade do recurso. Atenção ao recurso que só discute fundamentação sem alterar o dispositivo: em regra, falta interesse."
+    },
+    {
+     "t": "Sem fato impeditivo ou extintivo",
+     "pl": "A parte não aceitou a decisão nem desistiu ou renunciou ao direito de recorrer.",
+     "tc": "Renúncia (art. 999) e desistência (art. 998) independem de anuência; aceitação tácita por ato incompatível com a vontade de recorrer (art. 1.000). A desistência não impede o julgamento de tese de RG ou repetitivo (art. 998, p. ú.)."
+    }
+   ]
+  },
+  "extr": {
+   "t": "Requisitos extrínsecos",
+   "p": "O modo de recorrer: o recurso foi feito do jeito certo?",
+   "i": [
+    {
+     "t": "Tempestividade",
+     "pl": "Protocolado estritamente no prazo — em regra, 15 dias úteis; 5 nos embargos de declaração.",
+     "tc": "Dias úteis (art. 219); prazo em dobro para Fazenda, MP e Defensoria; feriado local comprovável e sanável (art. 1.003, §6º).",
+     "lex": "Tempestividade"
+    },
+    {
+     "t": "Preparo",
+     "pl": "Custas recolhidas e comprovadas na interposição, salvo gratuidade ou isenção.",
+     "tc": "Pagou a menos: 5 dias para complementar. Não pagou: recolher em dobro. Só então há deserção (art. 1.007, §§2º e 4º).",
+     "lex": "Preparo"
+    },
+    {
+     "t": "Regularidade formal",
+     "pl": "Petição escrita com as partes, as razões da insatisfação e o pedido expresso de reforma ou anulação.",
+     "tc": "Apelação: art. 1.010, I a IV. Dialeticidade: as razões devem atacar especificamente os fundamentos da decisão (art. 932, III · Súm. 182/STJ)."
+    }
+   ]
+  }
+ },
+ "lexico": {
+  "grupos": [
+   {
+    "id": "entrada",
+    "t": "Entrada e admissibilidade",
+    "s": "A porta do recurso",
+    "p": "Antes de saber quem tem razão, o Tribunal pergunta se o recurso pode sequer ser examinado."
+   },
+   {
+    "id": "resultado",
+    "t": "Resultado do julgamento",
+    "s": "Os verbos do dispositivo",
+    "p": "Primeiro se conhece ou não; só depois, conhecido, se dá ou se nega provimento."
+   },
+   {
+    "id": "filtros",
+    "t": "Dinâmicas internas e filtros",
+    "s": "Como o Tribunal decide",
+    "p": "Os mecanismos que encurtam, impõem ou preparam o caminho do julgamento."
+   }
+  ],
+  "itens": [
+   {
+    "g": "entrada",
+    "t": "Juízo de admissibilidade",
+    "lat": "filtro prévio",
+    "d": "A análise preliminar que decide se o recurso pode ser aceito e julgado: prazo, custas, legitimidade, cabimento.",
+    "det": [
+     "Requisitos intrínsecos (ligados ao direito de recorrer): cabimento, legitimidade, interesse recursal e inexistência de fato impeditivo ou extintivo (renúncia, desistência, aquiescência).",
+     "Requisitos extrínsecos (ligados ao modo de recorrer): tempestividade, preparo e regularidade formal, incluída a impugnação específica dos fundamentos (dialeticidade).",
+     "Na apelação, o juízo de admissibilidade é feito só no Tribunal: o juiz de origem apenas colhe as contrarrazões e remete os autos (CPC, art. 1.010, §3º).",
+     "Antes de inadmitir por vício sanável, o Relator concede 5 dias para a correção (art. 932, p. ú.)."
+    ],
+    "gab": "Começar toda minuta pelo exame de admissibilidade, ainda que em um parágrafo: é ele que autoriza o \"conheço do recurso\". Use o checklist da alfândega processual, no topo deste grupo.",
+    "base": [
+     "CPC 932, III e p. ú.",
+     "CPC 1.010, §3º",
+     "CPC 997–1.000"
+    ],
+    "rel": [
+     "s932"
+    ]
+   },
+   {
+    "g": "entrada",
+    "t": "Efeito devolutivo",
+    "lat": "tantum devolutum",
+    "d": "O recurso \"devolve\" ao Tribunal a matéria impugnada para reexame. Praticamente todo recurso o tem.",
+    "det": [
+     "Extensão: o Tribunal só conhece do que foi impugnado — tantum devolutum quantum appellatum (CPC, art. 1.013, caput). Capítulo não recorrido transita em julgado.",
+     "Profundidade: dentro do capítulo impugnado, sobem todas as questões suscitadas e discutidas, ainda que a sentença não as tenha resolvido (§§1º e 2º).",
+     "Causa madura: o Tribunal julga desde logo o mérito quando a sentença extinguiu sem resolução de mérito, for nula por incongruência, omitiu pedido ou careceu de fundamentação (§3º), e quando reformar a pronúncia de prescrição ou decadência (§4º).",
+     "Questões de ordem pública podem ser examinadas de ofício, observado o contraditório prévio (arts. 10 e 933)."
+    ],
+    "gab": "No relatório, delimitar com precisão o que foi impugnado; no voto, não avançar sobre capítulo não recorrido.",
+    "base": [
+     "CPC 1.013",
+     "CPC 933"
+    ],
+    "rel": []
+   },
+   {
+    "g": "entrada",
+    "t": "Efeito suspensivo",
+    "lat": "decisão congelada",
+    "d": "Impede que a decisão recorrida produza efeitos imediatamente: ela fica \"congelada\" até o julgamento do recurso.",
+    "det": [
+     "Apelação: em regra, tem efeito suspensivo automático (CPC, art. 1.012, caput).",
+     "Exceções (§1º): sentença que homologa divisão ou demarcação; condena a alimentos; extingue sem mérito ou julga improcedentes os embargos do executado; julga procedente a instituição de arbitragem; confirma, concede ou revoga tutela provisória; decreta interdição.",
+     "Nas exceções, o efeito pode ser requerido ao Tribunal (§3º), demonstrando probabilidade de provimento ou relevância da fundamentação somada a risco de dano grave ou de difícil reparação (§4º).",
+     "Agravo de instrumento, embargos de declaração, REsp e RE: não suspendem automaticamente (arts. 995, 1.019, I, 1.026 e 1.029, §5º) — o efeito depende de decisão."
+    ],
+    "gab": "Pedido de efeito suspensivo é urgência: passa à frente da fila e pede decisão imediata, com intimação e ciência à origem.",
+    "base": [
+     "CPC 995",
+     "CPC 1.012",
+     "CPC 1.019, I",
+     "CPC 1.029, §5º"
+    ],
+    "rel": [
+     "stut",
+     "spje",
+     "sexc"
+    ]
+   },
+   {
+    "g": "entrada",
+    "t": "Preparo",
+    "lat": "custas recursais",
+    "d": "O pagamento das custas necessárias para que o recurso seja julgado. Sem ele, o recurso é deserto e não é admitido.",
+    "det": [
+     "Deve ser comprovado no ato de interposição (CPC, art. 1.007, caput). Em autos eletrônicos, dispensa-se o porte de remessa e retorno (§3º).",
+     "Insuficiente: intima-se para complementar em 5 dias (§2º).",
+     "Ausente: intima-se para recolher em dobro, sob pena de deserção (§4º); vedada nova complementação (§5º).",
+     "Erro no preenchimento da guia não gera deserção sem prévia intimação para sanar (§7º); justo impedimento releva a pena (§6º).",
+     "Isentos: União, autarquias e fundações, MP e beneficiários da gratuidade (art. 1.007, §1º · Lei 9.289/1996, art. 4º)."
+    ],
+    "gab": "Na Justiça Federal, conferir a GRU e o código de recolhimento; INSS e União não preparam. Deserção só depois de cumprida a intimação dos §§2º ou 4º.",
+    "base": [
+     "CPC 1.007",
+     "Lei 9.289/1996",
+     "CPC 99, §7º"
+    ],
+    "rel": [
+     "shon"
+    ]
+   },
+   {
+    "g": "entrada",
+    "t": "Tempestividade",
+    "lat": "dentro do prazo",
+    "d": "O requisito do prazo: tempestivo é o recurso protocolado rigorosamente dentro do prazo legal.",
+    "det": [
+     "Prazos contados em dias úteis (CPC, art. 219), a partir da intimação (art. 1.003).",
+     "Em dobro: Fazenda Pública (art. 183), Ministério Público (art. 180) e Defensoria (art. 186), salvo prazo próprio fixado em lei.",
+     "Recurso interposto antes do termo inicial é tempestivo (art. 218, §4º).",
+     "Feriado local deve ser comprovado; não comprovado, o Tribunal determina a correção ou o desconsidera se a informação já constar dos autos eletrônicos (art. 1.003, §6º, red. Lei 14.939/2024)."
+    ],
+    "gab": "Apoiar-se na certidão de tempestividade da Divisão de Triagem (DTTR), mas recalcular quando houver feriado local, suspensão de expediente ou ente com prazo em dobro.",
+    "base": [
+     "CPC 219",
+     "CPC 1.003",
+     "CPC 183"
+    ],
+    "rel": [
+     "spz"
+    ]
+   },
+   {
+    "g": "entrada",
+    "t": "Recurso adesivo",
+    "lat": "subordinado ao principal",
+    "d": "Forma subordinada de apelar, ou de interpor REsp ou RE, aberta a quem se conformou com a sentença mas foi surpreendido pelo recurso da outra parte.",
+    "det": [
+     "Cabe só em apelação, REsp e RE (CPC, art. 997, §2º, II), havendo sucumbência recíproca (§1º).",
+     "Prazo: o das contrarrazões; endereçamento: o mesmo órgão do recurso principal; preparo próprio.",
+     "Segue a sorte do principal: inadmitido este, ou havendo desistência, o adesivo não é conhecido (§2º, III).",
+     "Apelações cruzadas são outra coisa: duas apelações autônomas, cada uma no prazo originário, independentes entre si — a sorte de uma não afeta a outra."
+    ],
+    "gab": "Na minuta, examinar primeiro a admissibilidade do principal; só depois a do adesivo. Ver o quadro comparativo na Rotina, etapa 1.",
+    "base": [
+     "CPC 997, §§1º e 2º",
+     "CPC 1.010, §2º",
+     "RITRF3 64, I"
+    ],
+    "rel": []
+   },
+   {
+    "g": "entrada",
+    "t": "Efeito ativo",
+    "lat": "tutela antecipada recursal",
+    "d": "O Relator concede, desde logo, aquilo que o juízo de origem negou — o inverso do efeito suspensivo, que apenas paralisa.",
+    "det": [
+     "Cabe no agravo de instrumento (CPC, art. 1.019, I) e, em geral, sempre que se pede ao Relator uma tutela provisória recursal (art. 932, II).",
+     "Requisitos do art. 300: probabilidade do direito + perigo de dano ou risco ao resultado útil do processo; vedada a medida irreversível (§3º); caução facultativa (§1º).",
+     "Com base em evidência (art. 311), dispensa-se o perigo; liminar apenas nos incisos II e III.",
+     "Exemplo típico na Justiça Federal: medicamento ou benefício negado na origem e concedido pelo Relator."
+    ],
+    "gab": "Separar com nitidez, na minuta, se o pedido é de suspender ou de antecipar: os requisitos do art. 995, p. ú., e do art. 300 não são idênticos.",
+    "base": [
+     "CPC 300",
+     "CPC 311",
+     "CPC 1.019, I",
+     "CPC 932, II"
+    ],
+    "rel": [
+     "stut"
+    ]
+   },
+   {
+    "g": "resultado",
+    "t": "Conhecer do recurso",
+    "lat": "admitido",
+    "d": "O recurso passou pela admissibilidade: \"preenche os requisitos, vamos examinar o caso\".",
+    "det": [
+     "É o pressuposto do julgamento de mérito.",
+     "Pode ser parcial: conhece-se de um capítulo e não de outro (ex.: parte do recurso sem interesse ou sem impugnação específica)."
+    ],
+    "gab": "Fórmula: \"Conheço do recurso\" ou \"Conheço em parte do recurso e, na parte conhecida, …\".",
+    "base": [
+     "CPC 932, III"
+    ],
+    "rel": []
+   },
+   {
+    "g": "resultado",
+    "t": "Não conhecer do recurso",
+    "lat": "barrado na porta",
+    "d": "O recurso travou na entrada: intempestivo, deserto, incabível, sem documento ou sem impugnação específica. O mérito sequer é discutido.",
+    "det": [
+     "Hipóteses do art. 932, III: recurso inadmissível, prejudicado ou que não impugne especificamente os fundamentos da decisão recorrida.",
+     "Vício sanável exige a concessão prévia de 5 dias (art. 932, p. ú.).",
+     "Admite decisão monocrática do Relator, impugnável por agravo interno.",
+     "Gera majoração de honorários recursais (art. 85, §11 · Tema 1.059/STJ)."
+    ],
+    "gab": "Dispositivo: \"Não conheço do recurso\". Não adentrar o mérito na fundamentação — no máximo, registrar que fica prejudicado.",
+    "base": [
+     "CPC 932, III e p. ú.",
+     "CPC 85, §11"
+    ],
+    "rel": [
+     "s932"
+    ]
+   },
+   {
+    "g": "resultado",
+    "t": "Dar provimento",
+    "lat": "recorrente vence",
+    "d": "O Tribunal examinou o mérito e acolheu o recurso, alterando a decisão anterior.",
+    "det": [
+     "Reforma, quando há erro no julgamento (error in judicando); anulação, quando há vício de procedimento (error in procedendo), com retorno à origem ou julgamento direto pela causa madura.",
+     "Pode ser parcial: \"dar parcial provimento\".",
+     "Monocraticamente, só quando a decisão recorrida contrariar súmula, repetitivo, IRDR ou IAC, e depois de facultadas as contrarrazões (art. 932, V).",
+     "Com provimento, ainda que parcial, não há majoração de honorários recursais (Tema 1.059/STJ); redistribui-se a sucumbência."
+    ],
+    "gab": "Na apelação, resultado não unânime — em qualquer sentido — aciona o art. 942.",
+    "base": [
+     "CPC 932, V",
+     "CPC 1.013, §3º",
+     "CPC 85, §11"
+    ],
+    "rel": [
+     "s942"
+    ]
+   },
+   {
+    "g": "resultado",
+    "t": "Negar provimento",
+    "lat": "decisão mantida",
+    "d": "O Tribunal examinou o mérito, mas rejeitou os argumentos do recorrente, mantendo intacta a decisão anterior.",
+    "det": [
+     "Monocraticamente, quando o recurso contrariar súmula do STF, do STJ ou do próprio Tribunal, repetitivo, IRDR ou IAC (art. 932, IV).",
+     "Desprovido integralmente o recurso, majoram-se os honorários fixados na origem (art. 85, §11 · Tema 1.059/STJ), respeitados os limites dos §§2º e 3º."
+    ],
+    "gab": "Fórmula: \"Nego provimento ao recurso\". Não esquecer a majoração dos honorários quando houver fixação na origem.",
+    "base": [
+     "CPC 932, IV",
+     "CPC 85, §11"
+    ],
+    "rel": [
+     "s932",
+     "shon"
+    ]
+   },
+   {
+    "g": "resultado",
+    "t": "Honorários recursais",
+    "lat": "85, §11",
+    "d": "A majoração, em grau de recurso, dos honorários fixados na origem quando o recurso não é conhecido ou é desprovido integralmente.",
+    "det": [
+     "Pressupostos: decisão recorrida sob o CPC/2015; honorários fixados na origem; não conhecimento ou desprovimento integral (AgInt nos EREsp 1.539.725 · Tema 1.059/STJ).",
+     "Contrarrazões não são requisito — a falta de trabalho adicional só pesa na quantificação.",
+     "Não há majoração no provimento, ainda que parcial; em processos sem honorários na origem (MS); nem em agravo interno e ED contra a decisão que já majorou.",
+     "Limites: 20% no rito comum; faixas do §3º contra a Fazenda, somadas as fases."
+    ],
+    "gab": "Fórmula usual: “Majoro os honorários fixados na origem em X pontos percentuais, nos termos do art. 85, §11, do CPC, observados os limites dos §§2º e 3º.” Em favor de beneficiário da gratuidade, ressalvar a suspensão da exigibilidade (art. 98, §3º).",
+    "base": [
+     "CPC 85, §§2º, 3º e 11",
+     "Tema 1.059/STJ",
+     "Tema 1.076/STJ"
+    ],
+    "rel": [
+     "shon"
+    ]
+   },
+   {
+    "g": "resultado",
+    "t": "Consectários legais",
+    "lat": "juros e correção",
+    "d": "Juros de mora e correção monetária que acompanham a condenação — pedido implícito, ajustável de ofício.",
+    "det": [
+     "Até a EC 113/2021: previdenciário com INPC (Tema 905/STJ) e juros da poupança; administrativo com IPCA-E (Tema 810/STF) e poupança; tributário com Selic.",
+     "Desde a EC 113/2021 (9/12/2021): Selic, uma única vez, para toda condenação da Fazenda — sem cumular com outro índice.",
+     "A EC 136/2025 reescreveu o art. 3º da EC 113/2021: nos requisitórios federais, da expedição ao pagamento, IPCA + juros simples de 2% a.a., limitado à Selic.",
+     "Termos iniciais: dano moral, do arbitramento (Súm. 362/STJ); juros extracontratuais, do evento (Súm. 54/STJ); previdenciário, juros da citação (Súm. 204/STJ)."
+    ],
+    "gab": "No dispositivo, remeter ao Manual de Cálculos da Justiça Federal e registrar a Selic a partir da EC 113/2021; ajustar de ofício sem caracterizar reformatio in pejus.",
+    "base": [
+     "CPC 322, §1º · 491",
+     "EC 113/2021",
+     "EC 136/2025",
+     "Temas 810/STF e 905/STJ"
+    ],
+    "rel": [
+     "shon"
+    ]
+   },
+   {
+    "g": "filtros",
+    "t": "Julgamento monocrático",
+    "lat": "decisão singular",
+    "d": "Decisão tomada apenas pelo Relator, sem levar o caso ao colegiado — reservada às matérias já pacificadas ou ao recurso que não passa da porta.",
+    "det": [
+     "Hipóteses do art. 932: tutela provisória (II), não conhecimento (III), negativa de provimento (IV) e provimento (V) com base em precedente qualificado.",
+     "Garante-se a colegialidade pelo agravo interno (art. 1.021), que leva a decisão à Turma.",
+     "A monocrática deve enfrentar os fundamentos do recurso como faria o colegiado (art. 489, §1º)."
+    ],
+    "gab": "Citar expressamente o precedente que autoriza a via singular (súmula, tema ou IRDR) e o inciso do art. 932 aplicado.",
+    "base": [
+     "CPC 932",
+     "CPC 1.021"
+    ],
+    "rel": [
+     "s932",
+     "sag"
+    ]
+   },
+   {
+    "g": "filtros",
+    "t": "Remessa necessária",
+    "lat": "duplo grau obrigatório",
+    "d": "Não é recurso, mas exigência legal: sentença contra a União ou suas autarquias, como o INSS, sobe ao TRF para revisão, ainda que ninguém recorra.",
+    "det": [
+     "É condição de eficácia da sentença (CPC, art. 496); sem ela, não há trânsito em julgado.",
+     "Dispensada abaixo de 1.000 salários-mínimos para a União e entes federais (§3º, I) ou com sentença fundada em precedente qualificado (§4º).",
+     "Em matéria previdenciária, o STJ afasta a remessa quando é evidente que a condenação, embora ilíquida, não alcança o teto (REsp 1.735.097/RS).",
+     "Vedado agravar a situação da Fazenda (Súmula 45/STJ); sem aplicação do art. 942."
+    ],
+    "gab": "Na triagem do INSS, estimar o proveito econômico (parcelas vencidas até a sentença) antes de conhecer da remessa.",
+    "base": [
+     "CPC 496",
+     "Súm. 45/STJ",
+     "Súm. 253/STJ"
+    ],
+    "rel": [
+     "srn"
+    ]
+   },
+   {
+    "g": "filtros",
+    "t": "Juízo de retratação",
+    "lat": "o prolator revê",
+    "d": "O reexame que o próprio prolator faz da decisão recorrida, podendo reformá-la antes de o recurso seguir ao colegiado ou à instância superior.",
+    "det": [
+     "Finalidade: celeridade, economia de atos e harmonização da jurisprudência.",
+     "No Tribunal: no agravo interno ou regimental, o Relator pode rever a monocrática; não o fazendo, leva o feito em mesa (CPC, art. 1.021, §2º · RITRF3, art. 251).",
+     "Nos recursos excepcionais: se o acórdão diverge de tese de repercussão geral ou repetitivo, a Vice-Presidência devolve os autos à Turma (arts. 1.030, II, e 1.040, II). Retratado, o REsp/RE fica prejudicado; mantido por distinguishing, volta à admissibilidade.",
+     "No 1º Grau: apelação contra indeferimento da inicial (art. 331), improcedência liminar (art. 332, §3º) ou sentença sem mérito (art. 485, §7º) — 5 dias para o juiz se retratar. No agravo de instrumento, a reforma integral pelo juiz prejudica o recurso (art. 1.018, §1º).",
+     "Positiva: a decisão é reformada e o recurso perde o objeto. Negativa: a decisão é ratificada e o recurso segue seu curso."
+    ],
+    "gab": "Em retorno da Vice-Presidência, o voto é colegiado: ou readequa o acórdão (decidindo as questões que a readequação tornar necessárias, art. 1.041, §1º), ou mantém-no com distinção expressamente fundamentada.",
+    "base": [
+     "CPC 1.021, §2º",
+     "CPC 1.030, II",
+     "CPC 1.040, II",
+     "CPC 1.041",
+     "CPC 331 · 332 · 485, §7º",
+     "CPC 1.018, §1º"
+    ],
+    "rel": [
+     "sexc",
+     "sag"
+    ]
+   },
+   {
+    "g": "filtros",
+    "t": "Rito regimental específico",
+    "lat": "lex interna",
+    "d": "Procedimento cujos trâmites, prazos, competências e votação seguem o Regimento Interno do TRF3, e não o fluxo ordinário do CPC.",
+    "det": [
+     "O RITRF3 rege a vida interna do Tribunal e cede ou complementa a lei processual quando a matéria pede contraditório diferenciado, urgência, uniformização ou controle disciplinar.",
+     "Exemplos: IRDR e IAC (tese vinculante regional), mandado de segurança originário (prioridade e informações em 10 dias), arguição de inconstitucionalidade (reserva de plenário no Órgão Especial) e PAD contra magistrado.",
+     "O recurso típico desses ritos é o agravo regimental, em 5 dias, apresentado em mesa."
+    ],
+    "gab": "Voto que conclua pela inconstitucionalidade de lei ainda não apreciada pelo Órgão Especial não pode afastá-la na Turma: suscita-se o incidente (CF, art. 97 · Súmula Vinculante 10).",
+    "base": [
+     "RITRF3 103 · 106-A · 171 · 191",
+     "CPC 947 · 948 · 976",
+     "SV 10"
+    ],
+    "rel": [
+     "sreg"
+    ]
+   },
+   {
+    "g": "filtros",
+    "t": "Decisão administrativa da Presidência",
+    "lat": "dupla face",
+    "d": "Ato do Presidente no exercício da gestão do Tribunal e da Justiça Federal da 3ª Região — ora administração pura, ora fronteira com o processo.",
+    "det": [
+     "Administração pura: posse, vacâncias, férias, convocação de juízes, resoluções e portarias (inclusive as que estruturam a TRgMS), licitações e contratos. Impugna-se por recurso administrativo.",
+     "Fronteira jurisdicional: precatórios e RPVs (preterição, sequestro), suspensão de liminar e de segurança. Impugna-se por agravo regimental em 5 dias, levado em mesa ao Órgão Especial.",
+     "A admissibilidade de REsp e RE é atribuição da Vice-Presidência (CPC, art. 1.030)."
+    ],
+    "gab": "Quando a liminar do Relator for objeto de pedido de suspensão, acompanhar a decisão da Presidência: ela pode sustar os efeitos da decisão do gabinete até o trânsito do processo principal.",
+    "base": [
+     "RITRF3 279 · 355–358",
+     "Lei 8.437/1992, art. 4º",
+     "Lei 12.016/2009, art. 15"
+    ],
+    "rel": [
+     "sreg",
+     "sag"
+    ]
+   },
+   {
+    "g": "filtros",
+    "t": "Prequestionamento",
+    "lat": "ponte para Brasília",
+    "d": "A exigência de que a questão federal ou constitucional tenha sido debatida expressamente no TRF, para abrir caminho ao STJ ou ao STF.",
+    "det": [
+     "Sem ele, o REsp e o RE não são admitidos (Súmulas 282 e 356/STF · 211/STJ).",
+     "Prequestionamento ficto: consideram-se incluídos no acórdão os elementos suscitados em embargos de declaração, ainda que inadmitidos ou rejeitados, se o Tribunal Superior reconhecer erro, omissão, contradição ou obscuridade (CPC, art. 1.025).",
+     "Embargos de declaração com notório propósito de prequestionamento não são protelatórios (Súmula 98/STJ)."
+    ],
+    "gab": "Diante de ED \"para fins de prequestionamento\", enfrentar os dispositivos invocados ou declarar que a matéria foi examinada — e não aplicar multa por esse só motivo.",
+    "base": [
+     "CPC 1.025",
+     "Súm. 282 e 356/STF",
+     "Súm. 211 e 98/STJ"
+    ],
+    "rel": [
+     "sexc"
+    ]
+   }
+  ]
+ },
+ "regimento": [
+  {
+   "art": "15",
+   "titulo": "Prevenção do Relator",
+   "nota": "A Turma que primeiro conhece do feito tem o Relator prevento para incidentes e recursos."
+  },
+  {
+   "art": "33",
+   "titulo": "Atribuições do Relator",
+   "nota": "XII e XIII: monocráticas do art. 932 do CPC · XV: tutela no agravo · XVIII: agravos de suas decisões."
+  },
+  {
+   "art": "64",
+   "titulo": "Anotações na autuação",
+   "nota": "Recurso adesivo, réu preso, impedimentos e prevenção."
+  },
+  {
+   "art": "10",
+   "titulo": "Competência das Seções",
+   "nota": "A matéria define a Seção e as Turmas que a integram."
+  },
+  {
+   "art": "24",
+   "titulo": "Presidente de Turma",
+   "nota": "Preside as sessões, manda incluir em pauta, assina ofícios executórios."
+  },
+  {
+   "art": "103",
+   "titulo": "Assunção de competência",
+   "nota": "IAC — arts. 103 a 106."
+  },
+  {
+   "art": "106A",
+   "titulo": "IRDR",
+   "nota": "Do pedido à aplicação da tese — arts. 106-A a 106-J."
+  },
+  {
+   "art": "133A",
+   "titulo": "Sessões virtuais",
+   "nota": "Julgamento em ambiente eletrônico, não presencial."
+  },
+  {
+   "art": "143",
+   "titulo": "Sustentação oral",
+   "nota": "Cabimento (I a X) e vedações (parágrafo único)."
+  },
+  {
+   "art": "171",
+   "titulo": "Inconstitucionalidade",
+   "nota": "Arguição e reserva de plenário — arts. 171 a 177."
+  },
+  {
+   "art": "247",
+   "titulo": "Recursos internos",
+   "nota": "Quadro dos recursos contra decisões do Órgão Especial, Seções, Turmas e Relatores."
+  },
+  {
+   "art": "251",
+   "titulo": "Agravo regimental",
+   "nota": "Reconsideração pelo prolator; empate mantém a decisão."
+  },
+  {
+   "art": "260",
+   "titulo": "Julgamento não unânime",
+   "nota": "Nas Turmas, prosseguimento com mais dois votos (CPC, art. 942)."
+  },
+  {
+   "art": "262",
+   "titulo": "Embargos de declaração",
+   "nota": "Cabimento, prazo e negativa de seguimento — arts. 262 a 264."
+  },
+  {
+   "art": "277",
+   "titulo": "REsp e RE",
+   "nota": "Interpostos na Vice-Presidência, em petições distintas."
+  },
+  {
+   "art": "279",
+   "titulo": "Suspensão de liminar",
+   "nota": "Lei 8.437/1992, art. 4º, e Lei 12.016/2009, art. 15."
+  },
+  {
+   "art": "298",
+   "titulo": "Tutela provisória",
+   "nota": "Pedido ao Relator; efeito suspensivo em REsp/RE na Vice-Presidência (§ 3º)."
+  },
+  {
+   "art": "355",
+   "titulo": "Precatórios e RPV",
+   "nota": "Requisições de pagamento — arts. 355 a 358."
+  },
+  {
+   "art": "368",
+   "titulo": "Gabinete do Desembargador",
+   "nota": "Estrutura e atribuições — arts. 368 a 371."
+  }
+ ],
+ "secoes": [
+  {
+   "n": "1ª Seção",
+   "t": "1ª e 2ª Turmas",
+   "b": "RITRF3, art. 10, §1º",
+   "m": [
+    "Contribuições ao custeio da Previdência Social, ao FUNRURAL e ao FGTS",
+    "Direito Privado: domínio e posse",
+    "Direito Privado: locação de imóveis",
+    "Direito Privado: família e sucessões",
+    "Direito Privado: direitos reais sobre a coisa alheia",
+    "Direito Privado: constituição, dissolução e liquidação de sociedades",
+    "Matéria trabalhista de competência residual",
+    "Propriedade industrial",
+    "Registros públicos",
+    "Servidores civis e militares",
+    "Desapropriações e apossamentos administrativos"
+   ]
+  },
+  {
+   "n": "2ª Seção",
+   "t": "3ª, 4ª e 6ª Turmas",
+   "b": "RITRF3, art. 10, §2º",
+   "m": [
+    "Matéria constitucional, inclusive nacionalidade e opção de naturalização — ressalvadas as competências do Órgão Especial, da 1ª e da 3ª Seções",
+    "Licitações",
+    "Nulidade e anulabilidade de atos administrativos — ressalvadas as matérias da 1ª e da 3ª Seções",
+    "Ensino superior",
+    "Inscrição no exercício profissional",
+    "Tributos em geral e preços públicos",
+    "Contribuições, salvo as de competência da 1ª Seção"
+   ]
+  },
+  {
+   "n": "3ª Seção",
+   "t": "7ª, 8ª, 9ª e 10ª Turmas",
+   "b": "RITRF3, art. 10, §3º",
+   "m": [
+    "Previdência e Assistência Social, ressalvada a competência da 1ª Seção"
+   ]
+  }
+ ]
+}

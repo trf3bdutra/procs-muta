@@ -32,11 +32,19 @@
     "causaPedir": {
      "type": "string"
     },
+    "subassunto": {
+     "type": "string",
+     "description": "Subassunto conferido na curadoria (área = ramoDireito › assunto › subassunto), como nos cards de processo."
+    },
     "especificidades": {
      "type": "string"
     },
     "especificidadesTags": {
      "type": "string"
+    },
+    "observacoes": {
+     "type": "string",
+     "description": "Notas sobre o registro (fonte, inteiro teor não juntado, conferências pendentes); não é especificidade de mérito."
     },
     "preliminares": {
      "type": "string"
@@ -312,6 +320,36 @@
     },
     "variaveis": {
      "type": "array"
+    },
+    "vinculos": {
+     "type": "array",
+     "description": "Correspondências opcionais com outros parágrafos ou com trechos de outras partes da peça (relatório, ementa, voto, proclamação). Cada item: {parte, ref (id de parágrafo) ou texto, opcional}.",
+     "items": {
+      "type": "object",
+      "properties": {
+       "parte": {
+        "enum": [
+         "paragrafo",
+         "relatorio",
+         "ementa",
+         "voto",
+         "proclamacao"
+        ]
+       },
+       "ref": {
+        "type": "string"
+       },
+       "texto": {
+        "type": "string"
+       },
+       "rotulo": {
+        "type": "string"
+       },
+       "opcional": {
+        "type": "boolean"
+       }
+      }
+     }
     }
    }
   },
@@ -507,6 +545,10 @@
    "registro": "inteiroTeor"
   },
   "modelos/modelos.json": {
+   "formato": "json",
+   "registro": "modelo"
+  },
+  "modelos/matrizes-estruturais.json": {
    "formato": "json",
    "registro": "modelo"
   },

@@ -2,7 +2,7 @@
  "padrao": "gabcmt",
  "versao": "1.0.0",
  "compatibilidade": "apps declaram a versão maior que leem (1); versão menor nova só acrescenta campos",
- "atualizadoEm": "2026-11-15T09:23:43Z",
+ "atualizadoEm": "2026-11-15T12:10:21Z",
  "areas": {
   "acervo": "processos em tramitação no gabinete (acervo/)",
   "precedentes": "processos já julgados pelo relator: ementário, inteiros teores e catálogo CMT",
@@ -16,9 +16,9 @@
    "sha256": "7ed78b6df3173ab4f5b8231d170404c57edf6ff23c407262c397b62de487e216"
   },
   "apoio/diretrizes.json": {
-   "registros": 136,
-   "bytes": 33105,
-   "sha256": "4a87e5b0c775b4d7af2746287fd36bee727bf1896cdddaa5a58019122007c367"
+   "registros": 138,
+   "bytes": 33739,
+   "sha256": "daeb577f32bc97ff9a5ba8a6065bda19eef7864d43ea089ad50069ddfa6d556e"
   },
   "apoio/magistrados.json": {
    "registros": 3,
@@ -30,15 +30,20 @@
    "bytes": 45815,
    "sha256": "acfd1bc0db4bea5bb3ec5e56bd0fbf0dcc10c7dfb89e20f14f433976d1884b9f"
   },
+  "modelos/matrizes-estruturais.json": {
+   "registros": 20,
+   "bytes": 158464,
+   "sha256": "d303a11e65957a3c11b35e5016ba03d0d13f9ab3659f19974e528d103dd950a7"
+  },
   "modelos/modelos.json": {
-   "registros": 222,
-   "bytes": 1596516,
-   "sha256": "3bb0ccca2081daf812b3b8cc9327277671d8e3ff187a7f5802b4ed27aeff49ac"
+   "registros": 199,
+   "bytes": 1418583,
+   "sha256": "525f36a6c43c474d69783a58ac5f92db977b75a541e2fe843197fe64c1a53769"
   },
   "modelos/paragrafos.json": {
    "registros": 120,
-   "bytes": 99204,
-   "sha256": "2af3de993344823584dfddaefc4f88de18764f7280f0a1370362db6621362e18"
+   "bytes": 100028,
+   "sha256": "a58a813b7ab575d56ad617279475704ee85b8281a3a2b3691c107da7fe658028"
   },
   "precedentes/inteiros-teores/2026.jsonl": {
    "registros": 138,
@@ -47,8 +52,8 @@
   },
   "precedentes/precedentes.jsonl": {
    "registros": 1844,
-   "bytes": 13521046,
-   "sha256": "c9ec32f4e8a30b576334ddf37d4d93935caf5636b1b302ade48baf335f61aea9"
+   "bytes": 13648823,
+   "sha256": "6b6b5a92f61a12ec01bb60ec91a3b65c0ed48a128dff80d93e3d5ca33f8982ee"
   }
  }
 }
