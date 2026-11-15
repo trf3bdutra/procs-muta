@@ -467,7 +467,10 @@ function vAssuntos(L,out){
 /* ================= EDITORIAL ================= */
 var ED=null;
 try{ED=JSON.parse($('#editorial').textContent);}catch(e){ED=null;}
-var XS={sub:'estrutura',peca:'',grupo:'',vg:'palavras',q:''};
+var XS={sub:'estrutura',ed:'pecas',peca:'',grupo:'',vg:'palavras',q:''};
+/* Editorial reúne Peças, Modelos, Parágrafos e Diretrizes; Modelos e Parágrafos usam o painel de busca do Ementário, que muda de seção */
+var XDESC={pecas:'Estrutura de cada peça, com fórmulas, regras e orientações de redação.',mod:'Modelos-matriz de acórdão, decisão e despacho, prontos para preencher com os dados do caso.',par:'Parágrafos-padrão por matéria e situação, com campos que se preenchem com o caso.',dir:'Manual de redação do gabinete: preferências, conectivos, verbos, correções e alertas.'};
+function layoutEm(v){var L=$('#e-layout'),S=$(v);if(!L||!S||L.parentNode===S)return;if(v==='#v-edit')S.insertBefore(L,$('#x-man'));else S.appendChild(L);}
 function man(){var db=window.VDM_DB&&window.VDM_DB();return ((db&&db['Diretrizes'])||[]).filter(function(r){return r['Código'];});}
 function manCap(c){return man().filter(function(r){return String(r['Capítulo']||'').indexOf(c)===0;});}
 function manTxt(r){return [r['Título'],r['Orientação'],r['Evitar'],r['Observação'],r['Grupo']].join(' ');}
@@ -480,13 +483,17 @@ function regs(t){return ((ED&&ED.padrao&&ED.padrao.registros)||[]).filter(functi
 function grp(r){return r.grupo||'Termos e grafias';}
 function xRender(){
   if(!ED){$('#x-main').innerHTML='<p class="empty">Dados do editorial indisponíveis.</p>';return;}
+  var ed=XS.ed||'pecas';$$('#x-sub button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===ed));});
+  var xd=$('#x-desc');if(xd)xd.textContent=XDESC[ed]||'';
+  if(ed==='mod'||ed==='par'){$('#x-man').hidden=true;$('#x-wrap').hidden=true;layoutEm('#v-edit');EM.sub=ed;fecharIT();mostrar();return;}
+  if($('#e-layout').parentNode===$('#v-edit'))layoutEm('#v-ement');
+  XS.sub=ed==='dir'?'dir':'estrutura';
   var dir=XS.sub==='dir';$('#x-man').hidden=!dir;$('#x-wrap').hidden=dir;
-  $$('#x-sub button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===(dir?'dir':'pecas')));});
   if(window.VDM_marcaNav)window.VDM_marcaNav();
   if(!dir&&XD.proc&&!XD.ac&&!XD.naoAchou&&!XD._busca){XD._busca=1;xBuscaProc();return;}
   if(dir)xManual();else xPagina();
 }
-$$('#x-sub button').forEach(function(b){b.addEventListener('click',function(){XS.sub=b.getAttribute('data-s')==='dir'?'dir':'estrutura';xRender();window.scrollTo(0,0);});});
+$$('#x-sub button').forEach(function(b){b.addEventListener('click',function(){XS.ed=b.getAttribute('data-s');xRender();window.scrollTo(0,0);});});
 /* ===== Diretrizes em formato de manual: sumário à esquerda, capítulos numerados, busca e impressão ===== */
 var XM={q:''};
 function xManual(){
@@ -1078,7 +1085,9 @@ function irEmentarioProc(nums,lab){
   EM.sub='prec';$$('#e-sub button').forEach(function(z){z.setAttribute('aria-selected',String(z.getAttribute('data-s')==='prec'));});
   var b=document.querySelector('.tab[data-v="ement"]');if(b&&b.getAttribute('aria-selected')==='true'){fecharIT();mostrar();}else if(b)b.click();window.scrollTo(0,0);
 }
-function irModelos(tipo){EM.sub='mod';MS.tipo=tipo||'Acórdão';MS.ass='';MS.cls='';MS.jul='';EM.q.mod='';MLIM=40;var b=document.querySelector('.tab[data-v="ement"]');if(b)b.click();}
+function irModelos(tipo){XS.ed='mod';EM.sub='mod';MS.tipo=tipo||'Acórdão';MS.ass='';MS.cls='';MS.jul='';EM.q.mod='';MLIM=40;irEditorial('mod');}
+window.VDM_irEditorial=function(s){irEditorial(s);};
+function irEditorial(s){XS.ed=s||XS.ed;var b=document.querySelector('.tab[data-v="edit"]');if(b&&b.getAttribute('aria-selected')==='true')xRender();else if(b)b.click();window.scrollTo(0,0);}
 function jp(s){try{return typeof s==='string'?JSON.parse(s||'null'):s;}catch(e){return null;}}
 function marcarR(t){return refs(t).replace(/\{\{([^}]*)\}\}/g,'<mark>{{$1}}</mark>').replace(/\[PREENCHER:([^\]]*)\]/g,'<mark>[PREENCHER:$1]</mark>').replace(/\[VALIDAR([^\]]*)\]/g,'<mark>[VALIDAR$1]</mark>');}
 function marcar(t){return esc(t).replace(/\{\{([^}]*)\}\}/g,'<mark>{{$1}}</mark>').replace(/\[PREENCHER:([^\]]*)\]/g,'<mark>[PREENCHER:$1]</mark>').replace(/\[VALIDAR([^\]]*)\]/g,'<mark>[VALIDAR$1]</mark>');}
@@ -1783,7 +1792,7 @@ if(m[1]){var num=+m[2].replace(/\./g,''),tr=m[3],A=NL.filter(function(x){return 
 
 /* ================= navegação: subabas em menus suspensos no cabeçalho ================= */
 (function(){
-  var MAPA={rep:'#v-rep .sub',ement:'#e-sub',edit:'#x-sub',enc:'#enc-sub'};
+  var MAPA={rep:'#v-rep .sub',edit:'#x-sub',enc:'#enc-sub'};
   var aberto=null;
   function fechaTodos(){$$('.tabw.open').forEach(function(w){w.classList.remove('open');w.querySelector('.tab').setAttribute('aria-expanded','false');});aberto=null;}
   function atual(v){var r=$(MAPA[v]);var b=r&&r.querySelector('[aria-selected="true"]');return b?b.textContent:'';}
@@ -1823,7 +1832,7 @@ nRender();
 window.VDM_view=function(v){
   if(v==='temas')nRender();
   if(v==='rep')rpRender();
-  if(v==='ement')mostrar();
+  if(v==='ement'){layoutEm('#v-ement');EM.sub='prec';$$('#e-sub button').forEach(function(z){z.setAttribute('aria-selected','true');});mostrar();}
   if(v==='edit'){if(!xFeito){xFeito=true;}xRender();}
 };
 /*__EDITOR__*/
