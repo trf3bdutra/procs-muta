@@ -172,12 +172,10 @@ code{font-size:12px;background:var(--field);padding:1px 5px;border-radius:4px;ov
     <button data-s="normas" aria-selected="false">Repertório normativo</button>
     <button data-s="reg" aria-selected="false">Regimento Interno</button>
   </div>
-  <div class="layout" id="r-lay">
-    <aside id="r-aside"></aside>
-    <div class="content">
-      <div class="bar"><input class="q" id="r-q" type="search" placeholder="Buscar…" aria-label="Buscar no repertório"><span class="count" id="r-cnt"></span></div>
-      <div id="r-out"></div>
-    </div>
+  <div class="n-wrap nodet" id="r-wrap">
+    <aside class="n-f" id="r-aside"></aside>
+    <div class="n-main"><div class="n-bar"><div class="n-sum" id="r-sum"></div><div class="seg n-seg" id="r-modos" role="group" aria-label="Modo de exibição"></div></div><div id="r-out"></div></div>
+    <section class="n-det" id="r-det" aria-label="Detalhe"></section>
   </div>
 </section>
 
@@ -341,114 +339,15 @@ document.addEventListener('click',function(e){
 
 /* ---------- navegação ---------- */
 var VIEW='temas';
-document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','edit'].forEach(function(v){$('#v-'+v).hidden=v!==VIEW;});$('#openSheet').hidden=VIEW==='ement';$('#openSheet').href=sheetUrl(VIEW==='temas'?(window.VDM_enunTab?window.VDM_enunTab():'Temas'):VIEW==='edit'?'Diretrizes':({juris:'Jurisprudência',normas:'Normas',reg:'Regimento'})[RS.sub]);if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
-function renderAll(){if(window.VDM_enun)window.VDM_enun();renderR();if(window.VDM_refresh)window.VDM_refresh();}
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','edit'].forEach(function(v){$('#v-'+v).hidden=v!==VIEW;});$('#openSheet').hidden=VIEW==='ement';$('#openSheet').href=sheetUrl(VIEW==='temas'?(window.VDM_enunTab?window.VDM_enunTab():'Temas'):VIEW==='edit'?'Diretrizes':(window.VDM_repTab?window.VDM_repTab():'Jurisprudência'));if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
+function renderAll(){if(window.VDM_enun)window.VDM_enun();if(window.VDM_rep)window.VDM_rep();if(window.VDM_refresh)window.VDM_refresh();}
 
 /* Enunciados: código em ementario.js (lista, tabela, mapa e painel) */
 function suspKind(t){var s=norm(t['Suspensão de processos']);if(!s)return '';if(s.indexOf('nacional')>=0)return 'nac';if(s.indexOf('so ')===0||s.indexOf('recursos')>=0)return 'resp';if(s.indexOf('sem')===0)return 'sem';return '';}
 window.VDM_usos=function(){return USOS;};
 window.VDM_assuntos=function(){return {AS:AS,ASN:ASN,ramos:ramos()};};
 
-/* ================= REPERTÓRIO ================= */
-var RS={sub:'juris',trib:'',g:'',ramo:'',q:'',modo:'diploma',dip:'',ema:false,parte:''};
-document.querySelectorAll('#v-rep .sub button').forEach(function(b){b.addEventListener('click',function(){RS.sub=b.getAttribute('data-s');RS.g='';RS.ramo='';RS.dip='';RS.trib='';RS.parte='';RS.q='';$('#r-q').value='';document.querySelectorAll('#v-rep .sub button').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});$('#openSheet').href=sheetUrl(({juris:'Jurisprudência',normas:'Normas',reg:'Regimento'})[RS.sub]);renderR();});});
-$('#r-q').addEventListener('input',function(e){RS.q=e.target.value;renderR();});
-function renderR(){ if(RS.sub==='juris')renderJ(); else if(RS.sub==='normas')renderN(); else renderReg(); }
-function asideAssuntos(items,getA){
-  var cnt={};items.forEach(function(x){asList(getA(x)).forEach(function(a){cnt[a]=(cnt[a]||0)+1;});});
-  var h='<button data-g="" aria-pressed="'+(!RS.g)+'"><i style="background:var(--ink)"></i><span>Todos os assuntos</span><small>'+items.length+'</small></button>';
-  AS.forEach(function(a){var k=a['Assunto'];h+='<button class="'+(cnt[k]?'':'zero')+'" data-g="'+esc(k)+'" aria-pressed="'+(RS.g===k)+'"><i style="background:'+esc(a['Cor'])+'"></i><span>'+esc(k)+'</span><small>'+(cnt[k]||0)+'</small></button>';});
-  return h;
-}
-function precLabel(p){var cl=p['Classe'].split(' '),suf=['AgR','ED','AgR-ED','MC','AgInt'].indexOf(cl[cl.length-1])>=0&&cl.length>1?cl.pop():'';return cl.join(' ')+' '+p['Número']+(p['UF']?'/'+p['UF']:'')+(suf?' '+suf:'');}
-function renderJ(){
-  var P=DB['Jurisprudência']||[],q=norm(RS.q);
-  var tribs=[];P.forEach(function(p){if(tribs.indexOf(p['Tribunal'])<0)tribs.push(p['Tribunal']);});
-  var base=P.filter(function(p){if(RS.trib&&p['Tribunal']!==RS.trib)return false;if(RS.ema&&!p['Ementa'])return false;if(q&&norm(Object.keys(p).map(function(k){return p[k];}).join(' ')).indexOf(q)<0)return false;return true;});
-  var a='<div class="lab">Tribunal</div><div class="seg" id="j-trib"><button data-t="" aria-pressed="'+(!RS.trib)+'">Todos</button>'+tribs.map(function(t){return '<button data-t="'+esc(t)+'" aria-pressed="'+(RS.trib===t)+'">'+esc(t)+'</button>';}).join('')+'</div>';
-  a+='<label class="chk"><input type="checkbox" id="j-ema"'+(RS.ema?' checked':'')+'> Só com ementa transcrita</label>';
-  a+='<div class="lab">Ramos e assuntos</div><div class="glist" id="j-gl">'+ramoTree(base,function(p){return p['Assunto'];},RS,true)+'</div>';
-  a+='<div class="note">Precedentes do STF, do STJ e dos TRFs citados nas fundamentações do gabinete. Assuntos sem precedente aparecem esmaecidos até o acervo crescer.</div>';
-  $('#r-aside').innerHTML=a;
-  $('#j-trib').querySelectorAll('button').forEach(function(b){b.onclick=function(){RS.trib=b.getAttribute('data-t');renderJ();};});
-  $('#j-ema').onchange=function(e){RS.ema=e.target.checked;renderJ();};
-  bindTree($('#j-gl'),RS,renderJ);
-  var L=base.filter(function(p){return matchA(p['Assunto'],RS);});
-  $('#r-cnt').innerHTML='<b>'+L.length+'</b> precedentes · '+tribs.map(function(t){return L.filter(function(p){return p['Tribunal']===t;}).length+' '+t;}).join(' · ')+' · '+L.filter(function(p){return p['Ementa'];}).length+' com ementa';
-  var h='';
-  if(RS.g&&/pis/i.test(RS.g)&&(DB['Matriz PIS-Cofins']||[]).length){var M={},MO=[];DB['Matriz PIS-Cofins'].forEach(function(m){if(!M[m['Grupo']]){M[m['Grupo']]=[];MO.push(m['Grupo']);}M[m['Grupo']].push(m['Nota']);});h+='<div class="matriz"><h3>Matriz de teses de PIS e Cofins</h3>'+MO.map(function(g){return '<b>'+esc(g)+'</b><ol>'+M[g].map(function(n){return '<li>'+esc(n)+'</li>';}).join('')+'</ol>';}).join('')+'</div>';}
-  var TN={STF:'Supremo Tribunal Federal',STJ:'Superior Tribunal de Justiça',TRF3:'Tribunal Regional Federal da 3ª Região',TRF4:'Tribunal Regional Federal da 4ª Região'};
-  tribs.forEach(function(t){var A=L.filter(function(p){return p['Tribunal']===t;});if(!A.length)return;
-    A.sort(function(x,y){return (y['Ementa']?1:0)-(x['Ementa']?1:0)||(+y['Citações contadas no arquivo original']||0)-(+x['Citações contadas no arquivo original']||0);});
-    h+='<section class="grp"><h2>'+esc(TN[t]||t)+' <small>'+A.length+'</small></h2><div class="list">'+A.map(function(p){
-      var lab=precLabel(p);var cit=lab+(p['Relator']?', Rel. '+p['Relator']:'')+(p['Publicação']?', '+p['Publicação']:'')+(p['Ementa']?': “'+p['Ementa']+'”':'');
-      var c='<article class="card" id="'+esc(p['Código'])+'" style="--gc:'+esc(color(asList(p['Assunto'])[0]))+'"><div class="hd"><span class="tb '+esc(t)+'">'+esc(t)+'</span><span class="num">'+esc(lab)+'</span>'+(p['Ementa']?'<span class="pill" style="color:var(--good);border-color:var(--good)">Ementa transcrita</span>':'')+'</div>';
-      c+='<p class="meta">'+[p['Relator']?'Rel. '+esc(p['Relator']):'Relator e data não indicados na citação',esc(p['Publicação'])].filter(Boolean).join(' · ')+'</p>';
-      if(p['Subassunto'])c+='<p class="meta">'+esc(p['Subassunto'])+'</p>';
-      var tm=asList(p['Temas relacionados']);if(tm.length)c+='<div class="chips">'+tm.map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join('')+'</div>';
-      if(p['Ementa'])c+='<details><summary>Ler a ementa</summary><p class="tx">'+esc(p['Ementa'])+'</p></details>';
-      c+='<div class="ft">'+(p['Link']?'<a href="'+esc(p['Link'])+'" target="_blank" rel="noopener">Inteiro teor ↗</a>':'')+'<span class="meta">'+(p['Citações contadas no arquivo original']?esc(p['Citações contadas no arquivo original'])+' citações contadas no acervo':'')+'</span><span class="sp"></span>'+usosBtn(p['Código'])+'<button class="btn" data-copy="'+esc(cit)+'">Copiar citação</button></div></article>';
-      return c;}).join('')+'</div></section>';});
-  $('#r-out').innerHTML=h||'<p class="empty">Nenhum precedente com esses filtros.</p>';
-}
-function renderN(){
-  var N=DB['Normas']||[],q=norm(RS.q);
-  var base=N.filter(function(n){return !q||norm(Object.keys(n).map(function(k){return n[k];}).join(' ')).indexOf(q)>=0;});
-  var dips=[],dcnt={};base.forEach(function(n){var d=n['Diploma'];if(!dcnt[d]){dcnt[d]=0;dips.push(d);}dcnt[d]++;});
-  var a='<div class="lab">Organizar por</div><div class="seg" id="n-modo"><button data-m="diploma" aria-pressed="'+(RS.modo==='diploma')+'">Diploma</button><button data-m="assunto" aria-pressed="'+(RS.modo==='assunto')+'">Assunto</button></div>';
-  if(RS.modo==='diploma'){a+='<div class="lab">Diplomas</div><div class="glist" id="n-gl"><button data-d="" aria-pressed="'+(!RS.dip)+'"><span>Todos os diplomas</span><small>'+base.length+'</small></button>'+dips.map(function(d){return '<button data-d="'+esc(d)+'" aria-pressed="'+(RS.dip===d)+'"><span>'+esc(d)+'</span><small>'+dcnt[d]+'</small></button>';}).join('')+'</div>';}
-  else{a+='<div class="lab">Ramos e assuntos</div><div class="glist" id="n-gl">'+ramoTree(base,function(n){return n['Assunto'];},RS,false)+'</div>';}
-  a+='<div class="note">Texto literal dos dispositivos citados pelo gabinete. Um mesmo dispositivo pode pertencer a mais de um assunto; separe-os por ponto e vírgula na planilha.</div>';
-  $('#r-aside').innerHTML=a;
-  $('#n-modo').querySelectorAll('button').forEach(function(b){b.onclick=function(){RS.modo=b.getAttribute('data-m');RS.g='';RS.ramo='';RS.dip='';renderN();};});
-  if(RS.modo==='diploma')$('#n-gl').querySelectorAll('button').forEach(function(b){b.onclick=function(){RS.dip=b.getAttribute('data-d');renderN();};});
-  else bindTree($('#n-gl'),RS,renderN);
-  var L=base.filter(function(n){return RS.modo==='diploma'?(!RS.dip||n['Diploma']===RS.dip):matchA(n['Assunto'],RS);});
-  $('#r-cnt').innerHTML='<b>'+L.length+'</b> dispositivos · '+dips.length+' diplomas';
-  var groups={},order=[];
-  L.forEach(function(n){var gs=asList(n['Assunto']);var ks=RS.modo==='diploma'?[n['Diploma']]:(RS.g?[RS.g]:(RS.ramo?(gs.filter(function(a){return ramoOf(a)===RS.ramo;}).slice(0,1)):gs.slice(0,1)));if(!ks.length)ks=gs.slice(0,1);ks.forEach(function(k){if(!groups[k]){groups[k]=[];order.push(k);}groups[k].push(n);});});
-  if(RS.modo==='assunto'){order=AS.map(function(a){return a['Assunto'];}).filter(function(k){return groups[k];}).concat(order.filter(function(k){return !ASN[k];}));}
-  var lastR=null;
-  var h=order.map(function(k){var A=groups[k];var first=A[0];
-    var rt='';if(RS.modo==='assunto'){var r=ramoOf(k);if(r!==lastR){rt='<div class="ramo-t">'+esc(r)+'</div>';lastR=r;}}
-    return rt+'<section class="grp"><h2>'+esc(k)+' <small>'+(RS.modo==='diploma'&&first['Norma']&&first['Norma']!==k?esc(first['Nome do diploma'])+' · '+esc(first['Norma'])+' · ':'')+A.length+'</small></h2><div class="list">'+A.map(function(n){
-      var tit=n['Dispositivo']?(n['Diploma']+', art. '+n['Dispositivo']):n['Norma'];
-      var c='<article class="card" id="'+esc(n['Código'])+'" style="--gc:'+esc(color(asList(n['Assunto'])[0]))+'"><div class="hd"><span class="num">'+esc(tit)+'</span><span class="pill">'+esc(n['Norma'])+'</span></div>';
-      c+='<div class="chips">'+asList(n['Assunto']).map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join('')+'</div>';
-      var tx=n['Texto literal']||'';
-      c+=tx.length>700?'<p class="tx" style="margin-top:8px">'+esc(tx.slice(0,520))+'…</p><details><summary>Ler o dispositivo inteiro</summary><p class="tx">'+esc(tx)+'</p></details>':'<p class="tx" style="margin-top:8px">'+esc(tx)+'</p>';
-      if(n['Observação'])c+='<div class="box">'+esc(n['Observação'])+'</div>';
-      c+='<div class="ft"><span class="meta">'+esc(n['Código'])+'</span><span class="sp"></span>'+usosBtn(n['Código'])+'<button class="btn" data-copy="'+esc(tx)+'">Copiar texto</button></div></article>';
-      return c;}).join('')+'</div></section>';}).join('');
-  $('#r-out').innerHTML=h||'<p class="empty">Nenhum dispositivo com esses filtros.</p>';
-}
-function renderReg(){
-  var R=(DB['Regimento']||[]).slice().sort(function(a,b){return (+a['Ordem'])-(+b['Ordem']);}),q=norm(RS.q);
-  var partes=[];R.forEach(function(r){if(r['Tipo']==='Parte')partes.push(r);});
-  var a='<div class="lab">Mapa do Regimento</div><div class="glist tree" id="g-tree"><button data-p="" aria-pressed="'+(!RS.parte)+'"><span>Regimento inteiro</span><small>'+R.filter(function(r){return r['Tipo']==='Artigo';}).length+'</small></button>';
-  partes.forEach(function(p){var key=p['Rótulo']+' – '+p['Título ou texto'];a+='<button data-p="'+esc(key)+'" aria-pressed="'+(RS.parte===key)+'"><span><b>'+esc(p['Rótulo'])+'</b> · '+esc(p['Título ou texto'])+'</span><small>'+R.filter(function(r){return r['Tipo']==='Artigo'&&r['Parte']===key;}).length+'</small></button>';
-    if(RS.parte===key){R.filter(function(r){return r['Tipo']==='Título'&&r['Parte']===key;}).forEach(function(t){a+='<button class="l1" data-jump="'+esc(t['Código'])+'"><span>'+esc(t['Rótulo'])+' · '+esc(t['Título ou texto'])+'</span></button>';});}});
-  a+='</div><label class="chk"><input type="checkbox" id="g-rev"'+(RS.rev?' checked':'')+'> Ocultar artigos revogados</label><div class="note">RITRF3 consolidado com as Emendas Regimentais até a ER 25/2026. As notas de redação ficam sob cada artigo.</div>';
-  $('#r-aside').innerHTML=a;
-  $('#g-tree').querySelectorAll('[data-p]').forEach(function(b){b.onclick=function(){RS.parte=b.getAttribute('data-p');renderReg();};});
-  $('#g-tree').querySelectorAll('[data-jump]').forEach(function(b){b.onclick=function(){var el=document.getElementById(b.getAttribute('data-jump'));if(el)el.scrollIntoView({behavior:'smooth',block:'start'});};});
-  $('#g-rev').onchange=function(e){RS.rev=e.target.checked;renderReg();};
-  var L=R.filter(function(r){if(RS.parte&&r['Parte']!==RS.parte)return false;if(r['Tipo']==='Artigo'){if(RS.rev&&r['Vigência']==='Revogado')return false;if(q&&norm(r['Rótulo']+' '+r['Título ou texto']+' '+r['Notas de redação']).indexOf(q)<0)return false;}else if(q)return false;return true;});
-  var nA=L.filter(function(r){return r['Tipo']==='Artigo';}).length;
-  $('#r-cnt').innerHTML='<b>'+nA+'</b> artigos'+(q?' encontrados':'');
-  var h='<div class="reg">';
-  L.forEach(function(r){var t=r['Tipo'];
-    if(t==='Parte')h+='<h2 class="h0" id="'+esc(r['Código'])+'">'+esc(r['Rótulo'])+' · '+esc(r['Título ou texto'])+'</h2>';
-    else if(t==='Título')h+='<h3 class="h1" id="'+esc(r['Código'])+'">'+esc(r['Rótulo'])+' · '+esc(r['Título ou texto'])+'</h3>';
-    else if(t==='Capítulo'||t==='Seção')h+='<h4 id="'+esc(r['Código'])+'">'+esc(r['Rótulo'])+' · '+esc(r['Título ou texto'])+'</h4>';
-    else{var rev=r['Vigência']==='Revogado';
-      if(q)h+='<p class="hn">'+[r['Parte'],r['Título'],r['Capítulo'],r['Seção']].filter(Boolean).map(esc).join(' › ')+'</p>';
-      h+='<div class="art'+(rev?' rev':'')+'" id="'+esc(r['Código'])+'"><div class="hd"><span class="num">'+esc(r['Rótulo'])+'</span>'+(rev?'<span class="tag">revogado</span>':'')+'</div><p class="tx" style="margin-top:6px">'+esc(r['Título ou texto'])+'</p>'+(r['Notas de redação']?'<details><summary>Notas de redação</summary><p class="tx meta">'+esc(r['Notas de redação'])+'</p></details>':'')+'<div class="ft"><span class="meta">'+esc(r['Código'])+'</span><span class="sp"></span>'+usosBtn(r['Código'])+'<button class="btn" data-copy="'+esc('RITRF3, '+r['Rótulo'].replace(/^Art\. /,'art. ')+': '+r['Título ou texto'])+'">Copiar</button></div></div>';}
-    if(t!=='Artigo'&&r['Notas de redação'])h+='<p class="hn">'+esc(r['Notas de redação'])+'</p>';
-  });
-  $('#r-out').innerHTML=nA?h+'</div>':'<p class="empty">Nenhum artigo encontrado.</p>';
-}
-
+/* Repertório: código em ementario.js */
 window.VDM_DB=function(){return DB;};
 boot();
 })();
