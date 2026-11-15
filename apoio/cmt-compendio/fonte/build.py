@@ -115,9 +115,31 @@ ref = ler(RAIZ/'apoio/referencias-rapidas.json')
 # acervo resumido para preencher a peça pelo número do processo: classe, assunto e polos (sem documentos)
 def _v(x):
     x = limpa(str(x or '').strip()); return '' if x in ('####', 'None', 'nan') else x
+# ramo do direito para o cabeçalho da ementa: raiz do assunto principal na árvore do CNJ (SGT/TPU)
+_SGT = ler(RAIZ/'apoio/assuntos-cnj.json').get('assuntos', {}) if (RAIZ/'apoio/assuntos-cnj.json').exists() else {}
+_MAT = {'DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO': 'ADMINISTRATIVO', 'DIREITO À EDUCAÇÃO': 'ADMINISTRATIVO',
+        'DIREITO DA SAÚDE': 'ADMINISTRATIVO', 'DIREITO DO CONSUMIDOR': 'CIVIL', 'DIREITO PROCESSUAL CIVIL E DO TRABALHO': 'PROCESSUAL CIVIL',
+        'DIREITO DO TRABALHO': 'DO TRABALHO'}
+_SGTN = {}
+for _v0 in _SGT.values():
+    _SGTN.setdefault(nzp(_v0.get('nome')), set()).add(_v0.get('ramo'))
+def ramo_mat(a):
+    r = None
+    for f in ('Código_Assunto_Principal', 'DataJud · Código Assunto'):
+        c = str(a.get(f) or '').split('.')[0].split(';')[0].strip()
+        if c in _SGT and _SGT[c].get('ramo'):
+            r = _SGT[c]['ramo']; break
+    if not r:
+        for f in ('Assunto_Principal', 'assunto_judicial', 'Assunto'):
+            k = _SGTN.get(nzp(str(a.get(f) or '').split('(')[0]), ())
+            if len(k) == 1:
+                r = next(iter(k)); break
+    if not r:
+        return ''
+    return _MAT.get(r, re.sub(r'^DIREITO\s+', '', r))
 acx = {}
 for n, a in AC.items():
-    acx[n] = [_v(a.get('Classe') or a.get('classe_judicial')), _v(a.get('Assunto_Principal') or a.get('assunto_judicial')), _v(a.get('polo_ativo') or a.get('Polo_Ativo')), _v(a.get('polo_passivo') or a.get('Polo_Passivo'))]
+    acx[n] = [_v(a.get('Classe') or a.get('classe_judicial')), _v(a.get('Assunto_Principal') or a.get('assunto_judicial')), _v(a.get('polo_ativo') or a.get('Polo_Ativo')), _v(a.get('polo_passivo') or a.get('Polo_Passivo')), ramo_mat(a)]
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
 

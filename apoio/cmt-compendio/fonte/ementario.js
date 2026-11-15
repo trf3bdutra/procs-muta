@@ -888,7 +888,9 @@ function xEmDisp(s){
   return '';}
 function xAuto(PT){AUTO={};var d=xDispTexto(PT);
   if(d){AUTO.resultado=xTerceira(d);var em=xEmDisp(d);if(em){AUTO['dispositivo da ementa']=em;AUTO['CONCLUSÃO']=em.split('.')[0].toUpperCase();}}
-  if(XD.ac){if(XD.ac[0])AUTO.CLASSE=XD.ac[0].toUpperCase();if(XD.ac[1])AUTO.ASSUNTO=XD.ac[1].toUpperCase();}
+  if(XD.ac){if(XD.ac[0])AUTO.CLASSE=XD.ac[0].toUpperCase();if(XD.ac[1])AUTO.ASSUNTO=XD.ac[1].toUpperCase();
+    /* ramo: raiz do assunto principal na árvore do CNJ; ED, agravo interno e agravo de instrumento levam também o processual civil */
+    var mt=XD.ac[4];if(mt)AUTO.RAMO=mt==='PROCESSUAL CIVIL'?'DIREITO PROCESSUAL CIVIL':(/^(ed|agint|ai)$/.test(XP.v[XP.pc]||'')?'DIREITO PROCESSUAL CIVIL E '+mt:'DIREITO '+mt);}
   if(XD.rec){AUTO['o autor / a autora']=XD.rec;AUTO['a agravante']=XD.rec;}}
 function xAutoAplica(){if(!XP._PT)return;xAuto(XP._PT);$$('#x-main .fill').forEach(function(f){var k=f.getAttribute('data-fk');if(FILL[k]||document.activeElement===f)return;var n=f.getAttribute('data-ph'),v=AUTO[n]||PADR[n]||'';if(f.textContent!==v)f.textContent=v;f.classList.toggle('ok',!!v);f.classList.toggle('auto',!!v);});}
 function xRascunho(){clearTimeout(xRascunho._t);xRascunho._t=setTimeout(function(){try{var F={};Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))F[k]=FILL[k];});localStorage.setItem(XRK,JSON.stringify({pc:XP.pc,v:XP.v,alt:XP.alt,abre:XP.abre,fora:XP.fora,res:XP.res,mrec:XP.mrec,vb:XP.vb,d:{proc:XD.proc,rec:XD.rec},F:F}));}catch(e){}},400);}
