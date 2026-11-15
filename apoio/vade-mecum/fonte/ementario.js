@@ -457,6 +457,8 @@ function xEstrutura(){
     if(FM)h+=FM;
     if(p.id==='voto'){var DF=estiloItens().filter(function(r){return r.g==='F. Dispositivo e fecho'&&hit([r.titulo,r.pref,r.ev].join(' '));});
       if(DF.length){cnt+=DF.length;h+='<div class="k" style="margin-top:16px">Dispositivo e fecho</div><div class="grid">'+DF.map(function(r){return '<article class="card" style="--gc:var(--line)">'+(r.titulo?'<h3 style="margin-top:0">'+esc(r.titulo)+'</h3>':'')+'<div class="fields">'+(r.pref?'<div class="field good"><b>Preferir</b><p>'+refs(r.pref)+'</p></div>':'')+(r.ev?'<div class="field bad"><b>Evitar</b><p>'+refs(r.ev)+'</p></div>':'')+'</div></article>';}).join('')+'</div>';}}
+    var RE=estruturaRegras(p.id).filter(function(r){return hit([r.titulo,r.pref,r.ev,r.obs].join(' '));});
+    if(RE.length){cnt+=RE.length;h+='<div class="k" style="margin-top:16px">Regras de estrutura</div><div class="grid">'+RE.map(function(r){return '<article class="card" style="--gc:var(--line)">'+(r.titulo?'<h3 style="margin-top:0">'+esc(r.titulo)+'</h3>':'')+'<div class="fields">'+(r.pref?'<div class="field good"><b>Preferir</b><p>'+refs(r.pref)+'</p></div>':'')+(r.ev?'<div class="field bad"><b>Evitar</b><p>'+refs(r.ev)+'</p></div>':'')+(r.obs?'<div class="field"><b>Observação</b><p>'+refs(r.obs)+'</p></div>':'')+'</div></article>';}).join('')+'</div>';}
     var MR=MANG[p.id]?manCap('02').filter(function(r){return r['Grupo']===MANG[p.id]&&hit(manTxt(r));}):[];
     if(MR.length){cnt+=MR.length;h+='<div class="k" style="margin-top:16px">Regras complementares · '+esc(MANG[p.id])+'</div><div class="grid">'+MR.map(manCard).join('')+'</div>';}
     if(p.exemplos)h+='<p style="margin:10px 0 0"><button class="btn" data-ex="'+p.exemplos+'">Ver modelos de decisão monocrática →</button></p>';
@@ -500,13 +502,17 @@ function estiloItens(){
   });
   return L;
 }
-var RED_ORD=['Regras gerais','Estrutura','Fatos e prova','Fundamentação'];
+var RED_ORD=['Regras gerais','Fatos e prova','Fundamentação'];
+/* Regras de estrutura (grupo A das diretrizes): exibidas na peça a que se referem, em Estrutura das peças */
+var EST_PECA={'red-dir-01':['voto','monocratica'],'red-dir-03':['monocratica'],'red-dir-04':['relatorio','monocratica']};
+function ehEstrutura(r){return r.g==='A. Estrutura'&&!/voto rural/i.test(r.titulo||'');}
+function estruturaRegras(id){return estiloItens().filter(function(r){if(!ehEstrutura(r))return false;var ps=EST_PECA[r.id];return ps?ps.indexOf(id)>=0:id==='voto';});}
 function redGrupo(r){if(/^Manual ·/.test(r.g)||r.g==='D. Frase e vocabulário')return 'Regras gerais';return String(r.g).replace(/^[A-Z]\.\s*/,'');}
-function redacaoItens(){return estiloItens().filter(function(r){return r.g!=='Termos e grafias'&&r.g!=='E. Citação'&&r.g!=='F. Dispositivo e fecho'&&r.g!=='G. Matéria rural'&&!/voto rural/i.test(r.titulo||'')&&!/^Manual · Vocabul/.test(r.g);}).map(function(r){r.rg=redGrupo(r);return r;});}
+function redacaoItens(){return estiloItens().filter(function(r){return r.g!=='A. Estrutura'&&r.g!=='Termos e grafias'&&r.g!=='E. Citação'&&r.g!=='F. Dispositivo e fecho'&&r.g!=='G. Matéria rural'&&!/voto rural/i.test(r.titulo||'')&&!/^Manual · Vocabul/.test(r.g);}).map(function(r){r.rg=redGrupo(r);return r;});}
 function xEstilo(){
   var R=redacaoItens(),gs={};R.forEach(function(r){gs[r.rg]=(gs[r.rg]||0)+1;});
   var ord=RED_ORD.filter(function(g){return gs[g];}).concat(Object.keys(gs).filter(function(g){return RED_ORD.indexOf(g)<0;}));
-  $('#x-aside').innerHTML='<div class="lab">Redação</div>'+xAsideList(ord.map(function(g){return [g,g,gs[g]];}),XS.grupo,'g','Todos os tópicos',R.length)+'<div class="note">Como escrever: regras gerais de frase e léxico, depois as regras de estrutura, prova e fundamentação. Dispositivo e fecho estão na Estrutura das peças; palavras, grafias e citação, em Vocabulário e forma.</div>';
+  $('#x-aside').innerHTML='<div class="lab">Redação</div>'+xAsideList(ord.map(function(g){return [g,g,gs[g]];}),XS.grupo,'g','Todos os tópicos',R.length)+'<div class="note">Como escrever: regras gerais de frase e léxico, depois as regras de prova e fundamentação. Regras de estrutura, dispositivo e fecho estão na Estrutura das peças; palavras, grafias e citação, em Vocabulário e forma.</div>';
   bindAside('g','grupo');
   var L=R.filter(function(r){return (!XS.grupo||r.rg===XS.grupo)&&hit([r.titulo,r.pref,r.ev,r.regra,r.obs].join(' '));});
   $('#x-cnt').innerHTML='<b>'+L.length+'</b> regras';
