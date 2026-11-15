@@ -183,7 +183,7 @@ def montar(var):
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
     secoes = t[i0:i1]; t = t[:i0] + t[i1:]
     abas = secoes[secoes.index('>') + 1:secoes.rindex('</nav>')]
-    ordem = ['ement', 'edit', 'consulta', 'temas', 'rep', 'enc']
+    ordem = ['ement', 'edit', 'dir', 'consulta', 'temas', 'rep', 'enc']
     lin = {}
     for l in abas.strip().split('\n'):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l
@@ -191,8 +191,8 @@ def montar(var):
     rotulo = ('<a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-cmp eq-ed" aria-current="page">Editor</span>' if var == 'editor'
               else '<a class="eq-cmp" href="/compendio/" aria-current="page">Compêndio</a>')
     k = t.index('<div class="brand tw">'); k = t.index('</span></div>\n', k) + len('</span></div>\n')
-    t = t[:k] + ('  <nav class="eqtabs" aria-label="Gabinete CMT"><a href="/equipe/#inicio" data-eqlink>Início</a><a href="/equipe/#pauta" data-eqlink>Pauta</a>'
-                 '<span class="eq-grp">' + rotulo + '<span class="tabs eq-sec" role="tablist" aria-label="Seções do Compêndio">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
+    t = t[:k] + ('  <nav class="eqtabs" aria-label="Gabinete CMT"><a href="/equipe/#inicio" data-eqlink>Início</a><a href="/equipe/#pauta" data-eqlink>Pauta</a></nav>'
+                 '<nav class="eqtabs eq-cpn" aria-label="Compêndio"><span class="eq-grp">' + rotulo + '<span class="tabs eq-sec" role="tablist" aria-label="Seções do Compêndio">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
     a = '  </div>\n</header>\n'
     t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a)
     js += '\n' + (H/'eqnav.js').read_text(encoding='utf-8')
