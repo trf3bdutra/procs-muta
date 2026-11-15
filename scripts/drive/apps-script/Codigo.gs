@@ -221,13 +221,24 @@ function formulaEtapa_(l) { return '=IF($B' + l + '="","",IF($H' + l + '<>"","Mi
 /* texto de exibição → valor da célula: datas como data; número de item como número; texto que pareceria número, data ou fórmula, com apóstrofo */
 function valor_(col, v) {
   v = v == null ? '' : String(v); if (!v) return '';
-  if (COLS_DATA[col]) { var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v); return m ? new Date(+m[3], +m[2] - 1, +m[1], 12) : v; }
+  if (COLS_DATA[col]) { var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v); return m ? new Date(+m[3], +m[2] - 1, +m[1]) : v; }
   if (col === 'Item' || col === 'Nº') return /^\d+$/.test(v) ? Number(v) : v;
   return /^([=+@-]|[\d.,\/:%\s-]+$)/.test(v) ? "'" + v : v;
 }
 function setData_(r, br) {
   var m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(String(br || ''));
   if (!m) { r.setValue(br || ''); return; }
-  r.setValue(new Date(+m[3], +m[2] - 1, +m[1], 12)).setNumberFormat('dd/mm/yyyy');
+  r.setValue(new Date(+m[3], +m[2] - 1, +m[1])).setNumberFormat('dd/mm/yyyy');
+}
+/* manutenção: tira a hora de datas gravadas com horário (versões anteriores gravavam 12:00) */
+function corrigirHoras() {
+  var ids = Object.keys(arquivos_()), n = 0;
+  ids.forEach(function (id) { SpreadsheetApp.openById(id).getSheets().forEach(function (sh) {
+    var lr = sh.getLastRow(), lc = sh.getLastColumn(); if (!lr || !lc) return;
+    var R = sh.getRange(1, 1, lr, Math.min(lc, 30)), V = R.getValues(), F = R.getFormulas(), mud = false;
+    V.forEach(function (L, i) { L.forEach(function (v, j) { if (!F[i][j] && v instanceof Date && (v.getHours() || v.getMinutes())) { V[i][j] = new Date(v.getFullYear(), v.getMonth(), v.getDate()); mud = true; n++; } }); });
+    if (mud) V.forEach(function (L, i) { L.forEach(function (v, j) { if (!F[i][j] && v instanceof Date) sh.getRange(i + 1, j + 1).setValue(v); }); });
+  }); });
+  Logger.log(n + ' datas corrigidas.');
 }
 function isoDe_(br) { var m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(String(br || '')); return m ? m[3] + '-' + m[2] + '-' + m[1] : ''; }
