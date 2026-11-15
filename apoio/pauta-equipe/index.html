@@ -799,6 +799,32 @@ html[data-theme=dark] #v-pauta.ed.mono .urg{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07
 #v-pauta.ed.mono .urg-t .dd.al{background:#f6e3de;color:#923d30;border-color:var(--ul)}
 #v-pauta.ed.mono .urg-sg summary{font:700 12.5px var(--font);color:var(--ei)}#v-pauta.ed.mono .urg-sg summary span{border-radius:0;font:400 10px var(--emono);background:var(--ew);border:1px solid var(--el)}
 #v-pauta.ed.mono .urg .eqx{border-radius:0}
+
+/* Controles especiais · uma só página no estilo editorial (Projetos / Aprendizado) */
+#v-pauta .ctl-lead,#v-pauta .ctl-sec{display:none}
+#v-pauta.ctl{display:grid;grid-template-columns:232px minmax(0,1fr);column-gap:36px;align-items:start}
+#v-pauta.ctl>*{grid-column:2;min-width:0}
+#v-pauta.ctl>.pt-h,#v-pauta.ctl>.ctl-lead{grid-column:1/-1}
+#v-pauta.ctl .pt-h{border-top:0;padding-top:4px;margin-top:22px}
+#v-pauta.ctl .pt-h h1{font-size:52px;line-height:1.02;font-weight:700;letter-spacing:-.045em;color:var(--ei)}
+#v-pauta.ctl .pt-h h1 em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+#v-pauta.ctl .ctl-lead{display:block;margin:6px 0 26px;max-width:720px;font-size:15.5px;line-height:1.55;color:var(--em)}
+#v-pauta.ctl .ctl-sub{display:flex!important;flex-direction:column;gap:0;grid-column:1;grid-row:3 / span 6;position:sticky;top:84px;background:transparent!important;border:0!important;border-top:2px solid var(--eg)!important;border-radius:0!important;padding:12px 0 0!important;margin:0!important}
+#v-pauta.ctl .ctl-nk{margin:0 0 6px;font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
+#v-pauta.ctl .ctl-sub button{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:baseline;gap:6px;width:100%;border:0;border-bottom:1px solid var(--el);border-radius:0;background:transparent;padding:10px 2px;text-align:left;font:600 13.5px var(--font);color:var(--ei);cursor:pointer}
+#v-pauta.ctl .ctl-sub button i{font:400 10.5px var(--emono);font-style:normal;color:var(--em)}
+#v-pauta.ctl .ctl-sub button small{font:400 10.5px var(--emono);color:var(--em)}
+#v-pauta.ctl .ctl-sub button:hover{color:var(--eg)}
+#v-pauta.ctl .ctl-sub button[aria-current=true]{color:var(--eg);box-shadow:inset 3px 0 var(--eo);padding-left:10px}
+#v-pauta.ctl .ctl-sub button[aria-current=true] i{color:var(--eo2)}
+#v-pauta.ctl .ctl-nota{margin:12px 0 0;font-size:12px;line-height:1.5;color:var(--em)}
+#v-pauta.ctl .ctl-sec{display:block;border-top:2px solid var(--eg);padding:14px 0 12px;margin:30px 0 0;scroll-margin-top:84px}
+#v-pauta.ctl #ctl-metas{margin-top:0}
+#v-pauta.ctl .ctl-k{margin:0;font:400 10.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
+#v-pauta.ctl .ctl-sec h2{margin:6px 0 4px;font-size:30px;line-height:1.1;font-weight:700;letter-spacing:-.03em;color:var(--ei)}
+#v-pauta.ctl .ctl-sec>p:last-child{margin:0;max-width:760px;font-size:14px;color:var(--em)}
+#v-pauta.ctl .metas{display:block!important;background:var(--ep);border:1px solid var(--el);border-radius:8px;padding:16px;box-shadow:0 8px 24px -18px rgba(32,59,57,.35)}
+@media (max-width:980px){#v-pauta.ctl{display:block}#v-pauta.ctl .ctl-sub{position:static;flex-direction:row;flex-wrap:wrap;gap:6px;border-top:0!important;padding:0!important;margin:0 0 18px!important}#v-pauta.ctl .ctl-nk,#v-pauta.ctl .ctl-nota{display:none}#v-pauta.ctl .ctl-sub button{width:auto;border:1px solid var(--el);border-radius:999px;padding:6px 12px}#v-pauta.ctl .pt-h h1{font-size:38px}}
 </style>
 <style id="cc-cal-css">
 .cc-esq{position:relative}
@@ -1043,7 +1069,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
 
 <div id="app" hidden>
   <header><span class="br"><i class="star" aria-hidden="true"></i><span>GABINETE CMT · <em>EQUIPE</em></span></span>
-    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page">Início</a><a href="#pauta" data-vw="pauta">Pautas</a><a href="#mono" data-vw="mono">Monocráticas</a><a href="#controles" data-vw="ctrl">Controles especiais</a></nav><nav class="tabs eq-cpn" aria-label="Compêndio"><span class="eq-grp"><a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-dd" role="menu" aria-label="Seções do Compêndio"><a href="/compendio/#v=ement">Ementário</a><b>Editorial</b><a href="/compendio/#v=edit&amp;s=pecas">Peças</a><a href="/compendio/#v=edit&amp;s=mod">Modelos</a><a href="/compendio/#v=edit&amp;s=par">Parágrafos</a><a href="/compendio/#v=dir">Diretrizes</a><a href="/compendio/#v=consulta">Consulta</a></span></span></nav><span class="sp"></span><span id="salvo"></span><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic hbx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i class="bdg" id="c-not" hidden></i></button><button class="hb ic hbx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><i class="bdg" id="c-pen" hidden></i></button>
+    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page">Início</a><a href="#pauta" data-vw="pauta">Pautas</a><a href="#mono" data-vw="mono">Monocráticas</a><a href="#controles" data-vw="ctrl">Controles especiais</a></nav><nav class="tabs eq-cpn" aria-label="Compêndio"><span class="eq-grp"><a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-dd" role="menu" aria-label="Seções do Compêndio"><a href="/compendio/#v=ement">Ementário</a><b>Editorial</b><a href="/compendio/#v=edit&amp;s=pecas">Minuta-Matriz</a><a href="/compendio/#v=edit&amp;s=mod">Modelos</a><a href="/compendio/#v=edit&amp;s=par">Banco de trechos</a><a href="/compendio/#v=edit&amp;s=dir">Diretrizes</a><a href="/compendio/#v=edit&amp;s=consulta">Consulta</a></span></span></nav><span class="sp"></span><span id="salvo"></span><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic hbx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i class="bdg" id="c-not" hidden></i></button><button class="hb ic hbx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><i class="bdg" id="c-pen" hidden></i></button>
     <button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
     <span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb" id="sair">Sair</button></header>
   <main id="v-inicio" class="home-v2">
@@ -1120,9 +1146,13 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
     <div class="trm-urq" id="trm-urq"></div>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <section class="urg" id="urg" hidden></section>
-    <div class="ctl-sub" id="ctl-sub" role="tablist"><button data-sub="metas">Metas</button><button data-sub="sobr">Sobrestados</button><button data-sub="sens">Casos sensíveis</button></div>
+    <p class="ctl-lead">Metas do CNJ, sobrestados e casos sensíveis numa só página. Cada linha lê e grava a ficha do processo, a mesma do CMT-monitor.</p>
+    <nav class="ctl-sub" id="ctl-sub" aria-label="Seções dos Controles especiais"><p class="ctl-nk">Nesta página</p><button type="button" data-sub="metas"><i>01</i><span>Metas do CNJ</span><small id="ctl-n-metas"></small></button><button type="button" data-sub="sobr"><i>02</i><span>Sobrestados e suspensos</span><small id="ctl-n-sobr"></small></button><button type="button" data-sub="sens"><i>03</i><span>Casos sensíveis</span><small id="ctl-n-sens"></small></button><p class="ctl-nota">Clique numa seção para ir até ela. Alterações das três listas são salvas juntas.</p></nav>
+    <div class="ctl-sec" id="ctl-metas"><p class="ctl-k">01 / Acompanhar as metas</p><h2>Metas do CNJ</h2><p>Processos de meta até o fim definitivo, com a fase no PJe, a pauta e o acompanhamento de cada um.</p></div>
     <section class="metas" id="metas"></section>
+    <div class="ctl-sec" id="ctl-sobr"><p class="ctl-k">02 / Vigiar o sobrestamento</p><h2>Sobrestados e suspensos</h2><p>Processos parados por tribunal superior, IRDR, IAC ou outro motivo, com o tema, a situação do precedente e a previsão de retirada.</p></div>
     <section class="metas" id="sobr"></section>
+    <div class="ctl-sec" id="ctl-sens"><p class="ctl-k">03 / Cuidar dos casos sensíveis</p><h2>Casos sensíveis</h2><p>Saúde e outros casos que pedem acompanhamento mais próximo, pelo assunto, pelas etiquetas ou incluídos pela equipe.</p></div>
     <section class="metas" id="sens"></section>
     <div class="pt-mk" id="mk"></div>
     <div class="pt-corpo"><div class="pt-lista">
@@ -1219,7 +1249,7 @@ function salvarTudo(){var P=[];if(PEND.size)P.push(gravar());if(typeof MTP!=='un
 function pedeSalvar(msg){toast(msg||'Salve ou descarte as alterações antes.');var b=$('#sbar');if(b){b.classList.remove('aten');void b.offsetWidth;b.classList.add('aten');}}
 function descartar(){var n=nPend();if(!n||!confirm('Descartar as alterações não salvas de '+n+(n===1?' processo?':' processos?')))return;
   PEND.clear();if(typeof MTP!=='undefined')MTP.clear();if(typeof SBP!=='undefined')SBP.clear();if(typeof SNP!=='undefined')SNP.clear();barra();
-  if(S.fonte==='metas')MT.dados=null;if(S.fonte==='sobr')SB.dados=null;if(S.fonte==='sens')SN.dados=null;carregar(true);toast('Alterações descartadas.');}
+  if(S.fonte==='metas'||S.fonte==='ctrl')MT.dados=null;if(S.fonte==='sobr'||S.fonte==='ctrl')SB.dados=null;if(S.fonte==='sens'||S.fonte==='ctrl')SN.dados=null;carregar(true);toast('Alterações descartadas.');}
 document.body.insertAdjacentHTML('beforeend','<div id="sbar" role="status" hidden><i></i><span id="sbar-t"></span><button type="button" id="sbar-d">Descartar</button><button type="button" id="sbar-s" title="Ctrl+S">Salvar<kbd>Ctrl+S</kbd></button></div>');
 $('#sbar-s').onclick=function(){salvarTudo();};$('#sbar-d').onclick=descartar;
 document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&!e.altKey&&(e.key==='s'||e.key==='S')&&!$('#app').hidden&&!document.querySelector('.cmtfx-ov')){e.preventDefault();if(nPend())salvarTudo();else toast('Nada a salvar.');}});
@@ -1253,6 +1283,8 @@ function falha(e){if(e.status===401){entrada();return;}toast(e.message);$('#lst'
 function vigente(n,f,ses){return n===S.req&&S.fonte===f&&(f==='mono'||S.ses===ses);}
 function carregar(silencioso){
   var nReq=S.req=(S.req||0)+1,fReq=S.fonte,sReq=S.ses;
+  if(S.fonte==='ctrl'){$('#pt-ey').textContent='Produção / Controles especiais';$('#pt-t').innerHTML='Controles <em>especiais</em>';$('#pt-st').textContent='';
+    return Promise.all([carregarMetas(silencioso),carregarSobr(silencioso),carregarSens(silencioso)]).then(ctlConta,ctlConta);}
   if(S.fonte==='sobr'){$('#pt-ey').textContent='Controles especiais / Sobrestados e suspensos';$('#pt-t').textContent='Sobrestados';$('#pt-st').textContent='';return carregarSobr(silencioso);}
   if(S.fonte==='metas'){$('#pt-ey').textContent='Controles especiais / Metas do CNJ';$('#pt-t').textContent='Metas';$('#pt-st').textContent='';return carregarMetas(silencioso);}
   if(S.fonte==='sens'){$('#pt-ey').textContent='Controles especiais / Casos sensíveis';$('#pt-t').textContent='Casos sensíveis';$('#pt-st').textContent='';return carregarSens(silencioso);}
@@ -1379,7 +1411,7 @@ document.addEventListener('change',function(e){var t=e.target;if(t.hasAttribute(
   var it=achar(t);if(!it)return;
   if(t.hasAttribute('data-et')){setEtapa(it,t.value);render();return;}
   if(t.hasAttribute('data-r')){var f=t.getAttribute('data-r'),o={};it[f]=t.value;o[f]=t.value;marcar(it,o);if(f!=='resultado')render();}},true);
-$('#b-atu').onclick=function(){var b=this;if(nPend()||gravando){pedeSalvar('Salve ou descarte as alterações antes de atualizar.');return;}b.classList.add('gira');if(S.fonte==='metas')MT.dados=null;if(S.fonte==='sobr')SB.dados=null;if(S.fonte==='sens')SN.dados=null;
+$('#b-atu').onclick=function(){var b=this;if(nPend()||gravando){pedeSalvar('Salve ou descarte as alterações antes de atualizar.');return;}b.classList.add('gira');if(S.fonte==='metas'||S.fonte==='ctrl')MT.dados=null;if(S.fonte==='sobr'||S.fonte==='ctrl')SB.dados=null;if(S.fonte==='sens'||S.fonte==='ctrl')SN.dados=null;
   Promise.all([sessoesEquipe(false),notificacoes(),pendencias(),$('#v-inicio').hidden?carregar(true):painel()]).catch(function(){}).then(function(){setTimeout(function(){b.classList.remove('gira');},300);toast('Atualizado.');});};
 setInterval(function(){if(!$('#app').hidden&&!nPend()&&!document.activeElement.closest('.pc')&&document.visibilityState==='visible')carregar(true);},60000);
 /* ================= modelo do processo ================= */
@@ -2159,18 +2191,23 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
 var P={dados:null,mes:'',aus:[],tipos:[]};
 var MK=[['pautarAte','Peço dia','#2d6fa8'],['inicioPreparacao','Início da preparação','#7352a5'],['entregaMinutas','Entrega das minutas','#c46a1f'],['liberacao','Liberação','#28744b']];
 var SCOR=['#1f6f8b','#8a5cb8','#1a8a6a','#c46a1f','#b0406a','#3e72ad'];
-var CTRLV=['metas','sobr','sens'];
-function vista(v){if(v==='ctrl'||v==='controles')v=S.ctrlSub||'metas';if(v==='urg')v='mono';
-  v=['pauta','mono'].concat(CTRLV).indexOf(v)>=0?v:'inicio';if(CTRLV.indexOf(v)>=0)S.ctrlSub=v;
+var CTRLV=['ctrl','metas','sobr','sens'],CTRLT=['metas','sobr','sens'];
+function vista(v){if(v==='controles')v='ctrl';if(v==='urg')v='mono';var alvo='';
+  /* Controles especiais: Metas, Sobrestados e Casos sensíveis numa só página; o endereço de cada um leva à sua seção */
+  if(CTRLT.indexOf(v)>=0){alvo=v;v='ctrl';}
+  v=['pauta','mono','ctrl'].indexOf(v)>=0?v:'inicio';
   if(S.prt&&(v==='inicio'||v!==S.fonte)){S.prt=null;S.prtAba=0;try{prontLateral();}catch(e){}}
   if(v==='pauta'&&U.eu&&S.calSig!=null)sessoesEquipe(false);$('#v-inicio').hidden=v!=='inicio';$('#v-pauta').hidden=v==='inicio';
   var f=v==='inicio'?S.fonte:v;if(v!=='inicio'&&f!==S.fonte){if(nPend()){salvarTudo();toast('Alterações salvas ao trocar de página.');}S.fonte=f;S.doc=null;S.aberto={};S.sel={};
-    var vp=$('#v-pauta');['mono','metas','sobr','sens'].forEach(function(c){vp.classList.toggle(c,f===c);});vp.classList.toggle('ctl',CTRLV.indexOf(f)>=0);if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu)carregar();}
-  var cur=CTRLV.indexOf(v)>=0?'ctrl':v;
-  Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')===cur)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
-  Array.prototype.forEach.call(document.querySelectorAll('#ctl-sub [data-sub]'),function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-sub')===v));});
-  try{history.replaceState(null,'','#'+v);}catch(e){}if(v==='inicio'&&(!P.dados||!P.dados.entregas||Date.now()-(P.atualizado||0)>30000))painel();}
-$('#ctl-sub').addEventListener('click',function(e){var b=e.target.closest('[data-sub]');if(b)vista(b.getAttribute('data-sub'));});
+    var vp=$('#v-pauta');vp.classList.toggle('mono',f==='mono');CTRLT.forEach(function(c){vp.classList.toggle(c,f==='ctrl');});vp.classList.toggle('ctl',f==='ctrl');if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu)carregar();}
+  Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  ctlMarca(alvo);
+  try{history.replaceState(null,'','#'+(v==='ctrl'?(alvo||'controles'):v));}catch(e){}if(v==='inicio'&&(!P.dados||!P.dados.entregas||Date.now()-(P.atualizado||0)>30000))painel();
+  if(alvo)setTimeout(function(){var h=$('#ctl-'+alvo);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});},S.fonte==='ctrl'?60:400);}
+function ctlMarca(a){Array.prototype.forEach.call(document.querySelectorAll('#ctl-sub [data-sub]'),function(b){b.setAttribute('aria-current',String(b.getAttribute('data-sub')===a));});}
+function ctlConta(){var n={metas:(MT.dados||[]).filter(function(x){return x.fase!=='Encerrado';}).length,sobr:(SB.dados||[]).length,sens:(SN.dados||[]).length};
+  CTRLT.forEach(function(k){var e=$('#ctl-n-'+k);if(e)e.textContent=n[k]?String(n[k]):'';});}
+$('#ctl-sub').addEventListener('click',function(e){var b=e.target.closest('[data-sub]');if(!b)return;var k=b.getAttribute('data-sub');ctlMarca(k);try{history.replaceState(null,'','#'+k);}catch(x){}var h=$('#ctl-'+k);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});});
 document.querySelector('.tabs').addEventListener('click',function(e){var a=e.target.closest('[data-vw]');if(!a)return;e.preventDefault();vista(a.getAttribute('data-vw'));});
 function painel(){$('#hist').innerHTML='<div class="empty">Lendo…</div>';
   return Promise.all([api('/api/painel?entregas=1'),api('/api/ausencias').catch(function(){return {registros:[],tipos:[]};})]).then(function(r){P.dados=r[0];P.aus=r[1].registros||[];P.tipos=r[1].tipos||[];P.atualizado=Date.now();inicio();hcAtualizar();}).catch(falha);}
