@@ -134,6 +134,12 @@ html[data-theme=dark] .trb{--t-bg:#0a1821;--t-ln:#1e3747;--t-rs:#10222e;--t-ti:#
 .trb-p{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.tp{background:var(--t-rs);border:1px solid var(--t-ln);border-radius:8px;padding:10px 12px}
 .tp-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.tp-h small{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--t-mu)}.tp-h b{font-size:13px;color:var(--t-ti);white-space:nowrap}
 .tp-b{height:7px;border-radius:4px;background:var(--t-bar);overflow:hidden;margin-top:8px}.tp-b i{display:block;height:100%;background:var(--t-gab)}.tp.eu .tp-b i{background:var(--t-eu)}
+/* rodapé do painel: processos, minutas e alertas da sessão, cada parte abre o detalhe */
+.trb-rd{margin:0;border-top:1px solid var(--t-ln);background:var(--t-rs)}.trb-rd .pt-k{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.trb-rd .pk{background:transparent;border:0;border-left:1px solid var(--t-ln);border-radius:0;min-height:0;padding:10px 18px;gap:5px}.trb-rd .pk:first-child{border-left:0}
+.trb-rd .pk-h small{font-size:9.5px;letter-spacing:.12em}.trb-rd .pk p{color:var(--t-mu)}.trb-rd .pk p b{color:var(--t-ti)}.trb-rd .kd{border-top-color:var(--t-ln);color:var(--t-mu)}.trb-rd .kd b{color:var(--t-ti)}
+.trb-rd .pk-x{background:var(--t-bg);border-color:var(--t-ln)}
+@media (max-width:900px){.trb-rd .pt-k{grid-template-columns:1fr}.trb-rd .pk{border-left:0;border-top:1px solid var(--t-ln)}.trb-rd .pk:first-child{border-top:0}}
 .trb-fil{display:flex;height:3px}.trb-fil i{flex:1;background:#006291}.trb-fil i+i{background:#207242}
 #v-pauta.mono #trb,#v-pauta.ctl .trb,#v-pauta.urg .trb{display:none!important}.trm{display:none}#v-pauta.mono .trm{display:block}#v-pauta.mono .pt-h,#v-pauta.mono .pt-top{display:none}
 /* Monocráticas: indicadores do período no painel superior */
@@ -202,6 +208,7 @@ html[data-theme=dark] .pk{--pk:#4e9bcb;--pk-s:#0c2839}html[data-theme=dark] .pk.
 .pt-mk{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding:12px 4px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:12px}
 .pt-mk .mi{display:flex;align-items:center;gap:10px}.pt-mk .mc{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#f7efe0;color:#9a6a16;font-size:12px;border:1px solid #ecd7a7}
 .pt-mk small{display:block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.pt-mk b{font-size:13px}.pt-mk .ses b{color:#b0741a}.pt-mk .pas{opacity:.6}
+.exb{display:inline-flex;gap:4px}.b.ic3{width:34px;height:34px;padding:0;display:inline-grid;place-items:center}.b.ic3[hidden]{display:none}
 .pt-hd{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px 0;margin-bottom:10px}
 #v-pauta.ctl .pt-hd,#v-pauta.metas .pt-hd,#v-pauta.sobr .pt-hd,#v-pauta.urg .pt-hd{display:none!important}
 .pt-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:10px}.pt-bar.pt-fl{padding-top:10px;border-top:1px solid var(--line)}.pt-c b{font-size:16px}.pt-bar .sp{flex:1 1 0}.pt-c{display:inline-flex;align-items:baseline;gap:6px;margin-right:4px}
@@ -621,15 +628,13 @@ html[data-theme=dark] .st.ok{background:#183447!important}
       <div class="trb-h"><div><small class="trb-ey">Produção · Pauta de julgamento</small><h1 id="trb-t">Pauta de julgamento</h1><p class="trb-d" id="trb-d"></p></div>
         <div class="trb-c"><span class="trb-tag" id="ses-tag"></span><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><label class="trb-sl">Sessão<select id="ses" aria-label="Sessão"></select></label><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span><small id="ses-sub" hidden></small></div></div>
       <ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
-      <div class="trb-p" id="trb-p"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
+      <div class="trb-p" id="trb-p"></div></div>
+      <div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
     <section class="trb trm" id="trm" aria-labelledby="trm-t"><div class="trb-in">
       <div class="trb-h"><div><small class="trb-ey">Produção · Decisões monocráticas</small><h1 id="trm-t">Monocráticas</h1><p class="trb-d">Gestão de decisões, revisão e assinatura · indicadores pela data de cada etapa.</p></div>
         <div class="trb-c"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b trm-reg" id="trm-reg" aria-expanded="false">+ Registrar monocrática</button></div></div>
       <div class="trm-k" id="trm-k"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
-    <div class="pt-top">
-      <div class="pt-k" id="pt-k"></div>
-    </div>
     <section class="urg" id="urg" hidden></section>
     <div class="ctl-sub" id="ctl-sub" role="tablist"><button data-sub="metas">Metas</button><button data-sub="sobr">Sobrestados</button><button data-sub="sens">Casos sensíveis</button></div>
     <section class="metas" id="metas"></section>
@@ -643,7 +648,7 @@ html[data-theme=dark] .st.ok{background:#183447!important}
       <span class="pt-c"><b id="pt-n"></b> <small id="pt-f"></small><button class="b lk" id="f-limpa">Limpar filtros</button></span>
       <span class="sp"></span>
       <span class="seg" id="modo"><button data-v="cards" aria-pressed="true" title="Cartões compactos">▤ Cartões</button><button data-v="planilha" aria-pressed="false" title="Planilha no padrão do Controle de Pauta">▦ Planilha</button></span>
-      <button class="b" id="exp-xlsx">↓ Exportar</button>
+      <span class="exb" role="group" aria-label="Exportar e importar"><button class="b ic3" id="exp-xlsx"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="b ic3" id="exp-meus" aria-label="Exportar só as minhas designações" title="Exportar só as minhas designações"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><path d="M18.5 7v9M15.5 13l3 3 3-3"/></svg></button><button class="b ic3" id="exp-mes" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M12 12.5v5.5M9.5 15.5 12 18l2.5-2.5"/></svg></button><button class="b ic3" id="imp-xlsx" hidden aria-label="Importar monocráticas" title="Importar monocráticas (planilha no padrão da exportação)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7 10l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><input type="file" id="imp-arq" accept=".xlsx" hidden></span>
     </div>
     <div class="pt-bar pt-fl">
       <span class="pt-ir"><span>Ir para</span><select id="ir-k"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="ir-v" placeholder="Digite o número e Enter"></span>
@@ -809,8 +814,44 @@ $('#sel-filt').onclick=function(){filtrar().forEach(function(i){S.sel[dg(i.cnj)]
 $('#sel-limpa').onclick=function(){S.sel={};render();};
 $('#sel-copia').onclick=function(){var L=lista().filter(function(i){return S.sel[dg(i.cnj)];});if(!L.length)L=filtrar();var tx=L.map(function(i){return i.cnj;}).join('\n');
   (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toast(L.length+' processo(s) copiado(s).');}).catch(function(){toast('Não foi possível copiar.');});};
-$('#exp-xlsx').onclick=function(){var L=lista().filter(function(i){return S.sel[dg(i.cnj)];});if(!L.length)L=filtrar();if(!L.length){toast('Nada a exportar.');return;}
-  var MO=S.fonte==='mono',CC=MO?PLM:PL;baixarXlsx(MO?'Monocraticas_'+hoje()+'.xlsx':'Pauta_'+S.ses+'.xlsx',MO?'Monocráticas':'Sessão '+br(S.ses).replace(/\//g,'-'),CC.map(function(c){return [c[0]];}),L.map(MO?linhaExpMono:linhaExp),CC.map(function(c){return Math.max(8,Math.round(c[1]/7));}));};
+function expPauta(L,suf){baixarXlsx('Pauta_'+S.ses+(suf||'')+'.xlsx','Sessão '+br(S.ses).replace(/\//g,'-'),PL.map(function(c){return [c[0]];}),L.map(linhaExp),PL.map(function(c){return Math.max(8,Math.round(c[1]/7));}));}
+function expMono(L,nome){var X=PLM.concat([['Revisado em',128],['Para assinatura em',128]]);
+  baixarXlsx(nome,'Monocráticas',X.map(function(c){return [c[0]];}),L.map(function(it){return linhaExpMono(it).concat([it.dataCorrecao?br(it.dataCorrecao):'',it.dataLiberacao?br(it.dataLiberacao):'']);}),X.map(function(c){return Math.max(8,Math.round(c[1]/7));}));}
+/* pauta: integral (toda a sessão, sem filtros) · monocráticas: todos os registros */
+$('#exp-xlsx').onclick=function(){var MO=S.fonte==='mono',L=MO?((S.doc&&S.doc.itens)||[]):lista();if(!L.length){toast('Nada a exportar.');return;}
+  if(MO)expMono(L,'Monocraticas_todas_'+hoje()+'.xlsx');else expPauta(L,'');toast(L.length+' processo'+(L.length===1?'':'s')+' exportado'+(L.length===1?'':'s')+'.');};
+$('#exp-meus').onclick=function(){var L=lista().filter(meu);if(!L.length){toast('Nenhum processo designado a você nesta pauta.');return;}expPauta(L,'_'+String(U.eu||'').replace(/\s+/g,'_'));toast(L.length+' designaç'+(L.length===1?'ão':'ões')+' exportada'+(L.length===1?'':'s')+'.');};
+$('#exp-mes').onclick=function(){var P=monoPer(),em=function(v){v=(v||'').slice(0,10);return v&&v>=P.de&&v<=P.ate;};
+  var L=((S.doc&&S.doc.itens)||[]).filter(function(i){return em(i.monoEm)||em(i.dataMinuta)||em(i.dataCorrecao)||em(i.dataLiberacao);});
+  if(!L.length){toast('Nenhuma monocrática no período em tela.');return;}expMono(L,'Monocraticas_'+P.lb.replace(/[^0-9A-Za-zÀ-ú]+/g,'_')+'.xlsx');toast(L.length+' monocrática'+(L.length===1?'':'s')+' de '+P.lb+'.');};
+/* importação de monocráticas: planilha .xlsx no padrão da exportação; só os campos preenchidos são gravados (vazio não apaga) */
+function lerXlsx(arq){return arq.arrayBuffer().then(function(buf){var u=new Uint8Array(buf),dv=new DataView(buf),e=-1;
+  for(var i=u.length-22;i>=Math.max(0,u.length-70000);i--)if(dv.getUint32(i,true)===0x06054b50){e=i;break;}if(e<0)throw new Error('Arquivo não é uma planilha .xlsx.');
+  var n=dv.getUint16(e+10,true),o=dv.getUint32(e+16,true),F={},dec=new TextDecoder();
+  for(var k=0;k<n;k++){var m=dv.getUint16(o+10,true),cs=dv.getUint32(o+20,true),nl=dv.getUint16(o+28,true),el=dv.getUint16(o+30,true),cl=dv.getUint16(o+32,true),lo=dv.getUint32(o+42,true);
+    F[dec.decode(u.subarray(o+46,o+46+nl))]={m:m,cs:cs,lo:lo};o+=46+nl+el+cl;}
+  var abrir=function(nome){var f=F[nome];if(!f)return Promise.resolve('');var ini=f.lo+30+dv.getUint16(f.lo+26,true)+dv.getUint16(f.lo+28,true),b=u.slice(ini,ini+f.cs);
+    if(f.m===0)return Promise.resolve(dec.decode(b));return new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text();};
+  var sh=Object.keys(F).filter(function(x){return /^xl\/worksheets\/sheet\d+\.xml$/.test(x);}).sort()[0];if(!sh)throw new Error('Planilha sem aba de dados.');
+  return Promise.all([abrir(sh),abrir('xl/sharedStrings.xml')]);}).then(function(r){var P=new DOMParser(),ss=[];
+  if(r[1])[].forEach.call(P.parseFromString(r[1],'application/xml').getElementsByTagName('si'),function(s){ss.push([].map.call(s.getElementsByTagName('t'),function(x){return x.textContent;}).join(''));});
+  var col=function(ref){var s=(ref||'').replace(/\d+/g,''),n=0;for(var i=0;i<s.length;i++)n=n*26+s.charCodeAt(i)-64;return n-1;};
+  return [].map.call(P.parseFromString(r[0],'application/xml').getElementsByTagName('row'),function(row){var L=[];
+    [].forEach.call(row.getElementsByTagName('c'),function(c){var t=c.getAttribute('t'),v=c.getElementsByTagName('v')[0],val=t==='inlineStr'?c.textContent:t==='s'?ss[+(v&&v.textContent)]:(v?v.textContent:'');L[col(c.getAttribute('r'))]=val==null?'':String(val).trim();});return L;});});}
+function dataImp(v){v=String(v||'').trim();if(!v)return '';var m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v);if(m)return m[3]+'-'+m[2]+'-'+m[1];if(/^\d{4}-\d{2}-\d{2}/.test(v))return v.slice(0,10);
+  if(/^\d{5}(\.\d+)?$/.test(v))return new Date(Date.UTC(1899,11,30)+Math.floor(+v)*864e5).toISOString().slice(0,10);return '';}
+var IMPC={'tipo de ato':'tipoAto','hipotese art. 932':'hip932','detalhes':'obs','minutado em':'dataMinuta','revisado em':'dataCorrecao','para assinatura em':'dataLiberacao','servidor':'servidor','revisor':'corretor','resultado':'resJulg','honorarios':'honor','topico-sintese':'topico','intercorrencia':'intercor','pedido urgente':'urgTipo'};
+$('#imp-xlsx').onclick=function(){var f=$('#imp-arq');f.value='';f.click();};
+$('#imp-arq').onchange=function(){var arq=this.files[0];if(!arq)return;
+  lerXlsx(arq).then(function(rows){var H=(rows[0]||[]).map(function(h){return nq(h);}),ip=H.indexOf('processo');if(ip<0)throw new Error('A planilha precisa da coluna "Processo" (use o modelo da exportação).');
+    var R2=rows.slice(1).map(function(r){var cnj=fmtCnjDig(r[ip]||''),c={mono:true};if(dg(cnj).length!==20)return null;
+      H.forEach(function(h,i){var k=IMPC[h],v=r[i];if(!k||v==null||v==='')return;if(/^data/.test(k)){v=dataImp(v);if(!v)return;}if((k==='servidor'||k==='corretor')&&!U.gestor)return;c[k]=v;});return {cnj:cnj,campos:c};}).filter(Boolean);
+    if(!R2.length){toast('Nenhuma linha com número de processo válido.');return;}
+    if(!confirm('Importar '+R2.length+' monocrática'+(R2.length===1?'':'s')+' da planilha "'+arq.name+'"?\nSó os campos preenchidos são gravados; células vazias não apagam nada.'))return;
+    var ok=0,er=[];estado('Importando…','pend');
+    return R2.reduce(function(p,x,i){return p.then(function(){toast('Importando '+(i+1)+' de '+R2.length+'…');return api('/api/pauta?mono=1',{method:'POST',body:JSON.stringify(x)}).then(function(){ok++;}).catch(function(e){er.push(x.cnj+': '+e.message);});});},Promise.resolve())
+      .then(function(){estado(er.length?'✕ '+er.length+' com erro':'✓ gravado',er.length?'er':'');toast(ok+' importada'+(ok===1?'':'s')+(er.length?' · '+er.length+' com erro (veja o console)':'')+'.');if(er.length)console.warn('Importação de monocráticas:',er);return carregar(true);});})
+  .catch(function(e){toast(e.message);});};
 document.addEventListener('change',function(e){var t=e.target;if(t.hasAttribute('data-sel')){var a=t.closest('.pc');if(a){S.sel[a.getAttribute('data-k')]=t.checked;var ns=Object.keys(S.sel).filter(function(k){return S.sel[k];}).length;$('#sel-n').textContent=ns+' selecionado(s)';}return;}
   var it=achar(t);if(!it)return;
   if(t.hasAttribute('data-et')){setEtapa(it,t.value);render();return;}
@@ -883,7 +924,7 @@ function render(){
   $('#ses-sub').textContent=S.ses?br(S.ses)+(ss.hora?' · '+ss.hora:'')+' · '+diaSem(S.ses):'';
   var n=function(f){return L.filter(f).length;},jul=n(function(i){return /^julgad/i.test(i.resultado||'');}),adi=n(function(i){return /^adiad/i.test(i.resultado||'');}),ret=n(function(i){return /^retirad/i.test(i.resultado||'');});
   var mi=n(function(i){return i.dataMinuta;}),co=n(function(i){return i.dataCorrecao;}),li=n(function(i){return i.dataLiberacao;}),al=n(function(i){return alertas(i).length;}),ic=n(function(i){return (i.ctl||{}).intercor;}),sem=n(function(i){return !i.servidor||i.servidor==='—';}),mt=n(metaDe);
-  $('#pt-st').textContent=ic+' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'+(mt===1?'':'s');if(MO)bandaMono();prontLateral();
+  $('#pt-st').textContent=ic+' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'+(mt===1?'':'s');if(MO)bandaMono();prontLateral();var tx=MO?'Exportar todas as monocráticas (Excel)':'Exportar a pauta integral (Excel, padrão Controle de Pauta)';$('#exp-xlsx').title=tx;$('#exp-xlsx').setAttribute('aria-label',tx);$('#exp-meus').hidden=MO;$('#exp-mes').hidden=$('#imp-xlsx').hidden=!MO;if(MO){var tm='Exportar as monocráticas do período em tela ('+monoPer().lb+')';$('#exp-mes').title=tm;$('#exp-mes').setAttribute('aria-label',tm);}
   var det=function(k){if(!S.kx[k])return '';var o='';
     if(k==='p'){var c={};L.forEach(function(i){var a=MO?((i.ctl||{}).tipoAto||'tipo de ato não informado'):aprec(i);c[a]=(c[a]||0)+1;});o=Object.keys(c).map(function(a){return '<span><b>'+c[a]+'</b> '+esc(a)+'</span>';}).join('');}
     if(k==='m'){var r={};L.forEach(function(i){var s=i.servidor||'sem minutante';r[s]=r[s]||[0,0];r[s][0]++;if(i.dataMinuta)r[s][1]++;});o=Object.keys(r).sort().map(function(s){return '<span>'+esc(s)+' <b>'+r[s][1]+'/'+r[s][0]+'</b></span>';}).join('');}
