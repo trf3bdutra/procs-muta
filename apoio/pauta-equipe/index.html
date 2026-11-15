@@ -99,7 +99,7 @@ main{max-width:1320px;margin:0 auto;padding:18px 22px 60px}
 /* cartão compacto */
 .lst.cards{display:flex;flex-direction:column;gap:8px}
 .pc.cpt{border-left:3px solid #c9bfe0;border-radius:12px;box-shadow:none}.pc.cpt.meu{border-left-color:var(--gold-d,#b0741a)}.pc.cpt.al{border-left-color:#c4953c}.pc.cpt.li{border-left-color:#8a5cb8}.pc.cpt.co{border-left-color:#2d6fa8}
-.pc.cpt .rw{display:grid;grid-template-columns:28px 20px 34px minmax(200px,1.25fr) minmax(200px,1.4fr) auto auto auto;gap:12px;align-items:center;padding:10px 12px}
+.pc.cpt .rw{display:grid;grid-template-columns:28px 20px 34px minmax(200px,1.25fr) minmax(200px,1.4fr) auto auto auto 30px;gap:12px;align-items:center;padding:10px 12px}
 .xb{width:26px;height:26px;border-radius:8px;border:0;background:#e9f2ee;color:#1f4c4f;cursor:pointer;font-size:11px}.sel{width:16px;height:16px;accent-color:#1f4c4f}
 .pc.cpt .it{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--soft);display:grid;place-items:center;font-weight:800;font-size:13px}
 .pc.cpt .id .cnj{display:block;font:700 12px var(--mono);letter-spacing:.02em}.pc.cpt .id small,.pc.cpt .as small{display:block;font-size:11px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -235,6 +235,34 @@ html[data-theme=dark] .st.ok{background:#183447!important}
 .empty{padding:30px;text-align:center;color:var(--mut);border:1px dashed var(--line);border-radius:12px;background:var(--card)}
 .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:var(--card);padding:9px 16px;border-radius:9px;font-weight:700;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}.toast.on{opacity:1}
 @media (max-width:980px){.kpis{grid-template-columns:repeat(3,1fr)}.hd{grid-template-columns:auto 1fr}.ac{grid-column:1/-1;justify-content:flex-start}.pn,.grid{grid-template-columns:1fr}.mr{padding-left:14px}.rec{grid-template-columns:1fr 1fr}}
+/* ficha única do processo (padrao/ficha.json), gravada em acervo/operacional.json */
+.fxb{font-size:15px}
+.fd{position:fixed;inset:0;z-index:60;background:rgba(9,22,32,.55);display:flex;justify-content:flex-end}
+.fd[hidden]{display:none}
+.fdc{width:min(980px,100%);height:100%;background:var(--bg);display:flex;flex-direction:column;box-shadow:-12px 0 40px rgba(0,0,0,.25)}
+.fdh{display:flex;align-items:center;gap:12px;padding:14px 20px;background:linear-gradient(90deg,#173c47,#1f4c4f);color:#eef4f1}
+.fdh b{font:700 14px var(--mono);letter-spacing:.02em}.fdh small{display:block;color:#cfe0db;font-size:12px}.fdh .sp{flex:1}
+.fdh .fd-st{font-size:12px;color:#9fd6c2}.fdh .fd-st.er{color:#ffb4a3}.fdh .fd-st.pend{color:#e6c27a}
+.fdh button{border:1px solid rgba(255,255,255,.3);background:transparent;color:#eef4f1;border-radius:999px;padding:6px 12px;font-weight:700;cursor:pointer}
+.fdt{display:flex;gap:4px;padding:10px 20px 0;border-bottom:1px solid var(--line);background:var(--card)}
+.fdt button{border:0;background:transparent;padding:10px 14px;font-weight:700;color:var(--mut);border-bottom:2px solid transparent;cursor:pointer}
+.fdt button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--gold-d,#b0741a)}
+.fdb{flex:1;overflow:auto;padding:16px 20px 40px}
+.fdsel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.fdsel .sg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--soft)}
+.fdsel .sg button{border:0;background:transparent;border-radius:999px;padding:6px 14px;font-weight:700;color:var(--mut);cursor:pointer}
+.fdsel .sg button[aria-pressed=true]{background:var(--navy);color:#fff}
+.fdsel small{color:var(--mut)}
+.fdg{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:12px 14px;margin:0 0 12px}
+.fdg h4{margin:0 0 10px;font-size:13px;letter-spacing:.02em}
+.fdg .gr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px}
+.fdg label{display:flex;flex-direction:column;gap:4px;font-size:11.5px;font-weight:700;color:var(--mut)}
+.fdg label.w{grid-column:1/-1}
+.fdg input,.fdg select,.fdg textarea{font:13px var(--font);padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);font-weight:500}
+.fdg textarea{resize:vertical;min-height:60px}
+.fdg .ro{font-size:13px;color:var(--ink);font-weight:500;padding:7px 0}
+.fdg label.mud input,.fdg label.mud select,.fdg label.mud textarea{border-color:var(--gold-d,#b0741a);box-shadow:0 0 0 2px rgba(230,194,122,.25)}
+@media (max-width:700px){.fdg .gr{grid-template-columns:1fr}}
 </style>
 <style id="cc-cal-css">
 .cc-esq{position:relative}
@@ -734,6 +762,52 @@ function render(){
   $('#lst').className='lst '+S.modo;
   $('#lst').innerHTML=S.modo==='planilha'?(MO?planilhaMono(V):planilha(V)):V.map(cartao).join('');
 }
+/* ================= ficha única do processo (padrao/ficha.json → acervo/operacional.json) ================= */
+var FD={it:null,F:null,op:null,fo:null,aba:'Triagem',dest:null,pend:{},t:null,gestor:false};
+function fdVal(sec,k){var r=FD.op||{};return ((r[sec]||{})[k])||'';}
+function fdFonte(c){var f=FD.fo||{};for(var i=0;i<(c.fonte||[]).length;i++){var v=f[c.fonte[i]];if(v!=null&&v!=='')return String(v);}return '';}
+function fdCampo(c){var w=c.tipo==='texto-longo'?' w':'';
+  if(!c.secao||c.editavel===false||c.calculado){var v=c.secao?fdVal(c.secao,c.chave):fdFonte(c);return '<label class="'+w+'">'+esc(c.rotulo)+'<span class="ro">'+(v?esc(v):'—')+'</span></label>';}
+  var id=c.secao+'.'+c.chave,v=id in FD.pend?FD.pend[id]:fdVal(c.secao,c.chave),bloq=(id==='producao.SERVIDOR'||id==='producao.CORRETOR')&&!FD.gestor,h;
+  var at=' data-fk="'+esc(id)+'"'+(bloq?' disabled title="Designação: só o gestor"':'');
+  if(c.tipo==='lista'){var O=c.opcoes||[];h='<select'+at+'><option value="">—</option>'+O.map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+(v&&O.indexOf(v)<0?'<option selected>'+esc(v)+'</option>':'')+'</select>';}
+  else if(c.tipo==='simnao')h='<select'+at+'><option value="">—</option><option'+(v==='Sim'?' selected':'')+'>Sim</option>'+(v&&v!=='Sim'?'<option selected>'+esc(v)+'</option>':'')+'</select>';
+  else if(c.tipo==='data'&&(!v||/^\d{4}-\d{2}-\d{2}$/.test(v)))h='<input type="date"'+at+' value="'+esc(v)+'">';
+  else if(c.tipo==='numero')h='<input type="number"'+at+' value="'+esc(v)+'">';
+  else if(c.tipo==='texto-longo')h='<textarea rows="3"'+at+'>'+esc(v)+'</textarea>';
+  else h='<input'+at+' value="'+esc(v)+'">';
+  return '<label class="'+w+(id in FD.pend?' mud':'')+'">'+esc(c.rotulo)+h+'</label>';}
+function fdDestGrav(){return 'producao.Destino' in FD.pend?FD.pend['producao.Destino']:fdVal('producao','Destino');}
+function fdDestino(){if(FD.dest)return FD.dest;var d=fdDestGrav();return d==='Monocrática'?'monocratica':d?'sessao':(S.fonte==='mono'?'monocratica':'sessao');}
+function fdRender(){var F=FD.F,o=$('#fd');if(!o)return;
+  o.querySelectorAll('.fdt button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-fda')===FD.aba));});
+  if(!F){o.querySelector('.fdb').innerHTML='<div class="empty">Lendo a ficha…</div>';return;}
+  var A=F.abas.filter(function(a){return a.aba===FD.aba;})[0]||F.abas[0],h='';
+  if(A.seletor){var dn=fdDestino(),sv=fdDestGrav();
+    h+='<div class="fdsel"><b>'+esc(A.seletor.rotulo)+'</b><span class="sg">'+A.seletor.opcoes.map(function(x){var k=x.valor==='Monocrática'?'monocratica':'sessao';return '<button data-fdd="'+esc(x.valor)+'" aria-pressed="'+(dn===k)+'">'+esc(x.rotulo)+'</button>';}).join('')+'</span>'+
+      '<small>'+(sv?'Destino gravado: '+esc(sv):'Destino ainda não definido'+(S.fonte==='mono'?' · aberto pelas Monocráticas':''))+(FD.gestor?'':' · a troca aqui só muda a visão; quem define o destino é o gestor')+'</small></div>';}
+  h+=A.grupos.filter(function(g){return !g.destino||g.destino===fdDestino();}).map(function(g){return '<section class="fdg"><h4>'+esc(g.grupo)+'</h4><div class="gr">'+g.campos.map(fdCampo).join('')+'</div></section>';}).join('');
+  o.querySelector('.fdb').innerHTML=h;}
+function fdSt(t,c){var s=$('#fd .fd-st');if(s){s.textContent=t;s.className='fd-st'+(c?' '+c:'');}}
+function fichaAbre(it){FD.it=it;FD.F=null;FD.op=null;FD.fo=null;FD.pend={};FD.dest=null;
+  var o=$('#fd');if(!o){o=document.createElement('div');o.id='fd';o.className='fd';o.setAttribute('role','dialog');o.setAttribute('aria-label','Ficha do processo');document.body.appendChild(o);}
+  o.hidden=false;o.innerHTML='<div class="fdc"><div class="fdh"><div><b>'+fmtCnj(it.cnj)+'</b><small>'+esc(it.assunto||'')+(it.classe?' · '+esc(it.classe):'')+'</small></div><span class="sp"></span><span class="fd-st"></span><button data-fdx>Fechar</button></div>'+
+    '<div class="fdt" role="tablist">'+['Processo','Triagem','Produção','Pauta'].map(function(a){return '<button role="tab" data-fda="'+a+'">'+a+'</button>';}).join('')+'</div><div class="fdb"></div></div>';
+  fdRender();
+  api('/api/pauta?ficha='+encodeURIComponent(it.cnj)).then(function(j){if(FD.it!==it)return;FD.F=j.ficha;FD.op=j.operacional;FD.fo=j.fonte;FD.gestor=!!j.gestor;
+    fdSt(j.operacional?'':'Sem ficha ainda: será criada ao gravar');fdRender();}).catch(function(e){o.querySelector('.fdb').innerHTML='<div class="empty">Não foi possível ler a ficha: '+esc(e.message)+'</div>';});}
+function fdGrava(){var P=FD.pend,ks=Object.keys(P),it=FD.it;if(!ks.length||!it)return;FD.pend={};fdSt('Gravando…','pend');
+  api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:it.cnj,campos:P})}).then(function(j){if(FD.it!==it)return;FD.op=j.operacional||FD.op;fdSt((j.recusados||[]).length?'Gravado (sem permissão para: '+j.recusados.join(', ')+')':'Gravado na ficha','');if(!$('#fd').hidden)fdRender();})
+  .catch(function(e){Object.keys(P).forEach(function(k){if(!(k in FD.pend))FD.pend[k]=P[k];});fdSt('Não gravou: '+e.message,'er');});}
+function fdFecha(){if(Object.keys(FD.pend).length){clearTimeout(FD.t);fdGrava();}var o=$('#fd');if(o)o.hidden=true;}
+document.addEventListener('click',function(e){var o=$('#fd');if(!o||o.hidden||!o.contains(e.target))return;var b;
+  if(e.target===o||e.target.closest('[data-fdx]')){fdFecha();return;}
+  if((b=e.target.closest('[data-fda]'))){FD.aba=b.getAttribute('data-fda');fdRender();return;}
+  if((b=e.target.closest('[data-fdd]'))){var v=b.getAttribute('data-fdd');FD.dest=v==='Monocrática'?'monocratica':'sessao';
+    if(FD.gestor&&v!==fdDestGrav()){FD.pend['producao.Destino']=v;clearTimeout(FD.t);FD.t=setTimeout(fdGrava,300);}fdRender();return;}});
+document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.closest('#fd')||!t.hasAttribute('data-fk'))return;
+  FD.pend[t.getAttribute('data-fk')]=t.value;t.closest('label').classList.add('mud');fdSt('Alterações a gravar…','pend');clearTimeout(FD.t);FD.t=setTimeout(fdGrava,900);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=$('#fd');if(o&&!o.hidden)fdFecha();}});
 function cartao(it){
   var k=dg(it.cnj),ab=!!S.aberto[k],et=etapa(it),C=(it.ctl||{}).cartao||{},tj=tipoJ(it),o={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3}[et],A=alertas(it),c=it.ctl||{};
   var stp=[['Minutado','<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>'],['Corrigido','✓'],['Liberado','➤']]
@@ -745,10 +819,10 @@ function cartao(it){
     '<div class="as"><b>'+esc(it.assunto||'assunto não informado')+'</b><small>'+esc(it.classe||'')+' · '+(S.fonte==='mono'?esc(it.tarefa||'')+(it.desde?' · desde '+esc(br(it.desde)):''):esc(aprec(it)))+(metaDe(it)?' · <em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</small></div>'+
     '<div class="ics">'+(S.fonte==='mono'?'<span class="ic'+(urgDe(it)?' on '+(urgPend(it)?'al':'ic2'):'')+'" title="'+esc(urgDe(it)?'Pedido urgente: '+urgDe(it)+' · '+((it.ctl||{}).urgSit||'pendente'):'Sem pedido urgente')+'"><b>!</b></span>':'<span class="ic'+(c.sopref?' on pri':'')+'" title="'+esc(c.sopref?'Sustentação oral / preferência: '+c.sopref:'Sem sustentação oral nem preferência')+'">'+ICN.pri+'</span>')+'<span class="ic'+(A.length?' on al':'')+'" title="'+esc(A.length?A.join(' · '):'Sem alertas de admissibilidade')+'">'+ICN.al+'</span><span class="ic'+(c.intercor?' on ic2':'')+'" title="'+esc(c.intercor?'Intercorrência: '+c.intercor:'Sem intercorrência')+'">'+ICN.ic+'</span></div>'+
     '<div class="rs"><label><small>Minutante</small>'+selR(it,'servidor')+'</label><label><small>Corretor</small>'+selR(it,'corretor')+'</label></div>'+
-    '<div class="pr"><small>Produção</small><div class="stp">'+stp+'</div></div></div>';
+    '<div class="pr"><small>Produção</small><div class="stp">'+stp+'</div></div><button class="xb fxb" data-a="ficha" title="Ficha completa do processo">▤</button></div>';
   if(!ab)return h+'</article>';
   var dt=function(f){return '<input type="date" data-d="'+f+'" value="'+esc(it[f]||'')+'">';};
-  return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b pri" data-a="comp" title="Consultar no Compêndio com os dados deste cartão">◈ Compêndio</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
+  return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b" data-a="ficha" title="Ficha completa do processo (a mesma do CMT-monitor)">▤ Ficha do processo</button><button class="b pri" data-a="comp" title="Consultar no Compêndio com os dados deste cartão">◈ Compêndio</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
 }
 /* ===== regras das monocráticas: o fluxo é minutar → revisar → assinatura (art. 932), não o do voto levado à sessão ===== */
 var CPM={tipoAto:['Decisão monocrática (art. 932)','Decisão de urgência','Despacho','Decisão de admissibilidade','Juízo de retratação','Homologação / extinção'],
@@ -911,6 +985,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
   if(a==='et'){setEtapa(it,b.getAttribute('data-v'));render();return;}
   if(a==='undo'){if(it.dataLiberacao)it.dataLiberacao='';else if(it.dataCorrecao)it.dataCorrecao='';else it.dataMinuta='';marcar(it,{dataMinuta:it.dataMinuta,dataCorrecao:it.dataCorrecao,dataLiberacao:it.dataLiberacao});render();return;}
   if(a==='add'||a==='del'){var l=b.getAttribute('data-l'),C=cart(it);C[l]=C[l]||[];if(a==='add')C[l].push(l==='recursos'?{parte:'',tipo:'',id:'',contra:''}:{desc:'',id:'',data:''});else C[l].splice(+b.getAttribute('data-i'),1);var o={};o[l]=C[l];marcar(it,{cartao:o});render();return;}
+  if(a==='ficha'){fichaAbre(it);return;}
   if(a==='comp'){var C2=(it.ctl||{}).cartao||{},P={processo:it.cnj,classe:it.classe,assunto:it.assunto,subassuntos:C2.subassuntos,especificidades:C2.especificidades,questoes:C2.questoes,tipoJulgamento:tipoJ(it),decisaoOrigem:(C2.orig||{}).tipo,
       recursos:(C2.recursos||[]).map(function(r){return [r.tipo,r.parte].filter(Boolean).join(' · ');}).filter(Boolean),resultado:(it.ctl||{}).resJulg};
     Object.keys(P).forEach(function(x){if(!P[x]||(Array.isArray(P[x])&&!P[x].length))delete P[x];});

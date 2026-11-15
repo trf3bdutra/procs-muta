@@ -73,8 +73,15 @@ async function lerGrande(rel) {
   return { txt: Buffer.from(b64, 'base64').toString('utf8'), sha: o.sha };
 }
 /* um commit com vários arquivos (Git Data API) */
+/* commit de vários arquivos; se um arquivo traz "sha" (o lido antes), confere que ainda é o mesmo no commit de base: se mudou, erro 409 para nova tentativa.
+   A atualização do ramo não é forçada: se outro commit entrar no meio, o GitHub recusa (422). */
 async function commitArquivos(arqs, msg) {
   const ref = await gh('/git/ref/heads/' + RAMO), base = await gh('/git/commits/' + ref.object.sha);
+  for (const f of arqs) {
+    if (!f.sha) continue;
+    let atual = null; try { atual = (await gh('/contents/' + f.path + '?ref=' + ref.object.sha)).sha; } catch (e) { if (e.status !== 404) throw e; }
+    if (atual !== f.sha) { const e = new Error('arquivo mudou no GitHub: ' + f.path); e.status = 409; throw e; }
+  }
   const tree = await Promise.all(arqs.map(async f => ({ path: f.path, mode: '100644', type: 'blob', sha: (await gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: f.txt, encoding: 'utf-8' }) })).sha })));
   const t = await gh('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
   const c = await gh('/git/commits', { method: 'POST', body: JSON.stringify({ message: msg, tree: t.sha, parents: [ref.object.sha] }) });

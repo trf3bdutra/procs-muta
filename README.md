@@ -41,11 +41,14 @@ apoio/                         recursos de apoio à redação
                                e editor (+ edição de tudo); cada perfil inclui o anterior
   enciclopedia.json            Enciclopédia do modo avançado (servida só pelo /api/compendio, após o login): recursos, guias, rotina, PJe, competência, matérias, léxico
   usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)
-  pauta-equipe/                Pauta da equipe (/equipe/ na Vercel): login de cada servidor e cartões da pauta; api/ grava em acervo/sessoes com o GH_TOKEN da Vercel
+  pauta-equipe/                Pauta da equipe (/equipe/ na Vercel): login de cada servidor, cartões da pauta e das monocráticas e a ficha do processo;
+                               api/ grava em acervo/sessoes e, no mesmo commit, na ficha do processo em acervo/operacional.json (GH_TOKEN da Vercel)
   cmt-compendio/               CMT Compêndio: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Pauta da equipe); cmt-compendio.html (um só código; o que cada pessoa vê e edita depende do perfil em apoio/acessos.json) e cmt-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
 
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo
+  ficha.json                   ficha única padrão do processo (abas, grupos e campos; Produção em versão sessão ou monocrática),
+                               gerada de integracoes-ficha.md por scripts/ficha/gerar_ficha.py; usada pela Pauta da equipe
   manifesto.json               versão, contagem e hash de cada arquivo (gerado)
   paradigmas.js                biblioteca de leitura (navegador e Node)
 

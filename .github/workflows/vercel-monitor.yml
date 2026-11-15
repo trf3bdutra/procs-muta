@@ -41,7 +41,7 @@ jobs:
           mkdir -p site/public/equipe site/api && cp apoio/pauta-equipe/index.html site/public/equipe/index.html && cp apoio/pauta-equipe/api/*.js site/api/
           mkdir -p site/public/editor && cp apoio/cmt-compendio/cmt-editor.html site/public/editor/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","rewrites":[{"source":"/((?!api/|equipe|compendio|editor).*)","destination":"/index.html"}]}\n' > site/vercel.json
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"rewrites":[{"source":"/((?!api/|equipe|compendio|editor).*)","destination":"/index.html"}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

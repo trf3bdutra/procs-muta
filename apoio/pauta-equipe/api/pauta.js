@@ -1,7 +1,9 @@
 /* GET  /api/pauta?mono=1                      monocráticas (ver _mono.js)
    GET  /api/pauta?data=AAAA-MM-DD            pauta da sessão (itens e pré-pauta)
-   POST /api/pauta?data=AAAA-MM-DD  {cnj, lista, campos}   grava campos de um processo, num commit, com nova tentativa se o arquivo mudou */
-const L = require('./_lib');
+   POST /api/pauta?data=AAAA-MM-DD  {cnj, lista, campos}   grava campos de um processo, num commit, com nova tentativa se o arquivo mudou;
+                                                          o mesmo commit leva os campos à ficha do processo em acervo/operacional.json
+   GET/POST /api/pauta?ficha=…                             ficha única do processo (ver _ficha.js) */
+const L = require('./_lib'), FICHA = require('./_ficha');
 const DIRETOS = ['dataMinuta', 'dataCorrecao', 'dataLiberacao', 'obs'];
 const CTL = ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias', 'resJulg', 'consect', 'honor', 'topico', 'intercor', 'sopref'];
 const GESTOR = ['servidor', 'corretor', 'resultado'];   /* designação e desfecho: só o gestor (CMT_GESTOR) */
@@ -10,6 +12,7 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
   if (req.query.mono) return require('./_mono')(req, res, u);
+  if (req.query.ficha) return FICHA(req, res, u);
   const data = req.query.data; if (!L.dataOk(data)) return res.status(400).json({ erro: 'data inválida' });
   const rel = 'acervo/sessoes/' + data + '.json';
   try {
@@ -35,7 +38,9 @@ module.exports = async (req, res) => {
       if (!mud.length) return res.status(200).json({ ok: true, item: it, semMudanca: true });
       it.ctl.editadoPor = u; it.ctl.editadoEm = new Date().toISOString();
       dados.atualizadoEm = it.ctl.editadoEm;
-      try { await L.gravarJson(rel, dados, sha, 'Pauta da equipe (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return res.status(200).json({ ok: true, item: it }); }
+      /* o que a equipe registra vai também para a ficha do processo (acervo/operacional.json), no mesmo commit */
+      const Cf = Object.assign({}, C); if (!L.gestor(u)) GESTOR.forEach(k => delete Cf[k]);
+      try { await FICHA.espelho({ path: rel, txt: JSON.stringify(dados, null, 1) + '\n', sha }, it.cnj, Cf, C.cartao, 'Pauta da equipe (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return res.status(200).json({ ok: true, item: it }); }
       catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     res.status(409).json({ erro: 'A pauta mudou várias vezes seguidas; tente de novo.' });
