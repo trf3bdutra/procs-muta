@@ -1933,7 +1933,18 @@ function corpo(it,tj){
 }
 /* ================= edição e gravação ================= */
 function achar(el){var a=el.closest('.pc');if(!a)return null;var k=a.getAttribute('data-k');return lista().concat((S.doc&&S.doc.todos)||[]).filter(function(i){return dg(i.cnj)===k;})[0]||null;}
-function marcar(it,campos){var k=dg(it.cnj),p=PEND.get(k)||{cnj:it.cnj,lista:S.lista,mono:S.fonte==='mono',campos:{}};Object.keys(campos).forEach(function(c){if(c==='cartao'){p.campos.cartao=Object.assign(p.campos.cartao||{},campos.cartao);}else p.campos[c]=campos[c];});PEND.set(k,p);barra();}
+/* mudança de etapa (datas da minuta, correção/revisão e liberação/assinatura) grava na hora, sem esperar o Salvar;
+   cliques seguidos vão em fila, na ordem; se falhar, a alteração cai na fila do Salvar */
+var ETAPA_K={dataMinuta:1,dataCorrecao:1,dataLiberacao:1},filaEtapa=Promise.resolve();
+function marcar(it,campos){var ks=Object.keys(campos);if(ks.length&&ks.every(function(c){return ETAPA_K[c];})){etapaJa(it,campos);return;}marcarFila(it,campos);}
+function etapaJa(it,campos){var k=dg(it.cnj),q=PEND.get(k);
+  if(q){Object.keys(campos).forEach(function(c){delete q.campos[c];});if(!Object.keys(q.campos).length)PEND.delete(k);}
+  var p={cnj:it.cnj,lista:S.lista,mono:S.fonte==='mono',campos:Object.assign({},campos)},url=p.mono?'/api/pauta?mono=1':'/api/pauta?data='+S.ses;
+  estado('Gravando a etapa…','pend');
+  filaEtapa=filaEtapa.then(function(){return api(url,{method:'POST',body:JSON.stringify(p)}).then(function(){estado('✓ etapa gravada');barra();})
+    .catch(function(e){if(e.status===401){estado('sessão expirada · entre de novo','er');setTimeout(entrada,1200);return;}marcarFila(it,p.campos);estado('✕ etapa não gravou: '+e.message+' · use Salvar','er');});});
+  return filaEtapa;}
+function marcarFila(it,campos){var k=dg(it.cnj),p=PEND.get(k)||{cnj:it.cnj,lista:S.lista,mono:S.fonte==='mono',campos:{}};Object.keys(campos).forEach(function(c){if(c==='cartao'){p.campos.cartao=Object.assign(p.campos.cartao||{},campos.cartao);}else p.campos[c]=campos[c];});PEND.set(k,p);barra();}
 function estado(t,cls){var el=$('#salvo'),n=nPend();el.className=cls||(n?'pend':'');el.textContent=t||(n?'● '+n+' não salv'+(n===1?'o':'os'):'');}
 var gravando=false;
 function gravar(){
