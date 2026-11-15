@@ -198,16 +198,10 @@ code{font-size:12px;background:var(--field);padding:1px 5px;border-radius:4px;ov
 </section>
 
 <section id="v-edit" hidden>
-  <div class="sub" role="tablist" id="x-sub">
-    <button data-s="estrutura" aria-selected="true">Estrutura das peças</button>
-    <button data-s="vocab" aria-selected="false">Vocabulário e forma</button>
-  </div>
-  <div class="layout">
-    <aside id="x-aside"></aside>
-    <div class="content">
-      <div class="bar"><input class="q" id="x-q" type="search" placeholder="Buscar no editorial…" aria-label="Buscar no editorial"><span class="count" id="x-cnt"></span></div>
-      <div id="x-out"></div>
-    </div>
+  <div class="xa" id="x-wrap">
+    <aside class="xside" id="x-aside" aria-label="Peças e orientações"></aside>
+    <div id="x-main"></div>
+    <aside class="xrefp" id="x-ref" aria-label="Consulta"></aside>
   </div>
 </section>
 
