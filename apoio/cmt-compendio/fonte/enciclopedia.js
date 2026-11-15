@@ -8,7 +8,8 @@
   function nq(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
   function semTag(s){return String(s||'').replace(/<[^>]+>/g,' ');}
   function $e(s){return raiz.querySelector(s);}
-  function dados(){if(!ED){try{ED=JSON.parse(document.getElementById('enc-dados').textContent);}catch(x){ED={};}
+  var EXT=null,ERRO='';
+  function dados(){if(!ED){var el=document.getElementById('enc-dados');if(el){try{ED=JSON.parse(el.textContent);}catch(x){ED={};}}else if(EXT){ED=EXT;}else return {};
     ED.viaId={};(ED.vias||[]).forEach(function(v){ED.viaId[v.id]=v;});ED.guiaId={};(ED.guias||[]).forEach(function(g){ED.guiaId[g.id]=g;});
     ED.faseId={};(ED.fases||[]).forEach(function(f){ED.faseId[f.id]=f;});ED.cxId={};(ED.caixas||[]).forEach(function(c){ED.cxId[c.id]=c;});}return ED;}
   var SUBS=[['vias','Recursos'],['qual','Qual via?'],['guias','Guias práticos'],['rotina','Rotina do gabinete'],['pje','Caixas e fluxos do PJe'],['comp','Competência'],['mat','Matérias'],['lex','Léxico'],['reg','Regimento']];
@@ -130,13 +131,15 @@
     pje:[asidePje,mainPje,'Buscar caixa, tarefa ou ato do PJe…'],comp:[asideComp,mainComp,'Em qual Seção cai? Digite a matéria…'],
     mat:[function(){var D=dados();return asideGrp(D.materiasGrupos||[],ES.mg,'data-emg',D.materias||[],'g');},mainMat,'Buscar matéria, súmula ou tema…'],
     lex:[function(){var D=dados();return asideGrp(D.lexicoGrupos||[],ES.lg,'data-elg',D.lexico||[],'g');},mainLex,'Buscar verbete…'],reg:[function(){return '';},mainReg,'']};
-  function render(){dados();var r=R[ES.s]||R.vias;
+  function render(){var D=dados();
+    if(!D.vias){$e('#enc-aside').innerHTML='';$e('#enc-bar').hidden=true;$e('#enc-out').innerHTML='<div class="empty"><p>'+(ERRO?'Não foi possível carregar a Enciclopédia: '+e(ERRO)+'.':'Carregando a Enciclopédia…')+'</p><p class="meta">A Enciclopédia faz parte do modo avançado e é carregada do site do gabinete depois do login.</p></div>';return;}
+    var r=R[ES.s]||R.vias;
     $e('#enc-aside').innerHTML=r[0]();$e('#enc-out').innerHTML=r[1]();
     var qi=$e('#enc-q');qi.placeholder=r[2]||'Buscar na enciclopédia…';qi.disabled=!r[2];if(qi.value!==(ES.q[ES.s]||''))qi.value=ES.q[ES.s]||'';
     $e('#enc-bar').hidden=!r[2];
     Array.prototype.forEach.call(raiz.querySelectorAll('#enc-sub button'),function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===ES.s));});
     try{localStorage.setItem('vdm-enc-s',ES.s);}catch(x){}}
-  function vai(s,id){ES.s=s;if(id!=null){if(s==='vias'){ES.via=id;ES.modo='ficha';}else if(s==='guias')ES.guia=id;else if(s==='rotina')ES.fase=id;else if(s==='pje'){var c=dados().cxId[id];ES.est=c?c.st:'';}}
+  function vai(s,id){ES.s=s;if(id!=null){if(s==='vias'){ES.via=id;ES.modo='ficha';}else if(s==='guias')ES.guia=id;else if(s==='rotina')ES.fase=id;else if(s==='pje'){var c=(dados().cxId||{})[id];ES.est=c?c.st:'';}}
     render();if(window.VDM_marcaNav)window.VDM_marcaNav();window.scrollTo(0,0);
     if(s==='pje'&&id){var el=document.getElementById('enc-cx-'+id);if(el){el.scrollIntoView({block:'center'});el.classList.add('flash');setTimeout(function(){el.classList.remove('flash');},1400);}}}
   try{var s0=localStorage.getItem('vdm-enc-s');if(s0&&R[s0])ES.s=s0;}catch(x){}
@@ -165,4 +168,6 @@
   var tq;$e('#enc-q').addEventListener('input',function(ev){clearTimeout(tq);var v=ev.target.value;tq=setTimeout(function(){ES.q[ES.s]=v;var p=ev.target.selectionStart;render();var qi=$e('#enc-q');qi.focus();try{qi.setSelectionRange(p,p);}catch(x){}},180);});
   var aba=document.querySelector('.tab[data-v="enc"]');if(aba)aba.addEventListener('click',function(){setTimeout(render,0);});
   window.VDM_enc=vai;
+  /* modo avançado: o conteúdo chega do servidor (/api/compendio) só para quem tem acesso; ver acesso.js */
+  window.VDM_encDados=function(obj,erro){ERRO=erro||'';if(obj){EXT=obj;ED=null;}if(!raiz.hidden)render();};
 })();
