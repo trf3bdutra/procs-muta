@@ -532,7 +532,7 @@ html[data-theme=dark] #v-pauta.ed .trb{--t-ok-ink:#0a1821}
 #v-pauta.ed .pt-hd{background:transparent;border:0;border-radius:0;padding:0;margin:14px 0 0}
 #v-pauta.ed .pt-hd>.pt-bar,#v-pauta.ed .pt-hd>.pt-sel{display:none}
 .ed-tabs{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}.ed-tabs .sp{flex:1}
-.ed-tg{display:flex;align-items:flex-end}
+.ed-tg{display:flex;align-items:flex-end}#v-pauta.ed #ed-tr{display:none}
 #v-pauta.ed .ed-tg .seg{display:contents}
 #v-pauta.ed .ed-tg button{height:38px;min-width:38px;padding:0 16px;border:1px solid var(--el);border-bottom:0;border-radius:0;background:var(--ep);font:700 12.5px var(--font);color:var(--em);cursor:pointer;margin:0 -1px 0 0;position:relative;top:1px;display:inline-flex;align-items:center;justify-content:center;gap:5px;width:auto}
 #v-pauta.ed .ed-tg button[hidden]{display:none}
@@ -1255,8 +1255,9 @@ function render(){
   var rs=$('#f-resp'),vr=S.fResp;rs.innerHTML='<option value="">Todos os responsáveis e revisores</option>'+nomesEquipe().map(function(x){return '<option'+(x===vr?' selected':'')+'>'+esc(x)+'</option>';}).join('');
   var ns=Object.keys(S.sel).filter(function(k){return S.sel[k];}).length;$('#sel-n').textContent=$('#v-pauta')._ed?'· '+ns+' selecionado'+(ns===1?'':'s'):ns+' selecionado(s)';
   if(!V.length){$('#lst').innerHTML='<div class="empty">'+(L.length?(S.escopo==='meus'?(MO?'Nenhuma monocrática sua. Clique em "Todos" ou registre uma acima.':'Nenhum processo seu nesta pauta. Clique em "Todos".'):'Nenhum processo com esses filtros.'):(MO?'Nenhuma monocrática registrada. Use a faixa Registrar monocrática ou crie a partir de uma urgência.':'Esta sessão ainda não tem pauta.'))+'</div>';return;}
-  $('#lst').className='lst '+S.modo;
-  $('#lst').innerHTML=S.modo==='planilha'?(MO?planilhaMono(V):planilha(V)):V.map(cartao).join('');
+  /* na pauta (visual editorial) a listagem é só em lista; a planilha continua nas Monocráticas */
+  var modo=ED?'cards':S.modo;$('#lst').className='lst '+modo;
+  $('#lst').innerHTML=modo==='planilha'?(MO?planilhaMono(V):planilha(V)):V.map(cartao).join('');
   var sx=S.prt&&$('#v-pauta').classList.contains('prt-on')&&document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(sx)sx.classList.add('prt-sel');
 }
 /* painel superior da pauta: título da sessão, marcos ligados pelo trilho (feito · hoje · próximo · futuro) e o progresso */
