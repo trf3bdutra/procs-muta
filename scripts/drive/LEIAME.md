@@ -5,7 +5,7 @@ Os IDs estão em `planilhas.json`. O app continua sendo o lugar de editar; o Dri
 
 | Onde | Formato |
 |---|---|
-| Pasta **CMT - Pautas de Julgamento** | uma planilha por sessão liberada para a equipe, no molde **Controle de Pauta** (o da `Pauta_Sessao_30-11-2026`): painel nas linhas 1-19, cabeçalho na linha 20, processos em A21:Y320. Nome: `Pauta_Sessao_DD-MM-AAAA (Pauta da equipe)` |
+| Pasta **CMT - Pautas de Julgamento** | um arquivo por bimestre (`Pauta_AAAA_No_bimestre_mmm-mmm (Pauta da equipe)`, como os bimestrais da pasta), com uma aba por sessão liberada para a equipe (`Sessão DD-MM`, a mais recente primeiro), no molde **Controle de Pauta**: painel nas linhas 1-19, cabeçalho na linha 20, processos em A21:Y320 |
 | Monocráticas — Gabinete CMT | uma aba por mês de registro (sem data de registro: mês da minuta) |
 | Controles especiais — Gabinete CMT | Metas (com encerrados), Sobrestados, Casos sensíveis |
 
@@ -18,7 +18,8 @@ A Item · B Processo · C Classe · D Assunto · E Detalhes (com `#SO`/`#Pref` q
 F Pendências (**fórmula do molde, nunca gravada**) · G Etapa (fórmula do molde, ou Corrigido/Liberado) · H Minutado em ·
 I Servidor · J Revisor · K Intervenção MPF · L Parecer MPF · M Preliminares · N Tempestividade · O Preparo ·
 P Representação · Q Mídias · R Resultado · S Consectários · T Honorários · U Tópico-síntese · V Desfecho ·
-W Intercorrência · X Meta · Y Apreciação. A data da sessão fica em R1 (o título e os prazos do painel dependem dela).
+W Intercorrência · X Meta · Y Apreciação. A data da sessão fica em R1 (o título e os prazos do painel dependem dela);
+prazo das minutas em E3 e de liberação em K3 (marcos de `acervo/sessoes/calendario.json`).
 
 ## Atualização diária
 
@@ -29,14 +30,17 @@ W Intercorrência · X Meta · Y Apreciação. A data da sessão fica em R1 (o t
    python3 scripts/drive/pautas_sessao.py /tmp/cmt-drive
    ```
    Saída: `/tmp/cmt-drive/abas.json` (monocráticas e controles: abas e `.tsv` de cada uma) e
-   `/tmp/cmt-drive/pautas_sessao/<AAAA-MM-DD>.json` (uma por sessão: `titulo`, `aba`, `r1`, `limpar`, `faixa`, `valores`).
+   `/tmp/cmt-drive/pautas_sessao/<AAAA-MM-DD>.json` (uma por sessão: `arquivo`, `bimestre`, `aba`, `r1`, `e3`, `k3`, `limpar`, `faixa`, `valores`).
 2. **Pautas**, para cada arquivo de `pautas_sessao/`:
-   - achar a planilha na pasta (`pasta_id`) pelo `titulo` (busca do Drive: `title = '<titulo>' and parentId = '<pasta_id>'`);
-   - se não existir (sessão nova): `copy_file` de `copiar_de` com o `titulo`, na pasta; renomear a aba para `aba`
-     (`updateSheetProperties`, campo `title`);
+   - achar o arquivo bimestral: `pautas.arquivos[bimestre]` ou, se não houver, busca do Drive
+     `title = '<arquivo>' and parentId = '<pasta_id>'`;
+   - arquivo novo (bimestre novo): `copy_file` de `copiar_de` com o título `<arquivo>`, na pasta; no arquivo copiado,
+     apagar todas as abas menos a primeira (`deleteSheet`) e renomear essa aba para `<aba>`;
+   - aba nova (sessão nova num bimestre que já existe): `duplicateSheet` da primeira aba com `newSheetName` = `<aba>`,
+     na posição que mantém as sessões da mais recente para a mais antiga;
    - `batch_clear_values` nas faixas de `limpar` (A21:E320 e G21:Y320 da aba; a coluna F não é limpa);
-   - `update_values` em `'<aba>'!R1` com `[[r1]]` e em `'<aba>'!<faixa>` com `valores`
-     (null em F não grava nada; fórmulas usam nomes em inglês com ";", a planilha está em pt_BR).
+   - `update_values` em `'<aba>'!R1` com `[[r1]]`; em E3 e K3 com `e3` e `k3` quando não vierem vazios;
+     e em `'<aba>'!<faixa>` com `valores` (null em F não grava nada; fórmulas em inglês com ";", a planilha está em pt_BR).
 3. **Monocráticas e Controles especiais**, para cada aba listada em `abas.json`:
    - ler as abas existentes (`get_spreadsheet`, campos `sheets.properties`);
    - aba que ainda não existe (mês novo): `duplicateSheet` da última aba do mesmo arquivo (mantém cabeçalho,
