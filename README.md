@@ -36,6 +36,7 @@ apoio/                         recursos de apoio à redação
   vade-mecum.json              Vade Mecum do Compêndio (Assuntos, Temas, Súmulas, Jurisprudência, Normas, Regimento, Diretrizes,
                                Usos no gabinete, Matriz PIS-Cofins); antes vinha da planilha do Google, agora a fonte é este arquivo
   repertorio.json              repertório jurisprudencial e normativo (campo categoria: jurisprudencia | Lei, Código…)
+  diretrizes-rapidas.json      Quadro de entradas rápidas das Diretrizes (registradas no Compêndio por quem tem acesso de editor)
   acessos.json                 Quem tem o modo avançado do Compêndio e quem usa o editor (nomes da equipe da Pauta)
   enciclopedia.json            Enciclopédia do modo avançado (servida só pelo /api/compendio, após o login): recursos, guias, rotina, PJe, competência, matérias, léxico
   usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)

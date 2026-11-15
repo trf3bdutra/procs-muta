@@ -29,6 +29,8 @@ editorial = {'padrao': {'schema': dir_.get('schema'), 'versao': dir_.get('versao
              'pecas': ler(H/'editorial_pecas.json')}
 # repertório normativo: dispositivos acrescentados no procs-muta (somam-se aos da planilha)
 editorial['normasComplemento'] = ler(RAIZ/'apoio/repertorio-normativo-complemento.json')['registros']
+# quadro de entradas rápidas das Diretrizes (atualizado na hora pelo /api/rapidas no site)
+editorial['rapidas'] = ler(RAIZ/'apoio/diretrizes-rapidas.json')['registros']
 # matrizes estruturais (recurso × resultado, sem matéria): moldes do Editorial
 def _js(v): return json.loads(v) if isinstance(v, str) else v
 def _mold(m):
