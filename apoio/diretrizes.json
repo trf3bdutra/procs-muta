@@ -156,6 +156,14 @@
    "mensagem": "marcador de preenchimento não substituído"
   },
   {
+   "id": "red-alv-15",
+   "tipo": "alerta",
+   "escopo": "voto",
+   "padrao": "Senhores Desembargadores,\\s*\\n\\s*[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ]",
+   "flags": "g",
+   "mensagem": "após o vocativo, o primeiro parágrafo inicia com minúscula"
+  },
+  {
    "id": "red-con-01",
    "tipo": "conectivo",
    "expressao": "Senhores Desembargadores,",
@@ -860,6 +868,16 @@
    "preferir": "Vedação de inovação da lide (ApCiv 5134582-26.2025.4.03.9999).",
    "evitar": "",
    "base": "Diretrizes de minuta no padrão Carlos Muta (PDF, 12/10/2026)"
+  },
+  {
+   "id": "red-dir-31",
+   "tipo": "preferencia",
+   "regra": "R31",
+   "grupo": "A. Estrutura",
+   "titulo": "Primeiro parágrafo após o vocativo em minúscula",
+   "preferir": "Após “Senhores Desembargadores,”, o primeiro parágrafo inicia com letra minúscula.",
+   "evitar": "Iniciar com maiúscula o parágrafo seguinte ao vocativo.",
+   "base": "Orientação do gabinete (15/11/2026)"
   },
   {
    "id": "red-pre-01",
