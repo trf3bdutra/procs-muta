@@ -99,9 +99,30 @@
           "n": "Contrarrazões",
           "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
           "r": [
-            "Parágrafo próprio."
+            "Parágrafo próprio.",
+            "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Houve",
+              "f": "Houve contrarrazões (ID …).",
+              "sub": [
+                {
+                  "lab": "Sem preliminar",
+                  "f": "Houve contrarrazões (ID …)."
+                },
+                {
+                  "lab": "Com preliminar",
+                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                }
+              ]
+            },
+            {
+              "lab": "Não houve",
+              "f": "Não houve contrarrazões."
+            }
+          ]
         },
         {
           "n": "Ministério Público",
@@ -110,13 +131,25 @@
             "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
             "Parecer de 1º grau: “Ministério Público Federal”."
           ],
-          "fo": "P"
-        },
-        {
-          "n": "Referências aos autos",
-          "f": "(ID …)\n(ID …, f. …/…)",
-          "r": [],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Opinou no mérito",
+              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+            },
+            {
+              "lab": "Pelo prosseguimento",
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+            },
+            {
+              "lab": "Sem exame do mérito",
+              "f": "A Procuradoria Regional da República deixou de analisar o mérito, considerando [motivo] (ID …)."
+            },
+            {
+              "lab": "Sem intervenção",
+              "f": "[VALIDAR: redação para o Ministério Público que deixou de intervir no feito] (ID …)."
+            }
+          ]
         },
         {
           "n": "Encerramento",
@@ -130,7 +163,8 @@
       "notas": [
         "Não acrescentar fatos por força do modelo (gratuidade, multa, parecer).",
         "Manter uniforme a identificação da parte.",
-        "Variantes: mandado de segurança, remessa necessária com apelação, embargos de declaração (“opostos contra acórdão assim ementado:” + ementa) e agravo interno."
+        "Variantes: mandado de segurança, remessa necessária com apelação, embargos de declaração (“opostos contra acórdão assim ementado:” + ementa) e agravo interno.",
+        "Referência aos autos: (ID …) ou (ID …, f. …/…)."
       ],
       "notas_fo": "P+M"
     },
