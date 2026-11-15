@@ -19,6 +19,6 @@ module.exports = async (req, res) => {
           resJulg: (it.ctl || {}).resJulg || '', previa: !(d.itens || []).length });
       });
     });
-    res.status(200).json({ usuario: u, sessoes: pubs.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', processos: s.processos || 0, previa: s.previa || 0, marcos: s.marcos || {} })), expediente: cal.expediente || null, meus });
+    res.status(200).json({ usuario: u, sessoes: pubs.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', processos: s.processos || 0, previa: s.processos ? 0 : (s.previa || 0), marcos: s.marcos || {} })), expediente: cal.expediente || null, meus });
   } catch (e) { res.status(500).json({ erro: e.message }); }
 };
