@@ -680,6 +680,559 @@
       ],
       "notas": [],
       "notas_fo": "P"
+    },
+    {
+      "id": "rel-ap",
+      "t": "Relatório · Apelação",
+      "grupo": "Relatórios",
+      "resumo": "Abertura pela sentença, razões, contrarrazões, parecer e fecho.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Trata-se de apelação à sentença (ID …) que [verbo nuclear] …",
+          "alts": [
+            {
+              "lab": "À sentença",
+              "f": "Trata-se de apelação à sentença (ID …) que [verbo nuclear] …"
+            },
+            {
+              "lab": "Em ação",
+              "f": "Trata-se de apelação interposta em ação de […]."
+            }
+          ],
+          "r": [
+            "Quando a abertura já diz o que decidiu a sentença, o tópico Sentença sai."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Sentença",
+          "f": "A sentença (ID …) …",
+          "r": [
+            "Resultado e, na mesma frase, honorários, base de cálculo, suspensão da exigibilidade e eventual multa."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Razões",
+          "f": "Apelou o autor/a autora (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "r": [
+            "Orações no infinitivo.",
+            "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
+            "Um parágrafo por recurso, sem conectivo.",
+            "“aduz” só para acréscimo."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Contrarrazões",
+          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "r": [
+            "Parágrafo próprio.",
+            "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
+          ],
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Houve",
+              "f": "Houve contrarrazões (ID …).",
+              "sub": [
+                {
+                  "lab": "Sem preliminar",
+                  "f": "Houve contrarrazões (ID …)."
+                },
+                {
+                  "lab": "Com preliminar",
+                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                }
+              ]
+            },
+            {
+              "lab": "Não houve",
+              "f": "Não houve contrarrazões."
+            }
+          ]
+        },
+        {
+          "n": "Ministério Público",
+          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "alts": [
+            {
+              "lab": "Prosseguimento",
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+            },
+            {
+              "lab": "Mérito",
+              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+            },
+            {
+              "lab": "Sem exame do mérito",
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+            },
+            {
+              "lab": "Sem hipótese de intervenção",
+              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+            },
+            {
+              "lab": "Sem interesse público",
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            }
+          ],
+          "r": [
+            "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
+            "Parecer de 1º grau: “Ministério Público Federal”.",
+            "Sem parecer nos autos, retirar o trecho."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É o relatório.",
+          "r": [
+            "Fecho em linhas próprias: contrarrazões, ocorrências, Procuradoria Regional da República e “É o relatório.”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "fonte": "Inteiros teores da base do gabinete (precedentes/inteiros-teores), padrões mais frequentes"
+    },
+    {
+      "id": "rel-dap",
+      "t": "Relatório · Dupla apelação",
+      "grupo": "Relatórios",
+      "resumo": "Duas apelações: razões de cada apelante, em parágrafos próprios.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Trata-se de apelações à sentença (ID …) que [verbo nuclear] …",
+          "r": [
+            "[VALIDAR] Abertura no plural não localizada nos inteiros teores da base."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Razões do primeiro apelante",
+          "f": "Apelou [a parte autora] (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
+          "r": [
+            "Um parágrafo para cada apelante."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Razões do segundo apelante",
+          "f": "Apelou [a parte ré] (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Contrarrazões",
+          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "r": [
+            "Parágrafo próprio.",
+            "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
+          ],
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Houve",
+              "f": "Houve contrarrazões (ID …).",
+              "sub": [
+                {
+                  "lab": "Sem preliminar",
+                  "f": "Houve contrarrazões (ID …)."
+                },
+                {
+                  "lab": "Com preliminar",
+                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                }
+              ]
+            },
+            {
+              "lab": "Não houve",
+              "f": "Não houve contrarrazões."
+            }
+          ]
+        },
+        {
+          "n": "Ministério Público",
+          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "alts": [
+            {
+              "lab": "Prosseguimento",
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+            },
+            {
+              "lab": "Mérito",
+              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+            },
+            {
+              "lab": "Sem exame do mérito",
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+            },
+            {
+              "lab": "Sem hipótese de intervenção",
+              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+            },
+            {
+              "lab": "Sem interesse público",
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            }
+          ],
+          "r": [
+            "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
+            "Parecer de 1º grau: “Ministério Público Federal”.",
+            "Sem parecer nos autos, retirar o trecho."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É o relatório.",
+          "r": [
+            "Fecho em linhas próprias: contrarrazões, ocorrências, Procuradoria Regional da República e “É o relatório.”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "fonte": "Inteiros teores da base do gabinete (precedentes/inteiros-teores), padrões mais frequentes"
+    },
+    {
+      "id": "rel-aprn",
+      "t": "Relatório · Apelação e remessa necessária",
+      "grupo": "Relatórios",
+      "resumo": "Apelação com remessa necessária, ou só remessa.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Trata-se de apelação e remessa necessária à sentença (ID …) que …",
+          "alts": [
+            {
+              "lab": "Apelação e remessa",
+              "f": "Trata-se de apelação e remessa necessária à sentença (ID …) que …"
+            },
+            {
+              "lab": "Só remessa",
+              "f": "Trata-se de remessa necessária à sentença (ID …) que …"
+            }
+          ],
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Razões",
+          "f": "Apelou o autor/a autora (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "r": [
+            "Orações no infinitivo.",
+            "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
+            "Um parágrafo por recurso, sem conectivo.",
+            "“aduz” só para acréscimo."
+          ],
+          "fo": "P+M"
+        },
+        {
+          "n": "Contrarrazões",
+          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "r": [
+            "Parágrafo próprio.",
+            "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
+          ],
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Houve",
+              "f": "Houve contrarrazões (ID …).",
+              "sub": [
+                {
+                  "lab": "Sem preliminar",
+                  "f": "Houve contrarrazões (ID …)."
+                },
+                {
+                  "lab": "Com preliminar",
+                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                }
+              ]
+            },
+            {
+              "lab": "Não houve",
+              "f": "Não houve contrarrazões."
+            }
+          ]
+        },
+        {
+          "n": "Ministério Público",
+          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "alts": [
+            {
+              "lab": "Prosseguimento",
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+            },
+            {
+              "lab": "Mérito",
+              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+            },
+            {
+              "lab": "Remessa",
+              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] da remessa necessária (ID …)."
+            },
+            {
+              "lab": "Sem exame do mérito",
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+            },
+            {
+              "lab": "Sem hipótese de intervenção",
+              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+            },
+            {
+              "lab": "Sem interesse público",
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            }
+          ],
+          "r": [
+            "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
+            "Parecer de 1º grau: “Ministério Público Federal”.",
+            "Sem parecer nos autos, retirar o trecho."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É o relatório.",
+          "r": [
+            "Fecho em linhas próprias: contrarrazões, ocorrências, Procuradoria Regional da República e “É o relatório.”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "fonte": "Inteiros teores da base do gabinete (precedentes/inteiros-teores), padrões mais frequentes"
+    },
+    {
+      "id": "rel-ai",
+      "t": "Relatório · Agravo de instrumento",
+      "grupo": "Relatórios",
+      "resumo": "Decisão agravada, razões, contraminuta, parecer e fecho.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Trata-se de agravo de instrumento à decisão que, em […], […] (ID …).",
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Razões",
+          "f": "Alegou [a agravante] (ID …) que: (1) […]; (2) […]; e (3) […].",
+          "r": [
+            "Pedido de efeito suspensivo ou de tutela recursal, quando houver, com a decisão do Relator e o ID."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Contraminuta",
+          "f": "Houve contraminuta (ID …).",
+          "alts": [
+            {
+              "lab": "Houve",
+              "f": "Houve contraminuta (ID …)."
+            },
+            {
+              "lab": "Não houve",
+              "f": "Não houve contraminuta."
+            }
+          ],
+          "r": [
+            "Parágrafo próprio."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Ministério Público",
+          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "alts": [
+            {
+              "lab": "Prosseguimento",
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+            },
+            {
+              "lab": "Mérito",
+              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+            },
+            {
+              "lab": "Sem exame do mérito",
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+            },
+            {
+              "lab": "Sem hipótese de intervenção",
+              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+            },
+            {
+              "lab": "Sem interesse público",
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            }
+          ],
+          "r": [
+            "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
+            "Parecer de 1º grau: “Ministério Público Federal”.",
+            "Sem parecer nos autos, retirar o trecho."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É o relatório.",
+          "r": [
+            "Fecho em linhas próprias: contrarrazões, ocorrências, Procuradoria Regional da República e “É o relatório.”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "fonte": "Inteiros teores da base do gabinete (precedentes/inteiros-teores), padrões mais frequentes"
+    },
+    {
+      "id": "rel-ed",
+      "t": "Relatório · Embargos de declaração",
+      "grupo": "Relatórios",
+      "resumo": "Acórdão embargado com a ementa transcrita, vícios alegados, resposta e fecho.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Trata-se de embargos de declaração contra acórdão assim ementado:",
+          "alts": [
+            {
+              "lab": "Contra acórdão",
+              "f": "Trata-se de embargos de declaração contra acórdão assim ementado:"
+            },
+            {
+              "lab": "Opostos contra acórdão",
+              "f": "Trata-se de embargos de declaração opostos contra acórdão assim ementado:"
+            }
+          ],
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Ementa embargada",
+          "f": "“[ementa do acórdão embargado]”",
+          "r": [
+            "Transcrição integral, em bloco recuado."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Vícios alegados",
+          "f": "Alegou-se [omissão / contradição / obscuridade], inclusive em prequestionamento, pois: (1) […]; (2) […]; e (3) […].",
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Resposta",
+          "f": "Houve contrarrazões.",
+          "alts": [
+            {
+              "lab": "Houve",
+              "f": "Houve contrarrazões."
+            },
+            {
+              "lab": "Não houve",
+              "f": "Não houve contrarrazões."
+            },
+            {
+              "lab": "Pela rejeição",
+              "f": "Em resposta aos embargos de declaração, pugnou-se por sua rejeição."
+            }
+          ],
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Ministério Público",
+          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "alts": [
+            {
+              "lab": "Prosseguimento",
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+            },
+            {
+              "lab": "Mérito",
+              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+            },
+            {
+              "lab": "Sem exame do mérito",
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+            },
+            {
+              "lab": "Sem hipótese de intervenção",
+              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+            },
+            {
+              "lab": "Sem interesse público",
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            }
+          ],
+          "r": [
+            "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
+            "Parecer de 1º grau: “Ministério Público Federal”.",
+            "Sem parecer nos autos, retirar o trecho."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É o relatório.",
+          "r": [
+            "Fecho em linhas próprias: contrarrazões, ocorrências, Procuradoria Regional da República e “É o relatório.”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "fonte": "Inteiros teores da base do gabinete (precedentes/inteiros-teores), padrões mais frequentes"
+    },
+    {
+      "id": "rel-agint",
+      "t": "Relatório · Agravo interno",
+      "grupo": "Relatórios",
+      "resumo": "Decisão agravada, razões, contraminuta e fecho.",
+      "elementos": [
+        {
+          "n": "Abertura",
+          "f": "Trata-se de agravo interno à decisão que […].",
+          "r": [
+            "Uma frase: o que decidiu a monocrática agravada."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Razões",
+          "f": "Alegou [a agravante] (ID …) que […].",
+          "r": [],
+          "fo": "P"
+        },
+        {
+          "n": "Contraminuta",
+          "f": "Houve contraminuta (ID …).",
+          "alts": [
+            {
+              "lab": "Houve",
+              "f": "Houve contraminuta (ID …)."
+            },
+            {
+              "lab": "Não houve",
+              "f": "Não houve contraminuta."
+            }
+          ],
+          "r": [
+            "Parágrafo próprio."
+          ],
+          "fo": "P"
+        },
+        {
+          "n": "Encerramento",
+          "f": "É o relatório.",
+          "r": [
+            "Fecho em linhas próprias: contrarrazões, ocorrências, Procuradoria Regional da República e “É o relatório.”."
+          ],
+          "fo": "P+M"
+        }
+      ],
+      "fonte": "Inteiros teores da base do gabinete (precedentes/inteiros-teores), padrões mais frequentes"
     }
   ],
   "forma": [
