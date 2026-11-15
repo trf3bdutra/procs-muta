@@ -359,7 +359,7 @@ function renderAll(){renderT();renderR();if(window.VDM_refresh)window.VDM_refres
 
 /* ================= TEMAS E SÚMULAS ================= */
 var TS={sub:'temas',trib:'',g:'',ramo:'',susp:false,of:false,q:'',modo:'cartoes',qd:'situacao',mm:null};
-try{var tsv=JSON.parse(localStorage.getItem('vdm-enun')||'null');if(tsv){TS.modo=tsv.modo||TS.modo;TS.qd=tsv.qd||TS.qd;}}catch(e){}
+try{var tsv=JSON.parse(localStorage.getItem('vdm-enun')||'null');if(tsv){TS.modo=/^(cartoes|tabela|mapa)$/.test(tsv.modo||'')?tsv.modo:TS.modo;TS.qd=tsv.qd||TS.qd;}}catch(e){}
 document.querySelectorAll('#v-temas .sub button').forEach(function(b){b.addEventListener('click',function(){TS.sub=b.getAttribute('data-s');TS.trib='';TS.g='';TS.ramo='';document.querySelectorAll('#v-temas .sub button').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});$('#openSheet').href=sheetUrl(TS.sub==='temas'?'Temas':'Súmulas');renderT();});});
 $('#t-q').addEventListener('input',function(e){TS.q=e.target.value;renderT();});
 $('#t-susp').addEventListener('change',function(e){TS.susp=e.target.checked;renderT();});
@@ -429,11 +429,12 @@ function renderT(){
 }
 
 /* ---------- Enunciados: modos de visualização ---------- */
-var TMODOS=[['cartoes','Cartões'],['tabela','Tabela'],['quadro','Quadro'],['mapa','Mapa por assunto']];
+var TMODOS=[['cartoes','Cartões'],['tabela','Tabela'],['mapa','Mapa por assunto']];
 function tSalvar(){try{localStorage.setItem('vdm-enun',JSON.stringify({modo:TS.modo,qd:TS.qd}));}catch(e){}}
 function tLab(x,isT){return isT?'Tema '+fmtN(x['Tema'])+'/'+x['Tribunal']:sumLabel(x);}
 function tTxt(x,isT){return isT?(x['Título']||x['Tese oficial (texto literal)']||x['Resumo do gabinete']||''):(x['Enunciado']||'');}
 function tTrib(x,isT){return !isT&&/vinculante/i.test(x['Tipo'])?'SV':x['Tribunal'];}
+function tSusp(x){var k=suspKind(x),d=x['Suspensão desde']?' desde '+esc(x['Suspensão desde']):'';if(k==='nac')return '<span class="t-sp nac">Sim · nacional</span><small class="t-spd">'+d+'</small>';if(k==='resp')return '<span class="t-sp resp">Sim · só REsp/RE</span><small class="t-spd">'+d+'</small>';if(k==='sem')return '<span class="t-sp nao">Não</span>';return '<span class="t-sp ni">Não informado</span>'+(x['Situação']?'<small class="t-spd"> '+esc(x['Situação'])+'</small>':'');}
 function tSit(x){var k=suspKind(x);if(k==='nac')return 'Suspensão nacional';if(k==='resp')return 'Suspensão só de REsp/RE';if(k==='sem')return 'Sem suspensão';if(x['Situação'])return x['Situação'];return 'Sem registro de situação';}
 var QD={situacao:['Situação',function(x){return tSit(x);},['Suspensão nacional','Suspensão só de REsp/RE','Afetado','Pendente de julgamento','Sem suspensão','Sem registro de situação']],
   tese:['Tese',function(x){return x['Tese oficial (texto literal)']?'Tese oficial transcrita':x['Resumo do gabinete']?'Só resumo do gabinete':'Sem texto';},['Tese oficial transcrita','Só resumo do gabinete','Sem texto']],
@@ -441,7 +442,6 @@ var QD={situacao:['Situação',function(x){return tSit(x);},['Suspensão naciona
   ramo:['Ramo',function(x){return ramoOf(asList(x['Assunto'])[0]);},null]};
 function tModes(isT){
   var h='<div class="seg" role="group" aria-label="Modo de visualização">'+TMODOS.map(function(m){return '<button data-tm="'+m[0]+'" aria-pressed="'+(TS.modo===m[0])+'">'+m[1]+'</button>';}).join('')+'</div>';
-  if(TS.modo==='quadro'){var ks=isT?['situacao','tese','trib','ramo']:['trib','ramo'];if(ks.indexOf(TS.qd)<0)TS.qd=ks[0];h+='<span class="dims"><label>Colunas por <select id="t-qd">'+ks.map(function(k){return '<option value="'+k+'"'+(k===TS.qd?' selected':'')+'>'+QD[k][0]+'</option>';}).join('')+'</select></label></span>';}
   $('#t-modes').innerHTML=h;
   $('#t-modes').querySelectorAll('[data-tm]').forEach(function(b){b.onclick=function(){TS.modo=b.getAttribute('data-tm');TS.mm=null;tSalvar();renderT();};});
   var q=$('#t-qd');if(q)q.onchange=function(){TS.qd=q.value;tSalvar();renderT();};
@@ -458,18 +458,10 @@ function tModo(L,isT){
   function bind(){out.querySelectorAll('[data-tc]').forEach(function(el){el.addEventListener('click',function(e){if(e.target.closest('a,button.usos'))return;var x=byC[el.getAttribute('data-tc')];if(x)tDrawer(x,isT);});});}
   var ord=function(a,b){return (tTrib(a,isT)<tTrib(b,isT)?-1:tTrib(a,isT)>tTrib(b,isT)?1:0)||(+(a['Tema']||a['Número'])-+(b['Tema']||b['Número']));};
   if(TS.modo==='tabela'){
-    var h='<div class="e-viz"><table class="e-mx t-tbl"><thead><tr><th>'+(isT?'Tema':'Súmula')+'</th><th>Assunto</th><th>'+(isT?'Título ou tese':'Enunciado')+'</th>'+(isT?'<th>Situação</th><th>Tese oficial</th>':'')+'<th>Usos</th></tr></thead><tbody>';
-    L.slice().sort(ord).forEach(function(x){var u=(USOS[x['Código']]||[]).length,sk=suspKind(x);
-      h+='<tr data-tc="'+esc(x['Código'])+'"'+(sk==='nac'?' class="t-nac"':sk==='resp'?' class="t-resp"':'')+'><th><span class="tb '+esc(tTrib(x,isT))+'">'+esc(tTrib(x,isT))+'</span> '+esc(isT?fmtN(x['Tema']):x['Número'])+'</th><td class="l">'+esc(asList(x['Assunto']).join('; '))+'</td><td class="l">'+esc(String(tTxt(x,isT)).slice(0,200))+(String(tTxt(x,isT)).length>200?'…':'')+'</td>'+(isT?'<td class="l">'+esc(tSit(x))+'</td><td>'+(x['Tese oficial (texto literal)']?'✓':'—')+'</td>':'')+'<td>'+(u||'—')+'</td></tr>';});
+    var h='<div class="e-viz"><table class="e-mx t-tbl"><thead><tr><th>'+(isT?'Tema':'Súmula')+'</th>'+(isT?'<th>Suspende processos?</th>':'')+'<th>Assunto</th><th>'+(isT?'Título ou tese':'Enunciado')+'</th>'+(isT?'<th>Tese oficial</th>':'')+'<th>Usos</th></tr></thead><tbody>';
+    L.slice().sort(function(a,b){var r=function(x){var k=suspKind(x);return k==='nac'?0:k==='resp'?1:k==='sem'?2:3;};return isT?(r(a)-r(b))||ord(a,b):ord(a,b);}).forEach(function(x){var u=(USOS[x['Código']]||[]).length,sk=suspKind(x);
+      h+='<tr data-tc="'+esc(x['Código'])+'"'+(sk==='nac'?' class="t-nac"':sk==='resp'?' class="t-resp"':'')+'><th><span class="tb '+esc(tTrib(x,isT))+'">'+esc(tTrib(x,isT))+'</span> '+esc(isT?fmtN(x['Tema']):x['Número'])+'</th>'+(isT?'<td class="l">'+tSusp(x)+'</td>':'')+'<td class="l">'+esc(asList(x['Assunto']).join('; '))+'</td><td class="l">'+esc(String(tTxt(x,isT)).slice(0,200))+(String(tTxt(x,isT)).length>200?'…':'')+'</td>'+(isT?'<td>'+(x['Tese oficial (texto literal)']?'✓':'—')+'</td>':'')+'<td>'+(u||'—')+'</td></tr>';});
     out.innerHTML=h+'</tbody></table></div><p class="e-help" style="margin-top:8px">Clique em uma linha para ler o enunciado completo.</p>';bind();return;
-  }
-  if(TS.modo==='quadro'){
-    var cfg=QD[TS.qd],m={};L.forEach(function(x){var k=cfg[1](x,isT);(m[k]=m[k]||[]).push(x);});
-    var ks=Object.keys(m);if(cfg[2])ks.sort(function(a,b){var i=cfg[2].indexOf(a),j=cfg[2].indexOf(b);return (i<0?99:i)-(j<0?99:j);});else ks.sort(function(a,b){return m[b].length-m[a].length;});
-    var h='<div class="t-board">'+ks.map(function(k){var A=m[k].sort(ord),cls=/nacional/.test(k)?' crit':/só de/.test(k)?' warn':'';
-      return '<section class="t-col'+cls+'"><h4>'+esc(k)+' <small>'+A.length+'</small></h4>'+A.slice(0,60).map(function(x){return '<button class="t-mini" data-tc="'+esc(x['Código'])+'" style="--gc:'+esc(color(asList(x['Assunto'])[0]))+'"><b>'+esc(tLab(x,isT))+'</b><span>'+esc(String(tTxt(x,isT)).slice(0,120))+(String(tTxt(x,isT)).length>120?'…':'')+'</span></button>';}).join('')+(A.length>60?'<p class="meta">+ '+(A.length-60)+' (use os filtros)</p>':'')+'</section>';}).join('')+'</div>';
-    if(isT&&TS.qd==='situacao'&&m['Sem registro de situação'])h='<p class="e-help">A coluna “Sem registro de situação” reúne os temas em que a planilha ainda não informa situação nem suspensão.</p>'+h;
-    out.innerHTML=h;bind();return;
   }
   /* mapa: ramo › assunto › enunciados */
   var tree={},rord=[];

@@ -82,11 +82,11 @@ var DIM={
   y:{n:'Mês',v:function(x){return x.y||'—';}}
 };
 var DIMS=['t','apr','ramo','ass','c','o','res','y'];
-var MODOS=[['lista','Lista'],['mapa','Mapa mental'],['fluxo','Fluxograma'],['tempo','Linha do tempo'],['matriz','Matriz'],['assuntos','Assuntos']];
+var MODOS=[['lista','Lista'],['mapa','Mapa mental'],['tempo','Linha do tempo'],['matriz','Matriz']];
 var E={idx:null,err:null,carregando:false,F:{},q:'',y1:'',y2:'',modo:'lista',shown:60,open:{},sel:null,mais:{},
   dm:{mapa:['ramo','ass','res'],fluxo:['apr','ramo','res'],matriz:['apr','res'],tempo:'res'},mmOpen:null,clsNome:{}};
 var EM={sub:'prec',q:{}};
-try{var sv=JSON.parse(localStorage.getItem('vdm-ement2')||'null');if(sv){if(sv.modo)E.modo=sv.modo;if(sv.dm)E.dm=Object.assign(E.dm,sv.dm);}}catch(e){}
+try{var sv=JSON.parse(localStorage.getItem('vdm-ement2')||'null');if(sv){if(sv.modo&&/^(lista|mapa|tempo|matriz)$/.test(sv.modo))E.modo=sv.modo;if(sv.dm)E.dm=Object.assign(E.dm,sv.dm);}}catch(e){}
 function salvar(){try{localStorage.setItem('vdm-ement2',JSON.stringify({modo:E.modo,dm:E.dm}));}catch(e){}}
 
 var SENT={'desprovido':'Desprovido','provido':'Provido','parcialmente provido':'Parcialmente provido','rejeitados':'Embargos rejeitados','acolhidos':'Embargos acolhidos','prejudicado/extinto':'Prejudicado ou extinto','não conhecido':'Não conhecido','outro':'Outro'};
@@ -140,7 +140,7 @@ function render(){
   chips();selBar();
   var out=$('#e-out');
   if(!L.length){out.innerHTML='<p class="empty">Nenhum precedente com esses filtros.</p>';return;}
-  ({lista:vLista,mapa:vMapa,fluxo:vFluxo,tempo:vTempo,matriz:vMatriz,assuntos:vAssuntos})[E.modo](L,out);
+  ({lista:vLista,mapa:vMapa,tempo:vTempo,matriz:vMatriz})[E.modo]?({lista:vLista,mapa:vMapa,tempo:vTempo,matriz:vMatriz})[E.modo](L,out):vLista(L,out);
 }
 function selDim(k,i,v,lab){return '<label>'+lab+' <select data-d="'+k+'" data-i="'+i+'">'+DIMS.filter(function(d){return k!=='tempo'||d!=='y';}).map(function(d){return '<option value="'+d+'"'+(d===v?' selected':'')+'>'+DIM[d].n+'</option>';}).join('')+'</select></label>';}
 function dimsCtl(){
@@ -324,7 +324,8 @@ function vMapa(L,out){
   desenha(raiz,X0,ry);
   s='<g><rect x="6" y="'+(ry-20)+'" width="'+(X0-12)+'" height="40" rx="10" fill="var(--gold-soft)" stroke="var(--gold)"/><text x="'+(X0/2)+'" y="'+(ry-3)+'" text-anchor="middle" style="font-weight:800;fill:var(--gold)">'+n0(L.length)+'</text><text x="'+(X0/2)+'" y="'+(ry+12)+'" text-anchor="middle" class="mutt">precedentes</text></g>'+s;
   var head=D.map(function(d,i){return '<text x="'+(X0+i*COL+40)+'" y="12" class="mutt" style="font-weight:800;letter-spacing:.08em">'+DIM[d].n.toUpperCase()+'</text>';}).join('');
-  out.innerHTML='<p class="e-help">Clique em um ramo para abrir ou fechar os galhos; o galho selecionado pode virar filtro.</p><div class="e-viz">'+svgEl(W,H+10,head+s)+'</div>';
+  out.innerHTML='<p class="e-help">Clique em um ramo para abrir ou fechar os galhos; o galho selecionado pode virar filtro. Ao lado, os assuntos do recorte.</p><div class="e-mm"><div class="e-viz">'+svgEl(W,H+10,head+s)+'</div><aside class="e-asl">'+painelAssuntos(L)+'</aside></div>';
+  $$('.e-asl [data-av]',out).forEach(function(b){b.addEventListener('click',function(){selecionar({ass:b.getAttribute('data-av')},+b.getAttribute('data-n'));$$('.e-asl .on',out).forEach(function(x){x.classList.remove('on');});b.classList.add('on');});});
   var idx={};(function reg(ns){ns.forEach(function(nd){idx[nd.key]=nd;if(nd.ch)reg(nd.ch);});})(raiz);
   $$('.e-viz .nd',out).forEach(function(g){
     function act(){var nd=idx[g.getAttribute('data-key')];if(!nd)return;
@@ -333,6 +334,13 @@ function vMapa(L,out){
       vMapa(L,out);selecionar(f,nd.n);var ng=out.querySelector('[data-key="'+CSS.escape(nd.key)+'"]');if(ng)ng.classList.add('on');}
     g.addEventListener('click',act);g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
   });
+}
+/* ---- Painel lateral de assuntos (dentro do mapa mental) ---- */
+function painelAssuntos(L){
+  var t=conta(L,'ass').filter(function(z){return z[0]!=='Sem assunto catalogado';}),mx=t.length?t[0][1]:1;
+  if(!t.length)return '<div class="lab">Assuntos</div><p class="meta">Sem assunto catalogado no recorte.</p>';
+  return '<div class="lab">Assuntos do recorte <small>'+t.length+'</small></div><div class="e-asl-l">'+t.slice(0,40).map(function(z){var sub=L.filter(function(x){return x._ass===z[0];}),c=conta(sub,'res');
+    return '<button data-av="'+esc(z[0])+'" data-n="'+z[1]+'" title="'+esc(z[0])+'"><span class="l">'+esc(z[0])+'</span><small>'+n0(z[1])+'</small><span class="b" style="width:'+Math.max(8,z[1]/mx*100).toFixed(1)+'%">'+c.map(function(q){return '<i style="width:'+(q[1]/z[1]*100).toFixed(2)+'%;background:'+corRes(q[0])+'" title="'+esc(q[0]+': '+q[1])+'"></i>';}).join('')+'</span></button>';}).join('')+'</div>'+(t.length>40?'<p class="meta">+ '+(t.length-40)+' assuntos; use a busca ou os filtros.</p>':'');
 }
 /* ---- Fluxograma: Sankey em três colunas ---- */
 function vFluxo(L,out){
@@ -402,7 +410,7 @@ function vAssuntos(L,out){
 /* ================= EDITORIAL ================= */
 var ED=null;
 try{ED=JSON.parse($('#editorial').textContent);}catch(e){ED=null;}
-var XS={sub:'estrutura',peca:'',grupo:'',vg:'conectivos',q:''};
+var XS={sub:'estrutura',peca:'',grupo:'',vg:'termos',q:''};
 function man(){var db=window.VDM_DB&&window.VDM_DB();return ((db&&db['Diretrizes'])||[]).filter(function(r){return r['Código'];});}
 function manCap(c){return man().filter(function(r){return String(r['Capítulo']||'').indexOf(c)===0;});}
 function manTxt(r){return [r['Título'],r['Orientação'],r['Evitar'],r['Observação'],r['Grupo']].join(' ');}
@@ -455,6 +463,8 @@ function xTensoes(){
   var PR=manCap('08').filter(function(r){return hit(manTxt(r));});
   return '<section class="grp"><h2>Tensões entre fontes <small>sinalizar, não impor</small></h2>'+ED.pecas.tensoes.filter(function(t){return hit(t.t+t.a+t.b);}).map(function(t){return '<div class="x-card"><h3>'+esc(t.t)+' <span class="pill" style="color:var(--warn);border-color:var(--warn)">[VALIDAR]</span></h3><div class="x-ten"><div><b>Versão A</b>'+esc(t.a)+'<br>'+foTag(t.afo)+'</div><div><b>Versão B</b>'+esc(t.b)+'<br>'+foTag(t.bfo)+'</div></div></div>';}).join('')+(PR.length?'<h2 style="margin-top:22px">Propostas em avaliação <small>Manual CMT, Parte III</small></h2><div class="grid">'+PR.map(manCard).join('')+'</div>':'')+'</section>';
 }
+var VOCG={'Termos e grafias':1,'D. Frase e vocabulário':1};
+function ehVocab(g){return !!VOCG[g]||/^Manual · Vocabul/.test(g);}
 function estiloItens(){
   var L=regs('preferencia').map(function(r){return {g:grp(r),id:r.id,regra:r.regra,titulo:r.titulo,pref:r.preferir,ev:r.evitar,base:r.base,fo:'R'};});
   var chave=function(x){return nz(x).replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();};
@@ -467,9 +477,9 @@ function estiloItens(){
   return L;
 }
 function xEstilo(){
-  var R=estiloItens(),gs={},ord=[];R.forEach(function(r){if(!gs[r.g]){gs[r.g]=0;ord.push(r.g);}gs[r.g]++;});
+  var R=estiloItens().filter(function(r){return !ehVocab(r.g);}),gs={},ord=[];R.forEach(function(r){if(!gs[r.g]){gs[r.g]=0;ord.push(r.g);}gs[r.g]++;});
   ord.sort(function(a,b){var ma=a.indexOf('Manual')===0,mb=b.indexOf('Manual')===0;return (ma===mb?0:ma?-1:1)||a.localeCompare(b);});
-  $('#x-aside').innerHTML='<div class="lab">Grupos</div>'+xAsideList(ord.map(function(g){return [g,g,gs[g]];}),XS.grupo,'g','Todos os grupos',R.length)+'<div class="note">Regras do Manual CMT (fundamentos de redação e escolhas lexicais) e preferências do banco de redação do gabinete, sem repetição: a regra presente nas duas fontes aparece uma vez, com as duas etiquetas.</div>';
+  $('#x-aside').innerHTML='<div class="lab">Grupos</div>'+xAsideList(ord.map(function(g){return [g,g,gs[g]];}),XS.grupo,'g','Todos os grupos',R.length)+'<div class="note">Regras de estrutura, prova, fundamentação, citação e fecho, do Manual CMT e do banco de redação, sem repetição. Termos, grafias e escolhas de frase ficam na subaba Vocabulário.</div>';
   bindAside('g','grupo');
   var L=R.filter(function(r){return (!XS.grupo||r.g===XS.grupo)&&hit([r.titulo,r.pref,r.ev,r.base,r.regra,r.obs].join(' '));});
   $('#x-cnt').innerHTML='<b>'+L.length+'</b> regras';
@@ -490,21 +500,70 @@ function vocabMerge(tipo){
   }
   return out;
 }
-var VG=[['conectivos','Conectivos e transições'],['verbos','Verbos e construções'],['resultado','Verbos de resultado'],['correcoes','Substituições obrigatórias'],['evitar','Expressões a evitar'],['normas','Grafia de normas']];
+/* Vocabulário integrado: termos e grafias de todas as fontes reunidos por termo, com divergências apontadas */
+function vk(x){return nz(x).replace(/[’`´]/g,"'").replace(/[“”"«»]/g,'').replace(/\s+/g,' ').trim().replace(/[,;:…]+$/,'').replace(/(\w)\.$/,'$1');}
+function termosIntegrados(){
+  var rows=[],porAd={},porEv={};
+  function termos(x){return String(x||'').split(/\s*(?:·|;| ou )\s*|\s+\/\s+/).map(function(t){return t.replace(/\s*\(.*?\)\s*$/,'').trim();}).filter(function(t){return t&&t.length<60;});}
+  function add(ad,ev,obs,fo,ref,auto){
+    ad=String(ad||'').trim();ev=String(ev||'').trim();
+    var ka=vk(ad).replace(/…$/,'').trim(),r=ka&&porAd[ka];
+    if(!r&&ka.length>3)Object.keys(porAd).some(function(k){if(k.length>3&&(ka.indexOf(k+' ')===0||k.indexOf(ka+' ')===0)){r=porAd[k];return true;}return false;});
+    if(!r){var evs=termos(ev);for(var i=0;i<evs.length&&!r;i++){var ke=vk(evs[i]);if(ke.length>2&&porEv[ke]&&(!ad||!porEv[ke].ad||vk(porEv[ke].ad)===ka))r=porEv[ke];}}
+    if(!r){r={ad:ad,ev:[],obs:[],fo:[],ref:[],auto:false};rows.push(r);if(ka)porAd[ka]=r;}
+    if(ad&&!r.ad){r.ad=ad;porAd[ka]=r;}
+    termos(ev).forEach(function(t){var kt=vk(t);if(kt&&!r.ev.some(function(z){return vk(z)===kt;}))r.ev.push(t);if(kt.length>2)porEv[kt]=r;});
+    if(obs&&r.obs.indexOf(obs)<0)r.obs.push(obs);
+    String(fo).split('+').forEach(function(f){if(f&&r.fo.indexOf(f)<0)r.fo.push(f);});
+    if(ref&&r.ref.indexOf(ref)<0)r.ref.push(ref);
+    if(auto)r.auto=true;
+  }
+  man().filter(function(r){return /^Vocabul/.test(r['Grupo']||'')&&r['Capítulo'].indexOf('04')===0;}).forEach(function(r){
+    if(r['Título']&&!/^“/.test(r['Título'])&&r['Grupo']==='Vocabulário')add(r['Orientação'],r['Evitar'],r['Título'],'D',r['Código']+(r['Página']?', p. '+r['Página']:''));
+    else if(r['Grupo']==='Vocabulário — adotar e evitar')add(r['Orientação'],r['Evitar'],'','D',r['Código']+(r['Página']?', p. '+r['Página']:''));
+  });
+  regs('preferencia').filter(function(r){return !r.grupo;}).forEach(function(r){add(r.preferir,r.evitar,'','R',r.id);});
+  regs('correcao').forEach(function(r){var esq=String(r.motivo||'').split('→')[0],m=esq.match(/“([^”]+)”/);var ev=m?m[1]:'';var obs=m&&/equivalentes/.test(esq)?'Inclui equivalentes.':(!m?esq.trim():'');
+    if(!ev&&/laudat/.test(r.motivo)){ev='Egrégio · Colendo · Excelso';}
+    add(r.substituir||'',ev,obs,'R',r.id,true);});
+  (ED.pecas.evitar.itens||[]).forEach(function(t){var c=t.replace(/[“”]/g,'');add('',c,'','M','');});
+  /* divergências: termo adotado numa fonte e evitado noutra */
+  var adset={};rows.forEach(function(r){if(r.ad)adset[vk(r.ad)]=r;});
+  rows.forEach(function(r){r.ev.forEach(function(t){var o=adset[vk(t)];if(o&&o!==r){r.conf=o.ad;o.conf=t;}else if(o===r){r.conf=t;}});});
+  rows.sort(function(a,b){return (b.conf?1:0)-(a.conf?1:0)||(a.ad?0:1)-(b.ad?0:1)||nz(a.ad||a.ev[0]).localeCompare(nz(b.ad||b.ev[0]));});
+  return rows;
+}
+function usosLexicos(){
+  /* regras de uso (frase e léxico) do Manual e do banco: ligadas aos conectivos e verbos quando tratam deles */
+  var L=[];
+  regs('preferencia').filter(function(r){return r.grupo==='D. Frase e vocabulário';}).forEach(function(r){L.push({t:r.titulo,pref:r.preferir,ev:r.evitar,fo:'R',id:r.id});});
+  man().filter(function(r){return r['Grupo']==='Vocabulário'&&/^“/.test(r['Título']||'');}).forEach(function(r){L.push({t:r['Título'],pref:r['Orientação'],ev:r['Evitar'],fo:'D',id:r['Código']+(r['Página']?' · p. '+r['Página']:''),termo:r['Título'].replace(/[“”]/g,'')});});
+  return L;
+}
+var VG=[['termos','Termos e grafias'],['frase','Frase e léxico'],['conectivos','Conectivos e transições'],['verbos','Verbos e construções'],['resultado','Verbos de resultado'],['normas','Grafia de normas']];
 function xVocab(){
-  var C=vocabMerge('conectivo'),V=vocabMerge('verbo'),K=regs('correcao'),N=ED.normas||[],EV=ED.pecas.evitar.itens;
-  var cnts={conectivos:C.length,verbos:V.length,resultado:3,correcoes:K.length,evitar:EV.length,normas:N.length};
-  $('#x-aside').innerHTML='<div class="lab">Vocabulário</div><div class="glist" id="x-gl">'+VG.map(function(z){return '<button data-v="'+z[0]+'" aria-pressed="'+(XS.vg===z[0])+'"><span>'+z[1]+'</span><small>'+cnts[z[0]]+'</small></button>';}).join('')+'</div><div class="note">Conectivos e verbos do Manual CMT e do banco de redação, reunidos sem repetição; substituições do banco de redação; grafia de normas do repertório do gabinete; expressões a evitar da memória de minutas.</div>';
+  if(!VG.some(function(z){return z[0]===XS.vg;}))XS.vg='termos';
+  var U=usosLexicos(),C=vocabMerge('conectivo'),V=vocabMerge('verbo'),N=ED.normas||[],TI=termosIntegrados();
+  /* regra de uso de um termo específico entra na linha do próprio conectivo ou verbo */
+  U.forEach(function(u){if(!u.termo)return;var k=vk(u.termo);var c=C.filter(function(r){return vk(r.a)===k;})[0];if(c){c.uso=(u.pref||'')+(u.ev?' Evitar: '+u.ev:'');if(c.fo.indexOf('D')<0)c.fo+='+D';u.ligado='Conectivos e transições';return;}
+    var v=V.filter(function(r){return vk(r.a)===k;})[0];if(v){v.uso=(u.pref||'')+(u.ev?' Evitar: '+u.ev:'');u.ligado='Verbos e construções';}else{V.push({a:u.termo,b:'',c:u.pref+(u.ev?' Evitar: '+u.ev:''),fo:u.fo});u.ligado='Verbos e construções';}});
+  var cnts={termos:TI.length,frase:U.filter(function(u){return !u.termo;}).length,conectivos:C.length,verbos:V.length,resultado:3,normas:N.length};
+  $('#x-aside').innerHTML='<div class="lab">Vocabulário</div><div class="glist" id="x-gl">'+VG.map(function(z){return '<button data-v="'+z[0]+'" aria-pressed="'+(XS.vg===z[0])+'"><span>'+z[1]+'</span><small>'+cnts[z[0]]+'</small></button>';}).join('')+'</div><div class="note">Termos, grafias e expressões do Manual CMT, do banco de redação e da memória de minutas reunidos numa só tabela: cada termo aparece uma vez, com tudo o que se evita em seu lugar, as fontes e se o Verificador o substitui. Divergências entre fontes ficam no topo, marcadas [VALIDAR].</div>';
   $$('#x-gl [data-v]').forEach(function(b){b.onclick=function(){XS.vg=b.getAttribute('data-v');xRender();};});
-  var h='',n=0;
+  var h='',n=0,t=XS.vg;
   function tbl(cab,rows){n+=rows.length;return rows.length?'<div class="x-card"><table class="x-tbl"><thead><tr>'+cab.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+esc(c||'')+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>':'<p class="empty">Nada encontrado.</p>';}
   function tblF(cab,rows){n+=rows.length;return rows.length?'<div class="x-card"><table class="x-tbl"><thead><tr>'+cab.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(c,i){return '<td>'+(i===r.length-1?foTag(c):esc(c||''))+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>':'<p class="empty">Nada encontrado.</p>';}
-  var t=XS.vg;
-  if(t==='conectivos')h=tblF(['Expressão','Função','Ocorrências no acervo','Fontes'],C.filter(function(r){return hit(r.a+' '+r.b);}).map(function(r){return [r.a,r.b,r.oc,r.fo];}));
-  else if(t==='verbos')h=tblF(['Verbo','Construção','Emprego','Fontes'],V.filter(function(r){return hit(r.a+' '+r.b+' '+r.c);}).map(function(r){return [r.a,r.b,r.c,r.fo];}));
+  if(t==='termos'){
+    var R=TI.filter(function(r){return hit([r.ad,r.ev.join(' '),r.obs.join(' ')].join(' '));});n=R.length;
+    h='<div class="x-card"><table class="x-tbl x-voc"><thead><tr><th>Adotar</th><th>Evitar</th><th>Observação</th><th>Verificador</th><th>Fontes</th></tr></thead><tbody>'+R.map(function(r){
+      return '<tr'+(r.conf?' class="x-conf"':'')+'><td>'+(r.ad?esc(r.ad):'<span class="meta">—</span>')+(r.conf?'<div class="x-confm">[VALIDAR] outra fonte manda evitar ou adotar “'+esc(r.conf)+'”</div>':'')+'</td><td>'+r.ev.map(function(e){return '<span class="x-ev">'+esc(e)+'</span>';}).join(' ')+'</td><td>'+esc(r.obs.join(' '))+(r.ref.length?'<div class="meta">'+esc(r.ref.join(' · '))+'</div>':'')+'</td><td>'+(r.auto?'<span class="pill" style="color:var(--good);border-color:var(--good)">substitui</span>':'<span class="meta">alerta ou leitura</span>')+'</td><td>'+foTag(r.fo.join('+'))+'</td></tr>';}).join('')+'</tbody></table></div>';
+  }
+  else if(t==='frase'){var A=U.filter(function(u){return !u.termo&&hit([u.t,u.pref,u.ev].join(' '));});n=A.length;
+    h='<div class="grid">'+A.map(function(u){return '<article class="card" style="--gc:var(--line)"><div class="hd"><span class="meta" style="margin:0">'+esc(u.id)+'</span></div><h3>'+esc(u.t)+'</h3><div class="fields">'+(u.pref?'<div class="field good"><b>Preferir</b><p>'+esc(u.pref)+'</p></div>':'')+(u.ev?'<div class="field bad"><b>Evitar</b><p>'+esc(u.ev)+'</p></div>':'')+'</div><p class="meta">'+foTag(u.fo)+'</p></article>';}).join('')+'</div>';
+    var lig=U.filter(function(u){return u.termo;});if(lig.length)h+='<p class="meta" style="margin-top:10px">As regras de uso de '+lig.map(function(u){return '“'+esc(u.termo)+'” ('+esc(u.ligado)+')';}).join(' e ')+' estão na linha do próprio termo.</p>';}
+  else if(t==='conectivos')h=tblF(['Expressão','Função','Regra de uso','Ocorrências no acervo','Fontes'],C.filter(function(r){return hit(r.a+' '+r.b+' '+(r.uso||''));}).map(function(r){return [r.a,r.b,r.uso||'',r.oc,r.fo];}));
+  else if(t==='verbos')h=tblF(['Verbo','Construção','Emprego','Fontes'],V.filter(function(r){return hit(r.a+' '+r.b+' '+r.c+' '+(r.uso||''));}).map(function(r){return [r.a,r.b,(r.c||'')+(r.uso?(r.c?' · ':'')+r.uso:''),r.fo];}));
   else if(t==='resultado')h=tbl(['Classe','Resultado'],[['Recurso','provido / desprovido'],['Embargos de declaração','acolhidos / rejeitados'],['Mandado de segurança','segurança concedida / denegada']].filter(function(r){return hit(r.join(' '));}))+'<p class="meta">'+foTag('M')+'</p>';
-  else if(t==='correcoes')h=tbl(['Ocorrência','Substituir por'],K.filter(function(r){return hit(r.motivo+' '+r.substituir);}).map(function(r){return [r.motivo,r.substituir];}))+'<p class="meta">O Verificador aplica estas substituições ao texto colado.</p>';
-  else if(t==='evitar'){var A=EV.filter(hit);n=A.length;h='<div class="x-card"><div class="x-tags">'+A.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div><p class="meta" style="margin-top:10px">'+foTag(ED.pecas.evitar.fo)+'</p></div>';}
   else if(t==='normas')h=tbl(['Sigla','Nome','Na prosa','Tipo'],N.filter(function(r){return hit([r.sigla,r.nome,r.prosa,(r.aliases||[]).join(' ')].join(' '));}).map(function(r){return [r.sigla,r.nome,r.prosa,r.tipo];}));
   $('#x-cnt').innerHTML='<b>'+n+'</b> itens';
   $('#x-out').innerHTML='<section class="grp"><h2>'+esc(VG.filter(function(z){return z[0]===t;})[0][1])+'</h2>'+h+'</section>';
