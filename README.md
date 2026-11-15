@@ -37,11 +37,12 @@ apoio/                         recursos de apoio à redação
                                Usos no gabinete, Matriz PIS-Cofins); antes vinha da planilha do Google, agora a fonte é este arquivo
   repertorio.json              repertório jurisprudencial e normativo (campo categoria: jurisprudencia | Lei, Código…)
   diretrizes-rapidas.json      Quadro de entradas rápidas das Diretrizes (registradas no Compêndio por quem tem acesso de editor)
-  acessos.json                 Quem tem o modo avançado do Compêndio e quem usa o editor (nomes da equipe da Pauta)
+  acessos.json                 Perfis do Compêndio: equipe (padrão, leitura), avancado (+ Enunciados, Repertório, Enciclopédia, Monitor)
+                               e editor (+ edição de tudo); cada perfil inclui o anterior
   enciclopedia.json            Enciclopédia do modo avançado (servida só pelo /api/compendio, após o login): recursos, guias, rotina, PJe, competência, matérias, léxico
   usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)
   pauta-equipe/                Pauta da equipe (/equipe/ na Vercel): login de cada servidor e cartões da pauta; api/ grava em acervo/sessoes com o GH_TOKEN da Vercel
-  cmt-compendio/               CMT Compêndio: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Pauta da equipe); cmt-compendio.html (um só código: modo padrão para todos; modo avançado, com Enunciados, Repertório, Enciclopédia e atalho para o Monitor, liberado pelo login a quem está em apoio/acessos.json) e cmt-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
+  cmt-compendio/               CMT Compêndio: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Pauta da equipe); cmt-compendio.html (um só código; o que cada pessoa vê e edita depende do perfil em apoio/acessos.json) e cmt-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
 
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo

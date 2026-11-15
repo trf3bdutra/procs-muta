@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Monta apoio/cmt-compendio/cmt-compendio.html (modo padrão; modo avançado liberado pelo login, mesmo código) e cmt-editor.html (editor)
-a partir desta pasta e da base do procs-muta. Acesso ao modo avançado e ao editor: apoio/acessos.json (funções em apoio/pauta-equipe/api).
+a partir desta pasta e da base do procs-muta. Perfis (equipe, avancado, editor): apoio/acessos.json (funções em apoio/pauta-equipe/api).
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código

@@ -51,7 +51,7 @@ async function gravarJson(rel, dados, sha, msg) {
 }
 const gestor = u => String(process.env.CMT_GESTOR || 'Bruno').split(',').map(norm).filter(Boolean).includes(norm(u));
 const dataOk = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ''));
-/* acessos do CMT Compêndio (apoio/acessos.json): modo avançado e editor; vale o nome do login ou um apelido do cadastro da equipe */
+/* perfil no CMT Compêndio (apoio/acessos.json): equipe (padrão) < avancado < editor; cada perfil inclui o anterior; vale o nome do login ou um apelido do cadastro da equipe */
 let ACC = null, ACC_T = 0;
 async function acessos(usuario) {
   if (!ACC || Date.now() - ACC_T > 60e3) {
@@ -61,7 +61,9 @@ async function acessos(usuario) {
   const u = norm(usuario), reg = ACC.eq.find(r => [r.nome].concat(r.aliases || []).some(n => norm(n) === u));
   const nomes = new Set([u].concat(reg ? [reg.nome].concat(reg.aliases || []).map(norm) : []));
   const tem = lista => (lista || []).some(n => nomes.has(norm(n)));
-  return { avancado: tem(ACC.a.compendioAvancado), editor: tem(ACC.a.editor) };
+  const P = ACC.a.perfis || { avancado: ACC.a.compendioAvancado, editor: ACC.a.editor };
+  const editor = tem(P.editor), avancado = editor || tem(P.avancado);
+  return { perfil: editor ? 'editor' : avancado ? 'avancado' : 'equipe', avancado, editor };
 }
 /* arquivos grandes (mais de 1 MB) vêm pelo blob */
 async function lerGrande(rel) {

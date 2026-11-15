@@ -512,7 +512,7 @@ function rapHtml(nq){
     '<textarea data-raptxt rows="2" placeholder="Nova entrada: o que foi fixado, em uma ou duas frases (Ctrl+Enter salva)" aria-label="Texto da entrada">'+esc(RAP.txt)+'</textarea>'+
     '<input data-raporig placeholder="Origem (opcional): processo, reunião, despacho…" value="'+esc(RAP.orig)+'" aria-label="Origem">'+
     '<button class="btn" data-rapadd'+(RAP.grav?' disabled':'')+'>'+(RAP.grav?'Gravando…':'Registrar')+'</button></div>';
-  else h+='<p class="rap-ro">'+(window.CMT_SITE?'Para registrar entradas, entre com um login de editor.':'Aberto como arquivo: o registro de entradas funciona no site do gabinete.')+'</p>';
+  else h+='<p class="rap-ro">'+(window.CMT_SITE?'Leitura. Quem registra, incorpora e exclui entradas é o perfil Editor.':'Aberto como arquivo: o registro de entradas funciona no site do gabinete, para o perfil Editor.')+'</p>';
   h+=V.length?'<ol class="rap-l">'+V.map(function(r){var inc=r.situacao==='incorporada';return '<li class="'+(inc?'inc':'')+'"><div class="rap-m"><span class="rap-t">'+esc(r.tipo||'Entrada')+'</span><span>'+rapData(r.data)+'</span>'+(r.autor?'<span>'+esc(r.autor)+'</span>':'')+(inc?'<span class="rap-ok">incorporada'+(r.destino?' em '+esc(r.destino):'')+'</span>':'')+'</div>'+
       '<p>'+xFm(r.texto||'')+'</p>'+(r.origem?'<p class="rap-o">Origem: '+esc(r.origem)+'</p>':'')+
       (pode?'<div class="rap-a">'+(inc?'<button class="e-mini" data-rapsit="'+esc(r.id)+'">Voltar para “a incorporar”</button>':'<button class="e-mini" data-rapinc="'+esc(r.id)+'">Marcar como incorporada</button>')+'<button class="e-mini" data-rapdel="'+esc(r.id)+'">Excluir</button></div>':'')+'</li>';}).join('')+'</ol>'
