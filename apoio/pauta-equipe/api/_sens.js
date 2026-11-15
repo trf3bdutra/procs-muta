@@ -49,3 +49,4 @@ module.exports = async (req, res, u) => {
     res.status(409).json({ erro: 'O arquivo mudou várias vezes seguidas; tente de novo.' });
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
+module.exports.base = base;

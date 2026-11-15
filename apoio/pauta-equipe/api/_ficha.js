@@ -67,7 +67,8 @@ const V = {
   /* urgências e monocráticas (aba Urgências / Monocráticas da Pauta da equipe) */
   urgTipo: v => ({ triagem: { 'Urgência': { 'Tutela de urgência': 'Tutela de urgência', 'Tutela recursal (antecipação)': 'Tutela de urgência', 'Efeito suspensivo': 'Efeito suspensivo', 'Liminar': 'Pedido de liminar', 'Prioridade de saúde': 'Prioridade legal', 'Outro': 'Outra urgência' }[v] || '' } }),
   urgSit: v => ({ triagem: { 'Urgência - Apreciação': v } }), urgData: v => ({ triagem: { 'Urgência - Data': v } }), urgObs: v => ({ triagem: { 'Urgência - Observação': v } }),
-  hip932: v => ({ triagem: { 'Hipóteses Monocrática': v } })
+  hip932: v => ({ triagem: { 'Hipóteses Monocrática': v } }),
+  tipoAto: v => ({ producao: { 'Mono - Tipo de ato': v } }), fundamento: v => ({ producao: { 'Mono - Fundamento': v } })
 };
 const VC = {
   tipoJ: v => ({ triagem: { 'Tipo de Julgamento': v } }), especificidades: v => ({ triagem: { 'Especificidades': v } }), questoes: v => ({ triagem: { 'Alegações': v } }),
@@ -107,8 +108,12 @@ module.exports = async (req, res, u) => {
       const [{ doc }, fonte] = await Promise.all([lerOp(), fonteDe(cnj)]);
       /* controles da equipe do mesmo processo: monocrática e urgência, meta, sobrestamento */
       const opc = rel => L.lerJson(rel).then(x => (x.dados.registros || {})[dg(cnj)] || null).catch(() => null);
-      const [mono, metas, sobrestados, sensiveis] = await Promise.all([opc('acervo/monocraticas.json'), opc('acervo/metas.json'), opc('acervo/sobrestados.json'), opc('acervo/sensiveis.json')]);
-      return res.status(200).json({ ficha: F, operacional: registro(doc, cnj, F, false) || null, fonte, gestor: L.gestor(u), controles: { mono, metas, sobrestados, sensiveis } });
+      /* controles: o registro de acompanhamento e, para metas, sobrestados e casos sensíveis, se o processo está na lista (acervo) */
+      const naLista = mod => require(mod).base().then(B => (Array.isArray(B) ? B : B.lista).find(x => dg(x.cnj) === dg(cnj)) || null).catch(() => null);
+      const [mono, metas, sobrestados, sensiveis, bMeta, bSobr, bSens] = await Promise.all([opc('acervo/monocraticas.json'), opc('acervo/metas.json'), opc('acervo/sobrestados.json'), opc('acervo/sensiveis.json'),
+        naLista('./_metas'), naLista('./_sobr'), naLista('./_sens')]);
+      return res.status(200).json({ ficha: F, operacional: registro(doc, cnj, F, false) || null, fonte, gestor: L.gestor(u),
+        controles: { mono, metas, sobrestados, sensiveis, naLista: { metas: bMeta, sobrestados: bSobr, sensiveis: bSens } } });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const b = req.body || {}, cnj = String(b.cnj || ''), C = b.campos || {}, E = editaveis(F), mud = {}, recus = [];
