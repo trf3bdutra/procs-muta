@@ -40,7 +40,7 @@ padrao/                        regras técnicas da base
 
 gerar.py                       valida a base, atualiza o manifesto e importa exportações dos apps
 scripts/                       rotinas auxiliares (DataJud, catálogo, modelos-matriz, apps)
-cmt-monitor.html               CMT-monitor: menu Acervo com três páginas (Acervo Central: cartão Acervo filtrado com as situações, busca, critérios, fases e tarefas do PJe e cartões, painel esquerdo com o acervo do gabinete e os dados, painel direito com as estatísticas do filtro; Panorama geral: indicadores, visão geral, painel por blocos e relatórios, sobre o acervo ativo inteiro; Planilha integral, só leitura), Triagem, Seleção Prévia e Pautas de julgamento; Configurações com as regras e a equipe
+cmt-monitor.html               CMT-monitor: menu Acervo com três páginas (Acervo Central: escaninhos à esquerda, com os fixos Aptos, Metas e Retirados de pauta; dados dos filtrados, com as fases do PJe; cartão Acervo filtrado e Busca avançada, em Planilha ou Prontuário, com Exportar; Panorama geral: indicadores em faixas, painel por blocos e relatórios; Planilha integral, só leitura), Seleção Prévia e Pautas de julgamento; botão Base do gabinete com a conexão e os dados; Configurações com as regras e a equipe
 cmt-fluxograma.html            CMT-fluxograma: fluxograma interativo, rotina do gabinete, competência e impedimentos, assuntos e procedimentos
 construtor.html · index.html   apps (ver observação abaixo)
 ```
