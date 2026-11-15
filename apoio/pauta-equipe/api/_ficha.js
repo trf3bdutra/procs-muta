@@ -102,8 +102,9 @@ function paraCartao(mud, it) {
   if (tem(p, 'Data da Liberação') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Liberação'])) d.dataLiberacao = p['Data da Liberação'];
   if (tem(p, 'SERVIDOR')) d.servidor = p.SERVIDOR;
   if (tem(p, 'CORRETOR')) d.corretor = p.CORRETOR;
-  const C2 = { 'Especificidades': 'especificidades', 'Alegações': 'questoes', 'Tipo de Julgamento': 'tipoJ' };
+  const C2 = { 'Especificidades': 'especificidades', 'Alegações': 'questoes', 'Tipo de Julgamento': 'tipoJ', 'Síntese Processual': 'sintese' };
   Object.keys(C2).forEach(x => { if (tem(t, x)) cart[C2[x]] = t[x]; });
+  if (tem(mud.origem || {}, 'Observações')) cart.obsGeral = mud.origem['Observações'];
   if (tem(t, 'Parecer - Sentido') || tem(t, 'ID do Parecer MPF')) { cart.mpfx = Object.assign({}, (c.cartao || {}).mpfx); if (tem(t, 'Parecer - Sentido')) cart.mpfx.sentido = t['Parecer - Sentido']; if (tem(t, 'ID do Parecer MPF')) cart.mpfx.id = t['ID do Parecer MPF']; }
   if (tem(t, 'Tempest - Publicação') || tem(t, 'Tempest - Protocolo')) { cart.adm = Object.assign({}, (c.cartao || {}).adm); if (tem(t, 'Tempest - Publicação')) cart.adm.intim = t['Tempest - Publicação']; if (tem(t, 'Tempest - Protocolo')) cart.adm.prot = t['Tempest - Protocolo']; }
   if (tem(p, 'Voto - Descrição')) { cart.jul = Object.assign({}, (c.cartao || {}).jul, { fund: p['Voto - Descrição'] }); }
@@ -131,6 +132,7 @@ async function ondeEsta(cnj) {
 }
 const VC = {
   tipoJ: v => ({ triagem: { 'Tipo de Julgamento': v } }), especificidades: v => ({ triagem: { 'Especificidades': v } }), questoes: v => ({ triagem: { 'Alegações': v } }),
+  sintese: v => ({ triagem: { 'Síntese Processual': v } }), obsGeral: v => ({ origem: { 'Observações': v } }),
   'mpfx.sentido': v => ({ triagem: { 'Parecer - Sentido': v } }), 'mpfx.id': v => ({ triagem: { 'ID do Parecer MPF': v } }),
   'adm.intim': v => ({ triagem: { 'Tempest - Publicação': v } }), 'adm.prot': v => ({ triagem: { 'Tempest - Protocolo': v } }), 'adm.prazo': v => ({ triagem: { 'Tempest - Prazo legal': v } }),
   'adm.dobro': v => ({ triagem: { 'Tempest - Dobro': v === true || v === 'true' ? '2' : '1' } }), 'adm.ajg': v => ({ triagem: { 'AJG': v === true || v === 'true' ? 'Sim' : '' } }),
@@ -170,6 +172,7 @@ function regras(r, out, u) {
 }
 /* ficha → cartão integral (inverso de VC): o valor gravado na ficha prevalece sobre o guardado no cartão */
 const VCI = { tipoJ: ['triagem', 'Tipo de Julgamento'], especificidades: ['triagem', 'Especificidades'], questoes: ['triagem', 'Alegações'],
+  sintese: ['triagem', 'Síntese Processual'], obsGeral: ['origem', 'Observações'],
   'mpfx.sentido': ['triagem', 'Parecer - Sentido'], 'mpfx.id': ['triagem', 'ID do Parecer MPF'], 'adm.intim': ['triagem', 'Tempest - Publicação'],
   'adm.prot': ['triagem', 'Tempest - Protocolo'], 'adm.prazo': ['triagem', 'Tempest - Prazo legal'], 'adm.dobro': ['triagem', 'Tempest - Dobro', 1], 'adm.ajg': ['triagem', 'AJG', 1],
   'jul.fund': ['producao', 'Voto - Descrição'], 'jul.topico': ['producao', 'Tópico-síntese'] };
