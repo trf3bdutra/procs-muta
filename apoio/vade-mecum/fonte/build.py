@@ -6,7 +6,8 @@ Fontes (todas no procs-muta):
   snapshot.json · usos_auto.json                    cópia da planilha do Vade Mecum e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
-  ../../../modelos/modelos.json · paragrafos.json   modelos e parágrafos-padrão
+  ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
+  ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
   ../../../precedentes/precedentes.jsonl · inteiros-teores/*.jsonl   ementário do Relator
   ../../referencias-rapidas.json                   referências rápidas ao lado dos modelos
   ../../../acervo/fonte.json                        partes, advogados e dados do processo, quando o processo está no acervo
@@ -24,6 +25,12 @@ rep = ler(RAIZ/'apoio/repertorio.json')
 editorial = {'padrao': {'schema': dir_.get('schema'), 'versao': dir_.get('versao'), 'atualizadoEm': dir_.get('atualizadoEm'), 'registros': dir_['registros']},
              'normas': [r for r in rep['registros'] if r.get('categoria') == 'norma'],
              'pecas': ler(H/'editorial_pecas.json')}
+# matrizes estruturais (recurso × resultado, sem matéria): moldes do Editorial
+def _js(v): return json.loads(v) if isinstance(v, str) else v
+editorial['matrizes'] = [{'id': m['id'], 'nome': m.get('nomeModelo', ''), 'resultado': m.get('resultado', ''), 'classe': m.get('classe', ''), 'fonte': m.get('fonte', ''),
+                          'esq': _js(m.get('esqueletoModelo')) or {},
+                          'par': [{k: p.get(k) for k in ('posicao', 'ordem', 'versao', 'titulo', 'texto')} for p in (_js(m.get('paragrafosModelo')) or [])]}
+                         for m in ler(RAIZ/'modelos/matrizes-estruturais.json')['registros']]
 K = ['id', 'processo', 'classe', 'classeSigla', 'especie', 'pronunciamento', 'orgao', 'dataJulgamento', 'dataPublicacao', 'assunto', 'temas',
      'ramoDireito', 'ementa', 'resultado', 'sentidoResultado', 'dispositivosCitados', 'jurisprudenciaCitada']
 # inteiro teor: texto, arquivo, linha e partes do cabeçalho do PJe
