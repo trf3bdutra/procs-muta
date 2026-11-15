@@ -147,7 +147,7 @@ html[data-theme=dark] .trb{--t-bg:#0a1821;--t-ln:#1e3747;--t-rs:#10222e;--t-ti:#
 .trm-st{font-size:12px;font-weight:700;color:var(--t-mu);margin-right:6px}.trm-lb{min-width:150px;justify-content:center;color:var(--t-ti)}
 .trb-c .b.trm-reg{height:34px;padding:0 14px;background:var(--t-acao);border:1px solid var(--t-acao);color:var(--t-acao-ink);font-weight:750}
 .trb-c .b.ic2:disabled{opacity:1;color:var(--t-mu);background:var(--t-bg);cursor:not-allowed}
-.trm-k{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.tmk{background:var(--t-rs);border:1px solid var(--t-ln);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.trm-k{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:16px}.tmk{background:var(--t-rs);border:1px solid var(--t-ln);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
 .tmk-h{display:flex;justify-content:space-between;align-items:center}.tmk-h small{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--t-mu)}.tmk-h svg{color:var(--t-acao)}
 .tmk b{font-size:26px;font-weight:750;color:var(--t-ti);line-height:1.15}.tmk span{font-size:12px;color:var(--t-mu)}
 @media (max-width:900px){.trm-k{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -899,7 +899,8 @@ var GUIA={'Agravo de Instrumento':['A decisão agravada está identificada (ID e
   'Juízo de Retratação':['O tema ou precedente vinculante está identificado?','O acórdão submetido diverge da tese firmada?','Houve embargos ao acórdão submetido?']};
 function ctl(it){return it.ctl||(it.ctl={});}
 function cart(it){var c=ctl(it);return c.cartao||(c.cartao={});}
-function etapa(it){return it.dataLiberacao?'Liberado':it.dataCorrecao?'Corrigido':it.dataMinuta?'Minutado':'A fazer';}
+/* monocrática assinada (ficha · Decisão monocrática): etapa final, depois de “para assinatura” */
+function etapa(it){return it.assinado||it.dataAssinatura?'Assinada':it.dataLiberacao?'Liberado':it.dataCorrecao?'Corrigido':it.dataMinuta?'Minutado':'A fazer';}
 function tipoJ(it){var C=(it.ctl||{}).cartao||{};if(C.tipoJ)return C.tipoJ;var k=it.julgamento||'',c=nq(it.classe);
   if(k==='ED')return 'Embargos de Declaração';if(k==='AgInt')return 'Agravo Interno';if(k==='JR')return 'Juízo de Retratação';
   if(/agravo de instrumento/.test(c))return 'Agravo de Instrumento';if(/remessa/.test(c)&&!/apelac/.test(c))return 'Remessa Necessária';return 'Apelação';}
@@ -1086,10 +1087,10 @@ document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.
   if(/^(triagem\.Urgência|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.getAttribute('data-fk'))){fdPills();fdRender();}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=$('#fd');if(o&&!o.hidden)fdFecha();}});
 function cartao(it){
-  var k=dg(it.cnj),ab=!!S.aberto[k],et=etapa(it),C=(it.ctl||{}).cartao||{},tj=tipoJ(it),o={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3}[et],A=alertas(it),c=it.ctl||{};
+  var k=dg(it.cnj),ab=!!S.aberto[k],et=etapa(it),C=(it.ctl||{}).cartao||{},tj=tipoJ(it),o={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3,'Assinada':3}[et],A=alertas(it),c=it.ctl||{};
   var stp=[['Minutado','<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>'],['Corrigido','✓'],['Liberado','➤']]
     .map(function(x,i){return (i?'<i class="ln'+(i+1<=o?' ok':'')+'"></i>':'')+'<button class="sp'+(i+1<=o?' ok':'')+(i+1===o?' at':'')+'" data-a="et" data-v="'+(i+1===o?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+etLbl(x[0])+(i+1===o?' · clique para desfazer':'')+'">'+x[1]+'</button>';}).join('');
-  var h='<article class="pc cpt'+(meu(it)?' meu':'')+(ab?' ab':'')+(A.length?' al':'')+(et==='Liberado'?' et-li':et==='Corrigido'?' et-co':et==='Minutado'?' et-mi':'')+'" data-k="'+k+'"><div class="rw">'+
+  var h='<article class="pc cpt'+(meu(it)?' meu':'')+(ab?' ab':'')+(A.length?' al':'')+((et==='Liberado'||et==='Assinada')?' et-li':et==='Corrigido'?' et-co':et==='Minutado'?' et-mi':'')+'" data-k="'+k+'"><div class="rw">'+
     (S.fonte==='mono'?'<button class="xb" data-a="exp" title="'+(ab?'Recolher':'Abrir o cartão integral')+'">'+(ab?'˄':'˅')+'</button>':'<span class="xb-v" aria-hidden="true"></span>')+'<input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar">'+
     '<div class="it">'+esc(it.item||'—')+'</div>'+
     '<div class="id"><span class="cnj">'+fmtCnj(it.cnj)+'</span><small>'+esc(it.partes||'')+'</small></div>'+
@@ -1159,11 +1160,11 @@ function monoPer(){var p=S.mper||'mes',d=new Date((S.mref||hoje())+'T12:00:00Z')
   if(p==='tudo')return {de:'',ate:'9999-12-31',lb:'todo o período'};
   if(p==='mes'){var y=d.getUTCFullYear(),m=d.getUTCMonth();return {de:isoD(new Date(Date.UTC(y,m,1,12))),ate:isoD(new Date(Date.UTC(y,m+1,0,12))),lb:d.toLocaleDateString('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'})};}
   var a=new Date(+d-((d.getUTCDay()+6)%7)*864e5),b=new Date(+a+6*864e5);return {de:isoD(a),ate:isoD(b),lb:br(isoD(a)).slice(0,5)+' a '+br(isoD(b))};}
-var MIC={reg:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',min:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',rev:'<path d="M20 6 9 17l-5-5"/>',ass:'<path d="M3 21c3-1 5-4 6-7l3 3c-3 1-6 3-7 6z"/><path d="M14 4l6 6-5 5-6-6z"/>'};
+var MIC={reg:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>',min:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',rev:'<path d="M20 6 9 17l-5-5"/>',ass:'<path d="M3 21c3-1 5-4 6-7l3 3c-3 1-6 3-7 6z"/><path d="M14 4l6 6-5 5-6-6z"/>',fim:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>'};
 function bandaMono(){var I=(S.doc&&S.doc.itens)||[],P=monoPer(),em=function(v){v=(v||'').slice(0,10);return v&&v>=P.de&&v<=P.ate;};
-  var n=function(f){return I.filter(f).length;},reg=n(function(i){return em(i.monoEm||i.criadoEm);}),mi=n(function(i){return em(i.dataMinuta);}),co=n(function(i){return em(i.dataCorrecao);}),li=n(function(i){return em(i.dataLiberacao);});
+  var n=function(f){return I.filter(f).length;},reg=n(function(i){return em(i.monoEm||i.criadoEm);}),mi=n(function(i){return em(i.dataMinuta);}),co=n(function(i){return em(i.dataCorrecao);}),li=n(function(i){return em(i.dataLiberacao);}),as=n(function(i){return em(i.dataAssinatura);});
   var k=function(t,v,s,ic){return '<div class="tmk"><div class="tmk-h"><small>'+t+'</small><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+MIC[ic]+'</svg></div><b>'+v+'</b><span>'+s+'</span></div>';};
-  $('#trm-k').innerHTML=k('Registradas',reg,reg===1?'nova decisão':'novas decisões','reg')+k('Minutadas',mi,mi===1?'minuta elaborada':'minutas elaboradas','min')+k('Revisadas',co,co===1?'revisão realizada':'revisões realizadas','rev')+k('Para assinatura',li,li===1?'liberada para assinatura':'liberadas para assinatura','ass');
+  $('#trm-k').innerHTML=k('Registradas',reg,reg===1?'nova decisão':'novas decisões','reg')+k('Minutadas',mi,mi===1?'minuta elaborada':'minutas elaboradas','min')+k('Revisadas',co,co===1?'revisão realizada':'revisões realizadas','rev')+k('Para assinatura',li,li===1?'liberada para assinatura':'liberadas para assinatura','ass')+k('Assinadas',as,as===1?'decisão assinada':'decisões assinadas','fim');
   $('#trm-lb').textContent=P.lb.charAt(0).toUpperCase()+P.lb.slice(1);marcaSeg('#trm-per',S.mper||'mes');$('#trm-ant').disabled=$('#trm-prox').disabled=(S.mper==='tudo');
   $('#trm-st').textContent=$('#pt-st').textContent;$('#trm-reg').setAttribute('aria-expanded',String(!!S.monoForm));}
 $('#trm-per').onclick=function(e){var b=e.target.closest('button');if(!b)return;S.mper=b.getAttribute('data-v');S.mref=hoje();bandaMono();};
@@ -1183,7 +1184,7 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
   var abas=PRT_ABAS.map(function(a){var ss=secs.filter(function(s){var h=s.querySelector('h3');return h&&a[1].test(h.textContent);});
     var n=0,ch=0;ss.forEach(function(s){[].forEach.call(s.querySelectorAll('input,select,textarea'),function(x){if(x.type==='button')return;n++;if(x.type==='checkbox'?x.checked:(x.value||'').trim())ch++;});});
     return {nome:a[0],html:ss.map(function(s){return s.outerHTML;}).join(''),n:n,ch:ch};});
-  var o3={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3}[etapa(it)];
+  var o3={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3,'Assinada':3}[etapa(it)];
   var PEN='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
   var DT=['dataMinuta','dataCorrecao','dataLiberacao'];
   var stp=[['Minutado',PEN],['Corrigido','✓'],['Liberado','➤']].map(function(x,i){var at=i+1===o3,d=it[DT[i]];
@@ -1383,7 +1384,7 @@ function planilha(V){
   var sc=function(it,k,L){var v=(it.ctl||{})[k]||'';return '<select data-c="'+k+'"><option value="">—</option>'+L.map(function(x){return '<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>';}).join('')+(v&&L.indexOf(v)<0?'<option selected>'+esc(v)+'</option>':'')+'</select>';};
   var th='<thead><tr>'+PL.map(function(c,i){return '<th style="min-width:'+c[1]+'px;max-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead>';
   var tb=V.map(function(it){var k=dg(it.cnj),et=etapa(it),A=alertas(it),mt=metaDe(it),c=it.ctl||{};
-    var cls=et==='Liberado'?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'';
+    var cls=(et==='Liberado'||et==='Assinada')?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'';
     var td=function(x,w){return '<td'+(w?' class="'+w+'"':'')+'>'+x+'</td>';};
     return '<tr class="pc '+cls+(meu(it)?' meu':'')+'" data-k="'+k+'">'+
       '<td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item||'—')+'</b></label></td>'+
@@ -1393,7 +1394,7 @@ function planilha(V){
       td('<textarea rows="1" data-d="obs" placeholder="anotações">'+esc(it.obs||'')+'</textarea>')+
       td('<textarea rows="1" data-p="sintese" placeholder="síntese fática">'+esc(((c.cartao||{}).sintese)||'')+'</textarea>')+td('<textarea rows="1" data-p="obsGeral" placeholder="observação">'+esc(((c.cartao||{}).obsGeral)||'')+'</textarea>')+
       td(A.length?'<span class="pd">'+esc(A.join(' · '))+'</span>':'','pdc')+
-      td('<select data-et>'+['A fazer','Minutado','Corrigido','Liberado'].map(function(x){return '<option'+(x===et?' selected':'')+'>'+x+'</option>';}).join('')+'</select>')+
+      td(et==='Assinada'?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+br(it.dataAssinatura):'')+'</b>':'<select data-et>'+['A fazer','Minutado','Corrigido','Liberado'].map(function(x){return '<option'+(x===et?' selected':'')+'>'+x+'</option>';}).join('')+'</select>')+
       td('<input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'">')+td(selR(it,'servidor'))+td(selR(it,'corretor'))+
       td(sc(it,'mpf',CP.mpf))+td(sc(it,'parecer',CP.parecer))+td(sc(it,'prelim',CP.prelim))+td(sc(it,'tempest',CP.tempest))+td(sc(it,'preparo',CP.preparo))+td(sc(it,'repres',CP.repres))+td(sc(it,'midias',CP.midias))+
       td(sc(it,'resJulg',CP.resJulg))+td(sc(it,'consect',CP.simnao))+td(sc(it,'honor',CP.honor))+td(sc(it,'topico',CP.simnao))+td(sc(it,'sopref',SOP))+
@@ -1406,10 +1407,10 @@ function planilhaMono(V){
   var sc=function(it,k,L){var v=(it.ctl||{})[k]||'';return '<select data-c="'+k+'"><option value="">—</option>'+L.map(function(x){return '<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>';}).join('')+'</select>';};
   var th='<thead><tr>'+PLM.map(function(c,i){return '<th style="min-width:'+c[1]+'px;max-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead>';
   return '<div class="plw"><table class="pl">'+th+'<tbody>'+V.map(function(it){var k=dg(it.cnj),et=etapa(it),A=alertas(it),c=it.ctl||{},td=function(x){return '<td>'+x+'</td>';};
-    return '<tr class="pc '+(et==='Liberado'?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'')+(meu(it)?' meu':'')+'" data-k="'+k+'"><td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item)+'</b></label></td>'+
+    return '<tr class="pc '+((et==='Liberado'||et==='Assinada')?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'')+(meu(it)?' meu':'')+'" data-k="'+k+'"><td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item)+'</b></label></td>'+
       td('<span class="cnj">'+fmtCnj(it.cnj)+'</span><small class="pt">'+esc(it.partes||'')+'</small>')+td(esc(clSig(it.classe)))+td('<div class="wr">'+esc(it.assunto||'')+'</div>')+td('<div class="wr">'+esc(it.tarefa||'')+'</div>')+td(it.desde?esc(br(it.desde)):'')+td(sc(it,'urgTipo',CPM.urgTipo)+(it.urgAuto&&!c.urgTipo?'<small class="pt">'+esc(it.urgAuto)+'</small>':''))+td(sc(it,'tipoAto',CPM.tipoAto))+td(sc(it,'hip932',CPM.hip932))+
       td('<textarea rows="1" data-d="obs" placeholder="anotações">'+esc(it.obs||'')+'</textarea>')+td(A.length?'<span class="pd">'+esc(A.join(' · '))+'</span>':'')+
-      td('<select data-et>'+['A fazer','Minutado','Corrigido','Liberado'].map(function(x){return '<option value="'+x+'"'+(x===et?' selected':'')+'>'+etLbl(x)+'</option>';}).join('')+'</select>')+td('<input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'">')+
+      td(et==='Assinada'?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+br(it.dataAssinatura):'')+'</b>':'<select data-et>'+['A fazer','Minutado','Corrigido','Liberado'].map(function(x){return '<option value="'+x+'"'+(x===et?' selected':'')+'>'+etLbl(x)+'</option>';}).join('')+'</select>')+td('<input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'">')+
       td(selR(it,'servidor'))+td(selR(it,'corretor'))+td(sc(it,'resJulg',CPM.res))+td(sc(it,'honor',CP.honor))+td(sc(it,'topico',CP.simnao))+td('<input data-c="intercor" value="'+esc(c.intercor||'')+'" placeholder="motivo / chamado">')+'</tr>';}).join('')+'</tbody></table></div>';
 }
 function linhaExpMono(it){var c=it.ctl||{};return [it.item,it.cnj,clSig(it.classe),it.assunto,it.tarefa,it.desde?br(it.desde):'',urgDe(it),c.tipoAto,c.hip932,it.obs,alertas(it).join(' · '),etLbl(etapa(it)),it.dataMinuta?br(it.dataMinuta):'',it.servidor,it.corretor,c.resJulg,c.honor,c.topico,c.intercor];}

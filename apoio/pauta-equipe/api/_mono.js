@@ -44,7 +44,9 @@ function item(r) {
   const cart = FICHA.cartaoDaFicha(r, x.cartao); if (Object.keys(cart).length) ctl.cartao = cart;
   ctl.editadoPor = c['Monocrática - Atualizado por'] || ''; ctl.editadoEm = c['Monocrática - Atualizado em'] || '';
   return { cnj: r.processo, mono: p.Destino === 'Monocrática', monoEm: c['Monocrática - Registrada em'] || '', obs: c['Monocrática - Observação'] || '',
-    servidor: p.SERVIDOR || '', corretor: p.CORRETOR || '', dataMinuta: p.MINUTADO || '', dataCorrecao: p['Data da Revisão'] || '', dataLiberacao: p['Data da Liberação'] || '', ctl };
+    servidor: p.SERVIDOR || '', corretor: p.CORRETOR || '', dataMinuta: p.MINUTADO || '', dataCorrecao: p['Data da Revisão'] || '', dataLiberacao: p['Data da Liberação'] || '',
+    /* assinatura e publicação (ficha · Decisão monocrática): a etapa final da monocrática */
+    assinado: p.Assinado === 'Sim' || !!p['Data da Assinatura'], dataAssinatura: p['Data da Assinatura'] || '', publicado: p.Publicado === 'Sim', decisaoId: p['Decisão - ID'] || '', ctl };
 }
 const vale = r => (r.producao || {}).Destino === 'Monocrática' || !!(r.triagem || {})['Urgência'];
 module.exports = async (req, res, u) => {
