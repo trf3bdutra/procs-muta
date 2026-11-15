@@ -1,12 +1,12 @@
 # Publica o CMT-monitor no projeto trf3-muta da Vercel (trf3-muta.vercel.app).
-# Vão para a Vercel só o cmt-monitor.html (raiz), o CMT Compêndio público (/compendio/) e as pautas das sessões (/dados/sessoes/),
-# que a aba Consulta do Compêndio lê; o restante do acervo continua privado no repositório. O Compêndio avançado não é publicado.
+# Vão para a Vercel: o cmt-monitor.html (raiz), o CMT Compêndio público (/compendio/), a Pauta da equipe (/equipe/) e as funções
+# /api/* (login da equipe e leitura/gravação das pautas no procs-muta, com o GH_TOKEN guardado na Vercel). O Compêndio avançado não é publicado.
 # Requer o segredo VERCEL_TOKEN (Settings › Secrets and variables › Actions).
 name: CMT-monitor na Vercel
 on:
   push:
     branches: [main]
-    paths: ["cmt-monitor.html", "apoio/cmt-compendio/cmt-compendio.html", "acervo/sessoes/**", ".github/workflows/vercel-monitor.yml"]
+    paths: ["cmt-monitor.html", "apoio/cmt-compendio/cmt-compendio.html", "apoio/pauta-equipe/**", ".github/workflows/vercel-monitor.yml"]
   workflow_dispatch:
 permissions:
   contents: read
@@ -29,8 +29,8 @@ jobs:
           mkdir -p site/public
           cp cmt-monitor.html site/public/index.html
           mkdir -p site/public/compendio && cp apoio/cmt-compendio/cmt-compendio.html site/public/compendio/index.html
-          mkdir -p site/public/dados/sessoes && cp acervo/sessoes/*.json site/public/dados/sessoes/
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","rewrites":[{"source":"/(.*)","destination":"/index.html"}]}\n' > site/vercel.json
+          mkdir -p site/public/equipe site/api && cp apoio/pauta-equipe/index.html site/public/equipe/index.html && cp apoio/pauta-equipe/api/*.js site/api/
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","rewrites":[{"source":"/((?!api/|equipe|compendio).*)","destination":"/index.html"}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

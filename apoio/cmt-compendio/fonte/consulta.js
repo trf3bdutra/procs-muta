@@ -1,14 +1,13 @@
 /* ================= CONSULTA: processo pautado → perfil do caso → modelos, precedentes e parágrafos ================= */
 (function(){
   var CQ={ses:'',item:'',perfil:null,fonte:'',cal:null,erro:'',busy:false};
-  var DADOS='/dados/sessoes/';
   var STOP={'de':1,'da':1,'do':1,'das':1,'dos':1,'e':1,'a':1,'o':1,'as':1,'os':1,'em':1,'no':1,'na':1,'nos':1,'nas':1,'por':1,'para':1,'com':1,'sem':1,'um':1,'uma':1,'ao':1,'aos':1,'que':1,'se':1,'ou':1,'nao':1,'sobre':1,'entre':1,'pelo':1,'pela':1,'art':1,'lei':1,'recurso':1,'processo':1,'caso':1};
   function nq(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
   function toks(s){return nq(s).split(/[^a-z0-9]+/).filter(function(w){return w.length>2&&!STOP[w];});}
   function dg(s){return String(s||'').replace(/\D/g,'');}
   function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function brd(d){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||'');return m?m[3]+'/'+m[2]+'/'+m[1]:(d||'');}
-  function jget(u){return fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status+' em '+u);return r.json();});}
+  function jget(u){return fetch(u,{cache:'no-store',credentials:'same-origin'}).then(function(r){if(r.status===401){var e=new Error('Para consultar a pauta, entre primeiro pela Pauta da equipe (/equipe/) com o seu nome e a sua senha.');e.login=true;throw e;}if(!r.ok)throw new Error('HTTP '+r.status+' em '+u);return r.json();});}
   function tipoJ(classe,julg){var k=String(julg||''),c=nq(classe);
     if(k==='ED')return 'Embargos de Declaração';if(k==='AgInt')return 'Agravo Interno';if(k==='JR')return 'Juízo de Retratação';
     if(/agravo de instrumento/.test(c))return 'Agravo de Instrumento';if(/remessa/.test(c)&&!/apelac/.test(c))return 'Remessa Necessária';return 'Apelação';}
@@ -33,13 +32,13 @@
   }
   function carregarCal(){
     if(CQ.cal)return Promise.resolve();
-    return jget(DADOS+'calendario.json').then(function(c){CQ.cal=(c.sessoes||[]).slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});})
-      .catch(function(){CQ.cal=[];CQ.erro='As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Compêndio dos cartões do CMT-monitor continua enviando o caso.';});
+    return jget('/api/sessoes').then(function(c){CQ.cal=(c.sessoes||[]).slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});})
+      .catch(function(er){CQ.cal=[];CQ.erro=er.login?er.message:'As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Compêndio dos cartões continua enviando o caso.';});
   }
   function consultar(){
     var ses=CQ.ses,it=String(CQ.item||'').trim();if(!ses||!it){toastC('Escolha a sessão e informe o item.');return;}
     CQ.busy=true;render();
-    jget(DADOS+ses+'.json').then(function(doc){
+    jget('/api/pauta?data='+ses).then(function(doc){
       var L=(doc.itens||[]).concat(doc.previa||[]),d=dg(it);
       var x=L.filter(function(i){return String(i.item)===it;})[0]||L.filter(function(i){return d.length>=7&&dg(i.cnj).indexOf(d)>=0;})[0];
       if(!x)throw new Error('Item '+it+' não encontrado na pauta de '+brd(ses)+'.');
@@ -79,7 +78,7 @@
     var h='<div class="cq-bar"><div><div class="lab">Sessão</div><select id="cq-ses"><option value="">escolha a sessão</option>'+opts+'</select></div>'+
       '<div><div class="lab">Item ou nº do processo</div><input id="cq-item" value="'+e(CQ.item)+'" placeholder="ex.: 12" autocomplete="off"></div>'+
       '<button class="cq-go" id="cq-go"'+(CQ.busy?' disabled':'')+'>'+(CQ.busy?'Consultando…':'Consultar')+'</button></div>';
-    if(CQ.erro)h+='<div class="cq-er">'+e(CQ.erro)+'</div>';
+    if(CQ.erro)h+='<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir a Pauta da equipe</a>':'')+'</div>';
     var P=CQ.perfil;
     if(!P){el.innerHTML=h+'<div class="empty">Escolha a sessão, informe o item da pauta e aperte Enter. O Compêndio lê o cartão do processo gravado no procs-muta e mostra os modelos-matriz, os precedentes e os parágrafos-padrão que se aplicam ao caso.</div>';ligar();return;}
     h+='<div class="cq-caso"><div class="cq-ch"><b>'+e(P.processo||'Caso')+'</b><small>'+e(CQ.fonte)+'</small></div><dl>'+Object.keys(ROT).filter(function(k){return P[k]!=null&&k!=='processo';}).map(function(k){return '<dt>'+ROT[k]+'</dt><dd>'+e(val(k,P[k]))+'</dd>';}).join('')+'</dl>'+
