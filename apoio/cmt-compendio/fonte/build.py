@@ -6,6 +6,7 @@ Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
   ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
+  editorial_d.js · editorial_d.css · editorial_apoios.json   Minuta-Matriz (arquitetura D) e apoios do canhoto
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
   ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
@@ -149,6 +150,12 @@ js_ = js
 EDJ = js(editorial)
 t0 = (H/'template.html').read_text(encoding='utf-8')
 JS = (H/'ementario.js').read_text(encoding='utf-8')
+# Editorial · Minuta-Matriz (arquitetura D): folha com abas, canhoto do bloco e orientações; substitui a apresentação da página Peças
+_AP = ler(H/'editorial_apoios.json')
+_ED = ((H/'editorial_d.js').read_text(encoding='utf-8').replace('/*__DAJ__*/{}', js(_AP['ajuda'])).replace('/*__DPREL__*/[]', js(_AP['preliminares'])).replace('/*__DEMP__*/{}', js(_AP['ementa'])))
+_ANC = "$('#v-edit').addEventListener('click',function(e){"
+assert JS.count(_ANC) == 1
+JS = JS.replace(_ANC, _ED + '\n' + _ANC)
 def blob_sha(p):
     b = p.read_bytes(); return hashlib.sha1(b'blob %d\0' % len(b) + b).hexdigest()
 ENC_SUBS = [('vias', 'Recursos'), ('qual', 'Qual via?'), ('guias', 'Guias práticos'), ('rotina', 'Rotina do gabinete'), ('pje', 'Caixas e fluxos do PJe'),
@@ -163,7 +170,7 @@ def montar(var):
              'editor'    (página do editor: grava no procs-muta pelo servidor; /editor/)"""
     t = t0
     js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8'))
-    css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8')
+    css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8') + (H/'editorial_d.css').read_text(encoding='utf-8')
     # abas do modo avançado: Enunciados, Repertório e Enciclopédia (escondidas até o login com acesso)
     t = troca(t, '<button class="tab" role="tab" data-v="temas" aria-selected="true">Enunciados</button>', '<button class="tab" role="tab" data-v="temas" aria-selected="false" data-av hidden>Enunciados</button>')
     t = troca(t, '<button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>', '<button class="tab" role="tab" data-v="rep" aria-selected="false" data-av hidden>Repertório</button>')
