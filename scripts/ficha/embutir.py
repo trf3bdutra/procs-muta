@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Embute a ficha única (padrao/ficha-dialogo.js + .css) nos dois HTML que a usam: o CMT-monitor (cmt-monitor.html, no documento
+"""Embute a ficha única (padrao/ficha-dialogo.js + .css, com a leitura do inteiro teor padrao/inteiro-teor.js) nos dois HTML que a usam: o CMT-monitor (cmt-monitor.html, no documento
 de fora, não no motor) e a Pauta da equipe (apoio/pauta-equipe/index.html). Fonte única: edite os arquivos de padrao/ e rode
    python3 scripts/ficha/embutir.py
 O monitor recebe também o adaptador (padrao/ficha-adaptador-monitor.js). O bloco fica entre <!-- cmt-ficha:inicio --> e <!-- cmt-ficha:fim --> e é trocado inteiro a cada execução."""
 import pathlib, re
 R = pathlib.Path(__file__).resolve().parents[2]
-js = (R / 'padrao/ficha-dialogo.js').read_text(encoding='utf-8')
+js = (R / 'padrao/inteiro-teor.js').read_text(encoding='utf-8') + '\n' + (R / 'padrao/ficha-dialogo.js').read_text(encoding='utf-8')
 css = (R / 'padrao/ficha-dialogo.css').read_text(encoding='utf-8')
 assert '</script' not in js and '</style' not in css
 ad = (R / 'padrao/ficha-adaptador-monitor.js').read_text(encoding='utf-8')

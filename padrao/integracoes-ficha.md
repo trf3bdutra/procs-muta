@@ -34,6 +34,8 @@ Chave de ligação: número CNJ (`processo`). Baixados e arquivados em definitiv
 
 **Diálogo da ficha** (o mesmo no CMT-monitor e na Pauta da equipe): `padrao/ficha-dialogo.js` + `padrao/ficha-dialogo.css`, no visual v198, desenhado a partir de `padrao/ficha.json`. `scripts/ficha/embutir.py` copia o módulo para `cmt-monitor.html` (com o adaptador `padrao/ficha-adaptador-monitor.js`, que grava direto na base pelo token) e para `apoio/pauta-equipe/index.html` (grava por `/api/pauta?ficha=1`). Na Pauta da equipe, a gaveta lateral passou a ser o prontuário de produção (preenchimento rápido); a ficha é o diálogo.
 
+**Inteiro teor (.txt do PJe)** na ficha: `padrao/inteiro-teor.js` (leitura, pré-seleção e sugestões do módulo v40 do app Gabinete CMT, sem mudança de regra). O painel tem três etapas (arquivo, documentos, conferência) e grava no operacional só os campos confirmados que existem no modelo; dados do acervo (PJe), recursos e outras peças aparecem na conferência, mas não são gravados. O .txt é lido só no navegador.
+
 Não há arquivos paralelos: a página Monocráticas, as urgências e a aba Controles especiais da Pauta da equipe leem e gravam esses campos no `acervo/operacional.json`.
 
 Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENTE", "VERIFICAR REPRESENTAÇÃO") não são gravados: campo vazio = ainda não verificado.

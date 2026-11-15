@@ -31,7 +31,8 @@ var IC = {
   lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>', rule: '<path d="M18 5H6l6 7-6 7h12"/>', ok: '<path d="M5 12l5 5 9-10"/>',
   warn: '<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>', back: '<path d="M15 18l-6-6 6-6"/>', fwd: '<path d="M9 18l6-6-6-6"/>',
   json: '<path d="M8 4H7a2 2 0 0 0-2 2v4l-2 2 2 2v4a2 2 0 0 0 2 2h1"/><path d="M16 4h1a2 2 0 0 1 2 2v4l2 2-2 2v4a2 2 0 0 1-2 2h-1"/>',
-  shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>', plus: '<path d="M12 5v14M5 12h14"/>'
+  shield: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/>', plus: '<path d="M12 5v14M5 12h14"/>',
+  txt: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9.5 14.5 12 17l2.5-2.5"/>'
 };
 var svg = function (k, c) { return '<svg class="' + (c || '') + '" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + '</svg>'; };
 
@@ -60,7 +61,7 @@ function controlesDe(fo, op) {
 }
 
 /* ───── estado ───── */
-var ST = { cnj: '', ad: null, d: null, err: '', tab: 'resumo', edit: false, draft: {}, busy: false, view: 'ficha', mostra: {}, histAll: false };
+var ST = { cnj: '', ad: null, d: null, err: '', tab: 'resumo', edit: false, draft: {}, busy: false, view: 'ficha', mostra: {}, histAll: false, teor: null };
 var host = null;
 function F() { return ST.d && ST.d.ficha; }
 function op() { return (ST.d && ST.d.operacional) || {}; }
@@ -141,11 +142,14 @@ function ensureHost() {
   if (host && doc.body.contains(host)) return host;
   host = doc.createElement('div'); host.id = 'cmt-fx'; host.setAttribute('aria-hidden', 'true');
   host.addEventListener('click', onClick); host.addEventListener('change', onChange); host.addEventListener('input', onInput);
+  host.addEventListener('dragover', function (ev) { if (!ST.teor || ST.view !== 'ficha') return; if ([].slice.call((ev.dataTransfer && ev.dataTransfer.types) || []).indexOf('Files') >= 0) { ev.preventDefault(); host.classList.add('is-drop'); } });
+  host.addEventListener('dragleave', function (ev) { if (ev.target === host || !host.contains(ev.relatedTarget)) host.classList.remove('is-drop'); });
+  host.addEventListener('drop', function (ev) { host.classList.remove('is-drop'); var f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0]; if (!f || !ST.teor) return; ev.preventDefault(); lerTxt(f); });
   doc.body.appendChild(host); return host;
 }
 function abrir(cnj, ad) {
   ensureHost();
-  ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false;
+  ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; descartarTeor();
   ST.tab = (ad && ad.aba) || 'resumo';
   host.classList.add('on'); host.setAttribute('aria-hidden', 'false'); doc.documentElement.classList.add('cmt-fx-open');
   doc.addEventListener('keydown', onKey, true);
@@ -161,7 +165,7 @@ function abrir(cnj, ad) {
 function fechar(force) {
   if (!host) return;
   if (!force && Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas da ficha?')) return;
-  host.classList.remove('on'); host.setAttribute('aria-hidden', 'true'); host.innerHTML = '';
+  descartarTeor(); host.classList.remove('on', 'is-drop'); host.setAttribute('aria-hidden', 'true'); host.innerHTML = '';
   doc.documentElement.classList.remove('cmt-fx-open'); doc.removeEventListener('keydown', onKey, true); ST.edit = false; ST.draft = {};
 }
 function passo(n) {
@@ -171,7 +175,7 @@ function passo(n) {
 }
 function onKey(ev) {
   if (!host || !host.classList.contains('on')) return;
-  if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); if (ST.view === 'doc') { ST.view = 'ficha'; render(); return; } fechar(); return; }
+  if (ev.key === 'Escape') { ev.preventDefault(); ev.stopPropagation(); if (ST.view === 'doc') { ST.view = 'ficha'; render(); return; } if (ST.teor) { fecharTeor(); return; } fechar(); return; }
   if (ev.target.closest && ev.target.closest('input,select,textarea')) return;
   if ((ev.key === 'ArrowDown' || ev.key === 'ArrowUp') && ev.altKey) { ev.preventDefault(); passo(ev.key === 'ArrowDown' ? 1 : -1); }
 }
@@ -191,7 +195,7 @@ function cabecalho() {
   var nav = L.length > 1 && i >= 0 ? '<button type="button" class="fx-sq" data-fx="ant" title="Processo anterior (Alt+↑)">' + svg('back') + '</button><span class="fx-note">' + (i + 1) + ' de ' + L.length + '</span><button type="button" class="fx-sq" data-fx="prox" title="Próximo processo (Alt+↓)">' + svg('fwd') + '</button>' : '';
   return '<header class="fx-head"><span class="fx-ic">' + svg('ficha') + '</span>' +
     '<div class="fx-tt"><span>' + E(['Ficha do processo', cl, as].filter(Boolean).join(' · ')) + '</span><div class="fx-num"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2><button type="button" class="fx-sq" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' + (partes ? '<small>' + E(partes) + '</small>' : '') + '</div>' +
-    '<div class="fx-acts" role="group" aria-label="Navegação">' + nav + '</div>' +
+    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor .txt</button>' : '') + nav + '</div>' +
     '<button type="button" class="fx-sq fx-x" data-fx="fechar" aria-label="Fechar" title="Fechar (Esc)">' + svg('x') + '</button></header>';
 }
 function faixa() {
@@ -219,9 +223,9 @@ function fichaView() {
   }).join('') + '</div><span class="fx-grow"></span><div class="fx-seg fx-acts2" role="group" aria-label="Ficha completa e edição"><button type="button" data-fx="doc" aria-label="Ficha completa" title="Ficha completa · ler, imprimir ou salvar em PDF">' + svg('print') + '</button>' +
     '<button type="button" data-fx="editar" aria-pressed="' + ST.edit + '" title="Liberar a edição dos campos do gabinete">' + svg('edit') + (ST.edit ? 'Editando' : 'Editar') + '</button></div></nav>';
   var n = Object.keys(ST.draft).length;
-  return '<section class="fx-dlg" role="dialog" aria-modal="true" aria-labelledby="fx-titulo" tabindex="-1">' + cabecalho() + (pode ? faixa() : '') + nav +
+  return '<section class="fx-dlg' + (ST.teor ? ' has-teor' : '') + '" role="dialog" aria-modal="true" aria-labelledby="fx-titulo" tabindex="-1">' + cabecalho() + (pode ? faixa() : '') + nav +
     (ST.edit ? '<div class="fx-editbar" role="status">' + svg('edit') + 'Modo de edição: os campos do gabinete estão liberados. Os dados do acervo (PJe) e os campos calculados continuam bloqueados.</div>' : '') +
-    '<div class="fx-work"><main class="fx-main">' + corpo + '</main></div>' +
+    '<div class="fx-work"><main class="fx-main">' + corpo + '</main>' + (ST.teor ? teorPanel() : '') + '</div>' +
     '<footer class="fx-foot"><span class="fx-legend"><span><kbd>Esc</kbd> fecha</span><span>' + svg('lock', 'is-imp') + 'acervo (PJe) · só leitura</span><span>' + svg('rule', 'is-calc') + 'calculado</span><span><i class="fx-sw"></i>campo do gabinete · grava no operacional</span></span>' +
     (ST.edit ? '<button type="button" class="fx-b" data-fx="descartar">Descartar</button><button type="button" class="fx-b pri" data-fx="salvar"' + (ST.busy ? ' disabled' : '') + '>' + (ST.busy ? 'Salvando…' : 'Salvar alterações' + (n ? ' (' + n + ')' : '')) + '</button>' : '<button type="button" class="fx-b" data-fx="fechar">Fechar</button>') +
     '</footer></section>';
@@ -345,9 +349,102 @@ function imprimir() {
   setTimeout(function () { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) { avisar('Não foi possível abrir a impressão.', 'err'); } setTimeout(function () { fr.remove(); }, 1500); }, 250);
 }
 
+/* ───── inteiro teor (.txt do PJe): painel lateral, leitura por padrao/inteiro-teor.js ───── */
+var TX = function () { return window.CMTInteiroTeor || {}; };
+/* chave sugerida → campo da ficha (seção.chave), pelo modelo; campos do acervo (PJe) e sem lugar no modelo não são gravados */
+function alvoDe(chave) {
+  var achou = null; (F().abas || []).forEach(function (a) { a.grupos.forEach(function (g) { g.campos.forEach(function (c) { if (!achou && c.chave === chave && editavel(c)) achou = c; }); }); });
+  return achou;
+}
+function valorPara(c, v) { v = S(v); if (c.tipo === 'simnao') return /^(2|sim|s|true)$/i.test(v) ? 'Sim' : /^(1|n[aã]o)$/i.test(v) ? '' : v; if (c.tipo === 'data') return iso(v) || v; return v; }
+function linhaAntiga() { var o = op(), r = Object.assign({ Processo: ST.cnj }, fo()); ['origem', 'triagem', 'producao', 'pauta', 'controles'].forEach(function (s) { Object.assign(r, o[s] || {}); }); delete r.sessoes; return r; }
+function itensTeor(P) {
+  var L = TX().buildSuggestions(P, linhaAntiga(), null) || [], out = [], contra = [], proc = [];
+  L.forEach(function (it) {
+    if (it.kind === 'contra') { if (it.key === 'ids') contra.push(it.value); return; }
+    if (it.kind === 'proc') { proc.push(it); return; }
+    if (it.kind === 'rec' || it.kind === 'ocorr') { it.alvo = null; it.motivo = it.kind === 'rec' ? 'recursos ainda não têm campo na ficha' : 'outras peças ainda não têm campo na ficha'; it.apply = false; out.push(it); return; }
+    var c = alvoDe(it.key);
+    if (!c) { it.alvo = null; it.motivo = (fonteVal({ fonte: [it.key] }) || /^(Assunto|classe_judicial|Partes|Polo )/.test(it.key)) ? 'dado do acervo (PJe), só leitura' : 'sem campo na ficha'; it.apply = false; out.push(it); return; }
+    it.alvo = c.secao + '.' + c.chave; it.campo = c; it.value = valorPara(c, it.value); var atual = gravado(c.secao, c.chave);
+    it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) ? 'igual' : 'conflito'; it.apply = it.status === 'novo'; out.push(it);
+  });
+  /* contrarrazões e procuração: o que cabe nos campos da ficha */
+  var c1 = alvoDe('Contrarrazões - Situação');
+  if (contra.length && c1) { var a1 = gravado(c1.secao, c1.chave); out.push({ sec: 'Recursos e contrarrazões', key: c1.chave, label: 'Contrarrazões', value: 'apresentadas', doc: contra.join(', '), kind: 'field', alvo: c1.secao + '.' + c1.chave, campo: c1, current: a1, status: !a1 ? 'novo' : N(a1) === 'apresentadas' ? 'igual' : 'conflito', apply: !a1 }); }
+  var c2 = alvoDe('ID da Procuração');
+  if (proc.length && c2) { var pr = proc[proc.length - 1], a2 = gravado(c2.secao, c2.chave), v2 = S(pr.proc && pr.proc.id) || S(pr.doc); out.push({ sec: 'Representação', key: c2.chave, label: 'ID da procuração', value: v2, doc: pr.doc, kind: 'field', alvo: c2.secao + '.' + c2.chave, campo: c2, current: a2, status: !a2 ? 'novo' : N(a2) === N(v2) ? 'igual' : 'conflito', apply: !a2, note: pr.proc ? [pr.proc.data ? 'de ' + brD(iso(pr.proc.data) || pr.proc.data) : '', pr.proc.advogados].filter(Boolean).join(' · ') : '' }); }
+  return out;
+}
+function descartarTeor() { if (ST.teor && ST.teor.parsed && ST.teor.parsed.docs) ST.teor.parsed.docs.forEach(function (d) { d.text = ''; }); ST.teor = null; }
+function fecharTeor() { descartarTeor(); render(); }
+function lerTxt(file) {
+  var T = TX(); if (!T.parseTxt) return;
+  if (!/\.txt$/i.test(file.name) && file.type && file.type !== 'text/plain') { ST.teor = { step: 0, err: 'Envie o arquivo .txt do inteiro teor exportado pelo PJe.' }; render(); return; }
+  if (file.size > 25 * 1024 * 1024) { ST.teor = { step: 0, err: 'Arquivo muito grande para leitura no navegador (limite de 25 MB).' }; render(); return; }
+  var rd = new FileReader();
+  rd.onload = function () { var txt = String(rd.result || ''); try {
+    var P = T.parseTxt(txt); txt = '';
+    if (!P.docs.length) { ST.teor = { step: 0, err: 'Nenhum documento identificado no .txt (esperado o cabeçalho “Documento: ID - Tipo”).' }; render(); return; }
+    T.preselect(P); try { P.kind = T.especie(P); T.preselectKind(P); } catch (e) { console.warn('[ficha] inteiro teor · espécie', e); }
+    ST.teor = { step: 1, parsed: P, file: file.name, items: null }; render();
+  } catch (e) { ST.teor = { step: 0, err: 'Não foi possível ler o .txt: ' + ((e && e.message) || e) }; render(); } };
+  rd.onerror = function () { ST.teor = { step: 0, err: 'Falha na leitura do arquivo.' }; render(); };
+  rd.readAsText(file, 'utf-8');
+}
+function teorPanel() {
+  var D = ST.teor, P = D.parsed, T = TX(), steps = ['Arquivo', 'Documentos', 'Conferência'], body = '', foot = '';
+  var head = '<header class="fx-teor-h"><div><span>Importar inteiro teor · .txt do PJe</span><h3>' + (P ? E(D.file) + ' · ' + P.docs.length + ' documentos' : 'Escolha o arquivo') + '</h3></div><button type="button" class="fx-sq" data-fx="teor-fechar" aria-label="Fechar importação" title="Fechar importação">' + svg('x') + '</button></header>' +
+    '<ol class="fx-steps">' + steps.map(function (st, k) { return '<li class="' + (k < D.step ? 'is-done' : k === D.step ? 'is-cur' : '') + '">' + (k < D.step ? svg('ok') : '') + (k + 1) + ' · ' + st + '</li>'; }).join('') + '</ol>';
+  if (D.step === 0) {
+    body = '<label class="fx-drop"><input type="file" accept=".txt,text/plain" data-fx-file>' + svg('txt') + '<b>Arraste o .txt do PJe para a ficha</b><span>ou clique para escolher o arquivo</span></label>' + (D.err ? '<p class="fx-alert-p">' + E(D.err) + '</p>' : '') +
+      '<p class="fx-help">Cada bloco “Documento: ID - tipo” do .txt vira uma linha, com o destino sugerido pelo tipo. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
+      '<p class="fx-help">O .txt é lido só no navegador e não é guardado; ficam os campos confirmados, e o commit registra os IDs dos documentos.</p>';
+    foot = '<button type="button" class="fx-b" data-fx="teor-fechar">Cancelar</button>';
+  } else if (D.step === 1) {
+    var outro = P.main && dg(ST.cnj) !== P.main, TG = T.TARGETS || [['', 'Não usar']];
+    body = (outro ? '<p class="fx-alert-p">' + svg('warn') + '<span>O .txt é do processo <b>' + E(P.processo) + '</b>, diferente desta ficha (' + E(ST.cnj) + '). Confira antes de continuar.</span></p>' : '') +
+      (P.kind && T.KIND_TXT ? '<p class="fx-info-p">' + E(T.KIND_TXT[P.kind] || '') + ': pré-seleção própria da espécie.</p>' : '') +
+      '<p class="fx-help">O destino já vem sugerido pelo tipo e pode ser trocado. “Não usar” deixa o documento de fora.</p>' +
+      P.docs.map(function (d, k) { return '<div class="fx-doc ' + (d.target ? 'is-on' : '') + ' ' + (d.outro ? 'is-ext' : '') + '"><div class="fx-doc-h"><span class="fx-mono">' + E(d.id) + '</span><b>' + E(d.tipo) + '</b><span class="fx-grow"></span><small>' + E(brD(d.date) || '—') + '</small></div>' +
+        (d.descricao || d.por || d.outro ? '<small class="fx-doc-s">' + E([d.descricao, d.por, d.outro ? 'outro processo · ' + d.outro : '', d.empty ? 'sem texto' : ''].filter(Boolean).join(' · ')) + '</small>' : '') +
+        '<label class="fx-dest"><span>Destino</span><select data-fx-dest="' + k + '">' + TG.map(function (t) { return '<option value="' + E(t[0]) + '"' + (S(d.target) === t[0] ? ' selected' : '') + '>' + E(t[1]) + '</option>'; }).join('') + '</select></label></div>'; }).join('');
+    var n = P.docs.filter(function (d) { return d.target; }).length;
+    foot = '<span class="fx-note">' + n + ' documento(s) selecionado(s)</span><button type="button" class="fx-b" data-fx="teor-fechar">Cancelar</button><button type="button" class="fx-b pri" data-fx="teor-extrair"' + (n ? '' : ' disabled') + '>Extrair e conferir →</button>';
+  } else {
+    var I = D.items || [], cnt = function (k) { return I.filter(function (i) { return i.alvo && i.status === k; }).length; }, marc = I.filter(function (i) { return i.apply && i.alvo && i.status !== 'igual'; }).length, G = {}, ordem = [];
+    I.forEach(function (it, k) { if (!G[it.sec]) { G[it.sec] = []; ordem.push(it.sec); } G[it.sec].push([it, k]); });
+    var sem = I.filter(function (i) { return !i.alvo; }).length;
+    body = '<div class="fx-sum"><span class="fx-chip t-ok">' + cnt('novo') + ' novos</span><span class="fx-chip t-neutro">' + cnt('igual') + ' iguais</span><span class="fx-chip t-warn">' + cnt('conflito') + ' conflito' + (cnt('conflito') === 1 ? '' : 's') + '</span>' + (sem ? '<span class="fx-chip o-registro">' + sem + ' sem campo na ficha</span>' : '') + '</div>' +
+      (I.length ? ordem.map(function (sec) { return '<section class="fx-csec"><h5>' + E(sec) + '</h5>' + G[sec].map(function (x) {
+        var it = x[0], k = x[1], c = it.campo, opts = c && c.tipo === 'lista' ? (c.opcoes || []) : it.kind === 'select' && !c ? (it.options || []) : null, val;
+        if (!it.alvo) val = '<span class="fx-v">' + E(it.value) + '</span>';
+        else if (opts) val = '<select data-fx-val="' + k + '">' + (opts.indexOf(it.value) < 0 ? ['', it.value].concat(opts) : [''].concat(opts)).filter(function (o, i, a) { return a.indexOf(o) === i; }).map(function (o) { return '<option' + (o === it.value ? ' selected' : '') + '>' + E(o) + '</option>'; }).join('') + '</select>';
+        else if (c && c.tipo === 'simnao') val = '<select data-fx-val="' + k + '"><option value=""' + (it.value ? '' : ' selected') + '>—</option><option' + (it.value === 'Sim' ? ' selected' : '') + '>Sim</option></select>';
+        else if (c && c.tipo === 'data') val = '<input type="date" data-fx-val="' + k + '" value="' + E(iso(it.value)) + '">';
+        else if (it.kind === 'area' || (c && c.tipo === 'texto-longo') || S(it.value).length > 70) val = '<textarea rows="' + Math.min(5, Math.max(2, S(it.value).split('\n').length)) + '" data-fx-val="' + k + '">' + E(it.value) + '</textarea>';
+        else val = '<input data-fx-val="' + k + '" value="' + E(it.value) + '">';
+        var st = !it.alvo ? '<span class="fx-chip o-registro">' + E(it.motivo) + '</span>' : '<span class="fx-chip t-' + (it.status === 'novo' ? 'ok' : it.status === 'conflito' ? 'warn' : 'neutro') + '">' + E(it.status) + '</span>';
+        return '<div class="fx-cf is-' + (it.alvo ? it.status : 'igual') + '"><label class="fx-cb"><input type="checkbox" data-fx-apply="' + k + '"' + (it.apply && it.alvo ? ' checked' : '') + (!it.alvo || it.status === 'igual' ? ' disabled' : '') + ' aria-label="Aplicar ' + E(it.label) + '"></label>' +
+          '<div class="fx-cf-b"><div class="fx-cf-h"><b>' + E(it.label) + '</b>' + st + '<small class="fx-mono">ID ' + E(it.doc) + '</small></div>' + val +
+          (it.alvo && it.status === 'conflito' ? '<small class="fx-cur">Atual na ficha: ' + E(it.current) + '</small>' : '') + (it.note ? '<small class="fx-cur">' + E(it.note) + '</small>' : '') + '</div></div>';
+      }).join('') + '</section>'; }).join('') : '<p class="fx-info-p">Nenhuma informação aproveitável foi identificada nos documentos selecionados.</p>') +
+      (cnt('conflito') ? '<p class="fx-warn-p">Valores em conflito só substituem o que está na ficha se a caixa for marcada.</p>' : '');
+    foot = '<button type="button" class="fx-b" data-fx="teor-voltar"' + (ST.busy ? ' disabled' : '') + '>← Documentos</button><button type="button" class="fx-b pri" data-fx="teor-gravar"' + (marc && !ST.busy ? '' : ' disabled') + '>' + (ST.busy ? 'Gravando…' : 'Gravar ' + marc + ' campo' + (marc === 1 ? '' : 's') + ' na ficha') + '</button>';
+  }
+  return '<aside class="fx-teor" aria-label="Importar inteiro teor">' + head + '<div class="fx-teor-b">' + body + '</div><footer class="fx-teor-f">' + foot + '</footer></aside>';
+}
+function gravarTeor() {
+  var D = ST.teor; if (!D || !D.items) return;
+  var C = {}, ids = [];
+  D.items.forEach(function (i) { if (i.apply && i.alvo && i.status !== 'igual' && S(i.value) !== S(i.current)) { C[i.alvo] = i.value; S(i.doc).split(/[,;\s]+/).forEach(function (x) { if (/^\d{5,}$/.test(x) && ids.indexOf(x) < 0) ids.push(x); }); } });
+  if (!Object.keys(C).length) return;
+  gravar(C, Object.keys(C).length + ' campo(s) gravado(s) a partir do inteiro teor' + (ids.length ? ' (IDs ' + ids.join(', ') + ')' : '') + '. O arquivo não foi guardado.').then(function (ok) { if (!ok) return; descartarTeor(); ST.tab = 'Triagem'; render(); });
+}
+
 /* ───── gravação ───── */
 function gravar(campos, msgOk) {
-  if (ST.busy) return Promise.resolve();
+  if (ST.busy) return Promise.resolve(false);
   ST.busy = true; render();
   return Promise.resolve().then(function () { return ST.ad.gravar(ST.cnj, campos); }).then(function (j) {
     j = j || {}; if (j.operacional) ST.d.operacional = j.operacional;
@@ -355,7 +452,7 @@ function gravar(campos, msgOk) {
     var rec = (j.recusados || []); avisar(rec.length ? 'Gravado, exceto (sem permissão): ' + rec.join(', ') : msgOk || 'Ficha gravada.', rec.length ? 'warn' : 'ok');
     try { doc.dispatchEvent(new CustomEvent('cmt:ficha-gravada', { detail: { cnj: ST.cnj, campos: campos } })); } catch (e) {}
   }).catch(function (e) { avisar('Não gravou: ' + ((e && e.message) || e), 'err'); throw e; })
-    .then(function () { ST.busy = false; if (!Object.keys(ST.draft).length) ST.edit = false; render(); }, function () { ST.busy = false; render(); });
+    .then(function () { ST.busy = false; if (!Object.keys(ST.draft).length) ST.edit = false; render(); return true; }, function () { ST.busy = false; render(); return false; });
 }
 function onClick(ev) {
   if (ev.target === host) return; /* clique fora não fecha (evita perder a edição) */
@@ -371,6 +468,11 @@ function onClick(ev) {
   if (a === 'editar') { if (ST.edit && Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas?')) return; ST.edit = !ST.edit; ST.draft = {}; if (ST.edit && ST.tab === 'resumo') ST.tab = 'Triagem'; render(); return; }
   if (a === 'descartar') { ST.draft = {}; ST.edit = false; ST.mostra = {}; render(); return; }
   if (a === 'salvar') { var K = Object.keys(ST.draft); if (!K.length) { ST.edit = false; render(); return; } var C = {}; K.forEach(function (k) { C[k] = ST.draft[k]; }); gravar(C, K.length + ' campo(s) da ficha gravado(s).').catch(function () {}); return; }
+  if (a === 'teor') { if (ST.teor) fecharTeor(); else { ST.teor = { step: 0 }; render(); } return; }
+  if (a === 'teor-fechar') return fecharTeor();
+  if (a === 'teor-voltar') { ST.teor.step = 1; render(); return; }
+  if (a === 'teor-extrair') { try { ST.teor.items = itensTeor(ST.teor.parsed); ST.teor.step = 2; } catch (e) { console.error('[ficha] inteiro teor · sugestões', e); avisar('Não foi possível extrair os campos: ' + ((e && e.message) || e), 'err'); } render(); return; }
+  if (a === 'teor-gravar') return gravarTeor();
   if (a === 'doc') { ST.view = 'doc'; render(); return; }
   if (a === 'doc-voltar') { ST.view = 'ficha'; render(); return; }
   if (a === 'doc-imprimir') return imprimir();
@@ -380,10 +482,16 @@ function onClick(ev) {
 function onChange(ev) {
   var t = ev.target;
   if (t.hasAttribute('data-fx-destino')) { if (t.value === gravado('producao', 'Destino')) return; if (ST.edit) { ST.draft['producao.Destino'] = t.value; render(); } else gravar({ 'producao.Destino': t.value }, t.value ? 'Destino: decisão monocrática.' : 'Destino: sessão.').catch(function () {}); return; }
+  if (t.hasAttribute('data-fx-file')) { var f = t.files && t.files[0]; if (f) lerTxt(f); t.value = ''; return; }
+  if (t.hasAttribute('data-fx-dest')) { ST.teor.parsed.docs[+t.getAttribute('data-fx-dest')].target = t.value; render(); return; }
+  if (t.hasAttribute('data-fx-apply')) { ST.teor.items[+t.getAttribute('data-fx-apply')].apply = t.checked; render(); return; }
+  if (t.hasAttribute('data-fx-val')) { onInput(ev); return; }
   if (t.hasAttribute('data-fx-k')) { onInput(ev); if (t.type === 'checkbox' || t.tagName === 'SELECT') render(); }
 }
 function onInput(ev) {
-  var t = ev.target; if (!t.hasAttribute || !t.hasAttribute('data-fx-k')) return;
+  var t = ev.target; if (!t.hasAttribute) return;
+  if (t.hasAttribute('data-fx-val')) { var it = ST.teor && ST.teor.items && ST.teor.items[+t.getAttribute('data-fx-val')]; if (it) { it.value = t.value; it.status = !S(it.current) ? 'novo' : N(it.current) === N(it.value) ? 'igual' : 'conflito'; } return; }
+  if (!t.hasAttribute('data-fx-k')) return;
   var k = t.getAttribute('data-fx-k'), i = k.indexOf('.'), v = t.type === 'checkbox' ? (t.checked ? 'Sim' : '') : t.value, orig = gravado(k.slice(0, i), k.slice(i + 1));
   if (S(v) === S(orig) || (t.type === 'date' && iso(orig) === v)) delete ST.draft[k]; else ST.draft[k] = v;
   var fx = t.closest('.fx-f'); if (fx) fx.classList.toggle('is-dirty', Object.prototype.hasOwnProperty.call(ST.draft, k));
