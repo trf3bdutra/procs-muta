@@ -68,8 +68,62 @@ const V = {
   urgTipo: v => ({ triagem: { 'Urgência': { 'Tutela de urgência': 'Tutela de urgência', 'Tutela recursal (antecipação)': 'Tutela de urgência', 'Efeito suspensivo': 'Efeito suspensivo', 'Liminar': 'Pedido de liminar', 'Prioridade de saúde': 'Prioridade legal', 'Outro': 'Outra urgência' }[v] || '' } }),
   urgSit: v => ({ triagem: { 'Urgência - Apreciação': v } }), urgData: v => ({ triagem: { 'Urgência - Data': v } }), urgObs: v => ({ triagem: { 'Urgência - Observação': v } }),
   hip932: v => ({ triagem: { 'Hipóteses Monocrática': v } }),
-  tipoAto: v => ({ producao: { 'Mono - Tipo de ato': v } }), fundamento: v => ({ producao: { 'Mono - Fundamento': v } })
+  tipoAto: v => ({ producao: { 'Mono - Tipo de ato': v } }), fundamento: v => ({ producao: { 'Mono - Fundamento': v } }),
+  /* registro da monocrática marca o destino na ficha; urgPedido é o nome usado pelo formulário de urgência */
+  mono: v => ({ producao: { 'Destino': v && v !== 'false' ? 'Monocrática' : '' } }),
+  urgPedido: v => ({ triagem: { 'Urgência - Data': v } })
 };
+/* ficha → cartão (volta): só o que tem correspondência sem ambiguidade; o cartão guarda o vocabulário da equipe */
+const LISTAS = {
+  resJulg: ['Provido', 'Parcialmente provido', 'Desprovido', 'Não conhecido', 'Prejudicado', 'Rejeitados', 'Acolhidos sem efeito infringente', 'Acolhidos com efeito infringente', 'Retratação exercida', 'Acórdão mantido'],
+  honor: ['Majorados', 'Mantidos', 'Invertidos', 'Fixados', 'Redistribuídos', 'Sem honorários recursais'], prelim: ['Sem preliminares', 'Há preliminares', 'Preliminar de ofício'], simnao: ['Sim', 'Não']
+};
+const naLista = (L, v) => L.find(x => x.toLowerCase() === String(v || '').trim().toLowerCase()) || null;
+function paraCartao(mud, it) {
+  const c = (it && it.ctl) || {}, d = {}, k = {}, cart = {}, t = mud.triagem || {}, p = mud.producao || {}, tem = (o, x) => Object.prototype.hasOwnProperty.call(o, x);
+  if (tem(t, 'Tempestividade')) k.tempest = /^(Tempestivo|Intempestivo)$/.test(t.Tempestividade) ? t.Tempestividade : '';
+  if (tem(t, 'Preparo')) k.preparo = { 'Comprovado': 'Comprovado', 'Não Recolhido': 'Não recolhido', 'Não se Aplica': 'Não se aplica' }[t.Preparo] ||
+    (t.Preparo === 'Dispensado' ? (/^(Justiça gratuita|Isento)/.test(c.preparo || '') ? c.preparo : 'Justiça gratuita') : '');
+  if (tem(t, 'Representação')) k.repres = t['Representação'] === 'Regular' ? (/^Dispensada/.test(c.repres || '') ? c.repres : 'Regular') : t['Representação'] === 'Negativo' ? 'Irregular – intimar' : '';
+  if (tem(t, 'Mídias')) k.midias = { 'Juntada': 'Juntadas', 'Faltante': 'Faltantes', 'Não se Aplica': 'Não se aplica' }[t['Mídias']] || '';
+  if (tem(t, 'MPF')) k.parecer = t.MPF === 'Com Parecer' ? 'Com parecer' : t.MPF === 'Sem Parecer' ? (/^(Aguardando|Intimado)/.test(c.parecer || '') ? c.parecer : 'Aguardando parecer') : '';
+  if (tem(t, 'Prelim.') && (naLista(LISTAS.prelim, t['Prelim.']) || !t['Prelim.'])) k.prelim = naLista(LISTAS.prelim, t['Prelim.']) || '';
+  if (tem(t, 'Intercorrências')) k.intercor = t['Intercorrências'];
+  if (tem(p, 'Voto - Resultado') && (naLista(LISTAS.resJulg, p['Voto - Resultado']) || !p['Voto - Resultado'])) k.resJulg = naLista(LISTAS.resJulg, p['Voto - Resultado']) || '';
+  if (tem(p, 'Voto - Honorários') && (naLista(LISTAS.honor, p['Voto - Honorários']) || !p['Voto - Honorários'])) k.honor = naLista(LISTAS.honor, p['Voto - Honorários']) || '';
+  if (tem(p, 'Tópico-síntese') && naLista(LISTAS.simnao, p['Tópico-síntese'])) k.topico = naLista(LISTAS.simnao, p['Tópico-síntese']);
+  if (tem(p, 'MINUTADO') && /^(\d{4}-\d{2}-\d{2})?$/.test(p.MINUTADO)) d.dataMinuta = p.MINUTADO;
+  if (tem(p, 'Data da Revisão') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Revisão'])) d.dataCorrecao = p['Data da Revisão'];
+  if (tem(p, 'Data da Liberação') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Liberação'])) d.dataLiberacao = p['Data da Liberação'];
+  if (tem(p, 'SERVIDOR')) d.servidor = p.SERVIDOR;
+  if (tem(p, 'CORRETOR')) d.corretor = p.CORRETOR;
+  const C2 = { 'Especificidades': 'especificidades', 'Alegações': 'questoes', 'Tipo de Julgamento': 'tipoJ' };
+  Object.keys(C2).forEach(x => { if (tem(t, x)) cart[C2[x]] = t[x]; });
+  if (tem(t, 'Parecer - Sentido') || tem(t, 'ID do Parecer MPF')) { cart.mpfx = Object.assign({}, (c.cartao || {}).mpfx); if (tem(t, 'Parecer - Sentido')) cart.mpfx.sentido = t['Parecer - Sentido']; if (tem(t, 'ID do Parecer MPF')) cart.mpfx.id = t['ID do Parecer MPF']; }
+  if (tem(t, 'Tempest - Publicação') || tem(t, 'Tempest - Protocolo')) { cart.adm = Object.assign({}, (c.cartao || {}).adm); if (tem(t, 'Tempest - Publicação')) cart.adm.intim = t['Tempest - Publicação']; if (tem(t, 'Tempest - Protocolo')) cart.adm.prot = t['Tempest - Protocolo']; }
+  if (tem(p, 'Voto - Descrição')) { cart.jul = Object.assign({}, (c.cartao || {}).jul, { fund: p['Voto - Descrição'] }); }
+  return { d, k, cart };
+}
+/* aplica a volta num item da pauta ou das monocráticas; devolve true se mudou */
+function aplicaCartao(it, v, u) {
+  let m = false; it.ctl = it.ctl || {};
+  Object.keys(v.d).forEach(x => { if ((it[x] || '') !== v.d[x]) { it[x] = v.d[x]; m = true; } });
+  Object.keys(v.k).forEach(x => { const val = v.k[x]; if ((it.ctl[x] || '') !== val) { if (val) it.ctl[x] = val; else delete it.ctl[x]; m = true; } });
+  if (Object.keys(v.cart).length) { const ant = it.ctl.cartao || {}; Object.keys(v.cart).forEach(x => { if (JSON.stringify(ant[x]) !== JSON.stringify(v.cart[x])) { ant[x] = v.cart[x]; m = true; } }); it.ctl.cartao = ant; }
+  if (m) { it.ctl.editadoPor = u; it.ctl.editadoEm = agora(); }
+  return m;
+}
+/* arquivos onde o processo aparece hoje: pautas de sessões de hoje em diante e monocráticas/urgências */
+async function ondeEsta(cnj) {
+  const k = dg(cnj), hoje = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10), out = [];
+  const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
+  for (const s of (cal.sessoes || []).filter(s => s.date >= hoje)) {
+    try { const rel = 'acervo/sessoes/' + s.date + '.json', { dados, sha } = await L.lerJson(rel);
+      const its = (dados.itens || []).concat(dados.previa || []).filter(i => dg(i.cnj) === k); if (its.length) out.push({ path: rel, dados, sha, its }); } catch (e) { if (e.status !== 404) throw e; }
+  }
+  try { const rel = 'acervo/monocraticas.json', { dados, sha } = await L.lerJson(rel), it = (dados.registros || {})[k]; if (it) out.push({ path: rel, dados, sha, its: [it] }); } catch (e) { if (e.status !== 404) throw e; }
+  return out;
+}
 const VC = {
   tipoJ: v => ({ triagem: { 'Tipo de Julgamento': v } }), especificidades: v => ({ triagem: { 'Especificidades': v } }), questoes: v => ({ triagem: { 'Alegações': v } }),
   'mpfx.sentido': v => ({ triagem: { 'Parecer - Sentido': v } }), 'mpfx.id': v => ({ triagem: { 'ID do Parecer MPF': v } }),
@@ -128,9 +182,15 @@ module.exports = async (req, res, u) => {
       const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mud);
       if (!out.length) return res.status(200).json({ ok: true, semMudanca: true, operacional: r, recusados: recus });
       doc.atualizado_em = agora();
+      /* volta: o que tem correspondência no cartão é gravado também na pauta e nas monocráticas onde o processo está, no mesmo commit */
+      const arqs = [{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], cart = [];
+      for (const a of await ondeEsta(cnj)) {
+        let mudou = false; a.its.forEach(it => { if (aplicaCartao(it, paraCartao(mud, it), u)) mudou = true; });
+        if (mudou) { a.dados.atualizadoEm = agora(); arqs.push({ path: a.path, txt: JSON.stringify(a.dados, null, 1) + '\n', sha: a.sha }); cart.push(a.path); }
+      }
       try {
-        await commitConferido([{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], 'Ficha (' + u + '): ' + r.processo + ' · ' + out.slice(0, 6).join(', '));
-        return res.status(200).json({ ok: true, operacional: r, recusados: recus });
+        await commitConferido(arqs, 'Ficha (' + u + '): ' + r.processo + ' · ' + out.slice(0, 6).join(', ') + (cart.length ? '\n\nCartão atualizado em: ' + cart.join(', ') : ''));
+        return res.status(200).json({ ok: true, operacional: r, recusados: recus, cartoes: cart });
       } catch (e) { if (e.status !== 409) throw e; }
     }
     res.status(409).json({ erro: 'A ficha mudou várias vezes seguidas; tente de novo.' });
@@ -138,3 +198,4 @@ module.exports = async (req, res, u) => {
 };
 module.exports.espelho = espelho;
 module.exports.doCartao = doCartao;
+module.exports.paraCartao = paraCartao;

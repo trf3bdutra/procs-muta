@@ -911,9 +911,11 @@ function fichaAbre(it){FD.it=it;FD.F=null;FD.op=null;FD.fo=null;FD.pend={};FD.de
   api('/api/pauta?ficha='+encodeURIComponent(it.cnj)).then(function(j){if(FD.it!==it)return;FD.F=j.ficha;FD.op=j.operacional;FD.fo=j.fonte;FD.gestor=!!j.gestor;FD.ctl=j.controles||{};if(FD.abrirCtl&&fdCtlAtivos().length)FD.aba='Controles';FD.abrirCtl=false;
     fdSt(j.operacional?'':'Sem ficha ainda: será criada ao gravar');fdPills();fdRender();}).catch(function(e){o.querySelector('.fdb').innerHTML='<div class="empty">Não foi possível ler a ficha: '+esc(e.message)+'</div>';});}
 function fdGrava(){var P=FD.pend,ks=Object.keys(P),it=FD.it;if(!ks.length||!it)return;FD.pend={};fdSt('Gravando…','pend');
-  api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:it.cnj,campos:P})}).then(function(j){if(FD.it!==it)return;FD.op=j.operacional||FD.op;fdSt((j.recusados||[]).length?'Gravado (sem permissão para: '+j.recusados.join(', ')+')':'Gravado na ficha','');if(!$('#fd').hidden)fdRender();})
+  api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:it.cnj,campos:P})}).then(function(j){if((j.cartoes||[]).length)FD.recarregar=true;if(FD.it!==it)return;FD.op=j.operacional||FD.op;fdSt((j.recusados||[]).length?'Gravado (sem permissão para: '+j.recusados.join(', ')+')':'Gravado na ficha','');if(!$('#fd').hidden)fdRender();})
   .catch(function(e){Object.keys(P).forEach(function(k){if(!(k in FD.pend))FD.pend[k]=P[k];});fdSt('Não gravou: '+e.message,'er');});}
-function fdFecha(){if(Object.keys(FD.pend).length){clearTimeout(FD.t);fdGrava();}var o=$('#fd');if(o)o.hidden=true;}
+function fdFecha(){var p=Object.keys(FD.pend).length;if(p){clearTimeout(FD.t);fdGrava();}var o=$('#fd');if(o)o.hidden=true;
+  /* o que a ficha gravou com correspondência no cartão volta à pauta: relê a lista */
+  setTimeout(function(){if(FD.recarregar&&!PEND.size){FD.recarregar=false;carregar(true);}},p?2500:0);}
 document.addEventListener('click',function(e){var o=$('#fd');if(!o||o.hidden||!o.contains(e.target))return;var b;
   if(e.target===o||e.target.closest('[data-fdx]')){fdFecha();return;}
   if((b=e.target.closest('[data-fda]'))){FD.aba=b.getAttribute('data-fda');fdRender();return;}
