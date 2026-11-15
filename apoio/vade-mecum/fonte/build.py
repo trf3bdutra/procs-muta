@@ -111,7 +111,13 @@ for p in par:
     u = [k for k, t in ITN if lg in t]
     if u and len(u) <= 0.6 * len(ITN): p['_usos'] = u
 ref = ler(RAIZ/'apoio/referencias-rapidas.json')
-pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref}
+# acervo resumido para preencher a peça pelo número do processo: classe, assunto e polos (sem documentos)
+def _v(x):
+    x = limpa(str(x or '').strip()); return '' if x in ('####', 'None', 'nan') else x
+acx = {}
+for n, a in AC.items():
+    acx[n] = [_v(a.get('Classe') or a.get('classe_judicial')), _v(a.get('Assunto_Principal') or a.get('assunto_judicial')), _v(a.get('polo_ativo') or a.get('Polo_Ativo')), _v(a.get('polo_passivo') or a.get('Polo_Passivo'))]
+pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
 
 js_ = js
