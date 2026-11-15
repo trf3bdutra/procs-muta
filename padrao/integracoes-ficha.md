@@ -64,7 +64,7 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
-| Tema | `Tema` | texto longo | operacional · `triagem` | 0 de 4.725 |  |
+| Subassunto | `Tema` | texto longo | operacional · `triagem` | 0 de 4.725 |  |
 | Complexidade | `COMPLEXIDADE` | regra · calculado | operacional · `triagem` | 1 de 4.725 | lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ |
 | Tipo de voto | `Tipo de Voto` | texto | operacional · `triagem` | 0 de 4.725 |  |
 | Preliminares | `Prelim.` | Sim/— | operacional · `triagem` | 0 de 4.725 |  |
