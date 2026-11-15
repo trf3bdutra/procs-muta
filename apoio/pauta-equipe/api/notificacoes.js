@@ -9,7 +9,14 @@ module.exports = async (req, res) => {
   try {
     const eu = L.norm(u), ev = [];
     const [cal, avisos, pend, aus] = await Promise.all([opc('acervo/sessoes/calendario.json'), opc('apoio/equipe-avisos.json'), opc('apoio/equipe-pendencias.json'), opc('apoio/equipe-solicitacoes.json')]);
-    ((avisos || {}).registros || []).forEach(a => ev.push({ id: 'av-' + a.id, time: a.time, action: 'aviso-geral', user: a.user || 'Responsável', title: a.title, message: a.message }));
+    const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+    ((avisos || {}).registros || []).forEach(a => {
+      /* destinatários: lista vazia = toda a equipe; o gestor vê todos; vencido some */
+      if ((a.para || []).length && !a.para.some(n => L.norm(n) === eu) && !L.gestor(u)) return;
+      if (a.ate && a.ate < hj) return;
+      ev.push({ id: 'av-' + a.id, time: a.time, action: 'aviso-geral', user: a.user || 'Responsável', title: a.title, message: a.message,
+        link: a.link || '', linkTxt: a.linkTxt || '', nivel: a.nivel || 'info', painel: a.painel !== false, notificacao: a.notificacao !== false, para: a.para || [], fixo: !!a.fixo, ate: a.ate || '', avId: a.id });
+    });
     const pubs = ((cal || {}).sessoes || []).filter(s => s.publicada);
     const docs = await Promise.all(pubs.map(s => opc('acervo/sessoes/' + s.date + '.json')));
     pubs.forEach((s, i) => { const d = docs[i]; if (!d) return; ((d.itens || []).length ? d.itens : (d.previa || [])).forEach(it => {
@@ -19,7 +26,7 @@ module.exports = async (req, res) => {
     }); });
     ((pend || {}).registros || []).forEach(t => {
       if (L.norm(t.atualizadoPor) === eu) return; if (L.norm(t.assignee) !== eu && L.norm(t.creator) !== eu) return;
-      ev.push({ id: 'pe-' + t.id + '-' + (t._rev || 1), time: t.atualizadoEm, action: 'pendencia', user: t.atualizadoPor, title: (t.excluida ? 'Pendência excluída' : t.stage === 'done' ? 'Pendência concluída' : (t._rev || 1) === 1 ? 'Nova pendência para você' : 'Pendência atualizada') + ' · ' + t.title, message: [t.numero, t.dueDate && 'prazo ' + t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '), resolved: t.stage === 'done' });
+      ev.push({ id: 'pe-' + t.id + '-' + (t._rev || 1), time: t.atualizadoEm, action: 'pendencia', user: t.atualizadoPor, title: (t.excluida ? 'Diligência excluída' : t.stage === 'done' ? 'Diligência concluída' : (t._rev || 1) === 1 ? 'Nova diligência para você' : 'Diligência atualizada') + ' · ' + t.title, message: [t.numero, t.dueDate && 'prazo ' + t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '), resolved: t.stage === 'done' });
     });
     ((aus || {}).registros || []).forEach(a => { if (L.norm(a.nome) !== eu || !a.decididoEm || L.norm(a.decididoPor) === eu) return;
       ev.push({ id: 'au-' + a.id + '-' + a.estado, time: a.decididoEm, action: 'ausencia', user: a.decididoPor || 'Responsável', title: 'Ausência ' + a.estado + ' · ' + a.tipo, message: a.de.split('-').reverse().join('/') + (a.ate !== a.de ? ' a ' + a.ate.split('-').reverse().join('/') : '') + (a.obs ? ' · ' + a.obs : '') }); });

@@ -3,7 +3,8 @@
    CMT_USERS_JSON      {"BRUNO":"senha","VICTOR":"outra",...}  (nome de login = nome do servidor na pauta)
    TEAM_LOGIN_PASSWORD senha comum, opcional, para quem não estiver em CMT_USERS_JSON (só nomes de CMT_EQUIPE)
    CMT_EQUIPE          lista de nomes separados por vírgula, opcional (aparece na tela de entrada)
-   CMT_SESSION_SECRET  segredo longo e aleatório para assinar o cookie de sessão */
+   CMT_SESSION_SECRET  segredo longo e aleatório para assinar o cookie de sessão
+   CMT_GESTOR          nomes com acesso restrito de gestão (avisos e notificações), separados por vírgula; padrão: Bruno */
 const crypto = require('crypto');
 const REPO = 'trf3bdutra/procs-muta', RAMO = 'main', HORAS = 12;
 const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').trim().toUpperCase();
@@ -48,5 +49,6 @@ async function lerJson(rel) {
 async function gravarJson(rel, dados, sha, msg) {
   return gh('/contents/' + rel, { method: 'PUT', body: JSON.stringify({ message: msg, content: Buffer.from(JSON.stringify(dados, null, 1) + '\n').toString('base64'), sha, branch: RAMO }) });
 }
+const gestor = u => String(process.env.CMT_GESTOR || 'Bruno').split(',').map(norm).filter(Boolean).includes(norm(u));
 const dataOk = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ''));
-module.exports = { norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk };
+module.exports = { gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk };

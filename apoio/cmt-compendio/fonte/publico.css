@@ -11,3 +11,15 @@
 .top .ico{border-color:rgba(255,255,255,.25)!important;color:#eef4f1!important}
 #openSheet{display:none!important}
 .hb-eq{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.25);color:#eef4f1;border-radius:999px;padding:6px 13px;font-weight:700;font-size:12px;text-decoration:none}.hb-eq:hover{background:rgba(255,255,255,.08)}
+/* barra unificada com a Pauta da equipe */
+.top{gap:14px!important;flex-wrap:nowrap!important}.top .eqsp{flex:1}
+.eqtabs{display:flex;gap:4px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:4px}.eqtabs a{border-radius:999px;padding:7px 14px;font-weight:700;font-size:13px;color:#cfe0db;text-decoration:none}.eqtabs a[aria-current=page]{background:#e6c27a;color:#14263c}
+.top .right{display:flex;align-items:center;gap:10px;margin-left:0}.top .right .status,.top .right .pill2{display:none!important}
+.top .hb{border:1px solid rgba(255,255,255,.25);background:transparent;color:#eef4f1;border-radius:999px;padding:6px 12px;font-weight:700;font-size:12px;text-decoration:none;cursor:pointer;font-family:inherit}.top .hb:hover{background:rgba(255,255,255,.08)}
+.top .hb.ic{width:32px;height:32px;padding:0;display:inline-grid;place-items:center;position:relative;box-sizing:border-box}
+.top .bdg{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:99px;background:#e6c27a;color:#14263c;font:800 9.5px/17px Figtree,system-ui,sans-serif;font-style:normal;padding:0 4px;text-align:center;box-sizing:border-box}
+.top .ico{width:32px!important;height:32px!important;border-radius:999px!important}
+.top .chip-u{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;color:#eef4f1}.top .chip-u b{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#e6c27a;color:#14263c;font-size:11px}
+.cp-sub{display:flex;justify-content:center;padding:10px 20px 0}.cp-sub .tabs{background:var(--panel)!important;border:1px solid var(--line)!important}.cp-sub .tab{color:var(--mut)!important}.cp-sub .tab[aria-selected="true"]{background:var(--gold)!important;color:var(--gold-ink)!important}
+aside{top:58px!important}
+@media (max-width:860px){.top{flex-wrap:wrap!important}.top .chip-u span{display:none}}

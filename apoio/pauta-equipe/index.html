@@ -78,10 +78,24 @@ html[data-theme=dark] .mc .ic{background:#183447!important}
 @media (max-width:980px){.pg2{grid-template-columns:1fr}.pm{grid-template-columns:repeat(2,1fr)}}
 .hbx{position:relative}.bdg{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:99px;background:#e6c27a;color:#14263c;font:800 9.5px/17px var(--font);font-style:normal;padding:0 4px;text-align:center}
 .drw{position:fixed;top:56px;right:14px;z-index:40;width:min(420px,calc(100vw - 28px));max-height:calc(100vh - 72px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 24px 60px rgba(10,30,40,.28);padding:12px 14px}
-.drw.wide{width:min(1180px,calc(100vw - 28px))}.drw-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}.drw-h h2{flex:1;margin:0;font-size:15px}
+.drw{top:var(--hh,56px)!important;border-top:0!important;border-radius:0 0 16px 16px!important;max-height:calc(100vh - var(--hh,56px) - 12px)!important;animation:drw .18s ease-out;transform-origin:top}
+@keyframes drw{from{opacity:0;transform:translateY(-10px) scaleY(.97)}to{opacity:1;transform:none}}
+.drw.wide{left:10px;right:10px;width:auto}
+#p-not{width:min(460px,calc(100vw - 28px))}
+.nt.importante{box-shadow:inset 3px 0 0 var(--amber)}.nt.urgente{box-shadow:inset 3px 0 0 var(--red)}.nt.urgente b{color:var(--red)}
+.nt .lk{display:inline-block;margin-top:5px;font-size:12px;font-weight:700;color:var(--navy);text-decoration:none;border-bottom:1px solid currentColor}
+.nt .dst{display:block;margin-top:4px;font-size:10.5px;color:var(--mut)}.nt .x{border:0;background:none;color:var(--mut);cursor:pointer;font-size:15px;padding:0 2px}.nt .x:hover{color:var(--red)}
+.nt .pin{font-size:10px;color:var(--amber);font-weight:800;margin-left:4px}
+.av-comp{border:1px solid var(--line);border-radius:12px;padding:0 12px;margin:2px 0 10px;background:var(--soft)}.av-comp[open]{padding-bottom:12px}
+.av-comp summary{cursor:pointer;font-weight:800;font-size:13px;padding:10px 0;list-style:none}.av-comp summary::-webkit-details-marker{display:none}.av-comp summary:before{content:"▸ ";color:var(--mut)}.av-comp[open] summary:before{content:"▾ "}
+.av-comp label{display:block;font-size:11.5px;font-weight:700;color:var(--mut);margin:8px 0 3px}.av-comp input[type=text],.av-comp input[type=url],.av-comp input[type=date],.av-comp textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font:inherit;font-size:13px;background:var(--card);color:var(--ink)}
+.av-comp .r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.av-comp .seg2{display:flex;gap:4px;flex-wrap:wrap}.av-comp .seg2 label,.av-comp .ppl label{display:inline-flex;align-items:center;gap:5px;margin:0;font-size:12px;color:var(--ink);font-weight:600;border:1px solid var(--line);border-radius:999px;padding:4px 10px;background:var(--card);cursor:pointer}
+.av-comp .ppl{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.av-comp .ppl.off{opacity:.45;pointer-events:none}.av-comp .tb{display:flex;gap:4px;margin-bottom:4px}.av-comp .tb button{border:1px solid var(--line);background:var(--card);border-radius:7px;font-size:11.5px;padding:3px 8px;cursor:pointer}
+.av-comp .pv{margin-top:10px;font-size:11px;color:var(--mut)}.av-comp .ac{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.nt-sec{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:10px 0 2px}.drw-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}.drw-h h2{flex:1;margin:0;font-size:15px}
 .nt{display:flex;gap:10px;padding:9px 0;border-top:1px dashed var(--line)}.nt:first-child{border-top:0}.nt .ico2{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:0 0 30px;font-size:13px;background:var(--soft)}
 .nt.aviso-geral .ico2{background:#faf4e6;color:var(--amber)}.nt.processos .ico2{background:#edf4fb;color:var(--blue)}.nt.pendencia .ico2{background:#f3eef9;color:var(--purple)}.nt.ausencia .ico2{background:#eaf5ee;color:var(--green)}
-.nt .tx2{flex:1;min-width:0}.nt b{font-size:12.5px;display:block}.nt p{margin:2px 0 0;font-size:12px;color:var(--mut);white-space:pre-wrap}.nt time{font-size:10.5px;color:var(--mut);white-space:nowrap}.nt.novo b:after{content:" ●";color:var(--gold-d)}
+.nt .tx2{flex:1;min-width:0}.nt b{font-size:12.5px;display:block}.nt p{margin:2px 0 0;font-size:12px;color:var(--mut);white-space:pre-wrap}.nt time{font-size:10.5px;color:var(--mut);white-space:nowrap}.nt.novo .tx2>b:after{content:" ●";color:var(--gold-d)}
 .av-box .nt.aviso-geral{background:linear-gradient(90deg,rgba(230,194,122,.12),transparent);border-radius:10px;padding:9px 8px;border-top:0;margin-bottom:4px}
 .pen-f{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}.pen-f input,.pen-f select{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:12.5px}.pen-f input[type=search]{flex:1;min-width:160px}
 .pen-s{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--mut);margin-bottom:8px}.pen-s b{color:var(--ink)}
@@ -148,8 +162,8 @@ html[data-theme=dark] .st.ok{background:#183447!important}
 </div>
 
 <div id="app" hidden>
-  <header><span class="br"><i></i>GABINETE CMT · <em>PAUTA DA EQUIPE</em></span>
-    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page">Início</a><a href="#pauta" data-vw="pauta">Pauta</a><a href="/compendio/">Compêndio</a></nav><span class="sp"></span><span id="salvo"></span><button class="hb ic hbx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i class="bdg" id="c-not" hidden></i></button><button class="hb ic hbx" id="b-pen" title="Pendências" aria-label="Pendências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><i class="bdg" id="c-pen" hidden></i></button>
+  <header><span class="br"><i></i>GABINETE CMT · <em>EQUIPE</em></span>
+    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page">Início</a><a href="#pauta" data-vw="pauta">Pauta</a><a href="/compendio/">Compêndio</a></nav><span class="sp"></span><span id="salvo"></span><button class="hb ic hbx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i class="bdg" id="c-not" hidden></i></button><button class="hb ic hbx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><i class="bdg" id="c-pen" hidden></i></button>
     <button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
     <span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb" id="sair">Sair</button></header>
   <main id="v-inicio">
@@ -191,11 +205,22 @@ html[data-theme=dark] .st.ok{background:#183447!important}
     <div class="lst" id="lst"></div>
   </main>
 </div>
-<aside class="drw" id="p-not" hidden><div class="drw-h"><h2>Notificações</h2><button class="b" data-fecha>×</button></div><div id="l-not"></div></aside>
-<aside class="drw wide" id="p-pen" hidden><div class="drw-h"><h2>Pendências</h2><button class="b pri" id="pen-novo">+ Nova pendência</button><button class="b" data-fecha>×</button></div>
+<aside class="drw" id="p-not" hidden><div class="drw-h"><h2>Notificações</h2><button class="b" data-fecha>×</button></div>
+  <details class="av-comp" id="av-comp" hidden><summary>Publicar aviso ou notificação</summary><form id="f-av" autocomplete="off">
+    <label>Título<input type="text" name="title" maxlength="160" required placeholder="Ex.: Entrega das minutas da sessão de 30/11"></label>
+    <label>Texto</label><div class="tb"><button type="button" data-md="**">Negrito</button><button type="button" data-md="• ">Item</button><button type="button" data-ins="data">Data de hoje</button></div><textarea name="message" rows="4" maxlength="2000" placeholder="Mensagem para a equipe"></textarea>
+    <div class="r2"><div><label>Link (opcional)</label><input type="text" name="link" inputmode="url" placeholder="https://… ou /compendio/"></div><div><label>Texto do link</label><input type="text" name="linkTxt" maxlength="80" placeholder="Abrir"></div></div>
+    <label>Importância</label><div class="seg2"><label><input type="radio" name="nivel" value="info" checked> Informativo</label><label><input type="radio" name="nivel" value="importante"> Importante</label><label><input type="radio" name="nivel" value="urgente"> Urgente</label></div>
+    <label>Onde aparece</label><div class="seg2"><label><input type="checkbox" name="painel" checked> Aviso no painel inicial</label><label><input type="checkbox" name="notificacao" checked> Notificação (sininho)</label><label><input type="checkbox" name="fixo"> Fixar no topo</label></div>
+    <label>Quem recebe</label><div class="seg2"><label><input type="checkbox" name="todos" checked> Toda a equipe</label></div><div class="ppl off" id="av-ppl"></div>
+    <div class="r2"><div><label>Válido até (opcional)</label><input type="date" name="ate"></div><div></div></div>
+    <p class="pv" id="av-pv"></p><p class="en-er" id="av-er" hidden style="color:var(--red);font-size:12px"></p>
+    <div class="ac"><button class="b" type="reset">Limpar</button><button class="b pri" type="submit">Publicar</button></div></form></details>
+  <div id="l-not"></div></aside>
+<aside class="drw wide" id="p-pen" hidden><div class="drw-h"><h2>Diligências</h2><button class="b pri" id="pen-novo">+ Nova diligência</button><button class="b" data-fecha>×</button></div>
   <div class="pen-f"><input type="search" id="pen-q" placeholder="Buscar…"><select id="pen-ow"></select><select id="pen-ur"><option value="">Todas as prioridades</option><option>Urgente</option><option>Alta</option><option>Média</option><option>Baixa</option></select><label class="ck"><input type="checkbox" id="pen-meu" checked> Só as minhas</label></div>
   <div class="pen-s" id="pen-s"></div><div class="board" id="board"></div></aside>
-<dialog id="dlg-pen"><form id="f-pen" method="dialog"><h2 id="dlg-pen-t">Nova pendência</h2>
+<dialog id="dlg-pen"><form id="f-pen" method="dialog"><h2 id="dlg-pen-t">Nova diligência</h2>
   <label>Título<input name="title" required maxlength="200"></label><label>Descrição<textarea name="description" rows="3"></textarea></label>
   <div class="row2"><label>Responsável<select name="assignee"></select></label><label>Prioridade<select name="urgency"><option>Urgente</option><option>Alta</option><option selected>Média</option><option>Baixa</option></select></label></div>
   <div class="row2"><label>Prazo<input type="date" name="dueDate"></label><label>Etapa<select name="stage"><option value="todo">A fazer</option><option value="doing">Em andamento</option><option value="review">Em revisão</option><option value="done">Concluída</option></select></label></div>
@@ -231,29 +256,32 @@ $('#roster').addEventListener('click',function(e){var b=e.target.closest('[data-
 $('#en-form').addEventListener('submit',function(e){e.preventDefault();var er=$('#en-er');er.hidden=true;
   if(!U.sel){er.textContent='Selecione o seu nome.';er.hidden=false;return;}
   var bt=$('#en-go');bt.disabled=true;bt.textContent='Conferindo…';
-  api('/api/login',{method:'POST',body:JSON.stringify({usuario:U.sel,senha:$('#en-senha').value})}).then(function(j){try{localStorage.setItem('eq_ultimo',U.sel);}catch(x){}$('#en-senha').value='';iniciar(j.usuario);})
+  api('/api/login',{method:'POST',body:JSON.stringify({usuario:U.sel,senha:$('#en-senha').value})}).then(function(j){try{localStorage.setItem('eq_ultimo',U.sel);}catch(x){}$('#en-senha').value='';iniciar(j.usuario,j.gestor);})
     .catch(function(x){er.textContent=x.message;er.hidden=false;}).then(function(){bt.disabled=false;bt.textContent='Entrar';});});
 $('#sair').onclick=function(){if(PEND.size&&!confirm('Há alterações ainda não gravadas. Sair mesmo assim?'))return;api('/api/login',{method:'DELETE'}).catch(function(){}).then(function(){location.reload();});};
 $('#tema').onclick=function(){var d=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',d);try{localStorage.setItem('cmt-eq-tema',d);}catch(e){}};
 /* ================= estado ================= */
 var S={cal:[],exp:null,ses:'',doc:null,lista:'itens',escopo:'meus',q:'',aberto:{}};
 var PEND=new Map(),tSal=null;
-function iniciar(nome){
+function iniciar(nome,gestor){
+  U.gestor=!!gestor;document.body.classList.toggle('gestor',U.gestor);if(U.gestor)avCarregar();
+  var h0=location.hash;
   U.eu=nome;$('#entrada').hidden=true;$('#app').hidden=false;$('#u-nome').textContent=nome;$('#u-ini').textContent=nome.slice(0,2).toUpperCase();
   try{S.escopo=localStorage.getItem('eq_escopo')||'meus';}catch(e){}
   marcaSeg('#esc',S.escopo);
   sessoesEquipe(true);
   P.dados=null;vista(/pauta/.test(location.hash)?'pauta':'inicio');
-  notificacoes();pendencias();
-  clearInterval(S.tCal);S.tCal=setInterval(function(){if(!document.hidden)sessoesEquipe(false);},60000);
+  notificacoes().then(function(){if(h0==='#notificacoes'){abrePainel('#p-not');setTimeout(marcarLido,1500);}});pendencias().then(function(){if(h0==='#pendencias')abrePainel('#p-pen');});
+  clearInterval(S.tCal);S.tCal=setInterval(function(){if(!document.hidden)sessoesEquipe(false);},30000);
+  if(!S.visOk){S.visOk=1;document.addEventListener('visibilitychange',function(){if(!document.hidden&&U.eu)sessoesEquipe(false);});}
 }
-/* pautas publicadas pelo Monitor: relidas ao entrar, ao abrir a aba Pauta e a cada minuto, para refletir na hora a liberação */
+/* pautas publicadas pelo Monitor: relidas ao entrar, ao abrir a aba Pauta, ao voltar à página e a cada 30 segundos, para refletir na hora a liberação */
 function sessoesEquipe(primeira){
   return api('/api/sessoes').then(function(j){var sig=JSON.stringify((j.sessoes||[]).map(function(s){return s.date+':'+s.processos+':'+s.previa;}));if(!primeira&&sig===S.calSig)return;S.calSig=sig;S.cal=(j.sessoes||[]).slice().sort(function(a,b){return String(a.date).localeCompare(String(b.date));});S.exp=j.expediente||null;
-    var h=hoje(),fut=S.cal.filter(function(s){return s.date>=h&&(s.processos||s.previa);}),pref=null;try{pref=localStorage.getItem('eq_ses');}catch(e){}
+    var h=hoje(),fut=S.cal.filter(function(s){return s.date>=h&&(s.processos||s.previa);}),pref=S.ses||null;if(!pref)try{pref=localStorage.getItem('eq_ses');}catch(e){}
     S.ses=(pref&&S.cal.some(function(s){return s.date===pref;}))?pref:(fut[0]||S.cal.filter(function(s){return s.processos;}).slice(-1)[0]||S.cal.slice(-1)[0]||{}).date||'';
     $('#ses').innerHTML=S.cal.slice().reverse().map(function(s){return '<option value="'+esc(s.date)+'"'+(s.date===S.ses?' selected':'')+'>Sessão de '+esc(br(s.date))+(s.hora?' · '+esc(s.hora):'')+(s.processos?' · '+s.processos+' itens':s.previa?' · pré-pauta '+s.previa:' · sem pauta')+'</option>';}).join('');
-    if(primeira||!S.ses||!S.doc)carregar(!primeira);if(!primeira){P.dados=null;try{if(!$('#v-inicio').hidden)inicio();}catch(e){}}
+    var mesma=!primeira&&S.ses===S.sesAnt,editando=PEND.size||(document.activeElement&&$('#lst').contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName));if(!mesma)S.doc=null;if(!(mesma&&editando))carregar(!primeira);S.sesAnt=S.ses;if(!primeira&&!S.cal.length)toast('Nenhuma pauta liberada para a equipe no momento.');if(!primeira){P.dados=null;try{if(!$('#v-inicio').hidden)inicio();}catch(e){}}
   }).catch(function(e){if(primeira)falha(e);});
 }
 function falha(e){if(e.status===401){entrada();return;}toast(e.message);$('#lst').innerHTML='<div class="empty">'+esc(e.message)+'</div>';}
@@ -526,20 +554,46 @@ var NT={ev:[],lido:''};
 var NIC={'aviso-geral':'📣',processos:'✎',pendencia:'☑',ausencia:'⌂'};
 function tempo(t){var d=new Date(t);if(isNaN(d))return '';var m=Math.round((Date.now()-d)/6e4);return m<1?'agora':m<60?'há '+m+' min':m<1440?'há '+Math.round(m/60)+' h':d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
 function chaveLido(){return 'eq_not_lido_'+nq(U.eu);}
-function itemNot(e,lim){return '<div class="nt '+esc(e.action)+(e.time>NT.lido?' novo':'')+'"><span class="ico2">'+(NIC[e.action]||'•')+'</span><div class="tx2"><b>'+esc(e.title||'')+'</b><p>'+esc((e.action==='aviso-geral'?e.message:[e.user,e.message].filter(Boolean).join(' · '))||'')+'</p></div><time>'+esc(tempo(e.time))+'</time>'+(e.sessao?'<button class="b" data-ir="'+esc(e.sessao)+'|'+esc(e.numero||'')+'">Abrir</button>':'')+'</div>';}
-function notificacoes(){return api('/api/notificacoes').then(function(j){NT.ev=j.events||[];try{NT.lido=localStorage.getItem(chaveLido())||'';}catch(e){}
+function itemNot(e,lim){var lk=e.link?'<a class="lk" href="'+esc(e.link)+'"'+(/^https?:/.test(e.link)?' target="_blank" rel="noopener"':'')+'>'+esc(e.linkTxt||'Abrir link')+' ↗</a>':'',dst=U.gestor&&e.action==='aviso-geral'?'<span class="dst">'+[(e.para||[]).length?'para '+e.para.join(', '):'toda a equipe',e.painel===false?'só notificação':e.notificacao===false?'só painel inicial':'painel e notificação',e.ate?'até '+br(e.ate):''].filter(Boolean).join(' · ')+'</span>':'';
+  return '<div class="nt '+esc(e.action)+(e.nivel&&e.nivel!=='info'?' '+esc(e.nivel):'')+(e.time>NT.lido?' novo':'')+'"><span class="ico2">'+(NIC[e.action]||'•')+'</span><div class="tx2"><b>'+esc(e.title||'')+'</b>'+(e.fixo?'<span class="pin">FIXADO</span>':'')+'<p>'+fmtMsg((e.action==='aviso-geral'?e.message:[e.user,e.message].filter(Boolean).join(' · '))||'')+'</p>'+lk+dst+'</div><time>'+esc(tempo(e.time))+'</time>'+(e.sessao?'<button class="b" data-ir="'+esc(e.sessao)+'|'+esc(e.numero||'')+'">Abrir</button>':'')+(U.gestor&&e.avId?'<button class="x" data-av-del="'+esc(e.avId)+'" title="Retirar este aviso">×</button>':'')+'</div>';}
+function fmtMsg(s){return esc(s).replace(/\*\*([^*]+)\*\*/g,'<b style="display:inline;font-size:inherit">$1</b>');}
+function notificacoes(){return api('/api/notificacoes').then(function(j){var tudo=j.events||[];try{NT.lido=localStorage.getItem(chaveLido())||'';}catch(e){}
+  /* sininho: tudo, menos o aviso marcado só para o painel inicial; painel inicial: avisos marcados para ele (fixados primeiro) e as atualizações */
+  NT.ev=tudo.filter(function(e){return e.action!=='aviso-geral'||e.notificacao!==false;});
   var n=NT.ev.filter(function(e){return e.time>NT.lido;}).length,b=$('#c-not');b.hidden=!n;b.textContent=n>99?'99+':n;
   $('#l-not').innerHTML=NT.ev.length?NT.ev.map(function(e){return itemNot(e);}).join(''):'<p class="mut">Nenhuma atualização registrada.</p>';
-  var av=NT.ev.filter(function(e){return e.action==='aviso-geral';}).slice(0,2),ou=NT.ev.filter(function(e){return e.action!=='aviso-geral';}).slice(0,5);
+  if(U.gestor){var so=tudo.filter(function(e){return e.action==='aviso-geral'&&e.notificacao===false;});if(so.length)$('#l-not').innerHTML+='<p class="nt-sec">Só no painel inicial</p>'+so.map(function(e){return itemNot(e);}).join('');}
+  var av=tudo.filter(function(e){return e.action==='aviso-geral'&&e.painel!==false;}).sort(function(a,b){return (b.fixo?1:0)-(a.fixo?1:0);}).slice(0,3),ou=tudo.filter(function(e){return e.action!=='aviso-geral';}).slice(0,5);
   $('#avisos').innerHTML=(av.concat(ou)).map(function(e){return itemNot(e);}).join('')||'<p class="mut" style="font-size:12px">Sem avisos nem atualizações.</p>';
 }).catch(function(e){if(e.status===401)return;$('#avisos').innerHTML='<p class="mut">Não foi possível carregar as atualizações.</p>';});}
 function marcarLido(){if(!NT.ev.length)return;NT.lido=NT.ev[0].time;try{localStorage.setItem(chaveLido(),NT.lido);}catch(e){}$('#c-not').hidden=true;}
-function abrePainel(id){['#p-not','#p-pen'].forEach(function(x){if(x!==id)$(x).hidden=true;});var p=$(id);p.hidden=!p.hidden;return !p.hidden;}
-$('#b-not').onclick=function(){if(abrePainel('#p-not'))setTimeout(marcarLido,1500);};
+function abrePainel(id){hh();['#p-not','#p-pen'].forEach(function(x){if(x!==id)$(x).hidden=true;});var p=$(id);p.hidden=!p.hidden;return !p.hidden;}
+function hh(){var h=document.querySelector('#app header');if(h)document.documentElement.style.setProperty('--hh',Math.round(h.getBoundingClientRect().bottom)+'px');}
+window.addEventListener('resize',hh);window.addEventListener('scroll',hh,{passive:true});
+$('#b-not').onclick=function(){hh();if(abrePainel('#p-not'))setTimeout(marcarLido,1500);};
 $('#av-tudo').onclick=function(){if(abrePainel('#p-not'))setTimeout(marcarLido,1500);};
 document.addEventListener('click',function(e){if(e.target.closest('[data-fecha]')){e.target.closest('.drw').hidden=true;return;}
   if(!e.target.closest('.drw')&&!e.target.closest('.hbx')&&!e.target.closest('#av-tudo')&&!e.target.closest('dialog')){$('#p-not').hidden=true;$('#p-pen').hidden=true;}});
-/* ================= pendências: quadro A fazer · Em andamento · Em revisão · Concluída ================= */
+/* ================= avisos do gestor: título, texto, link, importância, onde aparece e quem recebe ================= */
+var AV={eq:[]};
+function avCarregar(){$('#av-comp').hidden=false;api('/api/avisos').then(function(j){AV.eq=j.equipe||[];$('#av-ppl').innerHTML=AV.eq.map(function(n){return '<label><input type="checkbox" name="para" value="'+esc(n)+'"> '+esc(n)+'</label>';}).join('');avPrevia();}).catch(function(){});}
+function avPrevia(){var f=$('#f-av');if(!f)return;var E=f.elements,todos=E.todos.checked,p=[].filter.call(f.querySelectorAll('[name=para]'),function(x){return x.checked;}).map(function(x){return x.value;});
+  $('#av-ppl').classList.toggle('off',todos);
+  var onde=[E.painel.checked&&'painel inicial',E.notificacao.checked&&'notificações'].filter(Boolean).join(' e ');
+  $('#av-pv').textContent=(onde?'Aparece em '+onde:'Escolha onde o aviso aparece')+' · '+(todos?'para toda a equipe':p.length?'para '+p.join(', '):'escolha quem recebe')+(E.ate.value?' · até '+br(E.ate.value):'')+'.';}
+$('#f-av').addEventListener('input',avPrevia);$('#f-av').addEventListener('change',avPrevia);$('#f-av').addEventListener('reset',function(){setTimeout(avPrevia,0);});
+$('#f-av').addEventListener('click',function(e){var b=e.target.closest('[data-md],[data-ins]');if(!b)return;var ta=$('#f-av').elements.message,s=ta.selectionStart,f=ta.selectionEnd,v=ta.value;
+  var ins=b.dataset.ins==='data'?br(hoje()):b.dataset.md==='**'?'**'+(v.slice(s,f)||'texto')+'**':'\n• ';
+  ta.value=v.slice(0,s)+ins+v.slice(f);ta.focus();ta.selectionStart=ta.selectionEnd=s+ins.length;});
+$('#f-av').addEventListener('submit',function(e){e.preventDefault();var f=e.target,E=f.elements,er=$('#av-er');er.hidden=true;
+  var para=E.todos.checked?[]:[].filter.call(f.querySelectorAll('[name=para]'),function(x){return x.checked;}).map(function(x){return x.value;});
+  if(!E.todos.checked&&!para.length){er.textContent='Escolha quem recebe ou marque Toda a equipe.';er.hidden=false;return;}
+  var d={title:E.title.value,message:E.message.value,link:E.link.value,linkTxt:E.linkTxt.value,nivel:E.nivel.value,painel:E.painel.checked,notificacao:E.notificacao.checked,fixo:E.fixo.checked,ate:E.ate.value,para:para};
+  var bt=f.querySelector('[type=submit]');bt.disabled=true;
+  api('/api/avisos',{method:'POST',body:JSON.stringify(d)}).then(function(){f.reset();toast('Aviso publicado.');notificacoes();}).catch(function(x){er.textContent=x.message;er.hidden=false;}).then(function(){bt.disabled=false;});});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-av-del]');if(!b||!U.gestor)return;e.preventDefault();e.stopPropagation();if(!confirm('Retirar este aviso para todos?'))return;
+  api('/api/avisos?id='+encodeURIComponent(b.dataset.avDel),{method:'DELETE'}).then(function(){toast('Aviso retirado.');notificacoes();}).catch(function(x){toast(x.message);});},true);
+/* ================= diligências: quadro A fazer · Em andamento · Em revisão · Concluída ================= */
 var PN={t:[],equipe:[],ed:null};
 var ETAPAS=[['todo','A fazer'],['doing','Em andamento'],['review','Em revisão'],['done','Concluída']],URK={Urgente:0,Alta:1,'Média':2,Baixa:3};
 function pendencias(){return api('/api/pendencias').then(function(j){PN.t=j.tasks||[];PN.equipe=j.equipe||[];quadro();}).catch(function(e){if(e.status!==401)$('#board').innerHTML='<p class="mut">Não foi possível carregar o quadro: '+esc(e.message)+'</p>';});}
@@ -567,20 +621,20 @@ $('#board').addEventListener('drop',function(e){var l=e.target.closest('.lane');
   if(!t||t.stage===l.getAttribute('data-st'))return;var st=l.getAttribute('data-st');t.stage=st;quadro();salvarTk({id:t.id,_rev:t._rev,stage:st}).catch(function(x){toast(x.message);pendencias();});});
 $('#board').addEventListener('click',function(e){var t=e.target.closest('[data-tk]');if(!t)return;dlgPen(PN.t.filter(function(x){return x.id===t.getAttribute('data-tk');})[0]);});
 $('#pen-novo').onclick=function(){dlgPen(null);};
-function dlgPen(t){PN.ed=t;var f=$('#f-pen'),E=f.elements;f.reset();$('#pen-er').hidden=true;$('#dlg-pen-t').textContent=t?'Editar pendência':'Nova pendência';
+function dlgPen(t){PN.ed=t;var f=$('#f-pen'),E=f.elements;f.reset();$('#pen-er').hidden=true;$('#dlg-pen-t').textContent=t?'Editar diligência':'Nova diligência';
   E.assignee.innerHTML='<option value="">Sem responsável</option>'+PN.equipe.map(function(n){return '<option>'+esc(n)+'</option>';}).join('');
   E.sessao.innerHTML='<option value="">Sem sessão</option>'+S.cal.map(function(s){return '<option value="'+esc(s.date)+'">'+esc(br(s.date))+'</option>';}).join('');
   ['title','description','assignee','urgency','dueDate','numero','sessao','stage'].forEach(function(k){if(t&&t[k]!=null)E[k].value=t[k];});
   if(!t){E.urgency.value='Média';E.stage.value='todo';E.assignee.value=PN.equipe.filter(function(n){return nq(n)===nq(U.eu);})[0]||'';}
   $('#pen-del').hidden=!(t&&nq(t.creator)===nq(U.eu));$('#dlg-pen').showModal();E.title.focus();}
 $('#pen-x').onclick=function(){$('#dlg-pen').close();};
-$('#pen-del').onclick=function(){var t=PN.ed;if(!t)return;api('/api/pendencias?id='+encodeURIComponent(t.id),{method:'DELETE'}).then(function(){$('#dlg-pen').close();toast('Pendência excluída.');pendencias();}).catch(function(x){$('#pen-er').textContent=x.message;$('#pen-er').hidden=false;});};
+$('#pen-del').onclick=function(){var t=PN.ed;if(!t)return;api('/api/pendencias?id='+encodeURIComponent(t.id),{method:'DELETE'}).then(function(){$('#dlg-pen').close();toast('Diligência excluída.');pendencias();}).catch(function(x){$('#pen-er').textContent=x.message;$('#pen-er').hidden=false;});};
 $('#f-pen').addEventListener('submit',function(e){e.preventDefault();var E=this.elements,d={};['title','description','assignee','urgency','dueDate','numero','sessao','stage'].forEach(function(k){d[k]=E[k].value;});
-  if(PN.ed){d.id=PN.ed.id;d._rev=PN.ed._rev;}salvarTk(d).then(function(){$('#dlg-pen').close();toast('Pendência salva.');}).catch(function(x){$('#pen-er').textContent=x.message;$('#pen-er').hidden=false;});});
+  if(PN.ed){d.id=PN.ed.id;d._rev=PN.ed._rev;}salvarTk(d).then(function(){$('#dlg-pen').close();toast('Diligência salva.');}).catch(function(x){$('#pen-er').textContent=x.message;$('#pen-er').hidden=false;});});
 setInterval(function(){if(!$('#app').hidden&&document.visibilityState==='visible'){notificacoes();if(!$('#p-pen').hidden&&!arr)pendencias();}},120000);
 
 /* ================= início ================= */
-api('/api/login').then(function(j){iniciar(j.usuario);}).catch(function(){entrada();});
+api('/api/login').then(function(j){iniciar(j.usuario,j.gestor);}).catch(function(){entrada();});
 })();
 </script>
 </body>
