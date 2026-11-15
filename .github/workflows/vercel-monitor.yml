@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p site/public
           cp cmt-monitor.html site/public/index.html
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public"}\n' > site/vercel.json
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","rewrites":[{"source":"/(.*)","destination":"/index.html"}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

@@ -4795,10 +4795,8 @@ function commandTabFromLocation(){
 }
 function setCommandTabUrl(tab){
   const slug = COMMAND_TAB_SLUG[tab] || COMMAND_TAB_SLUG.painel;
-  const path = '/comando-' + slug;
-  if (location.pathname !== path || location.search || location.hash){
-    try { history.replaceState(null, '', path); } catch(e){}
-  }
+  /* não troca o caminho da página: num site publicado, recarregar um caminho inventado dá 404 */
+  if (location.hash !== '#' + tab){ try { history.replaceState(null, '', location.pathname + location.search + '#' + tab); } catch(e){} }
 }
 function showTab(t){
   if (!TABS.includes(t)) t = 'recursos';
@@ -13163,6 +13161,7 @@ else setTimeout(ready, 0);
     '#au-con button{border:1px solid rgba(255,255,255,.25);background:transparent;color:#eef2f5;border-radius:999px;padding:7px 13px;font:700 12.5px Figtree,system-ui,sans-serif;cursor:pointer}#au-con button.pri{background:#e6c27a;border-color:#e6c27a;color:#14263c}#au-con button:disabled{opacity:.6}' +
     '#au-con .tf{margin-top:10px;display:grid;gap:8px}#au-con .tf label{font-size:12.5px;color:#c9d3dc}#au-con .tf .tr{display:flex;gap:8px}#au-con .tf input[type=password]{flex:1;min-width:0;padding:9px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.25);background:#0b1824;color:#fff;font:14px Figtree,system-ui,sans-serif}' +
     '#au-con .tf .lb{display:flex;gap:7px;align-items:center}#au-con .er{margin:0;color:#ffb4a3;font-weight:600;font-size:12.5px}#au-con .er:empty{display:none}#au-con .au-lst{margin:0}' +
+    '#au-con .au-tk button:not(.pri),#au-con .au-conimp button:not(.pri){color:inherit;border-color:transparent;background:transparent;border-radius:6px}#au-con .au-conimp .lnk,#au-con .dp-c .lnk{color:#a7433d}#au-con .au-conimp .lnk:disabled{color:#b9c3cc}' +
     '#cmtConBtn.au-off{background:#e6c27a!important;color:#14263c!important;border-color:#e6c27a!important}' +
     '@media (max-width:760px){#au-con .cg{grid-template-columns:minmax(0,1fr)}#au-con{padding-top:56px}}' +
     /* o painel esquerdo do Acervo Central sai (o conteúdo foi para o diálogo) */
