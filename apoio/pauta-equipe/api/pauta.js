@@ -1,4 +1,5 @@
-/* GET  /api/pauta?data=AAAA-MM-DD            pauta da sessão (itens e pré-pauta)
+/* GET  /api/pauta?mono=1                      monocráticas (ver _mono.js)
+   GET  /api/pauta?data=AAAA-MM-DD            pauta da sessão (itens e pré-pauta)
    POST /api/pauta?data=AAAA-MM-DD  {cnj, lista, campos}   grava campos de um processo, num commit, com nova tentativa se o arquivo mudou */
 const L = require('./_lib');
 const DIRETOS = ['dataMinuta', 'dataCorrecao', 'dataLiberacao', 'obs'];
@@ -8,6 +9,7 @@ const dg = s => String(s || '').replace(/\D/g, '');
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
+  if (req.query.mono) return require('./_mono')(req, res, u);
   const data = req.query.data; if (!L.dataOk(data)) return res.status(400).json({ erro: 'data inválida' });
   const rel = 'acervo/sessoes/' + data + '.json';
   try {
