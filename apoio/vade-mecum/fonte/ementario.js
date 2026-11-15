@@ -609,6 +609,52 @@ var RE_CAMPO=/\{\{([^}]*)\}\}|\[PREENCHER:\s*([^\]]*)\]|\[(?!VALIDAR)(?![.…\s]
 function campoNome(a,b,c,d,e){return e?'…':(String(a||b||c||d||'').trim()||'…');}
 function comCampos(raw,ctx,fmt){var P=[];var t=String(raw||'').replace(RE_CAMPO,function(m,a,b,c,d,e){P.push(campoNome(a,b,c,d,e));return '\uE000'+(P.length-1)+'\uE001';});
   return fmt(t).replace(/\uE000(\d+)\uE001/g,function(_,i){var nome=P[+i],k=ctx.k+'#'+(ctx.i++),v=FILL[k];return '<span class="fill'+(v?' ok':'')+'" contenteditable="true" spellcheck="true" role="textbox" aria-label="'+esc(nome)+'" data-fk="'+esc(k)+'" data-ph="'+esc(nome)+'">'+esc(v||'')+'</span>';});}
+/* ===== Cópia com a formatação do PJe (Arial 12, justificado, recuo de 2,5 cm; ementa sem recuo; citação em bloco) ===== */
+var PJF='font-family:Arial,sans-serif;font-size:12pt;line-height:1.5;';
+function camposR(raw,ctx){return String(raw||'').replace(RE_CAMPO,function(m,a,b,c,d,e){var nome=campoNome(a,b,c,d,e),k=ctx.k+'#'+(ctx.i++),v=FILL[k];return v?v:''+nome+'';});}
+function rcEsc(t,html){return html?esc(t).replace(/([^]*)/g,'<span style="background:#ffff00">$1</span>'):t.replace(/([^]*)/g,'[$1]');}
+/* uma linha de texto vira um parágrafo do PJe */
+function rcLinha(l,parte,n,html){
+  var t=rcEsc(l,html);
+  if(parte==='ementa'){var st=PJF+'text-align:justify;text-indent:0;margin:0 0 6pt;';
+    if(!html)return t;
+    if(n==='Cabeçalho'||/^[IV]+\.\s/.test(l))t='<b>'+t+'</b>';else if(/^\d+\.\s/.test(l))t=t.replace(/^(\d+\.)/,'<b>$1</b>');else if(n==='Rodapé'&&/^[^:]{6,40}:\s/.test(l))t=t.replace(/^([^:]+:)/,'<i>$1</i>');
+    return '<p style="'+st+'">'+t+'</p>';}
+  var cit=/^\s*“/.test(l)||(n==='Precedente'&&/“[^”]*”/.test(l));
+  if(!html)return t;
+  return '<p style="'+PJF+'text-align:justify;'+(cit?'margin:6pt 0 6pt 2.5cm;font-style:italic;text-indent:0;':'text-indent:2.5cm;margin:0 0 6pt;')+'">'+t+'</p>';
+}
+/* partes → documento; comTitulo: põe RELATÓRIO, VOTO etc. (para colar fora do PJe) */
+function rcDoc(partes,comTitulo,html){
+  var out=[];
+  partes.forEach(function(pt){
+    if(comTitulo&&pt.pj)out.push(html?'<p style="'+PJF+'text-align:center;font-weight:bold;margin:12pt 0 6pt;">'+esc(pt.pj)+'</p>':pt.pj);
+    pt.itens.forEach(function(it){
+      if(it.rn)out.push(rcLinha(it.n,'ementa','',html));
+      String(it.txt||'').split('\n').filter(function(x){return x.trim();}).forEach(function(l){out.push(rcLinha(l.trim(),pt.parte,it.n,html));});
+    });
+  });
+  return html?'<div style="'+PJF+'">'+out.join('')+'</div>':out.join('\n');
+}
+function copiarRico(partes,comTitulo,msg){
+  var h=rcDoc(partes,comTitulo,true),t=rcDoc(partes,comTitulo,false);
+  function fb(){var d=document.createElement('div');d.contentEditable='true';d.style.cssText='position:fixed;left:-9999px;top:0;background:#fff;color:#000';d.innerHTML=h;document.body.appendChild(d);var r=document.createRange();r.selectNodeContents(d);var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');toast(msg);}catch(e){copiar(t,msg);}s.removeAllRanges();d.remove();}
+  try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([h],{type:'text/html'}),'text/plain':new Blob([t],{type:'text/plain'})})]).then(function(){toast(msg);},fb);}else fb();}catch(e){fb();}
+}
+/* coleta do que está na folha (alternativa escolhida, opcionais abertos, campos preenchidos, minúscula após o vocativo) */
+function rcColher(PT,get){
+  var aposVoc=false;
+  return PT.map(function(pt){var parte=pt.parte;
+    var itens=pt.trs.filter(function(t){return !t.opc||get.abre[t.k];}).map(function(t){
+      var ai=Math.min(get.alt[t.k]||0,Math.max(0,t.alts.length-1)),a=t.alts[ai]||{},rn=parte==='ementa'&&/^[IV]+\./.test(t.n);
+      var txt=a.f?camposR(a.f,{k:get.kp(t)+'@'+ai,i:0}):(rn?'':''+t.n+'');
+      if(aposVoc){if(a.f)txt=txt.replace(/^(\s*)(\S)/,function(_,s,c){return s+c.toLowerCase();});aposVoc=false;}
+      if(t.n==='Vocativo')aposVoc=true;
+      return {n:t.n,txt:txt,rn:rn};});
+    return {pj:pt.pj,parte:parte,itens:itens};});
+}
+function rcEditorial(){var PT=(XP._PT||xPartes()).map(function(pt){return {pj:pt.pj||'',parte:pt.id==='ementa'?'ementa':pt.id,trs:pt.tr};});return rcColher(PT,{alt:XP.alt,abre:XP.abre,kp:function(t){return t.k;}});}
+function rcModelo(){var m=MS._m;var PT=(MS._P||[]).map(function(pt){return {pj:pt.pj,parte:pt.pj==='EMENTA'?'ementa':(pt.pj==='RELATÓRIO'?'relatorio':pt.pj==='ACÓRDÃO'?'acordao':'voto'),trs:pt.trs};});return rcColher(PT,{alt:MS.alt,abre:MS.abre,kp:function(t){return m.id+'|'+t.k;}});}
 function camposT(raw,ctx){return String(raw||'').replace(RE_CAMPO,function(m,a,b,c,d,e){var nome=campoNome(a,b,c,d,e),k=ctx.k+'#'+(ctx.i++),v=FILL[k];return v||('['+nome+']');});}
 document.addEventListener('input',function(e){var f=e.target.closest&&e.target.closest('.fill');if(!f)return;var v=f.textContent.trim();if(v){FILL[f.getAttribute('data-fk')]=v;f.classList.add('ok');}else{delete FILL[f.getAttribute('data-fk')];f.classList.remove('ok');}});
 document.addEventListener('focusout',function(e){var f=e.target.closest&&e.target.closest('.fill');if(!f)return;if(!f.textContent.trim()){f.textContent='';f.classList.remove('ok');delete FILL[f.getAttribute('data-fk')];}});
@@ -630,7 +676,7 @@ function xLista(L){return L.length?'<ul>'+L.join('')+'</ul>':'';}
 function xPagina(){
   var PT=xPartes(),v=XP.v[XP.pc],h='',aposVoc=false,FMT=((ED.pecas.forma.filter(function(f){return f.t==='Formatação para o PJe';})[0]||{}).r)||[];
   PT.forEach(function(pt){
-    h+=PT.length>1?'<div class="xpj" id="xp-'+pt.id+'">'+pt.pj+' <small>(inserido pelo PJe)</small></div>':'<div id="xp-'+pt.id+'"></div>';
+    h+=PT.length>1?'<div class="xpj" id="xp-'+pt.id+'">'+pt.pj+' <small>(inserido pelo PJe)</small><button class="xpjc" data-xcpp="'+pt.id+'" title="Copiar só esta parte, com a formatação do PJe">copiar '+esc(pt.t.toLowerCase())+'</button></div>':'<div id="xp-'+pt.id+'"></div>';
     pt.tr.forEach(function(t){
       if(t.opc&&!XP.abre[t.k]){h+='<button class="xopc" data-xabre="'+esc(t.k)+'">+ '+esc(t.n)+' <small>· opcional</small></button>';return;}
       var ai=Math.min(XP.alt[t.k]||0,t.alts.length-1),a=t.alts[ai],min=false;
@@ -665,7 +711,7 @@ function xPagina(){
   if(PT.length>1)side+='<div class="lab">Sumário</div><div class="glist">'+PT.map(function(pt){return '<button data-xgo="'+pt.id+'"><span>'+pt.t+'</span><small>'+pt.tr.filter(function(t){return !t.opc;}).length+'</small></button>';}).join('')+'</div>';
   side+='<div class="lab">Orientações da peça</div>'+g;
   var as=$('#x-aside'),st=as.scrollTop;as.innerHTML=side;as.scrollTop=st;
-  $('#x-main').innerHTML='<div class="xvar"><span class="meta">Variante</span>'+XPECAS[XP.pc].var.map(function(x){return '<button data-xv="'+x[0]+'" aria-pressed="'+(v===x[0])+'">'+x[1]+'</button>';}).join('')+'<span style="flex:1"></span><button class="btn" data-xcp>Copiar esqueleto</button></div><div class="xsheet">'+h+'</div>';
+  $('#x-main').innerHTML='<div class="xvar"><span class="meta">Variante</span>'+XPECAS[XP.pc].var.map(function(x){return '<button data-xv="'+x[0]+'" aria-pressed="'+(v===x[0])+'">'+x[1]+'</button>';}).join('')+'<span style="flex:1"></span><button class="btn" data-xcp title="Peça inteira, com os títulos, para colar fora do PJe">Copiar peça</button></div><div class="xsheet">'+h+'</div>';
   xRef();
   XP._PT=PT;
 }
@@ -698,7 +744,7 @@ function xRef(){
   el.innerHTML='<div class="xrtabs" role="tablist">'+T.map(function(t){return '<button role="tab" data-xrt="'+t[0]+'" aria-selected="'+(XP.tab===t[0])+'">'+t[1]+(XP.q?' <small>'+R[t[0]].n+'</small>':'')+'</button>';}).join('')+'</div><input id="x-rq" type="search" placeholder="Buscar nas orientações…" aria-label="Buscar nas orientações" value="'+esc(XP.q)+'"><div class="xrb">'+(R[XP.tab].h||'<p class="meta">Nada encontrado.</p>')+'</div>';
   if(foco){var q=$('#x-rq');q.focus();try{q.setSelectionRange(pos,pos);}catch(e){}}
 }
-function xCopiar(){var PT=XP._PT||xPartes();copiar(PT.map(function(pt){return (PT.length>1?pt.pj+'\n\n':'')+pt.tr.filter(function(t){return !t.opc||XP.abre[t.k];}).map(function(t){var ai=Math.min(XP.alt[t.k]||0,t.alts.length-1),a=t.alts[ai];var rn=pt.id==='ementa'&&/^[IV]+\./.test(t.n);return a.f?(rn?t.n+'\n':'')+camposT(a.f,{k:t.k+'@'+ai,i:0}):(rn?t.n:'['+t.n+']');}).join('\n\n');}).join('\n\n'),'Esqueleto copiado');}
+function xCopiar(qual){var D=rcEditorial();if(qual)D=D.filter(function(pt){return pt.parte===qual;});copiarRico(D,!qual&&D.length>1,qual?'Parte copiada com a formatação do PJe':'Peça copiada com a formatação do PJe');}
 $('#v-edit').addEventListener('click',function(e){
   var b;
   if(e.target.closest('.ref')||e.target.closest('.fill'))return;
@@ -709,6 +755,7 @@ $('#v-edit').addEventListener('click',function(e){
   if((b=e.target.closest('[data-xabre]'))){XP.abre[b.getAttribute('data-xabre')]=1;XP.sel=b.getAttribute('data-xabre');xPagina();return;}
   if((b=e.target.closest('[data-xfecha]'))){delete XP.abre[b.getAttribute('data-xfecha')];XP.sel=null;xPagina();return;}
   if((b=e.target.closest('[data-xrt]'))){XP.tab=b.getAttribute('data-xrt');xRef();return;}
+  if((b=e.target.closest('[data-xcpp]'))){xCopiar(b.getAttribute('data-xcpp'));return;}
   if(e.target.closest('[data-xcp]')){xCopiar();return;}
   if(e.target.closest('[data-xex]')){irModelos('Monocrática');return;}
   if((b=e.target.closest('.xblk'))){var k=b.getAttribute('data-xk');XP.sel=XP.sel===k?null:k;xPagina();}
@@ -835,7 +882,7 @@ function mPartes(m){
 function mFolha(m){
   var PT=mPartes(m),tp=mTipo(m),h='';
   PT.forEach(function(pt){var lastG=null;
-    if(pt.pj)h+='<div class="xpj">'+pt.pj+' <small>(inserido pelo PJe)</small></div>';
+    if(pt.pj)h+='<div class="xpj">'+pt.pj+' <small>(inserido pelo PJe)</small><button class="xpjc" data-mcpp="'+pt.pj+'" title="Copiar só esta parte, com a formatação do PJe">copiar '+esc(pt.pj==='ACÓRDÃO'?'proclamação':pt.pj.toLowerCase())+'</button></div>';
     pt.trs.forEach(function(t){
       if(t.g&&t.g!==lastG){h+='<div class="mgrp">'+esc(t.g)+'</div>';lastG=t.g;}
       if(t.opc&&!MS.abre[t.k]){h+='<button class="xopc" data-mabre="'+esc(t.k)+'">+ '+esc(t.n)+' <small>· opcional</small></button>';return;}
@@ -871,7 +918,8 @@ $('#e-out').addEventListener('click',function(e){if(EM.sub!=='mod')return;var b;
   if((b=e.target.closest('[data-malt]'))){MS.alt[b.getAttribute('data-malt')]=+b.getAttribute('data-i');MS.blk=b.getAttribute('data-malt');mFolha(MS._m);return;}
   if((b=e.target.closest('[data-mabre]'))){MS.abre[b.getAttribute('data-mabre')]=1;MS.blk=b.getAttribute('data-mabre');mFolha(MS._m);return;}
   if((b=e.target.closest('[data-mfecha]'))){delete MS.abre[b.getAttribute('data-mfecha')];mFolha(MS._m);return;}
-  if(e.target.closest('[data-mcpb]')){copiar(mTexto(false),'Texto do modelo copiado');return;}
+  if((b=e.target.closest('[data-mcpp]'))){var q=b.getAttribute('data-mcpp');copiarRico(rcModelo().filter(function(pt){return pt.pj===q;}),false,'Parte copiada com a formatação do PJe');return;}
+  if(e.target.closest('[data-mcpb]')){var D=rcModelo();copiarRico(D,D.length>1,'Modelo copiado com a formatação do PJe');return;}
   if(e.target.closest('[data-mcpe]')){copiar(mTexto(true),'Esqueleto copiado');return;}
   if((b=e.target.closest('.xblk[data-mk]'))){MS.blk=MS.blk===b.getAttribute('data-mk')?null:b.getAttribute('data-mk');$$('#e-out .xblk').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-mk')===MS.blk);});}
 },true);
@@ -918,7 +966,7 @@ function pAbrir(p){
   var box=painel(h+'</div>',true);
   box.querySelector('[data-dx]').onclick=function(){PS.sel=null;fecharIT();$$('#e-out .p-row.sel').forEach(function(r){r.classList.remove('sel');});};
   $$('[data-pvref]',box).forEach(function(a){a.onclick=function(ev){ev.preventDefault();var q=((BASE&&BASE.par)||[]).filter(function(z){return z.id===a.getAttribute('data-pvref');})[0];if(q)pAbrir(q);};});
-  box.querySelector('[data-pcp2]').onclick=function(){copiar(camposT(pVars(p.texto,false),{k:'par:'+p.id,i:0}),'Parágrafo copiado');};
+  box.querySelector('[data-pcp2]').onclick=function(){copiarRico([{pj:'',parte:'voto',itens:[{n:p.titulo,txt:camposR(pVars(p.texto,false),{k:'par:'+p.id,i:0})}]}],false,'Parágrafo copiado com a formatação do PJe');};
 }
 $('#e-out').addEventListener('click',function(e){
   var pc=e.target.closest('[data-pcp]');
