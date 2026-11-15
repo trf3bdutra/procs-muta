@@ -864,8 +864,8 @@ $('#sel-limpa').onclick=function(){S.sel={};render();};
 $('#sel-copia').onclick=function(){var L=lista().filter(function(i){return S.sel[dg(i.cnj)];});if(!L.length)L=filtrar();var tx=L.map(function(i){return i.cnj;}).join('\n');
   (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toast(L.length+' processo(s) copiado(s).');}).catch(function(){toast('Não foi possível copiar.');});};
 function expPauta(L,suf){baixarXlsx('Pauta_'+S.ses+(suf||'')+'.xlsx','Sessão '+br(S.ses).replace(/\//g,'-'),PL.map(function(c){return [c[0]];}),L.map(linhaExp),PL.map(function(c){return Math.max(8,Math.round(c[1]/7));}));}
-function expMono(L,nome){var X=PLM.concat([['Revisado em',128],['Para assinatura em',128]]);
-  baixarXlsx(nome,'Monocráticas',X.map(function(c){return [c[0]];}),L.map(function(it){return linhaExpMono(it).concat([it.dataCorrecao?br(it.dataCorrecao):'',it.dataLiberacao?br(it.dataLiberacao):'']);}),X.map(function(c){return Math.max(8,Math.round(c[1]/7));}));}
+function expMono(L,nome){var X=PLM.concat([['Revisado em',128],['Para assinatura em',128],['Registrada em',128]]);
+  baixarXlsx(nome,'Monocráticas',X.map(function(c){return [c[0]];}),L.map(function(it){return linhaExpMono(it).concat([it.dataCorrecao?br(it.dataCorrecao):'',it.dataLiberacao?br(it.dataLiberacao):'',it.monoEm?br(String(it.monoEm).slice(0,10)):'']);}),X.map(function(c){return Math.max(8,Math.round(c[1]/7));}));}
 /* pauta: integral (toda a sessão, sem filtros) · monocráticas: todos os registros */
 $('#exp-xlsx').onclick=function(){var MO=S.fonte==='mono',L=MO?((S.doc&&S.doc.itens)||[]):lista();if(!L.length){toast('Nada a exportar.');return;}
   if(MO)expMono(L,'Monocraticas_todas_'+hoje()+'.xlsx');else expPauta(L,'');toast(L.length+' processo'+(L.length===1?'':'s')+' exportado'+(L.length===1?'':'s')+'.');};
