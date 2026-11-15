@@ -410,7 +410,7 @@ function vAssuntos(L,out){
 /* ================= EDITORIAL ================= */
 var ED=null;
 try{ED=JSON.parse($('#editorial').textContent);}catch(e){ED=null;}
-var XS={sub:'estrutura',peca:'',grupo:'',vg:'termos',q:''};
+var XS={sub:'estrutura',peca:'',grupo:'',vg:'palavras',q:''};
 function man(){var db=window.VDM_DB&&window.VDM_DB();return ((db&&db['Diretrizes'])||[]).filter(function(r){return r['Código'];});}
 function manCap(c){return man().filter(function(r){return String(r['Capítulo']||'').indexOf(c)===0;});}
 function manTxt(r){return [r['Título'],r['Orientação'],r['Evitar'],r['Observação'],r['Grupo']].join(' ');}
@@ -562,7 +562,7 @@ function usosLexicos(){
   man().filter(function(r){return r['Grupo']==='Vocabulário'&&/^“/.test(r['Título']||'');}).forEach(function(r){L.push({t:r['Título'],pref:r['Orientação'],ev:r['Evitar'],fo:'D',id:r['Código']+(r['Página']?' · p. '+r['Página']:''),termo:r['Título'].replace(/[“”]/g,'')});});
   return L;
 }
-var VG=[['termos','Termos'],['graf','Grafias'],['conv','Conectivos e verbos'],['normas','Grafia de normas'],['cit','Citação de precedentes'],['ref','Normas, referências e remissões']];
+var VG=[['palavras','Termos, conectivos e verbos',[['xv-ter','Termos'],['xv-con','Conectivos e transições'],['xv-ver','Verbos e construções'],['xv-res','Verbos de resultado']]],['forma','Grafias, normas e remissões',[['xv-gra','Grafias'],['xv-nor','Grafia de normas'],['xv-ref','Normas, referências e remissões']]],['cit','Citação de precedentes',[]]];
 function ehGrafia(r){var ad=r.ad||'',t=[ad].concat(r.ev).join(' | ');if(/sigla/i.test(r.obs.join(' ')))return true;if(ad.length>60)return false;
   return /\d/.test(t)||/\S\/\S/.test(t)||/n[º°]/i.test(t)||/\(g\.?\s?n/.test(t)||/\bID['’]?s\b/.test(t)||r.ev.concat([ad]).some(function(e){return /^[A-Z]{2,6}(?:['’]?s)?(\b|$)/.test(e);})||/sigla/i.test(r.obs.join(' '));}
 function tabela(cab,rows,cls){return rows.length?'<div class="x-card"><table class="x-tbl'+(cls?' '+cls:'')+'"><thead><tr>'+cab.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>':'<p class="empty">Nada encontrado.</p>';}
@@ -574,38 +574,33 @@ function conectivosVerbos(){
   return {C:C,V:V};
 }
 function xVocab(){
-  if(!VG.some(function(z){return z[0]===XS.vg;}))XS.vg='termos';
+  if(!VG.some(function(z){return z[0]===XS.vg;}))XS.vg='palavras';
   var TI=termosIntegrados().filter(function(r){return !ehGrafia(r);}),CV=conectivosVerbos();
   var G=termosIntegrados().filter(ehGrafia),FF={};ED.pecas.forma.forEach(function(f){FF[f.t]=f.r;});
   var CITR=estiloItens().filter(function(r){return r.g==='E. Citação';}),MC=manCap('03');
-  var cnts={termos:TI.length,graf:G.length,conv:CV.C.length+CV.V.length+3,normas:(ED.normas||[]).length,cit:(FF['Citação de precedente']||[]).length+CITR.length+MC.length,ref:(FF['Normas e referências']||[]).length+(FF['Enumeração e remissões']||[]).length};
-  $('#x-aside').innerHTML='<div class="lab">Vocabulário</div><div class="glist" id="x-gl">'+VG.map(function(z){return '<button data-v="'+z[0]+'" aria-pressed="'+(XS.vg===z[0])+'"><span>'+z[1]+'</span><small>'+cnts[z[0]]+'</small></button>';}).join('')+(XS.vg==='conv'?'<button class="l1" data-j="xv-con"><span>Conectivos e transições</span></button><button class="l1" data-j="xv-ver"><span>Verbos e construções</span></button><button class="l1" data-j="xv-res"><span>Verbos de resultado</span></button>':'')+'</div><div class="note">Que palavras usar e como grafar e citar: termos a adotar e evitar, grafias e siglas, conectivos e verbos, nomes de normas, citação de precedentes e remissões.</div>';
+  var RS0=[['Recurso','provido / desprovido'],['Embargos de declaração','acolhidos / rejeitados'],['Mandado de segurança','segurança concedida / denegada']];
+  var cnts={palavras:TI.length+CV.C.length+CV.V.length+RS0.length,forma:G.length+(ED.normas||[]).length+(FF['Normas e referências']||[]).length+(FF['Enumeração e remissões']||[]).length,cit:(FF['Citação de precedente']||[]).length+CITR.length+MC.length};
+  $('#x-aside').innerHTML='<div class="lab">Vocabulário e forma</div><div class="glist" id="x-gl">'+VG.map(function(z){var on=XS.vg===z[0];return '<button data-v="'+z[0]+'" aria-pressed="'+on+'"><span>'+z[1]+'</span><small>'+cnts[z[0]]+'</small></button>'+(on?z[2].map(function(s){return '<button class="l1" data-j="'+s[0]+'"><span>'+s[1]+'</span></button>';}).join(''):'');}).join('')+'</div><div class="note">Que palavras usar e como grafar, remeter e citar.</div>';
   $$('#x-gl [data-v]').forEach(function(b){b.onclick=function(){XS.vg=b.getAttribute('data-v');xRender();window.scrollTo(0,0);};});
   $$('#x-gl [data-j]').forEach(function(b){b.onclick=function(){var el=document.getElementById(b.getAttribute('data-j'));if(el)el.scrollIntoView({behavior:'smooth',block:'start'});};});
-  var h='',n=0;
-  if(XS.vg==='termos'){
-    var R=TI.filter(function(r){return hit([r.ad,r.ev.join(' '),r.obs.join(' ')].join(' '));});n=R.length;
-    h='<section class="grp"><h2>Termos <small>adotar e evitar</small></h2>'+tabela(['Adotar','Evitar','Observação'],R.map(linhaTermo),'x-voc')+'</section>';
-  }else if(XS.vg==='graf'){
-    var Rg=G.filter(function(r){return hit([r.ad,r.ev.join(' '),r.obs.join(' ')].join(' '));});n=Rg.length;
-    h='<section class="grp"><h2>Grafias <small>siglas e formas fixas</small></h2>'+tabela(['Grafar','Evitar','Observação'],Rg.map(linhaTermo),'x-voc')+'</section>';
-  }else if(XS.vg==='normas'){
-    var N=(ED.normas||[]).filter(function(r){return hit([r.sigla,r.nome,r.prosa,(r.aliases||[]).join(' ')].join(' '));});n=N.length;
-    h='<section class="grp"><h2>Grafia de normas</h2>'+tabela(['Sigla','Nome','Na prosa','Tipo'],N.map(function(r){return '<tr><td>'+esc(r.sigla)+'</td><td>'+esc(r.nome)+'</td><td>'+esc(r.prosa)+'</td><td>'+esc(r.tipo)+'</td></tr>';}))+'</section>';
-  }else if(XS.vg==='cit'){
+  var h='',n=0,ht=function(r){return hit([r.ad,r.ev.join(' '),r.obs.join(' ')].join(' '));};
+  function sub(id,tit,small,body,qt){n+=qt;return '<h3 class="x-sub3" id="'+id+'">'+tit+(small!=null?' <small>'+small+'</small>':'')+'</h3>'+body;}
+  if(XS.vg==='palavras'){
+    var R=TI.filter(ht),C=CV.C.filter(function(r){return hit(r.a+' '+r.b+' '+(r.uso||''));}),V=CV.V.filter(function(r){return hit(r.a+' '+r.b+' '+r.c+' '+(r.uso||''));}),RS=RS0.filter(function(r){return hit(r.join(' '));});
+    h='<section class="grp"><h2>Termos, conectivos e verbos</h2>';
+    h+=sub('xv-ter','Termos','adotar e evitar',tabela(['Adotar','Evitar','Observação'],R.map(linhaTermo),'x-voc'),R.length);
+    h+=sub('xv-con','Conectivos e transições',C.length,tabela(['Expressão','Função','Regra de uso','Ocorrências no acervo'],C.map(function(r){return '<tr><td>'+esc(r.a)+'</td><td>'+esc(r.b)+'</td><td>'+esc(r.uso||'')+'</td><td>'+esc(r.oc||'')+'</td></tr>';})),C.length);
+    h+=sub('xv-ver','Verbos e construções',V.length,tabela(['Verbo','Construção','Emprego'],V.map(function(r){return '<tr><td>'+esc(r.a)+'</td><td>'+esc(r.b)+'</td><td>'+esc((r.c||'')+(r.uso?(r.c?' · ':'')+r.uso:''))+'</td></tr>';})),V.length);
+    h+=sub('xv-res','Verbos de resultado','por classe',tabela(['Classe','Resultado'],RS.map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>';})),RS.length)+'</section>';
+  }else if(XS.vg==='forma'){
+    var Rg=G.filter(ht),N=(ED.normas||[]).filter(function(r){return hit([r.sigla,r.nome,r.prosa,(r.aliases||[]).join(' ')].join(' '));}),fr=(FF['Normas e referências']||[]).concat(FF['Enumeração e remissões']||[]).filter(hit);
+    h='<section class="grp"><h2>Grafias, normas e remissões</h2>';
+    h+=sub('xv-gra','Grafias','siglas e formas fixas',tabela(['Grafar','Evitar','Observação'],Rg.map(linhaTermo),'x-voc'),Rg.length);
+    h+=sub('xv-nor','Grafia de normas',N.length,tabela(['Sigla','Nome','Na prosa','Tipo'],N.map(function(r){return '<tr><td>'+esc(r.sigla)+'</td><td>'+esc(r.nome)+'</td><td>'+esc(r.prosa)+'</td><td>'+esc(r.tipo)+'</td></tr>';})),N.length);
+    h+=sub('xv-ref','Normas, referências e remissões',null,fr.length?'<div class="x-card"><ul>'+fr.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul></div>':'<p class="empty">Nada encontrado.</p>',fr.length)+'</section>';
+  }else{
     var fc=(FF['Citação de precedente']||[]).filter(hit),CI=CITR.filter(function(r){return hit([r.titulo,r.pref,r.ev].join(' '));}),M3=MC.filter(function(r){return hit(manTxt(r));});n=fc.length+CI.length+M3.length;
     h='<section class="grp"><h2>Citação de precedentes</h2>'+(fc.length?'<div class="x-card"><ul>'+fc.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul></div>':'')+'<div class="grid">'+CI.map(function(r){return '<article class="card" style="--gc:var(--line)">'+(r.titulo?'<h3 style="margin-top:0">'+esc(r.titulo)+'</h3>':'')+'<div class="fields">'+(r.pref?'<div class="field good"><b>Preferir</b><p>'+esc(r.pref)+'</p></div>':'')+(r.ev?'<div class="field bad"><b>Evitar</b><p>'+esc(r.ev)+'</p></div>':'')+'</div></article>';}).join('')+M3.map(manCard).join('')+'</div></section>';
-  }else if(XS.vg==='ref'){
-    var fr=(FF['Normas e referências']||[]).concat(FF['Enumeração e remissões']||[]).filter(hit);n=fr.length;
-    h='<section class="grp"><h2>Normas, referências e remissões</h2>'+(fr.length?'<div class="x-card"><ul>'+fr.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul></div>':'<p class="empty">Nada encontrado.</p>')+'</section>';
-  }else{
-    var C=CV.C.filter(function(r){return hit(r.a+' '+r.b+' '+(r.uso||''));}),V=CV.V.filter(function(r){return hit(r.a+' '+r.b+' '+r.c+' '+(r.uso||''));});
-    var RS=[['Recurso','provido / desprovido'],['Embargos de declaração','acolhidos / rejeitados'],['Mandado de segurança','segurança concedida / denegada']].filter(function(r){return hit(r.join(' '));});
-    n=C.length+V.length+RS.length;
-    h='<section class="grp"><h2>Conectivos e verbos</h2>';
-    h+='<h3 class="x-sub3" id="xv-con">Conectivos e transições <small>'+C.length+'</small></h3>'+tabela(['Expressão','Função','Regra de uso','Ocorrências no acervo'],C.map(function(r){return '<tr><td>'+esc(r.a)+'</td><td>'+esc(r.b)+'</td><td>'+esc(r.uso||'')+'</td><td>'+esc(r.oc||'')+'</td></tr>';}));
-    h+='<h3 class="x-sub3" id="xv-ver">Verbos e construções <small>'+V.length+'</small></h3>'+tabela(['Verbo','Construção','Emprego'],V.map(function(r){return '<tr><td>'+esc(r.a)+'</td><td>'+esc(r.b)+'</td><td>'+esc((r.c||'')+(r.uso?(r.c?' · ':'')+r.uso:''))+'</td></tr>';}));
-    h+='<h3 class="x-sub3" id="xv-res">Verbos de resultado <small>por classe</small></h3>'+tabela(['Classe','Resultado'],RS.map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>';}))+'</section>';
   }
   $('#x-cnt').innerHTML='<b>'+n+'</b> itens';
   $('#x-out').innerHTML=h;
