@@ -150,6 +150,10 @@ ORIGEM = ["Contrarrazões - Situação", "_recursos", "_contras", "Sentença - D
 RENOMEAR = {"Sessão Destino": "Nova sessão de destino", "Dificuldade": "COMPLEXIDADE"}
 
 
+def _todos(sec):
+    return list(dict.fromkeys(SECOES.get(sec, []) + CAMPOS.get(sec, [])))
+
+
 def secionar(o):
     """Registro plano → {processo, geral, triagem, producao, pauta}. Idempotente."""
     painel = o.pop("_painel", {}) or {}
@@ -176,15 +180,44 @@ def secionar(o):
         plano.pop("Observação do Impedimento")
     origem = {k: plano.pop(k) for k in GERAL if k in plano}
     origem["atualizado_em"] = plano.pop("atualizado_em", "")
-    origem.update({k: plano.pop(k) for k in ORIGEM if k in plano and not vazio(plano[k])})
+    origem.update({k: plano.pop(k) for k in ORIGEM + CAMPOS["origem"] if k in plano and not vazio(plano[k])})
     novo["origem"] = origem
-    for s, campos in SECOES.items():
-        novo[s] = {c: plano.pop(c) for c in campos if c in plano and not vazio(plano[c])}
+    for s in SECOES:
+        novo[s] = {c: plano.pop(c) for c in _todos(s) if c in plano and not vazio(plano[c])}
     novo["pauta"]["sessoes"] = plano.pop("pautas", [])          # histórico: sessão, item, resultado
-    for k in list(plano):                                       # o que sobrar vai para geral
-        if not vazio(plano[k]):
+    for k in list(plano):                                       # o que sobrar vai para a origem
+        if not vazio(plano[k]) and k != "pautas":
             novo["origem"][k] = plano.pop(k)
     return novo
+
+
+# campos da Ficha por seção: todo registro tem todos (vazio = ainda não preenchido)
+CAMPOS = {
+    "origem": ["Sentença - Decisão", "Sentença - ID", "Sentença - Honorários", "Sentença - Custas", "Sentença - Resultado",
+               "Sentença - Fundamento", "Sentença - Providências", "Contrarrazões - Situação",
+               "Responsável", "Próxima ação", "Observações"],
+    "triagem": ["Urgência", "Urgência - Observação", "Tempestividade", "Preparo", "AJG", "DPU (controle)", "Representação",
+                "ID da Procuração", "Impedimento / Suspeição", "Observação do Impedimento", "Regularidade",
+                "Regularidade Manual", "Observação da Representação", "MPF", "MPF - Custos Legis", "ID do Parecer MPF",
+                "Parecer - Sentido", "MPF - Info adicional", "Observação MPF", "Tema", "COMPLEXIDADE", "Tipo de Voto",
+                "Prelim.", "Descrição da Preliminar", "META", "Seleção Prévia", "Mídias", "Etiquetas", "Alegações",
+                "O que falta sanar", "Intercorrências"],
+    "producao": ["Destino", "SERVIDOR", "MINUTADO", "Refinado", "CORRETOR", "CORRIGIDO", "Data da Revisão", "LIBERADO",
+                 "Data da Liberação", "Rev - Atenção", "Tópico-síntese", "Rev - Ementa", "Rev - Subementa", "Rev - IDs",
+                 "Rev - Mérito", "Rev - Honorários", "Rev - Nota de atenção", "Assinado", "Data da Assinatura",
+                 "Decisão - ID", "Publicado", "Relatório Padronizado", "Adequação Ementa", "Formatação Subementa",
+                 "Voto - Resultado", "Voto - Honorários", "Mídias Necessárias", "Voto - Descrição"],
+    "pauta": ["Status de Julgamento", "Sessão original", "Item (Pauta de Julgamento)", "Nova sessão de destino",
+              "JULGAMENTO", "Motivo da remarcação"],
+}
+
+
+def completar(r):
+    for sec, campos in CAMPOS.items():
+        atual = r[sec]
+        novo = {c: atual.get(c, "") for c in campos}
+        novo.update({k: v for k, v in atual.items() if k not in novo})   # extras e campos técnicos (_…) no fim
+        r[sec] = novo
 
 
 def integrar_sessoes(raiz, regs):
@@ -223,10 +256,13 @@ def organizar(raiz=Path(".")):
     oper["schema_versao"] = 2
     oper["registros"] = [secionar(r) for r in oper["registros"]]
     integrar_sessoes(raiz, oper["registros"])
+    for r in oper["registros"]:
+        completar(r)
     oper["secoes"] = {
         "origem": "aba Processo da Ficha: situação no acervo, sentença, recursos e contrarrazões, acompanhamento",
-        "triagem": SECOES["triagem"], "producao": SECOES["producao"],
-        "pauta": SECOES["pauta"] + ["sessoes: [{sessao, item, resultado}] · histórico de inclusões, retiradas e adiamentos"],
+        "triagem": CAMPOS["triagem"], "producao": CAMPOS["producao"],
+        "pauta": CAMPOS["pauta"] + ["sessoes: [{sessao, item, resultado}] · histórico de inclusões, retiradas e adiamentos"],
+        "campos_origem": CAMPOS["origem"],
     }
     oper.pop("colunas", None)
     po.write_text(json.dumps(oper, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
