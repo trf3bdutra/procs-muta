@@ -62,7 +62,9 @@ module.exports = async (req, res, u) => {
       if (!it.mono && !it.ctl.urgTipo && !novo && 'mono' in C) delete dados.registros[alvo];
       if (!mud.length) return res.status(200).json({ ok: true, item: it, semMudanca: true });
       it.ctl.editadoPor = u; it.ctl.editadoEm = agora; dados.atualizadoEm = agora;
-      try { await L.gravarJson(ARQ, dados, sha, 'Monocráticas e urgências (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return res.status(200).json({ ok: true, item: it }); }
+      /* o que a equipe registra vai também para a ficha do processo (acervo/operacional.json), no mesmo commit */
+      const Cf = Object.assign({}, C); if (!L.gestor(u)) GESTOR.forEach(k => delete Cf[k]);
+      try { await require('./_ficha').espelho({ path: ARQ, txt: JSON.stringify(dados, null, 1) + '\n', sha }, it.cnj, Cf, C.cartao, 'Monocráticas e urgências (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return res.status(200).json({ ok: true, item: it }); }
       catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     res.status(409).json({ erro: 'O arquivo mudou várias vezes seguidas; tente de novo.' });

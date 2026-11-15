@@ -1,0 +1,885 @@
+{
+ "schema": "gabcmt.padrao.ficha",
+ "versao": "1.0.0",
+ "origem": "padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py",
+ "descricao": "Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
+ "abas": [
+  {
+   "aba": "Processo",
+   "grupos": [
+    {
+     "grupo": "Sentença",
+     "campos": [
+      {
+       "rotulo": "Decisão",
+       "chave": "Sentença - Decisão",
+       "tipo": "lista",
+       "secao": "origem",
+       "opcoes": [
+        "Procedente",
+        "Parcialmente procedente",
+        "Improcedente",
+        "Extinção sem resolução do mérito",
+        "Homologatória",
+        "Outra"
+       ]
+      },
+      {
+       "rotulo": "ID da sentença",
+       "chave": "Sentença - ID",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Honorários",
+       "chave": "Sentença - Honorários",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Custas / gratuidade",
+       "chave": "Sentença - Custas",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Resultado",
+       "chave": "Sentença - Resultado",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Fundamento",
+       "chave": "Sentença - Fundamento",
+       "tipo": "texto-longo",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Providências",
+       "chave": "Sentença - Providências",
+       "tipo": "texto-longo",
+       "secao": "origem"
+      }
+     ]
+    },
+    {
+     "grupo": "Recursos e contrarrazões",
+     "campos": [
+      {
+       "rotulo": "Contrarrazões",
+       "chave": "Contrarrazões - Situação",
+       "tipo": "texto",
+       "secao": "origem",
+       "calculado": true,
+       "regra": "apresentadas/nao/omitir → rótulo"
+      }
+     ]
+    },
+    {
+     "grupo": "Registro no acervo",
+     "campos": [
+      {
+       "rotulo": "Baixado / arquivado",
+       "chave": "baixado",
+       "tipo": "texto",
+       "secao": "origem",
+       "calculado": true,
+       "regra": "tarefa do PJe de baixa definitiva/arquivo"
+      },
+      {
+       "rotulo": "Fora do acervo atual",
+       "chave": "fora_do_fonte",
+       "tipo": "texto",
+       "secao": "origem",
+       "calculado": true,
+       "regra": "tem histórico, mas saiu do fonte"
+      },
+      {
+       "rotulo": "Atualizado em",
+       "chave": "atualizado_em",
+       "tipo": "texto",
+       "secao": "origem",
+       "calculado": true
+      }
+     ]
+    },
+    {
+     "grupo": "Acompanhamento",
+     "campos": [
+      {
+       "rotulo": "Responsável pelo acompanhamento",
+       "chave": "Responsável",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Próxima ação",
+       "chave": "Próxima ação",
+       "tipo": "texto",
+       "secao": "origem"
+      },
+      {
+       "rotulo": "Observações gerais",
+       "chave": "Observações",
+       "tipo": "texto-longo",
+       "secao": "origem"
+      }
+     ]
+    },
+    {
+     "grupo": "Autuação",
+     "campos": [
+      {
+       "rotulo": "Classe",
+       "chave": "classe_judicial",
+       "tipo": "texto",
+       "fonte": [
+        "classe_judicial",
+        "Classe",
+        "DataJud",
+        "Classe"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Assunto CNJ",
+       "chave": "Assunto",
+       "tipo": "texto",
+       "fonte": [
+        "Assunto"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Seção competente",
+       "chave": "Seção",
+       "tipo": "texto",
+       "fonte": [
+        "Seção Competente"
+       ],
+       "editavel": false,
+       "regra": "regra secaoCompetente do app, senão Seção Competente"
+      },
+      {
+       "rotulo": "Distribuição",
+       "chave": "data_distribuição",
+       "tipo": "texto",
+       "fonte": [
+        "data_distribuição"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Relator",
+       "chave": "Relator",
+       "tipo": "texto",
+       "editavel": false
+      },
+      {
+       "rotulo": "Etiquetas do PJe",
+       "chave": "_etq",
+       "tipo": "texto",
+       "fonte": [
+        "Etiquetas Originais"
+       ],
+       "editavel": false
+      }
+     ]
+    },
+    {
+     "grupo": "Partes",
+     "campos": [
+      {
+       "rotulo": "Polo ativo",
+       "chave": "Polo Ativo",
+       "tipo": "texto",
+       "fonte": [
+        "polo_ativo"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Polo passivo",
+       "chave": "Polo Passivo",
+       "tipo": "texto",
+       "fonte": [
+        "polo_passivo"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Partes (texto da pauta)",
+       "chave": "Partes",
+       "tipo": "texto",
+       "editavel": false
+      }
+     ]
+    },
+    {
+     "grupo": "Tramitação",
+     "campos": [
+      {
+       "rotulo": "Tarefa atual",
+       "chave": "tarefa_atual",
+       "tipo": "texto",
+       "fonte": [
+        "tarefa_atual"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Situação na pauta",
+       "chave": "Situação da Pauta",
+       "tipo": "texto",
+       "editavel": false
+      },
+      {
+       "rotulo": "Sessão na planilha",
+       "chave": "Sessão atual (Excel)",
+       "tipo": "texto",
+       "editavel": false
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "aba": "Triagem",
+   "grupos": [
+    {
+     "grupo": "Urgência",
+     "campos": [
+      {
+       "rotulo": "Liminar / urgência",
+       "chave": "Urgência",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Pedido de liminar",
+        "Tutela de urgência",
+        "Efeito suspensivo",
+        "Prioridade legal",
+        "Outra urgência"
+       ],
+       "regra": "pílula vermelha nas Regras"
+      },
+      {
+       "rotulo": "Observação da urgência",
+       "chave": "Urgência - Observação",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Nível da urgência",
+       "chave": "Urgência - Nível",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Apreciação da urgência",
+       "chave": "Urgência - Apreciação",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Data da urgência",
+       "chave": "Urgência - Data",
+       "tipo": "data",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Admissibilidade e regularidade",
+     "campos": [
+      {
+       "rotulo": "Tempestividade",
+       "chave": "Tempestividade",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Não Verificado",
+        "Tempestivo",
+        "Intempestivo"
+       ]
+      },
+      {
+       "rotulo": "Preparo",
+       "chave": "Preparo",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Não Verificado",
+        "Comprovado",
+        "Não Recolhido",
+        "Dispensado",
+        "Não se Aplica"
+       ],
+       "regra": "AJG/DPU → Dispensado"
+      },
+      {
+       "rotulo": "DPU",
+       "chave": "DPU (controle)",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Representação",
+       "chave": "Representação",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Não Verificado",
+        "Regular",
+        "Negativo"
+       ]
+      },
+      {
+       "rotulo": "ID da procuração",
+       "chave": "ID da Procuração",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Observação do impedimento",
+       "chave": "Observação do Impedimento",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Regularidade",
+       "chave": "Regularidade",
+       "tipo": "texto",
+       "secao": "triagem",
+       "calculado": true,
+       "regra": "calculada pelo app a partir de tempestividade, preparo e representação"
+      },
+      {
+       "rotulo": "Regularidade · observação",
+       "chave": "Regularidade Manual",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Observação da representação",
+       "chave": "Observação da Representação",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Intimação / publicação",
+       "chave": "Tempest - Publicação",
+       "tipo": "data",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Protocolo do recurso",
+       "chave": "Tempest - Protocolo",
+       "tipo": "data",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Prazo legal (dias úteis)",
+       "chave": "Tempest - Prazo legal",
+       "tipo": "numero",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Prazo em dobro",
+       "chave": "Tempest - Dobro",
+       "tipo": "simnao",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Suspensões de prazo",
+       "chave": "Tempest - Suspensões",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "AJG",
+       "chave": "AJG",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Impedimento / suspeição",
+       "chave": "Impedimento / Suspeição",
+       "tipo": "texto",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Ministério Público",
+     "campos": [
+      {
+       "rotulo": "Parecer",
+       "chave": "MPF",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Não se Aplica",
+        "Com Parecer",
+        "Sem Parecer"
+       ]
+      },
+      {
+       "rotulo": "Custos legis",
+       "chave": "MPF - Custos Legis",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Sim",
+        "Não"
+       ]
+      },
+      {
+       "rotulo": "ID do parecer",
+       "chave": "ID do Parecer MPF",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Sentido do parecer",
+       "chave": "Parecer - Sentido",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Prosseguimento do feito",
+        "Provimento do recurso",
+        "Não provimento do recurso",
+        "Outro"
+       ]
+      },
+      {
+       "rotulo": "Fundamentos do parecer",
+       "chave": "MPF - Info adicional",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Observação do parecer",
+       "chave": "Observação MPF",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Matéria e gestão",
+     "campos": [
+      {
+       "rotulo": "Subassunto",
+       "chave": "Tema",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Complexidade",
+       "chave": "COMPLEXIDADE",
+       "tipo": "texto",
+       "secao": "triagem",
+       "calculado": true,
+       "regra": "lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ"
+      },
+      {
+       "rotulo": "Tipo de voto",
+       "chave": "Tipo de Voto",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Preliminares",
+       "chave": "Prelim.",
+       "tipo": "simnao",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Descrição da preliminar",
+       "chave": "Descrição da Preliminar",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Meta",
+       "chave": "META",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Seleção prévia",
+       "chave": "Seleção Prévia",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Mídias",
+       "chave": "Mídias",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Não se Aplica",
+        "Juntada",
+        "Faltante"
+       ]
+      },
+      {
+       "rotulo": "Etiquetas do gabinete",
+       "chave": "Etiquetas",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Alegações",
+       "chave": "Alegações",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "O que falta sanar",
+       "chave": "O que falta sanar",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Intercorrências",
+       "chave": "Intercorrências",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Tipo de julgamento",
+       "chave": "Tipo de Julgamento",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Hipóteses de monocrática",
+       "chave": "Hipóteses Monocrática",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Síntese processual",
+       "chave": "Síntese Processual",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Especificidades",
+       "chave": "Especificidades",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "aba": "Produção",
+   "grupos": [
+    {
+     "grupo": "Designação e minuta",
+     "campos": [
+      {
+       "rotulo": "Servidor",
+       "chave": "SERVIDOR",
+       "tipo": "texto",
+       "secao": "producao",
+       "regra": "também de sessoes/*.json"
+      },
+      {
+       "rotulo": "Minutado em",
+       "chave": "MINUTADO",
+       "tipo": "data",
+       "secao": "producao",
+       "regra": "também de sessoes/*.json (dataMinuta)"
+      },
+      {
+       "rotulo": "Minuta refinada",
+       "chave": "Refinado",
+       "tipo": "simnao",
+       "secao": "producao"
+      }
+     ]
+    },
+    {
+     "grupo": "Revisão",
+     "campos": [
+      {
+       "rotulo": "Corretor",
+       "chave": "CORRETOR",
+       "tipo": "texto",
+       "secao": "producao",
+       "regra": "também de sessoes/*.json"
+      },
+      {
+       "rotulo": "Corrigido",
+       "chave": "CORRIGIDO",
+       "tipo": "simnao",
+       "secao": "producao",
+       "regra": "Sim quando a sessão traz dataCorrecao"
+      },
+      {
+       "rotulo": "Data da revisão",
+       "chave": "Data da Revisão",
+       "tipo": "data",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Atenção na revisão",
+       "chave": "Rev - Atenção",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Ementa",
+       "chave": "Rev - Ementa",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Subementa",
+       "chave": "Rev - Subementa",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Mérito",
+       "chave": "Rev - Mérito",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Honorários",
+       "chave": "Rev - Honorários",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Revisão · IDs",
+       "chave": "Rev - IDs",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Nota de atenção",
+       "chave": "Rev - Nota de atenção",
+       "tipo": "texto-longo",
+       "secao": "producao"
+      }
+     ]
+    },
+    {
+     "grupo": "Relatório e voto",
+     "campos": [
+      {
+       "rotulo": "Relatório padronizado",
+       "chave": "Relatório Padronizado",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Adequação da ementa",
+       "chave": "Adequação Ementa",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Formatação da subementa",
+       "chave": "Formatação Subementa",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Resultado do voto",
+       "chave": "Voto - Resultado",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Honorários no voto",
+       "chave": "Voto - Honorários",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Tópico-síntese",
+       "chave": "Tópico-síntese",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Mídias necessárias",
+       "chave": "Mídias Necessárias",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Descrição do voto",
+       "chave": "Voto - Descrição",
+       "tipo": "texto-longo",
+       "secao": "producao"
+      }
+     ],
+     "destino": "sessao"
+    },
+    {
+     "grupo": "Liberação para a sessão",
+     "campos": [
+      {
+       "rotulo": "Liberado",
+       "chave": "LIBERADO",
+       "tipo": "simnao",
+       "secao": "producao",
+       "regra": "Sim quando a sessão traz dataLiberacao"
+      },
+      {
+       "rotulo": "Data da liberação",
+       "chave": "Data da Liberação",
+       "tipo": "data",
+       "secao": "producao"
+      }
+     ],
+     "destino": "sessao"
+    },
+    {
+     "grupo": "Decisão monocrática",
+     "campos": [
+      {
+       "rotulo": "Resultado da decisão",
+       "chave": "Voto - Resultado",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Honorários na decisão",
+       "chave": "Voto - Honorários",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Fundamentos da decisão",
+       "chave": "Voto - Descrição",
+       "tipo": "texto-longo",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Assinado",
+       "chave": "Assinado",
+       "tipo": "simnao",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Assinado em",
+       "chave": "Data da Assinatura",
+       "tipo": "data",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "ID da decisão",
+       "chave": "Decisão - ID",
+       "tipo": "texto",
+       "secao": "producao"
+      },
+      {
+       "rotulo": "Publicada",
+       "chave": "Publicado",
+       "tipo": "simnao",
+       "secao": "producao"
+      }
+     ],
+     "destino": "monocratica"
+    }
+   ],
+   "seletor": {
+    "secao": "producao",
+    "chave": "Destino",
+    "rotulo": "Destino do julgamento",
+    "opcoes": [
+     {
+      "valor": "",
+      "rotulo": "Sessão (colegiado)"
+     },
+     {
+      "valor": "Monocrática",
+      "rotulo": "Decisão monocrática"
+     }
+    ],
+    "regra": "vazio = sessão: Pautado, Minutado, Corrigido, Liberado, Sessão; Monocrática: Minutado, Corrigido, Assinado, Publicado"
+   }
+  },
+  {
+   "aba": "Pauta",
+   "grupos": [
+    {
+     "grupo": "Pauta e julgamento",
+     "campos": [
+      {
+       "rotulo": "Status de julgamento",
+       "chave": "Status de Julgamento",
+       "tipo": "lista",
+       "secao": "pauta",
+       "opcoes": [
+        "PAUTADO",
+        "EM MESA",
+        "ADIADO",
+        "RETIRADO DE PAUTA"
+       ],
+       "regra": "status da entrada de pauta (_pautaEntries) ou campo"
+      },
+      {
+       "rotulo": "Pendente de 1º julgamento",
+       "chave": "Pendente de 1º julgamento",
+       "tipo": "texto",
+       "fonte": [
+        "Pendente_1Julgamento"
+       ],
+       "editavel": false,
+       "regra": "do BI (Pendente_1Julgamento)"
+      },
+      {
+       "rotulo": "Sessão original",
+       "chave": "Sessão original",
+       "tipo": "texto",
+       "secao": "pauta",
+       "calculado": true,
+       "regra": "data dd/mm/aaaa"
+      },
+      {
+       "rotulo": "Item",
+       "chave": "Item (Pauta de Julgamento)",
+       "tipo": "texto",
+       "secao": "pauta",
+       "calculado": true,
+       "regra": "item da entrada de pauta da sessão selecionada"
+      },
+      {
+       "rotulo": "Sessão de destino",
+       "chave": "Nova sessão de destino",
+       "tipo": "texto",
+       "secao": "pauta",
+       "calculado": true,
+       "regra": "antes \"Sessão Destino\""
+      },
+      {
+       "rotulo": "Situação na seleção",
+       "chave": "JULGAMENTO",
+       "tipo": "texto",
+       "secao": "pauta",
+       "calculado": true,
+       "regra": "situação da seleção prévia"
+      },
+      {
+       "rotulo": "Motivo da remarcação",
+       "chave": "Motivo da remarcação",
+       "tipo": "texto",
+       "secao": "pauta"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
