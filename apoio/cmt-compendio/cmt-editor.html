@@ -3603,7 +3603,7 @@ document.addEventListener('keydown',function(e){var m=$('#ed-vm');
   }
   function carregarCal(){
     if(CQ.cal)return Promise.resolve();
-    return jget('/api/sessoes').then(function(c){CQ.cal=(c.sessoes||[]).slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});})
+    return jget('/api/sessoes').then(function(c){CQ.cal=(c.sessoes||[]).filter(function(s){return s.pauta!==false;}).sort(function(a,b){return String(b.date).localeCompare(String(a.date));});})
       .catch(function(er){CQ.cal=[];CQ.erro=er.login?er.message:'As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Compêndio dos cartões continua enviando o caso.';});
   }
   function consultar(){
