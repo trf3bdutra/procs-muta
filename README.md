@@ -40,7 +40,7 @@ apoio/                         recursos de apoio à redação
   enciclopedia.json            Enciclopédia do modo avançado (servida só pelo /api/compendio, após o login): recursos, guias, rotina, PJe, competência, matérias, léxico
   usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)
   pauta-equipe/                Pauta da equipe (/equipe/ na Vercel): login de cada servidor e cartões da pauta; api/ grava em acervo/sessoes com o GH_TOKEN da Vercel
-  cmt-compendio/               CMT Compêndio: cmt-compendio.html (um só código: modo padrão para todos; modo avançado, com Enunciados, Repertório, Enciclopédia e atalho para o Monitor, liberado pelo login a quem está em apoio/acessos.json) e cmt-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
+  cmt-compendio/               CMT Compêndio: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos, Diretrizes) e Consulta, na mesma pill da Pauta da equipe; cmt-compendio.html (um só código: modo padrão para todos; modo avançado, com Enunciados, Repertório, Enciclopédia e atalho para o Monitor, liberado pelo login a quem está em apoio/acessos.json) e cmt-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
 
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo

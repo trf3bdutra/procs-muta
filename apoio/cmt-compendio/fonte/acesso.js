@@ -14,7 +14,7 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-av]'),function(el){el.hidden=!av;var w=el.parentElement;if(w&&w.classList.contains('tabw'))w.hidden=!av;});
     var cur=q('.tab[aria-selected="true"]');if(!av&&cur&&cur.hasAttribute('data-av')){var b=q('.tab[data-v="ement"]');if(b)b.click();}
     var ed0=!!window.VDM_EDITOR;window.VDM_EDITOR=!!AC.editor||!!window.VDM_PAGINA_EDITOR;
-    if(ed0!==window.VDM_EDITOR){try{var v=function(id){var x=q(id);return x&&!x.hidden;};if(v('#v-edit')&&typeof xRender==='function')xRender();if(v('#v-ement')&&typeof EM!=='undefined'){if(EM.sub==='mod'&&typeof mRender==='function')mRender();else if(EM.sub==='par'&&typeof pRender==='function')pRender();}}catch(x){}}
+    if(ed0!==window.VDM_EDITOR){try{var v=function(id){var x=q(id);return x&&!x.hidden;};if(v('#v-edit')&&typeof xRender==='function')xRender();}catch(x){}}
     if(av&&!AC.enc){AC.enc=1;api('/api/compendio').then(function(j){if(window.VDM_encDados)window.VDM_encDados(j.enciclopedia);}).catch(function(x){AC.enc=0;if(window.VDM_encDados)window.VDM_encDados(null,x.message);});}
     chip();if(window.VDM_marcaNav)window.VDM_marcaNav();}
   function chip(){var c=q('#ac-chip');if(!c)return;
