@@ -1,5 +1,5 @@
 /* POST /api/editor → grava no procs-muta as alterações feitas no editor do CMT Compêndio (só para quem tem acesso de editor).
-   Corpo: { msg, colecoes: { mod|par|pec|dir|nor: [ { op: 'set'|'del', id, rec, orig, idx } ] } }
+   Corpo: { msg, colecoes: { mod|par|pec|dir|nor|rap: [ { op: 'set'|'del', id, rec, orig, idx } ] } }
    orig é o registro como o editor o recebeu (JSON) ou '__novo__'; se o registro mudou no GitHub depois disso, a gravação é recusada. */
 const L = require('./_lib');
 const ARQ = {
@@ -7,6 +7,7 @@ const ARQ = {
   par: { path: 'modelos/paragrafos.json', lista: d => d.registros, ind: 1 },
   dir: { path: 'apoio/diretrizes.json', lista: d => d.registros, ind: 1 },
   nor: { path: 'apoio/repertorio-normativo-complemento.json', lista: d => d.registros, ind: 1 },
+  rap: { path: 'apoio/diretrizes-rapidas.json', lista: d => d.registros, ind: 1 },
   pec: { path: 'apoio/cmt-compendio/fonte/editorial_pecas.json', lista: d => d.pecas, ind: 2, sem: true }
 };
 /* mesma serialização do editor (edJ): ignora chaves de cache iniciadas por _, salvo _topicos e _estrutura */
