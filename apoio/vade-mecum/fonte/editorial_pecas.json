@@ -86,7 +86,7 @@
         },
         {
           "n": "Razões",
-          "f": "Apelou o autor/a autora (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "Apelou [o autor / a autora] (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -396,7 +396,7 @@
       "elementos": [
         {
           "n": "Cabeçalho",
-          "f": "RAMO. CLASSE. ASSUNTO. CONCLUSÃO.",
+          "f": "[RAMO]. [CLASSE]. [ASSUNTO]. [CONCLUSÃO].",
           "r": [
             "Negrito e caixa alta.",
             "Ordem: ramo → classe → assunto → conclusão, em até 3 linhas."
@@ -427,8 +427,10 @@
         },
         {
           "n": "IV. DISPOSITIVO",
-          "f": "",
-          "r": [],
+          "f": "[dispositivo da ementa]",
+          "r": [
+            "Preenchido a partir do dispositivo do voto; confira a redação."
+          ],
           "fo": "M"
         },
         {
@@ -463,11 +465,16 @@
       "elementos": [
         {
           "n": "Fórmula",
-          "f": "Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, [resultado], nos termos do voto do Desembargador Federal CARLOS MUTA (Relator). Votaram o Desembargador Federal JEAN MARCOS e o Juiz Federal Convocado NEY DE ANDRADE, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.",
+          "f": "Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, [resultado], nos termos do voto do Desembargador Federal CARLOS MUTA (Relator). Votaram o [2º julgador] e o [3º julgador], nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.",
           "r": [
-            "O resultado repete o dispositivo do voto."
+            "O resultado repete o dispositivo do voto.",
+            "O resultado vem do dispositivo do voto; os julgadores vêm preenchidos e podem ser trocados."
           ],
-          "fo": "M"
+          "fo": "M",
+          "padroes": {
+            "2º julgador": "Desembargador Federal JEAN MARCOS",
+            "3º julgador": "Juiz Federal Convocado NEY DE ANDRADE"
+          }
         }
       ],
       "notas": [],
@@ -770,7 +777,7 @@
         },
         {
           "n": "Razões",
-          "f": "Apelou o autor/a autora (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "Apelou [o autor / a autora] (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -975,7 +982,7 @@
         },
         {
           "n": "Razões",
-          "f": "Apelou o autor/a autora (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "Apelou [o autor / a autora] (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
