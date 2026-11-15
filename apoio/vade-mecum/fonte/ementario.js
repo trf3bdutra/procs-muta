@@ -776,55 +776,82 @@ function mostraRoteiro(){
   var ro=roteiroDe(MS.ass);if(!ro)return false;
   var box=painel(rotHtml(ro,MS.ass),true);var x=box.querySelector('[data-dx]');if(x)x.onclick=function(){fecharIT();};return true;
 }
+/* ---- Modelos no padrão do Editorial: lista e filtros à esquerda, folha ao centro, ficha à direita ---- */
+MS.sel=null;MS.alt={};MS.abre={};MS.blk=null;
+function mFm(t){return refs(t).replace(/\{\{([^}]*)\}\}/g,'<mark class="v">{{$1}}</mark>').replace(/\[PREENCHER:([^\]]*)\]/g,'<mark class="v">[PREENCHER:$1]</mark>').replace(/\[VALIDAR([^\]]*)\]/g,'<mark class="v">[VALIDAR$1]</mark>');}
+function mParas(f){var L=String(f||'').split('\n').filter(function(x){return x.trim();});return L.map(function(l){return '<p class="'+(/^\s*“/.test(l)?'cit':'std')+'">'+mFm(l.trim())+'</p>';}).join('');}
+/* trechos do modelo: cada tópico vira um trecho; versões e parágrafos alternativos vão para o seletor */
+function mTrechos(m){
+  return mSecoes(m).map(function(s){
+    var base=s.bl.filter(function(b){return b.tit==null;}),pars=s.bl.filter(function(b){return b.tit!=null;}),alts=[];
+    if(pars.length){pars.forEach(function(p,i){alts.push({lab:(p.tit||('Versão '+(p.ver!=null?p.ver:i+1))).replace(/\s*\(\d+%\)\s*$/,function(z){return z;}),f:p.txt,op:p.op});});}
+    else base.forEach(function(b,i){alts.push({lab:base.length>1?'Forma '+(i+1):'',f:b.txt});});
+    var opc=!!s.t.opcional||(base.length&&!pars.length&&base.every(function(b){return b.ativo===false;}));
+    return {k:m.id+'|'+s.t.id,n:s.t.titulo||s.t.id,g:s.t.grupo||'',opc:opc,alts:alts};
+  });
+}
+function mLista(L){
+  var g={},ord=[];L.forEach(function(m){var k=mAss(m);if(!g[k]){g[k]=[];ord.push(k);}g[k].push(m);});
+  return ord.map(function(k){return '<div class="mgk">'+esc(k)+' <small>'+g[k].length+'</small></div>'+g[k].map(function(m){var ap=mApr(m);return '<button class="mli" data-msel="'+esc(m.id)+'" aria-pressed="'+(MS.sel===m.id)+'"><span class="t">'+esc(m.nomeModelo||m.id)+'</span><span class="s">'+esc(mCls(m))+(ap&&ap!=='Julgamento do recurso'&&ap!=='Providência (despacho)'?' · '+esc(ap):'')+(m.resultado?' · '+esc(String(m.resultado).slice(0,40)):'')+'</span></button>';}).join('');}).join('');
+}
 function mRender(){
   var M=(BASE&&BASE.mod)||[],q=nz(EM.q.mod||'');
   var passa=function(m,ex){if(ex!=='tipo'&&MS.tipo&&mTipo(m)!==MS.tipo)return false;if(ex!=='ass'&&MS.ass&&mAss(m)!==MS.ass)return false;if(ex!=='apr'&&MS.apr&&mApr(m)!==MS.apr)return false;if(ex!=='cls'&&MS.cls&&mCls(m)!==MS.cls)return false;
     if(q){if(!m._q)m._q=nz([m.nomeModelo,m.assunto,m.temas,m.tese,m.resultado,m.fundamentacao,m.classe,m.pronunciamento,mTextoBase(m)].join(' '));if(m._q.indexOf(q)<0)return false;}return true;};
   function cnt(ex,fn){var c={};M.filter(function(m){return passa(m,ex);}).forEach(function(m){var k=fn(m);c[k]=(c[k]||0)+1;});return Object.keys(c).map(function(k){return [k,c[k]];}).sort(function(a,b){return b[1]-a[1]||a[0].localeCompare(b[0]);});}
-  var ct=cnt('tipo',mTipo),tot=ct.reduce(function(a,z){return a+z[1];},0),ctm={};ct.forEach(function(z){ctm[z[0]]=z[1];});
-  var a='<div class="lab">Tipo</div><div class="seg" id="m-tipo">'+[['Acórdão','Acórdão',ctm['Acórdão']||0],['Monocrática','Monocrática',ctm['Monocrática']||0],['Despacho','Despacho',ctm['Despacho']||0]].map(function(z){return '<button data-v="'+z[0]+'" aria-pressed="'+(MS.tipo===z[0])+'" title="'+z[2]+' modelos">'+z[1]+'</button>';}).join('')+'</div>';
-  function lista(dim,lab,c,n){var ab=MS.mais[dim],h='<div class="lab">'+lab+'</div><div class="glist"><button data-mf="'+dim+'" data-v="" aria-pressed="'+(!MS[dim])+'"><span>Todos</span><small>'+c.reduce(function(a,z){return a+z[1];},0)+'</small></button>'+c.slice(0,ab?c.length:n).map(function(z){return '<button data-mf="'+dim+'" data-v="'+esc(z[0])+'" aria-pressed="'+(MS[dim]===z[0])+'"><span>'+esc(z[0])+'</span><small>'+z[1]+'</small></button>';}).join('')+'</div>';if(c.length>n)h+='<button class="e-gmore" data-mm="'+dim+'">'+(ab?'Mostrar menos':'Mostrar todos ('+c.length+')')+'</button>';return h;}
-  a+=lista('apr','Apreciação',cnt('apr',mApr),6)+lista('ass','Assunto',cnt('ass',mAss),12)+lista('cls','Classe',cnt('cls',mCls),8);
-  a+='<div class="note">Base de modelos do gabinete (procs-muta · modelos/modelos.json): votos-matriz para acórdão, decisões monocráticas e despachos. Os trechos entre {{ }} são preenchidos com os dados dos autos.</div>';
-  $('#e-aside').innerHTML=a;
-  $$('#m-tipo button').forEach(function(b){b.onclick=function(){MS.tipo=b.getAttribute('data-v');MS.ass='';MS.cls='';MS.apr='';MLIM=40;mRender();};});
-  $$('#e-aside [data-mf]').forEach(function(b){b.onclick=function(){var d=b.getAttribute('data-mf'),v=b.getAttribute('data-v');MS[d]=MS[d]===v?'':v;MLIM=40;mRender();};});
-  $$('#e-aside [data-mm]').forEach(function(b){b.onclick=function(){var d=b.getAttribute('data-mm');MS.mais[d]=!MS.mais[d];mRender();};});
-  var L=M.filter(function(m){return passa(m);}).sort(function(x,y){return mTipo(x).localeCompare(mTipo(y))||mAss(x).localeCompare(mAss(y))||String(x.nomeModelo).localeCompare(String(y.nomeModelo));});
+  var ct=cnt('tipo',mTipo),ctm={};ct.forEach(function(z){ctm[z[0]]=z[1];});
+  function sel(dim,lab,c){return '<label class="msel"><span>'+lab+'</span><select data-mf="'+dim+'"><option value="">Todos ('+c.reduce(function(a,z){return a+z[1];},0)+')</option>'+c.map(function(z){return '<option value="'+esc(z[0])+'"'+(MS[dim]===z[0]?' selected':'')+'>'+esc(z[0])+' ('+z[1]+')</option>';}).join('')+'</select></label>';}
+  var L=M.filter(function(m){return passa(m);}).sort(function(x,y){return mAss(x).localeCompare(mAss(y))||String(x.nomeModelo).localeCompare(String(y.nomeModelo));});
+  if(!L.some(function(m){return m.id===MS.sel;}))MS.sel=L.length?L[0].id:null;
+  var a='<div class="lab" style="margin-top:0">Tipo</div><div class="seg" id="m-tipo">'+['Acórdão','Monocrática','Despacho'].map(function(t){return '<button data-v="'+t+'" aria-pressed="'+(MS.tipo===t)+'" title="'+(ctm[t]||0)+' modelos">'+t+'</button>';}).join('')+'</div>';
+  a+='<div class="mfil">'+sel('apr','Apreciação',cnt('apr',mApr))+sel('ass','Assunto',cnt('ass',mAss))+sel('cls','Classe',cnt('cls',mCls))+'</div>';
+  a+='<div class="lab">Modelos <small>'+L.length+'</small></div><div class="mlist">'+(L.length?mLista(L):'<p class="meta">Nenhum modelo com esses filtros.</p>')+'</div>';
+  var as=$('#e-aside'),st=as.querySelector('.mlist')?as.querySelector('.mlist').scrollTop:0;as.innerHTML=a;var ml=as.querySelector('.mlist');if(ml)ml.scrollTop=st;
   $('#e-cnt').innerHTML='<b>'+n0(L.length)+'</b> de '+n0(M.length)+' modelos';
-  var cor={'Acórdão':'var(--stj)','Monocrática':'var(--trf)','Despacho':'var(--mut)'};
-  var h=L.slice(0,MLIM).map(function(m){var tp=mTipo(m),st=m.statusCuradoria,ap=mApr(m);
-    return '<li class="e-proc m-row" data-mid="'+esc(m.id)+'"><div class="e-crow m-crow" data-mact="ver"><div class="e-c0"><span class="e-tag '+(tp==='Acórdão'?'A':tp==='Monocrática'?'M':'')+'">'+esc(tp)+'</span></div><div class="e-c2"><span class="e-ass" title="'+esc(m.nomeModelo||'')+'">'+esc(m.nomeModelo||m.processo||m.id)+'</span><div class="e-ctags">'+(ap!=='Julgamento do recurso'&&ap!=='Providência (despacho)'?'<span class="e-ct apr">'+esc(ap)+'</span>':'')+'<span class="e-ct org">'+esc(mCls(m))+'</span><span class="e-ct">'+esc(mAss(m))+'</span>'+(m.resultado?'<span class="e-ct dash" title="'+esc(m.resultado)+'">'+esc(String(m.resultado).slice(0,60))+'</span>':'')+(st?'<span class="e-ct apr">'+esc(st)+'</span>':'')+'</div></div><div class="e-c3"><button class="e-ib" data-mact="cp" title="Copiar texto-base" aria-label="Copiar texto-base">'+ICO.cit+'</button><button class="e-ib" data-mact="ver" title="Ver modelo" aria-label="Ver modelo">'+ICO.doc+'</button></div></div></li>';}).join('');
-  if(L.length>MLIM)h+='<div class="e-more"><button class="btn" id="m-mais">Mostrar mais ('+(L.length-MLIM)+')</button></div>';
-  if(MS.modo==='tabela'){h='<table class="n-tbl m-tbl"><thead><tr><th>Modelo</th><th>Apreciação</th><th>Classe</th><th>Assunto</th><th>Temas</th><th>Resultado</th><th>Situação</th></tr></thead><tbody>'+L.map(function(m){return '<tr data-mid="'+esc(m.id)+'" data-mact="ver"><th>'+esc(m.nomeModelo||m.id)+'</th><td>'+esc(mApr(m))+'</td><td>'+esc(mCls(m))+'</td><td>'+esc(mAss(m))+'</td><td>'+refs(m.temas||'')+'</td><td>'+esc(m.resultado||'')+'</td><td>'+esc(m.statusCuradoria||'')+'</td></tr>';}).join('')+'</tbody></table>';}
-  var mseg='<div class="n-bar"><div class="seg n-seg" role="group" aria-label="Modo de exibição">'+[['lista','Lista'],['tabela','Tabela']].map(function(z){return '<button data-mmodo="'+z[0]+'" aria-pressed="'+(MS.modo===z[0])+'">'+z[1]+'</button>';}).join('')+'</div></div>';
-  var ro=roteiroDe(MS.ass);
-  $('#e-out').innerHTML=mseg+(L.length?'<div class="e-split'+(ro?' rot':'')+'"><div class="e-lcol">'+(MS.modo==='tabela'?h:'<ul class="e-res">'+h+'</ul>')+'</div>'+(ro?'<aside class="e-rot" aria-label="Roteiro e diretrizes da matéria">'+rotCol(ro)+'</aside>':'<section class="e-det" id="e-det" hidden></section>')+'</div>':'<p class="empty">Nenhum modelo com esses filtros.</p>');
-  var mb=$('#m-mais');if(mb)mb.onclick=function(){MLIM+=80;mRender();};
-  $$('#e-out [data-mmodo]').forEach(function(b){b.onclick=function(){MS.modo=b.getAttribute('data-mmodo');mRender();};});
+  var m=M.filter(function(z){return z.id===MS.sel;})[0];
+  if(!m){$('#e-out').innerHTML='<p class="empty">Nenhum modelo com esses filtros.</p>';return;}
+  mFolha(m);
 }
-function mAbrir(m){
-  var F=[['Pronunciamento',m.pronunciamento],['Apreciação',mApr(m)],['Classe',m.classe||m.classeSigla],['Assunto',m.assunto],['Temas',m.temas],['Causa de pedir',m.causaPedir],['Resultado',m.resultado],['Preliminares',m.preliminares],['Honorários',m.honorarios],['Processos associados',m.processosAssociados]].filter(function(z){return z[1];});
-  var h='<div class="e-dhead"><div class="e-dtit"><span class="e-tag A">'+esc(mTipo(m))+'</span><span class="e-dname">'+esc(m.nomeModelo||m.id)+'</span><button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
-  h+='<div class="e-dmeta">'+F.slice(0,6).map(function(z){return '<div><span>'+z[0]+'</span>'+(z[0]==='Temas'?refs(z[1]):esc(z[1]))+'</div>';}).join('')+'</div><div class="e-dacts"><button class="e-mini pri" data-mcp>Copiar texto-base</button>'+(roteiroDe(m.assunto)&&!$('.e-rot')?'<button class="e-mini" data-mrot>Roteiro da matéria</button>':'')+'</div></div><div class="e-dbody">';
-  if(m.tese)h+='<h3 class="e-sec">Tese</h3><div class="e-box">'+refs(m.tese)+'</div>';
-  F.slice(6).forEach(function(z){h+='<h3 class="e-sec">'+z[0]+'</h3><div class="e-box">'+refs(z[1])+'</div>';});
-  if(m.especificidades)h+='<h3 class="e-sec">Especificidades</h3><div class="e-box">'+refs(m.especificidades)+'</div>';
-  if(m.fundamentacao)h+='<h3 class="e-sec">Fundamentação resumida</h3><div class="e-box">'+refs(m.fundamentacao)+'</div>';
-  var mc=citados([m.temas,m.tese,m.fundamentacao,mTextoBase(m)].join('\n'));if(mc.enun.length||mc.norm.length)h+='<h3 class="e-sec">O modelo cita</h3><div class="e-chipl">'+mc.enun.concat(mc.norm).map(function(t){return '<span>'+refs(t)+'</span>';}).join('')+'</div>';
-  h+='<h3 class="e-sec">Estrutura do modelo</h3><div class="x-doc">';
-  mSecoes(m).forEach(function(s){var t=s.t;
-    h+='<div class="x-el"><h4>'+esc(t.titulo||t.id)+(t.grupo?' <span class="x-fo">'+esc(t.grupo)+'</span>':'')+(t.opcional?' <span class="pill">opcional</span>':'')+'</h4>';
-    if(!s.bl.length)h+='<p class="meta">Tópico de redação livre.</p>';
-    s.bl.forEach(function(x){h+=(x.tit!=null?'<p class="meta" style="margin:6px 0 0"><b>'+esc((x.ver!=null?'Versão '+x.ver+' · ':'')+(x.tit||''))+'</b>'+(x.op?' · opcional':'')+'</p>':'')+'<div class="x-f serif'+(x.ativo===false?' off':'')+'">'+marcarR(x.txt)+'</div>';});
-    h+='</div>';});
-  h+='</div>'+(m.fonte?'<h3 class="e-sec">Origem</h3><p class="meta">'+esc(m.fonte)+' · '+esc(m.id)+'</p>':'')+'</div>';
-  var box=painel(h,true);
-  box.querySelector('[data-dx]').onclick=function(){fecharIT();};
-  box.querySelector('[data-mcp]').onclick=function(){copiar(mTextoBase(m),'Texto-base do modelo copiado');};
-  var br=box.querySelector('[data-mrot]');if(br)br.onclick=function(){var ro=roteiroDe(m.assunto),b2=painel(rotHtml(ro,m.assunto),true);b2.querySelector('[data-dx]').onclick=function(){fecharIT();};};
-  $$('#e-out [data-mid]').forEach(function(c){c.classList.toggle('sel',c.getAttribute('data-mid')===m.id);});
+function mFolha(m){
+  var T=mTrechos(m),tp=mTipo(m),h='',lastG=null;
+  if(tp==='Acórdão')h+='<div class="xpj">VOTO <small>(inserido pelo PJe)</small></div>';
+  T.forEach(function(t){
+    if(t.g&&t.g!==lastG){h+='<div class="mgrp">'+esc(t.g)+'</div>';lastG=t.g;}
+    if(t.opc&&!MS.abre[t.k]){h+='<button class="xopc" data-mabre="'+esc(t.k)+'">+ '+esc(t.n)+' <small>· opcional</small></button>';return;}
+    var ai=Math.min(MS.alt[t.k]||0,Math.max(0,t.alts.length-1)),a=t.alts[ai]||{f:''};
+    h+='<div class="xblk'+(MS.blk===t.k?' on':'')+'" data-mk="'+esc(t.k)+'"><span class="xtg">'+esc(t.n)+(t.opc?'<br><span class="xop" data-mfecha="'+esc(t.k)+'">recolher</span>':'')+'</span>'+
+      (t.alts.length>1?'<div class="xalt">'+t.alts.map(function(x,i){return '<button data-malt="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===ai)+'" title="'+esc(x.lab)+'">'+esc(x.lab.length>34?x.lab.slice(0,33)+'…':x.lab)+'</button>';}).join('')+'</div>':'')+
+      (a.f?mParas(a.f):'<p class="xph std">['+esc(t.n)+': redação livre]</p>')+'</div>';});
+  /* ficha à direita */
+  var F=[['Pronunciamento',m.pronunciamento],['Apreciação',mApr(m)],['Classe',m.classe||m.classeSigla],['Assunto',m.assunto],['Temas',m.temas],['Resultado',m.resultado],['Causa de pedir',m.causaPedir],['Preliminares',m.preliminares],['Honorários',m.honorarios],['Processos associados',m.processosAssociados],['Situação',m.statusCuradoria]].filter(function(z){return z[1];});
+  var mc=citados([m.temas,m.tese,m.fundamentacao,mTextoBase(m)].join('\n')),ro=roteiroDe(m.assunto);
+  var r='<div class="mfh"><span class="e-tag '+(tp==='Acórdão'?'A':tp==='Monocrática'?'M':'')+'">'+esc(tp)+'</span><h3>'+esc(m.nomeModelo||m.id)+'</h3><div class="e-dacts"><button class="e-mini pri" data-mcpb>Copiar texto</button><button class="e-mini" data-mcpe>Copiar esqueleto</button></div></div><div class="mfb">';
+  r+='<div class="pp-pg">'+F.map(function(z){return '<div><span>'+esc(z[0])+'</span>'+(z[0]==='Temas'?refs(z[1]):esc(z[1]))+'</div>';}).join('')+'</div>';
+  if(m.tese)r+='<div class="xrg">Tese</div><div class="xri">'+refs(m.tese)+'</div>';
+  if(m.especificidades)r+='<div class="xrg">Especificidades</div><div class="xri">'+refs(m.especificidades)+'</div>';
+  if(m.fundamentacao)r+='<div class="xrg">Fundamentação resumida</div><div class="xri">'+refs(m.fundamentacao)+'</div>';
+  if(mc.enun.length||mc.norm.length)r+='<div class="xrg">O modelo cita</div><div class="e-chipl pp-cita">'+mc.enun.map(function(t){return '<span class="en">'+refs(t)+'</span>';}).join('')+mc.norm.map(function(t){return '<span class="no">'+refs(t)+'</span>';}).join('')+'</div>';
+  if(ro)r+='<div class="xrg">Roteiro da matéria</div><div class="mrot">'+rotCol(ro)+'</div>';
+  if(m.fonte)r+='<p class="meta" style="margin-top:14px;font-size:11.5px">Origem: '+esc(m.fonte)+' · '+esc(m.id)+'</p>';
+  r+='</div>';
+  $('#e-out').innerHTML='<div class="mpag"><div class="mcen"><div class="xsheet">'+h+'</div></div><aside class="mfic" aria-label="Ficha do modelo">'+r+'</aside></div>';
+  MS._T=T;MS._m=m;
 }
+function mTexto(sk){var T=MS._T||[];return T.filter(function(t){return !t.opc||MS.abre[t.k];}).map(function(t){var a=t.alts[Math.min(MS.alt[t.k]||0,Math.max(0,t.alts.length-1))];return sk?'['+t.n+']':(a&&a.f?a.f:'['+t.n+']');}).join('\n\n');}
+$('#e-aside').addEventListener('change',function(e){var s=e.target.closest('[data-mf]');if(!s||EM.sub!=='mod')return;MS[s.getAttribute('data-mf')]=s.value;MS.alt={};MS.abre={};mRender();});
+$('#e-aside').addEventListener('click',function(e){if(EM.sub!=='mod')return;var b;
+  if((b=e.target.closest('#m-tipo button'))){MS.tipo=b.getAttribute('data-v');MS.ass='';MS.cls='';MS.apr='';MS.sel=null;mRender();return;}
+  if((b=e.target.closest('[data-msel]'))){MS.sel=b.getAttribute('data-msel');MS.blk=null;$$('#e-aside [data-msel]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});var m=((BASE&&BASE.mod)||[]).filter(function(z){return z.id===MS.sel;})[0];if(m)mFolha(m);window.scrollTo(0,0);}
+});
+$('#e-out').addEventListener('click',function(e){if(EM.sub!=='mod')return;var b;
+  if(e.target.closest('.ref'))return;
+  if((b=e.target.closest('[data-malt]'))){MS.alt[b.getAttribute('data-malt')]=+b.getAttribute('data-i');MS.blk=b.getAttribute('data-malt');mFolha(MS._m);return;}
+  if((b=e.target.closest('[data-mabre]'))){MS.abre[b.getAttribute('data-mabre')]=1;MS.blk=b.getAttribute('data-mabre');mFolha(MS._m);return;}
+  if((b=e.target.closest('[data-mfecha]'))){delete MS.abre[b.getAttribute('data-mfecha')];mFolha(MS._m);return;}
+  if(e.target.closest('[data-mcpb]')){copiar(mTexto(false),'Texto do modelo copiado');return;}
+  if(e.target.closest('[data-mcpe]')){copiar(mTexto(true),'Esqueleto copiado');return;}
+  if((b=e.target.closest('.xblk[data-mk]'))){MS.blk=MS.blk===b.getAttribute('data-mk')?null:b.getAttribute('data-mk');$$('#e-out .xblk').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-mk')===MS.blk);});}
+},true);
 /* ---- Parágrafos-padrão ---- */
 var PS={cat:'',sub:'',st:'',sel:null};
 var STL={padrao:'Padrão',estrutural:'Estrutural',variante:'Variante',especifico:'Específico',preferencial:'Preferencial',anterior:'Anterior',pedido:'Pedido'};
@@ -866,8 +893,6 @@ function pAbrir(p){
   box.querySelector('[data-pcp2]').onclick=function(){copiar(pVars(p.texto,true),'Parágrafo copiado');};
 }
 $('#e-out').addEventListener('click',function(e){
-  var b=e.target.closest('[data-mact]');
-  if(b){e.stopPropagation();var c=b.closest('[data-mid]'),m=((BASE&&BASE.mod)||[]).filter(function(x){return x.id===c.getAttribute('data-mid');})[0];if(!m)return;if(b.getAttribute('data-mact')==='ver')mAbrir(m);else copiar(mTextoBase(m),'Texto-base do modelo copiado');return;}
   var pc=e.target.closest('[data-pcp]');
   if(pc){e.stopPropagation();var p=((BASE&&BASE.par)||[]).filter(function(x){return x.id===pc.getAttribute('data-pcp');})[0];if(p)copiar(pVars(p.texto,true),'Parágrafo copiado');return;}
   if(e.target.closest('.ref'))return;
