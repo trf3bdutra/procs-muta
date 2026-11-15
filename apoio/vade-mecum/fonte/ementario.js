@@ -779,6 +779,8 @@ function subSel(t,E,attr){return E.sub?'<div class="xalt sub">'+E.sub.map(functi
 /* a abertura que já diz o que decidiu a sentença dispensa o tópico Sentença */
 function sentNaAbertura(trs,ST){var ab=trs.filter(function(t){return /^Abertura/.test(t.n);})[0];if(!ab)return false;var a=escolha(ab,ST).a||{};return /senten[çc]a/i.test(a.f||'');}
 function xSai(t,trs,ST,fora){return !!(fora&&fora[t.k])||(t.n==='Sentença'&&sentNaAbertura(trs,ST));}
+/* trechos que não se retiram: cabeçalho e vocativo do voto, “É o relatório.” e “É como voto.” */
+function xFixo(parte,t){return semRotulo(parte,t.n)||t.alts.length===1&&/^\s*É (o relatório|como voto)\.?\s*$/.test(t.alts[0].f||'');}
 function semRotulo(parte,n){return parte==='voto'&&/^(Cabeçalho|Vocativo)$/.test(n);}
 function xFm(l){return refs(l).replace(/\[VALIDAR[^\]]*\]/g,function(m){return '<mark class="v">'+m+'</mark>';});}
 function xParas(f,parte,n,extra,ctx){
@@ -804,7 +806,7 @@ function xPagina(){
       var E=escolha(t,XP.alt),ai=E.ai,a=E.a,min=false;
       if(aposVoc&&a.f){min=true;aposVoc=false;a={lab:a.lab,f:a.f.charAt(0).toLowerCase()+a.f.slice(1),r:a.r};}
       var ph=aposVoc&&!a.f;if(t.n==='Vocativo')aposVoc=true;else if(ph)aposVoc=false;
-      h+='<div class="xblk'+(XP.sel===t.k?' on':'')+'" data-xk="'+esc(t.k)+'"><span class="xtg">'+(semRotulo(pt.id,t.n)?'':esc(t.n))+(t.opc?'<br><span class="xop" data-xfecha="'+esc(t.k)+'">recolher</span>':semRotulo(pt.id,t.n)?'':'<br><span class="xop xret" data-xfora="'+esc(t.k)+'" title="Retirar da peça, da cópia e do .docx">retirar</span>')+'</span>'+
+      h+='<div class="xblk'+(XP.sel===t.k?' on':'')+'" data-xk="'+esc(t.k)+'"><span class="xtg">'+(semRotulo(pt.id,t.n)?'':esc(t.n))+(t.opc?'<br><span class="xop" data-xfecha="'+esc(t.k)+'">recolher</span>':xFixo(pt.id,t)?'':'<br><span class="xop xret" data-xfora="'+esc(t.k)+'" title="Retirar da peça, da cópia e do .docx">retirar</span>')+'</span>'+
         (t.alts.length>1?'<div class="xalt">'+t.alts.map(function(x,i){return '<button data-xalt="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===ai)+'">'+esc(x.lab)+'</button>';}).join('')+'</div>':'')+subSel(t,E,'data-xsub')+
         (pt.id==='ementa'&&/^[IV]+\./.test(t.n)?'<p class="em"><b>'+esc(t.n)+'</b></p>':'')+
         (a.f?xParas(a.f,pt.id,t.n,min?' <span class="xop" title="Primeiro parágrafo após o vocativo">inicia em minúscula</span>':'',{k:t.k+'@'+E.key,i:0}):(pt.id==='ementa'&&/^[IV]+\./.test(t.n)?(t.r.length?'<p class="xph em">'+esc(t.r[0])+'</p>':''):'<p class="xph'+(pt.id==='ementa'?' em':' std')+'">'+(ph?'em minúscula · ':'')+esc(t.n)+(t.r.length?': '+esc(t.r[0]):'')+'</p>'))+(t.info?xInfo(t.info):'')+'</div>';});
@@ -981,7 +983,7 @@ function mTrechos(m){
     var base=s.bl.filter(function(b){return b.tit==null;}),pars=s.bl.filter(function(b){return b.tit!=null;}),alts=[];
     if(pars.length){pars.forEach(function(p,i){alts.push({lab:(p.tit||('Versão '+(p.ver!=null?p.ver:i+1))).replace(/\s*\(\d+%\)\s*$/,function(z){return z;}),f:p.txt,op:p.op});});}
     else base.forEach(function(b,i){alts.push({lab:base.length>1?'Forma '+(i+1):'',f:b.txt});});
-    var opc=!!s.t.opcional||(base.length&&!pars.length&&base.every(function(b){return b.ativo===false;}));
+    var opc=base.length&&base.some(function(b){return String(b.txt||'').trim();})?base.every(function(b){return b.ativo===false;}):!!s.t.opcional;
     return {k:m.id+'|'+s.t.id,n:s.t.titulo||s.t.id,g:s.t.grupo||'',opc:opc,alts:alts};
   });
 }
@@ -1093,7 +1095,8 @@ function mPartes(m){
   if(tp!=='Acórdão')return [{pj:'',trs:T.map(function(t){t.parte='voto';return t;})}];
   var ap=mApr(m),tj=rrTipoJulg(m),v=/^Embargos de declara/.test(ap)||tj==='ed'?'ed':/^Agravo interno/.test(ap)||tj==='ain'?'agint':tj==='ai'?'ai':tj==='rn'?'aprn':/apelac[oõ]es|ambas as partes|duplas? apela/.test(nz(m.nomeModelo||''))?'dap':'ap',P=xPartesDe('acordao',v);
   function ed(pt){return pt.tr.map(function(t){return {k:'ed:'+t.k,n:t.n,g:'',opc:t.opc,alts:t.alts,parte:pt.id,info:t.info,r:t.r||[]};});}
-  return [{pj:'EMENTA',trs:ed(P[0])},{pj:'RELATÓRIO',trs:ed(P[1])},{pj:'VOTO',trs:T.map(function(t){t.parte='voto';return t;})},{pj:'ACÓRDÃO',trs:ed(P[3])}];
+  var cab=xTrechos('voto',['Cabeçalho','Vocativo']).map(function(t){return {k:'ed:'+t.k,n:t.n,g:'',opc:false,alts:t.alts,parte:'voto',r:t.r||[]};});
+  return [{pj:'EMENTA',trs:ed(P[0])},{pj:'RELATÓRIO',trs:ed(P[1])},{pj:'VOTO',trs:cab.concat(T.map(function(t){t.parte='voto';return t;}))},{pj:'ACÓRDÃO',trs:ed(P[3])}];
 }
 function mFolha(m){
   var PT=mPartes(m),tp=mTipo(m),h='';
@@ -1105,7 +1108,7 @@ function mFolha(m){
       if(MS.fora[t.k]){h+='<button class="xopc fora" data-mvolta="'+esc(t.k)+'">+ '+esc(t.n)+' <small>· retirado</small></button>';return;}
       if(t.opc&&!MS.abre[t.k]){h+='<button class="xopc" data-mabre="'+esc(t.k)+'">+ '+esc(t.n)+' <small>· opcional</small></button>';return;}
       var E=escolha(t,MS.alt),ai=E.ai,a=E.a||{f:''},ctx={k:m.id+'|'+t.k+'@'+E.key,i:0};
-      h+='<div class="xblk'+(MS.blk===t.k?' on':'')+'" data-mk="'+esc(t.k)+'"><span class="xtg">'+(semRotulo(t.parte,t.n)?'':esc(t.n))+(t.opc?'<br><span class="xop" data-mfecha="'+esc(t.k)+'">recolher</span>':semRotulo(t.parte,t.n)?'':'<br><span class="xop xret" data-mfora="'+esc(t.k)+'" title="Retirar da peça, da cópia e do .docx">retirar</span>')+'</span>'+
+      h+='<div class="xblk'+(MS.blk===t.k?' on':'')+'" data-mk="'+esc(t.k)+'"><span class="xtg">'+(semRotulo(t.parte,t.n)?'':esc(t.n))+(t.opc?'<br><span class="xop" data-mfecha="'+esc(t.k)+'">recolher</span>':xFixo(t.parte,t)?'':'<br><span class="xop xret" data-mfora="'+esc(t.k)+'" title="Retirar da peça, da cópia e do .docx">retirar</span>')+'</span>'+
         (t.alts.length>1?'<div class="xalt">'+t.alts.map(function(x,i){return '<button data-malt="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===ai)+'" title="'+esc(x.lab)+'">'+esc(x.lab.length>34?x.lab.slice(0,33)+'…':x.lab)+'</button>';}).join('')+'</div>':'')+subSel(t,E,'data-msub')+
         (t.parte==='ementa'&&/^[IV]+\./.test(t.n)?'<p class="em"><b>'+esc(t.n)+'</b></p>':'')+
         (a.f?(t.parte==='voto'?mParas(a.f,ctx):xParas(a.f,t.parte,t.n,'',ctx)):(t.parte==='ementa'&&/^[IV]+\./.test(t.n)&&!(t.r&&t.r[0])?'':'<p class="xph '+(t.parte==='ementa'?'em':'std')+'">'+(t.parte==='voto'?esc(t.n)+': redação livre':esc((t.r&&t.r[0])||t.n))+'</p>'))+(t.info?xInfo(t.info):'')+'</div>';});
