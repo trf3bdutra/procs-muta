@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Embute a ficha única (padrao/ficha-dialogo.js + .css, com a leitura do inteiro teor padrao/inteiro-teor.js) nos dois HTML que a usam: o CMT-monitor (cmt-monitor.html, no documento
+"""Embute a ficha única (padrao/ficha-dialogo.js + .css, com o calendário forense padrao/calendario-forense.js e a leitura do inteiro teor padrao/inteiro-teor.js) nos dois HTML que a usam: o CMT-monitor (cmt-monitor.html, no documento
 de fora, não no motor) e a Pauta da equipe (apoio/pauta-equipe/index.html). Fonte única: edite os arquivos de padrao/ e rode
    python3 scripts/ficha/embutir.py
 O monitor recebe também o adaptador (padrao/ficha-adaptador-monitor.js). O bloco fica entre <!-- cmt-ficha:inicio --> e <!-- cmt-ficha:fim --> e é trocado inteiro a cada execução."""
 import pathlib, re
 R = pathlib.Path(__file__).resolve().parents[2]
-js = (R / 'padrao/inteiro-teor.js').read_text(encoding='utf-8') + '\n' + (R / 'padrao/ficha-dialogo.js').read_text(encoding='utf-8')
+js = (R / 'padrao/calendario-forense.js').read_text(encoding='utf-8') + '\n' + (R / 'padrao/inteiro-teor.js').read_text(encoding='utf-8') + '\n' + (R / 'padrao/ficha-dialogo.js').read_text(encoding='utf-8')
 css = (R / 'padrao/ficha-dialogo.css').read_text(encoding='utf-8')
 assert '</script' not in js and '</style' not in css
 ad = (R / 'padrao/ficha-adaptador-monitor.js').read_text(encoding='utf-8')
@@ -22,3 +22,18 @@ for rel in ['apoio/pauta-equipe/index.html', 'cmt-monitor.html']:
         s = s[:k] + BLOCO + '\n' + s[k:]
     p.write_text(s, encoding='utf-8')
     print(rel, 'ok', len(s))
+
+# CMT-monitor: o motor (iframe, guardado comprimido em var MOTOR) recebe o calendário forense e o CSS do editor do calendário do gabinete
+import base64, gzip, re
+mon = R / 'cmt-monitor.html'; t = mon.read_text(encoding='utf-8')
+m = re.search(r"var MOTOR = '([^']*)'", t)
+motor = gzip.decompress(base64.b64decode(m.group(1))).decode('utf-8')
+fr = (R / 'padrao/calendario-forense.js').read_text(encoding='utf-8'); ecss = (R / 'padrao/calendario-editor.css').read_text(encoding='utf-8')
+B2 = '<!-- cmt-forense:inicio -->\n<style id="cmt-calendario-editor-css">\n' + ecss + '\n</style>\n<script id="cmt-forense">\n' + fr + '\n</script>\n<!-- cmt-forense:fim -->'
+i, j = motor.find('<!-- cmt-forense:inicio -->'), motor.find('<!-- cmt-forense:fim -->')
+if i >= 0 and j > i: motor = motor[:i] + B2 + motor[j + len('<!-- cmt-forense:fim -->'):]
+else:
+    k = motor.rfind('</body>'); assert k > 0; motor = motor[:k] + B2 + '\n' + motor[k:]
+b64 = base64.b64encode(gzip.compress(motor.encode('utf-8'), 9)).decode()
+t = t[:m.start(1)] + b64 + t[m.end(1):]
+mon.write_text(t, encoding='utf-8'); print('motor do cmt-monitor.html ok', len(motor))

@@ -65,6 +65,12 @@ for a in abas:
         for rot, ch, t in EXTRAS.get((a['aba'], g['grupo']), []):
             if ch not in tem:
                 g['campos'].append({'rotulo': rot, 'chave': ch, 'tipo': t, 'secao': SEC[a['aba']]})
+# contagem do prazo: o CMT-monitor grava 1 (simples) ou 2 (em dobro) — mesmo valor na ficha
+for a in abas:
+    for g in a['grupos']:
+        for c in g['campos']:
+            if c['chave'] == 'Tempest - Dobro':
+                c.update({'rotulo': 'Contagem do prazo', 'tipo': 'lista', 'opcoes': ['1', '2'], 'regra': '1 = simples · 2 = em dobro (Fazenda Pública, MP, Defensoria)'})
 # Produção em duas versões, conforme o destino do processo: sessão (colegiado) ou decisão monocrática
 def _prod(a):
     C = {c['chave']: c for g in a['grupos'] for c in g['campos']}
@@ -154,6 +160,53 @@ CONTROLES = {'aba': 'Controles especiais', 'secao': 'controles',
                CE('Excluído do controle', 'Sensível - Excluído', 'simnao'), CE('Quadro / motivo', 'Sensível - Quadro', 'texto-longo'),
                CE('Decisão', 'Sensível - Decisão', 'lista', SENS_DEC), CE('Cumprimento', 'Sensível - Cumprimento', 'lista', SENS_CUMP),
                CE('Última verificação', 'Sensível - Última verificação', 'data'), CE('Próxima verificação', 'Sensível - Próxima verificação', 'data')] + _acomp('Sensível')}]}
+# campos que o inteiro teor (.txt do PJe) identifica e que o operacional ainda não tinha: entram como campos oficiais.
+# Tabelas (tipo "tabela"): lista de linhas com as colunas indicadas, gravada como lista no registro do processo.
+def C(rot, ch, tipo, sec, op=None, **x):
+    c = {'rotulo': rot, 'chave': ch, 'tipo': tipo, 'secao': sec}
+    if op: c['opcoes'] = op
+    c.update(x); return c
+def T(rot, ch, sec, cols):
+    return {'rotulo': rot, 'chave': ch, 'tipo': 'tabela', 'secao': sec, 'colunas': [{'chave': k, 'rotulo': r, 'tipo': t} for k, r, t in cols]}
+ESPECIES = ['Embargos de declaração', 'Agravo interno', 'Juízo de retratação']
+def grupo(a, nome):
+    for g in a['grupos']:
+        if g['grupo'] == nome: return g
+def mais(g, campos):
+    tem = {c['chave'] for c in g['campos']}
+    g['campos'] += [c for c in campos if c['chave'] not in tem]
+for a in abas:
+    if a['aba'] == 'Processo':
+        mais(grupo(a, 'Sentença'), [C('Data da sentença', 'Sentença - Data', 'data', 'origem'), C('Remessa necessária', 'Sentença - Reexame', 'lista', 'origem', ['Sim', 'Não', 'Dispensada']),
+            C('Tutela na sentença', 'Sentença - Tutela', 'lista', 'origem', ['Concedida', 'Negada', 'Revogada', 'Não'])])
+        i = a['grupos'].index(grupo(a, 'Sentença'))
+        a['grupos'].insert(i + 1, {'grupo': 'Origem', 'campos': [C('Juízo de origem', 'Origem - Juízo', 'texto', 'origem'), C('Julgador(a) de origem', 'Origem - Julgador', 'texto', 'origem'),
+            C('Valor da causa', 'Origem - Valor da causa', 'texto', 'origem')]})
+        mais(grupo(a, 'Recursos e contrarrazões'), [
+            T('Recursos', 'Recursos', 'origem', [('parte', 'Parte', 'texto'), ('ids', 'IDs', 'texto'), ('data', 'Data', 'data'), ('preliminares', 'Preliminares', 'texto-longo'),
+                ('teses', 'Teses / alegações', 'texto-longo'), ('pedidos', 'Pedidos', 'texto-longo'), ('merito', 'Mérito', 'texto-longo')]),
+            T('Contrarrazões', 'Contrarrazões', 'origem', [('parte', 'Parte', 'texto'), ('ids', 'IDs', 'texto'), ('data', 'Data', 'data'), ('preliminares', 'Preliminares', 'texto-longo'),
+                ('teses', 'Teses', 'texto-longo')])])
+        i = a['grupos'].index(grupo(a, 'Recursos e contrarrazões'))
+        a['grupos'].insert(i + 1, {'grupo': 'Outras peças e ocorrências', 'campos': [T('Outras peças', 'Outras peças', 'origem', [('tipo', 'Peça', 'texto'), ('ids', 'IDs', 'texto'), ('data', 'Data', 'data'), ('texto', 'Observação', 'texto-longo')])]})
+    if a['aba'] == 'Triagem':
+        mais(grupo(a, 'Admissibilidade e regularidade'), [T('Procurações', 'Procurações', 'triagem', [('id', 'ID', 'texto'), ('data', 'Data', 'data'), ('validade', 'Validade', 'texto'), ('advogados', 'Advogados', 'texto-longo')])])
+        mais(grupo(a, 'Ministério Público'), [C('Data do parecer', 'MPF - Data', 'data', 'triagem'), C('Conclusão do parecer (texto)', 'Parecer - Sentido (outro)', 'texto', 'triagem')])
+        a['grupos'] += [
+            {'grupo': 'Espécie e decisão impugnada', 'campos': [C('Espécie', 'Padrão - Espécie', 'lista', 'triagem', ESPECIES, mapa={'ed': 'Embargos de declaração', 'interno': 'Agravo interno', 'retratacao': 'Juízo de retratação'}),
+                C('ID da decisão impugnada', 'Impugnada - ID', 'texto', 'triagem'), C('Data do julgamento / decisão', 'Impugnada - Data', 'data', 'triagem'), C('Órgão julgador', 'Impugnada - Órgão', 'texto', 'triagem'),
+                C('Relator(a)', 'Impugnada - Relator', 'texto', 'triagem'), C('Síntese / ementa', 'Impugnada - Síntese', 'texto-longo', 'triagem')]},
+            {'grupo': 'Embargos de declaração', 'quando': {'campo': 'triagem.Padrão - Espécie', 'valor': 'Embargos de declaração'},
+             'campos': [C('Vício(s) apontado(s)', 'ED - Vício', 'texto', 'triagem'), C('Ponto dos embargos', 'ED - Ponto', 'texto-longo', 'triagem')]},
+            {'grupo': 'Agravo interno', 'quando': {'campo': 'triagem.Padrão - Espécie', 'valor': 'Agravo interno'},
+             'campos': [C('Fundamentos do agravo interno', 'AgInt - Fundamentos', 'texto-longo', 'triagem')]},
+            {'grupo': 'Juízo de retratação', 'quando': {'campo': 'triagem.Padrão - Espécie', 'valor': 'Juízo de retratação'},
+             'campos': [C('Tribunal do precedente', 'Retratação - Tribunal', 'lista', 'triagem', ['STF', 'STJ']), C('Tema', 'Retratação - Tema', 'texto', 'triagem'),
+                C('Precedente', 'Retratação - Precedente', 'texto', 'triagem'), C('Síntese', 'Retratação - Síntese', 'texto-longo', 'triagem'),
+                C('ID da devolução', 'Retratação - Devolução ID', 'texto', 'triagem'), C('Órgão da devolução', 'Retratação - Devolução órgão', 'texto', 'triagem'),
+                C('Mês da devolução', 'Retratação - Devolução mês', 'texto', 'triagem'),
+                C('Resultado dos embargos', 'Retratação - ED', 'lista', 'triagem', ['Rejeitados', 'Acolhidos', 'Parcialmente acolhidos', 'Não conhecidos'], mapa={'parcial': 'Parcialmente acolhidos', 'naoconhecidos': 'Não conhecidos'}),
+                C('IDs dos embargos', 'Retratação - ED IDs', 'texto', 'triagem'), C('Data dos embargos', 'Retratação - ED data', 'data', 'triagem')]}]
 for a in abas:
     if a['aba'] == 'Triagem':
         a['grupos'] = [g for g in a['grupos'] if g['grupo'] != 'Urgência']   # a urgência passa ao grupo oficial dos Controles especiais
@@ -166,8 +219,8 @@ for a in abas:
 abas.append(CONTROLES)
 ordem = ['Processo', 'Triagem', 'Produção', 'Controles especiais', 'Pauta']
 abas.sort(key=lambda a: ordem.index(a['aba']) if a['aba'] in ordem else 99)
-out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.1.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py',
-       'descricao': 'Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
+out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.2.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py',
+       'descricao': 'Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com "tipo": "tabela" são listas de linhas com as "colunas" indicadas. Grupos com "quando" só aparecem quando o campo indicado tem o valor. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
        'abas': abas}
 (R / 'padrao/ficha.json').write_text(json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 n = sum(len(g['campos']) for a in abas for g in a['grupos'])

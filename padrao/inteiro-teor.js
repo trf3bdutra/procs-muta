@@ -15,10 +15,10 @@ const S=v=>String(v??'').trim();
 /* no lugar do PautaControl do app antigo: só a conversão de datas é usada pelas sugestões */
 const dataIso=v=>{const s=S(v);let m=/^(\d{4})-(\d{2})-(\d{2})/.exec(s);if(m)return s.slice(0,10);m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s);return m?`${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`:'';};
 const PC=()=>({date:dataIso});
-/* tempestividade: dias úteis sem feriados (o limite fica igual ou antes do real; “tempestivo” só é sugerido quando seguro) */
-function tempCalc(r){const pub=dataIso(r['Tempest - Publicação']),prot=dataIso(r['Tempest - Protocolo']),total=(+r['Tempest - Prazo legal']||0)*(+r['Tempest - Dobro']||1);
-  if(!pub||!total)return null;let d=new Date(pub+'T12:00:00Z'),n=0;while(n<total){d=new Date(+d+864e5);const w=d.getUTCDay();if(w%6)n++;}
-  const limit=d.toISOString().slice(0,10);return {limit,total,ok:prot?prot<=limit:null};}
+/* tempestividade pelo calendário forense do gabinete (padrao/calendario-forense.js), o mesmo do Controle de Pauta */
+function tempCalc(r){const F=window.CMTForense;if(!F)return null;
+  const c=F.prazo({publicacao:r['Tempest - Publicação'],protocolo:r['Tempest - Protocolo'],prazo:r['Tempest - Prazo legal'],dobro:r['Tempest - Dobro'],suspensoes:r['Tempest - Suspensões']},F.atual);
+  return c.falta?null:{limit:c.limite,total:c.total,ok:c.ok,skipped:c.pulados};}
 const page=()=>({tempCalc});
 const cnjDigits=v=>String(v||'').replace(/\D/g,'');
 const fmtCnj=d=>d.length===20?`${d.slice(0,7)}-${d.slice(7,9)}.${d.slice(9,13)}.${d.slice(13,14)}.${d.slice(14,16)}.${d.slice(16)}`:d;

@@ -43,7 +43,9 @@ function registro(doc, cnj, F, criar) {
 /* aplica {secao: {chave: valor}} ao registro; devolve a lista do que mudou */
 function aplica(r, mud) {
   const out = [];
-  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const v = String(mud[s][k] == null ? '' : mud[s][k]); if ((r[s][k] || '') !== v) { r[s][k] = v; out.push(s + '.' + k); } }); });
+  /* texto, ou lista de linhas (campos "tabela" da ficha) */
+  const igual = (x, y) => (typeof x === 'object' && x) || (typeof y === 'object' && y) ? JSON.stringify(x == null || x === '' ? [] : x) === JSON.stringify(y == null || y === '' ? [] : y) : String(x == null ? '' : x) === String(y == null ? '' : y);
+  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
   if (out.length) { r.origem = r.origem || {}; r.origem.atualizado_em = agora(); }
   return out;
 }
@@ -131,7 +133,7 @@ const VC = {
   tipoJ: v => ({ triagem: { 'Tipo de Julgamento': v } }), especificidades: v => ({ triagem: { 'Especificidades': v } }), questoes: v => ({ triagem: { 'Alegações': v } }),
   'mpfx.sentido': v => ({ triagem: { 'Parecer - Sentido': v } }), 'mpfx.id': v => ({ triagem: { 'ID do Parecer MPF': v } }),
   'adm.intim': v => ({ triagem: { 'Tempest - Publicação': v } }), 'adm.prot': v => ({ triagem: { 'Tempest - Protocolo': v } }), 'adm.prazo': v => ({ triagem: { 'Tempest - Prazo legal': v } }),
-  'adm.dobro': v => ({ triagem: { 'Tempest - Dobro': v === true || v === 'true' ? 'Sim' : '' } }), 'adm.ajg': v => ({ triagem: { 'AJG': v === true || v === 'true' ? 'Sim' : '' } }),
+  'adm.dobro': v => ({ triagem: { 'Tempest - Dobro': v === true || v === 'true' ? '2' : '1' } }), 'adm.ajg': v => ({ triagem: { 'AJG': v === true || v === 'true' ? 'Sim' : '' } }),
   'jul.fund': v => ({ producao: { 'Voto - Descrição': v } }), 'jul.topico': v => ({ producao: { 'Tópico-síntese': v } })
 };
 /* ficha → campos do cartão (Monocráticas e urgências): o inverso de V, no vocabulário do app */
@@ -174,7 +176,7 @@ const VCI = { tipoJ: ['triagem', 'Tipo de Julgamento'], especificidades: ['triag
 function cartaoDaFicha(r, base) {
   const c = JSON.parse(JSON.stringify(base || {}));
   Object.keys(VCI).forEach(p => { const [s, k, b] = VCI[p], v = ((r && r[s]) || {})[k]; if (!v) return;
-    const ks = p.split('.'); let o = c; ks.slice(0, -1).forEach(x => { o = o[x] = (o[x] && typeof o[x] === 'object') ? o[x] : {}; }); o[ks[ks.length - 1]] = b ? v === 'Sim' : v; });
+    const ks = p.split('.'); let o = c; ks.slice(0, -1).forEach(x => { o = o[x] = (o[x] && typeof o[x] === 'object') ? o[x] : {}; }); o[ks[ks.length - 1]] = b ? (v === 'Sim' || v === '2') : v; });
   return c;
 }
 /* grava {secao: {chave: valor}} no registro do processo (cria se faltar), com nova tentativa se o arquivo mudou no meio */
@@ -233,7 +235,10 @@ module.exports = async (req, res, u) => {
     Object.keys(C).forEach(k => {
       if (!E[k]) { recus.push(k); return; }
       if (SO_GESTOR.has(k) && !L.gestor(u)) { recus.push(k); return; }
-      const i = k.indexOf('.'); (mud[k.slice(0, i)] = mud[k.slice(0, i)] || {})[k.slice(i + 1)] = C[k];
+      let v = C[k];
+      if (E[k].tipo === 'tabela') { const cols = (E[k].colunas || []).map(c => c.chave); v = (Array.isArray(v) ? v : []).slice(0, 60).map(l => { const o = {}; cols.forEach(c => { const x = l && l[c]; if (x != null && String(x).trim()) o[c] = String(x).slice(0, 4000); }); return o; }).filter(o => Object.keys(o).length); }
+      else if (typeof v === 'object' && v !== null) { recus.push(k); return; }
+      const i = k.indexOf('.'); (mud[k.slice(0, i)] = mud[k.slice(0, i)] || {})[k.slice(i + 1)] = v;
     });
     if (!Object.keys(mud).length) return res.status(400).json({ erro: 'nenhum campo editável', recusados: recus });
     /* volta: o que tem correspondência no cartão é gravado também na pauta das sessões onde o processo está, no mesmo commit */
