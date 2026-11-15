@@ -13872,8 +13872,10 @@ else setTimeout(ready, 0);
   /* cliques no motor: prontuário, exportar e seleção prévia por card */
   function ligarCliquesMotor() {
     var md = mw() && mw().document; if (!md || md.__cmtCliques) return; md.__cmtCliques = true;
+    md.addEventListener('keydown', tecladoTri, true);
     md.addEventListener('keydown', function (e) { if (e.key === 'Escape' && md.body.classList.contains('cmt-shfull')) telaCheia(md, false); });
     md.addEventListener('click', function (e) {
+      var pl = e.target.closest && e.target.closest('[data-cmt-plan]'); if (pl) { triagemPlanilha(false); return; }
       var t = e.target.closest && e.target.closest('[data-cmt-pront],[data-cmt-exp],[data-cmt-oper],.cmt-sp1'); if (!t) return;
       if (t.hasAttribute('data-cmt-oper')) { e.preventDefault(); e.stopPropagation(); var w2 = mw(), c2 = comp(); if (!w2 || !w2.CMTOperacional || !c2) { aviso('Gravação indisponível: motor não carregado.'); return; }
         t.disabled = true; t.textContent = 'GRAVANDO…';
@@ -13883,7 +13885,7 @@ else setTimeout(ready, 0);
       if (t.classList.contains('cmt-sp1')) { e.preventDefault(); e.stopPropagation(); enviarUmSP(md, t.dataset.pid); return; }
       if (t.hasAttribute('data-cmt-exp') && W.__cmtExpDireto) { W.__cmtExpDireto = false; return; }
       e.preventDefault(); e.stopPropagation();
-      if (t.hasAttribute('data-cmt-pront')) { var c = comp(), L = c.filteredCentral().map(function (x) { return x.r; }); if (!L.length) { aviso('Nenhum processo no filtro.'); return; } if (L.length > 300) aviso('Triagem com os 300 primeiros de ' + nf(L.length) + ' processos filtrados.'); abrirEscaninho(null, L.slice(0, 300), 'Triagem · resultado da busca'); }
+      if (t.hasAttribute('data-cmt-pront')) { triagemPlanilha(true); return; }
       else menuExportar(t);
     }, true);
   }
@@ -14000,9 +14002,83 @@ else setTimeout(ready, 0);
         return '<th><input data-shf="' + x.k + '" value="' + esc(v) + '" placeholder="filtrar…"></th>'; }).join('') + '</tr></thead><tbody>' + linhasSheet(L.slice(0, SHX.lim), cols) + '</tbody></table>' +
       (L.length > SHX.lim ? '<button type="button" class="sh-mais" data-sh="mais">carregar mais (' + nf(SHX.lim) + ' de ' + nf(L.length) + ')</button>' : '') + (L.length ? '' : '<p class="sh-v">Nenhum processo com esses filtros.</p>') + '</div>';
     if (foco) { var i = box.querySelector('[data-shf="' + foco[0] + '"]'); if (i) { i.focus(); try { i.setSelectionRange(foco[1], foco[1]); } catch (e) {} } }
+    md.body.classList.toggle('cmt-shtri', SHT.on);
+    if (SHT.on && SHT.cur) { var tr0 = box.querySelector('tbody tr[data-p="' + SHT.cur.replace(/"/g, '') + '"]'); if (tr0) abrirLinha(tr0, true); }
+  }
+  /* =================== Modo triagem dentro da planilha: o prontuário ocupa o lugar da linha clicada =================== */
+  var SHT = { on: false, cur: '' }, LS_TRI = 'pr_triados';
+  function triados() { try { return JSON.parse(localStorage.getItem(LS_TRI) || '{}'); } catch (e) { return {}; } }
+  var PR_MAP = { 'Publicação': 'Tempest - Publicação', 'Protocolo': 'Tempest - Protocolo', 'Prazo': 'Tempest - Prazo legal', 'Contagem': 'Tempest - Dobro', 'Preparo': 'Preparo',
+    'Representação': 'Representação', 'ID da procuração': 'ID da Procuração', 'Contrarrazões': 'Contrarrazões - Situação', 'Mídias': 'Mídias', 'Impedimento / suspeição': 'Impedimento / Suspeição',
+    'Magistrado': 'Observação do Impedimento', 'Nível': 'Urgência - Nível', 'Medida': 'Urgência', 'Apreciação': 'Urgência - Apreciação', 'Motivo': 'Urgência - Observação', 'Parecer': 'MPF',
+    'Custos legis': 'MPF - Custos Legis', 'Tipo de julgamento': 'Tipo de Julgamento', 'Complexidade': 'COMPLEXIDADE', 'Destino': 'Destino', 'Pendências': 'O que falta sanar' };
+  function triagemPlanilha(on) {
+    var w = mw(), md = w && w.document, c = comp(); if (!md || !c) return;
+    SHT.on = !!on; if (!on) fecharLinha(md);
+    md.body.classList.toggle('cmt-shtri', SHT.on);
+    if (on) { if ((c.state || {}).view !== 'sheet') try { c.setState({ view: 'sheet' }); } catch (e) {}
+      setTimeout(function () { planilha(); var b = md.getElementById('cmt-sheet'); if (b) b.scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 60);
+      aviso('Modo triagem: clique numa linha da planilha para abrir o prontuário no lugar dela · ↑ ↓ trocam de processo · Enter marca triado · Esc fecha.'); }
+  }
+  function cssProntMotor(md) {
+    if (md.getElementById('pr-css-m')) return; var src = D.getElementById('pr-css'); if (!src) return;
+    var st = md.createElement('style'); st.id = 'pr-css-m'; st.textContent = src.textContent; md.head.appendChild(st);
+    var lk = md.createElement('link'); lk.rel = 'stylesheet'; lk.href = 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap'; md.head.appendChild(lk);
+  }
+  function linhaMotor(p) { var c = comp(); return c ? c.rows.find(function (r) { return dig(r.processo || r.Processo) === dig(p); }) : null; }
+  function campoPr(box, lab) { var sp = [].slice.call(box.querySelectorAll('label.f > span')).find(function (x) { return x.textContent.trim().indexOf(lab) === 0; }); return sp ? sp.parentElement.querySelector('input,select,textarea') : null; }
+  function ligarCampos(box, r) {
+    if (!r) return;
+    var put = function (el, v) { if (!el || v == null || v === '') return; v = Array.isArray(v) ? v.join('; ') : String(v);
+      if (el.tagName === 'SELECT' && ![].some.call(el.options, function (o) { return o.value === v; })) { var op = el.ownerDocument.createElement('option'); op.value = op.textContent = v; el.appendChild(op); }
+      el.value = v; };
+    Object.keys(PR_MAP).forEach(function (lab) { var el = campoPr(box, lab); if (!el) return; if (/Publica|Protocolo/.test(lab)) { el.type = 'date'; var v0 = String(r[PR_MAP[lab]] || ''), m = v0.match(/^(\d{2})\/(\d{2})\/(\d{4})$/); put(el, m ? m[3] + '-' + m[2] + '-' + m[1] : v0); } else put(el, r[PR_MAP[lab]]);
+      el.dataset.prk = PR_MAP[lab]; });
+    var chk = function (txt, k) { var lb = [].slice.call(box.querySelectorAll('label')).find(function (x) { return x.querySelector('input[type=checkbox]') && x.textContent.trim().indexOf(txt) === 0; }); if (!lb) return; var cb = lb.querySelector('input'); cb.dataset.prk = k; if (r[k] && !/^(n[aã]o|false|0)$/i.test(String(r[k]))) cb.checked = true; };
+    chk('DPU', 'DPU (controle)'); chk('AJG', 'AJG'); chk('Lançar no painel', 'Urgência - Painel');
+    var hips = String(r['Hipóteses Monocrática'] || '').split(/;\s*/).filter(Boolean);
+    box.querySelectorAll('.hip').forEach(function (h) { var cb = h.querySelector('input'), nm = (h.querySelector('b') || {}).textContent || ''; cb.dataset.prhip = nm; if (hips.indexOf(nm) >= 0) cb.checked = true; });
+    var sint = box.querySelector('textarea[placeholder^="Pedido, sentença"]'); if (sint) { sint.dataset.prk = 'Síntese Processual'; put(sint, r['Síntese Processual']); }
+    var grava = function (e) { var el = e.target; if (el.dataset.prhip != null) { r['Hipóteses Monocrática'] = [].slice.call(box.querySelectorAll('[data-prhip]')).filter(function (x) { return x.checked; }).map(function (x) { return x.dataset.prhip; }).join('; '); return; }
+      var k = el.dataset.prk; if (!k) return; r[k] = el.type === 'checkbox' ? (el.checked ? 'Sim' : '') : el.value; };
+    box.addEventListener('change', grava); box.addEventListener('input', grava);
+  }
+  function fecharLinha(md) { if (!md) return; md.querySelectorAll('#cmt-sheet .sh-pr').forEach(function (x) { x.remove(); }); md.querySelectorAll('#cmt-sheet tr.sh-hide').forEach(function (x) { x.classList.remove('sh-hide'); }); }
+  function abrirLinha(tr, quieto) {
+    var md = tr.ownerDocument, p = tr.dataset.p, box = md.getElementById('cmt-sheet'); if (!p || !box) return;
+    fecharLinha(md); cssProntMotor(md); SHT.cur = p;
+    var o = (ACV.recs || []).find(function (x) { return x.p === p; }) || { p: p }, r = linhaMotor(p);
+    var L = box.__L || [], pos = L.findIndex(function (x) { return x.p === p; }), T = triados();
+    var row = md.createElement('tr'); row.className = 'sh-pr';
+    row.innerHTML = '<td colspan="' + tr.children.length + '"><div class="sh-prbar"><b>' + (pos >= 0 ? nf(pos + 1) + ' de ' + nf(L.length) : '') + '</b><span>' + (T[p] ? 'triado ✓' : 'a triar') + '</span>' +
+      '<button type="button" data-shtri="ant" title="Processo anterior (↑)">‹</button><button type="button" data-shtri="prox" title="Próximo processo (↓)">›</button>' +
+      '<button type="button" class="pri" data-shtri="ok" title="Marcar triado e ir ao próximo (Enter)">' + (T[p] ? 'Triado ✓ · próximo' : 'Marcar triado') + '</button>' +
+      '<button type="button" data-shtri="grava" title="Gravar a triagem no procs-muta">⇪ Gravar triagem</button><button type="button" data-shtri="x" title="Fechar o prontuário (Esc)">Fechar ✕</button>' +
+      '<span class="k">↑ ↓ trocam · Enter marca triado · Esc fecha</span></div><div class="sh-prhost"></div></td>';
+    tr.after(row); tr.classList.add('sh-hide');
+    var host = row.querySelector('.sh-prhost');
+    try { var t0 = (o.tks || [])[0] || {}; W.CMTProntuario.montar(host, { p: o.p, classe: o.classe, assunto: o.assunto, ativo: o.ativo, passivo: o.passivo, tks: o.tks || [], etq: o.etq || [], pri: o.pri }); } catch (e) { host.textContent = 'Prontuário indisponível: ' + (e && e.message || e); }
+    ligarCampos(host, r);
+    var th = box.querySelector('thead'); box.scrollTop = Math.max(0, row.offsetTop - (th ? th.offsetHeight : 0) - 4);
+    if (!quieto) { var bt = box.getBoundingClientRect().top; if (bt < 0 || bt > 200) box.scrollIntoView({ block: 'start' }); }
+  }
+  function irLinha(n) { var md = mw() && mw().document; if (!md) return; var rows = [].slice.call(md.querySelectorAll('#cmt-sheet tbody tr[data-p]')), i = rows.findIndex(function (x) { return x.dataset.p === SHT.cur; }); var nx = rows[i + n]; if (nx) abrirLinha(nx); else if (n > 0) { var box = md.getElementById('cmt-sheet'); maisSheet(box); var r2 = [].slice.call(md.querySelectorAll('#cmt-sheet tbody tr[data-p]')); if (r2[i + n]) abrirLinha(r2[i + n]); } }
+  function acaoTri(a) {
+    var md = mw() && mw().document;
+    if (a === 'x') { fecharLinha(md); SHT.cur = ''; return; }
+    if (a === 'ant') return irLinha(-1); if (a === 'prox') return irLinha(1);
+    if (a === 'ok') { var T = triados(); T[SHT.cur] = new Date().toISOString(); try { localStorage.setItem(LS_TRI, JSON.stringify(T)); } catch (e) {} var r = linhaMotor(SHT.cur); if (r) r['Triado em'] = new Date().toLocaleDateString('pt-BR');
+      var tr = md && md.querySelector('#cmt-sheet tbody tr[data-p="' + SHT.cur + '"]'); if (tr) tr.classList.add('sh-tok'); return irLinha(1); }
+    if (a === 'grava') { var w2 = mw(), c2 = comp(); if (!w2 || !w2.CMTOperacional || !c2) { aviso('Gravação indisponível: motor não carregado.'); return; } aviso('Gravando a triagem…');
+      w2.CMTOperacional.gravar(c2.rows).then(function (r) { aviso(r.mud ? 'Triagem gravada no procs-muta: ' + nf(r.mud) + ' processo(s) no operacional.' : 'Nada a gravar: o operacional já está igual.'); }).catch(function (er) { aviso('Falha ao gravar: ' + (er && er.message || er)); }); }
+  }
+  function tecladoTri(e) {
+    if (!SHT.on || !SHT.cur) return; var t = e.target; if (t && t.closest && t.closest('input,select,textarea,[contenteditable]')) return;
+    if (e.key === 'ArrowDown') { e.preventDefault(); irLinha(1); } else if (e.key === 'ArrowUp') { e.preventDefault(); irLinha(-1); }
+    else if (e.key === 'Enter') { e.preventDefault(); acaoTri('ok'); } else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); acaoTri('x'); }
   }
   function linhasSheet(L, cols) {
-    return L.map(function (o) { return '<tr>' + cols.map(function (x) { var v = shFmt(x, shVal(x, o));
+    var TRI = triados(); return L.map(function (o) { return '<tr data-p="' + esc(o.p) + '"' + (TRI[o.p] ? ' class="sh-tok"' : '') + '>' + cols.map(function (x) { var v = shFmt(x, shVal(x, o));
       if (x.k === 'p') return '<td class="mono"><a href="#" data-shp="' + esc(o.p) + '" title="Abrir o cartão do processo">' + esc(o.p) + '</a>' + (o.pri ? ' <i class="pri" title="Prioridade">P</i>' : '') + '</td>';
       if (x.k === 'sit') { var sx = SIT_BY[o.sit] || {}; return '<td><span class="chip" style="--fc:' + cor(sx.c || '--muted') + '">' + esc(o.caminho ? 'A caminho' : v) + '</span></td>'; }
       return '<td' + (x.num ? ' class="num"' : '') + ' title="' + esc(v) + '">' + esc(v) + '</td>'; }).join('') + '</tr>'; }).join('');
@@ -14017,7 +14093,10 @@ else setTimeout(ready, 0);
   }
   function cliqueSheet(e) {
     var t = e.target, md = t.ownerDocument;
-    var p = t.closest('[data-shp]'); if (p) { e.preventDefault(); try { fichaNoLugar(p.dataset.shp); } catch (er) {} return; }
+    if (t.closest('.sh-pr')) { var bb = t.closest('[data-shtri]'); if (bb) { e.preventDefault(); acaoTri(bb.dataset.shtri); } return; }
+    var p = t.closest('[data-shp]');
+    if (SHT.on) { var tr = t.closest('tbody tr[data-p]'); if (tr && !t.closest('input,select,textarea')) { e.preventDefault(); abrirLinha(tr); return; } }
+    if (p) { e.preventDefault(); try { if (W.CMTProntuario && W.CMTProntuario.abrir) W.CMTProntuario.abrir(p.dataset.shp, (md.getElementById('cmt-sheet').__L || []).map(function (o) { return o.p; })); else fichaNoLugar(p.dataset.shp); } catch (er) {} return; }
     var s = t.closest('[data-shs]'); if (s) { var k = s.dataset.shs; SHX.sort = SHX.sort.k === k ? { k: k, d: -SHX.sort.d } : { k: k, d: 1 }; planilha(); return; }
     var b = t.closest('[data-sh]'); if (!b) return; e.preventDefault(); var a = b.dataset.sh, box = md.getElementById('cmt-sheet');
     if (a === 'limpar') { SHX.f = {}; SHX.lim = 200; planilha(); }
@@ -14030,6 +14109,14 @@ else setTimeout(ready, 0);
   function telaCheia(md, on) { md.body.classList.toggle('cmt-shfull', on); D.body.classList.toggle('au-shfull', on); var box = md.getElementById('cmt-sheet'); if (box) { box.__sig = ''; planilha(); } }
   D.addEventListener('keydown', function (e) { var md = mw() && mw().document; if (e.key === 'Escape' && md && md.body.classList.contains('cmt-shfull')) telaCheia(md, false); });
   var CSS_SHEET =
+    'body.cmt-shtri [data-cmt-pront]{background:#1b3553!important;color:#fff!important}body.cmt-shtri [data-cmt-plan]{background:transparent!important;color:#33506e!important}' +
+    'body.cmt-shtri #cmt-sheet tbody tr[data-p]{cursor:pointer}body.cmt-shtri #cmt-sheet tbody tr[data-p]:hover td{background:#eef6fb!important}' +
+    'body.cmt-shtri #cmt-sheet{max-height:calc(100vh - 80px)!important}#cmt-sheet tr.sh-tok td:first-child{box-shadow:inset 3px 0 #1a7f5a}#cmt-sheet tr.sh-hide{display:none}' +
+    '#cmt-sheet tr.sh-pr>td{padding:10px 10px 14px!important;background:#eef2f5!important;white-space:normal!important;max-width:none!important;position:sticky;left:0}' +
+    '#cmt-sheet .sh-prbar{position:sticky;left:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px;padding:8px 12px;border-radius:12px;color:#fff;font:600 12.5px Figtree,system-ui,sans-serif;background:radial-gradient(420px 160px at 95% -40%,rgba(217,160,70,.35),transparent 70%),linear-gradient(135deg,#1b3553,#122840);max-width:calc(100vw - 340px)}' +
+    '#cmt-sheet .sh-prbar b{font-size:14px;font-weight:800}#cmt-sheet .sh-prbar span{color:#c9d3dc}#cmt-sheet .sh-prbar .k{margin-left:auto;color:#e6c27a;font-size:11px}' +
+    '#cmt-sheet .sh-prbar button{height:28px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);border-radius:8px;font:700 12px Figtree,sans-serif;color:#dfe5ee;cursor:pointer;padding:0 10px}#cmt-sheet .sh-prbar button:hover{background:rgba(255,255,255,.14)}#cmt-sheet .sh-prbar .pri{background:#c4953c;border-color:#c4953c;color:#1f2442}' +
+    '#cmt-sheet .sh-prhost{position:sticky;left:10px;max-width:calc(100vw - 340px)}#cmt-sheet .sh-prhost .pr-cnt{padding:0}' +
     'body.cmt-sheet-on .cmt-dados-grade~*{display:none!important}' +
     '#cmt-sheet{order:-1;background:#fff;border:1px solid #e5e1d8;border-radius:18px;box-shadow:0 12px 28px rgba(20,38,60,.05);font-family:Figtree,system-ui,sans-serif;color:#14263c;max-height:78vh;overflow:auto;position:relative}#cmt-sheet[hidden]{display:none}' +
     '#cmt-sheet .sh-bar{position:sticky;left:0;top:0;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 14px;background:#fbfaf7;border-bottom:1px solid #eee7da}#cmt-sheet .sh-bar b{font:800 15px Figtree,system-ui,sans-serif}#cmt-sheet .sh-bar>span{color:#6d7b8a;font-size:12.5px;margin-right:auto}' +
@@ -14851,8 +14938,8 @@ else setTimeout(ready, 0);
     s.innerHTML=h.length?`<b>Sugestão: monocrática.</b> Hipótese marcada: ${esc(h.join(', '))}.`:'<b>Sugestão: sessão.</b> Nenhuma hipótese de monocrática marcada.';}
   function registro(p){if(window.CMTProntuario&&CMTProntuario.fonte){const r=CMTProntuario.fonte(p); if(r) return r;} return ((typeof ACV!=='undefined'&&ACV.recs)||[]).find(o=>o.p===p)||{p};}
   function html(o){
-    const tk=(o.tks||[])[0]||{}, dd=tk.de?Math.round((Date.now()-new Date(tk.de))/864e5):null;
-    const desde=tk.de?String(tk.de).slice(0,10).split('-').reverse().join('/'):'—', etq=o.etq||[];
+    const tk=(o.tks||[])[0]||{}, toD=v=>{if(v==null||v==='')return null; if(typeof v==='number'||/^\d{5}(\.\d+)?$/.test(String(v))) return new Date(Math.round((+v-25569)*864e5)); const m=String(v).match(/^(\d{2})\/(\d{2})\/(\d{4})/); const d=m?new Date(+m[3],+m[2]-1,+m[1]):new Date(v); return isNaN(d)?null:d;}, d0=toD(tk.de), dd=d0?Math.round((Date.now()-d0)/864e5):null;
+    const desde=d0?d0.toLocaleDateString('pt-BR'):'—', etq=o.etq||[];
     let h=TPL.replace('%%CLASSE%%',esc(o.classe||'—')).replace('%%P%%',esc(o.p)).replace('%%ASS%%',esc(o.assunto||''))
       .replace('%%PARTES%%',esc((o.ativo||'')+(o.passivo?' × '+o.passivo:''))).replace('%%DESDE%%',esc(desde)).replace('%%TAREFA%%',esc(tk.t||'—'))
       .replace('%%DIAS%%',dd==null?'—':dd+' dias').replace('%%NETQ%%',etq.length).replace('%%ETQ%%',etq.map(chip).join('')||'<small style="color:#8a98a3">sem etiquetas</small>')
