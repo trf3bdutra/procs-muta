@@ -616,3 +616,9 @@ body:not(.vdm-ed) #openSheet{display:none!important}
 .xconfc li button{display:block;width:100%;text-align:left;background:transparent;border:1px solid var(--line,#2c313a);border-radius:7px;padding:6px 9px;margin-bottom:4px;color:inherit;cursor:pointer;font:13px Figtree,sans-serif}
 .xconfc li button:hover{border-color:var(--gold,#d4ab58)}
 @media (max-width:860px){.xa>#x-main{order:-1}.xbar{position:static}.xbs select,.xbs input{max-width:none}}
+
+/* caso na ficha do modelo */
+.m-caso{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0 4px;font-size:12px}
+.m-caso>span{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.m-caso input{width:220px;max-width:100%;padding:5px 8px;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font-size:12.5px}
+.m-caso small{color:var(--mut);flex-basis:100%}
