@@ -173,9 +173,20 @@ def montar(var):
     # identidade gêmea da Pauta da equipe: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
     css += (H/'publico.css').read_text(encoding='utf-8') + (H/'acesso.css').read_text(encoding='utf-8')
     t = troca(t, '<div class="brand"><small>TRF3 · Gabinete CMT</small><b>CMT Compêndio · Referenciais</b></div>',
-              '<div class="brand tw"><i></i><span>GABINETE CMT · <em>' + ('EDITOR' if var == 'editor' else 'COMPÊNDIO') + '</em></span></div>')
+              '<div class="brand tw"><i></i><span>GABINETE CMT · <em>' + ('EDITOR' if var == 'editor' else 'EQUIPE') + '</em></span></div>')
     a = '  <div class="right">\n'
-    t = troca(t, a, a + '    <span id="ac-chip" class="ac-chip"></span>\n    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>◧ Monitor</a>\n    <a class="hb-eq" href="/equipe/">Pauta da equipe</a>\n')
+    SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
+    t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>◧ Monitor</a>\n'
+              '    <a class="hb ic hbx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<i class="bdg" id="eq-cnot" hidden></i></a>'
+              '<a class="hb ic hbx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<i class="bdg" id="eq-cpen" hidden></i></a>\n')
+    # barra unificada com a Pauta da equipe: Início, Pauta, Compêndio; as seções do Compêndio descem para uma faixa logo abaixo
+    i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
+    secoes = t[i0:i1]; t = t[:i0] + t[i1:]
+    k = t.index('<div class="brand tw">'); k = t.index('</span></div>\n', k) + len('</span></div>\n')
+    t = t[:k] + '  <nav class="eqtabs" aria-label="Seções"><a href="/equipe/#inicio">Início</a><a href="/equipe/#pauta">Pauta</a><a href="/compendio/" aria-current="page">Compêndio</a></nav><span class="eqsp"></span>\n' + t[k:]
+    a = '  </div>\n</header>\n'
+    t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a + '<div class="cp-sub">\n' + secoes + '</div>\n')
+    js += '\n' + (H/'eqnav.js').read_text(encoding='utf-8')
     t = troca(t, "try{var th=localStorage.getItem('vdm-theme');if(th)document.documentElement.setAttribute('data-theme',th);}catch(e){}",
               "try{var th=localStorage.getItem('cmt-eq-tema')||'light';document.documentElement.setAttribute('data-theme',th);}catch(e){}")
     t = troca(t, "localStorage.setItem('vdm-theme',nv);", "localStorage.setItem('vdm-theme',nv);localStorage.setItem('cmt-eq-tema',nv);")

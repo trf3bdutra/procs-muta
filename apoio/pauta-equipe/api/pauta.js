@@ -13,12 +13,14 @@ module.exports = async (req, res) => {
     /* só as pautas que o Monitor publicou para a equipe */
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
     if (!(cal.sessoes || []).some(s => s.date === data && s.publicada)) return res.status(403).json({ erro: 'Esta pauta ainda não foi publicada para a equipe.' });
-    if (req.method === 'GET') { const { dados } = await L.lerJson(rel); return res.status(200).json(dados); }
+    /* importado o PDF, a pauta é fixa: a pré-pauta deixa de existir para a equipe */
+    if (req.method === 'GET') { const { dados } = await L.lerJson(rel); if ((dados.itens || []).length) dados.previa = []; return res.status(200).json(dados); }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
-    const b = req.body || {}, alvo = dg(b.cnj), lista = b.lista === 'previa' ? 'previa' : 'itens', C = b.campos || {};
+    const b = req.body || {}, alvo = dg(b.cnj), C = b.campos || {};
     if (alvo.length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
     for (let t = 0; t < 4; t++) {
       const { dados, sha } = await L.lerJson(rel);
+      const lista = b.lista === 'previa' && !(dados.itens || []).length ? 'previa' : 'itens';
       const it = (dados[lista] || []).find(i => dg(i.cnj) === alvo);
       if (!it) return res.status(404).json({ erro: 'processo fora desta pauta' });
       const mud = [];

@@ -39,7 +39,7 @@
     var ses=CQ.ses,it=String(CQ.item||'').trim();if(!ses||!it){toastC('Escolha a sessão e informe o item.');return;}
     CQ.busy=true;render();
     jget('/api/pauta?data='+ses).then(function(doc){
-      var L=(doc.itens||[]).concat(doc.previa||[]),d=dg(it);
+      var L=(doc.itens||[]).length?doc.itens:(doc.previa||[]),d=dg(it);
       var x=L.filter(function(i){return String(i.item)===it;})[0]||L.filter(function(i){return d.length>=7&&dg(i.cnj).indexOf(d)>=0;})[0];
       if(!x)throw new Error('Item '+it+' não encontrado na pauta de '+brd(ses)+'.');
       CQ.perfil=perfilDoItem(x);CQ.fonte='pauta de '+brd(ses)+(x.item?' · item '+x.item:'');CQ.erro='';
