@@ -328,3 +328,15 @@ section>.sub{display:none}
 #vdm-bal .bm{color:var(--mut);font-size:11px;margin-top:5px}
 @media (max-width:1180px){.n-wrap,.n-wrap.nodet{grid-template-columns:240px minmax(0,1fr)}.n-det{position:fixed;top:64px;right:0;bottom:0;height:auto;width:min(440px,100%);z-index:25;box-shadow:-10px 0 30px rgba(0,0,0,.3)}}
 @media (max-width:860px){.n-wrap,.n-wrap.nodet{grid-template-columns:1fr}.n-f{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line)}.n-row{grid-template-columns:76px minmax(0,1fr)}.n-mk{grid-column:1/-1}.n-det{top:0}}
+/* Repertório */
+.rg-h{font-size:13px;margin:12px 0 6px;color:var(--gold)}.rg-h small{color:var(--mut);font-weight:500}
+.n-row.rg{grid-template-columns:80px minmax(0,1fr) auto}
+details.matriz{background:var(--card);border:1px solid var(--gold);border-radius:10px;padding:10px 14px;margin:6px 0 12px}
+details.matriz summary{font-weight:700;color:var(--gold);cursor:pointer}
+details.matriz ol{margin:4px 0 10px 18px;padding:0;font-size:12.5px}
+/* Ementário: citações, tabela de modelos e parágrafos em lista */
+.e-cita{display:flex;flex-direction:column;gap:8px}.e-cita .meta{display:block;margin:0 0 4px;font-size:11px}
+.m-tbl tbody th{white-space:normal;min-width:220px}
+.p-row{grid-template-columns:86px minmax(0,1fr) auto}.p-row .n-m{white-space:nowrap}
+.p-row .n-tx .s{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.p-row .n-m{background:var(--field);color:var(--mut)}
