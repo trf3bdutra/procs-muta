@@ -10134,9 +10134,21 @@ function rpRender(cx){
   return { p0, p1, toc, sig:sigTotal, pal:PL };
 }
 
+/* gerador de PDF: jsPDF + AutoTable carregados na primeira vez que um relatório é pedido */
+let JSPDF_P = null;
+function carregarJsPDF(cb){
+  const ok = () => window.jspdf && window.jspdf.jsPDF && window.jspdf.jsPDF.API && window.jspdf.jsPDF.API.autoTable;
+  if (ok()){ cb(); return; }
+  toast('Carregando o gerador de PDF…');
+  const add = src => new Promise((res, rej) => { const el = document.createElement('script'); el.src = src; el.async = true; el.onload = res; el.onerror = () => rej(new Error('falha ao carregar ' + src)); document.head.appendChild(el); });
+  JSPDF_P = JSPDF_P || add('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+    .then(() => add('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js'));
+  JSPDF_P.then(() => { if (ok()) cb(); else throw new Error('jsPDF sem AutoTable'); })
+    .catch(e => { JSPDF_P = null; console.error('[CMT] PDF', e); toast('Não foi possível carregar o gerador de PDF. Verifique a internet e tente de novo.'); });
+}
 function rpPDF(){
   if (!ACV.recs){ toast('Importe o acervo antes de gerar relatórios.'); return; }
-  const J = window.jspdf && window.jspdf.jsPDF; if (!J){ toast('O gerador de PDF não carregou neste navegador.'); return; }
+  const J = window.jspdf && window.jspdf.jsPDF; if (!J || !J.API || !J.API.autoTable){ carregarJsPDF(() => rpPDF()); return; }
   const D = rpCur(), R = RP_CAT.find(r => r.id === RP.id) || { g:'', d:'' }, ori = rpOri(), modo = rpCapaModo();
   if (RP_UNI[R.g]) return rpUnico(R.g, rpCapsSel(R.g));
   const fazer = sum => { const doc = new J({ orientation:ori, unit:'mm', format:'a4' }), F = rpFonte(doc); const r = rpRender({ doc, F, D, R, id:RP.id, ori, modo, fresh:true, sumario:sum }); return { doc, r }; };
@@ -10195,7 +10207,7 @@ function rpGestao(ids){ return rpUnico(RP_CAP_G, ids); }
 function rpUnico(g, ids){
   if (!ACV.recs){ toast('Importe o acervo antes de gerar relatórios.'); return; }
   if (!ids.length){ toast('Marque pelo menos um capítulo.'); return; }
-  const J = window.jspdf && window.jspdf.jsPDF; if (!J){ toast('O gerador de PDF não carregou neste navegador.'); return; }
+  const J = window.jspdf && window.jspdf.jsPDF; if (!J || !J.API || !J.API.autoTable){ carregarJsPDF(() => rpUnico(g, ids)); return; }
   const itens = rpDocsDe(ids), doc = new J({ orientation:'p', unit:'mm', format:'a4' }), F = rpFonte(doc), C = RP_COR, PL = rpPal(g), U = RP_UNI[g], W = 210, H = 297, agora = new Date();
   const fonte = (st, sz, cor) => { doc.setFont(F, st); doc.setFontSize(sz); doc.setTextColor(...cor); };
   /* capa do relatório */
@@ -10239,7 +10251,7 @@ function rpUnico(g, ids){
 }
 function rpPacote(chave){
   if (!ACV.recs){ toast('Importe o acervo antes de gerar relatórios.'); return; }
-  const J = window.jspdf && window.jspdf.jsPDF; if (!J){ toast('O gerador de PDF não carregou neste navegador.'); return; }
+  const J = window.jspdf && window.jspdf.jsPDF; if (!J || !J.API || !J.API.autoTable){ carregarJsPDF(() => rpPacote(chave)); return; }
   const P = RP_PACOTES.find(p => p[0] === chave) || RP_PACOTES[0], ids = (P[2] || RP_CAT.map(r => r.id)).filter(id => RP_CAT.some(r => r.id === id));
   const itens = rpDocsDe(ids);
   const doc = new J({ orientation:'p', unit:'mm', format:'a4' }), F = rpFonte(doc), C = RP_COR, W = 210, H = 297, agora = new Date();
@@ -15045,6 +15057,9 @@ body.au-pan #au-pan-top>.pt-h .mx-sub{margin:6px 0 0;font-size:13px;color:#2b4a6
 #au-pan-ind .ai-b .au-gabslot>h4,#au-pan-ind .ai-b>h4.au-sub4,#au-pan-ind .ai-b .au-rlmov>h2{border-left:3px solid var(--mx,#2b698e)!important;padding:0 0 0 10px!important;font:800 16px Figtree,system-ui,sans-serif!important;color:#14263c!important;background:none!important;scroll-margin-top:80px}
 #au-pan-ind .ai-b .au-gabslot>h4::before,#au-pan-ind .ai-b>h4.au-sub4::before,#au-pan-ind .ai-b .au-rlmov>h2::before,#au-pan-ind .ai-b .au-gabslot::before{display:none!important;content:none!important}
 #au-pan-top .au-balm .au-balt,#au-pan-top .au-bal.mx-dir .au-balt{left:auto!important;right:0!important}
+/* botões de recolher os painéis laterais: sempre visíveis, mesmo com o painel rolado */
+@media (min-width:1061px){body:not(.ix-min) .index>.side-tog.l{position:fixed!important;top:62px!important;left:calc(var(--ixw) - 40px)!important;right:auto!important;z-index:45}
+body:not(.rail-min) .rail>.side-tog.r{position:fixed!important;top:62px!important;right:calc(var(--rlw) - 42px)!important;left:auto!important;z-index:45}}
 @media (max-width:1100px){body.au-pan #au-pan-top{grid-template-columns:minmax(0,1fr)}#mx-idx{display:none}body.au-pan #au-pan-top>nav.pt-nav{display:flex!important}#au-pan-ind .ai-ks{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style>
 <script id="mx-js">
