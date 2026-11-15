@@ -159,6 +159,18 @@ def montar(editor):
             assert t.count(a) == 1, a; t = t.replace(a, '')
         t = t.replace('<section id="v-temas">', '<section id="v-temas" hidden>', 1)
         js = 'window.VDM_PUBLICO=true;\n' + js
+        # identidade gêmea da Pauta da equipe: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
+        css += (H/'publico.css').read_text(encoding='utf-8')
+        a = '<div class="brand"><small>TRF3 · Gabinete CMT</small><b>CMT Compêndio · Referenciais</b></div>'
+        assert t.count(a) == 1; t = t.replace(a, '<div class="brand tw"><i></i><span>GABINETE CMT · <em>COMPÊNDIO</em></span></div>')
+        a = '  <div class="right">\n'
+        assert t.count(a) == 1; t = t.replace(a, a + '    <a class="hb-eq" href="/equipe/">Pauta da equipe</a>\n')
+        a = "try{var th=localStorage.getItem('vdm-theme');if(th)document.documentElement.setAttribute('data-theme',th);}catch(e){}"
+        assert t.count(a) == 1
+        t = t.replace(a, "try{var th=localStorage.getItem('cmt-eq-tema')||'light';document.documentElement.setAttribute('data-theme',th);}catch(e){}")
+        t = t.replace("<title>CMT Compêndio</title>", "<title>Compêndio · Gabinete CMT</title>", 1)
+        a = "localStorage.setItem('vdm-theme',nv);"
+        assert t.count(a) == 1; t = t.replace(a, "localStorage.setItem('vdm-theme',nv);localStorage.setItem('cmt-eq-tema',nv);")
     pre = ''
     if editor:
         cab = lambda p: {k: v for k, v in ler(p).items() if k != 'registros'}
