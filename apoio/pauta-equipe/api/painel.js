@@ -13,8 +13,8 @@ module.exports = async (req, res) => {
       const lista = (d.itens || []).length ? d.itens : (d.previa || []);
       lista.forEach(it => {
         const pm = L.norm(it.servidor) === eu, pc = L.norm(it.corretor) === eu; if (!pm && !pc) return;
-        meus.push({ sessao: s.date, item: it.item || '', cnj: it.cnj, classe: it.classe || '', assunto: it.assunto || '', partes: it.partes || '',
-          papel: pm && pc ? 'minuta e correção' : pm ? 'minuta' : 'correção', servidor: it.servidor || '', corretor: it.corretor || '',
+        meus.push({ papel: pm && pc ? 'minuta e correção' : pm ? 'minuta' : 'correção', sessao: s.date, item: it.item || '', cnj: it.cnj, classe: it.classe || '', assunto: it.assunto || '', partes: it.partes || '',
+          servidor: it.servidor || '', corretor: it.corretor || '',
           dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', resultado: it.resultado || '',
           resJulg: (it.ctl || {}).resJulg || '', previa: !(d.itens || []).length });
       });
