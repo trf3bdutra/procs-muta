@@ -108,7 +108,31 @@ table.mtb tr.mpd td{background:#fff8de}table.mtb tr.enc td{background:#f1f5f2;co
 /* ===== Pauta de Julgamento ===== */
 #v-pauta{max-width:1500px}
 .pt-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 0 12px}.pt-h h1{margin:2px 0 0;font-size:28px;letter-spacing:-.01em}.pt-st{font-size:12px;font-weight:700;color:var(--mut)}
-.pt-top{display:grid;grid-template-columns:minmax(300px,1fr) minmax(0,3fr);gap:10px;margin-bottom:10px}
+.pt-top{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px}
+/* painel superior da pauta: trilho da sessão (zona escura do design system Gabinete CMT) */
+.trb{background:#0a1821;color:#dee2e5;border:1px solid #1e3747;border-radius:12px;overflow:hidden;margin:2px 0 14px}
+.trb-in{padding:18px 20px}.trb-h{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between}
+.trb-ey{display:block;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#6eba8a}
+.trb h1{margin:4px 0 0;font-size:26px;font-weight:750;letter-spacing:-.01em;color:#ebeff1}.trb-d{margin:4px 0 0;font-size:13px;color:#a7a8a9}
+.trb-c{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.trb-c .b.ic2{width:34px;height:34px;background:#10222e;border:1px solid #1e3747;color:#a4cae5}.trb-c .b.ic2:hover{border-color:#4e9bcb}
+.trb-sl{display:flex;align-items:center;gap:8px;height:34px;padding:0 10px;border:1px solid #1e3747;border-radius:6px;background:#10222e;color:#a7a8a9;font-size:12px;font-weight:700}
+.trb-sl select{background:#10222e;color:#ebeff1;border:0;font:700 13px var(--font);max-width:280px;text-overflow:ellipsis}
+.trb .seg{border-color:#1e3747;background:#10222e}.trb .seg button{color:#c3cbd1}.trb .seg button[aria-pressed=true]{background:#4e9bcb;color:#061119}
+.trb-tag{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#6eba8a;background:#10222e;border:1px solid #1e3747;border-radius:999px;padding:4px 10px}.trb-tag:empty{display:none}
+.trb-mk{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+.tm{display:flex;flex-direction:column;gap:3px;min-width:0;padding-right:6px}.tm-l{display:flex;align-items:center;height:30px}
+.tm-i{width:28px;height:28px;border-radius:999px;display:grid;place-items:center;flex-shrink:0;border:2px solid #4e9bcb;background:#0a1821;color:#a4cae5}
+.tm-c{flex:1;height:0;border-top:3px dashed #2c4a5c;margin:0 3px}.tm-c.ok{border-top-style:solid;border-color:#6eba8a}
+.tm small{margin-top:4px;font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#a7a8a9}.tm b{font-size:16px;font-weight:750;color:#ebeff1}.tm .tm-s{font-size:12px;color:#a7a8a9}
+.tm.feito .tm-i{background:#1a653e;border-color:#6eba8a;color:#d6ecdd}.tm.feito small{color:#6eba8a}
+.tm.hoje .tm-i{width:16px;height:16px;margin:0 6px;background:#c0782f;border-color:#f3c48f}.tm.hoje small{color:#f3c48f}
+.tm.prox .tm-i{border-color:#f3c48f;color:#f3c48f;box-shadow:0 0 0 4px #33261d}.tm.prox small,.tm.prox .tm-s{color:#f3c48f}
+.trb-p{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.tp{background:#10222e;border:1px solid #1e3747;border-radius:8px;padding:10px 12px}
+.tp-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.tp-h small{font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#a7a8a9}.tp-h b{font-size:13px;color:#ebeff1;white-space:nowrap}
+.tp-b{height:7px;border-radius:4px;background:#0c2839;overflow:hidden;margin-top:8px}.tp-b i{display:block;height:100%;background:#6eba8a}.tp.eu .tp-b i{background:#4e9bcb}
+.trb-fil{display:flex;height:3px}.trb-fil i{flex:1;background:#006291}.trb-fil i+i{background:#207242}
+#v-pauta.mono .trb,#v-pauta.ctl .trb,#v-pauta.urg .trb{display:none!important}#v-pauta:not(.mono):not(.ctl):not(.urg) .pt-h,#v-pauta:not(.mono):not(.ctl):not(.urg) #mk{display:none}
+@media (max-width:900px){.trb-p{grid-template-columns:repeat(2,minmax(0,1fr))}.trb-mk{overflow-x:auto;grid-auto-columns:minmax(118px,1fr)}.trb h1{font-size:22px}}
 .pt-ses{background:var(--card);border:1px solid var(--line);border-left:3px solid #c4953c;border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
 .pt-sl{display:flex;align-items:center;justify-content:space-between;gap:8px}.pt-sl small{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
 .pt-sl .tag{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:#e3f0ea;color:#28744b;border-radius:999px;padding:3px 10px}
@@ -535,11 +559,13 @@ html[data-theme=dark] .st.ok{background:#183447!important}
       <div class="pg2"><div><h3>Resumo por dia</h3><div class="hw" id="pd"></div></div><div><h3>Atividades registradas <small id="pa-c" class="mut"></small></h3><div class="hw" id="hist"></div></div></div></section>
   </main>
   <main id="v-pauta" hidden>
+    <section class="trb" id="trb" aria-labelledby="trb-t"><div class="trb-in">
+      <div class="trb-h"><div><small class="trb-ey">Produção · Pauta de julgamento</small><h1 id="trb-t">Pauta de julgamento</h1><p class="trb-d" id="trb-d"></p></div>
+        <div class="trb-c"><span class="trb-tag" id="ses-tag"></span><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><label class="trb-sl">Sessão<select id="ses" aria-label="Sessão"></select></label><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span><small id="ses-sub" hidden></small></div></div>
+      <ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
+      <div class="trb-p" id="trb-p"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <div class="pt-top">
-      <div class="pt-ses"><div class="pt-sl"><small>Sessão selecionada</small><span class="tag" id="ses-tag"></span></div>
-        <div class="pt-ss"><span class="pt-cal">▦</span><select id="ses" aria-label="Sessão"></select><button class="b ic2" id="ses-ant" aria-label="Sessão anterior">‹</button><button class="b ic2" id="ses-prox" aria-label="Próxima sessão">›</button></div>
-        <small id="ses-sub"></small><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span></div>
       <div class="pt-k" id="pt-k"></div>
     </div>
     <section class="urg" id="urg" hidden></section>
@@ -797,6 +823,7 @@ function render(){
   var card=function(k,t,vals){return '<div class="pk'+(S.kx[k]?' ab':'')+'"><div class="pk-h"><small>'+t+'</small><button class="pk-x" data-kx="'+k+'" aria-label="Detalhar">'+(S.kx[k]?'˄':'˅')+'</button></div><p>'+vals.map(function(v){return '<b>'+v[0]+'</b> '+v[1];}).join('<i></i>')+'</p>'+det(k)+'</div>';};
   if(UR){painelUrg();$('#pt-st').textContent='';return;}
   $('#pt-k').innerHTML=(MO?card('p','Monocráticas registradas',[[L.length,'registradas'],[n(function(i){return !i.dataMinuta;}),'a minutar'],[n(urgDe),'com pedido urgente'],[n(urgPend),'urgências pendentes']]):card('p','Processos da sessão',[[L.length,'pautados'],[jul,'julgados'],[adi,'adiados'],[ret,'retirados']]))+(MO?card('m','Minuta · revisão · assinatura',[[mi,'minutados'],[co,'revisados'],[li,'para assinatura']]):card('m','Minutas · revisão · liberação',[[mi,'minutados'],[co,'corrigidos'],[li,'liberados']]))+card('a','Alertas · intercorrências',[[al,'com alertas'],[ic,'intercorrências'],[sem,'sem minutante']]);
+  if(!MO)trilhoSessao(ss,L,h,mi,co,li);
   var MKI=[['pautarAte','Peço dia','▦'],['inicioPreparacao','Preparação','⚑'],['entregaMinutas','Entrega das minutas','◷'],['liberacao','Liberação dos votos','✓'],['date','Sessão','◇']];
   $('#mk').innerHTML=MKI.map(function(x){var d=x[0]==='date'?S.ses:m[x[0]];return '<div class="mi'+(x[0]==='date'?' ses':'')+(d&&d<h&&x[0]!=='date'?' pas':'')+'"><span class="mc">'+x[2]+'</span><div><small>'+x[1]+'</small><b>'+(d?esc(br(d)):'—')+'</b></div></div>';}).join('');
   /* barra de filtros */
@@ -808,6 +835,30 @@ function render(){
   if(!V.length){$('#lst').innerHTML='<div class="empty">'+(L.length?(S.escopo==='meus'?(MO?'Nenhuma monocrática sua. Clique em "Todos" ou registre uma acima.':'Nenhum processo seu nesta pauta. Clique em "Todos".'):'Nenhum processo com esses filtros.'):(MO?'Nenhuma monocrática registrada. Use a faixa Registrar monocrática ou crie a partir de uma urgência.':'Esta sessão ainda não tem pauta.'))+'</div>';return;}
   $('#lst').className='lst '+S.modo;
   $('#lst').innerHTML=S.modo==='planilha'?(MO?planilhaMono(V):planilha(V)):V.map(cartao).join('');
+}
+/* painel superior da pauta: título da sessão, marcos ligados pelo trilho (feito · hoje · próximo · futuro) e o progresso */
+var TRI={pautarAte:'<path d="M5 21V4h11l-2 4 2 4H5"/>',inicioPreparacao:'<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 3h6v3H9zM9 12h6M9 16h4"/>',
+  entregaMinutas:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 14l2 2 4-4"/>',liberacao:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.5-2"/>',
+  date:'<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/>'};
+function trilhoSessao(ss,L,h,mi,co,li){
+  if(!$('#trb'))return;var m=ss.marcos||{},ses=S.ses,tot=L.length,pl=function(n,s,p){return n+' '+(n===1?s:p);};
+  $('#trb-t').textContent=ses?'Sessão de '+br(ses)+(ss.hora?' · '+ss.hora:''):'Nenhuma pauta liberada';
+  var dS=ses?dias(h,ses):0,dE=m.entregaMinutas?dias(h,m.entregaMinutas):-1,txt='';
+  if(ses){txt=pl(tot,'processo','processos')+(S.lista==='previa'?' na pré-pauta':'')+' · ';
+    txt+=dS<0?'sessão realizada.':dS===0?'a sessão é hoje.':dE>0?'faltam '+pl(dE,'dia','dias')+' para a entrega das minutas e '+dS+' para a sessão.':dE===0?'a entrega das minutas é hoje; faltam '+pl(dS,'dia','dias')+' para a sessão.':'faltam '+pl(dS,'dia','dias')+' para a sessão.';}
+  $('#trb-d').textContent=txt;
+  var N=[['pautarAte','Peço dia'],['inicioPreparacao','Preparação'],['entregaMinutas','Entrega das minutas'],['liberacao','Liberação'],['date','Sessão']]
+    .map(function(x){return {k:x[0],n:x[1],d:x[0]==='date'?ses:m[x[0]]};}).filter(function(x){return x.d;});
+  if(ses&&N.length&&N[0].d<h&&h<ses&&!N.some(function(x){return x.d===h;}))N.push({k:'hoje',n:'Hoje',d:h});
+  N.sort(function(a,b){return a.d.localeCompare(b.d)||(a.k==='hoje'?-1:1);});
+  var px=N.filter(function(x){return x.d>h;})[0];
+  $('#trb-mk').innerHTML=N.map(function(x,i){var st=x.d<h?'feito':x.d===h?'hoje':x===px?'prox':'fut',nx=N[i+1];
+    var sub=x.k==='hoje'?'você está aqui':st==='feito'?'concluído':st==='hoje'?'hoje':quando(x.d);if(x.k==='date'&&ss.hora)sub+=' · '+ss.hora;
+    var ic=x.k==='hoje'?'':'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+TRI[x.k]+'</svg>';
+    return '<li class="tm '+st+'" title="'+esc(x.n+' · '+br(x.d))+'"><div class="tm-l"><span class="tm-i">'+ic+'</span>'+(nx?'<span class="tm-c'+(nx.d<=h?' ok':'')+'"></span>':'')+'</div><small>'+esc(x.n)+'</small><b>'+esc(br(x.d).slice(0,5))+'</b><span class="tm-s">'+esc(sub)+'</span></li>';}).join('');
+  var eu=nq(U.eu),me=L.filter(function(i){return nq(i.servidor)===eu;}),mf=me.filter(function(i){return i.dataMinuta;}).length;
+  var bar=function(t,a,b,c){var p=b?Math.round(a/b*100):0;return '<div class="tp'+(c?' '+c:'')+'"><div class="tp-h"><small>'+t+'</small><b>'+(b?a+' de '+b+' · '+p+'%':'—')+'</b></div><div class="tp-b"><i style="width:'+p+'%"></i></div></div>';};
+  $('#trb-p').innerHTML=bar('Minhas minutas',mf,me.length,'eu')+bar('Minutas do gabinete',mi,tot)+bar('Correções',co,tot)+bar('Liberações',li,tot);
 }
 /* ================= ficha única do processo (padrao/ficha.json → acervo/operacional.json) ================= */
 var FD={it:null,F:null,op:null,fo:null,aba:'Triagem',dest:null,pend:{},t:null,gestor:false,mostra:{}};
