@@ -201,7 +201,7 @@ CAMPOS = {
                 "Regularidade Manual", "Observação da Representação", "MPF", "MPF - Custos Legis", "ID do Parecer MPF",
                 "Parecer - Sentido", "MPF - Info adicional", "Observação MPF", "Tema", "COMPLEXIDADE", "Tipo de Voto",
                 "Prelim.", "Descrição da Preliminar", "META", "Seleção Prévia", "Mídias", "Etiquetas", "Alegações",
-                "O que falta sanar", "Intercorrências"],
+                "O que falta sanar", "Intercorrências", "Síntese Processual", "Especificidades"],
     "producao": ["Destino", "SERVIDOR", "MINUTADO", "Refinado", "CORRETOR", "CORRIGIDO", "Data da Revisão", "LIBERADO",
                  "Data da Liberação", "Rev - Atenção", "Tópico-síntese", "Rev - Ementa", "Rev - Subementa", "Rev - IDs",
                  "Rev - Mérito", "Rev - Honorários", "Rev - Nota de atenção", "Assinado", "Data da Assinatura",
@@ -250,11 +250,36 @@ def integrar_sessoes(raiz, regs):
         r["pauta"]["sessoes"].sort(key=lambda x: x["sessao"])
 
 
+def cnj(n):
+    d = "".join(c for c in str(n) if c.isdigit())
+    return f"{d[:7]}-{d[7:9]}.{d[9:13]}.{d[13]}.{d[14:16]}.{d[16:20]}" if len(d) == 20 else str(n)
+
+
+def unificar(regs):
+    """Um registro por CNJ (número sempre com máscara); duplicatas se fundem, sem perder valor nem sessão."""
+    por = {}
+    for r in regs:
+        r["processo"] = cnj(r["processo"])
+        a = por.get(r["processo"])
+        if not a:
+            por[r["processo"]] = r
+            continue
+        for sec in ("origem", "triagem", "producao", "pauta"):
+            for k, v in r.get(sec, {}).items():
+                if k == "sessoes":
+                    for x in v:
+                        if not any(y.get("sessao") == x.get("sessao") for y in a["pauta"].setdefault("sessoes", [])):
+                            a["pauta"]["sessoes"].append(x)
+                elif vazio(a.setdefault(sec, {}).get(k)) and not vazio(v):
+                    a[sec][k] = v
+    return list(por.values())
+
+
 def organizar(raiz=Path(".")):
     po = raiz / "acervo/operacional.json"
     oper = json.loads(po.read_text(encoding="utf-8"))
     oper["schema_versao"] = 2
-    oper["registros"] = [secionar(r) for r in oper["registros"]]
+    oper["registros"] = unificar([secionar(r) for r in oper["registros"]])
     integrar_sessoes(raiz, oper["registros"])
     for r in oper["registros"]:
         completar(r)

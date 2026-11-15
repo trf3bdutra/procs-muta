@@ -202,6 +202,14 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 
 `_pautaEntries` (entradas por sessão), `_pautaHistory`, `_recursos`, `_contras`, `_ementa`, `_autoMetaTags`, `_preparoAJG`, `_ajgFromDpu`, `_dpuAuto`, `_autoRestriction`, `_magistradoRestricao`, `_restricaoTipo`: vêm do Painel Central e ficam nas seções do operacional, sem exibição direta.
 
+## CMT-monitor · Acervo Central (busca avançada)
+
+- Modos de resultado: **Planilha** e **Triagem**. Na Triagem, cada processo aparece como o seu **Prontuário** (card triável).
+- Ao carregar, o motor lê `acervo/fonte.json` e sobrepõe `acervo/operacional.json` (`CMTOperacional.paraLinha`), convertendo os nomes da Ficha para os do app: `Nova sessão de destino` → `Sessão Destino`, `COMPLEXIDADE` → `Dificuldade`, `Preparo: Dispensado` com AJG/DPU → `AJG`, impedimento em tipo + nome → `Impedimento — Nome`.
+- **⇪ Gravar triagem** grava no `operacional.json`, num commit, só os processos alterados (`CMTOperacional.gravar`), com a conversão inversa e sem gravar valores padrão.
+- O Prontuário traz, além dos campos de antes: Urgência, MPF, Mídias, Seleção prévia e "Próximo passo » Destino" com servidor e corretor.
+- As sessões gravadas pela área Sessões vão para `pauta.sessoes` (formato em seções).
+
 ## Pendências de integração
 
 | # | Ponto | Situação |
