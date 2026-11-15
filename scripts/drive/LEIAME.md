@@ -1,7 +1,8 @@
 # Planilhas do Drive (espelho da Pauta da equipe)
 
-Planilhas do Google atualizadas todo dia útil por uma tarefa agendada, a partir do que está no GitHub.
-Os IDs estão em `planilhas.json`. O app continua sendo o lugar de editar; o Drive é cópia para consulta.
+Planilhas do Google ligadas à Pauta da equipe. **Sincronização nos dois sentidos, quase em tempo real: ver `apps-script/LEIAME.md`.**
+O procedimento abaixo (exportação + tarefa agendada diária, só app → planilha) fica como alternativa sem o Apps Script.
+Os IDs estão em `planilhas.json`.
 
 | Onde | Formato |
 |---|---|

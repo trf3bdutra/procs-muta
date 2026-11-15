@@ -44,3 +44,4 @@ module.exports = async (req, res, u) => {
   } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
 module.exports.base = base;
+module.exports.MAPA = MAPA;

@@ -2,14 +2,42 @@
    GET  /api/pauta?data=AAAA-MM-DD            pauta da sessão (itens e pré-pauta)
    POST /api/pauta?data=AAAA-MM-DD  {cnj, lista, campos}   grava campos de um processo, num commit, com nova tentativa se o arquivo mudou;
                                                           o mesmo commit leva os campos à ficha do processo em acervo/operacional.json
-   GET/POST /api/pauta?ficha=…                             ficha única do processo (ver _ficha.js) */
+   GET/POST /api/pauta?ficha=…                             ficha única do processo (ver _ficha.js)
+   GET/POST /api/pauta?planilha=1                          planilhas do Google Drive, por token (ver _planilha.js) */
 const L = require('./_lib'), FICHA = require('./_ficha');
 const DIRETOS = ['dataMinuta', 'dataCorrecao', 'dataLiberacao', 'obs'];
 const CTL = ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias', 'resJulg', 'consect', 'honor', 'topico', 'intercor', 'sopref'];
 const GESTOR = ['servidor', 'corretor', 'resultado'];   /* designação e desfecho: só o gestor (CMT_GESTOR) */
 const dg = s => String(s || '').replace(/\D/g, '');
+/* grava campos de um processo da pauta; devolve {status, body}. gestorOk: pode designar e registrar o desfecho */
+async function gravarItem(data, b, u, gestorOk) {
+  const rel = 'acervo/sessoes/' + data + '.json', alvo = dg(b.cnj), C = b.campos || {};
+  if (alvo.length !== 20) return { status: 400, body: { erro: 'número do processo inválido' } };
+  for (let t = 0; t < 4; t++) {
+    const { dados, sha } = await L.lerJson(rel);
+    const lista = b.lista === 'previa' && !(dados.itens || []).length ? 'previa' : 'itens';
+    const it = (dados[lista] || []).find(i => dg(i.cnj) === alvo);
+    if (!it) return { status: 404, body: { erro: 'processo fora desta pauta' } };
+    const mud = [];
+    DIRETOS.forEach(k => { if (k in C && it[k] !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
+    if (gestorOk) GESTOR.forEach(k => { if (k in C && it[k] !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
+    it.ctl = it.ctl || {};
+    CTL.forEach(k => { if (k in C) { const v = String(C[k] || ''); if ((it.ctl[k] || '') !== v) { if (v) it.ctl[k] = v; else delete it.ctl[k]; mud.push(k); } } });
+    if (C.cartao && typeof C.cartao === 'object') { const ant = it.ctl.cartao || {}; Object.keys(C.cartao).forEach(k => { if (JSON.stringify(ant[k]) !== JSON.stringify(C.cartao[k])) { ant[k] = C.cartao[k]; mud.push('cartao.' + k); } }); it.ctl.cartao = ant; }
+    if (!mud.length) return { status: 200, body: { ok: true, item: it, semMudanca: true } };
+    it.ctl.editadoPor = u; it.ctl.editadoEm = new Date().toISOString();
+    dados.atualizadoEm = it.ctl.editadoEm;
+    /* o que a equipe registra vai também para a ficha do processo (acervo/operacional.json), no mesmo commit */
+    const Cf = Object.assign({}, C); if (!gestorOk) GESTOR.forEach(k => delete Cf[k]);
+    try { await FICHA.espelho({ path: rel, txt: JSON.stringify(dados, null, 1) + '\n', sha }, it.cnj, Cf, C.cartao, 'Pauta da equipe (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return { status: 200, body: { ok: true, item: it } }; }
+    catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+  }
+  return { status: 409, body: { erro: 'A pauta mudou várias vezes seguidas; tente de novo.' } };
+}
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
+  /* planilhas do Google (Apps Script): autenticação própria, por token (ver _planilha.js) */
+  if (req.query.planilha) return require('./_planilha')(req, res);
   const u = L.exigir(req, res); if (!u) return;
   if (req.query.mono) return require('./_mono')(req, res, u);
   if (req.query.ficha) return FICHA(req, res, u);
@@ -25,27 +53,8 @@ module.exports = async (req, res) => {
     /* importado o PDF, a pauta é fixa: a pré-pauta deixa de existir para a equipe */
     if (req.method === 'GET') { const { dados } = await L.lerJson(rel); if ((dados.itens || []).length) dados.previa = []; return res.status(200).json(dados); }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
-    const b = req.body || {}, alvo = dg(b.cnj), C = b.campos || {};
-    if (alvo.length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
-    for (let t = 0; t < 4; t++) {
-      const { dados, sha } = await L.lerJson(rel);
-      const lista = b.lista === 'previa' && !(dados.itens || []).length ? 'previa' : 'itens';
-      const it = (dados[lista] || []).find(i => dg(i.cnj) === alvo);
-      if (!it) return res.status(404).json({ erro: 'processo fora desta pauta' });
-      const mud = [];
-      DIRETOS.forEach(k => { if (k in C && it[k] !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
-      if (L.gestor(u)) GESTOR.forEach(k => { if (k in C && it[k] !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
-      it.ctl = it.ctl || {};
-      CTL.forEach(k => { if (k in C) { const v = String(C[k] || ''); if ((it.ctl[k] || '') !== v) { if (v) it.ctl[k] = v; else delete it.ctl[k]; mud.push(k); } } });
-      if (C.cartao && typeof C.cartao === 'object') { const ant = it.ctl.cartao || {}; Object.keys(C.cartao).forEach(k => { if (JSON.stringify(ant[k]) !== JSON.stringify(C.cartao[k])) { ant[k] = C.cartao[k]; mud.push('cartao.' + k); } }); it.ctl.cartao = ant; }
-      if (!mud.length) return res.status(200).json({ ok: true, item: it, semMudanca: true });
-      it.ctl.editadoPor = u; it.ctl.editadoEm = new Date().toISOString();
-      dados.atualizadoEm = it.ctl.editadoEm;
-      /* o que a equipe registra vai também para a ficha do processo (acervo/operacional.json), no mesmo commit */
-      const Cf = Object.assign({}, C); if (!L.gestor(u)) GESTOR.forEach(k => delete Cf[k]);
-      try { await FICHA.espelho({ path: rel, txt: JSON.stringify(dados, null, 1) + '\n', sha }, it.cnj, Cf, C.cartao, 'Pauta da equipe (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return res.status(200).json({ ok: true, item: it }); }
-      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
-    }
-    res.status(409).json({ erro: 'A pauta mudou várias vezes seguidas; tente de novo.' });
+    const r = await gravarItem(data, req.body || {}, u, L.gestor(u));
+    res.status(r.status).json(r.body);
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
+module.exports.gravarItem = gravarItem;
