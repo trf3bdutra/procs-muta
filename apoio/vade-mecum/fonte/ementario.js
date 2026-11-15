@@ -73,6 +73,7 @@ function siglaO(o){if(!o)return 'órgão n/i';if(/Mato Grosso do Sul/.test(o))re
 
 var DIM={
   t:{n:'Tipo',v:function(x){return x.t==='A'?'Acórdão':'Monocrática';}},
+  apr:{n:'Apreciação',v:function(x){return x._apr||'Julgamento do recurso';}},
   ramo:{n:'Ramo',v:function(x){return x._ramo||'Sem ramo informado';}},
   ass:{n:'Assunto',v:function(x){return x._ass||'Sem assunto catalogado';}},
   c:{n:'Classe',v:function(x){return x.c||'—';}},
@@ -80,23 +81,31 @@ var DIM={
   res:{n:'Resultado',v:function(x){return x._res;}},
   y:{n:'Mês',v:function(x){return x.y||'—';}}
 };
-var DIMS=['t','ramo','ass','c','o','res','y'];
+var DIMS=['t','apr','ramo','ass','c','o','res','y'];
 var MODOS=[['lista','Lista'],['mapa','Mapa mental'],['fluxo','Fluxograma'],['tempo','Linha do tempo'],['matriz','Matriz'],['assuntos','Assuntos']];
 var E={idx:null,err:null,carregando:false,F:{},q:'',y1:'',y2:'',modo:'lista',shown:60,open:{},sel:null,mais:{},
-  dm:{mapa:['ramo','ass','res'],fluxo:['ramo','c','res'],matriz:['c','res'],tempo:'res'},mmOpen:null,clsNome:{}};
+  dm:{mapa:['ramo','ass','res'],fluxo:['apr','ramo','res'],matriz:['apr','res'],tempo:'res'},mmOpen:null,clsNome:{}};
 var EM={sub:'prec',q:{}};
-try{var sv=JSON.parse(localStorage.getItem('vdm-ement')||'null');if(sv){if(sv.modo)E.modo=sv.modo;if(sv.dm)E.dm=Object.assign(E.dm,sv.dm);}}catch(e){}
-function salvar(){try{localStorage.setItem('vdm-ement',JSON.stringify({modo:E.modo,dm:E.dm}));}catch(e){}}
+try{var sv=JSON.parse(localStorage.getItem('vdm-ement2')||'null');if(sv){if(sv.modo)E.modo=sv.modo;if(sv.dm)E.dm=Object.assign(E.dm,sv.dm);}}catch(e){}
+function salvar(){try{localStorage.setItem('vdm-ement2',JSON.stringify({modo:E.modo,dm:E.dm}));}catch(e){}}
 
 var SENT={'desprovido':'Desprovido','provido':'Provido','parcialmente provido':'Parcialmente provido','rejeitados':'Embargos rejeitados','acolhidos':'Embargos acolhidos','prejudicado/extinto':'Prejudicado ou extinto','não conhecido':'Não conhecido','outro':'Outro'};
 function ramoDe(rd){var n=nz(rd);if(!n)return null;var m=n.replace(/processual civil|processo civil|processual penal/g,'');for(var j=0;j<MAT.length;j++){if(m.indexOf(MAT[j][0])>=0)return MAT[j][1];}return n.indexOf('penal')>=0?'Processual penal':'Processual civil';}
+function apreciacao(r){
+  var cab=String(r.ementaCabecalho||r.ementa||'').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'').split(/\.\s+/).slice(0,3).join('. ');
+  var res=String(r.resultado||'').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'').slice(0,200),st=r.sentidoResultado||'';
+  if(cab.indexOf('RETRATACAO')>=0||res.indexOf('JUIZO DE RETRATACAO')===0)return 'Juízo de retratação';
+  if(/AGRAVOS? (INTERNOS?|REGIMENTAL|LEGAL)/.test(cab)||/^AGRAVOS? (INTERNOS?|REGIMENTAL|LEGAL)/.test(res))return 'Agravo interno';
+  if(st==='rejeitados'||st==='acolhidos'||cab.indexOf('EMBARGOS DE DECLARACAO')>=0||res.indexOf('EMBARGOS DE DECLARACAO')===0||r.classeSigla==='ED')return 'Embargos de declaração';
+  return 'Julgamento do recurso';
+}
 function carregar(){
   if(E.idx||E.carregando)return;E.carregando=true;
   $('#e-out').innerHTML='<p class="empty">Abrindo a base do gabinete…</p>';
   base().then(function(B){
     var d=(B.prec||[]).map(function(r){
       var x={id:r.id,t:/^voto/i.test(r.pronunciamento||'Voto')?'A':'M',n:r.processo,c:r.classeSigla||r.especie||'',cl:r.classe||'',o:r.orgao||'',d:r.dataJulgamento||'',p:r.dataPublicacao||'',e:r.ementa||'',r:r.resultado||'',temas:r.temas||'',tese:r.tese||'',disp:r.dispositivosCitados||'',jur:r.jurisprudenciaCitada||'',it:!!r.inteiroTeor};
-      x.y=(x.d||'').slice(0,7);x._ramo=ramoDe(r.ramoDireito);x._rd=r.ramoDireito||'';x._ass=r.assunto||null;
+      x.y=(x.d||'').slice(0,7);x._apr=apreciacao(r);x._ramo=ramoDe(r.ramoDireito);x._rd=r.ramoDireito||'';x._ass=r.assunto||null;
       x._res=SENT[r.sentidoResultado]||(x.r?classRes(x.r):'Sem classificação');
       x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x.temas,x._ass,x.tese].join(' '));if(x.c&&x.cl)E.clsNome[x.c]=x.cl;return x;});
     d.sort(function(a,b){return (b.d||'').localeCompare(a.d||'');});
@@ -157,7 +166,7 @@ function renderAside(){
   var opt=function(v){return '<option value="">—</option>'+anos.map(function(y){return '<option value="'+y+'"'+(y===v?' selected':'')+'>'+mesL(y)+'</option>';}).join('');};
   a+='<div class="lab">Período</div><div class="e-yr"><select id="e-y1" aria-label="Ano inicial">'+opt(E.y1)+'</select> a <select id="e-y2" aria-label="Ano final">'+opt(E.y2)+'</select></div>';
   var base=function(d){return E.idx.filter(function(x){return passa(x,d);});};
-  a+=facet('ramo','Ramo',base('ramo'),8)+facet('res','Resultado',base('res'),8)+facet('o','Órgão julgador',base('o'),6)+facet('c','Classe',base('c'),8);
+  a+=facet('apr','Apreciação',base('apr'),6)+facet('ramo','Ramo',base('ramo'),8)+facet('res','Resultado',base('res'),8)+facet('o','Órgão julgador',base('o'),6)+facet('c','Classe',base('c'),8);
   a+='<div class="note">Julgamentos do Relator na base do gabinete (procs-muta · precedentes), com ramo, assunto e resultado catalogados. Inteiro teor disponível para '+n0(E.idx.filter(function(x){return x.it;}).length)+' julgamentos.</div>';
   var as=$('#e-aside'),st=as.scrollTop;as.innerHTML=a;as.scrollTop=st;
   $$('#e-tipo button').forEach(function(b){b.onclick=function(){setF('t',b.getAttribute('data-v'));};});
@@ -193,62 +202,82 @@ function selBar(){
 }
 function aplicaSel(lista){var f=E.sel.f;Object.keys(f).forEach(function(k){if(k==='y'){E.y1=E.y2=f[k];}else E.F[k]=f[k];});E.sel=null;E.mmOpen=null;E.shown=60;if(lista)E.modo='lista';salvar();render();window.scrollTo(0,0);}
 
-/* ---- Lista ---- */
-function card(x){
-  var op=!!E.open[x.id],res=x._res,tit=titulo(x)||'(sem prévia)';
-  var h='<article class="card ec'+(op?' open':'')+'" data-id="'+x.id+'" style="--gc:'+corRes(res)+'"><div class="hd"><span class="tb t'+x.t+'">'+(x.t==='A'?'ACÓRDÃO':'MONOCRÁTICA')+'</span><span class="num">'+esc(x.n)+'</span><span class="pill" title="'+esc(x.cl||'')+'">'+esc(x.c||'—')+'</span><span class="pill" title="'+esc(x.o||'Órgão não informado')+'">'+esc(siglaO(x.o))+'</span><span class="pill">'+fmtD(x.d)+'</span><span class="pill res" title="Classificação automática do dispositivo: conferir">'+esc(res)+'</span>'+(x._ass?'<span class="pill">'+esc(x._ass)+'</span>':'')+(x.it?'<span class="pill" title="Inteiro teor na base">inteiro teor</span>':'')+'</div>';
-  if(x.t==='A')h+='<h3>'+esc(tit)+'</h3>';
-  var e=prev(x);
-  var e2=e.slice(tit.length).trim()||e;h+='<p class="tx">'+esc(op?e:(e2.length>300?e2.slice(0,300)+'…':e2))+'</p>';
+/* ---- Lista (linhas compactas, como a pesquisa de jurisprudência) e painel lateral ---- */
+var ICO={chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',cit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h4v4c0 3-1.5 5-4 6M15 7h4v4c0 3-1.5 5-4 6"/></svg>',doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>'};
+var APRS={'Julgamento do recurso':'','Embargos de declaração':'ED','Agravo interno':'AgInt','Juízo de retratação':'Retratação'};
+function linha(x){
+  var op=!!E.open[x.id],sel=E.det===x.id,tit=x._ass||titulo(x)||'(sem assunto)';
+  var h='<li class="e-proc'+(sel?' sel':'')+(op?' open':'')+'" data-id="'+x.id+'"><div class="e-crow" data-act="abrir">';
+  h+='<div class="e-c0"><button class="e-chev" data-act="tg" aria-expanded="'+op+'" aria-label="'+(op?'Recolher':'Expandir')+'">'+ICO.chev+'</button><span class="e-tag '+x.t+'" title="'+(x.t==='A'?'Acórdão':'Decisão monocrática')+'">'+x.t+'</span></div>';
+  h+='<div class="e-c1"><span class="e-num">'+esc(x.n)+'</span><span class="e-sub" title="'+esc(x.cl||'')+'">'+esc(x.c||'')+' · '+esc(x.cl||'')+'</span></div>';
+  h+='<div class="e-c2"><span class="e-ass" title="'+esc(tit)+'">'+esc(tit)+'</span><div class="e-ctags">'+(APRS[x._apr]?'<span class="e-ct apr" title="'+esc(x._apr)+'">'+esc(APRS[x._apr])+'</span>':'')+'<span class="e-ct org" title="'+esc(x.o||'Órgão não informado')+'">'+esc(siglaO(x.o))+'</span>'+(x._ramo?'<span class="e-ct ramo">'+esc(x._ramo)+'</span>':'')+'<span class="e-ct res" style="--rc:'+corRes(x._res)+'" title="'+esc(x.r||x._res)+'">'+esc(x._res)+'</span>'+(x.it?'<span class="e-ct dash" title="Inteiro teor na base">inteiro teor</span>':'')+'</div></div>';
+  h+='<div class="e-c3"><span class="e-dt" title="Julgado em">'+fmtD(x.d)+'</span><button class="e-ib" data-act="cit" title="Copiar citação" aria-label="Copiar citação">'+ICO.cit+'</button><button class="e-ib" data-act="abrir" title="Abrir" aria-label="Abrir">'+ICO.doc+'</button></div></div>';
   if(op){
-    h+='<div class="fields">'+(x.r?'<div class="field good"><b>Resultado</b><p>'+esc(x.r)+'</p></div>':'')+'<div class="field"><b>Dados</b><p>'+esc((x.cl||'—')+'\n'+(x.o||'Órgão não informado')+'\nJulgamento '+fmtD(x.d)+(x.p?'\nPublicação '+fmtD(x.p):'')+(x._rd?'\n'+x._rd:''))+'</p></div>'+(x.temas?'<div class="field"><b>Temas</b><p>'+esc(x.temas)+'</p></div>':'')+(x.tese?'<div class="field"><b>Tese catalogada</b><p>'+esc(x.tese)+'</p></div>':'')+'</div>';
+    h+='<div class="e-cbody"><div class="e-pnl"><div class="e-lb">Ementa</div><div class="e-tx">'+esc(prev(x).length>900?prev(x).slice(0,900)+'…':prev(x))+'</div>'+(x.r?'<div class="e-note"><b>Resultado:</b> '+esc(x.r)+'</div>':'')+'</div>';
+    h+='<div class="e-pnl"><div class="e-lb">Dados</div>'+[['Apreciação',x._apr],['Classe',x.cl],['Órgão',x.o||'não informado'],['Julgamento',fmtD(x.d)],['Publicação',x.p?fmtD(x.p):'—'],['Ramo',x._rd||x._ramo],['Assunto',x._ass],['Temas',x.temas]].filter(function(z){return z[1];}).map(function(z){return '<div class="e-pr"><span class="e-pl">'+z[0]+'</span><span class="e-pv">'+esc(z[1])+'</span></div>';}).join('')+'</div>';
+    h+='<div class="e-cfoot"><button class="e-mini" data-act="cit">'+ICO.cit+'Copiar citação</button><button class="e-mini pri" data-act="abrir">'+ICO.doc+(x.it?'Abrir inteiro teor':'Abrir ementa')+'</button></div></div>';
   }
-  h+='<div class="ft"><button class="btn" data-act="tg">'+(op?'Recolher':'Expandir')+'</button><span class="sp"></span><button class="btn" data-act="cit">Copiar citação</button><button class="btn gold" data-act="it">'+(x.it?'Inteiro teor':'Ementa completa')+'</button></div></article>';
-  return h;
+  return h+'</li>';
 }
+function largo(){return window.matchMedia('(min-width:1180px)').matches;}
 function vLista(L,out){
-  var h='<div class="e-list">'+L.slice(0,E.shown).map(card).join('')+'</div>';
+  if(E.det&&!L.some(function(x){return x.id===E.det;}))E.det=null;
+  var sp=E.det&&largo();
+  var h='<div class="e-split'+(sp?' on':'')+'"><div class="e-lcol"><ul class="e-res">'+L.slice(0,E.shown).map(linha).join('')+'</ul>';
   if(L.length>E.shown)h+='<div class="e-more"><button class="btn" id="e-mais">Mostrar mais ('+n0(L.length-E.shown)+' restantes)</button></div>';
+  h+='</div><section class="e-det" id="e-det"'+(sp?'':' hidden')+'></section></div>';
   out.innerHTML=h;
   var b=$('#e-mais');if(b)b.onclick=function(){E.shown+=100;vLista(L,out);};
+  if(sp)abrirIT(porId(E.det));
 }
 var POR_ID=null;
 function porId(id){if(!POR_ID){POR_ID={};E.idx.forEach(function(x){POR_ID[x.id]=x;});}return POR_ID[id];}
 function citacao(x){
   return (x.c||'')+' '+x.n+', Rel. Des. Fed. CARLOS MUTA, [VALIDAR: veículo] '+fmtD(x.p||x.d)+': "'+String(x.e||'').replace(/\s*\n\s*/g,' ').trim()+'"';
 }
-function abrirIT(x){
-  var dr=$('#e-dr'),b=$('#e-drb');dr.hidden=false;
-  var it=BASE&&BASE.it&&BASE.it[x.id];
-  var h='<button class="btn x" id="e-drx">Fechar ×</button><span class="tb t'+x.t+'">'+(x.t==='A'?'ACÓRDÃO':'MONOCRÁTICA')+'</span><h2>'+esc((x.c||'')+' '+x.n)+'</h2>';
-  h+='<p class="meta">'+esc([x.cl,x.o,'julgado em '+fmtD(x.d),x.p?'publicado em '+fmtD(x.p):''].filter(Boolean).join(' · '))+'</p>';
-  h+='<div class="chips"><button class="btn gold" id="e-dcit">Copiar citação</button><button class="btn" id="e-dem">Copiar ementa</button>'+(it?'<button class="btn" id="e-dit">Copiar inteiro teor</button>':'')+'</div>';
-  if(x._ass||x.temas)h+='<div class="fields">'+(x._ass?'<div class="field"><b>Assunto</b><p>'+esc(x._ass)+'</p></div>':'')+(x.temas?'<div class="field"><b>Temas</b><p>'+esc(x.temas)+'</p></div>':'')+'</div>';
-  h+='<div class="k">Ementa</div><pre>'+esc(x.e)+'</pre>';
-  if(x.r)h+='<div class="k">Resultado</div><pre>'+esc(x.r)+'</pre>';
-  if(x.disp)h+='<details><summary>Dispositivos citados</summary><pre>'+esc(x.disp)+'</pre></details>';
-  if(x.jur)h+='<details><summary>Jurisprudência citada</summary><pre>'+esc(x.jur)+'</pre></details>';
-  h+=it?'<details open><summary>Inteiro teor ('+n0(it.length)+' caracteres)</summary><pre>'+esc(it)+'</pre></details>':'<p class="meta">Inteiro teor ainda não juntado à base do gabinete.</p>';
-  b.innerHTML=h;b.scrollTop=0;
-  $('#e-drx').onclick=fecharIT;
-  $('#e-dcit').onclick=function(){copiar(citacao(x),'Citação copiada; confira o veículo de publicação');};
-  $('#e-dem').onclick=function(){copiar(x.e,'Ementa copiada');};
-  var bi=$('#e-dit');if(bi)bi.onclick=function(){copiar(it,'Inteiro teor copiado');};
+function painel(html,ondeSplit){
+  var d=$('#e-det');
+  if(ondeSplit&&d&&largo()){d.hidden=false;d.parentNode.classList.add('on');d.innerHTML=html;d.scrollTop=0;return d;}
+  var dr=$('#e-dr'),b=$('#e-drb');dr.hidden=false;b.innerHTML=html;b.scrollTop=0;return b;
 }
-function fecharIT(){$('#e-dr').hidden=true;}
+function abrirIT(x){
+  if(!x)return;E.det=x.id;
+  $$('#e-out li.e-proc.sel').forEach(function(l){l.classList.remove('sel');});var li=$('#e-out li.e-proc[data-id="'+x.id+'"]');if(li)li.classList.add('sel');
+  var it=BASE&&BASE.it&&BASE.it[x.id];
+  var h='<div class="e-dhead"><div class="e-dtit"><span class="e-tag '+x.t+'">'+(x.t==='A'?'Acórdão':'Decisão monocrática')+'</span><span class="e-num big">'+esc(x.n)+'</span><span class="e-tag">'+esc(x.c||'')+'</span>'+(APRS[x._apr]?'<span class="e-tag apr">'+esc(x._apr)+'</span>':'')+'<button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
+  h+='<div class="e-dmeta">'+[['Classe',x.cl||'—'],['Órgão julgador',x.o||'não informado'],['Julgamento',fmtD(x.d)],['Publicação',x.p?fmtD(x.p):'—'],['Relator','CARLOS MUTA'],['Apreciação',x._apr],['Ramo',x._rd||x._ramo||'—'],['Assunto',x._ass||'—'],['Resultado',x._res]].map(function(z){return '<div><span>'+z[0]+'</span>'+esc(z[1])+'</div>';}).join('')+'</div>';
+  h+='<div class="e-dacts"><button class="e-mini pri" data-dcit>'+ICO.cit+'Copiar citação</button><button class="e-mini" data-dem>Copiar ementa</button>'+(it?'<button class="e-mini" data-dit>Copiar inteiro teor</button>':'')+'</div></div>';
+  h+='<div class="e-dbody">';
+  if(!it)h+='<div class="e-aviso">A base do gabinete tem a ementa e o resultado deste julgamento; o inteiro teor ainda não foi juntado.</div>';
+  if(x.temas)h+='<h3 class="e-sec">Temas</h3><div class="e-chipl">'+x.temas.split(/;\s*/).filter(Boolean).map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div>';
+  if(x.tese)h+='<h3 class="e-sec">Tese catalogada</h3><div class="e-box">'+esc(x.tese)+'</div>';
+  h+='<h3 class="e-sec">Ementa</h3><div class="e-box serif">'+esc(x.e)+'</div>';
+  if(x.r)h+='<h3 class="e-sec">Resultado</h3><div class="e-box ok">'+esc(x.r)+'</div>';
+  if(x.disp)h+='<h3 class="e-sec">Dispositivos citados</h3><div class="e-box">'+esc(x.disp)+'</div>';
+  if(x.jur)h+='<h3 class="e-sec">Jurisprudência citada</h3><div class="e-box">'+esc(x.jur)+'</div>';
+  if(it)h+='<h3 class="e-sec">Inteiro teor <small>'+n0(it.length)+' caracteres</small></h3><div class="e-texto">'+esc(it)+'</div>';
+  h+='<h3 class="e-sec">Origem</h3><p class="meta">Base do gabinete · procs-muta, precedentes/precedentes.jsonl · registro '+esc(x.id)+'. A citação traz [VALIDAR: veículo], porque a base não registra o veículo de publicação.</p></div>';
+  var box=painel(h,true);
+  box.querySelector('[data-dx]').onclick=function(){fecharIT();};
+  box.querySelector('[data-dcit]').onclick=function(){copiar(citacao(x),'Citação copiada; confira o veículo de publicação');};
+  box.querySelector('[data-dem]').onclick=function(){copiar(x.e,'Ementa copiada');};
+  var bi=box.querySelector('[data-dit]');if(bi)bi.onclick=function(){copiar(it,'Inteiro teor copiado');};
+}
+function fecharIT(){$('#e-dr').hidden=true;var d=$('#e-det');if(d&&!d.hidden){d.hidden=true;d.innerHTML='';d.parentNode.classList.remove('on');}E.det=null;$$('#e-out li.e-proc.sel').forEach(function(l){l.classList.remove('sel');});}
 $('#e-dr').addEventListener('click',function(e){if(e.target.id==='e-dr')fecharIT();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('#e-dr').hidden)fecharIT();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&(!$('#e-dr').hidden||($('#e-det')&&!$('#e-det').hidden)))fecharIT();});
 $('#e-out').addEventListener('click',function(e){
   var b=e.target.closest('[data-act]');if(!b)return;var c=b.closest('[data-id]');if(!c)return;var x=porId(c.getAttribute('data-id'));if(!x)return;
   var a=b.getAttribute('data-act');
-  if(a==='tg'){if(E.open[x.id])delete E.open[x.id];else E.open[x.id]=1;c.outerHTML=card(x);}
+  e.stopPropagation();
+  if(a==='tg'){if(E.open[x.id])delete E.open[x.id];else E.open[x.id]=1;c.outerHTML=linha(x);}
   else if(a==='cit')copiar(citacao(x),'Citação copiada; confira o veículo de publicação');
-  else if(a==='it')abrirIT(x);
+  else if(a==='abrir'){if(E.det===x.id&&largo()&&!$('#e-det').hidden){fecharIT();return;}abrirIT(x);}
 });
 var qT;$('#e-q').addEventListener('input',function(e){clearTimeout(qT);qT=setTimeout(function(){if(EM.sub!=='prec'){EM.q[EM.sub]=e.target.value.trim();(EM.sub==='mod'?mRender:pRender)();return;}E.q=e.target.value.trim();E.qn=E.q?nz(E.q).split(/\s+/).filter(Boolean):null;E.shown=60;E.sel=null;E.mmOpen=null;render();},220);});
 function baixarCsv(L){
-  var C=[['Tipo','Processo','Classe','Classe (nome)','Órgão','Julgamento','Publicação','Ramo','Assunto','Resultado','Temas','Texto do resultado','Registro']];
-  L.forEach(function(x){C.push([x.t==='A'?'Acórdão':'Monocrática',x.n,x.c,x.cl,x.o,fmtD(x.d),fmtD(x.p),x._ramo,x._ass,x._res,x.temas,x.r,x.id]);});
+  var C=[['Tipo','Apreciação','Processo','Classe','Classe (nome)','Órgão','Julgamento','Publicação','Ramo','Assunto','Resultado','Temas','Texto do resultado','Registro']];
+  L.forEach(function(x){C.push([x.t==='A'?'Acórdão':'Monocrática',x._apr,x.n,x.c,x.cl,x.o,fmtD(x.d),fmtD(x.p),x._ramo,x._ass,x._res,x.temas,x.r,x.id]);});
   var csv='﻿'+C.map(function(r){return r.map(function(v){v=String(v==null?'':v);return /[";\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}).join(';');}).join('\r\n');
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='ementario-filtrado.csv';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
 }
@@ -517,7 +546,7 @@ var xT;$('#x-q').addEventListener('input',function(e){clearTimeout(xT);xT=setTim
 
 /* ================= EMENTÁRIO · subabas ================= */
 function mostrar(){
-  var p=EM.sub==='prec';
+  var p=EM.sub==='prec';if(window.VDM_marcaNav)window.VDM_marcaNav();
   $$('#e-sub button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===EM.sub));});
   ['#e-modes','#e-chips','#e-sel'].forEach(function(s){$(s).hidden=!p;});
   $('#e-q').value=p?(E.q||''):(EM.q[EM.sub]||'');
@@ -531,9 +560,15 @@ function irModelos(tipo){EM.sub='mod';MS.tipo=tipo||'';MS.ass='';MS.cls='';EM.q.
 function jp(s){try{return typeof s==='string'?JSON.parse(s||'null'):s;}catch(e){return null;}}
 function marcar(t){return esc(t).replace(/\{\{([^}]*)\}\}/g,'<mark>{{$1}}</mark>').replace(/\[PREENCHER:([^\]]*)\]/g,'<mark>[PREENCHER:$1]</mark>').replace(/\[VALIDAR([^\]]*)\]/g,'<mark>[VALIDAR$1]</mark>');}
 /* ---- Modelos ---- */
-var MS={tipo:'',ass:'',cls:'',mais:{}},MLIM=40;
+var MS={tipo:'',apr:'',ass:'',cls:'',mais:{}},MLIM=40;
 function mTipo(m){var e=m.especieModelo||'';return /^voto/.test(e)?'Acórdão':e==='despacho'?'Despacho':'Monocrática';}
 function mAss(m){return m.assunto||'Sem assunto';}
+function mApr(m){var s=String(m.classeSigla||'')+' '+String(m.especie||''),n=nz([m.nomeModelo,m.assunto,m.processo].join(' '));
+  if(m.especieModelo==='despacho')return 'Providência (despacho)';
+  if(/\bED|EDcl/.test(s)||/embargos de declaracao|omissao, contradicao/.test(n))return 'Embargos de declaração';
+  if(/AgInt/.test(s)||/agravo interno/.test(n))return 'Agravo interno';
+  if(/retratacao/.test(n))return 'Juízo de retratação';
+  return 'Julgamento do recurso';}
 function mCls(m){return m.classeSigla||m.especie||'—';}
 function mSecoes(m){
   var e=jp(m.esqueletoModelo)||{},P=jp(m.paragrafosModelo)||[],out=[],usados={};
@@ -552,13 +587,13 @@ function mTextoBase(m){
 }
 function mRender(){
   var M=(BASE&&BASE.mod)||[],q=nz(EM.q.mod||'');
-  var passa=function(m,ex){if(ex!=='tipo'&&MS.tipo&&mTipo(m)!==MS.tipo)return false;if(ex!=='ass'&&MS.ass&&mAss(m)!==MS.ass)return false;if(ex!=='cls'&&MS.cls&&mCls(m)!==MS.cls)return false;
+  var passa=function(m,ex){if(ex!=='tipo'&&MS.tipo&&mTipo(m)!==MS.tipo)return false;if(ex!=='ass'&&MS.ass&&mAss(m)!==MS.ass)return false;if(ex!=='apr'&&MS.apr&&mApr(m)!==MS.apr)return false;if(ex!=='cls'&&MS.cls&&mCls(m)!==MS.cls)return false;
     if(q){if(!m._q)m._q=nz([m.nomeModelo,m.assunto,m.temas,m.tese,m.resultado,m.fundamentacao,m.classe,m.pronunciamento,mTextoBase(m)].join(' '));if(m._q.indexOf(q)<0)return false;}return true;};
   function cnt(ex,fn){var c={};M.filter(function(m){return passa(m,ex);}).forEach(function(m){var k=fn(m);c[k]=(c[k]||0)+1;});return Object.keys(c).map(function(k){return [k,c[k]];}).sort(function(a,b){return b[1]-a[1]||a[0].localeCompare(b[0]);});}
   var ct=cnt('tipo',mTipo),tot=ct.reduce(function(a,z){return a+z[1];},0),ctm={};ct.forEach(function(z){ctm[z[0]]=z[1];});
   var a='<div class="lab">Tipo</div><div class="seg" id="m-tipo">'+[['','Todos',tot],['Acórdão','Acórdão',ctm['Acórdão']||0],['Monocrática','Monocrática',ctm['Monocrática']||0],['Despacho','Despacho',ctm['Despacho']||0]].map(function(z){return '<button data-v="'+z[0]+'" aria-pressed="'+(MS.tipo===z[0])+'" title="'+z[2]+' modelos">'+z[1]+'</button>';}).join('')+'</div>';
   function lista(dim,lab,c,n){var ab=MS.mais[dim],h='<div class="lab">'+lab+'</div><div class="glist"><button data-mf="'+dim+'" data-v="" aria-pressed="'+(!MS[dim])+'"><span>Todos</span><small>'+c.reduce(function(a,z){return a+z[1];},0)+'</small></button>'+c.slice(0,ab?c.length:n).map(function(z){return '<button data-mf="'+dim+'" data-v="'+esc(z[0])+'" aria-pressed="'+(MS[dim]===z[0])+'"><span>'+esc(z[0])+'</span><small>'+z[1]+'</small></button>';}).join('')+'</div>';if(c.length>n)h+='<button class="e-gmore" data-mm="'+dim+'">'+(ab?'Mostrar menos':'Mostrar todos ('+c.length+')')+'</button>';return h;}
-  a+=lista('ass','Assunto',cnt('ass',mAss),12)+lista('cls','Classe',cnt('cls',mCls),8);
+  a+=lista('apr','Apreciação',cnt('apr',mApr),6)+lista('ass','Assunto',cnt('ass',mAss),12)+lista('cls','Classe',cnt('cls',mCls),8);
   a+='<div class="note">Base de modelos do gabinete (procs-muta · modelos/modelos.json): votos-matriz para acórdão, decisões monocráticas e despachos. Os trechos entre {{ }} são preenchidos com os dados dos autos.</div>';
   $('#e-aside').innerHTML=a;
   $$('#m-tipo button').forEach(function(b){b.onclick=function(){MS.tipo=b.getAttribute('data-v');MLIM=40;mRender();};});
@@ -567,27 +602,31 @@ function mRender(){
   var L=M.filter(function(m){return passa(m);}).sort(function(x,y){return mTipo(x).localeCompare(mTipo(y))||mAss(x).localeCompare(mAss(y))||String(x.nomeModelo).localeCompare(String(y.nomeModelo));});
   $('#e-cnt').innerHTML='<b>'+n0(L.length)+'</b> de '+n0(M.length)+' modelos';
   var cor={'Acórdão':'var(--stj)','Monocrática':'var(--trf)','Despacho':'var(--mut)'};
-  var h=L.slice(0,MLIM).map(function(m){var tp=mTipo(m),st=m.statusCuradoria;
-    return '<article class="card ec" data-mid="'+esc(m.id)+'" style="--gc:'+cor[tp]+'"><div class="hd"><span class="tb" style="background:'+cor[tp]+'">'+tp.toUpperCase()+'</span><span class="pill">'+esc(mCls(m))+'</span><span class="pill">'+esc(m.pronunciamento||'')+'</span>'+(st?'<span class="pill" style="color:var(--warn);border-color:var(--warn)">'+esc(st)+'</span>':'')+'</div><h3>'+esc(m.nomeModelo||m.processo||m.id)+'</h3><p class="meta" style="margin:0">'+esc(mAss(m))+(m.temas?' · '+esc(m.temas):'')+'</p>'+(m.tese?'<p class="tx" style="margin-top:6px">'+esc(m.tese)+'</p>':'')+(m.resultado?'<p class="meta"><b>Resultado:</b> '+esc(m.resultado)+'</p>':'')+'<div class="ft"><span class="meta">'+esc(m.id)+'</span><span class="sp"></span><button class="btn" data-mact="cp">Copiar texto-base</button><button class="btn gold" data-mact="ver">Ver modelo</button></div></article>';}).join('');
+  var h=L.slice(0,MLIM).map(function(m){var tp=mTipo(m),st=m.statusCuradoria,ap=mApr(m);
+    return '<li class="e-proc m-row" data-mid="'+esc(m.id)+'"><div class="e-crow m-crow" data-mact="ver"><div class="e-c0"><span class="e-tag '+(tp==='Acórdão'?'A':tp==='Monocrática'?'M':'')+'">'+esc(tp)+'</span></div><div class="e-c2"><span class="e-ass" title="'+esc(m.nomeModelo||'')+'">'+esc(m.nomeModelo||m.processo||m.id)+'</span><div class="e-ctags">'+(ap!=='Julgamento do recurso'&&ap!=='Providência (despacho)'?'<span class="e-ct apr">'+esc(ap)+'</span>':'')+'<span class="e-ct org">'+esc(mCls(m))+'</span><span class="e-ct">'+esc(mAss(m))+'</span>'+(m.resultado?'<span class="e-ct dash" title="'+esc(m.resultado)+'">'+esc(String(m.resultado).slice(0,60))+'</span>':'')+(st?'<span class="e-ct apr">'+esc(st)+'</span>':'')+'</div></div><div class="e-c3"><button class="e-ib" data-mact="cp" title="Copiar texto-base" aria-label="Copiar texto-base">'+ICO.cit+'</button><button class="e-ib" data-mact="ver" title="Ver modelo" aria-label="Ver modelo">'+ICO.doc+'</button></div></div></li>';}).join('');
   if(L.length>MLIM)h+='<div class="e-more"><button class="btn" id="m-mais">Mostrar mais ('+(L.length-MLIM)+')</button></div>';
-  $('#e-out').innerHTML=L.length?'<div class="e-list">'+h+'</div>':'<p class="empty">Nenhum modelo com esses filtros.</p>';
+  $('#e-out').innerHTML=L.length?'<div class="e-split"><div class="e-lcol"><ul class="e-res">'+h+'</ul></div><section class="e-det" id="e-det" hidden></section></div>':'<p class="empty">Nenhum modelo com esses filtros.</p>';
   var mb=$('#m-mais');if(mb)mb.onclick=function(){MLIM+=80;mRender();};
 }
 function mAbrir(m){
-  var dr=$('#e-dr'),b=$('#e-drb');dr.hidden=false;
-  var F=[['Pronunciamento',m.pronunciamento],['Classe',m.classe||m.classeSigla],['Assunto',m.assunto],['Temas',m.temas],['Causa de pedir',m.causaPedir],['Resultado',m.resultado],['Preliminares',m.preliminares],['Honorários',m.honorarios],['Especificidades',m.especificidades],['Processos associados',m.processosAssociados],['Fonte',m.fonte]].filter(function(z){return z[1];});
-  var h='<button class="btn x" id="e-drx">Fechar ×</button><span class="tb" style="background:var(--gold)">'+mTipo(m).toUpperCase()+'</span><h2>'+esc(m.nomeModelo||m.id)+'</h2>'+(m.tese?'<p class="tx">'+esc(m.tese)+'</p>':'');
-  h+='<div class="chips"><button class="btn gold" id="m-cp">Copiar texto-base</button></div><div class="fields">'+F.map(function(z){return '<div class="field"><b>'+z[0]+'</b><p>'+esc(z[1])+'</p></div>';}).join('')+'</div>';
-  if(m.fundamentacao)h+='<details><summary>Fundamentação resumida</summary><p class="tx">'+esc(m.fundamentacao)+'</p></details>';
-  h+='<div class="k" style="margin-top:14px">Estrutura do modelo</div><div class="x-doc">';
+  var F=[['Pronunciamento',m.pronunciamento],['Apreciação',mApr(m)],['Classe',m.classe||m.classeSigla],['Assunto',m.assunto],['Temas',m.temas],['Causa de pedir',m.causaPedir],['Resultado',m.resultado],['Preliminares',m.preliminares],['Honorários',m.honorarios],['Processos associados',m.processosAssociados]].filter(function(z){return z[1];});
+  var h='<div class="e-dhead"><div class="e-dtit"><span class="e-tag A">'+esc(mTipo(m))+'</span><span class="e-dname">'+esc(m.nomeModelo||m.id)+'</span><button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
+  h+='<div class="e-dmeta">'+F.slice(0,6).map(function(z){return '<div><span>'+z[0]+'</span>'+esc(z[1])+'</div>';}).join('')+'</div><div class="e-dacts"><button class="e-mini pri" data-mcp>Copiar texto-base</button></div></div><div class="e-dbody">';
+  if(m.tese)h+='<h3 class="e-sec">Tese</h3><div class="e-box">'+esc(m.tese)+'</div>';
+  F.slice(6).forEach(function(z){h+='<h3 class="e-sec">'+z[0]+'</h3><div class="e-box">'+esc(z[1])+'</div>';});
+  if(m.especificidades)h+='<h3 class="e-sec">Especificidades</h3><div class="e-box">'+esc(m.especificidades)+'</div>';
+  if(m.fundamentacao)h+='<h3 class="e-sec">Fundamentação resumida</h3><div class="e-box">'+esc(m.fundamentacao)+'</div>';
+  h+='<h3 class="e-sec">Estrutura do modelo</h3><div class="x-doc">';
   mSecoes(m).forEach(function(s){var t=s.t;
     h+='<div class="x-el"><h4>'+esc(t.titulo||t.id)+(t.grupo?' <span class="x-fo">'+esc(t.grupo)+'</span>':'')+(t.opcional?' <span class="pill">opcional</span>':'')+'</h4>';
     if(!s.bl.length)h+='<p class="meta">Tópico de redação livre.</p>';
-    s.bl.forEach(function(x){h+=(x.tit!=null?'<p class="meta" style="margin:6px 0 0"><b>'+esc((x.ver!=null?'Versão '+x.ver+' · ':'')+(x.tit||''))+'</b>'+(x.op?' · opcional':'')+'</p>':'')+'<div class="x-f'+(x.ativo===false?' off':'')+'">'+marcar(x.txt)+'</div>';});
+    s.bl.forEach(function(x){h+=(x.tit!=null?'<p class="meta" style="margin:6px 0 0"><b>'+esc((x.ver!=null?'Versão '+x.ver+' · ':'')+(x.tit||''))+'</b>'+(x.op?' · opcional':'')+'</p>':'')+'<div class="x-f serif'+(x.ativo===false?' off':'')+'">'+marcar(x.txt)+'</div>';});
     h+='</div>';});
-  h+='</div>';
-  b.innerHTML=h;b.scrollTop=0;
-  $('#e-drx').onclick=fecharIT;$('#m-cp').onclick=function(){copiar(mTextoBase(m),'Texto-base do modelo copiado');};
+  h+='</div>'+(m.fonte?'<h3 class="e-sec">Origem</h3><p class="meta">'+esc(m.fonte)+' · '+esc(m.id)+'</p>':'')+'</div>';
+  var box=painel(h,true);
+  box.querySelector('[data-dx]').onclick=function(){fecharIT();};
+  box.querySelector('[data-mcp]').onclick=function(){copiar(mTextoBase(m),'Texto-base do modelo copiado');};
+  $$('#e-out [data-mid]').forEach(function(c){c.classList.toggle('sel',c.getAttribute('data-mid')===m.id);});
 }
 /* ---- Parágrafos-padrão ---- */
 var PS={cat:'',sub:'',st:''};
@@ -617,11 +656,42 @@ function pRender(){
 }
 $('#e-out').addEventListener('click',function(e){
   var b=e.target.closest('[data-mact]');
-  if(b){var c=b.closest('[data-mid]'),m=((BASE&&BASE.mod)||[]).filter(function(x){return x.id===c.getAttribute('data-mid');})[0];if(!m)return;if(b.getAttribute('data-mact')==='ver')mAbrir(m);else copiar(mTextoBase(m),'Texto-base do modelo copiado');return;}
+  if(b){e.stopPropagation();var c=b.closest('[data-mid]'),m=((BASE&&BASE.mod)||[]).filter(function(x){return x.id===c.getAttribute('data-mid');})[0];if(!m)return;if(b.getAttribute('data-mact')==='ver')mAbrir(m);else copiar(mTextoBase(m),'Texto-base do modelo copiado');return;}
   var pc=e.target.closest('[data-pcp]');
   if(pc){var p=((BASE&&BASE.par)||[]).filter(function(x){return x.id===pc.getAttribute('data-pcp');})[0];if(p)copiar(pVars(p.texto,true),'Parágrafo copiado');}
 });
 
+/* ================= navegação: subabas em menus suspensos no cabeçalho ================= */
+(function(){
+  var MAPA={temas:'#v-temas .sub',rep:'#v-rep .sub',ement:'#e-sub',edit:'#x-sub'};
+  var aberto=null;
+  function fechaTodos(){$$('.tabw.open').forEach(function(w){w.classList.remove('open');w.querySelector('.tab').setAttribute('aria-expanded','false');});aberto=null;}
+  function atual(v){var r=$(MAPA[v]);var b=r&&r.querySelector('[aria-selected="true"]');return b?b.textContent:'';}
+  function marca(){$$('.tabw').forEach(function(w){var v=w.getAttribute('data-w'),sub=w.querySelector('.tab-cur');if(sub)sub.textContent=atual(v);w.querySelectorAll('.dd button').forEach(function(i){var r=$(MAPA[v]),src=r&&r.querySelector('[data-s="'+i.getAttribute('data-s')+'"]');i.setAttribute('aria-current',String(!!(src&&src.getAttribute('aria-selected')==='true')));});});}
+  $$('.tabs .tab').forEach(function(t){
+    var v=t.getAttribute('data-v'),row=$(MAPA[v]);if(!row)return;
+    var w=document.createElement('span');w.className='tabw';w.setAttribute('data-w',v);t.parentNode.insertBefore(w,t);w.appendChild(t);
+    t.setAttribute('aria-haspopup','true');t.setAttribute('aria-expanded','false');
+    t.insertAdjacentHTML('beforeend','<span class="tab-cur"></span><svg class="car" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>');
+    var dd=document.createElement('div');dd.className='dd';dd.setAttribute('role','menu');
+    dd.innerHTML=Array.prototype.map.call(row.querySelectorAll('button[data-s]'),function(b){return '<button role="menuitem" data-s="'+b.getAttribute('data-s')+'">'+b.textContent+'</button>';}).join('');
+    w.appendChild(dd);
+    dd.addEventListener('click',function(e){var i=e.target.closest('button[data-s]');if(!i)return;e.stopPropagation();fechaTodos();
+      if(t.getAttribute('aria-selected')!=='true')t.click();
+      var src=row.querySelector('button[data-s="'+i.getAttribute('data-s')+'"]');if(src)src.click();marca();window.scrollTo(0,0);});
+    t.addEventListener('click',function(e){
+      if(t.getAttribute('aria-selected')==='true'){e.stopImmediatePropagation();var o=w.classList.contains('open');fechaTodos();if(!o){w.classList.add('open');t.setAttribute('aria-expanded','true');aberto=w;}}
+      else{fechaTodos();}
+      setTimeout(marca,0);
+    },true);
+    w.addEventListener('mouseenter',function(){if(window.matchMedia('(hover:hover)').matches){fechaTodos();w.classList.add('open');t.setAttribute('aria-expanded','true');}});
+    w.addEventListener('mouseleave',function(){if(window.matchMedia('(hover:hover)').matches)fechaTodos();});
+  });
+  document.addEventListener('click',function(e){if(!e.target.closest('.tabw'))fechaTodos();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')fechaTodos();});
+  $$('.sub button[data-s]').forEach(function(b){b.addEventListener('click',function(){setTimeout(marca,0);});});
+  marca();window.VDM_marcaNav=marca;
+})();
 /* ================= navegação ================= */
 function irEmentario(f){
   E.F={};E.q='';E.qn=null;E.y1=E.y2='';$('#e-q').value='';Object.keys(f||{}).forEach(function(k){E.F[k]=f[k];});E.modo='lista';E.sel=null;E.mmOpen=null;
