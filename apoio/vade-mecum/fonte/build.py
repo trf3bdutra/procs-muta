@@ -8,6 +8,7 @@ Fontes (todas no procs-muta):
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos e parágrafos-padrão
   ../../../precedentes/precedentes.jsonl · inteiros-teores/*.jsonl   ementário do Relator
+  ../../referencias-rapidas.json                   referências rápidas ao lado dos modelos
   ../../../acervo/fonte.json                        partes, advogados e dados do processo, quando o processo está no acervo
 Uso: python3 build.py
 """
@@ -87,7 +88,8 @@ for ln, r in enumerate((RAIZ/'precedentes/precedentes.jsonl').read_text(encoding
     prec.append(x)
 mod = ler(RAIZ/'modelos/modelos.json')['registros']
 par = ler(RAIZ/'modelos/paragrafos.json')['registros']
-pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par}
+ref = ler(RAIZ/'apoio/referencias-rapidas.json')
+pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref}
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
 
 t = (H/'template.html').read_text(encoding='utf-8')
