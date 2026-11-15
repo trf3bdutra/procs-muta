@@ -238,7 +238,12 @@ html[data-theme=dark] .pk{--pk:#4e9bcb;--pk-s:#0c2839}html[data-theme=dark] .pk.
 .pt-sel{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 -12px;padding:7px 12px;border-top:1px solid var(--line);background:var(--soft);border-radius:0 0 12px 12px;font-size:12px}.pt-sel .b{height:28px}#sel-n{font-weight:700;color:var(--ink);margin-right:2px}.pt-sel .sp{flex:1}
 /* cartão compacto */
 .lst.cards{display:flex;flex-direction:column;gap:8px}
-.pc.cpt{border-left:3px solid #c9bfe0;border-radius:12px;box-shadow:none}.pc.cpt.meu{border-left-color:var(--gold-d,#b0741a)}.pc.cpt.al{border-left-color:#c4953c}.pc.cpt.et-mi{border-left-color:#28744b}.pc.cpt.et-li{border-left-color:#8a5cb8}.pc.cpt.et-co{border-left-color:#2d6fa8}
+.pc.cpt{border-left:3px solid #c9bfe0;border-radius:12px;box-shadow:none}.pc.cpt.meu{border-left-color:var(--gold-d,#b0741a)}/* cor do cartão pela etapa/situação, como nas planilhas de pauta: minutado verde, aviso amarelo, corrigido azul, liberado lilás (pastel) */
+.pc.cpt.et-mi{background:#eaf6ef;border-color:#cfe6d8;border-left-color:#28744b}.pc.cpt.al{background:#fff8de;border-color:#efe2b0;border-left-color:#c4953c}
+.pc.cpt.et-co{background:#e8f1fb;border-color:#c9dcf0;border-left-color:#2d6fa8}.pc.cpt.et-li{background:#f1eafa;border-color:#dccfee;border-left-color:#8a5cb8}
+html[data-theme=dark] .pc.cpt.et-mi{background:#132a20;border-color:#22473a;border-left-color:#6eba8a}html[data-theme=dark] .pc.cpt.al{background:#2c2614;border-color:#4d4222;border-left-color:#e6c27a}
+html[data-theme=dark] .pc.cpt.et-co{background:#132b42;border-color:#244a6a;border-left-color:#7fb2d1}html[data-theme=dark] .pc.cpt.et-li{background:#221a36;border-color:#3d2f5c;border-left-color:#b49ad8}
+table.pl tr.et-mi td{background:#eaf6ef}html[data-theme=dark] table.pl tr.et-mi td{background:#132a20}html[data-theme=dark] table.pl tr.al td{background:#2c2614}html[data-theme=dark] table.pl tr.et-co td{background:#132b42}html[data-theme=dark] table.pl tr.et-li td{background:#221a36}
 .pc.cpt .rw{display:grid;grid-template-columns:28px 20px 34px minmax(200px,1.25fr) minmax(200px,1.4fr) auto auto auto 30px;gap:12px;align-items:center;padding:10px 12px}
 .xb{width:26px;height:26px;border-radius:8px;border:0;background:#e9f2ee;color:#1f4c4f;cursor:pointer;font-size:11px}.sel{width:16px;height:16px;accent-color:#1f4c4f}
 .pc.cpt .it{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--soft);display:grid;place-items:center;font-weight:800;font-size:13px}
@@ -1378,7 +1383,7 @@ function planilha(V){
   var sc=function(it,k,L){var v=(it.ctl||{})[k]||'';return '<select data-c="'+k+'"><option value="">—</option>'+L.map(function(x){return '<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>';}).join('')+(v&&L.indexOf(v)<0?'<option selected>'+esc(v)+'</option>':'')+'</select>';};
   var th='<thead><tr>'+PL.map(function(c,i){return '<th style="min-width:'+c[1]+'px;max-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead>';
   var tb=V.map(function(it){var k=dg(it.cnj),et=etapa(it),A=alertas(it),mt=metaDe(it),c=it.ctl||{};
-    var cls=et==='Liberado'?'et-li':et==='Corrigido'?'et-co':A.length?'al':'';
+    var cls=et==='Liberado'?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'';
     var td=function(x,w){return '<td'+(w?' class="'+w+'"':'')+'>'+x+'</td>';};
     return '<tr class="pc '+cls+(meu(it)?' meu':'')+'" data-k="'+k+'">'+
       '<td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item||'—')+'</b></label></td>'+
@@ -1400,7 +1405,7 @@ function planilhaMono(V){
   var sc=function(it,k,L){var v=(it.ctl||{})[k]||'';return '<select data-c="'+k+'"><option value="">—</option>'+L.map(function(x){return '<option'+(x===v?' selected':'')+'>'+esc(x)+'</option>';}).join('')+'</select>';};
   var th='<thead><tr>'+PLM.map(function(c,i){return '<th style="min-width:'+c[1]+'px;max-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead>';
   return '<div class="plw"><table class="pl">'+th+'<tbody>'+V.map(function(it){var k=dg(it.cnj),et=etapa(it),A=alertas(it),c=it.ctl||{},td=function(x){return '<td>'+x+'</td>';};
-    return '<tr class="pc '+(et==='Liberado'?'et-li':et==='Corrigido'?'et-co':A.length?'al':'')+(meu(it)?' meu':'')+'" data-k="'+k+'"><td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item)+'</b></label></td>'+
+    return '<tr class="pc '+(et==='Liberado'?'et-li':et==='Corrigido'?'et-co':A.length?'al':et==='Minutado'?'et-mi':'')+(meu(it)?' meu':'')+'" data-k="'+k+'"><td class="fx"><label class="ix"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+'><b>'+esc(it.item)+'</b></label></td>'+
       td('<span class="cnj">'+fmtCnj(it.cnj)+'</span><small class="pt">'+esc(it.partes||'')+'</small>')+td(esc(clSig(it.classe)))+td('<div class="wr">'+esc(it.assunto||'')+'</div>')+td('<div class="wr">'+esc(it.tarefa||'')+'</div>')+td(it.desde?esc(br(it.desde)):'')+td(sc(it,'urgTipo',CPM.urgTipo)+(it.urgAuto&&!c.urgTipo?'<small class="pt">'+esc(it.urgAuto)+'</small>':''))+td(sc(it,'tipoAto',CPM.tipoAto))+td(sc(it,'hip932',CPM.hip932))+
       td('<textarea rows="1" data-d="obs" placeholder="anotações">'+esc(it.obs||'')+'</textarea>')+td(A.length?'<span class="pd">'+esc(A.join(' · '))+'</span>':'')+
       td('<select data-et>'+['A fazer','Minutado','Corrigido','Liberado'].map(function(x){return '<option value="'+x+'"'+(x===et?' selected':'')+'>'+etLbl(x)+'</option>';}).join('')+'</select>')+td('<input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'">')+
