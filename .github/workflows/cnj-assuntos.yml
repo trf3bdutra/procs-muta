@@ -1,0 +1,36 @@
+name: CNJ · árvore de assuntos (SGT/TPU)
+on:
+  workflow_dispatch:
+    inputs:
+      limite:
+        description: 'Quantos códigos consultar (0 = todos)'
+        default: '0'
+  schedule:
+    - cron: '41 9 * * 1'
+permissions:
+  contents: write
+concurrency:
+  group: cnj-assuntos
+  cancel-in-progress: false
+jobs:
+  consultar:
+    if: github.event.repository.private
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Consultar o SGT do CNJ e publicar
+        run: |
+          git config user.name 'cnj-assuntos[bot]'
+          git config user.email 'cnj-assuntos[bot]@users.noreply.github.com'
+          python3 scripts/cnj/assuntos_sgt.py --limite "${{ github.event.inputs.limite || '0' }}"
+          git add apoio/assuntos-cnj.json
+          if git diff --cached --quiet; then echo 'Sem mudança.'; exit 0; fi
+          git commit -m 'Apoio: árvore de assuntos do CNJ (SGT)'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase origin main
+          done
+          exit 1
