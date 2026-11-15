@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
   if (req.query.mono) return require('./_mono')(req, res, u);
+  if (req.query.metas) return require('./_metas')(req, res, u);
   const data = req.query.data; if (!L.dataOk(data)) return res.status(400).json({ erro: 'data inválida' });
   const rel = 'acervo/sessoes/' + data + '.json';
   try {
