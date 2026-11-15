@@ -497,3 +497,19 @@ details.x-parte .x-doc{margin-bottom:10px}
 .fill:focus:empty::before{opacity:.55}
 .xpjc{margin-left:10px;border:1px solid #d8ccb3;background:#fff;color:#8c6d38;border-radius:999px;padding:1px 9px;font:700 10.5px Figtree,sans-serif;letter-spacing:0;cursor:pointer;vertical-align:1px}
 .xpjc:hover{background:#f4efe3}
+/* Referências rápidas dos modelos */
+.mtabs{display:flex;gap:2px;margin-top:10px;border-bottom:1px solid var(--line)}
+.mtabs button{flex:1;border:0;background:transparent;padding:7px 4px;font-weight:700;font-size:12px;color:var(--mut);cursor:pointer;border-bottom:2px solid transparent}
+.mtabs button[aria-selected=true]{color:var(--gold);border-bottom-color:var(--gold)}
+.rr-av{font-size:11.5px;border-left:3px solid var(--warn);padding-left:8px;margin:8px 0 6px}
+details.rr{border-top:1px solid var(--line);padding:8px 0}
+details.rr>summary{cursor:pointer;font-weight:800;font-size:13px}details.rr>summary small{color:var(--mut);font-weight:600}
+details.rr ul{margin:4px 0 6px 16px;padding:0;font-size:12.5px}details.rr li{margin:3px 0}
+.rr-pg{margin-top:6px;border-top:0;padding-top:0}
+.rr-k{font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:8px 0 2px}
+.rr-atn{background:var(--warn-soft);border-radius:7px;padding:6px 9px;font-size:12.5px;margin:6px 0}
+.rr-as{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12.5px}.rr-as p{margin:4px 0}
+.rr-sec{display:inline-block;margin-left:6px;font-size:10px;font-weight:700;border:1px solid var(--line);border-radius:999px;padding:0 7px;color:var(--mut)}
+.rr-req{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 9px;margin:5px 0;font-size:12.5px}
+.rr-req p{margin:3px 0 0}.rr-req p.tc{color:var(--mut);font-size:12px}.rr-req a{color:var(--gold)}
+.pp-pg .ref,.pp-pg span.fill{display:inline;font-size:inherit;font-weight:inherit;letter-spacing:0;text-transform:none;color:inherit}
