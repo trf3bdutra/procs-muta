@@ -148,7 +148,7 @@ async function gravarPauta(data, cnj, cels) {
 async function gravarMono(cnj, cels) {
   const MONO = require('./_mono'), C = {};
   if ('Etapa' in cels) {
-    const { doc } = await FICHA.lerOp(), r = (doc.registros || []).find(x => dg(x.processo) === dg(cnj));
+    const { doc } = await FICHA.lerOpLeitura(), r = (doc.registros || []).find(x => dg(x.processo) === dg(cnj));
     const d = datasDaEtapa(cels.Etapa, r ? MONO.item(r) : {}); if (d) Object.assign(C, d);
   }
   Object.keys(cels).forEach(col => { const k = MONO_ED[col]; if (k) C[k] = valorCampo(k, cels[col]); });
@@ -171,12 +171,9 @@ module.exports = async (req, res) => {
     if (req.method === 'GET') {
       const ref = await L.gh('/git/ref/heads/main'), v = ref.object.sha;
       if (req.query.v && req.query.v === v) return res.status(200).json({ igual: true, v });
-      /* o operacional (13 MB) é lido uma vez só nesta resposta, para todos os módulos */
-      const orig = FICHA.lerOp; let p = null; FICHA.lerOp = () => p || (p = orig());
-      try {
-        const [pautas, mono, controles] = await Promise.all([lerPautas(), lerMono(), lerControles()]);
-        return res.status(200).json({ v, geradoEm: new Date().toISOString(), pautaCab: PAUTA_CAB, pautas, mono, controles });
-      } finally { FICHA.lerOp = orig; }
+      /* o operacional (13 MB) é lido uma vez só nesta resposta (lerOpLeitura), para todos os módulos */
+      const [pautas, mono, controles] = await Promise.all([lerPautas(), lerMono(), lerControles()]);
+      return res.status(200).json({ v, geradoEm: new Date().toISOString(), pautaCab: PAUTA_CAB, pautas, mono, controles });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const E = ((req.body || {}).edicoes || []).filter(e => e && e.tipo && dg(e.cnj).length === 20 && e.coluna).slice(0, 500);

@@ -10,7 +10,7 @@ function acomp(r, MAPA, pref) {
   return o;
 }
 /* índice CNJ → registro, a partir do operacional lido agora (o acompanhamento é sempre o mais recente) */
-async function indice() { const { doc } = await FICHA.lerOp(), I = {}; (doc.registros || []).forEach(r => { I[dg(r.processo)] = r; }); return { I, doc }; }
+async function indice() { const { doc } = await FICHA.lerOpLeitura(), I = {}; (doc.registros || []).forEach(r => { I[dg(r.processo)] = r; }); return { I, doc }; }
 /* grava o acompanhamento: campos do app → controles; devolve o acompanhamento atualizado */
 async function gravar(cnj, campos, MAPA, pref, u, rotulo, extra) {
   const mud = { controles: {} };

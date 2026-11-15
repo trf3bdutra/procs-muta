@@ -52,7 +52,7 @@ const vale = r => (r.producao || {}).Destino === 'Monocrática' || !!(r.triagem 
 module.exports = async (req, res, u) => {
   try {
     if (req.method === 'GET') {
-      const [A, { doc }] = await Promise.all([acervo(), FICHA.lerOp()]);
+      const [A, { doc }] = await Promise.all([acervo(), FICHA.lerOpLeitura()]);
       const itens = (doc.registros || []).filter(vale).map(r => { const k = dg(r.processo); return Object.assign({}, A.base[k] || { cnj: r.processo, tarefa: 'fora do acervo' }, item(r), { noAcervo: !!A.base[k] }); });
       const tem = {}; itens.forEach(i => { if (i.ctl.urgTipo) tem[dg(i.cnj)] = 1; });
       return res.status(200).json({ mono: true, itens, sugestoes: A.sug.filter(b => !tem[dg(b.cnj)]), previa: [], atualizadoEm: doc.atualizado_em || '' });
