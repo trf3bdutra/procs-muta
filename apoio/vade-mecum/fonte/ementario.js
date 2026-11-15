@@ -236,7 +236,7 @@ function citacao(x){
   return (x.c||'')+' '+x.n+', Rel. Des. Fed. CARLOS MUTA, [VALIDAR: veículo] '+fmtD(x.p||x.d)+': "'+String(x.e||'').replace(/\s*\n\s*/g,' ').trim()+'"';
 }
 function painel(html,ondeSplit){
-  var d=$('#e-det');
+  var d=$('#e-det');if(d&&d.parentNode.classList.contains('rot'))d=null;
   if(ondeSplit&&d&&largo()){d.hidden=false;d.parentNode.classList.add('on');d.innerHTML=html;d.scrollTop=0;return d;}
   var dr=$('#e-dr'),b=$('#e-drb');dr.hidden=false;b.innerHTML=html;b.scrollTop=0;return b;
 }
@@ -687,6 +687,12 @@ function rotHtml(ro,ass){
   if(ro.dir.length)h+='<h3 class="e-sec">Diretrizes da matéria</h3>'+ro.dir.map(function(r){return '<div class="x-dir"><b>'+esc(r.titulo||'')+'</b>'+(r.preferir?'<p>'+esc(r.preferir)+'</p>':'')+(r.evitar?'<p class="ev"><span>Evitar:</span> '+esc(r.evitar)+'</p>':'')+'</div>';}).join('');
   return h+'</div>';
 }
+function rotCol(ro){
+  var h='<div class="lab" style="margin-top:0">Roteiro · '+esc(ro.nome)+'</div>';
+  if(ro.passos.length)h+='<div class="e-rk">Sequência do voto</div><ol class="x-ol">'+ro.passos.map(function(p){return '<li>'+esc(p.charAt(0).toUpperCase()+p.slice(1))+'</li>';}).join('')+'</ol>'+(ro.seqEv?'<p class="meta"><b>Evitar:</b> '+esc(ro.seqEv)+'</p>':'');
+  if(ro.dir.length)h+='<div class="e-rk">Diretrizes</div>'+ro.dir.map(function(r){return '<div class="x-dir"><b>'+esc(r.titulo||'')+'</b>'+(r.preferir?'<p>'+esc(r.preferir)+'</p>':'')+(r.evitar?'<p class="ev"><span>Evitar:</span> '+esc(r.evitar)+'</p>':'')+'</div>';}).join('');
+  return h;
+}
 function mostraRoteiro(){
   var ro=roteiroDe(MS.ass);if(!ro)return false;
   var box=painel(rotHtml(ro,MS.ass),true);var x=box.querySelector('[data-dx]');if(x)x.onclick=function(){fecharIT();};return true;
@@ -711,16 +717,14 @@ function mRender(){
   var h=L.slice(0,MLIM).map(function(m){var tp=mTipo(m),st=m.statusCuradoria,ap=mApr(m);
     return '<li class="e-proc m-row" data-mid="'+esc(m.id)+'"><div class="e-crow m-crow" data-mact="ver"><div class="e-c0"><span class="e-tag '+(tp==='Acórdão'?'A':tp==='Monocrática'?'M':'')+'">'+esc(tp)+'</span></div><div class="e-c2"><span class="e-ass" title="'+esc(m.nomeModelo||'')+'">'+esc(m.nomeModelo||m.processo||m.id)+'</span><div class="e-ctags">'+(ap!=='Julgamento do recurso'&&ap!=='Providência (despacho)'?'<span class="e-ct apr">'+esc(ap)+'</span>':'')+'<span class="e-ct org">'+esc(mCls(m))+'</span><span class="e-ct">'+esc(mAss(m))+'</span>'+(m.resultado?'<span class="e-ct dash" title="'+esc(m.resultado)+'">'+esc(String(m.resultado).slice(0,60))+'</span>':'')+(st?'<span class="e-ct apr">'+esc(st)+'</span>':'')+'</div></div><div class="e-c3"><button class="e-ib" data-mact="cp" title="Copiar texto-base" aria-label="Copiar texto-base">'+ICO.cit+'</button><button class="e-ib" data-mact="ver" title="Ver modelo" aria-label="Ver modelo">'+ICO.doc+'</button></div></div></li>';}).join('');
   if(L.length>MLIM)h+='<div class="e-more"><button class="btn" id="m-mais">Mostrar mais ('+(L.length-MLIM)+')</button></div>';
-  var rob=roteiroDe(MS.ass)&&!largo()?'<p><button class="btn gold" id="m-rot">Roteiro e diretrizes · '+esc(roteiroDe(MS.ass).nome)+'</button></p>':'';
-  $('#e-out').innerHTML=rob+(L.length?'<div class="e-split"><div class="e-lcol"><ul class="e-res">'+h+'</ul></div><section class="e-det" id="e-det" hidden></section></div>':'<p class="empty">Nenhum modelo com esses filtros.</p>');
-  var rb=$('#m-rot');if(rb)rb.onclick=mostraRoteiro;
+  var ro=roteiroDe(MS.ass);
+  $('#e-out').innerHTML=(L.length?'<div class="e-split'+(ro?' rot':'')+'"><div class="e-lcol"><ul class="e-res">'+h+'</ul></div>'+(ro?'<aside class="e-rot" aria-label="Roteiro e diretrizes da matéria">'+rotCol(ro)+'</aside>':'<section class="e-det" id="e-det" hidden></section>')+'</div>':'<p class="empty">Nenhum modelo com esses filtros.</p>');
   var mb=$('#m-mais');if(mb)mb.onclick=function(){MLIM+=80;mRender();};
-  if(roteiroDe(MS.ass)&&largo())mostraRoteiro();
 }
 function mAbrir(m){
   var F=[['Pronunciamento',m.pronunciamento],['Apreciação',mApr(m)],['Classe',m.classe||m.classeSigla],['Assunto',m.assunto],['Temas',m.temas],['Causa de pedir',m.causaPedir],['Resultado',m.resultado],['Preliminares',m.preliminares],['Honorários',m.honorarios],['Processos associados',m.processosAssociados]].filter(function(z){return z[1];});
   var h='<div class="e-dhead"><div class="e-dtit"><span class="e-tag A">'+esc(mTipo(m))+'</span><span class="e-dname">'+esc(m.nomeModelo||m.id)+'</span><button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
-  h+='<div class="e-dmeta">'+F.slice(0,6).map(function(z){return '<div><span>'+z[0]+'</span>'+esc(z[1])+'</div>';}).join('')+'</div><div class="e-dacts"><button class="e-mini pri" data-mcp>Copiar texto-base</button>'+(roteiroDe(m.assunto)?'<button class="e-mini" data-mrot>Roteiro da matéria</button>':'')+'</div></div><div class="e-dbody">';
+  h+='<div class="e-dmeta">'+F.slice(0,6).map(function(z){return '<div><span>'+z[0]+'</span>'+esc(z[1])+'</div>';}).join('')+'</div><div class="e-dacts"><button class="e-mini pri" data-mcp>Copiar texto-base</button>'+(roteiroDe(m.assunto)&&!$('.e-rot')?'<button class="e-mini" data-mrot>Roteiro da matéria</button>':'')+'</div></div><div class="e-dbody">';
   if(m.tese)h+='<h3 class="e-sec">Tese</h3><div class="e-box">'+esc(m.tese)+'</div>';
   F.slice(6).forEach(function(z){h+='<h3 class="e-sec">'+z[0]+'</h3><div class="e-box">'+esc(z[1])+'</div>';});
   if(m.especificidades)h+='<h3 class="e-sec">Especificidades</h3><div class="e-box">'+esc(m.especificidades)+'</div>';
