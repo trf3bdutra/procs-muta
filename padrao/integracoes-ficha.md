@@ -195,7 +195,10 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 | Situação na pauta | `Situação da Pauta` | importado · só leitura | — (sem coluna na base) | — |  |
 | Sessão na planilha | `Sessão atual (Excel)` | importado · só leitura | — (sem coluna na base) | — |  |
 
-### Fora das abas (estado técnico, preservado)
+### Fora das abas
+
+- `Destino` (operacional · `producao`): escolhido no seletor da última etapa do fluxo. Vazio = Sessão (Pautado, Minutado, Corrigido, Liberado, Sessão); "Monocrática" = Minutado, Corrigido, Assinado, Monocrática.
+- Estado técnico do Painel, preservado:
 
 `_pautaEntries` (entradas por sessão), `_pautaHistory`, `_recursos`, `_contras`, `_ementa`, `_autoMetaTags`, `_preparoAJG`, `_ajgFromDpu`, `_dpuAuto`, `_autoRestriction`, `_magistradoRestricao`, `_restricaoTipo`: vêm do Painel Central e ficam nas seções do operacional, sem exibição direta.
 
