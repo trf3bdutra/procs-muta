@@ -588,3 +588,5 @@ details.rr ul{margin:4px 0 6px 16px;padding:0;font-size:12.5px}details.rr li{mar
 .mn-doc mark.v{background:#fbe7b0;color:#5a4520}
 .mn-doc .ref{color:#6b4f1d}
 @media (max-width:900px){.mn-wrap{grid-template-columns:1fr}.mn-toc{position:static;max-height:none}.mn-doc{padding:26px 18px}}
+/* "Editar na planilha" só na versão editor */
+body:not(.vdm-ed) #openSheet{display:none!important}

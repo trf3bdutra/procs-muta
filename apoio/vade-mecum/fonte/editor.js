@@ -177,5 +177,6 @@ function edEnviar(msg){
   .then(function(x){x.T.forEach(function(t){Object.keys(EDM.arquivos).forEach(function(k){if(EDM.arquivos[k].path===t.path)EDM.arquivos[k].sha=t.sha;});});
     EDS.sujo={};EDS.log=[];EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Enviado</h3><p>Commit <a href="'+esc(x.c.html_url||('https://github.com/'+EDM.repo+'/commit/'+x.c.sha))+'" target="_blank" rel="noopener">'+esc(x.c.sha.slice(0,7))+'</a> gravado em '+esc(EDM.ramo)+'. O GitHub valida a base e reconstrói o Vade Mecum em alguns minutos.</p><div class="e-dacts"><button class="btn" data-eddlgx>Fechar</button></div></div></div>';edRender();})
   .catch(function(e){edSt('Não foi possível enviar: '+e.message);if(/^401|^403/.test(e.message))EDS.token='';});}
+document.body.classList.add('vdm-ed');
 /* entrada pelo cabeçalho */
 (function(){var h=$('#openSheet');var b='<button class="btn ed-btn" data-edabre title="Adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial e diretrizes">Editor</button>';if(h)h.insertAdjacentHTML('beforebegin',b);else document.body.insertAdjacentHTML('afterbegin',b);})();
