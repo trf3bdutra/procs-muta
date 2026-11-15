@@ -1,4 +1,4 @@
-# Base gabcmt (padrão 1.0): a cada gravação, valida a base e atualiza o manifesto.
+# Base gabcmt (padrão 1.0): a cada gravação, valida a base, atualiza o manifesto e reconstrói o Vade Mecum.
 # Commits feitos por este fluxo (GITHUB_TOKEN) não disparam o fluxo de novo.
 name: Base gabcmt
 on:
@@ -26,6 +26,8 @@ jobs:
           node-version: "20"
       - name: Valida e atualiza o manifesto
         run: python3 gerar.py
+      - name: Reconstrói o Vade Mecum (leitura e editor)
+        run: python3 apoio/vade-mecum/fonte/build.py
       - name: Grava
         run: |
           if [ -n "$(git status --porcelain)" ]; then
