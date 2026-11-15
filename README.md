@@ -36,6 +36,7 @@ padrao/                        regras técnicas da base
 gerar.py                       valida a base, atualiza o manifesto e importa exportações dos apps
 scripts/                       rotinas auxiliares (DataJud, catálogo, modelos-matriz, apps)
 cmt-monitor.html               CMT-monitor: acervo, sessões de julgamento, designação e regras
+cmt-fluxograma.html            CMT-fluxograma: fluxograma interativo, rotina do gabinete, competência e impedimentos, assuntos e procedimentos
 construtor.html · index.html   apps (ver observação abaixo)
 ```
 
