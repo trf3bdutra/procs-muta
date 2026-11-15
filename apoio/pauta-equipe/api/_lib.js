@@ -88,4 +88,4 @@ async function commitArquivos(arqs, msg) {
   await gh('/git/refs/heads/' + RAMO, { method: 'PATCH', body: JSON.stringify({ sha: c.sha }) });
   return c;
 }
-module.exports = { gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };
+module.exports = { gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };

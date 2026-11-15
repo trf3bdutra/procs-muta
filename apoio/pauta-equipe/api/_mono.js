@@ -58,9 +58,15 @@ module.exports = async (req, res, u) => {
       return res.status(200).json({ mono: true, itens, sugestoes: A.sug.filter(b => !tem[dg(b.cnj)]), previa: [], atualizadoEm: doc.atualizado_em || '' });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
-    const b = req.body || {}, cnj = String(b.cnj || ''), C = Object.assign({}, b.campos || {});
+    const b = req.body || {}, cnj = String(b.cnj || '');
     if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'Número do processo inválido: informe os 20 dígitos do CNJ.' });
-    if (!L.gestor(u)) GESTOR.forEach(k => delete C[k]);
+    return res.status(200).json(await gravarMono(cnj, b.campos, u, L.gestor(u)));
+  } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
+};
+/* grava o registro de monocrática/urgência; gestorOk: pode designar */
+async function gravarMono(cnj, campos, u, gestorOk) {
+    const C = Object.assign({}, campos || {});
+    if (!gestorOk) GESTOR.forEach(k => delete C[k]);
     /* campos do cartão → ficha (mesmo mapa da pauta); destino e observação da monocrática; urgência retirada limpa o grupo inteiro */
     const mud = FICHA.doCartao(C, C.cartao);
     if ('mono' in C) (mud.producao = mud.producao || {}).Destino = C.mono ? 'Monocrática' : '';
@@ -74,6 +80,7 @@ module.exports = async (req, res, u) => {
         else if (k !== 'cartao' && (x[k] || '') !== String(C[k] || '')) { x[k] = String(C[k] || ''); mx = true; } });
       if (mx) { c[EXTRA] = JSON.stringify(x); out.push('controles.Monocrática - ' + EXTRA); }
     }, u);
-    return res.status(200).json({ ok: true, item: item(r), semMudanca: !out.length });
-  } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
-};
+    return { ok: true, item: item(r), semMudanca: !out.length };
+}
+module.exports.gravarMono = gravarMono;
+module.exports.item = item;
