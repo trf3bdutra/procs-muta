@@ -236,9 +236,9 @@ function dkResumo(t){if(XP.fora[t.k])return 'retirado';if(t.opc&&!XP.abre[t.k])r
 function dkOutros(pt,sel){var L=pt.tr.filter(function(t){return !(t.n==='Sentença'&&sentNaAbertura(pt.tr,XP.alt));});if(L.length<2)return '';
   return '<div class="dout2"><div class="cfl">'+(sel?'Outros blocos':'Blocos da parte')+'</div><ol>'+L.map(function(t,i){if(sel&&t.k===sel.k)return '';var fo=XP.fora[t.k],op=t.opc&&!XP.abre[t.k];return '<li><button type="button" data-'+(fo?'xvolta':op?'xabre':'dsel')+'="'+esc(t.k)+'"><span class="n">'+('0'+(i+1)).slice(-2)+'</span><b>'+esc(t.n)+'</b><small>'+esc(dkResumo(t))+' ›</small></button></li>';}).join('')+'</ol></div>';}
 function dkHead(){var h=$('#v-edit .pg-h');if(!h)return;var ed=XS.ed||'pecas',t=$('#v-edit .pg-t h1'),k=$('#v-edit .pg-t .dkk');if(!k&&t){k=document.createElement('p');k.className='dkk';t.parentNode.insertBefore(k,t);}
-  var I={pecas:['01 / MONTAR A MINUTA','Minuta-Matriz','Molde-padrão de cada peça: a estrutura vem pronta, com versões, campos, regras e orientações; a fundamentação é do caso.'],mod:['02 / PARTIR DE UM MODELO','Modelos','Modelos de acórdão, decisão e despacho, prontos para preencher com os dados do caso.']}[ed]||['','Editorial',''];
+  var I={pecas:['01 / MONTAR A MINUTA','Minuta-Matriz','Molde-padrão de cada peça: a estrutura vem pronta, com versões, campos, regras e orientações; a fundamentação é do caso.'],mod:['02 / PARTIR DE UM MODELO','Modelos','Modelos de acórdão, decisão e despacho, prontos para preencher com os dados do caso.'],dir:['03 / SEGUIR AS DIRETRIZES','Diretrizes','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.'],consulta:['04 / CONSULTAR O CASO PAUTADO','Consulta','Escolha a sessão e o item: o Compêndio lê o cartão do processo e reúne o material aplicável.']}[ed]||['','Editorial',''];
   if(k)k.textContent=I[0];if(t)t.textContent=I[1];var d=$('#x-desc');if(d)d.textContent=I[2];
-  $$('#x-sub button').forEach(function(b,i){b.setAttribute('data-n','0'+(i+1));var tx={pecas:'Minuta-Matriz',mod:'Modelos'}[b.getAttribute('data-s')];if(tx&&b.textContent!==tx)b.textContent=tx;});}
+  $$('#x-sub button').forEach(function(b,i){b.setAttribute('data-n','0'+(i+1));var tx={pecas:'Minuta-Matriz',mod:'Modelos',dir:'Diretrizes',consulta:'Consulta'}[b.getAttribute('data-s')];if(tx&&b.textContent!==tx)b.textContent=tx;});}
 document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#x-sub button'))setTimeout(dkHead,0);});
 function xPagina(){
   var q=cxQual(),PT=q?cxPartes():xPartes(),FMT=((ED.pecas.forma.filter(function(f){return f.t==='Formatação para o PJe';})[0]||{}).r)||[];XP._PT=PT;xAuto(PT);
@@ -367,10 +367,15 @@ document.addEventListener('input',function(e){var f=e.target.closest&&e.target.c
 /* ===== Editorial: Minuta-Matriz (com o banco de trechos ao fim) e Modelos ===== */
 function xRender(){
   if(!ED){$('#x-main').innerHTML='<p class="empty">Dados do editorial indisponíveis.</p>';return;}
-  if(XS.ed==='dir'){XS.ed='pecas';var td=document.querySelector('.tab[data-v="dir"]');if(td){td.click();return;}}
   var irBanco=XS.ed==='par';if(irBanco)XS.ed='pecas';
   var ed=XS.ed||'pecas';$$('#x-sub button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===ed));});
   var bk=$('#x-banco');
+  dkVolta();
+  if(ed==='dir'||ed==='consulta'){$('#x-wrap').hidden=true;if(bk)bk.hidden=true;if($('#e-layout').parentNode!==$('#v-ement'))layoutEm('#v-ement');
+    var a=$('#x-alt');if(!a){a=document.createElement('div');a.id='x-alt';$('#v-edit').appendChild(a);}a.hidden=false;a.className='x-alt-'+ed;
+    var el=ed==='dir'?$('#x-man'):$('#cq');if(el)a.appendChild(el);
+    if(ed==='dir'){if(ED)xManual();else $('#x-man').innerHTML='<p class="empty">Dados do editorial indisponíveis.</p>';}else if(window.CQ_render)window.CQ_render();
+    if(window.VDM_marcaNav)window.VDM_marcaNav();dkHead();return;}
   if(ed==='mod'){$('#x-wrap').hidden=true;if(bk)bk.hidden=true;layoutEm('#v-edit');EM.sub='mod';fecharIT();mostrar();dkHead();return;}
   XS.sub='estrutura';$('#x-wrap').hidden=false;
   if(!bk){bk=document.createElement('section');bk.id='x-banco';bk.setAttribute('aria-label','Banco de trechos');
@@ -382,3 +387,8 @@ function xRender(){
   xPagina();
   if(irBanco)setTimeout(function(){bk.scrollIntoView({behavior:'smooth',block:'start'});},60);
 }
+
+/* Diretrizes e Consulta entram na navegação interna do Editorial: o conteúdo é levado para dentro da página e volta ao sair */
+function dkVolta(){var m=$('#x-man'),c=$('#cq'),a=$('#x-alt');if(m&&a&&m.parentNode===a)$('#v-dir').appendChild(m);if(c&&a&&c.parentNode===a){var w=$('#v-consulta .cq-wrap')||$('#v-consulta');w.appendChild(c);}if(a)a.hidden=true;}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.tab[data-v="dir"],.tab[data-v="consulta"]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();irEditorial(t.getAttribute('data-v'));},true);
+document.addEventListener('cmt-acesso',function(){if(XS.ed==='dir'&&!$('#v-edit').hidden)setTimeout(function(){if(XS.ed==='dir')xManual();},1500);});
