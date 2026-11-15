@@ -155,7 +155,7 @@ html[data-theme=dark] .trb{--t-bg:#0a1821;--t-ln:#1e3747;--t-rs:#10222e;--t-ti:#
 #v-pauta.mono .pt-corpo{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}#v-pauta:not(.mono) .urq{display:none}.pt-lista{min-width:0}
 @media (max-width:1100px){#v-pauta.mono .pt-corpo{grid-template-columns:1fr}}
 /* prontuário lateral da pauta: mesmo molde da fila de urgências, em azul */
-.prq{display:none}#v-pauta.prt-on:not(.mono):not(.ctl) .prq{display:block}
+.prq{display:none}#v-pauta.prt-on:not(.ctl) .prq{display:block}#v-pauta.mono.prt-on .urq{display:none}#v-pauta.mono.prt-on .pt-corpo{grid-template-columns:minmax(0,1fr)}
 .prt{background:#f2f7fb;border:1px solid #cfdfec;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;box-shadow:0 10px 30px #21394c1f}
 @media (min-width:1181px){.prt{position:fixed;z-index:15;top:72px;bottom:12px;overflow:hidden}}
 .prt-body{flex:1 1 auto;min-height:0;overflow:auto}.prt-body::-webkit-scrollbar{width:6px}
@@ -1198,30 +1198,38 @@ $('#trm-per').onclick=function(e){var b=e.target.closest('button');if(!b)return;
 $('#trm-reg').onclick=function(){S.monoForm=!S.monoForm;$('#mono-n').hidden=!S.monoForm;bandaMono();if(S.monoForm){var c=$('#mono-n').elements.cnj;c.focus();}};
 /* prontuário lateral (Pautas): clique no processo abre o painel com 4 abas, com os mesmos campos do cartão */
 var PRT_ABAS=[['Admissibilidade',/Regularidade/],['Origem',/Processo e origem|Caracteriza/],['Recursos',/Recursos/],['Julgamento',/Julgamento/]];
+var PRT_ABAS_MONO=[['Produção',null],['Ato e fundamento',/Ato e fundamento/],['Pedido urgente',/Pedido urgente/]];
 function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
-  var on=!!S.prt&&S.fonte!=='mono'&&CTRLV.indexOf(S.fonte)<0,it=on?lista().filter(function(i){return dg(i.cnj)===S.prt;})[0]:null;
+  var mono=S.fonte==='mono',on=!!S.prt&&CTRLV.indexOf(S.fonte)<0,it=on?lista().filter(function(i){return dg(i.cnj)===S.prt;})[0]:null;
   [].forEach.call(document.querySelectorAll('#lst .prt-sel'),function(x){x.classList.remove('prt-sel');});
   if(!it){vp.classList.remove('prt-on');el.innerHTML='';prtPos();return;}
   vp.classList.add('prt-on');var sel=document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(sel)sel.classList.add('prt-sel');
   var ativo=el.querySelector('.prt-pc')&&el.contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
   if(ativo&&el.getAttribute('data-k')===S.prt)return;
-  var tmp=document.createElement('div');tmp.innerHTML=corpo(it,tipoJ(it));var secs=[].slice.call(tmp.querySelectorAll('.pn > section'));
-  var abas=PRT_ABAS.map(function(a){var ss=secs.filter(function(s){var h=s.querySelector('h3');return h&&a[1].test(h.textContent);});
+  var tmp=document.createElement('div');tmp.innerHTML=mono?corpoMono(it):corpo(it,tipoJ(it));var secs=[].slice.call(tmp.querySelectorAll('.pn > section'));
+  /* Monocráticas: produção (minutado, revisado, para assinatura, assinada), ato e fundamento, pedido urgente */
+  var abas=(mono?PRT_ABAS_MONO:PRT_ABAS).map(function(a){var ss=secs.filter(function(s){var h=s.querySelector('h3');return h&&a[1]&&a[1].test(h.textContent);});
     var n=0,ch=0;ss.forEach(function(s){[].forEach.call(s.querySelectorAll('input,select,textarea'),function(x){if(x.type==='button')return;n++;if(x.type==='checkbox'?x.checked:(x.value||'').trim())ch++;});});
-    return {nome:a[0],html:ss.map(function(s){return s.outerHTML;}).join(''),n:n,ch:ch};});
+    return {nome:a[0],html:a[1]?ss.map(function(s){return s.outerHTML;}).join(''):'',n:n,ch:ch};});
   var o3={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3,'Assinada':3}[etapa(it)];
   var PEN='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>';
   var DT=['dataMinuta','dataCorrecao','dataLiberacao'];
   var stp=[['Minutado',PEN],['Corrigido','✓'],['Liberado','➤']].map(function(x,i){var at=i+1===o3,d=it[DT[i]];
     return (i?'<i class="ln'+(i+1<=o3?' ok':'')+'"></i>':'')+'<button class="sp'+(i+1<=o3?' ok':'')+(at?' at':'')+'" data-a="et" data-v="'+(at?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+etLbl(x[0])+(d?' em '+esc(br(d)):'')+(at?' · clique para desfazer':'')+'" aria-label="'+etLbl(x[0])+'">'+x[1]+'</button>';}).join('');
-  abas[3].html='<section class="prt-dts"><h3><em>✓</em>Produção</h3><div class="prt-prod"><div class="f"><span>Minutado em</span><div class="v"><input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'" title="Informar a data marca o processo como minutado"></div></div>'+
+  if(mono){var dtf=function(r,k){return '<div class="f"><span>'+r+'</span><div class="v"><input type="date" data-d="'+k+'" value="'+esc(it[k]||'')+'"></div></div>';};
+    abas[0].html='<section class="prt-dts"><h3><em>✓</em>Produção da monocrática</h3><div class="prt-prod">'+
+      '<div class="f"><span>Minutado · revisado · para assinatura</span><div class="v"><div class="stp prt-stp">'+stp+'</div></div></div>'+
+      dtf('Minutado em','dataMinuta')+dtf('Revisado em','dataCorrecao')+dtf('Enviada para assinatura em','dataLiberacao')+
+      '<div class="f"><span>Assinatura</span><div class="v">'+(it.assinado||it.dataAssinatura?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):'')+'</b>':'<span class="mut">ainda não assinada · registrar na ficha (▤ › Produção)</span>')+(it.decisaoId?' · ID '+esc(it.decisaoId):'')+'</div></div>'+
+      '<div class="f"><span>Observação</span><div class="v"><textarea rows="2" data-d="obs" placeholder="anotações da monocrática">'+esc(it.obs||'')+'</textarea></div></div></div></section>';abas[0].n=3;abas[0].ch=['dataMinuta','dataCorrecao','dataLiberacao'].filter(function(x){return it[x];}).length;}
+  else abas[3].html='<section class="prt-dts"><h3><em>✓</em>Produção</h3><div class="prt-prod"><div class="f"><span>Minutado em</span><div class="v"><input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'" title="Informar a data marca o processo como minutado"></div></div>'+
     '<div class="f"><span>Minutado · corrigido · liberado</span><div class="v"><div class="stp prt-stp">'+stp+'</div></div></div></div></section>'+abas[3].html;
-  var ab=Math.min(S.prtAba||0,3),V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),et=etapa(it),ssx=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},pz=(ssx.marcos||{}).entregaMinutas||'',dd=pz?dias(hoje(),pz):null,A=alertas(it);
+  var ab=Math.min(S.prtAba||0,abas.length-1),V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),et=etapa(it),ssx=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},pz=mono?'':(ssx.marcos||{}).entregaMinutas||'',dd=pz?dias(hoje(),pz):null,A=alertas(it);
   var mins=it.servidor||'—',cor=it.corretor||'—';
   el.setAttribute('data-k',S.prt);
   var chip=function(tx,c){return '<span class="prt-ch'+(c?' '+c:'')+'">'+tx+'</span>';};
   el.innerHTML='<section class="prt" aria-labelledby="prt-t"><div class="prt-h"><span class="prt-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>'+
-    '<div><h2 id="prt-t">Prontuário</h2><small>Item '+esc(it.item||'—')+' · sessão de '+esc(br(S.ses))+'</small></div><span class="sp"></span>'+
+    '<div><h2 id="prt-t">Prontuário de produção</h2><small>'+(mono?'Monocrática'+(((it.ctl||{}).tipoAto)?' · '+esc(it.ctl.tipoAto):''):'Item '+esc(it.item||'—')+' · sessão de '+esc(br(S.ses)))+'</small></div><span class="sp"></span>'+
     '<span class="pc prt-pc prt-hb" data-k="'+S.prt+'"><button data-a="ficha" aria-label="Ficha completa do processo" title="Ficha completa do processo">▤</button><button data-a="comp" aria-label="Consultar no Compêndio" title="Consultar no Compêndio com os dados deste processo">◈</button></span>'+
     '<button data-prt="ant" aria-label="Processo anterior" title="Processo anterior"'+(ix>0?'':' disabled')+'>‹</button><button data-prt="prox" aria-label="Próximo processo" title="Próximo processo"'+(ix>=0&&ix<V.length-1?'':' disabled')+'>›</button><button data-prt="x" aria-label="Fechar o prontuário" title="Fechar (Esc)">×</button></div>'+
     '<div class="prt-id"><b>'+esc(it.cnj)+'</b><small>'+esc([it.assunto,it.classe].filter(Boolean).join(' · '))+'</small><small class="prt-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</small>'+
@@ -1240,7 +1248,7 @@ document.addEventListener('click',function(e){
   if(b&&b.closest('#prq')){if(b.hasAttribute('data-prt-aba')){S.prtAba=+b.getAttribute('data-prt-aba');[].forEach.call($('#prq').querySelectorAll('[data-prt-aba]'),function(x){x.setAttribute('aria-selected',String(x===b));});[].forEach.call($('#prq').querySelectorAll('[data-prt-p]'),function(x){x.hidden=x.getAttribute('data-prt-p')!==String(S.prtAba);});return;}
     var a=b.getAttribute('data-prt');if(a==='x'){S.prt=null;prontLateral();return;}var V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),nx=V[ix+(a==='prox'?1:-1)];
     if(nx){S.prt=dg(nx.cnj);prontLateral();var c=document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(c)c.scrollIntoView({behavior:'smooth',block:'nearest'});}return;}
-  if(S.fonte==='mono'||CTRLV.indexOf(S.fonte)>=0)return;
+  if(CTRLV.indexOf(S.fonte)>=0)return;
   var pc=t.closest&&t.closest('#lst .pc');if(!pc||t.closest('button,input,select,textarea,a,label,.ex,.pn,summary'))return;
   var k=pc.getAttribute('data-k');S.prt=S.prt===k&&$('#v-pauta').classList.contains('prt-on')?null:k;prontLateral();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&S.prt&&!document.querySelector('#fd:not([hidden]),.cmtfx-ov'))if(!(document.activeElement&&$('#prq').contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))){S.prt=null;prontLateral();}});
@@ -1514,7 +1522,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
   if(a==='undo'){if(it.dataLiberacao)it.dataLiberacao='';else if(it.dataCorrecao)it.dataCorrecao='';else it.dataMinuta='';marcar(it,{dataMinuta:it.dataMinuta,dataCorrecao:it.dataCorrecao,dataLiberacao:it.dataLiberacao});render();return;}
   if(a==='add'||a==='del'){var l=b.getAttribute('data-l'),C=cart(it);C[l]=C[l]||[];if(a==='add')C[l].push(l==='recursos'?{parte:'',tipo:'',id:'',contra:''}:{desc:'',id:'',data:''});else C[l].splice(+b.getAttribute('data-i'),1);var o={};o[l]=C[l];marcar(it,{cartao:o});render();return;}
   if(a==='ficha'){fichaDialogo(it.cnj,lista().map(function(i){return i.cnj;}));return;}
-  if(a==='pront'){fichaAbre(it);return;}
+  if(a==='pront'){S.prt=k;prontLateral();return;}
   if(a==='comp'){var C2=(it.ctl||{}).cartao||{},P={processo:it.cnj,classe:it.classe,assunto:it.assunto,subassuntos:C2.subassuntos,especificidades:C2.especificidades,questoes:C2.questoes,tipoJulgamento:tipoJ(it),decisaoOrigem:(C2.orig||{}).tipo,
       recursos:(C2.recursos||[]).map(function(r){return [r.tipo,r.parte].filter(Boolean).join(' · ');}).filter(Boolean),resultado:(it.ctl||{}).resJulg};
     Object.keys(P).forEach(function(x){if(!P[x]||(Array.isArray(P[x])&&!P[x].length))delete P[x];});
