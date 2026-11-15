@@ -3,10 +3,10 @@
 
 Lê os códigos de assunto do acervo fonte (DataJud e Power BI), consulta o webservice
 público do SGT do CNJ e grava apoio/assuntos-cnj.json com, para cada código, o nome,
-a cadeia de pais (do ramo do direito até o assunto) e o ramo (primeiro nível).
+a cadeia de pais (do ramo do direito até o assunto), com códigos e nomes, e o ramo (primeiro nível).
 
 Webservice: https://www.cnj.jus.br/sgt/infWebService.php
-  getStringPaisItemPublicoWS(seqItem, tipoItem='A')   -> cadeia de pais
+  getStringPaisItemPublicoWS(seqItem, tipoItem='A')   -> códigos dos pais, do ramo ao pai imediato
   getArrayDetalhesItemPublicoWS(seqItem, tipoItem='A') -> detalhes do item
   getDataUltimaVersao()                               -> data da versão das tabelas
 """
@@ -109,32 +109,43 @@ def main():
     except Exception as e:  # noqa: BLE001
         print('versão:', e, file=sys.stderr); versao = None
 
-    saida, amostras, falhas = {}, {}, []
+    cache, falhas = {}, []
+
+    def det(c):
+        c = int(c)
+        if c not in cache:
+            rd, _ = chamar('getArrayDetalhesItemPublicoWS', {'seqItem': c, 'tipoItem': 'A'})
+            bruto = retorno(rd)
+            kv = {i.get('key'): i.get('value') for i in bruto if isinstance(i, dict)} if isinstance(bruto, list) else (bruto or {})
+            cache[c] = {k: kv.get(k, '') for k in ('nome', 'cod_item_pai', 'situacao', 'dispositivo_legal', 'artigo')}
+            time.sleep(0.1)
+        return cache[c]
+
+    saida = {}
     for i, c in enumerate(lista, 1):
         try:
-            rp, txt_p = chamar('getStringPaisItemPublicoWS', {'seqItem': c, 'tipoItem': 'A'})
-            rd, txt_d = chamar('getArrayDetalhesItemPublicoWS', {'seqItem': c, 'tipoItem': 'A'})
-            pais, det = retorno(rp), retorno(rd)
-            cadeia = cadeia_de(pais)
-            nome = (det.get('nome') if isinstance(det, dict) else None) or (cadeia[-1] if cadeia else '')
-            saida[str(c)] = {'nome': nome, 'cadeia': cadeia, 'ramo': cadeia[0] if cadeia else '',
-                             'processos': cods[c], 'detalhes': det}
-            if len(amostras) < 3:
-                amostras[str(c)] = {'pais': txt_p[-1500:], 'detalhes': txt_d[-3000:]}
+            rp, _ = chamar('getStringPaisItemPublicoWS', {'seqItem': c, 'tipoItem': 'A'})
+            pais = [int(x) for x in re.findall(r'\d+', str(retorno(rp) or ''))]
+            pais = [x for x in pais if x != c]
+            d = det(c)
+            nomes = [det(x)['nome'] for x in pais] + [d['nome']]
+            saida[str(c)] = {'nome': d['nome'], 'codigos': pais + [c], 'cadeia': nomes, 'ramo': nomes[0],
+                             'ramo_codigo': (pais + [c])[0], 'situacao': d['situacao'],
+                             'dispositivo_legal': d['dispositivo_legal'], 'artigo': d['artigo'], 'processos': cods[c]}
         except Exception as e:  # noqa: BLE001
             falhas.append({'codigo': c, 'erro': str(e)[:300]})
             if str(c) in anterior:
                 saida[str(c)] = anterior[str(c)]
         if i % 50 == 0:
             print(f'{i}/{len(lista)}', flush=True)
-        time.sleep(0.15)
+        time.sleep(0.1)
 
     doc = {
         'schema': 'gabcmt.assuntos-cnj', 'schema_versao': 1,
         'fonte': 'CNJ · SGT/TPU, webservice público (https://www.cnj.jus.br/sgt/infWebService.php)',
         'versao_tpu': versao, 'consultado_em': datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'total': len(saida), 'falhas': falhas,
-        'ramos': {}, 'assuntos': saida, 'amostras_brutas': amostras,
+        'ramos': {}, 'assuntos': saida,
     }
     for v in saida.values():
         if v.get('ramo'):
