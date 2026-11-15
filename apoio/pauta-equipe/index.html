@@ -588,6 +588,26 @@ html[data-theme=dark] .st.ok{background:#183447!important}
 @container (max-width:720px){.cc-top{grid-template-columns:1fr}.cc-sb{position:static}.cc-wg{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 #cc-cal{margin:0 0 18px}
+/* Início (design D): calendário do gabinete ao centro; à direita, meus prazos e entregas, ausências e avisos; produtividade recolhida */
+.ini-d{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start;margin-bottom:14px}.ini-cal{min-width:0}.ini-d #cc-cal{margin:0}
+.ini-rail{display:flex;flex-direction:column;gap:14px;min-width:0}.ini-rail .cx{border-radius:12px;padding:12px 14px}
+.ini-ph{margin:-12px -14px 10px!important;padding:11px 14px 10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.ini-ph small,.ini-pz .ini-ph small{display:block;font-size:9.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#1a653e}html[data-theme=dark] .ini-ph small{color:#6eba8a}
+.ini-ph h2{margin:2px 0 0;font-size:15px}.ini-pz .ini-ph{display:block}
+.ini-rail .hero{background:transparent;color:var(--ink);border-radius:0;padding:0;overflow:visible}.ini-rail .hero:after{display:none}.ini-rail .hero small{display:none}
+.ini-rail .hero .big{font-size:20px;margin:0 0 2px;color:var(--ink)}.ini-rail .hero .big em{color:var(--blue)}html[data-theme=dark] .ini-rail .hero .big em{color:#a9cfe6}
+.ini-rail .hero p,.ini-rail .hero .ft2{color:var(--mut)}.ini-rail .bar2{background:var(--soft);border:1px solid var(--line);margin:10px 0 5px}.ini-rail .bar2 i{background:#005982}
+.ini-rail .hero .go{width:100%;margin-top:10px;background:#005982;color:#fff;border-radius:8px;height:34px}html[data-theme=dark] .ini-rail .hero .go{background:#4e9bcb;color:#061119}
+.ini-rail .mini{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.ini-rail .mc{padding:8px 10px;border-radius:8px;min-height:0;gap:8px}.ini-rail .mc .ic{width:30px;height:30px;flex-basis:30px;font-size:14px;border-radius:8px}
+.ini-rail .mc b{font-size:18px}.ini-rail .mc em{font-size:9.5px}.ini-rail .mc span{display:none}.ini-rail .mc{align-items:center}
+.ini-st{margin:14px 0 4px;font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.ipx{display:grid;grid-template-columns:66px minmax(0,1fr);gap:10px;width:100%;padding:8px 0;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;font:inherit;color:inherit;cursor:pointer}.ipx:hover b{color:var(--blue)}
+.ipx b{display:block;font-size:14px}.ipx small{font-size:11px;font-weight:700;color:var(--mut);white-space:nowrap}.ipx span+span small{white-space:normal}.ipx small.pr{color:#8f4d0e}.ipx span small{font-weight:500}
+.prod{padding:0!important}.prod-s{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;list-style:none;font-size:13px}.prod-s::-webkit-details-marker{display:none}
+.prod-ab{color:var(--blue);font-weight:700;font-size:12.5px}.prod[open] .prod-ab{color:var(--mut)}.prod[open]>*:not(summary){margin-left:16px;margin-right:16px}.prod[open]>.pg2{margin-bottom:16px}.prod[open] .prod-s{border-bottom:1px solid var(--line);margin-bottom:12px}
+@media (max-width:1180px){.ini-d{grid-template-columns:1fr}}
+/* modo noite: o calendário (componente do CMT-monitor, tema claro) fica como um cartão claro, com texto escuro legível */
+html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:#ffffff;--soft:#f6f8f9;--navy:#1f4c4f;--blue:#2d6fa8;color:#13242f;color-scheme:light}
 /* tema claro: o calendário segue a página (sem o painel azul-marinho) */
 
 /* agenda: prazos-limite, datas específicas e ausências (férias, licença, compensação…) */
@@ -625,28 +645,30 @@ html[data-theme=dark] .st.ok{background:#183447!important}
     <span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb" id="sair">Sair</button></header>
   <main id="v-inicio">
     <div class="ola"><div><small class="ola-ey">Gabinete do Des. Fed. Carlos Muta · Turma Regional de MS</small><h1 id="ola-t">Olá</h1><p id="ola-d"></p></div><span class="ola-ch" id="ola-ch"></span></div>
-    <div class="ini-top">
-      <section class="hero" id="hero"></section>
-      <div class="mini" id="mini"></div>
-    </div>
-    <div class="ini-g">
-      <div class="col">
-        <section class="cx av-box"><div class="cx-h"><h2>Avisos e atualizações</h2><button class="b" id="av-tudo">Ver todas</button></div><div id="avisos"></div></section>
-        <section class="cx"><h2>Para hoje e atrasadas</h2><div id="hoje"></div></section>
-        <section class="cx" id="aus-box"><div class="cx-h"><h2>Ausências</h2><button class="b pri" id="aus-novo">+ Solicitar</button></div>
+    <div class="ini-d">
+      <div class="ini-cal"><div id="cc-cal" class="eq-cal"></div></div>
+      <aside class="ini-rail" aria-label="Meus prazos, ausências e avisos">
+        <section class="cx ini-pz" aria-labelledby="pz-t"><div class="ini-ph"><small>Meus prazos e entregas</small><h2 id="pz-t">Minhas minutas</h2></div>
+          <section class="hero" id="hero"></section>
+          <div class="mini" id="mini"></div>
+          <h3 class="ini-st">Para hoje e atrasadas</h3><div id="hoje"></div>
+          <h3 class="ini-st">Próximos prazos</h3><div id="ini-prox"></div>
+        </section>
+        <section class="cx" id="aus-box"><div class="cx-h ini-ph"><div><small>Pedidos ao responsável</small><h2>Minhas ausências</h2></div><span class="sp"></span><button class="b pri" id="aus-novo">+ Solicitar</button></div>
           <form id="aus-form" class="aus-f" hidden><div class="row2"><label>De<input type="date" id="aus-de" required></label><label>Até<input type="date" id="aus-ate" required></label></div>
             <label>Tipo<select id="aus-tipo"></select></label><label>Motivo ou observação<textarea id="aus-mot" rows="2" placeholder="opcional"></textarea></label>
             <div class="row2"><button class="b" type="button" id="aus-cancela">Cancelar</button><button class="b pri" type="submit">Enviar ao responsável</button></div></form>
           <div id="aus-lst"></div></section>
-      </div>
+        <section class="cx av-box"><div class="cx-h ini-ph"><div><small>Gabinete</small><h2>Avisos e atualizações</h2></div><span class="sp"></span><button class="b" id="av-tudo">Ver todas</button></div><div id="avisos"></div></section>
+      </aside>
     </div>
-    <div id="cc-cal" class="eq-cal"></div>
-    <section class="cx prod"><div class="cx-h"><div><small class="ov">REGISTRO DE ATIVIDADES</small><h2>Minha produtividade</h2></div><span class="sp"></span><button class="b pri" id="xlsx">⬇ Exportar Excel</button></div>
+    <details class="cx prod" id="prod"><summary class="prod-s"><b>Minha produtividade</b><span id="prod-res" class="mut"></span><span class="sp"></span><span class="prod-ab">Ver o registro e exportar</span></summary>
+      <div class="cx-h"><div><small class="ov">REGISTRO DE ATIVIDADES</small><h2>Minha produtividade</h2></div><span class="sp"></span><button class="b pri" id="xlsx">⬇ Exportar Excel</button></div>
       <p class="mut" style="margin:-4px 0 10px">Minutas, correções e liberações registradas nas pautas publicadas, pela data informada em cada etapa.</p>
       <div class="pf"><label>De <input type="date" id="pf-de"></label><label>Até <input type="date" id="pf-ate"></label><label>Sessão <select id="pf-ses"></select></label>
         <label>Atividade <select id="pf-at"><option value="">Todas as atividades</option><option value="minuta">Minuta</option><option value="correcao">Correção</option><option value="liberacao">Liberação</option></select></label><button class="b" id="pf-limpa">Limpar</button></div>
       <div class="pm" id="pm"></div>
-      <div class="pg2"><div><h3>Resumo por dia</h3><div class="hw" id="pd"></div></div><div><h3>Atividades registradas <small id="pa-c" class="mut"></small></h3><div class="hw" id="hist"></div></div></div></section>
+      <div class="pg2"><div><h3>Resumo por dia</h3><div class="hw" id="pd"></div></div><div><h3>Atividades registradas <small id="pa-c" class="mut"></small></h3><div class="hw" id="hist"></div></div></div></details>
   </main>
   <main id="v-pauta" hidden>
     <section class="trb" id="trb" aria-labelledby="trb-t"><div class="trb-in">
@@ -1543,6 +1565,12 @@ function inicio(){
   var L=at.map(function(x){return lin(x,['at','atrasada · '+br(prazo(x)).slice(0,5)]);}).concat(hj.map(function(x){return lin(x,['hj','hoje']);}));
   $('#hoje').innerHTML=L.length?L.join(''):'<p class="mut" style="font-size:12px">Nenhuma minuta para hoje nem em atraso.</p>';
   if(!P.mes)P.mes=h.slice(0,7);
+  /* título do painel e próximos prazos da sessão mais próxima com minutas minhas (entrega, liberação, sessão) */
+  var sp=pend.filter(function(x){return x.sessao>=h;}).map(function(x){return x.sessao;}).sort()[0]||((D.sessoes||[]).filter(function(s){return s.date>=h;}).map(function(s){return s.date;}).sort()[0]);
+  var so=(D.sessoes||[]).filter(function(s){return s.date===sp;})[0],mm=(so&&so.marcos)||{},np=pend.filter(function(x){return x.sessao===sp;}).length;
+  var PZ=so?[['entregaMinutas','Entrega das minutas',np?np+' pendente'+(np===1?'':'s'):'nada pendente'],['liberacao','Liberação','correção e liberação'],['date','Sessão de julgamento',so.hora||'']]
+    .map(function(m){return {d:m[0]==='date'?so.date:mm[m[0]],t:m[1],s:m[2]};}).filter(function(x){return x.d&&x.d>=h;}):[];
+  $('#ini-prox').innerHTML=PZ.length?PZ.map(function(x,i){return '<button class="ipx" data-ir="'+esc(sp)+'|"><span><b>'+esc(br(x.d).slice(0,5))+'</b><small class="'+(i?'':'pr')+'">'+esc(quando(x.d))+'</small></span><span><b>'+esc(x.t)+'</b><small>Sessão de '+esc(br(sp).slice(0,5))+(x.s?' · '+esc(x.s):'')+'</small></span></button>';}).join(''):'<p class="mut" style="font-size:12px;margin:4px 0">Nenhum prazo de sessão à frente.</p>';
   calendario();historico();ausencias();
 }
 /* calendário: o mesmo painel de sessões do CMT-monitor (CMTCalendario), com as pautas liberadas para a equipe */
@@ -1580,6 +1608,8 @@ function historico(){
   var dias=Object.keys(D).sort().reverse();
   $('#pd').innerHTML=dias.length?'<table class="ht"><thead><tr><th>Dia</th><th>Minutas</th><th>Correções</th><th>Liberações</th><th>Total</th></tr></thead><tbody>'+dias.map(function(d){var o=D[d];return '<tr><td>'+br(d)+'</td><td>'+o.minuta+'</td><td>'+o.correcao+'</td><td>'+o.liberacao+'</td><td><b>'+(o.minuta+o.correcao+o.liberacao)+'</b></td></tr>';}).join('')+'</tbody></table>':'<div class="empty">Nenhuma atividade neste período.</div>';
   $('#pa-c').textContent=L.length?'· '+L.length+' no período, mais recentes primeiro':'';
+  var TT=atividades(),ct={minuta:0,correcao:0,liberacao:0};TT.forEach(function(a){ct[a.at]++;});
+  $('#prod-res').textContent=ct.minuta+' minuta'+(ct.minuta===1?'':'s')+' · '+ct.correcao+' correç'+(ct.correcao===1?'ão':'ões')+' · '+ct.liberacao+' liberaç'+(ct.liberacao===1?'ão':'ões')+(TT.length?' · última em '+br(TT[0].dia):'');
   $('#hist').innerHTML=L.length?'<table class="ht"><thead><tr><th>Data</th><th>Atividade</th><th>Processo</th><th>Sessão</th><th>Item</th><th>Assunto</th></tr></thead><tbody>'+L.map(function(a){return '<tr><td>'+br(a.dia)+'</td><td><span class="atv '+a.at+'">'+AT[a.at]+'</span></td><td>'+esc(a.x.cnj)+'</td><td>'+br(a.x.sessao)+'</td><td>'+esc(a.x.item)+'</td><td class="as">'+esc(a.x.assunto)+'</td></tr>';}).join('')+'</tbody></table>':'<div class="empty">Nenhuma atividade registrada neste período.</div>';
 }
 ['#pf-de','#pf-ate','#pf-ses','#pf-at'].forEach(function(id){$(id).addEventListener('change',historico);});
