@@ -45,6 +45,12 @@ main{max-width:1320px;margin:0 auto;padding:18px 22px 60px}
 .kpi.al b{color:var(--red)}.kpi.ok b{color:var(--green)}.kpi.am b{color:var(--amber)}
 .ini-g{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:12px}.ini-g .col{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))!important}
 #cc-cal.eq-cal{margin:0 0 12px}
+/* detalhes coloridos da barra, como no CMT-monitor: filete verde e régua azul em dois tons; ponto de cor em cada seção */
+#app header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#0083bd 0 50%,#76bae6 50% 100%);box-shadow:0 -1px 0 #1b7244;pointer-events:none}
+#app header .tabs a:before,#app header .eq-cmp:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin:0 7px 1px 0;vertical-align:middle;background:var(--dot,#e6c27a)}
+#app header .tabs a[data-vw="inicio"]{--dot:#e6c27a}#app header .tabs a[data-vw="pauta"]{--dot:#5fc4a8}#app header .eq-cmp{--dot:#e08a7a}
+#app header .tabs a[aria-current=page]:before{background:#14263c}
+
 /* ===== Pauta de Julgamento ===== */
 #v-pauta{max-width:1500px}
 .pt-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:2px 0 12px}.pt-h h1{margin:2px 0 0;font-size:28px;letter-spacing:-.01em}.pt-st{font-size:12px;font-weight:700;color:var(--mut)}
