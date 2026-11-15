@@ -1,0 +1,422 @@
+{
+ "ajuda": {
+  "ident:processo": "Número CNJ completo, com pontos e hífen.· Exemplo: 5000902-39.2024.4.03.6002",
+  "ident:pronunciamento": "Define a estrutura da aba Minuta: voto, decisão monocrática terminativa, decisão interlocutória ou despacho.",
+  "ident:recurso": "Espécie recursal. Decide o início da abertura e o verbo de cada recurso.· Exemplo: Apelação → “Trata-se de apelação à sentença…” / “Apelou…” · Exemplo: Agravo interno → “Trata-se de agravo interno à negativa de provimento a agravo de instrumento interposto contra decisão que…” / “Alegou o agravante, em suma (ID …):…” · Exemplo: Duas apelações → “Trata-se de dupla apelação à sentença…”",
+  "ident:ramo": "Ramo do Direito — item (i) do cabeçalho da ementa, em caixa alta. Vem do catálogo de assuntos; altere só se o caso pedir outro.· Exemplo: Direito Tributário · Exemplo: Direito Previdenciário · Exemplo: Direito Administrativo e Processual Civil · Sai assim: “DIREITO TRIBUTÁRIO. APELAÇÃO CÍVEL. …”",
+  "ident:secao": "Seção competente (competência interna). Preenchida pelo catálogo de assuntos.· Exemplo: 1ª Seção · Exemplo: 2ª Seção · Exemplo: 3ª Seção",
+  "ident:natureza": "Natureza da ação de origem, em minúscula e sem artigo. Compõe o contexto da abertura (“em execução fiscal…”). Deixe vazio para ação comum.· Exemplo: execução fiscal · Exemplo: mandado de segurança · Exemplo: cumprimento de sentença · Exemplo: embargos à execução fiscal · Evite: “Ação de execução fiscal”, “MS”.",
+  "ident:assunto": "Assunto principal — item (iii) do cabeçalho da ementa. Use o nome do catálogo (escolha na lista).· Exemplo: PIS/PASEP · Exemplo: Multas e demais Sanções · Exemplo: Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+  "ident:temas": "Tema(s) = subassunto(s): a subdivisão do assunto em que o caso se insere (não são os temas de repetitivo). Separe por “;”. Entram no cabeçalho da ementa logo após o assunto.· Exemplo: PASEP; Legitimidade passiva · Exemplo: Cumprimento individual de sentença coletiva · Exemplo: Benefício por incapacidade · Evite: “Tema 1.150/STJ” aqui — vai em especificidades.",
+  "ident:especificidadesTags": "Especificidades que distinguem o caso e explicam o resultado, separadas por “;”. Inclua aqui o tema de repetitivo ou de repercussão geral.· Exemplo: julgamento monocrático; Tema 1.150/STJ · Exemplo: bloqueio de ativos via Sisbajud; depósito judicial integralO cabeçalho deve caber em até três linhas.",
+  "ident:especificidades": "Observações internas do caso (não entram no relatório nem na ementa).",
+  "ident:julgadorOrigem": "Juiz ou juíza que proferiu a sentença, pelo nome.· Exemplo: Vitor Henrique Fernandez",
+  "ident:primeiroGrau": "Vara de origem.· Exemplo: 2ª Vara Federal de Dourados",
+  "ident:pedidosInicial": "Pedido principal da inicial, no substantivo, sem “requer”.· Exemplo: a concessão de aposentadoria por idade rural desde a DER · Exemplo: a exclusão do ICMS da base de cálculo do PIS e da COFINS",
+  "ident:decisaoImpugnadaResumo": "Agravo interno: o que decidiu a decisão monocrática, a partir do verbo — entra depois de “à decisão (ID …) que”.· Exemplo: negou provimento a agravo de instrumento interposto contra decisão que reconheceu a ilegitimidade passiva da União · Sai assim: “Trata-se de agravo interno à decisão (ID …) que negou provimento a agravo de instrumento…”Embargos de declaração: cole a ementa do acórdão embargado; sai transcrita entre aspas.Juízo de retratação: cole a ementa do acórdão da Turma submetido a retratação; sai transcrita entre aspas, depois de “assim ementado (ID …):”.",
+  "ident:decisaoImpugnadaData": "Data do julgamento do acórdão ou da decisão, como DD/MM/AAAA.· Exemplo: 14/04/2026 · Sai assim: “Trata-se de juízo de retratação a acórdão da Turma, proferido em 14/04/2026, assim ementado (ID …):”",
+  "ident:retratAcordaoId": "ID do acórdão submetido a retratação, só os números.· Exemplo: 366525913 · Sai assim: “… assim ementado (ID 366525913):”",
+  "ident:retratOrgao": "Órgão prolator do acórdão. O padrão é a Turma. · Sai assim: “a acórdão da Turma”",
+  "ident:retratSintese": "O que decidiu o acórdão, a partir do verbo, para o Caso em exame da ementa. Se ficar vazio, o gerador extrai o resultado do dispositivo da ementa transcrita.· Exemplo: deu provimento à apelação da parte autora, para garantir concessão de benefício assistencial de prestação continuada, fixando juros de mora e correção monetária conforme o Tema 810/STF · Sai assim: “Juízo de retratação de acórdão que deu provimento à apelação da parte autora…”",
+  "ident:retratEd": "Embargos de declaração opostos ao acórdão antes da subida dos recursos excepcionais.· Exemplo: Opostos e rejeitados · Sai assim: “Foram opostos e rejeitados embargos de declaração em 06/07/2026 (ID’s 369825098 e 384720716).” · ementa: “Rejeitados os embargos de declaração opostos, os autos foram devolvidos…”",
+  "ident:retratEdData": "Data do julgamento dos embargos de declaração.· Exemplo: 06/07/2026",
+  "ident:retratEdIds": "IDs dos embargos e do acórdão que os julgou, separados por vírgula.· Exemplo: 369825098, 384720716 · Sai assim: “(ID’s 369825098 e 384720716)”",
+  "ident:retratPrecedente": "Precedente que motivou a devolução, com a sigla da classe e o número.· Exemplo: ARE 1.557.312/RG-ED · Exemplo: RE 870.947 · Exemplo: REsp 1.495.146 · Sai assim: “… face ao julgamento do ARE 1.557.312/RG-ED pela Suprema Corte (Tema 1.419)”",
+  "ident:retratTema": "Número do tema de repercussão geral ou repetitivo, só o número.· Exemplo: 1.419 · Exemplo: 810 · Sai assim: relatório: “(Tema 1.419)” · ementa: “(Tema 1.419/STF)”",
+  "ident:retratTribunal": "Tribunal do precedente.· Exemplo: STF → “pela Suprema Corte” · Exemplo: STJ → “pelo Superior Tribunal de Justiça”",
+  "ident:retratDevMes": "Mês e ano da decisão de devolução, por extenso e com barra.· Exemplo: julho/2026 · Sai assim: “houve, em julho/2026, decisão para devolução dos autos à Turma…”",
+  "ident:retratDevId": "ID da decisão da Vice-Presidência que devolveu os autos.· Exemplo: 394078935",
+  "ident:retratDevOrgao": "Órgão que determinou a devolução. O padrão é a Vice-Presidência. · Sai assim: “Na tramitação dos recursos excepcionais perante a Vice-Presidência…”",
+  "ident:retratResultado": "Resultado do juízo de retratação. Preenche a conclusão do cabeçalho e o dispositivo da ementa.· Exemplo: Acolhido → “JUÍZO DE RETRATAÇÃO ACOLHIDO” · Exemplo: Não exercido → “Juízo de retratação não exercido, mantido o acórdão.”",
+  "ident:retratAlteracao": "O que o acórdão passa a dizer, a partir do infinitivo.· Exemplo: alterar, no julgamento da apelação, os critérios de incidência dos consectários legais · Sai assim: “Juízo de retratação acolhido para alterar…, mantidos os demais termos do julgamento anterior.”",
+  "ident:retratQuestao": "Ponto do acórdão submetido a retratação, com o artigo: o gerador faz a contração.· Exemplo: os critérios de correção monetária e juros de mora aplicáveis às parcelas devidas pela Fazenda Pública após a entrada em vigor da EC 136/2025 · Sai assim: “A questão em discussão consiste em definir se o acórdão deve ser retratado quanto aos critérios…”",
+  "ok:resultado": "Resultado da sentença, integrado ao “Resultado principal” (detalhamento da decisão recorrida): a escolha escreve o verbo do primeiro parágrafo, e o texto digitado lá atualiza esta escolha.· Exemplo: Procedente → “julgou procedente o pedido” · Exemplo: Extinção sem resolução do mérito → “extinguiu o processo, sem resolução do mérito” · Exemplo: Extinção da execução → “extinguiu a execução” · Exemplo: Impugnação acolhida → “acolheu a impugnação”",
+  "ok:perc": "Percentual dos honorários fixados na sentença, com “%”.· Exemplo: 10% · Exemplo: entre 10% e 20%, nos termos do artigo 85, § 3º, do CPC",
+  "ok:base": "Base de cálculo dos honorários, como está na sentença.· Exemplo: valor atualizado da causa · Exemplo: valor da condenação · Exemplo: proveito econômico · Evite: trocar “valor da causa” por “valor atualizado da causa” se a sentença não disse assim.",
+  "ok:ajg": "Marque se o vencido é beneficiário da gratuidade. · Sai assim: “…, suspensa a exigibilidade em razão da gratuidade de justiça.”",
+  "ok:dpu": "Parte assistida pela Defensoria Pública da União.",
+  "ok:semHon": "Sentença sem condenação em honorários. · Sai assim: “Sem condenação em honorários advocatícios.” (no mandado de segurança, com o artigo 25 da Lei 12.016/2009)",
+  "id:tipoPrincipal": "Estrutura do relatório conforme a espécie (apelação, apelação e remessa, agravo, agravo interno, embargos).",
+  "id:padraoRedacao": "Padrão Carlos Muta (formas do Manual CMT) ou clássico.",
+  "id:formaAbertura": "Forma A (padrão): parágrafo único — “Trata-se de apelação à sentença (ID …) que …”.Forma B: abertura com a ação + parágrafo “A sentença (ID …) …” — previdenciário ou sentença com três ou mais comandos.Agravos e embargos usam sempre a Forma A.",
+  "id:aberturaCustom": "Substitui apenas o início automático, até “que”. Use só quando a forma automática não servir.· Exemplo: Trata-se de apelação e recurso adesivo à sentença · Exemplo: Trata-se de remessa necessária de sentença · Evite: repetir o resultado aqui — ele vem dos campos abaixo.",
+  "id:objetoAcao": "Objeto da ação, em minúscula, sem artigo inicial e sem ponto. Completa “em ação de …” (Forma B) ou o contexto da Forma A.· Exemplo: concessão de aposentadoria por idade rural · Exemplo: restituição de contribuição previdenciária sobre o terço de férias · Exemplo: para excluir o ICMS da base de cálculo do PIS e da COFINS (com “para”, vira “em mandado de segurança impetrado para …”) · Evite: “Ação de concessão…”, “O autor pretende…”, ponto final. · Sai assim: “Trata-se de apelação interposta em ação de concessão de aposentadoria por idade rural.”",
+  "id:sentencaIds": "ID da sentença (ou da decisão agravada / acórdão embargado), só números. Vários: separados por vírgula → “(ID’s …)”. Marque ⊘ se não houver ID.· Exemplo: 389644899 · Exemplo: 333367463, 333367468",
+  "id:sentencaContexto": "Contexto incidental, entre vírgulas, logo depois de “que”. Minúscula, sem ponto.· Exemplo: em cumprimento de sentença proferida na ação civil pública 0005019-15.1997.4.03.6000 · Exemplo: em execução fiscal de multa administrativa · Sai assim: “…à sentença (ID …) que, em execução fiscal de multa administrativa, extinguiu a execução…”",
+  "id:sentencaResultado": "Verbo nuclear no pretérito + objeto. Integrado ao “Resultado na origem”: escolher lá escreve a frase-padrão aqui; digitar aqui atualiza a escolha lá (texto mais específico e compatível é preservado).· Exemplo: julgou parcialmente procedentes os pedidos · Exemplo: concedeu a segurança · Exemplo: extinguiu a execução · Exemplo: acolheu a impugnação e extinguiu o processo · Evite: “Julgou…” com maiúscula; ponto final.",
+  "id:sentencaQualificacao": "Qualificação jurídica do resultado, que entra após vírgula.· Exemplo: com resolução do mérito (artigo 487, I, do CPC) · Exemplo: nos termos do artigo 485, VI, do CPC",
+  "id:sentencaFundamento": "Motivo ou comando principal.Com por / pela / com fundamento → entra após vírgula. Com para → vira comando.· Exemplo: por ilegitimidade passiva · Exemplo: com fundamento no pagamento integral da dívida · Exemplo: para condenar o INSS a conceder aposentadoria por idade rural desde a DER · Sai assim: “…extinguiu o processo, sem resolução do mérito, por ilegitimidade passiva.”",
+  "id:sentencaProvidencias": "Demais comandos da sentença, um por linha, no infinitivo. Dois ou mais viram “(1) …; (2) …; e (3) …”. Honorários não entram aqui.· Exemplo: determinar a implantação do benefício em 30 dias · Exemplo: autorizar a compensação após o trânsito em julgado, observado o artigo 170-A do CTN",
+  "id:sentencaHonorarios": "Honorários — sempre em frase nova no primeiro parágrafo (Manual CMT). Preenchido pelo percentual, base e devedor; ajuste se preciso.· Exemplo: condenando o réu ao pagamento de honorários advocatícios de 10% sobre o valor da condenação · Exemplo: sem condenação em honorários advocatícios · Sai assim: “Condenou o réu ao pagamento de honorários advocatícios de 10% sobre o valor da condenação.”",
+  "id:sentencaCustas": "Complemento da frase dos honorários, após vírgula.· Exemplo: suspensa a exigibilidade em razão da gratuidade de justiça · Exemplo: sem custas",
+  "id:sentencaCustasPreset": "Fórmulas prontas para custas e exigibilidade.",
+  "id:sentencaFinalExtra": "Frase final do primeiro parágrafo, completa, com sujeito e ponto.· Exemplo: A sentença foi integrada pela proferida em embargos de declaração (ID …), que os rejeitou. · Exemplo: Foi deferida tutela de urgência para implantação do benefício.",
+  "id:contraPadrao": "Se houve ou não resposta ao recurso. · Sai assim: “Houve contrarrazões (ID …).” / “Não houve contrarrazões.” (agravos: contraminuta)",
+  "id:contraIds": "ID das contrarrazões ou da contraminuta, só números; ⊘ se não houver.· Exemplo: 389644902",
+  "id:mpDenominacao": "Unidade do Ministério Público que se manifestou (Manual CMT, I.2.2.2): no Tribunal, Procuradoria Regional da República; no primeiro grau, Procuradoria da República; nos tribunais superiores, Procuradoria-Geral da República. “Ministério Público Federal” só quando a referência for à instituição.",
+  "id:mpfModo": "Sentido do parecer.· Exemplo: desprovimento → “opinou pelo desprovimento da apelação” · Exemplo: prosseguimento → “opinou pelo prosseguimento do feito” · Exemplo: sem mérito → “opinou pelo prosseguimento do feito, abstendo-se de manifestação sobre o mérito”Parecer “falta de interesse” = prosseguimento do feito.",
+  "id:mpfIds": "ID do parecer, só números.· Exemplo: 402327239",
+  "id:mpfCustom": "Ação do parecer quando nenhuma opção serve: comece pelo verbo, sem a denominação.· Exemplo: opinou pela anulação da sentença, para realização de perícia social · Sai assim: “A Procuradoria Regional da República opinou pela anulação da sentença… (ID …).”",
+  "id:mpfFinalExtra": "Complemento do parecer, após vírgula.· Exemplo: reiterado em manifestação posterior (ID …)",
+  "id:edPreq": "Embargos de declaração: acrescenta “inclusive em prequestionamento” a “Alegou-se omissão…”.",
+  "rec:verbo": "Verbo inicial do parágrafo do recurso. Concorda sozinho com sujeito plural (“Apelaram os exequentes”).· Exemplo: Apelou · Exemplo: Agravou · Exemplo: Embargou · Exemplo: Recorreu adesivamente",
+  "rec:artigo": "Artigo da parte recorrente (o, a, os, as ou sem artigo).",
+  "rec:partePreset": "Designação da parte pela posição na origem (Manual CMT, I.2.2.1). União, Caixa Econômica Federal, Banco Central do Brasil e Fazenda Nacional vão pelo nome.· Exemplo: a autora · Exemplo: o réu · Exemplo: os exequentes · Exemplo: a União · Evite: “a parte autora” como primeira menção — serve só para variar depois.",
+  "rec:parte": "Designação da parte recorrente.· Exemplo: a autora · Exemplo: o INSS · Exemplo: a União",
+  "rec:parteCustom": "Designação livre da parte recorrente, com artigo.· Exemplo: a Agência Nacional de Transportes Terrestres",
+  "rec:sujeitoCustom": "Sujeito livre do parágrafo do recurso, com artigo.· Exemplo: a Agência Nacional de Transportes Terrestres",
+  "rec:nominal": "Refere a parte recorrente pelo nome, e não pela designação processual.",
+  "rec:ids": "ID da apelação, do agravo ou dos embargos, só números.· Exemplo: 389644901 · Sai assim: “Apelou a União (ID 389644901), alegando, em suma…”",
+  "rec:conectivo": "Conectivo antes do verbo — excepcional (o padrão entre recursos é sem conectivo).· Exemplo: Por sua vez, · Exemplo: De outro lado,",
+  "rec:preliminares": "Uma preliminar por linha. Escolha uma forma e mantenha em todas:• infinitivo: ser nula a sentença por cerceamento de defesa• substantivo: nulidade da sentença por cerceamento de defesa• oração: a sentença é nula por cerceamento de defesa (→ “…, que: …”). · Sai assim: “…, alegando, preliminarmente, ser nula a sentença por cerceamento de defesa; e, no mérito, alegando, em suma: (1) …”",
+  "rec:teses": "Uma alegação de mérito por linha, como a parte sustentou (atribua à parte, não ao Tribunal).Infinitivo ou substantivo → “alegando, em suma: (1) …”.Oração com verbo flexionado → “alegando, em suma, que: (1) …”.· Exemplo: não ter sido adequadamente valorado o conjunto probatório · Exemplo: inaplicabilidade do Tema 677/STJ ao caso · Exemplo: a reestruturação da carreira só ocorreu com a MP 305/2006 · Evite: misturar formas na mesma lista; terminar itens com ponto.",
+  "rec:pedidos": "Pedido recursal, sem “requer” — entra como “pelo que requereu …”. Vários: um por linha.· Exemplo: a reforma da sentença, para julgar procedente o pedido · Exemplo: a anulação da sentença e, subsidiariamente, a sua reforma · Evite: repetir o pedido também no último item das alegações.",
+  "rec:finalExtra": "Complemento ao final do parágrafo do recurso, após vírgula.· Exemplo: com pedido de concessão de efeito suspensivo",
+  "rec:formaAleg": "Força a forma das alegações: infinitivo/substantivo (“alegando, em suma:”) ou oração (“alegando, em suma, que:”). Automático decide pelos itens.",
+  "rec:transicaoMerito": "Passagem das preliminares ao mérito: “; e, no mérito,” (uma preliminar) ou “. No mérito,” (várias).",
+  "rec:organizacao": "Preliminares e mérito juntos num só bloco ou separados pela transição.",
+  "rec:paragrafoManual": "Substitui o parágrafo inteiro do recurso pelo texto digitado — use só em situação atípica.",
+  "contra:parte": "Quem apresentou a resposta, com artigo, pela posição na origem ou pelo nome do ente. Com mais de uma resposta, aparece no início: “Houve contrarrazões da União (ID …).”· Exemplo: a União · Exemplo: o exequente · Exemplo: o Banco Central do Brasil",
+  "contra:ids": "ID das contrarrazões, só números.· Exemplo: 333367476",
+  "contra:preliminares": "Preliminares das contrarrazões — sempre entram no relatório (Manual CMT). Uma por linha, no substantivo.· Exemplo: ausência de dialeticidade · Exemplo: ilegitimidade ativa · Sai assim: “Houve contrarrazões (ID …), com arguição preliminar de ausência de dialeticidade.”",
+  "contra:merito": "Resumo do mérito — opcional e desligado por padrão (Manual CMT). Marque “incluir” só quando relevante.· Exemplo: a manutenção da sentença por seus próprios fundamentos · Sai assim: “… No mérito, a União defendeu a manutenção da sentença…”",
+  "contra:pedidos": "Pedido das contrarrazões — opcional.· Exemplo: o desprovimento da apelação · Exemplo: a majoração da verba honorária",
+  "contra:finalExtra": "Complemento ao final do parágrafo das contrarrazões, após vírgula.",
+  "oc:tipo": "Tipo da peça ou ocorrência, em parágrafo próprio.· Exemplo: Memoriais → “A União apresentou memoriais (ID …).” · Exemplo: Efeito suspensivo → “O pedido de efeito suspensivo formulado pela autora foi indeferido (ID …).”",
+  "oc:posicao": "Onde o parágrafo entra: após a sentença, após os recursos, após as contrarrazões, antes do parecer ministerial ou antes do fecho.",
+  "oc:parte": "Quem apresentou, com artigo.· Exemplo: a União · Exemplo: a autora",
+  "oc:ids": "ID da peça ou ocorrência, só números.",
+  "oc:resultado": "Resultado do pedido (efeito suspensivo, tutela).· Exemplo: deferido · Exemplo: indeferido",
+  "oc:texto": "Texto livre da peça ou ocorrência, em frase completa com ponto.· Exemplo: Em memoriais (ID …), reiterou a União a ilegitimidade ativa.",
+  "oc:finalExtra": "Complemento ao final do parágrafo da ocorrência, após vírgula.",
+  "id:julgamentoTipo": "O que se julga agora. Do próprio recurso: apelação, agravo de instrumento ou remessa. Agravo interno, embargos de declaração ou juízo de retratação: a CLASSE passa a indicar o recurso de origem e o relatório e a ementa seguem a estrutura própria.· Exemplo: Juízo de retratação → “Trata-se de juízo de retratação a acórdão da Turma, proferido em …, assim ementado (ID …):” · ementa: “JUÍZO DE RETRATAÇÃO” · Exemplo: Agravo interno + Agravo de instrumento → “Trata-se de agravo interno à negativa de provimento (ID …) a agravo de instrumento interposto contra decisão que …” · ementa: “AGRAVO INTERNO EM AGRAVO DE INSTRUMENTO” · Exemplo: Embargos + Apelação → “Trata-se de embargos de declaração (ID …) contra acórdão (ID …) assim ementado: …” · “Alegou-se omissão, inclusive em prequestionamento, pois: …” · ementa: “EMBARGOS DE DECLARAÇÃO EM APELAÇÃO CÍVEL”",
+  "id:areaDireito": "(i) Ramo do Direito, em caixa alta. Vem dos Dados do processo.· Exemplo: DIREITO TRIBUTÁRIO · Exemplo: DIREITO ADMINISTRATIVO E PROCESSUAL CIVIL",
+  "id:classeRecurso": "(ii) Classe processual.· Exemplo: Apelação cível · Exemplo: Agravo interno em agravo de instrumento · Exemplo: Embargos de declaração em apelação cível",
+  "id:tipoAcao": "Natureza da ação, quando ajuda a situar o caso (opcional).· Exemplo: Execução fiscal · Exemplo: Mandado de segurança · Exemplo: Cumprimento individual de sentença coletiva",
+  "id:temaPrincipal": "(iii) Assunto principal — palavras curtas, sem verbo.· Exemplo: PASEP · Exemplo: Reajuste de 28,86% · Exemplo: Aposentadoria por idade rural",
+  "id:cabComplementos": "(iv) Tema(s) — subassuntos — e (v) especificidades, um por linha, temas primeiro. Cabeçalho inteiro em até três linhas.· Exemplo: Legitimidade passiva do Banco do Brasil · Exemplo: Ilegitimidade da União · Exemplo: Tema 1.150/STJ",
+  "id:resultadoCab": "Conclusão do julgamento, último item do cabeçalho. Preenchida quando o resultado do recurso é marcado; até lá sai “[CONCLUSÃO]”.· Exemplo: Recurso desprovido · Exemplo: Apelação parcialmente provida · Exemplo: Embargos de declaração rejeitados · Exemplo: Segurança concedida · Evite: “Apelação julgada procedente”; “provimento” de embargos de declaração.",
+  "id:teseJulgamento": "Tese de julgamento, quando houver — frase afirmativa, geral, sem dados do caso.· Exemplo: A abrangência da coisa julgada nas ações civis públicas é determinada pelo pedido e pelas pessoas afetadas.",
+  "id:ementaRotulo": "Rótulo inicial (“EMENTA:”), quando usado.",
+  "caso:text": "I. Caso em exame — o recurso, quem recorre, a decisão recorrida, o fato relevante e o pedido, em frase direta, sem “trata-se de”.· Exemplo: Apelação da União contra sentença que, em mandado de segurança, concedeu a ordem para excluir o ICMS da base de cálculo do PIS e da COFINS. · Exemplo: Agravo interno do Banco do Brasil contra decisão que negou provimento a agravo de instrumento. · Evite: IDs, nomes de particulares, “Trata-se de”.",
+  "questao:text": "II. Questão em discussão — uma por item, começando por “saber se” (ou só “se”). O gerador monta “A questão em discussão consiste em saber se …” ou “Há duas questões em discussão: (i) saber se …; e (ii) saber se …”.· Exemplo: se o depósito judicial integral cessa a responsabilidade do executado pelos encargos da mora · Exemplo: se a União tem legitimidade passiva em demanda sobre a conta individual do PASEP",
+  "disp:text": "IV. Dispositivo — conclusão curta, com o verbo próprio da classe.· Exemplo: Recurso desprovido. · Exemplo: Apelação parcialmente provida. · Exemplo: Embargos de declaração rejeitados. · Exemplo: Segurança concedida. · Evite: “Negado provimento aos embargos de declaração”.",
+  "razao:conclusao": "III. Razões de decidir — a conclusão jurídica do item, em frase afirmativa e direta (obrigatória).· Exemplo: O depósito judicial integral do valor executado cessa a responsabilidade do devedor pelos juros e pela correção monetária.",
+  "razao:fundamento": "Fundamento normativo ou fático que sustenta a conclusão (opcional).· Exemplo: O artigo 9º, § 4º, da Lei 6.830/1980 equipara o depósito em dinheiro ao pagamento.",
+  "razao:precedente": "Precedente que ratifica a conclusão (opcional), sem transcrição longa.· Exemplo: Tema 1.150/STJ",
+  "razao:aplicacao": "Aplicação ao caso concreto (opcional), sem IDs.· Exemplo: No caso, o bloqueio via Sisbajud alcançou o valor integral da dívida inscrita."
+ },
+ "preliminares": [
+  {
+   "id": "prel.m.tempestividade",
+   "titulo": "Tempestividade — intimação eletrônica (rejeição)",
+   "uso": "Rejeitar intempestividade alegada: contagem a partir da intimação eletrônica.",
+   "texto": "Nos termos do artigo 5º, § 2º, da Lei 11.419/2006, c/c os artigos 219, 224, § 2º, e 231, V, do CPC, a intimação eletrônica considera-se realizada no primeiro dia útil seguinte ao da consulta ou ao término do prazo para consultá-la, iniciando-se a contagem do prazo recursal em [DATA INICIAL], com término em [DATA FINAL]. Tendo sido o recurso interposto em [DATA DA INTERPOSIÇÃO], é tempestivo."
+  },
+  {
+   "id": "prel.m.intempestividade",
+   "titulo": "Intempestividade (não conhecimento)",
+   "uso": "Peça protocolada após o prazo.",
+   "texto": "Nos termos dos artigos 219, 224 e 1.003, § 5º, do CPC, o prazo recursal é de 15 (quinze) dias úteis, contados da intimação [— em dobro para a Fazenda Pública, nos termos do artigo 183 do CPC —], o que não foi observado na espécie, revelando a intempestividade da manifestação."
+  },
+  {
+   "id": "prel.m.preparo",
+   "titulo": "Preparo comprovado (rejeição da deserção)",
+   "uso": "Rejeitar deserção alegada.",
+   "texto": "O preparo constitui requisito objetivo de admissibilidade recursal e, nos termos do artigo 1.007, caput, do CPC, foi comprovado no ato de interposição do recurso (ID [ID])."
+  },
+  {
+   "id": "prel.m.desercao",
+   "titulo": "Deserção (não conhecimento)",
+   "uso": "Preparo não comprovado nem regularizado após intimação.",
+   "texto": "O preparo constitui requisito objetivo de admissibilidade recursal. Nos termos do artigo 1.007, caput, do CPC, deve ser comprovado no ato de interposição do recurso, sob pena de deserção.\n\nIntimada para regularizar o preparo (ID [ID]), nos termos do artigo 1.007, § 4º, do CPC, a parte deixou de comprová-lo no prazo assinalado.\n\nConfigurada a deserção, impõe-se o não conhecimento do recurso."
+  },
+  {
+   "id": "prel.m.dialeticidade.rej",
+   "titulo": "Dialeticidade atendida (rejeição)",
+   "uso": "Razões recursais enfrentam os fundamentos da decisão.",
+   "texto": "Segundo o artigo 1.010 do CPC, a apelação deve conter a exposição dos fatos e do direito e as razões do pedido de reforma ou de decretação de nulidade, requisito atendido na espécie, pois as razões recursais enfrentam especificamente [FUNDAMENTO DA DECISÃO IMPUGNADO]."
+  },
+  {
+   "id": "prel.m.dialeticidade",
+   "titulo": "Ausência de dialeticidade (não conhecimento)",
+   "uso": "Razões dissociadas dos fundamentos da decisão recorrida.",
+   "texto": "Não é demais lembrar que, segundo o artigo 1.010 do CPC, a apelação deve conter, entre outros requisitos, a exposição dos fatos e do direito, bem como as razões do pedido de reforma ou de decretação da nulidade, exigindo-se, portanto, a dialeticidade da insurgência, com a necessária adequação das razões recursais ao pedido de reforma, em consonância com o teor da decisão recorrida.\n\nPortanto, é manifesta a dissociação entre as razões recursais e os fundamentos da decisão recorrida, circunstância que configura violação ao princípio da dialeticidade recursal e impede o conhecimento do recurso."
+  },
+  {
+   "id": "prel.m.cabimentoAI",
+   "titulo": "Não cabimento do agravo de instrumento (artigo 1.015 do CPC)",
+   "uso": "Decisão fora do rol do artigo 1.015, sem urgência (Tema 988/STJ).",
+   "texto": "O rol do artigo 1.015 do CPC é de taxatividade mitigada, admitindo a interposição de agravo de instrumento apenas quando verificada a urgência decorrente da inutilidade do julgamento da questão no recurso de apelação (Tema 988/STJ).\n\nNa espécie, é objeto de recurso a decisão que [CONTEÚDO DA DECISÃO AGRAVADA], o que não tem correspondência com o elenco legal das hipóteses de cabimento, de que tratam os incisos e o parágrafo único do artigo 1.015 do CPC, tampouco sendo possível cogitar de urgência para interposição recursal em detrimento da apelação."
+  },
+  {
+   "id": "prel.m.interesse",
+   "titulo": "Perda superveniente do interesse recursal",
+   "uso": "Fato superveniente esvazia a utilidade do recurso.",
+   "texto": "O interesse recursal, como condição de admissibilidade do recurso, deve estar presente não apenas no momento da interposição, mas persistir até o julgamento. A perda superveniente do interesse torna o recurso prejudicado, impondo seu não conhecimento."
+  },
+  {
+   "id": "prel.m.representacao",
+   "titulo": "Irregularidade de representação não sanada",
+   "uso": "Mandato não juntado após intimação (artigo 76, § 2º, I, do CPC).",
+   "texto": "Intimada para regularizar a representação processual, considerando a falta de juntada de instrumento de mandato (ID [ID]), a parte deixou transcorrer in albis o prazo assinalado, perpetuando, assim, o defeito processual, a inviabilizar a admissibilidade do recurso interposto, na forma do artigo 76, § 2º, I, do CPC."
+  },
+  {
+   "id": "prel.m.inovacao",
+   "titulo": "Inovação recursal (não conhecimento no ponto)",
+   "uso": "Matéria não deduzida na origem.",
+   "texto": "A matéria não foi submetida ao Juízo de origem, configurando inovação recursal vedada pelo artigo 1.014 do CPC, sem demonstração de força maior que justificasse sua dedução apenas nesta instância."
+  },
+  {
+   "id": "prel.m.cerceamento",
+   "titulo": "Cerceamento de defesa (rejeição)",
+   "uso": "Prova dos autos suficiente; artigo 370 do CPC.",
+   "texto": "Nos termos do artigo 370 do CPC, cabe ao juiz determinar as provas necessárias ao julgamento do mérito, indeferindo, em decisão fundamentada, as diligências inúteis ou meramente protelatórias. Na espécie, [A PROVA DOCUMENTAL / PERICIAL] constante dos autos (ID [ID]) revelou-se suficiente à solução da controvérsia, não se cogitando de cerceamento de defesa."
+  },
+  {
+   "id": "prel.m.fundamentacao",
+   "titulo": "Fundamentação suficiente da sentença (rejeição)",
+   "uso": "Nulidade por falta de fundamentação afastada.",
+   "texto": "A sentença examinou as questões essenciais ao deslinde da controvérsia, com fundamentação suficiente, nos termos dos artigos 93, IX, da Constituição Federal e 489, § 1º, do CPC, não sendo exigível o enfrentamento de argumentos incapazes de infirmar a conclusão adotada."
+  },
+  {
+   "id": "prel.m.petita",
+   "titulo": "Sentença nos limites do pedido (rejeição)",
+   "uso": "Afastar alegação de julgamento extra ou ultra petita.",
+   "texto": "O juiz não está vinculado aos fundamentos jurídicos invocados na petição inicial, cabendo-lhe analisar os fatos e pedidos deduzidos no caso concreto e aplicar-lhes a solução pertinente à luz do ordenamento jurídico, nos limites dos artigos 141 e 492 do CPC."
+  },
+  {
+   "id": "prel.m.ilegitimidade",
+   "titulo": "Legitimidade pela teoria da asserção (rejeição)",
+   "uso": "Afastar ilegitimidade ativa ou passiva.",
+   "texto": "A legitimidade para a causa é aferida à luz da relação jurídica de direito material deduzida na inicial, segundo a teoria da asserção, figurando [PARTE] como titular [DO DIREITO / DA OBRIGAÇÃO] discutida, conforme [DOCUMENTO] (ID [ID])."
+  },
+  {
+   "id": "prel.m.gratuidade",
+   "titulo": "Gratuidade — presunção relativa (artigo 99, § 3º, do CPC)",
+   "uso": "Impugnação ou exame da gratuidade.",
+   "texto": "A legislação (artigo 99, § 3º, do CPC) não confere presunção absoluta à declaração de hipossuficiência, permitindo ao Juízo analisar a existência dos requisitos legais para o deferimento do pedido. Assim, cabe ao magistrado verificar, sempre que necessário, a efetiva comprovação do estado de hipossuficiência, uma vez que a presunção em favor da declaração é relativa, podendo ser afastada mediante análise do caso concreto."
+  },
+  {
+   "id": "prel.m.requerimento",
+   "titulo": "Prévio requerimento administrativo (Tema 350/STF)",
+   "uso": "Interesse de agir em ação previdenciária.",
+   "texto": "Conforme assentado pelo Supremo Tribunal Federal no Tema 350 (RE 631.240), a concessão de benefício previdenciário depende de requerimento do interessado, não se caracterizando ameaça ou lesão a direito antes de sua apreciação e indeferimento pelo INSS, ou se excedido o prazo legal para sua análise, ressalvadas as hipóteses de entendimento notória e reiteradamente contrário da Administração."
+  },
+  {
+   "id": "prel.m.quinquenal",
+   "titulo": "Prescrição quinquenal das parcelas (Súmula 85/STJ)",
+   "uso": "Prejudicial de mérito em relação de trato sucessivo com a Fazenda Pública.",
+   "texto": "Nas relações jurídicas de trato sucessivo em que figure como devedora a Fazenda Pública, quando não negado o próprio direito reclamado, a prescrição atinge apenas as prestações vencidas antes do quinquênio anterior à propositura da ação, nos termos do artigo 1º do Decreto 20.910/1932 e da Súmula 85/STJ."
+  },
+  {
+   "id": "prel.m.intercorrente",
+   "titulo": "Prescrição intercorrente na execução fiscal (Tema 566/STJ)",
+   "uso": "Prejudicial de mérito em execução fiscal.",
+   "texto": "Nos termos do artigo 40 da Lei 6.830/1980, conforme a sistemática fixada pelo Superior Tribunal de Justiça no Tema 566, o prazo de suspensão de um ano inicia-se automaticamente na data da ciência da Fazenda Pública acerca da não localização do devedor ou de bens penhoráveis, findo o qual tem início o prazo prescricional quinquenal intercorrente."
+  }
+ ],
+ "ementa": {
+  "cab": {
+   "ap": [
+    [
+     "RECURSO DESPROVIDO",
+     "143 ementas"
+    ],
+    [
+     "APELAÇÃO DESPROVIDA",
+     "122"
+    ],
+    [
+     "APELAÇÃO PARCIALMENTE PROVIDA",
+     "61"
+    ],
+    [
+     "INVERSÃO DA SUCUMBÊNCIA",
+     "60 · após o resultado"
+    ],
+    [
+     "HONORÁRIOS RECURSAIS",
+     "265 · último item, quando há majoração"
+    ]
+   ],
+   "dap": [
+    [
+     "APELAÇÕES DESPROVIDAS",
+     "[VALIDAR] sem amostra separada de dupla apelação"
+    ],
+    [
+     "HONORÁRIOS RECURSAIS",
+     "quando há majoração"
+    ]
+   ],
+   "aprn": [
+    [
+     "REMESSA NECESSÁRIA DESPROVIDA",
+     "26 ementas"
+    ],
+    [
+     "APELAÇÃO E REMESSA NECESSÁRIA PROVIDAS",
+     "4"
+    ],
+    [
+     "APELAÇÃO PARCIALMENTE PROVIDA",
+     "4"
+    ],
+    [
+     "SEGURANÇA CONCEDIDA MANTIDA",
+     "3 · mandado de segurança"
+    ]
+   ],
+   "ai": [
+    [
+     "RECURSO DESPROVIDO",
+     "6 ementas"
+    ],
+    [
+     "RECURSO PREJUDICADO",
+     "4"
+    ],
+    [
+     "RECURSO PROVIDO",
+     "2"
+    ],
+    [
+     "RECURSO NÃO CONHECIDO",
+     "2"
+    ]
+   ],
+   "ed": [
+    [
+     "REJEIÇÃO",
+     "139 ementas"
+    ],
+    [
+     "EMBARGOS REJEITADOS",
+     "32"
+    ],
+    [
+     "CORREÇÃO DE OFÍCIO QUANTO ÀS ATUALIZAÇÕES PROMOVIDAS NO MANUAL DE CÁLCULOS DA JUSTIÇA FEDERAL",
+     "45"
+    ],
+    [
+     "CARÁTER PROTELATÓRIO NÃO COMPROVADO",
+     "19"
+    ]
+   ],
+   "agint": [
+    [
+     "AGRAVO INTERNO DESPROVIDO",
+     "11 ementas"
+    ],
+    [
+     "RECURSO DESPROVIDO",
+     "6"
+    ],
+    [
+     "AGRAVO INTERNO PREJUDICADO",
+     "4"
+    ]
+   ]
+  },
+  "cabNota": "Contagem sobre 1.827 ementas do acervo do gabinete; o cabeçalho termina pelo resultado e, havendo, pelos consectários do julgamento.",
+  "caso": {
+   "ap": [
+    [
+     "Apelação interposta contra sentença que …",
+     "667 ementas"
+    ],
+    [
+     "Apelação interposta pelo INSS contra sentença que …",
+     "282"
+    ],
+    [
+     "Apelação interposta pela autora contra sentença que …",
+     "45"
+    ]
+   ],
+   "dap": [
+    [
+     "Apelações interpostas contra sentença que …",
+     "44 ementas"
+    ]
+   ],
+   "aprn": [
+    [
+     "Remessa necessária de sentença que …",
+     "12 ementas"
+    ],
+    [
+     "Remessa necessária em mandado de segurança impetrado …",
+     "11"
+    ],
+    [
+     "Apelação e remessa necessária em mandado de segurança …",
+     "4"
+    ]
+   ],
+   "ai": [
+    [
+     "Agravo de instrumento interposto contra decisão que …",
+     "6 ementas"
+    ],
+    [
+     "Agravo de instrumento interposto pelo INSS contra decisão que …",
+     "6"
+    ],
+    [
+     "Agravo de instrumento interposto pela União contra decisão que …",
+     "2"
+    ]
+   ],
+   "ed": [
+    [
+     "Embargos de declaração opostos contra acórdão que …",
+     "199 ementas"
+    ],
+    [
+     "Embargos de declaração contra acórdão que …",
+     "31"
+    ],
+    [
+     "Duplos embargos de declaração opostos contra acórdão que …",
+     "9"
+    ]
+   ],
+   "agint": [
+    [
+     "Agravo interno interposto contra decisão monocrática que …",
+     "13 ementas"
+    ],
+    [
+     "Agravo interno interposto pela União contra decisão monocrática que …",
+     "2"
+    ]
+   ]
+  },
+  "questao": [
+   [
+    "A questão em discussão consiste em saber se …",
+    "862 ementas · uma questão"
+   ],
+   [
+    "Há duas questões em discussão: (i) saber se …; e (ii) saber se …",
+    "601 de 707 com dois-pontos, “;” e “; e” antes da última"
+   ],
+   [
+    "A questão em discussão consiste em definir …",
+    "177 · alternativa a “saber se”"
+   ],
+   [
+    "Alegação de omissão quanto à …",
+    "≈130 · embargos de declaração"
+   ]
+  ],
+  "questaoNota": "Verbos de abertura: saber se (≈1.630), definir (177), verificar (130). A seção tem sempre um só item.",
+  "razoes": [
+   "Mediana de 4 itens por ementa, com 59 palavras cada.",
+   "43% das frases passam de 40 palavras: prefira uma ideia por frase.",
+   "Nos embargos rejeitados, a sequência de 5 itens é fixa (vícios, rediscussão, enfrentamento, natureza do inconformismo, prequestionamento)."
+  ]
+ }
+}

@@ -469,7 +469,7 @@ var ED=null;
 try{ED=JSON.parse($('#editorial').textContent);}catch(e){ED=null;}
 var XS={sub:'estrutura',ed:'pecas',peca:'',grupo:'',vg:'palavras',q:''};
 /* Editorial reúne Peças, Modelos, Parágrafos e Diretrizes; Modelos e Parágrafos usam o painel de busca do Ementário, que muda de seção */
-var XDESC={pecas:'Estrutura de cada peça, com fórmulas, regras e orientações de redação.',mod:'Modelos-matriz de acórdão, decisão e despacho, prontos para preencher com os dados do caso.',par:'Parágrafos-padrão por matéria e situação, com campos que se preenchem com o caso.',};
+var XDESC={pecas:'Molde-padrão de cada peça: a estrutura vem pronta, com versões, campos, regras e orientações; a fundamentação é do caso.',mod:'Modelos de acórdão, decisão e despacho, prontos para preencher com os dados do caso.',par:'Parágrafos-padrão por matéria e situação, com campos que se preenchem com o caso.',};
 function layoutEm(v){var L=$('#e-layout'),S=$(v);if(!L||!S||L.parentNode===S)return;if(v==='#v-edit')S.insertBefore(L,$('#x-wrap'));else S.appendChild(L);}
 function man(){var db=window.VDM_DB&&window.VDM_DB();return ((db&&db['Diretrizes'])||[]).filter(function(r){return r['Código'];});}
 function manCap(c){return man().filter(function(r){return String(r['Capítulo']||'').indexOf(c)===0;});}
