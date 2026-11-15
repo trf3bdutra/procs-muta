@@ -69,6 +69,31 @@ def main():
                 o[c] = v; movidos += 1
         o["atualizado_em"] = fonte.get("atualizado_em") or o.get("atualizado_em", "")
 
+    # um registro operacional para cada processo do fonte (1:1), exceto os baixados/arquivados em definitivo;
+    # baixado ou fora do fonte com trabalho registrado fica, marcado (histórico não se apaga)
+    def baixado(r):
+        t = str(r.get("tarefa_atual") or "").lower()
+        return ("baixados ao juízo" in t or "arquivo permanente" in t or "baixados por" in t
+                or r.get("ultimo_movimento") in ("Arquivado Definitivamente", "Baixa Definitiva"))
+    def com_trabalho(o):
+        return bool(o.get("pautas")) or any(k not in ("processo", "pautas", "atualizado_em", "baixado", "fora_do_fonte")
+                                            for k in o)
+    ativos = {r["processo"] for r in fonte["registros"] if not baixado(r)}
+    baixados = {r["processo"] for r in fonte["registros"]} - ativos
+    for n in ativos:
+        por_cnj.setdefault(n, {"processo": n, "pautas": []})
+    for n in list(por_cnj):
+        o = por_cnj[n]
+        o.pop("baixado", None); o.pop("fora_do_fonte", None)
+        if n in ativos:
+            continue
+        if not com_trabalho(o):
+            del por_cnj[n]
+        elif n in baixados:
+            o["baixado"] = True
+        else:
+            o["fora_do_fonte"] = True
+
     # estado global do Painel (regras, preferências) também é operacional
     if "painel" in fonte:
         oper.setdefault("painel", fonte.pop("painel"))
