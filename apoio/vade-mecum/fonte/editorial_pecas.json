@@ -551,6 +551,15 @@
       "resumo": "Sem fórmula de dispositivo.",
       "elementos": [
         {
+          "n": "Baixa à origem para exame dos ED",
+          "f": "Vistos.\n[circunstâncias do caso, com ID’s e datas]\nAssim, mostra-se inviável, neste momento, a análise da apelação interposta [pela parte …].\nAnte o exposto, determino a baixa dos autos à Vara de origem para o exame dos embargos de declaração.",
+          "r": [
+            "Embargos de declaração pendentes na origem.",
+            "[VALIDAR] O modelo do gabinete usa “Ante o exposto”; a regra do despacho dispensa a fórmula."
+          ],
+          "fo": "P"
+        },
+        {
           "n": "Comunicação",
           "f": "Intime-se.",
           "r": [
@@ -570,15 +579,29 @@
       "elementos": [
         {
           "n": "1. Vícios",
-          "f": "",
+          "f": "Verifica-se dos autos que os embargos de declaração não apontam vícios de omissão, contradição, obscuridade ou erro material sanáveis na via eleita, mas mera impugnação ao acórdão embargado, que teria incorrido em error in judicando, desvirtuando, pois, a própria natureza do recurso, que não é a de reapreciar a causa como pretendido.",
           "r": [
             "Vícios inexistentes ou error in judicando."
           ],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Error in judicando",
+              "f": "Verifica-se dos autos que os embargos de declaração não apontam vícios de omissão, contradição, obscuridade ou erro material sanáveis na via eleita, mas mera impugnação ao acórdão embargado, que teria incorrido em error in judicando, desvirtuando, pois, a própria natureza do recurso, que não é a de reapreciar a causa como pretendido."
+            },
+            {
+              "lab": "Só prequestionamento",
+              "f": "Os embargos de declaração, embora tenham apontado omissão, aludiram apenas à necessidade de garantir prequestionamento de normas discutidas, em termos de violação ou negativa de vigência, objetivando acesso às instâncias extraordinárias.\nNão houve impugnação específica nem indicação de omissão a exigir qualquer abordagem ou consideração adicional em face do que constou do acórdão embargado, pleiteando-se, como visto, apenas que se registre que foi alegada violação ou negativa de vigência aos [dispositivos indicados].\nDe toda sorte, evidencia-se, revelando inexistência de omissão, ainda que para efeito de mero prequestionamento, que o acórdão restou devidamente fundamentado quanto à conclusão adotada, relacionada ao [objeto da conclusão]."
+            },
+            {
+              "lab": "Assiste razão · erro material",
+              "f": "Assiste razão à embargante, pois o acórdão embargado [fundamento do acórdão], contudo [erro material verificado].\nFaz-se, portanto, necessária a correção do erro material, com acolhimento dos embargos de declaração, com efeitos infringentes, para fazer constar que [correção]."
+            }
+          ]
         },
         {
           "n": "2. Rediscussão",
-          "f": "Com efeito, resta evidenciado o intento de mera rediscussão…",
+          "f": "Com efeito, resta evidenciado o intento de mera rediscussão da causa, pois o acórdão embargado [fundamento enfrentado]. De qualquer sorte, ainda que houvesse, em mera suposição, eventual ofensa à legislação, gerando error in judicando, tal discussão não seria passível de exame em embargos de declaração, a revelar, pois, que o aresto recorrido apreciou sem qualquer omissão, obscuridade ou contradição os pontos essenciais ao deslinde da causa, com fundamentação necessária e suficiente a respaldar o julgamento.",
           "r": [],
           "fo": "M"
         },
@@ -590,25 +613,57 @@
         },
         {
           "n": "4. Natureza do inconformismo",
-          "f": "Como se observa, não se trata de omissão…",
+          "f": "Como se observa, não se trata de omissão ou qualquer outro vício sanável na via eleita, pois o que se pretende é rediscutir a matéria decidida, alegando que houve error in judicando, o que não se presta à discussão em embargos de declaração. Se tal motivação, baseada na análise de matéria de fato para a interpretação do direito aplicável, é equivocada ou insuficiente, fere normas ([normas invocadas]) ou contraria julgados ou jurisprudência, deve a embargante veicular recurso próprio para a impugnação do acórdão e não rediscutir a matéria em embargos de declaração.",
           "r": [
             "Indicar o recurso próprio."
           ],
           "fo": "M"
         },
         {
+          "n": "Multa protelatória",
+          "f": "Quanto à condenação em multa pelo caráter protelatório dos embargos de declaração, inviável o acolhimento do pedido da embargada, pois, ainda que inexistentes os vícios apontados, disto não resulta a caracterização, por si, do intuito de procrastinar o feito e prejudicar a tramitação regular do processo, como exigido para que se imponha a sanção do artigo 1.026, § 2º, CPC.",
+          "r": [
+            "Quando a parte embargada pede a multa do artigo 1.026, § 2º, do CPC."
+          ],
+          "fo": "P"
+        },
+        {
           "n": "5. Prequestionamento",
-          "f": "… com os apontamentos destacados …",
+          "f": "Embora tratados todos os pontos invocados nos embargos declaratórios, de relevância e pertinência à demonstração de que não houve qualquer vício no julgamento, é expresso o artigo 1.025 do Código de Processo Civil em enfatizar que se consideram incluídos no acórdão os elementos suscitados pela embargante, ainda que inadmitido ou rejeitado o recurso, para efeito de prequestionamento, pelo que aperfeiçoado, com os apontados destacados, o julgamento cabível no âmbito da Turma.",
           "r": [
             "Artigo 1.025 do CPC."
           ],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Um recurso",
+              "f": "Embora tratados todos os pontos invocados nos embargos declaratórios, de relevância e pertinência à demonstração de que não houve qualquer vício no julgamento, é expresso o artigo 1.025 do Código de Processo Civil em enfatizar que se consideram incluídos no acórdão os elementos suscitados pela embargante, ainda que inadmitido ou rejeitado o recurso, para efeito de prequestionamento, pelo que aperfeiçoado, com os apontados destacados, o julgamento cabível no âmbito da Turma."
+            },
+            {
+              "lab": "Duplos embargos",
+              "f": "Embora tratados todos os pontos de relevância e pertinência, é expresso o artigo 1.025 do Código de Processo Civil em enfatizar que se consideram incluídos no acórdão os elementos suscitados pelas embargantes, ainda que inadmitidos ou rejeitados os recursos, para efeito de prequestionamento, aperfeiçoando-se, pois, com os apontamentos destacados o julgamento cabível no âmbito da Turma."
+            }
+          ]
         },
         {
           "n": "6. Dispositivo",
           "f": "Ante o exposto, rejeito os embargos de declaração.",
           "r": [],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Rejeição",
+              "f": "Ante o exposto, rejeito os embargos de declaração."
+            },
+            {
+              "lab": "Duplos · não conheço e rejeito",
+              "f": "Ante o exposto, não conheço dos embargos de declaração [da parte …] e rejeito os [da parte …]."
+            },
+            {
+              "lab": "Acolhimento · efeitos modificativos",
+              "f": "Ante o exposto, acolho os embargos de declaração, com efeitos modificativos, para sanar erro material do acórdão embargado, nos termos supracitados."
+            }
+          ]
         },
         {
           "n": "Erro material de ofício",
