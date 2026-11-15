@@ -1,8 +1,8 @@
 {
  "schema": "gabcmt.padrao.ficha",
- "versao": "1.0.0",
+ "versao": "1.1.0",
  "origem": "padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py",
- "descricao": "Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
+ "descricao": "Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
  "abas": [
   {
    "aba": "Processo",
@@ -247,49 +247,6 @@
    "aba": "Triagem",
    "grupos": [
     {
-     "grupo": "Urgência",
-     "campos": [
-      {
-       "rotulo": "Liminar / urgência",
-       "chave": "Urgência",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Pedido de liminar",
-        "Tutela de urgência",
-        "Efeito suspensivo",
-        "Prioridade legal",
-        "Outra urgência"
-       ],
-       "regra": "pílula vermelha nas Regras"
-      },
-      {
-       "rotulo": "Observação da urgência",
-       "chave": "Urgência - Observação",
-       "tipo": "texto",
-       "secao": "triagem"
-      },
-      {
-       "rotulo": "Nível da urgência",
-       "chave": "Urgência - Nível",
-       "tipo": "texto",
-       "secao": "triagem"
-      },
-      {
-       "rotulo": "Apreciação da urgência",
-       "chave": "Urgência - Apreciação",
-       "tipo": "texto",
-       "secao": "triagem"
-      },
-      {
-       "rotulo": "Data da urgência",
-       "chave": "Urgência - Data",
-       "tipo": "data",
-       "secao": "triagem"
-      }
-     ]
-    },
-    {
      "grupo": "Admissibilidade e regularidade",
      "campos": [
       {
@@ -499,12 +456,6 @@
        "rotulo": "Descrição da preliminar",
        "chave": "Descrição da Preliminar",
        "tipo": "texto-longo",
-       "secao": "triagem"
-      },
-      {
-       "rotulo": "Meta",
-       "chave": "META",
-       "tipo": "texto",
        "secao": "triagem"
       },
       {
@@ -937,6 +888,400 @@
     ],
     "regra": "vazio = sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; Monocrática: designação, minuta, revisão, ato e fundamento (art. 932), decisão, assinatura e publicação"
    }
+  },
+  {
+   "aba": "Controles especiais",
+   "secao": "controles",
+   "descricao": "Grupos oficiais de acompanhamento: urgência, monocrática, meta, sobrestamento e caso sensível. Cada grupo vale para o processo quando a regra de inclusão é atendida; os campos ficam no próprio registro do operacional.",
+   "grupos": [
+    {
+     "grupo": "Urgência",
+     "controle": "urgencia",
+     "inclusao": "campo \"Medida\" preenchido (sugerida pelas etiquetas do PJe)",
+     "ativo": "triagem.Urgência",
+     "campos": [
+      {
+       "rotulo": "Medida",
+       "chave": "Urgência",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Tutela de urgência",
+        "Tutela de evidência",
+        "Antecipação da tutela recursal",
+        "Efeito suspensivo",
+        "Liminar em mandado de segurança",
+        "Reconsideração de liminar",
+        "Prioridade legal",
+        "Outra"
+       ]
+      },
+      {
+       "rotulo": "Nível",
+       "chave": "Urgência - Nível",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Urgentíssima (mesmo dia)",
+        "Urgente (24 h)",
+        "Prioritária (48 h)",
+        "Ordinária (5 dias)"
+       ]
+      },
+      {
+       "rotulo": "Pedido em",
+       "chave": "Urgência - Data",
+       "tipo": "data",
+       "secao": "triagem",
+       "regra": "conta o prazo do nível"
+      },
+      {
+       "rotulo": "Apreciação",
+       "chave": "Urgência - Apreciação",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Pendente · não apreciada",
+        "Em análise",
+        "Minuta pronta",
+        "Apreciada · deferida",
+        "Apreciada · parcialmente deferida",
+        "Apreciada · indeferida",
+        "Apreciada · prejudicada",
+        "Apreciada · reconsiderada"
+       ]
+      },
+      {
+       "rotulo": "Apreciada em",
+       "chave": "Urgência - Apreciada em",
+       "tipo": "data",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Motivo / observação",
+       "chave": "Urgência - Observação",
+       "tipo": "texto-longo",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Lançar no painel de urgências",
+       "chave": "Urgência - Painel",
+       "tipo": "simnao",
+       "secao": "triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Monocrática",
+     "controle": "monocratica",
+     "inclusao": "destino do julgamento = Monocrática (minuta feita ou possível)",
+     "ativo": "producao.Destino=Monocrática",
+     "campos": [
+      {
+       "rotulo": "Destino do julgamento",
+       "chave": "Destino",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Monocrática"
+       ],
+       "regra": "vazio = sessão (acórdão)"
+      },
+      {
+       "rotulo": "Registrada em",
+       "chave": "Monocrática - Registrada em",
+       "tipo": "data",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Observação",
+       "chave": "Monocrática - Observação",
+       "tipo": "texto-longo",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Atualizado por",
+       "chave": "Monocrática - Atualizado por",
+       "tipo": "texto",
+       "secao": "controles",
+       "editavel": false
+      },
+      {
+       "rotulo": "Atualizado em",
+       "chave": "Monocrática - Atualizado em",
+       "tipo": "data",
+       "secao": "controles",
+       "editavel": false
+      }
+     ]
+    },
+    {
+     "grupo": "Meta",
+     "controle": "meta",
+     "inclusao": "etiqueta de meta do CNJ no PJe ou campo META da triagem (sobrestados ficam no grupo Sobrestamento)",
+     "ativo": "lista",
+     "campos": [
+      {
+       "rotulo": "Metas do CNJ",
+       "chave": "META",
+       "tipo": "texto",
+       "secao": "triagem",
+       "regra": "ex.: Meta 2; Meta 6"
+      },
+      {
+       "rotulo": "Situação",
+       "chave": "Meta - Situação",
+       "tipo": "lista",
+       "secao": "controles",
+       "opcoes": [
+        "Em andamento",
+        "Aguardando pauta",
+        "Pautado",
+        "Julgado · aguardando trânsito",
+        "Encerrado"
+       ]
+      },
+      {
+       "rotulo": "Prazo da providência",
+       "chave": "Meta - Prazo da providência",
+       "tipo": "data",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Próxima providência",
+       "chave": "Meta - Próxima providência",
+       "tipo": "texto",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Responsável",
+       "chave": "Meta - Responsável",
+       "tipo": "texto",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Observação",
+       "chave": "Meta - Observação",
+       "tipo": "texto-longo",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Atualizado por",
+       "chave": "Meta - Atualizado por",
+       "tipo": "texto",
+       "secao": "controles",
+       "editavel": false
+      },
+      {
+       "rotulo": "Atualizado em",
+       "chave": "Meta - Atualizado em",
+       "tipo": "data",
+       "secao": "controles",
+       "editavel": false
+      }
+     ]
+    },
+    {
+     "grupo": "Sobrestamento",
+     "controle": "sobrestamento",
+     "inclusao": "tarefa de sobrestamento ou suspensão no PJe",
+     "ativo": "lista",
+     "campos": [
+      {
+       "rotulo": "Motivo",
+       "chave": "Sobrestamento - Motivo",
+       "tipo": "lista",
+       "secao": "controles",
+       "opcoes": [
+        "Tribunal superior (repetitivo ou repercussão geral)",
+        "IRDR ou IAC",
+        "Suspensão nacional (STF/STJ)",
+        "Decisão do relator",
+        "Acordo / conciliação",
+        "Outro motivo"
+       ]
+      },
+      {
+       "rotulo": "Tema ou precedente",
+       "chave": "Sobrestamento - Tema",
+       "tipo": "texto",
+       "secao": "controles",
+       "regra": "ex.: Tema 1039 STJ"
+      },
+      {
+       "rotulo": "Situação do precedente",
+       "chave": "Sobrestamento - Situação do precedente",
+       "tipo": "lista",
+       "secao": "controles",
+       "opcoes": [
+        "Afetado · aguardando julgamento",
+        "Julgado · aguardando publicação ou trânsito",
+        "Julgado · apto a retirar o sobrestamento",
+        "Cancelado ou desafetado · retirar",
+        "Sem informação"
+       ]
+      },
+      {
+       "rotulo": "Previsão de retirada",
+       "chave": "Sobrestamento - Previsão de retirada",
+       "tipo": "data",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Sem previsão de retirada",
+       "chave": "Sobrestamento - Sem previsão",
+       "tipo": "simnao",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Próxima providência",
+       "chave": "Sobrestamento - Próxima providência",
+       "tipo": "texto",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Responsável",
+       "chave": "Sobrestamento - Responsável",
+       "tipo": "texto",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Observação",
+       "chave": "Sobrestamento - Observação",
+       "tipo": "texto-longo",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Atualizado por",
+       "chave": "Sobrestamento - Atualizado por",
+       "tipo": "texto",
+       "secao": "controles",
+       "editavel": false
+      },
+      {
+       "rotulo": "Atualizado em",
+       "chave": "Sobrestamento - Atualizado em",
+       "tipo": "data",
+       "secao": "controles",
+       "editavel": false
+      }
+     ]
+    },
+    {
+     "grupo": "Caso sensível",
+     "controle": "sensivel",
+     "inclusao": "assunto ou etiqueta de saúde, ou inclusão manual",
+     "ativo": "lista",
+     "campos": [
+      {
+       "rotulo": "Categoria",
+       "chave": "Sensível - Categoria",
+       "tipo": "lista",
+       "secao": "controles",
+       "opcoes": [
+        "Saúde · medicamento",
+        "Saúde · oncológico",
+        "Saúde · cirurgia ou internação",
+        "Saúde · tratamento",
+        "Saúde · outro",
+        "Pessoa idosa",
+        "Criança ou adolescente",
+        "Pessoa com deficiência",
+        "Subsistência (verba alimentar)",
+        "Outro"
+       ]
+      },
+      {
+       "rotulo": "Incluído manualmente",
+       "chave": "Sensível - Incluído",
+       "tipo": "simnao",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Excluído do controle",
+       "chave": "Sensível - Excluído",
+       "tipo": "simnao",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Quadro / motivo",
+       "chave": "Sensível - Quadro",
+       "tipo": "texto-longo",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Decisão",
+       "chave": "Sensível - Decisão",
+       "tipo": "lista",
+       "secao": "controles",
+       "opcoes": [
+        "Sem pedido de urgência",
+        "Liminar/tutela deferida",
+        "Liminar/tutela indeferida",
+        "Pedido pendente de apreciação",
+        "Decisão de mérito proferida"
+       ]
+      },
+      {
+       "rotulo": "Cumprimento",
+       "chave": "Sensível - Cumprimento",
+       "tipo": "lista",
+       "secao": "controles",
+       "opcoes": [
+        "Não se aplica",
+        "Cumprida",
+        "Pendente de cumprimento",
+        "Descumprimento noticiado",
+        "Bloqueio de valores / sequestro"
+       ]
+      },
+      {
+       "rotulo": "Última verificação",
+       "chave": "Sensível - Última verificação",
+       "tipo": "data",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Próxima verificação",
+       "chave": "Sensível - Próxima verificação",
+       "tipo": "data",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Próxima providência",
+       "chave": "Sensível - Próxima providência",
+       "tipo": "texto",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Responsável",
+       "chave": "Sensível - Responsável",
+       "tipo": "texto",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Observação",
+       "chave": "Sensível - Observação",
+       "tipo": "texto-longo",
+       "secao": "controles"
+      },
+      {
+       "rotulo": "Atualizado por",
+       "chave": "Sensível - Atualizado por",
+       "tipo": "texto",
+       "secao": "controles",
+       "editavel": false
+      },
+      {
+       "rotulo": "Atualizado em",
+       "chave": "Sensível - Atualizado em",
+       "tipo": "data",
+       "secao": "controles",
+       "editavel": false
+      }
+     ]
+    }
+   ]
   },
   {
    "aba": "Pauta",

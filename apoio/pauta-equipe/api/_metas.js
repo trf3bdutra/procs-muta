@@ -1,10 +1,12 @@
 /* Metas do CNJ: controle dos processos de meta até o fim definitivo (baixa ou arquivamento); os sobrestados ficam na aba Sobrestados.
-   A lista vem do acervo (etiquetas do PJe e campo META da triagem); o acompanhamento da equipe fica em acervo/metas.json.
+   A lista vem do acervo (etiquetas do PJe e campo META da triagem); o acompanhamento fica na ficha do processo (acervo/operacional.json,
+   Controles especiais · grupo Meta).
    Servido por /api/pauta?metas=1 (o plano Hobby da Vercel aceita no máximo 12 funções; arquivos com _ não contam).
    GET  /api/pauta?metas=1                     processos de meta com situação no acervo, pauta e acompanhamento
    POST /api/pauta?metas=1 {cnj, campos}       grava o acompanhamento de um processo */
 const L = require('./_lib');
-const ARQ = 'acervo/metas.json', CAMPOS = ['ctrl', 'prox', 'prazo', 'obs', 'resp'];
+const AC = require('./_acomp');
+const MAPA = { ctrl: 'Meta - Situação', prox: 'Meta - Próxima providência', prazo: 'Meta - Prazo da providência', resp: 'Meta - Responsável', obs: 'Meta - Observação' };
 const dg = s => String(s || '').replace(/\D/g, '');
 const iso = v => { const s = String(v || '').trim(), m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(s); return m ? m[3] + '-' + m[2] + '-' + m[1] : /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : ''; };
 /* números de meta: 1 ou 2 dígitos logo após "meta(s)", de 1 a 12 (mesma regra do CMT-monitor) */
@@ -49,26 +51,17 @@ async function base() {
   }
   return CACHE;
 }
-async function ler() { try { return await L.lerJson(ARQ); } catch (e) { if (e.status === 404) return { dados: { schema: 'gabcmt.metas', versao: 1, registros: {} }, sha: undefined }; throw e; } }
 module.exports = async (req, res, u) => {
   try {
     if (req.method === 'GET') {
-      const [B, { dados }] = await Promise.all([base(), ler()]), R = dados.registros || {};
-      return res.status(200).json({ itens: B.map(x => Object.assign({}, x, { acomp: R[dg(x.cnj)] || {} })), atualizadoEm: dados.atualizadoEm || '' });
+      const [B, { I, doc }] = await Promise.all([base(), AC.indice()]);
+      return res.status(200).json({ itens: B.map(x => Object.assign({}, x, { acomp: AC.acomp(I[dg(x.cnj)], MAPA, 'Meta') })), atualizadoEm: doc.atualizado_em || '' });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
-    const b = req.body || {}, alvo = dg(b.cnj), C = b.campos || {};
-    if (alvo.length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
-    for (let t = 0; t < 4; t++) {
-      const { dados, sha } = await ler(); dados.registros = dados.registros || {};
-      const it = dados.registros[alvo] || (dados.registros[alvo] = { cnj: b.cnj }), mud = [];
-      CAMPOS.forEach(k => { if (k in C && (it[k] || '') !== String(C[k] || '')) { it[k] = String(C[k] || '').slice(0, 1000); mud.push(k); } });
-      if (!mud.length) return res.status(200).json({ ok: true, item: it, semMudanca: true });
-      it.editadoPor = u; it.editadoEm = new Date().toISOString(); dados.atualizadoEm = it.editadoEm;
-      try { await L.gravarJson(ARQ, dados, sha, 'Metas (' + u + '): ' + it.cnj + ' · ' + mud.join(', ')); return res.status(200).json({ ok: true, item: it }); }
-      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
-    }
-    res.status(409).json({ erro: 'O arquivo mudou várias vezes seguidas; tente de novo.' });
-  } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
+    const b = req.body || {};
+    if (dg(b.cnj).length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
+    const out = await AC.gravar(String(b.cnj), b.campos || {}, MAPA, 'Meta', u, 'Metas');
+    res.status(200).json(Object.assign({ ok: true }, out));
+  } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
 module.exports.base = base;

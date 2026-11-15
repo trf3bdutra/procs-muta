@@ -1,19 +1,20 @@
-/* Monocráticas e urgências da equipe, num só registro por processo (acervo/monocraticas.json):
-   - a monocrática existe quando é registrada (minuta feita ou possível): campo mono = true;
-   - a urgência (liminar, tutela de urgência, efeito suspensivo) existe quando tem pedido (ctl.urgTipo);
+/* Controles especiais · monocráticas e urgências, no registro do processo em acervo/operacional.json (ficha única, padrao/ficha.json):
+   - monocrática = producao.Destino "Monocrática" (registrada quando a minuta é feita ou possível), com controles "Monocrática - *";
+   - urgência = triagem "Urgência" (medida) preenchida, com nível, pedido em, apreciação, apreciada em, observação;
    - qualquer uma pode nascer primeiro: a urgência pode virar monocrática e a monocrática pode receber a urgência.
    Os dados do processo (classe, assunto, partes, tarefa no PJe) vêm do acervo (acervo/fonte.json).
    Servido por /api/pauta?mono=1 (o plano Hobby da Vercel aceita no máximo 12 funções; arquivos com _ não contam).
    GET  /api/pauta?mono=1                      registros, sugestões de urgência pelas etiquetas do PJe
    POST /api/pauta?mono=1 {cnj, campos}        cria ou altera o registro (designação só pelo gestor) */
 const L = require('./_lib');
-const ARQ = 'acervo/monocraticas.json';
-const DIRETOS = ['dataMinuta', 'dataCorrecao', 'dataLiberacao', 'obs'], GESTOR = ['servidor', 'corretor'];
-const CTL = ['resJulg', 'honor', 'consect', 'topico', 'intercor', 'tempest', 'preparo', 'repres', 'midias', 'mpf', 'parecer', 'prelim',
-  'tipoAto', 'hip932', 'fundamento', 'urgTipo', 'urgSit', 'urgData', 'urgObs', 'urgPedido'];
+const FICHA = require('./_ficha');
+const GESTOR = ['servidor', 'corretor'];
+/* campos sem lugar próprio na ficha (cartão completo, consectários): guardados juntos, no mesmo registro */
+const EXTRA = '_monoExtra', SEM_FICHA = ['consect', 'cartao'];
 /* sugestões: etiquetas do PJe que indicam pedido urgente, em processo que ainda está no gabinete */
 const URG = /urgen|tutela de urg|tutela antecip|tutela provis|efeito suspensivo|liminar(?! indeferida)|cirurgia|medicamento/i;
 const FORA = /^\[Sess|Baixad|Arquivo|prazo em curso|Sobrestad/i;
+const URG_CAMPOS = ['Urgência', 'Urgência - Nível', 'Urgência - Data', 'Urgência - Apreciação', 'Urgência - Apreciada em', 'Urgência - Observação', 'Urgência - Painel'];
 const dg = s => String(s || '').replace(/\D/g, '');
 /* a data de entrada na tarefa vem ora em AAAA-MM-DD, ora em DD/MM/AAAA */
 const iso = v => { const s = String(v || '').trim(), m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(s); return m ? m[3] + '-' + m[2] + '-' + m[1] : /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : ''; };
@@ -35,38 +36,42 @@ async function acervo() {
   }
   return { base: BASE, sug: SUG };
 }
-async function ler() { try { return await L.lerJson(ARQ); } catch (e) { if (e.status === 404) return { dados: { schema: 'gabcmt.monocraticas', versao: 2, registros: {} }, sha: undefined }; throw e; } }
+const extra = r => { try { return JSON.parse((r.controles || {})[EXTRA] || '{}'); } catch (e) { return {}; } };
+/* registro do operacional → item da página Monocráticas */
+function item(r) {
+  const p = r.producao || {}, c = r.controles || {}, x = extra(r), ctl = Object.assign({}, x, FICHA.paraCtl(r));
+  if (ctl.urgTipo) { ctl.urgEm = ctl.urgPedido || ''; }
+  const cart = FICHA.cartaoDaFicha(r, x.cartao); if (Object.keys(cart).length) ctl.cartao = cart;
+  ctl.editadoPor = c['Monocrática - Atualizado por'] || ''; ctl.editadoEm = c['Monocrática - Atualizado em'] || '';
+  return { cnj: r.processo, mono: p.Destino === 'Monocrática', monoEm: c['Monocrática - Registrada em'] || '', obs: c['Monocrática - Observação'] || '',
+    servidor: p.SERVIDOR || '', corretor: p.CORRETOR || '', dataMinuta: p.MINUTADO || '', dataCorrecao: p['Data da Revisão'] || '', dataLiberacao: p['Data da Liberação'] || '', ctl };
+}
+const vale = r => (r.producao || {}).Destino === 'Monocrática' || !!(r.triagem || {})['Urgência'];
 module.exports = async (req, res, u) => {
   try {
     if (req.method === 'GET') {
-      const [A, { dados }] = await Promise.all([acervo(), ler()]), R = dados.registros || {};
-      const itens = Object.keys(R).map(k => Object.assign({}, A.base[k] || { cnj: R[k].cnj, tarefa: 'fora do acervo' }, R[k], { noAcervo: !!A.base[k] }));
-      const sugestoes = A.sug.filter(b => !(R[dg(b.cnj)] && (R[dg(b.cnj)].ctl || {}).urgTipo));
-      return res.status(200).json({ mono: true, itens, sugestoes, previa: [], atualizadoEm: dados.atualizadoEm || '' });
+      const [A, { doc }] = await Promise.all([acervo(), FICHA.lerOp()]);
+      const itens = (doc.registros || []).filter(vale).map(r => { const k = dg(r.processo); return Object.assign({}, A.base[k] || { cnj: r.processo, tarefa: 'fora do acervo' }, item(r), { noAcervo: !!A.base[k] }); });
+      const tem = {}; itens.forEach(i => { if (i.ctl.urgTipo) tem[dg(i.cnj)] = 1; });
+      return res.status(200).json({ mono: true, itens, sugestoes: A.sug.filter(b => !tem[dg(b.cnj)]), previa: [], atualizadoEm: doc.atualizado_em || '' });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
-    const b = req.body || {}, alvo = dg(b.cnj), C = b.campos || {};
-    if (alvo.length !== 20) return res.status(400).json({ erro: 'Número do processo inválido: informe os 20 dígitos do CNJ.' });
-    for (let t = 0; t < 4; t++) {
-      const { dados, sha } = await ler(); dados.registros = dados.registros || {};
-      const novo = !dados.registros[alvo], agora = new Date().toISOString();
-      const it = dados.registros[alvo] || (dados.registros[alvo] = { cnj: b.cnj, criadoEm: agora, criadoPor: u }), mud = novo ? ['registro'] : [];
-      if ('mono' in C && !!C.mono !== !!it.mono) { it.mono = !!C.mono; if (it.mono) { it.monoEm = agora; it.monoPor = u; } mud.push('mono'); }
-      DIRETOS.forEach(k => { if (k in C && (it[k] || '') !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
-      if (L.gestor(u)) GESTOR.forEach(k => { if (k in C && (it[k] || '') !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
-      it.ctl = it.ctl || {};
-      CTL.forEach(k => { if (k in C) { const v = String(C[k] || ''); if ((it.ctl[k] || '') !== v) { if (v) it.ctl[k] = v; else delete it.ctl[k]; mud.push(k); } } });
-      if (C.urgTipo && !it.ctl.urgEm) { it.ctl.urgEm = agora; it.ctl.urgPor = u; }
-      if (C.cartao && typeof C.cartao === 'object') { const ant = it.ctl.cartao || {}; Object.keys(C.cartao).forEach(k => { if (JSON.stringify(ant[k]) !== JSON.stringify(C.cartao[k])) { ant[k] = C.cartao[k]; mud.push('cartao.' + k); } }); it.ctl.cartao = ant; }
-      /* registro sem monocrática e sem urgência deixa de existir */
-      if (!it.mono && !it.ctl.urgTipo && !novo && 'mono' in C) delete dados.registros[alvo];
-      if (!mud.length) return res.status(200).json({ ok: true, item: it, semMudanca: true });
-      it.ctl.editadoPor = u; it.ctl.editadoEm = agora; dados.atualizadoEm = agora;
-      /* o que a equipe registra vai também para a ficha do processo (acervo/operacional.json), no mesmo commit */
-      const Cf = Object.assign({}, C); if (!L.gestor(u)) GESTOR.forEach(k => delete Cf[k]);
-      try { await require('./_ficha').espelho({ path: ARQ, txt: JSON.stringify(dados, null, 1) + '\n', sha }, it.cnj, Cf, C.cartao, 'Monocráticas e urgências (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return res.status(200).json({ ok: true, item: it }); }
-      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
-    }
-    res.status(409).json({ erro: 'O arquivo mudou várias vezes seguidas; tente de novo.' });
-  } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
+    const b = req.body || {}, cnj = String(b.cnj || ''), C = Object.assign({}, b.campos || {});
+    if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'Número do processo inválido: informe os 20 dígitos do CNJ.' });
+    if (!L.gestor(u)) GESTOR.forEach(k => delete C[k]);
+    /* campos do cartão → ficha (mesmo mapa da pauta); destino e observação da monocrática; urgência retirada limpa o grupo inteiro */
+    const mud = FICHA.doCartao(C, C.cartao);
+    if ('mono' in C) (mud.producao = mud.producao || {}).Destino = C.mono ? 'Monocrática' : '';
+    if ('obs' in C) (mud.controles = mud.controles || {})['Monocrática - Observação'] = String(C.obs || '');
+    if ('urgTipo' in C && !C.urgTipo) { mud.triagem = mud.triagem || {}; URG_CAMPOS.forEach(k => { mud.triagem[k] = ''; }); }
+    const { r, out } = await FICHA.gravar(cnj, mud, 'Monocráticas e urgências (' + u + '): ' + cnj, (r, out) => {
+      const c = r.controles = r.controles || {};
+      const x = extra(r); let mx = false;
+      SEM_FICHA.forEach(k => { if (!(k in C)) return;
+        if (k === 'cartao' && C.cartao && typeof C.cartao === 'object') { x.cartao = Object.assign(x.cartao || {}, C.cartao); mx = true; }
+        else if (k !== 'cartao' && (x[k] || '') !== String(C[k] || '')) { x[k] = String(C[k] || ''); mx = true; } });
+      if (mx) { c[EXTRA] = JSON.stringify(x); out.push('controles.Monocrática - ' + EXTRA); }
+    }, u);
+    return res.status(200).json({ ok: true, item: item(r), semMudanca: !out.length });
+  } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
