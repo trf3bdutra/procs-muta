@@ -314,3 +314,31 @@ body.dsk #v-edit .pg-h .sub.pg-seg .dgs button{border:0!important;border-radius:
 body.dsk #v-edit .pg-h .sub.pg-seg .dgs button+button{position:relative}
 body.dsk #v-edit .pg-h .sub.pg-seg .dgs button[aria-selected="true"]{background:#235a55!important;color:#fff!important}
 body.dsk #v-edit .pg-h .sub.pg-seg .dgs button:not([aria-selected="true"]):hover{background:#f1f4f6!important}
+/* Referenciais: um só item no topo; Enunciados, Repertório e Enciclopédia na navegação interna */
+.tabw[data-w="rep"],.tabw[data-w="enc"],.tab[data-v="temas"],.tab[data-v="rep"],.tab[data-v="enc"]{display:none!important}
+.tab[data-v="refs"] .tab-cur:not(:empty){margin-left:6px;font-size:11px;font-weight:600;color:var(--gold)}
+.tab[data-v="refs"] .tab-cur:not(:empty):before{content:"· "}
+.pg-h.dref{display:flex;flex-direction:column;align-items:stretch;background:transparent;border:0;padding:22px 40px 14px;gap:0}
+.pg-h.dref .sub.pg-seg{display:flex;gap:28px;margin:0;background:transparent;border:0;border-bottom:2px solid #173f3d;border-radius:0;padding:0}
+.pg-h.dref .sub.pg-seg button{background:transparent!important;border:0;border-radius:0;padding:4px 2px 10px;margin-bottom:-2px;font:600 14.5px Inter,sans-serif;color:#617570!important;box-shadow:none!important;border-bottom:2px solid transparent;cursor:pointer}
+.pg-h.dref .sub.pg-seg button[data-n]:before{content:attr(data-n);font:500 10px "IBM Plex Mono",monospace;color:#99978c;margin-right:6px}
+.pg-h.dref .sub.pg-seg button[aria-selected="true"]{color:#173f3d!important;font-weight:700;border-bottom:2px solid #a57829}
+.pg-h.dref .sub.pg-seg button[aria-selected="true"]:before{color:#805b18}
+.pg-h.dref .pg-t{padding:20px 0 0}
+.pg-h.dref .dkk{margin:0;font:500 10.5px "IBM Plex Mono",monospace;letter-spacing:.09em;color:#805b18}
+.pg-h.dref h1{margin:6px 0 4px;font:700 38px/1.1 Inter,sans-serif;letter-spacing:-.025em;color:var(--ink,#173f3d)}
+.pg-h.dref .dsc{margin:0;font-size:14.5px;color:var(--mut,#4f5a57)}
+@media (max-width:860px){.pg-h.dref{padding:16px 16px 10px}.pg-h.dref .sub.pg-seg{gap:16px;overflow-x:auto}.pg-h.dref h1{font-size:30px}}
+#dir-fr{display:block;width:100%;border:0;min-height:600px;background:transparent}
+body.dsk #x-alt.x-alt-dir{padding:0 0 40px}
+/* faixa de seções do Compêndio (fora do cabeçalho) */
+#cmp-nav{background:var(--panel,#fff);border-bottom:1px solid var(--line,#d8d3c6)}
+#cmp-nav .cn-in{display:flex;align-items:center;gap:18px;padding:0 40px;min-height:46px;overflow-x:auto}
+#cmp-nav .cn-k{font:500 10px "IBM Plex Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--gold,#805b18);flex:none}
+#cmp-nav .tabs.eq-sec{display:flex!important;gap:4px;background:transparent!important;border:0!important;padding:0!important;flex-wrap:nowrap}
+#cmp-nav .tab{background:transparent!important;box-shadow:none!important;border-radius:0!important;color:var(--mut,#617570)!important;font:600 14px Inter,"Segoe UI",system-ui,sans-serif;padding:13px 12px 11px!important;border-bottom:2px solid transparent!important;white-space:nowrap}
+#cmp-nav .tab[aria-selected="true"]{color:var(--ink,#173f3d)!important;border-bottom-color:var(--gold,#a57829)!important;font-weight:700}
+#cmp-nav .tab-cur,#cmp-nav .car,#cmp-nav .tabw .dd{display:none!important}
+body.cmp-nav-fora .top .eq-grp{gap:0}
+@media (max-width:860px){#cmp-nav .cn-in{padding:0 16px;gap:10px}#cmp-nav .cn-k{display:none}}
+.dgrp>label>select{max-width:205px}

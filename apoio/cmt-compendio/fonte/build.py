@@ -7,6 +7,7 @@ Fontes (todas no procs-muta):
   ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   editorial_d.js · editorial_d.css · editorial_apoios.json   Minuta-Matriz (arquitetura D) e apoios do canhoto
+  diretrizes_manual.html                            manual de redação das Diretrizes (Padrões decisórios só no acesso avançado)
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
   ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
@@ -178,6 +179,8 @@ def montar(var):
     t = troca(t, a, a + '    <button class="tab" role="tab" data-v="enc" aria-selected="false" data-av hidden>Enciclopédia</button>\n')
     t = troca(t, '<section id="v-consulta" hidden>', ENC_SECAO + '<section id="v-consulta" hidden>')
     t = t.replace('<section id="v-temas">', '<section id="v-temas" hidden>', 1)
+    # Diretrizes: manual de redação novo (documento próprio, embutido; Padrões decisórios só no acesso avançado)
+    t = troca(t, '<section id="v-dir" hidden>', '<script type="application/json" id="dir-manual">' + json.dumps((H/'diretrizes_manual.html').read_text(encoding='utf-8'), ensure_ascii=False).replace('<', '\\u003c') + '</script>\n<section id="v-dir" hidden>')
     js = 'window.VDM_PUBLICO=true;\n' + js + '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8') + '\n' + (H/'acesso.js').read_text(encoding='utf-8')
     # identidade gêmea da Pauta da equipe: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
     css += (H/'publico.css').read_text(encoding='utf-8') + (H/'acesso.css').read_text(encoding='utf-8')

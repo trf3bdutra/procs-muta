@@ -394,3 +394,64 @@ function xRender(){
 function dkVolta(){var m=$('#x-man'),c=$('#cq'),a=$('#x-alt');if(m&&a&&m.parentNode===a)$('#v-dir').appendChild(m);if(c&&a&&c.parentNode===a){var w=$('#v-consulta .cq-wrap')||$('#v-consulta');w.appendChild(c);}if(a)a.hidden=true;}
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.tab[data-v="dir"],.tab[data-v="consulta"]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();irEditorial(t.getAttribute('data-v'));},true);
 document.addEventListener('cmt-acesso',function(){if(XS.ed==='dir'&&!$('#v-edit').hidden)setTimeout(function(){if(XS.ed==='dir')xManual();},1500);});
+
+/* ===== Referenciais (acesso avançado): Enunciados, Repertório e Enciclopédia num só menu, com navegação interna como a do Editorial ===== */
+(function(){
+  var RV=['temas','rep','enc'],RI={temas:['01','Enunciados','01 / ENUNCIADOS','Temas repetitivos, de repercussão geral e súmulas, com as teses e os usos no gabinete.'],
+    rep:['02','Repertório','02 / REPERTÓRIO','Jurisprudência, normas e Regimento citados nas peças do gabinete.'],
+    enc:['03','Enciclopédia','03 / ENCICLOPÉDIA','Recursos, guias práticos, rotina do gabinete, PJe, competência, matérias, léxico e Regimento.']};
+  var ult='temas';
+  var et=document.querySelector('.tab[data-v="edit"]');if(!et)return;var ancora=et.closest('.tabw')||et;
+  var rt=document.createElement('button');rt.className='tab';rt.type='button';rt.setAttribute('role','tab');rt.setAttribute('data-v','refs');rt.setAttribute('data-av','');rt.setAttribute('aria-selected','false');rt.hidden=true;
+  rt.innerHTML='Referenciais<span class="tab-cur"></span>';ancora.parentNode.insertBefore(rt,ancora.nextSibling);
+  var hd=document.createElement('div');hd.className='pg-h dref';
+  hd.innerHTML='<div class="sub pg-seg" role="tablist" aria-label="Referenciais">'+RV.map(function(v){return '<button type="button" data-rs="'+v+'" data-n="'+RI[v][0]+'" aria-selected="false">'+RI[v][1]+'</button>';}).join('')+'</div><div class="pg-t"><p class="dkk"></p><h1></h1><p class="dsc"></p></div>';
+  function vis(){for(var i=0;i<RV.length;i++){var s=document.getElementById('v-'+RV[i]);if(s&&!s.hidden)return RV[i];}return '';}
+  function sync(){var v=vis();rt.setAttribute('aria-selected',String(!!v));rt.querySelector('.tab-cur').textContent=v?RI[v][1]:'';
+    if(!v)return;ult=v;document.body.classList.add('dsk');var s=document.getElementById('v-'+v);if(hd.parentNode!==s)s.insertBefore(hd,s.firstChild);
+    $$('[data-rs]',hd).forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-rs')===v));});
+    hd.querySelector('.dkk').textContent=RI[v][2];hd.querySelector('h1').textContent=RI[v][1];hd.querySelector('.dsc').textContent=RI[v][3];}
+  function abre(v){var t=document.querySelector('.tab[data-v="'+v+'"]');if(t)t.click();setTimeout(sync,0);}
+  rt.addEventListener('click',function(e){e.preventDefault();abre(vis()||ult);});
+  hd.addEventListener('click',function(e){var b=e.target.closest('[data-rs]');if(!b)return;abre(b.getAttribute('data-rs'));window.scrollTo(0,0);});
+  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.tab,.tabw .dd button'))setTimeout(sync,0);});
+  window.addEventListener('hashchange',function(){setTimeout(sync,50);});
+  document.addEventListener('cmt-acesso',function(){setTimeout(sync,50);});
+})();
+
+/* ===== Diretrizes: manual de redação novo (diretrizes_manual.html), com Padrões decisórios só no acesso avançado ===== */
+function dirAv(){try{return !!(window.CMT_ACESSO&&window.CMT_ACESSO().avancado);}catch(e){return false;}}
+function xManual(){var M=$('#x-man');if(!M)return;var f=document.getElementById('dir-fr');
+  if(!f||!M.contains(f)){var src=document.getElementById('dir-manual');if(!src){M.innerHTML='<p class="empty">Manual de redação indisponível.</p>';return;}
+    M.innerHTML='<iframe id="dir-fr" title="Diretrizes · Manual de redação" scrolling="no"></iframe>';f=M.querySelector('#dir-fr');
+    f.addEventListener('load',function(){dirPrep(f);});var h='';try{h=JSON.parse(src.textContent);}catch(e){}f.srcdoc=h;return;}
+  dirPrep(f);}
+function dirAjusta(f){try{var D=f.contentDocument;var h=Math.max(D.documentElement.scrollHeight,D.body.scrollHeight);if(Math.abs((parseInt(f.style.height)||0)-h)>2)f.style.height=h+'px';}catch(e){}}
+function dirPrep(f){var D=f.contentDocument;if(!D||!D.body)return;
+  D.documentElement.setAttribute('data-theme',document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light');
+  var av=dirAv(),st=D.getElementById('dk-av');if(!st){st=D.createElement('style');st.id='dk-av';(D.head||D.documentElement).appendChild(st);}
+  st.textContent='html,body{overflow:hidden!important;height:auto!important}.top{position:relative!important;top:auto!important}'+(av?'':'[data-abab="padroes"],[data-aba="padroes"]{display:none!important}');
+  if(!av&&D.body.getAttribute('data-aba')==='padroes'){var mb=D.querySelector('[data-abab="manual"]');if(mb)mb.click();}
+  var r=D.getElementById('mn-rap');if(r)r.innerHTML=rapHtml('');
+  if(!D.__dk){D.__dk=1;
+    D.addEventListener('click',function(e){var b=e.target.closest('[data-rapf],[data-rapadd],[data-rapinc],[data-rapsit],[data-rapdel]');if(!b)return;
+      if(b.hasAttribute('data-rapf')){RAP.filtro=b.getAttribute('data-rapf');xManual();return;}
+      if(b.hasAttribute('data-rapadd')){rapNovo();return;}
+      var id=b.getAttribute('data-rapinc')||b.getAttribute('data-rapsit')||b.getAttribute('data-rapdel');
+      if(b.hasAttribute('data-rapinc')){var dst=window.prompt('Onde foi incorporada? (ex.: Manual · Vocabulário, modelo, parágrafo)','');if(dst===null)return;rapMuda(id,function(n){n.situacao='incorporada';n.destino=dst.trim();},'Diretrizes: entrada rápida incorporada');return;}
+      if(b.hasAttribute('data-rapsit')){rapMuda(id,function(n){n.situacao='nova';n.destino='';},'Diretrizes: entrada rápida reaberta');return;}
+      if(b.hasAttribute('data-rapdel')){if(!window.confirm('Excluir esta entrada rápida?'))return;var x=rapAcha(id);if(!x)return;
+        rapGrava([{op:'del',id:id,orig:rapJ(x)}],'Diretrizes: entrada rápida excluída',function(){var L=rapBase();L.splice(L.indexOf(rapAcha(id)),1);});}});
+    D.addEventListener('input',function(e){if(e.target.matches('[data-raptxt]'))RAP.txt=e.target.value;else if(e.target.matches('[data-raporig]'))RAP.orig=e.target.value;});
+    D.addEventListener('change',function(e){if(e.target.matches('[data-raptipo]'))RAP.tipo=e.target.value;});
+    D.addEventListener('keydown',function(e){if(e.target.matches('[data-raptxt]')&&(e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();rapNovo();}});
+    try{new (f.contentWindow.ResizeObserver||ResizeObserver)(function(){dirAjusta(f);}).observe(D.body);}catch(e){setInterval(function(){dirAjusta(f);},800);}}
+  dirAjusta(f);}
+document.addEventListener('cmt-acesso',function(){var f=document.getElementById('dir-fr');if(f)dirPrep(f);});
+try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f&&f.contentDocument)f.contentDocument.documentElement.setAttribute('data-theme',document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light');}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}catch(e){}
+
+/* ===== Navegação do Compêndio fora do cabeçalho: faixa própria abaixo do topo ===== */
+(function(){var sec=document.querySelector('.top .eq-sec');var top=document.querySelector('header.top');if(!sec||!top)return;
+  var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compêndio');
+  bar.innerHTML='<div class="cn-in"><span class="cn-k">Compêndio</span></div>';bar.firstChild.appendChild(sec);top.parentNode.insertBefore(bar,top.nextSibling);
+  document.body.classList.add('cmp-nav-fora');})();
