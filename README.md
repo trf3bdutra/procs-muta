@@ -6,8 +6,13 @@ Base de dados do gabinete do Desembargador Federal Carlos Muta (Turma Regional d
 
 ```
 acervo/                        processos em tramitação no gabinete
-  fonte.json · fonte.csv       acervo fonte: o acervo atual, atualizado pelo DataJud e pelas planilhas do PJe e do Power BI
-  operacional.json             dados operacionais de cada processo, inclusive as passagens por pauta (sessão, item e resultado)
+  fonte.json · fonte.csv       acervo fonte: só dados de origem (planilhas do PJe e do Power BI e DataJud); valores
+                               padrão do Painel Central não são gravados (scripts/painel/separar_fonte.py)
+  operacional.json             trabalho do gabinete, 1 registro por processo ativo (baixados/arquivados fora), em seções:
+                               origem (aba Processo da Ficha) · triagem · producao · pauta (histórico de sessões);
+                               servidor, corretor, datas e itens vêm também de acervo/sessoes/;
+                               nomes de campo da Ficha: triagem, AJG/DPU, impedimento,
+                               contrarrazões, META, elaboração e passagens por pauta (sessão, item e resultado)
   sessoes/                     calendario.json (calendário de sessões) e um arquivo por sessão (AAAA-MM-DD.json)
   datajud/                     estado da sincronização e relatórios de cada coleta
 
