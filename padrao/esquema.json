@@ -320,6 +320,36 @@
     },
     "variaveis": {
      "type": "array"
+    },
+    "vinculos": {
+     "type": "array",
+     "description": "Correspondências opcionais com outros parágrafos ou com trechos de outras partes da peça (relatório, ementa, voto, proclamação). Cada item: {parte, ref (id de parágrafo) ou texto, opcional}.",
+     "items": {
+      "type": "object",
+      "properties": {
+       "parte": {
+        "enum": [
+         "paragrafo",
+         "relatorio",
+         "ementa",
+         "voto",
+         "proclamacao"
+        ]
+       },
+       "ref": {
+        "type": "string"
+       },
+       "texto": {
+        "type": "string"
+       },
+       "rotulo": {
+        "type": "string"
+       },
+       "opcional": {
+        "type": "boolean"
+       }
+      }
+     }
     }
    }
   },
