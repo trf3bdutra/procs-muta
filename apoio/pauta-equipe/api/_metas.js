@@ -1,4 +1,4 @@
-/* Metas do CNJ: controle de todos os processos de meta até o fim definitivo (baixa ou arquivamento).
+/* Metas do CNJ: controle dos processos de meta até o fim definitivo (baixa ou arquivamento); os sobrestados ficam na aba Sobrestados.
    A lista vem do acervo (etiquetas do PJe e campo META da triagem); o acompanhamento da equipe fica em acervo/metas.json.
    Servido por /api/pauta?metas=1 (o plano Hobby da Vercel aceita no máximo 12 funções; arquivos com _ não contam).
    GET  /api/pauta?metas=1                     processos de meta com situação no acervo, pauta e acompanhamento
@@ -37,6 +37,8 @@ async function base() {
       const o = O[dg(cnj)] || {}, tri = o.triagem || {}, pr = o.producao || {}, pa = o.pauta || {};
       const fonteMeta = [r.Etiquetas, r.etiquetas, tri.META].filter(Boolean).join(' ; ');
       const metas = numerosMeta(fonteMeta); if (!metas.length) return;
+      /* sobrestados e suspensos têm aba própria (Sobrestados) */
+      if (/Sobrestad|\[SU\]/i.test(r.tarefa_atual || '')) return;
       const ses = (pa.sessoes || []).map(s => ({ data: s.sessao, item: s.item || '', res: s.resultado || '' })).filter(s => s.data);
       CACHE.push({ cnj, metas, rotulo: String(tri.META || '').trim(), classe: r.classe_judicial || r.Classe || '', assunto: r.Assunto || r.Assunto_Principal || '',
         partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter(Boolean).join(' x '), dist: iso(r['data_distribuição'] || r['Data_Distribuição']),
