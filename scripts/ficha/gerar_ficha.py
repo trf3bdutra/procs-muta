@@ -56,7 +56,7 @@ EXTRAS = {('Triagem', 'Urgência'): [('Nível da urgência', 'Urgência - Nível
               ('Prazo legal (dias úteis)', 'Tempest - Prazo legal', 'numero'), ('Prazo em dobro', 'Tempest - Dobro', 'simnao'), ('Suspensões de prazo', 'Tempest - Suspensões', 'texto'),
               ('AJG', 'AJG', 'texto'), ('Impedimento / suspeição', 'Impedimento / Suspeição', 'texto')],
           ('Triagem', 'Matéria e gestão'): [('Tipo de julgamento', 'Tipo de Julgamento', 'texto'), ('Hipóteses de monocrática', 'Hipóteses Monocrática', 'texto'),
-              ('Síntese processual', 'Síntese Processual', 'texto-longo'), ('Especificidades', 'Especificidades', 'texto-longo')],
+              ('Síntese processual', 'Síntese Processual', 'texto-longo'), ('Síntese fática', 'Síntese Fática', 'texto-longo'), ('Especificidades', 'Especificidades', 'texto-longo')],
           ('Produção', 'Elaboração e revisão'): [('Destino', 'Destino', 'texto'), ('Data da revisão', 'Data da Revisão', 'data'), ('Data da liberação', 'Data da Liberação', 'data'), ('Revisão · IDs', 'Rev - IDs', 'texto')]}
 SEC = {'Triagem': 'triagem', 'Produção': 'producao', 'Pauta': 'pauta', 'Processo': 'origem'}
 for a in abas:
