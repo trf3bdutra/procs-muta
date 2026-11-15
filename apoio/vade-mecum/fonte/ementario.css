@@ -117,7 +117,7 @@
 .x-f mark,.ec mark{background:var(--warn-soft);color:var(--warn);border-radius:3px;padding:0 2px}
 #m-tipo,#e-tipo{flex-wrap:wrap}
 #m-tipo button,#e-tipo button{flex:1 1 30%;min-width:0;padding:6px 4px;font-size:11.5px}
-#m-tipo button{flex-basis:45%}
+#m-tipo button{flex-basis:30%}
 .x-fo{white-space:nowrap;display:inline-block;margin:1px 0}
 /* ===== Cabeçalho: subabas em menu suspenso ===== */
 section>.sub{display:none}
@@ -264,3 +264,9 @@ section>.sub{display:none}
 .pg .pg-noi{text-indent:0}
 .pg .pg-rule{text-indent:0;color:#555}
 @media (max-width:860px){.x-fmt{grid-template-columns:1fr}.pg{padding:18px;font-size:11pt}.pg p{text-indent:1.2cm}}
+.x-ol{margin:0;padding:0 0 0 22px;font-size:13px;line-height:1.55}
+.x-ol li{margin:3px 0}
+.x-dir{background:var(--field);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:0 0 8px;font-size:12.5px}
+.x-dir b{display:block;font-size:13px;margin-bottom:3px}
+.x-dir p{margin:3px 0 0}
+.x-dir p.ev span{color:var(--bad);font-weight:700}
