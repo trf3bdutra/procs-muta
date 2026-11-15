@@ -1,0 +1,472 @@
+{
+ "schema": "gabcmt.regras.impedimentos",
+ "versao": 1,
+ "atualizadoEm": "2026-11-14T23:57:59+00:00",
+ "nota": "Listas do CMT-Acervo (cmt-triagem). Sem CPF: a identificação é por nome e OAB. A atuação na vara de origem é só sinal de alerta; o impedimento depende de decisão do julgador no 1º grau (CPC, art. 144, II).",
+ "regra": {
+  "titulo": "Impedimento por atuação no 1º grau",
+  "texto": "O julgador está impedido no processo de que conheceu em outro grau de jurisdição, tendo proferido decisão (CPC, art. 144, II). A atuação na vara de origem é só o sinal de alerta: o impedimento depende de decisão sua nos autos.",
+  "passos": [
+   "Conferir a origem pelo número do processo.",
+   "Abrir as decisões e a sentença do 1º grau e verificar o signatário.",
+   "Constatado o impedimento, anotar na autuação (RITRF3, art. 64, IV) e encaminhar à convocação da Seção."
+  ]
+ },
+ "nota_advogados": "A lista recebida trata todos como suspeição. Pela lei, a advogada filha do magistrado gera impedimento (CPC, art. 144, III), que se estende aos advogados do mesmo escritório, ainda que não atuem diretamente no processo (art. 144, § 3º). Os demais casos seguem como suspeição declarada (art. 145). Todos se referem a Dr. Jean, conforme informado pelo gabinete.",
+ "origens": {
+  "6000": "Campo Grande",
+  "6002": "Dourados",
+  "6003": "Três Lagoas",
+  "6004": "Corumbá",
+  "6005": "Ponta Porã",
+  "6006": "Naviraí",
+  "6007": "Coxim",
+  "6201": "JEF Campo Grande",
+  "6202": "JEF Dourados",
+  "6203": "JEF Três Lagoas",
+  "6204": "JEF Corumbá",
+  "6205": "JEF Ponta Porã",
+  "6206": "JEF Naviraí",
+  "6207": "JEF Coxim"
+ },
+ "varas": {
+  "6000": [
+   "1ª Vara Federal de Campo Grande",
+   "2ª Vara Federal de Campo Grande",
+   "3ª Vara Federal de Campo Grande",
+   "4ª Vara Federal de Campo Grande",
+   "5ª Vara Federal de Campo Grande",
+   "6ª Vara Federal de Campo Grande"
+  ],
+  "6201": [
+   "Juizado Especial Federal Cível de Campo Grande"
+  ],
+  "6002": [
+   "1ª Vara Federal de Dourados",
+   "2ª Vara Federal de Dourados"
+  ],
+  "6202": [
+   "Juizado Especial Federal Cível de Dourados"
+  ],
+  "6003": [
+   "1ª Vara Federal de Três Lagoas"
+  ],
+  "6203": [
+   "Juizado Especial Federal Adjunto de Três Lagoas"
+  ],
+  "6004": [
+   "1ª Vara Federal de Corumbá"
+  ],
+  "6204": [
+   "Juizado Especial Federal Adjunto de Corumbá"
+  ],
+  "6005": [
+   "1ª Vara Federal de Ponta Porã",
+   "2ª Vara Federal de Ponta Porã"
+  ],
+  "6205": [
+   "Juizado Especial Federal Adjunto de Ponta Porã (2ª Vara)"
+  ],
+  "6006": [
+   "1ª Vara Federal de Naviraí"
+  ],
+  "6206": [
+   "Juizado Especial Federal Adjunto de Naviraí"
+  ],
+  "6007": [
+   "1ª Vara Federal de Coxim"
+  ],
+  "6207": [
+   "Juizado Especial Federal Adjunto de Coxim (7º Núcleo de Justiça 4.0)"
+  ]
+ },
+ "julgadores": [
+  {
+   "id": "jean",
+   "nome": "Dr. Jean",
+   "historico": [
+    "Atuou até 2014 na 6ª Vara Federal de Campo Grande, especializada em execução fiscal.",
+    "Respondeu eventualmente por outras Varas Federais de Campo Grande.",
+    "Na época, ainda não existia a atual estrutura de subseções no interior; como referência, a 1ª Vara Federal de Dourados foi inaugurada em 1997."
+   ],
+   "alvo": "Processos de Campo Grande (origem 4.03.6000) distribuídos no 1º grau até 2014, sobretudo execuções fiscais e embargos.",
+   "periodos": [
+    {
+     "loc": "6000",
+     "vara": "6ª Vara Federal de Campo Grande",
+     "ini": "",
+     "fim": "2014-12-31",
+     "obs": "6ª Vara Federal de Campo Grande (execução fiscal) e substituições em outras varas"
+    }
+   ]
+  },
+  {
+   "id": "ney",
+   "nome": "Dr. Ney",
+   "historico": [
+    "Como juiz substituto, atuou em diversas unidades no início da carreira.",
+    "Principais atuações: Naviraí, logo após o ingresso na magistratura; 6ª Vara Federal de Campo Grande; Ponta Porã; Coxim.",
+    "Passagem curta por Três Lagoas, no início da carreira."
+   ],
+   "alvo": "Processos originários de Naviraí, Ponta Porã, Coxim e Três Lagoas. Na 6ª Vara Federal de Campo Grande, o período de atuação ainda não foi informado: conferir caso a caso.",
+   "periodos": [
+    {
+     "loc": "6006",
+     "vara": "1ª Vara Federal de Naviraí",
+     "ini": "",
+     "fim": "",
+     "obs": "logo após o ingresso"
+    },
+    {
+     "loc": "6000",
+     "vara": "6ª Vara Federal de Campo Grande",
+     "ini": "",
+     "fim": "",
+     "obs": ""
+    },
+    {
+     "loc": "6005",
+     "vara": "",
+     "ini": "",
+     "fim": "",
+     "obs": ""
+    },
+    {
+     "loc": "6007",
+     "vara": "",
+     "ini": "",
+     "fim": "",
+     "obs": ""
+    },
+    {
+     "loc": "6003",
+     "vara": "",
+     "ini": "",
+     "fim": "",
+     "obs": "período curto no início da carreira"
+    }
+   ]
+  }
+ ],
+ "advogados": [
+  {
+   "nome": "Adriano Magno de Oliveira",
+   "oab": "MS 11.835-A",
+   "oabNum": "11835",
+   "vinculo": "Advogado",
+   "tipo": "susp",
+   "base": "CPC, art. 145",
+   "julgador": "jean"
+  },
+  {
+   "nome": "Odilon de Oliveira Junior",
+   "oab": "MS 11.514-A",
+   "oabNum": "11514",
+   "vinculo": "Advogado",
+   "tipo": "susp",
+   "base": "CPC, art. 145",
+   "julgador": "jean"
+  },
+  {
+   "nome": "Odilon de Oliveira",
+   "oab": "MS 2.062-A",
+   "oabNum": "2062",
+   "vinculo": "Advogado",
+   "tipo": "susp",
+   "base": "CPC, art. 145",
+   "julgador": "jean"
+  },
+  {
+   "nome": "Laís de Oliveira Ferreira",
+   "oab": "MS 30.615",
+   "oabNum": "30615",
+   "vinculo": "Filha do magistrado",
+   "tipo": "imp",
+   "base": "CPC, art. 144, III",
+   "julgador": "jean"
+  },
+  {
+   "nome": "Genoveva Teresinha Ricken",
+   "oab": "MS 23.819",
+   "oabNum": "23819",
+   "vinculo": "Mesmo escritório",
+   "tipo": "imp",
+   "base": "CPC, art. 144, III e § 3º",
+   "julgador": "jean"
+  },
+  {
+   "nome": "Iris de Matos Silva",
+   "oab": "MS 11.989",
+   "oabNum": "11989",
+   "vinculo": "Mesmo escritório",
+   "tipo": "imp",
+   "base": "CPC, art. 144, III e § 3º",
+   "julgador": "jean"
+  }
+ ],
+ "convocacoes": [
+  {
+   "data": "2026-11-27",
+   "secao": "2ª Seção",
+   "obs": "Impedimentos e suspeições"
+  },
+  {
+   "data": "2026-12-07",
+   "secao": "1ª Seção",
+   "obs": "Impedimentos e suspeições"
+  },
+  {
+   "data": "2026-12-15",
+   "secao": "3ª Seção",
+   "obs": "Impedimentos e suspeições"
+  }
+ ],
+ "processosMarcados": [
+  {
+   "cnj": "0000101-83.2021.4.03.6207",
+   "advogados": [
+    "Genoveva Teresinha Ricken",
+    "Iris de Matos Silva",
+    "Laís de Oliveira Ferreira"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "0000262-30.2020.4.03.6207",
+   "advogados": [
+    "Genoveva Teresinha Ricken",
+    "Iris de Matos Silva"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "0000671-15.2020.4.03.6204",
+   "advogados": [
+    "Genoveva Teresinha Ricken"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "0003720-27.2002.4.03.6000",
+   "advogados": [
+    "Adriano Magno de Oliveira",
+    "Odilon de Oliveira Junior"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "0007761-22.2011.4.03.6000",
+   "advogados": [
+    "Laís de Oliveira Ferreira"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Julgado",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "0014838-14.2013.4.03.6000",
+   "advogados": [
+    "Adriano Magno de Oliveira",
+    "Odilon de Oliveira Junior"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Julgado",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5000214-67.2026.4.03.0001",
+   "advogados": [
+    "Adriano Magno de Oliveira",
+    "Odilon de Oliveira Junior",
+    "Odilon de Oliveira"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "AGRAVO DE INSTRUMENTO",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5001389-97.2024.4.03.6005",
+   "advogados": [
+    "Adriano Magno de Oliveira"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5001528-64.2024.4.03.6000",
+   "advogados": [
+    "Adriano Magno de Oliveira",
+    "Odilon de Oliveira Junior",
+    "Odilon de Oliveira"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5001577-42.2023.4.03.6000",
+   "advogados": [
+    "Adriano Magno de Oliveira"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5002350-19.2025.4.03.6000",
+   "advogados": [
+    "Genoveva Teresinha Ricken",
+    "Iris de Matos Silva",
+    "Laís de Oliveira Ferreira"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5004110-08.2022.4.03.6000",
+   "advogados": [
+    "Adriano Magno de Oliveira"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Julgado",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5004974-62.2026.4.03.0000",
+   "advogados": [
+    "Adriano Magno de Oliveira"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "AGRAVO DE INSTRUMENTO",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5005188-45.2024.4.03.6201",
+   "advogados": [
+    "Genoveva Teresinha Ricken",
+    "Iris de Matos Silva",
+    "Laís de Oliveira Ferreira"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Julgado",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5005192-82.2024.4.03.6201",
+   "advogados": [
+    "Genoveva Teresinha Ricken",
+    "Iris de Matos Silva",
+    "Laís de Oliveira Ferreira"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5005491-46.2025.4.03.6000",
+   "advogados": [
+    "Genoveva Teresinha Ricken",
+    "Iris de Matos Silva",
+    "Laís de Oliveira Ferreira"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5005562-19.2023.4.03.6000",
+   "advogados": [
+    "Genoveva Teresinha Ricken",
+    "Laís de Oliveira Ferreira"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Andamento",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5008113-74.2020.4.03.6000",
+   "advogados": [
+    "Adriano Magno de Oliveira"
+   ],
+   "tipos": [
+    "Suspeição"
+   ],
+   "classe": "APELAÇÃO CÍVEL",
+   "situacao": "Julgado",
+   "julgador": "jean"
+  },
+  {
+   "cnj": "5010078-35.2026.4.03.0000",
+   "advogados": [
+    "Iris de Matos Silva"
+   ],
+   "tipos": [
+    "Impedimento"
+   ],
+   "classe": "AGRAVO DE INSTRUMENTO",
+   "situacao": "Julgado",
+   "julgador": "jean"
+  }
+ ]
+}

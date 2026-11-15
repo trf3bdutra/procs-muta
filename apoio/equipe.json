@@ -1,254 +1,470 @@
 {
  "schema": "gabcmt.equipe",
  "versao": 1,
- "atualizadoEm": "2026-11-14T23:47:01+00:00",
+ "atualizadoEm": "2026-11-15T00:15:08+00:00",
+ "origem": "CMT-Triagem (regras-designacao-e-correcao.xlsx) e histórico do Gabinete CMT",
  "registros": [
-  {
-   "id": "m-dalete",
-   "nome": "Dalete",
-   "papel": "equipe",
-   "aliases": [],
-   "cargo": "",
-   "atribuicoes": [
-    "Elaboração de minutas / Minutar"
-   ],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-debora",
-   "nome": "Debora",
-   "papel": "equipe",
-   "aliases": [
-    "Débora"
-   ],
-   "cargo": "CJ2",
-   "atribuicoes": [
-    "Elaboração de minutas / Minutar"
-   ],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-estela",
-   "nome": "Estela",
-   "papel": "equipe",
-   "aliases": [
-    "Estela Carneiro"
-   ],
-   "cargo": "",
-   "atribuicoes": [],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-giovana",
-   "nome": "Giovana",
-   "papel": "equipe",
-   "aliases": [],
-   "cargo": "",
-   "atribuicoes": [],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-jose",
-   "nome": "José",
-   "papel": "equipe",
-   "aliases": [
-    "José V."
-   ],
-   "cargo": "",
-   "atribuicoes": [
-    "Elaboração de minutas / Minutar"
-   ],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-maria-eduarda",
-   "nome": "Maria Eduarda",
-   "papel": "equipe",
-   "aliases": [
-    "DUDA"
-   ],
-   "cargo": "",
-   "atribuicoes": [],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-rodrigo",
-   "nome": "Rodrigo",
-   "papel": "equipe",
-   "aliases": [],
-   "cargo": "",
-   "atribuicoes": [
-    "Elaboração de minutas / Minutar",
-    "Supervisão de Minutas de Voto"
-   ],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-victor",
-   "nome": "Victor",
-   "papel": "equipe",
-   "aliases": [
-    "Víctor Neres",
-    "Víctor"
-   ],
-   "cargo": "",
-   "atribuicoes": [],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-wellington",
-   "nome": "Wellington",
-   "papel": "equipe",
-   "aliases": [],
-   "cargo": "",
-   "atribuicoes": [],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
   {
    "id": "m-alexander",
    "nome": "Alexander",
-   "papel": "assessoria",
    "aliases": [
-    "Alex"
+    "ALEX",
+    "ALE",
+    "ALEXANDRE",
+    "ALEXANDER"
    ],
    "cargo": "CJ1",
-   "atribuicoes": [],
-   "pref": [],
-   "exp": [],
-   "nao": [],
+   "minuta": false,
+   "correcao": true,
+   "auto": true,
+   "papel": "assessoria",
+   "atribuicoes": [
+    "Elaboração de minutas",
+    "Supervisão de minutas de voto"
+   ],
+   "escopos": [
+    "Voto",
+    "Voto/3ª Seção/ramo_9"
+   ],
+   "situacao": "disponivel",
+   "pref": [
+    "3ª Seção"
+   ],
+   "nao": [
+    "2ª Seção"
+   ],
+   "exp": [
+    "Aposentadoria Especial (Art. 57/8)",
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+    "Alteração do coeficiente de cálculo do benefício"
+   ],
    "aus": [],
    "nota": ""
   },
   {
    "id": "m-bruno",
    "nome": "Bruno",
-   "papel": "assessoria",
-   "aliases": [],
-   "cargo": "",
-   "atribuicoes": [
-    "Elaboração de minutas / Minutar"
+   "aliases": [
+    "BRU",
+    "BRUNINHO",
+    "BRUNO"
    ],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-renato",
-   "nome": "Renato",
+   "cargo": "CJ2",
+   "minuta": false,
+   "correcao": true,
+   "auto": true,
    "papel": "assessoria",
-   "aliases": [],
-   "cargo": "",
    "atribuicoes": [
-    "Elaboração de minutas / Minutar"
+    "Elaboração de minutas"
    ],
+   "escopos": [
+    "Voto"
+   ],
+   "situacao": "disponivel",
    "pref": [],
-   "exp": [],
    "nao": [],
+   "exp": [
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   ],
    "aus": [],
    "nota": ""
   },
   {
    "id": "m-saffioti",
    "nome": "Saffioti",
+   "aliases": [
+    "SAFF",
+    "SAFIOTI",
+    "SAFFIOTI"
+   ],
+   "cargo": "CJ3",
+   "minuta": false,
+   "correcao": true,
+   "auto": true,
    "papel": "assessoria",
-   "aliases": [],
-   "cargo": "",
    "atribuicoes": [],
+   "escopos": [],
+   "situacao": "disponivel",
    "pref": [],
-   "exp": [],
    "nao": [],
-   "aus": [],
-   "nota": ""
-  },
-  {
-   "id": "m-salah",
-   "nome": "Salah",
-   "papel": "assessoria",
-   "aliases": [],
-   "cargo": "",
-   "atribuicoes": [],
-   "pref": [],
    "exp": [],
-   "nao": [],
    "aus": [],
    "nota": ""
   },
   {
    "id": "m-vanilda",
    "nome": "Vanilda",
+   "aliases": [
+    "VANI",
+    "VAN",
+    "VANILDA"
+   ],
+   "cargo": "CJ1",
+   "minuta": false,
+   "correcao": true,
+   "auto": true,
    "papel": "assessoria",
-   "aliases": [],
-   "cargo": "",
    "atribuicoes": [],
+   "escopos": [],
+   "situacao": "disponivel",
    "pref": [],
-   "exp": [],
    "nao": [],
+   "exp": [
+    "Fundo de Saúde do Exército - FUSEX",
+    "Contratos Bancários"
+   ],
    "aus": [],
    "nota": ""
   },
   {
-   "id": "m-rmwh20kqumadf",
-   "nome": "CM",
+   "id": "m-giovana",
+   "nome": "Giovana",
+   "aliases": [
+    "GIO",
+    "GIOVANNA",
+    "GIOVANA"
+   ],
+   "cargo": "FC4",
+   "minuta": false,
+   "correcao": false,
+   "auto": true,
    "papel": "equipe",
-   "aliases": [],
-   "cargo": "",
    "atribuicoes": [],
+   "escopos": [],
+   "situacao": "disponivel",
    "pref": [],
-   "exp": [],
    "nao": [],
+   "exp": [],
    "aus": [],
-   "nota": "Veio da equipe antiga do painel."
+   "nota": ""
   },
   {
-   "id": "m-rmwh20kquqtrg",
-   "nome": "Lucila",
-   "papel": "equipe",
-   "aliases": [],
+   "id": "m-dalete",
+   "nome": "Dalete",
+   "aliases": [
+    "DALE",
+    "DAL",
+    "DALETE"
+   ],
    "cargo": "",
-   "atribuicoes": [],
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [
+    "Elaboração de minutas"
+   ],
+   "escopos": [
+    "Voto/3ª Seção/ramo_9/s359",
+    "Voto/3ª Seção/cnj_12734/s364",
+    "Voto/3ª Seção/ramo_9/s69",
+    "Voto/3ª Seção/ramo_9/s460",
+    "Voto/3ª Seção/ramo_9/s462"
+   ],
+   "situacao": "disponivel",
    "pref": [],
-   "exp": [],
    "nao": [],
+   "exp": [
+    "Pensão por Morte (Art. 74/9)",
+    "Aposentadoria por Incapacidade Permanente",
+    "Pessoa com Deficiência",
+    "Urbana (Art. 48/51)",
+    "Salário-Maternidade (Art. 71/73)",
+    "Seguro-defeso ao pescado artesanal profissional",
+    "Incapacidade Laborativa Permanente",
+    "Benefício Assistencial (Art. 203,V CF/88)"
+   ],
    "aus": [],
-   "nota": "Veio da equipe antiga do painel."
+   "nota": ""
+  },
+  {
+   "id": "m-jose",
+   "nome": "José",
+   "aliases": [
+    "ZÉ",
+    "ZE",
+    "José V.",
+    "JOSÉ"
+   ],
+   "cargo": "",
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [
+    "Elaboração de minutas"
+   ],
+   "escopos": [
+    "Voto"
+   ],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [
+    "Contribuições Previdenciárias",
+    "Impostos",
+    "Conselhos Regionais e Afins (Anuidade)",
+    "Multas e demais Sanções",
+    "Cessão de créditos não-tributários",
+    "Cofins",
+    "IRPJ/Imposto de Renda de Pessoa Jurídica",
+    "Microempresa"
+   ],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-rodrigo",
+   "nome": "Rodrigo",
+   "aliases": [
+    "RODRI",
+    "ROD",
+    "RODRIGO"
+   ],
+   "cargo": "",
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [
+    "Elaboração de minutas",
+    "Supervisão de minutas de voto"
+   ],
+   "escopos": [
+    "Decisão",
+    "Despacho",
+    "Voto"
+   ],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+    "Inquérito / Processo / Recurso Administrativo",
+    "Aposentadoria Especial (Art. 57/8)",
+    "Cálculo do fator previdenciário - Lei 9.876/99",
+    "RMI - Renda Mensal Inicial",
+    "Professor",
+    "Correção Monetária de Diferenças Pagas em Atraso"
+   ],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-debora",
+   "nome": "Debora",
+   "aliases": [
+    "DEB",
+    "Débora",
+    "DEBORA"
+   ],
+   "cargo": "",
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [
+    "Elaboração de minutas"
+   ],
+   "escopos": [
+    "Voto"
+   ],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [
+    "Rural (Art. 48/51)",
+    "Híbrida (Art. 48/106)",
+    "Averbação/Cômputo de tempo de serviço rural (empregado/empregador)",
+    "Indenização por Dano Moral",
+    "Remoção"
+   ],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-renato",
+   "nome": "Renato",
+   "aliases": [
+    "RENA",
+    "REN",
+    "RENATO"
+   ],
+   "cargo": "CJ3",
+   "minuta": false,
+   "correcao": true,
+   "auto": true,
+   "papel": "assessoria",
+   "atribuicoes": [
+    "Elaboração de minutas"
+   ],
+   "escopos": [
+    "Voto"
+   ],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-victor",
+   "nome": "Victor",
+   "aliases": [
+    "VITOR",
+    "VIC",
+    "Víctor Neres",
+    "Víctor",
+    "VICTOR"
+   ],
+   "cargo": "",
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [
+    "Elaboração de minutas"
+   ],
+   "escopos": [
+    "Voto"
+   ],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [
+    "Convalidação de Estudos e Reconhecimento de Diploma"
+   ],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-estela",
+   "nome": "Estela",
+   "aliases": [
+    "ESTELLA",
+    "ESTE",
+    "Estela Carneiro",
+    "ESTELA"
+   ],
+   "cargo": "",
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [],
+   "escopos": [],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-maria-eduarda",
+   "nome": "Maria Eduarda",
+   "aliases": [
+    "DUDA",
+    "MADU",
+    "EDUARDA",
+    "MARIA E.",
+    "MARIA EDUARDA"
+   ],
+   "cargo": "FC3",
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [
+    "Elaboração de minutas"
+   ],
+   "escopos": [
+    "Voto"
+   ],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [
+    "Direitos Indígenas",
+    "Esbulho / Turbação / Ameaça",
+    "FGTS/Fundo de Garantia Por Tempo de Serviço",
+    "Reintegração",
+    "Anulação e Correção de Provas / Questões",
+    "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico",
+    "Ambiental",
+    "Restituição de área - FUNAI"
+   ],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-wellington",
+   "nome": "Wellington",
+   "aliases": [
+    "WELL",
+    "WEL",
+    "WELLING",
+    "WELLINGTON"
+   ],
+   "cargo": "FC4",
+   "minuta": true,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [],
+   "escopos": [],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-salah",
+   "nome": "Salah",
+   "aliases": [
+    "SALAH"
+   ],
+   "cargo": "",
+   "minuta": false,
+   "correcao": false,
+   "auto": true,
+   "papel": "equipe",
+   "atribuicoes": [],
+   "escopos": [],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [],
+   "aus": [],
+   "nota": ""
+  },
+  {
+   "id": "m-cm",
+   "nome": "CM",
+   "aliases": [
+    "Dr. Muta",
+    "Carlos Muta",
+    "Des. Carlos Muta"
+   ],
+   "cargo": "Desembargador",
+   "minuta": false,
+   "correcao": true,
+   "auto": false,
+   "papel": "assessoria",
+   "atribuicoes": [
+    "Revisão final"
+   ],
+   "escopos": [],
+   "situacao": "disponivel",
+   "pref": [],
+   "nao": [],
+   "exp": [],
+   "aus": [],
+   "nota": "Só por escolha manual: a designação automática não o indica."
   }
  ]
 }

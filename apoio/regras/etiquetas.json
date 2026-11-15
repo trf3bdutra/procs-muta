@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.regras.etiquetas",
  "versao": 1,
- "atualizadoEm": "2026-11-14T23:47:01+00:00",
+ "atualizadoEm": "2026-11-15T00:15:08+00:00",
  "registros": [
   {
    "id": "pad-ED",
@@ -169,6 +169,18 @@
     {
      "t": "instância de origem",
      "m": "contem"
+    },
+    {
+     "t": "SESSÃO",
+     "m": "contem"
+    },
+    {
+     "t": "APTO",
+     "m": "inicio"
+    },
+    {
+     "t": "Apto para julgamento",
+     "m": "inicio"
     }
    ],
    "exceto": [],
@@ -176,6 +188,269 @@
    "nome": "",
    "nota": "",
    "origem": "padrão"
+  },
+  {
+   "id": "cmt-esp-1",
+   "on": true,
+   "ef": "esp",
+   "v": "Aposentadoria rural",
+   "termos": [
+    {
+     "t": "Aposentadoria por Idade Rural",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-esp-2",
+   "on": true,
+   "ef": "esp",
+   "v": "Aposentadoria por tempo de contribuição",
+   "termos": [
+    {
+     "t": "Aposentadoria por Tempo de Contribuição",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-esp-3",
+   "on": true,
+   "ef": "esp",
+   "v": "Aposentadoria especial",
+   "termos": [
+    {
+     "t": "Aposentadoria Especial",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-esp-4",
+   "on": true,
+   "ef": "esp",
+   "v": "Vista ao MPF",
+   "termos": [
+    {
+     "t": "INTIMAR MPF",
+     "m": "contem"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-esp-5",
+   "on": true,
+   "ef": "esp",
+   "v": "Pensão por morte",
+   "termos": [
+    {
+     "t": "Pensão por morte",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-mpf-6",
+   "on": true,
+   "ef": "mpf",
+   "v": "Idoso",
+   "termos": [
+    {
+     "t": "Idoso",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-mpf-7",
+   "on": true,
+   "ef": "mpf",
+   "v": "Mandado de segurança",
+   "termos": [
+    {
+     "t": "MS",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-8",
+   "on": true,
+   "ef": "tema",
+   "v": "Convalidação de Estudos e Reconhecimento de Diploma",
+   "termos": [
+    {
+     "t": "Revalida",
+     "m": "contem"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-9",
+   "on": true,
+   "ef": "tema",
+   "v": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "termos": [
+    {
+     "t": "ICMS - IRPJ/CSLL",
+     "m": "inicio"
+    },
+    {
+     "t": "Tema 1182 STJ",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-10",
+   "on": true,
+   "ef": "tema",
+   "v": "Aposentadoria por Idade Rural",
+   "termos": [
+    {
+     "t": "Aposentadoria por Idade Rural",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-11",
+   "on": true,
+   "ef": "tema",
+   "v": "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "termos": [
+    {
+     "t": "Aposentadoria por Tempo de Contribuição",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-12",
+   "on": true,
+   "ef": "tema",
+   "v": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "termos": [
+    {
+     "t": "28",
+     "m": "inicio"
+    },
+    {
+     "t": "86%",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-13",
+   "on": true,
+   "ef": "tema",
+   "v": "Aposentadoria Especial (Art. 57/8)",
+   "termos": [
+    {
+     "t": "Aposentadoria Especial",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-14",
+   "on": true,
+   "ef": "tema",
+   "v": "Efeito Suspensivo / Impugnação / Embargos à Execução",
+   "termos": [
+    {
+     "t": "embargos à execução",
+     "m": "contem"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
+  },
+  {
+   "id": "cmt-tema-15",
+   "on": true,
+   "ef": "tema",
+   "v": "Execução Fiscal",
+   "termos": [
+    {
+     "t": "Execução Fiscal",
+     "m": "inicio"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "CMT-Triagem"
   }
  ]
 }

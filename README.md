@@ -6,8 +6,9 @@ Base de dados do gabinete do Desembargador Federal Carlos Muta (Turma Regional d
 
 ```
 acervo/                        processos em tramitação no gabinete
-  acervo.json · acervo.csv     acervo atual, atualizado pelo DataJud
+  fonte.json · fonte.csv       acervo fonte: o acervo atual, atualizado pelo DataJud e pelas planilhas do PJe e do Power BI
   operacional.json             dados operacionais do acervo
+  sessoes/                     calendario.json (calendário de sessões) e um arquivo por sessão (AAAA-MM-DD.json)
   datajud/                     estado da sincronização e relatórios de cada coleta
 
 precedentes/                   processos já julgados pelo relator
@@ -63,9 +64,9 @@ Precedente: `acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie>` 
 
 O **CMT-monitor** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta base, com um token do GitHub com permissão *Contents* (leitura e gravação):
 
-- lê `acervo/acervo.json` (DataJud e planilhas) e `apoio/assuntos.json` (seção e ramo de cada assunto);
-- grava as sessões de julgamento (marcos, pauta, quem minuta e quem corrige) em `acervo/operacional.json`, campo `sessoes`;
-- grava as regras em `apoio/regras/etiquetas.json` (conversão de etiquetas) e `apoio/regras/designacao.json` (critérios de designação e correção), e a equipe em `apoio/equipe.json`;
+- lê `acervo/fonte.json`, o acervo fonte (DataJud e planilhas) e `apoio/assuntos.json` (seção e ramo de cada assunto);
+- grava o calendário de sessões (datas, hora e marcos) em `acervo/sessoes/calendario.json` e a pauta de cada sessão (item, quem minuta, quem corrige e as datas de minuta, correção e liberação) em `acervo/sessoes/AAAA-MM-DD.json`;
+- grava as regras em `apoio/regras/etiquetas.json` (conversão de etiquetas) e `apoio/regras/designacao.json` (critérios de designação e correção), e a equipe em `apoio/equipe.json`; as regras de impedimento e suspeição ficam em `apoio/regras/impedimentos.json` (sem CPF);
 - tudo vai num único commit pelo botão "Gravar no procs-muta"; até lá, o trabalho fica no navegador.
 
 `construtor.html` e `index.html` ainda leem e gravam no repositório `brndutra/gabcmt`, com a estrutura antiga de pastas.
