@@ -31,7 +31,8 @@ apoio/                         recursos de apoio à redação
   assuntos.json                assuntos (TPU/CNJ) e temas
   repertorio.json              repertório jurisprudencial e normativo (campo categoria: jurisprudencia | Lei, Código…)
   usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)
-  cmt-compendio/               CMT Compêndio (cmt-compendio.html, leitura; cmt-compendio-editor.html, editor), com os usos automáticos embutidos
+  pauta-equipe/                Pauta da equipe (/equipe/ na Vercel): login de cada servidor e cartões da pauta; api/ grava em acervo/sessoes com o GH_TOKEN da Vercel
+  cmt-compendio/               CMT Compêndio: cmt-compendio.html (público: Ementário, Editorial e Consulta da pauta) e cmt-compendio-avancado.html (uso interno: todas as abas, edição e atalho para o Monitor), com os usos automáticos embutidos
 
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo
