@@ -8,3 +8,16 @@
     j('/api/pendencias').then(function(x){bdg('#eq-cpen',(x.tasks||[]).filter(function(t){return t.stage!=='done'&&nq(t.assignee)===nq(u);}).length);}).catch(function(){});
   });
 })();
+
+/* endereço das seções (#v=edit&s=mod) e links da pill fora do site */
+(function(){
+  var SITE=/^https?:$/.test(location.protocol);
+  if(!SITE)Array.prototype.forEach.call(document.querySelectorAll('[data-eqlink],.eq-cmp[href]'),function(a){a.href='https://trf3-muta.vercel.app'+a.getAttribute('href');});
+  function vai(){var p={};location.hash.replace(/^#/,'').split('&').forEach(function(kv){var i=kv.indexOf('=');if(i>0)p[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1));});
+    if(!p.v)return;var t=document.querySelector('.tab[data-v="'+p.v+'"]');if(!t||t.hidden)return;
+    if(p.v==='edit'&&window.VDM_irEditorial){window.VDM_irEditorial(p.s);return;}
+    if(t.getAttribute('aria-selected')!=='true')t.click();
+    if(p.s&&p.v!=='edit'){var sb=document.querySelector('#v-'+p.v+' [data-s="'+p.s+'"]');if(sb)sb.click();}}
+  document.addEventListener('cmt-acesso',function(){setTimeout(vai,0);},{once:true});
+  window.addEventListener('hashchange',vai);
+})();

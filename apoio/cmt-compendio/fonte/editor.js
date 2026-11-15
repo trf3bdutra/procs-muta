@@ -175,7 +175,7 @@ function edForm(r){
     corpo=edEsq(r)+'<details class="edg" open><summary>Ficha do modelo</summary>'+dados+'</details><details class="edg"><summary>Parágrafos alternativos do modelo (JSON, avançado)</summary><textarea id="ed-pm" rows="6" class="mono ed-auto" spellcheck="false">'+esc(typeof r.paragrafosModelo==='string'?r.paragrafosModelo:JSON.stringify(r.paragrafosModelo||[]))+'</textarea></details>';}
   else if(c==='par')corpo='<div class="ed-grid">'+ED_PAR.map(function(f){return edCampo(r,f);}).join('')+'</div><p class="meta">Campos variáveis no texto: {nome} ou {nome|rótulo}; colchetes [ … ] viram campo a preencher.</p>';
   else if(c==='pec')corpo=edPeca(r);
-  else if(c==='nor')corpo='<div class="ed-grid">'+ED_NOR.map(function(f){return edCampo(r,f);}).join('')+'</div><p class="meta">Dispositivos que completam o repertório normativo da planilha do Vade Mecum; código repetido na planilha prevalece.</p>';
+  else if(c==='nor')corpo='<div class="ed-grid">'+ED_NOR.map(function(f){return edCampo(r,f);}).join('')+'</div><p class="meta">Dispositivos que completam as normas do Vade Mecum (apoio/vade-mecum.json); código repetido no Vade Mecum prevalece.</p>';
   else corpo='<div class="ed-grid">'+(ED_DIR[r.tipo]||[]).map(function(f){return edCampo(r,f);}).join('')+'</div>';
   return h+'<div class="ed-fcols"><div class="ed-fmain">'+corpo+'</div>'+(EDS.prev?'<aside class="ed-prev"><div class="edgh">Pré-visualização <small>campos em destaque</small></div><div id="ed-prev" class="serif"></div></aside>':'')+'</div>';}
 function edLerForm(r){
@@ -201,7 +201,7 @@ function edAplicar(silencioso){var r=EDS.id&&edAcha(EDS.col,EDS.id);if(!r){EDS.d
   else if(!silencioso)toast('Nada mudou');
   EDS.dirty=false;return true;}
 function edMarcaSujo(){if(EDS.dirty)return;EDS.dirty=true;var d=$('#ed-dirty');if(d){d.hidden=false;d.textContent='alterações não aplicadas';}var b=$('[data-edsalvar]');if(b)b.classList.add('pulse');$$('[data-edgit],[data-edzip]').forEach(function(x){x.disabled=false;});}
-function edAtualizaVista(){try{PRECP=null;PRECI=null;if(!$('#v-edit').hidden)xRender();if(!$('#v-ement').hidden){if(EM.sub==='mod')mRender();else if(EM.sub==='par')pRender();}}catch(e){}}
+function edAtualizaVista(){try{PRECP=null;PRECI=null;if(!$('#v-edit').hidden)xRender();if(!$('#v-dir').hidden)xManual();}catch(e){}}
 function edNovo(){if(EDS.dirty&&!edAplicar(true))return;var c=EDS.col,L=edLista(),r;
   if(c==='mod'){var ref=L.filter(function(m){var e=jp(m.esqueletoModelo);return e&&e._estrutura==='padrao';})[0],e=ref?jp(ref.esqueletoModelo):{_estrutura:'padrao',_topicos:[]},o={_estrutura:e._estrutura,_topicos:e._topicos};(e._topicos||[]).forEach(function(t){o[t.id]={texto:t.id==='fecho'?'É como voto.':'',ativo:!t.opcional};});
     var tp=EDS.f.mod.tipo==='Decisão'?'decisao':EDS.f.mod.tipo==='Despacho'?'despacho':'voto-matriz';
@@ -327,7 +327,7 @@ function edEnviar(msg){
   .catch(function(e){edSt('Não foi possível enviar: '+e.message);if(/^401|^403/.test(e.message))EDS.token='';});}
 document.body.classList.add('vdm-ed');
 /* entrada pelo cabeçalho; aviso de rascunho guardado; na página do editor, abre sozinho (registro indicado no endereço: #mod=id) */
-(function(){var h=$('#openSheet');var b='<button class="btn ed-btn" data-edabre title="Adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial, diretrizes e normas">Editor</button>';if(h)h.insertAdjacentHTML('beforebegin',b);else document.body.insertAdjacentHTML('afterbegin',b);
+(function(){var h=$('#theme');var b='<button class="btn ed-btn" data-edabre title="Adicionar, editar e excluir modelos-matriz, parágrafos-padrão, peças do Editorial, diretrizes e normas">Editor</button>';if(h)h.insertAdjacentHTML('beforebegin',b);else document.body.insertAdjacentHTML('afterbegin',b);
   try{var d=JSON.parse(localStorage.getItem(EDK)||'null');if(d&&d.cols){var n=0;Object.keys(d.cols).forEach(function(c){n+=Object.keys(d.cols[c]).length;});if(n){var bt=document.querySelector('[data-edabre]');if(bt){bt.insertAdjacentHTML('beforeend',' <i class="ed-badge" title="Alterações guardadas e não enviadas">'+n+'</i>');}}}}catch(e){}
   function alvo(){var m=/^#(mod|par|pec|dir|nor)=(.+)$/.exec(location.hash||'');return m?[m[1],decodeURIComponent(m[2])]:[];}
   function semAcesso(){var o=$('#ed-ov');if(!o){o=document.createElement('div');o.id='ed-ov';o.className='ed-ov';document.body.appendChild(o);}o.hidden=false;document.body.classList.add('ed-on');

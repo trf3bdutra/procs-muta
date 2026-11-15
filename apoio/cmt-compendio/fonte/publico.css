@@ -20,9 +20,33 @@
 .top .bdg{position:absolute;top:-4px;right:-4px;min-width:17px;height:17px;border-radius:99px;background:#e6c27a;color:#14263c;font:800 9.5px/17px Figtree,system-ui,sans-serif;font-style:normal;padding:0 4px;text-align:center;box-sizing:border-box}
 .top .ico{width:32px!important;height:32px!important;border-radius:999px!important}
 
-.cp-sub{display:flex;justify-content:center;padding:10px 20px 0}.cp-sub .tabs{background:var(--panel)!important;border:1px solid var(--line)!important}.cp-sub .tab{color:var(--mut)!important}.cp-sub .tab[aria-selected="true"]{background:var(--gold)!important;color:var(--gold-ink)!important}
 aside{top:58px!important}
 @media (max-width:860px){.top{flex-wrap:wrap!important}}
+/* barra comum com a Pauta da equipe: pill Início · Pauta e, separada, a pill do Compêndio com suas seções */
+.top .eqtabs+.eqtabs{margin-left:-4px}
+.eq-cpn .eq-grp{background:transparent;box-shadow:none;padding-right:0}
+.eqtabs{align-items:center;flex-wrap:nowrap}
+.eq-grp{display:inline-flex;align-items:center;gap:2px;border-radius:999px;background:rgba(230,194,122,.12);box-shadow:inset 0 0 0 1px rgba(230,194,122,.32);padding-right:3px}
+.eqtabs .eq-cmp{border-radius:999px;padding:7px 14px;font-weight:800;font-size:13px;color:#e6c27a;text-decoration:none;white-space:nowrap}
+.eqtabs .eq-cmp[aria-current=page]{background:#e6c27a;color:#14263c}
+.eqtabs a.eq-cmp:not([aria-current]):hover{background:rgba(230,194,122,.18)}
+.eqtabs>a:hover{color:#fff}
+.top .tabs.eq-sec{background:transparent!important;border:0!important;padding:0!important;gap:2px;flex-wrap:nowrap;display:inline-flex}
+.top .eq-sec .tab{padding:6px 11px!important;font-size:13px;white-space:nowrap;color:#cfe0db!important}
+.top .eq-sec .tab:hover{color:#fff!important}
+.top .eq-sec .tab[aria-selected="true"]{background:rgba(255,255,255,.15)!important;color:#fff!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)!important}
+.top .eq-sec .tab .tab-cur{color:#e6c27a;font-weight:600}
+@media (max-width:1180px){.top{flex-wrap:wrap!important}.top .eq-cpn{order:3}.top .eqsp{display:none}.top .right{margin-left:auto}}
+@media (max-width:700px){.top .eqtabs{flex-wrap:wrap;border-radius:18px}.eq-grp{flex-wrap:wrap;border-radius:16px}.top .tabs.eq-sec{flex-wrap:wrap}}
+/* cabeçalho de cada seção (Ementário, Editorial) */
+.pg-h{display:flex;align-items:flex-end;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;padding:20px 24px 16px;border-bottom:1px solid var(--line);background:var(--panel)}
+.pg-t h1{margin:0;font-size:22px;line-height:1.2;letter-spacing:-.01em;color:var(--ink);font-weight:800}
+.pg-t p{margin:4px 0 0;color:var(--mut);font-size:13.5px;max-width:70ch}
+section>.pg-h .sub.pg-seg{display:inline-flex;gap:2px;padding:4px;margin:0;background:var(--bg);border:1px solid var(--line);border-radius:999px;flex-wrap:wrap}
+.pg-seg button{border:0!important;border-radius:999px!important;padding:8px 18px!important;background:transparent!important;color:var(--mut)!important;font-weight:700;font-size:13px;cursor:pointer}
+.pg-seg button:hover{color:var(--ink)!important}
+.pg-seg button[aria-selected="true"]{background:var(--gold)!important;color:var(--gold-ink)!important}
+#v-edit #e-layout{border-top:0}
 
 /* marca do gabinete: a estrela do CMT-monitor */
 .brand.tw i{width:22px!important;height:24px!important;border-radius:0!important;box-shadow:none!important;background:#e6c27a!important;-webkit-mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat;mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat}

@@ -4,7 +4,7 @@ a partir desta pasta e da base do procs-muta. Acesso ao modo avançado e ao edit
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
-  snapshot.json · usos_auto.json                    cópia da planilha do Vade Mecum e usos localizados
+  ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
@@ -180,13 +180,22 @@ def montar(var):
               '    <button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>'
               '<a class="hb ic hbx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<i class="bdg" id="eq-cnot" hidden></i></a>'
               '<a class="hb ic hbx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<i class="bdg" id="eq-cpen" hidden></i></a>\n')
-    # barra unificada com a Pauta da equipe: Início, Pauta, Compêndio; as seções do Compêndio descem para uma faixa logo abaixo
+    # barra unificada com a Pauta da equipe (mesma pill): Início · Pauta · Compêndio, e as seções do Compêndio dentro da pill, ao lado do botão Compêndio
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
     secoes = t[i0:i1]; t = t[:i0] + t[i1:]
+    abas = secoes[secoes.index('>') + 1:secoes.rindex('</nav>')]
+    ordem = ['ement', 'edit', 'dir', 'consulta', 'temas', 'rep', 'enc']
+    lin = {}
+    for l in abas.strip().split('\n'):
+        l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l
+    abas = ''.join(lin[v] for v in ordem if v in lin)
+    rotulo = ('<a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-cmp eq-ed" aria-current="page">Editor</span>' if var == 'editor'
+              else '<a class="eq-cmp" href="/compendio/" aria-current="page">Compêndio</a>')
     k = t.index('<div class="brand tw">'); k = t.index('</span></div>\n', k) + len('</span></div>\n')
-    t = t[:k] + '  <nav class="eqtabs" aria-label="Seções"><a href="/equipe/#inicio">Início</a><a href="/equipe/#pauta">Pauta</a><a href="/compendio/" aria-current="page">Compêndio</a></nav><span class="eqsp"></span>\n' + t[k:]
+    t = t[:k] + ('  <nav class="eqtabs" aria-label="Gabinete CMT"><a href="/equipe/#inicio" data-eqlink>Início</a><a href="/equipe/#pauta" data-eqlink>Pauta</a></nav>'
+                 '<nav class="eqtabs eq-cpn" aria-label="Compêndio"><span class="eq-grp">' + rotulo + '<span class="tabs eq-sec" role="tablist" aria-label="Seções do Compêndio">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
     a = '  </div>\n</header>\n'
-    t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a + '<div class="cp-sub">\n' + secoes + '</div>\n')
+    t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a)
     js += '\n' + (H/'eqnav.js').read_text(encoding='utf-8')
     t = troca(t, "try{var th=localStorage.getItem('vdm-theme');if(th)document.documentElement.setAttribute('data-theme',th);}catch(e){}",
               "try{var th=localStorage.getItem('cmt-eq-tema')||'light';document.documentElement.setAttribute('data-theme',th);}catch(e){}")
@@ -210,7 +219,7 @@ def montar(var):
 def gerar_html(var):
     t, js, css, pre = montar(var)
     for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
-             ('/*__DATA__*/', (H/'snapshot.json').read_text(encoding='utf-8').strip()),
+             ('/*__DATA__*/', (RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')),
              ('/*__EDITORIAL__*/', EDJ),
              ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + gz + '</script>'),
              ('</style>\n</head>', css + '</style>\n</head>'),
