@@ -173,14 +173,14 @@ def montar(var):
     """var = 'compendio' (um só código: modo padrão para todos; modo avançado liberado pelo login, ver acesso.js)
              'editor'    (página do editor: grava no procs-muta pelo servidor; /editor/)"""
     t = t0
-    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8') + '\n' + (H/'juris.js').read_text(encoding='utf-8'))
-    css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'juris.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8') + (H/'editorial_d.css').read_text(encoding='utf-8')
+    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'juris.js').read_text(encoding='utf-8'))
+    css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'juris.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8') + (H/'editorial_d.css').read_text(encoding='utf-8')
     # abas do modo avançado: Enunciados, Repertório e Enciclopédia (escondidas até o login com acesso)
     t = troca(t, '<button class="tab" role="tab" data-v="temas" aria-selected="true">Enunciados</button>', '<button class="tab" role="tab" data-v="temas" aria-selected="false" data-av hidden>Enunciados</button>')
     t = troca(t, '<button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>', '<button class="tab" role="tab" data-v="rep" aria-selected="false" data-av hidden>Repertório</button>')
     a = '    <button class="tab" role="tab" data-v="edit" aria-selected="false">Editorial</button>\n'
     t = troca(t, a, a + '    <button class="tab" role="tab" data-v="enc" aria-selected="false" data-av hidden>Enciclopédia</button>\n')
-    t = troca(t, '<section id="v-consulta" hidden>', ENC_SECAO + '<section id="v-consulta" hidden>')
+    t = troca(t, '<section id="v-dir" hidden>', ENC_SECAO + '<section id="v-dir" hidden>')
     t = t.replace('<section id="v-temas">', '<section id="v-temas" hidden>', 1)
     # Diretrizes: manual de redação novo (documento próprio, embutido; Padrões decisórios só no acesso avançado)
     t = troca(t, '<section id="v-dir" hidden>', '<script type="application/json" id="dir-manual">' + json.dumps((H/'diretrizes_manual.html').read_text(encoding='utf-8'), ensure_ascii=False).replace('<', '\\u003c') + '</script>\n<section id="v-dir" hidden>')
@@ -202,7 +202,7 @@ def montar(var):
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
     secoes = t[i0:i1]; t = t[:i0] + t[i1:]
     abas = secoes[secoes.index('>') + 1:secoes.rindex('</nav>')]
-    ordem = ['ement', 'edit', 'dir', 'consulta', 'temas', 'rep', 'enc']
+    ordem = ['ement', 'edit', 'dir', 'temas', 'rep', 'enc']
     lin = {}
     for l in abas.strip().split('\n'):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l

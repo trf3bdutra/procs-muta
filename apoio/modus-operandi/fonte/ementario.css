@@ -645,3 +645,5 @@ body:not(.vdm-ed) #openSheet{display:none!important}
 .rap-ok{color:#3f7a50;font-weight:700}
 .rap-a{display:flex;gap:6px;margin-top:8px}
 @media (max-width:700px){.rap-novo{grid-template-columns:1fr;grid-template-areas:"t" "x" "o" "b"}}
+
+.ac-btn small{font:500 9px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-left:6px}

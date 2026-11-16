@@ -1,5 +1,5 @@
 /* ================= ACESSO: perfis do Modus Operandi (apoio/acessos.json), cada um inclui o anterior =================
-   equipe (todos, com ou sem login): Ementário, Editorial, Diretrizes com as entradas rápidas e Consulta, só leitura
+   equipe (todos, com ou sem login, sem precisar entrar): Ementário, Minuta-Matriz, Modelos e Diretrizes, só leitura
    avancado: + Enunciados, Repertório, Enciclopédia (conteúdo vindo do /api/compendio) e atalho do Monitor
    editor: + edição de tudo (botões Editar, entradas rápidas e a página /editor/) */
 (function(){
@@ -22,7 +22,7 @@
   function chip(){var c=q('#ac-chip');if(!c)return;
     if(!SITE){c.innerHTML='<span class="ac-off" title="Aberto como arquivo: os perfis Avançado e Editor funcionam no site do gabinete, com login">perfil Equipe · arquivo local</span>';return;}
     if(!AC.ok){c.innerHTML='';return;}
-    if(!AC.usuario){c.innerHTML='<button class="ac-btn" data-acentra title="Entrar com o login do Ex Officio">Entrar</button>';return;}
+    if(!AC.usuario){c.innerHTML='<button class="ac-btn" data-acentra title="A consulta é livre; o login do Ex Officio abre o acesso avançado">Entrar <small>acesso avançado</small></button>';return;}
     var PN={equipe:'Equipe',avancado:'Avançado',editor:'Editor'};
     var h='<span class="ac-u" title="Conectado como '+e(AC.usuario)+'">'+e(AC.usuario)+'</span><span class="ac-p" title="Perfil no Modus Operandi (apoio/acessos.json)">'+PN[AC.perfil]+'</span>';
     c.innerHTML=h+'<button class="ac-sair" data-acsai title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button>';}
