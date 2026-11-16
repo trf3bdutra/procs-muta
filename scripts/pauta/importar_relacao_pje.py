@@ -18,7 +18,7 @@ Uso: python3 scripts/pauta/importar_relacao_pje.py RELATORIO.xlsx [mais.xlsx ...
 Sem --gravar, só mostra o que mudaria.
 """
 import argparse, json, pathlib, re, sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 import openpyxl
 
@@ -142,7 +142,7 @@ def importar(op, sessao, executado, procs):
                 pon('origem', 'Sentença - Data', sent['data'], so_vazio=True)
                 pon('origem', 'Origem - Julgador', sent['magistrado'], so_vazio=True)
         if json.dumps(r, ensure_ascii=False, sort_keys=True) != antes:
-            r['origem']['atualizado_em'] = datetime.utcnow().isoformat(timespec='milliseconds') + 'Z'
+            r['origem']['atualizado_em'] = datetime.now(timezone.utc).replace(tzinfo=None).isoformat(timespec='milliseconds') + 'Z'
             mud += 1
     return mud, novos, por_campo
 
@@ -161,7 +161,7 @@ def main():
         for k, n in sorted(por.items()):
             print(f'  {k}: {n}')
     if a.gravar:
-        op['atualizado_em'] = datetime.utcnow().isoformat(timespec='milliseconds') + 'Z'
+        op['atualizado_em'] = datetime.now(timezone.utc).replace(tzinfo=None).isoformat(timespec='milliseconds') + 'Z'
         OP.write_text(json.dumps(op, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
         print('gravado em acervo/operacional.json')
     else:
