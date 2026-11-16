@@ -1319,6 +1319,7 @@ function renderPanel(){
 /* =================== GRANDES FLUXOS =================== */
 let bigIdx = 0;
 function buildBig(){
+  if (!$('#ftabs') || !$('#bigflow')) return;
   $('#ftabs').innerHTML = BIG.map((b, i) => `<button class="chipbtn ftab ${i===bigIdx?'on':''}" data-i="${i}">${['I','II','III'][i]} · ${b.t}</button>`).join('');
   document.querySelectorAll('.ftab').forEach(b => b.onclick = () => { bigIdx = +b.dataset.i; buildBig(); });
   draw($('#bigflow'), BIG[bigIdx].src);

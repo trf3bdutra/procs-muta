@@ -70,3 +70,6 @@ html:not([data-theme="dark"]) #cmt-base-v2 .cb2-message{border-radius:0!importan
 html:not([data-theme="dark"]) #cmt-base-v2 .cb2-message.is-error{border-left-color:#a5382a!important;background:#fff1ee!important;color:#8c312c!important}
 @media (max-width:760px){html:not([data-theme="dark"]) #cmt-base-v2 .cb2-surface{grid-template-columns:1fr}html:not([data-theme="dark"]) #cmt-base-v2 .cb2-tabs{flex-direction:row!important;overflow:auto;border-right:0}html:not([data-theme="dark"]) #cmt-base-v2 .cb2-main{grid-column:1}}
 html:not([data-theme="dark"]) #cmt-base-v2 .cb2-drop{border-radius:0!important;border-color:#bcb7a9!important;background:var(--pp-p)!important}
+
+/* celular: a Triagem (motor) começa logo depois do trilho recolhido, sem a faixa vazia */
+@media (max-width:700px){html body.cmt-acv:not(.cmt-cfg-on):not(.cmt-ficha-on):not(.cmt-token) #cmt-motor{left:70px!important;width:calc(100vw - 70px)!important}}

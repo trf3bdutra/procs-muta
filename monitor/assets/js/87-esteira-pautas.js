@@ -184,6 +184,7 @@
       ${d.pauta ? listagem(d, 'Listagem da pauta') : ''}</section>`;
   }
   function etapa5(ss, d) {
+    if (!d.pauta) return `<section class="cwe-st"><h2>5 · Painel da sessão</h2><p class="cwe-nota">O painel da sessão aparece depois da pauta oficial. A sessão de ${e(A.br(ss.data))} ainda não tem pauta.</p></section>`;
     const L = d.lines, N = L.length || 1, P = d.plan;
     const kp = [[L.length, 'itens'], [d.metas, 'com meta CNJ'], [d.tipos.AgInt, 'agravos internos'], [d.tipos.ED, 'embargos'], [d.tipos.JR, 'retratação'], [d.tipos.ret, 'retirados e adiados'], [d.info.unassigned, 'sem minutante'], [d.info.unrevised, 'sem corretor'], [L.filter((x) => x.dataMinuta).length, 'minutadas'], [L.filter((x) => x.dataCorrecao).length, 'corrigidas'], [d.info.released, 'liberadas'], [d.foraAc, 'fora do acervo']];
     const B = [['APRECIAÇÃO', conta(P, (p) => p['Apreciação'])], ['CLASSE', conta(L, (x) => x.recurso || x.classe)], ['META', conta(P, (p) => p.Meta || 'sem meta')], ['MINUTANTE', conta(L, (x) => x.servidor || 'sem minutante')], ['CORRETOR', conta(L, (x) => x.corretor || 'sem corretor')], ['ASSUNTO · 10 MAIS', conta(L, (x) => x.assunto, 10)], ['SEÇÃO', conta(L, (x) => x.secao)], ['TAREFA NO PJe', conta(L, (x) => x.tarefa || 'sem tarefa', 7)], ['ETAPA', conta(L, situacao)], ['PENDÊNCIAS DA FICHA', conta(P.flatMap((p) => (p['Pendências'] || '').split(' · ').filter(Boolean)).map((t) => ({ t })), (o) => o.t)], ['INTERVENÇÃO DO MPF', conta(P, (p) => p['Intervenção MPF'] || 'sem hipótese marcada')], ['TEMPESTIVIDADE', conta(P, (p) => p.Tempestividade)]];

@@ -1,5 +1,7 @@
 # Publica o CMT-monitor no projeto trf3-muta da Vercel (trf3-muta.vercel.app).
-# Vão para a Vercel: o Ab Initio modular (/monitor/: index.html, assets/ e motor/ juntos; a raiz leva a ele),
+# Vão para a Vercel: o Ab Initio modular (/monitor/: index.html, assets/ e motor/ juntos),
+# ATENÇÃO: as Rotas do projeto no painel da Vercel valem antes deste vercel.json: "/", "/equipe" e "/hub" → /office/ (Ex Officio)
+# e "/monitor" → /monitor/index.html (Ab Initio). Mudança de endereço se faz lá.
 # o Modus Operandi público (/modus/, com /compendio/ mantido), a Ex Officio (/equipe/) e as funções /api/* (login da equipe e leitura/gravação
 # das pautas no procs-muta, com o GH_TOKEN guardado na Vercel), o editor do Modus Operandi (/editor/)
 # e a Enciclopédia, servida só pelo /api/compendio a quem tem o modo avançado (apoio/acessos.json).
