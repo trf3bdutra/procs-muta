@@ -69,3 +69,4 @@ html:not([data-theme="dark"]) #cmt-base-v2 :is(.cb2-outline,.cb2-shortcuts butto
 html:not([data-theme="dark"]) #cmt-base-v2 .cb2-message{border-radius:0!important;border:0!important;border-left:3px solid var(--pp-t)!important;background:var(--pp-p)!important;color:var(--pp-tx)!important}
 html:not([data-theme="dark"]) #cmt-base-v2 .cb2-message.is-error{border-left-color:#a5382a!important;background:#fff1ee!important;color:#8c312c!important}
 @media (max-width:760px){html:not([data-theme="dark"]) #cmt-base-v2 .cb2-surface{grid-template-columns:1fr}html:not([data-theme="dark"]) #cmt-base-v2 .cb2-tabs{flex-direction:row!important;overflow:auto;border-right:0}html:not([data-theme="dark"]) #cmt-base-v2 .cb2-main{grid-column:1}}
+html:not([data-theme="dark"]) #cmt-base-v2 .cb2-drop{border-radius:0!important;border-color:#bcb7a9!important;background:var(--pp-p)!important}
