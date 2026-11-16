@@ -111,6 +111,39 @@
        "chave": "Origem - Valor da causa",
        "tipo": "texto",
        "secao": "origem"
+      },
+      {
+       "rotulo": "Processo de referência",
+       "chave": "Origem - Processo de referência",
+       "tipo": "texto",
+       "secao": "origem",
+       "editavel": false,
+       "regra": "Processo_Referencia do relatório 151 do PJe; no agravo de instrumento, o processo de 1º grau"
+      },
+      {
+       "rotulo": "Documentos do 1º grau",
+       "chave": "Origem - Documentos 1G",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "documento",
+         "rotulo": "Documento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "magistrado",
+         "rotulo": "Magistrado(a)",
+         "tipo": "texto"
+        }
+       ],
+       "editavel": false,
+       "regra": "data_doc_1g, documento_1g e magistrado_1g do relatório 151 do PJe (uma linha por documento)"
       }
      ]
     },
@@ -1737,6 +1770,54 @@
        "chave": "Motivo da remarcação",
        "tipo": "texto",
        "secao": "pauta"
+      },
+      {
+       "rotulo": "Publicação da pauta",
+       "chave": "Pauta - Publicação",
+       "tipo": "texto",
+       "secao": "pauta",
+       "editavel": false,
+       "regra": "dt_publicacao da Relação de Processos da sessão (PJe 2G, relatório 151)"
+      },
+      {
+       "rotulo": "Inclusão na pauta",
+       "chave": "Pauta - Inclusão",
+       "tipo": "texto",
+       "secao": "pauta",
+       "editavel": false,
+       "regra": "tp_insercao do relatório 151, como vem do PJe (N ou M) [VALIDAR significado]"
+      },
+      {
+       "rotulo": "Proclamação do julgamento",
+       "chave": "Pauta - Proclamação",
+       "tipo": "texto",
+       "secao": "pauta",
+       "editavel": false,
+       "regra": "proclamacao_decisao do relatório 151, depois da sessão"
+      },
+      {
+       "rotulo": "Último movimento",
+       "chave": "Pauta - Último movimento",
+       "tipo": "texto",
+       "secao": "pauta",
+       "editavel": false,
+       "regra": "ds_ultimo_movimento do relatório 151 (ex.: intimação de pauta publicada)"
+      },
+      {
+       "rotulo": "MPU",
+       "chave": "Pauta - MPU",
+       "tipo": "texto",
+       "secao": "pauta",
+       "editavel": false,
+       "regra": "mpu do relatório 151, SIM ou NÃO [VALIDAR significado]"
+      },
+      {
+       "rotulo": "Relação do PJe importada em",
+       "chave": "Pauta - Importado em",
+       "tipo": "texto",
+       "secao": "pauta",
+       "editavel": false,
+       "regra": "data e hora da importação do relatório 151"
       }
      ]
     }
