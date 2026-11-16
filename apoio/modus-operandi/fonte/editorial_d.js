@@ -523,7 +523,7 @@ try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f
    abas comuns (Ementário · Padrão: Minuta-Matriz e Modelos · Diretrizes · Consulta) e abas do acesso avançado (Enunciados · Repertório · Enciclopédia) ===== */
 (function(){var top=document.querySelector('header.top');if(!top)return;
   var IT=[['ement','Ementário','','precedentes'],['|'],['pecas','Minuta-Matriz','Padrão','estrutura da peça'],['mod','Modelos','','textos fixados'],['|'],['dir','Diretrizes','','regras de redação'],['||'],['temas','Enunciados','Acesso avançado','temas e súmulas'],['rep','Repertório','','normas e grafia'],['enc','Enciclopédia','','rotina e recursos']];
-  var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Modus Operandi');
+  var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compendium');
   var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
     var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false"><span class="cn-tt">'+x[1]+(x[3]?'<small>'+x[3]+'</small>':'')+'</span></button>';});
   bar.innerHTML=h+'</div>';top.parentNode.insertBefore(bar,top.nextSibling);document.body.classList.add('cmp-nav-fora');
