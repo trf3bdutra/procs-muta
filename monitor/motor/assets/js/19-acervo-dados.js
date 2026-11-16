@@ -398,6 +398,16 @@
       tocados.push(r);
       if (novo) criados++; else if (hashLinha(r) !== antes) atualizados++; else iguais++;
     }
+    /* a fonte do repositório é a lista inteira dos processos do gabinete (scripts/painel/atualizar_fonte.py):
+       quem não está mais nela (baixado, arquivado, redistribuído) sai também da cópia deste navegador,
+       salvo linha com alteração local ainda não gravada (_acervoPend) */
+    let removidos = 0;
+    if (v2 && origem === "repositório" && regs.length) {
+      const naFonte = new Set(regs.map(rec => procId(txt(rec && (rec.processo || rec.Processo)))).filter(Boolean));
+      const antes = c.rows.length;
+      c.rows = c.rows.filter(r => { const p = procId(r.Processo || r.processo); return !p || naFonte.has(p) || r._acervoPend; });
+      removidos = antes - c.rows.length;
+    }
     // estado geral (sessões, equipe, escaninhos, calendário, colunas…): vale o mais recente
     if (v2 && doc.painel && doc.painel.dados) {
       const pl = lerPainelLocal();
@@ -412,14 +422,14 @@
         gravarPainelLocal({ sync: doc.painel.atualizado_em, hash: fnv(JSON.stringify(painelDados(c))), pend: false });
       }
     }
-    if (criados || atualizados || geral) {
+    if (criados || atualizados || geral || removidos) {
       c.rows = c.rows.map(r => c.ensureShape(r));
       tocados.forEach(r => { try { c.recompute(r); } catch (e) {} r._acervoHash = hashLinha(r); });
       if (geral) gravarPainelLocal({ ...lerPainelLocal(), hash: fnv(JSON.stringify(painelDados(c))) });
       await c.saveDB(); c.refresh();
     } else tocados.forEach(r => { r._acervoHash = hashLinha(r); });
-    const msg = `Banco do acervo (${origem}): ${criados} novo(s) · ${atualizados} atualizado(s) · ${iguais} já em dia` + (ignorados ? ` · ${ignorados} ignorado(s)` : "") + (geral ? " · sessões, equipe, escaninhos e configurações atualizados" : "") + ".";
-    return { criados, atualizados, iguais, ignorados, geral, msg };
+    const msg = `Banco do acervo (${origem}): ${criados} novo(s) · ${atualizados} atualizado(s) · ${iguais} já em dia` + (ignorados ? ` · ${ignorados} ignorado(s)` : "") + (removidos ? ` · ${removidos} saíram do gabinete` : "") + (geral ? " · sessões, equipe, escaninhos e configurações atualizados" : "") + ".";
+    return { criados, atualizados, iguais, ignorados, removidos, geral, msg };
   }
 
   async function puxar(silencioso) {
@@ -429,7 +439,7 @@
       const doc = await lerRemoto();
       ST.total = (doc.registros || []).length; ST.versao = doc.atualizado_em || doc.versao || ""; ST.lidoEm = agora();
       const r = await receber(doc, "repositório");
-      if (!silencioso || r.criados || r.atualizados || r.geral) avisar(r.msg, "ok"); else desenhar();
+      if (!silencioso || r.criados || r.atualizados || r.removidos || r.geral) avisar(r.msg, "ok"); else desenhar();
       return r;
     } catch (e) {
       ST.erro = e.message || String(e);
