@@ -1084,6 +1084,76 @@ html[data-theme=dark] #v-cmt{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a
 .cmt-q h2 .cmt-out{color:var(--em);text-decoration:none;border-bottom:1px solid var(--el2);padding-bottom:1px;font-weight:400;font-size:11.5px}
 .cmt-q h2 .cmt-out:hover{color:var(--eg);border-color:var(--eg)}
 #cmt-ed-f{display:block;width:calc(100% + 36px);margin:0 -18px;height:74vh;min-height:520px;border:0;background:var(--ew)}
+
+.cmt-lay{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:22px;align-items:start}
+.cmt-main{min-width:0}
+.cmt-rail{position:sticky;top:76px;display:flex;flex-direction:column;gap:16px}
+.cmt-rc2{border-top:2px solid var(--eg);background:var(--ep);border:1px solid var(--el);border-top:2px solid var(--eg);padding:0 12px 12px}
+.cmt-rc2 .cmt-k{margin:10px 0 6px}
+.cmt-pg{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(220px,.95fr);gap:0 20px;padding-top:12px}
+.cmt-pg>div+div{border-left:1px solid var(--el);padding-left:20px}
+.cmt-cal-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.cmt-cal-h b{flex:1;font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--ei)}
+.cmt-mb,.cmt-hoje{border:1px solid var(--el);background:var(--ew);color:var(--em);border-radius:0;min-height:24px;padding:0 8px;cursor:pointer;font-size:12px}
+.cmt-hoje{font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase}
+.cmt-mb:hover,.cmt-hoje:hover{border-color:var(--eg);color:var(--eg)}
+.cmt-wk,.cmt-dg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.cmt-wk b{text-align:center;font:400 9px var(--emono);color:var(--em);padding:3px 0;font-weight:400}
+.cmt-d{height:40px;border-top:1px solid var(--el);padding:3px 4px;font-size:11px;color:var(--ei2,#45605d);position:relative}
+.cmt-d.fora{opacity:.3}
+.cmt-d.hoje{box-shadow:inset 0 2px 0 var(--eo);color:var(--eo2);font-weight:700}
+.cmt-d i{position:absolute;bottom:4px;left:4px;font:400 8px var(--emono);font-style:normal;color:var(--eg);letter-spacing:.06em}
+.cmt-d.sel{background:var(--ep2)}
+.cmt-leg{display:flex;flex-wrap:wrap;gap:6px 12px;margin:10px 0 0;font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+.cmt-leg span{display:flex;align-items:center;gap:5px}
+.cmt-leg b{display:inline-grid;place-items:center;width:14px;height:14px;border:1px solid var(--el2);color:var(--eg);font-size:8px}
+.cmt-ml{list-style:none;margin:0;padding:0}
+.cmt-ml li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:baseline;border-top:1px solid var(--el);padding:8px 0;font-size:12.5px}
+.cmt-ml li:first-child{border-top:0}
+.cmt-ml b{display:grid;place-items:center;width:17px;height:17px;border:1px solid var(--el2);font:400 8.5px var(--emono);color:var(--em)}
+.cmt-ml li.prox b{border-color:var(--eg);background:var(--eg);color:var(--ep)}
+.cmt-ml li.feito{color:var(--em)}
+.cmt-ml small{display:block;color:var(--em);font-size:10.5px}
+.cmt-ml time{font:400 10.5px var(--emono);color:var(--em)}
+.cmt-met{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:14px;border-top:1px solid var(--el)}
+.cmt-met div{padding:10px 14px;border-left:1px solid var(--el)}
+.cmt-met div:first-child{border-left:0;padding-left:0}
+.cmt-met span{display:block;font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+.cmt-met b{display:block;font:400 22px var(--emono);letter-spacing:-.03em;color:var(--eo2);margin-top:2px}
+.cmt-met small{display:block;color:var(--em);font-size:10.5px}
+.cmt-ft{display:flex;flex-wrap:wrap;gap:0;margin:0 -18px;border-bottom:1px solid var(--el)}
+.cmt-ft button{border:0;border-right:1px solid var(--el);background:transparent;color:var(--em);font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;padding:9px 13px;cursor:pointer}
+.cmt-ft button:first-child{padding-left:18px}
+.cmt-ft button[aria-pressed=true]{color:var(--ei);box-shadow:inset 0 -2px 0 var(--eg)}
+.cmt-ft button:hover{color:var(--eg)}
+.cmt-ft button i{font-style:normal;color:var(--eo2);margin-left:5px}
+.cmt-bus{margin:0 -18px;border-bottom:1px solid var(--el)}
+.cmt-bus input{width:100%;border:0;background:transparent;color:var(--ei);font-size:12.5px;padding:10px 18px;min-height:38px}
+.cmt-tw{overflow-x:auto;margin:0 -18px}
+.cmt-tb{width:100%;border-collapse:collapse;font-size:12.5px;min-width:720px}
+.cmt-tb th{text-align:left;font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);font-weight:400;padding:8px 10px;border-bottom:1px solid var(--el)}
+.cmt-tb th:first-child,.cmt-tb td:first-child{padding-left:18px}
+.cmt-tb td{border-bottom:1px solid var(--el);padding:9px 10px;color:var(--ei);vertical-align:top}
+.cmt-tb tr:hover td{background:var(--ep2)}
+.cmt-tb .cmt-ii{font:400 11px var(--emono);color:var(--eo2)}
+.cmt-tb .cnj{font:400 11px var(--emono)}
+.cmt-tb .as{display:block}
+.cmt-tb .as small{display:block;color:var(--em);font-size:10.5px}
+.cmt-et{font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);white-space:nowrap}
+.cmt-et.liberado{color:var(--eg)}
+.cmt-et.corrigido{color:#2d6fa8}
+.cmt-et.pendente{color:#a7433d}
+.cmt-at{font:400 10px var(--emono);color:var(--eo2)}
+.cmt-rc{margin:10px 0 0;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+.cmt-sl{display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--el);background:transparent;color:var(--ei);padding:8px 0;cursor:pointer;font-size:12.5px}
+.cmt-sl:first-child{border-top:0}
+.cmt-sl b{font:400 11px var(--emono)}
+.cmt-sl small{display:block;color:var(--em);font-size:10.5px}
+.cmt-sl[aria-pressed=true]{box-shadow:inset 3px 0 0 var(--eg);padding-left:9px}
+.cmt-sl:hover{color:var(--eg)}
+@media (max-width:1100px){.cmt-lay{grid-template-columns:1fr}.cmt-rail{position:static;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.cmt-pg{grid-template-columns:1fr}.cmt-pg>div+div{border-left:0;padding-left:0;border-top:1px solid var(--el);margin-top:14px;padding-top:14px}}
+@media (max-width:860px){.cmt-rail{grid-template-columns:1fr}.cmt-met{grid-template-columns:1fr 1fr}.cmt-met div{border-left:0;padding-left:0;border-top:1px solid var(--el)}.cmt-met div:nth-child(2){border-left:1px solid var(--el);padding-left:14px}.cmt-met div:nth-child(4){border-left:1px solid var(--el);padding-left:14px}}
+@media print{#app header,.cmt-rail,.cmt-ed,.cmt-hero .b,.cmt-ft,.cmt-bus,#cmt-pauta h2 .b{display:none!important}.cmt-lay{display:block}.cmt-q{break-inside:avoid}}
 .cmt-fontes{margin:18px 0 0;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
 @media (max-width:860px){#v-cmt{padding:0 14px 30px}.cmt-cols{grid-template-columns:1fr}.cmt-cols>div+div{border-left:0;padding-left:0;margin-left:0;border-top:1px solid var(--el);margin-top:12px}.cmt-hero h1{font-size:28px}}
 /* ===== Diligências no padrão editorial: papel, filetes, cantos retos e rótulos em mono ===== */
@@ -1484,13 +1554,33 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
     <div class="cmt-load" id="cmt-load"><i class="star"></i><p class="cmt-ld-k">Gabinete</p><p class="cmt-ld-t">Painel do <em>desembargador.</em></p><p class="cmt-ld-m" id="cmt-ld-m">Lendo a ficha única, o calendário das sessões e as pautas publicadas…</p><div class="cmt-ld-b"><i></i></div></div>
     <div class="cmt-wrap" id="cmt-wrap" hidden>
       <div class="cmt-hero"><p class="cmt-ey">05 / Gabinete</p><h1>Painel do <em>desembargador.</em></h1><p class="cmt-sub" id="cmt-sub"></p><button type="button" class="b" id="cmt-atu">Atualizar</button></div>
+      <div class="cmt-lay">
+      <div class="cmt-main">
+      <section class="cmt-q cmt-pan"><h2>Panorama da sessão <span class="cmt-n" id="cmt-n-pan">—</span></h2>
+        <div class="cmt-pg">
+          <div class="cmt-cal-w"><div class="cmt-cal-h"><button type="button" class="cmt-mb" data-mes="-1" aria-label="Mês anterior">‹</button><b id="cmt-mes">—</b><button type="button" class="cmt-mb" data-mes="1" aria-label="Próximo mês">›</button><button type="button" class="cmt-hoje" id="cmt-hoje">Hoje</button></div><div id="cmt-cal"></div><p class="cmt-leg"><span><b>P</b>Pautar até</span><span><b>I</b>Início da preparação</span><span><b>E</b>Entrega das minutas</span><span><b>L</b>Liberação</span><span><b>S</b>Sessão</span></p></div>
+          <div class="cmt-mar"><p class="cmt-k" id="cmt-mar-t">Marcos da sessão</p><ol class="cmt-ml" id="cmt-ml"></ol></div>
+        </div>
+        <div class="cmt-met" id="cmt-met"></div>
+      </section>
+      <section class="cmt-q cmt-dk" id="cmt-pauta"><h2>Pauta da sessão <span class="cmt-n" id="cmt-n-pt">—</span><span class="cmt-sp"></span><button type="button" class="b" id="cmt-csv">CSV</button><button type="button" class="b" id="cmt-imp">Imprimir</button></h2>
+        <div class="cmt-ft" id="cmt-ft"></div>
+        <div class="cmt-bus"><input type="search" id="cmt-q" placeholder="Itens (2, 5-9), número, assunto ou servidor" aria-label="Buscar na pauta"></div>
+        <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Atenção</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
+        <p class="cmt-rc" id="cmt-rc"></p>
+      </section>
       <section class="cmt-q" id="cmt-assinar"><h2>Assinar e liberar <span class="cmt-n" id="cmt-n-as">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Aguardam assinatura</p><div id="cmt-l-ass"></div></div><div><p class="cmt-k">Aguardam liberação</p><div id="cmt-l-lib"></div></div></div></section>
-      <section class="cmt-q" id="cmt-urg"><h2>Urgências e prazos <span class="cmt-n" id="cmt-n-ur">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Pedidos não apreciados</p><div id="cmt-l-urg"></div></div><div><p class="cmt-k">Marcos vencendo</p><div id="cmt-l-pz"></div></div></div></section>
-      <section class="cmt-q" id="cmt-ses"><h2>Panorama das sessões <span class="cmt-n" id="cmt-n-se">—</span></h2><div id="cmt-l-ses"></div></section>
       <section class="cmt-q" id="cmt-eq"><h2>Equipe e ausências <span class="cmt-n" id="cmt-n-eq">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Produção nas pautas publicadas</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
       <section class="cmt-q cmt-ed" id="cmt-editor"><h2>Editor do Modus Operandi <span class="cmt-n" id="cmt-n-ed">fechado</span><span class="cmt-sp"></span><a class="cmt-out" id="cmt-ed-out" href="/editor/" target="_blank" rel="noopener">Abrir em outra aba ↗</a><button type="button" class="b" id="cmt-ed-ab">Abrir aqui</button></h2>
         <div class="cmt-ed-b" id="cmt-ed-b" hidden><iframe id="cmt-ed-f" title="Editor do Modus Operandi" loading="lazy"></iframe></div></section>
       <p class="cmt-fontes" id="cmt-fontes"></p>
+      </div>
+      <aside class="cmt-rail">
+        <section class="cmt-rc2"><p class="cmt-k">Sessões</p><div id="cmt-l-ses"></div></section>
+        <section class="cmt-rc2"><p class="cmt-k">Urgências <span class="cmt-n" id="cmt-n-ur">—</span></p><div id="cmt-l-urg"></div></section>
+        <section class="cmt-rc2"><p class="cmt-k">Marcos vencendo</p><div id="cmt-l-pz"></div></section>
+      </aside>
+      </div>
     </div>
   </main>
 
@@ -3109,6 +3199,75 @@ function cmtCarregar(){
       $('#cmt-sub').textContent=(e&&e.erro)||'Não foi possível montar o painel.';})
     .then(function(){clearInterval(tm);CMT.carregando=false;});}
 function cmtLista(el,itens,monta){var h=(itens||[]).map(monta).join('');$(el).innerHTML=h||'<p class="cmt-vazio">Nada pendente.</p>';}
+var CMTM={pautarAte:['P','Pautar até'],inicioPreparacao:['I','Início da preparação'],entregaMinutas:['E','Entrega das minutas'],liberacao:['L','Liberação']};
+function cmtDias(a,b){return Math.round((Date.parse(a+'T12:00:00Z')-Date.parse(b+'T12:00:00Z'))/86400e3);}
+function cmtMesNome(d){return new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'}).format(d);}
+/* calendário do mês com os marcos das sessões visíveis */
+function cmtCal(){
+  var j=CMT.dados;if(!j)return;var m=CMT.mes||new Date(Date.parse((j.hoje||'2026-01-01')+'T12:00:00Z'));CMT.mes=m;
+  var y=m.getUTCFullYear(),mo=m.getUTCMonth(),ini=new Date(Date.UTC(y,mo,1)),nd=new Date(Date.UTC(y,mo+1,0)).getUTCDate(),off=ini.getUTCDay();
+  var marca={};(j.agenda||[]).forEach(function(s){
+    Object.keys(CMTM).forEach(function(k){var d=(s.marcos||{})[k];if(d){if(!marca[d])marca[d]=[];marca[d].push(CMTM[k][0]+' · sessão de '+br(s.date));}});
+    if(!marca[s.date])marca[s.date]=[];marca[s.date].push('S · sessão de '+br(s.date));});
+  $('#cmt-mes').textContent=cmtMesNome(ini);
+  var h='<div class="cmt-wk"><b>D</b><b>S</b><b>T</b><b>Q</b><b>Q</b><b>S</b><b>S</b></div><div class="cmt-dg">';
+  var total=Math.ceil((off+nd)/7)*7;
+  for(var c=0;c<total;c++){
+    var dt=new Date(Date.UTC(y,mo,c-off+1)),iso=dt.toISOString().slice(0,10),den=dt.getUTCMonth()===mo;
+    var mk=marca[iso]||[],cls='cmt-d'+(den?'':' fora')+(iso===j.hoje?' hoje':'')+(iso===(j.pauta||{}).date?' sel':'');
+    var letras=mk.map(function(x){return x.charAt(0);}).join('');
+    h+='<div class="'+cls+'" title="'+esc(mk.join(' · '))+'">'+dt.getUTCDate()+(mk.length?'<i>'+esc(letras)+'</i>':'')+'</div>';}
+  $('#cmt-cal').innerHTML=h+'</div>';}
+/* marcos da sessão aberta, com o próximo em destaque */
+function cmtMarcos(){
+  var j=CMT.dados,sd=(j.pauta||{}).date||'';
+  var d=(j.agenda||[]).filter(function(s){return s.date===sd;})[0]||{marcos:{}};
+  $('#cmt-mar-t').textContent=sd?'Marcos · sessão de '+br(sd):'Marcos da sessão';
+  var ks=Object.keys(CMTM),prox=null;
+  ks.forEach(function(k){var x=(d.marcos||{})[k];if(x&&x>=j.hoje&&!prox)prox=k;});
+  var li=ks.map(function(k){var x=(d.marcos||{})[k];
+    if(!x)return '<li class="feito"><b>'+CMTM[k][0]+'</b><span>'+esc(CMTM[k][1])+'<small>não informado</small></span><time>—</time></li>';
+    var n=cmtDias(x,j.hoje);
+    return '<li class="'+(k===prox?'prox':x<j.hoje?'feito':'')+'"><b>'+CMTM[k][0]+'</b><span>'+esc(CMTM[k][1])+'<small>'+(x<j.hoje?'cumprido':n===0?'hoje':n===1?'amanhã':'em '+n+' dias')+'</small></span><time>'+esc(br(x))+'</time></li>';}).join('');
+  li+='<li class="'+(sd&&sd<j.hoje?'feito':'prox')+'"><b>S</b><span>Sessão de julgamento<small>'+(sd?(sd<j.hoje?'realizada':'em '+cmtDias(sd,j.hoje)+' dias'):'—')+'</small></span><time>'+esc(sd?br(sd):'—')+'</time></li>';
+  $('#cmt-ml').innerHTML=li;}
+/* pauta da sessão aberta: filtros por etapa e busca por item, número, assunto ou servidor */
+function cmtFiltra(){
+  var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'todos',q=(CMT.q||'').trim().toLowerCase();
+  var L=f==='todos'?it.slice():it.filter(function(x){return x.etapa===f;});
+  if(q){var fx=/^\d+(?:\s*[-,]\s*\d+)*$/.test(q);
+    L=L.filter(function(x){
+      if([x.item,x.cnj,x.assunto,x.classe,x.servidor,x.corretor,x.partes].join(' ').toLowerCase().indexOf(q)>=0)return true;
+      if(!fx)return false;var n=parseInt(x.item,10);if(isNaN(n))return false;
+      return q.split(/\s*,\s*/).some(function(p){var r=p.split('-');return r.length>1?(n>=+r[0]&&n<=+r[1]):+p===n;});});}
+  return L;}
+function cmtPauta(){
+  var j=CMT.dados,p=j.pauta||{itens:[]},it=p.itens||[];
+  var cta={todos:it.length,pendente:0,minutado:0,corrigido:0,liberado:0};
+  it.forEach(function(x){cta[x.etapa]=(cta[x.etapa]||0)+1;});
+  $('#cmt-n-pt').textContent=p.date?br(p.date)+(p.previa?' · prévia':''):'sem pauta';
+  var F=[['todos','Todos'],['pendente','Sem minuta'],['minutado','Minutadas'],['corrigido','Corrigidas'],['liberado','Liberadas']];
+  $('#cmt-ft').innerHTML=F.map(function(x){return '<button type="button" data-cf="'+x[0]+'" aria-pressed="'+((CMT.filtro||'todos')===x[0])+'">'+x[1]+'<i>'+(cta[x[0]]||0)+'</i></button>';}).join('');
+  var L=cmtFiltra(),NOME={pendente:'Sem minuta',minutado:'Minutada',corrigido:'Corrigida',liberado:'Liberada'};
+  $('#cmt-rows').innerHTML=L.length?L.map(function(x){
+    var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.meta)at.push('meta');
+    return '<tr><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span></td><td>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td><span class="cmt-et '+esc(x.etapa)+'">'+esc(NOME[x.etapa]||x.etapa)+'</span></td><td class="cmt-at">'+esc(at.join(' · ')||'—')+'</td></tr>';}).join(''):'<tr><td colspan="6" style="color:var(--em)">Nada nesta seleção.</td></tr>';
+  $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
+  var falta=it.length-(cta.liberado||0);
+  var nmin=it.filter(function(x){return x.dataMinuta;}).length,ncor=it.filter(function(x){return x.dataCorrecao;}).length;
+  var d=(j.agenda||[]).filter(function(s){return s.date===p.date;})[0]||{marcos:{}};
+  $('#cmt-met').innerHTML=''+
+    '<div><span>A liberar</span><b>'+falta+'</b><small>'+(d.marcos&&d.marcos.liberacao?'liberação em '+br(d.marcos.liberacao):'sem marco de liberação')+'</small></div>'+
+    '<div><span>Minutadas</span><b>'+nmin+'</b><small>de '+it.length+'</small></div>'+
+    '<div><span>Corrigidas</span><b>'+ncor+'</b><small>de '+it.length+'</small></div>'+
+    '<div><span>Liberadas</span><b>'+(cta.liberado||0)+'</b><small>de '+it.length+'</small></div>';
+  $('#cmt-n-pan').textContent=p.date?'sessão de '+br(p.date):'—';}
+function cmtCsv(){
+  var L=cmtFiltra(),h=['Item','Processo','Classe','Assunto','Servidor','Corretor','Etapa','Minuta','Correcao','Liberacao','Resultado'];
+  var li=[h].concat(L.map(function(x){return [x.item,x.cnj,x.classe,x.assunto,x.servidor,x.corretor,x.etapa,x.dataMinuta,x.dataCorrecao,x.dataLiberacao,x.resultado];}));
+  var csv=li.map(function(r){return r.map(function(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}).join(';');}).join('\r\n');
+  var b=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');
+  a.href=u;a.download='pauta-'+(((CMT.dados||{}).pauta||{}).date||'')+'.csv';a.click();URL.revokeObjectURL(u);toast('CSV da pauta baixado.');}
 function cmtPinta(){
   var j=CMT.dados;if(!j)return;$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
   var as=j.assinar||{assinatura:[],liberacao:[]};
@@ -3116,30 +3275,29 @@ function cmtPinta(){
   cmtLista('#cmt-l-ass',as.assinatura,function(x){return '<div class="cmt-it"><b>'+esc(x.cnj)+'</b><span>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · '))+'</span><time>liberada '+esc(br(x.desde))+'</time></div>';});
   cmtLista('#cmt-l-lib',as.liberacao,function(x){return '<div class="cmt-it"><b>'+esc(x.cnj)+'</b><span>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · '))+'</span><time>corrigida '+esc(br(x.desde))+'</time></div>';});
   var ur=j.urgencias||[],pz=j.prazos||[];
-  $('#cmt-n-ur').textContent=ur.length+' · '+pz.length+' marcos';
-  cmtLista('#cmt-l-urg',ur,function(x){var d=x.espera;return '<div class="cmt-it'+(d>=15?' alerta':d>=7?' atencao':'')+'"><b>'+esc(x.cnj)+'</b><span>'+esc([x.tipo,x.nivel,x.servidor].filter(Boolean).join(' · '))+'</span><time>'+(d==null?'':d===0?'hoje':d===1?'há 1 dia':'há '+d+' dias')+'</time></div>';});
-  cmtLista('#cmt-l-pz',pz,function(x){return '<div class="cmt-it'+(x.dias<0?' alerta':x.dias<=2?' atencao':'')+'"><b>'+esc(br(x.sessao))+'</b><span>'+esc(x.marco)+'</span><time>'+(x.dias<0?'vencido em '+esc(br(x.data)):x.dias===0?'hoje':x.dias===1?'amanhã':'em '+x.dias+' dias')+'</time></div>';});
-  var se=j.sessoes||[];$('#cmt-n-se').textContent=se.length+(se.length===1?' publicada':' publicadas');
-  $('#cmt-l-ses').innerHTML=se.length?'<table class="cmt-ses"><thead><tr><th>Sessão</th><th>Processos</th><th>Minutadas</th><th>Corrigidas</th><th>Liberadas</th><th>Entrega</th></tr></thead><tbody>'+
-    se.map(function(s){var pc=s.processos?Math.round(100*s.liberadas/s.processos):0;
-      return '<tr><td><b>'+esc(br(s.date))+'</b>'+(s.hora?' <span class="cmt-n">'+esc(s.hora)+'</span>':'')+'<span class="cmt-bar"><i style="width:'+pc+'%"></i></span></td><td>'+s.processos+'</td><td>'+s.minutadas+'</td><td>'+s.corrigidas+'</td><td>'+s.liberadas+'</td><td>'+esc(s.marcos&&s.marcos.entregaMinutas?br(s.marcos.entregaMinutas):'—')+'</td></tr>';}).join('')+
-    '</tbody></table>':'<p class="cmt-vazio">Nenhuma pauta publicada.</p>';
+  $('#cmt-n-ur').textContent=ur.length;
+  cmtLista('#cmt-l-urg',ur,function(x){var d=x.espera;return '<div class="cmt-it'+(d>=15?' alerta':d>=7?' atencao':'')+'"><b>'+esc(x.cnj)+'</b><span>'+esc([x.tipo,x.nivel].filter(Boolean).join(' · '))+'</span><time>'+(d==null?'':d===0?'hoje':'há '+d+(d===1?' dia':' dias'))+'</time></div>';});
+  cmtLista('#cmt-l-pz',pz,function(x){return '<div class="cmt-it'+(x.dias<0?' alerta':x.dias<=2?' atencao':'')+'"><b>'+esc(br(x.sessao))+'</b><span>'+esc(x.marco)+'</span><time>'+(x.dias<0?'vencido':x.dias===0?'hoje':x.dias===1?'amanhã':'em '+x.dias+' dias')+'</time></div>';});
+  var se=j.sessoes||[],sel=(j.pauta||{}).date;
+  $('#cmt-l-ses').innerHTML=se.length?se.map(function(s){
+    return '<button type="button" class="cmt-sl" data-cs="'+esc(s.date)+'" aria-pressed="'+(s.date===sel)+'"><b>'+esc(br(s.date))+'</b>'+(s.hora?' '+esc(s.hora):'')+'<small>'+s.processos+' processos · '+s.liberadas+' liberadas</small></button>';}).join(''):'<p class="cmt-vazio">Nenhuma pauta publicada.</p>';
   var eq=j.equipe||[],au=j.ausencias||[];
   $('#cmt-n-eq').textContent=eq.length+' · '+au.length+(au.length===1?' pedido':' pedidos');
   cmtLista('#cmt-l-eq',eq,function(x){return '<div class="cmt-it"><b>'+esc(x.nome)+'</b><span>'+x.minutasFeitas+'/'+x.minutas+' minutas · '+x.correcoesFeitas+'/'+x.correcoes+' correções</span></div>';});
   cmtLista('#cmt-l-aus',au,function(x){return '<div class="cmt-it"><b>'+esc(x.nome)+'</b><span>'+esc(x.tipo)+' · '+esc(br(x.de))+(x.ate!==x.de?' a '+esc(br(x.ate)):'')+'</span></div>';});
+  if(sel&&!CMT.mes)CMT.mes=new Date(Date.parse(sel+'T12:00:00Z'));
+  cmtCal();cmtMarcos();cmtPauta();
   var f=j.fontes||{};
   $('#cmt-sub').textContent='Tudo que depende de uma decisão sua, reunido das fontes oficiais do gabinete.';
   $('#cmt-fontes').textContent='Fontes · ficha única '+(f.ficha?'lida':'indisponível')+' · calendário '+(f.calendario?'lido':'indisponível')+' · '+(f.pautas||0)+' pautas · ausências '+(f.ausencias?'lidas':'indisponíveis');}
-
-/* Editor do Modus Operandi embutido: só carrega quando o quadro é aberto */
-var CMTED={aberto:false};
-function cmtEdAbrir(on){var b=$('#cmt-ed-b'),f=$('#cmt-ed-f');if(!b||!f)return;
-  CMTED.aberto=on==null?!CMTED.aberto:!!on;b.hidden=!CMTED.aberto;
-  $('#cmt-ed-ab').textContent=CMTED.aberto?'Fechar':'Abrir aqui';
-  $('#cmt-n-ed').textContent=CMTED.aberto?'aberto':'fechado';
-  if(CMTED.aberto)f.setAttribute('src','/editor/');else f.removeAttribute('src');}
-document.addEventListener('click',function(e){if(e.target&&e.target.id==='cmt-ed-ab')cmtEdAbrir();});
+document.addEventListener('click',function(e){
+  var b=e.target.closest&&e.target.closest('[data-cs]');if(b){CMT.atualizado=0;cmtCarregar(b.getAttribute('data-cs'));return;}
+  var f=e.target.closest&&e.target.closest('[data-cf]');if(f){CMT.filtro=f.getAttribute('data-cf');cmtPauta();return;}
+  var m=e.target.closest&&e.target.closest('[data-mes]');if(m){var d=CMT.mes||new Date();CMT.mes=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+parseInt(m.getAttribute('data-mes'),10),1));cmtCal();return;}
+  if(e.target&&e.target.id==='cmt-hoje'){CMT.mes=new Date(Date.parse(((CMT.dados||{}).hoje||'')+'T12:00:00Z'));cmtCal();return;}
+  if(e.target&&e.target.id==='cmt-csv'){cmtCsv();return;}
+  if(e.target&&e.target.id==='cmt-imp'){window.print();return;}});
+document.addEventListener('input',function(e){if(e.target&&e.target.id==='cmt-q'){CMT.q=e.target.value;cmtPauta();}});
 document.addEventListener('click',function(e){if(e.target&&e.target.id==='cmt-atu'){CMT.atualizado=0;cmtCarregar();}});
 api('/api/login').then(function(j){U.des=!!j.desembargador;iniciar(j.usuario,j.gestor);}).catch(function(){entrada();});
 })();
