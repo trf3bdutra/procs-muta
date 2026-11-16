@@ -2041,8 +2041,12 @@
       aviso('Modo triagem: clique numa linha da planilha para abrir o prontuário no lugar dela · ↑ ↓ trocam de processo · Enter marca triado · Esc fecha.'); }
   }
   function cssProntMotor(md) {
-    if (md.getElementById('pr-css-m')) return; var src = D.getElementById('pr-css'); if (!src) return;
-    var st = md.createElement('style'); st.id = 'pr-css-m'; st.textContent = src.textContent; md.head.appendChild(st);
+    if (md.getElementById('pr-css-m')) return;
+    /* o CSS do prontuário saiu do <style id="pr-css"> para assets/css/21-prontuario.css: aceita os dois */
+    var src = D.getElementById('pr-css'), lk0 = D.querySelector('link[rel="stylesheet"][href*="21-prontuario"]'), st;
+    if (src) { st = md.createElement('style'); st.textContent = src.textContent; }
+    else if (lk0) { st = md.createElement('link'); st.rel = 'stylesheet'; st.href = lk0.href; }
+    if (st) { st.id = 'pr-css-m'; md.head.appendChild(st); }
     var sq = md.createElement('style'); sq.id = 'shq-css'; sq.textContent = CSS_Q; md.head.appendChild(sq);
     var lk = md.createElement('link'); lk.rel = 'stylesheet'; lk.href = 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap'; md.head.appendChild(lk);
   }
@@ -2263,6 +2267,8 @@
     '#cmt-sheet .sh-prbar b{font-size:14px;font-weight:800}#cmt-sheet .sh-prbar span{color:#c9d3dc}#cmt-sheet .sh-prbar .k{margin-left:auto;color:#e6c27a;font-size:11px}' +
     '#cmt-sheet .sh-prbar button{height:28px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);border-radius:8px;font:700 12px Figtree,sans-serif;color:#dfe5ee;cursor:pointer;padding:0 10px}#cmt-sheet .sh-prbar button:hover{background:rgba(255,255,255,.14)}#cmt-sheet .sh-prbar .pri{background:#c4953c;border-color:#c4953c;color:#1f2442}' +
     '#cmt-sheet .sh-prhost{position:sticky;left:10px;max-width:calc(100vw - 340px)}#cmt-sheet .sh-prhost .pr-cnt{padding:0}' +
+    /* o estilo de pílula dos botões da planilha não vale dentro do prontuário: chips de etiqueta e botões S/E/O */
+    '#cmt-sheet .pr-scope .chip{display:inline-flex!important;align-items:center;gap:4px;white-space:nowrap}#cmt-sheet .pr-scope button.mini{width:18px;height:18px;min-height:0;padding:0!important;border-radius:4px;border:1px solid #d4dce2;background:#fff;font:800 9.5px/1 Figtree,sans-serif;color:#103b54;display:inline-grid;place-items:center}' +
     'body.cmt-sheet-on .cmt-dados-grade~*{display:none!important}' +
     '#cmt-sheet{order:-1;background:#fff;border:1px solid #e5e1d8;border-radius:18px;box-shadow:0 12px 28px rgba(20,38,60,.05);font-family:Figtree,system-ui,sans-serif;color:#14263c;max-height:78vh;overflow:auto;position:relative}#cmt-sheet[hidden]{display:none}' +
     '#cmt-sheet .sh-bar{position:sticky;left:0;top:0;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 14px;background:#fbfaf7;border-bottom:1px solid #eee7da}#cmt-sheet .sh-bar b{font:800 15px Figtree,system-ui,sans-serif}#cmt-sheet .sh-bar>span{color:#6d7b8a;font-size:12.5px;margin-right:auto}' +
