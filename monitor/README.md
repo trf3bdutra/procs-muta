@@ -5,7 +5,7 @@ Esta é uma refatoração do `cmt-monitor.html` fornecido (15/11/2026), sem troc
 ## Execução
 
 - `index.html` é a aplicação modular. Abra em um servidor HTTP da pasta `monitor/`, por exemplo `python -m http.server 8000` e acesse `http://localhost:8000/`.
-- `Gestor_CMT_portatil.html` é a edição de arquivo único para conferência local; mantém o motor comprimido na própria página.
+- Publicado em `/monitor/` pelo workflow `vercel-monitor.yml`, que copia `index.html`, `assets/` e `motor/` juntos. O endereço sem barra final (`/monitor`) é redirecionado para `/monitor/`, porque os caminhos são relativos.
 - `/motor/index.html` contém o núcleo original de Acervo, Triagem, Sessões, Equipe e suas integrações.
 
 ## Mapa dos módulos preservados

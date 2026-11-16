@@ -4,7 +4,7 @@
    de MS, Carnaval, Semana Santa e Corpus Christi; recesso de 20/12 a 20/01 na contagem de prazos (CPC, art. 220);
    datas do calendário do gabinete marcadas “não conta para prazo”; suspensões informadas no processo.
    O expediente do gabinete fica em acervo/sessoes/calendario.json (expediente: diasSemana, semExpediente, nomes, tipos, semPrazo, recesso).
-   Um só módulo para o Ab Initio e a Pauta da equipe (scripts/ficha/embutir.py). */
+   Um só módulo para o Ab Initio e a Ex Officio (scripts/ficha/embutir.py). */
 (function () {
 'use strict';
 if (window.CMTForense && window.CMTForense.versao >= 1) return;
@@ -81,7 +81,7 @@ window.CMTForense = { versao: 1, TIPOS: TIPOS, SEM_PRAZO: SEM_PRAZO, sugestoes: 
    a gravação no card do Controle de Pauta (applySuggestions), a IA opcional, o panorama e as estatísticas: a ficha
    (padrao/ficha-dialogo.js) conduz a conferência e grava no operacional, pelo modelo padrao/ficha.json.
    O .txt é lido só na memória do navegador; nada do texto integral é gravado: só os campos confirmados.
-   Embutido no Ab Initio e na Pauta da equipe por scripts/ficha/embutir.py. */
+   Embutido no Ab Initio e na Ex Officio por scripts/ficha/embutir.py. */
 (function(){'use strict';
 if(window.CMTInteiroTeor&&window.CMTInteiroTeor.parseTxt)return;
 
@@ -850,7 +850,7 @@ window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABE
 })();
 
 /* CMT · Ficha única do processo — diálogo no visual v198 (padrão cmtx), com os campos de padrao/ficha.json.
-   Um só módulo para o Ab Initio e a Pauta da equipe: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
+   Um só módulo para o Ab Initio e a Ex Officio: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
    para os dois HTML. Cada página entrega um adaptador:
      CMTFicha.abrir(cnj, {
        carregar: cnj => Promise<{ ficha, operacional, fonte, controles?, gestor? }>,
@@ -858,7 +858,7 @@ window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABE
        irPara?:  controle => void        (botão "Abrir a página" dos Controles especiais)
        lista?:   [cnj, ...]              (anterior / próximo)
        avisar?:  (texto, tipo) => void
-       leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Pauta da equipe edita pelo prontuário lateral)
+       leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Ex Officio edita pelo prontuário lateral)
      })
    Regras dos Controles especiais (quando cada grupo vale): CMTFicha.controlesDe(fonte, operacional), as mesmas do servidor (api/_metas, _sobr, _sens). */
 (function () {

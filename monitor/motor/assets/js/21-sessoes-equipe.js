@@ -273,8 +273,8 @@
     if (mantidas.length) toast('Alterações deste navegador ainda não gravadas: ' + mantidas.join(', ') + '.');
     if (REPO.erro) toast('procs-muta: ' + REPO.erro);
   }
-  /* liberar ou retirar a pauta da equipe grava na hora: a Pauta da equipe e a Consulta do Compêndio refletem em seguida */
-  /* publicação para a equipe, em duas partes: os marcos da sessão (calendário e página inicial da Pauta da equipe) e a listagem da pauta
+  /* liberar ou retirar a pauta da equipe grava na hora: a Ex Officio e a Consulta do Modus Operandi refletem em seguida */
+  /* publicação para a equipe, em duas partes: os marcos da sessão (calendário e página inicial da Ex Officio) e a listagem da pauta
      (processos, minutas, correções). Publicar a listagem publica também os marcos; retirar os marcos retira também a listagem. */
   async function publicar(sx, oque) {
     oque = oque || 'pauta';
@@ -285,7 +285,7 @@
       : (sx.publicada ? 'Pauta de ' + br(sx.data) + ' liberada para a equipe (listagem e marcos)' : 'Listagem da pauta de ' + br(sx.data) + ' retirada da equipe (os marcos continuam publicados)');
     if (!W.ProcsMuta || !W.ProcsMuta.gravar || !REPO.lido) { toast(msg + ' neste navegador. Grave no procs-muta para valer.'); return; }
     await gravar();
-    toast(msg + (oque === 'pauta' && sx.publicada ? ': já aparece na Pauta da equipe e na Consulta do Compêndio.' : '.'));
+    toast(msg + (oque === 'pauta' && sx.publicada ? ': já aparece na Ex Officio e na Consulta do Modus Operandi.' : '.'));
     render();
   }
   async function gravar() {
@@ -294,7 +294,7 @@
     REPO.gravando = true; pill();
     try {
       var files = {}, agora = new Date().toISOString();
-      /* o que a equipe gravou pela Pauta da equipe depois da última leitura prevalece sobre a cópia deste navegador */
+      /* o que a equipe gravou pela Ex Officio depois da última leitura prevalece sobre a cópia deste navegador */
       for (var pi = 0; pi < P.length; pi++) { var kk = P[pi]; if (kk.indexOf('ses:') !== 0) continue; var sx = S.sessoes.find(function (x) { return x.data === kk.slice(4); }); if (!sx) continue;
         var rem = null; try { rem = JSON.parse(await W.ProcsMuta.ler(arqSessao(sx.data))); } catch (e) { rem = null; } if (!rem) continue;
         ['itens', 'previa'].forEach(function (ln) { (rem[ln] || []).forEach(function (ri) { var rc = ri.ctl || {}; if (!rc.editadoEm) return; var li = (sx[ln] || []).find(function (x) { return dig(x.cnj) === dig(ri.cnj); }); if (!li || (li.editadoEm || '') >= rc.editadoEm) return;
@@ -879,7 +879,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
   W.CMTExpediente = function () { var c = calendario(), E = expediente(); return { diasSemana: (c.weekdays || [1, 2, 3, 4, 5]).slice(), semExpediente: (c.excluded || []).slice().sort(), nomes: E.nomes, tipos: E.tipos, semPrazo: E.semPrazo.slice(), recesso: E.recesso.slice() }; };
   function feriadosCal() { var E = expediente(), M = {}; CAL_FER.forEach(function (f) { M[f[0]] = f[1]; }); (calendario().excluded || []).forEach(function (d) { M[d] = E.nomes[d] || M[d] || 'Sem expediente'; }); return Object.keys(M).sort().map(function (d) { return [d, M[d]]; }); }
   /* Calendário do gabinete · expediente e prazos: o calendário do Controle de Pauta (meses, datas sem expediente com tipo, “não conta para prazo”,
-     sugestão de feriados da Justiça Federal por ano). Grava em acervo/sessoes/calendario.json (expediente), lido pela Pauta da equipe e pela ficha. */
+     sugestão de feriados da Justiça Federal por ano). Grava em acervo/sessoes/calendario.json (expediente), lido pela Ex Officio e pela ficha. */
   var XP = { mes: '', meses: 3, ano: '', sug: false, sel: null, q: '', tipo: '', passadas: false };
   function FR() { return W.CMTForense || (W.parent && W.parent.CMTForense) || null; }
   var XP_COR = { 'Feriado nacional': 't1', 'Feriado da Justiça Federal': 't2', 'Recesso forense': 't3', 'Feriado estadual': 't4', 'Feriado municipal': 't4', 'Ponto facultativo': 't5', 'Suspensão de expediente': 't6', 'Outro': 't6' };
@@ -950,7 +950,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         (r.n ? '<button class="cs-btn pri" data-ses="' + esc(ss.id) + '" title="Pauta oficial importada do PDF">Pauta · ' + r.n + '</button>' : '') +
         '<button class="cs-btn gold" data-ses="' + esc(ss.id) + '" data-acao="importar" title="O PDF dá o número oficial de cada item e confere com a pré-pauta">' + (r.n ? 'Reimportar PDF' : 'Importar PDF') + '</button>' +
         '<button class="cs-btn' + (ss.marcosPub || ss.publicada ? ' pub' : '') + '" data-ses="' + esc(ss.id) + '" data-acao="publicar-marcos" aria-pressed="' + !!(ss.marcosPub || ss.publicada) + '" title="' + (ss.marcosPub || ss.publicada ? 'Marcos publicados para a equipe (calendário e página inicial): clique para retirar' : 'Marcos não publicados: clique para mostrar à equipe as datas desta sessão (peço dia, preparação, entrega das minutas, liberação), sem a lista de processos') + '">' + (ss.marcosPub || ss.publicada ? '● Marcos' : '○ Marcos') + '</button>' +
-        '<button class="cs-btn' + (ss.publicada ? ' pub' : '') + '" data-ses="' + esc(ss.id) + '" data-acao="publicar" aria-pressed="' + !!ss.publicada + '" title="' + (ss.publicada ? 'Listagem publicada na Pauta da equipe: clique para retirar' : 'Listagem não publicada: clique para liberar os processos desta pauta à equipe (Pauta da equipe e Consulta do Compêndio)') + '">' + (ss.publicada ? '● Pauta' : '○ Pauta') + '</button>' +
+        '<button class="cs-btn' + (ss.publicada ? ' pub' : '') + '" data-ses="' + esc(ss.id) + '" data-acao="publicar" aria-pressed="' + !!ss.publicada + '" title="' + (ss.publicada ? 'Listagem publicada na Ex Officio: clique para retirar' : 'Listagem não publicada: clique para liberar os processos desta pauta à equipe (Ex Officio e Consulta do Modus Operandi)') + '">' + (ss.publicada ? '● Pauta' : '○ Pauta') + '</button>' +
         '<button class="cs-btn" data-ses="' + esc(ss.id) + '" data-acao="apagar" title="Apagar sessão">×</button></div></div>';
     });
     return h;
@@ -1126,7 +1126,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     var fim = d.toISOString().slice(0, 10);
     return { fim: fim, n: n, ok: a.prot ? a.prot <= fim : null };
   }
-  /* perfil do caso para pesquisa no CMT Compêndio (modelos, precedentes, parágrafos) */
+  /* perfil do caso para pesquisa no Modus Operandi (modelos, precedentes, parágrafos) */
   function perfilCaso(it, inf) {
     var C = it.cartao || {}, a = C.adm || {}, o = C.orig || {}, j = C.jul || {};
     var x = { processo: it.cnj, classe: it.classe || inf.classe || '', assunto: inf.assunto || '', secao: inf.secao || '', ramo: inf.ramo || '',
@@ -1163,7 +1163,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       '<div class="pc-hd"><div class="pc-it">' + esc(it.item || '—') + '</div>' +
         '<div class="pc-id"><a href="#" class="pc-cnj" data-cs-ficha="' + esc(it.cnj) + '" title="Abrir a ficha do processo">' + esc(it.cnj) + '</a><small>' + esc(partes || 'partes não informadas') + '</small></div>' +
         '<div class="pc-as"><b>' + esc(inf.assunto || 'assunto não informado') + '</b><small>Classe judicial: ' + esc([it.classe || inf.classe, inf.secao].filter(Boolean).join(' · ')) + '</small></div>' +
-        '<div class="pc-ac"><button class="pc-b pri" data-cs="cx-comp" title="Pesquisar no CMT Compêndio (modelos, precedentes e parágrafos) com os dados deste cartão">◈ Compêndio</button>' +
+        '<div class="pc-ac"><button class="pc-b pri" data-cs="cx-comp" title="Pesquisar no Modus Operandi (modelos, precedentes e parágrafos) com os dados deste cartão">◈ Compêndio</button>' +
         '<button class="pc-b" data-cs-ficha="' + esc(it.cnj) + '" title="Abrir a ficha completa">▣ Ficha</button>' +
         '<button class="pc-b dz" data-cs="cp-del" title="Excluir da ' + (PRE ? 'pré-pauta' : 'pauta') + '">Excluir</button><button class="pc-b" data-cs="cp-exp" title="' + (mini ? 'Expandir' : 'Recolher') + '">' + (mini ? '▾' : '▴') + '</button></div></div>' +
       '<div class="pc-mr">' + chips + '<span class="pc-own"><label>Servidor · minuta<select class="cs-sel" data-cs-who="d">' + opts('d', it.servidor) + '</select></label><label>Corretor<select class="cs-sel" data-cs-who="c">' + opts('c', it.corretor) + '</select></label></span></div>' +
@@ -1172,7 +1172,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     if (mini) return h + '<div class="pc-ft"><span class="pc-mut">' + esc([C.subassuntos, C.especificidades, pend && 'Pendências: ' + pend, it.intercor && 'Intercorrência: ' + it.intercor].filter(Boolean).join(' · ') || 'Caso ainda não caracterizado.') + '</span><button class="pc-xp" data-cs="cp-exp">Expandir ficha ↓</button></div></div>';
     h += '<div class="pc-bd">';
     var pts = (partes || '').split(/\s+[x×]\s+/).filter(Boolean);
-    var sec0 = '<section class="pc-wide"><h3><em>◈</em>Caracterização do caso <small class="pc-mut">· dados que alimentam a pesquisa no Compêndio</small></h3><div class="pc-grid">' +
+    var sec0 = '<section class="pc-wide"><h3><em>◈</em>Caracterização do caso <small class="pc-mut">· dados que alimentam a pesquisa no Modus Operandi</small></h3><div class="pc-grid">' +
       linha('Assunto', esc(inf.assunto || '—')) + linha('Tipo de julgamento', '<select class="cs-sel" data-cs-cx="tipoJ" data-cs-re><option value="">auto: ' + esc(cxTipoJ({ tipoManual: it.tipoManual, classe: it.classe }, inf)) + '</option>' + CX_TJ.map(function (o) { return '<option' + (o === C.tipoJ ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select>') +
       linha('Subassuntos', ta('subassuntos', 'subassuntos (do inteiro teor)')) + linha('Especificidades', ta('especificidades', 'peculiaridades do caso, distinções')) +
       linha('Questões controvertidas', ta('questoes', 'o que o recurso discute, ponto a ponto')) + linha('Recurso relacionado', inp('relacionado', 'ex.: Apelação relacionada nº …', 'text', 1)) + '</div></section>';
@@ -1245,7 +1245,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       '<button data-cs="xlsx" title="Baixar a planilha no padrão do Controle de Pauta (.xlsx)"' + (ss.itens.length ? '' : ' disabled') + '>' + ico('xlsx') + '</button>' +
       '<button data-cs="copiar" title="Copiar a lista de processos"' + (ss.itens.length ? '' : ' disabled') + '>' + ico('copy') + '</button>' +
       '<button data-cs="sx-pub-marcos" class="sx-pub' + (sr.marcosPub || sr.publicada ? ' on' : '') + '" title="' + (sr.marcosPub || sr.publicada ? 'Marcos publicados para a equipe: clique para retirar' : 'Publicar para a equipe só os marcos da sessão (datas), sem a lista de processos') + '">' + (sr.marcosPub || sr.publicada ? '● Marcos' : '○ Marcos') + '</button>' +
-      '<button data-cs="sx-pub" class="sx-pub' + (sr.publicada ? ' on' : '') + '" title="' + (sr.publicada ? 'Listagem publicada na Pauta da equipe: clique para retirar' : 'Publicar para a equipe a listagem da pauta (processos)') + '">' + (sr.publicada ? '● Pauta' : '○ Pauta') + '</button>' +
+      '<button data-cs="sx-pub" class="sx-pub' + (sr.publicada ? ' on' : '') + '" title="' + (sr.publicada ? 'Listagem publicada na Ex Officio: clique para retirar' : 'Publicar para a equipe a listagem da pauta (processos)') + '">' + (sr.publicada ? '● Pauta' : '○ Pauta') + '</button>' +
       '<button data-cs="sx-geral" title="Voltar à visão geral das sessões">' + ico('back') + '</button>' +
       '<button data-cs="apagar-sessao" class="dz" title="Apagar a sessão">' + ico('del') + '</button></div>' +
       '<div class="sx-m">' + fi('pauta', 'Peço dia') + fi('inicio', 'Início da preparação') + fi('minutas', 'Entrega das minutas') + fi('liberacao', 'Liberação') + '</div></div>';
@@ -1426,7 +1426,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     return h;
   }
 
-  /* ---------- Equipe: avisos, solicitações de ausência, ausências e cadastro (dados que a Pauta da equipe usa) ---------- */
+  /* ---------- Equipe: avisos, solicitações de ausência, ausências e cadastro (dados que a Ex Officio usa) ---------- */
   var EQ = { sol: null, av: null, lendo: false, erro: '' };
   var ARQ_SOL = 'apoio/equipe-solicitacoes.json', ARQ_AV = 'apoio/equipe-avisos.json';
   async function eqLer(rel, vazio) { try { return JSON.parse(await W.ProcsMuta.ler(rel)); } catch (e) { if (/404/.test(e.message)) return vazio; throw e; } }
@@ -1479,9 +1479,9 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     var ps = ordenadas().filter(function (s) { return s.data >= hj && (s.itens || []).length; }).sort(function (a, b) { return a.data.localeCompare(b.data); })[0];
     var kpi = function (n, t, s, c) { return '<div class="eqm-k' + (c ? ' ' + c : '') + '"><b>' + n + '</b><span>' + t + '</span><small>' + s + '</small></div>'; };
     var h = '<div class="eqm">' +
-      '<div class="eqm-hd"><div><p>Pedidos de ausência e o cadastro usado na designação das pautas. Avisos e notificações à equipe ficam na <b>Pauta da equipe</b>.</p></div>' +
+      '<div class="eqm-hd"><div><p>Pedidos de ausência e o cadastro usado na designação das pautas. Avisos e notificações à equipe ficam na <b>Ex Officio</b>.</p></div>' +
       '<div class="eqm-ac">' + (EQ.erro ? '<span class="eqm-err" title="' + esc(EQ.erro) + '">Erro ao ler do procs-muta</span>' : EQ.lendo ? '<span class="eqm-mut">Lendo…</span>' : '') +
-      '<button class="cs-btn" data-cs="eq-ler">↻ Ler de novo</button><a class="cs-btn pri" href="' + URL_EQ + '" target="_blank" rel="noopener">Abrir a Pauta da equipe ↗</a></div></div>' +
+      '<button class="cs-btn" data-cs="eq-ler">↻ Ler de novo</button><a class="cs-btn pri" href="' + URL_EQ + '" target="_blank" rel="noopener">Abrir a Ex Officio ↗</a></div></div>' +
       '<div class="eqm-ks">' + kpi(S.equipe.length, 'servidores', S.equipe.filter(function (m) { return faz(m, 'd'); }).length + ' minutam · ' + S.equipe.filter(function (m) { return faz(m, 'c'); }).length + ' corrigem') +
         kpi(pend.length, 'pedidos pendentes', pend.length ? 'aguardam a sua decisão' : 'nada a decidir', pend.length ? 'al' : '') +
         kpi(foraHoje.length, 'fora hoje', foraHoje.length ? foraHoje.map(function (x) { return x.mb.nome; }).join(', ') : 'equipe completa', foraHoje.length ? 'am' : '') +
@@ -1493,7 +1493,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       (EQ.lendo && !EQ.sol ? '<p class="eqm-mut">Lendo…</p>' : sol.length ? sol.slice(0, 12).map(function (x) { var p = x.estado === 'pendente';
         return '<div class="eqm-sol' + (p ? ' pend' : '') + '"><div class="eqm-av">' + esc(String(x.nome || '?').slice(0, 2).toUpperCase()) + '</div><div class="eqm-tx"><b>' + esc(x.nome) + '</b><span>' + esc(x.tipo) + ' · ' + esc(br(x.de)) + (x.ate !== x.de ? ' a ' + esc(br(x.ate)) : '') + '</span>' + (x.motivo ? '<small>' + esc(x.motivo) + '</small>' : '') + (x.obs ? '<small>Obs.: ' + esc(x.obs) + '</small>' : '') + '</div>' +
           (p ? '<div class="eqm-dec"><input class="cs-in" placeholder="observação (opcional)" data-eq-obs="' + esc(x.id) + '"><div><button class="cs-btn pri" data-cs="eq-aprovar" data-id="' + esc(x.id) + '" data-nome="' + esc(x.nome) + '">Aprovar</button><button class="cs-btn" data-cs="eq-recusar" data-id="' + esc(x.id) + '" data-nome="' + esc(x.nome) + '">Recusar</button></div></div>'
-             : '<span class="eqm-est ' + esc(x.estado) + '">' + esc(x.estado) + '</span>') + '</div>'; }).join('') : '<p class="eqm-mut">Nenhuma solicitação. Os pedidos chegam da página inicial da Pauta da equipe.</p>') + '</section></div><div class="eqm-col">';
+             : '<span class="eqm-est ' + esc(x.estado) + '">' + esc(x.estado) + '</span>') + '</div>'; }).join('') : '<p class="eqm-mut">Nenhuma solicitação. Os pedidos chegam da página inicial da Ex Officio.</p>') + '</section></div><div class="eqm-col">';
     h += '<section class="eqm-c"><div class="eqm-ch"><h3>Ausências</h3><span class="eqm-mut">quem está fora no preparo de uma sessão sai da designação automática</span></div>' +
       '<div class="eqm-form"><select class="cs-sel" data-cs-aus-m>' + S.equipe.map(function (mb) { return '<option value="' + esc(mb.id) + '">' + esc(mb.nome) + '</option>'; }).join('') + '</select><input type="date" class="cs-in" data-cs-aus-de><span class="eqm-mut">a</span><input type="date" class="cs-in" data-cs-aus-ate><button class="cs-btn pri" data-cs="aus-add">Registrar</button></div>' +
       (aus.length ? '<div class="eqm-aus">' + aus.filter(function (x) { return x.a.ate >= new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10); }).map(function (x) { var ag = x.a.de <= hj && x.a.ate >= hj, past = x.a.ate < hj;
@@ -1589,8 +1589,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     if (k === 'cx-comp') { var pf = perfilCaso(it, infoItem(it)), js = JSON.stringify(pf, null, 1);
       try { (W.parent.navigator || navigator).clipboard.writeText(js); } catch (er) {}
       var Lc = null; try { Lc = (W.top || W).location; } catch (er) { Lc = null; }
-      if (Lc && /^https?:$/.test(Lc.protocol)) { var sr0 = sessaoReal(); (W.top || W).open(Lc.origin + '/compendio/#' + (sr0 ? 'consulta=' + sr0.data + '/' + encodeURIComponent(it.item || it.cnj) + '&' : '') + 'caso=' + encodeURIComponent(JSON.stringify(pf)), 'cmt-compendio'); toast('Compêndio aberto com o perfil do caso (também copiado).'); }
-      else toast('Perfil do caso copiado. O Compêndio abre pelo site publicado (trf3-muta.vercel.app).');
+      if (Lc && /^https?:$/.test(Lc.protocol)) { var sr0 = sessaoReal(); (W.top || W).open(Lc.origin + '/compendio/#' + (sr0 ? 'consulta=' + sr0.data + '/' + encodeURIComponent(it.item || it.cnj) + '&' : '') + 'caso=' + encodeURIComponent(JSON.stringify(pf)), 'cmt-compendio'); toast('Modus Operandi aberto com o perfil do caso (também copiado).'); }
+      else toast('Perfil do caso copiado. O Modus Operandi abre pelo site publicado (trf3-muta.vercel.app).');
       return; }
     if (k === 'cx-tab') { UI.cxTab = UI.cxTab || {}; UI.cxTab[dc] = UI.cxTab[dc] === t.dataset.v ? '' : t.dataset.v; render(); return; }
     if (k === 'cx-add') { var co = cxObj(it), lk = t.dataset.k; co[lk] = co[lk] || [];

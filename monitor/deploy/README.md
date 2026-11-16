@@ -11,4 +11,4 @@ cp -R monitor/index.html monitor/assets monitor/motor site/public/monitor/
 ```
 
 Não publique apenas `index.html`: o motor e os JS/CSS externos são necessários.
-O arquivo `Gestor_CMT_portatil.html` funciona isoladamente e não requer cópia das pastas locais.
+O workflow `.github/workflows/vercel-monitor.yml` já faz essa cópia.
