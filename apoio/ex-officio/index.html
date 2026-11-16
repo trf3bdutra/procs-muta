@@ -613,7 +613,7 @@ html[data-theme=dark] #v-pauta.ed .trb{--t-ok-ink:#0a1821}
 #v-pauta.ed table.pl th{background:var(--ep);color:var(--em);font:400 9.5px var(--emono);letter-spacing:.12em;border-right:0;border-bottom:1px solid var(--el)}
 #v-pauta.ed table.pl td{border-right:0;border-bottom-color:var(--el)}
 /* prontuário lateral */
-#v-pauta.ed .prt{background:var(--ep);border:1px solid var(--el);border-top:2px solid var(--eg);border-radius:0;box-shadow:none}
+#v-pauta.ed .prt{background:var(--eprt,#fff);border:1px solid var(--el);border-top:2px solid var(--eg);border-radius:0;box-shadow:none}
 #v-pauta.ed .prt-ic{display:none}
 #v-pauta.ed .prt-h h2{font-size:22px;font-weight:620;letter-spacing:-.03em;color:var(--ei)}
 #v-pauta.ed .prt-h h2 em{font-family:var(--eser);font-weight:400;font-style:italic;color:var(--eo)}
@@ -1670,6 +1670,14 @@ html[data-theme=dark] #v-inicio.home-v2{--ep:#10222e;--ep2:#132835;--el:#1e3747;
   #v-cmt .cmt-met{grid-template-columns:repeat(3,minmax(0,1fr))}
   #v-cmt .cmt-urgl{grid-template-columns:minmax(0,1fr)}
 }
+/* prontuário com fundo mais claro (claro: branco; escuro: um tom acima do fundo) */
+#v-pauta.ed{--eprt:#fff}html[data-theme=dark] #v-pauta.ed{--eprt:#17303f}
+#v-pauta.ed .prt-id{background:#f7f9f8}html[data-theme=dark] #v-pauta.ed .prt-id{background:#1d3a4b}
+#prq .prt.pmn .prt-id{background:#f7f9f8}html[data-theme=dark] #prq .prt.pmn .prt-id{background:#1d3a4b}
+html[data-theme=dark] #v-pauta.ed .prt input,html[data-theme=dark] #v-pauta.ed .prt select,html[data-theme=dark] #v-pauta.ed .prt textarea{background:#12293a}
+/* cabeçalho: utilidades (notificações, diligências, tema, usuário) na mesma faixa das seções */
+#app header.nx .nx1{flex-wrap:nowrap!important}#app header.nx .sp{flex:1 1 auto}#app header.nx .nx-ut{flex:none}
+@media (max-width:1050px){#app header.nx .nx1{flex-wrap:wrap!important}}
 /* ===== Cabeçalho numa faixa só: as seções ficam na mesma linha da marca e dos botões ===== */
 #app header.nx{flex-wrap:wrap}
 #app header.nx .nx1{flex-wrap:nowrap;row-gap:0}
