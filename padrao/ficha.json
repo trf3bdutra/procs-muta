@@ -1000,6 +1000,18 @@
        "secao": "triagem"
       },
       {
+       "rotulo": "Destino confirmado em",
+       "chave": "Destino - Confirmado em",
+       "tipo": "data",
+       "secao": "triagem"
+      },
+      {
+       "rotulo": "Destino confirmado por",
+       "chave": "Destino - Confirmado por",
+       "tipo": "texto",
+       "secao": "triagem"
+      },
+      {
        "rotulo": "Tipo de julgamento",
        "chave": "Tipo de Julgamento",
        "tipo": "texto",
@@ -1555,6 +1567,10 @@
     "opcoes": [
      {
       "valor": "",
+      "rotulo": "A definir na triagem"
+     },
+     {
+      "valor": "Sessão",
       "rotulo": "Sessão (colegiado)"
      },
      {
@@ -1562,7 +1578,7 @@
       "rotulo": "Decisão monocrática"
      }
     ],
-    "regra": "vazio = sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; Monocrática: designação, minuta, revisão, ato e fundamento (art. 932), decisão, assinatura e publicação"
+    "regra": "confirmado na triagem (Triagem › Destino); vazio = a definir, com o fluxo da sessão até a confirmação. Sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; Monocrática: designação, minuta, revisão, ato e fundamento (art. 932), decisão, assinatura e publicação"
    }
   },
   {
@@ -1659,9 +1675,10 @@
        "tipo": "lista",
        "secao": "producao",
        "opcoes": [
+        "Sessão",
         "Monocrática"
        ],
-       "regra": "vazio = sessão (acórdão)"
+       "regra": "vazio = a definir na triagem"
       },
       {
        "rotulo": "Registrada em",

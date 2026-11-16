@@ -56,7 +56,8 @@ EXTRAS = {('Triagem', 'Urgência'): [('Nível da urgência', 'Urgência - Nível
           ('Triagem', 'Admissibilidade e regularidade'): [('Intimação / publicação', 'Tempest - Publicação', 'data'), ('Protocolo do recurso', 'Tempest - Protocolo', 'data'),
               ('Prazo legal (dias úteis)', 'Tempest - Prazo legal', 'numero'), ('Prazo em dobro', 'Tempest - Dobro', 'simnao'), ('Suspensões de prazo', 'Tempest - Suspensões', 'texto'),
               ('AJG', 'AJG', 'texto'), ('Impedimento / suspeição', 'Impedimento / Suspeição', 'texto')],
-          ('Triagem', 'Matéria e gestão'): [('Tipo de julgamento', 'Tipo de Julgamento', 'texto'), ('Hipóteses de monocrática', 'Hipóteses Monocrática', 'texto'),
+          ('Triagem', 'Matéria e gestão'): [('Destino confirmado em', 'Destino - Confirmado em', 'data'), ('Destino confirmado por', 'Destino - Confirmado por', 'texto'),
+              ('Tipo de julgamento', 'Tipo de Julgamento', 'texto'), ('Hipóteses de monocrática', 'Hipóteses Monocrática', 'texto'),
               ('Síntese processual', 'Síntese Processual', 'texto-longo'), ('Síntese fática', 'Síntese Fática', 'texto-longo'), ('Especificidades', 'Especificidades', 'texto-longo')],
           ('Produção', 'Elaboração e revisão'): [('Destino', 'Destino', 'texto'), ('Data da revisão', 'Data da Revisão', 'data'), ('Data da liberação', 'Data da Liberação', 'data'), ('Revisão · IDs', 'Rev - IDs', 'texto')]}
 SEC = {'Triagem': 'triagem', 'Produção': 'producao', 'Pauta': 'pauta', 'Processo': 'origem'}
@@ -92,8 +93,8 @@ def _prod(a):
     RES_MONO = ['Não conhecido', 'Negado provimento', 'Dado provimento', 'Parcialmente provido', 'Deferido', 'Indeferido', 'Parcialmente deferido', 'Prejudicado', 'Homologado', 'Extinto']
     HONOR = ['Majorados', 'Mantidos', 'Invertidos', 'Fixados', 'Redistribuídos', 'Sem honorários recursais']
     a['seletor'] = {'secao': 'producao', 'chave': 'Destino', 'rotulo': 'Destino do julgamento',
-                    'opcoes': [{'valor': '', 'rotulo': 'Sessão (colegiado)'}, {'valor': 'Monocrática', 'rotulo': 'Decisão monocrática'}],
-                    'regra': 'vazio = sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; '
+                    'opcoes': [{'valor': '', 'rotulo': 'A definir na triagem'}, {'valor': 'Sessão', 'rotulo': 'Sessão (colegiado)'}, {'valor': 'Monocrática', 'rotulo': 'Decisão monocrática'}],
+                    'regra': 'confirmado na triagem (Triagem › Destino); vazio = a definir, com o fluxo da sessão até a confirmação. Sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; '
                              'Monocrática: designação, minuta, revisão, ato e fundamento (art. 932), decisão, assinatura e publicação'}
     a['grupos'] = [
         g('Designação e minuta', ['SERVIDOR', 'MINUTADO', 'Refinado']),
@@ -146,7 +147,7 @@ CONTROLES = {'aba': 'Controles especiais', 'secao': 'controles',
                CE('Motivo / observação', 'Urgência - Observação', 'texto-longo', sec='triagem'),
                CE('Lançar no painel de urgências', 'Urgência - Painel', 'simnao', sec='triagem')]},
    {'grupo': 'Monocrática', 'controle': 'monocratica', 'inclusao': 'destino do julgamento = Monocrática (minuta feita ou possível)', 'ativo': 'producao.Destino=Monocrática',
-    'campos': [CE('Destino do julgamento', 'Destino', 'lista', ['Monocrática'], 'producao', regra='vazio = sessão (acórdão)'),
+    'campos': [CE('Destino do julgamento', 'Destino', 'lista', ['Sessão', 'Monocrática'], 'producao', regra='vazio = a definir na triagem'),
                CE('Registrada em', 'Monocrática - Registrada em', 'data'), CE('Prazo', 'Monocrática - Prazo', 'data'), CE('Observação', 'Monocrática - Observação', 'texto-longo'),
                CE('Atualizado por', 'Monocrática - Atualizado por', 'texto', editavel=False), CE('Atualizado em', 'Monocrática - Atualizado em', 'data', editavel=False)]},
    {'grupo': 'Meta', 'controle': 'meta', 'inclusao': 'etiqueta de meta do CNJ no PJe ou campo META da triagem (sobrestados ficam no grupo Sobrestamento)', 'ativo': 'lista',

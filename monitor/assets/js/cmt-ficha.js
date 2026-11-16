@@ -1132,10 +1132,18 @@ function abaGrupos(A) {
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
   if (A.seletor) h += '<p class="fx-info-p">' + svg('rule') + '<span><b>' + E(A.seletor.rotulo) + ':</b> ' + (dn === 'monocratica' ? 'decisão monocrática' : destinoDef() ? 'sessão (acórdão)' : 'a definir na triagem (o fluxo mostra o da sessão)') + '. ' + E(A.seletor.regra || '') + '</span></p>';
-  if (A.aba === 'Triagem') h += cardTempest();
+  if (A.aba === 'Triagem') h += cardDestino() + cardTempest();
   h += (A.grupos || []).filter(function (g) { return (!g.destino || g.destino === dn) && grupoVisivel(g); }).map(function (g) { return card(g.grupo, grade(g.campos), { n: ('0' + (++n)).slice(-2), nota: g.destino ? (g.destino === 'sessao' ? 'acórdão' : 'monocrática') : '' }); }).join('');
   if (A.aba === 'Pauta') { var SS = sessoes(); h += card('Histórico de sessões', SS.length ? '<div class="fx-tbl"><span>Sessão</span><span>Item · situação</span><span>Resultado</span>' + SS.map(function (s) { return '<span class="fx-mono">' + E(brD(iso(s.sessao || s.data)) || s.sessao) + '</span><span>' + E([s.item ? 'item ' + s.item : '', S(s.status).toLowerCase()].filter(Boolean).join(' · ') || '—') + '</span><span>' + E(s.resultado || s.motivo || '—') + '</span>'; }).join('') + '</div>' : '<p class="fx-dim">Sem passagens por pauta.</p>', { n: ('0' + (++n)).slice(-2), nota: 'inclusões, adiamentos e retiradas' }); }
   return h;
+}
+/* destino do julgamento confirmado na triagem: Sessão ou Monocrática (producao.Destino); a data e o autor ficam na triagem */
+function cardDestino() {
+  var d = destinoDef(), em = val('triagem', 'Destino - Confirmado em'), por = val('triagem', 'Destino - Confirmado por'), hip = val('triagem', 'Hipóteses Monocrática'), ro = ST.ad.leitura;
+  var est = d ? '<b>' + (d === 'monocratica' ? 'Decisão monocrática' : 'Sessão (colegiado)') + '</b> <span class="fx-dim">· confirmado' + (iso(em) ? ' em ' + E(brD(iso(em))) : '') + (por ? ' por ' + E(por) : '') + '</span>' : '<b>A definir</b> <span class="fx-dim">· o processo segue na fila de triagem até a confirmação</span>';
+  var bt = function (v, t, on) { return '<button type="button" class="fx-pill' + (on ? ' is-on' : '') + '" data-fx-confdest="' + v + '"' + (ro || on ? ' disabled' : '') + '>' + t + '</button>'; };
+  var acoes = bt('Sessão', 'Confirmar sessão', d === 'sessao') + bt('Monocrática', 'Confirmar monocrática', d === 'monocratica') + (d ? '<button type="button" class="fx-pill fx-mini" data-fx-confdest=""' + (ro ? ' disabled' : '') + '>Desfazer</button>' : '');
+  return card('Destino do julgamento', '<p>' + est + '</p>' + (hip && hip !== 'Não se aplica' ? '<p class="fx-note">Hipótese de monocrática anotada: ' + E(hip) + '</p>' : '') + '<div class="fx-acts">' + acoes + '</div>', { cls: 'fx-destino' + (d ? ' is-ok' : ' is-warn') });
 }
 /* tempestividade calculada pelo calendário forense do gabinete (padrao/calendario-forense.js) */
 function cardTempest() {
@@ -1353,7 +1361,8 @@ function gravar(campos, msgOk) {
 }
 function onClick(ev) {
   if (ev.target === host) return; /* clique fora não fecha (evita perder a edição) */
-  var t = ev.target.closest('[data-fx],[data-fx-tab],[data-fx-inc],[data-fx-ir],[data-fx-tba],[data-fx-tbx]'); if (!t) return;
+  var t = ev.target.closest('[data-fx],[data-fx-tab],[data-fx-inc],[data-fx-ir],[data-fx-tba],[data-fx-tbx],[data-fx-confdest]'); if (!t) return;
+  if (t.hasAttribute('data-fx-confdest')) { var dv = t.getAttribute('data-fx-confdest'); if (ST.edit) { ST.draft['producao.Destino'] = dv; render(); } else gravar({ 'producao.Destino': dv }, dv === 'Monocrática' ? 'Destino confirmado: decisão monocrática.' : dv === 'Sessão' ? 'Destino confirmado: sessão.' : 'Destino desfeito: volta a definir na triagem.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-tab')) { ST.tab = t.getAttribute('data-fx-tab'); render(); var m = host.querySelector('.fx-main'); if (m) m.scrollTop = 0; return; }
   if (t.hasAttribute('data-fx-inc')) { var g = t.getAttribute('data-fx-inc'), x = CE_INC[g][1]; ST.mostra[g] = true; ST.edit = true; if (x) ST.draft[x[0]] = x[1]; render(); return; }
   if (t.hasAttribute('data-fx-ir')) { var c = t.getAttribute('data-fx-ir'); fechar(); if (!host.classList.contains('on') && ST.ad.irPara) ST.ad.irPara(c); return; }
@@ -1413,6 +1422,8 @@ function aplicar(r, campos, usuario) {
   if (!out.length) return out;
   var t = r.triagem, p = r.producao, c = r.controles, has = function (k) { return out.indexOf(k) >= 0; };
   if (has('producao.Destino') && p.Destino === 'Monocrática' && !c['Monocrática - Registrada em']) { c['Monocrática - Registrada em'] = hj; out.push('controles.Monocrática - Registrada em'); }
+  /* destino confirmado (Sessão ou Monocrática): data e autor da confirmação; vazio volta a "a definir na triagem" */
+  if (has('producao.Destino')) { var cf = p.Destino === 'Sessão' || p.Destino === 'Monocrática'; t['Destino - Confirmado em'] = cf ? hj : ''; t['Destino - Confirmado por'] = cf ? (usuario || '') : ''; out.push('triagem.Destino - Confirmado em', 'triagem.Destino - Confirmado por'); }
   if (has('triagem.Urgência') && t['Urgência']) { if (!t['Urgência - Data']) { t['Urgência - Data'] = hj; out.push('triagem.Urgência - Data'); } if (!t['Urgência - Apreciação']) { t['Urgência - Apreciação'] = 'Pendente · não apreciada'; out.push('triagem.Urgência - Apreciação'); } }
   var G = {}; out.forEach(function (k) { var m = /^controles\.(Monocrática|Meta|Sobrestamento|Sensível) - /.exec(k); if (m) G[m[1]] = 1; }); if (has('producao.Destino')) G['Monocrática'] = 1;
   if (usuario) Object.keys(G).forEach(function (g) { c[g + ' - Atualizado por'] = usuario; c[g + ' - Atualizado em'] = hj; });
