@@ -1076,6 +1076,40 @@ html[data-theme=dark] #p-pen,html[data-theme=dark] #dlg-pen,html[data-theme=dark
 #p-pen>*{padding-left:14px;padding-right:14px}#p-pen .board{grid-template-columns:1fr}#p-pen .lane{border-left:0;padding-left:0;border-top:1px solid var(--el)}#p-pen .lane:first-child{border-top:0}#p-pen .drw-h{flex-wrap:wrap}
 #p-pen .pen-s{flex:1 1 100%;margin:0;padding-top:6px;border-top:1px solid var(--el);flex-wrap:wrap}
 #p-pen .pen-s span{flex:1 1 42%;margin-left:0;padding-left:0;border-left:0;justify-content:flex-end}}
+/* ===== Notificações no mesmo padrão do painel de Diligências ===== */
+#p-not{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--em:#55584f;--eg:#235a55;--eo:#a57829;--eo2:#805b18;--ew:#fff;--esf:#fbfaf5;--etx:rgba(32,59,57,.085);--ecd:#fff;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace}
+html[data-theme=dark] #p-not{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--em:#a7a8a9;--eg:#6eba8a;--eo:#e6c27a;--eo2:#e6c27a;--ew:#0a1821;--esf:#10222e;--etx:rgba(235,239,241,.075);--ecd:#16303e}
+#p-not{background-color:var(--esf)!important;background-image:radial-gradient(var(--etx) 1px,transparent 1px)!important;background-size:13px 13px!important;border:1px solid var(--el)!important;border-top:2px solid var(--eg)!important;border-radius:0!important;color:var(--ei);box-shadow:0 24px 60px rgba(32,59,57,.18)!important;padding:0!important}
+#p-not>*{padding-left:20px;padding-right:20px}
+#p-not .drw-h{align-items:center;gap:10px;margin:0;padding-top:6px;padding-bottom:6px;border-bottom:1px solid var(--el);min-height:38px}
+#p-not .drw-h h2{font-size:15px;color:var(--ei);white-space:nowrap}
+#p-not .drw-h .b{border-radius:0;border:1px solid var(--el2);background:var(--ew);color:var(--ei);min-height:30px;padding:0 12px}
+#p-not .av-comp{border:0;border-bottom:1px solid var(--el);border-radius:0;background:transparent;margin:0}
+#p-not .av-comp[open]{padding-bottom:14px}
+#p-not .av-comp summary{font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em);padding:11px 0}
+#p-not .av-comp summary:before,#p-not .av-comp[open] summary:before{color:var(--em)}
+#p-not .av-comp label{font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+#p-not .av-comp input[type=text],#p-not .av-comp input[type=url],#p-not .av-comp input[type=date],#p-not .av-comp textarea{border:1px solid var(--el2);border-radius:0;background:var(--ew);color:var(--ei)}
+#p-not .av-comp .seg2 label,#p-not .av-comp .ppl label{border:1px solid var(--el2);border-radius:0;background:var(--ew);color:var(--ei);font-weight:400;font-size:11.5px;letter-spacing:0;text-transform:none;font-family:inherit}
+#p-not .av-comp .tb button{border:1px solid var(--el2);border-radius:0;background:var(--ew);color:var(--ei)}
+#p-not .av-comp .pv{color:var(--em)}
+#p-not .av-comp .ac .b{border-radius:0;border:1px solid var(--eg);background:var(--ew);color:var(--eg);font-weight:700;font-size:12px;min-height:30px;padding:0 12px}
+#p-not .av-comp .ac .b.pri{background:var(--eg);color:var(--ep);border-color:var(--eg)}
+#p-not #l-not{padding-top:2px;padding-bottom:18px}
+#p-not .nt{border-top:1px solid var(--el);padding:11px 0;gap:11px}
+#p-not .nt:first-child{border-top:0}
+#p-not .nt .ico2{border-radius:0;background:var(--ep2)!important;color:var(--em)!important;width:28px;height:28px;flex-basis:28px}
+#p-not .nt b{color:var(--ei);font-size:12.5px}
+#p-not .nt p,#p-not .nt time,#p-not .nt .dst{color:var(--em)}
+#p-not .nt .lk{color:var(--eg)}
+#p-not .nt .pin{color:var(--eo2);font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase}
+#p-not .nt-sec{font:400 9.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em);margin:18px 0 4px}
+#p-not .nt.aviso-geral{background:transparent;border-radius:0;margin:0;padding:11px 0 11px 11px;border-top:1px solid var(--el);border-left:3px solid var(--eo)}
+#p-not .nt.aviso-geral:first-child{border-top:0}
+#p-not .nt.importante{box-shadow:none;border-left:3px solid var(--eo);padding-left:11px}
+#p-not .nt.urgente{box-shadow:none;border-left:3px solid #a7433d;padding-left:11px}
+#p-not .nt.urgente b{color:#a7433d}
+@media (max-width:700px){#p-not>*{padding-left:14px;padding-right:14px}}
 </style>
 
 <style id="cc-cal-css">
