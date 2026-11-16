@@ -50,7 +50,7 @@
       showDashboard(next);
     } else if (!next && settings.mode) {
       settings.mode='';settings.legacy=false;settings.lastSig='';
-      D.body.classList.remove('cmt-workdesk');$('#index')?.style.removeProperty('display');view.hidden=true;aside.hidden=true;toggle.hidden=true;
+      D.body.classList.remove('cmt-workdesk','cmt-pautas');$('#index')?.style.removeProperty('display');view.hidden=true;aside.hidden=true;toggle.hidden=true;
     }
   }
   function showDashboard(mode) {
@@ -63,7 +63,7 @@
   }
   function showLegacy(action) {
     settings.legacy=true;
-    D.body.classList.remove('cmt-workdesk');$('#index')?.style.removeProperty('display');view.hidden=true;aside.hidden=true;
+    D.body.classList.remove('cmt-workdesk','cmt-pautas');$('#index')?.style.removeProperty('display');view.hidden=true;aside.hidden=true;
     toggle.hidden=false;toggle.textContent='Voltar ao painel de trabalho';
     const w=getMotor(),s=getSes();
     try {
@@ -219,7 +219,7 @@
     }).join('')+(l.length>settings.sessTake?`<tr><td colspan="6"><div class="cwt-loadmore"><button data-cwt="ses-more">Mostrar mais ${Math.min(80,l.length-settings.sessTake)} processos</button></div></td></tr>`:'');
   }
   function renderSessionList(){const ss=selectedSession();if(!ss)return;const info=sesInfo(ss);const el=$('#cwt-ses-results');if(el)el.innerHTML=sessionRows(info);const count=$('#cwt-ses-count');if(count)count.textContent=sessionFilter(info.lines).length+' de '+info.lines.length+' processos';$('.cwt-chips')?.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.cwtVal===settings.sessFilter));}
-  function render(){if(!settings.mode||settings.legacy)return;mount();if(settings.mode==='triagem')renderTriagem();else renderPautas();}
+  function render(){if(!settings.mode||settings.legacy){D.body.classList.remove('cmt-pautas');return;}mount();D.body.classList.toggle('cmt-pautas',settings.mode==='pautas');$('#index')?.style.setProperty('display',settings.mode==='pautas'?'none':'block','important');if(settings.mode==='triagem')renderTriagem();else renderPautas();}
   function openFicha(p){if(digits(p).length!==20){msg('Número CNJ inválido para abrir a ficha.',true);return;}try {if(W.CMTProntuario?.abrir){W.CMTProntuario.abrir(p,settings.mode==='triagem'?triData().filtered.map(r=>digits(r.Processo||r.processo)):sesInfo(selectedSession()).lines.map(x=>digits(x.cnj)));} else msg('O módulo de ficha ainda não foi carregado.',true);}catch(e){msg('Falha ao abrir a ficha: '+e.message,true);}}
   function downloadCsv(list){const fields=['Processo','Classe','Assunto','Tarefa','Escaninho','Selecionado para sessão'];const value=(r,k)=>k==='Processo'?cnj(r.Processo||r.processo):k==='Classe'?r.classe_judicial||r.Classe||'':k==='Assunto'?r.Assunto||r.assunto_judicial||'':k==='Tarefa'?r.tarefa_atual||'':k==='Escaninho'?r._escaninho||'':r['Sessão Destino']||'';
     const cell=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const text='\ufeff'+[fields,...list.map(r=>fields.map(k=>value(r,k)))].map(row=>row.map(cell).join(';')).join('\r\n');const a=D.createElement('a'),u=URL.createObjectURL(new Blob([text],{type:'text/csv;charset=utf-8'}));a.href=u;a.download='triagem-cmt-'+new Date().toISOString().slice(0,10)+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),5000);msg(`${list.length} registro(s) exportado(s).`);}

@@ -6,7 +6,7 @@
 (function (W, D) {
   'use strict';
   if (W.CMTEsteira) return;
-  const est = { ses: '', etapa: 0, prep: 0, cfg: false, cfgTab: 0, exp: false, q: '', filtro: 'all', take: 60, sel: '', mag: null, magPedido: false };
+  const est = { arq: false, ses: '', etapa: 0, prep: 0, cfg: false, cfgTab: 0, exp: false, q: '', filtro: 'all', take: 60, sel: '', mag: null, magPedido: false };
   const HOJE = () => new Date().toISOString().slice(0, 10);
   const SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
   let A = null; let ligado = null;
@@ -93,6 +93,14 @@
         <i class="${feito && !agora ? 'feito' : agora ? 'agora' : ''}">${n}</i><span><small>${st}</small><b>${e(t)}</b><em>${e(trava ? 'fechada · a pauta oficial já existe' : s)}</em></span></button>
         ${sel ? `<span class="cwe-checks">${C[k].map(([ct, cs, cl, sub]) => `<span class="ck ${cl} ${sub != null ? 'aba' : ''} ${sub != null && sub === est.prep ? 'on' : ''}" ${sub != null ? `data-cwe="prep" data-n="${sub}" role="tab"` : ''}><span class="dot">${cl === ok ? '✓' : cl === pd ? '!' : ''}</span><span>${e(ct)}<small>${e(cs)}</small></span></span>`).join('')}</span>` : ''}</li>`;
     }).join('')}</ol>`;
+  }
+
+  function sessoes(ss) {
+    const hoje = HOJE(), lista = A.sessionData();
+    const ant = lista.filter((x) => x.data < hoje), vis = lista.filter((x) => x.data >= hoje || est.arq || x.id === ss.id);
+    const sub = (x) => { const n = (x.itens || []).length; if (!n) return (x.previa || []).length ? (x.previa || []).length + ' na seleção prévia' : 'sem pauta'; const m = (x.itens || []).filter((i) => i.dataMinuta).length; return m + ' de ' + n + ' minutadas'; };
+    return `<span class="cwe-k">SESSÕES</span><div class="cwe-ses">${vis.map((x) => `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}"><b>${e(A.br(x.data))}</b><small>${e(x.data < hoje ? 'realizada · ' + sub(x) : sub(x))}</small></button>`).join('')}</div>
+      ${ant.length ? `<button type="button" class="cwe-arq" data-cwe="arq">${est.arq ? 'Ocultar as realizadas' : 'Ver realizadas e arquivadas (' + ant.length + ')'}</button>` : ''}`;
   }
 
   /* ---------- listagem e prontuário ---------- */
@@ -235,6 +243,7 @@
       if (k === 'etapa') { const n = +b.dataset.n; if (b.getAttribute('aria-disabled') === 'true') return; est.etapa = n; est.exp = false; }
       else if (k === 'prep') { est.prep = +b.dataset.n; est.etapa = 3; }
       else if (k === 'exp') est.exp = !est.exp;
+      else if (k === 'arq') est.arq = !est.arq;
       else if (k.startsWith('x-')) { est.exp = false; exportar(k.slice(2), ss, dados(ss)); }
       else if (k === 'cfg') { est.cfg = true; est.exp = false; }
       else if (k === 'cfg-x') est.cfg = false;
@@ -263,7 +272,7 @@
     if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; }
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapa3, etapa4, etapa5][d.cur](ss, d);
-    view.innerHTML = `<div class="cwe">${cabecalho(ss, d)}${marcos(ss)}<div class="cwe-grid"><nav class="cwe-nav"><span class="cwe-k">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main">${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
+    view.innerHTML = `<div class="cwe">${cabecalho(ss, d)}${marcos(ss)}<div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main">${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
   }
 
   W.CMTEsteira = { render, estado: () => ({ ...est }) };
