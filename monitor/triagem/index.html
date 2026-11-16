@@ -36,16 +36,17 @@ select{height:34px;padding:0 8px;font-weight:600;font-size:13px}
 /* topo: marca, abas e estado numa linha */
 #top{position:sticky;top:0;z-index:30;display:flex;align-items:flex-end;gap:4px;min-height:58px;padding:0 24px;background:var(--p);border-bottom:2px solid var(--v)}
 #marca{display:flex;align-items:center;gap:8px;align-self:center;white-space:nowrap;flex:none;padding-right:16px;margin-right:8px;border-right:1px solid var(--b);height:30px;text-decoration:none;color:inherit}
-#marca span{font-size:16px;color:var(--m)}#marca b{font-size:16px;letter-spacing:-.03em;color:var(--v)}#marca i{font-style:normal;color:var(--g2)}
+#marca span{font-size:16px;color:var(--m)}#modulos{display:flex;gap:2px;margin-left:2px}#modulos button{border:0;background:transparent;font:inherit;font-size:16px;font-weight:700;letter-spacing:-.03em;color:var(--m);padding:3px 9px;border-radius:7px;cursor:pointer}#modulos button:hover{color:var(--v)}#modulos button.on{color:var(--v);background:rgba(23,63,61,.08)}#modulos button.on::after{content:'.';color:var(--g2)}#marca b{font-size:16px;letter-spacing:-.03em;color:var(--v)}#marca i{font-style:normal;color:var(--g2)}
 #abas{display:flex;align-items:flex-end;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none}#abas::-webkit-scrollbar{display:none}
 .tb{display:flex;align-items:center;gap:8px;height:38px;padding:0 13px;border:1px solid var(--b);border-bottom:0;background:#ece9df;font:600 13px Figtree,sans-serif;color:var(--m2);cursor:pointer;white-space:nowrap;border-radius:0}
 .tb.on{background:var(--p);color:var(--v);box-shadow:inset 0 3px 0 var(--g2);position:relative;top:2px;height:40px}
 .tb small{font:500 11px "JetBrains Mono",monospace;color:var(--m)}
 .tb .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
 .tb.dash{background:transparent;border-style:dashed}
+#estado .btn.ib{width:34px;padding:0;color:var(--v)}
+#st-grava{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 6px;border:0;background:transparent;font:600 12px Figtree,sans-serif;color:var(--m);cursor:default;white-space:nowrap}#st-grava i{width:8px;height:8px;border-radius:50%;background:#b9c2bf;flex:none}#st-grava.ok i{background:#3f8a63}#st-grava.pend{cursor:pointer;color:#8a5a12}#st-grava.pend i{background:#d29a2c}#st-grava.err{cursor:pointer;color:#a03a2a}#st-grava.err i{background:#c4513f}#st-grava.ing i{background:#3f7fa8;animation:stp 1s ease-in-out infinite}@keyframes stp{50%{opacity:.3}}
+.tb-esc .car{font-size:10px;margin-left:4px;color:var(--m)}#esc-pop{position:fixed;z-index:2147480000;min-width:280px;max-width:380px;max-height:70vh;overflow:auto;background:var(--w,#fff);border:1px solid var(--b2,#cfd6d3);border-radius:8px;padding:6px;box-shadow:0 10px 30px rgba(23,63,61,.18)}#esc-pop button{display:flex;width:100%;align-items:center;gap:8px;border:0;background:transparent;padding:7px 9px;border-radius:6px;font:600 13px Figtree,sans-serif;color:var(--tx);cursor:pointer;text-align:left}#esc-pop button:hover,#esc-pop button.on{background:rgba(23,63,61,.07)}#esc-pop button small{margin-left:auto;font:500 11.5px 'JetBrains Mono',monospace;color:var(--m)}#esc-pop .dot{width:9px;height:9px;border-radius:50%;flex:none}#esc-pop hr{border:0;border-top:1px solid var(--b,#e3e0d6);margin:5px 2px}#esc-pop .vz{padding:8px 9px;font-size:12.5px;color:var(--m)}
 #estado{display:flex;align-items:center;gap:8px;margin-left:auto;align-self:center;white-space:nowrap;flex:none;padding-left:10px}
-#st-grava.err{color:var(--r);border-color:var(--r2)}
-#st-grava.pend{color:var(--g);border-color:#d9c38f}
 main{min-height:calc(100vh - 60px);padding-bottom:140px}
 .wrap{max-width:1480px;margin:0 auto;padding:0 24px}
 #carga{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:60vh;color:var(--m);text-align:center;padding:0 24px}
@@ -468,9 +469,9 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
 </head>
 <body>
 <header id="top">
-  <a id="marca" href="#inicio" title="Início da triagem"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><b>Triagem<i>.</i></b></a>
+  <div id="marca"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button></nav></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
-  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
+  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
 <main id="main"><div id="carga"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
 <section id="aba-pautas" hidden aria-label="Pautas de julgamento"><div class="pt-barra pt-acoes"><span class="k" style="margin-right:auto;color:var(--m)">Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta</span><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button></div><main id="pt-view"><div id="pt-carga" role="status"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
@@ -640,8 +641,8 @@ function desfazer() { const u = DESF.pop(); if (!u) { toast('Nada a desfazer.', 
 function agendar(ms) { clearTimeout(T_GRAVA); T_GRAVA = setTimeout(gravar, ms == null ? 3500 : ms); pintaGrava(); }
 function pendentes() { return PEND.size + (ESC_V !== ESC_GRAV ? 1 : 0); }
 function pintaGrava() { const b = $('#st-grava'); if (!b) return; const n = pendentes();
-  b.classList.toggle('err', !!ERRO && !GRAVANDO); b.classList.toggle('pend', !ERRO && n > 0 && !GRAVANDO);
-  b.textContent = !PRONTO ? 'Carregando…' : GRAVANDO ? 'Gravando…' : ERRO ? 'Não gravado (' + n + ') · tentar' : n ? 'Gravar (' + n + ')' : ULT ? 'Gravado ' + ULT : 'Tudo gravado';
+  b.classList.toggle('err', !!ERRO && !GRAVANDO); b.classList.toggle('pend', !ERRO && n > 0 && !GRAVANDO); b.classList.toggle('ing', !!GRAVANDO); b.classList.toggle('ok', PRONTO && !GRAVANDO && !ERRO && !n);
+  const tx = b.querySelector('span') || b; tx.textContent = !PRONTO ? 'carregando' : GRAVANDO ? 'gravando' : ERRO ? 'erro · tentar (' + n + ')' : n ? n + ' a gravar' : ULT ? 'gravado ' + ULT : 'gravado';
   b.title = ERRO ? 'Erro: ' + ERRO : 'Grava no procs-muta (acervo/operacional.json e escaninhos)'; }
 async function gravar() {
   if (GRAVANDO || !PRONTO) return; const P = PM(); if (!P || !P.gravar) { ERRO = 'motor ainda carregando'; pintaGrava(); return; }
@@ -693,9 +694,28 @@ function pintaAbas() {
   ABERTAS = ABERTAS.filter((id) => ESC.escaninhos.some((e) => e.id === id));
   const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
   $('#abas').innerHTML = t('inicio', 'Início') + t('fila', 'Fila de triagem', PRONTO ? U.length : null) +
-    ABERTAS.map((id) => { const e = ESC.escaninhos.find((x) => x.id === id); return t('esc:' + id, e.titulo, U.filter((o) => e._set.has(o.d)).length, '<span class="x" role="button" aria-label="Fechar a aba" data-fecha="' + esc(id) + '">×</span>', e.cor); }).join('') +
-    '<button type="button" class="tb dash' + (ABA === 'escaninhos' ? ' on' : '') + '" data-aba="escaninhos">Escaninhos</button>' + t('pautas', 'Pautas'); }
-$('#abas').addEventListener('click', (e) => { const f = e.target.closest('[data-fecha]'); if (f) { e.stopPropagation(); ABERTAS = ABERTAS.filter((x) => x !== f.dataset.fecha); LS.set('tri_abas', ABERTAS); if (ABA === 'esc:' + f.dataset.fecha) ir('fila'); else pintaAbas(); return; }
+    tabEsc();
+  /* módulos no canto esquerdo: Triagem | Pautas; na Pautas, as abas da triagem ficam ocultas */
+  const naP = ABA === 'pautas'; $('#abas').hidden = naP; if (!naP) ULT_TRI = ABA;
+  D.querySelectorAll('#modulos [data-mod]').forEach((b) => { const on = (b.dataset.mod === 'pautas') === naP; b.classList.toggle('on', on); b.setAttribute('aria-current', on ? 'page' : 'false'); }); }
+var ULT_TRI = 'inicio';
+/* escaninhos: uma aba só, com menu (lista com cor e contagem, painel geral); o aberto aparece no nome da aba */
+function escAtual() { return ABA.indexOf('esc:') === 0 ? ESC.escaninhos.find((x) => x.id === ABA.slice(4)) : null; }
+function tabEsc() { const e = escAtual(), on = !!e || ABA === 'escaninhos';
+  return '<button type="button" role="tab" class="tb tb-esc' + (on ? ' on' : '') + '" aria-selected="' + on + '" data-escmenu="1" aria-haspopup="menu" aria-expanded="' + !!$('#esc-pop') + '">' +
+    (e ? '<i class="dot" style="background:' + esc(e.cor || '#8a9a96') + '"></i>' + esc(e.titulo) + ' <small>' + nf(U.filter((o) => e._set.has(o.d)).length) + '</small><span class="x" role="button" aria-label="Fechar o escaninho" data-escsai="1">×</span>'
+      : 'Escaninhos <small>' + nf(ESC.escaninhos.length) + '</small>') + '<span class="car" aria-hidden="true">▾</span></button>'; }
+function fechaEscPop() { const p = $('#esc-pop'); if (p) p.remove(); const b = D.querySelector('[data-escmenu]'); if (b) b.setAttribute('aria-expanded', 'false'); }
+function abreEscPop(btn) { fechaEscPop(); const r = btn.getBoundingClientRect(), e0 = escAtual(), p = D.createElement('div'); p.id = 'esc-pop'; p.setAttribute('role', 'menu');
+  const L = ESC.escaninhos.slice().sort((a, b) => String(a.titulo).localeCompare(String(b.titulo), 'pt-BR'));
+  p.innerHTML = (L.length ? L.map((e) => '<button type="button" role="menuitem" data-escir="' + esc(e.id) + '"' + (e0 && e0.id === e.id ? ' class="on"' : '') + '><i class="dot" style="background:' + esc(e.cor || '#8a9a96') + '"></i>' + esc(e.titulo) + '<small>' + nf(U.filter((o) => e._set.has(o.d)).length) + '</small></button>').join('') : '<div class="vz">Nenhum escaninho ainda.</div>') +
+    '<hr><button type="button" role="menuitem" data-escir="__todos">Painel dos escaninhos <small>criar, organizar</small></button>';
+  p.style.left = Math.max(8, Math.min(r.left, W.innerWidth - 300)) + 'px'; p.style.top = (r.bottom + 6) + 'px'; D.body.appendChild(p); btn.setAttribute('aria-expanded', 'true');
+  p.addEventListener('click', (ev) => { const b = ev.target.closest('[data-escir]'); if (!b) return; const id = b.dataset.escir; fechaEscPop(); ir(id === '__todos' ? 'escaninhos' : 'esc=' + id); }); }
+D.addEventListener('click', (e) => { if ($('#esc-pop') && !e.target.closest('#esc-pop,[data-escmenu]')) fechaEscPop(); });
+D.addEventListener('keydown', (e) => { if (e.key === 'Escape') fechaEscPop(); });
+$('#modulos').addEventListener('click', (e) => { const b = e.target.closest('[data-mod]'); if (!b) return; ir(b.dataset.mod === 'pautas' ? 'pautas' : (ULT_TRI && ULT_TRI !== 'pautas' ? (ULT_TRI.indexOf('esc:') === 0 ? 'esc=' + ULT_TRI.slice(4) : ULT_TRI) : 'inicio')); });
+$('#abas').addEventListener('click', (e) => { if (e.target.closest('[data-escsai]')) { e.stopPropagation(); fechaEscPop(); ir('fila'); return; } const em = e.target.closest('[data-escmenu]'); if (em) { e.stopPropagation(); if ($('#esc-pop')) fechaEscPop(); else abreEscPop(em); return; } const f = e.target.closest('[data-fecha]'); if (f) { e.stopPropagation(); ABERTAS = ABERTAS.filter((x) => x !== f.dataset.fecha); LS.set('tri_abas', ABERTAS); if (ABA === 'esc:' + f.dataset.fecha) ir('fila'); else pintaAbas(); return; }
   const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
 
 /* ===================== render geral ===================== */
@@ -1007,7 +1027,7 @@ function vEscaninho(id) {
   const sec = contar(base, (o) => o.secao), pr = base.filter((o) => o.prior).length;
   let h = '<div class="es-cab"><div><p class="k">Escaninho · criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)) || '—') + '</p><h1>' + esc(e.titulo) + '<i>.</i></h1>' + (e.subtitulo ? '<p style="margin:4px 0 0;font-size:14.5px;color:var(--m2)">' + esc(e.subtitulo) + '</p>' : '') +
     '<p style="margin:10px 0 0;display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(base.length) + '</b> processos</span>' + sec.map((x) => '<span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(x[1]) + '</b> ' + esc(x[0]) + '</span>').join('') + '<span><b class="mono" style="font-weight:500;color:var(--r)">' + nf(pr) + '</b> com prioridade</span>' + (fora > 0 ? '<span title="processos do escaninho que já foram julgados ou saíram do acervo">' + nf(fora) + ' fora dos em triagem</span>' : '') + '</p></div>' +
-    '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete</p><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem bilhete. Use “Editar escaninho” para deixar a orientação de quem triou.</p>') + '</div></div>';
+    '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete</p><button type="button" class="lk" data-esc-lista="' + esc(e.id) + '">+ Incluir por número</button> · <button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem bilhete. Use “Editar escaninho” para deixar a orientação de quem triou.</p>') + '</div></div>';
   return vFila(h, ' style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"'); }
 function vEscaninhos() {
   let h = '<div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:18px 0 14px;flex-wrap:wrap"><div><p class="k" style="margin:0">Triagem · escaninhos</p><h1 style="margin:4px 0 0;font-size:32px;font-weight:800;letter-spacing:-.04em;color:var(--v)">Escaninhos<span style="color:var(--g2)">.</span></h1><p style="margin:4px 0 0;font-size:14px;color:var(--m2)">Pastas para examinar um grupo depois. Clicar num escaninho abre o conteúdo numa aba própria. Ficam gravados no procs-muta, para toda a equipe.</p></div><button type="button" class="btn pri" data-esc-novo>+ Novo escaninho</button></div><div class="cards">';
@@ -1020,6 +1040,7 @@ function editarEscaninho(id, depois) {
   const e = id ? ESC.escaninhos.find((x) => x.id === id) : { titulo: '', subtitulo: '', bilhete: '', cor: '#a57829' }; let cor = e.cor || '#a57829';
   const g = gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">' + (id ? 'Editar escaninho' : 'Novo escaninho') + '</p><h2>' + esc(id ? e.titulo : 'Novo escaninho') + '<span style="color:var(--g2)">.</span></h2></div><button type="button" class="x" style="font-size:20px" data-gv="fechar" aria-label="Fechar">×</button></div>' +
     '<div class="gv-c"><label class="f">Título<input type="text" id="ge-t" value="' + esc(e.titulo) + '" maxlength="80"></label><label class="f">Subtítulo<input type="text" id="ge-s" value="' + esc(e.subtitulo || '') + '" maxlength="160"></label><label class="f">Bilhete<textarea id="ge-b" rows="5" placeholder="Orientação para quem for examinar o escaninho">' + esc(e.bilhete || '') + '</textarea></label>' +
+    '<label class="f">Incluir processos<textarea id="ge-l" rows="4" class="mono" style="font-size:12.5px" placeholder="Cole os números (com ou sem máscara), um por linha ou separados por vírgula, espaço ou ponto e vírgula"></textarea><span id="ge-li" style="font-weight:500;font-size:12px;color:var(--m)">Só entram processos do acervo; os demais são informados e ficam de fora.</span></label>' +
     '<div><span class="f">Cor</span><div class="cores" style="margin-top:6px">' + CORES.map((c) => '<button type="button" aria-label="' + c[0] + '" data-cor="' + c[1] + '" class="' + (c[1] === cor ? 'on' : '') + '" style="background:' + c[1] + '"></button>').join('') + '</div></div>' + (id ? '<p style="font-size:12.5px;color:var(--m)">' + nf(e.processos.length) + ' processo(s) guardado(s).</p>' : '') + '</div>' +
     '<div class="gv-f">' + (id ? '<button type="button" class="btn" style="color:var(--r);border-color:var(--r2);margin-right:auto" data-gv="excluir">Excluir escaninho</button>' : '') + '<button type="button" class="btn" data-gv="fechar">Cancelar</button><button type="button" class="btn pri" data-gv="salvar">' + (id ? 'Salvar' : 'Criar') + '</button></div>');
   g.addEventListener('click', (ev) => { const c = ev.target.closest('[data-cor]'); if (c) { cor = c.dataset.cor; $$('[data-cor]', g).forEach((b) => b.classList.toggle('on', b === c)); return; }
@@ -1030,7 +1051,18 @@ function editarEscaninho(id, depois) {
     const agora = new Date().toISOString();
     if (id) Object.assign(e, { titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, atualizadoEm: agora });
     else { const ne = { id: 'e' + Date.now().toString(36), titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, criadoEm: agora, atualizadoEm: agora, processos: [], _set: new Set() }; ESC.escaninhos.push(ne); if (depois) depois(ne); }
-    ESC_V++; agendar(); fecharGaveta(); render(); toast(id ? 'Escaninho salvo.' : 'Escaninho criado: ' + t + '.'); }); }
+    const alvo = id ? e : ESC.escaninhos[ESC.escaninhos.length - 1], r = incluirLista(alvo, $('#ge-l').value);
+    ESC_V++; agendar(); fecharGaveta(); render(); toast((id ? 'Escaninho salvo.' : 'Escaninho criado: ' + t + '.') + (r ? ' ' + r : '')); });
+  const tl = $('#ge-l', g); if (tl) tl.addEventListener('input', () => { const L = listaCnj(tl.value), M = new Map(U.map((o) => [o.d, o])); const no = L.filter((d) => M.has(d)), ja = no.filter((d) => e._set && e._set.has(d)).length;
+    $('#ge-li', g).textContent = L.length ? nf(L.length) + ' número(s) lido(s): ' + nf(no.length - ja) + ' a incluir' + (ja ? ', ' + nf(ja) + ' já no escaninho' : '') + (L.length - no.length ? ', ' + nf(L.length - no.length) + ' fora do acervo' : '') + '.' : 'Só entram processos do acervo; os demais são informados e ficam de fora.'; });
+  if (depois === 'lista' && tl) setTimeout(() => tl.focus(), 60); }
+/* lista de números → dígitos CNJ (20), sem repetição */
+function listaCnj(t) { const v = new Set(); (String(t || '').match(/\d{7}-?\d{2}\.?\d{4}\.?\d\.?\d{2}\.?\d{4}/g) || []).forEach((m) => v.add(dg(m))); return [...v]; }
+function incluirLista(e, txt) { const L = listaCnj(txt); if (!L.length || !e) return ''; const M = new Map(U.map((o) => [o.d, o])); let inc = 0, ja = 0; const fora = [];
+  L.forEach((d) => { const o = M.get(d); if (!o) { fora.push(fmtCnj(d)); return; } if (e._set.has(d)) { ja++; return; } e._set.add(d); e.processos.push(o.cnj); refazDest(o); inc++; });
+  if (inc) e.atualizadoEm = new Date().toISOString();
+  if (fora.length) console.warn('[escaninho] fora do acervo:', fora.join(', '));
+  return nf(inc) + ' processo(s) incluído(s)' + (ja ? ', ' + nf(ja) + ' já estava(m)' : '') + (fora.length ? ', ' + nf(fora.length) + ' fora do acervo (' + fora.slice(0, 3).join(', ') + (fora.length > 3 ? '…' : '') + ')' : '') + '.'; }
 function novoEscaninho() { editarEscaninho(null, (ne) => { RODA['r-esc'] = ne.id; }); }
 function excluirEscaninho(id) { const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return;
   gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">Excluir escaninho</p><h2>' + esc(e.titulo) + '</h2><p>Os ' + nf(e.processos.length) + ' processo(s) voltam à fila de triagem. Nada sai do acervo.</p></div></div><div class="gv-f"><button type="button" class="btn" data-gv="n">Cancelar</button><button type="button" class="btn" style="background:var(--r);border-color:var(--r);color:#fff" data-gv="s">Excluir</button></div>').addEventListener('click', (ev) => { const a = ev.target.closest('[data-gv]'); if (!a) return;
@@ -1212,6 +1244,7 @@ D.addEventListener('click', (e) => { const t = e.target;
     if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
   if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : ESCL; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; }
   if ((b = q('[data-esc-abre]')) && !q('[data-esc-edit]') && !q('[data-esc-del]')) { ir('esc=' + b.dataset.escAbre); return; }
+  if ((b = q('[data-esc-lista]'))) { editarEscaninho(b.dataset.escLista, 'lista'); return; }
   if ((b = q('[data-esc-edit]'))) { editarEscaninho(b.dataset.escEdit); return; }
   if ((b = q('[data-esc-del]'))) { excluirEscaninho(b.dataset.escDel); return; }
   if (q('[data-esc-novo]')) { editarEscaninho(null, (ne) => { setTimeout(() => ir('esc=' + ne.id), 0); }); return; } });
