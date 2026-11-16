@@ -58,7 +58,7 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 .kpi{display:flex;flex-direction:column;gap:5px;padding:15px 17px;border:1px solid var(--b);background:var(--w);border-radius:8px;text-align:left;cursor:pointer}
 .kpi:hover{border-color:var(--v2)}
 .kpi b{font:500 32px "JetBrains Mono",monospace;letter-spacing:-.02em;line-height:1}
-.kpi .sub{font-size:12.5px;color:var(--m2)}.kpi .rg{font-size:11.5px;color:var(--m)}
+.kpi .sub{font-size:12.5px;color:var(--m2)}.kpi .kr{font-size:11.5px;color:var(--m)}
 .ini-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;padding:16px 0 30px;align-items:start}
 .col{display:flex;flex-direction:column;gap:16px;min-width:0}
 .card{border:1px solid var(--b);background:var(--w);border-radius:8px;min-width:0}
@@ -741,7 +741,7 @@ function vInicio() {
   const semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri');
   const aptos = U.filter((o) => o.apto), comPend = aptos.filter((o) => o.pend.length), prontos = aptos.filter((o) => !o.pend.length), prM = prontos.filter((o) => o.monoE), prC = prontos.filter((o) => !o.monoE);
   const cands = U.filter((o) => o.cand && !o.dest.k), dados = U.filter((o) => o.dest.k);
-  const k = (cor, rot, n, sub, rg, conj) => '<button type="button" class="kpi" style="box-shadow:inset 0 3px 0 ' + cor + '" data-conj="' + conj + '"><span class="k" style="color:' + cor + '">' + rot + '</span><b style="color:' + cor + '">' + nf(n) + '</b><span class="sub">' + sub + '</span>' + (rg ? '<span class="rg">' + rg + '</span>' : '') + '<span class="lk" style="margin-top:2px">Abrir na Fila →</span></button>';
+  const k = (cor, rot, n, sub, rg, conj) => '<button type="button" class="kpi" style="box-shadow:inset 0 3px 0 ' + cor + '" data-conj="' + conj + '"><span class="k" style="color:' + cor + '">' + rot + '</span><b style="color:' + cor + '">' + nf(n) + '</b><span class="sub">' + sub + '</span>' + (rg ? '<span class="kr">' + rg + '</span>' : '') + '<span class="lk" style="margin-top:2px">Abrir na Fila →</span></button>';
   REG = {}; reg('tri', 'Sem caminho definido', tri); reg('pr', 'Prontos para julgar', prontos); reg('prc', 'Prontos · colegiado', prC); reg('prm', 'Prontos · decisão do relator', prM); reg('cand', 'Candidatos à monocrática', cands); reg('dados', 'Já com destino da triagem', dados); reg('novas', 'Tarefas não classificadas', NOVAS); reg('pend', 'Aptos com pendência', comPend);
   let h = '<div class="wrap"><div class="ini-cab"><div><p class="k" style="margin:0">Triagem · início</p><p>Só o que leva a uma decisão de triagem. Cada número abre os processos na Fila, já filtrados.</p></div><div style="display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.length) + '</b> em triagem</span><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.filter((o) => o.dest.k).length) + '</b> com destino da triagem</span></div></div>';
   h += '<div class="kpis">' + k('#a57829', 'Sem caminho definido', tri.length, 'em Triagem de Gabinete ou Analisar tipo de decisão, sem destino', '', 'tri') +

@@ -36,7 +36,7 @@
   var css = D.createElement('style');
   css.textContent =
     '.rg-veu{position:fixed;inset:0;background:rgba(23,63,61,.32);z-index:2147481000}' +
-    '.rg{position:fixed;left:50%;top:4vh;transform:translateX(-50%);width:min(1080px,calc(100vw - 24px));height:92vh;display:grid;grid-template-columns:230px minmax(0,1fr);grid-template-rows:minmax(0,1fr);background:#fbfaf5;border:1px solid #c8c3b6;border-top:3px solid #173f3d;box-shadow:0 24px 60px rgba(23,63,61,.28);z-index:2147481001;font:14px/1.45 Figtree,system-ui,sans-serif;color:#203b39;border-radius:8px;overflow:hidden}' +
+    'section.rg{position:fixed;left:50%;top:4vh;transform:translateX(-50%);width:min(1080px,calc(100vw - 24px));height:92vh;display:grid;grid-template-columns:230px minmax(0,1fr);grid-template-rows:minmax(0,1fr);background:#fbfaf5;border:1px solid #c8c3b6;border-top:3px solid #173f3d;box-shadow:0 24px 60px rgba(23,63,61,.28);z-index:2147481001;font:14px/1.45 Figtree,system-ui,sans-serif;color:#203b39;border-radius:8px;overflow:hidden}' +
     '.rg nav{background:#f4f2ea;border-right:1px solid #d8d3c6;padding:14px 10px;overflow:auto;display:flex;flex-direction:column;gap:2px}' +
     '.rg nav p{margin:12px 8px 4px;font:500 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#805b18}.rg nav p:first-child{margin-top:0}' +
     '.rg nav button{border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:5px;font:600 13px Figtree,sans-serif;color:#4f5a57;cursor:pointer}.rg nav button:hover{background:#ece9df}.rg nav button[aria-current=true]{background:#173f3d;color:#fff}' +
@@ -52,7 +52,7 @@
     '.rg .rg-msg{padding:9px 12px;border:1px solid #d8d3c6;border-radius:6px;background:#fff;font-size:12.5px}.rg .rg-msg.bad{border-color:#e2b3aa;color:#8a2f22}' +
     '.rg .rg-eq{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:7px 14px;border-top:1px solid #f0ece2;font-size:13px}.rg .rg-eq label{margin-left:10px;font-size:12.5px;white-space:nowrap}' +
     '.rg .rg-add{display:flex;gap:8px;padding:10px 14px;border-top:1px solid #e3ded2}.rg .rg-add input{flex:1;height:30px;border:1px solid #c8c3b6;border-radius:5px;padding:0 8px;font:13px Figtree,sans-serif}' +
-    '@media (max-width:760px){.rg{grid-template-columns:minmax(0,1fr);top:0;height:100vh;width:100vw;border-radius:0}.rg nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid #d8d3c6}.rg nav p{display:none}.rg .rg-li{grid-template-columns:minmax(0,1fr) 50px}.rg .rg-li select{grid-column:1/-1}.rg .rg-tl{grid-template-columns:minmax(0,1fr)}}';
+    '@media (max-width:760px){section.rg{grid-template-columns:minmax(0,1fr);top:0;height:100vh;width:100vw;border-radius:0}.rg nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid #d8d3c6}.rg nav p{display:none}.rg .rg-li{grid-template-columns:minmax(0,1fr) 50px}.rg .rg-li select{grid-column:1/-1}.rg .rg-tl{grid-template-columns:minmax(0,1fr)}}';
   D.head.appendChild(css);
 
   var ABAS = [['TRIAGEM'], ['escopo', 'Escopo da triagem'], ['destino', 'Destino provável e candidatos'], ['ACERVO'], ['acervo', 'Acervo fonte'], ['PAUTAS E EQUIPE'], ['calendario', 'Calendário forense'], ['etiquetas', 'Regras de etiquetas'], ['designacao', 'Regras de designação'], ['produtividade', 'Regras de produtividade'], ['sessao', 'Sessão nova'], ['equipe', 'Equipe']];
