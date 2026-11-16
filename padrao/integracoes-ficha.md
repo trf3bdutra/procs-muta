@@ -152,6 +152,12 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 | Sessão de destino | `Nova sessão de destino` | regra · calculado | operacional · `pauta` | 175 de 4.725 | antes "Sessão Destino" |
 | Situação na seleção | `JULGAMENTO` | regra · calculado | operacional · `pauta` | 175 de 4.725 | situação da seleção prévia |
 | Motivo da remarcação | `Motivo da remarcação` | texto | operacional · `pauta` | 0 de 4.725 |  |
+| Publicação da pauta | `Pauta - Publicação` | importado · só leitura | operacional · `pauta` | — | dt_publicacao da Relação de Processos da sessão (PJe 2G, relatório 151) |
+| Inclusão na pauta | `Pauta - Inclusão` | importado · só leitura | operacional · `pauta` | — | tp_insercao do relatório 151, como vem do PJe (N ou M) [VALIDAR significado] |
+| Proclamação do julgamento | `Pauta - Proclamação` | importado · só leitura | operacional · `pauta` | — | proclamacao_decisao do relatório 151, depois da sessão |
+| Último movimento | `Pauta - Último movimento` | importado · só leitura | operacional · `pauta` | — | ds_ultimo_movimento do relatório 151 (ex.: intimação de pauta publicada) |
+| MPU | `Pauta - MPU` | importado · só leitura | operacional · `pauta` | — | mpu do relatório 151, SIM ou NÃO [VALIDAR significado] |
+| Relação do PJe importada em | `Pauta - Importado em` | importado · só leitura | operacional · `pauta` | — | data e hora da importação do relatório 151 |
 
 ### Processo
 
