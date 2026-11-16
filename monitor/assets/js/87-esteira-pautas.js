@@ -7,7 +7,7 @@
   'use strict';
   if (W.CMTEsteira) return;
   const est = { arq: false, ses: '', etapa: 0, prep: 0, cfg: false, cfgTab: 0, exp: false, q: '', filtro: 'all', take: 60, sel: '', mag: null, magPedido: false,
-    desm: {}, c2: {}, etqF: 'todos', etqTake: 50, convAb: false, convG: new Set(), desF: 'todos', desTake: 50, dsg: {}, cf: '' };
+    desm: {}, c2: {}, etqF: 'todos', etqTake: 50, convAb: false, convG: new Set(), desF: 'todos', desTake: 50, dsg: {}, cf: '', nr: null, mEd: false };
   const HOJE = () => new Date().toISOString().slice(0, 10);
   const SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
   let A = null; let ligado = null;
@@ -74,10 +74,10 @@
   }
   function marcos(ss) {
     const f = ss.fases || {};
-    const M = [['Peço dia', f.pauta, 'do calendário do tribunal'], ['Início', f.inicio, 'início da preparação'], ['Entrega', f.minutas, 'entrega das minutas'], ['Liberação', f.liberacao, 'liberação dos votos'], ['Sessão', ss.data, 'data do julgamento']];
+    const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', '']];
     return `<section class="cwe-marcos" aria-label="Marcos da sessão"><button type="button" class="cwe-regras" data-cwe="cfg-0">regras</button><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
-      ${M.map(([t, v, o]) => `<label title="${e(t + ' · ' + o)}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
-      <span class="cwe-mkb"><button type="button" data-cwt="marcos">Editar marcos</button></span></section>`;
+      ${M.map(([t, v, o, k]) => est.mEd && k ? `<label title="${e(t + ' · ' + o)}">${e(t)}<input type="date" data-cwe-mk="${k}" value="${e(v || '')}"></label>` : `<label title="${e(t + ' · ' + o)}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
+      <span class="cwe-mkb"><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
   }
   function esteira(d) {
     const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e conferência'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
@@ -248,9 +248,18 @@
       <div class="cwe-lado"><section class="cwe-box"><div class="h"><span><b>Regras base pela tarefa no PJe</b><button type="button" class="cwe-lnk" data-cwe="cfg-2">Editar regras</button></span><small>valem antes das etiquetas · o tipo de julgamento sai daqui</small></div>
           <div class="rb"><code>[Sessão - ED] …  ·  [ED] …</code><b>→ ED</b></div><div class="rb"><code>[Ag. Int] …</code><b>→ AgInt</b></div><div class="rb"><code>tarefa com "retratação"</code><b>→ JR</b></div><div class="rb"><code>… Processos retirados e adiados</code><b>→ Retirado ou adiado</b></div>
           <p>A etiqueta de ED só informa. Remessa necessária vem da classe.</p></section>
-        <aside class="cwe-box"><div class="h"><span><b>Sem regra, mais frequentes</b><button type="button" class="cwe-lnk" data-cwt="rules">Editar regras</button></span><small>na pauta de ${e(A.br(ss.data).slice(0, 5))}</small></div>
-          ${semL.map(([t, n]) => `<div class="sr"><b>${n}</b><span>${e(t)}</span><button type="button" data-cwt="rules">Criar regra</button></div>`).join('') || '<p>Todas as etiquetas têm regra.</p>'}</aside></div></div></section>`;
+        <aside class="cwe-box"><div class="h"><span><b>Sem regra, mais frequentes</b><button type="button" class="cwe-lnk" data-cwe="cfg-2">Editar regras</button></span><small>na pauta de ${e(A.br(ss.data).slice(0, 5))}</small></div>
+          ${semL.map(([t, n]) => `<div class="sr"><b>${n}</b><span>${e(t)}</span><button type="button" data-cwe="nr" data-t="etq" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'etq' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'etq' && est.nr.v === t ? formEtq(d, t) : ''}`).join('') || '<p>Todas as etiquetas têm regra.</p>'}</aside></div></div></section>`;
   }
+
+  /* criar regra sem sair da esteira */
+  function formEtq(d, t) { let E = []; try { E = d.s?.efeitosEtiqueta?.() || []; } catch (er) { E = []; }
+    return `<div class="cwe-nr" data-nr="etq"><span class="cwe-k">NOVA REGRA · ETIQUETA "${e(t)}"</span><label>Converte em<select data-nr-ef>${E.map((x) => `<option value="${e(x.k)}" data-v="${e(x.v)}">${e(x.t)}</option>`).join('')}</select></label>
+      <label>Valor <small>(tema, especificidade, hipótese ou nº da meta)</small><input data-nr-v placeholder="só para os efeitos que pedem valor"></label>
+      <span class="cwe-acoes"><button type="button" class="pri" data-cwe="nr-salvar">Salvar a regra</button><button type="button" data-cwe="nr-x">Cancelar</button></span><small>Vale para a etiqueta exatamente com este texto, nesta e nas próximas pautas.</small></div>`; }
+  function formAss(Z, t) { const op = (P) => `<option value="">— manter —</option>${P.map((m) => `<option>${e(m.nome)}</option>`).join('')}`;
+    return `<div class="cwe-nr" data-nr="ass"><span class="cwe-k">NOVA REGRA · ASSUNTO "${e(t)}"</span><label>Minutante<select data-nr-d>${op(Z.minutantes)}</select></label><label>Corretor<select data-nr-c>${op(Z.corretores)}</select></label>
+      <span class="cwe-acoes"><button type="button" class="pri" data-cwe="nr-salvar">Salvar a regra</button><button type="button" data-cwe="nr-x">Cancelar</button></span><small>Entra no critério "Tema ou assunto"${Z.escopo === 'sessao' ? ', no ajuste desta sessão' : ', nas regras gerais'}.</small></div>`; }
 
   /* 3 · B · designação e correção */
   function etapa3b(ss, d, tabs) {
@@ -281,7 +290,7 @@
           ${Z.criterios.map((k, i) => `<div class="cr ${k.d || k.c ? '' : 'off'}"><b>${i + 1}</b><span><b>${e(k.t)}</b></span><span>${e([k.d ? 'minuta' : '', k.c ? 'correção' : ''].filter(Boolean).join(' · ') || 'desligada')}</span></div>`).join('')}
           <p>A primeira regra que casa decide, separadamente para minuta e para correção. Ausência cadastrada tira a pessoa do período.${Z.equilibrar ? ' Equilibrar a carga · ligado.' : ''}</p></section>
         <section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
-          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwt="rules">Criar regra</button></div>`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
+          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
       <section class="cwe-carga">${quadro('MINUTA · EQUIPE', Z.minutantes, 'd')}${quadro('CORREÇÃO · ASSESSORIA', Z.corretores, 'c')}</section>
       <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a preencher</b> · o que veio por regra pode ser trocado; o que está em branco espera escolha</span><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="4">Próximo: publicar a pauta →</button></div>
         ${vis.map((p) => { const dg = A.digits(p.cnj); return `<article class="cwe-pc"><div class="t">${ck('dsg', dg)}<span class="it">item ${e(p.item || '—')}</span><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(p.cnj))}</button><span class="as">${e(p.assunto || '—')} · ${e(p.recurso || p.classe || '')} · ${e(p.secao || '')}</span><span class="ct">${e(AP_T[p.tipo] || p.tipo || '1º julgamento')}</span></div>
@@ -328,10 +337,10 @@
     const desig = (() => { try { return d.s?.regrasDesignacaoSessao?.(ss.id) || null; } catch (er) { return null; } })();
     const crit = Array.isArray(desig?.ordem) ? desig.ordem : Array.isArray(desig) ? desig.map((x) => x.id || x.nome || x) : [];
     const T = [
-      ['Regras dos marcos', `<p>Nenhuma data fica fixa: cada marco segue uma regra em dias úteis, contada da sessão ou do peço dia. A sessão pode ajustar a própria data sem mudar a regra.</p><div class="cwe-cfg-l">${[['Peço dia', 'calendário do tribunal', f.pauta ? 'nesta sessão: ' + A.br(f.pauta) : ''], ['Início da preparação', '[definir] dias úteis depois do peço dia', dias(f.inicio, ss.data) != null ? 'nesta sessão: ' + dias(f.inicio, ss.data) + ' dias corridos antes da sessão' : ''], ['Entrega das minutas', '[definir] dias úteis antes da sessão', dias(f.minutas, ss.data) != null ? 'nesta sessão: ' + dias(f.minutas, ss.data) + ' dias corridos' : ''], ['Liberação', '[definir] dias úteis antes da sessão', dias(f.liberacao, ss.data) != null ? 'nesta sessão: ' + dias(f.liberacao, ss.data) + ' dias corridos' : '']].map(([a, b, c]) => `<span><b>${e(a)}</b>${e(b)}<small>${e(c)}</small></span>`).join('')}</div><button type="button" data-cwt="marcos">Calendário e marcos</button>`],
-      ['Calendário forense', '<p>Feriados nacionais e da Justiça Federal, de MS, Carnaval, Semana Santa, Corpus Christi e recesso (20/12 a 20/01). Os marcos, os prazos da triagem e as urgências seguem este calendário.</p><button type="button" data-cwt="marcos">Abrir o calendário</button>'],
-      ['Regras de etiquetas', '<p>A tarefa do PJe decide o tipo de julgamento ([ED], [Sessão - ED], [Ag. Int], retratação); a etiqueta de ED só informa. Remessa necessária vem da classe. As conversões gerais (subassuntos, MPF, especificidades, alertas de impedimento e suspeição) estão em apoio/regras/etiquetas.json.</p><button type="button" data-cwt="rules">Abrir as regras</button>'],
-      ['Regras de designação', `<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>${crit.length ? `<ol class="cwe-cfg-o">${crit.map((c) => `<li>${e(typeof c === 'string' ? c : JSON.stringify(c))}</li>`).join('')}</ol>` : ''}<button type="button" data-cwt="rules">Regras desta sessão</button>`],
+      ['Regras dos marcos', `<p>Nenhuma data fica fixa: cada marco segue uma regra em dias úteis, contada da sessão ou do peço dia. A sessão pode ajustar a própria data sem mudar a regra.</p><div class="cwe-cfg-l">${[['Peço dia', 'calendário do tribunal', f.pauta ? 'nesta sessão: ' + A.br(f.pauta) : ''], ['Início da preparação', '[definir] dias úteis depois do peço dia', dias(f.inicio, ss.data) != null ? 'nesta sessão: ' + dias(f.inicio, ss.data) + ' dias corridos antes da sessão' : ''], ['Entrega das minutas', '[definir] dias úteis antes da sessão', dias(f.minutas, ss.data) != null ? 'nesta sessão: ' + dias(f.minutas, ss.data) + ' dias corridos' : ''], ['Liberação', '[definir] dias úteis antes da sessão', dias(f.liberacao, ss.data) != null ? 'nesta sessão: ' + dias(f.liberacao, ss.data) + ' dias corridos' : '']].map(([a, b, c]) => `<span><b>${e(a)}</b>${e(b)}<small>${e(c)}</small></span>`).join('')}</div><button type="button" data-cwt="marcos" title="Abre o editor completo do motor">Calendário e marcos · editor completo ↗</button>`],
+      ['Calendário forense', '<p>Feriados nacionais e da Justiça Federal, de MS, Carnaval, Semana Santa, Corpus Christi e recesso (20/12 a 20/01). Os marcos, os prazos da triagem e as urgências seguem este calendário.</p><button type="button" data-cwt="marcos" title="Abre o editor completo do motor">Abrir o calendário no editor completo ↗</button>'],
+      ['Regras de etiquetas', '<p>A tarefa do PJe decide o tipo de julgamento ([ED], [Sessão - ED], [Ag. Int], retratação); a etiqueta de ED só informa. Remessa necessária vem da classe. As conversões gerais (subassuntos, MPF, especificidades, alertas de impedimento e suspeição) estão em apoio/regras/etiquetas.json.</p><button type="button" data-cwt="rules" title="Abre o editor completo do motor">Abrir as regras no editor completo ↗</button>'],
+      ['Regras de designação', `<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>${crit.length ? `<ol class="cwe-cfg-o">${crit.map((c) => `<li>${e(typeof c === 'string' ? c : JSON.stringify(c))}</li>`).join('')}</ol>` : ''}<button type="button" data-cwt="rules" title="Abre o editor completo do motor">Regras desta sessão no editor completo ↗</button>`],
       ['Regras de produtividade', '<p>Metas internas do gabinete, distintas das metas do CNJ: cota fixa de minutas por dia útil para quem minuta. Dia sem expediente ou sem processos pendentes: meta zero. Cada processo minutado conta uma vez por número.</p><div class="cwe-cfg-l">' + [['Dalete, José, Rodrigo, Débora e Maria Eduarda', '3 minutas por dia'], ['Victor e Estela', '4 minutas por dia'], ['Demais da equipe', 'sem meta interna'], ['Monocráticas e correções', 'sem meta interna'], ['Complexidade (½ · Ω · A · Σ)', '0,5 · 1 · 2 · 3 [VALIDAR peso na meta]']].map(([a, b]) => `<span><b>${e(a)}</b>${e(b)}</span>`).join('') + '</div>'],
       ['Sessão', `<p>O que toda sessão nova recebe ao ser criada.</p><div class="cwe-cfg-l">${[['Órgão julgador', 'Turma Regional de MS'], ['Gabinete na relação do PJe', S.gab || 'Gab. A da Turma Regional de Mato Grosso do Sul'], ['Horário', ss.hora || '14:00'], ['Julgadores', (est.mag || []).map((m) => m.nome).join(' · ') || 'apoio/magistrados.json']].map(([a, b]) => `<span><b>${e(a)}</b>${e(b)}</span>`).join('')}</div>`],
       ['Equipe', `<p>A equipe fica aqui, junto das regras que a usam: quem minuta entra na designação e na meta interna; a Assessoria corrige.</p><div class="cwe-eq">${eq.map((m) => `<span><b>${e(m.nome)}</b><small>${e((m.papel === 'assessoria' ? 'Assessoria' : 'Equipe') + (m.cargo ? ' · ' + m.cargo : ''))}</small><em class="${m.minuta ? 'min' : m.correcao ? 'cor' : ''}">${m.minuta ? 'minuta' : m.correcao ? 'corrige' : 'apoio'}</em></span>`).join('')}</div><button type="button" data-cwe="equipe">Abrir o cadastro completo da equipe</button>`]
@@ -435,6 +444,14 @@
       else if (k === 'des-mais') est.desTake += 50;
       else if (k === 'des-todos') est.desTake = 1e5;
       else if (k === 'cf') est.cf = est.cf === b.dataset.v ? '' : b.dataset.v;
+      else if (k === 'm-ed') est.mEd = !est.mEd;
+      else if (k === 'nr') est.nr = est.nr?.t === b.dataset.t && est.nr.v === b.dataset.v ? null : { t: b.dataset.t, v: b.dataset.v };
+      else if (k === 'nr-x') est.nr = null;
+      else if (k === 'nr-salvar') { const f = b.closest('.cwe-nr'), s = A.getSes(); if (!f || !est.nr || !s) return;
+        let ok = false;
+        if (f.dataset.nr === 'etq') { const ef = f.querySelector('[data-nr-ef]').value, v = f.querySelector('[data-nr-v]').value; ok = !!s.criarRegraEtiqueta?.(est.nr.v, ef, v); if (!ok) { A.msg('Este efeito pede um valor (tema, especificidade, hipótese ou número da meta).', true); return; } }
+        else { const dd = f.querySelector('[data-nr-d]').value, cc = f.querySelector('[data-nr-c]').value; ok = !!s.regraAssunto?.(ss.id, est.nr.v, dd, cc); if (!ok) { A.msg('Escolha o minutante, o corretor ou os dois.', true); return; } }
+        est.nr = null; A.msg('Regra criada. A lista já reflete a regra; grave no procs-muta pela Base.'); }
       else if (acao(k, b, ss)) return;
       else if (k === 'triagem') { D.querySelector('nav.mods .mod[data-cmt="triagem"]')?.click(); return; }
       else if (k === 'equipe') { est.cfg = false; const bt = D.querySelector('nav.mods .mod[data-cmt="equipe"]') || D.querySelector('nav.mods .mod[data-tab="equipe"]'); if (bt) bt.click(); return; }
@@ -443,6 +460,7 @@
     view.addEventListener('change', (ev) => {
       const t = ev.target;
       if (t.dataset.cweCk) { const k = t.dataset.cweCk, dg = t.dataset.p, S0 = est.desm[k] || (est.desm[k] = new Set()); if (t.checked) S0.delete(dg); else S0.add(dg); A.render(); return; }
+      if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Grave no procs-muta pela Base.'); } return; }
       if (t.dataset.cweEsc) { const dg = t.dataset.p; est.dsg[dg] = { ...(est.dsg[dg] || {}), [t.dataset.cweEsc]: t.value }; A.render(); }
     });
     view.addEventListener('input', (ev) => {
@@ -457,7 +475,7 @@
     A = api; const view = api.view; ligar(view);
     const ss = api.selectedSession();
     if (!ss) { view.innerHTML = `<div class="cwe"><div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Nenhuma sessão cadastrada</h1><p>Cadastre a data do julgamento para começar a seleção prévia.</p></div><div class="cwe-tools"><button type="button" class="pri" data-cwt="create-session">Cadastrar sessão</button></div></div></div>`; return; }
-    if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; }
+    if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapa3, etapa4, etapa5][d.cur](ss, d);
     view.innerHTML = `<div class="cwe">${cabecalho(ss, d)}${marcos(ss)}<div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main">${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
