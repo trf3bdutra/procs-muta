@@ -1,0 +1,30 @@
+
+/* CMT-Acervo · V29 — regras por sessão */
+#cmt-s-rules{margin:16px 0 4px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.cmt-sr-head{display:flex;align-items:flex-start;gap:18px;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:12px}
+.cmt-sr-head h2{margin:2px 0 4px;font:800 18px/1.25 Figtree,system-ui,sans-serif;color:var(--ink)}
+.cmt-sr-head p{margin:0;color:var(--muted);font-size:12px}
+.cmt-sr-k{font:800 9.5px/1.2 Figtree,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--m-ses)}
+.cmt-sr-lock{flex:none;border:1px solid color-mix(in srgb,var(--m-ses) 35%,var(--line));border-radius:999px;padding:4px 9px;background:color-mix(in srgb,var(--m-ses) 8%,var(--paper));color:var(--m-ses);font:800 10px/1.2 Figtree,system-ui,sans-serif;text-transform:uppercase;letter-spacing:.08em}
+.cmt-sr-actions,.cmt-sr-copy{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:11px}
+.cmt-sr-copy{padding:10px;border:1px dashed var(--line);border-radius:10px;background:var(--bg)}
+.cmt-sr-copy label{display:flex;align-items:center;gap:8px;flex:1 1 360px;margin:0;color:var(--muted);font:700 11px/1.35 Figtree,system-ui,sans-serif}
+.cmt-sr-copy select{flex:1;min-width:180px}
+.cmt-sr-criteria{display:grid;gap:7px;margin-top:12px}
+.cmt-sr-crit{border:1px solid var(--line);border-radius:10px;background:var(--bg);overflow:hidden}
+.cmt-sr-crit>summary{display:grid;grid-template-columns:24px minmax(140px,1fr) auto auto auto minmax(0,auto);gap:6px;align-items:center;cursor:pointer;padding:8px 9px;list-style:none}
+.cmt-sr-crit>summary::-webkit-details-marker{display:none}
+.cmt-sr-crit .nn{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:var(--soft);font:800 10px Figtree,system-ui,sans-serif;color:var(--muted)}
+.cmt-sr-crit .tt{font:800 12.5px/1.25 Figtree,system-ui,sans-serif;color:var(--ink)}
+.cmt-sr-crit .tg,.cmt-sr-crit .mv{border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--muted);padding:3px 7px;font:800 9.5px/1.2 Figtree,system-ui,sans-serif;cursor:pointer}
+.cmt-sr-crit .tg[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.cmt-sr-crit .mv{border-radius:7px;padding:3px 6px}
+.cmt-sr-crit .ct{color:var(--muted);font:600 10px/1.2 Figtree,system-ui,sans-serif;white-space:nowrap}
+.cmt-sr-rows{border-top:1px solid var(--line);padding:7px 9px 9px}
+.cmt-sr-row{display:grid;grid-template-columns:minmax(200px,1fr) minmax(145px,.7fr) minmax(145px,.7fr);gap:8px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line)}
+.cmt-sr-row:last-child{border-bottom:0}
+.cmt-sr-row span{display:grid;gap:1px}.cmt-sr-row b{font-size:11.5px;color:var(--ink)}.cmt-sr-row small{font-size:10px;color:var(--muted)}
+.cmt-sr-row select{min-width:0;width:100%}
+.cmt-sr-empty{padding:16px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:12px}
+@media(max-width:780px){.cmt-sr-head{flex-direction:column;gap:8px}.cmt-sr-row{grid-template-columns:1fr}.cmt-sr-crit>summary{grid-template-columns:24px minmax(100px,1fr) auto auto}.cmt-sr-crit .ct,.cmt-sr-crit .mv{display:none}.cmt-sr-copy label{align-items:flex-start;flex-direction:column}.cmt-sr-copy select{width:100%}}
+

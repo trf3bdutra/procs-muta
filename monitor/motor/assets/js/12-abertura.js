@@ -1,0 +1,2 @@
+(function(){var el=document.getElementById("painel-abertura");function fim(){if(!el||el.classList.contains("saindo"))return;el.classList.add("saindo");setTimeout(function(){el.style.display="none"},300)}
+if(window.__painelPronto)fim();window.addEventListener("painel-pronto",fim);window.addEventListener("error",function(){setTimeout(fim,1500)});setTimeout(fim,45000);})();

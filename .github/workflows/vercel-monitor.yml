@@ -1,13 +1,14 @@
 # Publica o CMT-monitor no projeto trf3-muta da Vercel (trf3-muta.vercel.app).
-# Vão para a Vercel: o cmt-monitor.html (raiz), o Modus Operandi público (/compendio/), a Ex Officio (/equipe/) e as funções
-# /api/* (login da equipe e leitura/gravação das pautas no procs-muta, com o GH_TOKEN guardado na Vercel), o editor do Modus Operandi (/editor/)
+# Vão para a Vercel: o cmt-monitor.html (raiz), o Ab Initio modular (/monitor/: index.html, assets/ e motor/ juntos),
+# o Modus Operandi público (/compendio/), a Ex Officio (/equipe/) e as funções /api/* (login da equipe e leitura/gravação
+# das pautas no procs-muta, com o GH_TOKEN guardado na Vercel), o editor do Modus Operandi (/editor/)
 # e a Enciclopédia, servida só pelo /api/compendio a quem tem o modo avançado (apoio/acessos.json).
 # Requer o segredo VERCEL_TOKEN (Settings › Secrets and variables › Actions).
 name: CMT-monitor na Vercel
 on:
   push:
     branches: [main]
-    paths: ["cmt-monitor.html", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml"]
+    paths: ["cmt-monitor.html", "monitor/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml"]
   # o commit do Base (feito com o GITHUB_TOKEN) não dispara outros workflows: publica de novo quando ele termina
   workflow_run:
     workflows: ["Base gabcmt"]
@@ -41,7 +42,11 @@ jobs:
           mkdir -p site/public/equipe site/api && cp apoio/ex-officio/index.html site/public/equipe/index.html && cp apoio/ex-officio/api/*.js site/api/
           mkdir -p site/public/editor && cp apoio/modus-operandi/modus-operandi-editor.html site/public/editor/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"rewrites":[{"source":"/((?!api/|equipe|compendio|editor).*)","destination":"/index.html"}]}\n' > site/vercel.json
+          # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.
+          mkdir -p site/public/monitor
+          cp monitor/index.html site/public/monitor/index.html
+          cp -R monitor/assets monitor/motor site/public/monitor/
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"rewrites":[{"source":"/monitor","destination":"/monitor/index.html"},{"source":"/((?!api/|equipe|monitor|compendio|editor).*)","destination":"/index.html"}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

@@ -1,0 +1,1 @@
+(function(){var h=new Date().getHours(),e=document.querySelector('[data-cmtc-gr]');if(e)e.innerHTML=(h<12?'Bom dia':h<18?'Boa tarde':'Boa noite')+', <em>gabinete.</em>';})()

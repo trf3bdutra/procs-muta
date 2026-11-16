@@ -1,0 +1,29 @@
+
+/* ===== Triagem e Pautas · padrão visual da Central de Comando ===== */
+/* fundo frio das páginas */
+[style*="grid-template-columns: 232px minmax"]{background:#eef2f5!important}
+#cs-root{background:#eef2f5!important}
+/* Triagem: cabeçalho em cartão */
+main>header:has(.pv-title){background:#fff;border:1px solid #e1e7ec;border-radius:20px;padding:16px 24px 14px;box-shadow:0 1px 3px rgba(20,38,60,.06)}
+.pv-eyebrow{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;font:800 10.5px Figtree,system-ui,sans-serif!important;letter-spacing:.16em!important;text-transform:uppercase!important;color:#b8862b!important}
+.pv-title{font-size:30px!important;color:#14263c!important}
+/* Triagem: painéis com filete de cor */
+.central-search-panel{border-radius:18px!important;border:1px solid #e1e7ec!important;border-top:3px solid #1a7f7a!important;box-shadow:0 1px 3px rgba(20,38,60,.06)!important;overflow:hidden}
+.central-stat-card{border-radius:16px!important;border:1px solid #e1e7ec!important;border-top:3px solid var(--tc,#1a7f7a)!important;box-shadow:0 1px 2px rgba(20,38,60,.05)!important}
+.central-stat-card:nth-child(6n+1){--tc:#2b698e}.central-stat-card:nth-child(6n+2){--tc:#1a7f5a}.central-stat-card:nth-child(6n+3){--tc:#a8761c}
+.central-stat-card:nth-child(6n+4){--tc:#6a4fb3}.central-stat-card:nth-child(6n+5){--tc:#a33b4a}.central-stat-card:nth-child(6n+6){--tc:#3e72ad}
+section:has(>.sh-bar){background:#fff;border:1px solid #e1e7ec;border-top:3px solid #2b698e;border-radius:18px;overflow:hidden;box-shadow:0 1px 3px rgba(20,38,60,.06)}
+/* Pautas: cabeçalho claro na Visão geral (com a sessão aberta, a barra escura da sessão continua) */
+#cs-root:has(#cs-body[data-aba="sessoes"]) .cs-top,#cs-root:has(#cs-body[data-aba="marcos"]) .cs-top{background:#fff!important;color:#14263c!important;margin:14px 22px 0;border:1px solid #e1e7ec;border-radius:20px;padding:14px 22px!important;box-shadow:0 1px 3px rgba(20,38,60,.06)}
+#cs-root:has(#cs-body[data-aba="sessoes"]) .cs-top h1,#cs-root:has(#cs-body[data-aba="marcos"]) .cs-top h1{font-size:28px!important;font-weight:800!important;letter-spacing:-.02em;color:#14263c!important}
+#cs-root:has(#cs-body[data-aba="sessoes"]) .cs-top small,#cs-root:has(#cs-body[data-aba="marcos"]) .cs-top small{color:#b8862b!important}
+#cs-root .cs-pill{border-radius:999px}
+#cs-root:has(#cs-body[data-aba="sessoes"]) .cs-top .cs-pill,#cs-root:has(#cs-body[data-aba="marcos"]) .cs-top .cs-pill{background:#e8f5ef!important;color:#1a7f5a!important;border:1px solid #b9e0cd!important;padding:4px 10px}
+/* Pautas: sessões como cartões com filete */
+#cs-root .cs-grp,#cs-root .cs-h2g{color:#b8862b!important;letter-spacing:.16em!important}
+#cs-root .cs-ses{border:1px solid #e1e7ec!important;border-left:4px solid #1a7f5a!important;border-radius:14px!important;box-shadow:0 1px 2px rgba(20,38,60,.05)}
+#cs-root .cs-ses.prox{border-left-color:#c4953c!important;box-shadow:0 0 0 2px rgba(196,149,60,.18)!important}
+#cs-root .cs-ses.passada{border-left-color:#9aa6b2!important}
+#cs-root .cs-ses .dt{color:#14263c!important}
+#cs-root .cs-tbl{border:1px solid #e1e7ec!important;border-top:3px solid #2b698e!important;border-radius:16px!important}
+#cs-root .cs-bar{background:#fff;border:1px solid #e1e7ec;border-radius:14px;padding:8px 12px}

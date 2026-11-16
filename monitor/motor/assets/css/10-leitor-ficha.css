@@ -1,0 +1,11 @@
+
+body.pr-leitor [data-tri-card]{display:none!important}
+body.pr-leitor [data-tri-card].pr-atual{display:block!important}
+#pr-leitor-bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:8px;flex-wrap:wrap;border-radius:16px;padding:10px 14px;margin:0 0 10px;font:500 12.5px Figtree,system-ui,sans-serif;color:#fff;background:radial-gradient(420px 160px at 95% -40%,rgba(217,160,70,.35),transparent 70%),linear-gradient(135deg,#1b3553,#122840);box-shadow:0 6px 18px rgba(18,40,64,.18)}
+#pr-leitor-bar b{font-size:15px;font-weight:800}#pr-leitor-bar .s{color:#c9d3dc}
+#pr-leitor-bar button{height:28px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);border-radius:8px;font:700 12px Figtree,sans-serif;color:#dfe5ee;cursor:pointer;padding:0 10px}
+#pr-leitor-bar button:hover{background:rgba(255,255,255,.14)}
+#pr-leitor-bar button.on{background:#c4953c;border-color:#c4953c;color:#1f2442}
+#pr-leitor-bar .pri{background:#c4953c;border-color:#c4953c;color:#1f2442}
+#pr-leitor-bar .k{margin-left:auto;font-size:11px;color:#e6c27a;letter-spacing:.04em}
+[data-tri-card].pr-triado{box-shadow:0 0 0 2px #1a8a6a inset}
