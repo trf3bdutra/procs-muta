@@ -180,6 +180,9 @@ body.dsk #v-edit .pg-t{padding:20px 0 6px}
 body.dsk #v-edit .pg-t .dkk{margin:0;font:500 10.5px "IBM Plex Mono",monospace;letter-spacing:.09em;color:#805b18}
 body.dsk #v-edit .pg-t h1{margin:6px 0 4px;font:700 38px/1.1 Inter,sans-serif;letter-spacing:-.025em;color:#173f3d}
 body.dsk #v-edit .pg-t p#x-desc{margin:0;font-size:14.5px;color:#4f5a57}
+#v-edit .pg-t p#x-dev{margin:10px 0 0;max-width:820px;padding:7px 12px;border-left:3px solid #b8892e;background:rgba(184,137,46,.08);font-size:13px;line-height:1.5;color:#4f5a57}
+#v-edit .pg-t p#x-dev b{font-weight:600;color:#805b18}
+#v-edit .pg-t p#x-dev[hidden]{display:none}
 body.dsk #v-edit .xa{padding:22px 40px 56px}
 /* barra única: um retângulo, rótulos internos */
 .dbar{align-items:center;gap:12px}
