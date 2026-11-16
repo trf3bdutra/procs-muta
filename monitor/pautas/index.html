@@ -48,13 +48,14 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe button:disabled{opacity:.5;cursor:not-allowed}
 .cwe-k{font:600 10px ui-monospace,'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--g)}
 .cwe-mono{font:500 12.5px ui-monospace,'IBM Plex Mono',monospace;color:var(--t)}
-.cwe-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px 20px;border-top:2px solid var(--t);padding-top:14px}
+.cwe-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px 20px;padding-top:22px}
 .cwe-top h1{margin:6px 0 2px!important;font-size:38px!important;line-height:1.05;font-weight:650;letter-spacing:-.045em;color:var(--tx)!important}
 .cwe-top>div:first-child{flex:1 1 480px;min-width:0}
 .cwe-top p{margin:0;font-size:13px;color:var(--m)}
 .cwe-julg{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:6px!important;font-size:12px}
 .cwe-julg small{font:10px ui-monospace,monospace;color:var(--m2)}
 .cwe-tools{display:inline-flex;align-items:center;gap:4px;padding:3px;border:1px solid var(--b);border-radius:10px;background:var(--p)}
+.cwe-pubg>button{height:30px;padding:0 12px;border:1px solid var(--b2);border-radius:7px;background:var(--w);color:var(--tx);font:700 12px Figtree,'Segoe UI',sans-serif;cursor:pointer}.cwe-pubg>button.pri{background:var(--t);border-color:var(--t);color:#fff}.cwe-pubg>button:disabled{opacity:.55;cursor:not-allowed}
 .cwe-tools>button,.cwe-expwrap>button{height:30px;padding:0 11px;border:0;border-radius:7px;background:transparent;color:var(--tx);font-weight:700;font-size:12px}
 .cwe-tools>button:hover,.cwe-expwrap>button:hover{background:var(--w)}
 .cwe-expwrap{position:relative}
@@ -63,13 +64,15 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-menu button:hover{background:var(--p)}
 .cwe-menu b{font-size:12.5px}.cwe-menu small{display:block;font:10.5px ui-monospace,monospace;color:var(--m2)}
 .cwe-marcos{position:relative;display:flex;align-items:stretch;margin:18px 0;border:1px solid var(--b);background:var(--w);min-width:0}
-.cwe-regras{position:absolute;top:-9px;right:8px;z-index:1;border:0;background:var(--fundo);padding:0 5px;font:600 10px/16px Figtree,'Segoe UI',sans-serif;color:var(--g);text-decoration:underline;text-underline-offset:3px}
+.cwe-regras{position:static;order:9;align-self:center;margin:0 8px;border:0;background:transparent;padding:0 4px;font:600 10px/16px Figtree,'Segoe UI',sans-serif;color:var(--g);text-decoration:underline;text-underline-offset:3px}
 .cwe-mk{flex:0 0 auto;display:flex;align-items:center;padding:6px 12px;background:var(--p);border-right:1px solid var(--b)}
 .cwe-marcos label{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:5px 7px;border-right:1px solid var(--l);font-size:10px;font-weight:600;color:var(--m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cwe-marcos input{width:100%!important;min-width:0;height:24px!important;min-height:0!important;border-radius:0!important;box-shadow:none!important;border:1px solid var(--b2);padding:0 5px!important;font:11.5px ui-monospace,monospace;color:var(--tx);background:var(--w)}
 .cwe-marcos input.vazio{background:var(--amb);color:var(--m2)}
 .cwe-mkb{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:5px 8px}
 .cwe-eqk{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px;font-size:12px}.cwe-eqk label{display:inline-flex;gap:4px;align-items:center}
+.cwe-pubg{display:inline-flex;align-items:center;gap:6px;padding:0 10px 0 4px;margin-right:4px;border-right:1px solid var(--l)}.cwe-pubg .cwe-k{margin-right:2px}
+.cwe-tools button.on{background:#e3f1ea!important;border-color:#235a55!important;color:#173f3d!important}
 .cwe-mkb button.on{background:#e3f1ea;border-color:#235a55;color:#173f3d}
 .cwe-mkb button,.cwe-acoes button,.cwe-drop button,.cwe-cfg-b>button{height:30px;padding:0 12px;border:1px solid var(--b2);border-radius:7px;background:var(--p);color:var(--tx);font-weight:700;font-size:11.5px;white-space:nowrap}
 .cwe .pri{background:var(--t);border-color:var(--t);color:var(--w)}
@@ -376,7 +379,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da etapa 5'], ['copiar', 'Copiar a lista', 'área de transferência']];
     return `<div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p>
       ${mg ? `<p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg}<small>· composição padrão</small></p>` : ''}</div>
-      <div class="cwe-tools"><button type="button" data-cwt="create-session" title="Cadastrar outra sessão">+ Sessão</button>
+      <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicar na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar' : 'Publicar os marcos da sessão na Ex Officio'}">${ss.marcosPub || ss.publicada ? '● Marcos publicados' : 'Publicar marcos'}</button><button type="button" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" class="${ss.publicada ? 'on' : 'pri'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} title="${ss.publicada ? 'Pauta publicada na Ex Officio: clique para retirar' : d.pauta ? 'Publicar a pauta (processos e marcos) na Ex Officio' : 'Importe o PDF da pauta antes de publicar'}">${ss.publicada ? '● Pauta publicada' : 'Publicar pauta'}</button></span><button type="button" data-cwt="create-session" title="Cadastrar outra sessão">+ Sessão</button>
       <span class="cwe-expwrap"><button type="button" data-cwe="exp" aria-expanded="${est.exp}">Exportar ▾</button>${est.exp ? `<span class="cwe-menu" role="menu">${exp.map(([k, t, s]) => `<button type="button" role="menuitem" data-cwe="x-${k}"><b>${e(t)}</b><small>${e(s)}</small></button>`).join('')}</span>` : ''}</span>
       <button type="button" data-cwe="cfg" title="Configurações das pautas" aria-label="Configurações das pautas">⚙</button></div></div>`;
   }
@@ -385,7 +388,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', '']];
     return `<section class="cwe-marcos" aria-label="Marcos da sessão"><button type="button" class="cwe-regras" data-cwe="cfg-0">regras</button><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
       ${M.map(([t, v, o, k]) => est.mEd && k ? `<label title="${e(t + ' · ' + o)}">${e(t)}<input type="date" data-cwe-mk="${k}" value="${e(v || '')}"></label>` : `<label title="${e(t + ' · ' + o)}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
-      <span class="cwe-mkb"><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar (retira também a listagem)' : 'Publicar os marcos à equipe na Ex Officio (calendário e página inicial)'}">${ss.marcosPub || ss.publicada ? '● Marcos na Ex Officio' : 'Publicar marcos'}</button></span></section>`;
+      <span class="cwe-mkb"><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
   }
   function esteira(d) {
     const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e conferência'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
