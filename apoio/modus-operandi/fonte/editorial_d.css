@@ -427,3 +427,16 @@ body.dsk #x-main .xblk.on{background:#fbf6e6;box-shadow:0 0 0 1px #f0e3bd}
 .dori.xrot .xri .xrif{margin-top:4px;padding:5px 7px;background:#f4f2ea;border-left:2px solid #c8c3b6;font-size:12px;color:#2f3d3a;white-space:pre-wrap}
 .dori.xrot .xri small{display:block;margin-top:3px;font-size:10.5px;color:#8a8f88}
 .dori.xrot .xrie{font:400 9px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#805b18;margin-left:5px;vertical-align:1px}
+/* Roteiro do trecho, no canhoto */
+.dcan .cf.xrot .cfl em{font:400 9px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#805b18;margin-left:6px;font-style:normal}
+.dcan .cf.xrot .xrsel{display:flex;align-items:center;gap:7px;margin:6px 0 2px}
+.dcan .cf.xrot .xrsel label{font:400 9px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#6b7d78}
+.dcan .cf.xrot .xrsel select{flex:1;min-width:0;border:1px solid #d8d3c6;border-radius:0;background:#fff;color:#203b39;font-size:11.5px;padding:3px 5px}
+.dcan .cf.xrot ul{list-style:none;padding-left:0;margin:7px 0 0}
+.dcan .cf.xrot .xri{margin:0 0 9px;padding-left:9px;border-left:2px solid #e3dfd3;font-size:12px;line-height:1.5}
+.dcan .cf.xrot .xri.ess{border-left-color:#a57829}
+.dcan .cf.xrot .xri b{color:#203b39}
+.dcan .cf.xrot .xri p{margin:2px 0 0;color:#4a5a56}
+.dcan .cf.xrot .xri .xrif{margin-top:4px;padding:5px 7px;background:#f4f2ea;border-left:2px solid #c8c3b6;font-size:11.5px;color:#2f3d3a;white-space:pre-wrap}
+.dcan .cf.xrot .xri small{display:block;margin-top:3px;font-size:10px;color:#8a8f88}
+.dcan .cf.xrot .xrie{color:#805b18}
