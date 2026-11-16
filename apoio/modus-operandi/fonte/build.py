@@ -175,6 +175,8 @@ def montar(var):
     t = t0
     js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8'))
     css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8') + (H/'editorial_d.css').read_text(encoding='utf-8')
+    from escuro import escuro  # modo noturno de #v-edit (Minuta-Matriz, Modelos, Diretrizes), gerado de editorial_d.css
+    css += escuro((H/'editorial_d.css').read_text(encoding='utf-8'))
     # abas do modo avançado: Enunciados, Repertório e Enciclopédia (escondidas até o login com acesso)
     t = troca(t, '<button class="tab" role="tab" data-v="temas" aria-selected="true">Enunciados</button>', '<button class="tab" role="tab" data-v="temas" aria-selected="false" data-av hidden>Enunciados</button>')
     t = troca(t, '<button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>', '<button class="tab" role="tab" data-v="rep" aria-selected="false" data-av hidden>Repertório</button>')

@@ -634,6 +634,7 @@ body:not(.vdm-ed) #openSheet{display:none!important}
 .rap-novo{display:grid;grid-template-columns:150px minmax(0,1fr) auto;grid-template-areas:"t x b" ". o b";gap:8px;margin:16px 0 4px}
 .rap-novo select{grid-area:t;align-self:start}.rap-novo textarea{grid-area:x;resize:vertical;min-height:52px}.rap-novo input{grid-area:o}.rap-novo .btn{grid-area:b;align-self:start}
 .rap-novo select,.rap-novo textarea,.rap-novo input{font:14px Figtree,system-ui,sans-serif;padding:8px 10px;border:1px solid #d8ccb0;border-radius:8px;background:#fffdf8;color:#1d1d1b}
+:root:not([data-theme="light"]) .rap-novo select,:root:not([data-theme="light"]) .rap-novo textarea,:root:not([data-theme="light"]) .rap-novo input{background:#14212b;color:#e6edf2;border-color:#2f4758}
 .rap-ro,.rap-v{margin:14px 0 0;font-size:13px;color:#6b6457}
 .rap-l{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
 .rap-l li{border:1px solid #ece2cc;border-left:3px solid #c9a24f;border-radius:8px;padding:10px 12px;background:#fffdf8}
