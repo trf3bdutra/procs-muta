@@ -1,0 +1,88 @@
+{
+ "schema": "gabcmt.regras.escopo-triagem",
+ "versao": 1,
+ "atualizadoEm": "2026-11-16T20:36:25.646857+00:00",
+ "descricao": "Escopo do app de triagem (destinar à decisão monocrática ou à pauta). Entra só processo do acervo fonte (acervo/fonte.json) cuja tarefa_atual esteja em 'triar'. Processo sem tarefa do gabinete (com a secretaria: prazo, publicação, juntada, recebimento) fica fora. Tarefa nova que não esteja em nenhuma lista: mostrar à parte, para classificar.",
+ "regra": {
+  "campo": "tarefa_atual",
+  "semTarefa": "ignorar",
+  "tarefaNaoListada": "mostrar à parte"
+ },
+ "triar": [
+  {
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "motivo": "decisão sobre o destino",
+   "processos_16_11_2026": 1234
+  },
+  {
+   "tarefa": "Triagem de Gabinete",
+   "motivo": "ainda não triado",
+   "processos_16_11_2026": 339
+  },
+  {
+   "tarefa": "Recebidos com Embargos de Declaração",
+   "motivo": "embargos: sessão ou decisão monocrática",
+   "processos_16_11_2026": 35
+  },
+  {
+   "tarefa": "Recebidos da unidade processante",
+   "motivo": "voltou ao gabinete sem destino",
+   "processos_16_11_2026": 20
+  },
+  {
+   "tarefa": "Minutar ato judicial",
+   "motivo": "entra na triagem: a tarefa também recebe processos ainda não triados",
+   "processos_16_11_2026": 219
+  },
+  {
+   "tarefa": "Minutar ato judicial - Processo sobrestado",
+   "motivo": "entra na triagem: retomada após o julgamento do tema",
+   "processos_16_11_2026": 36
+  },
+  {
+   "tarefa": "[Sessão] Processos retirados e adiados",
+   "motivo": "entra na triagem: repautar",
+   "processos_16_11_2026": 4
+  }
+ ],
+ "ignorar": {
+  "pauta": {
+   "motivo": "já destinados à pauta",
+   "tarefas": [
+    "[Sessão] Aguardando a sessão",
+    "[Sessão - ED] Aguardando a sessão",
+    "[Sessão] Lançar movimentações do julgamento",
+    "[Sessão - ED] Lançar movimentações do julgamento",
+    "[Sessão] Preparar relatório e voto",
+    "[Sessão] Confirmar Inteiro Teor",
+    "[Sessão] Assinar Inteiro Teor",
+    "[Sessão] Minutar decisão intercorrente"
+   ]
+  },
+  "producao": {
+   "motivo": "já em produção de decisão (ED, AgInt, revisão, assinatura)",
+   "tarefas": [
+    "[ED] Minutar ato judicial",
+    "Revisar ato judicial",
+    "Assinar ato judicial",
+    "[Ag. Int] Minutar ato judicial"
+   ]
+  },
+  "sobrestados": {
+   "motivo": "sobrestados; voltam à triagem quando o sobrestamento cair",
+   "tarefas": [
+    "[SU] Sobrestado por Determinação de Tribunais Superiores",
+    "[SU] Sobrestados - Analisar petição",
+    "Sobrestado por Determinação de Tribunais Superiores",
+    "[SU] Sobrestado por Determinação em IRDR ou IAC",
+    "[SU] Sobrestado por Motivos Diversos",
+    "Sobrestado por Motivos Diversos"
+   ]
+  }
+ },
+ "totais_16_11_2026": {
+  "triar": 1887,
+  "ignorar_com_tarefa": 901,
+  "sem_tarefa_do_gabinete": 1183
+ }
+}
