@@ -79,12 +79,19 @@ module.exports = async (req, res, u) => {
       return res.status(400).json({ erro: 'Ação desconhecida.' });
     } catch (e) { return res.status(e.status || 500).json({ erro: e.message }); }
   }
-  const [cal, doc, aus, pen] = await Promise.all([
+  const [cal, doc, aus, pen, com] = await Promise.all([
     opc('acervo/sessoes/calendario.json'),
     FICHA.lerOpLeitura().then(x => x.doc).catch(() => null),
     opc('apoio/equipe-solicitacoes.json'),
-    opc('apoio/equipe-pendencias.json')
+    opc('apoio/equipe-pendencias.json'),
+    opc('apoio/equipe-comunicados.json')
   ]);
+  /* comunicados da equipe ao desembargador: os não lidos primeiro, do mais recente para o mais antigo */
+  const comunicados = ((com || {}).registros || [])
+    .filter(r => !r.excluido)
+    .map(r => ({ id: r.id, titulo: r.titulo || '', texto: r.texto || '', de: r.de || '', cnjs: r.cnjs || [], em: r.criadoEm || '', lidoEm: r.lidoEm || '' }))
+    .sort((x, y) => (!!x.lidoEm - !!y.lidoEm) || String(y.em).localeCompare(String(x.em)))
+    .slice(0, 40);
   /* dúvidas dirigidas ao desembargador: diligências em aberto atribuídas a ele, no quadro da equipe */
   const duvidas = ((pen || {}).registros || [])
     .filter(r => !r.excluida && r.stage !== 'done' && L.norm(r.assignee) === L.norm(u))
@@ -158,7 +165,7 @@ module.exports = async (req, res, u) => {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, urgencias, sessoes, agenda, pauta, prazos,
+  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, comunicados, urgencias, sessoes, agenda, pauta, prazos,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 };

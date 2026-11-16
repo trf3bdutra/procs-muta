@@ -9,7 +9,19 @@ module.exports = async (req, res) => {
   const u = L.exigir(req, res); if (!u) return;
   try {
     const eu = L.norm(u), ev = [];
-    const [cal, avisos, pend, aus] = await Promise.all([opc('acervo/sessoes/calendario.json'), opc('apoio/equipe-avisos.json'), opc('apoio/equipe-pendencias.json'), opc('apoio/equipe-solicitacoes.json')]);
+    const [cal, avisos, pend, aus, com] = await Promise.all([opc('acervo/sessoes/calendario.json'), opc('apoio/equipe-avisos.json'), opc('apoio/equipe-pendencias.json'), opc('apoio/equipe-solicitacoes.json'), opc('apoio/equipe-comunicados.json')]);
+    /* comunicados ao desembargador: ele vê os recebidos; quem enviou, o seu próprio */
+    let ehCmt = L.gestor(u);
+    if (!ehCmt) { try { const ac = await L.acessos(u); ehCmt = !!(ac && ac.perfil === 'desembargador'); } catch (e) { /* perfil ilegível */ } }
+    ((com || {}).registros || []).forEach(c => {
+      if (c.excluido) return;
+      const meu = L.norm(c.de) === eu; if (!ehCmt && !meu) return;
+      const qt = (c.cnjs || []).length;
+      ev.push({ id: 'co-' + c.id + (c.lidoEm ? '-lido' : ''), time: c.criadoEm, action: 'comunicado', user: c.de,
+        title: (meu && !ehCmt ? 'Comunicado enviado · ' : '') + c.titulo,
+        message: [meu && !ehCmt ? 'ao desembargador' : 'de ' + c.de, qt ? qt + (qt > 1 ? ' processos' : ' processo') : '', c.lidoEm ? 'lido' : 'não lido'].filter(Boolean).join(' · '),
+        texto: c.texto, numero: (c.cnjs || [])[0] || '', nivel: c.lidoEm ? 'info' : 'urgente', resolved: !!c.lidoEm, comId: c.id });
+    });
     const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
     ((avisos || {}).registros || []).forEach(a => {
       /* destinatários: lista vazia = toda a equipe; o gestor vê todos; vencido some */

@@ -1183,6 +1183,8 @@ html[data-theme=dark] #v-cmt{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a
 .cmt-cd b{font:400 11px var(--emono);display:block;color:var(--ei)}
 .cmt-cd p{margin:3px 0 0;font-size:11.5px;color:var(--em)}
 .cmt-cd .cmt-rsp{border-left:2px solid var(--eg);padding-left:7px;color:var(--ei)}
+.cmt-cd.alerta{border-left:3px solid var(--er,#a7433d);padding-left:8px}
+.cmt-com-tx{margin:6px 0 0;max-height:150px;overflow:auto;white-space:pre-wrap;font:400 11px var(--emono);color:var(--ei);background:var(--ew,#fff);border:1px solid var(--el);padding:7px 8px}
 .cmt-cd .ac{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .cmt-cd .ac button{border:1px solid var(--el2);background:var(--ew);color:var(--ei);border-radius:0;font-size:11px;min-height:26px;padding:0 9px;cursor:pointer}
 .cmt-cd .ac button.pri{background:var(--eg);border-color:var(--eg);color:var(--ep);font-weight:700}
@@ -1609,6 +1611,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
       <div class="cmt-lay">
       <aside class="cmt-left">
         <section class="cmt-rc2"><p class="cmt-k">Para devolutiva · ao CM <span class="cmt-n" id="cmt-n-dv">—</span></p><div id="cmt-c-dv"></div></section>
+        <section class="cmt-rc2"><p class="cmt-k">Comunicados da equipe <span class="cmt-n" id="cmt-n-com">—</span></p><div id="cmt-c-com"></div></section>
         <section class="cmt-rc2"><p class="cmt-k">Para assinatura <span class="cmt-n" id="cmt-n-ass">—</span></p><div id="cmt-c-ass"></div></section>
         <section class="cmt-rc2"><p class="cmt-k">Para liberação <span class="cmt-n" id="cmt-n-lib">—</span></p><div id="cmt-c-lib"></div></section>
       </aside>
@@ -2449,16 +2452,79 @@ function painelUrgEd(el){
   el.className='urg uzb';el.hidden=false;
   el.innerHTML='<form class="urg-n" id="urg-n" aria-label="Registrar urgência"><b>Nova urgência</b><input name="cnj" placeholder="nº CNJ do processo" required aria-label="Número CNJ"><select name="tipo" aria-label="Medida">'+CPM.urgTipo.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><select name="niv" aria-label="Nível"><option value="">nível…</option>'+CPM.urgNivel.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><input type="date" name="ped" title="Data do pedido" aria-label="Data do pedido"><input name="obs" placeholder="observação (opcional)" aria-label="Observação"><button class="b pri">+ Registrar</button></form>'+
     '<div class="uz-ls">'+(P0.concat(A).map(lin).join('')||'<p class="uz-v">Nenhuma urgência'+(q||uf!=='todos'?' com esse filtro':' registrada')+'.</p>')+'</div>'+
-    '<div class="uz-ft"><div><span>Não apreciadas primeiro, pelo pedido mais antigo · mostrando '+Lf.length+' de '+L.length+'</span><span class="mleg"><b>Cor da tag</b>'+leg+'</span></div>'+
+    '<div class="uz-ft"><div><span>Não apreciadas primeiro, pelo pedido mais antigo · mostrando '+Lf.length+' de '+L.length+'</span>'+(P0.length?'<button type="button" class="b" data-uq-com-todas aria-label="Comunicar o desembargador sobre as urgências pendentes">Comunicar o desembargador · '+P0.length+'</button>':'')+'<span class="mleg"><b>Cor da tag</b>'+leg+'</span></div>'+
     (SG.length?'<details class="urg-sg"'+(S.sgAb?' open':'')+'><summary>Sugeridos pelas etiquetas do PJe <span>'+SG.length+'</span></summary><div class="urg-t"><table><thead><tr><th>Processo</th><th>Etiqueta</th><th>Tarefa</th><th></th></tr></thead><tbody>'+
       SG.map(function(b){var d=diasDesde(b.desde);return '<tr><td><span class="cnj">'+esc(b.cnj)+'</span><small class="pt">'+esc(b.partes||'')+'</small></td><td>'+esc(b.urgAuto)+'</td><td><small>'+esc(b.tarefa)+'</small>'+(d!=null?'<b class="dd">'+d+' dias na tarefa</b>':'')+'</td><td><button class="b" data-sug="'+esc(b.cnj)+'" data-et="'+esc(b.urgAuto)+'">+ Registrar urgência</button></td></tr>';}).join('')+'</tbody></table></div></details>':'')+'</div>';}
 $('#urq').addEventListener('click',function(e){var b=e.target.closest('[data-uf]');if(!b)return;S.uf=b.getAttribute('data-uf');painelUrg();});
 $('#urq').addEventListener('input',function(e){if(e.target.id!=='urg-q')return;var v=e.target.value;clearTimeout(S.tuq);S.tuq=setTimeout(function(){S.uq=v;painelUrg();var q=$('#urg-q');if(q){q.focus();q.setSelectionRange(v.length,v.length);}},250);});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-uq-ab]');if(!b)return;S.urgTab=true;S.uf='todos';painelUrg();$('#trm-urq').scrollIntoView({behavior:'smooth',block:'start'});});
 /* comunicar o desembargador: sem canal próprio no app, a mensagem pronta vai para a área de transferência */
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-uq-com]');if(!b)return;var it=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-uq-com');})[0];if(!it)return;
-  var c=it.ctl||{},d=diasDesde(urgIni(it)),tx='Urgência pendente de apreciação\nProcesso: '+it.cnj+'\nPedido: '+(c.urgTipo||'—')+(c.urgNivel?' · '+c.urgNivel:'')+'\nPedido em: '+(urgIni(it)?br(urgIni(it)):'—')+(d!=null?' · '+d+' dia'+(d===1?'':'s')+' de espera':'')+'\nSituação: '+(c.urgSit||'Pendente · não apreciada')+'\nMinutante: '+(it.servidor||'—')+(c.urgObs?'\nObservação: '+c.urgObs:'');
-  (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toast('Mensagem ao desembargador copiada. Cole no canal de comunicação do gabinete.');}).catch(function(){toast('Não foi possível copiar a mensagem.');});});
+/* comunicar o desembargador: a mensagem sai pronta dos dados do processo e da urgência, pode ser ajustada
+   antes de sair e vai para as notificações e o painel do gabinete (/equipe/#cmt); copiar segue disponível */
+var COM_LINK='http://gabinete-cmt.com/cmt', COM_TRACO='━━━━━━━━━━━━━━━';
+var COM_NUM=['nenhum','um','dois','três','quatro','cinco','seis','sete','oito','nove','dez'];
+function comSaud(){var h=Number(new Date().toLocaleString('pt-BR',{hour:'2-digit',hour12:false,timeZone:'America/Cuiaba'}));return h<12?'bom dia':h<18?'boa tarde':'boa noite';}
+function comNum(n){return COM_NUM[n]||String(n);}
+function comPlural(n,s,p){return n===1?s:p;}
+function comMinutantes(L){var o={};L.forEach(function(i){var n=(i.servidor||'').trim();if(n&&n!=='—')o[nq(n)]=n;});return Object.keys(o).map(function(k){return o[k];});}
+/* um feito: cabeçalho, pedido, urgência e minuta, com o que a base tem; o resto quem envia completa */
+function comItem(it,n){
+  var c=it.ctl||{},L=[],d=diasDesde(urgIni(it)),sint=((c.cartao||{}).sintese||'').trim();
+  L.push('*'+n+' · '+clSig(it.classe)+' '+fmtCnjDig(it.cnj)+'*');
+  if(it.partes)L.push(it.partes);
+  L.push('');
+  L.push('*PEDIDO*');
+  L.push([c.urgTipo||'Tutela de urgência',c.urgNivel].filter(Boolean).join(' · ')+'.');
+  if(it.assunto)L.push(it.assunto+'.');
+  L.push('');
+  L.push('*URGÊNCIA*');
+  L.push('Pedido em '+(urgIni(it)?br(urgIni(it)):'data não registrada')+(d!=null?' · '+d+' '+comPlural(d,'dia','dias')+' de espera':'')+'.');
+  if(c.urgObs)L.push(c.urgObs);
+  if(it.obs&&it.obs!==c.urgObs)L.push(it.obs);
+  L.push('');
+  L.push('*MINUTA*');
+  var mi=[];
+  if(c.resJulg)mi.push(c.resJulg);
+  if(c.hip932)mi.push('art. 932 do CPC · '+c.hip932);
+  if(!mi.length)mi.push(it.dataMinuta?'Minutada em '+br(it.dataMinuta)+'; resultado ainda não registrado':'Minuta ainda não registrada');
+  L.push(mi.join(' \u00b7 ')+'.');
+  if(sint)L.push('> '+sint);
+  return L.join('\n');
+}
+function comMsg(L){
+  var paraAssin=L.length&&L.every(function(i){return i.dataLiberacao&&!i.assinado&&!i.dataAssinatura;});
+  var tit=paraAssin?'URGÊNCIAS · PARA ASSINATURA':'URGÊNCIAS · PENDENTES DE APRECIAÇÃO';
+  var mn=comMinutantes(L),n=L.length;
+  var ab=['*'+tit+'*','','Dr. Muta, '+comSaud()+'.','',
+    'Informo que '+comNum(n)+' '+comPlural(n,'feito urgente foi encaminhado','feitos urgentes foram encaminhados')+(paraAssin?' para assinatura.':' e seguem pendentes de apreciação.')];
+  if(mn.length)ab.push('_'+comPlural(n,'Minutado','Minutados')+' por '+mn.join(', ')+'._');
+  var cp=L.map(function(it,k){return comItem(it,k+1);});
+  return {titulo:tit.replace(/\*/g,''),texto:ab.join('\n')+'\n\n'+COM_TRACO+'\n\n'+cp.join('\n\n'+COM_TRACO+'\n\n')+'\n\n'+COM_TRACO+'\n\n'+COM_LINK+'\n\n_Fico à disposição._\n'};
+}
+function comAbrir(L){
+  if(!L.length){toast('Nenhuma urgência para comunicar.');return;}
+  var m=comMsg(L),d=document.createElement('dialog');d.className='dv';
+  d.innerHTML='<form method="dialog"><small class="dv-ey">Comunicar o desembargador</small><h2>'+esc(m.titulo)+'</h2>'+
+    '<p class="mut">'+L.length+' '+comPlural(L.length,'feito','feitos')+' · a mensagem foi montada com os dados da base. Confira origem, dispositivo e IDs das peças antes de enviar.</p>'+
+    '<label>Mensagem<textarea name="tx" rows="16" maxlength="8000" required spellcheck="false" style="font:400 12.5px var(--mono,monospace);white-space:pre-wrap">'+esc(m.texto)+'</textarea></label>'+
+    '<div class="dv-a"><button type="button" class="b" data-com="x">Cancelar</button><button type="button" class="b" data-com="c">Copiar</button>'+
+    '<button type="submit" class="b pri">Enviar ao gabinete</button></div></form>';
+  document.body.appendChild(d);
+  var f=d.querySelector('form');
+  d.querySelector('[data-com=x]').onclick=function(){d.close();d.remove();};
+  d.querySelector('[data-com=c]').onclick=function(){var tx=f.tx.value;
+    (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toast('Mensagem copiada.');}).catch(function(){toast('Não foi possível copiar a mensagem.');});};
+  f.onsubmit=function(e){e.preventDefault();var tx=f.tx.value.trim();if(!tx)return;var bt=f.querySelector('[type=submit]');bt.disabled=true;
+    api('/api/pendencias?com=1',{method:'POST',body:JSON.stringify({titulo:m.titulo,texto:tx,cnjs:L.map(function(i){return i.cnj;})})})
+      .then(function(){d.close();d.remove();toast('Comunicado enviado ao painel do gabinete e às notificações do desembargador.');})
+      .catch(function(er){bt.disabled=false;toast(er.message||'Não foi possível enviar o comunicado.');});};
+  if(d.showModal)d.showModal();else d.setAttribute('open','');
+  setTimeout(function(){var x=d.querySelector('textarea');if(x){x.focus();x.setSelectionRange(0,0);x.scrollTop=0;}},50);
+}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-uq-com]');if(!b)return;
+  var it=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-uq-com');})[0];if(!it)return;comAbrir([it]);});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-uq-com-todas]');if(!b)return;
+  comAbrir(urgTodos().filter(function(i){var c=i.ctl||{};return c.urgTipo&&!/^Apreciada/.test(String(c.urgSit||''));}));});
 function urgIni(it){var c=it.ctl||{};return c.urgPedido||(c.urgEm||'').slice(0,10)||it.desde||'';}
 function tipoDaEtiqueta(e){e=nq(e);return /suspensiv/.test(e)?'Efeito suspensivo':/reconsid/.test(e)?'Reconsideração de liminar':/liminar|mandado de seg/.test(e)?'Liminar em mandado de segurança':/antecip|recursal/.test(e)?'Antecipação da tutela recursal':/evidenc/.test(e)?'Tutela de evidência':/cirurg|medicam|saude|idos|prioridade/.test(e)?'Prioridade legal':'Tutela de urgência';}
 /* cria ou altera o registro na hora (monocrática ou urgência) e relê a lista */
@@ -3284,7 +3350,7 @@ function cmtCarregar(){
     .catch(function(e){$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
       $('#cmt-sub').textContent=(e&&e.erro)||'Não foi possível montar o painel.';})
     .then(function(){clearInterval(tm);CMT.carregando=false;});}
-function cmtLista(el,itens,monta){var h=(itens||[]).map(monta).join('');$(el).innerHTML=h||'<p class="cmt-vazio">Nada pendente.</p>';}
+function cmtLista(el,itens,monta,vazio){var h=(itens||[]).map(monta).join('');$(el).innerHTML=h||'<p class="cmt-vazio">'+(vazio||'Nada pendente.')+'</p>';}
 var CMTM={pautarAte:['P','Pautar até'],inicioPreparacao:['I','Início da preparação'],entregaMinutas:['E','Entrega das minutas'],liberacao:['L','Liberação']};
 function cmtDias(a,b){return Math.round((Date.parse(a+'T12:00:00Z')-Date.parse(b+'T12:00:00Z'))/86400e3);}
 function cmtMesNome(d){return new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'}).format(d);}
@@ -3372,6 +3438,12 @@ function cmtPinta(){
     return '<div class="cmt-cd"><b>'+esc(x.titulo||x.numero||'Dúvida')+'</b><p>'+esc([x.de,x.numero,x.prioridade].filter(Boolean).join(' · '))+'</p>'+
       (x.texto?'<p>'+esc(x.texto)+'</p>':'')+(x.resposta?'<p class="cmt-rsp">Respondida: '+esc(x.resposta)+'</p>':'')+
       '<span class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></span></div>';});
+  var co=j.comunicados||[], naoLidos=co.filter(function(x){return !x.lidoEm;});
+  var nc=$('#cmt-n-com');if(nc)nc.textContent=naoLidos.length?naoLidos.length+' não lido'+(naoLidos.length>1?'s':''):String(co.length);
+  cmtLista('#cmt-c-com',co,function(x){
+    return '<div class="cmt-cd'+(x.lidoEm?'':' alerta')+'"><b>'+esc(x.titulo||'Comunicado')+'</b><p>'+esc([x.de,(x.cnjs||[]).length?(x.cnjs.length+((x.cnjs.length>1)?' processos':' processo')):'',x.em?br(String(x.em).slice(0,10)):''].filter(Boolean).join(' · '))+'</p>'+
+      '<pre class="cmt-com-tx">'+esc(x.texto||'')+'</pre>'+
+      (x.lidoEm?'<p class="cmt-rsp">Lido em '+esc(br(String(x.lidoEm).slice(0,10)))+'</p>':'<span class="ac"><button type="button" class="pri" data-com-ler="'+esc(x.id)+'">Marcar como lido</button></span>')+'</div>';},'Nenhum comunicado da equipe.');
   var ur=j.urgencias||[],pz=j.prazos||[];
   $('#cmt-n-ur').textContent=ur.length;
   var venc=ur.filter(function(x){return x.espera!=null&&x.espera>=15;}).length;
@@ -3400,6 +3472,10 @@ document.addEventListener('click',function(e){
   if(e.target&&e.target.id==='cmt-hoje'){CMT.mes=new Date(Date.parse(((CMT.dados||{}).hoje||'')+'T12:00:00Z'));cmtCal();return;}
   if(e.target&&e.target.id==='cmt-csv'){cmtCsv();return;}
   if(e.target&&e.target.id==='cmt-imp'){window.print();return;}});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-com-ler]');if(!b)return;b.disabled=true;
+  api('/api/pendencias?com=1&ler=1',{method:'POST',body:JSON.stringify({id:b.getAttribute('data-com-ler')})})
+    .then(function(){toast('Comunicado marcado como lido.');CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);})
+    .catch(function(er){b.disabled=false;toast((er&&er.message)||'Não foi possível marcar como lido.');});});
 document.addEventListener('input',function(e){if(e.target&&e.target.id==='cmt-q'){CMT.q=e.target.value;cmtPauta();}});
 /* decisões: gravam onde já era gravado e podem ser desfeitas */
 function cmtPost(corpo,ok){
