@@ -1791,6 +1791,49 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     catalogo: function () { return CATALOGO; }, ramoCurto: ramoCurto,
     regrasDesignacaoSessao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id || x.data === id; }); return ss ? clone(desigEfetiva(ss)) : null; },
     definirRegrasSessao: function (id, novo) { var ss = S.sessoes.find(function (x) { return x.id === id || x.data === id; }); if (!ss) return false; ss.desigOverride = novo ? clone(novo) : null; salvar(); if (root && !root.hidden) render(); return true; },
+    /* esteira de Pautas (Ab Initio): leituras e ações das etapas 2 a 4 */
+    conversoes: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return null; var R = ativas();
+      return ss.itens.slice().sort(function (a, b) { return (+a.item || 0) - (+b.item || 0); }).map(function (it) { var inf = infoItem(it), r = inf.r || {};
+        var tags = inf.tags.map(function (t) { var d = N(t), H = R.filter(function (g) { return casaRegra(g, d) && classeOK(g, inf.classe); });
+          return { e: t, ign: H.some(function (g) { return g.ef === 'ignorar'; }), regras: H.map(function (g) { return { id: g.id, nome: g.nome || '', ef: g.ef, v: g.v || '', rot: (EF[g.ef] || {}).s || g.ef }; }) }; });
+        var pr = propostas([{ it: it, inf: inf }])[0] || null;
+        return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tarefa: r.tarefa_atual || '', tipo: julgKey(it, inf), c: inf.c, tags: tags,
+          mpf: it.mpf || '', meta: it.meta || '', tipoManual: it.tipoManual || '', proposta: pr ? { ap: pr.ap, meta: pr.meta, mpf: pr.mpf, dif: pr.dif, man: pr.man } : null }; }); },
+    aplicarConversoes: function (id, cnjs) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return 0; var quer = new Set((cnjs || []).map(dig)), n = 0;
+      propostas(ss.itens.map(function (it) { return { it: it, inf: infoItem(it) }; })).forEach(function (p) { if (!p.dif.length || !quer.has(dig(p.it.cnj))) return; p.it.tipoManual = p.ap; if (p.meta) p.it.meta = p.meta; if (p.mpf) p.it.mpf = p.mpf; n++; });
+      if (n) { salvar(); if (root && !root.hidden) render(); } return n; },
+    designacao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return null; var D = desigEfetiva(ss);
+      var de = (ss.fases && ss.fases.inicio) || ss.data, ate = (ss.fases && ss.fases.minutas) || ss.data;
+      var linhas = ss.itens.slice().sort(function (a, b) { return (+a.item || 0) - (+b.item || 0); }).map(function (it) { var inf = infoItem(it);
+        return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tipo: julgKey(it, inf), servidor: it.servidor || '', corretor: it.corretor || '', porD: it.porD || '', porC: it.porC || '',
+          sugD: it.servidor ? null : escolher('d', it, ss), sugC: it.corretor ? null : escolher('c', it, ss) }; });
+      var gente = function (kind) { return pool(kind).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss), atual: ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(m.nome); }).length }; }); };
+      return { criterios: D.ordem.map(function (cid) { return { id: cid, t: CRIT_T[cid] || cid, d: !!(D.on[cid] && D.on[cid].d), c: !!(D.on[cid] && D.on[cid].c) }; }), equilibrar: D.equilibrar !== false, escopo: ss.desigOverride ? 'sessao' : 'geral',
+        periodo: { de: de, ate: ate }, minutantes: gente('d'), corretores: gente('c'), linhas: linhas }; },
+    aplicarDesignacao: function (id, lista) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return 0; var by = new Map(ss.itens.map(function (i) { return [dig(i.cnj), i]; })), n = 0;
+      (lista || []).forEach(function (o) { var it = by.get(dig(o.cnj)); if (!it) return; var m = 0;
+        if (o.d && !it.servidor) { it.servidor = o.d; it.porD = o.porD || 'esteira'; m = 1; } if (o.c && !it.corretor) { it.corretor = o.c; it.porC = o.porC || 'esteira'; m = 1; } n += m; });
+      if (n) { HIST = null; salvar(); if (root && !root.hidden) render(); } return n; },
+    confirmarPauta: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.conferencia = Object.assign({}, ss.conferencia || {}, { confirmada: hoje() }); salvar(); return true; },
+    publicar: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.pronta = on === false ? '' : hoje(); salvar(); if (root && !root.hidden) render(); return true; },
+    /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */
+    previaDaTriagem: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return []; return linhasSelecao(ss).map(function (r) { return dig(r.Processo || r.processo); }); },
+    /* marcas de seleção prévia na Triagem apontando para sessão que já passou, sem pauta que as recebesse */
+    previaVencida: function () { var c = comp(); if (!c || !c.rows) return []; var h = hoje(), g = {};
+      c.rows.forEach(function (r) { if (r['Seleção Prévia'] !== 'SELECIONADO PREVIAMENTE' || r['Status de Julgamento'] === 'PAUTADO' || r['Status de Julgamento'] === 'JULGADO') return; var n = r['Sessão Destino'] || '', m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(n); if (!m) return; var d = m[3] + '-' + m[2] + '-' + m[1]; if (d >= h) return;
+        var sx = S.sessoes.find(function (x) { return x.data === d; }); if (sx && sx.itens.some(function (i) { return dig(i.cnj) === dig(r.Processo || r.processo); })) return;
+        (g[d] = g[d] || { data: d, nome: n, cnjs: [] }).cnjs.push(dig(r.Processo || r.processo)); });
+      return Object.keys(g).sort().map(function (k) { return g[k]; }); },
+    moverPrevia: function (id, cnjs, destinoId) { var todas = id === '*', ss = todas ? { id: '*', data: '', itens: [] } : S.sessoes.find(function (x) { return x.id === id; }), c = comp(); if (!ss || !c || !c.rows) return { n: 0, erro: 'Triagem não carregada.' };
+      var pautar = destinoId === 'pautar', dest = destinoId && !pautar ? S.sessoes.find(function (x) { return x.id === destinoId; }) : null; if (destinoId && !pautar && !dest) return { n: 0, erro: 'Sessão de destino não encontrada.' };
+      var quer = new Set((cnjs || []).map(dig)), nomes = todas ? null : nomesNoPainel(ss), n = 0;
+      c.rows.forEach(function (r) { if (!quer.has(dig(r.Processo || r.processo)) || r['Seleção Prévia'] !== 'SELECIONADO PREVIAMENTE') return; if (nomes && r['Sessão Destino'] && nomes.indexOf(r['Sessão Destino']) < 0) return;
+        if (pautar) { if (!r['Sessão Destino']) r['Sessão Destino'] = br(ss.data); if (c.setJudgment) c.setJudgment(r, 'PAUTADO'); else r['Status de Julgamento'] = 'PAUTADO'; }
+        else if (dest) r['Sessão Destino'] = br(dest.data); else if (c.setJudgment) c.setJudgment(r, ''); else { r['Seleção Prévia'] = ''; r['Sessão Destino'] = ''; } n++; });
+      if (!n) return { n: 0 }; try { c.refresh(); } catch (e) {}
+      if (pautar || todas) {} else if (preAberta(ss)) sincronizarPrevia(ss); else { ss.previa = (ss.previa || []).filter(function (i) { return !quer.has(dig(i.cnj)); }); salvar(); }
+      var g = W.CMTOperacional && W.CMTOperacional.gravar ? W.CMTOperacional.gravar(c.rows) : null;
+      return { n: n, gravando: g }; },
     contagem: function () { var d = hoje(); return S.sessoes.filter(function (x) { return x.data >= d; }).length; }, gravar: gravar, pendentes: pendentes, repo: function () { return REPO; }, regras: function () { return S.regras.filter(function (r) { return r.on; }).length; } };
 })();
 
