@@ -50,6 +50,8 @@ jobs:
           mkdir -p site/public/monitor
           cp monitor/index.html site/public/monitor/index.html
           cp -R monitor/assets monitor/motor site/public/monitor/
+          # Pautas: página própria em /pautas/ (rota da Vercel → /monitor/pautas/index.html)
+          mkdir -p site/public/monitor/pautas && cp monitor/pautas/index.html site/public/monitor/pautas/index.html
           printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false}]}\n' > site/vercel.json
       - name: Publica
         env:
