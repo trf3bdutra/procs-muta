@@ -11,6 +11,7 @@ assert '</script' not in js and '</style' not in css
 ad = (R / 'padrao/ficha-adaptador-monitor.js').read_text(encoding='utf-8')
 assert '</script' not in ad
 for rel in ['apoio/ex-officio/index.html', 'cmt-monitor.html']:
+    if not (R / rel).exists(): print(rel, 'ausente (aposentado), pulado'); continue
     BLOCO = '<!-- cmt-ficha:inicio -->\n<style id="cmt-ficha-css">\n' + css + '\n</style>\n<script id="cmt-ficha">\n' + js + '\n</script>\n' + \
         ('<script id="cmt-ficha-monitor">\n' + ad + '\n</script>\n' if rel == 'cmt-monitor.html' else '') + '<!-- cmt-ficha:fim -->'
     p = R / rel; s = p.read_text(encoding='utf-8')
@@ -25,7 +26,9 @@ for rel in ['apoio/ex-officio/index.html', 'cmt-monitor.html']:
 
 # CMT-monitor: o motor (iframe, guardado comprimido em var MOTOR) recebe o calendário forense e o CSS do editor do calendário do gabinete
 import base64, gzip, re
-mon = R / 'cmt-monitor.html'; t = mon.read_text(encoding='utf-8')
+mon = R / 'cmt-monitor.html'
+if not mon.exists(): print('cmt-monitor.html aposentado: motor embutido não atualizado'); raise SystemExit(0)
+t = mon.read_text(encoding='utf-8')
 m = re.search(r"var MOTOR = '([^']*)'", t)
 motor = gzip.decompress(base64.b64decode(m.group(1))).decode('utf-8')
 fr = (R / 'padrao/calendario-forense.js').read_text(encoding='utf-8'); ecss = (R / 'padrao/calendario-editor.css').read_text(encoding='utf-8')
