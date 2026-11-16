@@ -482,7 +482,7 @@ function vInicio() {
   ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
     pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
   pr += '</section>';
-  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + conf + ms + pr + '</div></div></div>';
+  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + ms + pr + '</div></div></div>';
   return h; }
 let REG = {}, INI_MAS = false;
 function reg(k, rot, L) { REG[k] = { rot, ids: L.map((o) => o.d) }; }
