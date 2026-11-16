@@ -1859,6 +1859,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     /* publicar a pauta à equipe (Ex Officio): libera a listagem e os marcos; retirar devolve só os marcos */
     publicar: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.pronta = on === false ? '' : hoje(); ss.publicada = on !== false; if (ss.publicada) ss.marcosPub = true; salvar(); if (root && !root.hidden) render(); return true; },
     /* publicar só os marcos da sessão (calendário e página inicial da Ex Officio); retirar os marcos retira também a listagem */
+    /* equipe editada na página Pautas: quem minuta, quem corrige e quem entra na designação automática */
+    equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto'].indexOf(campo) < 0) return false; m[campo] = !!valor; HIST = null; salvar(); return true; },
     publicarMarcos: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return false; ss.marcosPub = on !== false; if (!ss.marcosPub) { ss.publicada = false; ss.pronta = ''; } salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */
     /* regras criadas pela esteira, sem sair da página Pautas */
