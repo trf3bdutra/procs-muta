@@ -1000,7 +1000,7 @@ function pendencias() {
 function ensureHost() {
   if (host && doc.body.contains(host)) return host;
   host = doc.createElement('div'); host.id = 'cmt-fx'; host.setAttribute('aria-hidden', 'true');
-  host.addEventListener('click', onClick); host.addEventListener('change', onChange); host.addEventListener('input', onInput);
+  host.addEventListener('click', onClick); host.addEventListener('change', onChange); host.addEventListener('input', onInput); host.addEventListener('paste', onPastePostit);
   host.addEventListener('dragover', function (ev) { if (!ST.teor || ST.view !== 'ficha') return; if ([].slice.call((ev.dataTransfer && ev.dataTransfer.types) || []).indexOf('Files') >= 0) { ev.preventDefault(); host.classList.add('is-drop'); } });
   host.addEventListener('dragleave', function (ev) { if (ev.target === host || !host.contains(ev.relatedTarget)) host.classList.remove('is-drop'); });
   host.addEventListener('drop', function (ev) { host.classList.remove('is-drop'); var f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0]; if (!f || !ST.teor) return; ev.preventDefault(); lerTxt(f); });
@@ -1107,6 +1107,58 @@ function campoTabela(c) {
       '<button type="button" class="fx-sq" data-fx-tbx="' + E(id) + '" data-fx-i="' + i + '" title="Excluir a linha">' + svg('x') + '</button></div>'; }).join('') +
     '<button type="button" class="fx-pill fx-mini" data-fx-tba="' + E(id) + '">' + svg('plus') + 'Linha</button></div></div>';
 }
+/* Observações formatadas: colar o resumo do processo (Próximo ato, Prazos e alertas, O caso, Partes e andamento, Post-its…) vira texto
+   padronizado ("## Seção", "- item", "Rótulo: valor", "• Nota: texto — Peça · id N"); na leitura, seções, listas e post-its coloridos */
+var PI_TIPOS = [['nota', 'Nota'], ['aten[cç][aã]o', 'Atenção'], ['pend[eê]ncia', 'Pendência'], ['alerta', 'Alerta'], ['lembrete', 'Lembrete'], ['d[uú]vida', 'Dúvida'], ['importante', 'Importante']];
+var PI_RE = new RegExp('^(' + PI_TIPOS.map(function (t) { return t[0]; }).join('|') + ')(?=\\s*[:\\-–—]|\\s+|[A-ZÀ-Ú(“"0-9])\\s*[:\\-–—]?\\s*', 'i');
+var PI_LINHA = new RegExp('^•\\s*(' + PI_TIPOS.map(function (t) { return t[1]; }).join('|') + '):\\s*(.*)$');
+var OBS_SEC = ['Próximo ato', 'Prazos e alertas', 'O caso', 'Partes e andamento', 'Post-its colados nas peças', 'Pendências', 'Providências', 'Resumo'];
+var OBS_ROT = ['Por quê', 'Polo ativo', 'Polo passivo', 'Fase', 'Último ato', 'Prazo', 'Classe', 'Assunto', 'Relator', 'Origem'];
+var OBS_ROT_RE = new RegExp('^(' + OBS_ROT.join('|') + '):\\s*(.*)$', 'i');
+function semAc(x) { return S(x).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim(); }
+function piTipo(x) { for (var i = 0; i < PI_TIPOS.length; i++) if (new RegExp('^' + PI_TIPOS[i][0] + '$', 'i').test(x)) return PI_TIPOS[i][1]; return 'Nota'; }
+function obsSec(l) { var x = semAc(l.replace(/\s*·\s*\d+\s*$/, '').replace(/:\s*$/, '')); if (/^post-?its?\b/.test(x)) return 'Post-its colados nas peças'; for (var i = 0; i < OBS_SEC.length; i++) if (x === semAc(OBS_SEC[i])) return OBS_SEC[i]; return ''; }
+function obsRot(l) { var x = semAc(l.replace(/:\s*$/, '')); for (var i = 0; i < OBS_ROT.length; i++) if (x === semAc(OBS_ROT[i])) return OBS_ROT[i]; return ''; }
+function obsPostit(l, naSecao) {
+  var bala = /^[*•\-–]\s*/.test(l), x = l.replace(/^[*•\-–]\s*/, '').replace(/\s*Descolar\s*$/i, ''), m = PI_RE.exec(x);
+  if (!m || (!naSecao && !bala) || (!naSecao && !/^[^:]{0,12}:/.test(x) && !/^[A-ZÀ-Ú]/.test(x.slice(m[1].length).trim()))) return '';
+  var resto = x.slice(m[0].length).trim(), f = /^(.*?)\s+—\s+([^—]*·\s*id\s*\d+)\s*$/i.exec(resto) || /^(.*[.;!?)”"])\s*([^.;!?]{2,90}?·\s*id\s*\d+)\s*$/i.exec(resto);
+  return '• ' + piTipo(m[1]) + ': ' + (f ? f[1].trim() + ' — ' + f[2].trim() : resto);
+}
+function obsNormaliza(txt) {
+  var out = [], sec = '', pend = '', ach = 0;
+  S(txt).replace(/\r/g, '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean).forEach(function (l) {
+    var sc = obsSec(l.replace(/^##\s*/, '')); if (sc) { if (pend) { out.push(pend + ':'); pend = ''; } out.push('## ' + sc); sec = sc; ach++; return; }
+    var rt = obsRot(l); if (rt && !/:\s*\S/.test(l)) { pend = rt; return; }
+    if (pend) { out.push(pend + ': ' + l); pend = ''; return; }
+    var pi = obsPostit(l, sec === 'Post-its colados nas peças'); if (pi) { out.push(pi); ach++; return; }
+    if (/^[*•\-–]\s+/.test(l)) { out.push('- ' + l.replace(/^[*•\-–]\s+/, '')); return; }
+    out.push(l);
+  });
+  if (pend) out.push(pend + ':');
+  return ach ? out.join('\n') : null;
+}
+function temFormato(v) { return S(v).split('\n').some(function (l) { l = l.trim(); return /^##\s/.test(l) || PI_LINHA.test(l); }); }
+function obsIds(h) { return h.replace(/\b(id\s*)(\d{6,})/gi, '$1<b class="fx-mono">$2</b>'); }
+function obsHtml(v) {
+  var secs = [], cur = null, novo = function (t) { cur = { t: t, L: [] }; secs.push(cur); };
+  S(v).split('\n').map(function (l) { return l.trim(); }).filter(Boolean).forEach(function (l) { var m = /^##\s*(.+)$/.exec(l); if (m) novo(m[1].trim()); else { if (!cur) novo(''); cur.L.push(l); } });
+  return '<div class="fx-obs">' + secs.map(function (sc) {
+    var h = '', ul = [], pis = [], fecha = function () { if (ul.length) { h += '<ul class="fx-obs-ul">' + ul.join('') + '</ul>'; ul = []; } if (pis.length) { h += '<div class="fx-pis">' + pis.join('') + '</div>'; pis = []; } };
+    sc.L.forEach(function (l) {
+      var m = PI_LINHA.exec(l);
+      if (m) { if (ul.length) fecha(); var tx = m[2], fo = '', k = tx.lastIndexOf(' — '); if (k > 0 && /·\s*id\s*\d+/i.test(tx.slice(k))) { fo = tx.slice(k + 3); tx = tx.slice(0, k); }
+        var cls = { 'Nota': 'nota', 'Atenção': 'atencao', 'Alerta': 'atencao', 'Importante': 'atencao', 'Pendência': 'pend', 'Lembrete': 'pend', 'Dúvida': 'duvida' }[m[1]] || 'nota';
+        pis.push('<div class="fx-pi t-' + cls + '"><span class="fx-pi-t">' + E(m[1]) + '</span><p>' + obsIds(E(tx)) + '</p>' + (fo ? '<small>' + obsIds(E(fo)) + '</small>' : '') + '</div>'); return; }
+      if (/^-\s+/.test(l)) { if (pis.length) fecha(); ul.push('<li>' + obsIds(E(l.replace(/^-\s+/, ''))) + '</li>'); return; }
+      fecha(); var r = OBS_ROT_RE.exec(l);
+      if (r) { h += '<div class="fx-obs-kv"><span>' + E(obsRot(r[1]) || r[1]) + '</span><p>' + (r[2] ? obsIds(E(r[2])) : '<em class="fx-dim">—</em>') + '</p></div>'; return; }
+      h += '<p class="fx-obs-p">' + obsIds(E(l)) + '</p>';
+    }); fecha();
+    var np = sc.L.filter(function (l) { return PI_LINHA.test(l); }).length, cl = semAc(sc.t).replace(/[^a-z]+/g, '-');
+    return '<section class="fx-obs-s s-' + cl + '">' + (sc.t ? '<h6>' + E(sc.t) + (np ? ' <em>· ' + np + '</em>' : '') + '</h6>' : '') + h + '</section>';
+  }).join('') + '</div>';
+}
 function campo(c) {
   if (c.tipo === 'tabela') return campoTabela(c);
   var v = valorCampo(c), ed = ST.edit && editavel(c) && !bloqueado(c), id = c.secao ? c.secao + '.' + c.chave : '', sujo = id && Object.prototype.hasOwnProperty.call(ST.draft, id);
@@ -1118,11 +1170,12 @@ function campo(c) {
     else if (c.tipo === 'simnao') body = '<label class="fx-tg"><input type="checkbox" ' + a + (sim(v) ? ' checked' : '') + '><span>' + (sim(v) ? 'Sim' : 'Não') + '</span></label>';
     else if (c.tipo === 'data' && (!v || iso(v))) body = '<input type="date" ' + a + ' value="' + E(iso(v)) + '">';
     else if (c.tipo === 'numero') body = '<input type="number" ' + a + ' value="' + E(v) + '">';
-    else if (c.tipo === 'texto-longo') body = '<textarea rows="' + Math.min(6, Math.max(2, S(v).split('\n').length)) + '" ' + a + '>' + E(v) + '</textarea>';
+    else if (c.tipo === 'texto-longo') body = '<textarea rows="' + Math.min(c.chave === 'Observações' ? 12 : 6, Math.max(2, S(v).split('\n').length)) + '" ' + a + (c.chave === 'Observações' ? ' data-fx-postit' : '') + '>' + E(v) + '</textarea>' + (c.chave === 'Observações' ? '<small class="fx-pi-h">Cole o resumo do processo (Próximo ato, Prazos e alertas, O caso, Partes e andamento, Post-its…): o texto é padronizado ao colar e aparece formatado na leitura.</small>' : '');
     else body = '<input ' + a + ' value="' + E(v) + '">';
   } else if (c.calculado) body = v ? '<span class="fx-calc">' + E(v) + '</span>' : '<span class="fx-dim">—</span>';
   else if (c.tipo === 'simnao') body = '<span class="fx-v ' + (sim(v) ? '' : 'fx-dim') + '">' + (sim(v) ? 'Sim' : v ? E(v) : '—') + '</span>';
   else if (c.tipo === 'data') body = '<span class="fx-v fx-mono ' + (v ? '' : 'fx-dim') + '">' + E(brD(iso(v) || v) || '—') + '</span>';
+  else if (c.tipo === 'texto-longo' && temFormato(v)) body = obsHtml(v);
   else body = '<span class="fx-v ' + (v ? '' : 'fx-dim') + (/ID\b/.test(c.rotulo) ? ' fx-mono' : '') + '">' + E(mostra(v) || '—') + '</span>';
   return '<div class="fx-f s' + span(c, v) + (ed ? ' is-edit' : '') + (sujo ? ' is-dirty' : '') + '">' + lab + body + '</div>';
 }
@@ -1399,6 +1452,12 @@ function onChange(ev) {
   if (t.hasAttribute('data-fx-apply')) { ST.teor.items[+t.getAttribute('data-fx-apply')].apply = t.checked; render(); return; }
   if (t.hasAttribute('data-fx-val')) { onInput(ev); return; }
   if (t.hasAttribute('data-fx-k')) { onInput(ev); if (t.type === 'checkbox' || t.tagName === 'SELECT') render(); }
+}
+function onPastePostit(ev) {
+  var t = ev.target; if (!t || !t.hasAttribute || !t.hasAttribute('data-fx-postit')) return;
+  var txt = ev.clipboardData && ev.clipboardData.getData('text/plain'), n = txt && obsNormaliza(txt); if (!n) return;
+  ev.preventDefault(); var a = t.selectionStart, b = t.selectionEnd, antes = t.value.slice(0, a), ins = (antes && !/\n$/.test(antes) ? '\n' : '') + n;
+  t.setRangeText(ins, a, b, 'end'); t.rows = Math.min(12, Math.max(2, t.value.split('\n').length)); t.dispatchEvent(new Event('input', { bubbles: true }));
 }
 function onInput(ev) {
   var t = ev.target; if (!t.hasAttribute) return;
