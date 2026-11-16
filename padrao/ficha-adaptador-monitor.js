@@ -1,6 +1,6 @@
 /* CMT-monitor · adaptador da ficha única (padrao/ficha-dialogo.js). Lê o modelo (padrao/ficha.json) e o registro do gabinete
    (acervo/operacional.json) pelo token do procs-muta do motor (window.ProcsMuta) e grava direto na base, com as mesmas regras do
-   servidor da Pauta da equipe (CMTFicha.aplicar). Os dados do acervo vêm da linha do painel central (fonte já carregada).
+   servidor da Ex Officio (CMTFicha.aplicar). Os dados do acervo vêm da linha do painel central (fonte já carregada).
    Toda abertura de ficha do monitor (Acervo, Triagem, Cadastro de sessão) passa por CMTProntuario.abrir, que agora abre esta ficha. */
 (function () {
   'use strict';

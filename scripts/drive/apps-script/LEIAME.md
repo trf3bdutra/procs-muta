@@ -1,4 +1,4 @@
-# Planilhas do Google ⇄ Pauta da equipe (Apps Script)
+# Planilhas do Google ⇄ Ex Officio (Apps Script)
 
 `Codigo.gs` liga as planilhas do Drive ao app, nos dois sentidos:
 
@@ -19,13 +19,13 @@ As demais colunas (processo, classe, assunto, tarefa, pendências, apreciação�
 Quem grava aparece no app como **Planilha Google**. A planilha é ferramenta do gestor: por ela também se designa servidor e revisor
 e se registra o desfecho. Compartilhe as planilhas com edição só com quem pode fazer isso.
 
-O lado do app é `apoio/pauta-equipe/api/_planilha.js` (rota `/api/pauta?planilha=1`), autenticado pelo token `CMT_PLANILHA_TOKEN`.
+O lado do app é `apoio/ex-officio/api/_planilha.js` (rota `/api/pauta?planilha=1`), autenticado pelo token `CMT_PLANILHA_TOKEN`.
 
 ## Instalação (uma vez)
 
-1. **Vercel** (projeto da Pauta da equipe) › Settings › Environment Variables: `CMT_PLANILHA_TOKEN` = um texto aleatório
+1. **Vercel** (projeto da Ex Officio) › Settings › Environment Variables: `CMT_PLANILHA_TOKEN` = um texto aleatório
    de 32+ caracteres (Production). Fazer um novo deploy para valer.
-2. **script.google.com** › Novo projeto › nome "Planilhas ⇄ Pauta da equipe". Apagar o conteúdo de `Código.gs` e colar `Codigo.gs`.
+2. **script.google.com** › Novo projeto › nome "Planilhas ⇄ Ex Officio". Apagar o conteúdo de `Código.gs` e colar `Codigo.gs`.
 3. **Configurações do projeto** (engrenagem): fuso horário *(GMT-04:00) Cuiabá*; em *Propriedades do script*, adicionar
    `CMT_TOKEN` com o mesmo valor do passo 1.
 4. No editor, escolher a função **instalar** e clicar em **Executar**. Autorizar com a conta dona das planilhas

@@ -1,4 +1,4 @@
-/* barra da equipe no Compêndio: mesmos botões da Pauta da equipe; aqui só os contadores de notificações e diligências (o usuário e o Sair ficam no chip de acesso) */
+/* barra da equipe no Modus Operandi: mesmos botões do Ex Officio; aqui só os contadores de notificações e diligências (o usuário e o Sair ficam no chip de acesso) */
 (function(){
   function nq(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();}
   function j(u){return fetch(u,{credentials:'same-origin',cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json();});}

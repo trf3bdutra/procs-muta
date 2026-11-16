@@ -113,7 +113,7 @@ def _prod(a):
             com('Data da Assinatura', rotulo='Data da assinatura'), com('Decisão - ID', rotulo='ID da decisão'), com('Publicado', rotulo='Publicada'),
             NOVO('Data da publicação', 'Mono - Data da publicação', 'data')]}]
 # Controles especiais: grupos oficiais da ficha para os processos sob acompanhamento próprio (seção "controles" do operacional;
-# a urgência e a monocrática usam os campos que já existem na triagem e na produção). Mesmo vocabulário no CMT-monitor e na Pauta da equipe.
+# a urgência e a monocrática usam os campos que já existem na triagem e na produção). Mesmo vocabulário no CMT-monitor e na Ex Officio.
 URG_MEDIDA = ['Tutela de urgência', 'Tutela de evidência', 'Antecipação da tutela recursal', 'Efeito suspensivo', 'Liminar em mandado de segurança',
               'Reconsideração de liminar', 'Prioridade legal', 'Outra']
 URG_NIVEL = ['Urgentíssima (mesmo dia)', 'Urgente (24 h)', 'Prioritária (48 h)', 'Ordinária (5 dias)']
@@ -220,7 +220,7 @@ abas.append(CONTROLES)
 ordem = ['Processo', 'Triagem', 'Produção', 'Controles especiais', 'Pauta']
 abas.sort(key=lambda a: ordem.index(a['aba']) if a['aba'] in ordem else 99)
 out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.2.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py',
-       'descricao': 'Ficha única padrão de processo, usada pelo CMT-monitor e pela Pauta da equipe. Campos com "tipo": "tabela" são listas de linhas com as "colunas" indicadas. Grupos com "quando" só aparecem quando o campo indicado tem o valor. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
+       'descricao': 'Ficha única padrão de processo, usada pelo CMT-monitor e pela Ex Officio. Campos com "tipo": "tabela" são listas de linhas com as "colunas" indicadas. Grupos com "quando" só aparecem quando o campo indicado tem o valor. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
        'abas': abas}
 (R / 'padrao/ficha.json').write_text(json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 n = sum(len(g['campos']) for a in abas for g in a['grupos'])

@@ -1,4 +1,4 @@
-/* GET /api/compendio → conteúdo do modo avançado do CMT Compêndio (Enciclopédia), só para quem tem acesso */
+/* GET /api/compendio → conteúdo do modo avançado do Modus Operandi (Enciclopédia), só para quem tem acesso */
 const L = require('./_lib');
 let ENC = null;
 module.exports = async (req, res) => {

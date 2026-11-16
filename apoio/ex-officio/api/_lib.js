@@ -1,4 +1,4 @@
-/* Pauta da equipe · funções do servidor (Vercel). O token do GitHub e as senhas ficam só nas variáveis de ambiente da Vercel:
+/* Ex Officio · funções do servidor (Vercel). O token do GitHub e as senhas ficam só nas variáveis de ambiente da Vercel:
    GH_TOKEN            token com permissão Contents (leitura e gravação) no trf3bdutra/procs-muta
    CMT_USERS_JSON      {"BRUNO":"senha","VICTOR":"outra",...}  (nome de login = nome do servidor na pauta)
    TEAM_LOGIN_PASSWORD senha comum, opcional, para quem não estiver em CMT_USERS_JSON (só nomes de CMT_EQUIPE)
@@ -60,7 +60,7 @@ async function gravarJson(rel, dados, sha, msg) {
 }
 const gestor = u => String(process.env.CMT_GESTOR || 'Bruno').split(',').map(norm).filter(Boolean).includes(norm(u));
 const dataOk = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ''));
-/* perfil no CMT Compêndio (apoio/acessos.json): equipe (padrão) < avancado < editor; cada perfil inclui o anterior; vale o nome do login ou um apelido do cadastro da equipe */
+/* perfil no Modus Operandi (apoio/acessos.json): equipe (padrão) < avancado < editor; cada perfil inclui o anterior; vale o nome do login ou um apelido do cadastro da equipe */
 let ACC = null, ACC_T = 0;
 async function acessos(usuario) {
   if (!ACC || Date.now() - ACC_T > 60e3) {

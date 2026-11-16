@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
       for (let t = 0; t < 4; t++) {
         const { sha } = await L.lerJson(AG).catch(nada);
         const doc = { schema: 'gabcmt.agenda-calendario', versao: 1, atualizado_em: new Date().toISOString(), itens: b.itens.slice(0, 2000), feitos: b.feitos && typeof b.feitos === 'object' ? b.feitos : {} };
-        try { await L.gravarJson(AG, doc, sha, 'Pauta da equipe (' + u + '): agenda do calendário'); return res.status(200).json({ ok: true }); }
+        try { await L.gravarJson(AG, doc, sha, 'Ex Officio (' + u + '): agenda do calendário'); return res.status(200).json({ ok: true }); }
         catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
       }
       return res.status(409).json({ erro: 'A agenda mudou várias vezes seguidas; tente de novo.' });

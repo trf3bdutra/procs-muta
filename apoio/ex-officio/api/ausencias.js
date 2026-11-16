@@ -19,13 +19,13 @@ module.exports = async (req, res) => {
         if (!dataOk(b.de) || !dataOk(b.ate) || b.ate < b.de) return res.status(400).json({ erro: 'Informe o período (a data final não pode ser anterior à inicial).' });
         const tipo = TIPOS.includes(b.tipo) ? b.tipo : 'Outro';
         dados.registros.push({ id: 'aus-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), nome: u, de: b.de, ate: b.ate, tipo, motivo: String(b.motivo || '').slice(0, 400), estado: 'pendente', criadoEm: new Date().toISOString() });
-        msg = 'Pauta da equipe (' + u + '): solicita ausência ' + b.de + ' a ' + b.ate;
+        msg = 'Ex Officio (' + u + '): solicita ausência ' + b.de + ' a ' + b.ate;
       } else if (req.method === 'DELETE') {
         const r = dados.registros.find(x => x.id === req.query.id && L.norm(x.nome) === L.norm(u));
         if (!r) return res.status(404).json({ erro: 'solicitação não encontrada' });
         if (r.estado !== 'pendente') return res.status(409).json({ erro: 'Só dá para cancelar solicitação ainda pendente.' });
         r.estado = 'cancelada'; r.decididoEm = new Date().toISOString(); r.decididoPor = u;
-        msg = 'Pauta da equipe (' + u + '): cancela solicitação de ausência';
+        msg = 'Ex Officio (' + u + '): cancela solicitação de ausência';
       } else return res.status(405).json({ erro: 'método não aceito' });
       dados.atualizadoEm = new Date().toISOString();
       try { await L.gravarJson(ARQ, dados, sha, msg); return res.status(200).json({ ok: true }); }

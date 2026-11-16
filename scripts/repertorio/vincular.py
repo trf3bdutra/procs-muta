@@ -7,7 +7,7 @@ Com --html (entrada .html), grava também os usos automáticos dentro do própri
 (bloco <script id="usos-auto">), somados aos usos lançados à mão na planilha.
 
 Lê os itens do repertório (Temas, Súmulas, Jurisprudência, Normas) — do snapshot embutido no
-cmt-compendio.html ou de um JSON com as mesmas abas — e procura cada um nos campos
+modus-operandi.html ou de um JSON com as mesmas abas — e procura cada um nos campos
 jurisprudenciaCitada, temas, dispositivosCitados e ementa de precedentes/precedentes.jsonl.
 
 Gera:

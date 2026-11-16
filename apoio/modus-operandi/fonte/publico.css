@@ -1,4 +1,4 @@
-/* versão pública: identidade gêmea da Pauta da equipe (mesmo cabeçalho, paleta e tema) */
+/* versão pública: identidade gêmea da Ex Officio (mesmo cabeçalho, paleta e tema) */
 :root{--bg:#0b1c28;--panel:#10273a;--card:#132a3b;--field:#183447;--ink:#e3ebf2;--mut:#9fb3c4;--line:#27465c;--gold:#e6c27a;--gold-ink:#14263c;--gold-soft:rgba(230,194,122,.14);--focus:#e6c27a}
 :root[data-theme="light"]{--bg:#eef2f4;--panel:#ffffff;--card:#ffffff;--field:#f6f8f9;--ink:#1e3448;--mut:#64778a;--line:#d8e1e8;--gold:#1f4c4f;--gold-ink:#ffffff;--gold-soft:rgba(31,76,79,.09);--focus:#1f4c4f}
 .top{background:linear-gradient(90deg,#173c47,#1f4c4f)!important;border-bottom:0!important;color:#eef4f1;padding:10px 22px!important}
@@ -11,7 +11,7 @@
 .top .ico{border-color:rgba(255,255,255,.25)!important;color:#eef4f1!important}
 #openSheet{display:none!important}
 .hb-eq{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.25);color:#eef4f1;border-radius:999px;padding:6px 13px;font-weight:700;font-size:12px;text-decoration:none}.hb-eq:hover{background:rgba(255,255,255,.08)}
-/* barra unificada com a Pauta da equipe */
+/* barra unificada com a Ex Officio */
 .top{gap:14px!important;flex-wrap:nowrap!important}.top .eqsp{flex:1}
 .eqtabs{display:flex;gap:4px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:4px}.eqtabs a{border-radius:999px;padding:7px 14px;font-weight:700;font-size:13px;color:#cfe0db;text-decoration:none}.eqtabs a[aria-current=page]{background:#e6c27a;color:#14263c}
 .top .right{display:flex;align-items:center;gap:10px;margin-left:0}.top .right .status,.top .right .pill2{display:none!important}
@@ -22,7 +22,7 @@
 
 aside{top:58px!important}
 @media (max-width:860px){.top{flex-wrap:wrap!important}}
-/* barra comum com a Pauta da equipe: pill Início · Pauta e, separada, a pill do Compêndio com suas seções */
+/* barra comum com a Ex Officio: pill Início · Pauta e, separada, a pill do Modus Operandi com suas seções */
 .top .eqtabs+.eqtabs{margin-left:-4px}
 .eq-cpn .eq-grp{background:transparent;box-shadow:none;padding-right:0}
 .eqtabs{align-items:center;flex-wrap:nowrap}
@@ -51,11 +51,11 @@ section>.pg-h .sub.pg-seg{display:inline-flex;gap:2px;padding:4px;margin:0;backg
 /* marca do gabinete: a estrela do CMT-monitor */
 .brand.tw i{width:22px!important;height:24px!important;border-radius:0!important;box-shadow:none!important;background:#e6c27a!important;-webkit-mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat;mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat}
 .brand.tw span{letter-spacing:.22em!important;font-size:11.5px!important}
-/* barra: marca e lado direito sem quebra; no modo avançado (mais seções) a pill do Compêndio desce para uma segunda linha em telas médias */
+/* barra: marca e lado direito sem quebra; no modo avançado (mais seções) a pill do Modus Operandi desce para uma segunda linha em telas médias */
 .brand.tw span{white-space:nowrap}.top .right,.ac-chip{flex-wrap:nowrap!important;white-space:nowrap}
 @media (max-width:1680px){html.modo-av .top{flex-wrap:wrap!important;row-gap:8px}html.modo-av .top .eq-cpn{order:3}html.modo-av .top .eqsp{display:block}}
 
-/* detalhes coloridos da barra, como no CMT-monitor e na Pauta da equipe */
+/* detalhes coloridos da barra, como no CMT-monitor e na Ex Officio */
 .top{position:sticky}.top:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#0083bd 0 50%,#76bae6 50% 100%);box-shadow:0 -1px 0 #1b7244;pointer-events:none}
 .eqtabs>a:before,.eqtabs .eq-cmp:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin:0 7px 1px 0;vertical-align:middle;background:var(--dot,#e6c27a)}
 .eqtabs>a[href*="#inicio"]{--dot:#e6c27a}.eqtabs>a[href*="#pauta"]{--dot:#5fc4a8}.eqtabs .eq-cmp{--dot:#e08a7a}.eqtabs .eq-cmp[aria-current=page]:before{background:#14263c}

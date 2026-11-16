@@ -1,4 +1,4 @@
-/* GET /api/acesso → quem está conectado e o perfil no CMT Compêndio (equipe, avancado, editor; ver apoio/acessos.json) */
+/* GET /api/acesso → quem está conectado e o perfil no Modus Operandi (equipe, avancado, editor; ver apoio/acessos.json) */
 const L = require('./_lib');
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
