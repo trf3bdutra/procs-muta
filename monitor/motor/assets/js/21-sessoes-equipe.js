@@ -485,8 +485,10 @@
     return out.sort(function (a, b) { return a.data.localeCompare(b.data); });
   }
   function julgKey(it, inf) {
-    if (it.tipoManual) return it.tipoManual === '—' ? '' : it.tipoManual;
-    if (inf.c.tipo) return inf.c.tipo;
+    if (it.tipoManual && it.tipoManual !== '—') return it.tipoManual;
+    /* "—" fixa o 1º julgamento: tira ED/AgInt/JR da etiqueta, mas a META continua valendo para a designação */
+    if (!it.tipoManual && inf.c.tipo) return inf.c.tipo;
+    if (it.tipoManual === '—') return inf.c.metas.length || /^M\d/i.test(it.meta || '') ? 'META' : '';
     if (inf.c.metas.length) return 'META';
     if (inf.recurso === 'AI') return 'AI';
     return '';
@@ -630,9 +632,47 @@
         'Desfecho': it.resultado || '', 'Intercorrência': it.intercor || '', 'Meta': cpMeta(it, inf), 'Apreciação': cpApreciacao(it, inf) };
     });
   }
+  /* Controle de Pauta no molde oficial (planilha de 30/11): o modelo em assets/modelos tem o cabeçalho com painel,
+     fórmulas, listas suspensas e cores; aqui só se preenchem a data, os prazos e as linhas (a partir da 21) */
+  var PL_COLS = ['Item', 'Processo', 'Classe', 'Assunto', 'Detalhes', 'Pendências', 'Etapa', 'Minutado em', 'Servidor', 'Revisor', 'Intervenção MPF', 'Parecer MPF', 'Preliminares', 'Tempestividade', 'Preparo', 'Representação', 'Mídias', 'Resultado', 'Consectários', 'Honorários', 'Tópico-síntese', 'Desfecho', 'Intercorrência', 'Meta', 'Apreciação'];
+  function serialData(v) { v = String(v || ''); var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(v) || /^(\d{2})\/(\d{2})\/(\d{4})/.exec(v); if (!m) return null; var y = +(m[1].length === 4 ? m[1] : m[3]), mo = +m[2], d = +(m[1].length === 4 ? m[3] : m[1]); return (Date.UTC(y, mo - 1, d) - Date.UTC(1899, 11, 30)) / 864e5; }
+  function xmlEsc(v) { return String(v).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, ''); }
+  function colLetra(i) { var s = ''; i++; while (i) { var r = (i - 1) % 26; s = String.fromCharCode(65 + r) + s; i = Math.floor((i - 1) / 26); } return s; }
+  async function exportarModelo(ss, linhas, nome) {
+    var X = W.XLSX, CFB = X.CFB; if (linhas.length > 300) throw new Error('mais de 300 itens');
+    var resp = await fetch('assets/modelos/controle-de-pauta.xlsx', { cache: 'no-cache' }); if (!resp.ok) throw new Error('modelo ' + resp.status);
+    var cfb = CFB.read(new Uint8Array(await resp.arrayBuffer()), { type: 'array' });
+    var ler = function (n) { var i = cfb.FullPaths.findIndex(function (p) { return p.slice(-n.length - 1) === '/' + n; }), e = i >= 0 ? cfb.FileIndex[i] : null; if (!e) throw new Error('modelo sem ' + n); return { e: e, t: new TextDecoder().decode(e.content) }; };
+    var grava = function (o, t) { o.e.content = new TextEncoder().encode(t); o.e.size = o.e.content.length; };
+    var V = {}, f = ss.fases || {}, dd = br(ss.data).slice(0, 5).replace('/', '-');
+    var put = function (ref, v, num) { if (v == null || v === '') return; V[ref] = num ? { n: v } : { s: v }; };
+    put('R1', serialData(ss.data), true); put('E3', serialData(f.minutas), true); put('K3', serialData(f.liberacao), true);
+    linhas.forEach(function (l, i) { var r = 21 + i;
+      PL_COLS.forEach(function (k, ci) { var v = l[k], ref = colLetra(ci) + r;
+        if (k === 'Pendências') return;
+        if (k === 'Etapa') { if (v === 'Corrigido' || v === 'Liberado') V[ref] = { s: v, f: true }; return; }
+        if (k === 'Minutado em') { put(ref, serialData(v), true); return; }
+        if (k === 'Item') { var n = Number(v); put(ref, isNaN(n) || v === '' ? v : n, !isNaN(n) && v !== ''); return; }
+        put(ref, v == null ? '' : String(v)); }); });
+    var sh = ler('xl/worksheets/sheet1.xml');
+    var xml = sh.t.replace(/<c r="([A-Z]+[0-9]+)"( s="\d+")?( t="[a-z]+")?(?:\/>|>(?:<f>[\s\S]*?<\/f>)?(?:<v>[^<]*<\/v>|<v\/>)?<\/c>)/g, function (m, ref, st) {
+      var o = V[ref]; if (!o) return m; if (/<f>/.test(m) && !o.f) return m;
+      return o.n != null ? '<c r="' + ref + '"' + (st || '') + '><v>' + o.n + '</v></c>' : '<c r="' + ref + '"' + (st || '') + ' t="inlineStr"><is><t xml:space="preserve">' + xmlEsc(o.s) + '</t></is></c>'; });
+    grava(sh, xml);
+    var wbx = ler('xl/workbook.xml'); grava(wbx, wbx.t.replace(/name="Sess[^"]*"/, 'name="Sessão ' + dd + '"'));
+    try { var tb = ler('xl/tables/table1.xml'); grava(tb, tb.t.replace(/(name|displayName)="Pauta_[^"]*"/g, '$1="Pauta_' + dd.replace('-', '') + '"')); } catch (e) {}
+    var out = CFB.write(cfb, { type: 'array', fileType: 'zip' });
+    var a = Dc.createElement('a'); a.href = URL.createObjectURL(new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })); a.download = nome; Dc.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+    return true;
+  }
   function exportarXlsx() {
     var ss = sessao(); if (!ss) return;
     var X = W.XLSX, linhas = planilhaLinhas(ss), nome = 'Pauta_Sessao_' + br(ss.data || hoje()).replace(/\//g, '-') + '.xlsx';
+    if (X && X.CFB && W.fetch && W.TextDecoder) { exportarModelo(ss, linhas, nome).then(function () { toast('Controle de Pauta de ' + br(ss.data) + ' no molde oficial: ' + linhas.length + ' itens.'); }).catch(function (e) { toast('Molde oficial indisponível (' + e.message + '): saiu a versão simples.'); exportarSimples(ss, linhas, nome); }); return; }
+    exportarSimples(ss, linhas, nome);
+  }
+  function exportarSimples(ss, linhas, nome) {
+    var X = W.XLSX;
     if (!X) { var h = Object.keys(linhas[0] || {}); baixar(nome.replace('.xlsx', '.csv'), [h.join(';')].concat(linhas.map(function (l) { return h.map(function (k) { return '"' + String(l[k]).replace(/"/g, '""') + '"'; }).join(';'); })).join('\n'), 'text/csv'); return; }
     var wb = X.utils.book_new(), ws = X.utils.json_to_sheet(linhas);
     ws['!cols'] = [6, 26, 10, 34, 30, 28, 11, 12, 14, 14, 22, 18, 16, 14, 18, 18, 14, 22, 12, 16, 12, 10, 24, 10, 10].map(function (w) { return { wch: w }; });
