@@ -597,7 +597,10 @@ function construir() {
   const MR = new Map(); R.forEach((r) => { const d = dg(r.Processo || r.processo); if (d) MR.set(d, r); });
   const F0 = FONTE || R;
   U = []; NOVAS = []; ALL = [];
+  /* a cópia do navegador (motor) recebe da fonte o paradeiro e os dados de origem: a ficha e as Pautas passam a mostrar o mesmo que a Triagem */
+  const SINC = ['tarefa_atual', 'data_entrada_tarefa', 'paradeiro_em', 'tarefa_anterior', 'saiu_da_tarefa_em', 'prioridade', 'Etiquetas', 'etiquetas', 'Etiquetas Originais', 'tarefas_pje', 'Sigiloso', 'Liminar Pendente', 'Órgão Julgador', 'Colegiado', 'Cargo Judicial', 'ultimo_movimento', 'Última_Movimentação', 'Data_Última_Movimentação', 'Tempo_de_Tramitação', 'Fase', 'Data_Fase'];
   F0.forEach((f) => { const t = String(f.tarefa_atual || '').trim(), d = dg(f.processo || f.Processo); if (d.length !== 20) return; let r = MR.get(d); if (!r) { r = { Processo: fmtCnj(d) }; }
+    else if (FONTE) SINC.forEach((k) => { const v = f[k] == null ? '' : f[k]; if ((r[k] == null ? '' : r[k]) !== v) r[k] = v; });
     const k = nzT(t), o = proc(f, r);
     o.grupo = !t ? 'sem' : TRIAR.has(k) ? 'triar' : IGN.has(k) ? IGN.get(k) : (ESCOPO.lido ? 'nc' : 'sem');
     ALL.push(o); if (o.grupo === 'triar') U.push(o); else if (o.grupo === 'nc') { o.nova = true; NOVAS.push(o); } });
