@@ -289,9 +289,11 @@
     render();
   }
   async function gravar() {
-    if (!W.ProcsMuta || !W.ProcsMuta.gravar) { toast('Gravação no procs-muta indisponível nesta página.'); return; }
-    var P = pendentes(); if (!P.length) { toast('Nada a gravar: tudo igual ao procs-muta.'); return; }
-    REPO.gravando = true; pill();
+    if (!W.ProcsMuta || !W.ProcsMuta.gravar) { toast('Gravação no procs-muta indisponível nesta página.'); return { ok: false, erro: 'Gravação no procs-muta indisponível nesta página.' }; }
+    if (!REPO.lido) return { ok: false, erro: 'O procs-muta ainda não foi lido; aguarde a carga antes de gravar.' };
+    if (REPO.gravando) return { ok: false, ocupado: true, erro: 'Gravação em andamento.' };
+    var P = pendentes(); if (!P.length) { toast('Nada a gravar: tudo igual ao procs-muta.'); return { ok: true, nada: true, partes: [] }; }
+    REPO.gravando = true; pill(); var RES;
     try {
       var files = {}, agora = new Date().toISOString();
       /* o que a equipe gravou pela Ex Officio depois da última leitura prevalece sobre a cópia deste navegador */
@@ -332,9 +334,9 @@
       await W.ProcsMuta.gravar(files, 'Ab Initio: ' + P.map(rotulo).join(', '));
       P.forEach(function (k) { if (k.indexOf('del:') === 0) delete S.sync['ses:' + k.slice(4)]; else S.sync[k] = hash(conteudo(k)); });
       S.apagadas = (S.apagadas || []).filter(function (d) { return P.indexOf('del:' + d) < 0; });
-      salvar(); toast('Gravado no procs-muta: ' + P.map(rotulo).join(', ') + '.');
-    } catch (e) { toast('Falha ao gravar: ' + e.message); }
-    REPO.gravando = false; pill();
+      salvar(); toast('Gravado no procs-muta: ' + P.map(rotulo).join(', ') + '.'); RES = { ok: true, partes: P.map(rotulo), em: new Date().toISOString() };
+    } catch (e) { toast('Falha ao gravar: ' + e.message); RES = { ok: false, erro: e.message }; }
+    REPO.gravando = false; pill(); return RES;
   }
   function pill() {
     var P = REPO.lido ? pendentes() : [];
@@ -1886,6 +1888,6 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       if (pautar || todas) {} else if (preAberta(ss)) sincronizarPrevia(ss); else { ss.previa = (ss.previa || []).filter(function (i) { return !quer.has(dig(i.cnj)); }); salvar(); }
       var g = W.CMTOperacional && W.CMTOperacional.gravar ? W.CMTOperacional.gravar(c.rows) : null;
       return { n: n, gravando: g }; },
-    contagem: function () { var d = hoje(); return S.sessoes.filter(function (x) { return x.data >= d; }).length; }, gravar: gravar, pendentes: pendentes, repo: function () { return REPO; }, regras: function () { return S.regras.filter(function (r) { return r.on; }).length; } };
+    contagem: function () { var d = hoje(); return S.sessoes.filter(function (x) { return x.data >= d; }).length; }, gravar: gravar, pendentes: pendentes, recarregar: function () { return pendentes().length ? Promise.resolve(false) : carregarRepo().then(function () { return true; }); }, repoLido: function () { return !!REPO.lido; }, gravando: function () { return !!REPO.gravando; }, repo: function () { return REPO; }, regras: function () { return S.regras.filter(function (r) { return r.on; }).length; } };
 })();
 

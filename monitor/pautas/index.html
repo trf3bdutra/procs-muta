@@ -26,7 +26,7 @@ html[data-theme="dark"] .pt-marca b{color:#e6edf3}
 html[data-theme="dark"] .pt-nav a{color:#e6edf3}html[data-theme="dark"] .pt-nav a[aria-current="page"]{background:#13293b}
 .pt-esp{flex:1}
 .pt-acoes{display:flex;align-items:center;gap:8px}
-.pt-acoes button.pend{background:#173f3d!important;border-color:#173f3d!important;color:#fff!important}
+.pt-acoes button.pend{background:#173f3d!important;border-color:#173f3d!important;color:#fff!important}.pt-acoes button.erro{background:#8a2f22!important;border-color:#8a2f22!important}
 .pt-acoes button{height:34px;padding:0 12px;border:1px solid #c8c3b6;background:#fff;color:#203b39;font:600 12.5px Figtree,sans-serif;cursor:pointer}
 html[data-theme="dark"] .pt-acoes button{background:#13293b;color:#e6edf3;border-color:#3a5368}
 #pt-view{max-width:1480px;margin:0 auto;padding:0 28px}
@@ -709,21 +709,21 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     if (k === 'etq-aplicar') { if (!s?.aplicarConversoes) { A.msg('Motor indisponível.', true); return true; }
       const L = convDados(ss, d).filter((p) => p.proposta?.dif.length && marcado('etq', A.digits(p.cnj))).map((p) => p.cnj);
       if (!L.length || !W.confirm('Aplicar as conversões de etiquetas a ' + L.length + ' processo(s)?\n\nFixa apreciação, meta e MPF que vieram das regras. O que foi fixado à mão não muda.')) return true;
-      const n = s.aplicarConversoes(ss.id, L); A.msg(n + ' processo(s) com as conversões aplicadas. Grave no procs-muta pelo botão Gravar, no topo.'); A.render(); return true; }
+      const n = s.aplicarConversoes(ss.id, L); A.msg(n + ' processo(s) com as conversões aplicadas. Gravação automática no procs-muta em instantes.'); A.render(); return true; }
     if (k === 'des-aplicar') { if (!s?.aplicarDesignacao || !s.designacao) { A.msg('Motor indisponível.', true); return true; }
       const Z = s.designacao(ss.id); const lista = Z.linhas.filter((p) => marcado('dsg', A.digits(p.cnj))).map((p) => { const o = est.dsg[A.digits(p.cnj)] || {}; const dd = p.servidor ? '' : (o.d ?? p.sugD?.nome ?? ''), cc = p.corretor ? '' : (o.c ?? p.sugC?.nome ?? '');
         return { cnj: p.cnj, d: dd, c: cc, porD: o.d != null && o.d !== p.sugD?.nome ? 'escolha manual' : p.sugD?.por, porC: o.c != null && o.c !== p.sugC?.nome ? 'escolha manual' : p.sugC?.por }; }).filter((x) => x.d || x.c);
       if (!lista.length || !W.confirm('Aplicar a designação a ' + lista.length + ' processo(s) da pauta?\n\nSó preenche quem está sem minutante ou sem corretor.')) return true;
-      const n = s.aplicarDesignacao(ss.id, lista); est.dsg = {}; A.msg(n + ' processo(s) designados. Grave no procs-muta pelo botão Gravar, no topo.'); A.render(); return true; }
+      const n = s.aplicarDesignacao(ss.id, lista); est.dsg = {}; A.msg(n + ' processo(s) designados. Gravação automática no procs-muta em instantes.'); A.render(); return true; }
     if (k === 'm-pub') { if (!s?.publicarMarcos) { A.msg('Motor indisponível.', true); return true; }
       const on = !(ss.marcosPub || ss.publicada);
       if (!on && ss.publicada && !W.confirm('Retirar os marcos da Ex Officio retira também a listagem da pauta publicada. Continuar?')) return true;
-      s.publicarMarcos(ss.id, on); A.render(); if (s.gravar) setTimeout(() => { try { s.gravar(); } catch (er) {} }, 400);
+      s.publicarMarcos(ss.id, on); A.render(); setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 400);
       A.msg(on ? 'Marcos publicados à equipe. Gravando no procs-muta…' : 'Marcos retirados da equipe.'); return true; }
     if (k === 'publicar' || k === 'despublicar') { if (!s?.publicar) { A.msg('Motor indisponível.', true); return true; }
       const on = k === 'publicar';
       if (!W.confirm(on ? 'Publicar a pauta de ' + A.br(ss.data) + ' à equipe?\n\nGrava a sessão no procs-muta; a Ex Officio passa a mostrá-la como publicada.' : 'Retirar a publicação da pauta de ' + A.br(ss.data) + '?')) return true;
-      s.publicar(ss.id, on); A.render(); if (s.gravar) setTimeout(() => { try { s.gravar(); } catch (er) {} }, 400);
+      s.publicar(ss.id, on); A.render(); setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 400);
       A.msg(on ? 'Pauta publicada. Gravando no procs-muta…' : 'Publicação retirada.'); return true; }
     return false;
   }
@@ -767,7 +767,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
         let ok = false;
         if (f.dataset.nr === 'etq') { const ef = f.querySelector('[data-nr-ef]').value, v = f.querySelector('[data-nr-v]').value; ok = !!s.criarRegraEtiqueta?.(est.nr.v, ef, v); if (!ok) { A.msg('Este efeito pede um valor (tema, especificidade, hipótese ou número da meta).', true); return; } }
         else { const dd = f.querySelector('[data-nr-d]').value, cc = f.querySelector('[data-nr-c]').value; ok = !!s.regraAssunto?.(ss.id, est.nr.v, dd, cc); if (!ok) { A.msg('Escolha o minutante, o corretor ou os dois.', true); return; } }
-        est.nr = null; A.msg('Regra criada. A lista já reflete a regra; grave no procs-muta pelo botão Gravar, no topo.'); }
+        est.nr = null; A.msg('Regra criada. A lista já reflete a regra; gravação automática no procs-muta em instantes.'); }
       else if (acao(k, b, ss)) return;
       else if (k === 'triagem') { W.location.href = '/init/'; return; }
       else if (k === 'm-ed-cfg') { est.cfg = false; est.mEd = true; }
@@ -776,8 +776,8 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     view.addEventListener('change', (ev) => {
       const t = ev.target;
       if (t.dataset.cweCk) { const k = t.dataset.cweCk, dg = t.dataset.p, S0 = est.desm[k] || (est.desm[k] = new Set()); if (t.checked) S0.delete(dg); else S0.add(dg); A.render(); return; }
-      if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Grave no procs-muta pelo botão Gravar, no topo.'); } return; }
-      if (t.dataset.cweEq) { const s = A.getSes(); if (s?.equipeDefinir?.(t.dataset.cweEq, t.dataset.k, t.checked)) { A.msg('Equipe atualizada. Gravando no procs-muta…'); clearTimeout(ligar.tq); ligar.tq = setTimeout(() => { try { s.gravar && s.gravar(); } catch (er) {} }, 1200); A.render(); } return; }
+      if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Gravação automática no procs-muta em instantes.'); } return; }
+      if (t.dataset.cweEq) { const s = A.getSes(); if (s?.equipeDefinir?.(t.dataset.cweEq, t.dataset.k, t.checked)) { A.msg('Equipe atualizada. Gravando no procs-muta…'); clearTimeout(ligar.tq); ligar.tq = setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 1200); A.render(); } return; }
       if (t.dataset.cweEsc) { const dg = t.dataset.p; est.dsg[dg] = { ...(est.dsg[dg] || {}), [t.dataset.cweEsc]: t.value }; A.render(); }
     });
     /* PDF da pauta arrastado para o quadro da etapa 2 */
@@ -860,10 +860,37 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
       else { render(); msg((r && r.erro) || 'O PDF não trouxe itens da pauta.', !(r && r.cancelado)); }
     }).catch((e) => msg('Importação não concluída: ' + e.message, true));
   });
-  /* gravar no procs-muta: o botão mostra quantas partes têm alteração pendente */
-  $('#pt-gravar').addEventListener('click', async () => { const s = getSes(); if (!s?.gravar) return msg('O motor ainda está carregando.', true); const n = (s.pendentes?.() || []).length; if (!n) return msg('Nada a gravar: tudo igual ao procs-muta.'); msg('Gravando no procs-muta…'); try { await s.gravar(); msg('Gravado no procs-muta.'); } catch (e) { msg('Falha ao gravar: ' + e.message, true); } pend(); });
-  function pend() { const s = getSes(), b = $('#pt-gravar'); if (!s?.pendentes || !b) return; const n = s.pendentes().length; b.classList.toggle('pend', !!n); b.textContent = n ? 'Gravar (' + n + ')' : 'Gravar'; }
-  setInterval(pend, 2000);
+  /* ===== Gravação: automática alguns segundos depois de cada alteração; o botão grava na hora e mostra o estado ===== */
+  const G = { ultima: '', erro: '', desde: 0, tentativa: 0, prox: 0 };
+  async function gravarAgora(manual) {
+    const s = getSes(); if (!s?.gravar) { if (manual) msg('O motor ainda está carregando.', true); return; }
+    if (s.repoLido && !s.repoLido()) { if (manual) msg('Aguarde: o procs-muta ainda está sendo lido.', true); return; }
+    if (!(s.pendentes?.() || []).length) { if (manual) msg('Tudo gravado no procs-muta.'); pend(); return; }
+    G.gravando = true; pend();
+    let r; try { r = await s.gravar(); } catch (e) { r = { ok: false, erro: e.message }; }
+    G.gravando = false;
+    if (r && r.ok) { G.erro = ''; G.tentativa = 0; G.desde = 0; G.ultima = new Date().toTimeString().slice(0, 5); if (manual || !r.nada) msg('Gravado no procs-muta' + (r.partes && r.partes.length ? ': ' + r.partes.join(', ') : '') + '.'); }
+    else if (r && r.ocupado) { /* outra gravação em curso: tenta em seguida */ }
+    else { G.erro = (r && r.erro) || 'falha desconhecida'; G.tentativa++; G.prox = Date.now() + Math.min(120000, 10000 * G.tentativa); msg('Não gravou no procs-muta: ' + G.erro + '. As alterações seguem neste navegador; nova tentativa automática em instantes.', true); }
+    pend();
+  }
+  function pend() {
+    const s = getSes(), b = $('#pt-gravar'); if (!s?.pendentes || !b) return;
+    const n = s.pendentes().length;
+    b.classList.toggle('pend', !!n); b.classList.toggle('erro', !!(n && G.erro));
+    b.textContent = G.gravando || s.gravando?.() ? 'Gravando…' : n ? (G.erro ? 'Não gravado (' + n + ') · tentar' : 'Gravar (' + n + ')') : (G.ultima ? 'Gravado ' + G.ultima : 'Gravado');
+    b.title = n ? 'Há ' + n + ' parte(s) com alteração ainda não gravada no procs-muta' + (G.erro ? ' · último erro: ' + G.erro : ' · grava sozinho em instantes') : 'Tudo gravado no procs-muta';
+    /* gravação automática: 4 s depois da primeira alteração pendente (ou na hora da nova tentativa, após erro) */
+    if (n && !G.gravando && pronto) { if (!G.desde) G.desde = Date.now(); if (Date.now() - G.desde > 4000 && Date.now() >= G.prox) gravarAgora(false); }
+    if (!n) G.desde = 0;
+  }
+  api.gravarAgora = gravarAgora;
+  $('#pt-gravar').addEventListener('click', () => { G.prox = 0; gravarAgora(true); });
+  setInterval(pend, 1500);
+  /* fechar a aba com alteração não gravada pede confirmação do navegador */
+  W.addEventListener('beforeunload', (ev) => { const s = getSes(); if (s?.pendentes && s.pendentes().length) { ev.preventDefault(); ev.returnValue = ''; } });
+  /* sem alteração pendente, relê o procs-muta de tempos em tempos: o que a equipe gravou na Ex Officio aparece aqui */
+  setInterval(() => { const s = getSes(); if (!pronto || !s?.recarregar || G.gravando || (s.pendentes?.() || []).length || D.hidden) return; s.recarregar().then((ok) => { if (ok) render(); }).catch(() => {}); }, 120000);
   $('#pt-tema').addEventListener('click', () => { const dk = D.documentElement.getAttribute('data-theme') === 'dark'; if (dk) D.documentElement.removeAttribute('data-theme'); else D.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('cmt-theme', dk ? 'light' : 'dark'); } catch (e) {} });
   /* pedido de token do GitHub (aparece dentro do motor): enquanto aberto, o motor fica à vista */
   setInterval(() => { const w = getMotor(); let pede = false; try { pede = !!(w && w.document.querySelector('form input[type=password]')); } catch (e) {} D.body.classList.toggle('pt-token', pede); }, 400);
