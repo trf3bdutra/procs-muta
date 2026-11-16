@@ -32,6 +32,11 @@ header.top.nx .ac-off{font:400 10px var(--emono);letter-spacing:.08em;text-trans
 #cmp-nav [hidden]{display:none!important}
 #cmp-nav .cn-in{display:flex;align-items:stretch;gap:0;padding:0 22px;min-height:44px;counter-reset:cn}
 #cmp-nav .cn-b{display:inline-flex;align-items:baseline;gap:9px;padding:12px 18px 11px;font:650 13px Figtree,"Segoe UI",system-ui,sans-serif;color:var(--ei2);border:0;border-right:1px solid var(--el);border-radius:0;background:none;white-space:nowrap;counter-increment:cn}
+#cmp-nav .cn-tt{display:flex;flex-direction:column;gap:1px;line-height:1.15;text-align:left}
+#cmp-nav .cn-tt small{font:400 9.5px var(--emono);letter-spacing:.09em;text-transform:lowercase;color:var(--em);font-weight:400}
+#cmp-nav .cn-b[aria-current="true"] .cn-tt small{color:var(--eo2)}
+#cmp-nav .cn-b{align-items:flex-start!important}
+#cmp-nav .cn-b:before{margin-top:2px}
 #cmp-nav .cn-b:before{content:counter(cn,decimal-leading-zero);font:400 10px var(--emono);color:var(--em);letter-spacing:.06em}
 #cmp-nav .cn-b:first-child{border-left:1px solid var(--el)}
 #cmp-nav .cn-b:hover{color:var(--ei)}
