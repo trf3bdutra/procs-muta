@@ -113,6 +113,10 @@ module.exports = async (req, res, u) => {
       espera: c.urgEm ? dias(hj, String(c.urgEm).slice(0, 10)) : null
     }, base));
   });
+  /* produção lançada por dia: minutas de voto (itens das pautas publicadas) e monocráticas (ficha única) */
+  const producao = {};
+  const lanca = (d, k) => { const x = String(d || '').slice(0, 10); if (!/^\d{4}-\d{2}-\d{2}$/.test(x)) return; (producao[x] = producao[x] || { voto: 0, mono: 0 })[k]++; };
+  regs.forEach(r => { const i = MONO.item(r); if (i.mono) lanca(i.dataMinuta, 'mono'); });
   const ordem = (x, y) => String(x.desde || x.pedidoEm || '').localeCompare(String(y.desde || y.pedidoEm || ''));
   assinar.assinatura.sort(ordem); assinar.liberacao.sort(ordem);
   urgencias.sort((x, y) => (y.espera || 0) - (x.espera || 0));
@@ -125,6 +129,7 @@ module.exports = async (req, res, u) => {
   const conta = (nome, campo) => { const n = String(nome || '').trim(); if (!n) return; (porServidor[n] = porServidor[n] || { nome: n, minutas: 0, minutasFeitas: 0, correcoes: 0, correcoesFeitas: 0 })[campo]++; };
   pubs.forEach((s, k) => {
     const d = docs[k]; if (!d) return;
+    ((d.itens || []).length ? d.itens : (d.previa || [])).forEach(it => lanca(it.dataMinuta, 'voto'));
     const lista = (d.itens || []).length ? d.itens : (d.previa || []);
     sessoes.push({ date: s.date, hora: s.hora || '', processos: lista.length,
       minutadas: lista.filter(x => x.dataMinuta).length, corrigidas: lista.filter(x => x.dataCorrecao).length,
@@ -165,7 +170,7 @@ module.exports = async (req, res, u) => {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, comunicados, urgencias, sessoes, agenda, pauta, prazos,
+  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, comunicados, urgencias, sessoes, agenda, pauta, prazos, producao,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 };
