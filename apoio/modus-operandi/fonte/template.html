@@ -141,7 +141,6 @@ code{font-size:12px;background:var(--field);padding:1px 5px;border-radius:4px;ov
     <button class="tab" role="tab" data-v="temas" aria-selected="true">Enunciados</button>
     <button class="tab" role="tab" data-v="rep" aria-selected="false">Repertório</button>
     <button class="tab" role="tab" data-v="ement" aria-selected="false">Ementário</button>
-    <button class="tab" role="tab" data-v="juris" aria-selected="false">Jurisprudência</button>
     <button class="tab" role="tab" data-v="edit" aria-selected="false">Editorial</button>
     <button class="tab" role="tab" data-v="dir" aria-selected="false">Diretrizes</button>
     <button class="tab" role="tab" data-v="consulta" aria-selected="false">Consulta</button>
@@ -187,11 +186,6 @@ code{font-size:12px;background:var(--field);padding:1px 5px;border-radius:4px;ov
     </div>
   </div>
 </section>
-
-<section id="v-juris" hidden><div class="jr-wrap">
-  <div class="pg-h"><div class="pg-t"><h1>Jurisprudência</h1><p>Série histórica dos julgados do Relator: 26.050 acórdãos (1999–2026) e 7.157 monocráticas (2016–2026). O índice abre de imediato; o ano entra sob demanda.</p></div></div>
-  <div id="jr"></div>
-</div></section>
 
 <section id="v-consulta" hidden><div class="cq-wrap"><h2 class="cq-h">Consulta do caso pautado</h2><p class="meta">Escolha a sessão e o item: o Modus Operandi lê o cartão do processo e reúne o material aplicável.</p><div id="cq"></div></div></section>
 
@@ -302,7 +296,7 @@ document.addEventListener('click',function(e){
 
 /* ---------- navegação ---------- */
 var VIEW='temas';
-document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','juris','edit','dir','consulta','enc'].forEach(function(v){var sv=$('#v-'+v);if(sv)sv.hidden=v!==VIEW;});if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
+document.querySelectorAll('.tab').forEach(function(b){b.addEventListener('click',function(){VIEW=b.getAttribute('data-v');document.querySelectorAll('.tab').forEach(function(x){x.setAttribute('aria-selected',String(x===b));});['temas','rep','ement','edit','dir','consulta','enc'].forEach(function(v){var sv=$('#v-'+v);if(sv)sv.hidden=v!==VIEW;});if(window.VDM_view)window.VDM_view(VIEW);window.scrollTo(0,0);});});
 function renderAll(){if(window.VDM_enun)window.VDM_enun();if(window.VDM_rep)window.VDM_rep();if(window.VDM_refresh)window.VDM_refresh();}
 
 /* Enunciados: código em ementario.js (lista, tabela, mapa e painel) */

@@ -522,17 +522,17 @@ try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f
 /* ===== Navegação única do Modus Operandi, numa faixa abaixo do cabeçalho: sem "Editorial";
    abas comuns (Ementário · Padrão: Minuta-Matriz e Modelos · Diretrizes · Consulta) e abas do acesso avançado (Enunciados · Repertório · Enciclopédia) ===== */
 (function(){var top=document.querySelector('header.top');if(!top)return;
-  var IT=[['ement','Ementário'],['juris','Jurisprudência'],['|'],['pecas','Minuta-Matriz','Padrão'],['mod','Modelos'],['|'],['dir','Diretrizes'],['consulta','Consulta'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
+  var IT=[['ement','Ementário'],['|'],['pecas','Minuta-Matriz','Padrão'],['mod','Modelos'],['|'],['dir','Diretrizes'],['consulta','Consulta'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
   var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Modus Operandi');
   var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
     var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false">'+x[1]+'</button>';});
   bar.innerHTML=h+'</div>';top.parentNode.insertBefore(bar,top.nextSibling);document.body.classList.add('cmp-nav-fora');
   function aba(v){var t=document.querySelector('.tab[data-v="'+v+'"]');if(t)t.click();}
-  function atual(){var vs=function(id){var e=document.getElementById(id);return e&&!e.hidden;};if(vs('v-ement'))return 'ement';if(vs('v-juris'))return 'juris';if(vs('v-edit'))return XS.ed==='par'?'pecas':(XS.ed||'pecas');
+  function atual(){var vs=function(id){var e=document.getElementById(id);return e&&!e.hidden;};if(vs('v-ement'))return 'ement';if(vs('v-edit'))return XS.ed==='par'?'pecas':(XS.ed||'pecas');
     var r=['temas','rep','enc'].filter(function(v){return vs('v-'+v);})[0];return r||'';}
   function sync(){var a=atual();$$('.cn-b',bar).forEach(function(b){b.setAttribute('aria-current',String(b.getAttribute('data-cn')===a));});}
   bar.addEventListener('click',function(e){var b=e.target.closest('.cn-b');if(!b)return;var v=b.getAttribute('data-cn');
-    if(v==='ement')aba('ement');else if(['temas','rep','enc','juris'].indexOf(v)>=0)aba(v);else irEditorial(v);setTimeout(sync,0);window.scrollTo(0,0);});
+    if(v==='ement')aba('ement');else if(['temas','rep','enc'].indexOf(v)>=0)aba(v);else irEditorial(v);setTimeout(sync,0);window.scrollTo(0,0);});
   document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.tab,#x-sub button,[data-rs]'))setTimeout(sync,0);});
   window.addEventListener('hashchange',function(){setTimeout(sync,60);});document.addEventListener('cmt-acesso',function(){setTimeout(sync,60);});
   window.VDM_cnSync=sync;setTimeout(sync,0);})();

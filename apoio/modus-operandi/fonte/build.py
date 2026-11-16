@@ -202,7 +202,7 @@ def montar(var):
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
     secoes = t[i0:i1]; t = t[:i0] + t[i1:]
     abas = secoes[secoes.index('>') + 1:secoes.rindex('</nav>')]
-    ordem = ['ement', 'juris', 'edit', 'dir', 'consulta', 'temas', 'rep', 'enc']
+    ordem = ['ement', 'edit', 'dir', 'consulta', 'temas', 'rep', 'enc']
     lin = {}
     for l in abas.strip().split('\n'):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l
