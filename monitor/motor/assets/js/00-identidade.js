@@ -1,0 +1,1 @@
+window.__LOGO_GABINETE=window.__LOGO_GABINETE||"https://i.ibb.co/5XS9CWBR/S-mbolo-geom-trico-cinza-em-fundo-transparente.png";

@@ -1,0 +1,59 @@
+
+/* Aba Acervo: estrutura da Central de Comando isolada para evitar colisões de CSS/JS. */
+body[data-mod="acervo"]{--mod:var(--m-acv,#8cc0ec)}
+#cmt-acervo-container{width:100%;min-height:calc(100vh - 90px);margin:0;padding:0}
+#cmt-acervo-frame{display:block;width:100%;height:calc(100vh - 96px);min-height:670px;background:var(--bg);border:0;border-radius:12px}
+#cmt-acervo-legacy[hidden]{display:none!important}
+/* O conteúdo original da aba Recursos passa a integrar o trilho Atalhos. */
+#cmt-at-recursos{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--m-rec);border-radius:10px;margin:10px 0 0;padding:0;max-width:100%;color:var(--ink)}
+#cmt-at-recursos>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;padding:10px 12px;min-height:51px}
+#cmt-at-recursos>summary::-webkit-details-marker{display:none}
+#cmt-at-recursos>summary b{display:block;font-size:13px;font-weight:800;color:var(--m-rec)}
+#cmt-at-recursos>summary small{display:block;font-size:10.5px;color:var(--muted);line-height:1.3}
+#cmt-at-recursos .cmt-at-expand{cursor:pointer;border:1px solid var(--line);border-radius:7px;display:grid;place-items:center;flex:0 0 28px;height:28px;font-size:18px;color:var(--m-rec)}
+#cmt-at-recursos[open]>summary{border-bottom:1px solid var(--line)}
+#cmt-at-recursos .cmt-at-recursos-body{padding:10px 8px 14px;max-width:100%;min-width:0}
+#cmt-at-recursos #recursos{display:block!important;margin:0!important;padding:0!important;min-width:0!important;background:transparent!important}
+#cmt-at-recursos #recursos .pane-head{margin:0 0 10px;padding:8px 10px;border-radius:8px}
+#cmt-at-recursos #recursos .pane-head h1{font-size:19px!important}
+#cmt-at-recursos #recursos .pane-head p{font-size:11px!important}
+#cmt-at-recursos #recursos .filterbar{display:flex;gap:6px;align-items:stretch}
+#cmt-at-recursos #recursos .filterbar .search{min-width:0;width:100%;max-width:100%}
+#cmt-at-recursos #recursos :is(.rgrid,.mapwrap,.ctx,.alf-cols,.fx-panel){grid-template-columns:minmax(0,1fr)!important}
+#cmt-at-recursos #recursos :is(.rc,.card,.cblock){min-width:0;max-width:100%}
+#cmt-at-recursos #recursos .rc{padding:9px 10px}
+#cmt-at-recursos #recursos .rc header{display:flex;flex-wrap:wrap}
+#cmt-at-recursos #recursos .rc h3{font-size:17px}
+#cmt-at-recursos #recursos .kv{grid-template-columns:repeat(2,minmax(0,1fr))}
+#cmt-at-recursos #recursos .rc .rc-x{max-width:100%;overflow-wrap:anywhere}
+#cmt-at-recursos #recursos #sec-quadro{max-width:100%;overflow-x:auto}
+#cmt-at-recursos #recursos #sec-quadro table{min-width:640px}
+#cmt-at-recursos #recursos .diagram{max-width:100%;overflow-x:auto;padding:8px}
+#cmt-at-recursos #recursos .blk{margin-top:14px}
+#cmt-at-recursos #recursos .blk>h2{font-size:17px}
+body.cmt-recursos-expandido .rail{position:fixed!important;top:56px!important;right:0!important;left:auto!important;bottom:0!important;width:min(1020px,calc(100vw - 28px))!important;height:calc(100vh - 56px)!important;max-height:none!important;z-index:150!important;display:block!important;overflow:auto;background:var(--rail)!important;border-left:2px solid var(--m-rec)!important;padding:10px 14px 30px!important}
+body.cmt-recursos-expandido .rail #atlist{display:none!important}
+body.cmt-recursos-expandido .rail #cmt-at-recursos #recursos .rgrid{grid-template-columns:repeat(auto-fill,minmax(310px,1fr))!important}
+body.cmt-recursos-expandido .rail #cmt-at-recursos #recursos .pane-head h1{font-size:25px!important}
+body.cmt-recursos-expandido::before{content:'';position:fixed;inset:56px 0 0;z-index:149;background:#061b2a75}
+body.cmt-recursos-expandido .rail .atl>h4{display:flex!important}
+@media(max-width:1060px){#cmt-at-recursos .cmt-at-recursos-body{padding:8px}body.cmt-recursos-expandido .rail{top:0!important;height:100vh!important;width:100vw!important}}
+
+/* Altura consistente do iframe sem forçar segundo scroll horizontal. */
+#cmt-acervo-frame{height:calc(100dvh - 100px);min-height:550px;border-radius:8px!important}
+#cmt-acervo-container{overflow:hidden;min-width:0}
+
+/* V26 · shell instantâneo do Acervo; somente a listagem aparenta carregar */
+#cmt-acervo-container{position:relative;background:var(--bg);min-height:calc(100dvh - 100px)}
+#cmt-acervo-frame{opacity:0;transition:opacity .12s ease;position:relative;z-index:2}
+#cmt-acervo-container.is-ready #cmt-acervo-frame{opacity:1}
+#cmt-acervo-container.is-ready #cmt-acervo-boot{display:none}
+#cmt-acervo-boot{position:absolute;inset:0;z-index:1;padding:8px 10px 22px;background:var(--bg);overflow:hidden;color:var(--ink)}
+.cmt-acervo-boot-top{display:grid;grid-template-columns:230px minmax(0,1fr);gap:10px;background:var(--soft);padding:10px 12px;border:1px solid var(--line);border-radius:12px 12px 0 0}
+.cmt-acervo-boot-count{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px}.cmt-acervo-boot-count span,.cmt-acervo-boot-search>span,.cmt-acervo-boot-build>b{display:block;font-size:9.5px;font-weight:800;letter-spacing:.07em;color:var(--muted)}.cmt-acervo-boot-count b{display:block;font-size:28px;line-height:1.1}.cmt-acervo-boot-count small{color:var(--muted);font-size:11px}
+.cmt-acervo-boot-search{display:grid;align-content:center;gap:7px}.cmt-acervo-boot-search>div{display:flex;gap:5px;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:4px}.cmt-acervo-boot-search button{border:0;border-radius:7px;padding:7px 10px;font-size:10px;font-weight:800;background:var(--soft);color:var(--muted)}.cmt-acervo-boot-search button:first-child{background:var(--m-acv,#2c6aa0);color:#fff}.cmt-acervo-boot-search input{flex:1;min-width:0;border:0;background:transparent;padding:6px;color:var(--ink)}
+.cmt-acervo-boot-build{border:1px solid var(--line);border-top:0;background:var(--paper);padding:10px 14px}.cmt-acervo-boot-build>div{display:flex;align-items:center;gap:6px;margin-top:8px}.cmt-acervo-boot-build span{font-size:9.5px;font-weight:800;color:var(--muted)}.cmt-acervo-boot-build i{width:110px;height:25px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}
+.cmt-acervo-boot-list{margin-top:10px;min-height:360px;border:1px solid var(--line);border-radius:10px;background:var(--paper);display:grid;place-items:center;align-content:center;gap:8px;padding:28px}.cmt-acervo-boot-list .cmt-acervo-boot-spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--m-acv,#2c6aa0);border-radius:50%;animation:cmtacvspin .8s linear infinite}.cmt-acervo-boot-list>b{font-size:13px}.cmt-acervo-boot-list small{font-size:11px;color:var(--muted);margin-bottom:8px}.cmt-acervo-boot-list>i{display:block;width:min(900px,90%);height:30px;border-radius:7px;background:linear-gradient(90deg,var(--soft),color-mix(in srgb,var(--m-acv,#2c6aa0) 9%,var(--paper)),var(--soft));background-size:220% 100%;animation:cmtacvsh 1.2s ease-in-out infinite}
+@keyframes cmtacvspin{to{transform:rotate(360deg)}}@keyframes cmtacvsh{0%{background-position:100% 0}100%{background-position:-100% 0}}
+@media(max-width:700px){.cmt-acervo-boot-top{grid-template-columns:1fr}.cmt-acervo-boot-build i:nth-of-type(n+3){display:none}.cmt-acervo-boot-list{min-height:280px}}
+

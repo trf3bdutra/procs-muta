@@ -1,0 +1,436 @@
+<!doctype html>
+<!-- Ab Initio · gestão modular do acervo, triagem, sessões e equipe -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="escudo-home" content="/">
+<meta name="application-name" content="Ab Initio">
+<script src="./assets/js/00-theme.js"></script>
+<title>Ab Initio · Triagem, Sessões e Equipe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;1,8..60,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js" async></script>
+<link rel="stylesheet" href="./assets/css/00-foundation.css">
+<link rel="stylesheet" href="./assets/css/10-layout.css">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctitle%3EGabinete CMT%3C/title%3E%3Crect width='64' height='64' rx='12' fill='%23103b54'/%3E%3Cg transform='translate%2832%2C32%29 scale%280.6474%29 translate%28-351.19%2C-269.38%29' fill='%23ffffff'%3E%3Cpath d='M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90'/%3E%3Cpath d='M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85'/%3E%3Cpath d='M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41'/%3E%3Cpath d='M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34'/%3E%3C/g%3E%3C/svg%3E">
+
+<script src="./assets/js/10-compatibility.js"></script><link rel="stylesheet" href="./assets/css/20-components.css"><link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/css/21-prontuario.css">
+
+<link rel="stylesheet" href="./assets/css/22-patch.css">
+</head>
+<body data-mod="painel"><div id="cmt-carga" role="status" aria-live="polite"><div class="cc"><span class="mk" role="img" aria-label="Gabinete CMT"><span class="st"></span></span><p class="id">Ab Initio · Gabinete A</p><p class="gr" data-cmtc-gr>Bom dia, <em>gabinete.</em></p><div class="tk" aria-hidden="true"><i></i></div><p class="sg">Carregando o acervo do procs-muta…</p><p class="dt">Gabinete do Des. Fed. Carlos Muta · TRF-3 · Turma Regional de MS</p></div></div><link rel="stylesheet" href="./assets/css/23-carga.css"><script src="./assets/js/15-arranque.js"></script>
+<link rel="stylesheet" href="./assets/css/30-overrides.css">
+
+<header class="bar">
+  
+  <div class="brand">
+    <b>Ab Initio <em>· Gestão do Acervo</em></b>
+    <span>Gab. Des. Fed. Carlos Muta · Turma Regional de MS</span>
+  </div>
+  <nav class="mods" aria-label="Módulos">
+    <button class="mod" data-tab="painel" style="--m:var(--m-pai)">Central</button>
+    <button class="mod" data-tab="triagem" style="--m:var(--m-tri)">Triagem</button>
+    <button class="mod" data-tab="sessoes" style="--m:var(--m-ses)">Sessões</button>
+    <button class="mod" data-tab="equipe" style="--m:var(--m-eq)">Equipe</button>
+    <button class="mod" data-tab="rotina" style="--m:var(--m-rot)">Rotina</button>
+    <button class="mod" data-tab="tarefas" style="--m:var(--m-pje)">Tarefas PJe</button>
+    <button class="mod" data-tab="competencia" style="--m:var(--m-comp)">Competência</button>
+    <button class="mod" data-tab="lexico" style="--m:var(--m-lex)">Léxico</button>
+    <button class="mod" data-tab="regimento" style="--m:var(--m-rit)">Regimento</button>
+    <button class="mod" data-tab="diretrizes" style="--m:var(--m-dir)">Diretrizes</button>
+  </nav>
+  <div class="tools">
+    <button class="srch" id="searchBtn" aria-label="Buscar em tudo"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Buscar em recursos, rotina e referências…</span><kbd>/</kbd></button>
+    <button class="chipbtn cmpbtn" id="cmpBtn" aria-label="Abrir comparação de vias" title="Comparar vias recursais">⇄ <span class="lbl">Comparar</span> <b id="cmpN">0</b></button>
+    <button class="chipbtn m-only" id="atlBtn" aria-label="Abrir atalhos">Atalhos</button>
+    <button class="chipbtn" id="gx-bkp" aria-label="Importar e exportar dados JSON" aria-haspopup="true" aria-expanded="false" title="Importar e exportar dados JSON"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 19h16"/></svg></button>
+    <button class="chipbtn" id="themeBtn" aria-label="Alternar tema claro ou escuro">◐</button>
+  </div>
+</header>
+<div id="gx-bkp-pop" class="gx" hidden role="dialog" aria-label="Importar e exportar dados">
+  <h3 class="ch">Dados e backups</h3>
+  <p class="cnote">O Acervo GitHub é a fonte dos dados dos processos. Importe JSON somente na ficha do processo que será atualizado.</p>
+  <p class="cnote">O backup completo inclui triagem, sessões, equipe e escaninhos, e também lê alguns arquivos do app antigo.</p>
+  <div class="gx-act"><button class="chipbtn" id="gx-exp">Exportar backup completo JSON</button><button class="chipbtn" id="gx-imp">Importar backup JSON…</button><input type="file" id="gx-imp-file" accept=".json,application/json" hidden><button class="chipbtn" id="gx-limpar">Apagar tudo…</button></div>
+  <p class="cnote" id="gx-dados-st" role="status"></p>
+</div>
+
+<div class="desk">
+  <aside class="index" id="index" aria-label="Painel de apoio"></aside>
+
+  <main id="main">
+  <!-- TRIAGEM · GabCMT -->
+  <div class="tabpane" id="triagem" hidden>
+    <div class="pane-head">
+      <h1>Triagem</h1>
+      <p>Entrada e organização dos processos do gabinete: inclusão, conferência, classificação e escaninhos.</p>
+    </div>
+    <div class="gx-cards" id="gx-t-kpis" style="margin:0 0 14px"></div>
+    <section class="gx-triage-manage card" id="gx-triage-manage">
+      <div class="gx-triage-tools">
+        <section class="gx-triage-add gx" id="gx-ix-inc" aria-labelledby="gx-t-entry-title">
+          <div class="gx-triage-head">
+            <div>
+              <h2 id="gx-t-entry-title">Incluir processos</h2>
+              <p>Adicione processos à triagem sem usar o painel lateral.</p>
+            </div>
+            <button type="button" class="chipbtn" data-gx-json="exportar-processos">Exportar JSON</button>
+          </div>
+          <div class="gx-triage-entry-grid">
+            <details class="gx-triage-entry" open>
+              <summary>Colar lista</summary>
+              <textarea id="gx-t-lote" rows="4" placeholder="Um CNJ por linha; o texto depois do CNJ será o assunto"></textarea>
+              <button type="button" class="chipbtn pri" id="gx-t-lote-add">Incluir na triagem</button>
+            </details>
+            <details class="gx-triage-entry">
+              <summary>Ficha rápida</summary>
+              <div class="gx-grid">
+                <div class="w2"><label for="gx-t-f-cnj">Processo (CNJ) *</label><input id="gx-t-f-cnj" inputmode="numeric" placeholder="0000000-00.0000.4.03.0000"></div>
+                <div><label for="gx-t-f-classe">Classe</label><input id="gx-t-f-classe" placeholder="Ex.: ApCiv"></div>
+                <div><label for="gx-t-f-secao">Seção</label><select id="gx-t-f-secao"><option value="">— identificar</option><option>1ª Seção</option><option>2ª Seção</option><option>3ª Seção</option></select></div>
+                <div class="w2"><label for="gx-t-f-assunto">Assunto</label><input id="gx-t-f-assunto"></div>
+                <div class="w2"><label for="gx-t-f-partes">Partes</label><input id="gx-t-f-partes"></div>
+              </div>
+              <button type="button" class="chipbtn pri" id="gx-t-f-add">Incluir na triagem</button>
+            </details>
+          </div>
+        </section>
+        <section class="gx-triage-drawers gx" aria-labelledby="gx-t-drawers-title">
+          <div class="gx-triage-head">
+            <div>
+              <h2 id="gx-t-drawers-title">Bandeja e escaninhos</h2>
+              <p>Selecione um escaninho para filtrar seus processos na lista abaixo.</p>
+            </div>
+          </div>
+          <div id="gx-ix-escs"></div>
+        </section>
+      </div>
+    </section>
+    <section class="blk gx" id="gx-t-lista" style="margin-top:0">
+        <h2 style="margin-top:0">Cadastro <span class="gx-count" id="gx-t-count"></span></h2>
+        <div class="filterbar">
+          <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="gx-t-q" type="search" placeholder="Filtrar: número, assunto, partes, servidor…" aria-label="Filtrar processos"></label>
+          <div class="famchips" id="gx-t-chips"></div>
+          <button class="chipbtn" id="gx-t-csv">Exportar CSV</button>
+        </div>
+        <div id="gx-t-rows"></div>
+    </section>
+  </div>
+
+  <!-- EQUIPE · GabCMT -->
+  <div class="tabpane" id="equipe" hidden>
+    <div class="pane-head">
+      <h1>Equipe</h1>
+      <p>Servidores do gabinete: tarefas do catálogo, regras de designação e correção e a ficha de cada um.</p>
+    </div>
+    <div id="gx-e-banner"></div><!--marcador-equipe-->
+    <div>
+      <section class="gx-maincol">
+        <div class="card gx" id="gx-e-quem">
+          <div class="gx-railhead" style="margin-bottom:10px"><h3 class="ch" style="margin:0">Quem faz o quê</h3>
+            <span style="flex:1"></span>
+            <label class="search" style="margin:0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="gx-e-q" type="search" placeholder="Buscar tarefa…" aria-label="Buscar tarefa"></label>
+            <button class="chipbtn" id="gx-e-print">Imprimir</button>
+            <span class="gx-efil" role="group" aria-label="Filtro de tarefas">
+              <button class="chipbtn" data-ef="todas" aria-pressed="true">Todas</button>
+              <button class="chipbtn" data-ef="sem" aria-pressed="false">Sem responsável</button>
+              <button class="chipbtn" data-ef="do" aria-pressed="false" id="gx-e-fdo" hidden>Do servidor</button>
+            </span>
+          </div>
+          <div class="gx-scroll gx-ematrix-wrap"><table class="gx-t gx-ematrix" id="gx-e-matrix"></table></div>
+        </div>
+        <div class="card gx" id="gx-e-prod">
+          <h3 class="ch">Regras de produtividade <small class="h2s">valem para capacidade e sugestões de marcos; a meta individual da ficha prevalece</small></h3>
+          <div id="gx-e-prodbody"></div>
+        </div>
+        <div class="card gx" id="gx-e-regras" hidden aria-hidden="true">
+          <div class="gx-railhead" style="margin-bottom:4px"><h3 class="ch" style="margin:0">Regras de designação e correção</h3>
+            <span style="flex:1"></span>
+            <button class="chipbtn" id="gx-e-sugerir">Sugerir pelos perfis</button>
+            <button class="chipbtn pri" id="gx-e-designar"></button>
+            <button class="chipbtn pri" id="gx-e-aplicar"></button>
+          </div>
+          <p class="cnote">Vale o primeiro critério ativo, na ordem abaixo. <b>Designa</b>: servidores da Equipe · <b>Corrige</b>: Assessoria. Escolha à mão na listagem não muda.</p>
+          <div class="gx-railchips" id="gx-e-sesschips"></div>
+          <div id="gx-e-crit"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- SESSÕES · GabCMT -->
+  <div class="tabpane" id="sessoes" hidden>
+    <div class="pane-head">
+      <h1>Sessões</h1>
+      <p>Marcos de cada sessão de julgamento, listagem da pauta e distribuição das minutas por servidor.</p>
+    </div>
+    <section class="gx cmt-json-sessions-toolbar" id="cmt-json-sessions-toolbar" role="group" aria-label="Intercâmbio dos cadastros de sessões">
+      <div class="cmt-json-toolbar-label"><strong>Cadastros de sessões</strong><small>Somente datas, marcos e configurações. Não altera os processos das pautas.</small></div>
+      <button type="button" class="chipbtn pri" id="gx-exp-ses">Exportar sessões · JSON</button>
+      <button type="button" class="chipbtn" id="gx-imp-ses">Importar sessões · JSON</button>
+      <span id="gx-s-db-status" role="status" aria-live="polite">Conectando ao banco de sessões…</span>
+      <button type="button" class="chipbtn" id="gx-s-db-auth" hidden>Autorizar alterações</button>
+      <input type="file" id="gx-imp-ses-file" accept=".json,application/json" hidden>
+    </section>
+    <section class="gx" id="gx-s-sel" style="margin-top:4px"></section>
+  </div>
+
+
+  <!-- MÓDULO · CONFORMIDADE E DIRETRIZES -->
+  <div class="tabpane" id="diretrizes" hidden></div>
+
+  <!-- PAINEL -->
+  <div class="tabpane" id="painel" hidden>
+    <div class="pane-head">
+      <h1>Central de Comando</h1>
+      <p>Um painel de cada módulo, à mão: do ato impugnado à via cabível, das caixas do PJe às convocações por impedimento, do léxico ao Regimento.</p>
+    </div>
+    <div class="pgrid">
+<section class="pc" id="p-dir" style="--mod:var(--m-dir)"><h2 class="pc-h"><span class="rn">XI</span>Conformidade · Diretrizes <button type="button" class="pc-go" data-open-diretrizes>Abrir módulo</button></h2><p class="p-empty">Painel de conformidade superior, Manual CMT organizado em cinco grupos, pesquisa e consulta das 14 diretrizes originais.</p><div class="tagrow" style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap"><span class="pill">Conformidade</span><span class="pill">Redação</span><span class="pill">Voto</span><span class="pill">Ementa</span><span class="pill">Auditoria</span></div></section>
+      <section class="pc" id="p-ato" style="--mod:var(--m-rec)">
+        <h2 class="pc-h"><span class="rn">I</span>Ato → via cabível</h2>
+        <div class="actchips" id="actchips" role="group" aria-label="Ato ou situação"></div>
+        <p class="actd" id="actd"></p>
+        <div class="acthint" id="acthint"></div>
+        <div class="vias" id="actres"></div>
+      </section>
+      <section class="pc" id="p-seq" style="--mod:var(--m-rot)">
+        <h2 class="pc-h"><span class="rn">II</span>Sequência do gabinete</h2>
+        <div class="seq" id="seq"></div>
+      </section>
+      <section class="pc" id="p-tar" style="--mod:var(--m-pje)">
+        <h2 class="pc-h"><span class="rn">III</span>Tarefas do PJe<a href="#" class="pc-go" data-p2go="tarefas:tk-panorama">módulo ›</a></h2>
+        <div id="p2-tar"></div>
+      </section>
+      <section class="pc" id="p-comp" style="--mod:var(--m-comp)">
+        <h2 class="pc-h"><span class="rn">IV</span>Competência e impedimentos<a href="#" class="pc-go" data-p2go="competencia:sec-imped">módulo ›</a></h2>
+        <div id="p2-comp"></div>
+      </section>
+      <section class="pc" id="p-rec" style="--mod:var(--m-rec)">
+        <h2 class="pc-h"><span class="rn">V</span>Prazos recursais<a href="#" class="pc-go" data-p2go="recursos:recgrid">módulo ›</a></h2>
+        <div id="p2-rec"></div>
+      </section>
+      <section class="pc" id="p-lex" style="--mod:var(--m-lex)">
+        <h2 class="pc-h"><span class="rn">VI</span>Léxico recursal<a href="#" class="pc-go" data-p2go="lexico:lex">módulo ›</a></h2>
+        <div id="p2-lex"></div>
+      </section>
+      <section class="pc" id="p-rit" style="--mod:var(--m-rit)">
+        <h2 class="pc-h"><span class="rn">VII</span>Regimento Interno<a href="#" class="pc-go" data-p2go="regimento:rit-gab">módulo ›</a></h2>
+        <div id="p2-rit"></div>
+      </section>
+      <section class="pc" id="p-fav">
+        <h2 class="pc-h"><span class="rn">VIII</span>Fichas salvas</h2>
+        <div class="vias" id="pfav"></div>
+      </section>
+      <section class="pc" id="p-prog">
+        <h2 class="pc-h"><span class="rn">IX</span>Conferências</h2>
+        <div id="pprog"></div>
+      </section>
+      <section class="pc" id="p-cmp">
+        <h2 class="pc-h"><span class="rn">X</span>Comparação</h2>
+        <div id="pcmp"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- RECURSOS -->
+  <div class="tabpane" id="recursos">
+    <div class="pane-head">
+      <h1>Recursos</h1>
+      <p>Os dez caminhos de impugnação, abertos lado a lado. Prazo, cabimento, órgão e sustentação oral à vista; rotina e fluxo a um clique.</p>
+    </div>
+    <div class="filterbar">
+      <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="rq" type="search" placeholder="Filtrar: 942, preparo, retratação…" aria-label="Filtrar recursos"></label>
+      <div class="famchips" id="famchips"></div>
+      <div class="seg" id="recview"><button class="vbtn on" data-v="fichas">Fichas</button><button class="vbtn" data-v="quadro">Quadro</button></div>
+    </div>
+    <div id="recgrid"></div>
+    <section class="blk" id="sec-quadro" hidden>
+      <div class="card tbl" id="sintese"><table>
+        <thead><tr><th class="ck" title="Comparar">⇄</th><th>Recurso</th><th>Cabe contra</th><th>Prazo</th><th>Órgão julgador</th><th>Sustentação oral</th></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table></div>
+    </section>
+
+    <section class="blk" id="sec-agravo">
+      <h2>Qual agravo?</h2>
+      <div class="card cblock" id="rec-sag" style="--fc:var(--navy)"></div>
+    </section>
+    <section class="blk" id="sec-panorama">
+      <h2>Panorama dos fluxos</h2>
+      <div class="ftabs" id="ftabs"></div>
+      <div class="card"><div class="diagram" id="bigflow"></div></div>
+    </section>
+  </div>
+
+  <!-- ROTINA -->
+  <div class="tabpane" id="rotina" hidden>
+    <div class="pane-head">
+      <h1>Rotina do gabinete</h1>
+      <p>Da chegada à baixa, etapa por etapa. Os checklists podem ser marcados enquanto se trabalha.</p>
+    </div>
+    <div class="rotidx" id="rotidx" role="navigation" aria-label="Etapas"></div>
+    <div id="rotbody"></div>
+  </div>
+
+  <!-- TAREFAS PJe -->
+  <div class="tabpane" id="tarefas" hidden>
+    <div class="pane-head">
+      <h1>Tarefas do PJe</h1>
+      <p>As 28 caixas do gabinete em seis estações, num fluxograma que se percorre clicando: o que cada uma guarda, o que se faz nela e para onde o processo segue.</p>
+    </div>
+    <section class="blk" id="tk-panorama" style="margin-top:0">
+      <div class="card tk-imp tkc" id="tkimp">
+        <div class="tkc-top">
+          <div class="tkc-tt"><b>Acervo do gabinete</b><span id="tkdate"></span><em id="tkimpst" class="tk-imp-st"></em></div>
+          <div class="tk-imp-a"><label class="chipbtn pri" for="tkfile" title="Relação Acervo Detalhado 2G — por Órgão Julgador (PJe, ID 278), em .xlsx ou .csv. Também é possível arrastar o arquivo para este quadro.">Importar relatório…</label><input type="file" id="tkfile" accept=".xlsx,.csv" hidden><button class="chipbtn" id="tkClear" hidden>Limpar</button>
+            <button class="chipbtn tkc-i" type="button" aria-expanded="false" aria-controls="tkchelp" title="Como importar">?</button></div>
+        </div>
+        <p class="tkc-help" id="tkchelp" hidden>Use o relatório <i>Relação Acervo Detalhado 2G — por Órgão Julgador</i> (PJe, ID 278), em .xlsx ou .csv, ou arraste o arquivo para este quadro. A leitura acontece só neste navegador e guardam-se apenas as contagens por tarefa — nomes de partes, advogados e telefones não ficam salvos.</p>
+        <div class="tkc-bar"><div class="tkc-tot" id="tksum"></div><div class="tkc-sb"><div class="tk-stack" id="tkstack"></div><div class="tk-leg" id="tkleg"></div></div></div>
+        <div class="tkc-read" id="tk-leitura"><div class="tk-read" id="tkread"></div></div>
+      </div>
+    </section>
+    <section class="blk" id="tk-mapa">
+      <h2>Fluxograma interativo</h2>
+      <div class="card fx-card" id="fxcard">
+        <div class="fx-bar"><div class="fx-paths" id="fxpaths" role="group" aria-label="Percursos"></div>
+          <div class="fx-tools"><button class="chipbtn" id="fxHeat">Calor do acervo</button><button class="chipbtn" id="fxFull">Tela cheia</button></div></div>
+        <div class="fx-step" id="fxstep" hidden></div>
+        <div class="fx-body"><div class="fx-panel" id="fxpanel"></div>
+        <div class="fx-wrap"><svg id="fxsvg" class="fx" viewBox="0 0 950 684" role="group" aria-label="Fluxograma interativo das tarefas do PJe"></svg><div class="fx-leg" id="fxleg"></div></div></div>
+      </div>
+    </section>
+    <section class="blk" id="tk-caixas">
+      <h2>As caixas, uma a uma</h2>
+      <div class="filterbar">
+        <label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="tkq" type="search" placeholder="Filtrar: sessão, sobrestado, embargos, IRDR…" aria-label="Filtrar tarefas"></label>
+        <div class="famchips" id="tkchips"></div>
+        <button class="chipbtn" id="tkEdit">Ajustar à mão</button>
+        <button class="chipbtn" id="tkReset" hidden>Desfazer ajustes</button>
+      </div>
+      <div id="tklist"></div>
+    </section>
+  </div>
+
+  <!-- COMPETÊNCIA -->
+  <div class="tabpane" id="competencia" hidden><section class="blk" id="gx-ca"><h2>Competência, Seções e impedimentos <small class="h2s">conferência essencial da chegada</small></h2><div class="cgrid3">
+      <section class="card cblock" id="sec-turma"><h3 class="ch">A Turma Regional de MS</h3><div id="c-turma"></div></section>
+      <section class="card cblock" id="sec-deleg"><h3 class="ch">Competência delegada</h3><div id="c-deleg"></div></section>
+      <section class="card cblock" id="sec-dist"><h3 class="ch">Turma Regional × Turma Recursal</h3><div id="c-dist"></div></section>
+    </div>
+    <section class="card cblock" id="sec-imped">
+      <h3 class="ch">Impedimentos e suspeições dos julgadores</h3>
+      <div id="c-imped"></div>
+    </section>
+    <section class="card cblock" id="sec-jean-processos" style="margin:12px 0 16px;border-top:4px solid var(--wine)">
+      <h3 class="ch">Dr. Jean · Processos com alerta de impedimento ou suspeição</h3>
+      <p class="cnote">Cruzamento dos relatórios PJe 2G 134 (parte) e 331 (advogado). Correspondências de advogado são alertas para conferência, não confirmação de impedimento ou suspeição no processo.</p>
+      <div class="jean-controls"><div class="jean-tabs"><button type="button" data-jean-gab="A" class="on">Gabinete A</button><button type="button" data-jean-gab="C">Gabinete C</button></div><input id="jean-filter" type="search" placeholder="Filtrar por CNJ, advogado, classe ou situação" aria-label="Pesquisar processos com alerta"><button type="button" id="jean-copy">Copiar números CNJ</button><button type="button" id="jean-csv">Exportar CSV</button></div>
+      <div class="jean-count" id="jean-count" aria-live="polite"></div>
+      <div class="jean-table-wrap"><table class="jean-table"><thead><tr><th>Processo CNJ</th><th>Advogado(s)</th><th>Impedimento / suspeição</th><th>Classe</th><th>Última situação reportada</th></tr></thead><tbody id="jean-body"></tbody></table></div>
+      <p class="cnote" style="margin-top:8px">Relatórios gerados em 04/11/2026. A última situação é histórica no momento da extração. Processos de Gabinete B ou demais órgãos não constam destas listas.</p>
+    </section>
+    <section class="card cblock" id="sec-secoes">
+      <h3 class="ch">As Seções do TRF3</h3>
+      <p class="cnote">A TRgMS julga, num só colegiado, as matérias das três primeiras Seções. A competência segue a natureza da relação jurídica — numa execução fiscal, é o crédito executado que define a Seção.</p>
+      <div id="c-secs"></div>
+    </section>
+    <details class="gx-moredet" id="gx-ca-ass"><summary>Assuntos recorrentes · o essencial de cada tema e a tese que costuma decidir</summary><section class="blk" id="sec-assuntos">
+      <h2>Assuntos recorrentes</h2>
+      <p class="cnote">O essencial de cada tema e a tese que costuma decidir. Conferir redação e modulação vigentes antes de minutar.</p>
+      <div class="lexbar"><label class="search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="aq" type="search" placeholder="Filtrar: prescrição, ruído, IBAMA, Tema 69…" aria-label="Filtrar assuntos"></label>
+        <button class="chipbtn" id="assOpen">Abrir todos</button><button class="chipbtn" id="assClose">Fechar todos</button></div>
+      <div id="assu"></div>
+    </section>
+  </details></section></div>
+
+  <!-- LÉXICO -->
+  <div class="tabpane" id="lexico" hidden></div>
+
+  <!-- REGIMENTO -->
+  <div class="tabpane" id="regimento" hidden></div>
+
+  <footer>
+    Uso interno do gabinete. Conferir vigência, alcance e modulação antes de minutar. Rótulos com texto literal: Planalto, STJ, STF e atos do TRF3, consultados em 15/10/2026. RITRF3 consolidado até a Emenda Regimental nº 25/2026 (texto de 12/05/2026).
+  </footer>
+  </main>
+
+  <aside class="rail" id="rail" aria-label="Consulta">
+    <button class="side-tog r" id="rlTog" type="button" aria-expanded="true" title="Recolher atalhos" aria-label="Recolher atalhos"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg><span class="side-lab">Atalhos</span></button>
+    <section class="atl">
+      <h4>Referências rápidas <small>consulta imediata</small><button class="railx" id="railClose" aria-label="Fechar referências rápidas">✕</button></h4>
+      <div id="atlist"></div>
+    </section>
+  </aside>
+</div>
+
+<dialog id="dlg" class="drawer"><div class="dh"><div><div class="k" id="dk"></div><h3 id="dt"></h3></div><button id="dx" aria-label="Fechar">✕</button></div><div class="db" id="db"></div></dialog>
+<dialog id="pal" class="pal">
+  <div class="pin"><span>⌕</span><input id="pq" type="text" autocomplete="off" placeholder="Buscar em recursos, rotina, atalhos, léxico e assuntos…" aria-label="Busca global"><kbd>esc</kbd></div>
+  <div class="pres" id="pres"></div>
+</dialog>
+<dialog id="cmpDlg" class="cmpdlg" aria-labelledby="cmpTitle">
+  <div class="cmp-h"><div><small>Consulta comparada</small><h3 id="cmpTitle">Vias recursais lado a lado</h3></div><button id="cmpClose" aria-label="Fechar">✕</button></div>
+  <div class="cmp-b" id="cmpBody"></div>
+  <div class="cmp-f"><button class="chipbtn" id="cmpClear">Limpar seleção</button><button class="chipbtn pri" id="cmpCopy">Copiar como texto</button></div>
+</dialog>
+<div id="toast" class="toast" role="status" hidden></div>
+<div id="citpop" class="citpop" role="tooltip" hidden></div>
+
+<script src="./assets/js/20-legacy-core.js"></script>
+<!-- =================== V41 · DATAJUD (CNJ) NA ABA ACERVO =================== -->
+<link rel="stylesheet" href="./assets/css/40-extra.css">
+
+
+<!-- =================== V42 · NOTIFICAÇÕES AUTOMÁTICAS (DataJud × TPU) =================== -->
+<link rel="stylesheet" href="./assets/css/50-utilities.css">
+
+<!-- =================== V42s · NOTIFICAÇÕES NO SERVIDOR DO GABCMT =================== -->
+
+
+
+
+
+<link rel="stylesheet" href="./assets/css/60-workspace.css">
+
+
+
+
+
+<script src="./assets/js/40-initial-data.js"></script>
+<script src="./assets/js/60-final-layout.js"></script><link rel="stylesheet" href="./assets/css/70-finishing.css">
+
+<!-- CMT-ITER · Compatibilidade JSON com Gabinete CMT -->
+
+
+<!-- Fonte privada do acervo e visão operacional no mesmo repositório -->
+
+<!-- Acervo isolado da Central de Comando, servido em /acervo/index.html. -->
+<link rel="stylesheet" href="./assets/css/81-ficha-unica.css">
+
+<link rel="stylesheet" href="./assets/css/82-acervo-recursos.css">
+
+<link rel="stylesheet" href="./assets/css/83-paineis-contextuais.css">
+<script src="./assets/js/83-paineis-contextuais.js"></script>
+<link rel="stylesheet" href="./assets/css/84-regras-sessao.css">
+
+<script src="./assets/js/cmt-monitor.js"></script>
+<script src="./assets/js/pr-js.js"></script>
+
+<link rel="stylesheet" href="./assets/css/90-calendario.css">
+<script src="./assets/js/mx-js.js"></script>
+
+<!-- cmt-ficha:inicio -->
+<link rel="stylesheet" href="./assets/css/95-ficha-unica.css">
+<script src="./assets/js/cmt-ficha.js"></script>
+<script src="./assets/js/cmt-ficha-monitor.js"></script>
+<!-- cmt-ficha:fim -->
+<link rel="stylesheet" href="./assets/css/85-base-acervo.css">
+<script src="./assets/js/85-base-acervo.js"></script>
+<link rel="stylesheet" href="./assets/css/86-triagem-pautas.css">
+<script src="./assets/js/86-triagem-pautas.js"></script>
+</body>
+</html>

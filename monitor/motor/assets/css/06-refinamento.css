@@ -1,0 +1,109 @@
+
+  :root {
+    --ui-ink: #14263c;
+    --ui-muted: #667789;
+    --ui-line: #e1dcd2;
+    --ui-focus: #416f9e;
+    --ui-shadow: 0 8px 24px rgba(20, 38, 60, .055);
+  }
+
+  html, body {
+    color: var(--ui-ink);
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: #d9e8f6;
+    color: var(--ui-ink);
+  }
+
+  button, a, summary, input, select, textarea, [role="button"] {
+    transition: border-color .16s ease, background-color .16s ease,
+      box-shadow .16s ease, color .16s ease;
+  }
+
+  :where(button, a, summary, input, select, textarea, [role="button"]):focus-visible {
+    outline: 3px solid rgba(65, 111, 158, .42);
+    outline-offset: 2px;
+  }
+
+  :where(input, select, textarea):focus-visible {
+    border-color: var(--ui-focus) !important;
+    box-shadow: 0 0 0 3px rgba(65, 111, 158, .12);
+  }
+
+  :where(button, [role="button"]):disabled {
+    cursor: not-allowed;
+    opacity: .62;
+  }
+
+  :where(.central-stat-card, .central-monthly-card, .central-search-panel,
+    .tri-kpi, .tri-bandeja, .tri-aberto, .pre-base-part, .pre-base-detail) {
+    border-color: var(--ui-line);
+    box-shadow: var(--ui-shadow);
+  }
+
+  .central-stat-card,
+  .central-monthly-card,
+  .central-search-panel,
+  .tri-kpi,
+  .tri-aberto {
+    border-radius: 13px;
+  }
+
+  .central-stat-card,
+  .central-monthly-card,
+  .central-search-panel,
+  .tri-kpi,
+  .tri-aberto,
+  .pre-base-part {
+    background-clip: padding-box;
+  }
+
+  .central-stat-card:hover,
+  .central-monthly-card:hover,
+  .tri-kpi:hover {
+    border-color: #cbd6e2;
+    box-shadow: 0 10px 28px rgba(20, 38, 60, .085);
+  }
+
+  :where(.pre-base-button, .tri-ab-btn, .tri-icone, #acv-gh-slot button):not(:disabled):hover {
+    border-color: #9fb3c9;
+    box-shadow: 0 2px 7px rgba(20, 38, 60, .09);
+  }
+
+  .tri-ficha {
+    transition: background-color .16s ease, border-color .16s ease, box-shadow .16s ease;
+  }
+
+  .tri-ficha:hover {
+    box-shadow: 0 3px 10px rgba(20, 38, 60, .07);
+  }
+
+  .tri-plan-tr:not(.cab):hover > *,
+  tbody tr:hover > * {
+    background-color: #f6f9fc;
+  }
+
+  #acvBtn {
+    transition: filter .16s ease, box-shadow .16s ease;
+  }
+
+  #acvBtn:hover {
+    filter: brightness(1.04);
+    box-shadow: 0 5px 16px rgba(20, 38, 60, .2);
+  }
+
+  .acv-box {
+    border: 1px solid var(--ui-line);
+    box-shadow: 0 22px 60px rgba(15, 31, 49, .25);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
