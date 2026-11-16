@@ -1916,7 +1916,7 @@ $('#roster').addEventListener('click',function(e){var b=e.target.closest('[data-
 $('#en-form').addEventListener('submit',function(e){e.preventDefault();var er=$('#en-er');er.hidden=true;
   if(!U.sel){er.textContent='Selecione o seu nome.';er.hidden=false;return;}
   var bt=$('#en-go');bt.disabled=true;bt.textContent='Conferindo…';
-  api('/api/login',{method:'POST',body:JSON.stringify({usuario:U.sel,senha:$('#en-senha').value})}).then(function(j){try{localStorage.setItem('eq_ultimo',U.sel);}catch(x){}$('#en-senha').value='';U.des=!!j.desembargador;iniciar(j.usuario,j.gestor);})
+  api('/api/login',{method:'POST',body:JSON.stringify({usuario:U.sel,senha:$('#en-senha').value})}).then(function(j){try{localStorage.setItem('eq_ultimo',U.sel);}catch(x){}$('#en-senha').value='';U.des=!!j.desembargador||!!j.gestor;iniciar(j.usuario,j.gestor);})
     .catch(function(x){er.textContent=x.message;er.hidden=false;}).then(function(){bt.disabled=false;bt.textContent='Entrar';});});
 $('#sair').onclick=function(){if(nPend()&&!confirm('Há alterações não salvas. Sair mesmo assim?'))return;api('/api/login',{method:'DELETE'}).catch(function(){}).then(function(){location.reload();});};
 (function(){var nm=$('#nx-mais'),mn=$('#nx-mn');if(!nm||!mn)return;nm.onclick=function(){var o=mn.classList.toggle('ab');nm.setAttribute('aria-expanded',String(o));};document.addEventListener('click',function(e){if(!e.target.closest('.nx-ut')){mn.classList.remove('ab');nm.setAttribute('aria-expanded','false');}});})();
@@ -3705,7 +3705,7 @@ document.addEventListener('click',function(e){
     seq.then(function(){CMT.sel={};toast(m.length+(m.length===1?' voto liberado.':' votos liberados.'));CMT.atualizado=0;cmtCarregar(sd);})
       .catch(function(e){toast((e&&e.erro)||'Não foi possível liberar tudo.');CMT.atualizado=0;cmtCarregar(sd);});return;}});
 document.addEventListener('click',function(e){if(e.target&&e.target.id==='cmt-atu'){CMT.atualizado=0;cmtCarregar();}});
-api('/api/login').then(function(j){U.des=!!j.desembargador;iniciar(j.usuario,j.gestor);}).catch(function(){entrada();});
+api('/api/login').then(function(j){U.des=!!j.desembargador||!!j.gestor;iniciar(j.usuario,j.gestor);}).catch(function(){entrada();});
 })();
 </script>
 <script id="cmt-agenda">
