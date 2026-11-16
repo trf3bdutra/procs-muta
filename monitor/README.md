@@ -23,6 +23,13 @@ Esta é uma refatoração do `cmt-monitor.html` fornecido (15/11/2026), sem troc
 - A Equipe deixou de ser aba própria: fica nas Configurações, com atalho para o cadastro completo.
 - As ações que gravam usam os comandos que já existiam (importar PDF, marcos, designação, regras). Publicar à equipe e aplicar as conversões de etiquetas ficam desativados até validação.
 
+## Gestor de acervo e Triagem no padrão da Pautas
+
+- `assets/css/88-padrao-pautas.css` e `assets/js/88-padrao-pautas.js` mudam só o visual (tema claro): o índice do Gestor vira a coluna clara da esteira; cabeçalhos e seções ganham régua, título grande e números em faixa; a Triagem, dentro do motor, recebe a mesma folha.
+- Base do Acervo: abas à esquerda (Visão da base, **Planilha integral**, Importar / atualizar, Conexão e acesso). A planilha integral é só leitura, com busca em todas as colunas, colunas principais ou todas, exportação .csv/.xlsx e atalho para a tela cheia; celulares, telefones, e-mails e CPF não aparecem.
+- Importar: uma área só, que reconhece o tipo pelo nome do arquivo (acervo, sigilosos, acervo detalhado e complementares) e importa o acervo antes dos complementos; os importadores específicos ficam recolhidos para quando o nome não for reconhecido.
+- As Referências rápidas saem do lado direito da Triagem e abrem pelo botão "Referências" no cabeçalho (o estado fica lembrado neste navegador); fechadas, a Triagem ocupa a largura toda.
+
 ## Base do Acervo: diálogo reparado
 
 - A Base abre um diálogo independente com Situação, Importar/Atualizar e Conexão.

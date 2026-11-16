@@ -997,7 +997,7 @@ const PRE_VOTO = ['Dar provimento','Dar parcial provimento','Negar provimento','
 const PRE_HONORARIOS = ['Majorar (art. 85, § 11, CPC)','Manter','Inverter','Fixar','Redistribuir','Sem honorários recursais','Não se aplica'];
 const PRE_MPF_REASONS = ['Não se aplica','Interesse público ou social relevante','Comunidades indígenas','Comunidades quilombolas e tradicionais','Idoso','Incapaz','Litígios coletivos federais pela posse de terra rural ou urbana','Mandado de segurança','Ação civil pública proposta por outro legitimado','Ação popular','Processos de desapropriação para reforma agrária','Ações de improbidade administrativa','Processos de extradição, expulsão e deportação','Outros'];
 const CONTROL_COLUMNS = [...PRE_NEW_FIELDS,"Voto","Sessões","Contrarrazões", "Contrarrazões Ausentes", "Descrição das Alegações", "Descrição das Contrarrazões", "Mídias Necessárias", "Memoriais", "Memoriais - Parte", "Memoriais - ID", "Memoriais - Descrição", "Outros Documentos", "Outros - Peça", "Outros - ID", "Outros - Descrição", "Outras Peças","Controladores","AJG","DPU (controle)","Intervenção MPF","ID do Parecer MPF","Alegações","Numeração Prévia","Item (Pauta de Julgamento)","Processo","Assunto","Etiquetar","Etiquetas","Tema","Observações","SERVIDOR","JULGAMENTO","Sessão Destino","Seleção Prévia","Status de Julgamento","Tempestividade","Preparo","Regularidade","Representação","ID da Procuração","Mídias","Impedimento / Suspeição","META","MPF","MPF - Custos Legis","Prelim.","Observação Complementar","O que falta sanar","Refinado","Conferido","Tipo de Voto","MINUTADO","CORRETOR","CORRIGIDO","LIBERADO"];
-const ACERVO_COLUMNS = ["processo","classe_judicial","assunto_judicial","data_distribuição","tarefa_atual","data_entrada_tarefa","prioridade","etiquetas","polo_ativo","advogado_pa","polo_passivo","advogado_pp","dpu","mpf","valor_causa","ultimo_movimento","dt_distribuicao_1g","celular_pa","celular_pp"];
+const ACERVO_COLUMNS = ["processo","classe_judicial","assunto_judicial","data_distribuição","tarefa_atual","data_entrada_tarefa","prioridade","etiquetas","polo_ativo","advogado_pa","polo_passivo","advogado_pp","dpu","mpf","valor_causa","ultimo_movimento","dt_distribuicao_1g"];
 
 // Colunas brutas das planilhas Gab A anexadas (Acervo, Sigilosos, Entradas e Saídas). Elas são preservadas no Acervo Central,
 // além dos campos operacionais do painel, para que o Acervo Central concentre toda a informação.
@@ -1082,6 +1082,8 @@ const isLegacySectionColumn = __memo(c => !txt(c).startsWith("_") && (canon(c) =
 const unifySectionColumn = c => workflowColumn(isLegacySectionColumn(c) ? "Seção Competente" : ["Impedimento","Suspeição"].includes(c) ? "Impedimento / Suspeição" : c);
 const isVisibleColumn = __memo(c => txt(c) && !txt(c).startsWith("_") && !isRetiredColumn(c) && !isLegacySectionColumn(c) && workflowColumn(c) === c && !["Impedimento","Suspeição"].includes(c));
 // Identificação, classificação e movimento são campos das fontes Gab A.
+// Celulares, telefones, WhatsApp e e-mails das planilhas não entram no acervo (regra do procs-muta).
+const CONTATO_RE = /celular|telefone|fone|whats|e-?mail/i;
 const GAB_CORE_KEYS = new Set(["Processo","Classe","Assunto_Principal","Data_Distribuição","Polo_Ativo","Polo_Passivo","Valor_da_Causa","Última_Movimentação"].map(fieldKey));
 const procId = v => txt(v).replace(/\D/g, "");
 // Leitura de coluna por nome tolerante a variações de acentuação, caixa, espaços e
@@ -2011,6 +2013,7 @@ class Component extends DCLogic {
         if(isNew)r._pjeCreated=true;
         const own = new Set(Array.isArray(r._pjeFields) ? r._pjeFields : []),before=supplemented;
         Object.entries(src).forEach(([header, value]) => {
+          if (CONTATO_RE.test(txt(header))) return;
           const k = fieldKey(header);
           if (!isVisibleColumn(header) || (!txt(value) && !(k === "etiquetas" && own.has(k))) || (!isNew && !r._pjeCreated && !own.has(k) && (GAB_CORE_KEYS.has(k) || (this.gabSourceColumns.has(k) && k !== "etiquetas")))) return;
           // Somente campos do relatório PJe; nunca campos de trabalho do painel.
@@ -2031,6 +2034,7 @@ class Component extends DCLogic {
         const julgador = this.getVal(src, ["Julgador_Colegiado", "Julgador Colegiado"]);
         if (txt(julgador)) r._julgadorColegiado = txt(julgador);
         Object.entries(src).forEach(([header, value]) => {
+          if (CONTATO_RE.test(txt(header))) return;
           if (["Impedimento","Suspeição"].includes(txt(header))) { if (txt(value)) r[txt(header)]=value; return; }
           if (fieldKey(header) === "etiquetas" || fieldKey(header) === "etiquetasoriginais") {importedColumns.add("Etiquetas Originais");return;}
           const c = workflowColumn(txt(header)); if (!isVisibleColumn(c)) return;
