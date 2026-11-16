@@ -2878,7 +2878,7 @@ $('#xlsx').onclick=function(){var L=filtradas();if(!L.length){toast('Nada a expo
 
 /* ================= notificações (montadas no servidor a partir do procs-muta) ================= */
 var NT={ev:[],lido:''};
-var NIC={'aviso-geral':'📣',processos:'✎',pendencia:'☑',ausencia:'⌂'};
+var NIC={'aviso-geral':'📣',processos:'✎',pendencia:'☑',ausencia:'⌂',pauta:'▤',prazo:'◷'};
 function tempo(t){var d=new Date(t);if(isNaN(d))return '';var m=Math.round((Date.now()-d)/6e4);return m<1?'agora':m<60?'há '+m+' min':m<1440?'há '+Math.round(m/60)+' h':d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
 function chaveLido(){return 'eq_not_lido_'+nq(U.eu);}
 function itemNot(e,lim){var lk=e.link?'<a class="lk" href="'+esc(e.link)+'"'+(/^https?:/.test(e.link)?' target="_blank" rel="noopener"':'')+'>'+esc(e.linkTxt||'Abrir link')+' ↗</a>':'',dst=U.gestor&&e.action==='aviso-geral'?'<span class="dst">'+[(e.para||[]).length?'para '+e.para.join(', '):'toda a equipe',e.painel===false?'só notificação':e.notificacao===false?'só painel inicial':'painel e notificação',e.ate?'até '+br(e.ate):''].filter(Boolean).join(' · ')+'</span>':'';

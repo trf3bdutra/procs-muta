@@ -25,6 +25,30 @@ module.exports = async (req, res) => {
       if (L.norm(it.servidor) !== eu && L.norm(it.corretor) !== eu) return;
       ev.push({ id: 'pr-' + s.date + '-' + String(it.cnj).replace(/\D/g, ''), time: c.editadoEm, action: 'processos', user: c.editadoPor, title: 'Atualizou um processo seu', message: it.cnj + ' · sessão de ' + s.date.split('-').reverse().join('/') + (it.item ? ' · item ' + it.item : ''), sessao: s.date, numero: it.cnj });
     }); });
+    /* publicação da pauta: quantos processos ficaram com você; e o prazo até a entrega das minutas, enquanto houver pendência sua */
+    pubs.forEach((s, i) => {
+      const d = docs[i]; if (!d) return;
+      const lista = (d.itens || []).length ? d.itens : (d.previa || []);
+      const br = x => String(x).split('-').reverse().join('/');
+      const meusM = lista.filter(it => L.norm(it.servidor) === eu), meusC = lista.filter(it => L.norm(it.corretor) === eu);
+      if (!meusM.length && !meusC.length) return;
+      const tPub = s.publicadaEm || d.publicadaEm || d.atualizadoEm || (cal || {}).atualizadoEm || '';
+      if (tPub) ev.push({ id: 'pp-' + s.date, time: tPub, action: 'pauta', user: 'Responsável', title: 'Pauta publicada · sessão de ' + br(s.date),
+        message: [meusM.length && meusM.length + (meusM.length > 1 ? ' processos designados a você para minuta' : ' processo designado a você para minuta'),
+          meusC.length && meusC.length + (meusC.length > 1 ? ' para correção' : ' para correção')].filter(Boolean).join(' · '), sessao: s.date });
+      const ent = (s.marcos || {}).entregaMinutas;
+      if (!ent || !/^\d{4}-\d{2}-\d{2}$/.test(ent)) return;
+      const faltaM = meusM.filter(it => !it.dataMinuta).length, faltaC = meusC.filter(it => !it.dataCorrecao).length;
+      if (!faltaM && !faltaC) return;
+      const dias = Math.round((Date.parse(ent + 'T12:00:00Z') - Date.parse(hj + 'T12:00:00Z')) / 86400e3);
+      if (dias > 7) return;
+      const marco = dias < 0 ? -1 : dias === 0 ? 0 : dias === 1 ? 1 : dias <= 3 ? 3 : 7;
+      const inicio = new Date(Date.parse(ent + 'T12:00:00Z') - (marco < 0 ? -1 : marco) * 86400e3).toISOString().slice(0, 10);
+      ev.push({ id: 'pz-' + s.date + '-' + marco, time: inicio + 'T12:00:00.000Z', action: 'prazo', user: '',
+        title: dias < 0 ? 'Entrega das minutas vencida em ' + br(ent) : dias === 0 ? 'Entrega das minutas é hoje' : dias === 1 ? 'Entrega das minutas é amanhã' : 'Faltam ' + dias + ' dias para a entrega das minutas',
+        message: ['sessão de ' + br(s.date), faltaM && faltaM + (faltaM > 1 ? ' minutas suas pendentes' : ' minuta sua pendente'), faltaC && faltaC + (faltaC > 1 ? ' correções pendentes' : ' correção pendente')].filter(Boolean).join(' · '),
+        nivel: dias <= 1 ? 'urgente' : 'importante', sessao: s.date });
+    });
     ((pend || {}).registros || []).forEach(t => {
       if (L.norm(t.atualizadoPor) === eu) return; if (L.norm(t.assignee) !== eu && L.norm(t.creator) !== eu) return;
       ev.push({ id: 'pe-' + t.id + '-' + (t._rev || 1), time: t.atualizadoEm, action: 'pendencia', user: t.atualizadoPor, title: (t.excluida ? 'Diligência excluída' : t.stage === 'done' ? 'Diligência concluída' : (t._rev || 1) === 1 ? 'Nova diligência para você' : 'Diligência atualizada') + ' · ' + t.title, message: [t.numero, t.dueDate && 'prazo ' + t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '), resolved: t.stage === 'done' });
