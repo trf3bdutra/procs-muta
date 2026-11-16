@@ -645,3 +645,18 @@ body:not(.vdm-ed) #openSheet{display:none!important}
 .rap-ok{color:#3f7a50;font-weight:700}
 .rap-a{display:flex;gap:6px;margin-top:8px}
 @media (max-width:700px){.rap-novo{grid-template-columns:1fr;grid-template-areas:"t" "x" "o" "b"}}
+
+/* busca: modo índice / texto integral, ajuda e trechos */
+.e-qmodo{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:6px 0 4px;font-size:12.5px;color:var(--ink-2,#3d4c5c)}
+.e-qmodo label{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.e-qmodo label small{color:var(--muted,#7a8794);font-size:11.5px}
+.e-qmodo label.off{opacity:.5;cursor:not-allowed}
+.e-qmodo .sp{flex:1}
+.e-qmodo .e-ord select{font:inherit;font-size:12px;padding:3px 6px;border-radius:6px;border:1px solid var(--line,#d9dee3);background:#fff}
+.e-qmodo #e-qaj{min-width:30px}
+.e-qaj{flex-basis:100%;background:var(--paper-2,#f7f5f0);border:1px solid var(--line,#e3dfd6);border-radius:9px;padding:9px 12px;font-size:12.5px}
+.e-qaj ul{margin:5px 0 0;padding-left:18px}.e-qaj li{margin:2px 0}.e-qaj code{background:#fff;border:1px solid var(--line,#e3dfd6);border-radius:4px;padding:0 4px;font-size:12px}
+.e-qinfo{flex-basis:100%;font-size:11.5px;color:var(--muted,#7a8794)}
+.e-snip{margin:2px 0 6px 64px;font-size:12.5px;line-height:1.5;color:var(--ink-2,#3d4c5c);font-family:var(--serif,Georgia,serif)}
+.e-snip mark{background:var(--warn-soft,#fff2db);color:var(--warn,#956019);border-radius:3px;padding:0 2px}
+.e-snn{font-family:var(--sans,system-ui);color:var(--muted,#7a8794);font-size:11px;margin-left:4px}

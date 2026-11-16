@@ -10,7 +10,7 @@ name: CMT-monitor na Vercel
 on:
   push:
     branches: [main]
-    paths: ["monitor/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml", "padrao/acervo-fonte.js"]
+    paths: ["monitor/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml", "padrao/acervo-fonte.js", "precedentes/jurisprudencia/**", "scripts/jurisprudencia/**"]
   # o commit do Base (feito com o GITHUB_TOKEN) não dispara outros workflows: publica de novo quando ele termina
   workflow_run:
     workflows: ["Base gabcmt"]
@@ -56,6 +56,10 @@ jobs:
           mkdir -p site/public/monitor/triagem && cp monitor/triagem/index.html site/public/monitor/triagem/index.html
           # Módulo comum "Atualizar acervo fonte" (planilhas → carga → Action acervo-fonte.yml), para qualquer página do site
           mkdir -p site/public/padrao && cp padrao/acervo-fonte.js site/public/padrao/acervo-fonte.js
+          # Série histórica do Relator (precedentes/jurisprudencia): índice e arquivos de busca em texto integral,
+          # gerados aqui (não ficam no Git); lidos pelo ementário do Compendium em /jurisprudencia/
+          python3 scripts/jurisprudencia/gerar_busca.py
+          mkdir -p site/public/jurisprudencia && cp precedentes/jurisprudencia/indice.json.gz site/public/jurisprudencia/ && cp -R precedentes/jurisprudencia/busca site/public/jurisprudencia/
           printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false}]}\n' > site/vercel.json
       - name: Publica
         env:
