@@ -61,3 +61,16 @@ série bruta, sem curadoria. As duas convivem; a série histórica não substitu
 ## Leitura
 
 `scripts/jurisprudencia/ler.py` lista, filtra por ano, espécie e atuação, e exporta em JSONL.
+
+## Atualização semanal
+
+`scripts/jurisprudencia/incorporar.py` acrescenta julgados novos à série, sem apagar
+nem reescrever nada: descarta o que já está (mesmo processo e mesma data de julgamento),
+grava os novos no arquivo do ano e refaz `indice.json.gz`, `MANIFESTO.json` e `SHA256SUMS`.
+
+```sh
+python3 scripts/jurisprudencia/incorporar.py novos.json   # incorpora
+python3 scripts/jurisprudencia/incorporar.py --conferir   # só confere a série
+```
+
+A coleta semanal na base do TRF-3 roda como tarefa agendada e abre um PR com o que entrou.
