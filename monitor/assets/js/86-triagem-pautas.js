@@ -179,6 +179,7 @@
   }
   function renderTriList(){const d=triData();const el=$('#cwt-tri-results');if(el)el.innerHTML=triRows(d);const count=$('#cwt-tri-count');if(count)count.textContent=d.filtered.length+' registros no filtro';const sel=$('#cwt-selected');if(sel)sel.textContent=settings.triChecked.size;const all=$('[data-cwt-change="select-all"]');if(all)all.checked=d.filtered.length>0&&d.filtered.slice(0,settings.triTake).every(r=>settings.triChecked.has(digits(r.Processo||r.processo)));}
   function renderPautas(){
+    if(W.CMTEsteira){const ss=selectedSession();settings.sessId=ss?.id||'';renderAside();W.CMTEsteira.render({view,settings,getMotor,getCore,getSes,sessionData,selectedSession,sesInfo,openFicha,showLegacy,msg,render,esc,br,cnj,digits,norm});return;}
     const list=sessionData(),ss=selectedSession(),info=ss?sesInfo(ss):null;
     settings.sessId=ss?.id||'';
     renderAside();
