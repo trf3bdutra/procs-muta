@@ -27,6 +27,16 @@ function fase(t) {
   if (/prazo em curso|diligência|MPF/i.test(t)) return 'Aguardando prazo ou diligência';
   return t ? 'No gabinete' : 'Fora do acervo ativo';
 }
+/* pendente de 1º julgamento, pelo PJe (o Power BI saiu): todo processo em andamento, salvo embargos de declaração,
+   agravo interno ou juízo de retratação (pela tarefa, pela classe ou pela etiqueta) e o que já foi julgado e está no pós-sessão */
+const R_RECURSO_INTERNO = /\[ED\]|\[Sess[^\]]*ED\]|embargos de declara|\[Ag\.? ?Int\]|agravo interno|\bag\.? ?int\b|retrata/i;
+const R_POS_JULG = /Lançar movimentações do julgamento|Inteiro Teor|Intimação de acórdão|prazo em curso - Acórdão|Decurso de prazo de acórdão/i;
+function pendente1(r) {
+  const t = String(r.tarefa_atual || ''), c = String(r.classe_judicial || ''), e = String(r.Etiquetas || r.etiquetas || '');
+  if (!t || /Baixad|Arquivo/i.test(t) || R_POS_JULG.test(t)) return false;
+  if (R_RECURSO_INTERNO.test(t) || R_RECURSO_INTERNO.test(c) || e.split(/\s*,\s*/).some(x => R_RECURSO_INTERNO.test(x) || /^ED$/i.test(x.trim()))) return false;
+  return true;
+}
 /* pendências marcadas por etiqueta (mesmas regras da triagem do CMT-monitor) e impedimento registrado na triagem */
 const nz = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function pendEtq(et, tri) {
@@ -57,7 +67,7 @@ async function base() {
       const ses = (pa.sessoes || []).map(s => ({ data: s.sessao, item: s.item || '', res: s.resultado || '' })).filter(s => s.data);
       CACHE.push({ cnj, metas, rotulo: String(tri.META || '').trim(), classe: r.classe_judicial || r.Classe || '', assunto: r.Assunto || r.Assunto_Principal || '',
         partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter(Boolean).join(' x '), dist: iso(r['data_distribuição'] || r['Data_Distribuição']),
-        tarefa: r.tarefa_atual || '', desde: iso(r.data_entrada_tarefa), fase: fase(r.tarefa_atual), pend1: String(r.Pendente_1Julgamento || '').toLowerCase() === 'sim',
+        tarefa: r.tarefa_atual || '', desde: iso(r.data_entrada_tarefa), fase: fase(r.tarefa_atual), pend1: pendente1(r),
         secao: r['Seção Competente'] || '', servidor: pr.SERVIDOR || '', corretor: pr.CORRETOR || '', sessoes: ses,
         prioridade: r.prioridade || '', pendEtq: pendEtq([r.Etiquetas, r.etiquetas].filter(Boolean).join(','), tri) });
     });
