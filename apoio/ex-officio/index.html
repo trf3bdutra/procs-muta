@@ -166,25 +166,6 @@ html[data-theme=dark] .trb{--t-bg:#0a1821;--t-ln:#1e3747;--t-rs:#10222e;--t-ti:#
 .prt{background:#f2f7fb;border:1px solid #cfdfec;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;box-shadow:none}
 @media (min-width:1181px){.prt{position:fixed;z-index:15;top:72px;bottom:12px;overflow:hidden}}
 .prt-body{flex:1 1 auto;min-height:0;overflow:auto}
-/* Retrato da sessão no prontuário */
-.prt-rs .prt-body{padding-right:2px}
-.prt-rg,.prt-rg2{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-.prt-rm{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 10px}
-.prt-rm span{display:block;font-size:10.5px;color:var(--mut)}
-.prt-rm b{display:block;font-size:19px;font-weight:750;color:var(--ink)}
-.prt-rm.al b{color:#a7433d}
-.prt-rm.ok b{color:#235a55}
-.prt-rb{height:5px;background:var(--soft);border-radius:3px;overflow:hidden;margin-top:2px}
-.prt-rb i{display:block;height:100%;background:#235a55}
-.prt-rp{margin:5px 0 10px;font-size:11.5px;color:var(--mut)}
-.prt-rk{margin:12px 0 5px;font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
-.prt-rl{list-style:none;margin:0;padding:0}
-.prt-rl li{display:flex;gap:8px;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding:7px 0;font-size:12px;color:var(--ink)}
-.prt-rl li:first-child{border-top:0}
-.prt-rl time{color:var(--mut);font-size:11.5px;white-space:nowrap}
-.prt-rl li.al time{color:#a7433d}
-.prt-rl li.ok time{color:#235a55}
-.prt-rn{margin:12px 0 0;font-size:11.5px;color:var(--mut)}
 .prt-body::-webkit-scrollbar{width:6px}
 /* campos compactos, rótulo acima, em duas colunas: cada aba cabe na tela sem rolagem */
 .prt-pc .pn{display:block}.prt-pc .pn section{border:0;background:transparent;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 10px;align-content:start}
@@ -1689,6 +1670,16 @@ html[data-theme=dark] #v-inicio.home-v2{--ep:#10222e;--ep2:#132835;--el:#1e3747;
   #v-cmt .cmt-met{grid-template-columns:repeat(3,minmax(0,1fr))}
   #v-cmt .cmt-urgl{grid-template-columns:minmax(0,1fr)}
 }
+/* ===== Cabeçalho numa faixa só: as seções ficam na mesma linha da marca e dos botões ===== */
+#app header.nx{flex-wrap:wrap}
+#app header.nx .nx1{flex-wrap:wrap;row-gap:0}
+#app header.nx nav.tabs{border-top:0!important;padding:0!important;margin:0 0 0 14px!important;border-left:1px solid var(--el)!important;align-self:stretch}
+#app header.nx .tabs a{padding:10px 13px 9px!important;font-size:12.5px!important;min-height:38px;border-right:1px solid var(--el)}
+#app header.nx .tabs a:first-child{border-left:0}
+#app header.nx .tabs a .nx-n{font-size:9px}
+#app header.nx .nx-bc{margin-right:2px}
+@media (max-width:1250px){#app header.nx .tabs a .nx-n{display:none}#app header.nx .tabs a{padding:10px 11px 9px!important}}
+@media (max-width:1050px){#app header.nx nav.tabs{margin-left:0!important;border-left:0!important;border-top:1px solid var(--el)!important;flex:1 0 100%}}
 </style>
 </head>
 <body>
@@ -1711,8 +1702,7 @@ html[data-theme=dark] #v-inicio.home-v2{--ep:#10222e;--ep2:#132835;--el:#1e3747;
 </div>
 
 <div id="app" hidden>
-  <header class="nx"><div class="nx1"><span class="br"><i class="star" aria-hidden="true"></i></span><button class="nx-nav" id="nx-nav" type="button" aria-expanded="false" aria-controls="nx-tabs" title="Seções (Esc fecha)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span id="nx-nav-t">Mural</span></button><div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><div class="nx-cad"><b class="nx-on">Ex Officio<em>.</em></b><span class="nx-sl" aria-hidden="true">/</span><span class="eq-grp"><a class="eq-cmp" href="/modus/">Modus Operandi</a><span class="eq-dd" role="menu" aria-label="Seções do Modus Operandi"><a href="/modus/#v=ement">Ementário</a><b>Editorial</b><a href="/modus/#v=edit&amp;s=pecas">Minuta-Matriz</a><a href="/modus/#v=edit&amp;s=mod">Modelos</a><a href="/modus/#v=edit&amp;s=par">Banco de trechos</a><a href="/modus/#v=edit&amp;s=dir">Diretrizes</a><a href="/modus/#v=edit&amp;s=consulta">Consulta</a></span></span></div></div><span class="sp"></span><div class="nx-ut"><button class="hb hbx nx-tx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="c-not" hidden></i></button><div class="nx-mn" id="nx-mn"><button class="hb hbx nx-tx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="c-pen" hidden></i></button><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button><span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb ic" id="sair" title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button></div><button class="hb ic" id="nx-mais" type="button" title="Mais opções" aria-label="Mais opções" aria-expanded="false" aria-controls="nx-mn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
-    <nav class="tabs" id="nx-tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page"><i class="nx-n">01</i>Mural</a><a href="#pauta" data-vw="pauta"><i class="nx-n">02</i>Pautas</a><a href="#mono" data-vw="mono"><i class="nx-n">03</i>Monocráticas</a><a href="#controles" data-vw="ctrl"><i class="nx-n">04</i>Monitoramento</a><a href="#cmt" data-vw="cmt" id="tab-cmt" hidden><i class="nx-n">05</i>Gabinete</a><span id="salvo"></span></nav></header>
+  <header class="nx"><div class="nx1"><span class="br"><i class="star" aria-hidden="true"></i></span><button class="nx-nav" id="nx-nav" type="button" aria-expanded="false" aria-controls="nx-tabs" title="Seções (Esc fecha)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span id="nx-nav-t">Mural</span></button><div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><div class="nx-cad"><b class="nx-on">Ex Officio<em>.</em></b><span class="nx-sl" aria-hidden="true">/</span><span class="eq-grp"><a class="eq-cmp" href="/modus/">Modus Operandi</a><span class="eq-dd" role="menu" aria-label="Seções do Modus Operandi"><a href="/modus/#v=ement">Ementário</a><b>Editorial</b><a href="/modus/#v=edit&amp;s=pecas">Minuta-Matriz</a><a href="/modus/#v=edit&amp;s=mod">Modelos</a><a href="/modus/#v=edit&amp;s=par">Banco de trechos</a><a href="/modus/#v=edit&amp;s=dir">Diretrizes</a><a href="/modus/#v=edit&amp;s=consulta">Consulta</a></span></span></div></div><nav class="tabs" id="nx-tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page"><i class="nx-n">01</i>Mural</a><a href="#pauta" data-vw="pauta"><i class="nx-n">02</i>Pautas</a><a href="#mono" data-vw="mono"><i class="nx-n">03</i>Monocráticas</a><a href="#controles" data-vw="ctrl"><i class="nx-n">04</i>Monitoramento</a><a href="#cmt" data-vw="cmt" id="tab-cmt" hidden><i class="nx-n">05</i>Gabinete</a><span id="salvo"></span></nav></header><span class="sp"></span><div class="nx-ut"><button class="hb hbx nx-tx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="c-not" hidden></i></button><div class="nx-mn" id="nx-mn"><button class="hb hbx nx-tx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="c-pen" hidden></i></button><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button><span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb ic" id="sair" title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button></div><button class="hb ic" id="nx-mais" type="button" title="Mais opções" aria-label="Mais opções" aria-expanded="false" aria-controls="nx-mn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
   <main id="v-inicio" class="home-v2">
     <section class="hc-hero" aria-label="Central de Entregas"><div class="hc-watermark" aria-hidden="true"></div>
       <div><small class="hc-ey">01 / Mural do gabinete</small><h1 id="ola-t">Mural <em>de entregas.</em></h1>
@@ -2463,9 +2453,8 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
   var mono=S.fonte==='mono',on=!!S.prt&&CTRLV.indexOf(S.fonte)<0,it=on?lista().filter(function(i){return dg(i.cnj)===S.prt;})[0]:null;
   [].forEach.call(document.querySelectorAll('#lst .prt-sel'),function(x){x.classList.remove('prt-sel');});
   if(!it){
-    /* sem processo escolhido o prontuário não some: mostra o retrato da sessão */
-    if(CTRLV.indexOf(S.fonte)>=0||window.innerWidth<1181){var era0=vp.classList.contains('prt-on');vp.classList.remove('prt-on');el.innerHTML='';prtPos();if(era0&&mono&&vp._ed)filaUrg();return;}
-    vp.classList.add('prt-on');el.removeAttribute('data-k');el.innerHTML=prtResumo(mono);prtPos();return;}
+    /* sem processo escolhido o prontuário sai da tela: ele volta ao clicar num processo */
+    var era0=vp.classList.contains('prt-on');vp.classList.remove('prt-on');el.removeAttribute('data-k');el.innerHTML='';prtPos();if(era0&&mono&&vp._ed)filaUrg();return;}
   var era2=vp.classList.contains('prt-on');vp.classList.add('prt-on');if(!era2&&mono&&vp._ed)filaUrg();var sel=document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(sel)sel.classList.add('prt-sel');
   var ativo=el.querySelector('.prt-pc')&&el.contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
   if(ativo&&el.getAttribute('data-k')===S.prt)return;
@@ -2513,38 +2502,11 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
   prtPos();}
 /* o painel fica parado na tela: mesma coluna da grade, preso ao topo (abaixo da barra) e ao rodapé da janela */
 var PRT_W=480;
-/* retrato da sessão, no lugar do prontuário enquanto nenhum processo está aberto */
-function prtResumo(mono){
-  var L=lista(),V=filtrar(),ss=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},mk=ss.marcos||{};
-  var cta={'A fazer':0,'Minutado':0,'Corrigido':0,'Liberado':0,'Assinada':0};
-  var alerta=0,inter=0,meta=0,semServ=0,porServ={};
-  L.forEach(function(i){var e=etapa(i);cta[e]=(cta[e]||0)+1;
-    if(alertas(i).length)alerta++;var c=i.ctl||{};if(c.intercor&&!c.intercorOk)inter++;if(c.meta)meta++;
-    if(!i.servidor)semServ++;else{var k=i.servidor;porServ[k]=porServ[k]||{n:0,f:0};porServ[k].n++;if(i.dataMinuta)porServ[k].f++;}});
-  var n=L.length,feito=(cta.Liberado||0)+(cta.Assinada||0),pct=n?Math.round(100*feito/n):0;
-  var med=function(r,v,c){return '<div class="prt-rm'+(c?' '+c:'')+'"><span>'+r+'</span><b>'+v+'</b></div>';};
-  var MK=[['pautarAte','Pautar até'],['inicioPreparacao','Início da preparação'],['entregaMinutas','Entrega das minutas'],['liberacao','Liberação']];
-  var marcos=MK.map(function(x){var d=mk[x[0]];if(!d)return '';var q=dias(hoje(),d);
-    return '<li class="'+(q<0?'ok':q<=3?'al':'')+'"><span>'+x[1]+'</span><time>'+esc(br(d).slice(0,5))+' · '+esc(quando(d))+'</time></li>';}).join('');
-  var eq=Object.keys(porServ).sort(function(a,b){return porServ[b].n-porServ[a].n;}).slice(0,6).map(function(k){
-    return '<li><span>'+esc(k)+'</span><time>'+porServ[k].f+'/'+porServ[k].n+'</time></li>';}).join('');
-  return '<section class="prt prt-rs" aria-labelledby="prt-rt">'+
-    '<div class="prt-h"><span class="prt-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5m0 14h16M8 16V9m4 7V6m4 10v-4"/></svg></span>'+
-    '<div><h2 id="prt-rt">'+(vpEd()?'Retrato <em>da sessão.</em>':'Retrato da sessão')+'</h2><small>'+(mono?'Monocráticas e urgências':'Sessão de '+esc(br(S.ses))+' · '+n+' processos')+'</small></div></div>'+
-    '<div class="prt-body">'+
-      '<div class="prt-rg">'+med('A fazer',cta['A fazer']||0,(cta['A fazer']?'al':''))+med('Minutados',cta.Minutado||0)+med('Corrigidos',cta.Corrigido||0)+med(mono?'Assinadas':'Liberados',mono?(cta.Assinada||0):(cta.Liberado||0),'ok')+'</div>'+
-      '<div class="prt-rb"><i style="width:'+pct+'%"></i></div><p class="prt-rp">'+pct+'% do caminho · '+feito+' de '+n+'</p>'+
-      '<div class="prt-rg2">'+med('Com alerta',alerta,(alerta?'al':''))+med('Intercorrências',inter,(inter?'al':''))+med('Metas',meta)+med('Sem minutante',semServ,(semServ?'al':''))+'</div>'+
-      (marcos?'<p class="prt-rk">Marcos</p><ul class="prt-rl">'+marcos+'</ul>':'')+
-      (eq?'<p class="prt-rk">Minutas por servidor</p><ul class="prt-rl">'+eq+'</ul>':'')+
-      '<p class="prt-rn">No filtro atual: '+V.length+' de '+n+'. Escolha um processo na lista para abrir o prontuário dele aqui.</p>'+
-    '</div></section>';}
-function vpEd(){var vp=$('#v-pauta');return !!(vp&&vp._ed);}
 function prtPos(){var vp=$('#v-pauta'),a=$('#prq'),p=a&&a.querySelector('.prt');
   if(!p||window.innerWidth<1181||!vp.classList.contains('prt-on')){vp.style.paddingRight='';if(p)p.style.left=p.style.width=p.style.top='';return;}
   vp.style.paddingRight='';var cs=getComputedStyle(vp),pr0=parseFloat(cs.paddingRight)||0,r=vp.getBoundingClientRect();vp.style.paddingRight=(pr0+PRT_W+34)+'px';
   var hd=document.querySelector('#app header'),hb=hd?hd.getBoundingClientRect().bottom:60;p.style.left=(r.right-pr0-PRT_W)+'px';p.style.width=PRT_W+'px';p.style.top=(Math.max(hb,0)+12)+'px';}
-window.addEventListener('resize',prtPos);window.addEventListener('scroll',prtPos,{passive:true});
+window.addEventListener('resize',prtPos);
 document.addEventListener('click',function(e){
   var t=e.target,b=t.closest&&t.closest('[data-prt],[data-prt-aba]');
   if(b&&b.closest('#prq')){if(b.hasAttribute('data-prt-aba')){S.prtAba=+b.getAttribute('data-prt-aba');[].forEach.call($('#prq').querySelectorAll('[data-prt-aba]'),function(x){x.setAttribute('aria-selected',String(x===b));});[].forEach.call($('#prq').querySelectorAll('[data-prt-p]'),function(x){x.hidden=x.getAttribute('data-prt-p')!==String(S.prtAba);});return;}
