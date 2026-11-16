@@ -6,11 +6,11 @@ Base de dados do gabinete do Desembargador Federal Carlos Muta (Turma Regional d
 
 ```
 acervo/                        processos em tramitação no gabinete
-  fonte.json · fonte.csv       acervo fonte: só os processos efetivamente no gabinete (em tarefa do gabinete no PJe ou no
-                               acervo do Power BI, tramitação e sigilosos); quem volta entra, quem é baixado/arquivado sai.
-                               Refeita a cada carga das três planilhas do dia por scripts/painel/atualizar_fonte.py
-                               (botão "Atualizar acervo fonte" → acervo/entrada/carga.json → Action acervo-fonte.yml,
-                               que também complementa com o DataJud, sem acrescentar processos)
+  fonte.json · fonte.csv       acervo fonte: processos em andamento no gabinete, com o paradeiro (tarefa do PJe) atualizado.
+                               Planilha principal (lista dos em andamento) define quem está e onde; complementares (Power BI,
+                               sigilosos, outras) só preenchem; lista de uma tarefa atualiza o paradeiro de quem veio nela.
+                               scripts/painel/atualizar_fonte.py · botão via padrao/acervo-fonte.js → acervo/entrada/carga.json
+                               → Action acervo-fonte.yml (também complementa com o DataJud, sem acrescentar processos)
   operacional.json             trabalho do gabinete, 1 registro por processo da fonte, em seções:
                                origem (aba Processo da Ficha) · triagem · producao · pauta (histórico de sessões);
                                servidor, corretor, datas e itens vêm também de acervo/sessoes/;

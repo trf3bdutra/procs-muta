@@ -1,19 +1,22 @@
 /* Atualizar acervo fonte · módulo comum (sem dependência de tela).
 
-   Regra (scripts/painel/atualizar_fonte.py): a fonte tem só os processos efetivamente no gabinete, isto é, em tarefa
-   do gabinete no PJe ou no acervo do Power BI (tramitação e sigilosos). Quem volta entra; quem foi baixado, arquivado
-   ou redistribuído sai (o trabalho registrado vai para acervo/operacional-arquivo.json e volta se o processo voltar).
-
-   Fluxo: o navegador lê as três planilhas do dia, guarda só as colunas usadas e grava acervo/entrada/carga.json no
-   procs-muta. O GitHub Action "Acervo fonte · atualizar" (.github/workflows/acervo-fonte.yml) aplica a regra,
-   complementa com o DataJud e grava fonte.json, fonte.csv, operacional.json e operacional-arquivo.json num commit.
+   Objetivo: a fonte (acervo/fonte.json) sempre atualizada quanto ao paradeiro de cada processo (tarefa do PJe).
+   Cada planilha escolhida tem um papel (sugerido pelo conteúdo; a tela deixa trocar antes de enviar):
+     principal     lista dos em andamento (PJe, com a coluna Tarefa): define quem está na fonte e onde está.
+                   Entra quem aparece; sai quem não aparece (o trabalho registrado vai para acervo/operacional-arquivo.json).
+     complementar  mais informações (Power BI, sigilosos, relação detalhada, outra): só preenche quem já está na fonte.
+     tarefa        lista de uma tarefa do PJe: atualiza o paradeiro de quem veio nela; quem estava naquela tarefa
+                   e não veio perde a tarefa (fica tarefa_anterior e saiu_da_tarefa_em), sem sair da fonte.
+   Fluxo: o navegador lê as planilhas, grava acervo/entrada/carga.json no procs-muta; o GitHub Action
+   "Acervo fonte · atualizar" aplica scripts/painel/atualizar_fonte.py, complementa com o DataJud e grava fonte.json,
+   fonte.csv, operacional.json e operacional-arquivo.json num commit.
 
    Uso numa página:
      <script src="/padrao/acervo-fonte.js"></script>
-     const r = await CMTAtualizarFonte.atualizar(arquivos, { XLSX, ProcsMuta, aviso: texto => ... });
-     // r = { commit, resumo, ignorados }; depois, recarregar acervo/fonte.json e acervo/operacional.json.
-   As três planilhas (escolhidas juntas, em qualquer ordem; o tipo vem do cabeçalho, não do nome):
-     PJe 2G · Painel Gerencial (.csv)     Power BI · Tramitação Total (.xlsx)     Power BI · Sigilosos (.xlsx)
+     const lidos = await CMTAtualizarFonte.classificar(arquivos, XLSX);  // [{nome, tipo, papel, processos, tarefas}]
+     // mostrar a lista; o usuário pode trocar o papel de cada uma
+     const r = await CMTAtualizarFonte.atualizar(null, { lidos, papeis: {'arquivo.csv': 'tarefa'}, XLSX, ProcsMuta, aviso: t => ... });
+     // r = { commit, mensagem, modo, resumo, ignorados }; depois, reler acervo/fonte.json e acervo/operacional.json.
 */
 (function (W) {
   'use strict';
@@ -74,41 +77,58 @@
     return out;
   }
 
-  /* tipo pelo cabeçalho; só as colunas usadas; só número de processo completo (20 dígitos; "Sigilo(...)" fica de fora) */
-  function planilha(linhas) {
-    var i = linhas.findIndex(function (l) { return (l || []).some(function (v) { v = String(v == null ? '' : v).trim(); return v === 'Processo' || v === 'Número do Processo'; }); });
+  var CHAVES = ['Número do Processo', 'Processo', 'processo', 'Nº Processo', 'Número Processo'];
+  var PII = /cpf|celular|telefone|e-?mail/i;
+  var PAPEIS = { principal: 'principal (em andamento)', complementar: 'complementar', tarefa: 'lista de uma tarefa' };
+
+  /* tipo pelo cabeçalho; papel padrão: PJe com 3+ tarefas = principal, com 1-2 = lista de tarefa; o resto = complementar.
+     Só número de processo completo (20 dígitos; "Sigilo(...)" fica de fora); sem colunas de CPF, telefone e e-mail. */
+  function planilha(linhas, nome) {
+    var i = linhas.findIndex(function (l) { return (l || []).some(function (v) { return CHAVES.indexOf(String(v == null ? '' : v).trim()) >= 0; }); });
     if (i < 0) return null;
     var H = linhas[i].map(function (v) { return String(v == null ? '' : v).trim(); }), tem = function (c) { return H.indexOf(c) >= 0; };
     var tipo = tem('Número do Processo') && tem('Tarefa') ? 'pje'
       : tem('Nível_Sigilo') ? 'sigilosos'
-      : tem('Processo') && (tem('Indicador') || tem('Tempo_de_Tramitação')) ? 'bi' : '';
-    if (!tipo) return null;
-    var cols = COLS[tipo], chave = cols[0], idx = {};
+      : tem('Processo') && (tem('Indicador') || tem('Tempo_de_Tramitação')) ? 'bi' : 'generica';
+    var cols = COLS[tipo] || H.filter(function (h) { return h && !PII.test(h); });
+    var chave = CHAVES.find(function (c) { return tem(c); }), idx = {};
     H.forEach(function (h, k) { if (cols.indexOf(h) >= 0 && !(h in idx)) idx[h] = k; });
-    var regs = [];
+    var regs = [], tarefas = {};
     linhas.slice(i + 1).forEach(function (l) {
       var o = {};
-      cols.forEach(function (c) { var v = c in idx ? l[idx[c]] : null; o[c] = v === undefined || v === '' ? null : v; });
-      if (String(o[chave] == null ? '' : o[chave]).replace(/\D/g, '').length === 20) regs.push(o);
+      cols.forEach(function (c) { if (!(c in idx)) return; var v = l[idx[c]]; o[c] = v === undefined || v === '' ? null : v; });
+      if (String(l[H.indexOf(chave)] == null ? '' : l[H.indexOf(chave)]).replace(/\D/g, '').length !== 20) return;
+      o[chave] = l[H.indexOf(chave)];
+      var t = o.Tarefa || o.tarefa_atual; if (t) tarefas[t] = (tarefas[t] || 0) + 1;
+      regs.push(o);
     });
-    return { tipo: tipo, regs: regs };
+    var nt = Object.keys(tarefas).length;
+    return { nome: nome || '', tipo: tipo, papel: tipo === 'pje' ? (nt >= 3 ? 'principal' : 'tarefa') : 'complementar',
+             processos: regs.length, tarefas: tarefas, linhas: regs };
   }
 
-  async function montarCarga(arquivos, X) {
-    var carga = { schema: 'gabA.acervo.carga', versao: 1, enviado_em: new Date().toISOString(), arquivos: {} }, ignorados = [];
+  /* lê os arquivos e devolve o que cada um é, para a tela mostrar e deixar trocar o papel antes de enviar */
+  async function classificar(arquivos, X) {
+    var out = [];
     for (var k = 0; k < arquivos.length; k++) {
       var f = arquivos[k];
       var linhas = /\.csv$/i.test(f.name) ? linhasCsv(await f.text()) : linhasXlsx(X, new Uint8Array(await f.arrayBuffer()));
-      var p = planilha(linhas);
-      if (!p) { ignorados.push(f.name); continue; }
-      if (carga[p.tipo]) throw new Error('Duas planilhas de ' + NOMES[p.tipo] + ': ' + carga.arquivos[p.tipo] + ' e ' + f.name + '. Escolha uma de cada.');
-      carga[p.tipo] = p.regs; carga.arquivos[p.tipo] = f.name;
+      var p = planilha(linhas, f.name);
+      out.push(p || { nome: f.name, tipo: '', papel: '', processos: 0, tarefas: {}, linhas: [], erro: 'sem coluna de número do processo' });
     }
-    var falta = ['pje', 'bi', 'sigilosos'].filter(function (t) { return !carga[t] || !carga[t].length; });
-    if (falta.length) throw new Error('Faltou ' + falta.map(function (t) { return NOMES[t]; }).join(' e ') +
-      '. A fonte só é refeita com as três planilhas do mesmo dia.' + (ignorados.length ? ' Não reconhecidas: ' + ignorados.join(', ') + '.' : ''));
-    return { carga: carga, ignorados: ignorados,
-             resumo: carga.pje.length + ' no PJe, ' + carga.bi.length + ' no Power BI, ' + carga.sigilosos.length + ' sigilosos' };
+    return out;
+  }
+
+  /* papeis: { 'nome do arquivo': 'principal' | 'complementar' | 'tarefa' } troca o papel sugerido */
+  function montarCarga(lidos, papeis) {
+    var ok = lidos.filter(function (p) { return p.tipo && p.processos; });
+    ok.forEach(function (p) { if (papeis && PAPEIS[papeis[p.nome]]) p.papel = papeis[p.nome]; });
+    if (!ok.length) throw new Error('Nenhuma planilha com número de processo.');
+    var pr = ok.filter(function (p) { return p.papel === 'principal'; });
+    var resumo = ok.map(function (p) { return p.nome + ' (' + PAPEIS[p.papel] + ', ' + p.processos + ')'; }).join(' · ');
+    return { resumo: resumo, modo: pr.length ? 'completa' : 'parcial', ignorados: lidos.filter(function (p) { return !p.tipo || !p.processos; }).map(function (p) { return p.nome; }),
+             carga: { schema: 'gabA.acervo.carga', versao: 2, enviado_em: new Date().toISOString(),
+                      arquivos: ok.map(function (p) { return { nome: p.nome, tipo: p.tipo, papel: p.papel, linhas: p.linhas }; }) } };
   }
 
   /* espera o commit do Action que consome a carga; se o token puder ler Actions, avisa o andamento e a falha */
@@ -142,14 +162,15 @@
     if (!PM || !PM.gravar) throw new Error('Gravação no procs-muta indisponível nesta página.');
     if (!PM.atual && PM.token) await PM.token('Para atualizar o acervo fonte.', true);
     aviso('Lendo as planilhas…');
-    var m = await montarCarga(Array.from(arquivos || []), X);
-    aviso('Enviando a carga ao procs-muta (' + m.resumo + ')…');
+    var lidos = o.lidos || await classificar(Array.from(arquivos || []), X);
+    var m = montarCarga(lidos, o.papeis);
+    aviso('Enviando ao procs-muta: ' + m.resumo + '…');
     var desde = new Date(Date.now() - 60000).toISOString();
-    var sha = await PM.gravar({ [CARGA]: JSON.stringify(m.carga) }, 'Acervo fonte: carga enviada pelo painel (' + m.resumo + ')');
-    aviso('Carga enviada (' + m.resumo + '). O GitHub aplica a regra do acervo e consulta o DataJud; leva alguns minutos.');
+    var sha = await PM.gravar({ [CARGA]: JSON.stringify(m.carga) }, 'Acervo fonte: carga ' + m.modo + ' enviada pelo painel (' + m.resumo + ')');
+    aviso('Carga enviada. O GitHub aplica a regra do acervo e consulta o DataJud; leva alguns minutos.');
     var cm = await acompanhar(PM, sha, desde, aviso, o.minutos);
-    return { commit: cm, mensagem: ((cm.commit || {}).message || '').split('\n')[0], resumo: m.resumo, ignorados: m.ignorados };
+    return { commit: cm, mensagem: ((cm.commit || {}).message || '').split('\n')[0], modo: m.modo, resumo: m.resumo, ignorados: m.ignorados };
   }
 
-  W.CMTAtualizarFonte = { atualizar: atualizar, montarCarga: montarCarga, planilha: planilha, linhasCsv: linhasCsv, linhasXlsx: linhasXlsx, CARGA: CARGA };
+  W.CMTAtualizarFonte = { atualizar: atualizar, classificar: classificar, montarCarga: montarCarga, planilha: planilha, linhasCsv: linhasCsv, linhasXlsx: linhasXlsx, PAPEIS: PAPEIS, CARGA: CARGA };
 })(typeof window !== 'undefined' ? window : globalThis);

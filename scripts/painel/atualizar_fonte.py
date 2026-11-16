@@ -1,26 +1,23 @@
 #!/usr/bin/env python3
-"""Acervo fonte = só os processos efetivamente no gabinete.
+"""Acervo fonte = processos em andamento no gabinete, com o paradeiro (tarefa do PJe) sempre atualizado.
 
 Uso:
-  python3 scripts/painel/atualizar_fonte.py --pje PAINEL_GERENCIAL.csv --bi TRAMITACAO.xlsx --sigilosos SIGILOSOS.xlsx [--raiz .]
-  python3 scripts/painel/atualizar_fonte.py --carga acervo/entrada/carga.json [--raiz .]
-      (carga gravada pelo botão "Atualizar acervo fonte" da Base do gabinete; o GitHub Action acervo-fonte.yml a processa)
+  python3 scripts/painel/atualizar_fonte.py --principal EM_ANDAMENTO.csv [--complementar X.xlsx ...] [--tarefa TAREFA.csv ...]
+  python3 scripts/painel/atualizar_fonte.py --carga acervo/entrada/carga.json
+      (carga gravada pelo botão "Atualizar acervo fonte" via padrao/acervo-fonte.js; o Action acervo-fonte.yml a processa)
 
-Fontes (as três juntas, sempre do mesmo dia):
-  --pje        PJe 2G · Painel Gerencial (CSV ";"): processos em tarefa do gabinete; tarefa, data de chegada,
-               prioridade e etiquetas.
-  --bi         Power BI · Tramitação Total do Gab. A (xlsx): acervo em tramitação, inclusive o que está
-               temporariamente na secretaria (prazo, intimação, juntada). Linhas "Sigilo(...)" são ignoradas.
-  --sigilosos  Power BI · acervo sigiloso do Gab. A (xlsx).
-
-Regra:
-  - Fica na fonte quem aparece em pelo menos uma das três planilhas.
-  - Quem volta ao gabinete entra de novo; quem não aparece em nenhuma (baixado, arquivado, redistribuído) sai.
-  - As colunas das planilhas são refeitas do zero a cada carga; ficam preservados só os dados que elas não trazem
-    (DataJud, advogados, DPU, MPF, distribuição no 1º grau, Seção Competente, classe/assunto do PJe).
-  - acervo/operacional.json acompanha a fonte 1:1. Quem sai e tinha trabalho registrado (pautas, triagem, produção)
-    vai para acervo/operacional-arquivo.json; se voltar, o registro é restaurado de lá. Histórico não se apaga.
-Idempotente: rodar de novo com as mesmas planilhas não muda nada.
+Papéis das planilhas:
+  principal     lista dos em andamento (PJe com a coluna Tarefa). Define quem está na fonte e onde está: entra quem
+                aparece, sai quem não aparece. Colunas de origem refeitas do zero.
+  complementar  mais informações: Power BI (tramitação), sigilosos ou outra planilha com número do processo. Só preenche
+                quem já está na fonte; Power BI e sigilosos refazem as suas colunas e as marcas Consta_Acervo_*.
+  tarefa        lista de uma tarefa do PJe. Atualiza o paradeiro de quem veio nela (e acrescenta quem faltava); quem estava
+                naquela tarefa e não veio perde a tarefa (tarefa_anterior, saiu_da_tarefa_em), sem sair da fonte.
+Sem planilha principal, a carga é parcial: ninguém sai da fonte.
+Sempre preservados: DataJud, advogados, DPU, MPF, 1º grau, Seção Competente.
+paradeiro_em = data da carga que confirmou ou mudou a tarefa.
+acervo/operacional.json acompanha a fonte 1:1. Quem sai e tinha trabalho registrado vai para acervo/operacional-arquivo.json;
+se voltar, o registro é restaurado de lá. Idempotente.
 """
 import argparse, csv, datetime, json, re, sys
 from pathlib import Path
@@ -55,30 +52,6 @@ def iso(d):
     return f"{m[3]}-{m[2]}-{m[1]}" if m else (d or "")
 
 
-def por_cnj(linhas, chave):
-    return {dig(x.get(chave)): x for x in linhas if len(dig(x.get(chave))) == 20}
-
-
-def ler_pje(p):
-    with open(p, encoding="utf-8-sig") as f:
-        return por_cnj(list(csv.DictReader(f, delimiter=";")), "Número do Processo")
-
-
-def ler_xlsx(p):
-    import openpyxl
-    ws = openpyxl.load_workbook(p, data_only=True).active
-    rows = list(ws.iter_rows(values_only=True))
-    i = next(i for i, r in enumerate(rows) if r and "Processo" in r)
-    return por_cnj([dict(zip(rows[i], r)) for r in rows[i + 1:] if r], "Processo")
-
-
-def ler_carga(p):
-    c = json.loads(Path(p).read_text(encoding="utf-8"))
-    pje = [{k: ("" if v is None else str(v)) for k, v in x.items()} for x in c.get("pje") or []]  # como no CSV
-    return (por_cnj(pje, "Número do Processo"), por_cnj(c.get("bi") or [], "Processo"),
-            por_cnj(c.get("sigilosos") or [], "Processo"))
-
-
 def com_trabalho(o):
     p = achatar(o)
     if p.get("pautas"): return True
@@ -99,63 +72,213 @@ def registro_operacional(proc, etiquetas, agora):
     return o
 
 
+PJE_CHAVE, BI_CHAVE = "Número do Processo", "Processo"
+CHAVES = ("Número do Processo", "Processo", "processo", "Nº Processo", "Número Processo")
+PII = re.compile(r"cpf|celular|telefone|e-?mail", re.I)
+# colunas de planilha genérica que viram campo da fonte (além das que já têm o mesmo nome na fonte)
+ALIAS = {"Tarefa": "tarefa_atual", "Tarefa Atual": "tarefa_atual", "tarefa atual": "tarefa_atual",
+         "Data de Chegada": "data_entrada_tarefa", "Data Entrada Tarefa": "data_entrada_tarefa",
+         "Classe Judicial": "classe_judicial", "Assunto Judicial": "assunto_judicial", "Etiquetas": "Etiquetas",
+         "Polo Ativo": "polo_ativo", "Polo Passivo": "polo_passivo", "Prioridade": "prioridade"}
+PARADEIRO = ("tarefa_atual", "data_entrada_tarefa", "tarefa_anterior", "saiu_da_tarefa_em", "paradeiro_em")
+
+
+def chave(linha):
+    for k in CHAVES:
+        if linha.get(k): return dig(linha[k])
+    return ""
+
+
+def tipo_de(linhas):
+    h = set().union(*[set(x) for x in linhas[:50]]) if linhas else set()
+    if "Número do Processo" in h and "Tarefa" in h: return "pje"
+    if "Nível_Sigilo" in h: return "sigilosos"
+    if "Processo" in h and ("Indicador" in h or "Tempo_de_Tramitação" in h): return "bi"
+    return "generica"
+
+
+def papel_padrao(tipo, linhas):
+    """PJe com várias tarefas = principal (lista dos em andamento); com uma ou duas = de tarefa; o resto = complementar."""
+    if tipo == "pje":
+        return "principal" if len({x.get("Tarefa") for x in linhas if x.get("Tarefa")}) >= 3 else "tarefa"
+    return "complementar"
+
+
+def arquivo(nome, linhas, tipo=None, papel=None):
+    linhas = [{k: ("" if v is None else v) for k, v in x.items() if not PII.search(str(k))} for x in linhas]
+    tipo = tipo or tipo_de(linhas)
+    if tipo == "pje": linhas = [{k: str(v) for k, v in x.items()} for x in linhas]
+    regs = {}
+    for x in linhas:
+        d = chave(x)
+        if len(d) == 20: regs[d] = x
+    return {"nome": nome, "tipo": tipo, "papel": papel or papel_padrao(tipo, linhas), "regs": regs,
+            "tarefas": sorted({x.get("Tarefa") or x.get("tarefa_atual") or "" for x in linhas} - {""})}
+
+
+def ler_planilha(p):
+    p = Path(p)
+    if p.suffix.lower() == ".csv":
+        with open(p, encoding="utf-8-sig") as f:
+            t = f.read()
+        sep = ";" if t.split("\n", 1)[0].count(";") >= t.split("\n", 1)[0].count(",") else ","
+        return list(csv.DictReader(t.splitlines(), delimiter=sep))
+    import openpyxl
+    ws = openpyxl.load_workbook(p, data_only=True).active
+    rows = list(ws.iter_rows(values_only=True))
+    i = next(i for i, r in enumerate(rows) if r and any(str(v or "").strip() in CHAVES for v in r))
+    h = [str(v or "").strip() for v in rows[i]]
+    return [{k: (val(v) if isinstance(v, datetime.datetime) else v) for k, v in zip(h, r) if k} for r in rows[i + 1:] if r]
+
+
+def ler_carga(p):
+    c = json.loads(Path(p).read_text(encoding="utf-8"))
+    if isinstance(c.get("arquivos"), list):                      # versão 2: lista de arquivos com papel
+        return [arquivo(a.get("nome", ""), a.get("linhas") or [], a.get("tipo"), a.get("papel")) for a in c["arquivos"]]
+    nomes = c.get("arquivos") or {}                               # versão 1: as três planilhas, todas principais
+    return [arquivo(nomes.get(t, t), c.get(t) or [], t, "principal") for t in ("pje", "bi", "sigilosos") if c.get(t)]
+
+
+def aplicar_pje(r, p):
+    r["tarefa_atual"] = p.get("Tarefa", ""); r["data_entrada_tarefa"] = iso(p.get("Data de Chegada", ""))
+    if "Prioridade" in p: r["prioridade"] = "Sim" if str(p["Prioridade"]).lower() in ("true", "sim", "1") else "Não"
+    if "Etiquetas" in p:
+        for k in ("Etiquetas", "etiquetas", "Etiquetas Originais"): r[k] = p["Etiquetas"]
+    for x, y in [("polo_ativo", "Polo Ativo"), ("polo_passivo", "Polo Passivo"), ("classe_judicial", "Classe"), ("assunto_judicial", "Assunto")]:
+        if not r.get(x) and p.get(y): r[x] = p[y]
+
+
+def aplicar_bi(r, b):
+    for c in BI_COLS:
+        v = f"{float(b[c]):.2f}" if c == "Valor_da_Causa" and b.get(c) not in (None, "") else val(b.get(c))
+        if v or r.get(c): r[c] = v
+    r["Consta_Acervo_Gab_A"] = "Sim"
+    for x, y in [("data_distribuição", "Data_Distribuição"), ("ultimo_movimento", "Última_Movimentação"),
+                 ("polo_ativo", "Polo_Ativo"), ("polo_passivo", "Polo_Passivo"), ("valor_causa", "Valor_da_Causa")]:
+        if r.get(y): r[x] = r[y]
+    if not r.get("classe_judicial") and r.get("Classe"): r["classe_judicial"] = r["Classe"]
+    if not r.get("assunto_judicial") and r.get("Assunto_Principal"): r["assunto_judicial"] = r["Assunto_Principal"]
+
+
+def aplicar_sig(r, s):
+    for c in ["Ano", "Mês", "Gabinete", "Data_Distribuição"] + SIG_COLS:
+        v = val(s.get(c))
+        if v and (c in SIG_COLS or not r.get(c)): r[c] = v
+    r["Consta_Acervo_Sigiloso"] = "Sim"
+    if not r.get("data_distribuição") and r.get("Data_Distribuição"): r["data_distribuição"] = r["Data_Distribuição"]
+
+
+def aplicar_generica(r, g, conhecidas):
+    n = 0
+    for k, v in g.items():
+        if k in CHAVES: continue
+        campo = ALIAS.get(k) or (k if k in conhecidas else None)
+        if not campo or v in (None, ""): continue
+        v = val(v)
+        if campo in ("Etiquetas",):
+            for e in ("Etiquetas", "etiquetas", "Etiquetas Originais"): r[e] = v
+        else:
+            r[campo] = iso(v) if campo.startswith("data") or campo.startswith("Data") else v
+        n += 1
+    return n
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pje"); ap.add_argument("--bi"); ap.add_argument("--sigilosos"); ap.add_argument("--carga")
-    ap.add_argument("--raiz", default=".")
+    ap.add_argument("--principal", action="append", default=[], help="lista dos em andamento: define quem está na fonte e onde")
+    ap.add_argument("--complementar", action="append", default=[], help="mais informações; só preenche quem já está na fonte")
+    ap.add_argument("--tarefa", action="append", default=[], help="lista de uma tarefa: atualiza o paradeiro de quem veio nela")
+    ap.add_argument("--pje"); ap.add_argument("--bi"); ap.add_argument("--sigilosos")   # forma antiga: as três como principais
+    ap.add_argument("--carga"); ap.add_argument("--raiz", default=".")
     a = ap.parse_args()
-    if not a.carga and not (a.pje and a.bi and a.sigilosos):
-        ap.error("informe --carga ou as três planilhas (--pje, --bi e --sigilosos)")
     raiz = Path(a.raiz); A = raiz / "acervo"
     agora = datetime.datetime.now(datetime.timezone.utc).isoformat()
     agora_z = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    pje, bi, sig = ler_carga(a.carga) if a.carga else (ler_pje(a.pje), ler_xlsx(a.bi), ler_xlsx(a.sigilosos))
-    if not (pje and bi and sig):
-        sys.exit("Falta uma das três planilhas (PJe, Power BI ou sigilosos) ou ela veio vazia: nada foi alterado.")
+    hoje = agora[:10]
+    if a.carga:
+        arqs = ler_carga(a.carga)
+    else:
+        arqs = [arquivo(f, ler_planilha(f), papel="principal") for f in [a.pje, a.bi, a.sigilosos] if f]
+        arqs += [arquivo(f, ler_planilha(f), papel=pp) for pp, fs in (("principal", a.principal), ("complementar", a.complementar), ("tarefa", a.tarefa)) for f in fs]
+    arqs = [x for x in arqs if x["regs"]]
+    if not arqs:
+        sys.exit("Nenhuma planilha com processos: nada foi alterado.")
 
     doc = json.loads((A / "fonte.json").read_text(encoding="utf-8"))
     antigos = {dig(r.get("processo") or r.get("Processo")): r for r in doc["registros"]}
-    ativos = set(pje) | set(bi) | set(sig)
-    st = {"pje": len(pje), "bi": len(bi), "sigilosos": len(sig), "ativos": len(ativos)}
+    conhecidas = set(doc.get("colunas", [])) | {k for r in doc["registros"] for k in r}
+    principais = [x for x in arqs if x["papel"] == "principal"]
+    de_tarefa = [x for x in arqs if x["papel"] == "tarefa"]
+    st = {"arquivos": [f'{x["nome"]} ({x["tipo"]}, {x["papel"]}, {len(x["regs"])})' for x in arqs]}
 
-    novos, mudou = [], False
-    for d in sorted(ativos):
+    # quem está na fonte: com principal, só quem aparece nela (+ quem veio nas listas de tarefa, que estão em tarefa do gabinete);
+    # sem principal, todos os de antes + os das listas de tarefa (ninguém sai)
+    da_tarefa = set().union(*[set(x["regs"]) for x in de_tarefa]) if de_tarefa else set()
+    membros = (set().union(*[set(x["regs"]) for x in principais]) | da_tarefa) if principais else (set(antigos) | da_tarefa)
+    st.update(modo="completa" if principais else "parcial", processos=len(membros))
+
+    regs, mudou = {}, False
+    for d in membros:
         velho = antigos.get(d)
-        r = {k: v for k, v in (velho or {}).items() if k not in REFEITAS}
-        p, b, s = pje.get(d), bi.get(d), sig.get(d)
-        proc = (p or {}).get("Número do Processo") or (b or {}).get("Processo") or (s or {}).get("Processo")
-        r.setdefault("id", "acv-" + d); r["processo"] = r.get("processo") or proc
-        if b:
-            for c in BI_COLS:
-                v = f"{float(b[c]):.2f}" if c == "Valor_da_Causa" and b.get(c) is not None else val(b.get(c))
-                if v: r[c] = v
-            r["Consta_Acervo_Gab_A"] = "Sim"
-            for x, y in [("data_distribuição", "Data_Distribuição"), ("ultimo_movimento", "Última_Movimentação"),
-                         ("polo_ativo", "Polo_Ativo"), ("polo_passivo", "Polo_Passivo"), ("valor_causa", "Valor_da_Causa")]:
-                if r.get(y): r[x] = r[y]
-        if s:
-            for c in ["Ano", "Mês", "Gabinete", "Data_Distribuição"] + SIG_COLS:
-                v = val(s.get(c))
-                if v and (c in SIG_COLS or not r.get(c)): r[c] = v
-            r["Consta_Acervo_Sigiloso"] = "Sim"
-            if not r.get("data_distribuição") and r.get("Data_Distribuição"): r["data_distribuição"] = r["Data_Distribuição"]
-        if p:
-            r["tarefa_atual"] = p["Tarefa"]; r["data_entrada_tarefa"] = iso(p["Data de Chegada"])
-            r["prioridade"] = "Sim" if p["Prioridade"] == "true" else "Não"
-            for k in ("Etiquetas", "etiquetas", "Etiquetas Originais"): r[k] = p["Etiquetas"]
-            for x, y in [("polo_ativo", "Polo Ativo"), ("polo_passivo", "Polo Passivo")]:
-                if not r.get(x) and p.get(y): r[x] = p[y]
-        cl = r.get("Classe") or (p or {}).get("Classe")
-        asn = r.get("Assunto_Principal") or (p or {}).get("Assunto")
-        if not r.get("classe_judicial") and cl: r["classe_judicial"] = cl
-        if not r.get("assunto_judicial") and asn: r["assunto_judicial"] = asn
+        r = dict(velho or {})
+        if principais:                                         # carga completa: colunas de origem refeitas do zero
+            r = {k: v for k, v in r.items() if k not in REFEITAS or k in PARADEIRO}
+        if not r:
+            x0 = next(x["regs"][d] for x in arqs if d in x["regs"])
+            r = {"id": "acv-" + d, "processo": x0.get("Número do Processo") or x0.get("Processo") or x0.get("processo")}
+        regs[d] = r
+
+    # paradeiro (tarefa): PJe principal manda em todos; lista de tarefa manda nas tarefas que ela cobre
+    pje_principal = [x for x in principais if x["tipo"] == "pje"]
+    tarefa_por = {}
+    for x in pje_principal + de_tarefa:
+        for d, p in x["regs"].items(): tarefa_por[d] = p
+    saiu_tarefa = 0
+    for d, r in regs.items():
+        if d in tarefa_por:
+            antes = r.get("tarefa_atual", "")
+            aplicar_pje(r, tarefa_por[d]); r.pop("tarefa_anterior", None); r.pop("saiu_da_tarefa_em", None)
+            if antes != r["tarefa_atual"] or not r.get("paradeiro_em"): r["paradeiro_em"] = hoje
+            continue
+        cobre = bool(pje_principal) or any(r.get("tarefa_atual") in x["tarefas"] for x in de_tarefa)
+        if cobre and r.get("tarefa_atual"):
+            r["tarefa_anterior"] = r["tarefa_atual"]; r["tarefa_atual"] = ""; r["data_entrada_tarefa"] = ""
+            r["saiu_da_tarefa_em"] = hoje; r["paradeiro_em"] = hoje; saiu_tarefa += 1
+        elif principais and not pje_principal:                 # principal sem tarefa (ex.: Power BI): mantém o paradeiro conhecido
+            pass
+    st["sairam_da_tarefa"] = saiu_tarefa
+
+    # complementos: Power BI e sigilosos são listas inteiras (refazem as suas colunas e a flag); genérica só preenche
+    for x in arqs:
+        if x["tipo"] == "bi":
+            for d, r in regs.items():
+                if d in x["regs"]: aplicar_bi(r, x["regs"][d])
+                elif r.get("Consta_Acervo_Gab_A"):
+                    r["Consta_Acervo_Gab_A"] = ""
+                    for c in BI_COLS:
+                        if r.get(c): r[c] = ""
+        elif x["tipo"] == "sigilosos":
+            for d, r in regs.items():
+                if d in x["regs"]: aplicar_sig(r, x["regs"][d])
+                elif r.get("Consta_Acervo_Sigiloso"):
+                    r["Consta_Acervo_Sigiloso"] = ""
+                    for c in SIG_COLS:
+                        if r.get(c): r[c] = ""
+        elif x["tipo"] == "generica":
+            st.setdefault("genericas", {})[x["nome"]] = sum(aplicar_generica(regs[d], g, conhecidas) for d, g in x["regs"].items() if d in regs)
+
+    novos = []
+    for d in sorted(regs):
+        r, velho = regs[d], antigos.get(d)
         if not r.get("Assunto") and r.get("assunto_judicial"): r["Assunto"] = r["assunto_judicial"]
-        for k in ("data_distribuição", "Data_Distribuição", "Data_Conclusão", "Data_Última_Movimentação", "dt_distribuicao_1g"):
+        for k in ("data_distribuição", "Data_Distribuição", "Data_Conclusão", "Data_Última_Movimentação", "dt_distribuicao_1g", "data_entrada_tarefa"):
             if isinstance(r.get(k), str): r[k] = iso(r[k])
+        r = {k: v for k, v in r.items() if not (v in ("", None) and (velho is None or k not in velho))}
         comparar = {k: v for k, v in r.items() if k != "atualizado_em"}
         if not velho or comparar != {k: v for k, v in velho.items() if k != "atualizado_em"}:
             r["atualizado_em"] = agora; mudou = True
         novos.append(r)
+    ativos = set(regs)
     st["entraram"] = len(ativos - set(antigos)); st["sairam"] = len(set(antigos) - ativos)
 
     usadas = {k for r in novos for k, v in r.items() if not vazio(v)}
@@ -163,13 +286,14 @@ def main():
     cols += sorted(usadas - set(cols) - {"id", "processo", "atualizado_em"})
     mudou = mudou or len(novos) != len(antigos) or cols != doc.get("colunas")
     doc.update(registros=novos, colunas=cols, atualizado_em=agora if mudou else doc.get("atualizado_em", agora),
-               regra="Só processos efetivamente no gabinete: em tarefa do gabinete no PJe ou no acervo do Power BI "
-                     "(tramitação e sigilosos). Entra quem volta; sai quem foi baixado, arquivado ou redistribuído. "
-                     "scripts/painel/atualizar_fonte.py")
+               regra="Fonte = processos em andamento no gabinete. A planilha principal (lista dos em andamento, com a tarefa do PJe) "
+                     "define quem está e onde está: entra quem aparece, sai quem não aparece. Complementares (Power BI, sigilosos, "
+                     "outras) só preenchem dados de quem já está. Lista de uma tarefa atualiza o paradeiro de quem veio nela; quem estava "
+                     "naquela tarefa e não veio perde a tarefa, sem sair da fonte. scripts/painel/atualizar_fonte.py")
     (A / "fonte.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     cel = lambda v: "" if v is None else ('"' + str(v).replace('"', '""') + '"' if re.search(r'[",\n\r]', str(v)) else str(v))
     linhas = [",".join(cel(c) for c in cols)] + [",".join(cel(r.get("processo") if c == "Processo" else r.get(c)) for c in cols) for r in novos]
-    (A / "fonte.csv").write_text("﻿" + "\r\n".join(linhas) + "\r\n", encoding="utf-8", newline="")
+    (A / "fonte.csv").write_text("\ufeff" + "\r\n".join(linhas) + "\r\n", encoding="utf-8", newline="")
 
     # operacional 1:1 com a fonte; quem sai com histórico vai para o arquivo; quem volta é restaurado
     op = json.loads((A / "operacional.json").read_text(encoding="utf-8"))
@@ -179,7 +303,6 @@ def main():
         "(baixados, arquivados, redistribuídos). Volta ao operacional se o processo voltar.", "registros": []}
     por = {dig(o["processo"]): o for o in op["registros"]}
     guardados = {dig(o["processo"]): o for o in arq["registros"]}
-    hoje = agora[:10]
     st.update(op_arquivados=0, op_descartados=0, op_restaurados=0, op_criados=0)
     for d, o in list(por.items()):
         if d in ativos: continue
