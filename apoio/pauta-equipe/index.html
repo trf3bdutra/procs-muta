@@ -1475,7 +1475,7 @@ function falha(e){if(e.status===401){entrada();return;}toast(e.message);$('#lst'
 function vigente(n,f,ses){return n===S.req&&S.fonte===f&&(f==='mono'||S.ses===ses);}
 function carregar(silencioso){
   var nReq=S.req=(S.req||0)+1,fReq=S.fonte,sReq=S.ses;
-  if(S.fonte==='ctrl'){$('#pt-ey').textContent='04 / Produção';$('#pt-t').innerHTML='Monitoramento <em>especial.</em>';$('#pt-st').textContent='';
+  if(S.fonte==='ctrl'){$('#pt-ey').textContent='04 / Acompanhamento';$('#pt-t').innerHTML='Monitoramento <em>especial.</em>';$('#pt-st').textContent='';
     return Promise.all([carregarMetas(silencioso),carregarSobr(silencioso),carregarSens(silencioso)]).then(ctlConta,ctlConta);}
   if(S.fonte==='sobr'){$('#pt-ey').textContent='Monitoramento / Sobrestados e suspensos';$('#pt-t').textContent='Sobrestados';$('#pt-st').textContent='';return carregarSobr(silencioso);}
   if(S.fonte==='metas'){$('#pt-ey').textContent='Monitoramento / Metas do CNJ';$('#pt-t').textContent='Metas';$('#pt-st').textContent='';return carregarMetas(silencioso);}
