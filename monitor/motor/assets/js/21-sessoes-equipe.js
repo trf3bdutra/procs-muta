@@ -1818,6 +1818,17 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     aba: function () { return root && !root.hidden ? UI.aba : ''; },
     novaSessao: function (data) { if (!/^\d{4}-\d{2}-\d{2}$/.test(data || '')) return { erro: 'Informe a data do julgamento.' }; if (S.sessoes.some(function (x) { return x.data === data; })) return { erro: 'Já existe a sessão de ' + br(data) + '.' }; var ns = novaSessao(data); S.sessoes.push(ns); marcosParaPainel(ns); salvar(); if (root && !root.hidden) render(); return { id: ns.id }; },
     fase: function (id, k, v) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; sf.fases = sf.fases || {}; sf.fases[k] = v || ''; salvar(); marcosParaPainel(sf); if (root && !root.hidden) render(); return true; },
+    /* muda a data da sessão: o JSON da pauta passa a AAAA-MM-DD.json da nova data e o antigo é apagado na próxima gravação */
+    data: function (id, nova) { nova = String(nova || '').slice(0, 10); if (!/^\d{4}-\d{2}-\d{2}$/.test(nova)) return { erro: 'Data inválida.' };
+      var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return { erro: 'Sessão não encontrada.' }; var velha = sf.data; if (velha === nova) return { ok: true };
+      if (S.sessoes.some(function (x) { return x !== sf && x.data === nova; })) return { erro: 'Já existe sessão em ' + br(nova) + '.' };
+      sf.data = nova; if ((S.sync || {})['ses:' + velha]) { S.apagadas = (S.apagadas || []).filter(function (d) { return d !== nova; }); if (S.apagadas.indexOf(velha) < 0) S.apagadas.push(velha); }
+      HIST = null; salvar(); marcosParaPainel(sf); if (root && !root.hidden) render(); return { ok: true, de: velha, para: nova }; },
+    /* critérios de designação (apoio/regras/designacao.json): ordem e interruptores Designa (d) e Corrige (c) */
+    desigDefinir: function (ordem, on) { if (!S.desig) S.desig = { ordem: CRIT.slice(), on: {}, rows: {}, equilibrar: true };
+      if (Array.isArray(ordem)) { var o = ordem.filter(function (k) { return CRIT.indexOf(k) >= 0; }); CRIT.forEach(function (k) { if (o.indexOf(k) < 0) o.push(k); }); S.desig.ordem = o; }
+      if (on && typeof on === 'object') Object.keys(on).forEach(function (k) { if (CRIT.indexOf(k) < 0) return; S.desig.on[k] = { d: on[k].d !== false, c: on[k].c !== false }; });
+      HIST = null; salvar(); return true; },
     hora: function (id, v) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; sf.hora = v || ''; salvar(); if (root && !root.hidden) render(); return true; },
     pronta: function (id, quando) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; sf.pronta = quando || ''; salvar(); if (root && !root.hidden) render(); return true; },
     linhas: function (id, versao) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return [];
