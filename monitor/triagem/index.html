@@ -89,15 +89,17 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 .chip b{font-weight:700}
 .e{font:600 11px "JetBrains Mono",monospace;color:var(--m)}
 .pop{position:absolute;z-index:40;background:var(--w);border:1px solid var(--b2);border-radius:10px;box-shadow:0 14px 36px rgba(23,63,61,.2)}
-#crit-pop{width:min(560px,calc(100vw - 32px));padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+#crit-pop{width:min(780px,calc(100vw - 32px));padding:16px 18px;display:flex;flex-direction:column;gap:12px}
 #crit-pop label.f{display:flex;flex-direction:column;gap:4px;font:600 12px Figtree,sans-serif;color:var(--m2)}
 .vals{border:1px solid #e3ded2;border-radius:8px}
 .vals .vh{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid #e3ded2}
 .vals .vh input{flex:1;border:0;outline:0}
-.vals .vl{display:flex;flex-direction:column;max-height:220px;overflow:auto;padding:4px 0;font-size:13px}
-.vals .vl label{display:flex;justify-content:space-between;gap:8px;padding:5px 12px;cursor:pointer}
+.vals .vl{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:2px 6px;max-height:260px;overflow:auto;padding:6px;font-size:12.5px;background:#fbfaf5}
+.vals .vl label{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 6px;cursor:pointer;border-radius:5px;min-width:0}.vals .vl .vt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vals .vl .bd{font:500 10.5px 'JetBrains Mono',monospace;background:#e3ecf2;color:#24506f;border-radius:999px;padding:1px 7px;flex:none}
 .vals .vl label:hover{background:#f6f4ee}
 .vals .vl label span:first-child{display:flex;gap:8px;align-items:center;min-width:0}
+.acf{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:start;padding:12px 16px;border:1px solid var(--b);background:var(--p);border-radius:8px}.acf .big{font:500 30px 'JetBrains Mono',monospace;color:var(--v);line-height:1.1}.acf .pre{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.acf .pre button{height:30px;padding:0 12px;border:1px solid var(--b2);background:var(--w);border-radius:999px;font:700 12.5px Figtree,sans-serif;cursor:pointer}.acf .pre button.on{background:var(--v);border-color:var(--v);color:#fff}.acf .gs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.acf .gs button{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--b);background:var(--w);border-radius:999px;font:600 12.5px Figtree,sans-serif;cursor:pointer;color:var(--tx)}.acf .gs button i{width:9px;height:9px;border-radius:50%;border:2px solid var(--c);display:inline-block}.acf .gs button.on{background:#eef4f1;border-color:var(--v2)}.acf .gs button.on i{background:var(--c)}.acf .gs button b{font:500 11.5px 'JetBrains Mono',monospace;color:var(--m)}
+.etp{border:1px solid var(--b);background:var(--p);border-radius:8px}.etp .eh{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--l)}.etp .eh .hs{width:28px;height:28px;border-radius:50%;background:#e3ecf2;color:var(--az);display:grid;place-items:center;font-weight:700}.etp .eg{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;padding:10px 14px 14px}.etp .eg button{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:34px;padding:4px 6px 4px 10px;border:1px solid var(--b);background:var(--w);border-radius:8px;font:600 12.5px Figtree,sans-serif;color:var(--tx);cursor:pointer;text-align:left;min-width:0}.etp .eg button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.etp .eg button b{font:500 10.5px 'JetBrains Mono',monospace;background:#e3ecf2;color:var(--az);border-radius:999px;padding:1px 7px;flex:none}.etp .eg button.in{background:var(--v);border-color:var(--v);color:#fff}.etp .eg button.in b{background:rgba(255,255,255,.18);color:#fff}.etp .eg button.out{background:#fbefec;border-color:var(--r2);color:var(--r);text-decoration:line-through}
 .fl-grid{display:grid;grid-template-columns:240px minmax(0,1fr)}
 .rail{padding:16px 18px 40px 0;border-right:1px solid var(--b);display:flex;flex-direction:column;gap:14px;min-width:0}
 .gh{display:flex;width:100%;align-items:center;justify-content:space-between;height:24px;margin:0 0 4px;padding:0 2px;border:0;background:transparent;cursor:pointer;color:var(--g)}
@@ -284,7 +286,9 @@ const DESF = [];
 let ABA = 'inicio', ABERTAS = LS.get('tri_abas', []);
 const SEL = new Set();
 const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], ['Vinho', '#8a2f22'], ['Cinza', '#8a948f'], ['Roxo', '#6a4fb3']];
-const F = { modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
+const GRUPOS = [['triar', 'Em triagem', '#a57829'], ['nc', 'Não classificadas', '#8a2f22'], ['pauta', 'Já na pauta', '#173f3d'], ['producao', 'Em produção', '#4b7fa8'], ['sobrestados', 'Sobrestados', '#8a70c0'], ['distribuicao', 'Análise da distribuição', '#3b7150'], ['secretaria', 'Com a secretaria', '#8a948f'], ['sem', 'Sem tarefa do gabinete', '#b3ab9c']];
+const PRESETS = [['triagem', 'Em triagem', ['triar']], ['gabinete', 'Em tarefa do gabinete', ['triar', 'nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria']], ['fora', 'Fora da triagem', ['nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria', 'sem']], ['todos', 'Todos na fonte', GRUPOS.map((g) => g[0])]];
+const F = { base: LS.get('tri_base', ['triar']), etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
 const FE = { q: '', lim: 100, ver: 'lista' };
 
 function escDe(d) { for (const e of ESC.escaninhos) if (e._set && e._set.has(d)) return e; return null; }
@@ -315,10 +319,12 @@ function construir() {
   /* o paradeiro (tarefa, etiquetas, prioridade) vem da fonte do procs-muta, não da cópia do navegador; da cópia vem só o trabalho do gabinete */
   const MR = new Map(); R.forEach((r) => { const d = dg(r.Processo || r.processo); if (d) MR.set(d, r); });
   const F0 = FONTE || R;
-  U = []; NOVAS = [];
-  F0.forEach((f) => { const t = String(f.tarefa_atual || '').trim(); if (!t) return; const d = dg(f.processo || f.Processo); let r = MR.get(d); if (!r) { r = { Processo: fmtCnj(d) }; }
-    const k = nzT(t); if (TRIAR.has(k)) U.push(proc(f, r)); else if (ESCOPO.lido && !IGN.has(k)) { const o = proc(f, r); o.nova = true; NOVAS.push(o); } });
-  ALL = U.concat(NOVAS); IDX = new Map(ALL.map((o) => [o.d, o]));
+  U = []; NOVAS = []; ALL = [];
+  F0.forEach((f) => { const t = String(f.tarefa_atual || '').trim(), d = dg(f.processo || f.Processo); if (d.length !== 20) return; let r = MR.get(d); if (!r) { r = { Processo: fmtCnj(d) }; }
+    const k = nzT(t), o = proc(f, r);
+    o.grupo = !t ? 'sem' : TRIAR.has(k) ? 'triar' : IGN.has(k) ? IGN.get(k) : (ESCOPO.lido ? 'nc' : 'sem');
+    ALL.push(o); if (o.grupo === 'triar') U.push(o); else if (o.grupo === 'nc') { o.nova = true; NOVAS.push(o); } });
+  IDX = new Map(ALL.map((o) => [o.d, o]));
   ALL.forEach((o) => { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); });
   for (const d of [...SEL]) if (!IDX.has(d)) SEL.delete(d); }
 function refazDest(o) { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
@@ -515,7 +521,7 @@ function chipsAtivos() { const ch = [];
   F.etIn.forEach((e) => ch.push(['<b>Etiqueta</b> tem ' + esc(e), 'etIn', e, false])); F.etOut.forEach((e) => ch.push(['<b>Etiqueta</b> não tem ' + esc(e), 'etOut', e, true]));
   return ch; }
 function vFila() {
-  const L = ordenar(filtrar(F.conj ? ALL : U)); FILA = L;
+  const L = ordenar(filtrar(F.conj ? ALL : BASE())); FILA = L;
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
   let h = '<div class="wrap"><div class="fl-cab"><div class="fl-l1" style="position:relative">' +
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
@@ -527,19 +533,31 @@ function vFila() {
     '<span style="position:relative"><button type="button" class="btn" id="bt-exp" aria-expanded="false">Exportar ▾</button></span></div>';
   if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), fora = [...s].filter((d) => !IDX.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + ' entre os em triagem' + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
   h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · todos os em triagem</span>') +
-    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div></div>';
+    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + painelBase() + '</div>';
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
-  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(U.length) + ' em triagem</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
+  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + ' no acervo filtrado</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
   if (F.statsAberto) h += stats(L);
+  h += painelEtq(L);
   h += lista(L, F, 'fila') + '</div></div></div>';
   return h; }
 let FILA = [];
+function BASE() { const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
+function painelBase() { const cnt = {}; ALL.forEach((o) => { cnt[o.grupo] = (cnt[o.grupo] || 0) + 1; }); const S = new Set(F.base), n = ALL.filter((o) => S.has(o.grupo)).length;
+  const pr = PRESETS.find((p) => p[2].length === F.base.length && p[2].every((g) => S.has(g)));
+  return '<section class="acf" aria-label="Acervo filtrado"><div><p class="k" style="margin:0;color:var(--m)">Acervo filtrado</p><b style="display:block;font-size:13px;color:var(--g)">' + esc(pr ? pr[1] : 'Seleção própria') + '</b><span class="big">' + nf(n) + '</span><span style="display:block;font-size:12px;color:var(--m)">processos nos grupos marcados · ' + nf(ALL.length) + ' na fonte</span></div>' +
+    '<div><div class="pre">' + PRESETS.map((p) => '<button type="button" data-preset="' + p[0] + '" class="' + (pr && pr[0] === p[0] ? 'on' : '') + '">' + p[1] + '</button>').join('') + '<span style="font-size:12px;color:var(--m)">' + (F.conj ? 'conjunto do Início ativo: os grupos não se aplicam' : 'grupos pela tarefa do PJe (regras gerais › escopo)') + '</span></div>' +
+    '<div class="gs">' + GRUPOS.filter((g) => cnt[g[0]]).map((g) => '<button type="button" data-grupo="' + g[0] + '" class="' + (S.has(g[0]) ? 'on' : '') + '" style="--c:' + g[2] + '"><i></i>' + g[1] + ' <b>' + nf(cnt[g[0]]) + '</b></button>').join('') + '</div></div></section>'; }
+function painelEtq(L) { const C = contar(L, (o) => o.etq), q = nz(F.etqQ), V = C.filter((x) => !q || nz(x[0]).indexOf(q) >= 0);
+  let h = '<section class="etp" aria-label="Etiquetas dos processos filtrados"><div class="eh"><span class="hs">#</span><div style="flex:1"><p class="k" style="margin:0;color:var(--v)">Etiquetas dos processos filtrados</p><span style="font-size:12px;color:var(--m)">' + nf(C.length) + ' etiqueta(s) · ' + nf(L.length) + ' processo(s) filtrado(s)</span></div><span class="mono" style="font-size:12px;background:#e3ecf2;color:var(--az);border-radius:999px;padding:2px 9px">' + nf(C.length) + '</span><button type="button" class="lk" data-etqp>' + (F.etqAberto ? 'Recolher ▴' : 'Abrir ▾') + '</button></div>';
+  if (!F.etqAberto) return h + '</section>';
+  h += '<div style="display:flex;gap:12px;align-items:center;padding:10px 14px 0;flex-wrap:wrap"><input type="search" id="etq-q" value="' + esc(F.etqQ) + '" placeholder="Buscar nas etiquetas dos filtrados…" aria-label="Buscar nas etiquetas" style="flex:1 1 280px;height:32px;padding:0 10px"><span style="font-size:12px;color:var(--m)">contagem = processos filtrados com a etiqueta · clique: incluir · de novo: excluir · de novo: tirar</span></div>';
+  return h + '<div class="eg">' + V.slice(0, 300).map((x) => { const st = F.etIn.indexOf(x[0]) >= 0 ? 'in' : F.etOut.indexOf(x[0]) >= 0 ? 'out' : ''; return '<button type="button" class="' + st + '" data-etqc="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><span>' + esc(x[0]) + '</span><b>' + nf(x[1]) + '</b></button>'; }).join('') + (V.length ? '' : '<span style="color:var(--m);font-size:12.5px">nenhuma etiqueta</span>') + '</div></section>'; }
 function rail() {
   const blk = (f, tit, ent, extra) => { const ab = !!F.rail[f]; return '<div><button type="button" class="gh" data-rail="' + f + '" aria-expanded="' + ab + '"><span class="k">' + tit + '</span><span>' + (extra || '') + (ab ? '▾' : '▸') + '</span></button>' + (ab ? ent() : '') + '</div>'; };
-  const fac = (f, fn, lim) => () => { const C = contar(filtrar(U, f), fn); const sel = F.fac[f]; const L = C.slice(0, F.rail[f + 'Todos'] ? 400 : (lim || 8));
+  const fac = (f, fn, lim) => () => { const C = contar(filtrar(F.conj ? ALL : BASE(), f), fn); const sel = F.fac[f]; const L = C.slice(0, F.rail[f + 'Todos'] ? 400 : (lim || 8));
     sel.forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
     return L.map((x) => '<button type="button" class="rl' + (sel.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-fac="' + f + '" data-v="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><em>' + esc(x[0]) + '</em><span>' + nf(x[1]) + '</span></button>').join('') + (C.length > (lim || 8) ? '<button type="button" class="lk" data-todos="' + f + '" style="padding:4px 9px">' + (F.rail[f + 'Todos'] ? 'menos' : 'todos (' + C.length + ')') + '</button>' : ''); };
-  const etq = () => { const C = contar(filtrar(U, 'etq'), (o) => o.etq), L = C.slice(0, F.rail.etqTodos ? 400 : 10);
+  const etq = () => { const C = contar(filtrar(F.conj ? ALL : BASE(), 'etq'), (o) => o.etq), L = C.slice(0, F.rail.etqTodos ? 400 : 10);
     F.etIn.concat(F.etOut).forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
     return '<p style="margin:0 0 4px;font-size:11.5px;color:var(--m)">+ só com a etiqueta · − sem ela</p>' + L.map((x) => '<div class="et"><em title="' + esc(x[0]) + '">' + esc(x[0]) + ' <span class="mono" style="font-size:11px;color:var(--m)">' + nf(x[1]) + '</span></em><span class="pm"><button type="button" class="' + (F.etIn.indexOf(x[0]) >= 0 ? 'on' : '') + '" data-etin="' + esc(x[0]) + '" aria-label="Só com ' + esc(x[0]) + '">+</button><button type="button" class="neg' + (F.etOut.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-etout="' + esc(x[0]) + '" aria-label="Sem ' + esc(x[0]) + '">−</button></span></div>').join('') + (C.length > 10 ? '<button type="button" class="lk" data-todos="etq" style="padding:4px 0">' + (F.rail.etqTodos ? 'menos' : 'todas (' + C.length + ')') + '</button>' : ''); };
   return blk('secao', 'Seção', fac('secao', (o) => o.secao, 5)) + blk('classe', 'Classe', fac('classe', (o) => o.cl, 6)) + blk('assunto', 'Assunto', fac('assunto', (o) => o.assunto, 8)) + blk('tarefa', 'Tarefa do PJe', fac('tarefa', (o) => o.tarefa || 'Sem tarefa', 8)) + blk('prior', 'Prioridade legal', fac('prior', (o) => o.prior ? 'Sim' : 'Não', 2)) + blk('etq', 'Etiquetas', etq); }
@@ -580,21 +598,21 @@ function abrirCrit(btn, edit) {
   D.body.appendChild(p); pintaCrit(); btn.setAttribute('aria-expanded', 'true'); }
 function pintaCrit() { const p = $('#crit-pop'); if (!p || !CP) return; const c = CP.c, data = /^(desde|dist)$/.test(c.campo);
   if (data && !/^(between|empty|notempty)$/.test(c.cond)) c.cond = 'between'; if (!data && c.cond === 'between') c.cond = 'in';
-  const base = filtrar(U).concat([]), outros = F.crit.filter((x, i) => i !== CP.edit);
-  const pre = U.filter((o) => outros.every((x) => passaCrit(o, x)));
-  const C = data ? [] : contar(pre, (o) => valDe(o, c.campo)).filter((x) => !CP.filtro || nz(x[0]).indexOf(nz(CP.filtro)) >= 0).slice(0, 300);
-  const prev = U.filter((o) => outros.every((x) => passaCrit(o, x)) && (c.cond === 'in' && !c.vals.length && !c.trechos.length ? true : passaCrit(o, c))).length;
+  const outros = F.crit.filter((x, i) => i !== CP.edit), guard = F.crit; F.crit = outros; const pre = filtrar(F.conj ? ALL : BASE()); F.crit = guard;
+  const C = data ? [] : contar(pre, (o) => valDe(o, c.campo)).filter((x) => !CP.filtro || nz(x[0]).indexOf(nz(CP.filtro)) >= 0).slice(0, 600);
+  const prev = pre.filter((o) => (c.cond === 'in' && !c.vals.length && !c.trechos.length ? true : passaCrit(o, c))).length, todosC = data ? [] : contar(pre, (o) => valDe(o, c.campo));
   p.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14.5px;color:var(--v)">' + (CP.edit != null ? 'Editar critério' : 'Novo critério') + '</b><button type="button" class="x" data-cp="fechar" aria-label="Fechar">×</button></div>' +
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">Campo<select data-cp="campo">' + CAMPOS.map((x) => '<option value="' + x[0] + '"' + (x[0] === c.campo ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select></label>' +
     '<label class="f">Condição<select data-cp="cond">' + CONDS.filter((x) => data ? /^(between|empty|notempty)$/.test(x[0]) : x[0] !== 'between').map((x) => '<option value="' + x[0] + '"' + (x[0] === c.cond ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select></label></div>' +
     (data ? (c.cond === 'between' ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">De<input type="date" data-cp="de" value="' + esc(c.de) + '"></label><label class="f">Até<input type="date" data-cp="ate" value="' + esc(c.ate) + '"></label></div>' : '')
       : /empty/.test(c.cond) ? '' :
-      '<div class="vals"><div class="vh"><input type="search" data-cp="filtro" placeholder="Filtrar os valores" value="' + esc(CP.filtro) + '" aria-label="Filtrar os valores"><button type="button" class="lk" data-cp="todos">marcar todos</button><button type="button" class="lk" data-cp="nenhum" style="color:var(--m)">nenhum</button></div><div class="vl">' +
-      C.map((x) => '<label><span><input type="checkbox" data-cpv="' + esc(x[0]) + '"' + (c.vals.indexOf(x[0]) >= 0 ? ' checked' : '') + '> <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(x[0]) + '</span></span><span class="mono" style="font-size:11.5px;color:var(--m)">' + nf(x[1]) + '</span></label>').join('') + (C.length ? '' : '<span style="padding:6px 12px;color:var(--m)">nenhum valor</span>') + '</div></div>' +
+      '<p class="k" style="margin:0">Valores existentes · múltiplos</p><div class="vals"><div class="vh"><input type="search" data-cp="filtro" placeholder="Buscar nos valores existentes…" value="' + esc(CP.filtro) + '" aria-label="Filtrar os valores"><button type="button" class="lk" data-cp="todos">marcar todos</button><button type="button" class="lk" data-cp="nenhum" style="color:var(--m)">nenhum</button></div><div class="vl">' +
+      C.map((x) => '<label title="' + esc(x[0]) + '"><span><input type="checkbox" data-cpv="' + esc(x[0]) + '"' + (c.vals.indexOf(x[0]) >= 0 ? ' checked' : '') + '> <span class="vt">' + esc(x[0]) + '</span></span><span class="bd">' + nf(x[1]) + '</span></label>').join('') + (C.length ? '' : '<span style="padding:6px 12px;color:var(--m)">nenhum valor</span>') + '</div></div>' +
+      '<p style="margin:-6px 0 0;font-size:11.5px;color:var(--m)">' + nf(C.length) + ' de ' + nf(todosC.length) + ' valor(es) · contagem no acervo filtrado' + (c.vals.length ? ' · ' + nf(c.vals.length) + ' marcado(s)' : ' · nenhum marcado: você pode usar só os trechos livres') + '</p>' +
       '<label class="f">Trechos livres (um por linha)<textarea data-cp="trechos" rows="2" placeholder="ex.: aposentadoria">' + esc(c.trechos.join('\n')) + '</textarea></label>') +
     '<p style="margin:0;font-size:12px;line-height:1.5;color:var(--m)">Valores marcados no mesmo critério se somam (<b>ou</b>). Critérios diferentes se cruzam (<b>e</b>). As contagens já consideram os outros critérios.</p>' +
     '<div style="display:flex;justify-content:flex-end;gap:8px"><button type="button" class="btn" data-cp="fechar">Cancelar</button><button type="button" class="btn pri" data-cp="aplicar">Aplicar · ' + nf(prev) + ' processos</button></div>';
-  void base; }
+  }
 D.addEventListener('input', (e) => { const t = e.target; if (!CP || !t.closest('#crit-pop')) return; const k = t.dataset.cp;
   if (k === 'filtro') { CP.filtro = t.value; const pos = t.selectionStart; pintaCrit(); const n = $('#crit-pop [data-cp=filtro]'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }
   else if (k === 'trechos') CP.c.trechos = t.value.split('\n').map((s) => s.trim()).filter(Boolean);
@@ -769,6 +787,7 @@ let T_Q = null;
 D.addEventListener('input', (e) => { const t = e.target;
   if (t.id === 'fl-q') { F.q = t.value; F.lim = 100; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#fl-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); }
   else if (t.id === 'fl-lote') { F.lote = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#fl-lote'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 400); }
+  else if (t.id === 'etq-q') { F.etqQ = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#etq-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); }
   else if (t.id === 'es-q') { FE.q = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#es-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); } });
 D.addEventListener('click', (e) => { const t = e.target;
   if (!t.closest('.pop') && !t.closest('#bt-crit') && !t.closest('#bt-exp') && !t.closest('#bt-expe')) fecharPops();
@@ -781,6 +800,10 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
   if ((b = q('[data-esc-conj]'))) { const r = REG[b.dataset.escConj]; if (!r) return; editarEscaninho(null, (ne) => { const ds = r.ids; setTimeout(() => acao('Guardado em ' + ne.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [ne.id] })), 0); }); const ti = $('#ge-t'); if (ti) ti.value = r.rot; return; }
   if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
+  if ((b = q('[data-preset]'))) { const p = PRESETS.find((x) => x[0] === b.dataset.preset); F.base = p[2].slice(); LS.set('tri_base', F.base); F.lim = 100; render(); return; }
+  if ((b = q('[data-grupo]'))) { const g = b.dataset.grupo, i = F.base.indexOf(g); if (i >= 0) { if (F.base.length > 1) F.base.splice(i, 1); } else F.base.push(g); LS.set('tri_base', F.base); F.lim = 100; render(); return; }
+  if (q('[data-etqp]')) { F.etqAberto = !F.etqAberto; LS.set('tri_etqp', F.etqAberto); render(); return; }
+  if ((b = q('[data-etqc]'))) { const v = b.dataset.etqc; if (F.etIn.indexOf(v) >= 0) { F.etIn = F.etIn.filter((x) => x !== v); F.etOut = F.etOut.concat(v); } else if (F.etOut.indexOf(v) >= 0) F.etOut = F.etOut.filter((x) => x !== v); else F.etIn = F.etIn.concat(v); F.lim = 100; render(); return; }
   if ((b = q('[data-modo]'))) { F.modo = b.dataset.modo; render(); return; }
   if ((b = q('[data-ver]'))) { F.ver = b.dataset.ver; F.lim = F.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('[data-verE]'))) { FE.ver = b.dataset.vere || b.getAttribute('data-verE'); FE.lim = FE.ver === 'lista' ? 100 : 30; render(); return; }
