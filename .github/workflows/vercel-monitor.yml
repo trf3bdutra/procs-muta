@@ -10,7 +10,7 @@ name: CMT-monitor na Vercel
 on:
   push:
     branches: [main]
-    paths: ["monitor/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml"]
+    paths: ["monitor/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml", "padrao/acervo-fonte.js"]
   # o commit do Base (feito com o GITHUB_TOKEN) não dispara outros workflows: publica de novo quando ele termina
   workflow_run:
     workflows: ["Base gabcmt"]
@@ -52,6 +52,8 @@ jobs:
           cp -R monitor/assets monitor/motor site/public/monitor/
           # Pautas: página própria em /pautas/ (rota da Vercel → /monitor/pautas/index.html)
           mkdir -p site/public/monitor/pautas && cp monitor/pautas/index.html site/public/monitor/pautas/index.html
+          # Módulo comum "Atualizar acervo fonte" (planilhas → carga → Action acervo-fonte.yml), para qualquer página do site
+          mkdir -p site/public/padrao && cp padrao/acervo-fonte.js site/public/padrao/acervo-fonte.js
           printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false}]}\n' > site/vercel.json
       - name: Publica
         env:
