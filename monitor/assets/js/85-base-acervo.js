@@ -175,18 +175,52 @@
       mens('Conectado ao procs-muta e acervo atualizado.');
     },'Conferindo permissão de leitura e gravação…');
   }
+  /* tipo da planilha pelo cabeçalho (o nome do arquivo engana: "Relação do Acervo dos Gabinetes" é PJe, não o acervo do BI) */
+  var NOMES={acervo:'acervo do Power BI (Gab A)',sigilosos:'sigilosos do Power BI',pje_etiquetas_tarefa:'PJe · classe, assunto, tarefa e etiquetas',complemento:'complementar do painel de indicadores',pje_local:'caixas do PJe (antigo)'};
+  var RETIRADOS=/id\s*(157|191|110)\b|prevenc|etiquetas por processo|nome da parte|data de nascimento|\bentradas?\b|\bsaidas?\b|decis/;
+  var semAc=function(x){return String(x==null?'':x).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();};
+  async function cabecalho(f){
+    var M=motor()||W,X=M.XLSX||W.XLSX; var linhas=[];
+    if(/\.csv$/i.test(f.name)){var t=await f.slice(0,200000).text();var sep=(t.split('\n')[0].match(/;/g)||[]).length>=(t.split('\n')[0].match(/,/g)||[]).length?';':',';linhas=t.split(/\r?\n/).slice(0,60).map(function(l){return l.split(sep).map(function(c){return c.replace(/^"|"$/g,'');});});}
+    else if(X){var wb=X.read(new (M.Uint8Array||Uint8Array)(await f.arrayBuffer()),{type:'array',sheetRows:60});wb.SheetNames.some(function(n){var m=X.utils.sheet_to_json(wb.Sheets[n],{header:1,defval:''});if(m.some(function(r){return (r||[]).some(function(v){return semAc(v)==='processo';});})){linhas=m;return true;}return false;});}
+    var h=linhas.find(function(r){return (r||[]).some(function(v){return semAc(v)==='processo';});});
+    return h?h.map(function(v){return semAc(v).replace(/\s+/g,'_');}):null;
+  }
+  function tipoPeloCabecalho(H){
+    if(!H)return '';var tem=function(){for(var i=0;i<arguments.length;i++)if(H.indexOf(arguments[i])>=0)return true;return false;};
+    if(tem('indicador','des_grupo_indicador','qtde'))return 'complemento';
+    if(tem('sin_pend_1julg','des_ultima_movime_sigilo'))return 'sigilosos';
+    if(tem('k_tempo','sin_prazo_legal','julgador_colegiado','pendente_1julgamento','assunto_principal'))return 'acervo';
+    if(tem('tarefa_atual','classe_judicial','assunto_judicial','data_entrada_tarefa'))return 'pje_etiquetas_tarefa';
+    if(H.filter(function(x){return x&&x!=='processo';}).length)return 'complemento';
+    return '';
+  }
+  async function tipoDe(f,escolhido,c){
+    var n=semAc(f.name);if(RETIRADOS.test(n))return '';
+    if(escolhido==='pje_local')return escolhido;
+    var porCab='';try{porCab=tipoPeloCabecalho(await cabecalho(f));}catch(e){porCab='';}
+    if(porCab)return porCab;
+    if(escolhido!=='lote')return escolhido;
+    var t=typeof c.detectImportType==='function'?c.detectImportType(f.name):'';
+    if(!t&&/tramita|conclus|sobrest|segredo|complement/.test(n))t='complemento';
+    return t||'';
+  }
+  /* o motor roda em outra janela (iframe): o arquivo precisa ser recriado lá, ou o leitor de planilhas não reconhece o conteúdo */
+  async function arquivoNoMotor(f){var w=motor();if(!w||!w.File||f instanceof w.File)return f;var b=await f.arrayBuffer();return new w.File([new w.Uint8Array(b)],f.name,{type:f.type||'',lastModified:f.lastModified||Date.now()});}
   async function importar(files,tipo) {
     if(!files.length)return;
     await ocupado(async function(){
       var w=motor(),c=atual(); if(!c)throw new Error('Motor do gestor ainda não está pronto.');
-      var ok=[],falhas=[];
+      var ok=[],falhas=[],ajustes=[];
       var ORD=['acervo','sigilosos','pje_etiquetas_tarefa','complemento'];
-      var det=function(f){var t=typeof c.detectImportType==='function'?c.detectImportType(f.name):'';if(!t&&/tramita|conclus|sobrest|segredo|complement/i.test(f.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'')))t='complemento';return t||'';};
-      if(tipo==='lote')files=files.slice().sort(function(a,b){var x=ORD.indexOf(det(a)),y=ORD.indexOf(det(b));return (x<0?9:x)-(y<0?9:y);});
+      var fila=[];
+      for (var f0 of files) fila.push({f:f0,t:await tipoDe(f0,tipo,c)});
+      fila.forEach(function(x){if(tipo!=='lote'&&x.t&&x.t!==tipo)ajustes.push(x.f.name+' → '+NOMES[x.t]);});
+      fila.sort(function(a,b){var x=ORD.indexOf(a.t),y=ORD.indexOf(b.t);return (x<0?9:x)-(y<0?9:y);});
+      files=fila.map(function(x){return x.f;});var TIPOS=new Map(fila.map(function(x){return [x.f,x.t];}));
       for (var f of files) {
-        var tp=tipo;
-        if(tp==='lote')tp=det(f);
-        if(!tp) {falhas.push(f.name+': fonte não reconhecida; selecione o importador específico.');continue;}
+        var tp=TIPOS.get(f);
+        if(!tp) {falhas.push(f.name+': planilha não reconhecida (nem pelo cabeçalho nem pelo nome) ou de relatório retirado.');continue;}
         try{
           mens('Lendo e validando '+f.name+'…');
           if(tp==='pje_local'||tp==='complemento') {
@@ -198,8 +232,9 @@
             if(msg && /^(✕|×)/.test(msg.textContent.trim()))throw new Error(msg.textContent);
           } else {
             if(typeof c.runImport!=='function')throw new Error('Importador da fonte indisponível.');
-            var epoch=await c.runImport(f,tp);
-            if(typeof c.logImport==='function')await c.logImport(tp,f,epoch);
+            var fm=await arquivoNoMotor(f);
+            var epoch=await c.runImport(fm,tp);
+            if(typeof c.logImport==='function')await c.logImport(tp,fm,epoch);
           }
           ok.push(f.name);
           if(W.CMTShell && W.CMTShell.recarregar)W.CMTShell.recarregar();
@@ -207,7 +242,7 @@
       }
       atualizarEstado();
       if(falhas.length)mens((ok.length?ok.length+' arquivo(s) importado(s) localmente. ':'')+'Falhas: '+falhas.join(' | '),true);
-      else mens(ok.length+' arquivo(s) processado(s) com o importador original. Alterações na cópia de trabalho não equivalem a publicação no GitHub.');
+      else mens(ok.length+' arquivo(s) processado(s): '+fila.map(function(x){return x.f.name+' ('+(NOMES[x.t]||x.t)+')';}).join(' · ')+(ajustes.length?'. Tipo corrigido pelo cabeçalho: '+ajustes.join(', '):'')+'. Nenhum processo foi duplicado: o número do processo é a chave. Alterações na cópia de trabalho não equivalem a publicação no GitHub.');
     },'Preparando importação…');
   }
   async function desconectar() {
