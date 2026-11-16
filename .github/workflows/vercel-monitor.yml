@@ -46,7 +46,7 @@ jobs:
           mkdir -p site/public/monitor
           cp monitor/index.html site/public/monitor/index.html
           cp -R monitor/assets monitor/motor site/public/monitor/
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"rewrites":[{"source":"/monitor","destination":"/monitor/index.html"},{"source":"/((?!api/|equipe|monitor|compendio|editor).*)","destination":"/index.html"}]}\n' > site/vercel.json
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60}},"rewrites":[{"source":"/((?!api/|equipe|monitor|compendio|editor).*)","destination":"/index.html"}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
