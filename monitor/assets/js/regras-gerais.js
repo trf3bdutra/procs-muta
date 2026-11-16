@@ -127,7 +127,19 @@
     return '<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>' +
       (L.length ? '<div class="rg-card"><b>Ordem dos critérios<small>' + ARQ_DES + '</small></b>' + L.map(function (c, i) { return '<div class="rg-tl"><b>' + (i + 1) + '.</b><span>' + esc(typeof c === 'string' ? c : (c.nome || c.id || c.titulo || JSON.stringify(c))) + '</span></div>'; }).join('') + '</div>' : '<p class="rg-n">' + (ST.des === 'lendo' ? 'Lendo ' + ARQ_DES + '…' : 'Sem critérios gravados em ' + ARQ_DES + '.') + '</p>'); }
   function vProdutividade() { return '<p>Metas internas do gabinete, distintas das metas do CNJ: cota fixa de minutas por dia útil para quem minuta. Dia sem expediente ou sem processos pendentes: meta zero. Cada processo minutado conta uma vez por número.</p><div class="rg-card">' +
-      [['Dalete, José, Rodrigo, Débora e Maria Eduarda', '3 minutas por dia'], ['Victor e Estela', '4 minutas por dia'], ['Demais da equipe', 'sem meta interna'], ['Monocráticas e correções', 'sem meta interna'], ['Complexidade (½ · Ω · A · Σ)', '0,5 · 1 · 2 · 3 [VALIDAR peso na meta]']].map(function (x) { return '<div class="rg-tl"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('') + '</div>'; }
+      [['Dalete, José, Rodrigo, Débora e Maria Eduarda', '3 minutas por dia'], ['Victor e Estela', '4 minutas por dia'], ['Demais da equipe', 'sem meta interna'], ['Monocráticas e correções', 'sem meta interna'], ['Complexidade (½ · Ω · A · Σ)', '0,5 · 1 · 2 · 3 [VALIDAR peso na meta]']].map(function (x) { return '<div class="rg-tl"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('') + '</div>'; +
+      '<p style="margin-top:16px"><b>Como se conta</b> (regra do Gabinete CMT, painel de produtividade da equipe).</p><div class="rg-card">' +
+      [['Universo', 'Processos das listas oficiais das sessões de julgamento. Sessão arquivada sai do painel de sessões, mas continua na produtividade.'],
+       ['Minuta concluída', 'Processo com MINUTADO preenchido. Conta na data do MINUTADO, dentro do período filtrado.'],
+       ['Autoria da minuta', 'Quem marcou a minuta (identificador do servidor); na falta, o nome em SERVIDOR. Vale o nome ou o apelido cadastrado.'],
+       ['Minutas avulsas', 'Lançamentos diários do próprio servidor (fora da pauta) somam ao total de minutas.'],
+       ['Minutas designadas pendentes', 'Processos com o servidor em SERVIDOR e sem MINUTADO.'],
+       ['Correção concluída', 'CORRIGIDO ou LIBERADO marcado (sim ou data), creditado a quem está em CORRETOR, na data da marca.'],
+       ['Pendências concluídas', 'Baixas de pendência registradas pelo servidor no período.'],
+       ['Total do servidor', 'Minutas da pauta + minutas avulsas.'],
+       ['Classificação', 'Total de minutas, depois correções, depois pendências, depois nome.'],
+       ['Situação do processo na pauta', 'Adiado, retirado ou julgado (resultado da sessão) prevalece; senão liberado; senão corrigido; senão minutado (feito); senão pendente.']
+      ].map(function (x) { return '<div class="rg-tl"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('') + '</div>'; }
   function vSessao() { var s = M() && M().CMTSessao, S = {}; try { S = (s && s.estado && s.estado()) || {}; } catch (e) {}
     return '<p>O que toda sessão nova recebe ao ser criada na página Pautas.</p><div class="rg-card">' + [['Órgão julgador', 'Turma Regional de MS'], ['Gabinete na relação do PJe', S.gab || 'Gab. A da Turma Regional de Mato Grosso do Sul'], ['Horário', '14:00'], ['Julgadores', 'apoio/magistrados.json']].map(function (x) { return '<div class="rg-tl"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join('') + '</div>'; }
   function vEquipe() { var s = M() && M().CMTSessao, S = {}; try { S = (s && s.estado && s.estado()) || {}; } catch (e) {} var eq = S.equipe || [];
