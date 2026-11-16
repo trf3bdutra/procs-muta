@@ -473,7 +473,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
 </header>
 <main id="main"><div id="carga"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
-<section id="aba-pautas" hidden aria-label="Pautas de julgamento"><div class="pt-barra pt-acoes"><span class="k" style="margin-right:auto;color:var(--m)">Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta</span><button type="button" id="pt-regras" title="Regras gerais">⚙ Regras gerais</button><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button></div><main id="pt-view"><div id="pt-carga" role="status"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
+<section id="aba-pautas" hidden aria-label="Pautas de julgamento"><div class="pt-barra pt-acoes"><span class="k" style="margin-right:auto;color:var(--m)">Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta</span><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button></div><main id="pt-view"><div id="pt-carga" role="status"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
 <div id="cwt-toast" role="status" hidden></div>
 <div id="rodape" class="off" role="region" aria-label="Ações em bloco" hidden></div>
 <div id="toast" role="status" hidden></div>
@@ -1004,7 +1004,7 @@ function excluirEscaninho(id) { const e = ESC.escaninhos.find((x) => x.id === id
 
 /* ---------- rodapé de ações em bloco ---------- */
 const RODA = {};
-function pintaRodape() { const r = $('#rodape'); if (!PRONTO) { r.hidden = true; return; } r.hidden = false;
+function pintaRodape() { const r = $('#rodape'); if (!PRONTO || ABA === 'pautas') { r.hidden = true; return; } r.hidden = false;
   const emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '', L = ABA === 'fila' ? FILA : emEsc ? ESCL : [], n = SEL.size, S = sessoes();
   if (!RODA['r-ses'] || !S.some((s) => s.data === RODA['r-ses'])) RODA['r-ses'] = S[0] ? S[0].data : '';
   const escs = ESC.escaninhos.filter((e) => e.id !== idE); if (RODA['r-esc'] && !escs.some((e) => e.id === RODA['r-esc'])) RODA['r-esc'] = '';
@@ -1660,7 +1660,7 @@ async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(awai
         else { const dd = f.querySelector('[data-nr-d]').value, cc = f.querySelector('[data-nr-c]').value; ok = !!s.regraAssunto?.(ss.id, est.nr.v, dd, cc); if (!ok) { A.msg('Escolha o minutante, o corretor ou os dois.', true); return; } }
         est.nr = null; A.msg('Regra criada. A lista já reflete a regra; gravação automática no procs-muta em instantes.'); }
       else if (acao(k, b, ss)) return;
-      else if (k === 'triagem') { W.location.href = '/init/'; return; }
+      else if (k === 'triagem') { W.location.hash = 'fila'; return; }
       else if (k === 'm-ed-cfg') { est.cfg = false; est.mEd = true; }
       A.render();
     });
@@ -1784,7 +1784,7 @@ async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(awai
   setInterval(() => { const s = getSes(); if (!pronto || !s?.recarregar || G.gravando || (s.pendentes?.() || []).length || D.hidden) return; s.recarregar().then((ok) => { if (ok) render(); }).catch(() => {}); }, 120000);
   function abrirRegras(aba) { if (!W.CMTRegrasGerais) return msg('As regras gerais ainda estão carregando.', true); W.CMTRegrasGerais.abrir({ motor: getMotor, pagina: 'pautas', aba: aba || 'equipe' }); }
   W.__abrirRegras = abrirRegras;
-  $('#pt-regras').addEventListener('click', () => abrirRegras());
+  ($('#pt-regras') || { addEventListener() {} }).addEventListener('click', () => abrirRegras());
   ($('#pt-tema') || { addEventListener() {} }).addEventListener('click', () => { const dk = D.documentElement.getAttribute('data-theme') === 'dark'; if (dk) D.documentElement.removeAttribute('data-theme'); else D.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('cmt-theme', dk ? 'light' : 'dark'); } catch (e) {} });
   /* pedido de token do GitHub (aparece dentro do motor): enquanto aberto, o motor fica à vista */
   /* o pedido de token é mostrado pela Triagem (body.tk) */
