@@ -1200,6 +1200,12 @@ async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(awai
   construir(); PRONTO = true; rotear(); acervoData();
   /* o motor pode recarregar o acervo (outra aba gravou, importação): refaz quando as linhas mudam */
   setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop') || $('#rg')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
+  /* fonte nova no procs-muta (carga do painel, lista de tarefa, DataJud): relê e redesenha, para a tarefa atual estar sempre em dia */
+  let FONTE_SHA = ''; const vigia = async () => { if (!PRONTO || D.hidden || $('#gaveta') || $('#rg') || $('.pop')) return; try { const P = PM(), k = P && P.atual; if (!k) return;
+      const r = await fetch('https://api.github.com/repos/trf3bdutra/procs-muta/commits?path=acervo/fonte.json&per_page=1', { cache: 'no-store', headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k } }); if (!r.ok) return;
+      const j = await r.json(), sha = j[0] && j[0].sha; if (!sha) return; if (!FONTE_SHA) { FONTE_SHA = sha; return; } if (sha === FONTE_SHA) return; FONTE_SHA = sha;
+      await lerFonte(); construir(); render(); acervoData(); toast('Fonte do acervo atualizada no procs-muta: tarefas relidas.'); } catch (e) {} };
+  vigia(); setInterval(vigia, 90000);
   /* volta da ficha: o destino pode ter mudado lá */
   let fichaAberta = false; setInterval(() => { const on = D.body.classList.contains('cmt-ficha-on'); if (fichaAberta && !on) { U.forEach(refazDest); render(); } fichaAberta = on; }, 700);
 })();
