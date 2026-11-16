@@ -188,6 +188,13 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 #rodape .lin{display:flex;gap:6px}#rodape .lin select{flex:1;min-width:0}
 #rodape small{font-size:11.5px;color:var(--m)}
 #rodape.off .ac{opacity:.5}
+#rodape.min{display:flex;align-items:center;gap:14px;padding:0 16px 0 0;height:46px}
+#rodape .rmin{display:flex;align-items:center;gap:12px;flex:1;min-width:0;padding:0;border:0;flex-direction:row;justify-content:flex-start}
+#rodape .rmin .sel{display:flex;flex:none;flex-direction:row;align-items:center;gap:10px;height:46px;padding:0 18px 0 24px;min-width:0}
+#rodape .rmin .sel b{font-size:19px}
+#rodape .tog{height:30px;padding:0 12px;border:1px solid var(--b2);background:var(--w);border-radius:999px;font:700 12.5px Figtree,sans-serif;color:var(--v);cursor:pointer;white-space:nowrap}
+#rodape .tog.cheio{position:absolute;right:10px;top:-15px;height:26px;font-size:11.5px;box-shadow:0 2px 6px rgba(23,63,61,.15)}
+body.rod-min main{padding-bottom:70px}
 #toast{position:fixed;right:18px;bottom:110px;z-index:60;max-width:480px;padding:11px 14px;background:var(--v);color:#fff;font:600 13px Figtree,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.18);border-radius:6px}
 #toast.bad{background:var(--r)}
 /* motor de dados: oculto; aparece para o pedido de token e para a ficha */
@@ -1038,20 +1045,22 @@ function excluirEscaninho(id) { const e = ESC.escaninhos.find((x) => x.id === id
     fecharGaveta(); }); }
 
 /* ---------- rodapé de ações em bloco ---------- */
-const RODA = {};
+const RODA = {}; let ROD_MIN = LS.get('tri_rod_min', true); /* rodapé de ações: minimizado por padrão, expansível */
 function pintaRodape() { const r = $('#rodape'); if (!PRONTO || ABA === 'pautas') { r.hidden = true; return; } r.hidden = false;
   const emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '', L = ABA === 'fila' ? FILA : emEsc ? ESCL : [], n = SEL.size, S = sessoes();
   if (!RODA['r-ses'] || !S.some((s) => s.data === RODA['r-ses'])) RODA['r-ses'] = S[0] ? S[0].data : '';
   const escs = ESC.escaninhos.filter((e) => e.id !== idE); if (RODA['r-esc'] && !escs.some((e) => e.id === RODA['r-esc'])) RODA['r-esc'] = '';
   if (!RODA['r-esc'] && escs[0]) RODA['r-esc'] = escs[0].id;
   const dis = n ? '' : ' disabled';
-  r.classList.toggle('off', !n);
-  r.innerHTML = '<div class="sel"><span style="font-size:13px;opacity:.8">Selecionados</span><b>' + nf(n) + '</b><span style="display:flex;gap:10px;flex-wrap:wrap">' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + (emEsc ? ' do escaninho' : ' filtrados') + '</button>' : '<span style="font-size:12px;color:#cfe0dc">marque nas listas</span>') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</span></div>' +
+  r.classList.toggle('off', !n); r.classList.toggle('min', ROD_MIN); D.body.classList.toggle('rod-min', ROD_MIN);
+  if (ROD_MIN) { r.innerHTML = '<div class="rmin"><div class="sel"><b>' + nf(n) + '</b><span style="font-size:13px;opacity:.85">selecionado(s)</span>' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + (emEsc ? ' do escaninho' : ' filtrados') + '</button>' : '') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</div><span style="font-size:12.5px;color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (n ? 'Pautar, julgar por monocrática ou guardar em escaninho: abra as ações' : 'Marque processos nas listas para pautar, julgar por monocrática ou guardar em escaninho') + '</span><span style="flex:1"></span>' + (DESF.length ? '<button type="button" class="btn sm" data-r="desfazer" title="' + esc('Desfazer: ' + DESF[DESF.length - 1].rot) + '">Desfazer última</button>' : '') + '</div><button type="button" class="tog" data-r="rodmax" aria-expanded="false">Ações de triagem ▴</button>'; return; }
+  r.innerHTML = '<button type="button" class="tog cheio" data-r="rodmin" aria-expanded="true" title="Minimizar o rodapé">minimizar ▾</button><div class="sel"><span style="font-size:13px;opacity:.8">Selecionados</span><b>' + nf(n) + '</b><span style="display:flex;gap:10px;flex-wrap:wrap">' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + (emEsc ? ' do escaninho' : ' filtrados') + '</button>' : '<span style="font-size:12px;color:#cfe0dc">marque nas listas</span>') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</span></div>' +
     '<div class="ac"><span class="k" style="color:var(--ok)">Pauta</span><div class="lin"><select id="r-ses" aria-label="Sessão"' + (S.length ? '' : ' disabled') + '>' + (S.length ? S.map((s) => '<option value="' + s.data + '"' + (s.data === RODA['r-ses'] ? ' selected' : '') + '>Sessão de ' + nomeSes(s) + ' · ' + nf((s.itens || []).length || (s.previa || []).length) + (s.itens && s.itens.length ? ' itens' : ' na pré-pauta') + '</option>').join('') : '<option>nenhuma sessão futura</option>') + '</select><button type="button" class="btn" style="background:var(--v2);border-color:var(--v2);color:#fff" data-r="pautar"' + (S.length ? dis : ' disabled') + '>Pautar</button></div><small>entra na seleção prévia da sessão, na página Pautas</small></div>' +
     '<div class="ac"><span class="k" style="color:var(--az)">Monocrática</span><button type="button" class="btn" style="background:var(--az);border-color:var(--az);color:#fff" data-r="mono"' + dis + '>Julgar por monocrática</button><small>vai para as Monocráticas da Ex Officio</small></div>' +
     '<div class="ac"><span class="k">Escaninho</span><div class="lin"><select id="r-esc" aria-label="Escaninho">' + escs.map((e) => '<option value="' + esc(e.id) + '"' + (e.id === RODA['r-esc'] ? ' selected' : '') + '>' + esc(e.titulo) + ' (' + nf(e.processos.length) + ')</option>').join('') + '<option value="__novo">+ Novo escaninho…</option></select><button type="button" class="btn" style="background:var(--g2);border-color:var(--g2);color:#fff" data-r="guardar"' + (escs.length ? dis : ' disabled') + '>' + (emEsc ? 'Mover' : 'Guardar') + '</button></div><small>' + (emEsc ? 'leva para outro escaninho' : 'para examinar depois, em aba própria') + '</small></div>' +
     '<div class="ac" style="border-right:0;gap:5px">' + (emEsc ? '<button type="button" class="btn sm" data-r="devolver"' + dis + '>Devolver à fila</button>' : '') + '<button type="button" class="btn sm" data-r="desfazer"' + (DESF.length ? '' : ' disabled') + ' title="' + esc(DESF.length ? 'Desfazer: ' + DESF[DESF.length - 1].rot : '') + '">Desfazer última</button><button type="button" class="btn sm" style="color:var(--r);border-color:var(--r2)" data-r="limpardest"' + dis + '>Limpar destino</button></div>'; }
 $('#rodape').addEventListener('click', (e) => { const b = e.target.closest('[data-r]'); if (!b || b.disabled) return; const k = b.dataset.r, ds = [...SEL], emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '';
+  if (k === 'rodmin' || k === 'rodmax') { ROD_MIN = k === 'rodmin'; LS.set('tri_rod_min', ROD_MIN); pintaRodape(); return; }
   if (k === 'todos') { (ABA === 'fila' ? FILA : ESCL).forEach((o) => SEL.add(o.d)); render(); return; }
   if (k === 'limpar') { SEL.clear(); render(); return; }
   if (k === 'desfazer') { desfazer(); return; }
