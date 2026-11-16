@@ -1161,6 +1161,7 @@ html[data-theme=dark] #v-cmt{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a
 .cmt-cd:first-child{border-top:0}
 .cmt-cd b{font:400 11px var(--emono);display:block;color:var(--ei)}
 .cmt-cd p{margin:3px 0 0;font-size:11.5px;color:var(--em)}
+.cmt-cd .cmt-rsp{border-left:2px solid var(--eg);padding-left:7px;color:var(--ei)}
 .cmt-cd .ac{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
 .cmt-cd .ac button{border:1px solid var(--el2);background:var(--ew);color:var(--ei);border-radius:0;font-size:11px;min-height:26px;padding:0 9px;cursor:pointer}
 .cmt-cd .ac button.pri{background:var(--eg);border-color:var(--eg);color:var(--ep);font-weight:700}
@@ -1578,6 +1579,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
       <div class="cmt-hero"><p class="cmt-ey">05 / Gabinete</p><h1>Painel do <em>desembargador.</em></h1><p class="cmt-sub" id="cmt-sub"></p><button type="button" class="b" id="cmt-atu">Atualizar</button></div>
       <div class="cmt-lay">
       <aside class="cmt-left">
+        <section class="cmt-rc2"><p class="cmt-k">Dúvidas ao CM <span class="cmt-n" id="cmt-n-dv">—</span></p><div id="cmt-c-dv"></div></section>
         <section class="cmt-rc2"><p class="cmt-k">Para assinatura <span class="cmt-n" id="cmt-n-ass">—</span></p><div id="cmt-c-ass"></div></section>
         <section class="cmt-rc2"><p class="cmt-k">Para liberação <span class="cmt-n" id="cmt-n-lib">—</span></p><div id="cmt-c-lib"></div></section>
       </aside>
@@ -3300,6 +3302,12 @@ function cmtPinta(){
   $('#cmt-n-ass').textContent=as.assinatura.length;$('#cmt-n-lib').textContent=as.liberacao.length;
   cmtLista('#cmt-c-ass',as.assinatura,function(x){return '<div class="cmt-cd"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+' · liberada '+esc(br(x.desde))+'</p><span class="ac"><button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button></span></div>';});
   cmtLista('#cmt-c-lib',as.liberacao,function(x){return '<div class="cmt-cd"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+' · corrigida '+esc(br(x.desde))+'</p></div>';});
+  var dv=j.duvidas||[];
+  $('#cmt-n-dv').textContent=dv.length;
+  cmtLista('#cmt-c-dv',dv,function(x){
+    return '<div class="cmt-cd"><b>'+esc(x.titulo||x.numero||'Dúvida')+'</b><p>'+esc([x.de,x.numero,x.prioridade].filter(Boolean).join(' · '))+'</p>'+
+      (x.texto?'<p>'+esc(x.texto)+'</p>':'')+(x.resposta?'<p class="cmt-rsp">Respondida: '+esc(x.resposta)+'</p>':'')+
+      '<span class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></span></div>';});
   var ur=j.urgencias||[],pz=j.prazos||[];
   $('#cmt-n-ur').textContent=ur.length;
   cmtLista('#cmt-l-urg',ur,function(x){var d=x.espera;return '<div class="cmt-it'+(d>=15?' alerta':d>=7?' atencao':'')+'"><b>'+esc(x.cnj)+'</b><span>'+esc([x.tipo,x.nivel].filter(Boolean).join(' · '))+'</span><time>'+(d==null?'':d===0?'hoje':'há '+d+(d===1?' dia':' dias'))+'</time></div>';});
@@ -3338,13 +3346,18 @@ document.addEventListener('click',function(e){
     if(on&&!confirm('Desfazer a liberação do voto de '+cnj+'?'))return;
     cmtPost({acao:'liberar',sessao:sd,cnj:cnj,desfazer:on},on?'Liberação desfeita.':'Voto liberado.');return;}
   var d=e.target.closest&&e.target.closest('[data-cd]');
-  if(d){var c2=d.getAttribute('data-cd'),tx=prompt('Devolutiva para '+c2+' — o apontamento vira intercorrência da pauta e diligência para a equipe:');
-    if(tx&&tx.trim())cmtPost({acao:'devolver',sessao:sd,cnj:c2,texto:tx.trim()},'Devolutiva registrada.');return;}
+  if(d){var c2=d.getAttribute('data-cd'),it2=(((CMT.dados||{}).pauta||{}).itens||[]).filter(function(x){return x.cnj===c2;})[0]||{};
+    var tx=prompt('Devolutiva para '+c2+' — vira diligência para '+(it2.servidor||'a equipe')+':');
+    if(tx&&tx.trim())cmtPost({acao:'devolver',sessao:sd,cnj:c2,texto:tx.trim(),para:it2.servidor||''},'Devolutiva enviada.');return;}
   var a=e.target.closest&&e.target.closest('[data-cas]');
   if(a){var c3=a.getAttribute('data-cas');if(confirm('Assinar a monocrática de '+c3+'?'))cmtPost({acao:'assinar',cnj:c3},'Monocrática assinada.');return;}
-  var dv=e.target.closest&&e.target.closest('[data-cdv]');
-  if(dv){var c4=dv.getAttribute('data-cdv'),t4=prompt('Devolutiva para '+c4+':');
-    if(t4&&t4.trim()){if(!sd){toast('Abra a sessão do processo para devolver.');return;}cmtPost({acao:'devolver',sessao:sd,cnj:c4,texto:t4.trim()},'Devolutiva registrada.');}return;}
+  var dvb=e.target.closest&&e.target.closest('[data-cdv]');
+  if(dvb){var c4=dvb.getAttribute('data-cdv'),a4=(((CMT.dados||{}).assinar||{}).assinatura||[]).filter(function(x){return x.cnj===c4;})[0]||{};
+    var t4=prompt('Devolutiva para '+c4+' — vira diligência para '+(a4.servidor||'a equipe')+':');
+    if(t4&&t4.trim())cmtPost({acao:'devolver',cnj:c4,texto:t4.trim(),para:a4.servidor||'',sessao:sd},'Devolutiva enviada.');return;}
+  var rs=e.target.closest&&e.target.closest('[data-crs]'),rm=e.target.closest&&e.target.closest('[data-crm]');
+  if(rs||rm){var id=(rs||rm).getAttribute(rs?'data-crs':'data-crm'),tr=prompt('Resposta à dúvida:');
+    if(tr&&tr.trim())cmtPost({acao:'responder',id:id,texto:tr.trim(),manter:!!rm},rm?'Resposta registrada; a dúvida continua aberta.':'Dúvida respondida e concluída.');return;}
   if(e.target&&e.target.id==='cmt-selt'){CMT.sel=CMT.sel||{};var L=cmtFiltra(),todos=L.every(function(x){return CMT.sel[x.cnj];});L.forEach(function(x){CMT.sel[x.cnj]=!todos;});cmtPauta();cmtAtuLote();return;}
   if(e.target&&e.target.id==='cmt-libl'){var m=cmtMarcados();if(!m.length)return;
     if(!confirm('Liberar '+m.length+(m.length===1?' voto?':' votos?')))return;

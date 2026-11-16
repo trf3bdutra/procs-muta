@@ -12,16 +12,45 @@ const opc = rel => L.lerJson(rel).then(x => x.dados).catch(() => null);
 const br = d => String(d || '').split('-').reverse().join('/');
 const dias = (a, b) => Math.round((Date.parse(a + 'T12:00:00Z') - Date.parse(b + 'T12:00:00Z')) / 86400e3);
 
+const PEN = 'apoio/equipe-pendencias.json';
+async function lerPen() { try { return await L.lerJson(PEN); } catch (e) { if (e.status === 404) return { dados: { schema: 'gabcmt.equipe.pendencias', versao: 1, registros: [] }, sha: undefined }; throw e; } }
+async function criarDiligencia(campos, u) {
+  for (let n = 0; n < 4; n++) {
+    const { dados, sha } = await lerPen(); dados.registros = dados.registros || [];
+    const agora = new Date().toISOString();
+    const t = Object.assign({ id: 'pen-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      creator: u, criadoEm: agora, _rev: 1, stage: 'todo', atualizadoEm: agora, atualizadoPor: u, origem: '' }, campos);
+    dados.registros.push(t);
+    try { await L.gravarJson(PEN, dados, sha, 'Devolutiva do desembargador (' + u + '): ' + t.title); return t; }
+    catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+  }
+  throw Object.assign(new Error('O quadro mudou várias vezes seguidas; tente de novo.'), { status: 409 });
+}
+async function responder(id, texto, u, manter) {
+  for (let n = 0; n < 4; n++) {
+    const { dados, sha } = await lerPen(); dados.registros = dados.registros || [];
+    const t = (dados.registros || []).find(x => x.id === id && !x.excluida);
+    if (!t) throw Object.assign(new Error('Dúvida não encontrada.'), { status: 404 });
+    if (L.norm(t.assignee) !== L.norm(u)) throw Object.assign(new Error('Esta dúvida não foi dirigida a você.'), { status: 403 });
+    const agora = new Date().toISOString();
+    t.resposta = texto; t.respondidoPor = u; t.respondidoEm = agora;
+    if (!manter) t.stage = 'done';
+    t._rev = Number(t._rev || 1) + 1; t.atualizadoEm = agora; t.atualizadoPor = u;
+    try { await L.gravarJson(PEN, dados, sha, 'Resposta do desembargador (' + u + '): ' + (t.title || id)); return t; }
+    catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+  }
+  throw Object.assign(new Error('O quadro mudou várias vezes seguidas; tente de novo.'), { status: 409 });
+}
 module.exports = async (req, res, u) => {
   res.setHeader('Cache-Control', 'no-store');
   const a = await L.acessos(u);
   if (a.perfil !== 'desembargador' && !L.gestor(u)) return res.status(403).json({ erro: 'Painel restrito ao desembargador.' });
   const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
-  /* decisões do desembargador: liberar o voto, assinar a monocrática e devolver com apontamento.
-     Tudo grava onde já era gravado — o item da pauta e a ficha única —, e tudo pode ser desfeito. */
+  /* decisões do desembargador: liberar o voto e assinar a monocrática.
+     As duas gravam onde já era gravado — o item da pauta e a ficha única — e podem ser desfeitas. */
   if (req.method === 'POST') {
     const b = req.body || {}, cnj = String(b.cnj || '').trim();
-    if (!cnj) return res.status(400).json({ erro: 'Informe o processo.' });
+    if (!cnj && b.acao !== 'responder') return res.status(400).json({ erro: 'Informe o processo.' });
     try {
       if (b.acao === 'liberar') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
@@ -32,21 +61,37 @@ module.exports = async (req, res, u) => {
         await MONO.gravarMono(cnj, { dataAssinatura: b.desfazer ? '' : hj }, u, true);
         return res.status(200).json({ ok: true, cnj, dataAssinatura: b.desfazer ? '' : hj });
       }
+      /* devolutiva: vira diligência para o servidor do processo, no mesmo quadro da equipe */
       if (b.acao === 'devolver') {
-        const txt = String(b.texto || '').trim().slice(0, 1000);
+        const txt = String(b.texto || '').trim().slice(0, 2000);
         if (!txt) return res.status(400).json({ erro: 'Escreva o apontamento da devolutiva.' });
-        if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
-        await require('./pauta').gravarItem(b.sessao, { cnj, campos: { intercor: txt, intercorOk: false } }, u, true);
-        return res.status(200).json({ ok: true, cnj, intercor: txt });
+        const r = await criarDiligencia({ title: 'Devolutiva · ' + cnj, description: txt, assignee: String(b.para || ''),
+          numero: cnj, sessao: L.dataOk(b.sessao) ? b.sessao : '', urgency: 'Alta' }, u);
+        return res.status(200).json({ ok: true, task: r });
+      }
+      /* resposta do desembargador a uma dúvida que lhe foi dirigida: fica no registro e conclui a diligência */
+      if (b.acao === 'responder') {
+        const txt = String(b.texto || '').trim().slice(0, 2000);
+        if (!txt) return res.status(400).json({ erro: 'Escreva a resposta.' });
+        const r = await responder(String(b.id || ''), txt, u, !!b.manter);
+        return res.status(200).json({ ok: true, task: r });
       }
       return res.status(400).json({ erro: 'Ação desconhecida.' });
     } catch (e) { return res.status(e.status || 500).json({ erro: e.message }); }
   }
-  const [cal, doc, aus] = await Promise.all([
+  const [cal, doc, aus, pen] = await Promise.all([
     opc('acervo/sessoes/calendario.json'),
     FICHA.lerOpLeitura().then(x => x.doc).catch(() => null),
-    opc('apoio/equipe-solicitacoes.json')
+    opc('apoio/equipe-solicitacoes.json'),
+    opc('apoio/equipe-pendencias.json')
   ]);
+  /* dúvidas dirigidas ao desembargador: diligências em aberto atribuídas a ele, no quadro da equipe */
+  const duvidas = ((pen || {}).registros || [])
+    .filter(r => !r.excluida && r.stage !== 'done' && L.norm(r.assignee) === L.norm(u))
+    .map(r => ({ id: r.id, titulo: r.title || '', texto: r.description || '', numero: r.numero || '',
+      de: r.creator || '', prazo: r.dueDate || '', prioridade: r.urgency || '', etapa: r.stage || '',
+      em: r.atualizadoEm || r.criadoEm || '', origem: r.origem || '', resposta: r.resposta || '' }))
+    .sort((x, y) => String(y.em).localeCompare(String(x.em)));
 
   /* monocráticas e urgências */
   const assinar = { assinatura: [], liberacao: [] }, urgencias = [];
@@ -113,8 +158,8 @@ module.exports = async (req, res, u) => {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, urgencias, sessoes, agenda, pauta, prazos,
+  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, urgencias, sessoes, agenda, pauta, prazos,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
-    ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus } });
+    ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 };
 module.exports.br = br;
