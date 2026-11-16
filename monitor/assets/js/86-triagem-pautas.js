@@ -227,7 +227,7 @@
   function onSelected(){const d=triData();return d.all.filter(r=>settings.triChecked.has(digits(r.Processo||r.processo)));}
   function click(ev){const b=ev.target.closest?.('[data-cwt],[data-cwt-filter],[data-cwt-ses]');if(!b)return;ev.preventDefault();
     if(b.dataset.cwtFilter){settings.triFilter=b.dataset.cwtFilter;settings.triTake=70;render();return;}
-    if(b.dataset.cwtSes){settings.sessId=b.dataset.cwtSes;settings.sessQuery='';settings.sessFilter='all';settings.sessTake=90;render();return;}
+    if(b.dataset.cwtSes){settings.sessId=b.dataset.cwtSes;settings.sessQuery='';settings.sessFilter='all';settings.sessTake=90;render();if(scrollY>240)scrollTo({top:0,behavior:'smooth'});return;}
     const cmd=b.dataset.cwt;
     if(cmd==='filter'){settings.triFilter=b.dataset.cwtVal;render();}
     else if(cmd==='refresh'){render();msg('Vista atualizada com os dados já carregados.');}

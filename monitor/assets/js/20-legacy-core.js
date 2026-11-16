@@ -7794,7 +7794,7 @@ function popHTML(items){
   }).join('');
 }
 
-const SKIP = '#acervo,#relatorios,#regimento,#fxleg,.tk-atos summary,script,style,code,kbd,textarea,input,select,svg,h1,h2,h3,button,#index,.famchips,.prz,.kv dt,.atl-i > summary,#lex summary,.cit,.citpop,#lawbody,#lawhist,#pres,.mermaid,.mini,.diagram,.ph-title,summary .lat';
+const SKIP = '#acervo,#relatorios,#regimento,#fxleg,.tk-atos summary,script,style,code,kbd,textarea,input,select,svg,h1,h2,h3,button,#index,.famchips,.prz,.kv dt,.atl-i > summary,#lex summary,.cit,.citpop,#lawbody,#lawhist,#pres,.mermaid,.mini,.diagram,.ph-title,summary .lat,#cwt-workspace,#cwt-aside,.cwe,#cmt-base-v2';
 function linkify(root){
   if (!root || root.nodeType !== 1 || root.closest && root.closest('.cit,.citpop')) return;
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => {
