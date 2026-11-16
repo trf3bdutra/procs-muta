@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.regras.etiquetas",
  "versao": 1,
- "atualizadoEm": "2026-11-16T23:00:03.241Z",
+ "atualizadoEm": "2026-11-16T23:45:29.267Z",
  "registros": [
   {
    "id": "pad-ED",
@@ -176,6 +176,23 @@
    "nome": "",
    "nota": "",
    "origem": "padrão"
+  },
+  {
+   "id": "rmwjwvlvrm0up",
+   "on": true,
+   "ef": "tema",
+   "v": "assunto",
+   "termos": [
+    {
+     "t": "LOTE 28,86% - APCIV",
+     "m": "igual"
+    }
+   ],
+   "exceto": [],
+   "classes": [],
+   "nome": "LOTE 28,86% - APCIV",
+   "nota": "",
+   "origem": "esteira"
   }
  ]
 }
