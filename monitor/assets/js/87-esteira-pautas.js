@@ -173,7 +173,7 @@
   }
 
   function etapa2(ss, d) {
-    const drop = `<div class="cwe-drop"><span><span class="cwe-k">ESPELHO DA PAUTA · SESSÃO DE ${e(A.br(ss.data))}</span><b>${d.pauta ? 'Pauta oficial importada · ' + d.itens.length + ' itens' : 'Arraste o PDF da pauta aqui ou escolha o arquivo.'}</b><small>${e(ss.arquivo || 'resumo do espelho de pauta em PDF')}</small></span><button type="button" class="pri" data-cwt="import-pdf">${d.pauta ? 'Reimportar o PDF' : 'Importar PDF'}</button></div>`;
+    const drop = `<div class="cwe-drop"><span><span class="cwe-k">ESPELHO DA PAUTA · SESSÃO DE ${e(A.br(ss.data))}</span><b>${d.pauta ? 'Pauta oficial importada · ' + d.itens.length + ' itens' : 'Arraste o PDF da pauta aqui ou escolha o arquivo.'}</b><small>${e(ss.arquivo || 'resumo do espelho de pauta em PDF')}</small></span><button type="button" class="pri" data-cwt="import-pdf">${d.pauta ? 'Reimportar o PDF' : 'Importar PDF'}</button><input type="file" id="cwt-pdf-file" accept=".pdf,application/pdf" hidden></div>`;
     if (!d.pauta) return `<section class="cwe-st"><h2>2 · Pauta oficial</h2><p>Oficializado o registro no PJe, chega o PDF do Resumo do Espelho de Pauta. O PDF oficializa a listagem: cada processo da seleção prévia recebe o número do seu item.</p>${drop}</section>`;
     const conf = (ss.conferencia || {}).confirmada, prox = proxSessao(ss);
     const ass = (dg) => { const it = d.raw.get(dg) || {}; const r = d.acv(dg) || {}; return it.assunto || r.Assunto || r.assunto_judicial || '—'; };
@@ -462,6 +462,16 @@
       if (t.dataset.cweCk) { const k = t.dataset.cweCk, dg = t.dataset.p, S0 = est.desm[k] || (est.desm[k] = new Set()); if (t.checked) S0.delete(dg); else S0.add(dg); A.render(); return; }
       if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Grave no procs-muta pela Base.'); } return; }
       if (t.dataset.cweEsc) { const dg = t.dataset.p; est.dsg[dg] = { ...(est.dsg[dg] || {}), [t.dataset.cweEsc]: t.value }; A.render(); }
+    });
+    /* PDF da pauta arrastado para o quadro da etapa 2 */
+    view.addEventListener('dragover', (ev) => { const z = ev.target.closest?.('.cwe-drop'); if (!z) return; ev.preventDefault(); z.classList.add('on'); });
+    view.addEventListener('dragleave', (ev) => { const z = ev.target.closest?.('.cwe-drop'); if (z && !z.contains(ev.relatedTarget)) z.classList.remove('on'); });
+    view.addEventListener('drop', (ev) => {
+      const z = ev.target.closest?.('.cwe-drop'); if (!z) return; ev.preventDefault(); z.classList.remove('on');
+      const f = [...(ev.dataTransfer?.files || [])].find((x) => /\.pdf$/i.test(x.name) || x.type === 'application/pdf');
+      if (!f) { A.msg('Arraste o PDF do resumo do espelho de pauta.', true); return; }
+      const inp = view.querySelector('#cwt-pdf-file'); if (!inp) return;
+      try { const dt = new DataTransfer(); dt.items.add(f); inp.files = dt.files; inp.dispatchEvent(new Event('change', { bubbles: true })); } catch (er) { A.msg('Não foi possível ler o arquivo arrastado; use o botão Importar PDF.', true); }
     });
     view.addEventListener('input', (ev) => {
       if (ev.target.dataset.cweInput !== 'q') return;
