@@ -1043,10 +1043,11 @@ html[data-theme=dark] #p-pen,html[data-theme=dark] #dlg-pen,html[data-theme=dark
 #p-pen .pen-f input,#p-pen .pen-f select{border:0;border-left:1px solid var(--el);border-radius:0;background:transparent;color:var(--ei);font-size:12.5px;min-height:32px;padding:0 12px}
 #p-pen .pen-f input[type=search]{border-left:0;flex:1 1 220px}
 #p-pen .pen-f .ck{display:inline-flex;align-items:center;gap:7px;min-height:32px;padding:0 14px;border-left:1px solid var(--el);font:400 10px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em);white-space:nowrap}
-#p-pen .pen-s{gap:0;margin:0;padding:0;border-bottom:1px solid var(--el);display:flex;flex-wrap:wrap}
-#p-pen .pen-s span{flex:1 1 150px;padding:5px 20px 6px;border-left:1px solid var(--el);font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);display:flex;flex-direction:column;gap:0}
-#p-pen .pen-s span:first-child{border-left:0}
-#p-pen .pen-s b{font:400 15px var(--emono);color:var(--eo2);letter-spacing:0;line-height:1.25}
+#p-pen .drw-h h2{flex:none}
+#p-pen .pen-s{flex:1 1 auto;gap:0;margin:0 0 0 6px;padding:0;border:0;display:flex;flex-wrap:nowrap;min-width:0;overflow:hidden}
+#p-pen .pen-s span{flex:0 1 auto;white-space:nowrap;padding:0 0 0 14px;margin-left:14px;border-left:1px solid var(--el);font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);display:flex;flex-direction:row-reverse;align-items:baseline;gap:7px}
+#p-pen .pen-s span:first-child{margin-left:0}
+#p-pen .pen-s b{font:400 13px var(--emono);color:var(--eo2);letter-spacing:0;line-height:1.25}
 #p-pen .board{gap:0;padding-bottom:22px;padding-top:0;border-top:0}
 #p-pen .lane{background:transparent;border:0;border-left:1px solid var(--el);border-radius:0;padding:14px 14px 10px;min-height:150px}
 #p-pen .lane:first-child{border-left:0;padding-left:0}
@@ -1072,7 +1073,9 @@ html[data-theme=dark] #p-pen,html[data-theme=dark] #dlg-pen,html[data-theme=dark
 #dlg-pen .pen-or{background:var(--ep2);border-left:3px solid var(--eo);color:var(--em);font-size:12px}
 @media (max-width:1100px){#p-pen .board{grid-template-columns:1fr 1fr}#p-pen .lane:nth-child(3){border-left:0;padding-left:0}#p-pen .lane:nth-child(n+3){border-top:1px solid var(--el)}}
 @media (max-width:700px){#p-pen .drw-h h2:before{display:none}#p-pen .drw-h .b.pri{font-size:0;white-space:nowrap}#p-pen .drw-h .b.pri:before{content:"+ Nova";font-size:12px}
-#p-pen>*{padding-left:14px;padding-right:14px}#p-pen .board{grid-template-columns:1fr}#p-pen .lane{border-left:0;padding-left:0;border-top:1px solid var(--el)}#p-pen .lane:first-child{border-top:0}#p-pen .pen-s span{flex:1 1 50%}}
+#p-pen>*{padding-left:14px;padding-right:14px}#p-pen .board{grid-template-columns:1fr}#p-pen .lane{border-left:0;padding-left:0;border-top:1px solid var(--el)}#p-pen .lane:first-child{border-top:0}#p-pen .drw-h{flex-wrap:wrap}
+#p-pen .pen-s{flex:1 1 100%;margin:0;padding-top:6px;border-top:1px solid var(--el);flex-wrap:wrap}
+#p-pen .pen-s span{flex:1 1 42%;margin-left:0;padding-left:0;border-left:0;justify-content:flex-end}}
 </style>
 
 <style id="cc-cal-css">
@@ -1440,9 +1443,9 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
     <div class="ac"><button class="b" type="reset">Limpar</button><button class="b pri" type="submit">Publicar</button></div></form></details>
   <details class="av-comp" id="av-hist" hidden><summary>Histórico de avisos <span id="av-hn"></span></summary><div id="av-hl"></div></details>
   <div id="l-not"></div></aside>
-<aside class="drw wide" id="p-pen" hidden><div class="drw-h"><h2>Diligências</h2><button class="b pri" id="pen-novo">+ Nova diligência</button><button class="b" data-fecha>×</button></div>
+<aside class="drw wide" id="p-pen" hidden><div class="drw-h"><h2>Diligências</h2><div class="pen-s" id="pen-s"></div><button class="b pri" id="pen-novo">+ Nova diligência</button><button class="b" data-fecha>×</button></div>
   <div class="pen-f"><input type="search" id="pen-q" placeholder="Buscar…"><select id="pen-ow"></select><select id="pen-ur"><option value="">Todas as prioridades</option><option>Urgente</option><option>Alta</option><option>Média</option><option>Baixa</option></select><label class="ck"><input type="checkbox" id="pen-meu" checked> Só as minhas</label></div>
-  <div class="pen-s" id="pen-s"></div><div class="board" id="board"></div></aside>
+  <div class="board" id="board"></div></aside>
 <dialog id="dlg-pen"><form id="f-pen" method="dialog"><h2 id="dlg-pen-t">Nova diligência</h2><p class="pen-or" id="pen-or" hidden></p>
   <label>Título<input name="title" required maxlength="200"></label><label>Descrição<textarea name="description" rows="3"></textarea></label>
   <div class="row2"><label>Responsável<select name="assignee"></select></label><label>Prioridade<select name="urgency"><option>Urgente</option><option>Alta</option><option selected>Média</option><option>Baixa</option></select></label></div>
