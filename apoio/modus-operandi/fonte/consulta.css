@@ -1,15 +1,59 @@
-.cq-wrap{max-width:1280px;margin:0 auto;padding:18px 24px 50px}.cq-h{margin:0 0 4px;font-size:20px}
-.cq-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
-.cq-bar select,.cq-bar input{background:var(--field);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;min-width:220px}
-.cq-bar input{min-width:160px}.cq-go{background:var(--gold);color:var(--gold-ink);border:0;border-radius:8px;padding:9px 18px;font-weight:800;cursor:pointer}.cq-go:disabled{opacity:.6}
-.cq-er{border:1px solid var(--crit);background:var(--crit-soft);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:13px}
-.cq-caso{border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;background:var(--card);padding:12px 16px;margin-bottom:14px}
-.cq-ch{display:flex;gap:10px;align-items:baseline;margin-bottom:8px}.cq-ch b{font-family:ui-monospace,Consolas,monospace;font-size:14px}.cq-ch small{color:var(--mut)}
-.cq-caso dl{display:grid;grid-template-columns:170px 1fr;gap:4px 12px;margin:0;font-size:13px}.cq-caso dt{color:var(--mut);font-weight:700}.cq-caso dd{margin:0}
-.cq-av{margin:10px 0 0;color:var(--warn);font-size:12.5px}
-.cq-res{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.cq-col{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:10px}
-.cq-col h3{margin:2px 4px 8px;font-size:14px}.cq-col h3 small{color:var(--mut);font-weight:600}
-.cq-r{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:8px 10px;margin-bottom:6px;cursor:pointer;font:inherit}
-.cq-r:hover{border-color:var(--gold)}.cq-r b{font-size:13px}.cq-r span{font-size:12px;color:var(--mut)}.cq-r .cq-t{font-size:11px;color:var(--gold)}
+/* ===== Consulta do caso pautado — arquitetura D (barra única, canhoto, folha e painel de conformidade) ===== */
+#v-consulta .cq-xa{display:grid;grid-template-columns:272px minmax(0,1fr) 316px;grid-template-areas:"top top top" "can main ori";column-gap:0;row-gap:14px;align-items:start;max-width:1560px;margin:0 auto;padding:16px 24px 48px;box-sizing:border-box}
+#cq-top{grid-area:top}
+#cq-can{grid-area:can;align-self:stretch;padding:0}
+#cq-main{grid-area:main;min-width:0;align-self:stretch}
+#cq-ori{grid-area:ori;align-self:stretch;border-left:1px solid #d8d3c6;padding-left:18px;margin-left:22px}
+#v-consulta .dbar input{height:36px;border:1px solid #c8c3b6;border-radius:5px;background:#fff;padding:0 8px;font:600 13px Inter,"Segoe UI",system-ui,sans-serif;color:#203b39;max-width:200px;box-sizing:border-box}
+#v-consulta .cq-go{height:36px;border:1px solid #235a55;border-radius:5px;background:#235a55;color:#fff;padding:0 18px;font:700 13px Inter,sans-serif;cursor:pointer}
+#v-consulta .cq-go:disabled{opacity:.55}
+#v-consulta .cq-er{margin:10px 0 0;border:1px solid #d9b5ab;background:#fbf3f1;border-radius:5px;padding:9px 12px;font-size:13px;color:#8a3526}
+#v-consulta .cq-er a{color:#235a55}
+/* folha */
+#cq-main .cqs{background:#fff;color:#1f2328;border:1px solid #d8d3c6;border-radius:0 0 6px 0;box-shadow:0 1px 2px rgba(32,59,57,.06);padding:0 0 28px;font:15.5px/1.55 Arial,"Liberation Sans",Helvetica,sans-serif;min-height:60vh}
+#cq-main .dpj{padding:16px 28px 6px 56px}
+#cq-main .dtabs{padding-left:22px}
+#cq-main .cqvz{padding:14px 28px 6px 56px;font:13px/1.6 Inter,"Segoe UI",system-ui,sans-serif;color:#617570}
+#cq-main .cqb{position:relative;cursor:pointer}
+#cq-main .cqb .band .bl{min-width:180px}
+#cq-main .cqb.on .band .bl{color:#235a55}
+#cq-main .cqb.on .band .bl:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#235a55;margin:0 7px 1px 0;vertical-align:middle}
+#cq-main .cqb.on .dbody{box-shadow:inset 2px 0 #235a55;background:#f7faf9}
+#cq-main .cqb p{margin:0;text-align:justify;hyphens:auto}
+#cq-main .cqb p+p{margin-top:8px}
+#cq-main .cqb p.std{text-indent:2.5cm}
+#cq-main .cqb p.xph{font-style:italic;color:#6b7280;text-indent:0;text-align:left}
+#cq-main .fill{background:#f7ecc8;color:#5c430f;box-shadow:inset 0 -1px 0 #d9a83f}
+#cq-main .vs{display:inline-flex;flex-wrap:wrap;border:1px solid #c9d2da;border-radius:4px;overflow:hidden;background:#fff}
+#cq-main .vs button{border:0;border-left:1px solid #dde3e8;background:transparent;padding:3px 9px;font:600 11.5px Inter,"Segoe UI",system-ui,sans-serif;color:#5d6b78;cursor:pointer;max-width:300px;text-align:left}
+#cq-main .vs button:first-child{border-left:0}
+#cq-main .vs button[aria-pressed="true"]{background:#e7f1ee;color:#1d4f49}
+#v-consulta .pill.op{background:#f1efe7;color:#7b8794}
+/* canhoto */
+#cq-can .dcan{min-height:calc(100% - 45px);box-sizing:border-box}
+#cq-can .cqkv{display:grid;grid-template-columns:96px minmax(0,1fr);gap:3px 10px;font-size:12.5px}
+#cq-can .cqk{font:500 9.5px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.06em;color:#7b8794;text-transform:uppercase;padding-top:2px}
+#cq-can .cqv{color:#203b39;line-height:1.45;word-break:break-word}
+#cq-can .dvl button{font-size:11.5px}
+/* painel de conformidade */
+#cq-ori .cqc{display:flex;flex-direction:column}
+#cq-ori .cqi{padding:9px 0 9px 10px;border-top:1px dashed #d8d3c6;border-left:2px solid #c8c3b6}
+#cq-ori .cqi:first-child{border-top:0}
+#cq-ori .cqi.ok{border-left-color:#37786e}
+#cq-ori .cqi.pc{border-left-color:#a57829}
+#cq-ori .cqi.no{border-left-color:#9a3d2e}
+#cq-ori .cqih{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+#cq-ori .cqih b{font:700 12.5px Inter,"Segoe UI",system-ui,sans-serif;color:#203b39}
+#cq-ori .cqih i{font:500 9.5px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.1em;color:#7b8794;font-style:normal;text-transform:uppercase;white-space:nowrap}
+#cq-ori .cqi.ok .cqih i{color:#1d4f49}
+#cq-ori .cqi.pc .cqih i{color:#805b18}
+#cq-ori .cqi.no .cqih i{color:#9a3d2e}
+#cq-ori .cqi p{margin:3px 0 0;font:12.5px/1.5 Inter,"Segoe UI",system-ui,sans-serif;color:#3e4a47}
+#cq-ori .cqacs{display:flex;flex-direction:column;align-items:flex-start;gap:4px;margin-top:10px}
+#cq-ori .dtl button{align-items:baseline}
+#cq-ori .dtl button span{min-width:0;word-break:break-word}
+#cq-ori .meta{font-size:12px;color:#617570}
+/* ligação de volta ao monitor */
 .mon-lnk{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--gold);color:var(--gold);border-radius:999px;padding:6px 12px;font-weight:800;font-size:12.5px;text-decoration:none}.mon-lnk:hover{background:var(--gold-soft)}
-@media (max-width:980px){.cq-res{grid-template-columns:1fr}.cq-caso dl{grid-template-columns:1fr}}
+@media (max-width:1240px){#v-consulta .cq-xa{grid-template-columns:248px minmax(0,1fr);grid-template-areas:"top top" "can main" "ori ori"}#cq-ori{border-left:0;padding-left:0;margin-left:0;border-top:1px solid #d8d3c6;padding-top:14px}#cq-ori .cqc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}}
+@media (max-width:860px){#v-consulta .cq-xa{grid-template-columns:1fr;grid-template-areas:"top" "main" "can" "ori";padding:12px 16px 40px}#cq-main .dpj,#cq-main .cqvz{padding-left:16px;padding-right:16px}#cq-main .cqb p.std{text-indent:1.2cm}#cq-can .dcan{border-right:1px solid #d8d3c6;border-radius:0 0 6px 6px}#cq-ori .cqc{grid-template-columns:1fr}#v-consulta .dbar input,#v-consulta .dbar select{max-width:100%}}
