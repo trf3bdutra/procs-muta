@@ -83,6 +83,7 @@
 
   var CHAVES = ['Número do Processo', 'Processo', 'processo', 'Nº Processo', 'Número Processo'];
   var PII = /cpf|celular|telefone|e-?mail/i;
+  var LISTA = { nomeTarefa: 'Tarefa', dataChegada: 'Data de Chegada', tagsProcessoList: 'Etiquetas', poloAtivo: 'Polo Ativo', poloPassivo: 'Polo Passivo', classeJudicial: 'Classe', assuntoPrincipal: 'Assunto', orgaoJulgador: 'Órgão Julgador', orgaoJulgadorColegiado: 'Colegiado', sigiloso: 'Sigiloso', cargoJudicial: 'Cargo Judicial', prioridade: 'Prioridade' };
   var PAPEIS = { principal: 'principal (em andamento)', complementar: 'complementar', tarefa: 'lista de uma tarefa' };
 
   /* tipo pelo cabeçalho; papel padrão: PJe com 3+ tarefas = principal, com 1-2 = lista de tarefa; o resto = complementar.
@@ -91,6 +92,8 @@
     var i = linhas.findIndex(function (l) { return (l || []).some(function (v) { return CHAVES.indexOf(String(v == null ? '' : v).trim()) >= 0; }); });
     if (i < 0) return null;
     var H = linhas[i].map(function (v) { return String(v == null ? '' : v).trim(); }), tem = function (c) { return H.indexOf(c) >= 0; };
+    /* exportação da lista de uma tarefa do PJe (camelCase): os mesmos campos do painel gerencial */
+    if (tem('nomeTarefa') || tem('dataChegada')) { H = H.map(function (h) { return LISTA[h] || h; }); if (!tem('Número do Processo') && tem('Processo')) H[H.indexOf('Processo')] = 'Número do Processo'; }
     var tipo = tem('Número do Processo') && tem('Tarefa') ? 'pje'
       : tem('Nível_Sigilo') ? 'sigilosos'
       : tem('Processo') && (tem('Indicador') || tem('Tempo_de_Tramitação')) ? 'bi' : 'generica';
