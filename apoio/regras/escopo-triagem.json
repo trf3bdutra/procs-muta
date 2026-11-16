@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.regras.escopo-triagem",
  "versao": 1,
- "atualizadoEm": "2026-11-16T20:45:27.253589+00:00",
+ "atualizadoEm": "2026-11-16T21:02:25.547019+00:00",
  "descricao": "Escopo do app de triagem (destinar à decisão monocrática ou à pauta). Entra só processo do acervo fonte (acervo/fonte.json) cuja tarefa_atual esteja em 'triar'. Processo sem tarefa do gabinete (com a secretaria: prazo, publicação, juntada, recebimento) fica fora. Tarefa nova que não esteja em nenhuma lista: mostrar à parte, para classificar.",
  "regra": {
   "campo": "tarefa_atual",
@@ -56,7 +56,9 @@
     "[Sessão] Preparar relatório e voto",
     "[Sessão] Confirmar Inteiro Teor",
     "[Sessão] Assinar Inteiro Teor",
-    "[Sessão] Minutar decisão intercorrente"
+    "[Sessão] Minutar decisão intercorrente",
+    "[Sessão] Aguardando julgamento colegiado",
+    "[Sessão - ED] Aguardando julgamento colegiado"
    ]
   },
   "producao": {
@@ -86,6 +88,46 @@
     "Análise da distribuição - recursos estaduais",
     "Análise da distribuição - recursos federias prioridade",
     "Retificar autuação - Análise da distribuição"
+   ]
+  },
+  "secretaria": {
+   "motivo": "com a secretaria (prazo, intimação, certidão, cumprimento, expedição): fora da triagem; voltam quando chegarem a uma tarefa do gabinete",
+   "tarefas": [
+    "[Sessão] Processo com prazo em curso - Acórdão",
+    "Processo com prazo em curso",
+    "Não intimados automaticamente - Parte sem advogado",
+    "Aguardando manifestação inicial do MPF - Parecer",
+    "[SU] Não intimados automaticamente - Parte sem advogado - Pauta",
+    "Preparar certidão de trânsito em julgado",
+    "[Sessão] Analisar manifestação - Acórdão",
+    "Cumprir determinações do magistrado",
+    "[Sessão] Preparar Intimação de acórdão",
+    "[Sessão] Decurso de prazo de acórdão",
+    "Verificar pendências anteriores ao arquivamento",
+    "Processos já analisados",
+    "Cumprir - determinações",
+    "Assinar certidão de trânsito em julgado",
+    "Avaliar - determinações",
+    "[SU] Não intimados automaticamente - Sigilosos - Pauta",
+    "Aguardando expedição de documentos",
+    "Preparar expediente - cartas",
+    "Preparar intimação de pauta - Expressa",
+    "Análise de Secretaria - Núcleo de Conciliação",
+    "Recebidos do juízo de origem",
+    "Preparar comunicação",
+    "Recebidos da UFOR",
+    "[INSS] Notificação recebida",
+    "[SU] Recebidos da Contadoria",
+    "Analisar resultado de diligência ou recurso",
+    "Elaborar cálculos",
+    "Remetidos à Contadoria",
+    "Escolher tipo de intimação de pauta",
+    "Fazer conclusão",
+    "Minutar certidão da distribuição",
+    "Aguardando manifestação do MPF",
+    "[SU] Cumprir determinações",
+    "Escolher tipo de preparação",
+    "Remeter ao 1º Grau - Competência Delegada"
    ]
   }
  },
