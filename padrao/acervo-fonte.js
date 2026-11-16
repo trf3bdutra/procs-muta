@@ -21,7 +21,10 @@
 (function (W) {
   'use strict';
   if (W.CMTAtualizarFonte) return;
-  var CARGA = 'acervo/entrada/carga.json';
+  var PASTA = 'acervo/entrada/';
+  /* uma carga por envio, com nome próprio (data e hora + sufixo): cargas seguidas não se sobrepõem */
+  function nomeCarga() { var d = new Date(), p = function (n) { return ('0' + n).slice(-2); };
+    return PASTA + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes()) + p(d.getSeconds()) + '-' + Math.random().toString(36).slice(2, 6) + '.json'; }
   var COLS = {
     pje: ['Número do Processo', 'Classe', 'Assunto', 'Tarefa', 'Etiquetas', 'Prioridade', 'Data de Chegada', 'Polo Ativo', 'Polo Passivo',
           'Órgão Julgador', 'Colegiado', 'Sigiloso', 'Liminar Pendente', 'Cargo Judicial', 'Peso Prioridade', 'Data Último Movimento'],
@@ -132,28 +135,33 @@
                       arquivos: ok.map(function (p) { return { nome: p.nome, tipo: p.tipo, papel: p.papel, linhas: p.linhas }; }) } };
   }
 
-  /* espera o commit do Action que consome a carga; se o token puder ler Actions, avisa o andamento e a falha */
-  async function acompanhar(PM, sha, desde, aviso, minutos) {
-    var base = 'https://api.github.com/repos/' + PM.dono + '/' + PM.repo, limite = Date.now() + (minutos || 20) * 60000, semActions = false, volta = 0;
-    var op = function () { return { cache: 'no-store', headers: { 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + PM.atual, 'X-GitHub-Api-Version': '2022-11-28' } }; };
+  /* espera o Action consumir a carga: o arquivo sai de acervo/entrada (processada) ou vai para acervo/entrada/recusadas */
+  async function acompanhar(PM, sha, caminho, aviso, minutos) {
+    var base = 'https://api.github.com/repos/' + PM.dono + '/' + PM.repo, limite = Date.now() + (minutos || 20) * 60000, volta = 0, semActions = false;
+    var op = function (raw) { return { cache: 'no-store', headers: { 'Accept': raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json', 'Authorization': 'Bearer ' + PM.atual, 'X-GitHub-Api-Version': '2022-11-28' } }; };
     var espera = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+    var nome = caminho.split('/').pop(), recus = PASTA + 'recusadas/' + nome;
     while (Date.now() < limite) {
-      await espera(15000); volta++;
-      /* o commit do Action apaga a carga: é o sinal de que terminou (mesmo quando nada mudou na fonte) */
-      var c = null; try { c = await fetch(base + '/commits?sha=' + PM.ramo + '&path=' + encodeURIComponent(CARGA) + '&since=' + encodeURIComponent(desde) + '&per_page=5', op()); } catch (e) {}
-      if (c && c.ok) { var lst = await c.json(), fim = (lst || []).find(function (x) { return x.sha !== sha && /^Acervo fonte: regra/.test(((x.commit || {}).message) || ''); }); if (fim) return fim; }
+      await espera(volta ? 10000 : 6000); volta++;
+      var c = null; try { c = await fetch(base + '/contents/' + caminho + '?ref=' + PM.ramo + '&t=' + Date.now(), op()); } catch (e) {}
+      if (c && c.status === 404) {
+        var rr = null; try { rr = await fetch(base + '/contents/' + recus.replace(/\.json$/, '.txt') + '?ref=' + PM.ramo + '&t=' + Date.now(), op(true)); } catch (e) {}
+        if (rr && rr.ok) throw new Error('A carga foi recusada pelo processamento: ' + (await rr.text()).trim().split('\n').slice(-2).join(' '));
+        var cm = null; try { var l = await fetch(base + '/commits?sha=' + PM.ramo + '&path=' + encodeURIComponent(caminho) + '&per_page=1', op()); if (l.ok) cm = (await l.json())[0]; } catch (e) {}
+        return cm || { commit: { message: 'Acervo fonte: carga processada' } };
+      }
       if (!semActions) {
         var r = null; try { r = await fetch(base + '/actions/runs?head_sha=' + sha + '&per_page=10', op()); } catch (e) {}
         if (r && r.ok) {
           var j = await r.json(), run = (j.workflow_runs || []).find(function (x) { return /acervo-fonte\.yml$/.test(x.path || ''); });
-          if (run && run.status === 'completed' && run.conclusion !== 'success')
-            throw new Error('O GitHub não conseguiu atualizar a fonte (' + run.conclusion + '). A carga ficou em ' + CARGA + '. Detalhes: ' + run.html_url);
-          if (run) aviso('O GitHub está aplicando a regra do acervo e consultando o DataJud (' + (run.status === 'queued' ? 'na fila' : 'em execução') + ', ' + Math.round(volta / 4) + ' min)…');
+          if (run && run.status === 'completed' && run.conclusion === 'failure')
+            throw new Error('O GitHub não conseguiu processar a carga. A carga continua em ' + caminho + '. Detalhes: ' + run.html_url);
+          aviso('O GitHub está aplicando a regra do acervo (' + (run ? (run.status === 'queued' ? 'na fila' : run.status === 'completed' ? 'concluído; aguardando a gravação' : 'em execução') : 'aguardando início') + ', ' + Math.round(volta / 6) + ' min)…');
         } else if (r && (r.status === 403 || r.status === 404)) semActions = true;
       }
-      if (semActions) aviso('Carga enviada. Aguardando o GitHub gravar a nova fonte (' + Math.round(volta / 4) + ' min)…');
+      if (semActions) aviso('Carga enviada. Aguardando o GitHub gravar a nova fonte (' + Math.round(volta / 6) + ' min)…');
     }
-    throw new Error('A carga foi enviada, mas a fonte não foi gravada em ' + (minutos || 20) + ' minutos. Confira a aba Actions do procs-muta (Acervo fonte · atualizar).');
+    throw new Error('A carga foi enviada, mas não foi processada em ' + (minutos || 20) + ' minutos. Confira a aba Actions do procs-muta (Acervo fonte · atualizar).');
   }
 
   async function atualizar(arquivos, o) {
@@ -166,12 +174,12 @@
     var lidos = o.lidos || await classificar(Array.from(arquivos || []), X);
     var m = montarCarga(lidos, o.papeis);
     aviso('Enviando ao procs-muta: ' + m.resumo + '…');
-    var desde = new Date(Date.now() - 60000).toISOString();
-    var sha = await PM.gravar({ [CARGA]: JSON.stringify(m.carga) }, 'Acervo fonte: carga ' + m.modo + ' enviada pelo painel (' + m.resumo + ')');
-    aviso('Carga enviada. O GitHub aplica a regra do acervo e consulta o DataJud; leva alguns minutos.');
-    var cm = await acompanhar(PM, sha, desde, aviso, o.minutos);
+    var caminho = nomeCarga();
+    var sha = await PM.gravar({ [caminho]: JSON.stringify(m.carga) }, 'Acervo fonte: carga ' + m.modo + ' enviada pelo painel (' + m.resumo + ')');
+    aviso('Carga enviada. O GitHub aplica a regra do acervo; leva um ou dois minutos (o DataJud complementa depois, em segundo plano).');
+    var cm = await acompanhar(PM, sha, caminho, aviso, o.minutos);
     return { commit: cm, mensagem: ((cm.commit || {}).message || '').split('\n')[0], modo: m.modo, resumo: m.resumo, ignorados: m.ignorados };
   }
 
-  W.CMTAtualizarFonte = { atualizar: atualizar, classificar: classificar, montarCarga: montarCarga, planilha: planilha, linhasCsv: linhasCsv, linhasXlsx: linhasXlsx, PAPEIS: PAPEIS, CARGA: CARGA };
+  W.CMTAtualizarFonte = { atualizar: atualizar, classificar: classificar, montarCarga: montarCarga, planilha: planilha, linhasCsv: linhasCsv, linhasXlsx: linhasXlsx, PAPEIS: PAPEIS, PASTA: PASTA };
 })(typeof window !== 'undefined' ? window : globalThis);

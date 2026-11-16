@@ -1,12 +1,13 @@
 name: Acervo fonte · atualizar
-# Disparado pelo botão "Atualizar acervo fonte" (padrao/acervo-fonte.js), que grava acervo/entrada/carga.json com as
-# três planilhas do dia (PJe painel gerencial, Power BI tramitação e sigilosos). Aplica a regra do acervo
-# (scripts/painel/atualizar_fonte.py: só os processos efetivamente no gabinete), complementa com o DataJud
-# (só quem já está na fonte) e grava tudo num commit. Também roda à mão (Actions › Run workflow) só com o DataJud.
+# Disparado pelo botão "Atualizar acervo fonte" (padrao/acervo-fonte.js), que grava uma carga por envio em
+# acervo/entrada/AAAAMMDD-HHMMSS-xxxx.json (planilhas do dia com o papel de cada uma). Processa TODAS as cargas
+# pendentes, na ordem de envio, com scripts/painel/atualizar_fonte.py, e grava num commit; se o repositório andar
+# no meio, relê e refaz (até 3 vezes). Carga que o script recusar vai para acervo/entrada/recusadas/ com o motivo.
+# Depois, num passo separado, o DataJud complementa quem já está na fonte (não acrescenta processos).
 on:
   push:
     branches: [main]
-    paths: ["acervo/entrada/carga.json"]
+    paths: ["acervo/entrada/*.json"]
   workflow_dispatch:
     inputs:
       datajud:
@@ -24,33 +25,46 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with: { ref: main }
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - name: Testes do DataJud
         run: python3 -m unittest discover -s scripts/datajud -p 'test_sincronizar_banco.py' -v
-      - name: Regra do acervo (PJe + Power BI)
+      - name: Regra do acervo (cargas pendentes, em ordem) e gravação
         run: |
-          if [ -f acervo/entrada/carga.json ]; then
-            python3 scripts/painel/atualizar_fonte.py --carga acervo/entrada/carga.json
-            git rm -q acervo/entrada/carga.json
-          else
-            echo 'Sem carga nova; só o DataJud.'
-          fi
+          git config user.name 'acervo-fonte[bot]'
+          git config user.email 'acervo-fonte[bot]@users.noreply.github.com'
+          for tentativa in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            CARGAS=$(ls acervo/entrada/*.json 2>/dev/null | sort)
+            if [ -z "$CARGAS" ]; then echo 'Sem carga pendente.'; exit 0; fi
+            NOMES=""
+            for f in $CARGAS; do
+              n=$(basename "$f" .json)
+              if python3 scripts/painel/atualizar_fonte.py --carga "$f" > "/tmp/$n.log" 2>&1; then
+                cat "/tmp/$n.log"; git rm -q "$f"; NOMES="$NOMES $n"
+              else
+                cat "/tmp/$n.log"; mkdir -p acervo/entrada/recusadas
+                git mv "$f" "acervo/entrada/recusadas/$n.json"; tail -5 "/tmp/$n.log" > "acervo/entrada/recusadas/$n.txt"; NOMES="$NOMES $n(recusada)"
+              fi
+            done
+            git add -A acervo
+            git commit -q -m "Acervo fonte: regra do gabinete ($(TZ=America/Cuiaba date +%d/%m/%Y\ %H:%M)) · cargas:$NOMES"
+            if git push -q origin HEAD:main; then exit 0; fi
+            echo "O repositório andou durante o processamento; tentativa $tentativa refeita."
+          done
+          exit 1
       - name: DataJud (só complementa quem já está na fonte)
         if: github.event_name == 'push' || inputs.datajud
         continue-on-error: true
         env:
           DATAJUD_API_KEY: ${{ secrets.DATAJUD_API_KEY }}
-        run: python3 scripts/datajud/sincronizar_banco.py --acervo . --aplicar --chave-wiki
-      - name: Gravar no procs-muta
         run: |
-          git config user.name 'acervo-fonte[bot]'
-          git config user.email 'acervo-fonte[bot]@users.noreply.github.com'
-          git add -A acervo
-          if git diff --cached --quiet; then echo 'Nada mudou.'; exit 0; fi
-          git commit -q -m "Acervo fonte: regra do gabinete e DataJud ($(TZ=America/Cuiaba date +%d/%m/%Y\ %H:%M))"
-          for i in 1 2 3; do
-            git push origin HEAD:main && exit 0
-            git pull --rebase -q origin main || exit 1
+          for tentativa in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python3 scripts/datajud/sincronizar_banco.py --acervo . --aplicar --chave-wiki || exit 0
+            git add -A acervo/fonte.json acervo/fonte.csv acervo/datajud
+            if git diff --cached --quiet; then echo 'DataJud: nada mudou.'; exit 0; fi
+            git commit -q -m "Acervo fonte: DataJud ($(TZ=America/Cuiaba date +%d/%m/%Y\ %H:%M))"
+            if git push -q origin HEAD:main; then exit 0; fi
           done
-          exit 1

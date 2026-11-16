@@ -203,7 +203,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 <header id="top">
   <a id="marca" href="#inicio" title="Início da triagem"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><b>Triagem<i>.</i></b></a>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
-  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
+  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><a class="btn" id="bt-pautas" href="/pautas/" title="Pautas de julgamento: sessões, marcos, seleção prévia e PDF da pauta">Pautas</a><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
 </header>
 <main id="main"><div id="carga"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
 <div id="rodape" class="off" role="region" aria-label="Ações em bloco" hidden></div>
@@ -764,7 +764,10 @@ function abrirAcervo() {
   IMP = { log: '', bad: false, ocupado: false, lidos: null, papeis: {} };
   const g = gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">Acervo fonte</p><h2>Atualizar acervo fonte<span style="color:var(--g2)">.</span></h2><p>Escolha as planilhas do PJe e do Power BI. Confira o papel de cada uma e envie. O GitHub aplica a regra do acervo, complementa com o DataJud e grava a fonte e o operacional num só commit. Leva alguns minutos.</p></div><button type="button" class="x" style="font-size:20px" data-ia="fechar" aria-label="Fechar">×</button></div><div class="gv-c" id="ia-c"></div><div class="gv-f" id="ia-f"></div>');
   g.addEventListener('click', (e) => { const a = e.target.closest('[data-ia]'); if (!a || a.disabled) return; const k = a.dataset.ia;
-    if (k === 'escolher') $('#ia-file').click();
+    if (k === 'tk') conectarToken();
+    else if (k === 'tk-trocar') { IMP.trocaTk = true; IMP.tkErro = ''; pintaAcervo(); }
+    else if (k === 'tk-cancelar') { IMP.trocaTk = false; IMP.tkErro = ''; pintaAcervo(); }
+    else if (k === 'escolher') $('#ia-file').click();
     else if (k === 'limpar') { IMP.lidos = null; IMP.papeis = {}; IMP.log = ''; pintaAcervo(); }
     else if (k === 'enviar') enviarFonte();
     else if (k === 'datajud') rodarDataJud();
@@ -772,8 +775,20 @@ function abrirAcervo() {
   g.addEventListener('change', (e) => { const t = e.target; if (t.dataset.papel != null) { IMP.papeis[t.dataset.papel] = t.value; pintaAcervo(); } });
   pintaAcervo(); fonteInfo().then((i) => { if (i && IMP) { IMP.fonte = i; pintaAcervo(); } }); }
 function papelDe(l) { return IMP.papeis[l.nome] || l.papel; }
+/* token do GitHub (procs-muta) para enviar a carga: o mesmo do motor (ProcsMuta), guardado nesta aba ou neste navegador */
+function cardToken() { const P = PM(), ok = !!(P && P.atual);
+  if (ok && !IMP.trocaTk) return '<div class="card" style="padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="flex:1 1 220px;font-size:12.5px;color:var(--m2)"><b style="color:var(--v)">Conectado ao procs-muta</b> · token ' + (P.lembrado ? 'guardado neste navegador' : 'só nesta aba') + '</span><button type="button" class="btn" data-ia="tk-trocar">Trocar token</button></div>';
+  return '<div class="card" style="padding:12px 14px;display:flex;flex-direction:column;gap:8px"><b style="font-size:13.5px;color:var(--v)">Token do GitHub (procs-muta)</b><span style="font-size:12.5px;color:var(--m2)">Necessário para enviar a carga. Token com acesso ao repositório trf3bdutra/procs-muta, permissão Contents (leitura e gravação).</span>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><input type="password" id="ia-tk" autocomplete="off" placeholder="github_pat_… ou ghp_…" style="flex:1 1 260px;padding:7px 9px;border:1px solid var(--l,#d6dbe0);border-radius:7px;font:inherit"><label style="display:flex;gap:5px;align-items:center;font-size:12.5px"><input type="checkbox" id="ia-tk-l" checked> lembrar neste navegador</label><button type="button" class="btn pri" data-ia="tk">Conectar</button>' + (ok ? '<button type="button" class="btn" data-ia="tk-cancelar">Cancelar</button>' : '') + '</div>' +
+    (IMP.tkErro ? '<span style="font-size:12.5px;color:var(--r)">' + esc(IMP.tkErro) + '</span>' : '') + '</div>'; }
+async function conectarToken() { const P = PM(), v = (($('#ia-tk') || {}).value || '').trim(), lb = !!(($('#ia-tk-l') || {}).checked);
+  if (!P || !P.definir) { IMP.tkErro = 'O motor ainda está carregando; tente de novo em instantes.'; pintaAcervo(); return; }
+  if (!v) { IMP.tkErro = 'Informe o token.'; pintaAcervo(); return; }
+  IMP.tkErro = 'Conferindo no GitHub…'; pintaAcervo();
+  const r = await P.definir(v, lb); IMP.tkErro = r && r.ok ? '' : ((r && r.erro) || 'O GitHub recusou o token.');
+  if (r && r.ok) { IMP.trocaTk = false; try { const G = M().__acervoGitHub; if (G && G.token) G.token(v); } catch (e) {} } pintaAcervo(); }
 function pintaAcervo() { const c = $('#ia-c'); if (!c || !IMP) return; const L = IMP.lidos;
-  let h = '';
+  let h = cardToken();
   if (!L) h += '<div class="drop" id="ia-drop"><b style="font-size:15px;color:var(--v)">Arraste as planilhas aqui</b><span style="font-size:12.5px;color:var(--m)">uma ou várias · .csv ou .xlsx · o tipo é reconhecido pelo cabeçalho, não pelo nome</span><button type="button" class="btn pri" data-ia="escolher"' + (IMP.ocupado ? ' disabled' : '') + '>Escolher arquivos</button><input type="file" id="ia-file" multiple accept=".xlsx,.xls,.csv" hidden></div>';
   else { const ok = L.filter((l) => l.tipo && l.processos), temPr = ok.some((l) => papelDe(l) === 'principal');
     h += '<div><p class="k" style="margin:0 0 4px;color:var(--m)">Conferência · papel de cada planilha</p>' + L.map((l) => { const tf = Object.keys(l.tarefas || {}), pp = papelDe(l);
