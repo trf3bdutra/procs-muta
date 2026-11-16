@@ -1,0 +1,45 @@
+/* Ab Initio · Gestor de acervo e Triagem no padrão da página Pautas (88-padrao-pautas.js)
+   Só visual: um painel lateral claro, cabeçalho editorial, seções com régua, números em faixa.
+   Nada muda de lugar nos controles; o tema escuro fica como está. */
+html:not([data-theme="dark"]) body{--pp-t:#235a55;--pp-g:#805b18;--pp-g2:#a57829;--pp-p:#fbfaf5;--pp-l:#ece9df;--pp-b:#d3dfdc;--pp-tx:#203b39;--pp-m:#617570}
+
+/* Referências rápidas: gaveta pelo botão do cabeçalho */
+.pp-ref{height:36px;padding:0 12px;border:1px solid rgba(230,194,122,.45);border-radius:999px;background:transparent;color:#e6c27a;font:700 12px Figtree,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.pp-ref[aria-pressed="true"]{background:rgba(230,194,122,.16)}
+body:not(.rf-aberto) #rf-lado{display:none!important}
+body.rf-aberto #rf-lado{z-index:70!important;box-shadow:0 18px 50px rgba(10,30,40,.35)!important}
+body:not(.rf-on) .pp-ref{display:none!important}
+html body.rf-on:not(.rf-aberto){--rlw:0px!important}
+html body.cmt-acv.rf-on:not(.rf-aberto) #cmt-motor{width:calc(100vw - var(--ixw))!important}
+
+/* Gestor de acervo · índice lateral claro, como a coluna da esteira */
+html:not([data-theme="dark"]) body #mx-idx{background:transparent!important;box-shadow:none!important;border-radius:0!important;border-top:2px solid var(--pp-t)!important;padding:11px 0 14px!important;color:var(--pp-tx)!important}
+html:not([data-theme="dark"]) body #mx-idx .mx-k{font:600 10px ui-monospace,'IBM Plex Mono',monospace!important;letter-spacing:.1em!important;color:var(--pp-g)!important;margin:0 0 10px!important}
+html:not([data-theme="dark"]) body #mx-idx a{color:var(--pp-tx)!important;border-radius:0!important;border-left:1px solid #d8d3c6;padding:7px 10px!important;margin:0!important}
+html:not([data-theme="dark"]) body #mx-idx a:hover{background:#fff!important}
+html:not([data-theme="dark"]) body #mx-idx a.on{background:#fff!important;border-left:3px solid var(--pp-g2);padding-left:8px!important;color:var(--pp-tx)!important}
+html:not([data-theme="dark"]) body #mx-idx .mx-i em{background:#fff!important;color:var(--pp-m)!important;border:1px solid #c8c3b6;border-radius:50%!important;min-width:22px!important;height:22px!important;font:600 10px ui-monospace,monospace!important}
+html:not([data-theme="dark"]) body #mx-idx a.on em{background:#d9a83f!important;border-color:#d9a83f;color:#3d2c08!important}
+html:not([data-theme="dark"]) body #mx-idx .mx-ss{border-left:0!important;margin:0 0 4px 12px!important;padding-left:0!important}
+html:not([data-theme="dark"]) body #mx-idx .mx-s{color:var(--pp-m)!important;font-size:11.5px!important}
+html:not([data-theme="dark"]) body #mx-idx .mx-ac{border-top:1px solid var(--pp-l)!important}
+html:not([data-theme="dark"]) body #mx-idx .mx-ac button{color:var(--pp-g)!important;border-color:#bcb7a9!important}
+
+/* Gestor · cabeçalho e seções */
+html:not([data-theme="dark"]) body #au-pan-ind .pt-h{background:transparent!important;border:0!important;border-top:2px solid var(--pp-t)!important;border-radius:0!important;box-shadow:none!important;padding:14px 0 14px!important}
+html:not([data-theme="dark"]) body #au-pan-ind .pt-h .mx-ey{font:600 10px ui-monospace,'IBM Plex Mono',monospace!important;letter-spacing:.1em!important;color:var(--pp-g)!important}
+html:not([data-theme="dark"]) body #au-pan-ind .pt-h h1{font:650 40px/1.05 Figtree,system-ui,sans-serif!important;letter-spacing:-.045em!important;color:var(--pp-tx)!important}
+html:not([data-theme="dark"]) body #au-pan-ind>section.ai-b{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding-left:0!important;padding-right:0!important}
+html:not([data-theme="dark"]) body #au-pan-ind>section.ai-b>h3{border-top:2px solid var(--pp-t)!important;padding-top:12px!important;color:var(--pp-tx)!important;font-weight:650!important;letter-spacing:-.03em!important}
+html:not([data-theme="dark"]) body #au-pan-ind>section.ai-b>h3>b{background:#fff!important;color:var(--pp-m)!important;border:1px solid #c8c3b6!important;border-radius:50%!important;box-shadow:none!important}
+html:not([data-theme="dark"]) body #au-pan-ind .ai-ks{gap:0!important;border:1px solid var(--pp-b);background:#fff}
+html:not([data-theme="dark"]) body #au-pan-ind .ai-k{border:0!important;border-left:1px solid var(--pp-l)!important;border-bottom:1px solid var(--pp-l)!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;color:var(--pp-tx)!important;padding:9px 12px!important}
+html:not([data-theme="dark"]) body #au-pan-ind .ai-k span{font:600 9.5px ui-monospace,monospace!important;letter-spacing:.08em!important;text-transform:uppercase;color:var(--pp-g)!important}
+html:not([data-theme="dark"]) body #au-pan-ind .ai-k b{font-size:24px!important;font-weight:650!important;letter-spacing:-.03em;color:var(--pp-tx)!important}
+html:not([data-theme="dark"]) body #au-pan-ind .ai-k small{color:#8a8d86!important}
+html:not([data-theme="dark"]) body #au-pan-ind .ai-k:hover{background:var(--pp-p)!important}
+html:not([data-theme="dark"]) body #au-pan-ind .ai-c{border-radius:0!important;border:1px solid var(--pp-b)!important;box-shadow:none!important}
+html:not([data-theme="dark"]) body #au-pan-ind .tk-read>div{border-radius:0!important;box-shadow:none!important;background:#fff!important;border:1px solid var(--pp-b)!important;border-left:3px solid var(--fc,var(--pp-g2))!important}
+
+/* Triagem · moldura do painel lateral (escaninhos) */
+html:not([data-theme="dark"]) body.cmt-modo #index:not(.ix-min){background:transparent}
