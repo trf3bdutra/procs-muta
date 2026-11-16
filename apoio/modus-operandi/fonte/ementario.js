@@ -80,9 +80,10 @@ var DIM={
   c:{n:'Classe',v:function(x){return x.c||'—';}},
   o:{n:'Órgão',v:function(x){return x.o||'Órgão não informado';}},
   res:{n:'Resultado',v:function(x){return x._res;}},
-  y:{n:'Mês',v:function(x){return x.y||'—';}}
+  y:{n:'Mês',v:function(x){return x.y||'—';}},
+  cur:{n:'Curadoria',v:function(x){return x._cur===false?'Pendente':'Feita';}}
 };
-var DIMS=['t','apr','ramo','ass','sub','c','o','res','y'];
+var DIMS=['t','apr','ramo','ass','sub','c','o','res','y','cur'];
 var MODOS=[['lista','Lista'],['mapa','Mapa mental'],['tempo','Linha do tempo'],['matriz','Matriz']];
 var Y4=(function(){var d=new Date();return (d.getFullYear()-4)+'-'+('0'+(d.getMonth()+1)).slice(-2);})();
 var E={idx:null,err:null,carregando:false,F:{},q:'',y1:Y4,y2:'',modo:'lista',shown:60,open:{},sel:null,mais:{},
@@ -111,8 +112,33 @@ function carregar(){
       x._res=SENT[r.sentidoResultado]||(x.r?classRes(x.r):'Sem classificação');
       x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x.temas,x._ass,x.sub,x.tags.join(' '),x.esp,x.tese,x.proc?(x.proc.pt||[]).concat(x.proc.ac||[]).map(function(z){return z[1];}).join(' '):''].join(' '));if(x.c&&x.cl)E.clsNome[x.c]=x.cl;return x;});
     d.sort(function(a,b){return (b.d||'').localeCompare(a.d||'');});
-    E.idx=d;E.carregando=false;if(EM.sub==='prec')render();
+    d.forEach(function(x){x._cur=true;});
+    E.idx=d;E.carregando=false;if(EM.sub==='prec')render();serie();
   }).catch(function(e){E.carregando=false;$('#e-out').innerHTML='<p class="empty">Não foi possível abrir a base do gabinete ('+esc(e.message)+').</p>';});
+}
+/* o resto dos precedentes: a série da base do TRF-3, sem curadoria ainda */
+function aprSerie(c,e,r){var t=nz([c,e,r].join(' '));
+  if(/embargos de declara/.test(t)||c==='ED')return 'Embargos de declaração';
+  if(/agravo interno|agravo regimental|agravo legal/.test(t)||c==='AgInt')return 'Agravo interno';
+  if(/juizo de retratacao/.test(t))return 'Juízo de retratação';
+  return 'Julgamento do recurso';}
+function serie(){
+  if(!window.JR_indice||E.serieOk)return;E.serieOk=1;
+  var ja={};E.idx.forEach(function(x){ja[x.n+'|'+String(x.d).slice(0,10)]=1;});
+  window.JR_indice().then(function(L){
+    var novos=L.filter(function(r){return !ja[r.n+'|'+String(r.d).slice(0,10)];}).map(function(r){
+      var x={id:'js-'+r.id,t:r.t,n:r.n,c:r.c||'',cl:r.cl||'',o:r.o||'',d:r.d||'',p:r.p||'',e:r.e||'',r:r.r||'',
+        temas:'',sub:'',tags:[],esp:'',tese:'',disp:'',jur:'',proc:null,it:r.k==='integral',
+        _cur:false,_serie:true,_st:r.t,_sy:String(r.d||'').slice(0,4),_sid:r.id,_ass:null,_ramo:null,_rd:''};
+      x.y=(x.d||'').slice(0,7);x._apr=aprSerie(x.c,x.e,x.r);
+      x._res=x.r?classRes(x.r):'Sem classificação';
+      x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r].join(' '));
+      if(x.c&&x.cl)E.clsNome[x.c]=x.cl;
+      return x;});
+    if(!novos.length)return;
+    E.idx=E.idx.concat(novos).sort(function(a,b){return (b.d||'').localeCompare(a.d||'');});
+    if(EM.sub==='prec')render();
+  }).catch(function(e){E.serieErr=e.message;});
 }
 function passa(x,excl){
   if(E.plist&&!E.plist.set[x.n])return false;
@@ -268,6 +294,13 @@ function ppPartes(P){
 }
 function abrirIT(x){
   if(!x)return;E.det=x.id;
+  /* julgado da série: a ementa e o inteiro teor vêm do arquivo do ano, baixado na hora */
+  if(x._serie&&!x._cheio&&window.JR_teor){x._cheio=1;
+    window.JR_teor(x).then(function(r){if(!r)return;
+      if(r.ementa)x.e=r.ementa;if(r.resultado_colegiado)x.r=r.resultado_colegiado;
+      if(r.inteiro_teor){x.it=true;if(typeof BASE!=='undefined'&&BASE){BASE.it=BASE.it||{};BASE.it[x.id]=r.inteiro_teor;}}
+      x._link=r.link_integra_externa||'';x._q=nz([x._q,r.ementa,r.inteiro_teor].join(' '));
+      if(E.det===x.id)abrirIT(x);}).catch(function(){});}
   $$('#e-out li.e-proc.sel').forEach(function(l){l.classList.remove('sel');});var li=$('#e-out li.e-proc[data-id="'+x.id+'"]');if(li)li.classList.add('sel');
   var it=BASE&&BASE.it&&BASE.it[x.id],ct=citados([x.temas,x.tese,x.e,x.r,x.jur,x.disp,it].join('\n'));
   var ass=x._ass||titulo(x)||'(sem assunto)';
