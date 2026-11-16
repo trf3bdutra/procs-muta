@@ -146,7 +146,6 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
 | Status de julgamento | `Status de Julgamento` | lista | operacional · `pauta` | 0 de 4.725 | PAUTADO / EM MESA / ADIADO / RETIRADO DE PAUTA; status da entrada de pauta (_pautaEntries) ou campo |
-| Pendente de 1º julgamento | `Pendente de 1º julgamento` | regra · calculado | fonte · `Pendente_1Julgamento` | 2.683 de 2.788 | do BI (Pendente_1Julgamento) |
 | Sessão original | `Sessão original` | regra · calculado | operacional · `pauta` | 1.008 de 4.725 | data dd/mm/aaaa |
 | Item | `Item (Pauta de Julgamento)` | regra · calculado | operacional · `pauta` | 0 de 4.725 | item da entrada de pauta da sessão selecionada |
 | Sessão de destino | `Nova sessão de destino` | regra · calculado | operacional · `pauta` | 175 de 4.725 | antes "Sessão Destino" |
@@ -205,12 +204,11 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 | Distribuição | `data_distribuição` | importado · só leitura | fonte · `data_distribuição` | 2.788 de 2.788 |  |
 | Relator | `Relator` | importado · só leitura | — (sem coluna na base) | — |  |
 | Etiquetas do PJe | `_etq` | importado · só leitura | fonte · `Etiquetas Originais` | 2.658 de 2.788 |  |
-| Assuntos do processo (códigos CNJ) | `Assuntos_do_Processo` | importado · só leitura | fonte · `Assuntos_do_Processo` | 2.683 de 2.788 | do Power BI |
-| Seção de origem | `Seção de Origem` | importado · só leitura | fonte · `Seção de Origem` | 2.683 de 2.788 | do Power BI |
-| Valor da causa | `valor_causa` | importado · só leitura | fonte · `valor_causa ou Valor_da_Causa` | 2.762 de 2.788 |  |
+| Valor da causa | `valor_causa` | importado · só leitura | fonte · `valor_causa` | 2.762 de 2.788 |  |
 | Distribuição no 1º grau | `dt_distribuicao_1g` | data · importado · só leitura | fonte · `dt_distribuicao_1g` | 2.016 de 2.788 |  |
 | Prioridade | `prioridade` | importado · só leitura | fonte · `prioridade` | 2.788 de 2.788 | do PJe |
-| Nível de sigilo | `Nível_Sigilo` | importado · só leitura | fonte · `Nível_Sigilo` | 58 de 2.788 | do Power BI (sigilosos) |
+| Sigiloso | `Sigiloso` | importado · só leitura | fonte · `Sigiloso` | — | do PJe |
+| Órgão julgador | `Órgão Julgador` | importado · só leitura | fonte · `Órgão Julgador` | — | do PJe |
 
 **Partes**
 
@@ -233,15 +231,8 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 | Paradeiro conferido em | `paradeiro_em` | data · importado · só leitura | fonte · `paradeiro_em` | 2.788 de 2.788 | data da carga que confirmou a tarefa |
 | Tarefa anterior | `tarefa_anterior` | importado · só leitura | fonte · `tarefa_anterior` | 0 de 2.788 | quando saiu de uma tarefa sem entrar em outra conhecida |
 | Saiu da tarefa em | `saiu_da_tarefa_em` | data · importado · só leitura | fonte · `saiu_da_tarefa_em` | 0 de 2.788 |  |
-| Última movimentação | `Última_Movimentação` | importado · só leitura | fonte · `Última_Movimentação ou ultimo_movimento` | 2.788 de 2.788 | do Power BI |
-| Data da última movimentação | `Data_Última_Movimentação` | data · importado · só leitura | fonte · `Data_Última_Movimentação` | 2.683 de 2.788 |  |
-| Tempo de tramitação (dias) | `Tempo_de_Tramitação` | importado · só leitura | fonte · `Tempo_de_Tramitação` | 2.683 de 2.788 | do Power BI |
-| Concluso | `Conclusão?` | importado · só leitura | fonte · `Conclusão?` | 2.683 de 2.788 | do Power BI |
-| Data da conclusão | `Data_Conclusão` | data · importado · só leitura | fonte · `Data_Conclusão` | 2.509 de 2.788 |  |
-| Fase | `Fase` | importado · só leitura | fonte · `Fase` | 120 de 2.788 | do Power BI (sobrestamentos) |
-| Complemento da fase | `Complemento` | importado · só leitura | fonte · `Complemento` | 91 de 2.788 |  |
-| Data da fase | `Data_Fase` | data · importado · só leitura | fonte · `Data_Fase` | 120 de 2.788 |  |
-| Indicador (Power BI) | `Indicador` | importado · só leitura | fonte · `Indicador` | 2.683 de 2.788 | tramitação líquida ou sobrestados |
+| Última movimentação | `ultimo_movimento` | importado · só leitura | fonte · `ultimo_movimento` | — | do PJe |
+| Data da última movimentação | `Data Último Movimento` | data · importado · só leitura | fonte · `Data Último Movimento` | — | do PJe |
 | DataJud · último movimento | `DataJud · Último movimento` | importado · só leitura | fonte · `DataJud · Último movimento` | 0 de 2.788 |  |
 | DataJud · data do movimento | `DataJud · Data movimento` | data · importado · só leitura | fonte · `DataJud · Data movimento` | 0 de 2.788 |  |
 | DataJud · situação | `DataJud · Situação` | importado · só leitura | fonte · `DataJud · Situação` | 0 de 2.788 |  |

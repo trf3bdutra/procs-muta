@@ -4,7 +4,8 @@
    Cada planilha escolhida tem um papel (sugerido pelo conteúdo; a tela deixa trocar antes de enviar):
      principal     lista dos em andamento (PJe, com a coluna Tarefa): define quem está na fonte e onde está.
                    Entra quem aparece; sai quem não aparece (o trabalho registrado vai para acervo/operacional-arquivo.json).
-     complementar  mais informações (Power BI, sigilosos, relação detalhada, outra): só preenche quem já está na fonte.
+     complementar  mais informações (relação detalhada do PJe ou outra): só preenche quem já está na fonte.
+                   Planilhas do Power BI (tramitação, sigilosos) não são mais usadas: são recusadas na leitura.
      tarefa        lista de uma tarefa do PJe: atualiza o paradeiro de quem veio nela; quem estava naquela tarefa
                    e não veio perde a tarefa (fica tarefa_anterior e saiu_da_tarefa_em), sem sair da fonte.
    Fluxo: o navegador lê as planilhas, grava acervo/entrada/carga.json no procs-muta; o GitHub Action
@@ -97,6 +98,7 @@
     var tipo = tem('Número do Processo') && tem('Tarefa') ? 'pje'
       : tem('Nível_Sigilo') ? 'sigilosos'
       : tem('Processo') && (tem('Indicador') || tem('Tempo_de_Tramitação')) ? 'bi' : 'generica';
+    if (tipo === 'bi' || tipo === 'sigilosos') return { nome: nome || '', tipo: '', papel: '', processos: 0, tarefas: {}, linhas: [], erro: 'planilha do Power BI: não é mais usada' };
     var cols = COLS[tipo] || H.filter(function (h) { return h && !PII.test(h); });
     var chave = CHAVES.find(function (c) { return tem(c); }), idx = {};
     H.forEach(function (h, k) { if (cols.indexOf(h) >= 0 && !(h in idx)) idx[h] = k; });

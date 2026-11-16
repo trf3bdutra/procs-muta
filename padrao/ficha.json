@@ -378,32 +378,11 @@
        "editavel": false
       },
       {
-       "rotulo": "Assuntos do processo (códigos CNJ)",
-       "chave": "Assuntos_do_Processo",
-       "tipo": "texto",
-       "fonte": [
-        "Assuntos_do_Processo"
-       ],
-       "editavel": false,
-       "regra": "do Power BI"
-      },
-      {
-       "rotulo": "Seção de origem",
-       "chave": "Seção de Origem",
-       "tipo": "texto",
-       "fonte": [
-        "Seção de Origem"
-       ],
-       "editavel": false,
-       "regra": "do Power BI"
-      },
-      {
        "rotulo": "Valor da causa",
        "chave": "valor_causa",
        "tipo": "texto",
        "fonte": [
-        "valor_causa",
-        "Valor_da_Causa"
+        "valor_causa"
        ],
        "editavel": false
       },
@@ -427,14 +406,24 @@
        "regra": "do PJe"
       },
       {
-       "rotulo": "Nível de sigilo",
-       "chave": "Nível_Sigilo",
+       "rotulo": "Sigiloso",
+       "chave": "Sigiloso",
        "tipo": "texto",
        "fonte": [
-        "Nível_Sigilo"
+        "Sigiloso"
        ],
        "editavel": false,
-       "regra": "do Power BI (sigilosos)"
+       "regra": "do PJe"
+      },
+      {
+       "rotulo": "Órgão julgador",
+       "chave": "Órgão Julgador",
+       "tipo": "texto",
+       "fonte": [
+        "Órgão Julgador"
+       ],
+       "editavel": false,
+       "regra": "do PJe"
       }
      ]
     },
@@ -557,90 +546,23 @@
       },
       {
        "rotulo": "Última movimentação",
-       "chave": "Última_Movimentação",
+       "chave": "ultimo_movimento",
        "tipo": "texto",
        "fonte": [
-        "Última_Movimentação",
         "ultimo_movimento"
        ],
        "editavel": false,
-       "regra": "do Power BI"
+       "regra": "do PJe"
       },
       {
        "rotulo": "Data da última movimentação",
-       "chave": "Data_Última_Movimentação",
+       "chave": "Data Último Movimento",
        "tipo": "data",
        "fonte": [
-        "Data_Última_Movimentação"
-       ],
-       "editavel": false
-      },
-      {
-       "rotulo": "Tempo de tramitação (dias)",
-       "chave": "Tempo_de_Tramitação",
-       "tipo": "texto",
-       "fonte": [
-        "Tempo_de_Tramitação"
+        "Data Último Movimento"
        ],
        "editavel": false,
-       "regra": "do Power BI"
-      },
-      {
-       "rotulo": "Concluso",
-       "chave": "Conclusão?",
-       "tipo": "texto",
-       "fonte": [
-        "Conclusão?"
-       ],
-       "editavel": false,
-       "regra": "do Power BI"
-      },
-      {
-       "rotulo": "Data da conclusão",
-       "chave": "Data_Conclusão",
-       "tipo": "data",
-       "fonte": [
-        "Data_Conclusão"
-       ],
-       "editavel": false
-      },
-      {
-       "rotulo": "Fase",
-       "chave": "Fase",
-       "tipo": "texto",
-       "fonte": [
-        "Fase"
-       ],
-       "editavel": false,
-       "regra": "do Power BI (sobrestamentos)"
-      },
-      {
-       "rotulo": "Complemento da fase",
-       "chave": "Complemento",
-       "tipo": "texto",
-       "fonte": [
-        "Complemento"
-       ],
-       "editavel": false
-      },
-      {
-       "rotulo": "Data da fase",
-       "chave": "Data_Fase",
-       "tipo": "data",
-       "fonte": [
-        "Data_Fase"
-       ],
-       "editavel": false
-      },
-      {
-       "rotulo": "Indicador (Power BI)",
-       "chave": "Indicador",
-       "tipo": "texto",
-       "fonte": [
-        "Indicador"
-       ],
-       "editavel": false,
-       "regra": "tramitação líquida ou sobrestados"
+       "regra": "do PJe"
       },
       {
        "rotulo": "DataJud · último movimento",
@@ -2000,16 +1922,6 @@
         "RETIRADO DE PAUTA"
        ],
        "regra": "status da entrada de pauta (_pautaEntries) ou campo"
-      },
-      {
-       "rotulo": "Pendente de 1º julgamento",
-       "chave": "Pendente de 1º julgamento",
-       "tipo": "texto",
-       "fonte": [
-        "Pendente_1Julgamento"
-       ],
-       "editavel": false,
-       "regra": "do BI (Pendente_1Julgamento)"
       },
       {
        "rotulo": "Sessão original",

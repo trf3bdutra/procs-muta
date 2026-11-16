@@ -20,7 +20,7 @@ const dg = s => String(s || '').replace(/\D/g, '');
 const iso = v => { const s = String(v || '').trim(), m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(s); return m ? m[3] + '-' + m[2] + '-' + m[1] : /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : ''; };
 let BASE = null, SUG = null, BASE_T = 0;
 /* sigilo pelo acervo: nível informado (ex.: Segredo De Justiça) ou presença na planilha de sigilosos */
-const sigiloDe = r => String(r['Nível_Sigilo'] || '').trim() || (String(r.Consta_Acervo_Sigiloso || '').trim() === 'Sim' ? 'Sigiloso' : '');
+const sigiloDe = r => String(r['Nível_Sigilo'] || '').trim() || (/^(sim|true|s)$/i.test(String(r.Sigiloso || '').trim()) || String(r.Consta_Acervo_Sigiloso || '').trim() === 'Sim' ? 'Sigiloso' : '');
 async function acervo() {
   if (!BASE || Date.now() - BASE_T > 300e3) {
     const { txt } = await L.lerGrande('acervo/fonte.json'), d = JSON.parse(txt);

@@ -9,8 +9,9 @@ Uso:
 Papéis das planilhas:
   principal     lista dos em andamento (PJe com a coluna Tarefa). Define quem está na fonte e onde está: entra quem
                 aparece, sai quem não aparece. Cada planilha só refaz as próprias colunas, quando vem na carga.
-  complementar  mais informações: Power BI (tramitação), sigilosos ou outra planilha com número do processo. Só preenche
-                quem já está na fonte; Power BI e sigilosos refazem as suas colunas e as marcas Consta_Acervo_*.
+  complementar  mais informações: relação detalhada do PJe ou outra planilha com número do processo. Só preenche quem
+                já está na fonte. Planilhas do Power BI (tramitação, sigilosos) não são mais usadas: são ignoradas, e as
+                colunas delas saem da fonte.
   tarefa        lista de uma tarefa do PJe. Atualiza o paradeiro de quem veio nela (e acrescenta quem faltava); quem estava
                 naquela tarefa e não veio perde a tarefa (tarefa_anterior, saiu_da_tarefa_em), sem sair da fonte.
 Sem planilha principal, a carga é parcial: ninguém sai da fonte.
@@ -81,7 +82,8 @@ ALIAS = {"Tarefa": "tarefa_atual", "Tarefa Atual": "tarefa_atual", "tarefa atual
          "Data de Chegada": "data_entrada_tarefa", "Data Entrada Tarefa": "data_entrada_tarefa",
          "Classe Judicial": "classe_judicial", "Assunto Judicial": "assunto_judicial", "Etiquetas": "Etiquetas",
          "Polo Ativo": "polo_ativo", "Polo Passivo": "polo_passivo", "Prioridade": "prioridade"}
-LEGADO = {"fora_pje", "DAT_FIM", "NUM_CPF_MAGIST", "SIN_PRAZO_LEGAL", "SIN_SECRETARIA", "SIN_CONTADORIA", "SIN_REM_EXTERNA",
+# Power BI (tramitação e sigilosos) deixou de ser usado em 16/11/2026: as suas colunas saem da fonte a cada carga
+LEGADO = set(BI_COLS) | set(SIG_COLS) | {"Consta_Acervo_Gab_A", "Consta_Acervo_Sigiloso", "fora_pje", "DAT_FIM", "NUM_CPF_MAGIST", "SIN_PRAZO_LEGAL", "SIN_SECRETARIA", "SIN_CONTADORIA", "SIN_REM_EXTERNA",
           "SIN_UFOR", "BASE", "K_TEMPO", "SIN_PEND_1JULG", "SIN_CLS", "DES_ULTIMA_MOVIME_SIGILO"}
 PARADEIRO = ("tarefa_atual", "data_entrada_tarefa", "tarefa_anterior", "saiu_da_tarefa_em", "paradeiro_em")
 
@@ -224,7 +226,12 @@ def main():
         arqs = [arquivo(f, ler_planilha(f), papel="principal") for f in [a.pje, a.bi, a.sigilosos] if f]
         arqs += [arquivo(f, ler_planilha(f), papel=pp) for pp, fs in (("principal", a.principal), ("complementar", a.complementar), ("tarefa", a.tarefa)) for f in fs]
     arqs = [x for x in arqs if x["regs"]]
-    if not arqs:
+    bi_fora = [x["nome"] + " (Power BI: não é mais usado)" for x in arqs if x["tipo"] in ("bi", "sigilosos")]
+    arqs = [x for x in arqs if x["tipo"] not in ("bi", "sigilosos")]
+    if not arqs and bi_fora:
+        sys.exit("Só planilhas do Power BI, que não são mais usadas: nada foi alterado.")
+    limpeza = bool(a.carga) and bool(json.loads(Path(a.carga).read_text(encoding="utf-8")).get("limpeza"))
+    if not arqs and not limpeza:
         sys.exit("Nenhuma planilha com processos: nada foi alterado.")
 
     doc = json.loads((A / "fonte.json").read_text(encoding="utf-8"))
@@ -273,22 +280,9 @@ def main():
     st["sairam_da_tarefa"] = saiu_tarefa
 
     # complementos: Power BI e sigilosos são listas inteiras (refazem as suas colunas e a flag); genérica só preenche
+    if bi_fora: st["ignoradas"] = bi_fora
     for x in arqs:
-        if x["tipo"] == "bi":
-            for d, r in regs.items():
-                if d in x["regs"]: aplicar_bi(r, x["regs"][d])
-                elif r.get("Consta_Acervo_Gab_A"):
-                    r["Consta_Acervo_Gab_A"] = ""
-                    for c in BI_COLS:
-                        if r.get(c): r[c] = ""
-        elif x["tipo"] == "sigilosos":
-            for d, r in regs.items():
-                if d in x["regs"]: aplicar_sig(r, x["regs"][d])
-                elif r.get("Consta_Acervo_Sigiloso"):
-                    r["Consta_Acervo_Sigiloso"] = ""
-                    for c in SIG_COLS:
-                        if r.get(c): r[c] = ""
-        elif x["tipo"] == "generica":
+        if x["tipo"] == "generica":
             st.setdefault("genericas", {})[x["nome"]] = sum(aplicar_generica(regs[d], g, conhecidas) for d, g in x["regs"].items() if d in regs)
 
     novos = []
@@ -311,7 +305,7 @@ def main():
     mudou = mudou or len(novos) != len(antigos) or cols != doc.get("colunas")
     doc.update(registros=novos, colunas=cols, atualizado_em=agora if mudou else doc.get("atualizado_em", agora),
                regra="Fonte = processos em andamento no gabinete. A planilha principal (lista dos em andamento, com a tarefa do PJe) "
-                     "define quem está e onde está: entra quem aparece, sai quem não aparece. Complementares (Power BI, sigilosos, "
+                     "define quem está e onde está: entra quem aparece, sai quem não aparece. Complementares (relação detalhada do PJe, "
                      "outras) só preenchem dados de quem já está. Lista de uma tarefa atualiza o paradeiro de quem veio nela; quem estava "
                      "naquela tarefa e não veio perde a tarefa, sem sair da fonte. scripts/painel/atualizar_fonte.py")
     (A / "fonte.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
