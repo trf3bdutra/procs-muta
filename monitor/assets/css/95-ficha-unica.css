@@ -376,6 +376,10 @@ html.cmt-fx-open{overflow:hidden!important}
 .fx-destino.is-warn{border-left:3px solid #c9973a}
 .fx-destino.is-ok{border-left:3px solid #3f8a63}
 .fx-destino .fx-pill.is-on{background:#e8f3ec;border-color:#3f8a63;color:#245a3d;opacity:1}
+/* organização: subtítulo da Pauta dentro de "Pauta e controles" e grupos sem registro */
+#cmt-fx .fx-sub{margin:18px 4px 2px!important;font-size:11px!important;font-weight:800!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--cx-ink2)!important}
+#cmt-fx .fx-vazios .fx-acts{flex-wrap:wrap!important}
+#cmt-fx .fx-vz-off{text-align:center!important}
 
 /* Observações formatadas (seções, listas, rótulos e post-its) */
 #cmt-fx .fx-obs{display:flex!important;flex-direction:column!important;gap:12px!important;margin-top:4px!important}
