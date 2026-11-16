@@ -1,0 +1,73 @@
+/* ===== Barra editorial (Expediente), gêmea da Pauta da equipe.
+   Linha de cima (header.top): marca, cadernos (Equipe / Compêndio / Editor) e utilitários. Linha de baixo (#cmp-nav): seções numeradas; fica presa no topo ao rolar. ===== */
+header.top.nx,#cmp-nav{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--ei2:#45605d;--em:#617570;--em2:#55584f;--eg:#235a55;--eo:#a57829;--eo2:#805b18;--ew:#fff;--ebd:#fff;--etb:#d4c6a1;--etf:#f5efd9;--eti:#645530;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif}
+:root:not([data-theme="light"]) header.top.nx,:root:not([data-theme="light"]) #cmp-nav{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--ei2:#c5d2d8;--em:#a7a8a9;--em2:#b6bcc0;--eg:#6eba8a;--eo:#e6c27a;--eo2:#e6c27a;--ew:#0a1821;--ebd:#10222e;--etb:#5a4a2c;--etf:#33261d;--eti:#e6c27a}
+header.top.nx{position:relative!important;top:auto;display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:14px!important;row-gap:0!important;padding:5px 22px 0!important;height:65px;box-sizing:border-box;background:var(--ep)!important;color:var(--ei)!important;border-bottom:0!important}
+header.top.nx:after{top:0;bottom:auto;height:4px;box-shadow:0 1px 0 #1b7244}
+header.top.nx .brand.tw{flex:none;order:0}
+header.top.nx .brand.tw i{width:26px!important;height:29px!important;background:var(--eo)!important}
+header.top.nx .nx-bc{display:flex;flex-direction:column;min-width:0}
+header.top.nx .nx-ey{font-family:var(--emono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--em);line-height:1.4}
+header.top.nx .nx-cad{display:flex;align-items:baseline;gap:9px;white-space:nowrap}
+header.top.nx .nx-cad a,header.top.nx .nx-cad .eq-cmp{font-size:22px;line-height:1.15;letter-spacing:-.04em;font-weight:550;color:var(--em);text-decoration:none;padding:1px 0;border-radius:0;background:none}
+header.top.nx .nx-cad a:hover{color:var(--ei)}
+header.top.nx .nx-cad .nx-on{font-weight:650;color:var(--ei)}
+header.top.nx .nx-cad .nx-on em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+header.top.nx .nx-sl{font-family:var(--emono);color:var(--el2);font-size:15px}
+header.top.nx .eq-cpn{display:none!important}
+header.top.nx .eqsp{display:block!important;flex:1 1 auto;order:0}
+header.top.nx .right{display:flex!important;align-items:center;gap:2px!important;margin-left:0!important;width:auto!important;max-width:none!important;flex:none!important;flex-wrap:nowrap!important;white-space:nowrap;order:0}
+header.top.nx .hb,header.top.nx .mon-lnk,header.top.nx .ac-btn,header.top.nx .ac-sair,header.top.nx .ico{border:0!important;background:none!important;border-radius:0!important;color:var(--ei)!important;font:400 10.5px/1 var(--emono)!important;letter-spacing:.1em;text-transform:uppercase;padding:0 9px!important;min-height:34px;height:auto!important;width:auto!important;align-items:center;gap:6px;text-decoration:none;cursor:pointer;position:relative;opacity:1}
+header.top.nx .hb,header.top.nx .ac-btn,header.top.nx .ac-sair,header.top.nx .ico,header.top.nx .mon-lnk:not([hidden]){display:inline-flex}
+header.top.nx .hb:hover,header.top.nx .mon-lnk:hover,header.top.nx .ac-btn:hover,header.top.nx .ac-sair:hover,header.top.nx .ico:hover{color:var(--eo2)!important;background:none!important}
+header.top.nx .hb.nx-tx svg{display:none}
+header.top.nx .hb.ic,header.top.nx .ico,header.top.nx .ac-sair{min-width:34px;padding:0 8px!important;justify-content:center;color:var(--ei2)!important}
+header.top.nx .bdg{position:static;min-width:0;height:auto;border-radius:0;background:var(--eo2);color:var(--ebd);font:400 10.5px/1.3 var(--emono);font-style:normal;padding:1px 5px;letter-spacing:0}
+header.top.nx .ac-chip{flex-wrap:nowrap;gap:8px;padding-left:14px;margin-left:8px;border-left:1px solid var(--el);min-height:30px;max-width:none;overflow:visible}
+header.top.nx .ac-u{font:700 12.5px Figtree,"Segoe UI",system-ui,sans-serif;color:var(--ei);padding:0;letter-spacing:0;text-transform:none}
+header.top.nx .ac-p{font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--etb);background:var(--etf);color:var(--eti);border-radius:0;padding:2px 6px}
+header.top.nx .ac-off{font:400 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--em);opacity:1}
+/* faixa das seções */
+#cmp-nav{position:sticky;top:0;z-index:19;background:var(--ep);border-top:2px solid var(--eg);border-bottom:1px solid var(--el)}
+#cmp-nav [hidden]{display:none!important}
+#cmp-nav .cn-in{display:flex;align-items:stretch;gap:0;padding:0 22px;min-height:44px;counter-reset:cn}
+#cmp-nav .cn-b{display:inline-flex;align-items:baseline;gap:9px;padding:12px 18px 11px;font:650 13px Figtree,"Segoe UI",system-ui,sans-serif;color:var(--ei2);border:0;border-right:1px solid var(--el);border-radius:0;background:none;white-space:nowrap;counter-increment:cn}
+#cmp-nav .cn-b:before{content:counter(cn,decimal-leading-zero);font:400 10px var(--emono);color:var(--em);letter-spacing:.06em}
+#cmp-nav .cn-b:first-child{border-left:1px solid var(--el)}
+#cmp-nav .cn-b:hover{color:var(--ei)}
+#cmp-nav .cn-b[aria-current="true"]{background:var(--ew);color:var(--ei);font-weight:750;box-shadow:inset 0 3px 0 var(--eo);margin-top:-2px;padding-top:14px;border-bottom:0}
+#cmp-nav .cn-b[aria-current="true"]:before{color:var(--eo2)}
+#cmp-nav .cn-sep{display:none}
+#cmp-nav .cn-g{display:inline-flex;align-items:center;flex:none;margin:0;padding:0 0 0 14px;font:400 9.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+#cmp-nav .cn-g+.cn-b{padding-left:10px}
+/* acesso avançado: rótulo e abas no mesmo bloco */
+#cmp-nav .cn-g.av{gap:6px;padding:0 14px;background:var(--ep2);color:var(--em2);border-right:1px solid var(--el)}
+#cmp-nav .cn-g.av:before{content:"";width:12px;height:12px;background:currentColor;-webkit-mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%225%22 y=%2211%22 width=%2214%22 height=%229%22 rx=%221.5%22/%3E%3Cpath d=%22M8 11V8a4 4 0 0 1 8 0v3%22/%3E%3C/svg%3E') center/contain no-repeat;mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23000%22 stroke-width=%222.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect x=%225%22 y=%2211%22 width=%2214%22 height=%229%22 rx=%221.5%22/%3E%3Cpath d=%22M8 11V8a4 4 0 0 1 8 0v3%22/%3E%3C/svg%3E') center/contain no-repeat}
+#cmp-nav .cn-g.av+.cn-b{padding-left:18px}
+#cmp-nav .cn-b[data-av]{background:var(--ep2);color:var(--ei)}
+#cmp-nav .cn-b[data-av][aria-current="true"]{background:var(--ew)}
+aside{top:52px!important}
+@media (max-width:1180px){header.top.nx{gap:10px!important;padding:5px 14px 0!important}header.top.nx .hb,header.top.nx .mon-lnk{padding:0 6px!important}#cmp-nav .cn-in{padding:0 14px;overflow-x:auto;scrollbar-width:none}}
+@media (max-width:980px){
+  header.top.nx .hb.nx-tx span{display:none}
+  header.top.nx .hb.nx-tx svg{display:block}
+  header.top.nx .hb.nx-tx{min-width:40px;justify-content:center;color:var(--ei2)!important}
+  header.top.nx .hb.nx-tx .bdg{position:absolute;top:2px;right:0;font-size:9.5px;padding:0 4px}
+}
+@media (max-width:760px){
+  header.top.nx{flex-wrap:wrap!important;height:auto;padding:5px 12px 2px!important;row-gap:0!important}
+  header.top.nx .nx-ey{display:none}
+  header.top.nx .nx-bc{min-height:44px;justify-content:center}
+  header.top.nx .nx-cad a,header.top.nx .nx-cad .eq-cmp{font-size:19px}
+  header.top.nx .eqsp{display:none!important}
+  header.top.nx .right{width:100%!important;flex:1 1 100%!important;justify-content:flex-end;border-top:1px solid var(--el);order:5}
+  header.top.nx .hb,header.top.nx .ico,header.top.nx .ac-sair,header.top.nx .ac-btn{min-height:40px}
+  header.top.nx .mon-lnk{display:none!important}
+  header.top.nx .ac-chip{margin-left:4px;padding-left:10px}
+  header.top.nx .ac-u{max-width:96px;overflow:hidden;text-overflow:ellipsis}
+  #cmp-nav .cn-in{padding:0}
+  #cmp-nav .cn-b{padding:14px 15px 13px;min-height:46px}
+  #cmp-nav .cn-b[aria-current="true"]{padding-top:16px}
+  #cmp-nav .cn-b:first-child{border-left:0}
+  #cmp-nav .cn-g:not(.av){display:none}
+}
