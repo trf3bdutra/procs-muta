@@ -1,5 +1,5 @@
 /* CMT · Ficha única do processo — diálogo no visual v198 (padrão cmtx), com os campos de padrao/ficha.json.
-   Um só módulo para o CMT-monitor e a Ex Officio: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
+   Um só módulo para o Ab Initio e a Ex Officio: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
    para os dois HTML. Cada página entrega um adaptador:
      CMTFicha.abrir(cnj, {
        carregar: cnj => Promise<{ ficha, operacional, fonte, controles?, gestor? }>,
@@ -62,7 +62,11 @@ function controlesDe(fo, op) {
 }
 
 /* ───── estado ───── */
-var ST = { cnj: '', ad: null, d: null, err: '', tab: 'resumo', edit: false, draft: {}, busy: false, view: 'ficha', mostra: {}, histAll: false, teor: null };
+var ST = { cnj: '', ad: null, d: null, err: '', tab: 'resumo', edit: false, draft: {}, busy: false, view: 'ficha', mostra: {}, histAll: false, teor: null, vz: {}, vzTodos: false };
+/* organização: a aba Pauta fica dentro de "Pauta e controles" (chave Controles especiais); quem abre a ficha na aba Pauta cai nela */
+var PAUTA = 'Pauta', ROT_CE = 'Pauta e controles', PRI_PROC = ['Autuação', 'Partes', 'Tramitação'];
+function tabNorm(t) { return t === PAUTA ? CE : t; }
+function temValor(c) { return c.tipo === 'tabela' ? linhas(c.secao, c.chave).length > 0 : !!S(valorCampo(c)).trim(); }
 var host = null;
 function F() { return ST.d && ST.d.ficha; }
 function op() { return (ST.d && ST.d.operacional) || {}; }
@@ -149,7 +153,7 @@ function pendencias() {
 function ensureHost() {
   if (host && doc.body.contains(host)) return host;
   host = doc.createElement('div'); host.id = 'cmt-fx'; host.setAttribute('aria-hidden', 'true');
-  host.addEventListener('click', onClick); host.addEventListener('change', onChange); host.addEventListener('input', onInput);
+  host.addEventListener('click', onClick); host.addEventListener('change', onChange); host.addEventListener('input', onInput); host.addEventListener('paste', onPastePostit);
   host.addEventListener('dragover', function (ev) { if (!ST.teor || ST.view !== 'ficha') return; if ([].slice.call((ev.dataTransfer && ev.dataTransfer.types) || []).indexOf('Files') >= 0) { ev.preventDefault(); host.classList.add('is-drop'); } });
   host.addEventListener('dragleave', function (ev) { if (ev.target === host || !host.contains(ev.relatedTarget)) host.classList.remove('is-drop'); });
   host.addEventListener('drop', function (ev) { host.classList.remove('is-drop'); var f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0]; if (!f || !ST.teor) return; ev.preventDefault(); lerTxt(f); });
@@ -158,7 +162,7 @@ function ensureHost() {
 function abrir(cnj, ad) {
   ensureHost();
   ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; descartarTeor();
-  ST.tab = (ad && ad.aba) || 'resumo';
+  ST.tab = tabNorm((ad && ad.aba) || 'resumo'); ST.vz = {};
   host.classList.add('on'); host.setAttribute('aria-hidden', 'false'); doc.documentElement.classList.add('cmt-fx-open');
   doc.addEventListener('keydown', onKey, true);
   render();
@@ -166,7 +170,6 @@ function abrir(cnj, ad) {
   Promise.resolve().then(function () { return ST.ad.carregar(alvo); }).then(function (d) {
     if (ST.cnj !== alvo) return;
     ST.d = d || {}; if (window.CMTForense) window.CMTForense.atual = ST.d.expediente || null; if (!ST.d.controles || !ST.d.controles.naLista) ST.d.controles = Object.assign({}, ST.d.controles, controlesDe(ST.d.fonte, ST.d.operacional));
-    if (ST.tab === CE && !ativos().length) ST.tab = 'resumo';
     render(); requestAnimationFrame(function () { var dl = host.querySelector('.fx-dlg'); if (dl) dl.focus({ preventScroll: true }); });
   }).catch(function (e) { if (ST.cnj !== alvo) return; ST.err = (e && e.message) || String(e); render(); });
 }
@@ -218,7 +221,7 @@ function faixa() {
 }
 function abas() {
   var P = pendencias(), L = [['resumo', 'Resumo', 0]];
-  (F().abas || []).forEach(function (a) { var n = a.aba === CE ? ativos().length : P.filter(function (p) { return p[1] === a.aba; }).length; L.push([a.aba, a.aba, n, a.aba === CE]); });
+  (F().abas || []).forEach(function (a) { if (a.aba === PAUTA) return; var n = a.aba === CE ? ativos().length + P.filter(function (p) { return p[1] === PAUTA; }).length : P.filter(function (p) { return p[1] === a.aba; }).length; L.push([a.aba, a.aba === CE ? ROT_CE : a.aba, n, a.aba === CE]); });
   return L;
 }
 function fichaView() {
@@ -256,6 +259,58 @@ function campoTabela(c) {
       '<button type="button" class="fx-sq" data-fx-tbx="' + E(id) + '" data-fx-i="' + i + '" title="Excluir a linha">' + svg('x') + '</button></div>'; }).join('') +
     '<button type="button" class="fx-pill fx-mini" data-fx-tba="' + E(id) + '">' + svg('plus') + 'Linha</button></div></div>';
 }
+/* Observações formatadas: colar o resumo do processo (Próximo ato, Prazos e alertas, O caso, Partes e andamento, Post-its…) vira texto
+   padronizado ("## Seção", "- item", "Rótulo: valor", "• Nota: texto — Peça · id N"); na leitura, seções, listas e post-its coloridos */
+var PI_TIPOS = [['nota', 'Nota'], ['aten[cç][aã]o', 'Atenção'], ['pend[eê]ncia', 'Pendência'], ['alerta', 'Alerta'], ['lembrete', 'Lembrete'], ['d[uú]vida', 'Dúvida'], ['importante', 'Importante']];
+var PI_RE = new RegExp('^(' + PI_TIPOS.map(function (t) { return t[0]; }).join('|') + ')(?=\\s*[:\\-–—]|\\s+|[A-ZÀ-Ú(“"0-9])\\s*[:\\-–—]?\\s*', 'i');
+var PI_LINHA = new RegExp('^•\\s*(' + PI_TIPOS.map(function (t) { return t[1]; }).join('|') + '):\\s*(.*)$');
+var OBS_SEC = ['Próximo ato', 'Prazos e alertas', 'O caso', 'Partes e andamento', 'Post-its colados nas peças', 'Pendências', 'Providências', 'Resumo'];
+var OBS_ROT = ['Por quê', 'Polo ativo', 'Polo passivo', 'Fase', 'Último ato', 'Prazo', 'Classe', 'Assunto', 'Relator', 'Origem'];
+var OBS_ROT_RE = new RegExp('^(' + OBS_ROT.join('|') + '):\\s*(.*)$', 'i');
+function semAc(x) { return S(x).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim(); }
+function piTipo(x) { for (var i = 0; i < PI_TIPOS.length; i++) if (new RegExp('^' + PI_TIPOS[i][0] + '$', 'i').test(x)) return PI_TIPOS[i][1]; return 'Nota'; }
+function obsSec(l) { var x = semAc(l.replace(/\s*·\s*\d+\s*$/, '').replace(/:\s*$/, '')); if (/^post-?its?\b/.test(x)) return 'Post-its colados nas peças'; for (var i = 0; i < OBS_SEC.length; i++) if (x === semAc(OBS_SEC[i])) return OBS_SEC[i]; return ''; }
+function obsRot(l) { var x = semAc(l.replace(/:\s*$/, '')); for (var i = 0; i < OBS_ROT.length; i++) if (x === semAc(OBS_ROT[i])) return OBS_ROT[i]; return ''; }
+function obsPostit(l, naSecao) {
+  var bala = /^[*•\-–]\s*/.test(l), x = l.replace(/^[*•\-–]\s*/, '').replace(/\s*Descolar\s*$/i, ''), m = PI_RE.exec(x);
+  if (!m || (!naSecao && !bala) || (!naSecao && !/^[^:]{0,12}:/.test(x) && !/^[A-ZÀ-Ú]/.test(x.slice(m[1].length).trim()))) return '';
+  var resto = x.slice(m[0].length).trim(), f = /^(.*?)\s+—\s+([^—]*·\s*id\s*\d+)\s*$/i.exec(resto) || /^(.*[.;!?)”"])\s*([^.;!?]{2,90}?·\s*id\s*\d+)\s*$/i.exec(resto);
+  return '• ' + piTipo(m[1]) + ': ' + (f ? f[1].trim() + ' — ' + f[2].trim() : resto);
+}
+function obsNormaliza(txt) {
+  var out = [], sec = '', pend = '', ach = 0;
+  S(txt).replace(/\r/g, '').split('\n').map(function (l) { return l.trim(); }).filter(Boolean).forEach(function (l) {
+    var sc = obsSec(l.replace(/^##\s*/, '')); if (sc) { if (pend) { out.push(pend + ':'); pend = ''; } out.push('## ' + sc); sec = sc; ach++; return; }
+    var rt = obsRot(l); if (rt && !/:\s*\S/.test(l)) { pend = rt; return; }
+    if (pend) { out.push(pend + ': ' + l); pend = ''; return; }
+    var pi = obsPostit(l, sec === 'Post-its colados nas peças'); if (pi) { out.push(pi); ach++; return; }
+    if (/^[*•\-–]\s+/.test(l)) { out.push('- ' + l.replace(/^[*•\-–]\s+/, '')); return; }
+    out.push(l);
+  });
+  if (pend) out.push(pend + ':');
+  return ach ? out.join('\n') : null;
+}
+function temFormato(v) { return S(v).split('\n').some(function (l) { l = l.trim(); return /^##\s/.test(l) || PI_LINHA.test(l); }); }
+function obsIds(h) { return h.replace(/\b(id\s*)(\d{6,})/gi, '$1<b class="fx-mono">$2</b>'); }
+function obsHtml(v) {
+  var secs = [], cur = null, novo = function (t) { cur = { t: t, L: [] }; secs.push(cur); };
+  S(v).split('\n').map(function (l) { return l.trim(); }).filter(Boolean).forEach(function (l) { var m = /^##\s*(.+)$/.exec(l); if (m) novo(m[1].trim()); else { if (!cur) novo(''); cur.L.push(l); } });
+  return '<div class="fx-obs">' + secs.map(function (sc) {
+    var h = '', ul = [], pis = [], fecha = function () { if (ul.length) { h += '<ul class="fx-obs-ul">' + ul.join('') + '</ul>'; ul = []; } if (pis.length) { h += '<div class="fx-pis">' + pis.join('') + '</div>'; pis = []; } };
+    sc.L.forEach(function (l) {
+      var m = PI_LINHA.exec(l);
+      if (m) { if (ul.length) fecha(); var tx = m[2], fo = '', k = tx.lastIndexOf(' — '); if (k > 0 && /·\s*id\s*\d+/i.test(tx.slice(k))) { fo = tx.slice(k + 3); tx = tx.slice(0, k); }
+        var cls = { 'Nota': 'nota', 'Atenção': 'atencao', 'Alerta': 'atencao', 'Importante': 'atencao', 'Pendência': 'pend', 'Lembrete': 'pend', 'Dúvida': 'duvida' }[m[1]] || 'nota';
+        pis.push('<div class="fx-pi t-' + cls + '"><span class="fx-pi-t">' + E(m[1]) + '</span><p>' + obsIds(E(tx)) + '</p>' + (fo ? '<small>' + obsIds(E(fo)) + '</small>' : '') + '</div>'); return; }
+      if (/^-\s+/.test(l)) { if (pis.length) fecha(); ul.push('<li>' + obsIds(E(l.replace(/^-\s+/, ''))) + '</li>'); return; }
+      fecha(); var r = OBS_ROT_RE.exec(l);
+      if (r) { h += '<div class="fx-obs-kv"><span>' + E(obsRot(r[1]) || r[1]) + '</span><p>' + (r[2] ? obsIds(E(r[2])) : '<em class="fx-dim">—</em>') + '</p></div>'; return; }
+      h += '<p class="fx-obs-p">' + obsIds(E(l)) + '</p>';
+    }); fecha();
+    var np = sc.L.filter(function (l) { return PI_LINHA.test(l); }).length, cl = semAc(sc.t).replace(/[^a-z]+/g, '-');
+    return '<section class="fx-obs-s s-' + cl + '">' + (sc.t ? '<h6>' + E(sc.t) + (np ? ' <em>· ' + np + '</em>' : '') + '</h6>' : '') + h + '</section>';
+  }).join('') + '</div>';
+}
 function campo(c) {
   if (c.tipo === 'tabela') return campoTabela(c);
   var v = valorCampo(c), ed = ST.edit && editavel(c) && !bloqueado(c), id = c.secao ? c.secao + '.' + c.chave : '', sujo = id && Object.prototype.hasOwnProperty.call(ST.draft, id);
@@ -267,22 +322,36 @@ function campo(c) {
     else if (c.tipo === 'simnao') body = '<label class="fx-tg"><input type="checkbox" ' + a + (sim(v) ? ' checked' : '') + '><span>' + (sim(v) ? 'Sim' : 'Não') + '</span></label>';
     else if (c.tipo === 'data' && (!v || iso(v))) body = '<input type="date" ' + a + ' value="' + E(iso(v)) + '">';
     else if (c.tipo === 'numero') body = '<input type="number" ' + a + ' value="' + E(v) + '">';
-    else if (c.tipo === 'texto-longo') body = '<textarea rows="' + Math.min(6, Math.max(2, S(v).split('\n').length)) + '" ' + a + '>' + E(v) + '</textarea>';
+    else if (c.tipo === 'texto-longo') body = '<textarea rows="' + Math.min(c.chave === 'Observações' ? 12 : 6, Math.max(2, S(v).split('\n').length)) + '" ' + a + (c.chave === 'Observações' ? ' data-fx-postit' : '') + '>' + E(v) + '</textarea>' + (c.chave === 'Observações' ? '<small class="fx-pi-h">Cole o resumo do processo (Próximo ato, Prazos e alertas, O caso, Partes e andamento, Post-its…): o texto é padronizado ao colar e aparece formatado na leitura.</small>' : '');
     else body = '<input ' + a + ' value="' + E(v) + '">';
   } else if (c.calculado) body = v ? '<span class="fx-calc">' + E(v) + '</span>' : '<span class="fx-dim">—</span>';
   else if (c.tipo === 'simnao') body = '<span class="fx-v ' + (sim(v) ? '' : 'fx-dim') + '">' + (sim(v) ? 'Sim' : v ? E(v) : '—') + '</span>';
   else if (c.tipo === 'data') body = '<span class="fx-v fx-mono ' + (v ? '' : 'fx-dim') + '">' + E(brD(iso(v) || v) || '—') + '</span>';
+  else if (c.tipo === 'texto-longo' && temFormato(v)) body = obsHtml(v);
   else body = '<span class="fx-v ' + (v ? '' : 'fx-dim') + (/ID\b/.test(c.rotulo) ? ' fx-mono' : '') + '">' + E(mostra(v) || '—') + '</span>';
   return '<div class="fx-f s' + span(c, v) + (ed ? ' is-edit' : '') + (sujo ? ' is-dirty' : '') + '">' + lab + body + '</div>';
 }
 var grade = function (campos) { return '<div class="fx-grid">' + campos.map(campo).join('') + '</div>'; };
 function abaGrupos(A) {
-  if (A.aba === CE) return abaControles(A);
+  if (A.aba === CE) { var AP = abaDe(PAUTA); return abaControles(A) + (AP ? '<h3 class="fx-sub">' + E(PAUTA) + '</h3>' + abaGruposCorpo(AP) : ''); }
+  return abaGruposCorpo(A);
+}
+/* grupos de uma aba: na leitura, só os campos preenchidos; grupo sem nada vai para "Sem registro" (abre com um clique); na edição, tudo */
+function abaGruposCorpo(A) {
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
   if (A.seletor) h += '<p class="fx-info-p">' + svg('rule') + '<span><b>' + E(A.seletor.rotulo) + ':</b> ' + (dn === 'monocratica' ? 'decisão monocrática' : destinoDef() ? 'sessão (acórdão)' : 'a definir na triagem (o fluxo mostra o da sessão)') + '. ' + E(A.seletor.regra || '') + '</span></p>';
   if (A.aba === 'Triagem') h += cardDestino() + cardTempest();
-  h += (A.grupos || []).filter(function (g) { return (!g.destino || g.destino === dn) && grupoVisivel(g); }).map(function (g) { return card(g.grupo, grade(g.campos), { n: ('0' + (++n)).slice(-2), nota: g.destino ? (g.destino === 'sessao' ? 'acórdão' : 'monocrática') : '' }); }).join('');
+  var gs = (A.grupos || []).filter(function (g) { return (!g.destino || g.destino === dn) && grupoVisivel(g); }), vazios = [];
+  if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
+  h += gs.map(function (g) {
+    var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
+    if (!tudo && !cheios.length) { vazios.push(g.grupo); return ''; }
+    var ac = !ST.edit && !ST.vzTodos && nv ? '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g.grupo) + '">' + (ST.vz[g.grupo] ? 'esconder vazios' : '+ ' + nv + (nv > 1 ? ' campos vazios' : ' campo vazio')) + '</button>' : '';
+    return card(g.grupo, grade(tudo ? g.campos : cheios), { n: ('0' + (++n)).slice(-2), nota: g.destino ? (g.destino === 'sessao' ? 'acórdão' : 'monocrática') : '', acoes: ac });
+  }).join('');
+  if (!ST.edit && vazios.length) h += card('Sem registro', '<div class="fx-acts">' + vazios.map(function (g) { return '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g) + '">' + E(g) + '</button>'; }).join('') + '</div><p class="fx-note">Grupos sem nenhum campo preenchido. Clique num deles para abrir; em Editar, todos os campos aparecem.</p>', { cls: 'fx-vazios', acoes: '<button type="button" class="fx-pill fx-mini" data-fx-vz="*">Mostrar todos os campos</button>' });
+  else if (!ST.edit && ST.vzTodos) h += '<p class="fx-note fx-vz-off"><button type="button" class="fx-pill fx-mini" data-fx-vz="*">Esconder campos vazios</button></p>';
   if (A.aba === 'Pauta') { var SS = sessoes(); h += card('Histórico de sessões', SS.length ? '<div class="fx-tbl"><span>Sessão</span><span>Item · situação</span><span>Resultado</span>' + SS.map(function (s) { return '<span class="fx-mono">' + E(brD(iso(s.sessao || s.data)) || s.sessao) + '</span><span>' + E([s.item ? 'item ' + s.item : '', S(s.status).toLowerCase()].filter(Boolean).join(' · ') || '—') + '</span><span>' + E(s.resultado || s.motivo || '—') + '</span>'; }).join('') + '</div>' : '<p class="fx-dim">Sem passagens por pauta.</p>', { n: ('0' + (++n)).slice(-2), nota: 'inclusões, adiamentos e retiradas' }); }
   return h;
 }
@@ -510,9 +579,10 @@ function gravar(campos, msgOk) {
 }
 function onClick(ev) {
   if (ev.target === host) return; /* clique fora não fecha (evita perder a edição) */
-  var t = ev.target.closest('[data-fx],[data-fx-tab],[data-fx-inc],[data-fx-ir],[data-fx-tba],[data-fx-tbx],[data-fx-confdest]'); if (!t) return;
+  var t = ev.target.closest('[data-fx],[data-fx-tab],[data-fx-vz],[data-fx-inc],[data-fx-ir],[data-fx-tba],[data-fx-tbx],[data-fx-confdest]'); if (!t) return;
   if (t.hasAttribute('data-fx-confdest')) { var dv = t.getAttribute('data-fx-confdest'); if (ST.edit) { ST.draft['producao.Destino'] = dv; render(); } else gravar({ 'producao.Destino': dv }, dv === 'Monocrática' ? 'Destino confirmado: decisão monocrática.' : dv === 'Sessão' ? 'Destino confirmado: sessão.' : 'Destino desfeito: volta a definir na triagem.').catch(function () {}); return; }
-  if (t.hasAttribute('data-fx-tab')) { ST.tab = t.getAttribute('data-fx-tab'); render(); var m = host.querySelector('.fx-main'); if (m) m.scrollTop = 0; return; }
+  if (t.hasAttribute('data-fx-vz')) { var gz = t.getAttribute('data-fx-vz'); if (gz === '*') ST.vzTodos = !ST.vzTodos; else ST.vz[gz] = !ST.vz[gz]; render(); return; }
+  if (t.hasAttribute('data-fx-tab')) { ST.tab = tabNorm(t.getAttribute('data-fx-tab')); render(); var m = host.querySelector('.fx-main'); if (m) m.scrollTop = 0; return; }
   if (t.hasAttribute('data-fx-inc')) { var g = t.getAttribute('data-fx-inc'), x = CE_INC[g][1]; ST.mostra[g] = true; ST.edit = true; if (x) ST.draft[x[0]] = x[1]; render(); return; }
   if (t.hasAttribute('data-fx-ir')) { var c = t.getAttribute('data-fx-ir'); fechar(); if (!host.classList.contains('on') && ST.ad.irPara) ST.ad.irPara(c); return; }
   var a = t.getAttribute('data-fx');
@@ -549,6 +619,12 @@ function onChange(ev) {
   if (t.hasAttribute('data-fx-val')) { onInput(ev); return; }
   if (t.hasAttribute('data-fx-k')) { onInput(ev); if (t.type === 'checkbox' || t.tagName === 'SELECT') render(); }
 }
+function onPastePostit(ev) {
+  var t = ev.target; if (!t || !t.hasAttribute || !t.hasAttribute('data-fx-postit')) return;
+  var txt = ev.clipboardData && ev.clipboardData.getData('text/plain'), n = txt && obsNormaliza(txt); if (!n) return;
+  ev.preventDefault(); var a = t.selectionStart, b = t.selectionEnd, antes = t.value.slice(0, a), ins = (antes && !/\n$/.test(antes) ? '\n' : '') + n;
+  t.setRangeText(ins, a, b, 'end'); t.rows = Math.min(12, Math.max(2, t.value.split('\n').length)); t.dispatchEvent(new Event('input', { bubbles: true }));
+}
 function onInput(ev) {
   var t = ev.target; if (!t.hasAttribute) return;
   if (t.hasAttribute('data-fx-val')) { var it = ST.teor && ST.teor.items && ST.teor.items[+t.getAttribute('data-fx-val')]; if (it) { it.value = t.value; it.status = !S(it.current) ? 'novo' : N(it.current) === N(it.value) ? 'igual' : 'conflito'; } return; }
@@ -562,7 +638,7 @@ function onInput(ev) {
   var b = host.querySelector('[data-fx="salvar"]'); if (b && !ST.busy) { var n = Object.keys(ST.draft).length; b.textContent = 'Salvar alterações' + (n ? ' (' + n + ')' : ''); }
 }
 
-/* regras de gravação dos Controles especiais, iguais às do servidor (api/_ficha.js · aplica e regras): para quem grava direto na base (CMT-monitor) */
+/* regras de gravação dos Controles especiais, iguais às do servidor (api/_ficha.js · aplica e regras): para quem grava direto na base (Ab Initio) */
 function aplicar(r, campos, usuario) {
   var out = [], hj = hoje();
   ['origem', 'triagem', 'producao', 'pauta', 'controles'].forEach(function (s) { if (!r[s] || typeof r[s] !== 'object') r[s] = s === 'pauta' ? { sessoes: [] } : {}; });
@@ -582,3 +658,4 @@ function aplicar(r, campos, usuario) {
 
 window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true); }, aberta: function () { return !!(host && host.classList.contains('on')); }, controlesDe: controlesDe, aplicar: aplicar, numerosMeta: numerosMeta };
 })();
+
