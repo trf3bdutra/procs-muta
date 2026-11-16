@@ -19,6 +19,8 @@ const dg = s => String(s || '').replace(/\D/g, '');
 /* a data de entrada na tarefa vem ora em AAAA-MM-DD, ora em DD/MM/AAAA */
 const iso = v => { const s = String(v || '').trim(), m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(s); return m ? m[3] + '-' + m[2] + '-' + m[1] : /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : ''; };
 let BASE = null, SUG = null, BASE_T = 0;
+/* sigilo pelo acervo: nível informado (ex.: Segredo De Justiça) ou presença na planilha de sigilosos */
+const sigiloDe = r => String(r['Nível_Sigilo'] || '').trim() || (String(r.Consta_Acervo_Sigiloso || '').trim() === 'Sim' ? 'Sigiloso' : '');
 async function acervo() {
   if (!BASE || Date.now() - BASE_T > 300e3) {
     const { txt } = await L.lerGrande('acervo/fonte.json'), d = JSON.parse(txt);
@@ -28,7 +30,7 @@ async function acervo() {
       const et = String(r.Etiquetas || r.etiquetas || ''), u = et.split(/[;,|]/).map(s => s.trim()).filter(s => URG.test(s))[0] || '';
       const b = { cnj, assunto: r.Assunto || r.Assunto_Principal || r.assunto_judicial || '', classe: r.classe_judicial || r.Classe || '',
         partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter(Boolean).join(' x '), tarefa: r.tarefa_atual || '',
-        desde: iso(r.data_entrada_tarefa), prioridade: r.prioridade || '', urgAuto: u };
+        desde: iso(r.data_entrada_tarefa), prioridade: r.prioridade || '', urgAuto: u, sigilo: sigiloDe(r) };
       BASE[dg(cnj)] = b;
       if (u && b.tarefa && !FORA.test(b.tarefa)) SUG.push(b);
     });
@@ -84,3 +86,4 @@ async function gravarMono(cnj, campos, u, gestorOk) {
 }
 module.exports.gravarMono = gravarMono;
 module.exports.item = item;
+module.exports.acervo = acervo;
