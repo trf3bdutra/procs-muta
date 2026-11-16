@@ -17,6 +17,31 @@ module.exports = async (req, res, u) => {
   const a = await L.acessos(u);
   if (a.perfil !== 'desembargador' && !L.gestor(u)) return res.status(403).json({ erro: 'Painel restrito ao desembargador.' });
   const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+  /* decisões do desembargador: liberar o voto, assinar a monocrática e devolver com apontamento.
+     Tudo grava onde já era gravado — o item da pauta e a ficha única —, e tudo pode ser desfeito. */
+  if (req.method === 'POST') {
+    const b = req.body || {}, cnj = String(b.cnj || '').trim();
+    if (!cnj) return res.status(400).json({ erro: 'Informe o processo.' });
+    try {
+      if (b.acao === 'liberar') {
+        if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
+        await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, u, true);
+        return res.status(200).json({ ok: true, cnj, dataLiberacao: b.desfazer ? '' : hj });
+      }
+      if (b.acao === 'assinar') {
+        await MONO.gravarMono(cnj, { dataAssinatura: b.desfazer ? '' : hj }, u, true);
+        return res.status(200).json({ ok: true, cnj, dataAssinatura: b.desfazer ? '' : hj });
+      }
+      if (b.acao === 'devolver') {
+        const txt = String(b.texto || '').trim().slice(0, 1000);
+        if (!txt) return res.status(400).json({ erro: 'Escreva o apontamento da devolutiva.' });
+        if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
+        await require('./pauta').gravarItem(b.sessao, { cnj, campos: { intercor: txt, intercorOk: false } }, u, true);
+        return res.status(200).json({ ok: true, cnj, intercor: txt });
+      }
+      return res.status(400).json({ erro: 'Ação desconhecida.' });
+    } catch (e) { return res.status(e.status || 500).json({ erro: e.message }); }
+  }
   const [cal, doc, aus] = await Promise.all([
     opc('acervo/sessoes/calendario.json'),
     FICHA.lerOpLeitura().then(x => x.doc).catch(() => null),
