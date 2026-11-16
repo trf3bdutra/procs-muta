@@ -4,7 +4,7 @@ O Ab Initio antigo (`index.html` com Acervo Central, Base do gabinete e Configur
 `/init` agora só redireciona para a Triagem.
 
 - `triagem/index.html` — Triagem (`/triagem/`): fila de triagem, Atualizar acervo fonte, Regras gerais, ficha.
-- `pautas/index.html` — Pautas (`/pautas/`): sessões, marcos, seleção prévia, PDF da pauta, designação.
+- Pautas (`/pautas/`): aba da Triagem (`triagem/index.html`); a rota da Vercel leva `/pautas/` à Triagem já na aba Pautas.
 - `motor/` — motor de dados (iframe oculto, `/init/motor/index.html`): leitura e gravação no procs-muta (ProcsMuta),
   acervo, sessões, equipe e regras. Usado pela Triagem e pelas Pautas.
 - `assets/` — só o que as páginas compartilham: `js/cmt-ficha.js` e `js/cmt-ficha-monitor.js` (ficha única do processo),

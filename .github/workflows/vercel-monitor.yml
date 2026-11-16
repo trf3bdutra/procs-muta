@@ -50,9 +50,7 @@ jobs:
           mkdir -p site/public/monitor
           cp monitor/index.html site/public/monitor/index.html
           cp -R monitor/assets monitor/motor site/public/monitor/
-          # Pautas: página própria em /pautas/ (rota da Vercel → /monitor/pautas/index.html)
-          mkdir -p site/public/monitor/pautas && cp monitor/pautas/index.html site/public/monitor/pautas/index.html
-          # Triagem (nova): página própria em /triagem/ (rota da Vercel → /monitor/triagem/index.html)
+          # Triagem: /triagem/ e /pautas/ (rotas da Vercel → /monitor/triagem/index.html; /pautas/ abre na aba Pautas)
           mkdir -p site/public/monitor/triagem && cp monitor/triagem/index.html site/public/monitor/triagem/index.html
           # Módulo comum "Atualizar acervo fonte" (planilhas → carga → Action acervo-fonte.yml), para qualquer página do site
           mkdir -p site/public/padrao && cp padrao/acervo-fonte.js site/public/padrao/acervo-fonte.js
