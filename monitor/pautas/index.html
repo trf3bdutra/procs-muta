@@ -26,6 +26,7 @@ html[data-theme="dark"] .pt-marca b{color:#e6edf3}
 html[data-theme="dark"] .pt-nav a{color:#e6edf3}html[data-theme="dark"] .pt-nav a[aria-current="page"]{background:#13293b}
 .pt-esp{flex:1}
 .pt-acoes{display:flex;align-items:center;gap:8px}
+.pt-acoes button.pend{background:#173f3d!important;border-color:#173f3d!important;color:#fff!important}
 .pt-acoes button{height:34px;padding:0 12px;border:1px solid #c8c3b6;background:#fff;color:#203b39;font:600 12.5px Figtree,sans-serif;cursor:pointer}
 html[data-theme="dark"] .pt-acoes button{background:#13293b;color:#e6edf3;border-color:#3a5368}
 #pt-view{max-width:1480px;margin:0 auto;padding:0 28px}
@@ -35,11 +36,7 @@ html[data-theme="dark"] .pt-acoes button{background:#13293b;color:#e6edf3;border
 #cwt-toast.bad{background:#8a2f22}
 /* motor (dados e regras) fica oculto; aparece inteiro para o pedido de token e para as telas de configuração */
 #cmt-motor{position:fixed;left:-200vw;top:0;width:100vw;height:100vh;border:0;visibility:hidden}
-body.pt-token #cmt-motor,body.pt-legado #cmt-motor{left:0;visibility:visible;z-index:2147482000;background:#fff}
-body.pt-legado #cmt-motor{top:52px;height:calc(100vh - 52px)}
-#pt-fecha{display:none}
-body.pt-legado #pt-fecha{display:flex;position:fixed;left:0;right:0;top:0;height:52px;z-index:2147482001;align-items:center;gap:12px;padding:0 20px;background:#173f3d;color:#fff;font:600 14px Figtree,sans-serif}
-#pt-fecha button{margin-left:auto;height:34px;padding:0 14px;border:1px solid #fff;background:transparent;color:#fff;font:600 13px Figtree,sans-serif;cursor:pointer}
+body.pt-token #cmt-motor{left:0;visibility:visible;z-index:2147482000;background:#fff}
 body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh + 48px);left:4vw;width:92vw;height:calc(92vh - 48px)}
 @media (max-width:760px){.pt-top{padding:0 12px}.pt-marca span{display:none}#pt-view{padding:0 12px}}
 /* ===== Esteira da sessão ===== */
@@ -72,6 +69,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-marcos input{width:100%!important;min-width:0;height:24px!important;min-height:0!important;border-radius:0!important;box-shadow:none!important;border:1px solid var(--b2);padding:0 5px!important;font:11.5px ui-monospace,monospace;color:var(--tx);background:var(--w)}
 .cwe-marcos input.vazio{background:var(--amb);color:var(--m2)}
 .cwe-mkb{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:5px 8px}
+.cwe-eqk{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px;font-size:12px}.cwe-eqk label{display:inline-flex;gap:4px;align-items:center}
 .cwe-mkb button.on{background:#e3f1ea;border-color:#235a55;color:#173f3d}
 .cwe-mkb button,.cwe-acoes button,.cwe-drop button,.cwe-cfg-b>button{height:30px;padding:0 12px;border:1px solid var(--b2);border-radius:7px;background:var(--p);color:var(--tx);font-weight:700;font-size:11.5px;white-space:nowrap}
 .cwe .pri{background:var(--t);border-color:var(--t);color:var(--w)}
@@ -301,10 +299,9 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
   <a class="pt-marca" href="/init/" title="Voltar à Triagem (Ab Initio)"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"></path></svg><span>Gabinete CMT</span><b>Pautas<i>.</i></b></a>
   <nav class="pt-nav" aria-label="Aplicativos"><a href="/init/">Triagem</a><a href="/pautas/" aria-current="page">Pautas</a><a href="/office/">Ex Officio</a></nav>
   <span class="pt-esp"></span>
-  <div class="pt-acoes"><button type="button" id="pt-tema" title="Tema claro ou escuro">Tema</button></div>
+  <div class="pt-acoes"><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button><button type="button" id="pt-tema" title="Tema claro ou escuro">Tema</button></div>
 </header>
 <main id="pt-view"><div id="pt-carga" role="status"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main>
-<div id="pt-fecha"><span id="pt-fecha-t">Configurações</span><button type="button" data-pt-fecha>Voltar às Pautas</button></div>
 <div id="cwt-toast" role="status" hidden></div>
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
@@ -479,7 +476,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
       <div class="cwe-kpis">${kpi(L.length, 'Selecionados', 'na seleção prévia')}${kpi(`${sec('1ª')} · ${sec('2ª')} · ${sec('3ª')}`, '1ª · 2ª · 3ª Seção', semSec + ' sem seção')}${kpi(`${d.metas} · ${prio}`, 'Metas · prioridades legais', 'com meta CNJ · prioridade no PJe')}${kpi(`${imp} · ${d.tipos.ret}`, 'Impedimento · retirados', 'conferir antes de fechar')}</div>
       <div class="cwe-duo"><div class="cwe-pares"><div class="h">MATÉRIAS QUE MAIS PESAM</div><div>${mat.length ? mat.map(([t, n]) => `<span title="${e(t)}">${e(t)}</span><b>${n}</b>`).join('') : '<span>nenhuma ainda</span><b>—</b>'}</div></div>
         <div class="cwe-pares"><div class="h">RASCUNHO FEITO NA TRIAGEM</div><div><span>Com minutante no rascunho</span><b>${comM} de ${L.length}</b><span>Com corretor no rascunho</span><b>${comC} de ${L.length}</b><span>Com meta CNJ</span><b>${d.metas}</b><span>ED, AgInt ou JR</span><b>${d.tipos.ED + d.tipos.AgInt + d.tipos.JR}</b></div></div></div>
-      <div class="cwe-acoes"><button type="button" class="pri" data-cwe="fechar-sel" ${L.length ? '' : 'disabled'}>Fechar a seleção e copiar a lista para o registro no PJe</button><button type="button" data-cwe="triagem">Editar na Triagem</button><button type="button" data-cwt="open-pre">Abrir a seleção prévia</button></div>
+      <div class="cwe-acoes"><button type="button" class="pri" data-cwe="fechar-sel" ${L.length ? '' : 'disabled'}>Fechar a seleção e copiar a lista para o registro no PJe</button><button type="button" data-cwe="triagem">Editar na Triagem</button></div>
       ${L.length ? listagem(d, 'Processos da seleção prévia') : '<p class="cwe-vazio">Nenhum processo na seleção prévia. Encaminhe pela Triagem.</p>'}</section>`;
   }
 
@@ -648,13 +645,13 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     const desig = (() => { try { return d.s?.regrasDesignacaoSessao?.(ss.id) || null; } catch (er) { return null; } })();
     const crit = Array.isArray(desig?.ordem) ? desig.ordem : Array.isArray(desig) ? desig.map((x) => x.id || x.nome || x) : [];
     const T = [
-      ['Regras dos marcos', `<p>Nenhuma data fica fixa: cada marco segue uma regra em dias úteis, contada da sessão ou do peço dia. A sessão pode ajustar a própria data sem mudar a regra.</p><div class="cwe-cfg-l">${[['Peço dia', 'calendário do tribunal', f.pauta ? 'nesta sessão: ' + A.br(f.pauta) : ''], ['Início da preparação', '[definir] dias úteis depois do peço dia', dias(f.inicio, ss.data) != null ? 'nesta sessão: ' + dias(f.inicio, ss.data) + ' dias corridos antes da sessão' : ''], ['Entrega das minutas', '[definir] dias úteis antes da sessão', dias(f.minutas, ss.data) != null ? 'nesta sessão: ' + dias(f.minutas, ss.data) + ' dias corridos' : ''], ['Liberação', '[definir] dias úteis antes da sessão', dias(f.liberacao, ss.data) != null ? 'nesta sessão: ' + dias(f.liberacao, ss.data) + ' dias corridos' : '']].map(([a, b, c]) => `<span><b>${e(a)}</b>${e(b)}<small>${e(c)}</small></span>`).join('')}</div><button type="button" data-cwt="marcos" title="Abre o editor completo do motor">Calendário e marcos · editor completo ↗</button>`],
-      ['Calendário forense', '<p>Feriados nacionais e da Justiça Federal, de MS, Carnaval, Semana Santa, Corpus Christi e recesso (20/12 a 20/01). Os marcos, os prazos da triagem e as urgências seguem este calendário.</p><button type="button" data-cwt="marcos" title="Abre o editor completo do motor">Abrir o calendário no editor completo ↗</button>'],
-      ['Regras de etiquetas', '<p>A tarefa do PJe decide o tipo de julgamento ([ED], [Sessão - ED], [Ag. Int], retratação); a etiqueta de ED só informa. Remessa necessária vem da classe. As conversões gerais (subassuntos, MPF, especificidades, alertas de impedimento e suspeição) estão em apoio/regras/etiquetas.json.</p><button type="button" data-cwt="rules" title="Abre o editor completo do motor">Abrir as regras no editor completo ↗</button>'],
-      ['Regras de designação', `<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>${crit.length ? `<ol class="cwe-cfg-o">${crit.map((c) => `<li>${e(typeof c === 'string' ? c : JSON.stringify(c))}</li>`).join('')}</ol>` : ''}<button type="button" data-cwt="rules" title="Abre o editor completo do motor">Regras desta sessão no editor completo ↗</button>`],
+      ['Regras dos marcos', `<p>Nenhuma data fica fixa: cada marco segue uma regra em dias úteis, contada da sessão ou do peço dia. A sessão pode ajustar a própria data sem mudar a regra.</p><div class="cwe-cfg-l">${[['Peço dia', 'calendário do tribunal', f.pauta ? 'nesta sessão: ' + A.br(f.pauta) : ''], ['Início da preparação', '[definir] dias úteis depois do peço dia', dias(f.inicio, ss.data) != null ? 'nesta sessão: ' + dias(f.inicio, ss.data) + ' dias corridos antes da sessão' : ''], ['Entrega das minutas', '[definir] dias úteis antes da sessão', dias(f.minutas, ss.data) != null ? 'nesta sessão: ' + dias(f.minutas, ss.data) + ' dias corridos' : ''], ['Liberação', '[definir] dias úteis antes da sessão', dias(f.liberacao, ss.data) != null ? 'nesta sessão: ' + dias(f.liberacao, ss.data) + ' dias corridos' : '']].map(([a, b, c]) => `<span><b>${e(a)}</b>${e(b)}<small>${e(c)}</small></span>`).join('')}</div><button type="button" data-cwe="m-ed-cfg">Editar os marcos desta sessão</button>`],
+      ['Calendário forense', '<p>Feriados nacionais e da Justiça Federal, de MS, Carnaval, Semana Santa, Corpus Christi e recesso (20/12 a 20/01). Os marcos, os prazos da triagem e as urgências seguem este calendário.</p>'],
+      ['Regras de etiquetas', '<p>A tarefa do PJe decide o tipo de julgamento ([ED], [Sessão - ED], [Ag. Int], retratação); a etiqueta de ED só informa. Remessa necessária vem da classe. As conversões gerais (subassuntos, MPF, especificidades, alertas de impedimento e suspeição) estão em apoio/regras/etiquetas.json.</p>'],
+      ['Regras de designação', `<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>${crit.length ? `<ol class="cwe-cfg-o">${crit.map((c) => `<li>${e(typeof c === 'string' ? c : JSON.stringify(c))}</li>`).join('')}</ol>` : ''}`],
       ['Regras de produtividade', '<p>Metas internas do gabinete, distintas das metas do CNJ: cota fixa de minutas por dia útil para quem minuta. Dia sem expediente ou sem processos pendentes: meta zero. Cada processo minutado conta uma vez por número.</p><div class="cwe-cfg-l">' + [['Dalete, José, Rodrigo, Débora e Maria Eduarda', '3 minutas por dia'], ['Victor e Estela', '4 minutas por dia'], ['Demais da equipe', 'sem meta interna'], ['Monocráticas e correções', 'sem meta interna'], ['Complexidade (½ · Ω · A · Σ)', '0,5 · 1 · 2 · 3 [VALIDAR peso na meta]']].map(([a, b]) => `<span><b>${e(a)}</b>${e(b)}</span>`).join('') + '</div>'],
       ['Sessão', `<p>O que toda sessão nova recebe ao ser criada.</p><div class="cwe-cfg-l">${[['Órgão julgador', 'Turma Regional de MS'], ['Gabinete na relação do PJe', S.gab || 'Gab. A da Turma Regional de Mato Grosso do Sul'], ['Horário', ss.hora || '14:00'], ['Julgadores', (est.mag || []).map((m) => m.nome).join(' · ') || 'apoio/magistrados.json']].map(([a, b]) => `<span><b>${e(a)}</b>${e(b)}</span>`).join('')}</div>`],
-      ['Equipe', `<p>A equipe fica aqui, junto das regras que a usam: quem minuta entra na designação e na meta interna; a Assessoria corrige.</p><div class="cwe-eq">${eq.map((m) => `<span><b>${e(m.nome)}</b><small>${e((m.papel === 'assessoria' ? 'Assessoria' : 'Equipe') + (m.cargo ? ' · ' + m.cargo : ''))}</small><em class="${m.minuta ? 'min' : m.correcao ? 'cor' : ''}">${m.minuta ? 'minuta' : m.correcao ? 'corrige' : 'apoio'}</em></span>`).join('')}</div><button type="button" data-cwe="equipe">Abrir o cadastro completo da equipe</button>`]
+      ['Equipe', `<p>A equipe fica aqui, junto das regras que a usam: quem minuta entra na designação e na meta interna; a Assessoria corrige.</p><div class="cwe-eq">${eq.map((m) => `<span><b>${e(m.nome)}</b><small>${e((m.papel === 'assessoria' ? 'Assessoria' : 'Equipe') + (m.cargo ? ' · ' + m.cargo : ''))}</small>${(() => { const mi = m.minuta != null ? !!m.minuta : m.papel === 'equipe', co = m.correcao != null ? !!m.correcao : m.papel === 'assessoria'; return `<em class="${mi ? 'min' : co ? 'cor' : ''}">${mi && co ? 'minuta e corrige' : mi ? 'minuta' : co ? 'corrige' : 'apoio'}</em>`; })()}<span class="cwe-eqk">${[['minuta', 'minuta'], ['correcao', 'corrige'], ['auto', 'designação automática']].map(([k, t]) => `<label><input type="checkbox" data-cwe-eq="${e(m.nome)}" data-k="${k}" ${(k === 'auto' ? m.auto !== false : k === 'minuta' ? (m.minuta != null ? !!m.minuta : m.papel === 'equipe') : (m.correcao != null ? !!m.correcao : m.papel === 'assessoria')) ? 'checked' : ''}> ${t}</label>`).join('')}</span></span>`).join('')}</div><p class="cwe-nota">As marcas valem na hora para a designação; a gravação no procs-muta segue junto. Nomes, cargos e ausências ficam no cadastro da equipe da Ex Officio.</p>`]
     ];
     const t = Math.min(est.cfgTab, T.length - 1);
     return `<div class="cwe-cfg-bg" data-cwe="cfg-x"></div><section class="cwe-cfg" role="dialog" aria-label="Configurações das pautas"><nav>${T.map(([n], k) => `<button type="button" data-cwe="cfg-${k}" aria-current="${k === t}">${e(n)}</button>`).join('')}</nav>
@@ -709,12 +706,12 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     if (k === 'etq-aplicar') { if (!s?.aplicarConversoes) { A.msg('Motor indisponível.', true); return true; }
       const L = convDados(ss, d).filter((p) => p.proposta?.dif.length && marcado('etq', A.digits(p.cnj))).map((p) => p.cnj);
       if (!L.length || !W.confirm('Aplicar as conversões de etiquetas a ' + L.length + ' processo(s)?\n\nFixa apreciação, meta e MPF que vieram das regras. O que foi fixado à mão não muda.')) return true;
-      const n = s.aplicarConversoes(ss.id, L); A.msg(n + ' processo(s) com as conversões aplicadas. Grave no procs-muta pela Base.'); A.render(); return true; }
+      const n = s.aplicarConversoes(ss.id, L); A.msg(n + ' processo(s) com as conversões aplicadas. Grave no procs-muta pelo botão Gravar, no topo.'); A.render(); return true; }
     if (k === 'des-aplicar') { if (!s?.aplicarDesignacao || !s.designacao) { A.msg('Motor indisponível.', true); return true; }
       const Z = s.designacao(ss.id); const lista = Z.linhas.filter((p) => marcado('dsg', A.digits(p.cnj))).map((p) => { const o = est.dsg[A.digits(p.cnj)] || {}; const dd = p.servidor ? '' : (o.d ?? p.sugD?.nome ?? ''), cc = p.corretor ? '' : (o.c ?? p.sugC?.nome ?? '');
         return { cnj: p.cnj, d: dd, c: cc, porD: o.d != null && o.d !== p.sugD?.nome ? 'escolha manual' : p.sugD?.por, porC: o.c != null && o.c !== p.sugC?.nome ? 'escolha manual' : p.sugC?.por }; }).filter((x) => x.d || x.c);
       if (!lista.length || !W.confirm('Aplicar a designação a ' + lista.length + ' processo(s) da pauta?\n\nSó preenche quem está sem minutante ou sem corretor.')) return true;
-      const n = s.aplicarDesignacao(ss.id, lista); est.dsg = {}; A.msg(n + ' processo(s) designados. Grave no procs-muta pela Base.'); A.render(); return true; }
+      const n = s.aplicarDesignacao(ss.id, lista); est.dsg = {}; A.msg(n + ' processo(s) designados. Grave no procs-muta pelo botão Gravar, no topo.'); A.render(); return true; }
     if (k === 'm-pub') { if (!s?.publicarMarcos) { A.msg('Motor indisponível.', true); return true; }
       const on = !(ss.marcosPub || ss.publicada);
       if (!on && ss.publicada && !W.confirm('Retirar os marcos da Ex Officio retira também a listagem da pauta publicada. Continuar?')) return true;
@@ -767,16 +764,17 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
         let ok = false;
         if (f.dataset.nr === 'etq') { const ef = f.querySelector('[data-nr-ef]').value, v = f.querySelector('[data-nr-v]').value; ok = !!s.criarRegraEtiqueta?.(est.nr.v, ef, v); if (!ok) { A.msg('Este efeito pede um valor (tema, especificidade, hipótese ou número da meta).', true); return; } }
         else { const dd = f.querySelector('[data-nr-d]').value, cc = f.querySelector('[data-nr-c]').value; ok = !!s.regraAssunto?.(ss.id, est.nr.v, dd, cc); if (!ok) { A.msg('Escolha o minutante, o corretor ou os dois.', true); return; } }
-        est.nr = null; A.msg('Regra criada. A lista já reflete a regra; grave no procs-muta pela Base.'); }
+        est.nr = null; A.msg('Regra criada. A lista já reflete a regra; grave no procs-muta pelo botão Gravar, no topo.'); }
       else if (acao(k, b, ss)) return;
       else if (k === 'triagem') { W.location.href = '/init/'; return; }
-      else if (k === 'equipe') { est.cfg = false; A.showLegacy('equipe'); return; }
+      else if (k === 'm-ed-cfg') { est.cfg = false; est.mEd = true; }
       A.render();
     });
     view.addEventListener('change', (ev) => {
       const t = ev.target;
       if (t.dataset.cweCk) { const k = t.dataset.cweCk, dg = t.dataset.p, S0 = est.desm[k] || (est.desm[k] = new Set()); if (t.checked) S0.delete(dg); else S0.add(dg); A.render(); return; }
-      if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Grave no procs-muta pela Base.'); } return; }
+      if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Grave no procs-muta pelo botão Gravar, no topo.'); } return; }
+      if (t.dataset.cweEq) { const s = A.getSes(); if (s?.equipeDefinir?.(t.dataset.cweEq, t.dataset.k, t.checked)) { A.msg('Equipe atualizada. Gravando no procs-muta…'); clearTimeout(ligar.tq); ligar.tq = setTimeout(() => { try { s.gravar && s.gravar(); } catch (er) {} }, 1200); A.render(); } return; }
       if (t.dataset.cweEsc) { const dg = t.dataset.p; est.dsg[dg] = { ...(est.dsg[dg] || {}), [t.dataset.cweEsc]: t.value }; A.render(); }
     });
     /* PDF da pauta arrastado para o quadro da etapa 2 */
@@ -837,16 +835,8 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     const ss = selectedSession(); settings.sessId = ss?.id || ''; try { sessionStorage.setItem('pt-ses', settings.sessId); } catch (e) {}
     W.CMTEsteira.render(api);
   }
-  /* telas de configuração do motor (marcos, regras, equipe, sessões) abertas por cima da página */
-  const TIT = { marcos: 'Marcos e prazos', regras: 'Regras de designação', sessoes: 'Sessões', equipe: 'Equipe', pre: 'Seleção prévia', pos: 'Planilha da sessão' };
-  function legado(v) {
-    const s = getSes(), w = getMotor(); if (!s || !w) return msg('O motor ainda está carregando.', true);
-    try { if (v === 'regras') s.abrir('desig'); else if (v === 'pre' || v === 'pos') { const ss = selectedSession(); if (!ss || !s.abrirSessao(ss.id, v)) return msg('Selecione uma sessão.', true); } else if (v === 'equipe') { w.CMTMotor ? w.CMTMotor.ir('equipe') : s.abrir('equipe'); } else s.abrir(v); } catch (e) { return msg(e.message, true); }
-    $('#pt-fecha-t').textContent = TIT[v] || 'Configurações'; D.body.classList.add('pt-legado');
-  }
-  function fecharLegado() { D.body.classList.remove('pt-legado'); try { getSes()?.fechar?.(); } catch (e) {} render(); }
   function abrirFicha(p) { if (digits(p).length !== 20) return msg('Número CNJ inválido para abrir a ficha.', true); try { const ss = selectedSession(); W.CMTProntuario.abrir(p, ss ? sesInfo(ss).lines.map((x) => digits(x.cnj)) : []); } catch (e) { msg('Falha ao abrir a ficha: ' + e.message, true); } }
-  const api = { view, settings, getMotor, getCore, getSes, sessionData, selectedSession, sesInfo, openFicha: abrirFicha, showLegacy: legado, msg, render, esc, br, cnj, digits, norm };
+  const api = { view, settings, getMotor, getCore, getSes, sessionData, selectedSession, sesInfo, openFicha: abrirFicha, msg, render, esc, br, cnj, digits, norm };
   W.CMTPautas = api;
   /* comandos de página (data-cwt), sessão (data-cwt-ses) e importação do PDF da pauta */
   view.addEventListener('click', (ev) => {
@@ -856,10 +846,6 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     if (k === 'ficha') abrirFicha(b.dataset.p);
     else if (k === 'import-pdf') $('#cwt-pdf-file', view)?.click();
     else if (k === 'create-session') { const d = W.prompt('Data do julgamento (AAAA-MM-DD):', new Date().toISOString().slice(0, 10)); if (d === null) return; const s = getSes(); if (!s?.novaSessao) return msg('Serviço de sessões indisponível.', true); const r = s.novaSessao(d.trim()); if (r.erro) return msg(r.erro, true); settings.sessId = r.id; render(); msg('Sessão cadastrada. Configure os marcos antes de importar a pauta.'); }
-    else if (k === 'marcos') legado('marcos');
-    else if (k === 'rules') legado('regras');
-    else if (k === 'open-pre') legado('pre');
-    else if (k === 'open-pos') legado('pos');
   });
   view.addEventListener('change', (ev) => {
     if (ev.target.id !== 'cwt-pdf-file' || !ev.target.files?.length) return;
@@ -871,7 +857,10 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
       else { render(); msg((r && r.erro) || 'O PDF não trouxe itens da pauta.', !(r && r.cancelado)); }
     }).catch((e) => msg('Importação não concluída: ' + e.message, true));
   });
-  D.addEventListener('click', (ev) => { if (ev.target.closest('[data-pt-fecha]')) fecharLegado(); });
+  /* gravar no procs-muta: o botão mostra quantas partes têm alteração pendente */
+  $('#pt-gravar').addEventListener('click', async () => { const s = getSes(); if (!s?.gravar) return msg('O motor ainda está carregando.', true); const n = (s.pendentes?.() || []).length; if (!n) return msg('Nada a gravar: tudo igual ao procs-muta.'); msg('Gravando no procs-muta…'); try { await s.gravar(); msg('Gravado no procs-muta.'); } catch (e) { msg('Falha ao gravar: ' + e.message, true); } pend(); });
+  function pend() { const s = getSes(), b = $('#pt-gravar'); if (!s?.pendentes || !b) return; const n = s.pendentes().length; b.classList.toggle('pend', !!n); b.textContent = n ? 'Gravar (' + n + ')' : 'Gravar'; }
+  setInterval(pend, 2000);
   $('#pt-tema').addEventListener('click', () => { const dk = D.documentElement.getAttribute('data-theme') === 'dark'; if (dk) D.documentElement.removeAttribute('data-theme'); else D.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('cmt-theme', dk ? 'light' : 'dark'); } catch (e) {} });
   /* pedido de token do GitHub (aparece dentro do motor): enquanto aberto, o motor fica à vista */
   setInterval(() => { const w = getMotor(); let pede = false; try { pede = !!(w && w.document.querySelector('form input[type=password]')); } catch (e) {} D.body.classList.toggle('pt-token', pede); }, 400);
@@ -882,7 +871,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     if (++n === 240) { clearInterval(t); $('#pt-carga').innerHTML = '<b>O motor de dados não carregou.</b><span>Recarregue a página. Se persistir, abra a Triagem e confira a conexão com o procs-muta.</span>'; }
   }, 250);
   /* o motor avisa mudanças (gravação, importação): a página redesenha */
-  setInterval(() => { if (!pronto || D.body.classList.contains('pt-legado') || D.body.classList.contains('cmt-ficha-on')) return; const s = getSes(); const sig = JSON.stringify((s?.estado()?.sessoes || []).map((x) => [x.id, (x.itens || []).length, (x.previa || []).length, x.publicada || ''])); if (sig !== render.sig) { render.sig = sig; if (!D.activeElement?.closest?.('#pt-view input,#pt-view select,#pt-view textarea')) render(); } }, 1500);
+  setInterval(() => { if (!pronto || D.body.classList.contains('cmt-ficha-on')) return; const s = getSes(); const sig = JSON.stringify((s?.estado()?.sessoes || []).map((x) => [x.id, (x.itens || []).length, (x.previa || []).length, x.publicada || ''])); if (sig !== render.sig) { render.sig = sig; if (!D.activeElement?.closest?.('#pt-view input,#pt-view select,#pt-view textarea')) render(); } }, 1500);
 })(window, document);
 </script>
 </body>
