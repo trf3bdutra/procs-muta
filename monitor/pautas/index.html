@@ -767,7 +767,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
         else { const dd = f.querySelector('[data-nr-d]').value, cc = f.querySelector('[data-nr-c]').value; ok = !!s.regraAssunto?.(ss.id, est.nr.v, dd, cc); if (!ok) { A.msg('Escolha o minutante, o corretor ou os dois.', true); return; } }
         est.nr = null; A.msg('Regra criada. A lista já reflete a regra; gravação automática no procs-muta em instantes.'); }
       else if (acao(k, b, ss)) return;
-      else if (k === 'triagem') { W.location.href = '/init/'; return; }
+      else if (k === 'triagem') { W.location.href = '/triagem/'; return; }
       else if (k === 'm-ed-cfg') { est.cfg = false; est.mEd = true; }
       A.render();
     });
