@@ -767,6 +767,7 @@ function abrirAcervo() {
     if (k === 'escolher') $('#ia-file').click();
     else if (k === 'limpar') { IMP.lidos = null; IMP.papeis = {}; IMP.log = ''; pintaAcervo(); }
     else if (k === 'enviar') enviarFonte();
+    else if (k === 'datajud') rodarDataJud();
     else if (k === 'fechar') { if (IMP && IMP.ocupado) toast('O envio continua; o resultado aparece no painel quando o GitHub terminar.'); fecharGaveta(); } });
   g.addEventListener('change', (e) => { const t = e.target; if (t.dataset.papel != null) { IMP.papeis[t.dataset.papel] = t.value; pintaAcervo(); } });
   pintaAcervo(); fonteInfo().then((i) => { if (i && IMP) { IMP.fonte = i; pintaAcervo(); } }); }
@@ -783,6 +784,7 @@ function pintaAcervo() { const c = $('#ia-c'); if (!c || !IMP) return; const L =
     h += '<div class="log' + (temPr ? ' bad' : '') + '" style="' + (temPr ? '' : 'border-color:#d9c38f;color:#6e4e14') + '">' + (temPr ? 'Com planilha principal: quem não estiver na lista principal sai da fonte. O trabalho registrado vai para o arquivo e volta se o processo voltar.' : 'Atualização parcial: ninguém sai da fonte. As listas de tarefa atualizam o paradeiro de quem veio nelas; quem estava nessas tarefas e não veio perde a tarefa.') + '</div>'; }
   if (IMP.log) h += '<div class="log' + (IMP.bad ? ' bad' : '') + '" role="status">' + esc(IMP.log) + '</div>';
   h += '<div class="card" style="padding:10px 14px;font-size:12.5px;color:var(--m2);display:flex;flex-direction:column;gap:4px"><span><b>Principal (em andamento):</b> lista do PJe com a coluna Tarefa. Define quem está na fonte e onde está. Entra quem aparece; sai quem não aparece.</span><span><b>Complementar:</b> Power BI, sigilosos ou outra planilha com mais dados. Só preenche quem já está na fonte.</span><span><b>Lista de uma tarefa:</b> exportação do PJe de uma tarefa. Atualiza o paradeiro de quem veio; quem estava nela e não veio perde a tarefa, mas fica na fonte.</span><span>Celulares, telefones, e-mails e CPF não entram. O navegador nunca grava a fonte: só o GitHub.</span></div>' +
+    '<div class="card" style="padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><div style="flex:1 1 260px"><b style="font-size:13.5px;color:var(--v)">DataJud</b><span style="display:block;font-size:12.5px;color:var(--m2)">Consulta o DataJud para os processos que já estão na fonte e grava o que vier (classe, assuntos, órgão, situação, movimentos). Não acrescenta nem tira processo. Leva alguns minutos.</span>' + (IMP.dj ? '<span style="display:block;font-size:12.5px;margin-top:4px;color:' + (IMP.djBad ? 'var(--r)' : 'var(--ok)') + '">' + IMP.dj + '</span>' : '') + '</div><button type="button" class="btn" data-ia="datajud"' + (IMP.ocupado || IMP.djRodando ? ' disabled' : '') + '>' + (IMP.djRodando ? 'DataJud rodando…' : 'Rodar o DataJud agora') + '</button></div>' +
     '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + (IMP.fonte ? 'Fonte gravada em <b>' + new Date(IMP.fonte.em).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) + '</b> · ' + esc(IMP.fonte.msg) : 'Consultando a última gravação da fonte…') + '</p>';
   c.innerHTML = h;
   const ok = L && L.some((l) => l.tipo && l.processos);
@@ -796,6 +798,28 @@ async function lerPlanilhas(files) { const AF = W.CMTAtualizarFonte, X = W.XLSX;
   IMP.ocupado = true; IMP.bad = false; IMP.log = 'Lendo ' + files.length + ' planilha(s)…'; pintaAcervo();
   try { IMP.lidos = await AF.classificar(files, X); IMP.log = ''; } catch (e) { IMP.bad = true; IMP.log = 'Não li as planilhas: ' + ((e && e.message) || e); }
   IMP.ocupado = false; pintaAcervo(); }
+/* DataJud: dispara o Action "Acervo fonte · atualizar" só com o DataJud (workflow_dispatch) e acompanha até gravar */
+async function rodarDataJud() { const P = PM(); if (!IMP || !P) return; const k = P.atual || (P.token ? await P.token('Para rodar o DataJud.', true) : '');
+  const base = 'https://api.github.com/repos/trf3bdutra/procs-muta', H = { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k, 'X-GitHub-Api-Version': '2022-11-28' };
+  const dj = (t, bad) => { if (!IMP) return; IMP.dj = esc(t); IMP.djBad = !!bad; pintaAcervo(); };
+  IMP.djRodando = true; dj('Pedindo ao GitHub para rodar o DataJud…');
+  const desde = new Date(Date.now() - 30000).toISOString();
+  try { const r = await fetch(base + '/actions/workflows/acervo-fonte.yml/dispatches', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, H), body: JSON.stringify({ ref: 'main', inputs: { datajud: true } }) });
+    if (r.status === 403 || r.status === 404) { IMP.djRodando = false; IMP.dj = 'O token deste navegador não pode disparar Actions. Rode à mão: <a href="https://github.com/trf3bdutra/procs-muta/actions/workflows/acervo-fonte.yml" target="_blank" rel="noopener">Actions › Acervo fonte · atualizar › Run workflow</a> (com “Consultar o DataJud” marcado). Para o botão funcionar, dê ao token a permissão Actions: leitura e gravação.'; IMP.djBad = true; pintaAcervo(); return; }
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    let run = null, n = 0;
+    while (n++ < 120) { await new Promise((x) => setTimeout(x, 15000));
+      const q = await fetch(base + '/actions/workflows/acervo-fonte.yml/runs?event=workflow_dispatch&per_page=5&created=>' + encodeURIComponent(desde), { cache: 'no-store', headers: H }); if (!q.ok) continue;
+      run = ((await q.json()).workflow_runs || [])[0]; if (!run) { dj('Na fila do GitHub…'); continue; }
+      if (run.status !== 'completed') { dj('DataJud rodando no GitHub (' + Math.round(n / 4) + ' min)…'); continue; }
+      break; }
+    if (!run || run.status !== 'completed') throw new Error('o GitHub não terminou em 30 minutos; confira a aba Actions');
+    if (run.conclusion !== 'success') throw new Error('o Action terminou com “' + run.conclusion + '” (' + run.html_url + ')');
+    dj('DataJud concluído. Relendo a fonte…');
+    try { const A = M().CMTAcervoDados; if (A && A.puxar) await A.puxar(false); } catch (e) {}
+    await lerFonte(); construir(); render(); if (IMP) IMP.fonte = await fonteInfo(); acervoData();
+    IMP.djRodando = false; dj('DataJud concluído e fonte relida.');
+  } catch (e) { if (IMP) { IMP.djRodando = false; dj('Não rodou o DataJud: ' + ((e && e.message) || e), true); } } }
 async function enviarFonte() { const AF = W.CMTAtualizarFonte; if (!IMP || !IMP.lidos || IMP.ocupado) return;
   IMP.ocupado = true; IMP.bad = false;
   const aviso = (t) => { if (!IMP) return; IMP.log = t; pintaAcervo(); };
