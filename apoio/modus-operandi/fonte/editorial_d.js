@@ -526,7 +526,12 @@ try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f
   var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compendium');
   var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
     var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false"><span class="cn-tt">'+x[1]+(x[3]?'<small>'+x[3]+'</small>':'')+'</span></button>';});
-  bar.innerHTML=h+'</div>';top.parentNode.insertBefore(bar,top.nextSibling);document.body.classList.add('cmp-nav-fora');
+  bar.innerHTML=h+'</div>';
+  /* as seções entram na própria faixa do cabeçalho, no lugar das abas antigas */
+  var velha=top.querySelector('.eqtabs.eq-cpn');if(velha)velha.hidden=true;
+  var sp=top.querySelector('.eqsp');
+  if(sp)top.insertBefore(bar,sp);else top.appendChild(bar);
+  document.body.classList.add('cmp-nav-dentro');
   function aba(v){var t=document.querySelector('.tab[data-v="'+v+'"]');if(t)t.click();}
   function atual(){var vs=function(id){var e=document.getElementById(id);return e&&!e.hidden;};if(vs('v-ement'))return 'ement';if(vs('v-edit'))return XS.ed==='par'?'pecas':(XS.ed||'pecas');
     var r=['temas','rep','enc'].filter(function(v){return vs('v-'+v);})[0];return r||'';}
