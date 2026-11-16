@@ -1288,7 +1288,7 @@ function portaToken() { return new Promise((fim) => {
     let r = null; try { r = await PM().definir(tk, $('#pt-l').checked); } catch (x) { r = { erro: x.message }; }
     st.textContent = ''; bt.disabled = false;
     if (!r || !r.ok) { er.textContent = (r && r.erro) || 'O GitHub recusou o token.'; er.hidden = false; i.select(); return; }
-    try { const G = M().__acervoGitHub; if (G && G.token) G.token(tk); } catch (x) {}
+    try { const G = M().__acervoGitHub; if (G && G.token) { G.token(tk); if (G.puxar) G.puxar(true); } } catch (x) {}
     v.remove(); fim(tk); }); }); }
 (async function arrancar() {
   const msg = (t) => { const m = $('#carga-msg'); if (m) m.textContent = t; };

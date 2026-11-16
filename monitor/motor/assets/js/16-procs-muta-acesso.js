@@ -3,7 +3,7 @@
    O token fica nesta aba; com "Lembrar", fica também neste navegador. */
 (function(){
   if(window.ProcsMuta)return;
-  var REPO={dono:'trf3bdutra',repo:'procs-muta',ramo:'main'},K='procsmuta_token',pedido=null,GRAVA=true;
+  var REPO={dono:'trf3bdutra',repo:'procs-muta',ramo:'main'},K='procsmuta_token',pedido=null,GRAVA=true;var fechaPedido=null;
   var tok=(function(){try{return sessionStorage.getItem(K)||localStorage.getItem(K)||''}catch(e){return ''}})();
   function esquecer(){tok='';try{sessionStorage.removeItem(K);localStorage.removeItem(K)}catch(e){}}
   var recusado=true,aviso='';   /* o pedido de token não abre sozinho: só pelo botão de conexão (ou ao gravar) */
@@ -26,7 +26,8 @@
       document.body.appendChild(bg);
       var erro=bg.querySelector('[data-erro]'),st=bg.querySelector('[data-st]'),inp=bg.querySelector('input[type=password]');
       function mostra(m){erro.textContent=m;erro.style.display=m?'':'none'}
-      function fim(v){bg.remove();res(v)}
+      function fim(v){fechaPedido=null;bg.remove();res(v)}
+      fechaPedido=fim;
       bg.querySelector('[data-n]').onclick=function(){recusado=true;fim('')};
       bg.querySelector('form').onsubmit=async function(e){
         e.preventDefault();var v=inp.value.trim();if(!v)return;
@@ -88,6 +89,8 @@
     if(r.status===403||r.status===404)return{erro:'Este token não dá acesso ao trf3bdutra/procs-muta. Use a permissão Contents (leitura e gravação) nesse repositório.'};
     if(!r.ok)return{erro:'O GitHub respondeu HTTP '+r.status+'. Tente de novo em instantes.'};
     tok=v;recusado=false;aviso='';
+    /* token informado fora deste pedido (tela de entrada da Triagem, cartão do Atualizar): fecha o pedido aberto */
+    if(fechaPedido)try{fechaPedido(v)}catch(e){}
     try{sessionStorage.setItem(K,v);if(lembrar)localStorage.setItem(K,v);else localStorage.removeItem(K)}catch(e){}
     return{ok:true};
   }
