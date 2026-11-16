@@ -16,7 +16,7 @@ function cat(s) { return /oncol/i.test(s) ? 'Saúde · oncológico' : /medicamen
 let CACHE = null, IDX = null, CACHE_T = 0;
 const mapa = r => ({ cnj: r.processo || r.Processo, classe: r.classe_judicial || r.Classe || '', assunto: r.Assunto || r.Assunto_Principal || '',
   partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter(Boolean).join(' x '), tarefa: r.tarefa_atual || '', desde: iso(r.data_entrada_tarefa),
-  prioridade: r.prioridade || '', etiquetas: String(r.Etiquetas || r.etiquetas || '') });
+  prioridade: r.prioridade || '', etiquetas: String(r.Etiquetas || r.etiquetas || ''), dist: iso(r['data_distribuição'] || r['Data_Distribuição']) });
 async function base() {
   if (!CACHE || Date.now() - CACHE_T > 300e3) {
     const F = JSON.parse((await L.lerGrande('acervo/fonte.json')).txt).registros || [];
@@ -31,9 +31,9 @@ module.exports = async (req, res, u) => {
   try {
     if (req.method === 'GET') {
       const [B, { I, doc }] = await Promise.all([base(), AC.indice()]), na = {}, ac = r => Object.assign(AC.acomp(r, MAPA, 'Sensível'), ((r && r.controles) || {})['Sensível - Incluído'] === 'Sim' ? { incluido: true } : {});
-      const itens = B.lista.map(x => { na[dg(x.cnj)] = 1; return Object.assign({}, x, { acomp: ac(I[dg(x.cnj)]) }); });
+      const itens = B.lista.map(x => { na[dg(x.cnj)] = 1; return Object.assign({}, x, { acomp: ac(I[dg(x.cnj)]), nota: AC.nota(I[dg(x.cnj)]) }); });
       /* incluídos à mão (fora da regra do acervo) */
-      (doc.registros || []).forEach(r => { const k = dg(r.processo); if (!na[k] && ((r.controles || {})['Sensível - Incluído'] === 'Sim')) itens.push(Object.assign({ catAuto: '', manual: true }, B.idx[k] || { cnj: r.processo, tarefa: 'fora do acervo' }, { acomp: ac(r) })); });
+      (doc.registros || []).forEach(r => { const k = dg(r.processo); if (!na[k] && ((r.controles || {})['Sensível - Incluído'] === 'Sim')) itens.push(Object.assign({ catAuto: '', manual: true }, B.idx[k] || { cnj: r.processo, tarefa: 'fora do acervo' }, { acomp: ac(r), nota: AC.nota(r) })); });
       return res.status(200).json({ itens: itens.filter(x => x.acomp.excluido !== 'Sim'), atualizadoEm: doc.atualizado_em || '' });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });

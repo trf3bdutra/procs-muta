@@ -512,8 +512,8 @@ html[data-theme=dark] .home-v2 .hc-rail-row,html[data-theme=dark] .home-v2 .hc-s
 
 /* ===== Pautas · visual editorial (o de Projetos e Aprendizado do Gabinete CMT). Vale só na fonte "pauta": #v-pauta.ed ===== */
 .ed-i{display:none}.trb-em{display:none}.ed-tabs[hidden],.ed-strip[hidden]{display:none!important}
-#v-pauta.ed{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--em:#617570;--eg:#235a55;--egs:#dfe9e4;--eo:#a57829;--eo2:#805b18;--eos:#f5efd9;--ew:#fff;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif}
-html[data-theme=dark] #v-pauta.ed{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--em:#a7a8a9;--eg:#6eba8a;--egs:#14301f;--eo:#e6c27a;--eo2:#e6c27a;--eos:#33261d;--ew:#0a1821}
+#v-pauta.ed,#v-pauta.ctl{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--em:#617570;--eg:#235a55;--egs:#dfe9e4;--eo:#a57829;--eo2:#805b18;--eos:#f5efd9;--ew:#fff;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif}
+html[data-theme=dark] #v-pauta.ed,html[data-theme=dark] #v-pauta.ctl{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--em:#a7a8a9;--eg:#6eba8a;--egs:#14301f;--eo:#e6c27a;--eo2:#e6c27a;--eos:#33261d;--ew:#0a1821}
 /* painel da sessão */
 #v-pauta.ed .trb{--t-bg:var(--ep);--t-ln:var(--el);--t-rs:var(--ew);--t-ti:var(--ei);--t-in:var(--ei);--t-mu:var(--em);--t-inst:var(--eg);--t-acao:var(--eg);--t-ic:var(--em);--t-icb:var(--ew);--t-ok:var(--eg);--t-ok-ink:#fff;--t-ok-ln:var(--eg);--t-trk:var(--el2);--t-prox:var(--eo2);--t-prox-halo:var(--eos);--t-hoje:var(--eo);--t-hoje-ln:var(--eo);--t-bar:var(--el);--t-gab:var(--eo);--t-eu:var(--eg);border-radius:0;border-top:2px solid var(--eg)}
 html[data-theme=dark] #v-pauta.ed .trb{--t-ok-ink:#0a1821}
@@ -824,6 +824,75 @@ html[data-theme=dark] #v-pauta.ed.mono .urg{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07
 #v-pauta.ctl .ctl-sec h2{margin:6px 0 4px;font-size:30px;line-height:1.1;font-weight:700;letter-spacing:-.03em;color:var(--ei)}
 #v-pauta.ctl .ctl-sec>p:last-child{margin:0;max-width:760px;font-size:14px;color:var(--em)}
 #v-pauta.ctl .metas{display:block!important;background:var(--ep);border:1px solid var(--el);border-radius:8px;padding:16px;box-shadow:0 8px 24px -18px rgba(32,59,57,.35)}
+/* Monitoramento · seções no padrão da opção A: cabeçalho com pill de ícones, painel de números com tempo na tarefa, filtros como cabeçalho da tabela, anotação por processo */
+#v-pauta.ctl .metas{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important;margin:12px 0 0}
+#v-pauta.ctl .ctl-sec{padding:16px 0 0;margin:34px 0 0}
+#v-pauta.ctl .ctl-hd{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:10px 20px}
+#v-pauta.ctl .ctl-hd>div{flex:1 1 380px;min-width:0}
+#v-pauta.ctl .ctl-d{margin:0;max-width:680px;font-size:13.5px;color:var(--em)}
+#v-pauta.ctl .ctl-sec.fech+.metas .ct-min{margin-top:2px}
+.pil{display:inline-flex;align-items:center;gap:2px;height:36px;padding:2px;border:1px solid var(--el);border-radius:10px;background:var(--ep)}
+.pil:empty{display:none}
+.pil button{width:30px;height:30px;padding:0;border:0;border-radius:7px;background:transparent;color:var(--ei);display:inline-grid;place-items:center;cursor:pointer}
+.pil button:hover{background:var(--ew);color:var(--eg)}
+.pil button[aria-pressed=true]{background:var(--eg);color:var(--ew)}
+.pil-sep{width:1px;height:18px;margin:0 3px;background:var(--el)}
+.ct-pn{background:var(--ep2);border:1px solid var(--el)}
+.ct-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr))}
+.ct-c{display:flex;flex-direction:column;align-items:flex-start;padding:13px 14px 11px;border:0;border-left:1px solid var(--el);background:transparent;text-align:left;cursor:pointer;font-family:var(--font);color:var(--ei);min-width:0}
+.ct-c:first-child{border-left:0}.ct-c:hover{background:var(--ep)}
+.ct-c b{font:400 23px/1.15 var(--emono);color:var(--eo2)}.ct-c.pd b{color:#a5382a}
+.ct-c span{margin-top:4px;font:700 11.5px var(--font)}.ct-c small{margin-top:2px;font-size:10.5px;color:var(--em)}
+.ct-c[aria-pressed=true]{background:var(--ew);box-shadow:inset 0 -3px var(--eo)}
+.ct-id{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 14px 12px;border-top:1px solid var(--el)}
+.ct-k{font:400 10px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+.ct-bar{flex:1 1 340px;display:flex;height:26px;min-width:0;border:1px solid var(--el);background:var(--ew)}
+.ct-bar button{border:0;padding:0;min-width:4px;cursor:pointer;font:400 10.5px var(--emono)}
+.ct-bar button.apg{opacity:.4}.ct-bar button[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--ei)}
+.ct-lg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11px;color:var(--em)}.ct-lg i{display:inline-block;width:8px;height:8px;margin-right:4px}
+.f1{background:#dfe9e4;color:#1d4f49}.f2{background:#b9d3cb;color:#1d4f49}.f3{background:#edc762;color:#5c430f}.f4{background:#d9a83f;color:#3d2c08}.f5{background:#bd4c38;color:#fff}
+.ct-min{display:flex;flex-wrap:wrap;background:var(--ep2);border:1px solid var(--el)}.ct-min .ct-c{flex:1 1 110px;padding:9px 12px}.ct-min .ct-c b{font-size:16px}.ct-min .ct-c small{display:none}
+.ct-box{margin-top:12px;border:1px solid var(--el);background:var(--ew)}
+.ct-fb{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;padding:10px 12px 12px;background:var(--ep);border-bottom:1px solid var(--el)}
+.ct-fl{display:flex;flex-direction:column;gap:3px;flex:1 1 170px;min-width:0;font:700 10.5px var(--font);color:var(--em)}.ct-fl.ct-q{flex:999 1 260px}
+.ct-fl input,.ct-fl select{height:34px;border:1px solid var(--el2);border-radius:0;background:var(--ew);padding:0 10px;font:600 12.5px var(--font);color:var(--ei);min-width:0;width:100%}
+.ct-fb .ck{padding-bottom:8px;font-size:12px;white-space:nowrap}.ct-n{padding-bottom:9px;font:400 11px var(--emono);color:var(--em);white-space:nowrap}.ct-n b{color:var(--ei)}
+.ct-tw{overflow:auto;max-height:520px}.ct-tw.exp{max-height:none}
+#v-pauta.ctl table.ct-t{width:100%;border-collapse:collapse;font-size:12.5px;background:var(--ew)}
+#v-pauta.ctl table.ct-t th{position:sticky;top:0;z-index:1;background:var(--ew);text-align:left;padding:9px 12px;border-bottom:1px solid var(--el);font:400 9.5px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--em)}
+#v-pauta.ctl table.ct-t td{padding:10px 12px;border-bottom:1px solid var(--el);vertical-align:top;background:var(--ew)}
+#v-pauta.ctl table.ct-t tr.ct-r{cursor:pointer}#v-pauta.ctl table.ct-t tr.ct-r:hover td{background:var(--egs)}
+#v-pauta.ctl table.ct-t tr.mpd td{background:var(--ew)}#v-pauta.ctl table.ct-t tr.mpd td:first-child{box-shadow:inset 3px 0 var(--eo)}#v-pauta.ctl table.ct-t tr.pri td:first-child{box-shadow:inset 3px 0 #bd4c38}
+#v-pauta.ctl table.ct-t tr.ab td{background:var(--eos)}
+.ct-t .cnj{font:400 12px var(--emono);color:var(--eg);white-space:nowrap}.ct-t small.pt{display:block;margin-top:2px;font-size:11px;color:var(--em)}.ct-t small.pt.pd,.ct-t .pd{color:var(--eo2);font-weight:600}.ct-t small.tm{color:var(--ei);font-weight:600}
+.ct-t .tg{display:inline-block;padding:2px 6px;font:400 10.5px var(--emono);white-space:nowrap;border:1px solid var(--el);background:var(--ep2);color:var(--ei)}
+.ct-t .tg.mt{background:var(--eos);border-color:#d4c6a1;color:#645530}.ct-t .tg.ts,.ct-t .tg.tb-STF{background:#e8edf2;color:#34506b}.ct-t .tg.ir{background:var(--eos);color:var(--eo2)}.ct-t .tg.sn{background:var(--egs);color:var(--eg)}.ct-t .tg.tb-STJ{background:var(--egs);color:var(--eg)}
+.ct-t .px{font-weight:600;color:var(--ei)}.ct-t .mono{font:400 12px var(--emono)}
+.ct-an{text-align:right;white-space:nowrap}.lk{border:0;background:transparent;padding:2px;font:12px var(--font);color:var(--eo2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+#v-pauta.ctl table.ct-t tr.ct-x>td{padding:0;background:var(--ep);box-shadow:inset 3px 0 var(--eo)}
+.ct-xg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.ct-x>td>div{position:sticky;left:0;max-width:min(100%,calc(100vw - 330px))}@media (max-width:980px){.ct-x>td>div{max-width:calc(100vw - 34px)}}
+.ct-xc{display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-left:1px solid var(--el);min-width:0}.ct-xc:first-child{border-left:0}
+.ct-xk{font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--eg)}.ct-xk.e{color:#5b3f8c;margin-top:4px}.ct-xk.o{color:var(--eo2)}
+.ct-xc textarea,.ct-xc input,.ct-xc select{width:100%;min-width:0;border:1px solid var(--el2);border-radius:0;background:var(--ew);padding:6px 9px;font:12.5px/1.45 var(--font);color:var(--ei)}.ct-xc input,.ct-xc select{height:32px;padding:0 9px}
+.ct-xc textarea{resize:vertical}#v-pauta.ctl .ct-xc input,#v-pauta.ctl .ct-xc select,#v-pauta.ctl .ct-xc textarea{border:1px solid var(--el2)!important;background:var(--ew)!important;border-radius:0!important;box-shadow:none!important}.ct-cp{display:flex;flex-direction:column;gap:3px;font:700 10.5px var(--font);color:var(--em)}.ct-cp2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ct-xf{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;padding:9px 14px;border-top:1px dashed var(--el)}.ct-xf small{font-size:11px;color:var(--em)}.ct-xf>span{display:flex;gap:8px}
+.ct-sai{align-self:flex-start;color:#a5382a}
+.ct-le{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;margin-top:12px}.ct-le p{margin:0;flex:1 1 420px;padding-left:9px;border-left:2px solid var(--eo);font-size:11.5px;line-height:1.5;color:var(--em)}
+.ct-ref{margin-top:12px;border:1px solid var(--el);border-left:3px solid #edc762;background:var(--ew)}
+.ct-rh{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;width:100%;padding:10px 14px;border:0;background:var(--ep);text-align:left;cursor:pointer;font:12.5px var(--font);color:var(--ei)}.ct-rh span{flex:1 1 300px;color:var(--em)}.ct-rh em{font-style:normal;color:var(--eo2);text-decoration:underline;text-underline-offset:3px}
+.ct-rw{max-height:300px;overflow:auto;border-top:1px solid var(--el)}
+.ct-nb{display:flex;align-items:center;gap:8px}.ct-nb b{font:400 13px var(--emono);color:var(--eo2);min-width:24px}.ct-nb>i{flex:1;height:8px;background:var(--ep2)}.ct-nb>i>i{display:block;height:8px;background:#37786e}
+.ct-inc{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;padding:12px 14px;border-left:3px solid #edc762;background:var(--ep2)}.ct-inh{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px}.ct-inh .lk{margin-left:auto}
+.ct-inf{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+@media (max-width:760px){.ct-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.ct-c{border-left:0;border-top:1px solid var(--el)}.ct-xc{border-left:0;border-top:1px solid var(--el)}.ct-cp2{grid-template-columns:1fr}}
+/* menu lateral no estilo de sumário (filete fino, ativo em dourado, contagem pequena ao lado) */
+#v-pauta.ctl .ctl-sub button{display:block!important;width:100%;border:0!important;border-left:1px solid var(--el)!important;border-radius:0!important;padding:6px 0 6px 12px!important;font:400 13px var(--font)!important;color:var(--em)!important;box-shadow:none!important;background:transparent!important;text-align:left}
+#v-pauta.ctl .ctl-sub button i{display:none}
+#v-pauta.ctl .ctl-sub button span{display:inline}#v-pauta.ctl .ctl-sub button small{display:inline;margin-left:5px;font:400 10.5px var(--emono);color:#8a8d86}
+#v-pauta.ctl .ctl-sub button:hover{color:var(--ei)!important}
+#v-pauta.ctl .ctl-sub button[aria-current=true]{border-left:2px solid var(--eo)!important;padding-left:11px!important;font-weight:700!important;color:var(--ei)!important}
+#v-pauta.ctl .ctl-nk{margin:0 0 10px;color:var(--eo2)}
 @media (max-width:980px){#v-pauta.ctl{display:block}#v-pauta.ctl .ctl-sub{position:static;flex-direction:row;flex-wrap:wrap;gap:6px;border-top:0!important;padding:0!important;margin:0 0 18px!important}#v-pauta.ctl .ctl-nk,#v-pauta.ctl .ctl-nota{display:none}#v-pauta.ctl .ctl-sub button{width:auto;border:1px solid var(--el);border-radius:999px;padding:6px 12px}#v-pauta.ctl .pt-h h1{font-size:38px}}
 
 /* celular: cabeçalho em duas linhas (marca e botões em cima; seções roláveis embaixo), sem rolagem lateral da página */
@@ -1082,7 +1151,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
 
 <div id="app" hidden>
   <header><span class="br"><i class="star" aria-hidden="true"></i><span>GABINETE CMT · <em>EQUIPE</em></span></span>
-    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page">Início</a><a href="#pauta" data-vw="pauta">Pautas</a><a href="#mono" data-vw="mono">Monocráticas</a><a href="#controles" data-vw="ctrl">Controles especiais</a></nav><nav class="tabs eq-cpn" aria-label="Compêndio"><span class="eq-grp"><a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-dd" role="menu" aria-label="Seções do Compêndio"><a href="/compendio/#v=ement">Ementário</a><b>Editorial</b><a href="/compendio/#v=edit&amp;s=pecas">Minuta-Matriz</a><a href="/compendio/#v=edit&amp;s=mod">Modelos</a><a href="/compendio/#v=edit&amp;s=par">Banco de trechos</a><a href="/compendio/#v=edit&amp;s=dir">Diretrizes</a><a href="/compendio/#v=edit&amp;s=consulta">Consulta</a></span></span></nav><span class="sp"></span><span id="salvo"></span><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic hbx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i class="bdg" id="c-not" hidden></i></button><button class="hb ic hbx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><i class="bdg" id="c-pen" hidden></i></button>
+    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page">Início</a><a href="#pauta" data-vw="pauta">Pautas</a><a href="#mono" data-vw="mono">Monocráticas</a><a href="#monitoramento" data-vw="ctrl">Monitoramento</a></nav><nav class="tabs eq-cpn" aria-label="Compêndio"><span class="eq-grp"><a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-dd" role="menu" aria-label="Seções do Compêndio"><a href="/compendio/#v=ement">Ementário</a><b>Editorial</b><a href="/compendio/#v=edit&amp;s=pecas">Minuta-Matriz</a><a href="/compendio/#v=edit&amp;s=mod">Modelos</a><a href="/compendio/#v=edit&amp;s=par">Banco de trechos</a><a href="/compendio/#v=edit&amp;s=dir">Diretrizes</a><a href="/compendio/#v=edit&amp;s=consulta">Consulta</a></span></span></nav><span class="sp"></span><span id="salvo"></span><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic hbx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><i class="bdg" id="c-not" hidden></i></button><button class="hb ic hbx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><i class="bdg" id="c-pen" hidden></i></button>
     <button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button>
     <span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb" id="sair">Sair</button></header>
   <main id="v-inicio" class="home-v2">
@@ -1160,12 +1229,12 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <section class="urg" id="urg" hidden></section>
     <p class="ctl-lead">Metas do CNJ, sobrestados e casos sensíveis numa só página. Cada linha lê e grava a ficha do processo, a mesma do CMT-monitor.</p>
-    <nav class="ctl-sub" id="ctl-sub" aria-label="Seções dos Controles especiais"><p class="ctl-nk">Nesta página</p><button type="button" data-sub="metas"><i>01</i><span>Metas do CNJ</span><small id="ctl-n-metas"></small></button><button type="button" data-sub="sobr"><i>02</i><span>Sobrestados e suspensos</span><small id="ctl-n-sobr"></small></button><button type="button" data-sub="sens"><i>03</i><span>Casos sensíveis</span><small id="ctl-n-sens"></small></button><p class="ctl-nota">Clique numa seção para ir até ela. Alterações das três listas são salvas juntas.</p></nav>
-    <div class="ctl-sec" id="ctl-metas"><p class="ctl-k">01 / Acompanhar as metas</p><h2>Metas do CNJ</h2><p>Processos de meta até o fim definitivo, com a fase no PJe, a pauta e o acompanhamento de cada um.</p></div>
+    <nav class="ctl-sub" id="ctl-sub" aria-label="Seções do Monitoramento"><p class="ctl-nk">Nesta página</p><button type="button" data-sub="metas"><i>01</i><span>Metas do CNJ</span><small id="ctl-n-metas"></small></button><button type="button" data-sub="sobr"><i>02</i><span>Sobrestados e suspensos</span><small id="ctl-n-sobr"></small></button><button type="button" data-sub="sens"><i>03</i><span>Casos sensíveis</span><small id="ctl-n-sens"></small></button><p class="ctl-nota">Clique numa seção para ir até ela. Alterações das três listas são salvas juntas.</p></nav>
+    <div class="ctl-sec" id="ctl-metas"><div class="ctl-hd"><div><p class="ctl-k">01 / Acompanhar as metas</p><h2>Metas do CNJ</h2><p class="ctl-d">Processos de meta até o fim definitivo, com a fase no PJe, a pauta e o acompanhamento de cada um.</p></div><span class="pil" id="pil-metas" role="group" aria-label="Ações da seção"></span></div></div>
     <section class="metas" id="metas"></section>
-    <div class="ctl-sec" id="ctl-sobr"><p class="ctl-k">02 / Vigiar o sobrestamento</p><h2>Sobrestados e suspensos</h2><p>Processos parados por tribunal superior, IRDR, IAC ou outro motivo, com o tema, a situação do precedente e a previsão de retirada.</p></div>
+    <div class="ctl-sec" id="ctl-sobr"><div class="ctl-hd"><div><p class="ctl-k">02 / Vigiar o sobrestamento</p><h2>Sobrestados e suspensos</h2><p class="ctl-d">Processos parados por tribunal superior, IRDR, IAC ou outro motivo, com o tema, a situação do precedente e a previsão de retirada.</p></div><span class="pil" id="pil-sobr" role="group" aria-label="Ações da seção"></span></div></div>
     <section class="metas" id="sobr"></section>
-    <div class="ctl-sec" id="ctl-sens"><p class="ctl-k">03 / Cuidar dos casos sensíveis</p><h2>Casos sensíveis</h2><p>Saúde e outros casos que pedem acompanhamento mais próximo, pelo assunto, pelas etiquetas ou incluídos pela equipe.</p></div>
+    <div class="ctl-sec" id="ctl-sens"><div class="ctl-hd"><div><p class="ctl-k">03 / Cuidar dos casos sensíveis</p><h2>Casos sensíveis</h2><p class="ctl-d">Saúde e outros casos que pedem acompanhamento mais próximo, pelo assunto, pelas etiquetas ou incluídos pela equipe.</p></div><span class="pil" id="pil-sens" role="group" aria-label="Ações da seção"></span></div></div>
     <section class="metas" id="sens"></section>
     <div class="pt-mk" id="mk"></div>
     <div class="pt-corpo"><div class="pt-lista">
@@ -1274,7 +1343,7 @@ function iniciar(nome,gestor){
   try{S.escopo=localStorage.getItem('eq_escopo')||'meus';}catch(e){}
   marcaSeg('#esc',S.escopo);
   sessoesEquipe(true);
-  P.dados=null;vista(/mono|urg/.test(location.hash)?'mono':/metas/.test(location.hash)?'metas':/sobr/.test(location.hash)?'sobr':/sens/.test(location.hash)?'sens':/controles/.test(location.hash)?'ctrl':/pauta/.test(location.hash)?'pauta':'inicio');
+  P.dados=null;vista(/mono|urg/.test(location.hash)?'mono':/metas/.test(location.hash)?'metas':/sobr/.test(location.hash)?'sobr':/sens/.test(location.hash)?'sens':/controles|monitoramento/.test(location.hash)?'ctrl':/pauta/.test(location.hash)?'pauta':'inicio');
   notificacoes().then(function(){if(h0==='#notificacoes'){abrePainel('#p-not');setTimeout(marcarLido,1500);}});pendencias().then(function(){if(h0==='#pendencias')abrePainel('#p-pen');});
   clearInterval(S.tCal);S.tCal=setInterval(function(){if(!document.hidden)sessoesEquipe(false);},30000);
   if(!S.visOk){S.visOk=1;document.addEventListener('visibilitychange',function(){if(!document.hidden&&U.eu)sessoesEquipe(false);});}
@@ -1296,7 +1365,7 @@ function falha(e){if(e.status===401){entrada();return;}toast(e.message);$('#lst'
 function vigente(n,f,ses){return n===S.req&&S.fonte===f&&(f==='mono'||S.ses===ses);}
 function carregar(silencioso){
   var nReq=S.req=(S.req||0)+1,fReq=S.fonte,sReq=S.ses;
-  if(S.fonte==='ctrl'){$('#pt-ey').textContent='Produção / Controles especiais';$('#pt-t').innerHTML='Controles <em>especiais</em>';$('#pt-st').textContent='';
+  if(S.fonte==='ctrl'){$('#pt-ey').textContent='Produção / Monitoramento';$('#pt-t').innerHTML='Monito<em>ramento</em>';$('#pt-st').textContent='';
     return Promise.all([carregarMetas(silencioso),carregarSobr(silencioso),carregarSens(silencioso)]).then(ctlConta,ctlConta);}
   if(S.fonte==='sobr'){$('#pt-ey').textContent='Controles especiais / Sobrestados e suspensos';$('#pt-t').textContent='Sobrestados';$('#pt-st').textContent='';return carregarSobr(silencioso);}
   if(S.fonte==='metas'){$('#pt-ey').textContent='Controles especiais / Metas do CNJ';$('#pt-t').textContent='Metas';$('#pt-st').textContent='';return carregarMetas(silencioso);}
@@ -1333,27 +1402,30 @@ $('#urg').addEventListener('click',function(e){var b;
   if(e.target.id==='urg-x'){S.urgTab=false;painelUrg();return;}
   if((b=e.target.closest('[data-tirar-urg]'))){var it2=urgTodos().filter(function(i){return dg(i.cnj)===b.getAttribute('data-tirar-urg');})[0];if(it2&&confirm('Excluir a urgência deste processo? A monocrática, se houver, continua.'))regMono(it2.cnj,{urgTipo:'',urgSit:'',urgData:'',urgObs:'',urgPedido:'',mono:!!it2.mono},'Urgência excluída.');return;}
   if((b=e.target.closest('[data-sug]'))){regMono(b.getAttribute('data-sug'),{urgTipo:tipoDaEtiqueta(b.getAttribute('data-et')),urgSit:'Pendente · não apreciada',urgObs:'Etiqueta do PJe: '+b.getAttribute('data-et')},'Urgência registrada.');return;}});
-$('#metas').addEventListener('click',function(e){var b=e.target.closest('[data-mf]');if(b){var k=b.getAttribute('data-mf'),v=b.getAttribute('data-v');MT[k]=MT[k]===v?'':v;renderMetas();return;}
-  if(e.target.id==='mt-pend'){MT.pend=!MT.pend;renderMetas();return;}if(e.target.id==='mt-limpa'){MT.meta=MT.fase=MT.q=MT.ctrl='';MT.pend=false;MT.enc=false;renderMetas();return;}
+$('#metas').addEventListener('click',function(e){var b=e.target.closest('[data-mf],[data-mf-meta],[data-mf-p1],[data-mf-pend]');if(b){MT.col=false;if(b.hasAttribute('data-mf')){MT.meta='';MT.pend=false;MT.p1=false;}else if(b.hasAttribute('data-mf-meta')){var v=b.getAttribute('data-mf-meta');MT.meta=MT.meta===v?'':v;}else if(b.hasAttribute('data-mf-p1'))MT.p1=!MT.p1;else MT.pend=!MT.pend;renderMetas();return;}
+  if(e.target.id==='mt-limpa'){MT.meta=MT.fase=MT.q=MT.ctrl=MT.prox='';MT.pend=MT.p1=MT.enc=false;MT.ag=-1;renderMetas();return;}
   if(e.target.id==='mt-xlsx'){var V=metasFiltradas();if(!V.length){toast('Nada a exportar.');return;}
     baixarXlsx('Metas_'+hoje()+'.xlsx','Metas',[['Meta'],['Processo'],['Partes'],['Classe'],['Assunto'],['Distribuído'],['Fase'],['Tarefa no PJe'],['Na tarefa desde'],['Última pauta'],['Minutante'],['Pendências'],['Controle'],['Próxima providência'],['Prazo'],['Responsável'],['Observação']],
       V.map(function(x){var s=x.sessoes[x.sessoes.length-1];return [x.metas.map(function(m){return 'Meta '+m;}).join(', '),x.cnj,x.partes,x.classe,x.assunto,x.dist?br(x.dist):'',x.fase,x.tarefa,x.desde?br(x.desde):'',s?br(s.data)+(s.item?' · item '+s.item:''):'',x.servidor,metasPend(x).join(' · '),x.acomp.ctrl,x.acomp.prox,x.acomp.prazo?br(x.acomp.prazo):'',x.acomp.resp,x.acomp.obs];}),[10,26,40,10,40,12,22,36,14,18,14,30,22,36,12,16,40]);}});
 $('#metas').addEventListener('input',function(e){if(e.target.id!=='mt-q')return;var v=e.target.value;clearTimeout(MT.t);MT.t=setTimeout(function(){MT.q=v;renderMetas();var q=$('#mt-q');if(q){q.focus();q.setSelectionRange(v.length,v.length);}},250);});
-$('#metas').addEventListener('change',function(e){if(e.target.id==='mt-enc'){MT.enc=e.target.checked;renderMetas();}if(e.target.id==='mt-ctrl'){MT.ctrl=e.target.value;renderMetas();}});
-$('#sobr').addEventListener('click',function(e){var b=e.target.closest('[data-sf]');if(b){var k=b.getAttribute('data-sf'),v=b.getAttribute('data-v');SB[k]=SB[k]===v?'':v;renderSobr();return;}
-  if(e.target.id==='sb-limpa'){SB.motivo=SB.tema=SB.sit=SB.q=SB.filtro='';renderSobr();return;}
+$('#metas').addEventListener('change',function(e){var id=e.target.id;if(id==='mt-enc'){MT.enc=e.target.checked;renderMetas();}if(id==='mt-ctrl'){MT.ctrl=e.target.value;renderMetas();}if(id==='mt-fase'){MT.fase=e.target.value;renderMetas();}if(id==='mt-prox'){MT.prox=e.target.value;renderMetas();}});
+$('#sobr').addEventListener('click',function(e){var b=e.target.closest('[data-sf-todos],[data-sf-f],[data-sf-tema]');if(b){SB.col=false;if(b.hasAttribute('data-sf-todos'))SB.filtro='';else if(b.hasAttribute('data-sf-f')){var v=b.getAttribute('data-sf-f');SB.filtro=SB.filtro===v?'':v;}else{var t=b.getAttribute('data-sf-tema');SB.tema=SB.tema===t?'':t;}renderSobr();return;}
+  if(e.target.closest('#sb-ref')){SB.refFecha=!SB.refFecha;renderSobr();return;}
+  if(e.target.id==='sb-limpa'){SB.motivo=SB.tema=SB.sit=SB.q=SB.filtro='';SB.ag=-1;renderSobr();return;}
   if(e.target.id==='sb-xlsx'){var V=sobrFiltrados();if(!V.length){toast('Nada a exportar.');return;}
     baixarXlsx('Sobrestados_'+hoje()+'.xlsx','Sobrestados',[['Processo'],['Partes'],['Classe'],['Assunto'],['Tarefa no PJe'],['Desde'],['Motivo'],['Tema ou precedente'],['Situação do precedente'],['Previsão de retirada'],['Sem previsão'],['Atenção'],['Próxima providência'],['Responsável'],['Observação']],
       V.map(function(x){var a=x.acomp;return [x.cnj,x.partes,x.classe,x.assunto,x.tarefa,x.desde?br(x.desde):'',sbMotivo(x),sbTema(x),a.sitPrec,a.previsao?br(a.previsao):'',a.semPrev,sbAlerta(x).join(' · '),a.prox,a.resp,a.obs];}),[26,40,10,36,36,12,30,22,30,14,10,30,36,16,40]);}});
+$('#sobr').addEventListener('change',function(e){var id=e.target.id,m={'sb-mot':'motivo','sb-tema':'tema','sb-sit':'sit'}[id];if(m){SB[m]=e.target.value;renderSobr();}});
 $('#sobr').addEventListener('input',function(e){if(e.target.id!=='sb-q')return;var v=e.target.value;clearTimeout(SB.t);SB.t=setTimeout(function(){SB.q=v;renderSobr();var q=$('#sb-q');if(q){q.focus();q.setSelectionRange(v.length,v.length);}},250);});
-$('#sens').addEventListener('click',function(e){var b=e.target.closest('[data-nf]');if(b){var k=b.getAttribute('data-nf'),v=b.getAttribute('data-v');SN[k]=SN[k]===v?'':v;renderSens();return;}
+$('#sens').addEventListener('click',function(e){var b=e.target.closest('[data-nf-todos],[data-nf-f]');if(b){SN.col=false;if(b.hasAttribute('data-nf-todos'))SN.filtro='';else{var v=b.getAttribute('data-nf-f');SN.filtro=SN.filtro===v?'':v;}renderSens();return;}
   if((b=e.target.closest('[data-sn-sai]'))){var x=(SN.dados||[]).filter(function(i){return dg(i.cnj)===b.getAttribute('data-sn-sai');})[0];if(x&&confirm('Tirar este processo dos casos sensíveis?'))gravaSens(x.cnj,{excluido:'Sim'},'Retirado dos casos sensíveis.');return;}
-  if(e.target.id==='sn-limpa'){SN.cat=SN.q=SN.filtro='';renderSens();return;}
+  if(e.target.id==='sn-limpa'){SN.cat=SN.q=SN.filtro=SN.origem='';SN.ag=-1;renderSens();return;}
   if(e.target.id==='sn-xlsx'){var V=sensFiltrados();if(!V.length){toast('Nada a exportar.');return;}
     baixarXlsx('Casos_sensiveis_'+hoje()+'.xlsx','Casos sensíveis',[['Processo'],['Partes'],['Categoria'],['Assunto'],['Tarefa no PJe'],['Quadro / motivo'],['Decisão'],['Cumprimento'],['Última verificação'],['Próxima verificação'],['Atenção'],['Próxima providência'],['Responsável'],['Observação']],
       V.map(function(x){var a=x.acomp;return [x.cnj,x.partes,snCat(x),x.assunto,x.tarefa,a.quadro,a.decisao,a.cumprimento,a.ultimo?br(a.ultimo):'',a.proxVer?br(a.proxVer):'',snAlerta(x).join(' · '),a.prox,a.resp,a.obs];}),[26,40,26,36,36,36,28,28,14,14,30,36,16,40]);}});
+$('#sens').addEventListener('change',function(e){var id=e.target.id;if(id==='sn-cat'){SN.cat=e.target.value;renderSens();}if(id==='sn-ori'){SN.origem=e.target.value;renderSens();}});
 $('#sens').addEventListener('input',function(e){if(e.target.id!=='sn-q')return;var v=e.target.value;clearTimeout(SN.t);SN.t=setTimeout(function(){SN.q=v;renderSens();var q=$('#sn-q');if(q){q.focus();q.setSelectionRange(v.length,v.length);}},250);});
-$('#sens').addEventListener('submit',function(e){if(e.target.id!=='sn-n')return;e.preventDefault();var E=e.target.elements,c=fmtCnjDig(E.cnj.value);if(dg(c).length!==20){toast('Informe os 20 dígitos do número CNJ.');return;}gravaSens(c,{incluir:true,cat:E.cat.value,quadro:E.quadro.value},'Caso incluído.');});
+$('#sens').addEventListener('submit',function(e){if(e.target.id!=='sn-n')return;e.preventDefault();var E=e.target.elements,c=fmtCnjDig(E.cnj.value);if(dg(c).length!==20){toast('Informe os 20 dígitos do número CNJ.');return;}SN.inc=false;gravaSens(c,{incluir:true,cat:E.cat.value,quadro:E.quadro.value},'Caso incluído.');});
 $('#urg').addEventListener('toggle',function(e){if(e.target.classList&&e.target.classList.contains('urg-sg'))S.sgAb=e.target.open;},true);
 $('#urg').addEventListener('input',function(e){if(e.target.id!=='urg-q')return;var v=e.target.value;clearTimeout(S.tuq);S.tuq=setTimeout(function(){S.uq=v;painelUrg();var q=$('#urg-q');if(q){q.focus();q.setSelectionRange(v.length,v.length);}},250);});
 $('#urg').addEventListener('submit',function(e){if(e.target.id!=='urg-n')return;e.preventDefault();var E=e.target.elements;regMono(fmtCnjDig(E.cnj.value),{urgTipo:E.tipo.value,urgNivel:E.niv.value,urgSit:'Pendente · não apreciada',urgPedido:E.ped.value,urgObs:E.obs.value},'Urgência registrada.');});
@@ -1935,7 +2007,7 @@ function regMono(cnj,campos,msg){if(dg(cnj).length!==20){toast('Informe os 20 d�
   estado('Gravando…','pend');return api('/api/pauta?mono=1',{method:'POST',body:JSON.stringify({cnj:cnj,campos:campos})}).then(function(){estado('✓ gravado');toast(msg);return carregar(true);}).catch(function(e){estado('✕ '+e.message,'er');toast(e.message);});}
 function fmtCnjDig(v){var d=dg(v);return d.length===20?d.slice(0,7)+'-'+d.slice(7,9)+'.'+d.slice(9,13)+'.'+d.slice(13,14)+'.'+d.slice(14,16)+'.'+d.slice(16):v;}
 /* ===== Metas do CNJ: planilha de controle dos processos de meta até o fim definitivo ===== */
-var MT={dados:null,meta:'',fase:'',q:'',enc:false,ctrl:''};
+var MT={dados:null,meta:'',fase:'',q:'',enc:false,ctrl:'',prox:'',p1:false,pend:false,ag:-1,aberto:'',exp:false,col:false};
 var CTRL=['Em andamento','Aguardando pauta','Pautado','Julgado · aguardando trânsito','Encerrado'];
 /* pendências só onde a condução depende do gabinete (no gabinete, preparo para sessão, monocrática) */
 function metasPend(x){var A=[],d=diasDesde(x.desde),gab=/No gabinete|Preparo|Monocr/.test(x.fase);if(x.fase==='Encerrado')return A;
@@ -1943,36 +2015,98 @@ function metasPend(x){var A=[],d=diasDesde(x.desde),gab=/No gabinete|Preparo|Mon
   if(x.pend1&&!x.sessoes.length&&/gabinete|Preparo/.test(x.fase))A.push('sem pauta');if(x.acomp.prazo&&x.acomp.prazo<hoje())A.push('providência vencida');return A;}
 function carregarMetas(sil){if(!sil)$('#metas').innerHTML='<div class="empty">Lendo os processos de meta…</div>';
   return api('/api/pauta?metas=1').then(function(d){MT.dados=d.itens||[];renderMetas();}).catch(falha);}
-function metasFiltradas(){var q=nq(MT.q);return (MT.dados||[]).filter(function(x){
-  if(!MT.enc&&x.fase==='Encerrado'&&!MT.fase)return false;if(MT.meta&&x.metas.indexOf(MT.meta)<0)return false;if(MT.fase&&x.fase!==MT.fase)return false;
-  if(MT.ctrl&&(x.acomp.ctrl||'')!==MT.ctrl)return false;if(MT.pend&&!metasPend(x).length)return false;
-  if(q&&nq([x.cnj,x.partes,x.assunto,x.classe,x.servidor,x.tarefa,x.acomp.obs,x.acomp.prox].join(' ')).indexOf(q)<0)return false;return true;})
+/* ===== Monitoramento: peças comuns às três seções (painel com números, tempo na tarefa, pill de ações, anotação do processo) ===== */
+var CT_FX=[[30,'até 30 dias','f1'],[90,'31 a 90','f2'],[180,'91 a 180','f3'],[365,'181 a 365','f4'],[1e9,'mais de 1 ano','f5']];
+function ctFaixa(d){if(d==null)return -1;for(var i=0;i<CT_FX.length;i++)if(d<=CT_FX[i][0])return i;return -1;}
+var CT_IC={copiar:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',xlsx:'<path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/>',exp:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',rec:'<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>',min:'<path d="M6 15l6-6 6 6"/>',abr:'<path d="M6 9l6 6 6-6"/>',inc:'<path d="M12 5v14M5 12h14"/>'};
+function ctIc(k){return '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+CT_IC[k]+'</svg>';}
+function ctBt(sec,a,t,on,ic){return '<button type="button" data-ct="'+a+'" data-sec="'+sec+'" title="'+t+'" aria-label="'+t+'"'+(on!=null?' aria-pressed="'+!!on+'"':'')+'>'+ctIc(ic||a)+'</button>';}
+function ctPill(sec,S,inc){var p=$('#pil-'+sec);if(!p)return;p.innerHTML=(inc?ctBt(sec,'inc','Buscar e incluir processo do acervo',!!S.inc)+'<i class="pil-sep"></i>':'')+ctBt(sec,'copiar','Copiar os números da lista filtrada')+ctBt(sec,'xlsx','Exportar a lista filtrada (.xlsx)')+
+  ctBt(sec,'exp',S.exp?'Recolher a lista':'Expandir a lista',!!S.exp,S.exp?'rec':'exp')+'<i class="pil-sep"></i>'+ctBt(sec,'col',S.col?'Abrir a seção':'Minimizar a seção',null,S.col?'abr':'min');
+  var h=$('#ctl-'+sec);if(h)h.classList.toggle('fech',!!S.col);}
+function ctIdade(sec,L,ag){var n=CT_FX.map(function(){return 0;}),t=0;L.forEach(function(x){var i=ctFaixa(diasDesde(x.desde));if(i>=0){n[i]++;t++;}});
+  return '<div class="ct-id"><span class="ct-k">Tempo na tarefa</span><div class="ct-bar">'+CT_FX.map(function(f,i){var pc=t?n[i]/t*100:0;
+    return '<button type="button" class="'+f[2]+(ag>=0&&ag!==i?' apg':'')+'" data-ag="'+i+'" data-sec="'+sec+'" aria-pressed="'+(ag===i)+'" title="'+f[1]+' · '+n[i]+' processo'+(n[i]===1?'':'s')+'" style="flex:'+(n[i]||0.0001)+' 1 0'+(n[i]?'':';min-width:0;padding:0')+'">'+(pc>=9?n[i]:'')+'</button>';}).join('')+
+    '</div><span class="ct-lg">'+CT_FX.map(function(f,i){return '<span><i class="'+f[2]+'"></i>'+f[1]+' · '+n[i]+'</span>';}).join('')+'</span></div>';}
+function ctPainel(cards,strip){return '<div class="ct-pn"><div class="ct-cards">'+cards+'</div>'+strip+'</div>';}
+function ctCard(attr,v,on,lab,n,d,cls){return '<button type="button" class="ct-c'+(cls?' '+cls:'')+'" '+attr+'="'+esc(v)+'" aria-pressed="'+!!on+'"><b>'+n+'</b><span>'+esc(lab)+'</span><small>'+esc(d)+'</small></button>';}
+function ctSel(id,rot,vals,cur,todos){return '<label class="ct-fl">'+rot+'<select id="'+id+'"><option value="">'+(todos||'Todos')+'</option>'+vals.map(function(o){return '<option value="'+esc(o[0])+'"'+(o[0]===cur?' selected':'')+'>'+esc(o[1])+'</option>';}).join('')+'</select></label>';}
+function ctFechada(cards){return '<div class="ct-min">'+cards+'</div>';}
+function ctLeitura(t,limpa){return '<div class="ct-le"><p>'+t+'</p>'+(limpa?'<button type="button" class="lk" id="'+limpa+'">Limpar filtros</button>':'')+'</div>';}
+function ctNota(x,sec,ncol,campos){var k=dg(x.cnj),n=x.nota||{};
+  return '<tr class="ct-x" data-k="'+k+'"><td colspan="'+ncol+'"><div class="ct-xg">'+(campos?'<div class="ct-xc ac"><span class="ct-xk">Acompanhamento do controle</span>'+campos+'</div>':'')+
+   '<div class="ct-xc"><span class="ct-xk s">S · Subassunto</span><textarea rows="2" data-nota="sub" placeholder="subassunto">'+esc(n.sub||'')+'</textarea><span class="ct-xk e">E · Especificidades</span><textarea rows="2" data-nota="esp" placeholder="especificidades">'+esc(n.esp||'')+'</textarea></div>'+
+   '<div class="ct-xc"><span class="ct-xk o">O · Observações</span><textarea rows="5" data-nota="obs" placeholder="O que a equipe precisa saber deste processo além do subassunto e das especificidades">'+esc(n.obs||'')+'</textarea></div></div>'+
+   '<div class="ct-xf"><small>Os campos do controle entram no salvar da página. Subassunto e especificidades vão para a triagem da ficha; observações, para a aba Processo.</small><span><button type="button" class="b" data-fd-cnj="'+k+'">Abrir ficha completa</button><button type="button" class="b pri" data-nota-salvar="'+k+'" data-sec="'+sec+'">Salvar anotação</button></span></div></td></tr>';}
+function ctCampo(rot,inp){return '<label class="ct-cp"><span>'+rot+'</span>'+inp+'</label>';}
+function ctAnotar(x,S,sec){var k=dg(x.cnj),ab=S.aberto===k,n=x.nota||{},tem=n.sub||n.esp||n.obs;return '<td class="ct-an"><button type="button" class="lk" data-abre="'+k+'" data-sec="'+sec+'" aria-expanded="'+ab+'">'+(ab?'Fechar ▴':(tem?'Anotado ▾':'Anotar ▾'))+'</button></td>';}
+function ctTabela(cols,rows,vazio,S){return '<div class="ct-tw'+(S.exp?' exp':'')+'"><table class="pl mtb ct-t"><thead><tr>'+cols.map(function(c){return '<th style="min-width:'+c[1]+'px">'+c[0]+'</th>';}).join('')+'</tr></thead><tbody>'+(rows||'<tr><td colspan="'+cols.length+'" class="mut">'+vazio+'</td></tr>')+'</tbody></table></div>';}
+function ctS(sec){return {metas:MT,sobr:SB,sens:SN}[sec];}
+function ctR(sec){({metas:renderMetas,sobr:renderSobr,sens:renderSens})[sec]();}
+function ctV(sec){return ({metas:metasFiltradas,sobr:sobrFiltrados,sens:sensFiltrados})[sec]();}
+function ctCopiar(t,msg){var ok=function(){toast(msg);},alt=function(){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();try{document.execCommand('copy');ok();}catch(e){toast('Não foi possível copiar.');}a.remove();};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,alt);else alt();}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-ct],[data-ag],[data-abre]');if(!b)return;
+  if(b.tagName==='TR'&&e.target.closest('button,a,input,select,textarea,label'))return;
+  var sec=b.getAttribute('data-sec'),S=ctS(sec);if(!S)return;
+  if(b.hasAttribute('data-ag')){var i=+b.getAttribute('data-ag');S.ag=S.ag===i?-1:i;ctR(sec);return;}
+  if(b.hasAttribute('data-abre')){var k=b.getAttribute('data-abre');S.aberto=S.aberto===k?'':k;ctR(sec);return;}
+  var a=b.getAttribute('data-ct');
+  if(a==='col'){S.col=!S.col;ctR(sec);return;}if(a==='exp'){S.exp=!S.exp;ctR(sec);return;}if(a==='inc'){S.inc=!S.inc;S.col=false;ctR(sec);if(S.inc){var f=$('#sn-n');if(f&&f.elements.cnj)f.elements.cnj.focus();}return;}
+  if(a==='xlsx'){var x=$('#'+{metas:'mt',sobr:'sb',sens:'sn'}[sec]+'-xlsx');if(x)x.click();return;}
+  if(a==='copiar'){var V=ctV(sec).map(function(x){return x.cnj;});if(!V.length){toast('Nada a copiar.');return;}ctCopiar(V.join('\n'),V.length+' número'+(V.length===1?'':'s')+' copiado'+(V.length===1?'':'s')+'.');}});
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-nota-salvar]');if(!b)return;
+  var k=b.getAttribute('data-nota-salvar'),S=ctS(b.getAttribute('data-sec')),x=((S&&S.dados)||[]).filter(function(i){return dg(i.cnj)===k;})[0];if(!x)return;
+  var tr=b.closest('tr'),v=function(n){var t=tr.querySelector('[data-nota="'+n+'"]');return t?t.value.trim():'';},N={sub:v('sub'),esp:v('esp'),obs:v('obs')};
+  b.disabled=true;estado('Gravando…','pend');
+  api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:x.cnj,campos:{'triagem.Tema':N.sub,'triagem.Especificidades':N.esp,'origem.Observações':N.obs}})})
+  .then(function(){x.nota=N;estado('✓ gravado');toast('Anotação gravada na ficha do processo.');b.disabled=false;})
+  .catch(function(er){estado('✕ não gravou: '+er.message,'er');toast(er.message);b.disabled=false;});});
+/* próxima fase pela tarefa atual no PJe (etapas da triagem do CMT-monitor, mais as de depois da sessão) */
+var CT_PROX=[[/^Recebidos da unidade processante/,'triagem de gabinete'],[/Triagem de Gabinete|Analisar tipo de decisão|Avaliar tipo de recurso|Recebidos com Embargos/,'definir monocrática ou colegiado'],
+  [/Minutar ato judicial/,'revisar e assinar a decisão'],[/Revisar ato judicial/,'assinar a decisão'],[/Assinar ato judicial/,'publicar a decisão'],
+  [/Preparar relatório e voto/,'apto para julgamento'],[/Minutar decisão intercorrente/,'decidir a intercorrência'],[/Aptos para julgamento/,'incluir em pauta'],[/retirados e adiados/,'incluir em nova sessão'],
+  [/Aguardando julgamento colegiado|Aguardando a sessão/,'julgamento em sessão'],[/Confirmar Inteiro Teor|Intimação de acórdão/,'intimação do acórdão'],[/prazo em curso - Acórdão/,'decurso do prazo do acórdão'],[/Decurso de prazo de acórdão/,'trânsito ou recurso'],
+  [/Processo com prazo em curso/,'analisar o retorno do prazo'],[/resultado de diligência/,'decidir após a diligência'],[/Conciliação/,'retorno da conciliação'],[/ato ordinatório/,'expedir o ato ordinatório'],[/Cumprir/,'cumprir as determinações'],[/manifestação/,'analisar a manifestação'],[/Baixad|Arquivo/,'encerrado']];
+function mtProx(x){var t=String(x.tarefa||'');for(var i=0;i<CT_PROX.length;i++)if(CT_PROX[i][0].test(t))return CT_PROX[i][1];return t?'conferir a tarefa':'—';}
+function mtPendTudo(x){return metasPend(x).concat(x.pendEtq||[]);}
+function metasFiltradas(semIdade){var q=nq(MT.q);return (MT.dados||[]).filter(function(x){
+  if(!MT.enc&&x.fase==='Encerrado'&&MT.fase!=='Encerrado')return false;if(MT.meta&&x.metas.indexOf(MT.meta)<0)return false;if(MT.fase&&x.fase!==MT.fase)return false;
+  if(MT.ctrl&&(x.acomp.ctrl||'')!==MT.ctrl)return false;if(MT.pend&&!mtPendTudo(x).length)return false;if(MT.p1&&!x.pend1)return false;if(MT.prox&&mtProx(x)!==MT.prox)return false;
+  if(!semIdade&&MT.ag>=0&&ctFaixa(diasDesde(x.desde))!==MT.ag)return false;
+  if(q&&nq([x.cnj,x.partes,x.assunto,x.classe,x.servidor,x.corretor,x.tarefa,mtProx(x),x.acomp.obs,x.acomp.prox,(x.nota||{}).sub,(x.nota||{}).esp,(x.nota||{}).obs].join(' ')).indexOf(q)<0)return false;return true;})
   .sort(function(a,b){return (+a.metas[0]-+b.metas[0])||String(a.dist).localeCompare(String(b.dist));});}
 function renderMetas(){
   var el=$('#metas');if(!MT.dados){carregarMetas();return;}
-  var T=MT.dados,V=metasFiltradas(),ativos=T.filter(function(x){return x.fase!=='Encerrado';});
-  var porMeta={};T.forEach(function(x){x.metas.forEach(function(m){var o=porMeta[m]||(porMeta[m]={a:0,e:0});if(x.fase==='Encerrado')o.e++;else o.a++;});});
-  var fases={};ativos.forEach(function(x){fases[x.fase]=(fases[x.fase]||0)+1;});
-  var np=ativos.filter(function(x){return metasPend(x).length;}).length;
-  var chip=function(k,v,lab,n,cls){return '<button class="mchip'+(cls?' '+cls:'')+'" data-mf="'+k+'" data-v="'+esc(v)+'" aria-pressed="'+(MT[k]===v)+'"><b>'+n+'</b> '+esc(lab)+'</button>';};
-  var h='<div class="mt-k">'+Object.keys(porMeta).sort(function(a,b){return a-b;}).map(function(m){var o=porMeta[m],t=o.a+o.e;return '<button class="mcard" data-mf="meta" data-v="'+m+'" aria-pressed="'+(MT.meta===m)+'"><small>Meta '+m+'</small><b>'+o.a+'</b><span>em andamento · '+o.e+' encerrado'+(o.e===1?'':'s')+'</span><i style="width:'+(t?Math.round(o.e/t*100):0)+'%"></i></button>';}).join('')+
-    '<div class="mcard pd"><small>Pendências</small><b>'+np+'</b><span>processos com pendência</span></div></div>'+
-    '<div class="mt-f"><span class="lbl">Fase</span>'+Object.keys(fases).sort(function(a,b){return fases[b]-fases[a];}).map(function(f){return chip('fase',f,f,fases[f]);}).join('')+chip('fase','Encerrado','Encerrado',T.length-ativos.length,'enc')+'</div>'+
-    '<div class="mt-bar"><input type="search" id="mt-q" placeholder="Filtrar por processo, partes, assunto, minutante…" value="'+esc(MT.q)+'">'+
-    '<select id="mt-ctrl"><option value="">Controle: todos</option>'+CTRL.map(function(c){return '<option'+(c===MT.ctrl?' selected':'')+'>'+c+'</option>';}).join('')+'</select>'+
-    '<button class="b" id="mt-pend" aria-pressed="'+!!MT.pend+'">Só com pendências</button><label class="ck"><input type="checkbox" id="mt-enc"'+(MT.enc?' checked':'')+'> mostrar encerrados</label>'+
-    '<button class="b" id="mt-limpa">Limpar filtros</button><span class="sp"></span><b>'+V.length+'</b>&nbsp;processo'+(V.length===1?'':'s')+'<button class="b" id="mt-xlsx">↓ Exportar</button></div>';
+  var T=MT.dados,V=metasFiltradas(),B=metasFiltradas(true),ativos=T.filter(function(x){return x.fase!=='Encerrado';});
+  var porMeta={};ativos.forEach(function(x){x.metas.forEach(function(m){porMeta[m]=(porMeta[m]||0)+1;});});
+  var fases={},prox={};ativos.forEach(function(x){fases[x.fase]=(fases[x.fase]||0)+1;var p=mtProx(x);prox[p]=(prox[p]||0)+1;});
+  var np=ativos.filter(function(x){return mtPendTudo(x).length;}).length,n1=ativos.filter(function(x){return x.pend1;}).length;
+  ctPill('metas',MT);
+  var cards=ctCard('data-mf','',!MT.meta&&!MT.pend&&!MT.p1,'Todas',ativos.length,'em andamento')+Object.keys(porMeta).sort(function(a,b){return a-b;}).map(function(m){return ctCard('data-mf-meta',m,MT.meta===m,'Meta '+m,porMeta[m],'em andamento');}).join('')+
+    ctCard('data-mf-p1','1',MT.p1,'Pendente 1º julg.',n1,'sem julgamento ainda')+ctCard('data-mf-pend','1',MT.pend,'Com pendência',np,'parecer, minutante, pauta…','pd');
+  if(MT.col){el.innerHTML=ctFechada(cards);return;}
+  var h=ctPainel(cards,ctIdade('metas',B,MT.ag))+
+    '<div class="ct-box"><div class="ct-fb"><label class="ct-fl ct-q">Buscar<input type="search" id="mt-q" placeholder="Processo, partes, assunto, minutante, anotação" value="'+esc(MT.q)+'"></label>'+
+    ctSel('mt-fase','Fase',Object.keys(fases).sort(function(a,b){return fases[b]-fases[a];}).map(function(f){return [f,f+' · '+fases[f]];}).concat([['Encerrado','Encerrado · '+(T.length-ativos.length)]]),MT.fase,'Todas')+
+    ctSel('mt-prox','Próxima fase',Object.keys(prox).sort(function(a,b){return prox[b]-prox[a];}).map(function(f){return [f,f+' · '+prox[f]];}),MT.prox,'Todas')+
+    ctSel('mt-ctrl','Controle',CTRL.map(function(c){return [c,c];}),MT.ctrl,'Todos')+
+    '<label class="ck"><input type="checkbox" id="mt-enc"'+(MT.enc?' checked':'')+'> encerrados</label><span class="ct-n"><b>'+V.length+'</b> de '+ativos.length+' visíveis</span><button hidden id="mt-xlsx"></button></div>';
   var sc=function(x,k,L,ph){var v=x.acomp[k]||'';return '<select data-mt="'+k+'"><option value="">'+(ph||'—')+'</option>'+L.map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';};
-  var rows=V.map(function(x){var P=metasPend(x),d=diasDesde(x.desde),s=x.sessoes[x.sessoes.length-1],k=dg(x.cnj);
-    return '<tr class="mtr '+(x.fase==='Encerrado'?'enc':P.length?'mpd':'')+'" data-k="'+k+'"><td class="fx"><b class="mt-n">'+x.metas.map(function(m){return 'M'+m;}).join(' ')+'</b></td>'+
-      '<td><span class="cnj">'+esc(x.cnj)+'<button class="fdb-b" data-fd-cnj="'+k+'" title="Ficha completa do processo">▤</button></span><small class="pt">'+esc(x.partes)+'</small></td><td>'+esc(clSig(x.classe))+'</td><td><div class="wr">'+esc(x.assunto)+'</div></td><td>'+(x.dist?esc(br(x.dist)):'')+'</td>'+
-      '<td><span class="fz">'+esc(x.fase)+'</span></td><td><div class="wr">'+esc(x.tarefa)+'</div>'+(d!=null?'<small class="pt">há '+d+' dias</small>':'')+'</td>'+
-      '<td>'+(s?esc(br(s.data))+(s.item?' · item '+esc(s.item):'')+(s.res?'<small class="pt">'+esc(s.res)+'</small>':''):'<span class="mut">—</span>')+'</td><td>'+esc(x.servidor||'—')+'</td>'+
-      '<td>'+(P.length?'<span class="pd">'+esc(P.join(' · '))+'</span>':'')+'</td><td>'+sc(x,'ctrl',CTRL)+'</td>'+
-      '<td><input data-mt="prox" value="'+esc(x.acomp.prox||'')+'" placeholder="próxima providência"></td><td><input type="date" data-mt="prazo" value="'+esc(x.acomp.prazo||'')+'"></td>'+
-      '<td><input data-mt="resp" value="'+esc(x.acomp.resp||'')+'" placeholder="responsável"></td><td><input data-mt="obs" value="'+esc(x.acomp.obs||'')+'" placeholder="observação"></td></tr>';}).join('');
-  var COLS=[['Meta',70],['Processo',190],['Classe',60],['Assunto',200],['Distribuído',96],['Fase',150],['Tarefa no PJe',200],['Pauta',130],['Minutante',110],['Pendências',170],['Controle',170],['Próxima providência',200],['Prazo',130],['Responsável',130],['Observação',220]];
-  h+='<div class="plw"><table class="pl mtb"><thead><tr>'+COLS.map(function(c,i){return '<th style="min-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead><tbody>'+(rows||'<tr><td colspan="15" class="mut">Nenhum processo de meta com esses filtros.</td></tr>')+'</tbody></table></div>';
+  var COLS=[['Processo',200],['Meta',66],['Assunto',170],['Fase e tarefa no PJe',200],['Próxima fase',180],['Equipe',116],['Pauta',76],['',76]];
+  var rows=V.map(function(x){var P=mtPendTudo(x),d=diasDesde(x.desde),s=x.sessoes[x.sessoes.length-1],k=dg(x.cnj),ab=MT.aberto===k,a=x.acomp;
+    var tr='<tr class="mtr ct-r'+(x.fase==='Encerrado'?' enc':P.length?' mpd':'')+(ab?' ab':'')+'" data-k="'+k+'" data-abre="'+k+'" data-sec="metas"><td><span class="cnj">'+esc(x.cnj)+'<button class="fdb-b" data-fd-cnj="'+k+'" title="Ficha completa do processo">▤</button></span><small class="pt">'+esc([clSig(x.classe),x.dist?'distr. '+x.dist.slice(0,4):'',x.prioridade==='Sim'?'prioridade':''].filter(Boolean).join(' · '))+'</small><small class="pt">'+esc(x.partes)+'</small></td>'+
+      '<td><span class="tg mt">'+x.metas.map(function(m){return 'M'+m;}).join(' · ')+'</span></td><td><div class="wr">'+esc(x.assunto)+'</div></td>'+
+      '<td><span class="tg fz">'+esc(x.fase)+'</span><small class="pt">'+esc(x.tarefa.replace(/^\[[^\]]*\]\s*/,''))+(d!=null?' · há '+d+' dias':'')+'</small></td>'+
+      '<td><b class="px">→ '+esc(mtProx(x))+'</b>'+(P.length?'<small class="pt pd">'+esc(P.join(' · '))+'</small>':x.pend1?'<small class="pt">pendente de 1º julgamento</small>':'')+(a.ctrl?'<small class="pt">controle: '+esc(a.ctrl)+'</small>':'')+'</td>'+
+      '<td>'+(x.servidor?'<b>'+esc(x.servidor)+'</b>':'<span class="mut">—</span>')+(x.corretor?'<small class="pt">corretor '+esc(x.corretor)+'</small>':'')+'</td>'+
+      '<td>'+(s?'<span class="mono">'+esc(br(s.data).slice(0,5))+'</span>'+(s.item?'<small class="pt">item '+esc(s.item)+'</small>':'')+(s.res?'<small class="pt">'+esc(s.res)+'</small>':''):'<span class="mut">—</span>')+'</td>'+ctAnotar(x,MT,'metas')+'</tr>';
+    if(ab)tr+=ctNota(x,'metas',COLS.length,ctCampo('Controle',sc(x,'ctrl',CTRL))+ctCampo('Próxima providência','<input data-mt="prox" value="'+esc(a.prox||'')+'" placeholder="próxima providência">')+
+      '<div class="ct-cp2">'+ctCampo('Prazo','<input type="date" data-mt="prazo" value="'+esc(a.prazo||'')+'">')+ctCampo('Responsável','<input data-mt="resp" value="'+esc(a.resp||'')+'" placeholder="responsável">')+'</div>'+ctCampo('Observação do controle','<input data-mt="obs" value="'+esc(a.obs||'')+'" placeholder="observação">'));
+    return tr;}).join('');
+  h+=ctTabela(COLS,rows,'Nenhum processo de meta com esses filtros.',MT)+'</div>'+
+    ctLeitura('Leitura dos indicadores: cada meta conta os processos com a etiqueta dela; um processo pode estar em mais de uma. A próxima fase sai da tarefa atual no PJe, como na triagem do monitor. A pendência junta o que depende do gabinete (sem minutante, parado, sem pauta, providência vencida) e o que as etiquetas marcam (parecer, contrarrazões, preparo, liminar, não pautar) ou o impedimento da triagem.',
+      (MT.meta||MT.fase||MT.q||MT.ctrl||MT.pend||MT.p1||MT.prox||MT.ag>=0||MT.enc)?'mt-limpa':'');
   el.innerHTML=h;
 }
 var MTP=new Map(),tMt=null;
@@ -1983,41 +2117,61 @@ function gravarMetas(){var lote=Array.from(MTP.values());MTP.clear();estado('Gra
 document.addEventListener('change',function(e){var t=e.target,k=t.getAttribute&&t.getAttribute('data-mt');if(!k)return;var tr=t.closest('tr[data-k]'),x=(MT.dados||[]).filter(function(i){return dg(i.cnj)===tr.getAttribute('data-k');})[0];if(!x)return;
   x.acomp[k]=t.value;var p=MTP.get(x.cnj)||{cnj:x.cnj,campos:{}};p.campos[k]=t.value;MTP.set(x.cnj,p);barra();if(k==='ctrl'||k==='prazo')renderMetas();});
 /* ===== Sobrestados e suspensos: motivo, tema ou precedente, situação do precedente e previsão de retirada ===== */
-var SB={dados:null,motivo:'',tema:'',sit:'',q:'',filtro:''};
+var SB={dados:null,motivo:'',tema:'',sit:'',q:'',filtro:'',ag:-1,aberto:'',exp:false,col:false,refFecha:false};
 var SBM=['Tribunal superior (repetitivo ou repercussão geral)','IRDR ou IAC','Suspensão nacional (STF/STJ)','Decisão do relator','Acordo / conciliação','Outro motivo'];
 var SBS=['Afetado · aguardando julgamento','Julgado · aguardando publicação ou trânsito','Julgado · apto a retirar o sobrestamento','Cancelado ou desafetado · retirar','Sem informação'];
 function sbTema(x){return x.acomp.tema||(x.temasAuto||[]).join(', ');}
 function sbMotivo(x){return x.acomp.motivo||x.motivoAuto;}
 function sbAlerta(x){var a=x.acomp,A=[];if(/apto a retirar|retirar$/.test(a.sitPrec||''))A.push('retirar o sobrestamento');if(a.previsao&&a.previsao<hoje())A.push('previsão vencida');if(x.analisarPeticao)A.push('petição a analisar');if(!sbTema(x))A.push('tema não identificado');return A;}
 function carregarSobr(sil){if(!sil)$('#sobr').innerHTML='<div class="empty">Lendo os sobrestados…</div>';return api('/api/pauta?sobr=1').then(function(d){SB.dados=d.itens||[];renderSobr();}).catch(falha);}
-function sobrFiltrados(){var q=nq(SB.q);return (SB.dados||[]).filter(function(x){var a=x.acomp;
-  if(SB.motivo&&sbMotivo(x)!==SB.motivo)return false;if(SB.tema&&sbTema(x).indexOf(SB.tema)<0)return false;if(SB.sit&&(a.sitPrec||'Sem informação')!==SB.sit)return false;
+function sobrFiltrados(semIdade){var q=nq(SB.q);return (SB.dados||[]).filter(function(x){var a=x.acomp;
+  if(SB.motivo&&sbMotivo(x)!==SB.motivo)return false;if(SB.tema&&(SB.tema==='—'?sbTema(x):(', '+sbTema(x)+',').indexOf(', '+SB.tema+',')<0))return false;if(SB.sit&&(a.sitPrec||'Sem informação')!==SB.sit)return false;
   if(SB.filtro==='alerta'&&!sbAlerta(x).length)return false;if(SB.filtro==='prev'&&!a.previsao)return false;if(SB.filtro==='semprev'&&!(a.semPrev==='Sim'||!a.previsao))return false;
-  if(q&&nq([x.cnj,x.partes,x.assunto,x.classe,sbTema(x),a.obs,a.prox].join(' ')).indexOf(q)<0)return false;return true;})
+  if(SB.filtro==='pet'&&!x.analisarPeticao)return false;if(SB.filtro==='apto'&&!/retirar/.test(a.sitPrec||''))return false;
+  if(!semIdade&&SB.ag>=0&&ctFaixa(diasDesde(x.desde))!==SB.ag)return false;
+  if(q&&nq([x.cnj,x.partes,x.assunto,x.classe,sbTema(x),a.obs,a.prox,(x.nota||{}).sub,(x.nota||{}).esp,(x.nota||{}).obs].join(' ')).indexOf(q)<0)return false;return true;})
   .sort(function(a,b){return String(a.desde).localeCompare(String(b.desde));});}
+/* referencial: cada tema (ou, sem tema, cada motivo) com processos, tribunal, assunto mais comum e situação do precedente registrada pela equipe */
+function sbRef(T){var G={};T.forEach(function(x){var ts=x.acomp.tema?x.acomp.tema.split(/\s*,\s*/):(x.temasAuto||[]);if(!ts.length)ts=['—'];ts.forEach(function(t){(G[t]=G[t]||[]).push(x);});});
+  return Object.keys(G).map(function(t){var L=G[t],as={},si={};L.forEach(function(x){as[x.assunto]=(as[x.assunto]||0)+1;var s=x.acomp.sitPrec;if(s)si[s]=(si[s]||0)+1;});
+    var top=function(o){return Object.keys(o).sort(function(a,b){return o[b]-o[a];})[0]||'';};
+    return {t:t,n:L.length,trib:t==='—'?'':(/STF$/.test(t)?'STF':/STJ$/.test(t)?'STJ':/TNU$/.test(t)?'TNU':/TRF/.test(t)?'TRF':'não indicado'),ass:top(as),sit:top(si)};}).sort(function(a,b){return b.n-a.n;});}
 function renderSobr(){
   var el=$('#sobr');if(!SB.dados){carregarSobr();return;}
-  var T=SB.dados,V=sobrFiltrados(),mot={},tem={},sit={};
-  T.forEach(function(x){var m=sbMotivo(x);mot[m]=(mot[m]||0)+1;(x.acomp.tema?[x.acomp.tema]:x.temasAuto).forEach(function(t){tem[t]=(tem[t]||0)+1;});var s=x.acomp.sitPrec||'Sem informação';sit[s]=(sit[s]||0)+1;});
-  var nAl=T.filter(function(x){return sbAlerta(x).length;}).length,nPrev=T.filter(function(x){return x.acomp.previsao;}).length,nApto=T.filter(function(x){return /retirar/.test(x.acomp.sitPrec||'');}).length;
-  var chip=function(k,v,lab,n){return '<button class="mchip" data-sf="'+k+'" data-v="'+esc(v)+'" aria-pressed="'+(SB[k]===v)+'"><b>'+n+'</b> '+esc(lab)+'</button>';};
-  var h='<div class="mt-k"><div class="mcard"><small>Sobrestados e suspensos</small><b>'+T.length+'</b><span>no acervo do gabinete</span></div>'+
-    '<button class="mcard" data-sf="filtro" data-v="alerta" aria-pressed="'+(SB.filtro==='alerta')+'"><small>Atenção</small><b>'+nAl+'</b><span>retirar, previsão vencida, petição ou tema</span></button>'+
-    '<button class="mcard" data-sf="filtro" data-v="prev" aria-pressed="'+(SB.filtro==='prev')+'"><small>Com previsão de retirada</small><b>'+nPrev+'</b><span>'+(T.length-nPrev)+' sem previsão</span></button>'+
-    '<div class="mcard pd"><small>Aptos a retirar</small><b>'+nApto+'</b><span>precedente julgado, cancelado ou desafetado</span></div></div>'+
-    '<div class="mt-f"><span class="lbl">Motivo</span>'+Object.keys(mot).sort(function(a,b){return mot[b]-mot[a];}).map(function(m){return chip('motivo',m,m,mot[m]);}).join('')+'</div>'+
-    '<div class="mt-f"><span class="lbl">Tema</span>'+Object.keys(tem).sort(function(a,b){return tem[b]-tem[a];}).slice(0,14).map(function(t){return chip('tema',t,t,tem[t]);}).join('')+'</div>'+
-    '<div class="mt-f"><span class="lbl">Precedente</span>'+Object.keys(sit).map(function(s){return chip('sit',s,s,sit[s]);}).join('')+'</div>'+
-    '<div class="mt-bar"><input type="search" id="sb-q" placeholder="Filtrar por processo, partes, assunto, tema…" value="'+esc(SB.q)+'"><button class="b" id="sb-limpa">Limpar filtros</button><span class="sp"></span><b>'+V.length+'</b>&nbsp;processo'+(V.length===1?'':'s')+'<button class="b" id="sb-xlsx">↓ Exportar</button></div>';
+  var T=SB.dados,V=sobrFiltrados(),B=sobrFiltrados(true),mot={},sit={},R=sbRef(T);
+  T.forEach(function(x){var m=sbMotivo(x);mot[m]=(mot[m]||0)+1;var s=x.acomp.sitPrec||'Sem informação';sit[s]=(sit[s]||0)+1;});
+  var nAl=T.filter(function(x){return sbAlerta(x).length;}).length,nPrev=T.filter(function(x){return x.acomp.previsao;}).length,nApto=T.filter(function(x){return /retirar/.test(x.acomp.sitPrec||'');}).length,nPet=T.filter(function(x){return x.analisarPeticao;}).length;
+  ctPill('sobr',SB);
+  var cards=ctCard('data-sf-todos','',!SB.filtro,'No acervo',T.length,'sobrestados e suspensos')+ctCard('data-sf-f','alerta',SB.filtro==='alerta','Atenção',nAl,'retirar, previsão, petição ou tema','pd')+
+    ctCard('data-sf-f','pet',SB.filtro==='pet','Petição a analisar',nPet,'na tarefa do PJe')+ctCard('data-sf-f','prev',SB.filtro==='prev','Com previsão',nPrev,(T.length-nPrev)+' sem previsão de retirada')+ctCard('data-sf-f','apto',SB.filtro==='apto','Aptos a retirar',nApto,'precedente julgado ou cancelado');
+  if(SB.col){el.innerHTML=ctFechada(cards);return;}
+  var h=ctPainel(cards,ctIdade('sobr',B,SB.ag));
+  h+='<div class="ct-ref"><button type="button" class="ct-rh" id="sb-ref" aria-expanded="'+!SB.refFecha+'"><b>Referencial dos sobrestamentos</b><span>'+R.length+' temas ou motivos ativos no acervo. A situação do precedente é a que a equipe registrou; sem registro, fica a conferir.</span><em>'+(SB.refFecha?'Abrir':'Recolher')+'</em></button>'+
+    (SB.refFecha?'':'<div class="ct-rw"><table class="pl ct-t"><thead><tr><th>Tema ou precedente</th><th>Tribunal</th><th style="min-width:170px">Processos</th><th>Assunto mais comum</th><th>Situação do precedente</th><th></th></tr></thead><tbody>'+
+      R.map(function(r){var on=SB.tema===r.t;return '<tr'+(on?' class="ab"':'')+'><td><b>'+(r.t==='—'?'Tema não identificado':esc(r.t))+'</b></td><td>'+(r.trib?'<span class="tg tb-'+r.trib.replace(/\W/g,'')+'">'+r.trib+'</span>':'<span class="mut">—</span>')+'</td>'+
+        '<td><span class="ct-nb"><b>'+r.n+'</b><i><i style="width:'+Math.round(r.n/R[0].n*100)+'%"></i></i></span></td><td>'+esc(r.ass)+'</td><td>'+(r.sit?esc(r.sit):'<span class="pd">a conferir</span>')+'</td>'+
+        '<td class="ct-an"><button type="button" class="lk" data-sf-tema="'+esc(r.t)+'">'+(on?'Ver todos':'Filtrar')+'</button></td></tr>';}).join('')+'</tbody></table></div>')+'</div>';
+  h+='<div class="ct-box"><div class="ct-fb"><label class="ct-fl ct-q">Buscar<input type="search" id="sb-q" placeholder="Processo, partes, assunto, tema, anotação" value="'+esc(SB.q)+'"></label>'+
+    ctSel('sb-mot','Motivo',Object.keys(mot).sort(function(a,b){return mot[b]-mot[a];}).map(function(m){return [m,m.replace(/ \(repetitivo ou repercussão geral\)/,'')+' · '+mot[m]];}),SB.motivo,'Todos')+
+    ctSel('sb-tema','Tema',R.map(function(r){return [r.t,(r.t==='—'?'Tema não identificado':r.t)+' · '+r.n];}),SB.tema,'Todos')+
+    ctSel('sb-sit','Precedente',Object.keys(sit).map(function(s){return [s,s+' · '+sit[s]];}),SB.sit,'Todos')+
+    '<span class="ct-n"><b>'+V.length+'</b> de '+T.length+' visíveis</span><button hidden id="sb-xlsx"></button></div>';
   var sel=function(x,k,L,ph){var v=x.acomp[k]||'';return '<select data-sb="'+k+'"><option value="">'+(ph||'—')+'</option>'+L.map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';};
-  var rows=V.map(function(x){var A=sbAlerta(x),d=diasDesde(x.desde),a=x.acomp,k=dg(x.cnj);
-    return '<tr class="mtr '+(A.length?'mpd':'')+'" data-k="'+k+'"><td class="fx"><span class="cnj">'+esc(x.cnj)+'<button class="fdb-b" data-fd-cnj="'+k+'" title="Ficha completa do processo">▤</button></span><small class="pt">'+esc(x.partes)+'</small></td><td>'+esc(clSig(x.classe))+'</td><td><div class="wr">'+esc(x.assunto)+'</div></td>'+
-      '<td><div class="wr">'+esc(x.tarefa)+'</div>'+(d!=null?'<small class="pt">há '+d+' dias</small>':'')+'</td>'+
-      '<td>'+sel(x,'motivo',SBM,x.motivoAuto)+'</td><td><input data-sb="tema" value="'+esc(a.tema||'')+'" placeholder="'+esc((x.temasAuto||[]).join(', ')||'tema / precedente')+'"></td>'+
-      '<td>'+sel(x,'sitPrec',SBS,'situação…')+'</td><td><input type="date" data-sb="previsao" value="'+esc(a.previsao||'')+'"><label class="ck sm"><input type="checkbox" data-sb="semPrev"'+(a.semPrev==='Sim'?' checked':'')+'> sem previsão</label></td>'+
-      '<td>'+(A.length?'<span class="pd">'+esc(A.join(' · '))+'</span>':'')+'</td><td><input data-sb="prox" value="'+esc(a.prox||'')+'" placeholder="próxima providência"></td><td><input data-sb="resp" value="'+esc(a.resp||'')+'" placeholder="responsável"></td><td><input data-sb="obs" value="'+esc(a.obs||'')+'" placeholder="observação"></td></tr>';}).join('');
-  var COLS=[['Processo',200],['Classe',60],['Assunto',190],['Tarefa no PJe',210],['Motivo',220],['Tema ou precedente',170],['Situação do precedente',220],['Previsão de retirada',150],['Atenção',170],['Próxima providência',200],['Responsável',130],['Observação',220]];
-  h+='<div class="plw"><table class="pl mtb"><thead><tr>'+COLS.map(function(c,i){return '<th style="min-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead><tbody>'+(rows||'<tr><td colspan="12" class="mut">Nenhum processo com esses filtros.</td></tr>')+'</tbody></table></div>';
+  var COLS=[['Processo',200],['Assunto',170],['Motivo e tema',190],['Precedente',140],['Na tarefa',190],['Retirada',120],['',76]];
+  var rows=V.map(function(x){var A=sbAlerta(x),d=diasDesde(x.desde),a=x.acomp,k=dg(x.cnj),ab=SB.aberto===k,m=sbMotivo(x),tm=sbTema(x);
+    var tr='<tr class="mtr ct-r'+(A.length?' mpd':'')+(ab?' ab':'')+'" data-k="'+k+'" data-abre="'+k+'" data-sec="sobr"><td><span class="cnj">'+esc(x.cnj)+'<button class="fdb-b" data-fd-cnj="'+k+'" title="Ficha completa do processo">▤</button></span><small class="pt">'+esc([clSig(x.classe),x.dist?'distr. '+x.dist.slice(0,4):'',x.prioridade==='Sim'?'prioridade':'',x.meta?'também meta':''].filter(Boolean).join(' · '))+'</small><small class="pt">'+esc(x.partes)+'</small></td>'+
+      '<td><div class="wr">'+esc(x.assunto)+'</div></td>'+
+      '<td><span class="tg '+(/Tribunal superior/.test(m)?'ts':/IRDR/.test(m)?'ir':'ou')+'">'+esc(m.replace(/ \(repetitivo ou repercussão geral\)/,''))+'</span><small class="pt'+(tm?' tm':' pd')+'">'+esc(tm||'tema não identificado')+'</small></td>'+
+      '<td>'+(a.sitPrec?esc(a.sitPrec):'<span class="pd">a conferir</span>')+'</td>'+
+      '<td><div class="wr">'+esc(x.tarefa.replace(/^\[[^\]]*\]\s*/,''))+'</div><small class="pt'+(x.analisarPeticao?' pd':'')+'">'+esc([x.analisarPeticao?'petição a analisar':'',d!=null?'há '+d+' dias':''].filter(Boolean).join(' · '))+'</small></td>'+
+      '<td>'+(a.previsao?'<span class="mono">'+esc(br(a.previsao))+'</span>':'<span class="mut">sem previsão</span>')+(A.length?'<small class="pt pd">'+esc(A.filter(function(t){return t!=='petição a analisar'&&t!=='tema não identificado';}).join(' · '))+'</small>':'')+'</td>'+ctAnotar(x,SB,'sobr')+'</tr>';
+    if(ab)tr+=ctNota(x,'sobr',COLS.length,ctCampo('Motivo',sel(x,'motivo',SBM,x.motivoAuto))+ctCampo('Tema ou precedente','<input data-sb="tema" value="'+esc(a.tema||'')+'" placeholder="'+esc((x.temasAuto||[]).join(', ')||'tema / precedente')+'">')+ctCampo('Situação do precedente',sel(x,'sitPrec',SBS,'situação…'))+
+      '<div class="ct-cp2">'+ctCampo('Previsão de retirada','<input type="date" data-sb="previsao" value="'+esc(a.previsao||'')+'">')+ctCampo('&nbsp;','<label class="ck sm"><input type="checkbox" data-sb="semPrev"'+(a.semPrev==='Sim'?' checked':'')+'> sem previsão</label>')+'</div>'+
+      '<div class="ct-cp2">'+ctCampo('Próxima providência','<input data-sb="prox" value="'+esc(a.prox||'')+'" placeholder="próxima providência">')+ctCampo('Responsável','<input data-sb="resp" value="'+esc(a.resp||'')+'" placeholder="responsável">')+'</div>'+ctCampo('Observação do controle','<input data-sb="obs" value="'+esc(a.obs||'')+'" placeholder="observação">'));
+    return tr;}).join('');
+  h+=ctTabela(COLS,rows,'Nenhum processo com esses filtros.',SB)+'</div>'+
+    ctLeitura('Leitura dos indicadores: o motivo e o tema vêm da tarefa e das etiquetas do PJe, e a equipe pode corrigi-los na anotação. Um processo com mais de um tema conta em cada um no referencial. A situação do precedente e a previsão de retirada são as registradas pela equipe.',
+      (SB.motivo||SB.tema||SB.sit||SB.q||SB.filtro||SB.ag>=0)?'sb-limpa':'');
   el.innerHTML=h;
 }
 var SBP=new Map(),tSb=null;
@@ -2027,7 +2181,7 @@ function gravarSobr(){var lote=Array.from(SBP.values());SBP.clear();estado('Grav
 document.addEventListener('change',function(e){var t=e.target,k=t.getAttribute&&t.getAttribute('data-sb');if(!k)return;var tr=t.closest('tr[data-k]'),x=(SB.dados||[]).filter(function(i){return dg(i.cnj)===tr.getAttribute('data-k');})[0];if(!x)return;
   var v=t.type==='checkbox'?(t.checked?'Sim':''):t.value;x.acomp[k]=v;var p=SBP.get(x.cnj)||{cnj:x.cnj,campos:{}};p.campos[k]=v;SBP.set(x.cnj,p);barra();if(k!=='obs'&&k!=='prox'&&k!=='resp')renderSobr();});
 /* ===== Casos sensíveis: saúde e outros que pedem acompanhamento mais próximo ===== */
-var SN={dados:null,cat:'',q:'',filtro:''};
+var SN={dados:null,cat:'',q:'',filtro:'',origem:'',ag:-1,aberto:'',exp:false,col:false,inc:false};
 var SNC=['Saúde · medicamento','Saúde · oncológico','Saúde · cirurgia ou internação','Saúde · tratamento','Saúde · outro','Pessoa idosa','Criança ou adolescente','Pessoa com deficiência','Subsistência (verba alimentar)','Outro'];
 var SND=['Sem pedido de urgência','Liminar/tutela deferida','Liminar/tutela indeferida','Pedido pendente de apreciação','Decisão de mérito proferida'];
 var SNU=['Não se aplica','Cumprida','Pendente de cumprimento','Descumprimento noticiado','Bloqueio de valores / sequestro'];
@@ -2035,32 +2189,44 @@ function snCat(x){return x.acomp.cat||x.catAuto||'Outro';}
 function snAlerta(x){var a=x.acomp,A=[];if(a.proxVer&&a.proxVer<=hoje())A.push('verificação '+(a.proxVer<hoje()?'vencida':'hoje'));if(/Pendente de cumprimento|Descumprimento/.test(a.cumprimento||''))A.push(a.cumprimento.toLowerCase());
   if(/pendente de apreciação/.test(a.decisao||''))A.push('pedido a apreciar');return A;}
 function carregarSens(sil){if(!sil)$('#sens').innerHTML='<div class="empty">Lendo os casos sensíveis…</div>';return api('/api/pauta?sens=1').then(function(d){SN.dados=d.itens||[];renderSens();}).catch(falha);}
-function sensFiltrados(){var q=nq(SN.q);return (SN.dados||[]).filter(function(x){if(SN.cat&&snCat(x)!==SN.cat)return false;if(SN.filtro==='alerta'&&!snAlerta(x).length)return false;if(SN.filtro==='cump'&&!/Pendente|Descumprimento/.test(x.acomp.cumprimento||''))return false;
-  if(q&&nq([x.cnj,x.partes,x.assunto,x.classe,x.tarefa,x.acomp.quadro,x.acomp.obs,x.acomp.prox].join(' ')).indexOf(q)<0)return false;return true;})
+function sensFiltrados(semIdade){var q=nq(SN.q);return (SN.dados||[]).filter(function(x){if(SN.cat&&snCat(x)!==SN.cat)return false;if(SN.filtro==='alerta'&&!snAlerta(x).length)return false;if(SN.filtro==='cump'&&!/Pendente|Descumprimento/.test(x.acomp.cumprimento||''))return false;
+  if(SN.filtro==='ver'&&!(x.acomp.proxVer&&x.acomp.proxVer<=hoje()))return false;if(SN.filtro==='pri'&&x.prioridade!=='Sim')return false;if(SN.origem==='auto'&&!x.auto)return false;if(SN.origem==='eq'&&x.auto)return false;
+  if(!semIdade&&SN.ag>=0&&ctFaixa(diasDesde(x.desde))!==SN.ag)return false;
+  if(q&&nq([x.cnj,x.partes,x.assunto,x.classe,x.tarefa,x.acomp.quadro,x.acomp.obs,x.acomp.prox,(x.nota||{}).sub,(x.nota||{}).esp,(x.nota||{}).obs].join(' ')).indexOf(q)<0)return false;return true;})
   .sort(function(a,b){var u=snAlerta(b).length-snAlerta(a).length;if(u)return u;return String(a.acomp.proxVer||'9').localeCompare(String(b.acomp.proxVer||'9'));});}
 function renderSens(){
   var el=$('#sens');if(!SN.dados){carregarSens();return;}
-  var T=SN.dados,V=sensFiltrados(),cs={};T.forEach(function(x){var c=snCat(x);cs[c]=(cs[c]||0)+1;});
-  var nAl=T.filter(function(x){return snAlerta(x).length;}).length,nC=T.filter(function(x){return /Pendente|Descumprimento/.test(x.acomp.cumprimento||'');}).length,nV=T.filter(function(x){return x.acomp.proxVer&&x.acomp.proxVer<=hoje();}).length;
-  var chip=function(k,v,lab,n){return '<button class="mchip" data-nf="'+k+'" data-v="'+esc(v)+'" aria-pressed="'+(SN[k]===v)+'"><b>'+n+'</b> '+esc(lab)+'</button>';};
-  var h='<div class="mt-k"><div class="mcard"><small>Casos sensíveis</small><b>'+T.length+'</b><span>saúde e outros com acompanhamento próximo</span></div>'+
-    '<button class="mcard" data-nf="filtro" data-v="alerta" aria-pressed="'+(SN.filtro==='alerta')+'"><small>Atenção</small><b>'+nAl+'</b><span>verificação, cumprimento ou pedido a apreciar</span></button>'+
-    '<button class="mcard" data-nf="filtro" data-v="cump" aria-pressed="'+(SN.filtro==='cump')+'"><small>Cumprimento</small><b>'+nC+'</b><span>pendente ou descumprimento noticiado</span></button>'+
-    '<div class="mcard pd"><small>Verificar hoje</small><b>'+nV+'</b><span>verificação marcada até hoje</span></div></div>'+
-    '<div class="mt-f"><span class="lbl">Categoria</span>'+Object.keys(cs).sort(function(a,b){return cs[b]-cs[a];}).map(function(c){return chip('cat',c,c,cs[c]);}).join('')+'</div>'+
-    '<form class="urg-n" id="sn-n"><b>Incluir caso</b><input name="cnj" placeholder="nº CNJ do processo" required><select name="cat">'+SNC.map(function(c){return '<option>'+c+'</option>';}).join('')+'</select><input name="quadro" placeholder="quadro / motivo do acompanhamento"><button class="b pri">Incluir</button></form>'+
-    '<div class="mt-bar"><input type="search" id="sn-q" placeholder="Filtrar por processo, partes, assunto, quadro…" value="'+esc(SN.q)+'"><button class="b" id="sn-limpa">Limpar filtros</button><span class="sp"></span><b>'+V.length+'</b>&nbsp;processo'+(V.length===1?'':'s')+'<button class="b" id="sn-xlsx">↓ Exportar</button></div>';
+  var T=SN.dados,V=sensFiltrados(),B=sensFiltrados(true),cs={};T.forEach(function(x){var c=snCat(x);cs[c]=(cs[c]||0)+1;});
+  var nAl=T.filter(function(x){return snAlerta(x).length;}).length,nC=T.filter(function(x){return /Pendente|Descumprimento/.test(x.acomp.cumprimento||'');}).length,nV=T.filter(function(x){return x.acomp.proxVer&&x.acomp.proxVer<=hoje();}).length,nP=T.filter(function(x){return x.prioridade==='Sim';}).length,nE=T.filter(function(x){return !x.auto;}).length;
+  ctPill('sens',SN,true);
+  var cards=ctCard('data-nf-todos','',!SN.filtro,'Casos',T.length,'em acompanhamento')+ctCard('data-nf-f','alerta',SN.filtro==='alerta','Atenção',nAl,'verificação, cumprimento ou pedido','pd')+
+    ctCard('data-nf-f','cump',SN.filtro==='cump','Cumprimento',nC,'pendente ou descumprido')+ctCard('data-nf-f','ver',SN.filtro==='ver','Verificar hoje',nV,'verificação marcada até hoje')+ctCard('data-nf-f','pri',SN.filtro==='pri','Prioridade',nP,'prioridade no PJe');
+  if(SN.col){el.innerHTML=ctFechada(cards);return;}
+  var h=(SN.inc?'<form class="ct-inc" id="sn-n"><div class="ct-inh"><b>Incluir do acervo</b><span>Informe o processo e a categoria. Ele entra marcado como incluído pela equipe.</span><button type="button" class="lk" data-ct="inc" data-sec="sens">Fechar</button></div>'+
+      '<div class="ct-inf"><label class="ct-fl ct-q">Processo<input name="cnj" placeholder="nº CNJ do processo" required></label><label class="ct-fl">Categoria<select name="cat">'+SNC.map(function(c){return '<option>'+c+'</option>';}).join('')+'</select></label><label class="ct-fl ct-q">Quadro / motivo<input name="quadro" placeholder="quadro / motivo do acompanhamento"></label><button class="b pri">Incluir</button></div></form>':'')+
+    ctPainel(cards,ctIdade('sens',B,SN.ag))+
+    '<div class="ct-box"><div class="ct-fb"><label class="ct-fl ct-q">Buscar<input type="search" id="sn-q" placeholder="Processo, partes, assunto, quadro, anotação" value="'+esc(SN.q)+'"></label>'+
+    ctSel('sn-cat','Categoria',Object.keys(cs).sort(function(a,b){return cs[b]-cs[a];}).map(function(c){return [c,c+' · '+cs[c]];}),SN.cat,'Todas')+
+    ctSel('sn-ori','Origem',[['auto','pelo assunto ou etiqueta · '+(T.length-nE)],['eq','incluídos pela equipe · '+nE]],SN.origem,'Todas')+
+    '<span class="ct-n"><b>'+V.length+'</b> de '+T.length+' visíveis</span><button hidden id="sn-xlsx"></button></div>';
   var sel=function(x,k,L,ph){var v=x.acomp[k]||'';return '<select data-sn="'+k+'"><option value="">'+(ph||'—')+'</option>'+L.map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';};
-  var rows=V.map(function(x){var A=snAlerta(x),d=diasDesde(x.desde),a=x.acomp,k=dg(x.cnj);
-    return '<tr class="mtr '+(A.length?'mpd':'')+'" data-k="'+k+'"><td class="fx"><span class="cnj">'+esc(x.cnj)+'<button class="fdb-b" data-fd-cnj="'+k+'" title="Ficha completa do processo">▤</button></span><small class="pt">'+esc(x.partes||'')+'</small></td>'+
-      '<td>'+sel(x,'cat',SNC,x.catAuto||'categoria…')+'</td><td><div class="wr">'+esc(x.assunto||'')+'</div><small class="pt">'+esc(clSig(x.classe))+(x.prioridade==='Sim'?' · prioridade legal':'')+'</small></td>'+
-      '<td><div class="wr">'+esc(x.tarefa||'')+'</div>'+(d!=null?'<small class="pt">há '+d+' dias</small>':'')+'</td>'+
-      '<td><input data-sn="quadro" value="'+esc(a.quadro||'')+'" placeholder="quadro clínico / motivo"></td><td>'+sel(x,'decisao',SND,'decisão…')+'</td><td>'+sel(x,'cumprimento',SNU,'cumprimento…')+'</td>'+
-      '<td><input type="date" data-sn="ultimo" value="'+esc(a.ultimo||'')+'" title="Última verificação"></td><td><input type="date" data-sn="proxVer" value="'+esc(a.proxVer||'')+'" title="Próxima verificação"></td>'+
-      '<td>'+(A.length?'<span class="pd">'+esc(A.join(' · '))+'</span>':'')+'</td><td><input data-sn="prox" value="'+esc(a.prox||'')+'" placeholder="próxima providência"></td><td><input data-sn="resp" value="'+esc(a.resp||'')+'" placeholder="responsável"></td><td><input data-sn="obs" value="'+esc(a.obs||'')+'" placeholder="observação"></td>'+
-      '<td><button class="eqx" data-sn-sai="'+k+'" title="Tirar dos casos sensíveis">×</button></td></tr>';}).join('');
-  var COLS=[['Processo',200],['Categoria',190],['Assunto',190],['Tarefa no PJe',200],['Quadro / motivo',200],['Decisão',190],['Cumprimento',190],['Última verificação',130],['Próxima verificação',130],['Atenção',170],['Próxima providência',200],['Responsável',120],['Observação',200],['',30]];
-  h+='<div class="plw"><table class="pl mtb"><thead><tr>'+COLS.map(function(c,i){return '<th style="min-width:'+c[1]+'px"'+(i?'':' class="fx"')+'>'+c[0]+'</th>';}).join('')+'</tr></thead><tbody>'+(rows||'<tr><td colspan="14" class="mut">Nenhum caso com esses filtros.</td></tr>')+'</tbody></table></div>';
+  var COLS=[['Processo',200],['Categoria',150],['Assunto',170],['Na tarefa',190],['Decisão e cumprimento',170],['Verificação',116],['',76]];
+  var rows=V.map(function(x){var A=snAlerta(x),d=diasDesde(x.desde),a=x.acomp,k=dg(x.cnj),ab=SN.aberto===k,c=snCat(x);
+    var tr='<tr class="mtr ct-r'+(A.length?' mpd':'')+(x.prioridade==='Sim'?' pri':'')+(ab?' ab':'')+'" data-k="'+k+'" data-abre="'+k+'" data-sec="sens"><td><span class="cnj">'+esc(x.cnj)+'<button class="fdb-b" data-fd-cnj="'+k+'" title="Ficha completa do processo">▤</button></span><small class="pt">'+esc([clSig(x.classe),x.dist?'distr. '+x.dist.slice(0,4):'',x.prioridade==='Sim'?'prioridade':''].filter(Boolean).join(' · '))+'</small><small class="pt">'+esc(x.partes||'')+'</small></td>'+
+      '<td><span class="tg sn">'+esc(c.replace(/^Saúde · /,''))+'</span><small class="pt'+(x.auto?'':' pd')+'">'+(x.auto?'pelo assunto ou etiqueta':'incluído pela equipe')+'</small>'+(a.quadro?'<small class="pt">'+esc(a.quadro)+'</small>':'')+'</td>'+
+      '<td><div class="wr">'+esc(x.assunto||'')+'</div></td>'+
+      '<td><div class="wr">'+esc(String(x.tarefa||'').replace(/^\[[^\]]*\]\s*/,''))+'</div>'+(d!=null?'<small class="pt">há '+d+' dias</small>':'')+'</td>'+
+      '<td>'+(a.decisao?esc(a.decisao):'<span class="mut">sem registro</span>')+(a.cumprimento?'<small class="pt'+(/Pendente|Descumprimento/.test(a.cumprimento)?' pd':'')+'">'+esc(a.cumprimento)+'</small>':'')+'</td>'+
+      '<td>'+(a.proxVer?'<span class="mono'+(a.proxVer<=hoje()?' pd':'')+'">'+esc(br(a.proxVer))+'</span>':'<span class="mut">—</span>')+(a.ultimo?'<small class="pt">última '+esc(br(a.ultimo))+'</small>':'')+'</td>'+ctAnotar(x,SN,'sens')+'</tr>';
+    if(ab)tr+=ctNota(x,'sens',COLS.length,ctCampo('Categoria',sel(x,'cat',SNC,x.catAuto||'categoria…'))+ctCampo('Quadro / motivo','<input data-sn="quadro" value="'+esc(a.quadro||'')+'" placeholder="quadro clínico / motivo">')+
+      '<div class="ct-cp2">'+ctCampo('Decisão',sel(x,'decisao',SND,'decisão…'))+ctCampo('Cumprimento',sel(x,'cumprimento',SNU,'cumprimento…'))+'</div>'+
+      '<div class="ct-cp2">'+ctCampo('Última verificação','<input type="date" data-sn="ultimo" value="'+esc(a.ultimo||'')+'">')+ctCampo('Próxima verificação','<input type="date" data-sn="proxVer" value="'+esc(a.proxVer||'')+'">')+'</div>'+
+      '<div class="ct-cp2">'+ctCampo('Próxima providência','<input data-sn="prox" value="'+esc(a.prox||'')+'" placeholder="próxima providência">')+ctCampo('Responsável','<input data-sn="resp" value="'+esc(a.resp||'')+'" placeholder="responsável">')+'</div>'+
+      ctCampo('Observação do controle','<input data-sn="obs" value="'+esc(a.obs||'')+'" placeholder="observação">')+'<button type="button" class="lk ct-sai" data-sn-sai="'+k+'">Tirar dos casos sensíveis</button>');
+    return tr;}).join('');
+  h+=ctTabela(COLS,rows,'Nenhum caso com esses filtros.',SN)+'</div>'+
+    ctLeitura('Leitura dos indicadores: a categoria vem do assunto e das etiquetas; os casos incluídos pela equipe aparecem marcados. Prioridade é a do PJe. Decisão, cumprimento e verificações são os registrados pela equipe.',
+      (SN.cat||SN.q||SN.filtro||SN.origem||SN.ag>=0)?'sn-limpa':'');
   el.innerHTML=h;
 }
 function gravaSens(cnj,campos,msg){estado('Gravando…','pend');return api('/api/pauta?sens=1',{method:'POST',body:JSON.stringify({cnj:cnj,campos:campos})}).then(function(){estado('✓ gravado');if(msg){toast(msg);SN.dados=null;carregarSens(true);}return true;}).catch(function(e){estado('✕ não gravou: '+e.message,'er');toast(e.message);return false;});}
@@ -2205,7 +2371,7 @@ var P={dados:null,mes:'',aus:[],tipos:[]};
 var MK=[['pautarAte','Peço dia','#2d6fa8'],['inicioPreparacao','Início da preparação','#7352a5'],['entregaMinutas','Entrega das minutas','#c46a1f'],['liberacao','Liberação','#28744b']];
 var SCOR=['#1f6f8b','#8a5cb8','#1a8a6a','#c46a1f','#b0406a','#3e72ad'];
 var CTRLV=['ctrl','metas','sobr','sens'],CTRLT=['metas','sobr','sens'];
-function vista(v){if(v==='controles')v='ctrl';if(v==='urg')v='mono';var alvo='';
+function vista(v){if(v==='controles'||v==='monitoramento')v='ctrl';if(v==='urg')v='mono';var alvo='';
   /* Controles especiais: Metas, Sobrestados e Casos sensíveis numa só página; o endereço de cada um leva à sua seção */
   if(CTRLT.indexOf(v)>=0){alvo=v;v='ctrl';}
   v=['pauta','mono','ctrl'].indexOf(v)>=0?v:'inicio';
@@ -2215,7 +2381,7 @@ function vista(v){if(v==='controles')v='ctrl';if(v==='urg')v='mono';var alvo='';
     var vp=$('#v-pauta');vp.classList.toggle('mono',f==='mono');CTRLT.forEach(function(c){vp.classList.toggle(c,f==='ctrl');});vp.classList.toggle('ctl',f==='ctrl');if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu)carregar();}
   Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   ctlMarca(alvo);
-  try{history.replaceState(null,'','#'+(v==='ctrl'?(alvo||'controles'):v));}catch(e){}if(v==='inicio'&&(!P.dados||!P.dados.entregas||Date.now()-(P.atualizado||0)>30000))painel();
+  try{history.replaceState(null,'','#'+(v==='ctrl'?(alvo||'monitoramento'):v));}catch(e){}if(v==='inicio'&&(!P.dados||!P.dados.entregas||Date.now()-(P.atualizado||0)>30000))painel();
   if(alvo)setTimeout(function(){var h=$('#ctl-'+alvo);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});},S.fonte==='ctrl'?60:400);}
 function ctlMarca(a){Array.prototype.forEach.call(document.querySelectorAll('#ctl-sub [data-sub]'),function(b){b.setAttribute('aria-current',String(b.getAttribute('data-sub')===a));});}
 function ctlConta(){var n={metas:(MT.dados||[]).filter(function(x){return x.fase!=='Encerrado';}).length,sobr:(SB.dados||[]).length,sens:(SN.dados||[]).length};

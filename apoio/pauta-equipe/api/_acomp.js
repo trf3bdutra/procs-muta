@@ -9,6 +9,8 @@ function acomp(r, MAPA, pref) {
   if (c[pref + ' - Atualizado por']) { o.editadoPor = c[pref + ' - Atualizado por']; o.editadoEm = c[pref + ' - Atualizado em'] || ''; }
   return o;
 }
+/* anotação livre do processo na ficha: subassunto e especificidades (triagem) e observações gerais (aba Processo) */
+function nota(r) { const t = (r && r.triagem) || {}, o = (r && r.origem) || {}; return { sub: t.Tema || '', esp: t.Especificidades || '', obs: o['Observações'] || '' }; }
 /* índice CNJ → registro, a partir do operacional lido agora (o acompanhamento é sempre o mais recente) */
 async function indice() { const { doc } = await FICHA.lerOpLeitura(), I = {}; (doc.registros || []).forEach(r => { I[dg(r.processo)] = r; }); return { I, doc }; }
 /* grava o acompanhamento: campos do app → controles; devolve o acompanhamento atualizado */
@@ -19,4 +21,4 @@ async function gravar(cnj, campos, MAPA, pref, u, rotulo, extra) {
   const { r, out } = await FICHA.gravar(cnj, mud, rotulo + ' (' + u + '): ' + cnj, null, u);
   return { item: acomp(r, MAPA, pref), semMudanca: !out.length };
 }
-module.exports = { acomp, indice, gravar, dg };
+module.exports = { acomp, nota, indice, gravar, dg };

@@ -24,7 +24,7 @@ async function base() {
       return { cnj: r.processo || r.Processo, classe: r.classe_judicial || r.Classe || '', assunto: r.Assunto || r.Assunto_Principal || '',
         partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter(Boolean).join(' x '), tarefa: r.tarefa_atual || '',
         desde: iso(r.data_entrada_tarefa), temasAuto: temas(et), motivoAuto: motivoDaTarefa(r.tarefa_atual), analisarPeticao: /Analisar petição/i.test(r.tarefa_atual || ''),
-        meta: /meta/i.test(et), secao: r['Seção Competente'] || '' };
+        meta: /meta/i.test(et), secao: r['Seção Competente'] || '', prioridade: r.prioridade || '', dist: iso(r['data_distribuição'] || r['Data_Distribuição']) };
     }).map(x => { if (x.motivoAuto === 'Não identificado' && x.temasAuto.length) x.motivoAuto = 'Tribunal superior (repetitivo ou repercussão geral)'; return x; });
     CACHE_T = Date.now();
   }
@@ -34,7 +34,7 @@ module.exports = async (req, res, u) => {
   try {
     if (req.method === 'GET') {
       const [B, { I, doc }] = await Promise.all([base(), AC.indice()]);
-      return res.status(200).json({ itens: B.map(x => Object.assign({}, x, { acomp: AC.acomp(I[dg(x.cnj)], MAPA, 'Sobrestamento') })), atualizadoEm: doc.atualizado_em || '' });
+      return res.status(200).json({ itens: B.map(x => Object.assign({}, x, { acomp: AC.acomp(I[dg(x.cnj)], MAPA, 'Sobrestamento'), nota: AC.nota(I[dg(x.cnj)]) })), atualizadoEm: doc.atualizado_em || '' });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const b = req.body || {};
