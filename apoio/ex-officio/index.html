@@ -206,6 +206,12 @@ html[data-theme=dark] .etq.e1{background:#14301f;border-color:#2e6b49;color:#9fd
 .uq-k{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:10px 0}.uq-m{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px;text-align:left;font:inherit;color:inherit}
 .uq-m b{display:block;font-size:20px;color:var(--ink)}.uq-m.al b{color:#a7433d}html[data-theme=dark] .uq-m.al b{color:#f2a397}.uq-m small{font-size:10.5px;font-weight:700;color:var(--mut)}button.uq-m{cursor:pointer}button.uq-m:hover{border-color:#a7433d}
 .uq-l{display:flex;flex-direction:column;gap:8px}.uq-c{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:3px}.uq-c.pend{border-left:3px solid #a7433d}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.tk .tk-mv{display:block;margin-top:7px}
+.tk .tk-mv select{width:100%;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--mut);font:600 11.5px var(--font);padding:4px 6px;cursor:pointer}
+.tk .tk-mv select:hover{color:var(--ink);border-color:var(--navy)}
+.tk .tk-or{display:inline-block;margin:2px 0 1px;font:400 9.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+.pen-or{margin:0 0 8px;font-size:12px;color:var(--mut);background:var(--soft);border-left:3px solid var(--gold);padding:7px 10px}
 .uq-tp{display:flex;gap:6px;flex-wrap:wrap}.uq-t{background:#fbe7e0;color:#a7433d;border-radius:4px;padding:2px 7px;font-size:11px;font-weight:800}html[data-theme=dark] .uq-t{background:#4a2622;color:#f2a397}.uq-n{background:var(--soft);color:var(--mut);border-radius:4px;padding:2px 7px;font-size:11px;font-weight:700}
 .uq-cnj{font:700 12px var(--mono);color:var(--ink);margin-top:3px}.uq-c small{font-size:11.5px;color:var(--mut)}.uq-c small b{color:var(--ink)}.uq-c small b.al{color:#a7433d}html[data-theme=dark] .uq-c small b.al{color:#f2a397}
 .uq-a{display:flex;gap:6px;margin-top:6px}.uq-a .b{flex:1;height:30px;font-size:12px}.uq-a .b.ok{background:#e3f0ea;color:#28744b;border-color:#9fd0b6}
@@ -354,6 +360,10 @@ html[data-theme=dark] .mc .ic{background:#183447!important}
 .tk{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c,#9babb6);border-radius:10px;padding:8px 9px;margin-bottom:7px;cursor:grab;font-size:12px}.tk b{display:block;font-size:12.5px}.tk small{display:block;color:var(--mut);margin-top:3px}
 .tk.Urgente{--c:#a7433d}.tk.Alta{--c:#c46a1f}.tk.Média{--c:#2d6fa8}.tk.Baixa{--c:#9babb6}.tk.done{opacity:.6}.tk .dl{color:var(--red);font-weight:800}
 dialog#dlg-pen{border:1px solid var(--line);border-radius:16px;padding:16px 18px;width:min(560px,94vw);background:var(--card);color:var(--ink)}dialog#dlg-pen::backdrop{background:rgba(8,20,28,.5)}
+.dlg-sit{border:1px solid var(--line);border-radius:16px;padding:16px 18px;width:min(460px,94vw);background:var(--card);color:var(--ink)}dialog.dlg-sit::backdrop{background:rgba(8,20,28,.5)}
+.dlg-sit form{display:grid;gap:9px}.dlg-sit h2{margin:0;font-size:16px}.dlg-sit .meta{margin:0;font-size:12.5px;color:var(--mut)}
+.dlg-sit label{display:grid;gap:4px;font-size:12px;font-weight:700;color:var(--mut)}.dlg-sit select{border:1px solid var(--line);border-radius:9px;background:var(--field);color:var(--ink);font:14px var(--font);padding:7px 8px}
+.dlg-sit .row2{display:flex;gap:8px;justify-content:flex-end;margin-top:2px}
 #f-pen{display:grid;gap:9px}#f-pen h2{margin:0 0 4px;font-size:16px}#f-pen label{display:grid;gap:3px;font-size:11px;font-weight:800;color:var(--mut)}#f-pen input,#f-pen select,#f-pen textarea{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:7px 9px;font-size:13px;color:var(--ink)}
 @media (max-width:980px){.board{grid-template-columns:1fr 1fr}}
 .lst{display:grid;gap:10px}
@@ -1387,7 +1397,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
 <aside class="drw wide" id="p-pen" hidden><div class="drw-h"><h2>Diligências</h2><button class="b pri" id="pen-novo">+ Nova diligência</button><button class="b" data-fecha>×</button></div>
   <div class="pen-f"><input type="search" id="pen-q" placeholder="Buscar…"><select id="pen-ow"></select><select id="pen-ur"><option value="">Todas as prioridades</option><option>Urgente</option><option>Alta</option><option>Média</option><option>Baixa</option></select><label class="ck"><input type="checkbox" id="pen-meu" checked> Só as minhas</label></div>
   <div class="pen-s" id="pen-s"></div><div class="board" id="board"></div></aside>
-<dialog id="dlg-pen"><form id="f-pen" method="dialog"><h2 id="dlg-pen-t">Nova diligência</h2>
+<dialog id="dlg-pen"><form id="f-pen" method="dialog"><h2 id="dlg-pen-t">Nova diligência</h2><p class="pen-or" id="pen-or" hidden></p>
   <label>Título<input name="title" required maxlength="200"></label><label>Descrição<textarea name="description" rows="3"></textarea></label>
   <div class="row2"><label>Responsável<select name="assignee"></select></label><label>Prioridade<select name="urgency"><option>Urgente</option><option>Alta</option><option selected>Média</option><option>Baixa</option></select></label></div>
   <div class="row2"><label>Prazo<input type="date" name="dueDate"></label><label>Etapa<select name="stage"><option value="todo">A fazer</option><option value="doing">Em andamento</option><option value="review">Em revisão</option><option value="done">Concluída</option></select></label></div>
@@ -2833,7 +2843,9 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-av-d
 /* ================= diligências: quadro A fazer · Em andamento · Em revisão · Concluída ================= */
 var PN={t:[],equipe:[],ed:null};
 var ETAPAS=[['todo','A fazer'],['doing','Em andamento'],['review','Em revisão'],['done','Concluída']],URK={Urgente:0,Alta:1,'Média':2,Baixa:3};
-function pendencias(){return api('/api/pendencias').then(function(j){PN.t=j.tasks||[];PN.equipe=j.equipe||[];quadro();}).catch(function(e){if(e.status!==401)$('#board').innerHTML='<p class="mut">Não foi possível carregar o quadro: '+esc(e.message)+'</p>';});}
+function pendencias(sync){var r=sync?api('/api/pendencias?sync=1',{method:'POST',body:'{}'}):api('/api/pendencias');
+  return r.then(function(j){PN.t=j.tasks||[];PN.equipe=j.equipe||[];if(j.travas)PN.travas=j.travas;quadro();})
+   .catch(function(e){if(sync&&e.status!==401)return pendencias(false);if(e.status!==401)$('#board').innerHTML='<p class="mut">Não foi possível carregar o quadro: '+esc(e.message)+'</p>';});}
 function quadro(){
   var eu=nq(U.eu),abertas=PN.t.filter(function(t){return t.stage!=='done';}),minhas=abertas.filter(function(t){return nq(t.assignee)===eu;});
   var b=$('#c-pen');b.hidden=!minhas.length;b.textContent=minhas.length;
@@ -2845,25 +2857,48 @@ function quadro(){
   $('#pen-s').innerHTML='<span><b>'+abertas.length+'</b> em aberto</span><span><b>'+minhas.length+'</b> suas</span><span><b>'+abertas.filter(function(t){return /Urgente|Alta/.test(t.urgency);}).length+'</b> prioritárias</span><span><b>'+abertas.filter(function(t){return !t.assignee;}).length+'</b> sem responsável</span>';
   $('#board').innerHTML=ETAPAS.map(function(st){var L=F.filter(function(t){return (t.stage||'todo')===st[0];});
     return '<section class="lane" data-st="'+st[0]+'"><h3><span>'+st[1]+'</span><span>'+L.length+'</span></h3>'+L.map(function(t){var at=t.dueDate&&t.dueDate<h&&st[0]!=='done';
-      return '<article class="tk '+esc(t.urgency)+(st[0]==='done'?' done':'')+'" draggable="true" data-tk="'+esc(t.id)+'"><b>'+esc(t.title)+'</b><small>'+esc([t.urgency,t.assignee||'sem responsável'].join(' · '))+'</small>'+
-        (t.dueDate?'<small class="'+(at?'dl':'')+'">prazo '+br(t.dueDate)+(at?' · vencida':'')+'</small>':'')+(t.numero?'<small>'+esc(t.numero)+'</small>':'')+'</article>';}).join('')+'</section>';}).join('');
+      return '<article class="tk '+esc(t.urgency)+(st[0]==='done'?' done':'')+'" draggable="true" data-tk="'+esc(t.id)+'"><b>'+esc(t.title)+'</b>'+(t.origem?'<small class="tk-or">'+(t.origem==='intercor'?'Intercorrência da pauta':'Urgência da monocrática')+'</small>':'')+'<small>'+esc([t.urgency,t.assignee||'sem responsável'].join(' · '))+'</small>'+
+        (t.dueDate?'<small class="'+(at?'dl':'')+'">prazo '+br(t.dueDate)+(at?' · vencida':'')+'</small>':'')+(t.numero?'<small>'+esc(t.numero)+'</small>':'')+
+        '<label class="tk-mv"><span class="vh">Mover para</span><select data-mv="'+esc(t.id)+'" aria-label="Mover para">'+ETAPAS.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===st[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></label>'+'</article>';}).join('')+'</section>';}).join('');
 }
 ['#pen-q','#pen-ur','#pen-ow','#pen-meu'].forEach(function(id){$(id).addEventListener(id==='#pen-q'?'input':'change',quadro);});
-$('#b-pen').onclick=function(){if(abrePainel('#p-pen'))pendencias();};
+$('#b-pen').onclick=function(){if(abrePainel('#p-pen'))pendencias(true);};
 function salvarTk(dados){return api('/api/pendencias',{method:dados.id?'PUT':'POST',body:JSON.stringify(dados)}).then(function(){return pendencias();});}
 var arr=null;
 $('#board').addEventListener('dragstart',function(e){var t=e.target.closest('[data-tk]');if(!t)return;arr=t.getAttribute('data-tk');e.dataTransfer.effectAllowed='move';});
 $('#board').addEventListener('dragover',function(e){var l=e.target.closest('.lane');if(!l||!arr)return;e.preventDefault();Array.prototype.forEach.call(document.querySelectorAll('.lane.ov'),function(x){x.classList.remove('ov');});l.classList.add('ov');});
 $('#board').addEventListener('drop',function(e){var l=e.target.closest('.lane');if(!l||!arr)return;e.preventDefault();l.classList.remove('ov');var t=PN.t.filter(function(x){return x.id===arr;})[0];arr=null;
-  if(!t||t.stage===l.getAttribute('data-st'))return;var st=l.getAttribute('data-st');t.stage=st;quadro();salvarTk({id:t.id,_rev:t._rev,stage:st}).catch(function(x){toast(x.message);pendencias();});});
-$('#board').addEventListener('click',function(e){var t=e.target.closest('[data-tk]');if(!t)return;dlgPen(PN.t.filter(function(x){return x.id===t.getAttribute('data-tk');})[0]);});
+  if(!t||t.stage===l.getAttribute('data-st'))return;moverTk(t,l.getAttribute('data-st'));});
+/* cartão automático: concluir e reabrir escrevem na origem */
+function pedirSituacao(){return new Promise(function(ok){
+  var d=document.createElement('dialog');d.className='dlg-sit';
+  d.innerHTML='<form method="dialog"><h2>Como a urgência foi apreciada?</h2><p class="meta">A escolha vai para o campo Apreciação, na ficha do processo.</p>'+
+    '<label>Apreciação<select name="sit">'+['Apreciada · deferida','Apreciada · parcialmente deferida','Apreciada · indeferida','Apreciada · prejudicada','Apreciada · reconsiderada'].map(function(s){return '<option>'+s+'</option>';}).join('')+'</select></label>'+
+    '<div class="row2"><button class="b" value="">Cancelar</button><button class="b pri" value="ok">Concluir</button></div></form>';
+  document.body.appendChild(d);
+  d.addEventListener('close',function(){var v=d.returnValue==='ok'?d.querySelector('[name=sit]').value:'';d.remove();ok(v);});
+  d.showModal();});}
+function moverTk(t,st){
+  if(t.origem==='urgencia'&&t.stage==='done'&&st!=='done'&&(PN.travas||{})[t.origemChave]){toast('Para reabrir esta urgência, reabra antes a monocrática: ela já foi liberada ou assinada.');return;}
+  var pede=t.origem==='urgencia'&&st==='done';
+  (pede?pedirSituacao():Promise.resolve('')).then(function(sit){
+    if(pede&&!sit)return;
+    var ant=t.stage;t.stage=st;quadro();
+    var d={id:t.id,_rev:t._rev,stage:st};if(sit)d.situacao=sit;
+    salvarTk(d).catch(function(x){t.stage=ant;toast(x.message);pendencias(false);});});}
+$('#board').addEventListener('change',function(e){var s=e.target.closest('[data-mv]');if(!s)return;
+  var t=PN.t.filter(function(x){return x.id===s.getAttribute('data-mv');})[0];if(!t)return;
+  var st=s.value;if(st===t.stage)return;moverTk(t,st);});
+$('#board').addEventListener('click',function(e){if(e.target.closest('.tk-mv'))return;var t=e.target.closest('[data-tk]');if(!t)return;dlgPen(PN.t.filter(function(x){return x.id===t.getAttribute('data-tk');})[0]);});
 $('#pen-novo').onclick=function(){dlgPen(null);};
 function dlgPen(t){PN.ed=t;var f=$('#f-pen'),E=f.elements;f.reset();$('#pen-er').hidden=true;$('#dlg-pen-t').textContent=t?'Editar diligência':'Nova diligência';
   E.assignee.innerHTML='<option value="">Sem responsável</option>'+PN.equipe.map(function(n){return '<option>'+esc(n)+'</option>';}).join('');
   E.sessao.innerHTML='<option value="">Sem sessão</option>'+S.cal.map(function(s){return '<option value="'+esc(s.date)+'">'+esc(br(s.date))+'</option>';}).join('');
   ['title','description','assignee','urgency','dueDate','numero','sessao','stage'].forEach(function(k){if(t&&t[k]!=null)E[k].value=t[k];});
   if(!t){E.urgency.value='Média';E.stage.value='todo';E.assignee.value=PN.equipe.filter(function(n){return nq(n)===nq(U.eu);})[0]||'';}
-  $('#pen-del').hidden=!(t&&nq(t.creator)===nq(U.eu));$('#dlg-pen').showModal();E.title.focus();}
+  var or=$('#pen-or');or.hidden=!(t&&t.origem);
+ if(t&&t.origem)or.textContent=t.origem==='intercor'?'Cartão da intercorrência da pauta. O que você escrever na descrição vai para o campo Intercorrência; concluir marca a intercorrência como resolvida, sem apagar o texto.':'Cartão da urgência da monocrática. Concluir pede a apreciação e grava na ficha do processo.';
+ $('#pen-del').hidden=!(t&&!t.origem&&nq(t.creator)===nq(U.eu));$('#dlg-pen').showModal();E.title.focus();}
 $('#pen-x').onclick=function(){$('#dlg-pen').close();};
 $('#pen-del').onclick=function(){var t=PN.ed;if(!t)return;api('/api/pendencias?id='+encodeURIComponent(t.id),{method:'DELETE'}).then(function(){$('#dlg-pen').close();toast('Diligência excluída.');pendencias();}).catch(function(x){$('#pen-er').textContent=x.message;$('#pen-er').hidden=false;});};
 $('#f-pen').addEventListener('submit',function(e){e.preventDefault();var E=this.elements,d={};['title','description','assignee','urgency','dueDate','numero','sessao','stage'].forEach(function(k){d[k]=E[k].value;});

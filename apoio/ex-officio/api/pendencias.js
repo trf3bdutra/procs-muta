@@ -1,8 +1,83 @@
-/* Pendências da equipe (apoio/equipe-pendencias.json): quadro com A fazer, Em andamento, Em revisão e Concluída.
-   GET /api/pendencias · POST {title,…} cria · PUT {id,_rev,…} altera · DELETE ?id= exclui (só quem criou) */
+/* Diligências da equipe (apoio/equipe-pendencias.json): quadro com A fazer, Em andamento, Em revisão e Concluída.
+   GET /api/pendencias · POST {title,…} cria · PUT {id,_rev,…} altera · DELETE ?id= exclui (só quem criou)
+   POST /api/pendencias?sync=1   acerta os cartões automáticos com as suas origens (ver abaixo)
+
+   Cartão automático: nasce de uma origem e guarda o vínculo em origem e origemChave, para nunca duplicar.
+     intercorrência da pauta  int:<data da sessão>:<CNJ>   enquanto ctl.intercor tem texto e ctl.intercorOk está vazio
+     urgência da monocrática  urg:<CNJ>                    enquanto a urgência não foi apreciada e a decisão não saiu
+   Concluir o cartão resolve a origem (a intercorrência fica marcada como resolvida, com o texto preservado;
+   a urgência recebe a apreciação informada). Reabrir desfaz, salvo urgência de monocrática já liberada ou assinada.
+   Editar a descrição de um cartão de intercorrência reescreve o campo Intercorrência da pauta. */
 const L = require('./_lib');
+const FICHA = require('./_ficha');
+const dg = s => String(s || '').replace(/\D/g, '');
+const hojeISO = () => new Date().toISOString().slice(0, 10);
 const ARQ = 'apoio/equipe-pendencias.json', STAGES = ['todo', 'doing', 'review', 'done'], URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
 const CAMPOS = ['title', 'description', 'assignee', 'urgency', 'dueDate', 'numero', 'sessao', 'stage'];
+const APRECIADA = /^Apreciada · /;
+/* origens automáticas abertas agora, e as urgências travadas (decisão já liberada ou assinada) */
+async function origens() {
+  const abertas = new Map(), travas = {};
+  const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
+  const pubs = (cal.sessoes || []).filter(s => s.publicada);
+  const docs = await Promise.all(pubs.map(s => L.lerJson('acervo/sessoes/' + s.date + '.json').then(x => x.dados).catch(() => null)));
+  pubs.forEach((s, i) => {
+    const d = docs[i]; if (!d) return;
+    const lista = (d.itens || []).length ? d.itens : (d.previa || []);
+    lista.forEach(it => {
+      const c = it.ctl || {}, txt = String(c.intercor || '').trim();
+      if (!txt || String(c.intercorOk || '').trim() || dg(it.cnj).length !== 20) return;
+      abertas.set('int:' + s.date + ':' + dg(it.cnj), { origem: 'intercor', origemChave: 'int:' + s.date + ':' + dg(it.cnj),
+        title: ('Intercorrência · ' + (it.cnj || '') + (it.item ? ' · item ' + it.item : '')).slice(0, 200),
+        description: txt.slice(0, 2000), assignee: String(it.servidor || ''), urgency: 'Alta', dueDate: '', numero: String(it.cnj || ''), sessao: s.date });
+    });
+  });
+  try {
+    const { doc } = await FICHA.lerOpLeitura();
+    (doc.registros || []).forEach(r => {
+      const t = r.triagem || {}, p = r.producao || {}, pedido = String(t['Urgência'] || '').trim();
+      if (!pedido || dg(r.processo).length !== 20) return;
+      const chave = 'urg:' + dg(r.processo);
+      const saiu = p.Assinado === 'Sim' || !!p['Data da Assinatura'] || !!p['Data da Liberação'];
+      if (saiu) { travas[chave] = true; return; }
+      if (APRECIADA.test(String(t['Urgência - Apreciação'] || ''))) return;
+      abertas.set(chave, { origem: 'urgencia', origemChave: chave,
+        title: ('Urgência · ' + pedido + ' · ' + (r.processo || '')).slice(0, 200),
+        description: [String(t['Urgência - Nível'] || ''), String(t['Urgência - Observação'] || '')].filter(Boolean).join(' · ').slice(0, 2000),
+        assignee: String(p.SERVIDOR || ''), urgency: 'Urgente', dueDate: '', numero: String(r.processo || ''), sessao: '' });
+    });
+  } catch (e) { /* sem ficha legível, só as intercorrências */ }
+  return { abertas, travas };
+}
+/* escreve na origem o que o cartão passou a dizer */
+async function naOrigem(alvo, b, u, done, descNova) {
+  if (alvo.origem === 'intercor') {
+    const parte = String(alvo.origemChave || '').split(':'), data = parte[1], cnj = parte[2];
+    const campos = {};
+    if (done !== null) campos.intercorOk = done ? hojeISO() : '';
+    if (descNova != null) campos.intercor = descNova;
+    if (!Object.keys(campos).length) return;
+    const r = await require('./pauta').gravarItem(data, { cnj, campos }, u, L.gestor(u));
+    if (r.status >= 400) { const e = new Error((r.body || {}).erro || 'não foi possível gravar na pauta'); e.status = r.status; throw e; }
+    return;
+  }
+  if (alvo.origem === 'urgencia') {
+    if (done === null) return;
+    const cnj = String(alvo.origemChave || '').slice(4);
+    if (done) {
+      const sit = String((b || {}).situacao || '').trim();
+      if (!APRECIADA.test(sit)) { const e = new Error('Informe como a urgência foi apreciada.'); e.status = 400; e.situacao = true; throw e; }
+      await require('./_mono').gravarMono(cnj, { urgSit: sit }, u, L.gestor(u));
+      return;
+    }
+    const { doc } = await FICHA.lerOpLeitura();
+    const r = (doc.registros || []).find(x => dg(x.processo) === dg(cnj)) || {}, p = r.producao || {};
+    if (p.Assinado === 'Sim' || p['Data da Assinatura'] || p['Data da Liberação']) {
+      const e = new Error('Para reabrir esta urgência, reabra antes a monocrática: ela já foi liberada ou assinada.'); e.status = 409; throw e;
+    }
+    await require('./_mono').gravarMono(cnj, { urgSit: 'Pendente · não apreciada' }, u, L.gestor(u));
+  }
+}
 async function ler() { try { return await L.lerJson(ARQ); } catch (e) { if (e.status === 404) return { dados: { schema: 'gabcmt.equipe.pendencias', versao: 1, registros: [] }, sha: undefined }; throw e; } }
 function limpar(b, t) {
   CAMPOS.forEach(k => { if (k in b) t[k] = String(b[k] == null ? '' : b[k]).slice(0, k === 'description' ? 2000 : 200).trim(); });
@@ -15,6 +90,37 @@ module.exports = async (req, res) => {
   const u = L.exigir(req, res); if (!u) return;
   try {
     if (req.method === 'GET') { const { dados } = await ler(); return res.status(200).json({ tasks: (dados.registros || []).filter(t => !t.excluida), equipe: L.equipe() }); }
+    /* acerto dos cartões automáticos com as origens: cria o que falta, atualiza o texto, conclui o que a origem já resolveu */
+    if (req.method === 'POST' && req.query.sync) {
+      const { abertas, travas } = await origens();
+      for (let n = 0; n < 4; n++) {
+        const { dados, sha } = await ler(); dados.registros = dados.registros || [];
+        const agora = new Date().toISOString(), mud = [];
+        const por = new Map(); dados.registros.filter(t => !t.excluida && t.origemChave).forEach(t => por.set(t.origemChave, t));
+        abertas.forEach((novo, chave) => {
+          const t = por.get(chave);
+          if (!t) {
+            dados.registros.push(Object.assign({ id: 'pen-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+              creator: '', criadoEm: agora, _rev: 1, atualizadoEm: agora, atualizadoPor: '' }, novo, { stage: 'todo' }));
+            mud.push('nova diligência de ' + chave); return;
+          }
+          let m = false;
+          if (t.title !== novo.title || t.description !== novo.description) { t.title = novo.title; t.description = novo.description; m = true; }
+          if (t.stage === 'done') { t.stage = 'todo'; delete t.concluidaEm; m = true; mud.push('reaberta ' + chave); }
+          if (m) { t._rev = Number(t._rev || 0) + 1; t.atualizadoEm = agora; }
+        });
+        por.forEach((t, chave) => {
+          if (abertas.has(chave) || t.stage === 'done') return;
+          t.stage = 'done'; t.concluidaEm = agora; t._rev = Number(t._rev || 0) + 1; t.atualizadoEm = agora; mud.push('concluída ' + chave);
+        });
+        const corpo = () => ({ tasks: dados.registros.filter(t => !t.excluida), equipe: L.equipe(), travas, acertos: mud.length });
+        if (!mud.length) return res.status(200).json(corpo());
+        dados.atualizadoEm = agora;
+        try { await L.gravarJson(ARQ, dados, sha, 'Diligências automáticas: ' + mud.slice(0, 4).join('; ')); return res.status(200).json(corpo()); }
+        catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+      }
+      return res.status(409).json({ erro: 'O quadro mudou várias vezes seguidas; tente de novo.' });
+    }
     for (let n = 0; n < 4; n++) {
       const { dados, sha } = await ler(); dados.registros = dados.registros || []; const agora = new Date().toISOString(); let msg, alvo;
       if (req.method === 'POST') {
@@ -25,7 +131,17 @@ module.exports = async (req, res) => {
         const b = req.body || {}; alvo = dados.registros.find(t => t.id === b.id && !t.excluida);
         if (!alvo) return res.status(404).json({ erro: 'diligência não encontrada' });
         if (b._rev != null && Number(b._rev) !== Number(alvo._rev || 0)) return res.status(409).json({ erro: 'Outra pessoa alterou esta diligência. Atualize o quadro.', task: alvo });
-        limpar(b, alvo); alvo._rev = Number(alvo._rev || 0) + 1; alvo.atualizadoEm = agora; alvo.atualizadoPor = u;
+        const etapaAntes = alvo.stage, descAntes = alvo.description;
+        limpar(b, alvo);
+        if (alvo.origem) {
+          const mudouEtapa = alvo.stage !== etapaAntes && (alvo.stage === 'done' || etapaAntes === 'done');
+          const descNova = alvo.description !== descAntes ? alvo.description : null;
+          if (mudouEtapa || descNova != null) {
+            try { await naOrigem(alvo, b, u, mudouEtapa ? alvo.stage === 'done' : null, descNova); }
+            catch (x) { return res.status(x.status || 500).json({ erro: x.message, situacao: !!x.situacao, task: alvo }); }
+          }
+        }
+        alvo._rev = Number(alvo._rev || 0) + 1; alvo.atualizadoEm = agora; alvo.atualizadoPor = u;
         if (alvo.stage === 'done' && !alvo.concluidaEm) alvo.concluidaEm = agora; if (alvo.stage !== 'done') delete alvo.concluidaEm;
         msg = 'Diligência atualizada por ' + u + ': ' + alvo.title;
       } else if (req.method === 'DELETE') {
