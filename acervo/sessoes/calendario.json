@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.calendario-sessoes",
  "versao": 1,
- "atualizadoEm": "2026-11-15T15:00:00Z",
+ "atualizadoEm": "2026-11-16T00:05:02.237Z",
  "sessoes": [
   {
    "nome": "27/04/2026",
@@ -21,7 +21,8 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": false
   },
   {
    "nome": "14/09/2026",
@@ -41,7 +42,8 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": false
   },
   {
    "nome": "25/09/2026",
@@ -61,7 +63,8 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": false
   },
   {
    "nome": "05/10/2026",
@@ -81,7 +84,8 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": false
   },
   {
    "nome": "26/10/2026",
@@ -101,7 +105,8 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": false
   },
   {
    "nome": "13/11/2026",
@@ -121,7 +126,8 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": false
   },
   {
    "nome": "30/11/2026",
@@ -141,14 +147,15 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": true
+   "publicada": true,
+   "marcosPublicados": true
   },
   {
    "nome": "07/12/2026",
    "date": "2026-12-07",
-   "hora": "",
+   "hora": "14:00",
    "numeroPje": "",
-   "arquivo": "",
+   "arquivo": "resumo 07 dezcecaaed5-5f06-40f8-93a6-29c59e832ebc.pdf",
    "planilha": "",
    "gabinete": "Gab. A da Turma Regional de Mato Grosso do Sul",
    "marcos": {
@@ -157,11 +164,12 @@
     "entregaMinutas": "",
     "liberacao": ""
    },
-   "processos": 0,
+   "processos": 192,
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": true
   },
   {
    "nome": "15/12/2026",
@@ -181,7 +189,8 @@
    "previa": 0,
    "cor": "",
    "excluidosPre": [],
-   "publicada": false
+   "publicada": false,
+   "marcosPublicados": false
   }
  ],
  "expediente": {
@@ -194,6 +203,8 @@
   ],
   "semExpediente": [],
   "nomes": {},
+  "tipos": {},
+  "semPrazo": [],
   "recesso": [
    "2026-12-20",
    "2027-01-20"
