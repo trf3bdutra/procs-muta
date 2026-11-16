@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
     let n = 0;
     for (const c of Object.keys(C)) {
       const A = ARQ[c]; if (!A || !Array.isArray(C[c]) || !C[c].length) continue;
-      const { txt } = await L.lerGrande(A.path), doc = JSON.parse(txt), L0 = A.lista(doc);
+      const { txt, sha } = await L.lerGrande(A.path), doc = JSON.parse(txt), L0 = A.lista(doc);
       for (const op of C[c]) {
         const i = L0.findIndex(r => r.id === op.id), cur = i >= 0 ? L0[i] : null;
         if (op.orig === '__novo__') { if (cur) { conflitos.push(c + ':' + op.id + ' já existe'); continue; } }
@@ -36,7 +36,8 @@ module.exports = async (req, res) => {
         n++;
       }
       if (!A.sem && 'atualizadoEm' in doc) doc.atualizadoEm = String(doc.atualizadoEm).length === 10 ? agora().slice(0, 10) : agora();
-      arqs.push({ path: A.path, txt: JSON.stringify(doc, null, A.ind) + '\n' });
+      /* sha do que foi lido: se o arquivo mudar no GitHub antes do commit, a gravação é recusada (409) em vez de sobrescrever */
+      arqs.push({ path: A.path, txt: JSON.stringify(doc, null, A.ind) + '\n', sha });
     }
     if (conflitos.length) return res.status(409).json({ erro: 'Conflito com o que está no GitHub: ' + conflitos.slice(0, 8).join('; ') + '. Recarregue o editor e refaça essas alterações.', conflitos });
     if (!arqs.length || !n) return res.status(400).json({ erro: 'Nada a gravar.' });

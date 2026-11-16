@@ -41,7 +41,12 @@ async function responder(id, texto, u, manter) {
   }
   throw Object.assign(new Error('O quadro mudou várias vezes seguidas; tente de novo.'), { status: 409 });
 }
+/* toda a resposta passa por aqui: erro de leitura vira 500 com mensagem, nunca queda da função */
 module.exports = async (req, res, u) => {
+  try { await painel(req, res, u); }
+  catch (e) { if (!res.headersSent) res.status(e.status || 500).json({ erro: e.message }); }
+};
+async function painel(req, res, u) {
   res.setHeader('Cache-Control', 'no-store');
   const a = await L.acessos(u);
   if (a.perfil !== 'desembargador' && !L.gestor(u)) return res.status(403).json({ erro: 'Painel restrito ao desembargador.' });
@@ -54,7 +59,8 @@ module.exports = async (req, res, u) => {
     try {
       if (b.acao === 'liberar') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
-        await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, u, true);
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, u, true);
+        if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, dataLiberacao: b.desfazer ? '' : hj });
       }
       if (b.acao === 'assinar') {
@@ -158,7 +164,7 @@ module.exports = async (req, res, u) => {
       resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, meta: c.meta || '', obs: it.obs || '' };
   }) };
   /* marcos vencendo: até 7 dias à frente, ou já vencidos, nas sessões visíveis à equipe */
-  const NOMES = { pautarAte: 'Pautar até', inicioPreparacao: 'Início da preparação', entregaMinutas: 'Entrega das minutas', liberacao: 'Liberação' };
+  const NOMES = { pautarAte: 'Peço dia', inicioPreparacao: 'Início da preparação', entregaMinutas: 'Entrega das minutas', liberacao: 'Liberação' };
   todas.forEach(s => Object.keys(NOMES).forEach(k => {
     const d = (s.marcos || {})[k]; if (!L.dataOk(d)) return;
     const n = dias(d, hj); if (n > 7) return;
@@ -173,5 +179,5 @@ module.exports = async (req, res, u) => {
   res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, comunicados, urgencias, sessoes, agenda, pauta, prazos, producao,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
-};
+}
 module.exports.br = br;
