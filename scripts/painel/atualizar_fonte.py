@@ -8,7 +8,7 @@ Uso:
 
 Papéis das planilhas:
   principal     lista dos em andamento (PJe com a coluna Tarefa). Define quem está na fonte e onde está: entra quem
-                aparece, sai quem não aparece. Colunas de origem refeitas do zero.
+                aparece, sai quem não aparece. Cada planilha só refaz as próprias colunas, quando vem na carga.
   complementar  mais informações: Power BI (tramitação), sigilosos ou outra planilha com número do processo. Só preenche
                 quem já está na fonte; Power BI e sigilosos refazem as suas colunas e as marcas Consta_Acervo_*.
   tarefa        lista de uma tarefa do PJe. Atualiza o paradeiro de quem veio nela (e acrescenta quem faltava); quem estava
@@ -80,6 +80,8 @@ ALIAS = {"Tarefa": "tarefa_atual", "Tarefa Atual": "tarefa_atual", "tarefa atual
          "Data de Chegada": "data_entrada_tarefa", "Data Entrada Tarefa": "data_entrada_tarefa",
          "Classe Judicial": "classe_judicial", "Assunto Judicial": "assunto_judicial", "Etiquetas": "Etiquetas",
          "Polo Ativo": "polo_ativo", "Polo Passivo": "polo_passivo", "Prioridade": "prioridade"}
+LEGADO = {"fora_pje", "DAT_FIM", "NUM_CPF_MAGIST", "SIN_PRAZO_LEGAL", "SIN_SECRETARIA", "SIN_CONTADORIA", "SIN_REM_EXTERNA",
+          "SIN_UFOR", "BASE", "K_TEMPO", "SIN_PEND_1JULG", "SIN_CLS", "DES_ULTIMA_MOVIME_SIGILO"}
 PARADEIRO = ("tarefa_atual", "data_entrada_tarefa", "tarefa_anterior", "saiu_da_tarefa_em", "paradeiro_em")
 
 
@@ -221,8 +223,9 @@ def main():
     for d in membros:
         velho = antigos.get(d)
         r = dict(velho or {})
-        if principais:                                         # carga completa: colunas de origem refeitas do zero
-            r = {k: v for k, v in r.items() if k not in REFEITAS or k in PARADEIRO}
+        # colunas sem planilha de origem (exportações antigas do BI) saem; as demais só mudam quando a planilha
+        # daquele tipo vem na carga (PJe: tarefa e etiquetas; Power BI e sigilosos: as suas colunas e a marca Consta_Acervo_*)
+        r = {k: v for k, v in r.items() if k not in LEGADO}
         if not r:
             x0 = next(x["regs"][d] for x in arqs if d in x["regs"])
             r = {"id": "acv-" + d, "processo": x0.get("Número do Processo") or x0.get("Processo") or x0.get("processo")}

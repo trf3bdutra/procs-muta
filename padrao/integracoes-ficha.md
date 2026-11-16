@@ -146,7 +146,7 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
 | Status de julgamento | `Status de Julgamento` | lista | operacional · `pauta` | 0 de 4.725 | PAUTADO / EM MESA / ADIADO / RETIRADO DE PAUTA; status da entrada de pauta (_pautaEntries) ou campo |
-| Pendente de 1º julgamento | `Pendente de 1º julgamento` | regra · calculado | fonte · `Pendente_1Julgamento` | 4.178 de 5.820 | do BI (Pendente_1Julgamento) |
+| Pendente de 1º julgamento | `Pendente de 1º julgamento` | regra · calculado | fonte · `Pendente_1Julgamento` | 2.683 de 2.788 | do BI (Pendente_1Julgamento) |
 | Sessão original | `Sessão original` | regra · calculado | operacional · `pauta` | 1.008 de 4.725 | data dd/mm/aaaa |
 | Item | `Item (Pauta de Julgamento)` | regra · calculado | operacional · `pauta` | 0 de 4.725 | item da entrada de pauta da sessão selecionada |
 | Sessão de destino | `Nova sessão de destino` | regra · calculado | operacional · `pauta` | 175 de 4.725 | antes "Sessão Destino" |
@@ -199,32 +199,59 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
-| Classe | `classe_judicial` | importado · só leitura | fonte · `classe_judicial · Classe · DataJud · Classe` | 5.566 de 5.820 |  |
-| Assunto CNJ | `Assunto` | importado · só leitura | fonte · `Assunto` | 5.566 de 5.820 |  |
-| Seção competente | `Seção` | regra · calculado | fonte · `Seção Competente` | 5.305 de 5.820 | regra secaoCompetente do app, senão Seção Competente |
-| Distribuição | `data_distribuição` | importado · só leitura | fonte · `data_distribuição` | 5.566 de 5.820 |  |
+| Classe | `classe_judicial` | importado · só leitura | fonte · `classe_judicial ou Classe ou DataJud · Classe` | 2.788 de 2.788 |  |
+| Assunto CNJ | `Assunto` | importado · só leitura | fonte · `Assunto` | 2.788 de 2.788 |  |
+| Seção competente | `Seção` | regra · calculado | fonte · `Seção Competente` | 2.553 de 2.788 | regra secaoCompetente do app, senão Seção Competente |
+| Distribuição | `data_distribuição` | importado · só leitura | fonte · `data_distribuição` | 2.788 de 2.788 |  |
 | Relator | `Relator` | importado · só leitura | — (sem coluna na base) | — |  |
-| Etiquetas do PJe | `_etq` | importado · só leitura | fonte · `Etiquetas Originais` | 5.263 de 5.820 |  |
+| Etiquetas do PJe | `_etq` | importado · só leitura | fonte · `Etiquetas Originais` | 2.658 de 2.788 |  |
+| Assuntos do processo (códigos CNJ) | `Assuntos_do_Processo` | importado · só leitura | fonte · `Assuntos_do_Processo` | 2.683 de 2.788 | do Power BI |
+| Seção de origem | `Seção de Origem` | importado · só leitura | fonte · `Seção de Origem` | 2.683 de 2.788 | do Power BI |
+| Valor da causa | `valor_causa` | importado · só leitura | fonte · `valor_causa ou Valor_da_Causa` | 2.762 de 2.788 |  |
+| Distribuição no 1º grau | `dt_distribuicao_1g` | data · importado · só leitura | fonte · `dt_distribuicao_1g` | 2.016 de 2.788 |  |
+| Prioridade | `prioridade` | importado · só leitura | fonte · `prioridade` | 2.788 de 2.788 | do PJe |
+| Nível de sigilo | `Nível_Sigilo` | importado · só leitura | fonte · `Nível_Sigilo` | 58 de 2.788 | do Power BI (sigilosos) |
 
 **Partes**
 
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
-| Polo ativo | `Polo Ativo` | importado · só leitura | fonte · `polo_ativo` | 5.459 de 5.820 |  |
-| Polo passivo | `Polo Passivo` | importado · só leitura | fonte · `polo_passivo` | 5.459 de 5.820 |  |
+| Polo ativo | `Polo Ativo` | importado · só leitura | fonte · `polo_ativo` | 2.788 de 2.788 |  |
+| Polo passivo | `Polo Passivo` | importado · só leitura | fonte · `polo_passivo` | 2.788 de 2.788 |  |
+| Advogado do polo ativo | `advogado_pa` | importado · só leitura | fonte · `advogado_pa` | 1.973 de 2.788 |  |
+| Advogado do polo passivo | `advogado_pp` | importado · só leitura | fonte · `advogado_pp` | 1.157 de 2.788 |  |
+| DPU | `dpu` | importado · só leitura | fonte · `dpu` | 70 de 2.788 |  |
+| MPF | `mpf` | importado · só leitura | fonte · `mpf` | 3 de 2.788 |  |
 | Partes (texto da pauta) | `Partes` | importado · só leitura | — (sem coluna na base) | — |  |
 
 **Tramitação**
 
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
-| Tarefa atual | `tarefa_atual` | importado · só leitura | fonte · `tarefa_atual` | 5.557 de 5.820 |  |
+| Tarefa atual | `tarefa_atual` | importado · só leitura | fonte · `tarefa_atual` | 2.788 de 2.788 | paradeiro no PJe |
+| Na tarefa desde | `data_entrada_tarefa` | data · importado · só leitura | fonte · `data_entrada_tarefa` | 2.788 de 2.788 | data de chegada na tarefa |
+| Paradeiro conferido em | `paradeiro_em` | data · importado · só leitura | fonte · `paradeiro_em` | 2.788 de 2.788 | data da carga que confirmou a tarefa |
+| Tarefa anterior | `tarefa_anterior` | importado · só leitura | fonte · `tarefa_anterior` | 0 de 2.788 | quando saiu de uma tarefa sem entrar em outra conhecida |
+| Saiu da tarefa em | `saiu_da_tarefa_em` | data · importado · só leitura | fonte · `saiu_da_tarefa_em` | 0 de 2.788 |  |
+| Última movimentação | `Última_Movimentação` | importado · só leitura | fonte · `Última_Movimentação ou ultimo_movimento` | 2.788 de 2.788 | do Power BI |
+| Data da última movimentação | `Data_Última_Movimentação` | data · importado · só leitura | fonte · `Data_Última_Movimentação` | 2.683 de 2.788 |  |
+| Tempo de tramitação (dias) | `Tempo_de_Tramitação` | importado · só leitura | fonte · `Tempo_de_Tramitação` | 2.683 de 2.788 | do Power BI |
+| Concluso | `Conclusão?` | importado · só leitura | fonte · `Conclusão?` | 2.683 de 2.788 | do Power BI |
+| Data da conclusão | `Data_Conclusão` | data · importado · só leitura | fonte · `Data_Conclusão` | 2.509 de 2.788 |  |
+| Fase | `Fase` | importado · só leitura | fonte · `Fase` | 120 de 2.788 | do Power BI (sobrestamentos) |
+| Complemento da fase | `Complemento` | importado · só leitura | fonte · `Complemento` | 91 de 2.788 |  |
+| Data da fase | `Data_Fase` | data · importado · só leitura | fonte · `Data_Fase` | 120 de 2.788 |  |
+| Indicador (Power BI) | `Indicador` | importado · só leitura | fonte · `Indicador` | 2.683 de 2.788 | tramitação líquida ou sobrestados |
+| DataJud · último movimento | `DataJud · Último movimento` | importado · só leitura | fonte · `DataJud · Último movimento` | 0 de 2.788 |  |
+| DataJud · data do movimento | `DataJud · Data movimento` | data · importado · só leitura | fonte · `DataJud · Data movimento` | 0 de 2.788 |  |
+| DataJud · situação | `DataJud · Situação` | importado · só leitura | fonte · `DataJud · Situação` | 0 de 2.788 |  |
+| DataJud · última coleta | `DataJud · Última coleta` | data · importado · só leitura | fonte · `DataJud · Última coleta` | 0 de 2.788 |  |
 | Situação na pauta | `Situação da Pauta` | importado · só leitura | — (sem coluna na base) | — |  |
 | Sessão na planilha | `Sessão atual (Excel)` | importado · só leitura | — (sem coluna na base) | — |  |
 
 ### Fora das abas
 
-- `Destino` (operacional · `producao`): escolhido no seletor da última etapa do fluxo. Vazio = Sessão (Pautado, Minutado, Corrigido, Liberado, Sessão); "Monocrática" = Minutado, Corrigido, Assinado, Monocrática.
+- `Destino` (operacional · `producao`): "Sessão" ou "Monocrática", gravado pela triagem ao confirmar o destino (ou no seletor da última etapa do fluxo). Vazio = a definir na triagem; o fluxo mostrado é o da sessão até a confirmação. "Sessão" = Pautado, Minutado, Corrigido, Liberado, Sessão; "Monocrática" = Minutado, Corrigido, Assinado, Monocrática.
 - Estado técnico do Painel, preservado:
 
 `_pautaEntries` (entradas por sessão), `_pautaHistory`, `_recursos`, `_contras`, `_ementa`, `_autoMetaTags`, `_preparoAJG`, `_ajgFromDpu`, `_dpuAuto`, `_autoRestriction`, `_magistradoRestricao`, `_restricaoTipo`: vêm do Painel Central e ficam nas seções do operacional, sem exibição direta.

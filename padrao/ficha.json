@@ -330,8 +330,7 @@
        "fonte": [
         "classe_judicial",
         "Classe",
-        "DataJud",
-        "Classe"
+        "DataJud · Classe"
        ],
        "editavel": false
       },
@@ -377,6 +376,65 @@
         "Etiquetas Originais"
        ],
        "editavel": false
+      },
+      {
+       "rotulo": "Assuntos do processo (códigos CNJ)",
+       "chave": "Assuntos_do_Processo",
+       "tipo": "texto",
+       "fonte": [
+        "Assuntos_do_Processo"
+       ],
+       "editavel": false,
+       "regra": "do Power BI"
+      },
+      {
+       "rotulo": "Seção de origem",
+       "chave": "Seção de Origem",
+       "tipo": "texto",
+       "fonte": [
+        "Seção de Origem"
+       ],
+       "editavel": false,
+       "regra": "do Power BI"
+      },
+      {
+       "rotulo": "Valor da causa",
+       "chave": "valor_causa",
+       "tipo": "texto",
+       "fonte": [
+        "valor_causa",
+        "Valor_da_Causa"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Distribuição no 1º grau",
+       "chave": "dt_distribuicao_1g",
+       "tipo": "data",
+       "fonte": [
+        "dt_distribuicao_1g"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Prioridade",
+       "chave": "prioridade",
+       "tipo": "texto",
+       "fonte": [
+        "prioridade"
+       ],
+       "editavel": false,
+       "regra": "do PJe"
+      },
+      {
+       "rotulo": "Nível de sigilo",
+       "chave": "Nível_Sigilo",
+       "tipo": "texto",
+       "fonte": [
+        "Nível_Sigilo"
+       ],
+       "editavel": false,
+       "regra": "do Power BI (sigilosos)"
       }
      ]
     },
@@ -402,6 +460,42 @@
        "editavel": false
       },
       {
+       "rotulo": "Advogado do polo ativo",
+       "chave": "advogado_pa",
+       "tipo": "texto",
+       "fonte": [
+        "advogado_pa"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Advogado do polo passivo",
+       "chave": "advogado_pp",
+       "tipo": "texto",
+       "fonte": [
+        "advogado_pp"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "DPU",
+       "chave": "dpu",
+       "tipo": "texto",
+       "fonte": [
+        "dpu"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "MPF",
+       "chave": "mpf",
+       "tipo": "texto",
+       "fonte": [
+        "mpf"
+       ],
+       "editavel": false
+      },
+      {
        "rotulo": "Partes (texto da pauta)",
        "chave": "Partes",
        "tipo": "texto",
@@ -418,6 +512,173 @@
        "tipo": "texto",
        "fonte": [
         "tarefa_atual"
+       ],
+       "editavel": false,
+       "regra": "paradeiro no PJe"
+      },
+      {
+       "rotulo": "Na tarefa desde",
+       "chave": "data_entrada_tarefa",
+       "tipo": "data",
+       "fonte": [
+        "data_entrada_tarefa"
+       ],
+       "editavel": false,
+       "regra": "data de chegada na tarefa"
+      },
+      {
+       "rotulo": "Paradeiro conferido em",
+       "chave": "paradeiro_em",
+       "tipo": "data",
+       "fonte": [
+        "paradeiro_em"
+       ],
+       "editavel": false,
+       "regra": "data da carga que confirmou a tarefa"
+      },
+      {
+       "rotulo": "Tarefa anterior",
+       "chave": "tarefa_anterior",
+       "tipo": "texto",
+       "fonte": [
+        "tarefa_anterior"
+       ],
+       "editavel": false,
+       "regra": "quando saiu de uma tarefa sem entrar em outra conhecida"
+      },
+      {
+       "rotulo": "Saiu da tarefa em",
+       "chave": "saiu_da_tarefa_em",
+       "tipo": "data",
+       "fonte": [
+        "saiu_da_tarefa_em"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Última movimentação",
+       "chave": "Última_Movimentação",
+       "tipo": "texto",
+       "fonte": [
+        "Última_Movimentação",
+        "ultimo_movimento"
+       ],
+       "editavel": false,
+       "regra": "do Power BI"
+      },
+      {
+       "rotulo": "Data da última movimentação",
+       "chave": "Data_Última_Movimentação",
+       "tipo": "data",
+       "fonte": [
+        "Data_Última_Movimentação"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Tempo de tramitação (dias)",
+       "chave": "Tempo_de_Tramitação",
+       "tipo": "texto",
+       "fonte": [
+        "Tempo_de_Tramitação"
+       ],
+       "editavel": false,
+       "regra": "do Power BI"
+      },
+      {
+       "rotulo": "Concluso",
+       "chave": "Conclusão?",
+       "tipo": "texto",
+       "fonte": [
+        "Conclusão?"
+       ],
+       "editavel": false,
+       "regra": "do Power BI"
+      },
+      {
+       "rotulo": "Data da conclusão",
+       "chave": "Data_Conclusão",
+       "tipo": "data",
+       "fonte": [
+        "Data_Conclusão"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Fase",
+       "chave": "Fase",
+       "tipo": "texto",
+       "fonte": [
+        "Fase"
+       ],
+       "editavel": false,
+       "regra": "do Power BI (sobrestamentos)"
+      },
+      {
+       "rotulo": "Complemento da fase",
+       "chave": "Complemento",
+       "tipo": "texto",
+       "fonte": [
+        "Complemento"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Data da fase",
+       "chave": "Data_Fase",
+       "tipo": "data",
+       "fonte": [
+        "Data_Fase"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "Indicador (Power BI)",
+       "chave": "Indicador",
+       "tipo": "texto",
+       "fonte": [
+        "Indicador"
+       ],
+       "editavel": false,
+       "regra": "tramitação líquida ou sobrestados"
+      },
+      {
+       "rotulo": "DataJud · último movimento",
+       "chave": "DataJud · Último movimento",
+       "tipo": "texto",
+       "fonte": [
+        "DataJud",
+        "Último movimento"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "DataJud · data do movimento",
+       "chave": "DataJud · Data movimento",
+       "tipo": "data",
+       "fonte": [
+        "DataJud",
+        "Data movimento"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "DataJud · situação",
+       "chave": "DataJud · Situação",
+       "tipo": "texto",
+       "fonte": [
+        "DataJud",
+        "Situação"
+       ],
+       "editavel": false
+      },
+      {
+       "rotulo": "DataJud · última coleta",
+       "chave": "DataJud · Última coleta",
+       "tipo": "data",
+       "fonte": [
+        "DataJud",
+        "Última coleta"
        ],
        "editavel": false
       },

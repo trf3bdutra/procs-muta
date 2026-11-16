@@ -37,7 +37,8 @@ for l in corpo.splitlines():
     if secao:
         campo['secao'] = secao
     if ft:
-        campo['fonte'] = [x.strip() for x in ft.group(1).split('·')]
+        fs = ft.group(1)  # colunas alternativas separadas por " ou " (nomes como "DataJud · Classe" têm ·); forma antiga: ·
+        campo['fonte'] = [x.strip() for x in (re.split(r'\s+ou\s+', fs) if ' ou ' in fs else fs.split('·'))]
     if leitura or not secao:
         campo['editavel'] = False
     elif calc:
