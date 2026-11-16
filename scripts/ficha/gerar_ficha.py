@@ -181,7 +181,10 @@ for a in abas:
             C('Tutela na sentença', 'Sentença - Tutela', 'lista', 'origem', ['Concedida', 'Negada', 'Revogada', 'Não'])])
         i = a['grupos'].index(grupo(a, 'Sentença'))
         a['grupos'].insert(i + 1, {'grupo': 'Origem', 'campos': [C('Juízo de origem', 'Origem - Juízo', 'texto', 'origem'), C('Julgador(a) de origem', 'Origem - Julgador', 'texto', 'origem'),
-            C('Valor da causa', 'Origem - Valor da causa', 'texto', 'origem')]})
+            C('Valor da causa', 'Origem - Valor da causa', 'texto', 'origem'),
+            C('Processo de referência', 'Origem - Processo de referência', 'texto', 'origem', editavel=False, regra='Processo_Referencia do relatório 151 do PJe; no agravo de instrumento, o processo de 1º grau'),
+            dict(T('Documentos do 1º grau', 'Origem - Documentos 1G', 'origem', [('data', 'Data', 'data'), ('documento', 'Documento', 'texto'), ('magistrado', 'Magistrado(a)', 'texto')]), editavel=False,
+                 regra='data_doc_1g, documento_1g e magistrado_1g do relatório 151 do PJe (uma linha por documento)')]})
         mais(grupo(a, 'Recursos e contrarrazões'), [
             T('Recursos', 'Recursos', 'origem', [('parte', 'Parte', 'texto'), ('ids', 'IDs', 'texto'), ('data', 'Data', 'data'), ('preliminares', 'Preliminares', 'texto-longo'),
                 ('teses', 'Teses / alegações', 'texto-longo'), ('pedidos', 'Pedidos', 'texto-longo'), ('merito', 'Mérito', 'texto-longo')]),

@@ -16,6 +16,13 @@ Esta é uma refatoração do `cmt-monitor.html` fornecido (15/11/2026), sem troc
 - Equipe: cadastro, papéis, preferências, histórico, designação, ausências, solicitações e avisos.
 - Integrações: `trf3bdutra/procs-muta`, arquivos `acervo/`, `apoio/`, `padrao/`, sessão/monocrática e ficha única.
 
+## Pautas: esteira da sessão
+
+- A aba Pautas abre a sessão escolhida na esteira de 5 etapas (`assets/js/87-esteira-pautas.js` e `assets/css/87-esteira-pautas.css`): seleção prévia, pauta oficial, preparar (A · regras de etiquetas, B · designação e correção), publicar (com a conferência final da pauta contra o acervo fonte) e painel da sessão.
+- No topo: título da sessão, julgadores (`apoio/magistrados.json`), quadro de marcos e os botões Exportar (planilha de controle .xlsx, pauta simplificada .doc ou PDF, lista .txt, estatísticas .csv, copiar a lista) e Configurações (regras, calendário, produtividade, sessão e equipe).
+- A Equipe deixou de ser aba própria: fica nas Configurações, com atalho para o cadastro completo.
+- As ações que gravam usam os comandos que já existiam (importar PDF, marcos, designação, regras). Publicar à equipe e aplicar as conversões de etiquetas ficam desativados até validação.
+
 ## Base do Acervo: diálogo reparado
 
 - A Base abre um diálogo independente com Situação, Importar/Atualizar e Conexão.

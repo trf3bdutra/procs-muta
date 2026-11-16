@@ -1785,6 +1785,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
           servidor: it.servidor || '', corretor: it.corretor || '', dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '',
           resultado: it.resultado || '', obs: it.obs || '', noAcervo: !!inf.r, dist: r['data_distribuição'] || r.data_distribuicao || '', tarefa: r.tarefa_atual || '', prioridade: r.prioridade || r.Prioridade || '',
           anteriores: outrasPautas(it.cnj, ss).map(function (x) { return br(x.data) + (x.resultado ? ' (' + x.resultado + ')' : ''); }) }; }); },
+    planilha: function (id) { var sx = S.sessoes.find(function (x) { return x.id === id; }); return sx ? planilhaLinhas(sx) : []; },
+    exportarXlsx: function (id) { var sx = S.sessoes.find(function (x) { return x.id === id; }); if (!sx) return false; S.atual = sx.id; exportarXlsx(); return true; },
     acervoDe: function (cnj) { try { return acervo().by.get(dig(cnj)) || null; } catch (e) { return null; } },
     catalogo: function () { return CATALOGO; }, ramoCurto: ramoCurto,
     regrasDesignacaoSessao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id || x.data === id; }); return ss ? clone(desigEfetiva(ss)) : null; },
