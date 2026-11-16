@@ -132,7 +132,7 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 .st-x .xr:first-of-type{border-top:0}
 .st-x .xf{display:flex;gap:8px;align-items:center;padding:8px 12px;border-top:1px solid var(--l);background:var(--p);font-size:12.5px;flex-wrap:wrap}
 .lst{border:1px solid var(--b);background:var(--w);border-radius:8px;overflow:hidden}
-.row{display:grid;grid-template-columns:26px 205px 64px minmax(0,1fr) 84px 92px 150px;gap:12px;align-items:center;padding:8px 16px;border-top:1px solid var(--l2);font-size:13.5px}
+.row{display:grid;grid-template-columns:26px 205px 64px minmax(0,1.15fr) minmax(0,1fr) 150px;gap:12px;align-items:center;padding:8px 16px;border-top:1px solid var(--l2);font-size:13.5px}
 .row.hd{font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m);background:var(--p);border-top:0}
 .row.hd button{border:0;background:transparent;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer;padding:0;text-align:left}
 .row.sel{background:#f3f8f5}
@@ -195,7 +195,7 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 body.tk #cmt-motor{left:0;visibility:visible;z-index:2147482000;background:#fff}
 body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh + 48px);left:4vw;width:92vw;height:calc(92vh - 48px)}
 @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ini-grid{grid-template-columns:minmax(0,1fr)}.st-g{grid-template-columns:minmax(0,1fr)}.es-cab{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:860px){.fl-grid{grid-template-columns:minmax(0,1fr)}.rail{border-right:0;padding-right:0}.fl-main{padding-left:0}.row{grid-template-columns:24px minmax(0,1fr) 80px;}.row>:nth-child(3),.row>:nth-child(5),.row>:nth-child(6){display:none}#rodape{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#rodape .sel{grid-column:1/-1}#marca span{display:none}.wrap{padding:0 14px}#top{padding:0 14px}}
+@media (max-width:860px){.fl-grid{grid-template-columns:minmax(0,1fr)}.rail{border-right:0;padding-right:0}.fl-main{padding-left:0}.row{grid-template-columns:24px minmax(0,1fr) 80px;}.row>:nth-child(3),.row>:nth-child(4){display:none}#rodape{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#rodape .sel{grid-column:1/-1}#marca span{display:none}.wrap{padding:0 14px}#top{padding:0 14px}}
 /* ===== Aba Pautas (antes /pautas/, página própria) ===== */
 #aba-pautas{min-height:calc(100vh - 60px);padding-bottom:40px}
 .pt-barra{display:flex;align-items:center;gap:8px;justify-content:flex-end;max-width:1480px;margin:0 auto;padding:10px 24px 0}
@@ -559,7 +559,10 @@ const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], [
 const GRUPOS = [['triar', 'Em triagem', '#a57829'], ['nc', 'Não classificadas', '#8a2f22'], ['pauta', 'Já na pauta', '#173f3d'], ['producao', 'Em produção', '#4b7fa8'], ['sobrestados', 'Sobrestados', '#8a70c0'], ['distribuicao', 'Análise da distribuição', '#3b7150'], ['secretaria', 'Com a secretaria', '#8a948f'], ['sem', 'Sem tarefa do gabinete', '#b3ab9c']];
 const PRESETS = [['triagem', 'Em triagem', ['triar']], ['gabinete', 'Em tarefa do gabinete', ['triar', 'nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria']], ['fora', 'Fora da triagem', ['nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria', 'sem']], ['todos', 'Todos na fonte', GRUPOS.map((g) => g[0])]];
 const PJ0 = () => ({ num: '', obj: '', ass: '', cla: '', parte: '', doc: '', orgao: '', col: '', ordem: '', prior: '', etq: '', autDe: '', autAte: '', minut: '', cargo: '', sig: false, lim: false, top: false });
-const F = { pje: PJ0(), pjeAberto: false, base: LS.get('tri_base', ['triar']), etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
+function novoF() { return { pje: PJ0(), pjeAberto: false, base: ['triar'], etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) }; }
+const F0 = Object.assign(novoF(), { base: LS.get('tri_base', ['triar']) }), FES = {};
+let F = F0; /* a Fila e cada escaninho têm o próprio estado de busca e filtros */
+function filtroDe(aba) { if (aba.indexOf('esc:') !== 0) return F0; const id = aba.slice(4); return FES[id] || (FES[id] = Object.assign(novoF(), { esc: id, statsAberto: false })); }
 const FE = { q: '', lim: 100, ver: 'lista' };
 
 function escDe(d) { for (const e of ESC.escaninhos) if (e._set && e._set.has(d)) return e; return null; }
@@ -696,7 +699,7 @@ $('#abas').addEventListener('click', (e) => { const f = e.target.closest('[data-
   const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
 
 /* ===================== render geral ===================== */
-function render() { if (!PRONTO) return; pintaAbas(); pintaGrava();
+function render() { if (!PRONTO) return; F = filtroDe(ABA); pintaAbas(); pintaGrava();
   const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
   m.hidden = naPauta; ap.hidden = !naPauta; D.title = naPauta ? 'Ab Initio · Pautas' : 'Ab Initio · Triagem';
   if (naPauta) { $('#rodape').hidden = true; try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
@@ -809,7 +812,7 @@ function formPje() { const P = F.pje, opts = (fn, v) => { const C = contar(ALL, 
     '<div style="display:flex;gap:8px;align-items:end;grid-column:1/-1"><button type="submit" class="btn pri">Pesquisar</button><button type="button" class="btn" data-pjlimpa>Limpar</button><span style="font-size:12px;color:var(--m)">Ordem: pela data de chegada na tarefa. Os campos somam-se aos critérios e aos grupos do acervo filtrado.</span></div></form>'; }
 function limparFiltros() { F.pje = PJ0(); F.q = ''; F.lote = ''; F.crit = []; F.conj = null; F.etIn = []; F.etOut = []; Object.keys(F.fac).forEach((k) => { F.fac[k] = []; }); F.lim = 100; F.statsX = null; }
 function contar(L, fn) { const m = new Map(); L.forEach((o) => { [].concat(fn(o)).forEach((v) => { if (v === '' || v == null) return; m.set(v, (m.get(v) || 0) + 1); }); }); return [...m.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0]))); }
-const ORDS = { cnj: (o) => o.d, classe: (o) => o.cl, assunto: (o) => nz(o.assunto), secao: (o) => o.secao, desde: (o) => o.desde || '9999', dest: (o) => o.dest.t };
+const ORDS = { cnj: (o) => o.d, classe: (o) => o.cl, assunto: (o) => nz(o.assunto), secao: (o) => o.secao, desde: (o) => o.desde || '9999', tarefa: (o) => nz(o.tarefa || '~'), dest: (o) => o.dest.t };
 function ordenar(L) { const f = ORDS[F.ord] || ORDS.cnj; return L.slice().sort((a, b) => { const x = f(a), y = f(b); return (x < y ? -1 : x > y ? 1 : 0) * F.dir; }); }
 
 /* ---------- Fila ---------- */
@@ -825,29 +828,29 @@ function chipsAtivos() { const ch = [];
   Object.keys(F.fac).forEach((f) => { if (F.fac[f].length) ch.push(['<b>' + FN[f] + '</b> ' + esc(F.fac[f].join(' ou ')), 'fac', f, false]); });
   F.etIn.forEach((e) => ch.push(['<b>Etiqueta</b> tem ' + esc(e), 'etIn', e, false])); F.etOut.forEach((e) => ch.push(['<b>Etiqueta</b> não tem ' + esc(e), 'etOut', e, true]));
   return ch; }
-function vFila() {
-  const L = ordenar(filtrar(F.conj ? ALL : BASE())); FILA = L;
+function vFila(cab, estilo) {
+  const L = ordenar(filtrar(F.conj ? ALL : BASE())), emE = !!F.esc; FILA = L; if (emE) ESCL = L;
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
-  let h = '<div class="wrap"><div class="fl-cab"><div class="fl-l1" style="position:relative">' +
+  let h = '<div class="wrap"' + (estilo || '') + '>' + (cab || '') + '<div class="fl-cab"><div class="fl-l1" style="position:relative">' +
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
     (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
     '<button type="button" class="btn" id="bt-pje" aria-expanded="' + F.pjeAberto + '">Pesquisa do PJe ' + (F.pjeAberto ? '▴' : '▾') + '</button><button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
     '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
     '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
-    '<span style="position:relative"><button type="button" class="btn" id="bt-exp" aria-expanded="false">Exportar ▾</button></span></div>';
+    (emE ? '<button type="button" class="btn" data-ex-direto="copiar">Copiar lista</button>' : '') + '<button type="button" class="btn" data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button><span style="position:relative"><button type="button" class="btn" id="' + (emE ? 'bt-expe' : 'bt-exp') + '" aria-expanded="false">Exportar ▾</button></span></div>';
   if (F.pjeAberto) h += formPje();
-  if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), fora = [...s].filter((d) => !IDX.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + ' entre os em triagem' + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
-  h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · todos os em triagem</span>') +
-    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + painelBase() + '</div>';
+  if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), noB = emE ? new Set(BASE().map((o) => o.d)) : IDX, fora = [...s].filter((d) => !noB.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + (emE ? ' no escaninho' : ' entre os em triagem') + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
+  h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · ' + (emE ? 'todos do escaninho' : 'todos os em triagem') + '</span>') +
+    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + (emE ? '' : painelBase()) + '</div>';
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
-  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + ' no acervo filtrado</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
+  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + (emE ? ' no escaninho' : ' no acervo filtrado') + '</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
   if (F.statsAberto) h += stats(L);
   h += painelEtq(L);
   h += lista(L, F, 'fila') + '</div></div></div>';
   return h; }
 let FILA = [];
-function BASE() { const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
+function BASE() { if (F.esc) { const e = ESC.escaninhos.find((x) => x.id === F.esc); return e ? U.filter((o) => e._set.has(o.d)) : []; } const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
 function painelBase() { const cnt = {}; ALL.forEach((o) => { cnt[o.grupo] = (cnt[o.grupo] || 0) + 1; }); const S = new Set(F.base), n = ALL.filter((o) => S.has(o.grupo)).length;
   const pr = PRESETS.find((p) => p[2].length === F.base.length && p[2].every((g) => S.has(g)));
   return '<section class="acf" aria-label="Acervo filtrado"><div><p class="k" style="margin:0;color:var(--m)">Acervo filtrado</p><b style="display:block;font-size:13px;color:var(--g)">' + esc(pr ? pr[1] : 'Seleção própria') + '</b><span class="big">' + nf(n) + '</span><span style="display:block;font-size:12px;color:var(--m)">processos nos grupos marcados · ' + nf(ALL.length) + ' na fonte</span><button type="button" class="lk" data-vertar style="margin-top:6px">' + (F.verTar ? 'esconder as tarefas ▴' : 'ver as ' + nf(new Set(ALL.filter((o) => S.has(o.grupo)).map((o) => o.tarefa || 'Sem tarefa')).size) + ' tarefas consideradas ▾') + '</button></div>' +
@@ -884,11 +887,11 @@ function stats(L) {
   return h + '<p class="nota">Clique numa barra para abrir aqui os processos daquele grupo. Os números acompanham os critérios ativos.</p></section>'; }
 function sxPassa(o, x) { return x.k === 'etq' ? o.etq.indexOf(x.v) >= 0 : x.k === 'classe' ? o.cl === x.v : x.k === 'tarefa' ? (o.tarefa || 'Sem tarefa') === x.v : o[x.k] === x.v; }
 function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>';
-  return '<div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.tarefa || 'sem tarefa no PJe') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span>' + esc(o.secao.replace(' Seção', '')) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + '</span><span class="mono" style="font-size:12px">' + (br(o.desde) || '—') + '</span><span>' + tg + '</span></div>'; }
+  return '<div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span></div>'; }
 function lista(L, st, onde) {
   const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
   const todosMarc = L.length && L.every((o) => SEL.has(o.d));
-  let h = '<div class="lst"><div class="row hd"><input type="checkbox" data-selall="' + onde + '"' + (todosMarc ? ' checked' : '') + ' aria-label="Marcar todos os ' + L.length + '"><span>' + hdr('cnj', 'Processo') + '</span><span>' + hdr('classe', 'Classe') + '</span><span>' + hdr('assunto', 'Assunto · tarefa no PJe') + '</span><span>' + hdr('secao', 'Seção') + '</span><span>' + hdr('desde', 'Na tarefa desde') + '</span><span>' + hdr('dest', 'Destino') + '</span></div>';
+  let h = '<div class="lst"><div class="row hd"><input type="checkbox" data-selall="' + onde + '"' + (todosMarc ? ' checked' : '') + ' aria-label="Marcar todos os ' + L.length + '"><span>' + hdr('cnj', 'Processo') + '</span><span>' + hdr('classe', 'Classe') + '</span><span>' + hdr('assunto', 'Assunto · seção') + '</span><span>' + hdr('tarefa', 'Tarefa atual no PJe') + ' · ' + hdr('desde', 'desde') + '</span><span>' + hdr('dest', 'Destino') + '</span></div>';
   if (!L.length) return h + '<div class="vazio">Nenhum processo com esses critérios.</div></div>';
   if (st.ver === 'lista') { h += L.slice(0, st.lim).map(linha).join('');
     h += '<div class="mais"><span>' + nf(Math.min(st.lim, L.length)) + ' de ' + nf(L.length) + ' na tela · marcar todos marca os ' + nf(L.length) + '</span>' + (L.length > st.lim ? '<button type="button" class="lk" data-mais="' + onde + '">Mostrar mais 100</button>' : '') + '</div>'; }
@@ -947,8 +950,38 @@ function abrirExp(btn, L, titulo, bilhete) { fecharPops(); const p = D.createEle
   const alvo = SEL.size && L.some((o) => SEL.has(o.d)) ? L.filter((o) => SEL.has(o.d)) : L;
   const it = (k, b, s) => '<button type="button" role="menuitem" data-ex="' + k + '"><b>' + b + '</b><small>' + s + '</small></button>';
   p.innerHTML = '<span class="k" style="color:var(--m)">' + (alvo === L ? 'Os ' + nf(L.length) + ' da lista' : 'Os ' + nf(alvo.length) + ' marcados') + '</span><span class="k">Copiar · sem baixar arquivo</span>' + it('copiar', 'Copiar a lista', 'tabela com processo, classe, assunto, tarefa e seção · cola no Word, Excel ou e-mail') + it('numeros', 'Copiar os números', 'um processo por linha') +
-    '<span class="k" style="border-top:1px solid #ece8de;margin-top:4px">Baixar arquivo</span>' + it('xlsx', 'Planilha completa', '.xlsx · todas as colunas da triagem') + it('xlsxs', 'Planilha simples', '.xlsx · processo, classe, assunto, tarefa, seção, destino') + it('csv', 'CSV', '.csv · para abrir em qualquer planilha') + it('pdf', 'Relação em PDF', 'pela impressão do navegador') + it('doc', 'Relação em Word', '.doc · processo, classe, assunto, partes') + it('est', 'Estatísticas', '.csv · contagens por seção, classe, tarefa e destino');
+    '<span class="k" style="border-top:1px solid #ece8de;margin-top:4px">Baixar arquivo</span>' + it('xlsx', 'Excel completo', '.xlsx formatado · todas as colunas, filtro e cabeçalho fixo') + it('xlsxs', 'Excel simples', '.xlsx formatado · processo, classe, assunto, tarefa, data, seção, destino') + it('csv', 'CSV', '.csv · para abrir em qualquer planilha') + it('pdf', 'Relação em PDF', 'pela impressão do navegador') + it('doc', 'Relação em Word', '.doc · processo, classe, assunto, partes') + it('est', 'Estatísticas', '.csv · contagens por seção, classe, tarefa e destino');
   D.body.appendChild(p); btn.setAttribute('aria-expanded', 'true'); p.__L = alvo; p.__t = titulo; p.__b = bilhete || ''; }
+/* planilha da Triagem com cara de planilha: título, cabeçalho verde, zebra, datas reais, filtro e cabeçalho congelado */
+function xlsxBonito(X, L, cols, titulo, bilhete, hoje) {
+  const DT = { 'Na tarefa desde': (o) => o.desde, 'Distribuição': (o) => o.dist }, LARGO = { Assunto: 46, Partes: 46, Etiquetas: 40, 'Tarefa no PJe': 40, 'Destino da triagem': 26, 'Pendências': 30, 'Destino provável': 22, 'Candidato à monocrática': 22, Classe: 24, 'Seção': 20 };
+  const nc = cols.length, H = 3, serial = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(s || '')); return m ? (Date.UTC(+m[1], +m[2] - 1, +m[3]) - Date.UTC(1899, 11, 30)) / 864e5 : null; };
+  const bd = { style: 'thin', color: { rgb: 'D8D3C6' } }, borda = { top: bd, bottom: bd, left: bd, right: bd }, fonte = { name: 'Arial', sz: 10, color: { rgb: '203B39' } };
+  const ws = {}, put = (r, c, cell) => { ws[X.utils.encode_cell({ r, c })] = cell; };
+  put(0, 0, { t: 's', v: titulo || 'Triagem', s: { font: { name: 'Arial', sz: 14, bold: true, color: { rgb: '173F3D' } } } });
+  put(1, 0, { t: 's', v: L.length + ' processo(s) · gerado em ' + (hoje || '') + (bilhete ? ' · ' + String(bilhete).replace(/\s+/g, ' ') : ''), s: { font: { name: 'Arial', sz: 9.5, italic: true, color: { rgb: '5C6B67' } } } });
+  cols.forEach((c, j) => put(H - 1, j, { t: 's', v: c[0], s: { font: { name: 'Arial', sz: 10, bold: true, color: { rgb: 'FFFFFF' } }, fill: { patternType: 'solid', fgColor: { rgb: '173F3D' } }, alignment: { vertical: 'center', wrapText: true }, border: borda } }));
+  L.forEach((o, i) => { const r = H + i, zebra = i % 2 ? { fill: { patternType: 'solid', fgColor: { rgb: 'F7F5EE' } } } : {};
+    cols.forEach((c, j) => { const st = Object.assign({ font: fonte, alignment: { vertical: 'top', wrapText: !!LARGO[c[0]] && LARGO[c[0]] >= 30 }, border: borda }, zebra);
+      if (DT[c[0]]) { const n = serial(DT[c[0]](o)); put(r, j, n == null ? { t: 's', v: '', s: st } : { t: 'n', v: n, z: 'dd/mm/yyyy', s: Object.assign({}, st, { numFmt: 'dd/mm/yyyy', alignment: { horizontal: 'center', vertical: 'top' } }) }); return; }
+      let v = c[1](o); v = v == null ? '' : String(v);
+      if (c[0] === 'Processo') st.font = { name: 'Consolas', sz: 10, color: { rgb: '173F3D' } };
+      if (c[0] === 'Prioridade' && v) st.font = { name: 'Arial', sz: 10, bold: true, color: { rgb: '8A2F22' } };
+      put(r, j, { t: 's', v, s: st }); }); });
+  const ult = X.utils.encode_cell({ r: H + Math.max(L.length, 1) - 1, c: nc - 1 });
+  ws['!ref'] = 'A1:' + ult;
+  ws['!merges'] = [{ s: { r: 0, c: 0 }, e: { r: 0, c: nc - 1 } }, { s: { r: 1, c: 0 }, e: { r: 1, c: nc - 1 } }];
+  ws['!autofilter'] = { ref: X.utils.encode_cell({ r: H - 1, c: 0 }) + ':' + ult };
+  ws['!cols'] = cols.map((c, j) => { if (LARGO[c[0]]) return { wch: LARGO[c[0]] }; let w = c[0].length; for (let i = 0; i < Math.min(L.length, 400); i++) w = Math.max(w, String(ws[X.utils.encode_cell({ r: H + i, c: j })].v || '').length); return { wch: Math.min(Math.max(w + 2, 10), 34) }; });
+  ws['!rows'] = [{ hpt: 22 }, { hpt: 15 }, { hpt: 30 }];
+  const wb = X.utils.book_new(); X.utils.book_append_sheet(wb, ws, 'Triagem');
+  let out = X.write(wb, { bookType: 'xlsx', type: 'array', cellStyles: true });
+  /* congela o cabeçalho (a biblioteca não escreve o painel): ajusta o sheet1.xml dentro do zip */
+  try { const C = X.CFB, z = C.read(new Uint8Array(out), { type: 'array' }), f = C.find(z, '/xl/worksheets/sheet1.xml');
+    if (f) { let xml = new TextDecoder().decode(new Uint8Array(f.content)); const vis = '<sheetViews><sheetView workbookViewId="0" zoomScale="110"><pane ySplit="' + H + '" topLeftCell="A' + (H + 1) + '" activePane="bottomLeft" state="frozen"/><selection pane="bottomLeft" activeCell="A' + (H + 1) + '" sqref="A' + (H + 1) + '"/></sheetView></sheetViews>';
+      xml = /<sheetViews[\s\S]*?<\/sheetViews>|<sheetViews\/>/.test(xml) ? xml.replace(/<sheetViews[\s\S]*?<\/sheetViews>|<sheetViews\/>/, vis) : xml.replace(/<sheetFormatPr|<cols>|<sheetData/, (m) => vis + m);
+      f.content = new TextEncoder().encode(xml); out = C.write(z, { fileType: 'zip', type: 'array', compression: true }); } } catch (e) { /* sem congelamento a planilha sai igual */ }
+  return out; }
 function tabela(L, cols) { return [cols.map((c) => c[0])].concat(L.map((o) => cols.map((c) => String(c[1](o) == null ? '' : c[1](o))))); }
 function baixar(nome, blob) { const a = D.createElement('a'); a.href = URL.createObjectURL(blob); a.download = nome; D.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800); }
 const csvC = (v) => /[";\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
@@ -960,8 +993,7 @@ async function exportar(k, L, titulo, bilhete) {
   if (k === 'csv' || k === 'est') { let T; if (k === 'csv') T = tabela(L, COLS_C); else { T = [['Grupo', 'Valor', 'Processos']]; [['Seção', (o) => o.secao], ['Classe', (o) => o.cl], ['Tarefa', (o) => o.tarefa || 'Sem tarefa'], ['Destino da triagem', (o) => o.dest.k ? o.dest.t : 'sem destino'], ['Destino provável', (o) => DLAB[o.prov]]].forEach(([g, fn]) => contar(L, fn).forEach((x) => T.push([g, x[0], String(x[1])]))); }
     baixar(nome + (k === 'est' ? '-estatisticas' : '') + '.csv', new Blob(['﻿' + T.map((r) => r.map(csvC).join(';')).join('\r\n')], { type: 'text/csv;charset=utf-8' })); return; }
   if (k === 'xlsx' || k === 'xlsxs') { const X = W.XLSX || (M() && M().XLSX); if (!X) { toast('O leitor de planilhas ainda está carregando. Tente de novo.', true); return; }
-    const ws = X.utils.aoa_to_sheet(tabela(L, k === 'xlsx' ? COLS_C : COLS_S)), wb = X.utils.book_new(); X.utils.book_append_sheet(wb, ws, 'Triagem');
-    const out = X.write(wb, { bookType: 'xlsx', type: 'array' }); baixar(nome + '.xlsx', new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })); return; }
+    const out = xlsxBonito(X, L, k === 'xlsx' ? COLS_C : COLS_S, titulo, bilhete, br(HOJE)); baixar(nome + '.xlsx', new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })); return; }
   const T = tabela(L, [['Processo', (o) => o.cnj], ['Classe', (o) => o.cl], ['Assunto', (o) => o.assunto], ['Partes', (o) => o.partes], ['Tarefa no PJe', (o) => o.tarefa], ['Seção', (o) => o.secao]]);
   const corpo = '<h1 style="font:700 16pt Arial;margin:0 0 4pt">' + esc(titulo) + '</h1><p style="font:10pt Arial;margin:0 0 8pt">' + nf(L.length) + ' processo(s) · ' + br(HOJE) + (bilhete ? '<br>' + esc(bilhete) : '') + '</p><table border="1" cellpadding="4" style="border-collapse:collapse;font:9pt Arial;width:100%">' + T.map((r, i) => '<tr>' + r.map((c) => (i ? '<td>' : '<th style="background:#eee">') + esc(c) + (i ? '</td>' : '</th>')).join('') + '</tr>').join('') + '</table>';
   if (k === 'doc') { baixar(nome + '.doc', new Blob(['﻿<html><head><meta charset="utf-8"></head><body>' + corpo + '</body></html>'], { type: 'application/msword' })); return; }
@@ -971,16 +1003,12 @@ async function exportar(k, L, titulo, bilhete) {
 let ESCL = [];
 function vEscaninho(id) {
   const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return '<div class="wrap vazio">Escaninho não encontrado.</div>';
-  const base = U.filter((o) => e._set.has(o.d)), fora = e.processos.length - base.length, toks = tokens(FE.q);
-  const L = ordenar(base.filter((o) => toks.every((t) => (o.hay.indexOf(t.t) >= 0) !== t.neg))); ESCL = L;
+  const base = BASE(), fora = e.processos.length - base.length;
   const sec = contar(base, (o) => o.secao), pr = base.filter((o) => o.prior).length;
-  let h = '<div class="wrap" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><div class="es-cab"><div><p class="k">Escaninho · criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)) || '—') + '</p><h1>' + esc(e.titulo) + '<i>.</i></h1>' + (e.subtitulo ? '<p style="margin:4px 0 0;font-size:14.5px;color:var(--m2)">' + esc(e.subtitulo) + '</p>' : '') +
+  let h = '<div class="es-cab"><div><p class="k">Escaninho · criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)) || '—') + '</p><h1>' + esc(e.titulo) + '<i>.</i></h1>' + (e.subtitulo ? '<p style="margin:4px 0 0;font-size:14.5px;color:var(--m2)">' + esc(e.subtitulo) + '</p>' : '') +
     '<p style="margin:10px 0 0;display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(base.length) + '</b> processos</span>' + sec.map((x) => '<span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(x[1]) + '</b> ' + esc(x[0]) + '</span>').join('') + '<span><b class="mono" style="font-weight:500;color:var(--r)">' + nf(pr) + '</b> com prioridade</span>' + (fora > 0 ? '<span title="processos do escaninho que já foram julgados ou saíram do acervo">' + nf(fora) + ' fora dos em triagem</span>' : '') + '</p></div>' +
     '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete</p><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem bilhete. Use “Editar escaninho” para deixar a orientação de quem triou.</p>') + '</div></div>';
-  h += '<div class="es-tool"><label class="busca" style="flex:1 1 300px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="es-q" type="search" placeholder="Buscar no escaninho" aria-label="Buscar no escaninho" value="' + esc(FE.q) + '"></label>' +
-    '<div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção']].map((x) => '<button type="button" data-verE="' + x[0] + '" class="' + (FE.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
-    '<button type="button" class="btn" data-ex-direto="copiar">Copiar lista</button><span style="position:relative"><button type="button" class="btn pri" id="bt-expe" aria-expanded="false">Exportar ▾</button></span></div>';
-  h += lista(L, FE, 'esc') + '</div>'; return h; }
+  return vFila(h, ' style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"'); }
 function vEscaninhos() {
   let h = '<div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:18px 0 14px;flex-wrap:wrap"><div><p class="k" style="margin:0">Triagem · escaninhos</p><h1 style="margin:4px 0 0;font-size:32px;font-weight:800;letter-spacing:-.04em;color:var(--v)">Escaninhos<span style="color:var(--g2)">.</span></h1><p style="margin:4px 0 0;font-size:14px;color:var(--m2)">Pastas para examinar um grupo depois. Clicar num escaninho abre o conteúdo numa aba própria. Ficam gravados no procs-muta, para toda a equipe.</p></div><button type="button" class="btn pri" data-esc-novo>+ Novo escaninho</button></div><div class="cards">';
   ESC.escaninhos.forEach((e) => { const n = U.filter((o) => e._set.has(o.d)).length;
@@ -1160,6 +1188,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-ver]'))) { F.ver = b.dataset.ver; F.lim = F.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('[data-verE]'))) { FE.ver = b.dataset.vere || b.getAttribute('data-verE'); FE.lim = FE.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('#bt-crit'))) { if ($('#crit-pop')) { fecharPops(); return; } abrirCrit(b); return; }
+  if ((b = q('[data-ex-xlsx]'))) { const e2 = F.esc && ESC.escaninhos.find((x) => x.id === F.esc), L = F.esc ? ESCL : FILA, alvo = SEL.size && L.some((o) => SEL.has(o.d)) ? L.filter((o) => SEL.has(o.d)) : L; exportar('xlsx', alvo, e2 ? e2.titulo : (F.conj ? F.conj.rot : 'Fila de triagem'), e2 ? e2.bilhete : ''); return; }
   if ((b = q('#bt-exp'))) { if ($('.menu')) { fecharPops(); return; } abrirExp(b, FILA, F.conj ? F.conj.rot : 'Fila de triagem', ''); return; }
   if ((b = q('#bt-expe'))) { if ($('.menu')) { fecharPops(); return; } const e2 = ESC.escaninhos.find((x) => 'esc:' + x.id === ABA); abrirExp(b, ESCL, e2 ? e2.titulo : 'Escaninho', e2 ? e2.bilhete : ''); return; }
   if ((b = q('[data-ex-direto]'))) { const alvo = SEL.size && ESCL.some((o) => SEL.has(o.d)) ? ESCL.filter((o) => SEL.has(o.d)) : ESCL; exportar('copiar', alvo, '', ''); return; }
