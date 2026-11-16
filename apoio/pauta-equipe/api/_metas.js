@@ -27,6 +27,19 @@ function fase(t) {
   if (/prazo em curso|diligência|MPF/i.test(t)) return 'Aguardando prazo ou diligência';
   return t ? 'No gabinete' : 'Fora do acervo ativo';
 }
+/* pendências marcadas por etiqueta (mesmas regras da triagem do CMT-monitor) e impedimento registrado na triagem */
+const nz = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+function pendEtq(et, tri) {
+  const tg = String(et || '').split(/[,;]/).map(s => nz(s.trim())), has = rx => tg.some(t => rx.test(t)), P = [];
+  if (has(/ag\. parecer|aguardando parecer|intimar mpf/)) P.push('parecer do MPF');
+  if (has(/ag\. contrarraz|ag\. contraminuta/)) P.push('contrarrazões');
+  if (has(/preparo/) && !has(/custas ok/)) P.push('preparo');
+  if (has(/liminar pendente/)) P.push('liminar pendente');
+  if (has(/aguardar novos precedentes|tema 1433/)) P.push('aguardar precedente');
+  if (has(/nao pautar/)) P.push('não pautar');
+  if (tri && tri['Impedimento / Suspeição']) P.push('impedimento ou suspeição');
+  return P;
+}
 let CACHE = null, CACHE_T = 0;
 async function base() {
   if (!CACHE || Date.now() - CACHE_T > 300e3) {
@@ -45,7 +58,8 @@ async function base() {
       CACHE.push({ cnj, metas, rotulo: String(tri.META || '').trim(), classe: r.classe_judicial || r.Classe || '', assunto: r.Assunto || r.Assunto_Principal || '',
         partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter(Boolean).join(' x '), dist: iso(r['data_distribuição'] || r['Data_Distribuição']),
         tarefa: r.tarefa_atual || '', desde: iso(r.data_entrada_tarefa), fase: fase(r.tarefa_atual), pend1: String(r.Pendente_1Julgamento || '').toLowerCase() === 'sim',
-        secao: r['Seção Competente'] || '', servidor: pr.SERVIDOR || '', corretor: pr.CORRETOR || '', sessoes: ses });
+        secao: r['Seção Competente'] || '', servidor: pr.SERVIDOR || '', corretor: pr.CORRETOR || '', sessoes: ses,
+        prioridade: r.prioridade || '', pendEtq: pendEtq([r.Etiquetas, r.etiquetas].filter(Boolean).join(','), tri) });
     });
     CACHE_T = Date.now();
   }
@@ -55,7 +69,7 @@ module.exports = async (req, res, u) => {
   try {
     if (req.method === 'GET') {
       const [B, { I, doc }] = await Promise.all([base(), AC.indice()]);
-      return res.status(200).json({ itens: B.map(x => Object.assign({}, x, { acomp: AC.acomp(I[dg(x.cnj)], MAPA, 'Meta') })), atualizadoEm: doc.atualizado_em || '' });
+      return res.status(200).json({ itens: B.map(x => Object.assign({}, x, { acomp: AC.acomp(I[dg(x.cnj)], MAPA, 'Meta'), nota: AC.nota(I[dg(x.cnj)]) })), atualizadoEm: doc.atualizado_em || '' });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const b = req.body || {};
