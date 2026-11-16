@@ -1740,12 +1740,23 @@
   /* =================== Acervo Central: escaninhos, prontuário, exportar e dados dos filtrados =================== */
   var pid = function (v) { return String(v || '').replace(/\D/g, ''); };
   var FIXOS = [['fx_aptos', 'Aptos', 'aptos para julgamento (etiqueta ou tarefa)', '#3e72ad'], ['fx_metas', 'Metas', 'etiquetas de meta do CNJ', '#c4953c'], ['fx_retirados', 'Retirados de pauta', 'retirados, adiados ou a retirar de pauta', '#b0524a']];
-  var FXC = new WeakMap(), FXG = -1;
-  function escFixo(r) { if (FXG !== GERACAO) { FXC = new WeakMap(); FXG = GERACAO; } var v = FXC.get(r); if (v !== undefined) return v;
+  var FXC = new WeakMap(), FXG = -1, SPSIG = '', SPSET = new Set();
+  /* escaninhos automáticos de seleção prévia: um por sessão futura ainda sem pauta oficial */
+  function sessoesSemPauta() { try { var w = mw(), S = w && w.CMTSessao && w.CMTSessao.estado(), h = new Date().toISOString().slice(0, 10);
+    return ((S && S.sessoes) || []).filter(function (x) { return x.data >= h && !(x.itens || []).length; }).sort(function (a, b) { return a.data < b.data ? -1 : 1; }); } catch (e) { return []; } }
+  function dataDaSessao(nome) { var m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(String(nome || '')); if (m) return m[3] + '-' + m[2] + '-' + m[1]; var c = comp(), d = ((c && c.sessionDetails) || {})[nome]; return (d && d.date) || ''; }
+  function escPrevia(r) { if (r['Seleção Prévia'] !== 'SELECIONADO PREVIAMENTE') return ''; var d = dataDaSessao(r['Sessão Destino']); return d && SPSET.has(d) ? 'sp_' + d : ''; }
+  function escFixo(r) { if (FXG !== GERACAO + '|' + SPSIG) { FXC = new WeakMap(); FXG = GERACAO + '|' + SPSIG; } var v = FXC.get(r); if (v !== undefined) return v;
+    v = escPrevia(r); if (v) { FXC.set(r, v); return v; }
     var o = MAPA.get(dig(r.processo || r.Processo)); v = (!o || o.caminho || ACS_ENC.indexOf(o.sit) >= 0) ? '' : ehRetirado(o) ? 'fx_retirados' : ehApto(o) ? 'fx_aptos' : ehMeta(o) ? 'fx_metas' : ''; FXC.set(r, v); return v; }
   function garantirFixos(c) {
     if (!Array.isArray(c.escaninhos)) c.escaninhos = [];
     var mud = false; FIXOS.slice().reverse().forEach(function (f) { var e = c.escaninhos.find(function (x) { return x.id === f[0]; }); if (!e) { c.escaninhos.unshift({ id: f[0], titulo: f[1], subtitulo: f[2], obs: '', cor: f[3], fixo: true, criado: new Date().toISOString().slice(0, 10) }); mud = true; } else if (!e.fixo) { e.fixo = true; mud = true; } });
+    var SP = sessoesSemPauta(), sig = SP.map(function (x) { return x.data; }).join(','); if (sig !== SPSIG) { SPSIG = sig; SPSET = new Set(SP.map(function (x) { return x.data; })); }
+    var ultimoFixo = function () { var k = -1; c.escaninhos.forEach(function (e, i) { if (e.fixo) k = i; }); return k; };
+    SP.forEach(function (x) { var id = 'sp_' + x.data, e = c.escaninhos.find(function (y) { return y.id === id; }), br = x.data.slice(8, 10) + '/' + x.data.slice(5, 7) + '/' + x.data.slice(0, 4);
+      if (!e) { c.escaninhos.splice(ultimoFixo() + 1, 0, { id: id, titulo: 'Seleção prévia · ' + br, subtitulo: 'sessão sem pauta oficial · automático', obs: '', cor: '#4a8f74', fixo: true, auto: true, criado: new Date().toISOString().slice(0, 10) }); mud = true; } });
+    c.escaninhos = c.escaninhos.filter(function (e) { if (!e.auto || SPSET.has(String(e.id).slice(3))) return true; c.rows.forEach(function (r) { if (r._escaninho === e.id) r._escaninho = ''; }); mud = true; return false; });
     var w = mw(); if (w && w.__cmtEscFixo !== escFixo) { w.__cmtEscFixo = escFixo; mud = true; }
     if (mud) { try { c.saveDeb ? c.saveDeb() : c.saveDB(); c.refresh(); } catch (e) {} }
   }

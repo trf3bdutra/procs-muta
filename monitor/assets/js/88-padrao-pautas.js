@@ -19,6 +19,12 @@
     tools.prepend(b); aplicar();
   }
   const CSS = `
+/* Estatísticas dos filtrados: deixam de ser rodapé flutuante e entram no primeiro painel, logo abaixo do acervo filtrado e da busca */
+html body .central-search-panel{order:0}html body div.cmt-stats{order:1}html body #cmt-sheet{order:2}
+html body div.cmt-stats,html body div.cmt-stats.min{position:static!important;left:auto!important;right:auto!important;bottom:auto!important;top:auto!important;z-index:auto!important;max-height:none!important;overflow:visible!important;margin:-32px 0 0!important;border-radius:0!important;box-shadow:none!important;border-top:1px dashed #d3dfdc!important;background-image:none!important}
+html body div.cmt-stats::before,html body div.cmt-stats::after{display:none!important}
+html body div.cmt-stats .cmt-stats-h{position:static!important;top:auto!important;margin:0!important;background:transparent!important;cursor:pointer}
+html body div.cmt-stats:not(.min) .cmt-stats-h{margin:0 0 10px!important}
 html:not([data-theme="dark"]) #dc-root main>header{background:transparent!important;border:0!important;border-top:2px solid #235a55!important;border-radius:0!important;box-shadow:none!important;padding:14px 0 6px!important}
 html:not([data-theme="dark"]) #dc-root main>header>div>div:first-child,html:not([data-theme="dark"]) #dc-root main>header>div>div:first-child *{font-family:ui-monospace,'IBM Plex Mono',monospace!important;font-weight:600!important;color:#805b18!important;letter-spacing:.1em!important}
 html:not([data-theme="dark"]) #dc-root main>header>div>div[style*="gap: 10px"],html:not([data-theme="dark"]) #dc-root main>header>div>div[style*="gap: 10px"] *{font-family:Figtree,system-ui,sans-serif!important;font-size:40px!important;line-height:1.05!important;font-weight:650!important;letter-spacing:-.045em!important;color:#203b39!important}
