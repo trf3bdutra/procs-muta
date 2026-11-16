@@ -23,7 +23,8 @@
   if (W.CMTAtualizarFonte) return;
   var CARGA = 'acervo/entrada/carga.json';
   var COLS = {
-    pje: ['Número do Processo', 'Classe', 'Assunto', 'Tarefa', 'Etiquetas', 'Prioridade', 'Data de Chegada', 'Polo Ativo', 'Polo Passivo'],
+    pje: ['Número do Processo', 'Classe', 'Assunto', 'Tarefa', 'Etiquetas', 'Prioridade', 'Data de Chegada', 'Polo Ativo', 'Polo Passivo',
+          'Órgão Julgador', 'Colegiado', 'Sigiloso', 'Liminar Pendente', 'Cargo Judicial', 'Peso Prioridade', 'Data Último Movimento'],
     bi: ['Processo', 'Ano', 'Mês', 'Gabinete', 'Indicador', 'Data_Distribuição', 'Código_Classe', 'Classe', 'Código_Assunto_Principal',
          'Assunto_Principal', 'Assuntos_do_Processo', 'Pendente_1Julgamento', 'Conclusão?', 'Data_Conclusão', 'Data_Fase', 'Fase',
          'Complemento', 'Última_Movimentação', 'Data_Última_Movimentação', 'Tempo_de_Tramitação', 'Polo_Ativo', 'Polo_Passivo',

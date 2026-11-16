@@ -98,6 +98,7 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 .vals .vl label{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 6px;cursor:pointer;border-radius:5px;min-width:0}.vals .vl .vt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vals .vl .bd{font:500 10.5px 'JetBrains Mono',monospace;background:#e3ecf2;color:#24506f;border-radius:999px;padding:1px 7px;flex:none}
 .vals .vl label:hover{background:#f6f4ee}
 .vals .vl label span:first-child{display:flex;gap:8px;align-items:center;min-width:0}
+.pjf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 16px;padding:14px 16px;border:1px solid var(--b);background:var(--w);border-radius:8px}.pjf .f input,.pjf .f select{height:32px;padding:0 8px;font-weight:400}.pjf .f input:disabled{background:#f4f2ea}@media (max-width:860px){.pjf{grid-template-columns:minmax(0,1fr)}}
 .acf{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:start;padding:12px 16px;border:1px solid var(--b);background:var(--p);border-radius:8px}.acf .big{font:500 30px 'JetBrains Mono',monospace;color:var(--v);line-height:1.1}.acf .pre{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.acf .pre button{height:30px;padding:0 12px;border:1px solid var(--b2);background:var(--w);border-radius:999px;font:700 12.5px Figtree,sans-serif;cursor:pointer}.acf .pre button.on{background:var(--v);border-color:var(--v);color:#fff}.acf .gs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.acf .gs button{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--b);background:var(--w);border-radius:999px;font:600 12.5px Figtree,sans-serif;cursor:pointer;color:var(--tx)}.acf .gs button i{width:9px;height:9px;border-radius:50%;border:2px solid var(--c);display:inline-block}.acf .gs button.on{background:#eef4f1;border-color:var(--v2)}.acf .gs button.on i{background:var(--c)}.acf .gs button b{font:500 11.5px 'JetBrains Mono',monospace;color:var(--m)}
 .etp{border:1px solid var(--b);background:var(--p);border-radius:8px}.etp .eh{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--l)}.etp .eh .hs{width:28px;height:28px;border-radius:50%;background:#e3ecf2;color:var(--az);display:grid;place-items:center;font-weight:700}.etp .eg{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;padding:10px 14px 14px}.etp .eg button{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:34px;padding:4px 6px 4px 10px;border:1px solid var(--b);background:var(--w);border-radius:8px;font:600 12.5px Figtree,sans-serif;color:var(--tx);cursor:pointer;text-align:left;min-width:0}.etp .eg button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.etp .eg button b{font:500 10.5px 'JetBrains Mono',monospace;background:#e3ecf2;color:var(--az);border-radius:999px;padding:1px 7px;flex:none}.etp .eg button.in{background:var(--v);border-color:var(--v);color:#fff}.etp .eg button.in b{background:rgba(255,255,255,.18);color:#fff}.etp .eg button.out{background:#fbefec;border-color:var(--r2);color:var(--r);text-decoration:line-through}
 .fl-grid{display:grid;grid-template-columns:240px minmax(0,1fr)}
@@ -288,7 +289,8 @@ const SEL = new Set();
 const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], ['Vinho', '#8a2f22'], ['Cinza', '#8a948f'], ['Roxo', '#6a4fb3']];
 const GRUPOS = [['triar', 'Em triagem', '#a57829'], ['nc', 'Não classificadas', '#8a2f22'], ['pauta', 'Já na pauta', '#173f3d'], ['producao', 'Em produção', '#4b7fa8'], ['sobrestados', 'Sobrestados', '#8a70c0'], ['distribuicao', 'Análise da distribuição', '#3b7150'], ['secretaria', 'Com a secretaria', '#8a948f'], ['sem', 'Sem tarefa do gabinete', '#b3ab9c']];
 const PRESETS = [['triagem', 'Em triagem', ['triar']], ['gabinete', 'Em tarefa do gabinete', ['triar', 'nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria']], ['fora', 'Fora da triagem', ['nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria', 'sem']], ['todos', 'Todos na fonte', GRUPOS.map((g) => g[0])]];
-const F = { base: LS.get('tri_base', ['triar']), etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
+const PJ0 = () => ({ num: '', obj: '', ass: '', cla: '', parte: '', doc: '', orgao: '', col: '', ordem: '', prior: '', etq: '', autDe: '', autAte: '', minut: '', cargo: '', sig: false, lim: false, top: false });
+const F = { pje: PJ0(), pjeAberto: false, base: LS.get('tri_base', ['triar']), etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
 const FE = { q: '', lim: 100, ver: 'lista' };
 
 function escDe(d) { for (const e of ESC.escaninhos) if (e._set && e._set.has(d)) return e; return null; }
@@ -305,6 +307,12 @@ function proc(f, r) {
   const o = { row: r, d: dg(f.processo || f.Processo), cnj: fmtCnj(f.processo || f.Processo), classe, cl, assunto: String(f.assunto_judicial || f.Assunto || f.Assunto_Principal || '').trim() || '—',
     tarefa, desde: iso(f.data_entrada_tarefa), secao: SEC_RX.test(sc) ? sc : (se || 'Sem seção'), secEtq: se, secComp: SEC_RX.test(sc) ? sc : '', prior: /^(sim|s)$/i.test(String(f.prioridade || '').trim()), etq,
     partes: [f.polo_ativo || f.Polo_Ativo, f.polo_passivo || f.Polo_Passivo].filter((x) => x && x !== '####').join(' x '), dist: iso(f['data_distribuição'] || f['Data_Distribuição']) };
+  const sim = (v) => /^(sim|s|true|1)$/i.test(String(v == null ? '' : v).trim());
+  o.orgao = String(f['Órgão Julgador'] || f['DataJud · Órgão Julgador'] || '').trim(); o.colegiado = String(f.Colegiado || '').trim(); o.cargo = String(f['Cargo Judicial'] || '').trim();
+  o.sigiloso = sim(f.Sigiloso) || !!f['Nível_Sigilo'] || f.Consta_Acervo_Sigiloso === 'Sim';
+  o.liminar = sim(f['Liminar Pendente']) || etq.some((e) => /liminar pendente/i.test(e));
+  o.minutante = String(r.SERVIDOR || '').trim(); o.topico = !!String(r['Tópico-síntese'] || '').trim();
+  o.objeto = [o.assunto, f['DataJud · Assuntos'], f.Assuntos_do_Processo, f.ultimo_movimento].filter(Boolean).join(' ');
   o.apto = etq.some(ehAptoE) || /Aptos para julgamento/i.test(tarefa);
   o.monoE = etq.some((e) => /monocr/i.test(e)) || r.Destino === 'Monocrática';
   o.prov = DEST.find((x) => x[3](o))[0];
@@ -498,12 +506,34 @@ function filtrar(base, sem) {
   return base.filter((o) => {
     if (F.conj && sem !== 'conj' && !F.conj.ids.has(o.d)) return false;
     if (lote && lote.size && !lote.has(o.d)) return false;
+    if (!passaPje(o)) return false;
     for (const t of toks) { const has = o.hay.indexOf(t.t) >= 0; if (t.neg ? has : !has) return false; }
     for (const c of F.crit) if (!passaCrit(o, c)) return false;
     for (const f of ['secao', 'classe', 'assunto', 'tarefa', 'prior']) { if (f === sem) continue; const L = F.fac[f]; if (L.length) { const v = f === 'classe' ? o.cl : f === 'prior' ? (o.prior ? 'Sim' : 'Não') : f === 'tarefa' ? (o.tarefa || 'Sem tarefa') : o[f]; if (L.indexOf(v) < 0) return false; } }
     if (sem !== 'etq') { if (F.etIn.length && !F.etIn.every((e) => o.etq.indexOf(e) >= 0)) return false; if (F.etOut.length && F.etOut.some((e) => o.etq.indexOf(e) >= 0)) return false; }
     return true; }); }
-function limparFiltros() { F.q = ''; F.lote = ''; F.crit = []; F.conj = null; F.etIn = []; F.etOut = []; Object.keys(F.fac).forEach((k) => { F.fac[k] = []; }); F.lim = 100; F.statsX = null; }
+function passaPje(o) { const P = F.pje, has = (v, q) => !q || nz(v).indexOf(nz(q)) >= 0;
+  if (P.num && o.d.indexOf(dg(P.num)) < 0) return false;
+  if (!has(o.objeto, P.obj) || !has(o.assunto, P.ass) || !has(o.classe + ' ' + o.cl, P.cla) || !has(o.partes, P.parte) || !has(o.etq.join(' | '), P.etq) || !has(o.minutante, P.minut)) return false;
+  if (P.orgao && o.orgao !== P.orgao) return false; if (P.col && o.colegiado !== P.col) return false; if (P.cargo && o.cargo !== P.cargo) return false;
+  if (P.prior && (P.prior === 'Sim') !== o.prior) return false;
+  if (P.autDe && (!o.dist || o.dist < P.autDe)) return false; if (P.autAte && (!o.dist || o.dist > P.autAte)) return false;
+  if (P.sig && !o.sigiloso) return false; if (P.lim && !o.liminar) return false; if (P.top && !o.topico) return false;
+  return true; }
+const PJ_ROT = { num: 'Número', obj: 'Objeto', ass: 'Assunto', cla: 'Classe', parte: 'Parte', orgao: 'Órgão julgador', col: 'Colegiado', prior: 'Prioridade', etq: 'Etiqueta', autDe: 'Autuação desde', autAte: 'Autuação até', minut: 'Minutante', cargo: 'Cargo judicial', sig: 'Somente sigiloso', lim: 'Com pedido de liminar', top: 'Possui tópico síntese' };
+function formPje() { const P = F.pje, opts = (fn, v) => { const C = contar(ALL, fn); return '<option value="">' + (v ? '' : '') + '</option>' + C.map((x) => '<option' + (x[0] === v ? ' selected' : '') + '>' + esc(x[0]) + '</option>').join(''); };
+  const inp = (k, rot, ph) => '<label class="f">' + rot + '<input type="text" data-pj="' + k + '" value="' + esc(P[k]) + '"' + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '></label>';
+  const sel = (k, rot, html) => '<label class="f">' + rot + '<select data-pj="' + k + '">' + html + '</select></label>';
+  const ck = (k, rot, dis, tip) => '<label style="display:flex;gap:7px;align-items:center;font:600 12.5px Figtree,sans-serif;color:' + (dis ? 'var(--m)' : 'var(--m2)') + '"' + (tip ? ' title="' + esc(tip) + '"' : '') + '><input type="checkbox" data-pjc="' + k + '"' + (P[k] ? ' checked' : '') + (dis ? ' disabled' : '') + '> ' + rot + '</label>';
+  return '<form class="pjf" id="pjf" aria-label="Pesquisa do PJe">' + inp('num', 'Número do processo', '0000000-00.0000.4.03.0000') + inp('obj', 'Objeto', 'assunto, assuntos do processo, último movimento') + inp('ass', 'Assunto') +
+    inp('cla', 'Classe') + inp('parte', 'Nome da parte') + '<label class="f">CPF | CNPJ<input type="text" disabled placeholder="não fica no procs-muta" title="Por regra do gabinete, CPF e CNPJ não são guardados na fonte"></label>' +
+    sel('orgao', 'Órgão julgador', opts((o) => o.orgao, P.orgao)) + sel('col', 'Órgão julgador colegiado', opts((o) => o.colegiado, P.col)) + sel('ordem', 'Ordem', '<option value=""' + (!P.ordem ? ' selected' : '') + '>Mais antigo</option><option value="rec"' + (P.ordem === 'rec' ? ' selected' : '') + '>Mais recente</option>') +
+    sel('prior', 'Prioridade', '<option value=""></option><option' + (P.prior === 'Sim' ? ' selected' : '') + '>Sim</option><option' + (P.prior === 'Não' ? ' selected' : '') + '>Não</option>') + inp('etq', 'Por etiqueta') +
+    '<div style="display:flex;flex-direction:column;gap:5px;grid-row:span 2">' + ck('sig', 'Somente sigiloso?') + ck('lim', 'Somente com pedido de liminar', false, 'coluna Liminar Pendente do painel ou etiqueta “liminar pendente”') + ck('docn', 'Somente com documentos não lidos', true, 'o painel do PJe não exporta a leitura de documentos') + ck('docl', 'Documentos lidos', true, 'o painel do PJe não exporta a leitura de documentos') + ck('top', 'Possui tópico síntese?', false, 'tópico-síntese preenchido na ficha') + '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><label class="f">Data da autuação · de<input type="date" data-pj="autDe" value="' + esc(P.autDe) + '"></label><label class="f">até<input type="date" data-pj="autAte" value="' + esc(P.autAte) + '"></label></div>' + inp('minut', 'Usuário elaboração minuta', 'minutante da ficha') +
+    sel('cargo', 'Cargo judicial', opts((o) => o.cargo, P.cargo)) +
+    '<div style="display:flex;gap:8px;align-items:end;grid-column:1/-1"><button type="submit" class="btn pri">Pesquisar</button><button type="button" class="btn" data-pjlimpa>Limpar</button><span style="font-size:12px;color:var(--m)">Ordem: pela data de chegada na tarefa. Os campos somam-se aos critérios e aos grupos do acervo filtrado.</span></div></form>'; }
+function limparFiltros() { F.pje = PJ0(); F.q = ''; F.lote = ''; F.crit = []; F.conj = null; F.etIn = []; F.etOut = []; Object.keys(F.fac).forEach((k) => { F.fac[k] = []; }); F.lim = 100; F.statsX = null; }
 function contar(L, fn) { const m = new Map(); L.forEach((o) => { [].concat(fn(o)).forEach((v) => { if (v === '' || v == null) return; m.set(v, (m.get(v) || 0) + 1); }); }); return [...m.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0]))); }
 const ORDS = { cnj: (o) => o.d, classe: (o) => o.cl, assunto: (o) => nz(o.assunto), secao: (o) => o.secao, desde: (o) => o.desde || '9999', dest: (o) => o.dest.t };
 function ordenar(L) { const f = ORDS[F.ord] || ORDS.cnj; return L.slice().sort((a, b) => { const x = f(a), y = f(b); return (x < y ? -1 : x > y ? 1 : 0) * F.dir; }); }
@@ -511,6 +541,7 @@ function ordenar(L) { const f = ORDS[F.ord] || ORDS.cnj; return L.slice().sort((
 /* ---------- Fila ---------- */
 function chipsAtivos() { const ch = [];
   if (F.conj) ch.push(['<b>Conjunto</b> ' + esc(F.conj.rot) + ' (' + nf(F.conj.ids.size) + ')', 'conj', '', false]);
+  Object.keys(PJ_ROT).forEach((k) => { const v = F.pje[k]; if (v) ch.push(['<b>' + PJ_ROT[k] + '</b>' + (v === true ? '' : ' ' + esc(/aut/.test(k) ? br(v) : v)), 'pje', k, false]); });
   if (F.modo === 'texto' && F.q.trim()) ch.push(['<b>Texto</b> ' + esc(tokens(F.q).map((t) => (t.neg ? 'sem “' : '“') + t.t + '”').join(', ')), 'q', '', false]);
   if (F.modo === 'lote' && loteSet().size) ch.push(['<b>Lote</b> ' + nf(loteSet().size) + ' números', 'lote', '', false]);
   F.crit.forEach((c, i) => { const cmp = (CAMPOS.find((x) => x[0] === c.campo) || [])[1], cd = (CONDS.find((x) => x[0] === c.cond) || [])[1];
@@ -527,10 +558,11 @@ function vFila() {
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
     (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
-    '<button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
+    '<button type="button" class="btn" id="bt-pje" aria-expanded="' + F.pjeAberto + '">Pesquisa do PJe ' + (F.pjeAberto ? '▴' : '▾') + '</button><button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
     '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
     '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
     '<span style="position:relative"><button type="button" class="btn" id="bt-exp" aria-expanded="false">Exportar ▾</button></span></div>';
+  if (F.pjeAberto) h += formPje();
   if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), fora = [...s].filter((d) => !IDX.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + ' entre os em triagem' + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
   h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · todos os em triagem</span>') +
     '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + painelBase() + '</div>';
@@ -800,6 +832,8 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
   if ((b = q('[data-esc-conj]'))) { const r = REG[b.dataset.escConj]; if (!r) return; editarEscaninho(null, (ne) => { const ds = r.ids; setTimeout(() => acao('Guardado em ' + ne.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [ne.id] })), 0); }); const ti = $('#ge-t'); if (ti) ti.value = r.rot; return; }
   if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
+  if (q('#bt-pje')) { F.pjeAberto = !F.pjeAberto; render(); return; }
+  if (q('[data-pjlimpa]')) { F.pje = PJ0(); render(); return; }
   if ((b = q('[data-preset]'))) { const p = PRESETS.find((x) => x[0] === b.dataset.preset); F.base = p[2].slice(); LS.set('tri_base', F.base); F.lim = 100; render(); return; }
   if ((b = q('[data-grupo]'))) { const g = b.dataset.grupo, i = F.base.indexOf(g); if (i >= 0) { if (F.base.length > 1) F.base.splice(i, 1); } else F.base.push(g); LS.set('tri_base', F.base); F.lim = 100; render(); return; }
   if (q('[data-etqp]')) { F.etqAberto = !F.etqAberto; LS.set('tri_etqp', F.etqAberto); render(); return; }
@@ -811,7 +845,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('#bt-exp'))) { if ($('.menu')) { fecharPops(); return; } abrirExp(b, FILA, F.conj ? F.conj.rot : 'Fila de triagem', ''); return; }
   if ((b = q('#bt-expe'))) { if ($('.menu')) { fecharPops(); return; } const e2 = ESC.escaninhos.find((x) => 'esc:' + x.id === ABA); abrirExp(b, ESCL, e2 ? e2.titulo : 'Escaninho', e2 ? e2.bilhete : ''); return; }
   if ((b = q('[data-ex-direto]'))) { const alvo = SEL.size && ESCL.some((o) => SEL.has(o.d)) ? ESCL.filter((o) => SEL.has(o.d)) : ESCL; exportar('copiar', alvo, '', ''); return; }
-  if ((b = q('[data-tira]'))) { const k = b.dataset.tira, v = b.dataset.v; if (k === 'conj') F.conj = null; else if (k === 'q') F.q = ''; else if (k === 'lote') F.lote = ''; else if (k === 'crit') F.crit.splice(+v, 1); else if (k === 'fac') F.fac[v] = []; else if (k === 'etIn') F.etIn = F.etIn.filter((x) => x !== v); else if (k === 'etOut') F.etOut = F.etOut.filter((x) => x !== v); F.lim = 100; render(); return; }
+  if ((b = q('[data-tira]'))) { const k = b.dataset.tira, v = b.dataset.v; if (k === 'conj') F.conj = null; else if (k === 'pje') F.pje[v] = typeof F.pje[v] === 'boolean' ? false : ''; else if (k === 'q') F.q = ''; else if (k === 'lote') F.lote = ''; else if (k === 'crit') F.crit.splice(+v, 1); else if (k === 'fac') F.fac[v] = []; else if (k === 'etIn') F.etIn = F.etIn.filter((x) => x !== v); else if (k === 'etOut') F.etOut = F.etOut.filter((x) => x !== v); F.lim = 100; render(); return; }
   if ((b = q('.chip span')) && b.closest('.chip').querySelector('[data-tira="crit"]')) { abrirCrit($('#bt-crit'), +b.closest('.chip').querySelector('[data-tira]').dataset.v); return; }
   if (q('#bt-limpar')) { limparFiltros(); render(); return; }
   if (q('#bt-salvar')) { const nm = W.prompt('Nome para este filtro:', F.conj ? F.conj.rot : ''); if (!nm) return; const S = LS.get('tri_filtros', []).filter((x) => x.nome !== nm); const cp = JSON.parse(JSON.stringify(Object.assign({}, F, { conj: null, statsX: null }))); S.push({ nome: nm, F: cp }); LS.set('tri_filtros', S); render(); toast('Filtro salvo neste navegador: ' + nm + (F.conj ? ' (o conjunto vindo do Início não entra no filtro salvo)' : '') + '.'); return; }
@@ -834,6 +868,10 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-esc-edit]'))) { editarEscaninho(b.dataset.escEdit); return; }
   if ((b = q('[data-esc-del]'))) { excluirEscaninho(b.dataset.escDel); return; }
   if (q('[data-esc-novo]')) { editarEscaninho(null, (ne) => { setTimeout(() => ir('esc=' + ne.id), 0); }); return; } });
+D.addEventListener('submit', (e) => { if (e.target.id !== 'pjf') return; e.preventDefault(); const P = F.pje;
+  $$('[data-pj]', e.target).forEach((i) => { P[i.dataset.pj] = i.value.trim(); }); $$('[data-pjc]', e.target).forEach((i) => { if (i.dataset.pjc in P) P[i.dataset.pjc] = i.checked; });
+  if (P.ordem === 'rec') { F.ord = 'desde'; F.dir = -1; } else if ($$('[data-pj]', e.target).length) { if (F.ord === 'desde' || Object.keys(PJ_ROT).some((k) => P[k])) { F.ord = 'desde'; F.dir = 1; } }
+  F.lim = 100; render(); });
 D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if ($('#gaveta')) fecharGaveta(); else fecharPops(); }
   if (e.key === 'Enter' && e.target.matches('.ecard')) e.target.click(); });
 
