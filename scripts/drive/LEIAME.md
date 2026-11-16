@@ -1,19 +1,19 @@
-# Planilhas do Drive (espelho da Pauta da equipe)
+# Planilhas do Drive (espelho da Ex Officio)
 
-Planilhas do Google ligadas à Pauta da equipe. **Sincronização nos dois sentidos, quase em tempo real: ver `apps-script/LEIAME.md`.**
+Planilhas do Google ligadas à Ex Officio. **Sincronização nos dois sentidos, quase em tempo real: ver `apps-script/LEIAME.md`.**
 O procedimento abaixo (exportação + tarefa agendada diária, só app → planilha) fica como alternativa sem o Apps Script.
 Os IDs estão em `planilhas.json`.
 
 | Onde | Formato |
 |---|---|
-| Pasta **CMT - Pautas de Julgamento** | um arquivo por bimestre (`Pauta_AAAA_No_bimestre_mmm-mmm (Pauta da equipe)`, como os bimestrais da pasta), com uma aba por sessão liberada para a equipe (`Sessão DD-MM`, a mais recente primeiro), no molde **Controle de Pauta**: painel nas linhas 1-19, cabeçalho na linha 20, processos em A21:Y320 |
+| Pasta **CMT - Pautas de Julgamento** | um arquivo por bimestre (`Pauta_AAAA_No_bimestre_mmm-mmm (Ex Officio)`, como os bimestrais da pasta), com uma aba por sessão liberada para a equipe (`Sessão DD-MM`, a mais recente primeiro), no molde **Controle de Pauta**: painel nas linhas 1-19, cabeçalho na linha 20, processos em A21:Y320 |
 | Monocráticas — Gabinete CMT | uma aba por mês de registro (sem data de registro: mês da minuta) |
 | Controles especiais — Gabinete CMT | Metas (com encerrados), Sobrestados, Casos sensíveis |
 
 Cores: formatação condicional na própria planilha. Nas pautas, a do molde (liberado lilás, corrigido azul,
 pendência amarela, minutado verde, desfecho laranja); nas demais, a mesma lógica pelas colunas de etapa e aviso.
 
-## Pautas: colunas do molde × Pauta da equipe
+## Pautas: colunas do molde × Ex Officio
 
 A Item · B Processo · C Classe · D Assunto · E Detalhes (com `#SO`/`#Pref` quando há sustentação oral/preferência) ·
 F Pendências (**fórmula do molde, nunca gravada**) · G Etapa (fórmula do molde, ou Corrigido/Liberado) · H Minutado em ·

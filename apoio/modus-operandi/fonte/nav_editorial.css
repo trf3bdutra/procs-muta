@@ -1,5 +1,5 @@
-/* ===== Barra editorial (Expediente), gêmea da Pauta da equipe.
-   Linha de cima (header.top): marca, cadernos (Equipe / Compêndio / Editor) e utilitários. Linha de baixo (#cmp-nav): seções numeradas; fica presa no topo ao rolar. ===== */
+/* ===== Barra editorial (Expediente), gêmea da Ex Officio.
+   Linha de cima (header.top): marca, cadernos (Equipe / Modus Operandi / Editor) e utilitários. Linha de baixo (#cmp-nav): seções numeradas; fica presa no topo ao rolar. ===== */
 header.top.nx,#cmp-nav{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--ei2:#45605d;--em:#617570;--em2:#55584f;--eg:#235a55;--eo:#a57829;--eo2:#805b18;--ew:#fff;--ebd:#fff;--etb:#d4c6a1;--etf:#f5efd9;--eti:#645530;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif}
 :root:not([data-theme="light"]) header.top.nx,:root:not([data-theme="light"]) #cmp-nav{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--ei2:#c5d2d8;--em:#a7a8a9;--em2:#b6bcc0;--eg:#6eba8a;--eo:#e6c27a;--eo2:#e6c27a;--ew:#0a1821;--ebd:#10222e;--etb:#5a4a2c;--etf:#33261d;--eti:#e6c27a}
 header.top.nx{position:relative!important;top:auto;display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:14px!important;row-gap:0!important;padding:5px 22px 0!important;height:65px;box-sizing:border-box;background:var(--ep)!important;color:var(--ei)!important;border-bottom:0!important}

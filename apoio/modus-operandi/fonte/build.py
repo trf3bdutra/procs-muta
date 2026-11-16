@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Monta apoio/cmt-compendio/cmt-compendio.html (modo padrão; modo avançado liberado pelo login, mesmo código) e cmt-editor.html (editor)
-a partir desta pasta e da base do procs-muta. Perfis (equipe, avancado, editor): apoio/acessos.json (funções em apoio/pauta-equipe/api).
+"""Monta apoio/modus-operandi/modus-operandi.html (modo padrão; modo avançado liberado pelo login, mesmo código) e modus-operandi-editor.html (editor)
+a partir desta pasta e da base do procs-muta. Perfis (equipe, avancado, editor): apoio/acessos.json (funções em apoio/ex-officio/api).
 
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
   ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   editorial_d.js · editorial_d.css · editorial_apoios.json   Minuta-Matriz (arquitetura D) e apoios do canhoto
-  nav_editorial.css                                 barra editorial (Expediente), gêmea da Pauta da equipe
+  nav_editorial.css                                 barra editorial (Expediente), gêmea do Ex Officio
   diretrizes_manual.html                            manual de redação das Diretrizes (Padrões decisórios só no acesso avançado)
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
@@ -183,9 +183,9 @@ def montar(var):
     # Diretrizes: manual de redação novo (documento próprio, embutido; Padrões decisórios só no acesso avançado)
     t = troca(t, '<section id="v-dir" hidden>', '<script type="application/json" id="dir-manual">' + json.dumps((H/'diretrizes_manual.html').read_text(encoding='utf-8'), ensure_ascii=False).replace('<', '\\u003c') + '</script>\n<section id="v-dir" hidden>')
     js = 'window.VDM_PUBLICO=true;\n' + js + '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8') + '\n' + (H/'acesso.js').read_text(encoding='utf-8')
-    # identidade gêmea da Pauta da equipe: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
+    # identidade gêmea do Ex Officio: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
     css += (H/'publico.css').read_text(encoding='utf-8') + (H/'acesso.css').read_text(encoding='utf-8')
-    t = troca(t, '<div class="brand"><small>TRF3 · Gabinete CMT</small><b>CMT Compêndio · Referenciais</b></div>',
+    t = troca(t, '<div class="brand"><small>TRF3 · Gabinete CMT</small><b>Modus Operandi · Referenciais</b></div>',
               '<div class="brand tw"><i></i></div>')
     t = troca(t, '<header class="top">', '<header class="top nx">')
     ARR = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
@@ -194,9 +194,9 @@ def montar(var):
     t = troca(t, a, a + '    <a class="hb hbx nx-tx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<span>Notificações</span><i class="bdg" id="eq-cnot" hidden></i></a>'
               '<a class="hb hbx nx-tx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<span>Diligências</span><i class="bdg" id="eq-cpen" hidden></i></a>\n'
               '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>Monitor ' + ARR + '</a>'
-              + ('' if var == 'editor' else '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compêndio" hidden>Editor ' + ARR + '</a>') +
+              + ('' if var == 'editor' else '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Modus Operandi" hidden>Editor ' + ARR + '</a>') +
               '<button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>\n')
-    # barra unificada com a Pauta da equipe (mesma pill): Início · Pauta · Compêndio, e as seções do Compêndio dentro da pill, ao lado do botão Compêndio
+    # barra unificada com o Ex Officio: cadernos no título e as seções na faixa de baixo
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
     secoes = t[i0:i1]; t = t[:i0] + t[i1:]
     abas = secoes[secoes.index('>') + 1:secoes.rindex('</nav>')]
@@ -206,12 +206,12 @@ def montar(var):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l
     abas = ''.join(lin[v] for v in ordem if v in lin)
     SL = '<span class="nx-sl" aria-hidden="true">/</span>'
-    rotulo = ('<a class="eq-cmp" href="/compendio/">Compêndio</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
-              else '<a class="eq-cmp nx-on" href="/compendio/" aria-current="page">Compêndio<em>.</em></a>')
+    rotulo = ('<a class="eq-cmp" href="/compendio/">Modus Operandi</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
+              else '<a class="eq-cmp nx-on" href="/compendio/" aria-current="page">Modus Operandi<em>.</em></a>')
     k = t.index('<div class="brand tw"><i></i></div>\n') + len('<div class="brand tw"><i></i></div>\n')
-    # barra editorial (Expediente), gêmea da Pauta da equipe: cadernos no título; as abas (.tab) seguem no cabeçalho, ocultas, e a faixa #cmp-nav as aciona
-    t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><nav class="nx-cad" aria-label="Cadernos"><a class="nx-lk" href="/equipe/#inicio" data-eqlink>Equipe</a>' + SL + rotulo + '</nav></div>'
-                 '<nav class="eqtabs eq-cpn" aria-label="Seções do Compêndio"><span class="eq-grp"><span class="tabs eq-sec" role="tablist" aria-label="Seções do Compêndio">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
+    # barra editorial (Expediente), gêmea do Ex Officio: cadernos no título; as abas (.tab) seguem no cabeçalho, ocultas, e a faixa #cmp-nav as aciona
+    t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><nav class="nx-cad" aria-label="Cadernos"><a class="nx-lk" href="/equipe/#inicio" data-eqlink>Ex Officio</a>' + SL + rotulo + '</nav></div>'
+                 '<nav class="eqtabs eq-cpn" aria-label="Seções do Modus Operandi"><span class="eq-grp"><span class="tabs eq-sec" role="tablist" aria-label="Seções do Modus Operandi">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
     a = '  </div>\n</header>\n'
     t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a)
     js += '\n' + (H/'eqnav.js').read_text(encoding='utf-8')
@@ -224,15 +224,15 @@ def montar(var):
         meta = {'repo': 'trf3bdutra/procs-muta', 'ramo': 'main', 'arquivos': {
             'modelos': {'path': 'modelos/modelos.json', 'sha': blob_sha(RAIZ/'modelos/modelos.json'), 'head': cab(RAIZ/'modelos/modelos.json')},
             'paragrafos': {'path': 'modelos/paragrafos.json', 'sha': blob_sha(RAIZ/'modelos/paragrafos.json'), 'head': cab(RAIZ/'modelos/paragrafos.json')},
-            'pecas': {'path': 'apoio/cmt-compendio/fonte/editorial_pecas.json', 'sha': blob_sha(H/'editorial_pecas.json')},
+            'pecas': {'path': 'apoio/modus-operandi/fonte/editorial_pecas.json', 'sha': blob_sha(H/'editorial_pecas.json')},
             'diretrizes': {'path': 'apoio/diretrizes.json', 'sha': blob_sha(RAIZ/'apoio/diretrizes.json')},
             'normas': {'path': 'apoio/repertorio-normativo-complemento.json', 'sha': blob_sha(RAIZ/'apoio/repertorio-normativo-complemento.json'), 'head': cab(RAIZ/'apoio/repertorio-normativo-complemento.json')}}}
         pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
         css += (H/'editor.css').read_text(encoding='utf-8')
         js = 'window.VDM_EDITOR=true;window.VDM_PAGINA_EDITOR=true;\n' + js
-        t = t.replace('<title>CMT Compêndio</title>', '<title>Editor · Compêndio · Gabinete CMT</title>', 1)
+        t = t.replace('<title>Modus Operandi</title>', '<title>Editor · Modus Operandi · Gabinete CMT</title>', 1)
     else:
-        t = t.replace('<title>CMT Compêndio</title>', '<title>Compêndio · Gabinete CMT</title>', 1)
+        t = t.replace('<title>Modus Operandi</title>', '<title>Modus Operandi · Gabinete CMT</title>', 1)
     css += (H/'nav_editorial.css').read_text(encoding='utf-8') + (H/'tema_editorial.css').read_text(encoding='utf-8')
     return t, js, css, pre
 def gerar_html(var):
@@ -245,11 +245,11 @@ def gerar_html(var):
              ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
         assert t.count(a) == 1, a[:60]
         t = t.replace(a, b)
-    out = H.parent/('cmt-editor.html' if var == 'editor' else 'cmt-compendio.html')
+    out = H.parent/('modus-operandi-editor.html' if var == 'editor' else 'modus-operandi.html')
     out.write_text(t, encoding='utf-8')
     print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
 gerar_html('compendio')
 gerar_html('editor')
-velho = H.parent/'cmt-compendio-avancado.html'
+velho = H.parent/'modus-operandi-avancado.html'
 if velho.exists():
-    velho.unlink()   # o modo avançado agora é o próprio cmt-compendio.html, liberado pelo login
+    velho.unlink()   # o modo avançado agora é o próprio modus-operandi.html, liberado pelo login

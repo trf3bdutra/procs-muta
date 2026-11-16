@@ -33,22 +33,22 @@ apoio/                         recursos de apoio à redação
   diretrizes.json              vocabulário, conectivos, preferências, correções, alertas
   magistrados.json             cadastro de magistrados (TRF3 e 1º grau)
   assuntos.json                assuntos (TPU/CNJ) e temas
-  vade-mecum.json              Vade Mecum do Compêndio (Assuntos, Temas, Súmulas, Jurisprudência, Normas, Regimento, Diretrizes,
+  vade-mecum.json              Vade Mecum do Modus Operandi (Assuntos, Temas, Súmulas, Jurisprudência, Normas, Regimento, Diretrizes,
                                Usos no gabinete, Matriz PIS-Cofins); antes vinha da planilha do Google, agora a fonte é este arquivo
   repertorio.json              repertório jurisprudencial e normativo (campo categoria: jurisprudencia | Lei, Código…)
-  diretrizes-rapidas.json      Quadro de entradas rápidas das Diretrizes (registradas no Compêndio por quem tem acesso de editor)
-  acessos.json                 Perfis do Compêndio: equipe (padrão, leitura), avancado (+ Enunciados, Repertório, Enciclopédia, Monitor)
+  diretrizes-rapidas.json      Quadro de entradas rápidas das Diretrizes (registradas no Modus Operandi por quem tem acesso de editor)
+  acessos.json                 Perfis do Modus Operandi: equipe (padrão, leitura), avancado (+ Enunciados, Repertório, Enciclopédia, Monitor)
                                e editor (+ edição de tudo); cada perfil inclui o anterior
   enciclopedia.json            Enciclopédia do modo avançado (servida só pelo /api/compendio, após o login): recursos, guias, rotina, PJe, competência, matérias, léxico
   usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)
-  pauta-equipe/                Pauta da equipe (/equipe/ na Vercel): login de cada servidor, cartões da pauta e das monocráticas e a ficha do processo;
+  ex-officio/                Ex Officio (/equipe/ na Vercel): login de cada servidor, cartões da pauta e das monocráticas e a ficha do processo;
                                api/ grava em acervo/sessoes e, no mesmo commit, na ficha do processo em acervo/operacional.json (GH_TOKEN da Vercel)
-  cmt-compendio/               CMT Compêndio: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Pauta da equipe); cmt-compendio.html (um só código; o que cada pessoa vê e edita depende do perfil em apoio/acessos.json) e cmt-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
+  modus-operandi/               Modus Operandi: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Ex Officio); modus-operandi.html (um só código; o que cada pessoa vê e edita depende do perfil em apoio/acessos.json) e modus-operandi-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
 
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo
   ficha.json                   ficha única padrão do processo (abas, grupos e campos; Produção em versão sessão ou monocrática),
-                               gerada de integracoes-ficha.md por scripts/ficha/gerar_ficha.py; usada pela Pauta da equipe
+                               gerada de integracoes-ficha.md por scripts/ficha/gerar_ficha.py; usada pela Ex Officio
   manifesto.json               versão, contagem e hash de cada arquivo (gerado)
   paradigmas.js                biblioteca de leitura (navegador e Node)
 
@@ -64,7 +64,7 @@ construtor.html · index.html   apps (ver observação abaixo)
 ```
 python3 gerar.py                         valida tudo e atualiza padrao/manifesto.json
 python3 gerar.py --importar A.json …     mescla exportações dos apps por id e valida
-python3 scripts/repertorio/vincular.py apoio/cmt-compendio/cmt-compendio.html --html
+python3 scripts/repertorio/vincular.py apoio/modus-operandi/modus-operandi.html --html
                                          localiza nos precedentes os temas, súmulas, julgados e artigos
                                          do Vade Mecum e atualiza os usos (JSON, CSV e o próprio HTML)
 ```

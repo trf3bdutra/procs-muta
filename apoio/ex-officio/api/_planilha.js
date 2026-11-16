@@ -1,4 +1,4 @@
-/* Planilhas do Google Drive ⇄ Pauta da equipe (sincronização quase em tempo real, pelo Apps Script em scripts/drive/apps-script/).
+/* Planilhas do Google Drive ⇄ Ex Officio (sincronização quase em tempo real, pelo Apps Script em scripts/drive/apps-script/).
    Autenticação própria: cabeçalho X-CMT-Planilha igual à variável CMT_PLANILHA_TOKEN da Vercel (24+ caracteres).
    Quem grava aparece como "Planilha Google"; a planilha é ferramenta do gestor, então pode designar servidor e revisor e registrar o desfecho.
    GET  /api/pauta?planilha=1&v=<commit>   se o repositório não mudou desde <commit>: {igual:true}; senão, tudo o que as planilhas mostram:
@@ -31,7 +31,7 @@ function chama(fn, query) {
   });
 }
 
-/* ---------- mesmas regras de exibição da Pauta da equipe (index.html) ---------- */
+/* ---------- mesmas regras de exibição da Ex Officio (index.html) ---------- */
 const SIG = { 'Apelação': '1º julg', 'Agravo de Instrumento': '1º julg', 'Remessa Necessária': '1º julg', 'Embargos de Declaração': 'ED', 'Agravo Interno': 'AgInt', 'Juízo de Retratação': 'Retrat' };
 function clSig(c) { c = nq(c); if (/agravo de instrumento/.test(c)) return 'AI'; if (/apelac/.test(c) && /remessa/.test(c)) return 'AC/RN'; if (/remessa/.test(c)) return 'RN'; if (/apelac/.test(c)) return 'AC'; if (/agravo interno/.test(c)) return 'AgInt'; if (/embargos/.test(c)) return 'ED'; return (c || '—').toUpperCase().slice(0, 10); }
 function tipoJ(it) { const C = (it.ctl || {}).cartao || {}; if (C.tipoJ) return C.tipoJ; const k = it.julgamento || '', c = nq(it.classe);
@@ -71,7 +71,7 @@ const DATAS = new Set(['dataMinuta', 'dataCorrecao', 'dataLiberacao', 'prazo', '
 const s = v => (v == null ? '' : String(v));
 
 /* ---------- leitura: o que cada planilha mostra ---------- */
-function bimestral(d) { const a = +d.slice(0, 4), m = +d.slice(5, 7), b = Math.floor((m + 1) / 2); return { arquivo: 'Pauta_' + a + '_' + b + 'o_bimestre_' + MESES[2 * b - 2] + '-' + MESES[2 * b - 1] + ' (Pauta da equipe)', bimestre: a + '-' + b }; }
+function bimestral(d) { const a = +d.slice(0, 4), m = +d.slice(5, 7), b = Math.floor((m + 1) / 2); return { arquivo: 'Pauta_' + a + '_' + b + 'o_bimestre_' + MESES[2 * b - 2] + '-' + MESES[2 * b - 1] + ' (Ex Officio)', bimestre: a + '-' + b }; }
 function linhaPauta(it) {
   const c = it.ctl || {}, so = c.sopref || '', tag = so ? (/^Pref/.test(so) ? '#Pref' : '#SO') : '';
   let det = s(it.obs); if (tag && nq(det).indexOf(nq(tag)) < 0) det = (det + ' ' + tag).trim();

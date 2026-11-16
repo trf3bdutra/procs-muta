@@ -1,5 +1,5 @@
 /**
- * Planilhas do Google Drive ⇄ Pauta da equipe (trf3-muta.vercel.app/equipe/)
+ * Planilhas do Google Drive ⇄ Ex Officio (trf3-muta.vercel.app/equipe/)
  *
  * Um único projeto do Apps Script (script.google.com), fora das planilhas, cuida de todas:
  *   - Pautas: um arquivo por bimestre na pasta "CMT - Pautas de Julgamento", uma aba por sessão, no molde Controle de Pauta;
@@ -77,9 +77,9 @@ function aoEditar(e) {
   pendMarcar_(ss.getId(), nome, marca);
   try {
     var r = chamar_('post', '', { edicoes: ed }), err = (r.resultados || []).filter(function (x) { return x.erro; });
-    if (err.length) ss.toast(err.map(function (x) { return x.cnj + ': ' + x.erro; }).join('\n').slice(0, 300), 'Pauta da equipe: não gravado', 8);
+    if (err.length) ss.toast(err.map(function (x) { return x.cnj + ': ' + x.erro; }).join('\n').slice(0, 300), 'Ex Officio: não gravado', 8);
   } catch (x) {
-    filaGuardar_(ed); ss.toast('Sem conexão com o app agora; a edição vai na próxima sincronização.', 'Pauta da equipe', 6);
+    filaGuardar_(ed); ss.toast('Sem conexão com o app agora; a edição vai na próxima sincronização.', 'Ex Officio', 6);
   }
 }
 /* células editadas há pouco (por aba): a sincronização não as sobrescreve enquanto o app não confirma */
@@ -114,7 +114,7 @@ function doPost(e) {
   sincronizar(false, 500);
   return ContentService.createTextOutput('ok');
 }
-function doGet() { return ContentService.createTextOutput('Planilhas ⇄ Pauta da equipe'); }
+function doGet() { return ContentService.createTextOutput('Planilhas ⇄ Ex Officio'); }
 function sincronizar(forcar, esperaMs) {
   var trava = LockService.getScriptLock(); if (!trava.tryLock(esperaMs || 2000)) return;
   try {

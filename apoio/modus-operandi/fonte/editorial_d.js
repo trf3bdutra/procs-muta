@@ -236,7 +236,7 @@ function dkResumo(t){if(XP.fora[t.k])return 'retirado';if(t.opc&&!XP.abre[t.k])r
 function dkOutros(pt,sel){var L=pt.tr.filter(function(t){return !(t.n==='Sentença'&&sentNaAbertura(pt.tr,XP.alt));});if(L.length<2)return '';
   return '<div class="dout2"><div class="cfl">'+(sel?'Outros blocos':'Blocos da parte')+'</div><ol>'+L.map(function(t,i){if(sel&&t.k===sel.k)return '';var fo=XP.fora[t.k],op=t.opc&&!XP.abre[t.k];return '<li><button type="button" data-'+(fo?'xvolta':op?'xabre':'dsel')+'="'+esc(t.k)+'"><span class="n">'+('0'+(i+1)).slice(-2)+'</span><b>'+esc(t.n)+'</b><small>'+esc(dkResumo(t))+' ›</small></button></li>';}).join('')+'</ol></div>';}
 function dkHead(){var h=$('#v-edit .pg-h');if(!h)return;var ed=XS.ed||'pecas',t=$('#v-edit .pg-t h1'),k=$('#v-edit .pg-t .dkk');if(!k&&t){k=document.createElement('p');k.className='dkk';t.parentNode.insertBefore(k,t);}
-  var I={pecas:['PADRÃO · MINUTA-MATRIZ','Minuta-Matriz','Molde-padrão de cada peça: a estrutura vem pronta, com versões, campos, regras e orientações; a fundamentação é do caso.'],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho, prontos para preencher com os dados do caso.'],dir:['DIRETRIZES DO GABINETE','Diretrizes','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.'],consulta:['CONSULTA DO CASO PAUTADO','Consulta','Escolha a sessão e o item: o Compêndio lê o cartão do processo e reúne o material aplicável.']}[ed]||['','Editorial',''];
+  var I={pecas:['PADRÃO · MINUTA-MATRIZ','Minuta-Matriz','Molde-padrão de cada peça: a estrutura vem pronta, com versões, campos, regras e orientações; a fundamentação é do caso.'],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho, prontos para preencher com os dados do caso.'],dir:['DIRETRIZES DO GABINETE','Diretrizes','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.'],consulta:['CONSULTA DO CASO PAUTADO','Consulta','Escolha a sessão e o item: o Modus Operandi lê o cartão do processo e reúne o material aplicável.']}[ed]||['','Editorial',''];
   if(k)k.textContent=I[0];if(t)t.textContent=I[1];var d=$('#x-desc');if(d)d.textContent=I[2];
   var sb=$('#x-sub');if(sb&&!sb.querySelector('.dgp')){var gp=document.createElement('span');gp.className='dgp';gp.setAttribute('role','group');gp.setAttribute('aria-label','Padrão: versões alternativas');gp.innerHTML='<span class="dgl" data-n="01">Padrão</span><span class="dgs"></span>';
     sb.insertBefore(gp,sb.firstChild);['pecas','mod'].forEach(function(k){var b=sb.querySelector('button[data-s="'+k+'"]');if(b)gp.querySelector('.dgs').appendChild(b);});}
@@ -293,7 +293,7 @@ function xPagina(){
     if(sel&&pt.id!=='acordao'&&!xFixo(pt.id,sel.t))bt+='<div class="cf"><button type="button" class="dact" data-xfora="'+esc(sel.t.k)+'">Retirar este bloco da peça</button></div>';
     $('#dcan-bot').innerHTML=bt+dkOutros(pt,sel&&sel.t);
   }else{
-    $('#dcan-top').innerHTML=(KX.falhou&&DK.cx&&dkPron()!=='desp'?'<p class="cxnota">O construtor não carregou neste navegador; segue o modo Modelo.</p>':DK.cx&&!KX.ready&&dkPron()!=='desp'?'<p class="cxnota">Carregando o construtor do gabinete…</p>':DK.cx&&dkPron()==='desp'?'<p class="cxnota">Despacho segue os modelos do Compêndio.</p>':'')+(sel?dkCanTrecho(sel):dkCanPeca(PT,pt));
+    $('#dcan-top').innerHTML=(KX.falhou&&DK.cx&&dkPron()!=='desp'?'<p class="cxnota">O construtor não carregou neste navegador; segue o modo Modelo.</p>':DK.cx&&!KX.ready&&dkPron()!=='desp'?'<p class="cxnota">Carregando o construtor do gabinete…</p>':DK.cx&&dkPron()==='desp'?'<p class="cxnota">Despacho segue os modelos do Modus Operandi.</p>':'')+(sel?dkCanTrecho(sel):dkCanPeca(PT,pt));
     $('#dcan-bot').innerHTML=dkOutros(pt,sel?sel.t:null);
     var tb=as.querySelector('[data-dtemp]');if(tb){if(DK.temp)['ci','pz','in','db'].forEach(function(k){var el=tb.querySelector('[data-dtc="'+k+'"]');if(k==='db')el.checked=!!DK.temp.db;else if(DK.temp[k])el.value=DK.temp[k];});dkTempCalc(tb);}
   }
@@ -451,11 +451,11 @@ function dirPrep(f){var D=f.contentDocument;if(!D||!D.body)return;
 document.addEventListener('cmt-acesso',function(){var f=document.getElementById('dir-fr');if(f)dirPrep(f);});
 try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f&&f.contentDocument)f.contentDocument.documentElement.setAttribute('data-theme',document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light');}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}catch(e){}
 
-/* ===== Navegação única do Compêndio, numa faixa abaixo do cabeçalho: sem "Editorial";
+/* ===== Navegação única do Modus Operandi, numa faixa abaixo do cabeçalho: sem "Editorial";
    abas comuns (Ementário · Padrão: Minuta-Matriz e Modelos · Diretrizes · Consulta) e abas do acesso avançado (Enunciados · Repertório · Enciclopédia) ===== */
 (function(){var top=document.querySelector('header.top');if(!top)return;
   var IT=[['ement','Ementário'],['|'],['pecas','Minuta-Matriz','Padrão'],['mod','Modelos'],['|'],['dir','Diretrizes'],['consulta','Consulta'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
-  var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compêndio');
+  var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Modus Operandi');
   var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
     var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false">'+x[1]+'</button>';});
   bar.innerHTML=h+'</div>';top.parentNode.insertBefore(bar,top.nextSibling);document.body.classList.add('cmp-nav-fora');

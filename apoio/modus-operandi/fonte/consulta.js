@@ -7,7 +7,7 @@
   function dg(s){return String(s||'').replace(/\D/g,'');}
   function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function brd(d){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||'');return m?m[3]+'/'+m[2]+'/'+m[1]:(d||'');}
-  function jget(u){return fetch(u,{cache:'no-store',credentials:'same-origin'}).then(function(r){if(r.status===401){var e=new Error('Para consultar a pauta, entre primeiro pela Pauta da equipe (/equipe/) com o seu nome e a sua senha.');e.login=true;throw e;}if(!r.ok)throw new Error('HTTP '+r.status+' em '+u);return r.json();});}
+  function jget(u){return fetch(u,{cache:'no-store',credentials:'same-origin'}).then(function(r){if(r.status===401){var e=new Error('Para consultar a pauta, entre primeiro pelo Ex Officio (/equipe/) com o seu nome e a sua senha.');e.login=true;throw e;}if(!r.ok)throw new Error('HTTP '+r.status+' em '+u);return r.json();});}
   function tipoJ(classe,julg){var k=String(julg||''),c=nq(classe);
     if(k==='ED')return 'Embargos de Declaração';if(k==='AgInt')return 'Agravo Interno';if(k==='JR')return 'Juízo de Retratação';
     if(/agravo de instrumento/.test(c))return 'Agravo de Instrumento';if(/remessa/.test(c)&&!/apelac/.test(c))return 'Remessa Necessária';return 'Apelação';}
@@ -33,7 +33,7 @@
   function carregarCal(){
     if(CQ.cal)return Promise.resolve();
     return jget('/api/sessoes').then(function(c){CQ.cal=(c.sessoes||[]).slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});})
-      .catch(function(er){CQ.cal=[];CQ.erro=er.login?er.message:'As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Compêndio dos cartões continua enviando o caso.';});
+      .catch(function(er){CQ.cal=[];CQ.erro=er.login?er.message:'As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Modus Operandi dos cartões continua enviando o caso.';});
   }
   function consultar(){
     var ses=CQ.ses,it=String(CQ.item||'').trim();if(!ses||!it){toastC('Escolha a sessão e informe o item.');return;}
@@ -78,9 +78,9 @@
     var h='<div class="cq-bar"><div><div class="lab">Sessão</div><select id="cq-ses"><option value="">escolha a sessão</option>'+opts+'</select></div>'+
       '<div><div class="lab">Item ou nº do processo</div><input id="cq-item" value="'+e(CQ.item)+'" placeholder="ex.: 12" autocomplete="off"></div>'+
       '<button class="cq-go" id="cq-go"'+(CQ.busy?' disabled':'')+'>'+(CQ.busy?'Consultando…':'Consultar')+'</button></div>';
-    if(CQ.erro)h+='<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir a Pauta da equipe</a>':'')+'</div>';
+    if(CQ.erro)h+='<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir o Ex Officio</a>':'')+'</div>';
     var P=CQ.perfil;
-    if(!P){el.innerHTML=h+'<div class="empty">Escolha a sessão, informe o item da pauta e aperte Enter. O Compêndio lê o cartão do processo gravado no procs-muta e mostra os modelos-matriz, os precedentes e os parágrafos-padrão que se aplicam ao caso.</div>';ligar();return;}
+    if(!P){el.innerHTML=h+'<div class="empty">Escolha a sessão, informe o item da pauta e aperte Enter. O Modus Operandi lê o cartão do processo gravado no procs-muta e mostra os modelos-matriz, os precedentes e os parágrafos-padrão que se aplicam ao caso.</div>';ligar();return;}
     h+='<div class="cq-caso"><div class="cq-ch"><b>'+e(P.processo||'Caso')+'</b><small>'+e(CQ.fonte)+'</small></div><dl>'+Object.keys(ROT).filter(function(k){return P[k]!=null&&k!=='processo';}).map(function(k){return '<dt>'+ROT[k]+'</dt><dd>'+e(val(k,P[k]))+'</dd>';}).join('')+'</dl>'+
       (P.subassuntos||P.especificidades||P.questoes?'':'<p class="cq-av">O cartão ainda não tem subassuntos, especificidades nem questões controvertidas; a pesquisa usa só o assunto e o tipo de julgamento.</p>')+'</div>';
     if(!BASE){el.innerHTML=h+'<div class="empty">Carregando a base do gabinete…</div>';ligar();base().then(render);return;}

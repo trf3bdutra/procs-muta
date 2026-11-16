@@ -1,5 +1,5 @@
 /* CMT · Ficha única do processo — diálogo no visual v198 (padrão cmtx), com os campos de padrao/ficha.json.
-   Um só módulo para o CMT-monitor e a Pauta da equipe: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
+   Um só módulo para o CMT-monitor e a Ex Officio: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
    para os dois HTML. Cada página entrega um adaptador:
      CMTFicha.abrir(cnj, {
        carregar: cnj => Promise<{ ficha, operacional, fonte, controles?, gestor? }>,
@@ -7,7 +7,7 @@
        irPara?:  controle => void        (botão "Abrir a página" dos Controles especiais)
        lista?:   [cnj, ...]              (anterior / próximo)
        avisar?:  (texto, tipo) => void
-       leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Pauta da equipe edita pelo prontuário lateral)
+       leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Ex Officio edita pelo prontuário lateral)
      })
    Regras dos Controles especiais (quando cada grupo vale): CMTFicha.controlesDe(fonte, operacional), as mesmas do servidor (api/_metas, _sobr, _sens). */
 (function () {

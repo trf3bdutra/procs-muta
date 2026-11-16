@@ -2,7 +2,7 @@
  "schema": "gabcmt.apoio.acessos",
  "versao": "2.0.0",
  "atualizadoEm": "2026-11-15",
- "descricao": "Perfis do CMT Compêndio. Cada perfil inclui o anterior. equipe (padrão: todos, com ou sem login): Ementário, Editorial, Diretrizes com as entradas rápidas, Consulta; só leitura. avancado: + Enunciados, Repertório, Enciclopédia e atalho do Monitor; só leitura. editor: + edição de tudo (modelos, parágrafos, peças, diretrizes, normas e entradas rápidas), na página e no /editor/. Nomes do login da Pauta da equipe; vale também por apelido do cadastro da equipe. Quem não está listado tem o perfil equipe.",
+ "descricao": "Perfis do Modus Operandi. Cada perfil inclui o anterior. equipe (padrão: todos, com ou sem login): Ementário, Editorial, Diretrizes com as entradas rápidas, Consulta; só leitura. avancado: + Enunciados, Repertório, Enciclopédia e atalho do Monitor; só leitura. editor: + edição de tudo (modelos, parágrafos, peças, diretrizes, normas e entradas rápidas), na página e no /editor/. Nomes do login da Ex Officio; vale também por apelido do cadastro da equipe. Quem não está listado tem o perfil equipe.",
  "perfis": {
   "avancado": [],
   "editor": ["Bruno"]

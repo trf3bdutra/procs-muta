@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#28594f">
-<title>Pauta da equipe · Gabinete CMT</title>
+<title>Ex Officio · Gabinete CMT</title>
 <style>
 :root{--font:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
 --g1:#3a6c5f;--g2:#2e5d52;--teal:#26524b;--petrol:#1f4c4f;--deep:#173c47;--gold:#e6c27a;--gold-d:#c9a24a;--mint:#9fd6c2;--sky:#a9cfe6;
@@ -909,7 +909,7 @@ html[data-theme=dark] #v-pauta.ed.mono .urg{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07
 }
 </style>
 <style id="nx-css">
-/* ===== Barra editorial (Expediente): duas linhas. Em cima, a marca, os cadernos (Equipe · Compêndio) e os utilitários; embaixo, as seções numeradas.
+/* ===== Barra editorial (Expediente): duas linhas. Em cima, a marca, os cadernos (Ex Officio · Modus Operandi) e os utilitários; embaixo, as seções numeradas.
    Ao rolar, a linha de cima sai e a das seções fica presa no topo. ===== */
 #app header.nx{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--ei2:#45605d;--em:#617570;--eg:#235a55;--eo:#a57829;--eo2:#805b18;--ew:#fff;--ebd:#fff;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif;
   display:block!important;padding:0!important;gap:0!important;background:var(--ep)!important;color:var(--ei)!important;border-bottom:1px solid var(--el);top:-65px}
@@ -1243,7 +1243,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
 </head>
 <body>
 <div id="entrada" hidden>
-  <div class="en-top"><i></i>GABINETE CMT · PAUTA DA EQUIPE</div>
+  <div class="en-top"><i></i>GABINETE CMT · EX OFFICIO</div>
   <div class="en-main">
     <form class="en-card" id="en-form" autocomplete="on">
       <h1 id="en-sauda">Bom dia</h1><p>Selecione o seu nome e digite a sua senha.</p>
@@ -1255,17 +1255,17 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
     </form>
     <section class="en-story"><h2>Pauta da <em>equipe</em></h2>
       <p>Gabinete do Desembargador Federal Carlos Muta · Turma Regional de Mato Grosso do Sul.</p>
-      <ol><li><b>01</b><span>Escolha a sessão e veja os seus processos.</span></li><li><b>02</b><span>Abra o cartão e registre a minuta: caracterização, admissibilidade, recursos e julgamento.</span></li><li><b>03</b><span>Marque as etapas e consulte o Compêndio a partir do próprio cartão.</span></li></ol>
+      <ol><li><b>01</b><span>Escolha a sessão e veja os seus processos.</span></li><li><b>02</b><span>Abra o cartão e registre a minuta: caracterização, admissibilidade, recursos e julgamento.</span></li><li><b>03</b><span>Marque as etapas e consulte o Modus Operandi a partir do próprio cartão.</span></li></ol>
     </section>
   </div>
 </div>
 
 <div id="app" hidden>
-  <header class="nx"><div class="nx1"><span class="br"><i class="star" aria-hidden="true"></i></span><div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><div class="nx-cad"><b class="nx-on">Equipe<em>.</em></b><span class="nx-sl" aria-hidden="true">/</span><span class="eq-grp"><a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-dd" role="menu" aria-label="Seções do Compêndio"><a href="/compendio/#v=ement">Ementário</a><b>Editorial</b><a href="/compendio/#v=edit&amp;s=pecas">Minuta-Matriz</a><a href="/compendio/#v=edit&amp;s=mod">Modelos</a><a href="/compendio/#v=edit&amp;s=par">Banco de trechos</a><a href="/compendio/#v=edit&amp;s=dir">Diretrizes</a><a href="/compendio/#v=edit&amp;s=consulta">Consulta</a></span></span></div></div><span class="sp"></span><div class="nx-ut"><button class="hb hbx nx-tx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="c-not" hidden></i></button><div class="nx-mn" id="nx-mn"><button class="hb hbx nx-tx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="c-pen" hidden></i></button><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button><span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb ic" id="sair" title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button></div><button class="hb ic" id="nx-mais" type="button" title="Mais opções" aria-label="Mais opções" aria-expanded="false" aria-controls="nx-mn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
-    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page"><i class="nx-n">01</i>Início</a><a href="#pauta" data-vw="pauta"><i class="nx-n">02</i>Pautas</a><a href="#mono" data-vw="mono"><i class="nx-n">03</i>Monocráticas</a><a href="#controles" data-vw="ctrl"><i class="nx-n">04</i>Monitoramento</a><span id="salvo"></span></nav></header>
+  <header class="nx"><div class="nx1"><span class="br"><i class="star" aria-hidden="true"></i></span><div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><div class="nx-cad"><b class="nx-on">Ex Officio<em>.</em></b><span class="nx-sl" aria-hidden="true">/</span><span class="eq-grp"><a class="eq-cmp" href="/compendio/">Modus Operandi</a><span class="eq-dd" role="menu" aria-label="Seções do Modus Operandi"><a href="/compendio/#v=ement">Ementário</a><b>Editorial</b><a href="/compendio/#v=edit&amp;s=pecas">Minuta-Matriz</a><a href="/compendio/#v=edit&amp;s=mod">Modelos</a><a href="/compendio/#v=edit&amp;s=par">Banco de trechos</a><a href="/compendio/#v=edit&amp;s=dir">Diretrizes</a><a href="/compendio/#v=edit&amp;s=consulta">Consulta</a></span></span></div></div><span class="sp"></span><div class="nx-ut"><button class="hb hbx nx-tx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="c-not" hidden></i></button><div class="nx-mn" id="nx-mn"><button class="hb hbx nx-tx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="c-pen" hidden></i></button><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button><span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb ic" id="sair" title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button></div><button class="hb ic" id="nx-mais" type="button" title="Mais opções" aria-label="Mais opções" aria-expanded="false" aria-controls="nx-mn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div>
+    <nav class="tabs" aria-label="Seções"><a href="#inicio" data-vw="inicio" aria-current="page"><i class="nx-n">01</i>Mural</a><a href="#pauta" data-vw="pauta"><i class="nx-n">02</i>Pautas</a><a href="#mono" data-vw="mono"><i class="nx-n">03</i>Monocráticas</a><a href="#controles" data-vw="ctrl"><i class="nx-n">04</i>Monitoramento</a><span id="salvo"></span></nav></header>
   <main id="v-inicio" class="home-v2">
     <section class="hc-hero" aria-label="Central de Entregas"><div class="hc-watermark" aria-hidden="true"></div>
-      <div><small class="hc-ey">01 / Central de trabalho</small><h1 id="ola-t">Central <em>de entregas.</em></h1>
+      <div><small class="hc-ey">01 / Mural do gabinete</small><h1 id="ola-t">Mural <em>de entregas.</em></h1>
         <p><span id="ola-s"></span>Processos, minutas, revisões, liberações e pedidos urgentes em todas as frentes.</p><p id="ola-d" style="margin-top:6px;font-size:11px"></p></div>
       <div class="hc-head-actions"><div id="ola-ch"></div><button class="b" id="hc-recarregar" type="button">↻ Atualizar entregas</button></div>
     </section>
@@ -1888,7 +1888,7 @@ function cartao(it){
       '<button class="xb" data-a="ficha" title="Ficha integral do processo (leitura)" aria-label="Ficha integral do processo">'+sv('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>')+'</button></span></span></div></article>';}
   if(!ab||S.fonte!=='mono')return h+'</article>';
   var dt=function(f){return '<input type="date" data-d="'+f+'" value="'+esc(it[f]||'')+'">';};
-  return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b" data-a="ficha" title="Ficha completa do processo (a mesma do CMT-monitor)">▤ Ficha do processo</button><button class="b pri" data-a="comp" title="Consultar no Compêndio com os dados deste cartão">◈ Compêndio</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
+  return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b" data-a="ficha" title="Ficha completa do processo (a mesma do CMT-monitor)">▤ Ficha do processo</button><button class="b pri" data-a="comp" title="Consultar no Modus Operandi com os dados deste cartão">◈ Modus Operandi</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
 }
 /* ===== regras das monocráticas: o fluxo é minutar → revisar → assinatura (art. 932), não o do voto levado à sessão ===== */
 var CPM={tipoAto:['Decisão monocrática (art. 932)','Decisão de urgência','Despacho','Decisão de admissibilidade','Juízo de retratação','Homologação / extinção'],
@@ -1996,7 +1996,7 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
   var chip=function(tx,c){return '<span class="prt-ch'+(c?' '+c:'')+'">'+tx+'</span>';};
   el.innerHTML='<section class="prt" aria-labelledby="prt-t"><div class="prt-h"><span class="prt-ic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>'+
     '<div><h2 id="prt-t">'+($('#v-pauta')._ed?'Prontuário <em>de produção.</em>':'Prontuário de produção')+'</h2><small>'+(mono?'Monocrática'+(((it.ctl||{}).tipoAto)?' · '+esc(it.ctl.tipoAto):''):'Item '+esc(it.item||'—')+' · sessão de '+esc(br(S.ses)))+'</small></div><span class="sp"></span>'+
-    '<span class="pc prt-pc prt-hb" data-k="'+S.prt+'"><button data-a="ficha" aria-label="Ficha completa do processo" title="Ficha completa do processo">▤</button><button data-a="comp" aria-label="Consultar no Compêndio" title="Consultar no Compêndio com os dados deste processo">◈</button></span>'+
+    '<span class="pc prt-pc prt-hb" data-k="'+S.prt+'"><button data-a="ficha" aria-label="Ficha completa do processo" title="Ficha completa do processo">▤</button><button data-a="comp" aria-label="Consultar no Modus Operandi" title="Consultar no Modus Operandi com os dados deste processo">◈</button></span>'+
     '<button data-prt="ant" aria-label="Processo anterior" title="Processo anterior"'+(ix>0?'':' disabled')+'>‹</button><button data-prt="prox" aria-label="Próximo processo" title="Próximo processo"'+(ix>=0&&ix<V.length-1?'':' disabled')+'>›</button><button data-prt="x" aria-label="Fechar o prontuário" title="Fechar (Esc)">×</button></div>'+
     '<div class="prt-id"><b>'+esc(it.cnj)+'</b><small>'+esc([it.assunto,it.classe].filter(Boolean).join(' · '))+'</small><small class="prt-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</small>'+
     '<div class="prt-chs">'+chip('Minutante <b>'+esc(mins)+'</b>')+chip('Corretor <b>'+esc(cor)+'</b>')+chip('Etapa <b>'+esc(etLbl(et))+'</b>')+chip('Entrega <b>'+(pz?esc(br(pz).slice(0,5))+' · '+esc(quando(pz)):'—')+'</b>',dd!=null&&dd<0&&et==='A fazer'?'al':'')+chip('<b>'+A.length+'</b> alerta'+(A.length===1?'':'s'),A.length?'al':'')+'</div></div>'+
@@ -2395,7 +2395,7 @@ function corpo(it,tj){
   var C=(it.ctl||{}).cartao||{},pts=String(it.partes||'').split(/\s+[x×]\s+/).filter(Boolean),pz=prazo(it),recs=C.recursos||[];
   var AI=tj==='Agravo de Instrumento'||recs.some(function(r){return r.tipo==='Agravo de instrumento';}),RN=tj==='Remessa Necessária'||recs.some(function(r){return r.tipo==='Remessa necessária';});
   var h='<div class="pn">'+
-   '<section class="w"><h3><em>◈</em>Caracterização do caso <small>· alimenta a pesquisa no Compêndio</small></h3><div class="grid">'+
+   '<section class="w"><h3><em>◈</em>Caracterização do caso <small>· alimenta a pesquisa no Modus Operandi</small></h3><div class="grid">'+
      f('Tipo de julgamento','<select data-p="tipoJ"><option value="">auto: '+esc(tipoJ({classe:it.classe,julgamento:it.julgamento}))+'</option>'+TJ.map(function(x){return '<option'+(x===C.tipoJ?' selected':'')+'>'+x+'</option>';}).join('')+'</select>')+
      f('Recurso relacionado',inp('relacionado','ex.: Apelação relacionada nº …'))+f('Subassuntos',ta('subassuntos','subassuntos (do inteiro teor)'))+f('Especificidades',ta('especificidades','peculiaridades do caso, distinções'))+
      f('Questões controvertidas',ta('questoes','o que o recurso discute, ponto a ponto'))+f('Síntese fática',ta('sintese','fatos relevantes do caso, em poucas linhas'))+f('Observação',ta('obsGeral','observação geral sobre o processo'))+f('Detalhes da pauta','<textarea rows="2" data-d="obs" placeholder="anotações (coluna Detalhes)">'+esc(it.obs||'')+'</textarea>')+'</div></section>'+
@@ -2475,7 +2475,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
   if(a==='comp'){var C2=(it.ctl||{}).cartao||{},P={processo:it.cnj,classe:it.classe,assunto:it.assunto,subassuntos:C2.subassuntos,especificidades:C2.especificidades,questoes:C2.questoes,tipoJulgamento:tipoJ(it),decisaoOrigem:(C2.orig||{}).tipo,
       recursos:(C2.recursos||[]).map(function(r){return [r.tipo,r.parte].filter(Boolean).join(' · ');}).filter(Boolean),resultado:(it.ctl||{}).resJulg};
     Object.keys(P).forEach(function(x){if(!P[x]||(Array.isArray(P[x])&&!P[x].length))delete P[x];});
-    window.open('/compendio/#consulta='+S.ses+'/'+encodeURIComponent(it.item||it.cnj)+'&caso='+encodeURIComponent(JSON.stringify(P)),'cmt-compendio');}
+    window.open('/compendio/#consulta='+S.ses+'/'+encodeURIComponent(it.item||it.cnj)+'&caso='+encodeURIComponent(JSON.stringify(P)),'modus-operandi');}
 });
 /* ================= página inicial: entregas do servidor, calendário, ausências e histórico ================= */
 var P={dados:null,mes:'',aus:[],tipos:[]};
@@ -2875,7 +2875,7 @@ api('/api/login').then(function(j){iniciar(j.usuario,j.gestor);}).catch(function
 })();
 </script>
 <script id="cmt-agenda">
-/* Agenda do calendário na Pauta da equipe: afazeres, alertas, eventos, prazos-limite, datas e ausências em acervo/sessoes/agenda.json
+/* Agenda do calendário no Ex Officio: afazeres, alertas, eventos, prazos-limite, datas e ausências em acervo/sessoes/agenda.json
    (a mesma do CMT-monitor) e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json). Lê /api/sessoes?agenda=1; só o gestor grava. */
 (function(){ if(window.CMTAgenda) return;
   var D={itens:null,feitos:null,aus:[]},ok=false,t=null,lsf=function(){try{return JSON.parse(localStorage.getItem('cc_feitos')||'{}')}catch(e){return {}}};
@@ -3580,7 +3580,7 @@ html.cmt-fx-open{overflow:hidden!important}
    de MS, Carnaval, Semana Santa e Corpus Christi; recesso de 20/12 a 20/01 na contagem de prazos (CPC, art. 220);
    datas do calendário do gabinete marcadas “não conta para prazo”; suspensões informadas no processo.
    O expediente do gabinete fica em acervo/sessoes/calendario.json (expediente: diasSemana, semExpediente, nomes, tipos, semPrazo, recesso).
-   Um só módulo para o CMT-monitor e a Pauta da equipe (scripts/ficha/embutir.py). */
+   Um só módulo para o CMT-monitor e a Ex Officio (scripts/ficha/embutir.py). */
 (function () {
 'use strict';
 if (window.CMTForense && window.CMTForense.versao >= 1) return;
@@ -3657,7 +3657,7 @@ window.CMTForense = { versao: 1, TIPOS: TIPOS, SEM_PRAZO: SEM_PRAZO, sugestoes: 
    a gravação no card do Controle de Pauta (applySuggestions), a IA opcional, o panorama e as estatísticas: a ficha
    (padrao/ficha-dialogo.js) conduz a conferência e grava no operacional, pelo modelo padrao/ficha.json.
    O .txt é lido só na memória do navegador; nada do texto integral é gravado: só os campos confirmados.
-   Embutido no CMT-monitor e na Pauta da equipe por scripts/ficha/embutir.py. */
+   Embutido no CMT-monitor e na Ex Officio por scripts/ficha/embutir.py. */
 (function(){'use strict';
 if(window.CMTInteiroTeor&&window.CMTInteiroTeor.parseTxt)return;
 
@@ -4426,7 +4426,7 @@ window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABE
 })();
 
 /* CMT · Ficha única do processo — diálogo no visual v198 (padrão cmtx), com os campos de padrao/ficha.json.
-   Um só módulo para o CMT-monitor e a Pauta da equipe: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
+   Um só módulo para o CMT-monitor e a Ex Officio: scripts/ficha/embutir.py copia este arquivo e padrao/ficha-dialogo.css
    para os dois HTML. Cada página entrega um adaptador:
      CMTFicha.abrir(cnj, {
        carregar: cnj => Promise<{ ficha, operacional, fonte, controles?, gestor? }>,
@@ -4434,7 +4434,7 @@ window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABE
        irPara?:  controle => void        (botão "Abrir a página" dos Controles especiais)
        lista?:   [cnj, ...]              (anterior / próximo)
        avisar?:  (texto, tipo) => void
-       leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Pauta da equipe edita pelo prontuário lateral)
+       leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Ex Officio edita pelo prontuário lateral)
      })
    Regras dos Controles especiais (quando cada grupo vale): CMTFicha.controlesDe(fonte, operacional), as mesmas do servidor (api/_metas, _sobr, _sens). */
 (function () {

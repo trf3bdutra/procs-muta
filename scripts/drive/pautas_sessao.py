@@ -18,7 +18,7 @@ RAIZ = pathlib.Path(__file__).resolve().parents[2]
 pasta = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else '.')
 D = json.loads((pasta / 'planilhas.json').read_text(encoding='utf-8'))
 LINHAS = 300
-# colunas do molde (A..Y) e o cabeçalho correspondente na exportação da Pauta da equipe
+# colunas do molde (A..Y) e o cabeçalho correspondente na exportação da Ex Officio
 MOLDE = ['Item', 'Processo', 'Classe', 'Assunto', 'Detalhes', None, None, 'Minutado em', 'Servidor', 'Revisor',
          'Intervenção', 'Parecer', 'Preliminares', 'Tempestividade', 'Preparo', 'Representação', 'Mídias',
          'Resultado', 'Consectários', 'Honorários', 'Tópico-síntese', 'Desfecho', 'Intercorrência', 'Meta', 'Apreciação']
@@ -42,7 +42,7 @@ def serial_iso(d):
 
 def bimestral(d):
     a, m = int(d[:4]), int(d[5:7]); b = (m + 1) // 2
-    return 'Pauta_%d_%do_bimestre_%s-%s (Pauta da equipe)' % (a, b, MESES[2 * b - 2], MESES[2 * b - 1]), '%d-%d' % (a, b)
+    return 'Pauta_%d_%do_bimestre_%s-%s (Ex Officio)' % (a, b, MESES[2 * b - 2], MESES[2 * b - 1]), '%d-%d' % (a, b)
 
 
 def texto(v):

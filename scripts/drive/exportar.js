@@ -1,15 +1,15 @@
-/* Exporta para JSON as planilhas que espelham no Google Drive o que a equipe vê na Pauta da equipe:
+/* Exporta para JSON as planilhas que espelham no Google Drive o que a equipe vê na Ex Officio:
      pautas        uma entrada por sessão liberada (exportação integral; pautas_sessao.py põe no molde Controle de Pauta)
      monocraticas  uma aba por mês de registro (exportação de todas as monocráticas)
      controles     abas Metas (com encerrados), Sobrestados e Casos sensíveis
    (tudo em <pasta de saída>/planilhas.json)
-   Como funciona: sobe a Pauta da equipe localmente, com as funções /api reais lendo esta cópia do repositório
+   Como funciona: sobe a Ex Officio localmente, com as funções /api reais lendo esta cópia do repositório
    (GitHub simulado, SÓ LEITURA: nada é gravado), entra como gestor de teste local e aciona os mesmos botões
    de exportação do app; cada .xlsx baixado vira linhas (cabeçalho + valores).
    Uso: node scripts/drive/exportar.js <pasta de saída>     (precisa do Playwright com Chromium)
    Quem grava no Drive é a tarefa agendada, com o conector do Google Sheets (as planilhas estão em planilhas.json). */
 const http = require('http'), fs = require('fs'), path = require('path');
-const RAIZ = path.resolve(__dirname, '../..'), API = path.join(RAIZ, 'apoio/pauta-equipe/api');
+const RAIZ = path.resolve(__dirname, '../..'), API = path.join(RAIZ, 'apoio/ex-officio/api');
 const SAIDA = path.resolve(process.argv[2] || path.join(require('os').tmpdir(), 'cmt-drive'));
 fs.mkdirSync(SAIDA, { recursive: true });
 
@@ -43,7 +43,7 @@ const srv = http.createServer((q, s) => {
           send(t) { s.writeHead(st, H); s.end(t); return res; }, end(t) { s.writeHead(st, H); s.end(t); return res; } };
         await require(f)(req, res); return;
       }
-      const rel = p === '/equipe/' ? 'apoio/pauta-equipe/index.html' : p.slice(1), abs = path.join(RAIZ, rel);
+      const rel = p === '/equipe/' ? 'apoio/ex-officio/index.html' : p.slice(1), abs = path.join(RAIZ, rel);
       if (!rel || !abs.startsWith(RAIZ) || !fs.existsSync(abs) || fs.statSync(abs).isDirectory()) { s.writeHead(404); return s.end(); }
       const ct = { '.html': 'text/html; charset=utf-8', '.json': 'application/json', '.js': 'text/javascript', '.css': 'text/css' }[path.extname(abs)] || 'application/octet-stream';
       s.writeHead(200, { 'Content-Type': ct }); fs.createReadStream(abs).pipe(s);

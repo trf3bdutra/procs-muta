@@ -3,7 +3,7 @@
      Monocraticas.xlsx          (uma aba por mês de registro)
      Controles_especiais.xlsx   (Metas, Sobrestados, Casos sensíveis)
    (As pautas têm uma planilha por sessão, no molde Controle de Pauta: ver pautas_sessao.py.)
-   Cabeçalho na linha 1 (fixo, com filtro), cores das etapas como na Pauta da equipe e nas planilhas de pauta:
+   Cabeçalho na linha 1 (fixo, com filtro), cores das etapas como na Ex Officio e nas planilhas de pauta:
    minutado verde, aviso amarelo, corrigido/revisado azul, liberado/para assinatura lilás.
    Também grava, para cada aba, um .tsv (usado pela tarefa diária para regravar os dados na mesma planilha).
    Uso: python3 scripts/drive/montar_xlsx.py <pasta com planilhas.json>

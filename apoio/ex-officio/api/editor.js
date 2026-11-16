@@ -1,4 +1,4 @@
-/* POST /api/editor → grava no procs-muta as alterações feitas no editor do CMT Compêndio (só para quem tem acesso de editor).
+/* POST /api/editor → grava no procs-muta as alterações feitas no editor do Modus Operandi (só para quem tem acesso de editor).
    Corpo: { msg, colecoes: { mod|par|pec|dir|nor|rap: [ { op: 'set'|'del', id, rec, orig, idx } ] } }
    orig é o registro como o editor o recebeu (JSON) ou '__novo__'; se o registro mudou no GitHub depois disso, a gravação é recusada. */
 const L = require('./_lib');
@@ -8,7 +8,7 @@ const ARQ = {
   dir: { path: 'apoio/diretrizes.json', lista: d => d.registros, ind: 1 },
   nor: { path: 'apoio/repertorio-normativo-complemento.json', lista: d => d.registros, ind: 1 },
   rap: { path: 'apoio/diretrizes-rapidas.json', lista: d => d.registros, ind: 1 },
-  pec: { path: 'apoio/cmt-compendio/fonte/editorial_pecas.json', lista: d => d.pecas, ind: 2, sem: true }
+  pec: { path: 'apoio/modus-operandi/fonte/editorial_pecas.json', lista: d => d.pecas, ind: 2, sem: true }
 };
 /* mesma serialização do editor (edJ): ignora chaves de cache iniciadas por _, salvo _topicos e _estrutura */
 const J = x => JSON.stringify(x, (k, v) => k.charAt(0) === '_' && k !== '_topicos' && k !== '_estrutura' ? undefined : v);
@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
     }
     if (conflitos.length) return res.status(409).json({ erro: 'Conflito com o que está no GitHub: ' + conflitos.slice(0, 8).join('; ') + '. Recarregue o editor e refaça essas alterações.', conflitos });
     if (!arqs.length || !n) return res.status(400).json({ erro: 'Nada a gravar.' });
-    const msg = String(b.msg || 'Editor do CMT Compêndio').slice(0, 200) + '\n\nAlterações feitas no editor do CMT Compêndio por ' + u + '.';
+    const msg = String(b.msg || 'Editor do Modus Operandi').slice(0, 200) + '\n\nAlterações feitas no editor do Modus Operandi por ' + u + '.';
     const cm = await L.commitArquivos(arqs, msg);
     res.status(200).json({ ok: true, commit: cm.sha, url: 'https://github.com/trf3bdutra/procs-muta/commit/' + cm.sha, alteracoes: n });
   } catch (e) { res.status(e.status === 409 ? 409 : 500).json({ erro: e.message }); }

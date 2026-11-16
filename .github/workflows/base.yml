@@ -27,7 +27,7 @@ jobs:
       - name: Valida e atualiza o manifesto
         run: python3 gerar.py
       - name: Reconstrói o Vade Mecum (leitura e editor)
-        run: python3 apoio/cmt-compendio/fonte/build.py
+        run: python3 apoio/modus-operandi/fonte/build.py
       - name: Grava
         run: |
           if [ -n "$(git status --porcelain)" ]; then

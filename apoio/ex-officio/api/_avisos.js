@@ -27,11 +27,11 @@ module.exports = async (req, res) => {
           link, linkTxt: String(b.linkTxt || '').trim().slice(0, 80), nivel: NIVEIS.includes(b.nivel) ? b.nivel : 'info', painel, notificacao, para,
           ate: L.dataOk(b.ate) ? b.ate : '', fixo: !!b.fixo };
         dados.registros.unshift(r);
-        msg = 'Pauta da equipe (' + u + '): aviso · ' + title.slice(0, 60);
+        msg = 'Ex Officio (' + u + '): aviso · ' + title.slice(0, 60);
       } else if (req.method === 'DELETE') {
         const n = dados.registros.length; dados.registros = dados.registros.filter(x => x.id !== req.query.id);
         if (dados.registros.length === n) return res.status(404).json({ erro: 'aviso não encontrado' });
-        msg = 'Pauta da equipe (' + u + '): retira aviso';
+        msg = 'Ex Officio (' + u + '): retira aviso';
       } else return res.status(405).json({ erro: 'método não aceito' });
       dados.atualizadoEm = new Date().toISOString();
       try { await L.gravarJson(ARQ, dados, sha, msg); return res.status(200).json({ ok: true }); }
