@@ -2065,6 +2065,24 @@ class Component extends DCLogic {
       }
       this.recompute(r); map.set(id, r);
     }
+    /* Relação completa do PJe: processo com tarefa que não veio na planilha saiu do acervo do gabinete
+       (julgado, baixado ou redistribuído). A tarefa antiga deixa de valer; fica guardada em _tarefaAnterior.
+       Só vale para a relação inteira (cobre ao menos 80% dos processos com tarefa); planilha parcial não limpa nada. */
+    let foraDoPje = 0;
+    if (type === "pje_etiquetas_tarefa" && seen.size) {
+      const comTarefa = [...map.entries()].filter(([id, r]) => txt(r.tarefa_atual));
+      const cobertos = comTarefa.filter(([id]) => seen.has(id)).length;
+      if (comTarefa.length && cobertos / comTarefa.length >= 0.8) {
+        const hoje = new Date().toISOString().slice(0, 10);
+        comTarefa.forEach(([id, r]) => {
+          if (seen.has(id)) { if (r._foraPje) delete r._foraPje; return; }
+          r._tarefaAnterior = txt(r.tarefa_atual); r._foraPje = hoje;
+          r.tarefa_atual = ""; r.data_entrada_tarefa = "";
+          this.recompute(r); foraDoPje++;
+        });
+        if (foraDoPje) issues.push({location:"Arquivo",process:"—",reason:`${foraDoPje} processo(s) com tarefa no Acervo Central não constam desta relação do PJe (saíram do gabinete: julgados, baixados ou redistribuídos). A tarefa antiga foi retirada.`});
+      }
+    }
     this.rows = [...map.values()].map(r => this.ensureShape(r));
     const recordColumns = [...new Set(this.rows.flatMap(r => Object.keys(r)).filter(isVisibleColumn))];
     const discovered = [...new Set([...importedColumns, ...recordColumns])].filter(isVisibleColumn);
@@ -2076,7 +2094,7 @@ class Component extends DCLogic {
     if (saved === false) throw new Error("A planilha foi lida, mas os dados não puderam ser salvos no navegador. Tente Salvar novamente.");
     if(issues.length)this.addImportIssues(file && file.name || spec.label,issues);
     const extra = ignored ? ` · ${ignored} linha(s) não importada(s); veja os motivos na mensagem expansível` : issues.length ? " · veja os detalhes na mensagem expansível" : "";
-    const detail = spec.complement ? ` · ${supplemented} campo(s) exclusivo(s) preenchido(s); dados Gab A preservados` : "";
+    const detail = (spec.complement ? ` · ${supplemented} campo(s) exclusivo(s) preenchido(s); dados Gab A preservados` : "") + (foraDoPje ? ` · ${foraDoPje} fora do PJe, tarefa retirada` : "");
     this.notify(`${spec.label}: ${updated} atualizado(s) · ${created} novo(s) · ${duplicates} duplicidade(s) consolidadas${detail}${extra}.`, ignored ? "warn" : "ok");
     return epoch;
   }

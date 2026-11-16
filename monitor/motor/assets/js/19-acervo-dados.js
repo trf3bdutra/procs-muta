@@ -223,6 +223,45 @@
     return { mud, novos };
   }
   window.CMTOperacional = { campos: OPER_CAMPOS, paraLinha: operParaLinha, paraOper: linhaParaOper, gravar: operGravar };
+  /* Relação do PJe importada → acervo/fonte.json (e fonte.csv) no procs-muta: tarefa, entrada na tarefa, prioridade,
+     etiquetas e classe/assunto do PJe. Processo que saiu do PJe (_foraPje) perde a tarefa; processo novo do PJe entra.
+     Os demais campos (Power BI, DataJud, trabalho do gabinete) ficam como estão. Um commit. */
+  const PJE_SYNC = ["tarefa_atual", "data_entrada_tarefa", "prioridade", "Etiquetas Originais"];
+  const csvCel = v => { const t = v == null ? "" : String(v); return /[",\n\r]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t; };
+  async function fontePje(c) {
+    if (!window.ProcsMuta || !window.ProcsMuta.gravar) throw new Error("gravação no procs-muta indisponível nesta página");
+    c = c || window.__painelCentralComponent; if (!c || !Array.isArray(c.rows)) throw new Error("acervo do navegador indisponível");
+    const doc = JSON.parse(await window.ProcsMuta.ler(`${GH.pasta}/${GH.arquivo}`));
+    if (!doc || !Array.isArray(doc.registros)) throw new Error(`${GH.pasta}/${GH.arquivo} ilegível`);
+    const agora = new Date().toISOString(), por = new Map(doc.registros.map(r => [operDig(r.processo || r.Processo), r]));
+    let mud = 0, fora = 0, novos = 0;
+    c.rows.forEach(row => {
+      const d = operDig(row.Processo || row.processo); if (d.length !== 20) return;
+      let reg = por.get(d);
+      const doPje = Array.isArray(row._pjeFields) && row._pjeFields.length;
+      if (!reg) {
+        if (!row._pjeCreated) return;
+        reg = { id: "acv-" + d, processo: row.Processo || row.processo, atualizado_em: agora };
+        ["classe_judicial", "assunto_judicial", "Assunto", "data_distribuição", "polo_ativo", "polo_passivo"].forEach(k => { if (row[k]) reg[k] = row[k]; });
+        doc.registros.push(reg); por.set(d, reg); novos++;
+      } else if (!doPje && !row._foraPje) return;
+      let m = false;
+      PJE_SYNC.forEach(k => { const v = row[k] == null ? "" : String(row[k]); if ((reg[k] || "") !== v) { reg[k] = v; m = true; } });
+      if (row._foraPje) { if (reg.fora_pje !== row._foraPje) { reg.fora_pje = row._foraPje; m = true; fora++; } }
+      else if (reg.fora_pje) { delete reg.fora_pje; m = true; }
+      if (m) { reg.atualizado_em = agora; mud++; }
+    });
+    if (!mud) return { mud: 0, fora: 0, novos: 0 };
+    doc.atualizado_em = agora;
+    const cols = Array.isArray(doc.colunas) && doc.colunas.length ? doc.colunas : [...new Set(doc.registros.flatMap(r => Object.keys(r)))];
+    if (!cols.includes("fora_pje") && doc.registros.some(r => r.fora_pje)) cols.push("fora_pje");
+    if (Array.isArray(doc.colunas)) doc.colunas = cols;
+    const csv = "﻿" + [cols.map(csvCel).join(",")].concat(doc.registros.map(r => cols.map(k => csvCel(r[k])).join(","))).join("\r\n") + "\r\n";
+    await window.ProcsMuta.gravar({ [`${GH.pasta}/${GH.arquivo}`]: JSON.stringify(doc, null, 2) + "\n", [`${GH.pasta}/${GH.planilha}`]: csv },
+      `Acervo: relação do PJe importada (${mud} processo(s) atualizados${fora ? ", " + fora + " fora do PJe" : ""}${novos ? ", " + novos + " novo(s)" : ""})`);
+    return { mud, fora, novos };
+  }
+  window.CMTAcervoFonte = { gravarPje: fontePje };
   /* o acervo inteiro no formato de linha do painel (v2), montado a partir de importado + operacional */
   async function lerRemoto() {
     /* procs-muta: o acervo fonte vem pronto em acervo/fonte.json (gabA.acervo v2), atualizado pelo DataJud e pelas planilhas */
