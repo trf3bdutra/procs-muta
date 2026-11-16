@@ -2858,7 +2858,7 @@ function notificacoes(){return api('/api/notificacoes').then(function(j){var tud
 }).catch(function(e){if(e.status===401)return;$('#avisos').innerHTML='<p class="mut">Não foi possível carregar as atualizações.</p>';});}
 function marcarLido(){if(!NT.ev.length)return;NT.lido=NT.ev[0].time;try{localStorage.setItem(chaveLido(),NT.lido);}catch(e){}$('#c-not').hidden=true;}
 function abrePainel(id){hh();['#p-not','#p-pen'].forEach(function(x){if(x!==id)$(x).hidden=true;});var p=$(id);p.hidden=!p.hidden;return !p.hidden;}
-function hh(){var h=document.querySelector('#app header');if(h)document.documentElement.style.setProperty('--hh',Math.round(h.getBoundingClientRect().bottom)+'px');}
+function hh(){var h=document.querySelector('#app header .nx1')||document.querySelector('#app header');if(h)document.documentElement.style.setProperty('--hh',Math.round(h.getBoundingClientRect().bottom)+'px');}
 window.addEventListener('resize',hh);window.addEventListener('scroll',hh,{passive:true});
 $('#b-not').onclick=function(){hh();if(abrePainel('#p-not'))setTimeout(marcarLido,1500);};
 $('#av-tudo').onclick=function(){if(abrePainel('#p-not'))setTimeout(marcarLido,1500);};
