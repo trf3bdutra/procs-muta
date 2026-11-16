@@ -71,7 +71,8 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-marcos label{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:5px 7px;border-right:1px solid var(--l);font-size:10px;font-weight:600;color:var(--m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cwe-marcos input{width:100%!important;min-width:0;height:24px!important;min-height:0!important;border-radius:0!important;box-shadow:none!important;border:1px solid var(--b2);padding:0 5px!important;font:11.5px ui-monospace,monospace;color:var(--tx);background:var(--w)}
 .cwe-marcos input.vazio{background:var(--amb);color:var(--m2)}
-.cwe-mkb{flex:0 0 auto;display:flex;align-items:center;padding:5px 8px}
+.cwe-mkb{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:5px 8px}
+.cwe-mkb button.on{background:#e3f1ea;border-color:#235a55;color:#173f3d}
 .cwe-mkb button,.cwe-acoes button,.cwe-drop button,.cwe-cfg-b>button{height:30px;padding:0 12px;border:1px solid var(--b2);border-radius:7px;background:var(--p);color:var(--tx);font-weight:700;font-size:11.5px;white-space:nowrap}
 .cwe .pri{background:var(--t);border-color:var(--t);color:var(--w)}
 .cwe-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start}
@@ -373,7 +374,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
   /* ---------- cabeçalho, marcos, esteira ---------- */
   function cabecalho(ss, d) {
     const dt = new Date(ss.data + 'T12:00:00'); const dia = isNaN(dt) ? '' : SEM[dt.getDay()];
-    const desc = [dia, ss.hora || '', d.pauta ? d.itens.length + ' itens' : 'sem pauta oficial', d.realizada ? 'realizada' : ss.pronta ? 'pauta publicada' : d.pauta ? 'pauta não publicada' : 'seleção prévia'].filter(Boolean).join(' · ');
+    const desc = [dia, ss.hora || '', d.pauta ? d.itens.length + ' itens' : 'sem pauta oficial', d.realizada ? 'realizada' : ss.publicada ? 'pauta publicada' : ss.marcosPub ? 'marcos publicados' : d.pauta ? 'pauta não publicada' : 'seleção prévia'].filter(Boolean).join(' · ');
     const mg = magistrados().map((m) => { const at = (m.atuacao || []).find((x) => /Turma Regional/i.test(x.orgao || '')) || {}; return `<span><b>${e(m.nome)}</b> <small>${e(at.papel || m.cargo || '')}</small></span>`; }).join('');
     const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da etapa 5'], ['copiar', 'Copiar a lista', 'área de transferência']];
     return `<div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p>
@@ -387,7 +388,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', '']];
     return `<section class="cwe-marcos" aria-label="Marcos da sessão"><button type="button" class="cwe-regras" data-cwe="cfg-0">regras</button><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
       ${M.map(([t, v, o, k]) => est.mEd && k ? `<label title="${e(t + ' · ' + o)}">${e(t)}<input type="date" data-cwe-mk="${k}" value="${e(v || '')}"></label>` : `<label title="${e(t + ' · ' + o)}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
-      <span class="cwe-mkb"><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
+      <span class="cwe-mkb"><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar (retira também a listagem)' : 'Publicar os marcos à equipe na Ex Officio (calendário e página inicial)'}">${ss.marcosPub || ss.publicada ? '● Marcos na Ex Officio' : 'Publicar marcos'}</button></span></section>`;
   }
   function esteira(d) {
     const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e conferência'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
@@ -396,7 +397,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
       [['Sessão cadastrada', 'feito', ok], ['Processos na seleção prévia', d.previa.length + ' processos', d.previa.length ? ok : pd], ['Rascunho de regras e designação', 'na Triagem', vz]],
       [['PDF da pauta importado', d.pauta ? d.itens.length + ' itens' : 'aguardando o PDF', d.pauta ? ok : vz], ['Conferência com a seleção prévia', d.pauta ? `${d.conf.fora.length} fora · ${d.conf.novos.length} novos · ${d.conf.batem.length} batem` : 'depois do PDF', !d.pauta ? vz : (d.ss.conferencia || {}).confirmada ? ok : pd]],
       [['A · Regras de etiquetas', `${d.tipos.ED} ED · ${d.tipos.AgInt} AgInt · ${d.tipos.JR} JR · ${d.tipos.ret} retirados`, d.pauta ? ok : vz, 0], ['B · Designação e correção', `${i.unassigned} sem minutante · ${i.unrevised} sem corretor`, !d.pauta ? vz : (i.unassigned || i.unrevised) ? pd : ok, 1]],
-      [['Conferência final', `${d.foraAc} fora do acervo · ${d.assDiv} assuntos · ${d.foraTar} fora de tarefa de sessão`, !d.pauta ? vz : (d.foraAc || d.assDiv) ? pd : ok], ['Pauta publicada à equipe', d.ss.pronta ? 'publicada em ' + A.br(d.ss.pronta) : d.realizada ? 'sessão realizada' : 'a publicar', d.ss.pronta ? ok : vz]],
+      [['Conferência final', `${d.foraAc} fora do acervo · ${d.assDiv} assuntos · ${d.foraTar} fora de tarefa de sessão`, !d.pauta ? vz : (d.foraAc || d.assDiv) ? pd : ok], ['Pauta publicada à equipe', d.ss.publicada ? (d.ss.pronta ? 'publicada em ' + A.br(d.ss.pronta) : 'publicada') : d.realizada ? 'sessão realizada' : 'a publicar', d.ss.pronta ? ok : vz]],
       [['Painel integral', 'números e distribuição', d.pauta ? ok : vz], ['Produção', `${i.lines.filter((x) => x.dataMinuta).length} minutadas · ${i.released} liberadas`, i.released ? ok : vz]]
     ];
     return `<ol class="cwe-esteira" aria-label="Etapas da sessão">${E.map(([t, s], k) => {
@@ -618,13 +619,13 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     };
     const cf = [['', d.itens.length, 'itens no espelho', 'pauta oficial importada', ''], ['fora', d.foraAc, 'fora do acervo fonte', 'sem registro no acervo', d.foraAc ? 'r' : 'g'], ['ass', d.assDiv, 'assuntos divergentes', 'pauta × acervo fonte', d.assDiv ? 'a' : 'g'], ['tar', d.foraTar, 'fora de tarefa de sessão', 'tarefa atual sem [Sessão]', d.foraTar ? 'a' : 'g'], ['des', semDes.length, 'sem designação', 'minutante ou corretor', semDes.length ? 'a' : 'g']];
     const ab = est.cf && LST[est.cf] ? LST[est.cf] : null;
-    const pub = ss.pronta;
+    const pub = ss.publicada ? (ss.pronta || 'sim') : '';
     return `<section class="cwe-st"><h2>4 · Publicar a pauta e acompanhar</h2>
       <p>A pauta vai à equipe depois de uma conferência rápida. Os marcos seguem por conta própria, no quadro acima da esteira.</p>
       ${d.pauta ? `<div class="cwe-final"><div class="h"><span class="cwe-k">CONFERÊNCIA FINAL · ANTES DE PUBLICAR</span><small>espelho da pauta × acervo fonte</small></div>
         <div class="g">${cf.map(([k, n, t, s, c]) => k ? `<button type="button" class="${c} ${est.cf === k ? 'on' : ''}" data-cwe="cf" data-v="${k}" ${n ? '' : 'disabled'}><b>${n}</b>${e(t)}<small>${e(s)}</small></button>` : `<span><b>${n}</b>${e(t)}<small>${e(s)}</small></span>`).join('')}</div>
         ${ab ? `<div class="cwe-cfl"><div>${ab.slice(0, 80).map((x) => `<button type="button" class="cwe-lnk cwe-mono" data-cwt="ficha" data-p="${e(A.digits(x.cnj))}">${e(A.cnj(x.cnj))}</button>`).join('')}${ab.length > 80 ? ` <small>e mais ${ab.length - 80}</small>` : ''}</div></div>` : '<p class="pe">Cada número abre a lista dos processos. O que ficar pendente vai como alerta no card do processo.</p>'}</div>` : '<p class="cwe-nota">Sem pauta oficial ainda: a conferência final começa depois do PDF.</p>'}
-      <div class="cwe-acoes linha">${pub ? `<span class="cwe-ok">Publicada à equipe em ${e(A.br(pub))}</span><button type="button" data-cwe="despublicar">Retirar a publicação</button>` : `<button type="button" class="pri" data-cwe="publicar" ${d.pauta && !d.realizada ? '' : 'disabled'}>Publicar à equipe</button>`}<button type="button" data-cwe="x-xlsx">Controle da pauta · Excel do bimestre</button><button type="button" data-cwt="open-pos">Abrir a pauta oficial</button><small>painel, app da equipe e planilha de controle</small></div>
+      <div class="cwe-acoes linha">${pub ? `<span class="cwe-ok">Publicada à equipe${pub !== 'sim' ? ' em ' + e(A.br(pub)) : ''} · aparece na Ex Officio</span><button type="button" data-cwe="despublicar">Retirar a publicação</button>` : `<button type="button" class="pri" data-cwe="publicar" ${d.pauta && !d.realizada ? '' : 'disabled'}>Publicar à equipe</button>`}<button type="button" data-cwe="x-xlsx">Controle da pauta · Excel do bimestre</button><button type="button" data-cwt="open-pos">Abrir a pauta oficial</button><small>painel, app da equipe e planilha de controle</small></div>
       <div class="cwe-vinc"><div class="h"><span class="cwe-k">VÍNCULO DA PAUTA DE ${e(A.br(ss.data))}</span><small>os três devem ter os mesmos itens, designações e situações</small></div>
         <div class="g"><div><span class="cwe-k">PAINEL · PAUTAS</span><b>Esta página</b><small>fonte da pauta</small></div><div><span class="cwe-k">APP DA EQUIPE</span><b>Ex Officio</b><small>${pub ? 'publicada · lê o procs-muta' : 'ainda não publicada'}</small></div><div><span class="cwe-k">PLANILHA · CONTROLE DE PAUTA</span><b>Excel do bimestre</b><small>sai pelo botão Controle da pauta</small></div></div></div>
       ${d.pauta ? listagem(d, 'Listagem da pauta') : ''}</section>`;
@@ -714,6 +715,11 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
         return { cnj: p.cnj, d: dd, c: cc, porD: o.d != null && o.d !== p.sugD?.nome ? 'escolha manual' : p.sugD?.por, porC: o.c != null && o.c !== p.sugC?.nome ? 'escolha manual' : p.sugC?.por }; }).filter((x) => x.d || x.c);
       if (!lista.length || !W.confirm('Aplicar a designação a ' + lista.length + ' processo(s) da pauta?\n\nSó preenche quem está sem minutante ou sem corretor.')) return true;
       const n = s.aplicarDesignacao(ss.id, lista); est.dsg = {}; A.msg(n + ' processo(s) designados. Grave no procs-muta pela Base.'); A.render(); return true; }
+    if (k === 'm-pub') { if (!s?.publicarMarcos) { A.msg('Motor indisponível.', true); return true; }
+      const on = !(ss.marcosPub || ss.publicada);
+      if (!on && ss.publicada && !W.confirm('Retirar os marcos da Ex Officio retira também a listagem da pauta publicada. Continuar?')) return true;
+      s.publicarMarcos(ss.id, on); A.render(); if (s.gravar) setTimeout(() => { try { s.gravar(); } catch (er) {} }, 400);
+      A.msg(on ? 'Marcos publicados à equipe. Gravando no procs-muta…' : 'Marcos retirados da equipe.'); return true; }
     if (k === 'publicar' || k === 'despublicar') { if (!s?.publicar) { A.msg('Motor indisponível.', true); return true; }
       const on = k === 'publicar';
       if (!W.confirm(on ? 'Publicar a pauta de ' + A.br(ss.data) + ' à equipe?\n\nGrava a sessão no procs-muta; a Ex Officio passa a mostrá-la como publicada.' : 'Retirar a publicação da pauta de ' + A.br(ss.data) + '?')) return true;
