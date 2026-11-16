@@ -1152,26 +1152,33 @@ async function lerPlanilhas(files) { const AF = W.CMTAtualizarFonte, X = W.XLSX;
   try { IMP.lidos = await AF.classificar(files, X); IMP.log = ''; } catch (e) { IMP.bad = true; IMP.log = 'Não li as planilhas: ' + ((e && e.message) || e); }
   IMP.ocupado = false; pintaAcervo(); }
 /* DataJud: dispara o Action "Acervo fonte · atualizar" só com o DataJud (workflow_dispatch) e acompanha até gravar */
-async function rodarDataJud() { const P = PM(); if (!IMP || !P) return; const k = P.atual || (P.token ? await P.token('Para rodar o DataJud.', true) : '');
-  const base = 'https://api.github.com/repos/trf3bdutra/procs-muta', H = { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k, 'X-GitHub-Api-Version': '2022-11-28' };
+async function rodarDataJud() { const P = PM(); if (!IMP || !P || !P.gravar) return; const k = P.atual || (P.token ? await P.token('Para rodar o DataJud.', true) : '');
+  /* sem depender da permissão de Actions: grava um pedido em acervo/entrada/, que dispara o Action "Acervo fonte · atualizar" (o passo do DataJud roda em todo envio) */
+  const base = 'https://api.github.com/repos/trf3bdutra/procs-muta', H = { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k, 'X-GitHub-Api-Version': '2022-11-28' }, ramo = P.ramo || 'main';
   const dj = (t, bad) => { if (!IMP) return; IMP.dj = esc(t); IMP.djBad = !!bad; pintaAcervo(); };
-  IMP.djRodando = true; dj('Pedindo ao GitHub para rodar o DataJud…');
-  const desde = new Date(Date.now() - 30000).toISOString();
-  try { const r = await fetch(base + '/actions/workflows/acervo-fonte.yml/dispatches', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, H), body: JSON.stringify({ ref: 'main', inputs: { datajud: true } }) });
-    if (r.status === 403 || r.status === 404) { IMP.djRodando = false; IMP.dj = 'O token deste navegador não pode disparar Actions. Rode à mão: <a href="https://github.com/trf3bdutra/procs-muta/actions/workflows/acervo-fonte.yml" target="_blank" rel="noopener">Actions › Acervo fonte · atualizar › Run workflow</a> (com “Consultar o DataJud” marcado). Para o botão funcionar, dê ao token a permissão Actions: leitura e gravação.'; IMP.djBad = true; pintaAcervo(); return; }
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    let run = null, n = 0;
-    while (n++ < 120) { await new Promise((x) => setTimeout(x, 15000));
-      const q = await fetch(base + '/actions/workflows/acervo-fonte.yml/runs?event=workflow_dispatch&per_page=5&created=>' + encodeURIComponent(desde), { cache: 'no-store', headers: H }); if (!q.ok) continue;
-      run = ((await q.json()).workflow_runs || [])[0]; if (!run) { dj('Na fila do GitHub…'); continue; }
-      if (run.status !== 'completed') { dj('DataJud rodando no GitHub (' + Math.round(n / 4) + ' min)…'); continue; }
-      break; }
-    if (!run || run.status !== 'completed') throw new Error('o GitHub não terminou em 30 minutos; confira a aba Actions');
-    if (run.conclusion !== 'success') throw new Error('o Action terminou com “' + run.conclusion + '” (' + run.html_url + ')');
+  const p2 = (n) => String(n).padStart(2, '0'), a = new Date(), nome = 'acervo/entrada/' + a.getFullYear() + p2(a.getMonth() + 1) + p2(a.getDate()) + '-' + p2(a.getHours()) + p2(a.getMinutes()) + p2(a.getSeconds()) + '-datajud.json';
+  const desde = new Date(Date.now() - 60000).toISOString(), t0 = Date.now();
+  IMP.djRodando = true; dj('Enviando o pedido do DataJud ao procs-muta…');
+  try { const sha = await P.gravar({ [nome]: JSON.stringify({ schema: 'gabA.acervo.carga', versao: 2, datajud: true, motivo: 'Rodar o DataJud (botão da Triagem)', enviado_em: a.toISOString(), arquivos: [] }) }, 'Acervo fonte: pedido do DataJud (Triagem)');
+    let semActions = false, fim = '', n = 0;
+    while (n++ < 120) { await new Promise((x) => setTimeout(x, 15000)); const min = Math.round((Date.now() - t0) / 60000);
+      if (!semActions) { let r = null; try { r = await fetch(base + '/actions/runs?head_sha=' + sha + '&per_page=10', { cache: 'no-store', headers: H }); } catch (e) {}
+        if (r && r.ok) { const run = ((await r.json()).workflow_runs || []).find((x) => /acervo-fonte\.yml$/.test(x.path || ''));
+          if (!run) { dj('Na fila do GitHub…'); continue; }
+          if (run.status !== 'completed') { dj('DataJud rodando no GitHub (' + min + ' min)…'); continue; }
+          if (run.conclusion !== 'success') throw new Error('o Action terminou com “' + run.conclusion + '” (' + run.html_url + ')');
+          fim = 'ok'; break; }
+        if (r && (r.status === 403 || r.status === 404)) semActions = true; }
+      /* sem leitura de Actions: acompanha pelos commits da fonte */
+      let c = null; try { c = await fetch(base + '/commits?sha=' + ramo + '&path=acervo/fonte.json&since=' + encodeURIComponent(desde) + '&per_page=5', { cache: 'no-store', headers: H }); } catch (e) {}
+      if (c && c.ok && ((await c.json()) || []).some((x) => /^Acervo fonte: DataJud/.test(((x.commit || {}).message || '')))) { fim = 'ok'; break; }
+      if (min >= 15) { fim = 'sem'; break; }
+      dj('DataJud rodando no GitHub (' + min + ' min)…'); }
+    if (!fim) throw new Error('o GitHub não terminou em 30 minutos; confira a aba Actions');
     dj('DataJud concluído. Relendo a fonte…');
     try { const A = M().CMTAcervoDados; if (A && A.puxar) await A.puxar(false); } catch (e) {}
     await lerFonte(); construir(); render(); if (IMP) IMP.fonte = await fonteInfo(); acervoData();
-    IMP.djRodando = false; dj('DataJud concluído e fonte relida.');
+    IMP.djRodando = false; dj(fim === 'ok' ? 'DataJud concluído e fonte relida.' : 'O DataJud rodou sem gravar mudança nova em 15 minutos (nada mudou ou ainda está terminando). A fonte foi relida.');
   } catch (e) { if (IMP) { IMP.djRodando = false; dj('Não rodou o DataJud: ' + ((e && e.message) || e), true); } } }
 async function enviarFonte() { const AF = W.CMTAtualizarFonte; if (!IMP || !IMP.lidos || IMP.ocupado) return;
   IMP.ocupado = true; IMP.bad = false;

@@ -231,6 +231,9 @@ def main():
     if not arqs and bi_fora:
         sys.exit("Só planilhas do Power BI, que não são mais usadas: nada foi alterado.")
     limpeza = bool(a.carga) and bool(json.loads(Path(a.carga).read_text(encoding="utf-8")).get("limpeza"))
+    if not arqs and a.carga and json.loads(Path(a.carga).read_text(encoding="utf-8")).get("datajud"):
+        print("Pedido do DataJud (botão da Triagem): a fonte não muda nesta etapa; o DataJud roda no passo seguinte.")
+        sys.exit(0)
     if not arqs and not limpeza:
         sys.exit("Nenhuma planilha com processos: nada foi alterado.")
 
