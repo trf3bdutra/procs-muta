@@ -60,7 +60,7 @@ async function gravarJson(rel, dados, sha, msg) {
 }
 const gestor = u => String(process.env.CMT_GESTOR || 'Bruno').split(',').map(norm).filter(Boolean).includes(norm(u));
 const dataOk = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ''));
-/* perfil no Modus Operandi (apoio/acessos.json): equipe (padrão) < avancado < editor; cada perfil inclui o anterior; vale o nome do login ou um apelido do cadastro da equipe */
+/* perfil no Modus Operandi (apoio/acessos.json): equipe (padrão) < avancado < editor < desembargador; cada perfil inclui o anterior; vale o nome do login ou um apelido do cadastro da equipe */
 let ACC = null, ACC_T = 0;
 async function acessos(usuario) {
   if (!ACC || Date.now() - ACC_T > 60e3) {
@@ -71,8 +71,8 @@ async function acessos(usuario) {
   const nomes = new Set([u].concat(reg ? [reg.nome].concat(reg.aliases || []).map(norm) : []));
   const tem = lista => (lista || []).some(n => nomes.has(norm(n)));
   const P = ACC.a.perfis || { avancado: ACC.a.compendioAvancado, editor: ACC.a.editor };
-  const editor = tem(P.editor), avancado = editor || tem(P.avancado);
-  return { perfil: editor ? 'editor' : avancado ? 'avancado' : 'equipe', avancado, editor };
+  const desembargador = tem(P.desembargador), editor = desembargador || tem(P.editor), avancado = editor || tem(P.avancado);
+  return { perfil: desembargador ? 'desembargador' : editor ? 'editor' : avancado ? 'avancado' : 'equipe', avancado, editor, desembargador };
 }
 /* arquivos grandes (mais de 1 MB) vêm pelo blob. O texto fica guardado nesta instância do servidor e só é baixado
    de novo quando o arquivo muda no GitHub (a conferência do sha é uma consulta leve). */

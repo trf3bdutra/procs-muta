@@ -1,10 +1,12 @@
-/* GET /api/painel  página inicial do servidor: calendário das pautas publicadas e todos os processos dele (minuta e correção) */
+/* GET /api/painel?cmt=1  painel do desembargador (api/_cmt.js)
+   GET /api/painel  página inicial do servidor: calendário das pautas publicadas e todos os processos dele (minuta e correção) */
 const L = require('./_lib');
 const E = require('./_entregas');
 const FICHA = require('./_ficha');
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
+  if (req.query && req.query.cmt) return require('./_cmt')(req, res, u);
   try {
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
     /* calendário: sessões com marcos publicados; processos, progresso e "meus" só das pautas com listagem publicada */
