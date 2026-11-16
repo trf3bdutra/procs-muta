@@ -299,15 +299,16 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
 </head>
 <body>
 <header class="pt-top">
-  <a class="pt-marca" href="/init/" title="Voltar à Triagem (Ab Initio)"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"></path></svg><span>Gabinete CMT</span><b>Pautas<i>.</i></b></a>
-  <nav class="pt-nav" aria-label="Aplicativos"><a href="/init/">Triagem</a><a href="/pautas/" aria-current="page">Pautas</a><a href="/office/">Ex Officio</a></nav>
+  <a class="pt-marca" href="/triagem/" title="Voltar à Triagem (Ab Initio)"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"></path></svg><span>Gabinete CMT</span><b>Pautas<i>.</i></b></a>
+  <nav class="pt-nav" aria-label="Aplicativos"><a href="/triagem/">Triagem</a><a href="/pautas/" aria-current="page">Pautas</a><a href="/office/">Ex Officio</a></nav>
   <span class="pt-esp"></span>
-  <div class="pt-acoes"><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button><button type="button" id="pt-tema" title="Tema claro ou escuro">Tema</button></div>
+  <div class="pt-acoes"><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button><button type="button" id="pt-regras" title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button type="button" id="pt-tema" title="Tema claro ou escuro">Tema</button></div>
 </header>
 <main id="pt-view"><div id="pt-carga" role="status"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main>
 <div id="cwt-toast" role="status" hidden></div>
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
+<script src="/init/assets/js/regras-gerais.js"></script>
 <script>
 /* Ab Initio · Pautas — esteira da sessão (desenho "Pautas · criação da sessão").
    Camada de apresentação sobre o motor: lê CMTSessao, o acervo (acervoDe) e a equipe.
@@ -649,16 +650,12 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
     const crit = Array.isArray(desig?.ordem) ? desig.ordem : Array.isArray(desig) ? desig.map((x) => x.id || x.nome || x) : [];
     const T = [
       ['Regras dos marcos', `<p>Nenhuma data fica fixa: cada marco segue uma regra em dias úteis, contada da sessão ou do peço dia. A sessão pode ajustar a própria data sem mudar a regra.</p><div class="cwe-cfg-l">${[['Peço dia', 'calendário do tribunal', f.pauta ? 'nesta sessão: ' + A.br(f.pauta) : ''], ['Início da preparação', '[definir] dias úteis depois do peço dia', dias(f.inicio, ss.data) != null ? 'nesta sessão: ' + dias(f.inicio, ss.data) + ' dias corridos antes da sessão' : ''], ['Entrega das minutas', '[definir] dias úteis antes da sessão', dias(f.minutas, ss.data) != null ? 'nesta sessão: ' + dias(f.minutas, ss.data) + ' dias corridos' : ''], ['Liberação', '[definir] dias úteis antes da sessão', dias(f.liberacao, ss.data) != null ? 'nesta sessão: ' + dias(f.liberacao, ss.data) + ' dias corridos' : '']].map(([a, b, c]) => `<span><b>${e(a)}</b>${e(b)}<small>${e(c)}</small></span>`).join('')}</div><button type="button" data-cwe="m-ed-cfg">Editar os marcos desta sessão</button>`],
-      ['Calendário forense', '<p>Feriados nacionais e da Justiça Federal, de MS, Carnaval, Semana Santa, Corpus Christi e recesso (20/12 a 20/01). Os marcos, os prazos da triagem e as urgências seguem este calendário.</p>'],
-      ['Regras de etiquetas', '<p>A tarefa do PJe decide o tipo de julgamento ([ED], [Sessão - ED], [Ag. Int], retratação); a etiqueta de ED só informa. Remessa necessária vem da classe. As conversões gerais (subassuntos, MPF, especificidades, alertas de impedimento e suspeição) estão em apoio/regras/etiquetas.json.</p>'],
-      ['Regras de designação', `<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>${crit.length ? `<ol class="cwe-cfg-o">${crit.map((c) => `<li>${e(typeof c === 'string' ? c : JSON.stringify(c))}</li>`).join('')}</ol>` : ''}`],
-      ['Regras de produtividade', '<p>Metas internas do gabinete, distintas das metas do CNJ: cota fixa de minutas por dia útil para quem minuta. Dia sem expediente ou sem processos pendentes: meta zero. Cada processo minutado conta uma vez por número.</p><div class="cwe-cfg-l">' + [['Dalete, José, Rodrigo, Débora e Maria Eduarda', '3 minutas por dia'], ['Victor e Estela', '4 minutas por dia'], ['Demais da equipe', 'sem meta interna'], ['Monocráticas e correções', 'sem meta interna'], ['Complexidade (½ · Ω · A · Σ)', '0,5 · 1 · 2 · 3 [VALIDAR peso na meta]']].map(([a, b]) => `<span><b>${e(a)}</b>${e(b)}</span>`).join('') + '</div>'],
-      ['Sessão', `<p>O que toda sessão nova recebe ao ser criada.</p><div class="cwe-cfg-l">${[['Órgão julgador', 'Turma Regional de MS'], ['Gabinete na relação do PJe', S.gab || 'Gab. A da Turma Regional de Mato Grosso do Sul'], ['Horário', ss.hora || '14:00'], ['Julgadores', (est.mag || []).map((m) => m.nome).join(' · ') || 'apoio/magistrados.json']].map(([a, b]) => `<span><b>${e(a)}</b>${e(b)}</span>`).join('')}</div>`],
-      ['Equipe', `<p>A equipe fica aqui, junto das regras que a usam: quem minuta entra na designação e na meta interna; a Assessoria corrige.</p><div class="cwe-eq">${eq.map((m) => `<span><b>${e(m.nome)}</b><small>${e((m.papel === 'assessoria' ? 'Assessoria' : 'Equipe') + (m.cargo ? ' · ' + m.cargo : ''))}</small>${(() => { const mi = m.minuta != null ? !!m.minuta : m.papel === 'equipe', co = m.correcao != null ? !!m.correcao : m.papel === 'assessoria'; return `<em class="${mi ? 'min' : co ? 'cor' : ''}">${mi && co ? 'minuta e corrige' : mi ? 'minuta' : co ? 'corrige' : 'apoio'}</em>`; })()}<span class="cwe-eqk">${[['minuta', 'minuta'], ['correcao', 'corrige'], ['auto', 'designação automática']].map(([k, t]) => `<label><input type="checkbox" data-cwe-eq="${e(m.nome)}" data-k="${k}" ${(k === 'auto' ? m.auto !== false : k === 'minuta' ? (m.minuta != null ? !!m.minuta : m.papel === 'equipe') : (m.correcao != null ? !!m.correcao : m.papel === 'assessoria')) ? 'checked' : ''}> ${t}</label>`).join('')}</span></span>`).join('')}</div><p class="cwe-nota">As marcas valem na hora para a designação; a gravação no procs-muta segue junto. Nomes, cargos e ausências ficam no cadastro da equipe da Ex Officio.</p>`]
+      ['Designação nesta sessão', `<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>${crit.length ? `<ol class="cwe-cfg-o">${crit.map((c) => `<li>${e(typeof c === 'string' ? c : JSON.stringify(c))}</li>`).join('')}</ol>` : ''}`],
+      ['Regras gerais', '<p>Escopo da triagem, acervo fonte, calendário forense, etiquetas, designação geral, produtividade, sessão nova e equipe ficam no diálogo comum de regras gerais, o mesmo da Triagem.</p><button type="button" data-cwe="rg">Abrir as regras gerais</button>']
     ];
     const t = Math.min(est.cfgTab, T.length - 1);
-    return `<div class="cwe-cfg-bg" data-cwe="cfg-x"></div><section class="cwe-cfg" role="dialog" aria-label="Configurações das pautas"><nav>${T.map(([n], k) => `<button type="button" data-cwe="cfg-${k}" aria-current="${k === t}">${e(n)}</button>`).join('')}</nav>
-      <div class="cwe-cfg-b"><div class="cwe-cfg-h"><span class="cwe-k">CONFIGURAÇÕES DAS PAUTAS</span><button type="button" data-cwe="cfg-x" aria-label="Fechar">×</button></div><h3>${e(T[t][0])}</h3>${T[t][1]}</div></section>`;
+    return `<div class="cwe-cfg-bg" data-cwe="cfg-x"></div><section class="cwe-cfg" role="dialog" aria-label="Configurações desta sessão"><nav>${T.map(([n], k) => `<button type="button" data-cwe="cfg-${k}" aria-current="${k === t}">${e(n)}</button>`).join('')}</nav>
+      <div class="cwe-cfg-b"><div class="cwe-cfg-h"><span class="cwe-k">CONFIGURAÇÕES DESTA SESSÃO</span><button type="button" data-cwe="cfg-x" aria-label="Fechar">×</button></div><h3>${e(T[t][0])}</h3>${T[t][1]}</div></section>`;
   }
 
   /* ---------- exportações ---------- */
@@ -743,6 +740,7 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
       else if (k.startsWith('x-')) { est.exp = false; exportar(k.slice(2), ss, dados(ss)); }
       else if (k === 'cfg') { est.cfg = true; est.exp = false; }
       else if (k === 'cfg-x') est.cfg = false;
+      else if (k === 'rg') { est.cfg = false; if (window.__abrirRegras) window.__abrirRegras(); }
       else if (k.startsWith('cfg-')) { est.cfg = true; est.cfgTab = +k.slice(4); }
       else if (k === 'filtro') { est.filtro = b.dataset.v; est.take = 60; }
       else if (k === 'mais') est.take += 80;
@@ -891,6 +889,9 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
   W.addEventListener('beforeunload', (ev) => { const s = getSes(); if (s?.pendentes && s.pendentes().length) { ev.preventDefault(); ev.returnValue = ''; } });
   /* sem alteração pendente, relê o procs-muta de tempos em tempos: o que a equipe gravou na Ex Officio aparece aqui */
   setInterval(() => { const s = getSes(); if (!pronto || !s?.recarregar || G.gravando || (s.pendentes?.() || []).length || D.hidden) return; s.recarregar().then((ok) => { if (ok) render(); }).catch(() => {}); }, 120000);
+  function abrirRegras(aba) { if (!W.CMTRegrasGerais) return msg('As regras gerais ainda estão carregando.', true); W.CMTRegrasGerais.abrir({ motor: getMotor, pagina: 'pautas', aba: aba || 'equipe' }); }
+  W.__abrirRegras = abrirRegras;
+  $('#pt-regras').addEventListener('click', () => abrirRegras());
   $('#pt-tema').addEventListener('click', () => { const dk = D.documentElement.getAttribute('data-theme') === 'dark'; if (dk) D.documentElement.removeAttribute('data-theme'); else D.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('cmt-theme', dk ? 'light' : 'dark'); } catch (e) {} });
   /* pedido de token do GitHub (aparece dentro do motor): enquanto aberto, o motor fica à vista */
   setInterval(() => { const w = getMotor(); let pede = false; try { pede = !!(w && w.document.querySelector('form input[type=password]')); } catch (e) {} D.body.classList.toggle('pt-token', pede); }, 400);

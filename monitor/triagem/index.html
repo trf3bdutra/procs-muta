@@ -89,15 +89,18 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 .chip b{font-weight:700}
 .e{font:600 11px "JetBrains Mono",monospace;color:var(--m)}
 .pop{position:absolute;z-index:40;background:var(--w);border:1px solid var(--b2);border-radius:10px;box-shadow:0 14px 36px rgba(23,63,61,.2)}
-#crit-pop{width:min(560px,calc(100vw - 32px));padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+#crit-pop{width:min(780px,calc(100vw - 32px));padding:16px 18px;display:flex;flex-direction:column;gap:12px}
 #crit-pop label.f{display:flex;flex-direction:column;gap:4px;font:600 12px Figtree,sans-serif;color:var(--m2)}
 .vals{border:1px solid #e3ded2;border-radius:8px}
 .vals .vh{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid #e3ded2}
 .vals .vh input{flex:1;border:0;outline:0}
-.vals .vl{display:flex;flex-direction:column;max-height:220px;overflow:auto;padding:4px 0;font-size:13px}
-.vals .vl label{display:flex;justify-content:space-between;gap:8px;padding:5px 12px;cursor:pointer}
+.vals .vl{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:2px 6px;max-height:260px;overflow:auto;padding:6px;font-size:12.5px;background:#fbfaf5}
+.vals .vl label{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:4px 6px;cursor:pointer;border-radius:5px;min-width:0}.vals .vl .vt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vals .vl .bd{font:500 10.5px 'JetBrains Mono',monospace;background:#e3ecf2;color:#24506f;border-radius:999px;padding:1px 7px;flex:none}
 .vals .vl label:hover{background:#f6f4ee}
 .vals .vl label span:first-child{display:flex;gap:8px;align-items:center;min-width:0}
+.pjf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 16px;padding:14px 16px;border:1px solid var(--b);background:var(--w);border-radius:8px}.pjf .f input,.pjf .f select{height:32px;padding:0 8px;font-weight:400}.pjf .f input:disabled{background:#f4f2ea}@media (max-width:860px){.pjf{grid-template-columns:minmax(0,1fr)}}
+.acf{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px;align-items:start;padding:12px 16px;border:1px solid var(--b);background:var(--p);border-radius:8px}.acf .big{font:500 30px 'JetBrains Mono',monospace;color:var(--v);line-height:1.1}.acf .pre{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.acf .pre button{height:30px;padding:0 12px;border:1px solid var(--b2);background:var(--w);border-radius:999px;font:700 12.5px Figtree,sans-serif;cursor:pointer}.acf .pre button.on{background:var(--v);border-color:var(--v);color:#fff}.acf .gs{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.acf .gs button{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--b);background:var(--w);border-radius:999px;font:600 12.5px Figtree,sans-serif;cursor:pointer;color:var(--tx)}.acf .gs button i{width:9px;height:9px;border-radius:50%;border:2px solid var(--c);display:inline-block}.acf .gs button.on{background:#eef4f1;border-color:var(--v2)}.acf .gs button.on i{background:var(--c)}.acf .gs button b{font:500 11.5px 'JetBrains Mono',monospace;color:var(--m)}
+.etp{border:1px solid var(--b);background:var(--p);border-radius:8px}.etp .eh{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--l)}.etp .eh .hs{width:28px;height:28px;border-radius:50%;background:#e3ecf2;color:var(--az);display:grid;place-items:center;font-weight:700}.etp .eg{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;padding:10px 14px 14px}.etp .eg button{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:34px;padding:4px 6px 4px 10px;border:1px solid var(--b);background:var(--w);border-radius:8px;font:600 12.5px Figtree,sans-serif;color:var(--tx);cursor:pointer;text-align:left;min-width:0}.etp .eg button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.etp .eg button b{font:500 10.5px 'JetBrains Mono',monospace;background:#e3ecf2;color:var(--az);border-radius:999px;padding:1px 7px;flex:none}.etp .eg button.in{background:var(--v);border-color:var(--v);color:#fff}.etp .eg button.in b{background:rgba(255,255,255,.18);color:#fff}.etp .eg button.out{background:#fbefec;border-color:var(--r2);color:var(--r);text-decoration:line-through}
 .fl-grid{display:grid;grid-template-columns:240px minmax(0,1fr)}
 .rail{padding:16px 18px 40px 0;border-right:1px solid var(--b);display:flex;flex-direction:column;gap:14px;min-width:0}
 .gh{display:flex;width:100%;align-items:center;justify-content:space-between;height:24px;margin:0 0 4px;padding:0 2px;border:0;background:transparent;cursor:pointer;color:var(--g)}
@@ -200,7 +203,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 <header id="top">
   <a id="marca" href="#inicio" title="Início da triagem"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><b>Triagem<i>.</i></b></a>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
-  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
+  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
 </header>
 <main id="main"><div id="carga"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
 <div id="rodape" class="off" role="region" aria-label="Ações em bloco" hidden></div>
@@ -209,6 +212,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 <script src="/padrao/acervo-fonte.js"></script>
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
+<script src="/init/assets/js/regras-gerais.js"></script>
 <script>
 (function () {
 'use strict';
@@ -275,7 +279,7 @@ function pendDe(o) { const t = o.etq.map(nz), has = (rx) => t.some((x) => rx.tes
   if (has(/preparo/) && !has(/custas ok/)) L.push('preparo'); if (has(/liminar pendente/)) L.push('liminar'); if (has(/aguardar novos precedentes|tema 1433/)) L.push('precedente'); if (has(/nao pautar/)) L.push('não pautar'); return L; }
 
 /* ===================== estado ===================== */
-let U = [], NOVAS = [], ALL = [], IDX = new Map(), ROWS_REF = null, ROWS_N = 0, PRONTO = false;
+let FONTE = null, FONTE_EM = '', U = [], NOVAS = [], ALL = [], IDX = new Map(), ROWS_REF = null, ROWS_N = 0, PRONTO = false;
 const ESC_ARQ = 'acervo/triagem/escaninhos.json';
 let ESC = { schema: 'gabcmt.escaninhos', versao: 1, atualizadoEm: '', escaninhos: [] }, ESC_V = 0, ESC_GRAV = 0;
 const PEND = new Map(); let GRAVANDO = false, ERRO = '', ULT = '', TENT = 0, T_GRAVA = null;
@@ -283,7 +287,10 @@ const DESF = [];
 let ABA = 'inicio', ABERTAS = LS.get('tri_abas', []);
 const SEL = new Set();
 const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], ['Vinho', '#8a2f22'], ['Cinza', '#8a948f'], ['Roxo', '#6a4fb3']];
-const F = { modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
+const GRUPOS = [['triar', 'Em triagem', '#a57829'], ['nc', 'Não classificadas', '#8a2f22'], ['pauta', 'Já na pauta', '#173f3d'], ['producao', 'Em produção', '#4b7fa8'], ['sobrestados', 'Sobrestados', '#8a70c0'], ['distribuicao', 'Análise da distribuição', '#3b7150'], ['secretaria', 'Com a secretaria', '#8a948f'], ['sem', 'Sem tarefa do gabinete', '#b3ab9c']];
+const PRESETS = [['triagem', 'Em triagem', ['triar']], ['gabinete', 'Em tarefa do gabinete', ['triar', 'nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria']], ['fora', 'Fora da triagem', ['nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria', 'sem']], ['todos', 'Todos na fonte', GRUPOS.map((g) => g[0])]];
+const PJ0 = () => ({ num: '', obj: '', ass: '', cla: '', parte: '', doc: '', orgao: '', col: '', ordem: '', prior: '', etq: '', autDe: '', autAte: '', minut: '', cargo: '', sig: false, lim: false, top: false });
+const F = { pje: PJ0(), pjeAberto: false, base: LS.get('tri_base', ['triar']), etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
 const FE = { q: '', lim: 100, ver: 'lista' };
 
 function escDe(d) { for (const e of ESC.escaninhos) if (e._set && e._set.has(d)) return e; return null; }
@@ -293,12 +300,19 @@ function destinoAtual(o) { const r = o.row;
   if (r.Destino === 'Monocrática') return { k: 'mono', t: 'monocrática' };
   const e = escDe(o.d); if (e) return { k: 'esc', t: e.titulo, e };
   return { k: '', t: 'sem destino' }; }
-function proc(r) {
-  const etq = etqDe(r), classe = r.classe_judicial || r.Classe || '', cl = abrev(classe), tarefa = String(r.tarefa_atual || '').trim();
-  const sc = String(r['Seção Competente'] || '').trim(), se = etq.find((e) => SEC_RX.test(e)) || '';
-  const o = { row: r, d: dg(r.Processo || r.processo), cnj: fmtCnj(r.Processo || r.processo), classe, cl, assunto: String(r.assunto_judicial || r.Assunto || r.Assunto_Principal || '').trim() || '—',
-    tarefa, desde: iso(r.data_entrada_tarefa), secao: SEC_RX.test(sc) ? sc : (se || 'Sem seção'), secEtq: se, secComp: SEC_RX.test(sc) ? sc : '', prior: /^(sim|s)$/i.test(String(r.prioridade || '').trim()), etq,
-    partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter((x) => x && x !== '####').join(' x '), dist: iso(r['data_distribuição'] || r['Data_Distribuição']) };
+function proc(f, r) {
+  r = r || f;
+  const etq = etqDe(f), classe = f.classe_judicial || f.Classe || r.classe_judicial || '', cl = abrev(classe), tarefa = String(f.tarefa_atual || '').trim();
+  const sc = String(f['Seção Competente'] || r['Seção Competente'] || '').trim(), se = etq.find((e) => SEC_RX.test(e)) || '';
+  const o = { row: r, d: dg(f.processo || f.Processo), cnj: fmtCnj(f.processo || f.Processo), classe, cl, assunto: String(f.assunto_judicial || f.Assunto || f.Assunto_Principal || '').trim() || '—',
+    tarefa, desde: iso(f.data_entrada_tarefa), secao: SEC_RX.test(sc) ? sc : (se || 'Sem seção'), secEtq: se, secComp: SEC_RX.test(sc) ? sc : '', prior: /^(sim|s)$/i.test(String(f.prioridade || '').trim()), etq,
+    partes: [f.polo_ativo || f.Polo_Ativo, f.polo_passivo || f.Polo_Passivo].filter((x) => x && x !== '####').join(' x '), dist: iso(f['data_distribuição'] || f['Data_Distribuição']) };
+  const sim = (v) => /^(sim|s|true|1)$/i.test(String(v == null ? '' : v).trim());
+  o.orgao = String(f['Órgão Julgador'] || f['DataJud · Órgão Julgador'] || '').trim(); o.colegiado = String(f.Colegiado || '').trim(); o.cargo = String(f['Cargo Judicial'] || '').trim();
+  o.sigiloso = sim(f.Sigiloso) || !!f['Nível_Sigilo'] || f.Consta_Acervo_Sigiloso === 'Sim';
+  o.liminar = sim(f['Liminar Pendente']) || etq.some((e) => /liminar pendente/i.test(e));
+  o.minutante = String(r.SERVIDOR || '').trim(); o.topico = !!String(r['Tópico-síntese'] || '').trim();
+  o.objeto = [o.assunto, f['DataJud · Assuntos'], f.Assuntos_do_Processo, f.ultimo_movimento].filter(Boolean).join(' ');
   o.apto = etq.some(ehAptoE) || /Aptos para julgamento/i.test(tarefa);
   o.monoE = etq.some((e) => /monocr/i.test(e)) || r.Destino === 'Monocrática';
   o.prov = DEST.find((x) => x[3](o))[0];
@@ -310,9 +324,15 @@ function proc(r) {
 function construir() {
   const c = core(); const R = (c && c.rows) || []; ROWS_REF = R; ROWS_N = R.length;
   indexEsc();
-  U = []; NOVAS = [];
-  R.forEach((r) => { const t = String(r.tarefa_atual || '').trim(); if (!t) return; const k = nzT(t); if (TRIAR.has(k)) U.push(proc(r)); else if (ESCOPO.lido && !IGN.has(k)) { const o = proc(r); o.nova = true; NOVAS.push(o); } });
-  ALL = U.concat(NOVAS); IDX = new Map(ALL.map((o) => [o.d, o]));
+  /* o paradeiro (tarefa, etiquetas, prioridade) vem da fonte do procs-muta, não da cópia do navegador; da cópia vem só o trabalho do gabinete */
+  const MR = new Map(); R.forEach((r) => { const d = dg(r.Processo || r.processo); if (d) MR.set(d, r); });
+  const F0 = FONTE || R;
+  U = []; NOVAS = []; ALL = [];
+  F0.forEach((f) => { const t = String(f.tarefa_atual || '').trim(), d = dg(f.processo || f.Processo); if (d.length !== 20) return; let r = MR.get(d); if (!r) { r = { Processo: fmtCnj(d) }; }
+    const k = nzT(t), o = proc(f, r);
+    o.grupo = !t ? 'sem' : TRIAR.has(k) ? 'triar' : IGN.has(k) ? IGN.get(k) : (ESCOPO.lido ? 'nc' : 'sem');
+    ALL.push(o); if (o.grupo === 'triar') U.push(o); else if (o.grupo === 'nc') { o.nova = true; NOVAS.push(o); } });
+  IDX = new Map(ALL.map((o) => [o.d, o]));
   ALL.forEach((o) => { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); });
   for (const d of [...SEL]) if (!IDX.has(d)) SEL.delete(d); }
 function refazDest(o) { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
@@ -446,7 +466,7 @@ function vInicio() {
   const div = U.filter((o) => o.div);
   reg('div', 'Seção divergente (etiqueta × Seção competente)', div);
   const cf = (n, t, s, kk) => '<button type="button" class="li" data-conj="' + kk + '" style="grid-template-columns:56px minmax(0,1fr)"><span class="n" style="text-align:left;color:var(--r)">' + nf(n) + '</span><span><b style="font-weight:600">' + t + '</b><small>' + s + '</small></span></button>';
-  const conf = '<section class="card" style="box-shadow:inset 0 3px 0 var(--r)"><div class="ch"><h2>Conferir antes</h2><p>pode mudar o destino</p></div>' + cf(div.length, 'Seção divergente', 'a etiqueta de seção difere da Seção competente', 'div') + cf(comPend.length, 'Aptos com pendência', 'etiqueta de parecer do MPF, contrarrazões, preparo, liminar, precedente ou “não pautar”', 'pend') + (NOVAS.length ? cf(NOVAS.length, 'Tarefas não classificadas', 'tarefa do PJe fora das listas do escopo da triagem: ' + esc([...new Set(NOVAS.map((o) => o.tarefa))].slice(0, 3).join('; ')), 'novas') : '') + '</section>';
+  const conf = '<section class="card" style="box-shadow:inset 0 3px 0 var(--r)"><div class="ch"><h2>Conferir antes</h2><p>pode mudar o destino</p></div>' + cf(div.length, 'Seção divergente', 'a etiqueta de seção difere da Seção competente', 'div') + cf(comPend.length, 'Aptos com pendência', 'etiqueta de parecer do MPF, contrarrazões, preparo, liminar, precedente ou “não pautar”', 'pend') + (NOVAS.length ? cf(NOVAS.length, 'Tarefas não classificadas', 'tarefa do PJe fora das listas do escopo: ' + esc([...new Set(NOVAS.map((o) => o.tarefa))].slice(0, 3).join('; ')) + ' · classificar em ⚙ Regras gerais', 'novas') : '') + '</section>';
   /* massas */
   const base = semD.filter((o) => o.prov === 'tri' && !o.cand), G = new Map();
   base.forEach((o) => { const kk = o.secao + '|' + o.assunto; if (!G.has(kk)) G.set(kk, []); G.get(kk).push(o); });
@@ -462,7 +482,7 @@ function vInicio() {
   ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
     pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
   pr += '</section>';
-  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + conf + ms + pr + '</div></div></div>';
+  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + ms + pr + '</div></div></div>';
   return h; }
 let REG = {}, INI_MAS = false;
 function reg(k, rot, L) { REG[k] = { rot, ids: L.map((o) => o.d) }; }
@@ -486,12 +506,34 @@ function filtrar(base, sem) {
   return base.filter((o) => {
     if (F.conj && sem !== 'conj' && !F.conj.ids.has(o.d)) return false;
     if (lote && lote.size && !lote.has(o.d)) return false;
+    if (!passaPje(o)) return false;
     for (const t of toks) { const has = o.hay.indexOf(t.t) >= 0; if (t.neg ? has : !has) return false; }
     for (const c of F.crit) if (!passaCrit(o, c)) return false;
     for (const f of ['secao', 'classe', 'assunto', 'tarefa', 'prior']) { if (f === sem) continue; const L = F.fac[f]; if (L.length) { const v = f === 'classe' ? o.cl : f === 'prior' ? (o.prior ? 'Sim' : 'Não') : f === 'tarefa' ? (o.tarefa || 'Sem tarefa') : o[f]; if (L.indexOf(v) < 0) return false; } }
     if (sem !== 'etq') { if (F.etIn.length && !F.etIn.every((e) => o.etq.indexOf(e) >= 0)) return false; if (F.etOut.length && F.etOut.some((e) => o.etq.indexOf(e) >= 0)) return false; }
     return true; }); }
-function limparFiltros() { F.q = ''; F.lote = ''; F.crit = []; F.conj = null; F.etIn = []; F.etOut = []; Object.keys(F.fac).forEach((k) => { F.fac[k] = []; }); F.lim = 100; F.statsX = null; }
+function passaPje(o) { const P = F.pje, has = (v, q) => !q || nz(v).indexOf(nz(q)) >= 0;
+  if (P.num && o.d.indexOf(dg(P.num)) < 0) return false;
+  if (!has(o.objeto, P.obj) || !has(o.assunto, P.ass) || !has(o.classe + ' ' + o.cl, P.cla) || !has(o.partes, P.parte) || !has(o.etq.join(' | '), P.etq) || !has(o.minutante, P.minut)) return false;
+  if (P.orgao && o.orgao !== P.orgao) return false; if (P.col && o.colegiado !== P.col) return false; if (P.cargo && o.cargo !== P.cargo) return false;
+  if (P.prior && (P.prior === 'Sim') !== o.prior) return false;
+  if (P.autDe && (!o.dist || o.dist < P.autDe)) return false; if (P.autAte && (!o.dist || o.dist > P.autAte)) return false;
+  if (P.sig && !o.sigiloso) return false; if (P.lim && !o.liminar) return false; if (P.top && !o.topico) return false;
+  return true; }
+const PJ_ROT = { num: 'Número', obj: 'Objeto', ass: 'Assunto', cla: 'Classe', parte: 'Parte', orgao: 'Órgão julgador', col: 'Colegiado', prior: 'Prioridade', etq: 'Etiqueta', autDe: 'Autuação desde', autAte: 'Autuação até', minut: 'Minutante', cargo: 'Cargo judicial', sig: 'Somente sigiloso', lim: 'Com pedido de liminar', top: 'Possui tópico síntese' };
+function formPje() { const P = F.pje, opts = (fn, v) => { const C = contar(ALL, fn); return '<option value="">' + (v ? '' : '') + '</option>' + C.map((x) => '<option' + (x[0] === v ? ' selected' : '') + '>' + esc(x[0]) + '</option>').join(''); };
+  const inp = (k, rot, ph) => '<label class="f">' + rot + '<input type="text" data-pj="' + k + '" value="' + esc(P[k]) + '"' + (ph ? ' placeholder="' + esc(ph) + '"' : '') + '></label>';
+  const sel = (k, rot, html) => '<label class="f">' + rot + '<select data-pj="' + k + '">' + html + '</select></label>';
+  const ck = (k, rot, dis, tip) => '<label style="display:flex;gap:7px;align-items:center;font:600 12.5px Figtree,sans-serif;color:' + (dis ? 'var(--m)' : 'var(--m2)') + '"' + (tip ? ' title="' + esc(tip) + '"' : '') + '><input type="checkbox" data-pjc="' + k + '"' + (P[k] ? ' checked' : '') + (dis ? ' disabled' : '') + '> ' + rot + '</label>';
+  return '<form class="pjf" id="pjf" aria-label="Pesquisa do PJe">' + inp('num', 'Número do processo', '0000000-00.0000.4.03.0000') + inp('obj', 'Objeto', 'assunto, assuntos do processo, último movimento') + inp('ass', 'Assunto') +
+    inp('cla', 'Classe') + inp('parte', 'Nome da parte') + '<label class="f">CPF | CNPJ<input type="text" disabled placeholder="não fica no procs-muta" title="Por regra do gabinete, CPF e CNPJ não são guardados na fonte"></label>' +
+    sel('orgao', 'Órgão julgador', opts((o) => o.orgao, P.orgao)) + sel('col', 'Órgão julgador colegiado', opts((o) => o.colegiado, P.col)) + sel('ordem', 'Ordem', '<option value=""' + (!P.ordem ? ' selected' : '') + '>Mais antigo</option><option value="rec"' + (P.ordem === 'rec' ? ' selected' : '') + '>Mais recente</option>') +
+    sel('prior', 'Prioridade', '<option value=""></option><option' + (P.prior === 'Sim' ? ' selected' : '') + '>Sim</option><option' + (P.prior === 'Não' ? ' selected' : '') + '>Não</option>') + inp('etq', 'Por etiqueta') +
+    '<div style="display:flex;flex-direction:column;gap:5px;grid-row:span 2">' + ck('sig', 'Somente sigiloso?') + ck('lim', 'Somente com pedido de liminar', false, 'coluna Liminar Pendente do painel ou etiqueta “liminar pendente”') + ck('docn', 'Somente com documentos não lidos', true, 'o painel do PJe não exporta a leitura de documentos') + ck('docl', 'Documentos lidos', true, 'o painel do PJe não exporta a leitura de documentos') + ck('top', 'Possui tópico síntese?', false, 'tópico-síntese preenchido na ficha') + '</div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><label class="f">Data da autuação · de<input type="date" data-pj="autDe" value="' + esc(P.autDe) + '"></label><label class="f">até<input type="date" data-pj="autAte" value="' + esc(P.autAte) + '"></label></div>' + inp('minut', 'Usuário elaboração minuta', 'minutante da ficha') +
+    sel('cargo', 'Cargo judicial', opts((o) => o.cargo, P.cargo)) +
+    '<div style="display:flex;gap:8px;align-items:end;grid-column:1/-1"><button type="submit" class="btn pri">Pesquisar</button><button type="button" class="btn" data-pjlimpa>Limpar</button><span style="font-size:12px;color:var(--m)">Ordem: pela data de chegada na tarefa. Os campos somam-se aos critérios e aos grupos do acervo filtrado.</span></div></form>'; }
+function limparFiltros() { F.pje = PJ0(); F.q = ''; F.lote = ''; F.crit = []; F.conj = null; F.etIn = []; F.etOut = []; Object.keys(F.fac).forEach((k) => { F.fac[k] = []; }); F.lim = 100; F.statsX = null; }
 function contar(L, fn) { const m = new Map(); L.forEach((o) => { [].concat(fn(o)).forEach((v) => { if (v === '' || v == null) return; m.set(v, (m.get(v) || 0) + 1); }); }); return [...m.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0]))); }
 const ORDS = { cnj: (o) => o.d, classe: (o) => o.cl, assunto: (o) => nz(o.assunto), secao: (o) => o.secao, desde: (o) => o.desde || '9999', dest: (o) => o.dest.t };
 function ordenar(L) { const f = ORDS[F.ord] || ORDS.cnj; return L.slice().sort((a, b) => { const x = f(a), y = f(b); return (x < y ? -1 : x > y ? 1 : 0) * F.dir; }); }
@@ -499,6 +541,7 @@ function ordenar(L) { const f = ORDS[F.ord] || ORDS.cnj; return L.slice().sort((
 /* ---------- Fila ---------- */
 function chipsAtivos() { const ch = [];
   if (F.conj) ch.push(['<b>Conjunto</b> ' + esc(F.conj.rot) + ' (' + nf(F.conj.ids.size) + ')', 'conj', '', false]);
+  Object.keys(PJ_ROT).forEach((k) => { const v = F.pje[k]; if (v) ch.push(['<b>' + PJ_ROT[k] + '</b>' + (v === true ? '' : ' ' + esc(/aut/.test(k) ? br(v) : v)), 'pje', k, false]); });
   if (F.modo === 'texto' && F.q.trim()) ch.push(['<b>Texto</b> ' + esc(tokens(F.q).map((t) => (t.neg ? 'sem “' : '“') + t.t + '”').join(', ')), 'q', '', false]);
   if (F.modo === 'lote' && loteSet().size) ch.push(['<b>Lote</b> ' + nf(loteSet().size) + ' números', 'lote', '', false]);
   F.crit.forEach((c, i) => { const cmp = (CAMPOS.find((x) => x[0] === c.campo) || [])[1], cd = (CONDS.find((x) => x[0] === c.cond) || [])[1];
@@ -509,31 +552,44 @@ function chipsAtivos() { const ch = [];
   F.etIn.forEach((e) => ch.push(['<b>Etiqueta</b> tem ' + esc(e), 'etIn', e, false])); F.etOut.forEach((e) => ch.push(['<b>Etiqueta</b> não tem ' + esc(e), 'etOut', e, true]));
   return ch; }
 function vFila() {
-  const L = ordenar(filtrar(F.conj ? ALL : U)); FILA = L;
+  const L = ordenar(filtrar(F.conj ? ALL : BASE())); FILA = L;
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
   let h = '<div class="wrap"><div class="fl-cab"><div class="fl-l1" style="position:relative">' +
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
     (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
-    '<button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
+    '<button type="button" class="btn" id="bt-pje" aria-expanded="' + F.pjeAberto + '">Pesquisa do PJe ' + (F.pjeAberto ? '▴' : '▾') + '</button><button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
     '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
     '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
     '<span style="position:relative"><button type="button" class="btn" id="bt-exp" aria-expanded="false">Exportar ▾</button></span></div>';
+  if (F.pjeAberto) h += formPje();
   if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), fora = [...s].filter((d) => !IDX.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + ' entre os em triagem' + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
   h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · todos os em triagem</span>') +
-    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div></div>';
+    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + painelBase() + '</div>';
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
-  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(U.length) + ' em triagem</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
+  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + ' no acervo filtrado</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
   if (F.statsAberto) h += stats(L);
+  h += painelEtq(L);
   h += lista(L, F, 'fila') + '</div></div></div>';
   return h; }
 let FILA = [];
+function BASE() { const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
+function painelBase() { const cnt = {}; ALL.forEach((o) => { cnt[o.grupo] = (cnt[o.grupo] || 0) + 1; }); const S = new Set(F.base), n = ALL.filter((o) => S.has(o.grupo)).length;
+  const pr = PRESETS.find((p) => p[2].length === F.base.length && p[2].every((g) => S.has(g)));
+  return '<section class="acf" aria-label="Acervo filtrado"><div><p class="k" style="margin:0;color:var(--m)">Acervo filtrado</p><b style="display:block;font-size:13px;color:var(--g)">' + esc(pr ? pr[1] : 'Seleção própria') + '</b><span class="big">' + nf(n) + '</span><span style="display:block;font-size:12px;color:var(--m)">processos nos grupos marcados · ' + nf(ALL.length) + ' na fonte</span></div>' +
+    '<div><div class="pre">' + PRESETS.map((p) => '<button type="button" data-preset="' + p[0] + '" class="' + (pr && pr[0] === p[0] ? 'on' : '') + '">' + p[1] + '</button>').join('') + '<span style="font-size:12px;color:var(--m)">' + (F.conj ? 'conjunto do Início ativo: os grupos não se aplicam' : 'grupos pela tarefa do PJe (regras gerais › escopo)') + '</span></div>' +
+    '<div class="gs">' + GRUPOS.filter((g) => cnt[g[0]]).map((g) => '<button type="button" data-grupo="' + g[0] + '" class="' + (S.has(g[0]) ? 'on' : '') + '" style="--c:' + g[2] + '"><i></i>' + g[1] + ' <b>' + nf(cnt[g[0]]) + '</b></button>').join('') + '</div></div></section>'; }
+function painelEtq(L) { const C = contar(L, (o) => o.etq), q = nz(F.etqQ), V = C.filter((x) => !q || nz(x[0]).indexOf(q) >= 0);
+  let h = '<section class="etp" aria-label="Etiquetas dos processos filtrados"><div class="eh"><span class="hs">#</span><div style="flex:1"><p class="k" style="margin:0;color:var(--v)">Etiquetas dos processos filtrados</p><span style="font-size:12px;color:var(--m)">' + nf(C.length) + ' etiqueta(s) · ' + nf(L.length) + ' processo(s) filtrado(s)</span></div><span class="mono" style="font-size:12px;background:#e3ecf2;color:var(--az);border-radius:999px;padding:2px 9px">' + nf(C.length) + '</span><button type="button" class="lk" data-etqp>' + (F.etqAberto ? 'Recolher ▴' : 'Abrir ▾') + '</button></div>';
+  if (!F.etqAberto) return h + '</section>';
+  h += '<div style="display:flex;gap:12px;align-items:center;padding:10px 14px 0;flex-wrap:wrap"><input type="search" id="etq-q" value="' + esc(F.etqQ) + '" placeholder="Buscar nas etiquetas dos filtrados…" aria-label="Buscar nas etiquetas" style="flex:1 1 280px;height:32px;padding:0 10px"><span style="font-size:12px;color:var(--m)">contagem = processos filtrados com a etiqueta · clique: incluir · de novo: excluir · de novo: tirar</span></div>';
+  return h + '<div class="eg">' + V.slice(0, 300).map((x) => { const st = F.etIn.indexOf(x[0]) >= 0 ? 'in' : F.etOut.indexOf(x[0]) >= 0 ? 'out' : ''; return '<button type="button" class="' + st + '" data-etqc="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><span>' + esc(x[0]) + '</span><b>' + nf(x[1]) + '</b></button>'; }).join('') + (V.length ? '' : '<span style="color:var(--m);font-size:12.5px">nenhuma etiqueta</span>') + '</div></section>'; }
 function rail() {
   const blk = (f, tit, ent, extra) => { const ab = !!F.rail[f]; return '<div><button type="button" class="gh" data-rail="' + f + '" aria-expanded="' + ab + '"><span class="k">' + tit + '</span><span>' + (extra || '') + (ab ? '▾' : '▸') + '</span></button>' + (ab ? ent() : '') + '</div>'; };
-  const fac = (f, fn, lim) => () => { const C = contar(filtrar(U, f), fn); const sel = F.fac[f]; const L = C.slice(0, F.rail[f + 'Todos'] ? 400 : (lim || 8));
+  const fac = (f, fn, lim) => () => { const C = contar(filtrar(F.conj ? ALL : BASE(), f), fn); const sel = F.fac[f]; const L = C.slice(0, F.rail[f + 'Todos'] ? 400 : (lim || 8));
     sel.forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
     return L.map((x) => '<button type="button" class="rl' + (sel.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-fac="' + f + '" data-v="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><em>' + esc(x[0]) + '</em><span>' + nf(x[1]) + '</span></button>').join('') + (C.length > (lim || 8) ? '<button type="button" class="lk" data-todos="' + f + '" style="padding:4px 9px">' + (F.rail[f + 'Todos'] ? 'menos' : 'todos (' + C.length + ')') + '</button>' : ''); };
-  const etq = () => { const C = contar(filtrar(U, 'etq'), (o) => o.etq), L = C.slice(0, F.rail.etqTodos ? 400 : 10);
+  const etq = () => { const C = contar(filtrar(F.conj ? ALL : BASE(), 'etq'), (o) => o.etq), L = C.slice(0, F.rail.etqTodos ? 400 : 10);
     F.etIn.concat(F.etOut).forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
     return '<p style="margin:0 0 4px;font-size:11.5px;color:var(--m)">+ só com a etiqueta · − sem ela</p>' + L.map((x) => '<div class="et"><em title="' + esc(x[0]) + '">' + esc(x[0]) + ' <span class="mono" style="font-size:11px;color:var(--m)">' + nf(x[1]) + '</span></em><span class="pm"><button type="button" class="' + (F.etIn.indexOf(x[0]) >= 0 ? 'on' : '') + '" data-etin="' + esc(x[0]) + '" aria-label="Só com ' + esc(x[0]) + '">+</button><button type="button" class="neg' + (F.etOut.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-etout="' + esc(x[0]) + '" aria-label="Sem ' + esc(x[0]) + '">−</button></span></div>').join('') + (C.length > 10 ? '<button type="button" class="lk" data-todos="etq" style="padding:4px 0">' + (F.rail.etqTodos ? 'menos' : 'todas (' + C.length + ')') + '</button>' : ''); };
   return blk('secao', 'Seção', fac('secao', (o) => o.secao, 5)) + blk('classe', 'Classe', fac('classe', (o) => o.cl, 6)) + blk('assunto', 'Assunto', fac('assunto', (o) => o.assunto, 8)) + blk('tarefa', 'Tarefa do PJe', fac('tarefa', (o) => o.tarefa || 'Sem tarefa', 8)) + blk('prior', 'Prioridade legal', fac('prior', (o) => o.prior ? 'Sim' : 'Não', 2)) + blk('etq', 'Etiquetas', etq); }
@@ -574,21 +630,21 @@ function abrirCrit(btn, edit) {
   D.body.appendChild(p); pintaCrit(); btn.setAttribute('aria-expanded', 'true'); }
 function pintaCrit() { const p = $('#crit-pop'); if (!p || !CP) return; const c = CP.c, data = /^(desde|dist)$/.test(c.campo);
   if (data && !/^(between|empty|notempty)$/.test(c.cond)) c.cond = 'between'; if (!data && c.cond === 'between') c.cond = 'in';
-  const base = filtrar(U).concat([]), outros = F.crit.filter((x, i) => i !== CP.edit);
-  const pre = U.filter((o) => outros.every((x) => passaCrit(o, x)));
-  const C = data ? [] : contar(pre, (o) => valDe(o, c.campo)).filter((x) => !CP.filtro || nz(x[0]).indexOf(nz(CP.filtro)) >= 0).slice(0, 300);
-  const prev = U.filter((o) => outros.every((x) => passaCrit(o, x)) && (c.cond === 'in' && !c.vals.length && !c.trechos.length ? true : passaCrit(o, c))).length;
+  const outros = F.crit.filter((x, i) => i !== CP.edit), guard = F.crit; F.crit = outros; const pre = filtrar(F.conj ? ALL : BASE()); F.crit = guard;
+  const C = data ? [] : contar(pre, (o) => valDe(o, c.campo)).filter((x) => !CP.filtro || nz(x[0]).indexOf(nz(CP.filtro)) >= 0).slice(0, 600);
+  const prev = pre.filter((o) => (c.cond === 'in' && !c.vals.length && !c.trechos.length ? true : passaCrit(o, c))).length, todosC = data ? [] : contar(pre, (o) => valDe(o, c.campo));
   p.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14.5px;color:var(--v)">' + (CP.edit != null ? 'Editar critério' : 'Novo critério') + '</b><button type="button" class="x" data-cp="fechar" aria-label="Fechar">×</button></div>' +
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">Campo<select data-cp="campo">' + CAMPOS.map((x) => '<option value="' + x[0] + '"' + (x[0] === c.campo ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select></label>' +
     '<label class="f">Condição<select data-cp="cond">' + CONDS.filter((x) => data ? /^(between|empty|notempty)$/.test(x[0]) : x[0] !== 'between').map((x) => '<option value="' + x[0] + '"' + (x[0] === c.cond ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select></label></div>' +
     (data ? (c.cond === 'between' ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">De<input type="date" data-cp="de" value="' + esc(c.de) + '"></label><label class="f">Até<input type="date" data-cp="ate" value="' + esc(c.ate) + '"></label></div>' : '')
       : /empty/.test(c.cond) ? '' :
-      '<div class="vals"><div class="vh"><input type="search" data-cp="filtro" placeholder="Filtrar os valores" value="' + esc(CP.filtro) + '" aria-label="Filtrar os valores"><button type="button" class="lk" data-cp="todos">marcar todos</button><button type="button" class="lk" data-cp="nenhum" style="color:var(--m)">nenhum</button></div><div class="vl">' +
-      C.map((x) => '<label><span><input type="checkbox" data-cpv="' + esc(x[0]) + '"' + (c.vals.indexOf(x[0]) >= 0 ? ' checked' : '') + '> <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(x[0]) + '</span></span><span class="mono" style="font-size:11.5px;color:var(--m)">' + nf(x[1]) + '</span></label>').join('') + (C.length ? '' : '<span style="padding:6px 12px;color:var(--m)">nenhum valor</span>') + '</div></div>' +
+      '<p class="k" style="margin:0">Valores existentes · múltiplos</p><div class="vals"><div class="vh"><input type="search" data-cp="filtro" placeholder="Buscar nos valores existentes…" value="' + esc(CP.filtro) + '" aria-label="Filtrar os valores"><button type="button" class="lk" data-cp="todos">marcar todos</button><button type="button" class="lk" data-cp="nenhum" style="color:var(--m)">nenhum</button></div><div class="vl">' +
+      C.map((x) => '<label title="' + esc(x[0]) + '"><span><input type="checkbox" data-cpv="' + esc(x[0]) + '"' + (c.vals.indexOf(x[0]) >= 0 ? ' checked' : '') + '> <span class="vt">' + esc(x[0]) + '</span></span><span class="bd">' + nf(x[1]) + '</span></label>').join('') + (C.length ? '' : '<span style="padding:6px 12px;color:var(--m)">nenhum valor</span>') + '</div></div>' +
+      '<p style="margin:-6px 0 0;font-size:11.5px;color:var(--m)">' + nf(C.length) + ' de ' + nf(todosC.length) + ' valor(es) · contagem no acervo filtrado' + (c.vals.length ? ' · ' + nf(c.vals.length) + ' marcado(s)' : ' · nenhum marcado: você pode usar só os trechos livres') + '</p>' +
       '<label class="f">Trechos livres (um por linha)<textarea data-cp="trechos" rows="2" placeholder="ex.: aposentadoria">' + esc(c.trechos.join('\n')) + '</textarea></label>') +
     '<p style="margin:0;font-size:12px;line-height:1.5;color:var(--m)">Valores marcados no mesmo critério se somam (<b>ou</b>). Critérios diferentes se cruzam (<b>e</b>). As contagens já consideram os outros critérios.</p>' +
     '<div style="display:flex;justify-content:flex-end;gap:8px"><button type="button" class="btn" data-cp="fechar">Cancelar</button><button type="button" class="btn pri" data-cp="aplicar">Aplicar · ' + nf(prev) + ' processos</button></div>';
-  void base; }
+  }
 D.addEventListener('input', (e) => { const t = e.target; if (!CP || !t.closest('#crit-pop')) return; const k = t.dataset.cp;
   if (k === 'filtro') { CP.filtro = t.value; const pos = t.selectionStart; pintaCrit(); const n = $('#crit-pop [data-cp=filtro]'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }
   else if (k === 'trechos') CP.c.trechos = t.value.split('\n').map((s) => s.trim()).filter(Boolean);
@@ -711,6 +767,7 @@ function abrirAcervo() {
     if (k === 'escolher') $('#ia-file').click();
     else if (k === 'limpar') { IMP.lidos = null; IMP.papeis = {}; IMP.log = ''; pintaAcervo(); }
     else if (k === 'enviar') enviarFonte();
+    else if (k === 'datajud') rodarDataJud();
     else if (k === 'fechar') { if (IMP && IMP.ocupado) toast('O envio continua; o resultado aparece no painel quando o GitHub terminar.'); fecharGaveta(); } });
   g.addEventListener('change', (e) => { const t = e.target; if (t.dataset.papel != null) { IMP.papeis[t.dataset.papel] = t.value; pintaAcervo(); } });
   pintaAcervo(); fonteInfo().then((i) => { if (i && IMP) { IMP.fonte = i; pintaAcervo(); } }); }
@@ -727,6 +784,7 @@ function pintaAcervo() { const c = $('#ia-c'); if (!c || !IMP) return; const L =
     h += '<div class="log' + (temPr ? ' bad' : '') + '" style="' + (temPr ? '' : 'border-color:#d9c38f;color:#6e4e14') + '">' + (temPr ? 'Com planilha principal: quem não estiver na lista principal sai da fonte. O trabalho registrado vai para o arquivo e volta se o processo voltar.' : 'Atualização parcial: ninguém sai da fonte. As listas de tarefa atualizam o paradeiro de quem veio nelas; quem estava nessas tarefas e não veio perde a tarefa.') + '</div>'; }
   if (IMP.log) h += '<div class="log' + (IMP.bad ? ' bad' : '') + '" role="status">' + esc(IMP.log) + '</div>';
   h += '<div class="card" style="padding:10px 14px;font-size:12.5px;color:var(--m2);display:flex;flex-direction:column;gap:4px"><span><b>Principal (em andamento):</b> lista do PJe com a coluna Tarefa. Define quem está na fonte e onde está. Entra quem aparece; sai quem não aparece.</span><span><b>Complementar:</b> Power BI, sigilosos ou outra planilha com mais dados. Só preenche quem já está na fonte.</span><span><b>Lista de uma tarefa:</b> exportação do PJe de uma tarefa. Atualiza o paradeiro de quem veio; quem estava nela e não veio perde a tarefa, mas fica na fonte.</span><span>Celulares, telefones, e-mails e CPF não entram. O navegador nunca grava a fonte: só o GitHub.</span></div>' +
+    '<div class="card" style="padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><div style="flex:1 1 260px"><b style="font-size:13.5px;color:var(--v)">DataJud</b><span style="display:block;font-size:12.5px;color:var(--m2)">Consulta o DataJud para os processos que já estão na fonte e grava o que vier (classe, assuntos, órgão, situação, movimentos). Não acrescenta nem tira processo. Leva alguns minutos.</span>' + (IMP.dj ? '<span style="display:block;font-size:12.5px;margin-top:4px;color:' + (IMP.djBad ? 'var(--r)' : 'var(--ok)') + '">' + IMP.dj + '</span>' : '') + '</div><button type="button" class="btn" data-ia="datajud"' + (IMP.ocupado || IMP.djRodando ? ' disabled' : '') + '>' + (IMP.djRodando ? 'DataJud rodando…' : 'Rodar o DataJud agora') + '</button></div>' +
     '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + (IMP.fonte ? 'Fonte gravada em <b>' + new Date(IMP.fonte.em).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) + '</b> · ' + esc(IMP.fonte.msg) : 'Consultando a última gravação da fonte…') + '</p>';
   c.innerHTML = h;
   const ok = L && L.some((l) => l.tipo && l.processos);
@@ -740,17 +798,43 @@ async function lerPlanilhas(files) { const AF = W.CMTAtualizarFonte, X = W.XLSX;
   IMP.ocupado = true; IMP.bad = false; IMP.log = 'Lendo ' + files.length + ' planilha(s)…'; pintaAcervo();
   try { IMP.lidos = await AF.classificar(files, X); IMP.log = ''; } catch (e) { IMP.bad = true; IMP.log = 'Não li as planilhas: ' + ((e && e.message) || e); }
   IMP.ocupado = false; pintaAcervo(); }
+/* DataJud: dispara o Action "Acervo fonte · atualizar" só com o DataJud (workflow_dispatch) e acompanha até gravar */
+async function rodarDataJud() { const P = PM(); if (!IMP || !P) return; const k = P.atual || (P.token ? await P.token('Para rodar o DataJud.', true) : '');
+  const base = 'https://api.github.com/repos/trf3bdutra/procs-muta', H = { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k, 'X-GitHub-Api-Version': '2022-11-28' };
+  const dj = (t, bad) => { if (!IMP) return; IMP.dj = esc(t); IMP.djBad = !!bad; pintaAcervo(); };
+  IMP.djRodando = true; dj('Pedindo ao GitHub para rodar o DataJud…');
+  const desde = new Date(Date.now() - 30000).toISOString();
+  try { const r = await fetch(base + '/actions/workflows/acervo-fonte.yml/dispatches', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, H), body: JSON.stringify({ ref: 'main', inputs: { datajud: true } }) });
+    if (r.status === 403 || r.status === 404) { IMP.djRodando = false; IMP.dj = 'O token deste navegador não pode disparar Actions. Rode à mão: <a href="https://github.com/trf3bdutra/procs-muta/actions/workflows/acervo-fonte.yml" target="_blank" rel="noopener">Actions › Acervo fonte · atualizar › Run workflow</a> (com “Consultar o DataJud” marcado). Para o botão funcionar, dê ao token a permissão Actions: leitura e gravação.'; IMP.djBad = true; pintaAcervo(); return; }
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    let run = null, n = 0;
+    while (n++ < 120) { await new Promise((x) => setTimeout(x, 15000));
+      const q = await fetch(base + '/actions/workflows/acervo-fonte.yml/runs?event=workflow_dispatch&per_page=5&created=>' + encodeURIComponent(desde), { cache: 'no-store', headers: H }); if (!q.ok) continue;
+      run = ((await q.json()).workflow_runs || [])[0]; if (!run) { dj('Na fila do GitHub…'); continue; }
+      if (run.status !== 'completed') { dj('DataJud rodando no GitHub (' + Math.round(n / 4) + ' min)…'); continue; }
+      break; }
+    if (!run || run.status !== 'completed') throw new Error('o GitHub não terminou em 30 minutos; confira a aba Actions');
+    if (run.conclusion !== 'success') throw new Error('o Action terminou com “' + run.conclusion + '” (' + run.html_url + ')');
+    dj('DataJud concluído. Relendo a fonte…');
+    try { const A = M().CMTAcervoDados; if (A && A.puxar) await A.puxar(false); } catch (e) {}
+    await lerFonte(); construir(); render(); if (IMP) IMP.fonte = await fonteInfo(); acervoData();
+    IMP.djRodando = false; dj('DataJud concluído e fonte relida.');
+  } catch (e) { if (IMP) { IMP.djRodando = false; dj('Não rodou o DataJud: ' + ((e && e.message) || e), true); } } }
 async function enviarFonte() { const AF = W.CMTAtualizarFonte; if (!IMP || !IMP.lidos || IMP.ocupado) return;
   IMP.ocupado = true; IMP.bad = false;
   const aviso = (t) => { if (!IMP) return; IMP.log = t; pintaAcervo(); };
   try { const r = await AF.atualizar(null, { lidos: IMP.lidos, papeis: IMP.papeis, XLSX: W.XLSX, ProcsMuta: PM(), aviso });
     aviso(r.mensagem + '. Relendo o acervo…');
     try { const A = M().CMTAcervoDados; if (A && A.puxar) await A.puxar(false); } catch (e) {}
+    await lerFonte();
     construir(); render(); if (IMP) IMP.fonte = await fonteInfo(); acervoData();
     aviso('Acervo atualizado (carga ' + r.modo + '): ' + r.mensagem + '.' + (r.ignorados && r.ignorados.length ? ' Ignoradas: ' + r.ignorados.join(', ') + '.' : ''));
   } catch (e) { if (IMP) { IMP.bad = true; aviso('Não atualizou: ' + ((e && e.message) || e)); } }
   if (IMP) { IMP.ocupado = false; pintaAcervo(); } }
 async function acervoData() { const i = await fonteInfo(); const s = $('#st-acervo'); if (s && i) { s.textContent = 'acervo ' + br(i.em.slice(0, 10)).slice(0, 5); s.title = 'fonte gravada em ' + new Date(i.em).toLocaleString('pt-BR') + ' · ' + i.msg; } }
+function abrirRegras(aba) { if (!W.CMTRegrasGerais) { toast('As regras gerais ainda estão carregando.', true); return; }
+  W.CMTRegrasGerais.abrir({ motor: M, pagina: 'triagem', contagem: () => { const o = {}; (FONTE || ((core() || {}).rows) || []).forEach((r) => { const t = String(r.tarefa_atual || '').trim(); if (t) o[t] = (o[t] || 0) + 1; }); return o; }, aba: aba || (NOVAS.length ? 'escopo' : 'destino'), aoGravarEscopo: (j) => { ESCOPO = { triar: (j.triar || []).map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); construir(); render(); toast('Escopo da triagem atualizado: ' + nf(U.length) + ' processos em triagem.'); } }); }
+$('#bt-regras').addEventListener('click', () => { if (!PRONTO) { toast('Aguarde o acervo carregar.', true); return; } abrirRegras(); });
 $('#bt-acervo').addEventListener('click', () => { if (!PRONTO) { toast('Aguarde o acervo carregar.', true); return; } abrirAcervo(); });
 $('#st-grava').addEventListener('click', () => { if (ERRO || pendentes()) { TENT = 0; gravar(); } });
 
@@ -759,6 +843,7 @@ let T_Q = null;
 D.addEventListener('input', (e) => { const t = e.target;
   if (t.id === 'fl-q') { F.q = t.value; F.lim = 100; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#fl-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); }
   else if (t.id === 'fl-lote') { F.lote = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#fl-lote'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 400); }
+  else if (t.id === 'etq-q') { F.etqQ = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#etq-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); }
   else if (t.id === 'es-q') { FE.q = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#es-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); } });
 D.addEventListener('click', (e) => { const t = e.target;
   if (!t.closest('.pop') && !t.closest('#bt-crit') && !t.closest('#bt-exp') && !t.closest('#bt-expe')) fecharPops();
@@ -771,6 +856,12 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
   if ((b = q('[data-esc-conj]'))) { const r = REG[b.dataset.escConj]; if (!r) return; editarEscaninho(null, (ne) => { const ds = r.ids; setTimeout(() => acao('Guardado em ' + ne.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [ne.id] })), 0); }); const ti = $('#ge-t'); if (ti) ti.value = r.rot; return; }
   if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
+  if (q('#bt-pje')) { F.pjeAberto = !F.pjeAberto; render(); return; }
+  if (q('[data-pjlimpa]')) { F.pje = PJ0(); render(); return; }
+  if ((b = q('[data-preset]'))) { const p = PRESETS.find((x) => x[0] === b.dataset.preset); F.base = p[2].slice(); LS.set('tri_base', F.base); F.lim = 100; render(); return; }
+  if ((b = q('[data-grupo]'))) { const g = b.dataset.grupo, i = F.base.indexOf(g); if (i >= 0) { if (F.base.length > 1) F.base.splice(i, 1); } else F.base.push(g); LS.set('tri_base', F.base); F.lim = 100; render(); return; }
+  if (q('[data-etqp]')) { F.etqAberto = !F.etqAberto; LS.set('tri_etqp', F.etqAberto); render(); return; }
+  if ((b = q('[data-etqc]'))) { const v = b.dataset.etqc; if (F.etIn.indexOf(v) >= 0) { F.etIn = F.etIn.filter((x) => x !== v); F.etOut = F.etOut.concat(v); } else if (F.etOut.indexOf(v) >= 0) F.etOut = F.etOut.filter((x) => x !== v); else F.etIn = F.etIn.concat(v); F.lim = 100; render(); return; }
   if ((b = q('[data-modo]'))) { F.modo = b.dataset.modo; render(); return; }
   if ((b = q('[data-ver]'))) { F.ver = b.dataset.ver; F.lim = F.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('[data-verE]'))) { FE.ver = b.dataset.vere || b.getAttribute('data-verE'); FE.lim = FE.ver === 'lista' ? 100 : 30; render(); return; }
@@ -778,7 +869,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('#bt-exp'))) { if ($('.menu')) { fecharPops(); return; } abrirExp(b, FILA, F.conj ? F.conj.rot : 'Fila de triagem', ''); return; }
   if ((b = q('#bt-expe'))) { if ($('.menu')) { fecharPops(); return; } const e2 = ESC.escaninhos.find((x) => 'esc:' + x.id === ABA); abrirExp(b, ESCL, e2 ? e2.titulo : 'Escaninho', e2 ? e2.bilhete : ''); return; }
   if ((b = q('[data-ex-direto]'))) { const alvo = SEL.size && ESCL.some((o) => SEL.has(o.d)) ? ESCL.filter((o) => SEL.has(o.d)) : ESCL; exportar('copiar', alvo, '', ''); return; }
-  if ((b = q('[data-tira]'))) { const k = b.dataset.tira, v = b.dataset.v; if (k === 'conj') F.conj = null; else if (k === 'q') F.q = ''; else if (k === 'lote') F.lote = ''; else if (k === 'crit') F.crit.splice(+v, 1); else if (k === 'fac') F.fac[v] = []; else if (k === 'etIn') F.etIn = F.etIn.filter((x) => x !== v); else if (k === 'etOut') F.etOut = F.etOut.filter((x) => x !== v); F.lim = 100; render(); return; }
+  if ((b = q('[data-tira]'))) { const k = b.dataset.tira, v = b.dataset.v; if (k === 'conj') F.conj = null; else if (k === 'pje') F.pje[v] = typeof F.pje[v] === 'boolean' ? false : ''; else if (k === 'q') F.q = ''; else if (k === 'lote') F.lote = ''; else if (k === 'crit') F.crit.splice(+v, 1); else if (k === 'fac') F.fac[v] = []; else if (k === 'etIn') F.etIn = F.etIn.filter((x) => x !== v); else if (k === 'etOut') F.etOut = F.etOut.filter((x) => x !== v); F.lim = 100; render(); return; }
   if ((b = q('.chip span')) && b.closest('.chip').querySelector('[data-tira="crit"]')) { abrirCrit($('#bt-crit'), +b.closest('.chip').querySelector('[data-tira]').dataset.v); return; }
   if (q('#bt-limpar')) { limparFiltros(); render(); return; }
   if (q('#bt-salvar')) { const nm = W.prompt('Nome para este filtro:', F.conj ? F.conj.rot : ''); if (!nm) return; const S = LS.get('tri_filtros', []).filter((x) => x.nome !== nm); const cp = JSON.parse(JSON.stringify(Object.assign({}, F, { conj: null, statsX: null }))); S.push({ nome: nm, F: cp }); LS.set('tri_filtros', S); render(); toast('Filtro salvo neste navegador: ' + nm + (F.conj ? ' (o conjunto vindo do Início não entra no filtro salvo)' : '') + '.'); return; }
@@ -801,19 +892,25 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-esc-edit]'))) { editarEscaninho(b.dataset.escEdit); return; }
   if ((b = q('[data-esc-del]'))) { excluirEscaninho(b.dataset.escDel); return; }
   if (q('[data-esc-novo]')) { editarEscaninho(null, (ne) => { setTimeout(() => ir('esc=' + ne.id), 0); }); return; } });
+D.addEventListener('submit', (e) => { if (e.target.id !== 'pjf') return; e.preventDefault(); const P = F.pje;
+  $$('[data-pj]', e.target).forEach((i) => { P[i.dataset.pj] = i.value.trim(); }); $$('[data-pjc]', e.target).forEach((i) => { if (i.dataset.pjc in P) P[i.dataset.pjc] = i.checked; });
+  if (P.ordem === 'rec') { F.ord = 'desde'; F.dir = -1; } else if ($$('[data-pj]', e.target).length) { if (F.ord === 'desde' || Object.keys(PJ_ROT).some((k) => P[k])) { F.ord = 'desde'; F.dir = 1; } }
+  F.lim = 100; render(); });
 D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if ($('#gaveta')) fecharGaveta(); else fecharPops(); }
   if (e.key === 'Enter' && e.target.matches('.ecard')) e.target.click(); });
 
 /* ===================== arranque ===================== */
+async function lerFonte(msg) { try { if (msg) msg('Lendo a fonte do acervo no procs-muta…'); const j = JSON.parse(await PM().ler('acervo/fonte.json')); if (j && Array.isArray(j.registros)) { FONTE = j.registros; FONTE_EM = j.atualizado_em || ''; } } catch (e) { FONTE = null; toast('Não li a fonte do acervo (' + e.message + '); uso a cópia deste navegador.', true); } }
 async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; } indexEsc(); }
 (async function arrancar() {
   const msg = (t) => { const m = $('#carga-msg'); if (m) m.textContent = t; };
   let n = 0; while (!(core() && core().rows && core().rows.length && PM())) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); return; } if (n === 40) msg('Ainda lendo o acervo (são ~6 mil processos)…'); await new Promise((r) => setTimeout(r, 400)); }
   try { const j = JSON.parse(await PM().ler('apoio/regras/escopo-triagem.json')); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } } catch (e) { console.warn('[Triagem] escopo', e); }
+  await lerFonte(msg);
   try { await lerEscaninhos(); } catch (e) { toast('Não li os escaninhos: ' + e.message + '. Os novos escaninhos serão gravados normalmente.', true); }
   construir(); PRONTO = true; rotear(); acervoData();
   /* o motor pode recarregar o acervo (outra aba gravou, importação): refaz quando as linhas mudam */
-  setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
+  setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop') || $('#rg')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
   /* volta da ficha: o destino pode ter mudado lá */
   let fichaAberta = false; setInterval(() => { const on = D.body.classList.contains('cmt-ficha-on'); if (fichaAberta && !on) { U.forEach(refazDest); render(); } fichaAberta = on; }, 700);
 })();

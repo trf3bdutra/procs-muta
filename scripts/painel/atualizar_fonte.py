@@ -36,7 +36,8 @@ REFEITAS = set(BI_COLS + SIG_COLS + [
     "Consta_Acervo_Gab_A", "Consta_Acervo_Sigiloso", "tarefa_atual", "data_entrada_tarefa", "prioridade",
     "Etiquetas", "etiquetas", "Etiquetas Originais", "fora_pje", "tarefa_anterior",
     "DAT_FIM", "NUM_CPF_MAGIST", "SIN_PRAZO_LEGAL", "SIN_SECRETARIA", "SIN_CONTADORIA", "SIN_REM_EXTERNA",
-    "SIN_UFOR", "BASE", "K_TEMPO", "SIN_PEND_1JULG", "SIN_CLS", "DES_ULTIMA_MOVIME_SIGILO"])
+    "SIN_UFOR", "BASE", "K_TEMPO", "SIN_PEND_1JULG", "SIN_CLS", "DES_ULTIMA_MOVIME_SIGILO",
+    "Órgão Julgador", "Colegiado", "Sigiloso", "Liminar Pendente", "Cargo Judicial", "Peso Prioridade", "Data Último Movimento"])
 dig = lambda s: re.sub(r"\D", "", str(s or ""))
 
 
@@ -141,7 +142,13 @@ def ler_carga(p):
     return [arquivo(nomes.get(t, t), c.get(t) or [], t, "principal") for t in ("pje", "bi", "sigilosos") if c.get(t)]
 
 
+# colunas do painel gerencial guardadas como vêm, para a pesquisa da Triagem (os critérios básicos do PJe)
+PJE_EXTRA = ["Órgão Julgador", "Colegiado", "Sigiloso", "Liminar Pendente", "Cargo Judicial", "Peso Prioridade", "Data Último Movimento"]
+
+
 def aplicar_pje(r, p):
+    for c in PJE_EXTRA:
+        if c in p: r[c] = val(p.get(c)) if not isinstance(p.get(c), str) else p.get(c).strip()
     r["tarefa_atual"] = p.get("Tarefa", ""); r["data_entrada_tarefa"] = iso(p.get("Data de Chegada", ""))
     if "Prioridade" in p: r["prioridade"] = "Sim" if str(p["Prioridade"]).lower() in ("true", "sim", "1") else "Não"
     if "Etiquetas" in p:
