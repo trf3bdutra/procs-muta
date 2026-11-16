@@ -252,7 +252,8 @@
     ST.ocupado = true; ST.msg = 'Gravando as regras de produtividade…'; ST.bad = false; pintar();
     try { var novo = Object.assign({}, ST.prod, { atualizadoEm: new Date().toISOString() });
       await P.gravar({ [ARQ_PROD]: JSON.stringify(novo, null, 1) + '\n' }, 'Regras: produtividade, metas e prazos alterados pelo diálogo de regras gerais');
-      ST.prod = novo; ST.prodOrig = JSON.stringify(novo); ST.msg = 'Regras de produtividade gravadas no procs-muta.';
+      ST.prod = novo; ST.prodOrig = JSON.stringify(novo); ST.msg = 'Regras de produtividade gravadas no procs-muta. A designação e os marcos sugeridos já usam os valores novos.';
+      try { var SM2 = sesM(); if (SM2 && SM2.regrasProdutividade) SM2.regrasProdutividade(novo); } catch (e) {}
     } catch (e) { ST.msg = 'Não gravou: ' + (e.message || e); ST.bad = true; }
     ST.ocupado = false; pintar(); }
 

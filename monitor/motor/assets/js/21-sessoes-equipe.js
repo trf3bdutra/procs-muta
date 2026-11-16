@@ -185,7 +185,8 @@
     });
     S.sessoesPainel = true; salvar(); render();
   }
-  function novaSessao(data, fases) { return { id: 's' + data + '-' + Math.random().toString(36).slice(2, 5), data: data, hora: '', numero: '', arquivo: '', fases: Object.assign({ pauta: '', inicio: '', minutas: '', liberacao: '' }, fases || {}), itens: [] }; }
+  function novaSessao(data, fases) { var f = Object.assign({ pauta: '', inicio: '', minutas: '', liberacao: '' }, fases || {}); if (!f.liberacao && data) f.liberacao = deslocaUteis(data, -regraPainel().liberacao);
+    return { id: 's' + data + '-' + Math.random().toString(36).slice(2, 5), data: data, hora: '', numero: '', arquivo: '', fases: f, itens: [] }; }
   setInterval(function () { aplicarCatalogo(false); if (REPO.lido) fundirEquipePainel(); sessoesDoPainel(); }, 1500);
 
   /* ================= procs-muta: leitura e gravação =================
@@ -251,6 +252,7 @@
       if (op && Array.isArray(op.sessoes) && op.sessoes.length) sessoes = op.sessoes.map(function (o) { return sessaoDoRepo(o); });
     }
     var v = { regras: await ler(ARQ.regras), desig: await ler(ARQ.desig), equipe: await ler(ARQ.equipe) };
+    try { var pj = await ler('apoio/regras/produtividade.json'); if (pj && typeof pj === 'object') PROD = pj; } catch (e) {}
     var val = { regras: v.regras && Array.isArray(v.regras.registros) ? v.regras.registros : null,
       desig: v.desig && v.desig.criterios && Array.isArray(v.desig.criterios.ordem) ? v.desig.criterios : null,
       equipe: v.equipe && Array.isArray(v.equipe.registros) ? v.equipe.registros : null };
@@ -514,15 +516,63 @@
     return m;
   }
 
+  /* ================= regras do Gabinete CMT: dias úteis, pontos, capacidade e cota =================
+     Calendário: dia útil = dia da semana de expediente fora dos dias excluídos (calendário do gabinete).
+     Pontos: peso do tipo (voto, ED/AgInt) × multiplicador da complexidade (Ω, Α, Σ); tabela em apoio/regras/produtividade.json.
+     Capacidade: dias úteis de cada servidor no período, descontadas as ausências; a cota da sessão é proporcional a esses dias. */
+  var PROD = null;
+  function regraPainel() { var p = (PROD && PROD.painel) || {}, n = function (v, d, a, b) { if (v == null || String(v).trim() === '') return d; var x = Number(String(v).replace(',', '.')); return isFinite(x) && x >= a && x <= b ? x : d; };
+    return { liberacao: Math.round(n(p.liberacao, 5, 0, 30)), minutasDia: n(p.minutasDia, 3, 0.5, 20) }; }
+  function pesos() { var d = { voto: 1, ed: 0.5, mono: 0.75, cx1: 1, cx2: 1.5, cx3: 2 }, p = (PROD && PROD.pesos) || {}, o = {}; Object.keys(d).forEach(function (k) { var x = Number(p[k]); o[k] = isFinite(x) && x >= 0 && p[k] !== '' && p[k] != null ? x : d[k]; }); o.agint = o.ed; return o; }
+  function isoMais(d, n) { var x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); }
+  function util(d) { var c = calendario(), wd = c.weekdays && c.weekdays.length ? c.weekdays : [1, 2, 3, 4, 5]; return /^\d{4}-\d{2}-\d{2}$/.test(d || '') && wd.indexOf(new Date(d + 'T12:00:00Z').getUTCDay()) >= 0 && (c.excluded || []).indexOf(d) < 0; }
+  /* deslocamento estrito: -5 conta cinco dias úteis antes do dia (sem contar o próprio dia) */
+  function deslocaUteis(d, n) { if (!/^\d{4}-\d{2}-\d{2}$/.test(d || '')) return ''; var r = Math.abs(n), passo = n < 0 ? -1 : 1, x = d; for (var k = 0; r && k < 4000; k++) { x = isoMais(x, passo); if (util(x)) r--; } return r ? '' : x; }
+  function uteisEntre(de, ate) { if (!de || !ate || ate < de) return 0; var n = 0, x = de; for (var k = 0; x <= ate && k < 4000; k++, x = isoMais(x, 1)) if (util(x)) n++; return n; }
+  function diasDisp(m, de, ate) { if (!de || !ate || ate < de) return 0; var n = 0, x = de, A = m.aus || []; for (var k = 0; x <= ate && k < 4000; k++, x = isoMais(x, 1)) if (util(x) && !A.some(function (a) { return a.de && a.ate && a.de <= x && x <= a.ate; })) n++; return n; }
+  function cxDe(v) { var t = N(v); if (!t) return 1; if (/omega|padrao|baixa|ω/.test(t)) return 1; if (/alfa|alpha|intermedi|media|α/.test(t)) return 2; if (/sigma|complex|alta|σ/.test(t)) return 3; var n = Math.round(Number(String(v).replace(',', '.'))); return n >= 1 && n <= 3 ? n : 1; }
+  function periodo(ss) { var h = hoje(), de = (ss.fases && ss.fases.inicio) || h; if (de < h) de = h; var ate = (ss.fases && ss.fases.minutas) || deslocaUteis(ss.data, -regraPainel().liberacao - 1) || ss.data; return { de: de, ate: ate }; }
+  /* cota de cada minutante: pontos da sessão × dias disponíveis ÷ dias da equipe; sobras para a maior fração */
+  var COT = { k: '', t: 0, v: null };
+  function cotas(ss) { var ck = ss.id + '|' + ss.itens.length + '|' + ss.itens.map(function (i) { return N(i.servidor); }).join(','); if (COT.k === ck && Date.now() - COT.t < 3000) return COT.v; var v = cotas0(ss); COT = { k: ck, t: Date.now(), v: v }; return v; }
+  function cotas0(ss) { var pr = periodo(ss), P = pool('d').filter(function (m) { return m.auto !== false; }).map(function (m) { return { m: m, dias: diasDisp(m, pr.de, pr.ate) }; }),
+      total = ss.itens.reduce(function (a, i) { return a + pesoItem(i); }, 0), td = P.reduce(function (a, x) { return a + x.dias; }, 0), out = {};
+    if (!td) { P.forEach(function (x) { out[N(x.m.nome)] = { cota: 0, dias: x.dias }; }); return out; }
+    P.forEach(function (x) { var raw = total * x.dias / td; x.q = Math.floor(raw); x.f = raw - x.q; });
+    var resto = Math.round(total - P.reduce(function (a, x) { return a + x.q; }, 0)), R = P.filter(function (x) { return x.dias > 0; }).sort(function (a, b) { return b.f - a.f || a.m.nome.localeCompare(b.m.nome, 'pt-BR'); });
+    for (var i = 0; i < resto && R.length; i++) R[i % R.length].q++;
+    P.forEach(function (x) { out[N(x.m.nome)] = { cota: x.q, dias: x.dias }; }); return out; }
+  /* aderência sem regra que indique alguém (pesos do Gabinete CMT) */
+  function aderencia(kind, m, inf, ss, H) { var a = N(inf.assunto), sec = N(inf.secao), esp = (inf.c.esp || []).concat(inf.c.tema || []).map(N).filter(Boolean), p = 0, veto = false, why = [];
+    var casa = function (L) { return (L || []).some(function (e) { var k = N(e); return k && (k === a || k === sec || esp.indexOf(k) >= 0 || (k.length >= 4 && a.indexOf(k) >= 0)); }); };
+    if (kind === 'd') {
+      if (casa(m.exp)) { p += 2; why.push('experiência (+2)'); } if (casa(m.pref)) { p += 2; why.push('preferência (+2)'); } if (casa(m.nao)) { p -= 4; veto = true; why.push('área a evitar (−4)'); }
+      var hs = a ? (H.get(N(m.nome) + '|' + a) || 0) : 0; if (hs) { var pt = Math.min(4, hs) * 0.75; p += pt; why.push(hs + ' minuta(s) no assunto (+' + String(pt).replace('.', ',') + ')'); }
+    } else {
+      if (casa(m.exp)) { p += 3; why.push('experiência (+3)'); } if (casa(m.pref)) { p += 2; why.push('preferência (+2)'); } if (casa(m.nao)) { p -= 5; veto = true; why.push('área a evitar (−5)'); }
+      var hc = a ? (H.get(N(m.nome) + '|' + a) || 0) : 0; if (hc) { var pc = Math.min(4, hc) * 2; p += pc; why.push(hc + ' correção(ões) no assunto (+' + pc + ')'); }
+      var cg = ss.itens.filter(function (i) { return N(i.corretor) === N(m.nome) && !i.dataCorrecao; }).length; if (cg) { var pg = Math.min(8, cg) * 0.5; p -= pg; why.push(cg + ' correção(ões) pendente(s) (−' + String(pg).replace('.', ',') + ')'); }
+    }
+    return { p: p, veto: veto, why: why }; }
+  function porAderencia(kind, it, ss, P) { var inf = infoItem(it), H = historico()[kind], Q = kind === 'd' ? cotas(ss) : null;
+    var C = P.map(function (m) { var x = aderencia(kind, m, inf, ss, H), q = Q ? Q[N(m.nome)] || { cota: 0, dias: 0 } : null; return { m: m, p: x.p, veto: x.veto, why: x.why, livre: q ? q.cota - carga(m.nome, 'd', ss) : 0, dias: q ? q.dias : 0 }; });
+    if (kind === 'd') C = C.filter(function (c) { return c.dias > 0; }); if (!C.length) return null;
+    var sem = C.filter(function (c) { return !c.veto; }), base = sem.length ? sem : C, livres = kind === 'd' ? base.filter(function (c) { return c.livre > 0; }) : base, pool2 = livres.length ? livres : base;
+    pool2.sort(function (x, y) { return y.p - x.p || (kind === 'd' ? (y.livre - x.livre || y.dias - x.dias) : (carga(x.m.nome, 'c', ss) - carga(y.m.nome, 'c', ss))) || x.m.nome.localeCompare(y.m.nome, 'pt-BR'); });
+    var c = pool2[0]; return { nome: c.m.nome, por: 'aderência' + (c.why.length ? ': ' + c.why.join(', ') : ': sem histórico ou especialidade; ' + (kind === 'd' ? 'maior vaga na cota (' + c.livre + ' pt, ' + c.dias + ' dia(s) útil(eis))' : 'menor carga')) + (c.veto ? ' · área evitada, sem alternativa' : '') }; }
+  /* marcos sugeridos: liberação N dias úteis antes da sessão; prazo das minutas = primeiro dia útil em que a capacidade
+     (ritmo × minutantes disponíveis, dia a dia) cobre os pontos ainda sem minuta */
+  function sugerirMarcos(ss) { var R = regraPainel(), lib = deslocaUteis(ss.data, -R.liberacao), h = hoje(), ini = (ss.fases && ss.fases.inicio) || h; if (ini < h) ini = h;
+    var pend = ss.itens.filter(function (i) { return !i.dataMinuta; }).reduce(function (a, i) { return a + pesoItem(i); }, 0), P = pool('d').filter(function (m) { return m.auto !== false; }), cap = 0, x = ini, min = '';
+    if (pend && P.length) for (var k = 0; k < 400; k++, x = isoMais(x, 1)) { if (util(x)) { cap += R.minutasDia * P.filter(function (m) { return diasDisp(m, x, x) > 0; }).length; if (cap >= pend) { min = x; break; } } }
+    return { liberacao: lib, minutas: min, pontos: Math.round(pend * 100) / 100, minutantes: P.length, inicio: ini }; }
+
   /* ================= designação e correção ================= */
   var HIST = null;
   function membro(nome) { var k = N(nome); return k ? S.equipe.find(function (m) { return N(m.nome) === k || (m.aliases || []).some(function (a) { return N(a) === k; }); }) || null : null; }
   function faz(m, kind) { return kind === 'd' ? (m.minuta != null ? !!m.minuta : m.papel === 'equipe') : (m.correcao != null ? !!m.correcao : m.papel === 'assessoria'); }
   function pool(kind) { return S.equipe.filter(function (m) { return faz(m, kind); }); }
-  function ausente(m, ss) {
-    var de = (ss.fases && ss.fases.inicio) || ss.data, ate = (ss.fases && ss.fases.minutas) || ss.data;
-    return (m.aus || []).some(function (a) { return a.de && a.ate && !(a.ate < de || a.de > ate); });
-  }
+  function ausente(m, ss) { var pr = periodo(ss); return diasDisp(m, pr.de, pr.ate) === 0; }
   function historico() {
     if (HIST) return HIST;
     var H = { d: new Map(), c: new Map() }, add = function (k, nome, a) { if (!a) return; var key = N(nome) + '|' + N(a); H[k].set(key, (H[k].get(key) || 0) + 1); };
@@ -537,7 +587,8 @@
     });
     HIST = H; return H;
   }
-  function pesoItem(i) { var r = acervo().by.get(dig(i.cnj)), v = r ? Number(String(r.Dificuldade || r.COMPLEXIDADE || '').replace(',', '.')) : 0; return v > 0 ? v : 1; }
+  function pesoItem(i) { var r = acervo().by.get(dig(i.cnj)), W2 = pesos(), k = ''; try { k = julgKey(i, infoItem(i)); } catch (e) {}
+    var t = k === 'ED' ? W2.ed : k === 'AgInt' ? W2.agint : W2.voto, cx = cxDe(i.complexidade || (r && (r.COMPLEXIDADE || r.Dificuldade)) || ''); return Math.round(t * W2['cx' + cx] * 100) / 100; }
   function carga(nome, kind, ss) { return ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(nome); }).reduce(function (a, i) { return a + pesoItem(i); }, 0); }
   function desigEfetiva(ss) { return ss && ss.desigOverride ? ss.desigOverride : S.desig; }
   function desigNaTela() { var ss = sessaoReal(); return UI.aba === 'desig' && UI.desigEscopo === 'sessao' && ss ? (ss.desigOverride || (ss.desigOverride = clone(S.desig))) : S.desig; }
@@ -571,7 +622,7 @@
       if (v) return { nome: v, por: CRIT_T[cid] };
     }
     if (kind === 'd' && inf.c.metas.length && D.on.julg && D.on.julg.d) { var vm = ok(linha('julg', 'META', ss).d); if (vm) return { nome: vm, por: 'META (último critério da minuta)' }; }
-    return null;
+    return porAderencia(kind, it, ss, P);
   }
   function designar(kind, todos) {
     var ss = sessao(); if (!ss) return;
@@ -1832,6 +1883,11 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       if (S.sessoes.some(function (x) { return x !== sf && x.data === nova; })) return { erro: 'Já existe sessão em ' + br(nova) + '.' };
       sf.data = nova; if ((S.sync || {})['ses:' + velha]) { S.apagadas = (S.apagadas || []).filter(function (d) { return d !== nova; }); if (S.apagadas.indexOf(velha) < 0) S.apagadas.push(velha); }
       HIST = null; salvar(); marcosParaPainel(sf); if (root && !root.hidden) render(); return { ok: true, de: velha, para: nova }; },
+    sugerirMarcos: function (id) { var sf = S.sessoes.find(function (x) { return x.id === id; }); return sf ? sugerirMarcos(sf) : null; },
+    cotas: function (id) { var sf = S.sessoes.find(function (x) { return x.id === id; }); return sf ? cotas(sf) : null; },
+    pontos: function (id) { var sf = S.sessoes.find(function (x) { return x.id === id; }); return sf ? sf.itens.reduce(function (a, i) { return a + pesoItem(i); }, 0) : 0; },
+    regrasProdutividade: function (j) { if (j && typeof j === 'object') PROD = j; return PROD; },
+    diasUteis: { util: util, desloca: deslocaUteis, entre: uteisEntre },
     /* critérios de designação (apoio/regras/designacao.json): ordem e interruptores Designa (d) e Corrige (c) */
     desigDefinir: function (ordem, on) { if (!S.desig) S.desig = { ordem: CRIT.slice(), on: {}, rows: {}, equilibrar: true };
       if (Array.isArray(ordem)) { var o = ordem.filter(function (k) { return CRIT.indexOf(k) >= 0; }); CRIT.forEach(function (k) { if (o.indexOf(k) < 0) o.push(k); }); S.desig.ordem = o; }

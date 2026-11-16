@@ -1423,7 +1423,7 @@ function portaToken() { return new Promise((fim) => {
     const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', 'data']];
     return `<section class="cwe-marcos" aria-label="Marcos da sessão"><button type="button" class="cwe-regras" data-cwe="cfg-0">regras</button><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
       ${M.map(([t, v, o, k]) => est.mEd && k ? `<label title="${e(t + ' · ' + o)}">${e(t)}<input type="date" data-cwe-mk="${k}" value="${e(v || '')}"></label>` : `<label title="${e(t + ' · ' + o)}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
-      <span class="cwe-mkb"><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
+      <span class="cwe-mkb"><button type="button" data-cwe="m-sug" title="Liberação: dias úteis antes da sessão; entrega das minutas: primeiro dia útil em que a capacidade da equipe cobre os pontos pendentes (Regras gerais › produtividade)">Sugerir pelas regras</button><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
   }
   function esteira(d) {
     const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e conferência'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
@@ -1793,6 +1793,11 @@ function portaToken() { return new Promise((fim) => {
       else if (k === 'des-todos') est.desTake = 1e5;
       else if (k === 'cf') est.cf = est.cf === b.dataset.v ? '' : b.dataset.v;
       else if (k === 'm-ed') est.mEd = !est.mEd;
+      else if (k === 'm-sug') { const s = A.getSes(), ss = A.selectedSession(); const g = s?.sugerirMarcos?.(ss && ss.id); if (!g) { A.msg('Motor indisponível para sugerir os marcos.', true); return; }
+        const f = ss.fases || {}, mud = [];
+        if (g.liberacao && g.liberacao !== f.liberacao && (!f.liberacao || W.confirm('Trocar a liberação de ' + A.br(f.liberacao) + ' para ' + A.br(g.liberacao) + ' (regra: dias úteis antes da sessão)?'))) { s.fase(ss.id, 'liberacao', g.liberacao); mud.push('liberação ' + A.br(g.liberacao)); }
+        if (g.minutas && g.minutas !== f.minutas && (!f.minutas || W.confirm('Trocar a entrega das minutas de ' + A.br(f.minutas) + ' para ' + A.br(g.minutas) + ' (' + String(g.pontos).replace('.', ',') + ' pontos pendentes, ' + g.minutantes + ' minutante(s))?'))) { s.fase(ss.id, 'minutas', g.minutas); mud.push('entrega ' + A.br(g.minutas)); }
+        A.msg(mud.length ? 'Marcos pelas regras: ' + mud.join(' · ') + '.' : 'Nada mudou' + (g.minutas ? '' : ' (sem processos pendentes ou sem minutantes para calcular a entrega)') + '.'); }
       else if (k === 'nr') est.nr = est.nr?.t === b.dataset.t && est.nr.v === b.dataset.v ? null : { t: b.dataset.t, v: b.dataset.v };
       else if (k === 'nr-x') est.nr = null;
       else if (k === 'nr-salvar') { const f = b.closest('.cwe-nr'), s = A.getSes(); if (!f || !est.nr || !s) return;
