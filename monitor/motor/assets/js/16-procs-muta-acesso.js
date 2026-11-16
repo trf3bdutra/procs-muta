@@ -6,9 +6,12 @@
   var REPO={dono:'trf3bdutra',repo:'procs-muta',ramo:'main'},K='procsmuta_token',pedido=null,GRAVA=true;var fechaPedido=null;
   var tok=(function(){try{return sessionStorage.getItem(K)||localStorage.getItem(K)||''}catch(e){return ''}})();
   function esquecer(){tok='';try{sessionStorage.removeItem(K);localStorage.removeItem(K)}catch(e){}}
-  var recusado=true,aviso='';   /* o pedido de token não abre sozinho: só pelo botão de conexão (ou ao gravar) */
+  var recusado=true,aviso='';
+  /* sem token guardado: a sessão da Ex Officio, se houver, abre o acesso pela ponte da Vercel (gh-ponte.js · /api/gh) */
+  var pronto=(!tok&&window.__ghPonte&&window.__ghPonte.confere?window.__ghPonte.confere():Promise.resolve(false)).then(function(ok){if(ok&&!tok){tok=window.__ghPonte.SENT;recusado=false}}).catch(function(){});   /* o pedido de token não abre sozinho: só pelo botão de conexão (ou ao gravar) */
   /* pede o token uma vez; confere no GitHub antes de aceitar; "Agora não" vale para esta aba até novo pedido explícito */
-  function pedir(motivo,forcar){
+  function pedir(motivo,forcar){return pronto.then(function(){return pedir0(motivo,forcar)})}
+  function pedir0(motivo,forcar){
     if(tok)return Promise.resolve(tok);
     if(recusado&&!forcar)return Promise.resolve('');
     if(pedido)return pedido;
@@ -54,7 +57,7 @@
       if(!k)throw new Error('sem token de acesso ao repositório privado trf3bdutra/procs-muta');
       var r=await fetch('https://api.github.com/repos/'+REPO.dono+'/'+REPO.repo+'/contents/'+rel+'?ref='+REPO.ramo+'&t='+Date.now(),
         {cache:'no-store',headers:{'Accept':'application/vnd.github.raw+json','Authorization':'Bearer '+k,'X-GitHub-Api-Version':'2022-11-28'}});
-      if(r.status===401){esquecer();aviso='O GitHub recusou o token salvo neste navegador (errado ou expirado). Informe um novo.';continue}
+      if(r.status===401){var eraPonte=window.__ghPonte&&k===window.__ghPonte.SENT;esquecer();if(!eraPonte&&window.__ghPonte&&await window.__ghPonte.confere()){tok=window.__ghPonte.SENT;recusado=false;continue}aviso=eraPonte?'A sessão da Ex Officio expirou. Entre de novo.':'O GitHub recusou o token salvo neste navegador (errado ou expirado). Informe um novo.';continue}
       if(!r.ok)throw new Error('HTTP '+r.status+' em '+rel);
       return await r.text();
     }
@@ -91,10 +94,10 @@
     tok=v;recusado=false;aviso='';
     /* token informado fora deste pedido (tela de entrada da Triagem, cartão do Atualizar): fecha o pedido aberto */
     if(fechaPedido)try{fechaPedido(v)}catch(e){}
-    try{sessionStorage.setItem(K,v);if(lembrar)localStorage.setItem(K,v);else localStorage.removeItem(K)}catch(e){}
+    if(!(window.__ghPonte&&v===window.__ghPonte.SENT))try{sessionStorage.setItem(K,v);if(lembrar)localStorage.setItem(K,v);else localStorage.removeItem(K)}catch(e){}
     return{ok:true};
   }
-  window.ProcsMuta={dono:REPO.dono,repo:REPO.repo,ramo:REPO.ramo,ler:ler,gravar:gravar,token:pedir,conectar:function(){return pedir('',true)},definir:definir,esquecer:esquecer,get atual(){return tok},get lembrado(){try{return !!localStorage.getItem(K)}catch(e){return false}}};
+  window.ProcsMuta={dono:REPO.dono,repo:REPO.repo,ramo:REPO.ramo,ler:ler,gravar:gravar,token:pedir,conectar:function(){return pedir('',true)},definir:definir,esquecer:esquecer,get atual(){return tok},pronto:pronto,get ponte(){return !!(window.__ghPonte&&tok===window.__ghPonte.SENT)},get lembrado(){try{return !!localStorage.getItem(K)}catch(e){return false}}};
   function selo(){var d=document.createElement('div');d.id='procsMutaSelo';d.title='Lê a base trf3bdutra/procs-muta. A gravação está desligada nesta versão de teste.';
     d.setAttribute('style','position:fixed;left:10px;bottom:10px;z-index:2147483645;background:#8c6d38;color:#fff;font:700 11px/1 system-ui,Arial,sans-serif;letter-spacing:.04em;padding:6px 9px;border-radius:999px;box-shadow:0 2px 8px rgba(0,0,0,.25);pointer-events:none');
     d.textContent='VERSÃO DE TESTE · procs-muta · só leitura';document.body.appendChild(d)}

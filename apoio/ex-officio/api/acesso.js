@@ -1,6 +1,7 @@
 /* GET /api/acesso → quem está conectado e o perfil no Modus Operandi (equipe, avancado, editor; ver apoio/acessos.json) */
 const L = require('./_lib');
 module.exports = async (req, res) => {
+  if (req.query && req.query.gh !== undefined) return require('./_gh')(req, res);
   res.setHeader('Cache-Control', 'no-store');
   const u = L.quem(req);
   if (!u) return res.status(200).json({ usuario: '', perfil: 'equipe', avancado: false, editor: false });
