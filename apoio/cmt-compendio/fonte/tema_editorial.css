@@ -1,0 +1,28 @@
+/* ===== Tema editorial em todas as abas do Compêndio (papel, filetes, cantos retos, rótulos em mono).
+   Só estilo: nenhuma marcação nem script muda. A Minuta-Matriz (#v-edit .xa) já nasceu nesse padrão e fica de fora dos ajustes de forma. ===== */
+:root[data-theme="light"]{--bg:#f4f2ea;--panel:#fbfaf5;--card:#ffffff;--field:#ffffff;--ink:#203b39;--mut:#5c6b67;--line:#d8d3c6;--gold:#235a55;--gold-ink:#ffffff;--gold-soft:rgba(35,90,85,.10);--focus:#235a55;--warn:#805b18;--warn-soft:#f5efd9;--stf:#805b18;--stj:#1f4c4f;--trf:#3b7150}
+:root:not([data-theme="light"]){--stf:#e6c27a;--stj:#9fd6c2;--trf:#8fb59a}
+:root{--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif;--eoc:#a57829;--eoc2:#805b18;--evd:#235a55}
+:root:not([data-theme="light"]){--eoc:#e6c27a;--eoc2:#e6c27a;--evd:#6eba8a}
+/* forma: cantos retos e sem sombra de cartão */
+section[id^="v-"] *:not(input[type=radio]):not(input[type=checkbox]),.ac-dlgc,.ac-dlgc *{border-radius:0!important}
+section[id^="v-"] .card,section[id^="v-"] .e-row,section[id^="v-"] .n-row,section[id^="v-"] .n-card,section[id^="v-"] .mfic,section[id^="v-"] .cq-box{box-shadow:none!important}
+/* abertura de cada aba: sobrelinha em mono, título em duas partes do mesmo porte */
+.pg-h{background:var(--panel);border-bottom:1px solid var(--line);padding:22px 28px 16px}
+.pg-t h1{font-size:38px!important;font-weight:650!important;letter-spacing:-.045em!important;line-height:1.05!important;color:var(--ink)}
+.pg-t h1:after{content:".";font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eoc)}
+.pg-t p{font-size:13.5px;color:var(--mut)}
+#v-ement .pg-t:before{content:"Precedentes · Ementário";display:block;font:400 11px var(--emono);letter-spacing:.16em;text-transform:uppercase;color:var(--eoc2);margin-bottom:6px}
+/* rótulos pequenos (os que já eram em caixa alta) passam ao mono; títulos de conteúdo não mudam */
+.lab,.e-lb,.e-sec,.e-rk,.x-ten b,.x-tbl th,.e-dmeta div span,.n-tbl thead th,.n-of .lb,.xgk,.xrg,.xinfo thead th,
+.pp-k,.pp-path,.pp-pt .r,.pp-pg span,.pp-et span,.pp-ci span,.msel span,.mgk,.pvk,.pvo,.rr-k,.mn-t th,.m-caso>span,
+.enc-k,.enc-facts span,.enc-tbl thead th,#v-enc .enc-html thead th,.enc-cmp tbody th,.enc-ac em,
+#v-enc .enc-html .fact span,#v-enc .enc-html .im-k,#v-enc .enc-html .alf-top .k,#v-enc .enc-html .alf-col h5{font-family:var(--emono)!important;font-weight:400!important;letter-spacing:.12em!important}
+/* painéis laterais e barras: papel com filete (vazio, o painel não aparece) */
+section[id^="v-"] aside:not(:empty):not(#x-aside):not(#x-ref){background:var(--panel)!important;border-right:1px solid var(--line)}
+section[id^="v-"] .sub{background:var(--panel)}
+/* campos e botões */
+section[id^="v-"] input:not([type=radio]):not([type=checkbox]),section[id^="v-"] select{background:var(--field);border:1px solid #c8c3b6}
+:root:not([data-theme="light"]) section[id^="v-"] input:not([type=radio]):not([type=checkbox]),:root:not([data-theme="light"]) section[id^="v-"] select{border-color:var(--line)}
+/* celular: a linha de resumo e o aviso ocupam a largura toda, antes dos modos de exibição */
+@media (max-width:760px){.n-bar .n-sum{flex:1 1 100%}.n-bar .n-seg{margin-left:0}}

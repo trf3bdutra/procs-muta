@@ -233,7 +233,7 @@ def montar(var):
         t = t.replace('<title>CMT Compêndio</title>', '<title>Editor · Compêndio · Gabinete CMT</title>', 1)
     else:
         t = t.replace('<title>CMT Compêndio</title>', '<title>Compêndio · Gabinete CMT</title>', 1)
-    css += (H/'nav_editorial.css').read_text(encoding='utf-8')
+    css += (H/'nav_editorial.css').read_text(encoding='utf-8') + (H/'tema_editorial.css').read_text(encoding='utf-8')
     return t, js, css, pre
 def gerar_html(var):
     t, js, css, pre = montar(var)
