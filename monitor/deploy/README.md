@@ -1,7 +1,7 @@
-# Publicação sem remover /hub
+# Publicação sem remover /office
 
 Copie todo o conteúdo desta pasta (index.html, assets/, motor/) para `site/public/monitor/`.
-A raiz `/` e `/hub` devem continuar servidas pelo aplicativo da equipe (não pelo monitor).
+A raiz `/` leva ao `/office/` (aplicativo da equipe, Ex Officio); `/hub` e `/equipe` redirecionam para lá. Essas regras ficam nas Rotas do projeto, no painel da Vercel, e valem antes do `vercel.json`; `/monitor` também é reescrito ali para `/monitor/index.html`.
 
 Exemplo para a etapa de montagem de Vercel:
 
