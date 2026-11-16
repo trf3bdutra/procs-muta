@@ -58,6 +58,23 @@ module.exports = async (req, res, u) => {
     });
   });
   sessoes.sort((x, y) => String(x.date).localeCompare(String(y.date)));
+  /* calendário: todas as sessões visíveis, com os marcos, mesmo sem listagem publicada */
+  const agenda = todas.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', publicada: !!s.publicada,
+    processos: (sessoes.find(x => x.date === s.date) || {}).processos || 0, marcos: s.marcos || {}, sessao: s.date }))
+    .sort((x, y) => String(x.date).localeCompare(String(y.date)));
+  /* pauta da sessão pedida (?s=AAAA-MM-DD); sem pedido, a próxima publicada ainda por julgar */
+  const alvo = L.dataOk(req.query && req.query.s) ? req.query.s
+    : (sessoes.filter(s => s.date >= hj)[0] || sessoes[sessoes.length - 1] || {}).date || '';
+  const ki = pubs.findIndex(s => s.date === alvo), dAlvo = ki >= 0 ? docs[ki] : null;
+  const lst = dAlvo ? ((dAlvo.itens || []).length ? dAlvo.itens : (dAlvo.previa || [])) : [];
+  const etapa = it => it.dataLiberacao ? 'liberado' : it.dataCorrecao ? 'corrigido' : it.dataMinuta ? 'minutado' : 'pendente';
+  const pauta = { date: alvo, previa: !!(dAlvo && !(dAlvo.itens || []).length), itens: lst.map(it => {
+    const c = it.ctl || {};
+    return { cnj: it.cnj, item: it.item || '', classe: it.classe || '', assunto: it.assunto || '', partes: it.partes || '',
+      servidor: it.servidor || '', corretor: it.corretor || '', etapa: etapa(it),
+      dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '',
+      resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, meta: c.meta || '', obs: it.obs || '' };
+  }) };
   /* marcos vencendo: até 7 dias à frente, ou já vencidos, nas sessões visíveis à equipe */
   const NOMES = { pautarAte: 'Pautar até', inicioPreparacao: 'Início da preparação', entregaMinutas: 'Entrega das minutas', liberacao: 'Liberação' };
   todas.forEach(s => Object.keys(NOMES).forEach(k => {
@@ -71,7 +88,7 @@ module.exports = async (req, res, u) => {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, urgencias, sessoes, prazos,
+  res.status(200).json({ usuario: u, hoje: hj, assinar, urgencias, sessoes, agenda, pauta, prazos,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus } });
 };
