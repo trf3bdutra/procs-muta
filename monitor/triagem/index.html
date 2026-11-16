@@ -200,7 +200,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 <header id="top">
   <a id="marca" href="#inicio" title="Início da triagem"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><b>Triagem<i>.</i></b></a>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
-  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
+  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
 </header>
 <main id="main"><div id="carga"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
 <div id="rodape" class="off" role="region" aria-label="Ações em bloco" hidden></div>
@@ -209,6 +209,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 <script src="/padrao/acervo-fonte.js"></script>
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
+<script src="/init/assets/js/regras-gerais.js"></script>
 <script>
 (function () {
 'use strict';
@@ -275,7 +276,7 @@ function pendDe(o) { const t = o.etq.map(nz), has = (rx) => t.some((x) => rx.tes
   if (has(/preparo/) && !has(/custas ok/)) L.push('preparo'); if (has(/liminar pendente/)) L.push('liminar'); if (has(/aguardar novos precedentes|tema 1433/)) L.push('precedente'); if (has(/nao pautar/)) L.push('não pautar'); return L; }
 
 /* ===================== estado ===================== */
-let U = [], NOVAS = [], ALL = [], IDX = new Map(), ROWS_REF = null, ROWS_N = 0, PRONTO = false;
+let FONTE = null, FONTE_EM = '', U = [], NOVAS = [], ALL = [], IDX = new Map(), ROWS_REF = null, ROWS_N = 0, PRONTO = false;
 const ESC_ARQ = 'acervo/triagem/escaninhos.json';
 let ESC = { schema: 'gabcmt.escaninhos', versao: 1, atualizadoEm: '', escaninhos: [] }, ESC_V = 0, ESC_GRAV = 0;
 const PEND = new Map(); let GRAVANDO = false, ERRO = '', ULT = '', TENT = 0, T_GRAVA = null;
@@ -293,12 +294,13 @@ function destinoAtual(o) { const r = o.row;
   if (r.Destino === 'Monocrática') return { k: 'mono', t: 'monocrática' };
   const e = escDe(o.d); if (e) return { k: 'esc', t: e.titulo, e };
   return { k: '', t: 'sem destino' }; }
-function proc(r) {
-  const etq = etqDe(r), classe = r.classe_judicial || r.Classe || '', cl = abrev(classe), tarefa = String(r.tarefa_atual || '').trim();
-  const sc = String(r['Seção Competente'] || '').trim(), se = etq.find((e) => SEC_RX.test(e)) || '';
-  const o = { row: r, d: dg(r.Processo || r.processo), cnj: fmtCnj(r.Processo || r.processo), classe, cl, assunto: String(r.assunto_judicial || r.Assunto || r.Assunto_Principal || '').trim() || '—',
-    tarefa, desde: iso(r.data_entrada_tarefa), secao: SEC_RX.test(sc) ? sc : (se || 'Sem seção'), secEtq: se, secComp: SEC_RX.test(sc) ? sc : '', prior: /^(sim|s)$/i.test(String(r.prioridade || '').trim()), etq,
-    partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter((x) => x && x !== '####').join(' x '), dist: iso(r['data_distribuição'] || r['Data_Distribuição']) };
+function proc(f, r) {
+  r = r || f;
+  const etq = etqDe(f), classe = f.classe_judicial || f.Classe || r.classe_judicial || '', cl = abrev(classe), tarefa = String(f.tarefa_atual || '').trim();
+  const sc = String(f['Seção Competente'] || r['Seção Competente'] || '').trim(), se = etq.find((e) => SEC_RX.test(e)) || '';
+  const o = { row: r, d: dg(f.processo || f.Processo), cnj: fmtCnj(f.processo || f.Processo), classe, cl, assunto: String(f.assunto_judicial || f.Assunto || f.Assunto_Principal || '').trim() || '—',
+    tarefa, desde: iso(f.data_entrada_tarefa), secao: SEC_RX.test(sc) ? sc : (se || 'Sem seção'), secEtq: se, secComp: SEC_RX.test(sc) ? sc : '', prior: /^(sim|s)$/i.test(String(f.prioridade || '').trim()), etq,
+    partes: [f.polo_ativo || f.Polo_Ativo, f.polo_passivo || f.Polo_Passivo].filter((x) => x && x !== '####').join(' x '), dist: iso(f['data_distribuição'] || f['Data_Distribuição']) };
   o.apto = etq.some(ehAptoE) || /Aptos para julgamento/i.test(tarefa);
   o.monoE = etq.some((e) => /monocr/i.test(e)) || r.Destino === 'Monocrática';
   o.prov = DEST.find((x) => x[3](o))[0];
@@ -310,8 +312,12 @@ function proc(r) {
 function construir() {
   const c = core(); const R = (c && c.rows) || []; ROWS_REF = R; ROWS_N = R.length;
   indexEsc();
+  /* o paradeiro (tarefa, etiquetas, prioridade) vem da fonte do procs-muta, não da cópia do navegador; da cópia vem só o trabalho do gabinete */
+  const MR = new Map(); R.forEach((r) => { const d = dg(r.Processo || r.processo); if (d) MR.set(d, r); });
+  const F0 = FONTE || R;
   U = []; NOVAS = [];
-  R.forEach((r) => { const t = String(r.tarefa_atual || '').trim(); if (!t) return; const k = nzT(t); if (TRIAR.has(k)) U.push(proc(r)); else if (ESCOPO.lido && !IGN.has(k)) { const o = proc(r); o.nova = true; NOVAS.push(o); } });
+  F0.forEach((f) => { const t = String(f.tarefa_atual || '').trim(); if (!t) return; const d = dg(f.processo || f.Processo); let r = MR.get(d); if (!r) { r = { Processo: fmtCnj(d) }; }
+    const k = nzT(t); if (TRIAR.has(k)) U.push(proc(f, r)); else if (ESCOPO.lido && !IGN.has(k)) { const o = proc(f, r); o.nova = true; NOVAS.push(o); } });
   ALL = U.concat(NOVAS); IDX = new Map(ALL.map((o) => [o.d, o]));
   ALL.forEach((o) => { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); });
   for (const d of [...SEL]) if (!IDX.has(d)) SEL.delete(d); }
@@ -446,7 +452,7 @@ function vInicio() {
   const div = U.filter((o) => o.div);
   reg('div', 'Seção divergente (etiqueta × Seção competente)', div);
   const cf = (n, t, s, kk) => '<button type="button" class="li" data-conj="' + kk + '" style="grid-template-columns:56px minmax(0,1fr)"><span class="n" style="text-align:left;color:var(--r)">' + nf(n) + '</span><span><b style="font-weight:600">' + t + '</b><small>' + s + '</small></span></button>';
-  const conf = '<section class="card" style="box-shadow:inset 0 3px 0 var(--r)"><div class="ch"><h2>Conferir antes</h2><p>pode mudar o destino</p></div>' + cf(div.length, 'Seção divergente', 'a etiqueta de seção difere da Seção competente', 'div') + cf(comPend.length, 'Aptos com pendência', 'etiqueta de parecer do MPF, contrarrazões, preparo, liminar, precedente ou “não pautar”', 'pend') + (NOVAS.length ? cf(NOVAS.length, 'Tarefas não classificadas', 'tarefa do PJe fora das listas do escopo da triagem: ' + esc([...new Set(NOVAS.map((o) => o.tarefa))].slice(0, 3).join('; ')), 'novas') : '') + '</section>';
+  const conf = '<section class="card" style="box-shadow:inset 0 3px 0 var(--r)"><div class="ch"><h2>Conferir antes</h2><p>pode mudar o destino</p></div>' + cf(div.length, 'Seção divergente', 'a etiqueta de seção difere da Seção competente', 'div') + cf(comPend.length, 'Aptos com pendência', 'etiqueta de parecer do MPF, contrarrazões, preparo, liminar, precedente ou “não pautar”', 'pend') + (NOVAS.length ? cf(NOVAS.length, 'Tarefas não classificadas', 'tarefa do PJe fora das listas do escopo: ' + esc([...new Set(NOVAS.map((o) => o.tarefa))].slice(0, 3).join('; ')) + ' · classificar em ⚙ Regras gerais', 'novas') : '') + '</section>';
   /* massas */
   const base = semD.filter((o) => o.prov === 'tri' && !o.cand), G = new Map();
   base.forEach((o) => { const kk = o.secao + '|' + o.assunto; if (!G.has(kk)) G.set(kk, []); G.get(kk).push(o); });
@@ -746,11 +752,15 @@ async function enviarFonte() { const AF = W.CMTAtualizarFonte; if (!IMP || !IMP.
   try { const r = await AF.atualizar(null, { lidos: IMP.lidos, papeis: IMP.papeis, XLSX: W.XLSX, ProcsMuta: PM(), aviso });
     aviso(r.mensagem + '. Relendo o acervo…');
     try { const A = M().CMTAcervoDados; if (A && A.puxar) await A.puxar(false); } catch (e) {}
+    await lerFonte();
     construir(); render(); if (IMP) IMP.fonte = await fonteInfo(); acervoData();
     aviso('Acervo atualizado (carga ' + r.modo + '): ' + r.mensagem + '.' + (r.ignorados && r.ignorados.length ? ' Ignoradas: ' + r.ignorados.join(', ') + '.' : ''));
   } catch (e) { if (IMP) { IMP.bad = true; aviso('Não atualizou: ' + ((e && e.message) || e)); } }
   if (IMP) { IMP.ocupado = false; pintaAcervo(); } }
 async function acervoData() { const i = await fonteInfo(); const s = $('#st-acervo'); if (s && i) { s.textContent = 'acervo ' + br(i.em.slice(0, 10)).slice(0, 5); s.title = 'fonte gravada em ' + new Date(i.em).toLocaleString('pt-BR') + ' · ' + i.msg; } }
+function abrirRegras(aba) { if (!W.CMTRegrasGerais) { toast('As regras gerais ainda estão carregando.', true); return; }
+  W.CMTRegrasGerais.abrir({ motor: M, pagina: 'triagem', contagem: () => { const o = {}; (FONTE || ((core() || {}).rows) || []).forEach((r) => { const t = String(r.tarefa_atual || '').trim(); if (t) o[t] = (o[t] || 0) + 1; }); return o; }, aba: aba || (NOVAS.length ? 'escopo' : 'destino'), aoGravarEscopo: (j) => { ESCOPO = { triar: (j.triar || []).map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); construir(); render(); toast('Escopo da triagem atualizado: ' + nf(U.length) + ' processos em triagem.'); } }); }
+$('#bt-regras').addEventListener('click', () => { if (!PRONTO) { toast('Aguarde o acervo carregar.', true); return; } abrirRegras(); });
 $('#bt-acervo').addEventListener('click', () => { if (!PRONTO) { toast('Aguarde o acervo carregar.', true); return; } abrirAcervo(); });
 $('#st-grava').addEventListener('click', () => { if (ERRO || pendentes()) { TENT = 0; gravar(); } });
 
@@ -805,15 +815,17 @@ D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if ($('#gaveta'
   if (e.key === 'Enter' && e.target.matches('.ecard')) e.target.click(); });
 
 /* ===================== arranque ===================== */
+async function lerFonte(msg) { try { if (msg) msg('Lendo a fonte do acervo no procs-muta…'); const j = JSON.parse(await PM().ler('acervo/fonte.json')); if (j && Array.isArray(j.registros)) { FONTE = j.registros; FONTE_EM = j.atualizado_em || ''; } } catch (e) { FONTE = null; toast('Não li a fonte do acervo (' + e.message + '); uso a cópia deste navegador.', true); } }
 async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; } indexEsc(); }
 (async function arrancar() {
   const msg = (t) => { const m = $('#carga-msg'); if (m) m.textContent = t; };
   let n = 0; while (!(core() && core().rows && core().rows.length && PM())) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); return; } if (n === 40) msg('Ainda lendo o acervo (são ~6 mil processos)…'); await new Promise((r) => setTimeout(r, 400)); }
   try { const j = JSON.parse(await PM().ler('apoio/regras/escopo-triagem.json')); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } } catch (e) { console.warn('[Triagem] escopo', e); }
+  await lerFonte(msg);
   try { await lerEscaninhos(); } catch (e) { toast('Não li os escaninhos: ' + e.message + '. Os novos escaninhos serão gravados normalmente.', true); }
   construir(); PRONTO = true; rotear(); acervoData();
   /* o motor pode recarregar o acervo (outra aba gravou, importação): refaz quando as linhas mudam */
-  setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
+  setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop') || $('#rg')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
   /* volta da ficha: o destino pode ter mudado lá */
   let fichaAberta = false; setInterval(() => { const on = D.body.classList.contains('cmt-ficha-on'); if (fichaAberta && !on) { U.forEach(refazDest); render(); } fichaAberta = on; }, 700);
 })();
