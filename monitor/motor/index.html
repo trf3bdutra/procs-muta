@@ -1083,9 +1083,15 @@ const unifySectionColumn = c => workflowColumn(isLegacySectionColumn(c) ? "Seç�
 const isVisibleColumn = __memo(c => txt(c) && !txt(c).startsWith("_") && !isRetiredColumn(c) && !isLegacySectionColumn(c) && workflowColumn(c) === c && !["Impedimento","Suspeição"].includes(c));
 // Identificação, classificação e movimento são campos das fontes Gab A.
 // Celulares, telefones, WhatsApp e e-mails das planilhas não entram no acervo (regra do procs-muta).
+// Situação atual no PJe: o relatório do PJe é a fonte mais nova e sempre atualiza estes campos, mesmo que já venham do acervo.
+const PJE_MANDA = new Set(["tarefa_atual","data_entrada_tarefa","prioridade","etiquetas"].map(fieldKey));
 const CONTATO_RE = /celular|telefone|fone|whats|e-?mail/i;
 const GAB_CORE_KEYS = new Set(["Processo","Classe","Assunto_Principal","Data_Distribuição","Polo_Ativo","Polo_Passivo","Valor_da_Causa","Última_Movimentação"].map(fieldKey));
 const procId = v => txt(v).replace(/\D/g, "");
+// CNJ: NNNNNNN-DD.AAAA.J.TR.OOOO; dígito verificador módulo 97 (Res. CNJ 65/2008). Número que perdeu os zeros à esquerda
+// (célula numérica) volta a ter 20 dígitos; número que não confere não cria processo.
+const cnjNormal = v => { const d = procId(v); return d.length >= 15 && d.length < 20 ? d.padStart(20, "0") : d; };
+const cnjValido = d => { if (!/^\d{20}$/.test(d)) return false; try { return 98n - (BigInt(d.slice(0, 7) + d.slice(9) + "00") % 97n) === BigInt(d.slice(7, 9)); } catch (e) { return false; } };
 // Leitura de coluna por nome tolerante a variações de acentuação, caixa, espaços e
 // underscores entre as exportações ("Data_Distribuição", "data_distribuição" e
 // "DATA DISTRIBUICAO" são a mesma coluna). Não há busca difusa: apenas os nomes
@@ -2002,11 +2008,12 @@ class Component extends DCLogic {
     const seen = new Set(),issues=[];
     if(!p.data.length)issues.push({location:"Arquivo",process:"—",reason:"Nenhuma linha de dados foi encontrada abaixo do cabeçalho Processo. Nenhum processo foi importado."});
     for (const [recordIndex,src] of p.data.entries()) {
-      const proc = this.getVal(src, ["Processo","processo","Nº Processo","Número Processo","Numero Processo"]), id = procId(proc);
+      const proc = this.getVal(src, ["Processo","processo","Nº Processo","Número Processo","Numero Processo"]), id = cnjNormal(proc);
       const line=(p.rowNumbers || [])[recordIndex],location=line ? `Linha ${line}${p.sheetName ? " · " + p.sheetName : ""}` : `Registro ${recordIndex+1}`;
       if(id.length<15){ignored++;issues.push({location,process:txt(proc) || "Não informado",reason:!txt(proc) ? "Processo não informado. A linha não foi importada." : "Número de processo não reconhecido (menos de 15 dígitos). A linha não foi importada."});continue;}
-      if(seen.has(id)){duplicates++;issues.push({location,process:txt(proc),reason:"Processo repetido nesta planilha. Os dados foram consolidados no mesmo registro, sem criar outra linha."});}seen.add(id);
+      const repetido=seen.has(id);if(repetido){duplicates++;issues.push({location,process:txt(proc),reason:"Processo repetido nesta planilha. Os dados foram consolidados no mesmo registro, sem criar outra linha."});}seen.add(id);
       let r = map.get(id);const isNew=!r;
+      if (isNew && !cnjValido(id)) { ignored++;issues.push({location,process:txt(proc),reason:"Número de processo com dígito verificador que não confere (ou cortado pela planilha). Nenhum processo foi criado."});continue; }
       if (!r && !canCreate) { ignored++;issues.push({location,process:txt(proc),reason:"Esta fonte não permite criar processo ausente."});continue; }
       if (!r) { r = this.ensureShape({ Processo:proc, processo:proc }); created++; } else updated++;
       if (spec.complement) {
@@ -2015,13 +2022,15 @@ class Component extends DCLogic {
         Object.entries(src).forEach(([header, value]) => {
           if (CONTATO_RE.test(txt(header))) return;
           const k = fieldKey(header);
-          if (!isVisibleColumn(header) || (!txt(value) && !(k === "etiquetas" && own.has(k))) || (!isNew && !r._pjeCreated && !own.has(k) && (GAB_CORE_KEYS.has(k) || (this.gabSourceColumns.has(k) && k !== "etiquetas")))) return;
+          if (!isVisibleColumn(header) || (!txt(value) && !(k === "etiquetas" && own.has(k))) || (!isNew && !r._pjeCreated && !own.has(k) && !PJE_MANDA.has(k) && (GAB_CORE_KEYS.has(k) || (this.gabSourceColumns.has(k) && k !== "etiquetas")))) return;
           // Somente campos do relatório PJe; nunca campos de trabalho do painel.
           const col = ACERVO_COLUMNS.find(c => fieldKey(c) === k);
           if (!col || col === "processo") return;
           const aliases = Object.keys(r).filter(c => !c.startsWith("_") && (!CONTROL_COLUMNS.includes(c) || c === "Etiquetas") && fieldKey(c) === k);
           const supplied = k === "etiquetas" ? this.originalTags(r).length > 0 : aliases.some(c => txt(r[c]));
-          if (supplied && !own.has(k)) return;
+          if (supplied && !own.has(k) && !PJE_MANDA.has(k)) return;
+          if (repetido && own.has(k) && col === "tarefa_atual" && txt(r[col]) && txt(value) && !txt(r[col]).split(" | ").includes(txt(value))) { r[col] = txt(r[col]) + " | " + txt(value); importedColumns.add(col); supplemented++; return; }
+          if (repetido && own.has(k) && col === "data_entrada_tarefa" && txt(r[col]) && txt(value) && txt(value) < txt(r[col])) return;
           if (col === "etiquetas") this.setImportedTags(r,this.importedTagValues(src),type);
           else {r[col]=value;if(col==="assunto_judicial")r.Assunto=value;if(fieldKey(col)==="datadistribuicao")this.setDistributionDate(r,value);}
           own.add(k); importedColumns.add(col); supplemented++;

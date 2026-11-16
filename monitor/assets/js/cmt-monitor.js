@@ -1740,12 +1740,23 @@
   /* =================== Acervo Central: escaninhos, prontuário, exportar e dados dos filtrados =================== */
   var pid = function (v) { return String(v || '').replace(/\D/g, ''); };
   var FIXOS = [['fx_aptos', 'Aptos', 'aptos para julgamento (etiqueta ou tarefa)', '#3e72ad'], ['fx_metas', 'Metas', 'etiquetas de meta do CNJ', '#c4953c'], ['fx_retirados', 'Retirados de pauta', 'retirados, adiados ou a retirar de pauta', '#b0524a']];
-  var FXC = new WeakMap(), FXG = -1;
-  function escFixo(r) { if (FXG !== GERACAO) { FXC = new WeakMap(); FXG = GERACAO; } var v = FXC.get(r); if (v !== undefined) return v;
+  var FXC = new WeakMap(), FXG = -1, SPSIG = '', SPSET = new Set();
+  /* escaninhos automáticos de seleção prévia: um por sessão futura ainda sem pauta oficial */
+  function sessoesSemPauta() { try { var w = mw(), S = w && w.CMTSessao && w.CMTSessao.estado(), h = new Date().toISOString().slice(0, 10);
+    return ((S && S.sessoes) || []).filter(function (x) { return x.data >= h && !(x.itens || []).length; }).sort(function (a, b) { return a.data < b.data ? -1 : 1; }); } catch (e) { return []; } }
+  function dataDaSessao(nome) { var m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(String(nome || '')); if (m) return m[3] + '-' + m[2] + '-' + m[1]; var c = comp(), d = ((c && c.sessionDetails) || {})[nome]; return (d && d.date) || ''; }
+  function escPrevia(r) { if (r['Seleção Prévia'] !== 'SELECIONADO PREVIAMENTE') return ''; var d = dataDaSessao(r['Sessão Destino']); return d && SPSET.has(d) ? 'sp_' + d : ''; }
+  function escFixo(r) { if (FXG !== GERACAO + '|' + SPSIG) { FXC = new WeakMap(); FXG = GERACAO + '|' + SPSIG; } var v = FXC.get(r); if (v !== undefined) return v;
+    v = escPrevia(r); if (v) { FXC.set(r, v); return v; }
     var o = MAPA.get(dig(r.processo || r.Processo)); v = (!o || o.caminho || ACS_ENC.indexOf(o.sit) >= 0) ? '' : ehRetirado(o) ? 'fx_retirados' : ehApto(o) ? 'fx_aptos' : ehMeta(o) ? 'fx_metas' : ''; FXC.set(r, v); return v; }
   function garantirFixos(c) {
     if (!Array.isArray(c.escaninhos)) c.escaninhos = [];
     var mud = false; FIXOS.slice().reverse().forEach(function (f) { var e = c.escaninhos.find(function (x) { return x.id === f[0]; }); if (!e) { c.escaninhos.unshift({ id: f[0], titulo: f[1], subtitulo: f[2], obs: '', cor: f[3], fixo: true, criado: new Date().toISOString().slice(0, 10) }); mud = true; } else if (!e.fixo) { e.fixo = true; mud = true; } });
+    var SP = sessoesSemPauta(), sig = SP.map(function (x) { return x.data; }).join(','); if (sig !== SPSIG) { SPSIG = sig; SPSET = new Set(SP.map(function (x) { return x.data; })); }
+    var ultimoFixo = function () { var k = -1; c.escaninhos.forEach(function (e, i) { if (e.fixo) k = i; }); return k; };
+    SP.forEach(function (x) { var id = 'sp_' + x.data, e = c.escaninhos.find(function (y) { return y.id === id; }), br = x.data.slice(8, 10) + '/' + x.data.slice(5, 7) + '/' + x.data.slice(0, 4);
+      if (!e) { c.escaninhos.splice(ultimoFixo() + 1, 0, { id: id, titulo: 'Seleção prévia · ' + br, subtitulo: 'sessão sem pauta oficial · automático', obs: '', cor: '#4a8f74', fixo: true, auto: true, criado: new Date().toISOString().slice(0, 10) }); mud = true; } });
+    c.escaninhos = c.escaninhos.filter(function (e) { if (!e.auto || SPSET.has(String(e.id).slice(3))) return true; c.rows.forEach(function (r) { if (r._escaninho === e.id) r._escaninho = ''; }); mud = true; return false; });
     var w = mw(); if (w && w.__cmtEscFixo !== escFixo) { w.__cmtEscFixo = escFixo; mud = true; }
     if (mud) { try { c.saveDeb ? c.saveDeb() : c.saveDB(); c.refresh(); } catch (e) {} }
   }
@@ -2030,8 +2041,12 @@
       aviso('Modo triagem: clique numa linha da planilha para abrir o prontuário no lugar dela · ↑ ↓ trocam de processo · Enter marca triado · Esc fecha.'); }
   }
   function cssProntMotor(md) {
-    if (md.getElementById('pr-css-m')) return; var src = D.getElementById('pr-css'); if (!src) return;
-    var st = md.createElement('style'); st.id = 'pr-css-m'; st.textContent = src.textContent; md.head.appendChild(st);
+    if (md.getElementById('pr-css-m')) return;
+    /* o CSS do prontuário saiu do <style id="pr-css"> para assets/css/21-prontuario.css: aceita os dois */
+    var src = D.getElementById('pr-css'), lk0 = D.querySelector('link[rel="stylesheet"][href*="21-prontuario"]'), st;
+    if (src) { st = md.createElement('style'); st.textContent = src.textContent; }
+    else if (lk0) { st = md.createElement('link'); st.rel = 'stylesheet'; st.href = lk0.href; }
+    if (st) { st.id = 'pr-css-m'; md.head.appendChild(st); }
     var sq = md.createElement('style'); sq.id = 'shq-css'; sq.textContent = CSS_Q; md.head.appendChild(sq);
     var lk = md.createElement('link'); lk.rel = 'stylesheet'; lk.href = 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap'; md.head.appendChild(lk);
   }
@@ -2252,6 +2267,8 @@
     '#cmt-sheet .sh-prbar b{font-size:14px;font-weight:800}#cmt-sheet .sh-prbar span{color:#c9d3dc}#cmt-sheet .sh-prbar .k{margin-left:auto;color:#e6c27a;font-size:11px}' +
     '#cmt-sheet .sh-prbar button{height:28px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);border-radius:8px;font:700 12px Figtree,sans-serif;color:#dfe5ee;cursor:pointer;padding:0 10px}#cmt-sheet .sh-prbar button:hover{background:rgba(255,255,255,.14)}#cmt-sheet .sh-prbar .pri{background:#c4953c;border-color:#c4953c;color:#1f2442}' +
     '#cmt-sheet .sh-prhost{position:sticky;left:10px;max-width:calc(100vw - 340px)}#cmt-sheet .sh-prhost .pr-cnt{padding:0}' +
+    /* o estilo de pílula dos botões da planilha não vale dentro do prontuário: chips de etiqueta e botões S/E/O */
+    '#cmt-sheet .pr-scope .chip{display:inline-flex!important;align-items:center;gap:4px;white-space:nowrap}#cmt-sheet .pr-scope button.mini{width:18px;height:18px;min-height:0;padding:0!important;border-radius:4px;border:1px solid #d4dce2;background:#fff;font:800 9.5px/1 Figtree,sans-serif;color:#103b54;display:inline-grid;place-items:center}' +
     'body.cmt-sheet-on .cmt-dados-grade~*{display:none!important}' +
     '#cmt-sheet{order:-1;background:#fff;border:1px solid #e5e1d8;border-radius:18px;box-shadow:0 12px 28px rgba(20,38,60,.05);font-family:Figtree,system-ui,sans-serif;color:#14263c;max-height:78vh;overflow:auto;position:relative}#cmt-sheet[hidden]{display:none}' +
     '#cmt-sheet .sh-bar{position:sticky;left:0;top:0;z-index:6;display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 14px;background:#fbfaf7;border-bottom:1px solid #eee7da}#cmt-sheet .sh-bar b{font:800 15px Figtree,system-ui,sans-serif}#cmt-sheet .sh-bar>span{color:#6d7b8a;font-size:12.5px;margin-right:auto}' +

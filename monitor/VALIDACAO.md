@@ -30,4 +30,4 @@ Data: 15/11/2026 · Base: `cmt-monitor (1).html` fornecido pelo usuário.
 4. Use **Base do Acervo** para conectar e consultar. As credenciais não são fornecidas.
 5. Em homologação, compare uma amostra de processos entre o `procs-muta` e os módulos do gestor antes de efetuar gravações.
 
-Para a Vercel, copie `index.html`, `assets/` e `motor/` juntos para a rota `/monitor/`. Não substitua `/hub` nem publique o HTML modular sem os assets.
+Para a Vercel, copie `index.html`, `assets/` e `motor/` juntos para a rota `/monitor/`. Não substitua `/office` nem publique o HTML modular sem os assets.

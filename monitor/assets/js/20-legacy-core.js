@@ -1319,6 +1319,7 @@ function renderPanel(){
 /* =================== GRANDES FLUXOS =================== */
 let bigIdx = 0;
 function buildBig(){
+  if (!$('#ftabs') || !$('#bigflow')) return;
   $('#ftabs').innerHTML = BIG.map((b, i) => `<button class="chipbtn ftab ${i===bigIdx?'on':''}" data-i="${i}">${['I','II','III'][i]} · ${b.t}</button>`).join('');
   document.querySelectorAll('.ftab').forEach(b => b.onclick = () => { bigIdx = +b.dataset.i; buildBig(); });
   draw($('#bigflow'), BIG[bigIdx].src);
@@ -3073,6 +3074,20 @@ function buildImped(){
   $('#imq').oninput = () => { $('#imr').innerHTML = impCheckHTML($('#imq').value); };
 }
 buildImped();
+/* Referências rápidas (Triagem): impedimentos e suspeições logo depois de Competência */
+(() => { if (SC.some(s => s.id === 'simp')) return;
+  const item = { id:'simp', ic:'⊘', t:'Impedimentos e suspeições', s:'Julgadores · advogados · conferir processo', c:'--wine', body:() => `
+  <h4>Julgadores da Turma</h4>
+  <ul class="bul">${IMP_JUIZ.map(j => `<li><b>${j.n}</b> · ${j.alvo}</li>`).join('')}</ul>
+  <h4>Advogados declarados</h4>
+  <div class="tbl"><table><thead><tr><th>Advogado</th><th>Situação</th></tr></thead><tbody>${IMP_ADV.map(a => `<tr><td><b>${a.nome}</b><br><small>${a.oab} · ${a.vinc}</small></td><td>${a.tipo === 'imp' ? 'Impedimento' : 'Suspeição'} · ${escH((IMP_JUIZ.find(j => j.id === a.j) || {}).n || 'a confirmar')}</td></tr>`).join('')}</tbody></table></div>
+  <h4>Conferir um processo</h4>
+  <textarea class="rf-imq" rows="3" style="width:100%;box-sizing:border-box" placeholder="Cole o número e os advogados (ex.: 5001234-56.2013.4.03.6000 · FULANO OAB: MS11835)"></textarea>
+  <div class="rf-imr">${impCheckHTML('')}</div>
+  <p class="cnote">Regra: impedido quem decidiu no processo em outro grau (CPC, art. 144, II); advogada filha do magistrado gera impedimento (art. 144, III e §3º); os demais casos, suspeição declarada (art. 145).</p>`,
+    after:(b) => { const t = b.querySelector('.rf-imq'), r = b.querySelector('.rf-imr'); if (t && r) t.oninput = () => { r.innerHTML = impCheckHTML(t.value); }; } };
+  const i = SC.findIndex(s => s.id === 'scomp'); SC.splice(i >= 0 ? i + 1 : SC.length, 0, item);
+})();
 (() => { const ul = document.querySelector('#index .ix-g[data-tab="competencia"] ul'); if (!ul) return;
   [['sec-imped','Impedimentos e suspeições']].forEach(([id, t]) => { const li = document.createElement('li'); li.innerHTML = `<a href="#" data-target="${id}"><i></i>${t}</a>`;
     const a = ul.querySelector('a[data-target="sec-secoes"]'); a ? a.parentElement.before(li) : ul.append(li);
@@ -7779,7 +7794,7 @@ function popHTML(items){
   }).join('');
 }
 
-const SKIP = '#acervo,#relatorios,#regimento,#fxleg,.tk-atos summary,script,style,code,kbd,textarea,input,select,svg,h1,h2,h3,button,#index,.famchips,.prz,.kv dt,.atl-i > summary,#lex summary,.cit,.citpop,#lawbody,#lawhist,#pres,.mermaid,.mini,.diagram,.ph-title,summary .lat';
+const SKIP = '#acervo,#relatorios,#regimento,#fxleg,.tk-atos summary,script,style,code,kbd,textarea,input,select,svg,h1,h2,h3,button,#index,.famchips,.prz,.kv dt,.atl-i > summary,#lex summary,.cit,.citpop,#lawbody,#lawhist,#pres,.mermaid,.mini,.diagram,.ph-title,summary .lat,#cwt-workspace,#cwt-aside,.cwe,#cmt-base-v2';
 function linkify(root){
   if (!root || root.nodeType !== 1 || root.closest && root.closest('.cit,.citpop')) return;
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => {
