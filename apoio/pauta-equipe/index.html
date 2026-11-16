@@ -996,6 +996,27 @@ html[data-theme=dark] .home-v2 .hc-hero{--ep:#10222e;--el:#1e3747;--ei:#ebeff1;-
 .home-v2 #ola-ch b{color:var(--eo2)}
 .home-v2 .hc-head-actions .b{border-color:var(--eg);background:var(--eg);color:var(--ep);border-radius:7px}
 @media (max-width:760px){.home-v2 .hc-hero h1{font-size:30px}}
+/* ===== Abertura de página fora da caixa: o cabeçalho (sobrelinha, título, frase e controles) fica solto
+   sobre o papel, com um filete verde em cima; os painéis de baixo seguem no visual que já tinham. ===== */
+.home-v2 .hc-hero,#v-pauta.ed .trb,#v-pauta.ed .trm{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important;margin-bottom:0!important;overflow:visible}
+#v-pauta.ed .trb-in{padding:0}
+.home-v2 .hc-hero,#v-pauta.ed .trb-h{border-top:2px solid var(--eg,#235a55)!important;padding:14px 2px 12px!important;margin:2px 0 0!important;align-items:flex-end}
+/* tipografia igual nas quatro páginas */
+.home-v2 .hc-ey,#v-pauta.ed .trb-ey,#v-pauta.ctl .pt-h .ola-ey{font-family:var(--emono,SFMono-Regular,Consolas,ui-monospace,monospace)!important;font-weight:400!important;font-size:11px!important;letter-spacing:.16em!important;text-transform:uppercase;color:#2f6e64!important}
+.home-v2 .hc-hero h1,#v-pauta.ed .trb h1,#v-pauta.ctl .pt-h h1{font-size:36px!important;font-weight:600!important;letter-spacing:-.045em!important;line-height:1.05!important;color:var(--ei,#203b39)!important;margin:6px 0 0!important}
+.home-v2 .hc-hero h1 em,#v-pauta.ed .trb h1 em,#v-pauta.ctl .pt-h h1 em{font-family:var(--eser,Georgia,"Times New Roman",serif);font-style:italic;font-weight:400;color:var(--eo,#a57829)}
+.home-v2 .hc-hero p,#v-pauta.ed .trb-d,#v-pauta.ctl .ctl-lead{font-size:13.5px!important;color:var(--em,#55584f)!important;margin:6px 0 0!important;max-width:none}
+#v-pauta.ctl .pt-h{border-top:2px solid var(--eg,#235a55)!important;padding:14px 2px 12px!important;margin:2px 0 0!important}
+#v-pauta.ctl .ctl-lead{margin:6px 0 22px!important}
+/* marcos e números da sessão continuam num painel só */
+#v-pauta.ed:not(.mono) .trb-mk{background:var(--ep,#fbfaf5);border:1px solid var(--el,#d8d3c6);border-bottom:0;padding:14px 16px 0;margin-top:14px}
+#v-pauta.ed:not(.mono) .trb-p{background:var(--ep,#fbfaf5);border:1px solid var(--el,#d8d3c6);border-top:0;padding:0 16px 14px;margin-top:0}
+/* Pautas: um título só — o da abertura; a linha de intercorrências e metas continua, acima da lista */
+#v-pauta.ed:not(.mono) .pt-h{display:flex!important;border-top:0!important;padding:0!important;margin:18px 0 0!important;justify-content:flex-end}
+#v-pauta.ed:not(.mono) .pt-h>div:first-child{display:none}
+html[data-theme=dark] .home-v2 .hc-hero,html[data-theme=dark] #v-pauta.ed .trb-h{border-top-color:#6eba8a}
+html[data-theme=dark] .home-v2 .hc-ey,html[data-theme=dark] #v-pauta.ed .trb-ey,html[data-theme=dark] #v-pauta.ctl .pt-h .ola-ey{color:#6eba8a!important}
+@media (max-width:760px){.home-v2 .hc-hero h1,#v-pauta.ed .trb h1,#v-pauta.ctl .pt-h h1{font-size:30px!important}}
 </style>
 
 <style id="cc-cal-css">
