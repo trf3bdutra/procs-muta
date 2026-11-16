@@ -196,6 +196,273 @@ body.tk #cmt-motor{left:0;visibility:visible;z-index:2147482000;background:#fff}
 body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh + 48px);left:4vw;width:92vw;height:calc(92vh - 48px)}
 @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ini-grid{grid-template-columns:minmax(0,1fr)}.st-g{grid-template-columns:minmax(0,1fr)}.es-cab{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:860px){.fl-grid{grid-template-columns:minmax(0,1fr)}.rail{border-right:0;padding-right:0}.fl-main{padding-left:0}.row{grid-template-columns:24px minmax(0,1fr) 80px;}.row>:nth-child(3),.row>:nth-child(5),.row>:nth-child(6){display:none}#rodape{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#rodape .sel{grid-column:1/-1}#marca span{display:none}.wrap{padding:0 14px}#top{padding:0 14px}}
+/* ===== Aba Pautas (antes /pautas/, página própria) ===== */
+#aba-pautas{min-height:calc(100vh - 60px);padding-bottom:40px}
+.pt-barra{display:flex;align-items:center;gap:8px;justify-content:flex-end;max-width:1480px;margin:0 auto;padding:10px 24px 0}
+.pt-acoes button{height:32px;padding:0 12px;border:1px solid #c8c3b6;background:#fff;color:#203b39;font:600 12.5px Figtree,sans-serif;cursor:pointer;border-radius:6px}
+.pt-acoes button.pend{background:#173f3d!important;border-color:#173f3d!important;color:#fff!important}.pt-acoes button.erro{background:#8a2f22!important;border-color:#8a2f22!important;color:#fff!important}
+#pt-view{max-width:1480px;margin:0 auto;padding:0 24px;font:13.5px/1.5 Figtree,'Segoe UI',system-ui,sans-serif}
+#pt-carga{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:60vh;color:#5c6b67}
+#pt-carga b{font-size:16px;color:#173f3d}
+#cwt-toast{position:fixed;right:18px;bottom:18px;z-index:2147483000;max-width:460px;padding:11px 14px;background:#173f3d;color:#fff;font:600 13px Figtree,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.18);border-radius:6px}
+#cwt-toast.bad{background:#8a2f22}
+@media (max-width:760px){#pt-view{padding:0 12px}.pt-barra{padding:10px 12px 0}}
+/* ===== Esteira da sessão ===== */
+/* Ab Initio · Pautas — esteira da sessão (87-esteira-pautas.js) */
+/* Configurações (⚙) e ficha do motor também abrem a partir da Pautas */
+.cwe{--w:#fff;--sel:#fbf6e6;--amb:#fbf3df;--ok0:#eef3f2;--ok1:#e3f1ea;--fundo:#f3f6f4;--m2:#8a8d86;--b2:#c8c3b6;--t:#235a55;--g:#805b18;--g2:#a57829;--g3:#d9a83f;--p:#fbfaf5;--l:#ece9df;--b:#d3dfdc;--tx:#203b39;--m:#617570;--r:#a5382a;color:var(--tx);font:13.5px/1.5 Figtree,'Segoe UI',system-ui,sans-serif;padding:4px 0 60px}
+.cwe *{box-sizing:border-box}
+.cwe button{font:inherit;cursor:pointer}
+.cwe button:disabled{opacity:.5;cursor:not-allowed}
+.cwe-k{font:600 10px ui-monospace,'IBM Plex Mono',monospace;letter-spacing:.1em;color:var(--g)}
+.cwe-mono{font:500 12.5px ui-monospace,'IBM Plex Mono',monospace;color:var(--t)}
+.cwe-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px 20px;padding-top:22px}
+.cwe-top h1{margin:6px 0 2px!important;font-size:38px!important;line-height:1.05;font-weight:650;letter-spacing:-.045em;color:var(--tx)!important}
+.cwe-top>div:first-child{flex:1 1 480px;min-width:0}
+.cwe-top p{margin:0;font-size:13px;color:var(--m)}
+.cwe-julg{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:6px!important;font-size:12px}
+.cwe-julg small{font:10px ui-monospace,monospace;color:var(--m2)}
+.cwe-tools{display:inline-flex;align-items:center;gap:4px;padding:3px;border:1px solid var(--b);border-radius:10px;background:var(--p)}
+.cwe-pubg>button{height:30px;padding:0 12px;border:1px solid var(--b2);border-radius:7px;background:var(--w);color:var(--tx);font:700 12px Figtree,'Segoe UI',sans-serif;cursor:pointer}.cwe-pubg>button.pri{background:var(--t);border-color:var(--t);color:#fff}.cwe-pubg>button:disabled{opacity:.55;cursor:not-allowed}
+.cwe-tools>button,.cwe-expwrap>button{height:30px;padding:0 11px;border:0;border-radius:7px;background:transparent;color:var(--tx);font-weight:700;font-size:12px}
+.cwe-tools>button:hover,.cwe-expwrap>button:hover{background:var(--w)}
+.cwe-expwrap{position:relative}
+.cwe-menu{position:absolute;right:0;top:36px;z-index:40;width:290px;display:flex;flex-direction:column;border:1px solid var(--b);border-top:2px solid var(--t);background:var(--w);box-shadow:0 8px 24px rgba(22,60,57,.16)}
+.cwe-menu button{text-align:left;border:0;border-top:1px solid var(--l);background:var(--w);padding:8px 12px;color:var(--tx)}
+.cwe-menu button:hover{background:var(--p)}
+.cwe-menu b{font-size:12.5px}.cwe-menu small{display:block;font:10.5px ui-monospace,monospace;color:var(--m2)}
+.cwe-marcos{position:relative;display:flex;align-items:stretch;margin:18px 0;border:1px solid var(--b);background:var(--w);min-width:0}
+.cwe-regras{position:static;order:9;align-self:center;margin:0 8px;border:0;background:transparent;padding:0 4px;font:600 10px/16px Figtree,'Segoe UI',sans-serif;color:var(--g);text-decoration:underline;text-underline-offset:3px}
+.cwe-mk{flex:0 0 auto;display:flex;align-items:center;padding:6px 12px;background:var(--p);border-right:1px solid var(--b)}
+.cwe-marcos label{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:5px 7px;border-right:1px solid var(--l);font-size:10px;font-weight:600;color:var(--m);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cwe-marcos input{width:100%!important;min-width:0;height:24px!important;min-height:0!important;border-radius:0!important;box-shadow:none!important;border:1px solid var(--b2);padding:0 5px!important;font:11.5px ui-monospace,monospace;color:var(--tx);background:var(--w)}
+.cwe-marcos input.vazio{background:var(--amb);color:var(--m2)}
+.cwe-mkb{flex:0 0 auto;display:flex;align-items:center;gap:6px;padding:5px 8px}
+.cwe-eqk{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:4px;font-size:12px}.cwe-eqk label{display:inline-flex;gap:4px;align-items:center}
+.cwe-pubg{display:inline-flex;align-items:center;gap:6px;padding:0 10px 0 4px;margin-right:4px;border-right:1px solid var(--l)}.cwe-pubg .cwe-k{margin-right:2px}
+.cwe-tools button.on{background:#e3f1ea!important;border-color:#235a55!important;color:#173f3d!important}
+.cwe-mkb button.on{background:#e3f1ea;border-color:#235a55;color:#173f3d}
+.cwe-mkb button,.cwe-acoes button,.cwe-drop button,.cwe-cfg-b>button{height:30px;padding:0 12px;border:1px solid var(--b2);border-radius:7px;background:var(--p);color:var(--tx);font-weight:700;font-size:11.5px;white-space:nowrap}
+.cwe .pri{background:var(--t);border-color:var(--t);color:var(--w)}
+.cwe-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start}
+.cwe-nav{position:sticky;top:68px;border-top:2px solid var(--t);padding-top:11px}
+.cwe-k2{display:block;margin-top:22px;padding-top:11px;border-top:2px solid var(--t)}
+.cwe-ses{display:flex;flex-direction:column;margin-top:10px}
+.cwe-ses button{display:block;width:100%;text-align:left;border:0;border-left:1px solid var(--b2);background:transparent;padding:7px 10px;color:var(--tx)}
+.cwe-ses button b{font-size:13px}.cwe-ses button small{display:block;font:10.5px ui-monospace,monospace;color:var(--m2)}
+.cwe-ses button.on{border-left:3px solid var(--g2);background:var(--w);padding-left:8px}.cwe-ses button.passada{opacity:.7}
+.cwe-arq{margin-top:8px;border:0;background:transparent;padding:0;font-weight:600;font-size:11.5px;color:var(--g);text-decoration:underline;text-underline-offset:3px}
+.cwe-esteira{list-style:none;margin:10px 0 0;padding:0}
+.cwe-esteira li>button{display:flex;align-items:flex-start;gap:10px;width:100%;padding:9px 10px;border:0;border-left:1px solid var(--b2);background:transparent;text-align:left;color:var(--tx)}
+.cwe-esteira li.sel>button{border-left:3px solid var(--g2);background:var(--w);padding-left:8px}
+.cwe-esteira li.trava>button{opacity:.55;cursor:not-allowed}
+.cwe-esteira i{flex:0 0 auto;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font:600 11px ui-monospace,monospace;font-style:normal;background:var(--w);color:var(--m);border:1px solid var(--b2)}
+.cwe-esteira i.feito{background:var(--t);color:var(--w);border-color:var(--t)}
+.cwe-esteira i.agora{background:var(--g3);color:#3d2c08;border-color:var(--g3)}
+.cwe-esteira span{display:flex;flex-direction:column;min-width:0}
+.cwe-esteira small{font:9.5px ui-monospace,monospace;letter-spacing:.08em;color:var(--g)}
+.cwe-esteira b{font-size:13px}
+.cwe-esteira em{font-style:normal;font-size:11px;color:var(--m2)}
+.cwe-checks{display:flex!important;flex-direction:column;gap:5px;margin:0 0 8px 12px;padding:7px 0 4px 10px;border-left:3px solid var(--g2);background:var(--w)}
+.cwe-checks .ck{display:flex;flex-direction:row;align-items:flex-start;gap:7px;font-size:11.5px;line-height:1.35;padding:3px 6px;border-radius:5px}
+.cwe-checks .ck small{display:block;font:10px ui-monospace,monospace;color:var(--m2);letter-spacing:0}
+.cwe-checks .aba{cursor:pointer}.cwe-checks .aba.on{background:var(--sel);box-shadow:inset 2px 0 var(--g2);font-weight:700}
+.cwe-checks .dot{flex:0 0 auto;display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;font-size:9px;border:1px solid var(--b2);background:var(--w)}
+.cwe-checks .ok .dot{background:var(--t);border-color:var(--t);color:var(--w)}
+.cwe-checks .pd .dot{background:#edc762;border-color:#edc762;color:#3d2c08;font-weight:700}
+.cwe-main{min-width:0}
+.cwe-st{display:flex;flex-direction:column;gap:14px}
+.cwe-st h2{margin:0!important;font-size:22px!important;letter-spacing:-.03em;color:var(--tx)!important;font-weight:650!important}
+.cwe-st h3,.cwe-lista-h h3{margin:0!important;font-size:15px!important;color:var(--tx)!important}
+.cwe-st>p{margin:0;max-width:780px;color:#4f5a57}
+.cwe-nota{margin:0;padding-left:9px;border-left:2px solid var(--g3);font-size:12px;color:#686a62}
+.cwe-acoes{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cwe-acoes.linha{flex-wrap:nowrap;overflow-x:auto}.cwe-acoes small{color:var(--m2);font-size:11px;white-space:nowrap}
+.cwe-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));border:1px solid var(--b);background:var(--w)}
+.cwe-kpis span{padding:9px 12px;border-left:1px solid var(--l);border-bottom:1px solid var(--l);font-size:11.5px;color:#4f5a57}
+.cwe-kpis b{display:block;font-size:22px;line-height:1.1;font-weight:650;color:var(--tx);letter-spacing:-.03em}
+.cwe-drop{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:16px;border:1px dashed var(--b2);background:var(--p)}
+.cwe-drop span{flex:1;color:var(--m);font-size:12px}
+.cwe-conf{border:1px solid var(--b);border-left:3px solid var(--t);background:var(--w);padding:9px 12px}
+.cwe-conf.fora{border-left-color:var(--r)}.cwe-conf.novos{border-left-color:var(--g2)}
+.cwe-conf b{display:block;font-size:12.5px;margin-bottom:5px}
+.cwe-conf span{display:flex;flex-wrap:wrap;gap:4px 10px}
+.cwe-conf button{border:0;background:transparent;padding:0;font:12px ui-monospace,monospace;color:var(--t);text-decoration:underline;text-underline-offset:3px}
+.cwe-tabs{display:flex;gap:4px;border-bottom:1px solid var(--b)}
+.cwe-tabs button{border:0;border-bottom:2px solid transparent;background:transparent;padding:7px 12px;font-weight:700;font-size:12.5px;color:var(--m)}
+.cwe-tabs button[aria-selected="true"]{border-bottom-color:var(--g2);color:var(--tx)}
+.cwe-final{border:1px solid var(--b);border-left:3px solid var(--g2);background:var(--w)}
+.cwe-final .h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;padding:9px 14px;background:var(--p);border-bottom:1px solid var(--b)}
+.cwe-final .h small{font-size:11px;color:var(--m)}
+.cwe-final .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.cwe-final .g span{padding:9px 14px;border-left:1px solid var(--l);font-size:11.5px}
+.cwe-final .g b{display:block;font-size:20px;line-height:1.1}
+.cwe-final .g small{display:block;font:10px ui-monospace,monospace;color:var(--m2)}
+.cwe-final .r b{color:var(--r)}.cwe-final .a b{color:var(--g2)}.cwe-final .g b{color:inherit}.cwe-final .g .g b{color:#2f8a5e}
+.cwe-lista{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.cwe-lista-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-top:2px solid var(--t);padding-top:10px}
+.cwe-lista-h span{font-size:11.5px;color:var(--m)}
+.cwe-filtros{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cwe-filtros input{flex:1 1 260px;height:32px;border:1px solid var(--b2);padding:0 10px;font:inherit;font-size:12.5px;background:var(--w)}
+.cwe-filtros span{display:flex;flex-wrap:wrap;gap:4px}
+.cwe-filtros button{height:28px;padding:0 10px;border:1px solid var(--b);border-radius:14px;background:var(--w);font-size:11.5px;font-weight:600;color:var(--tx)}
+.cwe-filtros button.on{background:var(--t);border-color:var(--t);color:var(--w)}
+.cwe-cards{display:flex;flex-direction:column;border:1px solid var(--b);background:var(--w)}
+.cwe-card{display:grid;grid-template-columns:44px minmax(0,1fr) 110px 110px 92px auto;align-items:center;gap:10px;padding:8px 12px;border-top:1px solid var(--l);cursor:pointer}
+.cwe-card:first-child{border-top:0}.cwe-card:hover{background:var(--p)}.cwe-card.on{background:var(--sel);box-shadow:inset 3px 0 var(--g2)}
+.cwe-card .n{font:600 13px ui-monospace,monospace;color:var(--g)}
+.cwe-card .m{min-width:0;display:flex;flex-direction:column}
+.cwe-card .l1,.cwe-card .l2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11.5px;color:var(--m)}
+.cwe-card .l2{color:var(--tx);font-size:12.5px}
+.cwe-card em{font-style:normal;font-weight:700;color:var(--t)}.cwe-card em.meta{color:var(--g2)}.cwe-card em.ret{color:var(--r)}.cwe-card em.sg{color:#5b3f8c}
+.cwe-card .p{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cwe-card .p small{display:block;font:9.5px ui-monospace,monospace;color:var(--m2)}
+.cwe-card .s{justify-self:start;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;background:var(--ok0);color:var(--t)}
+.cwe-card .s-a-minutar{background:var(--amb);color:var(--g)}.cwe-card .s-liberado{background:var(--ok1);color:#2f8a5e}
+.cwe-card>button{height:26px;padding:0 9px;border:1px solid var(--b);border-radius:6px;background:var(--w);font-size:11px;font-weight:700;color:var(--tx)}
+.cwe-mais{align-self:center;height:30px;padding:0 14px;border:1px solid var(--b);border-radius:7px;background:var(--w);font-weight:700;font-size:12px}
+.cwe-vazio{margin:0;padding:14px;color:var(--m2);font-size:12px}
+.cwe-prt{position:sticky;top:64px;z-index:5;border:1px solid var(--b);border-top:2px solid var(--g2);background:var(--w);box-shadow:0 6px 18px rgba(22,60,57,.1)}
+.cwe-prt-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:9px 12px;border-bottom:1px solid var(--l);font-size:12.5px}
+.cwe-prt-h>small{flex-basis:100%;color:var(--m);font-size:11.5px}
+.cwe-cnj{border:0;background:transparent;padding:0;font:600 13px ui-monospace,monospace;color:var(--t);text-decoration:underline;text-underline-offset:3px}
+.cwe-prt-a{margin-left:auto;display:inline-flex;gap:4px}
+.cwe-prt-a button{height:26px;min-width:26px;padding:0 8px;border:1px solid var(--b);border-radius:6px;background:var(--w);font-size:11.5px;font-weight:700}
+.cwe-prt-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.cwe-prt-g span{padding:6px 12px;border-left:1px solid var(--l);border-bottom:1px solid var(--l);font-size:12px;min-width:0;overflow-wrap:anywhere}
+.cwe-prt-g small{display:block;font:9.5px ui-monospace,monospace;letter-spacing:.06em;color:var(--g);text-transform:uppercase}
+.cwe-blocos{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.cwe-bloco{border:1px solid var(--b);background:var(--w);padding-bottom:8px}
+.cwe-bloco p{margin:0 0 6px;padding:8px 12px;background:var(--p);border-bottom:1px solid var(--b);font:10px ui-monospace,monospace;letter-spacing:.1em;color:var(--g)}
+.cwe-bloco .r{display:grid;grid-template-columns:minmax(0,1fr) 34px 38px;align-items:center;gap:8px;padding:2px 12px;font-size:11.5px}
+.cwe-bloco .t{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cwe-bloco .t i{display:block;height:4px;margin-top:2px;background:var(--l)}.cwe-bloco .t i i{background:var(--t);margin:0}
+.cwe-bloco b{text-align:right;font:600 11.5px ui-monospace,monospace}.cwe-bloco small{text-align:right;font:10px ui-monospace,monospace;color:var(--m2)}
+.cwe-cfg-bg{position:fixed;inset:0;z-index:90;background:rgba(18,40,38,.35)}
+.cwe-cfg{position:fixed;z-index:91;left:50%;top:6vh;transform:translateX(-50%);width:min(940px,calc(100vw - 32px));max-height:88vh;display:grid;grid-template-columns:210px minmax(0,1fr);background:var(--w);border-top:2px solid var(--t);box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden}
+.cwe-cfg nav{display:flex;flex-direction:column;background:var(--p);border-right:1px solid var(--b);padding:10px 0;overflow:auto}
+.cwe-cfg nav button{border:0;background:transparent;text-align:left;padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--tx)}
+.cwe-cfg nav button[aria-current="true"]{background:var(--w);box-shadow:inset 3px 0 var(--g2)}
+.cwe-cfg-b{padding:14px 20px 20px;overflow:auto;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.cwe-cfg-h{align-self:stretch;display:flex;justify-content:space-between;align-items:center}
+.cwe-cfg-h button{border:0;background:transparent;font-size:20px;line-height:1;color:var(--m)}
+.cwe-cfg-b h3{margin:0!important;font-size:20px!important;color:var(--tx)!important}
+.cwe-cfg-b p{margin:0;color:#4f5a57;font-size:12.5px;max-width:640px}
+.cwe-cfg-l,.cwe-eq{align-self:stretch;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));border:1px solid var(--b)}
+.cwe-cfg-l span,.cwe-eq span{padding:8px 12px;border-left:1px solid var(--l);border-bottom:1px solid var(--l);font-size:12px}
+.cwe-cfg-l b,.cwe-eq b{display:block;font-size:12.5px}.cwe-cfg-l small,.cwe-eq small{display:block;font:10px ui-monospace,monospace;color:var(--m2)}
+.cwe-eq span{display:grid;grid-template-columns:1fr auto;align-items:center}.cwe-eq small{grid-column:1}.cwe-eq em{grid-row:1/3;grid-column:2;font-style:normal;font-weight:700;font-size:11px;color:var(--m2)}
+.cwe-eq em.min{color:#2f8a5e}.cwe-eq em.cor{color:var(--g)}
+.cwe-cfg-o{margin:0;padding-left:20px;font-size:12.5px}
+@media (max-width:900px){.cwe-marcos{flex-wrap:wrap}.cwe-marcos label{flex:1 1 30%;min-width:96px}.cwe-mk,.cwe-mkb{flex:1 1 100%}.cwe-grid{grid-template-columns:1fr}.cwe-nav{position:static}.cwe-card{grid-template-columns:38px minmax(0,1fr) auto}.cwe-card .p,.cwe-card .s{display:none}.cwe-cfg{grid-template-columns:1fr}.cwe-cfg nav{flex-direction:row;overflow-x:auto}.cwe-marcos{overflow-x:auto}}
+
+/* tema escuro */
+html[data-theme="dark"] .cwe{--w:#13293b;--sel:#2a2a1c;--amb:#33301c;--ok0:#183732;--ok1:#173a2b;--fundo:#0f2132;--m2:#8fa2b2;--b2:#3a5368;--t:#6cc2b4;--g:#e0b45a;--g2:#d9a83f;--g3:#d9a83f;--p:#182f43;--l:#24394d;--b:#2d465b;--tx:#e6edf3;--m:#a8b8c6;--r:#e58b7c}
+html[data-theme="dark"] .cwe .pri{color:#0e2132}
+html[data-theme="dark"] .cwe-esteira i.feito{color:#0e2132}
+/* ---------- etapas conforme as pranchas 2 a 4 ---------- */
+.cwe-lnk{border:0;background:transparent;padding:0;color:var(--t);text-decoration:underline;text-underline-offset:3px;font-size:inherit}
+.cwe-lnk2{border:0!important;background:transparent!important;padding:0 4px!important;color:var(--g)!important;font-weight:700;font-size:12px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.cwe-acoes.in{display:inline-flex;gap:6px;margin-left:4px}
+.cwe-ok{font:600 11.5px ui-monospace,monospace;color:#2f8a5e;white-space:nowrap}
+.cwe-alerta{padding:10px 14px;border:1px solid #e8c9a6;border-left:3px solid var(--g2);background:var(--amb);font-size:12.5px;line-height:1.6}
+.cwe-alerta .cwe-lnk{font:12px ui-monospace,monospace}
+.cwe-duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.cwe-pares{border:1px solid var(--b);background:var(--w)}
+.cwe-pares .h{padding:8px 12px;background:var(--p);border-bottom:1px solid var(--b);font:10px ui-monospace,monospace;letter-spacing:.1em;color:var(--g)}
+.cwe-pares>div:last-child{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 12px;font-size:12.5px}
+.cwe-pares span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cwe-pares b{font:600 12.5px ui-monospace,monospace;text-align:right}
+.cwe-drop>span{display:flex;flex-direction:column;gap:2px}.cwe-drop b{color:var(--tx);font-size:13.5px}.cwe-drop small{font-size:11px;color:var(--m2)}
+.cwe-res{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));background:var(--l);border:1px solid var(--b)}
+.cwe-res a{display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-left:1px solid var(--b);text-decoration:none;color:var(--tx)}
+.cwe-res a b{font:400 24px ui-monospace,'IBM Plex Mono',monospace}.cwe-res a span{font-weight:700;font-size:12.5px}.cwe-res a small{font-size:11px;color:var(--m)}
+.cwe-res .r b{color:var(--r)}.cwe-res .a b{color:var(--g)}.cwe-res .g b{color:var(--t)}
+.cwe-lst{border:1px solid var(--b);background:var(--w);min-width:0}
+.cwe-lst-h{position:sticky;top:56px;z-index:4;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 14px;background:var(--p);border-bottom:1px solid var(--b);font-size:12.5px;color:#4f5a57}
+.cwe-lst-h>span:first-child{flex:1 1 260px}.cwe-lst-h b{color:var(--tx)}
+.cwe-lst-h>button{height:34px;padding:0 14px;border:1px solid var(--b2);border-radius:7px;background:var(--p);font-weight:700;font-size:12px}
+.cwe-tbl{overflow-x:auto}.cwe-tbl table{width:100%;min-width:780px;border-collapse:collapse;font-size:12.5px}
+.cwe-tbl th{text-align:left;padding:9px 12px;border-bottom:1px solid #d8d3c6;font:9.5px ui-monospace,monospace;letter-spacing:.08em;color:var(--m);text-transform:uppercase}
+.cwe-tbl td{padding:8px 12px;border-bottom:1px solid #efece3;vertical-align:middle}.cwe-tbl td.m{color:#4f5a57}
+.cwe-tbl tr.gh td{padding:14px 12px 8px;border-bottom:1px solid #d8d3c6}
+.cwe-tbl tr.gh div{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}.cwe-tbl tr.gh span{flex:1 1 260px;font-size:12px;color:#4f5a57}.cwe-tbl tr.gh .cwe-acoes{flex:0 0 auto}
+.cwe-tbl tr.gh b{font-size:14px}.cwe-tbl tr.gh b.n{font:400 18px ui-monospace,monospace}
+.cwe-tbl tr.gh.r td{background:#fbf1ee;box-shadow:inset 3px 0 var(--r)}.cwe-tbl tr.gh.r b.n{color:var(--r)}
+.cwe-tbl tr.gh.a td{background:#fbf6e6;box-shadow:inset 3px 0 var(--g)}.cwe-tbl tr.gh.a b.n{color:var(--g)}
+.cwe-tbl tr.gh.g td{background:#f1f6f3;box-shadow:inset 3px 0 var(--t)}.cwe-tbl tr.gh.g b.n{color:var(--t)}
+.cwe-tbl tr.sub td{padding:4px 12px;font:9px ui-monospace,monospace;letter-spacing:.08em;color:var(--m2);text-transform:uppercase}
+.cwe-tg{display:inline-block;padding:2px 7px;font:10.5px ui-monospace,monospace;border:1px solid rgba(0,0,0,.08)}
+.cwe-tg.g{background:#dfe9e4;color:#1d4f49}.cwe-tg.a{background:#f5efd9;color:var(--g)}.cwe-tg.r{background:#f6e3df;color:#923d30}
+.cwe-mais2{border:0;background:transparent;padding:0;font-weight:700;font-size:12px;color:var(--g);text-decoration:underline;text-underline-offset:3px}
+.cwe-fil{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.cwe-fil button{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border:1px solid var(--b);border-radius:999px;background:var(--w);font-weight:600;font-size:12px;color:var(--tx)}
+.cwe-fil button span{font:10.5px ui-monospace,monospace;color:var(--m)}
+.cwe-fil button[aria-pressed="true"]{background:var(--t);border-color:var(--t);color:var(--w)}.cwe-fil button[aria-pressed="true"] span{color:#cfe3de}
+.cwe-k4 button{display:block;text-align:left;padding:9px 12px;border:0;border-left:1px solid var(--l);border-bottom:1px solid var(--l);background:var(--sel);font-size:11.5px;color:#4f5a57}
+.cwe-k4 button b{display:block;font-size:22px;line-height:1.1;font-weight:650;color:var(--tx);letter-spacing:-.03em}
+.cwe-k4 button small,.cwe-kpis span small{display:block;font:10px ui-monospace,monospace;color:var(--m2)}
+.cwe-k4 button[aria-expanded="true"],.cwe-k4 button[aria-pressed="true"]{box-shadow:inset 0 -2px var(--g2)}
+.cwe-kpis span.a b{color:var(--g2)}
+.cwe-convs{border:1px solid var(--b);background:var(--w)}
+.cwe-convs>.h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;padding:10px 14px;background:var(--p);border-bottom:1px solid var(--b)}
+.cwe-convs>.h small{display:block;font-size:11.5px;color:var(--m)}.cwe-convs>.h button{height:28px;padding:0 10px;border:1px solid var(--b2);border-radius:7px;background:var(--w);font-weight:700;font-size:11.5px}
+.cwe-convs .g{border-bottom:1px solid var(--l)}
+.cwe-convs .g>button{display:grid;grid-template-columns:14px 44px minmax(0,1fr) auto;align-items:baseline;gap:8px;width:100%;padding:8px 14px;border:0;background:transparent;text-align:left;font-size:12.5px;color:var(--tx)}
+.cwe-convs .g>button>b{font:500 14px ui-monospace,monospace;color:var(--t)}.cwe-convs .g>button small{font:10px ui-monospace,monospace;color:var(--m2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px}
+.cwe-convs table{width:100%;border-collapse:collapse;font-size:12px;margin:0 0 8px}.cwe-convs th,.cwe-convs td{padding:5px 14px;border-top:1px solid #f1eee6;text-align:left}.cwe-convs th{font:9px ui-monospace,monospace;color:var(--m2);text-transform:uppercase;letter-spacing:.08em}.cwe-convs td.m{color:var(--m)}
+.cwe-2col{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.cwe-lado{display:flex;flex-direction:column;gap:14px;position:sticky;top:64px}
+.cwe-box{border:1px solid var(--b);background:var(--w);font-size:12.5px}
+.cwe-box .h{padding:9px 12px;background:var(--p);border-bottom:1px solid var(--b)}.cwe-box .h>span{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.cwe-box .h small{display:block;font-size:11px;color:var(--m)}
+.cwe-box .rb{display:flex;justify-content:space-between;gap:8px;padding:6px 12px;border-bottom:1px solid #f1eee6}.cwe-box code{font:11px ui-monospace,monospace;color:#4f5a57}.cwe-box .rb b{color:var(--t);white-space:nowrap}
+.cwe-box p{margin:0;padding:8px 12px;font-size:11.5px;color:var(--m)}
+.cwe-box .sr{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 12px;border-bottom:1px solid #f1eee6}
+.cwe-box .sr b{font:500 13px ui-monospace,monospace;color:var(--g)}.cwe-box .sr span{min-width:0;overflow-wrap:anywhere}.cwe-box .sr small{display:block;font-size:10.5px;color:var(--m2)}
+.cwe-box .sr button{height:26px;padding:0 9px;border:1px solid var(--b2);border-radius:6px;background:var(--p);font-weight:700;font-size:11px}
+.cwe-box .cr{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:baseline;padding:7px 12px;border-bottom:1px solid #f1eee6}.cwe-box .cr>b{font:500 13px ui-monospace,monospace;color:var(--g)}.cwe-box .cr>span:last-child{font:10.5px ui-monospace,monospace;color:var(--m)}.cwe-box .cr.off{opacity:.5}
+.cwe-2eq{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.cwe-pc{padding:10px 14px;border-bottom:1px solid var(--l)}.cwe-pc.dif{box-shadow:inset 3px 0 var(--g3)}
+.cwe-pc .t{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}.cwe-pc .it{font:10.5px ui-monospace,monospace;color:var(--m)}.cwe-pc .as{flex:1 1 240px;min-width:0;color:#4f5a57;font-size:12.5px}.cwe-pc .ct{font:10.5px ui-monospace,monospace;color:var(--m2)}
+.cwe-pc .cwe-chps{display:flex;flex-wrap:wrap;gap:5px;margin:7px 0 0}
+.cwe-pc .cwe-chp{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:4px;padding:2px 8px;border:1px solid var(--b);background:#f7f9f8;font-size:11.5px}
+.cwe-pc .cwe-chp i{font-style:normal;color:var(--m2)}.cwe-pc .cwe-chp.cv{background:#eef6f2;border-color:#bcd8cb}.cwe-pc .cwe-chp.cv b{color:var(--t)}.cwe-pc .cwe-chp small{font:9.5px ui-monospace,monospace;color:var(--m2)}
+.cwe-pc .cwe-chp.ign{opacity:.6;text-decoration:line-through}.cwe-pc .cwe-chp.vazio{color:var(--m2);border-style:dashed}
+.cwe-pc .cf{display:flex;gap:8px;margin:7px 0 0;padding:6px 10px;background:var(--amb);font-size:11.5px}.cwe-pc .cf b{font:10px ui-monospace,monospace;color:var(--g);letter-spacing:.08em}
+.cwe-pc .cps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px 12px;margin-top:8px}
+.cwe-pc .cps span,.cwe-pc .ds span{display:block;font:9.5px ui-monospace,monospace;letter-spacing:.06em;color:var(--g)}
+.cwe-pc .cps b{display:block;font-weight:600;font-size:12px;overflow-wrap:anywhere}.cwe-pc .cps small,.cwe-pc .ds small{display:block;font-size:10.5px;color:var(--m2)}
+.cwe-pc .ds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin-top:8px}
+.cwe-pc .ds .v{display:block;font-weight:700;font-size:12.5px;color:var(--tx);font-family:inherit;letter-spacing:0}
+.cwe-pc .ds select{height:30px;min-width:180px;max-width:100%;border:1px solid var(--b2);border-radius:6px;background:var(--w);font:inherit;font-size:12.5px;padding:0 6px}
+.cwe-pc .ds select.reg{border-color:#7fb39f;background:#eef6f2}.cwe-pc .ds select.man{border-color:var(--g3);background:var(--amb)}.cwe-pc .ds select.vz{border-style:dashed}
+.cwe-mostra{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;font-size:12px;color:var(--m)}
+.cwe-mostra button{height:28px;padding:0 10px;border:1px solid var(--b2);border-radius:7px;background:var(--w);font-weight:700;font-size:11.5px}
+.cwe-segs{display:inline-flex;border:1px solid var(--b2);border-radius:7px;overflow:hidden;flex:0 0 auto!important}
+.cwe-segs button{height:30px;padding:0 10px;border:0;border-left:1px solid var(--b2);background:var(--w);font-weight:700;font-size:11.5px;color:var(--m)}.cwe-segs button:first-child{border-left:0}
+.cwe-segs button[aria-pressed="true"]{background:var(--t);color:var(--w)}
+.cwe-carga{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.cwe-carga .q{border:1px solid var(--b);background:var(--w);padding-bottom:6px}
+.cwe-carga .q .h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 10px;padding:8px 12px;background:var(--p);border-bottom:1px solid var(--b);margin-bottom:6px}.cwe-carga .q .h small{font-size:10.5px;color:var(--m)}
+.cwe-carga i{display:inline-block;width:9px;height:9px;vertical-align:middle}.cwe-carga i.a,.cwe-carga .cwe-br .a{background:var(--t)}.cwe-carga i.b,.cwe-carga .cwe-br .b{background:var(--g3)}
+.cwe-carga .p{display:grid;grid-template-columns:110px minmax(0,1fr) 80px;align-items:center;gap:8px;padding:3px 12px;font-size:12px}.cwe-carga .p b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cwe-carga .p>span:last-child{font:11px ui-monospace,monospace;color:var(--m);text-align:right}
+.cwe-carga .cwe-br{display:flex;height:8px;background:var(--l)}.cwe-carga .p.aus{opacity:.55}
+.cwe-final .g button{display:block;text-align:left;padding:9px 14px;border:0;border-left:1px solid var(--l);background:transparent;font-size:11.5px;color:var(--tx)}
+.cwe-final .g button b{display:block;font-size:20px;line-height:1.1}.cwe-final .g button small{display:block;font:10px ui-monospace,monospace;color:var(--m2)}
+.cwe-final .g button.r b{color:var(--r)}.cwe-final .g button.a b{color:var(--g2)}.cwe-final .g button.g b{color:#2f8a5e}.cwe-final .g button.on{background:var(--sel);box-shadow:inset 0 -2px var(--g2)}
+.cwe-final .pe{margin:0;padding:8px 14px;border-top:1px solid var(--l);font-size:11.5px;color:var(--m)}
+.cwe-cfl{padding:10px 14px;border-top:1px solid var(--l)}.cwe-cfl>div{display:flex;flex-wrap:wrap;gap:4px 12px}.cwe-cfl .cwe-lnk{font-size:12px}
+.cwe-vinc{border:1px solid var(--b);background:var(--w)}.cwe-vinc .h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;padding:9px 14px;background:var(--p);border-bottom:1px solid var(--b)}.cwe-vinc .h small{font-size:11px;color:var(--m)}
+.cwe-vinc .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}.cwe-vinc .g>div{display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-left:1px solid var(--l)}.cwe-vinc .g b{font-size:13.5px}.cwe-vinc .g small{font-size:11px;color:var(--m2)}
+@media (max-width:980px){.cwe-2col{grid-template-columns:minmax(0,1fr)}.cwe-lado{position:static}.cwe-lst-h{position:static}.cwe-pc .ds{grid-template-columns:minmax(0,1fr)}}
+html[data-theme="dark"] .cwe-tbl tr.gh.r td{background:#3a2622}html[data-theme="dark"] .cwe-tbl tr.gh.a td{background:#3a321f}html[data-theme="dark"] .cwe-tbl tr.gh.g td{background:#1f332e}
+html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dark"] .cwe-pc .cwe-chp.cv{background:#1f3a32;border-color:#2f5a4c}html[data-theme="dark"] .cwe-tg.g{background:#1f3a32;color:#bfe0d4}html[data-theme="dark"] .cwe-tg.a{background:#3a321f;color:#e6c27a}html[data-theme="dark"] .cwe-tg.r{background:#3a2622;color:#f0b3a8}
+.cwe-nr{display:flex;flex-direction:column;gap:7px;padding:10px 12px;background:var(--sel);border-bottom:1px solid var(--l);font-size:12px}
+.cwe-nr label{display:flex;flex-direction:column;gap:3px;font-weight:600}.cwe-nr label small{font-weight:400;color:var(--m2)}
+.cwe-nr select,.cwe-nr input{height:30px;border:1px solid var(--b2);border-radius:6px;background:var(--w);font:inherit;padding:0 6px;color:var(--tx)}
+.cwe-nr>small{color:var(--m2);font-size:11px}
+.cwe-marcos input[type="date"]{background:var(--w);border:1px solid var(--g3)}
+
+.cwe-drop.on{outline:2px dashed #235a55;outline-offset:3px;background:#eef5f1}
+
 @media print{#top,#rodape,.rail,.fl-cab,#toast{display:none!important}}
 </style>
 </head>
@@ -203,9 +470,11 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 <header id="top">
   <a id="marca" href="#inicio" title="Início da triagem"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><b>Triagem<i>.</i></b></a>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
-  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><a class="btn" id="bt-pautas" href="/pautas/" title="Pautas de julgamento: sessões, marcos, seleção prévia e PDF da pauta">Pautas</a><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
+  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-regras" type="button" title="Escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe">⚙ Regras gerais</button><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
 </header>
 <main id="main"><div id="carga"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
+<section id="aba-pautas" hidden aria-label="Pautas de julgamento"><div class="pt-barra pt-acoes"><span class="k" style="margin-right:auto;color:var(--m)">Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta</span><button type="button" id="pt-regras" title="Regras gerais">⚙ Regras gerais</button><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button></div><main id="pt-view"><div id="pt-carga" role="status"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
+<div id="cwt-toast" role="status" hidden></div>
 <div id="rodape" class="off" role="region" aria-label="Ações em bloco" hidden></div>
 <div id="toast" role="status" hidden></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -410,7 +679,7 @@ W.addEventListener('beforeunload', (e) => { if (pendentes() || GRAVANDO) { e.pre
 /* ===================== abas e roteamento ===================== */
 function rotear() { const h = decodeURIComponent(location.hash.slice(1) || 'inicio');
   if (h.indexOf('esc=') === 0) { const id = h.slice(4); if (ESC.escaninhos.some((e) => e.id === id)) { if (ABERTAS.indexOf(id) < 0) { ABERTAS.push(id); LS.set('tri_abas', ABERTAS); } ABA = 'esc:' + id; } else ABA = 'escaninhos'; }
-  else ABA = /^(inicio|fila|escaninhos)$/.test(h) ? h : 'inicio';
+  else ABA = /^(inicio|fila|escaninhos|pautas)$/.test(h) ? h : (!location.hash && /^\/pautas/.test(location.pathname) ? 'pautas' : 'inicio');
   W.scrollTo(0, 0); render(); }
 W.addEventListener('hashchange', rotear);
 const ir = (h) => { if (location.hash === '#' + h) rotear(); else location.hash = h; };
@@ -419,13 +688,15 @@ function pintaAbas() {
   const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
   $('#abas').innerHTML = t('inicio', 'Início') + t('fila', 'Fila de triagem', PRONTO ? U.length : null) +
     ABERTAS.map((id) => { const e = ESC.escaninhos.find((x) => x.id === id); return t('esc:' + id, e.titulo, U.filter((o) => e._set.has(o.d)).length, '<span class="x" role="button" aria-label="Fechar a aba" data-fecha="' + esc(id) + '">×</span>', e.cor); }).join('') +
-    '<button type="button" class="tb dash' + (ABA === 'escaninhos' ? ' on' : '') + '" data-aba="escaninhos">Escaninhos</button>'; }
+    '<button type="button" class="tb dash' + (ABA === 'escaninhos' ? ' on' : '') + '" data-aba="escaninhos">Escaninhos</button>' + t('pautas', 'Pautas'); }
 $('#abas').addEventListener('click', (e) => { const f = e.target.closest('[data-fecha]'); if (f) { e.stopPropagation(); ABERTAS = ABERTAS.filter((x) => x !== f.dataset.fecha); LS.set('tri_abas', ABERTAS); if (ABA === 'esc:' + f.dataset.fecha) ir('fila'); else pintaAbas(); return; }
   const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
 
 /* ===================== render geral ===================== */
 function render() { if (!PRONTO) return; pintaAbas(); pintaGrava();
-  const m = $('#main');
+  const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
+  m.hidden = naPauta; ap.hidden = !naPauta; D.title = naPauta ? 'Ab Initio · Pautas' : 'Ab Initio · Triagem';
+  if (naPauta) { $('#rodape').hidden = true; try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
   if (ABA === 'inicio') m.innerHTML = vInicio();
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
   else if (ABA === 'escaninhos') m.innerHTML = vEscaninhos();
@@ -930,6 +1201,602 @@ async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(awai
   let fichaAberta = false; setInterval(() => { const on = D.body.classList.contains('cmt-ficha-on'); if (fichaAberta && !on) { U.forEach(refazDest); render(); } fichaAberta = on; }, 700);
 })();
 })();
+</script>
+<script>
+/* Ab Initio · Pautas — esteira da sessão (desenho "Pautas · criação da sessão").
+   Camada de apresentação sobre o motor: lê CMTSessao, o acervo (acervoDe) e a equipe.
+   Etapas: 1 seleção prévia · 2 pauta oficial · 3 preparar · 4 publicar · 5 painel da sessão.
+   As ações que gravam pedem confirmação: conferência do PDF, conversões, designação,
+   publicação e a seleção prévia na Triagem (pelo mesmo caminho do botão Gravar triagem). */
+(function (W, D) {
+  'use strict';
+  if (W.CMTEsteira) return;
+  const est = { arq: false, ses: '', etapa: 0, prep: 0, cfg: false, cfgTab: 0, exp: false, q: '', filtro: 'all', take: 60, sel: '', mag: null, magPedido: false,
+    desm: {}, c2: {}, etqF: 'todos', etqTake: 50, convAb: false, convG: new Set(), desF: 'todos', desTake: 50, dsg: {}, cf: '', nr: null, mEd: false };
+  const HOJE = () => new Date().toISOString().slice(0, 10);
+  const SEM = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  let A = null; let ligado = null;
+
+  const e = (v) => A.esc(v);
+  const pct = (n, t) => (t ? Math.round(100 * n / t) : 0) + '%';
+  const conta = (lista, f, top) => {
+    const m = new Map(); lista.forEach((x) => { const k = f(x) || '—'; m.set(k, (m.get(k) || 0) + 1); });
+    const a = [...m.entries()].sort((x, y) => y[1] - x[1]); const vis = top ? a.slice(0, top) : a;
+    const resto = a.slice(vis.length).reduce((z, x) => z + x[1], 0);
+    return resto ? vis.concat([['outros (' + (a.length - vis.length) + ')', resto]]) : vis;
+  };
+  const tipoTarefa = (t) => /\[(Sessão - )?ED\]/i.test(t || '') ? 'ED' : /\[Ag\.? ?Int\]/i.test(t || '') ? 'AgInt' : /retrata/i.test(t || '') ? 'JR' : '';
+  const retirado = (t) => /retirados e adiados/i.test(t || '');
+  const situacao = (x) => x.dataLiberacao ? 'Liberado' : x.dataCorrecao ? 'A liberar' : x.dataMinuta ? 'A corrigir' : 'A minutar';
+
+  function magistrados() {
+    if (est.mag || est.magPedido) return est.mag || [];
+    est.magPedido = true;
+    const pm = A.getMotor()?.ProcsMuta;
+    if (!pm?.ler) return [];
+    pm.ler('apoio/magistrados.json').then((t) => { try { const d = JSON.parse(t); est.mag = Array.isArray(d) ? d : (d.registros || []); A.render(); } catch (er) { est.mag = []; } }).catch(() => { est.mag = []; });
+    return [];
+  }
+
+  function dados(ss) {
+    const s = A.getSes(); const info = A.sesInfo(ss); const lines = info.lines; const itens = ss.itens || [];
+    const pauta = itens.length > 0; const realizada = ss.data < HOJE();
+    const raw = new Map(itens.map((it) => [A.digits(it.cnj), it]));
+    const plan = (() => { try { return s?.planilha?.(ss.id) || []; } catch (er) { return []; } })();
+    const planMap = new Map(plan.map((p) => [A.digits(p.Processo), p]));
+    const acv = (c) => { try { return s?.acervoDe?.(c) || null; } catch (er) { return null; } };
+    /* a seleção prévia gravada na sessão; sem ela, as marcas da Triagem para esta sessão */
+    let previa = (ss.previa || []).map((x) => A.digits(x.cnj || x));
+    if (!previa.length && pauta) { try { previa = s?.previaDaTriagem?.(ss.id) || []; } catch (er) { previa = []; } }
+    const pv = new Set(previa), it = new Set(itens.map((x) => A.digits(x.cnj)));
+    const conf = { fora: previa.filter((d) => !it.has(d)), novos: [...it].filter((d) => !pv.has(d)), batem: [...it].filter((d) => pv.has(d)) };
+    let foraAc = 0, assDiv = 0, foraTar = 0;
+    lines.forEach((x) => {
+      const r = acv(x.cnj); if (!r) { foraAc++; return; }
+      const a1 = A.norm((raw.get(A.digits(x.cnj)) || {}).assunto || ''), a2 = A.norm(r.Assunto || r.assunto_judicial || '');
+      if (a1 && a2 && a1 !== a2) assDiv++;
+      if (!/^\[Sessão\]/.test(r.tarefa_atual || '')) foraTar++;
+    });
+    const tipos = { ED: 0, AgInt: 0, JR: 0, ret: 0 };
+    lines.forEach((x) => { const t = tipoTarefa(x.tarefa) || (x.julg === 'ED' || x.julg === 'AgInt' || x.julg === 'JR' ? x.julg : ''); if (t) tipos[t]++; if (retirado(x.tarefa)) tipos.ret++; });
+    const metas = lines.filter((x) => (x.metas || []).length).length;
+    const f = realizada ? 5 : !pauta ? 1 : (info.unassigned || info.unrevised) ? 3 : 4;
+    let cur = est.etapa || f; if (pauta && cur === 1) cur = 2;
+    return { ss, s, info, lines, itens, pauta, realizada, raw, plan, planMap, acv, previa, conf, foraAc, assDiv, foraTar, tipos, metas, f, cur };
+  }
+
+  /* ---------- cabeçalho, marcos, esteira ---------- */
+  function cabecalho(ss, d) {
+    const dt = new Date(ss.data + 'T12:00:00'); const dia = isNaN(dt) ? '' : SEM[dt.getDay()];
+    const desc = [dia, ss.hora || '', d.pauta ? d.itens.length + ' itens' : 'sem pauta oficial', d.realizada ? 'realizada' : ss.publicada ? 'pauta publicada' : ss.marcosPub ? 'marcos publicados' : d.pauta ? 'pauta não publicada' : 'seleção prévia'].filter(Boolean).join(' · ');
+    const mg = magistrados().map((m) => { const at = (m.atuacao || []).find((x) => /Turma Regional/i.test(x.orgao || '')) || {}; return `<span><b>${e(m.nome)}</b> <small>${e(at.papel || m.cargo || '')}</small></span>`; }).join('');
+    const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da etapa 5'], ['copiar', 'Copiar a lista', 'área de transferência']];
+    return `<div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p>
+      ${mg ? `<p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg}<small>· composição padrão</small></p>` : ''}</div>
+      <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicar na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar' : 'Publicar os marcos da sessão na Ex Officio'}">${ss.marcosPub || ss.publicada ? '● Marcos publicados' : 'Publicar marcos'}</button><button type="button" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" class="${ss.publicada ? 'on' : 'pri'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} title="${ss.publicada ? 'Pauta publicada na Ex Officio: clique para retirar' : d.pauta ? 'Publicar a pauta (processos e marcos) na Ex Officio' : 'Importe o PDF da pauta antes de publicar'}">${ss.publicada ? '● Pauta publicada' : 'Publicar pauta'}</button></span><button type="button" data-cwt="create-session" title="Cadastrar outra sessão">+ Sessão</button>
+      <span class="cwe-expwrap"><button type="button" data-cwe="exp" aria-expanded="${est.exp}">Exportar ▾</button>${est.exp ? `<span class="cwe-menu" role="menu">${exp.map(([k, t, s]) => `<button type="button" role="menuitem" data-cwe="x-${k}"><b>${e(t)}</b><small>${e(s)}</small></button>`).join('')}</span>` : ''}</span>
+      <button type="button" data-cwe="cfg" title="Configurações das pautas" aria-label="Configurações das pautas">⚙</button></div></div>`;
+  }
+  function marcos(ss) {
+    const f = ss.fases || {};
+    const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', '']];
+    return `<section class="cwe-marcos" aria-label="Marcos da sessão"><button type="button" class="cwe-regras" data-cwe="cfg-0">regras</button><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
+      ${M.map(([t, v, o, k]) => est.mEd && k ? `<label title="${e(t + ' · ' + o)}">${e(t)}<input type="date" data-cwe-mk="${k}" value="${e(v || '')}"></label>` : `<label title="${e(t + ' · ' + o)}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
+      <span class="cwe-mkb"><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
+  }
+  function esteira(d) {
+    const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e conferência'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
+    const ok = 'ok', pd = 'pd', vz = 'vz'; const i = d.info;
+    const C = [
+      [['Sessão cadastrada', 'feito', ok], ['Processos na seleção prévia', d.previa.length + ' processos', d.previa.length ? ok : pd], ['Rascunho de regras e designação', 'na Triagem', vz]],
+      [['PDF da pauta importado', d.pauta ? d.itens.length + ' itens' : 'aguardando o PDF', d.pauta ? ok : vz], ['Conferência com a seleção prévia', d.pauta ? `${d.conf.fora.length} fora · ${d.conf.novos.length} novos · ${d.conf.batem.length} batem` : 'depois do PDF', !d.pauta ? vz : (d.ss.conferencia || {}).confirmada ? ok : pd]],
+      [['A · Regras de etiquetas', `${d.tipos.ED} ED · ${d.tipos.AgInt} AgInt · ${d.tipos.JR} JR · ${d.tipos.ret} retirados`, d.pauta ? ok : vz, 0], ['B · Designação e correção', `${i.unassigned} sem minutante · ${i.unrevised} sem corretor`, !d.pauta ? vz : (i.unassigned || i.unrevised) ? pd : ok, 1]],
+      [['Conferência final', `${d.foraAc} fora do acervo · ${d.assDiv} assuntos · ${d.foraTar} fora de tarefa de sessão`, !d.pauta ? vz : (d.foraAc || d.assDiv) ? pd : ok], ['Pauta publicada à equipe', d.ss.publicada ? (d.ss.pronta ? 'publicada em ' + A.br(d.ss.pronta) : 'publicada') : d.realizada ? 'sessão realizada' : 'a publicar', d.ss.pronta ? ok : vz]],
+      [['Painel integral', 'números e distribuição', d.pauta ? ok : vz], ['Produção', `${i.lines.filter((x) => x.dataMinuta).length} minutadas · ${i.released} liberadas`, i.released ? ok : vz]]
+    ];
+    return `<ol class="cwe-esteira" aria-label="Etapas da sessão">${E.map(([t, s], k) => {
+      const n = k + 1, trava = n === 1 && d.pauta, feito = n < d.f || (n === 2 && d.pauta), agora = n === d.f, sel = n === d.cur;
+      const st = trava ? 'FECHADA' : agora ? 'AGORA' : feito ? 'FEITO' : 'A SEGUIR';
+      return `<li class="${sel ? 'sel' : ''} ${trava ? 'trava' : ''}"><button type="button" data-cwe="etapa" data-n="${n}" ${trava ? 'aria-disabled="true"' : ''} aria-current="${sel}">
+        <i class="${feito && !agora ? 'feito' : agora ? 'agora' : ''}">${n}</i><span><small>${st}</small><b>${e(t)}</b><em>${e(trava ? 'fechada · a pauta oficial já existe' : s)}</em></span></button>
+        ${sel ? `<span class="cwe-checks">${C[k].map(([ct, cs, cl, sub]) => `<span class="ck ${cl} ${sub != null ? 'aba' : ''} ${sub != null && sub === est.prep ? 'on' : ''}" ${sub != null ? `data-cwe="prep" data-n="${sub}" role="tab"` : ''}><span class="dot">${cl === ok ? '✓' : cl === pd ? '!' : ''}</span><span>${e(ct)}<small>${e(cs)}</small></span></span>`).join('')}</span>` : ''}</li>`;
+    }).join('')}</ol>`;
+  }
+
+  function sessoes(ss) {
+    const hoje = HOJE(), lista = A.sessionData();
+    const ant = lista.filter((x) => x.data < hoje), vis = lista.filter((x) => x.data >= hoje || est.arq || x.id === ss.id);
+    const sub = (x) => { const n = (x.itens || []).length; if (!n) return (x.previa || []).length ? (x.previa || []).length + ' na seleção prévia' : 'sem pauta'; const m = (x.itens || []).filter((i) => i.dataMinuta).length; return m + ' de ' + n + ' minutadas'; };
+    return `<span class="cwe-k">SESSÕES</span><div class="cwe-ses">${vis.map((x) => `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}"><b>${e(A.br(x.data))}</b><small>${e(x.data < hoje ? 'realizada · ' + sub(x) : sub(x))}</small></button>`).join('')}</div>
+      ${ant.length ? `<button type="button" class="cwe-arq" data-cwe="arq">${est.arq ? 'Ocultar as realizadas' : 'Ver realizadas e arquivadas (' + ant.length + ')'}</button>` : ''}`;
+  }
+
+  /* ---------- listagem e prontuário ---------- */
+  function filtrar(lines) {
+    const q = A.norm(est.q.trim());
+    return lines.filter((x) => {
+      const sit = situacao(x);
+      if (est.filtro === 'minutar' && sit !== 'A minutar') return false;
+      if (est.filtro === 'corrigir' && sit !== 'A corrigir') return false;
+      if (est.filtro === 'liberar' && sit !== 'A liberar') return false;
+      if (est.filtro === 'sem-servidor' && x.servidor) return false;
+      if (est.filtro === 'sem-corretor' && x.corretor) return false;
+      if (est.filtro === 'meta' && !(x.metas || []).length) return false;
+      if (est.filtro === 'fora' && x.noAcervo) return false;
+      return !q || A.norm([x.cnj, x.assunto, x.servidor, x.corretor, x.item, x.classe, x.tarefa].join(' ')).includes(q);
+    });
+  }
+  function prontuario(d) {
+    const x = d.lines.find((l) => A.digits(l.cnj) === est.sel); if (!x) return '';
+    const it = d.raw.get(est.sel) || {}, p = d.planMap.get(est.sel) || {}, r = d.acv(x.cnj) || {};
+    const k = [['Tarefa no PJe', x.tarefa || '—'], ['Seção', x.secao || '—'], ['Distribuição', x.dist ? A.br(x.dist) : '—'], ['Apreciação', p['Apreciação'] || '—'], ['Meta', p.Meta || (x.metas || []).join(' ') || '—'], ['Etapa', p.Etapa || situacao(x)], ['Minutante', x.servidor || '—'], ['Corretor', x.corretor || '—'], ['Tempestividade', p.Tempestividade || '—'], ['Preparo', p.Preparo || '—'], ['Intervenção do MPF', p['Intervenção MPF'] || '—'], ['Etiquetas', r.Etiquetas || r.etiquetas || '—'], ['Pautas anteriores', (x.anteriores || []).join(' · ') || '—'], ['Pendências', p['Pendências'] || 'nenhuma']];
+    return `<section class="cwe-prt" aria-label="Prontuário"><div class="cwe-prt-h"><span class="cwe-k">PRONTUÁRIO</span><b>Item ${e(x.item || '—')}</b><button type="button" class="cwe-cnj" data-cwt="ficha" data-p="${e(est.sel)}">${e(A.cnj(x.cnj))}</button><span>${e(x.assunto || '—')} · ${e(x.classe || '')}</span>${it.partes ? `<small>${e(it.partes)}</small>` : ''}
+      <span class="cwe-prt-a"><button type="button" data-cwe="prt-prev" title="Anterior">‹</button><button type="button" data-cwe="prt-next" title="Próximo">›</button><button type="button" data-cwt="ficha" data-p="${e(est.sel)}">Abrir a ficha completa</button><button type="button" data-cwe="prt-x" title="Fechar">×</button></span></div>
+      <div class="cwe-prt-g">${k.map(([t, v]) => `<span><small>${e(t)}</small>${e(v)}</span>`).join('')}</div></section>`;
+  }
+  function listagem(d, titulo) {
+    const l = filtrar(d.lines), vis = l.slice(0, est.take);
+    const F = [['all', 'Todos'], ['minutar', 'A minutar'], ['corrigir', 'A corrigir'], ['liberar', 'A liberar'], ['sem-servidor', 'Sem minutante'], ['sem-corretor', 'Sem corretor'], ['meta', 'Com meta'], ['fora', 'Fora do acervo']];
+    return `<section class="cwe-lista"><div class="cwe-lista-h"><h3>${e(titulo)}</h3><span>${l.length} de ${d.lines.length} processos</span></div>
+      ${prontuario(d)}
+      <div class="cwe-filtros"><input type="search" data-cwe-input="q" value="${e(est.q)}" placeholder="Buscar CNJ, assunto, minutante, corretor, tarefa…" aria-label="Buscar processos da sessão"><span>${F.map(([k, t]) => `<button type="button" data-cwe="filtro" data-v="${k}" class="${est.filtro === k ? 'on' : ''}">${t}</button>`).join('')}</span></div>
+      <div class="cwe-cards">${vis.map((x) => { const dg = A.digits(x.cnj), it = d.raw.get(dg) || {}, sit = situacao(x), t = tipoTarefa(x.tarefa);
+        return `<div class="cwe-card ${est.sel === dg ? 'on' : ''}" data-cwe="sel" data-p="${e(dg)}"><span class="n">${e(x.item || '—')}</span>
+          <span class="m"><span class="l1"><b class="cwe-mono">${e(A.cnj(x.cnj))}</b> · ${e(x.classe || '')}${t ? ` · <em>${t}</em>` : ''}${(x.metas || []).length ? ` · <em class="meta">★ ${e(x.metas.join(' '))}</em>` : ''}${retirado(x.tarefa) ? ' · <em class="ret">retirado/adiado</em>' : ''}${x.noAcervo ? '' : ' · <em class="ret">fora do acervo</em>'}${(() => { const r = d.acv(x.cnj) || {}, sg = String(r['Nível_Sigilo'] || '').trim() || (r.Consta_Acervo_Sigiloso === 'Sim' ? 'Sigiloso' : ''); return sg ? ` · <em class="sg" title="Sigilo: ${e(sg)}">🔒 sigilo</em>` : ''; })()}</span>
+          <span class="l2">${e(x.assunto || '—')}${it.partes ? ' · ' + e(it.partes) : ''}</span></span>
+          <span class="p"><small>Minutante</small>${e(x.servidor || '—')}</span><span class="p"><small>Corretor</small>${e(x.corretor || '—')}</span>
+          <span class="s s-${A.norm(sit).replace(/\s+/g, '-')}">${e(sit)}</span><button type="button" data-cwt="ficha" data-p="${e(dg)}">Ficha</button></div>`; }).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}</div>
+      ${l.length > est.take ? `<button type="button" class="cwe-mais" data-cwe="mais">Mostrar mais ${Math.min(80, l.length - est.take)}</button>` : ''}</section>`;
+  }
+
+  /* ---------- etapas ---------- */
+  const AP_T = { '—': '1º julgamento', '': '1º julgamento', ED: 'ED', AgInt: 'AgInt', JR: 'Retratação', AI: 'AI', META: 'META' };
+  const proxSessao = (ss) => A.sessionData().filter((x) => x.data > ss.data && x.data >= HOJE()).sort((a, b) => a.data.localeCompare(b.data))[0] || null;
+  const ondeEsta = (dg, ss) => A.sessionData().filter((x) => x.id !== ss.id && (x.itens || []).some((i) => A.digits(i.cnj) === dg)).map((x) => A.br(x.data).slice(0, 5));
+  const marcado = (k, dg) => !(est.desm[k] || new Set()).has(dg);
+  const ck = (k, dg) => `<input type="checkbox" data-cwe-ck="${k}" data-p="${e(dg)}" ${marcado(k, dg) ? 'checked' : ''} aria-label="Marcar">`;
+  const kpi = (n, t, s, cl) => `<span class="${cl || ''}"><b>${n}</b>${e(t)}${s ? `<small>${e(s)}</small>` : ''}</span>`;
+
+  function vencidas() { try { return (A.getSes()?.previaVencida?.() || []).map((v) => ({ ...v, id: v.data })); } catch (er) { return []; } }
+  function etapa1(ss, d) {
+    if (d.pauta) return `<section class="cwe-st"><h2>1 · Seleção prévia</h2><p class="cwe-nota">Fechada: a pauta oficial da sessão de ${e(A.br(ss.data))} já existe. O que valia como rascunho está na Triagem.</p></section>`;
+    const L = d.lines, sec = (k) => L.filter((x) => (x.secao || '').startsWith(k)).length, semSec = L.filter((x) => !/^[123]ª/.test(x.secao || '')).length;
+    const prio = L.filter((x) => x.prioridade).length;
+    const imp = L.filter((x) => { const r = d.acv(x.cnj) || {}; return /impedi|suspei/i.test(r['Impedimento / Suspeição'] || ''); }).length;
+    const V = vencidas();
+    const venc = V.length ? `<div class="cwe-alerta"><b>Seleções prévias vencidas: ${V.reduce((a, v) => a + v.cnjs.length, 0)}.</b> ${V.map((v) => `${v.cnjs.length} marcado(s) para a sessão de ${e(A.br(v.data))}, que já passou, sem entrar em pauta: ${v.cnjs.slice(0, 8).map((c) => `<button type="button" class="cwe-lnk" data-cwt="ficha" data-p="${e(c)}">${e(A.cnj(c))}</button>`).join(', ')}${v.cnjs.length > 8 ? '…' : ''}. <span class="cwe-acoes in"><button type="button" class="pri" data-cwe="venc-passar" data-v="${e(v.id)}">Passar a ${e(A.br(ss.data).slice(0, 5))}</button><button type="button" data-cwe="venc-devolver" data-v="${e(v.id)}">Devolver à Triagem</button></span>`).join(' ')}</div>` : '';
+    const mat = conta(L, (x) => x.assunto, 5).filter((r) => !/^outros/.test(r[0]));
+    const comM = L.filter((x) => x.servidor).length, comC = L.filter((x) => x.corretor).length;
+    return `<section class="cwe-st"><h2>1 · Seleção prévia da sessão de ${e(A.br(ss.data))}</h2>
+      <p>A seleção prévia se monta e se edita na Triagem, no escaninho da sessão. Aqui fica o que a Triagem não mostra: a sessão inteira de uma vez, para decidir se a lista está pronta, e o ato de fechá-la para o registro no PJe.</p>
+      ${venc}
+      <div class="cwe-kpis">${kpi(L.length, 'Selecionados', 'na seleção prévia')}${kpi(`${sec('1ª')} · ${sec('2ª')} · ${sec('3ª')}`, '1ª · 2ª · 3ª Seção', semSec + ' sem seção')}${kpi(`${d.metas} · ${prio}`, 'Metas · prioridades legais', 'com meta CNJ · prioridade no PJe')}${kpi(`${imp} · ${d.tipos.ret}`, 'Impedimento · retirados', 'conferir antes de fechar')}</div>
+      <div class="cwe-duo"><div class="cwe-pares"><div class="h">MATÉRIAS QUE MAIS PESAM</div><div>${mat.length ? mat.map(([t, n]) => `<span title="${e(t)}">${e(t)}</span><b>${n}</b>`).join('') : '<span>nenhuma ainda</span><b>—</b>'}</div></div>
+        <div class="cwe-pares"><div class="h">RASCUNHO FEITO NA TRIAGEM</div><div><span>Com minutante no rascunho</span><b>${comM} de ${L.length}</b><span>Com corretor no rascunho</span><b>${comC} de ${L.length}</b><span>Com meta CNJ</span><b>${d.metas}</b><span>ED, AgInt ou JR</span><b>${d.tipos.ED + d.tipos.AgInt + d.tipos.JR}</b></div></div></div>
+      <div class="cwe-acoes"><button type="button" class="pri" data-cwe="fechar-sel" ${L.length ? '' : 'disabled'}>Fechar a seleção e copiar a lista para o registro no PJe</button><button type="button" data-cwe="triagem">Editar na Triagem</button></div>
+      ${L.length ? listagem(d, 'Processos da seleção prévia') : '<p class="cwe-vazio">Nenhum processo na seleção prévia. Encaminhe pela Triagem.</p>'}</section>`;
+  }
+
+  function etapa2(ss, d) {
+    const drop = `<div class="cwe-drop"><span><span class="cwe-k">ESPELHO DA PAUTA · SESSÃO DE ${e(A.br(ss.data))}</span><b>${d.pauta ? 'Pauta oficial importada · ' + d.itens.length + ' itens' : 'Arraste o PDF da pauta aqui ou escolha o arquivo.'}</b><small>${e(ss.arquivo || 'resumo do espelho de pauta em PDF')}</small></span><button type="button" class="pri" data-cwt="import-pdf">${d.pauta ? 'Reimportar o PDF' : 'Importar PDF'}</button><input type="file" id="cwt-pdf-file" accept=".pdf,application/pdf" hidden></div>`;
+    if (!d.pauta) return `<section class="cwe-st"><h2>2 · Pauta oficial</h2><p>Oficializado o registro no PJe, chega o PDF do Resumo do Espelho de Pauta. O PDF oficializa a listagem: cada processo da seleção prévia recebe o número do seu item.</p>${drop}</section>`;
+    const conf = (ss.conferencia || {}).confirmada, prox = proxSessao(ss);
+    const ass = (dg) => { const it = d.raw.get(dg) || {}; const r = d.acv(dg) || {}; return it.assunto || r.Assunto || r.assunto_judicial || '—'; };
+    const tg = (cl, t) => `<span class="cwe-tg ${cl}">${e(t)}</span>`;
+    const semPrevia = !d.previa.length;
+    const G = [
+      ['fora', 'Ficaram de fora', 'estavam na seleção prévia e não vieram no PDF', 'r', d.conf.fora, 'Marcados na seleção prévia e ausentes do PDF. Escolha o destino de cada um.', 'Onde está', (dg) => { const o = ondeEsta(dg, ss); return o.length ? 'pauta' + (o.length > 1 ? 's' : '') + ' de ' + o.join(' e ') : 'nenhuma pauta'; }, () => tg('r', 'tirar a marca'),
+        [prox ? `<button type="button" class="pri" data-cwe="c2-passar" data-v="${e(prox.id)}">Passar à próxima sessão (${e(A.br(prox.data).slice(0, 5))})</button>` : '', `<button type="button" data-cwe="c2-devolver">Devolver à Triagem</button>`]],
+      ['novos', semPrevia ? 'Itens do PDF' : 'Novos', semPrevia ? 'a sessão não tinha seleção prévia gravada' : 'vieram no PDF sem estar na seleção prévia', 'a', d.conf.novos, semPrevia ? 'Sem seleção prévia, a conferência só lista os itens do PDF.' : 'Entraram na pauta pelo PDF, sem rascunho da Triagem. Recebem as regras e a designação na etapa 3, com os demais.', 'Tarefa no PJe', (dg) => (d.acv(dg) || {}).tarefa_atual || '—', () => tg('a', 'na pauta · sem rascunho'),
+        [`<button type="button" data-cwe="triagem">Abrir na Triagem</button>`]],
+      ['batem', 'Batem', 'estavam na seleção prévia e vieram no PDF', 'g', d.conf.batem, 'O PDF oficializa: recebem o número do item. O rascunho de regras e designação feito na Triagem segue para a etapa 3.', 'Seção', (dg) => { const x = d.lines.find((l) => A.digits(l.cnj) === dg); return x?.secao || '—'; }, () => tg('g', 'na pauta'), []]
+    ].filter((g) => !(semPrevia && g[0] !== 'novos'));
+    const res = G.map(([k, t, s, cl, l]) => `<a href="#cwe-g-${k}" class="${cl}"><b>${l.length}</b><span>${e(t)}</span><small>${e(s)}</small></a>`).join('');
+    const corpo = G.map(([k, t, , cl, l, aj, c3, f3, f4, acoes]) => {
+      const vis = est.c2[k] ? l : l.slice(0, 5);
+      return `<tbody id="cwe-g-${k}"><tr class="gh ${cl}"><td colspan="5"><div><b class="n">${l.length}</b><b>${e(t)}</b><span>${e(aj)}</span><span class="cwe-acoes in">${acoes.join('')}</span></div></td></tr>
+        ${vis.map((dg) => `<tr><td>${ck('c2' + k, dg)}</td><td><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(dg))}</button></td><td>${e(ass(dg))}</td><td class="m">${e(f3(dg))}</td><td>${f4(dg)}</td></tr>`).join('')}
+        ${l.length > 5 ? `<tr><td colspan="5"><button type="button" class="cwe-mais2" data-cwe="c2-mais" data-v="${k}">${est.c2[k] ? 'Mostrar só os 5 primeiros' : 'Mostrar os outros ' + (l.length - 5)}</button></td></tr>` : ''}</tbody>`;
+    }).join('');
+    return `<section class="cwe-st"><h2>2 · Pauta oficial</h2>
+      <p>O PDF oficializa a listagem: cada processo recebe o número do seu item. Tudo numa lista só: no topo os que ficaram de fora, depois os novos e, embaixo, os que batem.</p>
+      ${drop}
+      <div class="cwe-res">${res}</div>
+      <div class="cwe-lst"><div class="cwe-lst-h"><span><b>Uma lista só</b>, na ordem: ficaram de fora, novos e os que batem.</span>${conf ? `<span class="cwe-ok">Pauta oficial conferida em ${e(A.br(conf))}</span>` : ''}<button type="button" class="pri" data-cwe="c2-confirmar">${conf ? 'Confirmar de novo' : 'Confirmar a pauta oficial'}</button></div>
+        <div class="cwe-tbl"><table><thead><tr><th></th><th>Processo</th><th>Assunto</th><th>Detalhe</th><th>Situação ou destino</th></tr></thead>${corpo}</table></div></div>
+      <p class="cwe-nota">Ao confirmar, os processos que batem ficam como pautados na Triagem. Quem ficou de fora volta à Triagem ou passa para a seleção prévia da próxima sessão. A gravação vai ao procs-muta como o botão Gravar triagem.</p>
+      <div class="cwe-acoes"><button type="button" class="pri" data-cwe="etapa" data-n="3">Próximo: preparar →</button></div></section>`;
+  }
+
+  /* 3 · A · conversões de etiquetas */
+  function convDados(ss, d) { try { return d.s?.conversoes?.(ss.id) || []; } catch (er) { return []; } }
+  function etapa3(ss, d) {
+    const aba = est.prep;
+    const tabs = `<div class="cwe-tabs" role="tablist"><button type="button" role="tab" data-cwe="prep" data-n="0" aria-selected="${aba === 0}">A · Regras de etiquetas</button><button type="button" role="tab" data-cwe="prep" data-n="1" aria-selected="${aba === 1}">B · Designação e correção</button></div>`;
+    if (!d.pauta) return `<section class="cwe-st"><h2>3 · Preparar</h2>${tabs}<p class="cwe-nota">As regras de etiquetas e a designação se aplicam depois da pauta oficial. O rascunho fica na Triagem.</p></section>`;
+    return aba === 0 ? etapa3a(ss, d, tabs) : etapa3b(ss, d, tabs);
+  }
+  function etapa3a(ss, d, tabs) {
+    const C = convDados(ss, d);
+    let tot = 0, conv = 0, ign = 0, sem = 0; const semM = new Map(), grp = new Map();
+    C.forEach((p) => p.tags.forEach((t) => { tot++; if (t.ign) { ign++; return; } if (!t.regras.length) { sem++; semM.set(t.e, (semM.get(t.e) || 0) + 1); return; } conv++;
+      t.regras.forEach((r) => { const k = r.rot + (r.v ? ' · ' + r.v : ''); if (!grp.has(k)) grp.set(k, { rot: r.rot, v: r.v, rows: [], regras: new Set() }); const g = grp.get(k); g.rows.push({ item: p.item, cnj: p.cnj, e: t.e, id: r.nome || r.id }); g.regras.add(r.nome || r.id); }); }));
+    const tipo = (p) => p.proposta?.ap && p.proposta.ap !== '—' ? p.proposta.ap : p.tipo;
+    const F = [['todos', 'Todos', C.length], ['dif', 'Com conversão a aplicar', C.filter((p) => p.proposta?.dif.length).length], ['ED', 'ED', 0], ['AgInt', 'AgInt', 0], ['JR', 'JR', 0], ['META', 'META', 0], ['ret', 'Retirados e adiados', 0], ['conf', 'Conferir', C.filter((p) => p.proposta?.man.length).length]];
+    F.forEach((f) => { if (['ED', 'AgInt', 'JR'].includes(f[0])) f[2] = C.filter((p) => tipo(p) === f[0]).length; if (f[0] === 'META') f[2] = C.filter((p) => (p.c.metas || []).length).length; if (f[0] === 'ret') f[2] = C.filter((p) => retirado(p.tarefa)).length; });
+    const fl = est.etqF;
+    const L = C.filter((p) => fl === 'todos' ? true : fl === 'dif' ? p.proposta?.dif.length : fl === 'conf' ? p.proposta?.man.length : fl === 'META' ? (p.c.metas || []).length : fl === 'ret' ? retirado(p.tarefa) : fl === 'sem' ? p.tags.some((t) => !t.ign && !t.regras.length) : tipo(p) === fl);
+    const vis = L.slice(0, est.etqTake);
+    const aplic = C.filter((p) => p.proposta?.dif.length && marcado('etq', A.digits(p.cnj))).length;
+    const G = [...grp.entries()].sort((a, b) => b[1].rows.length - a[1].rows.length);
+    const painel = est.convAb ? `<section class="cwe-convs"><div class="h"><span><span class="cwe-k">TODAS AS ${conv} CONVERSÕES · PAUTA DE ${e(A.br(ss.data).slice(0, 5))}</span><small>Agrupadas pelo resultado. Abra um grupo para ver cada etiqueta, o processo e a regra.</small></span><button type="button" data-cwe="conv-todos">${G.every(([k]) => est.convG.has(k)) ? 'Recolher todos' : 'Abrir todos'}</button></div>
+      ${G.map(([k, g]) => { const ab = est.convG.has(k); return `<div class="g"><button type="button" data-cwe="conv-g" data-v="${e(k)}" aria-expanded="${ab}"><span>${ab ? '▾' : '▸'}</span><b>${g.rows.length}</b><span><b>${e(g.rot)}</b>${g.v ? ' ' + e(g.v) : ''}</span><small>${e([...g.regras].slice(0, 3).join(' · '))}</small></button>
+        ${ab ? `<table><thead><tr><th>Item</th><th>Processo</th><th>Etiqueta no PJe</th><th>Regra</th></tr></thead><tbody>${g.rows.map((r) => `<tr><td>${e(r.item || '')}</td><td class="cwe-mono">${e(A.cnj(r.cnj))}</td><td>${e(r.e)}</td><td class="m">${e(r.id)}</td></tr>`).join('')}</tbody></table>` : ''}</div>`; }).join('')}</section>` : '';
+    const card = (p) => { const dg = A.digits(p.cnj), pr = p.proposta;
+      const chips = p.tags.map((t) => t.ign ? `<span class="cwe-chp ign"><span>${e(t.e)}</span><i>→</i><b>ignorada</b></span>` : t.regras.length ? `<span class="cwe-chp cv"><span>${e(t.e)}</span><i>→</i><b>${e(t.regras.map((r) => r.rot + (r.v ? ' ' + r.v : '')).join(' · '))}</b><small>${e(t.regras.map((r) => r.nome || r.id).join(' · '))}</small></span>` : `<span class="cwe-chp"><span>${e(t.e)}</span></span>`).join('') || '<span class="cwe-chp vazio">sem etiquetas no PJe</span>';
+      const ap = pr ? pr.ap : (p.tipoManual || p.tipo || '—');
+      const campos = [['APRECIAÇÃO', AP_T[ap] || ap, tipoTarefa(p.tarefa) ? 'pela tarefa no PJe' : pr?.dif.includes('ap') ? 'pela etiqueta · a aplicar' : p.tipoManual ? 'fixado' : 'padrão'], ['TAREFA NO PJe', p.tarefa || '—', ''], ['META', (pr?.meta || p.meta || (p.c.metas || []).join(' ') || '—'), pr?.dif.includes('meta') ? 'a aplicar' : ''], ['MPF', pr?.mpf || p.mpf || (p.c.mpf || []).join(' · ') || '—', pr?.dif.includes('mpf') ? 'a aplicar' : ''], ['SUBASSUNTO', (p.c.tema || []).join(' · ') || '—', ''], ['ESPECIFICIDADE', (p.c.esp || []).join(' · ') || '—', '']];
+      const nc = p.tags.filter((t) => t.regras.length && !t.ign).length;
+      return `<article class="cwe-pc ${pr?.dif.length ? 'dif' : ''}"><div class="t">${ck('etq', dg)}<span class="it">item ${e(p.item || '—')}</span><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(p.cnj))}</button><span class="as">${e(p.assunto || '—')} · ${e(p.recurso || p.classe || '')}</span><span class="ct">${p.tags.length} etiqueta(s) · ${nc} convertida(s)</span></div>
+        <div class="chs">${chips}</div>
+        ${pr?.man.length ? `<p class="cf"><b>CONFERIR</b><span>O valor fixado à mão difere do que a regra daria (${e(pr.man.map((x) => ({ ap: 'apreciação', meta: 'meta', mpf: 'MPF' }[x])).join(', '))}). A aplicação não mexe no que foi fixado.</span></p>` : ''}
+        <div class="cps">${campos.map(([k, v, o]) => `<div><span>${e(k)}</span><b>${e(v)}</b>${o ? `<small>${e(o)}</small>` : ''}</div>`).join('')}</div></article>`; };
+    const semL = [...semM.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8);
+    return `<section class="cwe-st"><h2>3 · Preparar · A · Regras de etiquetas</h2>${tabs}
+      <p>Cada processo mostra todas as etiquetas do PJe. O tipo de julgamento sai primeiro da tarefa em que o processo está no PJe; a etiqueta confirma ou, sem indicação na tarefa, sugere. A etiqueta convertida aponta o resultado e a regra que a converteu.</p>
+      <div class="cwe-fil" role="group" aria-label="Filtrar os processos"><span class="cwe-k">METAS E TIPO DE JULGAMENTO</span>${F.map(([k, t, n]) => `<button type="button" data-cwe="etq-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}<span>${n}</span></button>`).join('')}</div>
+      <div class="cwe-kpis cwe-k4">${kpi(tot, 'Etiquetas na pauta', 'em ' + C.length + ' processos')}<button type="button" data-cwe="conv-ab" aria-expanded="${est.convAb}"><b>${conv}</b>Convertidas ${est.convAb ? '▴' : '▾'}<small>${est.convAb ? 'recolher a lista' : 'ver todas as conversões'}</small></button>${kpi(ign, 'Ignoradas por regra', 'APTO, SESSÃO, origem…')}<button type="button" data-cwe="etq-f" data-v="${fl === 'sem' ? 'todos' : 'sem'}" aria-pressed="${fl === 'sem'}"><b>${sem}</b>Sem regra<small>${fl === 'sem' ? 'mostrar todos' : 'filtrar os processos'}</small></button></div>
+      ${painel}
+      <div class="cwe-2col"><div class="cwe-lst"><div class="cwe-lst-h"><span><b>${aplic} de ${C.filter((p) => p.proposta?.dif.length).length} com conversão a aplicar</b> · desmarque o processo que não deve receber as conversões</span><button type="button" class="pri" data-cwe="etq-aplicar" ${aplic ? '' : 'disabled'}>Aplicar as conversões</button><button type="button" class="cwe-lnk2" data-cwe="prep" data-n="1">Próximo: designação e correção →</button></div>
+        ${vis.map(card).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}
+        <div class="cwe-mostra"><span>mostrando ${vis.length} de ${L.length}</span>${L.length > vis.length ? `<button type="button" data-cwe="etq-mais">Mostrar mais 50</button><button type="button" data-cwe="etq-todos">Mostrar todos</button>` : ''}</div></div>
+      <div class="cwe-lado"><section class="cwe-box"><div class="h"><span><b>Regras base pela tarefa no PJe</b><button type="button" class="cwe-lnk" data-cwe="cfg-2">Editar regras</button></span><small>valem antes das etiquetas · o tipo de julgamento sai daqui</small></div>
+          <div class="rb"><code>[Sessão - ED] …  ·  [ED] …</code><b>→ ED</b></div><div class="rb"><code>[Ag. Int] …</code><b>→ AgInt</b></div><div class="rb"><code>tarefa com "retratação"</code><b>→ JR</b></div><div class="rb"><code>… Processos retirados e adiados</code><b>→ Retirado ou adiado</b></div>
+          <p>A etiqueta de ED só informa. Remessa necessária vem da classe.</p></section>
+        <aside class="cwe-box"><div class="h"><span><b>Sem regra, mais frequentes</b><button type="button" class="cwe-lnk" data-cwe="cfg-2">Editar regras</button></span><small>na pauta de ${e(A.br(ss.data).slice(0, 5))}</small></div>
+          ${semL.map(([t, n]) => `<div class="sr"><b>${n}</b><span>${e(t)}</span><button type="button" data-cwe="nr" data-t="etq" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'etq' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'etq' && est.nr.v === t ? formEtq(d, t) : ''}`).join('') || '<p>Todas as etiquetas têm regra.</p>'}</aside></div></div></section>`;
+  }
+
+  /* criar regra sem sair da esteira */
+  function formEtq(d, t) { let E = []; try { E = d.s?.efeitosEtiqueta?.() || []; } catch (er) { E = []; }
+    return `<div class="cwe-nr" data-nr="etq"><span class="cwe-k">NOVA REGRA · ETIQUETA "${e(t)}"</span><label>Converte em<select data-nr-ef>${E.map((x) => `<option value="${e(x.k)}" data-v="${e(x.v)}">${e(x.t)}</option>`).join('')}</select></label>
+      <label>Valor <small>(tema, especificidade, hipótese ou nº da meta)</small><input data-nr-v placeholder="só para os efeitos que pedem valor"></label>
+      <span class="cwe-acoes"><button type="button" class="pri" data-cwe="nr-salvar">Salvar a regra</button><button type="button" data-cwe="nr-x">Cancelar</button></span><small>Vale para a etiqueta exatamente com este texto, nesta e nas próximas pautas.</small></div>`; }
+  function formAss(Z, t) { const op = (P) => `<option value="">— manter —</option>${P.map((m) => `<option>${e(m.nome)}</option>`).join('')}`;
+    return `<div class="cwe-nr" data-nr="ass"><span class="cwe-k">NOVA REGRA · ASSUNTO "${e(t)}"</span><label>Minutante<select data-nr-d>${op(Z.minutantes)}</select></label><label>Corretor<select data-nr-c>${op(Z.corretores)}</select></label>
+      <span class="cwe-acoes"><button type="button" class="pri" data-cwe="nr-salvar">Salvar a regra</button><button type="button" data-cwe="nr-x">Cancelar</button></span><small>Entra no critério "Tema ou assunto"${Z.escopo === 'sessao' ? ', no ajuste desta sessão' : ', nas regras gerais'}.</small></div>`; }
+
+  /* 3 · B · designação e correção */
+  function etapa3b(ss, d, tabs) {
+    let Z = null; try { Z = d.s?.designacao?.(ss.id) || null; } catch (er) { Z = null; }
+    if (!Z) return `<section class="cwe-st"><h2>3 · Preparar · B · Designação e correção</h2>${tabs}<p class="cwe-nota">Designação indisponível: motor não carregado.</p></section>`;
+    const Ls = Z.linhas, esc = est.dsg;
+    const vD = (p) => esc[A.digits(p.cnj)]?.d ?? (p.servidor || p.sugD?.nome || ''), vC = (p) => esc[A.digits(p.cnj)]?.c ?? (p.corretor || p.sugC?.nome || '');
+    const porRegD = Ls.filter((p) => p.sugD).length, porRegC = Ls.filter((p) => p.sugC).length;
+    const brD = Ls.filter((p) => !p.servidor && !p.sugD).length, brC = Ls.filter((p) => !p.corretor && !p.sugC).length;
+    const aus = Z.minutantes.concat(Z.corretores).filter((m) => m.ausente).map((m) => m.nome);
+    const semAss = new Map(); Ls.filter((p) => (!p.servidor && !p.sugD) || (!p.corretor && !p.sugC)).forEach((p) => { const k = p.assunto || '—'; const o = semAss.get(k) || { n: 0, d: 0, c: 0 }; o.n++; if (!p.servidor && !p.sugD) o.d++; if (!p.corretor && !p.sugC) o.c++; semAss.set(k, o); });
+    const semA = [...semAss.entries()].sort((a, b) => b[1].n - a[1].n).slice(0, 8);
+    const quadro = (t, P, kind) => { const mx = Math.max(1, ...P.map((m) => m.atual + Ls.filter((p) => (kind === 'd' ? p.sugD : p.sugC)?.nome === m.nome).length));
+      return `<div class="q"><div class="h"><span class="cwe-k">${e(t)}</span><small>só informação · já designados <i class="a"></i> · por regra agora <i class="b"></i></small></div>${P.map((m) => { const nv = Ls.filter((p) => (kind === 'd' ? p.sugD : p.sugC)?.nome === m.nome).length;
+        return `<div class="p ${m.ausente ? 'aus' : ''}"><b>${e(m.nome)}</b><span class="cwe-br"><span class="a" style="width:${100 * m.atual / mx}%"></span><span class="b" style="width:${100 * nv / mx}%"></span></span><span>${m.atual}${nv ? ' + ' + nv : ''}${m.ausente ? ' · ausente' : ''}</span></div>`; }).join('')}</div>`; };
+    const F = [['todos', 'Todos'], ['regra', 'Por regra agora'], ['branco', 'Em branco'], ['feitos', 'Já designados']];
+    const fl = est.desF;
+    const L = Ls.filter((p) => fl === 'todos' ? true : fl === 'regra' ? (p.sugD || p.sugC) : fl === 'branco' ? ((!p.servidor && !p.sugD) || (!p.corretor && !p.sugC)) : (p.servidor && p.corretor));
+    const vis = L.slice(0, est.desTake);
+    const sel = (kind, p) => { const atual = kind === 'd' ? p.servidor : p.corretor, sug = kind === 'd' ? p.sugD : p.sugC, P = kind === 'd' ? Z.minutantes : Z.corretores, v = kind === 'd' ? vD(p) : vC(p);
+      if (atual) return `<span class="v">${e(atual)}</span><small>${e((kind === 'd' ? p.porD : p.porC) || 'já designado')}</small>`;
+      return `<select data-cwe-esc="${kind}" data-p="${e(A.digits(p.cnj))}" class="${v ? (sug && v === sug.nome ? 'reg' : 'man') : 'vz'}"><option value="">— escolher —</option>${P.map((m) => `<option ${m.nome === v ? 'selected' : ''}>${e(m.nome)}</option>`).join('')}</select><small>${e(sug && v === sug.nome ? 'por regra: ' + sug.por : v ? 'escolha manual' : 'nenhuma regra casa')}</small>`; };
+    const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && ((!p.servidor && vD(p)) || (!p.corretor && vC(p)))).length;
+    return `<section class="cwe-st"><h2>3 · Preparar · B · Designação e correção</h2>${tabs}
+      <p>Regras de designação do gabinete${Z.escopo === 'sessao' ? ', com o ajuste desta sessão' : ''}, na ordem cadastrada. Só se preenche quem está sem minutante ou sem corretor. Onde nenhuma regra casa, o campo fica em branco para escolha.</p>
+      <div class="cwe-kpis cwe-k4">${kpi(Ls.length, 'Processos na pauta', `${Ls.filter((p) => p.servidor).length} com minutante · ${Ls.filter((p) => p.corretor).length} com corretor`)}${kpi(`${porRegD} · ${porRegC}`, 'Preenchidos por regra', 'minutantes · corretores')}${kpi(`${brD} · ${brC}`, 'Sem regra que case', 'minutantes · corretores, a escolher', brD + brC ? 'a' : '')}${kpi(aus.length, 'Ausências no período', aus.length ? aus.join(', ') : `nenhuma cadastrada entre ${A.br(Z.periodo.de).slice(0, 5)} e ${A.br(Z.periodo.ate).slice(0, 5)}`)}</div>
+      <div class="cwe-2eq"><section class="cwe-box"><div class="h"><span><span class="cwe-k">REGRAS DE DESIGNAÇÃO · NESTA ORDEM</span><button type="button" class="cwe-lnk" data-cwe="cfg-3">Editar regras</button></span></div>
+          ${Z.criterios.map((k, i) => `<div class="cr ${k.d || k.c ? '' : 'off'}"><b>${i + 1}</b><span><b>${e(k.t)}</b></span><span>${e([k.d ? 'minuta' : '', k.c ? 'correção' : ''].filter(Boolean).join(' · ') || 'desligada')}</span></div>`).join('')}
+          <p>A primeira regra que casa decide, separadamente para minuta e para correção. Ausência cadastrada tira a pessoa do período.${Z.equilibrar ? ' Equilibrar a carga · ligado.' : ''}</p></section>
+        <section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
+          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
+      <section class="cwe-carga">${quadro('MINUTA · EQUIPE', Z.minutantes, 'd')}${quadro('CORREÇÃO · ASSESSORIA', Z.corretores, 'c')}</section>
+      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a preencher</b> · o que veio por regra pode ser trocado; o que está em branco espera escolha</span><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="4">Próximo: publicar a pauta →</button></div>
+        ${vis.map((p) => { const dg = A.digits(p.cnj); return `<article class="cwe-pc"><div class="t">${ck('dsg', dg)}<span class="it">item ${e(p.item || '—')}</span><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(p.cnj))}</button><span class="as">${e(p.assunto || '—')} · ${e(p.recurso || p.classe || '')} · ${e(p.secao || '')}</span><span class="ct">${e(AP_T[p.tipo] || p.tipo || '1º julgamento')}</span></div>
+          <div class="ds"><div><span>MINUTANTE</span>${sel('d', p)}</div><div><span>CORRETOR</span>${sel('c', p)}</div></div></article>`; }).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}
+        <div class="cwe-mostra"><span>mostrando ${vis.length} de ${L.length}</span>${L.length > vis.length ? `<button type="button" data-cwe="des-mais">Mostrar mais 50</button><button type="button" data-cwe="des-todos">Mostrar todos</button>` : ''}</div></div></section>`;
+  }
+
+  function etapa4(ss, d) {
+    const semDes = d.lines.filter((x) => !x.servidor || !x.corretor);
+    const LST = {
+      fora: d.lines.filter((x) => !d.acv(x.cnj)),
+      ass: d.lines.filter((x) => { const r = d.acv(x.cnj); if (!r) return false; const a1 = A.norm((d.raw.get(A.digits(x.cnj)) || {}).assunto || ''), a2 = A.norm(r.Assunto || r.assunto_judicial || ''); return a1 && a2 && a1 !== a2; }),
+      tar: d.lines.filter((x) => { const r = d.acv(x.cnj); return r && !/^\[Sessão\]/.test(r.tarefa_atual || ''); }),
+      des: semDes
+    };
+    const cf = [['', d.itens.length, 'itens no espelho', 'pauta oficial importada', ''], ['fora', d.foraAc, 'fora do acervo fonte', 'sem registro no acervo', d.foraAc ? 'r' : 'g'], ['ass', d.assDiv, 'assuntos divergentes', 'pauta × acervo fonte', d.assDiv ? 'a' : 'g'], ['tar', d.foraTar, 'fora de tarefa de sessão', 'tarefa atual sem [Sessão]', d.foraTar ? 'a' : 'g'], ['des', semDes.length, 'sem designação', 'minutante ou corretor', semDes.length ? 'a' : 'g']];
+    const ab = est.cf && LST[est.cf] ? LST[est.cf] : null;
+    const pub = ss.publicada ? (ss.pronta || 'sim') : '';
+    return `<section class="cwe-st"><h2>4 · Publicar a pauta e acompanhar</h2>
+      <p>A pauta vai à equipe depois de uma conferência rápida. Os marcos seguem por conta própria, no quadro acima da esteira.</p>
+      ${d.pauta ? `<div class="cwe-final"><div class="h"><span class="cwe-k">CONFERÊNCIA FINAL · ANTES DE PUBLICAR</span><small>espelho da pauta × acervo fonte</small></div>
+        <div class="g">${cf.map(([k, n, t, s, c]) => k ? `<button type="button" class="${c} ${est.cf === k ? 'on' : ''}" data-cwe="cf" data-v="${k}" ${n ? '' : 'disabled'}><b>${n}</b>${e(t)}<small>${e(s)}</small></button>` : `<span><b>${n}</b>${e(t)}<small>${e(s)}</small></span>`).join('')}</div>
+        ${ab ? `<div class="cwe-cfl"><div>${ab.slice(0, 80).map((x) => `<button type="button" class="cwe-lnk cwe-mono" data-cwt="ficha" data-p="${e(A.digits(x.cnj))}">${e(A.cnj(x.cnj))}</button>`).join('')}${ab.length > 80 ? ` <small>e mais ${ab.length - 80}</small>` : ''}</div></div>` : '<p class="pe">Cada número abre a lista dos processos. O que ficar pendente vai como alerta no card do processo.</p>'}</div>` : '<p class="cwe-nota">Sem pauta oficial ainda: a conferência final começa depois do PDF.</p>'}
+      <div class="cwe-acoes linha">${pub ? `<span class="cwe-ok">Publicada à equipe${pub !== 'sim' ? ' em ' + e(A.br(pub)) : ''} · aparece na Ex Officio</span><button type="button" data-cwe="despublicar">Retirar a publicação</button>` : `<button type="button" class="pri" data-cwe="publicar" ${d.pauta && !d.realizada ? '' : 'disabled'}>Publicar à equipe</button>`}<button type="button" data-cwe="x-xlsx">Controle da pauta · Excel do bimestre</button><button type="button" data-cwt="open-pos">Abrir a pauta oficial</button><small>painel, app da equipe e planilha de controle</small></div>
+      <div class="cwe-vinc"><div class="h"><span class="cwe-k">VÍNCULO DA PAUTA DE ${e(A.br(ss.data))}</span><small>os três devem ter os mesmos itens, designações e situações</small></div>
+        <div class="g"><div><span class="cwe-k">PAINEL · PAUTAS</span><b>Esta página</b><small>fonte da pauta</small></div><div><span class="cwe-k">APP DA EQUIPE</span><b>Ex Officio</b><small>${pub ? 'publicada · lê o procs-muta' : 'ainda não publicada'}</small></div><div><span class="cwe-k">PLANILHA · CONTROLE DE PAUTA</span><b>Excel do bimestre</b><small>sai pelo botão Controle da pauta</small></div></div></div>
+      ${d.pauta ? listagem(d, 'Listagem da pauta') : ''}</section>`;
+  }
+
+  function etapa5(ss, d) {
+    if (!d.pauta) return `<section class="cwe-st"><h2>5 · Painel da sessão</h2><p class="cwe-nota">O painel da sessão aparece depois da pauta oficial. A sessão de ${e(A.br(ss.data))} ainda não tem pauta.</p></section>`;
+    const L = d.lines, N = L.length || 1, P = d.plan;
+    const kp = [[L.length, 'itens'], [d.metas, 'com meta CNJ'], [d.tipos.AgInt, 'agravos internos'], [d.tipos.ED, 'embargos'], [d.tipos.JR, 'retratação'], [d.tipos.ret, 'retirados e adiados'], [d.info.unassigned, 'sem minutante'], [d.info.unrevised, 'sem corretor'], [L.filter((x) => x.dataMinuta).length, 'minutadas'], [L.filter((x) => x.dataCorrecao).length, 'corrigidas'], [d.info.released, 'liberadas'], [d.foraAc, 'fora do acervo']];
+    const B = [['APRECIAÇÃO', conta(P, (p) => p['Apreciação'])], ['CLASSE', conta(L, (x) => x.recurso || x.classe)], ['META', conta(P, (p) => p.Meta || 'sem meta')], ['MINUTANTE', conta(L, (x) => x.servidor || 'sem minutante')], ['CORRETOR', conta(L, (x) => x.corretor || 'sem corretor')], ['ASSUNTO · 10 MAIS', conta(L, (x) => x.assunto, 10)], ['SEÇÃO', conta(L, (x) => x.secao)], ['TAREFA NO PJe', conta(L, (x) => x.tarefa || 'sem tarefa', 7)], ['ETAPA', conta(L, situacao)], ['PENDÊNCIAS DA FICHA', conta(P.flatMap((p) => (p['Pendências'] || '').split(' · ').filter(Boolean)).map((t) => ({ t })), (o) => o.t)], ['INTERVENÇÃO DO MPF', conta(P, (p) => p['Intervenção MPF'] || 'sem hipótese marcada')], ['TEMPESTIVIDADE', conta(P, (p) => p.Tempestividade)]];
+    return `<section class="cwe-st"><h2>5 · Painel da sessão</h2><p>Todas as estatísticas da sessão num lugar só. O painel inteiro sai em .csv pelo Exportar.</p>
+      <div class="cwe-kpis grande">${kp.map(([n, t]) => `<span><b>${n}</b>${t}</span>`).join('')}</div>
+      <div class="cwe-blocos">${B.map(([t, rows]) => { const mx = rows.length ? Math.max(...rows.map((r) => r[1])) : 1; return `<div class="cwe-bloco"><p>${t}</p>${rows.length ? rows.map(([k, n]) => `<span class="r"><span class="t" title="${e(k)}">${e(k)}<i><i style="width:${Math.max(3, Math.round(100 * n / mx))}%"></i></i></span><b>${n}</b><small>${pct(n, N)}</small></span>`).join('') : '<small class="cwe-vazio">sem dados</small>'}</div>`; }).join('')}</div></section>`;
+  }
+
+  /* ---------- configurações ---------- */
+  function config(ss, d) {
+    const S = d.s?.estado?.() || {}; const eq = S.equipe || [];
+    const f = ss.fases || {}; const dias = (a, b) => (a && b) ? Math.round((new Date(b) - new Date(a)) / 864e5) : null;
+    const desig = (() => { try { return d.s?.regrasDesignacaoSessao?.(ss.id) || null; } catch (er) { return null; } })();
+    const crit = Array.isArray(desig?.ordem) ? desig.ordem : Array.isArray(desig) ? desig.map((x) => x.id || x.nome || x) : [];
+    const T = [
+      ['Regras dos marcos', `<p>Nenhuma data fica fixa: cada marco segue uma regra em dias úteis, contada da sessão ou do peço dia. A sessão pode ajustar a própria data sem mudar a regra.</p><div class="cwe-cfg-l">${[['Peço dia', 'calendário do tribunal', f.pauta ? 'nesta sessão: ' + A.br(f.pauta) : ''], ['Início da preparação', '[definir] dias úteis depois do peço dia', dias(f.inicio, ss.data) != null ? 'nesta sessão: ' + dias(f.inicio, ss.data) + ' dias corridos antes da sessão' : ''], ['Entrega das minutas', '[definir] dias úteis antes da sessão', dias(f.minutas, ss.data) != null ? 'nesta sessão: ' + dias(f.minutas, ss.data) + ' dias corridos' : ''], ['Liberação', '[definir] dias úteis antes da sessão', dias(f.liberacao, ss.data) != null ? 'nesta sessão: ' + dias(f.liberacao, ss.data) + ' dias corridos' : '']].map(([a, b, c]) => `<span><b>${e(a)}</b>${e(b)}<small>${e(c)}</small></span>`).join('')}</div><button type="button" data-cwe="m-ed-cfg">Editar os marcos desta sessão</button>`],
+      ['Designação nesta sessão', `<p>Critérios tentados em ordem até um deles indicar alguém. Cada critério vale para a minuta (equipe), a correção (assessoria) ou as duas. A sessão pode ter ajuste próprio, gravado no JSON da sessão.</p>${crit.length ? `<ol class="cwe-cfg-o">${crit.map((c) => `<li>${e(typeof c === 'string' ? c : JSON.stringify(c))}</li>`).join('')}</ol>` : ''}`],
+      ['Regras gerais', '<p>Escopo da triagem, acervo fonte, calendário forense, etiquetas, designação geral, produtividade, sessão nova e equipe ficam no diálogo comum de regras gerais, o mesmo da Triagem.</p><button type="button" data-cwe="rg">Abrir as regras gerais</button>']
+    ];
+    const t = Math.min(est.cfgTab, T.length - 1);
+    return `<div class="cwe-cfg-bg" data-cwe="cfg-x"></div><section class="cwe-cfg" role="dialog" aria-label="Configurações desta sessão"><nav>${T.map(([n], k) => `<button type="button" data-cwe="cfg-${k}" aria-current="${k === t}">${e(n)}</button>`).join('')}</nav>
+      <div class="cwe-cfg-b"><div class="cwe-cfg-h"><span class="cwe-k">CONFIGURAÇÕES DESTA SESSÃO</span><button type="button" data-cwe="cfg-x" aria-label="Fechar">×</button></div><h3>${e(T[t][0])}</h3>${T[t][1]}</div></section>`;
+  }
+
+  /* ---------- exportações ---------- */
+  function baixar(nome, texto, tipo) { const a = D.createElement('a'); const u = URL.createObjectURL(new Blob([texto], { type: tipo })); a.href = u; a.download = nome; D.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(u); a.remove(); }, 800); }
+  function simplificada(ss, d) {
+    const linhas = d.lines.map((x) => { const it = d.raw.get(A.digits(x.cnj)) || {}; return `<tr><td>${e(x.item || '')}</td><td>${e(A.cnj(x.cnj))}</td><td>${e(x.classe || '')}</td><td>${e(it.partes || '')}</td><td>${e(x.assunto || '')}</td></tr>`; }).join('');
+    return `<html><head><meta charset="utf-8"><title>Pauta ${e(A.br(ss.data))}</title><style>body{font:11pt Arial,sans-serif}h1{font-size:14pt}table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:3px 5px;font-size:9.5pt;text-align:left;vertical-align:top}</style></head><body><h1>Pauta da sessão de ${e(A.br(ss.data))}${ss.hora ? ' · ' + e(ss.hora) : ''}</h1><p>${e((d.s?.estado?.() || {}).gab || '')} · ${d.lines.length} processos</p><table><thead><tr><th>Item</th><th>Processo</th><th>Classe</th><th>Partes</th><th>Assunto</th></tr></thead><tbody>${linhas}</tbody></table></body></html>`;
+  }
+  function exportar(k, ss, d) {
+    const nome = 'Pauta_' + A.br(ss.data).replace(/\//g, '-');
+    if (k === 'xlsx') { if (!d.pauta) return A.msg('A planilha de controle sai da pauta oficial.', true); if (!d.s?.exportarXlsx?.(ss.id)) A.msg('Exportação indisponível no motor.', true); return; }
+    if (k === 'txt') return baixar(nome + '.txt', d.lines.map((x) => A.cnj(x.cnj)).join('\r\n'), 'text/plain;charset=utf-8');
+    if (k === 'doc') return baixar(nome + '_simplificada.doc', simplificada(ss, d), 'application/msword');
+    if (k === 'pdf') { const w = W.open('', '_blank'); if (!w) return A.msg('O navegador bloqueou a janela de impressão.', true); w.document.write(simplificada(ss, d)); w.document.close(); w.focus(); setTimeout(() => w.print(), 300); return; }
+    if (k === 'copiar') { const t = d.lines.map((x) => A.cnj(x.cnj)).join('\n'); (navigator.clipboard?.writeText(t) || Promise.reject()).then(() => A.msg(d.lines.length + ' números copiados.')).catch(() => A.msg('Não foi possível copiar.', true)); return; }
+    if (k === 'csv') {
+      const P = d.plan, L = d.lines; const linhas = [['bloco', 'valor', 'quantidade']];
+      [['situação', conta(L, situacao)], ['minutante', conta(L, (x) => x.servidor || 'sem minutante')], ['corretor', conta(L, (x) => x.corretor || 'sem corretor')], ['assunto', conta(L, (x) => x.assunto)], ['seção', conta(L, (x) => x.secao)], ['tarefa', conta(L, (x) => x.tarefa || 'sem tarefa')], ['apreciação', conta(P, (p) => p['Apreciação'])], ['meta', conta(P, (p) => p.Meta || 'sem meta')]].forEach(([b, rows]) => rows.forEach(([v, n]) => linhas.push([b, v, n])));
+      return baixar(nome + '_estatisticas.csv', '﻿' + linhas.map((r) => r.map((c) => '"' + String(c).replace(/"/g, '""') + '"').join(';')).join('\r\n'), 'text/csv;charset=utf-8');
+    }
+  }
+
+  /* ---------- ações que gravam (sempre com confirmação) ---------- */
+  const marcados = (k, lista) => lista.filter((dg) => marcado(k, dg));
+  function mover(ss, cnjs, dest, txt) {
+    const s = A.getSes(); if (!s?.moverPrevia) { A.msg('Motor indisponível.', true); return; }
+    if (!cnjs.length) { A.msg('Nenhum processo marcado.', true); return; }
+    if (!W.confirm(txt + '\n\n' + cnjs.length + ' processo(s). A Triagem grava no procs-muta como o botão Gravar triagem.')) return;
+    const r = s.moverPrevia(ss.id, cnjs, dest);
+    if (r.erro) { A.msg(r.erro, true); return; }
+    A.msg(r.n ? r.n + ' processo(s) atualizados na Triagem.' : 'Nenhuma marca de seleção prévia encontrada na Triagem para esses processos.', !r.n);
+    Promise.resolve(r.gravando).then((g) => { if (g && g.mud) A.msg('Triagem gravada no procs-muta: ' + g.mud + ' processo(s).'); }).catch((er) => A.msg('Falha ao gravar a triagem: ' + (er?.message || er), true)).then(() => A.render());
+  }
+  function acao(k, b, ss) {
+    const d = dados(ss), s = d.s;
+    if (k === 'fechar-sel') { const t = d.lines.map((x) => A.cnj(x.cnj)).join('\n'); (navigator.clipboard?.writeText(t) || Promise.reject()).then(() => A.msg(d.lines.length + ' números copiados para o registro no PJe. A seleção segue editável na Triagem até o PDF da pauta.')).catch(() => A.msg('Não foi possível copiar.', true)); return true; }
+    if (k === 'venc-passar' || k === 'venc-devolver') { const v = vencidas().find((x) => x.id === b.dataset.v); if (!v) return true;
+      mover({ id: '*' }, v.cnjs, k === 'venc-passar' ? ss.id : null, k === 'venc-passar' ? 'Passar para a sessão de ' + A.br(ss.data) + ' os processos marcados para ' + A.br(v.data) + '?' : 'Devolver à Triagem (tirar a marca de seleção prévia) os processos marcados para ' + A.br(v.data) + '?'); return true; }
+    if (k === 'c2-passar') { const p = A.sessionData().find((x) => x.id === b.dataset.v); mover(ss, marcados('c2fora', d.conf.fora), b.dataset.v, 'Passar os que ficaram de fora para a seleção prévia da sessão de ' + (p ? A.br(p.data) : '') + '?'); return true; }
+    if (k === 'c2-devolver') { mover(ss, marcados('c2fora', d.conf.fora), null, 'Devolver à Triagem os que ficaram de fora (tirar a marca de seleção prévia)?'); return true; }
+    if (k === 'c2-confirmar') {
+      if (!s?.confirmarPauta) { A.msg('Motor indisponível.', true); return true; }
+      const bt = marcados('c2batem', d.conf.batem);
+      if (!W.confirm('Confirmar a pauta oficial de ' + A.br(ss.data) + '?\n\n' + d.itens.length + ' itens do PDF.' + (bt.length ? ' ' + bt.length + ' processo(s) da seleção prévia passam a pautados na Triagem.' : ''))) return true;
+      s.confirmarPauta(ss.id);
+      if (bt.length && s.moverPrevia) { const r = s.moverPrevia(ss.id, bt, 'pautar'); Promise.resolve(r.gravando).catch((er) => A.msg('Falha ao gravar a triagem: ' + (er?.message || er), true)).then(() => A.render()); }
+      A.msg('Pauta oficial conferida.'); A.render(); return true; }
+    if (k === 'etq-aplicar') { if (!s?.aplicarConversoes) { A.msg('Motor indisponível.', true); return true; }
+      const L = convDados(ss, d).filter((p) => p.proposta?.dif.length && marcado('etq', A.digits(p.cnj))).map((p) => p.cnj);
+      if (!L.length || !W.confirm('Aplicar as conversões de etiquetas a ' + L.length + ' processo(s)?\n\nFixa apreciação, meta e MPF que vieram das regras. O que foi fixado à mão não muda.')) return true;
+      const n = s.aplicarConversoes(ss.id, L); A.msg(n + ' processo(s) com as conversões aplicadas. Gravação automática no procs-muta em instantes.'); A.render(); return true; }
+    if (k === 'des-aplicar') { if (!s?.aplicarDesignacao || !s.designacao) { A.msg('Motor indisponível.', true); return true; }
+      const Z = s.designacao(ss.id); const lista = Z.linhas.filter((p) => marcado('dsg', A.digits(p.cnj))).map((p) => { const o = est.dsg[A.digits(p.cnj)] || {}; const dd = p.servidor ? '' : (o.d ?? p.sugD?.nome ?? ''), cc = p.corretor ? '' : (o.c ?? p.sugC?.nome ?? '');
+        return { cnj: p.cnj, d: dd, c: cc, porD: o.d != null && o.d !== p.sugD?.nome ? 'escolha manual' : p.sugD?.por, porC: o.c != null && o.c !== p.sugC?.nome ? 'escolha manual' : p.sugC?.por }; }).filter((x) => x.d || x.c);
+      if (!lista.length || !W.confirm('Aplicar a designação a ' + lista.length + ' processo(s) da pauta?\n\nSó preenche quem está sem minutante ou sem corretor.')) return true;
+      const n = s.aplicarDesignacao(ss.id, lista); est.dsg = {}; A.msg(n + ' processo(s) designados. Gravação automática no procs-muta em instantes.'); A.render(); return true; }
+    if (k === 'm-pub') { if (!s?.publicarMarcos) { A.msg('Motor indisponível.', true); return true; }
+      const on = !(ss.marcosPub || ss.publicada);
+      if (!on && ss.publicada && !W.confirm('Retirar os marcos da Ex Officio retira também a listagem da pauta publicada. Continuar?')) return true;
+      s.publicarMarcos(ss.id, on); A.render(); setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 400);
+      A.msg(on ? 'Marcos publicados à equipe. Gravando no procs-muta…' : 'Marcos retirados da equipe.'); return true; }
+    if (k === 'publicar' || k === 'despublicar') { if (!s?.publicar) { A.msg('Motor indisponível.', true); return true; }
+      const on = k === 'publicar';
+      if (!W.confirm(on ? 'Publicar a pauta de ' + A.br(ss.data) + ' à equipe?\n\nGrava a sessão no procs-muta; a Ex Officio passa a mostrá-la como publicada.' : 'Retirar a publicação da pauta de ' + A.br(ss.data) + '?')) return true;
+      s.publicar(ss.id, on); A.render(); setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 400);
+      A.msg(on ? 'Pauta publicada. Gravando no procs-muta…' : 'Publicação retirada.'); return true; }
+    return false;
+  }
+
+  /* ---------- eventos ---------- */
+  function ligar(view) {
+    if (ligado === view) return; ligado = view;
+    view.addEventListener('click', (ev) => {
+      const b = ev.target.closest?.('[data-cwe]'); if (!b || !A) return;
+      const k = b.dataset.cwe, ss = A.selectedSession(); if (!ss) return;
+      if (ev.target.closest('[data-cwt]') && k === 'sel') return;
+      ev.preventDefault();
+      if (k === 'etapa') { const n = +b.dataset.n; if (b.getAttribute('aria-disabled') === 'true') return; est.etapa = n; est.exp = false; }
+      else if (k === 'prep') { est.prep = +b.dataset.n; est.etapa = 3; }
+      else if (k === 'exp') est.exp = !est.exp;
+      else if (k === 'arq') est.arq = !est.arq;
+      else if (k.startsWith('x-')) { est.exp = false; exportar(k.slice(2), ss, dados(ss)); }
+      else if (k === 'cfg') { est.cfg = true; est.exp = false; }
+      else if (k === 'cfg-x') est.cfg = false;
+      else if (k === 'rg') { est.cfg = false; if (window.__abrirRegras) window.__abrirRegras(); }
+      else if (k.startsWith('cfg-')) { est.cfg = true; est.cfgTab = +k.slice(4); }
+      else if (k === 'filtro') { est.filtro = b.dataset.v; est.take = 60; }
+      else if (k === 'mais') est.take += 80;
+      else if (k === 'sel') est.sel = est.sel === b.dataset.p ? '' : b.dataset.p;
+      else if (k === 'prt-x') est.sel = '';
+      else if (k === 'prt-prev' || k === 'prt-next') { const l = filtrar(dados(ss).lines).map((x) => A.digits(x.cnj)); const i = l.indexOf(est.sel); if (l.length) est.sel = l[(i + (k === 'prt-next' ? 1 : -1) + l.length) % l.length]; }
+      else if (k === 'c2-mais') est.c2[b.dataset.v] = !est.c2[b.dataset.v];
+      else if (k === 'etq-f') { est.etqF = b.dataset.v; est.etqTake = 50; }
+      else if (k === 'etq-mais') est.etqTake += 50;
+      else if (k === 'etq-todos') est.etqTake = 1e5;
+      else if (k === 'conv-ab') est.convAb = !est.convAb;
+      else if (k === 'conv-g') { const v = b.dataset.v; if (est.convG.has(v)) est.convG.delete(v); else est.convG.add(v); }
+      else if (k === 'conv-todos') { const ks = [...view.querySelectorAll('[data-cwe="conv-g"]')].map((x) => x.dataset.v); est.convG = ks.every((x) => est.convG.has(x)) ? new Set() : new Set(ks); }
+      else if (k === 'des-f') { est.desF = b.dataset.v; est.desTake = 50; }
+      else if (k === 'des-mais') est.desTake += 50;
+      else if (k === 'des-todos') est.desTake = 1e5;
+      else if (k === 'cf') est.cf = est.cf === b.dataset.v ? '' : b.dataset.v;
+      else if (k === 'm-ed') est.mEd = !est.mEd;
+      else if (k === 'nr') est.nr = est.nr?.t === b.dataset.t && est.nr.v === b.dataset.v ? null : { t: b.dataset.t, v: b.dataset.v };
+      else if (k === 'nr-x') est.nr = null;
+      else if (k === 'nr-salvar') { const f = b.closest('.cwe-nr'), s = A.getSes(); if (!f || !est.nr || !s) return;
+        let ok = false;
+        if (f.dataset.nr === 'etq') { const ef = f.querySelector('[data-nr-ef]').value, v = f.querySelector('[data-nr-v]').value; ok = !!s.criarRegraEtiqueta?.(est.nr.v, ef, v); if (!ok) { A.msg('Este efeito pede um valor (tema, especificidade, hipótese ou número da meta).', true); return; } }
+        else { const dd = f.querySelector('[data-nr-d]').value, cc = f.querySelector('[data-nr-c]').value; ok = !!s.regraAssunto?.(ss.id, est.nr.v, dd, cc); if (!ok) { A.msg('Escolha o minutante, o corretor ou os dois.', true); return; } }
+        est.nr = null; A.msg('Regra criada. A lista já reflete a regra; gravação automática no procs-muta em instantes.'); }
+      else if (acao(k, b, ss)) return;
+      else if (k === 'triagem') { W.location.href = '/init/'; return; }
+      else if (k === 'm-ed-cfg') { est.cfg = false; est.mEd = true; }
+      A.render();
+    });
+    view.addEventListener('change', (ev) => {
+      const t = ev.target;
+      if (t.dataset.cweCk) { const k = t.dataset.cweCk, dg = t.dataset.p, S0 = est.desm[k] || (est.desm[k] = new Set()); if (t.checked) S0.delete(dg); else S0.add(dg); A.render(); return; }
+      if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Gravação automática no procs-muta em instantes.'); } return; }
+      if (t.dataset.cweEq) { const s = A.getSes(); if (s?.equipeDefinir?.(t.dataset.cweEq, t.dataset.k, t.checked)) { A.msg('Equipe atualizada. Gravando no procs-muta…'); clearTimeout(ligar.tq); ligar.tq = setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 1200); A.render(); } return; }
+      if (t.dataset.cweEsc) { const dg = t.dataset.p; est.dsg[dg] = { ...(est.dsg[dg] || {}), [t.dataset.cweEsc]: t.value }; A.render(); }
+    });
+    /* PDF da pauta arrastado para o quadro da etapa 2 */
+    view.addEventListener('dragover', (ev) => { const z = ev.target.closest?.('.cwe-drop'); if (!z) return; ev.preventDefault(); z.classList.add('on'); });
+    view.addEventListener('dragleave', (ev) => { const z = ev.target.closest?.('.cwe-drop'); if (z && !z.contains(ev.relatedTarget)) z.classList.remove('on'); });
+    view.addEventListener('drop', (ev) => {
+      const z = ev.target.closest?.('.cwe-drop'); if (!z) return; ev.preventDefault(); z.classList.remove('on');
+      const f = [...(ev.dataTransfer?.files || [])].find((x) => /\.pdf$/i.test(x.name) || x.type === 'application/pdf');
+      if (!f) { A.msg('Arraste o PDF do resumo do espelho de pauta.', true); return; }
+      const inp = view.querySelector('#cwt-pdf-file'); if (!inp) return;
+      try { const dt = new DataTransfer(); dt.items.add(f); inp.files = dt.files; inp.dispatchEvent(new Event('change', { bubbles: true })); } catch (er) { A.msg('Não foi possível ler o arquivo arrastado; use o botão Importar PDF.', true); }
+    });
+    view.addEventListener('input', (ev) => {
+      if (ev.target.dataset.cweInput !== 'q') return;
+      est.q = ev.target.value; est.take = 60; const pos = ev.target.selectionStart; A.render();
+      const n = view.querySelector('[data-cwe-input="q"]'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (er) {} }
+    });
+    D.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && (est.cfg || est.exp)) { est.cfg = false; est.exp = false; A.render(); } });
+  }
+
+  function render(api) {
+    A = api; const view = api.view; ligar(view);
+    const ss = api.selectedSession();
+    if (!ss) { view.innerHTML = `<div class="cwe"><div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Nenhuma sessão cadastrada</h1><p>Cadastre a data do julgamento para começar a seleção prévia.</p></div><div class="cwe-tools"><button type="button" class="pri" data-cwt="create-session">Cadastrar sessão</button></div></div></div>`; return; }
+    if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
+    const d = dados(ss);
+    const corpo = [null, etapa1, etapa2, etapa3, etapa4, etapa5][d.cur](ss, d);
+    view.innerHTML = `<div class="cwe">${cabecalho(ss, d)}${marcos(ss)}<div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main">${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
+  }
+
+  W.CMTEsteira = { render, estado: () => ({ ...est }) };
+})(window, document);
+
+</script>
+<script>
+/* ===== Pautas: ligação com o motor (acervo, sessões, regras, equipe) e comandos da página ===== */
+(function (W, D) {
+  'use strict';
+  const $ = (s, r = D) => r.querySelector(s);
+  const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const digits = (v) => String(v || '').replace(/\D/g, '');
+  const cnj = (v) => { const x = digits(v); return x.length === 20 ? x.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : String(v || ''); };
+  const br = (iso) => /^\d{4}-\d{2}-\d{2}/.test(iso || '') ? iso.slice(8, 10) + '/' + iso.slice(5, 7) + '/' + iso.slice(0, 4) : String(iso || '');
+  const norm = (v) => String(v == null ? '' : v).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const view = $('#pt-view');
+  const settings = { sessId: (() => { try { return sessionStorage.getItem('pt-ses') || ''; } catch (e) { return ''; } })() };
+  const frame = D.getElementById('cmt-motor'); /* o mesmo motor da Triagem */
+  const getMotor = () => { try { return frame.contentWindow; } catch (e) { return null; } };
+  const getCore = () => getMotor()?.__painelCentralComponent || null;
+  const getSes = () => getMotor()?.CMTSessao || null;
+  function msg(t, bad) { if (!t) return; const b = $('#cwt-toast'); b.textContent = t; b.classList.toggle('bad', !!bad); b.hidden = false; clearTimeout(msg.t); msg.t = setTimeout(() => { b.hidden = true; }, 5500); }
+  function sessionData() { return (getSes()?.estado()?.sessoes || []).slice().sort((a, b) => (a.data || '').localeCompare(b.data || '')); }
+  function selectedSession() { const L = sessionData(); if (!L.length) return null; const c = L.find((x) => x.id === settings.sessId); if (c) return c; const h = new Date().toISOString().slice(0, 10); return L.find((x) => x.data >= h) || L[L.length - 1]; }
+  function sesInfo(ss) { const s = getSes(); const of = (ss.itens || []).length > 0; let lines = []; try { lines = s?.linhas?.(ss.id, of ? 'pos' : 'pre') || []; } catch (e) { console.warn('[Pautas] sessão', e); } return { lines, total: lines.length, isOfficial: of }; }
+  let pronto = false;
+  function render() {
+    if (!pronto) return;
+    const ss = selectedSession(); settings.sessId = ss?.id || ''; try { sessionStorage.setItem('pt-ses', settings.sessId); } catch (e) {}
+    W.CMTEsteira.render(api);
+  }
+  function abrirFicha(p) { if (digits(p).length !== 20) return msg('Número CNJ inválido para abrir a ficha.', true); try { const ss = selectedSession(); W.CMTProntuario.abrir(p, ss ? sesInfo(ss).lines.map((x) => digits(x.cnj)) : []); } catch (e) { msg('Falha ao abrir a ficha: ' + e.message, true); } }
+  const api = { view, settings, getMotor, getCore, getSes, sessionData, selectedSession, sesInfo, openFicha: abrirFicha, msg, render, esc, br, cnj, digits, norm };
+  W.CMTPautas = api;
+  /* comandos de página (data-cwt), sessão (data-cwt-ses) e importação do PDF da pauta */
+  view.addEventListener('click', (ev) => {
+    const b = ev.target.closest?.('[data-cwt],[data-cwt-ses]'); if (!b) return;
+    if (b.dataset.cwtSes) { ev.preventDefault(); settings.sessId = b.dataset.cwtSes; render(); if (scrollY > 240) scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    const k = b.dataset.cwt; ev.preventDefault();
+    if (k === 'ficha') abrirFicha(b.dataset.p);
+    else if (k === 'import-pdf') $('#cwt-pdf-file', view)?.click();
+    else if (k === 'create-session') { const d = W.prompt('Data do julgamento (AAAA-MM-DD):', new Date().toISOString().slice(0, 10)); if (d === null) return; const s = getSes(); if (!s?.novaSessao) return msg('Serviço de sessões indisponível.', true); const r = s.novaSessao(d.trim()); if (r.erro) return msg(r.erro, true); settings.sessId = r.id; render(); msg('Sessão cadastrada. Configure os marcos antes de importar a pauta.'); }
+  });
+  view.addEventListener('change', (ev) => {
+    if (ev.target.id !== 'cwt-pdf-file' || !ev.target.files?.length) return;
+    const f = ev.target.files[0], ss = selectedSession(), s = getSes(); ev.target.value = '';
+    if (!ss || !s?.importar) return msg('Selecione uma sessão existente antes de importar.', true);
+    msg('Importando o resumo da pauta…');
+    Promise.resolve(s.importar(f, ss.id)).then((r) => {
+      if (r && r.ok) { if (r.id) settings.sessId = r.id; render(); msg(r.n + ' processos importados na sessão de ' + br(r.data) + (r.fora ? ' · ' + r.fora + ' fora do acervo' : '') + '.'); }
+      else { render(); msg((r && r.erro) || 'O PDF não trouxe itens da pauta.', !(r && r.cancelado)); }
+    }).catch((e) => msg('Importação não concluída: ' + e.message, true));
+  });
+  /* ===== Gravação: automática alguns segundos depois de cada alteração; o botão grava na hora e mostra o estado ===== */
+  const G = { ultima: '', erro: '', desde: 0, tentativa: 0, prox: 0 };
+  async function gravarAgora(manual) {
+    const s = getSes(); if (!s?.gravar) { if (manual) msg('O motor ainda está carregando.', true); return; }
+    if (s.repoLido && !s.repoLido()) { if (manual) msg('Aguarde: o procs-muta ainda está sendo lido.', true); return; }
+    if (!(s.pendentes?.() || []).length) { if (manual) msg('Tudo gravado no procs-muta.'); pend(); return; }
+    G.gravando = true; pend();
+    let r; try { r = await s.gravar(); } catch (e) { r = { ok: false, erro: e.message }; }
+    G.gravando = false;
+    if (r && r.ok) { G.erro = ''; G.tentativa = 0; G.desde = 0; G.ultima = new Date().toTimeString().slice(0, 5); if (manual || !r.nada) msg('Gravado no procs-muta' + (r.partes && r.partes.length ? ': ' + r.partes.join(', ') : '') + '.'); }
+    else if (r && r.ocupado) { /* outra gravação em curso: tenta em seguida */ }
+    else { G.erro = (r && r.erro) || 'falha desconhecida'; G.tentativa++; G.prox = Date.now() + Math.min(120000, 10000 * G.tentativa); msg('Não gravou no procs-muta: ' + G.erro + '. As alterações seguem neste navegador; nova tentativa automática em instantes.', true); }
+    pend();
+  }
+  function pend() {
+    const s = getSes(), b = $('#pt-gravar'); if (!s?.pendentes || !b) return;
+    const n = s.pendentes().length;
+    b.classList.toggle('pend', !!n); b.classList.toggle('erro', !!(n && G.erro));
+    b.textContent = G.gravando || s.gravando?.() ? 'Gravando…' : n ? (G.erro ? 'Não gravado (' + n + ') · tentar' : 'Gravar (' + n + ')') : (G.ultima ? 'Gravado ' + G.ultima : 'Gravado');
+    b.title = n ? 'Há ' + n + ' parte(s) com alteração ainda não gravada no procs-muta' + (G.erro ? ' · último erro: ' + G.erro : ' · grava sozinho em instantes') : 'Tudo gravado no procs-muta';
+    /* gravação automática: 4 s depois da primeira alteração pendente (ou na hora da nova tentativa, após erro) */
+    if (n && !G.gravando && pronto) { if (!G.desde) G.desde = Date.now(); if (Date.now() - G.desde > 4000 && Date.now() >= G.prox) gravarAgora(false); }
+    if (!n) G.desde = 0;
+  }
+  api.gravarAgora = gravarAgora;
+  $('#pt-gravar').addEventListener('click', () => { G.prox = 0; gravarAgora(true); });
+  setInterval(pend, 1500);
+  /* fechar a aba com alteração não gravada pede confirmação do navegador */
+  W.addEventListener('beforeunload', (ev) => { const s = getSes(); if (s?.pendentes && s.pendentes().length) { ev.preventDefault(); ev.returnValue = ''; } });
+  /* sem alteração pendente, relê o procs-muta de tempos em tempos: o que a equipe gravou na Ex Officio aparece aqui */
+  setInterval(() => { const s = getSes(); if (!pronto || !s?.recarregar || G.gravando || (s.pendentes?.() || []).length || D.hidden) return; s.recarregar().then((ok) => { if (ok) render(); }).catch(() => {}); }, 120000);
+  function abrirRegras(aba) { if (!W.CMTRegrasGerais) return msg('As regras gerais ainda estão carregando.', true); W.CMTRegrasGerais.abrir({ motor: getMotor, pagina: 'pautas', aba: aba || 'equipe' }); }
+  W.__abrirRegras = abrirRegras;
+  $('#pt-regras').addEventListener('click', () => abrirRegras());
+  ($('#pt-tema') || { addEventListener() {} }).addEventListener('click', () => { const dk = D.documentElement.getAttribute('data-theme') === 'dark'; if (dk) D.documentElement.removeAttribute('data-theme'); else D.documentElement.setAttribute('data-theme', 'dark'); try { localStorage.setItem('cmt-theme', dk ? 'light' : 'dark'); } catch (e) {} });
+  /* pedido de token do GitHub (aparece dentro do motor): enquanto aberto, o motor fica à vista */
+  /* o pedido de token é mostrado pela Triagem (body.tk) */
+  /* espera o motor carregar o acervo e as sessões */
+  let n = 0; const t = setInterval(() => {
+    const w = getMotor();
+    if (w && w.__painelCentralComponent && w.CMTSessao && w.CMTSessao.estado) { clearInterval(t); pronto = true; render(); return; }
+    if (++n === 240) { clearInterval(t); $('#pt-carga').innerHTML = '<b>O motor de dados não carregou.</b><span>Recarregue a página. Se persistir, abra a Triagem e confira a conexão com o procs-muta.</span>'; }
+  }, 250);
+  /* o motor avisa mudanças (gravação, importação): a página redesenha */
+  setInterval(() => { if (!pronto || D.body.classList.contains('cmt-ficha-on')) return; const s = getSes(); const sig = JSON.stringify((s?.estado()?.sessoes || []).map((x) => [x.id, (x.itens || []).length, (x.previa || []).length, x.publicada || ''])); if (sig !== render.sig) { render.sig = sig; if (!D.activeElement?.closest?.('#pt-view input,#pt-view select,#pt-view textarea')) render(); } }, 1500);
+})(window, document);
 </script>
 </body>
 </html>
