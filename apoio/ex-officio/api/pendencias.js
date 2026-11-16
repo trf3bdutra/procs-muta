@@ -88,6 +88,7 @@ function limpar(b, t) {
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
+  if (req.query && req.query.com) return require('./_comunicar')(req, res, u);
   try {
     if (req.method === 'GET') { const { dados } = await ler(); return res.status(200).json({ tasks: (dados.registros || []).filter(t => !t.excluida), equipe: L.equipe() }); }
     /* acerto dos cartões automáticos com as origens: cria o que falta, atualiza o texto, conclui o que a origem já resolveu */
