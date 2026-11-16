@@ -251,3 +251,5 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
 .cwe-nr select,.cwe-nr input{height:30px;border:1px solid var(--b2);border-radius:6px;background:var(--w);font:inherit;padding:0 6px;color:var(--tx)}
 .cwe-nr>small{color:var(--m2);font-size:11px}
 .cwe-marcos input[type="date"]{background:var(--w);border:1px solid var(--g3)}
+
+.cwe-drop.on{outline:2px dashed #235a55;outline-offset:3px;background:#eef5f1}

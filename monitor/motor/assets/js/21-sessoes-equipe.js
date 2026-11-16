@@ -1569,11 +1569,11 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       if (/\.pdf$/i.test(nome)) { toast('Lendo o PDF…'); texto = await textoDoPdf(file); p = lerPauta(texto); }
       else { texto = await file.text(); if (/^\s*\{/.test(texto)) { var j = JSON.parse(texto); p = { data: isoDeBr(j.data) || j.data || '', hora: j.hora || '', numero: '', itens: (j.itens || []).map(function (x) { return { item: String(x.item || ''), cnj: x.cnj, assunto: x.assunto || '', classe: x.classe || '', relator: x.relator || '', partes: x.partes || '' }; }) }; } else p = lerPauta(texto); }
       var gab = N(S.gab || ''), meus = p.itens.filter(function (x) { return !gab || !x.relator || N(x.relator).indexOf(gab) >= 0; });
-      if (!meus.length) { toast('Não encontrei processos do ' + (S.gab || 'gabinete') + ' nesse arquivo.'); return; }
+      if (!meus.length) { var em = 'Não encontrei processos do ' + (S.gab || 'gabinete') + ' nesse arquivo.'; toast(em); return { ok: false, erro: em }; }
       var alvo = UI.importarPara ? S.sessoes.find(function (x) { return x.id === UI.importarPara; }) : null; UI.importarPara = '';
-      if (alvo && p.data && alvo.data !== p.data && !W.confirm('A pauta é da sessão de ' + br(p.data) + ', e não de ' + br(alvo.data) + '. Importar na sessão de ' + br(p.data) + '?')) return;
+      if (alvo && p.data && alvo.data !== p.data && !W.confirm('A pauta é da sessão de ' + br(p.data) + ', e não de ' + br(alvo.data) + '. Importar na sessão de ' + br(p.data) + '?')) return { ok: false, cancelado: true, erro: 'Importação cancelada.' };
       var ss = S.sessoes.find(function (x) { return x.data && x.data === p.data; });
-      if (ss && ss.itens.length && !W.confirm('Já existe a sessão de ' + br(p.data) + '. Atualizar a lista de itens? As designações dos processos que continuam na pauta são mantidas.')) return;
+      if (ss && ss.itens.length && !W.confirm('Já existe a sessão de ' + br(p.data) + '. Atualizar a lista de itens? As designações dos processos que continuam na pauta são mantidas.')) return { ok: false, cancelado: true, erro: 'Importação cancelada.' };
       var antigos = new Map(((ss && ss.previa) || []).concat((ss && ss.itens) || []).map(function (i) { return [dig(i.cnj), i]; }));
       var itens = meus.map(function (x) { var o = antigos.get(dig(x.cnj)) || {}; return Object.assign({ servidor: '', corretor: '', obs: '', tipoManual: '' }, o, x); });
       var prevL = ((ss && ss.previa) || []).map(function (i) { return dig(i.cnj); }), pautL = itens.map(function (i) { return dig(i.cnj); });
@@ -1586,7 +1586,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       S.atual = ss.id; UI.versao = 'pos'; UI.f = ''; UI.q = ''; UI.fSec = ''; UI.fRamo = ''; HIST = null; salvar(); UI.aba = 'planilha'; render();
       var fora = itens.filter(function (it) { return !acervo().by.get(dig(it.cnj)); }).length;
       toast(itens.length + ' processos importados' + (fora ? ' · ' + fora + ' fora do acervo' : '') + '.');
-    } catch (e) { toast('Falha ao importar: ' + e.message); }
+      return { ok: true, id: ss.id, data: ss.data, n: itens.length, fora: fora };
+    } catch (e) { toast('Falha ao importar: ' + e.message); return { ok: false, erro: 'Falha ao importar: ' + e.message }; }
   }
   async function importarJson(file) {
     try {
@@ -1811,7 +1812,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     abrirSessao: function (id, versao) { var sx = S.sessoes.find(function (x) { return x.id === id; }); if (!sx) return false; S.atual = sx.id; UI.versao = versao === 'pre' && preAberta(sx) ? 'pre' : 'pos'; if (UI.versao === 'pre') sincronizarPrevia(sx); UI.f = ''; UI.q = ''; UI.fSec = ''; UI.fRamo = ''; salvar(); abrir('planilha'); return true; },
     versao: function () { return UI.versao === 'pre' ? 'pre' : 'pos'; },
     previa: function (id) { var sx = S.sessoes.find(function (x) { return x.id === id; }); return sx && preAberta(sx) ? linhasSelecao(sx).length || (sx.previa || []).length : 0; },
-    importar: function (file, id) { UI.importarPara = id || ''; abrir('sessoes'); return importarArquivo(file); },
+    importar: function (file, id) { UI.importarPara = id || ''; return importarArquivo(file); },
     aba: function () { return root && !root.hidden ? UI.aba : ''; },
     novaSessao: function (data) { if (!/^\d{4}-\d{2}-\d{2}$/.test(data || '')) return { erro: 'Informe a data do julgamento.' }; if (S.sessoes.some(function (x) { return x.data === data; })) return { erro: 'Já existe a sessão de ' + br(data) + '.' }; var ns = novaSessao(data); S.sessoes.push(ns); marcosParaPainel(ns); salvar(); if (root && !root.hidden) render(); return { id: ns.id }; },
     fase: function (id, k, v) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; sf.fases = sf.fases || {}; sf.fases[k] = v || ''; salvar(); marcosParaPainel(sf); if (root && !root.hidden) render(); return true; },
