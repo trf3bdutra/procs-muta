@@ -1856,7 +1856,10 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         if (o.d && !it.servidor) { it.servidor = o.d; it.porD = o.porD || 'esteira'; m = 1; } if (o.c && !it.corretor) { it.corretor = o.c; it.porC = o.porC || 'esteira'; m = 1; } n += m; });
       if (n) { HIST = null; salvar(); if (root && !root.hidden) render(); } return n; },
     confirmarPauta: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.conferencia = Object.assign({}, ss.conferencia || {}, { confirmada: hoje() }); salvar(); return true; },
-    publicar: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.pronta = on === false ? '' : hoje(); salvar(); if (root && !root.hidden) render(); return true; },
+    /* publicar a pauta à equipe (Ex Officio): libera a listagem e os marcos; retirar devolve só os marcos */
+    publicar: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.pronta = on === false ? '' : hoje(); ss.publicada = on !== false; if (ss.publicada) ss.marcosPub = true; salvar(); if (root && !root.hidden) render(); return true; },
+    /* publicar só os marcos da sessão (calendário e página inicial da Ex Officio); retirar os marcos retira também a listagem */
+    publicarMarcos: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return false; ss.marcosPub = on !== false; if (!ss.marcosPub) { ss.publicada = false; ss.pronta = ''; } salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */
     /* regras criadas pela esteira, sem sair da página Pautas */
     efeitosEtiqueta: function () { return Object.keys(EF).map(function (k) { return { k: k, t: EF[k].t, v: EF[k].v || '' }; }); },
