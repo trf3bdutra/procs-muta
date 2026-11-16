@@ -17,6 +17,7 @@
     var ed0=!!window.VDM_EDITOR;window.VDM_EDITOR=!!AC.editor||!!window.VDM_PAGINA_EDITOR;
     if(ed0!==window.VDM_EDITOR){try{var v=function(id){var x=q(id);return x&&!x.hidden;};if(v('#v-edit')&&typeof xRender==='function')xRender();}catch(x){}}
     if(av&&!AC.enc){AC.enc=1;api('/api/compendio').then(function(j){if(window.VDM_encDados)window.VDM_encDados(j.enciclopedia);}).catch(function(x){AC.enc=0;if(window.VDM_encDados)window.VDM_encDados(null,x.message);});}
+    var el=q('#ed-lnk');if(el)el.hidden=!(AC.editor&&!window.VDM_PAGINA_EDITOR);
     chip();if(window.VDM_marcaNav)window.VDM_marcaNav();}
   function chip(){var c=q('#ac-chip');if(!c)return;
     if(!SITE){c.innerHTML='<span class="ac-off" title="Aberto como arquivo: os perfis Avançado e Editor funcionam no site do gabinete, com login">perfil Equipe · arquivo local</span>';return;}
@@ -24,9 +25,7 @@
     if(!AC.usuario){c.innerHTML='<button class="ac-btn" data-acentra title="Entrar com o login da Pauta da equipe">Entrar</button>';return;}
     var PN={equipe:'Equipe',avancado:'Avançado',editor:'Editor'};
     var h='<span class="ac-u" title="Conectado como '+e(AC.usuario)+'">'+e(AC.usuario)+'</span><span class="ac-p" title="Perfil no Compêndio (apoio/acessos.json)">'+PN[AC.perfil]+'</span>';
-    if(AC.editor&&!window.VDM_PAGINA_EDITOR)h+='<a class="ac-btn" href="/editor/">Abrir o editor</a>';
-    if(window.VDM_PAGINA_EDITOR)h+='<a class="ac-btn" href="/compendio/">Voltar ao Compêndio</a>';
-    c.innerHTML=h+'<button class="ac-sair" data-acsai title="Sair">Sair</button>';}
+    c.innerHTML=h+'<button class="ac-sair" data-acsai title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button>';}
   function dlgLogin(){var o=q('#ac-dlg');if(!o){o=document.createElement('div');o.id='ac-dlg';o.className='ac-dlg';document.body.appendChild(o);}
     o.hidden=false;o.innerHTML='<form class="ac-dlgc" role="dialog" aria-label="Entrar"><h3>Entrar</h3><p class="meta">O mesmo nome e a mesma senha da Pauta da equipe.</p><label><span>Nome</span><select id="ac-nome" required><option value="">Carregando…</option></select></label><label><span>Senha</span><input id="ac-senha" type="password" autocomplete="current-password" required></label><p class="ac-er" id="ac-er" hidden></p><div class="ac-acts"><button class="btn" type="submit">Entrar</button><button class="btn ghost" type="button" data-acfecha>Cancelar</button></div></form>';
     api('/api/equipe').then(function(j){var ult='';try{ult=localStorage.getItem('eq_ultimo')||'';}catch(x){}q('#ac-nome').innerHTML='<option value="">Escolha o seu nome</option>'+(j.equipe||[]).map(function(n){return '<option'+(n===ult?' selected':'')+'>'+e(n)+'</option>';}).join('');if(ult)q('#ac-senha').focus();}).catch(function(x){q('#ac-nome').innerHTML='<option value="">'+e(x.message)+'</option>';});

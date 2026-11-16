@@ -7,6 +7,7 @@ Fontes (todas no procs-muta):
   ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   editorial_d.js · editorial_d.css · editorial_apoios.json   Minuta-Matriz (arquitetura D) e apoios do canhoto
+  nav_editorial.css                                 barra editorial (Expediente), gêmea da Pauta da equipe
   diretrizes_manual.html                            manual de redação das Diretrizes (Padrões decisórios só no acesso avançado)
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
@@ -185,13 +186,16 @@ def montar(var):
     # identidade gêmea da Pauta da equipe: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
     css += (H/'publico.css').read_text(encoding='utf-8') + (H/'acesso.css').read_text(encoding='utf-8')
     t = troca(t, '<div class="brand"><small>TRF3 · Gabinete CMT</small><b>CMT Compêndio · Referenciais</b></div>',
-              '<div class="brand tw"><i></i><span>GABINETE CMT · <em>' + ('EDITOR' if var == 'editor' else 'EQUIPE') + '</em></span></div>')
+              '<div class="brand tw"><i></i></div>')
+    t = troca(t, '<header class="top">', '<header class="top nx">')
+    ARR = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
     a = '  <div class="right">\n'
     SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
-    t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>◧ Monitor</a>\n'
-              '    <button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>'
-              '<a class="hb ic hbx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<i class="bdg" id="eq-cnot" hidden></i></a>'
-              '<a class="hb ic hbx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<i class="bdg" id="eq-cpen" hidden></i></a>\n')
+    t = troca(t, a, a + '    <a class="hb hbx nx-tx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<span>Notificações</span><i class="bdg" id="eq-cnot" hidden></i></a>'
+              '<a class="hb hbx nx-tx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<span>Diligências</span><i class="bdg" id="eq-cpen" hidden></i></a>\n'
+              '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>Monitor ' + ARR + '</a>'
+              + ('' if var == 'editor' else '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compêndio" hidden>Editor ' + ARR + '</a>') +
+              '<button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>\n')
     # barra unificada com a Pauta da equipe (mesma pill): Início · Pauta · Compêndio, e as seções do Compêndio dentro da pill, ao lado do botão Compêndio
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
     secoes = t[i0:i1]; t = t[:i0] + t[i1:]
@@ -201,11 +205,13 @@ def montar(var):
     for l in abas.strip().split('\n'):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l
     abas = ''.join(lin[v] for v in ordem if v in lin)
-    rotulo = ('<a class="eq-cmp" href="/compendio/">Compêndio</a><span class="eq-cmp eq-ed" aria-current="page">Editor</span>' if var == 'editor'
-              else '<a class="eq-cmp" href="/compendio/" aria-current="page">Compêndio</a>')
-    k = t.index('<div class="brand tw">'); k = t.index('</span></div>\n', k) + len('</span></div>\n')
-    t = t[:k] + ('  <nav class="eqtabs" aria-label="Gabinete CMT"><a href="/equipe/#inicio" data-eqlink>Início</a><a href="/equipe/#pauta" data-eqlink>Pauta</a></nav>'
-                 '<nav class="eqtabs eq-cpn" aria-label="Compêndio"><span class="eq-grp">' + rotulo + '<span class="tabs eq-sec" role="tablist" aria-label="Seções do Compêndio">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
+    SL = '<span class="nx-sl" aria-hidden="true">/</span>'
+    rotulo = ('<a class="eq-cmp" href="/compendio/">Compêndio</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
+              else '<a class="eq-cmp nx-on" href="/compendio/" aria-current="page">Compêndio<em>.</em></a>')
+    k = t.index('<div class="brand tw"><i></i></div>\n') + len('<div class="brand tw"><i></i></div>\n')
+    # barra editorial (Expediente), gêmea da Pauta da equipe: cadernos no título; as abas (.tab) seguem no cabeçalho, ocultas, e a faixa #cmp-nav as aciona
+    t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><nav class="nx-cad" aria-label="Cadernos"><a class="nx-lk" href="/equipe/#inicio" data-eqlink>Equipe</a>' + SL + rotulo + '</nav></div>'
+                 '<nav class="eqtabs eq-cpn" aria-label="Seções do Compêndio"><span class="eq-grp"><span class="tabs eq-sec" role="tablist" aria-label="Seções do Compêndio">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
     a = '  </div>\n</header>\n'
     t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a)
     js += '\n' + (H/'eqnav.js').read_text(encoding='utf-8')
@@ -227,6 +233,7 @@ def montar(var):
         t = t.replace('<title>CMT Compêndio</title>', '<title>Editor · Compêndio · Gabinete CMT</title>', 1)
     else:
         t = t.replace('<title>CMT Compêndio</title>', '<title>Compêndio · Gabinete CMT</title>', 1)
+    css += (H/'nav_editorial.css').read_text(encoding='utf-8')
     return t, js, css, pre
 def gerar_html(var):
     t, js, css, pre = montar(var)
