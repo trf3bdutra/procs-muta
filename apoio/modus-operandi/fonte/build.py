@@ -7,6 +7,7 @@ Fontes (todas no procs-muta):
   ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   editorial_d.js · editorial_d.css · editorial_apoios.json   Minuta-Matriz (arquitetura D) e apoios do canhoto
+  roteiros.json                                     roteiro da minuta (mestre, espécie, assunto e transversais)
   nav_editorial.css                                 barra editorial (Expediente), gêmea do Ex Officio
   diretrizes_manual.html                            manual de redação das Diretrizes (Padrões decisórios só no acesso avançado)
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
@@ -154,7 +155,8 @@ t0 = (H/'template.html').read_text(encoding='utf-8')
 JS = (H/'ementario.js').read_text(encoding='utf-8')
 # Editorial · Minuta-Matriz (arquitetura D): folha com abas, canhoto do bloco e orientações; substitui a apresentação da página Peças
 _AP = ler(H/'editorial_apoios.json')
-_ED = ((H/'editorial_d.js').read_text(encoding='utf-8').replace('/*__DAJ__*/{}', js(_AP['ajuda'])).replace('/*__DPREL__*/[]', js(_AP['preliminares'])).replace('/*__DEMP__*/{}', js(_AP['ementa'])))
+_ROT = ler(H/'roteiros.json')  # catálogo de roteiros por posição, espécie e assunto (Minuta-Matriz)
+_ED = ((H/'editorial_d.js').read_text(encoding='utf-8').replace('/*__DAJ__*/{}', js(_AP['ajuda'])).replace('/*__DPREL__*/[]', js(_AP['preliminares'])).replace('/*__DEMP__*/{}', js(_AP['ementa'])).replace('/*__DROT__*/{}', js(_ROT)))
 _ANC = "$('#v-edit').addEventListener('click',function(e){"
 assert JS.count(_ANC) == 1
 JS = JS.replace(_ANC, _ED + '\n' + _ANC)

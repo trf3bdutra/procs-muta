@@ -1,0 +1,1952 @@
+{
+ "schema": "roteiros-minuta",
+ "versao": 1,
+ "posicoes": [
+  "Relatório",
+  "Admissibilidade",
+  "Preliminares e prejudiciais",
+  "Decisão recorrida",
+  "Questão em discussão",
+  "Moldura jurídica",
+  "Na espécie: fatos",
+  "Na espécie: provas",
+  "Aplicação ao caso",
+  "Fecho da questão",
+  "Consectários",
+  "Honorários",
+  "Complementos",
+  "Dispositivo",
+  "Ementa e acórdão",
+  "Revisão redacional"
+ ],
+ "blocos": [
+  {
+   "g": "mestre",
+   "nome": "Roteiro-mestre",
+   "extra": "",
+   "nota": "O esqueleto comum a toda minuta do gabinete, do relatório à ementa, na ordem do Manual CMT: primeiro a questão; depois norma, provas e subsunção; ao final, o precedente que ratifica.",
+   "itens": [
+    {
+     "pos": "Relatório",
+     "q": "Abertura no padrão do gabinete?",
+     "o": "Parágrafo único: peça recorrida com ID logo após a referência; verbo nuclear do resultado (julgou, extinguiu, denegou, homologou); providências coordenadas por ponto e vírgula; ponto antes dos honorários, que abrem nova frase no mesmo parágrafo. Preservar os dados efetivos da sentença (\"valor da causa\" × \"valor atualizado da causa\").",
+     "e": true,
+     "f": "Trata-se de apelação à sentença (ID [ID]) que [julgou/extinguiu/denegou/homologou] [RESULTADO]. [Honorários advocatícios fixados em …, observada a gratuidade de justiça (artigo 98, § 3º, do CPC).]",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Relatório",
+     "q": "Razões recursais enumeradas e atribuídas à parte?",
+     "o": "Um parágrafo por recurso, sem conectivo entre recursos sucessivos; enumeração (1) …; (2) …; e (3) …, com orações no infinitivo; pedido no último item ou em \"pelo que requereu\" — nunca nas duas posições. Sem adjetivação nem apreciação da prova.",
+     "e": true,
+     "f": "Apelou [a União / a parte autora] (ID [ID]), alegando, em suma, que: (1) [ALEGAÇÃO]; (2) [ALEGAÇÃO]; e (3) [ALEGAÇÃO].",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Relatório",
+     "q": "Contrarrazões, Ministério Público e ocorrências fiéis aos autos?",
+     "o": "Contrarrazões em parágrafo próprio, com registro obrigatório só das preliminares nelas suscitadas. Parecer ministerial com ID — em segundo grau, conferir se a referência exige \"Procuradoria Regional da República\". Gratuidade, multa, parecer e ocorrências apenas se constarem dos autos.",
+     "e": false,
+     "f": "Houve contrarrazões (ID [ID]). / Não houve contrarrazões.\nO Ministério Público Federal opinou pelo [RESULTADO] (ID [ID]).\nÉ o relatório.",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Tempestividade, preparo e regularidade formal conferidos?",
+     "o": "Prazo em dias úteis (artigo 219 do CPC), em dobro para a Fazenda Pública (artigo 183 do CPC). Sem preparo comprovado na interposição, a deserção só se declara após intimação para recolhimento em dobro (artigo 1.007, § 4º, do CPC).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "As razões enfrentam os fundamentos da decisão recorrida?",
+     "o": "Dialeticidade (artigo 1.010, II e III, do CPC). Fundamento autônomo não impugnado sustenta, por si, a decisão: conhecimento parcial, registrado já na abertura do voto.",
+     "e": false,
+     "f": "Senhores Desembargadores, conheço [em parte] da apelação, pois [foi cumprido o requisito da dialeticidade / não se tratou na sentença da questão …].",
+     "fn": "votos do acervo"
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Há inovação recursal?",
+     "o": "Matéria não deduzida na origem não se conhece, ressalvadas as questões de ordem pública e a força maior (artigo 1.014 do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Algum tema afetado manda suspender este grau?",
+     "o": "Ler o alcance da ordem de suspensão na decisão de afetação: muitas alcançam apenas REsp e AREsp na Vice-Presidência ou no Superior Tribunal de Justiça, o que não impede o julgamento da apelação.",
+     "e": true,
+     "f": "cabe observar, inicialmente, que não se cogita de sobrestamento do feito, por afetação do Tema [Nº]/STJ, pois tal providência somente foi determinada em relação aos casos de recurso especial ou agravo em recurso especial em tramitação na Vice-Presidência da Corte ou no próprio Superior Tribunal de Justiça ([ProAfR no REsp …], Rel. Min. [NOME], julgado em [DATA]), não obstando, portanto, o julgamento do presente recurso.",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Preliminares de contrarrazões e questões de ordem pública resolvidas?",
+     "o": "Legitimidade, interesse, competência e prescrição antes do mérito. Se dependem de prova nunca produzida, remeter o exame à origem, com fundamentação expressa. Ouvir as partes antes de decidir por fundamento novo (artigo 10 do CPC).",
+     "e": false,
+     "f": "Superada a preliminar, passa-se à análise do mérito.",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Decisão recorrida",
+     "q": "Fundamento decisivo da decisão recorrida identificado?",
+     "o": "Transcrever apenas o trecho que sustenta a conclusão impugnada — é o alvo do recurso e a régua da dialeticidade. O voto não repete o relatório: vai direto à questão.",
+     "e": false,
+     "f": "bem decidiu a sentença (ID [ID]):\n\"[TRECHO DECISIVO]\"",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Questão em discussão",
+     "q": "Questão em discussão formulada numa frase?",
+     "o": "Havendo mais de uma, numerá-las — (1), (2) — e manter a mesma ordem na fundamentação, no fecho e na ementa. A questão nunca vira subtítulo: o voto não se fragmenta em tópicos.",
+     "e": true,
+     "f": "Senhores Desembargadores, a controvérsia envolve discutir [se …]. \n— ou —\nA controvérsia envolve discutir: (1) [QUESTÃO]; e (2) [QUESTÃO].",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Moldura normativa exposta antes do caso?",
+     "o": "Dispositivos transcritos quando úteis, em parágrafo próprio, entre aspas e em itálico, com destaques \"(g.n.)\". Comentário após a norma com \"Note-se que\", \"Como se observa\", \"Vale lembrar\". Identificar a categoria jurídica antes dos requisitos.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Precedente qualificado localizado, transcrito e conferido?",
+     "o": "Tema, súmula, IRDR ou IAC aplicável: transcrever a tese, não apenas o número; conferir redação vigente, modulação e data. Hierarquia: Supremo Tribunal Federal → Superior Tribunal de Justiça → TRF-3. Precedente da TNU é vedado.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: fatos",
+     "q": "Fatos introduzidos por \"Na espécie,\" e amarrados ao ID?",
+     "o": "O incontroverso entra como premissa, com o ID do documento; marcos temporais concretos (DD/MM/AAAA). Alegação não é fato demonstrado.",
+     "e": true,
+     "f": "Na espécie, [FATO JURIDICAMENTE RELEVANTE], conforme [DOCUMENTO] (ID [ID]), circunstância que [preenche/afasta] os requisitos previstos no artigo [DISPOSITIVO] da [NORMA].",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Cada fato decisivo amarrado a documento (ID e folha)?",
+     "o": "Forma \"(ID [ID], f. [X]/[Y])\" — nunca \"fls.\" nem \"conforme os autos\". Indicar quem tinha o ônus e se dele se desincumbiu; distinguir ausência de comprovação, insuficiência e prova de inexistência; dizer o que a prova demonstra e o que não demonstra.",
+     "e": true,
+     "f": "O laudo pericial judicial (ID [ID]) examinou [OBJETO] e concluiu por [CONCLUSÃO].",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Cada alegação recursal enfrentada, sem rejeição genérica?",
+     "o": "Argumento capaz de infirmar a conclusão exige resposta (artigo 489, § 1º, IV, do CPC). Responder ponto a ponto com fórmula adversativa ou concessiva: \"Contrariamente ao sustentado\", \"Nem se alegue que\", \"Ainda que\".",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "O caso se amolda à tese ou exige distinção?",
+     "o": "Afastar precedente invocado pela parte exige demonstrar a distinção ou a superação (artigo 489, § 1º, VI, do CPC).",
+     "e": true,
+     "f": "Não se aplica à espécie o entendimento firmado no [PRECEDENTE], pois [DISTINÇÃO DETERMINANTE].",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Precedente de ratificação depois do raciocínio?",
+     "o": "O precedente confirma, não inaugura: nunca abrir a questão por \"Neste sentido\". Citação com classe e número, relator em caixa alta, veículo e data de publicação.",
+     "e": false,
+     "f": "Em casos que tais, assim tem decidido esta Turma Regional:\n\nApCiv [NÚMERO], Rel. Des. Fed. [NOME EM CAIXA ALTA], DJEN [DD/MM/AAAA]: \"[EMENTA]\" (g.n.)",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Fecho da questão",
+     "q": "Cada questão tem fecho próprio?",
+     "o": "Fecho curto por questão, sem síntese redundante.",
+     "e": false,
+     "f": "Em suma, [CONCLUSÃO].\n— ou —\nAssim, nada colhe o recurso [da autora / da autarquia ré].\n— ou —\nAfigura-se, pois, correta a solução dada na origem.\n— ou —\nNão se cogita, pois, de [TESE AFASTADA], sob tal enfoque.",
+     "fn": "Manual CMT · votos do acervo"
+    },
+    {
+     "pos": "Consectários",
+     "q": "A reforma altera sucumbência, juros ou correção?",
+     "o": "Consectários só quando há condenação; inverter ou redistribuir a sucumbência quando o resultado muda.",
+     "e": false,
+     "f": "Em razão da reforma da sentença, impõe-se a inversão da sucumbência, [CRITÉRIOS].",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Honorários",
+     "q": "Sucumbência recursal tratada?",
+     "o": "Majoração de 1% somente se o recurso for integralmente desprovido ou não conhecido, contra decisão publicada a partir de 18/03/2016 e com honorários fixados na origem, respeitados os limites dos §§ 2º e 3º (Tema 1.059/STJ). Contrarrazões não são requisito. Sentença anulada, processo extinto ou remetido pela preliminar: rever os honorários, sem majoração. Mandado de segurança não comporta honorários (Súmula 512/STF; artigo 25 da Lei 12.016/2009).",
+     "e": true,
+     "f": "Pela sucumbência recursal, [a parte] deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC).",
+     "fn": "Manual CMT · votos do acervo"
+    },
+    {
+     "pos": "Complementos",
+     "q": "Pedidos residuais enfrentados?",
+     "o": "Litigância de má-fé, gratuidade impugnada, prequestionamento expresso, pedidos condicionados que ficaram prejudicados.",
+     "e": false,
+     "f": "A despeito da improcedência da pretensão recursal, não cabe cogitar, como apontado em contrarrazões, de sanção processual, pois não evidenciado exercício abusivo do direito recursal ou de ação para efeito de litigância de má-fé, fato grave a exigir demonstração inequívoca, inexistente na espécie.",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Dispositivo coerente com o conhecimento e com o resultado?",
+     "o": "\"Ante o exposto,\" + resultado + \"É como voto.\". Usar \"apelação\", não \"recurso\"; com apelante único, não o especificar; recurso adesivo e remessa necessária no mesmo dispositivo; preferir \"para anular\" e \"regular prosseguimento do feito\"; sem \"nos termos da fundamentação\".",
+     "e": true,
+     "f": "Ante o exposto, nego provimento à apelação.\n— ou —\nAnte o exposto, conheço em parte da apelação e nego-lhe provimento.\n— ou —\nAnte o exposto, dou provimento à apelação para reformar a sentença e determinar o retorno dos autos à origem para regular prosseguimento do feito.\n\nÉ como voto.",
+     "fn": "Manual CMT · votos do acervo"
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Tipo de voto no PJe compatível com o dispositivo?",
+     "o": "\"Provido\", \"não provido\", \"conhecido em parte e não provido\" etc. \"Procedência\" e \"improcedência\" ficam reservadas às sentenças; embargos de declaração são acolhidos ou rejeitados, nunca \"providos\".",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Ementa e acórdão",
+     "q": "Ementa na estrutura do gabinete (Recomendação CNJ 154/2024 adaptada)?",
+     "o": "Cabeçalho em caixa alta — ramo do Direito · classe · assunto · conclusão, até três linhas → I. CASO EM EXAME → II. QUESTÃO EM DISCUSSÃO → III. RAZÕES DE DECIDIR → IV. DISPOSITIVO (\"IV. DISPOSITIVO E TESE\" só se houver tese) → linha → rodapé. Numeração contínua entre seções, sem saltos; um fundamento por item.",
+     "e": true,
+     "f": "DIREITO [RAMO]. [CLASSE]. [ASSUNTO]. [CONCLUSÃO].\nI. CASO EM EXAME\n1. [Apelação contra sentença que …].\nII. QUESTÃO EM DISCUSSÃO\n2. A questão em discussão consiste em saber se [ …].\nIII. RAZÕES DE DECIDIR\n3. [FUNDAMENTO].\n4. [FUNDAMENTO].\nIV. DISPOSITIVO\n5. [Apelação desprovida.]\n__________\nDispositivos relevantes citados: [CF/1988, artigo …; Lei …/…, artigo …; e CPC, artigo …].\nJurisprudência relevante citada: [STF, RE …, Rel. Min. NOME, DJe DD/MM/AAAA; STJ, REsp …; e TRF-3, ApCiv …, Rel. Des. Fed. NOME, DJEN DD/MM/AAAA].",
+     "fn": "Manual CMT · Recomendação CNJ 154/2024"
+    },
+    {
+     "pos": "Ementa e acórdão",
+     "q": "Ementa limpa e fiel ao voto?",
+     "o": "Sem ID, sem nome das partes, sem \"trata-se de\", sem doutrina, sem TNU; \"União\", nunca \"União Federal\"; frases de até 40 palavras. Rodapé: diplomas na ordem hierárquica e julgados na ordem STF → STJ → TRF-3, com relator em caixa alta e DJe/DJEN. Tema aplicado: tese transcrita no voto.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Ementa e acórdão",
+     "q": "Acórdão espelha o dispositivo?",
+     "o": "O resultado reproduz literalmente o dispositivo do voto, com a pessoa verbal ajustada (\"nego\" → \"negou\").",
+     "e": false,
+     "f": "Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, [RESULTADO], nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Revisão redacional",
+     "q": "Revisão de forma concluída?",
+     "o": "Aglutinações (\"Naespécie\", \"embargosde\"), espaço após ponto no cabeçalho da ementa, datas truncadas, crase e regência (\"dada a regência\", \"a toda lógica\"), concordância com o gênero da parte e numeração da ementa sem saltos.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "especie",
+   "nome": "Apelação cível",
+   "extra": "",
+   "nota": "Sentença de 1º grau.",
+   "itens": [
+    {
+     "pos": "Admissibilidade",
+     "q": "Efeito suspensivo: regra ou exceção?",
+     "o": "Regra do artigo 1.012 do CPC; exceções do § 1º; pedido autônomo ao Tribunal conforme o § 3º. Examinado o mérito, o pedido fica prejudicado.",
+     "e": false,
+     "f": "prejudicado o pedido de efeito suspensivo pelo exame direto do mérito.",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Interlocutórias não agraváveis devolvidas em preliminar?",
+     "o": "Suscitadas em preliminar de apelação ou em contrarrazões (artigo 1.009, § 1º, do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Extensão do efeito devolutivo delimitada?",
+     "o": "Capítulos impugnados e questões suscitadas (artigo 1.013, §§ 1º e 2º, do CPC); causa madura (artigo 1.013, § 3º, do CPC). No relatório, delimitar o que foi impugnado; no voto, não avançar sobre capítulo não recorrido.",
+     "e": false,
+     "f": "Anulada a sentença, cabe proceder de imediato a novo julgamento nesta instância.",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Resultado não unânime?",
+     "o": "Técnica de ampliação do colegiado (artigo 942 do CPC): na apelação, basta o resultado não unânime, ainda que confirme a sentença. Não se aplica à remessa necessária (§ 4º).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Recurso adesivo e remessa necessária julgados no mesmo dispositivo?",
+     "o": "Registrar o resultado de cada recurso; com dupla apelação, identificar o recorrente.",
+     "e": false,
+     "f": "Ante o exposto, nego provimento à apelação [da parte exequente] e ao recurso adesivo [da FUNASA].",
+     "fn": "votos do 28,86%"
+    }
+   ]
+  },
+  {
+   "g": "especie",
+   "nome": "Agravo de instrumento",
+   "extra": "",
+   "nota": "Decisão interlocutória de 1º grau.",
+   "itens": [
+    {
+     "pos": "Admissibilidade",
+     "q": "Cabimento: rol do artigo 1.015 do CPC ou urgência?",
+     "o": "Taxatividade mitigada quando a espera pela apelação tornaria inútil o exame (Tema 988/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Peças e comunicações em ordem?",
+     "o": "Artigo 1.017 do CPC (instrução) e artigo 1.018 do CPC (comunicação ao juízo, nos autos físicos).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Pedido de efeito suspensivo ou de tutela recursal?",
+     "o": "Probabilidade do direito e perigo de dano (artigos 300 e 1.019, I, do CPC). Requisitos cumulativos: ausente um, fica prejudicado o outro.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "O exame ficou nos limites da decisão agravada?",
+     "o": "Efeito restrito à matéria impugnada: não antecipar o mérito da causa; reexaminar os pressupostos da interlocutória.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Complementos",
+     "q": "Sobreveio sentença?",
+     "o": "Perda superveniente do objeto do agravo.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Honorários a tratar?",
+     "o": "Em regra, são tratados na ação originária; majorar somente se a decisão agravada os fixou.",
+     "e": false,
+     "f": "Quanto aos honorários advocatícios, devem ser tratados na ação originária, já que se trata, nesta sede, apenas de agravo de instrumento contra decisão de natureza interlocutória, que não põe termo, portanto, ao processo.",
+     "fn": "Compêndio de modelos"
+    },
+    {
+     "pos": "Ementa e acórdão",
+     "q": "Comunicação ao Juízo de origem?",
+     "o": "Fecho processual próprio do agravo, em linhas separadas.",
+     "e": false,
+     "f": "Comunique-se o Juízo de origem.",
+     "fn": "Manual CMT"
+    }
+   ]
+  },
+  {
+   "g": "especie",
+   "nome": "Agravo interno",
+   "extra": "",
+   "nota": "Decisão monocrática do relator ou da Presidência.",
+   "itens": [
+    {
+     "pos": "Relatório",
+     "q": "Abertura própria do agravo interno?",
+     "o": "Indicar a decisão agravada e o recurso de origem.",
+     "e": false,
+     "f": "Trata-se de agravo interno à negativa de provimento a agravo de instrumento interposto contra decisão que [OBJETO].\nAlegou o agravante, em suma (ID [ID]): (1) …; e (2) … .",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Juízo de retratação considerado?",
+     "o": "O relator pode retratar-se antes de levar o recurso à Turma.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Impugnação específica da decisão monocrática?",
+     "o": "Artigo 1.021, § 1º, do CPC; Súmula 182/STJ.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "O voto vai além da decisão agravada?",
+     "o": "Vedado limitar-se a reproduzi-la (artigo 1.021, § 3º, do CPC). A fundamentação per relationem é admitida como reforço (Tema 1.306/STJ), não como substituto do enfrentamento.",
+     "e": false,
+     "f": "Embora os fundamentos já expostos possam ser, em princípio, adotados mediante a técnica da fundamentação per relationem, admitida pela jurisprudência da Corte Superior, conforme assentado no Tema 1.306, são aqui reproduzidos como elemento de reforço da solução adotada e contextualização da controvérsia:",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Complementos",
+     "q": "Multa por agravo manifestamente inadmissível ou improcedente?",
+     "o": "Exige votação unânime (artigo 1.021, § 4º, do CPC). Distinção ou superação fundamentadamente alegada afasta a multa (Tema 1.201/STJ, item 2); alegação genérica não.",
+     "e": false,
+     "f": "À luz do item \"2\" da tese firmada no Tema 1.201/STJ, não se impõe a aplicação da multa prevista no artigo 1.021, § 4º, do CPC quando alegada fundamentadamente a distinção ou a superação do precedente qualificado. Contudo, a alegação, da forma como apresentada, permanece genérica, circunstância que enseja a aplicação da multa prevista no artigo 1.021, § 4º, do CPC, no patamar de 1% do valor da causa, em favor da parte agravada.",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Dispositivo do agravo interno?",
+     "o": "Única hipótese em que o acervo remete à fundamentação — para a multa.",
+     "e": false,
+     "f": "Ante o exposto, nego provimento ao agravo interno [e aplico multa, nos termos da fundamentação].",
+     "fn": "Guia de Conformidade"
+    }
+   ]
+  },
+  {
+   "g": "especie",
+   "nome": "Embargos de declaração",
+   "extra": "",
+   "nota": "Qualquer decisão.",
+   "itens": [
+    {
+     "pos": "Relatório",
+     "q": "Abertura com a ementa embargada?",
+     "o": "Transcrever a ementa integral entre aspas curvas e sintetizar os vícios alegados.",
+     "e": false,
+     "f": "Trata-se de embargos de declaração contra acórdão assim ementado: \"[EMENTA]\".\nAlegou-se omissão, inclusive em prequestionamento, pois: (1) …; e (2) … .",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Prazo de cinco dias e vício apontado?",
+     "o": "Omissão, contradição, obscuridade ou erro material (artigo 1.022 do CPC).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Vício real ou rediscussão?",
+     "o": "Rediscussão do mérito não é omissão. Demonstrar, ponto a ponto, onde o acórdão tratou da matéria (\"Com efeito, resta evidenciado o intento de mera rediscussão da causa, pois o acórdão embargado consignou expressamente …\").",
+     "e": true,
+     "f": "Senhores Desembargadores, verifica-se dos autos que os embargos de declaração não apontam vícios de omissão, contradição, obscuridade ou erro material sanáveis na via eleita, mas mera impugnação ao acórdão embargado, que teria incorrido em error in judicando, desvirtuando, pois, a própria natureza do recurso, que não é a de reapreciar a causa como pretendido.\n\nComo se observa, não se trata de omissão ou qualquer outro vício sanável na via eleita, pois o que se pretende é rediscutir a matéria decidida, alegando que houve error in judicando, o que não se presta à discussão em embargos de declaração. Se tal motivação é equivocada ou insuficiente, fere as normas apontadas (artigos …) ou contraria julgados ou jurisprudência, deve a embargante veicular recurso próprio para a impugnação do acórdão e não rediscutir a matéria em embargos de declaração.",
+     "fn": "Guia de Conformidade · Manual CMT"
+    },
+    {
+     "pos": "Complementos",
+     "q": "Prequestionamento ficto registrado?",
+     "o": "Artigo 1.025 do CPC. Atenção à forma correta: \"com os apontamentos destacados\".",
+     "e": false,
+     "f": "Embora tratados todos os pontos de relevância e pertinência à demonstração de que não houve qualquer vício no julgamento, é expresso o artigo 1.025 do Código de Processo Civil em enfatizar que se consideram incluídos no acórdão os elementos suscitados pela embargante, ainda que inadmitido ou rejeitado o recurso, para efeito de prequestionamento, aperfeiçoando-se, pois, com os apontamentos destacados o julgamento cabível no âmbito da Turma.",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Complementos",
+     "q": "Efeitos infringentes?",
+     "o": "Intimar o embargado antes (artigo 1.023, § 2º, do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Complementos",
+     "q": "Embargos protelatórios?",
+     "o": "Multa (artigo 1.026, § 2º, do CPC); embargos com notório propósito de prequestionamento não são protelatórios (Súmula 98/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Dispositivo: acolher ou rejeitar?",
+     "o": "Nunca \"dar provimento\" a embargos. Ementa: \"Embargos de declaração rejeitados.\" — cabeçalho \"… VÍCIOS INEXISTENTES. REJEIÇÃO.\"",
+     "e": true,
+     "f": "Ante o exposto, rejeito os embargos de declaração.\n— ou —\nAnte o exposto, acolho parcialmente os embargos de declaração para, sem efeitos modificativos, acrescer fundamentação [ …].\n\nÉ como voto.",
+     "fn": "Manual CMT"
+    }
+   ]
+  },
+  {
+   "g": "especie",
+   "nome": "Remessa necessária",
+   "extra": "",
+   "nota": "Sentença contrária à Fazenda Pública.",
+   "itens": [
+    {
+     "pos": "Admissibilidade",
+     "q": "A sentença está sujeita ao reexame?",
+     "o": "Hipóteses e dispensas do artigo 496 do CPC (valor, súmula, repetitivo, orientação administrativa). Previdenciário com condenação aferível por simples cálculo abaixo do limite do § 3º, I: remessa dispensada (Tema 1.081/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Reexame sem agravar a Fazenda?",
+     "o": "Súmula 45/STJ.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Remessa e apelação julgadas em conjunto?",
+     "o": "Dispositivo único, com o resultado de cada uma.",
+     "e": false,
+     "f": "Ante o exposto, nego provimento à apelação e à remessa necessária.\n— ou —\nAnte o exposto, dou provimento à apelação e à remessa necessária para [denegar o mandado de segurança].",
+     "fn": "votos do acervo"
+    }
+   ]
+  },
+  {
+   "g": "especie",
+   "nome": "Cumprimento contra a Fazenda",
+   "extra": "",
+   "nota": "Cumprimento de título judicial, individual ou coletivo.",
+   "itens": [
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Exequente dentro dos limites subjetivos do título?",
+     "o": "Ler pedido, causa de pedir e dispositivo do título; exclusões expressas (outras ações, acordos).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição da pretensão executiva?",
+     "o": "Súmula 150/STF; atos interruptivos; remeter à origem se depender de prova.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Título fundado em lei declarada inconstitucional?",
+     "o": "Artigo 535, § 5º, do CPC (Tema 360/STF) e Tema 733/STF. Após a AR 2.876-QO (23/04/2025), o § 7º do artigo 535 foi declarado inconstitucional e o § 8º recebeu interpretação conforme: rescisória em dois anos do trânsito da decisão do Supremo Tribunal Federal, com efeitos retroativos limitados a cinco anos do ajuizamento, salvo modulação expressa.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Juros e correção: o título ou a tese vinculante?",
+     "o": "Tema 1.170/STF: os juros do artigo 1º-F da Lei 9.494/1997 aplicam-se às condenações não tributárias mesmo havendo previsão diversa no título. Selic a partir de 09/12/2021 (EC 113/2021); requisitórios federais expedidos desde 09/09/2025: IPCA + juros simples de 2% ao ano, limitados à Selic (artigo 3º da EC 113/2021, na redação da EC 136/2025).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Requisição adequada?",
+     "o": "RPV ou precatório, conforme o valor.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "especie",
+   "nome": "Decisão monocrática",
+   "extra": "",
+   "nota": "Decisões terminativas e interlocutórias do relator.",
+   "itens": [
+    {
+     "pos": "Relatório",
+     "q": "Estrutura da decisão?",
+     "o": "\"Vistos.\" em parágrafo próprio → síntese iniciada por \"Trata-se de\" → \"DECIDO.\" → fundamentação objetiva → dispositivo.",
+     "e": false,
+     "f": "Vistos.\n\nTrata-se de [RECURSO] interposto em [AÇÃO] …\n\nDECIDO.",
+     "fn": "Manual CMT · Compêndio"
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Fundamento legal da via singular expresso?",
+     "o": "Citar o inciso do artigo 932 do CPC e o precedente que autoriza o julgamento monocrático.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Dispositivo",
+     "q": "Dispositivo em primeira pessoa, com fundamento?",
+     "o": "Não conheço, julgo prejudicado, homologo, declino da competência. Despacho não leva \"Ante o exposto\".",
+     "e": false,
+     "f": "Ante o exposto, com esteio no artigo 932, III, do CPC, não conheço da apelação.\n— ou —\nHomologo o pedido de desistência da apelação (ID [ID]), nos termos do artigo 998 do CPC.",
+     "fn": "Manual CMT · Compêndio"
+    },
+    {
+     "pos": "Ementa e acórdão",
+     "q": "Fecho processual na ordem do gabinete?",
+     "o": "Uma fórmula por linha.",
+     "e": false,
+     "f": "Publique-se. Intime-se.\nOportunamente, baixem os autos à Vara de origem.\nCampo Grande, data da assinatura.",
+     "fn": "Manual CMT"
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Benefícios por incapacidade",
+   "extra": "estrutura: matriz-apelacao-previdenciaria",
+   "nota": "Auxílio por incapacidade temporária, aposentadoria por incapacidade permanente, auxílio-acidente.",
+   "itens": [
+    {
+     "pos": "Questão em discussão",
+     "q": "Qual requisito está em disputa?",
+     "o": "Incapacidade, qualidade de segurado, carência ou datas (DII, DIB, DCB).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Natureza acidentária afastada?",
+     "o": "Benefício acidentário é da Justiça Estadual (artigo 109, I, da CF/1988): a competência se fixa pelo pedido e pela causa de pedir.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "O laudo responde ao que importa?",
+     "o": "Diagnóstico, DII, grau (parcial ou total), duração (temporária ou permanente), prognóstico e quesitos. Transcrever entre aspas o trecho decisivo do perito.",
+     "e": true,
+     "f": "O laudo pericial judicial (ID [ID]), elaborado em [DATA], examinou [OBJETO] e concluiu por [CONCLUSÃO]: \"[TRECHO]\".",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Na espécie: fatos",
+     "q": "Qualidade de segurado e carência na DII?",
+     "o": "Período de graça (artigo 15 da Lei 8.213/1991) e carência (artigo 25 da Lei 8.213/1991), conferidos no CNIS (ID).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Laudo desfavorável × demais provas",
+     "o": "O juiz não fica adstrito ao laudo (artigo 479 do CPC), mas afastá-lo exige prova técnica de igual peso.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Doença preexistente ou agravamento posterior?",
+     "o": "Artigo 42, § 2º, e artigo 59, § 1º, da Lei 8.213/1991.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Trabalhou durante a incapacidade?",
+     "o": "Não impede o benefício no período (Tema 1.013/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: fatos",
+     "q": "Prorrogação do período de graça por desemprego?",
+     "o": "Pode ser provada por outros meios; a mera ausência de anotação na CTPS ou no CNIS não basta (Tema 1.360/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Permanência: condições pessoais avaliadas?",
+     "o": "Idade, escolaridade e histórico laboral pesam na reabilitação possível.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "DIB e DCB fixadas?",
+     "o": "Requerimento ou cessação indevida; prazo estimado e reavaliação (artigo 60, §§ 8º e 9º, da Lei 8.213/1991).",
+     "e": false,
+     "f": "Impõe-se, portanto, a reforma da sentença para conceder o benefício de [BENEFÍCIO] desde a DER, em [DATA DA DER].",
+     "fn": "Manual CMT"
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Tempo especial e aposentadoria especial",
+   "extra": "estrutura: matriz-apelacao-previdenciaria",
+   "nota": "Reconhecimento de períodos especiais, conversão e concessão.",
+   "itens": [
+    {
+     "pos": "Questão em discussão",
+     "q": "Quais períodos e quais agentes nocivos?",
+     "o": "Delimitar período a período; cada um tem prova e regra próprias.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Regra do tempo da prestação aplicada?",
+     "o": "Enquadramento por categoria até 28/04/1995; depois, exposição comprovada por formulário; laudo técnico exigido a partir de 05/03/1997 — para ruído e calor, sempre. [VALIDAR posição da Turma: parte do TRF3 adota 10/12/1997, Lei 9.528/1997.]",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "PPP íntegro?",
+     "o": "Responsável técnico pelos registros no período, técnica de medição, intensidade, habitualidade e permanência; LTCAT quando o PPP é impugnado.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Ruído: limite da época?",
+     "o": "80 dB até 05/03/1997; 90 dB de 06/03/1997 a 18/11/2003; 85 dB a partir de 19/11/2003, sem retroação (Tema 694/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Ruído: metodologia?",
+     "o": "NEN; na falta, pico de ruído, com perícia que comprove habitualidade e permanência (Tema 1.083/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "EPI eficaz?",
+     "o": "Afasta a especialidade, salvo ruído (Tema 555/STF); registro de EPI eficaz no PPP e ônus da prova da ineficácia (Tema 1.090/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Auxílio por incapacidade intercalado?",
+     "o": "Computa-se como especial (Tema 998/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Categoria ou atividade com tese própria?",
+     "o": "Vigilante, com ou sem arma de fogo, não é atividade especial (Tema 1.209/STF, que supera o Tema 1.031/STJ — conferir eventual modulação); contribuinte individual não cooperado (Tema 1.291/STJ); motorista e cobrador de ônibus e motorista de caminhão, mediante perícia individualizada (Tema 1.307/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Conversão em comum após a reforma?",
+     "o": "Só para tempo até 13/11/2019 (artigo 25, § 2º, da EC 103/2019).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Segurado continua em atividade nociva?",
+     "o": "Tema 709/STF.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Reafirmação da DER e termo inicial?",
+     "o": "Reafirmação da DER (Tema 995/STJ). Prova apresentada somente em juízo: DIB na citação válida ou em data posterior em que preenchidos os requisitos; mesmos fatos e provas do processo administrativo: DIB na DER (Tema 1.124/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Rural e segurado especial",
+   "extra": "estrutura: matriz-apelacao-previdenciaria",
+   "nota": "Aposentadoria por idade rural, híbrida, averbação de tempo rural.",
+   "itens": [
+    {
+     "pos": "Questão em discussão",
+     "q": "Período rural e condição de segurado especial?",
+     "o": "Regime de economia familiar, boia-fria ou empregado rural — cada qual com sua prova; nunca chamar o empregado rural de \"segurado especial\".",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Há início de prova material?",
+     "o": "Prova exclusivamente testemunhal não basta (Súmula 149/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "O documento mais antigo pode retroagir?",
+     "o": "Sim, se corroborado por prova testemunhal idônea (Súmula 577/STJ). Não se exige documento ano a ano.",
+     "e": false,
+     "f": "Não se exige documento referente a cada ano do período, bastando início razoável de prova material, ampliado por prova oral idônea.",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Documentos de membros do grupo familiar?",
+     "o": "Valem, salvo descaracterização por atividade urbana do titular do documento.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Boia-fria?",
+     "o": "Prova material abrandada, mas não dispensada (Tema 554/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Aposentadoria híbrida?",
+     "o": "Cômputo do rural remoto sem contribuição (Tema 1.007/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Labor rural no período imediatamente anterior?",
+     "o": "Ao requerimento ou ao implemento da idade (Tema 642/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Área e renda compatíveis com economia familiar?",
+     "o": "Até quatro módulos fiscais (artigo 11, VII, da Lei 8.213/1991).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Fecho da questão",
+     "q": "Insuficiência de prova ou prova da improcedência?",
+     "o": "Ausente início de prova material, extinção sem resolução do mérito (Tema 629/STJ); prova contrária leva à improcedência.",
+     "e": true,
+     "f": "Cabe, pois, por deficiência probatória no contexto específico da pretensão desejada, a extinção do processo sem resolução do mérito.\n— ou —\nA hipótese, como visto, não é de insuficiência probatória a permitir renovação da pretensão, mas de prova da improcedência do pedido.",
+     "fn": "Manual CMT"
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "BPC/LOAS",
+   "extra": "estrutura: matriz-apelacao-previdenciaria",
+   "nota": "Benefício assistencial à pessoa idosa ou com deficiência.",
+   "itens": [
+    {
+     "pos": "Questão em discussão",
+     "q": "Deficiência, idade ou miserabilidade?",
+     "o": "Pessoa com deficiência ou idosa com 65 anos ou mais (artigo 20 da Lei 8.742/1993).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Perícia médica e estudo social?",
+     "o": "Impedimento de longo prazo (artigo 20, § 10, da Lei 8.742/1993) e composição do grupo familiar (artigo 20, § 1º, da Lei 8.742/1993).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Renda per capita como único critério?",
+     "o": "Não é absoluto (Tema 27/STF; Tema 185/STJ); outros elementos do estudo social podem demonstrar a vulnerabilidade.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Renda familiar calculada na forma legal?",
+     "o": "Soma dos rendimentos dos membros que vivam sob o mesmo teto, vedadas deduções não previstas em lei (artigo 20, § 3º-A, da Lei 8.742/1993, incluído pela Lei 15.077/2024); benefício de até um salário mínimo de idoso ou pessoa com deficiência excluído do cálculo (artigo 20, § 14, da Lei 8.742/1993). Observar a lei vigente na DER.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "DIB fixada?",
+     "o": "Requerimento administrativo; revisão a cada dois anos (artigo 21 da Lei 8.742/1993).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Pensão por morte",
+   "extra": "estrutura: matriz-apelacao-previdenciaria",
+   "nota": "Dependência, qualidade de segurado do instituidor, duração.",
+   "itens": [
+    {
+     "pos": "Moldura jurídica",
+     "q": "Lei da data do óbito?",
+     "o": "Súmula 340/STJ. Moldura: transcrever os dispositivos da Lei 8.213/1991 aplicáveis.",
+     "e": true,
+     "f": "quanto à pensão por morte, dispõe a Lei 8.213/1991:",
+     "fn": "Manual CMT"
+    },
+    {
+     "pos": "Questão em discussão",
+     "q": "Dependência ou qualidade de segurado do instituidor?",
+     "o": "Separar as duas frentes.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "União estável com prova material contemporânea?",
+     "o": "Artigo 16, § 5º, da Lei 8.213/1991.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Instituidor sem qualidade de segurado?",
+     "o": "Pensão devida se já preenchia os requisitos de aposentadoria (Súmula 416/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Duração da cota?",
+     "o": "Idade do dependente e tempo de união (artigo 77, § 2º, da Lei 8.213/1991).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Termo inicial?",
+     "o": "Óbito ou requerimento, conforme o prazo do artigo 74 da Lei 8.213/1991 (180 dias para filhos menores de 16 anos; 90 dias para os demais). Filho menor de 16 anos que requer após 180 dias: sem retroação ao óbito (Tema 1.421/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Revisões e decadência",
+   "extra": "estrutura: matriz-apelacao-previdenciaria",
+   "nota": "Revisão de RMI, inclusão de períodos e salários, readequação.",
+   "itens": [
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Decadência decenal?",
+     "o": "Artigo 103 da Lei 8.213/1991 — inclusive sobre questão não apreciada no ato de concessão (Tema 975/STJ); termo inicial em 01/08/1997 para benefícios anteriores (Tema 313/STF).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Tese de revisão ainda viável?",
+     "o": "Revisão da vida toda: inviável — o artigo 3º da Lei 9.876/1999 é de observância cogente (Tema 1.102/STF, tese revista nos embargos julgados em 11/2025, após as ADIs 2.110 e 2.111). Modulação: irrepetíveis os valores recebidos por decisões prolatadas até 05/04/2024; sem honorários, custas e perícias para ações pendentes nessa data.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Cálculo da RMI juntado e conferido?",
+     "o": "Salários de contribuição, período básico, fator previdenciário.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Prescrição quinquenal das diferenças?",
+     "o": "Artigo 103, parágrafo único, da Lei 8.213/1991.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Execução fiscal e embargos",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Execução fiscal, embargos do devedor, exceção de pré-executividade.",
+   "itens": [
+    {
+     "pos": "Admissibilidade",
+     "q": "Valor abaixo da alçada?",
+     "o": "Contra sentença de execução de pequeno valor cabem embargos infringentes, não apelação (artigo 34 da Lei 6.830/1980; Tema 395/STJ; Tema 408/STF).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "CDA regular?",
+     "o": "Requisitos e possibilidade de emenda ou substituição até a sentença.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição originária?",
+     "o": "Cinco anos da constituição definitiva; interrupção pelo despacho que ordena a citação (artigo 174 do CTN).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição intercorrente?",
+     "o": "Artigo 40 da Lei 6.830/1980 e Tema 566/STJ: suspensão de um ano a partir da ciência da não localização, mais cinco anos.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Redirecionamento?",
+     "o": "Dissolução irregular presumida (Súmula 435/STJ); quem responde (Tema 981/STJ e Tema 962/STJ); prazo (Tema 444/STJ); mero inadimplemento não basta (Súmula 430/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Exceção de pré-executividade cabível?",
+     "o": "Só matéria cognoscível de ofício e sem dilação probatória (Súmula 393/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Embargos garantidos?",
+     "o": "Artigo 16, § 1º, da Lei 6.830/1980.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Execução de baixo valor?",
+     "o": "Extinção por ausência de interesse processual (artigo 485, VI, do CPC; Tema 1.184/STF; Res. CNJ 547/2024 — valor inferior a R$ 10.000,00 no ajuizamento, sem movimentação útil, com as alterações das Res. CNJ 617/2025 e 689/2026). Não alcança conselhos profissionais, regidos pela lei especial (Tema 1.193/STJ). [VALIDAR posição da Turma quanto a autarquias cobradas pela PGF.]",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Temas repetitivos recentes?",
+     "o": "CDA não pode ser emendada para alterar o fundamento legal (Tema 1.350/STJ); reiteração automática de bloqueio via Sisbajud é legítima (Tema 1.325/STJ); fiança bancária e seguro-garantia não podem ser recusados com base apenas na ordem legal (Tema 1.385/STJ); dívida paga após o ajuizamento gera honorários, ainda que antes da citação (Tema 1.413/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Encargo legal?",
+     "o": "Nas execuções da União, o encargo do Decreto-Lei 1.025/1969 substitui os honorários (Súmula 168/TFR).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Anuidades de conselhos profissionais",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Execuções e ações de conselhos de fiscalização profissional.",
+   "itens": [
+    {
+     "pos": "Moldura jurídica",
+     "q": "Anuidade fixada por lei?",
+     "o": "Natureza tributária e legalidade estrita (Tema 540/STF).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Piso de execução observado?",
+     "o": "Artigo 8º da Lei 12.514/2011 (cinco vezes a anuidade, redação da Lei 14.195/2021): arquivamento das execuções em curso abaixo do piso, salvo penhora concretizada (Tema 1.193/STJ). O Tema 1.184/STF e a Res. CNJ 547/2024 não se aplicam aos conselhos.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Fato gerador?",
+     "o": "Existência de inscrição no exercício, não o efetivo exercício profissional (artigo 5º da Lei 12.514/2011).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Pedido de cancelamento anterior?",
+     "o": "Afasta a cobrança dos exercícios seguintes.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "É a OAB?",
+     "o": "Anuidade sem natureza tributária; execução pelo CPC, não pela LEF.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Tributos federais: MS, repetição e compensação",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Mandados de segurança e ações de repetição, compensação e restituição; IRPF; contribuições sobre a folha.",
+   "itens": [
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Mandado de segurança viável?",
+     "o": "Prova pré-constituída, autoridade coatora (encampação: Súmula 628/STJ), prazo; declaração do direito à compensação (Súmula 213/STJ), vedada sua convalidação (Súmula 460/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Tema afetado sem ordem de suspensão?",
+     "o": "Sem suspensão nacional, prossegue-se no exame do mérito (artigo 1.035, § 5º, do CPC).",
+     "e": false,
+     "f": "Embora afetada a controvérsia, no âmbito do RE [NÚMERO], ao regime de repercussão geral (Tema [Nº]), não se determinou a suspensão da tramitação de feitos nas instâncias ordinárias, pelo que se adentra ao exame do mérito devolvido.",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Contribuição sobre verbas da folha?",
+     "o": "Terço de férias (Tema 985/STF); salário-maternidade (Tema 72/STF); aviso prévio indenizado (Tema 478/STJ); quinze primeiros dias de afastamento (Tema 738/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "IRPF e moléstia grave?",
+     "o": "Artigo 6º, XIV, da Lei 7.713/1988; Súmula 598/STJ e Súmula 627/STJ; não alcança rendimentos da atividade (Tema 1.037/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Repetição e compensação nos critérios do gabinete?",
+     "o": "Prescrição quinquenal (artigo 168 do CTN; artigo 3º da LC 118/2005; Tema 4/STF); compensação só após o trânsito (artigo 170-A do CTN); artigo 74 da Lei 9.430/1996 e artigo 26-A da Lei 11.457/2007, conforme a legislação do ajuizamento; Selic exclusiva (artigo 39, § 4º, da Lei 9.250/1995).",
+     "e": true,
+     "f": "O indébito fiscal gera direito à compensação, na via administrativa, em procedimento próprio, com comprovação e liquidação dos valores envolvidos, aplicados os critérios de prescrição (artigo 168 do CTN), trânsito em julgado (artigo 170-A do CTN), legislação de regência vigente ao tempo da propositura da ação (artigo 74 da Lei 9.430/1996 e demais textos legais, inclusive o artigo 26-A da Lei 11.457/2007) e incidência exclusiva da Taxa Selic (artigo 39, § 4º, da Lei 9.250/1995).",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Restituição ou compensação? Precatório em MS?",
+     "o": "Opção do contribuinte (Súmula 461/STJ). No mandado de segurança é vedada a expedição de precatório, e a restituição administrativa do indébito reconhecido em juízo contraria o regime do artigo 100 da CF/1988 (Tema 1.262/STF).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Débito vedado à compensação?",
+     "o": "Tributos devidos no registro da declaração de importação não se compensam (artigo 74, § 3º, II, da Lei 9.430/1996; Tema 874/STF).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Fecho da questão",
+     "q": "Exigibilidade mantida?",
+     "o": "Sem indébito, a compensação fica prejudicada.",
+     "e": false,
+     "f": "Ausente o indébito, em virtude da exigibilidade fiscal, resta prejudicado o exame do pedido de compensação.",
+     "fn": "Guia de Conformidade"
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "PIS/COFINS: exclusões da base de cálculo",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Tema 69/STF e desdobramentos: ICMS, ICMS-ST, ISS, PIS/COFINS sobre si mesmos, bases do IRPJ/CSLL.",
+   "itens": [
+    {
+     "pos": "Questão em discussão",
+     "q": "Qual tributo se pretende excluir de qual base?",
+     "o": "Delimitar: ICMS destacado, ICMS-ST, ISS, o próprio PIS/COFINS, créditos presumidos de ICMS no IRPJ/CSLL.",
+     "e": true,
+     "f": "Senhores Desembargadores, discute-se [a exclusão do … da base de cálculo do …].",
+     "fn": "Guia de Conformidade"
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "ICMS: Tema 69/STF e modulação pelo fato gerador?",
+     "o": "ICMS destacado fora da base (Tema 69/STF, RE 574.706); efeitos a partir de 15/03/2017, ressalvadas as ações e os procedimentos administrativos protocolados até essa data — a modulação se lê pelo fato gerador (Tema 1.279/STF).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "ICMS-ST?",
+     "o": "Excluído da base do PIS/COFINS do substituído (Tema 1.125/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Complementos",
+     "q": "Ação rescisória para adequar julgado à modulação do Tema 69?",
+     "o": "Admitida (Tema 1.338/STF, RE 1.489.562) — não confundir com o Tema 1.338/STJ, sobre citação por edital.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "ISS na base do PIS/COFINS?",
+     "o": "Ratio do Tema 69/STF; Tema 118/STF pendente sem ordem de suspensão (artigo 1.035, § 5º, do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "PIS/COFINS sobre si mesmos ou \"cálculo por dentro\"?",
+     "o": "Não há inconstitucionalidade por analogia: Tema 1.067/STF pendente, sem suspensão; RE 582.461; Tema 1.223/STJ.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Analogia indevida com o Tema 69?",
+     "o": "ISS no IRPJ/CSLL do lucro presumido integra a base (Tema 1.240/STJ); contribuição substitutiva das agroindústrias (Tema 1.048/STF); ISS na CPRB (Tema 1.135/STF).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Benefícios fiscais de ICMS no IRPJ/CSLL?",
+     "o": "Crédito presumido excluído (EREsp 1.517.492); demais benefícios: Tema 1.182/STJ, artigo 30 da Lei 12.973/2014 e Lei 14.789/2023.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Fecho da questão",
+     "q": "Manutenção da sentença?",
+     "o": "Fecho do acervo para sentença alinhada à jurisprudência consolidada.",
+     "e": false,
+     "f": "Na espécie, não se autoriza reforma, pois a sentença decidiu a causa em conformidade com os parâmetros adotados pela legislação e jurisprudência consolidada.",
+     "fn": "Guia de Conformidade"
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "PIS/COFINS: créditos, monofasia e ressarcimento",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Insumos, regime monofásico de combustíveis, cobrança de ressarcimento indevido, procedimento de conformidade.",
+   "itens": [
+    {
+     "pos": "Moldura jurídica",
+     "q": "Insumo: essencialidade e relevância provadas item a item?",
+     "o": "Temas 779 e 780/STJ; mandado de segurança genérico é via inadequada para prova concreta de insumos. Aquisição de pessoa física não gera crédito (artigo 3º, § 3º, I, das Leis 10.637/2002 e 10.833/2003; Tema 756/STF).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Monofasia ou alíquota zero?",
+     "o": "Vedado o crédito na revenda (Tema 1.093/STJ); ADI 7.181 não se aplica; Tema 1.339/STJ suspende apenas recursos especiais.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Cobrança de ressarcimento indevido é crédito tributário?",
+     "o": "Não: distinguir crédito tributário (artigos 139 e 142 do CTN) de indébito; não incidem o artigo 74, § 11, da Lei 9.430/1996 nem o artigo 151, III, do CTN; aplica-se a Lei 9.784/1999 (artigo 61).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Nulidade com prejuízo demonstrado?",
+     "o": "Sem prejuízo, não há nulidade (artigo 55 da Lei 9.784/1999; REsp 2.163.058).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Procedimento de conformidade exige contraditório prévio?",
+     "o": "Não: contraditório diferido; revisão no prazo quinquenal (artigos 53 e 54 da Lei 9.784/1999; Súmula 473/STF).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Subvenção de custeio de energia (CDE)?",
+     "o": "Consumidor final tem legitimidade (REsp 1.299.303); descontos do Decreto 7.891/2013 são subvenção de custeio tributável.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "PASEP: contas individuais",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Saques indevidos, desfalques e correção das contas — Tema 1.150/STJ.",
+   "itens": [
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Legitimidade: Banco do Brasil ou União?",
+     "o": "Banco do Brasil responde por falha na gestão da conta; a União, só quando em causa atos do Conselho Diretor (Tema 1.150/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Alegada omissão de repasse pela União é genérica?",
+     "o": "Sem distinção concreta, mantém-se a ilegitimidade da União e o declínio para a Justiça Estadual (artigo 109, I, da CF/1988).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição e termo inicial?",
+     "o": "Decenal (artigo 205 do CC), contada da ciência do desfalque (Tema 1.150/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Complementos",
+     "q": "Embargos protelatórios na origem?",
+     "o": "Multa do artigo 1.026, § 2º, do CPC (Tema 698/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Perdimento aduaneiro",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Pena de perdimento de veículo transportador e de mercadorias; locadoras; liberação e indenização.",
+   "itens": [
+    {
+     "pos": "Admissibilidade",
+     "q": "Autor ou impetrante era proprietário na data da autuação?",
+     "o": "Venda anterior à apreensão gera ilegitimidade ativa (artigo 485, VI, do CPC; artigo 123 do CTB).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Litispendência ou coisa julgada com mandado de segurança anterior?",
+     "o": "Mesmo veículo, mesma autuação (artigo 485, V, do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Processo administrativo regular?",
+     "o": "Intimação por edital após AR frustrado é válida (artigo 124 do Decreto-Lei 37/1966); nulidade da revelia não libera, por si, o veículo.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Critérios objetivos e subjetivos do perdimento enunciados?",
+     "o": "Artigo 24 do Decreto-Lei 1.455/1976; artigos 95, I, e 104, I a VI, do Decreto-Lei 37/1966; artigo 688, I a VII, do Decreto 6.759/2009; artigo 136 do CTN.",
+     "e": true,
+     "f": "a aplicação da pena de perdimento de veículo, por transporte de mercadoria sujeita à igual pena, deve avaliar aspectos objetivos, como subjetivos, assim, por exemplo, eventual boa-fé; impacto de eventual reincidência; gravidade do ilícito perpetrado; valor do veículo transportador em relação ao das mercadorias passíveis de perdimento; e, como critério geral, a própria proporcionalidade.",
+     "fn": "Acervo de Perdimento"
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Responsabilidade do proprietário não condutor?",
+     "o": "Exige ao menos culpa in eligendo ou in vigilando (Súmula 138/TFR). Não basta alegar que não participou nem se beneficiou.",
+     "e": true,
+     "f": "pode o proprietário responder pelo perdimento do veículo transportador se tiver concorrido, ao menos com culpa (\"in eligendo\" ou \"in vigilando\"), para prática da infração (artigo 95, I, do Decreto-Lei 37/1966), em conformidade com a Súmula 138 do extinto Tribunal Federal de Recursos.",
+     "fn": "Acervo de Perdimento"
+    },
+    {
+     "pos": "Na espécie: fatos",
+     "q": "Vínculo entre proprietário e condutor?",
+     "o": "Parente, empregado, locatário, arrendatário, comodatário: cessão habitual ou com histórico caracteriza culpa; mero parentesco não basta.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Boa-fé provada?",
+     "o": "Em mandado de segurança, só com prova pré-constituída (contrato, pagamentos, consulta prévia a registros). Locadora: consulta ao COMPROT anterior à locação. Depoimento isolado não afasta a presunção de legitimidade do ato.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Proporcionalidade com os demais fatores?",
+     "o": "Valor do veículo × mercadorias, somado a reincidência, ocultação, gravidade e fim comercial. A desproporção não é fator único; a habitualidade também não.",
+     "e": true,
+     "f": "cabe realçar que a habitualidade não é o único fator que permite ajustar a sanção a contexto específico de adequação e proporcionalidade da sanção aduaneira à conduta praticada.",
+     "fn": "Acervo de Perdimento"
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Locadora: culpa concreta descrita?",
+     "o": "A responsabilidade não é objetiva: decorre do descumprimento de dever de zelo aferível em sistema público de histórico aduaneiro.",
+     "e": false,
+     "f": "A responsabilidade da locadora de veículos não é objetiva, mas decorre do descumprimento de dever de zelo e cautela minimamente exigível na prestação de todo e qualquer serviço, sem autorizar devassas ou constrangimentos ilegais generalizados.",
+     "fn": "Acervo de Perdimento"
+    },
+    {
+     "pos": "Consectários",
+     "q": "Veículo já alienado: indenização?",
+     "o": "Via administrativa e Selic acumulada mensalmente (artigo 803-A, § 2º, do Decreto 6.759/2009; artigo 39, § 4º, da Lei 9.250/1995), sem precatório.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Ação ordinária ou mandado de segurança?",
+     "o": "Ordinária: majoração recursal apenas contra o apelante vencido. Mandado de segurança: sem honorários (artigo 25 da Lei 12.016/2009).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Multas administrativas e ambientais",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "IBAMA, ANTT, INMETRO, ANP e demais autarquias.",
+   "itens": [
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição punitiva e intercorrente?",
+     "o": "Cinco anos e três anos de paralisação no processo administrativo (artigo 1º da Lei 9.873/1999).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição da cobrança?",
+     "o": "Artigo 1º-A da Lei 9.873/1999; multa ambiental: Súmula 467/STJ.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Auto de infração regular?",
+     "o": "Presunção de legitimidade; competência, tipificação e motivação.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Responsabilidade administrativa ambiental?",
+     "o": "Subjetiva (EREsp 1.318.051).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Dosimetria proporcional?",
+     "o": "Circunstâncias, antecedentes, conversão em advertência ou serviços.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Servidor público",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Reajustes, gratificações, vantagens, reposição ao erário.",
+   "itens": [
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição?",
+     "o": "Artigo 1º do Decreto 20.910/1932; trato sucessivo (Súmula 85/STJ); prescrição do fundo de direito exige negativa expressa, formalizada e com ciência do servidor (Tema 1.410/STJ).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Pedido de aumento por isonomia?",
+     "o": "Vedado ao Judiciário (Súmula Vinculante 37).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Gratificação de caráter geral?",
+     "o": "Conferir paridade e regulamentação das avaliações antes de estender a inativos.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Complementos",
+     "q": "Reposição ao erário?",
+     "o": "Erro de interpretação da lei (Tema 531/STJ) × erro administrativo operacional (Tema 1.009/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Juros e correção?",
+     "o": "Tema 810/STF até 08/12/2021; Selic a partir de 09/12/2021 (EC 113/2021); requisitório: EC 136/2025 (ver transversal Consectários).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Execução de sentença coletiva — 28,86%",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Cumprimento individual da ACP 0005019-15.1997.4.03.6000 e protótipo para outras execuções coletivas.",
+   "itens": [
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Sobrestamento pelo Tema 1.433/STJ afastado?",
+     "o": "A suspensão alcança apenas REsp e AREsp na Vice-Presidência ou no Superior Tribunal de Justiça (ProAfR no REsp 2.234.888).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Razões dissociadas ou fundamento autônomo não impugnado?",
+     "o": "Conhecimento parcial ou não conhecimento (artigo 1.010, III, do CPC) — ex.: ilegitimidade da FUNASA não decidida na sentença.",
+     "e": false,
+     "f": "Senhores Desembargadores, conheço em parte da apelação, pois não se tratou na sentença da questão [ …] e, por outro lado, embora haja dois fundamentos, somente tendo sido um deles impugnado, o que poderia resultar em fundamentação suficiente para a confirmação da sentença, adentra-se, de qualquer modo, no exame da questão remanescente suscitada.",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Questão em discussão",
+     "q": "Qual alcance do título se discute?",
+     "o": "Territorial, subjetivo, acordo, ação anterior, prescrição — numerar.",
+     "e": true,
+     "f": "A controvérsia envolve discutir: (1) se a sentença coletiva proferida na Ação Civil Pública 0005019-15.1997.4.03.6000, ajuizada pelo Ministério Público Federal contra União \"e suas administrações indiretas\", possui abrangência nacional ou está limitada a servidores com lotação geográfica no Estado de Mato Grosso do Sul; e (2) [ …].",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Limite territorial?",
+     "o": "Pedido, aditamento e título sem restrição geográfica; Tema 1.075/STF (RE 1.101.937); rescisória desnecessária porque o título não se fundou no artigo 16 da Lei 7.347/1985 (artigo 535, § 8º, do CPC; Tema 733/STF); ADI 1.576 MC superada; ARE 1.585.247.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Substituição ou representação processual?",
+     "o": "A exigência de autorização e relação nominal (Tema 499/STF, RE 612.043; artigo 2º-A da Lei 9.494/1997) não alcança a ação civil pública, o mandado de segurança coletivo nem o sindicato, que atua como substituto processual (Tema 823/STF).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "O título exclui o exequente?",
+     "o": "Exclusões da própria coisa julgada: (1) recebimento do reajuste à época; (2) categoria cujo sindicato ajuizou ação idêntica, salvo prova de não contemplação; (3) ação individual ou sindical com igual objeto; e (4) acordo para recebimento das diferenças. Não há direito à escolha do título mais favorável.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Acordo administrativo provado?",
+     "o": "Fichas financeiras do SIAPE com a rubrica \"VANTAGEM ADMINIST. 28.86%\" (ID). Sem litígio prévio: acordo individual, dispensada homologação (Tema 550/STJ). Com litígio: transação até 19/05/1999 e homologação ou documento SIAPE (artigo 7º da MP 2.169-43/2001; Tema 1.102/STJ). Ação anterior se prova por certidão.",
+     "e": true,
+     "f": "Na espécie, a existência de fichas financeiras com registro de pagamento de diferenças decorrentes da vantagem de 28,86% — rubrica \"VANTAGEM ADMINIST. 28.86%-ATIV\" (ID [ID]) — faz presumir, em favor da Administração Pública, que houve composição administrativa regular entre as partes, sendo ônus do administrado demonstrar a eventual ilegalidade da conduta administrativa, o que não se verificou.",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Complementos",
+     "q": "Prescrição alegada só em contrarrazões?",
+     "o": "Reformada a sentença e dependendo de prova, remeter o exame à origem; mantida a sentença, a discussão fica prejudicada.",
+     "e": false,
+     "f": "Embora se cuide de questão de ordem pública, a controvérsia suscitada em contrarrazões de apelação não se amolda à hipótese de resolução imediata no âmbito da Corte sem oportunidade de amplo contraditório e dilação probatória na origem, vez que a legislação admite causas interruptivas e suspensivas relativamente a cada prazo aventado.",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Complementos",
+     "q": "Ilegitimidade do BACEN ou da União? Gratuidade revista?",
+     "o": "Polo passivo conforme o órgão de vínculo do servidor. Revisão da gratuidade: Tema 1.178/STJ e ADC 80 (ver transversal Gratuidade).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Pedido de honorários da União em contrarrazões?",
+     "o": "Condicionado à manutenção da sentença: prejudicado quando reformada, sem prejuízo da fixação na origem ao final.",
+     "e": false,
+     "f": "Prejudicado, por fim, o pedido de fixação de honorários advocatícios em favor da União, deduzido em contrarrazões ao fundamento da angularização da relação processual, vez que condicionado à manutenção da sentença, ora reformada, sem prejuízo da fixação da verba honorária na origem, ao final e conforme o resultado do cumprimento de sentença.",
+     "fn": "votos do 28,86%"
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "FGTS",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Correção, saque, recolhimentos.",
+   "itens": [
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Legitimidade passiva?",
+     "o": "Caixa Econômica Federal (Súmula 249/STJ).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Prescrição?",
+     "o": "Quinquenal, com modulação (Tema 608/STF).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Índice de correção?",
+     "o": "ADI 5.090: remuneração mínima pelo IPCA, com efeitos prospectivos.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Saque fora do rol legal?",
+     "o": "Admissível em situações excepcionais, como doença grave do titular ou de dependente.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "assunto",
+   "nome": "Saúde",
+   "extra": "estrutura: matriz-voto-geral",
+   "nota": "Medicamentos, tratamentos e procedimentos contra a União.",
+   "itens": [
+    {
+     "pos": "Preliminares e prejudiciais",
+     "q": "Competência e polo passivo?",
+     "o": "Tema 1.234/STF e Súmula Vinculante 60 (fluxos dos acordos interfederativos); Tema 793/STF.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Medicamento não incorporado?",
+     "o": "Requisitos cumulativos, com ônus do autor (Tema 6/STF; Súmula Vinculante 61); Tema 106/STJ.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Moldura jurídica",
+     "q": "Registro na ANVISA?",
+     "o": "Tema 500/STF.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Na espécie: provas",
+     "q": "Laudo e nota técnica?",
+     "o": "Laudo fundamentado do médico assistente; nota técnica do NatJus.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Aplicação ao caso",
+     "q": "Alternativa terapêutica do SUS esgotada?",
+     "o": "Demonstrar a ineficácia ou a contraindicação.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "transversal",
+   "nome": "Consectários",
+   "extra": "",
+   "nota": "Juros e correção contra a Fazenda Pública.",
+   "itens": [
+    {
+     "pos": "Consectários",
+     "q": "Regime anterior à EC 113/2021 por natureza da condenação?",
+     "o": "Até 08/12/2021: previdenciário, INPC (Tema 905/STJ); administrativo, IPCA-E (Tema 810/STF); juros da poupança nas relações não tributárias (artigo 1º-F da Lei 9.494/1997); tributário, Selic (artigo 39, § 4º, da Lei 9.250/1995).",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Selic a partir de 09/12/2021 e EC 136/2025?",
+     "o": "Selic única a partir de 09/12/2021 (EC 113/2021). A EC 136/2025 (09/09/2025) reescreveu o artigo 3º da EC 113/2021: nos requisitórios federais, da expedição ao pagamento, IPCA + juros simples de 2% ao ano, limitados à Selic; tributários, os critérios do crédito fiscal. Período anterior à expedição: regra geral suprimida e Tema 1.484/STF pendente — [VALIDAR] a redação com o Relator e o Manual de Cálculos vigente.",
+     "e": true,
+     "f": "Para o cálculo dos juros de mora e correção monetária, aplicam-se os critérios do Manual de Orientação de Procedimentos para os Cálculos na Justiça Federal vigente à época da elaboração da conta de liquidação até a edição da EC 113/2021, a partir de quando deve incidir exclusivamente a Taxa Selic.",
+     "fn": "Compêndio de modelos"
+    },
+    {
+     "pos": "Consectários",
+     "q": "Juros de mora em benefício?",
+     "o": "Desde a citação (Súmula 204/STJ); entre a conta e a requisição (Tema 96/STF).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Consectários",
+     "q": "Critério específico ou genérico?",
+     "o": "A uniformização vigente usa o padrão genérico; reservar critérios específicos à discussão concreta.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "transversal",
+   "nome": "Gratuidade",
+   "extra": "",
+   "nota": "Concessão, revisão e reflexos no preparo.",
+   "itens": [
+    {
+     "pos": "Complementos",
+     "q": "Pessoa natural: presunção respeitada?",
+     "o": "Artigo 99, § 3º, do CPC; indeferir só após oportunizar prova (artigo 99, § 2º, do CPC); critério objetivo apenas suplementar (Tema 1.178/STJ).",
+     "e": true,
+     "f": "Finalmente, quanto à gratuidade judiciária, não cabe alterar a concessão do benefício, conforme decisão anteriormente proferida, sem garantir prévio contraditório e, menos ainda, com base em critério exclusivamente objetivo, a teor do que dispõe o julgamento repetitivo do Tema 1.178/STJ.",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Complementos",
+     "q": "ADC 80 aplicável?",
+     "o": "Julgada em 03/09/2026 (ata publicada em 16/09/2026): presunção relativa de insuficiência para renda de até R$ 5.000,00, afastável por patrimônio ou renda familiar incompatíveis; acima disso, prova in concreto. Vale para todos os ramos do Judiciário, exceto Juizados de 1º grau, e só para processos ajuizados a partir da publicação da ata; o Tema 1.178/STJ será revisto.",
+     "e": false,
+     "f": "Embora no julgamento da ADC 80, Rel. p/ acórdão Min. GILMAR MENDES, na sessão de 03/09/2026, a Suprema Corte tenha fixado novos parâmetros para aferição da gratuidade judiciária, é certo que tal interpretação conforme à Constituição restou modulada para \"que produza efeitos ex nunc, a contar da publicação da ata de julgamento de mérito, sendo aplicável, portanto, somente aos processos ajuizados a partir de tal marco\", razão pela qual, no caso concreto, deve prevalecer o que decorre da jurisprudência tematizada da Corte Superior.",
+     "fn": "votos do 28,86%"
+    },
+    {
+     "pos": "Complementos",
+     "q": "Pessoa jurídica?",
+     "o": "Precisa demonstrar a insuficiência (Súmula 481/STJ; artigo 373, I, do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Admissibilidade",
+     "q": "Recurso contra o indeferimento ou gratuidade pedida no recurso?",
+     "o": "Dispensado o preparo até a decisão (artigo 99, § 7º, e artigo 101, § 1º, do CPC); indeferida, prazo para recolhimento; não recolhido, deserção (artigo 1.007 do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "transversal",
+   "nome": "Honorários",
+   "extra": "",
+   "nota": "Fixação, majoração e hipóteses de exclusão.",
+   "itens": [
+    {
+     "pos": "Honorários",
+     "q": "Fazenda vencida: faixas e base?",
+     "o": "Artigo 85, § 3º, do CPC; condenação, proveito econômico ou valor da causa.",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Equidade?",
+     "o": "Só nas hipóteses do artigo 85, § 8º, do CPC (Tema 1.076/STJ); Tema 1.255/STF pendente.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Previdenciário?",
+     "o": "Parcelas vencidas até a sentença (Súmula 111/STJ; Tema 1.105/STJ); nunca em salário mínimo.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Sem honorários na origem?",
+     "o": "Não se majora. Mantida a sentença e havendo contrarrazões, avaliar a fixação pela causalidade.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Hipóteses sem majoração?",
+     "o": "Desistência do recurso; mandado de segurança; agravo interno ou embargos contra decisão que já majorou; respeitar os limites dos §§ 2º e 3º.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Honorários",
+     "q": "Beneficiário da gratuidade?",
+     "o": "Exigibilidade suspensa (artigo 98, § 3º, do CPC).",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  },
+  {
+   "g": "transversal",
+   "nome": "Estilo do gabinete",
+   "extra": "",
+   "nota": "Vocabulário e forma do Manual CMT.",
+   "itens": [
+    {
+     "pos": "Revisão redacional",
+     "q": "Citações normativas na forma do gabinete?",
+     "o": "\"artigo 85, § 11, do CPC\" (por extenso, salvo transcrição); \"Lei 8.213/1991\" (sem \"nº\", ano com quatro dígitos); \"Súmula 149/STJ\"; \"Tema 642/STJ\"; \"CF/1988\". No rodapé da ementa, o diploma vem antes: \"CPC, artigos 85, § 11, e 1.022\".",
+     "e": true,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Revisão redacional",
+     "q": "Conectivos e fórmulas uniformizados?",
+     "o": "\"Neste sentido\" e \"Neste contexto\" (não \"Nesse\"); \"Ademais\", \"Com efeito\" (só confirmação), \"Por sua vez\", \"Contudo\", \"Assim\", \"Em suma\". Evitar \"Outrossim\", \"Nesse diapasão\", \"Por outro lado\", \"Porém\" no início do período; não abrir parágrafo com conectivo vazio.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Revisão redacional",
+     "q": "Designações e tratamento?",
+     "o": "\"a sentença\" (não \"a r. sentença\"); \"União\" (não \"União Federal\"); Supremo Tribunal Federal e Superior Tribunal de Justiça por extenso no corpo; \"Corte Superior\" para o Superior Tribunal de Justiça; sem \"Egrégio\", \"Colendo\", \"Excelso\".",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Revisão redacional",
+     "q": "Verbos e latinismos?",
+     "o": "\"alega\", \"sustenta\", \"afirma\" na exposição; \"aduz\" só para acréscimo de argumento. Latinismos só os consagrados (a quo, in albis, tempus regit actum): \"no caso\" por in casu, \"de ofício\" por ex officio, \"mandado de segurança\" por mandamus.",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Revisão redacional",
+     "q": "Documentos e números?",
+     "o": "\"ID’s\" no plural; \"(ID [ID], f. 5/9)\"; datas DD/MM/AAAA; \"R$ 2.736,98\"; enumeração \"(1) …; (2) …; e (3) …\".",
+     "e": false,
+     "f": "",
+     "fn": ""
+    },
+    {
+     "pos": "Revisão redacional",
+     "q": "Frase e terminologia técnica?",
+     "o": "Uma ideia por frase, até 40 palavras, ordem direta, sem adjetivos enfáticos; \"sem resolução do mérito\", \"ausência de interesse processual\", \"cumprimento de sentença\", \"remessa necessária\", \"auxílio por incapacidade temporária\".",
+     "e": false,
+     "f": "",
+     "fn": ""
+    }
+   ]
+  }
+ ]
+}
