@@ -58,7 +58,7 @@ jobs:
           # gerados aqui (não ficam no Git); lidos pelo ementário do Compendium em /jurisprudencia/
           python3 scripts/jurisprudencia/gerar_busca.py
           mkdir -p site/public/jurisprudencia && cp precedentes/jurisprudencia/indice.json.gz site/public/jurisprudencia/ && cp -R precedentes/jurisprudencia/busca site/public/jurisprudencia/
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60},"api/gh.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false}]}\n' > site/vercel.json
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60},"api/acesso.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}

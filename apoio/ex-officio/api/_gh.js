@@ -1,8 +1,8 @@
-/* /api/gh?p=<caminho> → ponte para a API do GitHub no repositório trf3bdutra/procs-muta, com o GH_TOKEN da Vercel.
+/* /api/acesso?gh=1&p=<caminho> (função _gh, servida pela acesso.js: o plano da Vercel aceita só 12 funções) → ponte para a API do GitHub no repositório trf3bdutra/procs-muta, com o GH_TOKEN da Vercel.
    Serve à Triagem e ao motor do acervo (Ab Initio) sem token no navegador: basta a sessão da Ex Officio (cookie cmt_eq)
    de quem é gestor ou tem perfil avançado (apoio/acessos.json).
    Corpo e resposta grandes (acervo/fonte.json, operacional.json) passam comprimidos (gzip, cabeçalho X-Ponte-Gz: 1),
-   abaixo do limite de 4,5 MB das funções da Vercel. GET /api/gh?p= (vazio) só confere o acesso. */
+   abaixo do limite de 4,5 MB das funções da Vercel. GET /api/acesso?gh=1&p= (vazio) só confere o acesso. */
 const zlib = require('zlib');
 const L = require('./_lib');
 const REPO = 'trf3bdutra/procs-muta';
