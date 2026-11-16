@@ -43,6 +43,7 @@ select{height:34px;padding:0 8px;font-weight:600;font-size:13px}
 .tb small{font:500 11px "JetBrains Mono",monospace;color:var(--m)}
 .tb .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
 .tb.dash{background:transparent;border-style:dashed}
+#porta-tk{position:fixed;inset:0;z-index:2147483600;background:rgba(23,63,61,.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px}#porta-tk .pt-c{background:var(--w,#fff);border-radius:12px;padding:22px 24px;width:min(460px,100%);box-shadow:0 18px 50px rgba(0,0,0,.25);font-size:14px;color:var(--tx)}#porta-tk h2{margin:4px 0 8px;font-size:24px;font-weight:800;letter-spacing:-.03em;color:var(--v)}#porta-tk input[type=password]{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--b2,#cfd6d3);border-radius:7px;font:inherit;margin-top:6px}#porta-tk .pt-l{display:flex;gap:7px;align-items:center;margin-top:9px;font-size:12.5px;color:var(--m2)}#porta-tk #pt-e{margin:10px 0 0;color:var(--r,#a03a2a);font-weight:600;font-size:13px}#porta-tk .pt-f{display:flex;align-items:center;gap:8px;margin-top:14px}#porta-tk #pt-s{margin-right:auto;font-size:12.5px;color:var(--m)}
 #estado .btn.ib{width:34px;padding:0;color:var(--v)}
 #st-grava{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 6px;border:0;background:transparent;font:600 12px Figtree,sans-serif;color:var(--m);cursor:default;white-space:nowrap}#st-grava i{width:8px;height:8px;border-radius:50%;background:#b9c2bf;flex:none}#st-grava.ok i{background:#3f8a63}#st-grava.pend{cursor:pointer;color:#8a5a12}#st-grava.pend i{background:#d29a2c}#st-grava.err{cursor:pointer;color:#a03a2a}#st-grava.err i{background:#c4513f}#st-grava.ing i{background:#3f7fa8;animation:stp 1s ease-in-out infinite}@keyframes stp{50%{opacity:.3}}
 .tb-esc .car{font-size:10px;margin-left:4px;color:var(--m)}#esc-pop{position:fixed;z-index:2147480000;min-width:280px;max-width:380px;max-height:70vh;overflow:auto;background:var(--w,#fff);border:1px solid var(--b2,#cfd6d3);border-radius:8px;padding:6px;box-shadow:0 10px 30px rgba(23,63,61,.18)}#esc-pop button{display:flex;width:100%;align-items:center;gap:8px;border:0;background:transparent;padding:7px 9px;border-radius:6px;font:600 13px Figtree,sans-serif;color:var(--tx);cursor:pointer;text-align:left}#esc-pop button:hover,#esc-pop button.on{background:rgba(23,63,61,.07)}#esc-pop button small{margin-left:auto;font:500 11.5px 'JetBrains Mono',monospace;color:var(--m)}#esc-pop .dot{width:9px;height:9px;border-radius:50%;flex:none}#esc-pop hr{border:0;border-top:1px solid var(--b,#e3e0d6);margin:5px 2px}#esc-pop .vz{padding:8px 9px;font-size:12.5px;color:var(--m)}
@@ -1274,8 +1275,27 @@ D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if ($('#gaveta'
 /* ===================== arranque ===================== */
 async function lerFonte(msg) { try { if (msg) msg('Lendo a fonte do acervo no procs-muta…'); const j = JSON.parse(await PM().ler('acervo/fonte.json')); if (j && Array.isArray(j.registros)) { FONTE = j.registros; FONTE_EM = j.atualizado_em || ''; } } catch (e) { FONTE = null; toast('Não li a fonte do acervo (' + e.message + '); uso a cópia deste navegador.', true); } }
 async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; } indexEsc(); }
+function portaToken() { return new Promise((fim) => {
+  const v = D.createElement('div'); v.id = 'porta-tk';
+  v.innerHTML = '<form class="pt-c" autocomplete="off"><p class="k" style="margin:0;color:var(--g)">Ab Initio · Gabinete A</p><h2>Entrar na Triagem<span style="color:var(--g2)">.</span></h2>' +
+    '<p>A Triagem lê o acervo e grava escaninhos, destinos e regras no repositório privado <code>trf3bdutra/procs-muta</code>. Informe o token do GitHub com acesso a ele (permissão <i>Contents</i>: leitura e gravação).</p>' +
+    '<input type="password" id="pt-v" placeholder="github_pat_… ou ghp_…" required aria-label="Token do GitHub">' +
+    '<label class="pt-l"><input type="checkbox" id="pt-l" checked> Lembrar neste navegador (só em computador do gabinete)</label>' +
+    '<p id="pt-e" role="alert" hidden></p><div class="pt-f"><span id="pt-s"></span><button type="submit" class="btn pri">Entrar</button></div></form>';
+  D.body.appendChild(v); const i = $('#pt-v'); setTimeout(() => i.focus(), 30);
+  v.querySelector('form').addEventListener('submit', async (e) => { e.preventDefault(); const tk = i.value.trim(); if (!tk) return; const er = $('#pt-e'), st = $('#pt-s'), bt = v.querySelector('button');
+    er.hidden = true; st.textContent = 'Conferindo no GitHub…'; bt.disabled = true;
+    let r = null; try { r = await PM().definir(tk, $('#pt-l').checked); } catch (x) { r = { erro: x.message }; }
+    st.textContent = ''; bt.disabled = false;
+    if (!r || !r.ok) { er.textContent = (r && r.erro) || 'O GitHub recusou o token.'; er.hidden = false; i.select(); return; }
+    try { const G = M().__acervoGitHub; if (G && G.token) G.token(tk); } catch (x) {}
+    v.remove(); fim(tk); }); }); }
 (async function arrancar() {
   const msg = (t) => { const m = $('#carga-msg'); if (m) m.textContent = t; };
+  /* token do procs-muta: pedido logo na entrada; sem ele a Triagem não abre (lê e grava num repositório privado) */
+  { let t = 0; while (!PM()) { if (++t > 300) break; await new Promise((r) => setTimeout(r, 200)); } }
+  if (PM() && !PM().atual) await portaToken();
+  else { try { const G = M().__acervoGitHub; if (G && G.token && PM()) G.token(PM().atual); } catch (e) {} }
   let n = 0; while (!(core() && core().rows && core().rows.length && PM())) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); return; } if (n === 40) msg('Ainda lendo o acervo (são ~6 mil processos)…'); await new Promise((r) => setTimeout(r, 400)); }
   try { const j = JSON.parse(await PM().ler('apoio/regras/escopo-triagem.json')); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } } catch (e) { console.warn('[Triagem] escopo', e); }
   await lerFonte(msg);
