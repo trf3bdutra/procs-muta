@@ -236,7 +236,7 @@ function dkResumo(t){if(XP.fora[t.k])return 'retirado';if(t.opc&&!XP.abre[t.k])r
 function dkOutros(pt,sel){var L=pt.tr.filter(function(t){return !(t.n==='Sentença'&&sentNaAbertura(pt.tr,XP.alt));});if(L.length<2)return '';
   return '<div class="dout2"><div class="cfl">'+(sel?'Outros blocos':'Blocos da parte')+'</div><ol>'+L.map(function(t,i){if(sel&&t.k===sel.k)return '';var fo=XP.fora[t.k],op=t.opc&&!XP.abre[t.k];return '<li><button type="button" data-'+(fo?'xvolta':op?'xabre':'dsel')+'="'+esc(t.k)+'"><span class="n">'+('0'+(i+1)).slice(-2)+'</span><b>'+esc(t.n)+'</b><small>'+esc(dkResumo(t))+' ›</small></button></li>';}).join('')+'</ol></div>';}
 function dkHead(){var h=$('#v-edit .pg-h');if(!h)return;var ed=XS.ed||'pecas',t=$('#v-edit .pg-t h1'),k=$('#v-edit .pg-t .dkk');if(!k&&t){k=document.createElement('p');k.className='dkk';t.parentNode.insertBefore(k,t);}
-  var I={pecas:['01 / PADRÃO · MINUTA-MATRIZ','Minuta-Matriz','Molde-padrão de cada peça: a estrutura vem pronta, com versões, campos, regras e orientações; a fundamentação é do caso.'],mod:['01 / PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho, prontos para preencher com os dados do caso.'],dir:['02 / SEGUIR AS DIRETRIZES','Diretrizes','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.'],consulta:['03 / CONSULTAR O CASO PAUTADO','Consulta','Escolha a sessão e o item: o Compêndio lê o cartão do processo e reúne o material aplicável.']}[ed]||['','Editorial',''];
+  var I={pecas:['PADRÃO · MINUTA-MATRIZ','Minuta-Matriz','Molde-padrão de cada peça: a estrutura vem pronta, com versões, campos, regras e orientações; a fundamentação é do caso.'],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho, prontos para preencher com os dados do caso.'],dir:['DIRETRIZES DO GABINETE','Diretrizes','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.'],consulta:['CONSULTA DO CASO PAUTADO','Consulta','Escolha a sessão e o item: o Compêndio lê o cartão do processo e reúne o material aplicável.']}[ed]||['','Editorial',''];
   if(k)k.textContent=I[0];if(t)t.textContent=I[1];var d=$('#x-desc');if(d)d.textContent=I[2];
   var sb=$('#x-sub');if(sb&&!sb.querySelector('.dgp')){var gp=document.createElement('span');gp.className='dgp';gp.setAttribute('role','group');gp.setAttribute('aria-label','Padrão: versões alternativas');gp.innerHTML='<span class="dgl" data-n="01">Padrão</span><span class="dgs"></span>';
     sb.insertBefore(gp,sb.firstChild);['pecas','mod'].forEach(function(k){var b=sb.querySelector('button[data-s="'+k+'"]');if(b)gp.querySelector('.dgs').appendChild(b);});}
@@ -388,6 +388,7 @@ function xRender(){
   if(window.VDM_marcaNav)window.VDM_marcaNav();
   xPagina();
   if(irBanco)setTimeout(function(){bk.scrollIntoView({behavior:'smooth',block:'start'});},60);
+  if(window.VDM_cnSync)setTimeout(window.VDM_cnSync,0);
 }
 
 /* Diretrizes e Consulta entram na navegação interna do Editorial: o conteúdo é levado para dentro da página e volta ao sair */
@@ -397,9 +398,9 @@ document.addEventListener('cmt-acesso',function(){if(XS.ed==='dir'&&!$('#v-edit'
 
 /* ===== Referenciais (acesso avançado): Enunciados, Repertório e Enciclopédia num só menu, com navegação interna como a do Editorial ===== */
 (function(){
-  var RV=['temas','rep','enc'],RI={temas:['01','Enunciados','01 / ENUNCIADOS','Temas repetitivos, de repercussão geral e súmulas, com as teses e os usos no gabinete.'],
-    rep:['02','Repertório','02 / REPERTÓRIO','Jurisprudência, normas e Regimento citados nas peças do gabinete.'],
-    enc:['03','Enciclopédia','03 / ENCICLOPÉDIA','Recursos, guias práticos, rotina do gabinete, PJe, competência, matérias, léxico e Regimento.']};
+  var RV=['temas','rep','enc'],RI={temas:['01','Enunciados','AVANÇADO · ENUNCIADOS','Temas repetitivos, de repercussão geral e súmulas, com as teses e os usos no gabinete.'],
+    rep:['02','Repertório','AVANÇADO · REPERTÓRIO','Jurisprudência, normas e Regimento citados nas peças do gabinete.'],
+    enc:['03','Enciclopédia','AVANÇADO · ENCICLOPÉDIA','Recursos, guias práticos, rotina do gabinete, PJe, competência, matérias, léxico e Regimento.']};
   var ult='temas';
   var et=document.querySelector('.tab[data-v="edit"]');if(!et)return;var ancora=et.closest('.tabw')||et;
   var rt=document.createElement('button');rt.className='tab';rt.type='button';rt.setAttribute('role','tab');rt.setAttribute('data-v','refs');rt.setAttribute('data-av','');rt.setAttribute('aria-selected','false');rt.hidden=true;
@@ -450,8 +451,28 @@ function dirPrep(f){var D=f.contentDocument;if(!D||!D.body)return;
 document.addEventListener('cmt-acesso',function(){var f=document.getElementById('dir-fr');if(f)dirPrep(f);});
 try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f&&f.contentDocument)f.contentDocument.documentElement.setAttribute('data-theme',document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light');}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}catch(e){}
 
-/* ===== Navegação do Compêndio fora do cabeçalho: faixa própria abaixo do topo ===== */
-(function(){var sec=document.querySelector('.top .eq-sec');var top=document.querySelector('header.top');if(!sec||!top)return;
+/* ===== Navegação única do Compêndio, numa faixa abaixo do cabeçalho: sem "Editorial";
+   abas comuns (Ementário · Padrão: Minuta-Matriz e Modelos · Diretrizes · Consulta) e abas do acesso avançado (Enunciados · Repertório · Enciclopédia) ===== */
+(function(){var top=document.querySelector('header.top');if(!top)return;
+  var IT=[['ement','Ementário'],['|'],['pecas','Minuta-Matriz','Padrão'],['mod','Modelos'],['|'],['dir','Diretrizes'],['consulta','Consulta'],['||'],['temas','Enunciados','Avançado'],['rep','Repertório'],['enc','Enciclopédia']];
   var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compêndio');
-  bar.innerHTML='<div class="cn-in"><span class="cn-k">Compêndio</span></div>';bar.firstChild.appendChild(sec);top.parentNode.insertBefore(bar,top.nextSibling);
-  document.body.classList.add('cmp-nav-fora');})();
+  var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
+    var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false">'+x[1]+'</button>';});
+  bar.innerHTML=h+'</div>';top.parentNode.insertBefore(bar,top.nextSibling);document.body.classList.add('cmp-nav-fora');
+  function aba(v){var t=document.querySelector('.tab[data-v="'+v+'"]');if(t)t.click();}
+  function atual(){var vs=function(id){var e=document.getElementById(id);return e&&!e.hidden;};if(vs('v-ement'))return 'ement';if(vs('v-edit'))return XS.ed==='par'?'pecas':(XS.ed||'pecas');
+    var r=['temas','rep','enc'].filter(function(v){return vs('v-'+v);})[0];return r||'';}
+  function sync(){var a=atual();$$('.cn-b',bar).forEach(function(b){b.setAttribute('aria-current',String(b.getAttribute('data-cn')===a));});}
+  bar.addEventListener('click',function(e){var b=e.target.closest('.cn-b');if(!b)return;var v=b.getAttribute('data-cn');
+    if(v==='ement')aba('ement');else if(['temas','rep','enc'].indexOf(v)>=0)aba(v);else irEditorial(v);setTimeout(sync,0);window.scrollTo(0,0);});
+  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.tab,#x-sub button,[data-rs]'))setTimeout(sync,0);});
+  window.addEventListener('hashchange',function(){setTimeout(sync,60);});document.addEventListener('cmt-acesso',function(){setTimeout(sync,60);});
+  window.VDM_cnSync=sync;setTimeout(sync,0);})();
+
+/* ===== Celular: filtros laterais (Ementário, Modelos, Banco de trechos, Enunciados, Repertório) recolhidos atrás de um botão ===== */
+(function(){
+  [['e-aside'],['n-aside'],['r-aside']].forEach(function(x){var a=document.getElementById(x[0]);if(!a||a.previousElementSibling&&a.previousElementSibling.classList.contains('mf-bt'))return;
+    var b=document.createElement('button');b.type='button';b.className='mf-bt';b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls',x[0]);b.innerHTML='<span>Filtros e navegação</span><i aria-hidden="true">▾</i>';
+    a.parentNode.insertBefore(b,a);a.classList.add('mf-col');
+    b.addEventListener('click',function(){var o=a.classList.toggle('mf-aberto');b.setAttribute('aria-expanded',String(o));});});
+})();

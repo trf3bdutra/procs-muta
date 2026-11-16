@@ -825,6 +825,19 @@ html[data-theme=dark] #v-pauta.ed.mono .urg{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07
 #v-pauta.ctl .ctl-sec>p:last-child{margin:0;max-width:760px;font-size:14px;color:var(--em)}
 #v-pauta.ctl .metas{display:block!important;background:var(--ep);border:1px solid var(--el);border-radius:8px;padding:16px;box-shadow:0 8px 24px -18px rgba(32,59,57,.35)}
 @media (max-width:980px){#v-pauta.ctl{display:block}#v-pauta.ctl .ctl-sub{position:static;flex-direction:row;flex-wrap:wrap;gap:6px;border-top:0!important;padding:0!important;margin:0 0 18px!important}#v-pauta.ctl .ctl-nk,#v-pauta.ctl .ctl-nota{display:none}#v-pauta.ctl .ctl-sub button{width:auto;border:1px solid var(--el);border-radius:999px;padding:6px 12px}#v-pauta.ctl .pt-h h1{font-size:38px}}
+
+/* celular: cabeçalho em duas linhas (marca e botões em cima; seções roláveis embaixo), sem rolagem lateral da página */
+@media (max-width:760px){
+  #app header{flex-wrap:wrap!important;row-gap:8px!important;padding:8px 12px!important;gap:8px!important}
+  #app header .br>span{display:none}
+  #app header .sp{flex:1 1 auto}
+  #app header nav.tabs{order:10;flex:1 1 auto;min-width:0;max-width:100%;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap!important}
+  #app header nav.tabs::-webkit-scrollbar{display:none}
+  #app header nav.tabs:not(.eq-cpn){flex-basis:calc(100% - 132px)}
+  #app header nav.tabs.eq-cpn{flex:0 0 auto}
+  #app header #salvo{display:none}
+  html,body{overflow-x:hidden}
+}
 </style>
 <style id="cc-cal-css">
 .cc-esq{position:relative}
