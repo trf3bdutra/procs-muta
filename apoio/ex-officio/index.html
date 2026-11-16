@@ -1034,7 +1034,8 @@ html[data-theme=dark] .home-v2 .hc-ey,html[data-theme=dark] #v-pauta.ed .trb-ey,
 #app header.nx .nx-nav:hover{border-color:var(--eg);color:var(--eg)}
 #app header.nx .nx-nav[aria-expanded=true]{background:var(--eg);border-color:var(--eg);color:var(--ep)}
 #app header.nx .nx-nav svg{flex:none}
-#app header.nx:not(.navab) nav.tabs{display:none!important}
+#app header.nx.navcmt:not(.navab) nav.tabs{display:none!important}
+#app header.nx:not(.navcmt) .nx-nav{display:none}
 #app header.nx.navab nav.tabs{animation:nxab .16s ease-out}
 @keyframes nxab{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media (max-width:760px){#app header.nx .nx-nav span{display:none}#app header.nx .nx-nav{padding:0 8px;min-width:38px;justify-content:center}}
@@ -1177,6 +1178,14 @@ html[data-theme=dark] #v-cmt{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a
 .cmt-ac button:hover{border-color:var(--eg);color:var(--eg)}
 .cmt-ac button.on{background:var(--eg);border-color:var(--eg);color:var(--ep)}
 .cmt-tb td.cmt-sel{width:28px;padding-right:0}
+
+.cmt-met .mk{border-left:3px solid var(--eo)}
+.cmt-met .mk .pq{font:600 14px Inter,system-ui,sans-serif;letter-spacing:-.01em;color:var(--ei)}
+.cmt-uc{display:flex;border-top:1px solid var(--el);border-bottom:1px solid var(--el);margin:0 -12px 2px}
+.cmt-uc span{flex:1;padding:8px 10px;border-left:1px solid var(--el);font:400 8.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+.cmt-uc span:first-child{border-left:0;padding-left:12px}
+.cmt-uc b{display:block;font:400 17px var(--emono);color:var(--eo2);letter-spacing:-.02em}
+.cmt-uc span:first-child b{color:#a7433d}
 .cmt-fontes{margin:18px 0 0;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
 @media (max-width:860px){#v-cmt{padding:0 14px 30px}.cmt-cols{grid-template-columns:1fr}.cmt-cols>div+div{border-left:0;padding-left:0;margin-left:0;border-top:1px solid var(--el);margin-top:12px}.cmt-hero h1{font-size:28px}}
 /* ===== Diligências no padrão editorial: papel, filetes, cantos retos e rótulos em mono ===== */
@@ -1579,7 +1588,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
       <div class="cmt-hero"><p class="cmt-ey">05 / Gabinete</p><h1>Painel do <em>desembargador.</em></h1><p class="cmt-sub" id="cmt-sub"></p><button type="button" class="b" id="cmt-atu">Atualizar</button></div>
       <div class="cmt-lay">
       <aside class="cmt-left">
-        <section class="cmt-rc2"><p class="cmt-k">Dúvidas ao CM <span class="cmt-n" id="cmt-n-dv">—</span></p><div id="cmt-c-dv"></div></section>
+        <section class="cmt-rc2"><p class="cmt-k">Para devolutiva · ao CM <span class="cmt-n" id="cmt-n-dv">—</span></p><div id="cmt-c-dv"></div></section>
         <section class="cmt-rc2"><p class="cmt-k">Para assinatura <span class="cmt-n" id="cmt-n-ass">—</span></p><div id="cmt-c-ass"></div></section>
         <section class="cmt-rc2"><p class="cmt-k">Para liberação <span class="cmt-n" id="cmt-n-lib">—</span></p><div id="cmt-c-lib"></div></section>
       </aside>
@@ -1594,7 +1603,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
       <section class="cmt-q cmt-dk" id="cmt-pauta"><h2>Pauta da sessão <span class="cmt-n" id="cmt-n-pt">—</span><span class="cmt-sp"></span><button type="button" class="b" id="cmt-csv">CSV</button><button type="button" class="b" id="cmt-imp">Imprimir</button></h2>
         <div class="cmt-ft" id="cmt-ft"></div>
         <div class="cmt-bus"><button type="button" class="cmt-selt" id="cmt-selt">Selecionar exibidos</button><button type="button" class="cmt-libl" id="cmt-libl" disabled>Liberar selecionados</button><input type="search" id="cmt-q" placeholder="Itens (2, 5-9), número, assunto ou servidor" aria-label="Buscar na pauta"></div>
-        <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Atenção</th><th>Decisão</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
+        <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Ações</th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Atenção</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
         <p class="cmt-rc" id="cmt-rc"></p>
       </section>
       <section class="cmt-q" id="cmt-eq"><h2>Equipe e ausências <span class="cmt-n" id="cmt-n-eq">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Produção nas pautas publicadas</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
@@ -1604,7 +1613,7 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
       </div>
       <aside class="cmt-rail">
         <section class="cmt-rc2"><p class="cmt-k">Sessões</p><div id="cmt-l-ses"></div></section>
-        <section class="cmt-rc2"><p class="cmt-k">Urgências <span class="cmt-n" id="cmt-n-ur">—</span></p><div id="cmt-l-urg"></div></section>
+        <section class="cmt-rc2"><p class="cmt-k">Urgências <span class="cmt-n" id="cmt-n-ur">—</span></p><div class="cmt-uc" id="cmt-urg-c"></div><div id="cmt-l-urg"></div></section>
         <section class="cmt-rc2"><p class="cmt-k">Marcos vencendo</p><div id="cmt-l-pz"></div></section>
       </aside>
       </div>
@@ -2779,11 +2788,11 @@ function vista(v){if(v==='controles'||v==='monitoramento')v='ctrl';if(v==='urg')
   if(S.prt&&(v==='inicio'||v!==S.fonte)){S.prt=null;S.prtAba=0;try{prontLateral();}catch(e){}}
   if(v==='pauta'&&U.eu&&S.calSig!=null)sessoesEquipe(false);$('#v-cmt').hidden=v!=='cmt';
   $('#v-inicio').hidden=v!=='inicio';$('#v-pauta').hidden=(v==='inicio'||v==='cmt');
-  if(v==='cmt'){try{history.replaceState(null,'','#cmt');}catch(e){}nxRotulo('cmt');cmtAbrir();Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')==='cmt')a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});return;}
+  if(v==='cmt'){try{history.replaceState(null,'','#cmt');}catch(e){}nxRotulo('cmt');var h2=document.querySelector('#app header.nx');if(h2)h2.classList.add('navcmt');cmtAbrir();Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')==='cmt')a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});return;}
   var f=v==='inicio'?S.fonte:v;if(v!=='inicio'&&f!==S.fonte){if(nPend()){salvarTudo();toast('Alterações salvas ao trocar de página.');}S.fonte=f;S.doc=null;S.aberto={};S.sel={};
     var vp=$('#v-pauta');vp.classList.toggle('mono',f==='mono');CTRLT.forEach(function(c){vp.classList.toggle(c,f==='ctrl');});vp.classList.toggle('ctl',f==='ctrl');if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu)carregar();}
   Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
-  nxRotulo(v);
+  nxRotulo(v);var hdr=document.querySelector('#app header.nx');if(hdr)hdr.classList.toggle('navcmt',v==='cmt');
   ctlMarca(alvo);
   try{history.replaceState(null,'','#'+(v==='ctrl'?(alvo||'monitoramento'):v));}catch(e){}if(v==='inicio'&&(!P.dados||!P.dados.entregas||Date.now()-(P.atualizado||0)>30000))painel();
   if(alvo)setTimeout(function(){var h=$('#ctl-'+alvo);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});},S.fonte==='ctrl'?60:400);}
@@ -3209,7 +3218,7 @@ document.addEventListener('click',function(e){
   var b=e.target.closest&&e.target.closest('#nx-nav');if(b){e.preventDefault();nxNav();return;}
   if(e.target.closest&&e.target.closest('.tabs [data-vw]'))nxNav(false);});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')nxNav(false);});
-try{if(localStorage.getItem('eq_nav')==='1')nxNav(true);}catch(e){}
+/* a barra só se recolhe no Gabinete; nas demais seções fica sempre à vista */
 
 /* ===== Gabinete · painel do desembargador (#cmt) =====
    Dados de /api/painel?cmt=1 (api/_cmt.js): assinaturas e liberações pendentes, urgências e marcos,
@@ -3260,8 +3269,8 @@ function cmtMarcos(){
   $('#cmt-ml').innerHTML=li;}
 /* pauta da sessão aberta: filtros por etapa e busca por item, número, assunto ou servidor */
 function cmtFiltra(){
-  var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'todos',q=(CMT.q||'').trim().toLowerCase();
-  var L=f==='todos'?it.slice():it.filter(function(x){return x.etapa===f;});
+  var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'aliberar',q=(CMT.q||'').trim().toLowerCase();
+  var L=f==='todos'?it.slice():f==='aliberar'?it.filter(function(x){return x.etapa!=='liberado';}):f==='retido'?it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;}):it.filter(function(x){return x.etapa===f;});
   if(q){var fx=/^\d+(?:\s*[-,]\s*\d+)*$/.test(q);
     L=L.filter(function(x){
       if([x.item,x.cnj,x.assunto,x.classe,x.servidor,x.corretor,x.partes].join(' ').toLowerCase().indexOf(q)>=0)return true;
@@ -3272,23 +3281,28 @@ function cmtPauta(){
   var j=CMT.dados,p=j.pauta||{itens:[]},it=p.itens||[];
   var cta={todos:it.length,pendente:0,minutado:0,corrigido:0,liberado:0};
   it.forEach(function(x){cta[x.etapa]=(cta[x.etapa]||0)+1;});
+  var retidos=it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;}).length;
   $('#cmt-n-pt').textContent=p.date?br(p.date)+(p.previa?' · prévia':''):'sem pauta';
-  var F=[['todos','Todos'],['pendente','Sem minuta'],['minutado','Minutadas'],['corrigido','Corrigidas'],['liberado','Liberadas']];
-  $('#cmt-ft').innerHTML=F.map(function(x){return '<button type="button" data-cf="'+x[0]+'" aria-pressed="'+((CMT.filtro||'todos')===x[0])+'">'+x[1]+'<i>'+(cta[x[0]]||0)+'</i></button>';}).join('');
+  var F=[['aliberar','A liberar'],['retido','Revisados, retidos'],['liberado','Liberados'],['todos','Todos']];
+  cta.aliberar=it.length-(cta.liberado||0);cta.retido=retidos;
+  $('#cmt-ft').innerHTML=F.map(function(x){return '<button type="button" data-cf="'+x[0]+'" aria-pressed="'+((CMT.filtro||'aliberar')===x[0])+'">'+x[1]+'<i>'+(cta[x[0]]||0)+'</i></button>';}).join('');
   var L=cmtFiltra(),NOME={pendente:'Sem minuta',minutado:'Minutada',corrigido:'Corrigida',liberado:'Liberada'};
   $('#cmt-rows').innerHTML=L.length?L.map(function(x){
     var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.meta)at.push('meta');
     var lib=x.etapa==='liberado';
-    return '<tr><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span></td><td>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td><span class="cmt-et '+esc(x.etapa)+'">'+esc(NOME[x.etapa]||x.etapa)+'</span></td><td class="cmt-at">'+esc(at.join(' · ')||'—')+'</td><td><span class="cmt-ac"><button type="button" class="'+(lib?'on':'')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Desfazer a liberação':'Liberar o voto')+'">✓</button><button type="button" data-cd="'+esc(x.cnj)+'" title="Devolver com apontamento">↩</button></span></td></tr>';}).join(''):'<tr><td colspan="8" style="color:var(--em)">Nada nesta seleção.</td></tr>';
+    return '<tr><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td><span class="cmt-ac"><button type="button" class="'+(lib?'on':'')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Desfazer a liberação':'Liberar o voto')+'" aria-label="'+(lib?'Desfazer a liberação':'Liberar o voto')+'">✓</button><button type="button" data-cd="'+esc(x.cnj)+'" title="Devolver com apontamento" aria-label="Devolver com apontamento">↩</button></span></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span></td><td>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td><span class="cmt-et '+esc(x.etapa)+'">'+esc(NOME[x.etapa]||x.etapa)+'</span></td><td class="cmt-at">'+esc(at.join(' · ')||'—')+'</td></tr>';}).join(''):'<tr><td colspan="8" style="color:var(--em)">Nada nesta seleção.</td></tr>';
   $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
   var falta=it.length-(cta.liberado||0);
   var nmin=it.filter(function(x){return x.dataMinuta;}).length,ncor=it.filter(function(x){return x.dataCorrecao;}).length;
   var d=(j.agenda||[]).filter(function(s){return s.date===p.date;})[0]||{marcos:{}};
+  var prox=null,PM={pautarAte:'Pautar até',inicioPreparacao:'Início da preparação',entregaMinutas:'Entrega das minutas',liberacao:'Liberação'};
+  Object.keys(PM).forEach(function(k){var x=(d.marcos||{})[k];if(x&&x>=j.hoje&&!prox)prox={nome:PM[k],data:x};});
+  if(!prox&&p.date&&p.date>=j.hoje)prox={nome:'Sessão de julgamento',data:p.date};
   $('#cmt-met').innerHTML=''+
     '<div><span>A liberar</span><b>'+falta+'</b><small>'+(d.marcos&&d.marcos.liberacao?'liberação em '+br(d.marcos.liberacao):'sem marco de liberação')+'</small></div>'+
-    '<div><span>Minutadas</span><b>'+nmin+'</b><small>de '+it.length+'</small></div>'+
-    '<div><span>Corrigidas</span><b>'+ncor+'</b><small>de '+it.length+'</small></div>'+
-    '<div><span>Liberadas</span><b>'+(cta.liberado||0)+'</b><small>de '+it.length+'</small></div>';
+    '<div><span>Liberados</span><b>'+(cta.liberado||0)+'</b><small>de '+it.length+' · '+nmin+' minutadas</small></div>'+
+    '<div><span>Revisados, não liberados</span><b>'+retidos+'</b><small>'+(retidos?'com apontamento em aberto':'nenhum retido')+'</small></div>'+
+    '<div class="mk"><span>Próximo marco</span><b class="pq">'+(prox?esc(prox.nome):'sem marco futuro')+'</b><small>'+(prox?br(prox.data)+' · em '+cmtDias(prox.data,j.hoje)+' dias':'cadastre os marcos da sessão')+'</small></div>';
   $('#cmt-n-pan').textContent=p.date?'sessão de '+br(p.date):'—';if(typeof cmtAtuLote==='function')cmtAtuLote();}
 function cmtCsv(){
   var L=cmtFiltra(),h=['Item','Processo','Classe','Assunto','Servidor','Corretor','Etapa','Minuta','Correcao','Liberacao','Resultado'];
@@ -3310,6 +3324,11 @@ function cmtPinta(){
       '<span class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></span></div>';});
   var ur=j.urgencias||[],pz=j.prazos||[];
   $('#cmt-n-ur').textContent=ur.length;
+  var venc=ur.filter(function(x){return x.espera!=null&&x.espera>=15;}).length;
+  var hj0=ur.filter(function(x){return x.espera===0;}).length;
+  var h48=ur.filter(function(x){return x.espera===1||x.espera===2;}).length;
+  var semr=ur.filter(function(x){return !x.servidor;}).length;
+  var cu=$('#cmt-urg-c');if(cu)cu.innerHTML='<span><b>'+venc+'</b>vencidas</span><span><b>'+hj0+'</b>hoje</span><span><b>'+h48+'</b>em 48 h</span><span><b>'+semr+'</b>sem resp.</span>';
   cmtLista('#cmt-l-urg',ur,function(x){var d=x.espera;return '<div class="cmt-it'+(d>=15?' alerta':d>=7?' atencao':'')+'"><b>'+esc(x.cnj)+'</b><span>'+esc([x.tipo,x.nivel].filter(Boolean).join(' · '))+'</span><time>'+(d==null?'':d===0?'hoje':'há '+d+(d===1?' dia':' dias'))+'</time></div>';});
   cmtLista('#cmt-l-pz',pz,function(x){return '<div class="cmt-it'+(x.dias<0?' alerta':x.dias<=2?' atencao':'')+'"><b>'+esc(br(x.sessao))+'</b><span>'+esc(x.marco)+'</span><time>'+(x.dias<0?'vencido':x.dias===0?'hoje':x.dias===1?'amanhã':'em '+x.dias+' dias')+'</time></div>';});
   var se=j.sessoes||[],sel=(j.pauta||{}).date;
