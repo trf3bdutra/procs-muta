@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.regras.escopo-triagem",
  "versao": 1,
- "atualizadoEm": "2026-11-16T20:36:25.646857+00:00",
+ "atualizadoEm": "2026-11-16T20:45:27.253589+00:00",
  "descricao": "Escopo do app de triagem (destinar à decisão monocrática ou à pauta). Entra só processo do acervo fonte (acervo/fonte.json) cuja tarefa_atual esteja em 'triar'. Processo sem tarefa do gabinete (com a secretaria: prazo, publicação, juntada, recebimento) fica fora. Tarefa nova que não esteja em nenhuma lista: mostrar à parte, para classificar.",
  "regra": {
   "campo": "tarefa_atual",
@@ -77,6 +77,15 @@
     "[SU] Sobrestado por Determinação em IRDR ou IAC",
     "[SU] Sobrestado por Motivos Diversos",
     "Sobrestado por Motivos Diversos"
+   ]
+  },
+  "distribuicao": {
+   "motivo": "recém-distribuídos, em análise da distribuição; entram na triagem quando chegarem à Triagem de Gabinete ou à análise do tipo de decisão",
+   "tarefas": [
+    "Análise da distribuição - recursos federais",
+    "Análise da distribuição - recursos estaduais",
+    "Análise da distribuição - recursos federias prioridade",
+    "Retificar autuação - Análise da distribuição"
    ]
   }
  },

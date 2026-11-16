@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ab Initio · Triagem</title>
+<meta name="description" content="Triagem dos processos do Gabinete A em tarefa pendente de destino: início, fila, escaninhos e atualização do acervo.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z' fill='%23a57829'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/init/assets/css/95-ficha-unica.css">
+<style>
+:root{--bg:#f4f2ea;--p:#fbfaf5;--w:#fff;--tx:#203b39;--m:#5c6b67;--m2:#4f5a57;--b:#d8d3c6;--b2:#c8c3b6;--l:#e3ded2;--l2:#f0ece2;--v:#173f3d;--v2:#235a55;--g:#805b18;--g2:#a57829;--ok:#1f5a4a;--ok2:#3b7150;--az:#24506f;--az2:#4b7fa8;--r:#8a2f22;--r2:#e2b3aa;--cz:#8a948f}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 Figtree,system-ui,sans-serif}
+a{color:var(--v2)}
+button{font:inherit;color:inherit}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.k{font:500 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
+.btn{height:34px;padding:0 13px;border:1px solid var(--b2);background:var(--w);color:var(--tx);font:700 13px Figtree,sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;border-radius:6px;white-space:nowrap}
+.btn:hover{border-color:var(--v2)}
+.btn.pri{background:var(--v);border-color:var(--v);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{height:28px;font-size:12px;padding:0 10px}
+.lk{border:0;background:transparent;color:var(--v2);font:600 12.5px Figtree,sans-serif;cursor:pointer;padding:0;white-space:nowrap}
+.lk:hover{text-decoration:underline;text-underline-offset:3px}
+.x{border:0;background:transparent;color:var(--m);font-size:15px;cursor:pointer;padding:0 0 0 4px;line-height:1}
+.tg{display:inline-block;font:500 10px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--b);color:var(--m);border-radius:4px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}
+.tg.d-pauta{border-color:#9cc0b4;color:var(--ok);background:#eaf3ef}
+.tg.d-mono{border-color:#a9bfd0;color:var(--az);background:#eaf1f6}
+.tg.d-esc{border-color:#d9c38f;color:#6e4e14;background:#f5efd9}
+.tg.pri{border-color:var(--r2);color:var(--r)}
+input[type=checkbox]{accent-color:var(--v);width:15px;height:15px;margin:0;cursor:pointer}
+select,input[type=text],input[type=search],input[type=date],textarea{font:14px Figtree,sans-serif;color:var(--tx);border:1px solid var(--b2);border-radius:6px;background:var(--w)}
+select{height:34px;padding:0 8px;font-weight:600;font-size:13px}
+/* topo: marca, abas e estado numa linha */
+#top{position:sticky;top:0;z-index:30;display:flex;align-items:flex-end;gap:4px;min-height:58px;padding:0 24px;background:var(--p);border-bottom:2px solid var(--v)}
+#marca{display:flex;align-items:center;gap:8px;align-self:center;white-space:nowrap;flex:none;padding-right:16px;margin-right:8px;border-right:1px solid var(--b);height:30px;text-decoration:none;color:inherit}
+#marca span{font-size:16px;color:var(--m)}#marca b{font-size:16px;letter-spacing:-.03em;color:var(--v)}#marca i{font-style:normal;color:var(--g2)}
+#abas{display:flex;align-items:flex-end;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none}#abas::-webkit-scrollbar{display:none}
+.tb{display:flex;align-items:center;gap:8px;height:38px;padding:0 13px;border:1px solid var(--b);border-bottom:0;background:#ece9df;font:600 13px Figtree,sans-serif;color:var(--m2);cursor:pointer;white-space:nowrap;border-radius:0}
+.tb.on{background:var(--p);color:var(--v);box-shadow:inset 0 3px 0 var(--g2);position:relative;top:2px;height:40px}
+.tb small{font:500 11px "JetBrains Mono",monospace;color:var(--m)}
+.tb .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+.tb.dash{background:transparent;border-style:dashed}
+#estado{display:flex;align-items:center;gap:8px;margin-left:auto;align-self:center;white-space:nowrap;flex:none;padding-left:10px}
+#st-grava.err{color:var(--r);border-color:var(--r2)}
+#st-grava.pend{color:var(--g);border-color:#d9c38f}
+main{min-height:calc(100vh - 60px);padding-bottom:140px}
+.wrap{max-width:1480px;margin:0 auto;padding:0 24px}
+#carga{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:60vh;color:var(--m);text-align:center;padding:0 24px}
+#carga b{font-size:16px;color:var(--v)}
+/* Início */
+.ini-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:18px 0 14px;flex-wrap:wrap}
+.ini-cab p{margin:4px 0 0;font-size:14px;color:var(--m2)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{display:flex;flex-direction:column;gap:5px;padding:15px 17px;border:1px solid var(--b);background:var(--w);border-radius:8px;text-align:left;cursor:pointer}
+.kpi:hover{border-color:var(--v2)}
+.kpi b{font:500 32px "JetBrains Mono",monospace;letter-spacing:-.02em;line-height:1}
+.kpi .sub{font-size:12.5px;color:var(--m2)}.kpi .rg{font-size:11.5px;color:var(--m)}
+.ini-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;padding:16px 0 30px;align-items:start}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card{border:1px solid var(--b);background:var(--w);border-radius:8px;min-width:0}
+.ch{display:flex;align-items:baseline;gap:10px;padding:12px 16px;border-bottom:1px solid var(--l);flex-wrap:wrap}
+.ch h2{margin:0;font-size:15px;font-weight:700;color:var(--v)}.ch p{margin:0;font-size:12px;color:var(--m)}
+.li{display:grid;align-items:center;gap:12px;padding:8px 16px;border-top:1px solid var(--l2);font-size:13.5px;width:100%;border-left:0;border-right:0;border-bottom:0;background:transparent;text-align:left}
+.li:first-of-type{border-top:0}
+button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
+.li .n{font:500 15px "JetBrains Mono",monospace;color:var(--v);text-align:right}
+.li small{display:block;font-size:12px;color:var(--m)}
+.li.hd{font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m);background:var(--p)}
+.nota{margin:0;padding:8px 16px;border-top:1px solid var(--l);font-size:12px;color:var(--m)}
+.hb{height:8px;background:#ece9df;border-radius:4px;overflow:hidden;display:flex}.hb i{display:block;height:100%}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;font-size:12.5px}.leg i{display:inline-block;width:9px;height:9px;margin-right:6px}
+/* Fila */
+.fl-cab{display:flex;flex-direction:column;gap:10px;padding:14px 0 12px;border-bottom:1px solid var(--b)}
+.fl-l1{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.seg{display:flex;border:1px solid var(--b2);border-radius:6px;overflow:hidden;height:34px;flex:none}
+.seg button{border:0;border-left:1px solid var(--b);background:var(--w);font:600 12.5px Figtree,sans-serif;color:var(--tx);padding:0 11px;cursor:pointer}
+.seg button:first-child{border-left:0}.seg button.on{background:var(--v);color:#fff}
+.busca{flex:1 1 360px;display:flex;align-items:center;gap:10px;min-height:34px;padding:0 12px;background:var(--w);border:1px solid var(--b2);border-radius:6px}
+.busca input{flex:1;border:0;outline:0;font:14px Figtree,sans-serif;background:transparent;min-width:80px}
+.busca small{font:500 11px "JetBrains Mono",monospace;color:var(--m);white-space:nowrap}
+.busca textarea{flex:1;border:0;outline:0;resize:vertical;min-height:34px;padding:7px 0;font:13px "JetBrains Mono",monospace}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:2px 6px 2px 10px;border:1px solid #9cc0b4;background:#eaf3ef;border-radius:999px;font-size:12.5px;color:var(--ok);max-width:100%}
+.chip.neg{border-color:var(--r2);background:#fbefec;color:var(--r)}
+.chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:520px}
+.chip b{font-weight:700}
+.e{font:600 11px "JetBrains Mono",monospace;color:var(--m)}
+.pop{position:absolute;z-index:40;background:var(--w);border:1px solid var(--b2);border-radius:10px;box-shadow:0 14px 36px rgba(23,63,61,.2)}
+#crit-pop{width:min(560px,calc(100vw - 32px));padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+#crit-pop label.f{display:flex;flex-direction:column;gap:4px;font:600 12px Figtree,sans-serif;color:var(--m2)}
+.vals{border:1px solid #e3ded2;border-radius:8px}
+.vals .vh{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid #e3ded2}
+.vals .vh input{flex:1;border:0;outline:0}
+.vals .vl{display:flex;flex-direction:column;max-height:220px;overflow:auto;padding:4px 0;font-size:13px}
+.vals .vl label{display:flex;justify-content:space-between;gap:8px;padding:5px 12px;cursor:pointer}
+.vals .vl label:hover{background:#f6f4ee}
+.vals .vl label span:first-child{display:flex;gap:8px;align-items:center;min-width:0}
+.fl-grid{display:grid;grid-template-columns:240px minmax(0,1fr)}
+.rail{padding:16px 18px 40px 0;border-right:1px solid var(--b);display:flex;flex-direction:column;gap:14px;min-width:0}
+.gh{display:flex;width:100%;align-items:center;justify-content:space-between;height:24px;margin:0 0 4px;padding:0 2px;border:0;background:transparent;cursor:pointer;color:var(--g)}
+.rl{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;min-height:28px;padding:3px 9px;border:0;background:transparent;color:var(--tx);font:500 13px Figtree,sans-serif;text-align:left;border-radius:5px;cursor:pointer}
+.rl:hover{background:#ece9df}
+.rl span{font:400 11.5px "JetBrains Mono",monospace;color:var(--m);flex:none}
+.rl em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rl.on{background:var(--v);color:#fff;font-weight:700}.rl.on span{color:#cfe0dc}
+.et{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px;padding:2px 0}
+.et em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.et .pm{display:flex;gap:3px;flex:none}
+.et .pm button{height:22px;width:22px;padding:0;border:1px solid var(--b2);background:var(--w);border-radius:5px;cursor:pointer;font-weight:700;line-height:1}
+.et .pm button.on{background:var(--v);border-color:var(--v);color:#fff}.et .pm button.on.neg{background:var(--r);border-color:var(--r)}
+.fl-main{padding:14px 0 0 20px;min-width:0;display:flex;flex-direction:column;gap:12px}
+.st{border:1px solid var(--b);background:var(--p);border-radius:8px;box-shadow:inset 0 3px 0 var(--g2)}
+.st-h{display:flex;align-items:center;gap:18px;padding:11px 16px;border-bottom:1px solid var(--l);flex-wrap:wrap}
+.st-h .kv{display:flex;gap:18px;align-items:baseline;font-size:12.5px;color:var(--m2);flex-wrap:wrap}
+.st-h .kv b{font:500 16px "JetBrains Mono",monospace;color:var(--v)}
+.st-g{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:16px;padding:10px 8px 12px}
+.st-g .k{margin:0 0 4px 8px}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) 70px 38px 12px;gap:8px;align-items:center;width:100%;padding:4px 8px;border:0;background:transparent;border-radius:5px;font:500 13px Figtree,sans-serif;color:var(--tx);text-align:left;cursor:pointer}
+.bar:hover,.bar.on{background:#eef4f1}
+.bar em{font-style:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .hb i{background:var(--v2)}
+.bar b{font:400 12px "JetBrains Mono",monospace;text-align:right}
+.st-x{margin:0 14px 12px;border:1px solid var(--b);border-radius:6px;background:var(--w)}
+.st-x .xh{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--l);font-size:13px;flex-wrap:wrap}
+.st-x .xr{display:grid;grid-template-columns:18px 200px 60px minmax(0,1fr) 90px;gap:8px;align-items:center;padding:5px 12px;border-top:1px solid var(--l2);font-size:12.5px}
+.st-x .xr:first-of-type{border-top:0}
+.st-x .xf{display:flex;gap:8px;align-items:center;padding:8px 12px;border-top:1px solid var(--l);background:var(--p);font-size:12.5px;flex-wrap:wrap}
+.lst{border:1px solid var(--b);background:var(--w);border-radius:8px;overflow:hidden}
+.row{display:grid;grid-template-columns:26px 205px 64px minmax(0,1fr) 84px 92px 150px;gap:12px;align-items:center;padding:8px 16px;border-top:1px solid var(--l2);font-size:13.5px}
+.row.hd{font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m);background:var(--p);border-top:0}
+.row.hd button{border:0;background:transparent;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer;padding:0;text-align:left}
+.row.sel{background:#f3f8f5}
+.nm{font:500 13px "JetBrains Mono",monospace;color:var(--v);border:0;background:transparent;padding:0;cursor:pointer;text-align:left}
+.nm:hover{text-decoration:underline}
+.as{min-width:0}.as>b{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.as>span{display:block;font-size:12px;color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grp-h{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--p);border-top:1px solid var(--l);font-size:13.5px}
+.grp-h b{color:var(--v)}
+.mais{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--l);font-size:12.5px;color:var(--m);flex-wrap:wrap;gap:8px}
+.vazio{padding:28px 16px;text-align:center;color:var(--m)}
+/* Escaninho */
+.es-cab{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:24px;align-items:start;padding:18px 0 14px}
+.es-cab h1{margin:2px 0 0;font-size:32px;line-height:1.05;font-weight:800;letter-spacing:-.04em;color:var(--v)}
+.es-cab h1 i{font-style:normal;color:var(--g2)}
+.bil{border:1px solid var(--b);background:var(--w);border-radius:8px;padding:12px 14px}
+.bil textarea{width:100%;min-height:70px;padding:8px;margin-top:6px}
+.es-tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--b);border-bottom:1px solid var(--b);margin-bottom:12px;position:relative}
+.menu{right:0;top:40px;width:340px;display:flex;flex-direction:column;padding:6px}
+.menu .k{padding:8px 10px 2px}
+.menu button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:7px 10px;border:0;background:transparent;text-align:left;cursor:pointer;border-radius:6px}
+.menu button:hover{background:#f3f8f5}
+.menu button b{font-size:13.5px}.menu button small{font-size:12px;color:var(--m)}
+/* Escaninhos */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.ecard{display:flex;flex-direction:column;gap:6px;padding:15px;border:1px solid var(--b);background:var(--w);border-radius:8px;text-align:left;cursor:pointer}
+.ecard:hover{border-color:var(--v2)}
+.ecard b{font-size:16px;color:var(--v)}
+.ecard .ft{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto}
+.ecard.novo{align-items:center;justify-content:center;border-style:dashed;background:transparent;min-height:140px;font-weight:600;color:var(--m2)}
+.cores{display:flex;gap:8px}.cores button{width:26px;height:26px;border-radius:50%;border:1px solid var(--b2);cursor:pointer}.cores button.on{border:2px solid var(--v);box-shadow:0 0 0 2px #fff inset}
+/* gaveta */
+.veu{position:fixed;inset:0;background:rgba(23,63,61,.28);z-index:45}
+.gaveta{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--p);border-left:2px solid var(--v);box-shadow:-16px 0 40px rgba(23,63,61,.2);display:flex;flex-direction:column;z-index:46}
+.gv-h{display:flex;align-items:flex-start;gap:12px;padding:18px 22px 12px;border-bottom:1px solid var(--l)}
+.gv-h h2{margin:4px 0 2px;font-size:22px;font-weight:800;letter-spacing:-.03em;color:var(--v)}
+.gv-h p{margin:0;font-size:13px;color:var(--m2)}
+.gv-c{flex:1;overflow:auto;padding:14px 22px;display:flex;flex-direction:column;gap:14px}
+.gv-f{display:flex;gap:8px;justify-content:flex-end;padding:12px 22px;border-top:1px solid var(--l);background:var(--w)}
+.f{display:flex;flex-direction:column;gap:4px;font:600 12px Figtree,sans-serif;color:var(--m2)}
+.f input,.f textarea{padding:8px 10px;font-weight:400}
+.drop{display:flex;flex-direction:column;align-items:center;gap:8px;padding:24px 16px;border:2px dashed #9cc0b4;border-radius:10px;background:var(--w);text-align:center}
+.drop.over{background:#eaf3ef}
+.imp{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:9px 0;border-top:1px solid #ece8de}
+.imp b{font-size:13.5px}.imp small{font-size:12px;color:var(--m)}
+.log{font-size:12.5px;line-height:1.5;padding:10px 12px;border:1px solid var(--b);border-radius:8px;background:var(--w);white-space:pre-wrap}
+.log.bad{border-color:var(--r2);color:var(--r)}
+/* rodapé de ações */
+#rodape{position:fixed;left:0;right:0;bottom:0;z-index:35;display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr) minmax(0,1fr) auto;align-items:stretch;background:var(--w);border-top:2px solid var(--v);box-shadow:0 -8px 24px rgba(23,63,61,.12)}
+#rodape>div{display:flex;flex-direction:column;gap:6px;padding:10px 14px;border-right:1px solid #ece8de;min-width:0;justify-content:center}
+#rodape .sel{background:var(--v);color:#fff;min-width:190px;padding-left:24px;gap:3px}
+#rodape .sel b{font:500 24px "JetBrains Mono",monospace;line-height:1}
+#rodape .sel .lk{color:#e6c27a;font-size:12px}#rodape .sel .lk.cl{color:#cfe0dc}
+#rodape .lin{display:flex;gap:6px}#rodape .lin select{flex:1;min-width:0}
+#rodape small{font-size:11.5px;color:var(--m)}
+#rodape.off .ac{opacity:.5}
+#toast{position:fixed;right:18px;bottom:110px;z-index:60;max-width:480px;padding:11px 14px;background:var(--v);color:#fff;font:600 13px Figtree,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.18);border-radius:6px}
+#toast.bad{background:var(--r)}
+/* motor de dados: oculto; aparece para o pedido de token e para a ficha */
+#cmt-motor{position:fixed;left:-200vw;top:0;width:100vw;height:100vh;border:0;visibility:hidden}
+body.tk #cmt-motor{left:0;visibility:visible;z-index:2147482000;background:#fff}
+body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh + 48px);left:4vw;width:92vw;height:calc(92vh - 48px)}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ini-grid{grid-template-columns:minmax(0,1fr)}.st-g{grid-template-columns:minmax(0,1fr)}.es-cab{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:860px){.fl-grid{grid-template-columns:minmax(0,1fr)}.rail{border-right:0;padding-right:0}.fl-main{padding-left:0}.row{grid-template-columns:24px minmax(0,1fr) 80px;}.row>:nth-child(3),.row>:nth-child(5),.row>:nth-child(6){display:none}#rodape{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#rodape .sel{grid-column:1/-1}#marca span{display:none}.wrap{padding:0 14px}#top{padding:0 14px}}
+@media print{#top,#rodape,.rail,.fl-cab,#toast{display:none!important}}
+</style>
+</head>
+<body>
+<header id="top">
+  <a id="marca" href="#inicio" title="Início da triagem"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><b>Triagem<i>.</i></b></a>
+  <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
+  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn" id="bt-acervo" type="button">Atualizar acervo fonte</button><button class="btn" id="st-grava" type="button" title="Estado da gravação no procs-muta">Carregando…</button></div>
+</header>
+<main id="main"><div id="carga"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
+<div id="rodape" class="off" role="region" aria-label="Ações em bloco" hidden></div>
+<div id="toast" role="status" hidden></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="/padrao/acervo-fonte.js"></script>
+<script src="/init/assets/js/cmt-ficha.js"></script>
+<script src="/init/assets/js/cmt-ficha-monitor.js"></script>
+<script>
+(function () {
+'use strict';
+const D = document, W = window;
+const $ = (s, r) => (r || D).querySelector(s), $$ = (s, r) => [...(r || D).querySelectorAll(s)];
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const nz = (s) => String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const dg = (v) => String(v || '').replace(/\D/g, '');
+const fmtCnj = (v) => { const d = dg(v); return d.length === 20 ? d.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : String(v || ''); };
+const nf = (n) => Number(n || 0).toLocaleString('pt-BR');
+const iso = (v) => { const s = String(v || '').trim(); let m = /^(\d{4})-(\d{2})-(\d{2})/.exec(s); if (m) return m[1] + '-' + m[2] + '-' + m[3]; m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(s); if (m) return m[3] + '-' + m[2].padStart(2, '0') + '-' + m[1].padStart(2, '0'); return ''; };
+const br = (i) => i ? i.slice(8, 10) + '/' + i.slice(5, 7) + '/' + i.slice(0, 4) : '';
+const HOJE = (() => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); })();
+const ANO = +HOJE.slice(0, 4);
+const dias = (i) => i ? Math.floor((Date.parse(HOJE) - Date.parse(i)) / 864e5) : null;
+const somaDias = (i, n) => { const d = new Date(Date.parse(i) + n * 864e5); return d.toISOString().slice(0, 10); };
+const hhmm = () => new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+const LS = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+function toast(t, bad) { const b = $('#toast'); b.textContent = t; b.classList.toggle('bad', !!bad); b.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { b.hidden = true; }, bad ? 9000 : 5000); }
+
+/* ===================== motor de dados (acervo, gravação no procs-muta, ficha e importadores) ===================== */
+const frame = D.createElement('iframe'); frame.id = 'cmt-motor'; frame.title = 'Motor de dados do acervo'; frame.src = '/init/motor/index.html'; D.body.appendChild(frame);
+const M = () => { try { return frame.contentWindow; } catch (e) { return null; } };
+const core = () => (M() && M().__painelCentralComponent) || null;
+const SES = () => (M() && M().CMTSessao) || null;
+const PM = () => (M() && M().ProcsMuta) || null;
+setInterval(() => { let pede = false; try { const w = M(); pede = !!(w && w.document.querySelector('#procsmuta-token, form input[type=password]')); } catch (e) {} D.body.classList.toggle('tk', pede); }, 400);
+
+/* ===================== regras (as mesmas do Monitor, sobre a fonte do acervo) ===================== */
+const CLS = [[/^APELA[CÇ][AÃ]O \/ REMESSA/, 'ApRemNec'], [/^APELA[CÇ][AÃ]O C[IÍ]VEL/, 'ApCiv'], [/^AGRAVO DE INSTRUMENTO/, 'AI'], [/^REMESSA NECESS/, 'RemNec'], [/^EMBARGOS DE DECLARA/, 'ED'], [/^AGRAVO INTERNO/, 'AgInt'], [/^MANDADO DE SEGURAN/, 'MS'], [/^PEDIDO DE EFEITO SUSPENSIVO/, 'PESAp'], [/^PETI[CÇ][AÃ]O/, 'Pet'], [/^TUTELA CAUTELAR/, 'TutCautAnt'], [/^RESTAURA/, 'RestAut'], [/^CONFLITO DE COMPET/, 'CC'], [/^A[CÇ][AÃ]O RESCIS/, 'AR']];
+const abrev = (c) => { const u = String(c || '').toUpperCase().trim(); if (!u) return '—'; for (const [rx, a] of CLS) if (rx.test(u)) return a; return u.split(/\s+/).map((w) => w[0]).join('').slice(0, 6); };
+const SEC_RX = /^[123]ª Seção$/;
+const etqDe = (r) => String(r.Etiquetas || r.etiquetas || r['Etiquetas Originais'] || '').split(/[;,|]/).map((s) => s.trim()).filter(Boolean);
+/* escopo (apoio/regras/escopo-triagem.json): entra só a tarefa do PJe listada em "triar"; tarefa não listada fica à parte */
+let ESCOPO = { triar: [['Analisar tipo de decisão a proferir', 'decisão sobre o destino'], ['Triagem de Gabinete', 'ainda não triado'], ['Recebidos com Embargos de Declaração', 'embargos: sessão ou decisão monocrática'], ['Recebidos da unidade processante', 'voltou ao gabinete sem destino'], ['Minutar ato judicial', 'a tarefa também recebe processos ainda não triados'], ['Minutar ato judicial - Processo sobrestado', 'retomada após o julgamento do tema'], ['[Sessão] Processos retirados e adiados', 'repautar']], ignorar: {} , lido: false };
+const nzT = (t) => nz(t).replace(/[\s\u2013\u2014-]+/g, ' ').trim();
+let TRIAR = new Map(), IGN = new Map();
+function montaEscopo() { TRIAR = new Map(ESCOPO.triar.map((x) => [nzT(x[0]), x])); IGN = new Map(); Object.keys(ESCOPO.ignorar || {}).forEach((g) => ((ESCOPO.ignorar[g] || {}).tarefas || []).forEach((t) => IGN.set(nzT(t), g))); }
+montaEscopo();
+const ehAptoE = (e) => /\bapto(s)?\b|apto para julgamento/i.test(e) && !/inapt/i.test(e);
+const DEST = [
+  ['ret', 'Retirado ou adiado: repautar', '#b0524a', (o) => /retirados e adiados/i.test(o.tarefa) || o.etq.some((e) => /retirad|retirar de pauta|\badiad/i.test(e))],
+  ['apc', 'Apto: pautar (colegiado)', '#3b7150', (o) => o.apto && !o.monoE],
+  ['apm', 'Apto: decisão do relator provável', '#24506f', (o) => o.apto && o.monoE],
+  ['edr', 'Embargos de declaração recebidos: sessão ou monocrática', '#2f6690', (o) => /Recebidos com Embargos/i.test(o.tarefa)],
+  ['msob', 'Retomada após o julgamento do tema', '#8a70c0', (o) => /Processo sobrestado/i.test(o.tarefa)],
+  ['ai', 'Agravo de instrumento antigo: verificar perda de objeto', '#a6545e', (o) => o.cl === 'AI' && o.dist && +o.dist.slice(0, 4) < ANO],
+  ['min', 'Em “Minutar ato judicial”: conferir se já triado', '#4b7fa8', (o) => /^Minutar ato judicial/i.test(o.tarefa)],
+  ['rec', 'Voltou da unidade processante', '#8a948f', (o) => /Recebidos da unidade/i.test(o.tarefa)],
+  ['tri', 'Indefinido: definir na triagem', '#a57829', (o) => /Triagem de Gabinete|Analisar tipo de decis/i.test(o.tarefa)],
+  ['out', 'Outros: conferir', '#9aa3ad', () => true]
+];
+const CAND = [
+  ['ai', 'Agravo de instrumento com risco de perda de objeto', 'autuado antes do ano corrente: consultar o andamento na origem (CPC, art. 932, III)', (o) => o.cl === 'AI' && o.dist && +o.dist.slice(0, 4) < ANO],
+  ['rem', 'Remessa necessária sem apelação', 'conferir o valor da condenação (CPC, art. 496, § 3º; Súmula 253/STJ)', (o) => o.cl === 'RemNec' || o.etq.some((e) => /apenas remessa/i.test(e))],
+  ['ed', 'Embargos de declaração recebidos', 'ver se a decisão embargada é monocrática (CPC, art. 1.024, § 2º)', (o) => /Recebidos com Embargos/i.test(o.tarefa) || o.cl === 'ED'],
+  ['etm', 'Já etiquetados como monocrática', 'mover para “Minutar ato judicial”', (o) => o.etq.some((e) => /monocr/i.test(e))],
+  ['prec', 'Precedente qualificado indicado na etiqueta', 'confirmar se a tese foi firmada (CPC, art. 932, IV e V)', (o) => o.etq.some((e) => /\btema\b|s[uú]mula|repetitiv|\birdr\b/i.test(e) && !/1433/.test(e))],
+  ['comp', 'Competência e prevenção', 'decidir a competência antes do mérito', (o) => o.etq.some((e) => /decl[ií]n|incompet|preven[cç][aã]o (pendente|a verificar)/i.test(e))],
+  ['ped', 'Pedidos de competência do relator', 'efeito suspensivo, petição, tutela cautelar, restauração de autos', (o) => /^(PESAp|Pet|TutCautAnt|RestAut)$/.test(o.cl)]
+];
+function pendDe(o) { const t = o.etq.map(nz), has = (rx) => t.some((x) => rx.test(x)), L = [];
+  if (has(/ag\. parecer|aguardando parecer|intimar mpf/)) L.push('parecer do MPF'); if (has(/ag\. contrarraz|ag\. contraminuta/)) L.push('contrarrazões');
+  if (has(/preparo/) && !has(/custas ok/)) L.push('preparo'); if (has(/liminar pendente/)) L.push('liminar'); if (has(/aguardar novos precedentes|tema 1433/)) L.push('precedente'); if (has(/nao pautar/)) L.push('não pautar'); return L; }
+
+/* ===================== estado ===================== */
+let U = [], NOVAS = [], ALL = [], IDX = new Map(), ROWS_REF = null, ROWS_N = 0, PRONTO = false;
+const ESC_ARQ = 'acervo/triagem/escaninhos.json';
+let ESC = { schema: 'gabcmt.escaninhos', versao: 1, atualizadoEm: '', escaninhos: [] }, ESC_V = 0, ESC_GRAV = 0;
+const PEND = new Map(); let GRAVANDO = false, ERRO = '', ULT = '', TENT = 0, T_GRAVA = null;
+const DESF = [];
+let ABA = 'inicio', ABERTAS = LS.get('tri_abas', []);
+const SEL = new Set();
+const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], ['Vinho', '#8a2f22'], ['Cinza', '#8a948f'], ['Roxo', '#6a4fb3']];
+const F = { modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) };
+const FE = { q: '', lim: 100, ver: 'lista' };
+
+function escDe(d) { for (const e of ESC.escaninhos) if (e._set && e._set.has(d)) return e; return null; }
+function indexEsc() { ESC.escaninhos.forEach((e) => { e.processos = (e.processos || []).map(fmtCnj); e._set = new Set(e.processos.map(dg)); }); }
+function destinoAtual(o) { const r = o.row;
+  if (r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' && r['Sessão Destino']) return { k: 'pauta', t: 'pauta ' + String(r['Sessão Destino']).slice(0, 5), s: r['Sessão Destino'] };
+  if (r.Destino === 'Monocrática') return { k: 'mono', t: 'monocrática' };
+  const e = escDe(o.d); if (e) return { k: 'esc', t: e.titulo, e };
+  return { k: '', t: 'sem destino' }; }
+function proc(r) {
+  const etq = etqDe(r), classe = r.classe_judicial || r.Classe || '', cl = abrev(classe), tarefa = String(r.tarefa_atual || '').trim();
+  const sc = String(r['Seção Competente'] || '').trim(), se = etq.find((e) => SEC_RX.test(e)) || '';
+  const o = { row: r, d: dg(r.Processo || r.processo), cnj: fmtCnj(r.Processo || r.processo), classe, cl, assunto: String(r.assunto_judicial || r.Assunto || r.Assunto_Principal || '').trim() || '—',
+    tarefa, desde: iso(r.data_entrada_tarefa), secao: SEC_RX.test(sc) ? sc : (se || 'Sem seção'), secEtq: se, secComp: SEC_RX.test(sc) ? sc : '', prior: /^(sim|s)$/i.test(String(r.prioridade || '').trim()), etq,
+    partes: [r.polo_ativo || r.Polo_Ativo, r.polo_passivo || r.Polo_Passivo].filter((x) => x && x !== '####').join(' x '), dist: iso(r['data_distribuição'] || r['Data_Distribuição']) };
+  o.apto = etq.some(ehAptoE) || /Aptos para julgamento/i.test(tarefa);
+  o.monoE = etq.some((e) => /monocr/i.test(e)) || r.Destino === 'Monocrática';
+  o.prov = DEST.find((x) => x[3](o))[0];
+  o.pend = pendDe(o);
+  o.cand = '';
+  if (o.prov !== 'ret') { const c = CAND.find((x) => x[3](o)); if (c) o.cand = c[0]; }
+  o.div = !!(o.secEtq && o.secComp && o.secEtq !== o.secComp);
+  return o; }
+function construir() {
+  const c = core(); const R = (c && c.rows) || []; ROWS_REF = R; ROWS_N = R.length;
+  indexEsc();
+  U = []; NOVAS = [];
+  R.forEach((r) => { const t = String(r.tarefa_atual || '').trim(); if (!t) return; const k = nzT(t); if (TRIAR.has(k)) U.push(proc(r)); else if (ESCOPO.lido && !IGN.has(k)) { const o = proc(r); o.nova = true; NOVAS.push(o); } });
+  ALL = U.concat(NOVAS); IDX = new Map(ALL.map((o) => [o.d, o]));
+  ALL.forEach((o) => { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); });
+  for (const d of [...SEL]) if (!IDX.has(d)) SEL.delete(d); }
+function refazDest(o) { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
+const DLAB = Object.fromEntries(DEST.map((x) => [x[0], x[1]])), CLAB = Object.fromEntries(CAND.map((x) => [x[0], x[1]]));
+
+/* ===================== sessões (calendário, pelo motor) ===================== */
+function sessoes() { const s = SES(); let L = []; try { L = ((s && s.estado && s.estado().sessoes) || []).slice(); } catch (e) {} return L.filter((x) => x.data && x.data >= HOJE).sort((a, b) => a.data.localeCompare(b.data)); }
+const nomeSes = (ss) => br(ss.data);
+
+/* ===================== gravação (acervo/operacional.json + escaninhos), com fila e nova tentativa ===================== */
+function estadoDe(o) { const r = o.row; return { sp: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? 'SELECIONADO PREVIAMENTE' : '', sd: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? (r['Sessão Destino'] || '') : '', mono: r.Destino === 'Monocrática' ? 'Monocrática' : '', esc: ESC.escaninhos.filter((e) => e._set.has(o.d)).map((e) => e.id) }; }
+function poeEstado(o, st) {
+  const r = o.row, ch = Object.assign({}, PEND.get(o.d) || {});
+  if (st.sp !== undefined) { const ant = r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? r['Sessão Destino'] || '' : ''; const novo = st.sp ? st.sd : '';
+    if (ant !== novo || (r['Seleção Prévia'] || '') !== (st.sp || '')) { r['Seleção Prévia'] = st.sp || ''; r['Sessão Destino'] = st.sp ? st.sd : ''; r['Nova sessão de destino'] = r['Sessão Destino']; ch.sp = r['Seleção Prévia']; ch.sd = r['Sessão Destino']; } }
+  if (st.mono !== undefined && (r.Destino === 'Monocrática' ? 'Monocrática' : '') !== st.mono) { if (st.mono) r.Destino = 'Monocrática'; else if (r.Destino === 'Monocrática') r.Destino = ''; ch.mono = st.mono; }
+  if (st.esc !== undefined) { let mud = false; ESC.escaninhos.forEach((e) => { const tem = e._set.has(o.d), quer = st.esc.indexOf(e.id) >= 0;
+      if (tem && !quer) { e._set.delete(o.d); e.processos = e.processos.filter((x) => dg(x) !== o.d); mud = true; e.atualizadoEm = new Date().toISOString(); }
+      if (!tem && quer) { e._set.add(o.d); e.processos.push(o.cnj); mud = true; e.atualizadoEm = new Date().toISOString(); } }); if (mud) ESC_V++; }
+  if (Object.keys(ch).length) PEND.set(o.d, ch);
+  refazDest(o); }
+function acao(rot, ds, fn) {
+  const L = ds.map((d) => IDX.get(d)).filter(Boolean); if (!L.length) { toast('Marque ao menos um processo.', true); return; }
+  const antes = new Map(L.map((o) => [o.d, estadoDe(o)]));
+  L.forEach((o) => poeEstado(o, fn(o)));
+  DESF.push({ rot, antes }); if (DESF.length > 30) DESF.shift();
+  SEL.clear(); agendar(); render(); toast(rot + ': ' + nf(L.length) + ' processo(s). Grava sozinho em instantes.'); }
+function desfazer() { const u = DESF.pop(); if (!u) { toast('Nada a desfazer.', true); return; }
+  u.antes.forEach((st, d) => { const o = IDX.get(d); if (o) poeEstado(o, st); }); agendar(); render(); toast('Desfeito: ' + u.rot.toLowerCase() + '.'); }
+function agendar(ms) { clearTimeout(T_GRAVA); T_GRAVA = setTimeout(gravar, ms == null ? 3500 : ms); pintaGrava(); }
+function pendentes() { return PEND.size + (ESC_V !== ESC_GRAV ? 1 : 0); }
+function pintaGrava() { const b = $('#st-grava'); if (!b) return; const n = pendentes();
+  b.classList.toggle('err', !!ERRO && !GRAVANDO); b.classList.toggle('pend', !ERRO && n > 0 && !GRAVANDO);
+  b.textContent = !PRONTO ? 'Carregando…' : GRAVANDO ? 'Gravando…' : ERRO ? 'Não gravado (' + n + ') · tentar' : n ? 'Gravar (' + n + ')' : ULT ? 'Gravado ' + ULT : 'Tudo gravado';
+  b.title = ERRO ? 'Erro: ' + ERRO : 'Grava no procs-muta (acervo/operacional.json e escaninhos)'; }
+async function gravar() {
+  if (GRAVANDO || !PRONTO) return; const P = PM(); if (!P || !P.gravar) { ERRO = 'motor ainda carregando'; pintaGrava(); return; }
+  if (!pendentes()) { pintaGrava(); return; }
+  GRAVANDO = true; ERRO = ''; pintaGrava();
+  const snap = new Map(PEND), escV = ESC_V, arq = {}, agora = new Date().toISOString(); let msg = [];
+  try {
+    if (snap.size) {
+      const op = JSON.parse(await P.ler('acervo/operacional.json'));
+      if (!op || !Array.isArray(op.registros)) throw new Error('acervo/operacional.json ilegível');
+      const por = new Map(op.registros.map((r) => [dg(r.processo), r]));
+      snap.forEach((ch, d) => { let r = por.get(d);
+        if (!r) { r = { processo: fmtCnj(d), origem: { atualizado_em: agora }, triagem: {}, producao: {}, pauta: { sessoes: [] } }; op.registros.push(r); por.set(d, r); }
+        r.origem = r.origem || {}; r.triagem = r.triagem || {}; r.producao = r.producao || {}; r.pauta = r.pauta || { sessoes: [] };
+        if ('sp' in ch) { r.triagem['Seleção Prévia'] = ch.sp; r.pauta['Nova sessão de destino'] = ch.sd; }
+        if ('mono' in ch) { r.producao.Destino = ch.mono; if (ch.mono) { const c = r.controles = r.controles || {};
+            if (!c['Monocrática - Registrada em']) { c['Monocrática - Registrada em'] = HOJE; c['Monocrática - Prazo'] = somaDias(HOJE, 30); }
+            c['Monocrática - Atualizado por'] = 'Triagem (Ab Initio)'; c['Monocrática - Atualizado em'] = HOJE; } }
+        r.origem.atualizado_em = agora; });
+      op.registros.sort((a, b) => String(a.processo).localeCompare(String(b.processo))); op.atualizado_em = agora;
+      arq['acervo/operacional.json'] = JSON.stringify(op, null, 1) + '\n'; msg.push(snap.size + ' destino(s)');
+    }
+    if (escV !== ESC_GRAV) {
+      let rem = null; try { rem = JSON.parse(await P.ler(ESC_ARQ)); } catch (e) { if (!/HTTP 404/.test(e.message)) throw e; }
+      const ids = new Set(ESC.escaninhos.map((e) => e.id)), apagados = new Set(ESC._apagados || []);
+      ((rem && rem.escaninhos) || []).forEach((e) => { if (!ids.has(e.id) && !apagados.has(e.id)) { e._set = new Set((e.processos || []).map(dg)); ESC.escaninhos.push(e); } });
+      ESC.atualizadoEm = agora;
+      arq[ESC_ARQ] = JSON.stringify({ schema: ESC.schema, versao: 1, atualizadoEm: agora, escaninhos: ESC.escaninhos.map((e) => ({ id: e.id, titulo: e.titulo, subtitulo: e.subtitulo || '', bilhete: e.bilhete || '', cor: e.cor || '#a57829', criadoEm: e.criadoEm || '', atualizadoEm: e.atualizadoEm || '', processos: e.processos })) }, null, 1) + '\n';
+      msg.push('escaninhos');
+    }
+    await P.gravar(arq, 'Triagem (Ab Initio): ' + msg.join(' e '));
+    snap.forEach((ch, d) => { if (PEND.get(d) === ch) PEND.delete(d); });
+    ESC_GRAV = escV; if (ESC_V === escV) ESC._apagados = [];
+    ULT = hhmm(); TENT = 0; ERRO = '';
+  } catch (e) { ERRO = (e && e.message) || String(e); TENT++; toast('Não gravou: ' + ERRO + '. Nova tentativa em instantes.', true); }
+  GRAVANDO = false; pintaGrava();
+  if (pendentes()) agendar(ERRO ? Math.min(120000, 10000 * TENT) : 1500);
+  if (ABA === 'inicio') render(); }
+W.addEventListener('beforeunload', (e) => { if (pendentes() || GRAVANDO) { e.preventDefault(); e.returnValue = ''; } });
+
+/* ===================== abas e roteamento ===================== */
+function rotear() { const h = decodeURIComponent(location.hash.slice(1) || 'inicio');
+  if (h.indexOf('esc=') === 0) { const id = h.slice(4); if (ESC.escaninhos.some((e) => e.id === id)) { if (ABERTAS.indexOf(id) < 0) { ABERTAS.push(id); LS.set('tri_abas', ABERTAS); } ABA = 'esc:' + id; } else ABA = 'escaninhos'; }
+  else ABA = /^(inicio|fila|escaninhos)$/.test(h) ? h : 'inicio';
+  W.scrollTo(0, 0); render(); }
+W.addEventListener('hashchange', rotear);
+const ir = (h) => { if (location.hash === '#' + h) rotear(); else location.hash = h; };
+function pintaAbas() {
+  ABERTAS = ABERTAS.filter((id) => ESC.escaninhos.some((e) => e.id === id));
+  const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
+  $('#abas').innerHTML = t('inicio', 'Início') + t('fila', 'Fila de triagem', PRONTO ? U.length : null) +
+    ABERTAS.map((id) => { const e = ESC.escaninhos.find((x) => x.id === id); return t('esc:' + id, e.titulo, U.filter((o) => e._set.has(o.d)).length, '<span class="x" role="button" aria-label="Fechar a aba" data-fecha="' + esc(id) + '">×</span>', e.cor); }).join('') +
+    '<button type="button" class="tb dash' + (ABA === 'escaninhos' ? ' on' : '') + '" data-aba="escaninhos">Escaninhos</button>'; }
+$('#abas').addEventListener('click', (e) => { const f = e.target.closest('[data-fecha]'); if (f) { e.stopPropagation(); ABERTAS = ABERTAS.filter((x) => x !== f.dataset.fecha); LS.set('tri_abas', ABERTAS); if (ABA === 'esc:' + f.dataset.fecha) ir('fila'); else pintaAbas(); return; }
+  const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
+
+/* ===================== render geral ===================== */
+function render() { if (!PRONTO) return; pintaAbas(); pintaGrava();
+  const m = $('#main');
+  if (ABA === 'inicio') m.innerHTML = vInicio();
+  else if (ABA === 'fila') { m.innerHTML = vFila(); }
+  else if (ABA === 'escaninhos') m.innerHTML = vEscaninhos();
+  else if (ABA.indexOf('esc:') === 0) m.innerHTML = vEscaninho(ABA.slice(4));
+  pintaRodape(); }
+
+/* ---------- Início ---------- */
+function vInicio() {
+  const semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri');
+  const aptos = U.filter((o) => o.apto), comPend = aptos.filter((o) => o.pend.length), prontos = aptos.filter((o) => !o.pend.length), prM = prontos.filter((o) => o.monoE), prC = prontos.filter((o) => !o.monoE);
+  const cands = U.filter((o) => o.cand && !o.dest.k), dados = U.filter((o) => o.dest.k);
+  const k = (cor, rot, n, sub, rg, conj) => '<button type="button" class="kpi" style="box-shadow:inset 0 3px 0 ' + cor + '" data-conj="' + conj + '"><span class="k" style="color:' + cor + '">' + rot + '</span><b style="color:' + cor + '">' + nf(n) + '</b><span class="sub">' + sub + '</span>' + (rg ? '<span class="rg">' + rg + '</span>' : '') + '<span class="lk" style="margin-top:2px">Abrir na Fila →</span></button>';
+  REG = {}; reg('tri', 'Sem caminho definido', tri); reg('pr', 'Prontos para julgar', prontos); reg('prc', 'Prontos · colegiado', prC); reg('prm', 'Prontos · decisão do relator', prM); reg('cand', 'Candidatos à monocrática', cands); reg('dados', 'Já com destino da triagem', dados); reg('novas', 'Tarefas não classificadas', NOVAS); reg('pend', 'Aptos com pendência', comPend);
+  let h = '<div class="wrap"><div class="ini-cab"><div><p class="k" style="margin:0">Triagem · início</p><p>Só o que leva a uma decisão de triagem. Cada número abre os processos na Fila, já filtrados.</p></div><div style="display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.length) + '</b> em triagem</span><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.filter((o) => o.dest.k).length) + '</b> com destino da triagem</span></div></div>';
+  h += '<div class="kpis">' + k('#a57829', 'Sem caminho definido', tri.length, 'em Triagem de Gabinete ou Analisar tipo de decisão, sem destino', '', 'tri') +
+    k('#3b7150', 'Prontos para julgar', prontos.length, nf(prC.length) + ' colegiado · ' + nf(prM.length) + ' relator · ' + nf(comPend.length) + ' aptos com pendência à parte', 'etiqueta Apto / Apto para julgamento ou tarefa “Aptos para julgamento”, sem etiqueta de pendência', 'pr') +
+    k('#24506f', 'Candidatos à monocrática', cands.length, 'indícios de decisão do relator, a confirmar', 'sem destino da triagem; os critérios estão abaixo', 'cand') +
+    k('#8a948f', 'Já destinados na triagem', dados.length, nf(dados.filter((o) => o.dest.k === 'pauta').length) + ' à pauta · ' + nf(dados.filter((o) => o.dest.k === 'mono').length) + ' monocrática · ' + nf(dados.filter((o) => o.dest.k === 'esc').length) + ' em escaninho', 'ainda na tarefa de triagem do PJe', 'dados') + '</div>';
+  /* sessões */
+  const S = sessoes().slice(0, 5);
+  let ses = '<section class="card"><div class="ch"><h2>Próximas sessões</h2><p>prontos por seção e o que a triagem já mandou para cada uma</p></div>';
+  if (!S.length) ses += '<p class="nota" style="border:0">Nenhuma sessão futura no calendário. Cadastre na página Pautas.</p>';
+  else { ses += '<div class="li hd" style="grid-template-columns:110px 110px minmax(0,1fr) 70px 70px">' + '<span>Sessão</span><span>Pautar até</span><span>Na pauta / pré-pauta</span><span style="text-align:right">Triagem</span><span></span></div>';
+    S.forEach((ss) => { const nm = nomeSes(ss), daTri = U.filter((o) => o.dest.k === 'pauta' && o.dest.s === nm); reg('ses' + ss.data, 'Mandados à sessão de ' + nm, daTri);
+      ses += '<div class="li" style="grid-template-columns:110px 110px minmax(0,1fr) 70px 70px"><b class="mono" style="font-weight:500">' + nm + '</b><span class="mono" style="font-size:12.5px">' + esc(br((ss.fases || {}).pauta || '') || '—') + '</span><span style="font-size:12.5px;color:var(--m2)">' + nf((ss.itens || []).length) + ' na pauta · ' + nf((ss.previa || []).length) + ' na pré-pauta</span><span class="n">' + nf(daTri.length) + '</span><button type="button" class="lk" data-conj="ses' + ss.data + '" style="text-align:right">Ver →</button></div>'; }); }
+  const ps = (sec) => prC.filter((o) => o.secao === sec).length + ' col. · ' + prM.filter((o) => o.secao === sec).length + ' rel.';
+  ses += '<p class="nota">Prontos por seção: 1ª ' + ps('1ª Seção') + ' · 2ª ' + ps('2ª Seção') + ' · 3ª ' + ps('3ª Seção') + ' · Para mandar à sessão, marque na Fila e use Pauta no rodapé.</p></section>';
+  /* destino provável */
+  const tot = U.length || 1, gD = DEST.map((x) => [x, U.filter((o) => o.prov === x[0])]).filter((x) => x[1].length).sort((a, b) => b[1].length - a[1].length), mx = Math.max(1, ...gD.map((x) => x[1].length));
+  let dp = '<section class="card"><div class="ch"><h2>Destino provável</h2><p>' + nf(U.length) + ' em triagem · pela tarefa no PJe e pelas etiquetas</p></div><div class="li hd" style="grid-template-columns:minmax(0,1fr) 120px 56px 40px"><span>Destino</span><span></span><span style="text-align:right">Proc.</span><span style="text-align:right">%</span></div>';
+  gD.forEach(([x, L]) => { reg('dp' + x[0], 'Destino provável: ' + x[1], L); dp += '<button type="button" class="li" data-conj="dp' + x[0] + '" style="grid-template-columns:minmax(0,1fr) 120px 56px 40px"><b style="font-weight:600">' + esc(x[1]) + '</b><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / mx)) + '%;background:' + x[2] + '"></i></span><span class="n">' + nf(L.length) + '</span><span class="mono" style="font-size:12px;color:var(--m);text-align:right">' + Math.round(100 * L.length / tot) + '%</span></button>'; });
+  dp += '<p class="nota">Clique numa linha para ver os processos na Fila. A regra de cada destino segue a ordem da lista: cada processo fica no primeiro que atende.</p></section>';
+  /* candidatos */
+  let cd = '<section class="card"><div class="ch"><h2>Candidatos à decisão do relator</h2><p>' + nf(cands.length) + ' · sem destino · cada processo no primeiro critério que atende</p></div>';
+  CAND.forEach((c) => { const L = cands.filter((o) => o.cand === c[0]); reg('cd' + c[0], c[1], L); cd += '<div class="li" style="grid-template-columns:48px minmax(0,1fr) 160px"><span class="n" style="text-align:left">' + nf(L.length) + '</span><span><b style="font-weight:600">' + esc(c[1]) + '</b><small>' + esc(c[2]) + '</small></span><span style="display:flex;gap:12px;justify-content:flex-end"><button type="button" class="lk" data-conj="cd' + c[0] + '"' + (L.length ? '' : ' disabled') + '>Abrir</button><button type="button" class="lk" data-mono-conj="cd' + c[0] + '"' + (L.length ? '' : ' disabled') + '>→ Monocrática</button></span></div>'; });
+  cd += '</section>';
+  /* conferir antes */
+  const div = U.filter((o) => o.div);
+  reg('div', 'Seção divergente (etiqueta × Seção competente)', div);
+  const cf = (n, t, s, kk) => '<button type="button" class="li" data-conj="' + kk + '" style="grid-template-columns:56px minmax(0,1fr)"><span class="n" style="text-align:left;color:var(--r)">' + nf(n) + '</span><span><b style="font-weight:600">' + t + '</b><small>' + s + '</small></span></button>';
+  const conf = '<section class="card" style="box-shadow:inset 0 3px 0 var(--r)"><div class="ch"><h2>Conferir antes</h2><p>pode mudar o destino</p></div>' + cf(div.length, 'Seção divergente', 'a etiqueta de seção difere da Seção competente', 'div') + cf(comPend.length, 'Aptos com pendência', 'etiqueta de parecer do MPF, contrarrazões, preparo, liminar, precedente ou “não pautar”', 'pend') + (NOVAS.length ? cf(NOVAS.length, 'Tarefas não classificadas', 'tarefa do PJe fora das listas do escopo da triagem: ' + esc([...new Set(NOVAS.map((o) => o.tarefa))].slice(0, 3).join('; ')), 'novas') : '') + '</section>';
+  /* massas */
+  const base = semD.filter((o) => o.prov === 'tri' && !o.cand), G = new Map();
+  base.forEach((o) => { const kk = o.secao + '|' + o.assunto; if (!G.has(kk)) G.set(kk, []); G.get(kk).push(o); });
+  const mas = [...G.entries()].filter((x) => x[1].length >= 6).sort((a, b) => b[1].length - a[1].length);
+  let ms = '<section class="card"><div class="ch"><h2>Massas sem caminho</h2><p>mesmo assunto e Seção · grupos de 6 ou mais · ' + nf(mas.length) + ' grupos</p></div>';
+  if (!mas.length) ms += '<p class="nota" style="border:0">Nenhum grupo de 6 ou mais sem destino.</p>';
+  mas.slice(0, INI_MAS ? 200 : 8).forEach(([kk, L], i) => { const [sec, ass] = kk.split('|'), ai = L.filter((o) => o.cl === 'AI').length; reg('ms' + i, ass + ' · ' + sec, L);
+    ms += '<div class="li" style="grid-template-columns:44px minmax(0,1fr) 150px"><span class="n" style="text-align:left">' + nf(L.length) + '</span><span><b style="font-weight:600">' + esc(ass) + '</b><small>' + esc(sec) + (ai ? ' · ' + ai + ' AI' : '') + '</small></span><span style="display:flex;gap:12px;justify-content:flex-end"><button type="button" class="lk" data-conj="ms' + i + '">Abrir</button><button type="button" class="lk" data-esc-conj="ms' + i + '">→ Escaninho</button></span></div>'; });
+  if (mas.length > 8) ms += '<button type="button" class="lk" data-ini-mas style="padding:10px 16px;border-top:1px solid var(--l);width:100%;text-align:left">' + (INI_MAS ? 'Mostrar só os 8 maiores' : 'Mostrar os ' + nf(mas.length) + ' grupos') + '</button>';
+  ms += '</section>';
+  /* por tarefa do escopo */
+  let pr = '<section class="card"><div class="ch"><h2>Por tarefa do PJe</h2><p>escopo da triagem · ' + nf(U.length) + (ESCOPO.lido ? '' : ' · regra padrão (apoio/regras/escopo-triagem.json não lido)') + '</p></div>';
+  ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
+    pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
+  pr += '</section>';
+  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + conf + ms + pr + '</div></div></div>';
+  return h; }
+let REG = {}, INI_MAS = false;
+function reg(k, rot, L) { REG[k] = { rot, ids: L.map((o) => o.d) }; }
+function abrirConj(k) { const r = REG[k]; if (!r) return; limparFiltros(); F.conj = { rot: r.rot, ids: new Set(r.ids) }; ir('fila'); }
+
+/* ---------- filtros da Fila ---------- */
+const CAMPOS = [['tarefa', 'Tarefa no PJe'], ['assunto', 'Assunto'], ['etq', 'Etiqueta'], ['classe', 'Classe'], ['secao', 'Seção'], ['partes', 'Partes'], ['desde', 'Data de entrada na tarefa'], ['dist', 'Data de distribuição'], ['prior', 'Prioridade legal'], ['dest', 'Destino da triagem'], ['prov', 'Destino provável']];
+const CONDS = [['in', 'é um destes'], ['notin', 'não é nenhum destes'], ['has', 'contém algum trecho'], ['nothas', 'não contém'], ['empty', 'está vazio'], ['notempty', 'não está vazio'], ['between', 'entre datas']];
+const valDe = (o, c) => c === 'etq' ? o.etq : c === 'classe' ? [o.cl] : c === 'prior' ? [o.prior ? 'Sim' : 'Não'] : c === 'dest' ? [o.dest.k ? (o.dest.k === 'esc' ? 'Escaninho: ' + o.dest.t : o.dest.k === 'pauta' ? 'Pauta ' + o.dest.s : 'Monocrática') : 'Sem destino'] : c === 'prov' ? [DLAB[o.prov]] : [o[c] || ''];
+function tokens(q) { const out = []; String(q || '').replace(/(-?)"([^"]+)"|(-?)(\S+)/g, (m, n1, f, n2, w) => { const neg = !!(n1 || n2), t = nz(f || w); if (t && t !== '-') out.push({ neg, t }); return ''; }); return out; }
+function loteSet() { const s = new Set(); String(F.lote || '').replace(/\d{7}-?\d{2}\.?\d{4}\.?\d\.?\d{2}\.?\d{4}/g, (m) => { s.add(dg(m)); return m; }); return s; }
+function passaCrit(o, c) { const v = valDe(o, c.campo).filter((x) => x !== '' && x != null);
+  if (c.cond === 'empty') return !v.length; if (c.cond === 'notempty') return !!v.length;
+  if (c.cond === 'between') { const x = v[0] || ''; return !!x && (!c.de || x >= c.de) && (!c.ate || x <= c.ate); }
+  if (c.cond === 'in') return v.some((x) => c.vals.indexOf(x) >= 0) || (c.trechos.length && v.some((x) => c.trechos.some((t) => nz(x).indexOf(nz(t)) >= 0)));
+  if (c.cond === 'notin') return !v.some((x) => c.vals.indexOf(x) >= 0);
+  const hit = v.some((x) => c.trechos.concat(c.vals).some((t) => nz(x).indexOf(nz(t)) >= 0));
+  return c.cond === 'has' ? hit : !hit; }
+function filtrar(base, sem) {
+  const toks = F.modo === 'texto' ? tokens(F.q) : [], lote = F.modo === 'lote' ? loteSet() : null;
+  return base.filter((o) => {
+    if (F.conj && sem !== 'conj' && !F.conj.ids.has(o.d)) return false;
+    if (lote && lote.size && !lote.has(o.d)) return false;
+    for (const t of toks) { const has = o.hay.indexOf(t.t) >= 0; if (t.neg ? has : !has) return false; }
+    for (const c of F.crit) if (!passaCrit(o, c)) return false;
+    for (const f of ['secao', 'classe', 'assunto', 'tarefa', 'prior']) { if (f === sem) continue; const L = F.fac[f]; if (L.length) { const v = f === 'classe' ? o.cl : f === 'prior' ? (o.prior ? 'Sim' : 'Não') : f === 'tarefa' ? (o.tarefa || 'Sem tarefa') : o[f]; if (L.indexOf(v) < 0) return false; } }
+    if (sem !== 'etq') { if (F.etIn.length && !F.etIn.every((e) => o.etq.indexOf(e) >= 0)) return false; if (F.etOut.length && F.etOut.some((e) => o.etq.indexOf(e) >= 0)) return false; }
+    return true; }); }
+function limparFiltros() { F.q = ''; F.lote = ''; F.crit = []; F.conj = null; F.etIn = []; F.etOut = []; Object.keys(F.fac).forEach((k) => { F.fac[k] = []; }); F.lim = 100; F.statsX = null; }
+function contar(L, fn) { const m = new Map(); L.forEach((o) => { [].concat(fn(o)).forEach((v) => { if (v === '' || v == null) return; m.set(v, (m.get(v) || 0) + 1); }); }); return [...m.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0]))); }
+const ORDS = { cnj: (o) => o.d, classe: (o) => o.cl, assunto: (o) => nz(o.assunto), secao: (o) => o.secao, desde: (o) => o.desde || '9999', dest: (o) => o.dest.t };
+function ordenar(L) { const f = ORDS[F.ord] || ORDS.cnj; return L.slice().sort((a, b) => { const x = f(a), y = f(b); return (x < y ? -1 : x > y ? 1 : 0) * F.dir; }); }
+
+/* ---------- Fila ---------- */
+function chipsAtivos() { const ch = [];
+  if (F.conj) ch.push(['<b>Conjunto</b> ' + esc(F.conj.rot) + ' (' + nf(F.conj.ids.size) + ')', 'conj', '', false]);
+  if (F.modo === 'texto' && F.q.trim()) ch.push(['<b>Texto</b> ' + esc(tokens(F.q).map((t) => (t.neg ? 'sem “' : '“') + t.t + '”').join(', ')), 'q', '', false]);
+  if (F.modo === 'lote' && loteSet().size) ch.push(['<b>Lote</b> ' + nf(loteSet().size) + ' números', 'lote', '', false]);
+  F.crit.forEach((c, i) => { const cmp = (CAMPOS.find((x) => x[0] === c.campo) || [])[1], cd = (CONDS.find((x) => x[0] === c.cond) || [])[1];
+    const vs = c.cond === 'between' ? br(c.de) + ' a ' + br(c.ate) : /empty/.test(c.cond) ? '' : c.vals.concat(c.trechos.map((t) => '“' + t + '”')).join(' ou ');
+    ch.push(['<b>' + esc(cmp) + '</b> ' + esc(cd) + ' ' + esc(vs), 'crit', i, /^not/.test(c.cond)]); });
+  const FN = { secao: 'Seção', classe: 'Classe', assunto: 'Assunto', tarefa: 'Tarefa', prior: 'Prioridade' };
+  Object.keys(F.fac).forEach((f) => { if (F.fac[f].length) ch.push(['<b>' + FN[f] + '</b> ' + esc(F.fac[f].join(' ou ')), 'fac', f, false]); });
+  F.etIn.forEach((e) => ch.push(['<b>Etiqueta</b> tem ' + esc(e), 'etIn', e, false])); F.etOut.forEach((e) => ch.push(['<b>Etiqueta</b> não tem ' + esc(e), 'etOut', e, true]));
+  return ch; }
+function vFila() {
+  const L = ordenar(filtrar(F.conj ? ALL : U)); FILA = L;
+  const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
+  let h = '<div class="wrap"><div class="fl-cab"><div class="fl-l1" style="position:relative">' +
+    '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
+    (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
+      : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
+    '<button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
+    '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
+    '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
+    '<span style="position:relative"><button type="button" class="btn" id="bt-exp" aria-expanded="false">Exportar ▾</button></span></div>';
+  if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), fora = [...s].filter((d) => !IDX.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + ' entre os em triagem' + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
+  h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · todos os em triagem</span>') +
+    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div></div>';
+  h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
+  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(U.length) + ' em triagem</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
+  if (F.statsAberto) h += stats(L);
+  h += lista(L, F, 'fila') + '</div></div></div>';
+  return h; }
+let FILA = [];
+function rail() {
+  const blk = (f, tit, ent, extra) => { const ab = !!F.rail[f]; return '<div><button type="button" class="gh" data-rail="' + f + '" aria-expanded="' + ab + '"><span class="k">' + tit + '</span><span>' + (extra || '') + (ab ? '▾' : '▸') + '</span></button>' + (ab ? ent() : '') + '</div>'; };
+  const fac = (f, fn, lim) => () => { const C = contar(filtrar(U, f), fn); const sel = F.fac[f]; const L = C.slice(0, F.rail[f + 'Todos'] ? 400 : (lim || 8));
+    sel.forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
+    return L.map((x) => '<button type="button" class="rl' + (sel.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-fac="' + f + '" data-v="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><em>' + esc(x[0]) + '</em><span>' + nf(x[1]) + '</span></button>').join('') + (C.length > (lim || 8) ? '<button type="button" class="lk" data-todos="' + f + '" style="padding:4px 9px">' + (F.rail[f + 'Todos'] ? 'menos' : 'todos (' + C.length + ')') + '</button>' : ''); };
+  const etq = () => { const C = contar(filtrar(U, 'etq'), (o) => o.etq), L = C.slice(0, F.rail.etqTodos ? 400 : 10);
+    F.etIn.concat(F.etOut).forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
+    return '<p style="margin:0 0 4px;font-size:11.5px;color:var(--m)">+ só com a etiqueta · − sem ela</p>' + L.map((x) => '<div class="et"><em title="' + esc(x[0]) + '">' + esc(x[0]) + ' <span class="mono" style="font-size:11px;color:var(--m)">' + nf(x[1]) + '</span></em><span class="pm"><button type="button" class="' + (F.etIn.indexOf(x[0]) >= 0 ? 'on' : '') + '" data-etin="' + esc(x[0]) + '" aria-label="Só com ' + esc(x[0]) + '">+</button><button type="button" class="neg' + (F.etOut.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-etout="' + esc(x[0]) + '" aria-label="Sem ' + esc(x[0]) + '">−</button></span></div>').join('') + (C.length > 10 ? '<button type="button" class="lk" data-todos="etq" style="padding:4px 0">' + (F.rail.etqTodos ? 'menos' : 'todas (' + C.length + ')') + '</button>' : ''); };
+  return blk('secao', 'Seção', fac('secao', (o) => o.secao, 5)) + blk('classe', 'Classe', fac('classe', (o) => o.cl, 6)) + blk('assunto', 'Assunto', fac('assunto', (o) => o.assunto, 8)) + blk('tarefa', 'Tarefa do PJe', fac('tarefa', (o) => o.tarefa || 'Sem tarefa', 8)) + blk('prior', 'Prioridade legal', fac('prior', (o) => o.prior ? 'Sim' : 'Não', 2)) + blk('etq', 'Etiquetas', etq); }
+function stats(L) {
+  const n = L.length, pr = L.filter((o) => o.prior).length, ds = L.map((o) => dias(o.desde)).filter((x) => x != null).sort((a, b) => a - b), med = ds.length ? ds[Math.floor(ds.length / 2)] : null, v180 = ds.filter((x) => x > 180).length, ant = L.map((o) => o.desde).filter(Boolean).sort()[0];
+  const col = (tit, k, fn, lim) => { const C = contar(L, fn).slice(0, lim), mx = Math.max(1, ...C.map((x) => x[1]));
+    return '<div style="display:flex;flex-direction:column;gap:1px;min-width:0"><p class="k">' + tit + '</p>' + C.map((x) => '<button type="button" class="bar' + (F.statsX && F.statsX.k === k && F.statsX.v === x[0] ? ' on' : '') + '" data-sx="' + k + '" data-v="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><em>' + esc(x[0]) + '</em><span class="hb"><i style="width:' + Math.max(2, Math.round(100 * x[1] / mx)) + '%"></i></span><b>' + nf(x[1]) + '</b><span style="color:var(--m)">' + (F.statsX && F.statsX.k === k && F.statsX.v === x[0] ? '▾' : '▸') + '</span></button>').join('') + (C.length ? '' : '<span style="font-size:12px;color:var(--m);padding:0 8px">—</span>') + '</div>'; };
+  let h = '<section class="st" aria-label="Estatísticas dos filtrados"><div class="st-h"><p class="k" style="margin:0">Estatísticas dos filtrados</p><span class="kv"><span><b style="font-size:20px">' + nf(n) + '</b> processos</span><span><b style="color:var(--r)">' + nf(pr) + '</b> com prioridade</span><span><b>' + (med == null ? '—' : nf(med) + ' dias') + '</b> na tarefa (mediana)</span><span><b>' + nf(v180) + '</b> há mais de 180 dias</span><span>mais antigo <b class="mono" style="font-size:13px">' + (ant ? br(ant) : '—') + '</b></span></span><span style="flex:1"></span><button type="button" class="btn sm" data-stats>Recolher ▴</button></div>';
+  h += '<div class="st-g">' + col('Assunto', 'assunto', (o) => o.assunto, 7) + '<div style="display:flex;flex-direction:column;gap:12px;min-width:0">' + col('Tarefa no PJe', 'tarefa', (o) => o.tarefa || 'Sem tarefa', 4) + col('Seção', 'secao', (o) => o.secao, 4) + col('Classe', 'classe', (o) => o.cl, 4) + '</div>' + col('Etiquetas', 'etq', (o) => o.etq, 8) + '</div>';
+  if (F.statsX) { const X = L.filter((o) => sxPassa(o, F.statsX)), mostra = X.slice(0, 8);
+    h += '<div style="display:flex;align-items:center;gap:10px;margin:0 14px 6px;font-size:13px"><b style="color:var(--v)">' + esc(F.statsX.v) + '</b><span class="mono" style="font-size:12px;color:var(--m)">' + nf(X.length) + ' processos</span><span style="flex:1"></span><button type="button" class="lk" data-sxfecha>fechar ▴</button></div><div class="st-x">' +
+      mostra.map((o) => '<div class="xr"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" style="font-size:12px">' + o.cnj + '</button><span>' + esc(o.cl) + '</span><span style="color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(o.tarefa || 'sem tarefa') + (o.prior ? ' · <b style="color:var(--r)">prioridade</b>' : '') + '</span><span class="mono" style="font-size:11.5px">' + br(o.desde) + '</span></div>').join('') +
+      '<div class="xf"><span style="color:var(--m)">' + (X.length > 8 ? 'mais ' + nf(X.length - 8) + ' · ' : '') + nf(X.filter((o) => SEL.has(o.d)).length) + ' marcados</span><span style="flex:1"></span><button type="button" class="btn sm" data-sxmarca>Marcar os ' + nf(X.length) + '</button><button type="button" class="btn sm" data-sxso>Ver só estes na lista</button></div></div>'; }
+  return h + '<p class="nota">Clique numa barra para abrir aqui os processos daquele grupo. Os números acompanham os critérios ativos.</p></section>'; }
+function sxPassa(o, x) { return x.k === 'etq' ? o.etq.indexOf(x.v) >= 0 : x.k === 'classe' ? o.cl === x.v : x.k === 'tarefa' ? (o.tarefa || 'Sem tarefa') === x.v : o[x.k] === x.v; }
+function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>';
+  return '<div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.tarefa || 'sem tarefa no PJe') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span>' + esc(o.secao.replace(' Seção', '')) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + '</span><span class="mono" style="font-size:12px">' + (br(o.desde) || '—') + '</span><span>' + tg + '</span></div>'; }
+function lista(L, st, onde) {
+  const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
+  const todosMarc = L.length && L.every((o) => SEL.has(o.d));
+  let h = '<div class="lst"><div class="row hd"><input type="checkbox" data-selall="' + onde + '"' + (todosMarc ? ' checked' : '') + ' aria-label="Marcar todos os ' + L.length + '"><span>' + hdr('cnj', 'Processo') + '</span><span>' + hdr('classe', 'Classe') + '</span><span>' + hdr('assunto', 'Assunto · tarefa no PJe') + '</span><span>' + hdr('secao', 'Seção') + '</span><span>' + hdr('desde', 'Na tarefa desde') + '</span><span>' + hdr('dest', 'Destino') + '</span></div>';
+  if (!L.length) return h + '<div class="vazio">Nenhum processo com esses critérios.</div></div>';
+  if (st.ver === 'lista') { h += L.slice(0, st.lim).map(linha).join('');
+    h += '<div class="mais"><span>' + nf(Math.min(st.lim, L.length)) + ' de ' + nf(L.length) + ' na tela · marcar todos marca os ' + nf(L.length) + '</span>' + (L.length > st.lim ? '<button type="button" class="lk" data-mais="' + onde + '">Mostrar mais 100</button>' : '') + '</div>'; }
+  else { const fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver], G = new Map();
+    L.forEach((o) => { const k = fn(o); if (!G.has(k)) G.set(k, []); G.get(k).push(o); });
+    [...G.entries()].sort((a, b) => b[1].length - a[1].length).slice(0, st.lim).forEach(([k, X]) => { const all = X.every((o) => SEL.has(o.d));
+      h += '<div class="grp-h"><input type="checkbox" data-selgrp="' + esc(k) + '" data-onde="' + onde + '"' + (all ? ' checked' : '') + ' aria-label="Marcar o grupo"><b>' + esc(k) + '</b><span class="mono" style="font-size:12px;color:var(--m)">' + nf(X.length) + '</span><span style="flex:1"></span>' + (X.length > 5 ? '<button type="button" class="lk" data-grpso="' + esc(k) + '" data-onde="' + onde + '">ver os ' + nf(X.length) + '</button>' : '') + '</div>' + X.slice(0, 5).map(linha).join(''); });
+    if (G.size > st.lim) h += '<div class="mais"><span>' + nf(st.lim) + ' de ' + nf(G.size) + ' grupos</span><button type="button" class="lk" data-mais="' + onde + '">Mostrar mais</button></div>'; }
+  return h + '</div>'; }
+
+/* ---------- popover de critério ---------- */
+let CP = null;
+function abrirCrit(btn, edit) {
+  fecharPops(); const c = edit != null ? JSON.parse(JSON.stringify(F.crit[edit])) : { campo: 'tarefa', cond: 'in', vals: [], trechos: [], de: '', ate: '' };
+  CP = { c, edit, filtro: '' }; const p = D.createElement('div'); p.className = 'pop'; p.id = 'crit-pop'; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Novo critério');
+  const r = btn.getBoundingClientRect(); p.style.top = (r.bottom + scrollY + 6) + 'px'; p.style.left = Math.max(12, Math.min(r.left + scrollX, innerWidth - 590)) + 'px';
+  D.body.appendChild(p); pintaCrit(); btn.setAttribute('aria-expanded', 'true'); }
+function pintaCrit() { const p = $('#crit-pop'); if (!p || !CP) return; const c = CP.c, data = /^(desde|dist)$/.test(c.campo);
+  if (data && !/^(between|empty|notempty)$/.test(c.cond)) c.cond = 'between'; if (!data && c.cond === 'between') c.cond = 'in';
+  const base = filtrar(U).concat([]), outros = F.crit.filter((x, i) => i !== CP.edit);
+  const pre = U.filter((o) => outros.every((x) => passaCrit(o, x)));
+  const C = data ? [] : contar(pre, (o) => valDe(o, c.campo)).filter((x) => !CP.filtro || nz(x[0]).indexOf(nz(CP.filtro)) >= 0).slice(0, 300);
+  const prev = U.filter((o) => outros.every((x) => passaCrit(o, x)) && (c.cond === 'in' && !c.vals.length && !c.trechos.length ? true : passaCrit(o, c))).length;
+  p.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:14.5px;color:var(--v)">' + (CP.edit != null ? 'Editar critério' : 'Novo critério') + '</b><button type="button" class="x" data-cp="fechar" aria-label="Fechar">×</button></div>' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">Campo<select data-cp="campo">' + CAMPOS.map((x) => '<option value="' + x[0] + '"' + (x[0] === c.campo ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select></label>' +
+    '<label class="f">Condição<select data-cp="cond">' + CONDS.filter((x) => data ? /^(between|empty|notempty)$/.test(x[0]) : x[0] !== 'between').map((x) => '<option value="' + x[0] + '"' + (x[0] === c.cond ? ' selected' : '') + '>' + x[1] + '</option>').join('') + '</select></label></div>' +
+    (data ? (c.cond === 'between' ? '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="f">De<input type="date" data-cp="de" value="' + esc(c.de) + '"></label><label class="f">Até<input type="date" data-cp="ate" value="' + esc(c.ate) + '"></label></div>' : '')
+      : /empty/.test(c.cond) ? '' :
+      '<div class="vals"><div class="vh"><input type="search" data-cp="filtro" placeholder="Filtrar os valores" value="' + esc(CP.filtro) + '" aria-label="Filtrar os valores"><button type="button" class="lk" data-cp="todos">marcar todos</button><button type="button" class="lk" data-cp="nenhum" style="color:var(--m)">nenhum</button></div><div class="vl">' +
+      C.map((x) => '<label><span><input type="checkbox" data-cpv="' + esc(x[0]) + '"' + (c.vals.indexOf(x[0]) >= 0 ? ' checked' : '') + '> <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(x[0]) + '</span></span><span class="mono" style="font-size:11.5px;color:var(--m)">' + nf(x[1]) + '</span></label>').join('') + (C.length ? '' : '<span style="padding:6px 12px;color:var(--m)">nenhum valor</span>') + '</div></div>' +
+      '<label class="f">Trechos livres (um por linha)<textarea data-cp="trechos" rows="2" placeholder="ex.: aposentadoria">' + esc(c.trechos.join('\n')) + '</textarea></label>') +
+    '<p style="margin:0;font-size:12px;line-height:1.5;color:var(--m)">Valores marcados no mesmo critério se somam (<b>ou</b>). Critérios diferentes se cruzam (<b>e</b>). As contagens já consideram os outros critérios.</p>' +
+    '<div style="display:flex;justify-content:flex-end;gap:8px"><button type="button" class="btn" data-cp="fechar">Cancelar</button><button type="button" class="btn pri" data-cp="aplicar">Aplicar · ' + nf(prev) + ' processos</button></div>';
+  void base; }
+D.addEventListener('input', (e) => { const t = e.target; if (!CP || !t.closest('#crit-pop')) return; const k = t.dataset.cp;
+  if (k === 'filtro') { CP.filtro = t.value; const pos = t.selectionStart; pintaCrit(); const n = $('#crit-pop [data-cp=filtro]'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }
+  else if (k === 'trechos') CP.c.trechos = t.value.split('\n').map((s) => s.trim()).filter(Boolean);
+  else if (k === 'de' || k === 'ate') CP.c[k] = t.value; });
+D.addEventListener('change', (e) => { const t = e.target;
+  if (CP && t.closest('#crit-pop')) { if (t.dataset.cp === 'campo') { CP.c.campo = t.value; CP.c.vals = []; CP.c.trechos = []; CP.filtro = ''; pintaCrit(); } else if (t.dataset.cp === 'cond') { CP.c.cond = t.value; pintaCrit(); } else if (t.dataset.cpv != null) { const v = t.dataset.cpv, i = CP.c.vals.indexOf(v); if (t.checked && i < 0) CP.c.vals.push(v); if (!t.checked && i >= 0) CP.c.vals.splice(i, 1); pintaCrit(); } return; }
+  if (t.id === 'fl-salvos') { const v = t.value; t.value = ''; const S = LS.get('tri_filtros', []);
+    if (v === 'del') { const nm = W.prompt('Nome do filtro salvo a excluir:', ''); if (!nm) return; LS.set('tri_filtros', S.filter((x) => x.nome !== nm)); render(); return; }
+    const s = S[+v]; if (!s) return; Object.assign(F, JSON.parse(JSON.stringify(s.F))); F.conj = null; F.lim = 100; render(); toast('Filtro aplicado: ' + s.nome); return; }
+  if (t.dataset.sel) { const d = t.dataset.sel; if (t.checked) SEL.add(d); else SEL.delete(d); const r = t.closest('.row'); if (r) r.classList.toggle('sel', t.checked); pintaRodape(); return; }
+  if (t.dataset.selall) { const L = t.dataset.selall === 'fila' ? FILA : ESCL; L.forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
+  if (t.dataset.selgrp != null) { const L = t.dataset.onde === 'fila' ? FILA : ESCL, st = t.dataset.onde === 'fila' ? F : FE, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
+    L.filter((o) => fn(o) === t.dataset.selgrp).forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
+  if (t.id === 'r-ses' || t.id === 'r-esc') { if (t.id === 'r-esc' && t.value === '__novo') { t.value = ''; novoEscaninho(); } RODA[t.id] = t.value; } });
+function fecharPops() { $$('.pop').forEach((p) => p.remove()); CP = null; $$('[aria-expanded="true"]#bt-crit, [aria-expanded="true"]#bt-exp, [aria-expanded="true"]#bt-expe').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
+
+/* ---------- exportar ---------- */
+const COLS_S = [['Processo', (o) => o.cnj], ['Classe', (o) => o.classe], ['Assunto', (o) => o.assunto], ['Tarefa no PJe', (o) => o.tarefa], ['Na tarefa desde', (o) => br(o.desde)], ['Seção', (o) => o.secao], ['Prioridade', (o) => o.prior ? 'Sim' : ''], ['Destino da triagem', (o) => o.dest.k ? o.dest.t : '']];
+const COLS_C = COLS_S.concat([['Partes', (o) => o.partes], ['Etiquetas', (o) => o.etq.join(', ')], ['Distribuição', (o) => br(o.dist)], ['Destino provável', (o) => DLAB[o.prov]], ['Candidato à monocrática', (o) => CLAB[o.cand] || ''], ['Pendências', (o) => o.pend.join(', ')]]);
+function abrirExp(btn, L, titulo, bilhete) { fecharPops(); const p = D.createElement('div'); p.className = 'pop menu'; p.setAttribute('role', 'menu');
+  const r = btn.getBoundingClientRect(); p.style.top = (r.bottom + scrollY + 6) + 'px'; p.style.left = Math.max(12, Math.min(r.right + scrollX - 340, innerWidth - 352)) + 'px';
+  const alvo = SEL.size && L.some((o) => SEL.has(o.d)) ? L.filter((o) => SEL.has(o.d)) : L;
+  const it = (k, b, s) => '<button type="button" role="menuitem" data-ex="' + k + '"><b>' + b + '</b><small>' + s + '</small></button>';
+  p.innerHTML = '<span class="k" style="color:var(--m)">' + (alvo === L ? 'Os ' + nf(L.length) + ' da lista' : 'Os ' + nf(alvo.length) + ' marcados') + '</span><span class="k">Copiar · sem baixar arquivo</span>' + it('copiar', 'Copiar a lista', 'tabela com processo, classe, assunto, tarefa e seção · cola no Word, Excel ou e-mail') + it('numeros', 'Copiar os números', 'um processo por linha') +
+    '<span class="k" style="border-top:1px solid #ece8de;margin-top:4px">Baixar arquivo</span>' + it('xlsx', 'Planilha completa', '.xlsx · todas as colunas da triagem') + it('xlsxs', 'Planilha simples', '.xlsx · processo, classe, assunto, tarefa, seção, destino') + it('csv', 'CSV', '.csv · para abrir em qualquer planilha') + it('pdf', 'Relação em PDF', 'pela impressão do navegador') + it('doc', 'Relação em Word', '.doc · processo, classe, assunto, partes') + it('est', 'Estatísticas', '.csv · contagens por seção, classe, tarefa e destino');
+  D.body.appendChild(p); btn.setAttribute('aria-expanded', 'true'); p.__L = alvo; p.__t = titulo; p.__b = bilhete || ''; }
+function tabela(L, cols) { return [cols.map((c) => c[0])].concat(L.map((o) => cols.map((c) => String(c[1](o) == null ? '' : c[1](o))))); }
+function baixar(nome, blob) { const a = D.createElement('a'); a.href = URL.createObjectURL(blob); a.download = nome; D.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800); }
+const csvC = (v) => /[";\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+async function exportar(k, L, titulo, bilhete) {
+  const nome = 'triagem-' + nz(titulo).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) + '-' + HOJE;
+  if (k === 'copiar') { const T = tabela(L, COLS_S.slice(0, 6)), txt = T.map((r) => r.join('\t')).join('\n'), html = '<table border="1" cellpadding="4" style="border-collapse:collapse;font-family:Arial;font-size:10pt">' + T.map((r, i) => '<tr>' + r.map((c) => (i ? '<td>' : '<th>') + esc(c) + (i ? '</td>' : '</th>')).join('') + '</tr>').join('') + '</table>';
+    try { if (W.ClipboardItem && navigator.clipboard.write) await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([txt], { type: 'text/plain' }) })]); else await navigator.clipboard.writeText(txt); toast('Lista copiada: ' + nf(L.length) + ' processo(s). Cole no Word, Excel ou e-mail.'); } catch (e) { toast('O navegador não deixou copiar: ' + e.message, true); } return; }
+  if (k === 'numeros') { try { await navigator.clipboard.writeText(L.map((o) => o.cnj).join('\n')); toast(nf(L.length) + ' número(s) copiado(s).'); } catch (e) { toast('O navegador não deixou copiar: ' + e.message, true); } return; }
+  if (k === 'csv' || k === 'est') { let T; if (k === 'csv') T = tabela(L, COLS_C); else { T = [['Grupo', 'Valor', 'Processos']]; [['Seção', (o) => o.secao], ['Classe', (o) => o.cl], ['Tarefa', (o) => o.tarefa || 'Sem tarefa'], ['Destino da triagem', (o) => o.dest.k ? o.dest.t : 'sem destino'], ['Destino provável', (o) => DLAB[o.prov]]].forEach(([g, fn]) => contar(L, fn).forEach((x) => T.push([g, x[0], String(x[1])]))); }
+    baixar(nome + (k === 'est' ? '-estatisticas' : '') + '.csv', new Blob(['﻿' + T.map((r) => r.map(csvC).join(';')).join('\r\n')], { type: 'text/csv;charset=utf-8' })); return; }
+  if (k === 'xlsx' || k === 'xlsxs') { const X = W.XLSX || (M() && M().XLSX); if (!X) { toast('O leitor de planilhas ainda está carregando. Tente de novo.', true); return; }
+    const ws = X.utils.aoa_to_sheet(tabela(L, k === 'xlsx' ? COLS_C : COLS_S)), wb = X.utils.book_new(); X.utils.book_append_sheet(wb, ws, 'Triagem');
+    const out = X.write(wb, { bookType: 'xlsx', type: 'array' }); baixar(nome + '.xlsx', new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })); return; }
+  const T = tabela(L, [['Processo', (o) => o.cnj], ['Classe', (o) => o.cl], ['Assunto', (o) => o.assunto], ['Partes', (o) => o.partes], ['Tarefa no PJe', (o) => o.tarefa], ['Seção', (o) => o.secao]]);
+  const corpo = '<h1 style="font:700 16pt Arial;margin:0 0 4pt">' + esc(titulo) + '</h1><p style="font:10pt Arial;margin:0 0 8pt">' + nf(L.length) + ' processo(s) · ' + br(HOJE) + (bilhete ? '<br>' + esc(bilhete) : '') + '</p><table border="1" cellpadding="4" style="border-collapse:collapse;font:9pt Arial;width:100%">' + T.map((r, i) => '<tr>' + r.map((c) => (i ? '<td>' : '<th style="background:#eee">') + esc(c) + (i ? '</td>' : '</th>')).join('') + '</tr>').join('') + '</table>';
+  if (k === 'doc') { baixar(nome + '.doc', new Blob(['﻿<html><head><meta charset="utf-8"></head><body>' + corpo + '</body></html>'], { type: 'application/msword' })); return; }
+  if (k === 'pdf') { const w = W.open('', '_blank'); if (!w) { toast('O navegador bloqueou a janela de impressão.', true); return; } w.document.write('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>' + esc(titulo) + '</title><style>@page{size:A4 landscape;margin:12mm}body{margin:0}</style></head><body>' + corpo + '</body></html>'); w.document.close(); setTimeout(() => w.print(), 300); } }
+
+/* ---------- escaninhos ---------- */
+let ESCL = [];
+function vEscaninho(id) {
+  const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return '<div class="wrap vazio">Escaninho não encontrado.</div>';
+  const base = U.filter((o) => e._set.has(o.d)), fora = e.processos.length - base.length, toks = tokens(FE.q);
+  const L = ordenar(base.filter((o) => toks.every((t) => (o.hay.indexOf(t.t) >= 0) !== t.neg))); ESCL = L;
+  const sec = contar(base, (o) => o.secao), pr = base.filter((o) => o.prior).length;
+  let h = '<div class="wrap" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><div class="es-cab"><div><p class="k">Escaninho · criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)) || '—') + '</p><h1>' + esc(e.titulo) + '<i>.</i></h1>' + (e.subtitulo ? '<p style="margin:4px 0 0;font-size:14.5px;color:var(--m2)">' + esc(e.subtitulo) + '</p>' : '') +
+    '<p style="margin:10px 0 0;display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(base.length) + '</b> processos</span>' + sec.map((x) => '<span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(x[1]) + '</b> ' + esc(x[0]) + '</span>').join('') + '<span><b class="mono" style="font-weight:500;color:var(--r)">' + nf(pr) + '</b> com prioridade</span>' + (fora > 0 ? '<span title="processos do escaninho que já foram julgados ou saíram do acervo">' + nf(fora) + ' fora dos em triagem</span>' : '') + '</p></div>' +
+    '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete</p><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem bilhete. Use “Editar escaninho” para deixar a orientação de quem triou.</p>') + '</div></div>';
+  h += '<div class="es-tool"><label class="busca" style="flex:1 1 300px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="es-q" type="search" placeholder="Buscar no escaninho" aria-label="Buscar no escaninho" value="' + esc(FE.q) + '"></label>' +
+    '<div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção']].map((x) => '<button type="button" data-verE="' + x[0] + '" class="' + (FE.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
+    '<button type="button" class="btn" data-ex-direto="copiar">Copiar lista</button><span style="position:relative"><button type="button" class="btn pri" id="bt-expe" aria-expanded="false">Exportar ▾</button></span></div>';
+  h += lista(L, FE, 'esc') + '</div>'; return h; }
+function vEscaninhos() {
+  let h = '<div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:18px 0 14px;flex-wrap:wrap"><div><p class="k" style="margin:0">Triagem · escaninhos</p><h1 style="margin:4px 0 0;font-size:32px;font-weight:800;letter-spacing:-.04em;color:var(--v)">Escaninhos<span style="color:var(--g2)">.</span></h1><p style="margin:4px 0 0;font-size:14px;color:var(--m2)">Pastas para examinar um grupo depois. Clicar num escaninho abre o conteúdo numa aba própria. Ficam gravados no procs-muta, para toda a equipe.</p></div><button type="button" class="btn pri" data-esc-novo>+ Novo escaninho</button></div><div class="cards">';
+  ESC.escaninhos.forEach((e) => { const n = U.filter((o) => e._set.has(o.d)).length;
+    h += '<div class="ecard" role="button" tabindex="0" data-esc-abre="' + esc(e.id) + '" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><span class="k" style="color:var(--m)">' + (ABERTAS.indexOf(e.id) >= 0 ? 'aberto em aba' : 'criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)))) + '</span><b>' + esc(e.titulo) + '</b><span style="font-size:13px;color:var(--m2)">' + esc(e.subtitulo || '') + '</span><span class="ft"><span class="mono" style="font-size:22px;color:var(--v)">' + nf(n) + '</span><span style="display:flex;gap:10px"><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar</button><button type="button" class="lk" style="color:var(--r)" data-esc-del="' + esc(e.id) + '">Excluir</button></span></span></div>'; });
+  h += '<button type="button" class="ecard novo" data-esc-novo>+ Novo escaninho</button></div><p style="font-size:12.5px;color:var(--m)">Excluir um escaninho devolve os processos dele à fila de triagem; nada sai do acervo.</p></div>'; return h; }
+function gaveta(html, onClose) { fecharGaveta(); const v = D.createElement('div'); v.className = 'veu'; v.id = 'veu'; const g = D.createElement('aside'); g.className = 'gaveta'; g.id = 'gaveta'; g.setAttribute('role', 'dialog'); g.innerHTML = html; D.body.append(v, g); v.onclick = fecharGaveta; gaveta.fim = onClose; const f = g.querySelector('input,textarea,button'); if (f) setTimeout(() => f.focus(), 30); return g; }
+function fecharGaveta() { const g = $('#gaveta'); if (g) { g.remove(); $('#veu') && $('#veu').remove(); if (gaveta.fim) { const f = gaveta.fim; gaveta.fim = null; f(); } } }
+function editarEscaninho(id, depois) {
+  const e = id ? ESC.escaninhos.find((x) => x.id === id) : { titulo: '', subtitulo: '', bilhete: '', cor: '#a57829' }; let cor = e.cor || '#a57829';
+  const g = gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">' + (id ? 'Editar escaninho' : 'Novo escaninho') + '</p><h2>' + esc(id ? e.titulo : 'Novo escaninho') + '<span style="color:var(--g2)">.</span></h2></div><button type="button" class="x" style="font-size:20px" data-gv="fechar" aria-label="Fechar">×</button></div>' +
+    '<div class="gv-c"><label class="f">Título<input type="text" id="ge-t" value="' + esc(e.titulo) + '" maxlength="80"></label><label class="f">Subtítulo<input type="text" id="ge-s" value="' + esc(e.subtitulo || '') + '" maxlength="160"></label><label class="f">Bilhete<textarea id="ge-b" rows="5" placeholder="Orientação para quem for examinar o escaninho">' + esc(e.bilhete || '') + '</textarea></label>' +
+    '<div><span class="f">Cor</span><div class="cores" style="margin-top:6px">' + CORES.map((c) => '<button type="button" aria-label="' + c[0] + '" data-cor="' + c[1] + '" class="' + (c[1] === cor ? 'on' : '') + '" style="background:' + c[1] + '"></button>').join('') + '</div></div>' + (id ? '<p style="font-size:12.5px;color:var(--m)">' + nf(e.processos.length) + ' processo(s) guardado(s).</p>' : '') + '</div>' +
+    '<div class="gv-f">' + (id ? '<button type="button" class="btn" style="color:var(--r);border-color:var(--r2);margin-right:auto" data-gv="excluir">Excluir escaninho</button>' : '') + '<button type="button" class="btn" data-gv="fechar">Cancelar</button><button type="button" class="btn pri" data-gv="salvar">' + (id ? 'Salvar' : 'Criar') + '</button></div>');
+  g.addEventListener('click', (ev) => { const c = ev.target.closest('[data-cor]'); if (c) { cor = c.dataset.cor; $$('[data-cor]', g).forEach((b) => b.classList.toggle('on', b === c)); return; }
+    const a = ev.target.closest('[data-gv]'); if (!a) return; const k = a.dataset.gv;
+    if (k === 'fechar') { fecharGaveta(); return; }
+    if (k === 'excluir') { fecharGaveta(); excluirEscaninho(id); return; }
+    const t = $('#ge-t').value.trim(); if (!t) { toast('Dê um título ao escaninho.', true); $('#ge-t').focus(); return; }
+    const agora = new Date().toISOString();
+    if (id) Object.assign(e, { titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, atualizadoEm: agora });
+    else { const ne = { id: 'e' + Date.now().toString(36), titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, criadoEm: agora, atualizadoEm: agora, processos: [], _set: new Set() }; ESC.escaninhos.push(ne); if (depois) depois(ne); }
+    ESC_V++; agendar(); fecharGaveta(); render(); toast(id ? 'Escaninho salvo.' : 'Escaninho criado: ' + t + '.'); }); }
+function novoEscaninho() { editarEscaninho(null, (ne) => { RODA['r-esc'] = ne.id; }); }
+function excluirEscaninho(id) { const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return;
+  gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">Excluir escaninho</p><h2>' + esc(e.titulo) + '</h2><p>Os ' + nf(e.processos.length) + ' processo(s) voltam à fila de triagem. Nada sai do acervo.</p></div></div><div class="gv-f"><button type="button" class="btn" data-gv="n">Cancelar</button><button type="button" class="btn" style="background:var(--r);border-color:var(--r);color:#fff" data-gv="s">Excluir</button></div>').addEventListener('click', (ev) => { const a = ev.target.closest('[data-gv]'); if (!a) return;
+    if (a.dataset.gv === 's') { ESC.escaninhos = ESC.escaninhos.filter((x) => x.id !== id); (ESC._apagados = ESC._apagados || []).push(id); ABERTAS = ABERTAS.filter((x) => x !== id); LS.set('tri_abas', ABERTAS); ESC_V++; U.forEach(refazDest); agendar(); if (ABA === 'esc:' + id) ir('escaninhos'); else render(); toast('Escaninho excluído.'); }
+    fecharGaveta(); }); }
+
+/* ---------- rodapé de ações em bloco ---------- */
+const RODA = {};
+function pintaRodape() { const r = $('#rodape'); if (!PRONTO) { r.hidden = true; return; } r.hidden = false;
+  const emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '', L = ABA === 'fila' ? FILA : emEsc ? ESCL : [], n = SEL.size, S = sessoes();
+  if (!RODA['r-ses'] || !S.some((s) => s.data === RODA['r-ses'])) RODA['r-ses'] = S[0] ? S[0].data : '';
+  const escs = ESC.escaninhos.filter((e) => e.id !== idE); if (RODA['r-esc'] && !escs.some((e) => e.id === RODA['r-esc'])) RODA['r-esc'] = '';
+  if (!RODA['r-esc'] && escs[0]) RODA['r-esc'] = escs[0].id;
+  const dis = n ? '' : ' disabled';
+  r.classList.toggle('off', !n);
+  r.innerHTML = '<div class="sel"><span style="font-size:13px;opacity:.8">Selecionados</span><b>' + nf(n) + '</b><span style="display:flex;gap:10px;flex-wrap:wrap">' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + (emEsc ? ' do escaninho' : ' filtrados') + '</button>' : '<span style="font-size:12px;color:#cfe0dc">marque nas listas</span>') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</span></div>' +
+    '<div class="ac"><span class="k" style="color:var(--ok)">Pauta</span><div class="lin"><select id="r-ses" aria-label="Sessão"' + (S.length ? '' : ' disabled') + '>' + (S.length ? S.map((s) => '<option value="' + s.data + '"' + (s.data === RODA['r-ses'] ? ' selected' : '') + '>Sessão de ' + nomeSes(s) + ' · ' + nf((s.itens || []).length || (s.previa || []).length) + (s.itens && s.itens.length ? ' itens' : ' na pré-pauta') + '</option>').join('') : '<option>nenhuma sessão futura</option>') + '</select><button type="button" class="btn" style="background:var(--v2);border-color:var(--v2);color:#fff" data-r="pautar"' + (S.length ? dis : ' disabled') + '>Pautar</button></div><small>entra na seleção prévia da sessão, na página Pautas</small></div>' +
+    '<div class="ac"><span class="k" style="color:var(--az)">Monocrática</span><button type="button" class="btn" style="background:var(--az);border-color:var(--az);color:#fff" data-r="mono"' + dis + '>Julgar por monocrática</button><small>vai para as Monocráticas da Ex Officio</small></div>' +
+    '<div class="ac"><span class="k">Escaninho</span><div class="lin"><select id="r-esc" aria-label="Escaninho">' + escs.map((e) => '<option value="' + esc(e.id) + '"' + (e.id === RODA['r-esc'] ? ' selected' : '') + '>' + esc(e.titulo) + ' (' + nf(e.processos.length) + ')</option>').join('') + '<option value="__novo">+ Novo escaninho…</option></select><button type="button" class="btn" style="background:var(--g2);border-color:var(--g2);color:#fff" data-r="guardar"' + (escs.length ? dis : ' disabled') + '>' + (emEsc ? 'Mover' : 'Guardar') + '</button></div><small>' + (emEsc ? 'leva para outro escaninho' : 'para examinar depois, em aba própria') + '</small></div>' +
+    '<div class="ac" style="border-right:0;gap:5px">' + (emEsc ? '<button type="button" class="btn sm" data-r="devolver"' + dis + '>Devolver à fila</button>' : '') + '<button type="button" class="btn sm" data-r="desfazer"' + (DESF.length ? '' : ' disabled') + ' title="' + esc(DESF.length ? 'Desfazer: ' + DESF[DESF.length - 1].rot : '') + '">Desfazer última</button><button type="button" class="btn sm" style="color:var(--r);border-color:var(--r2)" data-r="limpardest"' + dis + '>Limpar destino</button></div>'; }
+$('#rodape').addEventListener('click', (e) => { const b = e.target.closest('[data-r]'); if (!b || b.disabled) return; const k = b.dataset.r, ds = [...SEL], emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '';
+  if (k === 'todos') { (ABA === 'fila' ? FILA : ESCL).forEach((o) => SEL.add(o.d)); render(); return; }
+  if (k === 'limpar') { SEL.clear(); render(); return; }
+  if (k === 'desfazer') { desfazer(); return; }
+  if (k === 'pautar') { const ss = sessoes().find((s) => s.data === RODA['r-ses']); if (!ss) return; const nm = nomeSes(ss); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '', esc: [] })); return; }
+  if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
+  if (k === 'guardar') { const e2 = ESC.escaninhos.find((x) => x.id === RODA['r-esc']); if (!e2) return; acao((emEsc ? 'Movido para ' : 'Guardado em ') + e2.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [e2.id] })); return; }
+  if (k === 'devolver') { acao('Devolvido à fila', ds, (o) => ({ esc: estadoDe(o).esc.filter((x) => x !== idE) })); return; }
+  if (k === 'limpardest') { acao('Destino limpo', ds, () => ({ sp: '', sd: '', mono: '', esc: [] })); } });
+
+/* ---------- atualizar acervo fonte (padrao/acervo-fonte.js: as três planilhas do dia → carga → GitHub Action) ---------- */
+let IMP = null;
+async function fonteInfo() { try { const P = PM(), k = P && P.atual; if (!k) return null; const r = await fetch('https://api.github.com/repos/trf3bdutra/procs-muta/commits?path=acervo/fonte.json&per_page=1', { cache: 'no-store', headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k } }); if (!r.ok) return null; const j = await r.json(); if (!j[0]) return null; return { em: j[0].commit.committer.date, msg: j[0].commit.message.split('\n')[0] }; } catch (e) { return null; } }
+const TIPOS = { pje: 'PJe', bi: 'Power BI · tramitação', sigilosos: 'Power BI · sigilosos', generica: 'outra planilha' };
+const PAPEL_TXT = { principal: 'principal (em andamento)', complementar: 'complementar', tarefa: 'lista de uma tarefa' };
+function abrirAcervo() {
+  IMP = { log: '', bad: false, ocupado: false, lidos: null, papeis: {} };
+  const g = gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">Acervo fonte</p><h2>Atualizar acervo fonte<span style="color:var(--g2)">.</span></h2><p>Escolha as planilhas do PJe e do Power BI. Confira o papel de cada uma e envie. O GitHub aplica a regra do acervo, complementa com o DataJud e grava a fonte e o operacional num só commit. Leva alguns minutos.</p></div><button type="button" class="x" style="font-size:20px" data-ia="fechar" aria-label="Fechar">×</button></div><div class="gv-c" id="ia-c"></div><div class="gv-f" id="ia-f"></div>');
+  g.addEventListener('click', (e) => { const a = e.target.closest('[data-ia]'); if (!a || a.disabled) return; const k = a.dataset.ia;
+    if (k === 'escolher') $('#ia-file').click();
+    else if (k === 'limpar') { IMP.lidos = null; IMP.papeis = {}; IMP.log = ''; pintaAcervo(); }
+    else if (k === 'enviar') enviarFonte();
+    else if (k === 'fechar') { if (IMP && IMP.ocupado) toast('O envio continua; o resultado aparece no painel quando o GitHub terminar.'); fecharGaveta(); } });
+  g.addEventListener('change', (e) => { const t = e.target; if (t.dataset.papel != null) { IMP.papeis[t.dataset.papel] = t.value; pintaAcervo(); } });
+  pintaAcervo(); fonteInfo().then((i) => { if (i && IMP) { IMP.fonte = i; pintaAcervo(); } }); }
+function papelDe(l) { return IMP.papeis[l.nome] || l.papel; }
+function pintaAcervo() { const c = $('#ia-c'); if (!c || !IMP) return; const L = IMP.lidos;
+  let h = '';
+  if (!L) h += '<div class="drop" id="ia-drop"><b style="font-size:15px;color:var(--v)">Arraste as planilhas aqui</b><span style="font-size:12.5px;color:var(--m)">uma ou várias · .csv ou .xlsx · o tipo é reconhecido pelo cabeçalho, não pelo nome</span><button type="button" class="btn pri" data-ia="escolher"' + (IMP.ocupado ? ' disabled' : '') + '>Escolher arquivos</button><input type="file" id="ia-file" multiple accept=".xlsx,.xls,.csv" hidden></div>';
+  else { const ok = L.filter((l) => l.tipo && l.processos), temPr = ok.some((l) => papelDe(l) === 'principal');
+    h += '<div><p class="k" style="margin:0 0 4px;color:var(--m)">Conferência · papel de cada planilha</p>' + L.map((l) => { const tf = Object.keys(l.tarefas || {}), pp = papelDe(l);
+      return '<div class="card" style="padding:10px 12px;margin-bottom:8px;display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:baseline"><b style="font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(l.nome) + '">' + esc(l.nome) + '</b><span class="mono" style="font-size:11.5px;color:var(--m);white-space:nowrap">' + (l.tipo ? esc(TIPOS[l.tipo] || l.tipo) + ' · ' + nf(l.processos) + ' processos' : '') + '</span></div>' +
+        (l.erro || !l.tipo || !l.processos ? '<span style="font-size:12.5px;color:var(--r)">Ignorada: ' + esc(l.erro || 'sem processos') + '</span>' :
+        '<span style="font-size:12px;color:var(--m2)">' + (tf.length ? nf(tf.length) + ' tarefa(s): ' + esc(tf.slice(0, 3).join('; ')) + (tf.length > 3 ? '…' : '') : 'sem coluna de tarefa') + '</span>' +
+        '<label class="f" style="flex-direction:row;align-items:center;gap:8px">Papel<select data-papel="' + esc(l.nome) + '"' + (IMP.ocupado ? ' disabled' : '') + '>' + Object.keys(PAPEL_TXT).map((k) => '<option value="' + k + '"' + (k === pp ? ' selected' : '') + '>' + PAPEL_TXT[k] + (k === l.papel ? ' · sugerido' : '') + '</option>').join('') + '</select></label>') + '</div>'; }).join('') + '</div>';
+    h += '<div class="log' + (temPr ? ' bad' : '') + '" style="' + (temPr ? '' : 'border-color:#d9c38f;color:#6e4e14') + '">' + (temPr ? 'Com planilha principal: quem não estiver na lista principal sai da fonte. O trabalho registrado vai para o arquivo e volta se o processo voltar.' : 'Atualização parcial: ninguém sai da fonte. As listas de tarefa atualizam o paradeiro de quem veio nelas; quem estava nessas tarefas e não veio perde a tarefa.') + '</div>'; }
+  if (IMP.log) h += '<div class="log' + (IMP.bad ? ' bad' : '') + '" role="status">' + esc(IMP.log) + '</div>';
+  h += '<div class="card" style="padding:10px 14px;font-size:12.5px;color:var(--m2);display:flex;flex-direction:column;gap:4px"><span><b>Principal (em andamento):</b> lista do PJe com a coluna Tarefa. Define quem está na fonte e onde está. Entra quem aparece; sai quem não aparece.</span><span><b>Complementar:</b> Power BI, sigilosos ou outra planilha com mais dados. Só preenche quem já está na fonte.</span><span><b>Lista de uma tarefa:</b> exportação do PJe de uma tarefa. Atualiza o paradeiro de quem veio; quem estava nela e não veio perde a tarefa, mas fica na fonte.</span><span>Celulares, telefones, e-mails e CPF não entram. O navegador nunca grava a fonte: só o GitHub.</span></div>' +
+    '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + (IMP.fonte ? 'Fonte gravada em <b>' + new Date(IMP.fonte.em).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }) + '</b> · ' + esc(IMP.fonte.msg) : 'Consultando a última gravação da fonte…') + '</p>';
+  c.innerHTML = h;
+  const ok = L && L.some((l) => l.tipo && l.processos);
+  $('#ia-f').innerHTML = (L && !IMP.ocupado ? '<button type="button" class="btn" data-ia="limpar" style="margin-right:auto">Escolher outras</button>' : '') + '<button type="button" class="btn" data-ia="fechar">' + (IMP.ocupado ? 'Fechar (continua)' : 'Fechar') + '</button>' + (L ? '<button type="button" class="btn pri" data-ia="enviar"' + (ok && !IMP.ocupado ? '' : ' disabled') + '>' + (IMP.ocupado ? 'Enviando…' : 'Enviar') + '</button>' : '');
+  const dz = $('#ia-drop'), fi = $('#ia-file'); if (!dz) return;
+  fi.onchange = () => { if (fi.files.length) lerPlanilhas([...fi.files]); };
+  dz.ondragover = (e) => { e.preventDefault(); dz.classList.add('over'); }; dz.ondragleave = () => dz.classList.remove('over');
+  dz.ondrop = (e) => { e.preventDefault(); dz.classList.remove('over'); const fs = [...(e.dataTransfer.files || [])]; if (fs.length) lerPlanilhas(fs); }; }
+async function lerPlanilhas(files) { const AF = W.CMTAtualizarFonte, X = W.XLSX;
+  if (!AF || !AF.classificar || !X) { IMP.bad = true; IMP.log = 'O módulo de atualização do acervo não carregou. Recarregue a página.'; pintaAcervo(); return; }
+  IMP.ocupado = true; IMP.bad = false; IMP.log = 'Lendo ' + files.length + ' planilha(s)…'; pintaAcervo();
+  try { IMP.lidos = await AF.classificar(files, X); IMP.log = ''; } catch (e) { IMP.bad = true; IMP.log = 'Não li as planilhas: ' + ((e && e.message) || e); }
+  IMP.ocupado = false; pintaAcervo(); }
+async function enviarFonte() { const AF = W.CMTAtualizarFonte; if (!IMP || !IMP.lidos || IMP.ocupado) return;
+  IMP.ocupado = true; IMP.bad = false;
+  const aviso = (t) => { if (!IMP) return; IMP.log = t; pintaAcervo(); };
+  try { const r = await AF.atualizar(null, { lidos: IMP.lidos, papeis: IMP.papeis, XLSX: W.XLSX, ProcsMuta: PM(), aviso });
+    aviso(r.mensagem + '. Relendo o acervo…');
+    try { const A = M().CMTAcervoDados; if (A && A.puxar) await A.puxar(false); } catch (e) {}
+    construir(); render(); if (IMP) IMP.fonte = await fonteInfo(); acervoData();
+    aviso('Acervo atualizado (carga ' + r.modo + '): ' + r.mensagem + '.' + (r.ignorados && r.ignorados.length ? ' Ignoradas: ' + r.ignorados.join(', ') + '.' : ''));
+  } catch (e) { if (IMP) { IMP.bad = true; aviso('Não atualizou: ' + ((e && e.message) || e)); } }
+  if (IMP) { IMP.ocupado = false; pintaAcervo(); } }
+async function acervoData() { const i = await fonteInfo(); const s = $('#st-acervo'); if (s && i) { s.textContent = 'acervo ' + br(i.em.slice(0, 10)).slice(0, 5); s.title = 'fonte gravada em ' + new Date(i.em).toLocaleString('pt-BR') + ' · ' + i.msg; } }
+$('#bt-acervo').addEventListener('click', () => { if (!PRONTO) { toast('Aguarde o acervo carregar.', true); return; } abrirAcervo(); });
+$('#st-grava').addEventListener('click', () => { if (ERRO || pendentes()) { TENT = 0; gravar(); } });
+
+/* ===================== eventos ===================== */
+let T_Q = null;
+D.addEventListener('input', (e) => { const t = e.target;
+  if (t.id === 'fl-q') { F.q = t.value; F.lim = 100; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#fl-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); }
+  else if (t.id === 'fl-lote') { F.lote = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#fl-lote'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 400); }
+  else if (t.id === 'es-q') { FE.q = t.value; clearTimeout(T_Q); T_Q = setTimeout(() => { const pos = t.selectionStart; render(); const n = $('#es-q'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } }, 250); } });
+D.addEventListener('click', (e) => { const t = e.target;
+  if (!t.closest('.pop') && !t.closest('#bt-crit') && !t.closest('#bt-exp') && !t.closest('#bt-expe')) fecharPops();
+  const q = (s) => t.closest(s);
+  let b;
+  if ((b = q('#crit-pop [data-cp]'))) { const k = b.dataset.cp; if (k === 'fechar') fecharPops(); else if (k === 'todos' || k === 'nenhum') { if (k === 'nenhum') CP.c.vals = []; else $$('#crit-pop [data-cpv]').forEach((i) => { if (CP.c.vals.indexOf(i.dataset.cpv) < 0) CP.c.vals.push(i.dataset.cpv); }); pintaCrit(); }
+    else if (k === 'aplicar') { const c = CP.c; if (/^(in|notin|has|nothas)$/.test(c.cond) && !c.vals.length && !c.trechos.length) { toast('Marque um valor ou escreva um trecho.', true); return; } if (CP.edit != null) F.crit[CP.edit] = c; else F.crit.push(c); F.lim = 100; fecharPops(); render(); } return; }
+  if ((b = q('.menu [data-ex]'))) { const p = b.closest('.menu'); const k = b.dataset.ex; fecharPops(); exportar(k, p.__L, p.__t, p.__b); return; }
+  if ((b = q('[data-conj]'))) { abrirConj(b.dataset.conj); return; }
+  if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
+  if ((b = q('[data-esc-conj]'))) { const r = REG[b.dataset.escConj]; if (!r) return; editarEscaninho(null, (ne) => { const ds = r.ids; setTimeout(() => acao('Guardado em ' + ne.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [ne.id] })), 0); }); const ti = $('#ge-t'); if (ti) ti.value = r.rot; return; }
+  if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
+  if ((b = q('[data-modo]'))) { F.modo = b.dataset.modo; render(); return; }
+  if ((b = q('[data-ver]'))) { F.ver = b.dataset.ver; F.lim = F.ver === 'lista' ? 100 : 30; render(); return; }
+  if ((b = q('[data-verE]'))) { FE.ver = b.dataset.vere || b.getAttribute('data-verE'); FE.lim = FE.ver === 'lista' ? 100 : 30; render(); return; }
+  if ((b = q('#bt-crit'))) { if ($('#crit-pop')) { fecharPops(); return; } abrirCrit(b); return; }
+  if ((b = q('#bt-exp'))) { if ($('.menu')) { fecharPops(); return; } abrirExp(b, FILA, F.conj ? F.conj.rot : 'Fila de triagem', ''); return; }
+  if ((b = q('#bt-expe'))) { if ($('.menu')) { fecharPops(); return; } const e2 = ESC.escaninhos.find((x) => 'esc:' + x.id === ABA); abrirExp(b, ESCL, e2 ? e2.titulo : 'Escaninho', e2 ? e2.bilhete : ''); return; }
+  if ((b = q('[data-ex-direto]'))) { const alvo = SEL.size && ESCL.some((o) => SEL.has(o.d)) ? ESCL.filter((o) => SEL.has(o.d)) : ESCL; exportar('copiar', alvo, '', ''); return; }
+  if ((b = q('[data-tira]'))) { const k = b.dataset.tira, v = b.dataset.v; if (k === 'conj') F.conj = null; else if (k === 'q') F.q = ''; else if (k === 'lote') F.lote = ''; else if (k === 'crit') F.crit.splice(+v, 1); else if (k === 'fac') F.fac[v] = []; else if (k === 'etIn') F.etIn = F.etIn.filter((x) => x !== v); else if (k === 'etOut') F.etOut = F.etOut.filter((x) => x !== v); F.lim = 100; render(); return; }
+  if ((b = q('.chip span')) && b.closest('.chip').querySelector('[data-tira="crit"]')) { abrirCrit($('#bt-crit'), +b.closest('.chip').querySelector('[data-tira]').dataset.v); return; }
+  if (q('#bt-limpar')) { limparFiltros(); render(); return; }
+  if (q('#bt-salvar')) { const nm = W.prompt('Nome para este filtro:', F.conj ? F.conj.rot : ''); if (!nm) return; const S = LS.get('tri_filtros', []).filter((x) => x.nome !== nm); const cp = JSON.parse(JSON.stringify(Object.assign({}, F, { conj: null, statsX: null }))); S.push({ nome: nm, F: cp }); LS.set('tri_filtros', S); render(); toast('Filtro salvo neste navegador: ' + nm + (F.conj ? ' (o conjunto vindo do Início não entra no filtro salvo)' : '') + '.'); return; }
+  if ((b = q('[data-rail]'))) { F.rail[b.dataset.rail] = !F.rail[b.dataset.rail]; LS.set('tri_rail', F.rail); render(); return; }
+  if ((b = q('[data-todos]'))) { F.rail[b.dataset.todos + 'Todos'] = !F.rail[b.dataset.todos + 'Todos']; render(); return; }
+  if ((b = q('[data-fac]'))) { const f = b.dataset.fac, v = b.dataset.v, L = F.fac[f], i = L.indexOf(v); if (i >= 0) L.splice(i, 1); else L.push(v); F.lim = 100; render(); return; }
+  if ((b = q('[data-etin]'))) { const v = b.dataset.etin; F.etOut = F.etOut.filter((x) => x !== v); F.etIn = F.etIn.indexOf(v) >= 0 ? F.etIn.filter((x) => x !== v) : F.etIn.concat(v); render(); return; }
+  if ((b = q('[data-etout]'))) { const v = b.dataset.etout; F.etIn = F.etIn.filter((x) => x !== v); F.etOut = F.etOut.indexOf(v) >= 0 ? F.etOut.filter((x) => x !== v) : F.etOut.concat(v); render(); return; }
+  if (q('[data-stats]')) { F.statsAberto = !F.statsAberto; LS.set('tri_stats', F.statsAberto); render(); return; }
+  if ((b = q('[data-sx]'))) { const x = { k: b.dataset.sx, v: b.dataset.v }; F.statsX = F.statsX && F.statsX.k === x.k && F.statsX.v === x.v ? null : x; render(); return; }
+  if (q('[data-sxfecha]')) { F.statsX = null; render(); return; }
+  if (q('[data-sxmarca]')) { FILA.filter((o) => sxPassa(o, F.statsX)).forEach((o) => SEL.add(o.d)); render(); return; }
+  if (q('[data-sxso]')) { const x = F.statsX, ids = FILA.filter((o) => sxPassa(o, x)).map((o) => o.d); F.conj = { rot: x.v, ids: new Set(ids) }; F.statsX = null; render(); return; }
+  if ((b = q('[data-ord]'))) { const k = b.dataset.ord; if (F.ord === k) F.dir = -F.dir; else { F.ord = k; F.dir = 1; } render(); return; }
+  if ((b = q('[data-mais]'))) { const st = b.dataset.mais === 'fila' ? F : FE; st.lim += st.ver === 'lista' ? 100 : 30; render(); return; }
+  if ((b = q('[data-grpso]'))) { const onde = b.dataset.onde, st = onde === 'fila' ? F : FE, L = onde === 'fila' ? FILA : ESCL, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
+    if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
+  if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : ESCL; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; }
+  if ((b = q('[data-esc-abre]')) && !q('[data-esc-edit]') && !q('[data-esc-del]')) { ir('esc=' + b.dataset.escAbre); return; }
+  if ((b = q('[data-esc-edit]'))) { editarEscaninho(b.dataset.escEdit); return; }
+  if ((b = q('[data-esc-del]'))) { excluirEscaninho(b.dataset.escDel); return; }
+  if (q('[data-esc-novo]')) { editarEscaninho(null, (ne) => { setTimeout(() => ir('esc=' + ne.id), 0); }); return; } });
+D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if ($('#gaveta')) fecharGaveta(); else fecharPops(); }
+  if (e.key === 'Enter' && e.target.matches('.ecard')) e.target.click(); });
+
+/* ===================== arranque ===================== */
+async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; } indexEsc(); }
+(async function arrancar() {
+  const msg = (t) => { const m = $('#carga-msg'); if (m) m.textContent = t; };
+  let n = 0; while (!(core() && core().rows && core().rows.length && PM())) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); return; } if (n === 40) msg('Ainda lendo o acervo (são ~6 mil processos)…'); await new Promise((r) => setTimeout(r, 400)); }
+  try { const j = JSON.parse(await PM().ler('apoio/regras/escopo-triagem.json')); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } } catch (e) { console.warn('[Triagem] escopo', e); }
+  try { await lerEscaninhos(); } catch (e) { toast('Não li os escaninhos: ' + e.message + '. Os novos escaninhos serão gravados normalmente.', true); }
+  construir(); PRONTO = true; rotear(); acervoData();
+  /* o motor pode recarregar o acervo (outra aba gravou, importação): refaz quando as linhas mudam */
+  setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
+  /* volta da ficha: o destino pode ter mudado lá */
+  let fichaAberta = false; setInterval(() => { const on = D.body.classList.contains('cmt-ficha-on'); if (fichaAberta && !on) { U.forEach(refazDest); render(); } fichaAberta = on; }, 700);
+})();
+})();
+</script>
+</body>
+</html>
