@@ -4,7 +4,47 @@
    muda só a apresentação: barra única no topo, folha com abas por parte, canhoto do trecho à esquerda e orientações à direita. */
 document.body.classList.add('dsk');
 var DK={parte:'',cl:'ap'};
-var DAJ=/*__DAJ__*/{};
+var DAJ=/*__DAJ__*/{}; var DROT=/*__DROT__*/{};
+/* ===== Roteiro da minuta: perguntas do catálogo do gabinete, na posição do bloco aberto =====
+   Camadas: roteiro-mestre + espécie do recurso + assunto escolhido + transversais. Só exibe; não escreve na peça. */
+var DROTP={relatorio:['Relatório'],
+  voto:['Admissibilidade','Preliminares e prejudiciais','Decisão recorrida','Questão em discussão','Moldura jurídica','Na espécie: fatos','Na espécie: provas','Aplicação ao caso','Fecho da questão','Consectários','Honorários','Complementos','Dispositivo'],
+  ementa:['Ementa e acórdão','Revisão redacional'],acordao:['Ementa e acórdão']};
+DROTP.monocratica=DROTP.voto;DROTP['acordao-completo']=DROTP.relatorio.concat(DROTP.voto,DROTP.ementa);
+function dkRotPos(id){if(DROTP[id])return DROTP[id];if(/^rel-/.test(id))return DROTP.relatorio;if(id==='ed'||id==='agint')return DROTP.voto;return [];}
+function dkRotEsp(){var jg=dkJg(),cl=dkCl(),L=[];
+  if(jg==='ed')L.push('Embargos de declaração');else if(jg==='agint')L.push('Agravo interno');
+  else if(cl==='ai')L.push('Agravo de instrumento');
+  else{L.push('Apelação cível');if(cl==='aprn'||jg==='dap')L.push('Remessa necessária');}
+  if(dkPron()==='mono')L.push('Decisão monocrática');
+  return L;}
+function dkRotAssuntos(){return (DROT.blocos||[]).filter(function(b){return b.g==='assunto';}).map(function(b){return b.nome;});}
+function dkRotItem(b,it){
+  return '<li class="xri'+(it.e?' ess':'')+'"><b>'+esc(it.q)+'</b>'+(it.e?' <span class="xrie">essencial</span>':'')+
+    (it.o?'<p>'+xFm(it.o)+'</p>':'')+
+    (it.f?'<p class="xrif">'+esc(it.f).replace(/\n/g,'<br>')+'</p>':'')+
+    '<small>'+esc(b.nome)+(it.fn?' · '+esc(it.fn):'')+'</small></li>';}
+function dkRoteiro(pid){
+  var poss=dkRotPos(pid),B=DROT.blocos||[];if(!poss.length||!B.length)return '';
+  var esp=dkRotEsp(),as=DK.rotAs||'',n=0,ess=0,corpo='';
+  var usa=B.filter(function(b){return b.g==='mestre'||b.g==='transversal'||(b.g==='especie'&&esp.indexOf(b.nome)>=0)||(b.g==='assunto'&&b.nome===as);});
+  (DROT.posicoes||[]).forEach(function(ps){
+    if(poss.indexOf(ps)<0)return;
+    var L=[];usa.forEach(function(b){(b.itens||[]).forEach(function(it){if(it.pos===ps)L.push({b:b,i:it});});});
+    if(!L.length)return;
+    L.sort(function(x,y){return (y.i.e?1:0)-(x.i.e?1:0);});n+=L.length;
+    var ne=L.filter(function(x){return x.i.e;}).length;ess+=ne;
+    DK.rotPs=DK.rotPs||{};
+    corpo+='<details class="xrps"'+(DK.rotPs[ps]?' open':'')+' data-rotps="'+esc(ps)+'"><summary>'+esc(ps)+'<small>'+L.length+(ne?' · '+ne+(ne>1?' essenciais':' essencial'):'')+'</small></summary>'+
+      xLista(L.map(function(x){return dkRotItem(x.b,x.i);}))+'</details>';});
+  if(!n)return '';
+  var opc='<option value="">Sem assunto</option>'+dkRotAssuntos().map(function(x){return '<option value="'+esc(x)+'"'+(x===as?' selected':'')+'>'+esc(x)+'</option>';}).join('');
+  return '<div class="dori xrot"><div class="ohd"><p class="kick2">Roteiro · '+esc(String(pid==='relatorio'?'relatório':pid).toUpperCase())+'</p><span class="xrqt">'+n+' · '+ess+(ess>1?' essenciais':' essencial')+'</span></div>'+
+    '<p class="ointro">Perguntas do catálogo do gabinete para esta parte: roteiro-mestre, espécie do recurso, assunto e transversais.</p>'+
+    '<div class="xrsel"><label for="drot-as">Assunto</label><select id="drot-as">'+opc+'</select></div>'+
+    '<p class="xrn">'+esc(esp.join(' · '))+'</p>'+corpo+'</div>';}
+document.addEventListener('change',function(e){if(e.target&&e.target.id==='drot-as'){DK.rotAs=e.target.value;xRef();}});
+document.addEventListener('toggle',function(e){var el=e.target;if(el&&el.hasAttribute&&el.hasAttribute('data-rotps')){DK.rotPs=DK.rotPs||{};DK.rotPs[el.getAttribute('data-rotps')]=el.open;}},true);
 var DPREL=/*__DPREL__*/[];
 var DEMP=/*__DEMP__*/{};
 var DICO={
@@ -214,6 +254,7 @@ function xRef(){
     '<p class="ointro">'+(sel?'Regras do bloco selecionado na folha.':pid==='ementa'?'Como montar uma boa ementa: modelo CNJ 154/2024 adaptado, derivado do voto.':'Clique num bloco da folha para ver as regras dele.')+'</p>'+
     '<p class="okk">Editoriais</p>'+(ed.length?ed.map(function(x,i){return '<div class="ori'+(i===0&&sel?' at':'')+'"><p class="kick2">'+esc(x[0])+'</p><p>'+xFm(x[1])+'</p></div>';}).join(''):'<p class="ovz">Sem regra editorial própria além da estrutura.</p>')+
     '<p class="okk jur">Jurídicas</p>'+(ju.length?ju.map(function(x){return '<div class="ori"><p class="kick2">'+esc(x[0])+'</p><p>'+xFm(x[1])+'</p></div>';}).join(''):'<p class="ovz">Sem orientação jurídica própria neste bloco.</p>')+'</div>';
+  h+=dkRoteiro(pid);
   if(DK.man){var T=[['par','Parágrafos'],['cit','Citação'],['voc','Vocabulário'],['forma','Forma']],R={};T.forEach(function(t){R[t[0]]=xRefTab(t[0]);});var G=XP._G||{h:''};
     h+='<div class="dori man"><div class="ohd"><p class="kick2">Manual · '+esc(pt.t||'')+'</p></div>'+G.h+'<div class="xrtabs" role="tablist" style="margin-top:10px">'+T.map(function(t){return '<button role="tab" data-xrt="'+t[0]+'" aria-selected="'+(XP.tab===t[0])+'">'+t[1]+(XP.q?' <small>'+R[t[0]].n+'</small>':'')+'</button>';}).join('')+'</div><input id="x-rq" type="search" placeholder="Buscar nas orientações…" aria-label="Buscar nas orientações" value="'+esc(XP.q)+'"><div class="xrb">'+(R[XP.tab].h||'<p class="meta">Nada encontrado.</p>')+'</div></div>';}
   el.innerHTML=h;

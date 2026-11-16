@@ -406,3 +406,24 @@ body.dsk #x-main .xblk.on{background:#fbf6e6;box-shadow:0 0 0 1px #f0e3bd}
  #x-main .xblk.on>.band{border-left-color:#a57829}
 }
 @media (max-width:860px){.dbody{padding:8px 0}.dopc{padding-left:0}body.dsk #x-main .xsheet{padding:4px 16px 0}}
+
+/* Roteiro da minuta no painel de orientações */
+.dori.xrot .xrqt{font:400 9.5px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8f88}
+.dori.xrot .xrsel{display:flex;align-items:center;gap:8px;margin:8px 0 4px}
+.dori.xrot .xrsel label{font:400 9.5px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#6b7d78}
+.dori.xrot .xrsel select{flex:1;min-width:0;border:1px solid #d8d3c6;border-radius:0;background:#fff;color:#203b39;font-size:12px;padding:4px 6px}
+.dori.xrot .xrn{margin:0 0 6px;font:400 9.5px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8a8f88}
+.dori.xrot .xrps{border-top:1px solid #e3dfd3;padding:6px 0}
+.dori.xrot .xrps>summary{cursor:pointer;font:400 9.5px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#235a55;list-style:none}
+.dori.xrot .xrps>summary::-webkit-details-marker{display:none}
+.dori.xrot .xrps>summary:before{content:"▸ "}
+.dori.xrot .xrps[open]>summary:before{content:"▾ "}
+.dori.xrot .xrps>summary small{font-weight:400;color:#8a8f88;margin-left:6px;letter-spacing:.08em}
+.dori.xrot ul{list-style:none;padding-left:0;margin:7px 0 2px}
+.dori.xrot .xri{margin:0 0 9px;padding-left:9px;border-left:2px solid #e3dfd3;font-size:12.5px;line-height:1.5}
+.dori.xrot .xri.ess{border-left-color:#a57829}
+.dori.xrot .xri b{color:#203b39}
+.dori.xrot .xri p{margin:2px 0 0;color:#4a5a56}
+.dori.xrot .xri .xrif{margin-top:4px;padding:5px 7px;background:#f4f2ea;border-left:2px solid #c8c3b6;font-size:12px;color:#2f3d3a;white-space:pre-wrap}
+.dori.xrot .xri small{display:block;margin-top:3px;font-size:10.5px;color:#8a8f88}
+.dori.xrot .xrie{font:400 9px SFMono-Regular,Consolas,ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#805b18;margin-left:5px;vertical-align:1px}
