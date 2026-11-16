@@ -1,0 +1,56 @@
+name: Acervo fonte · atualizar
+# Disparado pelo botão "Atualizar acervo fonte" (padrao/acervo-fonte.js), que grava acervo/entrada/carga.json com as
+# três planilhas do dia (PJe painel gerencial, Power BI tramitação e sigilosos). Aplica a regra do acervo
+# (scripts/painel/atualizar_fonte.py: só os processos efetivamente no gabinete), complementa com o DataJud
+# (só quem já está na fonte) e grava tudo num commit. Também roda à mão (Actions › Run workflow) só com o DataJud.
+on:
+  push:
+    branches: [main]
+    paths: ["acervo/entrada/carga.json"]
+  workflow_dispatch:
+    inputs:
+      datajud:
+        description: 'Consultar o DataJud'
+        type: boolean
+        default: true
+permissions:
+  contents: write
+concurrency:
+  group: acervo-fonte
+  cancel-in-progress: false
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Testes do DataJud
+        run: python3 -m unittest discover -s scripts/datajud -p 'test_sincronizar_banco.py' -v
+      - name: Regra do acervo (PJe + Power BI)
+        run: |
+          if [ -f acervo/entrada/carga.json ]; then
+            python3 scripts/painel/atualizar_fonte.py --carga acervo/entrada/carga.json
+            git rm -q acervo/entrada/carga.json
+          else
+            echo 'Sem carga nova; só o DataJud.'
+          fi
+      - name: DataJud (só complementa quem já está na fonte)
+        if: github.event_name == 'push' || inputs.datajud
+        continue-on-error: true
+        env:
+          DATAJUD_API_KEY: ${{ secrets.DATAJUD_API_KEY }}
+        run: python3 scripts/datajud/sincronizar_banco.py --acervo . --aplicar --chave-wiki
+      - name: Gravar no procs-muta
+        run: |
+          git config user.name 'acervo-fonte[bot]'
+          git config user.email 'acervo-fonte[bot]@users.noreply.github.com'
+          git add -A acervo
+          if git diff --cached --quiet; then echo 'Nada mudou.'; exit 0; fi
+          git commit -q -m "Acervo fonte: regra do gabinete e DataJud ($(TZ=America/Cuiaba date +%d/%m/%Y\ %H:%M))"
+          for i in 1 2 3; do
+            git push origin HEAD:main && exit 0
+            git pull --rebase -q origin main || exit 1
+          done
+          exit 1

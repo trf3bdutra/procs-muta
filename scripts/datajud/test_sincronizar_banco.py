@@ -13,9 +13,14 @@ class TestBanco(unittest.TestCase):
   self.assertEqual(row["DataJud · Classe"],"Classe API")
   self.assertEqual(report["totais"]["iguais"],1)
   self.assertEqual(len(new["registros"]),1)
- def test_novo_process_add_and_absent_is_retained(self):
+ def test_fora_da_fonte_nao_entra(self):
   doc={"schema":"gabA.acervo","colunas":[],"registros":[]}
   new,state,report=atualizar(doc,{}, {"registros":[{"numeroProcesso":"00000000000000000002","classe":{"nome":"C"},"movimentos":[]}],"total":1},"2026-01-02")
+  self.assertEqual(len(new["registros"]),0)
+  self.assertEqual(report["totais"]["novos"],0)
+ def test_novo_process_add_and_absent_is_retained(self):
+  doc={"schema":"gabA.acervo","colunas":[],"registros":[]}
+  new,state,report=atualizar(doc,{}, {"registros":[{"numeroProcesso":"00000000000000000002","classe":{"nome":"C"},"movimentos":[]}],"total":1},"2026-01-02",acrescentar=True)
   self.assertEqual(len(new["registros"]),1)
   self.assertEqual(report["totais"]["novos"],1)
   new2,_,rep2=atualizar(new,state,{"registros":[],"total":0},"2026-01-03")

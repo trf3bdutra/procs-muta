@@ -3,6 +3,8 @@
 
 Uso:
   python3 scripts/painel/atualizar_fonte.py --pje PAINEL_GERENCIAL.csv --bi TRAMITACAO.xlsx --sigilosos SIGILOSOS.xlsx [--raiz .]
+  python3 scripts/painel/atualizar_fonte.py --carga acervo/entrada/carga.json [--raiz .]
+      (carga gravada pelo botão "Atualizar acervo fonte" da Base do gabinete; o GitHub Action acervo-fonte.yml a processa)
 
 Fontes (as três juntas, sempre do mesmo dia):
   --pje        PJe 2G · Painel Gerencial (CSV ";"): processos em tarefa do gabinete; tarefa, data de chegada,
@@ -53,9 +55,13 @@ def iso(d):
     return f"{m[3]}-{m[2]}-{m[1]}" if m else (d or "")
 
 
+def por_cnj(linhas, chave):
+    return {dig(x.get(chave)): x for x in linhas if len(dig(x.get(chave))) == 20}
+
+
 def ler_pje(p):
     with open(p, encoding="utf-8-sig") as f:
-        return {dig(x["Número do Processo"]): x for x in csv.DictReader(f, delimiter=";") if len(dig(x["Número do Processo"])) == 20}
+        return por_cnj(list(csv.DictReader(f, delimiter=";")), "Número do Processo")
 
 
 def ler_xlsx(p):
@@ -63,8 +69,14 @@ def ler_xlsx(p):
     ws = openpyxl.load_workbook(p, data_only=True).active
     rows = list(ws.iter_rows(values_only=True))
     i = next(i for i, r in enumerate(rows) if r and "Processo" in r)
-    h, c = rows[i], rows[i].index("Processo")
-    return {dig(r[c]): dict(zip(h, r)) for r in rows[i + 1:] if r and r[c] and len(dig(r[c])) == 20}
+    return por_cnj([dict(zip(rows[i], r)) for r in rows[i + 1:] if r], "Processo")
+
+
+def ler_carga(p):
+    c = json.loads(Path(p).read_text(encoding="utf-8"))
+    pje = [{k: ("" if v is None else str(v)) for k, v in x.items()} for x in c.get("pje") or []]  # como no CSV
+    return (por_cnj(pje, "Número do Processo"), por_cnj(c.get("bi") or [], "Processo"),
+            por_cnj(c.get("sigilosos") or [], "Processo"))
 
 
 def com_trabalho(o):
@@ -89,22 +101,24 @@ def registro_operacional(proc, etiquetas, agora):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pje", required=True); ap.add_argument("--bi", required=True); ap.add_argument("--sigilosos", required=True)
+    ap.add_argument("--pje"); ap.add_argument("--bi"); ap.add_argument("--sigilosos"); ap.add_argument("--carga")
     ap.add_argument("--raiz", default=".")
     a = ap.parse_args()
+    if not a.carga and not (a.pje and a.bi and a.sigilosos):
+        ap.error("informe --carga ou as três planilhas (--pje, --bi e --sigilosos)")
     raiz = Path(a.raiz); A = raiz / "acervo"
     agora = datetime.datetime.now(datetime.timezone.utc).isoformat()
     agora_z = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
-    pje, bi, sig = ler_pje(a.pje), ler_xlsx(a.bi), ler_xlsx(a.sigilosos)
-    if not (pje and bi):
-        sys.exit("Planilha do PJe ou do Power BI vazia: nada foi alterado.")
+    pje, bi, sig = ler_carga(a.carga) if a.carga else (ler_pje(a.pje), ler_xlsx(a.bi), ler_xlsx(a.sigilosos))
+    if not (pje and bi and sig):
+        sys.exit("Falta uma das três planilhas (PJe, Power BI ou sigilosos) ou ela veio vazia: nada foi alterado.")
 
     doc = json.loads((A / "fonte.json").read_text(encoding="utf-8"))
     antigos = {dig(r.get("processo") or r.get("Processo")): r for r in doc["registros"]}
     ativos = set(pje) | set(bi) | set(sig)
     st = {"pje": len(pje), "bi": len(bi), "sigilosos": len(sig), "ativos": len(ativos)}
 
-    novos = []
+    novos, mudou = [], False
     for d in sorted(ativos):
         velho = antigos.get(d)
         r = {k: v for k, v in (velho or {}).items() if k not in REFEITAS}
@@ -140,14 +154,15 @@ def main():
             if isinstance(r.get(k), str): r[k] = iso(r[k])
         comparar = {k: v for k, v in r.items() if k != "atualizado_em"}
         if not velho or comparar != {k: v for k, v in velho.items() if k != "atualizado_em"}:
-            r["atualizado_em"] = agora
+            r["atualizado_em"] = agora; mudou = True
         novos.append(r)
     st["entraram"] = len(ativos - set(antigos)); st["sairam"] = len(set(antigos) - ativos)
 
     usadas = {k for r in novos for k, v in r.items() if not vazio(v)}
     cols = [c for c in doc.get("colunas", []) if c in usadas or c == "Processo"]
     cols += sorted(usadas - set(cols) - {"id", "processo", "atualizado_em"})
-    doc.update(registros=novos, colunas=cols, atualizado_em=agora,
+    mudou = mudou or len(novos) != len(antigos) or cols != doc.get("colunas")
+    doc.update(registros=novos, colunas=cols, atualizado_em=agora if mudou else doc.get("atualizado_em", agora),
                regra="Só processos efetivamente no gabinete: em tarefa do gabinete no PJe ou no acervo do Power BI "
                      "(tramitação e sigilosos). Entra quem volta; sai quem foi baixado, arquivado ou redistribuído. "
                      "scripts/painel/atualizar_fonte.py")
@@ -185,8 +200,11 @@ def main():
             st["op_criados"] += 1
         o.setdefault("origem", {}).pop("baixado", None); o["origem"].pop("fora_do_fonte", None)
         por[d] = o
-    op["registros"] = sorted(por.values(), key=lambda x: x["processo"]); op["atualizado_em"] = agora_z
-    arq["registros"] = sorted(guardados.values(), key=lambda x: x["processo"]); arq["atualizado_em"] = agora_z
+    mexeu = any(st[k] for k in ("op_arquivados", "op_descartados", "op_restaurados", "op_criados"))
+    op["registros"] = sorted(por.values(), key=lambda x: x["processo"])
+    arq["registros"] = sorted(guardados.values(), key=lambda x: x["processo"])
+    if mexeu or "atualizado_em" not in arq:
+        op["atualizado_em"] = agora_z; arq["atualizado_em"] = agora_z
     (A / "operacional.json").write_text(json.dumps(op, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     pa.write_text(json.dumps(arq, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     st.update(fonte=len(novos), operacional=len(op["registros"]), arquivo=len(arq["registros"]))

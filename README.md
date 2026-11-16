@@ -6,9 +6,12 @@ Base de dados do gabinete do Desembargador Federal Carlos Muta (Turma Regional d
 
 ```
 acervo/                        processos em tramitação no gabinete
-  fonte.json · fonte.csv       acervo fonte: só dados de origem (planilhas do PJe e do Power BI e DataJud); valores
-                               padrão do Painel Central não são gravados (scripts/painel/separar_fonte.py)
-  operacional.json             trabalho do gabinete, 1 registro por processo ativo (baixados/arquivados fora), em seções:
+  fonte.json · fonte.csv       acervo fonte: só os processos efetivamente no gabinete (em tarefa do gabinete no PJe ou no
+                               acervo do Power BI, tramitação e sigilosos); quem volta entra, quem é baixado/arquivado sai.
+                               Refeita a cada carga das três planilhas do dia por scripts/painel/atualizar_fonte.py
+                               (botão "Atualizar acervo fonte" → acervo/entrada/carga.json → Action acervo-fonte.yml,
+                               que também complementa com o DataJud, sem acrescentar processos)
+  operacional.json             trabalho do gabinete, 1 registro por processo da fonte, em seções:
                                origem (aba Processo da Ficha) · triagem · producao · pauta (histórico de sessões);
                                servidor, corretor, datas e itens vêm também de acervo/sessoes/;
                                nomes de campo da Ficha: triagem, AJG/DPU, impedimento,
@@ -16,6 +19,7 @@ acervo/                        processos em tramitação no gabinete
   sessoes/                     calendario.json (calendário de sessões) e um arquivo por sessão (AAAA-MM-DD.json)
   planilhas/                   cópia integral das planilhas do Google Sheets aposentadas: Controle de Pauta (espelho de 09/11),
                                pautas do 2º e 6º bimestres, tarefas do PJe (22/06) e divergências de servidor e revisor a conferir
+  operacional-arquivo.json     trabalho registrado de quem saiu do gabinete; volta ao operacional se o processo voltar
   datajud/                     estado da sincronização e relatórios de cada coleta
 
 precedentes/                   processos já julgados pelo relator

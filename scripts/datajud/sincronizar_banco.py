@@ -43,7 +43,9 @@ def resumo(regs):
             "dataAtualizacao": latest.get("dataHoraUltimaAtualizacao", ""), "registros": len(regs)}
 
 
-def atualizar(doc, state, coleta, consultado=None):
+def atualizar(doc, state, coleta, consultado=None, acrescentar=False):
+    """acrescentar=False (padrão): o DataJud só complementa os processos que já estão na fonte; quem decide quem
+    está no gabinete é scripts/painel/atualizar_fonte.py (PJe + Power BI). O órgão no DataJud inclui baixados."""
     consultado = consultado or agora()
     local = doc.setdefault("registros", [])
     por_id = {cnj(r.get("processo") or r.get("Processo")): r for r in local if cnj(r.get("processo") or r.get("Processo"))}
@@ -56,6 +58,8 @@ def atualizar(doc, state, coleta, consultado=None):
         s = resumo(fontes); h = hashlib.sha256(canon(s).encode()).hexdigest(); hashes_novos[n] = h
         antigo = state.get("hashes", {}).get(n)
         proc = por_id.get(n)
+        if proc is None and not acrescentar:
+            continue
         cat = "novos" if proc is None else "iguais" if antigo is None or antigo == h else "atualizados"
         if proc is None:
             proc = {"id": "acv-" + n, "processo": n}; local.append(proc); por_id[n] = proc
@@ -76,7 +80,7 @@ def atualizar(doc, state, coleta, consultado=None):
         eventos.append({"categoria": cat, "processo": n, "resumo": s,
                         "primeiraLeitura": consultado if antigo is None else state.get("primeirasLeituras", {}).get(n, consultado),
                         "mudancas": [k for k in proc if k.startswith("DataJud ·")], "avisos": []})
-    ausentes = set(state.get("hashes", {})) - set(hashes_novos)
+    ausentes = {n for n in set(state.get("hashes", {})) - set(hashes_novos) if n in por_id}
     for n in sorted(ausentes):
         proc = por_id.get(n)
         if proc:
@@ -111,7 +115,8 @@ def grava(path, obj):
 def exportar_csv(doc, caminho):
     cols=doc.get("colunas") or sorted({k for r in doc.get("registros",[]) for k in r})
     out=io.StringIO(newline="")
-    w=csv.DictWriter(out, fieldnames=cols, extrasaction="ignore");w.writeheader();w.writerows(doc.get("registros",[]))
+    w=csv.DictWriter(out, fieldnames=cols, extrasaction="ignore");w.writeheader()
+    w.writerows({**r, "Processo": r.get("Processo") or r.get("processo", "")} for r in doc.get("registros",[]))
     caminho.write_text("\ufeff"+out.getvalue(),encoding="utf-8")
 
 

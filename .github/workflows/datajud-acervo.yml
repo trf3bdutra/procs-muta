@@ -1,12 +1,12 @@
 name: DataJud · atualização do acervo
+# Só à mão: o DataJud roda junto com cada atualização do acervo fonte (acervo-fonte.yml) e só complementa
+# os processos que já estão na fonte; não acrescenta processos.
 on:
-  schedule:
-    - cron: '17 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: datajud-acervo
+  group: acervo-fonte
   cancel-in-progress: false
 jobs:
   atualizar:
