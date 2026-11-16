@@ -246,3 +246,8 @@ html[data-theme="dark"] .cwe-esteira i.feito{color:#0e2132}
 @media (max-width:980px){.cwe-2col{grid-template-columns:minmax(0,1fr)}.cwe-lado{position:static}.cwe-lst-h{position:static}.cwe-pc .ds{grid-template-columns:minmax(0,1fr)}}
 html[data-theme="dark"] .cwe-tbl tr.gh.r td{background:#3a2622}html[data-theme="dark"] .cwe-tbl tr.gh.a td{background:#3a321f}html[data-theme="dark"] .cwe-tbl tr.gh.g td{background:#1f332e}
 html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dark"] .cwe-pc .cwe-chp.cv{background:#1f3a32;border-color:#2f5a4c}html[data-theme="dark"] .cwe-tg.g{background:#1f3a32;color:#bfe0d4}html[data-theme="dark"] .cwe-tg.a{background:#3a321f;color:#e6c27a}html[data-theme="dark"] .cwe-tg.r{background:#3a2622;color:#f0b3a8}
+.cwe-nr{display:flex;flex-direction:column;gap:7px;padding:10px 12px;background:var(--sel);border-bottom:1px solid var(--l);font-size:12px}
+.cwe-nr label{display:flex;flex-direction:column;gap:3px;font-weight:600}.cwe-nr label small{font-weight:400;color:var(--m2)}
+.cwe-nr select,.cwe-nr input{height:30px;border:1px solid var(--b2);border-radius:6px;background:var(--w);font:inherit;padding:0 6px;color:var(--tx)}
+.cwe-nr>small{color:var(--m2);font-size:11px}
+.cwe-marcos input[type="date"]{background:var(--w);border:1px solid var(--g3)}
