@@ -107,8 +107,22 @@ def papel_padrao(tipo, linhas):
     return "complementar"
 
 
+# exportação da lista de uma tarefa do PJe (nomes em camelCase): mesmos campos do painel gerencial
+PJE_LISTA = {"nomeTarefa": "Tarefa", "dataChegada": "Data de Chegada", "tagsProcessoList": "Etiquetas", "poloAtivo": "Polo Ativo",
+             "poloPassivo": "Polo Passivo", "classeJudicial": "Classe", "assuntoPrincipal": "Assunto", "orgaoJulgador": "Órgão Julgador",
+             "orgaoJulgadorColegiado": "Colegiado", "sigiloso": "Sigiloso", "cargoJudicial": "Cargo Judicial", "prioridade": "Prioridade"}
+
+
+def normalizar_lista(x):
+    if "nomeTarefa" not in x and "dataChegada" not in x: return x
+    y = {PJE_LISTA.get(k, k): v for k, v in x.items()}
+    if "Número do Processo" not in y and "Processo" in y: y["Número do Processo"] = y.pop("Processo")
+    return y
+
+
 def arquivo(nome, linhas, tipo=None, papel=None):
-    linhas = [{k: ("" if v is None else v) for k, v in x.items() if not PII.search(str(k))} for x in linhas]
+    linhas = [normalizar_lista({k: ("" if v is None else v) for k, v in x.items() if not PII.search(str(k))}) for x in linhas]
+    if tipo in (None, "", "generica") and tipo_de(linhas) == "pje": tipo = "pje"
     tipo = tipo or tipo_de(linhas)
     if tipo == "pje": linhas = [{k: str(v) for k, v in x.items()} for x in linhas]
     regs = {}
