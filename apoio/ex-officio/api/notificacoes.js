@@ -33,9 +33,10 @@ module.exports = async (req, res) => {
       const meusM = lista.filter(it => L.norm(it.servidor) === eu), meusC = lista.filter(it => L.norm(it.corretor) === eu);
       if (!meusM.length && !meusC.length) return;
       const tPub = s.publicadaEm || d.publicadaEm || d.atualizadoEm || (cal || {}).atualizadoEm || '';
-      if (tPub) ev.push({ id: 'pp-' + s.date, time: tPub, action: 'pauta', user: 'Responsável', title: 'Pauta publicada · sessão de ' + br(s.date),
-        message: [meusM.length && meusM.length + (meusM.length > 1 ? ' processos designados a você para minuta' : ' processo designado a você para minuta'),
-          meusC.length && meusC.length + (meusC.length > 1 ? ' para correção' : ' para correção')].filter(Boolean).join(' · '), sessao: s.date });
+      const qtd = (n, o) => n + (n > 1 ? ' processos designados a você para ' : ' processo designado a você para ') + o;
+      if (tPub) ev.push({ id: 'pp-' + s.date, time: tPub, action: 'pauta', user: '', title: 'Pauta publicada · sessão de ' + br(s.date),
+        message: meusM.length && meusC.length ? qtd(meusM.length, 'minuta') + ' · ' + meusC.length + ' para correção'
+          : meusM.length ? qtd(meusM.length, 'minuta') : qtd(meusC.length, 'correção'), sessao: s.date });
       const ent = (s.marcos || {}).entregaMinutas;
       if (!ent || !/^\d{4}-\d{2}-\d{2}$/.test(ent)) return;
       const faltaM = meusM.filter(it => !it.dataMinuta).length, faltaC = meusC.filter(it => !it.dataCorrecao).length;
