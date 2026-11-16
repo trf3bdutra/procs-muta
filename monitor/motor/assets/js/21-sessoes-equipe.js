@@ -1817,6 +1817,12 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     confirmarPauta: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.conferencia = Object.assign({}, ss.conferencia || {}, { confirmada: hoje() }); salvar(); return true; },
     publicar: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.pronta = on === false ? '' : hoje(); salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */
+    /* regras criadas pela esteira, sem sair da página Pautas */
+    efeitosEtiqueta: function () { return Object.keys(EF).map(function (k) { return { k: k, t: EF[k].t, v: EF[k].v || '' }; }); },
+    criarRegraEtiqueta: function (termo, ef, v) { termo = String(termo || '').trim(); if (!termo || !EF[ef] || (EF[ef].v && !String(v || '').trim())) return false;
+      S.regras.push(regra(ef, [{ t: termo, m: 'igual' }], { v: String(v || '').trim(), nome: termo, origem: 'esteira' })); HIST = null; salvar(); if (root && !root.hidden) render(); return true; },
+    regraAssunto: function (id, assunto, d, c) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!assunto || (!d && !c)) return false; var D = ss && ss.desigOverride ? ss.desigOverride : S.desig;
+      var key = 'tema:' + N(assunto), r = D.rows[key] || (D.rows[key] = { d: '', c: '', cap: assunto }); if (d) r.d = d; if (c) r.c = c; HIST = null; salvar(); if (root && !root.hidden) render(); return true; },
     previaDaTriagem: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return []; return linhasSelecao(ss).map(function (r) { return dig(r.Processo || r.processo); }); },
     /* marcas de seleção prévia na Triagem apontando para sessão que já passou, sem pauta que as recebesse */
     previaVencida: function () { var c = comp(); if (!c || !c.rows) return []; var h = hoje(), g = {};

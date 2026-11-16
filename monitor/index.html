@@ -3,7 +3,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<script>/* /monitor sem barra final: os caminhos ./assets e ./motor só resolvem dentro de /monitor/ */ if (/\/monitor$/.test(location.pathname)) location.replace(location.pathname + '/' + location.search + location.hash);</script>
+<script>/* endereço do Ab Initio: /init/ (o antigo /monitor leva para lá). Sem barra final, ./assets e ./motor não resolvem */ if (/\/(init|monitor)$/.test(location.pathname)) location.replace(location.pathname.replace(/\/monitor$/, '/init') + '/' + location.search + location.hash); else if (/^\/monitor\/?(index\.html)?$/.test(location.pathname)) location.replace('/init/' + location.search + location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="escudo-home" content="/">
 <meta name="application-name" content="Ab Initio">
