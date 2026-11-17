@@ -7,6 +7,7 @@ Gera:
   Catalogo_Paragrafos_Padrao_CMT.txt  parágrafos-padrão (modelos/paragrafos.json), por categoria
   Catalogo_Modelos_CMT.txt          modelos do banco (modelos/modelos.json): nome, assunto, tese, resultado
   Catalogo_Precedentes_CMT_*.txt    precedentes do relator, em dois arquivos (previdenciário; demais matérias) (precedentes/precedentes.jsonl): referência, assunto, resultado, tese
+  Catalogo_Precedentes_CMT_Serie_Recentes.txt  série histórica do relator (precedentes/jurisprudencia): todos os julgados desde SERIE_DESDE, com código, ementa e dispositivo
 O Compendium (aba Consulta) monta a versão do caso: o mesmo prompt com o prontuário, o modelo aplicado,
 os precedentes e os parágrafos escolhidos pela busca. Idempotente."""
 import json, re
@@ -161,7 +162,34 @@ def cat_precedentes():
     return out
 
 
+SERIE_DESDE = '2023'   # série histórica no catálogo: julgados a partir deste ano (os mais recentes, todos)
+
+
+def cat_serie():
+    """Série histórica do Relator (precedentes/jurisprudencia/indice.json.gz): todos os julgados desde SERIE_DESDE, do mais recente
+    ao mais antigo, curados ou não, com o código da série ([A…] acórdão, [M…] monocrática), a ementa resumida e o dispositivo."""
+    import gzip
+    D = json.load(gzip.open(RAIZ / 'precedentes/jurisprudencia/indice.json.gz', 'rt', encoding='utf-8'))
+    D = sorted([x for x in D if (x.get('d') or '') >= SERIE_DESDE], key=lambda x: ((x.get('d') or ''), x.get('id') or ''), reverse=True)
+    br = lambda d: '/'.join(reversed(str(d or '').split('-')))
+    L = []
+    for x in D:
+        rel = 'Rel. p/ acórdão Des. Fed. CARLOS MUTA' if 'acórdão' in (x.get('a') or '') else 'Rel. Des. Fed. CARLOS MUTA'
+        ref = '%s %s, %s, julgamento %s' % (x.get('c') or '', x.get('n') or '', rel, br(x.get('d')))
+        it = ['◆ %s · [%s]' % (limpa(ref), x.get('id'))]
+        tipo = 'Acórdão' if x.get('t') == 'A' else 'Decisão monocrática'
+        it.append('  %s' % ' · '.join(v for v in [tipo, limpa(x.get('o')), ('%s %s' % (limpa(x.get('v')), x.get('p'))).strip() if x.get('p') else ''] if v))
+        for rot, v in [('Ementa' if x.get('t') == 'A' else 'Síntese', x.get('e')), ('Dispositivo', x.get('r'))]:
+            v = limpa(v)
+            if v: it.append('  %s: %s' % (rot, v))
+        L.append('\n'.join(it))
+    cab = ['SÉRIE HISTÓRICA DE JULGADOS DO RELATOR (precedentes/jurisprudencia, procs-muta) — %d julgados de %s em diante, do mais recente ao mais antigo' % (len(L), SERIE_DESDE),
+           'Todos os acórdãos e decisões monocráticas do período, curados ou não. Código entre colchetes: [A…] acórdão, [M…] monocrática.',
+           'Ementa e dispositivo resumidos; o texto integral está nos arquivos por ano da série. Para os precedentes curados, os catálogos Catalogo_Precedentes_CMT_* trazem assunto e tese.', '']
+    return [('Catalogo_Precedentes_CMT_Serie_Recentes.txt', '\n'.join(cab + L) + '\n')]
+
+
 for nome, txt in [('Prompt_Gerar_CMT.txt', prompt_gerar()), ('Catalogo_Paragrafos_Padrao_CMT.txt', cat_paragrafos()),
-                  ('Catalogo_Modelos_CMT.txt', cat_modelos())] + cat_precedentes():
+                  ('Catalogo_Modelos_CMT.txt', cat_modelos())] + cat_precedentes() + cat_serie():
     (LIA / nome).write_text(txt, encoding='utf-8')
     print('ok', nome, len(txt.encode()) // 1024, 'KB')
