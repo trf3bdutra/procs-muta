@@ -45,6 +45,7 @@ select{height:34px;padding:0 8px;font-weight:600;font-size:13px}
 .tb.dash{background:transparent;border-style:dashed}
 #porta-tk{position:fixed;inset:0;z-index:2147483600;background:rgba(23,63,61,.55);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:16px}#porta-tk .pt-c{background:var(--w,#fff);border-radius:12px;padding:22px 24px;width:min(460px,100%);box-shadow:0 18px 50px rgba(0,0,0,.25);font-size:14px;color:var(--tx)}#porta-tk h2{margin:4px 0 8px;font-size:24px;font-weight:800;letter-spacing:-.03em;color:var(--v)}#porta-tk input[type=password],#porta-tk input[type=text]{width:100%;box-sizing:border-box;padding:9px 10px;border:1px solid var(--b2,#cfd6d3);border-radius:7px;font:inherit;margin-top:6px}#porta-tk .pt-l{display:flex;gap:7px;align-items:center;margin-top:9px;font-size:12.5px;color:var(--m2)}#porta-tk #pt-e{margin:10px 0 0;color:var(--r,#a03a2a);font-weight:600;font-size:13px}#porta-tk .pt-f{display:flex;align-items:center;gap:8px;margin-top:14px}#porta-tk #pt-s{margin-right:auto;font-size:12.5px;color:var(--m)}
 body.motor-on #cmt-motor{left:0;top:48px;height:calc(100vh - 48px);visibility:visible;z-index:2147481500;background:#fff}#motor-bar{position:fixed;left:0;right:0;top:0;height:48px;z-index:2147481501;display:flex;align-items:center;gap:14px;padding:0 16px;background:var(--v,#173f3d);color:#fff;font:600 13px Figtree,sans-serif}#motor-bar span{font-weight:500;opacity:.8;font-size:12px}#motor-bar .btn{background:#fff}
+#carga-et{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:4px;font-size:13px;color:var(--m2);text-align:left}#carga-et li.ok{color:#3f8a63}#carga-et li.err{color:var(--r)}#carga-et li.tm{font:500 11px 'JetBrains Mono',monospace;color:var(--m)}#carga-dica{margin:12px 0 0;font-size:12.5px;color:var(--m2)}
 #estado .btn.ib{width:34px;padding:0;color:var(--v)}
 #st-grava{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 6px;border:0;background:transparent;font:600 12px Figtree,sans-serif;color:var(--m);cursor:default;white-space:nowrap}#st-grava i{width:8px;height:8px;border-radius:50%;background:#b9c2bf;flex:none}#st-grava.ok i{background:#3f8a63}#st-grava.pend{cursor:pointer;color:#8a5a12}#st-grava.pend i{background:#d29a2c}#st-grava.err{cursor:pointer;color:#a03a2a}#st-grava.err i{background:#c4513f}#st-grava.ing i{background:#3f7fa8;animation:stp 1s ease-in-out infinite}@keyframes stp{50%{opacity:.3}}
 .tb-esc .car{font-size:10px;margin-left:4px;color:var(--m)}#esc-pop{position:fixed;z-index:2147480000;min-width:280px;max-width:380px;max-height:70vh;overflow:auto;background:var(--w,#fff);border:1px solid var(--b2,#cfd6d3);border-radius:8px;padding:6px;box-shadow:0 10px 30px rgba(23,63,61,.18)}#esc-pop button{display:flex;width:100%;align-items:center;gap:8px;border:0;background:transparent;padding:7px 9px;border-radius:6px;font:600 13px Figtree,sans-serif;color:var(--tx);cursor:pointer;text-align:left}#esc-pop button:hover,#esc-pop button.on{background:rgba(23,63,61,.07)}#esc-pop button small{margin-left:auto;font:500 11.5px 'JetBrains Mono',monospace;color:var(--m)}#esc-pop .dot{width:9px;height:9px;border-radius:50%;flex:none}#esc-pop hr{border:0;border-top:1px solid var(--b,#e3e0d6);margin:5px 2px}#esc-pop .vz{padding:8px 9px;font-size:12.5px;color:var(--m)}
@@ -753,7 +754,8 @@ $('#abas').addEventListener('click', (e) => { if (e.target.closest('[data-escsai
   const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
 
 /* ===================== render geral ===================== */
-function render() { if (!PRONTO) return; F = filtroDe(ABA); pintaAbas(); pintaGrava();
+function render() { if (!PRONTO) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', (b.dataset.mod === 'pautas') === naP)); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } return; }
+  F = filtroDe(ABA); pintaAbas(); pintaGrava();
   const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
   m.hidden = naPauta; ap.hidden = !naPauta; D.title = naPauta ? 'Ab Initio · Pautas' : 'Ab Initio · Triagem';
   if (naPauta) { $('#rodape').hidden = true; try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
@@ -1230,8 +1232,8 @@ async function enviarFonte() { const AF = W.CMTAtualizarFonte; if (!IMP || !IMP.
 async function acervoData() { const i = await fonteInfo(); const s = $('#st-acervo'); if (s && i) { s.textContent = 'acervo ' + br(i.em.slice(0, 10)).slice(0, 5); s.title = 'fonte gravada em ' + new Date(i.em).toLocaleString('pt-BR') + ' · ' + i.msg; } }
 function abrirRegras(aba) { if (!W.CMTRegrasGerais) { toast('As regras gerais ainda estão carregando.', true); return; }
   W.CMTRegrasGerais.abrir({ motor: M, abrirMotor: telaMotor, pagina: 'triagem', contagem: () => { const o = {}; (FONTE || ((core() || {}).rows) || []).forEach((r) => { const t = String(r.tarefa_atual || '').trim(); if (t) o[t] = (o[t] || 0) + 1; }); return o; }, aba: aba || (NOVAS.length ? 'escopo' : 'destino'), aoGravarEscopo: (j) => { ESCOPO = { triar: (j.triar || []).map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); construir(); render(); toast('Escopo da triagem atualizado: ' + nf(U.length) + ' processos em triagem.'); } }); }
-$('#bt-regras').addEventListener('click', () => { if (!PRONTO) { toast('Aguarde o acervo carregar.', true); return; } abrirRegras(); });
-$('#bt-acervo').addEventListener('click', () => { if (!PRONTO) { toast('Aguarde o acervo carregar.', true); return; } abrirAcervo(); });
+$('#bt-regras').addEventListener('click', () => { if (!PM() || !(M() && M().CMTSessao)) { toast('O motor ainda está abrindo; tente em instantes.', true); return; } abrirRegras(); });
+$('#bt-acervo').addEventListener('click', () => { if (!PM()) { toast('O motor ainda está abrindo; tente em instantes.', true); return; } abrirAcervo(); });
 $('#st-grava').addEventListener('click', () => { if (ERRO || pendentes()) { TENT = 0; gravar(); } });
 
 /* ===================== eventos ===================== */
@@ -1330,10 +1332,20 @@ function portaToken() { return new Promise((fim) => {
   if (PM() && PM().pronto) { try { await PM().pronto; } catch (e) {} }
   if (PM() && !PM().atual) await portaToken();
   else { try { const G = M().__acervoGitHub; if (G && G.token && PM()) G.token(PM().atual); } catch (e) {} }
-  let n = 0; while (!(core() && core().rows && core().rows.length && PM())) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); return; } if (n === 40) msg('Ainda lendo o acervo (são ~6 mil processos)…'); await new Promise((r) => setTimeout(r, 400)); }
-  try { const j = JSON.parse(await PM().ler('apoio/regras/escopo-triagem.json')); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } } catch (e) { console.warn('[Triagem] escopo', e); }
-  await lerFonte(msg);
-  try { await lerEscaninhos(); } catch (e) { toast('Não li os escaninhos: ' + e.message + '. Os novos escaninhos serão gravados normalmente.', true); }
+  rotear();
+  /* leituras em paralelo: escopo, fonte e escaninhos começam já, enquanto o motor monta o trabalho do gabinete;
+     a fonte é baixada uma só vez (o motor e a Triagem compartilham o download) e fica guardada neste navegador */
+  const ETAPA = { motor: 0, escopo: 0, fonte: 0, esc: 0 }, t0 = Date.now();
+  const etapas = () => { const c = $('#carga'); if (!c) return; let ul = $('#carga-et'); if (!ul) { ul = D.createElement('ul'); ul.id = 'carga-et'; c.appendChild(ul); const d = D.createElement('p'); d.id = 'carga-dica'; d.innerHTML = 'Enquanto carrega, <b>Pautas</b> e <b>⚙ Regras gerais</b> já funcionam.'; c.appendChild(d); }
+    const L = [['fonte', 'Fonte do acervo (tarefas do PJe)'], ['escopo', 'Escopo da triagem'], ['esc', 'Escaninhos'], ['motor', 'Trabalho do gabinete (destinos, seleção prévia)']];
+    ul.innerHTML = L.map(([k, t]) => '<li class="' + (ETAPA[k] === 1 ? 'ok' : ETAPA[k] === 2 ? 'err' : '') + '">' + (ETAPA[k] === 1 ? '✓' : ETAPA[k] === 2 ? '!' : '…') + ' ' + t + '</li>').join('') + '<li class="tm">' + Math.round((Date.now() - t0) / 1000) + ' s</li>'; };
+  const relogio = setInterval(etapas, 1000); etapas();
+  const pEscopo = PM().ler('apoio/regras/escopo-triagem.json').then((t) => { const j = JSON.parse(t); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } ETAPA.escopo = 1; }).catch((e) => { console.warn('[Triagem] escopo', e); ETAPA.escopo = 2; });
+  const pFonte = lerFonte().then(() => { ETAPA.fonte = FONTE ? 1 : 2; });
+  const pEsc = lerEscaninhos().then(() => { ETAPA.esc = 1; }).catch((e) => { ETAPA.esc = 2; toast('Não li os escaninhos: ' + e.message + '. Os novos escaninhos serão gravados normalmente.', true); });
+  let n = 0; while (!(core() && core().rows && core().rows.length)) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); clearInterval(relogio); return; } if (n === 40) msg('Ainda lendo o trabalho do gabinete…'); await new Promise((r) => setTimeout(r, 400)); }
+  ETAPA.motor = 1; etapas();
+  await Promise.all([pEscopo, pFonte, pEsc]); clearInterval(relogio);
   construir(); PRONTO = true; rotear(); acervoData();
   /* o motor pode recarregar o acervo (outra aba gravou, importação): refaz quando as linhas mudam */
   setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop') || $('#rg')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
