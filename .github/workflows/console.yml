@@ -65,7 +65,7 @@ jobs:
       - name: Grava
         if: env.ANTHROPIC_API_KEY != ''
         run: |
-          git add relatorios precedentes/indice-ia 2>/dev/null || true
+          for d in relatorios precedentes/indice-ia; do [ -e "$d" ] && git add "$d"; done
           if git diff --cached --quiet; then echo "Nada novo."; exit 0; fi
           git config user.name "console-claude[bot]"
           git config user.email "console-claude@users.noreply.github.com"
