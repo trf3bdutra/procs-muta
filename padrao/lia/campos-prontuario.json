@@ -1,0 +1,639 @@
+{
+ "pauta": [
+  [
+   "p:tipoJ",
+   "Tipo de julgamento",
+   "opcao",
+   [
+    "Agravo de Instrumento",
+    "Apelação",
+    "Remessa Necessária",
+    "Embargos de Declaração",
+    "Agravo Interno",
+    "Juízo de Retratação"
+   ]
+  ],
+  [
+   "p:relacionado",
+   "Recurso relacionado",
+   "texto"
+  ],
+  [
+   "p:subassuntos",
+   "Subassuntos",
+   "texto"
+  ],
+  [
+   "p:especificidades",
+   "Especificidades",
+   "texto"
+  ],
+  [
+   "p:questoes",
+   "Questões controvertidas",
+   "texto"
+  ],
+  [
+   "p:sintese",
+   "Síntese fática",
+   "texto"
+  ],
+  [
+   "p:obsGeral",
+   "Observação",
+   "texto"
+  ],
+  [
+   "d:obs",
+   "Detalhes da pauta",
+   "texto"
+  ],
+  [
+   "p:orig.tipo",
+   "Decisão na origem",
+   "opcao",
+   [
+    "Decisão interlocutória",
+    "Sentença",
+    "Decisão monocrática",
+    "Acórdão"
+   ]
+  ],
+  [
+   "p:orig.id",
+   "ID da decisão",
+   "texto"
+  ],
+  [
+   "p:orig.data",
+   "Data",
+   "data"
+  ],
+  [
+   "p:orig.juizo",
+   "Juízo de origem",
+   "texto"
+  ],
+  [
+   "p:orig.julgador",
+   "Julgador(a)",
+   "texto"
+  ],
+  [
+   "p:orig.acc.custas",
+   "Acessórios da decisão · custas",
+   "sim_nao"
+  ],
+  [
+   "p:orig.acc.honor",
+   "Acessórios da decisão · honorários",
+   "sim_nao"
+  ],
+  [
+   "p:orig.acc.tutela",
+   "Acessórios da decisão · tutela",
+   "sim_nao"
+  ],
+  [
+   "p:orig.acc.valor",
+   "Acessórios da decisão · valor da causa",
+   "sim_nao"
+  ],
+  [
+   "c:tempest",
+   "Tempestividade",
+   "opcao",
+   [
+    "Tempestivo",
+    "Intempestivo",
+    "Não verificado",
+    "Não se aplica"
+   ]
+  ],
+  [
+   "p:adm.intim",
+   "Data da intimação",
+   "data"
+  ],
+  [
+   "p:adm.prot",
+   "Data do protocolo do recurso",
+   "data"
+  ],
+  [
+   "p:adm.prazo",
+   "Prazo recursal (dias úteis)",
+   "numero"
+  ],
+  [
+   "p:adm.dobro",
+   "Prazo em dobro",
+   "sim_nao"
+  ],
+  [
+   "c:preparo",
+   "Preparo",
+   "opcao",
+   [
+    "Comprovado",
+    "Justiça gratuita",
+    "Isento (DPU/ente público)",
+    "Não recolhido",
+    "Não se aplica",
+    "Não verificado"
+   ]
+  ],
+  [
+   "p:adm.dpu",
+   "Preparo · DPU",
+   "sim_nao"
+  ],
+  [
+   "p:adm.ajg",
+   "Preparo · justiça gratuita",
+   "sim_nao"
+  ],
+  [
+   "p:adm.req",
+   "Outro requisito",
+   "opcao",
+   [
+    "Regularidade formal",
+    "Interesse recursal",
+    "Cabimento",
+    "Dialeticidade",
+    "Legitimidade recursal",
+    "Preclusão",
+    "Inovação recursal",
+    "Ausência de impugnação específica"
+   ]
+  ],
+  [
+   "p:adm.reqObs",
+   "Outro requisito · observação",
+   "texto"
+  ],
+  [
+   "c:prelim",
+   "Preliminares",
+   "opcao",
+   [
+    "Sem preliminares",
+    "Há preliminares",
+    "Preliminar de ofício"
+   ]
+  ],
+  [
+   "c:repres",
+   "Representação",
+   "opcao",
+   [
+    "Regular",
+    "Dispensada (proc. público/DPU)",
+    "Irregular – intimar",
+    "Não verificado"
+   ]
+  ],
+  [
+   "c:midias",
+   "Mídias",
+   "opcao",
+   [
+    "Juntadas",
+    "Faltantes",
+    "Não se aplica",
+    "Não verificado"
+   ]
+  ],
+  [
+   "c:mpf",
+   "Intervenção do MPF",
+   "opcao",
+   [
+    "Sem hipótese",
+    "Interesse público (178 I)",
+    "Incapaz (178 II)",
+    "Litígio coletivo terra (178 III)",
+    "Mandado de segurança",
+    "ACP/ação popular",
+    "Improbidade",
+    "Indígenas (CF 232)",
+    "Idoso em risco",
+    "Reforma agrária"
+   ]
+  ],
+  [
+   "c:parecer",
+   "Parecer do MPF",
+   "opcao",
+   [
+    "Com parecer",
+    "Aguardando parecer",
+    "Intimado sem manifestação"
+   ]
+  ],
+  [
+   "p:mpfx.sentido",
+   "Sentido do parecer",
+   "opcao",
+   [
+    "Prosseguimento do feito",
+    "Provimento do recurso",
+    "Não provimento do recurso",
+    "Outro"
+   ]
+  ],
+  [
+   "p:mpfx.id",
+   "ID do parecer",
+   "texto"
+  ],
+  [
+   "c:resJulg",
+   "Resultado",
+   "opcao",
+   [
+    "Provido",
+    "Parcialmente provido",
+    "Desprovido",
+    "Não conhecido",
+    "Prejudicado",
+    "Rejeitados",
+    "Acolhidos sem efeito infringente",
+    "Acolhidos com efeito infringente",
+    "Retratação exercida",
+    "Acórdão mantido"
+   ]
+  ],
+  [
+   "c:consect",
+   "Consectários",
+   "opcao",
+   [
+    "Sim",
+    "Não"
+   ]
+  ],
+  [
+   "c:honor",
+   "Honorários",
+   "opcao",
+   [
+    "Majorados",
+    "Mantidos",
+    "Invertidos",
+    "Fixados",
+    "Redistribuídos",
+    "Sem honorários recursais"
+   ]
+  ],
+  [
+   "p:jul.remessa",
+   "Remessa necessária no julgamento",
+   "sim_nao"
+  ],
+  [
+   "c:topico",
+   "Tópico-síntese (sim/não)",
+   "opcao",
+   [
+    "Sim",
+    "Não"
+   ]
+  ],
+  [
+   "p:jul.topico",
+   "Tópico-síntese (texto)",
+   "texto"
+  ],
+  [
+   "p:jul.fund",
+   "Fundamentos",
+   "texto"
+  ],
+  [
+   "p:jul.coment",
+   "Comentário ao corretor",
+   "texto"
+  ],
+  [
+   "p:ai.id",
+   "AI · decisão agravada · ID",
+   "texto"
+  ],
+  [
+   "p:ai.data",
+   "AI · data da decisão",
+   "data"
+  ],
+  [
+   "p:ai.hip",
+   "AI · hipótese (art. 1.015)",
+   "opcao",
+   [
+    "Tutela provisória",
+    "Mérito do processo",
+    "Exibição de documento",
+    "Intervenção de terceiros",
+    "Execução / cumprimento",
+    "Tema 988 · urgência",
+    "Outra"
+   ]
+  ],
+  [
+   "p:ai.efeito",
+   "AI · efeito suspensivo / tutela",
+   "opcao",
+   [
+    "Não requerido",
+    "Deferido",
+    "Indeferido",
+    "Pendente de análise"
+   ]
+  ],
+  [
+   "p:rem.hip",
+   "Remessa · hipótese (art. 496)",
+   "opcao",
+   [
+    "Contra ente público",
+    "Embargos à execução fiscal"
+   ]
+  ],
+  [
+   "p:rem.proveito",
+   "Remessa · proveito econômico",
+   "texto"
+  ],
+  [
+   "p:ed.id",
+   "ED · acórdão embargado · ID",
+   "texto"
+  ],
+  [
+   "p:ed.data",
+   "ED · data do acórdão",
+   "data"
+  ],
+  [
+   "p:ed.vicio",
+   "ED · vício alegado",
+   "opcao",
+   [
+    "Omissão",
+    "Contradição",
+    "Obscuridade",
+    "Erro material",
+    "Mais de um vício"
+   ]
+  ],
+  [
+   "p:ed.ponto",
+   "ED · ponto dos embargos",
+   "texto"
+  ],
+  [
+   "p:jul.multa",
+   "Multa",
+   "opcao",
+   [
+    "Sem multa",
+    "Protelatórios · art. 1.026, § 2º",
+    "Reiteração · art. 1.026, § 3º",
+    "Art. 1.021, § 4º"
+   ]
+  ],
+  [
+   "p:agint.id",
+   "AgInt · decisão agravada · ID",
+   "texto"
+  ],
+  [
+   "p:agint.data",
+   "AgInt · data da decisão",
+   "data"
+  ],
+  [
+   "p:agint.sintese",
+   "AgInt · síntese da decisão",
+   "texto"
+  ],
+  [
+   "p:agint.fund",
+   "AgInt · fundamentos",
+   "texto"
+  ],
+  [
+   "p:jr.id",
+   "Retratação · acórdão · ID",
+   "texto"
+  ],
+  [
+   "p:jr.data",
+   "Retratação · data do acórdão",
+   "data"
+  ],
+  [
+   "p:jr.tema",
+   "Retratação · precedente / tema",
+   "texto"
+  ],
+  [
+   "p:jr.trib",
+   "Retratação · tribunal",
+   "opcao",
+   [
+    "STF",
+    "STJ"
+   ]
+  ],
+  [
+   "p:jr.ed",
+   "Retratação · embargos ao acórdão",
+   "opcao",
+   [
+    "Não houve",
+    "Opostos e rejeitados",
+    "Opostos e acolhidos",
+    "Parcialmente acolhidos",
+    "Não conhecidos"
+   ]
+  ],
+  [
+   "p:jr.questao",
+   "Retratação · questão submetida",
+   "texto"
+  ]
+ ],
+ "mono": [
+  [
+   "c:tipoAto",
+   "Tipo de ato",
+   "opcao",
+   [
+    "Decisão monocrática (art. 932)",
+    "Decisão de urgência",
+    "Despacho",
+    "Decisão de admissibilidade",
+    "Juízo de retratação",
+    "Homologação / extinção"
+   ]
+  ],
+  [
+   "c:hip932",
+   "Hipótese do art. 932",
+   "opcao",
+   [
+    "III · recurso inadmissível, prejudicado ou sem impugnação específica",
+    "IV a · contrário a súmula do STF, STJ ou do TRF",
+    "IV b · contrário a repetitivo do STF ou STJ",
+    "IV c · contrário a IRDR ou IAC",
+    "V a · decisão recorrida contrária a súmula",
+    "V b · decisão recorrida contrária a repetitivo",
+    "V c · decisão recorrida contrária a IRDR ou IAC",
+    "Não se aplica"
+   ]
+  ],
+  [
+   "c:fundamento",
+   "Precedente ou fundamento",
+   "texto"
+  ],
+  [
+   "c:resJulg",
+   "Resultado",
+   "opcao",
+   [
+    "Não conhecido",
+    "Negado provimento",
+    "Dado provimento",
+    "Parcialmente provido",
+    "Deferido",
+    "Indeferido",
+    "Parcialmente deferido",
+    "Prejudicado",
+    "Homologado",
+    "Extinto"
+   ]
+  ],
+  [
+   "c:honor",
+   "Honorários",
+   "opcao",
+   [
+    "Majorados",
+    "Mantidos",
+    "Invertidos",
+    "Fixados",
+    "Redistribuídos",
+    "Sem honorários recursais"
+   ]
+  ],
+  [
+   "c:topico",
+   "Tópico-síntese (sim/não)",
+   "opcao",
+   [
+    "Sim",
+    "Não"
+   ]
+  ],
+  [
+   "d:obs",
+   "Detalhes",
+   "texto"
+  ],
+  [
+   "c:intercor",
+   "Intercorrência",
+   "texto"
+  ],
+  [
+   "c:urgTipo",
+   "Medida",
+   "opcao",
+   [
+    "Tutela de urgência",
+    "Tutela de evidência",
+    "Antecipação da tutela recursal",
+    "Efeito suspensivo",
+    "Liminar em mandado de segurança",
+    "Reconsideração de liminar",
+    "Prioridade legal",
+    "Outra"
+   ]
+  ],
+  [
+   "c:urgNivel",
+   "Nível",
+   "opcao",
+   [
+    "Urgentíssima (mesmo dia)",
+    "Urgente (24 h)",
+    "Prioritária (48 h)",
+    "Ordinária (5 dias)"
+   ]
+  ],
+  [
+   "c:urgPedido",
+   "Pedido em",
+   "data"
+  ],
+  [
+   "c:urgSit",
+   "Apreciação",
+   "opcao",
+   [
+    "Pendente · não apreciada",
+    "Em análise",
+    "Minuta pronta",
+    "Apreciada · deferida",
+    "Apreciada · parcialmente deferida",
+    "Apreciada · indeferida",
+    "Apreciada · prejudicada",
+    "Apreciada · reconsiderada"
+   ]
+  ],
+  [
+   "c:urgData",
+   "Apreciada em",
+   "data"
+  ],
+  [
+   "c:urgObs",
+   "Observação",
+   "texto"
+  ]
+ ],
+ "recursos": {
+  "parte": [
+   "Parte autora",
+   "Parte ré",
+   "União",
+   "INSS",
+   "Fazenda Nacional",
+   "Ambas",
+   "Outra"
+  ],
+  "tipo": [
+   "Agravo de instrumento",
+   "Apelação",
+   "Apelação adesiva",
+   "Remessa necessária",
+   "Agravo interno",
+   "Embargos de declaração",
+   "RE/REsp · retratação",
+   "Recurso ordinário",
+   "Outro"
+  ],
+  "id": null,
+  "contra": [
+   "Intimada para responder",
+   "Prazo em curso",
+   "Apresentada",
+   "Não apresentada",
+   "Dispensada / não se aplica",
+   "Não mencionar"
+  ]
+ }
+}

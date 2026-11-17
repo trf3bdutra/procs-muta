@@ -150,6 +150,8 @@ for n, a in AC.items():
 # prompt do gabinete para a LIA (Prompt_Minuta_CMT v3): a Consulta recorta pela peça e junta os dados do caso
 _L3 = RAIZ/'padrao/lia/Prompt_Minuta_CMT_v3.txt'
 LIA3 = ('<script type="text/plain" id="lia-v3">' + base64.b64encode(gzip.compress(_L3.read_bytes(), 9)).decode() + '</script>') if _L3.exists() else ''
+_LG = RAIZ/'padrao/lia/Prompt_Gerar_CMT.txt'
+LIA3 += ('<script type="text/plain" id="lia-gerar">' + base64.b64encode(gzip.compress(_LG.read_bytes(), 9)).decode() + '</script>') if _LG.exists() else ''
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
 

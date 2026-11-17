@@ -194,10 +194,11 @@
   }
 
   /* ---------- Minuta com a LIA: prompt do gabinete (Prompt_Minuta_CMT v3, recortado pela peça) + dados do caso + material da base ---------- */
-  var LIA3=null,LIA3P=null;
-  function liaV3(){if(LIA3)return Promise.resolve(LIA3);if(LIA3P)return LIA3P;var el=document.getElementById('lia-v3'),t=(el&&el.textContent||'').trim();
+  var LIAT={};
+  function liaTxt(id){if(LIAT[id])return LIAT[id];var el=document.getElementById(id),t=(el&&el.textContent||'').trim();
     if(!t)return Promise.reject(new Error('prompt do gabinete ausente nesta versão do Compendium'));var bin=atob(t),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
-    LIA3P=new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text().then(function(x){LIA3=x;return x;});return LIA3P;}
+    LIAT[id]=new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text();return LIAT[id];}
+  function liaV3(){return liaTxt('lia-v3');}
   var LIA_PECAS={acordao:['Acórdão completo (ementa, relatório, voto e proclamação)',null],relatorio:['Relatório',['R1','R2','R3','RT']],voto:['Voto',['V','W','PR','X','RT']],ementa:['Ementa',['M','N','M2','RT']],proclamacao:['Proclamação',['P','M','RT']],mono:['Decisão monocrática ou despacho',['W','PR','X','RT']]};
   function liaRecorte(txt,peca){var ks=LIA_PECAS[peca][1];if(!ks)return txt;var L=txt.split('\n'),ix=[];L.forEach(function(x,i){if(/^══ [A-Z0-9]+\./.test(x))ix.push(i);});
     var head=L.slice(0,ix[0]),sec={},ord=[];ix.forEach(function(i,n){var k=/^══ ([A-Z0-9]+)\./.exec(L[i])[1];sec[k]=L.slice(i,ix[n+1]==null?L.length:ix[n+1]);ord.push(k);});
@@ -213,19 +214,20 @@
       if(x.ementaIntegral)out+='\n\n— EMENTA DO MODELO (referência de forma) —\n'+String(x.ementaIntegral).trim();}
     return out;}
   function liaMontar(P,A,R){var o=CQ.lia,sel=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;}),B=BASE||{};
-    return liaV3().then(function(v3){var res=o.res||P.resultado||'';
+    var gerar=o.modo==='GERAÇÃO';
+    return (gerar?liaTxt('lia-gerar'):liaV3()).then(function(v3){var res=o.res||P.resultado||'';
       var tarefa='TAREFA: '+o.modo+' · '+LIA_PECAS[o.peca][0]+(o.modo==='GERAÇÃO'?' · resultado: '+(res||'[não informado: propor e marcar VALIDAR]'):'');
       var prec=(B.prec||[]).filter(function(p){return sel.indexOf(p.id)>=0;});
       var par=o.par?R.par.slice(0,6).map(function(z){return '◆ '+(z.x.titulo||z.x.id)+(z.x.categoria?' ('+z.x.categoria+')':'')+'\n'+String(z.x.texto||'').trim();}):[];
-      return [liaRecorte(v3,o.peca),'','══════════════════════════════','DADOS DESTE PROCESSO E MATERIAL DO GABINETE (gerados pelo Compendium a partir do prontuário do Ex Officio)','══════════════════════════════',tarefa,'',
+      return [].concat(gerar?[tarefa+'\n\n'+v3.trim()]:[liaRecorte(v3,o.peca),'','══════════════════════════════','DADOS DESTE PROCESSO E MATERIAL DO GABINETE (gerados pelo Compendium a partir do prontuário do Ex Officio)','══════════════════════════════',tarefa],['',
         'DADOS DO PRONTUÁRIO (conferir nos autos; o prontuário pode ter erro):',liaCaso(P)||'- (prontuário vazio)','',
         (o.mod&&A&&A.x?'ESTRUTURA DO GABINETE PARA ESTE CASO — '+(A.tipo==='mod'?'modelo do banco: ':'minuta-matriz: ')+nomeDe(A)+'\nUse a ordem dos tópicos e os parágrafos-padrão abaixo; os trechos entre { } são campos a preencher com os dados destes autos. Nada do modelo vale como fato deste processo.\n\n'+liaFolha(A)+'\n':''),
         (prec.length?'PRECEDENTES DO RELATOR NA BASE DO GABINETE (podem ser citados com estes dados, na forma da seção C; confira a aderência ao caso; outros precedentes só com [VALIDAR: precedente]):\n'+prec.map(liaPrec).join('\n\n')+'\n':''),
         (par.length?'PARÁGRAFOS-PADRÃO APLICÁVEIS (preencha os campos { } com os dados destes autos; use só se couberem):\n'+par.join('\n\n')+'\n':''),
-        'TEXTO PARA REVISÃO OU BASE (cole abaixo a minuta, se o modo não for GERAÇÃO; anexe o inteiro teor):'].join('\n');});}
+        gerar?'Fim do material. Comece pela Etapa 1.':'TEXTO PARA REVISÃO (cole abaixo a minuta; anexe o inteiro teor):']).join('\n');});}
   function liaPainel(P,A,R){var o=CQ.lia,sel=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;});
     return '<div class="dori cq-lia"><p class="kick2"><span>Minuta com a LIA</span><span>prompt</span></p>'+
-      '<p class="meta">Junta o prompt do gabinete (recortado pela peça), os dados deste processo, a estrutura aplicada e os precedentes marcados. Cole na LIA com o processo aberto no PJe.</p>'+
+      '<p class="meta">GERAÇÃO: prompt enxuto em quatro etapas (preencher o prontuário, pesquisar no material do gabinete, redigir pelas regras de redação, conferir), com os dados deste processo, o modelo aplicado, os parágrafos-padrão e os precedentes marcados. Os outros modos usam o Prompt_Minuta_CMT v3 completo, recortado pela peça. Cole na LIA com o processo aberto no PJe.</p>'+
       '<label class="cql">Peça<select id="cq-lp">'+Object.keys(LIA_PECAS).map(function(k){return '<option value="'+k+'"'+(k===o.peca?' selected':'')+'>'+e(LIA_PECAS[k][0])+'</option>';}).join('')+'</select></label>'+
       '<label class="cql">Modo<select id="cq-lm">'+['GERAÇÃO','CONFERÊNCIA','LIMPO','FORMATAÇÃO'].map(function(m){return '<option'+(m===o.modo?' selected':'')+'>'+m+'</option>';}).join('')+'</select></label>'+
       '<label class="cql">Resultado pretendido<input id="cq-lr" value="'+e(o.res||P.resultado||'')+'" placeholder="ex.: negar provimento à apelação do INSS"></label>'+

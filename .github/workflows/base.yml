@@ -4,7 +4,7 @@ name: Base gabcmt
 on:
   push:
     branches: [main]
-    paths: ["precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "modelos/**", "apoio/**", "padrao/esquema.json", "padrao/paradigmas.js", "gerar.py"]
+    paths: ["precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "modelos/**", "apoio/**", "padrao/esquema.json", "padrao/paradigmas.js", "padrao/lia/Prompt_Minuta_CMT_v3.txt", "padrao/lia/campos-prontuario.json", "scripts/lia/**", "gerar.py"]
   workflow_dispatch:
 permissions:
   contents: write
@@ -26,6 +26,8 @@ jobs:
           node-version: "20"
       - name: Valida e atualiza o manifesto
         run: python3 gerar.py
+      - name: Prompts e catálogos da LIA (padrao/lia)
+        run: python3 scripts/lia/gerar_prompts.py
       - name: Reconstrói o Vade Mecum (leitura e editor)
         run: python3 apoio/modus-operandi/fonte/build.py
       - name: Grava
