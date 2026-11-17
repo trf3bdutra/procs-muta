@@ -140,6 +140,13 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 .row.hd{font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m);background:var(--p);border-top:0}
 .row.hd button{border:0;background:transparent;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer;padding:0;text-align:left}
 .row.sel{background:#f3f8f5}
+.row>.obs{grid-column:2/-1;display:flex;align-items:baseline;gap:8px;min-width:0;margin:-2px 0 0;padding:4px 8px;border:0;border-left:3px solid var(--g2);border-radius:0 6px 6px 0;background:#fbf6e6;font:inherit;font-size:12.5px;color:var(--tx);text-align:left;cursor:pointer}
+.row>.obs:hover{background:#f6edd2}
+.row>.obs>span{flex:none;font:600 9.5px "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--g)}
+.row>.obs>b{flex:1;min-width:0;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row>.obs>i{flex:none;font-style:normal;font-size:11px;font-weight:600;padding:0 7px;border-radius:999px;border:1px solid}
+.obs .op-a{color:#a8322a;background:#fbe9e6;border-color:#efc2bb}.obs .op-p{color:#8f4d0e;background:#fbefe2;border-color:#efd0ac}.obs .op-n{color:#124f71;background:#d5e6f3;border-color:#a3c6e7}.obs .op-d{color:#5b3f86;background:#eee7f7;border-color:#d4c5ea}
+html[data-theme="dark"] .row>.obs{background:#2a2a1c}html[data-theme="dark"] .row>.obs:hover{background:#33301c}
 .nm{font:500 13px "JetBrains Mono",monospace;color:var(--v);border:0;background:transparent;padding:0;cursor:pointer;text-align:left}
 .nm:hover{text-decoration:underline}
 .as{min-width:0}.as>b{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.as>span{display:block;font-size:12px;color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -942,8 +949,18 @@ function stats(L) {
       '<div class="xf"><span style="color:var(--m)">' + (X.length > 8 ? 'mais ' + nf(X.length - 8) + ' · ' : '') + nf(X.filter((o) => SEL.has(o.d)).length) + ' marcados</span><span style="flex:1"></span><button type="button" class="btn sm" data-sxmarca>Marcar os ' + nf(X.length) + '</button><button type="button" class="btn sm" data-sxso>Ver só estes na lista</button></div></div>'; }
   return h + '<p class="nota">Clique numa barra para abrir aqui os processos daquele grupo. Os números acompanham os critérios ativos.</p></section>'; }
 function sxPassa(o, x) { return x.k === 'etq' ? o.etq.indexOf(x.v) >= 0 : x.k === 'classe' ? o.cl === x.v : x.k === 'tarefa' ? (o.tarefa || 'Sem tarefa') === x.v : o[x.k] === x.v; }
+/* observações da ficha (origem.Observações) na linha: o próximo ato (ou a 1ª linha) e os post-its por tipo; clique abre a ficha */
+const OBS_PI = { 'Nota': 'n', 'Atenção': 'a', 'Alerta': 'a', 'Importante': 'a', 'Pendência': 'p', 'Lembrete': 'p', 'Dúvida': 'd' };
+function obsCurta(v) { const L = String(v || '').split('\n').map((l) => l.trim()).filter(Boolean); if (!L.length) return null;
+  const pis = { n: 0, a: 0, p: 0, d: 0 }; let sec = '', prox = '', prim = '';
+  L.forEach((l) => { let m = /^##\s*(.+)$/.exec(l); if (m) { sec = m[1].toLowerCase(); return; } m = /^•\s*([^:]{3,12}):/.exec(l); if (m && OBS_PI[m[1]]) { pis[OBS_PI[m[1]]]++; return; }
+    if (/^por qu[eê]\s*:/i.test(l)) return; if (!prox && /^pr[oó]ximo ato/.test(sec)) prox = l; if (!prim) prim = l.replace(/^-\s+/, ''); });
+  return { t: prox || prim, prox: !!prox, pis }; }
+function obsLinha(o) { const x = obsCurta(o.row && o.row['Observações']); if (!x) return '';
+  const R = { a: ['atenção', 'atenções'], p: ['pendência', 'pendências'], n: ['nota', 'notas'], d: ['dúvida', 'dúvidas'] }, chips = ['a', 'p', 'n', 'd'].filter((k) => x.pis[k]).map((k) => '<i class="op-' + k + '">' + x.pis[k] + ' ' + R[k][x.pis[k] > 1 ? 1 : 0] + '</i>').join('');
+  return '<button type="button" class="obs" data-ficha="' + o.d + '" title="Observações da ficha · abrir">' + '<span>' + (x.prox ? 'Próximo ato' : 'Obs.') + '</span><b>' + esc(x.t || '—') + '</b>' + chips + '</button>'; }
 function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>';
-  return '<div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span></div>'; }
+  return '<div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span>' + obsLinha(o) + '</div>'; }
 function lista(L, st, onde) {
   const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
   const todosMarc = L.length && L.every((o) => SEL.has(o.d));

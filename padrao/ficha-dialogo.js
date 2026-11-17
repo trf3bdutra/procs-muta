@@ -8,6 +8,7 @@
        lista?:   [cnj, ...]              (anterior / próximo)
        avisar?:  (texto, tipo) => void
        leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Ex Officio edita pelo prontuário lateral)
+       teor?: true                       (com leitura: ainda assim importa o inteiro teor e grava os campos confirmados)
      })
    Regras dos Controles especiais (quando cada grupo vale): CMTFicha.controlesDe(fonte, operacional), as mesmas do servidor (api/_metas, _sobr, _sens). */
 (function () {
@@ -161,7 +162,7 @@ function ensureHost() {
 }
 function abrir(cnj, ad) {
   ensureHost();
-  ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; descartarTeor();
+  ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; ST.obsEd = false; ST.obsTx = ''; descartarTeor();
   ST.tab = tabNorm((ad && ad.aba) || 'resumo'); ST.vz = {};
   host.classList.add('on'); host.setAttribute('aria-hidden', 'false'); doc.documentElement.classList.add('cmt-fx-open');
   doc.addEventListener('keydown', onKey, true);
@@ -181,7 +182,7 @@ function fechar(force) {
 }
 function passo(n) {
   var L = ST.ad.lista || [], i = L.map(dg).indexOf(dg(ST.cnj)); if (L.length < 2 || i < 0) return;
-  if (Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas da ficha?')) return;
+  if ((Object.keys(ST.draft).length || (ST.obsEd && S(ST.obsTx) !== S(val('origem', 'Observações')))) && !window.confirm('Descartar as alterações não salvas da ficha?')) return;
   var ad = Object.assign({}, ST.ad, { aba: ST.tab }); abrir(L[(i + n + L.length) % L.length], ad);
 }
 function onKey(ev) {
@@ -206,7 +207,7 @@ function cabecalho() {
   var nav = L.length > 1 && i >= 0 ? '<button type="button" class="fx-sq" data-fx="ant" title="Processo anterior (Alt+↑)">' + svg('back') + '</button><span class="fx-note">' + (i + 1) + ' de ' + L.length + '</span><button type="button" class="fx-sq" data-fx="prox" title="Próximo processo (Alt+↓)">' + svg('fwd') + '</button>' : '';
   return '<header class="fx-head"><span class="fx-ic">' + svg('ficha') + '</span>' +
     '<div class="fx-tt"><span>' + E(['Ficha do processo', cl, as].filter(Boolean).join(' · ')) + '</span><div class="fx-num"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2><button type="button" class="fx-sq" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' + (partes ? '<small>' + E(partes) + '</small>' : '') + '</div>' +
-    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && !ST.ad.leitura ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor .txt</button>' : '') + nav + '</div>' +
+    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && (!ST.ad.leitura || ST.ad.teor) ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') + nav + '</div>' +
     '<button type="button" class="fx-sq fx-x" data-fx="fechar" aria-label="Fechar" title="Fechar (Esc)">' + svg('x') + '</button></header>';
 }
 function faixa() {
@@ -416,7 +417,19 @@ function abaResumo() {
     return '<div class="rs-t ' + (g === 'urgencia' && !/^Apreciada/.test(t('Urgência - Apreciação')) ? 'is-warn' : '') + '"><span>' + E({ urgencia: 'Urgência', monocratica: 'Monocrática', meta: 'Meta', sobrestamento: 'Sobrestamento', sensivel: 'Caso sensível' }[g]) + '</span><b>' + E(v || 'sim') + '</b></div>';
   }).join('') + '</div>' : '<p class="rs-empty">Nenhum controle especial vale para este processo.</p>';
   var pr = kv([['Partes', [S(f.polo_ativo || f.Polo_Ativo), S(f.polo_passivo || f.Polo_Passivo)].filter(Boolean).join(' × ')], ['Seção', S(f['Seção Competente'])], ['Distribuição', brD(iso(f['data_distribuição'] || f['Data_Distribuição']))], ['Última movimentação', [S(f.ultimo_movimento || f['Última_Movimentação']), brD(iso(f['Data Último Movimento'] || f['Data_Última_Movimentação']) || S(f['Data Último Movimento']))].filter(Boolean).join(' · ')], ['Sentença', [val('origem', 'Sentença - Decisão'), val('origem', 'Sentença - ID') ? 'ID ' + val('origem', 'Sentença - ID') : ''].filter(Boolean).join(' · ')], ['Responsável', val('origem', 'Responsável')], ['Próxima ação', val('origem', 'Próxima ação')]]);
-  return top + pend + '<div class="rs-grid"><div class="rs-stack">' + col('Triagem', 'Triagem', 'tri', tri) + col(CE, CE, 'ce', ce) + '</div><div class="rs-stack">' + col(mono ? 'Pauta' : 'Pauta', 'Pauta', 'jul', pau) + col('Processo', 'Processo', 'processo', pr) + '</div><div class="rs-stack">' + col('Produção · ' + (mono ? 'monocrática' : 'acórdão'), 'Produção', 'pro', pro) + '</div></div>';
+  return top + pend + resumoObs() + '<div class="rs-grid"><div class="rs-stack">' + col('Triagem', 'Triagem', 'tri', tri) + col(CE, CE, 'ce', ce) + '</div><div class="rs-stack">' + col(mono ? 'Pauta' : 'Pauta', 'Pauta', 'jul', pau) + col('Processo', 'Processo', 'processo', pr) + '</div><div class="rs-stack">' + col('Produção · ' + (mono ? 'monocrática' : 'acórdão'), 'Produção', 'pro', pro) + '</div></div>';
+}
+
+/* Observações no Resumo: o texto formatado à vista; "Colar resumo" abre o campo ali mesmo (colar já padroniza) e grava só ele */
+function resumoObs() {
+  var v = val('origem', 'Observações'), ro = ST.ad.leitura, ed = !ro && ST.obsEd;
+  var acoes = ro ? '' : ed ? '' : '<button type="button" data-fx="obs-ed" title="Escrever ou colar o resumo do processo; ao colar, o texto já sai padronizado">' + (S(v) ? 'Editar' : 'Colar resumo') + ' ›</button>';
+  var corpo = ed ? '<textarea class="rs-obs-ta" data-fx-obs data-fx-postit rows="' + Math.min(14, Math.max(6, S(ST.obsTx).split('\n').length + 1)) + '" aria-label="Observações" placeholder="Cole aqui o resumo do processo (Próximo ato, Prazos e alertas, Partes e andamento, Post-its…)">' + E(ST.obsTx) + '</textarea>' +
+      '<small class="fx-pi-h">Ao colar, “## Seção”, “- item”, “Rótulo: valor” e “• Nota/Atenção/Pendência: texto — Peça · id N” já ficam no padrão.</small>' +
+      '<div class="rs-obs-ac"><button type="button" class="fx-pill is-on" data-fx="obs-salvar"' + (ST.busy ? ' disabled' : '') + '>' + (ST.busy ? 'Gravando…' : 'Gravar observações') + '</button><button type="button" class="fx-pill" data-fx="obs-x">Cancelar</button></div>'
+    : S(v) ? (temFormato(v) ? obsHtml(v) : '<p class="fx-obs-p" style="white-space:pre-wrap">' + E(v) + '</p>')
+    : '<p class="rs-empty">Sem observações.' + (ro ? '' : ' Use “Colar resumo” para registrar o resumo do processo já formatado.') + '</p>';
+  return '<section class="rs-col rs-c-obs rs-obs"><h4><span class="rs-ic">' + svg('edit') + '</span><span>Observações</span>' + acoes + '</h4>' + corpo + '</section>';
 }
 
 /* ───── ficha completa (leitura, impressão) ───── */
@@ -457,7 +470,7 @@ function imprimir() {
   setTimeout(function () { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) { avisar('Não foi possível abrir a impressão.', 'err'); } setTimeout(function () { fr.remove(); }, 1500); }, 250);
 }
 
-/* ───── inteiro teor (.txt do PJe): painel lateral, leitura por padrao/inteiro-teor.js ───── */
+/* ───── inteiro teor (.txt do PJe ou .md da TecJustiça): painel lateral, leitura por padrao/inteiro-teor.js ───── */
 var TX = function () { return window.CMTInteiroTeor || {}; };
 /* chave sugerida → campo da ficha (seção.chave), pelo modelo; campos do acervo (PJe) e sem lugar no modelo não são gravados */
 function alvoDe(chave) {
@@ -502,31 +515,32 @@ function descartarTeor() { if (ST.teor && ST.teor.parsed && ST.teor.parsed.docs)
 function fecharTeor() { descartarTeor(); render(); }
 function lerTxt(file) {
   var T = TX(); if (!T.parseTxt) return;
-  if (!/\.txt$/i.test(file.name) && file.type && file.type !== 'text/plain') { ST.teor = { step: 0, err: 'Envie o arquivo .txt do inteiro teor exportado pelo PJe.' }; render(); return; }
+  if (!/\.(txt|md|markdown)$/i.test(file.name) && file.type && !/^text\/(plain|markdown|x-markdown)$/.test(file.type)) { ST.teor = { step: 0, err: 'Envie o .txt do inteiro teor exportado pelo PJe ou o .md da extensão TecJustiça.' }; render(); return; }
   if (file.size > 25 * 1024 * 1024) { ST.teor = { step: 0, err: 'Arquivo muito grande para leitura no navegador (limite de 25 MB).' }; render(); return; }
   var rd = new FileReader();
   rd.onload = function () { var txt = String(rd.result || ''); try {
     var P = T.parseTxt(txt); txt = '';
-    if (!P.docs.length) { ST.teor = { step: 0, err: 'Nenhum documento identificado no .txt (esperado o cabeçalho “Documento: ID - Tipo”).' }; render(); return; }
+    if (!P.docs.length) { ST.teor = { step: 0, err: 'Nenhum documento identificado no arquivo (esperado “Documento: ID - Tipo” no .txt ou “# ID - Tipo” no .md).' }; render(); return; }
     T.preselect(P); try { P.kind = T.especie(P); T.preselectKind(P); } catch (e) { console.warn('[ficha] inteiro teor · espécie', e); }
     ST.teor = { step: 1, parsed: P, file: file.name, items: null }; render();
-  } catch (e) { ST.teor = { step: 0, err: 'Não foi possível ler o .txt: ' + ((e && e.message) || e) }; render(); } };
+  } catch (e) { ST.teor = { step: 0, err: 'Não foi possível ler o arquivo: ' + ((e && e.message) || e) }; render(); } };
   rd.onerror = function () { ST.teor = { step: 0, err: 'Falha na leitura do arquivo.' }; render(); };
   rd.readAsText(file, 'utf-8');
 }
 function teorPanel() {
   var D = ST.teor, P = D.parsed, T = TX(), steps = ['Arquivo', 'Documentos', 'Conferência'], body = '', foot = '';
-  var head = '<header class="fx-teor-h"><div><span>Importar inteiro teor · .txt do PJe</span><h3>' + (P ? E(D.file) + ' · ' + P.docs.length + ' documentos' : 'Escolha o arquivo') + '</h3></div><button type="button" class="fx-sq" data-fx="teor-fechar" aria-label="Fechar importação" title="Fechar importação">' + svg('x') + '</button></header>' +
+  var head = '<header class="fx-teor-h"><div><span>Importar inteiro teor · ' + (P && P.formato === 'md' ? '.md da TecJustiça' : '.txt do PJe ou .md da TecJustiça') + '</span><h3>' + (P ? E(D.file) + ' · ' + P.docs.length + ' documentos' : 'Escolha o arquivo') + '</h3></div><button type="button" class="fx-sq" data-fx="teor-fechar" aria-label="Fechar importação" title="Fechar importação">' + svg('x') + '</button></header>' +
     '<ol class="fx-steps">' + steps.map(function (st, k) { return '<li class="' + (k < D.step ? 'is-done' : k === D.step ? 'is-cur' : '') + '">' + (k < D.step ? svg('ok') : '') + (k + 1) + ' · ' + st + '</li>'; }).join('') + '</ol>';
   if (D.step === 0) {
-    body = '<label class="fx-drop"><input type="file" accept=".txt,text/plain" data-fx-file>' + svg('txt') + '<b>Arraste o .txt do PJe para a ficha</b><span>ou clique para escolher o arquivo</span></label>' + (D.err ? '<p class="fx-alert-p">' + E(D.err) + '</p>' : '') +
-      '<p class="fx-help">Cada bloco “Documento: ID - tipo” do .txt vira uma linha, com o destino sugerido pelo tipo. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
-      '<p class="fx-help">O .txt é lido só no navegador e não é guardado; ficam os campos confirmados, e o commit registra os IDs dos documentos.</p>';
+    body = '<label class="fx-drop"><input type="file" accept=".txt,.md,text/plain,text/markdown" data-fx-file>' + svg('txt') + '<b>Arraste o .txt do PJe ou o .md da TecJustiça para a ficha</b><span>ou clique para escolher o arquivo</span></label>' + (D.err ? '<p class="fx-alert-p">' + E(D.err) + '</p>' : '') +
+      '<p class="fx-help">Cada peça (“Documento: ID - tipo” no .txt, “# ID - tipo” no .md) vira uma linha, com o destino sugerido pelo tipo. No .md, as linhas “- Juntado em/Juntado por/Assinado por/Situação” de cada peça e “- Classe/Assunto/Polo ativo/Polo passivo” do processo são aproveitadas quando vierem. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
+      '<p class="fx-help">O arquivo é lido só no navegador e não é guardado; ficam os campos confirmados, e o commit registra os IDs dos documentos.</p>';
     foot = '<button type="button" class="fx-b" data-fx="teor-fechar">Cancelar</button>';
   } else if (D.step === 1) {
     var outro = P.main && dg(ST.cnj) !== P.main, TG = T.TARGETS || [['', 'Não usar']];
-    body = (outro ? '<p class="fx-alert-p">' + svg('warn') + '<span>O .txt é do processo <b>' + E(P.processo) + '</b>, diferente desta ficha (' + E(ST.cnj) + '). Confira antes de continuar.</span></p>' : '') +
+    body = (outro ? '<p class="fx-alert-p">' + svg('warn') + '<span>O arquivo é do processo <b>' + E(P.processo) + '</b>, diferente desta ficha (' + E(ST.cnj) + '). Confira antes de continuar.</span></p>' : '') +
       (P.kind && T.KIND_TXT ? '<p class="fx-info-p">' + E(T.KIND_TXT[P.kind] || '') + ': pré-seleção própria da espécie.</p>' : '') +
+      (P.formato === 'md' && (P.semData || P.semTexto) ? '<p class="fx-info-p">.md da TecJustiça: ' + [P.semData ? (P.semData === P.docs.length ? 'sem data de juntada nas peças (a ordem segue o ID)' : P.semData + ' peça(s) sem data de juntada') : '', P.semTexto ? P.semTexto + ' página(s) digitalizada(s) sem texto — confira no PJe' : ''].filter(Boolean).join('; ') + '.</p>' : '') +
       '<p class="fx-help">O destino já vem sugerido pelo tipo e pode ser trocado. “Não usar” deixa o documento de fora.</p>' +
       P.docs.map(function (d, k) { return '<div class="fx-doc ' + (d.target ? 'is-on' : '') + ' ' + (d.outro ? 'is-ext' : '') + '"><div class="fx-doc-h"><span class="fx-mono">' + E(d.id) + '</span><b>' + E(d.tipo) + '</b><span class="fx-grow"></span><small>' + E(brD(d.date) || '—') + '</small></div>' +
         (d.descricao || d.por || d.outro ? '<small class="fx-doc-s">' + E([d.descricao, d.por, d.outro ? 'outro processo · ' + d.outro : '', d.empty ? 'sem texto' : ''].filter(Boolean).join(' · ')) + '</small>' : '') +
@@ -567,7 +581,7 @@ function gravarTeor() {
 
 /* ───── gravação ───── */
 function gravar(campos, msgOk) {
-  if (ST.busy || ST.ad.leitura) return Promise.resolve(false);
+  if (ST.busy || (ST.ad.leitura && !(ST.ad.teor && ST.teor))) return Promise.resolve(false);
   ST.busy = true; render();
   return Promise.resolve().then(function () { return ST.ad.gravar(ST.cnj, campos); }).then(function (j) {
     j = j || {}; if (j.operacional) ST.d.operacional = j.operacional;
@@ -599,6 +613,11 @@ function onClick(ev) {
     if (t.hasAttribute('data-fx-tba')) L.push({}); else L.splice(+t.getAttribute('data-fx-i'), 1);
     ST.draft[id] = L; render(); return;
   }
+  if (a === 'obs-ed') { if (ST.ad.leitura) return; ST.obsEd = true; ST.obsTx = val('origem', 'Observações'); render(); var ta = host.querySelector('[data-fx-obs]'); if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); } return; }
+  if (a === 'obs-x') { ST.obsEd = false; ST.obsTx = ''; render(); return; }
+  if (a === 'obs-salvar') { var ot = host.querySelector('[data-fx-obs]'), ov = ot ? ot.value.replace(/\s+$/, '') : ST.obsTx; ST.obsTx = ov;
+    if (S(ov) === S(val('origem', 'Observações'))) { ST.obsEd = false; render(); return; }
+    gravar({ 'origem.Observações': ov }, 'Observações gravadas.').then(function (ok) { if (ok) { ST.obsEd = false; ST.obsTx = ''; render(); } }).catch(function () {}); return; }
   if (a === 'teor') { if (ST.teor) fecharTeor(); else { ST.teor = { step: 0 }; render(); } return; }
   if (a === 'teor-fechar') return fecharTeor();
   if (a === 'teor-voltar') { ST.teor.step = 1; render(); return; }
@@ -627,6 +646,7 @@ function onPastePostit(ev) {
 }
 function onInput(ev) {
   var t = ev.target; if (!t.hasAttribute) return;
+  if (t.hasAttribute('data-fx-obs')) { ST.obsTx = t.value; return; }
   if (t.hasAttribute('data-fx-val')) { var it = ST.teor && ST.teor.items && ST.teor.items[+t.getAttribute('data-fx-val')]; if (it) { it.value = t.value; it.status = !S(it.current) ? 'novo' : N(it.current) === N(it.value) ? 'igual' : 'conflito'; } return; }
   if (t.hasAttribute('data-fx-tb')) { var tid = t.getAttribute('data-fx-tb'), ti = tid.indexOf('.'), TL = linhas(tid.slice(0, ti), tid.slice(ti + 1)).map(function (x) { return Object.assign({}, x); }), li = +t.getAttribute('data-fx-i');
     TL[li] = TL[li] || {}; TL[li][t.getAttribute('data-fx-c')] = t.value; ST.draft[tid] = TL; var fb = t.closest('.fx-f'); if (fb) fb.classList.add('is-dirty');
