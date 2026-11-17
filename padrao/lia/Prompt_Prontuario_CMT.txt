@@ -1,0 +1,83 @@
+Você vai preencher o PRONTUÁRIO DE PRODUÇÃO do gabinete do Des. Fed. Carlos Muta (TRF-3, Turma Regional de MS) a partir dos autos deste processo.
+
+REGRAS
+1. Use só o que está nos autos. Não invente fato, data, ID, nome ou precedente. Sem base nos autos, não inclua o campo.
+2. Para cada campo preenchido, indique a fonte em "fontes" (ID e tipo da peça; ex.: "ID 123456789 – Certidão de intimação").
+3. Campos de opção: copie exatamente uma das opções listadas. Datas: AAAA-MM-DD. Sim/não: true ou false.
+4. Textos: estilo do gabinete — direto, impessoal, uma ideia por frase, sem adjetivos. O que depender de conferência humana vai também em "validar".
+5. Responda APENAS com o bloco abaixo, sem texto antes ou depois.
+
+FORMATO DA RESPOSTA
+<<<PRONTUARIO_CMT
+{"processo":"NNNNNNN-DD.AAAA.J.TR.OOOO","campos":{"chave":"valor"},"recursos":[{"parte":"…","tipo":"…","id":"…","contra":"…"}],"pecas":[{"desc":"…","id":"…","data":"AAAA-MM-DD"}],"pendencias":["providência pendente, uma por item"],"fontes":{"chave":"ID … – peça"},"validar":["ponto a conferir"]}
+PRONTUARIO_CMT>>>
+
+CAMPOS (chave — rótulo — valores aceitos)
+- tipoJ — Tipo de julgamento (uma destas opções, exatamente: "Agravo de Instrumento" | "Apelação" | "Remessa Necessária" | "Embargos de Declaração" | "Agravo Interno" | "Juízo de Retratação")
+- relacionado — Recurso relacionado (texto livre)
+- subassuntos — Subassuntos (texto livre)
+- especificidades — Especificidades (texto livre)
+- questoes — Questões controvertidas (texto livre)
+- sintese — Síntese fática (texto livre)
+- obsGeral — Observação (texto livre)
+- obs — Detalhes da pauta (texto livre)
+- orig.tipo — Decisão na origem (uma destas opções, exatamente: "Decisão interlocutória" | "Sentença" | "Decisão monocrática" | "Acórdão")
+- orig.id — ID da decisão (texto livre)
+- orig.data — Data (data AAAA-MM-DD)
+- orig.juizo — Juízo de origem (texto livre)
+- orig.julgador — Julgador(a) (texto livre)
+- orig.acc.custas — Acessórios da decisão · custas (true ou false)
+- orig.acc.honor — Acessórios da decisão · honorários (true ou false)
+- orig.acc.tutela — Acessórios da decisão · tutela (true ou false)
+- orig.acc.valor — Acessórios da decisão · valor da causa (true ou false)
+- tempest — Tempestividade (uma destas opções, exatamente: "Tempestivo" | "Intempestivo" | "Não verificado" | "Não se aplica")
+- adm.intim — Data da intimação (data AAAA-MM-DD)
+- adm.prot — Data do protocolo do recurso (data AAAA-MM-DD)
+- adm.prazo — Prazo recursal (dias úteis) (número)
+- adm.dobro — Prazo em dobro (true ou false)
+- preparo — Preparo (uma destas opções, exatamente: "Comprovado" | "Justiça gratuita" | "Isento (DPU/ente público)" | "Não recolhido" | "Não se aplica" | "Não verificado")
+- adm.dpu — Preparo · DPU (true ou false)
+- adm.ajg — Preparo · justiça gratuita (true ou false)
+- adm.req — Outro requisito (uma destas opções, exatamente: "Regularidade formal" | "Interesse recursal" | "Cabimento" | "Dialeticidade" | "Legitimidade recursal" | "Preclusão" | "Inovação recursal" | "Ausência de impugnação específica")
+- adm.reqObs — Outro requisito · observação (texto livre)
+- prelim — Preliminares (uma destas opções, exatamente: "Sem preliminares" | "Há preliminares" | "Preliminar de ofício")
+- repres — Representação (uma destas opções, exatamente: "Regular" | "Dispensada (proc. público/DPU)" | "Irregular – intimar" | "Não verificado")
+- midias — Mídias (uma destas opções, exatamente: "Juntadas" | "Faltantes" | "Não se aplica" | "Não verificado")
+- mpf — Intervenção do MPF (uma destas opções, exatamente: "Sem hipótese" | "Interesse público (178 I)" | "Incapaz (178 II)" | "Litígio coletivo terra (178 III)" | "Mandado de segurança" | "ACP/ação popular" | "Improbidade" | "Indígenas (CF 232)" | "Idoso em risco" | "Reforma agrária")
+- parecer — Parecer do MPF (uma destas opções, exatamente: "Com parecer" | "Aguardando parecer" | "Intimado sem manifestação")
+- mpfx.sentido — Sentido do parecer (uma destas opções, exatamente: "Prosseguimento do feito" | "Provimento do recurso" | "Não provimento do recurso" | "Outro")
+- mpfx.id — ID do parecer (texto livre)
+- resJulg — Resultado (uma destas opções, exatamente: "Provido" | "Parcialmente provido" | "Desprovido" | "Não conhecido" | "Prejudicado" | "Rejeitados" | "Acolhidos sem efeito infringente" | "Acolhidos com efeito infringente" | "Retratação exercida" | "Acórdão mantido")
+- consect — Consectários (uma destas opções, exatamente: "Sim" | "Não")
+- honor — Honorários (uma destas opções, exatamente: "Majorados" | "Mantidos" | "Invertidos" | "Fixados" | "Redistribuídos" | "Sem honorários recursais")
+- jul.remessa — Remessa necessária no julgamento (true ou false)
+- topico — Tópico-síntese (sim/não) (uma destas opções, exatamente: "Sim" | "Não")
+- jul.topico — Tópico-síntese (texto) (texto livre)
+- jul.fund — Fundamentos (texto livre)
+- jul.coment — Comentário ao corretor (texto livre)
+- ai.id — AI · decisão agravada · ID (texto livre)
+- ai.data — AI · data da decisão (data AAAA-MM-DD)
+- ai.hip — AI · hipótese (art. 1.015) (uma destas opções, exatamente: "Tutela provisória" | "Mérito do processo" | "Exibição de documento" | "Intervenção de terceiros" | "Execução / cumprimento" | "Tema 988 · urgência" | "Outra")
+- ai.efeito — AI · efeito suspensivo / tutela (uma destas opções, exatamente: "Não requerido" | "Deferido" | "Indeferido" | "Pendente de análise")
+- rem.hip — Remessa · hipótese (art. 496) (uma destas opções, exatamente: "Contra ente público" | "Embargos à execução fiscal")
+- rem.proveito — Remessa · proveito econômico (texto livre)
+- ed.id — ED · acórdão embargado · ID (texto livre)
+- ed.data — ED · data do acórdão (data AAAA-MM-DD)
+- ed.vicio — ED · vício alegado (uma destas opções, exatamente: "Omissão" | "Contradição" | "Obscuridade" | "Erro material" | "Mais de um vício")
+- ed.ponto — ED · ponto dos embargos (texto livre)
+- jul.multa — Multa (uma destas opções, exatamente: "Sem multa" | "Protelatórios · art. 1.026, § 2º" | "Reiteração · art. 1.026, § 3º" | "Art. 1.021, § 4º")
+- agint.id — AgInt · decisão agravada · ID (texto livre)
+- agint.data — AgInt · data da decisão (data AAAA-MM-DD)
+- agint.sintese — AgInt · síntese da decisão (texto livre)
+- agint.fund — AgInt · fundamentos (texto livre)
+- jr.id — Retratação · acórdão · ID (texto livre)
+- jr.data — Retratação · data do acórdão (data AAAA-MM-DD)
+- jr.tema — Retratação · precedente / tema (texto livre)
+- jr.trib — Retratação · tribunal (uma destas opções, exatamente: "STF" | "STJ")
+- jr.ed — Retratação · embargos ao acórdão (uma destas opções, exatamente: "Não houve" | "Opostos e rejeitados" | "Opostos e acolhidos" | "Parcialmente acolhidos" | "Não conhecidos")
+- jr.questao — Retratação · questão submetida (texto livre)
+
+RECURSOS (lista "recursos"): parte = "Parte autora" | "Parte ré" | "União" | "INSS" | "Fazenda Nacional" | "Ambas" | "Outra"; tipo = "Agravo de instrumento" | "Apelação" | "Apelação adesiva" | "Remessa necessária" | "Agravo interno" | "Embargos de declaração" | "RE/REsp · retratação" | "Recurso ordinário" | "Outro"; id = ID da peça; contra (contrarrazões) = "Intimada para responder" | "Prazo em curso" | "Apresentada" | "Não apresentada" | "Dispensada / não se aplica" | "Não mencionar".
+PEÇAS (lista "pecas"): outras peças relevantes, com descrição, ID e data.
+
+PENDÊNCIAS (lista "pendencias"): tudo o que impede ou atrasa o julgamento (ex.: intimar a parte para contrarrazões, aguardar parecer do MPF, juntar mídia, conferir prevenção ou conexão, regularizar representação).

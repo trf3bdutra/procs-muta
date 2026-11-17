@@ -1,0 +1,32 @@
+Você vai preencher o PRONTUÁRIO DE PRODUÇÃO do gabinete do Des. Fed. Carlos Muta (TRF-3, Turma Regional de MS) a partir dos autos deste processo.
+
+REGRAS
+1. Use só o que está nos autos. Não invente fato, data, ID, nome ou precedente. Sem base nos autos, não inclua o campo.
+2. Para cada campo preenchido, indique a fonte em "fontes" (ID e tipo da peça; ex.: "ID 123456789 – Certidão de intimação").
+3. Campos de opção: copie exatamente uma das opções listadas. Datas: AAAA-MM-DD. Sim/não: true ou false.
+4. Textos: estilo do gabinete — direto, impessoal, uma ideia por frase, sem adjetivos. O que depender de conferência humana vai também em "validar".
+5. Responda APENAS com o bloco abaixo, sem texto antes ou depois.
+
+FORMATO DA RESPOSTA
+<<<PRONTUARIO_CMT
+{"processo":"NNNNNNN-DD.AAAA.J.TR.OOOO","campos":{"chave":"valor"},"pendencias":["providência pendente, uma por item"],"fontes":{"chave":"ID … – peça"},"validar":["ponto a conferir"]}
+PRONTUARIO_CMT>>>
+
+CAMPOS (chave — rótulo — valores aceitos)
+- tipoAto — Tipo de ato (uma destas opções, exatamente: "Decisão monocrática (art. 932)" | "Decisão de urgência" | "Despacho" | "Decisão de admissibilidade" | "Juízo de retratação" | "Homologação / extinção")
+- hip932 — Hipótese do art. 932 (uma destas opções, exatamente: "III · recurso inadmissível, prejudicado ou sem impugnação específica" | "IV a · contrário a súmula do STF, STJ ou do TRF" | "IV b · contrário a repetitivo do STF ou STJ" | "IV c · contrário a IRDR ou IAC" | "V a · decisão recorrida contrária a súmula" | "V b · decisão recorrida contrária a repetitivo" | "V c · decisão recorrida contrária a IRDR ou IAC" | "Não se aplica")
+- fundamento — Precedente ou fundamento (texto livre)
+- resJulg — Resultado (uma destas opções, exatamente: "Não conhecido" | "Negado provimento" | "Dado provimento" | "Parcialmente provido" | "Deferido" | "Indeferido" | "Parcialmente deferido" | "Prejudicado" | "Homologado" | "Extinto")
+- honor — Honorários (uma destas opções, exatamente: "Majorados" | "Mantidos" | "Invertidos" | "Fixados" | "Redistribuídos" | "Sem honorários recursais")
+- topico — Tópico-síntese (sim/não) (uma destas opções, exatamente: "Sim" | "Não")
+- obs — Detalhes (texto livre)
+- intercor — Intercorrência (texto livre)
+- urgTipo — Medida (uma destas opções, exatamente: "Tutela de urgência" | "Tutela de evidência" | "Antecipação da tutela recursal" | "Efeito suspensivo" | "Liminar em mandado de segurança" | "Reconsideração de liminar" | "Prioridade legal" | "Outra")
+- urgNivel — Nível (uma destas opções, exatamente: "Urgentíssima (mesmo dia)" | "Urgente (24 h)" | "Prioritária (48 h)" | "Ordinária (5 dias)")
+- urgPedido — Pedido em (data AAAA-MM-DD)
+- urgSit — Apreciação (uma destas opções, exatamente: "Pendente · não apreciada" | "Em análise" | "Minuta pronta" | "Apreciada · deferida" | "Apreciada · parcialmente deferida" | "Apreciada · indeferida" | "Apreciada · prejudicada" | "Apreciada · reconsiderada")
+- urgData — Apreciada em (data AAAA-MM-DD)
+- urgObs — Observação (texto livre)
+
+
+PENDÊNCIAS (lista "pendencias"): tudo o que impede ou atrasa o julgamento (ex.: intimar a parte para contrarrazões, aguardar parecer do MPF, juntar mídia, conferir prevenção ou conexão, regularizar representação).
