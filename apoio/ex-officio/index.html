@@ -1468,6 +1468,9 @@ html[data-theme=dark] #app main .trb-ey,html[data-theme=dark] #app main .ola-ey{
 #app main #trb-t em,#app main #trm-t em,#app main #pt-t em{font-size:inherit!important;letter-spacing:inherit!important}
 #app main .trb-d,#app main .pt-h h1+p{font-size:13px!important;line-height:1.45!important;margin-top:4px!important}
 @media (max-width:700px){#app main #trb-t,#app main #trm-t,#app main #pt-t{font-size:26px!important}}
+/* painel inicial da Pauta de julgamento: transparente, sobre o fundo da página (sem caixa, borda ou sombra) */
+#v-pauta #trb,html[data-theme=dark] #v-pauta #trb{--t-bg:transparent;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+#v-pauta #trb>.trb-in{padding-left:0;padding-right:0}
 
 /* revisão 16/11 · celular: navegação da sessão numa linha, marcos com rolagem própria, números das monocráticas empilhados, Gabinete em uma coluna */
 @media (max-width:700px){
