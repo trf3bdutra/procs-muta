@@ -268,8 +268,8 @@
     if(g('cq-lr'))g('cq-lr').oninput=function(){o.res=this.value;};
     if(g('cq-lmod'))g('cq-lmod').onchange=function(){o.mod=this.checked;};
     if(g('cq-lpar'))g('cq-lpar').onchange=function(){o.par=this.checked;};
-    Array.prototype.forEach.call(document.querySelectorAll('#v-consulta [data-lprec]'),function(c){c.onchange=function(){var cur=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;}),id=c.getAttribute('data-lprec');cur=cur.filter(function(x){return x!==id;});if(c.checked)cur.push(id);o.prec=cur;};});
-    Array.prototype.forEach.call(document.querySelectorAll('#v-consulta [data-lia]'),function(b){b.onclick=function(ev){ev.stopPropagation();var a=b.getAttribute('data-lia');
+    Array.prototype.forEach.call(document.querySelectorAll('#cq [data-lprec]'),function(c){c.onchange=function(){var cur=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;}),id=c.getAttribute('data-lprec');cur=cur.filter(function(x){return x!==id;});if(c.checked)cur.push(id);o.prec=cur;};});
+    Array.prototype.forEach.call(document.querySelectorAll('#cq [data-lia]'),function(b){b.onclick=function(ev){ev.stopPropagation();var a=b.getAttribute('data-lia');
       liaMontar(P,A,R).then(function(tx){if(a==='baixar'){var u=URL.createObjectURL(new Blob([tx],{type:'text/plain;charset=utf-8'})),l=document.createElement('a');l.href=u;l.download='Prompt_LIA_'+String(P.processo||'caso').replace(/\D/g,'').slice(0,20)+'_'+o.peca+'.txt';document.body.appendChild(l);l.click();setTimeout(function(){URL.revokeObjectURL(u);l.remove();},500);return;}
         (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toastC('Prompt copiado ('+Math.round(tx.length/1024)+' KB). Cole na LIA com o processo aberto.');}).catch(function(){toastC('Não consegui copiar: use Baixar .txt.');});})
       .catch(function(er){toastC(er.message);});};});}
@@ -326,15 +326,15 @@
     if(i){i.oninput=function(){CQ.item=i.value;};i.onkeydown=function(ev){if(ev.key==='Enter'){CQ.item=i.value;consultar();}};}
     if(g)g.onclick=function(){CQ.ses=s?s.value:CQ.ses;CQ.item=i?i.value:CQ.item;consultar();};
     var q=function(sel,fn){Array.prototype.forEach.call(document.querySelectorAll(sel),function(b){b.onclick=function(ev){ev.stopPropagation();fn(b);};});};
-    q('#v-consulta [data-cq]',function(b){abrir(b.getAttribute('data-cq'),b.getAttribute('data-id'));});
-    q('#v-consulta [data-ver]',function(b){var x=b.getAttribute('data-ver').split(':');CQ.ver[x[0]]=+x[1];CQ.sel=x[0];render();});
-    q('#v-consulta [data-blk]',function(b){var k=b.getAttribute('data-blk');CQ.sel=CQ.sel===k?'':k;render();});
-    q('#v-consulta [data-g]',function(b){CQ.grupo=b.getAttribute('data-g');CQ.sel='';render();});
-    q('#v-consulta [data-fecha]',function(){CQ.sel='';render();});
-    q('#v-consulta [data-usar]',function(b){CQ.usar=b.getAttribute('data-usar');CQ.matriz=false;CQ.sel='';CQ.grupo='';CQ.ver={};render();});
-    q('#v-consulta [data-matriz]',function(){CQ.matriz=true;CQ.usar='';CQ.sel='';CQ.grupo='';CQ.ver={};render();});
-    q('#v-consulta [data-auto]',function(){zerar();render();});
-    q('#v-consulta [data-edit]',function(b){irEditorial(b.getAttribute('data-edit'));});
+    q('#cq [data-cq]',function(b){abrir(b.getAttribute('data-cq'),b.getAttribute('data-id'));});
+    q('#cq [data-ver]',function(b){var x=b.getAttribute('data-ver').split(':');CQ.ver[x[0]]=+x[1];CQ.sel=x[0];render();});
+    q('#cq [data-blk]',function(b){var k=b.getAttribute('data-blk');CQ.sel=CQ.sel===k?'':k;render();});
+    q('#cq [data-g]',function(b){CQ.grupo=b.getAttribute('data-g');CQ.sel='';render();});
+    q('#cq [data-fecha]',function(){CQ.sel='';render();});
+    q('#cq [data-usar]',function(b){CQ.usar=b.getAttribute('data-usar');CQ.matriz=false;CQ.sel='';CQ.grupo='';CQ.ver={};render();});
+    q('#cq [data-matriz]',function(){CQ.matriz=true;CQ.usar='';CQ.sel='';CQ.grupo='';CQ.ver={};render();});
+    q('#cq [data-auto]',function(){zerar();render();});
+    q('#cq [data-edit]',function(b){irEditorial(b.getAttribute('data-edit'));});
   }
   window.CQ_render=function(){carregarCal().then(render);};
   var ov=window.VDM_view;
