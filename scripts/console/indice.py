@@ -75,6 +75,9 @@ def texto_do(r):
         t = ementa(r) or str(r.get('inteiro_teor') or '')[:5000]
     else:
         t = str(r.get('inteiro_teor') or '')
+        v = re.search(r'\n\s*(D\s?E\s?C\s?I\s?S\s?[ÃA]\s?O|Vistos|Trata-se|Cuida-se)', t)
+        if v:
+            t = t[v.start():].lstrip()
         k = re.search(r'\n\s*(DECIDO|Decido|DECIDE-SE|É o relatório\.)', t)
         t = (t[:1500] + '\n[…]\n' + t[k.start():k.start() + 3500]) if k else t[:5000]
         if r.get('dispositivo'):
