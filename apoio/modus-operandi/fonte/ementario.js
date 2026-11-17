@@ -409,6 +409,17 @@ function vMapa(L,out){var C=CXC();
     g.addEventListener('click',act);g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
   });
 }
+  /* links de fora (página do prontuário do agente, cartões): #v=edit&s=mod&m=<modelo> · #v=edit&s=par&id=<parágrafo> · #v=ement&proc=<processo> · #v=ement&q=<termos> */
+function dgLk(v){return String(v||'').replace(/\D/g,'');}
+window.VDM_abreItem=function(p){try{
+    if(p.v==='edit'&&p.s==='mod'&&p.m&&typeof MS!=='undefined'&&typeof mRender==='function'){var M=((BASE&&BASE.mod)||[]).filter(function(x){return x.id===p.m;})[0];if(!M)return;
+      MS.tipo=mTipo(M);MS.ass='';MS.jul='';MS.cls='';MS.apr='';if(typeof MSF!=='undefined')Object.keys(MSF).forEach(function(k){delete MSF[k];});if(typeof EM!=='undefined')EM.q.mod='';var q=document.getElementById('e-q');if(q)q.value='';
+      if(typeof MVZ!=='undefined'){MVZ.modo='lista';MVZ.sel=null;}MS.sel=M.id;mRender();window.scrollTo(0,0);return;}
+    if(p.v==='edit'&&p.s==='par'&&p.id&&typeof PS!=='undefined'&&typeof pAbrir==='function'){var P=((BASE&&BASE.par)||[]).filter(function(x){return x.id===p.id;})[0];if(!P)return;
+      PS.cat='';PS.sub='';PS.st='';if(typeof PVZ!=='undefined')PVZ.modo='lista';if(typeof pRender==='function')pRender();pAbrir(P);return;}
+    if(p.v==='ement'&&(p.proc||p.q)&&typeof E!=='undefined'){var x=p.proc?(E.idx||[]).filter(function(r){return dgLk(r.n)===dgLk(p.proc);})[0]:null,qi=document.getElementById('e-q');
+      if(x){E.modo='lista';E.q='';if(qi)qi.value='';render();abrirIT(x);return;}
+      var tq=p.q||p.proc;if(qi)qi.value=tq;E.q=tq;if(typeof buscar==='function')buscar();}}catch(er){console.warn('[link do Compendium]',er);}};
 /* ---- Painel de itens do recorte (no mapa mental, ao lado dos assuntos): precedentes ou modelos do recorte; com um ramo ou assunto selecionado, só os dele ---- */
 function itCfg(C){
   if(C&&C===CXP0)return {rot:'Precedentes',tit:function(x){return x._ass||titulo(x)||'(sem assunto)';},sub:function(x){return [x.n,fmtD(x.d),x._res].filter(Boolean).join(' · ');},
