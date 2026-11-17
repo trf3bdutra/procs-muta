@@ -2,7 +2,7 @@
    Base: modelos/matrizes-2886.json (BASE.m2886). Recebe o caso da Consulta (pauta, cartão ou prontuário colado),
    escolhe o grupo e os módulos, preenche as variáveis e monta relatório, voto, ementa e acórdão. */
 (function(){
-  var S={proc:null,g:'',on:{},ver:{},um:{},val:{},porque:{},manual:{},em:''};
+  var S={proc:null,g:'',on:{},ver:{},um:{},val:{},porque:{},manual:{},em:'',em1:'rel'};
   function e(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function nq(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
   function M(){return (typeof BASE!=="undefined"&&BASE&&BASE.m2886)||null;}
@@ -20,8 +20,9 @@
   function e2886(P,J){var t=nq(textoCaso(P,J));return /28[,.]\s?86|0005019-15\.1997/.test(t)||!!(J&&J.modelo&&/^2886-/.test(J.modelo.id||''));}
   /* ---------- grupo ---------- */
   function grupoAuto(P,J,T){
-    var m=J&&J.modelo&&/^2886-([0-9a-z-]+)/i.exec(J.modelo.id||'');
-    if(m){var c=m[1].toLowerCase();if(c==='3d')return ['3d','código do prontuário 2886-3d'];return [c.charAt(0),'código do prontuário 2886-'+c];}
+    var m=J&&J.modelo&&/^2886-([0-9a-z-]+)/i.exec(J.modelo.id||''),de='código do prontuário';
+    if(!m){m=/\b2886-(3d|[1-9][a-z]?(?:-esp)?)\b/i.exec(T);de='código no prontuário (especificidades/observação)';}
+    if(m){var c=m[1].toLowerCase();if(c==='3d')return ['3d',de+' 2886-3d'];return [c.charAt(0),de+' 2886-'+c];}
     var t=nq(T),tj=nq(P.tipoJulgamento||'');
     if(/embargos de declaracao/.test(tj))return /550|acordo|siape|sicap/.test(t)?['3d','embargos de declaração sobre acordo']:['8','embargos de declaração'];
     if(/agravo interno/.test(tj))return ['9','agravo interno'];
@@ -83,6 +84,7 @@
     if(C['ed.id'])V.ed_id=String(C['ed.id']);
     if(C['agint.id'])V.decisao_agravada_id=String(C['agint.id']).replace(/\D/g,'');
     if(C['ed.vicio']){var vi=nq(C['ed.vicio']);V.ed_vicio=/mais de um/.test(vi)?'omissão e contradição':vi.indexOf('contradi')>=0?'contradição':vi.indexOf('obscur')>=0?'obscuridade':'omissão';}
+    var acc=[C['orig.custas'],C['orig.honor']].filter(function(x){return x&&String(x).trim();});if(acc.length)V.rel_acessorios=', '+acc.join(', ').replace(/\.\s*$/,'').replace(/^./,function(c){return c.toLowerCase();});
     if(C['rel.razoes'])V.razoes=[].concat(C['rel.razoes']).join('; ');
     if(C['rel.contrarrazoes'])V.contrarrazoes=' '+[].concat(C['rel.contrarrazoes']).join('; ');
     if(C['orig.dispositivo'])V.sentenca_transcricao='“'+C['orig.dispositivo']+'”';
@@ -94,9 +96,9 @@
   }
   /* ---------- estado ---------- */
   function preparar(P,J,forcar){
-    if(S.proc===P.processo&&!forcar)return;
+    if(S.proc===P.processo&&S.j===(J||null)&&!forcar)return;
     var T=textoCaso(P,J),t=nq(T),ga=grupoAuto(P,J,T);
-    S={proc:P.processo,g:ga[0],gPorque:ga[1],on:{},ver:{},um:{},val:preVal(P,J,ga[0]),porque:{},manual:{},em:'',mpf:0};
+    S={proc:P.processo,j:J||null,g:ga[0],gPorque:ga[1],on:{},ver:{},um:{},val:preVal(P,J,ga[0]),porque:{},manual:{},em:'',em1:'rel',mpf:0};
     aplicarGrupo(P,J,t);
     var sx=nq((J&&J.campos&&J.campos['mpfx.sentido'])||P.mpf||'');
     S.mpf=/nao provimento|desprovimento/.test(sx)?4:/provimento do recurso/.test(sx)?3:/outro/.test(sx)?1:0;
@@ -139,9 +141,11 @@
   function ementaLinhas(){
     var x=ementaEscolhida();if(!x)return {cod:'',linhas:[]};
     var L=x.E.linhas.slice(),i1=-1;for(var i=0;i<L.length;i++)if(/^1\.\s/.test(L[i])){i1=i;break;}
-    if(i1>=0){if(S.val.ementa_item1==null||S.val._em!==x.cod){S.val.ementa_item1=L[i1].replace(/^1\.\s*/,'');S.val._em=x.cod;}L[i1]='1. {{ementa_item1}}';}
+    var ED=/^(8|3d|9)$/.test(S.g);
+    if(i1>=0){if(!ED&&S.em1==='rel'){L[i1]='1. '+ITEM1;}else{if(S.val.ementa_item1==null||S.val._em!==x.cod){S.val.ementa_item1=L[i1].replace(/^1\.\s*/,'');S.val._em=x.cod;}L[i1]='1. {{ementa_item1}}';}}
     return {cod:x.cod,proc:x.E.processo,sessao:x.E.sessao,sim:x.sim,linhas:L};
   }
+  var ITEM1='Em cumprimento de sentença {{rel_exequente}} na ACP 0005019-15.1997.4.03.6000 para incorporação a partir de janeiro de 1993 do reajuste de 28,86% (Leis 8.622/1993 e 8.627/1993) às remunerações de servidores públicos civis federais, ativos, inativos e pensionistas, a sentença, ora apelada, {{rel_sentenca}}{{rel_acessorios}}.';
   function relatorioLinhas(){
     var G=grp(S.g),R=(G&&G.relatorio)||{paragrafos:[]},L=R.paragrafos.slice();
     (R.opcionais||[]).forEach(function(o){if(S.on[o.id])L.push(o.texto);});
@@ -190,7 +194,7 @@
     add(cb?'ok':'pc','Combinação',cb?'Combinação já julgada em '+cb.acordaos+' acórdão(s) do lote.':'Combinação ainda sem acórdão no lote ('+chave+'): conferir a ordem e as transições entre os módulos.');
     var hon=nq((P.honorarios||'')+' '+((J&&J.campos&&J.campos.honor)||'')).trim(),hm=G.receita.map(function(r,i){return r.umDe?S.um[i]:null;}).filter(function(x){return x!=null;})[0];
     if(hon)add((/majorad/.test(hon)&&hm==='H-MAJ')||(/fixad/.test(hon)&&hm==='H-331')||(/sem honorarios/.test(hon)&&!/H-MAJ|H-331/.test(hm||''))?'ok':'pc','Honorários','Caso: '+(P.honorarios||(J&&J.campos&&J.campos.honor)||'')+' · módulo: '+(hm?modu(hm).titulo:'nenhum')+'.');
-    var em=ementaLinhas();if(em.cod)add('pc','Ementa','Base: modelo 2886-'+em.cod+' ('+em.proc+', '+em.sessao+'). Adaptar o item 1 e conferir cabeçalho, razões e dispositivo com os módulos usados.');
+    var em=ementaLinhas();if(em.cod)add('pc','Ementa','Base: modelo 2886-'+em.cod+' ('+em.proc+', '+em.sessao+'). '+(S.em1==='rel'&&!/^(8|3d|9)$/.test(S.g)?'Item 1 composto dos dados do relatório. ':'Adaptar o item 1. ')+'Conferir cabeçalho, questão, razões e dispositivo com os módulos usados.');
     pecas().forEach(function(p){var m=/^Grupo (\w+): /.exec(p.nota||'');if(p.nota&&(!m||m[1]===S.g))add('pc',p.titulo,m?p.nota.slice(m[0].length):p.nota);});
     if(S.on['PRESC-PREJ']&&S.g==='2')add('pc','Prescrição','No grupo 2 a frase da prescrição prejudicada vem depois do fecho próprio do grupo: conferir a redação.');
     return L;
@@ -212,7 +216,7 @@
     if(R.mpf&&S.g!=='8'&&S.g!=='3d')h+='<div class="cf"><div class="cfl"><span>Parecer do MPF</span></div><select class="m28-sel" data-m28mpf="1">'+R.mpf.map(function(t,i){return '<option value="'+i+'"'+(i===S.mpf?' selected':'')+'>'+e(t.replace(/\[\[.*?\]\]/g,'').slice(0,90))+'</option>';}).join('')+'</select></div>';
     (R.opcionais||[]).forEach(function(o){h+='<div class="cf"><label class="m28-mt"><input type="checkbox" data-m28m="'+e(o.id)+'"'+(S.on[o.id]?' checked':'')+'><b>Relatório: '+e(o.titulo)+'</b></label></div>';});
     var ex=ementaEscolhida();
-    if(ex)h+='<div class="cf"><div class="cfl"><span>Ementa-base</span></div><select class="m28-sel" data-m28em="1">'+(G.modelosEmenta||[]).filter(function(c){return D.ementas[c];}).map(function(c){return '<option value="'+e(c)+'"'+(c===ex.cod?' selected':'')+'>2886-'+e(c)+' · '+e(D.ementas[c].processo)+'</option>';}).join('')+'</select></div>';
+    if(ex)h+='<div class="cf"><div class="cfl"><span>Ementa-base</span></div><select class="m28-sel" data-m28em="1">'+(G.modelosEmenta||[]).filter(function(c){return D.ementas[c];}).map(function(c){return '<option value="'+e(c)+'"'+(c===ex.cod?' selected':'')+'>2886-'+e(c)+' · '+e(D.ementas[c].processo)+'</option>';}).join('')+'</select>'+(/^(8|3d|9)$/.test(S.g)?'':'<select class="m28-sel" data-m28em1="1"><option value="rel"'+(S.em1==='rel'?' selected':'')+'>Item 1: composto dos dados do relatório</option><option value="modelo"'+(S.em1==='modelo'?' selected':'')+'>Item 1: texto do modelo, para adaptar</option></select>')+'</div>';
     var us=usadas();
     h+='<div class="cf"><div class="cfl"><span>Variáveis do caso</span><span class="pill">'+us.length+'</span></div>'+us.map(function(k){var d=vdef(k),v=valor(k),id='m28v-'+k;
       var inp=d.tipo==='longo'?'<textarea id="'+id+'" data-m28in="'+e(k)+'" rows="3">'+e(v)+'</textarea>'
@@ -268,8 +272,9 @@
     q('#cq-can [data-m28ver]',function(b){var x=b.getAttribute('data-m28ver').split(':');S.ver[x[0]]=+x[1];desenhar();});
     q('#cq-can [data-m28mpf]',function(b){S.mpf=+b.value;desenhar();},'onchange');
     q('#cq-can [data-m28em]',function(b){S.em=b.value;S.val.ementa_item1=null;desenhar();},'onchange');
+    q('#cq-can [data-m28em1]',function(b){S.em1=b.value;desenhar();},'onchange');
     q('#cq-can [data-m28in]',function(b){S.val[b.getAttribute('data-m28in')]=b.value;b.parentNode.classList.toggle('falta',!b.value.trim()&&vdef(b.getAttribute('data-m28in')).tipo!=='opcoes');redesenharSemCanhoto();},'oninput');
-    q('#cq-can [data-m28reset]',function(){S.proc=null;preparar(CTX.P,CTX.J,true);desenhar();});
+    q('#cq-can [data-m28reset]',function(){preparar(CTX.P,CTX.J,true);desenhar();});
     ligarFolha();
   }
   window.M2886={

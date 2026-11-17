@@ -1,0 +1,474 @@
+MATERIAL DO GABINETE — 28,86% (cumprimento individual da ACP 0005019-15.1997.4.03.6000)
+Atualizado em 16/11/2026 (com a ficha de especificidades dos votos de 28,86%). Fonte: tabela “28,86% — modelos vigentes (nov-2026)” do projeto CMT - ACERVO, com os acórdãos de setembro e outubro de 2026 do Relator. Este bloco prevalece sobre os catálogos (item A do prompt).
+
+COMO USAR NO PRONTUÁRIO
+1. Verifique nos autos todos os itens da FICHA DE ESPECIFICIDADES e enquadre o caso em um grupo e em uma variação pela ÁRVORE, só com fatos dos autos. Preencha os campos pela seção COMO PREENCHER.
+2. "modelo": id = o código do modelo (ex.: “2886-1a”); nome = como consta depois do código; fonte = “MATERIAL DO GABINETE”. Em "ajustes", diga por que o grupo e a variação foram escolhidos (fundamento da sentença, quem apelou, o que veio em contrarrazões, com os IDs) e quais parágrafos de outra variação entram, se o caso combina mais de uma.
+3. "paradigmas": use os precedentes deste bloco (seção PRECEDENTES), começando pelo acórdão-modelo da variação escolhida. Não use os votos antigos de 28,86% (arquétipos A1–A8, módulos M1–M33, matrizes v3, modelos F04, F05, F12 e M8-039) nem acórdãos de 05/2026 a 08/2026: são versões superadas.
+4. Se a série recente trouxer acórdão de 28,86% de sessão posterior a 26/10/2026, ele prevalece sobre o modelo do mesmo grupo e variação: registre em "validar", com a referência.
+5. Caso sem grupo correspondente (lista SEM MODELO): omita "modelo" e registre em "validar": “Sem modelo vigente de 28,86%: voto próprio.”
+6. Caso entre dois grupos, ou com fato decisivo não confirmado nos autos: escolha o mais provável e registre a dúvida em "validar".
+7. "busca": inclua 28,86 e o termo distintivo do grupo (ex.: “28,86 territorial*”, “28,86 acordo SIAPE”, “28,86 sindicato”).
+
+COMO PREENCHER OS CAMPOS NOS CASOS DE 28,86% (além das regras gerais do prompt)
+- "subassuntos": “Cumprimento individual de sentença coletiva · ACP 0005019-15.1997.4.03.6000 · reajuste de 28,86% (Leis 8.622/1993 e 8.627/1993) · [tema do grupo]”.
+- "especificidades": uma linha por item da FICHA que o caso tiver, no formato “[código do item] valor (ID …)”. Ex.: “F2 herdeiros habilitados (ID …) · F7 fichas do SIAPE com a rubrica do 28,86% juntadas na impugnação (ID …) · F10 prescrição alegada em contrarrazões (ID …)”. Termine com “Modelo: 2886-[código]”.
+- "questoes": as questões do grupo (lista QUESTÕES POR GRUPO abaixo), mais as que vierem dos itens F9, F10 e F13 a F15 da ficha, uma por frase.
+- "sintese": quem executa, contra quem, o fundamento da sentença, quem recorreu e o que pede, em até quatro frases, com os IDs.
+- "rel.razoes": as alegações do recurso, em itens “(1) …; (2) …; e (3) …”, com o ID da peça. Alegação de parte se escreve como alegação.
+- "rel.contrarrazoes": quem respondeu, o ID e o que apontou ou pediu (ex.: “pela União (ID …), apontando ilegitimidade ativa e prescrição”).
+- "orig.dispositivo": o dispositivo e o fundamento determinante da sentença, transcritos entre aspas, com o ID.
+- Ao fim de "especificidades" e em "obsGeral", o código do modelo (“Modelo: 2886-…”): é por ele que a Consulta do Compendium abre a matriz certa.
+- "obsGeral": “Lote 28,86% · modelo 2886-[código] · grupo [n]”.
+- "resJulg": o resultado do modelo do grupo, como proposta, e o ponto vai a "validar" (“Resultado proposto conforme o modelo 2886-…”). Grupo 1 → “Provido”; grupos 2, 3, 5, 6 e 9 → “Desprovido”; grupo 4 → “Desprovido”, com "adm.req" “Dialeticidade” e "adm.reqObs" “conhecimento parcial: razões em parte dissociadas”; grupo 7 → “Não conhecido”, com "adm.req" “Dialeticidade”; grupo 8 e acórdão do 3d → “Rejeitados”.
+- "consect": “Não” (os modelos não tratam de consectários: a controvérsia é a extinção do cumprimento).
+- "honor": pela FICHA, item F14:
+    · recurso provido com retorno dos autos à origem (grupo 1) → “Sem honorários recursais”; pedido de honorários do ente em contrarrazões fica prejudicado (variações 1b e 1i);
+    · desprovimento ou não conhecimento, com honorários fixados na sentença contra o recorrente → “Majorados” (fórmula dos modelos: 1% em acréscimo, artigo 85, § 11, do CPC, com a suspensão do artigo 98, § 3º, se houver gratuidade);
+    · desprovimento, sentença sem honorários e contrarrazões apresentadas (grupo 6, regime do artigo 331 do CPC) → “Fixados” (percentual mínimo sobre o valor atualizado da causa, suspensos se houver gratuidade);
+    · sentença sem honorários e sem contrarrazões, ou variação 2e → “Sem honorários recursais”;
+    · embargos de declaração e agravo interno → “Sem honorários recursais”.
+- "tempest", "adm.prazo", "adm.dobro": apelação e agravos, 15 dias úteis; embargos de declaração, 5. Recurso da União, do INSS, do BACEN, da FUNASA ou de outra autarquia, ou da DPU: prazo em dobro (artigo 183 ou 186 do CPC). Conte da intimação (item F17).
+- "preparo": exequente com gratuidade → “Justiça gratuita” e "adm.ajg" true; ente público → “Isento (DPU/ente público)”; gratuidade revogada na sentença e apelação que a discute → “Não verificado”, e o ponto vai a "validar".
+- "mpf", "parecer", "mpfx.sentido": como nos autos. Nos acórdãos-modelo a Procuradoria Regional da República costuma opinar pelo prosseguimento do feito; não presuma o parecer.
+- "jul.fund": os fundamentos do acórdão-modelo, pelo grupo: 1 → Tema 1.075/STF (RE 1.101.937); artigo 16 da Lei 7.347/1985; Tema 499/STF (inaplicável); sobrestamento pelo Tema 1.433/STJ afastado. 2 e 3 → Temas 550 e 1.102/STJ; MP 1.704/1998; fichas financeiras do SIAPE; artigo 85, § 11, do CPC. 4 → ação coletiva distinta com exclusão expressa; dialeticidade parcial. 5 e 6 → Tema 1.178/STJ; ADC 80; artigo 98, § 3º, do CPC; ilegitimidade passiva (6). 7 → dialeticidade. 8 → artigo 1.022 do CPC; rediscussão; multa do artigo 1.026, § 2º, quando pedida. 9 → artigo 932 do CPC; Temas 1.302 e 1.433/STJ. Confira no acórdão-modelo antes de citar: nada além do que nele consta.
+- "busca": “28,86” com o termo do grupo: 1 → “28,86 territorial*”; 2 → “28,86 territorial* SIAPE”; 3 → “28,86 acordo SIAPE”; 4 → “28,86 sindicato”; 5 e 6 → “28,86 BACEN gratuidade”; 7 → “28,86 dissociad*”; 8 → “28,86 embargos”; 9 → “28,86 agravo interno”.
+
+QUESTÕES POR GRUPO (base para "questoes" e "analise.questoes")
+1 → cabimento do sobrestamento (Tema 1.433/STJ), se pedido; alcance territorial da coisa julgada da ACP 0005019-15.1997.4.03.6000 (artigo 16 da Lei 7.347/1985; Tema 1.075/STF); legitimidade ativa da parte exequente para o cumprimento individual.
+2 → alcance territorial da coisa julgada; existência de acordo individual ou transação comprovada pelas fichas do SIAPE (Temas 550 e 1.102/STJ); honorários recursais.
+3 → existência de acordo individual ou transação (Temas 550 e 1.102/STJ; MP 1.704/1998); prova pelas fichas do SIAPE; necessidade de homologação judicial (3d); honorários recursais.
+4 → conhecimento da apelação na parte dissociada; legitimidade ativa de quem foi substituído por sindicato em ação coletiva distinta, com exclusão expressa; honorários recursais.
+5 → manutenção da gratuidade impugnada por critério objetivo de renda (Tema 1.178/STJ; ADC 80).
+6 → legitimidade passiva do BACEN e da União quando o servidor pertence a entidade que não integrou o polo passivo da ACP; gratuidade; honorários de sucumbência após contrarrazões.
+7 → dialeticidade: se as razões atacam o fundamento da sentença.
+8 → existência de omissão, contradição, obscuridade ou erro material; rediscussão; multa do artigo 1.026, § 2º, do CPC, se pedida.
+9 → cabimento do julgamento monocrático (artigo 932 do CPC); sobrestamento pelos Temas 1.302 e 1.433/STJ; mérito da decisão agravada.
+
+CUIDADOS NOS CASOS DE 28,86% (base para "analise.cuidados" e "validar")
+- Acordo comprovado é diferente de acordo alegado: grupos 2 e 3 exigem as fichas do SIAPE com a rubrica da vantagem ou o termo de acordo nos autos; alegação só da União, sem documento, não basta.
+- Documento de acordo juntado só em contrarrazões, sem exame na sentença: variação 1f (transação a examinar na origem), não grupo 2.
+- Acordo sem homologação judicial: o modelo aplica o Tema 550/STJ, não o Tema 1.102/STJ (3d).
+- Ingresso no serviço público depois da MP 1.704/1998, sem obrigação residual: sem modelo.
+- Herdeiros e espólio: confira óbito, habilitação e inventariante; pensionista executa em nome próprio (1e).
+- Entidade da administração indireta que não integrou o polo passivo da ACP (ex.: BACEN): grupo 6, não grupo 1.
+- Exequente que já foi substituído em ação coletiva de sindicato: grupo 4; confira a exclusão expressa.
+- Outro cumprimento do mesmo exequente no lote ou em outra vara: litispendência (1e, 1i, 2c) e prevenção: vai a "pendencias" para conferência.
+- Honorários: verifique se a sentença os fixou, contra quem, e se houve contrarrazões, antes de escolher “Majorados”, “Fixados” ou “Sem honorários recursais”.
+
+PEÇAS PARA O PRONTUÁRIO (28,86%)
+Sem o inteiro teor, peça e analise estas peças, cada uma com “Documento: ID - Tipo”. A coluna da direita diz o que cada uma decide.
+Essenciais (todos os casos):
+  1. Petição do cumprimento de sentença — quem executa (servidor, pensionista, herdeiros, espólio), órgão de lotação ou ente executado, pedido de gratuidade, valor da causa.
+  2. Impugnação ou manifestação do executado (União, INSS, BACEN, FUNASA etc.) — o que o ente alegou: limitação territorial, acordo, ilegitimidade, prescrição, litispendência.
+  3. Sentença inteira (e decisão de embargos de declaração, se houver) — fundamento da extinção (grupo), honorários, custas, gratuidade.
+  4. Intimação da sentença (certidão ou expediente com a data da ciência) — tempestividade.
+  5. Apelação (e recurso adesivo, se houver), com a data do protocolo — o que se impugna; se ataca o fundamento da sentença (grupo 7).
+  6. Contrarrazões ou certidão de decurso de prazo — prescrição, litispendência, transação, honorários recursais, sobrestamento (variações 1b, 1c, 1f, 1i, 3c; parágrafo 2886-P1).
+  7. Parecer da Procuradoria Regional da República, se houver.
+Conforme o caso:
+  8. Fichas financeiras do SIAPE ou outro documento de pagamento da vantagem (“VANTAGEM ADMINIST. 28.86%”) — acordo (grupos 2 e 3). Se houver termo de acordo ou transação, ele também; diga se houve homologação judicial (3d).
+  9. Herdeiros, sucessores ou espólio: certidão de óbito, documentos de habilitação, termo de inventariante (variações 1d, 1d-esp, 2d, 2e).
+  10. Pensionista: documento da pensão e do vínculo do instituidor (variação 1e).
+  11. Sindicato: peça ou certidão da ação coletiva anterior e da exclusão expressa do exequente (grupo 4).
+  12. Litispendência: certidão de distribuição ou de objeto e pé da outra ação (1e, 1i, 2c).
+  13. Entidade fora do polo passivo da ACP: documento de lotação ou vínculo (grupo 6).
+  14. Nulidade por decisão surpresa: o despacho ou a intimação anterior à sentença, ou a falta deles (2d, 6c).
+  15. Gratuidade: decisão que a deferiu, revogou ou manteve, e a impugnação (grupo 5, 2c, 8b).
+  16. Embargos de declaração (grupo 8): acórdão embargado e embargos. Agravo interno (grupo 9): decisão monocrática, agravo interno e resposta.
+Faltando peça essencial ou a peça que decide o grupo, registre em "pendencias" “Juntar [peça] para análise” e em "validar" o enquadramento como provisório.
+
+FICHA DE ESPECIFICIDADES DO 28,86% (verificar todos os itens nos autos; registrar os que o caso tiver em "especificidades", com o ID)
+F1  Recurso e recorrente: apelação, agravo de instrumento, agravo interno ou embargos de declaração; quem recorre (exequente, União, INSS, BACEN, outro ente); recurso adesivo. → tipoJ, recursos, papeis; grupos 8 e 9; 6a × 6b.
+F2  Parte exequente: servidor ativo, inativo, pensionista, herdeiros ou sucessores, espólio (com inventariante). → variações 1d, 1d-esp, 1e, 2d, 2e.
+F3  Órgão de vinculação do servidor e ente executado (União, INSS, FUNASA, DNIT, BACEN ou outra entidade); se a entidade integrou o polo passivo da ACP. → grupo 6; 7a; 1h (INSS).
+F4  Data de ingresso no serviço público: anterior ou posterior à MP 1.704/1998 (30/06/1998), e se há obrigação residual. → sem modelo, se posterior e sem obrigação residual.
+F5  Fundamento da sentença: limitação territorial (artigo 16 da Lei 7.347/1985); acordo administrativo (Temas 550 e 1.102/STJ); ilegitimidade passiva; ilegitimidade ativa por ação coletiva distinta (sindicato); indeferimento da inicial; prescrição da pretensão executória; desistência. → grupo; orig.*.
+F6  Momento da sentença: antes ou depois da citação ou intimação do executado; se houve impugnação. → honorários (artigo 331 do CPC).
+F7  Prova de acordo: fichas financeiras do SIAPE com a rubrica da vantagem do 28,86%; termo de acordo ou de transação; homologação judicial; quem juntou e em que peça. → grupos 2 e 3; 3d; 1f.
+F8  Razões do recurso: se atacam o fundamento da sentença; se parte delas é dissociada. → grupos 4 e 7; adm.req.
+F9  Preliminares do recurso: nulidade da sentença; decisão surpresa (artigos 9º e 10 do CPC). → 2d, 6c; prelim.
+F10 Pedidos no recurso ou em contrarrazões: sobrestamento (Temas 1.433 e 1.302/STJ); tutela de evidência; prescrição; litispendência; transação; honorários pelo ente; litigância de má-fé. → 1a, 1g, 1c, 1d, 3c, 1e, 1i, 2c, 1f, 1b, 2b, 3b; parágrafos 2886-P1 a P3.
+F11 Ação coletiva anterior (sindicato ou associação), com a lista de substituídos e a exclusão expressa do exequente. → grupo 4.
+F12 Outra ação ou cumprimento do mesmo exequente sobre o 28,86%: número, juízo e fase. → litispendência (1e, 1i, 2c); pendência de prevenção.
+F13 Gratuidade: requerida, deferida, indeferida, revogada ou impugnada; fundamento (critério objetivo de renda: Tema 1.178/STJ e ADC 80). → grupo 5; 2c; 6; 8b; adm.ajg.
+F14 Honorários na sentença: fixados ou não; percentual e base; parte condenada; suspensão pelo artigo 98, § 3º; contrarrazões apresentadas. → "honor".
+F15 Litigância de má-fé: aplicada na sentença ou pedida pelo ente. → 2b, 2c, 3b.
+F16 Parecer da Procuradoria Regional da República: ID e sentido. → mpf, parecer, mpfx.*.
+F17 Datas: intimação da decisão recorrida e protocolo do recurso; prazo em dobro do ente público ou da DPU. → tempest, adm.*.
+F18 Embargos de declaração: acórdão embargado (ID e data); vício alegado; prequestionamento; pedido de multa por embargos protelatórios. → ed.*; jul.multa.
+F19 Agravo interno: decisão monocrática (ID e data); fundamentos atacados; pedido de sobrestamento. → agint.*.
+
+ÁRVORE DE ENQUADRAMENTO (na ordem; para no primeiro que se aplicar)
+A. Embargos de declaração contra acórdão do Relator → grupo 8 (8a: acórdão de limitação territorial; 8b: gratuidade revogada; acórdão embargado sobre acordo sem homologação judicial → 3d).
+B. Agravo interno contra decisão monocrática → grupo 9.
+C. Agravo de instrumento sobre cálculos ou custas → SEM MODELO.
+D. Apelação cujas razões não atacam o fundamento da sentença → grupo 7 (7a: sentença por ilegitimidade; 7b: sentença por acordo e apelação só sobre a limitação territorial).
+E. Apelação só do BACEN, limitada à gratuidade → grupo 5.
+F. Servidor de entidade que não integrou o polo passivo da ACP (ex.: BACEN), com extinção ou indeferimento por ilegitimidade passiva → grupo 6 (6a: apelações do exequente e do BACEN; 6b: apelação só do exequente; 6c: com alegação de nulidade por decisão surpresa).
+G. Exequente substituído por sindicato em ação coletiva anterior, com exclusão expressa → grupo 4.
+G2. Ingresso depois da MP 1.704/1998 sem obrigação residual, prescrição da pretensão executória reconhecida na sentença ou desistência anterior à impugnação → SEM MODELO (lista final).
+H. Sentença fundada só no acordo administrativo (fichas do SIAPE; Temas 550 e 1.102/STJ) → grupo 3.
+I. Sentença por limitação territorial, com acordo comprovado pelas fichas do SIAPE nos autos → grupo 2.
+J. Sentença por limitação territorial, sem acordo comprovado → grupo 1.
+Depois do grupo, escolha a variação pelas especificidades (herdeiros, espólio, pensionista, prescrição, litispendência, transação ou honorários em contrarrazões, má-fé, gratuidade, nulidade, tutela de evidência, ente executado). Sem especificidade: a variação “Base” do grupo.
+
+■ MODELOS (cada um é o acórdão-modelo indicado; o texto integral está no kit de acórdãos-modelo, arquivo de mesmo código)
+
+◆ [2886-1a] 28,86% · grupo 1 · Base, com afastamento do sobrestamento (Tema 1.433/STJ) e da preliminar de ilegitimidade
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+Especificidades: Base, com afastamento do sobrestamento (Tema 1.433/STJ) e da preliminar de ilegitimidade
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5006369-05.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-1b] 28,86% · grupo 1 · Honorários pedidos pelo ente em contrarrazões, prejudicados
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+Especificidades: Honorários pedidos pelo ente em contrarrazões, prejudicados
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5003544-88.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 06/10/2026)
+
+◆ [2886-1c] 28,86% · grupo 1 · Prescrição alegada em contrarrazões, remetida à origem
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. AÇÃO CIVIL PÚBLICA. REAJUSTE DE 28,86%. AUSÊNCIA DE LIMITAÇÃO TERRITORIAL DO TÍTULO EXECUTIVO. ABRANGÊNCIA NACIONAL. LEGITIMIDADE ATIVA. PRESCRIÇÃO. NECESSIDADE DE CONTRADITÓRIO E DILAÇÃO PROBATÓRIA. GRATUIDADE JUDICIÁRIA. RECURSO PROVIDO.
+Especificidades: Prescrição alegada em contrarrazões, remetida à origem
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5001271-05.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026)
+
+◆ [2886-1d] 28,86% · grupo 1 · Herdeiros ou sucessores, com prescrição remetida à origem
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ILEGITIMIDADE ATIVA AFASTADA. PRESCRIÇÃO. APELAÇÃO PROVIDA.
+Especificidades: Herdeiros ou sucessores, com prescrição remetida à origem
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5002200-72.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 26/10/2026, DJEN de 29/10/2026)
+
+◆ [2886-1d-esp] 28,86% · grupo 1 · Espólio, com prescrição remetida à origem
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+Especificidades: Espólio, com prescrição remetida à origem
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 0000011-75.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 26/10/2026, DJEN de 29/10/2026)
+
+◆ [2886-1e] 28,86% · grupo 1 · Pensionista com legitimidade própria; litispendência remetida à origem
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. LITISPENDÊNCIA. HABILITAÇÃO SUCESSÓRIA. GRATUIDADE JUDICIÁRIA. APELAÇÃO PROVIDA.
+Especificidades: Pensionista com legitimidade própria; litispendência remetida à origem
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5008835-69.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-1f] 28,86% · grupo 1 · Transação alegada apenas em contrarrazões, a examinar na origem
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. REJEIÇÃO DE QUESTÕES SUSCITADAS EM CONTRARRAZÕES. APELAÇÃO PROVIDA.
+Especificidades: Transação alegada apenas em contrarrazões, a examinar na origem
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5007453-41.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-1g] 28,86% · grupo 1 · Pedido de tutela de evidência prejudicado
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+Especificidades: Pedido de tutela de evidência prejudicado
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5007377-17.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-1h] 28,86% · grupo 1 · Base sem preliminar (INSS)
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+Especificidades: Base sem preliminar (INSS)
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5009725-71.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026)
+
+◆ [2886-1i] 28,86% · grupo 1 · Litispendência e honorários recursais prejudicados, ambos alegados em contrarrazões
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção por limitação territorial; apelação do exequente
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. LITISPENDÊNCIA E HONORÁRIOS ADVOCATÍCIOS. APELAÇÃO PROVIDA.
+Especificidades: Litispendência e honorários recursais prejudicados, ambos alegados em contrarrazões
+Resultado: Provimento, com retorno à origem (acórdão-modelo: ApCiv 5008082-15.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-2a] 28,86% · grupo 2 · Base
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+Especificidades: Base
+Resultado: Desprovimento, com honorários recursais (acórdão-modelo: ApCiv 5007937-56.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-2b] 28,86% · grupo 2 · Litigância de má-fé afastada
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. LITIGÂNCIA DE MÁ-FÉ. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+Especificidades: Litigância de má-fé afastada
+Resultado: Desprovimento, com honorários recursais (acórdão-modelo: ApCiv 5006120-54.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-2c] 28,86% · grupo 2 · Gratuidade (Tema 1.178/STJ e ADC 80) e má-fé; recurso adesivo do ente
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. LITIGÂNCIA DE MÁ-FÉ. LITISPENDÊNCIA E COISA JULGADA. GRATUIDADE JUDICIÁRIA. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+Especificidades: Gratuidade (Tema 1.178/STJ e ADC 80) e má-fé; recurso adesivo do ente
+Resultado: Desprovimento, com honorários recursais (acórdão-modelo: ApCiv 5002512-48.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-2d] 28,86% · grupo 2 · Herdeiros ou sucessores; nulidade da sentença afastada
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+Especificidades: Herdeiros ou sucessores; nulidade da sentença afastada
+Resultado: Desprovimento, com honorários recursais (acórdão-modelo: ApCiv 5008405-20.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 06/10/2026, DJEN de 09/10/2026)
+
+◆ [2886-2e] 28,86% · grupo 2 · Herdeiros ou sucessores, sem alegação de nulidade; sem honorários recursais se a sentença não os fixou (se fixou, usar a fórmula do 2d)
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. APELAÇÃO DESPROVIDA.
+Especificidades: Herdeiros ou sucessores, sem alegação de nulidade; sem honorários recursais se a sentença não os fixou (se fixou, usar a fórmula do 2d)
+Resultado: Desprovimento, com honorários recursais (acórdão-modelo: ApCiv 5011941-39.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-3a] 28,86% · grupo 3 · Base
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ)
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. VANTAGEM DE 28.86%. AÇÃO CIVIL PÚBLICA. ACORDO INDIVIDUAL OU TRANSAÇÃO ADMINISTRATIVA. TEMAS 550 E 1.102/STJ. PAGAMENTO ADMINISTRATIVO. DESPROVIMENTO. HONORÁRIOS RECURSAIS.
+Especificidades: Base
+Resultado: Desprovimento (acórdão-modelo: ApCiv 5006719-90.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-3b] 28,86% · grupo 3 · Litigância de má-fé afastada
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ)
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. VANTAGEM DE 28.86%. AÇÃO CIVIL PÚBLICA. ACORDO INDIVIDUAL OU TRANSAÇÃO ADMINISTRATIVA. TEMAS 550 E 1.102/STJ. PAGAMENTO ADMINISTRATIVO. LITIGÂNCIA DE MÁ-FÉ. DESPROVIMENTO. HONORÁRIOS RECURSAIS.
+Especificidades: Litigância de má-fé afastada
+Resultado: Desprovimento (acórdão-modelo: ApCiv 5001074-84.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-3c] 28,86% · grupo 3 · Prescrição alegada em contrarrazões, prejudicada
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ)
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. VANTAGEM DE 28.86%. AÇÃO CIVIL PÚBLICA. ACORDO INDIVIDUAL OU TRANSAÇÃO ADMINISTRATIVA. TEMAS 550 E 1.102/STJ. PAGAMENTO ADMINISTRATIVO. PRESCRIÇÃO. HONORÁRIOS ADVOCATÍCIOS. LITIGÂNCIA DE MÁ-FÉ. DESPROVIMENTO.
+Especificidades: Prescrição alegada em contrarrazões, prejudicada
+Resultado: Desprovimento (acórdão-modelo: ApCiv 5007906-02.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026)
+
+◆ [2886-3d] 28,86% · grupo 3 · Acordo sem homologação judicial: Tema 550, não Tema 1.102 (acórdão em embargos de declaração)
+Espécie: Embargos de Declaração (tese aplicável à apelação)
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ)
+Tese: DIREITO PROCESSUAL CIVIL. EMBARGOS DE DECLARAÇÃO.CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO.ACORDO ADMINISTRATIVO SEM HOMOLOGAÇÃO JUDICIAL. INCIDÊNCIA DO TEMA 550/STJ. INAPLICABILIDADE DO TEMA 1.102/STJ. AUSÊNCIA DE VÍCIOS SANÁVEIS. REJEIÇÃO.
+Especificidades: Acordo sem homologação judicial: Tema 550, não Tema 1.102 (acórdão em embargos de declaração)
+Resultado: Desprovimento (acórdão-modelo: ED na ApCiv 5004575-46.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 23/09/2026)
+
+◆ [2886-4] 28,86% · grupo 4 · Base
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Exequente substituído por sindicato (SINDSPREV/RJ) em ação coletiva anterior; razões em parte dissociadas
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. APELAÇÃO. RAZÕES EM PARTE DISSOCIADAS. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. EFEITOS DA COISA JULGADA. ILEGITIMIDADE ATIVA. PRETENSÃO ABRANGIDA POR AÇÃO COLETIVA DISTINTA. EXCLUSÃO EXPRESSA. SENTENÇA CONFIRMADA. HONORÁRIOS RECURSAIS.
+Especificidades: Base
+Resultado: Conhecimento parcial e desprovimento (acórdão-modelo: ApCiv 5008404-35.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 26/10/2026, DJEN de 29/10/2026)
+
+◆ [2886-5] 28,86% · grupo 5 · Base
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Apelação do BACEN limitada à gratuidade
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. GRATUIDADE DA JUSTIÇA. DECLARAÇÃO DE HIPOSSUFICIÊNCIA. REVISÃO BASEADA EM CRITÉRIO ESTRITAMENTE OBJETIVO. TEMA 1.178/STJ. DESPROVIMENTO.
+Especificidades: Base
+Resultado: Desprovimento (acórdão-modelo: ApCiv 5006182-94.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-6a] 28,86% · grupo 6 · Apelações do exequente e do BACEN
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Servidor de entidade que não integrou o polo passivo da ACP
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÕES. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. REAJUSTE DE 28,86%. ILEGITIMIDADE PASSIVA DO BANCO CENTRAL DO BRASIL E DA UNIÃO. COISA JULGADA COLETIVA. LIMITES SUBJETIVOS. GRATUIDADE DA JUSTIÇA. CRITÉRIOS OBJETIVOS DE RENDA. HONORÁRIOS ADVOCATÍCIOS SUCUMBENCIAIS. FIXAÇÃO EM GRAU RECURSAL. APELAÇÕES DESPROVIDAS.
+Especificidades: Apelações do exequente e do BACEN
+Resultado: Desprovimento (acórdão-modelo: ApCiv 5007534-87.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-6b] 28,86% · grupo 6 · Apelação apenas do exequente
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Servidor de entidade que não integrou o polo passivo da ACP
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÃO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. REAJUSTE DE 28,86%. ILEGITIMIDADE PASSIVA DO BANCO CENTRAL DO BRASIL E DA UNIÃO. AUSÊNCIA DE TÍTULO EXECUTIVO EM FACE DAS PARTES EXECUTADAS. GRATUIDADE DA JUSTIÇA. HONORÁRIOS ADVOCATÍCIOS. APELAÇÃO DESPROVIDA.
+Especificidades: Apelação apenas do exequente
+Resultado: Desprovimento (acórdão-modelo: ApCiv 5007466-40.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026)
+
+◆ [2886-6c] 28,86% · grupo 6 · Nulidade por decisão surpresa afastada
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Servidor de entidade que não integrou o polo passivo da ACP
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. REAJUSTE DE 28,86%. AÇÃO CIVIL PÚBLICA 0005019-15.1997.4.03.6000. INDEFERIMENTO DA INICIAL. ILEGITIMIDADE PASSIVA DA UNIÃO E DO BACEN. APELAÇÃO DESPROVIDA. SUCUMBÊNCIA E GRATUIDADE JUDICIÁRIA.
+Especificidades: Nulidade por decisão surpresa afastada
+Resultado: Desprovimento (acórdão-modelo: ApCiv 5006937-21.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-7a] 28,86% · grupo 7 · Sentença por ilegitimidade (FUNASA)
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Razões dissociadas do fundamento da sentença
+Tese: DIREITO PROCESSUAL CIVIL. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO POR ILEGITIMIDADE PASSIVA. RAZÕES DISSOCIADAS. FALTA DE DIALETICIDADE. NÃO CONHECIMENTO.
+Especificidades: Sentença por ilegitimidade (FUNASA)
+Resultado: Não conhecimento (acórdão-modelo: ApCiv 5004110-03.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 13/10/2026)
+
+◆ [2886-7b] 28,86% · grupo 7 · Sentença por acordo e apelação só sobre a limitação territorial
+Espécie: Apelação
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Razões dissociadas do fundamento da sentença
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. REAJUSTE DE 28,86%. ACORDO ADMINISTRATIVO. RAZÕES DISSOCIADAS. FALTA DE DIALETICIDADE RECURSAL. NÃO CONHECIMENTO.
+Especificidades: Sentença por acordo e apelação só sobre a limitação territorial
+Resultado: Não conhecimento (acórdão-modelo: ApCiv 5006685-18.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026)
+
+◆ [2886-8a] 28,86% · grupo 8 · Contra acórdão de limitação territorial
+Espécie: Embargos de Declaração
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Embargos de declaração
+Tese: DIREITO PROCESSUAL CIVIL. EMBARGOS DE DECLARAÇÃO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. EFEITOS DA COISA JULGADA. ABRANGÊNCIA NACIONAL. LEGITIMIDADE ATIVA. REDISCUSSÃO DA MATÉRIA. AUSÊNCIA DE VÍCIO SANÁVEL. REJEIÇÃO. MULTA. ARTIGO 1.026, § 2º, CPC. CARÁTER PROTELATÓRIO NÃO COMPROVADO.
+Especificidades: Contra acórdão de limitação territorial
+Resultado: Rejeição (acórdão-modelo: ED na ApCiv 5008731-43.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 23/09/2026)
+
+◆ [2886-8b] 28,86% · grupo 8 · Gratuidade revogada
+Espécie: Embargos de Declaração
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Embargos de declaração
+Tese: DIREITO PROCESSUAL CIVIL. EMBARGOS DE DECLARAÇÃO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. GRATUIDADE DA JUSTIÇA. REVOGAÇÃO DO BENEFÍCIO. AUSÊNCIA DE VÍCIO SANÁVEL. REJEIÇÃO.
+Especificidades: Gratuidade revogada
+Resultado: Rejeição (acórdão-modelo: ED na ApCiv 5010092-66.2023.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 23/09/2026)
+
+◆ [2886-9] 28,86% · grupo 9 · Base
+Espécie: Agravo Interno
+Assunto: Cumprimento individual da ACP 0005019-15.1997.4.03.6000 (28,86%) · Agravo interno contra decisão monocrática
+Tese: DIREITO ADMINISTRATIVO E PROCESSUAL CIVIL. AGRAVO INTERNO EM AGRAVO DE INSTRUMENTO. SERVIDOR PÚBLICO FEDERAL. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. SERVIDOR PÚBLICO FEDERAL. REAJUSTE DE 28,86%. AÇÃO CIVIL PÚBLICA. AUSÊNCIA DE LIMITAÇÃO TERRITORIAL NO TÍTULO EXECUTIVO. TEMA 1.075/STF. LEGITIMIDADE ATIVA. JULGAMENTO MONOCRÁTICO. CABIMENTO. TEMAS 1.302/STJ E 1.433/STJ. SUSPENSÃO INAPLICÁVEL. AGRAVO INTERNO DESPROVIDO.
+Especificidades: Base
+Resultado: Desprovimento (acórdão-modelo: AgInt no AI 5000162-71.2026.4.03.0001, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 14/10/2026)
+
+■ PRECEDENTES (os próprios acórdãos-modelo)
+
+◆ ApCiv 5006369-05.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Base, com afastamento do sobrestamento (Tema 1.433/STJ) e da preliminar de ilegitimidade
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5003544-88.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 06/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Honorários pedidos pelo ente em contrarrazões, prejudicados
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5001271-05.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Prescrição alegada em contrarrazões, remetida à origem
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. AÇÃO CIVIL PÚBLICA. REAJUSTE DE 28,86%. AUSÊNCIA DE LIMITAÇÃO TERRITORIAL DO TÍTULO EXECUTIVO. ABRANGÊNCIA NACIONAL. LEGITIMIDADE ATIVA. PRESCRIÇÃO. NECESSIDADE DE CONTRADITÓRIO E DILAÇÃO PROBATÓRIA. GRATUIDADE JUDICIÁRIA. RECURSO PROVIDO.
+
+◆ ApCiv 5002200-72.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 26/10/2026, DJEN de 29/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Herdeiros ou sucessores, com prescrição remetida à origem
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ILEGITIMIDADE ATIVA AFASTADA. PRESCRIÇÃO. APELAÇÃO PROVIDA.
+
+◆ ApCiv 0000011-75.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 26/10/2026, DJEN de 29/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Espólio, com prescrição remetida à origem
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5008835-69.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Pensionista com legitimidade própria; litispendência remetida à origem
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. LITISPENDÊNCIA. HABILITAÇÃO SUCESSÓRIA. GRATUIDADE JUDICIÁRIA. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5007453-41.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Transação alegada apenas em contrarrazões, a examinar na origem
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. REJEIÇÃO DE QUESTÕES SUSCITADAS EM CONTRARRAZÕES. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5007377-17.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Pedido de tutela de evidência prejudicado
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5009725-71.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Base sem preliminar (INSS)
+Resultado: Por unanimidade, dou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5008082-15.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção por limitação territorial; apelação do exequente · Litispendência e honorários recursais prejudicados, ambos alegados em contrarrazões
+Resultado: Por unanimidade, deu provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. LITISPENDÊNCIA E HONORÁRIOS ADVOCATÍCIOS. APELAÇÃO PROVIDA.
+
+◆ ApCiv 5007937-56.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE · Base
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+
+◆ ApCiv 5006120-54.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE · Litigância de má-fé afastada
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. LITIGÂNCIA DE MÁ-FÉ. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+
+◆ ApCiv 5002512-48.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE · Gratuidade (Tema 1.178/STJ e ADC 80) e má-fé; recurso adesivo do ente
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. LITIGÂNCIA DE MÁ-FÉ. LITISPENDÊNCIA E COISA JULGADA. GRATUIDADE JUDICIÁRIA. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+
+◆ ApCiv 5008405-20.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 06/10/2026, DJEN de 09/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE · Herdeiros ou sucessores; nulidade da sentença afastada
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. APELAÇÃO DESPROVIDA. HONORÁRIOS RECURSAIS.
+
+◆ ApCiv 5011941-39.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Limitação territorial afastada, mas acordo comprovado pelas fichas do SIAPE · Herdeiros ou sucessores, sem alegação de nulidade; sem honorários recursais se a sentença não os fixou (se fixou, usar a fórmula do 2d)
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM RESOLUÇÃO DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. COISA JULGADA. ABRANGÊNCIA NACIONAL. ACORDO ADMINISTRATIVO DE PAGAMENTO. APELAÇÃO DESPROVIDA.
+
+◆ ApCiv 5006719-90.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ) · Base
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. VANTAGEM DE 28.86%. AÇÃO CIVIL PÚBLICA. ACORDO INDIVIDUAL OU TRANSAÇÃO ADMINISTRATIVA. TEMAS 550 E 1.102/STJ. PAGAMENTO ADMINISTRATIVO. DESPROVIMENTO. HONORÁRIOS RECURSAIS.
+
+◆ ApCiv 5001074-84.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ) · Litigância de má-fé afastada
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. VANTAGEM DE 28.86%. AÇÃO CIVIL PÚBLICA. ACORDO INDIVIDUAL OU TRANSAÇÃO ADMINISTRATIVA. TEMAS 550 E 1.102/STJ. PAGAMENTO ADMINISTRATIVO. LITIGÂNCIA DE MÁ-FÉ. DESPROVIMENTO. HONORÁRIOS RECURSAIS.
+
+◆ ApCiv 5007906-02.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ) · Prescrição alegada em contrarrazões, prejudicada
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. VANTAGEM DE 28.86%. AÇÃO CIVIL PÚBLICA. ACORDO INDIVIDUAL OU TRANSAÇÃO ADMINISTRATIVA. TEMAS 550 E 1.102/STJ. PAGAMENTO ADMINISTRATIVO. PRESCRIÇÃO. HONORÁRIOS ADVOCATÍCIOS. LITIGÂNCIA DE MÁ-FÉ. DESPROVIMENTO.
+
+◆ ED na ApCiv 5004575-46.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 23/09/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Extinção apenas pelo acordo administrativo (Temas 550 e 1.102/STJ) · Acordo sem homologação judicial: Tema 550, não Tema 1.102 (acórdão em embargos de declaração)
+Resultado: Por unanimidade, rejeitou os embargos de declaração.
+Tese: DIREITO PROCESSUAL CIVIL. EMBARGOS DE DECLARAÇÃO.CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO.ACORDO ADMINISTRATIVO SEM HOMOLOGAÇÃO JUDICIAL. INCIDÊNCIA DO TEMA 550/STJ. INAPLICABILIDADE DO TEMA 1.102/STJ. AUSÊNCIA DE VÍCIOS SANÁVEIS. REJEIÇÃO.
+
+◆ ApCiv 5008404-35.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 26/10/2026, DJEN de 29/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Exequente substituído por sindicato (SINDSPREV/RJ) em ação coletiva anterior; razões em parte dissociadas · Base
+Resultado: Por unanimidade, conheceu em parte da apelação e negou-lhe provimento.
+Tese: DIREITO PROCESSUAL CIVIL. ADMINISTRATIVO. APELAÇÃO. RAZÕES EM PARTE DISSOCIADAS. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. EFEITOS DA COISA JULGADA. ILEGITIMIDADE ATIVA. PRETENSÃO ABRANGIDA POR AÇÃO COLETIVA DISTINTA. EXCLUSÃO EXPRESSA. SENTENÇA CONFIRMADA. HONORÁRIOS RECURSAIS.
+
+◆ ApCiv 5006182-94.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Apelação do BACEN limitada à gratuidade · Base
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. GRATUIDADE DA JUSTIÇA. DECLARAÇÃO DE HIPOSSUFICIÊNCIA. REVISÃO BASEADA EM CRITÉRIO ESTRITAMENTE OBJETIVO. TEMA 1.178/STJ. DESPROVIMENTO.
+
+◆ ApCiv 5007534-87.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Servidor de entidade que não integrou o polo passivo da ACP · Apelações do exequente e do BACEN
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÕES. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. REAJUSTE DE 28,86%. ILEGITIMIDADE PASSIVA DO BANCO CENTRAL DO BRASIL E DA UNIÃO. COISA JULGADA COLETIVA. LIMITES SUBJETIVOS. GRATUIDADE DA JUSTIÇA. CRITÉRIOS OBJETIVOS DE RENDA. HONORÁRIOS ADVOCATÍCIOS SUCUMBENCIAIS. FIXAÇÃO EM GRAU RECURSAL. APELAÇÕES DESPROVIDAS.
+
+◆ ApCiv 5007466-40.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 07/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Servidor de entidade que não integrou o polo passivo da ACP · Apelação apenas do exequente
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÃO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. REAJUSTE DE 28,86%. ILEGITIMIDADE PASSIVA DO BANCO CENTRAL DO BRASIL E DA UNIÃO. AUSÊNCIA DE TÍTULO EXECUTIVO EM FACE DAS PARTES EXECUTADAS. GRATUIDADE DA JUSTIÇA. HONORÁRIOS ADVOCATÍCIOS. APELAÇÃO DESPROVIDA.
+
+◆ ApCiv 5006937-21.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Servidor de entidade que não integrou o polo passivo da ACP · Nulidade por decisão surpresa afastada
+Resultado: Por unanimidade, negou provimento à apelação.
+Tese: DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. REAJUSTE DE 28,86%. AÇÃO CIVIL PÚBLICA 0005019-15.1997.4.03.6000. INDEFERIMENTO DA INICIAL. ILEGITIMIDADE PASSIVA DA UNIÃO E DO BACEN. APELAÇÃO DESPROVIDA. SUCUMBÊNCIA E GRATUIDADE JUDICIÁRIA.
+
+◆ ApCiv 5004110-03.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 13/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Razões dissociadas do fundamento da sentença · Sentença por ilegitimidade (FUNASA)
+Resultado: Por unanimidade, não conheceu da apelação.
+Tese: DIREITO PROCESSUAL CIVIL. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO POR ILEGITIMIDADE PASSIVA. RAZÕES DISSOCIADAS. FALTA DE DIALETICIDADE. NÃO CONHECIMENTO.
+
+◆ ApCiv 5006685-18.2024.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 05/10/2026, DJEN de 08/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Razões dissociadas do fundamento da sentença · Sentença por acordo e apelação só sobre a limitação territorial
+Resultado: Por unanimidade, não conheceu da apelação.
+Tese: DIREITO PROCESSUAL CIVIL. APELAÇÃO. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. REAJUSTE DE 28,86%. ACORDO ADMINISTRATIVO. RAZÕES DISSOCIADAS. FALTA DE DIALETICIDADE RECURSAL. NÃO CONHECIMENTO.
+
+◆ ED na ApCiv 5008731-43.2025.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 23/09/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Embargos de declaração · Contra acórdão de limitação territorial
+Resultado: Por unanimidade, rejeitou os embargos de declaração.
+Tese: DIREITO PROCESSUAL CIVIL. EMBARGOS DE DECLARAÇÃO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. ARTIGO 16 DA LEI 7.347/1985. EFEITOS DA COISA JULGADA. ABRANGÊNCIA NACIONAL. LEGITIMIDADE ATIVA. REDISCUSSÃO DA MATÉRIA. AUSÊNCIA DE VÍCIO SANÁVEL. REJEIÇÃO. MULTA. ARTIGO 1.026, § 2º, CPC. CARÁTER PROTELATÓRIO NÃO COMPROVADO.
+
+◆ ED na ApCiv 5010092-66.2023.4.03.6000, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 23/09/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Embargos de declaração · Gratuidade revogada
+Resultado: Por unanimidade, rejeitou os embargos de declaração.
+Tese: DIREITO PROCESSUAL CIVIL. EMBARGOS DE DECLARAÇÃO. CUMPRIMENTO DE SENTENÇA. AÇÃO CIVIL PÚBLICA. EXTINÇÃO DO PROCESSO SEM EXAME DE MÉRITO. GRATUIDADE DA JUSTIÇA. REVOGAÇÃO DO BENEFÍCIO. AUSÊNCIA DE VÍCIO SANÁVEL. REJEIÇÃO.
+
+◆ AgInt no AI 5000162-71.2026.4.03.0001, Rel. Des. Fed. CARLOS MUTA, Turma Regional de MS, julgado em 15/09/2026, DJEN de 14/10/2026
+Assunto: 28,86% · ACP 0005019-15.1997.4.03.6000 · Agravo interno contra decisão monocrática · Base
+Resultado: Por unanimidade, negou provimento ao agravo interno.
+Tese: DIREITO ADMINISTRATIVO E PROCESSUAL CIVIL. AGRAVO INTERNO EM AGRAVO DE INSTRUMENTO. SERVIDOR PÚBLICO FEDERAL. CUMPRIMENTO INDIVIDUAL DE SENTENÇA COLETIVA. SERVIDOR PÚBLICO FEDERAL. REAJUSTE DE 28,86%. AÇÃO CIVIL PÚBLICA. AUSÊNCIA DE LIMITAÇÃO TERRITORIAL NO TÍTULO EXECUTIVO. TEMA 1.075/STF. LEGITIMIDADE ATIVA. JULGAMENTO MONOCRÁTICO. CABIMENTO. TEMAS 1.302/STJ E 1.433/STJ. SUSPENSÃO INAPLICÁVEL. AGRAVO INTERNO DESPROVIDO.
+
+■ PARÁGRAFOS AVULSOS 28,86% (o texto integral está no acórdão-modelo indicado; transcrever de lá, sem reescrever)
+◆ [2886-P1] Sobrestamento pelos Temas 1.302 e 1.433/STJ pedido em contrarrazões · uso: Voto · preliminares, quando o ente pede suspensão. Fonte: 2886-9 (AgInt no AI 5000162-71.2026.4.03.0001, 15/09/2026), parágrafo que começa por “descabido o sobrestamento do feito em razão da afetação dos Temas 1.302/STJ e 1.433/STJ”.
+◆ [2886-P2] Prescrição alegada em contrarrazões ou memoriais, com a extinção mantida · uso: Voto · fecho da fundamentação. Fonte: 2886-3c, frase “prejudicada, assim, a discussão da prescrição aventada em contrarrazões”.
+◆ [2886-P3] Honorários recursais pedidos em contrarrazões, com a sentença reformada · uso: Voto · fecho, antes do dispositivo. Fonte: 2886-1i, parágrafo que começa por “Prejudicado, por fim, o pedido de condenação em honorários recursais, deduzido em contrarrazões”.
+
+SEM MODELO (voto próprio)
+Admissão após a MP 1.704/1998, sem obrigação residual; prescrição da pretensão executória reconhecida na sentença; desistência anterior à impugnação; cautelar de protesto de sindicato; agravos de instrumento sobre cálculos ou custas.

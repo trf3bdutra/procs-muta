@@ -24,6 +24,16 @@
     Object.keys(x).forEach(function(k){if(x[k]==null||x[k]===''||(Array.isArray(x[k])&&!x[k].length))delete x[k];});
     return x;
   }
+  /* prontuário do Ex Officio (cartão gravado no procs-muta) no mesmo formato do bloco da LIA: campos com chave pontuada */
+  function prontDoItem(i){
+    var ct=i.ctl||{},C=ct.cartao||{},campos={},LST={recursos:1,pecas:1,pendencias:1,papeis:1};
+    (function plano(o,pre){Object.keys(o||{}).forEach(function(k){var v=o[k],ch=pre?pre+'.'+k:k;if(!pre&&LST[k])return;
+      if(v&&typeof v==='object'&&!Array.isArray(v))plano(v,ch);else if(v!=null&&v!=='')campos[ch]=v;});})(C,'');
+    ['tempest','preparo','prelim','repres','midias','mpf','parecer','resJulg','consect','honor','topico'].forEach(function(k){if(ct[k]!=null&&ct[k]!=='')campos[k]=ct[k];});
+    if(i.obs)campos.obs=i.obs;
+    return {processo:i.cnj,campos:campos,recursos:C.recursos||[],pecas:C.pecas||[],papeis:C.papeis||[],
+      pendencias:(C.pendencias||[]).filter(function(x){return !(x&&x.ok);}).map(function(x){return x&&x.desc!=null?x.desc:String(x);}),fonte:'Ex Officio'};
+  }
   /* prontuário colado (bloco <<<PRONTUARIO_CMT … PRONTUARIO_CMT>>>, o JSON ou o arquivo .json baixado) → perfil do caso */
   function lerProntuario(txt){
     var t=String(txt||'').replace(/^[\s\S]*?<<<PRONTUARIO_CMT/,'').replace(/PRONTUARIO_CMT>>>[\s\S]*$/,'').trim();
@@ -60,9 +70,9 @@
       var L=(doc.itens||[]).length?doc.itens:(doc.previa||[]),d=dg(it);
       var x=L.filter(function(i){return String(i.item)===it;})[0]||L.filter(function(i){return d.length>=7&&dg(i.cnj).indexOf(d)>=0;})[0];
       if(!x)throw new Error('Item '+it+' não encontrado na pauta de '+brd(ses)+'.');
-      CQ.perfil=perfilDoItem(x);CQ.pront=null;CQ.m28=null;CQ.fonte='pauta de '+brd(ses)+(x.item?' · item '+x.item:'');CQ.erro='';zerar();
+      CQ.perfil=perfilDoItem(x);CQ.pront=prontDoItem(x);CQ.m28=null;CQ.fonte='prontuário do Ex Officio · pauta de '+brd(ses)+(x.item?' · item '+x.item:'');CQ.erro='';zerar();
       try{history.replaceState(null,'','#consulta='+ses+'/'+encodeURIComponent(it));}catch(er){}
-    }).catch(function(er){CQ.erro=er.message;}).then(function(){CQ.busy=false;render();});
+    }).catch(function(er){CQ.erro=CQ.perfil?'Prontuário completo indisponível ('+er.message+'). A Consulta usa os dados enviados pelo cartão.':er.message;}).then(function(){CQ.busy=false;render();});
   }
   function toastC(t){var el=document.getElementById('toast');if(el){el.textContent=t;el.classList.add('on');setTimeout(function(){el.classList.remove('on');},2400);}}
   /* pesquisa: pontua cada registro pelos termos do caso, com peso por campo */
@@ -330,10 +340,10 @@
   var ov=window.VDM_view;
   window.VDM_view=function(v){if(v==='consulta'){window.CQ_render();return;}if(ov)ov(v);};
   var temHash=lerHash();
-  window.addEventListener('hashchange',function(){if(lerHash()){var t=document.querySelector('.tab[data-v="consulta"]');if(t)t.click();if(CQ.ses&&CQ.item&&!/caso=/.test(location.hash))consultar();else window.CQ_render();}});
+  window.addEventListener('hashchange',function(){if(lerHash()){var t=document.querySelector('.tab[data-v="consulta"]');if(t)t.click();if(CQ.ses&&CQ.item)carregarCal().then(consultar);else window.CQ_render();}});
   setTimeout(function(){
     var alvo=temHash?'consulta':(window.VDM_PUBLICO?'ement':'');
     if(alvo){var t=document.querySelector('.tab[data-v="'+alvo+'"]');if(t)t.click();}
-    if(temHash&&CQ.ses&&CQ.item&&!CQ.perfil)carregarCal().then(consultar);
+    if(temHash&&CQ.ses&&CQ.item)carregarCal().then(consultar);
   },0);
 })();

@@ -156,7 +156,14 @@ LIA3 += ('<script type="text/plain" id="lia-gerar">' + base64.b64encode(gzip.com
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 # matrizes modulares de 28,86% (Consulta): modelos/matrizes-2886.json
 _M28 = RAIZ/'modelos/matrizes-2886.json'
-if _M28.exists(): pacote['m2886'] = ler(_M28)
+if _M28.exists():
+    pacote['m2886'] = ler(_M28)
+    try:
+        import importlib.util as _iu
+        _sp = _iu.spec_from_file_location('m2886', RAIZ/'scripts/modelos-matriz/matrizes_2886.py'); _mm = _iu.module_from_spec(_sp); _sp.loader.exec_module(_mm)
+        for _x in _mm.conferir(pacote['m2886'])[0]: print('matriz 28,86% · ERRO:', _x)
+    except Exception as _ex:
+        print('matriz 28,86%: conferência não rodou:', _ex)
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
 
 js_ = js
