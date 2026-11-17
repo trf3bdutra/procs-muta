@@ -307,7 +307,7 @@
     return '<div class="vs m28-vs">'+md.versoes.map(function(v,i){return '<button data-m28ver="'+e(id)+':'+i+'" aria-pressed="'+(i===vi)+'">'+e(v.rotulo)+'</button>';}).join('')+'</div>';}
   function folha(P,J){
     var G=grp(S.g),h='<div class="cqs"><div class="dpj">MINUTA · MATRIZ MODULAR 28,86% <small>· grupo '+e(S.g)+' · '+e(G.nome)+'</small></div><div class="cqf m28-f">';
-    h+='<div class="m28-acts"><button class="cq-go" data-m28cp="1">Copiar a minuta</button><button class="dbt" data-m28cp="txt">Copiar como texto</button><span class="meta">Variáveis em amarelo; faltas em vermelho.</span></div>';
+    h+='<div class="m28-acts"><button class="cq-go" data-m28cp="1">Copiar a minuta</button><button class="dbt" data-m28cp="txt">Copiar como texto</button><button class="dbt" data-m28pk="1" title="Arquivo para o agente de conferência final (minuta, escolhas da matriz e prontuário)">Pacote para conferência</button><span class="meta">Variáveis em amarelo; faltas em vermelho.</span></div>';
     h+='<div class="cqb"><div class="band"><span class="bl">RELATÓRIO</span></div><div class="dbody">'+relatorioLinhas().map(function(p){return '<p class="std">'+preencher(p,true)+'</p>';}).join('')+'</div></div>';
     pecas().forEach(function(p,i){h+='<div class="cqb"><div class="band"><span class="bl">'+(i===0?'VOTO · ':'')+e(p.titulo)+'</span>'+(p.rotulo&&p.rotulo!=='padrão'?'<span class="pill op">'+e(p.rotulo)+'</span>':'')+'<span class="dsp"></span><span class="drn">'+e(p.origem||'')+'</span></div><div class="dbody">'+
       p.ps.map(function(x){return '<p class="std">'+preencher(x,true)+'</p>';}).join('')+'</div></div>';});
@@ -338,6 +338,7 @@
   function redesenharSemCanhoto(){CTX.mn.innerHTML=folha(CTX.P,CTX.J);CTX.or.innerHTML=painel(CTX.P,CTX.J);ligarFolha();}
   function q(sel,fn,ev){Array.prototype.forEach.call(document.querySelectorAll(sel),function(b){b[ev||'onclick']=function(x){fn(b,x);};});}
   function ligarFolha(){
+    q('#cq-main [data-m28pk]',function(){baixar();});
     q('#cq-main [data-m28cp]',function(b){copiar(b.getAttribute('data-m28cp')==='txt').then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent=b.getAttribute('data-m28cp')==='txt'?'Copiar como texto':'Copiar a minuta';},1600);},function(){b.textContent='Não foi possível copiar';});});
     q('#cq-main [data-m28v]',function(b){var el=document.getElementById('m28v-'+b.getAttribute('data-m28v'));if(el){el.focus();el.scrollIntoView({block:'center'});}});
     q('#cq-ori [data-m28sair]',function(){CTX.CQ.m28=false;CTX.voltar();});
@@ -355,10 +356,23 @@
     q('#cq-can [data-m28reset]',function(){preparar(CTX.P,CTX.J,true);desenhar();});
     ligarFolha();
   }
+  /* pacote para o agente de conferência final (scripts/conferencia-2886): minuta + escolhas da matriz + prontuário */
+  function pacote(){var P=CTX.P||{},J=CTX.J||null,G=grp(S.g),us=usadas(),V={};
+    us.forEach(function(k){V[k]={valor:valor(k),rotulo:vdef(k).rotulo,fonte:S.manual[k]?'editado na Consulta':(S.der[k]?'prontuário ('+S.der[k]+')':(k in S.val&&!(((G.relatorio||{}).padroes||{})[k]===S.val[k])?'prontuário':'padrão do modelo'))};});
+    var mods=[];G.receita.forEach(function(r,i){if(r.umDe){var id=S.um[i];if(id)mods.push({id:id,titulo:modu(id).titulo,versao:(modu(id).versoes[S.ver[id]||0]||{}).rotulo||'',porque:S.porque['um'+i]||''});return;}
+      if(S.on[r.mod]){var md=modu(r.mod);mods.push({id:r.mod,titulo:md.titulo,versao:(md.versoes[S.ver[r.mod]||0]||{}).rotulo||'',porque:S.porque[r.mod]||(r.opcional?'':'núcleo')});}});
+    var em=ementaLinhas();
+    return {schema:'gabcmt-conf-2886-1',geradoEm:new Date().toISOString(),processo:P.processo||'',item:P.item||'',sessao:(CTX.CQ&&CTX.CQ.ses)||'',
+      grupo:{id:S.g,nome:G.nome,porque:S.gPorque,resJulg:G.resJulg},resultadoCaso:P.resultado||(J&&J.campos&&J.campos.resJulg)||'',
+      modulos:mods,variaveis:V,mpf:{opcao:S.mpf,nota:S.mpfNota||''},ementaBase:em.cod?{modelo:'2886-'+em.cod,processo:em.proc,sessao:em.sessao}:null,
+      conferenciaMatriz:conferir(P,J).map(function(z){return {situacao:z.s,item:z.k,texto:z.t};}),
+      minuta:textoFinal(),prontuario:J||null,perfil:P};}
+  function baixar(){var o=pacote(),b=new Blob([JSON.stringify(o,null,1)],{type:'application/json'}),a=document.createElement('a');
+    a.href=URL.createObjectURL(b);a.download='conf-2886_'+(o.sessao||'sessao')+'_item'+(o.item||'')+'_'+String(o.processo).replace(/\D/g,'')+'.json';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);}
   window.M2886={
     disponivel:function(){return !!M();},
     e2886:function(P,J){return e2886(P||{},J||null);},
     render:function(P,J,els,CQ,voltar){CTX={P:P,J:J,can:els.can,mn:els.mn,or:els.or,CQ:CQ,voltar:voltar};preparar(P,J);desenhar();},
-    estado:function(){return S;},texto:textoFinal
+    estado:function(){return S;},texto:textoFinal,pacote:pacote
   };
 })();
