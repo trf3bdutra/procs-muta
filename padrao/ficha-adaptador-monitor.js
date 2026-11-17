@@ -32,6 +32,26 @@
         });
       });
     },
+    /* várias fichas num só commit: [{cnj, campos}] → lê o operacional uma vez, aplica todas e grava uma vez */
+    gravarLote: function (lista, rotulo) {
+      var P = pm(); if (!P || !P.gravar) return Promise.reject(new Error('gravação no procs-muta indisponível nesta página'));
+      return oper(true).then(function (O) {
+        var n = 0;
+        (lista || []).forEach(function (it) {
+          var r = registro(O, it.cnj);
+          if (!r) { var l = linha(it.cnj); r = { processo: (l && (l.processo || l.Processo)) || it.cnj, origem: {}, triagem: {}, producao: {}, pauta: { sessoes: [] }, controles: {} }; O.registros.push(r); }
+          if (W.CMTFicha.aplicar(r, it.campos, 'CMT-monitor').length) n++;
+        });
+        if (!n) return { alterados: 0 };
+        O.registros.sort(function (a, b) { return String(a.processo).localeCompare(String(b.processo)); });
+        O.atualizado_em = new Date().toISOString();
+        return P.gravar({ 'acervo/operacional.json': JSON.stringify(O, null, 1) + '\n' }, 'Ficha em lote (Ab Initio): ' + n + ' processo(s) · ' + (rotulo || 'edição')).then(function () {
+          OP_T = Date.now();
+          try { var w = mw(); (lista || []).forEach(function (it) { var row = linha(it.cnj), r = registro(O, it.cnj); if (row && r && w.CMTOperacional) w.CMTOperacional.paraLinha(row, r); }); var c = w.__painelCentralComponent; if (c && c.refresh) c.refresh(); } catch (e) { console.warn('[ficha] painel', e); }
+          return { alterados: n };
+        });
+      });
+    },
     avisar: function (t) { try { (W.toast || (mw() || {}).toast || console.log)(t); } catch (e) { console.log(t); } }
   };
   W.CMTFichaMonitor = AD;
