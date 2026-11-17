@@ -576,38 +576,50 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .fl-cab,.pt-barra,.esc-resumo{padding-left:12px!important;padding-right:12px!important}
 }
 
-/* cabeçalho em duas linhas: marca e módulos | estado; abaixo, as abas sublinhadas em faixa própria */
-#top{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:54px auto;align-items:center;gap:0 12px;padding:0 24px!important;min-height:0!important;border-bottom:1px solid var(--b)!important;box-shadow:0 2px 8px rgba(32,59,57,.05)}
-#top #marca{grid-column:1;grid-row:1;border-right:0;margin:0;padding:0;height:auto;gap:12px}
-#top #marca>span{display:inline;font:700 15px Figtree,sans-serif;letter-spacing:-.01em;color:var(--v)}
-#top #modulos{background:rgba(23,63,61,.06);border-radius:9px;padding:3px;gap:2px;margin:0}
-#top #modulos button{font-size:13.5px;font-weight:600;letter-spacing:0;padding:5px 14px;border-radius:7px;color:var(--m2)}
-#top #modulos button.on{background:var(--w);color:var(--v);box-shadow:0 1px 3px rgba(32,59,57,.14)}
+/* cabeçalho no padrão do Ex Officio: filetes verdes, estrela, sobretítulo, marca com ponto em itálico, módulos como no "/ Compendium", abas numeradas */
+#top{display:flex!important;align-items:stretch;gap:0;min-height:0!important;height:64px;padding:4px 22px 0!important;background:var(--p);border-bottom:1px solid var(--b)!important;box-shadow:none}
+#top::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#1f5c52 0 50%,#86b8a8 50% 100%)}
+#top #marca{align-self:center;display:flex;align-items:center;gap:12px;border-right:0;padding:0 20px 0 0;margin:0;height:auto}
+#top #marca i.star{display:block;flex:none;width:24px;height:27px;background:#a57829;-webkit-mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat;mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat}
+#top .mc-bc{display:flex;flex-direction:column;min-width:0}
+#top .mc-ey{font:400 9.5px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--m);line-height:1.4}
+#top .mc-cad{display:flex;align-items:baseline;gap:9px;white-space:nowrap}
+#top .mc-cad>b{font-size:22px;line-height:1.15;letter-spacing:-.04em;font-weight:650;color:var(--v)}
+#top .mc-cad>b em{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;color:#a57829}
+#top .mc-sl{font:400 15px "JetBrains Mono",ui-monospace,monospace;color:var(--b2)}
+#top #modulos{display:flex;gap:12px;background:none;padding:0;margin:0}
+#top #modulos button{font:550 22px/1.15 Figtree,sans-serif;letter-spacing:-.04em;color:var(--cz);padding:0;border-radius:0;background:none;box-shadow:none}
+#top #modulos button:hover{color:var(--v2)}
+#top #modulos button.on{color:var(--v);background:none;box-shadow:none}
 #top #modulos button.on::after{content:none}
-#top #estado{grid-column:3;grid-row:1;gap:6px;padding:0}
-#top #st-acervo{font:500 11px "JetBrains Mono",ui-monospace,monospace!important;letter-spacing:.02em;text-transform:none;color:var(--m)!important;padding:0 4px}
-#top #estado .btn.ib{width:32px;height:32px;border-radius:8px}
-#top #st-grava{height:32px;padding:0 10px;border:1px solid var(--l);border-radius:16px;background:var(--w)}
-#top #abas{order:0;grid-column:1/-1;grid-row:2;align-self:stretch;align-items:stretch;gap:2px;margin:0 -24px;padding:0 18px;background:var(--bg);border-top:1px solid var(--l);overflow-x:auto;flex:none}
-#top .tb{height:40px;border:0;border-bottom:2px solid transparent;background:transparent;padding:0 12px;color:var(--m);font-weight:600;box-shadow:none;top:0}
-#top .tb:hover{color:var(--v)}
+#top #abas{order:0;flex:0 1 auto;align-self:stretch;display:flex;align-items:stretch;gap:0;margin:0;padding:0;background:none;border:0;border-left:1px solid var(--l);overflow-x:auto;counter-reset:tb}
 #top #abas[hidden]{display:none!important}
-#top .tb.on{background:transparent;color:var(--v);border-bottom-color:var(--v);box-shadow:none;top:0;height:40px}
-#top .tb small{font-size:10.5px;padding:1px 6px;border-radius:8px;background:rgba(23,63,61,.07);color:var(--m2)}
-#top .tb.on small{background:var(--v);color:#fff}
+#top .tb{height:auto;display:flex;align-items:center;gap:9px;border:0;border-right:1px solid var(--l);border-radius:0;padding:0 16px;background:transparent;font:600 13px Figtree,sans-serif;color:var(--m2);box-shadow:none;top:0}
+#top .tb::before{counter-increment:tb;content:counter(tb,decimal-leading-zero);font:400 10.5px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.06em;color:var(--cz)}
+#top .tb:hover{color:var(--v)}
+#top .tb.on{background:var(--w);color:var(--v);font-weight:700;box-shadow:inset 0 3px 0 #a57829;top:0;height:auto}
+#top .tb.on::before{color:#a57829}
+#top .tb small{font:400 11px "JetBrains Mono",ui-monospace,monospace;color:var(--m);background:none;padding:0}
 #top .tb .x{margin-left:2px;color:var(--m);font-weight:400}
-@media (max-width:600px){
-#top{grid-template-rows:50px auto;padding:0 12px!important;gap:0 8px}
-#top #marca>span,#top #st-acervo{display:none}
-#top #modulos button{padding:5px 10px}
-#top #abas{margin:0 -12px;padding:0 4px}
-#top #st-grava span{display:none}#top #st-grava{padding:0 9px}
+#top #estado{margin-left:auto;align-self:center;display:flex;align-items:center;gap:2px;padding:0 0 0 12px}
+#top #st-acervo{font:400 10.5px "JetBrains Mono",ui-monospace,monospace!important;letter-spacing:.1em;text-transform:uppercase;color:var(--m)!important;padding:0 8px}
+#top #estado .btn.ib{width:36px;height:36px;border:0;background:none;box-shadow:none;color:var(--m2);border-radius:0}
+#top #estado .btn.ib:hover{color:var(--v)}
+#top #st-grava{height:36px;padding:0 0 0 14px;margin-left:8px;border:0;border-left:1px solid var(--l);border-radius:0;background:none;font:400 10.5px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase}
+@media (max-width:760px){
+#top{height:auto;flex-wrap:wrap;padding:4px 12px 0!important}
+#top #marca{padding:8px 0;gap:10px}
+#top .mc-ey,#top #st-acervo,#top #st-grava span{display:none}
+#top .mc-cad>b,#top #modulos button{font-size:19px}
+#top #marca i.star{width:20px;height:23px}
+#top #abas{order:3;flex:1 1 100%;margin:0 -12px;border-left:0;border-top:1px solid var(--l);height:42px}
+#top #st-grava{padding:0 0 0 10px}
 }
 </style>
 </head>
 <body>
 <header id="top">
-  <div id="marca"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 7.8L22 12l-7.8 2.2L12 22l-2.2-7.8L2 12l7.8-2.2z" fill="#a57829"/></svg><span>Ab Initio</span><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button></nav></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT</span><div class="mc-cad"><b>Ab Initio<em>.</em></b><span class="mc-sl" aria-hidden="true">/</span><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button></nav></div></div></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
