@@ -76,15 +76,25 @@ async function acessos(usuario) {
 }
 /* arquivos grandes (mais de 1 MB) vêm pelo blob. O texto fica guardado nesta instância do servidor e só é baixado
    de novo quando o arquivo muda no GitHub (a conferência do sha é uma consulta leve). */
-const GRANDE = new Map();
+const GRANDE = new Map(), VOO = new Map();
 async function lerGrande(rel) {
-  const o = await gh('/contents/' + rel + '?ref=' + RAMO), c = GRANDE.get(rel);
-  if (c && c.sha === o.sha) return { txt: c.txt, sha: o.sha };
-  let b64 = o.content && o.encoding === 'base64' ? o.content : '';
-  if (!b64) b64 = (await gh('/git/blobs/' + o.sha)).content;
-  const txt = Buffer.from(b64, 'base64').toString('utf8');
-  GRANDE.set(rel, { sha: o.sha, txt });
-  return { txt, sha: o.sha };
+  /* leituras simultâneas do mesmo arquivo (pauta, monocráticas, metas na mesma instância) compartilham uma só ida ao GitHub */
+  if (VOO.has(rel)) return VOO.get(rel);
+  const p = (async () => {
+    const o = await gh('/contents/' + rel + '?ref=' + RAMO), c = GRANDE.get(rel);
+    if (c && c.sha === o.sha) return { txt: c.txt, sha: o.sha };
+    let txt;
+    if (o.content && o.encoding === 'base64') txt = Buffer.from(o.content, 'base64').toString('utf8');
+    else {
+      /* arquivo grande: texto cru (sem base64), mais leve que o blob */
+      const t = process.env.GH_TOKEN, r = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + rel + '?ref=' + RAMO, { headers: { Accept: 'application/vnd.github.raw+json', Authorization: 'Bearer ' + t, 'X-GitHub-Api-Version': '2022-11-28' } });
+      if (r.ok) txt = await r.text(); else txt = Buffer.from((await gh('/git/blobs/' + o.sha)).content, 'base64').toString('utf8');
+    }
+    GRANDE.set(rel, { sha: o.sha, txt });
+    return { txt, sha: o.sha };
+  })();
+  VOO.set(rel, p); p.finally(() => VOO.delete(rel)).catch(() => {});
+  return p;
 }
 /* um commit com vários arquivos (Git Data API) */
 /* commit de vários arquivos; se um arquivo traz "sha" (o lido antes), confere que ainda é o mesmo no commit de base: se mudou, erro 409 para nova tentativa.

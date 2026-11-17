@@ -48,13 +48,20 @@ module.exports = async (req, res) => {
   const rel = 'acervo/sessoes/' + data + '.json';
   try {
     /* só as pautas que o Monitor publicou para a equipe */
+    /* leitura: calendário, pauta e acervo (marca de sigilo) em paralelo */
+    if (req.method === 'GET') {
+      const [calR, docR, A] = await Promise.all([L.lerJson('acervo/sessoes/calendario.json'), L.lerJson(rel).catch(e => ({ erro: e })), require('./_mono').acervo().catch(() => null)]);
+      const cal = calR.dados;
+      if (!(cal.sessoes || []).some(s => s.date === data && s.publicada)) return res.status(403).json({ erro: 'Esta pauta ainda não foi publicada para a equipe.' });
+      if (docR.erro) throw docR.erro;
+      const dados = docR.dados;
+      /* importado o PDF, a pauta é fixa: a pré-pauta deixa de existir para a equipe */
+      if ((dados.itens || []).length) dados.previa = [];
+      /* sigilo vem do acervo (fonte.json): só na resposta, o arquivo da sessão não muda */
+      if (A) ['itens', 'previa'].forEach(k => (dados[k] || []).forEach(i => { const b = A.base[dg(i.cnj)]; if (b && b.sigilo) i.sigilo = b.sigilo; }));
+      return res.status(200).json(dados); }
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
     if (!(cal.sessoes || []).some(s => s.date === data && s.publicada)) return res.status(403).json({ erro: 'Esta pauta ainda não foi publicada para a equipe.' });
-    /* importado o PDF, a pauta é fixa: a pré-pauta deixa de existir para a equipe */
-    if (req.method === 'GET') { const { dados } = await L.lerJson(rel); if ((dados.itens || []).length) dados.previa = [];
-      /* sigilo vem do acervo (fonte.json): só na resposta, o arquivo da sessão não muda */
-      try { const A = await require('./_mono').acervo(); ['itens', 'previa'].forEach(k => (dados[k] || []).forEach(i => { const b = A.base[dg(i.cnj)]; if (b && b.sigilo) i.sigilo = b.sigilo; })); } catch (e) { /* sem acervo, sem marca de sigilo */ }
-      return res.status(200).json(dados); }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const r = await gravarItem(data, req.body || {}, u, L.gestor(u));
     res.status(r.status).json(r.body);
