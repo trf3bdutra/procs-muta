@@ -1676,6 +1676,33 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
 #trm-urq .uz-r .reg{font-size:0!important;gap:0!important;background:var(--ur,#bd4c38)!important;border:0!important;color:#fff!important}
 #trm-urq .uz-r .reg svg{width:16px;height:16px}
 }
+/* fila de urgências · cabeçalho com ícone, contadores por prazo (vencidas, hoje, 48 h, sem responsável) */
+#trm-urq .ufz2{--ur:#bd4c38;--uo:#a57829;background:var(--ew,#fff);border:1px solid var(--el,#d8d3c6);box-shadow:0 1px 2px rgba(32,59,57,.05);padding:12px;display:flex;flex-direction:column;gap:10px;color:var(--ei)}
+html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
+#trm-urq .ufz-h{display:flex;align-items:center;gap:10px;min-width:0}
+#trm-urq .ufz-ic{flex:none;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;background:var(--ur);color:#fff;border-radius:8px}
+#trm-urq .ufz-ic svg{width:17px;height:17px}
+#trm-urq .ufz-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2}
+#trm-urq .ufz-t b{font:700 15px var(--font);color:var(--ei);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#trm-urq .ufz-t small{font-size:11.5px;color:var(--em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#trm-urq .ufz-nova{flex:none;height:32px;padding:0 12px;border:0;border-radius:7px;background:var(--ur);color:#fff;font:700 12.5px var(--font);cursor:pointer}
+#trm-urq .ufz-x{flex:none;width:32px;height:32px;border:1px solid var(--el2,#c8c3b6);border-radius:7px;background:var(--ew,#fff);color:var(--em);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+#trm-urq .ufz-ks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+#trm-urq .ufz-k{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:7px 9px;border:1px solid var(--el,#e3ded2);border-radius:7px;background:var(--ep,#fbfaf5);cursor:pointer;text-align:left;font:inherit;color:var(--ei);min-width:0}
+#trm-urq .ufz-k b{font:600 19px var(--emono,ui-monospace);line-height:1;color:var(--ei)}
+#trm-urq .ufz-k span{font-size:11px;line-height:1.2;color:var(--em)}
+#trm-urq .ufz-k.r b{color:var(--ur)}#trm-urq .ufz-k.o b{color:var(--uo)}#trm-urq .ufz-k.r{border-color:#e0b8ae}
+#trm-urq .ufz-k:hover{border-color:var(--el2,#c8c3b6);background:var(--ew,#fff)}
+#trm-urq .ufz-fl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--el,#e3ded2);padding-top:10px;font-size:12.5px}
+#trm-urq .ufz-fl b.n{font:400 14px var(--emono);color:var(--ur)}
+#trm-urq .ufz-fl .uz-f{display:inline-flex;flex-wrap:wrap}#trm-urq .ufz-fl .uz-f button{min-height:28px;padding:0 10px;border:1px solid var(--el2,#c8c3b6);margin-left:-1px;background:var(--ew);color:var(--ei);font:700 11.5px var(--font);cursor:pointer;white-space:nowrap}
+#trm-urq .ufz-fl .uz-f button[aria-pressed=true]{background:var(--ur);border-color:var(--ur);color:#fff}
+#trm-urq .ufz-fl input[type=search]{flex:1 1 160px;min-width:0;height:28px;border:1px solid var(--el2,#c8c3b6);background:var(--ew);padding:0 10px;font:400 11.5px var(--font);color:var(--ei)}
+#v-pauta.urq-lat #trm-urq .ufz-ks{grid-template-columns:repeat(2,minmax(0,1fr))}
+#v-pauta.urq-lat #trm-urq .ufz2{width:100%;box-sizing:border-box}
+#v-pauta.urq-lat #trm-urq .ufz-t b,#v-pauta.urq-lat #trm-urq .ufz-t small{white-space:normal}
+@media (max-width:600px){#trm-urq .ufz2{border-left:0;border-right:0;padding:12px 16px}
+.uzb .ux-b{flex-wrap:wrap!important}.uzb .ux-b label,.uzb .ux-b .ro{flex:1 1 calc(50% - 10px)!important;min-width:0}.uzb .ux-b label.d,.uzb .ux-b .ro.d{flex:1 1 calc(50% - 10px)!important}}
 /* Monocráticas: título no padrão da Pauta (sobre o fundo, sem caixa) e números num painel logo abaixo */
 #v-pauta.mono #trm,html[data-theme=dark] #v-pauta.mono #trm{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
 #v-pauta.mono #trm>.trb-in{padding-left:0!important;padding-right:0!important;padding-top:0!important}
@@ -2662,16 +2689,20 @@ function filaUrgEd(el){
   var mx=P0.length?diasDesde(urgIni(P0[0])):null,ab=!!S.urgTab;
   var cor=function(it){var n=(it.ctl||{}).urgNivel||'',d=diasDesde(urgIni(it));return /Urgent[íi]ssima/.test(n)||d>5?'r':'o';};
   var chip=function(it){var c=it.ctl||{},d=diasDesde(urgIni(it));return '<button class="uz-p '+cor(it)+'" '+(it.mono?'data-ver-mono':'data-uq-ab')+'="'+dg(it.cnj)+'" title="'+esc(it.cnj+' · '+c.urgTipo+(it.mono?' · ver a decisão na lista':' · sem monocrática: abrir a fila'))+'"><span>'+(d==null?'—':d+' d')+'</span><i>'+esc(String(it.cnj).slice(0,15))+'…</i><b>'+esc(c.urgTipo)+'</b></button>';};
-  el.innerHTML='<section class="uz" aria-label="Fila de urgências'+(ab?'':' (minimizada)')+'"><span class="uz-l">'+sv('<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>')+'Fila de urgências</span>'+
-    '<div class="uz-m">'+(function(){var res=A.length+' apreciada'+(A.length===1?'':'s')+' · '+L.filter(function(i){return i.mono;}).length+' com monocrática · '+SG.length+' sugest'+(SG.length===1?'ão':'ões')+' do PJe';
-      if(!ab)return '<span><b class="n">'+P0.length+'</b> aguardando'+(P0.length?' · a mais antiga há <b class="n">'+(mx==null?'—':mx)+'</b> dia'+(mx===1?'':'s'):'')+'</span>'+P0.slice(0,4).map(chip).join('')+'<small>'+res+'</small>';
-      var q=nq(S.uq||''),Lq=L.filter(function(i){return !q||nq([i.cnj,i.partes,i.assunto,i.servidor,(i.ctl||{}).urgTipo].join(' ')).indexOf(q)>=0;}),nE={ass:0,prov:0,apr:0,todos:Lq.length},uf=S.uf||'todos';
+  var PZ=function(it){var n=(it.ctl||{}).urgNivel||'';return /Urgent[íi]ssima/.test(n)?0:/^Urgente/.test(n)?1:/^Priorit/.test(n)?2:5;};
+  var rest=function(it){var d=diasDesde(urgIni(it));return d==null?null:PZ(it)-d;};
+  var kV=0,kH=0,k48=0,kS=0;P0.forEach(function(it){var r=rest(it);if(r!=null){if(r<0)kV++;else if(r===0)kH++;else if(r<=2)k48++;}if(!it.servidor)kS++;});
+  var tile=function(n,t,c,tt){return '<button type="button" class="ufz-k'+(n?' '+c:'')+'" data-uq="tab" title="'+tt+'"><b>'+n+'</b><span>'+t+'</span></button>';};
+  el.innerHTML='<section class="ufz2'+(ab?' ab':'')+'" aria-label="Fila de urgências'+(ab?'':' (minimizada)')+'">'+
+    '<div class="ufz-h"><span class="ufz-ic" aria-hidden="true">'+sv('<path d="M13 3L5 14h6l-1 7 8-11h-6l1-7z"/>')+'</span><div class="ufz-t"><b>Fila de urgências</b><small>'+P0.length+' aberta'+(P0.length===1?'':'s')+' · pedidos e tutelas</small></div>'+
+    '<button type="button" class="ufz-nova" data-uq="reg" title="Registrar urgência">+ Nova</button>'+
+    '<button type="button" class="ufz-x" data-uq="tab" aria-expanded="'+ab+'" aria-label="'+(ab?'Minimizar a fila de urgências':'Abrir a fila de urgências')+'" title="'+(ab?'Minimizar a fila de urgências':'Abrir a fila de urgências')+'">'+sv(ab?'<path d="M6 15l6-6 6 6"/>':'<path d="M15 6l-6 6 6 6"/>')+'</button></div>'+
+    '<div class="ufz-ks">'+tile(kV,'vencidas','r','Prazo do nível já passou')+tile(kH,'vencem hoje','o','Prazo do nível termina hoje')+tile(k48,'em 48 h','a','Prazo termina em até dois dias')+tile(kS,'sem resp.','s','Urgências abertas sem responsável')+'</div>'+
+    (ab?'<div class="ufz-fl">'+(function(){var res='';var q=nq(S.uq||''),Lq=L.filter(function(i){return !q||nq([i.cnj,i.partes,i.assunto,i.servidor,(i.ctl||{}).urgTipo].join(' ')).indexOf(q)>=0;}),nE={ass:0,prov:0,apr:0,todos:Lq.length},uf=S.uf||'todos';
       Lq.forEach(function(i){var e=urgEst(i);if(e==='ass')nE.ass++;else if(e==='apr')nE.apr++;else nE.prov++;});
       var pill=function(v,t){return '<button data-uf="'+v+'" aria-pressed="'+(uf===v)+'">'+t+' <small>'+nE[v]+'</small></button>';};
       return '<span title="'+esc(res)+'"><b class="n">'+P0.length+'</b> aguardando'+(P0.length?' · <b class="n">'+(mx==null?'—':mx)+'</b> d':'')+'</span><span class="uz-f" role="group" aria-label="Filtrar a fila por situação">'+pill('ass','Aguardando assinatura')+pill('prov','Aguardando providências')+pill('apr','Concluídos')+pill('todos','Todos')+'</span>'+
-        '<input type="search" id="urg-q" placeholder="Filtrar por processo, partes, assunto…" aria-label="Filtrar urgências" value="'+esc(S.uq||'')+'">';})()+'</div>'+
-    '<span class="uz-r"><button class="x" data-uq="tab" aria-expanded="'+ab+'" aria-label="'+(ab?'Minimizar a fila de urgências':'Expandir a fila de urgências')+'" title="'+(ab?'Minimizar a fila de urgências':'Expandir a fila de urgências')+'">'+sv(ab?'<path d="M6 15l6-6 6 6"/>':'<path d="M6 9l6 6 6-6"/>')+'</button>'+
-    (ab?'':'<button class="reg" data-uq="reg" aria-label="Registrar urgência" title="Registrar urgência">'+sv('<path d="M12 5v14M5 12h14"/>')+'Registrar</button>')+'</span></section>';}
+        '<input type="search" id="urg-q" placeholder="Filtrar por processo, partes, assunto…" aria-label="Filtrar urgências" value="'+esc(S.uq||'')+'">';})()+'</div>':'')+'</section>';}
 /* corpo do painel aberto: filtros por estado, busca, nova urgência, uma linha por urgência com os campos, sugestões do PJe */
 function painelUrgEd(el){
   var L=(S.doc&&S.doc.urgs)||[],q=nq(S.uq||''),sv=UZ_SV,uf=S.uf||'todos';
