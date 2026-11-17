@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-17T03:07:48.601Z",
+ "atualizadoEm": "2026-11-17T03:07:54.579Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -766,7 +766,90 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "mpf": "Sem hipótese",
+    "parecer": "Intimado sem manifestação",
+    "prelim": "Sem preliminares",
+    "tempest": "Tempestivo",
+    "preparo": "Justiça gratuita",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Cumprimento individual de sentença coletiva · ACP 0005019-15.1997.4.03.6000 · reajuste de 28,86% (Leis 8.622/1993 e 8.627/1993) · limitação territorial e legitimidade ativa",
+     "especificidades": "F1 apelação do exequente (ID 396555414) · F2 servidor inativo (ID 396555395) · F3 União Federal (ID 396555395) · F5 sentença de extinção por limitação territorial e ilegitimidade ativa (ID 396555413) · F10 honorários advocatícios pedidos pela União em contrarrazões (ID 396555416) · Modelo: 2886-1b",
+     "questoes": "Cabimento do sobrestamento (Tema 1.433/STJ); alcance territorial da coisa julgada da ACP 0005019-15.1997.4.03.6000 (artigo 16 da Lei 7.347/1985; Tema 1.075/STF); legitimidade ativa da parte exequente para o cumprimento individual; honorários advocatícios pleiteados em contrarrazões.",
+     "sintese": "Djalma Guimarães ajuizou cumprimento individual da sentença coletiva proferida na ACP 0005019-15.1997.4.03.6000 em face da União (ID 396555395). O juízo a quo acolheu a preliminar e extinguiu o feito sem resolução de mérito por ilegitimidade ativa decorrente de limitação territorial (ID 396555413). O exequente apelou pugnando pelo afastamento da limitação territorial e pela aplicação do Tema 1.075/STF (ID 396555414). A União apresentou contrarrazões requerendo o desprovimento e a fixação de honorários sucumbenciais (ID 396555416).",
+     "obsGeral": "Lote 28,86% · modelo 2886-1b · grupo 1",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "396555413",
+      "data": "2026-08-12",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "julgador": "Juízo Federal da 1ª Vara Federal de Campo Grande",
+      "acc": {
+       "custas": true,
+       "honor": true,
+       "tutela": false,
+       "valor": true
+      }
+     },
+     "adm": {
+      "intim": "2026-08-18",
+      "prot": "2026-08-31",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "req": "Cabimento"
+     },
+     "jul": {
+      "remessa": false,
+      "fund": "Tema 1.075/STF (RE 1.101.937); inconstitucionalidade do artigo 16 da Lei 7.347/1985; eficácia erga omnes e abrangência nacional do título coletivo da ACP 0005019-15.1997.4.03.6000; Tema 499/STF inaplicável; sobrestamento pelos Temas 1.302 e 1.433/STJ afastado; retorno dos autos à origem; pedido de honorários em contrarrazões prejudicado.",
+      "coment": "Aplicação do modelo 2886-1b do gabinete, com reforma da sentença extintiva e remessa dos autos à origem para regular prosseguimento do cumprimento individual."
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Apelação",
+       "contra": "Apresentada",
+       "id": "396555414"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial do cumprimento individual",
+       "id": "396555395",
+       "data": "2026-02-23"
+      },
+      {
+       "desc": "Manifestação sobre ilegitimidade",
+       "id": "396555412",
+       "data": "2026-06-26"
+      },
+      {
+       "desc": "Sentença extintiva",
+       "id": "396555413",
+       "data": "2026-08-12"
+      },
+      {
+       "desc": "Apelação do exequente",
+       "id": "396555414",
+       "data": "2026-08-31"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "396555416",
+       "data": "2026-09-07"
+      }
+     ]
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-17T03:07:54.579Z"
+   }
   },
   {
    "cnj": "5001686-90.2022.4.03.6000",
