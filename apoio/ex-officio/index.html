@@ -1639,6 +1639,24 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
 #v-pauta .pt-tabs,#v-pauta .stb,#ed-tl{overflow-x:auto!important;scrollbar-width:none;max-width:100%;flex-wrap:nowrap}
 #trm-urq .uz *{white-space:normal!important}#trm-urq .uz-m{flex-direction:column;align-items:flex-start}
 #prq .prt{max-width:100%}
+/* barra do topo no celular: marca, Compendium e ícones numa linha; as três páginas em abas de largura igual logo abaixo */
+#app header.nx{height:auto!important;min-height:0!important}
+#app header.nx .nx1{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;gap:0 6px;padding:6px 12px 0!important;min-height:0!important;height:auto!important;max-height:none!important}
+#app header.nx .nx1>.br,#app header.nx .nx1>.nx-brand{grid-column:1}
+#app header.nx .nx1>.sp{display:none}
+#app header.nx .nx-ut{grid-column:3;grid-row:1;display:flex;gap:2px;justify-content:flex-end}
+#app header.nx .nx-ut .hb{min-width:34px;height:34px;padding:0!important;justify-content:center;border:0!important;background:transparent!important}
+#app header.nx .nx-ut .hb>span:not(.bdg){display:none!important}
+#app header.nx nav.tabs{grid-column:1/-1;grid-row:2;height:auto!important;min-height:40px;overflow:visible!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));margin:6px -12px 0!important;padding:0!important;border-top:1px solid var(--el)!important;border-left:0!important}
+#app header.nx nav.tabs a{justify-content:center;align-items:center!important;height:40px!important;box-sizing:border-box;line-height:1.2!important;text-align:center;padding:0 4px!important;font-size:13px!important;border-bottom:2px solid transparent;margin:0!important;border-left:1px solid var(--el)}
+#app header.nx nav.tabs a:first-child{border-left:0}
+#app header.nx nav.tabs a[aria-current],#app header.nx nav.tabs a.on{background:var(--ew,#fff);border-bottom-color:var(--eg,#235a55);color:var(--eg,#235a55)}
+#app header.nx nav.tabs #salvo{display:none}
+#app header.nx .nx-nav{display:none!important}
+/* painéis de ponta a ponta, sem margem lateral */
+#v-pauta{padding-left:0!important;padding-right:0!important}
+#v-pauta .trb,#v-pauta .trb-in,#v-pauta .pt-lista,#v-pauta #lst,#v-pauta .stb,#v-pauta .pt-tabs,#v-pauta #trm-urq,#v-pauta .trm-c,#v-pauta .trb-mk,#v-pauta .trb-p,#v-pauta .pt-k,#prq .prt{border-left:0!important;border-right:0!important;border-radius:0!important;margin-left:0!important;margin-right:0!important;max-width:none!important}
+#v-pauta .trb-h,#v-pauta .pt-h{padding-left:16px!important;padding-right:16px!important}
 }
 /* Monocráticas: título no padrão da Pauta (sobre o fundo, sem caixa) e números num painel logo abaixo */
 #v-pauta.mono #trm,html[data-theme=dark] #v-pauta.mono #trm{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
