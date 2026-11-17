@@ -196,9 +196,8 @@ def montar(var):
     ARR = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
     a = '  <div class="right">\n'
     SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
-    t = troca(t, a, a + '    <a class="hb hbx nx-tx" id="eq-not" href="/equipe/#notificacoes" title="Notificações" aria-label="Notificações">' + SV('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>') + '<span>Notificações</span><i class="bdg" id="eq-cnot" hidden></i></a>'
-              '<a class="hb hbx nx-tx" id="eq-pen" href="/equipe/#pendencias" title="Diligências" aria-label="Diligências">' + SV('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/>') + '<span>Diligências</span><i class="bdg" id="eq-cpen" hidden></i></a>\n'
-              '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>Monitor ' + ARR + '</a>'
+    # sem Notificações e Diligências na barra do Compendium (ficam no Ex Officio)
+    t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>Monitor ' + ARR + '</a>'
               + ('' if var == 'editor' else '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden>Editor ' + ARR + '</a>') +
               '<button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>\n')
     # barra unificada com o Ex Officio: cadernos no título e as seções na faixa de baixo
