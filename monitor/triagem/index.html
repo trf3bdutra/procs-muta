@@ -497,6 +497,9 @@ html[data-theme="dark"] .cwe-pc .cwe-chp{background:#1c2a2e}html[data-theme="dar
 html[data-theme="dark"] *{scrollbar-color:rgba(222,226,229,.24) transparent}
 html[data-theme="dark"] ::-webkit-scrollbar-thumb{background-color:rgba(222,226,229,.24)}
 html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background-color:rgba(222,226,229,.45)}
+
+/* Escaninho: lista em primeiro plano; resumo e bilhete recolhidos inicialmente */
+.esc-resumo{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border:1px solid var(--b);background:var(--w);border-radius:8px;margin:10px 0 12px}.esc-resumo b{color:var(--v)}.esc-detalhes{display:none}.esc-detalhes.on{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:16px;align-items:start;margin-bottom:12px}@media(max-width:860px){.esc-detalhes.on{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1076,11 +1079,9 @@ async function exportar(k, L, titulo, bilhete) {
 let ESCL = [];
 function vEscaninho(id) {
   const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return '<div class="wrap vazio">Escaninho não encontrado.</div>';
-  const base = BASE(), fora = e.processos.length - base.length;
-  const sec = contar(base, (o) => o.secao), pr = base.filter((o) => o.prior).length;
-  let h = '<div class="es-cab"><div><p class="k">Escaninho · criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)) || '—') + '</p><h1>' + esc(e.titulo) + '<i>.</i></h1>' + (e.subtitulo ? '<p style="margin:4px 0 0;font-size:14.5px;color:var(--m2)">' + esc(e.subtitulo) + '</p>' : '') +
-    '<p style="margin:10px 0 0;display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(base.length) + '</b> processos</span>' + sec.map((x) => '<span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(x[1]) + '</b> ' + esc(x[0]) + '</span>').join('') + '<span><b class="mono" style="font-weight:500;color:var(--r)">' + nf(pr) + '</b> com prioridade</span>' + (fora > 0 ? '<span title="processos do escaninho que já foram julgados ou saíram do acervo">' + nf(fora) + ' fora dos em triagem</span>' : '') + '</p></div>' +
-    '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete</p><button type="button" class="lk" data-esc-lista="' + esc(e.id) + '">+ Incluir por número</button> · <button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem bilhete. Use “Editar escaninho” para deixar a orientação de quem triou.</p>') + '</div></div>';
+  const base = BASE(), fora = e.processos.length - base.length, sec = contar(base, (o) => o.secao), pr = base.filter((o) => o.prior).length;
+  const bil = '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete e orientação</p><span><button type="button" class="lk" data-esc-lista="' + esc(e.id) + '">+ Incluir por número</button> · <button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button></span></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem orientação registrada.</p>') + '</div>';
+  const h = '<div class="wrap"><div class="esc-resumo" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><div style="flex:1;min-width:180px"><p class="k" style="margin:0">Escaninho · ' + esc(br(String(e.criadoEm || '').slice(0,10)) || '—') + '</p><b style="font-size:19px">' + esc(e.titulo) + '</b><span style="display:block;font-size:12px;color:var(--m)">' + esc(e.subtitulo || '') + '</span></div><b class="mono">' + nf(base.length) + ' processos</b><span style="font-size:12px;color:var(--m)">' + nf(pr) + ' prioritários · ' + nf(fora) + ' fora da triagem</span><button type="button" class="btn sm" data-esc-detalhes aria-expanded="false">Detalhes do escaninho ▾</button></div><div class="esc-detalhes" id="esc-detalhes"><div class="bil"><p class="k">Distribuição por seção</p>' + sec.map((x) => '<p style="margin:4px 0;font-size:12.5px">' + esc(x[0]) + ' <b class="mono">' + nf(x[1]) + '</b></p>').join('') + '</div>' + bil + '</div></div>';
   return vFila(h, ' style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"'); }
 function vEscaninhos() {
   let h = '<div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:18px 0 14px;flex-wrap:wrap"><div><p class="k" style="margin:0">Triagem · escaninhos</p><h1 style="margin:4px 0 0;font-size:32px;font-weight:800;letter-spacing:-.04em;color:var(--v)">Escaninhos<span style="color:var(--g2)">.</span></h1><p style="margin:4px 0 0;font-size:14px;color:var(--m2)">Pastas para examinar um grupo depois. Clicar num escaninho abre o conteúdo numa aba própria. Ficam gravados no procs-muta, para toda a equipe.</p></div><button type="button" class="btn pri" data-esc-novo>+ Novo escaninho</button></div><div class="cards">';
@@ -1305,7 +1306,8 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-grpso]'))) { const onde = b.dataset.onde, st = onde === 'fila' ? F : FE, L = onde === 'fila' ? FILA : ESCL, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
     if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
   if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : ESCL; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; }
-  if ((b = q('[data-esc-abre]')) && !q('[data-esc-edit]') && !q('[data-esc-del]')) { ir('esc=' + b.dataset.escAbre); return; }
+  if ((b = q('[data-esc-detalhes]'))) { const d=document.getElementById('esc-detalhes'); if(d){d.classList.toggle('on');b.setAttribute('aria-expanded',d.classList.contains('on'));b.textContent=d.classList.contains('on')?'Ocultar detalhes ▴':'Detalhes do escaninho ▾';} return; }
+   if ((b = q('[data-esc-abre]')) && !q('[data-esc-edit]') && !q('[data-esc-del]')) { ir('esc=' + b.dataset.escAbre); return; }
   if ((b = q('[data-esc-lista]'))) { editarEscaninho(b.dataset.escLista, 'lista'); return; }
   if ((b = q('[data-esc-edit]'))) { editarEscaninho(b.dataset.escEdit); return; }
   if ((b = q('[data-esc-del]'))) { excluirEscaninho(b.dataset.escDel); return; }
