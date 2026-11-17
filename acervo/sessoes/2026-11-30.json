@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-17T02:35:31.453Z",
+ "atualizadoEm": "2026-11-17T02:44:20.702Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -310,12 +310,12 @@
     "honor": "Majorados",
     "cartao": {
      "tipoJ": "Apelação",
-     "relacionado": "Tema 1.433/STJ (afetado em 14/05/2026, segundo os memoriais da União); REsp 2.234.888/MS (proposta de afetação, conforme a sentença); Tema 1.075/STF; Tema 733/STF",
-     "subassuntos": "Cumprimento individual de sentença coletiva (ACP 0005019-15.1997.4.03.6000); legitimidade ativa; limites subjetivos e territoriais do título; sucessores de servidor falecido; honorários sucumbenciais por equidade",
-     "especificidades": "Exequentes domiciliados em Manaus/AM; servidor instituidor lotado na Superintendência Regional do Trabalho e Emprego-AM (fichas financeiras SIAPE); sentença extinguiu o cumprimento por ilegitimidade ativa (limitação territorial ao MS); controvérsia sobre eficácia do Tema 1.075/STF em título transitado em julgado em 02/08/2019; pedido subsidiário de sobrestamento até o Tema 1.433/STJ; pedido de redução de honorários (10% sobre R$ 1.030.223,58, equivalente a R$ 103.022,35)",
-     "questoes": "1) O título da ACP 0005019-15.1997.4.03.6000 alcança servidor lotado fora do Mato Grosso do Sul? 2) O Tema 1.075/STF e a ausência de modulação afastam a limitação territorial, ou a coisa julgada (Tema 733/STF) a preserva? 3) Cabe sobrestar o feito até o Tema 1.433/STJ? 4) Honorários de 10% sobre o valor da causa devem ser reduzidos por equidade?",
-     "sintese": "Herdeiros do servidor aposentado José Murilo Levy Bomfim (Dirce Araujo dos Santos, Plácido, Regina e Ricardo) promoveram cumprimento individual do título da ACP nº 0005019-15.1997.4.03.6000 (28,86%), com crédito de R$ 1.030.223,58 atualizado até julho de 2024. A União impugnou, arguindo ilegitimidade ativa por ausência de vínculo com o MS. O juízo de origem acolheu a preliminar e extinguiu o cumprimento sem resolução do mérito (art. 485, VI, CPC), com condenação em custas e honorários de 10% sobre o valor atualizado da causa. Os exequentes apelaram sustentando eficácia ex tunc do Tema 1.075/STF, ausência de limitação territorial no título e excesso nos honorários. A União contra-arrazoou e, em memoriais, requereu o desprovimento ou, subsidiariamente, o sobrestamento até o Tema 1.433/STJ. O MPF deixou de opinar quanto ao mérito.",
-     "obsGeral": "Processo incluído em pauta em 27/10/2026; intimações de pauta publicadas em 29/10/2026. Memoriais da União juntados em 25/10/2026 e petição de ciência em 31/10/2026.",
+     "relacionado": "Tema 1.433/STJ; Tema 1.075/STF; Tema 733/STF; REsp 2.234.888/MS",
+     "subassuntos": "Cumprimento individual de sentença coletiva; ACP 0005019-15.1997.4.03.6000; índice de 28,86%; limites subjetivos e territoriais do título executivo; legitimidade ativa; honorários sucumbenciais",
+     "especificidades": "Exequentes herdeiros de servidor falecido que esteve vinculado à Superintendência Regional do Trabalho e Emprego no Amazonas (SRTE/AM); execução individual do título da ACP nº 0005019-15.1997.4.03.6000 extinta sem resolução de mérito por ilegitimidade ativa em razão da limitação territorial do título coletivo ao Estado de Mato Grosso do Sul; insurgência recursal quanto à aplicabilidade do Tema 1.075/STF sem modulação e redução de honorários fixados em 10% sobre o valor da causa; pedido subsidiário da União de sobrestamento até o julgamento do Tema 1.433/STJ",
+     "questoes": "1) O título executivo formado na ACP 0005019-15.1997.4.03.6000 possui abrangência restrita aos servidores vinculados à base territorial de Mato Grosso do Sul, configurando ilegitimidade ativa de exequentes vinculados a outro Estado? 2) A declaração de inconstitucionalidade do artigo 16 da Lei 7.347/1985 pelo STF (Tema 1.075) afasta a limitação territorial expressa fixada em título transitado em julgado antes do julgamento paradigma (Tema 733/STF)? 3) Cabe o sobrestamento do feito com base na afetação do Tema 1.433/STJ? 4) Os honorários sucumbenciais fixados em 10% sobre o valor da causa comportam redução?",
+     "sintese": "Trata-se de cumprimento individual de sentença coletiva ajuizado por sucessores de servidor público federal falecido, visando à percepção de diferenças do índice de 28,86% decorrentes do título formado na ACP nº 0005019-15.1997.4.03.6000. O Juízo da 1ª Vara Federal de Campo Grande/MS acolheu a preliminar de ilegitimidade ativa deduzida pela União e extinguiu o cumprimento sem resolução do mérito (artigo 485, VI, do CPC), condenando a parte exequente ao pagamento de custas e de honorários advocatícios fixados em 10% sobre o valor atualizado da causa. Os exequentes apelaram postulando a reforma da sentença para reconhecer a legitimidade ativa e a abrangência nacional do título, além da redução dos honorários sucumbenciais. A União apresentou contrarrazões e memoriais defendendo a manutenção da sentença ou, subsidiariamente, o sobrestamento em face do Tema 1.433/STJ. O Ministério Público Federal manifestou-se pelo prosseguimento sem opinar sobre o mérito.",
+     "obsGeral": "Processo incluído em pauta de julgamento. Memoriais juntados pela União (ID 406589829).",
      "orig": {
       "tipo": "Sentença",
       "id": "391290190",
@@ -323,14 +323,19 @@
       "juizo": "1ª Vara Federal de Campo Grande/MS",
       "acc": {
        "custas": true,
-       "honor": true
+       "honor": true,
+       "tutela": false,
+       "valor": true
       }
      },
      "adm": {
       "prot": "2026-08-06",
       "prazo": "15",
       "req": "Regularidade formal",
-      "reqObs": "Os apelantes alegam que a sentença foi publicada em 16/07/2026, que o prazo iniciou em 17/07/2026 e que se encerrou em 06/08/2026, com apelação protocolada nessa data. Há GRU de R$ 957,69 e comprovante de pagamento, mas o comprovante tem data ilegível."
+      "reqObs": "Apelação tempestiva e com comprovante de recolhimento de preparo (ID 391290192 e ID 391290193)",
+      "dobro": false,
+      "dpu": false,
+      "ajg": false
      },
      "mpfx": {
       "sentido": "Prosseguimento do feito",
@@ -428,11 +433,18 @@
        "ok": false,
        "em": "2026-11-16",
        "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Julgamento do recurso pautado na sessão colegiada.",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
       }
      ]
     },
     "editadoPor": "Bruno",
-    "editadoEm": "2026-11-17T02:35:31.453Z"
+    "editadoEm": "2026-11-17T02:44:20.702Z",
+    "resJulg": "Desprovido"
    }
   },
   {
