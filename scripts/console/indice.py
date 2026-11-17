@@ -218,7 +218,7 @@ def divergencias(X, n, ensaio):
     cli = cliente()
     for _, xs in cand[:n]:
         k = '|'.join(sorted(x['id'] for x in xs))
-        txt = '\n\n'.join('[%s] %s %s, %s · %s\nQuestão: %s\nTese: %s' % (x['id'], x['classe'], x['processo'], br(x['data']), x['resultado'], x['questao'], x['tese']) for x in xs)
+        txt = '\n\n'.join('[%s] %s %s, %s · %s\nQuestão: %s\nTese: %s' % (x['id'], x.get('classe', ''), x.get('processo', ''), br(x['data']), x.get('resultado', ''), x.get('questao', ''), x.get('tese', '')) for x in xs)
         try:
             m = chamar(cli, model=MODELO['medio'], max_tokens=1500, tools=[AVALIAR], tool_choice={'type': 'tool', 'name': 'avaliar'},
                        system='Você confere se julgados do mesmo Relator (TRF-3) divergem sobre a mesma questão de direito. Diferença de fatos não é divergência. '
@@ -237,7 +237,7 @@ def divergencias(X, n, ensaio):
     for v in D:
         L += ['## ' + v.get('questao', ''), '', v.get('explicacao', ''), ''] + \
              (['Explicação temporal: ' + v['explicacao_temporal'], ''] if v.get('explicacao_temporal') else []) + \
-             ['- %s %s, %s · %s — %s' % (j['classe'], j['processo'], br(j['data']), j['resultado'], j['tese']) for j in v['julgados']] + ['']
+             ['- %s %s, %s · %s — %s' % (j.get('classe', ''), j.get('processo', ''), br(j['data']), j.get('resultado', ''), j.get('tese', '')) for j in v['julgados']] + ['']
     gravar(PASTA / 'divergencias.md', '\n'.join(L))
 
 
