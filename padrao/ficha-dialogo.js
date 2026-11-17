@@ -521,14 +521,14 @@ function teorPanel() {
     '<ol class="fx-steps">' + steps.map(function (st, k) { return '<li class="' + (k < D.step ? 'is-done' : k === D.step ? 'is-cur' : '') + '">' + (k < D.step ? svg('ok') : '') + (k + 1) + ' · ' + st + '</li>'; }).join('') + '</ol>';
   if (D.step === 0) {
     body = '<label class="fx-drop"><input type="file" accept=".txt,.md,text/plain,text/markdown" data-fx-file>' + svg('txt') + '<b>Arraste o .txt do PJe ou o .md da TecJustiça para a ficha</b><span>ou clique para escolher o arquivo</span></label>' + (D.err ? '<p class="fx-alert-p">' + E(D.err) + '</p>' : '') +
-      '<p class="fx-help">Cada peça (“Documento: ID - tipo” no .txt, “# ID - tipo” no .md) vira uma linha, com o destino sugerido pelo tipo. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
+      '<p class="fx-help">Cada peça (“Documento: ID - tipo” no .txt, “# ID - tipo” no .md) vira uma linha, com o destino sugerido pelo tipo. No .md, as linhas “- Juntado em/Juntado por/Assinado por/Situação” de cada peça e “- Classe/Assunto/Polo ativo/Polo passivo” do processo são aproveitadas quando vierem. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
       '<p class="fx-help">O arquivo é lido só no navegador e não é guardado; ficam os campos confirmados, e o commit registra os IDs dos documentos.</p>';
     foot = '<button type="button" class="fx-b" data-fx="teor-fechar">Cancelar</button>';
   } else if (D.step === 1) {
     var outro = P.main && dg(ST.cnj) !== P.main, TG = T.TARGETS || [['', 'Não usar']];
     body = (outro ? '<p class="fx-alert-p">' + svg('warn') + '<span>O arquivo é do processo <b>' + E(P.processo) + '</b>, diferente desta ficha (' + E(ST.cnj) + '). Confira antes de continuar.</span></p>' : '') +
       (P.kind && T.KIND_TXT ? '<p class="fx-info-p">' + E(T.KIND_TXT[P.kind] || '') + ': pré-seleção própria da espécie.</p>' : '') +
-      (P.formato === 'md' ? '<p class="fx-info-p">.md da TecJustiça: sem data de juntada nas peças (a ordem segue o ID)' + (P.semTexto ? '; ' + P.semTexto + ' página(s) digitalizada(s) sem texto — confira no PJe' : '') + '.</p>' : '') +
+      (P.formato === 'md' && (P.semData || P.semTexto) ? '<p class="fx-info-p">.md da TecJustiça: ' + [P.semData ? (P.semData === P.docs.length ? 'sem data de juntada nas peças (a ordem segue o ID)' : P.semData + ' peça(s) sem data de juntada') : '', P.semTexto ? P.semTexto + ' página(s) digitalizada(s) sem texto — confira no PJe' : ''].filter(Boolean).join('; ') + '.</p>' : '') +
       '<p class="fx-help">O destino já vem sugerido pelo tipo e pode ser trocado. “Não usar” deixa o documento de fora.</p>' +
       P.docs.map(function (d, k) { return '<div class="fx-doc ' + (d.target ? 'is-on' : '') + ' ' + (d.outro ? 'is-ext' : '') + '"><div class="fx-doc-h"><span class="fx-mono">' + E(d.id) + '</span><b>' + E(d.tipo) + '</b><span class="fx-grow"></span><small>' + E(brD(d.date) || '—') + '</small></div>' +
         (d.descricao || d.por || d.outro ? '<small class="fx-doc-s">' + E([d.descricao, d.por, d.outro ? 'outro processo · ' + d.outro : '', d.empty ? 'sem texto' : ''].filter(Boolean).join(' · ')) + '</small>' : '') +

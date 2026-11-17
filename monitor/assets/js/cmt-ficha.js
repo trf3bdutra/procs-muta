@@ -185,36 +185,54 @@ function recursoTipo(tipo,text){
 }
 const ROLE_RE=/(?<!do\(a\) |DO\(A\) )\b(APELANTE|APELAD[OA]|AGRAVANTE|AGRAVAD[OA]|EMBARGANTE|EMBARGAD[OA]|IMPETRANTE|IMPETRAD[OA]|RECORRENTE|RECORRID[OA]|EXEQUENTE|EXECUTAD[OA]|AUTOR[A]?|R[ÉE]U?|PARTE AUTORA|PARTE R[ÉE])(?:\(A\)|\(S\)|\(ES\)|S)?\s*:\s*([A-ZÀ-Ú0-9][A-ZÀ-Ú0-9 .&'\/-]{2,120}?)(?=\s*(?:ADVOGAD|PROCURADOR|DESPACHO|DECIS|SENTEN|AC[ÓO]RD|ATO ORDINAT|CERTID|INTERESSAD|OUTROS PARTICIPANTES|RELATOR|APELA|AGRAVA|EMBARGA|IMPETRA|RECORR|\n|$|\s{2}|\())/g;
 /* Inteiro teor em Markdown (.md da extensão TecJustiça PJe): "# Processo N", um "# ID - Tipo (descrição) - ID de origem N"
-   por peça e "## Página N" por página. Vira o mesmo texto do .txt do PJe antes da leitura; páginas digitalizadas sem texto são contadas. */
+   por peça e "## Página N" por página. Vira o mesmo texto do .txt do PJe antes da leitura; páginas digitalizadas sem texto são contadas.
+   Metadados opcionais, em linhas "- Campo: valor" logo abaixo do título (sem eles a leitura segue só pelo texto):
+     do processo: Classe ("Apelação Cível (ApCiv)"), Assunto, Polo ativo, Polo passivo, ou o papel do PJe (Apelante, Apelado, Agravante…),
+                  com os nomes separados por ";";
+     de cada peça: Tipo, Descrição, Juntado em (dd/mm/aaaa hh:mm), Juntado por, Assinado por (nomes por ";"), Situação ("ainda não juntado"). */
 const MD_RE=/^\s*#\s+Processo\s+\d{7}-?\d{2}\./;
 function semParenteses(t){t=S(t);if(!/\)$/.test(t))return [t,''];let d=0;
   for(let i=t.length-1;i>=0;i--){if(t[i]===')')d++;else if(t[i]==='('&&!--d){const a=S(t.slice(0,i));return a?[a,S(t.slice(i+1,-1))]:[t,''];}}
   return [t,''];}
+const MD_META=/^\s*[-*]\s+([A-Za-zÀ-ú][A-Za-zÀ-ú ()\/]{1,40}?)\s*:\s*(.*?)\s*$/;
 function deMd(text){
-  const out=[];let sem=0;
+  const out=[],proc={},docs={};let sem=0,alvo=null,meta=false;
   text.split('\n').forEach(l=>{
-    let m=/^#\s+Processo\s+([\d.\-]+)\s*$/.exec(l);if(m){out.push('Processo: '+m[1]);return;}
+    let m=/^#\s+Processo\s+([\d.\-]+)\s*$/.exec(l);if(m){out.push('Processo: '+m[1]);alvo=proc;meta=true;return;}
     m=/^#\s+(\d{5,})\s+-\s+(.+?)\s*$/.exec(l);
-    if(m){const o=/^(.*?)\s+-\s+ID de origem\s+(\d{5,})$/.exec(m[2]),[tipo,desc]=semParenteses(o?o[1]:m[2]);
-      out.push('Documento: '+(o?o[2]:m[1])+' - '+tipo+(desc?' - '+desc:''));if(o)out.push(m[1]+' - '+tipo+' - ID de origem '+o[2]);return;}
+    if(m){const o=/^(.*?)\s+-\s+ID de origem\s+(\d{5,})$/.exec(m[2]),[tipo,desc]=semParenteses(o?o[1]:m[2]),hid=o?o[2]:m[1];
+      out.push('Documento: '+hid+' - '+tipo+(desc?' - '+desc:''));if(o)out.push(m[1]+' - '+tipo+' - ID de origem '+o[2]);alvo=docs[hid]={};meta=true;return;}
+    if(meta&&alvo){const mm=MD_META.exec(l);if(mm){alvo[N(mm[1])]=S(mm[2]).replace(/^\(?vazio[^)]*\)?$/i,'');return;}if(S(l)&&!/^>/.test(l))meta=false;}
     if(/^##\s+Página\s+\d+\s*$/.test(l)||/^>\s?/.test(l)||/^-{3,}\s*$/.test(l))return;
     if(/^_\[página[^\]]*\]_\s*$/i.test(l)){sem++;return;}
     out.push(l);
   });
-  return {txt:out.join('\n'),sem};
+  return {txt:out.join('\n'),sem,proc,docs};
 }
+/* "12/08/2026 14:32", "12/08/2026" ou "2026-08-12T14:32" viram "dd/mm/aaaa hh:mm", o formato da juntada no .txt */
+function mdData(v){v=S(v);let m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ ,T]+(\d{1,2}):(\d{2}))?/.exec(v);
+  if(m)return m[1].padStart(2,'0')+'/'+m[2].padStart(2,'0')+'/'+m[3]+(m[4]?' '+m[4].padStart(2,'0')+':'+m[5]:'');
+  m=/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2}))?/.exec(v);return m?m[3]+'/'+m[2]+'/'+m[1]+(m[4]?' '+m[4]+':'+m[5]:''):'';}
+const mdNomes=v=>S(v).split(/\s*;\s*/).map(x=>S(x).replace(/\s+/g,' ')).filter(x=>x.length>2);
 function parseTxt(raw){
-  let text=String(raw||'').replace(/\r\n?/g,'\n'),formato='txt',semTexto=0;
-  if(MD_RE.test(text)&&/^#\s+\d{5,}\s+-\s/m.test(text)){const r=deMd(text);text=r.txt;formato='md';semTexto=r.sem;}
+  let text=String(raw||'').replace(/\r\n?/g,'\n'),formato='txt',semTexto=0,MD=null;
+  if(MD_RE.test(text)&&/^#\s+\d{5,}\s+-\s/m.test(text)){MD=deMd(text);text=MD.txt;formato='md';semTexto=MD.sem;}
   const proc=(/^\s*Processo:\s*([\d.\-]+)/m.exec(text)||[])[1]||'';
   const main=cnjDigits(proc);
   const lines=text.split('\n');
   const heads=[];lines.forEach((l,n)=>{const m=/^Documento:\s*(\d{5,})\s*-\s*(.*)$/.exec(l);if(m)heads.push({n,id:m[1],title:m[2].trim()});});
   const polos={};let classeAbbr='',assunto='';
+  if(MD){const p=MD.proc,cl=semParenteses(p.classe||'');classeAbbr=cl[1]&&cl[1].length<=10?cl[1]:'';assunto=S(p.assunto);
+    const ativo=/^ai\b|agravo/.test(N(p.classe))?'agravante':/apela|^apciv|remessa/.test(N(p.classe))?'apelante':/mandado|^ms\b/.test(N(p.classe))?'impetrante':'parte autora';
+    const passivo={agravante:'agravado',apelante:'apelado',impetrante:'impetrado'}[ativo]||'parte re';
+    Object.entries(p).forEach(([k,v])=>{const role=k==='polo ativo'?ativo:k==='polo passivo'?passivo:/^(apelante|apelad[oa]|agravante|agravad[oa]|embargante|embargad[oa]|impetrante|impetrad[oa]|recorrente|recorrid[oa]|exequente|executad[oa]|autora?|reu|re|parte autora|parte re)$/.test(k)?k:'';
+      if(role)mdNomes(v).forEach(n=>(polos[role]||(polos[role]=new Set())).add(n));});}
   const docs=heads.map((h,k)=>{
+    const mm=MD&&MD.docs[h.id]||null;
     const end=k+1<heads.length?heads[k+1].n:lines.length;
     const block=lines.slice(h.n+1,end).filter(l=>!/^-{20,}\s*$/.test(l));
     const parts=h.title.split(/\s+-\s+/);let tipo=S(parts[0]),desc=S(parts.slice(1).join(' - ').replace(/\s*-\s*$/,''));
+    if(mm){if(S(mm.tipo))tipo=S(mm.tipo);if('descricao' in mm)desc=S(mm.descricao);}
     if(N(desc)===N(tipo))desc='';
     let juntada='',por='',assin='',encoded=false,id2='',naoJuntado=false;const body=[];
     let skipUi=false;
@@ -238,6 +256,8 @@ function parseTxt(raw){
       const d=decodeLine(x);if(d.enc)encoded=true;x=d.text;
       if(S(x))body.push(x);
     });
+    if(mm){const jd=mdData(mm['juntado em']||mm['data de juntada']||mm.juntada);if(jd)juntada=jd;if(S(mm['juntado por']))por=S(mm['juntado por']);
+      const as=mdNomes(mm['assinado por']||mm.assinatura||mm.signatarios);if(as.length)assin=as.join(', ');if(/nao juntad/.test(N(mm.situacao)))naoJuntado=true;}
     const content=tidy(body.join('\n')).trim();
     // partes (somente documentos do próprio processo)
     const kind=kindOf(tipo,desc,content,classeAbbr,naoJuntado);
@@ -256,7 +276,7 @@ function parseTxt(raw){
       text:content,chars:content.length,encoded,empty:content.replace(/\s/g,'').length<40,outro,kind,recursoTipo:kind==='recurso'?recursoTipo(tipo,content):''};
   });
   const P={};Object.entries(polos).forEach(([k,v])=>P[k]=[...v]);
-  return {processo:proc,main,docs,polos:P,classeAbbr,assunto,formato,semTexto};
+  return {processo:proc,main,docs,polos:P,classeAbbr,assunto,formato,semTexto,semData:docs.filter(d=>!d.date).length};
 }
 
 /* ───────────────────────── 2 · EXTRAÇÃO POR REGRAS ───────────────────────── */
@@ -1392,14 +1412,14 @@ function teorPanel() {
     '<ol class="fx-steps">' + steps.map(function (st, k) { return '<li class="' + (k < D.step ? 'is-done' : k === D.step ? 'is-cur' : '') + '">' + (k < D.step ? svg('ok') : '') + (k + 1) + ' · ' + st + '</li>'; }).join('') + '</ol>';
   if (D.step === 0) {
     body = '<label class="fx-drop"><input type="file" accept=".txt,.md,text/plain,text/markdown" data-fx-file>' + svg('txt') + '<b>Arraste o .txt do PJe ou o .md da TecJustiça para a ficha</b><span>ou clique para escolher o arquivo</span></label>' + (D.err ? '<p class="fx-alert-p">' + E(D.err) + '</p>' : '') +
-      '<p class="fx-help">Cada peça (“Documento: ID - tipo” no .txt, “# ID - tipo” no .md) vira uma linha, com o destino sugerido pelo tipo. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
+      '<p class="fx-help">Cada peça (“Documento: ID - tipo” no .txt, “# ID - tipo” no .md) vira uma linha, com o destino sugerido pelo tipo. No .md, as linhas “- Juntado em/Juntado por/Assinado por/Situação” de cada peça e “- Classe/Assunto/Polo ativo/Polo passivo” do processo são aproveitadas quando vierem. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
       '<p class="fx-help">O arquivo é lido só no navegador e não é guardado; ficam os campos confirmados, e o commit registra os IDs dos documentos.</p>';
     foot = '<button type="button" class="fx-b" data-fx="teor-fechar">Cancelar</button>';
   } else if (D.step === 1) {
     var outro = P.main && dg(ST.cnj) !== P.main, TG = T.TARGETS || [['', 'Não usar']];
     body = (outro ? '<p class="fx-alert-p">' + svg('warn') + '<span>O arquivo é do processo <b>' + E(P.processo) + '</b>, diferente desta ficha (' + E(ST.cnj) + '). Confira antes de continuar.</span></p>' : '') +
       (P.kind && T.KIND_TXT ? '<p class="fx-info-p">' + E(T.KIND_TXT[P.kind] || '') + ': pré-seleção própria da espécie.</p>' : '') +
-      (P.formato === 'md' ? '<p class="fx-info-p">.md da TecJustiça: sem data de juntada nas peças (a ordem segue o ID)' + (P.semTexto ? '; ' + P.semTexto + ' página(s) digitalizada(s) sem texto — confira no PJe' : '') + '.</p>' : '') +
+      (P.formato === 'md' && (P.semData || P.semTexto) ? '<p class="fx-info-p">.md da TecJustiça: ' + [P.semData ? (P.semData === P.docs.length ? 'sem data de juntada nas peças (a ordem segue o ID)' : P.semData + ' peça(s) sem data de juntada') : '', P.semTexto ? P.semTexto + ' página(s) digitalizada(s) sem texto — confira no PJe' : ''].filter(Boolean).join('; ') + '.</p>' : '') +
       '<p class="fx-help">O destino já vem sugerido pelo tipo e pode ser trocado. “Não usar” deixa o documento de fora.</p>' +
       P.docs.map(function (d, k) { return '<div class="fx-doc ' + (d.target ? 'is-on' : '') + ' ' + (d.outro ? 'is-ext' : '') + '"><div class="fx-doc-h"><span class="fx-mono">' + E(d.id) + '</span><b>' + E(d.tipo) + '</b><span class="fx-grow"></span><small>' + E(brD(d.date) || '—') + '</small></div>' +
         (d.descricao || d.por || d.outro ? '<small class="fx-doc-s">' + E([d.descricao, d.por, d.outro ? 'outro processo · ' + d.outro : '', d.empty ? 'sem texto' : ''].filter(Boolean).join(' · ')) + '</small>' : '') +
