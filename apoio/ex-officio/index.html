@@ -2551,13 +2551,15 @@ var PRT_W=400;
 function prtPos(){setTimeout(urqLat,0);var vp=$('#v-pauta'),a=$('#prq'),p=a&&a.querySelector('.prt');
   if(!p||window.innerWidth<1181||!vp.classList.contains('prt-on')){vp.style.paddingRight='';if(p)p.style.left=p.style.width=p.style.top=p.style.bottom='';return;}
   vp.style.paddingRight='';var cs=getComputedStyle(vp),pr0=parseFloat(cs.paddingRight)||0,r=vp.getBoundingClientRect();vp.style.paddingRight=(pr0+PRT_W+34)+'px';
-  var hd=document.querySelector('#app header'),hb=hd?hd.getBoundingClientRect().bottom:60,lf=r.right-pr0-PRT_W,mr=Math.min(28,Math.max(10,Math.round(document.documentElement.clientWidth-(lf+PRT_W))));p.style.left=lf+'px';p.style.width=PRT_W+'px';p.style.top=(Math.max(hb,0)+mr)+'px';p.style.bottom=mr+'px';}
+  var hd=document.querySelector('#app header'),hb=hd?hd.getBoundingClientRect().bottom:60,lf=r.right-pr0-PRT_W,mr=Math.min(28,Math.max(10,Math.round(document.documentElement.clientWidth-(lf+PRT_W))));p.style.left=lf+'px';p.style.width=PRT_W+'px';var ct=prtTopo(vp);p.style.top=Math.round(Math.max(Math.max(hb,0)+mr,ct))+'px';p.style.bottom=mr+'px';}
+/* painéis laterais começam na altura da listagem (abaixo do título e dos números) e, ao rolar, param logo abaixo da barra */
+function prtTopo(vp){var t=vp.querySelector('.pt-lista');return t?t.getBoundingClientRect().top:vp.getBoundingClientRect().top;}
 function urqLat(){var vp=$('#v-pauta'),u=$('#trm-urq');if(!vp||!u)return;var W=300,on=vp.classList.contains('mono')&&vp.classList.contains('ed')&&window.innerWidth>=1181;
   var r=vp.getBoundingClientRect(),gl=r.left+(parseFloat(getComputedStyle(vp).paddingLeft)||0);
   if(!on||gl<W+48){vp.classList.remove('urq-lat');u.style.left=u.style.top=u.style.width='';return;}
   var hd=document.querySelector('#app header'),hb=hd?Math.max(hd.getBoundingClientRect().bottom,0):60;
-  vp.classList.add('urq-lat');u.style.width=W+'px';u.style.left=Math.round(gl-W-24)+'px';u.style.top=Math.round(hb+24)+'px';}
-window.addEventListener('resize',prtPos);window.addEventListener('resize',urqLat);
+  vp.classList.add('urq-lat');u.style.width=W+'px';u.style.left=Math.round(gl-W-24)+'px';var ct=prtTopo(vp);u.style.top=Math.round(Math.max(hb+24,ct))+'px';}
+window.addEventListener('resize',prtPos);window.addEventListener('resize',urqLat);window.addEventListener('scroll',function(){prtPos();},{passive:true});
 document.addEventListener('click',function(e){
   var t=e.target,b=t.closest&&t.closest('[data-prt],[data-prt-aba]');
   if(b&&b.closest('#prq')){if(b.hasAttribute('data-prt-aba')){S.prtAba=+b.getAttribute('data-prt-aba');[].forEach.call($('#prq').querySelectorAll('[data-prt-aba]'),function(x){x.setAttribute('aria-selected',String(x===b));});[].forEach.call($('#prq').querySelectorAll('[data-prt-p]'),function(x){x.hidden=x.getAttribute('data-prt-p')!==String(S.prtAba);});return;}
