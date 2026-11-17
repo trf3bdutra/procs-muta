@@ -206,7 +206,7 @@ function chips(){
 /* seleção feita nas visualizações: aplicar como filtro ou ver a lista */
 function selecionar(f,n){
   var ok=Object.keys(f).every(function(k){return f[k]!=='__outros';});
-  CXC().st.sel={f:f,n:n,ok:ok};selBar();
+  CXC().st.sel={f:f,n:n,ok:ok};selBar();itensRecorte();
   $$('.e-viz .on').forEach(function(e){e.classList.remove('on');});
 }
 function selBar(){
@@ -215,7 +215,7 @@ function selBar(){
   var d=Object.keys(s.f).map(function(k){return '<b>'+C.DIM[k].n+':</b> '+esc(k==='y'?mesL(s.f[k]):rot(s.f[k],'vários'));}).join(' › ');
   el.innerHTML='<div class="e-selb"><span>'+d+' · '+n0(s.n)+' '+C.nome+'</span><span class="sp"></span>'+(s.ok?'<button class="btn gold" id="e-sap">Filtrar</button><button class="btn" id="e-svl">Ver na lista</button>':'<span class="meta">“Outros” reúne vários valores: escolha um grupo nomeado.</span>')+'<button class="btn" id="e-sx">×</button></div>';
   if(s.ok){$('#e-sap').onclick=function(){CX=C===CXP0?null:C;C.aplica(false);};$('#e-svl').onclick=function(){CX=C===CXP0?null:C;C.aplica(true);};}
-  $('#e-sx').onclick=function(){CX=C===CXP0?null:C;C.st.sel=null;selBar();$$('.e-viz .on').forEach(function(e){e.classList.remove('on');});};
+  $('#e-sx').onclick=function(){CX=C===CXP0?null:C;C.st.sel=null;selBar();itensRecorte();$$('.e-viz .on').forEach(function(e){e.classList.remove('on');});};
 }
 function aplicaSel(lista){var f=E.sel.f;Object.keys(f).forEach(function(k){if(k==='y'){E.y1=E.y2=f[k];}else E.F[k]=f[k];});E.sel=null;E.mmOpen=null;E.shown=60;if(lista)E.modo='lista';salvar();render();window.scrollTo(0,0);}
 
@@ -396,7 +396,9 @@ function vMapa(L,out){var C=CXC();
   desenha(raiz,X0,ry);
   s='<g><rect x="6" y="'+(ry-20)+'" width="'+(X0-12)+'" height="40" rx="10" fill="var(--gold-soft)" stroke="var(--gold)"/><text x="'+(X0/2)+'" y="'+(ry-3)+'" text-anchor="middle" style="font-weight:800;fill:var(--gold)">'+n0(L.length)+'</text><text x="'+(X0/2)+'" y="'+(ry+12)+'" text-anchor="middle" class="mutt">'+esc(C.nome)+'</text></g>'+s;
   var head=D.map(function(d,i){return '<text x="'+(X0+i*COL+40)+'" y="12" class="mutt" style="font-weight:800;letter-spacing:.08em">'+C.DIM[d].n.toUpperCase()+'</text>';}).join('');
-  out.innerHTML='<p class="e-help">Clique em um ramo para abrir ou fechar os galhos; o galho selecionado pode virar filtro. Ao lado, os assuntos do recorte.</p><div class="e-mm"><div class="e-viz">'+svgEl(W,H+10,head+s)+'</div>'+(C.ass?'<aside class="e-asl">'+painelAssuntos(L)+'</aside>':'')+'</div>';
+  var IC=itCfg(C);
+  out.innerHTML='<p class="e-help">Clique em um ramo para abrir ou fechar os galhos; o galho selecionado pode virar filtro. Ao lado, os assuntos e '+(IC?IC.rot.toLowerCase():'os itens')+' do recorte.</p><div class="e-mm'+(IC?' com-itl':'')+'"><div class="e-viz">'+svgEl(W,H+10,head+s)+'</div>'+(C.ass?'<aside class="e-asl">'+painelAssuntos(L)+'</aside>':'')+(IC?'<aside class="e-itl" aria-label="'+esc(IC.rot)+' do recorte"></aside>':'')+'</div>';
+  out.__L=L;out.__C=C;itensRecorte();
   $$('.e-asl [data-av]',out).forEach(function(b){b.addEventListener('click',function(){CX=C===CXP0?null:C;selecionar({ass:b.getAttribute('data-av')},+b.getAttribute('data-n'));$$('.e-asl .on',out).forEach(function(x){x.classList.remove('on');});b.classList.add('on');});});
   var idx={};(function reg(ns){ns.forEach(function(nd){idx[nd.key]=nd;if(nd.ch)reg(nd.ch);});})(raiz);
   $$('.e-viz .nd',out).forEach(function(g){
@@ -407,6 +409,22 @@ function vMapa(L,out){var C=CXC();
     g.addEventListener('click',act);g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();act();}});
   });
 }
+/* ---- Painel de itens do recorte (no mapa mental, ao lado dos assuntos): precedentes ou modelos do recorte; com um ramo ou assunto selecionado, só os dele ---- */
+function itCfg(C){
+  if(C&&C===CXP0)return {rot:'Precedentes',tit:function(x){return x._ass||titulo(x)||'(sem assunto)';},sub:function(x){return [x.n,fmtD(x.d),x._res].filter(Boolean).join(' · ');},
+    abre:function(x){E.modo='lista';E.sel=null;E.mmOpen=null;salvar();render();setTimeout(function(){abrirIT(x);},0);}};
+  if(typeof CXM!=='undefined'&&C===CXM)return {rot:'Modelos',tit:function(m){return m.nomeModelo||m.id;},sub:function(m){return [mJulg(m),m.resultado?classRes(m.resultado):''].filter(Boolean).join(' · ');},
+    abre:function(m){MS.sel=m.id;MVZ.modo='lista';MVZ.sel=null;mRender();window.scrollTo(0,0);}};
+  return null;}
+function itensRecorte(){var out=$('#e-out'),pn=out&&out.querySelector('.e-itl');if(!pn||!out.__L)return;var C=out.__C,IC=itCfg(C);if(!IC)return;
+  var s=C.st.sel,L=out.__L,V=s&&s.ok?L.filter(function(x){return Object.keys(s.f).every(function(k){return C.DIM[k]&&C.DIM[k].v(x)===s.f[k];});}):L,lim=pn.__lim||40;
+  pn.__V=V;
+  pn.innerHTML='<div class="lab">'+esc(IC.rot)+' do recorte <small>'+n0(V.length)+'</small></div>'+(s&&s.ok?'<p class="meta">Só os do item selecionado no mapa.</p>':'')+
+    '<div class="e-itl-l">'+V.slice(0,lim).map(function(x,i){return '<button type="button" data-ii="'+i+'" title="Abrir"><b>'+esc(IC.tit(x))+'</b><small>'+esc(IC.sub(x))+'</small></button>';}).join('')+'</div>'+
+    (V.length>lim?'<button type="button" class="e-itl-m">Mostrar mais ('+n0(V.length-lim)+')</button>':'');
+  if(!pn.__liga){pn.__liga=1;pn.addEventListener('click',function(e){var b=e.target.closest('[data-ii],.e-itl-m');if(!b)return;
+    if(b.classList.contains('e-itl-m')){pn.__lim=(pn.__lim||40)+40;itensRecorte();return;}
+    var x=pn.__V&&pn.__V[+b.getAttribute('data-ii')];if(x){CX=C===CXP0?null:C;IC.abre(x);}});}}
 /* ---- Painel lateral de assuntos (dentro do mapa mental) ---- */
 function painelAssuntos(L){
   var t=conta(L,'ass').filter(function(z){return z[0]!=='Sem assunto catalogado';}),mx=t.length?t[0][1]:1;
