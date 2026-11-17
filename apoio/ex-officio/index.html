@@ -2161,7 +2161,7 @@ function sinalDlg(it,f){var old=document.getElementById('sn-dlg');if(old)old.rem
     if(fm.intercor){var tx=fm.intercor.value.trim(),ok=fm.intercorOk.checked&&!!tx?'Sim':'';
       if((it.ctl.intercor||'')!==tx){m.intercor=tx;if(tx)it.ctl.intercor=tx;else delete it.ctl.intercor;}
       if((it.ctl.intercorOk?'Sim':'')!==ok){m.intercorOk=ok;if(ok)it.ctl.intercorOk=ok;else delete it.ctl.intercorOk;}}
-    fim();if(!Object.keys(m).length){toast('Nada mudou.');return;}marcar(it,m);render();toast(T+': registrado. Gravação em instantes.');};
+    fim();if(!Object.keys(m).length){toast('Nada mudou.');return;}marcar(it,m);render();toast(T+': registrado. Salve na barra de baixo (Ctrl+S) para gravar.');};
   d.showModal();var x=d.querySelector(f==='al'?'#sn-nova':'select,textarea');if(x)setTimeout(function(){x.focus();},30);}
 function cartao(it){
   var k=dg(it.cnj),ab=!!S.aberto[k],et=etapa(it),C=(it.ctl||{}).cartao||{},tj=tipoJ(it),o={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3,'Assinada':3}[et],A=alertas(it),c=it.ctl||{};
