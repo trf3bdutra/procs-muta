@@ -613,11 +613,12 @@ html[data-theme=dark] .dv-dlg{background:#10222e;color:#ebeff1;border-color:#1e3
 .mrw .mr-ob{flex:1 1 120px;min-width:0;height:24px;border:0;border-bottom:1px dashed var(--el2);background:transparent;padding:0 2px;font:400 11.5px var(--font);color:var(--ei);border-radius:0}.mrw .mr-ob:focus{outline:0;border-bottom:1px solid var(--eg)}
 .mrw .mr-tg{display:inline-flex;flex:none;border:1px solid #d4c6a1;background:var(--eos);color:var(--eo2);font:400 10px var(--emono);white-space:nowrap}.mrw .mr-tg span{padding:2px 7px;border-left:1px solid #d4c6a1}.mrw .mr-tg span:first-child{border-left:0}.mrw .mr-tg b{font-weight:700}
 html[data-theme=dark] .mrw .mr-tg,html[data-theme=dark] .mrw .mr-tg span{border-color:var(--el2)}
-#v-pauta.ed.mono .edr.mrw .stp .sp{width:28px;height:28px}
+/* etapas de produção: o mesmo desenho nas Monocráticas e na Pauta de julgamento (círculos em tons pastel por etapa) */
+#v-pauta.ed .edr .stp .sp{width:28px;height:28px}
 .mleg{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--em)}.mleg>b{font:400 9px var(--emono);letter-spacing:.14em;text-transform:uppercase}.mleg span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}.mleg i{display:inline-block}
-#v-pauta.ed.mono .edr .stp .sp{--b0:#bfe3d0;--b1:#8fcbb0;--b2:#1f6b50;border:1.5px dashed var(--b0);background:var(--ew);color:var(--b1)}
-#v-pauta.ed.mono .edr .stp button.sp:nth-of-type(2){--b0:#c2dcf3;--b1:#93bfe6;--b2:#27609a}#v-pauta.ed.mono .edr .stp button.sp:nth-of-type(3){--b0:#cfd1f5;--b1:#a6a9ea;--b2:#454bb0}#v-pauta.ed.mono .edr .stp .sp.sp-as{--b0:#e3cdf1;--b1:#c9a3e2;--b2:#7340a0}
-#v-pauta.ed.mono .edr .stp .sp.nx{border:1.5px solid var(--b1);background:var(--ew);color:var(--b2)}html[data-theme=dark] #v-pauta.ed.mono .edr .stp .sp.nx{color:var(--b1)}#v-pauta.ed.mono .edr .stp .sp.ok{border:1.5px solid var(--b1);background:var(--b0);color:var(--b2)}
+#v-pauta.ed .edr .stp .sp{--b0:#bfe3d0;--b1:#8fcbb0;--b2:#1f6b50;border:1.5px dashed var(--b0);background:var(--ew);color:var(--b1)}
+#v-pauta.ed .edr .stp button.sp:nth-of-type(2){--b0:#c2dcf3;--b1:#93bfe6;--b2:#27609a}#v-pauta.ed .edr .stp button.sp:nth-of-type(3){--b0:#cfd1f5;--b1:#a6a9ea;--b2:#454bb0}#v-pauta.ed .edr .stp .sp.sp-as{--b0:#e3cdf1;--b1:#c9a3e2;--b2:#7340a0}
+#v-pauta.ed .edr .stp .sp.nx{border:1.5px solid var(--b1);background:var(--ew);color:var(--b2)}html[data-theme=dark] #v-pauta.ed .edr .stp .sp.nx{color:var(--b1)}#v-pauta.ed .edr .stp .sp.ok{border:1.5px solid var(--b1);background:var(--b0);color:var(--b2)}
 /* fila de urgências: barra (minimizada, padrão) e painel aberto */
 #v-pauta.ed #trm-urq{border:0;background:transparent;margin-top:26px}#v-pauta.ed.mono.prt-on #trm-urq .urq{display:block!important}
 .uz{--ur:#bd4c38;--ubg:#fbf3f0;--ul:#e0b8ae;display:flex;align-items:stretch;border:1px solid var(--ul);border-left:4px solid var(--ur);background:var(--ubg);color:var(--ei)}
