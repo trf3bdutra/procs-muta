@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-17T03:07:54.579Z",
+ "atualizadoEm": "2026-11-17T03:12:11.218Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -867,7 +867,97 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "mpf": "Sem hipótese",
+    "prelim": "Sem preliminares",
+    "tempest": "Tempestivo",
+    "preparo": "Comprovado",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "resJulg": "Desprovido",
+    "consect": "Não",
+    "honor": "Majorados",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Cumprimento individual de sentença coletiva · Mandado de Segurança Coletivo 0002404-81.1999.4.03.6000 · SINPRF/MS · reajuste de 28,86% (Leis 8.622/1993 e 8.627/1993) · Ilegitimidade ativa e reestruturação da carreira da PRF (MP 305/2006 e Lei 11.358/2006)",
+     "especificidades": "F1 apelação do exequente (ID 358531004) · F2 servidor titular (Policial Rodoviário Federal) · F3 União · F4 ingresso no serviço público em 17/06/1999, posterior à MP 1.704/1998 · F5 extinção por ilegitimidade ativa e insubsistência do título executivo · F6 sentença proferida após impugnação · F14 honorários de 10% sobre o valor executado fixados na sentença contra o exequente (ID 358530999) · F17 preparo recolhido (ID 358531006) · Sem modelo (voto próprio)",
+     "questoes": "Legitimidade ativa de servidor admitido em 17/06/1999 para cumprimento individual de título executivo formado no Mandado de Segurança Coletivo 0002404-81.1999.4.03.6000 (SINPRF/MS). Inexistência de direito a diferenças de 28,86% para servidor empossado após a MP 1.704/1998 e absorção de eventuais resíduos pela reestruturação da carreira em subsídio (MP 305/2006 e Lei 11.358/2006).",
+     "sintese": "Cumprimento individual de sentença promovido por Policial Rodoviário Federal para recebimento de diferenças do reajuste de 28,86% a partir de junho de 1999, com base no MS Coletivo 0002404-81.1999.4.03.6000 (SINPRF/MS). A União impugnou a execução alegando ilegitimidade ativa e insubsistência do crédito. A sentença acolheu a impugnação e extinguiu o feito com fundamento nos artigos 924, I, e 485, VI, do CPC (IDs 358530999 e 358531003). O exequente apelou postulando o reconhecimento de sua legitimidade e o pagamento de resíduos do índice inclusive após a vigência da Lei 11.358/2006 (ID 358531004).",
+     "obsGeral": "Cumprimento individual de MS Coletivo 0002404-81.1999.4.03.6000 (SINPRF/MS) · PRF · Admissão em 17/06/1999 (posterior à MP 1.704/1998) · Sem modelo vigente de 28,86% (voto próprio)",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "358530999 e 358531003",
+      "data": "2024-06-21",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "julgador": "Juízo Federal da 2ª Vara Federal de Campo Grande",
+      "acc": {
+       "custas": false,
+       "honor": true,
+       "tutela": false,
+       "valor": true
+      }
+     },
+     "adm": {
+      "intim": "2025-06-18",
+      "prot": "2025-07-10",
+      "prazo": "15",
+      "dobro": false,
+      "dpu": false,
+      "ajg": false
+     },
+     "jul": {
+      "topico": "Cumprimento individual de sentença coletiva. Mandado de Segurança Coletivo 0002404-81.1999.4.03.6000 (SINPRF/MS). Policial Rodoviário Federal. Reajuste de 28,86%. Admissão posterior à MP 1.704/1998. Reestruturação da carreira em subsídio (MP 305/2006 e Lei 11.358/2006). Insubsistência do crédito executado. Apelação desprovida.",
+      "fund": "Inexistência de título executivo a amparar a pretensão de servidor admitido em 17/06/1999, posterior à MP 1.704/1998; eficácia do título coletivo adstrita aos substituídos da ação de conhecimento originária; absorção integral de eventual resíduo com a reestruturação da carreira da PRF em subsídio pela MP 305/2006 (Lei 11.358/2006)."
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Apelação",
+       "contra": "Apresentada",
+       "id": "358531004"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial do cumprimento de sentença",
+       "id": "358530480",
+       "data": "2022-02-23"
+      },
+      {
+       "desc": "Sentença de extinção da execução",
+       "id": "358530999",
+       "data": "2024-06-21"
+      },
+      {
+       "desc": "Embargos de declaração do exequente",
+       "id": "35853000",
+       "data": "2024-08-02"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "358531003",
+       "data": "2025-06-11"
+      },
+      {
+       "desc": "Recurso de apelação",
+       "id": "358531004",
+       "data": "2025-07-10"
+      },
+      {
+       "desc": "Comprovante de preparo recursal",
+       "id": "358531006",
+       "data": "2025-07-10"
+      },
+      {
+       "desc": "Contrarrazões de apelação da União",
+       "id": "358531008",
+       "data": "2025-11-06"
+      }
+     ]
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-17T03:12:11.218Z"
+   }
   },
   {
    "cnj": "5002473-80.2026.4.03.6000",
