@@ -1615,13 +1615,20 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
 /* Monocráticas: fila de urgências como painel lateral à esquerda, na margem livre da página (telas largas); em telas estreitas, faixa abaixo dos números */
 #v-pauta.urq-lat #trm-urq{position:fixed;margin:0;z-index:6;display:flex;max-height:calc(100vh - 120px);overflow:auto}
 #v-pauta.urq-lat #trm-urq>*{flex:1;min-width:0}
-#v-pauta.urq-lat #trm-urq .uz{flex-direction:column;box-sizing:border-box}
-#v-pauta.urq-lat #trm-urq .uz-l{min-height:36px;justify-content:flex-start}
+#v-pauta.urq-lat #trm-urq{background:transparent;border:0}
+#v-pauta.urq-lat #trm-urq .uz{flex-direction:column;box-sizing:border-box;background:transparent;border:0;box-shadow:none}
+#v-pauta.urq-lat #trm-urq .uz-l{align-self:flex-start;min-height:0!important;height:34px;padding:0 14px;font-size:12.5px;border-radius:0}
+#v-pauta.urq-lat #trm-urq .uz-m,#v-pauta.urq-lat #trm-urq .uz-r{background:var(--ubg);border:1px solid var(--ul);border-left:3px solid var(--ur)}
+#v-pauta.urq-lat #trm-urq .uz-r{border-top:0}
 #v-pauta.urq-lat #trm-urq .uz-m{flex-direction:column;align-items:stretch;gap:6px;padding:10px 12px}
-#v-pauta.urq-lat #trm-urq .uz-m>span,#v-pauta.urq-lat #trm-urq .uz-m span{white-space:normal}
+#v-pauta.urq-lat #trm-urq .uz-m>span,#v-pauta.urq-lat #trm-urq .uz-m span{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
 #v-pauta.urq-lat #trm-urq .uz-p{width:100%}
 #v-pauta.urq-lat #trm-urq .uz-m .uz-f{flex-wrap:wrap}
 #v-pauta.urq-lat #trm-urq .uz-r{padding:8px 12px 10px;justify-content:flex-end;border-top:1px solid var(--ul)}
+/* títulos das três páginas na mesma posição e no mesmo ritmo (sobretítulo, título, subtítulo) */
+#v-pauta.ed .trb-eyr,#v-pauta.ed .trm-ey,#v-pauta #pt-ey{display:flex!important;align-items:center;height:17px;margin:0!important}
+#v-pauta.ctl .pt-h{border-top:0!important;padding:4px 0 0 1px!important;margin:0!important}
+#v-pauta.ctl .ctl-lead{font-size:13px!important;line-height:1.5!important;margin-top:4px!important;max-width:none!important;color:var(--em)!important}
 /* Monocráticas: título no padrão da Pauta (sobre o fundo, sem caixa) e números num painel logo abaixo */
 #v-pauta.mono #trm,html[data-theme=dark] #v-pauta.mono #trm{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
 #v-pauta.mono #trm>.trb-in{padding-left:0!important;padding-right:0!important;padding-top:0!important}
@@ -2551,7 +2558,7 @@ var PRT_W=400;
 function prtPos(){setTimeout(urqLat,0);var vp=$('#v-pauta'),a=$('#prq'),p=a&&a.querySelector('.prt');
   if(!p||window.innerWidth<1181||!vp.classList.contains('prt-on')){vp.style.paddingRight='';if(p)p.style.left=p.style.width=p.style.top=p.style.bottom='';return;}
   vp.style.paddingRight='';var cs=getComputedStyle(vp),pr0=parseFloat(cs.paddingRight)||0,r=vp.getBoundingClientRect();vp.style.paddingRight=(pr0+PRT_W+34)+'px';
-  var hd=document.querySelector('#app header'),hb=hd?hd.getBoundingClientRect().bottom:60,lf=r.right-pr0-PRT_W,mr=Math.min(28,Math.max(10,Math.round(document.documentElement.clientWidth-(lf+PRT_W))));p.style.left=lf+'px';p.style.width=PRT_W+'px';var ct=prtTopo(vp);p.style.top=Math.round(Math.max(Math.max(hb,0)+mr,ct))+'px';p.style.bottom=mr+'px';}
+  var hd=document.querySelector('#app header'),hb=hd?hd.getBoundingClientRect().bottom:60,lf=r.right-pr0-PRT_W,mr=Math.min(28,Math.max(10,Math.round(document.documentElement.clientWidth-(lf+PRT_W))));p.style.left=lf+'px';p.style.width=PRT_W+'px';p.style.top=Math.round(Math.max(hb,0)+mr)+'px';p.style.bottom=mr+'px';}
 /* painéis laterais começam na altura da listagem (abaixo do título e dos números) e, ao rolar, param logo abaixo da barra */
 function prtTopo(vp){var t=vp.querySelector('.pt-lista');return t?t.getBoundingClientRect().top:vp.getBoundingClientRect().top;}
 function urqLat(){var vp=$('#v-pauta'),u=$('#trm-urq');if(!vp||!u)return;var W=300,on=vp.classList.contains('mono')&&vp.classList.contains('ed')&&window.innerWidth>=1181;
