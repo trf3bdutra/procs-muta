@@ -879,6 +879,7 @@ window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABE
        lista?:   [cnj, ...]              (anterior / próximo)
        avisar?:  (texto, tipo) => void
        leitura?: true                    (só leitura: sem o botão Editar e sem gravar; a Ex Officio edita pelo prontuário lateral)
+       teor?: true                       (com leitura: ainda assim importa o inteiro teor e grava os campos confirmados)
      })
    Regras dos Controles especiais (quando cada grupo vale): CMTFicha.controlesDe(fonte, operacional), as mesmas do servidor (api/_metas, _sobr, _sens). */
 (function () {
@@ -1077,7 +1078,7 @@ function cabecalho() {
   var nav = L.length > 1 && i >= 0 ? '<button type="button" class="fx-sq" data-fx="ant" title="Processo anterior (Alt+↑)">' + svg('back') + '</button><span class="fx-note">' + (i + 1) + ' de ' + L.length + '</span><button type="button" class="fx-sq" data-fx="prox" title="Próximo processo (Alt+↓)">' + svg('fwd') + '</button>' : '';
   return '<header class="fx-head"><span class="fx-ic">' + svg('ficha') + '</span>' +
     '<div class="fx-tt"><span>' + E(['Ficha do processo', cl, as].filter(Boolean).join(' · ')) + '</span><div class="fx-num"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2><button type="button" class="fx-sq" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' + (partes ? '<small>' + E(partes) + '</small>' : '') + '</div>' +
-    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && !ST.ad.leitura ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') + nav + '</div>' +
+    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && (!ST.ad.leitura || ST.ad.teor) ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') + nav + '</div>' +
     '<button type="button" class="fx-sq fx-x" data-fx="fechar" aria-label="Fechar" title="Fechar (Esc)">' + svg('x') + '</button></header>';
 }
 function faixa() {
@@ -1439,7 +1440,7 @@ function gravarTeor() {
 
 /* ───── gravação ───── */
 function gravar(campos, msgOk) {
-  if (ST.busy || ST.ad.leitura) return Promise.resolve(false);
+  if (ST.busy || (ST.ad.leitura && !(ST.ad.teor && ST.teor))) return Promise.resolve(false);
   ST.busy = true; render();
   return Promise.resolve().then(function () { return ST.ad.gravar(ST.cnj, campos); }).then(function (j) {
     j = j || {}; if (j.operacional) ST.d.operacional = j.operacional;
