@@ -1,8 +1,8 @@
 /* ===== Consulta · matriz modular 28,86% ===== */
-#v-consulta .cq-cola{margin:10px 0 0;border:1px solid #c8c3b6;border-radius:6px;background:#fbfaf5;padding:10px 12px}
-#v-consulta .cq-cola textarea{width:100%;box-sizing:border-box;border:1px solid #c8c3b6;border-radius:5px;padding:8px;font:12px/1.45 ui-monospace,Consolas,monospace;color:#203b39;background:#fff}
-#v-consulta .cq-cola-a{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
-#v-consulta #cq-m28[aria-pressed="true"]{background:#e7f1ee;border-color:#235a55;color:#1d4f49}
+#cq .cq-cola{margin:10px 0 0;border:1px solid #c8c3b6;border-radius:6px;background:#fbfaf5;padding:10px 12px}
+#cq .cq-cola textarea{width:100%;box-sizing:border-box;border:1px solid #c8c3b6;border-radius:5px;padding:8px;font:12px/1.45 ui-monospace,Consolas,monospace;color:#203b39;background:#fff}
+#cq .cq-cola-a{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+#cq #cq-m28[aria-pressed="true"]{background:#e7f1ee;border-color:#235a55;color:#1d4f49}
 #cq-can .m28-gs{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0 6px}
 #cq-can .m28-gs button{min-width:34px;height:28px;border:1px solid #c8c3b6;border-radius:4px;background:#fff;font:700 12px Inter,sans-serif;color:#41534f;cursor:pointer}
 #cq-can .m28-gs button[aria-pressed="true"]{background:#235a55;border-color:#235a55;color:#fff}
@@ -31,4 +31,4 @@
 #cq-ori .m28-cb li{margin:2px 0}
 #cq-can .m28-dica{color:#235a55;background:#f1f7f5;border-left:2px solid #9cc0b4;padding:3px 6px}
 #cq-can .m28-der{color:#1d6b3a;background:#eef8f1;border-left:2px solid #7fbf95;padding:3px 6px}
-.m28-f .fill.der{background:#dff3e5;box-shadow:inset 0 -1px 0 #7fbf95}
+#cq .m28-f .fill.der,#cq .m28-f .dbody .fill.der{background:#dff3e5;box-shadow:inset 0 -1px 0 #7fbf95}
