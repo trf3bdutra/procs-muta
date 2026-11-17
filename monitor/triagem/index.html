@@ -425,6 +425,11 @@ html[data-theme="dark"] .cwe-esteira i.feito{color:#0e2132}
 .cwe-box .h{padding:9px 12px;background:var(--p);border-bottom:1px solid var(--b)}.cwe-box .h>span{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.cwe-box .h small{display:block;font-size:11px;color:var(--m)}
 .cwe-box .rb{display:flex;justify-content:space-between;gap:8px;padding:6px 12px;border-bottom:1px solid #f1eee6}.cwe-box code{font:11px ui-monospace,monospace;color:#4f5a57}.cwe-box .rb b{color:var(--t);white-space:nowrap}
 .cwe-box p{margin:0;padding:8px 12px;font-size:11.5px;color:var(--m)}
+.cwe-box .rb.off code,.cwe-box .rb.off b{opacity:.5;text-decoration:line-through}.cwe-box .rb .cwe-lnk{font-size:11px;white-space:nowrap}.cwe-box .rbs{flex-wrap:wrap}.cwe-box .rbs code{flex:1 1 100%}.cwe-box .rbs small{color:var(--m);font-size:11px}.cwe-box .rbs span{display:flex;gap:10px;margin-left:auto}.cwe-lnk.x{color:var(--r)}
+.cwe-rb{display:flex;flex-direction:column;gap:7px;padding:10px 12px;border-bottom:1px solid var(--b);background:#fdfcf8}.cwe-rb .rbl{display:flex;justify-content:space-between;align-items:center}.cwe-rb .rbg{display:flex;gap:4px}.cwe-rb .rbg button{height:24px;min-width:32px;border:1px solid var(--b2);background:var(--w);font:700 11px Figtree,sans-serif;cursor:pointer}.cwe-rb .rbg button[aria-pressed=true]{background:var(--v);border-color:var(--v);color:#fff}
+.cwe-rb .rbc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr) 24px;gap:5px;align-items:center}.cwe-rb .rbc input{grid-column:1/3}.cwe-rb .rbc button{border:0;background:none;color:var(--r);font-size:15px;cursor:pointer}.cwe-rb select,.cwe-rb input{height:30px;min-width:0;padding:0 6px;font:12px Figtree,sans-serif}
+.cwe-rb .rbp{margin:0;padding:7px 9px;background:var(--l2);display:flex;flex-direction:column;gap:2px;font-size:11.5px;color:var(--m2)}.cwe-rb .rbp b{color:var(--g)}.cwe-rb small{font-size:11px;color:var(--m)}
+.cwe-box .sr select{height:26px;max-width:140px;font:11.5px Figtree,sans-serif;color:var(--g)}
 .cwe-box .sr{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 12px;border-bottom:1px solid #f1eee6}
 .cwe-box .sr b{font:500 13px ui-monospace,monospace;color:var(--g)}.cwe-box .sr span{min-width:0;overflow-wrap:anywhere}.cwe-box .sr small{display:block;font-size:10.5px;color:var(--m2)}
 .cwe-box .sr button{height:26px;padding:0 9px;border:1px solid var(--b2);border-radius:6px;background:var(--p);font-weight:700;font-size:11px}
@@ -1591,12 +1596,40 @@ function portaToken() { return new Promise((fim) => {
       <div class="cwe-2col"><div class="cwe-lst"><div class="cwe-lst-h"><span><b>${aplic} de ${C.filter((p) => p.proposta?.dif.length).length} com conversão a aplicar</b> · desmarque o processo que não deve receber as conversões</span><button type="button" class="pri" data-cwe="etq-aplicar" ${aplic ? '' : 'disabled'}>Aplicar as conversões</button><button type="button" class="cwe-lnk2" data-cwe="prep" data-n="1">Próximo: designação e correção →</button></div>
         ${vis.map(card).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}
         <div class="cwe-mostra"><span>mostrando ${vis.length} de ${L.length}</span>${L.length > vis.length ? `<button type="button" data-cwe="etq-mais">Mostrar mais 50</button><button type="button" data-cwe="etq-todos">Mostrar todos</button>` : ''}</div></div>
-      <div class="cwe-lado"><section class="cwe-box"><div class="h"><span><b>Regras base pela tarefa no PJe</b><button type="button" class="cwe-lnk" data-cwe="cfg-2">Editar regras</button></span><small>valem antes das etiquetas · o tipo de julgamento sai daqui</small></div>
+      <div class="cwe-lado">${boxRegrasPauta(ss, d)}
+        <section class="cwe-box"><div class="h"><span><b>Pela tarefa no PJe</b></span><small>fixas · valem antes das etiquetas · o tipo de julgamento sai daqui</small></div>
           <div class="rb"><code>[Sessão - ED] …  ·  [ED] …</code><b>→ ED</b></div><div class="rb"><code>[Ag. Int] …</code><b>→ AgInt</b></div><div class="rb"><code>tarefa com "retratação"</code><b>→ JR</b></div><div class="rb"><code>… Processos retirados e adiados</code><b>→ Retirado ou adiado</b></div>
-          <p>A etiqueta de ED só informa. Remessa necessária vem da classe.</p></section>
-        <aside class="cwe-box"><div class="h"><span><b>Sem regra, mais frequentes</b><button type="button" class="cwe-lnk" data-cwe="cfg-2">Editar regras</button></span><small>na pauta de ${e(A.br(ss.data).slice(0, 5))}</small></div>
-          ${semL.map(([t, n]) => `<div class="sr"><b>${n}</b><span>${e(t)}</span><button type="button" data-cwe="nr" data-t="etq" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'etq' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'etq' && est.nr.v === t ? formEtq(d, t) : ''}`).join('') || '<p>Todas as etiquetas têm regra.</p>'}</aside></div></div></section>`;
+          <p>A etiqueta de ED só informa. Remessa necessária vem da classe. Para outra regra por tarefa, use "Nova regra" acima com a condição "Tarefa atual no PJe".</p></section>
+        ${boxRegrasPadrao(ss, d)}
+        <aside class="cwe-box"><div class="h"><span><b>Sem regra, mais frequentes</b></span><small>na pauta de ${e(A.br(ss.data).slice(0, 5))} · escolha a regra de cada etiqueta (vale só nesta pauta)</small></div>
+          ${semL.map(([t, n]) => `<div class="sr"><b>${n}</b><span>${e(t)}</span><select data-cwe-rbsel="${e(t)}" aria-label="Criar regra para a etiqueta ${e(t)}"><option value="">Criar regra…</option>${efeitosRb(d).map((x) => `<option value="${e(x.k)}">${e(x.t)}</option>`).join('')}</select></div>`).join('') || '<p>Todas as etiquetas têm regra.</p>'}</aside></div></div></section>`;
   }
+
+  /* ===== regras de etiquetas por pauta: criadas aqui valem só nesta sessão (gravadas no arquivo dela); "Tornar padrão" leva às regras gerais ===== */
+  function efeitosRb(d) { try { return d.s?.efeitosEtiqueta?.() || []; } catch (er) { return []; } }
+  function boxRegrasPauta(ss, d) { let R = null; try { R = d.s?.regrasPauta?.(ss.id) || null; } catch (er) { R = null; } if (!R) return '';
+    const rb = est.rb, opt = (L, v) => L.map((x) => `<option value="${e(x.k)}"${x.k === v ? ' selected' : ''}>${e(x.t)}</option>`).join('');
+    let form = '';
+    if (rb) { const ef = R.efeitos.find((x) => x.k === rb.ef) || R.efeitos[0]; let prev = []; try { prev = d.s?.previaRegraPauta?.(ss.id, rb) || []; } catch (er) { prev = []; }
+      const temCond = rb.conds.some((c) => c.op === 'vazio' || String(c.val || '').trim());
+      const tarefas = [...new Set((convDados(ss, d) || []).map((p) => p.tarefa).filter(Boolean))].sort();
+      form = `<div class="cwe-rb"><div class="rbl"><span class="cwe-k">QUANDO</span><span class="rbg"><button type="button" data-cwe="rb-liga" data-v="E" aria-pressed="${rb.liga !== 'OU'}">E</button><button type="button" data-cwe="rb-liga" data-v="OU" aria-pressed="${rb.liga === 'OU'}">OU</button></span></div>
+        ${rb.conds.map((c, i) => `<div class="rbc"><select data-rb="campo" aria-label="Campo">${opt(R.campos, c.campo)}</select><select data-rb="op" aria-label="Operador">${opt(R.ops, c.op)}</select><button type="button" data-cwe="rb-tira" data-i="${i}" aria-label="Tirar a condição" title="Tirar a condição">×</button><input data-rb="val" value="${e(c.val || '')}" placeholder="${c.campo === 'tarefa' ? 'ex.: [Sessão - ED] ou retratação' : c.campo === 'item' ? 'ex.: 12 ou 40-60' : 'texto'}"${c.campo === 'tarefa' ? ' list="rb-tarefas"' : ''}></div>`).join('')}
+        <datalist id="rb-tarefas">${tarefas.map((t) => `<option value="${e(t)}"></option>`).join('')}</datalist>
+        <button type="button" class="cwe-lnk" data-cwe="rb-mais">+ condição</button>
+        <div class="rbl"><span class="cwe-k">ENTÃO</span></div><select data-rb="ef" aria-label="Efeito">${opt(R.efeitos, rb.ef)}</select>${ef && ef.v ? `<input data-rb="v" value="${e(rb.v || '')}" placeholder="${e(ef.v)}">` : ''}
+        <p class="rbp"><b>${temCond ? prev.length + ' processo(s) desta pauta' : 'Preencha uma condição'}</b>${prev.slice(0, 4).map((x) => `<span>item ${e(x.item || '—')} · ${e(A.cnj(x.cnj))}</span>`).join('')}${prev.length > 4 ? `<span>… e mais ${prev.length - 4}</span>` : ''}<button type="button" class="cwe-lnk" data-cwe="rb-previa">atualizar a prévia</button></p>
+        <span class="cwe-acoes"><button type="button" class="pri" data-cwe="rb-salvar">Salvar nesta pauta</button><button type="button" data-cwe="rb-x">Cancelar</button></span><small>Vale só para a pauta de ${e(A.br(ss.data))} e fica gravada com ela. "Tornar padrão" leva a regra às configurações.</small></div>`; }
+    return `<section class="cwe-box"><div class="h"><span><b>Regras desta pauta</b><button type="button" class="cwe-lnk" data-cwe="rb-abre">${rb ? 'Fechar' : '+ Nova regra'}</button></span><small>por tarefa atual, etiqueta, assunto, classe, meta ou item · valem só em ${e(A.br(ss.data).slice(0, 5))}</small></div>
+      ${form}${R.sessao.map((r) => `<div class="rb rbs"><code>${e(r.quando)}</code><b>→ ${e(r.ef)}</b><small>${r.n} proc.</small><span><button type="button" class="cwe-lnk" data-cwe="rb-pad" data-id="${e(r.id)}" title="Levar às regras padrão (configurações): passa a valer em todas as sessões">Tornar padrão</button><button type="button" class="cwe-lnk x" data-cwe="rb-del" data-id="${e(r.id)}" title="Excluir a regra desta pauta">Excluir</button></span></div>`).join('') || (rb ? '' : '<p>Nenhuma regra própria desta pauta.</p>')}</section>`; }
+  function boxRegrasPadrao(ss, d) { let R = null; try { R = d.s?.regrasPauta?.(ss.id) || null; } catch (er) { R = null; } if (!R || !R.padrao.length) return '';
+    const L = est.rbTodas ? R.padrao : R.padrao.slice(0, 8), off = R.padrao.filter((r) => r.off).length;
+    return `<section class="cwe-box"><div class="h"><span><b>Regras padrão</b><button type="button" class="cwe-lnk" data-cwe="cfg-2">Configurações</button></span><small>vêm das configurações e valem em todas as sessões · aqui só se desligam nesta pauta${off ? ' · ' + off + ' desligada(s)' : ''}</small></div>
+      ${L.map((r) => `<div class="rb${r.off ? ' off' : ''}"><code>${e(r.nome ? r.nome + ' · ' : '')}${e(r.quando)}</code><b>→ ${e(r.ef)}</b><button type="button" class="cwe-lnk" data-cwe="rb-off" data-id="${e(r.id)}" data-on="${r.off ? 1 : 0}" title="${r.off ? 'Voltar a aplicar nesta pauta' : 'Não aplicar só nesta pauta; nas demais continua'}">${r.off ? 'religar' : 'desligar aqui'}</button></div>`).join('')}
+      ${R.padrao.length > 8 ? `<p><button type="button" class="cwe-lnk" data-cwe="rb-todas">${est.rbTodas ? 'mostrar menos' : 'ver as ' + R.padrao.length}</button></p>` : ''}</section>`; }
+  function rbSync(view) { const f = view.querySelector('.cwe-rb'); if (!f || !est.rb) return;
+    est.rb.conds = [...f.querySelectorAll('.rbc')].map((r) => ({ campo: r.querySelector('[data-rb="campo"]').value, op: r.querySelector('[data-rb="op"]').value, val: r.querySelector('[data-rb="val"]').value }));
+    const ef = f.querySelector('[data-rb="ef"]'), v = f.querySelector('[data-rb="v"]'); if (ef) est.rb.ef = ef.value; est.rb.v = v ? v.value : ''; }
 
   /* criar regra sem sair da esteira */
   function formEtq(d, t) { let E = []; try { E = d.s?.efeitosEtiqueta?.() || []; } catch (er) { E = []; }
@@ -1798,6 +1831,17 @@ function portaToken() { return new Promise((fim) => {
         if (g.liberacao && g.liberacao !== f.liberacao && (!f.liberacao || W.confirm('Trocar a liberação de ' + A.br(f.liberacao) + ' para ' + A.br(g.liberacao) + ' (regra: dias úteis antes da sessão)?'))) { s.fase(ss.id, 'liberacao', g.liberacao); mud.push('liberação ' + A.br(g.liberacao)); }
         if (g.minutas && g.minutas !== f.minutas && (!f.minutas || W.confirm('Trocar a entrega das minutas de ' + A.br(f.minutas) + ' para ' + A.br(g.minutas) + ' (' + String(g.pontos).replace('.', ',') + ' pontos pendentes, ' + g.minutantes + ' minutante(s))?'))) { s.fase(ss.id, 'minutas', g.minutas); mud.push('entrega ' + A.br(g.minutas)); }
         A.msg(mud.length ? 'Marcos pelas regras: ' + mud.join(' · ') + '.' : 'Nada mudou' + (g.minutas ? '' : ' (sem processos pendentes ou sem minutantes para calcular a entrega)') + '.'); }
+      else if (/^rb-/.test(k)) { rbSync(view); const s = A.getSes(); if (!s) return;
+        if (k === 'rb-abre') est.rb = est.rb ? null : { conds: [{ campo: 'tarefa', op: 'contem', val: '' }], liga: 'E', ef: 'ED', v: '' };
+        else if (k === 'rb-x') est.rb = null;
+        else if (k === 'rb-mais') est.rb.conds.push({ campo: 'etiqueta', op: 'contem', val: '' });
+        else if (k === 'rb-tira') { est.rb.conds.splice(+b.dataset.i, 1); if (!est.rb.conds.length) est.rb.conds.push({ campo: 'tarefa', op: 'contem', val: '' }); }
+        else if (k === 'rb-liga') est.rb.liga = b.dataset.v;
+        else if (k === 'rb-todas') est.rbTodas = !est.rbTodas;
+        else if (k === 'rb-salvar') { if (!s.salvarRegraPauta?.(ss.id, est.rb)) { A.msg('Preencha ao menos uma condição e, se o efeito pedir, o valor (tema, especificidade, hipótese ou nº da meta).', true); return; } est.rb = null; A.msg('Regra salva nesta pauta. Gravação automática no procs-muta em instantes.'); }
+        else if (k === 'rb-del') { if (!W.confirm('Excluir esta regra da pauta de ' + A.br(ss.data) + '?')) return; s.excluirRegraPauta?.(ss.id, b.dataset.id); A.msg('Regra excluída desta pauta.'); }
+        else if (k === 'rb-pad') { if (!W.confirm('Tornar esta regra padrão?\n\nEla sai da pauta de ' + A.br(ss.data) + ' e passa às regras gerais (configurações), valendo em todas as sessões.')) return; s.tornarPadrao?.(ss.id, b.dataset.id); A.msg('Regra levada às regras padrão. Gravação automática no procs-muta em instantes.'); }
+        else if (k === 'rb-off') { s.padraoNaPauta?.(ss.id, b.dataset.id, b.dataset.on === '1'); A.msg(b.dataset.on === '1' ? 'Regra padrão religada nesta pauta.' : 'Regra padrão desligada só nesta pauta.'); } }
       else if (k === 'nr') est.nr = est.nr?.t === b.dataset.t && est.nr.v === b.dataset.v ? null : { t: b.dataset.t, v: b.dataset.v };
       else if (k === 'nr-x') est.nr = null;
       else if (k === 'nr-salvar') { const f = b.closest('.cwe-nr'), s = A.getSes(); if (!f || !est.nr || !s) return;
@@ -1816,6 +1860,7 @@ function portaToken() { return new Promise((fim) => {
       if (t.dataset.cweMk === 'data') { const s = A.getSes(), ss = A.selectedSession(); if (!s?.data || !ss || !t.value) return; const r = s.data(ss.id, t.value); if (r && r.erro) { A.msg(r.erro, true); t.value = ss.data; return; } A.msg('Data da sessão alterada para ' + A.br(t.value) + '. Gravação automática no procs-muta em instantes.'); A.render(); return; }
       if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Gravação automática no procs-muta em instantes.'); } return; }
       if (t.dataset.cweEq) { const s = A.getSes(); if (s?.equipeDefinir?.(t.dataset.cweEq, t.dataset.k, t.checked)) { A.msg('Equipe atualizada. Gravando no procs-muta…'); clearTimeout(ligar.tq); ligar.tq = setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 1200); A.render(); } return; }
+      if (t.dataset.cweRbsel != null) { if (!t.value) return; const et = t.dataset.cweRbsel, ef = t.value; est.rb = { conds: [{ campo: 'etiqueta', op: 'igual', val: et }], liga: 'E', ef, v: /^(tema|esp)$/.test(ef) ? et : '' }; A.render(); const f = view.querySelector('.cwe-rb'); if (f) f.scrollIntoView({ block: 'nearest' }); return; }
       if (t.dataset.cweEsc) { const dg = t.dataset.p; est.dsg[dg] = { ...(est.dsg[dg] || {}), [t.dataset.cweEsc]: t.value }; A.render(); }
     });
     /* PDF da pauta arrastado para o quadro da etapa 2 */
