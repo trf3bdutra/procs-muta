@@ -598,7 +598,7 @@ html[data-theme=dark] .dv-dlg{background:#10222e;color:#ebeff1;border-color:#1e3
 #v-pauta.ed.mono #ed-tr #trm-reg{height:32px;padding:0 14px 0 12px;font-size:11.5px}
 /* linha da monocrática: opções na faixa lateral esquerda, dados só de leitura (definidos no prontuário), síntese e trilha à direita */
 #v-pauta.ed.mono #lst.cards{background:var(--ep)}
-#v-pauta.ed #lst .pc.edr.mrw{position:relative;padding-left:36px;overflow:hidden;min-height:78px}
+#v-pauta.ed #lst .pc.edr.mrw{position:relative;padding-left:0;overflow:hidden;min-height:78px}
 #v-pauta.ed.mono #lst .pc.edr.prt-sel{background:var(--ew);outline:0;box-shadow:inset -2px 0 0 var(--eg)}
 #v-pauta.ed #lst .pc.edr.mrw .rw{padding:5px 12px 5px 10px;row-gap:2px;column-gap:14px}
 .mrw .mr-o{position:absolute;top:0;bottom:0;left:0;width:32px;display:grid;grid-auto-rows:1fr;border-right:1px solid var(--el);background:var(--ew)}
@@ -609,6 +609,14 @@ html[data-theme=dark] .dv-dlg{background:#10222e;color:#ebeff1;border-color:#1e3
 .mrw .mr-cl{font:400 10px var(--emono);border:1px solid var(--el2);padding:0 5px;color:var(--em);background:var(--ew);white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis;text-transform:none;letter-spacing:0}
 .mrw .mr-ta{font-size:11.5px;color:var(--em);white-space:nowrap}.mrw .mr-l1 .mr-as{flex:0 1 auto;min-width:80px;font-size:11.5px;font-weight:600;color:var(--ei);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #v-pauta.ed:not(.mono) .mrw .mr-o .ic{min-height:19px}#v-pauta.ed:not(.mono) .mrw .mr-o .ic svg{width:13px;height:13px}
+.sn{display:inline-flex;align-items:center;gap:2px;flex:none}
+.sn-b{position:relative;width:26px;height:26px;border:0;background:transparent;color:var(--em);opacity:.45;display:inline-grid;place-items:center;padding:0;cursor:pointer;border-radius:50%}
+.sn-b svg{width:14px;height:14px}.sn-b:hover{opacity:1;color:var(--eg);background:var(--egs)}
+.sn-b.on{opacity:1}.sn-b.on.al{color:#bd4c38}.sn-b.on.ic2{color:#b8860b}.sn-b.on.ok{color:#3f8a63}.sn-b.on.pri{color:#27609a}
+.sn-b i{position:absolute;top:0;right:0;min-width:13px;height:13px;border-radius:7px;background:#bd4c38;color:#fff;font:700 9px/13px var(--font);font-style:normal;text-align:center;padding:0 2px}
+.sn-dlg fieldset{border:1px solid #e3ded2;padding:8px 12px 2px;margin:0 0 10px}.sn-dlg legend{font:600 11.5px var(--font);color:#235a55;padding:0 4px}.sn-dlg fieldset.foco{border-color:#235a55;box-shadow:0 0 0 2px rgba(35,90,85,.12)}
+.sn-dlg .sn-al{margin:0 0 8px;color:#a03a2a;font-weight:600;font-size:12px}.sn-dlg .sn-ck{flex-direction:row;align-items:center;gap:6px;font-weight:600}
+html[data-theme=dark] .sn-dlg fieldset{border-color:#1e3747}
 .mrw .mr-pt{font-size:11px;color:var(--em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:520px}
 .mrw .mr-l1 .mt{font-size:11px;font-style:normal;white-space:nowrap}.mrw .mr-l2{display:flex;gap:5px;margin-top:3px}
 .mrw .e-urg{font:400 10px var(--emono);font-style:normal;padding:1px 7px;border:1px solid var(--el);background:var(--egs);color:var(--eg);white-space:nowrap}.mrw .e-urg.pend{background:#f6e3de;color:#923d30;border-color:#e0b8ae}
@@ -2099,6 +2107,32 @@ document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.
   FD.pend[t.getAttribute('data-fk')]=t.value;t.closest('label').classList.add('mud');fdSt('Alterações a gravar…','pend');clearTimeout(FD.t);FD.t=setTimeout(fdGrava,900);
   if(/^(triagem\.Urgência|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.getAttribute('data-fk'))){fdPills();fdRender();}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=$('#fd');if(o&&!o.hidden)fdFecha();}});
+/* sinalizações do cartão (Pauta e Monocráticas): ícones discretos na linha; cada um abre o diálogo de sinalizações do processo */
+function sinais(it,A,c){var MO=S.fonte==='mono',b=function(f,on,cls,ic,tt,n){return '<button type="button" class="sn-b'+(on?' on '+cls:'')+'" data-a="sinal" data-f="'+f+'" title="'+esc(tt)+'" aria-label="'+esc(tt)+'">'+ic+(n?'<i>'+n+'</i>':'')+'</button>';};
+  return '<span class="sn" role="group" aria-label="Sinalizações">'+
+    (MO?'':b('pri',!!c.sopref,'pri',ICN.pri,c.sopref?'Sustentação oral / preferência: '+c.sopref:'Sustentação oral ou preferência: nenhuma · clique para registrar'))+
+    b('al',A.length>0,'al',ICN.al,A.length?'Alertas: '+A.join(' · ')+' · clique para conferir':'Admissibilidade sem alertas · clique para conferir',A.length>1?A.length:'')+
+    b('ic',!!c.intercor,c.intercorOk?'ok':'ic2',ICN.ic,c.intercor?'Intercorrência'+(c.intercorOk?' (resolvida)':'')+': '+c.intercor:'Sem intercorrência · clique para registrar')+
+    '<button type="button" class="sn-b dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></span>';}
+function sinalDlg(it,foco){var old=document.getElementById('sn-dlg');if(old)old.remove();var MO=S.fonte==='mono',c=it.ctl||{},A=alertas(it);
+  var sel=function(k,ops,rot){var v=c[k]||'';return '<label>'+rot+'<select name="'+k+'"><option value="">—</option>'+ops.map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+(v&&ops.indexOf(v)<0?'<option selected>'+esc(v)+'</option>':'')+'</select></label>';};
+  var d=document.createElement('dialog');d.id='sn-dlg';d.className='dv-dlg sn-dlg';
+  d.innerHTML='<form method="dialog"><small class="dv-ey">Sinalizações do processo</small><h2>'+esc(it.cnj)+'</h2><p class="mut">'+esc([MO?'Monocrática':'Sessão de '+br(S.ses)+(it.item?' · item '+it.item:''),it.assunto].filter(Boolean).join(' · '))+'</p>'+
+    (MO?'':'<fieldset data-sec="pri"><legend>Sustentação oral ou preferência</legend><div class="dv-r">'+sel('sopref',SOP,'Pedido')+'</div></fieldset>')+
+    '<fieldset data-sec="al"><legend>Admissibilidade · alertas</legend>'+(A.length?'<p class="sn-al">'+A.map(esc).join(' · ')+'</p>':'<p class="mut">Nenhum alerta com o que está marcado.</p>')+
+      '<div class="dv-r">'+sel('tempest',CP.tempest,'Tempestividade')+sel('preparo',CP.preparo,'Preparo')+'</div><div class="dv-r">'+sel('repres',CP.repres,'Representação')+sel('midias',CP.midias,'Mídias')+'</div><div class="dv-r">'+sel('mpf',CP.mpf,'Intervenção do MPF')+sel('parecer',CP.parecer,'Parecer do MPF')+'</div></fieldset>'+
+    '<fieldset data-sec="ic"><legend>Intercorrência</legend><label>Descrição<textarea name="intercor" rows="3" maxlength="1200" placeholder="O que impede ou atrasa a liberação">'+esc(c.intercor||'')+'</textarea></label><label class="sn-ck"><input type="checkbox" name="intercorOk"'+(c.intercorOk?' checked':'')+'> Intercorrência resolvida</label></fieldset>'+
+    '<div class="dv-a"><button type="button" class="b" data-sn="dv" style="margin-right:auto">Registrar dúvida…</button><button type="button" class="b" data-sn="x">Cancelar</button><button type="submit" class="b pri">Salvar</button></div></form>';
+  document.body.appendChild(d);
+  var fim=function(){d.close();d.remove();};
+  d.querySelector('[data-sn=x]').onclick=fim;d.querySelector('[data-sn=dv]').onclick=function(){fim();duvidaDlg(it);};
+  d.querySelector('form').onsubmit=function(e){e.preventDefault();var f=e.target,m={};it.ctl=it.ctl||{};
+    ['sopref','tempest','preparo','repres','midias','mpf','parecer'].forEach(function(k){if(!f[k])return;var v=f[k].value;if((it.ctl[k]||'')!==v){m[k]=v;if(v)it.ctl[k]=v;else delete it.ctl[k];}});
+    var tx=f.intercor.value.trim(),ok=f.intercorOk.checked&&!!tx?'Sim':'';
+    if((it.ctl.intercor||'')!==tx){m.intercor=tx;if(tx)it.ctl.intercor=tx;else delete it.ctl.intercor;}
+    if((it.ctl.intercorOk?'Sim':'')!==ok){m.intercorOk=ok;if(ok)it.ctl.intercorOk=ok;else delete it.ctl.intercorOk;}
+    fim();if(!Object.keys(m).length){toast('Nada mudou.');return;}marcar(it,m);render();toast('Sinalizações registradas. Gravação em instantes.');};
+  d.showModal();var fs=d.querySelector('[data-sec="'+(foco||'al')+'"]');if(fs){fs.classList.add('foco');var x=fs.querySelector('select,textarea');if(x)setTimeout(function(){x.focus();},30);}}
 function cartao(it){
   var k=dg(it.cnj),ab=!!S.aberto[k],et=etapa(it),C=(it.ctl||{}).cartao||{},tj=tipoJ(it),o={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3,'Assinada':3}[et],A=alertas(it),c=it.ctl||{};
   var stp=[['Minutado','<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>'],['Corrigido','✓'],['Liberado','➤']]
@@ -2119,14 +2153,14 @@ function cartao(it){
       '<i class="ln'+(asn?' ok':'')+'"></i><span class="sp sp-as'+(asn?' ok':'')+'" role="img" title="'+(asn?'Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):''):'Assinatura: registrada na ficha do processo (Produção)')+'" aria-label="'+(asn?'Assinada':'Ainda não assinada')+'">'+svm('<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>')+'</span>';
     var segs=[['Minutante','Min.',it.servidor],['Corretor','Cor.',it.corretor],['Minutado em','',it.dataMinuta?br(it.dataMinuta).slice(0,5):'']].filter(function(x){return x[2];});
     return '<article class="pc cpt edr mrw ee'+oM+(meu(it)?' meu':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Com minuta','Revisada','Para assinatura','Assinada'][oM])+' · clique na linha para abrir o prontuário de produção">'+
-      '<span class="mr-o" role="group" aria-label="Sinalizações"><span class="ic'+(A.length?' on al':'')+'" title="'+esc(A.length?A.join(' · '):'Sem alertas')+'">'+ICN.al+'</span><span class="ic'+(c.intercor?' on ic2':'')+'" title="'+esc(c.intercor?'Intercorrência: '+c.intercor:'Sem intercorrência')+'">'+ICN.ic+'</span><button class="ic e-dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></span>'+
+      
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar decisão '+esc(it.item||'')+'">'+
       '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="Tipo de julgamento (ato)'+(it.tarefa?' · tarefa no PJe: '+esc(it.tarefa):'')+'">'+esc(c.tipoAto||'tipo de ato não informado')+'</span>'+
       '<span class="mr-as" title="'+esc('Assunto: '+(it.assunto||'não informado')+(it.partes?' · '+it.partes:''))+'">· '+esc(it.assunto||'assunto não informado')+'</span>'+(metaDe(it)?'<em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</span>'+
       (urgDe(it)?'<span class="mr-l2"><em class="e-urg'+(urgPend(it)?' pend':'')+'" title="Pedido urgente: definido no prontuário">'+esc(urgDe(it))+(urgPend(it)?' · não apreciada':' · '+esc(c.urgSit||'apreciada'))+'</em></span>':'')+'</div></span>'+
       '<span class="gb"><input class="mr-ob" data-d="obs" value="'+esc(it.obs||'')+'" placeholder="síntese ou observações…" aria-label="Síntese ou observações da decisão">'+
       (segs.length?'<span class="mr-tg" title="'+esc(segs.map(function(x){return x[0]+' '+x[2];}).join(' · '))+' · definido no prontuário">'+segs.map(function(x){return '<span>'+(x[1]?x[1]+' ':'')+'<b>'+esc(x[2])+'</b></span>';}).join('')+'</span>':'')+
-      '<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stM+'</div></div></span></div></article>';}
+      sinais(it,A,c)+'<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stM+'</div></div></span></div></article>';}
   if(S.fonte!=='mono'&&$('#v-pauta')._ed){
     var sv=function(d){return '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';};
     var stE=[['Minutado',sv('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta entregue'],['Corrigido',sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Correção concluída'],['Liberado',sv('<path d="M4 12l15-7-5 15-3-6z"/>'),'Voto liberado']]
@@ -2134,14 +2168,14 @@ function cartao(it){
     /* mesmo cartão das Monocráticas: sinalizações na coluna da esquerda, uma linha de identificação, síntese e etiqueta de responsáveis, etapas */
     var segP=[['Minutante','Min.',it.servidor&&it.servidor!=='—'?it.servidor:''],['Corretor','Cor.',it.corretor&&it.corretor!=='—'?it.corretor:''],['Minutado em','',it.dataMinuta?br(it.dataMinuta).slice(0,5):'']].filter(function(x){return x[2];});
     return '<article class="pc cpt edr mrw ee'+o+(meu(it)?' meu':'')+(A.length?' al':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Minutado','Corrigido','Liberado'][o]||'')+' · clique na linha para abrir o prontuário de produção">'+
-      '<span class="mr-o" role="group" aria-label="Sinalizações"><span class="ic'+(c.sopref?' on':'')+'" title="'+esc(c.sopref?'Sustentação oral / preferência: '+c.sopref:'Sem sustentação oral nem preferência')+'">'+ICN.pri+'</span><span class="ic'+(A.length?' on al':'')+'" title="'+esc(A.length?A.join(' · '):'Sem alertas de admissibilidade')+'">'+ICN.al+'</span><span class="ic'+(c.intercor?' on ic2':'')+'" title="'+esc(c.intercor?'Intercorrência: '+c.intercor:'Sem intercorrência')+'">'+ICN.ic+'</span><button class="ic e-dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></span>'+
+      
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar item '+esc(it.item||'')+'">'+
       '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="Apreciação">'+esc(aprec(it))+'</span>'+
       '<span class="mr-as" title="'+esc('Assunto: '+(it.assunto||'não informado')+(it.partes?' · '+it.partes:''))+'">· '+esc(it.assunto||'assunto não informado')+'</span>'+(metaDe(it)?'<em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</span>'+
       (it.partes||it.sigilo?'<span class="mr-l2"><span class="mr-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</span>'+(it.sigilo?'<em class="e-urg pend" title="Sigilo: '+esc(it.sigilo)+'">sigilo</em>':'')+'</span>':'')+'</div></span>'+
       '<span class="gb"><input class="mr-ob" data-d="obs" value="'+esc(it.obs||'')+'" placeholder="síntese ou observações…" aria-label="Síntese ou observações do processo">'+
       (segP.length?'<span class="mr-tg" title="'+esc(segP.map(function(x){return x[0]+' '+x[2];}).join(' · '))+' · definido no prontuário">'+segP.map(function(x){return '<span>'+(x[1]?x[1]+' ':'')+'<b>'+esc(x[2])+'</b></span>';}).join('')+'</span>':'')+
-      '<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stE+'</div></div></span></div></article>';}
+      sinais(it,A,c)+'<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stE+'</div></div></span></div></article>';}
   if(!ab||S.fonte!=='mono')return h+'</article>';
   var dt=function(f){return '<input type="date" data-d="'+f+'" value="'+esc(it[f]||'')+'">';};
   return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b" data-a="ficha" title="Ficha completa do processo (a mesma do CMT-monitor)">▤ Ficha do processo</button><button class="b pri" data-a="comp" title="Consultar no Compendium com os dados deste cartão">◈ Compendium</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
@@ -2793,6 +2827,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
   if(a==='ficha'){fichaDialogo(it.cnj,lista().map(function(i){return i.cnj;}));return;}
   if(a==='pront'){S.prt=k;prontLateral();return;}
   if(a==='duvida'){duvidaDlg(it);return;}
+  if(a==='sinal'){sinalDlg(it,b.getAttribute('data-f'));return;}
   if(a==='comp'){var C2=(it.ctl||{}).cartao||{},P={processo:it.cnj,classe:it.classe,assunto:it.assunto,subassuntos:C2.subassuntos,especificidades:C2.especificidades,questoes:C2.questoes,tipoJulgamento:tipoJ(it),decisaoOrigem:(C2.orig||{}).tipo,
       recursos:(C2.recursos||[]).map(function(r){return [r.tipo,r.parte].filter(Boolean).join(' · ');}).filter(Boolean),resultado:(it.ctl||{}).resJulg};
     Object.keys(P).forEach(function(x){if(!P[x]||(Array.isArray(P[x])&&!P[x].length))delete P[x];});
