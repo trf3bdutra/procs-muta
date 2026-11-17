@@ -33,7 +33,7 @@
   function carregarCal(){
     if(CQ.cal)return Promise.resolve();
     return jget('/api/sessoes').then(function(c){CQ.cal=(c.sessoes||[]).slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});})
-      .catch(function(er){CQ.cal=[];CQ.erro=er.login?er.message:'As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Modus Operandi dos cartões continua enviando o caso.';});
+      .catch(function(er){CQ.cal=[];CQ.erro=er.login?er.message:'As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Compendium dos cartões continua enviando o caso.';});
   }
   function zerar(){CQ.sel='';CQ.grupo='';CQ.ver={};CQ.usar='';CQ.matriz=false;}
   function consultar(){
@@ -211,7 +211,7 @@
     if(CQ.erro)h+='<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir o Ex Officio</a>':'')+'</div>';
     tp.innerHTML=h;
     var P=CQ.perfil;
-    if(!P){can.innerHTML='';or.innerHTML='';mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA <small>· sem caso em consulta</small></div><div class="cqvz">Escolha a sessão, informe o item da pauta e aperte Enter. O Modus Operandi lê o cartão gravado no procs-muta, aplica ao caso o modelo do banco ou, na falta dele, a minuta-matriz como estrutura, e confere a conformidade.</div></div>';ligar();return;}
+    if(!P){can.innerHTML='';or.innerHTML='';mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA <small>· sem caso em consulta</small></div><div class="cqvz">Escolha a sessão, informe o item da pauta e aperte Enter. O Compendium lê o cartão gravado no procs-muta, aplica ao caso o modelo do banco ou, na falta dele, a minuta-matriz como estrutura, e confere a conformidade.</div></div>';ligar();return;}
     if(!BASE){mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA</div><div class="cqvz">Carregando a base do gabinete…</div></div>';ligar();base().then(render);return;}
     var R=buscar(P),A=aplicar(P,R);
     can.innerHTML=canhoto(P,A);mn.innerHTML=folha(P,A);or.innerHTML=orientacoes(P,A,R);

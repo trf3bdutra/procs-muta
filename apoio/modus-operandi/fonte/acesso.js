@@ -1,4 +1,4 @@
-/* ================= ACESSO: perfis do Modus Operandi (apoio/acessos.json), cada um inclui o anterior =================
+/* ================= ACESSO: perfis do Compendium (apoio/acessos.json), cada um inclui o anterior =================
    equipe (todos, com ou sem login): Ementário, Editorial, Diretrizes com as entradas rápidas e Consulta, só leitura
    avancado: + Enunciados, Repertório, Enciclopédia (conteúdo vindo do /api/compendio) e atalho do Monitor
    editor: + edição de tudo (botões Editar, entradas rápidas e a página /editor/) */
@@ -24,7 +24,7 @@
     if(!AC.ok){c.innerHTML='';return;}
     if(!AC.usuario){c.innerHTML='<button class="ac-btn" data-acentra title="Entrar com o login do Ex Officio">Entrar</button>';return;}
     var PN={equipe:'Equipe',avancado:'Avançado',editor:'Editor'};
-    var h='<span class="ac-u" title="Conectado como '+e(AC.usuario)+'">'+e(AC.usuario)+'</span><span class="ac-p" title="Perfil no Modus Operandi (apoio/acessos.json)">'+PN[AC.perfil]+'</span>';
+    var h='<span class="ac-u" title="Conectado como '+e(AC.usuario)+'">'+e(AC.usuario)+'</span><span class="ac-p" title="Perfil no Compendium (apoio/acessos.json)">'+PN[AC.perfil]+'</span>';
     c.innerHTML=h+'<button class="ac-sair" data-acsai title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button>';}
   function dlgLogin(){var o=q('#ac-dlg');if(!o){o=document.createElement('div');o.id='ac-dlg';o.className='ac-dlg';document.body.appendChild(o);}
     o.hidden=false;o.innerHTML='<form class="ac-dlgc" role="dialog" aria-label="Entrar"><h3>Entrar</h3><p class="meta">O mesmo nome e a mesma senha do Ex Officio.</p><label><span>Nome</span><select id="ac-nome" required><option value="">Carregando…</option></select></label><label><span>Senha</span><input id="ac-senha" type="password" autocomplete="current-password" required></label><p class="ac-er" id="ac-er" hidden></p><div class="ac-acts"><button class="btn" type="submit">Entrar</button><button class="btn ghost" type="button" data-acfecha>Cancelar</button></div></form>';
