@@ -1,0 +1,74 @@
+# Rotinas pela API do Claude (chave criada no Claude Console, guardada no segredo ANTHROPIC_API_KEY).
+#   radar      segunda, 06h17 (Cuiabá)  → relatorios/radar/AAAA-MM-DD.md
+#   auditoria  dia 1, 07h43             → relatorios/auditoria/AAAA-MM.md
+#   indice     sábado, 04h23            → precedentes/indice-ia/ (depois da coleta semanal de sexta)
+# Sem o segredo, a execução só avisa e termina. Ver scripts/console/README.md.
+name: Rotinas pela API do Claude
+on:
+  schedule:
+    - cron: "17 10 * * 1"
+    - cron: "43 11 1 * *"
+    - cron: "23 8 * * 6"
+  workflow_dispatch:
+    inputs:
+      tarefa:
+        description: "Rotina"
+        type: choice
+        options: [radar, auditoria, indice]
+        default: radar
+      opcoes:
+        description: "Opções do script (ex.: --mes 2026-10 · --limite 1000 --divergencias 50 · --dias 14)"
+        required: false
+        default: ""
+permissions:
+  contents: write
+concurrency:
+  group: console-claude
+  cancel-in-progress: false
+jobs:
+  rodar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      AGENDA: ${{ github.event.schedule }}
+      TAREFA_MANUAL: ${{ inputs.tarefa }}
+      OPCOES: ${{ inputs.opcoes }}
+    steps:
+      - name: Escolhe a rotina
+        id: t
+        run: |
+          case "$AGENDA" in
+            "17 10 * * 1") T=radar ;;
+            "43 11 1 * *") T=auditoria ;;
+            "23 8 * * 6") T=indice ;;
+            *) T="$TAREFA_MANUAL" ;;
+          esac
+          case "$T" in radar|auditoria|indice) ;; *) echo "rotina inválida: $T"; exit 1 ;; esac
+          echo "tarefa=$T" >> "$GITHUB_OUTPUT"
+      - name: Sem chave da API
+        if: env.ANTHROPIC_API_KEY == ''
+        run: echo "::warning::O segredo ANTHROPIC_API_KEY não está configurado; nada foi feito."
+      - uses: actions/checkout@v4
+        if: env.ANTHROPIC_API_KEY != ''
+      - uses: actions/setup-python@v5
+        if: env.ANTHROPIC_API_KEY != ''
+        with:
+          python-version: "3.12"
+      - name: Executa
+        if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          pip install --quiet anthropic
+          cd scripts/console
+          # shellcheck disable=SC2086
+          python3 "${{ steps.t.outputs.tarefa }}.py" $OPCOES
+      - name: Grava
+        if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          git add relatorios precedentes/indice-ia 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Nada novo."; exit 0; fi
+          git config user.name "console-claude[bot]"
+          git config user.email "console-claude@users.noreply.github.com"
+          git commit -m "Console: ${{ steps.t.outputs.tarefa }} ($(date -u +%d/%m/%Y))"
+          for i in 1 2 3; do git pull --rebase --quiet && git push && exit 0; sleep 10; done
+          exit 1
