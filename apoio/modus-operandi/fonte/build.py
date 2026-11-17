@@ -158,6 +158,14 @@ pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 _M28 = RAIZ/'modelos/matrizes-2886.json'
 if _M28.exists():
     pacote['m2886'] = ler(_M28)
+    # íntegra dos acórdãos-modelo (modelos/kit-2886): relatório, voto, ementa e acórdão de cada código
+    _K = {}
+    for _f in sorted((RAIZ/'modelos/kit-2886').glob('2886-*.txt')):
+        _t = _f.read_text(encoding='utf-8'); _c = _f.name.split('_')[0]
+        _ref = next((l for l in _t.split('\n') if l.startswith('Referência:')), '')
+        _i = _t.find('\nRELATÓRIO\n')
+        _K[_c] = {'ref': _ref.replace('Referência: ', ''), 'texto': _t[_i + 1:] if _i >= 0 else _t}
+    pacote['m2886kit'] = _K
     try:
         import importlib.util as _iu
         _sp = _iu.spec_from_file_location('m2886', RAIZ/'scripts/modelos-matriz/matrizes_2886.py'); _mm = _iu.module_from_spec(_sp); _sp.loader.exec_module(_mm)

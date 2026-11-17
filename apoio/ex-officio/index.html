@@ -2181,49 +2181,24 @@ var LIA_2886="MATERIAL DO GABINETE — 28,86% (cumprimento individual da ACP 000
 function liaE2886(it){var C=(it&&it.ctl||{}).cartao||{};return /28[,.]\s?86|0005019-15\.1997/.test([it&&it.assunto,it&&it.classe,C.subassuntos,C.especificidades,C.questoes,C.obsGeral,C.sintese].join(' '));}
 function liaNorm(v){return String(v==null?'':v).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\s+/g,' ').trim();}
 function liaChave(k){return k.slice(2);}
-var LIA_MINUTA=['','ETAPA 2 · MINUTA DE JULGAMENTO (PARTE 2 DA RESPOSTA)',
-'Redija a minuta vinculada ao modelo do gabinete indicado no prontuário, nesta ordem:',
-'1. QUADRO DE IDENTIFICAÇÃO: processo; modelo usado (código e processo-paradigma); grupo e variação; fatos e IDs determinantes; resultado.',
-'2. MINUTA:',
-'- RELATÓRIO: narração fática e processual objetiva, com os IDs relevantes; decisão recorrida; teses do recurso, em itens “(1) …; (2) …”; contrarrazões; memoriais e manifestação do MPF, se houver. Fecho: “É o relatório.”',
-'- VOTO: a fundamentação do modelo aplicável, transcrita sem reescrever. Adapte só os fatos e IDs do caso, inclua ou retire os parágrafos de especificidade conforme os autos e ajuste a sucumbência e os honorários recursais.',
-'- EMENTA: cabeçalho em caixa alta (ramo do Direito, classe, assunto, conclusão); “I. Caso em exame”; “II. Questão em discussão” (sempre “saber se”); “III. Razões de decidir” (um fundamento por item); “IV. Dispositivo”; numeração contínua; títulos só com a inicial maiúscula; separador “__________”; depois, “Dispositivos relevantes citados:” e “Jurisprudência relevante citada:”. Sem ID, sem nome das partes, sem “Trata-se de”.',
-'- ACÓRDÃO: “Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, [resultado], nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.”',
-'3. QUADRO DE ADAPTAÇÕES: tabela “Trecho do modelo | Modificação efetuada | Fonte nos autos (ID)”.',
-'4. CHECAGEM FINAL, item por item: (1) nenhum dado do processo-modelo (nome, ID, data, valor) ficou na minuta; (2) todo ID citado existe nos autos e corresponde à peça; (3) relatório, dispositivo, ementa e acórdão têm o mesmo resultado; (4) sucumbência e honorários coerentes com a gratuidade e com o resultado; (5) os parágrafos usados são pertinentes à matéria do caso.',
-'5. PENDÊNCIAS E [VALIDAR]: pontos a conferir e pendências que impeçam o julgamento.',
-'','ETAPA 3 · PÁGINA DO PRONTUÁRIO (PARTE 3 DA RESPOSTA)',
-'Por último, o código de uma página HTML completa e autossuficiente (um só arquivo, sem recursos externos) que mostre o prontuário e a minuta para leitura, com o JSON da parte 1 embutido num <script type="application/json" id="prontuario"> e dois botões: “Baixar JSON” (gera o arquivo prontuario-[processo].json) e “Copiar minuta”. Se a resposta precisar ser encurtada, omita esta etapa, nunca as anteriores.',
-'','REGRAS OBRIGATÓRIAS',
-'- Use somente fatos, datas, IDs e nomes destes autos. Nunca invente dados.',
-'- Não resuma nem altere as teses consolidadas do Relator: o texto dos modelos e parágrafos-padrão é transcrito, não reescrito.',
-'- Nunca altere o resultado em silêncio: divergência entre os autos e o modelo vai a “validar”.',
-'- Precedente só com fonte verificável; TNU vedada.',
-'- Forma do gabinete: “União”; “artigo” por extenso; atos sem “nº”; datas DD/MM/AAAA; “(ID …)”.'].join('\n');
 function liaPrompt(mono,it){var L=LIA_CAMPOS[mono?'mono':'pauta'],R=LIA_CAMPOS.recursos;
   var linhas=L.map(function(e){var t=e[2],x='- '+liaChave(e[0])+' — '+e[1]+' ('+(t==='opcao'?'uma destas opções, exatamente: '+e[3].map(function(o){return '"'+o+'"';}).join(' | '):t==='data'?'data AAAA-MM-DD':t==='sim_nao'?'true ou false':t==='numero'?'número':'texto livre')+')';return x;}).join('\n');
-  return [(mono?'Você vai preencher o PRONTUÁRIO DE PRODUÇÃO do gabinete do Des. Fed. Carlos Muta (TRF-3, Turma Regional de MS) a partir dos autos deste processo'+(it?' ('+it.cnj+')':'')+'.'
-      :'Você vai atuar como agente de conformidade de minutas do gabinete do Des. Fed. Carlos Muta (TRF-3, Turma Regional de MS). Analise os autos deste processo'+(it?' ('+it.cnj+')':'')+', consulte o material do gabinete (catálogos de precedentes, modelos, parágrafos-padrão e, quando houver, o MATERIAL DO GABINETE ao fim deste prompt) e execute as etapas abaixo, nesta ordem.'),
-    mono?null:['','TAREFA',
-      '- Espécie de ato: prontuário de produção e minuta completa (relatório, voto, ementa no padrão da Recomendação CNJ 154/2024 adaptada pelo gabinete e acórdão).',
-      '- Matéria e assunto: identifique pelos autos.',
-      '- Resultado: proponha conforme o modelo e os precedentes do gabinete; registre a proposta em "validar".',
-      '','ETAPA 1 · PRONTUÁRIO',
-      'Leia as peças essenciais: petição inicial ou de cumprimento, impugnação ou contestação, decisão recorrida, certidões de intimação, recursos com a data do protocolo, contrarrazões, memoriais e parecer do MPF. Enquadre o caso no material do gabinete (grupo, variação e código do modelo). Se faltar peça indispensável, diga qual antes de redigir e registre em "pendencias".'].join('\n'),
+  return ['Você vai preencher o PRONTUÁRIO DE PRODUÇÃO do gabinete do Des. Fed. Carlos Muta (TRF-3, Turma Regional de MS) a partir dos autos deste processo'+(it?' ('+it.cnj+')':'')+'.',
+    mono?null:['','Leia as peças essenciais: petição inicial ou de cumprimento, impugnação ou contestação, decisão recorrida, certidões de intimação, recursos com a data do protocolo, contrarrazões, memoriais e parecer do MPF. Enquadre o caso no material do gabinete (grupo, variação e código do modelo), quando houver. Não redija minuta: ela é montada depois, no Compendium, com o texto integral dos modelos do gabinete. Se faltar peça indispensável, registre em "pendencias".'].join('\n'),
     '','REGRAS DO PRONTUÁRIO',
     '1. Use só o que está nos autos. Não invente fato, data, ID, nome ou precedente. Sem base nos autos, não inclua o campo.',
     '2. Para cada campo preenchido, indique a fonte em "fontes" (ID e tipo da peça; ex.: "ID 123456789 – Certidão de intimação").',
     '3. Campos de opção: copie exatamente uma das opções listadas. Datas: AAAA-MM-DD. Sim/não: true ou false.',
     '4. Textos: estilo do gabinete — direto, impessoal, uma ideia por frase, sem adjetivos. O que depender de conferência humana vai também em "validar".',
-    mono?'5. Responda APENAS com o bloco abaixo, sem texto antes ou depois.':'5. A resposta começa por este bloco, cru: sem cercas de código (```), sem markdown e sem quebra que invalide o JSON. Só depois dele vêm a minuta e a página (etapas 2 e 3).',
-    '',mono?'FORMATO DA RESPOSTA':'FORMATO DO BLOCO (PARTE 1 DA RESPOSTA)',
+    '5. Responda APENAS com o bloco abaixo, cru (sem cercas de código nem markdown), sem texto antes ou depois.',
+    '','FORMATO DA RESPOSTA',
     '<<<PRONTUARIO_CMT',
     '{"processo":"NNNNNNN-DD.AAAA.J.TR.OOOO","campos":{"chave":"valor"},'+(mono?'':'"recursos":[{"parte":"…","tipo":"…","id":"…","contra":"…"}],"pecas":[{"desc":"…","id":"…","data":"AAAA-MM-DD"}],')+'"pendencias":["providência pendente, uma por item"],"fontes":{"chave":"ID … – peça"},"validar":["ponto a conferir"]}',
     'PRONTUARIO_CMT>>>',
     '','CAMPOS (chave — rótulo — valores aceitos)',linhas,
     mono?'':'\nRECURSOS (lista "recursos"): parte = '+R.parte.map(function(o){return '"'+o+'"';}).join(' | ')+'; tipo = '+R.tipo.map(function(o){return '"'+o+'"';}).join(' | ')+'; id = ID da peça; contra (contrarrazões) = '+R.contra.map(function(o){return '"'+o+'"';}).join(' | ')+'.\nPEÇAS (lista "pecas"): outras peças relevantes, com descrição, ID e data.',
     '\nPENDÊNCIAS (lista "pendencias"): tudo o que impede ou atrasa o julgamento (ex.: intimar a parte para contrarrazões, aguardar parecer do MPF, juntar mídia, conferir prevenção ou conexão, regularizar representação).',
-    mono?null:LIA_MINUTA].filter(function(x){return x!==null;}).join('\n')+(!mono&&liaE2886(it)?'\n\n'+LIA_2886:'');}
+    ].filter(function(x){return x!==null;}).join('\n')+(!mono&&liaE2886(it)?'\n\n'+LIA_2886:'');}
 function liaLer(txt){var t=String(txt||''),m=/<<<\s*PRONTUARIO_CMT([\s\S]*?)PRONTUARIO_CMT\s*>>>/.exec(t),j=m?m[1]:t;var i=j.indexOf('{');if(i<0)throw new Error('Não encontrei o bloco PRONTUARIO_CMT nem um JSON na resposta.');
   var n=0,f=-1;for(var k=i;k<j.length;k++){var ch=j[k];if(ch==='"'){k++;while(k<j.length&&j[k]!=='"'){if(j[k]==='\\')k++;k++;}continue;}if(ch==='{')n++;else if(ch==='}'){n--;if(!n){f=k;break;}}}
   if(f<0)throw new Error('O JSON da resposta está incompleto.');var o=JSON.parse(j.slice(i,f+1));return o;}
@@ -2237,7 +2212,7 @@ function liaAtual(it,k){var tp=k[0],c=k.slice(2);return tp==='c'?(it.ctl||{})[c]
 function liaDlg(it){var old=document.getElementById('lia-dlg');if(old)old.remove();var MO=S.fonte==='mono',L=LIA_CAMPOS[MO?'mono':'pauta'],R=null,O=null;
   var d=document.createElement('dialog');d.id='lia-dlg';d.className='dv-dlg sn-dlg lia-dlg';
   var pinta=function(){var h='<form method="dialog"><small class="dv-ey">LIA · preencher o prontuário</small><h2>'+esc(it.cnj)+'</h2>';
-    if(!R){h+='<ol class="lia-p"><li><b>Copie o prompt</b> e cole na LIA, no PJe, com o processo aberto.</li><li>A LIA lê os autos e responde com o bloco <code>PRONTUARIO_CMT</code>'+(MO?'':', a minuta e a página do prontuário')+'.</li><li><b>Cole a resposta inteira</b> abaixo: o Ex Officio lê só o bloco. Confira campo a campo antes de aplicar.</li></ol>'+
+    if(!R){h+='<ol class="lia-p"><li><b>Copie o prompt</b> e cole na LIA, no PJe, com o processo aberto.</li><li>A LIA lê os autos e responde com o bloco <code>PRONTUARIO_CMT</code>.</li><li><b>Cole a resposta</b> abaixo e confira campo a campo antes de aplicar.</li></ol>'+
       '<div class="dv-a" style="justify-content:flex-start;margin:0 0 10px"><button type="button" class="b pri" data-lia="copiar">Copiar prompt para a LIA</button><button type="button" class="b" data-lia="baixar">Baixar .txt</button></div>'+
       '<label>Resposta da LIA<textarea name="tx" rows="8" placeholder="Cole aqui o bloco <<<PRONTUARIO_CMT … PRONTUARIO_CMT>>>"></textarea></label><p class="sn-al" id="lia-e" hidden></p>'+
       '<div class="dv-a"><button type="button" class="b" data-lia="x">Fechar</button><button type="button" class="b pri" data-lia="ler">Conferir resposta</button></div>';}
