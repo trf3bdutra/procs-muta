@@ -162,7 +162,7 @@ function ensureHost() {
 }
 function abrir(cnj, ad) {
   ensureHost();
-  ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; descartarTeor();
+  ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; ST.obsEd = false; ST.obsTx = ''; descartarTeor();
   ST.tab = tabNorm((ad && ad.aba) || 'resumo'); ST.vz = {};
   host.classList.add('on'); host.setAttribute('aria-hidden', 'false'); doc.documentElement.classList.add('cmt-fx-open');
   doc.addEventListener('keydown', onKey, true);
@@ -182,7 +182,7 @@ function fechar(force) {
 }
 function passo(n) {
   var L = ST.ad.lista || [], i = L.map(dg).indexOf(dg(ST.cnj)); if (L.length < 2 || i < 0) return;
-  if (Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas da ficha?')) return;
+  if ((Object.keys(ST.draft).length || (ST.obsEd && S(ST.obsTx) !== S(val('origem', 'Observações')))) && !window.confirm('Descartar as alterações não salvas da ficha?')) return;
   var ad = Object.assign({}, ST.ad, { aba: ST.tab }); abrir(L[(i + n + L.length) % L.length], ad);
 }
 function onKey(ev) {
@@ -417,7 +417,19 @@ function abaResumo() {
     return '<div class="rs-t ' + (g === 'urgencia' && !/^Apreciada/.test(t('Urgência - Apreciação')) ? 'is-warn' : '') + '"><span>' + E({ urgencia: 'Urgência', monocratica: 'Monocrática', meta: 'Meta', sobrestamento: 'Sobrestamento', sensivel: 'Caso sensível' }[g]) + '</span><b>' + E(v || 'sim') + '</b></div>';
   }).join('') + '</div>' : '<p class="rs-empty">Nenhum controle especial vale para este processo.</p>';
   var pr = kv([['Partes', [S(f.polo_ativo || f.Polo_Ativo), S(f.polo_passivo || f.Polo_Passivo)].filter(Boolean).join(' × ')], ['Seção', S(f['Seção Competente'])], ['Distribuição', brD(iso(f['data_distribuição'] || f['Data_Distribuição']))], ['Última movimentação', [S(f.ultimo_movimento || f['Última_Movimentação']), brD(iso(f['Data Último Movimento'] || f['Data_Última_Movimentação']) || S(f['Data Último Movimento']))].filter(Boolean).join(' · ')], ['Sentença', [val('origem', 'Sentença - Decisão'), val('origem', 'Sentença - ID') ? 'ID ' + val('origem', 'Sentença - ID') : ''].filter(Boolean).join(' · ')], ['Responsável', val('origem', 'Responsável')], ['Próxima ação', val('origem', 'Próxima ação')]]);
-  return top + pend + '<div class="rs-grid"><div class="rs-stack">' + col('Triagem', 'Triagem', 'tri', tri) + col(CE, CE, 'ce', ce) + '</div><div class="rs-stack">' + col(mono ? 'Pauta' : 'Pauta', 'Pauta', 'jul', pau) + col('Processo', 'Processo', 'processo', pr) + '</div><div class="rs-stack">' + col('Produção · ' + (mono ? 'monocrática' : 'acórdão'), 'Produção', 'pro', pro) + '</div></div>';
+  return top + pend + resumoObs() + '<div class="rs-grid"><div class="rs-stack">' + col('Triagem', 'Triagem', 'tri', tri) + col(CE, CE, 'ce', ce) + '</div><div class="rs-stack">' + col(mono ? 'Pauta' : 'Pauta', 'Pauta', 'jul', pau) + col('Processo', 'Processo', 'processo', pr) + '</div><div class="rs-stack">' + col('Produção · ' + (mono ? 'monocrática' : 'acórdão'), 'Produção', 'pro', pro) + '</div></div>';
+}
+
+/* Observações no Resumo: o texto formatado à vista; "Colar resumo" abre o campo ali mesmo (colar já padroniza) e grava só ele */
+function resumoObs() {
+  var v = val('origem', 'Observações'), ro = ST.ad.leitura, ed = !ro && ST.obsEd;
+  var acoes = ro ? '' : ed ? '' : '<button type="button" data-fx="obs-ed" title="Escrever ou colar o resumo do processo; ao colar, o texto já sai padronizado">' + (S(v) ? 'Editar' : 'Colar resumo') + ' ›</button>';
+  var corpo = ed ? '<textarea class="rs-obs-ta" data-fx-obs data-fx-postit rows="' + Math.min(14, Math.max(6, S(ST.obsTx).split('\n').length + 1)) + '" aria-label="Observações" placeholder="Cole aqui o resumo do processo (Próximo ato, Prazos e alertas, Partes e andamento, Post-its…)">' + E(ST.obsTx) + '</textarea>' +
+      '<small class="fx-pi-h">Ao colar, “## Seção”, “- item”, “Rótulo: valor” e “• Nota/Atenção/Pendência: texto — Peça · id N” já ficam no padrão.</small>' +
+      '<div class="rs-obs-ac"><button type="button" class="fx-pill is-on" data-fx="obs-salvar"' + (ST.busy ? ' disabled' : '') + '>' + (ST.busy ? 'Gravando…' : 'Gravar observações') + '</button><button type="button" class="fx-pill" data-fx="obs-x">Cancelar</button></div>'
+    : S(v) ? (temFormato(v) ? obsHtml(v) : '<p class="fx-obs-p" style="white-space:pre-wrap">' + E(v) + '</p>')
+    : '<p class="rs-empty">Sem observações.' + (ro ? '' : ' Use “Colar resumo” para registrar o resumo do processo já formatado.') + '</p>';
+  return '<section class="rs-col rs-c-obs rs-obs"><h4><span class="rs-ic">' + svg('edit') + '</span><span>Observações</span>' + acoes + '</h4>' + corpo + '</section>';
 }
 
 /* ───── ficha completa (leitura, impressão) ───── */
@@ -601,6 +613,11 @@ function onClick(ev) {
     if (t.hasAttribute('data-fx-tba')) L.push({}); else L.splice(+t.getAttribute('data-fx-i'), 1);
     ST.draft[id] = L; render(); return;
   }
+  if (a === 'obs-ed') { if (ST.ad.leitura) return; ST.obsEd = true; ST.obsTx = val('origem', 'Observações'); render(); var ta = host.querySelector('[data-fx-obs]'); if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); } return; }
+  if (a === 'obs-x') { ST.obsEd = false; ST.obsTx = ''; render(); return; }
+  if (a === 'obs-salvar') { var ot = host.querySelector('[data-fx-obs]'), ov = ot ? ot.value.replace(/\s+$/, '') : ST.obsTx; ST.obsTx = ov;
+    if (S(ov) === S(val('origem', 'Observações'))) { ST.obsEd = false; render(); return; }
+    gravar({ 'origem.Observações': ov }, 'Observações gravadas.').then(function (ok) { if (ok) { ST.obsEd = false; ST.obsTx = ''; render(); } }).catch(function () {}); return; }
   if (a === 'teor') { if (ST.teor) fecharTeor(); else { ST.teor = { step: 0 }; render(); } return; }
   if (a === 'teor-fechar') return fecharTeor();
   if (a === 'teor-voltar') { ST.teor.step = 1; render(); return; }
@@ -629,6 +646,7 @@ function onPastePostit(ev) {
 }
 function onInput(ev) {
   var t = ev.target; if (!t.hasAttribute) return;
+  if (t.hasAttribute('data-fx-obs')) { ST.obsTx = t.value; return; }
   if (t.hasAttribute('data-fx-val')) { var it = ST.teor && ST.teor.items && ST.teor.items[+t.getAttribute('data-fx-val')]; if (it) { it.value = t.value; it.status = !S(it.current) ? 'novo' : N(it.current) === N(it.value) ? 'igual' : 'conflito'; } return; }
   if (t.hasAttribute('data-fx-tb')) { var tid = t.getAttribute('data-fx-tb'), ti = tid.indexOf('.'), TL = linhas(tid.slice(0, ti), tid.slice(ti + 1)).map(function (x) { return Object.assign({}, x); }), li = +t.getAttribute('data-fx-i');
     TL[li] = TL[li] || {}; TL[li][t.getAttribute('data-fx-c')] = t.value; ST.draft[tid] = TL; var fb = t.closest('.fx-f'); if (fb) fb.classList.add('is-dirty');
