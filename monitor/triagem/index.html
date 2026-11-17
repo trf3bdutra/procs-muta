@@ -504,6 +504,46 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background-color:rgba(22
 #tri-prontuario{position:fixed;z-index:58;top:0;right:0;bottom:0;width:min(520px,96vw);display:flex;flex-direction:column;background:var(--p);border-left:2px solid var(--v);box-shadow:-16px 0 42px rgba(23,63,61,.2)}#tri-prontuario .tp-head{display:flex;align-items:flex-start;gap:12px;padding:17px 20px 13px;border-bottom:1px solid var(--l)}#tri-prontuario .tp-head h2{margin:4px 0 2px;font-size:21px;color:var(--v)}#tri-prontuario .tp-body{flex:1;overflow:auto;padding:14px 18px 24px;display:flex;flex-direction:column;gap:13px}#tri-prontuario .tp-group{border:1px solid var(--b);border-radius:8px;background:var(--w);overflow:hidden}#tri-prontuario .tp-group h3{margin:0;padding:9px 12px;border-bottom:1px solid var(--l);font-size:12px;color:var(--v);letter-spacing:.04em;text-transform:uppercase}#tri-prontuario .tp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:11px 12px}#tri-prontuario .tp-grid .f{min-width:0}#tri-prontuario .tp-grid .wide{grid-column:1/-1}#tri-prontuario .tp-grid input,#tri-prontuario .tp-grid select,#tri-prontuario .tp-grid textarea{width:100%;min-width:0;padding:8px 9px;font-weight:400}#tri-prontuario .tp-grid textarea{min-height:62px;resize:vertical}#tri-prontuario .tp-foot{display:flex;gap:8px;align-items:center;padding:12px 18px;border-top:1px solid var(--l);background:var(--w)}#tri-prontuario .tp-foot .grow{flex:1}.btn.pront{height:25px;padding:0 8px;font-size:10.5px;border-color:var(--b);color:var(--v);background:var(--p)}@media(max-width:860px){#tri-prontuario{width:100vw}}
 
 .proc-exp{display:none;padding:10px 14px 12px 54px;border-top:1px solid var(--l);background:#faf9f4}.proc-exp.on{display:block}.proc-exp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px}.proc-exp-item{min-width:0}.proc-exp-item b{display:block;margin-bottom:2px;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--m)}.proc-exp-item span{display:block;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12.5px;color:var(--tx)}.proc-exp-foot{display:flex;justify-content:flex-end;margin-top:8px}.proc-exp-toggle{border:0;background:transparent;color:var(--m);font:600 11px Figtree,sans-serif;cursor:pointer;padding:3px 8px}.proc-exp-toggle:hover{color:var(--v)}@media(max-width:860px){.proc-exp{padding-left:12px}.proc-exp-grid{grid-template-columns:1fr}}
+
+/* ===== escaninhos: painel do cartão e prontuário de triagem no padrão do prontuário do Ex Officio ===== */
+.proc-exp{padding:12px 16px 12px 54px!important;background:#fbfaf5!important;border-top:1px solid var(--l)}
+.pe-tri{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.pe-tri span{display:inline-flex;gap:6px;align-items:baseline;padding:2px 8px;border:1px solid var(--b);background:var(--w);font-size:12px}.pe-tri i{font:500 9.5px 'JetBrains Mono',monospace;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--m)}
+.pe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.pe-b{background:var(--w);border:1px solid var(--b);border-left:3px solid var(--v);padding:8px 11px;min-width:0}
+.pe-b h4{margin:0 0 4px;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--v)}
+.pe-fs{border-left-color:var(--g2)}.pe-fs h4{color:var(--g)}.pe-ic{border-left-color:var(--r)}.pe-ic h4{color:var(--r)}.pe-ob{border-left-color:var(--az2)}.pe-ob h4{color:var(--az)}
+.pe-t{font-size:12.5px;line-height:1.45;color:var(--tx);overflow-wrap:anywhere}.pe-t p{margin:0 0 3px}.pe-t ul{margin:0 0 3px;padding-left:16px}.pe-t li{margin:1px 0}.pe-t h5{margin:5px 0 2px;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--m)}
+.pe-vz{margin:0;font-size:12.5px;color:var(--m)}
+.pe-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}.pe-sem{font-size:11px;color:var(--m)}.pe-ac{display:flex;gap:6px}
+.proc-exp-toggle{font-size:11.5px!important}
+#tri-prontuario{top:76px;right:16px!important;bottom:16px!important;width:min(400px,94vw)!important;border:1px solid var(--b)!important;border-left:1px solid var(--b)!important;background:#fbfaf5!important;box-shadow:0 8px 28px rgba(23,63,61,.14)!important}
+#tri-prontuario .tp-head{padding:12px 14px 8px!important;border-bottom:0!important;align-items:flex-start}
+#tri-prontuario .tp-tt{flex:1;min-width:0}
+#tri-prontuario .tp-k{margin:0;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g2)}
+#tri-prontuario .tp-head h2{margin:2px 0 0!important;font:650 18px/1.15 Figtree,system-ui,sans-serif!important;letter-spacing:-.02em;color:var(--v)!important;white-space:nowrap}
+#tri-prontuario .tp-head h2 em{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;color:var(--g2)}
+#tri-prontuario .tp-x{width:28px;height:28px;border:1px solid var(--b2);background:var(--w);color:var(--tx);font-size:16px;cursor:pointer}
+#tri-prontuario .tp-id{margin:0 14px 12px;padding:8px 12px;border:1px solid var(--b);border-left:3px solid var(--v);background:var(--w);display:flex;flex-direction:column;gap:1px}
+#tri-prontuario .tp-id b{font:600 13px 'JetBrains Mono',monospace;color:var(--v)}#tri-prontuario .tp-id span{font-size:12px;color:var(--m)}
+#tri-prontuario .tp-body{padding:12px 14px 18px!important;gap:14px!important;border-top:1px solid var(--b);background:#fbfaf5}
+#tri-prontuario .tp-s{display:flex;flex-direction:column;gap:2px}
+#tri-prontuario .tp-s h3{display:flex;align-items:center;gap:8px;margin:0 0 6px;padding:7px 10px;border-bottom:2px solid var(--v);background:linear-gradient(90deg,#e7efec,transparent);font:650 12.5px Figtree,system-ui,sans-serif;color:var(--v)}
+#tri-prontuario .tp-s h3 em{width:20px;height:20px;display:grid;place-items:center;background:var(--v);color:#fff;font:600 10.5px 'JetBrains Mono',monospace;font-style:normal}
+#tri-prontuario .tp-s2 h3{border-bottom-color:#85601d;background:linear-gradient(90deg,#f8eedb,transparent)}#tri-prontuario .tp-s2 h3 em{background:#85601d}
+#tri-prontuario .tp-s3 h3{border-bottom-color:#4d6f8f;background:linear-gradient(90deg,#e8eef4,transparent)}#tri-prontuario .tp-s3 h3 em{background:#4d6f8f}
+#tri-prontuario .tp-s4 h3{border-bottom-color:#5d6b78;background:linear-gradient(90deg,#eceff2,transparent)}#tri-prontuario .tp-s4 h3 em{background:#5d6b78}
+#tri-prontuario .f{display:flex;flex-direction:column;gap:4px;padding:6px 0}
+#tri-prontuario .f>span{font:600 10.5px Figtree,system-ui,sans-serif;color:var(--m)}
+#tri-prontuario .f input,#tri-prontuario .f textarea{box-sizing:border-box;width:100%;border:1px solid var(--b2);border-radius:0;background:var(--w);font:400 12.5px Figtree,system-ui,sans-serif;padding:6px 8px;color:var(--tx)}
+#tri-prontuario .f textarea{resize:vertical;min-height:58px}
+#tri-prontuario .sgx{display:flex;flex-wrap:wrap;border:1px solid var(--b2);background:var(--w)}
+#tri-prontuario .sgx button{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;border-left:1px solid var(--b2);border-bottom:1px solid var(--b2);margin-bottom:-1px;background:transparent;color:var(--tx);font:600 11px Figtree,system-ui,sans-serif;padding:5px 8px;cursor:pointer}
+#tri-prontuario .sgx button:first-child{border-left:0}#tri-prontuario .sgx button i{width:7px;height:7px;background:var(--sgc)}
+#tri-prontuario .sgx button[aria-pressed=true]{background:var(--sgc,#173f3d);color:#fff}#tri-prontuario .sgx button[aria-pressed=true] i{background:#fff}
+#tri-prontuario .tp-nt{margin:4px 0 0;font-size:11px;color:var(--m)}
+#tri-prontuario .tp-foot{padding:10px 14px!important;border-top:1px solid var(--b);background:#fbfaf5;display:flex;gap:6px;align-items:center}#tri-prontuario .tp-foot .grow{flex:1}
+html[data-theme="dark"] #tri-prontuario,html[data-theme="dark"] #tri-prontuario .tp-body,html[data-theme="dark"] #tri-prontuario .tp-foot,html[data-theme="dark"] .proc-exp{background:#10222e!important}
+html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent)}
 </style>
 </head>
 <body>
@@ -966,9 +1006,22 @@ function obsCurta(v) { const L = String(v || '').split('\n').map((l) => l.trim()
 function obsLinha(o) { const x = obsCurta(o.row && o.row['Observações']); if (!x) return '';
   const R = { a: ['atenção', 'atenções'], p: ['pendência', 'pendências'], n: ['nota', 'notas'], d: ['dúvida', 'dúvidas'] }, chips = ['a', 'p', 'n', 'd'].filter((k) => x.pis[k]).map((k) => '<i class="op-' + k + '">' + x.pis[k] + ' ' + R[k][x.pis[k] > 1 ? 1 : 0] + '</i>').join('');
   return '<button type="button" class="obs" data-ficha="' + o.d + '" title="Observações da ficha · abrir">' + '<span>' + (x.prox ? 'Próximo ato' : 'Obs.') + '</span><b>' + esc(x.t || '—') + '</b>' + chips + '</button>'; }
+/* painel do cartão do escaninho: quatro blocos com filete de cor, texto em itens quando há várias linhas, ações no rodapé */
+function expItens(v){v=String(v||'').trim();if(!v)return '';const L=v.split('\n').map(x=>x.trim()).filter(Boolean);
+  if(L.length<2&&/;\s/.test(v))return '<ul>'+v.split(/;\s+/).map(x=>'<li>'+esc(x.replace(/[;.]\s*$/,''))+'</li>').join('')+'</ul>';
+  if(L.length<2)return '<p>'+esc(v)+'</p>';
+  return L.map(l=>{const m=/^##\s*(.+)$/.exec(l);if(m)return '<h5>'+esc(m[1])+'</h5>';const b=/^[-•*]\s*(.*)$/.exec(l);return b?'<li>'+esc(b[1])+'</li>':'<p>'+esc(l)+'</p>';}).join('').replace(/(<li>.*?<\/li>)+/g,x=>'<ul>'+x+'</ul>');}
+function procExp(o){const r=o.row||{},B=[['Próxima ação','pa',r['Próxima ação']],['O que falta sanar','fs',r['O que falta sanar']],['Intercorrências','ic',r['Intercorrências']],['Observações','ob',r['Observações']]];
+  const cheios=B.filter(x=>String(x[2]||'').trim()),vazios=B.filter(x=>!String(x[2]||'').trim());
+  const tri=[['Tempestividade',r['Tempestividade']],['Preparo',r['Preparo']],['Representação',r['Representação']],['MPF',r['MPF']],['Urgência',r['Urgência']],['Tema',r['Tema']]].filter(x=>x[1]&&!/^não verificado$/i.test(x[1]));
+  return '<div class="proc-exp on" id="proc-exp-'+o.d+'">'+
+    (tri.length?'<div class="pe-tri">'+tri.map(x=>'<span><i>'+esc(x[0])+'</i>'+esc(x[1])+'</span>').join('')+'</div>':'')+
+    (cheios.length?'<div class="pe-grid">'+cheios.map(x=>'<section class="pe-b pe-'+x[1]+'"><h4>'+esc(x[0])+'</h4><div class="pe-t">'+expItens(x[2])+'</div></section>').join('')+'</div>':'<p class="pe-vz">Nada anotado neste processo. Use o prontuário de triagem para registrar providências.</p>')+
+    '<div class="pe-foot">'+(vazios.length&&cheios.length?'<span class="pe-sem">sem registro: '+vazios.map(x=>esc(x[0].toLowerCase())).join(' · ')+'</span>':'<span></span>')+
+    '<span class="pe-ac"><button type="button" class="btn sm" data-ficha="'+o.d+'">Ficha</button><button type="button" class="btn sm pri" data-prontuario="'+o.d+'">Prontuário de triagem</button></span></div></div>';}
 function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>', exp = ABA.indexOf('esc:') === 0, aberto = exp && PROC_EXP_ABERTO === o.d;
-  const detalhes = exp ? '<div class="proc-exp' + (aberto ? ' on' : '') + '" id="proc-exp-' + o.d + '"><div class="proc-exp-grid">' + [['Próxima ação',o.row['Próxima ação']],['O que falta sanar',o.row['O que falta sanar']],['Intercorrências',o.row['Intercorrências']],['Observações',o.row['Observações']]].map(x=>'<div class="proc-exp-item"><b>'+x[0]+'</b><span>'+esc(x[1]||'—')+'</span></div>').join('')+'</div><div class="proc-exp-foot"><button type="button" class="btn sm" data-prontuario="'+o.d+'">Abrir prontuário de triagem</button></div></div>' : '';
-  return '<div class="proc-item"><div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Abrir prontuário rápido">Triagem</button>' + obsLinha(o) + (exp ? '<button type="button" class="proc-exp-toggle" data-proc-exp="'+o.d+'" aria-expanded="'+aberto+'">'+(aberto?'Recolher painel ▴':'Ver anotações e providências ▾')+'</button>' : '') + '</div>' + detalhes + '</div>'; }
+  const detalhes = exp && aberto ? procExp(o) : '';
+  return '<div class="proc-item"><div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Abrir prontuário rápido">Triagem</button>' + obsLinha(o) + (exp ? '<button type="button" class="proc-exp-toggle" data-proc-exp="'+o.d+'" aria-expanded="'+aberto+'" title="'+(aberto?'Recolher':'Anotações e providências')+'">'+(aberto?'Recolher ▴':'Anotações ▾')+'</button>' : '') + '</div>' + detalhes + '</div>'; }
 function lista(L, st, onde) {
   const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
   const todosMarc = L.length && L.every((o) => SEL.has(o.d));
@@ -1095,6 +1148,12 @@ function vEscaninhos() {
     h += '<div class="ecard" role="button" tabindex="0" data-esc-abre="' + esc(e.id) + '" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><span class="k" style="color:var(--m)">' + (ABERTAS.indexOf(e.id) >= 0 ? 'aberto em aba' : 'criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)))) + '</span><b>' + esc(e.titulo) + '</b><span style="font-size:13px;color:var(--m2)">' + esc(e.subtitulo || '') + '</span><span class="ft"><span class="mono" style="font-size:22px;color:var(--v)">' + nf(n) + '</span><span style="display:flex;gap:10px"><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar</button><button type="button" class="lk" style="color:var(--r)" data-esc-del="' + esc(e.id) + '">Excluir</button></span></span></div>'; });
   h += '<button type="button" class="ecard novo" data-esc-novo>+ Novo escaninho</button></div><p style="font-size:12.5px;color:var(--m)">Excluir um escaninho devolve os processos dele à fila de triagem; nada sai do acervo.</p></div>'; return h; }
 
+const TRI_COR={'Tempestivo':'#1f5a4a','Intempestivo':'#8a2f22','Comprovado':'#1f5a4a','Não Recolhido':'#8a2f22','Regular':'#1f5a4a','Negativo':'#8a2f22','Com Parecer':'#24506f'};
+/* posição do prontuário: abaixo da barra do topo, com a mesma folga à direita e embaixo */
+function triPos(g){const t=document.getElementById('top'),hb=t?Math.max(t.getBoundingClientRect().bottom,0):60;g.style.top=Math.round(hb+16)+'px';}
+D.addEventListener('click',(e)=>{const b=e.target.closest&&e.target.closest('[data-tri-seg]');if(!b)return;const w=b.parentNode,sl=w.previousElementSibling;if(!sl||sl.tagName!=='SELECT')return;
+  let v=b.dataset.triSeg;if(sl.value===v)v=sl.options[0]?sl.options[0].value:'';sl.value=v;[...w.children].forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.triSeg===v)));});
+addEventListener('scroll',()=>{const g=document.getElementById('tri-prontuario');if(g)triPos(g);},{passive:true});
 function abrirProntuarioTriagem(d) {
   const o=IDX.get(d); if(!o)return; const raw=o.row||{};
   const campos=[
@@ -1110,15 +1169,17 @@ function abrirProntuarioTriagem(d) {
     ['origem.Próxima ação','Próxima ação','t']
   ];
   const valor=(k)=>raw[k.slice(k.indexOf('.')+1)]||'';
-  const field=(c)=>{const k=c[0],v=valor(k);if(c[2]==='s')return '<label class="f">'+c[1]+'<select data-tri-field="'+k+'">'+c[3].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+(x||'—')+'</option>').join('')+'</select></label>';return '<label class="f'+(c[2]==='a'?' wide':'')+'">'+c[1]+(c[2]==='a'?'<textarea data-tri-field="'+k+'" rows="2">'+esc(v)+'</textarea>':'<input type="text" data-tri-field="'+k+'" value="'+esc(v)+'">')+'</label>';};
-  const g=document.createElement('aside');g.id='tri-prontuario';g.setAttribute('role','dialog');g.setAttribute('aria-label','Prontuário rápido de triagem');
-  g.innerHTML='<div class="tp-head"><div style="flex:1"><p class="k" style="margin:0">Prontuário de triagem · '+esc(o.secao)+'</p><h2>'+esc(o.cnj)+'</h2><p style="font-size:12px;color:var(--m);margin:0">'+esc(o.assunto)+'</p></div><button type="button" class="x" data-tri-close aria-label="Fechar">×</button></div>'+
-  '<div class="tp-body"><section class="tp-group"><h3>Admissibilidade e regularidade</h3><div class="tp-grid">'+campos.slice(0,3).map(field).join('')+'</div></section>'+
-  '<section class="tp-group"><h3>Ministério Público e urgência</h3><div class="tp-grid">'+campos.slice(3,6).map(field).join('')+'</div></section>'+
-  '<section class="tp-group"><h3>Matéria e gestão</h3><div class="tp-grid">'+campos.slice(6,8).map(field).join('')+'</div></section>'+
-  '<section class="tp-group"><h3>Alegações e providências</h3><div class="tp-grid">'+campos.slice(8).map(field).join('')+'</div></section>'+
-  '<p style="font-size:11.5px;color:var(--m)">Os campos são gravados na ficha única do processo (origem e triagem). A ficha completa permanece disponível no número do processo.</p></div>'+
-  '<div class="tp-foot"><span class="grow" style="font-size:11px;color:var(--m)">Registro na ficha do processo</span><button type="button" class="btn" data-tri-close>Fechar</button><button type="button" class="btn pri" data-tri-save="'+d+'">Salvar</button></div>';
+  const field=(c)=>{const k=c[0],v=valor(k);
+    if(c[2]==='s'){const O=c[3].filter(x=>x);return '<div class="f"><span>'+c[1]+'</span><select data-tri-field="'+k+'" hidden>'+c[3].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+(x||'—')+'</option>').join('')+'</select><div class="sgx" role="group" aria-label="'+esc(c[1])+'">'+O.map(x=>'<button type="button" data-tri-seg="'+esc(x)+'" aria-pressed="'+(x===v)+'"'+(TRI_COR[x]?' style="--sgc:'+TRI_COR[x]+'"':'')+'>'+(TRI_COR[x]?'<i aria-hidden="true"></i>':'')+esc(x)+'</button>').join('')+'</div></div>';}
+    return '<label class="f'+(c[2]==='a'?' wide':'')+'"><span>'+c[1]+'</span>'+(c[2]==='a'?'<textarea data-tri-field="'+k+'" rows="3">'+esc(v)+'</textarea>':'<input type="text" data-tri-field="'+k+'" value="'+esc(v)+'">')+'</label>';};
+  const sec=(n,t,L)=>'<section class="tp-s tp-s'+n+'"><h3><em>'+n+'</em>'+t+'</h3>'+L.map(field).join('')+'</section>';
+  const g=document.createElement('aside');g.id='tri-prontuario';g.setAttribute('role','dialog');g.setAttribute('aria-label','Prontuário de triagem');
+  g.innerHTML='<div class="tp-head"><div class="tp-tt"><p class="tp-k">02 / Triagem</p><h2>Prontuário <em>de triagem.</em></h2></div><button type="button" class="tp-x" data-tri-close aria-label="Fechar" title="Fechar">×</button></div>'+
+  '<div class="tp-id"><b>'+esc(o.cnj)+'</b><span>'+esc(o.assunto||'assunto não informado')+'</span><span>'+esc(o.secao||'')+(o.tarefa?' · '+esc(o.tarefa):'')+'</span></div>'+
+  '<div class="tp-body">'+sec(1,'Admissibilidade',campos.slice(0,3))+sec(2,'MPF e urgência',campos.slice(3,6))+sec(3,'Matéria e gestão',campos.slice(6,8))+sec(4,'Alegações e providências',campos.slice(8))+
+  '<p class="tp-nt">Os campos são gravados na ficha única do processo (origem e triagem).</p></div>'+
+  '<div class="tp-foot"><button type="button" class="btn" data-ficha="'+d+'">Ficha completa</button><span class="grow"></span><button type="button" class="btn" data-tri-close>Fechar</button><button type="button" class="btn pri" data-tri-save="'+d+'">Salvar</button></div>';
+  triPos(g);
   const anterior=document.getElementById('tri-prontuario');if(anterior)anterior.remove();document.body.appendChild(g);
 }
 async function salvarProntuarioTriagem(d){
