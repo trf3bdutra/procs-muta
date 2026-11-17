@@ -1,6 +1,6 @@
 /* ================= CONSULTA: processo pautado → perfil do caso → folha, canhoto, conformidade e material ================= */
 (function(){
-  var CQ={ses:'',item:'',perfil:null,fonte:'',cal:null,erro:'',busy:false,sel:'',grupo:'',ver:{},usar:'',matriz:false};
+  var CQ={ses:'',item:'',perfil:null,fonte:'',cal:null,erro:'',busy:false,sel:'',grupo:'',ver:{},usar:'',matriz:false,lia:{peca:'acordao',modo:'GERAÇÃO',res:'',prec:null,mod:true,par:true}};
   var STOP={'de':1,'da':1,'do':1,'das':1,'dos':1,'e':1,'a':1,'o':1,'as':1,'os':1,'em':1,'no':1,'na':1,'nos':1,'nas':1,'por':1,'para':1,'com':1,'sem':1,'um':1,'uma':1,'ao':1,'aos':1,'que':1,'se':1,'ou':1,'nao':1,'sobre':1,'entre':1,'pelo':1,'pela':1,'art':1,'lei':1,'recurso':1,'processo':1,'caso':1};
   function nq(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
   function toks(s){return nq(s).split(/[^a-z0-9]+/).filter(function(w){return w.length>2&&!STOP[w];});}
@@ -180,7 +180,7 @@
   }
   function orientacoes(P,A,R){
     var C=conformidade(P,A,R),mau=C.filter(function(z){return z.s!=='ok';}).length;
-    var h='<div class="dori"><p class="kick2"><span>Conformidade</span><span>'+(C.length-mau)+'/'+C.length+'</span></p><div class="cqc">'+
+    var h=liaPainel(P,A,R)+'<div class="dori"><p class="kick2"><span>Conformidade</span><span>'+(C.length-mau)+'/'+C.length+'</span></p><div class="cqc">'+
       C.map(function(z){return '<div class="cqi '+z.s+'"><div class="cqih"><b>'+e(z.k)+'</b><i>'+(z.s==='ok'?'em ordem':z.s==='pc'?'conferir':'falta')+'</i></div><p>'+e(z.t)+'</p></div>';}).join('')+'</div>';
     var alt=(R.mod||[]).filter(function(z){return !(A.tipo==='mod'&&z.x.id===A.x.id);}).slice(0,5);
     h+='<div class="cqacs">'+(A.tipo==='mod'?'<button class="dbt" data-matriz="1">Usar só a estrutura da minuta-matriz</button>':'')+
@@ -192,6 +192,58 @@
     h+=lista('Parágrafos-padrão','par',R.par,function(p){return e([p.titulo||p.id,p.categoria].filter(Boolean).join(' · '));});
     return h;
   }
+
+  /* ---------- Minuta com a LIA: prompt do gabinete (Prompt_Minuta_CMT v3, recortado pela peça) + dados do caso + material da base ---------- */
+  var LIA3=null,LIA3P=null;
+  function liaV3(){if(LIA3)return Promise.resolve(LIA3);if(LIA3P)return LIA3P;var el=document.getElementById('lia-v3'),t=(el&&el.textContent||'').trim();
+    if(!t)return Promise.reject(new Error('prompt do gabinete ausente nesta versão do Compendium'));var bin=atob(t),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);
+    LIA3P=new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text().then(function(x){LIA3=x;return x;});return LIA3P;}
+  var LIA_PECAS={acordao:['Acórdão completo (ementa, relatório, voto e proclamação)',null],relatorio:['Relatório',['R1','R2','R3','RT']],voto:['Voto',['V','W','PR','X','RT']],ementa:['Ementa',['M','N','M2','RT']],proclamacao:['Proclamação',['P','M','RT']],mono:['Decisão monocrática ou despacho',['W','PR','X','RT']]};
+  function liaRecorte(txt,peca){var ks=LIA_PECAS[peca][1];if(!ks)return txt;var L=txt.split('\n'),ix=[];L.forEach(function(x,i){if(/^══ [A-Z0-9]+\./.test(x))ix.push(i);});
+    var head=L.slice(0,ix[0]),sec={},ord=[];ix.forEach(function(i,n){var k=/^══ ([A-Z0-9]+)\./.exec(L[i])[1];sec[k]=L.slice(i,ix[n+1]==null?L.length:ix[n+1]);ord.push(k);});
+    var quer=['A','B','C','D','E','F','G','H'].concat(ks,['T','Q','S']);
+    return head.concat(['PEÇA DESTE PROMPT: '+LIA_PECAS[peca][0]+'. As seções de outras peças foram retiradas; a íntegra está no Prompt_Minuta_CMT_v3.'],[].concat.apply([],ord.filter(function(k){return quer.indexOf(k)>=0;}).map(function(k){return sec[k];}))).join('\n');}
+  function liaCaso(P){var L=[];Object.keys(ROT).forEach(function(k){if(P[k]!=null&&P[k]!=='')L.push('- '+ROT[k]+': '+val(k,P[k]));});return L.join('\n');}
+  function liaPrec(p){var cab=[p.classeSigla||p.especie||p.classe,p.processo].filter(Boolean).join(' ')+(p.relator?', Rel. Des. Fed. '+p.relator:'')+(p.orgao?', '+p.orgao:'')+(p.dataPublicacao?', publicação '+brd(p.dataPublicacao):p.dataJulgamento?', julgamento '+brd(p.dataJulgamento):'');
+    return '◆ '+cab+(p.resultado?'\n  Resultado: '+p.resultado:'')+(p.tese?'\n  Tese: '+p.tese:'')+(p.temas?'\n  Temas citados: '+p.temas:'')+(p.ementa?'\n  Ementa: '+String(p.ementa).replace(/\s+/g,' ').slice(0,2200):'');}
+  function liaFolha(A){if(!A||!A.x)return '';var B=blocos(A),x=A.x,out=B.map(function(z){var vi=Math.min(CQ.ver[z.t.id]||0,Math.max(z.ps.length-1,0)),q=z.ps[vi];return '['+(z.t.titulo||z.t.id)+(z.t.obrigatorio||z.t.opcional===false?' · obrigatório':' · opcional')+']\n'+(q&&q.texto?String(q.texto).trim():'(redação livre pelo roteiro da peça)');}).join('\n\n');
+    /* modelo do banco sem parágrafos por tópico: o texto do modelo (ou fundamentação, honorários e dispositivo) vai inteiro, como texto-fonte a adaptar */
+    if(A.tipo==='mod'){var tx=String(x.textoModelo||'').trim()||[x.fundamentacao?'— FUNDAMENTAÇÃO DO MODELO —\n'+String(x.fundamentacao).trim():'',x.honorarios?'— SENTENÇA E HONORÁRIOS (exemplo do modelo) —\n'+String(x.honorarios).trim():'',x.resultado?'— DISPOSITIVO DO MODELO —\n'+String(x.resultado).trim():''].filter(Boolean).join('\n\n');
+      if(tx)out+='\n\nTEXTO DO MODELO (texto-fonte do gabinete: aproveite as fórmulas e a ordem; substitua todo [PREENCHER …] e todo dado do caso-exemplo pelos dados destes autos; o resultado do modelo não vincula o resultado deste caso):\n'+tx;
+      if(x.ementaIntegral)out+='\n\n— EMENTA DO MODELO (referência de forma) —\n'+String(x.ementaIntegral).trim();}
+    return out;}
+  function liaMontar(P,A,R){var o=CQ.lia,sel=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;}),B=BASE||{};
+    return liaV3().then(function(v3){var res=o.res||P.resultado||'';
+      var tarefa='TAREFA: '+o.modo+' · '+LIA_PECAS[o.peca][0]+(o.modo==='GERAÇÃO'?' · resultado: '+(res||'[não informado: propor e marcar VALIDAR]'):'');
+      var prec=(B.prec||[]).filter(function(p){return sel.indexOf(p.id)>=0;});
+      var par=o.par?R.par.slice(0,6).map(function(z){return '◆ '+(z.x.titulo||z.x.id)+(z.x.categoria?' ('+z.x.categoria+')':'')+'\n'+String(z.x.texto||'').trim();}):[];
+      return [liaRecorte(v3,o.peca),'','══════════════════════════════','DADOS DESTE PROCESSO E MATERIAL DO GABINETE (gerados pelo Compendium a partir do prontuário do Ex Officio)','══════════════════════════════',tarefa,'',
+        'DADOS DO PRONTUÁRIO (conferir nos autos; o prontuário pode ter erro):',liaCaso(P)||'- (prontuário vazio)','',
+        (o.mod&&A&&A.x?'ESTRUTURA DO GABINETE PARA ESTE CASO — '+(A.tipo==='mod'?'modelo do banco: ':'minuta-matriz: ')+nomeDe(A)+'\nUse a ordem dos tópicos e os parágrafos-padrão abaixo; os trechos entre { } são campos a preencher com os dados destes autos. Nada do modelo vale como fato deste processo.\n\n'+liaFolha(A)+'\n':''),
+        (prec.length?'PRECEDENTES DO RELATOR NA BASE DO GABINETE (podem ser citados com estes dados, na forma da seção C; confira a aderência ao caso; outros precedentes só com [VALIDAR: precedente]):\n'+prec.map(liaPrec).join('\n\n')+'\n':''),
+        (par.length?'PARÁGRAFOS-PADRÃO APLICÁVEIS (preencha os campos { } com os dados destes autos; use só se couberem):\n'+par.join('\n\n')+'\n':''),
+        'TEXTO PARA REVISÃO OU BASE (cole abaixo a minuta, se o modo não for GERAÇÃO; anexe o inteiro teor):'].join('\n');});}
+  function liaPainel(P,A,R){var o=CQ.lia,sel=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;});
+    return '<div class="dori cq-lia"><p class="kick2"><span>Minuta com a LIA</span><span>prompt</span></p>'+
+      '<p class="meta">Junta o prompt do gabinete (recortado pela peça), os dados deste processo, a estrutura aplicada e os precedentes marcados. Cole na LIA com o processo aberto no PJe.</p>'+
+      '<label class="cql">Peça<select id="cq-lp">'+Object.keys(LIA_PECAS).map(function(k){return '<option value="'+k+'"'+(k===o.peca?' selected':'')+'>'+e(LIA_PECAS[k][0])+'</option>';}).join('')+'</select></label>'+
+      '<label class="cql">Modo<select id="cq-lm">'+['GERAÇÃO','CONFERÊNCIA','LIMPO','FORMATAÇÃO'].map(function(m){return '<option'+(m===o.modo?' selected':'')+'>'+m+'</option>';}).join('')+'</select></label>'+
+      '<label class="cql">Resultado pretendido<input id="cq-lr" value="'+e(o.res||P.resultado||'')+'" placeholder="ex.: negar provimento à apelação do INSS"></label>'+
+      '<label class="cqk2"><input type="checkbox" id="cq-lmod"'+(o.mod?' checked':'')+'> estrutura aplicada ('+e(nomeDe(A)||'nenhuma')+')</label>'+
+      '<label class="cqk2"><input type="checkbox" id="cq-lpar"'+(o.par?' checked':'')+'> parágrafos-padrão ('+R.par.slice(0,6).length+')</label>'+
+      (R.prec.length?'<p class="meta" style="margin-top:6px">Precedentes a levar:</p>'+R.prec.map(function(z){return '<label class="cqk2"><input type="checkbox" data-lprec="'+e(z.x.id)+'"'+(sel.indexOf(z.x.id)>=0?' checked':'')+'> '+e([z.x.processo||z.x.id,z.x.resultado].filter(Boolean).join(' · '))+'</label>';}).join(''):'<p class="meta">Sem precedente do relator com os termos do caso.</p>')+
+      '<div class="cqacs"><button class="dbt" data-lia="copiar">Copiar prompt para a LIA</button><button class="dbt" data-lia="baixar">Baixar .txt</button></div></div>';}
+  function liaLigar(P,A,R){var o=CQ.lia,g=function(id){return document.getElementById(id);};
+    if(g('cq-lp'))g('cq-lp').onchange=function(){o.peca=this.value;if(o.peca==='mono'&&o.modo==='GERAÇÃO'){}};
+    if(g('cq-lm'))g('cq-lm').onchange=function(){o.modo=this.value;};
+    if(g('cq-lr'))g('cq-lr').oninput=function(){o.res=this.value;};
+    if(g('cq-lmod'))g('cq-lmod').onchange=function(){o.mod=this.checked;};
+    if(g('cq-lpar'))g('cq-lpar').onchange=function(){o.par=this.checked;};
+    Array.prototype.forEach.call(document.querySelectorAll('#v-consulta [data-lprec]'),function(c){c.onchange=function(){var cur=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;}),id=c.getAttribute('data-lprec');cur=cur.filter(function(x){return x!==id;});if(c.checked)cur.push(id);o.prec=cur;};});
+    Array.prototype.forEach.call(document.querySelectorAll('#v-consulta [data-lia]'),function(b){b.onclick=function(ev){ev.stopPropagation();var a=b.getAttribute('data-lia');
+      liaMontar(P,A,R).then(function(tx){if(a==='baixar'){var u=URL.createObjectURL(new Blob([tx],{type:'text/plain;charset=utf-8'})),l=document.createElement('a');l.href=u;l.download='Prompt_LIA_'+String(P.processo||'caso').replace(/\D/g,'').slice(0,20)+'_'+o.peca+'.txt';document.body.appendChild(l);l.click();setTimeout(function(){URL.revokeObjectURL(u);l.remove();},500);return;}
+        (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toastC('Prompt copiado ('+Math.round(tx.length/1024)+' KB). Cole na LIA com o processo aberto.');}).catch(function(){toastC('Não consegui copiar: use Baixar .txt.');});})
+      .catch(function(er){toastC(er.message);});};});}
   /* abrir o resultado na aba própria */
   function abrir(tipo,id){
     var B=BASE||{};
@@ -215,7 +267,7 @@
     if(!BASE){mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA</div><div class="cqvz">Carregando a base do gabinete…</div></div>';ligar();base().then(render);return;}
     var R=buscar(P),A=aplicar(P,R);
     can.innerHTML=canhoto(P,A);mn.innerHTML=folha(P,A);or.innerHTML=orientacoes(P,A,R);
-    ligar();
+    ligar();liaLigar(P,A,R);
   }
   function ligar(){
     var s=document.getElementById('cq-ses'),i=document.getElementById('cq-item'),g=document.getElementById('cq-go');
