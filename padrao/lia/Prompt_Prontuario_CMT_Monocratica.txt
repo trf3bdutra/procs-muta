@@ -1,16 +1,63 @@
-Você vai preencher o PRONTUÁRIO DE PRODUÇÃO do gabinete do Des. Fed. Carlos Muta (TRF-3, Turma Regional de MS) a partir dos autos deste processo.
+Você vai preencher o PRONTUÁRIO DE PRODUÇÃO do gabinete do Des. Fed. Carlos Muta (TRF-3, Turma Regional de MS) a partir dos autos deste processo e comparar o caso com a base do gabinete no procs-muta: precedentes do Relator, modelos e parágrafos-padrão. A consulta à base é obrigatória e o resultado dela consta da resposta.
+
+ONDE BUSCAR (base do gabinete, procs-muta)
+A. MATERIAL DO GABINETE: se houver um bloco com esse título colado ao fim deste prompt (gerado pelo Compendium, aba Consulta, para este processo), ele prevalece sobre os catálogos.
+B. Catálogos anexados à conversa (bases de conhecimento), gerados do procs-muta (pasta padrao/lia):
+   - Catalogo_Precedentes_CMT_Previdenciario.txt (previdenciário e assistencial) e Catalogo_Precedentes_CMT_Administrativo_Tributario_Outros.txt (demais matérias), de precedentes/precedentes.jsonl. Cada precedente começa com "◆ " seguido da referência (classe, número, relator e data de publicação) e traz as linhas "Assunto:", "Resultado:" e "Tese:".
+   - Catalogo_Modelos_CMT.txt, de modelos/modelos.json. Cada modelo começa com "◆ [id] nome" e traz "Espécie:", "Assunto:", "Tese:", "Especificidades:" e "Resultado:".
+   - Catalogo_Paragrafos_Padrao_CMT.txt, de modelos/paragrafos.json. As categorias começam com "■ " e cada parágrafo com "◆ [id] título · uso: …", seguido do texto. Campos entre { } e [ ] se preenchem com os autos; o texto fixo não se altera.
+C. Consulte o catálogo de precedentes da matéria do caso. Na dúvida, consulte os dois. Consulte sempre o de modelos e o de parágrafos-padrão.
+D. A base do gabinete é só a do procs-muta (itens A e B). Não use o banco trf3-muta-jurisprudencia, blocos “=== PRECEDENTE ===”, códigos “A00001” nem links brndutra.github.io: esse banco foi desativado. Se esses arquivos estiverem anexados, ignore-os e registre em "validar": “Retirar da base do agente os arquivos do trf3-muta-jurisprudencia.”
+E. Sem catálogo anexado e sem MATERIAL DO GABINETE: não pesquise de memória. Mantenha "paradigmas" e "paragrafos" como listas vazias, omita "modelo" e "tendencia" e registre em "validar": “Base do gabinete não anexada: anexar os catálogos do procs-muta (padrao/lia).”
 
 REGRAS
 1. Use só o que está nos autos. Não invente fato, data, ID, nome ou precedente. Sem base nos autos, não inclua o campo.
 2. Para cada campo preenchido, indique a fonte em "fontes" (ID e tipo da peça; ex.: "ID 123456789 – Certidão de intimação").
 3. Campos de opção: copie exatamente uma das opções listadas. Datas: AAAA-MM-DD. Sim/não: true ou false.
 4. Textos: estilo do gabinete — direto, impessoal, uma ideia por frase, sem adjetivos. O que depender de conferência humana vai também em "validar".
-5. Responda APENAS com o bloco abaixo, sem texto antes ou depois.
+5. JSON VÁLIDO: aspas retas só como delimitador; dentro dos textos, use aspas curvas (“ ”); sem vírgula final; sem comentários; sem null — campo sem base é omitido.
+6. TIPOS: true/false e números sem aspas (ex.: "adm.dobro":true, "adm.prazo":15); datas sempre "AAAA-MM-DD".
+7. CHAVES: use só as chaves listadas, exatamente como escritas (com o ponto, ex.: "orig.acc.custas"); não crie chaves novas.
 
-FORMATO DA RESPOSTA
+PESQUISA NA BASE DO GABINETE (obrigatória; o resultado vai no JSON e na página)
+8. Termos de busca: tipoJ, assunto e subassuntos, especificidades, questões controvertidas, decisão de origem (resultado e fundamento) e temas ou súmulas citados nos autos. Procure por esses termos nas linhas "Assunto:", "Tese:", "Especificidades:" e "Resultado:" dos catálogos.
+9. "paradigmas": de 1 a 5 precedentes do Relator mais semelhantes, SOMENTE os encontrados no MATERIAL DO GABINETE ou nos catálogos de precedentes. Cada um com "referencia" (a linha “◆” do precedente, sem o “◆”, exatamente como está), "processo" (o número CNJ da referência), "assunto", "resultado" e "tese" (como constam do bloco), "semelhancas" (o que coincide com este caso: matéria, questão, fundamento da origem) e "diferencas" (o que distingue; se nada, “Nenhuma identificada”). Não afirme semelhança sem o texto do paradigma recuperado. Tese truncada no catálogo (termina em “…”) vai como está, e o ponto vai a "validar". Sem paradigma recuperado: lista vazia e um item em "validar".
+10. "modelo": o modelo do gabinete aplicável, só se encontrado no MATERIAL DO GABINETE ou no Catalogo_Modelos_CMT, com "id" (o identificador entre colchetes, sem os colchetes), "nome" (como consta depois do id), "fonte" (“Catalogo_Modelos_CMT” ou “MATERIAL DO GABINETE”), "aderencia" (“Alta” | “Média” | “Baixa”) e "ajustes" (o que adaptar ao caso, inclusive a controvérsia do modelo que se aplica, quando o modelo prevê mais de uma). Sem modelo recuperado: omita "modelo" e registre em "validar".
+11. "paragrafos": de 0 a 8 parágrafos-padrão aplicáveis, SOMENTE do Catalogo_Paragrafos_Padrao_CMT ou do MATERIAL DO GABINETE, cada um com "id" (sem os colchetes), "titulo", "categoria" (a categoria “■” em que está), "onde" (a parte e o ponto da peça em que entra, ex.: “Voto · admissibilidade”) e "campos" (o que se preenche com os autos, com o ID da peça de onde vem cada dado, quando houver). Sem parágrafo aplicável: lista vazia.
+12. "busca": de 2 a 5 termos distintivos do caso, para colar na busca do Ementário do Compendium, na sintaxe dele: termos separados por espaço, OU entre alternativas, -termo para excluir, radical* para variações (ex.: “28,86 ilegitimidade territorial*”). Não use frase entre aspas: as aspas quebram o JSON.
+13. "tendencia": em uma frase, o resultado que os paradigmas recuperados indicam (ex.: “Paradigmas indicam provimento da apelação.”), sem antecipar o julgamento. Paradigmas com resultados opostos: diga isso e registre o ponto em "validar". Omita se não houver paradigma.
+14. Modelo e paradigmas em sentidos opostos, ou paradigma mais recente que o modelo com solução diferente: registre em "validar", com as referências.
+
+SAÍDA (duas partes, nesta ordem, sem outro texto)
+PARTE 1 — o bloco do prontuário, cru, para colar no Ex Officio: a primeira linha é <<<PRONTUARIO_CMT, depois o JSON, e a última linha é PRONTUARIO_CMT>>>. Sem bloco de código (```) e sem Markdown.
+PARTE 2 — a página HTML completa (de <!doctype html> a </html>), no layout do gabinete, seguindo o esqueleto abaixo: cabeçalho com processo, tipo de julgamento, assunto e decisão de origem; o botão “Baixar arquivo para o prontuário (.json)”; as seções Prontuário (rótulo, valor e fonte de cada campo), Recursos, peças e pendências, Precedentes do Relator (com a tendência), Modelo do gabinete, Parágrafos-padrão, Busca no Ementário do Compendium e A validar. Seção sem resultado mostra “Nada encontrado na base.” e o motivo.
+   - O mesmo JSON da PARTE 1, sem os marcadores, vai inteiro no <script type="application/json" id="prontuario-cmt">. Dentro dele, escreva “</” como “<\/”. É esse script que o botão baixa e que o Ex Officio importa.
+   - Na página, use só o esqueleto e o estilo abaixo; sem imagens, sem fontes externas e sem outros scripts.
+   - Se puder entregar arquivos, entregue também a página como prontuario-NNNNNNNDDAAAAJTROOOO.html e o JSON como prontuario-NNNNNNNDDAAAAJTROOOO.json (só os dígitos do número do processo).
+
+FORMATO DO JSON (PARTE 1 e script da PARTE 2)
 <<<PRONTUARIO_CMT
-{"processo":"NNNNNNN-DD.AAAA.J.TR.OOOO","campos":{"chave":"valor"},"pendencias":["providência pendente, uma por item"],"fontes":{"chave":"ID … – peça"},"validar":["ponto a conferir"]}
+{"processo":"NNNNNNN-DD.AAAA.J.TR.OOOO","campos":{"chave":"valor"},"paradigmas":[{"referencia":"…","processo":"…","assunto":"…","resultado":"…","tese":"…","semelhancas":"…","diferencas":"…"}],"modelo":{"id":"…","nome":"…","fonte":"…","aderencia":"…","ajustes":"…"},"paragrafos":[{"id":"…","titulo":"…","categoria":"…","onde":"…","campos":"…"}],"busca":"…","tendencia":"…","pendencias":["providência pendente, uma por item"],"fontes":{"chave":"ID … – peça"},"validar":["ponto a conferir"]}
 PRONTUARIO_CMT>>>
+
+ESQUELETO DA PÁGINA (PARTE 2)
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prontuário · NNNNNNN-DD.AAAA.J.TR.OOOO</title>
+<style>body{margin:0;background:#f4f2ea;color:#203b39;font:14px/1.5 Inter,"Segoe UI",system-ui,sans-serif}main{max-width:1100px;margin:0 auto;padding:28px 32px 48px}
+.k{font:500 10.5px ui-monospace,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:#805b18;margin:0}h1{margin:4px 0 2px;font-size:30px;letter-spacing:-.03em;color:#173f3d}
+section{background:#fff;border:1px solid #d8d3c6;margin-top:16px;padding:14px 18px}h2{margin:0 0 10px;font-size:15px;color:#173f3d}table{width:100%;border-collapse:collapse}
+td,th{border-top:1px solid #ece8de;padding:6px 8px;text-align:left;vertical-align:top}th{width:32%;font-weight:600}small{color:#5c6b67}.c{border:1px solid #d8d3c6;padding:10px 12px;margin-top:8px}
+.v li{color:#8f4d0e}button{height:38px;padding:0 14px;border:1px solid #173f3d;background:#173f3d;color:#fff;font:600 13px Inter,sans-serif;cursor:pointer}</style></head><body><main>
+<p class="k">Gabinete CMT · Prontuário de produção</p><h1>NNNNNNN-DD.AAAA.J.TR.OOOO</h1><p>tipo de julgamento · assunto · decisão de origem</p>
+<button type="button" onclick="var t=document.getElementById('prontuario-cmt').textContent,o=JSON.parse(t),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'application/json'}));a.download='prontuario-'+String(o.processo||'').replace(/\D/g,'')+'.json';a.click();">Baixar arquivo para o prontuário (.json)</button>
+<section><h2>Prontuário</h2><table><tr><th>rótulo do campo</th><td>valor<br><small>fonte: ID … – peça</small></td></tr></table></section>
+<section><h2>Recursos, peças e pendências</h2>…</section>
+<section><h2>Precedentes do Relator (paradigmas)</h2><div class="c"><b>referência</b><br>assunto · resultado<br><small>tese</small><p>Semelhanças: … · Diferenças: …</p></div><p>Tendência: …</p></section>
+<section><h2>Modelo do gabinete</h2><div class="c"><b>id · nome</b> · aderência<p>Ajustes: …</p></div></section>
+<section><h2>Parágrafos-padrão</h2><div class="c"><b>id · título</b> · categoria<p>Onde: … · Campos: …</p></div></section>
+<section><h2>Busca no Ementário do Compendium</h2><p>termos</p></section>
+<section><h2>A validar</h2><ul class="v"><li>…</li></ul></section>
+<script type="application/json" id="prontuario-cmt">{ o mesmo JSON da PARTE 1, sem os marcadores }</script>
+</main></body></html>
 
 CAMPOS (chave — rótulo — valores aceitos)
 - tipoAto — Tipo de ato (uma destas opções, exatamente: "Decisão monocrática (art. 932)" | "Decisão de urgência" | "Despacho" | "Decisão de admissibilidade" | "Juízo de retratação" | "Homologação / extinção")
