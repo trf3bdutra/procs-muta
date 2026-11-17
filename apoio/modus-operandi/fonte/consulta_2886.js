@@ -17,7 +17,70 @@
       if(J.modelo)L.push(J.modelo.id,J.modelo.nome,J.modelo.ajustes);(J.papeis||[]).forEach(function(x){L.push(x.parte+' '+x.papel+' '+(x.polo||''));});(J.pecas||[]).forEach(function(x){L.push(x.desc);});}
     return L.filter(Boolean).join(' \n ');
   }
-  function e2886(P,J){var t=nq(textoCaso(P,J));return /28[,.]\s?86|0005019-15\.1997/.test(t)||!!(J&&J.modelo&&/^2886-/.test(J.modelo.id||''));}
+  function e2886(P,J){var t=nq(textoCaso(P,J));
+    if((J&&J.modelo&&/^2886-/.test(J.modelo.id||''))||/\b2886-(3d|[1-9])/.test(t))return true;
+    if(/sem modelo|voto proprio|mandado de seguranca coletivo|ms coletivo/.test(t))return false;
+    return /0005019-15\.1997|28[,.]\s?86/.test(t);}
+  /* trechos do prontuário que ajudam a preencher cada variável (sem inventar: só mostram o que está lá) */
+  function dica(k,P,J){var C=(J&&J.campos)||{},es=String(C.especificidades||P.especificidades||''),si=String(C.sintese||P.sintese||'');
+    var itens=function(re){return es.split(/\s·\s/).filter(function(x){return re.test(x);}).join(' · ');},frase=function(re){return si.split(/(?<=\.)\s+/).filter(function(x){return re.test(nq(x));}).join(' ');};
+    if(k==='razoes')return frase(/apel/);if(k==='contrarrazoes')return frase(/contrarraz/)||itens(/^F10/);
+    if(k==='rel_acessorios')return itens(/^F(6|13|14)\b/);if(k==='pens_id'||k==='rel_exequente'||k==='sujeito')return itens(/^F2\b/);
+    if(k==='rel_sentenca')return itens(/^F5\b/)||frase(/sentenca/);if(k==='fichas_id')return itens(/^F7\b/);return '';}
+  /* ---------- leitura do prontuário do Ex Officio: campos estruturados → modulação ---------- */
+  function lerFs(P,J){var C=(J&&J.campos)||{},es=String(C.especificidades||P.especificidades||''),F={};
+    es.split(/\s+·\s+/).forEach(function(x){var m=/^(F\d{1,2})\s+([\s\S]*)$/.exec(x.trim());if(m)F[m[1]]=(F[m[1]]?F[m[1]]+' · ':'')+m[2];});return F;}
+  function frasesSint(P,J){var C=(J&&J.campos)||{};return String(C.sintese||P.sintese||'').split(/(?<=\.)\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÇ])/).filter(Boolean);}
+  /* sinais = onde o prontuário registra pedidos e incidentes (fichas F, questões, fundamentos, contrarrazões e recurso na síntese).
+     Com o prontuário estruturado, os módulos opcionais só disparam por esses campos — não pela narrativa da inicial. */
+  function sinais(P,J){var C=(J&&J.campos)||{},F=lerFs(P,J),L=[];
+    Object.keys(F).sort(function(a,b){return +a.slice(1)-(+b.slice(1));}).forEach(function(k){L.push([k,F[k]]);});
+    if(!L.length)return null;
+    [['questoes','questões'],['jul.fund','fundamentos'],['jul.coment','comentário'],['rel.razoes','razões'],['rel.contrarrazoes','contrarrazões'],['rel.memoriais','memoriais']].forEach(function(a){if(C[a[0]])L.push([a[1],[].concat(C[a[0]]).join('; ')]);});
+    frasesSint(P,J).forEach(function(f){if(/contrarraz|memoria|apel|agrav|embarg|recorr/i.test(f))L.push(['síntese',f]);});
+    (J&&J.pecas||[]).forEach(function(x){if(x&&x.desc)L.push(['peças',x.desc]);});
+    return L.map(function(x){return [x[0],x[1],nq(x[1])];});}
+  function achar(re,t){if(!re)return null;if(S.sin){for(var i=0;i<S.sin.length;i++){var m=re.exec(S.sin[i][2]);if(m)return {f:S.sin[i][0],m:m[0]};}return null;}var m2=re.exec(t);return m2?{f:'',m:m2[0]}:null;}
+  function tSin(t){return S.sin?S.sin.map(function(x){return x[2];}).join(' \n '):t;}
+  function ent(art,nome){var a=nq(art);return {pelo:(a==='o'?'pelo ':a==='a'?'pela ':a==='os'?'pelos ':'pelas ')+nome,de:(a==='o'?'do ':a==='a'?'da ':a==='os'?'dos ':'das ')+nome};}
+  /* “pelo afastamento de X e pela aplicação de Y” → “(1) o afastamento de X; e (2) a aplicação de Y” */
+  function itensRazoes(x){var c=String(x).replace(/[,;.]\s*$/,'').trim(),art=function(z){return z.replace(/^pel([oa]s?)\s/i,'$1 ');};
+    var p=c.split(/\s*;\s*|,?\s+e\s+(?=(?:o|a|os|as|pel[oa]s?)\s)/).map(function(z){return art(z.trim());}).filter(Boolean);
+    if(p.length<2)return art(c);return p.map(function(z,i){return '('+(i+1)+') '+z;}).join('; ').replace(/; (\(\d+\) [^;]*)$/,'; e $1');}
+  function idsDe(x){return String(x||'').replace(/^IDs?\s*/i,'').trim();}
+  /* variáveis tiradas do prontuário estruturado; cada uma leva a fonte, para conferência */
+  function doOffice(P,J,g,V,D){
+    var C=(J&&J.campos)||{},F=lerFs(P,J),fr=frasesSint(P,J),pc=(J&&J.pecas)||[],rec=(J&&J.recursos)||[];
+    if(!Object.keys(F).length&&!fr.length)return;
+    var put=function(k,v,f){if(v==null||String(v).trim()==='')return;if(V[k]!=null&&String(V[k]).trim()!==''&&!D[k])return;V[k]=v;D[k]=f;};
+    if(F.F2){var f2=nq(F.F2);
+      if(/espolio/.test(f2)){put('rel_exequente','promovido pelo espólio do servidor','F2');put('sujeito','o espólio','F2');}
+      else if(/herdeir|sucessor/.test(f2)&&/pensionista falecid/.test(f2))put('rel_exequente','promovido por herdeiros de pensionista falecida','F2');
+      else if(/pensionist/.test(f2))put('rel_exequente','promovido por pensionista','F2');
+      else if(/herdeir|sucessor/.test(f2)){put('rel_exequente','promovido por herdeiros do servidor falecido','F2');put('sujeito','os sucessores','F2');}
+      else put('rel_exequente','proferida','F2');
+      if(/herdeir|sucessor/.test(f2)&&!/pensionist/.test(f2)&&!/espolio/.test(f2))put('sujeito','os sucessores','F2');
+      var pid=/\(IDs?\s*(\d{6,})/.exec(F.F2);if(pid)put('pens_id',pid[1],'F2');}
+    /* contrarrazões: “O INSS apresentou contrarrazões requerendo … (ID n).” */
+    var fc=fr.filter(function(x){return /contrarraz/i.test(x);})[0],ct=null;
+    if(fc){var m=/^(O|A|Os|As)\s+(.+?)\s+(?:apresent\w+|ofereceu|ofertou)\s+contrarrazões,?\s*([\s\S]*?)\s*\((IDs?\s*[^)]*)\)\s*\.?\s*$/.exec(fc);
+      if(m){var E=ent(m[1],m[2]),req=m[3].replace(/[,;]\s*$/,'');ct={de:E.de,id:idsDe(m[4])};
+        put('contrarrazoes',' '+E.pelo+' (ID '+ct.id+')'+(req?', '+req:''),'síntese');put('ente_contrarrazoes',E.de,'síntese');put('contrarrazoes_id',ct.id,'síntese');}}
+    var pcc=pc.filter(function(x){return /contrarraz/i.test(x.desc||'');})[0];
+    if(pcc&&pcc.id){put('contrarrazoes_id',String(pcc.id),'peças');if(!ct){var pe=/contrarraz\w*\s+(?:de \w+\s+)?d([oa]s?)\s+(.+)$/i.exec(pcc.desc||'');put('contrarrazoes',(pe?' '+ent(pe[1],pe[2]).pelo:'')+' (ID '+pcc.id+')','peças');if(pe)put('ente_contrarrazoes',ent(pe[1],pe[2]).de,'peças');}}
+    /* razões: “O exequente apelou sustentando … (ID n).” */
+    var fa=fr.filter(function(x){return /\b(apel|recorr|agravou|agravad|interp)/i.test(x)&&!/contrarraz/i.test(x);})[0];
+    if(fa){var ma=/\b(?:sustentando|alegando|aduzindo|defendendo|arguindo|pugnando|postulando|requerendo|pedindo)\s+(?:que\s+)?([\s\S]*?)\s*\((?:IDs?\s*[^)]*)\)\s*\.?\s*$/i.exec(fa);if(ma)put('razoes',itensRazoes(ma[1]),'síntese');}
+    var pm=pc.filter(function(x){return /memoria/i.test(x.desc||'');})[0];if(pm&&pm.id)put('memoriais_id',String(pm.id),'peças');
+    /* ilegitimidade ativa: onde foi alegada */
+    var f5=nq(F.F5||''),cr=nq(fc||'');
+    if(/ilegitimidade ativa|limitacao territorial|limites territoriais/.test(f5))put('ila_origem',/ilegitimidade/.test(cr)?'acolhida na sentença e reiterada em contrarrazões':'acolhida na sentença','F5');
+    else if(/ilegitimidade/.test(cr))put('ila_origem','alegada em contrarrazões','síntese');
+    /* acessórios da sentença: só quando o prontuário bate com uma das fórmulas do modelo */
+    var ac=nq([F.F6,F.F13,F.F14].filter(Boolean).join(' · ')),ajg=C['adm.ajg']===true||/deferid|concedid/.test(nq(F.F13||''));
+    if(/sem (fixacao|condenacao)[^·]{0,30}honorari/.test(ac))put('rel_acessorios',ajg?', deferida gratuidade de justiça, sem condenação em custas ou honorários advocatícios':', sem fixação de honorários advocatícios','F6/F14');
+    else if(/honorari[^·]{0,80}10 ?%[^·]{0,40}valor (atualizado )?da causa/.test(ac)&&/suspen|98/.test(ac)&&/exequente|autor/.test(ac))put('rel_acessorios',', com condenação da parte exequente em honorários advocatícios de 10% do valor atualizado da causa, suspensa a exigibilidade nos termos do artigo 98, § 3º, do CPC','F14');
+  }
   /* ---------- grupo ---------- */
   function grupoAuto(P,J,T){
     var m=J&&J.modelo&&/^2886-([0-9a-z-]+)/i.exec(J.modelo.id||''),de='código do prontuário';
@@ -88,7 +151,7 @@
     if(C['rel.razoes'])V.razoes=[].concat(C['rel.razoes']).join('; ');
     if(C['rel.contrarrazoes'])V.contrarrazoes=' '+[].concat(C['rel.contrarrazoes']).join('; ');
     if(C['orig.dispositivo'])V.sentenca_transcricao='“'+C['orig.dispositivo']+'”';
-    var t=nq(textoCaso(P,J));
+    var t=nq(textoCaso(P,J));if(lerFs(P,J).F2)return V;
     if(/espolio/.test(t)){V.sujeito='o espólio';V.rel_exequente='promovido pelo espólio do servidor';}
     else if(/herdeir|sucessor/.test(t)){V.sujeito='os sucessores';V.rel_exequente=/pensionist/.test(t)?'promovido por herdeiros de pensionista falecida':'promovido por herdeiros do servidor falecido';}
     else if(/pensionist/.test(t)&&g==='1')V.rel_exequente='promovido por pensionista';
@@ -98,19 +161,26 @@
   function preparar(P,J,forcar){
     if(S.proc===P.processo&&S.j===(J||null)&&!forcar)return;
     var T=textoCaso(P,J),t=nq(T),ga=grupoAuto(P,J,T);
-    S={proc:P.processo,j:J||null,g:ga[0],gPorque:ga[1],on:{},ver:{},um:{},val:preVal(P,J,ga[0]),porque:{},manual:{},em:'',em1:'rel',mpf:0};
+    S={proc:P.processo,j:J||null,g:ga[0],gPorque:ga[1],on:{},ver:{},um:{},val:{},der:{},porque:{},manual:{},em:'',em1:'rel',mpf:0,mpfNota:''};
+    S.sin=sinais(P,J);S.val=preVal(P,J,ga[0]);doOffice(P,J,ga[0],S.val,S.der);
     aplicarGrupo(P,J,t);
-    var sx=nq((J&&J.campos&&J.campos['mpfx.sentido'])||P.mpf||'');
-    S.mpf=/nao provimento|desprovimento/.test(sx)?4:/provimento do recurso/.test(sx)?3:/outro/.test(sx)?1:0;
+    var C=(J&&J.campos)||{},sx=nq(C['mpfx.sentido']||P.mpf||''),hip=nq(C.mpf||''),par=nq(C.parecer||'');
+    S.mpf=/nao provimento|desprovimento/.test(sx)?4:/provimento do recurso/.test(sx)?3:/sem hipotese|ausencia de hipotese/.test(sx)?1:/interesse publico/.test(sx)&&/inexist|ausencia/.test(sx)?2:/prosseguimento|outro/.test(sx)?0:-2;
+    if(S.mpf===-2){
+      if(/intimado sem manifest/.test(par)){S.mpf=-1;S.mpfNota='Prontuário: MPF intimado sem manifestação — o modelo não tem fórmula própria; parágrafo omitido. Conferir nos autos.';}
+      else if(/sem hipotese/.test(hip)&&!par&&!C['mpfx.id']){S.mpf=-1;S.mpfNota='Prontuário: sem hipótese de intervenção e sem parecer — parágrafo do MPF omitido. Conferir se houve intimação da PRR.';}
+      else if(C['mpfx.id']||/com parecer/.test(par)){S.mpf=0;S.mpfNota='Parecer registrado sem sentido definido: conferir a fórmula.';}
+      else{S.mpf=-1;S.mpfNota=J?'Prontuário sem dado do parecer: parágrafo do MPF omitido. Conferir nos autos.':'';if(!J)S.mpf=0;}
+    }
   }
   function aplicarGrupo(P,J,t){
     var G=grp(S.g);if(!G)return;S.on={};S.um={};S.porque={};
     G.receita.forEach(function(r,i){
-      if(r.umDe){var a=umAuto(r.umDe,S.g,P,J,t);S.um[i]=a[0];S.porque['um'+i]=a[1];return;}
+      if(r.umDe){var a=umAuto(r.umDe,S.g,P,J,tSin(t));S.um[i]=a[0];S.porque['um'+i]=a[1];return;}
       var md=modu(r.mod);if(!md)return;
       if(!r.opcional){S.on[r.mod]=true;}
-      else{var re=md.gatilho?new RegExp(md.gatilho,'i'):null,hit=re&&re.exec(t);
-        S.on[r.mod]=!!(hit||r.padrao);S.porque[r.mod]=hit?'no caso: “'+hit[0]+'”':(r.padrao?'padrão do grupo':'');}
+      else{var re=md.gatilho?new RegExp(md.gatilho,'i'):null,hit=achar(re,t);
+        S.on[r.mod]=!!(hit||r.padrao);S.porque[r.mod]=hit?(hit.f?hit.f+': ':'no caso: ')+'“'+hit.m+'”':(r.padrao?'padrão do grupo':'');}
       if(S.ver[r.mod]==null)S.ver[r.mod]=Math.min(versaoAuto(r.mod,S.g,t),md.versoes.length-1);
     });
     G.receita.forEach(function(r){if(r.umDe)r.umDe.forEach(function(id){var md=id&&modu(id);if(md&&S.ver[id]==null)S.ver[id]=Math.min(versaoAuto(id,S.g,t),md.versoes.length-1);});});
@@ -149,7 +219,7 @@
   function relatorioLinhas(){
     var G=grp(S.g),R=(G&&G.relatorio)||{paragrafos:[]},L=R.paragrafos.slice();
     (R.opcionais||[]).forEach(function(o){if(S.on[o.id])L.push(o.texto);});
-    if(R.mpf&&S.g!=='8'&&S.g!=='3d')L.push(R.mpf[Math.min(S.mpf||0,R.mpf.length-1)]);
+    if(R.mpf&&S.g!=='8'&&S.g!=='3d'&&S.mpf>=0)L.push(R.mpf[Math.min(S.mpf||0,R.mpf.length-1)]);
     L.push('É o relatório.');return L;
   }
   function usadas(){
@@ -167,7 +237,7 @@
     }
     if(!html)return s;
     return e(s).replace(/\u0001F([a-z0-9_]+)\u0002/g,function(_,k){return '<span class="m28-falta" data-m28v="'+k+'">[VALIDAR: '+e(vdef(k).rotulo)+']</span>';})
-      .replace(/\u0001V([a-z0-9_]+)\u0003([\s\S]*?)\u0002/g,function(_,k,v){return '<span class="fill" data-m28v="'+k+'">'+v+'</span>';});
+      .replace(/\u0001V([a-z0-9_]+)\u0003([\s\S]*?)\u0002/g,function(_,k,v){return '<span class="fill'+(S.der[k]&&!S.manual[k]?' der':'')+'" data-m28v="'+k+'">'+v+'</span>';});
   }
   function textoFinal(){
     var L=['RELATÓRIO',''];relatorioLinhas().forEach(function(p){L.push(preencher(p,false),'');});
@@ -182,10 +252,18 @@
   /* ---------- conferência ---------- */
   function conferir(P,J){
     var L=[],add=function(s,k,t){L.push({s:s,k:k,t:t});},D=M(),G=grp(S.g);
-    add(J&&J.modelo&&/^2886-/.test(J.modelo.id||'')?'ok':'pc','Grupo','Grupo '+S.g+' ('+G.nome+'): '+S.gPorque+'.'+(J&&J.modelo&&J.modelo.id?' Prontuário: '+J.modelo.id+'.':' Sem código 2886 no prontuário: conferir o enquadramento pela árvore.'));
+    var cod=/código/.test(S.gPorque||'');add(cod?'ok':'pc','Grupo','Grupo '+S.g+' ('+G.nome+'): '+S.gPorque+'.'+(J&&J.modelo&&J.modelo.id?' Prontuário: '+J.modelo.id+'.':cod?'':' Sem código 2886 no prontuário: conferir o enquadramento pela árvore.'));
     var res=P.resultado||(J&&J.campos&&J.campos.resJulg)||'';
     if(res)add(nq(res)===nq(G.resJulg)?'ok':'no','Resultado',nq(res)===nq(G.resJulg)?'Resultado do caso igual ao do grupo: '+G.resJulg+'.':'O caso registra “'+res+'”, e o grupo '+S.g+' fecha em “'+G.resJulg+'”. Não altere o resultado em silêncio: confira o grupo.');
     else add('pc','Resultado','Sem resultado no cartão ou no prontuário. O grupo fecha em “'+G.resJulg+'”.');
+    if(S.sin){var us0=usadas(),dv=Object.keys(S.der).filter(function(k){return us0.indexOf(k)>=0&&!S.manual[k];});
+      var mo=Object.keys(S.porque).filter(function(k){return S.on[k]&&S.porque[k]&&!/^padrão|^um/.test(S.porque[k])&&!/^um/.test(k);});
+      add('pc','Prontuário','Modulação pelos campos do prontuário (fichas F, questões, fundamentos, síntese do recurso e das contrarrazões)'+(mo.length?'; módulos acionados: '+mo.map(function(k){return k+' ('+S.porque[k].split(':')[0]+')';}).join(', '):'')+(dv.length?'; variáveis preenchidas: '+dv.map(function(k){return vdef(k).rotulo+' ('+S.der[k]+')';}).join('; '):'')+'. Conferir a redação das variáveis em verde.');
+      var rc=((J&&J.recursos)||[]).filter(function(r){return /nao apresent|ausent/.test(nq(r.contra||''));})[0];if(rc)add('no','Contrarrazões','O prontuário registra contrarrazões “'+rc.contra+'”, e o relatório do modelo diz “Houve contrarrazões”: ajustar.');}
+    if(S.on.PENS&&S.sin){var f2=nq(lerFs(P,J).F2||'');if(/servidora|sucessor\b|\bvi[uú]vo\b/.test(f2))add('pc','Pensionista','O módulo fala em “viúva do servidor”; o prontuário registra “'+lerFs(P,J).F2.replace(/\s*\(IDs?[^)]*\)/g,'')+'”: ajustar gênero e qualificação.');}
+    if(S.sin){var us1=usadas(),FALTA={rel_acessorios:'F6/F14 (honorários e custas na sentença) ou orig.honor',razoes:'rel.razoes ou a frase do recurso na síntese',contrarrazoes:'rel.contrarrazoes ou a frase das contrarrazões na síntese',pens_id:'F2 com o ID do comprovante',fichas_id:'F7 com o ID das fichas',mpf_id:'mpfx.id'};
+      var fp=us1.filter(function(k){return FALTA[k]&&!valor(k).trim();});if(fp.length)add('pc','Prontuário incompleto','Para preencher sozinho, o prontuário precisa de: '+fp.map(function(k){return vdef(k).rotulo+' → '+FALTA[k];}).join('; ')+'.');}
+    if(S.mpfNota)add('pc','MPF',S.mpfNota);
     var fal=usadas().filter(function(k){return !valor(k).trim()&&vdef(k).tipo!=='opcoes';});
     add(fal.length?'pc':'ok','Variáveis',fal.length?fal.length+' a preencher: '+fal.map(function(k){return vdef(k).rotulo;}).slice(0,6).join('; ')+(fal.length>6?'…':'')+'.':'Todas as variáveis preenchidas.');
     var on=Object.keys(S.on).filter(function(k){return S.on[k]&&/^(SOB|ILA|PRESC|PRESC-PREJ|LITISP|LITISP-PREJ|TUTELA|TRANS|PENS|GRAT-ORIG|MAFE|NUL|SUC|GRAT|SURPRESA|ILA-PREJ|MULTA|ADESIVO|AGINT-SOB)$/.test(k);})
@@ -213,7 +291,7 @@
     });
     h+='</div></div>';
     var R=G.relatorio||{};
-    if(R.mpf&&S.g!=='8'&&S.g!=='3d')h+='<div class="cf"><div class="cfl"><span>Parecer do MPF</span></div><select class="m28-sel" data-m28mpf="1">'+R.mpf.map(function(t,i){return '<option value="'+i+'"'+(i===S.mpf?' selected':'')+'>'+e(t.replace(/\[\[.*?\]\]/g,'').slice(0,90))+'</option>';}).join('')+'</select></div>';
+    if(R.mpf&&S.g!=='8'&&S.g!=='3d')h+='<div class="cf"><div class="cfl"><span>Parecer do MPF</span></div><select class="m28-sel" data-m28mpf="1">'+'<option value="-1"'+(S.mpf<0?' selected':'')+'>(sem parágrafo do MPF)</option>'+R.mpf.map(function(t,i){return '<option value="'+i+'"'+(i===S.mpf?' selected':'')+'>'+e(t.replace(/\[\[.*?\]\]/g,'').slice(0,90))+'</option>';}).join('')+'</select>'+(S.mpfNota?'<p class="meta m28-dica">'+e(S.mpfNota)+'</p>':'')+'</div>';
     (R.opcionais||[]).forEach(function(o){h+='<div class="cf"><label class="m28-mt"><input type="checkbox" data-m28m="'+e(o.id)+'"'+(S.on[o.id]?' checked':'')+'><b>Relatório: '+e(o.titulo)+'</b></label></div>';});
     var ex=ementaEscolhida();
     if(ex)h+='<div class="cf"><div class="cfl"><span>Ementa-base</span></div><select class="m28-sel" data-m28em="1">'+(G.modelosEmenta||[]).filter(function(c){return D.ementas[c];}).map(function(c){return '<option value="'+e(c)+'"'+(c===ex.cod?' selected':'')+'>2886-'+e(c)+' · '+e(D.ementas[c].processo)+'</option>';}).join('')+'</select>'+(/^(8|3d|9)$/.test(S.g)?'':'<select class="m28-sel" data-m28em1="1"><option value="rel"'+(S.em1==='rel'?' selected':'')+'>Item 1: composto dos dados do relatório</option><option value="modelo"'+(S.em1==='modelo'?' selected':'')+'>Item 1: texto do modelo, para adaptar</option></select>')+'</div>';
@@ -221,7 +299,7 @@
     h+='<div class="cf"><div class="cfl"><span>Variáveis do caso</span><span class="pill">'+us.length+'</span></div>'+us.map(function(k){var d=vdef(k),v=valor(k),id='m28v-'+k;
       var inp=d.tipo==='longo'?'<textarea id="'+id+'" data-m28in="'+e(k)+'" rows="3">'+e(v)+'</textarea>'
         :'<input id="'+id+'" data-m28in="'+e(k)+'" value="'+e(v)+'"'+(d.opcoes?' list="'+id+'-l"':'')+' autocomplete="off">'+(d.opcoes?'<datalist id="'+id+'-l">'+d.opcoes.map(function(o){return '<option value="'+e(o)+'">';}).join('')+'</datalist>':'');
-      return '<div class="m28-v'+(!v.trim()&&d.tipo!=='opcoes'?' falta':'')+'"><label for="'+id+'">'+e(d.rotulo)+(d.campo?' <small>· '+e(d.campo)+'</small>':'')+'</label>'+inp+(d.ajuda?'<p class="meta">'+e(d.ajuda)+'</p>':'')+'</div>';}).join('')+'</div>';
+      return '<div class="m28-v'+(!v.trim()&&d.tipo!=='opcoes'?' falta':'')+'"><label for="'+id+'">'+e(d.rotulo)+(d.campo?' <small>· '+e(d.campo)+'</small>':'')+'</label>'+inp+(S.der[k]&&!S.manual[k]?'<p class="meta m28-der">Preenchido do prontuário ('+e(S.der[k])+'): conferir a redação.</p>':'')+(d.ajuda?'<p class="meta">'+e(d.ajuda)+'</p>':'')+((function(){var x=S.der[k]?'':dica(k,P,J);return x?'<p class="meta m28-dica">No prontuário: '+e(x)+'</p>':'';})())+'</div>';}).join('')+'</div>';
     h+='<div class="cf"><button class="dbt" data-m28reset="1">Refazer a escolha automática</button></div>';
     return h+'</div>';
   }
@@ -273,7 +351,7 @@
     q('#cq-can [data-m28mpf]',function(b){S.mpf=+b.value;desenhar();},'onchange');
     q('#cq-can [data-m28em]',function(b){S.em=b.value;S.val.ementa_item1=null;desenhar();},'onchange');
     q('#cq-can [data-m28em1]',function(b){S.em1=b.value;desenhar();},'onchange');
-    q('#cq-can [data-m28in]',function(b){S.val[b.getAttribute('data-m28in')]=b.value;b.parentNode.classList.toggle('falta',!b.value.trim()&&vdef(b.getAttribute('data-m28in')).tipo!=='opcoes');redesenharSemCanhoto();},'oninput');
+    q('#cq-can [data-m28in]',function(b){S.val[b.getAttribute('data-m28in')]=b.value;S.manual[b.getAttribute('data-m28in')]=true;b.parentNode.classList.toggle('falta',!b.value.trim()&&vdef(b.getAttribute('data-m28in')).tipo!=='opcoes');redesenharSemCanhoto();},'oninput');
     q('#cq-can [data-m28reset]',function(){preparar(CTX.P,CTX.J,true);desenhar();});
     ligarFolha();
   }
