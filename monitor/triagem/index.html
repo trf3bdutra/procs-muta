@@ -203,6 +203,7 @@ html[data-theme="dark"] .row>.obs{background:#2a2a1c}html[data-theme="dark"] .ro
 #rodape .rmin{display:flex;align-items:center;gap:12px;flex:1;min-width:0;padding:0;border:0;flex-direction:row;justify-content:flex-start}
 #rodape .rmin .sel{display:flex;flex:none;flex-direction:row;align-items:center;gap:10px;height:46px;padding:0 18px 0 24px;min-width:0}
 #rodape .rmin .sel b{font-size:19px}
+#rodape.min:not(.off){background:#eef4f2;border-top-color:var(--v2)}#rodape.min:not(.off) .tog{background:var(--v);color:#fff;border-color:var(--v)}
 #rodape .tog{height:30px;padding:0 12px;border:1px solid var(--b2);background:var(--w);border-radius:999px;font:700 12.5px Figtree,sans-serif;color:var(--v);cursor:pointer;white-space:nowrap}
 #rodape .tog.cheio{position:absolute;right:10px;top:-15px;height:26px;font-size:11.5px;box-shadow:0 2px 6px rgba(23,63,61,.15)}
 body.rod-min main{padding-bottom:70px}
@@ -1169,7 +1170,7 @@ function abrirProntuarioTriagem(d) {
     ['triagem.Representação','Representação','s',['Não Verificado','Regular','Negativo']],
     ['triagem.MPF','Parecer do MPF','s',['Não se Aplica','Com Parecer','Sem Parecer']],
     ['triagem.MPF - Custos Legis','Custos legis','s',['','Sim','Não']],
-    ['triagem.Urgência','Urgência','s',['','Pedido de liminar','Tutela de urgência','Efeito suspensivo','Prioridade legal','Outra urgência']],
+    ['triagem.Urgência','Urgência','s',['','Tutela de urgência','Tutela de evidência','Antecipação da tutela recursal','Efeito suspensivo','Liminar em mandado de segurança','Reconsideração de liminar','Prioridade legal','Outra']],
     ['triagem.Tema','Tema / subassunto','t'],['triagem.META','Meta','t'],
     ['triagem.Alegações','Alegações','a'],['triagem.O que falta sanar','O que falta sanar','a'],
     ['triagem.Intercorrências','Intercorrências','a'],['origem.Observações','Observações gerais','a'],
@@ -1235,8 +1236,10 @@ function excluirEscaninho(id) { const e = ESC.escaninhos.find((x) => x.id === id
 
 /* ---------- rodapé de ações em bloco ---------- */
 /* edição em lote: campo da ficha (triagem/origem) e valor, gravados num só commit no operacional */
-const LOTE_CAMPOS = [['triagem.Tempestividade','Tempestividade',['Não Verificado','Tempestivo','Intempestivo']],['triagem.Preparo','Preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']],['triagem.Representação','Representação',['Não Verificado','Regular','Negativo']],['triagem.MPF','Parecer do MPF',['Não se Aplica','Com Parecer','Sem Parecer']],['triagem.Urgência','Urgência',['','Pedido de liminar','Tutela de urgência','Efeito suspensivo','Prioridade legal','Outra urgência']],['triagem.Tema','Tema / subassunto',null],['triagem.META','Meta',null],['origem.Próxima ação','Próxima ação',null],['triagem.O que falta sanar','O que falta sanar',null]];
-function loteCtl() { const c = LOTE_CAMPOS.find((x) => x[0] === RODA['r-lc']) || LOTE_CAMPOS[0]; RODA['r-lc'] = c[0];
+const LOTE_CAMPOS = [['triagem.Tempestividade','Tempestividade',['Não Verificado','Tempestivo','Intempestivo']],['triagem.Preparo','Preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']],['triagem.Representação','Representação',['Não Verificado','Regular','Negativo']],['triagem.MPF','Parecer do MPF',['Não se Aplica','Com Parecer','Sem Parecer']],['triagem.Urgência','Urgência',['','Tutela de urgência','Tutela de evidência','Antecipação da tutela recursal','Efeito suspensivo','Liminar em mandado de segurança','Reconsideração de liminar','Prioridade legal','Outra']],['triagem.Tema','Tema / subassunto',null],['triagem.META','Meta',null],['origem.Próxima ação','Próxima ação',null],['triagem.O que falta sanar','O que falta sanar',null],['triagem.Intercorrências','Intercorrências',null],['origem.Responsável','Responsável (designar)','equipe']];
+/* nomes da equipe vêm do motor (apoio/equipe.json); sem motor, o campo vira texto livre */
+function equipeNomes(){try{const m=document.getElementById('cmt-motor'),S=m&&m.contentWindow.CMTSessao&&m.contentWindow.CMTSessao.estado();const L=(S&&S.equipe||[]).filter((x)=>x&&x.nome&&x.situacao!=='inativo').map((x)=>String(x.nome).toUpperCase());return L.length?[''].concat([...new Set(L)].sort((a,b)=>a.localeCompare(b,'pt'))):null;}catch(e){return null;}}
+function loteCtl() { const c0 = LOTE_CAMPOS.find((x) => x[0] === RODA['r-lc']) || LOTE_CAMPOS[0]; RODA['r-lc'] = c0[0]; const c = c0[2] === 'equipe' ? [c0[0], c0[1], equipeNomes()] : c0;
   return '<select id="r-lc" aria-label="Campo">' + LOTE_CAMPOS.map((x) => '<option value="' + esc(x[0]) + '"' + (x[0] === c[0] ? ' selected' : '') + '>' + esc(x[1]) + '</option>').join('') + '</select>' +
     (c[2] ? '<select id="r-lv" aria-label="Valor">' + c[2].map((v) => '<option value="' + esc(v) + '"' + (v === (RODA['r-lv'] || '') ? ' selected' : '') + '>' + esc(v || '— limpar') + '</option>').join('') + '</select>' : '<input id="r-lv" type="text" placeholder="novo valor (vazio limpa)" value="' + esc(RODA['r-lv'] || '') + '" aria-label="Valor">'); }
 async function aplicarLote(ds) { const c = LOTE_CAMPOS.find((x) => x[0] === RODA['r-lc']) || LOTE_CAMPOS[0], el = $('#r-lv'), v = el ? el.value : (RODA['r-lv'] || ''), L = ds.map((d) => IDX.get(d)).filter(Boolean);
