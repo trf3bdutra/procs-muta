@@ -588,10 +588,10 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 #top .mc-cad>b em{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;color:#a57829}
 #top .mc-sl{font:400 15px "JetBrains Mono",ui-monospace,monospace;color:var(--b2)}
 #top #modulos{display:flex;gap:12px;background:none;padding:0;margin:0}
-#top #modulos button{font:550 22px/1.15 Figtree,sans-serif;letter-spacing:-.04em;color:var(--cz);padding:0;border-radius:0;background:none;box-shadow:none}
+#top #modulos button{font:650 22px/1.15 Figtree,sans-serif;letter-spacing:-.04em;color:var(--cz);padding:0;border-radius:0;background:none;box-shadow:none}
 #top #modulos button:hover{color:var(--v2)}
 #top #modulos button.on{color:var(--v);background:none;box-shadow:none}
-#top #modulos button.on::after{content:none}
+#top #modulos button.on::after{content:".";font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:400;color:#a57829}
 #top #abas{order:0;flex:0 1 auto;align-self:stretch;display:flex;align-items:stretch;gap:0;margin:0;padding:0;background:none;border:0;border-left:1px solid var(--l);overflow-x:auto;counter-reset:tb}
 #top #abas[hidden]{display:none!important}
 #top .tb{height:auto;display:flex;align-items:center;gap:9px;border:0;border-right:1px solid var(--l);border-radius:0;padding:0 16px;background:transparent;font:600 13px Figtree,sans-serif;color:var(--m2);box-shadow:none;top:0}
@@ -619,7 +619,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 </head>
 <body>
 <header id="top">
-  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT</span><div class="mc-cad"><b>Ab Initio<em>.</em></b><span class="mc-sl" aria-hidden="true">/</span><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button></nav></div></div></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button></nav></div></div></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
