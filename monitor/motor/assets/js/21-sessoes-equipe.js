@@ -241,7 +241,8 @@
   function pendentes() { S.sync = S.sync || {}; return chaves().filter(function (k) { return S.sync[k] !== hash(conteudo(k)); }); }
   async function carregarRepo() {
     if (!W.ProcsMuta) { REPO.lido = true; return; }
-    var ler = async function (rel) { try { return JSON.parse(await W.ProcsMuta.ler(rel)); } catch (e) { if (!/404/.test(e.message)) REPO.erro = e.message; return null; } };
+    REPO.falhou = new Set();
+    var ler = async function (rel) { try { return JSON.parse(await W.ProcsMuta.ler(rel)); } catch (e) { if (!/404/.test(e.message)) { REPO.erro = e.message; REPO.falhou.add(rel); } return null; } };
     S.sync = S.sync || {};
     var antes = pendentes(), sujoSes = S.sync.cal && antes.some(function (k) { return k === 'cal' || /^(ses|del):/.test(k); });
     var cal = await ler(ARQ.cal), sessoes = null;
@@ -270,15 +271,17 @@
         if (cal) { S.sync.cal = hash(conteudo('cal')); S.sessoes.forEach(function (ss) { if (ss.itens.length || (ss.previa || []).length) S.sync['ses:' + ss.data] = hash(conteudo('ses:' + ss.data)); }); }
       }
     }
+    /* regras, designação e equipe: o procs-muta prevalece, como nas sessões. A cópia deste navegador pode ser antiga (ou o padrão
+       embutido) e, com a gravação automática, apagaria as regras do gabinete. Arquivo que não pôde ser lido fica bloqueado para gravação. */
     ['regras', 'desig', 'equipe'].forEach(function (k) {
-      if (!val[k]) return;
-      if (S.sync[k] && S.sync[k] !== hash(conteudo(k))) { mantidas.push(ROT[k]); return; }
+      if (!val[k]) { if (v[k] || REPO.falhou.has(ARQ[k])) S.sync[k] = hash(conteudo(k)); return; }
+      if (S.sync[k] && S.sync[k] !== hash(conteudo(k)) && JSON.stringify(val[k]) !== conteudo(k)) mantidas.push(ROT[k]);
       if (k === 'regras') S.regras = val[k]; else if (k === 'desig') S.desig = val[k]; else { S.equipe = val[k]; S.equipePainel = true; }
       S.sync[k] = hash(conteudo(k));
     });
     if (S.desig) CRIT.forEach(function (k) { if (S.desig.ordem.indexOf(k) < 0) S.desig.ordem.push(k); if (!S.desig.on[k]) S.desig.on[k] = { d: true, c: true }; });
     REPO.lido = true; HIST = null; RX.clear(); salvar(); render();
-    if (mantidas.length) toast('Alterações deste navegador ainda não gravadas: ' + mantidas.join(', ') + '.');
+    if (mantidas.length) toast('Valeu a versão do procs-muta em: ' + mantidas.join(', ') + '. A cópia deste navegador, não gravada, foi descartada.');
     if (REPO.erro) toast('procs-muta: ' + REPO.erro);
   }
   /* liberar ou retirar a pauta da equipe grava na hora: a Ex Officio e a Consulta do Modus Operandi refletem em seguida */
@@ -296,6 +299,12 @@
     toast(msg + (oque === 'pauta' && sx.publicada ? ': já aparece na Ex Officio e na Consulta do Modus Operandi.' : '.'));
     render();
   }
+  function encolhe(k, rg) {
+    if (k === 'regras') { var a = (rg.registros || []).length, b = S.regras.length; return a >= 6 && b < a * 0.6; }
+    if (k === 'desig') { var ra = Object.keys(((rg.criterios || {}).rows) || {}).length, rb = Object.keys((S.desig || {}).rows || {}).length; return ra >= 10 && rb < ra * 0.5; }
+    if (k === 'equipe') { var R = rg.registros || [], fl = function (L) { return L.filter(function (m) { return m.minuta != null || m.correcao != null || (m.pref || []).length || (m.exp || []).length; }).length; };
+      return S.equipe.length < R.length - 2 || (fl(R) >= 3 && fl(S.equipe) < fl(R) * 0.5); }
+    return false; }
   async function gravar() {
     if (!W.ProcsMuta || !W.ProcsMuta.gravar) { toast('Gravação no procs-muta indisponível nesta página.'); return { ok: false, erro: 'Gravação no procs-muta indisponível nesta página.' }; }
     if (!REPO.lido) return { ok: false, erro: 'O procs-muta ainda não foi lido; aguarde a carga antes de gravar.' };
@@ -316,6 +325,13 @@
           ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias', 'resJulg', 'consect', 'honor', 'topico', 'intercor'].forEach(function (f) { li[f] = rc[f] || ''; });
           li.cartao = Object.assign({}, li.cartao || {}, rc.cartao || {}); li.editadoPor = rc.editadoPor; li.editadoEm = rc.editadoEm; }); }); }
       P = pendentes(); if (!P.length) { REPO.gravando = false; pill(); salvar(); render(); return { ok: true, nada: true, partes: [] }; }
+      /* proteção: não grava regras, designação ou equipe muito menores que as do procs-muta (cópia antiga ou padrão embutido) */
+      var bloq = [];
+      for (var gi = 0; gi < P.length; gi++) { var kg = P[gi]; if (['regras', 'desig', 'equipe'].indexOf(kg) < 0) continue;
+        var rg = null; try { rg = JSON.parse(await W.ProcsMuta.ler(ARQ[kg])); } catch (e) { rg = null; }
+        if (!rg) continue; if (encolhe(kg, rg)) { bloq.push(kg); S.sync[kg] = hash(conteudo(kg)); } }
+      if (bloq.length) { toast('Não gravado: ' + bloq.map(function (k) { return ROT[k]; }).join(', ') + '. A cópia deste navegador tem bem menos que o procs-muta; recarregue a página.'); P = P.filter(function (k) { return bloq.indexOf(k) < 0; });
+        if (!P.length) { REPO.gravando = false; pill(); salvar(); render(); return { ok: false, erro: 'Gravação bloqueada: cópia menor que a do procs-muta.', partes: [] }; } }
       P.forEach(function (k) {
         if (k === 'cal') files[ARQ.cal] = JSON.stringify({ schema: 'gabcmt.calendario-sessoes', versao: 1, atualizadoEm: agora, sessoes: JSON.parse(conteudo('cal')).sessoes, expediente: JSON.parse(conteudo('cal')).expediente }, null, 1) + '\n';
         else if (k.indexOf('ses:') === 0) { var d = k.slice(4); files[arqSessao(d)] = JSON.stringify(Object.assign({ schema: 'gabcmt.sessao', versao: 1, nome: br(d), date: d, atualizadoEm: agora, itens: [] }, (function (x) { return Array.isArray(x) ? { itens: x } : x || {}; })(JSON.parse(conteudo(k)))), null, 1) + '\n'; }
@@ -414,6 +430,7 @@
       else if (r.ef === 'ignorar') tagsHit.forEach(function (t) { push(c.ign, t); c.usadas = c.usadas.filter(function (u) { return u !== t; }); c.livres = c.livres.filter(function (u) { return u !== t; }); });
       c.porRegra.push({ id: r.id, nome: r.nome || '', ef: r.ef, v: r.v || '', rot: (EF[r.ef] || {}).s || r.ef, tags: tagsHit, sessao: !!(ss && (ss.regrasSessao || []).indexOf(r) >= 0) }); });
     return c; }
+  function tipoDaTarefa(t) { t = String(t || ''); return /\[(sess[ãa]o\s*-\s*)?ED\]/i.test(t) ? 'ED' : /\[ag\.?\s*int\]/i.test(t) ? 'AgInt' : /retrata/i.test(t) ? 'JR' : ''; }
   function sessaoDoItem(it) { return S.sessoes.find(function (x) { return x.itens.indexOf(it) >= 0 || (x.previa || []).indexOf(it) >= 0; }) || null; }
   function casaRegra(r, d) { return r.termos.some(function (x) { return casa(d, x); }) && !r.exceto.some(function (x) { return casa(d, x); }); }
   function classeOK(r, classe) { return !r.classes.length || !classe || r.classes.some(function (c) { return N(c) === N(classe); }); }
@@ -512,6 +529,8 @@
     var tags = etiquetas(r), classe = campo(r, ['Classe', 'classe_judicial', 'DataJud · Classe']) || it.classe;
     var c = classificar(tags, classe, ss);
     var assunto = campo(r, ['Assunto', 'Assunto_Principal', 'assunto_judicial']) || it.assunto || '';
+    /* tarefa atual no PJe: vale antes das etiquetas ([Sessão - ED] ou [ED] → ED; [Ag. Int] → AgInt; retratação → JR); regra com condição, depois, ainda pode mudar */
+    var tt = tipoDaTarefa(r && r.tarefa_atual); if (tt) { c.tipo = tt; c.porTarefa = tt; }
     aplicaRegrasCond(c, { tags: tags, tarefa: (r && r.tarefa_atual) || '', assunto: assunto, classe: classe || '', metas: c.metas, item: String(it.item || '') }, ss);
     return { r: r, tags: tags, c: c, classe: classe, recurso: recursoDaClasse(it.classe || classe), assunto: assunto,
       secao: campo(r, ['Seção Competente']) || secaoDoCatalogo(assunto) || 'Sem seção', ramo: campo(r, ['Ramo']) || ramoDoCatalogo(assunto), status: campo(r, ['Status de Julgamento']) };
@@ -1947,8 +1966,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         var pr = propostas([{ it: it, inf: inf }])[0] || null;
         return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tarefa: r.tarefa_atual || '', tipo: julgKey(it, inf), c: inf.c, tags: tags, porRegra: PR.filter(function (g) { return !g.tags.length; }),
           mpf: it.mpf || '', meta: it.meta || '', tipoManual: it.tipoManual || '', proposta: pr ? { ap: pr.ap, meta: pr.meta, mpf: pr.mpf, dif: pr.dif, man: pr.man } : null }; }); },
-    aplicarConversoes: function (id, cnjs) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return 0; var quer = new Set((cnjs || []).map(dig)), n = 0;
-      propostas(ss.itens.map(function (it) { return { it: it, inf: infoItem(it) }; })).forEach(function (p) { if (!p.dif.length || !quer.has(dig(p.it.cnj))) return; p.it.tipoManual = p.ap; if (p.meta) p.it.meta = p.meta; if (p.mpf) p.it.mpf = p.mpf; n++; });
+    aplicarConversoes: function (id, cnjs, forcar) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return 0; var quer = new Set((cnjs || []).map(dig)), n = 0;
+      propostas(ss.itens.map(function (it) { return { it: it, inf: infoItem(it) }; })).forEach(function (p) { if (!(p.dif.length || (forcar && p.man.length)) || !quer.has(dig(p.it.cnj))) return; p.it.tipoManual = p.ap; if (p.meta) p.it.meta = p.meta; if (p.mpf) p.it.mpf = p.mpf; n++; });
       if (n) { salvar(); if (root && !root.hidden) render(); } return n; },
     designacao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return null; var D = desigEfetiva(ss);
       var de = (ss.fases && ss.fases.inicio) || ss.data, ate = (ss.fases && ss.fases.minutas) || ss.data;
