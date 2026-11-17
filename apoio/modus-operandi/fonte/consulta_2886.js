@@ -324,6 +324,14 @@
     h+='<div class="cqacs"><button class="dbt" data-m28sair="1">Voltar à Consulta comum</button></div></div>';
     h+='<div class="dori"><p class="kick2"><span>Combinações julgadas · grupo '+e(S.g)+'</span><span>'+((D.combinacoes[S.g]||[]).length)+'</span></p><ul class="m28-cb">'+
       (D.combinacoes[S.g]||[]).map(function(c){return '<li><b>'+c.acordaos+'×</b> '+e(c.modulos)+'</li>';}).join('')+'</ul><p class="meta">'+e(D.fonte.descricao)+'</p></div>';
+    var K=(typeof BASE!=="undefined"&&BASE&&BASE.m2886kit)||null;
+    if(K){var cods=Object.keys(K).sort(function(a,b){return a.localeCompare(b,'pt',{numeric:true});});
+      if(!S.kit||!K[S.kit]){var m=/2886-(3d|\d[a-z]?(?:-esp)?)/.exec((S.gPorque||'')+' '+((J&&J.modelo&&J.modelo.id)||''));var ex=ementaEscolhida();S.kit=m&&K['2886-'+m[1]]?'2886-'+m[1]:(ex&&K['2886-'+ex.cod]?'2886-'+ex.cod:cods.filter(function(c){return c.indexOf('2886-'+S.g)===0;})[0]||cods[0]);}
+      var k=K[S.kit];
+      h+='<div class="dori"><p class="kick2"><span>Acórdão-modelo · íntegra</span><span>'+cods.length+'</span></p><select class="m28-sel" data-m28kit="1">'+cods.map(function(c){return '<option value="'+e(c)+'"'+(c===S.kit?' selected':'')+'>'+e(c)+'</option>';}).join('')+'</select>'+
+        '<p class="meta">'+e(k.ref)+'. Nomes, IDs e datas são do processo-modelo: não passam para a minuta.</p>'+
+        '<details class="m28-kit"><summary>Ler o relatório, o voto, a ementa e o acórdão</summary><div class="m28-kitt">'+e(k.texto).replace(/\n(RELATÓRIO|VOTO|EMENTA|ACÓRDÃO)\n/g,'\n<b>$1</b>\n').replace(/^(RELATÓRIO)\n/,'<b>$1</b>\n')+'</div></details>'+
+        '<div class="cqacs"><button class="dbt" data-m28kitcp="1">Copiar a íntegra</button></div></div>';}
     return h;
   }
   function copiar(txt){
@@ -342,6 +350,8 @@
     q('#cq-main [data-m28cp]',function(b){copiar(b.getAttribute('data-m28cp')==='txt').then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent=b.getAttribute('data-m28cp')==='txt'?'Copiar como texto':'Copiar a minuta';},1600);},function(){b.textContent='Não foi possível copiar';});});
     q('#cq-main [data-m28v]',function(b){var el=document.getElementById('m28v-'+b.getAttribute('data-m28v'));if(el){el.focus();el.scrollIntoView({block:'center'});}});
     q('#cq-ori [data-m28sair]',function(){CTX.CQ.m28=false;CTX.voltar();});
+    q('#cq-ori [data-m28kit]',function(b){S.kit=b.value;CTX.or.innerHTML=painel(CTX.P,CTX.J);ligarFolha();var d=document.querySelector('#cq-ori .m28-kit');if(d)d.open=true;},'onchange');
+    q('#cq-ori [data-m28kitcp]',function(b){var K=BASE.m2886kit[S.kit];(navigator.clipboard?navigator.clipboard.writeText(K.texto):Promise.reject()).then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar a íntegra';},1500);},function(){b.textContent='Não copiou';});});
   }
   function ligar(){
     var t=nq(textoCaso(CTX.P,CTX.J));
