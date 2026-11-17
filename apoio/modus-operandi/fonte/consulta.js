@@ -1,6 +1,6 @@
 /* ================= CONSULTA: processo pautado → perfil do caso → folha, canhoto, conformidade e material ================= */
 (function(){
-  var CQ={ses:'',item:'',perfil:null,fonte:'',cal:null,erro:'',busy:false,sel:'',grupo:'',ver:{},usar:'',matriz:false,lia:{peca:'acordao',modo:'GERAÇÃO',res:'',prec:null,mod:true,par:true}};
+  var CQ={ses:'',item:'',perfil:null,fonte:'',cal:null,erro:'',busy:false,sel:'',grupo:'',ver:{},usar:'',matriz:false,pront:null,colar:false,m28:null,lia:{peca:'acordao',modo:'GERAÇÃO',res:'',prec:null,mod:true,par:true}};
   var STOP={'de':1,'da':1,'do':1,'das':1,'dos':1,'e':1,'a':1,'o':1,'as':1,'os':1,'em':1,'no':1,'na':1,'nos':1,'nas':1,'por':1,'para':1,'com':1,'sem':1,'um':1,'uma':1,'ao':1,'aos':1,'que':1,'se':1,'ou':1,'nao':1,'sobre':1,'entre':1,'pelo':1,'pela':1,'art':1,'lei':1,'recurso':1,'processo':1,'caso':1};
   function nq(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
   function toks(s){return nq(s).split(/[^a-z0-9]+/).filter(function(w){return w.length>2&&!STOP[w];});}
@@ -24,6 +24,33 @@
     Object.keys(x).forEach(function(k){if(x[k]==null||x[k]===''||(Array.isArray(x[k])&&!x[k].length))delete x[k];});
     return x;
   }
+  /* prontuário do Ex Officio (cartão gravado no procs-muta) no mesmo formato do bloco da LIA: campos com chave pontuada */
+  function prontDoItem(i){
+    var ct=i.ctl||{},C=ct.cartao||{},campos={},LST={recursos:1,pecas:1,pendencias:1,papeis:1};
+    (function plano(o,pre){Object.keys(o||{}).forEach(function(k){var v=o[k],ch=pre?pre+'.'+k:k;if(!pre&&LST[k])return;
+      if(v&&typeof v==='object'&&!Array.isArray(v))plano(v,ch);else if(v!=null&&v!=='')campos[ch]=v;});})(C,'');
+    ['tempest','preparo','prelim','repres','midias','mpf','parecer','resJulg','consect','honor','topico'].forEach(function(k){if(ct[k]!=null&&ct[k]!=='')campos[k]=ct[k];});
+    if(i.obs)campos.obs=i.obs;
+    return {processo:i.cnj,campos:campos,recursos:C.recursos||[],pecas:C.pecas||[],papeis:C.papeis||[],
+      pendencias:(C.pendencias||[]).filter(function(x){return !(x&&x.ok);}).map(function(x){return x&&x.desc!=null?x.desc:String(x);}),fonte:'Ex Officio'};
+  }
+  /* prontuário colado (bloco <<<PRONTUARIO_CMT … PRONTUARIO_CMT>>>, o JSON ou o arquivo .json baixado) → perfil do caso */
+  function lerProntuario(txt){
+    var t=String(txt||'').replace(/^[\s\S]*?<<<PRONTUARIO_CMT/,'').replace(/PRONTUARIO_CMT>>>[\s\S]*$/,'').trim();
+    var i=t.indexOf('{'),j=t.lastIndexOf('}');if(i<0||j<i)throw new Error('Não encontrei o JSON do prontuário no texto colado.');
+    var J=JSON.parse(t.slice(i,j+1));if(!J||!J.campos)throw new Error('O JSON colado não tem “campos”: não parece um prontuário.');return J;
+  }
+  function perfilDoProntuario(J){
+    var C=J.campos||{},x={processo:J.processo||'',subassuntos:C.subassuntos||'',especificidades:C.especificidades||'',questoes:C.questoes||'',sintese:C.sintese||'',
+      tipoJulgamento:C.tipoJ||'',decisaoOrigem:[C['orig.tipo'],C['orig.id']?'ID '+C['orig.id']:''].filter(Boolean).join(' · '),
+      recursos:(J.recursos||[]).map(function(r){return [r.tipo,r.parte].filter(Boolean).join(' · ');}).filter(Boolean),
+      tempestividade:C.tempest||'',preparo:C.preparo||'',requisito:C['adm.req']||'',mpf:[C.parecer,C['mpfx.sentido']].filter(Boolean).join(' · '),
+      ed:C['ed.vicio']?{vicio:C['ed.vicio']}:null,retratacao:C['jr.tema']||C['jr.trib']?{tema:C['jr.tema']||'',tribunal:C['jr.trib']||''}:null,
+      resultado:C.resJulg||'',honorarios:C.honor||'',multa:C['jul.multa']||''};
+    if(/28[,.]86|0005019-15\.1997/.test([x.subassuntos,x.especificidades,C.obsGeral,J.modelo&&J.modelo.id].join(' '))||(J.modelo&&/^2886-/.test(J.modelo.id||'')))x.assunto='Reajuste de 28,86% (ACP 0005019-15.1997.4.03.6000)';
+    Object.keys(x).forEach(function(k){if(x[k]==null||x[k]===''||(Array.isArray(x[k])&&!x[k].length))delete x[k];});
+    return x;
+  }
   function lerHash(){
     var h=location.hash.replace(/^#/,''),p={};h.split('&').forEach(function(kv){var i=kv.indexOf('=');if(i>0)p[kv.slice(0,i)]=kv.slice(i+1);});
     if(p.caso){try{CQ.perfil=JSON.parse(decodeURIComponent(p.caso));CQ.fonte='enviado pelo cartão do CMT-monitor';}catch(er){}}
@@ -43,9 +70,9 @@
       var L=(doc.itens||[]).length?doc.itens:(doc.previa||[]),d=dg(it);
       var x=L.filter(function(i){return String(i.item)===it;})[0]||L.filter(function(i){return d.length>=7&&dg(i.cnj).indexOf(d)>=0;})[0];
       if(!x)throw new Error('Item '+it+' não encontrado na pauta de '+brd(ses)+'.');
-      CQ.perfil=perfilDoItem(x);CQ.fonte='pauta de '+brd(ses)+(x.item?' · item '+x.item:'');CQ.erro='';zerar();
+      CQ.perfil=perfilDoItem(x);CQ.pront=prontDoItem(x);CQ.m28=null;CQ.fonte='prontuário do Ex Officio · pauta de '+brd(ses)+(x.item?' · item '+x.item:'');CQ.erro='';zerar();
       try{history.replaceState(null,'','#consulta='+ses+'/'+encodeURIComponent(it));}catch(er){}
-    }).catch(function(er){CQ.erro=er.message;}).then(function(){CQ.busy=false;render();});
+    }).catch(function(er){CQ.erro=CQ.perfil?'Prontuário completo indisponível ('+er.message+'). A Consulta usa os dados enviados pelo cartão.':er.message;}).then(function(){CQ.busy=false;render();});
   }
   function toastC(t){var el=document.getElementById('toast');if(el){el.textContent=t;el.classList.add('on');setTimeout(function(){el.classList.remove('on');},2400);}}
   /* pesquisa: pontua cada registro pelos termos do caso, com peso por campo */
@@ -261,17 +288,39 @@
     var h='<div class="dbar"><label>Sessão<select id="cq-ses"><option value="">escolha a sessão</option>'+opts+'</select></label>'+
       '<label>Item ou nº do processo<input id="cq-item" value="'+e(CQ.item)+'" placeholder="ex.: 12" autocomplete="off"></label>'+
       '<button class="cq-go" id="cq-go"'+(CQ.busy?' disabled':'')+'>'+(CQ.busy?'Consultando…':'Consultar')+'</button><span class="dbsp"></span>'+
+      '<button class="dbt" id="cq-pront">Colar prontuário</button>'+
+      (CQ.perfil&&window.M2886&&M2886.disponivel()?'<button class="dbt" id="cq-m28" aria-pressed="'+(usa28()?'true':'false')+'">Matriz 28,86%</button>':'')+
       (CQ.perfil?'<span class="dbinfo">'+e(CQ.perfil.processo||'')+' · '+e(CQ.fonte)+'</span>':'')+'</div>';
+    if(CQ.colar)h+='<div class="cq-cola"><textarea id="cq-cola-t" rows="6" placeholder="Cole aqui o bloco do prontuário (<<<PRONTUARIO_CMT … PRONTUARIO_CMT>>>) ou o JSON baixado da página do prontuário."></textarea>'+
+      '<div class="cq-cola-a"><button class="cq-go" id="cq-cola-ok">Carregar o caso</button><button class="dbt" id="cq-cola-x">Cancelar</button>'+
+      '<span class="meta">O prontuário vira o caso em consulta. Nos casos de 28,86%, a Consulta abre a matriz modular já preenchida.</span></div></div>';
     if(CQ.erro)h+='<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir o Ex Officio</a>':'')+'</div>';
     tp.innerHTML=h;
     var P=CQ.perfil;
     if(!P){can.innerHTML='';or.innerHTML='';mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA <small>· sem caso em consulta</small></div><div class="cqvz">Escolha a sessão, informe o item da pauta e aperte Enter. O Compendium lê o cartão gravado no procs-muta, aplica ao caso o modelo do banco ou, na falta dele, a minuta-matriz como estrutura, e confere a conformidade.</div></div>';ligar();return;}
     if(!BASE){mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA</div><div class="cqvz">Carregando a base do gabinete…</div></div>';ligar();base().then(render);return;}
+    if(usa28()){window.M2886.render(P,CQ.pront,{can:can,mn:mn,or:or},CQ,render);ligarTopo();return;}
     var R=buscar(P),A=aplicar(P,R);
     can.innerHTML=canhoto(P,A);mn.innerHTML=folha(P,A);or.innerHTML=orientacoes(P,A,R);
     ligar();liaLigar(P,A,R);
   }
+  function usa28(){return !!(CQ.perfil&&window.M2886&&M2886.disponivel()&&(CQ.m28===true||(CQ.m28!==false&&M2886.e2886(CQ.perfil,CQ.pront))));}
+  function ligarTopo(){
+    var s=document.getElementById('cq-ses'),i=document.getElementById('cq-item'),g=document.getElementById('cq-go');
+    if(s)s.onchange=function(){CQ.ses=s.value;};
+    if(i){i.oninput=function(){CQ.item=i.value;};i.onkeydown=function(ev){if(ev.key==='Enter'){CQ.item=i.value;consultar();}};}
+    if(g)g.onclick=function(){CQ.ses=s?s.value:CQ.ses;CQ.item=i?i.value:CQ.item;consultar();};
+    var b=document.getElementById('cq-pront');if(b)b.onclick=function(){CQ.colar=!CQ.colar;render();var t=document.getElementById('cq-cola-t');if(t)t.focus();};
+    var x=document.getElementById('cq-cola-x');if(x)x.onclick=function(){CQ.colar=false;render();};
+    var ok=document.getElementById('cq-cola-ok');if(ok)ok.onclick=function(){
+      try{var J=lerProntuario(document.getElementById('cq-cola-t').value);CQ.pront=J;CQ.perfil=perfilDoProntuario(J);CQ.fonte='prontuário colado';CQ.erro='';CQ.colar=false;CQ.m28=null;zerar();
+        try{history.replaceState(null,'','#consulta');}catch(er){}}
+      catch(er){CQ.erro='Prontuário: '+er.message;}
+      render();};
+    var m=document.getElementById('cq-m28');if(m)m.onclick=function(){CQ.m28=!usa28();render();};
+  }
   function ligar(){
+    ligarTopo();
     var s=document.getElementById('cq-ses'),i=document.getElementById('cq-item'),g=document.getElementById('cq-go');
     if(s)s.onchange=function(){CQ.ses=s.value;};
     if(i){i.oninput=function(){CQ.item=i.value;};i.onkeydown=function(ev){if(ev.key==='Enter'){CQ.item=i.value;consultar();}};}
@@ -291,10 +340,10 @@
   var ov=window.VDM_view;
   window.VDM_view=function(v){if(v==='consulta'){window.CQ_render();return;}if(ov)ov(v);};
   var temHash=lerHash();
-  window.addEventListener('hashchange',function(){if(lerHash()){var t=document.querySelector('.tab[data-v="consulta"]');if(t)t.click();if(CQ.ses&&CQ.item&&!/caso=/.test(location.hash))consultar();else window.CQ_render();}});
+  window.addEventListener('hashchange',function(){if(lerHash()){var t=document.querySelector('.tab[data-v="consulta"]');if(t)t.click();if(CQ.ses&&CQ.item)carregarCal().then(consultar);else window.CQ_render();}});
   setTimeout(function(){
     var alvo=temHash?'consulta':(window.VDM_PUBLICO?'ement':'');
     if(alvo){var t=document.querySelector('.tab[data-v="'+alvo+'"]');if(t)t.click();}
-    if(temHash&&CQ.ses&&CQ.item&&!CQ.perfil)carregarCal().then(consultar);
+    if(temHash&&CQ.ses&&CQ.item)carregarCal().then(consultar);
   },0);
 })();

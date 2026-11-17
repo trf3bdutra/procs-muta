@@ -32,6 +32,8 @@ modelos/                       tudo o que é modelo de texto
                                os de acórdão "mod-cat-*" vêm do catálogo: scripts/modelos-matriz/catalogo.py
   matrizes-estruturais.json    moldes por tipo de julgamento, usados no Editorial (e ids excluídos)
   paragrafos.json              parágrafos-padrão (328; os "rural.cr.*" e "pensao.cr.*" vêm dos recortes do Compêndio Rural)
+  matrizes-2886.json           matrizes modulares do 28,86% (ACP 0005019-15.1997.4.03.6000): 44 módulos, 10 grupos, variáveis e ementas-base,
+                               extraídos dos 75 acórdãos de 15/09 a 26/10/2026; usados na Consulta do Modus Operandi (consulta_2886.js)
 
 apoio/                         recursos de apoio à redação
   diretrizes.json              vocabulário, conectivos, preferências, correções, alertas

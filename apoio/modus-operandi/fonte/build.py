@@ -16,6 +16,7 @@ Fontes (todas no procs-muta):
   ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
   ../../../precedentes/precedentes.jsonl · inteiros-teores/*.jsonl   ementário do Relator
   ../../referencias-rapidas.json                   referências rápidas ao lado dos modelos
+  consulta_2886.js · consulta_2886.css · ../../../modelos/matrizes-2886.json   matriz modular de 28,86% na Consulta
   ../../repertorio-normativo-complemento.json      dispositivos do repertório normativo além dos da planilha
   ../../../acervo/fonte.json                        partes, advogados e dados do processo, quando o processo está no acervo
 Uso: python3 build.py
@@ -153,6 +154,16 @@ LIA3 = ('<script type="text/plain" id="lia-v3">' + base64.b64encode(gzip.compres
 _LG = RAIZ/'padrao/lia/Prompt_Gerar_CMT.txt'
 LIA3 += ('<script type="text/plain" id="lia-gerar">' + base64.b64encode(gzip.compress(_LG.read_bytes(), 9)).decode() + '</script>') if _LG.exists() else ''
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
+# matrizes modulares de 28,86% (Consulta): modelos/matrizes-2886.json
+_M28 = RAIZ/'modelos/matrizes-2886.json'
+if _M28.exists():
+    pacote['m2886'] = ler(_M28)
+    try:
+        import importlib.util as _iu
+        _sp = _iu.spec_from_file_location('m2886', RAIZ/'scripts/modelos-matriz/matrizes_2886.py'); _mm = _iu.module_from_spec(_sp); _sp.loader.exec_module(_mm)
+        for _x in _mm.conferir(pacote['m2886'])[0]: print('matriz 28,86% · ERRO:', _x)
+    except Exception as _ex:
+        print('matriz 28,86%: conferência não rodou:', _ex)
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
 
 js_ = js
@@ -179,8 +190,8 @@ def montar(var):
     """var = 'compendio' (um só código: modo padrão para todos; modo avançado liberado pelo login, ver acesso.js)
              'editor'    (página do editor: grava no procs-muta pelo servidor; /editor/)"""
     t = t0
-    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8'))
-    css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8') + (H/'editorial_d.css').read_text(encoding='utf-8')
+    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8') + '\n' + (H/'consulta_2886.js').read_text(encoding='utf-8'))
+    css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'consulta_2886.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8') + (H/'editorial_d.css').read_text(encoding='utf-8')
     from escuro import escuro  # modo noturno de #v-edit (Minuta-Matriz, Modelos, Diretrizes), gerado de editorial_d.css
     css += escuro((H/'editorial_d.css').read_text(encoding='utf-8'))
     # abas do modo avançado: Enunciados, Repertório e Enciclopédia (escondidas até o login com acesso)
