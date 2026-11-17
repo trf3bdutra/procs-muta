@@ -1629,6 +1629,17 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
 #v-pauta.ed .trb-eyr,#v-pauta.ed .trm-ey,#v-pauta #pt-ey{display:flex!important;align-items:center;height:17px;margin:0!important}
 #v-pauta.ctl .pt-h{border-top:0!important;padding:4px 0 0 1px!important;margin:0!important}
 #v-pauta.ctl .ctl-lead{font-size:13px!important;line-height:1.5!important;margin-top:4px!important;max-width:none!important;color:var(--em)!important}
+
+/* ===== celular (até 600 px): barras de progresso sem estouro, números das Monocráticas em largura total, fila de urgências quebrando linha ===== */
+@media (max-width:600px){
+#v-pauta.ed .trb-p{grid-template-columns:minmax(0,1fr)!important}
+#v-pauta.ed .tp-h{flex-wrap:wrap;gap:2px 8px}#v-pauta.ed .tp-h b{white-space:nowrap}
+#v-pauta.ed.mono #trm .trm-c{width:auto!important;max-width:none!important}
+#trm-urq .uz{flex-wrap:wrap}#trm-urq .uz-m{flex-wrap:wrap}#trm-urq .uz-m span{white-space:normal!important}
+#v-pauta .pt-tabs,#v-pauta .stb,#ed-tl{overflow-x:auto!important;scrollbar-width:none;max-width:100%;flex-wrap:nowrap}
+#trm-urq .uz *{white-space:normal!important}#trm-urq .uz-m{flex-direction:column;align-items:flex-start}
+#prq .prt{max-width:100%}
+}
 /* Monocráticas: título no padrão da Pauta (sobre o fundo, sem caixa) e números num painel logo abaixo */
 #v-pauta.mono #trm,html[data-theme=dark] #v-pauta.mono #trm{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
 #v-pauta.mono #trm>.trb-in{padding-left:0!important;padding-right:0!important;padding-top:0!important}

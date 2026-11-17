@@ -544,6 +544,27 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background-color:rgba(22
 #tri-prontuario .tp-foot{padding:10px 14px!important;border-top:1px solid var(--b);background:#fbfaf5;display:flex;gap:6px;align-items:center}#tri-prontuario .tp-foot .grow{flex:1}
 html[data-theme="dark"] #tri-prontuario,html[data-theme="dark"] #tri-prontuario .tp-body,html[data-theme="dark"] #tri-prontuario .tp-foot,html[data-theme="dark"] .proc-exp{background:#10222e!important}
 html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent)}
+
+/* ===== celular (até 600 px): topo em uma linha rolável, linhas da lista empilhadas, rodapé de ações em coluna, painéis em tela cheia ===== */
+@media (max-width:600px){
+#top{padding:0 10px;gap:6px;flex-wrap:wrap;min-height:50px}
+#top #abas{order:3;flex:1 1 100%;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+#estado{max-width:44vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
+#st-grava{padding:4px 8px}
+.row{grid-template-columns:24px minmax(0,1fr)!important;row-gap:4px}
+.row>*:nth-child(n+3){grid-column:2!important;display:flex!important;min-width:0}
+.row .as b,.row .as span{white-space:normal}
+.kpis,.st-g,.ini-grid{grid-template-columns:minmax(0,1fr)!important}
+.proc-exp{padding:10px 12px!important}.pe-grid{grid-template-columns:minmax(0,1fr)}.pe-foot{flex-wrap:wrap}
+#rodape:not(.min){display:flex!important;flex-direction:column;max-height:72vh;overflow-y:auto}
+#rodape:not(.min) .ac{border-right:0!important;border-bottom:1px solid var(--l);padding:10px 12px}
+#rodape:not(.min) .lin{flex-wrap:wrap}#rodape:not(.min) .lin select,#rodape:not(.min) .lin input{flex:1 1 100%;min-width:0}
+#rodape.min .rmin>span:not(.sel){display:none}
+#tri-prontuario{left:8px!important;right:8px!important;bottom:8px!important;width:auto!important}
+.cwe table{display:block;overflow-x:auto}
+.cwe-2col,.cwe-grid{grid-template-columns:minmax(0,1fr)!important}
+#gaveta{width:100vw!important;max-width:100vw!important}
+}
 </style>
 </head>
 <body>
