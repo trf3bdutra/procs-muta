@@ -2872,16 +2872,16 @@ function linhaExp(it){var c=it.ctl||{};return [it.item,it.cnj,aprec(it)+(metaDe(
 function lvItens(v){v=String(v||'').trim();if(!v)return [];
   var L=v.split(/\n+/).map(function(x){return x.trim();}).filter(Boolean);
   if(L.length<2&&v.indexOf(' · ')>0)L=v.split(/\s·\s/);
-  if(L.length<2&&/(^|\s)(F\d{1,2}|\d{1,2}[.)]|[a-h]\)|\([ivx]+\))\s/.test(v)){var m=v.split(/\s(?=(?:F\d{1,2}|\d{1,2}[.)]|[a-h]\)|\([ivx]+\))\s)/);if(m.length>1)L=m;}
+  if(L.length<2&&/(^|\s)([FQ]\d{1,2}|\d{1,2}[.)]|[a-h]\)|\([ivx]+\))\s/.test(v)){var m=v.split(/\s(?=(?:[FQ]\d{1,2}|\d{1,2}[.)]|[a-h]\)|\([ivx]+\))\s)/);if(m.length>1)L=m;}
   if(L.length<2&&/;\s/.test(v))L=v.split(/;\s+/);
   return L.map(function(x){return x.replace(/^[-•*·]\s*/,'').replace(/[;.]\s*$/,'').trim();}).filter(Boolean);}
 function lvHtml(v,modo){if(!String(v||'').trim())return '';
   if(modo==='txt')return '<p class="lv-t">'+esc(String(v).trim()).replace(/\n+/g,'</p><p class="lv-t">')+'</p>';
   var L=lvItens(v);
   if(modo==='chips')return '<span class="lv-c">'+L.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</span>';
-  return '<ol class="lv-l'+(modo==='num'?' n':'')+'">'+L.map(function(x){var m=/^(F\d{1,2}|\d{1,2}[.)]|[a-h]\)|\([ivx]+\))\s+(.*)$/.exec(x),k=m?m[1].replace(/[.)]$/,''):'',t=m?m[2]:x;t=t.charAt(0).toUpperCase()+t.slice(1);
+  return '<ol class="lv-l">'+L.map(function(x,qi){var m=/^([FQ]\d{1,2}|\d{1,2}[.)]|[a-h]\)|\([ivx]+\))\s+(.*)$/.exec(x),k=m?m[1].replace(/[.)]$/,''):'',t=m?m[2]:x;t=t.charAt(0).toUpperCase()+t.slice(1);
     t=esc(t).replace(/\((ID\s*[\d.]+[^)]*)\)/g,'<code>$1</code>').replace(/(Tema\s*[\d.]+\/(?:STF|STJ)|Súmula\s*[\d.]+(?:\/(?:STF|STJ))?)/g,'<b>$1</b>');
-    return '<li>'+(k&&modo!=='num'?'<i>'+esc(k)+'</i>':'')+'<span>'+t+'</span></li>';}).join('')+'</ol>';}
+    if(modo==='num')k=/^Q\d/.test(k)?k:'Q'+(qi+1);return '<li>'+(k?'<i>'+esc(k)+'</i>':'')+'<span>'+t+'</span></li>';}).join('')+'</ol>';}
 document.addEventListener('click',function(e){var lv=e.target.closest&&e.target.closest('.lvw .lv');if(!lv)return;var w=lv.parentNode,t=w.querySelector('textarea');w.classList.add('ed');t.style.height=Math.max(72,Math.min(320,t.scrollHeight+4))+'px';t.focus();});
 document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('lv')){e.preventDefault();e.target.click();}});
 document.addEventListener('focusout',function(e){var t=e.target;if(!t||t.tagName!=='TEXTAREA')return;var w=t.closest('.lvw');if(!w)return;
