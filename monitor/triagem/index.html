@@ -500,6 +500,8 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background-color:rgba(22
 
 /* Escaninho: lista em primeiro plano; resumo e bilhete recolhidos inicialmente */
 .esc-resumo{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border:1px solid var(--b);background:var(--w);border-radius:8px;margin:10px 0 12px}.esc-resumo b{color:var(--v)}.esc-detalhes{display:none}.esc-detalhes.on{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:16px;align-items:start;margin-bottom:12px}@media(max-width:860px){.esc-detalhes.on{grid-template-columns:1fr}}
+
+#tri-prontuario{position:fixed;z-index:58;top:0;right:0;bottom:0;width:min(520px,96vw);display:flex;flex-direction:column;background:var(--p);border-left:2px solid var(--v);box-shadow:-16px 0 42px rgba(23,63,61,.2)}#tri-prontuario .tp-head{display:flex;align-items:flex-start;gap:12px;padding:17px 20px 13px;border-bottom:1px solid var(--l)}#tri-prontuario .tp-head h2{margin:4px 0 2px;font-size:21px;color:var(--v)}#tri-prontuario .tp-body{flex:1;overflow:auto;padding:14px 18px 24px;display:flex;flex-direction:column;gap:13px}#tri-prontuario .tp-group{border:1px solid var(--b);border-radius:8px;background:var(--w);overflow:hidden}#tri-prontuario .tp-group h3{margin:0;padding:9px 12px;border-bottom:1px solid var(--l);font-size:12px;color:var(--v);letter-spacing:.04em;text-transform:uppercase}#tri-prontuario .tp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:11px 12px}#tri-prontuario .tp-grid .f{min-width:0}#tri-prontuario .tp-grid .wide{grid-column:1/-1}#tri-prontuario .tp-grid input,#tri-prontuario .tp-grid select,#tri-prontuario .tp-grid textarea{width:100%;min-width:0;padding:8px 9px;font-weight:400}#tri-prontuario .tp-grid textarea{min-height:62px;resize:vertical}#tri-prontuario .tp-foot{display:flex;gap:8px;align-items:center;padding:12px 18px;border-top:1px solid var(--l);background:var(--w)}#tri-prontuario .tp-foot .grow{flex:1}.btn.pront{height:25px;padding:0 8px;font-size:10.5px;border-color:var(--b);color:var(--v);background:var(--p)}@media(max-width:860px){#tri-prontuario{width:100vw}}
 </style>
 </head>
 <body>
@@ -963,7 +965,7 @@ function obsLinha(o) { const x = obsCurta(o.row && o.row['Observações']); if (
   const R = { a: ['atenção', 'atenções'], p: ['pendência', 'pendências'], n: ['nota', 'notas'], d: ['dúvida', 'dúvidas'] }, chips = ['a', 'p', 'n', 'd'].filter((k) => x.pis[k]).map((k) => '<i class="op-' + k + '">' + x.pis[k] + ' ' + R[k][x.pis[k] > 1 ? 1 : 0] + '</i>').join('');
   return '<button type="button" class="obs" data-ficha="' + o.d + '" title="Observações da ficha · abrir">' + '<span>' + (x.prox ? 'Próximo ato' : 'Obs.') + '</span><b>' + esc(x.t || '—') + '</b>' + chips + '</button>'; }
 function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>';
-  return '<div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span>' + obsLinha(o) + '</div>'; }
+  return '<div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Abrir prontuário rápido">Triagem</button>' + obsLinha(o) + '</div>'; }
 function lista(L, st, onde) {
   const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
   const todosMarc = L.length && L.every((o) => SEL.has(o.d));
@@ -1088,6 +1090,42 @@ function vEscaninhos() {
   ESC.escaninhos.forEach((e) => { const n = U.filter((o) => e._set.has(o.d)).length;
     h += '<div class="ecard" role="button" tabindex="0" data-esc-abre="' + esc(e.id) + '" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><span class="k" style="color:var(--m)">' + (ABERTAS.indexOf(e.id) >= 0 ? 'aberto em aba' : 'criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)))) + '</span><b>' + esc(e.titulo) + '</b><span style="font-size:13px;color:var(--m2)">' + esc(e.subtitulo || '') + '</span><span class="ft"><span class="mono" style="font-size:22px;color:var(--v)">' + nf(n) + '</span><span style="display:flex;gap:10px"><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar</button><button type="button" class="lk" style="color:var(--r)" data-esc-del="' + esc(e.id) + '">Excluir</button></span></span></div>'; });
   h += '<button type="button" class="ecard novo" data-esc-novo>+ Novo escaninho</button></div><p style="font-size:12.5px;color:var(--m)">Excluir um escaninho devolve os processos dele à fila de triagem; nada sai do acervo.</p></div>'; return h; }
+
+function abrirProntuarioTriagem(d) {
+  const o=IDX.get(d); if(!o)return; const raw=o.row||{};
+  const campos=[
+    ['triagem.Tempestividade','Tempestividade','s',['Não Verificado','Tempestivo','Intempestivo']],
+    ['triagem.Preparo','Preparo','s',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']],
+    ['triagem.Representação','Representação','s',['Não Verificado','Regular','Negativo']],
+    ['triagem.MPF','Parecer do MPF','s',['Não se Aplica','Com Parecer','Sem Parecer']],
+    ['triagem.MPF - Custos Legis','Custos legis','s',['','Sim','Não']],
+    ['triagem.Urgência','Urgência','s',['','Pedido de liminar','Tutela de urgência','Efeito suspensivo','Prioridade legal','Outra urgência']],
+    ['triagem.Tema','Tema / subassunto','t'],['triagem.META','Meta','t'],
+    ['triagem.Alegações','Alegações','a'],['triagem.O que falta sanar','O que falta sanar','a'],
+    ['triagem.Intercorrências','Intercorrências','a'],['origem.Observações','Observações gerais','a'],
+    ['origem.Próxima ação','Próxima ação','t']
+  ];
+  const valor=(k)=>raw[k.slice(k.indexOf('.')+1)]||'';
+  const field=(c)=>{const k=c[0],v=valor(k);if(c[2]==='s')return '<label class="f">'+c[1]+'<select data-tri-field="'+k+'">'+c[3].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+(x||'—')+'</option>').join('')+'</select></label>';return '<label class="f'+(c[2]==='a'?' wide':'')+'">'+c[1]+(c[2]==='a'?'<textarea data-tri-field="'+k+'" rows="2">'+esc(v)+'</textarea>':'<input type="text" data-tri-field="'+k+'" value="'+esc(v)+'">')+'</label>';};
+  const g=document.createElement('aside');g.id='tri-prontuario';g.setAttribute('role','dialog');g.setAttribute('aria-label','Prontuário rápido de triagem');
+  g.innerHTML='<div class="tp-head"><div style="flex:1"><p class="k" style="margin:0">Prontuário de triagem · '+esc(o.secao)+'</p><h2>'+esc(o.cnj)+'</h2><p style="font-size:12px;color:var(--m);margin:0">'+esc(o.assunto)+'</p></div><button type="button" class="x" data-tri-close aria-label="Fechar">×</button></div>'+
+  '<div class="tp-body"><section class="tp-group"><h3>Admissibilidade e regularidade</h3><div class="tp-grid">'+campos.slice(0,3).map(field).join('')+'</div></section>'+
+  '<section class="tp-group"><h3>Ministério Público e urgência</h3><div class="tp-grid">'+campos.slice(3,6).map(field).join('')+'</div></section>'+
+  '<section class="tp-group"><h3>Matéria e gestão</h3><div class="tp-grid">'+campos.slice(6,8).map(field).join('')+'</div></section>'+
+  '<section class="tp-group"><h3>Alegações e providências</h3><div class="tp-grid">'+campos.slice(8).map(field).join('')+'</div></section>'+
+  '<p style="font-size:11.5px;color:var(--m)">Os campos são gravados na ficha única do processo (origem e triagem). A ficha completa permanece disponível no número do processo.</p></div>'+
+  '<div class="tp-foot"><span class="grow" style="font-size:11px;color:var(--m)">Registro na ficha do processo</span><button type="button" class="btn" data-tri-close>Fechar</button><button type="button" class="btn pri" data-tri-save="'+d+'">Salvar</button></div>';
+  const anterior=document.getElementById('tri-prontuario');if(anterior)anterior.remove();document.body.appendChild(g);
+}
+async function salvarProntuarioTriagem(d){
+  const g=document.getElementById('tri-prontuario'),o=IDX.get(d);if(!g||!o)return;
+  const campos={};g.querySelectorAll('[data-tri-field]').forEach(el=>{campos[el.dataset.triField]=el.value;});
+  const bt=g.querySelector('[data-tri-save]');bt.disabled=true;bt.textContent='Gravando…';
+  try{const ad=W.CMTFichaMonitor;if(!ad||!ad.gravar)throw new Error('Adaptador da ficha ainda não carregou.');await ad.gravar(o.cnj,campos);
+    Object.keys(campos).forEach(k=>{const p=k.indexOf('.');o.row[k.slice(p+1)]=campos[k];});refazDest(o);g.remove();render();toast('Prontuário gravado na ficha do processo.');
+  }catch(e){toast('Não foi possível gravar: '+e.message,true);bt.disabled=false;bt.textContent='Salvar';}
+}
+
 function gaveta(html, onClose) { fecharGaveta(); const v = D.createElement('div'); v.className = 'veu'; v.id = 'veu'; const g = D.createElement('aside'); g.className = 'gaveta'; g.id = 'gaveta'; g.setAttribute('role', 'dialog'); g.innerHTML = html; D.body.append(v, g); v.onclick = fecharGaveta; gaveta.fim = onClose; const f = g.querySelector('input,textarea,button'); if (f) setTimeout(() => f.focus(), 30); return g; }
 function fecharGaveta() { const g = $('#gaveta'); if (g) { g.remove(); $('#veu') && $('#veu').remove(); if (gaveta.fim) { const f = gaveta.fim; gaveta.fim = null; f(); } } }
 function editarEscaninho(id, depois) {
@@ -1305,6 +1343,9 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-mais]'))) { const st = b.dataset.mais === 'fila' ? F : FE; st.lim += st.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('[data-grpso]'))) { const onde = b.dataset.onde, st = onde === 'fila' ? F : FE, L = onde === 'fila' ? FILA : ESCL, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
     if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
+  if ((b = q('[data-tri-close]'))) { const g=document.getElementById('tri-prontuario');if(g)g.remove();return; }
+  if ((b = q('[data-tri-save]'))) { salvarProntuarioTriagem(b.dataset.triSave);return; }
+  if ((b = q('[data-prontuario]'))) { abrirProntuarioTriagem(b.dataset.prontuario);return; }
   if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : ESCL; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; }
   if ((b = q('[data-esc-detalhes]'))) { const d=document.getElementById('esc-detalhes'); if(d){d.classList.toggle('on');b.setAttribute('aria-expanded',d.classList.contains('on'));b.textContent=d.classList.contains('on')?'Ocultar detalhes ▴':'Detalhes do escaninho ▾';} return; }
    if ((b = q('[data-esc-abre]')) && !q('[data-esc-edit]') && !q('[data-esc-del]')) { ir('esc=' + b.dataset.escAbre); return; }
@@ -1316,7 +1357,7 @@ D.addEventListener('submit', (e) => { if (e.target.id !== 'pjf') return; e.preve
   $$('[data-pj]', e.target).forEach((i) => { P[i.dataset.pj] = i.value.trim(); }); $$('[data-pjc]', e.target).forEach((i) => { if (i.dataset.pjc in P) P[i.dataset.pjc] = i.checked; });
   if (P.ordem === 'rec') { F.ord = 'desde'; F.dir = -1; } else if ($$('[data-pj]', e.target).length) { if (F.ord === 'desde' || Object.keys(PJ_ROT).some((k) => P[k])) { F.ord = 'desde'; F.dir = 1; } }
   F.lim = 100; render(); });
-D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if ($('#gaveta')) fecharGaveta(); else fecharPops(); }
+D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const tp=document.getElementById('tri-prontuario');if(tp)tp.remove();else if ($('#gaveta')) fecharGaveta(); else fecharPops(); }
   if (e.key === 'Enter' && e.target.matches('.ecard')) e.target.click(); });
 
 /* ===================== arranque ===================== */
