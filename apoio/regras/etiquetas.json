@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.regras.etiquetas",
  "versao": 1,
- "atualizadoEm": "2026-11-16T23:45:29.267Z",
+ "atualizadoEm": "2026-11-17T03:54:41.374Z",
  "registros": [
   {
    "id": "pad-ED",
@@ -193,6 +193,26 @@
    "nome": "LOTE 28,86% - APCIV",
    "nota": "",
    "origem": "esteira"
+  },
+  {
+   "id": "rmwk5s06e69io",
+   "on": true,
+   "ef": "ED",
+   "v": "",
+   "termos": [],
+   "exceto": [],
+   "classes": [],
+   "nome": "",
+   "nota": "",
+   "origem": "esteira",
+   "conds": [
+    {
+     "campo": "tarefa",
+     "op": "contem",
+     "val": "[Sessão - ED]"
+    }
+   ],
+   "liga": "E"
   }
  ]
 }
