@@ -107,8 +107,28 @@ function recursoTipo(tipo,text){
   return 'Recurso';
 }
 const ROLE_RE=/(?<!do\(a\) |DO\(A\) )\b(APELANTE|APELAD[OA]|AGRAVANTE|AGRAVAD[OA]|EMBARGANTE|EMBARGAD[OA]|IMPETRANTE|IMPETRAD[OA]|RECORRENTE|RECORRID[OA]|EXEQUENTE|EXECUTAD[OA]|AUTOR[A]?|R[ÉE]U?|PARTE AUTORA|PARTE R[ÉE])(?:\(A\)|\(S\)|\(ES\)|S)?\s*:\s*([A-ZÀ-Ú0-9][A-ZÀ-Ú0-9 .&'\/-]{2,120}?)(?=\s*(?:ADVOGAD|PROCURADOR|DESPACHO|DECIS|SENTEN|AC[ÓO]RD|ATO ORDINAT|CERTID|INTERESSAD|OUTROS PARTICIPANTES|RELATOR|APELA|AGRAVA|EMBARGA|IMPETRA|RECORR|\n|$|\s{2}|\())/g;
+/* Inteiro teor em Markdown (.md da extensão TecJustiça PJe): "# Processo N", um "# ID - Tipo (descrição) - ID de origem N"
+   por peça e "## Página N" por página. Vira o mesmo texto do .txt do PJe antes da leitura; páginas digitalizadas sem texto são contadas. */
+const MD_RE=/^\s*#\s+Processo\s+\d{7}-?\d{2}\./;
+function semParenteses(t){t=S(t);if(!/\)$/.test(t))return [t,''];let d=0;
+  for(let i=t.length-1;i>=0;i--){if(t[i]===')')d++;else if(t[i]==='('&&!--d){const a=S(t.slice(0,i));return a?[a,S(t.slice(i+1,-1))]:[t,''];}}
+  return [t,''];}
+function deMd(text){
+  const out=[];let sem=0;
+  text.split('\n').forEach(l=>{
+    let m=/^#\s+Processo\s+([\d.\-]+)\s*$/.exec(l);if(m){out.push('Processo: '+m[1]);return;}
+    m=/^#\s+(\d{5,})\s+-\s+(.+?)\s*$/.exec(l);
+    if(m){const o=/^(.*?)\s+-\s+ID de origem\s+(\d{5,})$/.exec(m[2]),[tipo,desc]=semParenteses(o?o[1]:m[2]);
+      out.push('Documento: '+(o?o[2]:m[1])+' - '+tipo+(desc?' - '+desc:''));if(o)out.push(m[1]+' - '+tipo+' - ID de origem '+o[2]);return;}
+    if(/^##\s+Página\s+\d+\s*$/.test(l)||/^>\s?/.test(l)||/^-{3,}\s*$/.test(l))return;
+    if(/^_\[página[^\]]*\]_\s*$/i.test(l)){sem++;return;}
+    out.push(l);
+  });
+  return {txt:out.join('\n'),sem};
+}
 function parseTxt(raw){
-  const text=String(raw||'').replace(/\r\n?/g,'\n');
+  let text=String(raw||'').replace(/\r\n?/g,'\n'),formato='txt',semTexto=0;
+  if(MD_RE.test(text)&&/^#\s+\d{5,}\s+-\s/m.test(text)){const r=deMd(text);text=r.txt;formato='md';semTexto=r.sem;}
   const proc=(/^\s*Processo:\s*([\d.\-]+)/m.exec(text)||[])[1]||'';
   const main=cnjDigits(proc);
   const lines=text.split('\n');
@@ -159,7 +179,7 @@ function parseTxt(raw){
       text:content,chars:content.length,encoded,empty:content.replace(/\s/g,'').length<40,outro,kind,recursoTipo:kind==='recurso'?recursoTipo(tipo,content):''};
   });
   const P={};Object.entries(polos).forEach(([k,v])=>P[k]=[...v]);
-  return {processo:proc,main,docs,polos:P,classeAbbr,assunto};
+  return {processo:proc,main,docs,polos:P,classeAbbr,assunto,formato,semTexto};
 }
 
 /* ───────────────────────── 2 · EXTRAÇÃO POR REGRAS ───────────────────────── */

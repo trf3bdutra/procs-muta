@@ -184,8 +184,28 @@ function recursoTipo(tipo,text){
   return 'Recurso';
 }
 const ROLE_RE=/(?<!do\(a\) |DO\(A\) )\b(APELANTE|APELAD[OA]|AGRAVANTE|AGRAVAD[OA]|EMBARGANTE|EMBARGAD[OA]|IMPETRANTE|IMPETRAD[OA]|RECORRENTE|RECORRID[OA]|EXEQUENTE|EXECUTAD[OA]|AUTOR[A]?|R[ÉE]U?|PARTE AUTORA|PARTE R[ÉE])(?:\(A\)|\(S\)|\(ES\)|S)?\s*:\s*([A-ZÀ-Ú0-9][A-ZÀ-Ú0-9 .&'\/-]{2,120}?)(?=\s*(?:ADVOGAD|PROCURADOR|DESPACHO|DECIS|SENTEN|AC[ÓO]RD|ATO ORDINAT|CERTID|INTERESSAD|OUTROS PARTICIPANTES|RELATOR|APELA|AGRAVA|EMBARGA|IMPETRA|RECORR|\n|$|\s{2}|\())/g;
+/* Inteiro teor em Markdown (.md da extensão TecJustiça PJe): "# Processo N", um "# ID - Tipo (descrição) - ID de origem N"
+   por peça e "## Página N" por página. Vira o mesmo texto do .txt do PJe antes da leitura; páginas digitalizadas sem texto são contadas. */
+const MD_RE=/^\s*#\s+Processo\s+\d{7}-?\d{2}\./;
+function semParenteses(t){t=S(t);if(!/\)$/.test(t))return [t,''];let d=0;
+  for(let i=t.length-1;i>=0;i--){if(t[i]===')')d++;else if(t[i]==='('&&!--d){const a=S(t.slice(0,i));return a?[a,S(t.slice(i+1,-1))]:[t,''];}}
+  return [t,''];}
+function deMd(text){
+  const out=[];let sem=0;
+  text.split('\n').forEach(l=>{
+    let m=/^#\s+Processo\s+([\d.\-]+)\s*$/.exec(l);if(m){out.push('Processo: '+m[1]);return;}
+    m=/^#\s+(\d{5,})\s+-\s+(.+?)\s*$/.exec(l);
+    if(m){const o=/^(.*?)\s+-\s+ID de origem\s+(\d{5,})$/.exec(m[2]),[tipo,desc]=semParenteses(o?o[1]:m[2]);
+      out.push('Documento: '+(o?o[2]:m[1])+' - '+tipo+(desc?' - '+desc:''));if(o)out.push(m[1]+' - '+tipo+' - ID de origem '+o[2]);return;}
+    if(/^##\s+Página\s+\d+\s*$/.test(l)||/^>\s?/.test(l)||/^-{3,}\s*$/.test(l))return;
+    if(/^_\[página[^\]]*\]_\s*$/i.test(l)){sem++;return;}
+    out.push(l);
+  });
+  return {txt:out.join('\n'),sem};
+}
 function parseTxt(raw){
-  const text=String(raw||'').replace(/\r\n?/g,'\n');
+  let text=String(raw||'').replace(/\r\n?/g,'\n'),formato='txt',semTexto=0;
+  if(MD_RE.test(text)&&/^#\s+\d{5,}\s+-\s/m.test(text)){const r=deMd(text);text=r.txt;formato='md';semTexto=r.sem;}
   const proc=(/^\s*Processo:\s*([\d.\-]+)/m.exec(text)||[])[1]||'';
   const main=cnjDigits(proc);
   const lines=text.split('\n');
@@ -236,7 +256,7 @@ function parseTxt(raw){
       text:content,chars:content.length,encoded,empty:content.replace(/\s/g,'').length<40,outro,kind,recursoTipo:kind==='recurso'?recursoTipo(tipo,content):''};
   });
   const P={};Object.entries(polos).forEach(([k,v])=>P[k]=[...v]);
-  return {processo:proc,main,docs,polos:P,classeAbbr,assunto};
+  return {processo:proc,main,docs,polos:P,classeAbbr,assunto,formato,semTexto};
 }
 
 /* ───────────────────────── 2 · EXTRAÇÃO POR REGRAS ───────────────────────── */
@@ -1057,7 +1077,7 @@ function cabecalho() {
   var nav = L.length > 1 && i >= 0 ? '<button type="button" class="fx-sq" data-fx="ant" title="Processo anterior (Alt+↑)">' + svg('back') + '</button><span class="fx-note">' + (i + 1) + ' de ' + L.length + '</span><button type="button" class="fx-sq" data-fx="prox" title="Próximo processo (Alt+↓)">' + svg('fwd') + '</button>' : '';
   return '<header class="fx-head"><span class="fx-ic">' + svg('ficha') + '</span>' +
     '<div class="fx-tt"><span>' + E(['Ficha do processo', cl, as].filter(Boolean).join(' · ')) + '</span><div class="fx-num"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2><button type="button" class="fx-sq" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' + (partes ? '<small>' + E(partes) + '</small>' : '') + '</div>' +
-    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && !ST.ad.leitura ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor .txt</button>' : '') + nav + '</div>' +
+    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && !ST.ad.leitura ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') + nav + '</div>' +
     '<button type="button" class="fx-sq fx-x" data-fx="fechar" aria-label="Fechar" title="Fechar (Esc)">' + svg('x') + '</button></header>';
 }
 function faixa() {
@@ -1308,7 +1328,7 @@ function imprimir() {
   setTimeout(function () { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) { avisar('Não foi possível abrir a impressão.', 'err'); } setTimeout(function () { fr.remove(); }, 1500); }, 250);
 }
 
-/* ───── inteiro teor (.txt do PJe): painel lateral, leitura por padrao/inteiro-teor.js ───── */
+/* ───── inteiro teor (.txt do PJe ou .md da TecJustiça): painel lateral, leitura por padrao/inteiro-teor.js ───── */
 var TX = function () { return window.CMTInteiroTeor || {}; };
 /* chave sugerida → campo da ficha (seção.chave), pelo modelo; campos do acervo (PJe) e sem lugar no modelo não são gravados */
 function alvoDe(chave) {
@@ -1353,31 +1373,32 @@ function descartarTeor() { if (ST.teor && ST.teor.parsed && ST.teor.parsed.docs)
 function fecharTeor() { descartarTeor(); render(); }
 function lerTxt(file) {
   var T = TX(); if (!T.parseTxt) return;
-  if (!/\.txt$/i.test(file.name) && file.type && file.type !== 'text/plain') { ST.teor = { step: 0, err: 'Envie o arquivo .txt do inteiro teor exportado pelo PJe.' }; render(); return; }
+  if (!/\.(txt|md|markdown)$/i.test(file.name) && file.type && !/^text\/(plain|markdown|x-markdown)$/.test(file.type)) { ST.teor = { step: 0, err: 'Envie o .txt do inteiro teor exportado pelo PJe ou o .md da extensão TecJustiça.' }; render(); return; }
   if (file.size > 25 * 1024 * 1024) { ST.teor = { step: 0, err: 'Arquivo muito grande para leitura no navegador (limite de 25 MB).' }; render(); return; }
   var rd = new FileReader();
   rd.onload = function () { var txt = String(rd.result || ''); try {
     var P = T.parseTxt(txt); txt = '';
-    if (!P.docs.length) { ST.teor = { step: 0, err: 'Nenhum documento identificado no .txt (esperado o cabeçalho “Documento: ID - Tipo”).' }; render(); return; }
+    if (!P.docs.length) { ST.teor = { step: 0, err: 'Nenhum documento identificado no arquivo (esperado “Documento: ID - Tipo” no .txt ou “# ID - Tipo” no .md).' }; render(); return; }
     T.preselect(P); try { P.kind = T.especie(P); T.preselectKind(P); } catch (e) { console.warn('[ficha] inteiro teor · espécie', e); }
     ST.teor = { step: 1, parsed: P, file: file.name, items: null }; render();
-  } catch (e) { ST.teor = { step: 0, err: 'Não foi possível ler o .txt: ' + ((e && e.message) || e) }; render(); } };
+  } catch (e) { ST.teor = { step: 0, err: 'Não foi possível ler o arquivo: ' + ((e && e.message) || e) }; render(); } };
   rd.onerror = function () { ST.teor = { step: 0, err: 'Falha na leitura do arquivo.' }; render(); };
   rd.readAsText(file, 'utf-8');
 }
 function teorPanel() {
   var D = ST.teor, P = D.parsed, T = TX(), steps = ['Arquivo', 'Documentos', 'Conferência'], body = '', foot = '';
-  var head = '<header class="fx-teor-h"><div><span>Importar inteiro teor · .txt do PJe</span><h3>' + (P ? E(D.file) + ' · ' + P.docs.length + ' documentos' : 'Escolha o arquivo') + '</h3></div><button type="button" class="fx-sq" data-fx="teor-fechar" aria-label="Fechar importação" title="Fechar importação">' + svg('x') + '</button></header>' +
+  var head = '<header class="fx-teor-h"><div><span>Importar inteiro teor · ' + (P && P.formato === 'md' ? '.md da TecJustiça' : '.txt do PJe ou .md da TecJustiça') + '</span><h3>' + (P ? E(D.file) + ' · ' + P.docs.length + ' documentos' : 'Escolha o arquivo') + '</h3></div><button type="button" class="fx-sq" data-fx="teor-fechar" aria-label="Fechar importação" title="Fechar importação">' + svg('x') + '</button></header>' +
     '<ol class="fx-steps">' + steps.map(function (st, k) { return '<li class="' + (k < D.step ? 'is-done' : k === D.step ? 'is-cur' : '') + '">' + (k < D.step ? svg('ok') : '') + (k + 1) + ' · ' + st + '</li>'; }).join('') + '</ol>';
   if (D.step === 0) {
-    body = '<label class="fx-drop"><input type="file" accept=".txt,text/plain" data-fx-file>' + svg('txt') + '<b>Arraste o .txt do PJe para a ficha</b><span>ou clique para escolher o arquivo</span></label>' + (D.err ? '<p class="fx-alert-p">' + E(D.err) + '</p>' : '') +
-      '<p class="fx-help">Cada bloco “Documento: ID - tipo” do .txt vira uma linha, com o destino sugerido pelo tipo. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
-      '<p class="fx-help">O .txt é lido só no navegador e não é guardado; ficam os campos confirmados, e o commit registra os IDs dos documentos.</p>';
+    body = '<label class="fx-drop"><input type="file" accept=".txt,.md,text/plain,text/markdown" data-fx-file>' + svg('txt') + '<b>Arraste o .txt do PJe ou o .md da TecJustiça para a ficha</b><span>ou clique para escolher o arquivo</span></label>' + (D.err ? '<p class="fx-alert-p">' + E(D.err) + '</p>' : '') +
+      '<p class="fx-help">Cada peça (“Documento: ID - tipo” no .txt, “# ID - tipo” no .md) vira uma linha, com o destino sugerido pelo tipo. Depois, os campos sugeridos são conferidos com os valores da ficha; só o que for marcado é gravado.</p>' +
+      '<p class="fx-help">O arquivo é lido só no navegador e não é guardado; ficam os campos confirmados, e o commit registra os IDs dos documentos.</p>';
     foot = '<button type="button" class="fx-b" data-fx="teor-fechar">Cancelar</button>';
   } else if (D.step === 1) {
     var outro = P.main && dg(ST.cnj) !== P.main, TG = T.TARGETS || [['', 'Não usar']];
-    body = (outro ? '<p class="fx-alert-p">' + svg('warn') + '<span>O .txt é do processo <b>' + E(P.processo) + '</b>, diferente desta ficha (' + E(ST.cnj) + '). Confira antes de continuar.</span></p>' : '') +
+    body = (outro ? '<p class="fx-alert-p">' + svg('warn') + '<span>O arquivo é do processo <b>' + E(P.processo) + '</b>, diferente desta ficha (' + E(ST.cnj) + '). Confira antes de continuar.</span></p>' : '') +
       (P.kind && T.KIND_TXT ? '<p class="fx-info-p">' + E(T.KIND_TXT[P.kind] || '') + ': pré-seleção própria da espécie.</p>' : '') +
+      (P.formato === 'md' ? '<p class="fx-info-p">.md da TecJustiça: sem data de juntada nas peças (a ordem segue o ID)' + (P.semTexto ? '; ' + P.semTexto + ' página(s) digitalizada(s) sem texto — confira no PJe' : '') + '.</p>' : '') +
       '<p class="fx-help">O destino já vem sugerido pelo tipo e pode ser trocado. “Não usar” deixa o documento de fora.</p>' +
       P.docs.map(function (d, k) { return '<div class="fx-doc ' + (d.target ? 'is-on' : '') + ' ' + (d.outro ? 'is-ext' : '') + '"><div class="fx-doc-h"><span class="fx-mono">' + E(d.id) + '</span><b>' + E(d.tipo) + '</b><span class="fx-grow"></span><small>' + E(brD(d.date) || '—') + '</small></div>' +
         (d.descricao || d.por || d.outro ? '<small class="fx-doc-s">' + E([d.descricao, d.por, d.outro ? 'outro processo · ' + d.outro : '', d.empty ? 'sem texto' : ''].filter(Boolean).join(' · ')) + '</small>' : '') +
