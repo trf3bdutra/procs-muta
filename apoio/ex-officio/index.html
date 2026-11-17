@@ -924,6 +924,11 @@ html[data-theme=dark] #v-cmt{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a
 .cmt-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
 .cmt-cols>div+div{border-left:1px solid var(--el);padding-left:24px;margin-left:-12px}
 .cmt-k{margin:14px 0 6px;font:400 9.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+.pdv-per{display:inline-flex;gap:4px}.pdv-per .b{border-radius:0;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:600 11px Inter,system-ui,sans-serif;min-height:24px;padding:0 8px;cursor:pointer}.pdv-per .b[aria-pressed=true]{background:var(--ei);color:var(--ew)}
+.pdv-it{display:grid;grid-template-columns:minmax(90px,1fr) auto minmax(80px,1.2fr) 44px;gap:2px 10px;align-items:center;border-top:1px solid var(--el);padding:7px 0;font-size:12.5px;color:var(--ei)}.pdv-it:first-child{border-top:0}
+.pdv-it b{font-weight:600}.pdv-n{font:600 12px var(--emono);text-align:right}.pdv-n small{font-weight:400;color:var(--em)}.pdv-pc{font:600 11px var(--emono);text-align:right}
+.pdv-bar{height:6px;background:var(--el);position:relative}.pdv-bar i{position:absolute;left:0;top:0;bottom:0;background:#b4472e}.pdv-it.perto .pdv-bar i{background:#c9922b}.pdv-it.ok .pdv-bar i{background:#3f8a63}.pdv-bar.fora{background:repeating-linear-gradient(90deg,var(--el) 0 4px,transparent 4px 8px)}
+.pdv-d{grid-column:1/-1;color:var(--em);font-size:11px}.pdv-it.fora{opacity:.75}
 .cmt-it{border-top:1px solid var(--el);padding:8px 0;font-size:12.5px;color:var(--ei);display:flex;gap:10px;align-items:baseline}
 .cmt-it:first-child{border-top:0}
 .cmt-it b{font-weight:600;font-family:var(--emono);font-size:12px;letter-spacing:-.01em}
@@ -1545,7 +1550,7 @@ html[data-theme=dark] ::-webkit-scrollbar-thumb:hover{background-color:rgba(222,
       <section class="cmt-q cmt-urgp"><h2>Urgências<span class="cmt-n" id="cmt-n-ur">—</span><span class="cmt-sp"></span></h2>
         <div class="cmt-uc" id="cmt-urg-c"></div><div class="cmt-urgl" id="cmt-l-urg"></div></section>
 
-<section class="cmt-q" id="cmt-eq"><h2>Equipe e ausências <span class="cmt-n" id="cmt-n-eq">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Produção nas pautas publicadas</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
+<section class="cmt-q" id="cmt-eq"><h2>Produtividade e ausências <span class="cmt-n" id="cmt-n-eq">—</span><span class="cmt-sp"></span><span class="pdv-per" role="group" aria-label="Período"><button type="button" class="b" data-pdv="mes">Este mês</button><button type="button" class="b" data-pdv="ant">Mês anterior</button><button type="button" class="b" data-pdv="30">30 dias</button></span></h2><div class="cmt-cols"><div><p class="cmt-k" id="pdv-k">Produtividade pelas regras do gabinete</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
 <section class="cmt-q cmt-ed" id="cmt-editor"><h2>Editor do Compendium <span class="cmt-n" id="cmt-n-ed">fechado</span><span class="cmt-sp"></span><a class="cmt-out" id="cmt-ed-out" href="/editor/" target="_blank" rel="noopener">Abrir em outra aba ↗</a><button type="button" class="b" id="cmt-ed-ab">Abrir aqui</button></h2>
         <div class="cmt-ed-b" id="cmt-ed-b" hidden><iframe id="cmt-ed-f" title="Editor do Compendium" loading="lazy"></iframe></div></section>
       <p class="cmt-fontes" id="cmt-fontes"></p>
@@ -2992,10 +2997,23 @@ function cmtCarregar(){
   $('#cmt-load').hidden=false;$('#cmt-wrap').hidden=true;
   var msgs=['Lendo a ficha única, o calendário das sessões e as pautas publicadas…','Separando o que aguarda assinatura e liberação…','Conferindo urgências, marcos e ausências…'],i=0;
   var tm=setInterval(function(){i=(i+1)%msgs.length;var e=$('#cmt-ld-m');if(e)e.textContent=msgs[i];},1600);
-  api('/api/painel?cmt=1').then(function(j){CMT.dados=j;CMT.atualizado=Date.now();cmtPinta();})
+  api('/api/painel?cmt=1'+(CMT.per||'')).then(function(j){CMT.dados=j;CMT.atualizado=Date.now();cmtPinta();})
     .catch(function(e){$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
       $('#cmt-sub').textContent=(e&&e.erro)||'Não foi possível montar o painel.';})
     .then(function(){clearInterval(tm);CMT.carregando=false;});}
+/* produtividade pelas regras do gabinete (apoio/regras/produtividade.json; api/_produtividade.js):
+   pontos no período contra a meta diária × dias úteis do servidor, descontadas as ausências */
+function pdvPinta(j,eq){var P=j.produtividade,f=function(n){return String(Math.round((Number(n)||0)*100)/100).replace('.',',');};
+  if(!P||P.erro||!(P.linhas||[]).length){cmtLista('#cmt-l-eq',eq,function(x){return '<div class="cmt-it"><b>'+esc(x.nome)+'</b><span>'+x.minutasFeitas+'/'+x.minutas+' minutas · '+x.correcoesFeitas+'/'+x.correcoes+' correções</span></div>';});return;}
+  $('#pdv-k').textContent='Pontos de '+br(P.de)+' a '+br(P.ate)+' · '+P.diasUteis+' dia'+(P.diasUteis===1?'':'s')+' úte'+(P.diasUteis===1?'il':'is')+' · 1 pt = 1 voto Ω · perto da meta a partir de '+P.pertoMeta+'%';
+  document.querySelectorAll('[data-pdv]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-pdv')===(CMT.perK||'mes')));});
+  $('#cmt-l-eq').innerHTML=P.linhas.map(function(x){var pc=x.pct==null?null:x.pct,cls=!x.entra?'fora':pc>=100?'ok':pc>=P.pertoMeta?'perto':'baixo',w=pc==null?0:Math.min(100,pc);
+    var det=[x.votos?x.votos+' voto'+(x.votos===1?'':'s'):'',x.eds?x.eds+' ED/AgInt':'',x.monos?x.monos+' monocrática'+(x.monos===1?'':'s'):'',x.correcoes?x.correcoes+' correç'+(x.correcoes===1?'ão':'ões'):'',x.pendentes?x.pendentes+' na pauta por minutar':''].filter(Boolean).join(' · ')||'sem produção no período';
+    return '<div class="pdv-it '+cls+'" title="'+esc(x.situacao+(x.entra?' · meta '+f(x.metaDia)+' pt/dia × '+x.dias+' dia(s) útil(eis) = '+f(x.meta)+' pt':''))+'"><b>'+esc(x.nome)+'</b><span class="pdv-n">'+f(x.pontos)+(x.entra?' <small>/ '+f(x.meta)+' pt</small>':' pt')+'</span>'+
+      (x.entra?'<span class="pdv-bar"><i style="width:'+w+'%"></i></span><span class="pdv-pc">'+(pc==null?'—':pc+'%')+'</span>':'<span class="pdv-bar fora"></span><span class="pdv-pc">fora</span>')+'<small class="pdv-d">'+esc(det)+(x.entra&&x.dias!==P.diasUteis?' · '+x.dias+' dia(s) disponível(eis)':'')+'</small></div>';}).join('');}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-pdv]');if(!b)return;var k=b.getAttribute('data-pdv'),h=new Date(Date.now()-4*3600e3),i=function(d){return d.toISOString().slice(0,10);};
+  var hj=i(h),de,ate;if(k==='mes'){de=hj.slice(0,8)+'01';ate=hj;}else if(k==='ant'){var a=new Date(Date.UTC(h.getUTCFullYear(),h.getUTCMonth()-1,1)),z=new Date(Date.UTC(h.getUTCFullYear(),h.getUTCMonth(),0));de=i(a);ate=i(z);}else{var t=new Date(h);t.setUTCDate(t.getUTCDate()-29);de=i(t);ate=hj;}
+  CMT.perK=k;CMT.per='&pde='+de+'&pate='+ate;CMT.atualizado=0;cmtCarregar();});
 function cmtLista(el,itens,monta,vazio){var h=(itens||[]).map(monta).join('');$(el).innerHTML=h||'<p class="cmt-vazio">'+(vazio||'Nada pendente.')+'</p>';}
 var CMTM={pautarAte:['P','Pautar até'],inicioPreparacao:['I','Início da preparação'],entregaMinutas:['E','Entrega das minutas'],liberacao:['L','Liberação']};
 function cmtDias(a,b){return Math.round((Date.parse(a+'T12:00:00Z')-Date.parse(b+'T12:00:00Z'))/86400e3);}
@@ -3125,7 +3143,7 @@ function cmtPinta(){
     return '<button type="button" class="cmt-sl" data-cs="'+esc(s.date)+'" aria-pressed="'+(s.date===sel)+'"><b>'+esc(br(s.date))+'</b>'+(s.hora?' '+esc(s.hora):'')+'<small>'+s.processos+' processos · '+s.liberadas+' liberadas</small></button>';}).join(''):'<p class="cmt-vazio">Nenhuma pauta publicada.</p>';
   var eq=j.equipe||[],au=j.ausencias||[];
   $('#cmt-n-eq').textContent=eq.length+' · '+au.length+(au.length===1?' pedido':' pedidos');
-  cmtLista('#cmt-l-eq',eq,function(x){return '<div class="cmt-it"><b>'+esc(x.nome)+'</b><span>'+x.minutasFeitas+'/'+x.minutas+' minutas · '+x.correcoesFeitas+'/'+x.correcoes+' correções</span></div>';});
+  pdvPinta(j,eq);
   cmtLista('#cmt-l-aus',au,function(x){return '<div class="cmt-it"><b>'+esc(x.nome)+'</b><span>'+esc(x.tipo)+' · '+esc(br(x.de))+(x.ate!==x.de?' a '+esc(br(x.ate)):'')+'</span></div>';});
   if(sel&&!CMT.mes)CMT.mes=new Date(Date.parse(sel+'T12:00:00Z'));
   cmtCal();cmtMarcos();cmtPauta();

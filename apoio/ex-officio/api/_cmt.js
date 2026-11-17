@@ -8,6 +8,7 @@
 const L = require('./_lib');
 const MONO = require('./_mono');
 const FICHA = require('./_ficha');
+const PROD = require('./_produtividade');
 const opc = rel => L.lerJson(rel).then(x => x.dados).catch(() => null);
 const br = d => String(d || '').split('-').reverse().join('/');
 const dias = (a, b) => Math.round((Date.parse(a + 'T12:00:00Z') - Date.parse(b + 'T12:00:00Z')) / 86400e3);
@@ -92,6 +93,7 @@ async function painel(req, res, u) {
     opc('apoio/equipe-pendencias.json'),
     opc('apoio/equipe-comunicados.json')
   ]);
+  const [regProd, equipeDoc] = await Promise.all([opc('apoio/regras/produtividade.json'), opc('apoio/equipe.json')]);
   /* comunicados da equipe ao desembargador: os não lidos primeiro, do mais recente para o mais antigo */
   const comunicados = ((com || {}).registros || [])
     .filter(r => !r.excluido)
@@ -146,6 +148,14 @@ async function painel(req, res, u) {
     });
   });
   sessoes.sort((x, y) => String(x.date).localeCompare(String(y.date)));
+  /* produtividade pelas regras do gabinete: todas as sessões com listagem (publicadas ou não) e as monocráticas da ficha única */
+  const q = req.query || {}, de = L.dataOk(q.pde) ? q.pde : hj.slice(0, 8) + '01', ate = L.dataOk(q.pate) ? q.pate : hj;
+  const naoPub = ((cal || {}).sessoes || []).filter(s => !s.publicada && (s.processos || s.previa));
+  const docsNP = await Promise.all(naoPub.map(s => opc('acervo/sessoes/' + s.date + '.json')));
+  const sessoesDocs = pubs.map((s, k) => docs[k]).concat(docsNP).filter(Boolean).map(d => ({ itens: (d.itens || []).length ? d.itens : (d.previa || []) }));
+  let produtividade = null;
+  try { produtividade = PROD.calcular({ prod: regProd, cal, sessoesDocs, monos: regs.map(r => MONO.item(r)).filter(i => i.mono), equipe: equipeDoc, solicitacoes: aus, de, ate }); }
+  catch (e) { produtividade = { erro: e.message }; }
   /* calendário: todas as sessões visíveis, com os marcos, mesmo sem listagem publicada */
   const agenda = todas.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', publicada: !!s.publicada,
     processos: (sessoes.find(x => x.date === s.date) || {}).processos || 0, marcos: s.marcos || {}, sessao: s.date }))
@@ -176,7 +186,7 @@ async function painel(req, res, u) {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, comunicados, urgencias, sessoes, agenda, pauta, prazos, producao,
+  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, comunicados, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 }
