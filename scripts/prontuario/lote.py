@@ -29,7 +29,7 @@ RAIZ = pathlib.Path(__file__).resolve().parents[2]
 SESSOES = RAIZ / 'acervo' / 'sessoes'
 CONTROLE = RAIZ / 'acervo' / 'controles' / 'triagem-2886.xlsx'
 CAMPOS = json.loads((RAIZ / 'padrao' / 'lia' / 'campos-prontuario.json').read_text(encoding='utf-8'))
-SITE = 'https://trf3-muta.vercel.app'
+SITE = 'https://www.gabinete-cmt.com'
 PAUTA_MEM = {}
 COLS = ['Pauta', 'Item', 'Grupo sugerido', 'Prompt gerado', 'Prontuário lançado', 'Modelo (LIA)', 'Consulta']
 GRUPO_A = {'A1': '1', 'A2': '2', 'A3': '3', 'A5': '5', 'A1/A5': '6', 'A6': '7', 'A6/A2': '7'}
