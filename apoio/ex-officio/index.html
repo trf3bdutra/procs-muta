@@ -1570,6 +1570,16 @@ html[data-theme=dark] #prq .prt-p>section>h3{color:#e6e2d6;background:linear-gra
 .prt-min .pm-sw button[aria-pressed=true]{background:#173f3d;color:#fff}
 .prt-min .pm-cp{border:1px solid #173f3d;background:#fff;color:#173f3d;font:600 10.5px var(--font);padding:3px 9px;cursor:pointer}
 .prt-min .pm-hd{align-items:center}.prt-min .pm-nt{display:block;padding:4px 12px 0;font:400 10px var(--emono,ui-monospace);letter-spacing:.06em;color:#6b6658}
+/* prontuário e listagem no mesmo acabamento: borda fina, cantos retos, cabeçalho no tom da barra de filtros, corpo no branco dos cartões, margens iguais */
+#v-pauta.ed #prq .prt{border:1px solid var(--el);border-top:1px solid var(--el);padding:0;gap:0;background:var(--ew)}
+#v-pauta.ed #prq .prt-h{padding:12px 14px 8px;background:var(--ep2,var(--ep))}
+#v-pauta.ed #prq .prt>.prt-id{margin:0;padding:8px 14px 10px;border:0;border-bottom:1px solid var(--el);border-radius:0;background:var(--ep2,var(--ep))}
+#v-pauta.ed #prq .prt-id .prt-prh{background:var(--ew)}
+#v-pauta.ed #prq .prt-tabs{padding:0 14px;background:var(--ew)}
+#v-pauta.ed #prq .prt-body{padding:12px 14px 14px;background:var(--ew)}
+#v-pauta.ed #prq .prt-h button{border-radius:0;height:30px;min-width:30px}
+#v-pauta.ed #lst.cards{border-color:var(--el)}
+#v-pauta.ed #prq .prt-p>section{border:0;border-radius:0;background:transparent;padding:0;margin-bottom:14px}
 /* Monocráticas: título no padrão da Pauta (sobre o fundo, sem caixa) e números num painel logo abaixo */
 #v-pauta.mono #trm,html[data-theme=dark] #v-pauta.mono #trm{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
 #v-pauta.mono #trm>.trb-in{padding-left:0!important;padding-right:0!important;padding-top:0!important}
