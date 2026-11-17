@@ -1531,6 +1531,48 @@ html[data-theme=dark] #app main .trb-ey,html[data-theme=dark] #app main .ola-ey{
 html[data-theme=dark] *{scrollbar-color:rgba(222,226,229,.24) transparent}
 html[data-theme=dark] ::-webkit-scrollbar-thumb{background-color:rgba(222,226,229,.24)}
 html[data-theme=dark] ::-webkit-scrollbar-thumb:hover{background-color:rgba(222,226,229,.45)}
+
+/* ===== prontuário · redesign 17/11: três abas (Caso, Admissibilidade, Julgamento), produção no cabeçalho, seções com faixa colorida, prévia da minuta ===== */
+#v-pauta .prt-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}
+.prt-prh{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:8px;border:1px solid var(--el,#e3ddd0);background:var(--ew,#fff)}
+.prt-prh .ph-c{display:flex;flex-direction:column;gap:2px;padding:6px 9px;border-right:1px solid var(--el,#e3ddd0);box-shadow:inset 0 3px 0 var(--el,#e3ddd0);min-width:0}
+.prt-prh .ph-c:last-child{border-right:0}.prt-prh .ph-c.ok{box-shadow:inset 0 3px 0 #2f7a5f}
+.prt-prh small{font:500 9.5px var(--emono,ui-monospace);letter-spacing:.12em;text-transform:uppercase;color:var(--em,#6b6658)}
+.prt-prh b{font:500 12px var(--emono,ui-monospace);color:var(--ei,#2b2b28)}.prt-prh span{font-size:11px;color:var(--em,#6b6658);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.prt-prh input[type=date]{border:1px solid var(--el,#e3ddd0);background:transparent;color:inherit;font-size:11.5px;padding:1px 3px;max-width:100%}
+.prt-prh .prt-stp{display:flex;gap:4px;align-items:center;margin-top:2px;white-space:normal;overflow:visible}
+#prq .prt-p>section>h3{display:flex;align-items:center;gap:8px;margin:0 0 10px;padding:7px 10px;border-bottom:2px solid #173f3d;background:linear-gradient(90deg,#e7efec,transparent);font-size:12.5px;color:#173f3d}
+#prq .prt-p>section>h3 em{border-radius:0;background:#173f3d;color:#fff}
+#prq .prt-p>section:nth-of-type(2)>h3{border-bottom-color:#85601d;background:linear-gradient(90deg,#f8eedb,transparent)}#prq .prt-p>section:nth-of-type(2)>h3 em{background:#85601d}
+#prq .prt-p>section:nth-of-type(3)>h3{border-bottom-color:#4d6f8f;background:linear-gradient(90deg,#e8eef4,transparent)}#prq .prt-p>section:nth-of-type(3)>h3 em{background:#4d6f8f}
+#prq .prt-p>section:nth-of-type(4)>h3{border-bottom-color:#5d6b78;background:linear-gradient(90deg,#eceff2,transparent)}#prq .prt-p>section:nth-of-type(4)>h3 em{background:#5d6b78}
+html[data-theme=dark] #prq .prt-p>section>h3{color:#e6e2d6;background:linear-gradient(90deg,rgba(255,255,255,.07),transparent)}
+.prt-calc{margin-top:4px;padding:6px 8px;border:1px solid #c9d8e4;background:#f1f5f9;font-size:12px}html[data-theme=dark] .prt-calc{background:#16222c;border-color:#2c4356}
+.prt-calc .ok{color:#235a55;font-weight:700}.prt-calc .no{color:#a8322a;font-weight:700}
+.prt-prec a.b{text-decoration:none}
+#prq .prt-min{padding:0!important;border:0!important;background:transparent!important;margin-top:6px}
+.prt-min .pm-hd{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:8px 12px;background:#173f3d;color:#e6c27a;border-top:3px solid #2f7a5f}
+.prt-min .pm-hd span{font:600 12px var(--font)}.prt-min .pm-hd small{font:400 10px var(--emono,ui-monospace);letter-spacing:.08em;color:#d9e6e1}
+.prt-min .pm-fl{margin:10px 6px 4px;padding:18px 22px;background:#fff;border:1px solid #d9d3c4;box-shadow:0 1px 3px rgba(40,35,20,.1);color:#1f1f1d}
+.prt-min .pm-b{padding:8px 0;border-top:1px solid #e3ddd0}.prt-min .pm-b:first-child{border-top:0;padding-top:0}
+.prt-min .pm-b i{font:500 9.5px var(--emono,ui-monospace);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:#4d6f8f}
+.prt-min .pm-d i{color:#2f7a5f}.prt-min .pm-b p{margin:3px 0 0;font:400 13.5px/1.6 "Times New Roman",Georgia,serif;color:#1f1f1d}
+.prt-min .vz{font:400 11px var(--emono,ui-monospace);color:#8a6a1f}
+/* Monocráticas: título no padrão da Pauta (sobre o fundo, sem caixa) e números num painel logo abaixo */
+#v-pauta.mono #trm,html[data-theme=dark] #v-pauta.mono #trm{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+#v-pauta.mono #trm>.trb-in{padding-left:0!important;padding-right:0!important;padding-top:0!important}
+#v-pauta.ed.mono #trm .trb-h{display:block!important}
+#v-pauta.ed.mono #trm .trm-c{margin-top:14px;background:var(--ep,#fbfaf5);border:1px solid var(--el,#d8d3c6);padding:14px 16px}
+/* Pauta · painel abaixo do título: régua e barras em um só quadro, barras com cor por etapa, números em destaque */
+#v-pauta.ed:not(.mono) .trb-mk{padding:16px 18px 4px}
+#v-pauta.ed:not(.mono) .trb-p{padding:4px 18px 16px;gap:12px}
+#v-pauta.ed:not(.mono) .tp{background:var(--ew,#fff);padding:10px 12px}
+#v-pauta.ed .tp-h b{font-size:12.5px}
+#v-pauta.ed .tp-b{height:5px;background:var(--el,#e3ddd0)}
+#v-pauta.ed .tp-b i{background:#85601d}#v-pauta.ed .tp.eu .tp-b i{background:#173f3d}
+#v-pauta.ed .trb-p .tp:nth-child(3) .tp-b i{background:#4d6f8f}#v-pauta.ed .trb-p .tp:nth-child(4) .tp-b i{background:#2f7a5f}
+#v-pauta.ed .trb-p .tp:nth-child(1){box-shadow:inset 3px 0 0 #173f3d}#v-pauta.ed .trb-p .tp:nth-child(2){box-shadow:inset 3px 0 0 #85601d}#v-pauta.ed .trb-p .tp:nth-child(3){box-shadow:inset 3px 0 0 #4d6f8f}#v-pauta.ed .trb-p .tp:nth-child(4){box-shadow:inset 3px 0 0 #2f7a5f}
+#v-pauta.ed .tm .tm-s{font-size:11px}
 </style>
 </head>
 <body>
@@ -2030,7 +2072,7 @@ function trilhoSessao(ss,L,h,mi,co,li){
     txt+=dS<0?'sessão realizada.':dS===0?'a sessão é hoje.':dE>0?'faltam '+pl(dE,'dia','dias')+' para a entrega das minutas e '+dS+' para a sessão.':dE===0?'a entrega das minutas é hoje; faltam '+pl(dS,'dia','dias')+' para a sessão.':'faltam '+pl(dS,'dia','dias')+' para a sessão.';}
   $('#trb-d').textContent=txt;
   var N=[['pautarAte','Peço dia'],['inicioPreparacao','Preparação'],['entregaMinutas','Entrega das minutas'],['liberacao','Liberação'],['date','Sessão']]
-    .map(function(x){return {k:x[0],n:x[1],d:x[0]==='date'?ses:m[x[0]]};}).filter(function(x){return x.d;});
+    .map(function(x){return {k:x[0],n:x[1],d:x[0]==='date'?ses:m[x[0]]};}).filter(function(x){return /^\d{4}-\d{2}-\d{2}$/.test(x.d||'');});
   if(ses&&N.length&&N[0].d<h&&h<ses&&!N.some(function(x){return x.d===h;}))N.push({k:'hoje',n:'Hoje',d:h});
   N.sort(function(a,b){return a.d.localeCompare(b.d)||(a.k==='hoje'?-1:1);});
   var px=N.filter(function(x){return x.d>h;})[0];
@@ -2039,7 +2081,7 @@ function trilhoSessao(ss,L,h,mi,co,li){
     var ic=x.k==='hoje'?'':'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+TRI[x.k]+'</svg>';
     return '<li class="tm '+st+'" title="'+esc(x.n+' · '+br(x.d))+'"><div class="tm-l"><span class="tm-i">'+ic+'</span>'+(nx?'<span class="tm-c'+(nx.d<=h?' ok':'')+'"></span>':'')+'</div><small>'+esc(x.n)+'</small><b>'+esc(br(x.d).slice(0,5))+'</b><span class="tm-s">'+esc(sub)+'</span></li>';}).join('');
   var eu=nq(U.eu),me=L.filter(function(i){return nq(i.servidor)===eu;}),mf=me.filter(function(i){return i.dataMinuta;}).length;
-  var bar=function(t,a,b,c){var p=b?Math.round(a/b*100):0;return '<div class="tp'+(c?' '+c:'')+'"><div class="tp-h"><small>'+t+'</small><b>'+(b?a+' de '+b+' · '+p+'%':'—')+'</b></div><div class="tp-b"><i style="width:'+p+'%"></i></div></div>';};
+  var bar=function(t,a,b,c){var p=b?Math.round(a/b*100):0;return '<div class="tp'+(c?' '+c:'')+'"><div class="tp-h"><small>'+t+'</small><b>'+(b?a+' de '+b+' · '+p+'%':(c==='eu'?'nenhuma designada':'—'))+'</b></div><div class="tp-b"><i style="width:'+p+'%"></i></div></div>';};
   $('#trb-p').innerHTML=bar('Minhas minutas',mf,me.length,'eu')+bar('Minutas do gabinete',mi,tot)+bar('Correções',co,tot)+bar('Liberações',li,tot);
 }
 /* ================= ficha única do processo (padrao/ficha.json → acervo/operacional.json) ================= */
@@ -2381,7 +2423,7 @@ $('#trm-per').onclick=function(e){var b=e.target.closest('button');if(!b)return;
 $('#trm-hoje').onclick=function(){S.mref=hoje();bandaMono();};
 $('#trm-reg').onclick=function(){S.monoForm=!S.monoForm;$('#mono-n').hidden=!S.monoForm;bandaMono();if(S.monoForm){var c=$('#mono-n').elements.cnj;c.focus();}};
 /* prontuário lateral (Pautas): clique no processo abre o painel com 4 abas, com os mesmos campos do cartão */
-var PRT_ABAS=[['Admissibilidade',/Regularidade/],['Origem',/Processo e origem|Caracteriza/],['Recursos',/Recursos/],['Julgamento',/Julgamento/]];
+var PRT_ABAS=[['Caso',/Caracteriza|Processo e origem|Recursos/],['Admissibilidade',/Regularidade/],['Julgamento',/Julgamento/]];
 var PRT_ABAS_MONO=[['Produção',null],['Ato e fundamento',/Ato e fundamento/]];
 function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
   var mono=S.fonte==='mono',on=!!S.prt&&CTRLV.indexOf(S.fonte)<0,it=on?lista().filter(function(i){return dg(i.cnj)===S.prt;})[0]:null;
@@ -2409,8 +2451,7 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
       '<div class="f"><span>Assinatura</span><div class="v">'+(it.assinado||it.dataAssinatura?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):'')+'</b>':'<span class="mut">ainda não assinada · registrar na ficha (▤ › Produção)</span>')+'</div></div>'+
       '<div class="f"><span>Observação</span><div class="v"><textarea rows="2" data-d="obs" placeholder="anotações da monocrática">'+esc(it.obs||'')+'</textarea></div></div></div></section>'+(function(){var us=secs.filter(function(x){var h=x.querySelector('h3');return h&&/Pedido urgente/.test(h.textContent);})[0],on=!!urgDe(it);if(!us)return '';var h3=us.querySelector('h3');if(h3)h3.remove();
       return '<div class="prt-urgf'+(on?' on':'')+'"><label class="prt-urgs"><input type="checkbox" data-urg-sw'+(on?' checked':'')+'><b>Pedido urgente</b>'+(on?'<span class="prt-urgt'+(urgPend(it)?' pend':'')+'">'+esc((it.ctl||{}).urgSit||'Pendente · não apreciada')+'</span>':'<small>desligado · ligue para registrar liminar, tutela ou efeito suspensivo</small>')+'</label><div class="prt-urgc"'+(on?'':' hidden')+'>'+us.outerHTML+'</div></div>';})();abas[0].n=3;abas[0].ch=['dataMinuta','dataCorrecao','dataLiberacao'].filter(function(x){return it[x];}).length;}
-  else abas[3].html='<section class="prt-dts"><h3><em>✓</em>Produção</h3><div class="prt-prod"><div class="f"><span>Minutado em</span><div class="v"><input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'" title="Informar a data marca o processo como minutado"></div></div>'+
-    '<div class="f"><span>Minutado · corrigido · liberado</span><div class="v"><div class="stp prt-stp">'+stp+'</div></div></div></div></section>'+abas[3].html;
+  else {abas[0].html+=prtPrecedentes(it);abas[2].html+=previaMinuta(it,tipoJ(it));}
   var ab=Math.min(S.prtAba||0,abas.length-1),V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),et=etapa(it),ssx=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},pz=mono?'':(ssx.marcos||{}).entregaMinutas||'',dd=pz?dias(hoje(),pz):null,A=alertas(it);
   var mins=it.servidor||'—',cor=it.corretor||'—';
   el.setAttribute('data-k',S.prt);
@@ -2420,7 +2461,8 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
     '<span class="pc prt-pc prt-hb" data-k="'+S.prt+'"><button data-a="ficha" aria-label="Ficha completa do processo" title="Ficha completa do processo">▤</button><button data-a="comp" aria-label="Consultar no Compendium" title="Consultar no Compendium com os dados deste processo">◈</button><button data-a="lia" class="prt-lia" aria-label="Preencher com a LIA" title="Preencher o prontuário com a LIA (assistente do PJe)">LIA</button></span>'+
     '<button data-prt="ant" aria-label="Processo anterior" title="Processo anterior"'+(ix>0?'':' disabled')+'>‹</button><button data-prt="prox" aria-label="Próximo processo" title="Próximo processo"'+(ix>=0&&ix<V.length-1?'':' disabled')+'>›</button><button data-prt="x" aria-label="Fechar o prontuário" title="Fechar (Esc)">×</button></div>'+
     '<div class="prt-id"><b>'+esc(it.cnj)+'</b><small>'+esc([it.assunto,it.classe].filter(Boolean).join(' · '))+'</small><small class="prt-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</small>'+
-    '<div class="prt-chs">'+chip('Minutante <b>'+esc(mins)+'</b>')+chip('Corretor <b>'+esc(cor)+'</b>')+chip('Etapa <b>'+esc(etLbl(et))+'</b>')+chip('Entrega <b>'+(pz?esc(br(pz).slice(0,5))+' · '+esc(quando(pz)):'—')+'</b>',dd!=null&&dd<0&&et==='A fazer'?'al':'')+chip('<b>'+A.length+'</b> alerta'+(A.length===1?'':'s'),A.length?'al':'')+'</div></div>'+
+    (mono?'':'<div class="pc prt-pc prt-prh" data-k="'+S.prt+'"><div class="ph-c'+(o3>=1?' ok':'')+'"><small>Minutado</small><input type="date" data-d="dataMinuta" value="'+esc(it.dataMinuta||'')+'" aria-label="Minutado em" title="Informar a data marca o processo como minutado"><span>'+esc(mins)+'</span></div><div class="ph-c'+(o3>=2?' ok':'')+'"><small>Corrigido</small><b>'+(it.dataCorrecao?esc(br(it.dataCorrecao)):'—')+'</b><span>'+esc(cor)+'</span></div><div class="ph-c'+(o3>=3?' ok':'')+'"><small>Liberado</small><b>'+(it.dataLiberacao?esc(br(it.dataLiberacao)):'—')+'</b><span class="stp prt-stp">'+stp+'</span></div></div>')+
+    '<div class="prt-chs">'+(mono?chip('Minutante <b>'+esc(mins)+'</b>')+chip('Corretor <b>'+esc(cor)+'</b>')+chip('Etapa <b>'+esc(etLbl(et))+'</b>'):'')+chip('Entrega <b>'+(pz?esc(br(pz).slice(0,5))+' · '+esc(quando(pz)):'—')+'</b>',dd!=null&&dd<0&&et==='A fazer'?'al':'')+chip('<b>'+A.length+'</b> alerta'+(A.length===1?'':'s'),A.length?'al':'')+'</div></div>'+
     '<div class="prt-tabs" role="tablist">'+abas.map(function(a,i){return '<button role="tab" data-prt-aba="'+i+'" aria-selected="'+(i===ab)+'"><span class="tn">'+(i+1)+' · </span>'+esc(a.nome)+'<small>'+a.ch+'/'+a.n+'<span> preenchidos</span></small></button>';}).join('')+'</div>'+
     '<div class="pc prt-pc prt-body" data-k="'+S.prt+'">'+abas.map(function(a,i){return '<div class="pn prt-p" data-prt-p="'+i+'"'+(i===ab?'':' hidden')+'>'+(a.html||'<p class="mut">Nada a preencher nesta aba.</p>')+'</div>';}).join('')+'</div></section>';
   /* Monocráticas (editorial): sem abas, tudo numa tela; com a urgência ligada, o cartão do processo vira o cartão de urgência */
@@ -2868,6 +2910,32 @@ function planilhaMono(V){
 }
 function linhaExpMono(it){var c=it.ctl||{};return [it.item,it.cnj,clSig(it.classe),it.assunto,it.tarefa,it.desde?br(it.desde):'',urgDe(it),c.tipoAto,c.hip932,it.obs,alertas(it).join(' · '),etLbl(etapa(it)),it.dataMinuta?br(it.dataMinuta):'',it.servidor,it.corretor,c.resJulg,c.honor,c.topico,c.intercor];}
 function linhaExp(it){var c=it.ctl||{};return [it.item,it.cnj,aprec(it)+(metaDe(it)?' · META '+metaDe(it):''),clSig(it.classe),it.assunto,it.obs,(c.cartao||{}).sintese||'',(c.cartao||{}).obsGeral||'',alertas(it).join(' · '),etapa(it),it.dataMinuta?br(it.dataMinuta):'',it.servidor,it.corretor,c.mpf,c.parecer,c.prelim,c.tempest,c.preparo,c.repres,c.midias,c.resJulg,c.consect,c.honor,c.topico,c.sopref,it.resultado,c.intercor,metaDe(it)];}
+/* calculadora do preparo: valor da causa × alíquota informada (a alíquota é conferida por quem preenche: tabela da Lei 9.289/1996) */
+function numBR(v){v=String(v||'').replace(/[^\d,.-]/g,'');if(/,\d{1,2}$/.test(v))v=v.replace(/\./g,'').replace(',','.');else v=v.replace(/,/g,'');var n=parseFloat(v);return isNaN(n)?null:n;}
+function moedaBR(n){return 'R$ '+n.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function calcPreparo(G){var vc=numBR(G('adm.vcausa')),al=numBR(G('adm.aliq')),rc=numBR(G('adm.recolhido'));
+  if(vc==null||al==null)return '<div class="mut">Informe o valor da causa e a alíquota para ver o devido e a diferença.</div>';
+  var dv=Math.round(vc*al)/100,df=rc==null?null:Math.round((rc-dv)*100)/100;
+  return '<div class="prt-calc"><b>Devido '+moedaBR(dv)+'</b>'+(rc==null?'':' · recolhido '+moedaBR(rc)+' · '+(df>=0?'<span class="ok">sem diferença a recolher</span>':'<span class="no">faltam '+moedaBR(-df)+'</span>'))+'<div class="mut">Deserção só depois da intimação para complementar (art. 1.007, § 2º, do CPC).</div></div>';}
+/* precedentes relacionados: abre o Ementário do Compendium com os subassuntos e as questões do prontuário */
+function prtPrecedentes(it){var C=(it.ctl||{}).cartao||{},T=lvItens(C.subassuntos).slice(0,3).concat(lvItens(C.questoes).slice(0,2)).map(function(x){return x.replace(/^Q\d+\s+/,'').replace(/\s*\([^)]*\)/g,'').trim();}).filter(Boolean);
+  var q=T.slice(0,2).join(' ');
+  return '<section class="w prt-prec"><h3><em>4</em>Precedentes relacionados</h3>'+(T.length?'<div class="lv-c">'+T.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div>':'<p class="mut">Preencha subassuntos ou questões controvertidas para a busca.</p>')+
+    '<div class="row" style="margin-top:8px">'+(q?'<a class="b" href="/modus/#v=ement&amp;q='+encodeURIComponent(q)+'" target="_blank" rel="noopener">Ver no Ementário</a>':'')+'<button class="b" data-a="comp">Consultar no Compendium</button></div></section>';}
+/* prévia da minuta: relatório, ementa e dispositivo montados dos campos; texto de partida, a conferir */
+var DISP_V={'Provido':'dou provimento','Parcialmente provido':'dou parcial provimento','Desprovido':'nego provimento','Não conhecido':'não conheço','Prejudicado':'julgo prejudicado','Rejeitados':'rejeito os embargos de declaração','Acolhidos sem efeito infringente':'acolho os embargos de declaração, sem efeito infringente','Acolhidos com efeito infringente':'acolho os embargos de declaração, com efeito infringente','Retratação exercida':'em juízo de retratação, reformo o acórdão','Acórdão mantido':'mantenho o acórdão'};
+var DISP_O={'Apelação':['à apelação','da apelação'],'Agravo de Instrumento':['ao agravo de instrumento','do agravo de instrumento'],'Agravo Interno':['ao agravo interno','do agravo interno'],'Remessa Necessária':['à remessa necessária','da remessa necessária']};
+var DISP_H={'Majorados':'com majoração dos honorários advocatícios (artigo 85, § 11, do CPC) [percentual]','Invertidos':'com inversão da sucumbência','Fixados':'com fixação de honorários advocatícios [percentual e base]','Redistribuídos':'com redistribuição da sucumbência'};
+function previaMinuta(it,tj){var c=it.ctl||{},C=c.cartao||{},O=C.orig||{},pts=String(it.partes||'').split(/\s+[x×]\s+/).filter(Boolean),r=(C.recursos||[])[0]||{};
+  var V=' <span class="vz">[VALIDAR]</span>',rec=r.tipo||tj||'recurso',Q=lvItens(C.questoes);
+  var rel='Trata-se de '+esc(String(rec).toLowerCase())+(pts.length?' em ação entre '+esc(pts.join(' e ')):'')+(O.tipo?', contra '+esc(String(O.tipo).toLowerCase())+(O.id?' (ID '+esc(O.id)+')':''):'')+'.'+(C.sintese?' '+esc(C.sintese):'')+(Q.length?' Discute-se: '+Q.map(function(x,i){return '('+(i+1)+') '+esc(x.replace(/^Q\d+\s+/,''));}).join('; ')+'.':'')+V;
+  var em=lvItens(C.subassuntos).map(function(x){return x.toUpperCase();}).join('. ');
+  var ement=(em?'<b>'+esc(em)+'.</b>':'')+V;
+  var vb=DISP_V[c.resJulg],o=DISP_O[tj],emb=/embargos|acórdão/.test(vb||''),hn=DISP_H[c.honor]||'',obj='';
+  if(vb&&!emb&&o)obj=' '+(/^(não conheço|julgo prejudicado)/.test(vb)?o[1]:o[0]);
+  var disp=vb?'Ante o exposto, '+esc(vb)+esc(obj)+(hn?', '+esc(hn):'')+'.':'<span class="mut">Escolha o resultado para montar o dispositivo.</span>';
+  return '<section class="w prt-min"><div class="pm-hd"><span>Prévia da minuta</span><small>texto de partida · conferir antes de usar</small></div><div class="pm-fl">'+
+    '<div class="pm-b"><i>Relatório</i><p>'+rel+'</p></div><div class="pm-b"><i>Ementa</i><p>'+ement+'</p></div><div class="pm-b pm-d"><i>Dispositivo</i><p>'+disp+'</p></div></div></section>';}
 /* listagem dos campos de texto do prontuário: quebra por linha; sem quebra, por " · ", ";" ou marcadores F1, 1), a), (i) */
 function lvItens(v){v=String(v||'').trim();if(!v)return [];
   var L=v.split(/\n+/).map(function(x){return x.trim();}).filter(Boolean);
@@ -2899,11 +2967,11 @@ function corpo(it,tj){
   var C=(it.ctl||{}).cartao||{},pts=String(it.partes||'').split(/\s+[x×]\s+/).filter(Boolean),pz=prazo(it),recs=C.recursos||[];
   var AI=tj==='Agravo de Instrumento'||recs.some(function(r){return r.tipo==='Agravo de instrumento';}),RN=tj==='Remessa Necessária'||recs.some(function(r){return r.tipo==='Remessa necessária';});
   var h='<div class="pn">'+
-   '<section class="w"><h3><em>◈</em>Caracterização do caso <small>· alimenta a pesquisa no Compendium</small></h3><div class="grid">'+
+   '<section class="w"><h3><em>1</em>Caracterização do caso <small>· alimenta a pesquisa no Compendium</small></h3><div class="grid">'+
      f('Tipo de julgamento','<select data-p="tipoJ"><option value="">auto: '+esc(tipoJ({classe:it.classe,julgamento:it.julgamento}))+'</option>'+TJ.map(function(x){return '<option'+(x===C.tipoJ?' selected':'')+'>'+x+'</option>';}).join('')+'</select>')+
      f('Recurso relacionado',inp('relacionado','ex.: Apelação relacionada nº …'))+f('Subassuntos',tl('subassuntos','subassuntos (do inteiro teor)','chips'))+f('Especificidades',tl('especificidades','peculiaridades do caso, distinções','lista'))+
      f('Questões controvertidas',tl('questoes','o que o recurso discute, ponto a ponto','num'))+f('Síntese fática',tl('sintese','fatos relevantes do caso, em poucas linhas','txt'))+f('Observação',tl('obsGeral','observação geral sobre o processo','txt'))+f('Detalhes da pauta','<textarea rows="2" data-d="obs" placeholder="anotações (coluna Detalhes)">'+esc(it.obs||'')+'</textarea>')+'</div></section>'+
-   '<section><h3><em>§</em>Processo e origem</h3>'+
+   '<section><h3><em>2</em>Processo e origem</h3>'+
      f('Partes e papéis',pts.length?pts.map(function(p,i){return '<div class="row"><span style="flex:1 1 140px;font-size:11.5px">'+esc(p)+'</span>'+sx('papeis.'+i,['Autor(a)','Réu/ré','Terceiro'])+'</div>';}).join(''):'—')+
      f('Decisão na origem',sx('orig.tipo',['Decisão interlocutória','Sentença','Decisão monocrática','Acórdão']))+f('ID da decisão',inp('orig.id','ID'))+f('Data',inp('orig.data','','date'))+
      f('Juízo de origem',inp('orig.juizo','vara / juízo'))+f('Julgador(a)',inp('orig.julgador','nome'))+
@@ -2912,13 +2980,13 @@ function corpo(it,tj){
    '<section><h3><em>1</em>Regularidade e admissibilidade</h3>'+f('Tempestividade',sc('tempest',CP.tempest))+
      f('Intimação · protocolo','<div class="row">'+inp('adm.intim','','date')+inp('adm.prot','','date')+'</div>')+f('Prazo (dias úteis)','<div class="row">'+inp('adm.prazo','15','number')+ck('adm.dobro','Em dobro')+'</div>')+
      f('Prévia do prazo',pz?'<div><b>'+esc(br(pz.fim))+'</b> · '+pz.n+' dias úteis'+(pz.ok==null?'':pz.ok?' · <span class="ok">protocolo dentro do prazo</span>':' · <span class="no">protocolo após o prazo</span>')+'<div class="mut">Estimativa com fins de semana, feriados e recesso; não substitui a conferência.</div></div>':'<span class="mut">Informe a intimação para ver a estimativa.</span>')+
-     f('Preparo',sc('preparo',CP.preparo)+'<div class="row">'+ck('adm.dpu','Dispensa DPU')+ck('adm.ajg','AJG')+'</div>')+f('Outro requisito',sx('adm.req',REQ)+inp('adm.reqObs','observação'))+
-     f('Preliminares',sc('prelim',CP.prelim))+f('Representação',sc('repres',CP.repres))+f('Mídias',sc('midias',CP.midias))+f('Intervenção do MPF',sc('mpf',CP.mpf))+f('Parecer do MPF',sc('parecer',CP.parecer))+
+     f('Preparo',sc('preparo',CP.preparo)+'<div class="row">'+ck('adm.dpu','Dispensa DPU')+ck('adm.ajg','AJG')+'</div>')+f('Comprovante · guia','<div class="row">'+inp('adm.compId','ID do comprovante')+inp('adm.guiaId','ID da guia')+'</div>')+f('Calculadora do preparo','<div class="row">'+inp('adm.vcausa','valor da causa (R$)')+inp('adm.aliq','alíquota (%)')+inp('adm.recolhido','recolhido (R$)')+'</div>'+calcPreparo(G))+f('Outro requisito',sx('adm.req',REQ)+inp('adm.reqObs','observação'))+
+     f('Preliminares',sc('prelim',CP.prelim))+f('Representação',sc('repres',CP.repres))+f('Advogado(a) · OAB','<div class="row">'+inp('adm.adv','nome')+inp('adm.oab','nº/UF')+'</div>')+f('Procuração · ID','<div class="row">'+inp('adm.procId','ID da procuração')+inp('adm.subId','substabelecimento')+'</div>')+f('Mídias',sc('midias',CP.midias))+f('Intervenção do MPF',sc('mpf',CP.mpf))+f('Parecer do MPF',sc('parecer',CP.parecer))+
      f('Sentido do parecer',sx('mpfx.sentido',['Prosseguimento do feito','Provimento do recurso','Não provimento do recurso','Outro']))+f('ID do parecer',inp('mpfx.id','ID'))+'</section>'+
-   '<section class="w"><h3><em>2</em>Recursos, autos e outras peças</h3>'+
+   '<section class="w"><h3><em>3</em>Recursos, autos e outras peças</h3>'+
      (recs.length?recs.map(function(r,i){var b='recursos.'+i+'.';return '<div class="rec"><b>Recurso '+(i+1)+'</b>'+sx(b+'parte',['Parte autora','Parte ré','União','INSS','Fazenda Nacional','Ambas','Outra'])+sx(b+'tipo',RECS)+inp(b+'id','ID')+sx(b+'contra',['Intimada para responder','Prazo em curso','Apresentada','Não apresentada','Dispensada / não se aplica','Não mencionar'])+'<button class="x" data-a="del" data-l="recursos" data-i="'+i+'">Remover</button></div>';}).join(''):'<p class="mut">Nenhum recurso registrado.</p>')+
      '<div class="row" style="margin-top:6px"><button class="b" data-a="add" data-l="recursos">+ Adicionar recurso</button><button class="b" data-a="add" data-l="pecas">+ Outra peça</button></div>'+
-     ((C.pecas||[]).length?'<div class="sub">Outras peças</div>'+C.pecas.map(function(x,i){return '<div class="rec" style="grid-template-columns:2fr 1fr 1fr auto">'+inp('pecas.'+i+'.desc','documento')+inp('pecas.'+i+'.id','ID')+inp('pecas.'+i+'.data','','date')+'<button class="x" data-a="del" data-l="pecas" data-i="'+i+'">Remover</button></div>';}).join(''):'')+
+     ((C.pecas||[]).length?'<div class="sub">Outras peças</div>'+C.pecas.map(function(x,i){return '<div class="rec" style="grid-template-columns:2fr 1fr 1fr auto">'+inp('pecas.'+i+'.desc','documento')+inp('pecas.'+i+'.id','ID')+inp('pecas.'+i+'.data','','date')+'<button class="x" data-a="del" data-l="pecas" data-i="'+i+'">Remover</button><input data-p="pecas.'+i+'.esp" value="'+esc(G('pecas.'+i+'.esp'))+'" placeholder="especificação, se houver" style="grid-column:1/-1"></div>';}).join(''):'')+
      '<div class="grid">'+
      (AI?f('AI · decisão agravada · ID',inp('ai.id','ID'))+f('AI · data da decisão',inp('ai.data','','date'))+f('AI · hipótese (art. 1.015)',sx('ai.hip',['Tutela provisória','Mérito do processo','Exibição de documento','Intervenção de terceiros','Execução / cumprimento','Tema 988 · urgência','Outra']))+f('AI · efeito suspensivo / tutela',sx('ai.efeito',['Não requerido','Deferido','Indeferido','Pendente de análise'])):'')+
      (RN?f('Remessa · hipótese (art. 496)',sx('rem.hip',['Contra ente público','Embargos à execução fiscal']))+f('Remessa · proveito econômico',inp('rem.proveito','R$ / estimativa')):'')+
@@ -2926,7 +2994,7 @@ function corpo(it,tj){
      (tj==='Agravo Interno'?f('AgInt · decisão agravada · ID',inp('agint.id','ID'))+f('AgInt · data da decisão',inp('agint.data','','date'))+f('AgInt · síntese da decisão',ta('agint.sintese','síntese'))+f('AgInt · fundamentos',ta('agint.fund','fundamentos do agravo')):'')+
      (tj==='Juízo de Retratação'?f('Retratação · acórdão · ID',inp('jr.id','ID'))+f('Retratação · data do acórdão',inp('jr.data','','date'))+f('Retratação · precedente / tema',inp('jr.tema','Tema nº …'))+f('Retratação · tribunal',sx('jr.trib',['STF','STJ']))+f('Retratação · embargos ao acórdão',sx('jr.ed',['Não houve','Opostos e rejeitados','Opostos e acolhidos','Parcialmente acolhidos','Não conhecidos']))+f('Retratação · questão submetida',ta('jr.questao','questão')):'')+
      '</div></section>'+
-   '<section class="w"><h3><em>3</em>Julgamento · minuta</h3><div class="grid">'+f('Resultado',sc('resJulg',CP.resJulg))+f('Consectários',sc('consect',CP.simnao))+f('Honorários',sc('honor',CP.honor))+
+   '<section class="w"><h3><em>1</em>Julgamento · minuta</h3><div class="grid">'+f('Resultado',sc('resJulg',CP.resJulg))+f('Consectários',sc('consect',CP.simnao))+f('Honorários',sc('honor',CP.honor))+
      (tj==='Embargos de Declaração'||tj==='Agravo Interno'?f('Multa',sx('jul.multa',['Sem multa','Protelatórios · art. 1.026, § 2º','Reiteração · art. 1.026, § 3º','Art. 1.021, § 4º'])):f('Remessa necessária',ck('jul.remessa','Configurada')))+
      f('Tópico-síntese',sc('topico',CP.simnao)+ta('jul.topico','texto do tópico-síntese'))+f('Fundamentos',ta('jul.fund','fundamentos centrais do voto'))+f('Comentário ao corretor',ta('jul.coment','observação ao corretor'))+'</div>'+
      ((GUIA[tj]||[]).length?'<div class="sub">Análise guiada · '+esc(tj)+'</div>'+GUIA[tj].map(function(qq,i){var p='guia.'+tj.replace(/\W+/g,'')+'.'+i,v=G(p);return '<div class="q"><span>'+esc(qq)+'</span><span>'+['Sim','Não'].map(function(x){return '<label><input type="radio" name="'+esc(it.cnj+p)+'" data-p="'+p+'" value="'+x+'"'+(v===x?' checked':'')+'> '+x+'</label>';}).join('')+'</span></div>';}).join(''):'')+
