@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-16T23:46:56.263Z",
+ "atualizadoEm": "2026-11-17T03:07:48.601Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -671,7 +671,84 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "mpf": "Sem hipótese",
+    "prelim": "Sem preliminares",
+    "tempest": "Tempestivo",
+    "preparo": "Comprovado",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Cumprimento individual de sentença coletiva · ACP 0005019-15.1997.4.03.6000 · reajuste de 28,86% (Leis 8.622/1993 e 8.627/1993) · limitação territorial",
+     "especificidades": "F1 apelação do exequente (ID 398744640) · F2 pensionista e sucessor de servidora falecida (ID 398744447, ID 398744454 e ID 398744456) · F3 executado INSS (ID 398744447) · F5 sentença extintiva por limitação territorial ao Estado de MS (ID 398744639) · F6 sentença anterior à citação do executado, sem fixação de honorários (ID 398744639) · F10 honorários recursais e multa por litigância de má-fé requeridos em contrarrazões (ID 398744645) · Modelo: 2886-1b",
+     "questoes": "Alcance territorial da coisa julgada formada na ACP 0005019-15.1997.4.03.6000 (artigo 16 da Lei 7.347/1985; Tema 1.075/STF). Legitimidade ativa da parte exequente para o cumprimento individual da sentença coletiva. Pedido de honorários recursais e de condenação por litigância de má-fé deduzido pelo INSS em contrarrazões.",
+     "sintese": "Cumprimento individual de sentença coletiva ajuizado por Ataro dos Santos Lobato (pensionista e sucessor da servidora falecida Eloisa Brito Amaral Lobato) contra o INSS, visando ao recebimento de diferenças decorrentes do reajuste de 28,86% reconhecido na ACP 0005019-15.1997.4.03.6000 (ID 398744447). A sentença extinguiu o processo sem resolução do mérito (art. 485, VI, do CPC), por ilegitimidade ativa, sob o fundamento de que o título executivo restringiu seus efeitos a servidores com vínculo funcional em Mato Grosso do Sul (ID 398744639). O exequente apelou sustentando a abrangência nacional da coisa julgada e a incidência do Tema 1.075/STF e do Tema 480/STJ (ID 398744640). O INSS apresentou contrarrazões requerendo o desprovimento do recurso, a condenação do apelante por litigância de má-fé e a fixação de honorários recursais (ID 398744645).",
+     "obsGeral": "Lote 28,86% · modelo 2886-1b · grupo 1",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "398744639",
+      "data": "2026-08-13",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "acc": {
+       "custas": true,
+       "honor": true,
+       "tutela": false,
+       "valor": true
+      }
+     },
+     "adm": {
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false
+     },
+     "jul": {
+      "remessa": false,
+      "fund": "Tema 1.075/STF (RE 1.101.937); inconstitucionalidade do artigo 16 da Lei 7.347/1985; ausência de limitação territorial no título executivo judicial formado na ACP 0005019-15.1997.4.03.6000; Tema 499/STF inaplicável; desnecessidade de sobrestamento pelo Tema 1.433/STJ; retorno dos autos à origem para prosseguimento do cumprimento de sentença; pedido de honorários recursais em contrarrazões prejudicado."
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Apelação",
+       "contra": "Apresentada",
+       "id": "398744640"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial do cumprimento de sentença",
+       "id": "398744447",
+       "data": "2026-02-12"
+      },
+      {
+       "desc": "Comprovante e GRU de recolhimento de custas",
+       "id": "398744634",
+       "data": "2026-06-01"
+      },
+      {
+       "desc": "Sentença de extinção sem resolução do mérito",
+       "id": "398744639",
+       "data": "2026-08-13"
+      },
+      {
+       "desc": "Recurso de apelação da parte exequente",
+       "id": "398744640",
+       "data": "2026-08-21"
+      },
+      {
+       "desc": "Contrarrazões do INSS",
+       "id": "398744645",
+       "data": "2026-09-17"
+      }
+     ]
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-17T03:07:48.601Z"
+   }
   },
   {
    "cnj": "5001281-15.2026.4.03.6000",
