@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-17T02:22:58.733Z",
+ "atualizadoEm": "2026-11-17T02:35:25.201Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -147,7 +147,140 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "mpf": "Sem hipótese",
+    "parecer": "Com parecer",
+    "prelim": "Há preliminares",
+    "tempest": "Tempestivo",
+    "preparo": "Justiça gratuita",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "consect": "Não",
+    "topico": "Não",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Cumprimento individual de sentença coletiva (ACP 0005019-15.1997.4.03.6000); acordo administrativo; limites subjetivos e territoriais do título coletivo; Temas 550 e 1102/STJ; Tema 1075/STF",
+     "especificidades": "Execução individual por herdeiros de servidor falecido (ex-DNER/DNIT, vinculado ao Rio de Janeiro); fichas financeiras com rubrica de 28,86% sem termo de acordo juntado; sentença proferida antes da citação, com condenação da parte exequente em honorários; gratuidade da justiça concedida; afetação do Tema 1433/STJ; União pede subsidiariamente prescrição da pretensão executória",
+     "questoes": "1) Ilegitimidade ativa por limitação territorial/subjetiva do título coletivo a servidores de Mato Grosso do Sul (Tema 1075/STF, Tema 733/STF; Tema 1302 e Tema 1433/STJ). 2) Existência de acordo administrativo comprovada apenas por fichas financeiras, sem o termo: aplicação do Tema 550 (acordo sem litígio individual prévio) ou do Tema 1102 (prova por SIAPE e dedução de valores). 3) Efeito do acordo: extinção da execução por ausência de título ou apenas compensação dos valores pagos. 4) Honorários fixados em favor da União. 5) Prescrição da pretensão executória, suscitada subsidiariamente em memorial",
+     "sintese": "Os herdeiros de André Ferreira de Castro Netto, servidor vinculado ao DNER/DNIT, ajuizaram cumprimento individual da sentença da ACP 0005019-15.1997.4.03.6000 (reajuste de 28,86%), pedindo R$ 104.336,45 (agosto/2024; ID 393380608 e 393380616). A União impugnou, alegando ilegitimidade passiva (ID 393380628). A sentença rejeitou a preliminar e extinguiu o cumprimento sem resolução do mérito (art. 485, VI, CPC) por dois fundamentos: ilegitimidade ativa, por ausência de vínculo com Mato Grosso do Sul, e ausência de título executivo, diante de acordo administrativo reconhecido pelas fichas financeiras, com condenação em custas e honorários de 10% do valor da causa, com exigibilidade suspensa (ID 393380634). Os exequentes apelaram (ID 393380635); a União apresentou contrarrazões, pediu suspensão pelos Temas 1302 e 1433/STJ e, em memorial, a prescrição subsidiária (ID 393380639 e 406638692). O MPF declinou da intervenção (ID 406331494). O processo foi incluído em pauta em 27/10/2026",
+     "obsGeral": "Sentença com dois fundamentos autônomos, ambos impugnados na apelação. A parcela da sentença que rejeitou a preliminar de ilegitimidade passiva da União não foi objeto de recurso identificado nos autos. Os Temas 1302 e 1433/STJ constam apenas como alegados pela União e devem ser conferidos quanto ao alcance da suspensão",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "393380634",
+      "data": "2026-08-05",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "acc": {
+       "custas": true,
+       "honor": true,
+       "valor": true
+      }
+     },
+     "adm": {
+      "intim": "2026-08-06",
+      "prot": "2026-08-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true
+     },
+     "mpfx": {
+      "sentido": "Prosseguimento do feito",
+      "id": "406331494"
+     },
+     "jul": {
+      "remessa": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Apelação",
+       "contra": "Apresentada",
+       "id": "393380635"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial do cumprimento de sentença",
+       "id": "393380608",
+       "data": "2024-07-30"
+      },
+      {
+       "desc": "Emenda à inicial com cálculo (R$ 94.851,32) e fichas financeiras",
+       "id": "393380616",
+       "data": "2024-08-20"
+      },
+      {
+       "desc": "Impugnação da União (ilegitimidade passiva)",
+       "id": "393380628",
+       "data": "2025-09-22"
+      },
+      {
+       "desc": "Sentença de extinção",
+       "id": "393380634",
+       "data": "2026-08-05"
+      },
+      {
+       "desc": "Apelação dos exequentes",
+       "id": "393380635",
+       "data": "2026-08-11"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "393380639",
+       "data": "2026-08-24"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "406331494",
+       "data": "2026-10-23"
+      },
+      {
+       "desc": "Memorial da União (distinção entre Temas 550 e 1102/STJ)",
+       "id": "406638692",
+       "data": "2026-10-25"
+      }
+     ],
+     "pendencias": [
+      {
+       "desc": "Conferir se há decisão de suspensão por afetação do Tema 1433/STJ (afetação publicada em 14/05/2026) e o alcance dela sobre apelação em curso neste Tribunal",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Conferir se foi efetivamente suspenso o Tema 1302/STJ e seu alcance",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Verificar se a União recorreu quanto à rejeição da preliminar de ilegitimidade passiva (não há recurso identificado)",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Conferir nas fichas financeiras (ID 335711137 da origem, não anexado a esta análise) os períodos e a rubrica pagos",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Apreciar a prescrição da pretensão executória suscitada pela União em memorial (ID 406638692), pois a sentença não a examinou",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Verificar o Tema 1102/STJ quanto à data de eventual acordo (anterior ou posterior à MP 1.962-33/2000) e à homologação, se houve ação individual prévia",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      }
+     ]
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-17T02:35:25.201Z"
+   }
   },
   {
    "cnj": "5008148-92.2024.4.03.6000",
