@@ -575,6 +575,34 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .esc-resumo,.kpis{margin-left:0!important;margin-right:0!important}
 .fl-cab,.pt-barra,.esc-resumo{padding-left:12px!important;padding-right:12px!important}
 }
+
+/* cabeçalho em duas linhas: marca e módulos | estado; abaixo, as abas sublinhadas em faixa própria */
+#top{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:54px auto;align-items:center;gap:0 12px;padding:0 24px!important;min-height:0!important;border-bottom:1px solid var(--b)!important;box-shadow:0 2px 8px rgba(32,59,57,.05)}
+#top #marca{grid-column:1;grid-row:1;border-right:0;margin:0;padding:0;height:auto;gap:12px}
+#top #marca>span{display:inline;font:700 15px Figtree,sans-serif;letter-spacing:-.01em;color:var(--v)}
+#top #modulos{background:rgba(23,63,61,.06);border-radius:9px;padding:3px;gap:2px;margin:0}
+#top #modulos button{font-size:13.5px;font-weight:600;letter-spacing:0;padding:5px 14px;border-radius:7px;color:var(--m2)}
+#top #modulos button.on{background:var(--w);color:var(--v);box-shadow:0 1px 3px rgba(32,59,57,.14)}
+#top #modulos button.on::after{content:none}
+#top #estado{grid-column:3;grid-row:1;gap:6px;padding:0}
+#top #st-acervo{font:500 11px "JetBrains Mono",ui-monospace,monospace!important;letter-spacing:.02em;text-transform:none;color:var(--m)!important;padding:0 4px}
+#top #estado .btn.ib{width:32px;height:32px;border-radius:8px}
+#top #st-grava{height:32px;padding:0 10px;border:1px solid var(--l);border-radius:16px;background:var(--w)}
+#top #abas{order:0;grid-column:1/-1;grid-row:2;align-self:stretch;align-items:stretch;gap:2px;margin:0 -24px;padding:0 18px;background:var(--bg);border-top:1px solid var(--l);overflow-x:auto;flex:none}
+#top .tb{height:40px;border:0;border-bottom:2px solid transparent;background:transparent;padding:0 12px;color:var(--m);font-weight:600;box-shadow:none;top:0}
+#top .tb:hover{color:var(--v)}
+#top #abas[hidden]{display:none!important}
+#top .tb.on{background:transparent;color:var(--v);border-bottom-color:var(--v);box-shadow:none;top:0;height:40px}
+#top .tb small{font-size:10.5px;padding:1px 6px;border-radius:8px;background:rgba(23,63,61,.07);color:var(--m2)}
+#top .tb.on small{background:var(--v);color:#fff}
+#top .tb .x{margin-left:2px;color:var(--m);font-weight:400}
+@media (max-width:600px){
+#top{grid-template-rows:50px auto;padding:0 12px!important;gap:0 8px}
+#top #marca>span,#top #st-acervo{display:none}
+#top #modulos button{padding:5px 10px}
+#top #abas{margin:0 -12px;padding:0 4px}
+#top #st-grava span{display:none}#top #st-grava{padding:0 9px}
+}
 </style>
 </head>
 <body>
