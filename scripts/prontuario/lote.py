@@ -32,7 +32,7 @@ CAMPOS = json.loads((RAIZ / 'padrao' / 'lia' / 'campos-prontuario.json').read_te
 SITE = 'https://www.gabinete-cmt.com'
 PAUTA_MEM = {}
 COLS = ['Pauta', 'Item', 'Grupo sugerido', 'Prompt gerado', 'Prontuário lançado', 'Modelo (LIA)', 'Consulta']
-GRUPO_A = {'A1': '1', 'A2': '2', 'A3': '3', 'A5': '5', 'A1/A5': '6', 'A6': '7', 'A6/A2': '7'}
+GRUPO_A = {'A1': '1', 'A2': '2', 'A3': '3', 'A5': '5', 'A1/A5': '6', 'A6': '7', 'A6/A2': '7', 'A8': '8'}
 
 
 def dg(s):
