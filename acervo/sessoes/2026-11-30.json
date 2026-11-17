@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-16T23:53:37.662Z",
+ "atualizadoEm": "2026-11-17T02:22:58.733Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -66,7 +66,7 @@
    "obs": "",
    "ctl": {
     "editadoPor": "Bruno",
-    "editadoEm": "2026-11-16T17:57:33.761Z",
+    "editadoEm": "2026-11-17T02:22:58.733Z",
     "preparo": "Isento (DPU/ente público)",
     "cartao": {
      "orig": {
@@ -74,7 +74,21 @@
       "acc": {
        "honor": true
       }
-     }
+     },
+     "pendencias": [
+      {
+       "desc": "Disponibilizar os documentos do processo ao agente (petições, decisão de origem, recursos, contrarrazões, parecer do MPF) para preenchimento do prontuário",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Conferir a matéria, a decisão de origem e o resultado dos paradigmas antes de qualquer aproveitamento",
+       "ok": false,
+       "em": "2026-11-16",
+       "por": "LIA · Bruno"
+      }
+     ]
     }
    }
   },
