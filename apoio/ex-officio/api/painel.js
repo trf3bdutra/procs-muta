@@ -1,4 +1,5 @@
-/* GET /api/painel?cmt=1  painel do desembargador (api/_cmt.js)
+/* GET /api/painel?lote=1 painel de lotes (api/_lote.js)
+   GET /api/painel?cmt=1  painel do desembargador (api/_cmt.js)
    GET /api/painel  página inicial do servidor: calendário das pautas publicadas e todos os processos dele (minuta e correção) */
 const L = require('./_lib');
 const E = require('./_entregas');
@@ -7,6 +8,8 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.query && req.query.whatsapp === '1') return require('./_whatsapp')(req, res);
   if (req.query && req.query.fechamento === '1') return require('./_fechamento-auto')(req, res);
+  /* lotes (/lotes/): mesmo acesso do painel do relator, sem gastar outra função na Vercel */
+  if (req.query && req.query.lote !== undefined) return require('./_lote')(req, res);
   /* painel do relator: o endereço próprio (/cmt?k=…) vale como credencial, sem login */
   if (req.query && req.query.cmt) {
     const CMT = require('./_cmt');

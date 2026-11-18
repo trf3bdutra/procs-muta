@@ -1,9 +1,9 @@
 /* Painel de lotes (/lotes/): página própria, desenhada como parte do Painel do relator (/cmt), com o mesmo acesso:
    login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE).
-   GET /api/lote                       lotes disponíveis (acervo/lotes/*.json: id, título, descrição, sessões)
-   GET /api/lote?id=2886               o lote (matriz, perfis e painel), com o cartão do prontuário de cada processo
+   GET /api/painel?lote=1                       lotes disponíveis (acervo/lotes/*.json: id, título, descrição, sessões)
+   GET /api/painel?lote=1&id=2886               o lote (matriz, perfis e painel), com o cartão do prontuário de cada processo
                                        tirado, na hora, da sessão em acervo/sessoes/AAAA-MM-DD.json
-   GET /api/lote?id=2886&minuta=X      a minuta do processo X (10 primeiros caracteres do número): acervo/minutas/<id>/X.json */
+   GET /api/painel?lote=1&id=2886&minuta=X      a minuta do processo X (10 primeiros caracteres do número): acervo/minutas/<id>/X.json */
 const L = require('./_lib');
 const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/;
 const nada = e => { if (e.status === 404) return { dados: null }; throw e; };
