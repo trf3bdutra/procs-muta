@@ -1,0 +1,22 @@
+name: Fechamento diário do gabinete
+on:
+  schedule:
+    - cron: '0 21 * * 1-5'
+  workflow_dispatch:
+permissions: {}
+concurrency: fechamento-diario-gabinete
+jobs:
+  enviar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gerar e encaminhar os fechamentos
+        env:
+          CMT_FECHAMENTO_SECRET: ${{ secrets.CMT_FECHAMENTO_SECRET }}
+        run: |
+          if [ -z "$CMT_FECHAMENTO_SECRET" ]; then
+            echo "Configure CMT_FECHAMENTO_SECRET no GitHub e na Vercel."
+            exit 1
+          fi
+          curl --fail-with-body --silent --show-error --max-time 45 \
+            -X POST -H "Authorization: Bearer $CMT_FECHAMENTO_SECRET" \
+            'https://www.gabinete-cmt.com/api/painel?fechamento=1'
