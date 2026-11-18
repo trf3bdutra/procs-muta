@@ -114,6 +114,15 @@ async function painel(req, res, u) {
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, dataLiberacao: b.desfazer ? '' : hj });
       }
+      /* etapa do item: o relator marca ou desfaz minuta e correção, como na página da pauta */
+      if (b.acao === 'etapa') {
+        if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
+        const campo = String(b.campo || '');
+        if (!/^(dataMinuta|dataCorrecao)$/.test(campo)) return res.status(400).json({ erro: 'Etapa inválida.' });
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { [campo]: b.desfazer ? '' : hj } }, u, true);
+        if (g.status >= 400) return res.status(g.status).json(g.body);
+        return res.status(200).json({ ok: true, cnj, campo, valor: b.desfazer ? '' : hj });
+      }
       /* retirada ou adiamento do item, deferidos pelo relator: grava o desfecho na pauta */
       if (b.acao === 'situacao') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });

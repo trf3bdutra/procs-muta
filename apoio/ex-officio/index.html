@@ -1843,7 +1843,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         </div>
         <div class="cmt-sit" id="cmt-sit"></div>
       </div>
-      <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Ações</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
+      <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor · Corretor</th><th>Etapa</th><th>Ações</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
       <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
     </section>
 
@@ -4178,6 +4178,12 @@ cmtDlg('<small class="dv-ey">Sinalizações do item</small><h2>'+esc(x.cnj)+'</h
  function(f){var tx=f.tx.value.trim();if(!tx)return Promise.reject(new Error('Escreva o apontamento.'));
    return cmtPost({acao:'devolver',sessao:((CMT.dados||{}).pauta||{}).date||'',cnj:x.cnj,texto:tx,para:x.servidor||''},'Devolutiva enviada.');});}
 document.addEventListener('click',function(e){
+var et=e.target.closest&&e.target.closest('[data-cet]');
+if(et){var cj=et.getAttribute('data-cnj'),cp=et.getAttribute('data-cet'),ja=/\bs[12]\b/.test(et.className);
+  var nm=cp==='dataMinuta'?'minutada':'corrigida';
+  if(ja&&!confirm('Desfazer a marca de '+nm+' em '+cj+'?'))return;
+  cmtPost({acao:'etapa',sessao:((CMT.dados||{}).pauta||{}).date||'',cnj:cj,campo:cp,desfazer:ja},ja?'Marca desfeita.':'Minuta '+nm+'.');return;}});
+document.addEventListener('click',function(e){
 var b=e.target.closest&&e.target.closest('[data-ca]');if(!b)return;
 var cnj=b.getAttribute('data-cnj'),a=b.getAttribute('data-ca');
 var x=((((CMT.dados||{}).pauta)||{}).itens||[]).filter(function(y){return y.cnj===cnj;})[0];if(!x)return;
@@ -4208,9 +4214,9 @@ return '<span class="cmt-abs" role="group" aria-label="Ações do item">'+
   b('ficha','fi',ic.fi,'Abrir a ficha do processo')+'</span>';}
 function cmtPasso(x){
 var lib=x.etapa==='liberado',cor=!!x.dataCorrecao||lib,min=!!x.dataMinuta||cor,ret=/^retirad/i.test(x.resultado||''),adi=/^adiad/i.test(x.resultado||'');
-var p=function(cls,ic,rot,tt){return '<span class="cmt-pa'+(cls?' '+cls:'')+'" title="'+esc(tt)+'"><i>'+cmtSvg(ic,12)+'</i><b>'+rot+'</b></span>';};
-var h=p(min?'s1':'',CMTICO.d,'Minutado',min?'Minutado em '+br(x.dataMinuta):'Sem minuta')+'<u class="'+(cor?'l1':'')+'"></u>'+
-      p(cor?'s2':'',CMTICO.c,'Corrigido',cor?'Corrigido em '+br(x.dataCorrecao):'Sem correção')+'<u class="'+(lib?'l2':'')+'"></u>';
+var p=function(cls,ic,rot,tt,campo){return '<button type="button" class="cmt-pa'+(cls?' '+cls:'')+'" data-cet="'+campo+'" data-cnj="'+esc(x.cnj)+'" title="'+esc(tt)+'"><i>'+cmtSvg(ic,12)+'</i><b>'+rot+'</b></button>';};
+var h=p(min?'s1':'',CMTICO.d,'Minutado',min?'Minutado em '+br(x.dataMinuta)+' · clique para desfazer':'Marcar como minutado','dataMinuta')+'<u class="'+(cor?'l1':'')+'"></u>'+
+      p(cor?'s2':'',CMTICO.c,'Corrigido',cor?'Corrigido em '+br(x.dataCorrecao)+' · clique para desfazer':'Marcar como corrigido','dataCorrecao')+'<u class="'+(lib?'l2':'')+'"></u>';
 if(ret||adi)h+='<span class="cmt-pa '+(ret?'sr':'sa')+'" title="'+esc(x.resultado||'')+'"><i>'+cmtSvg(CMTICO.l,12)+'</i><b>'+(ret?'Retirado':'Adiado')+'</b></span>';
 else h+='<button type="button" class="cmt-pa'+(lib?' s3':' act')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Liberado em '+br(x.dataLiberacao)+' · clique para desfazer':cor?'Liberar o voto':'Liberar mesmo sem correção registrada')+'"><i>'+cmtSvg(CMTICO.l,12)+'</i><b>'+(lib?'Liberado':'Liberar')+'</b></button>';
 return '<span class="cmt-trl2">'+h+'</span>';}
