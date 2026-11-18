@@ -106,9 +106,9 @@
     "RES",
     "ORI"
    ],
-   "observacao": "Minuta analisada em 18/11/2026 a partir do texto integral do PJe; correção ainda não aplicada.",
-   "peculiaridades": "Mandado de segurança de empresa em recuperação judicial. Crédito presumido de ICMS pelo Acordo 687/2011 (ID 354858307) e aditivos (IDs 354858308 e 354858310), juntados aos autos. A sentença concedeu a segurança para excluir os créditos presumidos das bases do IRPJ e da CSLL, independentemente da Lei 14.789/2023, com compensação do indébito e prescrição quinquenal, e condenou a União a reembolsar custas. A apelação da União sustenta a LC 160/2017, a MP 1.185/2023 e a Lei 14.789/2023, e pede que a restituição siga o regime de precatórios. O voto mantém a sentença e veda a restituição administrativa (Tema 831/STF; Súmulas 269 e 271/STF).",
-   "peculiaridades_relator": "1) Mesma pergunta dos itens 66 e 77: manter a exclusão do crédito presumido depois da Lei 14.789/2023. Aqui a sentença concedeu expressamente \"independentemente da Lei 14.789/2023\" e o voto mantém, sem invocar o item 5 da ementa dos embargos na ApelRemNec 5000161-72.2019.4.03.6002 (DJEN 06/05/2026), que foi o apoio adotado na correção do item 66. Uniformizar o fundamento no lote. 2) Tema 1.416/STJ: o voto afasta a suspensão por entendê-la restrita a recurso especial e agravo em recurso especial. Conferir se a delimitação segue nesses termos, porque o tema trata exatamente dos regimes anterior e posterior à Lei 14.789/2023. 3) Jurisprudência citada: faltam na lista da ementa dois julgados usados no voto — ApelRemNec 5000264-80.2020.4.04.7113 (TRF-4, Rel. Des. Fed. Rômulo Pizzolatti), transcrita por extenso, e o próprio Tema 1.416/STJ. 4) Dispositivos citados: \"CPC, artigos 927, III\" e \"Lei 9.250/1995, artigos 39, § 4º\" estão no plural para dispositivo único, e a lista mistura \"Súmulas 269/STF\" com \"Súmula 271/STF\". 5) A condenação da União em custas, posta na sentença, não é enfrentada no voto nem no dispositivo; conferir se houve impugnação.",
+   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+   "peculiaridades": "Mandado de segurança de empresa em recuperação judicial. Crédito presumido de ICMS pelo Acordo 687/2011 (ID 354858307) e aditivos (IDs 354858308 e 354858310). A sentença concedeu a segurança independentemente da Lei 14.789/2023, com compensação e prescrição quinquenal, e condenou a União a reembolsar custas. A apelação da União sustenta a LC 160/2017, a MP 1.185/2023 e a Lei 14.789/2023, e que a restituição só pode ocorrer por precatório.",
+   "peculiaridades_relator": "1) Fundamento da exclusão após a Lei 14.789/2023 uniformizado com o item 66: item 5 da ementa dos embargos na ApelRemNec 5000161-72.2019.4.03.6002 (DJEN 06/05/2026). 2) A minuta original tratava do Tema 1.416/STJ, sem pedido de suspensão nas razões; o parágrafo foi retirado, como na correção do item 66, e o ponto ficou em pendência. 3) Restituição administrativa vedada na fórmula adotada no item 74 (Tema 831/STF; Súmulas 269 e 271/STF).",
    "orientacao": "",
    "equipe": {
     "minuta": "José",
@@ -147,13 +147,64 @@
    ],
    "mpf": "ID 355942741",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. Monica Nobre), também citada aqui.",
-    "Confirmar o alcance da suspensão no Tema 1.416/STJ e se há ordem vigente no Tema 1.182/STJ.",
-    "Uniformizar com os itens 66 e 77 o fundamento da exclusão após a Lei 14.789/2023."
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Ementa",
+     "Reescrita no padrão do gabinete: seções em maiúsculas, uma ideia por item, questões reduzidas a duas; dispositivos e jurisprudência citados conforme o voto",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé: retirados dispositivos não usados (artigo 150, VI, a, da CF; artigo 927, III, do CPC; artigo 39, § 4º, da Lei 9.250/1995) e corrigido o plural indevido; incluídos os julgados efetivamente citados, com relator e data",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Sentença e razões da União na fórmula do gabinete, com os oito itens numerados e o pedido",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Transcrições longas (AgInt no AREsp 2.023.930, AgInt no REsp 1.813.018, ApelRemNec 5000264-80.2020.4.04.7113, REsp 1.968.755, ApelRemNec 5011026-63.2019.4.03.6000) substituídas por fundamentação direta e citação curta, como no item 66",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Lei 14.789/2023: incluído o fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Parágrafo sobre o Tema 1.416/STJ retirado: a suspensão não foi pedida; ponto em pendência",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Enfrentados os itens (3), (7) e (8) das razões: exclusões só por lei federal, liquidez do indébito e restituição por precatório",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+     "Corrigido"
+    ],
+    [
+     "Acórdão",
+     "Incluído, com a composição da sessão de 30/11/2026",
+     "Corrigido"
+    ]
    ],
-   "minuta": false
+   "pendencias": [
+    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+    "Confirmar nos autos o Acordo 687/2011 e os aditivos (IDs 354858307, 354858308 e 354858310): o enquadramento no grupo 1 depende deles."
+   ],
+   "minuta": true
   },
   {
    "sessao": "2026-11-30",
@@ -164,28 +215,110 @@
    "exequente": "LSL COMERCIO DE CEREAIS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
+   "grupo": "1",
    "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
+   "resultado": "Desprovimento da apelação e da remessa necessária [VALIDAR: depende da prova do crédito presumido]",
+   "modelo": "matriz IRPJ · grupo 1 (concessão mantida) — enquadramento a validar",
+   "variacoes": [
+    "L14",
+    "ORI"
+   ],
+   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+   "peculiaridades": "Mandado de segurança de comerciante de cereais (LSL Comércio de Cereais Ltda.), 4ª Vara Federal de Campo Grande. A sentença concedeu em parte: exclusão incondicionada do crédito presumido, abstenção de óbices à certidão e de cobrança, demais benefícios condicionados aos requisitos legais (dispensada só a prova do estímulo) e compensação após 29/03/2018. A minuta afirma crédito presumido pelo Decreto estadual 9.889/2000 e pelo Convênio ICMS 100/1997, sem ID da prova.",
+   "peculiaridades_relator": "1) Ponto decisivo a validar nos autos: a minuta funda o crédito presumido no Convênio ICMS 100/1997, que trata de redução de base de cálculo de insumos agropecuários. Se o benefício fruído for redução de base, e não crédito presumido, o caso sai do grupo 1 e pode inverter o resultado, como ocorreu no item 73. 2) A versão corrigida explicita que os demais benefícios seguem o artigo 30 enquanto vigente e, depois, a Lei 14.789/2023, com o fundamento uniformizado com o item 66. Avaliar se a ressalva temporal pede parcial provimento à remessa necessária, já que a sentença condicionou os demais benefícios ao artigo 30 sem limite de tempo. 3) Retirados, por não pedidos, o parágrafo sobre o Tema 1.416/STJ e o tratamento da restituição administrativa, que a sentença não concedeu.",
    "orientacao": "",
    "equipe": {
     "minuta": "José",
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório)."
+   "pecas": [
+    {
+     "id": "301500627",
+     "tipo": "Sentença"
+    },
+    {
+     "id": "301500630",
+     "tipo": "Apelação da União"
+    },
+    {
+     "id": "301500734",
+     "tipo": "Contrarrazões"
+    },
+    {
+     "id": "302213218",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    },
+    {
+     "id": "306589620",
+     "tipo": "Recebimento da apelação no efeito devolutivo"
+    }
    ],
-   "minuta": false
+   "mpf": "ID 302213218",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Ementa",
+     "Reescrita no padrão do gabinete; questões reduzidas a duas; rodapé limitado aos dispositivos e julgados usados no voto, com relator e data",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Retirados do rodapé artigo 100 e artigo 150, VI, a, da CF, artigo 927, III, do CPC, artigo 39, § 4º, da Lei 9.250/1995, Tema 831/STF e Súmulas 269, 271/STF e 461/STJ, não usados na versão corrigida",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Dispositivo da sentença organizado em quatro itens, incluída a abstenção de óbices à certidão; razões da União com o pedido",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Transcrições longas substituídas por fundamentação direta, como no item 66",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Enfrentada a tese (4) da União: a sentença já manteve os requisitos legais para os demais benefícios, em harmonia com o Tema 1.182/STJ",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Lei 14.789/2023: demais benefícios sujeitos ao artigo 30 enquanto vigente e depois ao novo regime, com a ApelRemNec 5000161-72.2019.4.03.6002",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Espécie do benefício marcada [VALIDAR]: Convênio ICMS 100/1997 é redução de base de cálculo, sem ID da prova",
+     "Validar"
+    ],
+    [
+     "Voto",
+     "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+     "Corrigido"
+    ],
+    [
+     "Acórdão",
+     "Incluído, com a composição da sessão de 30/11/2026",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Confirmar nos autos a espécie do benefício fruído (crédito presumido ou redução de base de cálculo) e o ID da prova do Decreto estadual 9.889/2000 e do Convênio ICMS 100/1997.",
+    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação."
+   ],
+   "minuta": true
   },
   {
    "sessao": "2026-11-30",
