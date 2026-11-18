@@ -1890,7 +1890,8 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <div class="r2"><label>Data do fechamento<input type="date" id="ped-fech-data" required></label><div class="ac"><button type="button" class="b pri" id="ped-fech-gerar">Gerar bloco dos pedidos</button> <button type="button" class="b" id="ped-fech-completo">Gerar fechamento completo</button></div></div>
     <div id="ped-fech-prev" hidden>
       <label>Dr. Muta<textarea readonly id="ped-fech-muta"></textarea></label>
-      <div class="ac"><button type="button" class="b" data-ped-copiar="muta">Copiar para o Dr. Muta</button></div>
+      <div class="ac"><button type="button" class="b" data-ped-copiar="muta">Copiar para o Dr. Muta</button>
+        <a class="b pri" data-ped-copiar="muta" data-ped-whatsapp href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">Copiar e abrir WhatsApp Web</a></div>
       <label>Equipe<textarea readonly id="ped-fech-equipe"></textarea></label>
       <div class="ac"><button type="button" class="b" data-ped-copiar="equipe">Copiar para a equipe</button></div>
     </div>
@@ -3538,9 +3539,13 @@ $('#ped-fech-completo').onclick=async function(){
 };
 $('#ped-fech').addEventListener('click',function(e){
   var b=e.target.closest('[data-ped-copiar]');if(!b)return;
-  var campo=$('#ped-fech-'+b.dataset.pedCopiar);
-  function selecionar(){campo.focus();campo.select();toast('Texto selecionado para copiar.');}
-  if(navigator.clipboard)navigator.clipboard.writeText(campo.value).then(function(){toast('Bloco copiado.');},selecionar);
+  var campo=$('#ped-fech-'+b.dataset.pedCopiar), whatsapp=b.hasAttribute('data-ped-whatsapp');
+  var texto=campo.value;
+  if(!texto.trim()){e.preventDefault();toast('Gere o fechamento primeiro.');return;}
+  function selecionar(){campo.focus();campo.select();toast(whatsapp?'Texto selecionado. Copie e cole na conversa do Dr. Muta.':'Texto selecionado para copiar.');}
+  if(navigator.clipboard)navigator.clipboard.writeText(texto).then(function(){
+    toast(whatsapp?'Texto copiado. Cole na conversa do Dr. Muta no WhatsApp Web.':'Bloco copiado.');
+  },selecionar);
   else selecionar();
 });
 /* ================= avisos do gestor: título, texto, link, importância, onde aparece e quem recebe ================= */
