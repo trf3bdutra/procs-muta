@@ -1887,7 +1887,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
   </details>
   <details class="av-comp" id="ped-fech" hidden>
     <summary>Pedidos no fechamento diário</summary>
-    <div class="r2"><label>Data do fechamento<input type="date" id="ped-fech-data" required></label><div class="ac"><button type="button" class="b pri" id="ped-fech-gerar">Gerar bloco dos pedidos</button></div></div>
+    <div class="r2"><label>Data do fechamento<input type="date" id="ped-fech-data" required></label><div class="ac"><button type="button" class="b pri" id="ped-fech-gerar">Gerar bloco dos pedidos</button> <button type="button" class="b" id="ped-fech-completo">Gerar fechamento completo</button></div></div>
     <div id="ped-fech-prev" hidden>
       <label>Dr. Muta<textarea readonly id="ped-fech-muta"></textarea></label>
       <div class="ac"><button type="button" class="b" data-ped-copiar="muta">Copiar para o Dr. Muta</button></div>
@@ -3496,6 +3496,45 @@ $('#ped-fech-gerar').onclick=function(){
     $('#ped-fech-prev').hidden=false;status.textContent=pedidos.length+' '+(pedidos.length===1?'pedido':'pedidos')+' no fechamento.';
   }).catch(function(e){status.textContent=e.message||'Falha ao gerar o fechamento.';})
     .finally(function(){b.disabled=false;campo.disabled=false;});
+};
+$('#ped-fech-completo').onclick=async function(){
+  var b=this, status=$('#ped-fech-status'), hoje=pedDia();
+  if($('#ped-fech-data').value!==hoje){status.textContent='Para o fechamento completo, selecione a data de hoje.';return;}
+  b.disabled=true;$('#ped-fech-gerar').disabled=true;$('#ped-fech-data').disabled=true;
+  $('#ped-fech-prev').hidden=true;status.textContent='Consultando o gabinete…';
+  try{
+    var dados=await Promise.all([api('/api/painel?cmt=1'),api(PED_URI+'&fechamento=1&data='+hoje)]);
+    var j=dados[0], pedidos=dados[1].registros||[], pauta=j.pauta||{}, assinaturas=j.assinar||{};
+    if(!j.fontes||!j.fontes.ficha||!j.fontes.calendario||!j.fontes.duvidas)throw new Error('Não foi possível consultar todas as fontes do gabinete.');
+    var hora=new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Campo_Grande',hour:'2-digit',minute:'2-digit'}).format(new Date());
+    var cabecalho=' · FECHAMENTO DE '+br(hoje)+'*\nPosição às '+hora+'.';
+    var lista=function(titulo,itens){return '\n\n*'+titulo+'*\n'+(itens.length?itens.map(function(t){return '• '+t;}).join('\n'):'Nenhum registro.');};
+    var resumo=function(s){return 'Sessão de '+br(s.date)+' · '+s.liberadas+'/'+s.processos+' liberados · '+s.minutadas+' minutados · '+s.corrigidas+' corrigidos';};
+    var sessoes=(j.sessoes||[]).filter(function(s){return s.date>=hoje;}).map(resumo);
+    var prod=(j.producao||{})[hoje]||{};
+    var producao=lista('MINUTAS DO DIA',[(prod.voto||0)+' votos · '+(prod.mono||0)+' monocráticas']);
+    var pendencias=(assinaturas.assinatura||[]).map(function(x){return x.cnj+' · assinatura';})
+      .concat((assinaturas.liberacao||[]).map(function(x){return x.cnj+' · liberação';}),
+        (pauta.itens||[]).filter(function(x){return x.etapa==='corrigido';}).map(function(x){
+          return (x.item?'Item '+x.item+' · ':'')+x.cnj+' · liberação · sessão de '+br(pauta.date);
+        }));
+    var duvidas=(j.duvidas||[]).map(function(x){return [x.numero,x.titulo,x.texto].filter(Boolean).join(' · ');});
+    var urgencias=(j.urgencias||[]).map(function(x){return [x.cnj,x.tipo,x.situacao].filter(Boolean).join(' · ');});
+    var prazos=(j.prazos||[]).filter(function(x){return x.sessao>=hoje;}).map(function(x){return [br(x.data),x.marco,'sessão de '+br(x.sessao)].join(' · ');});
+    var porSessao={};
+    var pedidosDetalhes=pedidos.map(function(x){
+      var chave=x.data||'';
+      porSessao[chave]=(porSessao[chave]||0)+1;
+      return [x.data&&'Sessão de '+br(x.data),x.vinculo&&x.vinculo.item&&'item '+x.vinculo.item,x.cnj,x.titulo,!x.vinculo&&'a vincular'].filter(Boolean).join(' · ');
+    });
+    var pedidosEquipe=Object.keys(porSessao).sort().map(function(data){return (data?'Sessão de '+br(data):'Sessão sem data')+' · '+porSessao[data];});
+    var quadro=lista('PAUTAS',sessoes);
+    $('#ped-fech-muta').value='*GABINETE'+cabecalho+lista('PARA SUA PROVIDÊNCIA',pendencias)+lista('URGÊNCIAS EM ABERTO',urgencias)+lista('DÚVIDAS',duvidas)+
+      lista('PREFERÊNCIAS E SUSTENTAÇÕES ORAIS',pedidosDetalhes)+quadro+producao;
+    $('#ped-fech-equipe').value='*EQUIPE'+cabecalho+lista('PRÓXIMOS MARCOS',prazos)+quadro+producao+lista('PREFERÊNCIAS E SUSTENTAÇÕES ORAIS',pedidosEquipe);
+    $('#ped-fech-prev').hidden=false;status.textContent='Fechamentos gerados para copiar.';
+  }catch(e){status.textContent=e.message||'Falha ao gerar os fechamentos.';}
+  finally{b.disabled=false;$('#ped-fech-gerar').disabled=false;$('#ped-fech-data').disabled=false;}
 };
 $('#ped-fech').addEventListener('click',function(e){
   var b=e.target.closest('[data-ped-copiar]');if(!b)return;
