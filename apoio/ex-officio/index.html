@@ -1798,9 +1798,11 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <i class="star" aria-hidden="true"></i>
       <div class="cmt-hd2-t"><p class="cmt-ey">Gabinete CMT · acesso do relator</p><p class="cmt-hd2-h">Painel do <em>relator.</em></p></div>
       <span class="cmt-sp"></span>
-      <button type="button" class="cmt-hb" id="cmt-b-not" data-cdt="n">Notificações<i id="cmt-n-not">0</i></button>
-      <button type="button" class="cmt-hb" id="cmt-b-dil" data-cdt="g">Diligências<i id="cmt-n-dil">0</i></button>
-      <button type="button" class="cmt-hb" id="cmt-atu2">Atualizar</button>
+      <div class="cmt-ut">
+        <button type="button" class="hb hbx nx-tx" id="cmt-b-not" data-cdt="n" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="cmt-n-not" hidden></i></button>
+        <button type="button" class="hb hbx nx-tx" id="cmt-b-dil" data-cdt="g" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="cmt-n-dil" hidden></i></button>
+        <button type="button" class="hb ic" id="cmt-atu2" title="Atualizar" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button>
+      </div>
     </div>
 
     <section class="cmt-q cmt-dk" id="cmt-pauta">
@@ -1829,7 +1831,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
 
     <aside class="cmt-dr" id="cmt-dr" data-t="a">
       <div class="cmt-dr-h" id="cmt-dr-h">
-        <button type="button" class="cmt-dr-k" id="cmt-dr-k" aria-expanded="false" aria-controls="cmt-dr-b">Painéis</button>
+        <button type="button" class="cmt-dr-k" id="cmt-dr-k" aria-expanded="false" aria-controls="cmt-dr-b"><span>Painéis</span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
         <div class="cmt-rail" id="cmt-rail"></div>
       </div>
       <div class="cmt-dr-b" id="cmt-dr-b">
@@ -4218,8 +4220,7 @@ if(e.key==='Escape'&&$('#cmt-dr')&&$('#cmt-dr').classList.contains('on'))cmtGave
 function cmtNotif(){
 var j=CMT.dados||{},L=j.notificacoes||[],el=$('#cmt-l-not'),n=$('#cmt-n-not2'),h=$('#cmt-n-not');
 if(n)n.textContent=L.length?L.length+(L.length===1?' aviso':' avisos'):'nenhum';
-if(h)h.textContent=L.length;
-var bh=$('#cmt-b-not');if(bh)bh.classList.toggle('on',L.length>0);
+if(h){h.textContent=L.length;h.hidden=!L.length;}
 if(!el)return;
 el.innerHTML=L.length?L.map(function(x){return '<div class="cmt-it2'+(x.tipo==='comunicado'?' co':'')+'"><b>'+esc(x.titulo||'')+'</b><small>'+esc([x.de,x.numero,x.em?br(String(x.em).slice(0,10)):''].filter(Boolean).join(' · '))+'</small>'+(x.texto?'<p>'+esc(x.texto)+'</p>':'')+'</div>';}).join(''):'<p class="cmt-vazio">Nenhuma notificação.</p>';}
 function cmtDilig(){
@@ -4227,8 +4228,7 @@ var j=CMT.dados||{},T=j.diligencias||[],f=CMT.dilf||'comigo';
 var L=f==='comigo'?T.filter(function(x){return x.minha;}):f==='minhas'?T.filter(function(x){return x.dele;}):T;
 var el=$('#cmt-l-dil'),n=$('#cmt-n-dil2'),h=$('#cmt-n-dil');
 if(n)n.textContent=L.length+' de '+T.length;
-if(h)h.textContent=T.filter(function(x){return x.minha;}).length;
-var bh=$('#cmt-b-dil');if(bh)bh.classList.toggle('on',T.some(function(x){return x.minha;}));
+var nm=T.filter(function(x){return x.minha;}).length;if(h){h.textContent=nm;h.hidden=!nm;}
 [].forEach.call(document.querySelectorAll('[data-cdf]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cdf')===f));});
 if(!el)return;
 el.innerHTML=L.length?L.map(function(x){return '<div class="cmt-it2'+(x.minha?' eu':'')+'"><b>'+(x.pedido?'<em class="cmt-tg">pedido</em>':'')+esc(x.titulo||'')+'</b><small>'+esc([x.etapa,x.prioridade,x.para?'com '+x.para:'sem destinatário',x.de?'de '+x.de:'',x.prazo?'prazo '+br(x.prazo):'',x.em?br(String(x.em).slice(0,10)):''].filter(Boolean).join(' · '))+'</small>'+(x.texto?'<p>'+esc(x.texto)+'</p>':'')+'</div>';}).join(''):'<p class="cmt-vazio">Nada neste recorte.</p>';}
@@ -7130,6 +7130,50 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
 @media (max-width:780px){#v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}#v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq input{height:40px}}
 #v-cmt .cmt-sit .st.so.on{border-color:#9cc0e0;background:#e3eef8;color:#245b8c}
 #v-cmt .cmt-sit .st.sel{border-color:var(--ei);background:var(--ei);color:var(--ew)}
+
+/* lingueta da gaveta: uma faixa só, com o número de cada painel */
+#v-cmt .cmt-dr-h{width:62px;gap:0;padding:0;background:var(--ew);border:1px solid var(--el);border-right:0;box-shadow:-2px 0 0 rgba(32,59,57,.04)}
+#v-cmt .cmt-dr-k{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:9px 0 8px;writing-mode:horizontal-tb;transform:none;border-bottom:1px solid var(--el);font:400 7.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-dr-k svg{opacity:.6}
+#v-cmt .cmt-dr.on .cmt-dr-k svg{transform:rotate(180deg)}
+#v-cmt .cmt-dr-h:hover .cmt-dr-k{color:var(--ei)}
+#v-cmt .cmt-rail{flex-direction:column;gap:0;width:100%}
+#v-cmt .cmt-rail button{position:relative;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:100%;height:46px;padding:0;border:0;border-bottom:1px solid var(--el);border-left:2px solid transparent;background:var(--ew)}
+#v-cmt .cmt-rail button:last-child{border-bottom:0}
+#v-cmt .cmt-rail button i{font-size:15px;font-weight:700;line-height:1}
+#v-cmt .cmt-rail button small{font-size:7px;letter-spacing:.06em}
+#v-cmt .cmt-rail button.ok{border-left-color:#9fd0b6;background:var(--ew)}
+#v-cmt .cmt-rail button.al{border-left-color:#ecc9b8;background:var(--ew)}
+#v-cmt .cmt-rail button.inf{border-left-color:#9cc0e0;background:var(--ew)}
+#v-cmt .cmt-rail button.hj{box-shadow:none}
+#v-cmt .cmt-rail button.hj i::after{content:"";display:inline-block;width:4px;height:4px;margin-left:3px;border-radius:50%;background:var(--er);vertical-align:3px}
+#v-cmt .cmt-rail button:hover{background:var(--ep)}
+#v-cmt .cmt-rail button s{top:4px;right:4px;min-width:14px;line-height:12px;font-size:8px}
+@media (max-width:1100px){
+  #v-cmt .cmt-dr-h{width:auto;flex-direction:row;align-items:stretch;padding:0}
+  #v-cmt .cmt-dr-k{flex-direction:row;gap:6px;width:auto;padding:0 12px;border-bottom:0;border-right:1px solid var(--el)}
+  #v-cmt .cmt-dr-k svg{transform:rotate(90deg)}
+  #v-cmt .cmt-dr.on .cmt-dr-k svg{transform:rotate(-90deg)}
+  #v-cmt .cmt-rail{flex-direction:row;width:auto;flex:1}
+  #v-cmt .cmt-rail button{flex:1;height:52px;border-bottom:0;border-left:0;border-top:2px solid transparent}
+  #v-cmt .cmt-rail button.ok{border-top-color:#9fd0b6}
+  #v-cmt .cmt-rail button.al{border-top-color:#ecc9b8}
+  #v-cmt .cmt-rail button.inf{border-top-color:#9cc0e0}
+  #v-cmt .cmt-rail button small{font-size:8.5px}
+}
+
+/* cabeçalho do relator no padrão do cabeçalho do Ex Officio */
+#v-cmt .cmt-ut{display:flex;align-items:center;gap:2px;white-space:nowrap}
+#v-cmt .cmt-hd2 .hb{border:0;background:none;border-radius:0;color:var(--ei);font-family:var(--emono);font-weight:400;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:0 9px;min-height:34px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;position:relative}
+#v-cmt .cmt-hd2 .hb:hover{color:var(--eo2)}
+#v-cmt .cmt-hd2 .hb.nx-tx svg{display:none}
+#v-cmt .cmt-hd2 .hb.ic{min-width:34px;padding:0 8px;justify-content:center;color:var(--ei2)}
+#v-cmt .cmt-hd2 .bdg{position:static;min-width:0;height:auto;border-radius:0;background:var(--eo2);color:#fff;font:400 10.5px/1.3 var(--emono);font-style:normal;padding:1px 5px;letter-spacing:0}
+@media (max-width:780px){
+  #v-cmt .cmt-hd2 .hb.nx-tx svg{display:block}
+  #v-cmt .cmt-hd2 .hb{padding:0 7px;font-size:9.5px}
+  #v-cmt .cmt-ut{flex:1 1 100%;justify-content:flex-end;border-top:1px solid var(--el);padding-top:6px}
+}
 </style>
 </body>
 </html>
