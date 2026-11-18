@@ -1,11 +1,14 @@
 /* GET  /api/sessoes                 sessões publicadas para a equipe (marcos e, se liberada, a listagem) (acervo/sessoes/calendario.json) e o expediente
    GET  /api/sessoes?agenda=1        agenda do calendário (acervo/sessoes/agenda.json: afazeres, alertas, eventos, prazos-limite, datas e ausências)
                                      e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json: aprovadas = confirmadas, pendentes = previstas)
-   POST /api/sessoes?agenda=1 {itens, feitos}   grava a agenda (só o gestor; a mesma agenda do CMT-monitor) */
+   POST /api/sessoes?agenda=1 {itens, feitos}   grava a agenda (só o gestor; a mesma agenda do CMT-monitor)
+   /api/sessoes?pedidos=1            pedidos de sustentação oral e preferência recebidos por e-mail (ver _pedidos.js) */
 const L = require('./_lib');
 const AG = 'acervo/sessoes/agenda.json', SOL = 'apoio/equipe-solicitacoes.json';
 const nada = e => { if (e.status === 404) return { dados: null, sha: undefined }; throw e; };
 module.exports = async (req, res) => {
+  /* pedidos de sustentação oral e preferência (webhook do AgentMail e lista da equipe): ver _pedidos.js */
+  if (req.query && req.query.pedidos) return require('./_pedidos')(req, res);
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
   try {
