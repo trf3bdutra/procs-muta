@@ -119,7 +119,9 @@ async function painel(req, res, u) {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
         const v = String(b.valor || '').trim();
         if (v && !/^(Retirado|Adiado)$/i.test(v)) return res.status(400).json({ erro: 'Situação inválida.' });
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { resultado: v } }, u, true);
+        const campos = { resultado: v };
+        if (typeof b.obs === 'string' && b.obs.trim()) campos.obs = b.obs.trim().slice(0, 2000);
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos }, u, true);
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, resultado: v });
       }

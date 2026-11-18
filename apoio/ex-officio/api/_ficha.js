@@ -67,6 +67,10 @@ const V = {
   parecer: v => ({ triagem: { 'MPF': { 'Com parecer': 'Com Parecer', 'Aguardando parecer': 'Sem Parecer', 'Intimado sem manifestação': 'Sem Parecer' }[v] || '' } }),
   prelim: v => ({ triagem: { 'Prelim.': v } }),
   intercor: v => ({ triagem: { 'Intercorrências': v } }),
+  /* retirada e adiamento decididos pelo relator: vão ao Status de Julgamento da ficha */
+  resultado: v => (/^retirad/i.test(v) ? { pauta: { 'Status de Julgamento': 'RETIRADO DE PAUTA' } }
+    : /^adiad/i.test(v) ? { pauta: { 'Status de Julgamento': 'ADIADO' } }
+    : String(v || '').trim() === '' ? { pauta: { 'Status de Julgamento': 'PAUTADO' } } : {}),
   resJulg: v => ({ producao: { 'Voto - Resultado': v } }),
   honor: v => ({ producao: { 'Voto - Honorários': v } }),
   topico: v => ({ producao: { 'Tópico-síntese': v } }),
