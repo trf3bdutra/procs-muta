@@ -1883,6 +1883,10 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
   <details class="av-comp" id="av-hist" hidden><summary>Histórico de avisos <span id="av-hn"></span></summary><div id="av-hl"></div></details>
   <details class="av-comp" id="ped-list" hidden>
     <summary>Preferências e sustentações orais <span id="ped-total"></span></summary>
+    <div class="ac" id="ped-recon-actions" hidden>
+      <button type="button" class="b" id="ped-reconciliar">Verificar vínculos pendentes</button>
+    </div>
+    <p class="mut" id="ped-recon-status" role="status" hidden></p>
     <div id="ped-reg" aria-live="polite"></div>
   </details>
   <details class="av-comp" id="ped-fech" hidden>
@@ -3423,12 +3427,27 @@ function pedCard(dialogo,data,cnj){
     box.innerHTML=pedidos.length?pedidos.map(function(p){return '<article>'+pedResumo(p)+'</article>';}).join(''):'';
   }).catch(function(e){box.textContent=e.message||'Falha ao consultar os pedidos.';});
 }
+var pedMotivos=new Map();
+$('#ped-reconciliar').onclick=async function(){
+  var botao=this,status=$('#ped-recon-status');
+  botao.disabled=true;status.hidden=false;status.textContent='Conferindo os CNJs nas pautas publicadas…';
+  try{
+    var j=await api(PED_URI,{method:'POST',body:JSON.stringify({reconciliar:true})});
+    var resultados=j.resultados||[], vinculados=resultados.filter(function(r){return r.estado==='vinculado';}).length;
+    pedMotivos=new Map(resultados.filter(function(r){return r.motivo;}).map(function(r){return [r.id,r.motivo];}));
+    status.textContent=resultados.length ? vinculados+' vínculo(s) atualizado(s) · '+(resultados.length-vinculados)+' pedido(s) pendente(s).' : 'Nenhum pedido pendente.';
+    await pedCarregar();
+    if(vinculados){notificacoes();if(S.fonte==='pauta'&&!nPend())carregar(true);}
+  }catch(e){status.textContent=e.message||'Falha ao verificar os vínculos.';}
+  finally{botao.disabled=false;}
+};
 function pedCarregar(foco){
   var box=$('#ped-reg'), seq=++pedSeq;
   if(!box.children.length)box.textContent='Carregando pedidos…';
   return api(PED_URI).then(function(j){
     if(seq!==pedSeq)return;
     var pedidos=j.registros||[];
+    $('#ped-recon-actions').hidden=!U.gestor||!pedidos.some(function(p){return !p.vinculo;});
     $('#ped-total').textContent=pedidos.length?'('+pedidos.length+')':'';
     box.innerHTML=pedidos.map(function(p){
       var ir=p.vinculo&&S.calP&&S.calP.some(function(s){return s.date===p.vinculo.sessao;});
@@ -3437,7 +3456,9 @@ function pedCarregar(foco){
         '<label>Data da sessão<input required type="date" name="data" value="'+esc(p.data||'')+'"></label>'+
         '<label>Processo<input required type="text" name="cnj" maxlength="25" value="'+esc(p.cnj)+'"></label></div>'+
         '<div class="ac"><button class="b" type="submit">Vincular à pauta</button></div></form>':'';
-      return '<article class="ped-card" data-ped-card="'+esc(p.id)+'" tabindex="-1">'+pedResumo(p)+abrir+vincular+'</article>';
+      var motivo=!p.vinculo&&pedMotivos.get(p.id);
+      return '<article class="ped-card" data-ped-card="'+esc(p.id)+'" tabindex="-1">'+pedResumo(p)+
+        (motivo?'<p class="mut">'+esc(motivo)+'</p>':'')+abrir+vincular+'</article>';
     }).join('')||'<p class="mut">Nenhum pedido disponível.</p>';
     if(foco){var card=Array.from(box.children).find(function(x){return x.dataset.pedCard===foco;});if(card){card.focus();card.scrollIntoView({block:'nearest'});}}
   }).catch(function(e){if(seq===pedSeq)box.textContent=e.message||'Falha ao consultar os pedidos.';});
