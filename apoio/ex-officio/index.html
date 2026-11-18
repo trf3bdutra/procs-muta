@@ -7576,6 +7576,42 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
   #v-cmt .cmt-placar .cmt-prog{padding:8px 14px 9px}
   #v-cmt .cmt-placar .cmt-prog .lg{flex-wrap:wrap;gap:2px 10px;font-size:10px}
 }
+
+/* ===== Telefone: a listagem em fichas compactas ===== */
+@media (max-width:780px){
+  #v-cmt .cmt-tw{margin:0 -14px}
+  #v-cmt .cmt-tb tr{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;grid-template-areas:"sel item cnj cnj" "sel assunto assunto assunto" "sel etapa etapa etapa" "sel resp resp acoes";column-gap:8px;row-gap:0;margin:8px 14px;padding:10px 12px;border:1px solid var(--el);border-top:1px solid var(--el2);background:var(--ew)}
+  #v-cmt .cmt-tb td{padding:0;border:0}
+  #v-cmt .cmt-tb td.cmt-sel{grid-area:sel;position:static;align-self:start;padding-top:2px}
+  #v-cmt .cmt-tb td.cmt-ii{grid-area:item;align-self:center;font-size:9.5px;letter-spacing:.14em;color:var(--eo2)}
+  #v-cmt .cmt-tb td.cmt-ii::before{content:'Item '}
+  #v-cmt .cmt-tb td.cnj{grid-area:cnj;align-self:center;font-size:13px;font-weight:600;color:var(--eg)}
+  #v-cmt .cmt-tb td.cmt-asc{grid-area:assunto;margin:3px 0 0;font-size:13.5px;line-height:1.3}
+  #v-cmt .cmt-tb td.cmt-asc .as small{display:block;margin-top:1px;font-size:11px;color:var(--em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #v-cmt .cmt-tb td.cmt-asc .cmt-at2{margin-top:3px}
+  #v-cmt .cmt-tb td.cmt-tr{grid-area:etapa;align-self:center;justify-self:start;margin-top:9px;padding-top:9px;border-top:1px dashed var(--el);width:100%}
+  #v-cmt .cmt-tb td.cmt-tr[data-l]:not(.cmt-asc)::before{display:none}
+  #v-cmt .cmt-tb td[data-l="Servidor"]{grid-area:resp;align-self:center;margin-top:8px;padding-top:8px;border-top:1px dashed var(--el);font:400 9.5px var(--emono);letter-spacing:.04em;text-transform:uppercase;color:var(--em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  #v-cmt .cmt-tb td[data-l="Servidor"]::before{content:none}
+  #v-cmt .cmt-tb td.cmt-acd{grid-area:acoes;align-self:center;justify-self:end;margin-top:8px;padding-top:6px}
+  #v-cmt .cmt-tb td.cmt-acd[data-l]:not(.cmt-asc)::before{display:none}
+  /* etapa: só os ícones, e o botão de liberar com rótulo */
+  #v-cmt .cmt-tb .cmt-trl2{display:inline-flex;flex-wrap:nowrap;gap:0;align-items:center}
+  #v-cmt .cmt-tb .cmt-trl2 u{display:block;width:6px}
+  #v-cmt .cmt-tb .cmt-pa{padding:0;gap:0}
+  #v-cmt .cmt-tb .cmt-pa b{display:none}
+  #v-cmt .cmt-tb .cmt-pa i{width:24px;height:24px}
+  #v-cmt .cmt-tb button.cmt-pa[data-cl]{gap:5px;padding:0 9px 0 4px;height:30px;border:1px solid var(--el);border-radius:999px;margin-left:4px}
+  #v-cmt .cmt-tb button.cmt-pa[data-cl] b{display:inline;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase}
+  #v-cmt .cmt-tb button.cmt-pa[data-cl].s3{border-color:#c7b0e6;background:#efe8f8}
+  #v-cmt .cmt-tb .cmt-pa.sr,#v-cmt .cmt-tb .cmt-pa.sa{gap:5px;padding:0 9px 0 4px;height:30px;border:1px solid currentColor;border-radius:999px;margin-left:4px}
+  #v-cmt .cmt-tb .cmt-pa.sr b,#v-cmt .cmt-tb .cmt-pa.sa b{display:inline;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase}
+  /* ações compactas */
+  #v-cmt .cmt-tb td.cmt-acd .cmt-abs{display:inline-flex;gap:4px;width:auto}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-ab{flex:0 0 32px;width:32px;height:32px;border:1px solid var(--el);border-radius:0;opacity:.8}
+  #v-cmt .cmt-tb td.cmt-at{display:none}
+  #v-cmt .cmt-tb td.cmt-sel input{width:18px;height:18px}
+}
 </style>
 </body>
 </html>
