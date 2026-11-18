@@ -62,7 +62,18 @@ module.exports = async (req, res, u) => {
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const b = req.body || {}, cnj = String(b.cnj || '');
     if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'Número do processo inválido: informe os 20 dígitos do CNJ.' });
-    return res.status(200).json(await gravarMono(cnj, b.campos, u, L.gestor(u)));
+    const salvo = await gravarMono(cnj, b.campos, u, L.gestor(u));
+    if (salvo.novaUrgencia) {
+      let codigo;
+      await require('./_comunicar')({
+        method: 'POST', query: {}, body: {
+          titulo: 'URGÊNCIA · PARA CIÊNCIA', cnjs: [cnj],
+          texto: [cnj, salvo.item.ctl.urgTipo, salvo.item.ctl.urgNivel, salvo.item.ctl.urgEm].filter(Boolean).join(' · '),
+        },
+      }, { setHeader() {}, status(n) { codigo = n; return this; }, json(dados) { salvo.whatsapp = dados.whatsapp; } }, u);
+      salvo.avisoUrgencia = codigo === 200 ? 'registrado' : 'falhou';
+    }
+    return res.status(200).json(salvo);
   } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
 /* grava o registro de monocrática/urgência; gestorOk: pode designar */
@@ -82,7 +93,7 @@ async function gravarMono(cnj, campos, u, gestorOk) {
         else if (k !== 'cartao' && (x[k] || '') !== String(C[k] || '')) { x[k] = String(C[k] || ''); mx = true; } });
       if (mx) { c[EXTRA] = JSON.stringify(x); out.push('controles.Monocrática - ' + EXTRA); }
     }, u);
-    return { ok: true, item: item(r), semMudanca: !out.length };
+    return { ok: true, item: item(r), semMudanca: !out.length, novaUrgencia: !!C.urgTipo && out.includes('triagem.Urgência') };
 }
 module.exports.gravarMono = gravarMono;
 module.exports.item = item;
