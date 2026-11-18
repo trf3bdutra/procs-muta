@@ -3979,7 +3979,11 @@ function cmtMarcos(){
 /* pauta da sessão aberta: filtros por etapa e busca por item, número, assunto ou servidor */
 function cmtFiltra(){
   var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'aliberar',q=(CMT.q||'').trim().toLowerCase();
-  var L=f==='todos'?it.slice():f==='aliberar'?it.filter(function(x){return x.etapa!=='liberado';}):f==='retido'?it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;}):it.filter(function(x){return x.etapa===f;});
+  var L=f==='todos'?it.slice():f==='aliberar'?it.filter(function(x){return x.etapa!=='liberado';}):f==='retido'?it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;})
+    :f==='sopref'?it.filter(function(x){return !!x.sopref;})
+    :f==='retirado'?it.filter(function(x){return /^retirad/i.test(x.resultado||'');})
+    :f==='adiado'?it.filter(function(x){return /^adiad/i.test(x.resultado||'');})
+    :it.filter(function(x){return x.etapa===f;});
   if(q){var md=CMT.qm||'tudo',fx=/^\d+(?:\s*[-,]\s*\d+)*$/.test(q),qd=q.replace(/\D/g,'');
     var porItem=function(x){if(!fx)return false;var n=parseInt(x.item,10);if(isNaN(n))return false;
       return q.split(/\s*,\s*/).some(function(p){var r=p.split('-');return r.length>1?(n>=+r[0]&&n<=+r[1]):+p===n;});};
@@ -3999,7 +4003,7 @@ function cmtPauta(){
   $('#cmt-ft').innerHTML=F.map(function(x){return '<button type="button" data-cf="'+x[0]+'" aria-pressed="'+((CMT.filtro||'aliberar')===x[0])+'">'+x[1]+'<i>'+(cta[x[0]]||0)+'</i></button>';}).join('');
   var L=cmtFiltra(),NOME={pendente:'Sem minuta',minutado:'Minutada',corrigido:'Corrigida',liberado:'Liberada'};
   $('#cmt-rows').innerHTML=L.length?L.map(function(x){
-    var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.meta)at.push('meta');
+    var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta');
     var lib=x.etapa==='liberado';
     var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];
     return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span>'+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+' em apreciação</span>':'')+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
@@ -4021,10 +4025,12 @@ function cmtPauta(){
   var rtd=it.filter(function(x){return /^retirad/i.test(x.resultado||'');}).length;
   var adiad=it.filter(function(x){return /^adiad/i.test(x.resultado||'');}).length;
   var pedl=(((CMT.dados||{}).pedidos)||[]);
-  var pr=pedl.filter(function(z){return /retirada/i.test(z.tipo);}).length,pa=pedl.length-pr;
   var sit=$('#cmt-sit');
-  if(sit)sit.innerHTML='<b class="st">'+rtd+' retirado'+(rtd===1?'':'s')+'</b><b class="st">'+adiad+' adiado'+(adiad===1?'':'s')+'</b>'+
-    '<button type="button" class="st pd'+(pedl.length?' on':'')+'" data-cdt="d" title="Abrir os pedidos no painel de dúvidas">'+pedl.length+' pedido'+(pedl.length===1?'':'s')+' em apreciação'+(pedl.length?' <i>'+pr+' retirada · '+pa+' adiamento</i>':'')+'</button>'+
+  var sop=it.filter(function(x){return !!x.sopref;}).length,fa=CMT.filtro||'aliberar';
+  if(sit)sit.innerHTML='<button type="button" class="st'+(fa==='retirado'?' sel':'')+'" data-cf="retirado" aria-pressed="'+(fa==='retirado')+'">'+rtd+' retirado'+(rtd===1?'':'s')+'</button>'+
+    '<button type="button" class="st'+(fa==='adiado'?' sel':'')+'" data-cf="adiado" aria-pressed="'+(fa==='adiado')+'">'+adiad+' adiado'+(adiad===1?'':'s')+'</button>'+
+    '<button type="button" class="st so'+(sop?' on':'')+(fa==='sopref'?' sel':'')+'" data-cf="sopref" aria-pressed="'+(fa==='sopref')+'" title="Sustentação oral ou preferência pedida">'+sop+' sustenta'+(sop===1?'ção':'ções')+' · preferência</button>'+
+    '<button type="button" class="st pd'+(pedl.length?' on':'')+'" data-cdt="d" title="Abrir os pedidos no painel de dúvidas">'+pedl.length+' pedido'+(pedl.length===1?'':'s')+' em apreciação</button>'+
     '<button type="button" class="st dv'+((CMT.dados||{}).duvidas&&(CMT.dados.duvidas||[]).length?' on':'')+'" data-cdt="d" title="Abrir o painel de dúvidas">'+((CMT.dados||{}).duvidas||[]).length+' dúvida'+(((CMT.dados||{}).duvidas||[]).length===1?'':'s')+'</button>';
   var elp=$('#cmt-n-pt');if(elp)elp.textContent=p.date?'sessão de '+br(p.date)+' · '+it.length+' processos':'—';
 var nas=it.filter(function(x){return x.assinado||x.dataAssinatura;}).length,npe=it.length-nmin;
@@ -4064,6 +4070,7 @@ cmtDlg(h,function(f){var t=f.tipo.value,tx=f.tx.value.trim();if(!tx)return Promi
     .then(function(){toast(t==='duvida'?'Dúvida registrada para a equipe.':'Pedido registrado; ele aparece em Dúvidas, para apreciação.');CMT.atualizado=0;cmtCarregar(sd);});});}
 function cmtAlertaDlg(x,at){
 var c=[];if(x.intercor)c.push('<p class="cmt-fc-k">Intercorrência'+(x.intercorOk?' (resolvida)':' (em aberto, retém a liberação)')+'</p><p class="q">'+esc(x.intercor)+'</p>');
+if(x.sopref)c.push('<p class="cmt-fc-k">Sustentação ou preferência</p><p class="q">'+esc(x.sopref)+'</p>');
 if(x.obs)c.push('<p class="cmt-fc-k">Observação</p><p class="q">'+esc(x.obs)+'</p>');
 if(x.meta)c.push('<p class="cmt-fc-k">Meta</p><p class="q">'+esc(x.meta)+'</p>');
 if(x.resultado)c.push('<p class="cmt-fc-k">Situação</p><p class="q">'+esc(x.resultado)+'</p>');
@@ -4077,7 +4084,7 @@ document.addEventListener('click',function(e){
 var b=e.target.closest&&e.target.closest('[data-ca]');if(!b)return;
 var cnj=b.getAttribute('data-cnj'),a=b.getAttribute('data-ca');
 var x=((((CMT.dados||{}).pauta)||{}).itens||[]).filter(function(y){return y.cnj===cnj;})[0];if(!x)return;
-var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.meta)at.push('meta '+x.meta);if(x.obs)at.push('observação');
+var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta '+x.meta);if(x.obs)at.push('observação');
 var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(cnj);})[0];
 if(a==='alerta'){cmtAlertaDlg(x,at);return;}
 if(a==='duvida'){cmtPedidoDlg(x,ped);return;}
@@ -7121,6 +7128,8 @@ body.cmt-pg #v-cmt .cmt-wrap{padding-top:10px}
 #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq input{width:100%;box-sizing:border-box}
 body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
 @media (max-width:780px){#v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}#v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq input{height:40px}}
+#v-cmt .cmt-sit .st.so.on{border-color:#9cc0e0;background:#e3eef8;color:#245b8c}
+#v-cmt .cmt-sit .st.sel{border-color:var(--ei);background:var(--ei);color:var(--ew)}
 </style>
 </body>
 </html>
