@@ -793,28 +793,114 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "NOVO MUNDO INDUSTRIA E COMERCIO DE ALIMENTOS LTDA",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
+   "grupo": "1",
    "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
+   "resultado": "Parcial provimento da apelação e da remessa necessária para afastar a repetição e a restituição administrativa do indébito, mantida a compensação",
+   "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com restituição afastada",
+   "variacoes": [
+    "L14",
+    "OUT",
+    "RES",
+    "ORI"
+   ],
+   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+   "peculiaridades": "Mandado de segurança (Novo Mundo Indústria e Comércio de Alimentos Ltda.), 1ª Vara Federal de Naviraí. Crédito outorgado de ICMS pelo Termo de Acordo 1.261/2020 e aditivos (ID 343867666), fruído só a partir de 2024, segundo as contrarrazões (ID 343867739). A sentença concedeu a exclusão e autorizou repetição ou compensação, inclusive por requerimento administrativo. A União apela também contra a restituição (Súmulas 269 e 271/STF; Tema 1.262/STF). Há pedido de sustentação oral por videoconferência (ID 408491479).",
+   "peculiaridades_relator": "1) Inversão parcial do resultado: a minuta original negava provimento, mas sua própria fundamentação vedava a restituição e a repetição em mandado de segurança, que a sentença concedeu e a União atacou. A versão corrigida dá parcial provimento para restringir o ressarcimento à compensação, na linha do item 74. 2) Como o incentivo só foi fruído a partir de 2024, todo o período está sob a Lei 14.789/2023: é a mesma pergunta dos itens 66 e 77, com o fundamento uniformizado. 3) Pedido de sustentação oral por videoconferência pendente de verificação. 4) Retirados a questão do Tema 1.416/STJ, não suscitada pelas partes, e o parágrafo sobre reconstituição da escrita fiscal, que não consta da sentença nem das razões relatadas.",
    "orientacao": "",
    "equipe": {
     "minuta": "Dalete",
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório)."
+   "pecas": [
+    {
+     "id": "343867666",
+     "tipo": "Termo de Acordo 1.261/2020 e aditivos — crédito outorgado de ICMS"
+    },
+    {
+     "id": "343867737",
+     "tipo": "Apelação da União"
+    },
+    {
+     "id": "343867739",
+     "tipo": "Contrarrazões (início da fruição em 2024)"
+    },
+    {
+     "id": "406285525",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    },
+    {
+     "id": "408491479",
+     "tipo": "Pedido de sustentação oral por videoconferência"
+    }
    ],
-   "minuta": false
+   "mpf": "ID 406285525",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Dispositivo",
+     "De 'nego provimento' para 'dou parcial provimento': a fundamentação vedava a repetição e a restituição concedidas na sentença e atacadas pela União",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Reescrita conforme o novo resultado; questões reduzidas a duas, retirada a do Tema 1.416/STJ, não suscitada",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé: o primeiro bloco, rotulado 'Jurisprudência relevante citada', era de dispositivos; corrigido o rótulo e depurados dispositivos e julgados",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "ID da sentença ausente: marcado [VALIDAR]; razões da União numeradas, com o Tema 1.262/STF invocado",
+     "Validar"
+    ],
+    [
+     "Voto",
+     "Crédito outorgado tratado como presumido: incluído o precedente 5028609-86.2018 (sinônimos), como no item 66",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Enfrentada a tese da isenção heterônoma (artigo 151, III, da CF)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Retirados o parágrafo do Tema 1.416/STJ e o da reconstituição da escrita fiscal",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+     "Corrigido"
+    ],
+    [
+     "Acórdão",
+     "Incluído, com a composição da sessão de 30/11/2026",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Validar com o Relator o parcial provimento (restituição e repetição afastadas).",
+    "Indicar o ID da sentença, ausente da minuta original.",
+    "Verificar o pedido de habilitação para sustentação oral por videoconferência (ID 408491479) e sua comunicação para a sessão de 30/11/2026.",
+    "Confirmar se a sentença ou a inicial trataram de recomposição da escrita fiscal, mencionada na minuta original.",
+    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE) e confirmar que não há suspensão vigente no Tema 1.416/STJ."
+   ],
+   "minuta": true
   },
   {
    "sessao": "2026-11-30",
