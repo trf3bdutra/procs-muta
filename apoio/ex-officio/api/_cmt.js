@@ -32,6 +32,37 @@ async function criarDiligencia(campos, u) {
 }
 /* pedidos de retirada e de adiamento: nascem no quadro da equipe e são apreciados pelo relator */
 const PEDIDO = /^Pedido de (retirada|adiamento)\b/i;
+/* cada entrada do relator no painel vira um aviso para o gestor da equipe (apoio/equipe-avisos.json) */
+const AVISOS = 'apoio/equipe-avisos.json';
+async function avisarAcesso(u) {
+  for (let t = 0; t < 3; t++) {
+    let dados, sha;
+    try { const r = await L.lerJson(AVISOS); dados = r.dados; sha = r.sha; }
+    catch (e) { if (e.status !== 404) throw e; dados = { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] }; }
+    dados.registros = dados.registros || [];
+    const agora = new Date(), q = new Date(agora.getTime() - 4 * 3600e3);
+    const dia = q.toISOString().slice(0, 10), hora = q.toISOString().slice(11, 16);
+    const ate = new Date(q.getTime() + 7 * 86400e3).toISOString().slice(0, 10);
+    const gestor = process.env.CMT_GESTOR || 'Bruno';
+    /* guarda as quatro entradas anteriores, para o gestor ver a sequência sem o arquivo crescer */
+    const acessos = dados.registros.filter(r => /^av-cmt-acesso-/.test(String(r.id || '')))
+      .sort((x, y) => String(x.time).localeCompare(String(y.time))).slice(-4);
+    dados.registros = dados.registros.filter(r => !/^av-cmt-acesso-/.test(String(r.id || ''))).concat(acessos);
+    const antigos = acessos.length;
+    dados.registros.push({
+      id: 'av-cmt-acesso-' + agora.getTime().toString(36),
+      time: agora.toISOString(), user: 'Painel do relator',
+      title: 'O relator entrou no painel',
+      message: 'Entrada em ' + dia.slice(8, 10) + '/' + dia.slice(5, 7) + '/' + dia.slice(0, 4) + ', às ' + hora + '.',
+      link: '/cmt/', linkTxt: 'Abrir o painel do relator',
+      nivel: 'info', painel: false, notificacao: true, para: [gestor], ate, fixo: false,
+    });
+    dados.atualizadoEm = agora.toISOString();
+    try { await L.gravarJson(AVISOS, dados, sha, 'Painel do relator: entrada registrada para ' + gestor); return antigos; }
+    catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+  }
+  return null;
+}
 async function responder(id, texto, u, manter, evento) {
   for (let n = 0; n < 4; n++) {
     const { dados, sha } = await lerPen(); dados.registros = dados.registros || [];
@@ -74,7 +105,7 @@ async function painel(req, res, u) {
      As duas gravam onde já era gravado — o item da pauta e a ficha única — e podem ser desfeitas. */
   if (req.method === 'POST') {
     const b = req.body || {}, cnj = String(b.cnj || '').trim();
-    if (!cnj && b.acao !== 'responder') return res.status(400).json({ erro: 'Informe o processo.' });
+    if (!cnj && b.acao !== 'responder' && b.acao !== 'acesso') return res.status(400).json({ erro: 'Informe o processo.' });
     try {
       if (b.acao === 'liberar') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
@@ -90,6 +121,11 @@ async function painel(req, res, u) {
         const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { resultado: v } }, u, true);
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, resultado: v });
+      }
+      /* entrada no painel: avisa o gestor, e nunca atrapalha quem está entrando */
+      if (b.acao === 'acesso') {
+        try { await avisarAcesso(u); } catch (e) { return res.status(200).json({ ok: false, erro: e.message }); }
+        return res.status(200).json({ ok: true });
       }
       if (b.acao === 'assinar') {
         await MONO.gravarMono(cnj, { dataAssinatura: b.desfazer ? '' : hj }, u, true);
