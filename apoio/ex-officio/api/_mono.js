@@ -73,6 +73,10 @@ module.exports = async (req, res, u) => {
       }, { setHeader() {}, status(n) { codigo = n; return this; }, json(dados) { salvo.whatsapp = dados.whatsapp; } }, u);
       salvo.avisoUrgencia = codigo === 200 ? 'registrado' : 'falhou';
     }
+    if (salvo.paraAssinatura && !salvo.item.ctl.urgTipo) {
+      const id = require('node:crypto').createHash('sha256').update(cnj+':'+salvo.item.dataLiberacao).digest('hex');
+      salvo.whatsappAssinatura = await require('./_alerta-wa').assinatura(id);
+    }
     return res.status(200).json(salvo);
   } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
@@ -93,7 +97,8 @@ async function gravarMono(cnj, campos, u, gestorOk) {
         else if (k !== 'cartao' && (x[k] || '') !== String(C[k] || '')) { x[k] = String(C[k] || ''); mx = true; } });
       if (mx) { c[EXTRA] = JSON.stringify(x); out.push('controles.Monocrática - ' + EXTRA); }
     }, u);
-    return { ok: true, item: item(r), semMudanca: !out.length, novaUrgencia: !!C.urgTipo && out.includes('triagem.Urgência') };
+    return { ok: true, item: item(r), semMudanca: !out.length, novaUrgencia: !!C.urgTipo && out.includes('triagem.Urgência'),
+      paraAssinatura: !!C.dataLiberacao && out.includes('producao.Data da Liberação') && item(r).mono && !item(r).assinado };
 }
 module.exports.gravarMono = gravarMono;
 module.exports.item = item;
