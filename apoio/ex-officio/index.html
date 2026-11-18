@@ -1794,43 +1794,6 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
   <div class="cmt-load" id="cmt-load"><i class="star"></i><p class="cmt-ld-k">Gabinete</p><p class="cmt-ld-t">Painel do <em>relator.</em></p><p class="cmt-ld-m" id="cmt-ld-m">Lendo a ficha única, o calendário das sessões e as pautas publicadas…</p><div class="cmt-ld-b"><i></i></div></div>
   <div class="cmt-wrap" id="cmt-wrap" hidden>
 
-    <div class="cmt-hd">
-      <i class="star" aria-hidden="true"></i>
-      <div class="cmt-hd-t"><p class="cmt-ey">Gabinete CMT · acesso do relator</p><h1>Painel do <em>relator.</em></h1></div>
-      <span class="cmt-hd-ln" aria-hidden="true"></span>
-      <div class="cmt-ind" id="cmt-ind"></div>
-      <span class="cmt-sp"></span>
-      <label class="cmt-bq cmt-bq-g"><span class="vh">Buscar processo</span><input type="search" id="cmt-busca" placeholder="Processo, parte ou assunto"></label>
-      <button type="button" class="b" id="cmt-atu">Atualizar</button>
-    </div>
-    <p class="cmt-sub" id="cmt-sub"></p>
-
-    <div class="cmt-grid" id="cmt-grid">
-      <section class="cmt-q cmt-ass" id="cmt-ass">
-        <h2><i class="nn">01</i>Para <em>assinar.</em>
-          <span class="cmt-seg" id="cmt-vis" role="group" aria-label="Modo de visualização"><button type="button" data-cvis="lista" aria-pressed="false">Lista</button><button type="button" data-cvis="fila" aria-pressed="true">Fila</button></span>
-          <span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-pos">—</span></h2>
-        <div class="cmt-fbar" id="cmt-fbar" aria-hidden="true"></div>
-        <div class="cmt-ass-b" id="cmt-c-ass"></div>
-        <div class="cmt-ass-ft" id="cmt-ass-ft"></div>
-      </section>
-
-      <aside class="cmt-side">
-        <section class="cmt-q cmt-urgp" id="cmt-urg-p">
-          <h2><i class="nn">02</i><em>Urgências.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-ur">—</span></h2>
-          <div class="cmt-uc" id="cmt-urg-c"></div>
-          <div class="cmt-urgl" id="cmt-l-urg"></div>
-          <p class="cmt-rod">Mesma lista da página Monocráticas.</p>
-        </section>
-
-        <section class="cmt-q cmt-dvp" id="cmt-dv-p">
-          <h2><i class="nn">03</i><em>Dúvidas.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-dv">—</span></h2>
-          <div class="cmt-dvl" id="cmt-c-dv"></div>
-          <div class="cmt-dvb" id="cmt-dv-aberta"></div>
-        </section>
-      </aside>
-    </div>
-
     <section class="cmt-q cmt-dk" id="cmt-pauta">
       <h2><i class="nn">04</i><span class="cmt-ti">Pauta da <em>sessão.</em></span><span class="cmt-n" id="cmt-n-pt">—</span>
         <span class="cmt-ses-sel" id="cmt-l-ses"></span>
@@ -1839,7 +1802,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <button type="button" class="b" id="cmt-selt">Selecionar exibidos</button>
         <button type="button" class="b" id="cmt-libl" disabled>Liberar selecionados</button>
         <button type="button" class="b" id="cmt-csv">CSV</button>
-        <button type="button" class="b cmt-solo-b" id="cmt-solo" title="Só a pauta e a listagem (Esc para sair)">Modo pauta</button>
+        
       </h2>
       <div class="cmt-met" id="cmt-met"></div>
       <div class="cmt-prog" id="cmt-prog"></div>
@@ -1848,31 +1811,69 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
     </section>
 
-    <details class="cmt-mais" id="cmt-mais">
-      <summary>Calendário, marcos, comunicados e equipe</summary>
-      <div class="cmt-mais-b">
-        <section class="cmt-q cmt-pan"><h2>Calendário do <em>gabinete.</em><span class="cmt-sp"></span><span class="cmt-n">produção por dia</span></h2>
-          <div class="cmt-cal-w"><div class="cmt-cal-h"><button type="button" class="cmt-mb" data-mes="-1" aria-label="Mês anterior">‹</button><b id="cmt-mes">—</b><button type="button" class="cmt-mb" data-mes="1" aria-label="Próximo mês">›</button><button type="button" class="cmt-hoje" id="cmt-hoje">Hoje</button></div>
-            <div id="cmt-cal"></div>
-            <div class="cmt-tot" id="cmt-tot"></div>
-          </div>
-          <div class="cmt-mar"><p class="cmt-k" id="cmt-mar-t">Marcos das próximas sessões</p><div class="cmt-ses3" id="cmt-ml"></div></div>
-          <div class="cmt-pzw"><p class="cmt-k">Marcos vencendo</p><div id="cmt-l-pz"></div></div>
-        </section>
-
-        <section class="cmt-q"><h2>Comunicados da <em>equipe.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-com">—</span></h2>
-          <div id="cmt-c-com"></div>
-        </section>
-
-        <section class="cmt-q" id="cmt-eq"><h2>Equipe e <em>ausências.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-eq">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Produção nas pautas publicadas</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
-
-        <section class="cmt-q cmt-ed" id="cmt-editor"><h2>Editor do Compendium <span class="cmt-n" id="cmt-n-ed">fechado</span><span class="cmt-sp"></span><a class="cmt-out" id="cmt-ed-out" href="/editor/" target="_blank" rel="noopener">Abrir em outra aba ↗</a><button type="button" class="b" id="cmt-ed-ab">Abrir aqui</button></h2>
-          <div class="cmt-ed-b" id="cmt-ed-b" hidden><iframe id="cmt-ed-f" title="Editor do Compendium" loading="lazy"></iframe></div></section>
-
-        <p class="cmt-fontes" id="cmt-fontes"></p>
-        <span hidden id="cmt-n-ad"></span><span hidden id="cmt-n-ass"></span><span hidden id="cmt-n-lib"></span><div hidden id="cmt-c-lib"></div>
+    <aside class="cmt-dr" id="cmt-dr">
+      <button type="button" class="cmt-dr-h" id="cmt-dr-h" aria-expanded="false" aria-controls="cmt-dr-b"><span class="cmt-dr-k">Painéis</span><span class="cmt-rail" id="cmt-rail"></span></button>
+      <div class="cmt-dr-b" id="cmt-dr-b">
+      <div class="cmt-dr-t">
+        <p class="cmt-ey">Gabinete CMT · acesso do relator</p>
+        <button type="button" class="cmt-dr-x" id="cmt-dr-x" aria-label="Fechar painéis">Fechar</button>
+        <label class="cmt-bq cmt-bq-g"><span class="vh">Buscar processo</span><input type="search" id="cmt-busca" placeholder="Processo, parte ou assunto"></label>
+        <button type="button" class="b" id="cmt-atu">Atualizar</button>
+        <div class="cmt-ind" id="cmt-ind"></div>
+        <p class="cmt-sub" id="cmt-sub"></p>
       </div>
-    </details>
+    <div class="cmt-grid" id="cmt-grid">
+        <section class="cmt-q cmt-ass" id="cmt-ass">
+          <h2><i class="nn">01</i>Para <em>assinar.</em>
+            <span class="cmt-seg" id="cmt-vis" role="group" aria-label="Modo de visualização"><button type="button" data-cvis="lista" aria-pressed="false">Lista</button><button type="button" data-cvis="fila" aria-pressed="true">Fila</button></span>
+            <span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-pos">—</span></h2>
+          <div class="cmt-fbar" id="cmt-fbar" aria-hidden="true"></div>
+          <div class="cmt-ass-b" id="cmt-c-ass"></div>
+          <div class="cmt-ass-ft" id="cmt-ass-ft"></div>
+        </section>
+
+        <aside class="cmt-side">
+          <section class="cmt-q cmt-urgp" id="cmt-urg-p">
+            <h2><i class="nn">02</i><em>Urgências.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-ur">—</span></h2>
+            <div class="cmt-uc" id="cmt-urg-c"></div>
+            <div class="cmt-urgl" id="cmt-l-urg"></div>
+            <p class="cmt-rod">Mesma lista da página Monocráticas.</p>
+          </section>
+
+          <section class="cmt-q cmt-dvp" id="cmt-dv-p">
+            <h2><i class="nn">03</i><em>Dúvidas.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-dv">—</span></h2>
+            <div class="cmt-dvl" id="cmt-c-dv"></div>
+            <div class="cmt-dvb" id="cmt-dv-aberta"></div>
+          </section>
+        </aside>
+      </div>
+    <details class="cmt-mais" id="cmt-mais">
+        <summary>Calendário, marcos, comunicados e equipe</summary>
+        <div class="cmt-mais-b">
+          <section class="cmt-q cmt-pan"><h2>Calendário do <em>gabinete.</em><span class="cmt-sp"></span><span class="cmt-n">produção por dia</span></h2>
+            <div class="cmt-cal-w"><div class="cmt-cal-h"><button type="button" class="cmt-mb" data-mes="-1" aria-label="Mês anterior">‹</button><b id="cmt-mes">—</b><button type="button" class="cmt-mb" data-mes="1" aria-label="Próximo mês">›</button><button type="button" class="cmt-hoje" id="cmt-hoje">Hoje</button></div>
+              <div id="cmt-cal"></div>
+              <div class="cmt-tot" id="cmt-tot"></div>
+            </div>
+            <div class="cmt-mar"><p class="cmt-k" id="cmt-mar-t">Marcos das próximas sessões</p><div class="cmt-ses3" id="cmt-ml"></div></div>
+            <div class="cmt-pzw"><p class="cmt-k">Marcos vencendo</p><div id="cmt-l-pz"></div></div>
+          </section>
+
+          <section class="cmt-q"><h2>Comunicados da <em>equipe.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-com">—</span></h2>
+            <div id="cmt-c-com"></div>
+          </section>
+
+          <section class="cmt-q" id="cmt-eq"><h2>Equipe e <em>ausências.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-eq">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Produção nas pautas publicadas</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
+
+          <section class="cmt-q cmt-ed" id="cmt-editor"><h2>Editor do Compendium <span class="cmt-n" id="cmt-n-ed">fechado</span><span class="cmt-sp"></span><a class="cmt-out" id="cmt-ed-out" href="/editor/" target="_blank" rel="noopener">Abrir em outra aba ↗</a><button type="button" class="b" id="cmt-ed-ab">Abrir aqui</button></h2>
+            <div class="cmt-ed-b" id="cmt-ed-b" hidden><iframe id="cmt-ed-f" title="Editor do Compendium" loading="lazy"></iframe></div></section>
+
+          <p class="cmt-fontes" id="cmt-fontes"></p>
+          <span hidden id="cmt-n-ad"></span><span hidden id="cmt-n-ass"></span><span hidden id="cmt-n-lib"></span><div hidden id="cmt-c-lib"></div>
+        </div>
+      </details>
+      </div>
+    </aside>
 
   </div>
 </main>
@@ -4038,11 +4039,31 @@ ab.innerHTML='<p class="cmt-fc-n">'+esc(x.numero||x.titulo||'—')+'</p>'+(x.pri
 '<p class="cmt-fc-k">Devolutiva</p><label class="vh" for="cmt-dv-tx">Devolutiva</label><textarea id="cmt-dv-tx" rows="4" placeholder="Escreva a orientação à equipe…"></textarea>'+
 '<div class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder'+(x.de?' a '+esc(x.de):'')+'</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></div>';}
 /* indicadores do cabeçalho */
+/* gaveta lateral: começa recolhida; a lingueta mostra os números e marca o que mudou desde a última abertura */
+function cmtVisto(){try{return JSON.parse(localStorage.getItem('cmt_visto')||'{}');}catch(e){return {};}}
+function cmtRail(na,nu,nd,hj){
+var el=$('#cmt-rail');if(!el)return;
+var v=cmtVisto(),d=function(k,n){var a=Number(v[k]);return (isFinite(a)&&n>a)?(n-a):0;};
+var it=[['a','ok',na,'assinar',d('a',na)],['u','al'+(hj?' hj':''),nu,'urgências',d('u',nu)],['d','inf',nd,'dúvidas',d('d',nd)]];
+el.innerHTML=it.map(function(x){return '<b class="'+x[1]+(x[4]?' nov':'')+'"><i>'+x[2]+'</i><small>'+x[3]+'</small>'+(x[4]?'<s title="'+x[4]+' desde a última abertura">+'+x[4]+'</s>':'')+'</b>';}).join('');
+var h=$('#cmt-dr-h');if(h)h.classList.toggle('nov',it.some(function(x){return x[4];}));}
+function cmtGaveta(ab){
+var g=$('#cmt-dr'),h=$('#cmt-dr-h');if(!g)return;
+g.classList.toggle('on',ab);document.body.classList.toggle('cmt-dr-on',ab);
+if(h)h.setAttribute('aria-expanded',String(!!ab));
+if(ab){var j=CMT.dados||{},as=j.assinar||{};
+  try{localStorage.setItem('cmt_visto',JSON.stringify({a:(as.assinatura||[]).length,u:(j.urgencias||[]).length,d:(j.duvidas||[]).length}));}catch(e){}
+  cmtInd();var q=$('#cmt-busca');if(q)q.focus();}}
+document.addEventListener('click',function(e){
+if(e.target.closest('#cmt-dr-h')){cmtGaveta(!$('#cmt-dr').classList.contains('on'));return;}
+if(e.target.closest('#cmt-dr-x')){cmtGaveta(false);return;}});
+document.addEventListener('keydown',function(e){
+if(e.key==='Escape'&&$('#cmt-dr')&&$('#cmt-dr').classList.contains('on'))cmtGaveta(false);});
 function cmtInd(){
 var j=CMT.dados||{},as=j.assinar||{},el=$('#cmt-ind');if(!el)return;
 var na=(as.assinatura||[]).length,nu=(j.urgencias||[]).length,nd=(j.duvidas||[]).length;
 var hj=(j.urgencias||[]).filter(function(x){return x.espera===0;}).length;
-el.innerHTML='<b class="ok">'+na+(na===1?' a assinar':' a assinar')+'</b><b class="al">'+nu+(nu===1?' urgência':' urgências')+(hj?' · '+hj+' hoje':'')+'</b><b class="inf">'+nd+(nd===1?' dúvida':' dúvidas')+'</b>';}
+cmtRail(na,nu,nd,hj);el.innerHTML='<b class="ok">'+na+(na===1?' a assinar':' a assinar')+'</b><b class="al">'+nu+(nu===1?' urgência':' urgências')+(hj?' · '+hj+' hoje':'')+'</b><b class="inf">'+nd+(nd===1?' dúvida':' dúvidas')+'</b>';}
 function cmtPinta(){
   var j=CMT.dados;if(!j)return;$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
   var as=j.assinar||{assinatura:[],liberacao:[]};
@@ -6621,6 +6642,52 @@ body.cmt-solo header.nx .nx1{height:44px}
   #v-cmt #cmt-pauta{margin-top:26px}
   #v-cmt .cmt-ses-sel{max-width:170px}
 }
+
+/* ===== Painel do relator: gaveta lateral dos painéis 01-03 e do bloco "mais" ===== */
+#v-cmt .cmt-wrap{padding-right:58px}
+#v-cmt #cmt-pauta{margin-top:18px}
+#v-cmt .cmt-dr{position:fixed;inset:0;z-index:60;pointer-events:none}
+#v-cmt .cmt-dr-h{position:absolute;top:84px;right:0;z-index:2;pointer-events:auto;display:flex;flex-direction:column;align-items:center;gap:10px;width:46px;padding:12px 0 14px;border:1px solid var(--el);border-right:0;border-top:2px solid var(--eg);background:var(--ew);cursor:pointer;box-shadow:-2px 0 0 rgba(32,59,57,.04)}
+#v-cmt .cmt-dr-h:hover{background:var(--ep2)}
+#v-cmt .cmt-dr-h.nov{border-top-color:var(--eo)}
+#v-cmt .cmt-dr-k{writing-mode:vertical-rl;transform:rotate(180deg);font:400 9.5px var(--emono);letter-spacing:.18em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-rail{display:flex;flex-direction:column;gap:8px;width:100%;align-items:center}
+#v-cmt .cmt-rail b{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:34px;padding:4px 0 3px;border:1px solid var(--el);background:var(--ep);line-height:1}
+#v-cmt .cmt-rail b i{font-style:normal;font-size:13px;font-weight:750;color:var(--ei)}
+#v-cmt .cmt-rail b small{margin-top:2px;font:400 7.5px var(--emono);letter-spacing:.06em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-rail b.ok{border-color:#9fd0b6;background:#e3f0ea}#v-cmt .cmt-rail b.ok i{color:#1f6a43}
+#v-cmt .cmt-rail b.al{border-color:#ecc9b8;background:#fdf6f3}#v-cmt .cmt-rail b.al i{color:var(--er)}
+#v-cmt .cmt-rail b.inf{border-color:#9cc0e0;background:#e3eef8}#v-cmt .cmt-rail b.inf i{color:#245b8c}
+#v-cmt .cmt-rail b s{position:absolute;top:-6px;right:-8px;min-width:16px;padding:0 3px;border:1px solid var(--eo2);background:var(--eo);color:#fff;font:700 9px var(--emono);line-height:14px;text-align:center;text-decoration:none}
+#v-cmt .cmt-dr-b{pointer-events:auto;position:absolute;top:0;right:0;bottom:0;width:min(460px,94vw);overflow:auto;padding:16px 18px 60px;background:var(--ep);border-left:1px solid var(--el);box-shadow:-18px 0 40px rgba(32,59,57,.10);transform:translateX(101%);transition:transform .22s ease;visibility:hidden}
+#v-cmt .cmt-dr.on .cmt-dr-b{transform:none;visibility:visible}
+#v-cmt .cmt-dr.on .cmt-dr-h{right:min(460px,94vw)}
+#v-cmt .cmt-dr-h{transition:right .22s ease}
+#v-cmt .cmt-dr-t{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid var(--el)}
+#v-cmt .cmt-dr-t .cmt-ey{flex:1 1 auto;margin:0;font:400 9.5px var(--emono);letter-spacing:.18em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-dr-t .cmt-ind{flex:1 1 100%;margin-top:2px}
+#v-cmt .cmt-dr-t .cmt-sub{flex:1 1 100%;margin:0}
+#v-cmt .cmt-dr-t .cmt-bq-g{flex:1 1 200px}
+#v-cmt .cmt-dr-t .cmt-bq-g input{width:100%}
+#v-cmt .cmt-dr-x{border:1px solid var(--el);background:var(--ew);color:var(--em);font:400 9.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;cursor:pointer}
+#v-cmt .cmt-dr-x:hover{color:var(--ei);border-color:var(--ei)}
+#v-cmt .cmt-dr .cmt-grid{display:block;margin-top:18px}
+#v-cmt .cmt-dr .cmt-side{display:block;margin-top:22px}
+#v-cmt .cmt-dr .cmt-q{margin-bottom:22px}
+#v-cmt .cmt-dr .cmt-mais{margin-top:4px}
+@media (max-width:1100px){
+  #v-cmt .cmt-wrap{padding-right:0;padding-bottom:74px}
+  #v-cmt .cmt-dr-h{top:auto;bottom:0;right:0;left:0;flex-direction:row;justify-content:center;gap:14px;width:auto;padding:8px 12px;border:1px solid var(--el);border-top:2px solid var(--eg)}
+  #v-cmt .cmt-dr.on .cmt-dr-h{right:0}
+  #v-cmt .cmt-dr-k{writing-mode:horizontal-tb;transform:none}
+  #v-cmt .cmt-rail{flex-direction:row;width:auto}
+  #v-cmt .cmt-dr-b{width:100%;padding-bottom:84px}
+}
+#v-cmt .cmt-dr-h{width:54px}
+#v-cmt .cmt-rail b{width:42px;padding:5px 0 4px}
+#v-cmt .cmt-rail b small{font-size:7px;letter-spacing:.02em}
+#v-cmt .cmt-rail b.hj{box-shadow:inset 0 2px 0 var(--er)}
+@media (max-width:1100px){#v-cmt .cmt-dr-h{width:auto}#v-cmt .cmt-rail b{width:52px}}
 </style>
 </body>
 </html>
