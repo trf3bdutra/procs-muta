@@ -59,11 +59,12 @@ function porChave(req) {
   try { return crypto.timingSafeEqual(Buffer.from(vinda), Buffer.from(esperada)); } catch (e) { return false; }
 }
 /* toda a resposta passa por aqui: erro de leitura vira 500 com mensagem, nunca queda da função */
-module.exports.porChave = porChave;
 module.exports = async (req, res, u) => {
   try { await painel(req, res, u); }
   catch (e) { if (!res.headersSent) res.status(e.status || 500).json({ erro: e.message }); }
 };
+/* depois da atribuição de module.exports: antes ficava acima e se perdia (CMT.porChave chegava undefined no painel.js) */
+module.exports.porChave = porChave;
 async function painel(req, res, u) {
   res.setHeader('Cache-Control', 'no-store');
   const a = await L.acessos(u);

@@ -1,4 +1,5 @@
-/* Painel de lotes (/lotes/): página própria, fora da navegação do Ex Officio, com o mesmo login (cookie cmt_eq).
+/* Painel de lotes (/lotes/): página própria, desenhada como parte do Painel do relator (/cmt), com o mesmo acesso:
+   login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE).
    GET /api/lote                       lotes disponíveis (acervo/lotes/*.json: id, título, descrição, sessões)
    GET /api/lote?id=2886               o lote (matriz, perfis e painel), com o cartão do prontuário de cada processo
                                        tirado, na hora, da sessão em acervo/sessoes/AAAA-MM-DD.json
@@ -8,7 +9,9 @@ const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/;
 const nada = e => { if (e.status === 404) return { dados: null }; throw e; };
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-  const u = L.exigir(req, res); if (!u) return;
+  const CMT = require('./_cmt');
+  const u = L.quem(req) || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
+  if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   if (req.method !== 'GET') return res.status(405).json({ erro: 'método não aceito' });
   try {
     const id = String(req.query.id || '');
