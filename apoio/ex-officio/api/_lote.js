@@ -24,6 +24,9 @@
                                                e voltam iguais se a sessão for associada de novo
    POST ?lote=1 {acao:'editar', id, titulo, descricao, filtro, visivel}  título, descrição, filtro e visibilidade do lote inteiro
                                                (visivel {equipe, relator}: false tira o lote do seletor e da página da equipe ou do relator)
+   POST ?lote=1 {acao:'substituir', id, de, para, processos:[X]}   troca um trecho em várias minutas do lote (acervo/minutas/<id>/X.json),
+                                               num só commit; o trecho casa ignorando espaços, aspas e travessões; cada minuta
+                                               alterada guarda a edição em "edicoes". Não mexe no PJe: só na cópia do painel de lotes.
    POST ?lote=1 {acao:'visivel', id, itens:[{sessao, processo, equipe, relator}]}   visibilidade (relator: 'auto', true ou false) */
 const L = require('./_lib');
 const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/, DATA = /^\d{4}-\d{2}-\d{2}$/;
@@ -42,6 +45,11 @@ function passa(x, f) {
   if (f.classe && !sem(x.classe).includes(sem(f.classe))) return false;
   if (f.texto && !sem([x.assunto, x.classe, x.partes, x.obs, x.cnj].join(' ')).includes(sem(f.texto))) return false;
   return true;
+}
+/* trecho → expressão regular: espaços quaisquer entre as palavras, aspas e travessões de qualquer tipo (o mesmo da página) */
+function rxTrecho(de) {
+  const t = String(de || '').trim().split(/\s+/).filter(Boolean).map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/["“”«»]/g, '["“”«»]').replace(/['‘’`´]/g, "['‘’`´]").replace(/[–—]|-(?![^\[]*\])/g, '[-–—]'));
+  return new RegExp(t.join('\\s+'), 'g');
 }
 function situacao(x) { return x.dataLiberacao ? 'Liberada' : x.dataCorrecao ? 'Corrigida' : x.dataMinuta ? 'Minutada' : 'A minutar'; }
 const ORDEM = { 'A minutar': 1, 'Minutada': 2, 'Corrigida': 3, 'Liberada': 4 };
@@ -196,6 +204,30 @@ async function gravar(req, res, u, gestor) {
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
+  }
+  if (b.acao === 'substituir') {
+    const de = String(b.de || ''), para = String(b.para || '');
+    if (de.trim().length < 10) return res.status(400).json({ erro: 'O trecho precisa de ao menos 10 caracteres.' });
+    if (de.length > 6000 || para.length > 6000) return res.status(400).json({ erro: 'Trecho longo demais.' });
+    if (de.trim() === para.trim()) return res.status(400).json({ erro: 'O texto novo é igual ao trecho.' });
+    const procs = [...new Set((Array.isArray(b.processos) ? b.processos : []).map(String).filter(x => PROC.test(x)))].slice(0, 400);
+    if (!procs.length) return res.status(400).json({ erro: 'Escolha ao menos um processo.' });
+    const re = rxTrecho(de), arqs = [], feitos = [], agora = new Date();
+    for (const x of procs) {
+      const path = 'acervo/minutas/' + id + '/' + x + '.json';
+      const { dados, sha } = await L.lerJson(path).catch(nada);
+      if (!dados || !dados.secoes) continue;
+      let n = 0;
+      for (const k of Object.keys(dados.secoes)) dados.secoes[k] = (dados.secoes[k] || []).map(t => String(t).replace(re, () => { n++; return para; }));
+      if (!n) continue;
+      dados.atualizado_em = agora.toISOString().slice(0, 10);
+      (dados.edicoes = dados.edicoes || []).push({ em: agora.toISOString(), por: u, ocorrencias: n, de: de.slice(0, 300), para: para.slice(0, 300) });
+      arqs.push({ path, sha, txt: JSON.stringify(dados, null, 1) + '\n' }); feitos.push({ processo: x, n });
+    }
+    if (!arqs.length) return res.status(200).json({ ok: true, alterados: 0, ocorrencias: 0, feitos });
+    try { await L.commitArquivos(arqs, 'Lotes (' + u + '): trecho substituído em ' + arqs.length + ' minuta(s) do lote ' + id); }
+    catch (e) { if (e.status === 409) return res.status(409).json({ erro: 'Uma das minutas mudou enquanto isso; tente de novo.' }); throw e; }
+    return res.status(200).json({ ok: true, alterados: arqs.length, ocorrencias: feitos.reduce((a, f) => a + f.n, 0), feitos });
   }
   if (b.acao === 'editar' || b.acao === 'visivel') {
     for (let t = 0; t < 4; t++) {

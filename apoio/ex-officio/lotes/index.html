@@ -201,6 +201,10 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 .cx-out .eq{color:var(--em);font:400 10.5px var(--emono);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;padding:4px 0;border-top:1px dashed var(--el);border-bottom:1px dashed var(--el);text-align:center}
 .cx-out .so{opacity:.6}
 .cx-lg{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--em);margin-top:6px}
+.cx-nt{margin:0 0 10px;padding:8px 10px;border-left:3px solid var(--eo);background:var(--ep2);font-size:12px;line-height:1.5;color:var(--em)}
+.tr-c{border-top:1px solid var(--el);padding:7px 0;cursor:pointer;font-size:12.5px;line-height:1.45;color:var(--ei)}.tr-c:hover{background:var(--ep2)}
+.tr-c b{font:400 10px var(--emono);letter-spacing:.08em;color:var(--eo2);margin-right:6px}
+.tr-i{display:flex;gap:8px;align-items:baseline;border-top:1px solid var(--el);padding:6px 0;font-size:12.5px;color:var(--ei)}.tr-i small{color:var(--em);font:400 10.5px var(--emono)}
 .cx-q{width:100%;height:34px;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:14px var(--font);padding:0 10px}
 .cx-r{border-top:1px solid var(--el);padding:10px 0;cursor:pointer}
 .cx-r:hover{background:var(--ep2)}
@@ -353,7 +357,7 @@ function painel(uid){
   if(!$('#cx')){
     const com=ITENS.filter(i=>i.minuta);
     document.body.insertAdjacentHTML('beforeend',`<aside class="lx-cx cv" id="cx" aria-label="Comparar e buscar"><div class="cx-h"><div><p class="lx-ey" style="margin:0">Painel lateral</p><b>Comparar e <em>buscar.</em></b></div><span class="cmt-sp"></span><button type="button" class="b" id="cx-x">Fechar</button></div>
-    <div class="cx-sw"><span class="cmt-seg" role="group" aria-label="Modo do painel"><button type="button" data-cx="cmp" aria-pressed="true">Comparar</button><button type="button" data-cx="bus" aria-pressed="false">Buscar no lote</button></span></div>
+    <div class="cx-sw"><span class="cmt-seg" role="group" aria-label="Modo do painel"><button type="button" data-cx="cmp" aria-pressed="true">Comparar</button><button type="button" data-cx="bus" aria-pressed="false">Buscar no lote</button>${MODO==='cg'?'<button type="button" data-cx="tre" aria-pressed="false">Trechos em lote</button>':''}</span></div>
     <div class="cx-c" id="cx-cmp"><div class="form">
       <label>Processo<select class="cmt-sel" id="cx-it">${com.map(i=>`<option value="${i.uid}">${br(i.sessao).slice(0,5)} · item ${pad(i.item)} · ${esc(i.processo.slice(0,15))} · ${esc(String(i.exequente).slice(0,28))}</option>`).join('')}</select></label>
       <label>Parte<select class="cmt-sel" id="cx-sec"><option value="*">Tudo</option>${SECS.map(([k,t])=>`<option value="${k}">${t[0]+t.slice(1).toLowerCase()}</option>`).join('')}</select></label>
@@ -363,14 +367,26 @@ function painel(uid){
       <div class="cx-out" id="cx-out"></div></div>
     <div class="cx-c hidden" id="cx-bus"><input type="search" class="cx-q" id="cx-q" placeholder="Buscar nas minutas e nos dados de todos os processos do lote">
       <div class="acts"><label><input type="checkbox" id="cx-fm"> mostrar na matriz só os processos encontrados</label><span class="k" id="cx-bst"></span></div>
-      <div id="cx-res"></div></div></aside>`);
+      <div id="cx-res"></div></div>
+    ${MODO==='cg'?`<div class="cx-c hidden" id="cx-tre">
+      <p class="cx-nt">Altera as minutas guardadas no painel de lotes (a cópia que aparece aqui e na página do Relator), não as do PJe. Cada alteração fica registrada e pode ser desfeita pelo histórico.</p>
+      <div class="form"><label class="w">Processos<select class="cmt-sel" id="tr-esc"></select></label></div>
+      <div class="acts"><button type="button" class="b" id="tr-com">Parágrafos comuns</button><span class="k" id="tr-cst"></span></div>
+      <div id="tr-lista"></div>
+      <div class="form"><label class="w">Trecho a localizar<textarea id="tr-de" placeholder="Cole o parágrafo ou o trecho padrão, ou escolha um em Parágrafos comuns"></textarea></label></div>
+      <div class="acts"><span class="k" id="tr-st"></span></div>
+      <div id="tr-res"></div>
+      <div class="form"><label class="w">Novo texto<textarea id="tr-para" placeholder="Edite aqui o texto que vai substituir o trecho nas minutas marcadas"></textarea></label></div>
+      <div class="cx-out" id="tr-prev"></div>
+      <div class="acts"><button type="button" class="b pri" id="tr-ok" disabled>Aplicar</button><span class="k" id="tr-m"></span></div></div>`:''}</aside>`);
     $('#cx-x').onclick=()=>painel(false);
-    document.querySelectorAll('[data-cx]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-cx]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));$('#cx-cmp').classList.toggle('hidden',b.dataset.cx!=='cmp');$('#cx-bus').classList.toggle('hidden',b.dataset.cx!=='bus');if(b.dataset.cx==='bus')$('#cx-q').focus()});
+    document.querySelectorAll('[data-cx]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-cx]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));['cmp','bus','tre'].forEach(k=>{const e=$('#cx-'+k);if(e)e.classList.toggle('hidden',b.dataset.cx!==k)});if(b.dataset.cx==='bus')$('#cx-q').focus();if(b.dataset.cx==='tre')trechos()});
     let t1=0,t2=0;
     ['cx-it','cx-sec','cx-ws','cx-sd'].forEach(id=>$('#'+id).onchange=compara);
     $('#cx-txt').oninput=()=>{clearTimeout(t1);t1=setTimeout(compara,350)};
     $('#cx-q').oninput=()=>{clearTimeout(t2);t2=setTimeout(busca,300)};
     $('#cx-fm').onchange=()=>{CX.filtra=$('#cx-fm').checked;filtra()};
+    if(MODO==='cg')ligaTrechos();
     if(!com.length)$('#cx-out').innerHTML='<p class="none">Nenhum processo deste lote tem minuta.</p>';
   }
   if(uid===false){CX.aberto=false;$('#cx').hidden=true;document.body.classList.remove('cx-on');CX.filtra=false;$('#cx-fm').checked=false;filtra();return}
@@ -424,6 +440,63 @@ async function busca(){
   st.textContent=`${total} ocorrência${total===1?'':'s'} em ${hits.size} processo${hits.size===1?'':'s'}`;
   res.querySelectorAll('[data-hit]').forEach(d=>d.onclick=()=>vai(d.dataset.hit));
   filtra();
+}
+/* ---------- trechos em lote (gestão): localizar processos pelo modelo ou por um trecho padrão e trocar o texto em todos ---------- */
+function rxTrecho(de){const t=String(de||'').trim().split(/\s+/).filter(Boolean).map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/["“”«»]/g,'["“”«»]').replace(/['‘’`´]/g,"['‘’`´]").replace(/[–—]|-(?![^\[]*\])/g,'[-–—]'));return new RegExp(t.join('\\s+'),'g')}
+const TR={marcados:new Set(),achados:[]};
+function escopo(){const v=$('#tr-esc').value;return ITENS.filter(i=>i.minuta&&(v==='*'||(v.startsWith('m:')&&i.modelo===v.slice(2))||(v.startsWith('g:')&&String(i.grupo||'')===v.slice(2))))}
+async function carregaTodas(st){const fal=ITENS.filter(i=>i.minuta&&!MDATA[i.uid]);if(!fal.length)return;let n=0;const fila=fal.slice();
+  await Promise.all(Array.from({length:6},async()=>{while(fila.length){const it=fila.shift();try{await getMin(it)}catch(e){}n++;if(st)st.textContent=`Lendo as minutas… ${n} de ${fal.length}`}}))}
+function ligaTrechos(){
+  const mods={};ITENS.filter(i=>i.minuta).forEach(i=>{mods[i.modelo||'—']=(mods[i.modelo||'—']||0)+1});
+  const grs=LOTE.grupos.map(g=>[g,ITENS.filter(i=>i.minuta&&i.grupo===g.id).length]).filter(x=>x[1]);
+  $('#tr-esc').innerHTML=`<option value="*">Todo o lote · ${ITENS.filter(i=>i.minuta).length} com minuta</option><optgroup label="Mesmo modelo">${Object.entries(mods).sort((a,b)=>b[1]-a[1]).map(([m,n])=>`<option value="m:${esc(m)}">${esc(m)} · ${n}</option>`).join('')}</optgroup><optgroup label="Mesmo grupo">${grs.map(([g,n])=>`<option value="g:${esc(g.id)}">${esc(g.rotulo)} · ${n}</option>`).join('')}</optgroup>`;
+  let t=0;
+  $('#tr-esc').onchange=()=>{$('#tr-lista').innerHTML='';trechos()};
+  $('#tr-com').onclick=comuns;
+  $('#tr-de').oninput=()=>{clearTimeout(t);t=setTimeout(trechos,350)};
+  $('#tr-para').oninput=()=>{clearTimeout(t);t=setTimeout(previa,250)};
+  $('#tr-ok').onclick=aplica;
+}
+async function comuns(){
+  const st=$('#tr-cst');await carregaTodas(st);const esc_=escopo(),fr=new Map();
+  esc_.forEach(it=>{const m=MDATA[it.uid];if(!m)return;const vistos=new Set();SECS.forEach(([k,t])=>(m.secoes[k]||[]).forEach(p=>{const n=nrm(p,true);if(n.length<60||vistos.has(n))return;vistos.add(n);const o=fr.get(n)||{n:0,p:String(p),sec:t};o.n++;fr.set(n,o)}))});
+  const L=[...fr.values()].filter(o=>o.n>1).sort((a,b)=>b.n-a.n).slice(0,40);
+  st.textContent=L.length?`${L.length} parágrafos se repetem em ${esc_.length} minutas`:'Nenhum parágrafo se repete';
+  $('#tr-lista').innerHTML=L.map((o,i)=>`<div class="tr-c" data-tc="${i}"><b>${o.n}× · ${o.sec[0]+o.sec.slice(1).toLowerCase()}</b>${esc(o.p.slice(0,220))}${o.p.length>220?'…':''}</div>`).join('');
+  $('#tr-lista').querySelectorAll('[data-tc]').forEach(d=>d.onclick=()=>{const o=L[+d.dataset.tc];$('#tr-de').value=o.p;$('#tr-para').value=o.p;trechos()});
+}
+async function trechos(){
+  const de=$('#tr-de').value,st=$('#tr-st'),res=$('#tr-res');
+  if(de.trim().length<10){TR.achados=[];res.innerHTML='';st.textContent=de.trim()?'O trecho precisa de ao menos 10 caracteres':'';previa();return}
+  await carregaTodas(st);const re=rxTrecho(de);TR.achados=[];
+  escopo().forEach(it=>{const m=MDATA[it.uid];if(!m)return;let n=0;const onde=new Set();SECS.forEach(([k,t])=>(m.secoes[k]||[]).forEach(p=>{const c=(String(p).match(re)||[]).length;if(c){n+=c;onde.add(t[0]+t.slice(1).toLowerCase())}}));if(n)TR.achados.push({it,n,onde:[...onde]})});
+  TR.marcados=new Set(TR.achados.map(a=>a.it.uid));
+  const tot=TR.achados.reduce((a,x)=>a+x.n,0);
+  st.textContent=TR.achados.length?`${tot} ocorrência${tot>1?'s':''} em ${TR.achados.length} processo${TR.achados.length>1?'s':''}`:'Trecho não encontrado nas minutas';
+  res.innerHTML=TR.achados.map(a=>`<label class="tr-i"><input type="checkbox" data-tm="${a.it.uid}" checked><span>${br(a.it.sessao).slice(0,5)} · item ${pad(a.it.item)} · ${esc(a.it.processo.slice(0,15))} · ${esc(String(a.it.exequente).slice(0,26))}</span><small>${a.n}× · ${a.onde.join(', ')}</small></label>`).join('');
+  res.querySelectorAll('[data-tm]').forEach(c=>c.onchange=()=>{c.checked?TR.marcados.add(c.dataset.tm):TR.marcados.delete(c.dataset.tm);previa()});
+  CX.hits=new Set(TR.achados.map(a=>a.it.uid));filtra();
+  previa();
+}
+function previa(){
+  const de=$('#tr-de').value,para=$('#tr-para').value,ok=$('#tr-ok'),pv=$('#tr-prev'),n=[...TR.marcados].length;
+  const muda=de.trim().length>=10&&para.trim()!==de.trim()&&n>0;
+  ok.disabled=!muda;ok.textContent=muda?`Aplicar em ${n} minuta${n>1?'s':''}`:'Aplicar';ok.dataset.conf='';
+  $('#tr-m').textContent='';
+  if(!muda||!para.trim()){pv.innerHTML=muda&&!para.trim()?'<p class="none">O novo texto está vazio: o trecho será apagado.</p>':'';return}
+  const d=difPal(nrm(de,true),nrm(para,true),true);pv.innerHTML=`<h5>Como fica</h5><p>${d.h}</p>`;
+}
+async function aplica(){
+  const b=$('#tr-ok'),procs=TR.achados.filter(a=>TR.marcados.has(a.it.uid)).map(a=>a.it.processo.slice(0,10));
+  if(!b.dataset.conf){b.dataset.conf='1';b.textContent=`Confirmar: alterar ${procs.length} minuta${procs.length>1?'s':''}`;$('#tr-m').textContent='Clique de novo para confirmar.';return}
+  b.disabled=true;$('#tr-m').textContent='Gravando…';
+  try{const r=await post({acao:'substituir',id:LOTE.id,de:$('#tr-de').value,para:$('#tr-para').value,processos:procs});
+    TR.achados.forEach(a=>{if(TR.marcados.has(a.it.uid)){delete MDATA[a.it.uid];delete MIN[a.it.uid];const d=$('#d-'+a.it.uid);if(d){d.innerHTML='';d.classList.add('hidden')}const mb=$('#mb-'+a.it.uid);if(mb){mb.querySelectorAll('[data-cp]').forEach(x=>x.remove());const bt=mb.querySelector('[data-min]');if(bt)bt.textContent='Abrir minuta'}}});
+    toast(`${r.ocorrencias} trecho${r.ocorrencias>1?'s':''} trocado${r.ocorrencias>1?'s':''} em ${r.alterados} minuta${r.alterados>1?'s':''}`);
+    const fim=`Feito: ${r.ocorrencias} trecho${r.ocorrencias>1?'s':''} em ${r.alterados} minuta${r.alterados>1?'s':''}. Abaixo, o novo texto já localizado no lote.`;
+    $('#tr-de').value=$('#tr-para').value;TR.achados=[];TR.marcados=new Set();setTimeout(async()=>{await trechos();$('#tr-m').textContent=fim},300);
+  }catch(e){$('#tr-m').textContent='Não gravou: '+e.message;b.disabled=false;b.dataset.conf=''}
 }
 function dl(o){return '<dl>'+Object.entries(o).filter(([k,v])=>v).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')+'</dl>'}
 function perfil(it,i){
