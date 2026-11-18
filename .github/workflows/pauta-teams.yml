@@ -1,0 +1,72 @@
+name: Comunicar publicação da pauta no Teams
+on:
+  push:
+    branches: [main]
+    paths: [acervo/sessoes/calendario.json]
+permissions:
+  contents: read
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Enviar pautas recém-publicadas
+        env:
+          BEFORE: ${{ github.event.before }}
+          TEAMS_URL: ${{ secrets.CMT_TEAMS_WEBHOOK_URL }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess
+          from collections import defaultdict
+          from datetime import date
+          from pathlib import Path
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlparse
+          from urllib.request import Request, urlopen
+
+          base = Path("acervo/sessoes")
+          calendario = base / "calendario.json"
+          anterior = subprocess.check_output(["git", "show", os.environ["BEFORE"] + ":" + str(calendario)])
+          publicadas = {s["date"] for s in json.loads(anterior)["sessoes"] if s.get("publicada")}
+          novas = [s for s in json.loads(calendario.read_text())["sessoes"]
+                   if s.get("publicada") and s["date"] not in publicadas]
+          webhook = os.environ.get("TEAMS_URL", "")
+          if novas and urlparse(webhook).scheme != "https":
+              raise SystemExit("Configure o webhook de Workflows do Teams.")
+          for sessao in novas:
+              data = date.fromisoformat(sessao["date"])
+              pauta = json.loads((base / (data.isoformat() + ".json")).read_text())
+              itens = pauta.get("itens") or []
+              if not itens:
+                  continue
+              grupos = defaultdict(list)
+              for item in itens:
+                  numero = str(item.get("item") or "").strip()
+                  if numero:
+                      responsavel = str(item.get("servidor") or "").strip()
+                      grupos["A designar" if responsavel in ("", "—") else responsavel].append(numero)
+              titulo = f"Pauta publicada · {data:%d/%m/%Y}"
+              linhas = [f"{len(itens)} itens publicados."]
+              prazo = (sessao.get("marcos") or {}).get("entregaMinutas")
+              if prazo:
+                  linhas.append(f"Prazo interno · {date.fromisoformat(prazo):%d/%m/%Y}")
+              linhas.extend(f"{nome} · itens {', '.join(numeros)}" for nome, numeros in sorted(grupos.items()))
+              cartao = {"type": "AdaptiveCard", "version": "1.2",
+                  "body": [{"type": "TextBlock", "text": titulo, "weight": "Bolder", "wrap": True}]
+                      + [{"type": "TextBlock", "text": linha, "wrap": True} for linha in linhas],
+                  "actions": [{"type": "Action.OpenUrl", "title": "Abrir o Ex Officio",
+                               "url": "https://www.gabinete-cmt.com/office/#pauta"}]}
+              mensagem = {"type": "message", "attachments": [
+                  {"contentType": "application/vnd.microsoft.card.adaptive", "content": cartao}]}
+              try:
+                  request = Request(webhook, data=json.dumps(mensagem).encode(), headers={"Content-Type": "application/json"})
+                  with urlopen(request, timeout=20):
+                      pass
+              except HTTPError as erro:
+                  raise SystemExit(f"Teams retornou HTTP {erro.code}.") from None
+              except URLError:
+                  raise SystemExit("Não foi possível enviar o comunicado ao Teams.") from None
+          PY
