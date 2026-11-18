@@ -3880,7 +3880,7 @@ function cmtCarregar(){
    pontos no período contra a meta diária × dias úteis do servidor, descontadas as ausências */
 function pdvPinta(j,eq){var P=j.produtividade,f=function(n){return String(Math.round((Number(n)||0)*100)/100).replace('.',',');};
   if(!P||P.erro||!(P.linhas||[]).length){cmtLista('#cmt-l-eq',eq,function(x){return '<div class="cmt-it"><b>'+esc(x.nome)+'</b><span>'+x.minutasFeitas+'/'+x.minutas+' minutas · '+x.correcoesFeitas+'/'+x.correcoes+' correções</span></div>';});return;}
-  $('#pdv-k').textContent='Pontos de '+br(P.de)+' a '+br(P.ate)+' · '+P.diasUteis+' dia'+(P.diasUteis===1?'':'s')+' úte'+(P.diasUteis===1?'il':'is')+' · 1 pt = 1 voto Ω · perto da meta a partir de '+P.pertoMeta+'%';
+  var pdk=$('#pdv-k');if(pdk)pdk.textContent='Pontos de '+br(P.de)+' a '+br(P.ate)+' · '+P.diasUteis+' dia'+(P.diasUteis===1?'':'s')+' úte'+(P.diasUteis===1?'il':'is')+' · 1 pt = 1 voto Ω · perto da meta a partir de '+P.pertoMeta+'%';
   document.querySelectorAll('[data-pdv]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-pdv')===(CMT.perK||'mes')));});
   $('#cmt-l-eq').innerHTML=P.linhas.map(function(x){var pc=x.pct==null?null:x.pct,cls=!x.entra?'fora':pc>=100?'ok':pc>=P.pertoMeta?'perto':'baixo',w=pc==null?0:Math.min(100,pc);
     var det=[x.votos?x.votos+' voto'+(x.votos===1?'':'s'):'',x.eds?x.eds+' ED/AgInt':'',x.monos?x.monos+' monocrática'+(x.monos===1?'':'s'):'',x.correcoes?x.correcoes+' correç'+(x.correcoes===1?'ão':'ões'):'',x.pendentes?x.pendentes+' na pauta por minutar':''].filter(Boolean).join(' · ')||'sem produção no período';
