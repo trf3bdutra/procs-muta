@@ -1824,7 +1824,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         </div>
         <div class="cmt-ph-2">
           <span class="cmt-seg cmt-qm" id="cmt-qm" role="group" aria-label="Modo da busca"><button type="button" data-cqm="tudo" aria-pressed="true">Tudo</button><button type="button" data-cqm="item" aria-pressed="false">Item</button><button type="button" data-cqm="proc" aria-pressed="false">Processo</button></span>
-          <label class="cmt-bq"><span class="vh">Buscar na pauta</span><input type="search" id="cmt-q" placeholder="itens 2, 5-9, número, assunto ou servidor"></label>
+          <label class="cmt-bq cmt-bq-w"><span class="vh">Buscar na pauta</span><svg class="cmt-bq-i" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="cmt-q" placeholder="item, número, assunto ou servidor"><button type="button" class="cmt-bq-x" id="cmt-q-x" aria-label="Limpar a busca" hidden>×</button><span class="cmt-bq-n" id="cmt-q-n"></span></label>
           <span class="cmt-sp"></span>
           <button type="button" class="b" id="cmt-selt">Selecionar exibidos</button>
           <button type="button" class="b" id="cmt-libl" disabled>Liberar selecionados</button>
@@ -1842,6 +1842,12 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
 
     <aside class="cmt-dr" id="cmt-dr" data-t="a">
       <div class="cmt-dr-h" id="cmt-dr-h">
+      <div class="cmt-bbq" id="cmt-bbq" hidden>
+        <span class="cmt-seg cmt-qm" role="group" aria-label="Modo da busca"><button type="button" data-cqm="tudo" aria-pressed="true">Tudo</button><button type="button" data-cqm="item" aria-pressed="false">Item</button><button type="button" data-cqm="proc" aria-pressed="false">Processo</button></span>
+        <label class="cmt-bbq-c"><span class="vh">Buscar na pauta</span><input type="search" id="cmt-q2" placeholder="item, número, assunto ou servidor"></label>
+        <button type="button" class="cmt-bbq-x" id="cmt-bbq-x" aria-label="Fechar a busca">×</button>
+      </div>
+        <button type="button" class="cmt-bbq-b" id="cmt-bbq-b" aria-label="Buscar na pauta" aria-expanded="false"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
         <button type="button" class="cmt-dr-k" id="cmt-dr-k" aria-expanded="false" aria-controls="cmt-dr-b"><span>Painéis</span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
         <div class="cmt-rail" id="cmt-rail"></div>
       </div>
@@ -4050,6 +4056,8 @@ function cmtPauta(){
     var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];
     return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span>'+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+' em apreciação</span>':'')+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
   $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
+  var qn=$('#cmt-q-n');if(qn)qn.textContent=(CMT.q||'').trim()?L.length+' de '+it.length:'';
+  var qx=$('#cmt-q-x');if(qx)qx.hidden=!(CMT.q||'').trim();
   var falta=it.length-(cta.liberado||0);
   var nmin=it.filter(function(x){return x.dataMinuta;}).length,ncor=it.filter(function(x){return x.dataCorrecao;}).length;
   var d=(j.agenda||[]).filter(function(s){return s.date===p.date;})[0]||{marcos:{}};
@@ -4266,7 +4274,7 @@ var ab=e.target.closest('[data-cdt]');
 if(ab){var k=ab.getAttribute('data-cdt');
   if($('#cmt-dr').classList.contains('on')&&ab.closest('#cmt-dr-tb')){cmtAba(k);return;}
   cmtGaveta(true,k);return;}
-if(e.target.closest('#cmt-dr-h')){cmtGaveta(!$('#cmt-dr').classList.contains('on'));return;}
+if(e.target.closest('#cmt-dr-h')&&!e.target.closest('#cmt-bbq-b')){cmtGaveta(!$('#cmt-dr').classList.contains('on'));return;}
 if(e.target.closest('#cmt-dr-x')){cmtGaveta(false);return;}});
 document.addEventListener('keydown',function(e){
 if(e.key==='Escape'&&$('#cmt-dr')&&$('#cmt-dr').classList.contains('on'))cmtGaveta(false);});
@@ -4430,7 +4438,20 @@ if(fi){var c=fi.getAttribute('data-cfi');if(typeof abrirFicha==='function'){abri
 
 });
 
-document.addEventListener('input',function(e){if(e.target&&e.target.id==='cmt-busca'){CMT.q=e.target.value;var q=$('#cmt-q');if(q)q.value=e.target.value;cmtPauta();}});
+function cmtBuscaAtu(v){CMT.q=v;
+var a=$('#cmt-q'),b=$('#cmt-q2'),x=$('#cmt-q-x');
+if(a&&a.value!==v)a.value=v;if(b&&b.value!==v)b.value=v;
+if(x)x.hidden=!v;
+cmtPauta();}
+document.addEventListener('input',function(e){var t=e.target;if(!t)return;
+if(t.id==='cmt-q'||t.id==='cmt-q2'){cmtBuscaAtu(t.value);}});
+document.addEventListener('click',function(e){
+if(e.target.closest&&e.target.closest('#cmt-q-x')){cmtBuscaAtu('');var a=$('#cmt-q');if(a)a.focus();return;}
+var bb=e.target.closest&&e.target.closest('#cmt-bbq-b');
+if(bb){var el=$('#cmt-bbq'),on=el&&el.hidden;if(el){el.hidden=!on;}bb.setAttribute('aria-expanded',String(!!on));
+  if(on){var i2=$('#cmt-q2');if(i2)setTimeout(function(){i2.focus();},60);}return;}
+if(e.target.closest&&e.target.closest('#cmt-bbq-x')){var el2=$('#cmt-bbq');if(el2)el2.hidden=true;var b2=$('#cmt-bbq-b');if(b2)b2.setAttribute('aria-expanded','false');return;}});
+document.addEventListener('input',function(e){if(e.target&&e.target.id==='cmt-busca')cmtBuscaAtu(e.target.value);});
 /* decisões: gravam onde já era gravado e podem ser desfeitas */
 function cmtPost(corpo,ok){
   return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(corpo)}).then(function(){toast(ok);CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);})
@@ -7471,10 +7492,10 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
   #v-cmt .cmt-ph-2 .cmt-bq{order:1;flex:1 1 auto!important}
   #v-cmt .cmt-ph-2 .cmt-bq input{height:40px}
   /* escondidos até abrir Filtros */
-  #v-cmt .cmt-qm,#v-cmt #cmt-selt,#v-cmt #cmt-libl,#v-cmt .cmt-sit{display:none}
-  body.cmt-fon #v-cmt .cmt-qm,body.cmt-fon #v-cmt .cmt-sit{display:flex}
+  #v-cmt .cmt-ph-2 .cmt-qm,#v-cmt #cmt-selt,#v-cmt #cmt-libl,#v-cmt .cmt-sit{display:none}
+  body.cmt-fon #v-cmt .cmt-ph-2 .cmt-qm,body.cmt-fon #v-cmt .cmt-sit{display:flex}
   body.cmt-fon #v-cmt #cmt-selt,body.cmt-fon #v-cmt #cmt-libl{display:inline-flex;flex:1 1 44%!important;order:5!important}
-  body.cmt-fon #v-cmt .cmt-qm{order:3!important;flex:1 1 100%!important}
+  body.cmt-fon #v-cmt .cmt-ph-2 .cmt-qm{order:3!important;flex:1 1 100%!important}
   body.cmt-fon #v-cmt .cmt-sit{order:4;flex-wrap:wrap;gap:6px;margin-top:2px}
   body.cmt-fon #v-cmt .cmt-sit .st{flex:1 1 46%;justify-content:center;height:34px}
   #v-cmt .cmt-mfil[aria-expanded="true"]{border-color:var(--ei);background:var(--ei);color:var(--ew)}
@@ -7488,6 +7509,35 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
   /* abas de etapa: a filtragem principal, sempre à vista */
   #v-cmt .cmt-ft{margin-top:2px}
   #v-cmt .cmt-ft button{min-height:44px}
+}
+
+/* campo de busca da pauta: lupa, limpar e contagem */
+#v-cmt .cmt-bq-w{position:relative;display:inline-flex;align-items:center}
+#v-cmt .cmt-bq-w input::-webkit-search-cancel-button,#v-cmt .cmt-bbq-c input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+#v-cmt .cmt-bq-w .cmt-bq-i{position:absolute;left:10px;color:var(--em);pointer-events:none}
+#v-cmt #cmt-pauta .cmt-bq-w input{padding-left:30px;padding-right:86px}
+#v-cmt .cmt-bq-x{position:absolute;right:8px;width:22px;height:22px;border:1px solid var(--el);background:var(--ew);color:var(--em);font-size:14px;line-height:1;cursor:pointer;padding:0}
+#v-cmt .cmt-bq-x:hover{border-color:var(--ei);color:var(--ei)}
+#v-cmt .cmt-bq-n{position:absolute;right:36px;font:400 9.5px var(--emono);letter-spacing:.06em;text-transform:uppercase;color:var(--em);pointer-events:none}
+/* busca rápida na faixa de rodapé */
+#v-cmt .cmt-bbq{display:none}
+#v-cmt .cmt-bbq-b{display:none}
+@media (max-width:1100px){
+  #v-cmt .cmt-bbq{pointer-events:auto;position:absolute;left:0;right:0;bottom:100%;display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px;background:var(--ew);border-top:1px solid var(--el);box-shadow:0 -12px 30px rgba(32,59,57,.1)}
+  #v-cmt .cmt-bbq[hidden]{display:none}
+  #v-cmt .cmt-bbq .cmt-seg{flex:1 1 100%}
+  #v-cmt .cmt-bbq .cmt-seg button{flex:1;height:34px}
+  #v-cmt .cmt-bbq-c{flex:1 1 auto;display:block}
+  #v-cmt .cmt-bbq-c input{width:100%;height:42px;box-sizing:border-box;border:1px solid var(--el);background:var(--ep);color:var(--ei);font:inherit;font-size:14px;padding:0 12px;border-radius:0}
+  #v-cmt .cmt-bbq-x{flex:0 0 42px;height:42px;border:1px solid var(--el);background:var(--ew);color:var(--em);font-size:17px;cursor:pointer}
+  #v-cmt .cmt-bbq-b{display:inline-grid;place-items:center;flex:0 0 52px;width:52px;height:52px;border:0;border-right:1px solid var(--el);background:var(--ew);color:var(--em);cursor:pointer}
+  #v-cmt .cmt-bbq-b[aria-expanded="true"]{background:var(--ei);color:var(--ew)}
+  #v-cmt .cmt-dr-h{align-items:stretch;position:absolute}
+}
+@media (max-width:780px){
+  /* no telefone a busca mora no rodapé; o topo fica com a sessão, os filtros e as abas */
+  #v-cmt .cmt-ph-2 .cmt-bq-w{display:none}
+  #v-cmt .cmt-mfil{flex:1 1 100%!important;order:1!important}
 }
 </style>
 </body>
