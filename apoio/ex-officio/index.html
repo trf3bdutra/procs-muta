@@ -1815,6 +1815,10 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     </div>
 
     <section class="cmt-q cmt-dk" id="cmt-pauta">
+      <div class="cmt-placar">
+        <div class="cmt-ft" id="cmt-ft"></div>
+        <div class="cmt-prog" id="cmt-prog"></div>
+      </div>
       <div class="cmt-ph">
         <div class="cmt-ph-1">
           <h2><i class="nn">04</i><span class="cmt-ti">Pauta da <em>sessão.</em></span></h2>
@@ -1831,10 +1835,6 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         </div>
         <div class="cmt-sit" id="cmt-sit"></div>
       </div>
-      <button type="button" class="cmt-resumo" id="cmt-resumo" aria-expanded="false"></button>
-      <div class="cmt-met" id="cmt-met"></div>
-      <div class="cmt-prog" id="cmt-prog"></div>
-      <div class="cmt-ft" id="cmt-ft"></div>
       <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Ações</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
       <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
     </section>
@@ -4024,6 +4024,8 @@ function cmtFiltra(){
   var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'aliberar',q=(CMT.q||'').trim().toLowerCase();
   var L=f==='todos'?it.slice():f==='aliberar'?it.filter(function(x){return x.etapa!=='liberado';}):f==='retido'?it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;})
     :f==='sopref'?it.filter(function(x){return !!x.sopref;})
+    :f==='minutados'?it.filter(function(x){return !!x.dataMinuta;})
+    :f==='corrigidos'?it.filter(function(x){return !!x.dataCorrecao;})
     :f==='destaque'?it.filter(function(x){return !!x.destaque;})
     :f==='retirado'?it.filter(function(x){return /^retirad/i.test(x.resultado||'');})
     :f==='adiado'?it.filter(function(x){return /^adiad/i.test(x.resultado||'');})
@@ -4044,9 +4046,10 @@ function cmtPauta(){
   it.forEach(function(x){cta[x.etapa]=(cta[x.etapa]||0)+1;});
   var retidos=it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;}).length;
   $('#cmt-n-pt').textContent=p.date?br(p.date)+(p.previa?' · prévia':''):'sem pauta';
-  var F=[['aliberar','A liberar'],['retido','Revisados, retidos'],['liberado','Liberados'],['todos','Todos']];
-  cta.aliberar=it.length-(cta.liberado||0);cta.retido=retidos;
-  $('#cmt-ft').innerHTML=F.map(function(x){return '<button type="button" data-cf="'+x[0]+'" aria-pressed="'+((CMT.filtro||'aliberar')===x[0])+'">'+x[1]+'<i>'+(cta[x[0]]||0)+'</i></button>';}).join('');
+  var nmin0=it.filter(function(x){return x.dataMinuta;}).length,ncor0=it.filter(function(x){return x.dataCorrecao;}).length;
+  cta.aliberar=it.length-(cta.liberado||0);cta.retido=retidos;cta.minutados=nmin0;cta.corrigidos=ncor0;
+  var F=[['todos','Pautados'],['aliberar','A liberar'],['minutados','Minutados'],['corrigidos','Corrigidos'],['liberado','Liberados'],['retido','Retidos']];
+  $('#cmt-ft').innerHTML=F.map(function(x){return '<button type="button" data-cf="'+x[0]+'" aria-pressed="'+((CMT.filtro||'aliberar')===x[0])+'"><b>'+(cta[x[0]]||0)+'</b><span>'+x[1]+'</span></button>';}).join('');
   var L=cmtFiltra(),NOME={pendente:'Sem minuta',minutado:'Minutada',corrigido:'Corrigida',liberado:'Liberada'};
   $('#cmt-rows').innerHTML=L.length?L.map(function(x){
     var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta');
@@ -4062,7 +4065,8 @@ function cmtPauta(){
   var prox=null,PM={pautarAte:'Pautar até',inicioPreparacao:'Início da preparação',entregaMinutas:'Entrega das minutas',liberacao:'Liberação'};
   Object.keys(PM).forEach(function(k){var x=(d.marcos||{})[k];if(x&&x>=j.hoje&&!prox)prox={nome:PM[k],data:x};});
   if(!prox&&p.date&&p.date>=j.hoje)prox={nome:'Sessão de julgamento',data:p.date};
-  $('#cmt-met').innerHTML=''+
+  var elMet=$('#cmt-met');
+  if(elMet)elMet.innerHTML=''+
     '<div><span>Pautados</span><b>'+it.length+'</b><small>sessão de '+(p.date?br(p.date):'—')+'</small></div>'+
     '<div><span>A liberar</span><b class="al">'+falta+'</b><small>'+(d.marcos&&d.marcos.liberacao?'liberação em '+br(d.marcos.liberacao):'sem marco de liberação')+'</small></div>'+
     '<div><span>Minutados</span><b>'+nmin+'</b><small>de '+it.length+'</small></div>'+
@@ -4091,7 +4095,7 @@ function cmtPauta(){
   var elp=$('#cmt-n-pt');if(elp)elp.textContent=p.date?'sessão de '+br(p.date)+' · '+it.length+' processos':'—';
 var nas=it.filter(function(x){return x.assinado||x.dataAssinatura;}).length,npe=it.length-nmin;
 var pr=$('#cmt-prog');
-if(pr)pr.innerHTML=it.length?'<div class="br"><i class="as" style="width:'+(nas*100/it.length)+'%"></i><i class="lb" style="width:'+(Math.max(0,(cta.liberado||0)-nas)*100/it.length)+'%"></i><i class="co" style="width:'+(Math.max(0,ncor-(cta.liberado||0))*100/it.length)+'%"></i><i class="pe" style="width:'+(Math.max(0,npe)*100/it.length)+'%"></i></div><div class="lg"><span>'+nas+' assinados</span><span>'+Math.max(0,(cta.liberado||0)-nas)+' liberados</span><span>'+ncor+' corrigidos</span><span>'+Math.max(0,npe)+' a minutar</span><span style="margin-left:auto">'+(d.marcos&&d.marcos.entregaMinutas?'entrega das minutas em '+br(d.marcos.entregaMinutas):'sem marco de entrega')+'</span></div>':'';
+if(pr)pr.innerHTML=it.length?'<div class="br"><i class="as" style="width:'+(nas*100/it.length)+'%"></i><i class="lb" style="width:'+(Math.max(0,(cta.liberado||0)-nas)*100/it.length)+'%"></i><i class="co" style="width:'+(Math.max(0,ncor-(cta.liberado||0))*100/it.length)+'%"></i><i class="pe" style="width:'+(Math.max(0,npe)*100/it.length)+'%"></i></div><div class="lg"><span>'+(prox?esc(prox.nome)+' em '+br(prox.data)+' · em '+cmtDias(prox.data,j.hoje)+' dias':'sem marco futuro')+'</span><span style="margin-left:auto">'+(d.marcos&&d.marcos.liberacao?'liberação em '+br(d.marcos.liberacao):'')+'</span></div>':'';
 var lg=$('#cmt-leg');
 if(lg)lg.innerHTML=[['d','Minutado'],['c','Corrigido'],['l','Liberado'],['a','Assinado']].map(function(k){return '<span>'+cmtSvg(CMTICO[k[0]])+k[1]+'</span>';}).join('');if(typeof cmtAtuLote==='function')cmtAtuLote();}
 function cmtCsv(){
@@ -7548,6 +7552,29 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
   /* no telefone a busca mora no rodapé; o topo fica com a sessão, os filtros e as abas */
   #v-cmt .cmt-ph-2 .cmt-bq-w{display:none}
   #v-cmt .cmt-mfil{flex:1 1 100%!important;order:1!important}
+}
+
+/* ===== Placar da pauta: os números são o filtro, acima do cabeçalho ===== */
+#v-cmt .cmt-placar{margin:0 -18px 0;border-bottom:1px solid var(--el);background:var(--ew)}
+#v-cmt .cmt-placar .cmt-ft{display:flex;margin:0;border-bottom:1px solid var(--el);overflow-x:auto;scrollbar-width:none}
+#v-cmt .cmt-placar .cmt-ft::-webkit-scrollbar{display:none}
+#v-cmt .cmt-placar .cmt-ft button{flex:1 1 0;min-width:88px;display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:10px 14px;border:0;border-left:1px solid var(--el);border-bottom:2px solid transparent;background:none;cursor:pointer;text-align:left}
+#v-cmt .cmt-placar .cmt-ft button:first-child{border-left:0}
+#v-cmt .cmt-placar .cmt-ft button b{font-size:20px;font-weight:750;line-height:1.05;color:var(--ei);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#v-cmt .cmt-placar .cmt-ft button span{font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-placar .cmt-ft button:hover{background:var(--ep2)}
+#v-cmt .cmt-placar .cmt-ft button[aria-pressed="true"]{border-bottom-color:var(--eg);background:var(--ep)}
+#v-cmt .cmt-placar .cmt-ft button[aria-pressed="true"] span{color:var(--ei)}
+#v-cmt .cmt-placar .cmt-prog{margin:0;padding:9px 18px 10px}
+#v-cmt .cmt-placar .cmt-prog .lg{font-size:11px}
+#v-cmt #cmt-pauta{padding-top:0}
+#v-cmt .cmt-ph{padding-top:14px}
+@media (max-width:780px){
+  #v-cmt .cmt-placar{margin:0 -14px}
+  #v-cmt .cmt-placar .cmt-ft button{flex:0 0 auto;min-width:0;padding:9px 13px}
+  #v-cmt .cmt-placar .cmt-ft button b{font-size:17px}
+  #v-cmt .cmt-placar .cmt-prog{padding:8px 14px 9px}
+  #v-cmt .cmt-placar .cmt-prog .lg{flex-wrap:wrap;gap:2px 10px;font-size:10px}
 }
 </style>
 </body>
