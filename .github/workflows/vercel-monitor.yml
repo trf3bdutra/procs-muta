@@ -2,7 +2,7 @@
 # Vão para a Vercel: o Ab Initio modular (/monitor/: index.html, assets/ e motor/ juntos),
 # ATENÇÃO: as Rotas do projeto no painel da Vercel valem antes deste vercel.json: "/", "/equipe" e "/hub" → /office/ (Ex Officio)
 # e "/init" → /monitor/index.html, que agora só redireciona para /triagem/ (o Ab Initio antigo foi aposentado em 16/11/2026; o motor e os arquivos comuns da ficha e das regras gerais continuam em /init/motor e /init/assets).
-# o Modus Operandi público (/modus/, com /compendio/ mantido), a Ex Officio (/equipe/) e as funções /api/* (login da equipe e leitura/gravação
+# o Modus Operandi público (/modus/, com /compendio/ mantido), a Ex Officio (/equipe/), o painel de lotes (/lotes/) e as funções /api/* (login da equipe e leitura/gravação
 # das pautas no procs-muta, com o GH_TOKEN guardado na Vercel), o editor do Modus Operandi (/editor/)
 # e a Enciclopédia, servida só pelo /api/compendio a quem tem o modo avançado (apoio/acessos.json).
 # Requer o segredo VERCEL_TOKEN (Settings › Secrets and variables › Actions).
@@ -68,6 +68,8 @@ jobs:
           # /cmt/ é o endereço próprio do painel do relator (mesma página da Ex Officio).
           mkdir -p site/public/cmt && cp apoio/ex-officio/index.html site/public/cmt/index.html
           mkdir -p site/public/editor && cp apoio/modus-operandi/modus-operandi-editor.html site/public/editor/index.html
+          # Painel de lotes (/lotes/): página própria, fora da navegação do Ex Officio, com o mesmo login; dados por /api/lote
+          mkdir -p site/public/lotes && cp apoio/ex-officio/lotes/index.html site/public/lotes/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
           # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.
           mkdir -p site/public/monitor
