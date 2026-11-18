@@ -4082,11 +4082,11 @@ return '<span class="cmt-abs" role="group" aria-label="Ações do item">'+
   b('ficha','fi',ic.fi,'Abrir a ficha do processo')+'</span>';}
 function cmtPasso(x){
 var lib=x.etapa==='liberado',cor=!!x.dataCorrecao||lib,min=!!x.dataMinuta||cor,ret=/^retirad/i.test(x.resultado||''),adi=/^adiad/i.test(x.resultado||'');
-var pill=function(cls,ic,rot,tt){return '<span class="cmt-pa '+cls+'" title="'+esc(tt)+'">'+cmtSvg(ic,12)+'<b>'+rot+'</b></span>';};
-var h=pill(min?'on':'',CMTICO.d,'Minutado',min?'Minutado em '+br(x.dataMinuta):'Sem minuta')+'<i class="'+(cor?'on':'')+'"></i>'+
-      pill(cor?'on':'',CMTICO.c,'Corrigido',cor?'Corrigido em '+br(x.dataCorrecao):'Sem correção')+'<i class="'+(lib?'on':'')+'"></i>';
-if(ret||adi)h+='<span class="cmt-pa fim '+(ret?'ret':'adi')+'" title="'+esc(x.resultado||'')+'">'+cmtSvg(CMTICO.l,12)+'<b>'+(ret?'Retirado':'Adiado')+'</b></span>';
-else h+='<button type="button" class="cmt-pa fim'+(lib?' on':'')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Liberado em '+br(x.dataLiberacao)+' · clique para desfazer':cor?'Liberar o voto':'Liberar mesmo sem correção registrada')+'">'+cmtSvg(CMTICO.l,12)+'<b>'+(lib?'Liberado':'Liberar')+'</b></button>';
+var p=function(cls,ic,rot,tt){return '<span class="cmt-pa'+(cls?' '+cls:'')+'" title="'+esc(tt)+'"><i>'+cmtSvg(ic,12)+'</i><b>'+rot+'</b></span>';};
+var h=p(min?'s1':'',CMTICO.d,'Minutado',min?'Minutado em '+br(x.dataMinuta):'Sem minuta')+'<u class="'+(cor?'l1':'')+'"></u>'+
+      p(cor?'s2':'',CMTICO.c,'Corrigido',cor?'Corrigido em '+br(x.dataCorrecao):'Sem correção')+'<u class="'+(lib?'l2':'')+'"></u>';
+if(ret||adi)h+='<span class="cmt-pa '+(ret?'sr':'sa')+'" title="'+esc(x.resultado||'')+'"><i>'+cmtSvg(CMTICO.l,12)+'</i><b>'+(ret?'Retirado':'Adiado')+'</b></span>';
+else h+='<button type="button" class="cmt-pa'+(lib?' s3':' act')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Liberado em '+br(x.dataLiberacao)+' · clique para desfazer':cor?'Liberar o voto':'Liberar mesmo sem correção registrada')+'"><i>'+cmtSvg(CMTICO.l,12)+'</i><b>'+(lib?'Liberado':'Liberar')+'</b></button>';
 return '<span class="cmt-trl2">'+h+'</span>';}
 function cmtTrilha(n){var ic=[CMTICO.d,CMTICO.c,CMTICO.l,CMTICO.a],rot=['minutado','corrigido','liberado','assinado'],h='',f=[];
 for(var i=0;i<4;i++){if(i)h+='<i class="'+(i<=n-1?'l'+i:'')+'"></i>';h+='<span class="'+(i<n?'s'+(i+1):'')+'">'+cmtSvg(ic[i])+'</span>';if(i<n)f.push(rot[i]);}
@@ -6842,7 +6842,7 @@ body.cmt-solo header.nx .nx1{height:44px}
   #v-cmt .cmt-tb{min-width:0;display:block;font-size:13px}
   #v-cmt .cmt-tb thead{display:none}
   #v-cmt .cmt-tb tbody,#v-cmt .cmt-tb tr,#v-cmt .cmt-tb td{display:block;width:auto}
-  #v-cmt .cmt-tb tr{position:relative;display:flex;flex-direction:column;margin:10px 14px;padding:10px 12px 12px 40px;border:1px solid var(--el);border-top:2px solid var(--eg);background:var(--ew)}
+  #v-cmt .cmt-tb tr{position:relative;display:flex;flex-direction:column;margin:10px 14px;padding:10px 12px 12px 40px;border:1px solid var(--el);border-top:1px solid var(--el2);background:var(--ew)}
   #v-cmt .cmt-tb td.cmt-ii{order:1}#v-cmt .cmt-tb td.cnj{order:2}#v-cmt .cmt-tb td.cmt-asc{order:3}
   #v-cmt .cmt-tb td[data-l="Servidor"]{order:4}#v-cmt .cmt-tb td.cmt-tr{order:5}#v-cmt .cmt-tb td.cmt-at{order:6}#v-cmt .cmt-tb td.cmt-acd{order:7}
   #v-cmt .cmt-tb tr:hover td{background:none}
@@ -6993,6 +6993,43 @@ body.cmt-dr-on #v-cmt .cmt-met div.mk{grid-column:1/-1}
   #v-cmt .cmt-ph-2 .cmt-bq{display:block;flex:1 1 100%}
   #v-cmt .cmt-ph-2 .cmt-bq input{width:100%;box-sizing:border-box}
   #v-cmt .cmt-ph-2 #cmt-csv{flex:0 0 auto}
+}
+
+/* trilha do item no padrão da produção: círculo por etapa, com o rótulo ao lado */
+#v-cmt .cmt-trl2{display:inline-flex;align-items:center;gap:0}
+#v-cmt .cmt-trl2 u{width:10px;height:2px;background:var(--el);text-decoration:none;flex:none}
+#v-cmt .cmt-trl2 u.l1{background:#9cc0e0}
+#v-cmt .cmt-trl2 u.l2{background:#c7b0e6}
+#v-cmt .cmt-pa{display:inline-flex;align-items:center;gap:5px;padding:0 7px 0 0;border:0;background:none;font:inherit;color:#8fa0ad;white-space:nowrap}
+#v-cmt .cmt-pa i{width:22px;height:22px;flex:none;border-radius:50%;display:grid;place-items:center;border:1px solid var(--el);background:#f6f8f9;color:#8fa0ad}
+#v-cmt .cmt-pa b{font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;font-weight:400}
+#v-cmt .cmt-pa.s1 i{border-color:#9fd0b6;background:#e3f0ea;color:#28744b}#v-cmt .cmt-pa.s1{color:#28744b}
+#v-cmt .cmt-pa.s2 i{border-color:#9cc0e0;background:#e3eef8;color:#245b8c}#v-cmt .cmt-pa.s2{color:#245b8c}
+#v-cmt .cmt-pa.s3 i{border-color:#c7b0e6;background:#efe8f8;color:#6d4596}#v-cmt .cmt-pa.s3{color:#6d4596}
+#v-cmt .cmt-pa.sr i{border-color:#ecc9b8;background:#fdf6f3;color:var(--er)}#v-cmt .cmt-pa.sr{color:var(--er)}
+#v-cmt .cmt-pa.sa i{border-color:#c7b0e6;background:#efe8f8;color:#6d4596}#v-cmt .cmt-pa.sa{color:#6d4596}
+#v-cmt button.cmt-pa{cursor:pointer}
+#v-cmt button.cmt-pa:hover i{border-color:#6d4596;color:#6d4596}
+#v-cmt button.cmt-pa:hover b{color:#6d4596}
+#v-cmt button.cmt-pa.s3:hover i,#v-cmt button.cmt-pa.s3:hover b{border-color:var(--er);color:var(--er)}
+/* botões do item no mesmo peso das sinalizações da equipe */
+#v-cmt .cmt-abs{display:inline-flex;align-items:center;gap:2px}
+#v-cmt .cmt-ab{width:26px;height:26px;border:0;border-radius:50%;background:transparent;color:var(--em);opacity:.45;display:inline-grid;place-items:center;padding:0;cursor:pointer}
+#v-cmt .cmt-ab:hover{opacity:1;background:var(--ep2)}
+#v-cmt .cmt-ab.al.on{opacity:1;color:#bd4c38}
+#v-cmt .cmt-ab.dv.on{opacity:1;color:#6d4596}
+/* sem filete superior no painel da pauta nem na lingueta */
+#v-cmt #cmt-pauta{border-top:1px solid var(--el)}
+#v-cmt .cmt-dr-h{border-top:1px solid var(--el)}
+@media (max-width:1100px){#v-cmt .cmt-dr-h{border-top:1px solid var(--el)}}
+@media (max-width:780px){
+  #v-cmt .cmt-trl2{flex-wrap:wrap;gap:4px 10px}
+  #v-cmt .cmt-trl2 u{display:none}
+  #v-cmt .cmt-pa i{width:26px;height:26px}
+  #v-cmt .cmt-pa b{font-size:9.5px}
+  #v-cmt .cmt-ab{width:38px;height:38px;border:1px solid var(--el);border-radius:0;opacity:.75}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-abs{display:flex;gap:8px;width:100%}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-ab{flex:1;width:auto}
 }
 </style>
 </body>
