@@ -30,12 +30,14 @@ async function criarDiligencia(campos, u) {
   }
   throw Object.assign(new Error('O quadro mudou várias vezes seguidas; tente de novo.'), { status: 409 });
 }
+/* pedidos de retirada e de adiamento: nascem no quadro da equipe e são apreciados pelo relator */
+const PEDIDO = /^Pedido de (retirada|adiamento)\b/i;
 async function responder(id, texto, u, manter, evento) {
   for (let n = 0; n < 4; n++) {
     const { dados, sha } = await lerPen(); dados.registros = dados.registros || [];
     const t = (dados.registros || []).find(x => x.id === id && !x.excluida);
     if (!t) throw Object.assign(new Error('Dúvida não encontrada.'), { status: 404 });
-    if (L.norm(t.assignee) !== L.norm(u)) throw Object.assign(new Error('Esta dúvida não foi dirigida a você.'), { status: 403 });
+    if (L.norm(t.assignee) !== L.norm(u) && !PEDIDO.test(String(t.title || ''))) throw Object.assign(new Error('Esta dúvida não foi dirigida a você.'), { status: 403 });
     const agora = new Date().toISOString();
     if (evento && t.whatsappRespostaEvento === evento) return t;
     if (evento && t.stage === 'done') throw Object.assign(new Error('Dúvida já concluída.'), { status: 409 });
@@ -78,6 +80,15 @@ async function painel(req, res, u) {
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, dataLiberacao: b.desfazer ? '' : hj });
       }
+      /* retirada ou adiamento do item, deferidos pelo relator: grava o desfecho na pauta */
+      if (b.acao === 'situacao') {
+        if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
+        const v = String(b.valor || '').trim();
+        if (v && !/^(Retirado|Adiado)$/i.test(v)) return res.status(400).json({ erro: 'Situação inválida.' });
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { resultado: v } }, u, true);
+        if (g.status >= 400) return res.status(g.status).json(g.body);
+        return res.status(200).json({ ok: true, cnj, resultado: v });
+      }
       if (b.acao === 'assinar') {
         await MONO.gravarMono(cnj, { dataAssinatura: b.desfazer ? '' : hj }, u, true);
         return res.status(200).json({ ok: true, cnj, dataAssinatura: b.desfazer ? '' : hj });
@@ -117,10 +128,18 @@ async function painel(req, res, u) {
     .slice(0, 40);
   /* dúvidas dirigidas ao desembargador: diligências em aberto atribuídas a ele, no quadro da equipe */
   const duvidas = ((pen || {}).registros || [])
-    .filter(r => !r.excluida && r.stage !== 'done' && L.norm(r.assignee) === L.norm(u))
+    .filter(r => !r.excluida && r.stage !== 'done' && L.norm(r.assignee) === L.norm(u) && !PEDIDO.test(String(r.title || '')))
     .map(r => ({ id: r.id, titulo: r.title || '', texto: r.description || '', numero: r.numero || '',
       de: r.creator || '', prazo: r.dueDate || '', prioridade: r.urgency || '', etapa: r.stage || '',
       em: r.atualizadoEm || r.criadoEm || '', origem: r.origem || '', resposta: r.resposta || '' }))
+    .sort((x, y) => String(y.em).localeCompare(String(x.em)));
+
+  /* pedidos de retirada e de adiamento de item da pauta, qualquer que seja o destinatário anotado */
+  const pedidos = ((pen || {}).registros || [])
+    .filter(r => !r.excluida && r.stage !== 'done' && PEDIDO.test(String(r.title || '')))
+    .map(r => ({ id: r.id, tipo: /retirada/i.test(r.title) ? 'retirada' : 'adiamento', titulo: r.title || '',
+      texto: r.description || '', numero: r.numero || '', de: r.creator || '', sessao: r.sessao || '',
+      prioridade: r.urgency || '', em: r.atualizadoEm || r.criadoEm || '', resposta: r.resposta || '' }))
     .sort((x, y) => String(y.em).localeCompare(String(x.em)));
 
   /* monocráticas e urgências */
@@ -201,7 +220,7 @@ async function painel(req, res, u) {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, comunicados, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
+  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, pedidos, comunicados, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 }
