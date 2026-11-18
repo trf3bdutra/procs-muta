@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-18T18:59:42.448Z",
+ "atualizadoEm": "2026-11-18T20:46:35.617Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -112,15 +112,134 @@
    "dataLiberacao": "2026-11-16",
    "obs": "",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T14:36:40.655Z",
+    "editadoPor": "Claude (autos)",
+    "editadoEm": "2026-11-18T20:46:35.612Z",
     "cartao": {
      "orig": {
       "acc": {
-       "custas": false
+       "custas": false,
+       "honor": true,
+       "tutela": false,
+       "valor": true
+      },
+      "tipo": "Sentença",
+      "id": "393431657",
+      "data": "2026-08-13",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "julgador": "Dalton Igor Kita Conrado",
+      "dispositivo": "Ante o exposto, acolho a preliminar de ilegitimidade ativa para declarar extinto o presente processo, sem resolução do mérito, nos termos do artigo 485, inciso VI, do Código de Processo Civil. Sem custas (art. 4º, inciso II da Lei 9.289/96). Pelos princípios da sucumbência e da causalidade, condeno a parte exequente a arcar com as custas processuais e a pagar honorários advocatícios que fixo em 10% sobre o valor atualizado da causa, nos termos do artigo 85, §§1º e 2º, do CPC. Contudo, por ser beneficiária da justiça gratuita, resta suspensa a exigibilidade do crédito, nos termos do artigo 98, §3º, do CPC."
+     },
+     "tipoJ": "Apelação",
+     "relacionado": "Tema 1.433/STJ (ProAfR no REsp 2.234.888); Tema 1.075/STF; Tema 733/STF; cumprimento de sentença 5002016-82.2025.4.03.6000 (litispendência suscitada pelo INSS)",
+     "subassuntos": "Cumprimento individual de sentença coletiva (ACP 0005019-15.1997.4.03.6000); índice de 28,86%; limites subjetivos e territoriais do título executivo; legitimidade ativa; honorários sucumbenciais; litispendência",
+     "especificidades": "Execução promovida pelas herdeiras da pensionista falecida Dinah Ligório de Carvalhaes Pinheiro (Claudia de Carvalhaes Pinheiro e Marcia de Carvalhaes Mendes) contra o INSS; gratuidade da justiça deferida; extinção por ilegitimidade ativa, por ausência de vínculo com Mato Grosso do Sul; sentença que registra \"Sem custas\" e, em seguida, condena a parte exequente em custas e honorários de 10% sobre o valor atualizado da causa, com exigibilidade suspensa; INSS alega em contrarrazões litispendência com o cumprimento 5002016-82.2025.4.03.6000 e pede honorários recursais; as exequentes sustentam, antes da sentença, que os pedidos são distintos (ID 393431651).",
+     "questoes": "1) Alcance territorial e subjetivo do título da ACP 0005019-15.1997.4.03.6000 e legitimidade ativa de herdeiras de pensionista sem vínculo com Mato Grosso do Sul (artigo 16 da Lei 7.347/1985; Tema 1.075/STF; Tema 733/STF; artigo 93, II, do CDC). 2) Litispendência com o cumprimento 5002016-82.2025.4.03.6000, suscitada em contrarrazões. 3) Honorários recursais pedidos pelo INSS.",
+     "sintese": "As herdeiras da pensionista Dinah Ligório de Carvalhaes Pinheiro ajuizaram, em 21/02/2025, cumprimento individual da sentença da ACP 0005019-15.1997.4.03.6000 contra o INSS (ID 393431504). O INSS impugnou o cumprimento (ID 393431653), com réplica (ID 393431656). A sentença acolheu a preliminar de ilegitimidade ativa e extinguiu o processo, sem resolução do mérito (artigo 485, VI, do CPC), com condenação em custas e honorários de 10% sobre o valor atualizado da causa, suspensa a exigibilidade pela gratuidade (ID 393431657). As exequentes apelaram (ID 393431658). O INSS apresentou contrarrazões, com alegação de litispendência com o cumprimento 5002016-82.2025.4.03.6000 e pedido de honorários recursais (ID 393431663). A Procuradoria Regional da República deixou de opinar quanto ao mérito (ID 406329546).",
+     "rel": {
+      "razoes": "Apelação das exequentes (ID 393431658): (1) o título executivo judicial não determinou limitação territorial aos efeitos da coisa julgada coletiva, pois o Ministério Público Federal atuou como substituto processual de todos os servidores públicos civis federais, ativos e inativos, pensionistas e ex-servidores, sem distinção de lotação, residência ou domicílio; (2) a inconstitucionalidade do artigo 16 da Lei 7.347/1985 (Tema 1.075/STF) tem eficácia ex tunc, rejeitada a modulação nos embargos de declaração no RE 1.101.937, e alcança a coisa julgada da ação civil pública; (3) incide o artigo 93, II, do CDC, sendo competente o foro de Campo Grande; (4) o Tema 480/STJ assentou que os efeitos da sentença coletiva não se circunscrevem a limites geográficos.",
+      "contrarrazoes": "INSS (ID 393431663): ilegitimidade ativa; litispendência com o cumprimento de sentença 5002016-82.2025.4.03.6000; pedido de honorários recursais."
+     },
+     "obsGeral": "Prontuário preenchido pelo Claude a partir do inteiro teor do 2º grau (18/11/2026), sem passar pela LIA. Custas: a sentença diz \"Sem custas (art. 4º, inciso II da Lei 9.289/96)\" e, na frase seguinte, condena a parte exequente em custas; o campo custas foi mantido como marcado pelo Bruno.",
+     "adm": {
+      "prot": "2026-08-21",
+      "prazo": "15",
+      "dobro": false,
+      "dpu": false,
+      "ajg": true
+     },
+     "mpfx": {
+      "sentido": "Prosseguimento do feito",
+      "id": "406329546"
+     },
+     "jul": {
+      "remessa": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Apelação",
+       "contra": "Apresentada",
+       "id": "393431658"
       }
-     }
-    }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial do cumprimento de sentença",
+       "id": "393431504",
+       "data": "2025-02-21"
+      },
+      {
+       "desc": "Despacho do Juízo de origem",
+       "id": "393431650",
+       "data": "2025-12-19"
+      },
+      {
+       "desc": "Manifestação das exequentes sobre a litispendência",
+       "id": "393431651",
+       "data": "2026-01-27"
+      },
+      {
+       "desc": "Impugnação do INSS ao cumprimento de sentença",
+       "id": "393431653",
+       "data": "2026-05-08"
+      },
+      {
+       "desc": "Réplica à impugnação",
+       "id": "393431656",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Sentença de extinção (ilegitimidade ativa)",
+       "id": "393431657",
+       "data": "2026-08-13"
+      },
+      {
+       "desc": "Apelação das exequentes",
+       "id": "393431658",
+       "data": "2026-08-21"
+      },
+      {
+       "desc": "Contrarrazões do INSS",
+       "id": "393431663",
+       "data": "2026-08-24"
+      },
+      {
+       "desc": "Despacho (vista à Procuradoria Regional da República)",
+       "id": "398982598",
+       "data": "2026-09-21"
+      },
+      {
+       "desc": "Parecer da Procuradoria Regional da República (sem intervenção no mérito)",
+       "id": "406329546",
+       "data": "2026-10-23"
+      }
+     ],
+     "pendencias": [
+      {
+       "desc": "Litispendência (contrarrazões, ID 393431663): conferir nos autos do 5002016-82.2025.4.03.6000 a data de ajuizamento e o pedido; as exequentes sustentam pedidos distintos (ID 393431651)",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      },
+      {
+       "desc": "Sentença com \"Sem custas\" seguido de condenação em custas: confirmar com o Relator o tratamento na minuta",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      }
+     ]
+    },
+    "tempest": "Tempestivo",
+    "preparo": "Justiça gratuita",
+    "prelim": "Há preliminares",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "mpf": "Sem hipótese",
+    "parecer": "Com parecer",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não"
    }
   },
   {
@@ -182,8 +301,11 @@
       "acc": {
        "custas": true,
        "honor": true,
-       "valor": true
-      }
+       "valor": true,
+       "tutela": false
+      },
+      "julgador": "Dalton Igor Kita Conrado",
+      "dispositivo": "Ante o exposto, reconheço a ilegitimidade ativa, como também a ausência de título executivo pela realização de acordo administrativo, e declaro extinto o presente processo, sem resolução do mérito, nos termos do artigo 485, inciso VI, do Código de Processo Civil. Custas ex lege. Pelos princípios da sucumbência e da causalidade, condeno a parte exequente a arcar com as custas processuais e a pagar honorários advocatícios que fixo em 10% sobre o valor atualizado da causa, nos termos do artigo 85, §§1º e 2º, do CPC. Contudo, por ser beneficiária da justiça gratuita, resta suspensa a exigibilidade do crédito, nos termos do artigo 98, §3º, do CPC."
      },
      "adm": {
       "intim": "2026-08-06",
@@ -286,10 +408,16 @@
        "em": "2026-11-16",
        "por": "LIA · Bruno"
       }
-     ]
+     ],
+     "rel": {
+      "razoes": "Apelação dos exequentes (ID 393380635): (1) inexiste limitação territorial no título executivo judicial, pois a relação de entidades apresentada em aditamento pelo Ministério Público Federal, com a expressão \"neste Estado\", apenas indicou o local das intimações, e o afastamento do Tema 1.075/STF por distinção e a invocação do Tema 733/STF pressupõem limitação inexistente no título; (2) o Tema 550/STJ apenas dispensou a homologação judicial do termo de acordo, sem reconhecer fichas financeiras e extratos do SIAPE como prova da transação, e não pode ser aplicado sem a juntada do termo assinado, ausente nos autos; (3) na falta do instrumento, aplica-se o Tema 1.102/STJ, pelo qual documentos do SIAPE comprovam apenas acordos posteriores à MP 1.962-33/2000 e, quanto aos anteriores, apenas autorizam a dedução dos valores pagos (REsp 2.116.830 e REsp 2.184.554, decisões monocráticas); (4) reforma da sentença, com prosseguimento do cumprimento e dedução dos valores recebidos administrativamente.",
+      "contrarrazoes": "União (ID 393380639): suspensão do feito pela afetação dos Temas 1.302/STJ e 1.433/STJ e, subsidiariamente, reconhecimento da ilegitimidade ativa. Memoriais da União (ID 406638692): distinção entre os Temas 550/STJ e 1.102/STJ e, subsidiariamente, prescrição da pretensão executória."
+     }
     },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-17T02:35:25.201Z"
+    "editadoPor": "Claude (autos)",
+    "editadoEm": "2026-11-18T20:46:35.613Z",
+    "resJulg": "Desprovido",
+    "honor": "Majorados"
    }
   },
   {
@@ -337,7 +465,9 @@
        "honor": true,
        "tutela": false,
        "valor": true
-      }
+      },
+      "julgador": "Renan Mendonça de Almeida",
+      "dispositivo": "Ante o exposto, acolho a preliminar de ilegitimidade ativa para declarar extinto o presente processo, sem resolução do mérito, nos termos do artigo 485, inciso VI, do Código de Processo Civil. Custas \"ex lege\". Pelos princípios da sucumbência e da causalidade, condeno a parte exequente a arcar com as custas processuais e a pagar honorários advocatícios que fixo em 10% sobre o valor atualizado da causa, nos termos do artigo 85, §§1º e 2º, do CPC."
      },
      "adm": {
       "prot": "2026-08-06",
@@ -451,10 +581,15 @@
        "em": "2026-11-16",
        "por": "LIA · Bruno"
       }
-     ]
+     ],
+     "rel": {
+      "razoes": "Apelação dos exequentes (ID 391290191): (1) o título executivo judicial não contém limitação geográfica, seja quanto à lotação do servidor, seja quanto ao domicílio, e abrange servidores ativos ou inativos não litigantes em outras ações e não firmatários de acordo, requisitos preenchidos pela parte exequente; (2) a sentença violou a coisa julgada e o princípio da adstrição, pois ao juízo do cumprimento de sentença cabe observar os parâmetros fixados na fase de conhecimento, sem restringi-los; (3) os artigos 103 e 104 do CDC e precedentes do TRF-3 e do TRF-2 confirmam a abrangência nacional do título; (4) ainda que aplicável o artigo 16 da Lei 7.347/1985, não haveria limitação dos efeitos da sentença ao Estado de Mato Grosso do Sul. Pedido de honorários recursais e, subsidiariamente, de redução da verba honorária por apreciação equitativa (artigo 85, § 8º, do CPC).",
+      "contrarrazoes": "União (ID 391290195): ilegitimidade ativa da parte exequente, lotada fora do Estado de Mato Grosso do Sul, porque o pedido da ação civil pública se limitou aos servidores daquele Estado (interpretação lógico-sistemática da inicial e do aditamento; congruência, artigo 293 do CPC/1973), o que se confirmaria pelo cumprimento da liminar apenas perante órgãos locais e pelo ajuizamento de ações idênticas pelo Ministério Público Federal em outras unidades federativas; inaplicabilidade do Tema 1.075/STF à coisa julgada anterior (Tema 733/STF). Memoriais da União (ID 406589829): reiteração da ilegitimidade ativa (delimitação estadual do pedido; irretroatividade do Tema 1.075/STF); sobrestamento subsidiário até o julgamento do Tema 1.433/STJ; exame das demais matérias de defesa, se superada a questão."
+     }
     },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-17T02:44:20.702Z"
+    "editadoPor": "Claude (autos)",
+    "editadoEm": "2026-11-18T20:46:35.614Z",
+    "topico": "Não"
    }
   },
   {
@@ -473,7 +608,155 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "relacionado": "Tema 1.433/STJ (ProAfR no REsp 2.234.888); Tema 1.075/STF; Tema 733/STF",
+     "subassuntos": "Cumprimento individual de sentença coletiva (ACP 0005019-15.1997.4.03.6000); índice de 28,86%; limites subjetivos e territoriais do título executivo; legitimidade ativa; honorários sucumbenciais; preparo (deserção afastada em embargos de declaração)",
+     "especificidades": "Execução promovida por Nayara Rodrigues Regis, herdeira do servidor falecido Aldemir da Silva Regis, contra a União; valor da causa de R$ 903.214,14 (07/2024); custas iniciais recolhidas; extinção por ilegitimidade ativa, por ausência de vínculo com Mato Grosso do Sul, com custas e honorários de 10% sobre o valor atualizado da causa; impugnação da União com outras matérias além da ilegitimidade, não examinadas na sentença; apelação inicialmente não conhecida por deserção (ID 392703170), decisão tornada sem efeito no acolhimento dos embargos de declaração, com reconhecimento do preparo (ID 400100649); União pede, em memoriais, sobrestamento pelo Tema 1.433/STJ.",
+     "questoes": "1) Alcance territorial e subjetivo do título da ACP 0005019-15.1997.4.03.6000 e legitimidade ativa de herdeira de servidor sem vínculo com Mato Grosso do Sul (artigo 16 da Lei 7.347/1985; Tema 1.075/STF; Tema 733/STF). 2) Sobrestamento pelo Tema 1.433/STJ, pedido pela União em memoriais. 3) Honorários: fixação de honorários recursais e redução equitativa (artigo 85, § 8º, do CPC), pedidas pela parte apelante.",
+     "sintese": "Nayara Rodrigues Regis, herdeira do servidor falecido Aldemir da Silva Regis, ajuizou cumprimento individual da sentença da ACP 0005019-15.1997.4.03.6000 contra a União, no valor de R$ 903.214,14 (07/2024) (ID 382846164). A União impugnou, com preliminar de ilegitimidade ativa, entre outras matérias (ID 382846483). A sentença reconheceu a ilegitimidade ativa e extinguiu o processo, sem resolução do mérito (artigo 485, VI, do CPC), com condenação em custas e honorários de 10% sobre o valor atualizado da causa (ID 382846496). A exequente apelou (ID 382846497), e a União apresentou contrarrazões (ID 382846503). A apelação foi não conhecida por deserção (ID 392703170); acolhidos os embargos de declaração, a decisão foi tornada sem efeito, com reconhecimento do preparo (ID 400100649). A União apresentou memoriais (ID 406589347).",
+     "rel": {
+      "razoes": "Apelação da exequente (ID 382846497): (1) o título executivo judicial não contém limitação geográfica, seja quanto à lotação do servidor, seja quanto ao domicílio, e abrange servidores ativos ou inativos não litigantes em outras ações e não firmatários de acordo, requisitos preenchidos pela parte exequente; (2) a sentença violou a coisa julgada e o princípio da adstrição, pois ao juízo do cumprimento de sentença cabe observar os parâmetros fixados na fase de conhecimento, sem restringi-los; (3) os artigos 103 e 104 do CDC e precedentes do TRF-3 e do TRF-2 confirmam a abrangência nacional do título; (4) ainda que aplicável o artigo 16 da Lei 7.347/1985, não haveria limitação dos efeitos da sentença ao Estado de Mato Grosso do Sul. Pedido de honorários recursais e, subsidiariamente, de redução da verba honorária por apreciação equitativa (artigo 85, § 8º, do CPC).",
+      "contrarrazoes": "União (ID 382846503): ilegitimidade ativa da parte exequente, lotada fora do Estado de Mato Grosso do Sul, porque o pedido da ação civil pública se limitou aos servidores daquele Estado (interpretação lógico-sistemática da inicial e do aditamento; congruência, artigo 293 do CPC/1973), o que se confirmaria pelo cumprimento da liminar apenas perante órgãos locais e pelo ajuizamento de ações idênticas pelo Ministério Público Federal em outras unidades federativas; inaplicabilidade do Tema 1.075/STF à coisa julgada anterior (Tema 733/STF). Memoriais da União (ID 406589347): reiteração da ilegitimidade ativa (delimitação estadual do pedido; irretroatividade do Tema 1.075/STF); sobrestamento subsidiário até o julgamento do Tema 1.433/STJ; exame das demais matérias de defesa, se superada a questão. [VALIDAR: contrarrazões e memoriais ilegíveis no inteiro teor; resumo igual ao das peças da União nos casos idênticos]"
+     },
+     "obsGeral": "Prontuário preenchido pelo Claude a partir do inteiro teor do 2º grau (18/11/2026), sem passar pela LIA. Contrarrazões e memoriais da União ilegíveis no inteiro teor. Não consta parecer nem vista à Procuradoria Regional da República.",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "382846496",
+      "data": "2026-06-01",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "julgador": "Dalton Igor Kita Conrado",
+      "dispositivo": "Ante o exposto, declaro extinto o presente processo, sem resolução do mérito, por reconhecer a ilegitimidade ativa da parte exequente, nos termos do artigo 485, inciso VI, do Código de Processo Civil. Custas ex lege. Pelos princípios da sucumbência e da causalidade, condeno a parte exequente a arcar com as custas processuais e a pagar honorários advocatícios que fixo em 10% sobre o valor atualizado da causa, nos termos do artigo 85, §§1º e 2º, do CPC.",
+      "acc": {
+       "custas": true,
+       "honor": true,
+       "tutela": false,
+       "valor": true
+      }
+     },
+     "adm": {
+      "prot": "2026-06-24",
+      "prazo": "15",
+      "dobro": false,
+      "dpu": false,
+      "ajg": false,
+      "req": "Regularidade formal",
+      "reqObs": "Preparo: guia (ID 382846498) e comprovante Pix (ID 382846499) juntados com a apelação; deserção declarada (ID 392703170) e tornada sem efeito no acolhimento dos embargos de declaração (ID 400100649)"
+     },
+     "jul": {
+      "remessa": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Apelação",
+       "contra": "Apresentada",
+       "id": "382846497"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial do cumprimento de sentença",
+       "id": "382846164",
+       "data": "2024-08-02"
+      },
+      {
+       "desc": "Impugnação da União ao cumprimento de sentença",
+       "id": "382846483",
+       "data": "2025-09-04"
+      },
+      {
+       "desc": "Sentença de extinção (ilegitimidade ativa)",
+       "id": "382846496",
+       "data": "2026-06-01"
+      },
+      {
+       "desc": "Apelação da exequente",
+       "id": "382846497",
+       "data": "2026-06-24"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "382846503",
+       "data": "2026-06-26"
+      },
+      {
+       "desc": "Despacho (comprovação do preparo)",
+       "id": "389833047",
+       "data": "2026-07-31"
+      },
+      {
+       "desc": "Manifestação da apelante sobre o preparo",
+       "id": "391480092",
+       "data": "2026-08-11"
+      },
+      {
+       "desc": "Decisão monocrática (deserção)",
+       "id": "392703170",
+       "data": "2026-08-25"
+      },
+      {
+       "desc": "Embargos de declaração da apelante",
+       "id": "395890362",
+       "data": "2026-09-04"
+      },
+      {
+       "desc": "Embargos de declaração da apelante",
+       "id": "395892063",
+       "data": "2026-09-04"
+      },
+      {
+       "desc": "Decisão que acolheu os embargos e afastou a deserção",
+       "id": "400100649",
+       "data": "2026-10-05"
+      },
+      {
+       "desc": "Memoriais da União",
+       "id": "406589347",
+       "data": "2026-10-25"
+      }
+     ],
+     "pendencias": [
+      {
+       "desc": "Contrarrazões (ID 382846503) e memoriais (ID 406589347) ilegíveis no inteiro teor: conferir o conteúdo na peça",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      },
+      {
+       "desc": "Tempestividade: a data da intimação da sentença na origem não consta do inteiro teor (sentença de 01/06/2026; apelação de 24/06/2026)",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      },
+      {
+       "desc": "Não consta parecer nem vista à Procuradoria Regional da República no inteiro teor",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      },
+      {
+       "desc": "Qualidade da exequente: a sentença a trata como herdeira; a nota técnica juntada por ela (ID 382846495) refere benefício de pensão iniciado em 03/02/2021. Conferir se a minuta deve dizer pensionista",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      }
+     ]
+    },
+    "tempest": "Não verificado",
+    "preparo": "Comprovado",
+    "prelim": "Há preliminares",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "mpf": "Sem hipótese",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não",
+    "editadoPor": "Claude (autos)",
+    "editadoEm": "2026-11-18T20:46:35.615Z"
+   }
   },
   {
    "cnj": "5008175-75.2024.4.03.6000",
@@ -491,7 +774,153 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "relacionado": "Tema 1.433/STJ (ProAfR no REsp 2.234.888); Tema 1.075/STF; Tema 733/STF",
+     "subassuntos": "Cumprimento individual de sentença coletiva (ACP 0005019-15.1997.4.03.6000); índice de 28,86%; limites subjetivos e territoriais do título executivo; legitimidade ativa; honorários sucumbenciais; preparo (deserção afastada em embargos de declaração)",
+     "especificidades": "Exequente: espólio de Joel Batista da Silva, representado pela inventariante Elielza Oliveira Ribeiro, contra a União; valor pedido de R$ 407.374,10 (julho/2024); extinção por ilegitimidade ativa, acolhida a preliminar da União, com custas e honorários de 10% sobre o valor atualizado da causa; apelação inicialmente não conhecida por deserção (ID 392700615), decisão tornada sem efeito no acolhimento dos embargos de declaração (ID 400100637); União pede, em memoriais, sobrestamento pelo Tema 1.433/STJ.",
+     "questoes": "1) Alcance territorial e subjetivo do título da ACP 0005019-15.1997.4.03.6000 e legitimidade ativa de espólio de servidor sem vínculo com Mato Grosso do Sul (artigo 16 da Lei 7.347/1985; Tema 1.075/STF; Tema 733/STF). 2) Sobrestamento pelo Tema 1.433/STJ, pedido pela União em memoriais. 3) Honorários: fixação de honorários recursais e redução equitativa (artigo 85, § 8º, do CPC), pedidas pela parte apelante.",
+     "sintese": "O cumprimento individual da sentença da ACP 0005019-15.1997.4.03.6000 foi ajuizado em 02/08/2024 contra a União (ID 381970299), no valor de R$ 407.374,10 (julho/2024); figura como exequente o espólio de Joel Batista da Silva, representado pela inventariante Elielza Oliveira Ribeiro. A União impugnou, com preliminar de ilegitimidade ativa. A sentença acolheu a preliminar e extinguiu o processo, sem resolução do mérito (artigo 485, VI, do CPC), com condenação em custas e honorários de 10% sobre o valor atualizado da causa (ID 381970331). O espólio apelou (ID 381970382), e a União apresentou contrarrazões (ID 381970386). A apelação foi não conhecida por deserção (ID 392700615); acolhidos os embargos de declaração, a decisão foi tornada sem efeito e afastada a deserção (ID 400100637). A União apresentou memoriais (ID 407498483).",
+     "rel": {
+      "razoes": "Apelação do espólio, representado pela inventariante (ID 381970382): (1) o título executivo judicial não contém limitação geográfica, seja quanto à lotação do servidor, seja quanto ao domicílio, e abrange servidores ativos ou inativos não litigantes em outras ações e não firmatários de acordo, requisitos preenchidos pela parte exequente; (2) a sentença violou a coisa julgada e o princípio da adstrição, pois ao juízo do cumprimento de sentença cabe observar os parâmetros fixados na fase de conhecimento, sem restringi-los; (3) os artigos 103 e 104 do CDC e precedentes do TRF-3 e do TRF-2 confirmam a abrangência nacional do título; (4) ainda que aplicável o artigo 16 da Lei 7.347/1985, não haveria limitação dos efeitos da sentença ao Estado de Mato Grosso do Sul. Pedido de honorários recursais e, subsidiariamente, de redução da verba honorária por apreciação equitativa (artigo 85, § 8º, do CPC).",
+      "contrarrazoes": "União (ID 381970386): ilegitimidade ativa da parte exequente, lotada fora do Estado de Mato Grosso do Sul, porque o pedido da ação civil pública se limitou aos servidores daquele Estado (interpretação lógico-sistemática da inicial e do aditamento; congruência, artigo 293 do CPC/1973), o que se confirmaria pelo cumprimento da liminar apenas perante órgãos locais e pelo ajuizamento de ações idênticas pelo Ministério Público Federal em outras unidades federativas; inaplicabilidade do Tema 1.075/STF à coisa julgada anterior (Tema 733/STF). Memoriais da União (ID 407498483): reiteração da ilegitimidade ativa (delimitação estadual do pedido; irretroatividade do Tema 1.075/STF); sobrestamento subsidiário até o julgamento do Tema 1.433/STJ; exame das demais matérias de defesa, se superada a questão."
+     },
+     "obsGeral": "Prontuário preenchido pelo Claude a partir do inteiro teor do 2º grau (18/11/2026), sem passar pela LIA. Não consta parecer nem vista à Procuradoria Regional da República.",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "381970331",
+      "data": "2026-05-27",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "julgador": "Dalton Igor Kita Conrado",
+      "dispositivo": "Ante o exposto, acolho a preliminar de ilegitimidade ativa, arguida pela executada, e declaro extinto o presente processo, sem resolução do mérito, nos termos do artigo 485, inciso VI, do Código de Processo Civil. Custas ex lege. Pelos princípios da sucumbência e da causalidade, condeno a parte exequente a arcar com as custas processuais e a pagar honorários advocatícios que fixo em 10% sobre o valor atualizado da causa, nos termos do artigo 85, §§1º e 2º, do CPC.",
+      "acc": {
+       "custas": true,
+       "honor": true,
+       "tutela": false,
+       "valor": true
+      }
+     },
+     "adm": {
+      "prot": "2026-06-18",
+      "prazo": "15",
+      "dobro": false,
+      "dpu": false,
+      "ajg": false,
+      "req": "Regularidade formal",
+      "reqObs": "Preparo: guia (ID 381970383) e comprovante (ID 381970384) juntados com a apelação; deserção declarada (ID 392700615) e afastada no acolhimento dos embargos de declaração (ID 400100637)"
+     },
+     "jul": {
+      "remessa": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Apelação",
+       "contra": "Apresentada",
+       "id": "381970382"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial do cumprimento de sentença",
+       "id": "381970299",
+       "data": "2024-08-02"
+      },
+      {
+       "desc": "Resposta à impugnação",
+       "id": "381970326",
+       "data": "2025-08-25"
+      },
+      {
+       "desc": "Sentença de extinção (ilegitimidade ativa)",
+       "id": "381970331",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Apelação do espólio",
+       "id": "381970382",
+       "data": "2026-06-18"
+      },
+      {
+       "desc": "Guia de custas da apelação",
+       "id": "381970383",
+       "data": "2026-06-18"
+      },
+      {
+       "desc": "Comprovante de recolhimento do preparo",
+       "id": "381970384",
+       "data": "2026-06-18"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "381970386",
+       "data": "2026-06-19"
+      },
+      {
+       "desc": "Despacho (comprovação do preparo)",
+       "id": "389427660",
+       "data": "2026-07-30"
+      },
+      {
+       "desc": "Manifestação do apelante sobre o preparo",
+       "id": "391474232",
+       "data": "2026-08-11"
+      },
+      {
+       "desc": "Decisão monocrática (deserção)",
+       "id": "392700615",
+       "data": "2026-08-25"
+      },
+      {
+       "desc": "Embargos de declaração do apelante",
+       "id": "395905623",
+       "data": "2026-09-04"
+      },
+      {
+       "desc": "Embargos de declaração do apelante",
+       "id": "395911473",
+       "data": "2026-09-04"
+      },
+      {
+       "desc": "Decisão que acolheu os embargos e afastou a deserção",
+       "id": "400100637",
+       "data": "2026-10-05"
+      },
+      {
+       "desc": "Memoriais da União",
+       "id": "407498483",
+       "data": "2026-10-29"
+      }
+     ],
+     "pendencias": [
+      {
+       "desc": "Tempestividade: a data da intimação da sentença na origem não consta do inteiro teor (sentença de 27/05/2026; apelação de 18/06/2026)",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      },
+      {
+       "desc": "Não consta parecer nem vista à Procuradoria Regional da República no inteiro teor",
+       "ok": false,
+       "em": "2026-11-18",
+       "por": "Claude (autos)"
+      }
+     ]
+    },
+    "tempest": "Não verificado",
+    "preparo": "Comprovado",
+    "prelim": "Há preliminares",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "mpf": "Sem hipótese",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não",
+    "editadoPor": "Claude (autos)",
+    "editadoEm": "2026-11-18T20:46:35.617Z"
+   }
   },
   {
    "cnj": "5008201-39.2025.4.03.6000",

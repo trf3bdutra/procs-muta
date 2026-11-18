@@ -5,7 +5,7 @@
   python3 lote.py prompts [--sessao AAAA-MM-DD] [--so N1,N2] [--saida PASTA]
                                                gera um prompt por processo pendente (o mesmo do Ex Officio,
                                                mais a pista da triagem), para colar na LIA com os autos abertos
-  python3 lote.py lancar RESPOSTAS... [--sobrescrever] [--ensaio]
+  python3 lote.py lancar RESPOSTAS... [--sobrescrever] [--ensaio] [--autor NOME]
                                                lê os blocos <<<PRONTUARIO_CMT … >>> (arquivos .txt/.json ou pasta),
                                                confere e grava no cartão do processo na pauta (acervo/sessoes/*.json),
                                                como o botão "Aplicar" do Ex Officio, e atualiza a planilha de controle
@@ -13,6 +13,7 @@
 Controle: acervo/controles/triagem-2886.xlsx — as colunas de controle ficam à direita das da triagem:
 Pauta, Item, Grupo sugerido, Prompt gerado, Prontuário lançado, Modelo (LIA), Consulta.
 Nada é apagado: campo já preenchido no cartão só é trocado com --sobrescrever.
+--autor registra quem preencheu (padrão 'LIA (lote)'); use outro nome quando o prontuário vier de outra fonte, como os autos.
 """
 import argparse
 import datetime as dt
@@ -238,12 +239,13 @@ def cmd_lancar(a):
         if o.get('pecas') and (a.sobrescrever or not cart.get('pecas')):
             pc = [{'desc': str(x.get('desc') or ''), 'id': str(x.get('id') or ''), 'data': valor([0, 0, 'data'], x.get('data')) or ''} for x in o['pecas'] if x.get('desc') or x.get('id')]
             if pc: cart['pecas'] = pc; n += 1
+        por = 'LIA · lote' if a.autor == 'LIA (lote)' else a.autor
         ex = cart.get('pendencias') or []
         nov = [t for t in map(str, o.get('pendencias') or []) if t.strip() and not any(norm(q.get('desc')) == norm(t) for q in ex)]
         if nov:
-            cart['pendencias'] = ex + [{'desc': t, 'ok': False, 'em': dt.date.today().isoformat(), 'por': 'LIA · lote'} for t in nov]; n += 1
+            cart['pendencias'] = ex + [{'desc': t, 'ok': False, 'em': dt.date.today().isoformat(), 'por': por} for t in nov]; n += 1
         if n:
-            it['ctl']['editadoPor'] = 'LIA (lote)'; it['ctl']['editadoEm'] = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None).isoformat(timespec='milliseconds') + 'Z'
+            it['ctl']['editadoPor'] = a.autor; it['ctl']['editadoEm'] = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None).isoformat(timespec='milliseconds') + 'Z'
             mexidos[arq] = data
         mod = re.search(r'2886-(3d|\d[a-z]?(?:-esp)?)', json.dumps(o, ensure_ascii=False))
         r = lin.get(cnj)
@@ -271,7 +273,7 @@ def main():
     sp = ap.add_subparsers(dest='cmd', required=True)
     sp.add_parser('status')
     p = sp.add_parser('prompts'); p.add_argument('--sessao'); p.add_argument('--so'); p.add_argument('--saida'); p.add_argument('--todos', action='store_true')
-    p = sp.add_parser('lancar'); p.add_argument('respostas', nargs='+'); p.add_argument('--sobrescrever', action='store_true'); p.add_argument('--ensaio', action='store_true')
+    p = sp.add_parser('lancar'); p.add_argument('respostas', nargs='+'); p.add_argument('--sobrescrever', action='store_true'); p.add_argument('--ensaio', action='store_true'); p.add_argument('--autor', default='LIA (lote)')
     a = ap.parse_args()
     {'status': cmd_status, 'prompts': cmd_prompts, 'lancar': cmd_lancar}[a.cmd](a)
 

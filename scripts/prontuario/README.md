@@ -16,6 +16,7 @@ python3 scripts/prontuario/lote.py lancar RESPOSTAS.txt|PASTA [--ensaio]      # 
   - Só aceita as chaves oficiais; as outras são relatadas e ignoradas.
   - Não troca campo já preenchido, salvo com `--sobrescrever`.
   - Inclui as pendências novas.
+  - `--autor NOME` registra quem preencheu o cartão (padrão: `LIA (lote)`); use `--autor 'Claude (autos)'` quando o prontuário vier da leitura direta do inteiro teor.
   - Grava `acervo/sessoes/AAAA-MM-DD.json` e atualiza a planilha de controle.
   - O commit fica a cargo de quem roda.
 - **Depois do lançamento:** o link da coluna Consulta abre a minuta pela matriz modular (`/modus/#consulta=SESSÃO/ITEM`).
