@@ -161,7 +161,8 @@ module.exports = async (req, res) => {
       body: JSON.stringify({ accountId: conta, message: response.slice(0, 3800) }), signal: AbortSignal.timeout(7000),
     });
     if (!sent.ok) return res.status(502).json({ erro: 'Falha no retorno ao WhatsApp.' });
-    return res.status(200).json({ ok: true });
+    const copia = await require('./_zernio-copia').copiarResposta(conta, response.slice(0, 3800), event);
+    return res.status(200).json({ ok: true, copia });
   } catch (erro) {
     return res.status(erro.status === 413 ? 413 : erro instanceof SyntaxError ? 400 : 500).json({ erro: 'Falha ao processar a mensagem.' });
   }
