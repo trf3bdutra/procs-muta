@@ -1793,9 +1793,9 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
   <main id="v-cmt" hidden>
   <div class="cmt-load" id="cmt-load">
     <span class="cmt-ld-mk"><i class="star"></i></span>
-    <p class="cmt-ld-k">Gabinete CMT · acesso do relator</p>
-    <p class="cmt-ld-t">Painel do <em>relator.</em></p>
-    <p class="cmt-ld-s" id="cmt-ld-s">Bem-vindo, Desembargador.</p>
+    <p class="cmt-ld-k">Gabinete do Des. Fed. Carlos Muta</p>
+    <p class="cmt-ld-t">Painel do <em>Desembargador.</em></p>
+    <p class="cmt-ld-s" id="cmt-ld-s">Bem-vindo, Dr. Carlos Muta.</p>
     <p class="cmt-ld-m" id="cmt-ld-m">Lendo a ficha única, o calendário das sessões e as pautas publicadas…</p>
     <div class="cmt-ld-r" id="cmt-ld-r" hidden></div>
     <div class="cmt-ld-b"><i></i></div>
@@ -1805,7 +1805,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
 
     <div class="cmt-hd2">
       <i class="star" aria-hidden="true"></i>
-      <div class="cmt-hd2-t"><p class="cmt-ey">Gabinete CMT · acesso do relator</p><p class="cmt-hd2-h">Painel do <em>relator.</em></p></div>
+      <div class="cmt-hd2-t"><p class="cmt-ey">Gabinete do Des. Fed. Carlos Muta</p><p class="cmt-hd2-h">Painel do <em>Desembargador.</em></p></div>
       <span class="cmt-sp"></span>
       <div class="cmt-ut">
         <button type="button" class="hb hbx nx-tx" id="cmt-b-not" data-cpn="not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="cmt-n-not" hidden></i></button>
@@ -1845,14 +1845,14 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       </div>
       <div class="cmt-dr-b" id="cmt-dr-b">
       <div class="cmt-dr-t">
-        <p class="cmt-ey">Gabinete CMT · acesso do relator</p>
+        <p class="cmt-ey">Gabinete do Des. Fed. Carlos Muta</p>
         <button type="button" class="cmt-dr-x" id="cmt-dr-x" aria-label="Fechar painéis">Fechar</button>
         <label class="cmt-bq cmt-bq-g"><span class="vh">Buscar processo</span><input type="search" id="cmt-busca" placeholder="Processo, parte ou assunto"></label>
         <button type="button" class="b" id="cmt-atu">Atualizar</button>
         <div class="cmt-ind" id="cmt-ind"></div>
         <p class="cmt-sub" id="cmt-sub"></p>
       </div>
-      <nav class="cmt-dr-tb" id="cmt-dr-tb" role="tablist" aria-label="Painéis do relator"></nav>
+      <nav class="cmt-dr-tb" id="cmt-dr-tb" role="tablist" aria-label="Painéis do Desembargador"></nav>
     <div class="cmt-grid" id="cmt-grid">
         <section class="cmt-q cmt-ass" id="cmt-ass">
           <h2><i class="nn">01</i>Para <em>assinar.</em>
@@ -2073,7 +2073,7 @@ function iniciar(nome,gestor){
   try{S.escopo=localStorage.getItem('eq_escopo')||'meus';}catch(e){}
   marcaSeg('#esc',S.escopo);
   sessoesEquipe(true);
-  P.dados=null;vista((/^#cmt/.test(location.hash)||/\/cmt\/?$/.test(location.pathname))&&(U.des||CMTK)?'cmt':/mono|urg/.test(location.hash)?'mono':/metas/.test(location.hash)?'metas':/sobr/.test(location.hash)?'sobr':/sens/.test(location.hash)?'sens':/controles|monitoramento/.test(location.hash)?'ctrl':/pauta/.test(location.hash)?'pauta':'inicio');
+  P.dados=null;vista((/^#cmt/.test(location.hash)||/\/cmt\/?$/.test(location.pathname))?'cmt':/mono|urg/.test(location.hash)?'mono':/metas/.test(location.hash)?'metas':/sobr/.test(location.hash)?'sobr':/sens/.test(location.hash)?'sens':/controles|monitoramento/.test(location.hash)?'ctrl':/pauta/.test(location.hash)?'pauta':'inicio');
   notificacoes().then(function(){if(h0==='#notificacoes'){abrePainel('#p-not');setTimeout(marcarLido,1500);}});pendencias().then(function(){if(h0==='#pendencias')abrePainel('#p-pen');});
   clearInterval(S.tCal);S.tCal=setInterval(function(){if(!document.hidden)sessoesEquipe(false);},30000);
   if(!S.visOk){S.visOk=1;document.addEventListener('visibilitychange',function(){if(!document.hidden&&U.eu)sessoesEquipe(false);});}
@@ -3414,7 +3414,7 @@ var CTRLV=['ctrl','metas','sobr','sens'],CTRLT=['metas','sobr','sens'];
 function vista(v, documentosProntos){if(v==='controles'||v==='monitoramento')v='ctrl';if(v==='urg')v='mono';if(v==='inicio'||v==='mural')v='pauta';var alvo='';
   /* Controles especiais: Metas, Sobrestados e Casos sensíveis numa só página; o endereço de cada um leva à sua seção */
   if(CTRLT.indexOf(v)>=0){alvo=v;v='ctrl';}
-  if(v==='cmt'&&!U.des&&!CMTK)v='pauta';
+  
   v=['pauta','mono','ctrl','cmt'].indexOf(v)>=0?v:'pauta';
   if(S.prt&&(v==='inicio'||v!==S.fonte)){S.prt=null;S.prtAba=0;try{prontLateral();}catch(e){}}
   if(v==='pauta'&&!documentosProntos&&U.eu&&S.calSig!=null)sessoesEquipe(false);$('#v-cmt').hidden=v!=='cmt';
@@ -3920,7 +3920,7 @@ var CMT={dados:null,carregando:false,atualizado:0};
 /* tela de abertura: saúda o relator e resume o que o espera antes de entrar */
 function cmtAbertura(j){
 var h=new Date().getHours(),sa=h<12?'Bom dia':h<18?'Boa tarde':'Boa noite';
-var e=$('#cmt-ld-s');if(e)e.textContent=sa+', Desembargador.';
+var e=$('#cmt-ld-s');if(e)e.textContent=sa+', Dr. Carlos Muta.';
 var as=j.assinar||{},na=(as.assinatura||[]).length,nu=(j.urgencias||[]).length,nd=(j.duvidas||[]).length,np=(j.pedidos||[]).length;
 var hj=(j.urgencias||[]).filter(function(x){return x.espera===0;}).length;
 var p=j.pauta||{},it=(p.itens||[]),lib=it.filter(function(x){return x.etapa==='liberado';}).length;
@@ -4461,7 +4461,7 @@ function cmtEndereco(){return /^#cmt/.test(location.hash)||/\/cmt\/?$/.test(loca
 function cmtModoLink(){U.eu='';U.des=true;document.body.classList.add('cmt-link');
   var en=$('#entrada'),ap=$('#app');if(en)en.hidden=true;if(ap)ap.hidden=false;vista('cmt');}
 api('/api/login').then(function(j){U.des=!!j.desembargador||!!j.gestor;iniciar(j.usuario,j.gestor);})
-  .catch(function(){if(CMTK)cmtModoLink();else entrada();});
+  .catch(function(){if(CMTK||cmtEndereco())cmtModoLink();else entrada();});
 })();
 </script>
 <script id="cmt-agenda">
