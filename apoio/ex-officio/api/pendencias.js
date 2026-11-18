@@ -152,8 +152,12 @@ module.exports = async (req, res) => {
         alvo.excluida = true; alvo.atualizadoEm = agora; alvo.atualizadoPor = u; msg = 'Diligência excluída por ' + u + ': ' + alvo.title;
       } else return res.status(405).json({ erro: 'método não aceito' });
       dados.atualizadoEm = agora;
-      try { await L.gravarJson(ARQ, dados, sha, msg); return res.status(200).json({ ok: true, task: alvo }); }
-      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+      try { await L.gravarJson(ARQ, dados, sha, msg); }
+      catch (e) { if (e.status === 409 || e.status === 422) continue; throw e; }
+      const relator = process.env.CMT_WA_RELATOR;
+      const whatsapp = req.method === 'POST' && relator && L.norm(alvo.assignee) === L.norm(relator) &&
+        /^Dúvida · /i.test(alvo.title) ? await require('./_alerta-wa').duvida(alvo.id) : 'nao_aplicavel';
+      return res.status(200).json({ ok: true, task: alvo, whatsapp });
     }
     res.status(409).json({ erro: 'O quadro mudou várias vezes seguidas; tente de novo.' });
   } catch (e) { res.status(500).json({ erro: e.message }); }
