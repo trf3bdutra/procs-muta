@@ -3962,7 +3962,7 @@ function cmtPauta(){
   $('#cmt-rows').innerHTML=L.length?L.map(function(x){
     var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.meta)at.push('meta');
     var lib=x.etapa==='liberado';
-    return '<tr><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td><span class="cmt-ac"><button type="button" class="'+(lib?'on':'')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Desfazer a liberação':'Liberar o voto')+'" aria-label="'+(lib?'Desfazer a liberação':'Liberar o voto')+'">✓</button><button type="button" data-cd="'+esc(x.cnj)+'" title="Devolver com apontamento" aria-label="Devolver com apontamento">↩</button></span></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span></td><td>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td title="'+esc(NOME[x.etapa]||x.etapa)+'">'+cmtTrilha(cmtEtapaN(x))+'</td><td class="cmt-at">'+esc(at.join(' · ')||'—')+'</td></tr>';}).join(''):'<tr><td colspan="8" style="color:var(--em)">Nada nesta seleção.</td></tr>';
+    return '<tr><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-acd"><span class="cmt-ac"><button type="button" class="'+(lib?'on':'')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Desfazer a liberação':'Liberar o voto')+'" aria-label="'+(lib?'Desfazer a liberação':'Liberar o voto')+'">✓</button><button type="button" data-cd="'+esc(x.cnj)+'" title="Devolver com apontamento" aria-label="Devolver com apontamento">↩</button></span></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span></td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa" title="'+esc(NOME[x.etapa]||x.etapa)+'">'+cmtTrilha(cmtEtapaN(x))+'</td><td class="cmt-at'+(at.length?'':' vz')+'" data-l="Atenção">'+esc(at.join(' · ')||'—')+'</td></tr>';}).join(''):'<tr><td colspan="8" style="color:var(--em)">Nada nesta seleção.</td></tr>';
   $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
   var falta=it.length-(cta.liberado||0);
   var nmin=it.filter(function(x){return x.dataMinuta;}).length,ncor=it.filter(function(x){return x.dataCorrecao;}).length;
@@ -6688,6 +6688,70 @@ body.cmt-solo header.nx .nx1{height:44px}
 #v-cmt .cmt-rail b small{font-size:7px;letter-spacing:.02em}
 #v-cmt .cmt-rail b.hj{box-shadow:inset 0 2px 0 var(--er)}
 @media (max-width:1100px){#v-cmt .cmt-dr-h{width:auto}#v-cmt .cmt-rail b{width:52px}}
+
+/* ===== Painel do relator no telefone: pauta em fichas, controles ao alcance do polegar ===== */
+@media (max-width:780px){
+  #v-cmt #cmt-pauta{margin-top:10px;padding-left:14px;padding-right:14px}
+  #v-cmt #cmt-pauta h2{flex-wrap:wrap;row-gap:8px}
+  #v-cmt #cmt-pauta h2 .cmt-sp{display:none}
+  #v-cmt #cmt-pauta h2 .cmt-ti{flex:1 1 auto}
+  #v-cmt #cmt-pauta h2 .cmt-n{flex:1 1 100%;order:3}
+  #v-cmt #cmt-pauta h2 .cmt-ses-sel{order:4;flex:1 1 100%;overflow:auto;white-space:nowrap}
+  #v-cmt #cmt-pauta h2 .cmt-bq{order:5;flex:1 1 100%}
+  #v-cmt #cmt-pauta h2 .cmt-bq input{width:100%;height:40px}
+  #v-cmt #cmt-pauta h2 .b{order:6;flex:1 1 30%;height:38px;font-size:11.5px;padding:0 10px}
+  #v-cmt #cmt-pauta h2 #cmt-csv{flex:0 0 auto}
+  #v-cmt .cmt-met{grid-template-columns:1fr 1fr;margin:0 -14px}
+  #v-cmt .cmt-met div{padding:8px 12px}
+  #v-cmt .cmt-met div b{font-size:19px}
+  #v-cmt .cmt-met div .mk,#v-cmt .cmt-met div small{font-size:10px}
+  #v-cmt .cmt-met div.mk{grid-column:1/-1}
+  #v-cmt .cmt-ft{margin:0 -14px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  #v-cmt .cmt-ft::-webkit-scrollbar{display:none}
+  #v-cmt .cmt-ft button{white-space:nowrap;flex:none;min-height:42px}
+  #v-cmt .cmt-tw{margin:0 -14px;overflow-x:visible}
+  #v-cmt .cmt-tb{min-width:0;display:block;font-size:13px}
+  #v-cmt .cmt-tb thead{display:none}
+  #v-cmt .cmt-tb tbody,#v-cmt .cmt-tb tr,#v-cmt .cmt-tb td{display:block;width:auto}
+  #v-cmt .cmt-tb tr{position:relative;display:flex;flex-direction:column;margin:10px 14px;padding:10px 12px 12px 40px;border:1px solid var(--el);border-top:2px solid var(--eg);background:var(--ew)}
+  #v-cmt .cmt-tb td.cmt-ii{order:1}#v-cmt .cmt-tb td.cnj{order:2}#v-cmt .cmt-tb td.cmt-asc{order:3}
+  #v-cmt .cmt-tb td[data-l="Servidor"]{order:4}#v-cmt .cmt-tb td.cmt-tr{order:5}#v-cmt .cmt-tb td.cmt-at{order:6}#v-cmt .cmt-tb td.cmt-acd{order:7}
+  #v-cmt .cmt-tb tr:hover td{background:none}
+  #v-cmt .cmt-tb td{border:0;padding:1px 0}
+  #v-cmt .cmt-tb td:first-child{padding-left:0}
+  #v-cmt .cmt-tb td.cmt-sel{position:absolute;left:12px;top:12px;width:auto}
+  #v-cmt .cmt-tb td.cmt-sel input{width:19px;height:19px}
+  #v-cmt .cmt-tb td.cmt-ii{font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+  #v-cmt .cmt-tb td.cmt-ii::before{content:'Item '}
+  #v-cmt .cmt-tb td.cnj{font-size:13.5px;color:var(--eg);margin-bottom:2px}
+  #v-cmt .cmt-tb td.cmt-asc{font-size:14px;line-height:1.3;margin-bottom:6px}
+  #v-cmt .cmt-tb td[data-l]:not(.cmt-asc)::before{content:attr(data-l) ' · ';font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+  #v-cmt .cmt-tb td.cmt-tr{display:flex;align-items:center;gap:8px;margin:4px 0}
+  #v-cmt .cmt-tb td.cmt-at.vz{display:none}
+  #v-cmt .cmt-tb td.cmt-at{color:var(--er)}
+  #v-cmt .cmt-tb td.cmt-acd{margin-top:10px}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-ac{gap:8px}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-ac button{flex:1;width:auto;height:42px;font-size:13px;gap:6px;grid-auto-flow:column}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-ac button[data-cl]::after{content:'Liberar'}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-ac button[data-cl].on::after{content:'Liberado'}
+  #v-cmt .cmt-tb td.cmt-acd .cmt-ac button[data-cd]::after{content:'Devolver'}
+  #v-cmt .cmt-rodp{padding:0 14px}
+  /* gaveta: barra inferior maior e fichas de assinatura em botões de polegar */
+  #v-cmt .cmt-dr-h{padding:10px 12px calc(10px + env(safe-area-inset-bottom));gap:10px}
+  #v-cmt .cmt-dr-k{display:none}
+  #v-cmt .cmt-rail{width:100%;justify-content:space-between}
+  #v-cmt .cmt-rail b{flex:1;flex-direction:row;gap:6px;width:auto;height:44px}
+  #v-cmt .cmt-rail b i{font-size:15px}
+  #v-cmt .cmt-rail b small{margin:0;font-size:9px}
+  #v-cmt .cmt-dr-b{padding:14px 14px calc(96px + env(safe-area-inset-bottom))}
+  #v-cmt .cmt-dr-t{position:sticky;top:-14px;z-index:2;margin:-14px -14px 0;padding:14px;background:var(--ep)}
+  #v-cmt .cmt-dr .cmt-q{margin-bottom:16px}
+  #v-cmt .cmt-fc-ac{display:flex;flex-wrap:wrap;gap:8px}
+  #v-cmt .cmt-fc-ac button.pri{flex:1 1 100%;min-width:0;height:50px;font-size:15px}
+  #v-cmt .cmt-fc-ac button:not(.pri){flex:1 1 28%;height:44px}
+  #v-cmt .cmt-dr .cmt-ass-b{padding:12px 14px 14px}
+  #v-cmt .cmt-dr .cmt-fc-l div{padding:7px 0}
+}
 </style>
 </body>
 </html>
