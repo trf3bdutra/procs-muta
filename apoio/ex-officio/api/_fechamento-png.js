@@ -39,19 +39,15 @@ module.exports = async (req, res, u) => {
     });
     const medio = meta.ok ? await meta.json() : null;
     if (!medio?.id) return res.status(502).json({ erro: 'A Meta não confirmou o upload do PNG.', statusCanal: meta.status });
-    const zernio = await fetch('https://zernio.com/api/v1/inbox/conversations', {
-      method: 'POST', redirect: 'error',
-      headers: { Authorization: 'Bearer '+env.ZERNIO_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': chave },
-      body: JSON.stringify({
-        accountId: env.CMT_WA_ACCOUNT, participantId: telefone, templateName: env.CMT_WA_TEMPLATE_FECHAMENTO_PNG,
+    const { resposta: zernio, copia } = await require('./_zernio-copia').enviarModelo({
+        accountId: env.CMT_WA_ACCOUNT, templateName: env.CMT_WA_TEMPLATE_FECHAMENTO_PNG,
         templateLanguage: 'pt_BR', templateParams: [data.split('-').reverse().join('/')+' · página '+pagina],
         headerMedia: { id: String(medio.id) },
-      }), signal: AbortSignal.timeout(8000),
-    });
+      }, chave);
     if (!zernio.ok) return res.status(502).json({ erro: 'Zernio não confirmou o envio do PNG.', statusCanal: zernio.status });
     const resposta = await zernio.json();
     if (!resposta?.data?.messageId) return res.status(502).json({ erro: 'Zernio não retornou a identificação da mensagem.' });
-    return res.status(200).json({ aceito: true });
+    return res.status(200).json({ aceito: true, copia });
   } catch {
     return res.status(502).json({ erro: 'Não foi possível confirmar o envio pelo Zernio.' });
   }
