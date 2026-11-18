@@ -230,7 +230,8 @@ async function painel(req, res, u) {
     return { cnj: it.cnj, item: it.item || '', classe: it.classe || '', assunto: it.assunto || '', partes: it.partes || '',
       servidor: it.servidor || '', corretor: it.corretor || '', etapa: etapa(it),
       dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '',
-      resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, meta: c.meta || '', obs: it.obs || '' };
+      resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, meta: c.meta || '',
+      sopref: c.sopref || '', obs: it.obs || '' };
   }) };
   /* marcos vencendo: até 7 dias à frente, ou já vencidos, nas sessões visíveis à equipe */
   const NOMES = { pautarAte: 'Peço dia', inicioPreparacao: 'Início da preparação', entregaMinutas: 'Entrega das minutas', liberacao: 'Liberação' };
