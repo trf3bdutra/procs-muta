@@ -1823,8 +1823,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
           <label class="cmt-ses-w"><span class="vh">Sessão</span><select id="cmt-l-ses"></select></label>
         </div>
         <div class="cmt-ph-2">
-          <span class="cmt-seg cmt-qm" id="cmt-qm" role="group" aria-label="Modo da busca"><button type="button" data-cqm="tudo" aria-pressed="true">Tudo</button><button type="button" data-cqm="item" aria-pressed="false">Item</button><button type="button" data-cqm="proc" aria-pressed="false">Processo</button></span>
-          <label class="cmt-bq cmt-bq-w"><span class="vh">Buscar na pauta</span><svg class="cmt-bq-i" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="cmt-q" placeholder="item, número, assunto ou servidor"><button type="button" class="cmt-bq-x" id="cmt-q-x" aria-label="Limpar a busca" hidden>×</button><span class="cmt-bq-n" id="cmt-q-n"></span></label>
+          <label class="cmt-bq cmt-bq-w"><span class="vh">Buscar na pauta</span><svg class="cmt-bq-i" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="cmt-q" placeholder="cole o número do processo, o item, ou busque por assunto ou servidor"><button type="button" class="cmt-bq-x" id="cmt-q-x" aria-label="Limpar a busca" hidden>×</button><span class="cmt-bq-n" id="cmt-q-n"></span></label>
           <span class="cmt-sp"></span>
           <button type="button" class="b" id="cmt-selt">Selecionar exibidos</button>
           <button type="button" class="b" id="cmt-libl" disabled>Liberar selecionados</button>
@@ -1843,8 +1842,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <aside class="cmt-dr" id="cmt-dr" data-t="a">
       <div class="cmt-dr-h" id="cmt-dr-h">
       <div class="cmt-bbq" id="cmt-bbq" hidden>
-        <span class="cmt-seg cmt-qm" role="group" aria-label="Modo da busca"><button type="button" data-cqm="tudo" aria-pressed="true">Tudo</button><button type="button" data-cqm="item" aria-pressed="false">Item</button><button type="button" data-cqm="proc" aria-pressed="false">Processo</button></span>
-        <label class="cmt-bbq-c"><span class="vh">Buscar na pauta</span><input type="search" id="cmt-q2" placeholder="item, número, assunto ou servidor"></label>
+        <label class="cmt-bbq-c"><span class="vh">Buscar na pauta</span><input type="search" id="cmt-q2" placeholder="cole o número do processo, o item, ou busque por assunto ou servidor"></label>
         <button type="button" class="cmt-bbq-x" id="cmt-bbq-x" aria-label="Fechar a busca">×</button>
       </div>
         <button type="button" class="cmt-bbq-b" id="cmt-bbq-b" aria-label="Buscar na pauta" aria-expanded="false"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
@@ -4032,7 +4030,7 @@ function cmtFiltra(){
     :f==='pedido'?it.filter(function(x){return cmtTem('pedidos',x.cnj);})
     :f==='duvida'?it.filter(function(x){return cmtTem('duvidas',x.cnj);})
     :it.filter(function(x){return x.etapa===f;});
-  if(q){var md=CMT.qm||'tudo',fx=/^\d+(?:\s*[-,]\s*\d+)*$/.test(q),qd=q.replace(/\D/g,'');
+  if(q){var md='tudo',fx=/^\d+(?:\s*[-,]\s*\d+)*$/.test(q),qd=q.replace(/\D/g,'');
     var porItem=function(x){if(!fx)return false;var n=parseInt(x.item,10);if(isNaN(n))return false;
       return q.split(/\s*,\s*/).some(function(p){var r=p.split('-');return r.length>1?(n>=+r[0]&&n<=+r[1]):+p===n;});};
     var porProc=function(x){return qd.length>=3&&String(x.cnj||'').replace(/\D/g,'').indexOf(qd)>=0;};
@@ -4126,14 +4124,22 @@ cmtDlg(h,function(f){var t=f.tipo.value,tx=f.tx.value.trim();if(!tx)return Promi
   var tit=(t==='duvida'?'Dúvida · ':t==='retirada'?'Pedido de retirada · ':'Pedido de adiamento · ')+x.cnj+(x.item?' · item '+x.item:'');
   return api('/api/pendencias',{method:'POST',body:JSON.stringify({title:tit.slice(0,200),description:tx,assignee:t==='duvida'?(x.servidor||''):'',urgency:t==='duvida'?'Média':'Alta',numero:x.cnj,sessao:sd,stage:'todo'})})
     .then(function(){toast(t==='duvida'?'Dúvida registrada para a equipe.':'Pedido registrado; ele aparece em Dúvidas, para apreciação.');CMT.atualizado=0;cmtCarregar(sd);});});}
-function cmtAlertaDlg(x,at){
-var c=[];if(x.intercor)c.push('<p class="cmt-fc-k">Intercorrência'+(x.intercorOk?' (resolvida)':' (em aberto, retém a liberação)')+'</p><p class="q">'+esc(x.intercor)+'</p>');
-if(x.sopref)c.push('<p class="cmt-fc-k">Sustentação ou preferência</p><p class="q">'+esc(x.sopref)+'</p>');
-if(x.obs)c.push('<p class="cmt-fc-k">Observação</p><p class="q">'+esc(x.obs)+'</p>');
-if(x.meta)c.push('<p class="cmt-fc-k">Meta</p><p class="q">'+esc(x.meta)+'</p>');
-if(x.resultado)c.push('<p class="cmt-fc-k">Situação</p><p class="q">'+esc(x.resultado)+'</p>');
-if(!c.length)c.push('<p class="q">Nenhum alerta registrado neste item.</p>');
-cmtDlg('<small class="dv-ey">Alertas do item</small><h2>'+esc(x.cnj)+'</h2><p class="mut">'+esc((x.item?'item '+x.item+' · ':'')+(x.assunto||''))+'</p>'+c.join('')+
+function cmtAlertaDlg(x,at,foco){
+var sec=function(t,v){return '<p class="cmt-fc-k">'+t+'</p><p class="q">'+esc(v)+'</p>';};
+var c=[];
+if(x.sopref)c.push(sec('Sustentação oral ou preferência',x.sopref));
+else if(foco==='sopref')c.push(sec('Sustentação oral ou preferência','Nenhuma registrada.'));
+if(x.intercor)c.push(sec('Intercorrência'+(x.intercorOk?' (resolvida)':' (em aberto, retém a liberação)'),x.intercor));
+if(x.obs)c.push(sec('Observação da equipe',x.obs));
+if(x.meta)c.push(sec('Meta',x.meta));
+if(x.resultado)c.push(sec('Situação na sessão',x.resultado));
+var pd=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];
+if(pd)c.push(sec('Pedido em apreciação','Pedido de '+pd.tipo+(pd.de?' por '+pd.de:'')+' · '+(pd.texto||'')));
+var dv=(((CMT.dados||{}).duvidas)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];
+if(dv)c.push(sec('Dúvida em aberto',(dv.de?dv.de+' · ':'')+(dv.texto||'')));
+if(!c.length)c.push('<p class="q">Nenhuma sinalização neste item.</p>');
+cmtDlg('<small class="dv-ey">Sinalizações do item</small><h2>'+esc(x.cnj)+'</h2><p class="mut">'+esc((x.item?'item '+x.item+' · ':'')+(x.assunto||''))+'</p>'+c.join('')+
+ (pd||dv?'<div class="dv-a" style="margin-bottom:10px"><button type="button" class="b" data-cgo="aba:d">Abrir em Dúvidas</button></div>':'')+
  '<label>Devolutiva à equipe<textarea name="tx" rows="3" maxlength="1800" placeholder="Opcional: apontamento que vira diligência para '+esc(x.servidor||'a equipe')+'"></textarea></label>'+
  '<div class="dv-a"><button type="button" class="b" data-x="1">Fechar</button><button type="submit" class="b pri">Enviar devolutiva</button></div>',
  function(f){var tx=f.tx.value.trim();if(!tx)return Promise.reject(new Error('Escreva o apontamento.'));
@@ -4145,6 +4151,7 @@ var x=((((CMT.dados||{}).pauta)||{}).itens||[]).filter(function(y){return y.cnj=
 var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta '+x.meta);if(x.obs)at.push('observação');
 var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(cnj);})[0];
 if(a==='alerta'){cmtAlertaDlg(x,at);return;}
+if(a==='sopref'){cmtAlertaDlg(x,at,'sopref');return;}
 if(a==='duvida'){cmtPedidoDlg(x,ped);return;}
 if(a==='ficha'){if(typeof abrirFicha==='function')abrirFicha(cnj);else toast('Ficha de '+cnj+': abra pela página Pautas.');return;}
 if(a==='devolver'){var tx=prompt('Devolutiva para '+cnj+' — vira diligência para '+(x.servidor||'a equipe')+':');
@@ -4155,17 +4162,14 @@ var mf=e.target.closest&&e.target.closest('#cmt-mfil');
 if(mf){var on=!document.body.classList.contains('cmt-fon');document.body.classList.toggle('cmt-fon',on);mf.setAttribute('aria-expanded',String(on));mf.textContent=on?'Fechar filtros':'Filtros';return;}
 var rs=e.target.closest&&e.target.closest('#cmt-resumo');
 if(rs){var on2=!document.body.classList.contains('cmt-non');document.body.classList.toggle('cmt-non',on2);rs.setAttribute('aria-expanded',String(on2));return;}});
-document.addEventListener('click',function(e){var q=e.target.closest&&e.target.closest('[data-cqm]');if(!q)return;
-CMT.qm=q.getAttribute('data-cqm');
-[].forEach.call(document.querySelectorAll('[data-cqm]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cqm')===CMT.qm));});
-var el=$('#cmt-q');if(el)el.placeholder=CMT.qm==='item'?'itens 2, 5-9':CMT.qm==='proc'?'número do processo':'itens 2, 5-9, número, assunto ou servidor';
-cmtPauta();});
+
 function dgx(v){return String(v||'').replace(/\D/g,'');}
 function cmtAcoes(x,at,ped){
-var ic={al:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>',dv:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/>',fi:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h4M9 13h6M9 17h4"/>',dev:'<path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/>'};
+var ic={al:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>',so:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>',dv:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/>',fi:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h4M9 13h6M9 17h4"/>',dev:'<path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/>'};
 var b=function(a,cls,d,tt){return '<button type="button" class="cmt-ab '+cls+'" data-ca="'+a+'" data-cnj="'+esc(x.cnj)+'" title="'+esc(tt)+'" aria-label="'+esc(tt)+'">'+cmtSvg(d,14)+'</button>';};
 return '<span class="cmt-abs" role="group" aria-label="Ações do item">'+
-  b('alerta',at.length?'al on':'al',ic.al,at.length?'Alertas: '+at.join(' · '):'Sem alerta registrado')+
+  b('alerta',at.length?'al on':'al',ic.al,at.length?'Sinalizações: '+at.join(' · '):'Sem sinalização registrada')+
+  b('sopref',x.sopref?'so on':'so',ic.so,x.sopref?'Sustentação ou preferência: '+x.sopref:'Sem sustentação ou preferência')+
   b('duvida',ped?'dv on':'dv',ic.dv,ped?'Pedido de '+ped.tipo+' em apreciação · abrir':'Dúvida, pedido de retirada ou de adiamento')+
   b('devolver','dev',ic.dev,'Devolver com apontamento')+
   b('ficha','fi',ic.fi,'Abrir a ficha do processo')+'</span>';}
@@ -4227,6 +4231,13 @@ ab.innerHTML='<p class="cmt-fc-n">'+esc(x.numero||x.titulo||'—')+'</p>'+
 '<p class="cmt-fc-k">'+(ped?'Decisão':'Devolutiva')+'</p><label class="vh" for="cmt-dv-tx">'+(ped?'Decisão':'Devolutiva')+'</label><textarea id="cmt-dv-tx" rows="'+(ped?3:4)+'" placeholder="'+(ped?'Fundamento da decisão, se quiser registrar…':'Escreva a orientação à equipe…')+'"></textarea>'+
 (ped?'<div class="ac"><button type="button" class="pri" data-cpd="defere" data-cid="'+esc(x.id)+'">Deferir o pedido</button><button type="button" data-cpd="indefere" data-cid="'+esc(x.id)+'">Indeferir</button></div>'
    :'<div class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder'+(x.de?' a '+esc(x.de):'')+'</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></div>');}
+/* nota que fica no item: o que foi decidido, quando e a pedido de quem */
+function cmtNotaSit(pd){
+var j=CMT.dados||{},it=(((j.pauta||{}).itens)||[]).filter(function(x){return dgx(x.cnj)===dgx(pd.numero);})[0]||{};
+var nota=(pd.tipo==='retirada'?'Retirado de pauta':'Adiado')+' em '+br(j.hoje||'')+' por decisão do relator'+(pd.de?', a pedido de '+pd.de:'')+'.';
+var o=String(it.obs||'').trim();
+if(!o)return nota;
+return o.indexOf(nota)>=0?o:o+' · '+nota;}
 /* deferimento do pedido: responde a quem pediu e grava a retirada ou o adiamento no item da pauta */
 document.addEventListener('click',function(e){
 var b=e.target.closest&&e.target.closest('[data-cpd]');if(!b)return;
@@ -4238,7 +4249,7 @@ if(!confirm((defere?'Deferir':'Indeferir')+' o pedido de '+pd.tipo+' de '+pd.num
 var sd=pd.sessao||((CMT.dados||{}).pauta||{}).date||'';
 var raw=function(c){return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(c)});};
 b.disabled=true;
-(defere?raw({acao:'situacao',sessao:sd,cnj:pd.numero,valor:pd.tipo==='retirada'?'Retirado':'Adiado'}):Promise.resolve())
+(defere?raw({acao:'situacao',sessao:sd,cnj:pd.numero,valor:pd.tipo==='retirada'?'Retirado':'Adiado',obs:cmtNotaSit(pd)}):Promise.resolve())
 .then(function(){return raw({acao:'responder',id:id,texto:acao+(defere?' deferida.':' indeferido.')+nota});})
 .then(function(){toast(defere?'Pedido deferido e registrado na pauta.':'Pedido indeferido.');CMT.atualizado=0;cmtCarregar(sd);})
 .catch(function(er){b.disabled=false;toast((er&&er.erro)||er.message||'Não foi possível concluir.');});});
@@ -4290,9 +4301,9 @@ h=h.replace(/\b(sustenta(?:ção|cao)(?: oral)?|prefer[êe]ncia)\b/gi,function(m
 return h;}
 function cmtIr(k){
 var p=String(k||'').split(':'),v=p.slice(1).join(':');
-var marcaModo=function(m){[].forEach.call(document.querySelectorAll('[data-cqm]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cqm')===m));});};
-if(p[0]==='proc'){CMT.qm='proc';CMT.q=v;CMT.filtro='todos';var q=$('#cmt-q');if(q)q.value=v;marcaModo('proc');cmtPainel('not',false);cmtPauta();return;}
-if(p[0]==='item'){CMT.qm='item';CMT.q=v;CMT.filtro='todos';var q2=$('#cmt-q');if(q2)q2.value=v;marcaModo('item');cmtPainel('not',false);cmtPauta();return;}
+var marcaModo=function(){};
+if(p[0]==='proc'){CMT.q=v;CMT.filtro='todos';var q=$('#cmt-q');if(q)q.value=v;marcaModo('proc');cmtPainel('not',false);cmtPauta();return;}
+if(p[0]==='item'){CMT.q=v;CMT.filtro='todos';var q2=$('#cmt-q');if(q2)q2.value=v;marcaModo('item');cmtPainel('not',false);cmtPauta();return;}
 if(p[0]==='ses'){cmtPainel('not',false);CMT.atualizado=0;cmtCarregar(v);return;}
 if(p[0]==='aba'){cmtPainel('not',false);cmtGaveta(true,v);return;}
 if(p[0]==='pn'){cmtPainel(v,true);return;}
@@ -4330,9 +4341,8 @@ document.addEventListener('click',function(e){
 var a=e.target.closest&&e.target.closest('[data-cnf]');
 if(a){CMT.notf=a.getAttribute('data-cnf');cmtNotif();return;}
 var v=e.target.closest&&e.target.closest('[data-cnnum]');
-if(v){CMT.q=dgx(v.getAttribute('data-cnnum'));CMT.qm='proc';CMT.filtro='todos';
+if(v){CMT.q=dgx(v.getAttribute('data-cnnum'));CMT.filtro='todos';
   var q=$('#cmt-q');if(q)q.value=CMT.q;
-  [].forEach.call(document.querySelectorAll('[data-cqm]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cqm')==='proc'));});
   cmtPainel('not',false);cmtPauta();return;}});
 function cmtDilig(){
 var j=CMT.dados||{},T=j.diligencias||[],f=CMT.dilf||'comigo';
