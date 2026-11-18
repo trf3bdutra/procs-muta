@@ -65,6 +65,8 @@ jobs:
           mkdir -p site/public/modus && cp apoio/modus-operandi/modus-operandi.html site/public/modus/index.html
           mkdir -p site/public/compendio && cp apoio/modus-operandi/modus-operandi.html site/public/compendio/index.html
           mkdir -p site/public/equipe site/api && cp apoio/ex-officio/index.html site/public/equipe/index.html && cp apoio/ex-officio/api/*.js site/api/
+          # /cmt/ é o endereço próprio do painel do relator (mesma página da Ex Officio).
+          mkdir -p site/public/cmt && cp apoio/ex-officio/index.html site/public/cmt/index.html
           mkdir -p site/public/editor && cp apoio/modus-operandi/modus-operandi-editor.html site/public/editor/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
           # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.
