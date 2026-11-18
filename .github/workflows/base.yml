@@ -52,5 +52,6 @@ jobs:
             git config user.email "base-gabcmt@users.noreply.github.com"
             git add -A
             git commit -m "Base: validação e manifesto (${GITHUB_SHA::7})"
-            git push
+            # alguém pode ter gravado no main durante a montagem: traz o que entrou e tenta de novo
+            for i in 1 2 3 4; do git push && break; sleep $((i*3)); git pull --rebase -q origin main; done
           fi
