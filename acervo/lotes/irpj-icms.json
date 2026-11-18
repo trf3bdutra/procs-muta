@@ -361,28 +361,109 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "CAMPANARIO AGROPECUARIA LTDA",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
+   "grupo": "1",
    "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
+   "resultado": "Desprovimento da apelação e da remessa necessária",
+   "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
+   "variacoes": [
+    "L14",
+    "ORI"
+   ],
+   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+   "peculiaridades": "Mandado de segurança de empresa agropecuária (Campanário Agropecuária Ltda.), 2ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Decreto estadual 12.056/2006 (ID 312598538). A sentença concedeu a segurança, com compensação, Taxa SELIC desde cada recolhimento e Manual de Cálculos, e condenou a União a reembolsar custas.",
+   "peculiaridades_relator": "1) Fundamento da exclusão após a Lei 14.789/2023 uniformizado com o item 66 (ApelRemNec 5000161-72.2019.4.03.6002). 2) Enfrentadas as teses (2) e (4) da União — exclusão só por lei federal e pacto federativo invertido —, que a minuta original não respondia diretamente. 3) Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos.",
    "orientacao": "",
    "equipe": {
     "minuta": "José",
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório)."
+   "pecas": [
+    {
+     "id": "312598538",
+     "tipo": "Decreto estadual 12.056/2006 — crédito presumido de ICMS"
+    },
+    {
+     "id": "312598558",
+     "tipo": "Sentença"
+    },
+    {
+     "id": "312598561",
+     "tipo": "Apelação da União"
+    },
+    {
+     "id": "312598565",
+     "tipo": "Contrarrazões"
+    },
+    {
+     "id": "312661710",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    },
+    {
+     "id": "312671602",
+     "tipo": "Recebimento da apelação no efeito devolutivo"
+    }
    ],
-   "minuta": false
+   "mpf": "ID 312661710",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Ementa",
+     "Reescrita no padrão do gabinete, com uma questão em discussão",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé: súmulas retiradas da lista de dispositivos; AgInt no REsp 2.005.781 duplicado na jurisprudência; retirados dispositivos e julgados não usados; incluídos relator e data",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Sentença e razões da União na fórmula do gabinete, com o pedido",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Transcrições longas substituídas por fundamentação direta, como no item 66",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Enfrentadas as teses (2) e (4) da União",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+     "Corrigido"
+    ],
+    [
+     "Acórdão",
+     "Incluído, com a composição da sessão de 30/11/2026",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+    "Confirmar nos autos o Decreto estadual 12.056/2006 (ID 312598538) como ato concessivo de crédito presumido."
+   ],
+   "minuta": true
   },
   {
    "sessao": "2026-11-30",
@@ -393,28 +474,131 @@
    "exequente": "MPS DISTRIBUIDORA MERCANTIL LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
+   "grupo": "1",
    "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
+   "resultado": "Desprovimento da apelação da União e da remessa necessária; provimento da apelação da impetrante para estender a exclusão ao PIS e à COFINS",
+   "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com extensão ao PIS e à COFINS (Tema 843/STF)",
+   "variacoes": [
+    "L14",
+    "EDO",
+    "ORI"
+   ],
+   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+   "peculiaridades": "Apelações cruzadas em mandado de segurança (MPS Distribuidora Mercantil Ltda.), 2ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Acordo 724/2012 e aditivos (ID 356256987), corroborado pelas GIABF (ID 356256988). A sentença, integrada em embargos, concedeu só quanto ao IRPJ e à CSLL; a impetrante pede a extensão ao PIS e à COFINS. Minuta alterada no PJe depois da extração das 16h (+502 caracteres); corrigida sobre a versão nova.",
+   "peculiaridades_relator": "1) Provimento à impetrante pelo Tema 843/STF, julgado em 07/10/2026 (7 a 4); tese transcrita conforme a divulgada; acórdão ainda não publicado e sem notícia de modulação. 2) A ementa original anunciava a questão do cabimento da remessa necessária (artigo 496, § 4º, do CPC), não tratada no voto, que conhece da remessa e lhe nega provimento: questão retirada. 3) Enfrentado o pedido de efeito suspensivo da União, que a minuta original não apreciava. 4) Lei 14.789/2023: fundamento uniformizado com o item 66.",
    "orientacao": "",
    "equipe": {
     "minuta": "Dalete",
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório)."
+   "pecas": [
+    {
+     "id": "356256983",
+     "tipo": "Documento constitutivo da impetrante"
+    },
+    {
+     "id": "356256987",
+     "tipo": "Acordo 724/2012 e aditivos — crédito presumido de ICMS"
+    },
+    {
+     "id": "356256988",
+     "tipo": "Guias de Informação e Apuração de Benefício Fiscal"
+    },
+    {
+     "id": "356257005",
+     "tipo": "Sentença"
+    },
+    {
+     "id": "356257007",
+     "tipo": "Apelação da União"
+    },
+    {
+     "id": "356257014",
+     "tipo": "Decisão dos embargos de declaração"
+    },
+    {
+     "id": "356257017",
+     "tipo": "Apelação da impetrante"
+    },
+    {
+     "id": "356257019",
+     "tipo": "Contrarrazões da impetrante"
+    },
+    {
+     "id": "356257021",
+     "tipo": "Contrarrazões da União"
+    },
+    {
+     "id": "359322018",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    }
    ],
-   "minuta": false
+   "mpf": "ID 359322018",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Ementa",
+     "Retirada a questão do cabimento da remessa necessária (artigo 496, § 4º, do CPC), anunciada e não decidida; questões reduzidas a duas",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé depurado: retirados dispositivos e temas não usados (artigos 97, 151, 153, 155 da CF; artigo 1.021, § 4º, do CPC; Lei 4.506/1964; Temas 69 e 1.125; Súmula Vinculante 10; Súmula 512/STF); julgados com relator e data; Tema 843 com a data do julgamento",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Razões da União numeradas, com a preliminar de efeito suspensivo; razões e pedido da impetrante; sentença com a decisão dos embargos",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Apreciado o pedido de efeito suspensivo, que a minuta original não enfrentava",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Tema 843/STF com a data do julgamento (07/10/2026) e a tese conferida em fonte pública",
+     "Validado"
+    ],
+    [
+     "Voto",
+     "Transcrições longas substituídas por fundamentação direta, como no item 66",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Retirado o parágrafo do Tema 1.416/STJ, não pedido; ponto em pendência",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+     "Corrigido"
+    ],
+    [
+     "Acórdão",
+     "Incluído, com a composição da sessão de 30/11/2026",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Acompanhar a publicação do acórdão do RE 835.818 (Tema 843) e eventual embargos com pedido de modulação de efeitos antes da sessão de 30/11/2026.",
+    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance as apelações."
+   ],
+   "minuta": true
   },
   {
    "sessao": "2026-11-30",
