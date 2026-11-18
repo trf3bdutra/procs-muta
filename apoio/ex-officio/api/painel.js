@@ -7,9 +7,15 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.query && req.query.whatsapp === '1') return require('./_whatsapp')(req, res);
   if (req.query && req.query.fechamento === '1') return require('./_fechamento-auto')(req, res);
+  /* painel do relator: o endereço próprio (/cmt?k=…) vale como credencial, sem login */
+  if (req.query && req.query.cmt) {
+    const CMT = require('./_cmt');
+    const quem = L.quem(req);
+    if (!quem && !CMT.porChave(req)) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
+    return CMT(req, res, quem || process.env.CMT_RELATOR || 'CM');
+  }
   const u = L.exigir(req, res); if (!u) return;
   if (req.query && req.query.fechamentoPng === '1') return require('./_fechamento-png')(req, res, u);
-  if (req.query && req.query.cmt) return require('./_cmt')(req, res, u);
   try {
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
     /* calendário: sessões com marcos publicados; processos, progresso e "meus" só das pautas com listagem publicada */
