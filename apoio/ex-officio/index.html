@@ -4192,7 +4192,7 @@ var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)=
 if(a==='alerta'){cmtAlertaDlg(x,at);return;}
 if(a==='sopref'){cmtAlertaDlg(x,at,'sopref');return;}
 if(a==='duvida'){cmtPedidoDlg(x,ped);return;}
-if(a==='ficha'){if(typeof abrirFicha==='function')abrirFicha(cnj);else toast('Ficha de '+cnj+': abra pela página Pautas.');return;}
+if(a==='ficha'){cmtProntDlg(x);return;}
 if(a==='devolver'){var tx=prompt('Devolutiva para '+cnj+' — vira diligência para '+(x.servidor||'a equipe')+':');
   if(tx&&tx.trim())cmtPost({acao:'devolver',sessao:((CMT.dados||{}).pauta||{}).date||'',cnj:cnj,texto:tx.trim(),para:x.servidor||''},'Devolutiva enviada.');return;}});
 document.addEventListener('change',function(e){if(e.target&&e.target.id==='cmt-l-ses'&&e.target.value){CMT.atualizado=0;cmtCarregar(e.target.value);}});
@@ -4203,7 +4203,47 @@ var rs=e.target.closest&&e.target.closest('#cmt-resumo');
 if(rs){var on2=!document.body.classList.contains('cmt-non');document.body.classList.toggle('cmt-non',on2);rs.setAttribute('aria-expanded',String(on2));return;}});
 
 function dgx(v){return String(v||'').replace(/\D/g,'');}
-function cmtAcoes(x,at,ped){
+/* prontuário do processo no painel do desembargador: a ficha única em leitura, com a trilha e as ações do item */
+function cmtAt(x){var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta');return at;}
+function cmtPed(x){return (((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];}
+function cmtProntDlg(x){
+var o=document.getElementById('cmt-pdlg');if(o)o.remove();
+var sd=((CMT.dados||{}).pauta||{}).date||'',at=cmtAt(x),ped=cmtPed(x);
+var ET={pendente:'Sem minuta',minutado:'Minutada',corrigido:'Corrigida',liberado:'Liberada'};
+var ch=function(r,v,c){return v?'<span class="cmt-pd-ch'+(c?' '+c:'')+'"><span>'+r+'</span><b>'+esc(v)+'</b></span>':'';};
+var d=document.createElement('dialog');d.id='cmt-pdlg';d.className='dv-dlg cmt-dlg cmt-pdlg';
+d.innerHTML='<div class="cmt-pd-h"><div class="cmt-pd-t"><small class="dv-ey">Prontuário do processo</small><h2>'+esc(x.cnj)+'</h2>'+
+ '<p class="mut">'+esc([x.item?'Item '+x.item:'',sd?'sessão de '+br(sd):'',x.assunto||x.classe||''].filter(Boolean).join(' · '))+'</p></div>'+
+ '<button type="button" class="cmt-pd-x" data-pdx="1" aria-label="Fechar">'+cmtSvg('<path d="M6 6l12 12M18 6L6 18"/>',16)+'</button></div>'+
+ '<div class="cmt-pd-chs">'+ch('Etapa',ET[x.etapa]||'—')+ch('Minutante',x.servidor||'—')+ch('Corretor',x.corretor||'—')+
+ ch('Julgamento',x.julgamento)+ch('Destaque',x.destaque,'al')+ch('Situação',x.resultado,'al')+
+ (ped?ch('Pedido',ped.tipo+' em apreciação','al'):'')+(at.length?ch('Sinalização',at.join(' · '),'al'):'')+'</div>'+
+ '<div class="cmt-pd-ac"><div class="cmt-tr">'+cmtPasso(x)+'</div>'+cmtAcoes(x,at,ped,true)+'</div>'+
+ (x.partes?'<p class="cmt-pd-pt">'+esc(x.partes)+'</p>':'')+
+ (x.obs?'<p class="cmt-pd-ob"><span>Observação do item</span>'+esc(x.obs)+'</p>':'')+
+ '<div class="cmt-pd-b" id="cmt-pd-b"><p class="mut">Carregando a ficha…</p></div>';
+document.body.appendChild(d);
+var fechar=function(){d.close&&d.close();d.remove();};
+d.querySelector('[data-pdx]').onclick=fechar;
+d.addEventListener('cancel',function(e){e.preventDefault();fechar();});
+d.addEventListener('click',function(e){if(e.target===d)fechar();});
+if(d.showModal)d.showModal();else d.setAttribute('open','');
+api('/api/painel?cmt=1&pront='+encodeURIComponent(x.cnj)).then(function(j){
+  var el=document.getElementById('cmt-pd-b');if(!el)return;
+  var abas=(j&&j.abas)||[];
+  if(!abas.length){el.innerHTML='<p class="mut">'+(j&&j.achou?'A ficha deste processo ainda não tem campos preenchidos.':'Este processo ainda não tem ficha.')+'</p>';return;}
+  el.innerHTML='<div class="cmt-pd-tb" role="tablist">'+abas.map(function(a,i){return '<button type="button" role="tab" data-pda="'+i+'" aria-selected="'+(!i)+'">'+esc(a.nome)+'</button>';}).join('')+'</div>'+
+   abas.map(function(a,i){return '<div class="cmt-pd-p" data-pdp="'+i+'"'+(i?' hidden':'')+'>'+a.grupos.map(function(g){
+     return '<section><h3>'+esc(g.nome)+'</h3><dl>'+g.campos.map(function(c){
+       var v=Array.isArray(c.valor)?c.valor.map(function(y){return typeof y==='object'?Object.keys(y).map(function(k){return y[k];}).filter(Boolean).join(' · '):String(y);}).join(' | '):String(c.valor);
+       return '<dt>'+esc(c.rotulo)+'</dt><dd>'+esc(v)+'</dd>';}).join('')+'</dl></section>';}).join('')+'</div>';}).join('');
+  el.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-pda]');if(!b)return;
+    var k=b.getAttribute('data-pda');
+    [].forEach.call(el.querySelectorAll('[data-pda]'),function(q){q.setAttribute('aria-selected',q===b);});
+    [].forEach.call(el.querySelectorAll('[data-pdp]'),function(q){q.hidden=q.getAttribute('data-pdp')!==k;});});
+}).catch(function(e){var el=document.getElementById('cmt-pd-b');if(el)el.innerHTML='<p class="mut">'+esc((e&&e.erro)||'Não foi possível ler a ficha.')+'</p>';});
+return d;}
+function cmtAcoes(x,at,ped,semFicha){
 var ic={al:'<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17v.5"/>',so:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>',dv:'<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/>',fi:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h4M9 13h6M9 17h4"/>',dev:'<path d="M9 7L4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 6 6v1"/>'};
 var b=function(a,cls,d,tt){return '<button type="button" class="cmt-ab '+cls+'" data-ca="'+a+'" data-cnj="'+esc(x.cnj)+'" title="'+esc(tt)+'" aria-label="'+esc(tt)+'">'+cmtSvg(d,14)+'</button>';};
 return '<span class="cmt-abs" role="group" aria-label="Ações do item">'+
@@ -4211,7 +4251,7 @@ return '<span class="cmt-abs" role="group" aria-label="Ações do item">'+
   b('sopref',x.sopref?'so on':'so',ic.so,x.sopref?'Sustentação ou preferência: '+x.sopref:'Sem sustentação ou preferência')+
   b('duvida',ped?'dv on':'dv',ic.dv,ped?'Pedido de '+ped.tipo+' em apreciação · abrir':'Dúvida, pedido de retirada ou de adiamento')+
   b('devolver','dev',ic.dev,'Devolver com apontamento')+
-  b('ficha','fi',ic.fi,'Abrir a ficha do processo')+'</span>';}
+  (semFicha?'':b('ficha','fi',ic.fi,'Abrir o prontuário do processo'))+'</span>';}
 function cmtPasso(x){
 var lib=x.etapa==='liberado',cor=!!x.dataCorrecao||lib,min=!!x.dataMinuta||cor,ret=/^retirad/i.test(x.resultado||''),adi=/^adiad/i.test(x.resultado||'');
 var p=function(cls,ic,rot,tt,campo){return '<button type="button" class="cmt-pa'+(cls?' '+cls:'')+'" data-cet="'+campo+'" data-cnj="'+esc(x.cnj)+'" title="'+esc(tt)+'"><i>'+cmtSvg(ic,12)+'</i><b>'+rot+'</b></button>';};
@@ -4462,8 +4502,9 @@ function cmtPinta(){
 document.addEventListener('click',function(e){
   var b=e.target.closest&&e.target.closest('[data-cs]');if(b){CMT.atualizado=0;cmtCarregar(b.getAttribute('data-cs'));return;}
   var f=e.target.closest&&e.target.closest('[data-cf]');
-  if(f){var k=f.getAttribute('data-cf');CMT.filtro=k;cmtPauta();
-    if((k==='duvida'||k==='pedido')&&f.closest('#cmt-sit'))cmtGaveta(true,'d');
+  if(f){var k=f.getAttribute('data-cf'),marc=!!f.closest('#cmt-sit');
+    CMT.filtro=k;cmtPauta();
+    if(marc&&(k==='duvida'||k==='pedido'))cmtGaveta(true,'d');
     return;}
   var m=e.target.closest&&e.target.closest('[data-mes]');if(m){var d=CMT.mes||new Date();CMT.mes=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+parseInt(m.getAttribute('data-mes'),10),1));cmtCal();return;}
   if(e.target&&e.target.id==='cmt-hoje'){CMT.mes=new Date(Date.parse(((CMT.dados||{}).hoje||'')+'T12:00:00Z'));cmtCal();return;}
@@ -7670,6 +7711,71 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
   #v-cmt .cmt-fsel select{height:38px;font-size:13px}
   #v-cmt .cmt-flimpa{flex:1 1 100%;height:36px}
   #v-cmt .cmt-sit::before{flex:1 1 100%;margin:2px 0 0}
+}
+
+/* /cmt · prontuário do processo em diálogo: leitura da ficha única, com a trilha e as ações do item */
+dialog.cmt-pdlg{--ep:#fbfaf5;--ep2:#f3f1e8;--el:#ded9cc;--el2:#c8c3b6;--ei:#1c3344;--ei2:#2b4556;--em:#5d6b72;--eg:#1b5878;--eg2:#2f7ba3;--eo:#a57829;--eo2:#805b18;--er:#a7433d;--ew:#fff;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif;background:#fff;color:var(--ei);border:1px solid var(--el);border-radius:14px}
+html[data-theme=dark] dialog.cmt-pdlg{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--ei2:#c5d2d8;--em:#a7a8a9;--eg:#4e9bcb;--eg2:#76bae6;--eo:#e6c27a;--eo2:#e6c27a;--er:#f2a397;--ew:#0a1821;background:#0d1e29}
+dialog.cmt-pdlg .cmt-pd-x,html[data-theme=dark] dialog.cmt-pdlg .cmt-pd-tb{background:var(--ew)}
+#v-cmt .cmt-pdlg,dialog.cmt-pdlg{max-width:min(920px,calc(100vw - 24px));width:min(920px,calc(100vw - 24px));padding:0;overflow:hidden}
+dialog.cmt-pdlg{display:flex;flex-direction:column;max-height:min(88vh,860px)}
+dialog.cmt-pdlg .cmt-pd-h{display:flex;align-items:flex-start;gap:12px;padding:18px 20px 12px;border-bottom:1px solid var(--el)}
+dialog.cmt-pdlg .cmt-pd-t{min-width:0;flex:1}
+dialog.cmt-pdlg .cmt-pd-t h2{margin:2px 0 4px;font:600 19px/1.2 var(--emono);letter-spacing:.01em}
+dialog.cmt-pdlg .cmt-pd-t p{margin:0;font-size:12.5px}
+dialog.cmt-pdlg .cmt-pd-x{flex:0 0 auto;width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--el);border-radius:9px;background:var(--ew);color:var(--ei);cursor:pointer;transition:background .15s,transform .15s}
+dialog.cmt-pdlg .cmt-pd-x:hover{background:var(--ep)}
+dialog.cmt-pdlg .cmt-pd-x:active{transform:scale(.94)}
+dialog.cmt-pdlg .cmt-pd-chs{display:flex;flex-wrap:wrap;gap:6px;padding:12px 20px 0}
+dialog.cmt-pdlg .cmt-pd-ch{display:inline-flex;align-items:baseline;gap:5px;padding:4px 9px;border:1px solid var(--el);border-radius:999px;background:var(--ep);font-size:11px}
+dialog.cmt-pdlg .cmt-pd-ch span{color:var(--em);text-transform:uppercase;letter-spacing:.08em;font-size:9.5px}
+dialog.cmt-pdlg .cmt-pd-ch b{font-weight:600;color:var(--ei)}
+dialog.cmt-pdlg .cmt-pd-ch.al{border-color:#e6cfa6;background:#fdf6e6}
+dialog.cmt-pdlg .cmt-pd-ch.al b{color:var(--eo2)}
+dialog.cmt-pdlg .cmt-pd-ac{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 20px 0}
+dialog.cmt-pdlg .cmt-pd-pt{margin:10px 20px 0;font-size:12px;color:var(--em)}
+dialog.cmt-pdlg .cmt-pd-ob{margin:10px 20px 0;padding:9px 11px;border-left:2px solid var(--eo);background:var(--ep);font-size:12.5px}
+dialog.cmt-pdlg .cmt-pd-ob span{display:block;font-size:9.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--em);margin-bottom:3px}
+dialog.cmt-pdlg .cmt-pd-b{flex:1;min-height:0;overflow:auto;padding:14px 20px 20px}
+dialog.cmt-pdlg .cmt-pd-tb{position:sticky;top:-14px;z-index:2;display:flex;flex-wrap:wrap;gap:4px;padding:10px 0;margin-bottom:6px;background:var(--ew);border-bottom:1px solid var(--el)}
+dialog.cmt-pdlg .cmt-pd-tb button{padding:5px 11px;border:1px solid transparent;border-radius:999px;background:none;font:500 11.5px/1 var(--eser);color:var(--em);cursor:pointer;transition:background .15s,color .15s}
+dialog.cmt-pdlg .cmt-pd-tb button:hover{background:var(--ep);color:var(--ei)}
+dialog.cmt-pdlg .cmt-pd-tb button[aria-selected=true]{background:var(--ei);border-color:var(--ei);color:#fff}
+dialog.cmt-pdlg .cmt-pd-p{animation:cmtpd .22s ease both}
+@keyframes cmtpd{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+dialog.cmt-pdlg .cmt-pd-p section{margin:0 0 14px}
+dialog.cmt-pdlg .cmt-pd-p h3{margin:0 0 6px;font:600 10px/1 var(--eser);text-transform:uppercase;letter-spacing:.1em;color:var(--eg)}
+dialog.cmt-pdlg .cmt-pd-p dl{display:grid;grid-template-columns:minmax(150px,210px) 1fr;gap:0;margin:0;border-top:1px solid var(--el)}
+dialog.cmt-pdlg .cmt-pd-p dt{padding:6px 10px 6px 0;border-bottom:1px solid var(--el);font-size:11.5px;color:var(--em)}
+dialog.cmt-pdlg .cmt-pd-p dd{margin:0;padding:6px 0;border-bottom:1px solid var(--el);font-size:12.5px;color:var(--ei);white-space:pre-wrap;overflow-wrap:anywhere}
+@media (max-width:600px){
+dialog.cmt-pdlg{width:100vw;max-width:100vw;max-height:100vh;height:100vh;border-radius:0}
+dialog.cmt-pdlg .cmt-pd-h,dialog.cmt-pdlg .cmt-pd-chs,dialog.cmt-pdlg .cmt-pd-ac,dialog.cmt-pdlg .cmt-pd-b{padding-left:14px;padding-right:14px}
+dialog.cmt-pdlg .cmt-pd-pt,dialog.cmt-pdlg .cmt-pd-ob{margin-left:14px;margin-right:14px}
+dialog.cmt-pdlg .cmt-pd-p dl{grid-template-columns:1fr}
+dialog.cmt-pdlg .cmt-pd-p dt{padding-bottom:0;border-bottom:0;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+dialog.cmt-pdlg .cmt-pd-ac{flex-direction:column;align-items:stretch}
+}
+@media (prefers-reduced-motion:reduce){dialog.cmt-pdlg .cmt-pd-p{animation:none}}
+
+/* /cmt · interações discretas: resposta ao toque, entrada das linhas e transição dos painéis */
+#v-cmt .cmt-pa,#v-cmt .cmt-ab,#v-cmt #cmt-ft button,#v-cmt .cmt-fsel select,#v-cmt #cmt-sit button{transition:background .15s ease,border-color .15s ease,color .15s ease,transform .12s ease,box-shadow .15s ease}
+#v-cmt .cmt-pa:active,#v-cmt .cmt-ab:active,#v-cmt #cmt-ft button:active,#v-cmt #cmt-sit button:active{transform:scale(.96)}
+#v-cmt .cmt-ab:hover{box-shadow:0 1px 4px rgba(28,51,68,.14)}
+#v-cmt #cmt-ft button{position:relative}
+#v-cmt #cmt-ft button b{transition:color .2s ease}
+#v-cmt #cmt-prog i,#v-cmt #cmt-prog span{transition:width .45s cubic-bezier(.4,0,.2,1)}
+#v-cmt #cmt-rows tr{animation:cmtrow .24s ease both}
+#v-cmt #cmt-rows tr:nth-child(2){animation-delay:.02s}
+#v-cmt #cmt-rows tr:nth-child(3){animation-delay:.04s}
+#v-cmt #cmt-rows tr:nth-child(4){animation-delay:.06s}
+#v-cmt #cmt-rows tr:nth-child(n+5){animation-delay:.08s}
+@keyframes cmtrow{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+#v-cmt .cmt-dr-b,#v-cmt .cmt-pn{transition:transform .26s cubic-bezier(.32,.72,0,1),opacity .2s ease}
+@media (prefers-reduced-motion:reduce){
+#v-cmt #cmt-rows tr{animation:none}
+#v-cmt .cmt-pa,#v-cmt .cmt-ab,#v-cmt #cmt-ft button,#v-cmt #cmt-sit button,#v-cmt .cmt-fsel select,#v-cmt #cmt-prog i,#v-cmt #cmt-prog span,#v-cmt .cmt-dr-b,#v-cmt .cmt-pn{transition:none}
+#v-cmt .cmt-pa:active,#v-cmt .cmt-ab:active,#v-cmt #cmt-ft button:active,#v-cmt #cmt-sit button:active{transform:none}
 }
 </style>
 </body>

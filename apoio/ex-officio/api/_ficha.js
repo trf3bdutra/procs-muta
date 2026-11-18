@@ -287,4 +287,5 @@ module.exports.lerOp = lerOp;
 module.exports.lerOpLeitura = lerOpLeitura;
 module.exports.ativos = ativos;
 module.exports.doCartao = doCartao;
+module.exports.catalogo = ficha;
 module.exports.paraCartao = paraCartao;
