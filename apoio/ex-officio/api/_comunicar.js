@@ -55,8 +55,10 @@ module.exports = async (req, res, u) => {
       const agora = new Date().toISOString();
       const alvo = { id: 'com-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), de: u, criadoEm: agora, titulo, texto, cnjs, lidoEm: '', lidoPor: '' };
       dados.registros.push(alvo); dados.atualizadoEm = agora;
-      try { await L.gravarJson(ARQ, dados, sha, 'Comunicado de ' + u + ': ' + titulo); return res.status(200).json({ ok: true, comunicado: alvo }); }
-      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+      try { await L.gravarJson(ARQ, dados, sha, 'Comunicado de ' + u + ': ' + titulo); }
+      catch (e) { if (e.status === 409 || e.status === 422) continue; throw e; }
+      const whatsapp = await require('./_alerta-wa')(alvo.id, titulo, cnjs.length);
+      return res.status(200).json({ ok: true, comunicado: alvo, whatsapp });
     }
     res.status(409).json({ erro: 'O arquivo mudou várias vezes seguidas; tente de novo.' });
   } catch (e) { res.status(500).json({ erro: e.message }); }
