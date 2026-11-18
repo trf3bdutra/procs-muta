@@ -132,6 +132,44 @@ async function tratar(p) {
   return registrar(p);
 }
 
+
+/* A pauta pode ser publicada depois do e-mail. A gestão pode reaplicar os
+   pedidos sem vínculo usando a sessão e o CNJ gravados no recebimento. */
+async function reconciliarPedidos() {
+  const [registros, calendario] = await Promise.all([
+    lerRegistros(), L.lerJson('acervo/sessoes/calendario.json'),
+  ]);
+  const publicadas = new Set((calendario.dados.sessoes || []).filter(s => s.publicada).map(s => s.date));
+  const documentos = new Map();
+  const pendentes = registros.filter(p => p.estado !== 'vinculado');
+  const resultados = [];
+  for (const p of pendentes) {
+    let motivo = '';
+    if (!L.dataOk(p.data) || !cnjFmt(p.cnj)) motivo = 'Data ou CNJ ausente no pedido.';
+    else if (!publicadas.has(p.data)) motivo = 'A pauta da sessão ainda não foi publicada.';
+    else {
+      if (!documentos.has(p.data)) documentos.set(p.data, obterSessao(p.data));
+      const doc = await documentos.get(p.data);
+      const achado = doc && acharNoDocumento(doc, p.cnj);
+      if (!doc) motivo = 'Arquivo da pauta indisponível.';
+      else if (!achado) motivo = 'O CNJ não consta na pauta publicada de ' + br(p.data) + '.';
+      else {
+        const r = await marcar(p.data, achado, p);
+        if (r.status === 200) {
+          const item = r.body?.item?.item || achado.item;
+          const salvo = await registrar({ ...p, vinculo: { sessao: p.data, lista: achado.lista, item },
+            estado: 'vinculado', vinculadoEm: new Date().toISOString() });
+          resultados.push({ id: p.id, estado: salvo.estado, item: salvo.vinculo?.item || '' });
+          continue;
+        }
+        motivo = 'A pauta mudou durante a tentativa. Confira o item e tente novamente.';
+      }
+    }
+    resultados.push({ id: p.id, estado: 'a vincular', motivo });
+  }
+  return resultados;
+}
+
 /* ---------- rota ---------- */
 const igual = (a, b) => { const x = Buffer.from(String(a)), y = Buffer.from(String(b)); return x.length === y.length && crypto.timingSafeEqual(x, y); };
 module.exports = async (req, res) => {
@@ -175,7 +213,12 @@ module.exports = async (req, res) => {
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     if (!L.gestor(u)) return res.status(403).json({ erro: 'Só o gestor vincula pedidos à mão.' });
-    const b = req.body || {}, p = (await lerRegistros()).find(r => r.id === b.id);
+    const b = req.body || {};
+    if (b.reconciliar === true) {
+      const resultados = await reconciliarPedidos();
+      return res.status(200).json({ resultados });
+    }
+    const p = (await lerRegistros()).find(r => r.id === b.id);
     if (!p) return res.status(404).json({ erro: 'pedido não encontrado' });
     if (p.estado === 'vinculado' && await acharNaPauta(p.vinculo?.sessao, p.cnj)) {
       return res.status(409).json({ erro: 'O pedido já está vinculado.' });
