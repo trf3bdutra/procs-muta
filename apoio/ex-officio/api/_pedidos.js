@@ -27,7 +27,8 @@ function campos(txt) {
 function tipoDe(assunto, t) {
   const s = (assunto || '') + ' ' + (t || '');
   if (/prefer[eê]ncia/i.test(s)) return 'Preferência';
-  if (/sustenta[cç][aã]o oral/i.test(s)) return /presencial/i.test(s) ? 'Presencial' : 'Virtual';
+  /* o TRF3 manda "Pedido de Sustentação Oral por Videoconferência" ou só "Pedido de Sustentação Oral" (presencial) */
+  if (/sustenta[cç][aã]o oral/i.test(s)) return /videoconfer|virtual/i.test(s) ? 'Virtual' : 'Presencial';
   return '';
 }
 function oabDe(adv) { const m = /\(([A-Z]{2})?\s*(\d[\d.]*)\)/.exec(adv || ''); return m ? ((m[1] ? m[1] + ' ' : '') + m[2].replace(/\./g, '')) : ''; }
