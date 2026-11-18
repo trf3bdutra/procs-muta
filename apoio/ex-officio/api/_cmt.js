@@ -197,6 +197,7 @@ async function painel(req, res, u) {
     .map(c => ({ id: 'co-' + c.id, tipo: 'comunicado', titulo: c.titulo || 'Comunicado', texto: c.texto || '',
       de: c.de || '', numero: (c.cnjs || [])[0] || '', em: c.em || '', comId: c.id }))
     .concat(((avi || {}).registros || [])
+      .filter(a => !/^av-cmt-acesso-/.test(String(a.id || '')))   /* a entrada do relator é aviso para o gestor, não para ele */
       .filter(a => !a.ate || a.ate >= hj)
       .filter(a => !(a.para || []).length || (a.para || []).some(n => L.norm(n) === L.norm(u)))
       .map(a => ({ id: 'av-' + a.id, tipo: 'aviso', titulo: a.title || 'Aviso', texto: a.message || '',

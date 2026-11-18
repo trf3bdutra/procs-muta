@@ -4262,6 +4262,26 @@ if(e.target.closest('#cmt-dr-h')){cmtGaveta(!$('#cmt-dr').classList.contains('on
 if(e.target.closest('#cmt-dr-x')){cmtGaveta(false);return;}});
 document.addEventListener('keydown',function(e){
 if(e.key==='Escape'&&$('#cmt-dr')&&$('#cmt-dr').classList.contains('on'))cmtGaveta(false);});
+/* processos, itens, sessões e assuntos citados no aviso viram botões */
+function cmtCita(t){
+var h=esc(String(t||''));
+h=h.replace(/\b\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}\b/g,function(m){return '<button type="button" class="cmt-cit proc" data-cgo="proc:'+m.replace(/\D/g,'')+'">'+m+'</button>';});
+h=h.replace(/\bitem (\d{1,4})\b/gi,function(m,n){return '<button type="button" class="cmt-cit" data-cgo="item:'+n+'">'+m+'</button>';});
+h=h.replace(/\bsess(?:ão|ao) de (\d{2}\/\d{2}\/\d{4})\b/gi,function(m,d){var p=d.split('/');return '<button type="button" class="cmt-cit" data-cgo="ses:'+p[2]+'-'+p[1]+'-'+p[0]+'">'+m+'</button>';});
+h=h.replace(/\b(d[úu]vidas?|pedidos? de (?:retirada|adiamento))\b/gi,function(m){return '<button type="button" class="cmt-cit" data-cgo="aba:d">'+m+'</button>';});
+h=h.replace(/\b(dilig[êe]ncias?)\b/gi,function(m){return '<button type="button" class="cmt-cit" data-cgo="pn:dil">'+m+'</button>';});
+h=h.replace(/\b(sustenta(?:ção|cao)(?: oral)?|prefer[êe]ncia)\b/gi,function(m){return '<button type="button" class="cmt-cit" data-cgo="fil:sopref">'+m+'</button>';});
+return h;}
+function cmtIr(k){
+var p=String(k||'').split(':'),v=p.slice(1).join(':');
+var marcaModo=function(m){[].forEach.call(document.querySelectorAll('[data-cqm]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cqm')===m));});};
+if(p[0]==='proc'){CMT.qm='proc';CMT.q=v;CMT.filtro='todos';var q=$('#cmt-q');if(q)q.value=v;marcaModo('proc');cmtPainel('not',false);cmtPauta();return;}
+if(p[0]==='item'){CMT.qm='item';CMT.q=v;CMT.filtro='todos';var q2=$('#cmt-q');if(q2)q2.value=v;marcaModo('item');cmtPainel('not',false);cmtPauta();return;}
+if(p[0]==='ses'){cmtPainel('not',false);CMT.atualizado=0;cmtCarregar(v);return;}
+if(p[0]==='aba'){cmtPainel('not',false);cmtGaveta(true,v);return;}
+if(p[0]==='pn'){cmtPainel(v,true);return;}
+if(p[0]==='fil'){CMT.filtro=v;cmtPainel('not',false);cmtPauta();return;}}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-cgo]');if(!b)return;e.preventDefault();cmtIr(b.getAttribute('data-cgo'));});
 function cmtNotTipo(x){
 var t=(x.titulo||'')+' '+(x.texto||'');
 if(/sustenta|prefer/i.test(t))return 'so';
@@ -4286,8 +4306,8 @@ var h2='',dia='';
 L.forEach(function(x){var d=on(x.em);
   if(d!==dia){dia=d;h2+='<p class="cmt-ndia">'+esc(d)+'</p>';}
   h2+='<div class="cmt-it2 g-'+x.g+(x.tipo==='comunicado'?' co':'')+'"><span class="cmt-nic">'+cmtSvg(ICO[x.g]||ICO.eq,15)+'</span>'+
-    '<div class="cmt-nb"><b>'+esc(x.titulo||'')+'</b><small>'+esc([x.de,x.numero,x.em?br(String(x.em).slice(0,10)):''].filter(Boolean).join(' · '))+'</small>'+
-    (x.texto?'<p>'+esc(x.texto)+'</p>':'')+'</div>'+
+    '<div class="cmt-nb"><b>'+cmtCita(x.titulo||'')+'</b><small>'+(x.de?esc(x.de)+' · ':'')+(x.numero?cmtCita(x.numero)+' · ':'')+esc(x.em?br(String(x.em).slice(0,10)):'')+'</small>'+
+    (x.texto?'<p>'+cmtCita(x.texto)+'</p>':'')+'</div>'+
     (x.numero?'<button type="button" class="cmt-nac" data-cnnum="'+esc(x.numero)+'">Ver na pauta</button>':'')+'</div>';});
 el.innerHTML=h2;}
 document.addEventListener('click',function(e){
@@ -7388,6 +7408,11 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
 #v-cmt .cmt-nac{flex:0 0 auto;height:30px;padding:0 11px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}
 #v-cmt .cmt-nac:hover{border-color:var(--ei)}
 @media (max-width:780px){#v-cmt .cmt-not-ab button{font-size:9px;padding:11px 2px 9px}}
+
+/* trechos citados nos avisos */
+#v-cmt .cmt-cit{border:0;background:none;padding:0;font:inherit;color:var(--eg);text-decoration:underline;text-decoration-color:var(--el2);text-underline-offset:2px;cursor:pointer}
+#v-cmt .cmt-cit:hover{color:var(--ei);text-decoration-color:var(--ei)}
+#v-cmt .cmt-cit.proc{font-family:var(--emono);font-size:.95em}
 </style>
 </body>
 </html>
