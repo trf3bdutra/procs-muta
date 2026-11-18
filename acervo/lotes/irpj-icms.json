@@ -97,26 +97,61 @@
    "exequente": "ENERGETICA SANTA HELENA S/A - EM RECUPERACAO JUDICIAL",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
+   "grupo": "1",
    "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
+   "resultado": "Desprovimento da apelação e da remessa necessária",
+   "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
+   "variacoes": [
+    "L14",
+    "RES",
+    "ORI"
+   ],
+   "observacao": "Minuta analisada em 18/11/2026 a partir do texto integral do PJe; correção ainda não aplicada.",
+   "peculiaridades": "Mandado de segurança de empresa em recuperação judicial. Crédito presumido de ICMS pelo Acordo 687/2011 (ID 354858307) e aditivos (IDs 354858308 e 354858310), juntados aos autos. A sentença concedeu a segurança para excluir os créditos presumidos das bases do IRPJ e da CSLL, independentemente da Lei 14.789/2023, com compensação do indébito e prescrição quinquenal, e condenou a União a reembolsar custas. A apelação da União sustenta a LC 160/2017, a MP 1.185/2023 e a Lei 14.789/2023, e pede que a restituição siga o regime de precatórios. O voto mantém a sentença e veda a restituição administrativa (Tema 831/STF; Súmulas 269 e 271/STF).",
+   "peculiaridades_relator": "1) Mesma pergunta dos itens 66 e 77: manter a exclusão do crédito presumido depois da Lei 14.789/2023. Aqui a sentença concedeu expressamente \"independentemente da Lei 14.789/2023\" e o voto mantém, sem invocar o item 5 da ementa dos embargos na ApelRemNec 5000161-72.2019.4.03.6002 (DJEN 06/05/2026), que foi o apoio adotado na correção do item 66. Uniformizar o fundamento no lote. 2) Tema 1.416/STJ: o voto afasta a suspensão por entendê-la restrita a recurso especial e agravo em recurso especial. Conferir se a delimitação segue nesses termos, porque o tema trata exatamente dos regimes anterior e posterior à Lei 14.789/2023. 3) Jurisprudência citada: faltam na lista da ementa dois julgados usados no voto — ApelRemNec 5000264-80.2020.4.04.7113 (TRF-4, Rel. Des. Fed. Rômulo Pizzolatti), transcrita por extenso, e o próprio Tema 1.416/STJ. 4) Dispositivos citados: \"CPC, artigos 927, III\" e \"Lei 9.250/1995, artigos 39, § 4º\" estão no plural para dispositivo único, e a lista mistura \"Súmulas 269/STF\" com \"Súmula 271/STF\". 5) A condenação da União em custas, posta na sentença, não é enfrentada no voto nem no dispositivo; conferir se houve impugnação.",
    "orientacao": "",
    "equipe": {
     "minuta": "José",
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "id": "354858307",
+     "tipo": "Acordo 687/2011 — crédito presumido de ICMS"
+    },
+    {
+     "id": "354858308",
+     "tipo": "Aditivo ao acordo"
+    },
+    {
+     "id": "354858310",
+     "tipo": "Aditivo ao acordo"
+    },
+    {
+     "id": "354858327",
+     "tipo": "Sentença"
+    },
+    {
+     "id": "354858330",
+     "tipo": "Apelação da União"
+    },
+    {
+     "id": "354858783",
+     "tipo": "Contrarrazões"
+    },
+    {
+     "id": "355942741",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    }
+   ],
+   "mpf": "ID 355942741",
    "triagem": {},
    "ajustes": [],
    "pendencias": [
-    "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório)."
+    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. Monica Nobre), também citada aqui.",
+    "Confirmar o alcance da suspensão no Tema 1.416/STJ e se há ordem vigente no Tema 1.182/STJ.",
+    "Uniformizar com os itens 66 e 77 o fundamento da exclusão após a Lei 14.789/2023."
    ],
    "minuta": false
   },
