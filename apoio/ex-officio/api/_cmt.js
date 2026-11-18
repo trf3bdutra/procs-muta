@@ -102,6 +102,28 @@ async function painel(req, res, u) {
   /* o endereço próprio do painel abre sem login: quem está em /cmt é o desembargador */
   void a;
   const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+  /* prontuário de um processo (?pront=CNJ): a ficha única em leitura, agrupada como no catálogo */
+  if (req.method === 'GET' && req.query && req.query.pront) {
+    const alvoP = String(req.query.pront).replace(/\D/g, '');
+    if (alvoP.length < 15) return res.status(400).json({ erro: 'Informe o processo.' });
+    try {
+      const [F, { doc }] = await Promise.all([FICHA.catalogo(), FICHA.lerOpLeitura()]);
+      const reg = (doc.registros || []).find(r => String(r.processo || '').replace(/\D/g, '') === alvoP) || null;
+      const abas = (F.abas || []).map(ab => ({
+        nome: ab.nome || '',
+        grupos: (ab.grupos || []).map(g => ({
+          nome: g.nome || '',
+          campos: (g.campos || []).map(c => {
+            const v = c.secao && reg ? (reg[c.secao] || {})[c.chave] : '';
+            return { rotulo: c.rotulo || c.chave || '', valor: Array.isArray(v) ? v : (v == null ? '' : String(v)), tipo: c.tipo || '' };
+          }).filter(c => Array.isArray(c.valor) ? c.valor.length : String(c.valor).trim() !== '')
+        })).filter(g => g.campos.length)
+      })).filter(ab => ab.grupos.length);
+      return res.json({ cnj: (reg && reg.processo) || req.query.pront, achou: !!reg, abas,
+        atualizado: (reg && ((reg.origem || {}).atualizado_em || (reg.producao || {}).atualizado_em)) || '' });
+    } catch (e) { return res.status(e.status || 500).json({ erro: e.message || 'Falha ao ler a ficha.' }); }
+  }
+
   /* decisões do desembargador: liberar o voto e assinar a monocrática.
      As duas gravam onde já era gravado — o item da pauta e a ficha única — e podem ser desfeitas. */
   if (req.method === 'POST') {
