@@ -1828,9 +1828,11 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
           <span class="cmt-sp"></span>
           <button type="button" class="b" id="cmt-selt">Selecionar exibidos</button>
           <button type="button" class="b" id="cmt-libl" disabled>Liberar selecionados</button>
+          <button type="button" class="b cmt-mfil" id="cmt-mfil" aria-expanded="false">Filtros</button>
         </div>
         <div class="cmt-sit" id="cmt-sit"></div>
       </div>
+      <button type="button" class="cmt-resumo" id="cmt-resumo" aria-expanded="false"></button>
       <div class="cmt-met" id="cmt-met"></div>
       <div class="cmt-prog" id="cmt-prog"></div>
       <div class="cmt-ft" id="cmt-ft"></div>
@@ -4065,7 +4067,8 @@ function cmtPauta(){
   var rtd=it.filter(function(x){return /^retirad/i.test(x.resultado||'');}).length;
   var adiad=it.filter(function(x){return /^adiad/i.test(x.resultado||'');}).length;
   var pedl=(((CMT.dados||{}).pedidos)||[]);
-  var sit=$('#cmt-sit');
+  var res=$('#cmt-resumo');
+  if(res)res.innerHTML='<span><b>'+it.length+'</b> pautados</span><span><b>'+falta+'</b> a liberar</span><span><b>'+nmin+'</b> minutados</span><span><b>'+ncor+'</b> corrigidos</span><span><b>'+(cta.liberado||0)+'</b> liberados</span><i aria-hidden="true">⌄</i>';
   var sop=it.filter(function(x){return !!x.sopref;}).length,des=it.filter(function(x){return !!x.destaque;}).length;
   var fa=CMT.filtro||'aliberar';
   var ndv=it.filter(function(x){return cmtTem('duvidas',x.cnj);}).length,nped=it.filter(function(x){return cmtTem('pedidos',x.cnj);}).length;
@@ -4139,6 +4142,11 @@ if(a==='ficha'){if(typeof abrirFicha==='function')abrirFicha(cnj);else toast('Fi
 if(a==='devolver'){var tx=prompt('Devolutiva para '+cnj+' — vira diligência para '+(x.servidor||'a equipe')+':');
   if(tx&&tx.trim())cmtPost({acao:'devolver',sessao:((CMT.dados||{}).pauta||{}).date||'',cnj:cnj,texto:tx.trim(),para:x.servidor||''},'Devolutiva enviada.');return;}});
 document.addEventListener('change',function(e){if(e.target&&e.target.id==='cmt-l-ses'&&e.target.value){CMT.atualizado=0;cmtCarregar(e.target.value);}});
+document.addEventListener('click',function(e){
+var mf=e.target.closest&&e.target.closest('#cmt-mfil');
+if(mf){var on=!document.body.classList.contains('cmt-fon');document.body.classList.toggle('cmt-fon',on);mf.setAttribute('aria-expanded',String(on));mf.textContent=on?'Fechar filtros':'Filtros';return;}
+var rs=e.target.closest&&e.target.closest('#cmt-resumo');
+if(rs){var on2=!document.body.classList.contains('cmt-non');document.body.classList.toggle('cmt-non',on2);rs.setAttribute('aria-expanded',String(on2));return;}});
 document.addEventListener('click',function(e){var q=e.target.closest&&e.target.closest('[data-cqm]');if(!q)return;
 CMT.qm=q.getAttribute('data-cqm');
 [].forEach.call(document.querySelectorAll('[data-cqm]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cqm')===CMT.qm));});
@@ -7448,6 +7456,38 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
 @media (max-width:1100px){
   .pp-ses{margin:12px 0 0}
   .pp-num-rail .pk>p{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+/* ===== Topo da pauta no telefone: o essencial à vista, o resto em Filtros ===== */
+#v-cmt .cmt-mfil{display:none}
+#v-cmt .cmt-resumo{display:none}
+@media (max-width:780px){
+  #v-cmt .cmt-ph{gap:8px;padding-bottom:10px}
+  #v-cmt .cmt-ph-1{row-gap:6px}
+  #v-cmt #cmt-pauta h2{margin:0}
+  #v-cmt .cmt-ph-1 .cmt-n{order:2;flex:1 1 100%;font-size:10px}
+  #v-cmt .cmt-ph-2{gap:8px}
+  #v-cmt .cmt-mfil{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto!important;order:2!important;height:40px;padding:0 14px}
+  #v-cmt .cmt-ph-2 .cmt-bq{order:1;flex:1 1 auto!important}
+  #v-cmt .cmt-ph-2 .cmt-bq input{height:40px}
+  /* escondidos até abrir Filtros */
+  #v-cmt .cmt-qm,#v-cmt #cmt-selt,#v-cmt #cmt-libl,#v-cmt .cmt-sit{display:none}
+  body.cmt-fon #v-cmt .cmt-qm,body.cmt-fon #v-cmt .cmt-sit{display:flex}
+  body.cmt-fon #v-cmt #cmt-selt,body.cmt-fon #v-cmt #cmt-libl{display:inline-flex;flex:1 1 44%!important;order:5!important}
+  body.cmt-fon #v-cmt .cmt-qm{order:3!important;flex:1 1 100%!important}
+  body.cmt-fon #v-cmt .cmt-sit{order:4;flex-wrap:wrap;gap:6px;margin-top:2px}
+  body.cmt-fon #v-cmt .cmt-sit .st{flex:1 1 46%;justify-content:center;height:34px}
+  #v-cmt .cmt-mfil[aria-expanded="true"]{border-color:var(--ei);background:var(--ei);color:var(--ew)}
+  /* números: uma linha, que abre no toque */
+  #v-cmt .cmt-resumo{display:flex;align-items:center;gap:0 14px;flex-wrap:wrap;width:calc(100% + 28px);margin:0 -14px;padding:10px 14px;border:0;border-top:1px solid var(--el);border-bottom:1px solid var(--el);background:var(--ew);color:var(--em);font:inherit;font-size:11.5px;text-align:left;cursor:pointer}
+  #v-cmt .cmt-resumo b{font-size:15px;font-weight:750;color:var(--ei);margin-right:4px;font-variant-numeric:tabular-nums}
+  #v-cmt .cmt-resumo i{margin-left:auto;font-style:normal;color:var(--em)}
+  #v-cmt .cmt-resumo[aria-expanded="true"] i{transform:rotate(180deg)}
+  #v-cmt .cmt-met{display:none}
+  body.cmt-non #v-cmt .cmt-met{display:grid}
+  /* abas de etapa: a filtragem principal, sempre à vista */
+  #v-cmt .cmt-ft{margin-top:2px}
+  #v-cmt .cmt-ft button{min-height:44px}
 }
 </style>
 </body>
