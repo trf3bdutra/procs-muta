@@ -1146,6 +1146,15 @@ html[data-theme=dark] #p-not{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a
 #p-not .av-comp .ac .b{border-radius:0;border:1px solid var(--eg);background:var(--ew);color:var(--eg);font-weight:700;font-size:12px;min-height:30px;padding:0 12px}
 #p-not .av-comp .ac .b.pri{background:var(--eg);color:var(--ep);border-color:var(--eg)}
 #p-not #l-not{padding-top:2px;padding-bottom:18px}
+#p-not .ped-card{background:var(--ep2);border:1px solid var(--el);padding:10px 12px;margin-bottom:6px}
+#p-not .ped-card p,.sn-dlg .ped-dados p{margin:4px 0;overflow-wrap:anywhere}
+#p-not .ped-card:focus{outline:2px solid var(--eg);outline-offset:1px}
+#p-not .ped-card form{margin-top:8px}
+#p-not .ped-card .ac{justify-content:flex-start}
+#p-not #ped-fech textarea{min-height:8em;resize:vertical}
+#p-not #ped-fech .ac{justify-content:flex-start}
+.sn-dlg .ped-dados{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+.sn-dlg .ped-dados article+article{margin-top:9px}
 #p-not .nt{border-top:1px solid var(--el);padding:11px 0;gap:11px}
 #p-not .nt:first-child{border-top:0}
 #p-not .nt .ico2{border-radius:0;background:var(--ep2)!important;color:var(--em)!important;width:28px;height:28px;flex-basis:28px}
@@ -1872,6 +1881,21 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <p class="pv" id="av-pv"></p><p class="en-er" id="av-er" hidden style="color:var(--red);font-size:12px"></p>
     <div class="ac"><button class="b" type="reset">Limpar</button><button class="b pri" type="submit">Publicar</button></div></form></details>
   <details class="av-comp" id="av-hist" hidden><summary>Histórico de avisos <span id="av-hn"></span></summary><div id="av-hl"></div></details>
+  <details class="av-comp" id="ped-list" hidden>
+    <summary>Preferências e sustentações orais <span id="ped-total"></span></summary>
+    <div id="ped-reg" aria-live="polite"></div>
+  </details>
+  <details class="av-comp" id="ped-fech" hidden>
+    <summary>Pedidos no fechamento diário</summary>
+    <div class="r2"><label>Data do fechamento<input type="date" id="ped-fech-data" required></label><div class="ac"><button type="button" class="b pri" id="ped-fech-gerar">Gerar bloco dos pedidos</button></div></div>
+    <div id="ped-fech-prev" hidden>
+      <label>Dr. Muta<textarea readonly id="ped-fech-muta"></textarea></label>
+      <div class="ac"><button type="button" class="b" data-ped-copiar="muta">Copiar para o Dr. Muta</button></div>
+      <label>Equipe<textarea readonly id="ped-fech-equipe"></textarea></label>
+      <div class="ac"><button type="button" class="b" data-ped-copiar="equipe">Copiar para a equipe</button></div>
+    </div>
+    <p class="mut" id="ped-fech-status" role="status"></p>
+  </details>
   <div id="l-not"></div></aside>
 <aside class="drw wide" id="p-pen" hidden><div class="drw-h"><h2>Diligências</h2><div class="pen-s" id="pen-s"></div><button class="b pri" id="pen-novo">+ Nova diligência</button><button class="b" data-fecha>×</button></div>
   <div class="pen-f"><input type="search" id="pen-q" placeholder="Buscar…"><select id="pen-ow"></select><select id="pen-ur"><option value="">Todas as prioridades</option><option>Urgente</option><option>Alta</option><option>Média</option><option>Baixa</option></select><label class="ck"><input type="checkbox" id="pen-meu" checked> Só as minhas</label></div>
@@ -2375,14 +2399,14 @@ function sinalDlg(it,f){var old=document.getElementById('sn-dlg');if(old)old.rem
   var PL=JSON.parse(JSON.stringify(((c.cartao||{}).pendencias)||[]));
   var T={pri:'Sustentação oral ou preferência',al:'Pendências',ic:'Intercorrência'}[f]||'Sinalização',corpo;
   var lista=function(){return PL.length?PL.map(function(p,i){return '<div class="sn-pl'+(p.ok?' ok':'')+'"><label class="sn-ck"><input type="checkbox" data-pl-ok="'+i+'"'+(p.ok?' checked':'')+'> resolvida</label><input type="text" data-pl-d="'+i+'" value="'+esc(p.desc||'')+'" maxlength="300"><button type="button" class="b" data-pl-x="'+i+'" aria-label="Excluir pendência">×</button></div>';}).join(''):'<p class="mut">Nenhuma pendência registrada à mão.</p>';};
-  if(f==='pri')corpo='<div class="dv-r">'+sel('sopref',SOP,'Pedido')+'</div><p class="mut">Vazio = sem pedido.</p>';
+  if(f==='pri')corpo='<div class="dv-r">'+sel('sopref',SOP,'Pedido')+'</div><div class="ped-dados" aria-live="polite"></div>';
   else if(f==='ic')corpo='<label>Descrição<textarea name="intercor" rows="4" maxlength="1200" placeholder="O que impede ou atrasa a liberação">'+esc(c.intercor||'')+'</textarea></label><label class="sn-ck"><input type="checkbox" name="intercorOk"'+(c.intercorOk?' checked':'')+'> Intercorrência resolvida</label><p class="mut">Em aberto, a intercorrência retém a liberação do voto. Apague a descrição para retirar.</p>';
   else corpo='<p class="sn-h">Pendências registradas</p><div id="sn-pls">'+lista()+'</div><div class="sn-add"><input type="text" id="sn-nova" maxlength="300" placeholder="Nova pendência: ex. aguardar contrarrazões, intimar a parte, juntar mídia, conferir prevenção…"><button type="button" class="b" data-pl-add>+ Incluir</button></div>'+
       '<p class="sn-h">Admissibilidade e instrução</p><div class="dv-r">'+sel('tempest',CP.tempest,'Tempestividade')+sel('preparo',CP.preparo,'Preparo')+'</div><div class="dv-r">'+sel('repres',CP.repres,'Representação')+sel('midias',CP.midias,'Mídias')+'</div><div class="dv-r">'+sel('mpf',CP.mpf,'Intervenção do MPF')+sel('parecer',CP.parecer,'Parecer do MPF')+'</div><div class="dv-r">'+sel('prelim',CP.prelim,'Preliminares')+'</div>';
   var d=document.createElement('dialog');d.id='sn-dlg';d.className='dv-dlg sn-dlg';
   d.innerHTML='<form method="dialog"><small class="dv-ey">'+esc(T)+'</small><h2>'+esc(it.cnj)+'</h2><p class="mut">'+esc([MO?'Monocrática':'Sessão de '+br(S.ses)+(it.item?' · item '+it.item:''),it.assunto].filter(Boolean).join(' · '))+'</p>'+corpo+
     '<div class="dv-a"><button type="button" class="b" data-sn="x">Cancelar</button><button type="submit" class="b pri">Salvar</button></div></form>';
-  document.body.appendChild(d);var fim=function(){d.close();d.remove();};d.querySelector('[data-sn=x]').onclick=fim;d.addEventListener('close',function(){if(d.parentNode)d.remove();});
+  document.body.appendChild(d);if(f==='pri')pedCard(d,S.ses,it.cnj);var fim=function(){d.close();d.remove();};d.querySelector('[data-sn=x]').onclick=fim;d.addEventListener('close',function(){if(d.parentNode)d.remove();});
   var pinta=function(){var b=d.querySelector('#sn-pls');if(b)b.innerHTML=lista();};
   d.addEventListener('click',function(e){var t=e.target;if(t.hasAttribute('data-pl-add')){var n=d.querySelector('#sn-nova'),v=n.value.trim();if(!v)return;PL.push({desc:v,ok:false,em:hoje(),por:U.eu});n.value='';pinta();n.focus();}
     else if(t.hasAttribute('data-pl-x')){PL.splice(+t.getAttribute('data-pl-x'),1);pinta();}});
@@ -3340,16 +3364,20 @@ document.addEventListener('click',function(e){
 
 /* ================= notificações (montadas no servidor a partir do procs-muta) ================= */
 var NT={ev:[],lido:''};
-var NIC={'aviso-geral':'📣',processos:'✎',pendencia:'☑',ausencia:'⌂',pauta:'▤',prazo:'◷'};
+var NIC={'pedido-sessao':'▤','aviso-geral':'📣',processos:'✎',pendencia:'☑',ausencia:'⌂',pauta:'▤',prazo:'◷'};
 function tempo(t){var d=new Date(t);if(isNaN(d))return '';var m=Math.round((Date.now()-d)/6e4);return m<1?'agora':m<60?'há '+m+' min':m<1440?'há '+Math.round(m/60)+' h':d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'})+' '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});}
 function chaveLido(){return 'eq_not_lido_'+nq(U.eu);}
 function itemNot(e,lim){var lk=e.link?'<a class="lk" href="'+esc(e.link)+'"'+(/^https?:/.test(e.link)?' target="_blank" rel="noopener"':'')+'>'+esc(e.linkTxt||'Abrir link')+' ↗</a>':'',dst=U.gestor&&e.action==='aviso-geral'?'<span class="dst">'+[(e.para||[]).length?'para '+e.para.join(', '):'toda a equipe',e.painel===false?'só notificação':e.notificacao===false?'só painel inicial':'painel e notificação',e.ate?'até '+br(e.ate):''].filter(Boolean).join(' · ')+'</span>':'';
-  return '<div class="nt '+esc(e.action)+(e.nivel&&e.nivel!=='info'?' '+esc(e.nivel):'')+(e.time>NT.lido?' novo':'')+'"><span class="ico2">'+(NIC[e.action]||'•')+'</span><div class="tx2"><b>'+esc(e.title||'')+'</b>'+(e.fixo?'<span class="pin">FIXADO</span>':'')+'<p>'+fmtMsg((e.action==='aviso-geral'?e.message:[e.user,e.message].filter(Boolean).join(' · '))||'')+'</p>'+lk+dst+'</div><time>'+esc(tempo(e.time))+'</time>'+(e.sessao?'<button class="b" data-ir="'+esc(e.sessao)+'|'+esc(e.numero||'')+'">Abrir</button>':'')+(U.gestor&&e.avId?'<button class="x" data-av-del="'+esc(e.avId)+'" title="Excluir este aviso (sai do painel inicial e das notificações)">×</button>':'')+'</div>';}
+  return '<div class="nt '+esc(e.action)+(e.nivel&&e.nivel!=='info'?' '+esc(e.nivel):'')+(e.time>NT.lido?' novo':'')+'"><span class="ico2">'+(NIC[e.action]||'•')+'</span><div class="tx2"><b>'+esc(e.title||'')+'</b>'+(e.fixo?'<span class="pin">FIXADO</span>':'')+'<p>'+fmtMsg((e.action==='aviso-geral'?e.message:[e.user,e.message].filter(Boolean).join(' · '))||'')+'</p>'+lk+dst+'</div><time>'+esc(tempo(e.time))+'</time>'+(e.pedidoId?'<button type="button" class="b" data-ped-ver="'+esc(e.pedidoId)+'">Ver pedido</button>':e.sessao?'<button class="b" data-ir="'+esc(e.sessao)+'|'+esc(e.numero||'')+'">Abrir</button>':'')+(U.gestor&&e.avId?'<button class="x" data-av-del="'+esc(e.avId)+'" title="Excluir este aviso (sai do painel inicial e das notificações)">×</button>':'')+'</div>';}
 function fmtMsg(s){return esc(s).replace(/\*\*([^*]+)\*\*/g,'<b style="display:inline;font-size:inherit">$1</b>');}
 function notificacoes(){return api('/api/notificacoes').then(function(j){var tudo=j.events||[];try{NT.lido=localStorage.getItem(chaveLido())||'';}catch(e){}
   /* sininho: tudo, menos o aviso marcado só para o painel inicial; painel inicial: avisos marcados para ele (fixados primeiro) e as atualizações */
   NT.ev=tudo.filter(function(e){return e.action!=='aviso-geral'||e.notificacao!==false;});
-  var n=NT.ev.filter(function(e){return e.time>NT.lido;}).length,b=$('#c-not');b.hidden=!n;b.textContent=n>99?'99+':n;
+  var n=NT.ev.filter(function(e){return e.time>NT.lido;}).length,b=$('#c-not');
+  $('#ped-list').hidden=!U.gestor&&!U.des&&!NT.ev.some(function(e){return e.pedidoId;});
+  $('#ped-fech').hidden=!U.gestor;
+  if($('#ped-list').open&&!$('#p-not').hidden&&!$('#ped-reg').contains(document.activeElement))pedCarregar(pedFoco);
+  b.hidden=!n;b.textContent=n>99?'99+':n;
   $('#l-not').innerHTML=NT.ev.length?NT.ev.map(function(e){return itemNot(e);}).join(''):'<p class="mut">Nenhuma atualização registrada.</p>';
   if(U.gestor){var so=tudo.filter(function(e){return e.action==='aviso-geral'&&e.notificacao===false;});if(so.length)$('#l-not').innerHTML+='<p class="nt-sec">Só no painel inicial</p>'+so.map(function(e){return itemNot(e);}).join('');}
 
@@ -3364,9 +3392,118 @@ function mirar(p,b){if(!p||p.hidden||!b)return;var r=b.getBoundingClientRect(),q
 function mirarTodos(){Object.keys(GAT).forEach(function(k){mirar($(k),$(GAT[k]));});}
 function hh(){var h=document.querySelector('#app header .nx1')||document.querySelector('#app header');if(h)document.documentElement.style.setProperty('--hh',Math.round(h.getBoundingClientRect().bottom)+'px');}
 window.addEventListener('resize',function(){hh();mirarTodos();});window.addEventListener('scroll',function(){hh();mirarTodos();},{passive:true});
-$('#b-not').onclick=function(){hh();if(abrePainel('#p-not'))setTimeout(marcarLido,1500);};
+$('#b-not').onclick=function(){hh();if(abrePainel('#p-not')){notificacoes();setTimeout(marcarLido,1500);}};
 document.addEventListener('click',function(e){if(e.target.closest('[data-fecha]')){e.target.closest('.drw').hidden=true;return;}
   if(!e.target.closest('.drw')&&!e.target.closest('.hbx')&&!e.target.closest('dialog')){$('#p-not').hidden=true;$('#p-pen').hidden=true;}});
+/* Pedidos do AgentMail e seção de fechamento diário */
+var PED_URI='/api/sessoes?pedidos=1';
+var pedSeq=0, pedFoco='';
+function pedDia(){
+  var partes=new Intl.DateTimeFormat('pt-BR',{timeZone:'America/Cuiaba',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  var val=function(t){return partes.find(function(p){return p.type===t;}).value;};
+  return val('year')+'-'+val('month')+'-'+val('day');
+}
+function pedResumo(p){
+  var advogado=[p.advogado,p.oab?'OAB '+p.oab:''].filter(Boolean).join(' · ');
+  var registro=p.recebidoEm?new Date(p.recebidoEm).toLocaleString('pt-BR',{timeZone:'America/Cuiaba',dateStyle:'short',timeStyle:'short'}):'';
+  return '<b>'+esc(p.titulo)+'</b><p>'+esc([p.data&&'Sessão de '+br(p.data),p.vinculo&&p.vinculo.item?'Item '+p.vinculo.item:'',p.cnj].filter(Boolean).join(' · '))+'</p>'+
+    (advogado?'<p><strong>Advogado(a)</strong> · '+esc(advogado)+'</p>':'')+
+    (p.parte?'<p><strong>Parte representada</strong> · '+esc(p.parte)+'</p>':'')+
+    (registro?'<p>Recebido em '+esc(registro)+'</p>':'')+
+    '<p>'+(!p.vinculo?'A vincular':p.vinculo.lista==='previa'?'Vinculado à pré-pauta':'Vinculado à pauta')+'</p>';
+}
+function pedCard(dialogo,data,cnj){
+  var box=dialogo.querySelector('.ped-dados');
+  box.textContent='Consultando pedidos recebidos por e-mail…';
+  api(PED_URI+'&data='+encodeURIComponent(data)+'&cnj='+encodeURIComponent(cnj)).then(function(j){
+    var pedidos=(j.registros||[]).filter(function(p){return p.vinculo;});
+    box.innerHTML=pedidos.length?pedidos.map(function(p){return '<article>'+pedResumo(p)+'</article>';}).join(''):'';
+  }).catch(function(e){box.textContent=e.message||'Falha ao consultar os pedidos.';});
+}
+function pedCarregar(foco){
+  var box=$('#ped-reg'), seq=++pedSeq;
+  if(!box.children.length)box.textContent='Carregando pedidos…';
+  return api(PED_URI).then(function(j){
+    if(seq!==pedSeq)return;
+    var pedidos=j.registros||[];
+    $('#ped-total').textContent=pedidos.length?'('+pedidos.length+')':'';
+    box.innerHTML=pedidos.map(function(p){
+      var ir=p.vinculo&&S.calP&&S.calP.some(function(s){return s.date===p.vinculo.sessao;});
+      var abrir=ir?'<div class="ac"><button type="button" class="b" data-ped-abrir="'+esc(p.vinculo.sessao+'|'+p.cnj)+'">Abrir no processo</button></div>':'';
+      var vincular=U.gestor&&!p.vinculo?'<form data-ped-vincular="'+esc(p.id)+'"><div class="r2">'+
+        '<label>Data da sessão<input required type="date" name="data" value="'+esc(p.data||'')+'"></label>'+
+        '<label>Processo<input required type="text" name="cnj" maxlength="25" value="'+esc(p.cnj)+'"></label></div>'+
+        '<div class="ac"><button class="b" type="submit">Vincular à pauta</button></div></form>':'';
+      return '<article class="ped-card" data-ped-card="'+esc(p.id)+'" tabindex="-1">'+pedResumo(p)+abrir+vincular+'</article>';
+    }).join('')||'<p class="mut">Nenhum pedido disponível.</p>';
+    if(foco){var card=Array.from(box.children).find(function(x){return x.dataset.pedCard===foco;});if(card){card.focus();card.scrollIntoView({block:'nearest'});}}
+  }).catch(function(e){if(seq===pedSeq)box.textContent=e.message||'Falha ao consultar os pedidos.';});
+}
+$('#ped-list').addEventListener('toggle',function(){if(this.open){pedCarregar(pedFoco);pedFoco='';}});
+$('#ped-reg').addEventListener('submit',function(e){
+  var form=e.target;if(!form.dataset.pedVincular)return;e.preventDefault();
+  var b=form.querySelector('button');b.disabled=true;
+  api(PED_URI,{method:'POST',body:JSON.stringify({id:form.dataset.pedVincular,data:form.elements.data.value,cnj:form.elements.cnj.value})})
+    .then(function(){toast('Pedido vinculado à pauta.');pedCarregar();notificacoes();if(S.fonte==='pauta'&&!nPend())carregar(true);})
+    .catch(function(e){toast(e.message);}).finally(function(){b.disabled=false;});
+});
+$('#p-not').addEventListener('click',function(e){
+  var ver=e.target.closest('[data-ped-ver]'), abrir=e.target.closest('[data-ped-abrir]');
+  if(ver){
+    var painel=$('#ped-list');painel.hidden=false;
+    if(!painel.open){pedFoco=ver.dataset.pedVer;painel.open=true;}
+    else pedCarregar(ver.dataset.pedVer);
+    return;
+  }
+  if(!abrir)return;
+  if(nPend()||gravando){pedeSalvar('Salve ou descarte as alterações antes de abrir o pedido.');return;}
+  var ref=abrir.dataset.pedAbrir.split('|'), data=ref[0], cnj=ref[1];
+  abrir.disabled=true;
+  api('/api/pauta?data='+encodeURIComponent(data)).then(function(doc){
+    var item=(doc.itens||[]).concat(doc.previa||[]).find(function(it){return dg(it.cnj)===dg(cnj);});
+    if(!item)throw new Error('O processo não está na pauta publicada.');
+    S.ses=data;$('#ses').value=data;S.aberto={};S.sel={};
+    vista('pauta');aplicarPauta(doc);render();abrePainel('#p-not');sinalDlg(item,'pri');
+  }).catch(function(e){toast(e.message);}).finally(function(){abrir.disabled=false;});
+});
+$('#ped-fech').addEventListener('toggle',function(){if(this.open&&!$('#ped-fech-data').value)$('#ped-fech-data').value=pedDia();});
+$('#ped-fech-data').addEventListener('change',function(){$('#ped-fech-prev').hidden=true;$('#ped-fech-status').textContent='';});
+$('#ped-fech-gerar').onclick=function(){
+  var b=this, campo=$('#ped-fech-data'), data=campo.value, status=$('#ped-fech-status');
+  if(!data){campo.reportValidity();return;}
+  b.disabled=true;campo.disabled=true;$('#ped-fech-prev').hidden=true;status.textContent='Consultando o Ex Officio…';
+  api(PED_URI+'&fechamento=1&data='+encodeURIComponent(data)).then(function(j){
+    var titulo='*PREFERÊNCIAS E SUSTENTAÇÕES ORAIS · '+br(j.data)+'*';
+    var pedidos=j.registros||[], grupos={};
+    var privado=pedidos.map(function(p){
+      var situacao=p.vinculo?(p.vinculo.item?'Item '+p.vinculo.item:'Pré-pauta'):'A vincular';
+      return '• '+[p.data&&'Sessão de '+br(p.data),situacao,p.cnj,p.titulo,p.advogado,p.parte&&'por '+p.parte].filter(Boolean).join(' · ');
+    });
+    pedidos.forEach(function(p){
+      var chave=p.data||'sem data';
+      var grupo=grupos[chave]||(grupos[chave]={preferencias:0,sustentacoes:0,pendentes:0});
+      if(p.tipo==='Preferência')grupo.preferencias++;else grupo.sustentacoes++;
+      if(!p.vinculo)grupo.pendentes++;
+    });
+    var coletivo=Object.keys(grupos).sort().map(function(k){
+      var g=grupos[k];
+      var p=g.preferencias, s=g.sustentacoes, v=g.pendentes;
+      return '• Sessão '+(k==='sem data'?k:'de '+br(k))+' · '+p+(p===1?' preferência':' preferências')+
+        ' · '+s+(s===1?' sustentação oral':' sustentações orais')+(v?' · '+v+' a vincular':'');
+    });
+    var texto=function(linhas){return titulo+'\n\n'+(linhas.length?linhas.join('\n'):'Nenhum pedido recebido ou vinculado no período.');};
+    $('#ped-fech-muta').value=texto(privado);$('#ped-fech-equipe').value=texto(coletivo);
+    $('#ped-fech-prev').hidden=false;status.textContent=pedidos.length+' '+(pedidos.length===1?'pedido':'pedidos')+' no fechamento.';
+  }).catch(function(e){status.textContent=e.message||'Falha ao gerar o fechamento.';})
+    .finally(function(){b.disabled=false;campo.disabled=false;});
+};
+$('#ped-fech').addEventListener('click',function(e){
+  var b=e.target.closest('[data-ped-copiar]');if(!b)return;
+  var campo=$('#ped-fech-'+b.dataset.pedCopiar);
+  function selecionar(){campo.focus();campo.select();toast('Texto selecionado para copiar.');}
+  if(navigator.clipboard)navigator.clipboard.writeText(campo.value).then(function(){toast('Bloco copiado.');},selecionar);
+  else selecionar();
+});
 /* ================= avisos do gestor: título, texto, link, importância, onde aparece e quem recebe ================= */
 var AV={eq:[]};
 function avCarregar(){$('#av-comp').hidden=false;$('#av-hist').hidden=false;api('/api/notificacoes?gestao=1').then(function(j){AV.eq=j.equipe||[];AV.reg=j.registros||[];avHist();if($('#av-ppl').children.length)return;$('#av-ppl').innerHTML=AV.eq.map(function(n){return '<label><input type="checkbox" name="para" value="'+esc(n)+'"> '+esc(n)+'</label>';}).join('');avPrevia();}).catch(function(){});}
@@ -3453,6 +3590,7 @@ $('#pen-del').onclick=function(){var t=PN.ed;if(!t)return;api('/api/pendencias?i
 $('#f-pen').addEventListener('submit',function(e){e.preventDefault();var E=this.elements,d={};['title','description','assignee','urgency','dueDate','numero','sessao','stage'].forEach(function(k){d[k]=E[k].value;});
   if(PN.ed){d.id=PN.ed.id;d._rev=PN.ed._rev;}salvarTk(d).then(function(){$('#dlg-pen').close();toast('Diligência salva.');}).catch(function(x){$('#pen-er').textContent=x.message;$('#pen-er').hidden=false;});});
 setInterval(function(){if(!$('#app').hidden&&document.visibilityState==='visible'){notificacoes();if(!$('#p-pen').hidden&&!arr)pendencias();}},120000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&U.eu)notificacoes();});
 
 /* ================= início ================= */
 

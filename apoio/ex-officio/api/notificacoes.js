@@ -2,6 +2,7 @@
    avisos gerais do responsável (apoio/equipe-avisos.json), processos seus alterados por outra pessoa nas pautas publicadas,
    pendências atribuídas a você ou criadas por você e alteradas por outra pessoa, e decisões sobre as suas ausências. */
 const L = require('./_lib');
+const PEDIDOS = require('./_pedidos');
 const opc = rel => L.lerJson(rel).then(x => x.dados).catch(() => null);
 module.exports = async (req, res) => {
   if (req.query && req.query.gestao) return require('./_avisos')(req, res);
@@ -9,7 +10,7 @@ module.exports = async (req, res) => {
   const u = L.exigir(req, res); if (!u) return;
   try {
     const eu = L.norm(u), ev = [];
-    const [cal, avisos, pend, aus, com] = await Promise.all([opc('acervo/sessoes/calendario.json'), opc('apoio/equipe-avisos.json'), opc('apoio/equipe-pendencias.json'), opc('apoio/equipe-solicitacoes.json'), opc('apoio/equipe-comunicados.json')]);
+    const [cal, avisos, pend, aus, com, pedidos] = await Promise.all([opc('acervo/sessoes/calendario.json'), opc('apoio/equipe-avisos.json'), opc('apoio/equipe-pendencias.json'), opc('apoio/equipe-solicitacoes.json'), opc('apoio/equipe-comunicados.json'), PEDIDOS.lerRegistros()]);
     /* comunicados ao desembargador: ele vê os recebidos; quem enviou, o seu próprio */
     let ehCmt = L.gestor(u);
     if (!ehCmt) { try { const ac = await L.acessos(u); ehCmt = !!(ac && ac.perfil === 'desembargador'); } catch (e) { /* perfil ilegível */ } }
@@ -24,6 +25,7 @@ module.exports = async (req, res) => {
     });
     const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
     ((avisos || {}).registros || []).forEach(a => {
+      if (a.user === 'AgentMail' && String(a.id).startsWith('av-so-')) return;
       /* destinatários: lista vazia = toda a equipe; o gestor vê todos; vencido some */
       if ((a.para || []).length && !a.para.some(n => L.norm(n) === eu) && !L.gestor(u)) return;
       if (a.ate && a.ate < hj) return;
@@ -31,9 +33,28 @@ module.exports = async (req, res) => {
         link: a.link || '', linkTxt: a.linkTxt || '', nivel: a.nivel || 'info', painel: a.painel !== false, notificacao: a.notificacao !== false, para: a.para || [], fixo: !!a.fixo, ate: a.ate || '', avId: a.id });
     });
     const pubs = ((cal || {}).sessoes || []).filter(s => s.publicada);
-    const docs = await Promise.all(pubs.map(s => opc('acervo/sessoes/' + s.date + '.json')));
+    const porData = new Map(pubs.map(s => [s.date, opc('acervo/sessoes/' + s.date + '.json')]));
+    const recentes = Date.now() - 7 * 86400e3;
+    const pedidosAtivos = pedidos.filter(p => !p.data || p.data >= hj ||
+      Date.parse(p.vinculadoEm || p.recebidoEm) >= recentes);
+    const [docs, meusPedidos] = await Promise.all([
+      Promise.all(porData.values()),
+      PEDIDOS.paraUsuario(u, pedidosAtivos, data => porData.get(data) || PEDIDOS.obterSessao(data), ehCmt),
+    ]);
+    meusPedidos.forEach(p => {
+      const vinculo = p.vinculo;
+      const mensagem = [p.cnj, vinculo?.item && 'item ' + vinculo.item,
+        p.advogado, p.oab && 'OAB ' + p.oab, p.parte && 'por ' + p.parte].filter(Boolean);
+      ev.push({
+        id: 'pedido-' + p.id, time: vinculo ? p.vinculadoEm || p.recebidoEm : p.recebidoEm,
+        action: 'pedido-sessao', user: 'AgentMail',
+        title: [p.titulo, p.data && 'sessão de ' + p.data.split('-').reverse().join('/'),
+          !vinculo && 'a vincular'].filter(Boolean).join(' · '),
+        message: mensagem.join(' · '), nivel: 'importante', pedidoId: p.id,
+      });
+    });
     pubs.forEach((s, i) => { const d = docs[i]; if (!d) return; ((d.itens || []).length ? d.itens : (d.previa || [])).forEach(it => {
-      const c = it.ctl || {}; if (!c.editadoEm || L.norm(c.editadoPor) === eu) return;
+      const c = it.ctl || {}; if (!c.editadoEm || ['AGENTMAIL', eu].includes(L.norm(c.editadoPor))) return;
       if (L.norm(it.servidor) !== eu && L.norm(it.corretor) !== eu) return;
       ev.push({ id: 'pr-' + s.date + '-' + String(it.cnj).replace(/\D/g, ''), time: c.editadoEm, action: 'processos', user: c.editadoPor, title: 'Atualizou um processo seu', message: it.cnj + ' · sessão de ' + s.date.split('-').reverse().join('/') + (it.item ? ' · item ' + it.item : ''), sessao: s.date, numero: it.cnj });
     }); });
