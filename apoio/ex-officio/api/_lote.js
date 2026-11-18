@@ -6,6 +6,9 @@
    GET  ?lote=1&id=2886                        o lote (matriz, perfis e painel), com o cartão do prontuário de cada processo
                                                tirado, na hora, da sessão em acervo/sessoes/AAAA-MM-DD.json
    GET  ?lote=1&id=2886&minuta=X               a minuta do processo X (10 primeiros caracteres do número): acervo/minutas/<id>/X.json
+   O relator (link próprio ou perfil desembargador) só recebe os processos prontos: situação Corrigida ou Liberada, a mais
+   adiantada entre a do lote e a do Ex Officio (dataCorrecao/dataLiberacao na sessão). Os que estão por fazer ou por corrigir
+   não chegam a ele, nem a minuta deles. Equipe e gestor recebem todos, com a marca "pronto".
    Gestão (só o gestor, com login):
    GET  ?lote=1&previa=1&sessoes=A,B&assunto=&classe=&texto=   prévia: quantos processos das sessões entram pelo filtro
    POST ?lote=1 {acao:'criar', id, titulo, descricao, sessoes, filtro}   cria acervo/lotes/<id>.json com os processos das sessões
@@ -30,6 +33,23 @@ function passa(x, f) {
   return true;
 }
 function situacao(x) { return x.dataLiberacao ? 'Liberada' : x.dataCorrecao ? 'Corrigida' : x.dataMinuta ? 'Minutada' : 'A minutar'; }
+const ORDEM = { 'A minutar': 1, 'Minutada': 2, 'Corrigida': 3, 'Liberada': 4 };
+/* situação de cada processo: a mais adiantada entre a do lote e a do Ex Officio; marca "pronto" (corrigido ou liberado)
+   e devolve os cartões do prontuário lidos das sessões do lote */
+async function anotar(lote) {
+  const cartoes = {}, vivo = {};
+  await Promise.all((lote.sessoes || []).map(async s => (await itensSessao(s)).forEach(x => {
+    vivo[x.cnj] = situacao(x);
+    const c = x && x.ctl; if (!c || !c.cartao) return;
+    cartoes[x.cnj] = { cartao: c.cartao, editadoPor: c.editadoPor || '', editadoEm: c.editadoEm || '' };
+  })));
+  (lote.itens || []).forEach(it => {
+    const e = it.equipe = it.equipe || {}, sv = vivo[it.processo];
+    if (sv && (ORDEM[sv] || 0) > (ORDEM[e.situacao] || 0)) e.situacao = sv;
+    it.pronto = (ORDEM[e.situacao] || 0) >= 3;
+  });
+  return cartoes;
+}
 function novoItem(s, x) {
   const p = String(x.partes || '').split(/\s+x\s+/i), ex = p.find(n => !ENT.test(n)) || p[0] || '', en = p.find(n => n !== ex) || '';
   const c = (x.ctl || {});
@@ -63,6 +83,7 @@ module.exports = async (req, res) => {
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   const gestor = !!(login && L.gestor(login));
   try {
+    const relator = !gestor && (!login || (await L.acessos(login)).perfil === 'desembargador');
     if (req.method === 'POST') return await gravar(req, res, login, gestor);
     if (req.method !== 'GET') return res.status(405).json({ erro: 'método não aceito' });
     const q = req.query || {}, id = String(q.id || '');
@@ -78,28 +99,33 @@ module.exports = async (req, res) => {
       const lotes = [];
       for (const f of (Array.isArray(lista) ? lista : []).filter(f => /^[a-z0-9-]+\.json$/i.test(f.name))) {
         const { dados } = await L.lerJson('acervo/lotes/' + f.name).catch(nada);
-        if (dados) lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, sessoes: dados.sessoes, filtro: dados.filtro || null, total: (dados.itens || []).length });
+        if (!dados) continue;
+        if (relator) await anotar(dados);
+        lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, sessoes: dados.sessoes, filtro: dados.filtro || null, total: (dados.itens || []).filter(i => !relator || i.pronto).length });
       }
-      return res.status(200).json({ usuario: u, gestor, lotes, calendario: gestor ? await calendario() : [] });
+      return res.status(200).json({ usuario: u, gestor, relator, lotes, calendario: gestor ? await calendario() : [] });
     }
     if (!ID.test(id)) return res.status(400).json({ erro: 'lote inválido' });
     const mx = String(q.minuta || '');
     if (mx) {
       if (!PROC.test(mx)) return res.status(400).json({ erro: 'processo inválido' });
+      if (relator) {
+        const { dados: lt } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
+        if (lt) await anotar(lt);
+        const it = lt && (lt.itens || []).find(i => String(i.processo).slice(0, 10) === mx);
+        if (!it || !it.pronto) return res.status(404).json({ erro: 'Minuta ainda em preparo.' });
+      }
       const { dados } = await L.lerJson('acervo/minutas/' + id + '/' + mx + '.json').catch(nada);
       if (!dados) return res.status(404).json({ erro: 'Minuta não disponível para este processo.' });
       return res.status(200).json(dados);
     }
     const { dados: lote } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
     if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
-    /* cartão do prontuário (Ex Officio), lido das sessões do lote no momento da consulta */
-    const cartoes = {};
-    await Promise.all((lote.sessoes || []).map(async s => (await itensSessao(s)).forEach(x => {
-      const c = x && x.ctl; if (!c || !c.cartao) return;
-      cartoes[x.cnj] = { cartao: c.cartao, editadoPor: c.editadoPor || '', editadoEm: c.editadoEm || '' };
-    })));
+    /* cartão do prontuário (Ex Officio) e situação, lidos das sessões do lote no momento da consulta */
+    const cartoes = await anotar(lote);
     (lote.itens || []).forEach(it => { if (cartoes[it.processo]) it.prontuario = cartoes[it.processo]; });
-    res.status(200).json({ usuario: u, gestor, lote });
+    if (relator) lote.itens = (lote.itens || []).filter(i => i.pronto);
+    res.status(200).json({ usuario: u, gestor, relator, lote });
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
 async function gravar(req, res, u, gestor) {

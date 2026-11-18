@@ -131,7 +131,7 @@ const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>
 const SECS=[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']];
 const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
-let LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
+let RELATOR=false, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
 const params=new URLSearchParams(location.search);
 /* link próprio do relator: a chave (k) vale como credencial, como no Painel do relator (/cmt?k=…) */
 const CMTK=(function(){try{const m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){const v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);const q=new URLSearchParams(location.search);q.delete('k');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash.replace(/[#&]?k=[^&#]+/,''))}return sessionStorage.getItem('cmt_k')||''}catch(e){return ''}})();
@@ -161,7 +161,7 @@ async function inicio(){
     const L=await api('');LISTA={lotes:L.lotes||[],calendario:L.calendario||[],gestor:!!L.gestor};
     const lotes=LISTA.lotes; if(!lotes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhum lote cadastrado.'+(LISTA.gestor?' Use “Novo lote” para criar o primeiro.':'')+'</p>');ligaCab();if(LISTA.gestor)abrirNovo();return}
     const id=params.get('id')||lotes[0].id;
-    const R=await api('?id='+encodeURIComponent(id)); LOTE=R.lote; montar(lotes,id,L.usuario);
+    const R=await api('?id='+encodeURIComponent(id)); LOTE=R.lote; RELATOR=!!R.relator; montar(lotes,id,L.usuario);
   }catch(e){falha(e)}
 }
 function ligaCab(){
@@ -184,19 +184,20 @@ function montar(lotes,id,usuario){
    <h2><i class="nn">01</i><span>Matriz do <em>lote.</em></span><span class="cmt-n">${esc(LOTE.titulo)} · sessões de ${LOTE.sessoes.map(br).join(' e ')}</span><span class="cmt-sp"></span><span class="cmt-n" id="cnt">—</span></h2>
    <div class="cmt-met" id="met">${grs.map(g=>`<div data-g="${g.k}" style="border-top-color:${g.c}" title="Mostrar ou ocultar"><span>${/^\d+$/.test(g.k)?g.k+' · ':''}${esc(g.r)}</span><b>${pad(g.n)}</b></div>`).join('')}</div>
    <div class="cmt-ph"><div class="cmt-ph-2">
-     <span class="cmt-seg" role="group" aria-label="Visão"><button type="button" data-vz="rel" aria-pressed="true">Relator</button><button type="button" data-vz="eq" aria-pressed="false">Equipe</button></span>
+     ${RELATOR?'':`<span class="cmt-seg" role="group" aria-label="Visão" title="Relator: o que o Desembargador vê (só os processos corrigidos ou liberados). Equipe: todos os processos."><button type="button" data-vz="rel" aria-pressed="false">Como o Relator vê</button><button type="button" data-vz="eq" aria-pressed="true">Equipe</button></span>`}
      <label class="cmt-bq"><input type="search" id="q" placeholder="item, processo, parte ou variação"></label>
      <select class="cmt-sel" id="ff"><option value="">Todas as variações</option>${LOTE.colunas.map(c=>`<option value="${c.id}">${esc(c.rotulo)}</option>`).join('')}</select>
      <select class="cmt-sel so-equipe" id="fs"><option value="">Todas as situações</option>${sit.map(s=>`<option>${esc(s)}</option>`).join('')}</select>
    </div></div>
    <div class="cmt-tw"><table class="cmt-tb" id="mx"><thead><tr><th>Sessão</th><th>Item</th><th>Processo</th><th>Exequente</th><th>Executado</th><th>Rec.</th>${LOTE.colunas.map(c=>`<th class="v"><div>${esc(c.rotulo)}</div></th>`).join('')}<th>Observação</th></tr></thead><tbody id="mxb"></tbody></table></div>
+   ${ITENS.length?'':`<p class="none">${RELATOR?'Nenhum processo deste lote está pronto ainda.':'Nenhum processo neste lote.'}</p>`}
   </section>
   <div id="profiles"></div>`);
   let h='',last='x';
   for(const it of ITENS){
     const c=gcor(it);
     if(it.grupo!==last){const n=ITENS.filter(i=>i.grupo===it.grupo).length,g=LOTE.grupos.find(x=>x.id===it.grupo);
-      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
+      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n ghn">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
     const cells=LOTE.colunas.map(f=>`<td class="f">${it.variacoes.includes(f.id)?`<span class="dot" title="${esc(f.rotulo)}" style="background:${f.id==='ORI'?'var(--er)':c}"></span>`:''}</td>`).join('');
     h+=`<tr class="r" data-u="${it.uid}"><td style="border-left:4px solid ${c}" class="cnj">${br(it.sessao).slice(0,5)}</td><td class="ii">${pad(it.item)}</td><td class="cnj">${it.processo.slice(0,15)}</td><td>${esc(it.exequente)}</td><td>${esc(it.executado)}</td><td>${/^ED/.test(it.recurso)?'ED':'Apel.'}</td>${cells}<td class="obs">${esc(it.observacao)}</td></tr>`;
   }
@@ -207,7 +208,8 @@ function montar(lotes,id,usuario){
   document.querySelectorAll('#met [data-g]').forEach(d=>d.onclick=()=>{const g=d.dataset.g;offG.has(g)?offG.delete(g):offG.add(g);d.classList.toggle('off');filtra()});
   document.querySelectorAll('[data-vai]').forEach(x=>x.onclick=()=>vai(x.dataset.vai));
   document.querySelectorAll('[data-min]').forEach(x=>x.onclick=()=>abreMinuta(x.dataset.min,x));
-  document.querySelectorAll('[data-vz]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-vz]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));const rel=b.dataset.vz==='rel';document.body.classList.toggle('relator',rel);document.querySelectorAll('.pv').forEach(p=>p.textContent=rel?p.dataset.rel:p.dataset.eq)});
+  document.querySelectorAll('[data-vz]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-vz]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));const rel=b.dataset.vz==='rel';document.body.classList.toggle('relator',rel);document.querySelectorAll('.pv').forEach(p=>p.textContent=rel?p.dataset.rel:p.dataset.eq);filtra()});
+  document.body.classList.toggle('relator',RELATOR);if(!RELATOR)document.querySelectorAll('.pv').forEach(p=>p.textContent=p.dataset.eq);
   $('#q').oninput=filtra;$('#ff').onchange=filtra;$('#fs').onchange=filtra;filtra();
   const m=location.hash.match(/^#p=(.+)$/); if(m)setTimeout(()=>vai(decodeURIComponent(m[1])),150);
 }
@@ -277,14 +279,16 @@ async function copia(v){
 }
 function vai(uid){const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
 function filtra(){
-  const q=$('#q').value.toLowerCase().trim(), f=$('#ff').value, st=$('#fs').value, vis=new Set();
+  const q=$('#q').value.toLowerCase().trim(), f=$('#ff').value, st=$('#fs').value, vis=new Set(), rel=document.body.classList.contains('relator');
   for(const it of ITENS){const e=it.equipe||{};
     const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
-    if(!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st))vis.add(it.uid)}
+    if((!rel||it.pronto)&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st))vis.add(it.uid)}
   document.querySelectorAll('#mxb tr.r').forEach(r=>r.classList.toggle('hidden',!vis.has(r.dataset.u)));
-  document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)))});
+  document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null,n=ITENS.filter(i=>(i.grupo||null)===g&&(!rel||i.pronto)).length;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)));const x=r.querySelector('.ghn');if(x)x.textContent=n+' processo'+(n>1?'s':'')});
   document.querySelectorAll('.pf').forEach(p=>p.classList.toggle('hidden',!vis.has(p.dataset.u)));
-  $('#cnt').textContent=`${pad(vis.size)} de ${pad(ITENS.length)} processos`;
+  document.querySelectorAll('#met [data-g]').forEach(d=>{const g=d.dataset.g||null,n=ITENS.filter(i=>(i.grupo||null)===g&&(!rel||i.pronto)).length;d.querySelector('b').textContent=pad(n);d.classList.toggle('hidden',!n)});
+  const oc=rel&&!RELATOR?ITENS.filter(i=>!i.pronto).length:0, tot=rel?ITENS.length-oc:ITENS.length;
+  $('#cnt').textContent=`${pad(vis.size)} de ${pad(tot)} processos`+(oc?` · ${oc} por fazer ou corrigir, fora da visão do Relator`:'');
 }
 
 /* ---------- gestão (só o gestor): criar lote e associar sessões ---------- */
