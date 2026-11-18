@@ -1,5 +1,8 @@
-/* Painel de lotes (/lotes/): página própria, desenhada como parte do Painel do relator (/cmt), com o mesmo acesso:
-   login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE).
+/* Painel de lotes: três páginas com o mesmo arquivo, cada uma com a sua visão do lote.
+     /cg/lotes/   gestão (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
+     /lotes/      equipe: os processos visíveis para a equipe
+     /cmt/lotes/  relator (&rel=1, ou link próprio, ou perfil desembargador): os processos visíveis para o relator
+   Acesso: login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE).
    Servido pelo /api/painel?lote=1 (a Vercel no plano Hobby aceita no máximo 12 funções; este arquivo, com _, não conta como função).
    Leitura (equipe, gestor e relator):
    GET  ?lote=1                                lotes (acervo/lotes/*.json) e, para o gestor, o calendário das sessões
@@ -9,14 +12,18 @@
    Com &rel=1 (página do relator, /cmt/lotes/), a resposta é sempre a do relator, qualquer que seja o login.
    O relator (link próprio, perfil desembargador ou &rel=1) só recebe os processos prontos: situação Corrigida ou Liberada, a mais
    adiantada entre a do lote e a do Ex Officio (dataCorrecao/dataLiberacao na sessão). Os que estão por fazer ou por corrigir
-   não chegam a ele, nem a minuta deles. Equipe e gestor recebem todos, com a marca "pronto".
+   não chegam a ele, nem a minuta deles.
+   Visibilidade por processo (it.visivel, definida na gestão): equipe:false tira o processo da página da equipe;
+   relator:true mostra ao relator mesmo antes de pronto, relator:false nunca mostra; sem relator, vale a regra do "pronto".
    Gestão (só o gestor, com login):
    GET  ?lote=1&previa=1&sessoes=A,B&assunto=&classe=&texto=   prévia: quantos processos das sessões entram pelo filtro
    POST ?lote=1 {acao:'criar', id, titulo, descricao, sessoes, filtro}   cria acervo/lotes/<id>.json com os processos das sessões
    POST ?lote=1 {acao:'sessoes', id, sessoes}  associa e desassocia sessões: entram os processos das novas sessões que passam
                                                no filtro do lote; saem os das sessões retiradas; os demais ficam como estão.
                                                Os que saem ficam guardados em lote.retirados, com tudo o que já foi registrado,
-                                               e voltam iguais se a sessão for associada de novo */
+                                               e voltam iguais se a sessão for associada de novo
+   POST ?lote=1 {acao:'editar', id, titulo, descricao, filtro}         título, descrição e filtro do lote
+   POST ?lote=1 {acao:'visivel', id, itens:[{sessao, processo, equipe, relator}]}   visibilidade (relator: 'auto', true ou false) */
 const L = require('./_lib');
 const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/, DATA = /^\d{4}-\d{2}-\d{2}$/;
 const nada = e => { if (e.status === 404) return { dados: null }; throw e; };
@@ -50,6 +57,9 @@ async function anotar(lote) {
     const e = it.equipe = it.equipe || {}, sv = vivo[it.processo];
     if (sv && (ORDEM[sv] || 0) > (ORDEM[e.situacao] || 0)) e.situacao = sv;
     it.pronto = (ORDEM[e.situacao] || 0) >= 3;
+    const v = it.visivel || {};
+    it.verEquipe = v.equipe !== false;
+    it.verRelator = v.relator === true || (v.relator !== false && it.pronto);
   });
   return cartoes;
 }
@@ -89,7 +99,10 @@ module.exports = async (req, res) => {
     if (req.method === 'POST') return await gravar(req, res, login, gestor);
     if (req.method !== 'GET') return res.status(405).json({ erro: 'método não aceito' });
     const q = req.query || {}, id = String(q.id || '');
-    const relator = !!q.rel || (!gestor && (!login || (await L.acessos(login)).perfil === 'desembargador'));
+    const perfilRel = !gestor && (!login || (await L.acessos(login)).perfil === 'desembargador');
+    const modo = q.rel || perfilRel ? 'rel' : q.modo === 'cg' ? 'cg' : 'eq', relator = modo === 'rel';
+    if (modo === 'cg' && !gestor) return res.status(403).json({ erro: 'Esta página é só do gestor.' });
+    const ve = it => modo === 'rel' ? it.verRelator : modo === 'eq' ? it.verEquipe : true;
     if (q.previa) {
       if (!gestor) return res.status(403).json({ erro: 'Só o gestor cria lotes.' });
       const ss = String(q.sessoes || '').split(',').filter(s => DATA.test(s)), f = { assunto: q.assunto, classe: q.classe, texto: q.texto };
@@ -103,20 +116,20 @@ module.exports = async (req, res) => {
       for (const f of (Array.isArray(lista) ? lista : []).filter(f => /^[a-z0-9-]+\.json$/i.test(f.name))) {
         const { dados } = await L.lerJson('acervo/lotes/' + f.name).catch(nada);
         if (!dados) continue;
-        if (relator) await anotar(dados);
-        lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, sessoes: dados.sessoes, filtro: dados.filtro || null, total: (dados.itens || []).filter(i => !relator || i.pronto).length });
+        if (modo !== 'cg') await anotar(dados);
+        lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, sessoes: dados.sessoes, filtro: dados.filtro || null, total: (dados.itens || []).filter(ve).length });
       }
-      return res.status(200).json({ usuario: u, gestor, relator, lotes, calendario: gestor ? await calendario() : [] });
+      return res.status(200).json({ usuario: u, gestor, relator, modo, lotes, calendario: modo === 'cg' ? await calendario() : [] });
     }
     if (!ID.test(id)) return res.status(400).json({ erro: 'lote inválido' });
     const mx = String(q.minuta || '');
     if (mx) {
       if (!PROC.test(mx)) return res.status(400).json({ erro: 'processo inválido' });
-      if (relator) {
+      if (modo !== 'cg') {
         const { dados: lt } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
         if (lt) await anotar(lt);
         const it = lt && (lt.itens || []).find(i => String(i.processo).slice(0, 10) === mx);
-        if (!it || !it.pronto) return res.status(404).json({ erro: 'Minuta ainda em preparo.' });
+        if (!it || !ve(it)) return res.status(404).json({ erro: relator ? 'Minuta ainda em preparo.' : 'Minuta não disponível para este processo.' });
       }
       const { dados } = await L.lerJson('acervo/minutas/' + id + '/' + mx + '.json').catch(nada);
       if (!dados) return res.status(404).json({ erro: 'Minuta não disponível para este processo.' });
@@ -127,8 +140,9 @@ module.exports = async (req, res) => {
     /* cartão do prontuário (Ex Officio) e situação, lidos das sessões do lote no momento da consulta */
     const cartoes = await anotar(lote);
     (lote.itens || []).forEach(it => { if (cartoes[it.processo]) it.prontuario = cartoes[it.processo]; });
-    if (relator) lote.itens = (lote.itens || []).filter(i => i.pronto);
-    res.status(200).json({ usuario: u, gestor, relator, lote });
+    lote.itens = (lote.itens || []).filter(ve);
+    if (modo !== 'cg') delete lote.retirados;
+    res.status(200).json({ usuario: u, gestor, relator, modo, lote });
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
 async function gravar(req, res, u, gestor) {
@@ -177,6 +191,37 @@ async function gravar(req, res, u, gestor) {
         await L.gravarJson(rel, lote, sha, 'Lotes (' + u + '): sessões do lote ' + id + ' → ' + (ss.join(', ') || 'nenhuma') + ' (+' + entram + ' −' + saem + ')');
         return res.status(200).json({ ok: true, entram, voltam, saem, novas, total: lote.itens.length });
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
+  }
+  if (b.acao === 'editar' || b.acao === 'visivel') {
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      let msg;
+      if (b.acao === 'editar') {
+        const tt = String(b.titulo || '').trim();
+        if (!tt) return res.status(400).json({ erro: 'Dê um título ao lote.' });
+        lote.titulo = tt.slice(0, 80); lote.descricao = String(b.descricao || '').trim().slice(0, 300);
+        if (b.filtro) { const f = {}; ['assunto', 'classe', 'texto'].forEach(k => { const v = String(b.filtro[k] || '').trim(); if (v) f[k] = v.slice(0, 120); }); lote.filtro = f; }
+        msg = 'Lotes (' + u + '): edita título e descrição do lote ' + id;
+      } else {
+        const mapa = new Map((lote.itens || []).map(i => [i.sessao + '|' + i.processo, i]));
+        let n = 0;
+        for (const x of (Array.isArray(b.itens) ? b.itens : [])) {
+          const it = mapa.get(String(x.sessao) + '|' + String(x.processo)); if (!it) continue;
+          const v = Object.assign({}, it.visivel || {});
+          if (x.equipe === false) v.equipe = false; else if (x.equipe === true) delete v.equipe;
+          if (x.relator === true || x.relator === false) v.relator = x.relator; else if (x.relator === 'auto') delete v.relator;
+          if (Object.keys(v).length) it.visivel = v; else delete it.visivel;
+          n++;
+        }
+        if (!n) return res.status(400).json({ erro: 'Nenhum processo do lote foi informado.' });
+        msg = 'Lotes (' + u + '): visibilidade de ' + n + ' processo(s) no lote ' + id;
+      }
+      lote.atualizado_em = new Date().toISOString().slice(0, 10);
+      try { await L.gravarJson(rel, lote, sha, msg); return res.status(200).json({ ok: true }); }
+      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
   }
