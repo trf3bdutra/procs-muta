@@ -1891,7 +1891,9 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <div id="ped-fech-prev" hidden>
       <label>Dr. Muta<textarea readonly id="ped-fech-muta"></textarea></label>
       <div class="ac"><button type="button" class="b" data-ped-copiar="muta">Copiar para o Dr. Muta</button>
-        <a class="b pri" data-ped-copiar="muta" data-ped-whatsapp href="https://web.whatsapp.com/" target="_blank" rel="noopener noreferrer">Copiar e abrir WhatsApp Web</a></div>
+        <button type="button" class="b" id="ped-fech-png">Gerar PNG</button>
+        <button type="button" class="b pri" id="ped-fech-zernio">Enviar PNG pelo Zernio</button></div>
+      <div class="ac" id="ped-fech-imagens" hidden></div>
       <label>Equipe<textarea readonly id="ped-fech-equipe"></textarea></label>
       <div class="ac"><button type="button" class="b" data-ped-copiar="equipe">Copiar para a equipe</button></div>
     </div>
@@ -3468,11 +3470,11 @@ $('#p-not').addEventListener('click',function(e){
   }).catch(function(e){toast(e.message);}).finally(function(){abrir.disabled=false;});
 });
 $('#ped-fech').addEventListener('toggle',function(){if(this.open&&!$('#ped-fech-data').value)$('#ped-fech-data').value=pedDia();});
-$('#ped-fech-data').addEventListener('change',function(){$('#ped-fech-prev').hidden=true;$('#ped-fech-status').textContent='';});
+$('#ped-fech-data').addEventListener('change',function(){$('#ped-fech-prev').hidden=true;$('#ped-fech-imagens').hidden=true;$('#ped-fech-status').textContent='';});
 $('#ped-fech-gerar').onclick=function(){
   var b=this, campo=$('#ped-fech-data'), data=campo.value, status=$('#ped-fech-status');
   if(!data){campo.reportValidity();return;}
-  b.disabled=true;campo.disabled=true;$('#ped-fech-prev').hidden=true;status.textContent='Consultando o Ex Officio…';
+  b.disabled=true;campo.disabled=true;$('#ped-fech-prev').hidden=true;$('#ped-fech-imagens').hidden=true;status.textContent='Consultando o Ex Officio…';
   api(PED_URI+'&fechamento=1&data='+encodeURIComponent(data)).then(function(j){
     var titulo='*PREFERÊNCIAS E SUSTENTAÇÕES ORAIS · '+br(j.data)+'*';
     var pedidos=j.registros||[], grupos={};
@@ -3502,7 +3504,7 @@ $('#ped-fech-completo').onclick=async function(){
   var b=this, status=$('#ped-fech-status'), hoje=pedDia();
   if($('#ped-fech-data').value!==hoje){status.textContent='Para o fechamento completo, selecione a data de hoje.';return;}
   b.disabled=true;$('#ped-fech-gerar').disabled=true;$('#ped-fech-data').disabled=true;
-  $('#ped-fech-prev').hidden=true;status.textContent='Consultando o gabinete…';
+  $('#ped-fech-prev').hidden=true;$('#ped-fech-imagens').hidden=true;status.textContent='Consultando o gabinete…';
   try{
     var dados=await Promise.all([api('/api/painel?cmt=1'),api(PED_URI+'&fechamento=1&data='+hoje)]);
     var j=dados[0], pedidos=dados[1].registros||[], pauta=j.pauta||{}, assinaturas=j.assinar||{};
@@ -3537,15 +3539,96 @@ $('#ped-fech-completo').onclick=async function(){
   }catch(e){status.textContent=e.message||'Falha ao gerar os fechamentos.';}
   finally{b.disabled=false;$('#ped-fech-gerar').disabled=false;$('#ped-fech-data').disabled=false;}
 };
+var pedEnvio = { texto: '', data: '', imagens: [], aceitas: 0 };
+function pedImagens(texto) {
+  var canvas=document.createElement('canvas'), c=canvas.getContext('2d'), largura=1080, margem=64, entrelinha=43;
+  if(!c)throw new Error('O navegador não conseguiu gerar o PNG.');
+  var linhas=[];
+  texto.split(/\r?\n/).forEach(function(bruta){
+    var destaque=/^\*.*\*$/.test(bruta.trim()), linha=bruta.trim().replace(/^\*|\*$/g,'');
+    if(!linha){linhas.push({texto:'',destaque:false});return;}
+    c.font=(destaque?'700 ':'400 ')+'31px Arial';
+    var palavras=linha.split(/\s+/), atual='';
+    palavras.forEach(function(palavra){
+      if(atual && c.measureText(atual+' '+palavra).width>largura-2*margem){
+        linhas.push({texto:atual,destaque:destaque});atual='';
+      }
+      while(c.measureText(palavra).width>largura-2*margem){
+        var fim=palavra.length;
+        while(c.measureText(palavra.slice(0,fim)).width>largura-2*margem)fim--;
+        linhas.push({texto:palavra.slice(0,fim),destaque:destaque});
+        palavra=palavra.slice(fim);
+      }
+      atual=atual?atual+' '+palavra:palavra;
+    });
+    linhas.push({texto:atual,destaque:destaque});
+  });
+  var porPagina=36, total=Math.ceil(linhas.length/porPagina);
+  if(total>30)throw new Error('O fechamento ultrapassou o limite de 30 imagens.');
+  var imagens=[];
+  for(var i=0;i<total;i++){
+    var parte=linhas.slice(i*porPagina,(i+1)*porPagina);
+    canvas.width=largura;canvas.height=250+parte.length*entrelinha;
+    c.fillStyle='#f5f3eb';c.fillRect(0,0,largura,canvas.height);
+    c.fillStyle='#234d49';c.fillRect(0,0,largura,128);
+    c.fillStyle='#e9c184';c.fillRect(0,128,largura,5);
+    c.fillStyle='#ffffff';c.font='700 41px Arial';c.fillText('GABINETE CMT',margem,69);
+    c.fillStyle='#dceae5';c.font='22px Arial';c.fillText('EX OFFICIO · FECHAMENTO',margem,105);
+    parte.forEach(function(l,n){
+      c.fillStyle=l.destaque?'#234d49':'#21322f';
+      c.font=(l.destaque?'700 ':'400 ')+'31px Arial';c.fillText(l.texto,margem,189+n*entrelinha);
+    });
+    c.fillStyle='#52645e';c.font='22px Arial';c.fillText('Dr. Muta · '+(i+1)+' / '+total,margem,canvas.height-35);
+    imagens.push(canvas.toDataURL('image/png'));
+  }
+  return imagens;
+}
+function pedPrepararPng(){
+  var texto=$('#ped-fech-muta').value,data=$('#ped-fech-data').value;
+  if(!texto.trim()||!data)throw new Error('Gere o fechamento primeiro.');
+  if(pedEnvio.texto!==texto||pedEnvio.data!==data){
+    pedEnvio={texto:texto,data:data,imagens:pedImagens(texto),aceitas:0};
+  }
+  return pedEnvio;
+}
+$('#ped-fech-png').onclick=function(){
+  try{
+    var lote=pedPrepararPng(),preview=$('#ped-fech-imagens');
+    preview.replaceChildren();
+    lote.imagens.forEach(function(url,i){
+      var link=document.createElement('a');
+      link.className='b';link.href=url;link.download='fechamento-'+lote.data+'-'+(i+1)+'.png';
+      link.textContent='Baixar PNG '+(i+1)+'/'+lote.imagens.length;preview.appendChild(link);
+    });
+    preview.hidden=false;
+  }catch(e){$('#ped-fech-status').textContent=e.message;}
+};
+$('#ped-fech-zernio').onclick=async function(){
+  var btn=this,status=$('#ped-fech-status'), lote;
+  try{lote=pedPrepararPng();}catch(e){status.textContent=e.message;return;}
+  if(lote.aceitas===lote.imagens.length){status.textContent='O Zernio já aceitou todas as imagens deste fechamento.';return;}
+  var campos=['#ped-fech-data','#ped-fech-gerar','#ped-fech-completo'].map(function(sel){return $(sel);});
+  btn.disabled=true;campos.forEach(function(el){el.disabled=true;});
+  try{
+    while(lote.aceitas<lote.imagens.length){
+      var i=lote.aceitas;
+      status.textContent='Enviando PNG '+(i+1)+'/'+lote.imagens.length+' ao Dr. Muta…';
+      await api('/api/painel?fechamentoPng=1',{method:'POST',body:JSON.stringify({
+        png:lote.imagens[i].split(',')[1],data:lote.data,pagina:i+1,
+      })});
+      lote.aceitas++;
+    }
+    status.textContent='Zernio aceitou '+lote.aceitas+' imagem(ns) para o envio ao Dr. Muta.';
+  }catch(e){
+    status.textContent=lote.aceitas+'/'+lote.imagens.length+' PNG(s) aceitos. '+(e.message||'Envio não confirmado.')+
+      (lote.aceitas?' Clique novamente para continuar da próxima página.':'');
+  }finally{btn.disabled=false;campos.forEach(function(el){el.disabled=false;});}
+};
 $('#ped-fech').addEventListener('click',function(e){
   var b=e.target.closest('[data-ped-copiar]');if(!b)return;
-  var campo=$('#ped-fech-'+b.dataset.pedCopiar), whatsapp=b.hasAttribute('data-ped-whatsapp');
-  var texto=campo.value;
-  if(!texto.trim()){e.preventDefault();toast('Gere o fechamento primeiro.');return;}
-  function selecionar(){campo.focus();campo.select();toast(whatsapp?'Texto selecionado. Copie e cole na conversa do Dr. Muta.':'Texto selecionado para copiar.');}
-  if(navigator.clipboard)navigator.clipboard.writeText(texto).then(function(){
-    toast(whatsapp?'Texto copiado. Cole na conversa do Dr. Muta no WhatsApp Web.':'Bloco copiado.');
-  },selecionar);
+  var campo=$('#ped-fech-'+b.dataset.pedCopiar);
+  function selecionar(){campo.focus();campo.select();toast('Texto selecionado para copiar.');}
+  if(navigator.clipboard)navigator.clipboard.writeText(campo.value).then(function(){toast('Bloco copiado.');},selecionar);
   else selecionar();
 });
 /* ================= avisos do gestor: título, texto, link, importância, onde aparece e quem recebe ================= */
