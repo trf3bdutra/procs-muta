@@ -1922,7 +1922,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
   <main id="v-pauta" class="pt2" hidden>
     <section class="trb" id="trb" aria-labelledby="trb-t"><div class="trb-in">
       <div class="trb-h"><div><div class="trb-eyr"><small class="trb-ey">01 / Produção</small><span class="trb-tag" id="ses-tag"></span></div><h1 id="trb-t">Pauta <em class="trb-em">de julgamento.</em></h1><p class="trb-d" id="trb-d"></p></div>
-        <div class="trb-c"><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><label class="trb-sl">Sessão<select id="ses" aria-label="Sessão"></select></label><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span><small id="ses-sub" hidden></small></div></div>
+        </div>
       <div class="pp-sec pp-vazio" id="pp-and" data-m="pauta" aria-hidden="true"></div><ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
       <div class="trb-p" id="trb-p"></div></div>
       <div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
@@ -1930,7 +1930,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="trb-h"><div><small class="trb-ey trm-ey">02 / Produção</small><h1 id="trm-t">Decisões <em class="trm-em">monocráticas.</em></h1><p class="trb-d">Do registro à assinatura.</p></div>
         <div class="trb-c trm-c"><div class="trm-sel"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b" id="trm-hoje" title="Voltar ao período atual: o mês ou a semana de hoje">Hoje</button><button class="b trm-reg" id="trm-reg" aria-expanded="false" aria-label="Registrar monocrática" title="Registrar monocrática">+ Registrar</button></div><div class="trm-k" id="trm-k" role="group" aria-label="Estatísticas das monocráticas: semana, mês e total" title="Contagem pela data de cada etapa"></div></div></div></div>
       <div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
-    <div class="trm-urq" id="trm-urq"></div><nav class="pp-sub" id="pp-sub" aria-label="Seções da página"><p class="ctl-nk">Nesta página</p><button type="button" data-pp="pp-and" data-m="pauta"><i>01</i><span>Andamento da sessão</span><small id="pp-and-n"></small></button><button type="button" data-pp="pp-num" data-m="pauta"><i>02</i><span>Números da sessão</span><small id="pp-num-n"></small></button><button type="button" data-pp="pp-lst" data-m="pauta"><i>03</i><span>Processos da pauta</span><small id="pp-lst-n"></small></button><div class="pp-num-rail"><div class="pp-sec pp-vazio" id="pp-num" data-m="pauta" aria-hidden="true"></div><p class="pp-num-k">Números da sessão</p><div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div></div><p class="ctl-nota">Clique numa seção para ir até ela.</p></nav>
+    <div class="trm-urq" id="trm-urq"></div><nav class="pp-sub" id="pp-sub" aria-label="Seções da página"><p class="ctl-nk">Nesta página</p><button type="button" data-pp="pp-and" data-m="pauta"><i>01</i><span>Andamento da sessão</span><small id="pp-and-n"></small></button><button type="button" data-pp="pp-num" data-m="pauta"><i>02</i><span>Números da sessão</span><small id="pp-num-n"></small></button><button type="button" data-pp="pp-lst" data-m="pauta"><i>03</i><span>Processos da pauta</span><small id="pp-lst-n"></small></button><div class="pp-ses"><div class="trb-c"><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><label class="trb-sl">Sessão<select id="ses" aria-label="Sessão"></select></label><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span><small id="ses-sub"></small></div></div><div class="pp-num-rail"><div class="pp-sec pp-vazio" id="pp-num" data-m="pauta" aria-hidden="true"></div><p class="pp-num-k">Números da sessão</p><div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div></div><p class="ctl-nota">Clique numa seção para ir até ela.</p></nav>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <section class="urg" id="urg" hidden></section>
     <p class="ctl-lead">Metas do CNJ, sobrestados e casos sensíveis numa só página. Cada linha lê e grava a ficha do processo, a mesma do CMT-monitor.</p>
@@ -7413,6 +7413,42 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
 #v-cmt .cmt-cit{border:0;background:none;padding:0;font:inherit;color:var(--eg);text-decoration:underline;text-decoration-color:var(--el2);text-underline-offset:2px;cursor:pointer}
 #v-cmt .cmt-cit:hover{color:var(--ei);text-decoration-color:var(--ei)}
 #v-cmt .cmt-cit.proc{font-family:var(--emono);font-size:.95em}
+
+/* ===== Pauta: seletor da sessão e números no trilho da esquerda ===== */
+.pp-ses{margin:16px 0 0;padding-top:14px;border-top:1px solid var(--el)}
+.pp-ses .trb-c{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0;padding:0;border:0;background:none}
+.pp-ses .trb-sl{order:1;flex:1 1 100%;display:block;font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
+.pp-ses #ses-ant{order:2}
+.pp-ses #ses-prox{order:3}
+.pp-ses #ver{order:4}
+.pp-ses #ses-sub{order:5}
+.pp-ses .trb-sl select{width:100%;height:34px;margin-top:4px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:12.5px;padding:0 8px;border-radius:0}
+.pp-ses .b.ic2{flex:0 0 34px;width:34px!important;height:32px;min-width:0;border:1px solid var(--el);background:var(--ew);color:var(--em);border-radius:0;padding:0;display:inline-grid!important;place-items:center;font-size:14px;margin:0}
+.pp-ses .b.ic2:hover{border-color:var(--ei);color:var(--ei)}
+.pp-ses #ver{flex:1 1 100%;display:flex;margin-top:4px}
+.pp-ses #ver button{flex:1;height:30px;font-size:11.5px}
+.pp-ses #ses-sub{flex:1 1 100%;margin-top:4px;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+/* números: linhas editoriais, sem cartão pesado */
+.pp-num-rail .pk{border:0;border-top:1px solid var(--el);background:none;padding:10px 0 0;margin:0;border-radius:0;box-shadow:none}
+.pp-num-rail .pk:first-child{border-top:0;padding-top:2px}
+.pp-num-rail .pk .pk-h{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.pp-num-rail .pk .pk-h small{font:400 9px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+.pp-num-rail .pk .pk-x{margin-left:auto;width:22px;height:22px;border:1px solid var(--el);background:var(--ew);color:var(--em);line-height:1;cursor:pointer;border-radius:0}
+.pp-num-rail .pk .pk-x:hover{border-color:var(--ei);color:var(--ei)}
+.pp-num-rail .pk>p{display:block;margin:0;font-size:11.5px;color:var(--em);line-height:1.95}
+.pp-num-rail .pk>p i{display:inline-block;width:1px;height:9px;background:var(--el2);margin:0 8px;vertical-align:0}
+.pp-num-rail .pk>p b{font-size:16px;font-weight:750;color:var(--ei);letter-spacing:-.02em;font-variant-numeric:tabular-nums;margin-right:3px}
+.pp-num-rail .pk .pk-h{display:flex!important;align-items:center;gap:8px}
+.pp-num-rail .pk .pk-h small{flex:1;min-width:0}
+.pp-num-rail .pk .pk-x{flex:0 0 22px;width:22px!important;height:22px!important;min-width:0;padding:0}
+.pp-num-rail .pk-p>p b{color:#1f6a43}
+.pp-num-rail .pk-a>p b{color:var(--er)}
+.pp-num-rail .pt-k{gap:0!important}
+.pp-num-rail .pp-num-k{margin:0 0 8px}
+@media (max-width:1100px){
+  .pp-ses{margin:12px 0 0}
+  .pp-num-rail .pk>p{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 </style>
 </body>
 </html>
