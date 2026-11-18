@@ -4,13 +4,14 @@
         lê o e-mail do TRF3 ("Pedido de Sustentação Oral por Videoconferência", "Presencial", "Preferência"), fica só com os do
         Gabinete A (relator Des. Fed. Carlos Muta, ou processo que já está numa pauta nossa), registra em apoio/sustentacoes.json,
         marca o processo na pauta da sessão (ctl.sopref: Virtual, Presencial ou Preferência, o mesmo campo do cartão) e avisa a
-        equipe (apoio/equipe-avisos.json, que alimenta as notificações). O que não achar a sessão ou o processo fica "a vincular".
+        assessoria, minutante e corretor via notificações. O que não achar a sessão ou o processo fica "a vincular".
    GET  /api/sessoes?pedidos=1                        lista os pedidos (equipe logada)
    POST /api/sessoes?pedidos=1 {id, data, cnj}        vincula à mão um pedido "a vincular" (só o gestor)
    Não guarda e-mail, telefone nem CPF: só tipo, advogado e OAB, parte, processo, sessão e quando chegou. */
 const crypto = require('crypto');
 const L = require('./_lib');
-const ARQ = 'apoio/sustentacoes.json', AV = 'apoio/equipe-avisos.json';
+const ARQ = 'apoio/sustentacoes.json';
+const EQUIPE = 'apoio/equipe.json';
 const dg = s => String(s || '').replace(/\D/g, '');
 const cnjFmt = d => (d = dg(d)).length === 20 ? d.slice(0, 7) + '-' + d.slice(7, 9) + '.' + d.slice(9, 13) + '.' + d.slice(13, 14) + '.' + d.slice(14, 16) + '.' + d.slice(16) : '';
 const br = iso => String(iso || '').split('-').reverse().join('/');
@@ -45,7 +46,7 @@ function ler(msg) {
 async function acharNaPauta(data, cnj) {
   if (!L.dataOk(data)) return null;
   try { const { dados } = await L.lerJson('acervo/sessoes/' + data + '.json');
-    for (const lista of ['itens', 'previa']) { const it = (dados[lista] || []).find(i => dg(i.cnj) === dg(cnj)); if (it) return { lista, item: it.item || '' }; }
+    return acharNoDocumento(dados, cnj);
   } catch (e) { if (e.status !== 404) throw e; }
   return null;
 }
@@ -53,37 +54,82 @@ async function marcar(data, achado, p) {
   const { gravarItem } = require('./pauta');
   return gravarItem(data, { cnj: p.cnj, lista: achado.lista, campos: { sopref: p.tipo } }, 'AgentMail', false);
 }
-async function avisar(p) {
-  for (let t = 0; t < 4; t++) {
-    let dados, sha; try { ({ dados, sha } = await L.lerJson(AV)); } catch (e) { if (e.status !== 404) throw e; dados = { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] }; }
-    dados.registros = dados.registros || [];
-    const rot = p.tipo === 'Preferência' ? 'Preferência' : 'Sustentação oral' + (p.tipo === 'Presencial' ? ' presencial' : ' por videoconferência');
-    dados.registros.unshift({ id: 'av-so-' + p.id, time: new Date().toISOString(), user: 'AgentMail', title: rot + ' · sessão de ' + br(p.data) + (p.estado === 'a vincular' ? ' · a vincular' : ''),
-      message: [p.cnj, p.vinculo && p.vinculo.item ? 'item ' + p.vinculo.item : '', p.advogado + (p.oab ? ' (OAB ' + p.oab + ')' : ''), p.parte ? 'por ' + p.parte : ''].filter(Boolean).join(' · '),
-      link: '', linkTxt: '', nivel: 'importante', painel: false, notificacao: true, para: [], ate: p.data || '', fixo: false });
-    dados.atualizadoEm = new Date().toISOString();
-    try { await L.gravarJson(AV, dados, sha, 'AgentMail: aviso de ' + rot.toLowerCase() + ' · ' + p.cnj); return; } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
-  }
+function acharNoDocumento(dados, cnj) {
+  const lista = (dados.itens || []).length ? 'itens' : 'previa';
+  const item = (dados[lista] || []).find(it => dg(it.cnj) === dg(cnj));
+  return item ? { lista, item: item.item || '', servidor: item.servidor, corretor: item.corretor } : null;
 }
+
+async function lerRegistros() {
+  try { return (await L.lerJson(ARQ)).dados.registros || []; }
+  catch (e) { if (e.status === 404) return []; throw e; }
+}
+
+function tipoExibido(tipo) {
+  if (tipo === 'Preferência') return tipo;
+  return tipo === 'Presencial' ? 'Sustentação oral presencial' : 'Sustentação oral por videoconferência';
+}
+
+async function paraUsuario(usuario, registros, obterSessao, gestor = L.gestor(usuario)) {
+  if (!registros.length) return [];
+  const [equipeDoc, acesso] = await Promise.all([L.lerJson(EQUIPE), L.acessos(usuario)]);
+  const equipe = equipeDoc.dados.registros || [];
+  const eu = L.norm(usuario);
+  const cadastro = equipe.find(pessoa => [pessoa.nome, ...(pessoa.aliases || [])].some(n => L.norm(n) === eu));
+  const nomes = new Set([eu, cadastro?.nome, ...(cadastro?.aliases || [])].map(L.norm).filter(Boolean));
+  const assessoria = gestor || acesso?.desembargador || cadastro?.papel === 'assessoria';
+  const sessoes = new Map();
+  const pedidos = await Promise.all(registros.map(async pedido => {
+    const data = pedido.vinculo?.sessao;
+    if (pedido.estado !== 'vinculado' || !L.dataOk(data)) {
+      return assessoria ? { ...pedido, vinculo: null } : null;
+    }
+    if (!sessoes.has(data)) sessoes.set(data, obterSessao(data));
+    const dados = await sessoes.get(data);
+    const item = dados && acharNoDocumento(dados, pedido.cnj);
+    if (!item) return assessoria ? { ...pedido, estado: 'a vincular', vinculo: null } : null;
+    if (!assessoria && ![item.servidor, item.corretor].some(n => nomes.has(L.norm(n)))) return null;
+    return { ...pedido, vinculo: { sessao: data, item: item.item, lista: item.lista } };
+  }));
+  return pedidos.filter(Boolean).map(({ id, tipo, cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo }) =>
+    ({ id, tipo, titulo: tipoExibido(tipo), cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo }));
+}
+
+async function obterSessao(data) {
+  try { return (await L.lerJson('acervo/sessoes/' + data + '.json')).dados; }
+  catch (e) { if (e.status === 404) return null; throw e; }
+}
+
+const dataLocal = time => {
+  const data = new Date(time);
+  if (isNaN(data)) return '';
+  const partes = Object.fromEntries(new Intl.DateTimeFormat('pt-BR', {
+    timeZone: 'America/Cuiaba', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(data).map(p => [p.type, p.value]));
+  return partes.year + '-' + partes.month + '-' + partes.day;
+};
+
 async function registrar(p) {
   for (let t = 0; t < 4; t++) {
     let dados, sha; try { ({ dados, sha } = await L.lerJson(ARQ)); } catch (e) { if (e.status !== 404) throw e; dados = vazio(); }
     dados.registros = dados.registros || [];
     const i = dados.registros.findIndex(r => r.id === p.id);
-    if (i >= 0) dados.registros[i] = Object.assign(dados.registros[i], p); else dados.registros.unshift(p);
+    if (i >= 0) {
+      const anterior = dados.registros[i];
+      if (!p.vinculadoPor && anterior.estado === 'vinculado') return anterior;
+      dados.registros[i] = { ...anterior, ...p, recebidoEm: anterior.recebidoEm || p.recebidoEm };
+    } else dados.registros.unshift(p);
     dados.atualizadoEm = new Date().toISOString();
-    try { await L.gravarJson(ARQ, dados, sha, 'AgentMail: pedido de ' + (p.tipo === 'Preferência' ? 'preferência' : 'sustentação oral ' + (p.tipo || '').toLowerCase()) + ' · ' + (p.cnj || 'sem número') + ' · ' + p.estado); return; }
+    try { await L.gravarJson(ARQ, dados, sha, 'AgentMail: pedido de ' + (p.tipo === 'Preferência' ? 'preferência' : 'sustentação oral ' + (p.tipo || '').toLowerCase()) + ' · ' + (p.cnj || 'sem número') + ' · ' + p.estado); return i >= 0 ? dados.registros[i] : p; }
     catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
   }
   throw new Error('apoio/sustentacoes.json mudou várias vezes seguidas');
 }
 async function tratar(p) {
   const achado = p.cnj && p.data ? await acharNaPauta(p.data, p.cnj) : null;
-  if (achado) { const r = await marcar(p.data, achado, p); if (r.status !== 200) throw new Error('pauta: ' + JSON.stringify(r.body)); p.vinculo = { sessao: p.data, lista: achado.lista, item: achado.item }; p.estado = 'vinculado'; }
+  if (achado) { const r = await marcar(p.data, achado, p); if (r.status !== 200) throw new Error('pauta: ' + JSON.stringify(r.body)); p.vinculo = { sessao: p.data, lista: achado.lista, item: achado.item }; p.estado = 'vinculado'; p.vinculadoEm = new Date().toISOString(); }
   else p.estado = 'a vincular';
-  await registrar(p);
-  await avisar(p);
-  return p;
+  return registrar(p);
 }
 
 /* ---------- rota ---------- */
@@ -105,23 +151,47 @@ module.exports = async (req, res) => {
       if (!nosso) return res.status(200).json({ ignorado: 'de outro gabinete (' + (p.relator || 'relator não informado') + ')' });
       p.id = 'so-' + crypto.createHash('sha1').update(String(msg.message_id || msg.messageId || '') || (p.cnj + p.tipo + p.data)).digest('hex').slice(0, 12);
       p.recebidoEm = msg.timestamp || new Date().toISOString();
-      const r = await tratar(p);
+      const anterior = (await lerRegistros()).find(r => r.id === p.id);
+      const r = anterior?.estado === 'vinculado' ? anterior : await tratar(p);
       return res.status(200).json({ ok: true, estado: r.estado, cnj: r.cnj, sessao: r.data });
     }
     /* equipe */
     const u = L.exigir(req, res); if (!u) return;
-    if (req.method === 'GET') { let d; try { d = (await L.lerJson(ARQ)).dados; } catch (e) { if (e.status !== 404) throw e; d = vazio(); } return res.status(200).json(d); }
+    if (req.method === 'GET') {
+      const { data, cnj, fechamento } = req.query;
+      if (data && !L.dataOk(data)) return res.status(400).json({ erro: 'Data inválida.' });
+      if (cnj && !cnjFmt(cnj)) return res.status(400).json({ erro: 'Número do processo inválido.' });
+      if (fechamento && !L.gestor(u)) return res.status(403).json({ erro: 'Fechamento disponível para a gestão.' });
+      let registros = await lerRegistros();
+      const hoje = data || dataLocal(Date.now());
+      if (fechamento) {
+        registros = registros.filter(r => dataLocal(r.recebidoEm) === hoje || dataLocal(r.vinculadoEm) === hoje);
+      } else {
+        if (data) registros = registros.filter(r => (r.vinculo?.sessao || r.data) === data);
+        if (cnj) registros = registros.filter(r => dg(r.cnj) === dg(cnj) && r.estado === 'vinculado');
+      }
+      const pedidos = await paraUsuario(u, registros, obterSessao);
+      return res.status(200).json({ registros: pedidos, ...(fechamento && { data: hoje }) });
+    }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     if (!L.gestor(u)) return res.status(403).json({ erro: 'Só o gestor vincula pedidos à mão.' });
-    const b = req.body || {}, { dados } = await L.lerJson(ARQ), p = (dados.registros || []).find(r => r.id === b.id);
+    const b = req.body || {}, p = (await lerRegistros()).find(r => r.id === b.id);
     if (!p) return res.status(404).json({ erro: 'pedido não encontrado' });
-    if (b.data) p.data = b.data; if (b.cnj) p.cnj = cnjFmt(b.cnj);
+    if (p.estado === 'vinculado' && await acharNaPauta(p.vinculo?.sessao, p.cnj)) {
+      return res.status(409).json({ erro: 'O pedido já está vinculado.' });
+    }
+    if (b.data) p.data = b.data;
+    if (b.cnj) p.cnj = cnjFmt(b.cnj);
+    if (!L.dataOk(p.data) || !cnjFmt(p.cnj)) return res.status(400).json({ erro: 'Informe a data da sessão e o número do processo.' });
     const achado = await acharNaPauta(p.data, p.cnj);
     if (!achado) return res.status(404).json({ erro: 'processo não está na pauta de ' + br(p.data) });
     const r = await marcar(p.data, achado, p); if (r.status !== 200) return res.status(r.status).json(r.body);
     p.vinculo = { sessao: p.data, lista: achado.lista, item: achado.item }; p.estado = 'vinculado'; p.vinculadoPor = u;
-    await registrar(p);
-    res.status(200).json({ ok: true, pedido: p });
+    p.vinculadoEm = new Date().toISOString();
+    res.status(200).json({ ok: true, pedido: await registrar(p) });
   } catch (e) { res.status(500).json({ erro: e.message }); }
 };
 module.exports.ler = ler;
+module.exports.lerRegistros = lerRegistros;
+module.exports.paraUsuario = paraUsuario;
+module.exports.obterSessao = obterSessao;
