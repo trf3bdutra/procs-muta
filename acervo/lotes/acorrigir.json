@@ -3,7 +3,7 @@
  "versao": 1,
  "id": "acorrigir",
  "titulo": "A corrigir",
- "descricao": "Minutas da pauta de 30/11 extraídas do PJe para conferência, fora do lote de 28,86%.",
+ "descricao": "Minutas da pauta extraídas do PJe para conferência, fora do lote de 28,86%. Prontuário de cada processo no cartão da sessão; o lote guarda as peças, as peculiaridades e os pontos a corrigir.",
  "sessoes": [
   "2026-11-30"
  ],
@@ -29,11 +29,11 @@
    "assunto": "Anulação",
    "grupo": null,
    "tipo_caso": "Anulação",
-   "resultado": "",
+   "resultado": "Desprovido",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Resultado lido do dispositivo da minuta, a confirmar no julgamento.",
+   "peculiaridades": "Remoção por motivo de saúde de servidor técnico-administrativo entre universidades federais (UFMS → UFGD), no quadro único do MEC. Divergência entre a junta médica oficial, que indeferiu duas vezes, e a perícia judicial, que recomendou o deslocamento. Preliminares de dialeticidade recursal e de litisconsórcio necessário com a União.",
    "peculiaridades_relator": "1) Honorários recursais: a majoração foi fixada em 1% a ser acrescido ao arbitrado na origem, que é verba em valor certo (R$ 2.000,00, por equidade); percentual não incide sobre valor fixo — converter em acréscimo de valor ou em percentual sobre os R$ 2.000,00. 2) Dispositivos citados: a ementa lista \"CPC, art. 131\", que é do CPC/1973 e veio da ementa do AgRg no REsp 1.209.909; indicar CPC/1973 ou substituir pelo artigo 371 do CPC/2015. 3) Jurisprudência citada: faltam na lista da ementa a ApCiv 0000951-55.2016.4.03.6000 (dialeticidade) e a ApCiv 5002079-83.2021.4.03.6118 (litisconsórcio), ambas usadas no voto. 4) Dispositivo: o voto nega provimento mas impõe a condenação adicional do artigo 85, § 11; explicitar no dispositivo e no item 6 da ementa. 5) Revisão: vírgula entre sujeito e verbo em \"A sentença (ID 396725545), julgou procedente\"; espaço duplo em \"(ID  396725545)\"; \"AgRg no REsp1.209.909\" sem espaço; \"DJEN de: 27/03/2026\" com dois-pontos indevido. 6) \"em na cidade de lotação atual\" está dentro de transcrição literal da sentença — manter ou registrar (sic).",
    "orientacao": "",
    "equipe": {
@@ -41,12 +41,53 @@
     "correcao": "Bruno",
     "situacao": "Corrigida"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "396725518",
+     "tipo": "Requerimento administrativo de remoção (01/10/2025)"
+    },
+    {
+     "id": "396725519",
+     "tipo": "Parecer da junta médica oficial — indeferimento (28/10/2025)"
+    },
+    {
+     "id": "396725520",
+     "tipo": "Pedido de reconsideração"
+    },
+    {
+     "id": "396725530",
+     "tipo": "Laudo pericial judicial (f. 22 e 24)"
+    },
+    {
+     "id": "396725534",
+     "tipo": "Exames e pareceres médicos (f. 36/69 e 81)"
+    },
+    {
+     "id": "396725535",
+     "tipo": "Junta médica oficial — manutenção do indeferimento (27/01/2026)"
+    },
+    {
+     "id": "396725545",
+     "tipo": "Sentença"
+    },
+    {
+     "id": "396725547",
+     "tipo": "Apelação da UFMS"
+    },
+    {
+     "id": "396725552",
+     "tipo": "Contrarrazões"
+    },
+    {
+     "id": "405581554",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": false
+   "minuta": true
   },
   {
    "sessao": "2026-11-30",
@@ -59,11 +100,11 @@
    "assunto": "Assistência à Saúde",
    "grupo": null,
    "tipo_caso": "Assistência à Saúde",
-   "resultado": "",
+   "resultado": "Desprovido",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Resultado lido do dispositivo da minuta, a confirmar no julgamento.",
+   "peculiaridades": "Home care de beneficiária menor com encefalopatia crônica e ventilação mecânica contínua, prestado desde 2019. Operadora de autogestão inadimplente perante a prestadora, com débito vencido de R$ 327.431,55 e notificações de suspensão. Discussão sobre julgamento extra petita e sobre a imposição de custeio antecipado.",
    "peculiaridades_relator": "1) Dispositivos citados: a lista da ementa importa dispositivos que só aparecem nas ementas transcritas do STJ e não integram a fundamentação — CPC, artigos 489, § 1º, VI, 535 (CPC/1973), 926, 942 e 1.021. Depurar. 2) Contradição: a lista cita \"Lei 8.078/1990, artigo 51, IV\", a Lei 9.656/1998 e a Lei 14.454/2022, enquanto o voto assenta a inaplicabilidade do CDC aos planos de autogestão (Súmula 608/STJ). Retirar ou ressalvar que são dos precedentes. 3) Artigo 85, § 11: consta da lista sem que o voto trate de honorários recursais, descabidos em agravo de instrumento. Retirar. 4) \"CC/2002\" sem indicação de artigo — especificar (artigos 421 e 422) ou retirar. 5) Artigo 311, IV: entrou por reprodução da decisão de origem, que nele fundamentou a multa diária; a base é o artigo 537 do CPC. Não repetir o equívoco na ementa. 6) Ementa, item 1: \"Agravo interno contra decisão que indeferiu o efeito suspensivo.\" é período sem verbo principal; integrar ao caso em exame. 7) Revisão: apóstrofo tipográfico em \"IDʼs\" (usar \"IDs\"); espaço duplo em \"Terceira Turma,  DJe\"; datas em formatos distintos (\"30/8/2019\" e \"30/08/2019\").",
    "orientacao": "",
    "equipe": {
@@ -71,12 +112,73 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "350743266",
+     "tipo": "Agravo de instrumento"
+    },
+    {
+     "id": "354353769",
+     "tipo": "Decisão que indeferiu o efeito suspensivo e dispensou o preparo"
+    },
+    {
+     "id": "359090283",
+     "tipo": "Agravo interno"
+    },
+    {
+     "id": "360681840",
+     "tipo": "Certidão de ausência de contraminuta e de resposta"
+    },
+    {
+     "id": "368124217",
+     "tipo": "Redistribuição por prevenção ao AI 5000294-34.2026.4.03.0000"
+    },
+    {
+     "id": "368518477",
+     "tipo": "Redistribuição por prevenção — complemento"
+    },
+    {
+     "id": "407404295",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    },
+    {
+     "id": "484630251",
+     "tipo": "Petição inicial (autos de origem)"
+    },
+    {
+     "id": "484630253",
+     "tipo": "Comunicação de suspensão dos serviços (autos de origem)"
+    },
+    {
+     "id": "484630258",
+     "tipo": "Prescrição médica (autos de origem)"
+    },
+    {
+     "id": "494766628",
+     "tipo": "Manifestação da prestadora em juízo (autos de origem)"
+    },
+    {
+     "id": "494766638",
+     "tipo": "Débito vencido de R$ 327.431,55 (autos de origem)"
+    },
+    {
+     "id": "497253914",
+     "tipo": "Decisão agravada — tutela de urgência (autos de origem)"
+    },
+    {
+     "id": "537230702",
+     "tipo": "Contestação da operadora (autos de origem)"
+    },
+    {
+     "id": "605093039",
+     "tipo": "Decisão que indeferiu a reconsideração (autos de origem)"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": false
+   "minuta": true
   },
   {
    "sessao": "2026-11-30",
@@ -89,11 +191,11 @@
    "assunto": "Exame da Ordem OAB",
    "grupo": null,
    "tipo_caso": "Exame da Ordem OAB",
-   "resultado": "",
+   "resultado": "Parcialmente provido",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Resultado lido do dispositivo da minuta, a confirmar no julgamento.",
+   "peculiaridades": "Mandado de segurança sobre correção da segunda fase do XL Exame de Ordem. Tema 485/STF em cotejo com erro objetivo: a banca reconheceu correta a afirmação da candidata na questão 1, letra b, e manteve nota zero; no item 11, a candidata indicou os artigos exigidos pelo espelho.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -101,7 +203,36 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "354343888",
+     "tipo": "Edital do XL Exame de Ordem (f. 16)"
+    },
+    {
+     "id": "354343892",
+     "tipo": "Espelho de correção da prova discursiva (f. 3)"
+    },
+    {
+     "id": "354343894",
+     "tipo": "Peça prático-profissional da impetrante (linha 50)"
+    },
+    {
+     "id": "354343907",
+     "tipo": "Sentença"
+    },
+    {
+     "id": "354343912",
+     "tipo": "Apelação da OAB"
+    },
+    {
+     "id": "354343915",
+     "tipo": "Contrarrazões"
+    },
+    {
+     "id": "355552948",
+     "tipo": "Parecer da Procuradoria Regional da República"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
@@ -135,7 +266,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (11.098 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -165,7 +298,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (14.491 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -227,7 +362,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (13.589 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -289,7 +426,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (10.196 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -319,7 +458,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (19.900 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -349,7 +490,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (18.392 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -379,7 +522,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (32.480 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -409,7 +554,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (33.441 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -471,7 +618,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (31.980 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -501,7 +650,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (26.330 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -563,7 +714,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (32.514 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -689,7 +842,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (40.465 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -751,7 +906,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (34.927 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -781,7 +938,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (11.274 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -811,7 +970,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (32.178 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -873,7 +1034,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (33.318 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -903,7 +1066,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (35.684 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -997,7 +1162,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (23.112 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1027,7 +1194,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (17.008 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1089,7 +1258,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (17.854 caracteres); pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1170,7 +1341,7 @@
    "resultado": "",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1183,7 +1354,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (17.200 caracteres), na tarefa [Sessão - ED] Aguardando a sessão; pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1200,7 +1373,7 @@
    "resultado": "",
    "modelo": "",
    "variacoes": [],
-   "observacao": "Aguardando posição do Dr.",
+   "observacao": "Aguardando posição do Dr. · Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1213,7 +1386,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (21.727 caracteres), na tarefa [Sessão - ED] Aguardando a sessão; pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1230,7 +1405,7 @@
    "resultado": "",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1243,7 +1418,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (10.656 caracteres), na tarefa [Sessão - ED] Aguardando a sessão; pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1260,7 +1437,7 @@
    "resultado": "",
    "modelo": "",
    "variacoes": [],
-   "observacao": "com tutela e sobre seus efeitos",
+   "observacao": "com tutela e sobre seus efeitos · Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1273,7 +1450,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (25.153 caracteres), na tarefa [Sessão - ED] Aguardando a sessão; pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1290,7 +1469,7 @@
    "resultado": "",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1303,7 +1482,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (11.230 caracteres), na tarefa [Sessão - ED] Aguardando a sessão; pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1320,7 +1501,7 @@
    "resultado": "",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1333,7 +1514,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (16.830 caracteres), na tarefa [Sessão - ED] Aguardando a sessão; pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   },
   {
@@ -1350,7 +1533,7 @@
    "resultado": "",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1363,7 +1546,9 @@
    "mpf": "",
    "triagem": {},
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Minuta extraída do PJe em 18/11/2026 (18.473 caracteres), na tarefa [Sessão - ED] Aguardando a sessão; pendente de conversão para acervo/minutas/acorrigir/."
+   ],
    "minuta": false
   }
  ]
