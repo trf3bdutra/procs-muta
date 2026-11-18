@@ -4064,7 +4064,7 @@ function cmtPauta(){
   var sop=it.filter(function(x){return !!x.sopref;}).length,fa=CMT.filtro||'aliberar';
   if(sit)sit.innerHTML='<button type="button" class="st'+(fa==='retirado'?' sel':'')+'" data-cf="retirado" aria-pressed="'+(fa==='retirado')+'">'+rtd+' retirado'+(rtd===1?'':'s')+'</button>'+
     '<button type="button" class="st'+(fa==='adiado'?' sel':'')+'" data-cf="adiado" aria-pressed="'+(fa==='adiado')+'">'+adiad+' adiado'+(adiad===1?'':'s')+'</button>'+
-    '<button type="button" class="st so'+(sop?' on':'')+(fa==='sopref'?' sel':'')+'" data-cf="sopref" aria-pressed="'+(fa==='sopref')+'" title="Sustentação oral ou preferência pedida">'+sop+' sustenta'+(sop===1?'ção':'ções')+' · preferência</button>'+
+    '<button type="button" class="st so'+(sop?' on':'')+(fa==='sopref'?' sel':'')+'" data-cf="sopref" aria-pressed="'+(fa==='sopref')+'" title="Sustentação oral ou preferência pedida">'+sop+' sustenta'+(sop===1?'ção':'ções')+'</button>'+
     '<button type="button" class="st pd'+(pedl.length?' on':'')+'" data-cdt="d" title="Abrir os pedidos no painel de dúvidas">'+pedl.length+' pedido'+(pedl.length===1?'':'s')+' em apreciação</button>'+
     '<button type="button" class="st dv'+((CMT.dados||{}).duvidas&&(CMT.dados.duvidas||[]).length?' on':'')+'" data-cdt="d" title="Abrir o painel de dúvidas">'+((CMT.dados||{}).duvidas||[]).length+' dúvida'+(((CMT.dados||{}).duvidas||[]).length===1?'':'s')+'</button>';
   var elp=$('#cmt-n-pt');if(elp)elp.textContent=p.date?'sessão de '+br(p.date)+' · '+it.length+' processos':'—';
@@ -7168,10 +7168,11 @@ body.cmt-pg #v-cmt .cmt-wrap{padding-top:10px}
 #v-cmt .cmt-tb td.cmt-asc .as small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #v-cmt .cmt-tb th:nth-child(1),#v-cmt .cmt-tb td:nth-child(1){width:34px}
 #v-cmt .cmt-tb th:nth-child(2),#v-cmt .cmt-tb td:nth-child(2){width:52px}
-#v-cmt .cmt-tb th:nth-child(3),#v-cmt .cmt-tb td:nth-child(3){width:168px}
-#v-cmt .cmt-tb th:nth-child(5),#v-cmt .cmt-tb td:nth-child(5){width:128px}
-#v-cmt .cmt-tb th:nth-child(6),#v-cmt .cmt-tb td:nth-child(6){width:300px}
-#v-cmt .cmt-tb th:nth-child(7),#v-cmt .cmt-tb td:nth-child(7){width:124px}
+#v-cmt .cmt-tb th:nth-child(3),#v-cmt .cmt-tb td:nth-child(3){width:150px}
+#v-cmt .cmt-tb th:nth-child(4),#v-cmt .cmt-tb td:nth-child(4){width:300px}
+#v-cmt .cmt-tb th:nth-child(5),#v-cmt .cmt-tb td:nth-child(5){width:120px}
+#v-cmt .cmt-tb th:nth-child(6),#v-cmt .cmt-tb td:nth-child(6){width:262px}
+#v-cmt .cmt-tb th:nth-child(7),#v-cmt .cmt-tb td:nth-child(7){width:120px}
 @media (max-width:780px){
   #v-cmt .cmt-hd2{flex-wrap:wrap;gap:8px}
   #v-cmt .cmt-hd2 .cmt-sp{display:none}
@@ -7312,6 +7313,12 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
 #v-cmt .cmt-ld-mk::after{content:"";position:absolute;inset:-7px;border:1px solid rgba(230,194,122,.18);border-radius:50%;animation:cmtring 3.4s ease-in-out 1.1s infinite}
 #v-cmt .cmt-load .star{animation:cmtstar .62s cubic-bezier(.2,.8,.3,1) .1s both,cmtbrilho 3.4s ease-in-out .7s infinite}
 @media (prefers-reduced-motion:reduce){#v-cmt .cmt-ld-mk,#v-cmt .cmt-ld-mk::after,#v-cmt .cmt-load .star{animation:none}}
+#v-cmt .cmt-sit .st{white-space:nowrap;flex:0 0 auto}
+#v-cmt .cmt-sit{align-items:center}
+/* a listagem nunca esmaga as colunas: abaixo da largura mínima, ela rola */
+#v-cmt .cmt-tb{min-width:1036px}
+#v-cmt .cmt-tw{overflow-x:auto}
+@media (max-width:780px){#v-cmt .cmt-tb{min-width:0}}
 </style>
 </body>
 </html>
