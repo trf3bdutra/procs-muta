@@ -1993,7 +1993,7 @@ function dg(s){return String(s||'').replace(/\D/g,'');}
 function br(d){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||'');return m?m[3]+'/'+m[2]+'/'+m[1]:(d||'');}
 function hoje(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function toast(t){var el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(el._t);el._t=setTimeout(function(){el.classList.remove('on');},2600);}
-var CMTK=(function(){try{var m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){var v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);history.replaceState(null,'',location.pathname);return v;}return sessionStorage.getItem('cmt_k')||'';}catch(e){return '';}})();
+var CMTK=(function(){try{var m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){var v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);history.replaceState(null,'',location.pathname+(/^#cmt/.test(location.hash)?'#cmt':''));return v;}return sessionStorage.getItem('cmt_k')||'';}catch(e){return '';}})();
 function api(u,op){op=op||{};op.credentials='same-origin';op.headers=Object.assign({'Content-Type':'application/json'},op.headers||{});if(CMTK&&/^\/api\//.test(String(u)))op.headers['x-cmt-chave']=CMTK;
   return fetch(u,op).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok){var e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e;}return j;});});}
 try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cmt-eq-tema')||'light');}catch(e){}
@@ -3389,6 +3389,7 @@ function vista(v, documentosProntos){if(v==='controles'||v==='monitoramento')v='
   if(S.prt&&(v==='inicio'||v!==S.fonte)){S.prt=null;S.prtAba=0;try{prontLateral();}catch(e){}}
   if(v==='pauta'&&!documentosProntos&&U.eu&&S.calSig!=null)sessoesEquipe(false);$('#v-cmt').hidden=v!=='cmt';
   $('#v-pauta').hidden=(v==='cmt');
+  document.body.classList.toggle('cmt-pg',v==='cmt');
   if(v==='cmt'){try{history.replaceState(null,'','#cmt');}catch(e){}nxRotulo('cmt');var h2=document.querySelector('#app header.nx');if(h2)h2.classList.add('navcmt');cmtAbrir();Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')==='cmt')a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});return;}
   var f=v==='inicio'?S.fonte:v;if(v!=='inicio'&&f!==S.fonte){if(nPend()){salvarTudo();toast('Alterações salvas ao trocar de página.');}S.fonte=f;S.doc=null;S.aberto={};S.sel={};
     var vp=$('#v-pauta');vp.classList.toggle('mono',f==='mono');vp.classList.toggle('pt2',f==='pauta'||f==='mono');CTRLT.forEach(function(c){vp.classList.toggle(c,f==='ctrl');});vp.classList.toggle('ctl',f==='ctrl');if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu&&!documentosProntos)carregar();}
@@ -4293,7 +4294,12 @@ document.addEventListener('click',function(e){
     seq.then(function(){CMT.sel={};toast(m.length+(m.length===1?' voto liberado.':' votos liberados.'));CMT.atualizado=0;cmtCarregar(sd);})
       .catch(function(e){toast((e&&e.erro)||'Não foi possível liberar tudo.');CMT.atualizado=0;cmtCarregar(sd);});return;}});
 document.addEventListener('click',function(e){if(e.target&&e.target.id==='cmt-atu'){CMT.atualizado=0;cmtCarregar();}});
-api('/api/login').then(function(j){U.des=!!j.desembargador||!!j.gestor;iniciar(j.usuario,j.gestor);}).catch(function(){entrada();});
+function cmtEndereco(){return /^#cmt/.test(location.hash)||/\/cmt\/?$/.test(location.pathname);}
+/* o endereço próprio do painel abre direto, sem entrada e sem perfil: a chave do link é a credencial */
+function cmtModoLink(){U.eu='';U.des=true;document.body.classList.add('cmt-link');
+  var en=$('#entrada'),ap=$('#app');if(en)en.hidden=true;if(ap)ap.hidden=false;vista('cmt');}
+api('/api/login').then(function(j){U.des=!!j.desembargador||!!j.gestor;iniciar(j.usuario,j.gestor);})
+  .catch(function(){if(CMTK)cmtModoLink();else entrada();});
 })();
 </script>
 <script id="cmt-agenda">
@@ -7031,6 +7037,12 @@ body.cmt-dr-on #v-cmt .cmt-met div.mk{grid-column:1/-1}
   #v-cmt .cmt-tb td.cmt-acd .cmt-abs{display:flex;gap:8px;width:100%}
   #v-cmt .cmt-tb td.cmt-acd .cmt-ab{flex:1;width:auto}
 }
+
+/* página do relator: sem cabeçalho de perfil e sem a navegação do Ex Officio */
+body.cmt-pg #app header,body.cmt-pg #app header.nx{display:none!important}
+body.cmt-pg #app{padding-top:0}
+body.cmt-pg .tabs,body.cmt-pg #u-nome,body.cmt-pg .chip-u{display:none}
+body.cmt-pg #v-cmt .cmt-wrap{padding-top:10px}
 </style>
 </body>
 </html>
