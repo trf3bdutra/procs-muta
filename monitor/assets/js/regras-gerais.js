@@ -50,9 +50,9 @@
     '.rg nav{background:#f4f2ea;border-right:1px solid #d8d3c6;padding:14px 10px;overflow:auto;display:flex;flex-direction:column;gap:2px}' +
     '.rg nav p{margin:12px 8px 4px;font:500 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#805b18}.rg nav p:first-child{margin-top:0}' +
     '.rg nav button{border:0;background:transparent;text-align:left;padding:7px 10px;border-radius:5px;font:600 13px Figtree,sans-serif;color:#4f5a57;cursor:pointer}.rg nav button:hover{background:#ece9df}.rg nav button[aria-current=true]{background:#173f3d;color:#fff}' +
-    '.rg main{display:flex;flex-direction:column;min-width:0;min-height:0;height:100%}' +
+    '.rg main{display:flex;flex-direction:column;min-width:0;min-height:0!important;height:100%;padding:0!important}' +
     '.rg .rg-h{display:flex;align-items:center;gap:10px;padding:14px 20px 10px;border-bottom:1px solid #e3ded2}.rg .rg-h h2{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em;color:#173f3d;flex:1}.rg .rg-h .rg-x{border:0;background:transparent;font-size:22px;color:#5c6b67;cursor:pointer}' +
-    '.rg .rg-c{flex:1;overflow:auto;padding:14px 20px 24px;display:flex;flex-direction:column;gap:12px}.rg .rg-c p{margin:0}.rg .rg-c .rg-n{font-size:12.5px;color:#5c6b67}' +
+    '.rg .rg-c{flex:1;overflow:auto;padding:14px 20px 24px;display:flex;flex-direction:column;gap:12px}.rg .rg-c.emb{padding:0;gap:0;overflow:hidden}.rg .rg-emb-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 20px;border-bottom:1px solid #e3ded2}.rg .rg-emb-h .rg-n{margin-left:auto}.rg .rg-emb{flex:1;min-height:0;background:#fff}.rg .rg-evf{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 10px;padding:10px 14px 12px;border-bottom:1px solid #e3ded2;background:#f6f3ea}.rg .rg-evf label{display:flex;flex-direction:column;gap:3px;font:700 11.5px Figtree,sans-serif;color:#4f5e5a}.rg .rg-evf label.tit{flex:1 1 220px}.rg .rg-evf input,.rg .rg-evf select{height:30px;border:1px solid #c8c3b6;border-radius:5px;padding:0 7px;font:500 13px Figtree,sans-serif;background:#fff;color:#203b39}.rg .rg-er{flex:0 0 100%;font-style:normal;font-size:12px;color:#8a2f22}.rg .rg-er:empty{display:none}.rg .rg-ev{display:grid;grid-template-columns:96px 170px minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 14px;border-top:1px solid #f0ece2;font-size:13px}.rg .rg-ev i{font-style:normal;color:#fff;font:700 10.5px Figtree,sans-serif;padding:3px 7px;border-radius:4px;text-align:center}.rg .rg-ev .d{font:500 12px "JetBrains Mono",monospace;color:#4f5e5a}.rg .rg-ev small{color:#617570}.rg .rg-ev .rg-btn{height:26px;padding:0 9px;font-size:11.5px}.rg .rg-c p{margin:0}.rg .rg-c .rg-n{font-size:12.5px;color:#5c6b67}' +
     '.rg .rg-f{display:flex;gap:8px;justify-content:flex-end;align-items:center;padding:10px 20px;border-top:1px solid #e3ded2;background:#fff}' +
     '.rg .rg-btn{height:32px;padding:0 12px;border:1px solid #c8c3b6;background:#fff;color:#203b39;font:700 12.5px Figtree,sans-serif;border-radius:6px;cursor:pointer}.rg .rg-btn.pri{background:#173f3d;border-color:#173f3d;color:#fff}.rg .rg-btn:disabled{opacity:.45;cursor:not-allowed}' +
     '.rg .rg-card{border:1px solid #d8d3c6;background:#fff;border-radius:8px}.rg .rg-card>b{display:block;padding:9px 14px;border-bottom:1px solid #e3ded2;font-size:13.5px;color:#173f3d}.rg .rg-card>b small{font-weight:500;color:#5c6b67;margin-left:6px}' +
@@ -78,9 +78,11 @@
     var g = D.createElement('section'); g.className = 'rg'; g.id = 'rg'; g.setAttribute('role', 'dialog'); g.setAttribute('aria-label', 'Regras gerais');
     D.body.append(v, g);
     g.addEventListener('click', clique); g.addEventListener('change', muda);
+    g.addEventListener('submit', function (e) { var fm = e.target.closest('#rg-evf'); if (!fm) return; e.preventDefault(); incluirEvento(fm); });
+    g.addEventListener('input', function (e) { if (e.target.closest('#rg-evf')) { var er = D.getElementById('rg-ever'); if (er) er.textContent = ''; } });
     D.addEventListener('keydown', tecla);
     carregarEscopo(); pintar(); }
-  function fechar() { if (ST && ST.ocupado) return; var g = D.getElementById('rg'), v = D.getElementById('rg-veu'); if (g) g.remove(); if (v) v.remove(); D.removeEventListener('keydown', tecla); ST = null; }
+  function fechar() { if (ST && ST.ocupado) return; soltarMotor(); var g = D.getElementById('rg'), v = D.getElementById('rg-veu'); if (g) g.remove(); if (v) v.remove(); D.removeEventListener('keydown', tecla); ST = null; }
   function tecla(e) { if (e.key === 'Escape') fechar(); }
   function aberto() { return !!D.getElementById('rg'); }
 
@@ -131,15 +133,55 @@
       '<div class="rg-card"><b>Entrada e saída</b><div class="rg-tl"><b>Entra</b><span>quem aparece na planilha principal, inclusive quem volta ao gabinete</span></div><div class="rg-tl"><b>Sai</b><span>quem não aparece: baixado, arquivado ou redistribuído. O trabalho registrado vai para acervo/operacional-arquivo.json e volta se o processo voltar.</span></div><div class="rg-tl"><b>Preservados</b><span>dados que as planilhas não trazem: DataJud, advogados, DPU, MPF, distribuição no 1º grau, seção competente</span></div><div class="rg-tl"><b>DataJud</b><span>só complementa processos que já estão na fonte; nunca acrescenta processo</span></div><div class="rg-tl"><b>Dados pessoais</b><span>celulares, telefones, e-mails e CPF não entram</span></div></div>' +
       '<div class="rg-card"><b>Trabalho do gabinete</b><div class="rg-tl"><b>acervo/operacional.json</b><span>um registro por processo da fonte: triagem, produção e histórico de pautas</span></div><div class="rg-tl"><b>acervo/operacional-arquivo.json</b><span>trabalho de quem saiu do gabinete; não aparece na triagem</span></div></div>'; }
   function tl(L) { return L.map(function (x) { return '<div class="rg-tl"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></div>'; }).join(''); }
+  /* telas do motor que abrem DENTRO do diálogo (no lugar do conteúdo da seção), sem fechar as regras gerais */
+  var EMB = { desig: 'Quem recebe em cada critério' }, EMBF = null;
+  function frameMotor() { var m = M(); try { return m && m.frameElement; } catch (e) { return null; } }
+  function posMotor() { var f = frameMotor(), el = D.getElementById('rg-emb'); if (!f || !el) return; var r = el.getBoundingClientRect();
+    [['position', 'fixed'], ['left', r.left + 'px'], ['top', r.top + 'px'], ['width', r.width + 'px'], ['height', r.height + 'px'], ['visibility', 'visible'], ['z-index', '2147481002'], ['background', '#fff'], ['border', '0']].forEach(function (x) { f.style.setProperty(x[0], x[1], 'important'); }); }
+  function embutirMotor(aba) { var m = M(), f = frameMotor(); if (!m || !m.CMTSessao || !f) return false;
+    if (EMBF == null) { EMBF = f.getAttribute('style') || ''; W.addEventListener('resize', posMotor); }
+    try { var md = m.document; if (!md.getElementById('rg-emb-css')) { var c = md.createElement('style'); c.id = 'rg-emb-css'; c.textContent = '#cs-root.cs-emb .cs-top{display:none!important}'; md.head.appendChild(c); }
+      m.CMTSessao.abrir(aba); var rt = md.getElementById('cs-root'); if (rt) rt.classList.add('cs-emb'); } catch (e) { soltarMotor(); return false; }
+    return true; }
+  function soltarMotor() { if (EMBF == null) return; var m = M(), f = frameMotor(); W.removeEventListener('resize', posMotor);
+    try { var rt = m && m.document.getElementById('cs-root'); if (rt) rt.classList.remove('cs-emb'); if (m && m.CMTSessao) m.CMTSessao.fechar(); } catch (e) {}
+    if (f) { if (EMBF) f.setAttribute('style', EMBF); else f.removeAttribute('style'); } EMBF = null; if (ST) ST.emb = null; }
+  function vEmb() { return '<div class="rg-emb-h"><button type="button" class="rg-btn" data-rg="emb-volta">← Voltar às regras de designação</button><b>' + esc(EMB[ST.emb] || '') + '</b><span class="rg-n">As alterações gravam sozinhas no procs-muta.</span></div><div class="rg-emb" id="rg-emb"></div>'; }
   function tela(aba, rot) { return ST.ctx.abrirMotor ? '<button type="button" class="rg-btn" data-rg="motor" data-m="' + aba + '">' + esc(rot) + '</button>' : ''; }
   function lerProd() { if (ST.prod) return; ST.prod = 'lendo'; var P = PM(); if (!P) { ST.prod = prodNorm(null); ST.prodOrig = JSON.stringify(ST.prod); return; }
     P.ler(ARQ_PROD).then(function (t) { if (!ST) return; var j = null; try { j = JSON.parse(t); } catch (e) {} ST.prod = prodNorm(j); ST.prodOrig = JSON.stringify(ST.prod); pintar(); })
       .catch(function () { if (!ST) return; ST.prod = prodNorm(null); ST.prodOrig = JSON.stringify(ST.prod); pintar(); }); }
   function prodOk() { return ST.prod && typeof ST.prod === 'object'; }
   function sujoProd() { return prodOk() && JSON.stringify(ST.prod) !== ST.prodOrig; }
+  /* eventos da agenda do calendário (acervo/sessoes/agenda.json, a mesma do calendário do Monitor e da Ex Officio) */
+  var EVT = { evento: 'Evento', prazo: 'Prazo-limite', data: 'Data', alerta: 'Alerta', afazer: 'Afazer' }, EVTC = { evento: '#3e72ad', prazo: '#c0392b', data: '#7a5cc0', alerta: '#c46a1f', afazer: '#1a8a6a' };
+  function AGd() { var m = M(); return m && m.CMTAgenda; }
+  function hojeIso() { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function brD(i) { return i ? i.slice(8, 10) + '/' + i.slice(5, 7) + '/' + i.slice(0, 4) : ''; }
+  function vEventos() { var A = AGd();
+    if (!A) return '<div class="rg-card"><b>Eventos do calendário</b><p class="rg-n" style="padding:8px 14px">O motor ainda está carregando. Feche e abra de novo em instantes.</p></div>';
+    var L = A.get('itens', []) || [], h0 = hojeIso();
+    var vis = L.filter(function (i) { return EVT[i.tipo] && i.freq !== 'sessao' && i.freq !== 'semanal' && i.freq !== 'mensal' && (i.ate || i.data) >= h0; }).sort(function (a, b) { return String(a.data).localeCompare(String(b.data)) || String(a.hora || '').localeCompare(String(b.hora || '')); });
+    var rec = L.filter(function (i) { return EVT[i.tipo] && (i.freq === 'sessao' || i.freq === 'semanal' || i.freq === 'mensal'); }).length;
+    var lin = function (i) { return '<div class="rg-ev"><i style="background:' + (EVTC[i.tipo] || '#56656e') + '">' + esc(EVT[i.tipo]) + '</i><span class="d">' + esc(brD(i.data)) + (i.ate && i.ate !== i.data ? ' a ' + esc(brD(i.ate)) : '') + (i.hora ? ' · ' + esc(i.hora) : '') + '</span><span>' + esc(i.titulo || '') + (i.quem ? ' <small>· ' + esc(i.quem) + '</small>' : '') + '</span><button type="button" class="rg-btn" data-rg="ev-del" data-id="' + esc(i.id) + '" aria-label="Excluir ' + esc(i.titulo || 'evento') + '">Excluir</button></div>'; };
+    return '<div class="rg-card"><b>Eventos do calendário<small>aparecem no calendário do Monitor, das Pautas e da Ex Officio · acervo/sessoes/agenda.json</small></b>' +
+      '<form class="rg-evf" id="rg-evf" autocomplete="off"><label>Tipo<select name="tipo">' + Object.keys(EVT).map(function (k) { return '<option value="' + k + '">' + EVT[k] + '</option>'; }).join('') + '</select></label>' +
+      '<label>Data<input type="date" name="data"></label><label class="ate">Até (opcional)<input type="date" name="ate"></label><label>Horário<input type="time" name="hora"></label>' +
+      '<label class="tit">Título<input type="text" name="titulo" maxlength="140" placeholder="ex.: reunião da equipe, correição, ponto facultativo"></label><label>Responsável<input type="text" name="quem" maxlength="60" placeholder="Assessoria"></label>' +
+      '<button type="submit" class="rg-btn pri">Incluir no calendário</button><em class="rg-er" id="rg-ever"></em></form>' +
+      (vis.length ? vis.map(lin).join('') : '<p class="rg-n" style="padding:8px 14px">Nenhum evento a partir de hoje.</p>') +
+      (rec ? '<p class="rg-n" style="padding:6px 14px 10px">' + nf(rec) + ' item(ns) recorrente(s) (semanal, mensal ou por marco de sessão) se editam no próprio calendário, pelo botão de cadastrar.</p>' : '') + '</div>'; }
+  function incluirEvento(fm) { var A = AGd(), er = D.getElementById('rg-ever'); if (!A) return; var v = function (n) { return (fm[n] && fm[n].value || '').trim(); }, tp = v('tipo');
+    var msg = !v('titulo') ? 'Informe o título.' : !v('data') ? 'Informe a data.' : v('ate') && v('ate') < v('data') ? 'O fim não pode ser antes do início.' : '';
+    if (msg) { if (er) er.textContent = msg; return; }
+    var so = tp === 'prazo' || tp === 'data', ate = so ? '' : v('ate');
+    var it = { id: Date.now().toString(36), tipo: tp, sub: '', sit: '', titulo: v('titulo'), quem: v('quem'), ses: '', freq: ate ? 'diaria' : 'unica', hora: v('hora'), data: v('data'), ate: ate, dias: [], marco: '', desloc: 0 };
+    var L = (A.get('itens', []) || []).slice(); L.push(it); A.set('itens', L);
+    ST.msg = EVT[tp] + ' incluído em ' + brD(it.data) + (ate ? ' a ' + brD(ate) : '') + '. Grava no procs-muta em instantes.'; ST.bad = false; pintar(); }
   function vCalendario() { return '<p>Dia útil é dia de expediente do gabinete (segunda a sexta) que não esteja excluído no calendário. Os marcos das sessões, os prazos da triagem, a capacidade da equipe e as urgências seguem esta contagem.</p>' +
       '<div class="rg-card"><b>Dias não úteis sugeridos<small>calendário da Justiça Federal</small></b>' + tl([['Fixos', '01/01, 21/04, 01/05, 11/08 (Dia da Justiça Federal), 07/09, 12/10, 01/11, 02/11, 15/11, 20/11 e 08/12 (Dia da Justiça)'], ['Móveis (pela Páscoa)', 'Carnaval (segunda e terça), quarta, quinta e sexta-feira santas e Corpus Christi'], ['Recesso forense', '20/12 a 06/01'], ['Suspensão de prazos (CPC, art. 220)', '20/12 a 20/01: conta para prazos processuais, não para o expediente interno']]) + '</div>' +
       '<p class="rg-n">Os feriados são sugeridos para os próximos 120 dias e só passam a valer quando incluídos no calendário do gabinete. Feriado local de MS entra manualmente. A data e os marcos de cada sessão se editam na página Pautas (Editar marcos).</p>' +
+      vEventos() +
       '<div>' + tela('sessoes', 'Editar calendário do gabinete: expediente, feriados e sessões') + '</div>' +
       (lerProd(), '<div class="rg-card"><b>Marcos da sessão<small>contados em dias úteis · liberação e ritmo se editam em Regras de produtividade</small></b>') + tl([['Liberação dos votos', (prodOk() ? ST.prod.painel.liberacao : 5) + ' dias úteis antes da sessão (contagem estrita, sem o dia da sessão)'], ['Prazo das minutas', 'primeiro dia útil em que a capacidade da equipe, ao ritmo de ' + fmt(prodOk() ? ST.prod.painel.minutasDia : 3) + ' minutas por servidor por dia útil, cobre a carga de cada um e os processos ainda sem servidor'], ['Correção', 'do dia seguinte ao prazo das minutas até a liberação'], ['Folga', 'dias úteis entre a liberação e a véspera da sessão'], ['Início da preparação', 'definido na sessão; antes dele, a contagem parte de hoje']]) + '</div>'; }
   function vEtiquetas() { return '<p>A tarefa do PJe decide o tipo de julgamento ([ED], [Sessão - ED], [Ag. Int], retratação); a etiqueta de ED só informa. Remessa necessária vem da classe.</p><p>As conversões gerais (subassuntos, MPF, especificidades, alertas de impedimento e suspeição) estão em <b>apoio/regras/etiquetas.json</b>.</p><div>' + tela('regras', 'Editar regras de etiquetas') + '</div>'; }
@@ -211,11 +253,11 @@
     var sc = g.querySelector('.rg-c'), top = sc ? sc.scrollTop : 0;
     g.innerHTML = '<nav aria-label="Seções">' + ABAS.map(function (x) { return x.length === 1 ? '<p>' + x[0] + '</p>' : '<button type="button" data-rg-aba="' + x[0] + '" aria-current="' + (x[0] === a) + '">' + esc(x[1]) + (x[0] === 'escopo' && sujo() ? ' •' : '') + '</button>'; }).join('') + '</nav>' +
       '<main><div class="rg-h"><h2>' + esc(tit) + '</h2><span class="rg-n" style="font:500 10px JetBrains Mono,monospace;letter-spacing:.14em;text-transform:uppercase;color:#805b18">Regras gerais</span><button type="button" class="rg-x" data-rg="fechar" aria-label="Fechar">×</button></div>' +
-      '<div class="rg-c">' + (ST.msg ? '<div class="rg-msg' + (ST.bad ? ' bad' : '') + '" role="status">' + esc(ST.msg) + '</div>' : '') + VIS[a]() + '</div>' +
+      (ST.emb ? '<div class="rg-c emb">' + vEmb() + '</div>' : '<div class="rg-c">' + (ST.msg ? '<div class="rg-msg' + (ST.bad ? ' bad' : '') + '" role="status">' + esc(ST.msg) + '</div>' : '') + VIS[a]() + '</div>') +
       '<div class="rg-f">' + (a === 'escopo' ? '<span class="rg-n" style="margin-right:auto">' + (sujo() ? 'Alterações ainda não gravadas.' : 'Escopo igual ao gravado.') + '</span><button type="button" class="rg-btn" data-rg="desfazer"' + (sujo() && !ST.ocupado ? '' : ' disabled') + '>Desfazer</button><button type="button" class="rg-btn pri" data-rg="gravar"' + (sujo() && !ST.ocupado ? '' : ' disabled') + '>' + (ST.ocupado ? 'Gravando…' : 'Gravar escopo') + '</button>' : a === 'produtividade' && prodOk() ? '<span class="rg-n" style="margin-right:auto">' + (sujoProd() ? 'Alterações ainda não gravadas.' : 'Igual ao gravado.') + '</span><button type="button" class="rg-btn" data-rg="p-padrao"' + (ST.ocupado ? ' disabled' : '') + '>Restaurar padrões</button><button type="button" class="rg-btn" data-rg="p-desfazer"' + (sujoProd() && !ST.ocupado ? '' : ' disabled') + '>Desfazer</button><button type="button" class="rg-btn pri" data-rg="p-gravar"' + (sujoProd() && !ST.ocupado ? '' : ' disabled') + '>' + (ST.ocupado ? 'Gravando…' : 'Gravar') + '</button>' : '<button type="button" class="rg-btn" data-rg="fechar">Fechar</button>') + '</div></main>';
-    var nc = g.querySelector('.rg-c'); if (nc) nc.scrollTop = top; }
+    var nc = g.querySelector('.rg-c'); if (nc) nc.scrollTop = top; if (ST.emb) posMotor(); }
   function clique(e) { var b = e.target.closest('[data-rg-aba],[data-rg]'); if (!b || b.disabled) return;
-    if (b.dataset.rgAba) { ST.aba = b.dataset.rgAba; ST.msg = ''; pintar(); return; }
+    if (b.dataset.rgAba) { soltarMotor(); ST.aba = b.dataset.rgAba; ST.msg = ''; pintar(); return; }
     var k = b.dataset.rg;
     if (k === 'fechar') { if ((sujo() || sujoProd()) && !W.confirm('Há mudanças ainda não gravadas. Fechar e descartar?')) return; fechar(); }
     else if (k === 'desfazer') { ST.esc = JSON.parse(ST.orig); ST.mud = {}; ST.msg = ''; pintar(); }
@@ -225,6 +267,9 @@
     else if (k === 'p-desfazer') { ST.prod = JSON.parse(ST.prodOrig); ST.msg = ''; pintar(); }
     else if (k === 'p-padrao') { ST.prod = prodPadrao(); ST.msg = 'Padrões do Gabinete CMT restaurados; grave para valer.'; ST.bad = false; pintar(); }
     else if (k === 'd-sobe' || k === 'd-desce') { var ck = b.dataset.k; desigMuda(function (o) { var i = o.indexOf(ck), j = k === 'd-sobe' ? i - 1 : i + 1; if (i < 0 || j < 0 || j >= o.length) return; o[i] = o[j]; o[j] = ck; }); }
+    else if (k === 'emb-volta') { soltarMotor(); pintar(); }
+    else if (k === 'motor' && EMB[b.dataset.m] && embutirMotor(b.dataset.m)) { ST.emb = b.dataset.m; ST.msg = ''; pintar(); }
+    else if (k === 'ev-del') { var A = AGd(); if (!A) return; var id = b.dataset.id, L0 = A.get('itens', []) || [], it = L0.find(function (x) { return x.id === id; }); A.set('itens', L0.filter(function (x) { return x.id !== id; })); ST.msg = (it ? '“' + (it.titulo || '') + '” excluído' : 'Excluído') + ' do calendário. Grava no procs-muta em instantes.'; ST.bad = false; pintar(); }
     else if (k === 'motor') { var ab = b.dataset.m, volta = ST.aba; if (sujo() || sujoProd()) { if (!W.confirm('Há mudanças ainda não gravadas nesta seção. Sair e descartar?')) return; } var cx = ST.ctx; fechar(); cx.abrirMotor(ab, function () { abrir(Object.assign({}, cx, { aba: volta })); }); } }
   function muda(e) { var t = e.target;
     if (t.dataset.rgDc != null) { var dk = t.dataset.rgDc, dx = t.dataset.x, dv = t.checked; desigMuda(function (o, on) { on[dk] = on[dk] || { d: true, c: true }; on[dk][dx] = dv; }); return; }
