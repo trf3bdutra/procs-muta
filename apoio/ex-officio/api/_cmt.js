@@ -18,6 +18,8 @@ async function lerPen() { try { return await L.lerJson(PEN); } catch (e) { if (e
 async function criarDiligencia(campos, u) {
   for (let n = 0; n < 4; n++) {
     const { dados, sha } = await lerPen(); dados.registros = dados.registros || [];
+    const anterior = campos.whatsappEvento && dados.registros.find(t => t.whatsappEvento === campos.whatsappEvento);
+    if (anterior) return anterior;
     const agora = new Date().toISOString();
     const t = Object.assign({ id: 'pen-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       creator: u, criadoEm: agora, _rev: 1, stage: 'todo', atualizadoEm: agora, atualizadoPor: u, origem: '' }, campos);
@@ -27,13 +29,16 @@ async function criarDiligencia(campos, u) {
   }
   throw Object.assign(new Error('O quadro mudou várias vezes seguidas; tente de novo.'), { status: 409 });
 }
-async function responder(id, texto, u, manter) {
+async function responder(id, texto, u, manter, evento) {
   for (let n = 0; n < 4; n++) {
     const { dados, sha } = await lerPen(); dados.registros = dados.registros || [];
     const t = (dados.registros || []).find(x => x.id === id && !x.excluida);
     if (!t) throw Object.assign(new Error('Dúvida não encontrada.'), { status: 404 });
     if (L.norm(t.assignee) !== L.norm(u)) throw Object.assign(new Error('Esta dúvida não foi dirigida a você.'), { status: 403 });
     const agora = new Date().toISOString();
+    if (evento && t.whatsappRespostaEvento === evento) return t;
+    if (evento && t.stage === 'done') throw Object.assign(new Error('Dúvida já concluída.'), { status: 409 });
+    if (evento) t.whatsappRespostaEvento = evento;
     t.resposta = texto; t.respondidoPor = u; t.respondidoEm = agora;
     if (!manter) t.stage = 'done';
     t._rev = Number(t._rev || 1) + 1; t.atualizadoEm = agora; t.atualizadoPor = u;
@@ -60,7 +65,7 @@ async function painel(req, res, u) {
     try {
       if (b.acao === 'liberar') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, u, true);
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, u, true, req.whatsappEvent);
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, dataLiberacao: b.desfazer ? '' : hj });
       }
@@ -73,14 +78,15 @@ async function painel(req, res, u) {
         const txt = String(b.texto || '').trim().slice(0, 2000);
         if (!txt) return res.status(400).json({ erro: 'Escreva o apontamento da devolutiva.' });
         const r = await criarDiligencia({ title: 'Devolutiva · ' + cnj, description: txt, assignee: String(b.para || ''),
-          numero: cnj, sessao: L.dataOk(b.sessao) ? b.sessao : '', urgency: 'Alta' }, u);
+          numero: cnj, sessao: L.dataOk(b.sessao) ? b.sessao : '', urgency: 'Alta',
+          ...(req.whatsappEvent && { whatsappEvento: req.whatsappEvent }) }, u);
         return res.status(200).json({ ok: true, task: r });
       }
       /* resposta do desembargador a uma dúvida que lhe foi dirigida: fica no registro e conclui a diligência */
       if (b.acao === 'responder') {
         const txt = String(b.texto || '').trim().slice(0, 2000);
         if (!txt) return res.status(400).json({ erro: 'Escreva a resposta.' });
-        const r = await responder(String(b.id || ''), txt, u, !!b.manter);
+        const r = await responder(String(b.id || ''), txt, u, !!b.manter, req.whatsappEvent);
         return res.status(200).json({ ok: true, task: r });
       }
       return res.status(400).json({ erro: 'Ação desconhecida.' });
