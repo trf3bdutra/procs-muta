@@ -19,6 +19,8 @@ async function gravarItem(data, b, u, gestorOk, whatsappEvent) {
     const it = (dados[lista] || []).find(i => dg(i.cnj) === alvo);
     if (!it) return { status: 404, body: { erro: 'processo fora desta pauta' } };
     const mud = [];
+    const designacoes = gestorOk ? ['servidor', 'corretor'].filter(k => k in C && L.norm(it[k]) !== L.norm(C[k]))
+      .map(k => ({ papel: k === 'servidor' ? 'minuta' : 'correção', de: it[k] || '', para: String(C[k] || '') })) : [];
     if (whatsappEvent) {
       it.ctl = it.ctl || {};
       const eventos = it.ctl.whatsappLiberacoes || [];
@@ -35,6 +37,11 @@ async function gravarItem(data, b, u, gestorOk, whatsappEvent) {
     if (C.cartao && typeof C.cartao === 'object') { const ant = it.ctl.cartao || {}; Object.keys(C.cartao).forEach(k => { if (JSON.stringify(ant[k]) !== JSON.stringify(C.cartao[k])) { ant[k] = C.cartao[k]; mud.push('cartao.' + k); } }); it.ctl.cartao = ant; }
     if (!mud.length) return { status: 200, body: { ok: true, item: it, semMudanca: true } };
     it.ctl.editadoPor = u; it.ctl.editadoEm = new Date().toISOString();
+    if (designacoes.length) {
+      it.ctl.historicoDesignacoes = (it.ctl.historicoDesignacoes || []).concat({
+        em: it.ctl.editadoEm, por: u, alteracoes: designacoes,
+      }).slice(-20);
+    }
     dados.atualizadoEm = it.ctl.editadoEm;
     /* o que a equipe registra vai também para a ficha do processo (acervo/operacional.json), no mesmo commit */
     const Cf = Object.assign({}, C); if (!gestorOk) GESTOR.forEach(k => delete Cf[k]);
