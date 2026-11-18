@@ -5,6 +5,7 @@ const E = require('./_entregas');
 const FICHA = require('./_ficha');
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
+  if (req.query && req.query.whatsapp === '1') return require('./_whatsapp')(req, res);
   const u = L.exigir(req, res); if (!u) return;
   if (req.query && req.query.cmt) return require('./_cmt')(req, res, u);
   try {
