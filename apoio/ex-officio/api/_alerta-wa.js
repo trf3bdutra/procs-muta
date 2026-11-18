@@ -7,6 +7,9 @@ module.exports = async function alerta(id, titulo, quantidade) {
 module.exports.duvida = function duvida(id) {
   return enviar('duvida-'+id, process.env.CMT_WA_TEMPLATE_DUVIDA, id);
 };
+module.exports.assinatura = function assinatura(id) {
+  return enviar(id, process.env.CMT_WA_TEMPLATE_ASSINATURA, 'Uma decisão ordinária encaminhada para assinatura no Ex Officio.');
+};
 async function enviar(id, template, resumo) {
   const env = process.env;
   const telefone = String(env.CMT_WA_PHONE || '').replace(/\D/g, '');
