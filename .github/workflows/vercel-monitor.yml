@@ -68,7 +68,7 @@ jobs:
           # /cmt/ é o endereço próprio do painel do relator (mesma página da Ex Officio).
           mkdir -p site/public/cmt && cp apoio/ex-officio/index.html site/public/cmt/index.html
           mkdir -p site/public/editor && cp apoio/modus-operandi/modus-operandi-editor.html site/public/editor/index.html
-          # Painel de lotes (/lotes/): página própria, fora da navegação do Ex Officio, com o mesmo login; dados por /api/lote
+          # Painel de lotes (/lotes/): página própria, fora da navegação do Ex Officio, com o mesmo login; dados por /api/painel?lote=1
           mkdir -p site/public/lotes && cp apoio/ex-officio/lotes/index.html site/public/lotes/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
           # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.
