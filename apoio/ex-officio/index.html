@@ -1833,6 +1833,14 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
           <button type="button" class="b" id="cmt-libl" disabled>Liberar selecionados</button>
           <button type="button" class="b cmt-mfil" id="cmt-mfil" aria-expanded="false">Filtros</button>
         </div>
+        <div class="cmt-fsel" id="cmt-fsel">
+          <label><span>Servidor</span><select data-fc="servidor"></select></label>
+          <label><span>Corretor</span><select data-fc="corretor"></select></label>
+          <label><span>Assunto</span><select data-fc="assunto"></select></label>
+          <label><span>Classe</span><select data-fc="classe"></select></label>
+          <label><span>Julgamento</span><select data-fc="julgamento"></select></label>
+          <button type="button" class="cmt-flimpa" id="cmt-flimpa" hidden>Limpar</button>
+        </div>
         <div class="cmt-sit" id="cmt-sit"></div>
       </div>
       <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Ações</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
@@ -4019,6 +4027,23 @@ function cmtMarcos(){
       +'<p class="cmt-k2">'+(n===0?'hoje':n===1?'amanhã':'em '+n+' dias')+(s.processos?' · '+s.processos+' processos':'')+'</p>'
       +'<span class="cmt-chs">'+chips+'</span></div>';}).join('');}
 /* pauta da sessão aberta: filtros por etapa e busca por item, número, assunto ou servidor */
+/* listas de servidor, corretor, assunto, classe e tipo de julgamento, com o que a sessão tem */
+function cmtFsel(it){
+var S2=CMT.fsel||(CMT.fsel={}),algum=false;
+[['servidor','servidor'],['corretor','corretor'],['assunto','assunto'],['classe','classe'],['julgamento','julgamento']].forEach(function(par){
+  var k=par[0],sel=document.querySelector('[data-fc="'+k+'"]');if(!sel)return;
+  var m={};it.forEach(function(x){var v=String(x[k]||'').trim();if(v&&v!=='—')m[v]=(m[v]||0)+1;});
+  var ks=Object.keys(m).sort(function(a,b){return a.localeCompare(b,'pt');});
+  if(S2[k])algum=true;
+  var rot={servidor:'Todos os servidores',corretor:'Todos os corretores',assunto:'Todos os assuntos',classe:'Todas as classes',julgamento:'Todo tipo de julgamento'}[k];
+  sel.innerHTML='<option value="">'+rot+'</option>'+ks.map(function(v){return '<option value="'+esc(v)+'"'+(S2[k]===v?' selected':'')+'>'+esc(v)+' ('+m[v]+')</option>';}).join('');
+  sel.classList.toggle('on',!!S2[k]);
+  if(S2[k]&&ks.indexOf(S2[k])<0){S2[k]='';sel.value='';}});
+var lp=$('#cmt-flimpa');if(lp)lp.hidden=!algum;}
+document.addEventListener('change',function(e){var s2=e.target;if(!s2||!s2.getAttribute||!s2.getAttribute('data-fc'))return;
+CMT.fsel=CMT.fsel||{};CMT.fsel[s2.getAttribute('data-fc')]=s2.value;cmtPauta();});
+document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#cmt-flimpa'))return;
+CMT.fsel={};CMT.q='';var q=$('#cmt-q');if(q)q.value='';var q2=$('#cmt-q2');if(q2)q2.value='';cmtPauta();});
 function cmtTem(lista,cnj){var L=((CMT.dados||{})[lista])||[],d=dgx(cnj);return L.some(function(z){return dgx(z.numero)===d;});}
 function cmtFiltra(){
   var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'aliberar',q=(CMT.q||'').trim().toLowerCase();
@@ -4032,6 +4057,9 @@ function cmtFiltra(){
     :f==='pedido'?it.filter(function(x){return cmtTem('pedidos',x.cnj);})
     :f==='duvida'?it.filter(function(x){return cmtTem('duvidas',x.cnj);})
     :it.filter(function(x){return x.etapa===f;});
+  var S2=CMT.fsel||{};
+  ['servidor','corretor','assunto','classe','julgamento'].forEach(function(k){var v=S2[k];if(!v)return;
+    L=L.filter(function(x){return String(x[k]||'').trim()===v;});});
   if(q){var md='tudo',fx=/^\d+(?:\s*[-,]\s*\d+)*$/.test(q),qd=q.replace(/\D/g,'');
     var porItem=function(x){if(!fx)return false;var n=parseInt(x.item,10);if(isNaN(n))return false;
       return q.split(/\s*,\s*/).some(function(p){var r=p.split('-');return r.length>1?(n>=+r[0]&&n<=+r[1]):+p===n;});};
@@ -4079,11 +4107,12 @@ function cmtPauta(){
   var pedl=(((CMT.dados||{}).pedidos)||[]);
   var res=$('#cmt-resumo');
   if(res)res.innerHTML='<span><b>'+it.length+'</b> pautados</span><span><b>'+falta+'</b> a liberar</span><span><b>'+nmin+'</b> minutados</span><span><b>'+ncor+'</b> corrigidos</span><span><b>'+(cta.liberado||0)+'</b> liberados</span><i aria-hidden="true">⌄</i>';
+  cmtFsel(it);
   var sop=it.filter(function(x){return !!x.sopref;}).length,des=it.filter(function(x){return !!x.destaque;}).length;
   var fa=CMT.filtro||'aliberar';
   var ndv=it.filter(function(x){return cmtTem('duvidas',x.cnj);}).length,nped=it.filter(function(x){return cmtTem('pedidos',x.cnj);}).length;
   var sit=$('#cmt-sit');
-  var chip=function(f,n,rot,cls,tt){return '<button type="button" class="st'+(cls?' '+cls:'')+(n?' on':'')+(fa===f?' sel':'')+'" data-cf="'+f+'" aria-pressed="'+(fa===f)+'" title="'+esc(tt)+'">'+n+' '+rot+'</button>';};
+  var chip=function(f,n,rot,cls,tt){return '<button type="button" class="st'+(cls?' '+cls:'')+(n?' on':'')+(fa===f?' sel':'')+'" data-cf="'+f+'" data-n="'+n+'" aria-pressed="'+(fa===f)+'" title="'+esc(tt)+'">'+rot+'</button>';};
   if(sit)sit.innerHTML=
     chip('retirado',rtd,rtd===1?'retirado':'retirados','rt','Itens com retirada registrada')+
     chip('adiado',adiad,adiad===1?'adiado':'adiados','ad','Itens com adiamento registrado')+
@@ -7611,6 +7640,30 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
   #v-cmt .cmt-tb td.cmt-acd .cmt-ab{flex:0 0 32px;width:32px;height:32px;border:1px solid var(--el);border-radius:0;opacity:.8}
   #v-cmt .cmt-tb td.cmt-at{display:none}
   #v-cmt .cmt-tb td.cmt-sel input{width:18px;height:18px}
+}
+
+/* ===== Filtros da pauta: listas e marcadores numa faixa só ===== */
+#v-cmt .cmt-fsel{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px}
+#v-cmt .cmt-fsel label{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1 1 150px}
+#v-cmt .cmt-fsel label span{font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-fsel select{width:100%;height:32px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:12px;padding:0 8px;border-radius:0;min-width:0}
+#v-cmt .cmt-fsel select.on{border-color:var(--eg);background:#eef5f2;color:var(--ei);font-weight:650}
+#v-cmt .cmt-fsel select:focus{outline:2px solid var(--eg);outline-offset:1px}
+#v-cmt .cmt-flimpa{height:32px;padding:0 12px;border:1px solid var(--el);background:var(--ew);color:var(--er);font:inherit;font-size:11.5px;font-weight:700;cursor:pointer}
+#v-cmt .cmt-flimpa:hover{border-color:var(--er)}
+/* marcadores: a mesma família visual do placar */
+#v-cmt .cmt-sit{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+#v-cmt .cmt-sit::before{content:"Marcadores";font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);margin-right:2px}
+#v-cmt .cmt-sit .st{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border:1px solid var(--el);background:var(--ew);color:var(--em);font:inherit;font-size:11.5px;font-weight:600;letter-spacing:0;text-transform:none;white-space:nowrap;cursor:pointer}
+#v-cmt .cmt-sit .st::before{content:attr(data-n);font-family:var(--emono);font-size:12px;font-weight:750;color:var(--ei)}
+#v-cmt .cmt-sit .st i{display:none}
+@media (max-width:780px){
+  #v-cmt .cmt-fsel{display:none}
+  body.cmt-fon #v-cmt .cmt-fsel{display:flex}
+  #v-cmt .cmt-fsel label{flex:1 1 46%}
+  #v-cmt .cmt-fsel select{height:38px;font-size:13px}
+  #v-cmt .cmt-flimpa{flex:1 1 100%;height:36px}
+  #v-cmt .cmt-sit::before{flex:1 1 100%;margin:2px 0 0}
 }
 </style>
 </body>
