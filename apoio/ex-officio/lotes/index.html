@@ -179,6 +179,36 @@ body.relator .so-equipe{display:none!important}
 #gest>.cmt-q{margin-top:34px}
 .pf{scroll-margin-top:84px}
 @media(max-width:900px){.lx{display:block}.lx-sub{display:none}.lx-h h1{font-size:38px}}
+/* painel lateral: comparar e buscar (gestão e equipe); ao abrir, empurra o conteúdo para a esquerda */
+body.cx-on{padding-right:560px}
+body.cx-on .lx-nx{margin-left:calc(50% - 50vw + 280px);margin-right:calc(50% - 50vw + 280px)}
+.lx-cx.cv{padding:0;margin:0;max-width:none}
+.lx-cx{position:fixed;top:0;right:0;width:560px;height:100vh;z-index:30;background:var(--ep);border-left:1px solid var(--el2);display:flex;flex-direction:column}
+.lx-cx:before{content:"";display:block;height:4px;background:var(--eo);flex:none}
+.cx-h{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--el)}
+.cx-h b{font-size:20px;letter-spacing:-.03em;color:var(--ei)}.cx-h b em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+.cx-sw{padding:10px 18px 0}
+.cx-c{flex:1;overflow-y:auto;padding:12px 18px 24px}
+.cx-c .form{display:grid;grid-template-columns:minmax(0,1fr) 130px;gap:10px}.cx-c .form>*{min-width:0}.cx-c .form .w{grid-column:1/-1}.cx-c select{width:100%}
+.cx-c textarea{width:100%;min-height:150px;resize:vertical;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:13px/1.5 var(--font);padding:8px 9px}
+.cx-c .acts label{display:inline-flex;gap:5px;align-items:center;font-size:12px;color:var(--em)}
+.cx-out{margin-top:10px;font:14px/1.6 var(--eser);color:var(--ei)}
+.cx-out p{margin:0 0 10px;text-align:justify}
+.cx-out h5{margin:14px 0 6px;font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
+.cx-out del{background:#f6d6d2;color:#7d241e;text-decoration:line-through}
+.cx-out ins{background:#d4ead9;color:#1d5a2f;text-decoration:none}
+html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-theme=dark] .cx-out ins{background:#1f4a2c;color:#d4f5dc}
+.cx-out .eq{color:var(--em);font:400 10.5px var(--emono);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;padding:4px 0;border-top:1px dashed var(--el);border-bottom:1px dashed var(--el);text-align:center}
+.cx-out .so{opacity:.6}
+.cx-lg{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--em);margin-top:6px}
+.cx-q{width:100%;height:34px;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:14px var(--font);padding:0 10px}
+.cx-r{border-top:1px solid var(--el);padding:10px 0;cursor:pointer}
+.cx-r:hover{background:var(--ep2)}
+.cx-r h6{margin:0 0 4px;font:400 10.5px var(--emono);letter-spacing:.08em;color:var(--ei)}
+.cx-r p{margin:2px 0;font-size:12.5px;line-height:1.5;color:var(--em)}
+.cx-r mark{background:#f3dfa8;color:#3d2c07}
+.cmt-tb tr.r.hit td:first-child{box-shadow:inset 6px 0 0 var(--eo)}
+@media(max-width:1300px){body.cx-on{padding-right:0}.lx-cx{width:min(560px,100vw)}body.cx-on .lx-nx{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}}
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--eg,#1b5878);color:#fff;padding:8px 16px;font-size:12.5px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
 #toast.on{opacity:1}
 @media print{.lx-nx,.lx-sub,.cmt-hd2 .cmt-ut,.cmt-ph,.pf .nav,.mbar .b{display:none!important}.pf{break-inside:avoid-page}}
@@ -226,6 +256,7 @@ function cabecalho(lotes,id,usuario){
    ${MODO_REL||(CMTK&&!usuario)?'':`<a class="hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`}
    ${MODO_REL?'':'<a class="hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Modus Operandi</span></a>'}
    <button type="button" class="hb" id="tema" title="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Tema</span></button>
+   ${MODO_REL?'':`<button type="button" class="hb" id="b-cmp" title="Painel lateral: comparar a minuta de um processo com um texto e buscar em todos os processos do lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M14 4v16"/><path d="M17 9h1M17 13h1"/></svg><span>Comparar e buscar</span></button>`}
    <button type="button" class="hb" id="atu" title="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg><span>Atualizar</span></button>
    </div></div></header>`;
 }
@@ -233,7 +264,7 @@ async function inicio(){
   try{
     const L=await api('');LISTA={lotes:L.lotes||[],calendario:L.calendario||[],gestor:!!L.gestor};
     const lotes=LISTA.lotes; if(!lotes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhum lote cadastrado.'+(MODO==='cg'?' Use “Novo lote” para criar o primeiro.':'')+'</p>');ligaCab();if(MODO==='cg')abrirNovo();return}
-    const id=params.get('id')||lotes[0].id;
+    const id=lotes.some(l=>l.id===params.get('id'))?params.get('id'):lotes[0].id;
     const R=await api('?id='+encodeURIComponent(id));
     /* só com a chave do relator (sem login), /lotes/ leva à página dele */
     if(MODO==='eq'&&R.relator){location.replace('/cmt/lotes/?id='+encodeURIComponent(id)+location.hash);return}
@@ -242,7 +273,7 @@ async function inicio(){
 }
 function ligaCab(){
   const sl=$('#sel');if(sl)sl.onchange=()=>{location.search='?id='+encodeURIComponent(sl.value)};
-  $('#atu').onclick=()=>location.reload();
+  $('#atu').onclick=()=>location.reload();const bc=$('#b-cmp');if(bc)bc.onclick=()=>painel();
   $('#tema').onclick=()=>{const d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('cmt-eq-tema',n)}catch(e){}};
   const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const be=$('#b-ed');if(be)be.onclick=abrirEditar;const bs=$('#b-ses');if(bs)bs.onclick=abrirSessoes;
 }
@@ -259,7 +290,7 @@ function montar(lotes,id,usuario){
   mostra(cabecalho(lotes,id,usuario)+`<div class="lx">
   <nav class="lx-sub" id="lx-sub" aria-label="Lote e seções da página">
    <div class="lx-lt"><p class="lx-ey">Lotes / ${ROTULO[MODO]}</p>
-    <label class="lx-sel" title="Trocar de lote"><span class="sr">Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}</option>`).join('')}</select></label>
+    <label class="lx-sel" title="Trocar de lote"><span class="sr">Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}${MODO==='cg'&&l.visivel&&(l.visivel.equipe===false||l.visivel.relator===false)?' · oculto: '+[l.visivel.equipe===false?'equipe':'',l.visivel.relator===false?'Relator':''].filter(Boolean).join(' e '):''}</option>`).join('')}</select></label>
     <p class="lx-lt-n" id="cnt">—</p>
     <p class="lx-lt-s">Sessões de ${LOTE.sessoes.map(br).join(' e ')}</p>
     ${LOTE.descricao?`<p class="lx-lt-d">${esc(LOTE.descricao)}</p>`:''}</div>
@@ -299,6 +330,7 @@ function montar(lotes,id,usuario){
   ligaSub();
   document.querySelectorAll('#met [data-g]').forEach(d=>d.onclick=()=>{const g=d.dataset.g;offG.has(g)?offG.delete(g):offG.add(g);d.classList.toggle('off');filtra()});
   document.querySelectorAll('[data-vai]').forEach(x=>x.onclick=()=>vai(x.dataset.vai));
+  document.querySelectorAll('[data-cmpit]').forEach(x=>x.onclick=()=>painel(x.dataset.cmpit));
   document.querySelectorAll('[data-min]').forEach(x=>x.onclick=()=>abreMinuta(x.dataset.min,x));
   const visao=()=>{const rel=VZ==='rel';document.body.classList.toggle('relator',rel);document.querySelectorAll('.pv').forEach(p=>p.textContent=rel?p.dataset.rel:p.dataset.eq)};
   document.querySelectorAll('[data-vz]').forEach(b=>b.onclick=()=>{VZ=b.dataset.vz;document.querySelectorAll('[data-vz]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));visao();filtra()});
@@ -312,6 +344,86 @@ function ligaSub(){
   const marca=id=>document.querySelectorAll('#lx-sub [data-ir]').forEach(b=>b.setAttribute('aria-current',b.dataset.ir===id?'true':'false'));
   marca('matriz');
   try{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)marca(e.target.id)})},{rootMargin:'-90px 0px -60% 0px'});['matriz','sec-pf'].forEach(id=>{const e=document.getElementById(id);if(e)io.observe(e)})}catch(e){}
+}
+/* ---------- painel lateral: comparar a minuta com um texto e buscar em todos os processos do lote ---------- */
+const CX={aberto:false,hits:new Set(),filtra:false,todas:false};
+const MDATA={};
+async function getMin(it){if(MDATA[it.uid])return MDATA[it.uid];const m=await api('?id='+encodeURIComponent(LOTE.id)+'&minuta='+it.processo.slice(0,10));MDATA[it.uid]=m;return m}
+function painel(uid){
+  if(!$('#cx')){
+    const com=ITENS.filter(i=>i.minuta);
+    document.body.insertAdjacentHTML('beforeend',`<aside class="lx-cx cv" id="cx" aria-label="Comparar e buscar"><div class="cx-h"><div><p class="lx-ey" style="margin:0">Painel lateral</p><b>Comparar e <em>buscar.</em></b></div><span class="cmt-sp"></span><button type="button" class="b" id="cx-x">Fechar</button></div>
+    <div class="cx-sw"><span class="cmt-seg" role="group" aria-label="Modo do painel"><button type="button" data-cx="cmp" aria-pressed="true">Comparar</button><button type="button" data-cx="bus" aria-pressed="false">Buscar no lote</button></span></div>
+    <div class="cx-c" id="cx-cmp"><div class="form">
+      <label>Processo<select class="cmt-sel" id="cx-it">${com.map(i=>`<option value="${i.uid}">${br(i.sessao).slice(0,5)} · item ${pad(i.item)} · ${esc(i.processo.slice(0,15))} · ${esc(String(i.exequente).slice(0,28))}</option>`).join('')}</select></label>
+      <label>Parte<select class="cmt-sel" id="cx-sec"><option value="*">Tudo</option>${SECS.map(([k,t])=>`<option value="${k}">${t[0]+t.slice(1).toLowerCase()}</option>`).join('')}</select></label>
+      <label class="w">Texto para comparar<textarea id="cx-txt" placeholder="Cole aqui a minuta, o modelo ou o trecho que quer comparar com a minuta do processo"></textarea></label></div>
+      <div class="acts"><label><input type="checkbox" id="cx-ws" checked> ignorar espaços, aspas e travessões</label><label><input type="checkbox" id="cx-sd" checked> só as diferenças</label><span class="k" id="cx-st"></span></div>
+      <div class="cx-lg"><span><del>riscado</del> está na minuta e falta no texto colado</span><span><ins>verde</ins> está só no texto colado</span></div>
+      <div class="cx-out" id="cx-out"></div></div>
+    <div class="cx-c hidden" id="cx-bus"><input type="search" class="cx-q" id="cx-q" placeholder="Buscar nas minutas e nos dados de todos os processos do lote">
+      <div class="acts"><label><input type="checkbox" id="cx-fm"> mostrar na matriz só os processos encontrados</label><span class="k" id="cx-bst"></span></div>
+      <div id="cx-res"></div></div></aside>`);
+    $('#cx-x').onclick=()=>painel(false);
+    document.querySelectorAll('[data-cx]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-cx]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));$('#cx-cmp').classList.toggle('hidden',b.dataset.cx!=='cmp');$('#cx-bus').classList.toggle('hidden',b.dataset.cx!=='bus');if(b.dataset.cx==='bus')$('#cx-q').focus()});
+    let t1=0,t2=0;
+    ['cx-it','cx-sec','cx-ws','cx-sd'].forEach(id=>$('#'+id).onchange=compara);
+    $('#cx-txt').oninput=()=>{clearTimeout(t1);t1=setTimeout(compara,350)};
+    $('#cx-q').oninput=()=>{clearTimeout(t2);t2=setTimeout(busca,300)};
+    $('#cx-fm').onchange=()=>{CX.filtra=$('#cx-fm').checked;filtra()};
+    if(!com.length)$('#cx-out').innerHTML='<p class="none">Nenhum processo deste lote tem minuta.</p>';
+  }
+  if(uid===false){CX.aberto=false;$('#cx').hidden=true;document.body.classList.remove('cx-on');CX.filtra=false;$('#cx-fm').checked=false;filtra();return}
+  CX.aberto=true;$('#cx').hidden=false;document.body.classList.add('cx-on');
+  if(uid&&ITENS.some(i=>i.uid===uid&&i.minuta)){$('#cx-it').value=uid;document.querySelector('[data-cx="cmp"]').click()}
+  compara();
+}
+const nrm=(t,ws)=>{t=String(t||'');if(ws)t=t.replace(/[“”«»„]/g,'"').replace(/[‘’`´]/g,"'").replace(/[–—]/g,'-').replace(/\s+/g,' ');return t.trim()};
+function lcs(a,b,eq){const n=a.length,m=b.length,D=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)D[i][j]=eq(a[i],b[j])?D[i+1][j+1]+1:Math.max(D[i+1][j],D[i][j+1]);
+  const r=[];let i=0,j=0;while(i<n&&j<m){if(eq(a[i],b[j])){r.push(['=',a[i],b[j]]);i++;j++}else if(D[i+1][j]>=D[i][j+1])r.push(['-',a[i++]]);else r.push(['+',b[j++]])}
+  while(i<n)r.push(['-',a[i++]]);while(j<m)r.push(['+',b[j++]]);return r}
+function difPal(a,b,ws){const A=a.split(/\s+/).filter(Boolean),B=b.split(/\s+/).filter(Boolean);
+  if(A.length*B.length>360000)return {h:`<del>${esc(a)}</del> <ins>${esc(b)}</ins>`,igual:0,tot:Math.max(A.length,B.length)};
+  const ops=lcs(A,B,(x,y)=>nrm(x,ws)===nrm(y,ws));let h='',ig=0,cur='',buf=[];
+  const sai=()=>{if(!buf.length)return;const t=esc(buf.join(' '));h+=(h?' ':'')+(cur==='-'?`<del>${t}</del>`:cur==='+'?`<ins>${t}</ins>`:t);buf=[]};
+  ops.forEach(o=>{if(o[0]!==cur){sai();cur=o[0]}buf.push(o[0]==='+'?o[1]:o[1]);if(o[0]==='=')ig++});sai();
+  return {h,igual:ig,tot:Math.max(A.length,B.length)}}
+async function compara(){
+  if(!CX.aberto||!$('#cx-it')||!$('#cx-it').value)return;
+  const it=ITENS.find(i=>i.uid===$('#cx-it').value),sec=$('#cx-sec').value,ws=$('#cx-ws').checked,sd=$('#cx-sd').checked,out=$('#cx-out'),st=$('#cx-st');
+  st.textContent='Lendo a minuta…';let m;try{m=await getMin(it)}catch(e){st.textContent=e.message;return}
+  const A=[];SECS.forEach(([k,t])=>{if((sec==='*'||sec===k)&&m.secoes[k]&&m.secoes[k].length){A.push({h:t});m.secoes[k].forEach(x=>A.push({p:String(x)}))}});
+  const txt=$('#cx-txt').value;
+  if(!txt.trim()){st.textContent='';out.innerHTML=A.map(x=>x.h?`<h5>${x.h}</h5>`:`<p>${esc(x.p)}</p>`).join('');return}
+  const PA=A.filter(x=>x.p).map(x=>x.p),PB=txt.split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  const ops=lcs(PA,PB,(x,y)=>nrm(x,ws)===nrm(y,ws));
+  let h='',ig=0,tot=0,eqn=0,dl=[],ad=[],npar=0;
+  const flushEq=()=>{if(eqn){h+=`<p class="eq">${eqn} parágrafo${eqn>1?'s':''} igua${eqn>1?'is':'l'}</p>`;eqn=0}};
+  const flush=()=>{const n=Math.max(dl.length,ad.length);for(let i=0;i<n;i++){if(dl[i]!=null&&ad[i]!=null){const d=difPal(dl[i],ad[i],ws);h+=`<p>${d.h}</p>`;ig+=d.igual;tot+=d.tot;npar++}else if(dl[i]!=null){h+=`<p><del>${esc(dl[i])}</del></p>`;tot+=dl[i].split(/\s+/).length;npar++}else{h+=`<p><ins>${esc(ad[i])}</ins></p>`;tot+=ad[i].split(/\s+/).length;npar++}}dl=[];ad=[]};
+  ops.forEach(o=>{if(o[0]==='='){flush();const w=o[1].split(/\s+/).length;ig+=w;tot+=w;if(sd)eqn++;else h+=`<p class="so">${esc(o[1])}</p>`}else{flushEq();(o[0]==='-'?dl:ad).push(o[1])}});
+  flush();flushEq();
+  out.innerHTML=h||'<p class="none">Sem diferenças.</p>';
+  st.textContent=npar?`${npar} parágrafo${npar>1?'s':''} com diferença · ${tot?Math.round(100*ig/tot):100}% igual`:'Textos iguais';
+}
+async function busca(){
+  const q=nrm($('#cx-q').value,true).toLowerCase(),res=$('#cx-res'),st=$('#cx-bst');
+  const sem=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  if(q.length<3){CX.hits=new Set();res.innerHTML='';st.textContent=q?'Digite ao menos 3 letras':'';filtra();return}
+  const com=ITENS.filter(i=>i.minuta&&!MDATA[i.uid]);
+  if(com.length){let n=0;st.textContent=`Lendo as minutas do lote… 0 de ${com.length}`;
+    const fila=com.slice();await Promise.all(Array.from({length:6},async()=>{while(fila.length){const it=fila.shift();try{await getMin(it)}catch(e){}n++;st.textContent=`Lendo as minutas do lote… ${n} de ${com.length}`}}))}
+  const Q=sem(q),hits=new Set();let total=0,html='';
+  for(const it of ITENS){
+    const m=MDATA[it.uid],partes=[['Dados',[it.processo,it.partes,it.tipo_caso,it.resultado,it.observacao,it.peculiaridades,it.peculiaridades_relator].filter(Boolean).join(' · ')]];
+    if(m)SECS.forEach(([k,t])=>{(m.secoes[k]||[]).forEach(p=>partes.push([t,String(p)]))});
+    const tr=[];partes.forEach(([t,x])=>{const sx=sem(x);let i=sx.indexOf(Q),c=0;while(i>=0&&c<3){const a=Math.max(0,i-70),b=Math.min(x.length,i+Q.length+70);tr.push(`<p><b>${t[0]+t.slice(1).toLowerCase()}:</b> ${a?'…':''}${esc(x.slice(a,i))}<mark>${esc(x.slice(i,i+Q.length))}</mark>${esc(x.slice(i+Q.length,b))}${b<x.length?'…':''}</p>`);c++;total++;i=sx.indexOf(Q,i+Q.length)}});
+    if(tr.length){hits.add(it.uid);html+=`<div class="cx-r" data-hit="${it.uid}"><h6>${br(it.sessao).slice(0,5)} · ITEM ${pad(it.item)} · ${esc(it.processo.slice(0,15))} · ${esc(String(it.exequente).slice(0,34))}</h6>${tr.slice(0,4).join('')}${tr.length>4?`<p>+${tr.length-4} ocorrência(s)</p>`:''}</div>`}
+  }
+  CX.hits=hits;res.innerHTML=html||'<p class="none">Nada encontrado.</p>';
+  st.textContent=`${total} ocorrência${total===1?'':'s'} em ${hits.size} processo${hits.size===1?'':'s'}`;
+  res.querySelectorAll('[data-hit]').forEach(d=>d.onclick=()=>vai(d.dataset.hit));
+  filtra();
 }
 function dl(o){return '<dl>'+Object.entries(o).filter(([k,v])=>v).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')+'</dl>'}
 function perfil(it,i){
@@ -338,7 +450,7 @@ function perfil(it,i){
     :`<p class="none">Minuta não disponível no painel${e.situacao==='A minutar'?' (processo a minutar)':/Voto próprio|Sem modelo/.test(e.situacao||'')?' (voto próprio, sem acórdão-modelo)':''}.</p>`;
   return `<section class="cmt-q pf" id="p-${it.uid}" data-u="${it.uid}" style="border-top-color:${c}">
    <h2><i class="nn">ITEM ${pad(it.item)}</i><span class="cnj">${it.processo}</span><span class="tg">${esc(it.tipo_caso)}</span><span class="tg">${esc(it.resultado)}</span><span class="tg so-equipe">${esc(e.situacao||'')}</span><span class="cmt-sp"></span>
-   <span class="nav"><a class="b so-equipe" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Modus Operandi">Consulta ↗</a>${pv?`<button type="button" class="b" data-vai="${pv.uid}">← ${pad(pv.item)}</button>`:''}${nx?`<button type="button" class="b" data-vai="${nx.uid}">${pad(nx.item)} →</button>`:''}<button type="button" class="b" onclick="document.getElementById('matriz').scrollIntoView({behavior:'smooth'})">Matriz ↑</button></span></h2>
+   <span class="nav">${it.minuta&&!MODO_REL?`<button type="button" class="b so-equipe" data-cmpit="${it.uid}" title="Abre o painel lateral comparando esta minuta">Comparar</button>`:''}<a class="b so-equipe" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Modus Operandi">Consulta ↗</a>${pv?`<button type="button" class="b" data-vai="${pv.uid}">← ${pad(pv.item)}</button>`:''}${nx?`<button type="button" class="b" data-vai="${nx.uid}">${pad(nx.item)} →</button>`:''}<button type="button" class="b" onclick="document.getElementById('matriz').scrollIntoView({behavior:'smooth'})">Matriz ↑</button></span></h2>
    <div class="grid">${b}</div>${mn}</section>`;
 }
 function cls(p,sec,i){
@@ -353,7 +465,7 @@ async function abreMinuta(uid,btn){
   if(MIN[uid]){d.classList.toggle('hidden');btn.textContent=d.classList.contains('hidden')?'Abrir minuta':'Fechar minuta';return}
   btn.disabled=true;btn.textContent='Carregando…';
   try{
-    const m=await api('?id='+encodeURIComponent(LOTE.id)+'&minuta='+it.processo.slice(0,10)); MIN[uid]=m;
+    const m=await getMin(it); MIN[uid]=m;
     const S=SECS.filter(([k])=>m.secoes[k]&&m.secoes[k].length);
     d.innerHTML=S.map(([k,t])=>`<h4>${t}</h4>`+m.secoes[k].map((p,i)=>`<p class="${cls(p,k,i)}">${esc(p)}</p>`).join('')).join('');
     $('#mo-'+uid).textContent=(m.origem||'')+(m.atualizado_em?' · '+br(m.atualizado_em):'');
@@ -377,13 +489,13 @@ async function copia(v){
   const ok=await clip(plain,`<div style="font-family:'Times New Roman';font-size:12pt">${rich}</div>`);
   toast(ok?(k==='*'?'Minuta copiada':ks[0][1].charAt(0)+ks[0][1].slice(1).toLowerCase()+' copiado'):'Não foi possível copiar: selecione o texto e use Ctrl+C');
 }
-function vai(uid){const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
+function vai(uid){if(CX.aberto){const it=ITENS.find(i=>i.uid===uid);if(it&&it.minuta){$('#cx-it').value=uid;compara()}}const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
 function filtra(){
   const q=$('#q').value.toLowerCase().trim(), f=$('#ff').value, st=$('#fs').value, vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
   for(const it of ITENS){const e=it.equipe||{};
     const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
-    if(okv(it)&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st))vis.add(it.uid)}
-  document.querySelectorAll('#mxb tr.r').forEach(r=>r.classList.toggle('hidden',!vis.has(r.dataset.u)));
+    if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st))vis.add(it.uid)}
+  document.querySelectorAll('#mxb tr.r').forEach(r=>{r.classList.toggle('hidden',!vis.has(r.dataset.u));r.classList.toggle('hit',CX.hits.has(r.dataset.u))});
   document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)));const x=r.querySelector('.ghn');if(x)x.textContent=n+' processo'+(n>1?'s':'')});
   document.querySelectorAll('.pf').forEach(p=>p.classList.toggle('hidden',!vis.has(p.dataset.u)));
   document.querySelectorAll('#met [data-g]').forEach(d=>{const g=d.dataset.g||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;d.querySelector('b').textContent=pad(n);d.classList.toggle('hidden',!n)});
@@ -430,12 +542,13 @@ function abrirEditar(){
     <label>Assunto contém<input id="ge-a" value="${esc(f.assunto||'')}"></label>
     <label>Classe contém<input id="ge-c" value="${esc(f.classe||'')}"></label>
     <label class="w">Texto livre<input id="ge-x2" value="${esc(f.texto||'')}"></label>
+    <div class="w"><span class="lb">Onde o lote aparece</span><div class="ses"><label><input type="checkbox" id="ge-ve"${(LOTE.visivel||{}).equipe===false?'':' checked'}> Na página da equipe (/lotes/), no seletor de lotes</label><label><input type="checkbox" id="ge-vr"${(LOTE.visivel||{}).relator===false?'':' checked'}> Na página do Relator (/cmt/lotes/), no seletor de lotes</label></div></div>
    </div>
    <p class="none" style="font-style:normal">O filtro vale para as próximas sessões associadas; os processos que já estão no lote ficam.</p>
    <div class="acts"><button type="button" class="b pri" id="ge-ok">Salvar</button><span class="k" id="ge-m"></span></div></section>`;
   $('#ge-x').onclick=fechaGest;
   $('#ge-ok').onclick=async()=>{if(!$('#ge-t').value.trim()){toast('Dê um título ao lote');return}$('#ge-ok').disabled=true;$('#ge-m').textContent='Salvando…';
-    try{await post({acao:'editar',id:LOTE.id,titulo:$('#ge-t').value,descricao:$('#ge-d').value,filtro:{assunto:$('#ge-a').value,classe:$('#ge-c').value,texto:$('#ge-x2').value}});toast('Lote atualizado');setTimeout(()=>location.reload(),700)}
+    try{await post({acao:'editar',id:LOTE.id,titulo:$('#ge-t').value,descricao:$('#ge-d').value,filtro:{assunto:$('#ge-a').value,classe:$('#ge-c').value,texto:$('#ge-x2').value},visivel:{equipe:$('#ge-ve').checked,relator:$('#ge-vr').checked}});toast('Lote atualizado');setTimeout(()=>location.reload(),700)}
     catch(e){$('#ge-m').textContent=e.message;$('#ge-ok').disabled=false}};
   $('#g-ed').scrollIntoView({behavior:'smooth'});
 }
