@@ -10,7 +10,7 @@ const CTL = ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias
 const GESTOR = ['servidor', 'corretor', 'resultado'];   /* designação e desfecho: só o gestor (CMT_GESTOR) */
 const dg = s => String(s || '').replace(/\D/g, '');
 /* grava campos de um processo da pauta; devolve {status, body}. gestorOk: pode designar e registrar o desfecho */
-async function gravarItem(data, b, u, gestorOk) {
+async function gravarItem(data, b, u, gestorOk, whatsappEvent) {
   const rel = 'acervo/sessoes/' + data + '.json', alvo = dg(b.cnj), C = b.campos || {};
   if (alvo.length !== 20) return { status: 400, body: { erro: 'número do processo inválido' } };
   for (let t = 0; t < 4; t++) {
@@ -19,6 +19,15 @@ async function gravarItem(data, b, u, gestorOk) {
     const it = (dados[lista] || []).find(i => dg(i.cnj) === alvo);
     if (!it) return { status: 404, body: { erro: 'processo fora desta pauta' } };
     const mud = [];
+    if (whatsappEvent) {
+      it.ctl = it.ctl || {};
+      const eventos = it.ctl.whatsappLiberacoes || [];
+      if (eventos.includes(whatsappEvent)) return { status: 200, body: { ok: true, item: it, semMudanca: true } };
+      if (!it.dataCorrecao || it.dataLiberacao || (it.ctl.intercor && !it.ctl.intercorOk)) {
+        return { status: 409, body: { erro: 'O item não está disponível para liberação.' } };
+      }
+      it.ctl.whatsappLiberacoes = [...eventos.slice(-19), whatsappEvent];
+    }
     DIRETOS.forEach(k => { if (k in C && it[k] !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
     if (gestorOk) GESTOR.forEach(k => { if (k in C && it[k] !== String(C[k] || '')) { it[k] = String(C[k] || ''); mud.push(k); } });
     it.ctl = it.ctl || {};
