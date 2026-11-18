@@ -4012,12 +4012,16 @@ function cmtMarcos(){
       +'<p class="cmt-k2">'+(n===0?'hoje':n===1?'amanhã':'em '+n+' dias')+(s.processos?' · '+s.processos+' processos':'')+'</p>'
       +'<span class="cmt-chs">'+chips+'</span></div>';}).join('');}
 /* pauta da sessão aberta: filtros por etapa e busca por item, número, assunto ou servidor */
+function cmtTem(lista,cnj){var L=((CMT.dados||{})[lista])||[],d=dgx(cnj);return L.some(function(z){return dgx(z.numero)===d;});}
 function cmtFiltra(){
   var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'aliberar',q=(CMT.q||'').trim().toLowerCase();
   var L=f==='todos'?it.slice():f==='aliberar'?it.filter(function(x){return x.etapa!=='liberado';}):f==='retido'?it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;})
     :f==='sopref'?it.filter(function(x){return !!x.sopref;})
+    :f==='destaque'?it.filter(function(x){return !!x.destaque;})
     :f==='retirado'?it.filter(function(x){return /^retirad/i.test(x.resultado||'');})
     :f==='adiado'?it.filter(function(x){return /^adiad/i.test(x.resultado||'');})
+    :f==='pedido'?it.filter(function(x){return cmtTem('pedidos',x.cnj);})
+    :f==='duvida'?it.filter(function(x){return cmtTem('duvidas',x.cnj);})
     :it.filter(function(x){return x.etapa===f;});
   if(q){var md=CMT.qm||'tudo',fx=/^\d+(?:\s*[-,]\s*\d+)*$/.test(q),qd=q.replace(/\D/g,'');
     var porItem=function(x){if(!fx)return false;var n=parseInt(x.item,10);if(isNaN(n))return false;
@@ -4061,12 +4065,19 @@ function cmtPauta(){
   var adiad=it.filter(function(x){return /^adiad/i.test(x.resultado||'');}).length;
   var pedl=(((CMT.dados||{}).pedidos)||[]);
   var sit=$('#cmt-sit');
-  var sop=it.filter(function(x){return !!x.sopref;}).length,fa=CMT.filtro||'aliberar';
-  if(sit)sit.innerHTML='<button type="button" class="st'+(fa==='retirado'?' sel':'')+'" data-cf="retirado" aria-pressed="'+(fa==='retirado')+'">'+rtd+' retirado'+(rtd===1?'':'s')+'</button>'+
-    '<button type="button" class="st'+(fa==='adiado'?' sel':'')+'" data-cf="adiado" aria-pressed="'+(fa==='adiado')+'">'+adiad+' adiado'+(adiad===1?'':'s')+'</button>'+
-    '<button type="button" class="st so'+(sop?' on':'')+(fa==='sopref'?' sel':'')+'" data-cf="sopref" aria-pressed="'+(fa==='sopref')+'" title="Sustentação oral ou preferência pedida">'+sop+' sustenta'+(sop===1?'ção':'ções')+'</button>'+
-    '<button type="button" class="st pd'+(pedl.length?' on':'')+'" data-cdt="d" title="Abrir os pedidos no painel de dúvidas">'+pedl.length+' pedido'+(pedl.length===1?'':'s')+' em apreciação</button>'+
-    '<button type="button" class="st dv'+((CMT.dados||{}).duvidas&&(CMT.dados.duvidas||[]).length?' on':'')+'" data-cdt="d" title="Abrir o painel de dúvidas">'+((CMT.dados||{}).duvidas||[]).length+' dúvida'+(((CMT.dados||{}).duvidas||[]).length===1?'':'s')+'</button>';
+  var sop=it.filter(function(x){return !!x.sopref;}).length,des=it.filter(function(x){return !!x.destaque;}).length;
+  var fa=CMT.filtro||'aliberar';
+  var ndv=it.filter(function(x){return cmtTem('duvidas',x.cnj);}).length,nped=it.filter(function(x){return cmtTem('pedidos',x.cnj);}).length;
+  var sit=$('#cmt-sit');
+  var chip=function(f,n,rot,cls,tt){return '<button type="button" class="st'+(cls?' '+cls:'')+(n?' on':'')+(fa===f?' sel':'')+'" data-cf="'+f+'" aria-pressed="'+(fa===f)+'" title="'+esc(tt)+'">'+n+' '+rot+'</button>';};
+  if(sit)sit.innerHTML=
+    chip('retirado',rtd,rtd===1?'retirado':'retirados','rt','Itens com retirada registrada')+
+    chip('adiado',adiad,adiad===1?'adiado':'adiados','ad','Itens com adiamento registrado')+
+    chip('pedido',nped,nped===1?'pedido de retirada ou adiamento':'pedidos de retirada ou adiamento','pd','Itens com pedido em apreciação')+
+    chip('duvida',ndv,ndv===1?'dúvida':'dúvidas','dv','Itens com dúvida em aberto')+
+    chip('sopref',sop,sop===1?'sustentação ou preferência':'sustentações ou preferências','so','Itens com sustentação oral ou preferência')+
+    (des?chip('destaque',des,des===1?'destaque':'destaques','ds','Itens marcados para destaque'):'');
+
   var elp=$('#cmt-n-pt');if(elp)elp.textContent=p.date?'sessão de '+br(p.date)+' · '+it.length+' processos':'—';
 var nas=it.filter(function(x){return x.assinado||x.dataAssinatura;}).length,npe=it.length-nmin;
 var pr=$('#cmt-prog');
@@ -7319,6 +7330,12 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 100%}
 #v-cmt .cmt-tb{min-width:1036px}
 #v-cmt .cmt-tw{overflow-x:auto}
 @media (max-width:780px){#v-cmt .cmt-tb{min-width:0}}
+#v-cmt .cmt-sit .st.rt.on{border-color:#ecc9b8;background:#fdf6f3;color:var(--er)}
+#v-cmt .cmt-sit .st.ad.on{border-color:#c7b0e6;background:#efe8f8;color:#6d4596}
+#v-cmt .cmt-sit .st.pd.on{border-color:var(--eo2);background:#fdf7ec;color:var(--eo2)}
+#v-cmt .cmt-sit .st.dv.on{border-color:#9cc0e0;background:#e3eef8;color:#245b8c}
+#v-cmt .cmt-sit .st.so.on{border-color:#9fd0b6;background:#e3f0ea;color:#1f6a43}
+#v-cmt .cmt-sit .st.ds.on{border-color:var(--eo2);background:#fdf7ec;color:var(--eo2)}
 </style>
 </body>
 </html>
