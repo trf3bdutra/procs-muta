@@ -23,14 +23,15 @@ module.exports = async (req, res) => {
     const metodo = String(req.method || 'GET').toUpperCase();
     let corpo;
     if (!['GET', 'HEAD'].includes(metodo)) { corpo = await lerCorpo(req); if (req.headers['x-ponte-gz'] === '1') corpo = zlib.gunzipSync(corpo); }
-    const r = await fetch('https://api.github.com/repos/' + REPO + (p ? '/' + p : ''), {
+    /* GET com ETag (L.ghFetch): o que não mudou volta do cache desta instância sem gastar a cota do GitHub */
+    const r = await L.ghFetch('https://api.github.com/repos/' + REPO + (p ? '/' + p : ''), {
       method: metodo, body: corpo && corpo.length ? corpo : undefined,
       headers: { Accept: req.headers['x-ponte-accept'] || 'application/vnd.github+json', Authorization: 'Bearer ' + t, 'X-GitHub-Api-Version': '2022-11-28', ...(corpo && corpo.length ? { 'Content-Type': 'application/json' } : {}) }
     });
-    const buf = Buffer.from(await r.arrayBuffer());
+    const buf = r.buf;
     res.setHeader('X-Ponte-Usuario', encodeURIComponent(u));
-    if (buf.length > 200000) { res.setHeader('Content-Type', 'application/octet-stream'); res.setHeader('X-Ponte-Gz', '1'); res.setHeader('X-Ponte-Tipo', r.headers.get('content-type') || ''); return res.status(r.status).send(zlib.gzipSync(buf)); }
-    res.setHeader('Content-Type', r.headers.get('content-type') || 'application/json');
+    if (buf.length > 200000) { res.setHeader('Content-Type', 'application/octet-stream'); res.setHeader('X-Ponte-Gz', '1'); res.setHeader('X-Ponte-Tipo', r.tipo || ''); return res.status(r.status).send(zlib.gzipSync(buf)); }
+    res.setHeader('Content-Type', r.tipo || 'application/json');
     return res.status(r.status).send(buf);
   } catch (e) { res.status(500).json({ message: e.message }); }
 };

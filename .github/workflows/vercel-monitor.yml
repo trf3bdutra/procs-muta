@@ -19,16 +19,37 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-concurrency:
-  group: vercel-monitor
-  cancel-in-progress: true
 env:
   VERCEL_ORG_ID: team_nyqcxKFhethUSdW52fbXcWpZ
   VERCEL_PROJECT_ID: prj_RvxAJtVYRZd6rouWDzxewAyFE3bR
 jobs:
-  publicar:
+  # Depois do Base: só publica se ele gravou alguma coisa (o commit "Base: validação e manifesto (<sha>)").
+  # Sem isso, cada gravação da equipe virava uma publicação nova, que ainda cancelava a publicação em curso.
+  verificar:
     runs-on: ubuntu-latest
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    outputs:
+      publicar: ${{ steps.v.outputs.publicar }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 30
+      - id: v
+        env:
+          EVENTO: ${{ github.event_name }}
+          SHA_BASE: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ "$EVENTO" != "workflow_run" ]; then echo "publicar=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          if git log -30 --format=%s | grep -qF "Base: validação e manifesto (${SHA_BASE:0:7})"; then echo "publicar=1" >> "$GITHUB_OUTPUT"
+          else echo "publicar=0" >> "$GITHUB_OUTPUT"; echo "O Base não gravou nada: nada novo a publicar."; fi
+  publicar:
+    needs: verificar
+    if: needs.verificar.outputs.publicar == '1'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: vercel-monitor
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v4
         with:
