@@ -27,8 +27,11 @@ a{color:inherit}
 .cmt-hd2-h{margin:1px 0 0;font-size:19px;font-weight:650;letter-spacing:-.03em;line-height:1.15;color:var(--ei)}
 .cmt-hd2-h em,.cmt-q h2 em,.cmt-ld-t em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .cmt-sp{flex:1 1 20px}
-.cmt-hb{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:12px;cursor:pointer;text-decoration:none}
-.cmt-hb:hover{border-color:var(--ei)}
+.cmt-ut{display:flex;align-items:center;gap:2px;white-space:nowrap;flex-wrap:wrap;margin-left:auto;justify-content:flex-end}
+.hb{border:0;background:none;border-radius:0;color:var(--ei);font-family:var(--emono);font-weight:400;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:0 9px;min-height:34px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;text-decoration:none}
+.hb:hover{color:var(--eo2)}
+.hb select{border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:400 11px var(--emono);letter-spacing:.04em;height:26px;padding:0 4px;text-transform:none}
+.cmt-hb{display:inline-flex}
 .cmt-hb i{font-style:normal;min-width:18px;padding:0 5px;border:1px solid var(--el);background:var(--ep2);color:var(--em);font:400 10px var(--emono);line-height:16px;text-align:center}
 .cmt-hb select{border:0;background:transparent;color:var(--ei);font:inherit;font-size:12px;outline:0}
 .cmt-q{border:1px solid var(--el);border-top:2px solid var(--eg);background:var(--ep);margin-top:18px;padding:0 18px 16px}
@@ -93,7 +96,7 @@ a{color:inherit}
 .doc p.sep,.doc p.rel{text-indent:0}.doc p.rod{text-indent:0;font-size:13.5px}
 .none{padding:12px 0 0;color:var(--em);font-style:italic;font-size:12.5px}
 .cmt-load{min-height:62vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.cmt-load .star{width:34px;height:38px;margin-bottom:18px;animation:cmtp 1.5s ease-in-out infinite}
+.cmt-load .star{width:30px;height:33px;margin-bottom:16px}
 @keyframes cmtp{0%,100%{opacity:.35}50%{opacity:1}}
 .cmt-ld-k{margin:0;font:400 10px var(--emono);letter-spacing:.2em;text-transform:uppercase;color:var(--em)}
 .cmt-ld-t{margin:6px 0 0;font-size:34px;font-weight:600;letter-spacing:-.045em;color:var(--ei)}
@@ -106,7 +109,7 @@ a{color:inherit}
 body.relator .so-equipe{display:none!important}
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--eg,#1b5878);color:#fff;padding:8px 16px;font-size:12.5px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
 #toast.on{opacity:1}
-@media print{.cmt-hd2 .cmt-hb,.cmt-ph,.pf .nav,.mbar .b{display:none!important}.pf{break-inside:avoid-page}}
+@media print{.cmt-hd2 .cmt-ut,.cmt-ph,.pf .nav,.mbar .b{display:none!important}.pf{break-inside:avoid-page}}
 </style>
 </head>
 <body class="relator">
@@ -135,12 +138,14 @@ function cabecalho(lotes,id,usuario){
   return `<div class="cmt-hd2"><i class="star" aria-hidden="true"></i>
    <div class="cmt-hd2-t"><p class="cmt-ey">Gabinete CMT · acesso do relator</p><p class="cmt-hd2-h">Lotes do <em>gabinete.</em></p></div>
    <span class="cmt-sp"></span>
-   <label class="cmt-hb" title="Lote"><span class="cmt-n">Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}</option>`).join('')}</select></label>
-   <a class="cmt-hb" href="/cmt/" title="Voltar ao Painel do relator">Painel do relator</a>
-   ${CMTK&&!usuario?'':`<a class="cmt-hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo">Ex Officio</a>`}
-   <a class="cmt-hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta">Modus Operandi</a>
-   <button type="button" class="cmt-hb" id="tema" title="Tema claro ou escuro">Tema</button>
-   <button type="button" class="cmt-hb" id="atu">Atualizar</button></div>`;
+   <div class="cmt-ut">
+   <label class="hb" title="Lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}</option>`).join('')}</select></label>
+   <a class="hb" href="/cmt/" title="Voltar ao Painel do relator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Painel do relator</span></a>
+   ${CMTK&&!usuario?'':`<a class="hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`}
+   <a class="hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Modus Operandi</span></a>
+   <button type="button" class="hb" id="tema" title="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Tema</span></button>
+   <button type="button" class="hb" id="atu" title="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg><span>Atualizar</span></button>
+   </div></div>`;
 }
 async function inicio(){
   try{
