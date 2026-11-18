@@ -54,7 +54,24 @@ module.exports = async (req, res) => {
       });
     });
     pubs.forEach((s, i) => { const d = docs[i]; if (!d) return; ((d.itens || []).length ? d.itens : (d.previa || [])).forEach(it => {
-      const c = it.ctl || {}; if (!c.editadoEm || ['AGENTMAIL', eu].includes(L.norm(c.editadoPor))) return;
+      const c = it.ctl || {};
+      const historico = c.historicoDesignacoes || [];
+      historico.forEach(reg => reg.alteracoes.forEach(m => {
+        const antes = L.norm(m.de) === eu, depois = L.norm(m.para) === eu;
+        if (!(antes || depois)) return;
+        const transferida = !!String(m.de || '').trim().replace(/^—$/, '') && !!String(m.para || '').trim().replace(/^—$/, '');
+        const titulo = transferida ? 'Redistribuição' : depois ? 'Nova designação' : 'Designação retirada';
+        const item = it.item ? 'item '+it.item : 'pré-pauta';
+        const marco = (s.marcos || {}).entregaMinutas;
+        const prazo = depois && m.papel === 'minuta' && L.dataOk(marco) ? 'entrega '+marco.split('-').reverse().join('/') : '';
+        ev.push({ id: ['des', s.date, it.cnj, m.papel, reg.em].join('-'), time: reg.em, action: 'pauta', user: reg.por,
+          title: titulo+' · '+m.papel,
+          message: [it.cnj, item, 'sessão de '+s.date.split('-').reverse().join('/'),
+            transferida && antes && 'novo responsável: '+m.para, prazo].filter(Boolean).join(' · '),
+          sessao: s.date, numero: it.cnj });
+      }));
+      if (historico.some(reg => reg.em === c.editadoEm && reg.alteracoes.some(m => L.norm(m.para) === eu))) return;
+      if (!c.editadoEm || ['AGENTMAIL', eu].includes(L.norm(c.editadoPor))) return;
       if (L.norm(it.servidor) !== eu && L.norm(it.corretor) !== eu) return;
       ev.push({ id: 'pr-' + s.date + '-' + String(it.cnj).replace(/\D/g, ''), time: c.editadoEm, action: 'processos', user: c.editadoPor, title: 'Atualizou um processo seu', message: it.cnj + ' · sessão de ' + s.date.split('-').reverse().join('/') + (it.item ? ' · item ' + it.item : ''), sessao: s.date, numero: it.cnj });
     }); });
@@ -84,6 +101,15 @@ module.exports = async (req, res) => {
         nivel: dias <= 1 ? 'urgente' : 'importante', sessao: s.date });
     });
     ((pend || {}).registros || []).forEach(t => {
+      if (!t.excluida && t.stage !== 'done' && L.norm(t.assignee) === eu && L.dataOk(t.dueDate)) {
+        const dias = Math.round((Date.parse(t.dueDate) - Date.parse(hj)) / 86400e3);
+        if (dias <= 1) {
+          ev.push({ id: 'pe-prazo-'+t.id+'-'+hj, time: hj+'T04:00:00.000Z', action: 'pendencia',
+            title: (dias < 0 ? 'Pendência vencida' : dias === 0 ? 'Pendência vence hoje' : 'Pendência vence amanhã')+' · '+t.title,
+            message: [t.numero, 'prazo '+t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '),
+            nivel: dias <= 0 ? 'urgente' : 'importante' });
+        }
+      }
       if (L.norm(t.atualizadoPor) === eu) return; if (L.norm(t.assignee) !== eu && L.norm(t.creator) !== eu) return;
       ev.push({ id: 'pe-' + t.id + '-' + (t._rev || 1), time: t.atualizadoEm, action: 'pendencia', user: t.atualizadoPor, title: (t.excluida ? 'Diligência excluída' : t.stage === 'done' ? 'Diligência concluída' : (t._rev || 1) === 1 ? 'Nova diligência para você' : 'Diligência atualizada') + ' · ' + t.title, message: [t.numero, t.dueDate && 'prazo ' + t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '), resolved: t.stage === 'done' });
     });
