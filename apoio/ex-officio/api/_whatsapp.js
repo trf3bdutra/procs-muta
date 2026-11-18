@@ -9,7 +9,7 @@ const describeDate = value => String(value || '').split('-').reverse().join('/')
 const MENU = [
   '*GABINETE · CONSULTAS E RESPOSTAS*',
   'Como está a sessão? · Como está a sessão de 07/12/2026?',
-  'Produtividade de [nome] · Urgências · Dúvidas',
+  'Como está o processo [CNJ]? · Produtividade de [nome] · Urgências · Dúvidas',
   'Liberei os itens 34 e 36 da sessão de 07/12/2026',
   'Devolver o item 35 da sessão de 07/12/2026: [orientação]',
   'Responder [código da dúvida]: [resposta]',
@@ -60,10 +60,12 @@ async function answer(text, user, event, sentAt) {
   const responder = /^responder ([a-z0-9-]+):\s*([\s\S]+)$/i.exec(text);
   const sessao = /^(?:como est[aá] a )?(?:sess[aã]o|pauta)(?: de (\d{2})\/(\d{2})\/(\d{4}))?[?!.]?$/i.exec(text);
   const producao = /^produtividade de (.+?)[?!.]?$/i.exec(text);
+  const producaoHoje = /^quantos processos (.+?) produziu hoje[?!.]?$/i.exec(text);
+  const processo = /^(?:como est[aá] o )?processo (\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4})(?: na sess[aã]o de (\d{2})\/(\d{2})\/(\d{4}))?[?!.]?$/i.exec(text);
   const duvidas = /^d[uú]vidas[?!.]?$/i.test(text);
   const urgencias = /^urg[eê]ncias[?!.]?$/i.test(text);
 
-  if (!(liberar || devolver || responder || sessao || producao || duvidas || urgencias)) return MENU;
+  if (!(liberar || devolver || responder || sessao || processo || producao || producaoHoje || duvidas || urgencias)) return MENU;
   if (liberar || devolver || responder) {
     if (Date.now() - sentAt > 24 * 3600e3) return 'A mensagem tem mais de 24 horas. Envie o comando novamente.';
     const anotacao = devolver?.[5] || responder?.[2];
@@ -73,7 +75,7 @@ async function answer(text, user, event, sentAt) {
     await cmt(user, 'POST', {}, { acao: 'responder', id: responder[1], texto: responder[2] }, event);
     return 'Resposta registrada na dúvida '+responder[1]+'.';
   }
-  const match = liberar || devolver || sessao;
+  const match = liberar || devolver || sessao || processo;
   const dateParts = match?.slice(match === sessao ? 1 : 2, match === sessao ? 4 : 5);
   const date = dateParts?.[0] ? readDate(...dateParts) : '';
   if (dateParts?.[0] && !date) return 'Informe uma data válida no formato DD/MM/AAAA.';
@@ -106,8 +108,14 @@ async function answer(text, user, event, sentAt) {
     return s ? '*SESSÃO DE '+describeDate(s.date)+'*\n'+s.liberadas+'/'+s.processos+' liberados · '+s.minutadas+' minutados · '+s.corrigidas+' corrigidos.'
       : 'Não encontrei uma pauta publicada para a consulta.';
   }
-  if (producao) {
-    const nome = L.norm(producao[1]);
+  if (processo) {
+    const item = (pauta.itens || []).find(x => digits(x.cnj) === digits(processo[1]));
+    if (!item) return 'Não encontrei o processo na pauta consultada. Informe a data da sessão para consultar outra pauta.';
+    const etapa = { liberado: 'Liberado', corrigido: 'Corrigido · aguarda liberação', minutado: 'Minutado · aguarda correção', pendente: 'Aguarda minuta' };
+    return '*'+item.cnj+'*\nSessão de '+describeDate(pauta.date)+(item.item?' · item '+item.item:'')+'\n'+etapa[item.etapa]+'.';
+  }
+  if (producao || producaoHoje) {
+    const nome = L.norm((producao || producaoHoje)[1]);
     const pessoas = (data.produtividade?.linhas || []).filter(p => L.norm(p.nome) === nome || L.norm(p.nome).startsWith(nome+' '));
     if (pessoas.length !== 1) return 'Informe o nome cadastrado de um servidor para consultar a produção de hoje.';
     const p = pessoas[0];
