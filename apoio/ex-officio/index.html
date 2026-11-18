@@ -4043,6 +4043,9 @@ ab.innerHTML='<p class="cmt-fc-n">'+esc(x.numero||x.titulo||'—')+'</p>'+(x.pri
 '<div class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder'+(x.de?' a '+esc(x.de):'')+'</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></div>';}
 /* indicadores do cabeçalho */
 /* gaveta lateral: começa recolhida; a lingueta mostra os números e marca o que mudou desde a última abertura */
+function cmtTopo(){var h=document.querySelector('#app header'),t=h?Math.round(h.getBoundingClientRect().height):0;
+document.documentElement.style.setProperty('--cmt-top',t+'px');}
+window.addEventListener('resize',cmtTopo);
 function cmtVisto(){try{return JSON.parse(localStorage.getItem('cmt_visto')||'{}');}catch(e){return {};}}
 function cmtRail(na,nu,nd,hj){
 var v=cmtVisto(),d=function(k,n){var a=Number(v[k]);return (isFinite(a)&&n>a)?(n-a):0;};
@@ -4058,7 +4061,7 @@ if(a){g.setAttribute('data-t',a);var tb=$('#cmt-dr-tb');if(tb)[].forEach.call(tb
   var b2=$('#cmt-dr-b');if(b2)b2.scrollTop=0;}
 return g.getAttribute('data-t')||'a';}
 function cmtGaveta(ab,aba){
-if(aba)cmtAba(aba);
+cmtTopo();if(aba)cmtAba(aba);
 var g=$('#cmt-dr');if(!g)return;
 g.classList.toggle('on',ab);document.body.classList.toggle('cmt-dr-on',ab);
 var hk=$('#cmt-dr-k');if(hk)hk.setAttribute('aria-expanded',String(!!ab));
@@ -4078,7 +4081,7 @@ function cmtInd(){
 var j=CMT.dados||{},as=j.assinar||{},el=$('#cmt-ind');if(!el)return;
 var na=(as.assinatura||[]).length,nu=(j.urgencias||[]).length,nd=(j.duvidas||[]).length;
 var hj=(j.urgencias||[]).filter(function(x){return x.espera===0;}).length;
-cmtRail(na,nu,nd,hj);el.innerHTML='<b class="ok">'+na+(na===1?' a assinar':' a assinar')+'</b><b class="al">'+nu+(nu===1?' urgência':' urgências')+(hj?' · '+hj+' hoje':'')+'</b><b class="inf">'+nd+(nd===1?' dúvida':' dúvidas')+'</b>';}
+cmtTopo();cmtRail(na,nu,nd,hj);el.innerHTML='<b class="ok">'+na+(na===1?' a assinar':' a assinar')+'</b><b class="al">'+nu+(nu===1?' urgência':' urgências')+(hj?' · '+hj+' hoje':'')+'</b><b class="inf">'+nd+(nd===1?' dúvida':' dúvidas')+'</b>';}
 function cmtPinta(){
   var j=CMT.dados;if(!j)return;$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
   var as=j.assinar||{assinatura:[],liberacao:[]};
@@ -6817,6 +6820,9 @@ body.cmt-dr-on #v-cmt #cmt-pauta h2 .cmt-bq input{width:100%}
 body.cmt-dr-on #v-cmt #cmt-pauta h2 .b{order:6}
 body.cmt-dr-on #v-cmt .cmt-met{grid-template-columns:repeat(4,minmax(0,1fr))}
 body.cmt-dr-on #v-cmt .cmt-met div.mk{grid-column:1/-1}
+#v-cmt .cmt-dr{top:var(--cmt-top,0px)}
+#v-cmt .cmt-dr-h{top:24px}
+@media (max-width:1100px){#v-cmt .cmt-dr-h{top:auto}}
 </style>
 </body>
 </html>
