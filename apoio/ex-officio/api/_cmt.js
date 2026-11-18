@@ -272,7 +272,7 @@ async function painel(req, res, u) {
       servidor: it.servidor || '', corretor: it.corretor || '', etapa: etapa(it),
       dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '',
       resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, meta: c.meta || '',
-      sopref: c.sopref || '', destaque: c.destaque || '', obs: it.obs || '' };
+      sopref: c.sopref || '', destaque: c.destaque || '', julgamento: it.julgamento || '', obs: it.obs || '' };
   }) };
   /* marcos vencendo: até 7 dias à frente, ou já vencidos, nas sessões visíveis à equipe */
   const NOMES = { pautarAte: 'Peço dia', inicioPreparacao: 'Início da preparação', entregaMinutas: 'Entrega das minutas', liberacao: 'Liberação' };
