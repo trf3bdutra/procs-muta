@@ -19,7 +19,7 @@ acervo/                        processos em tramitação no gabinete
   sessoes/                     calendario.json (calendário de sessões) e um arquivo por sessão (AAAA-MM-DD.json)
   lotes/                       painéis de lote (1 arquivo por lote: <id>.json, esquema gabcmt.lote): grupos, colunas de variação,
                                e, por processo, enquadramento, variações, peculiaridades (versão da equipe e do Relator), peças,
-                               ajustes e pendências; lido pelo painel /lotes/ (apoio/ex-officio/lotes) por /api/lote
+                               ajustes e pendências; lido pelo painel /lotes/ (apoio/ex-officio/lotes) por /api/painel?lote=1
   minutas/<lote>/              minuta de cada processo do lote (<NNNNNNN-DD>.json, esquema gabcmt.minuta: relatório, voto, ementa,
                                acórdão, origem e data), carregada sob demanda no painel /lotes/ para leitura e cópia
   planilhas/                   cópia integral das planilhas do Google Sheets aposentadas: Controle de Pauta (espelho de 09/11),

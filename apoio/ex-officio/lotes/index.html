@@ -8,7 +8,7 @@
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cmt-eq-tema')||'light')}catch(e){}</script>
 <!-- Painel de lotes (/lotes/): página própria, desenhada como parte do Painel do relator (/cmt), com o mesmo tema (cmt-eq-tema),
      o mesmo login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave cmt_k / x-cmt-chave).
-     Dados: /api/lote (acervo/lotes/<id>.json, cartões de acervo/sessoes e minutas de acervo/minutas/<id>/).
+     Dados: /api/painel?lote=1 (api/_lote.js: acervo/lotes/<id>.json, cartões de acervo/sessoes e minutas de acervo/minutas/<id>/).
      Ligações: Painel do relator (/cmt/), Ex Officio (/equipe/) e Consulta do Modus Operandi (/modus/#consulta=AAAA-MM-DD/ITEM). -->
 <style>
 :root{--font:Figtree,"Segoe UI",system-ui,sans-serif;--bg:#eef2f4;--red:#a7433d}
@@ -128,7 +128,7 @@ let LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set();
 const params=new URLSearchParams(location.search);
 /* link próprio do relator: a chave (k) vale como credencial, como no Painel do relator (/cmt?k=…) */
 const CMTK=(function(){try{const m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){const v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);const q=new URLSearchParams(location.search);q.delete('k');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash.replace(/[#&]?k=[^&#]+/,''))}return sessionStorage.getItem('cmt_k')||''}catch(e){return ''}})();
-async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/lote'+q,{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
+async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/painel?lote=1'+(q?'&'+q.replace(/^\?/,''):''),{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function mostra(html){$('#ld').hidden=true;const a=$('#app');a.hidden=false;a.innerHTML=html}
 function falha(e){
   if(e.status===401){$('#ld-m').innerHTML='O painel de lotes usa o mesmo acesso do Painel do relator.<br><a class="b pri" style="margin-top:14px" href="/equipe/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
