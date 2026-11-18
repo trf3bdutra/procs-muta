@@ -17,6 +17,11 @@ acervo/                        processos em tramitação no gabinete
                                nomes de campo da Ficha: triagem, AJG/DPU, impedimento,
                                contrarrazões, META, elaboração e passagens por pauta (sessão, item e resultado)
   sessoes/                     calendario.json (calendário de sessões) e um arquivo por sessão (AAAA-MM-DD.json)
+  lotes/                       painéis de lote (1 arquivo por lote: <id>.json, esquema gabcmt.lote): grupos, colunas de variação,
+                               e, por processo, enquadramento, variações, peculiaridades (versão da equipe e do Relator), peças,
+                               ajustes e pendências; lido pelo painel /lotes/ (apoio/ex-officio/lotes) por /api/lote
+  minutas/<lote>/              minuta de cada processo do lote (<NNNNNNN-DD>.json, esquema gabcmt.minuta: relatório, voto, ementa,
+                               acórdão, origem e data), carregada sob demanda no painel /lotes/ para leitura e cópia
   planilhas/                   cópia integral das planilhas do Google Sheets aposentadas: Controle de Pauta (espelho de 09/11),
                                pautas do 2º e 6º bimestres, tarefas do PJe (22/06) e divergências de servidor e revisor a conferir
   operacional-arquivo.json     trabalho registrado de quem saiu do gabinete; volta ao operacional se o processo voltar
@@ -48,6 +53,9 @@ apoio/                         recursos de apoio à redação
   enciclopedia.json            Enciclopédia do modo avançado (servida só pelo /api/compendio, após o login): recursos, guias, rotina, PJe, competência, matérias, léxico
   usos-repertorio.json · .csv  em quais precedentes cada item do Vade Mecum é citado (gerado)
   ex-officio/                Ex Officio (/equipe/ na Vercel): login de cada servidor, cartões da pauta e das monocráticas e a ficha do processo;
+                               lotes/index.html: painel de lotes (/lotes/), página independente da navegação do Ex Officio, no mesmo padrão
+                               visual e com o mesmo login: matriz do lote, perfil de cada processo (prontuário da sessão) e minuta copiável;
+                               liga-se ao Ex Officio (/equipe/) e à Consulta do Modus Operandi (/modus/#consulta=AAAA-MM-DD/ITEM);
                                api/ grava em acervo/sessoes e, no mesmo commit, na ficha do processo em acervo/operacional.json (GH_TOKEN da Vercel)
   modus-operandi/               Modus Operandi: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Ex Officio); modus-operandi.html (um só código; o que cada pessoa vê e edita depende do perfil em apoio/acessos.json) e modus-operandi-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
 

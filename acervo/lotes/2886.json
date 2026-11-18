@@ -1,0 +1,4307 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "id": "2886",
+ "titulo": "Lote 28,86%",
+ "descricao": "Cumprimento individual da sentença coletiva da ACP 0005019-15.1997.4.03.6000 (reajuste de 28,86%)",
+ "sessoes": [
+  "2026-11-30",
+  "2026-12-07"
+ ],
+ "atualizado_em": "2026-11-18",
+ "colunas": [
+  {
+   "id": "SUC",
+   "rotulo": "Sucessores / espólio"
+  },
+  {
+   "id": "PEN",
+   "rotulo": "Pensionista"
+  },
+  {
+   "id": "DUAS",
+   "rotulo": "Duas apelações"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento (Temas 1.302 e 1.433)"
+  },
+  {
+   "id": "PRE",
+   "rotulo": "Prescrição"
+  },
+  {
+   "id": "LIT",
+   "rotulo": "Litispendência"
+  },
+  {
+   "id": "HON",
+   "rotulo": "Honorários em discussão"
+  },
+  {
+   "id": "GRA",
+   "rotulo": "Gratuidade"
+  },
+  {
+   "id": "DES",
+   "rotulo": "Deserção afastada"
+  },
+  {
+   "id": "HREF",
+   "rotulo": "Honorários: redação de 18/11"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Ponto para orientação"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "1",
+   "rotulo": "Limitação territorial afastada",
+   "cor": "#2f6db5",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)"
+  },
+  {
+   "id": "2",
+   "rotulo": "Limitação afastada + acordo",
+   "cor": "#7a5cc2",
+   "resultado": "Desprovimento",
+   "modelo": "5007937-56.2024 (2-a)"
+  },
+  {
+   "id": "3",
+   "rotulo": "Acordo administrativo",
+   "cor": "#1f8a70",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)"
+  },
+  {
+   "id": "5",
+   "rotulo": "BACEN — gratuidade",
+   "cor": "#c07a12",
+   "resultado": "Desprovimento",
+   "modelo": "5006182-94.2024 (5)"
+  },
+  {
+   "id": "6",
+   "rotulo": "BACEN fora do polo",
+   "cor": "#b8562f",
+   "resultado": "Desprovimento",
+   "modelo": "5007534-87.2024 (6-a)"
+  },
+  {
+   "id": "7",
+   "rotulo": "Razões dissociadas",
+   "cor": "#8a8f98",
+   "resultado": "Não conhecimento",
+   "modelo": "5006685-18.2024 (7-b)"
+  },
+  {
+   "id": "8",
+   "rotulo": "Embargos de declaração",
+   "cor": "#3a4a5c",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)"
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "Voto próprio, sem modelo ou grupo a confirmar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/2886/<processo>.json",
+ "itens": [
+  {
+   "sessao": "2026-11-30",
+   "item": 4,
+   "processo": "5001655-65.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "Claudia de Carvalhaes Pinheiro e outra x INSS",
+   "exequente": "Claudia de Carvalhaes Pinheiro e o…",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5008082-15.2024 (1-i)",
+   "variacoes": [
+    "SUC",
+    "PEN",
+    "LIT",
+    "HON"
+   ],
+   "observacao": "Litispendência remetida ao 5002016-82 (feito posterior)",
+   "peculiaridades": "Herdeiras de pensionista; litispendência remetida aos autos do 5002016-82 (feito posterior); honorários recursais pedidos pelo INSS, prejudicados",
+   "peculiaridades_relator": "Herdeiras de pensionista; litispendência remetida aos autos do 5002016-82 (feito posterior); honorários recursais pedidos pelo INSS, prejudicados",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Rodrigo",
+    "correcao": "Bruno",
+    "situacao": "Corrigida"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393431657"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393431658"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393431663"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "406329546"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Parágrafo das contrarrazões do INSS em duplicidade: retirado",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "ID da sentença ausente na abertura: incluído (ID 393431657)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Condenação em custas omitida (consta do dispositivo da sentença e é afastada no voto): incluída; «10% do valor» → «10% sobre o valor»",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "«opinou pelo prosseguimento» → «opinou pelo regular prosseguimento» (fórmula do modelo)",
+     "Aprimorado"
+    ],
+    [
+     "Voto",
+     "«os pedidos formulado» → «formulados»",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "«pois igualmente sentença» → «igualmente a sentença»",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "«a matéria não deve ser decidido» → «decidida»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho: «EM QUE VERIFICA» → «EM QUE SE VERIFICA»",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "IDs da sentença (393431657), da apelação (393431658), das contrarrazões (393431663) e do parecer do MPF (406329546) conferidos nos autos.",
+    "Litispendência remetida aos autos 5002016-82.2025 (feito posterior), conforme orientação de V. Exa."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-11-30",
+   "item": 6,
+   "processo": "5007207-45.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "Arthur Ferreira Cepeda e outra x União",
+   "exequente": "Arthur Ferreira Cepeda e outra",
+   "executado": "União",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a) + 5000162-71.2026 e 5007906-02.2025",
+   "variacoes": [
+    "SUC",
+    "SOB",
+    "PRE",
+    "HON"
+   ],
+   "observacao": "Sentença com duplo fundamento (limitação e acordo)",
+   "peculiaridades": "Sucessores de servidor; sentença com duplo fundamento (limitação e acordo); sobrestamento pelos Temas 1.302 e 1.433/STJ afastado; prescrição dos memoriais prejudicada; honorários recursais de 1%",
+   "peculiaridades_relator": "Sucessores de servidor; sentença com duplo fundamento (limitação e acordo); sobrestamento pelos Temas 1.302 e 1.433/STJ afastado; prescrição dos memoriais prejudicada; honorários recursais de 1%",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Rodrigo",
+    "correcao": "Bruno",
+    "situacao": "Corrigida"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393380634"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393380635"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393380639"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "406331494"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "406638692"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República opinou pelo regular processamento do feito",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "ID da sentença incluído (ID 393380634)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "«falta de titulo executivo» → «ausência de título executivo» (termo da sentença)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Condenação em custas omitida: incluída, conforme a sentença",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Pedido de suspensão (Temas 1.302 e 1.433/STJ) nas contrarrazões: incluído; ilegitimidade ativa registrada como pedido subsidiário",
+     "Identificado"
+    ],
+    [
+     "Relatório",
+     "Memoriais da União (ID 406638692), com prescrição subsidiária: incluídos",
+     "Identificado"
+    ],
+    [
+     "Voto",
+     "Sobrestamento não enfrentado: parágrafo do acervo (5000162-71.2026) acrescido",
+     "Identificado"
+    ],
+    [
+     "Voto",
+     "Prescrição dos memoriais declarada prejudicada (fórmula do 5007906-02.2025)",
+     "Identificado"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho, item 2 e razões completados com sobrestamento, prescrição e honorários recursais",
+     "Aprimorado"
+    ],
+    [
+     "Ementa",
+     "Dispositivo «Apelação desprovida, honorários recursais…» → «Apelação desprovida.», honorários nas razões (modelo 3-a)",
+     "Aprimorado"
+    ],
+    [
+     "Ementa",
+     "«Tema 550/STJ; Tema 1.102/STJ; TRF3» → «STJ, Temas 550, 1.102, 1.302 e 1.433; TRF-3»",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Pedido de suspensão (Temas 1.302 e 1.433/STJ) conferido nas contrarrazões (ID 393380639); prescrição subsidiária conferida nos memoriais (ID 406638692).",
+    "Sobrestamento e prescrição não estavam enfrentados na minuta: acrescidos com os parágrafos do acervo (5000162-71.2026 e 5007906-02.2025)."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-11-30",
+   "item": 7,
+   "processo": "5008148-92.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "Dirce Araujo dos Santos e outros x União",
+   "exequente": "Dirce Araujo dos Santos e outros",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5002200-72.2024 (1-d, sem prescrição)",
+   "variacoes": [
+    "SUC",
+    "SOB",
+    "HREF"
+   ],
+   "observacao": "",
+   "peculiaridades": "Herdeiros; sobrestamento pelo Tema 1.433/STJ pedido em memoriais; H-REF na redação ajustada pelo Relator; parágrafos fora do modelo",
+   "peculiaridades_relator": "Herdeiros; sobrestamento pelo Tema 1.433/STJ pedido em memoriais. Parágrafo de honorários na redação ajustada por V. Exa. em 18/11/2026",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Rodrigo",
+    "correcao": "Bruno",
+    "situacao": "Corrigida"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "391290190"
+    },
+    {
+     "peca": "Apelação",
+     "id": "391290191"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "391290195"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "401164482"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "406589829"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "ID da sentença incluído (ID 391290190)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Parecer do MPF: «opinou pelo regular prosseguimento do feito» → «deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção» (termos do parecer)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "«formulado» → «formulados»; «igualmente sentença» → «igualmente a sentença»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Item 1: vírgula e «do reajuste»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "«igualmente sentença» → «igualmente a sentença»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Separador, dispositivos citados (Lei 9.494/1997, artigo 2º-A) e «TRF-3»",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Parecer do MPF, contrarrazões e memoriais conferidos nos autos.",
+    "Parágrafos fora do modelo (\"Tampouco procedem…\" e \"O item II da tese…\"), com Tema 480/STJ — manter?"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-11-30",
+   "item": 8,
+   "processo": "5008171-38.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "Nayara Rodrigues Regis x União",
+   "exequente": "Nayara Rodrigues Regis",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5002200-72.2024 (1-d, sem prescrição)",
+   "variacoes": [
+    "SUC",
+    "SOB",
+    "HON",
+    "DES",
+    "HREF"
+   ],
+   "observacao": "",
+   "peculiaridades": "Herdeira; deserção afastada em ED; sobrestamento pedido em memoriais; honorários recursais e redução equitativa prejudicados",
+   "peculiaridades_relator": "Herdeira; deserção afastada em embargos de declaração; sobrestamento pedido em memoriais; honorários recursais e redução equitativa prejudicados. Parágrafo de honorários na redação ajustada por V. Exa. em 18/11/2026",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Rodrigo",
+    "correcao": "Bruno",
+    "situacao": "Corrigida"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "382846496"
+    },
+    {
+     "peca": "Apelação",
+     "id": "382846497"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "382846503"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "406589347"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "ID da sentença incluído (ID 382846496)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "«10% do valor atualizado» → «10% sobre o valor atualizado» (termo da sentença)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "«formulado» → «formulados»; «igualmente sentença» → «igualmente a sentença»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Item 1: «para incorporação a partir de janeiro de 1993 de 28,86%» → «para incorporação, a partir de janeiro de 1993, do reajuste de 28,86%»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "«igualmente sentença» → «igualmente a sentença»; «IV. DISPOSITIVO» → «IV. Dispositivo»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Separador, dispositivos citados (Lei 9.494/1997, artigo 2º-A) e «TRF-3»",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Sem parecer do MPF nos autos.",
+    "Parágrafos fora do modelo (\"Tampouco procedem…\" e \"O item II da tese…\"), com Tema 480/STJ, iguais aos do item 7 — manter?"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-11-30",
+   "item": 9,
+   "processo": "5008175-75.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "Espólio de Joel Batista da Silva x União",
+   "exequente": "Espólio de Joel Batista da Silva",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "0000011-75.2025 (1-d, espólio)",
+   "variacoes": [
+    "SUC",
+    "SOB",
+    "DES",
+    "HREF"
+   ],
+   "observacao": "",
+   "peculiaridades": "Espólio representado pela inventariante; deserção afastada em ED; sobrestamento pedido em memoriais",
+   "peculiaridades_relator": "Espólio representado pela inventariante; deserção afastada em embargos de declaração; sobrestamento pedido em memoriais. Parágrafo de honorários na redação ajustada por V. Exa. em 18/11/2026",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Rodrigo",
+    "correcao": "Bruno",
+    "situacao": "Corrigida"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "381970331"
+    },
+    {
+     "peca": "Apelação",
+     "id": "381970382"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "381970386"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "407498483"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "ID da sentença incluído (ID 381970331)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "«Apelou a parte exequente» → «Apelou o espólio do exequente (ID 381970382), representado pela inventariante»",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "«formulado» → «formulados»; «igualmente sentença» → «igualmente a sentença»",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Mesmos ajustes da ementa do item 7",
+     "Corrigido"
+    ]
+   ],
+   "pendencias": [
+    "Sem parecer do MPF nos autos."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 37,
+   "processo": "5001008-36.2026.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "ATARO DOS SANTOS LOBATO x INSS",
+   "exequente": "Ataro Dos Santos Lobato",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SUC",
+    "PEN",
+    "HON"
+   ],
+   "observacao": "Litigância de má-fé afastada",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "398744639"
+    },
+    {
+     "peca": "Apelação",
+     "id": "398744640"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "398744645"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF e Tema 480/STJ / Aplicação CDC",
+    "Código": "A1",
+    "Tema": "INSS - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (1 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (49 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: O artigo 2º-A da Lei 9.494/1997 e o Tema 499 do STF aplicam-se às ações coletivas de rito ordinário ajuizadas …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Comprovado nos autos que o exequente é viúvo e pensionista da servidora titular do direito, atua em nome própr…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Parágrafo acrescentado pela LIA fora do modelo: No mesmo sentido, a ApCiv 5013035-22.2024.4.03.6000, do Tribunal Regional Federal da 3ª Região, Rel. Des. Fed. Carlos Mu…",
+     "Excluído (precedente/tese não prevista no módulo)",
+     "JUR",
+     "Alta"
+    ],
+    [
+     "Ementa",
+     "Precedente acrescentado na lista de jurisprudência",
+     "Excluído",
+     "JUR",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"deu provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "Os documentos 398744642 e 398744643 não tiveram o texto extraído e não foram utilizados. A ausência de manifestação do Ministério Público Federal no segundo grau deve ser confirmada, caso algum desses documentos contenha pronunciamento sobre o recurso."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 38,
+   "processo": "5001281-15.2026.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "DJALMA GUIMARAES x UNIÃO FEDERAL",
+   "exequente": "Djalma Guimaraes",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "Parte maior de 80 anos",
+   "peculiaridades": "Parte maior de 80 anos; sentença sem honorários; União pede honorários por angularização em contrarrazões (H-PREJ, versão 1)",
+   "peculiaridades_relator": "Parte maior de 80 anos; sentença sem honorários; União pede honorários por angularização em contrarrazões",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "598870878"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (3 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Voto",
+     "ID atribuído pela LIA sem correspondência na numeração dos autos: 598870878 — conferir no PJe [VALIDAR]",
+     "Feito",
+     "DOC",
+     "Alta"
+    ]
+   ],
+   "pendencias": [
+    "Confirmar o número de identificação da peça de apelação no segundo grau; não consta nos dados fornecidos. Mantida a indicação “[VALIDAR: ID da apelação]”.",
+    "Confirmar o número de identificação das contrarrazões no segundo grau; não consta nos dados fornecidos. Mantida a indicação “[VALIDAR: ID das contrarrazões]”.",
+    "Confirmar no sistema o ID 598870878 atribuído à sentença, indicado no resumo da apelação."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 40,
+   "processo": "5002473-80.2026.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "JORGE PINHEIRO DE SOUZA x UNIÃO FEDERAL",
+   "exequente": "Jorge Pinheiro De Souza",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "399614790"
+    },
+    {
+     "peca": "Apelação",
+     "id": "399614791"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "399614796"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF e Tema 480/STJ / Aplicação CDC",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (5 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (35 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Prejudicado o pedido de fixação de honorários advocatícios em favor da União, deduzido em contrarrazões, sem p…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "Confirmar, antes da assinatura, a data da sentença da ação civil pública. A petição inicial indica 02/07/2002, enquanto o modelo fornecido traz 02/07/2001. Não há, entre os documentos indicados, manifestação ou parecer do Ministério Público Federal no segundo grau; por isso, não foi incluído parágrafo sobre sua atuação.",
+    "Não foram identificados pedidos de tutela de evidência, alegação de prescrição ou litispendência, pedido de revogação da gratuidade, nem alegação autônoma de transação administrativa pela União que acionassem outros módulos opcionais."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 44,
+   "processo": "5001004-96.2026.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "WANDIARA MIRANDA DIAS LEMOS x INSS",
+   "exequente": "Wandiara Miranda Dias Lemos",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "PEN"
+   ],
+   "observacao": "",
+   "peculiaridades": "Pensionista; MPF opinou pelo desprovimento; IDs repetidos com o item 75 na triagem",
+   "peculiaridades_relator": "Pensionista; MPF opinou pelo desprovimento",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 45,
+   "processo": "5001616-34.2026.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "OTAVIO ANDRE SILVA CARVALHO x INSS",
+   "exequente": "Otavio Andre Silva Carvalho",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON",
+    "GRA"
+   ],
+   "observacao": "",
+   "peculiaridades": "Havia duas versões da minuta",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "373083941"
+    },
+    {
+     "peca": "Apelação",
+     "id": "373083942"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "373083944"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF e Tema 480/STJ / Aplicação CDC",
+    "Código": "A1",
+    "Tema": "INSS - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Data da sentença da ACP trocada pela LIA para 02/07/2002 (alegação da inicial)",
+     "Restaurado 02/07/2001, como no modelo",
+     "FAT",
+     "Alta"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (1 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (6 trechos)",
+     "RED",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "Não há pendência documental identificada para a minuta. O andamento informa inclusão em pauta para julgamento de mérito em 11/11/2026, mas não indica a data da sessão ou resultado do julgamento.",
+    "A data 02/07/2002 vem da petição inicial dos exequentes (alegação de parte); o acervo assinado do gabinete traz 02/07/2001. Mantido o modelo."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 46,
+   "processo": "5003125-68.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "TEREZA CRISTINA IBIAPINA DA ROCHA ARAUJO x UNIÃO FEDERAL",
+   "exequente": "Tereza Cristina Ibiapina Da Rocha …",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "",
+   "peculiaridades": "Havia duas versões da minuta",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "359542415"
+    },
+    {
+     "peca": "Apelação",
+     "id": "359542421"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "359542423"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (8 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (101 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A abrangência da coisa julgada em ação civil pública é determinada pelo pedido e pelas pessoas afetadas, não p…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Afastada a limitação territorial, não procede a alegação de ilegitimidade ativa da exequente fundada exclusiva…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Fica prejudicado o pedido de honorários formulado pela União em contrarrazões, sem prejuízo de fixação da verb…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"deu provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "Não foi localizada manifestação do Ministério Público Federal entre as peças fornecidas; por isso, não foi incluído parágrafo a esse respeito.",
+    "A extração de texto dos documentos IDs 359542416 e 359542420 falhou. A minuta utiliza a apelação legível de ID 359542421 e os demais documentos identificados; convém confirmar se os arquivos não extraídos contêm informação adicional relevante."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 47,
+   "processo": "5003957-67.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "FRANCISCO DE ASSIS FEITOSA PEREIRA x UNIÃO FEDERAL",
+   "exequente": "Francisco De Assis Feitosa Pereira",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "Havia duas versões da minuta",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "349268055"
+    },
+    {
+     "peca": "Apelação",
+     "id": "349268057"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "349268059"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "380952927"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {
+    "Apelante": "autor",
+    "Preliminares": "decisão surpresa",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF e Tema 480/STJ",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (5 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (7 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Parágrafo acrescentado pela LIA fora do modelo: Em sentido convergente, a apelação foi provida no TRF3, ApCiv 5003454-12.2026.4.03.6000, Rel. Des. Fed. Carlos Muta, par…",
+     "Excluído (precedente/tese não prevista no módulo)",
+     "JUR",
+     "Alta"
+    ]
+   ],
+   "pendencias": [
+    "[[VALIDAR:]] A decisão recorrida extinguiu o cumprimento quanto a nove exequentes e determinou que Welendal Leal Tenorio comprovasse residência em Mato Grosso do Sul no prazo de quinze dias. Os documentos disponibilizados não esclarecem se houve cumprimento dessa determinação ou decisão posterior a respeito.",
+    "[[VALIDAR:]] Conferir a identificação e a íntegra dos precedentes citados no texto-modelo antes da assinatura, especialmente as referências ao ProAfR no REsp 2.234.888, ao AgInt no AREsp 2.996.314, ao ARE 1.585.247 e ao AgInt no AREsp 2.993.227."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 48,
+   "processo": "5005000-05.2026.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "LUIZ ROBERTO DOS SANTOS MONTEIRO x INSS",
+   "exequente": "Luiz Roberto Dos Santos Monteiro",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "399636728"
+    },
+    {
+     "peca": "Apelação",
+     "id": "399636729"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF e Tema 480/STJ / Aplicação CDC",
+    "Código": "A1",
+    "Tema": "INSS - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (5 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (20 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A alegação de transação administrativa suscitada em contrarrazões, não examinada na origem, exige contraditóri…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: a sentença identifica os exequentes como herdeiros do servidor Walter dos Santos Monteiro, enquanto as peças dos exequentes os apresentam como sucessores da pensionista Nadyr Baptista Monteiro; conferir a titularidade do crédito e a cadeia sucessória na origem.]",
+    "[VALIDAR: as contrarrazões mencionam pagamento administrativo e acordo, mas contêm a indicação “INSERIR FICHA FINANCEIRA/TERMO DE ACORDO”; verificar se os documentos comprobatórios foram efetivamente juntados e oportunizar manifestação dos exequentes.]",
+    "[VALIDAR: a petição inicial apresenta inconsistência quanto ao número de sucessores que figuram no polo ativo e às quotas requeridas; conferir a composição do polo ativo e a distribuição das quotas na origem.]"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 50,
+   "processo": "5005412-04.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "MARIA LUIZA DE FREITAS NUNES DE PAULA x UNIÃO FEDERAL",
+   "exequente": "Maria Luiza De Freitas Nunes De Pa…",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HREF"
+   ],
+   "observacao": "",
+   "peculiaridades": "Parágrafo de honorários atualizado para a redação ajustada pelo Relator em 18/11/2026",
+   "peculiaridades_relator": "Parágrafo de honorários atualizado para a redação ajustada por V. Exa. em 18/11/2026",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "388393863"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388393864"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388393868"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (1 trechos)",
+     "RED",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] Conferir, no inteiro teor da petição de contrarrazões, a data exata de sua apresentação e se há pedido de honorários advocatícios. O resumo disponível não registra esse pedido, razão pela qual não foi incluído o módulo H-PREJ.",
+    "[VALIDAR] Conferir o teor integral da petição inicial e do aditamento da ação civil pública citados na transcrição do modelo, pois esses documentos não estão entre as peças integralmente reproduzidas.",
+    "[VALIDAR] Confirmar, antes da assinatura, a adequação da transcrição padronizada do módulo TERR aos autos, inclusive a redação do trecho atribuído ao dispositivo da sentença coletiva.",
+    "[VALIDAR] A movimentação processual informa inclusão em pauta e publicação de intimação de pauta em novembro de 2026; o resultado colegiado ainda não consta dos dados fornecidos."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 51,
+   "processo": "5005469-85.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "CLAUDIA FERREIRA DE ALMEIDA RIBEIRO x INSS",
+   "exequente": "Claudia Ferreira De Almeida Ribeir…",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "399627429"
+    },
+    {
+     "peca": "Apelação",
+     "id": "399627431"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "399627440"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF e Tema 480/STJ / Aplicação CDC",
+    "Código": "A1",
+    "Tema": "INSS - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (6 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (34 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Prejudicado o pedido de condenação em honorários recursais, deduzido em contrarrazões, diante do provimento da…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "Confirmar, antes da assinatura, a transcrição literal dos trechos da petição inicial e da sentença coletiva reproduzidos no voto, bem como a data da sentença coletiva corrigida para 02/07/2002.",
+    "Não há manifestação do Ministério Público Federal identificada entre os documentos considerados, razão pela qual não foi incluído parágrafo a esse respeito."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 71,
+   "processo": "5010305-04.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "MARLI CAVALCANTI SANTOS x UNIÃO FEDERAL",
+   "exequente": "Marli Cavalcanti Santos",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON",
+    "HREF"
+   ],
+   "observacao": "",
+   "peculiaridades": "Parágrafo de honorários atualizado para a redação ajustada pelo Relator em 18/11/2026; relatório registra sentença sem condenação em custas e honorários [VALIDAR]",
+   "peculiaridades_relator": "Parágrafo de honorários atualizado para a redação ajustada por V. Exa. em 18/11/2026",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "599323703"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (95 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Não procede a tese de que o título executivo se restringe aos beneficiários lotados nos limites geográficos da…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Reformada a sentença, fica prejudicado o pedido de honorários formulado pela União em contrarrazões, sem preju…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Voto",
+     "ID atribuído pela LIA sem correspondência na numeração dos autos: 599323703 — conferir no PJe [VALIDAR]",
+     "Feito",
+     "DOC",
+     "Alta"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: ID da apelação no segundo grau] — não identificado nos documentos disponibilizados.",
+    "[VALIDAR: ID das contrarrazões no segundo grau] — não identificado nos documentos disponibilizados. O documento selecionado permite identificar a peça, mas não informa o respectivo identificador do processo.",
+    "Os documentos (ID 399625246), (ID 399625244), (ID 399625241), (ID 399625215) e (ID 399625233) foram indicados como ilegíveis, corrompidos ou sem extração de texto. A minuta não lhes atribui conteúdo.",
+    "Não foi localizado parecer do Ministério Público Federal neste recurso."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 72,
+   "processo": "5012133-69.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "RUTH MIANA x INSS",
+   "exequente": "Ruth Miana",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HREF"
+   ],
+   "observacao": "",
+   "peculiaridades": "Parágrafo de honorários atualizado para a redação ajustada pelo Relator em 18/11/2026",
+   "peculiaridades_relator": "Parágrafo de honorários atualizado para a redação ajustada por V. Exa. em 18/11/2026",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "400335484"
+    },
+    {
+     "peca": "Apelação",
+     "id": "400335485"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "400335490"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF e Tema 480/STJ / Aplicação CDC",
+    "Código": "A1",
+    "Tema": "INSS - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (1 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (42 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A limitação territorial automática prevista no artigo 16 da Lei 7.347/1985 foi superada pela evolução jurispru…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"deu provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "Os documentos de IDs 400335488, 400335487, 400335373, 400335372, 400335371, 400335370, 400335369 e 400335361 não tiveram o texto extraído; não foram utilizados para afirmar fatos ou pedidos.",
+    "Não foi identificada manifestação do Ministério Público Federal no recurso de apelação.",
+    "Não foram identificados memoriais, pedido de tutela recursal, alegação de prescrição, litispendência, transação administrativa ou pedido de honorários formulado nas contrarrazões.",
+    "A LIA trocou a data da sentença da ACP para 02/07/2002; mantido 02/07/2001, como no acervo assinado do gabinete."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 73,
+   "processo": "5012695-44.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "JONAS FERREIRA PIMENTA x UNIÃO FEDERAL",
+   "exequente": "Jonas Ferreira Pimenta",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "596270934"
+    },
+    {
+     "peca": "Apelação",
+     "id": "399061721"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "399061723"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (1 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (23 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Prejudicado o pedido de fixação de honorários advocatícios em favor da União, formulado em contrarrazões e con…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Voto",
+     "ID atribuído pela LIA sem correspondência na numeração dos autos: 596270934 — conferir no PJe [VALIDAR]",
+     "Feito",
+     "DOC",
+     "Alta"
+    ]
+   ],
+   "pendencias": [
+    "Não foram localizadas, entre os documentos selecionados, manifestação do Ministério Público Federal ou razões de memoriais; por isso, não foram incluídos esses parágrafos.",
+    "O ID da sentença consta na apelação como 596270934. Para a apelação e as contrarrazões, foram utilizados os identificadores dos documentos disponibilizados no processo.",
+    "A LIA trocou a data da sentença da ACP para 02/07/2002; mantido 02/07/2001, como no acervo assinado do gabinete."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 74,
+   "processo": "5013642-35.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "CARLOS MARCELO DE OLIVEIRA ALMEIDA x UNIÃO FEDERAL",
+   "exequente": "Carlos Marcelo De Oliveira Almeida",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Victor",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Preliminares": "decisão surpresa",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP",
+    "Obs. da triagem": "Pedido de suspensão Tema 1433/STJ"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 75,
+   "processo": "5013215-38.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "KATIA BEZERRA DE SOUZA x INSS",
+   "exequente": "Katia Bezerra De Souza",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "PEN",
+    "HON",
+    "GRA"
+   ],
+   "observacao": "",
+   "peculiaridades": "Pensionista; MPF sem interesse",
+   "peculiaridades_relator": "Pensionista",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "315382076"
+    },
+    {
+     "peca": "Apelação",
+     "id": "315382232"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "315382273"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "383634910"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Data da sentença da ACP trocada pela LIA para 02/07/2002 (alegação da inicial)",
+     "Restaurado 02/07/2001, como no modelo",
+     "FAT",
+     "Alta"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (43 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A prescrição da pretensão executória, suscitada em contrarrazões, deve ser apreciada na origem, após oportuniz…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Impugnada em contrarrazões a gratuidade da justiça concedida na origem, sua revisão deve ser examinada pelo ju…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Reformada a sentença, fica prejudicado o pedido de honorários recursais formulado em contrarrazões, sem prejuí…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"deu provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "Não foram identificados dados que exijam marcação “[VALIDAR]”.",
+    "A minuta não inclui o precedente ApCiv 5003797-42.2025.4.03.6000 nem o ApCiv 5003454-12.2026.4.03.6000, embora constem do catálogo fornecido, porque as instruções do modelo vedam acrescentar julgados além dos previstos nos módulos.",
+    "A data 02/07/2002 vem da petição inicial dos exequentes (alegação de parte); o acervo assinado do gabinete traz 02/07/2001. Mantido o modelo."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 76,
+   "processo": "5007060-19.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "ARSENITO TEIXEIRA ARAGAO x INSS",
+   "exequente": "Arsenito Teixeira Aragao",
+   "executado": "INSS",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "Tutela de evidência prejudicada",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "307095361"
+    },
+    {
+     "peca": "Apelação",
+     "id": "307095363"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "307095368"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "410185409"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "369373874"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {
+    "Apelante": "autor",
+    "Preliminares": "tutela de evidência",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "INSS - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (37 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Apelação provida. Pedido de tutela de evidência ou de urgência prejudicado. Pedido de honorários recursais for…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"deu provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: confirmar o identificador e a data oficiais da sentença no sistema.] Há duas peças com o mesmo teor, identificadas como IDs 307095361 e 307095362, com datas de 28/08/2024 e 29/08/2024, respectivamente. Foi adotado o ID 307095361, também referido no parecer ministerial.",
+    "Foram corrigidos erros materiais de redação do modelo: “pedidos formulados”, “igualmente a sentença”, “lista nominal” e a concordância do parágrafo sobre a tutela.",
+    "A LIA trocou a data da sentença da ACP para 02/07/2002; mantido 02/07/2001, como no acervo assinado do gabinete."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 79,
+   "processo": "5006231-38.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "LIA CRISTINA GALVAO DOS SANTOS x UNIÃO FEDERAL",
+   "exequente": "Lia Cristina Galvao Dos Santos",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "HON"
+   ],
+   "observacao": "Limites subjetivos (Tema 733/STF)",
+   "peculiaridades": "Sentença pelos limites subjetivos (Tema 733/STF); conferir a data do Tema 1.075 citada",
+   "peculiaridades_relator": "Sentença fundada nos limites subjetivos do título (Tema 733/STF)",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "400316235"
+    },
+    {
+     "peca": "Apelação",
+     "id": "400316236"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "400316238"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (2 trechos)",
+     "RED",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: confirmar se o percentual dos honorários fixados na sentença corresponde ao mínimo aplicável à faixa do valor atualizado da causa, pois a decisão não especifica percentual único e o modelo oferece alternativas fixas de 10%.]",
+    "O documento 400316234 está ilegível ou corrompido e não foi utilizado.",
+    "A pauta foi publicada em 13/11/2026; a minuta considera o resultado de provimento indicado pelo modelo, ainda sujeito à deliberação do colegiado."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 81,
+   "processo": "5004001-23.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "ZILMAR MENDONCA BITENCOURT x INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
+   "exequente": "Zilmar Mendonca Bitencourt",
+   "executado": "INCRA",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Victor",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "INCRA  - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 83,
+   "processo": "0000249-94.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "ARLETE CASTELO BRANCO PINTO x UNIÃO FEDERAL",
+   "exequente": "Arlete Castelo Branco Pinto",
+   "executado": "União",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Victor",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Preliminares": "decisão surpresa",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP",
+    "Obs. da triagem": "Pedido de suspensão Tema 1433/STJ"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 55,
+   "processo": "5006220-09.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "CRISTINA MARIA DOS SANTOS CAETANO x UNIÃO FEDERAL",
+   "exequente": "Cristina Maria Dos Santos Caetano",
+   "executado": "União",
+   "grupo": "2",
+   "tipo_caso": "2 · Limitação afastada + acordo (SIAPE)",
+   "resultado": "Desprovimento",
+   "modelo": "5007937-56.2024 (2-a)",
+   "variacoes": [
+    "PRE",
+    "ORI"
+   ],
+   "observacao": "Duplo fundamento; ação coletiva do SINDSPREV/RJ arguida",
+   "peculiaridades": "Sentença com duplo fundamento; apelação só sobre o acordo (Tema 1.102/STJ); União arguiu ação coletiva do SINDSPREV/RJ e prescrição [VALIDAR]",
+   "peculiaridades_relator": "Sentença com duplo fundamento (limitação e acordo); apelação só sobre o acordo (Tema 1.102/STJ)",
+   "orientacao": "Ação coletiva do SINDSPREV/RJ e prescrição arguidas pela União e não examinadas na sentença",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (3 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Item redigido pela LIA sem correspondente literal no modelo: A conclusão está em consonância com a tese da ApCiv 5008405-20.2024.4.03.6000, Rel. Des. Fed. Carlos Muta, pub…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: ID da sentença no segundo grau.]",
+    "[VALIDAR: ID da apelação.]",
+    "[VALIDAR: ID das contrarrazões.]",
+    "Conferir no documento original a identificação completa da rubrica financeira: a sentença e os documentos selecionados confirmam o pagamento administrativo da vantagem de 28,86%, mas a descrição da rubrica não aparece uniformemente transcrita.",
+    "Foi acrescentada referência à ApCiv 5008405-20.2024.4.03.6000 e à ApCiv 5002762-81.2024.4.03.6000, para atender à orientação de utilização dos precedentes fornecidos. A ApCiv 5003544-88.2024.4.03.6000 foi distinguida por tratar da limitação territorial, enquanto, neste caso, a manutenção da extinção também se fundamenta autonomamente no acordo administrativo.",
+    "A LIA trocou a data da sentença da ACP para 02/07/2002; mantido 02/07/2001, como no acervo assinado do gabinete."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 65,
+   "processo": "5007772-09.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "SELMA NASCIMENTO LIMA x FUNDACAO NACIONAL DE SAUDE",
+   "exequente": "Selma Nascimento Lima",
+   "executado": "FUNASA",
+   "grupo": "2",
+   "tipo_caso": "2 · Limitação afastada + acordo (SIAPE)",
+   "resultado": "Desprovimento",
+   "modelo": "5007937-56.2024 (2-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "399051256"
+    },
+    {
+     "peca": "Apelação",
+     "id": "399051258"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A2",
+    "Tema": "Funasa - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (5 trechos)",
+     "RED",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] As razões de apelação indicam o processo 5006369-05.2024.4.03.6000/MS, enquanto a petição de interposição e os dados do processo identificam este feito como 5007772-09.2024.4.03.6000. A minuta adotou o número do processo em julgamento; convém confirmar se as razões juntadas correspondem a este recurso.",
+    "[VALIDAR] A sentença e a impugnação mencionam identificadores distintos para os documentos de fichas financeiras e acordo administrativo. A minuta citou o ID 357032051, indicado na sentença para o termo de acordo, e o documento comprobatório disponibilizado. Convém confirmar no sistema se esse é o identificador adequado para referenciar as fichas financeiras.",
+    "O documento de ID 399051244 está indicado como ilegível ou corrompido. Não foi utilizado para a minuta.",
+    "Não constam, entre os documentos selecionados, manifestação do Ministério Público Federal, memoriais ou recurso adesivo."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 68,
+   "processo": "5008348-65.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "SUELI COUTINHO DO NASCIMENTO x FUNDACAO INSTIT BRAS DE GEOGRAFIA E ESTATISTICA IBGE",
+   "exequente": "Sueli Coutinho Do Nascimento",
+   "executado": "IBGE",
+   "grupo": "2",
+   "tipo_caso": "2 · Limitação afastada + acordo (SIAPE)",
+   "resultado": "Desprovimento",
+   "modelo": "5007937-56.2024 (2-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Apelação",
+     "id": "398744304"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "398744306"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República não apresentou manifestação de mérito. A exequente limitou-se a declarar ciência da intimação de pauta",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF / Impugnação acordo adm.",
+    "Código": "A2",
+    "Tema": "IBGE  - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (7 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (27 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Apelação desprovida. Honorários sucumbenciais fixados em grau recursal, observada a gratuidade da justiça e a …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: existência de ação individual da exequente sobre o reajuste em curso quando da opção registrada no SIAPE em 31/08/1999]. Os documentos apresentados não incluem certidão de distribuição ou de objeto e pé que permita confirmar esse ponto, relevante para distinguir acordo individual de transação administrativa sujeita à homologação judicial.",
+    "[VALIDAR: homologação judicial de eventual transação]. O extrato do SIAPE registra “Transação Judicial”, com opção em 31/08/1999, e os documentos financeiros indicam pagamentos; não foi localizado termo assinado nem decisão homologatória nos documentos selecionados."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 52,
+   "processo": "5005634-69.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "VALDEMIR FELIX DOMINGOS x FUNDACAO NACIONAL DE SAUDE",
+   "exequente": "Valdemir Felix Domingos",
+   "executado": "FUNASA",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "369654720"
+    },
+    {
+     "peca": "Apelação",
+     "id": "369654721"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "369654723"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "Acordo Administrativo - Tema 550STJ / Tema 1102/STJ",
+    "Código": "A3",
+    "Tema": "Funasa - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (20 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Parágrafo acrescentado pela LIA fora do modelo: A conclusão está em consonância com a tese adotada pelo Tribunal Regional Federal da 3ª Região na ApCiv 5008405-20.2024.…",
+     "Excluído (precedente/tese não prevista no módulo)",
+     "JUR",
+     "Alta"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: As fichas financeiras registram pagamentos da vantagem sob a rubrica “00955 VANTAGEM ADMINIST. 28.86%-ATIV”. A…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A adesão a acordo administrativo impede a utilização do cumprimento individual da sentença coletiva para redis…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Pela sucumbência recursal, os honorários são majorados em 1% a ser acrescido ao percentual fixado na origem, s…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Precedente acrescentado na lista de jurisprudência",
+     "Excluído",
+     "JUR",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] A petição de apelação apresenta divergência entre a data que consta no fecho do documento, 19/02/2025, e as datas de prazo recursal ali referidas, em fevereiro e março de 2026. As contrarrazões são datadas de 23/02/2026. A data efetiva do protocolo deve ser conferida no sistema.",
+    "[VALIDAR] A conclusão de que não havia demanda individual quando da celebração do acordo baseia-se no termo administrativo reproduzido na impugnação, que declara não haver litígio judicial individual sobre o passivo. Convém conferir o documento original e a extensão dessa declaração diante da existência da ação civil pública coletiva."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 53,
+   "processo": "5005760-22.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "JANE MARIA DE AZEVEDO x FUNDACAO INSTIT BRAS DE GEOGRAFIA E ESTATISTICA",
+   "exequente": "Jane Maria De Azevedo",
+   "executado": "IBGE",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "394845924"
+    },
+    {
+     "peca": "Apelação",
+     "id": "394845926"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "394845928"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (8 trechos)",
+     "RED",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: confirmar, antes da assinatura, se houve memoriais ou manifestação do Ministério Público Federal após a juntada das peças consideradas.]",
+    "[VALIDAR: conferir a redação final dos dispositivos e das referências jurisprudenciais transcritas no modelo, inclusive a identificação completa dos recursos representativos dos Temas 550 e 1.102 do STJ.]"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 54,
+   "processo": "5006039-08.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "MANOEL EMIDIO DE ROMA x UNIÃO FEDERAL",
+   "exequente": "Manoel Emidio De Roma",
+   "executado": "União",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "397914149"
+    },
+    {
+     "peca": "Apelação",
+     "id": "397914150"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "Acordo Administrativo - Tema 550STJ / Tema 1102/STJ",
+    "Código": "A3",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (4 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (25 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Item redigido pela LIA sem correspondente literal no modelo: Na espécie, a consulta ao SIAPE registra opção por transação relacionada ao passivo de 28,86%, em 05/05/1999, …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Item redigido pela LIA sem correspondente literal no modelo: Ainda que se tratasse de diferenças não reconhecidas ou pagas na via administrativa, não se autoriza ajuizar c…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Parágrafo \"Na espécie, a existência de fichas financeiras…\" do modelo reposto (a LIA o reescrevera); rubrica e ID preenchidos; mantida em parágrafo próprio a resposta à alegação de rasura.",
+     "Feito",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: situação processual do exequente em 05/05/1999.] A consulta ao SIAPE registra a opção como “transação judicial”, mas os documentos selecionados não esclarecem se havia ação judicial em curso quando o ajuste foi celebrado. Esse dado é relevante para a distinção entre o acordo individual tratado no Tema 550 e a transação sujeita à homologação judicial tratada no Tema 1.102.",
+    "[VALIDAR: rubrica exata das fichas financeiras.] O parecer e a consulta ao SIAPE comprovam pagamentos relacionados ao passivo de 28,86%, mas os elementos disponíveis não confirmam com segurança a nomenclatura literal da rubrica.",
+    "Não foram localizadas contrarrazões, memoriais ou manifestação do Ministério Público Federal entre as peças selecionadas; confirmar a situação nos autos de segundo grau."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 56,
+   "processo": "5006240-97.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "LUIZA RIBEIRO RODRIGUES x UNIÃO FEDERAL",
+   "exequente": "Luiza Ribeiro Rodrigues",
+   "executado": "União",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "Triagem A2: grupo 2 ou 3 conforme o fundamento da sentença; resultado igual",
+   "peculiaridades_relator": "Sentença com fundamento também na ilegitimidade",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "399018142"
+    },
+    {
+     "peca": "Apelação",
+     "id": "399018143"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "399018145"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "Acordo Administrativo - Tema 550STJ / Tema 1102/STJ",
+    "Código": "A2",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (12 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: pedido de suspensão] A União pediu a suspensão com fundamento nos Temas 1.302 e 1.433 do STJ (ID 399018145). O modelo fornecido não contém módulo para decidir o pedido. Conferir as decisões de afetação e a necessidade de enfrentamento antes da conclusão do voto.",
+    "[VALIDAR: ação judicial anterior] A ausência de ação individual contemporânea ao suposto acordo não foi comprovada por certidão nos documentos selecionados. A União também menciona ação coletiva sindical relativa ao mesmo reajuste (ID 399017024); os documentos da ação sindical não confirmam, por si, a inclusão individual da exequente (ID 399017025) (ID 399017026)",
+    "[VALIDAR: data e prova do acordo] O extrato registra autorização por acordo e pagamento de R$ 8.223,93, mas a data da opção está corrompida; não foi identificado termo assinado (ID 399018138). Conferir a pertinência dos fundamentos do modelo sobre a prova da avença e os Temas 550 e 1.102 do STJ.",
+    "[VALIDAR: datas normativas] O modelo indica 21/12/2000 para a MP 1.962-33; os documentos selecionados também mencionam 26/05/2000. Conferir a data e a primeira edição que introduziu o § 2º do artigo 7º antes da assinatura.",
+    "[VALIDAR: identificação dos precedentes transcritos] Conferir o inteiro teor e os dados dos julgados do TRF da 3ª Região nas Apelações Cíveis 5008922-59.2023.4.03.6000 e 5008102-06.2024.4.03.6000, reproduzidos no modelo fornecido.",
+    "[VALIDAR: custas] O dispositivo da sentença registra “sem custas” e, em seguida, condena a exequente a arcar com custas, com exigibilidade suspensa (ID 399018142). Conferir a disposição aplicável.",
+    "[VALIDAR: honorários] O modelo prevê acréscimo equivalente a 1% à sucumbência fixada na origem. Conferir a base de cálculo e os pressupostos da majoração, preservada a suspensão de exigibilidade.",
+    "[VALIDAR: identificação dos documentos] Confirmar os identificadores das peças no segundo grau. As referências acima usam os identificadores dos documentos selecionados; a sentença menciona, na origem, as fichas financeiras sob ID 582028240 e a consulta ao SIAPE sob ID 582028244."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 61,
+   "processo": "5007279-32.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "FLORESCENA SILVA MOURA x UNIÃO FEDERAL",
+   "exequente": "Florescena Silva Moura",
+   "executado": "União",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "399536868"
+    },
+    {
+     "peca": "Apelação",
+     "id": "399536869"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "399536871"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "Acordo Administrativo - Tema 550STJ / Tema 1102/STJ",
+    "Código": "A3",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (4 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A alegação de prescrição suscitada em contrarrazões fica prejudicada pela manutenção da sentença.…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Voto",
+     "Parágrafo acrescentado pela LIA fora do modelo: No mesmo sentido, no julgamento da ApCiv 5008405-20.2024.4.03.6000, o TRF3 manteve a extinção do cumprimento individual,…",
+     "Excluído (precedente/tese não prevista no módulo)",
+     "JUR",
+     "Alta"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: conferir nas fichas financeiras a denominação literal da rubrica e se a identificação “VANTAGEM ADMINIST. 28.86%-APOS” corresponde exatamente ao lançamento pertinente.]",
+    "[VALIDAR: confirmar nos autos se houve ação individual anterior da exequente sobre o reajuste. A União menciona ação coletiva sindical do SINDSPREV/RJ, mas os documentos selecionados não confirmam que a exequente tenha ajuizado demanda individual nem demonstram, de modo conclusivo, sua inclusão como beneficiária daquela ação coletiva.]"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 66,
+   "processo": "5007817-13.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "ADEMILDA MARIA MARCIANO DE FREITAS x FUNDACAO NACIONAL DE SAUDE",
+   "exequente": "Ademilda Maria Marciano De Freitas",
+   "executado": "FUNASA",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [],
+   "observacao": "Termo de acordo assinado e SIAPE",
+   "peculiaridades": "Sentença afastou a limitação e acolheu o acordo (termo assinado, SIAPE, rubrica 00955); apelação só invoca o Tema 1.102/STJ",
+   "peculiaridades_relator": "Sentença afastou a limitação e acolheu o acordo (termo assinado, SIAPE, rubrica 00955); apelação só invoca o Tema 1.102/STJ",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "395124197"
+    },
+    {
+     "peca": "Apelação",
+     "id": "395124198"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "395124200"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 69,
+   "processo": "5008413-94.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "JORGE DOS SANTOS x UNIÃO FEDERAL Sessão de Julgamento ORDINÁRIA PRESENCIAL / VIDEOCONFERÊNCIA, segunda- feira, 7 de dezembro de 2026 às 14:00",
+   "exequente": "Jorge Dos Santos",
+   "executado": "União",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [
+    "ORI"
+   ],
+   "observacao": "Acordo provado só por fichas e SIAPE",
+   "peculiaridades": "Acordo anterior à MP 1.962-33/2000 provado só por fichas e SIAPE [VALIDAR]; gêmeo do item 78",
+   "peculiaridades_relator": "Acordo comprovado por fichas financeiras e SIAPE",
+   "orientacao": "Acordo anterior à MP 1.962-33/2000 comprovado só por fichas e SIAPE (Tema 1.102/STJ)",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "395123374"
+    },
+    {
+     "peca": "Apelação",
+     "id": "395123375"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "395123377"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (9 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: os documentos administrativos divergem quanto à data da opção ou transação. O despacho administrativo atribui a celebração a 18/05/1999, enquanto a consulta do SIAPE registra 30/08/1999. Confirmar qual data deve prevalecer, especialmente diante do prazo indicado para a celebração do acordo.]",
+    "[VALIDAR: confirmar se há certidão de distribuição ou de objeto e pé que demonstre a inexistência de ação individual do exequente quando dos pagamentos administrativos. A ausência de prova de ação individual é afirmada pela União, mas não foi localizada certidão específica no material considerado.]",
+    "[VALIDAR: o documento ID 395123380 consta como ilegível ou corrompido e não foi considerado na minuta.]"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 78,
+   "processo": "5008046-70.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "MARTA COELHO DOS REIS x UNIÃO FEDERAL",
+   "exequente": "Marta Coelho Dos Reis",
+   "executado": "União",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo (Temas 550 e 1.102/STJ)",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [
+    "ORI"
+   ],
+   "observacao": "Acordo provado só por fichas e SIAPE",
+   "peculiaridades": "Mesma situação do item 69 [VALIDAR]",
+   "peculiaridades_relator": "Acordo comprovado por fichas financeiras e SIAPE",
+   "orientacao": "Acordo anterior à MP 1.962-33/2000 comprovado só por fichas e SIAPE (Tema 1.102/STJ)",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (2 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (2 trechos)",
+     "RED",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "Confirmar os identificadores processuais da sentença e da apelação no sistema, não individualizados nos dados disponibilizados.",
+    "Confirmar o identificador da petição de contrarrazões no sistema.",
+    "O extrato do SIAPE indica opção por “Transação Judicial”, atualizada em 11/05/1999, enquanto a conclusão sobre a ausência de ação judicial individual contemporânea ao acordo decorre da falta de prova dessa demanda nos autos. Convém conferir se há certidão de distribuição ou de objeto e pé que confirme esse dado.",
+    "A data de publicação dos precedentes citados no modelo deve ser conferida antes da assinatura, se necessário."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 57,
+   "processo": "5006631-52.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "BANCO CENTRAL DO BRASIL x DANIEL JULIANO DOEDERLEIN SOARES",
+   "exequente": "Daniel Juliano Doederlein Soares",
+   "executado": "BACEN",
+   "grupo": "5",
+   "tipo_caso": "5 · BACEN — só gratuidade",
+   "resultado": "Desprovimento",
+   "modelo": "5006182-94.2024 (5)",
+   "variacoes": [
+    "GRA"
+   ],
+   "observacao": "",
+   "peculiaridades": "Havia duas versões da minuta",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "382548741"
+    },
+    {
+     "peca": "Apelação",
+     "id": "382548742"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "382548744"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "Bacen",
+    "Mérito (triagem)": "Revogação da gratuidade",
+    "Código": "A5",
+    "Tema": "BCB - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (1 trechos)",
+     "RED",
+     "Média"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: remuneração] A apelação informa remuneração mensal superior a R$ 29.000,00. Conferir nos autos o documento-fonte e o valor exato considerado."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 63,
+   "processo": "5007600-67.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "BANCO CENTRAL DO BRASIL x JOAO CARLOS ZANIOLO COSTA",
+   "exequente": "Joao Carlos Zaniolo Costa",
+   "executado": "BACEN",
+   "grupo": "5",
+   "tipo_caso": "5 · BACEN — só gratuidade",
+   "resultado": "Desprovimento",
+   "modelo": "5006182-94.2024 (5)",
+   "variacoes": [
+    "GRA"
+   ],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Victor",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "Bacen",
+    "Preliminares": "Revogação gratuidade",
+    "Mérito (triagem)": "Condenação em honorários",
+    "Código": "A5",
+    "Tema": "BCB - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 77,
+   "processo": "5007255-04.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "BANCO CENTRAL DO BRASIL x UNIÃO FEDERAL",
+   "exequente": "—",
+   "executado": "BACEN x União",
+   "grupo": "5",
+   "tipo_caso": "5 · BACEN — só gratuidade",
+   "resultado": "Desprovimento",
+   "modelo": "5006182-94.2024 (5)",
+   "variacoes": [
+    "GRA"
+   ],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Victor",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "Bacen",
+    "Mérito (triagem)": "Revogação da gratuidade",
+    "Código": "A5",
+    "Tema": "BCB - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 82,
+   "processo": "5006849-80.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "BANCO CENTRAL DO BRASIL x SERGIO ANTONIO CRUZ BRAGA",
+   "exequente": "Sergio Antonio Cruz Braga",
+   "executado": "BACEN",
+   "grupo": "5",
+   "tipo_caso": "5 · BACEN — só gratuidade",
+   "resultado": "Desprovimento",
+   "modelo": "5006182-94.2024 (5)",
+   "variacoes": [
+    "GRA"
+   ],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Victor",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "Bacen",
+    "Mérito (triagem)": "Revogação da gratuidade",
+    "Código": "A5",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 58,
+   "processo": "5006767-49.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "JOAO ALBERTO MAGRO x BANCO CENTRAL DO BRASIL",
+   "exequente": "Joao Alberto Magro",
+   "executado": "BACEN",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo passivo",
+   "resultado": "Desprovimento",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "DUAS"
+   ],
+   "observacao": "",
+   "peculiaridades": "Duas apelações (exequente e BACEN); havia duas versões da minuta",
+   "peculiaridades_relator": "Duas apelações (exequente e BACEN)",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "344418333"
+    },
+    {
+     "peca": "Embargos",
+     "id": "344418339"
+    },
+    {
+     "peca": "Apelação",
+     "id": "344418341"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "344418344"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "412006477"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "2 apelações",
+    "Preliminares": "Revogação gratuidade",
+    "Mérito (triagem)": "autor: legitimidade bacen e devolução dos autos / Bacen: Condenação em honorários",
+    "Código": "A1/A5",
+    "Tema": "BCB - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto",
+     "Transcrições de precedentes alteradas (nomes, datas, \"art.\", supressões)",
+     "Restaurado o texto literal do modelo (6 trechos)",
+     "DOC",
+     "Alta"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (27 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A gratuidade da justiça não pode ser revogada com base exclusivamente em critério objetivo de renda, conforme …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "Conferir, antes da assinatura, a redação e a aplicabilidade ao caso dos percentuais de honorários da faixa do artigo 85, § 3º, do Código de Processo Civil, bem como o rateio entre os requeridos.",
+    "Confirmar nos autos da ação civil pública a ausência de citação e participação do BACEN na fase de conhecimento, conforme a documentação da ACP juntada sob ID 344418326.",
+    "Conferir o alcance do recolhimento de custas apresentado em dezembro de 2025 (IDs 346970053, 346970056 e 346970057) diante da gratuidade concedida por decisão de 02/07/2025 (ID 344418339).",
+    "O catálogo consultado não confirma o resultado da ApCiv 5006171-65.2024.4.03.6000; não se atribuiu a esse processo tese dispositiva específica."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 59,
+   "processo": "5006983-10.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "TARCISIO JOSE SILVEIRA x BANCO CENTRAL DO BRASIL",
+   "exequente": "Tarcisio Jose Silveira",
+   "executado": "BACEN",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo passivo",
+   "resultado": "Desprovimento",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "DUAS"
+   ],
+   "observacao": "",
+   "peculiaridades": "Duas apelações (exequente e BACEN)",
+   "peculiaridades_relator": "Duas apelações (exequente e BACEN)",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "350966424"
+    },
+    {
+     "peca": "Embargos",
+     "id": "374410227"
+    },
+    {
+     "peca": "Apelação",
+     "id": "396315766"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "2 apelações",
+    "Preliminares": "Revogação gratuidade",
+    "Mérito (triagem)": "autor: legitimidade bacen e devolução dos autos / Bacen: Condenação em honorários",
+    "Código": "A1/A5",
+    "Tema": "BCB - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (7 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: percentual numérico dos honorários.] A minuta conserva a fórmula do modelo — percentual mínimo da faixa de enquadramento — sem indicar percentual numérico, pois os documentos selecionados não registram esse arbitramento.",
+    "[VALIDAR: referência a “artigo 331” no módulo H-331.] O modelo determina o uso do módulo em cenário de extinção antes da citação; confirmar a adequação da referência normativa antes da assinatura.",
+    "[VALIDAR: resultado do julgamento colegiado.] Os movimentos disponibilizados registram inclusão em pauta e intimação de pauta para novembro de 2026, mas não informam julgamento já realizado. A minuta está redigida como proposta de voto, conforme o resultado previsto no modelo."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 62,
+   "processo": "5007584-16.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "WALTER BRESSAN x UNIÃO FEDERAL",
+   "exequente": "Walter Bressan",
+   "executado": "União",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo passivo",
+   "resultado": "Desprovimento",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "DUAS"
+   ],
+   "observacao": "",
+   "peculiaridades": "Duas apelações (exequente e BACEN)",
+   "peculiaridades_relator": "Duas apelações (exequente e BACEN)",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "355866588"
+    },
+    {
+     "peca": "Embargos",
+     "id": "355866593"
+    },
+    {
+     "peca": "Apelação",
+     "id": "355866596"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "355866595"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "371754433"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {
+    "Apelante": "2 apelações",
+    "Preliminares": "Revogação gratuidade",
+    "Mérito (triagem)": "autor: legitimidade bacen e devolução dos autos / Bacen: Condenação em honorários",
+    "Código": "A1/A5",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (14 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] A minuta nega provimento às duas apelações e, simultaneamente, fixa honorários em favor das partes requeridas. Como o BACEN também recorreu pedindo a fixação de honorários, convém confirmar se a verba deve ser tratada como consequência do desprovimento da apelação do exequente, sem acolhimento da apelação autônoma do BACEN."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 64,
+   "processo": "5007636-12.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "VELUZIA FERNANDES DE OLIVEIRA x BANCO CENTRAL DO BRASIL",
+   "exequente": "Veluzia Fernandes De Oliveira",
+   "executado": "BACEN",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo passivo",
+   "resultado": "Desprovimento",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "DUAS"
+   ],
+   "observacao": "",
+   "peculiaridades": "Duas apelações (exequente e BACEN)",
+   "peculiaridades_relator": "Duas apelações (exequente e BACEN)",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "355866288"
+    },
+    {
+     "peca": "Embargos",
+     "id": "355866293"
+    },
+    {
+     "peca": "Apelação",
+     "id": "355866295"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "355866298"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "375562538"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {
+    "Apelante": "2 apelações",
+    "Preliminares": "Revogação gratuidade",
+    "Mérito (triagem)": "autor: legitimidade bacen e devolução dos autos / Bacen: Condenação em honorários",
+    "Código": "A1/A5",
+    "Tema": "BCB - 28,86%, ACP"
+   },
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (18 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Não é nula a sentença que extingue liminarmente o processo sem resolução do mérito por ilegitimidade passiva, …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A discussão sobre a ilegitimidade ativa da exequente fica prejudicada diante da suficiência da confirmação da …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A gratuidade da justiça não pode ser revogada com fundamento exclusivamente em critério objetivo de renda, con…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"negou provimento à apelação\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: conferir no documento integral da sentença e da decisão dos embargos de declaração a identificação e a data da sentença recorrida, bem como a extensão precisa da fundamentação sobre ilegitimidade ativa.]",
+    "[VALIDAR: conferir o percentual e o valor dos honorários sucumbenciais a serem fixados, conforme o valor atualizado da causa e a faixa aplicável do artigo 85, § 3º, do Código de Processo Civil.]",
+    "[VALIDAR: conferir a composição do órgão julgador e a redação final do acórdão antes da assinatura.]"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 67,
+   "processo": "5008343-77.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "CARLOS GILBERTO LIMA COSTA x UNIÃO FEDERAL",
+   "exequente": "Carlos Gilberto Lima Costa",
+   "executado": "União",
+   "grupo": "7",
+   "tipo_caso": "7 · Razões dissociadas",
+   "resultado": "Não conhecimento",
+   "modelo": "5006685-18.2024 (7-b)",
+   "variacoes": [
+    "ORI"
+   ],
+   "observacao": "Enquadramento: grupo 1 ou 7",
+   "peculiaridades": "Triagem: razões dissociadas; a análise dos autos indica sentença por falta de vínculo e apelação que a enfrenta (grupo 1) [VALIDAR]",
+   "peculiaridades_relator": "Triagem como razões dissociadas",
+   "orientacao": "Enquadramento: razões dissociadas (grupo 7) ou grupo 1, conforme a sentença e a apelação",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "Acordo Administrativo - Tema 550STJ / Tema 1102/STJ",
+    "Código": "A6/A2",
+    "Tema": "União - 28,86%, ACP",
+    "Obs. da triagem": "Sentença extintiva por limitação territorial"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 80,
+   "processo": "5008465-90.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "LUIZ SERGIO CARVALHO TEIXEIRA x UNIÃO FEDERAL",
+   "exequente": "Luiz Sergio Carvalho Teixeira",
+   "executado": "União",
+   "grupo": "7",
+   "tipo_caso": "7 · Razões dissociadas",
+   "resultado": "Não conhecimento",
+   "modelo": "5006685-18.2024 (7-b)",
+   "variacoes": [
+    "ORI"
+   ],
+   "observacao": "Sentença por limitação; apelação sobre acordo",
+   "peculiaridades": "Sentença só pela limitação; apelação-modelo trata de acordo (Tema 1.102/STJ); combinação sem acórdão-modelo (inverso do 7-b)",
+   "peculiaridades_relator": "Sentença só pela limitação; apelação trata de acordo (Tema 1.102/STJ)",
+   "orientacao": "Combinação sem acórdão-modelo: sentença por limitação e apelação sobre acordo",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 152,
+   "processo": "5003544-88.2024.4.03.6000",
+   "recurso": "ED em apelação (acórdão de provimento)",
+   "partes": "ROSANGELA TORRES MODESTO x UNIÃO FEDERAL",
+   "exequente": "Rosangela Torres Modesto",
+   "executado": "União",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [],
+   "observacao": "Tema 1.302/STJ e LINDB",
+   "peculiaridades": "União; Tema 1.302/STJ, LINDB e AREsps do STJ",
+   "peculiaridades_relator": "União; Tema 1.302/STJ, LINDB e AREsps do STJ",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Parecer do MPF",
+     "id": "391392116"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (11 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A alegação fundada em manifestação proferida no curso da ação civil pública originária foi enfrentada no acórd…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: O acórdão embargado reconheceu a legitimidade ativa da exequente e afastou o sobrestamento relacionado aos Tem…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A pretensão de rever a conclusão adotada, sob alegação de omissão por não acolhimento de tese favorável à emba…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Não se trata de omissão ou de outro vício sanável na via eleita, mas de tentativa de rediscutir matéria decidi…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Para efeito de prequestionamento, consideram-se incluídos no acórdão os elementos suscitados pela embargante, …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] Conferir a íntegra dos embargos de declaração, documento de ID 404350189, para confirmar a formulação exata dos vícios, os dispositivos indicados para prequestionamento e todos os fundamentos da alegação de omissão. A descrição disponível decorre das contrarrazões.",
+    "O trecho do modelo “com os apontados destacados” foi mantido por não permitir identificar com segurança a correção pretendida sem alterar o texto padronizado."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 153,
+   "processo": "5003797-42.2025.4.03.6000",
+   "recurso": "ED em apelação (acórdão de provimento)",
+   "partes": "CILENE RIBEIRO SANTOS x FUNDACAO INSTIT BRAS DE GEOGRAFIA E ESTATISTICA IBGE",
+   "exequente": "Cilene Ribeiro Santos",
+   "executado": "IBGE",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [
+    "PRE",
+    "ORI"
+   ],
+   "observacao": "Protesto interruptivo (Tema 880/STJ)",
+   "peculiaridades": "IBGE; prescrição, protesto interruptivo (Tema 880/STJ) e Tema 1.033/STJ [VALIDAR]",
+   "peculiaridades_relator": "IBGE",
+   "orientacao": "Prescrição, protesto interruptivo (Tema 880/STJ) e Tema 1.033/STJ",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Parecer do MPF",
+     "id": "393105376"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR: conferir no inteiro teor dos embargos de declaração, ID 404131327, se as alegações e os pedidos foram sintetizados integralmente, em especial quanto à prescrição, ao protesto interruptivo e aos Temas 1.033 e 1.433 do Superior Tribunal de Justiça.]",
+    "O parecer do Ministério Público Federal mencionado no relatório é anterior ao julgamento da apelação e opinou pelo regular prosseguimento do feito; não consta parecer ministerial específico sobre o mérito dos embargos. A ciência posterior da inclusão em pauta não foi tratada como manifestação de mérito (ID 393105376) (ID 410072664)",
+    "Correção de erro material do texto-base: “embargosde” foi ajustado para “embargos de” na ementa transcrita no relatório. A referência aos Temas 1.302 e 1.433 do Superior Tribunal de Justiça foi mantida conforme o modelo fornecido; confirmar a pertinência da menção ao Tema 1.302 neste caso."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 154,
+   "processo": "5002655-66.2026.4.03.6000",
+   "recurso": "ED em apelação (acórdão de provimento)",
+   "partes": "NANCI FREITAS x UNIÃO FEDERAL",
+   "exequente": "Nanci Freitas",
+   "executado": "União",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [
+    "PEN"
+   ],
+   "observacao": "",
+   "peculiaridades": "União; pensionista",
+   "peculiaridades_relator": "União; pensionista",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Embargos",
+     "id": "406982280"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "392717130"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (3 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "O teor integral dos embargos de declaração da União, identificados no andamento como ID 404355836, não consta dos documentos selecionados. É necessário conferir e substituir a indicação “[VALIDAR]” pelas alegações efetivamente apresentadas.",
+    "O acórdão de 05/10/2026 enfrentou expressamente o Tema 1.433/STJ, mas o texto disponível não registra discussão do Tema 1.302/STJ. Deve-se conferir o ID 404355836 e avaliar a pertinência das referências ao Tema 1.302/STJ constantes do modelo de voto e da ementa.",
+    "A manifestação do MPF de ID 392717130 antecede o julgamento da apelação e não versa especificamente sobre os embargos de declaração. Convém confirmar se deve ser mencionada no relatório desta fase."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 156,
+   "processo": "5001271-05.2025.4.03.6000",
+   "recurso": "ED em apelação (acórdão de provimento)",
+   "partes": "SANDRA REGINA FLORES TEIXEIRA x INSS",
+   "exequente": "Sandra Regina Flores Teixeira",
+   "executado": "INSS",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [
+    "PRE",
+    "GRA"
+   ],
+   "observacao": "",
+   "peculiaridades": "INSS; acórdão tratou prescrição e gratuidade",
+   "peculiaridades_relator": "INSS; acórdão tratou prescrição e gratuidade",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Embargos",
+     "id": "405636365"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "369908663"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "A petição de embargos de declaração indicada no andamento como documento ID 404256992 não consta entre os documentos disponibilizados. É necessário conferir o teor da peça para confirmar os vícios alegados e se há pedido de multa.",
+    "A ementa reproduzida no relatório foi elaborada a partir do acórdão disponível em (ID 402486761); conferir a redação integral da ementa embargada antes da assinatura.",
+    "Confirmar a pertinência da manifestação ministerial de ID 369908663 ao relatório dos embargos, pois ela foi apresentada antes do acórdão embargado e opinou pelo regular prosseguimento do feito, não especificamente sobre os embargos.",
+    "Confirmar, nos autos, a referência à afetação dos Temas 1.302/STJ e 1.433/STJ, mencionada no texto do modelo, mas não identificada nos documentos processuais disponíveis."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 157,
+   "processo": "5009725-71.2025.4.03.6000",
+   "recurso": "ED em apelação (acórdão de provimento)",
+   "partes": "DESIMAR VIANA DE CASTRO x INSS",
+   "exequente": "Desimar Viana De Castro",
+   "executado": "INSS",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [],
+   "observacao": "Agravo interno anterior",
+   "peculiaridades": "INSS; agravo interno anterior",
+   "peculiaridades_relator": "INSS; agravo interno anterior",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Parecer do MPF",
+     "id": "369908834"
+    }
+   ],
+   "mpf": "A Procuradoria Regional da República [[]] deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] O inteiro teor dos embargos de declaração do INSS não consta entre os documentos selecionados. A descrição das alegações foi extraída das contrarrazões e dos movimentos processuais.",
+    "[VALIDAR] O módulo ED-TERR e a ementa-base mencionam o Tema 1.302/STJ, mas a documentação selecionada não confirma que esse tema tenha sido suscitado nos embargos ou examinado no acórdão embargado. A referência foi mantida conforme o texto do modelo, mas deve ser conferida antes da assinatura."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 158,
+   "processo": "5003386-96.2025.4.03.6000",
+   "recurso": "ED em apelação (acórdão de provimento)",
+   "partes": "ANDRE LUIS GUIMARAES DE SA x INSS",
+   "exequente": "Andre Luis Guimaraes De Sa",
+   "executado": "INSS",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [
+    "SUC"
+   ],
+   "observacao": "",
+   "peculiaridades": "INSS; 10 exequentes (espólio e herdeiros)",
+   "peculiaridades_relator": "INSS; 10 exequentes (espólio e herdeiros)",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Parecer do MPF",
+     "id": "388370218"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (30 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Não se cogita de omissão quanto à afetação de temas repetitivos, pois não houve determinação de suspensão dos …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: A discordância da embargante com a conclusão adotada e a pretensão de rediscutir a matéria não configuram víci…",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Ementa",
+     "Item redigido pela LIA sem correspondente literal no modelo: Para efeito de prequestionamento, consideram-se incluídos no acórdão os elementos suscitados pela embargante, …",
+     "Mantido; conferir [VALIDAR]",
+     "EST",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] O inteiro teor dos embargos de declaração, especialmente os vícios apontados, os argumentos apresentados e os dispositivos indicados para prequestionamento, não foi localizado entre os documentos disponibilizados. A síntese das contrarrazões não detalha as alegações específicas.",
+    "Conferir se houve pedido expresso de aplicação da multa do artigo 1.026, § 2º, do CPC, pois a síntese das contrarrazões informa que a iniciativa foi considerada protelatória, mas não confirma esse pedido."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 178,
+   "processo": "5000162-71.2026.4.03.0001",
+   "recurso": "ED em agravo interno em AI",
+   "partes": "UNIÃO FEDERAL x BERENICE ALBUQUERQUE NUNES",
+   "exequente": "Berenice Albuquerque Nunes",
+   "executado": "União",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [],
+   "observacao": "ED em agravo interno em AI",
+   "peculiaridades": "União; ED contra acórdão em agravo interno em AI",
+   "peculiaridades_relator": "União; ED contra acórdão em agravo interno em AI",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "[VALIDAR] O inteiro teor dos embargos de declaração da União, juntados sob o documento ID 406779082, não está entre os documentos selecionados. As alegações foram sintetizadas a partir das contrarrazões, que indicam pedido de sobrestamento em razão do Tema 1.433/STJ e reiteração da tese de limitação territorial e ilegitimidade ativa. [VALIDAR] Conferir no documento ID 406779082 os vícios, dispositivos e pedidos efetivamente suscitados, bem como a ementa transcrita no relatório. O acórdão embargado e sua ementa constam, respectivamente, dos documentos (ID 398169089) e (ID 393358717)."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 183,
+   "processo": "5024625-17.2025.4.03.0000",
+   "recurso": "ED em agravo interno em AI",
+   "partes": "INSS x ESTEVAM MARINHO PINTO MOREIRA",
+   "exequente": "Estevam Marinho Pinto Moreira",
+   "executado": "INSS",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [],
+   "observacao": "ED em agravo interno em AI; Tema 1.433/STJ",
+   "peculiaridades": "INSS; alegada contradição e Tema 1.433/STJ",
+   "peculiaridades_relator": "INSS; alegada contradição e Tema 1.433/STJ",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "O conteúdo da petição de embargos de declaração, registrada sob o ID 402612104, não está entre os documentos fornecidos. Precisam ser conferidos o vício alegado, os argumentos, os pedidos e a parte embargante. Não consta resposta aos embargos nos documentos fornecidos. É necessário verificar se houve manifestação da parte embargada e se foi requerido o desprovimento ou a aplicação de multa.",
+    "Não consta manifestação do Ministério Público Federal especificamente sobre os embargos; por isso, não foi incluído parágrafo a esse respeito no relatório."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 187,
+   "processo": "5008082-15.2024.4.03.6000",
+   "recurso": "ED",
+   "partes": "MARCOS JOSE DO ESPIRITO SANTO QUADROS x INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
+   "exequente": "Marcos Jose Do Espirito Santo Quad…",
+   "executado": "INCRA",
+   "grupo": "8",
+   "tipo_caso": "8 · Embargos de declaração",
+   "resultado": "Rejeição dos ED",
+   "modelo": "5008731-43.2025 (8-a)",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [
+    {
+     "peca": "Parecer do MPF",
+     "id": "375548820"
+    }
+   ],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Local",
+     "Problema",
+     "Correção",
+     "Natureza",
+     "Criticidade"
+    ],
+    [
+     "Voto e ementa",
+     "Fórmulas do modelo reescritas (palavras trocadas, abreviações, siglas)",
+     "Restaurado o texto do modelo (2 trechos)",
+     "RED",
+     "Média"
+    ],
+    [
+     "Acórdão",
+     "Fórmula diferente da do grupo",
+     "Padronizado: \"rejeitou os embargos de declaração\"",
+     "EST",
+     "Baixa"
+    ]
+   ],
+   "pendencias": [
+    "Confirmar se os embargos suscitaram a afetação do Tema 1.302/STJ e se houve pronunciamento específico sobre essa questão no acórdão embargado. A referência foi mantida com marcação de validação porque não está confirmada nos documentos selecionados."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 43,
+   "processo": "5005888-42.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "ANA CLEZIA FERREIRA NUNES x UNIÃO FEDERAL Sessão de Julgamento ORDINÁRIA PRESENCIAL / VIDEOCONFERÊNCIA, segunda- feira, 7 de dezembro de 2026 às 14:00",
+   "exequente": "Ana Clezia Ferreira Nunes",
+   "executado": "União",
+   "grupo": null,
+   "tipo_caso": "Voto próprio",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Ingresso após a MP 1.704/1998",
+   "peculiaridades": "Ingresso após a MP 1.704/1998, sem resíduo",
+   "peculiaridades_relator": "Ingresso após a MP 1.704/1998, sem resíduo",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Voto próprio"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "inexistência de limitação territorial e legitimidade ativa / Tema 1075STF",
+    "Código": "A1",
+    "Tema": "União - 28,86%, ACP",
+    "Obs. da triagem": "Pedido subsidiário"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 49,
+   "processo": "5005200-80.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "MARK OLIVEIRA DE MORAES SILVA BOLGHERONI x UNIÃO FEDERAL",
+   "exequente": "Mark Oliveira De Moraes Silva Bolg…",
+   "executado": "União",
+   "grupo": null,
+   "tipo_caso": "Voto próprio",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Ingresso após a MP 1.704/1998",
+   "peculiaridades": "Ingresso após a MP 1.704/1998, sem resíduo",
+   "peculiaridades_relator": "Ingresso após a MP 1.704/1998, sem resíduo",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Voto próprio"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "Extensão dos efeitos da coisa julgada a servidor que ingressou no serviço público em 2005 / Não aplicação do Tema 549/STJ",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 39,
+   "processo": "5001686-90.2022.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "JOHN KLEBER TEIXEIRA PIRES x UNIÃO FEDERAL",
+   "exequente": "John Kleber Teixeira Pires",
+   "executado": "União",
+   "grupo": null,
+   "tipo_caso": "Sem modelo",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Fora da triagem",
+   "peculiaridades": "Fora da triagem",
+   "peculiaridades_relator": "Fora da triagem",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Sem modelo"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 41,
+   "processo": "5002966-91.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "SINDICATO DOS SERVIDORES PUBLICOS FEDERAIS ESTADO DE MS x UNIÃO FEDERAL",
+   "exequente": "Sindicato Dos Servidores Publicos …",
+   "executado": "União",
+   "grupo": null,
+   "tipo_caso": "Sem modelo",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Protesto interruptivo de sindicato",
+   "peculiaridades": "Protesto interruptivo de sindicato",
+   "peculiaridades_relator": "Protesto interruptivo de sindicato",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Sem modelo"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "SINTSEP/MS",
+    "Mérito (triagem)": "Recebimento de protesto interruptivo da prescrição da pretensão",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 42,
+   "processo": "5004770-31.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "SINDICATO DOS TRAB FED EM S E PREVIDENCIA SOCIAL NO DF x UNIÃO FEDERAL",
+   "exequente": "Sindicato Dos Trab Fed Em S E Prev…",
+   "executado": "União",
+   "grupo": null,
+   "tipo_caso": "Sem modelo",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Protesto interruptivo de sindicato",
+   "peculiaridades": "Protesto interruptivo de sindicato",
+   "peculiaridades_relator": "Protesto interruptivo de sindicato",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Sem modelo"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "SINDPREV-DF",
+    "Mérito (triagem)": "Recebimento de protesto interruptivo da prescrição da pretensão",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 70,
+   "processo": "5010122-04.2023.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "JEANNETTE DE FATIMA LINS FREITAS DE BRITO x UNIÃO FEDERAL",
+   "exequente": "Jeannette De Fatima Lins Freitas D…",
+   "executado": "União",
+   "grupo": null,
+   "tipo_caso": "Sem modelo",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Valores do acordo administrativo",
+   "peculiaridades": "Discordância dos valores do acordo administrativo",
+   "peculiaridades_relator": "Discordância dos valores do acordo administrativo",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Sem modelo"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "Discordância valores do acordo administrativo - imprescindibilidade de remessa dos autos para a contadoria",
+    "Tema": "União - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 84,
+   "processo": "0003720-27.2002.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "EDSON PEREIRA CAMPOS x INSS",
+   "exequente": "Edson Pereira Campos",
+   "executado": "INSS",
+   "grupo": null,
+   "tipo_caso": "Sem modelo",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Base de cálculo dos honorários",
+   "peculiaridades": "Honorários — base de cálculo",
+   "peculiaridades_relator": "Honorários — base de cálculo",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Sem modelo"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "patronos",
+    "Preliminares": "prescrição",
+    "Mérito (triagem)": "Honorários advocatícios - alteração da base de cálculo",
+    "Tema": "INSS - 28,86%, ACP"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 85,
+   "processo": "0000101-83.2025.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "CLEONICE MARCELINA DA SILVA x UNIÃO FEDERAL",
+   "exequente": "Cleonice Marcelina Da Silva",
+   "executado": "União",
+   "grupo": null,
+   "tipo_caso": "Sem modelo",
+   "resultado": "—",
+   "modelo": "Sem modelo",
+   "variacoes": [],
+   "observacao": "Remessa ao juízo competente",
+   "peculiaridades": "Ilegitimidade ativa com pedido de remessa ao juízo competente",
+   "peculiaridades_relator": "Ilegitimidade ativa com pedido de remessa ao juízo competente",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Bruno (pendente)",
+    "correcao": "—",
+    "situacao": "Sem modelo"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "Apelante": "autor",
+    "Mérito (triagem)": "extinção por ilegitimidade ativa (pedido de remessa ao juízo competente)",
+    "Tema": "União - 28,86%, ACP",
+    "Obs. da triagem": "declarar  a legitimidade e devolução dos autos à origem?"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 60,
+   "processo": "5007033-36.2024.4.03.6000",
+   "recurso": "Apelação",
+   "partes": "CLAUDISBEL RODRIGUES DA SILVA x FUNDACAO NACIONAL DE SAUDE",
+   "exequente": "Claudisbel Rodrigues Da Silva",
+   "executado": "FUNASA",
+   "grupo": null,
+   "tipo_caso": "Grupo não anotado",
+   "resultado": "—",
+   "modelo": "—",
+   "variacoes": [],
+   "observacao": "",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Victor",
+    "correcao": "—",
+    "situacao": "Minutada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false
+  }
+ ]
+}
