@@ -51,6 +51,7 @@ module.exports = async (req, res) => {
         title: [p.titulo, p.data && 'sessão de ' + p.data.split('-').reverse().join('/'),
           !vinculo && 'a vincular'].filter(Boolean).join(' · '),
         message: mensagem.join(' · '), nivel: 'importante', pedidoId: p.id,
+        ...(vinculo && porData.has(vinculo.sessao) && { sessao: vinculo.sessao, numero: p.cnj }),
       });
     });
     pubs.forEach((s, i) => { const d = docs[i]; if (!d) return; ((d.itens || []).length ? d.itens : (d.previa || [])).forEach(it => {
@@ -101,17 +102,23 @@ module.exports = async (req, res) => {
         nivel: dias <= 1 ? 'urgente' : 'importante', sessao: s.date });
     });
     ((pend || {}).registros || []).forEach(t => {
+      const indice = pubs.findIndex(s => s.date === t.sessao);
+      const pauta = indice >= 0 ? docs[indice] : null;
+      const cnj = String(t.numero || '').replace(/\D/g, '');
+      const destino = cnj.length === 20 && pauta && ((pauta.itens || []).concat(pauta.previa || []))
+        .some(it => String(it.cnj || '').replace(/\D/g, '') === cnj)
+        ? { sessao: t.sessao, numero: t.numero } : {};
       if (!t.excluida && t.stage !== 'done' && L.norm(t.assignee) === eu && L.dataOk(t.dueDate)) {
         const dias = Math.round((Date.parse(t.dueDate) - Date.parse(hj)) / 86400e3);
         if (dias <= 1) {
           ev.push({ id: 'pe-prazo-'+t.id+'-'+hj, time: hj+'T04:00:00.000Z', action: 'pendencia',
             title: (dias < 0 ? 'Pendência vencida' : dias === 0 ? 'Pendência vence hoje' : 'Pendência vence amanhã')+' · '+t.title,
             message: [t.numero, 'prazo '+t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '),
-            nivel: dias <= 0 ? 'urgente' : 'importante' });
+            nivel: dias <= 0 ? 'urgente' : 'importante', ...destino });
         }
       }
       if (L.norm(t.atualizadoPor) === eu) return; if (L.norm(t.assignee) !== eu && L.norm(t.creator) !== eu) return;
-      ev.push({ id: 'pe-' + t.id + '-' + (t._rev || 1), time: t.atualizadoEm, action: 'pendencia', user: t.atualizadoPor, title: (t.excluida ? 'Diligência excluída' : t.stage === 'done' ? 'Diligência concluída' : (t._rev || 1) === 1 ? 'Nova diligência para você' : 'Diligência atualizada') + ' · ' + t.title, message: [t.numero, t.dueDate && 'prazo ' + t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '), resolved: t.stage === 'done' });
+      ev.push({ id: 'pe-' + t.id + '-' + (t._rev || 1), time: t.atualizadoEm, action: 'pendencia', user: t.atualizadoPor, title: (t.excluida ? 'Diligência excluída' : t.stage === 'done' ? 'Diligência concluída' : (t._rev || 1) === 1 ? 'Nova diligência para você' : 'Diligência atualizada') + ' · ' + t.title, message: [t.numero, t.dueDate && 'prazo ' + t.dueDate.split('-').reverse().join('/')].filter(Boolean).join(' · '), resolved: t.stage === 'done', ...destino });
     });
     ((aus || {}).registros || []).forEach(a => { if (L.norm(a.nome) !== eu || !a.decididoEm || L.norm(a.decididoPor) === eu) return;
       ev.push({ id: 'au-' + a.id + '-' + a.estado, time: a.decididoEm, action: 'ausencia', user: a.decididoPor || 'Responsável', title: 'Ausência ' + a.estado + ' · ' + a.tipo, message: a.de.split('-').reverse().join('/') + (a.ate !== a.de ? ' a ' + a.ate.split('-').reverse().join('/') : '') + (a.obs ? ' · ' + a.obs : '') }); });
