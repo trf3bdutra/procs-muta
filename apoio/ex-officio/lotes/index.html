@@ -105,6 +105,13 @@ a{color:inherit}
 .cmt-ld-b i{display:block;width:40%;height:100%;background:var(--eg);animation:cmtb 1.2s ease-in-out infinite}
 @keyframes cmtb{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
 [hidden]{display:none!important}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;padding:12px 0}
+.form label{display:flex;flex-direction:column;gap:4px;font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+.form .w{grid-column:1/-1}.form .lb{font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+.form input{height:30px;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:13px var(--font);padding:0 9px;text-transform:none;letter-spacing:0}
+.ses{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 12px;margin-top:6px;max-height:220px;overflow:auto;border:1px solid var(--el);background:var(--ew);padding:8px 10px}
+.form .ses label,.ses label{display:flex;flex-direction:row;align-items:center;gap:6px;font:13px var(--font);color:var(--ei);text-transform:none;letter-spacing:0;cursor:pointer}
+.acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0 4px}.acts .k{color:var(--em);font-size:12px}
 .hidden{display:none!important}
 body.relator .so-equipe{display:none!important}
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--eg,#1b5878);color:#fff;padding:8px 16px;font-size:12.5px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
@@ -124,11 +131,12 @@ const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>
 const SECS=[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']];
 const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
-let LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set();
+let LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
 const params=new URLSearchParams(location.search);
 /* link próprio do relator: a chave (k) vale como credencial, como no Painel do relator (/cmt?k=…) */
 const CMTK=(function(){try{const m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){const v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);const q=new URLSearchParams(location.search);q.delete('k');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash.replace(/[#&]?k=[^&#]+/,''))}return sessionStorage.getItem('cmt_k')||''}catch(e){return ''}})();
 async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/painel?lote=1'+(q?'&'+q.replace(/^\?/,''):''),{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
+async function post(b){const r=await fetch('/api/painel?lote=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function mostra(html){$('#ld').hidden=true;const a=$('#app');a.hidden=false;a.innerHTML=html}
 function falha(e){
   if(e.status===401){$('#ld-m').innerHTML='O painel de lotes usa o mesmo acesso do Painel do relator.<br><a class="b pri" style="margin-top:14px" href="/equipe/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
@@ -140,6 +148,7 @@ function cabecalho(lotes,id,usuario){
    <span class="cmt-sp"></span>
    <div class="cmt-ut">
    <label class="hb" title="Lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}</option>`).join('')}</select></label>
+   ${LISTA.gestor?`<button type="button" class="hb" id="b-novo" title="Criar um lote a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo lote</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
    <a class="hb" href="/cmt/" title="Voltar ao Painel do relator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Painel do relator</span></a>
    ${CMTK&&!usuario?'':`<a class="hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`}
    <a class="hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Modus Operandi</span></a>
@@ -149,11 +158,17 @@ function cabecalho(lotes,id,usuario){
 }
 async function inicio(){
   try{
-    const L=await api('');
-    const lotes=L.lotes||[]; if(!lotes.length){mostra('<p class="none">Nenhum lote cadastrado em acervo/lotes.</p>');return}
+    const L=await api('');LISTA={lotes:L.lotes||[],calendario:L.calendario||[],gestor:!!L.gestor};
+    const lotes=LISTA.lotes; if(!lotes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhum lote cadastrado.'+(LISTA.gestor?' Use “Novo lote” para criar o primeiro.':'')+'</p>');ligaCab();if(LISTA.gestor)abrirNovo();return}
     const id=params.get('id')||lotes[0].id;
     const R=await api('?id='+encodeURIComponent(id)); LOTE=R.lote; montar(lotes,id,L.usuario);
   }catch(e){falha(e)}
+}
+function ligaCab(){
+  const sl=$('#sel');if(sl)sl.onchange=()=>{location.search='?id='+encodeURIComponent(sl.value)};
+  $('#atu').onclick=()=>location.reload();
+  $('#tema').onclick=()=>{const d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('cmt-eq-tema',n)}catch(e){}};
+  const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const bs=$('#b-ses');if(bs)bs.onclick=abrirSessoes;
 }
 function gcor(it){return it.grupo&&COR[it.grupo]?COR[it.grupo]:OUT.cor}
 function montar(lotes,id,usuario){
@@ -164,10 +179,10 @@ function montar(lotes,id,usuario){
   const sit=[...new Set(ITENS.map(i=>i.equipe&&i.equipe.situacao).filter(Boolean))];
   const grs=LOTE.grupos.filter(g=>ITENS.some(i=>i.grupo===g.id)).map(g=>({k:g.id,r:g.rotulo,c:g.cor,n:ITENS.filter(i=>i.grupo===g.id).length}));
   if(ITENS.some(i=>!i.grupo))grs.push({k:'',r:'Outros',c:OUT.cor,n:ITENS.filter(i=>!i.grupo).length});
-  mostra(cabecalho(lotes,id,usuario)+`
+  mostra(cabecalho(lotes,id,usuario)+`<div id="gest"></div>
   <section class="cmt-q" id="matriz">
    <h2><i class="nn">01</i><span>Matriz do <em>lote.</em></span><span class="cmt-n">${esc(LOTE.titulo)} · sessões de ${LOTE.sessoes.map(br).join(' e ')}</span><span class="cmt-sp"></span><span class="cmt-n" id="cnt">—</span></h2>
-   <div class="cmt-met" id="met">${grs.map(g=>`<div data-g="${g.k}" style="border-top-color:${g.c}" title="Mostrar ou ocultar"><span>${g.k?g.k+' · ':''}${esc(g.r)}</span><b>${pad(g.n)}</b></div>`).join('')}</div>
+   <div class="cmt-met" id="met">${grs.map(g=>`<div data-g="${g.k}" style="border-top-color:${g.c}" title="Mostrar ou ocultar"><span>${/^\d+$/.test(g.k)?g.k+' · ':''}${esc(g.r)}</span><b>${pad(g.n)}</b></div>`).join('')}</div>
    <div class="cmt-ph"><div class="cmt-ph-2">
      <span class="cmt-seg" role="group" aria-label="Visão"><button type="button" data-vz="rel" aria-pressed="true">Relator</button><button type="button" data-vz="eq" aria-pressed="false">Equipe</button></span>
      <label class="cmt-bq"><input type="search" id="q" placeholder="item, processo, parte ou variação"></label>
@@ -181,15 +196,13 @@ function montar(lotes,id,usuario){
   for(const it of ITENS){
     const c=gcor(it);
     if(it.grupo!==last){const n=ITENS.filter(i=>i.grupo===it.grupo).length,g=LOTE.grupos.find(x=>x.id===it.grupo);
-      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length}" style="border-left:4px solid ${c}"><b>${esc(g?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
+      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
     const cells=LOTE.colunas.map(f=>`<td class="f">${it.variacoes.includes(f.id)?`<span class="dot" title="${esc(f.rotulo)}" style="background:${f.id==='ORI'?'var(--er)':c}"></span>`:''}</td>`).join('');
     h+=`<tr class="r" data-u="${it.uid}"><td style="border-left:4px solid ${c}" class="cnj">${br(it.sessao).slice(0,5)}</td><td class="ii">${pad(it.item)}</td><td class="cnj">${it.processo.slice(0,15)}</td><td>${esc(it.exequente)}</td><td>${esc(it.executado)}</td><td>${/^ED/.test(it.recurso)?'ED':'Apel.'}</td>${cells}<td class="obs">${esc(it.observacao)}</td></tr>`;
   }
   $('#mxb').innerHTML=h;
   $('#profiles').innerHTML=ITENS.map(perfil).join('');
-  $('#sel').onchange=()=>{location.search='?id='+encodeURIComponent($('#sel').value)};
-  $('#atu').onclick=()=>location.reload();
-  $('#tema').onclick=()=>{const d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('cmt-eq-tema',n)}catch(e){}};
+  ligaCab();
   document.querySelectorAll('#mxb tr.r').forEach(r=>r.onclick=()=>vai(r.dataset.u));
   document.querySelectorAll('#met [data-g]').forEach(d=>d.onclick=()=>{const g=d.dataset.g;offG.has(g)?offG.delete(g):offG.add(g);d.classList.toggle('off');filtra()});
   document.querySelectorAll('[data-vai]').forEach(x=>x.onclick=()=>vai(x.dataset.vai));
@@ -272,6 +285,56 @@ function filtra(){
   document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)))});
   document.querySelectorAll('.pf').forEach(p=>p.classList.toggle('hidden',!vis.has(p.dataset.u)));
   $('#cnt').textContent=`${pad(vis.size)} de ${pad(ITENS.length)} processos`;
+}
+
+/* ---------- gestão (só o gestor): criar lote e associar sessões ---------- */
+const slug=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,40);
+function listaSessoes(marcadas,nome){return `<div class="ses">${LISTA.calendario.map(c=>`<label><input type="checkbox" name="${nome}" value="${c.date}"${marcadas.includes(c.date)?' checked':''}> <span class="cnj">${esc(c.nome||br(c.date))}</span> <span class="cmt-n">${c.processos} proc.${c.publicada?'':' · não publicada'}</span></label>`).join('')}</div>`}
+function marcadas(nome){return [...document.querySelectorAll(`input[name="${nome}"]:checked`)].map(x=>x.value)}
+function fechaGest(){$('#gest').innerHTML=''}
+function abrirNovo(){
+  $('#gest').innerHTML=`<section class="cmt-q" id="g-novo"><h2><i class="nn">00</i><span>Novo <em>lote.</em></span><span class="cmt-sp"></span><button type="button" class="b" id="gn-x">Fechar</button></h2>
+   <div class="form">
+    <label>Título<input id="gn-t" placeholder="ex.: Lote PIS/COFINS"></label>
+    <label>Identificador<input id="gn-id" placeholder="ex.: pis-cofins"></label>
+    <label class="w">Descrição<input id="gn-d" placeholder="o que reúne este lote"></label>
+    <div class="w"><span class="lb">Sessões associadas</span>${listaSessoes([],'gn-s')}</div>
+    <label>Assunto contém<input id="gn-a" placeholder="ex.: 28,86 · PIS · Perdimento"></label>
+    <label>Classe contém<input id="gn-c" placeholder="ex.: ApCiv · AI · ED"></label>
+    <label class="w">Texto livre (assunto, partes, observação ou número)<input id="gn-x2" placeholder="opcional"></label>
+   </div>
+   <div class="acts"><button type="button" class="b" id="gn-p">Pré-visualizar</button><button type="button" class="b pri" id="gn-ok">Criar lote</button><span class="k" id="gn-m"></span></div>
+   <div id="gn-prev"></div></section>`;
+  $('#gn-x').onclick=fechaGest;
+  $('#gn-t').oninput=()=>{if(!$('#gn-id').dataset.mexido)$('#gn-id').value=slug($('#gn-t').value)};
+  $('#gn-id').oninput=()=>{$('#gn-id').dataset.mexido='1'};
+  const filtro=()=>({assunto:$('#gn-a').value.trim(),classe:$('#gn-c').value.trim(),texto:$('#gn-x2').value.trim()});
+  $('#gn-p').onclick=async()=>{const ss=marcadas('gn-s');if(!ss.length){toast('Escolha ao menos uma sessão');return}
+    const f=filtro(),q='?previa=1&sessoes='+ss.join(',')+'&assunto='+encodeURIComponent(f.assunto)+'&classe='+encodeURIComponent(f.classe)+'&texto='+encodeURIComponent(f.texto);
+    $('#gn-m').textContent='Lendo as sessões…';
+    try{const r=await api(q);$('#gn-m').textContent=`${r.total} processo${r.total===1?'':'s'} entram (${Object.entries(r.porSessao).map(([d,n])=>br(d)+': '+n).join(' · ')})`;
+      $('#gn-prev').innerHTML=r.amostra.length?`<table class="cmt-tb" style="min-width:0;margin-top:10px"><tr><th>Sessão</th><th>Item</th><th>Processo</th><th>Assunto</th></tr>${r.amostra.map(a=>`<tr><td class="cnj">${br(a.sessao).slice(0,5)}</td><td class="ii">${pad(a.item)}</td><td class="cnj">${esc(a.processo)}</td><td>${esc(a.assunto)}</td></tr>`).join('')}</table>`:''}
+    catch(e){$('#gn-m').textContent=e.message}};
+  $('#gn-ok').onclick=async()=>{const ss=marcadas('gn-s'),id=slug($('#gn-id').value||$('#gn-t').value);
+    if(!$('#gn-t').value.trim()){toast('Dê um título ao lote');return} if(!ss.length){toast('Escolha ao menos uma sessão');return}
+    $('#gn-ok').disabled=true;$('#gn-m').textContent='Criando o lote…';
+    try{const r=await post({acao:'criar',id,titulo:$('#gn-t').value.trim(),descricao:$('#gn-d').value.trim(),sessoes:ss,filtro:filtro()});
+      toast('Lote criado com '+r.total+' processos');location.search='?id='+encodeURIComponent(r.id)}
+    catch(e){$('#gn-m').textContent=e.message;$('#gn-ok').disabled=false}};
+  $('#g-novo').scrollIntoView({behavior:'smooth'});
+}
+function abrirSessoes(){
+  if(!LOTE)return;
+  const f=LOTE.filtro||{}, fd=[f.assunto&&('assunto contém “'+f.assunto+'”'),f.classe&&('classe contém “'+f.classe+'”'),f.texto&&('texto “'+f.texto+'”')].filter(Boolean).join(' · ')||'todos os processos da sessão';
+  $('#gest').innerHTML=`<section class="cmt-q" id="g-ses"><h2><i class="nn">00</i><span>Sessões do <em>lote.</em></span><span class="cmt-n">${esc(LOTE.titulo)} · filtro: ${esc(fd)}</span><span class="cmt-sp"></span><button type="button" class="b" id="gs-x">Fechar</button></h2>
+   <p class="none" style="font-style:normal">Ao associar uma sessão, entram os processos dela que passam no filtro do lote. Ao desassociar, saem os processos daquela sessão. Os demais ficam como estão, com os dados já registrados.</p>
+   ${listaSessoes(LOTE.sessoes||[],'gs-s')}
+   <div class="acts"><button type="button" class="b pri" id="gs-ok">Salvar sessões</button><span class="k" id="gs-m"></span></div></section>`;
+  $('#gs-x').onclick=fechaGest;
+  $('#gs-ok').onclick=async()=>{const ss=marcadas('gs-s');$('#gs-ok').disabled=true;$('#gs-m').textContent='Atualizando o lote…';
+    try{const r=await post({acao:'sessoes',id:LOTE.id,sessoes:ss});toast(`Lote atualizado: +${r.entram} −${r.saem}`);setTimeout(()=>location.reload(),700)}
+    catch(e){$('#gs-m').textContent=e.message;$('#gs-ok').disabled=false}};
+  $('#g-ses').scrollIntoView({behavior:'smooth'});
 }
 inicio();
 })();
