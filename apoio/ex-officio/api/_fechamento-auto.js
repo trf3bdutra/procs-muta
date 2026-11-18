@@ -46,13 +46,8 @@ module.exports = async (req, res) => {
     const privado = [br(hoje)+' às '+hora,
       painel.assinar.assinatura.length+' a assinar · '+painel.assinar.liberacao.length+' monocráticas para liberar',
       painel.urgencias.length+' urgências · '+painel.duvidas.length+' dúvidas', sessao, totais].join(' | ');
-    const wa = await fetch('https://zernio.com/api/v1/inbox/conversations', {
-      method: 'POST',
-      headers: { Authorization: 'Bearer '+env.ZERNIO_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': 'cmt-fechamento-'+hoje },
-      body: JSON.stringify({ accountId: env.CMT_WA_ACCOUNT, participantId: env.CMT_WA_PHONE.replace(/\D/g, ''),
-        templateName: env.CMT_WA_TEMPLATE_FECHAMENTO, templateLanguage: 'pt_BR', templateParams: [privado] }),
-      signal: AbortSignal.timeout(8000),
-    });
+    const { resposta: wa, copia } = await require('./_zernio-copia').enviarModelo({ accountId: env.CMT_WA_ACCOUNT,
+        templateName: env.CMT_WA_TEMPLATE_FECHAMENTO, templateLanguage: 'pt_BR', templateParams: [privado] }, 'cmt-fechamento-'+hoje);
     if (!wa.ok) return res.status(502).json({ erro: 'WhatsApp rejeitou o fechamento.', statusCanal: wa.status });
     const marcos = (painel.prazos || []).filter(p => p.data >= hoje && p.sessao >= hoje)
       .map(p => br(p.data)+' · '+p.marco+' · sessão de '+br(p.sessao)).slice(0,8);
@@ -64,7 +59,7 @@ module.exports = async (req, res) => {
           ({ type: 'TextBlock', text, wrap: true, weight: i ? 'Default' : 'Bolder' })) } }] }),
     });
     if (!teams.ok) return res.status(502).json({ erro: 'Teams rejeitou o fechamento.', statusCanal: teams.status });
-    return res.status(200).json({ ok: true });
+    return res.status(200).json({ ok: true, copia });
   } catch {
     return res.status(502).json({ erro: 'Não foi possível concluir o fechamento automático.' });
   }

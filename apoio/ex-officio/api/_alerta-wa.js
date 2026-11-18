@@ -15,13 +15,8 @@ async function enviar(id, template, resumo) {
   const telefone = String(env.CMT_WA_PHONE || '').replace(/\D/g, '');
   if (!telefone || !env.CMT_WA_ACCOUNT || !env.ZERNIO_API_KEY || !template) return 'sem_configuracao';
   try {
-    const r = await fetch('https://zernio.com/api/v1/inbox/conversations', {
-      method: 'POST',
-      headers: { Authorization: 'Bearer ' + env.ZERNIO_API_KEY, 'Content-Type': 'application/json', 'Idempotency-Key': id },
-      body: JSON.stringify({ accountId: env.CMT_WA_ACCOUNT, participantId: telefone, templateName: template,
-        templateLanguage: 'pt_BR', templateParams: [resumo] }),
-      signal: AbortSignal.timeout(6500),
-    });
+    const { resposta: r } = await require('./_zernio-copia').enviarModelo({ accountId: env.CMT_WA_ACCOUNT, templateName: template,
+        templateLanguage: 'pt_BR', templateParams: [resumo] }, id);
     return r.ok ? 'aceito' : 'falhou';
   } catch {
     return 'falhou';
