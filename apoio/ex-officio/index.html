@@ -1747,6 +1747,17 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
 #v-pauta.pt2:not(.mono) [data-m=mono],#v-pauta.pt2.mono [data-m=pauta]{display:none!important}
 #v-pauta.pt2 .pp-sec{display:block;border-top:2px solid var(--eg);padding:16px 0 0;margin:34px 0 14px;scroll-margin-top:84px}
 #v-pauta.pt2 #pp-and{margin-top:0}
+/* abertura de seção sem texto: só âncora para o sumário */
+.pp-vazio{height:0;padding:0!important;margin:0!important;border:0!important;overflow:hidden}
+#v-pauta.pt2 .pp-vazio{display:block;height:0;padding:0!important;margin:0!important;border:0!important}
+/* números da sessão no trilho da esquerda, logo abaixo do sumário */
+.pp-num-rail{display:none}
+#v-pauta.pt2 .pp-num-rail{display:block;margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--el)}
+#v-pauta.pt2 .pp-num-rail .pp-num-k{margin:0 0 10px;font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
+#v-pauta.pt2 .pp-num-rail .pt-top{display:block!important;margin:0;padding:0;border:0;background:transparent}
+#v-pauta.pt2 .pp-num-rail .pt-k{display:grid!important;grid-template-columns:minmax(0,1fr);gap:10px}
+@media (max-width:980px){#v-pauta.pt2 .pp-num-rail{margin:0 0 18px;padding-top:12px}#v-pauta.pt2 .pp-num-rail .pt-k{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){#v-pauta.pt2 .pp-num-rail .pt-k{grid-template-columns:minmax(0,1fr)}}
 #v-pauta.pt2 .pp-sec .ctl-k{margin:0;font:400 10.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
 #v-pauta.pt2 .pp-sec h2{margin:6px 0 4px;font-size:30px;line-height:1.1;font-weight:700;letter-spacing:-.03em;color:var(--ei)}
 #v-pauta.pt2 .pp-sec .ctl-d{margin:0;max-width:680px;font-size:13.5px;color:var(--em)}
@@ -1779,20 +1790,66 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
 <div id="app" hidden>
   <header class="nx"><div class="nx1"><span class="br"><i class="star" aria-hidden="true"></i></span><button class="nx-nav" id="nx-nav" type="button" aria-expanded="false" aria-controls="nx-tabs" title="Seções (Esc fecha)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span id="nx-nav-t">Pautas</span></button><div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><div class="nx-cad"><b class="nx-on">Ex Officio<em>.</em></b><span class="nx-sl" aria-hidden="true">/</span><span class="eq-grp"><a class="eq-cmp" href="/modus/" title="Abrir o Compendium (referenciais do gabinete)">Compendium</a></span></div></div><nav class="tabs" id="nx-tabs" aria-label="Seções"><a href="#pauta" data-vw="pauta"><i class="nx-n">01</i>Pautas</a><a href="#mono" data-vw="mono"><i class="nx-n">02</i>Monocráticas</a><a href="#controles" data-vw="ctrl"><i class="nx-n">03</i>Monitoramento</a><span id="salvo"></span></nav><span class="sp"></span><div class="nx-ut"><button class="hb hbx nx-tx" id="b-not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="c-not" hidden></i></button><div class="nx-mn" id="nx-mn"><button class="hb hbx nx-tx" id="b-pen" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="c-pen" hidden></i></button><button class="hb ic" id="b-atu" title="Atualizar tudo (pauta, avisos, diligências e calendário)" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button><button class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></button><span class="chip-u"><b id="u-ini"></b><span id="u-nome"></span></span><button class="hb ic" id="u-prod" type="button" title="Baixar o histórico de produtividade (.xlsx)" aria-label="Baixar o histórico de produtividade"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="hb ic" id="sair" title="Sair" aria-label="Sair"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h3"/><path d="M14 8l4 4-4 4M18 12H9"/></svg></button></div><button class="hb ic" id="nx-mais" type="button" title="Mais opções" aria-label="Mais opções" aria-expanded="false" aria-controls="nx-mn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></div></header>
   <main id="v-cmt" hidden>
-    <div class="cmt-load" id="cmt-load"><i class="star"></i><p class="cmt-ld-k">Gabinete</p><p class="cmt-ld-t">Painel do <em>desembargador.</em></p><p class="cmt-ld-m" id="cmt-ld-m">Lendo a ficha única, o calendário das sessões e as pautas publicadas…</p><div class="cmt-ld-b"><i></i></div></div>
-    <div class="cmt-wrap" id="cmt-wrap" hidden>
-      <div class="cmt-top"><p class="cmt-ey">04 / Gabinete</p><p class="cmt-sub" id="cmt-sub"></p><span class="cmt-sp"></span><div id="cmt-l-ses" class="cmt-ses-sel"></div><button type="button" class="b" id="cmt-atu">Atualizar</button></div>
+  <div class="cmt-load" id="cmt-load"><i class="star"></i><p class="cmt-ld-k">Gabinete</p><p class="cmt-ld-t">Painel do <em>relator.</em></p><p class="cmt-ld-m" id="cmt-ld-m">Lendo a ficha única, o calendário das sessões e as pautas publicadas…</p><div class="cmt-ld-b"><i></i></div></div>
+  <div class="cmt-wrap" id="cmt-wrap" hidden>
 
-      <section class="cmt-q cmt-ad"><h2>Assinaturas e <em>dúvidas.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-ad">—</span></h2>
-        <div class="cmt-raias">
-          <div><p class="cmt-k">Para assinatura <span class="cmt-n" id="cmt-n-ass">—</span></p><div id="cmt-c-ass"></div></div>
-          <div><p class="cmt-k">Para liberação <span class="cmt-n" id="cmt-n-lib">—</span></p><div id="cmt-c-lib"></div></div>
-          <div><p class="cmt-k">Dúvidas ao CM <span class="cmt-n" id="cmt-n-dv">—</span></p><div id="cmt-c-dv"></div></div>
-          <div><p class="cmt-k">Comunicados <span class="cmt-n" id="cmt-n-com">—</span></p><div id="cmt-c-com"></div></div>
-        </div>
+    <div class="cmt-hd">
+      <i class="star" aria-hidden="true"></i>
+      <div class="cmt-hd-t"><p class="cmt-ey">Gabinete CMT · acesso do relator</p><h1>Painel do <em>relator.</em></h1></div>
+      <span class="cmt-hd-ln" aria-hidden="true"></span>
+      <div class="cmt-ind" id="cmt-ind"></div>
+      <span class="cmt-sp"></span>
+      <label class="cmt-bq cmt-bq-g"><span class="vh">Buscar processo</span><input type="search" id="cmt-busca" placeholder="Processo, parte ou assunto"></label>
+      <button type="button" class="b" id="cmt-atu">Atualizar</button>
+    </div>
+    <p class="cmt-sub" id="cmt-sub"></p>
+
+    <div class="cmt-grid" id="cmt-grid">
+      <section class="cmt-q cmt-ass" id="cmt-ass">
+        <h2><i class="nn">01</i>Para <em>assinar.</em>
+          <span class="cmt-seg" id="cmt-vis" role="group" aria-label="Modo de visualização"><button type="button" data-cvis="lista" aria-pressed="false">Lista</button><button type="button" data-cvis="fila" aria-pressed="true">Fila</button></span>
+          <span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-pos">—</span></h2>
+        <div class="cmt-fbar" id="cmt-fbar" aria-hidden="true"></div>
+        <div class="cmt-ass-b" id="cmt-c-ass"></div>
+        <div class="cmt-ass-ft" id="cmt-ass-ft"></div>
       </section>
 
-      <div class="cmt-row2">
+      <aside class="cmt-side">
+        <section class="cmt-q cmt-urgp" id="cmt-urg-p">
+          <h2><i class="nn">02</i><em>Urgências.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-ur">—</span></h2>
+          <div class="cmt-uc" id="cmt-urg-c"></div>
+          <div class="cmt-urgl" id="cmt-l-urg"></div>
+          <p class="cmt-rod">Mesma lista da página Monocráticas.</p>
+        </section>
+
+        <section class="cmt-q cmt-dvp" id="cmt-dv-p">
+          <h2><i class="nn">03</i><em>Dúvidas.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-dv">—</span></h2>
+          <div class="cmt-dvl" id="cmt-c-dv"></div>
+          <div class="cmt-dvb" id="cmt-dv-aberta"></div>
+        </section>
+      </aside>
+    </div>
+
+    <section class="cmt-q cmt-dk" id="cmt-pauta">
+      <h2><i class="nn">04</i><span class="cmt-ti">Pauta da <em>sessão.</em></span><span class="cmt-n" id="cmt-n-pt">—</span>
+        <span class="cmt-ses-sel" id="cmt-l-ses"></span>
+        <span class="cmt-sp"></span>
+        <label class="cmt-bq"><span class="vh">Buscar na pauta</span><input type="search" id="cmt-q" placeholder="itens 2, 5-9, número, assunto ou servidor"></label>
+        <button type="button" class="b" id="cmt-selt">Selecionar exibidos</button>
+        <button type="button" class="b" id="cmt-libl" disabled>Liberar selecionados</button>
+        <button type="button" class="b" id="cmt-csv">CSV</button>
+        <button type="button" class="b cmt-solo-b" id="cmt-solo" title="Só a pauta e a listagem (Esc para sair)">Modo pauta</button>
+      </h2>
+      <div class="cmt-met" id="cmt-met"></div>
+      <div class="cmt-prog" id="cmt-prog"></div>
+      <div class="cmt-ft" id="cmt-ft"></div>
+      <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Ações</th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Atenção</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
+      <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
+    </section>
+
+    <details class="cmt-mais" id="cmt-mais">
+      <summary>Calendário, marcos, comunicados e equipe</summary>
+      <div class="cmt-mais-b">
         <section class="cmt-q cmt-pan"><h2>Calendário do <em>gabinete.</em><span class="cmt-sp"></span><span class="cmt-n">produção por dia</span></h2>
           <div class="cmt-cal-w"><div class="cmt-cal-h"><button type="button" class="cmt-mb" data-mes="-1" aria-label="Mês anterior">‹</button><b id="cmt-mes">—</b><button type="button" class="cmt-mb" data-mes="1" aria-label="Próximo mês">›</button><button type="button" class="cmt-hoje" id="cmt-hoje">Hoje</button></div>
             <div id="cmt-cal"></div>
@@ -1802,37 +1859,35 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
           <div class="cmt-pzw"><p class="cmt-k">Marcos vencendo</p><div id="cmt-l-pz"></div></div>
         </section>
 
-        <section class="cmt-q cmt-dk" id="cmt-pauta"><h2>Pauta da <em>sessão.</em><span class="cmt-n" id="cmt-n-pt">—</span><span class="cmt-sp"></span><button type="button" class="b" id="cmt-csv">CSV</button></h2>
-          <div class="cmt-met" id="cmt-met"></div>
-          <div class="cmt-ft" id="cmt-ft"></div>
-          <div class="cmt-bus"><label class="cmt-bq"><span class="vh">Buscar na pauta</span><input type="search" id="cmt-q" placeholder="itens 2, 5-9, número, assunto ou servidor"></label><button type="button" class="cmt-selt" id="cmt-selt">Selecionar exibidos</button><button type="button" class="cmt-libl" id="cmt-libl" disabled>Liberar selecionados</button></div>
-          <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th></th><th>Ações</th><th>Item</th><th>Processo</th><th>Assunto</th><th>Servidor</th><th>Etapa</th><th>Atenção</th></tr></thead><tbody id="cmt-rows"></tbody></table></div>
-          <p class="cmt-rc" id="cmt-rc"></p>
+        <section class="cmt-q"><h2>Comunicados da <em>equipe.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-com">—</span></h2>
+          <div id="cmt-c-com"></div>
         </section>
+
+        <section class="cmt-q" id="cmt-eq"><h2>Equipe e <em>ausências.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-eq">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Produção nas pautas publicadas</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
+
+        <section class="cmt-q cmt-ed" id="cmt-editor"><h2>Editor do Compendium <span class="cmt-n" id="cmt-n-ed">fechado</span><span class="cmt-sp"></span><a class="cmt-out" id="cmt-ed-out" href="/editor/" target="_blank" rel="noopener">Abrir em outra aba ↗</a><button type="button" class="b" id="cmt-ed-ab">Abrir aqui</button></h2>
+          <div class="cmt-ed-b" id="cmt-ed-b" hidden><iframe id="cmt-ed-f" title="Editor do Compendium" loading="lazy"></iframe></div></section>
+
+        <p class="cmt-fontes" id="cmt-fontes"></p>
+        <span hidden id="cmt-n-ad"></span><span hidden id="cmt-n-ass"></span><span hidden id="cmt-n-lib"></span><div hidden id="cmt-c-lib"></div>
       </div>
+    </details>
 
-      <section class="cmt-q cmt-urgp"><h2>Urgências<span class="cmt-n" id="cmt-n-ur">—</span><span class="cmt-sp"></span></h2>
-        <div class="cmt-uc" id="cmt-urg-c"></div><div class="cmt-urgl" id="cmt-l-urg"></div></section>
-
-<section class="cmt-q" id="cmt-eq"><h2>Produtividade e ausências <span class="cmt-n" id="cmt-n-eq">—</span><span class="cmt-sp"></span><span class="pdv-per" role="group" aria-label="Período"><button type="button" class="b" data-pdv="mes">Este mês</button><button type="button" class="b" data-pdv="ant">Mês anterior</button><button type="button" class="b" data-pdv="30">30 dias</button></span></h2><div class="cmt-cols"><div><p class="cmt-k" id="pdv-k">Produtividade pelas regras do gabinete</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
-<section class="cmt-q cmt-ed" id="cmt-editor"><h2>Editor do Compendium <span class="cmt-n" id="cmt-n-ed">fechado</span><span class="cmt-sp"></span><a class="cmt-out" id="cmt-ed-out" href="/editor/" target="_blank" rel="noopener">Abrir em outra aba ↗</a><button type="button" class="b" id="cmt-ed-ab">Abrir aqui</button></h2>
-        <div class="cmt-ed-b" id="cmt-ed-b" hidden><iframe id="cmt-ed-f" title="Editor do Compendium" loading="lazy"></iframe></div></section>
-      <p class="cmt-fontes" id="cmt-fontes"></p>
-    </div>
-  </main>
+  </div>
+</main>
 
   <main id="v-pauta" class="pt2" hidden>
     <section class="trb" id="trb" aria-labelledby="trb-t"><div class="trb-in">
       <div class="trb-h"><div><div class="trb-eyr"><small class="trb-ey">01 / Produção</small><span class="trb-tag" id="ses-tag"></span></div><h1 id="trb-t">Pauta <em class="trb-em">de julgamento.</em></h1><p class="trb-d" id="trb-d"></p></div>
         <div class="trb-c"><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><label class="trb-sl">Sessão<select id="ses" aria-label="Sessão"></select></label><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span><small id="ses-sub" hidden></small></div></div>
-      <div class="pp-sec" id="pp-and" data-m="pauta"><p class="ctl-k">01 / Acompanhar a sessão</p><h2>Andamento da sessão</h2><p class="ctl-d">Marcos do peço dia à sessão, com o avanço das minutas, correções e liberações.</p></div><ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
+      <div class="pp-sec pp-vazio" id="pp-and" data-m="pauta" aria-hidden="true"></div><ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
       <div class="trb-p" id="trb-p"></div></div>
-      <div class="pp-sec" id="pp-num" data-m="pauta"><p class="ctl-k">02 / Conferir os números</p><h2>Números da sessão</h2><p class="ctl-d">Pautados, julgados, adiados e retirados; minutas, revisões e liberações; alertas e intercorrências.</p></div><div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
+      <div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
     <section class="trb trm" id="trm" aria-labelledby="trm-t"><div class="trb-in">
       <div class="trb-h"><div><small class="trb-ey trm-ey">02 / Produção</small><h1 id="trm-t">Decisões <em class="trm-em">monocráticas.</em></h1><p class="trb-d">Do registro à assinatura.</p></div>
         <div class="trb-c trm-c"><div class="trm-sel"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b" id="trm-hoje" title="Voltar ao período atual: o mês ou a semana de hoje">Hoje</button><button class="b trm-reg" id="trm-reg" aria-expanded="false" aria-label="Registrar monocrática" title="Registrar monocrática">+ Registrar</button></div><div class="trm-k" id="trm-k" role="group" aria-label="Estatísticas das monocráticas: semana, mês e total" title="Contagem pela data de cada etapa"></div></div></div></div>
       <div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
-    <div class="trm-urq" id="trm-urq"></div><nav class="pp-sub" id="pp-sub" aria-label="Seções da página"><p class="ctl-nk">Nesta página</p><button type="button" data-pp="pp-and" data-m="pauta"><i>01</i><span>Andamento da sessão</span><small id="pp-and-n"></small></button><button type="button" data-pp="pp-num" data-m="pauta"><i>02</i><span>Números da sessão</span><small id="pp-num-n"></small></button><button type="button" data-pp="pp-lst" data-m="pauta"><i>03</i><span>Processos da pauta</span><small id="pp-lst-n"></small></button><p class="ctl-nota">Clique numa seção para ir até ela.</p></nav>
+    <div class="trm-urq" id="trm-urq"></div><nav class="pp-sub" id="pp-sub" aria-label="Seções da página"><p class="ctl-nk">Nesta página</p><button type="button" data-pp="pp-and" data-m="pauta"><i>01</i><span>Andamento da sessão</span><small id="pp-and-n"></small></button><button type="button" data-pp="pp-num" data-m="pauta"><i>02</i><span>Números da sessão</span><small id="pp-num-n"></small></button><button type="button" data-pp="pp-lst" data-m="pauta"><i>03</i><span>Processos da pauta</span><small id="pp-lst-n"></small></button><div class="pp-num-rail"><div class="pp-sec pp-vazio" id="pp-num" data-m="pauta" aria-hidden="true"></div><p class="pp-num-k">Números da sessão</p><div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div></div><p class="ctl-nota">Clique numa seção para ir até ela.</p></nav>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <section class="urg" id="urg" hidden></section>
     <p class="ctl-lead">Metas do CNJ, sobrestados e casos sensíveis numa só página. Cada linha lê e grava a ficha do processo, a mesma do CMT-monitor.</p>
@@ -3835,7 +3890,7 @@ function cmtPauta(){
   $('#cmt-rows').innerHTML=L.length?L.map(function(x){
     var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.meta)at.push('meta');
     var lib=x.etapa==='liberado';
-    return '<tr><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td><span class="cmt-ac"><button type="button" class="'+(lib?'on':'')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Desfazer a liberação':'Liberar o voto')+'" aria-label="'+(lib?'Desfazer a liberação':'Liberar o voto')+'">✓</button><button type="button" data-cd="'+esc(x.cnj)+'" title="Devolver com apontamento" aria-label="Devolver com apontamento">↩</button></span></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span></td><td>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td><span class="cmt-et '+esc(x.etapa)+'">'+esc(NOME[x.etapa]||x.etapa)+'</span></td><td class="cmt-at">'+esc(at.join(' · ')||'—')+'</td></tr>';}).join(''):'<tr><td colspan="8" style="color:var(--em)">Nada nesta seleção.</td></tr>';
+    return '<tr><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td><span class="cmt-ac"><button type="button" class="'+(lib?'on':'')+'" data-cl="'+esc(x.cnj)+'" title="'+(lib?'Desfazer a liberação':'Liberar o voto')+'" aria-label="'+(lib?'Desfazer a liberação':'Liberar o voto')+'">✓</button><button type="button" data-cd="'+esc(x.cnj)+'" title="Devolver com apontamento" aria-label="Devolver com apontamento">↩</button></span></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span></td><td>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td title="'+esc(NOME[x.etapa]||x.etapa)+'">'+cmtTrilha(cmtEtapaN(x))+'</td><td class="cmt-at">'+esc(at.join(' · ')||'—')+'</td></tr>';}).join(''):'<tr><td colspan="8" style="color:var(--em)">Nada nesta seleção.</td></tr>';
   $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
   var falta=it.length-(cta.liberado||0);
   var nmin=it.filter(function(x){return x.dataMinuta;}).length,ncor=it.filter(function(x){return x.dataCorrecao;}).length;
@@ -3851,25 +3906,81 @@ function cmtPauta(){
     '<div><span>Liberados</span><b class="ok">'+(cta.liberado||0)+'</b><small>de '+it.length+'</small></div>'+
     '<div><span>Retidos</span><b class="al">'+retidos+'</b><small>'+(retidos?'com apontamento':'nenhum retido')+'</small></div>'+
     '<div class="mk"><span>Próximo marco</span><b class="pq">'+(prox?esc(prox.nome):'sem marco futuro')+'</b><small>'+(prox?br(prox.data)+' · em '+cmtDias(prox.data,j.hoje)+' dias':'cadastre os marcos')+'</small></div>';
-  var elp=$('#cmt-n-pt');if(elp)elp.textContent=p.date?'sessão de '+br(p.date)+' · '+it.length+' processos':'—';if(typeof cmtAtuLote==='function')cmtAtuLote();}
+  var elp=$('#cmt-n-pt');if(elp)elp.textContent=p.date?'sessão de '+br(p.date)+' · '+it.length+' processos':'—';
+var nas=it.filter(function(x){return x.assinado||x.dataAssinatura;}).length,npe=it.length-nmin;
+var pr=$('#cmt-prog');
+if(pr)pr.innerHTML=it.length?'<div class="br"><i class="as" style="width:'+(nas*100/it.length)+'%"></i><i class="lb" style="width:'+(Math.max(0,(cta.liberado||0)-nas)*100/it.length)+'%"></i><i class="co" style="width:'+(Math.max(0,ncor-(cta.liberado||0))*100/it.length)+'%"></i><i class="pe" style="width:'+(Math.max(0,npe)*100/it.length)+'%"></i></div><div class="lg"><span>'+nas+' assinados</span><span>'+Math.max(0,(cta.liberado||0)-nas)+' liberados</span><span>'+ncor+' corrigidos</span><span>'+Math.max(0,npe)+' a minutar</span><span style="margin-left:auto">'+(d.marcos&&d.marcos.entregaMinutas?'entrega das minutas em '+br(d.marcos.entregaMinutas):'sem marco de entrega')+'</span></div>':'';
+var lg=$('#cmt-leg');
+if(lg)lg.innerHTML=[['d','Minutado'],['c','Corrigido'],['l','Liberado'],['a','Assinado']].map(function(k){return '<span>'+cmtSvg(CMTICO[k[0]])+k[1]+'</span>';}).join('');if(typeof cmtAtuLote==='function')cmtAtuLote();}
 function cmtCsv(){
   var L=cmtFiltra(),h=['Item','Processo','Classe','Assunto','Servidor','Corretor','Etapa','Minuta','Correcao','Liberacao','Resultado'];
   var li=[h].concat(L.map(function(x){return [x.item,x.cnj,x.classe,x.assunto,x.servidor,x.corretor,x.etapa,x.dataMinuta,x.dataCorrecao,x.dataLiberacao,x.resultado];}));
   var csv=li.map(function(r){return r.map(function(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}).join(';');}).join('\r\n');
   var b=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}),u=URL.createObjectURL(b),a=document.createElement('a');
   a.href=u;a.download='pauta-'+(((CMT.dados||{}).pauta||{}).date||'')+'.csv';a.click();URL.revokeObjectURL(u);toast('CSV da pauta baixado.');}
+/* trilha de etapas: os mesmos quatro ícones das linhas da pauta */
+var CMTICO={d:'<path d="M4 20h4l10-10-4-4L4 16z"/>',c:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',l:'<path d="M4 12l15-7-5 15-3-6z"/>',a:'<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>'};
+function cmtSvg(d,t){return '<svg viewBox="0 0 24 24" width="'+(t||13)+'" height="'+(t||13)+'" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';}
+function cmtTrilha(n){var ic=[CMTICO.d,CMTICO.c,CMTICO.l,CMTICO.a],rot=['minutado','corrigido','liberado','assinado'],h='',f=[];
+for(var i=0;i<4;i++){if(i)h+='<i class="'+(i<=n-1?'l'+i:'')+'"></i>';h+='<span class="'+(i<n?'s'+(i+1):'')+'">'+cmtSvg(ic[i])+'</span>';if(i<n)f.push(rot[i]);}
+return '<span class="cmt-trl" role="img" aria-label="'+(f.length?f.join(', '):'ainda a minutar')+'">'+h+'</span>';}
+function cmtEtapaN(x){return (x.assinado||x.dataAssinatura)?4:x.etapa==='liberado'?3:x.etapa==='corrigido'?2:x.etapa==='minutado'?1:0;}
+/* 01 · para assinar, em lista ou em fila */
+function cmtAssinar(){
+var j=CMT.dados||{},as=j.assinar||{},L=as.assinatura||[],modo=CMT.vis||'fila',al=$('#cmt-c-ass'),ft=$('#cmt-ass-ft');
+var seg=$('#cmt-vis');if(seg)Array.prototype.forEach.call(seg.querySelectorAll('[data-cvis]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-cvis')===modo));});
+var pos=Math.min(CMT.pos||0,Math.max(0,L.length-1));CMT.pos=pos;
+var np=$('#cmt-n-pos');if(np)np.textContent=!L.length?'nada pendente':modo==='fila'?(pos+1)+' de '+L.length:L.length+(L.length===1?' voto':' votos');
+var fb=$('#cmt-fbar');if(fb){fb.hidden=(modo!=='fila'||!L.length);fb.innerHTML=L.map(function(_,i){return '<i class="'+(i<pos?'ok':i===pos?'at':'')+'"></i>';}).join('');}
+if(!al)return;
+if(!L.length){al.innerHTML='<p class="cmt-vazio">Nenhum voto aguardando assinatura.</p>';if(ft)ft.innerHTML='';return;}
+if(modo==='lista'){
+al.innerHTML=L.map(function(x){return '<div class="cmt-ar"><div class="gr"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+(x.desde?' · liberada '+esc(br(x.desde)):'')+'</p></div>'+cmtTrilha(3)+'<button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button></div>';}).join('');
+if(ft)ft.innerHTML='<span>'+L.length+(L.length===1?' voto aguardando assinatura':' votos aguardando assinatura')+'</span>';return;}
+var x=L[pos],meta=[x.item?'item '+x.item:'',x.servidor,x.corretor?'corrigido por '+x.corretor:''].filter(Boolean).join(' · ');
+al.innerHTML='<div class="cmt-fc-tg">'+(x.resultado?'<span class="cmt-tag ok">'+esc(x.resultado)+'</span>':'')+(x.meta?'<span class="cmt-tag mt">Meta</span>':'')+(x.urgente?'<span class="cmt-tag al">Urgente</span>':'')+(meta?'<span class="cmt-fc-m">'+esc(meta)+'</span>':'')+'</div>'+
+'<p class="cmt-fc-n">'+esc(x.cnj)+'</p><p class="cmt-fc-s">'+esc([x.classe,x.assunto].filter(Boolean).join(' · ')||'—')+'</p>'+
+'<p class="cmt-fc-k">Registrado no prontuário</p><p class="cmt-fc-r">'+esc(x.resumo||x.dispositivo||'Sem resumo no prontuário; abra a ficha para conferir.')+'</p>'+
+'<div class="cmt-fc-l">'+[['Minutado',[x.servidor,x.dataMinuta?br(x.dataMinuta):''].filter(Boolean).join(' · ')],['Corrigido',[x.corretor,x.dataCorrecao?br(x.dataCorrecao):''].filter(Boolean).join(' · ')],['Liberado',x.desde?br(x.desde):''],['Atenção',x.atencao||'']].map(function(r){return '<div><span>'+r[0]+'</span><em style="font-style:normal">'+esc(r[1]||'—')+'</em></div>';}).join('')+'</div>'+
+'<div class="cmt-fc-ac"><button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar e seguir</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button><button type="button" data-cpl="1">Pular</button><button type="button" data-cfi="'+esc(x.cnj)+'">Ficha</button></div>';
+if(ft)ft.innerHTML='<span class="cmt-fc-m">A seguir</span>'+L.slice(pos+1,pos+4).map(function(y){return '<b>'+esc(String(y.cnj).split('.')[0])+'</b>';}).join('')+(L.length-pos-4>0?'<span>+'+(L.length-pos-4)+'</span>':'');}
+/* 02 · urgências, a mesma lista das Monocráticas */
+function cmtUrg(){
+var ur=((CMT.dados||{}).urgencias)||[],el=$('#cmt-l-urg');if(!el)return;
+if(!ur.length){el.innerHTML='<p class="cmt-vazio" style="padding:10px 16px">Nenhuma urgência aberta.</p>';return;}
+el.innerHTML=ur.map(function(x){var d=x.espera,hoje=(d===0||d>=15);
+var prazo=d==null?'sem prazo':d===0?'vence hoje':d<0?'em '+(-d)+(d===-1?' dia':' dias'):'há '+d+(d===1?' dia':' dias');
+var et=cmtEtapaN(x),nome=['A minutar','Minutada','Em correção','Liberada','Assinada'][et];
+return '<div class="cmt-ur'+(hoje?' hoje':'')+'"><div class="cmt-ur-l"><b>'+esc(x.cnj)+'</b><time>'+esc(prazo)+'</time></div>'+
+'<p>'+esc([x.tipo,x.nivel,x.servidor].filter(Boolean).join(' · ')||'—')+'</p>'+
+'<div class="cmt-ur-a"><span class="cmt-tag'+(et>=3?' ok':et===2?' inf':'')+'">'+nome+'</span><button type="button" class="'+(hoje?'pri':'')+'" data-cfi="'+esc(x.cnj)+'">'+(hoje?'Decidir':'Abrir')+'</button></div></div>';}).join('');}
+/* 03 · dúvidas, uma a uma */
+function cmtDuvidas(){
+var dv=((CMT.dados||{}).duvidas)||[],lis=$('#cmt-c-dv'),ab=$('#cmt-dv-aberta');if(!lis||!ab)return;
+if(!dv.length){lis.innerHTML='';ab.innerHTML='<p class="cmt-vazio">Nenhuma dúvida aberta.</p>';return;}
+var id=(CMT.dv&&dv.some(function(y){return y.id===CMT.dv;}))?CMT.dv:dv[0].id;CMT.dv=id;
+lis.innerHTML=dv.map(function(x){return '<button type="button" data-cdvs="'+esc(x.id)+'" aria-pressed="'+(x.id===id)+'"><span><b>'+esc(x.de||x.titulo||'Dúvida')+'</b><small>'+esc(x.numero||x.titulo||'')+'</small></span><time>'+esc(x.em?br(String(x.em).slice(0,10)):'')+'</time></button>';}).join('');
+var x=dv.filter(function(y){return y.id===id;})[0]||dv[0];
+ab.innerHTML='<p class="cmt-fc-n">'+esc(x.numero||x.titulo||'—')+'</p>'+(x.prioridade?'<p class="cmt-fc-s">'+esc(x.prioridade)+'</p>':'')+
+'<p class="q">'+esc(x.texto||'(sem texto)')+'</p>'+
+(x.resposta?'<p class="cmt-fc-k">Já respondida</p><p class="cmt-fc-r">'+esc(x.resposta)+'</p>':'')+
+'<p class="cmt-fc-k">Devolutiva</p><label class="vh" for="cmt-dv-tx">Devolutiva</label><textarea id="cmt-dv-tx" rows="4" placeholder="Escreva a orientação à equipe…"></textarea>'+
+'<div class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder'+(x.de?' a '+esc(x.de):'')+'</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></div>';}
+/* indicadores do cabeçalho */
+function cmtInd(){
+var j=CMT.dados||{},as=j.assinar||{},el=$('#cmt-ind');if(!el)return;
+var na=(as.assinatura||[]).length,nu=(j.urgencias||[]).length,nd=(j.duvidas||[]).length;
+var hj=(j.urgencias||[]).filter(function(x){return x.espera===0;}).length;
+el.innerHTML='<b class="ok">'+na+(na===1?' a assinar':' a assinar')+'</b><b class="al">'+nu+(nu===1?' urgência':' urgências')+(hj?' · '+hj+' hoje':'')+'</b><b class="inf">'+nd+(nd===1?' dúvida':' dúvidas')+'</b>';}
 function cmtPinta(){
   var j=CMT.dados;if(!j)return;$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
   var as=j.assinar||{assinatura:[],liberacao:[]};
   $('#cmt-n-ass').textContent=as.assinatura.length;$('#cmt-n-lib').textContent=as.liberacao.length;
-  cmtLista('#cmt-c-ass',as.assinatura,function(x){return '<div class="cmt-cd"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+' · liberada '+esc(br(x.desde))+'</p><span class="ac"><button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button></span></div>';});
+  cmtAssinar();
   cmtLista('#cmt-c-lib',as.liberacao,function(x){return '<div class="cmt-cd"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+' · corrigida '+esc(br(x.desde))+'</p></div>';});
   var dv=j.duvidas||[];
   $('#cmt-n-dv').textContent=dv.length;
-  cmtLista('#cmt-c-dv',dv,function(x){
-    return '<div class="cmt-cd"><b>'+esc(x.titulo||x.numero||'Dúvida')+'</b><p>'+esc([x.de,x.numero,x.prioridade].filter(Boolean).join(' · '))+'</p>'+
-      (x.texto?'<p>'+esc(x.texto)+'</p>':'')+(x.resposta?'<p class="cmt-rsp">Respondida: '+esc(x.resposta)+'</p>':'')+
-      '<span class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></span></div>';});
+  cmtDuvidas();
   var co=j.comunicados||[], naoLidos=co.filter(function(x){return !x.lidoEm;});
   var nad=$('#cmt-n-ad');
   if(nad)nad.textContent=[as.assinatura.length+' para assinar',as.liberacao.length+' para liberar',dv.length+(dv.length===1?' dúvida':' dúvidas'),naoLidos.length+(naoLidos.length===1?' comunicado novo':' comunicados novos')].join(' · ');
@@ -3885,7 +3996,7 @@ function cmtPinta(){
   var h48=ur.filter(function(x){return x.espera===1||x.espera===2;}).length;
   var semr=ur.filter(function(x){return !x.servidor;}).length;
   var cu=$('#cmt-urg-c');if(cu)cu.innerHTML='<span><b>'+venc+'</b>vencidas</span><span><b>'+hj0+'</b>hoje</span><span><b>'+h48+'</b>em 48 h</span><span><b>'+semr+'</b>sem resp.</span>';
-  cmtLista('#cmt-l-urg',ur,function(x){var d=x.espera;return '<div class="cmt-it'+(d>=15?' alerta':d>=7?' atencao':'')+'"><b>'+esc(x.cnj)+'</b><span>'+esc([x.tipo,x.nivel].filter(Boolean).join(' · '))+'</span><time>'+(d==null?'':d===0?'hoje':'há '+d+(d===1?' dia':' dias'))+'</time></div>';});
+  cmtUrg();
   cmtLista('#cmt-l-pz',pz,function(x){return '<div class="cmt-it'+(x.dias<0?' alerta':x.dias<=2?' atencao':'')+'"><b>'+esc(br(x.sessao))+'</b><span>'+esc(x.marco)+'</span><time>'+(x.dias<0?'vencido':x.dias===0?'hoje':x.dias===1?'amanhã':'em '+x.dias+' dias')+'</time></div>';});
   var se=j.sessoes||[],sel=(j.pauta||{}).date;
   $('#cmt-l-ses').innerHTML=se.length?se.map(function(s){
@@ -3895,7 +4006,7 @@ function cmtPinta(){
   pdvPinta(j,eq);
   cmtLista('#cmt-l-aus',au,function(x){return '<div class="cmt-it"><b>'+esc(x.nome)+'</b><span>'+esc(x.tipo)+' · '+esc(br(x.de))+(x.ate!==x.de?' a '+esc(br(x.ate)):'')+'</span></div>';});
   if(sel&&!CMT.mes)CMT.mes=new Date(Date.parse(sel+'T12:00:00Z'));
-  cmtCal();cmtMarcos();cmtPauta();
+  cmtInd();cmtCal();cmtMarcos();cmtPauta();
   var f=j.fontes||{};
   $('#cmt-sub').textContent='Tudo que depende de uma decisão sua, reunido das fontes oficiais do gabinete.';
   $('#cmt-fontes').textContent='Fontes · ficha única '+(f.ficha?'lida':'indisponível')+' · calendário '+(f.calendario?'lido':'indisponível')+' · '+(f.pautas||0)+' pautas · ausências '+(f.ausencias?'lidas':'indisponíveis');}
@@ -3911,6 +4022,23 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     .then(function(){toast('Comunicado marcado como lido.');CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);})
     .catch(function(er){b.disabled=false;toast((er&&er.message)||'Não foi possível marcar como lido.');});});
 document.addEventListener('input',function(e){if(e.target&&e.target.id==='cmt-q'){CMT.q=e.target.value;cmtPauta();}});
+
+/* fila de assinatura, seleção de dúvida, ficha e modo pauta */
+document.addEventListener('click',function(e){
+if(!e.target.closest)return;
+var v=e.target.closest('[data-cvis]');
+if(v){CMT.vis=v.getAttribute('data-cvis');CMT.pos=0;cmtAssinar();return;}
+if(e.target.closest('[data-cpl]')){var n=(((CMT.dados||{}).assinar||{}).assinatura||[]).length;CMT.pos=((CMT.pos||0)+1)%Math.max(1,n);cmtAssinar();return;}
+var ds=e.target.closest('[data-cdvs]');
+if(ds){CMT.dv=ds.getAttribute('data-cdvs');cmtDuvidas();return;}
+var fi=e.target.closest('[data-cfi]');
+if(fi){var c=fi.getAttribute('data-cfi');if(typeof abrirFicha==='function'){abrirFicha(c);}else{toast('Ficha de '+c+': abra pela página Pautas.');}return;}
+if(e.target.id==='cmt-solo'||e.target.closest('#cmt-solo')){var m=$('#v-cmt');if(m){m.classList.toggle('solo');document.body.classList.toggle('cmt-solo',m.classList.contains('solo'));var b=$('#cmt-solo');if(b)b.textContent=m.classList.contains('solo')?'Sair do modo pauta':'Modo pauta';if(m.classList.contains('solo'))window.scrollTo(0,0);}return;}
+});
+document.addEventListener('keydown',function(e){
+if(e.key!=='Escape')return;var m=$('#v-cmt');if(!m||!m.classList.contains('solo'))return;
+m.classList.remove('solo');document.body.classList.remove('cmt-solo');var b=$('#cmt-solo');if(b)b.textContent='Modo pauta';});
+document.addEventListener('input',function(e){if(e.target&&e.target.id==='cmt-busca'){CMT.q=e.target.value;var q=$('#cmt-q');if(q)q.value=e.target.value;cmtPauta();}});
 /* decisões: gravam onde já era gravado e podem ser desfeitas */
 function cmtPost(corpo,ok){
   return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(corpo)}).then(function(){toast(ok);CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);})
@@ -3935,7 +4063,7 @@ document.addEventListener('click',function(e){
     var t4=prompt('Devolutiva para '+c4+' — vira diligência para '+(a4.servidor||'a equipe')+':');
     if(t4&&t4.trim())cmtPost({acao:'devolver',cnj:c4,texto:t4.trim(),para:a4.servidor||'',sessao:sd},'Devolutiva enviada.');return;}
   var rs=e.target.closest&&e.target.closest('[data-crs]'),rm=e.target.closest&&e.target.closest('[data-crm]');
-  if(rs||rm){var id=(rs||rm).getAttribute(rs?'data-crs':'data-crm'),tr=prompt('Resposta à dúvida:');
+  if(rs||rm){var id=(rs||rm).getAttribute(rs?'data-crs':'data-crm'),cx=$('#cmt-dv-tx'),tr=(cx&&cx.value.trim())?cx.value:prompt('Resposta à dúvida:');
     if(tr&&tr.trim())cmtPost({acao:'responder',id:id,texto:tr.trim(),manter:!!rm},rm?'Resposta registrada; a dúvida continua aberta.':'Dúvida respondida e concluída.');return;}
   if(e.target&&e.target.id==='cmt-selt'){CMT.sel=CMT.sel||{};var L=cmtFiltra(),todos=L.every(function(x){return CMT.sel[x.cnj];});L.forEach(function(x){CMT.sel[x.cnj]=!todos;});cmtPauta();cmtAtuLote();return;}
   if(e.target&&e.target.id==='cmt-libl'){var m=cmtMarcados();if(!m.length)return;
@@ -6269,5 +6397,159 @@ window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true);
 
 </script>
 <!-- cmt-ficha:fim -->
+<style>
+
+/* ===== Painel do relator (#cmt): cabeçalho próprio, painéis 01–04 e modo pauta ===== */
+#v-cmt .cmt-hd{display:flex;flex-wrap:wrap;align-items:center;gap:14px;padding:12px 2px;border-top:2px solid var(--eg);border-bottom:1px solid var(--el)}
+#v-cmt .cmt-hd .star{width:26px;height:28px;flex:none;background:var(--eo);border-radius:0;box-shadow:none;-webkit-mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat;-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+#v-cmt .cmt-hd-t{min-width:0}
+#v-cmt .cmt-hd .cmt-ey{margin:0;font:400 9.5px var(--emono);letter-spacing:.18em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-hd h1{margin:2px 0 0;font-size:22px;font-weight:650;letter-spacing:-.04em;line-height:1.15;color:var(--ei)}
+#v-cmt .cmt-hd h1 em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+#v-cmt .cmt-hd-ln{width:1px;height:34px;background:var(--el)}
+#v-cmt .cmt-ind{display:flex;flex-wrap:wrap;gap:6px}
+#v-cmt .cmt-ind b{display:inline-flex;align-items:center;height:28px;padding:0 11px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font-size:12px;font-weight:750}
+#v-cmt .cmt-ind b.ok{border-color:#9fd0b6;background:#e3f0ea;color:#1f6a43}
+#v-cmt .cmt-ind b.al{border-color:#ecc9b8;background:#fdf6f3;color:var(--er)}
+#v-cmt .cmt-ind b.inf{border-color:#9cc0e0;background:#e3eef8;color:#245b8c}
+#v-cmt .cmt-hd .cmt-bq-g input{width:230px}
+#v-cmt .cmt-sub{margin:10px 0 0;font-size:12.5px;color:var(--em)}
+
+#v-cmt .cmt-grid{display:flex;flex-wrap:wrap;gap:40px;align-items:stretch;margin-top:22px}
+#v-cmt .cmt-grid>.cmt-ass{flex:2 1 620px;min-width:420px;display:flex;flex-direction:column;height:560px;margin-top:0;padding:0}
+#v-cmt .cmt-side{flex:1 1 360px;min-width:300px;display:flex;flex-direction:column;gap:40px;height:560px}
+#v-cmt .cmt-side>.cmt-q{flex:1 1 0;min-height:0;display:flex;flex-direction:column;margin-top:0;padding:0}
+#v-cmt .cmt-q h2 .nn{font:400 10px var(--emono);font-style:normal;letter-spacing:.12em;color:var(--em);margin-right:2px}
+#v-cmt .cmt-q>h2{margin:0;flex:none}
+#v-cmt .cmt-ass>h2,#v-cmt .cmt-side>.cmt-q>h2{padding:10px 16px}
+
+#v-cmt .cmt-seg{display:inline-flex;border:1px solid var(--el);background:var(--ew)}
+#v-cmt .cmt-seg button{height:28px;padding:0 12px;border:0;background:transparent;color:var(--em);font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+#v-cmt .cmt-seg button[aria-pressed=true]{background:var(--eg);color:#fff;font-weight:750}
+#v-cmt .cmt-fbar{display:flex;gap:3px;padding:10px 16px;background:var(--ew);border-bottom:1px solid var(--ep2);flex:none}
+#v-cmt .cmt-fbar i{flex:1;height:3px;background:#e2ded1}
+#v-cmt .cmt-fbar i.ok{background:var(--eg)}
+#v-cmt .cmt-fbar i.at{background:var(--eo)}
+#v-cmt .cmt-ass-b{flex:1;min-height:0;overflow:auto;background:var(--ew);padding:13px 16px 15px}
+#v-cmt .cmt-ass-ft{flex:none;border-top:1px solid var(--el);background:var(--ep);padding:9px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:12px;color:var(--em)}
+#v-cmt .cmt-ass-ft b{font:600 11.5px var(--emono);color:var(--eg)}
+
+#v-cmt .cmt-fc-tg{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+#v-cmt .cmt-tag{display:inline-flex;align-items:center;height:26px;padding:0 10px;border:1px solid var(--el);background:var(--ew);color:var(--em);font-size:11.5px;font-weight:750;white-space:nowrap}
+#v-cmt .cmt-tag.ok{border-color:#9fd0b6;background:#e3f0ea;color:#1f6a43}
+#v-cmt .cmt-tag.inf{border-color:#9cc0e0;background:#e3eef8;color:#245b8c}
+#v-cmt .cmt-tag.mt{border-color:#e0d6bb;background:#f5efd9;color:var(--eo2)}
+#v-cmt .cmt-tag.al{border-color:#ecc9b8;background:#fdf6f3;color:var(--er)}
+#v-cmt .cmt-fc-m{font:400 10px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-fc-n{margin:10px 0 0;font:600 13px var(--emono);color:var(--eg)}
+#v-cmt .cmt-fc-s{margin:4px 0 0;font-size:13px;color:var(--em)}
+#v-cmt .cmt-fc-k{margin:11px 0 5px;font:400 9.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eg)}
+#v-cmt .cmt-fc-r{margin:0;font-size:14px;line-height:1.45;color:var(--ei)}
+#v-cmt .cmt-fc-l{margin-top:12px;border-top:1px solid var(--ep2)}
+#v-cmt .cmt-fc-l div{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--ep2);font-size:12.5px}
+#v-cmt .cmt-fc-l span{width:100px;flex:none;color:var(--em)}
+#v-cmt .cmt-fc-ac{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+#v-cmt .cmt-fc-ac button,#v-cmt .cmt-fc-ac a{height:42px;padding:0 14px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+#v-cmt .cmt-fc-ac button.pri{flex:1;min-width:150px;border-color:var(--eg);background:var(--eg);color:#fff;font-weight:750}
+#v-cmt .cmt-fc-ac button:hover,#v-cmt .cmt-fc-ac a:hover{border-color:var(--eg)}
+
+#v-cmt .cmt-ar{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--ep2)}
+#v-cmt .cmt-ar:first-child{border-top:0}
+#v-cmt .cmt-ar b{font:600 12.5px var(--emono);color:var(--eg)}
+#v-cmt .cmt-ar p{margin:2px 0 0;font-size:12px;color:var(--em)}
+#v-cmt .cmt-ar .gr{flex:1;min-width:0}
+#v-cmt .cmt-ar button{height:34px;padding:0 12px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+#v-cmt .cmt-ar button.pri{border-color:var(--eg);background:var(--eg);color:#fff;font-weight:750}
+
+#v-cmt .cmt-urgp{border-color:#ecc9b8;background:#fdf6f3}
+#v-cmt .cmt-urgp>h2{border-bottom-color:#ecc9b8}
+#v-cmt .cmt-urgp .cmt-uc{margin:0;border-top:0;border-bottom:1px solid #ecc9b8;flex:none}
+#v-cmt .cmt-urgl{display:block;flex:1;min-height:0;overflow:auto;background:var(--ew);grid-template-columns:none}
+#v-cmt .cmt-ur{padding:9px 16px;border-bottom:1px solid #f0dcd3}
+#v-cmt .cmt-ur.hoje{border-left:3px solid var(--er)}
+#v-cmt .cmt-ur-l{display:flex;align-items:center;gap:8px}
+#v-cmt .cmt-ur b{font:600 12px var(--emono);color:var(--eg)}
+#v-cmt .cmt-ur time{margin-left:auto;font-size:11.5px;color:var(--em)}
+#v-cmt .cmt-ur.hoje time{color:var(--er);font-weight:750}
+#v-cmt .cmt-ur p{margin:3px 0 0;font-size:12px;color:var(--em)}
+#v-cmt .cmt-ur-a{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}
+#v-cmt .cmt-ur-a button{margin-left:auto;height:32px;padding:0 12px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+#v-cmt .cmt-ur-a button.pri{border-color:var(--eg);background:var(--eg);color:#fff;font-weight:750}
+#v-cmt .cmt-rod{flex:none;margin:0;padding:8px 16px;border-top:1px solid #ecc9b8;font-size:11.5px;color:var(--em)}
+
+#v-cmt .cmt-dvp{border-color:#9cc0e0}
+#v-cmt .cmt-dvl{flex:none;max-height:120px;overflow:auto;border-bottom:1px solid var(--el);background:var(--ep)}
+#v-cmt .cmt-dvl button{display:flex;align-items:center;gap:9px;width:100%;text-align:left;padding:9px 16px;border:0;border-bottom:1px solid var(--ep2);background:transparent;color:var(--ei);font:inherit;font-size:12px;cursor:pointer}
+#v-cmt .cmt-dvl button[aria-pressed=true]{background:var(--ew);box-shadow:inset 3px 0 0 #245b8c}
+#v-cmt .cmt-dvl button b{display:block;font-weight:700}
+#v-cmt .cmt-dvl button small{display:block;color:var(--em)}
+#v-cmt .cmt-dvl button time{margin-left:auto;font:400 10px var(--emono);color:var(--em)}
+#v-cmt .cmt-dvb{flex:1;min-height:0;overflow:auto;background:var(--ew);padding:12px 16px}
+#v-cmt .cmt-dvb .q{margin:9px 0 0;font-size:13px;line-height:1.55;border-left:3px solid #9cc0e0;padding-left:11px;color:var(--ei)}
+#v-cmt .cmt-dvb textarea{width:100%;box-sizing:border-box;border:1px solid var(--el);background:var(--ep);color:var(--ei);font:inherit;font-size:13px;line-height:1.5;padding:10px;resize:vertical}
+#v-cmt .cmt-dvb .ac{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+#v-cmt .cmt-dvb .ac button{height:38px;padding:0 12px;border:1px solid var(--el);background:var(--ew);color:var(--ei);font:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+#v-cmt .cmt-dvb .ac button.pri{flex:1;min-width:130px;border-color:var(--eg);background:var(--eg);color:#fff;font-weight:750}
+
+#v-cmt #cmt-pauta{margin-top:40px}
+#v-cmt .cmt-ses-sel{display:flex;flex-wrap:nowrap;gap:4px;border:0;overflow:auto;max-width:200px;flex:0 1 auto}
+#v-cmt .cmt-ses-sel .cmt-sl{display:inline-flex;align-items:center;gap:6px;width:auto;border:1px solid var(--el);background:var(--ew);padding:0 10px;height:28px;font-size:12px}
+#v-cmt .cmt-ses-sel .cmt-sl[aria-pressed=true]{border-color:var(--eg);background:var(--eg);color:#fff}
+#v-cmt .cmt-ses-sel .cmt-sl[aria-pressed=true] b,#v-cmt .cmt-ses-sel .cmt-sl[aria-pressed=true] small{color:#fff}
+#v-cmt .cmt-ses-sel .cmt-sl small{display:none}
+#v-cmt .cmt-ses-sel .cmt-sl:first-child{border-left:1px solid var(--el)}
+#v-cmt .cmt-ses-sel .cmt-sl[aria-pressed=true]{box-shadow:none}
+#v-cmt .cmt-prog{padding:12px 0 0}
+#v-cmt #cmt-pauta>h2{white-space:normal;row-gap:8px}
+#v-cmt #cmt-pauta>h2>.cmt-ti,#v-cmt #cmt-pauta>h2>.cmt-n{white-space:nowrap}
+#v-cmt .cmt-ti em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+#v-cmt #cmt-pauta>h2>em{margin-right:4px}
+#v-cmt #cmt-pauta .cmt-bq input{width:190px}
+#v-cmt #cmt-pauta>h2{column-gap:8px}
+#v-cmt #cmt-pauta .b{white-space:nowrap}
+#v-cmt .cmt-ses-sel .cmt-sl{white-space:nowrap}
+#v-cmt .cmt-prog .br{display:flex;height:9px;border:1px solid var(--el);background:#f6f8f9}
+#v-cmt .cmt-prog .br i{display:block}
+#v-cmt .cmt-prog .br i.as{background:#28744b}
+#v-cmt .cmt-prog .br i.lb{background:#6d4596}
+#v-cmt .cmt-prog .br i.co{background:#9cc0e0}
+#v-cmt .cmt-prog .br i.pe{background:#e2ded1}
+#v-cmt .cmt-prog .lg{display:flex;flex-wrap:wrap;gap:14px;margin-top:7px;font-size:11.5px;color:var(--em)}
+#v-cmt .cmt-trl{display:inline-flex;align-items:center}
+#v-cmt .cmt-trl span{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--el);background:#f6f8f9;color:#8fa0ad}
+#v-cmt .cmt-trl i{width:8px;height:2px;background:var(--el)}
+#v-cmt .cmt-trl span.s1{border-color:#9fd0b6;background:#e3f0ea;color:#28744b}
+#v-cmt .cmt-trl span.s2{border-color:#9cc0e0;background:#e3eef8;color:#245b8c}
+#v-cmt .cmt-trl span.s3{border-color:#c7b0e6;background:#efe8f8;color:#6d4596}
+#v-cmt .cmt-trl span.s4{border-color:#9fd0b6;background:#e3f0ea;color:#28744b}
+#v-cmt .cmt-trl i.l1{background:#9cc0e0}
+#v-cmt .cmt-trl i.l2{background:#c7b0e6}
+#v-cmt .cmt-trl i.l3{background:#9fd0b6}
+#v-cmt .cmt-rodp{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:8px}
+#v-cmt .cmt-leg{margin:0 0 0 auto;display:flex;flex-wrap:wrap;gap:12px;font-size:11.5px;color:var(--em)}
+#v-cmt .cmt-leg span{display:inline-flex;align-items:center;gap:6px}
+#v-cmt .cmt-mais{margin-top:40px;border-top:1px solid var(--el)}
+#v-cmt .cmt-mais>summary{cursor:pointer;padding:11px 2px;font:400 9.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-mais .cmt-mais-b>.cmt-q:first-child{margin-top:4px}
+
+/* modo pauta: só a pauta e a listagem */
+#v-cmt.solo .cmt-hd,#v-cmt.solo .cmt-sub,#v-cmt.solo .cmt-grid,#v-cmt.solo .cmt-mais{display:none}
+#v-cmt.solo #cmt-pauta{margin-top:0;border-top:2px solid var(--eg)}
+#v-cmt.solo #cmt-pauta>h2{position:sticky;top:0;z-index:3;background:var(--ep)}
+body.cmt-solo header.nx .tabs,body.cmt-solo header.nx .nx-ut,body.cmt-solo header.nx .nx-nav{display:none}
+body.cmt-solo header.nx .nx1{height:44px}
+@media (max-width:1100px){
+  #v-cmt .cmt-grid{display:block}
+  #v-cmt .cmt-grid>.cmt-ass{display:block;height:auto;min-width:0}
+  #v-cmt .cmt-ass-b{overflow:visible;max-height:none}
+  #v-cmt .cmt-side{display:block;height:auto;min-width:0}
+  #v-cmt .cmt-side>.cmt-q{display:block;height:auto;margin-top:26px}
+  #v-cmt .cmt-urgl{max-height:360px}
+  #v-cmt .cmt-dvb{max-height:none;overflow:visible}
+  #v-cmt .cmt-dvl{max-height:150px}
+  #v-cmt #cmt-pauta{margin-top:26px}
+  #v-cmt .cmt-ses-sel{max-width:170px}
+}
+</style>
 </body>
 </html>
