@@ -5,6 +5,7 @@
      urgencias pedidos urgentes ainda não apreciados e marcos de sessão vencendo
      sessoes   próximas sessões publicadas, com minutadas, corrigidas e liberadas
      equipe    produção por servidor nas pautas publicadas e ausências a decidir */
+const crypto = require('crypto');
 const L = require('./_lib');
 const MONO = require('./_mono');
 const FICHA = require('./_ficha');
@@ -47,6 +48,14 @@ async function responder(id, texto, u, manter, evento) {
   }
   throw Object.assign(new Error('O quadro mudou várias vezes seguidas; tente de novo.'), { status: 409 });
 }
+/* o link próprio do painel (/cmt?k=…) vale como credencial: a chave fica em CMT_CHAVE, só no servidor */
+function porChave(req) {
+  const esperada = String(process.env.CMT_CHAVE || '');
+  if (esperada.length < 16) return false;
+  const vinda = String((req.headers && req.headers['x-cmt-chave']) || (req.query && req.query.k) || '');
+  if (vinda.length !== esperada.length) return false;
+  try { return crypto.timingSafeEqual(Buffer.from(vinda), Buffer.from(esperada)); } catch (e) { return false; }
+}
 /* toda a resposta passa por aqui: erro de leitura vira 500 com mensagem, nunca queda da função */
 module.exports = async (req, res, u) => {
   try { await painel(req, res, u); }
@@ -55,7 +64,7 @@ module.exports = async (req, res, u) => {
 async function painel(req, res, u) {
   res.setHeader('Cache-Control', 'no-store');
   const a = await L.acessos(u);
-  if (a.perfil !== 'desembargador' && !L.gestor(u)) return res.status(403).json({ erro: 'Painel restrito ao desembargador.' });
+  if (a.perfil !== 'desembargador' && !L.gestor(u) && !porChave(req)) return res.status(403).json({ erro: 'Painel restrito ao desembargador.' });
   const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
   /* decisões do desembargador: liberar o voto e assinar a monocrática.
      As duas gravam onde já era gravado — o item da pauta e a ficha única — e podem ser desfeitas. */
