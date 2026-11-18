@@ -6,14 +6,17 @@
    GET  ?lote=1&id=2886                        o lote (matriz, perfis e painel), com o cartão do prontuário de cada processo
                                                tirado, na hora, da sessão em acervo/sessoes/AAAA-MM-DD.json
    GET  ?lote=1&id=2886&minuta=X               a minuta do processo X (10 primeiros caracteres do número): acervo/minutas/<id>/X.json
-   O relator (link próprio ou perfil desembargador) só recebe os processos prontos: situação Corrigida ou Liberada, a mais
+   Com &rel=1 (página do relator, /cmt/lotes/), a resposta é sempre a do relator, qualquer que seja o login.
+   O relator (link próprio, perfil desembargador ou &rel=1) só recebe os processos prontos: situação Corrigida ou Liberada, a mais
    adiantada entre a do lote e a do Ex Officio (dataCorrecao/dataLiberacao na sessão). Os que estão por fazer ou por corrigir
    não chegam a ele, nem a minuta deles. Equipe e gestor recebem todos, com a marca "pronto".
    Gestão (só o gestor, com login):
    GET  ?lote=1&previa=1&sessoes=A,B&assunto=&classe=&texto=   prévia: quantos processos das sessões entram pelo filtro
    POST ?lote=1 {acao:'criar', id, titulo, descricao, sessoes, filtro}   cria acervo/lotes/<id>.json com os processos das sessões
    POST ?lote=1 {acao:'sessoes', id, sessoes}  associa e desassocia sessões: entram os processos das novas sessões que passam
-                                               no filtro do lote; saem os das sessões retiradas; os demais ficam como estão */
+                                               no filtro do lote; saem os das sessões retiradas; os demais ficam como estão.
+                                               Os que saem ficam guardados em lote.retirados, com tudo o que já foi registrado,
+                                               e voltam iguais se a sessão for associada de novo */
 const L = require('./_lib');
 const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/, DATA = /^\d{4}-\d{2}-\d{2}$/;
 const nada = e => { if (e.status === 404) return { dados: null }; throw e; };
@@ -83,10 +86,10 @@ module.exports = async (req, res) => {
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   const gestor = !!(login && L.gestor(login));
   try {
-    const relator = !gestor && (!login || (await L.acessos(login)).perfil === 'desembargador');
     if (req.method === 'POST') return await gravar(req, res, login, gestor);
     if (req.method !== 'GET') return res.status(405).json({ erro: 'método não aceito' });
     const q = req.query || {}, id = String(q.id || '');
+    const relator = !!q.rel || (!gestor && (!login || (await L.acessos(login)).perfil === 'desembargador'));
     if (q.previa) {
       if (!gestor) return res.status(403).json({ erro: 'Só o gestor cria lotes.' });
       const ss = String(q.sessoes || '').split(',').filter(s => DATA.test(s)), f = { assunto: q.assunto, classe: q.classe, texto: q.texto };
@@ -157,16 +160,22 @@ async function gravar(req, res, u, gestor) {
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
       const antes = new Set(lote.sessoes || []), novas = ss.filter(s => !antes.has(s));
       const tem = new Set((lote.itens || []).map(i => i.sessao + '|' + i.processo));
-      const manter = (lote.itens || []).filter(i => ss.includes(i.sessao)), saem = (lote.itens || []).length - manter.length;
-      let entram = 0;
+      const manter = (lote.itens || []).filter(i => ss.includes(i.sessao)), fora = (lote.itens || []).filter(i => !ss.includes(i.sessao));
+      const saem = fora.length, ret = lote.retirados || {};
+      fora.forEach(i => { ret[i.sessao + '|' + i.processo] = i; });
+      let entram = 0, voltam = 0;
       for (const s of ss) (await itensSessao(s)).filter(x => passa(x, lote.filtro)).forEach(x => {
-        if (tem.has(s + '|' + x.cnj)) return; manter.push(novoItem(s, x)); entram++;
+        const k = s + '|' + x.cnj;
+        if (tem.has(k)) return;
+        if (ret[k]) { manter.push(ret[k]); delete ret[k]; voltam++; } else manter.push(novoItem(s, x));
+        entram++;
       });
+      if (Object.keys(ret).length) lote.retirados = ret; else delete lote.retirados;
       lote.itens = manter; lote.sessoes = ss; lote.atualizado_em = new Date().toISOString().slice(0, 10);
       (lote.itens || []).forEach(i => { if (i.grupo == null && (lote.grupos || []).some(g => /^g\d+$/.test(g.id))) { const g = lote.grupos.find(x => x.rotulo === i.assunto); if (g) i.grupo = g.id; } });
       try {
         await L.gravarJson(rel, lote, sha, 'Lotes (' + u + '): sessões do lote ' + id + ' → ' + (ss.join(', ') || 'nenhuma') + ' (+' + entram + ' −' + saem + ')');
-        return res.status(200).json({ ok: true, entram, saem, novas, total: lote.itens.length });
+        return res.status(200).json({ ok: true, entram, voltam, saem, novas, total: lote.itens.length });
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });

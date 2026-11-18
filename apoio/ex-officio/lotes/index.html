@@ -133,25 +133,28 @@ const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
 let RELATOR=false, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
 const params=new URLSearchParams(location.search);
+/* /cmt/lotes/ é a página do relator: sempre na visão dele, mesmo com login da equipe. /lotes/ é a página da equipe. */
+const MODO_REL=/^\/cmt\/lotes/.test(location.pathname);
 /* link próprio do relator: a chave (k) vale como credencial, como no Painel do relator (/cmt?k=…) */
 const CMTK=(function(){try{const m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){const v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);const q=new URLSearchParams(location.search);q.delete('k');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash.replace(/[#&]?k=[^&#]+/,''))}return sessionStorage.getItem('cmt_k')||''}catch(e){return ''}})();
-async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/painel?lote=1'+(q?'&'+q.replace(/^\?/,''):''),{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
+async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/painel?lote=1'+(MODO_REL?'&rel=1':'')+(q?'&'+q.replace(/^\?/,''):''),{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 async function post(b){const r=await fetch('/api/painel?lote=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function mostra(html){$('#ld').hidden=true;const a=$('#app');a.hidden=false;a.innerHTML=html}
 function falha(e){
-  if(e.status===401){$('#ld-m').innerHTML='O painel de lotes usa o mesmo acesso do Painel do relator.<br><a class="b pri" style="margin-top:14px" href="/equipe/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
+  if(e.status===401){$('#ld-m').innerHTML=MODO_REL?'Abra esta página pelo link do Painel do relator.':'O painel de lotes da equipe usa o login do Ex Officio.<br><a class="b pri" style="margin-top:14px" href="/equipe/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
   $('#ld-m').textContent='Não foi possível abrir: '+e.message;$('#ld .cmt-ld-b').hidden=true;
 }
 function cabecalho(lotes,id,usuario){
   return `<div class="cmt-hd2"><i class="star" aria-hidden="true"></i>
-   <div class="cmt-hd2-t"><p class="cmt-ey">Gabinete CMT · acesso do relator</p><p class="cmt-hd2-h">Lotes do <em>gabinete.</em></p></div>
+   <div class="cmt-hd2-t"><p class="cmt-ey">Gabinete CMT · ${MODO_REL?'acesso do relator':'equipe'}</p><p class="cmt-hd2-h">Lotes do <em>gabinete.</em></p></div>
    <span class="cmt-sp"></span>
    <div class="cmt-ut">
    <label class="hb" title="Lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}</option>`).join('')}</select></label>
-   ${LISTA.gestor?`<button type="button" class="hb" id="b-novo" title="Criar um lote a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo lote</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
+   ${LISTA.gestor&&!MODO_REL?`<button type="button" class="hb" id="b-novo" title="Criar um lote a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo lote</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
    <a class="hb" href="/cmt/" title="Voltar ao Painel do relator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Painel do relator</span></a>
-   ${CMTK&&!usuario?'':`<a class="hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`}
-   <a class="hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Modus Operandi</span></a>
+   ${MODO_REL?'':`<a class="hb" href="/cmt/lotes/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre a página do lote como o Relator a vê (/cmt/lotes/)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Página do Relator</span></a>`}
+   ${MODO_REL||(CMTK&&!usuario)?'':`<a class="hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`}
+   ${MODO_REL?'':'<a class="hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Modus Operandi</span></a>'}
    <button type="button" class="hb" id="tema" title="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Tema</span></button>
    <button type="button" class="hb" id="atu" title="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg><span>Atualizar</span></button>
    </div></div>`;
@@ -161,7 +164,10 @@ async function inicio(){
     const L=await api('');LISTA={lotes:L.lotes||[],calendario:L.calendario||[],gestor:!!L.gestor};
     const lotes=LISTA.lotes; if(!lotes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhum lote cadastrado.'+(LISTA.gestor?' Use “Novo lote” para criar o primeiro.':'')+'</p>');ligaCab();if(LISTA.gestor)abrirNovo();return}
     const id=params.get('id')||lotes[0].id;
-    const R=await api('?id='+encodeURIComponent(id)); LOTE=R.lote; RELATOR=!!R.relator; montar(lotes,id,L.usuario);
+    const R=await api('?id='+encodeURIComponent(id));
+    /* só com a chave do relator (sem login), /lotes/ leva à página dele */
+    if(!MODO_REL&&R.relator){location.replace('/cmt/lotes/?id='+encodeURIComponent(id)+location.hash);return}
+    LOTE=R.lote; RELATOR=!!R.relator; montar(lotes,id,L.usuario);
   }catch(e){falha(e)}
 }
 function ligaCab(){
@@ -238,7 +244,7 @@ function perfil(it,i){
     :`<p class="none">Minuta não disponível no painel${e.situacao==='A minutar'?' (processo a minutar)':/Voto próprio|Sem modelo/.test(e.situacao||'')?' (voto próprio, sem acórdão-modelo)':''}.</p>`;
   return `<section class="cmt-q pf" id="p-${it.uid}" data-u="${it.uid}" style="border-top-color:${c}">
    <h2><i class="nn">ITEM ${pad(it.item)}</i><span class="cnj">${it.processo}</span><span class="tg">${esc(it.tipo_caso)}</span><span class="tg">${esc(it.resultado)}</span><span class="tg so-equipe">${esc(e.situacao||'')}</span><span class="cmt-sp"></span>
-   <span class="nav"><a class="b" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Modus Operandi">Consulta ↗</a>${pv?`<button type="button" class="b" data-vai="${pv.uid}">← ${pad(pv.item)}</button>`:''}${nx?`<button type="button" class="b" data-vai="${nx.uid}">${pad(nx.item)} →</button>`:''}<button type="button" class="b" onclick="document.getElementById('matriz').scrollIntoView({behavior:'smooth'})">Matriz ↑</button></span></h2>
+   <span class="nav"><a class="b so-equipe" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Modus Operandi">Consulta ↗</a>${pv?`<button type="button" class="b" data-vai="${pv.uid}">← ${pad(pv.item)}</button>`:''}${nx?`<button type="button" class="b" data-vai="${nx.uid}">${pad(nx.item)} →</button>`:''}<button type="button" class="b" onclick="document.getElementById('matriz').scrollIntoView({behavior:'smooth'})">Matriz ↑</button></span></h2>
    <div class="grid">${b}</div>${mn}</section>`;
 }
 function cls(p,sec,i){
@@ -331,12 +337,12 @@ function abrirSessoes(){
   if(!LOTE)return;
   const f=LOTE.filtro||{}, fd=[f.assunto&&('assunto contém “'+f.assunto+'”'),f.classe&&('classe contém “'+f.classe+'”'),f.texto&&('texto “'+f.texto+'”')].filter(Boolean).join(' · ')||'todos os processos da sessão';
   $('#gest').innerHTML=`<section class="cmt-q" id="g-ses"><h2><i class="nn">00</i><span>Sessões do <em>lote.</em></span><span class="cmt-n">${esc(LOTE.titulo)} · filtro: ${esc(fd)}</span><span class="cmt-sp"></span><button type="button" class="b" id="gs-x">Fechar</button></h2>
-   <p class="none" style="font-style:normal">Ao associar uma sessão, entram os processos dela que passam no filtro do lote. Ao desassociar, saem os processos daquela sessão. Os demais ficam como estão, com os dados já registrados.</p>
+   <p class="none" style="font-style:normal">Ao associar uma sessão, entram os processos dela que passam no filtro do lote. Ao desassociar, saem os processos daquela sessão, mas ficam guardados: se a sessão for associada de novo, eles voltam com tudo o que já estava registrado. Os demais ficam como estão.</p>
    ${listaSessoes(LOTE.sessoes||[],'gs-s')}
    <div class="acts"><button type="button" class="b pri" id="gs-ok">Salvar sessões</button><span class="k" id="gs-m"></span></div></section>`;
   $('#gs-x').onclick=fechaGest;
   $('#gs-ok').onclick=async()=>{const ss=marcadas('gs-s');$('#gs-ok').disabled=true;$('#gs-m').textContent='Atualizando o lote…';
-    try{const r=await post({acao:'sessoes',id:LOTE.id,sessoes:ss});toast(`Lote atualizado: +${r.entram} −${r.saem}`);setTimeout(()=>location.reload(),700)}
+    try{const r=await post({acao:'sessoes',id:LOTE.id,sessoes:ss});toast(`Lote atualizado: +${r.entram} −${r.saem}`+(r.voltam?` (${r.voltam} com os dados de antes)`:''));setTimeout(()=>location.reload(),700)}
     catch(e){$('#gs-m').textContent=e.message;$('#gs-ok').disabled=false}};
   $('#g-ses').scrollIntoView({behavior:'smooth'});
 }

@@ -70,6 +70,8 @@ jobs:
           mkdir -p site/public/editor && cp apoio/modus-operandi/modus-operandi-editor.html site/public/editor/index.html
           # Painel de lotes (/lotes/): página própria, fora da navegação do Ex Officio, com o mesmo login; dados por /api/painel?lote=1
           mkdir -p site/public/lotes && cp apoio/ex-officio/lotes/index.html site/public/lotes/index.html
+          # /cmt/lotes/ é a página do lote para o relator (mesmo arquivo; a rota põe a página sempre na visão dele)
+          mkdir -p site/public/cmt/lotes && cp apoio/ex-officio/lotes/index.html site/public/cmt/lotes/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
           # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.
           mkdir -p site/public/monitor
