@@ -2846,7 +2846,7 @@ function comAbrir(L){
     (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toast('Mensagem copiada.');}).catch(function(){toast('Não foi possível copiar a mensagem.');});};
   f.onsubmit=function(e){e.preventDefault();var tx=f.tx.value.trim();if(!tx)return;var bt=f.querySelector('[type=submit]');bt.disabled=true;
     api('/api/pendencias?com=1',{method:'POST',body:JSON.stringify({titulo:m.titulo,texto:tx,cnjs:L.map(function(i){return i.cnj;})})})
-      .then(function(){d.close();d.remove();toast('Comunicado enviado ao painel do gabinete e às notificações do desembargador.');})
+      .then(function(r){d.close();d.remove();var aviso=r.whatsapp==='aceito'?' WhatsApp aceitou o envio.':r.whatsapp==='falhou'?' O envio ao WhatsApp falhou.':r.whatsapp==='sem_configuracao'?' WhatsApp ainda não configurado.':'';toast('Comunicado salvo no painel do gabinete.'+aviso);})
       .catch(function(er){bt.disabled=false;toast(er.message||'Não foi possível enviar o comunicado.');});};
   if(d.showModal)d.showModal();else d.setAttribute('open','');
   setTimeout(function(){var x=d.querySelector('textarea');if(x){x.focus();x.setSelectionRange(0,0);x.scrollTop=0;}},50);
