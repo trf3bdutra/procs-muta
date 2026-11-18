@@ -1691,6 +1691,33 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
 #v-pauta.ed .trb-p .tp:nth-child(3) .tp-b i{background:#4d6f8f}#v-pauta.ed .trb-p .tp:nth-child(4) .tp-b i{background:#2f7a5f}
 #v-pauta.ed .trb-p .tp:nth-child(1){box-shadow:inset 3px 0 0 #173f3d}#v-pauta.ed .trb-p .tp:nth-child(2){box-shadow:inset 3px 0 0 #85601d}#v-pauta.ed .trb-p .tp:nth-child(3){box-shadow:inset 3px 0 0 #4d6f8f}#v-pauta.ed .trb-p .tp:nth-child(4){box-shadow:inset 3px 0 0 #2f7a5f}
 #v-pauta.ed .tm .tm-s{font-size:11px}
+
+/* Pautas e Monocráticas na estrutura do Monitoramento: título na largura toda, sumário fixo à esquerda ("Nesta página") e seções numeradas */
+.pp-sec,.pp-sub{display:none}
+#v-pauta.pt2{display:grid;grid-template-columns:232px minmax(0,1fr);column-gap:36px;align-items:start}
+#v-pauta.pt2>*,#v-pauta.pt2 #trb>*,#v-pauta.pt2 #trb>.trb-in>*,#v-pauta.pt2.mono #trm>*,#v-pauta.pt2.mono #trm>.trb-in>*,#v-pauta.pt2.mono #trm .trb-h>*,#v-pauta.pt2.mono #trm .trm-c>*{grid-column:2;min-width:0}
+#v-pauta.pt2:not(.mono) #trb,#v-pauta.pt2:not(.mono) #trb>.trb-in,#v-pauta.pt2.mono #trm,#v-pauta.pt2.mono #trm>.trb-in,#v-pauta.pt2.mono #trm .trb-h,#v-pauta.pt2.mono #trm .trm-c{display:contents!important}
+#v-pauta.pt2 #trb .trb-h,#v-pauta.pt2.mono #trm .trb-h>div:first-child{grid-column:1/-1;margin:4px 0 22px!important;padding:0!important}
+#v-pauta.pt2 .trb-fil{display:none!important}
+#v-pauta.pt2 .trb-h h1{font-size:52px!important;line-height:1.02!important;letter-spacing:-.045em!important}
+#v-pauta.pt2 .pp-sub{display:flex;flex-direction:column;grid-column:1;grid-row:2/span 40;position:sticky;top:84px;border-top:2px solid var(--eg);padding:12px 0 0;margin:0}
+#v-pauta.pt2 .pp-sub .ctl-nk{margin:0 0 10px;font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
+#v-pauta.pt2 .pp-sub button{display:block;width:100%;text-align:left;border:0;border-left:1px solid var(--el);border-radius:0;padding:6px 0 6px 12px;font:400 13px var(--font);color:var(--em);background:transparent;cursor:pointer}
+#v-pauta.pt2 .pp-sub button i{display:none}
+#v-pauta.pt2 .pp-sub button small{margin-left:5px;font:400 10.5px var(--emono);color:#8a8d86}
+#v-pauta.pt2 .pp-sub button:hover{color:var(--ei)}
+#v-pauta.pt2 .pp-sub button[aria-current=true]{border-left:2px solid var(--eo);padding-left:11px;font-weight:700;color:var(--ei)}
+#v-pauta.pt2 .pp-sub .ctl-nota{margin:12px 0 0;font-size:12px;line-height:1.5;color:var(--em)}
+#v-pauta.pt2:not(.mono) [data-m=mono],#v-pauta.pt2.mono [data-m=pauta]{display:none!important}
+#v-pauta.pt2 .pp-sec{display:block;border-top:2px solid var(--eg);padding:16px 0 0;margin:34px 0 14px;scroll-margin-top:84px}
+#v-pauta.pt2 #pp-and,#v-pauta.pt2 #pp-prod{margin-top:0}
+#v-pauta.pt2 .pp-sec .ctl-k{margin:0;font:400 10.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--eo2)}
+#v-pauta.pt2 .pp-sec h2{margin:6px 0 4px;font-size:30px;line-height:1.1;font-weight:700;letter-spacing:-.03em;color:var(--ei)}
+#v-pauta.pt2 .pp-sec .ctl-d{margin:0;max-width:680px;font-size:13.5px;color:var(--em)}
+@media (max-width:980px){#v-pauta.pt2{display:block}#v-pauta.pt2 .pp-sub{position:static;flex-direction:row;flex-wrap:wrap;gap:6px;border-top:0;padding:0;margin:0 0 18px}#v-pauta.pt2 .pp-sub .ctl-nk,#v-pauta.pt2 .pp-sub .ctl-nota{display:none}#v-pauta.pt2 .pp-sub button{width:auto;border:1px solid var(--el);border-radius:999px;padding:6px 12px}#v-pauta.pt2 .pp-sub button[aria-current=true]{border:1px solid var(--eo);padding-left:12px}#v-pauta.pt2 .trb-h h1{font-size:38px!important}}
+#v-pauta.pt2.mono>*,#v-pauta.pt2.mono #trm *{order:0}
+#v-pauta.pt2.mono .trb-h>div:first-child{order:0}#v-pauta.pt2.mono #pp-prod{order:1}#v-pauta.pt2.mono .trm-sel{order:2}#v-pauta.pt2.mono #trm-k{order:3}#v-pauta.pt2.mono #pp-urg{order:4}#v-pauta.pt2.mono #trm-urq{order:5}#v-pauta.pt2.mono #pp-dec{order:6}#v-pauta.pt2.mono .pt-corpo{order:7}#v-pauta.pt2.mono #trm-urq{margin-top:0!important}
+@media (max-width:980px){#v-pauta.pt2{display:flex;flex-direction:column}#v-pauta.pt2:not(.mono)>*,#v-pauta.pt2:not(.mono) #trb>*,#v-pauta.pt2:not(.mono) #trb>.trb-in>*{order:1}#v-pauta.pt2:not(.mono) #trb .trb-h{order:-2}#v-pauta.pt2 .pp-sub{order:-1!important}#v-pauta.pt2.mono .trb-h>div:first-child{order:-2!important}#v-pauta.pt2 .pt-corpo,#v-pauta.pt2 .pp-sec,#v-pauta.pt2 #trm-urq{width:100%;min-width:0;max-width:100%}#v-pauta.pt2 .pp-sec{margin:24px 0 12px}#v-pauta.pt2 .pp-sec h2{font-size:24px}}#v-pauta.pt2.mono .pp-sub{order:0}
 </style>
 </head>
 <body>
@@ -1757,18 +1784,18 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
     </div>
   </main>
 
-  <main id="v-pauta" hidden>
+  <main id="v-pauta" class="pt2" hidden>
     <section class="trb" id="trb" aria-labelledby="trb-t"><div class="trb-in">
       <div class="trb-h"><div><div class="trb-eyr"><small class="trb-ey">01 / Produção</small><span class="trb-tag" id="ses-tag"></span></div><h1 id="trb-t">Pauta <em class="trb-em">de julgamento.</em></h1><p class="trb-d" id="trb-d"></p></div>
         <div class="trb-c"><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><label class="trb-sl">Sessão<select id="ses" aria-label="Sessão"></select></label><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span><small id="ses-sub" hidden></small></div></div>
-      <ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
+      <div class="pp-sec" id="pp-and" data-m="pauta"><p class="ctl-k">01 / Acompanhar a sessão</p><h2>Andamento da sessão</h2><p class="ctl-d">Marcos do peço dia à sessão, com o avanço das minutas, correções e liberações.</p></div><ol class="trb-mk" id="trb-mk" aria-label="Marcos da sessão"></ol>
       <div class="trb-p" id="trb-p"></div></div>
-      <div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
+      <div class="pp-sec" id="pp-num" data-m="pauta"><p class="ctl-k">02 / Conferir os números</p><h2>Números da sessão</h2><p class="ctl-d">Pautados, julgados, adiados e retirados; minutas, revisões e liberações; alertas e intercorrências.</p></div><div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div><div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
     <section class="trb trm" id="trm" aria-labelledby="trm-t"><div class="trb-in">
       <div class="trb-h"><div><small class="trb-ey trm-ey">02 / Produção</small><h1 id="trm-t">Decisões <em class="trm-em">monocráticas.</em></h1><p class="trb-d">Do registro à assinatura.</p></div>
-        <div class="trb-c trm-c"><div class="trm-sel"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b" id="trm-hoje" title="Voltar ao período atual: o mês ou a semana de hoje">Hoje</button><button class="b trm-reg" id="trm-reg" aria-expanded="false" aria-label="Registrar monocrática" title="Registrar monocrática">+ Registrar</button></div><div class="trm-k" id="trm-k" role="group" aria-label="Estatísticas das monocráticas: semana, mês e total" title="Contagem pela data de cada etapa"></div></div></div></div>
+        <div class="trb-c trm-c"><div class="pp-sec" id="pp-prod" data-m="mono"><p class="ctl-k">01 / Medir a produção</p><h2>Produção do período</h2><p class="ctl-d">Registradas, minutadas, para assinatura e assinadas, por semana, mês e total.</p></div><div class="trm-sel"><small class="trm-st" id="trm-st"></small><span class="seg" id="trm-per"><button data-v="tudo" aria-pressed="false">Todo o período</button><button data-v="mes" aria-pressed="true">Mês</button><button data-v="sem" aria-pressed="false">Semana</button></span><button class="b ic2" id="trm-ant" aria-label="Período anterior" title="Período anterior">‹</button><span class="trb-sl trm-lb" id="trm-lb"></span><button class="b ic2" id="trm-prox" aria-label="Próximo período" title="Próximo período">›</button><button class="b" id="trm-hoje" title="Voltar ao período atual: o mês ou a semana de hoje">Hoje</button><button class="b trm-reg" id="trm-reg" aria-expanded="false" aria-label="Registrar monocrática" title="Registrar monocrática">+ Registrar</button></div><div class="trm-k" id="trm-k" role="group" aria-label="Estatísticas das monocráticas: semana, mês e total" title="Contagem pela data de cada etapa"></div></div></div></div>
       <div class="trb-fil" aria-hidden="true"><i></i><i></i></div></section>
-    <div class="trm-urq" id="trm-urq"></div>
+    <div class="pp-sec" id="pp-urg" data-m="mono"><p class="ctl-k">02 / Atender as urgências</p><h2>Fila de urgências</h2><p class="ctl-d">Pedidos urgentes aguardando apreciação, com o prazo de cada um e as sugestões do PJe.</p></div><div class="trm-urq" id="trm-urq"></div><nav class="pp-sub" id="pp-sub" aria-label="Seções da página"><p class="ctl-nk">Nesta página</p><button type="button" data-pp="pp-and" data-m="pauta"><i>01</i><span>Andamento da sessão</span><small id="pp-and-n"></small></button><button type="button" data-pp="pp-num" data-m="pauta"><i>02</i><span>Números da sessão</span><small id="pp-num-n"></small></button><button type="button" data-pp="pp-lst" data-m="pauta"><i>03</i><span>Processos da pauta</span><small id="pp-lst-n"></small></button><button type="button" data-pp="pp-prod" data-m="mono"><i>01</i><span>Produção do período</span><small id="pp-prod-n"></small></button><button type="button" data-pp="pp-urg" data-m="mono"><i>02</i><span>Fila de urgências</span><small id="pp-urg-n"></small></button><button type="button" data-pp="pp-dec" data-m="mono"><i>03</i><span>Decisões</span><small id="pp-dec-n"></small></button><p class="ctl-nota">Clique numa seção para ir até ela.</p></nav>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <section class="urg" id="urg" hidden></section>
     <p class="ctl-lead">Metas do CNJ, sobrestados e casos sensíveis numa só página. Cada linha lê e grava a ficha do processo, a mesma do CMT-monitor.</p>
@@ -1780,7 +1807,7 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
     <div class="ctl-sec" id="ctl-sens"><div class="ctl-hd"><div><p class="ctl-k">03 / Cuidar dos casos sensíveis</p><h2>Casos sensíveis</h2><p class="ctl-d">Saúde e outros casos que pedem acompanhamento mais próximo, pelo assunto, pelas etiquetas ou incluídos pela equipe.</p></div><span class="pil" id="pil-sens" role="group" aria-label="Ações da seção"></span></div></div>
     <section class="metas" id="sens"></section>
     <div class="pt-mk" id="mk"></div>
-    <div class="pt-corpo"><div class="pt-lista">
+    <div class="pp-sec" id="pp-lst" data-m="pauta"><p class="ctl-k">03 / Preparar os votos</p><h2>Processos da pauta</h2><p class="ctl-d">Cada processo com minuta, correção e liberação, os controles do cartão e o prontuário ao lado.</p></div><div class="pp-sec" id="pp-dec" data-m="mono"><p class="ctl-k">03 / Do registro à assinatura</p><h2>Decisões</h2><p class="ctl-d">Para minuta, aguardando assinatura e concluídas, com os controles do cartão e o prontuário ao lado.</p></div><div class="pt-corpo"><div class="pt-lista">
     <form class="urg-n mono-n" id="mono-n" hidden><b>Registrar monocrática</b><input name="cnj" placeholder="nº CNJ do processo" required><select name="tipo"><option value="">tipo de ato…</option></select><button class="b pri">Registrar</button></form>
     <section class="pt-hd" aria-label="Filtros e seleção da lista">
     <div class="ed-tabs" id="ed-tabs" hidden><div class="ed-tg" id="ed-tl" role="group" aria-label="Escopo e exportação"></div><span class="sp"></span><div class="ed-tg" id="ed-tr"></div></div>
@@ -3212,7 +3239,7 @@ function vista(v){if(v==='controles'||v==='monitoramento')v='ctrl';if(v==='urg')
   $('#v-pauta').hidden=(v==='cmt');
   if(v==='cmt'){try{history.replaceState(null,'','#cmt');}catch(e){}nxRotulo('cmt');var h2=document.querySelector('#app header.nx');if(h2)h2.classList.add('navcmt');cmtAbrir();Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')==='cmt')a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});return;}
   var f=v==='inicio'?S.fonte:v;if(v!=='inicio'&&f!==S.fonte){if(nPend()){salvarTudo();toast('Alterações salvas ao trocar de página.');}S.fonte=f;S.doc=null;S.aberto={};S.sel={};
-    var vp=$('#v-pauta');vp.classList.toggle('mono',f==='mono');CTRLT.forEach(function(c){vp.classList.toggle(c,f==='ctrl');});vp.classList.toggle('ctl',f==='ctrl');if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu)carregar();}
+    var vp=$('#v-pauta');vp.classList.toggle('mono',f==='mono');vp.classList.toggle('pt2',f==='pauta'||f==='mono');CTRLT.forEach(function(c){vp.classList.toggle(c,f==='ctrl');});vp.classList.toggle('ctl',f==='ctrl');if(f!=='pauta'&&f!=='mono')edLayout(false);if(U.eu)carregar();}
   Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-vw]'),function(a){if(a.getAttribute('data-vw')===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   nxRotulo(v);var hdr=document.querySelector('#app header.nx');if(hdr)hdr.classList.toggle('navcmt',v==='cmt');
   ctlMarca(alvo);
@@ -3222,6 +3249,12 @@ function ctlMarca(a){Array.prototype.forEach.call(document.querySelectorAll('#ct
 function ctlConta(){var n={metas:(MT.dados||[]).filter(function(x){return x.fase!=='Encerrado';}).length,sobr:(SB.dados||[]).length,sens:(SN.dados||[]).length};
   CTRLT.forEach(function(k){var e=$('#ctl-n-'+k);if(e)e.textContent=n[k]?String(n[k]):'';});}
 $('#ctl-sub').addEventListener('click',function(e){var b=e.target.closest('[data-sub]');if(!b)return;var k=b.getAttribute('data-sub');ctlMarca(k);try{history.replaceState(null,'','#'+k);}catch(x){}var h=$('#ctl-'+k);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});});
+/* sumário das Pautas e das Monocráticas: leva à seção e marca a atual */
+$('#pp-sub').addEventListener('click',function(e){var b=e.target.closest('[data-pp]');if(!b)return;var id=b.getAttribute('data-pp');ppMarca(id);var h=document.getElementById(id);if(h)h.scrollIntoView({behavior:'smooth',block:'start'});});
+function ppMarca(id){Array.prototype.forEach.call(document.querySelectorAll('#pp-sub [data-pp]'),function(b){b.setAttribute('aria-current',String(b.getAttribute('data-pp')===id));});}
+(function(){var pend=0;window.addEventListener('scroll',function(){if(pend)return;pend=requestAnimationFrame(function(){pend=0;var vp=$('#v-pauta');if(!vp||vp.hidden||!vp.classList.contains('pt2'))return;var m=vp.classList.contains('mono')?'mono':'pauta',at='';
+  Array.prototype.forEach.call(document.querySelectorAll('#v-pauta .pp-sec[data-m="'+m+'"]'),function(h){if(h.getBoundingClientRect().top<160)at=h.id;});
+  if(!at){var f=document.querySelector('#v-pauta .pp-sec[data-m="'+m+'"]');at=f?f.id:'';}ppMarca(at);});},{passive:true});})();
 document.querySelector('.tabs').addEventListener('click',function(e){var a=e.target.closest('[data-vw]');if(!a)return;e.preventDefault();vista(a.getAttribute('data-vw'));});
 function sesDe(d){return ((P.dados&&P.dados.sessoes)||[]).filter(function(s){return s.date===d;})[0]||{};}
 function prazo(x){return (sesDe(x.sessao).marcos||{}).entregaMinutas||x.sessao;}
