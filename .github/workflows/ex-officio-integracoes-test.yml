@@ -1,0 +1,26 @@
+name: Testes de integrações Ex Officio
+on:
+  pull_request:
+    paths:
+      - 'apoio/ex-officio/**'
+      - '.github/workflows/ex-officio-integracoes-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar sintaxe dos módulos e do painel
+        run: |
+          node --check apoio/ex-officio/api/_pedidos.js
+          node --check apoio/ex-officio/api/notificacoes.js
+          node --check apoio/ex-officio/api/_whatsapp.js
+          node --check apoio/ex-officio/api/_zernio-copia.js
+      - name: Testes isolados (sem Zernio, Meta ou PJe)
+        run: node --test apoio/ex-officio/tests/integracoes.test.js
