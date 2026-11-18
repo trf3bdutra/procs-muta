@@ -1811,8 +1811,11 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
     </section>
 
-    <aside class="cmt-dr" id="cmt-dr">
-      <button type="button" class="cmt-dr-h" id="cmt-dr-h" aria-expanded="false" aria-controls="cmt-dr-b"><span class="cmt-dr-k">Painéis</span><span class="cmt-rail" id="cmt-rail"></span></button>
+    <aside class="cmt-dr" id="cmt-dr" data-t="a">
+      <div class="cmt-dr-h" id="cmt-dr-h">
+        <button type="button" class="cmt-dr-k" id="cmt-dr-k" aria-expanded="false" aria-controls="cmt-dr-b">Painéis</button>
+        <div class="cmt-rail" id="cmt-rail"></div>
+      </div>
       <div class="cmt-dr-b" id="cmt-dr-b">
       <div class="cmt-dr-t">
         <p class="cmt-ey">Gabinete CMT · acesso do relator</p>
@@ -1822,6 +1825,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <div class="cmt-ind" id="cmt-ind"></div>
         <p class="cmt-sub" id="cmt-sub"></p>
       </div>
+      <nav class="cmt-dr-tb" id="cmt-dr-tb" role="tablist" aria-label="Painéis do relator"></nav>
     <div class="cmt-grid" id="cmt-grid">
         <section class="cmt-q cmt-ass" id="cmt-ass">
           <h2><i class="nn">01</i>Para <em>assinar.</em>
@@ -1847,8 +1851,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
           </section>
         </aside>
       </div>
-    <details class="cmt-mais" id="cmt-mais">
-        <summary>Calendário, marcos, comunicados e equipe</summary>
+    <div class="cmt-mais" id="cmt-mais">
         <div class="cmt-mais-b">
           <section class="cmt-q cmt-pan"><h2>Calendário do <em>gabinete.</em><span class="cmt-sp"></span><span class="cmt-n">produção por dia</span></h2>
             <div class="cmt-cal-w"><div class="cmt-cal-h"><button type="button" class="cmt-mb" data-mes="-1" aria-label="Mês anterior">‹</button><b id="cmt-mes">—</b><button type="button" class="cmt-mb" data-mes="1" aria-label="Próximo mês">›</button><button type="button" class="cmt-hoje" id="cmt-hoje">Hoje</button></div>
@@ -1871,7 +1874,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
           <p class="cmt-fontes" id="cmt-fontes"></p>
           <span hidden id="cmt-n-ad"></span><span hidden id="cmt-n-ass"></span><span hidden id="cmt-n-lib"></span><div hidden id="cmt-c-lib"></div>
         </div>
-      </details>
+      </div>
       </div>
     </aside>
 
@@ -4042,19 +4045,31 @@ ab.innerHTML='<p class="cmt-fc-n">'+esc(x.numero||x.titulo||'—')+'</p>'+(x.pri
 /* gaveta lateral: começa recolhida; a lingueta mostra os números e marca o que mudou desde a última abertura */
 function cmtVisto(){try{return JSON.parse(localStorage.getItem('cmt_visto')||'{}');}catch(e){return {};}}
 function cmtRail(na,nu,nd,hj){
-var el=$('#cmt-rail');if(!el)return;
 var v=cmtVisto(),d=function(k,n){var a=Number(v[k]);return (isFinite(a)&&n>a)?(n-a):0;};
 var it=[['a','ok',na,'assinar',d('a',na)],['u','al'+(hj?' hj':''),nu,'urgências',d('u',nu)],['d','inf',nd,'dúvidas',d('d',nd)]];
-el.innerHTML=it.map(function(x){return '<b class="'+x[1]+(x[4]?' nov':'')+'"><i>'+x[2]+'</i><small>'+x[3]+'</small>'+(x[4]?'<s title="'+x[4]+' desde a última abertura">+'+x[4]+'</s>':'')+'</b>';}).join('');
+var el=$('#cmt-rail');
+if(el)el.innerHTML=it.map(function(x){return '<button type="button" data-cdt="'+x[0]+'" class="'+x[1]+(x[4]?' nov':'')+'" title="'+x[2]+' '+x[3]+'"><i>'+x[2]+'</i><small>'+x[3]+'</small>'+(x[4]?'<s>+'+x[4]+'</s>':'')+'</button>';}).join('');
+var tb=$('#cmt-dr-tb'),at=cmtAba();
+if(tb)tb.innerHTML=it.concat([['m','',null,'gabinete',0]]).map(function(x){
+  return '<button type="button" role="tab" data-cdt="'+x[0]+'" class="'+x[1]+'" aria-selected="'+(at===x[0])+'">'+x[3]+(x[2]==null?'':'<i>'+x[2]+'</i>')+(x[4]?'<s>+'+x[4]+'</s>':'')+'</button>';}).join('');
 var h=$('#cmt-dr-h');if(h)h.classList.toggle('nov',it.some(function(x){return x[4];}));}
-function cmtGaveta(ab){
-var g=$('#cmt-dr'),h=$('#cmt-dr-h');if(!g)return;
+function cmtAba(a){var g=$('#cmt-dr');if(!g)return 'a';
+if(a){g.setAttribute('data-t',a);var tb=$('#cmt-dr-tb');if(tb)[].forEach.call(tb.children,function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-cdt')===a));});
+  var b2=$('#cmt-dr-b');if(b2)b2.scrollTop=0;}
+return g.getAttribute('data-t')||'a';}
+function cmtGaveta(ab,aba){
+if(aba)cmtAba(aba);
+var g=$('#cmt-dr');if(!g)return;
 g.classList.toggle('on',ab);document.body.classList.toggle('cmt-dr-on',ab);
-if(h)h.setAttribute('aria-expanded',String(!!ab));
+var hk=$('#cmt-dr-k');if(hk)hk.setAttribute('aria-expanded',String(!!ab));
 if(ab){var j=CMT.dados||{},as=j.assinar||{};
   try{localStorage.setItem('cmt_visto',JSON.stringify({a:(as.assinatura||[]).length,u:(j.urgencias||[]).length,d:(j.duvidas||[]).length}));}catch(e){}
   cmtInd();var q=$('#cmt-busca');if(q)q.focus();}}
 document.addEventListener('click',function(e){
+var ab=e.target.closest('[data-cdt]');
+if(ab){var k=ab.getAttribute('data-cdt');
+  if($('#cmt-dr').classList.contains('on')&&ab.closest('#cmt-dr-tb')){cmtAba(k);return;}
+  cmtGaveta(true,k);return;}
 if(e.target.closest('#cmt-dr-h')){cmtGaveta(!$('#cmt-dr').classList.contains('on'));return;}
 if(e.target.closest('#cmt-dr-x')){cmtGaveta(false);return;}});
 document.addEventListener('keydown',function(e){
@@ -6752,6 +6767,56 @@ body.cmt-solo header.nx .nx1{height:44px}
   #v-cmt .cmt-dr .cmt-ass-b{padding:12px 14px 14px}
   #v-cmt .cmt-dr .cmt-fc-l div{padding:7px 0}
 }
+
+/* ===== Gaveta: abas em vez de pilha, e o conteúdo da página cede espaço ===== */
+#v-cmt .cmt-wrap{transition:padding-right .22s ease}
+body.cmt-dr-on #v-cmt .cmt-wrap{padding-right:calc(min(460px,94vw) + 58px)}
+#v-cmt .cmt-dr-b{box-shadow:none;border-left:1px solid var(--el)}
+#v-cmt .cmt-dr-h{flex-direction:column}
+#v-cmt .cmt-dr-k{appearance:none;border:0;background:none;padding:0;cursor:pointer;writing-mode:vertical-rl;transform:rotate(180deg);font:400 9.5px var(--emono);letter-spacing:.18em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-dr-k:hover{color:var(--ei)}
+#v-cmt .cmt-rail button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;width:42px;padding:5px 0 4px;border:1px solid var(--el);background:var(--ep);line-height:1;cursor:pointer;font:inherit}
+#v-cmt .cmt-rail button i{font-style:normal;font-size:13px;font-weight:750;color:var(--ei)}
+#v-cmt .cmt-rail button small{margin-top:2px;font:400 7px var(--emono);letter-spacing:.02em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-rail button.ok{border-color:#9fd0b6;background:#e3f0ea}#v-cmt .cmt-rail button.ok i{color:#1f6a43}
+#v-cmt .cmt-rail button.al{border-color:#ecc9b8;background:#fdf6f3}#v-cmt .cmt-rail button.al i{color:var(--er)}
+#v-cmt .cmt-rail button.inf{border-color:#9cc0e0;background:#e3eef8}#v-cmt .cmt-rail button.inf i{color:#245b8c}
+#v-cmt .cmt-rail button.hj{box-shadow:inset 0 2px 0 var(--er)}
+#v-cmt .cmt-rail button s{position:absolute;top:-6px;right:-8px;min-width:16px;padding:0 3px;border:1px solid var(--eo2);background:var(--eo);color:#fff;font:700 9px var(--emono);line-height:14px;text-align:center;text-decoration:none}
+#v-cmt .cmt-rail button:hover{border-color:var(--ei)}
+/* barra de abas */
+#v-cmt .cmt-dr-tb{display:flex;gap:0;margin:0 -18px 16px;border-bottom:1px solid var(--el)}
+#v-cmt .cmt-dr-tb button{flex:1;position:relative;appearance:none;border:0;border-bottom:2px solid transparent;background:none;padding:11px 6px 9px;cursor:pointer;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em);display:flex;align-items:center;justify-content:center;gap:5px}
+#v-cmt .cmt-dr-tb button i{font-style:normal;font-family:inherit;font-size:11px;font-weight:750;color:var(--ei)}
+#v-cmt .cmt-dr-tb button:hover{color:var(--ei);background:var(--ep2)}
+#v-cmt .cmt-dr-tb button[aria-selected="true"]{color:var(--ei);border-bottom-color:var(--eg)}
+#v-cmt .cmt-dr-tb button[aria-selected="true"].al{border-bottom-color:var(--er)}
+#v-cmt .cmt-dr-tb button[aria-selected="true"].inf{border-bottom-color:#245b8c}
+#v-cmt .cmt-dr-tb button s{min-width:15px;padding:0 3px;border:1px solid var(--eo2);background:var(--eo);color:#fff;font:700 8.5px var(--emono);line-height:13px;text-decoration:none}
+/* uma aba por vez */
+#v-cmt .cmt-dr .cmt-grid,#v-cmt .cmt-dr .cmt-side{display:contents}
+#v-cmt .cmt-dr #cmt-ass,#v-cmt .cmt-dr #cmt-urg-p,#v-cmt .cmt-dr #cmt-dv-p,#v-cmt .cmt-dr #cmt-mais{display:none;margin:0 0 4px}
+#v-cmt .cmt-dr[data-t="a"] #cmt-ass,#v-cmt .cmt-dr[data-t="u"] #cmt-urg-p,#v-cmt .cmt-dr[data-t="d"] #cmt-dv-p,#v-cmt .cmt-dr[data-t="m"] #cmt-mais{display:block}
+#v-cmt .cmt-dr #cmt-mais{margin-top:0;border-top:0}
+#v-cmt .cmt-dr #cmt-mais .cmt-mais-b>.cmt-q{margin-bottom:22px}
+#v-cmt .cmt-dr #cmt-ass{display:none}
+#v-cmt .cmt-dr[data-t="a"] #cmt-ass{display:flex;flex-direction:column;min-height:420px}
+#v-cmt .cmt-dr .cmt-q h2{margin-top:0}
+@media (max-width:1100px){body.cmt-dr-on #v-cmt .cmt-wrap{padding-right:0}}
+@media (max-width:780px){
+  #v-cmt .cmt-dr-tb{margin:0 -14px 14px;position:sticky;top:76px;z-index:2;background:var(--ep)}
+  #v-cmt .cmt-dr-tb button{padding:12px 4px 10px;font-size:9px}
+  #v-cmt .cmt-rail button{flex:1;flex-direction:row;gap:6px;width:auto;height:44px}
+  #v-cmt .cmt-rail button i{font-size:15px}
+  #v-cmt .cmt-rail button small{margin:0;font-size:9px}
+}
+#v-cmt #cmt-pauta h2{flex-wrap:wrap;row-gap:9px}
+body.cmt-dr-on #v-cmt #cmt-pauta h2 .cmt-sp{display:none}
+body.cmt-dr-on #v-cmt #cmt-pauta h2 .cmt-bq{flex:1 1 100%;order:5}
+body.cmt-dr-on #v-cmt #cmt-pauta h2 .cmt-bq input{width:100%}
+body.cmt-dr-on #v-cmt #cmt-pauta h2 .b{order:6}
+body.cmt-dr-on #v-cmt .cmt-met{grid-template-columns:repeat(4,minmax(0,1fr))}
+body.cmt-dr-on #v-cmt .cmt-met div.mk{grid-column:1/-1}
 </style>
 </body>
 </html>
