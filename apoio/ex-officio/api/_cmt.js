@@ -113,12 +113,13 @@ async function painel(req, res, u) {
       return res.status(400).json({ erro: 'Ação desconhecida.' });
     } catch (e) { return res.status(e.status || 500).json({ erro: e.message }); }
   }
-  const [cal, doc, aus, pen, com] = await Promise.all([
+  const [cal, doc, aus, pen, com, avi] = await Promise.all([
     opc('acervo/sessoes/calendario.json'),
     FICHA.lerOpLeitura().then(x => x.doc).catch(() => null),
     opc('apoio/equipe-solicitacoes.json'),
     opc('apoio/equipe-pendencias.json'),
-    opc('apoio/equipe-comunicados.json')
+    opc('apoio/equipe-comunicados.json'),
+    opc('apoio/equipe-avisos.json')
   ]);
   const [regProd, equipeDoc] = await Promise.all([opc('apoio/regras/produtividade.json'), opc('apoio/equipe.json')]);
   /* comunicados da equipe ao desembargador: os não lidos primeiro, do mais recente para o mais antigo */
@@ -142,6 +143,29 @@ async function painel(req, res, u) {
       texto: r.description || '', numero: r.numero || '', de: r.creator || '', sessao: r.sessao || '',
       prioridade: r.urgency || '', em: r.atualizadoEm || r.criadoEm || '', resposta: r.resposta || '' }))
     .sort((x, y) => String(y.em).localeCompare(String(x.em)));
+
+  /* diligências do quadro da equipe, do ponto de vista do relator: as que estão com ele primeiro */
+  const ETAPA = { todo: 'A fazer', doing: 'Em andamento', review: 'Em revisão', done: 'Concluída' };
+  const diligencias = ((pen || {}).registros || [])
+    .filter(r => !r.excluida && r.stage !== 'done')
+    .map(r => ({ id: r.id, titulo: r.title || '', texto: r.description || '', para: r.assignee || '', de: r.creator || '',
+      numero: r.numero || '', sessao: r.sessao || '', prioridade: r.urgency || '', etapa: ETAPA[r.stage] || r.stage || '',
+      prazo: r.dueDate || '', em: r.atualizadoEm || r.criadoEm || '',
+      minha: L.norm(r.assignee) === L.norm(u), dele: L.norm(r.creator) === L.norm(u), pedido: PEDIDO.test(String(r.title || '')) }))
+    .sort((x, y) => (y.minha - x.minha) || (y.dele - x.dele) || String(y.em).localeCompare(String(x.em)))
+    .slice(0, 120);
+
+  /* notificações dirigidas ao relator: comunicados da equipe e avisos gerais ainda válidos */
+  const notificacoes = comunicados.filter(c => !c.lidoEm)
+    .map(c => ({ id: 'co-' + c.id, tipo: 'comunicado', titulo: c.titulo || 'Comunicado', texto: c.texto || '',
+      de: c.de || '', numero: (c.cnjs || [])[0] || '', em: c.em || '', comId: c.id }))
+    .concat(((avi || {}).registros || [])
+      .filter(a => !a.ate || a.ate >= hj)
+      .filter(a => !(a.para || []).length || (a.para || []).some(n => L.norm(n) === L.norm(u)))
+      .map(a => ({ id: 'av-' + a.id, tipo: 'aviso', titulo: a.title || 'Aviso', texto: a.message || '',
+        de: a.user || 'Responsável', numero: '', em: a.time || '', nivel: a.nivel || 'info' })))
+    .sort((x, y) => String(y.em).localeCompare(String(x.em)))
+    .slice(0, 60);
 
   /* monocráticas e urgências */
   const assinar = { assinatura: [], liberacao: [] }, urgencias = [];
@@ -221,7 +245,7 @@ async function painel(req, res, u) {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, pedidos, comunicados, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
+  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, pedidos, comunicados, notificacoes, diligencias, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 }
