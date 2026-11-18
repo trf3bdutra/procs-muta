@@ -2030,7 +2030,7 @@ function iniciar(nome,gestor){
   try{S.escopo=localStorage.getItem('eq_escopo')||'meus';}catch(e){}
   marcaSeg('#esc',S.escopo);
   sessoesEquipe(true);
-  P.dados=null;vista(/^#cmt/.test(location.hash)&&U.des?'cmt':/mono|urg/.test(location.hash)?'mono':/metas/.test(location.hash)?'metas':/sobr/.test(location.hash)?'sobr':/sens/.test(location.hash)?'sens':/controles|monitoramento/.test(location.hash)?'ctrl':/pauta/.test(location.hash)?'pauta':'inicio');
+  P.dados=null;vista((/^#cmt/.test(location.hash)||/\/cmt\/?$/.test(location.pathname))&&U.des?'cmt':/mono|urg/.test(location.hash)?'mono':/metas/.test(location.hash)?'metas':/sobr/.test(location.hash)?'sobr':/sens/.test(location.hash)?'sens':/controles|monitoramento/.test(location.hash)?'ctrl':/pauta/.test(location.hash)?'pauta':'inicio');
   notificacoes().then(function(){if(h0==='#notificacoes'){abrePainel('#p-not');setTimeout(marcarLido,1500);}});pendencias().then(function(){if(h0==='#pendencias')abrePainel('#p-pen');});
   clearInterval(S.tCal);S.tCal=setInterval(function(){if(!document.hidden)sessoesEquipe(false);},30000);
   if(!S.visOk){S.visOk=1;document.addEventListener('visibilitychange',function(){if(!document.hidden&&U.eu)sessoesEquipe(false);});}
