@@ -35,11 +35,31 @@ function quem(req) {
   try { if (!igual(assinar(v), s)) return null; const o = JSON.parse(Buffer.from(v, 'base64url').toString()); return o.e > Date.now() ? o.u : null; } catch (e) { return null; }
 }
 function exigir(req, res) { const u = quem(req); if (!u) { res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' }); return null; } return u; }
+/* Leituras condicionais ao GitHub (ETag): cada instância da função guarda a última resposta de cada GET e pergunta
+   "mudou?" com If-None-Match. A resposta 304 (não mudou) não conta na cota de 5.000 chamadas por hora e é mais rápida.
+   Qualquer gravação feita por esta instância limpa o cache, para a próxima leitura vir sempre do GitHub. */
+const ETAG = new Map(); let ETAG_BYTES = 0; const ETAG_MAX = 80e6;
+function etagGuardar(k, v) { const a = ETAG.get(k); if (a) { ETAG_BYTES -= a.buf.length; ETAG.delete(k); }
+  ETAG.set(k, v); ETAG_BYTES += v.buf.length;
+  for (const [kk, vv] of ETAG) { if (ETAG_BYTES <= ETAG_MAX || kk === k) break; ETAG.delete(kk); ETAG_BYTES -= vv.buf.length; } }
+function etagLimpar() { ETAG.clear(); ETAG_BYTES = 0; }
+/* fetch para a API do GitHub com o cache acima; devolve {status, ok, tipo, buf} (buf: Buffer) */
+async function ghFetch(url, init = {}) {
+  const metodo = String(init.method || 'GET').toUpperCase(), le = metodo === 'GET', h = Object.assign({}, init.headers || {});
+  const k = url + '|' + (h.Accept || h.accept || ''), c = le ? ETAG.get(k) : null;
+  if (c && c.etag) h['If-None-Match'] = c.etag;
+  const r = await fetch(url, Object.assign({}, init, { headers: h }));
+  if (le && r.status === 304 && c) { ETAG.delete(k); ETAG.set(k, c); return { status: 200, ok: true, tipo: c.tipo, buf: c.buf, cache: true }; }
+  const buf = Buffer.from(await r.arrayBuffer()), tipo = r.headers.get('content-type') || '';
+  if (!le) etagLimpar();
+  else if (r.ok && r.headers.get('etag')) etagGuardar(k, { etag: r.headers.get('etag'), buf, tipo });
+  return { status: r.status, ok: r.ok, tipo, buf };
+}
 async function gh(caminho, op = {}) {
   const t = process.env.GH_TOKEN; if (!t) throw new Error('GH_TOKEN ausente na Vercel');
-  const r = await fetch('https://api.github.com/repos/' + REPO + caminho, { ...op, headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + t, 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json', ...(op.headers || {}) } });
-  if (!r.ok) { let m = ''; try { m = (await r.json()).message || ''; } catch (e) {} const er = new Error('GitHub HTTP ' + r.status + (m ? ' · ' + m : '')); er.status = r.status; throw er; }
-  return r.json();
+  const r = await ghFetch('https://api.github.com/repos/' + REPO + caminho, { ...op, headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + t, 'X-GitHub-Api-Version': '2022-11-28', 'Content-Type': 'application/json', ...(op.headers || {}) } });
+  if (!r.ok) { let m = ''; try { m = JSON.parse(r.buf.toString('utf8')).message || ''; } catch (e) {} const er = new Error('GitHub HTTP ' + r.status + (m ? ' · ' + m : '')); er.status = r.status; throw er; }
+  return JSON.parse(r.buf.toString('utf8'));
 }
 /* planilhas do Google: avisa o Apps Script (implantação App da Web) que o repositório mudou, para atualizar na hora.
    Não espera a sincronização terminar (corta em 1,5 s); gravação vinda da própria planilha não avisa. */
@@ -87,8 +107,8 @@ async function lerGrande(rel) {
     if (o.content && o.encoding === 'base64') txt = Buffer.from(o.content, 'base64').toString('utf8');
     else {
       /* arquivo grande: texto cru (sem base64), mais leve que o blob */
-      const t = process.env.GH_TOKEN, r = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + rel + '?ref=' + RAMO, { headers: { Accept: 'application/vnd.github.raw+json', Authorization: 'Bearer ' + t, 'X-GitHub-Api-Version': '2022-11-28' } });
-      if (r.ok) txt = await r.text(); else txt = Buffer.from((await gh('/git/blobs/' + o.sha)).content, 'base64').toString('utf8');
+      const t = process.env.GH_TOKEN, r = await ghFetch('https://api.github.com/repos/' + REPO + '/contents/' + rel + '?ref=' + RAMO, { headers: { Accept: 'application/vnd.github.raw+json', Authorization: 'Bearer ' + t, 'X-GitHub-Api-Version': '2022-11-28' } });
+      if (r.ok) txt = r.buf.toString('utf8'); else txt = Buffer.from((await gh('/git/blobs/' + o.sha)).content, 'base64').toString('utf8');
     }
     GRANDE.set(rel, { sha: o.sha, txt });
     return { txt, sha: o.sha };
@@ -113,4 +133,4 @@ async function commitArquivos(arqs, msg) {
   await avisarPlanilha(msg);
   return c;
 }
-module.exports = { gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };
+module.exports = { ghFetch, gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };

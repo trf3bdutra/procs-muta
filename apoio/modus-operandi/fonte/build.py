@@ -150,9 +150,9 @@ for n, a in AC.items():
     acx[n] = [_v(a.get('Classe') or a.get('classe_judicial')), _v(a.get('Assunto_Principal') or a.get('assunto_judicial')), _v(a.get('polo_ativo') or a.get('Polo_Ativo')), _v(a.get('polo_passivo') or a.get('Polo_Passivo')), ramo_mat(a)]
 # prompt do gabinete para a LIA (Prompt_Minuta_CMT v3): a Consulta recorta pela peça e junta os dados do caso
 _L3 = RAIZ/'padrao/lia/Prompt_Minuta_CMT_v3.txt'
-LIA3 = ('<script type="text/plain" id="lia-v3">' + base64.b64encode(gzip.compress(_L3.read_bytes(), 9)).decode() + '</script>') if _L3.exists() else ''
+LIA3 = ('<script type="text/plain" id="lia-v3">' + base64.b64encode(gzip.compress(_L3.read_bytes(), 9, mtime=0)).decode() + '</script>') if _L3.exists() else ''
 _LG = RAIZ/'padrao/lia/Prompt_Gerar_CMT.txt'
-LIA3 += ('<script type="text/plain" id="lia-gerar">' + base64.b64encode(gzip.compress(_LG.read_bytes(), 9)).decode() + '</script>') if _LG.exists() else ''
+LIA3 += ('<script type="text/plain" id="lia-gerar">' + base64.b64encode(gzip.compress(_LG.read_bytes(), 9, mtime=0)).decode() + '</script>') if _LG.exists() else ''
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 # matrizes modulares de 28,86% (Consulta): modelos/matrizes-2886.json
 _M28 = RAIZ/'modelos/matrizes-2886.json'
@@ -172,7 +172,7 @@ if _M28.exists():
         for _x in _mm.conferir(pacote['m2886'])[0]: print('matriz 28,86% · ERRO:', _x)
     except Exception as _ex:
         print('matriz 28,86%: conferência não rodou:', _ex)
-gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9)).decode()
+gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9, mtime=0)).decode()
 
 js_ = js
 EDJ = js(editorial)

@@ -4,7 +4,22 @@ name: Base gabcmt
 on:
   push:
     branches: [main]
-    paths: ["precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "modelos/**", "apoio/**", "padrao/esquema.json", "padrao/paradigmas.js", "padrao/lia/Prompt_Minuta_CMT_v3.txt", "padrao/lia/campos-prontuario.json", "scripts/lia/**", "gerar.py"]
+    paths:
+      - "precedentes/precedentes.jsonl"
+      - "precedentes/inteiros-teores/**"
+      - "modelos/**"
+      - "apoio/**"
+      - "padrao/esquema.json"
+      - "padrao/paradigmas.js"
+      - "padrao/lia/Prompt_Minuta_CMT_v3.txt"
+      - "padrao/lia/campos-prontuario.json"
+      - "scripts/lia/**"
+      - "gerar.py"
+      # dados que a equipe grava pelo app não mudam o Vade Mecum nem o manifesto: sem commit do Base e sem nova publicação a cada clique
+      - "!apoio/equipe*.json"
+      - "!apoio/sustentacoes.json"
+      - "!apoio/regras/**"
+      - "!apoio/ex-officio/**"
   workflow_dispatch:
 permissions:
   contents: write
