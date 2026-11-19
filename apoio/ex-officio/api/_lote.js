@@ -101,14 +101,18 @@ async function calendario() {
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const CMT = require('./_cmt');
+  const q = req.query || {};
   const login = L.quem(req);
-  const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
+  /* /index/cmt envia rel=1: leitura pública e estritamente no perfil do Relator.
+     Nenhuma gravação é liberada sem sessão autenticada de gestor. */
+  const relPublico = req.method === 'GET' && String(q.rel || '') === '1';
+  const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null) || (relPublico ? (process.env.CMT_RELATOR || 'CM') : null);
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   const gestor = !!(login && L.gestor(login));
   try {
     if (req.method === 'POST') return await gravar(req, res, login, gestor);
     if (req.method !== 'GET') return res.status(405).json({ erro: 'método não aceito' });
-    const q = req.query || {}, id = String(q.id || '');
+    const id = String(q.id || '');
     const perfilRel = !gestor && (!login || (await L.acessos(login)).perfil === 'desembargador');
     const modo = q.rel || perfilRel ? 'rel' : q.modo === 'cg' ? 'cg' : 'eq', relator = modo === 'rel';
     if (modo === 'cg' && !gestor) return res.status(403).json({ erro: 'Esta página é só do gestor.' });
@@ -229,6 +233,22 @@ async function gravar(req, res, u, gestor) {
     try { await L.commitArquivos(arqs, 'Lotes (' + u + '): trecho substituído em ' + arqs.length + ' minuta(s) do lote ' + id); }
     catch (e) { if (e.status === 409) return res.status(409).json({ erro: 'Uma das minutas mudou enquanto isso; tente de novo.' }); throw e; }
     return res.status(200).json({ ok: true, alterados: arqs.length, ocorrencias: feitos.reduce((a, f) => a + f.n, 0), feitos });
+  }
+  if (b.acao === 'lote-visivel') {
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      const v = {};
+      if (b.equipe === false) v.equipe = false;
+      if (b.relator === false) v.relator = false;
+      if (Object.keys(v).length) lote.visivel = v; else delete lote.visivel;
+      lote.atualizado_em = new Date().toISOString().slice(0, 10);
+      try {
+        await L.gravarJson(rel, lote, sha, 'Lotes (' + u + '): publicação do lote ' + id + ' (Geral=' + (b.equipe === false ? 'off' : 'on') + ', CMT=' + (b.relator === false ? 'off' : 'on') + ')');
+        return res.status(200).json({ ok: true, visivel: lote.visivel || {} });
+      } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
   }
   if (b.acao === 'editar' || b.acao === 'visivel') {
     for (let t = 0; t < 4; t++) {
