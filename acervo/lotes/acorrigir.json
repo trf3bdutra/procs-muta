@@ -10343,7 +10343,7 @@
    "assunto": "Apreensão",
    "grupo": null,
    "tipo_caso": "Apreensão",
-   "resultado": "",
+   "resultado": "Embargos rejeitados",
    "modelo": "",
    "variacoes": [],
    "observacao": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
@@ -10539,7 +10539,53 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Voto",
+     "ID inexistente nesta numeração: 15380906 é o ID de primeiro grau do boletim de ocorrência, copiado da sentença. O documento é o ID 158862476: interrogatório do condutor nas f. 20/21 e CRLV de 12/07/2018 na f. 24 (referência incluída)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Abertura dos embargos de declaração com o ID do acórdão (ID 400937169); alegações com \"Alegou a embargante\" e ID dos embargos (ID 401296422)",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Contrarrazões sem ID: é a impugnação da União (ID 402699979)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "\"Portanto, como se observa\" → \"Como se observa\"",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Item 11: \"com os apontados destacados\" (lista de caça) e parágrafo do voto copiado na ementa; reduzido à regra do artigo 1.025 do CPC",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé no formato do gabinete (\"e\" antes do último; \"TFR, Súmula 138\")",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído (a seção estava vazia)",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs conferidos: acórdão 400937169, embargos 401296422, impugnação 402699979, boletim de ocorrência 158862476, extrato de processos do condutor 158862478",
+     "Conferido"
+    ]
+   ],
    "pendencias": [],
    "minuta": true,
    "autos": {
@@ -11300,7 +11346,7 @@
    "assunto": "Liberação de Veículo Apreendido",
    "grupo": null,
    "tipo_caso": "Liberação de Veículo Apreendido",
-   "resultado": "",
+   "resultado": "Embargos rejeitados",
    "modelo": "",
    "variacoes": [],
    "observacao": "Aguardando posição do Dr. · Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
@@ -11418,8 +11464,51 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura dos embargos de declaração com o ID do acórdão (ID 398176482); alegações com \"Alegou a embargante\" e ID dos embargos (ID 401830446); \"REsp 1.817.179/RS\" sem UF",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Contrarrazões sem ID: é a impugnação da União (ID 404073493)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Tutela: não houve liminar anterior; a liberação do veículo foi deferida na própria sentença (ID 377918385). Parágrafo reescrito; \"Havendo trânsito em julgado do acórdão embargado\" → \"após o trânsito em julgado\"",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "\"ID’s\" → \"IDʼs\"; \"conclusão adotado\" → \"adotada\"; \"o embargante\" → \"a embargante\"; \"com os apontados destacados\" → \"com os apontamentos destacados\" (lista de caça); \"Portanto, como se observa\" → \"Como se observa\"",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Questões com \"saber se\"; item 8 reduzido; rodapé no formato do gabinete; retirado o REsp 1.817.179 do rodapé (é precedente invocado pela embargante, não fundamento do acórdão)",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído (a seção estava vazia)",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs conferidos: acórdão 398176482 (voto 391791137), embargos 401830446, impugnação 404073493, autos de infração 377918292/293 (consulta ao COMPROT), sentença 377918385",
+     "Conferido"
+    ]
+   ],
+   "pendencias": [
+    "DECISÃO DO RELATOR — o lote registra \"aguardando posição do Dr.\". O acórdão não tratou dos efeitos da reforma sobre a tutela concedida na sentença, e o voto dos embargos esclarece o ponto (revogação da tutela e eventual indenização do artigo 302 do CPC), mas conclui pela rejeição. Esclarecimento de ponto não apreciado costuma levar ao acolhimento parcial, sem efeitos infringentes, como no item 96. Confirmar o conteúdo do esclarecimento e o resultado: rejeição ou acolhimento parcial sem efeitos infringentes."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5001473-64.2025.4.03.6005.json.gz",
@@ -12090,7 +12179,7 @@
    "assunto": "ACESSO",
    "grupo": null,
    "tipo_caso": "ACESSO",
-   "resultado": "",
+   "resultado": "Embargos rejeitados",
    "modelo": "",
    "variacoes": [],
    "observacao": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
@@ -12232,7 +12321,48 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Voto",
+     "\"os embargos de declaração da União\": a embargante é a impetrante, não a União; corrigido. Também \"o embargante\" → \"a embargante\" (duas vezes)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Citação do STJ transcrita do acórdão sem fechar o parêntese (\"DJe 11/5/2015”.\"); corrigido para \"DJe 11/05/2015)”.\"",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "\"Portanto, não se trata\" → \"Como se observa, não se trata\"; \"no julgamento no exame da questão\" → \"no julgamento\"",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Parágrafo das alegações reescrito na fórmula do gabinete (pedido de tutela e alegações numa só frase, ID dos embargos)",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Questões com \"saber se\"; rodapé com as citações completas do acórdão embargado (ADI 3.324, RE 601.580 – Tema 57 e EDcl na MC 24.067)",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído (a seção estava vazia), com a tutela de urgência julgada prejudicada, como no voto",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "A ementa transcrita no relatório salta do item 3 para o 5; o salto está no próprio acórdão embargado (ID 398144949), e a transcrição foi mantida fiel. IDs conferidos: acórdão 398144949, embargos 399014083, impugnação da UFGD 402852726",
+     "Conferido"
+    ]
+   ],
    "pendencias": [],
    "minuta": true,
    "autos": {
