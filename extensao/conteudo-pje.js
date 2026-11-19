@@ -54,6 +54,37 @@
   }
   function agendar() { if (!espera) espera = setTimeout(informar, 700); }
 
+  /* Texto do editor da minuta (tarefa [Sessão] Aguardando a sessão), a pedido do painel (aba Lote › Comparar).
+     Procura editores de texto rico neste quadro: iframes do CKEditor/TinyMCE (mesma origem), áreas editáveis e
+     caixas de texto grandes; fica com o maior texto visível. Só lê; não altera o editor. */
+  function textoDe(el) { return (el.innerText || el.textContent || '').replace(/\u00a0/g, ' ').replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').trim(); }
+  function visivel(el) { try { var r = el.getBoundingClientRect(); return r.width > 40 && r.height > 20; } catch (e) { return false; } }
+  function editores() {
+    var c = [];
+    Array.prototype.forEach.call(document.querySelectorAll('iframe'), function (f) {
+      var d; try { d = f.contentDocument; } catch (e) { d = null; }
+      if (!d || !d.body) return;
+      var b = d.body, ed = b.isContentEditable || d.designMode === 'on' || /cke_editable|mce-content-body|ck-content/.test(b.className || '');
+      if (ed) c.push({ t: textoDe(b), vis: visivel(f), fonte: /cke/.test(b.className || '') || /cke/.test(f.className || '') ? 'CKEditor' : /mce/.test(b.className || '') ? 'TinyMCE' : 'editor (iframe)' });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[contenteditable="true"], .ck-editor__editable, .cke_editable'), function (el) {
+      if (el.parentElement && el.parentElement.closest('[contenteditable="true"]')) return;
+      c.push({ t: textoDe(el), vis: visivel(el), fonte: el.classList.contains('ck-editor__editable') ? 'CKEditor 5' : 'área editável' });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('textarea'), function (el) {
+      if ((el.value || '').length > 300) c.push({ t: el.value.trim(), vis: visivel(el), fonte: 'caixa de texto' });
+    });
+    return c.filter(function (x) { return x.t.length >= 80; }).sort(function (a, b) { return (b.vis - a.vis) || (b.t.length - a.t.length); });
+  }
+  try {
+    chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
+      if (!msg || msg.tipo !== 'muta-editor') return;
+      var e = editores();
+      if (!e.length) return;
+      responder({ texto: e[0].t, fonte: e[0].fonte, visivel: e[0].vis, outros: e.length - 1, numero: (detectar() || {}).numero || '', url: location.pathname });
+    });
+  } catch (e) {}
+
   informar();
   if (document.body) new MutationObserver(agendar).observe(document.body, { childList: true, subtree: true, characterData: true });
   window.addEventListener('focus', function () { ultimo = null; agendar(); });

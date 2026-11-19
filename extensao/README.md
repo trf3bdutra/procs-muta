@@ -18,9 +18,14 @@ O painel lê o número CNJ do processo aberto na aba do PJe e acompanha esse pro
   *Enviar o rascunho à ficha* (grava os campos correspondentes, com confirmação que lista o que muda) e
   *Trazer da ficha* (preenche só os campos vazios do rascunho, inclusive classe, partes e assunto do acervo).
   A correspondência de campos está em `MAPA`, no `gabinete.js`.
-- **Lote.** Procura o processo nos lotes do Amicus Curiae · Index (`/api/painel?lote=1`) e mostra o perfil no lote:
-  tipo de caso, resultado, modelo, variações, peculiaridades da equipe e do Relator, MPF, peças (ID copiável),
-  ajustes da correção, pendências e a minuta do lote por seção, com cópia. A gestão continua no Index.
+- **Lote: minuta do lote × editor do PJe.** Procura o processo nos lotes do Amicus Curiae · Index (`/api/painel?lote=1`)
+  e compara a versão da minuta registrada no lote com a minuta aberta no editor do PJe (tarefa [Sessão] Aguardando a
+  sessão). *Ler o editor do PJe* pede o texto ao `conteudo-pje.js`, que procura o editor na página (iframe do CKEditor
+  ou TinyMCE, área editável ou caixa de texto grande) e só lê. A comparação é a mesma do botão Comparar do Index
+  (parágrafos por LCS e, dentro do parágrafo, palavra a palavra; ignorar espaços, aspas e travessões; só as diferenças).
+  A parte comparada (Relatório, Voto, Ementa, Acórdão ou a minuta inteira) é escolhida pela semelhança, ou à mão.
+  Sem editor detectado, o texto pode ser colado. Abaixo: a minuta do lote por seção, com cópia, e o perfil do
+  processo no lote (resultado, variações, peculiaridades, peças, ajustes, pendências). A gestão continua no Index.
 - **Ementário do Compêndio.** A antiga aba Acervo agora busca na mesma base do Ementário do Compêndio:
   o ementário curado (`precedentes/precedentes.jsonl`) e a série histórica do Relator (`precedentes/jurisprudencia`),
   sem repetição. A sintaxe de busca é a do Compêndio (E, OU, "frase", -excluir, radical\*), em dois modos:
@@ -73,4 +78,6 @@ Não remova a extensão para atualizar: isso apaga os prontuários guardados nel
 - [VALIDAR] Leitura do número nos autos reais do PJe2g: o critério (título, cabeçalho ou número único na tela) foi
   testado só em páginas simuladas. Se o painel não reconhecer o processo, ajustar os seletores em `CABECALHOS`
   (`conteudo-pje.js`).
+- [VALIDAR] Leitura do editor da minuta no PJe2g real (testada com um CKEditor simulado). Se não ler, ajustar
+  `editores()` no `conteudo-pje.js`; enquanto isso, colar o texto.
 - [VALIDAR] Política de instalação de extensões nos computadores do TRF-3.

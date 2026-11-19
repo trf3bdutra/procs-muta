@@ -43,6 +43,20 @@
   });
 
   window.MutaPje = {
+    /* texto do editor da minuta na aba do PJe (todas as molduras respondem; vale a primeira que achar um editor) */
+    lerEditor: function () {
+      if (!temChrome) return Promise.reject(new Error('Fora da extensão: sem acesso ao PJe.'));
+      return chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(function (t) {
+        var id = t && t[0] ? t[0].id : abaAtiva;
+        if (id == null) throw new Error('Nenhuma aba ativa.');
+        return chrome.tabs.sendMessage(id, { tipo: 'muta-editor' });
+      }).then(function (r) {
+        if (!r || !r.texto) throw new Error('Nenhum editor de texto aberto na aba do PJe.');
+        return r;
+      }, function (e) {
+        throw new Error(/Receiving end|port closed|No tab/i.test(String(e && e.message)) ? 'Nenhum editor de texto aberto na aba do PJe (abra a minuta na tarefa e, se a extensão foi atualizada, recarregue a página do PJe).' : (e && e.message) || String(e));
+      });
+    },
     /* escolha manual na lista de prontuários: desliga o acompanhamento para não ser desfeita */
     manual: function (chave) {
       if (seguir.checked && ultimoPje && Muta.chaveProcesso(ultimoPje) !== chave) {

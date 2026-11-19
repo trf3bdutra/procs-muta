@@ -345,3 +345,25 @@ input[type=password]{width:100%;font:inherit;font-size:14px;color:var(--fg);back
 .lt-lotes{display:flex;flex-wrap:wrap;gap:5px}
 .lt-lotes .chip{text-decoration:none;color:var(--fg)}
 @media (max-width:430px){.gr{grid-template-columns:1fr}}
+
+/* ===== Lote: minuta do lote × editor do PJe (mesmo visual do "Comparar" do Index) ===== */
+.lt-cmp,.lt-min,.lt-perfil{margin-top:10px}
+.lt-cmp{display:grid;gap:7px;border-top:3px solid var(--primary)}
+.cp-h h3{margin:0;font-size:1.05rem}
+.cp-bar select{flex:1 1 140px;font:inherit;font-size:12px;padding:6px 8px;border:1px solid var(--input);border-radius:6px;background:var(--card);color:var(--fg)}
+.cp-opc label{display:inline-flex;gap:5px;align-items:center;font-size:11.5px;color:var(--muted-fg)}
+.cp-fonte{margin:0;font-size:11px}
+.cp-colar summary{cursor:pointer;font-size:11.5px;color:var(--accent-fg)}
+.cp-colar textarea{margin-top:6px;min-height:120px;font-size:12.5px}
+.cx-lg{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--muted-fg)}
+.cx-out{font:13.5px/1.6 var(--serif);color:var(--fg)}
+.cx-out p{margin:0 0 9px;text-align:justify}
+.cx-out del,.cx-lg del{background:#f6d6d2;color:#7d241e;text-decoration:line-through}
+.cx-out ins,.cx-lg ins{background:#d4ead9;color:#1d5a2f;text-decoration:none}
+.cx-out .eq{color:var(--muted-fg);font:400 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:4px 0;border-top:1px dashed var(--border);border-bottom:1px dashed var(--border);text-align:center}
+.cx-out .so{opacity:.6}
+.cx-out .none{color:var(--muted-fg);font-family:var(--sans);font-size:12px}
+.lt-perfil>summary{cursor:pointer;list-style:none}
+.lt-perfil>summary::-webkit-details-marker{display:none}
+.lt-perfil>summary h3{display:inline;margin:0;font-size:1.05rem}
+.lt-perfil[open]{display:grid;gap:6px}
