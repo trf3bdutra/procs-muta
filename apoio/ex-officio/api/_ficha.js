@@ -289,3 +289,10 @@ module.exports.ativos = ativos;
 module.exports.doCartao = doCartao;
 module.exports.catalogo = ficha;
 module.exports.paraCartao = paraCartao;
+/* usados pelo prontuário da extensão Muta (_prontuario.js), que grava ficha e cartão no mesmo commit do prontuário */
+module.exports.editaveis = editaveis;
+module.exports.registro = registro;
+module.exports.aplica = aplica;
+module.exports.regras = regras;
+module.exports.ondeEsta = ondeEsta;
+module.exports.aplicaCartao = aplicaCartao;

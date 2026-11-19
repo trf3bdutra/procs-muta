@@ -28,10 +28,22 @@
       mostrar(numero, 'PJe: ' + numero + (k === atual ? '' : ' · acompanhamento desligado'), k === atual ? 'on' : 'pausa');
     }
   }
+  /* sem registro da aba (página recarregada, extensão atualizada): pede aos quadros que informem de novo */
+  var pedidoEm = {};
+  function reinformar(id) {
+    if (id == null || Date.now() - (pedidoEm[id] || 0) < 5000) return;
+    pedidoEm[id] = Date.now();
+    try { chrome.tabs.sendMessage(id, { tipo: 'muta-reinformar' }).catch(function () {}); } catch (e) {}
+  }
   function lerAba(id) {
     abaAtiva = id;
     if (id == null) { aplicar(null); return; }
-    chrome.storage.session.get('aba:' + id).then(function (o) { if (abaAtiva === id) aplicar(o['aba:' + id]); }).catch(function () { aplicar(null); });
+    chrome.storage.session.get('aba:' + id).then(function (o) {
+      if (abaAtiva !== id) return;
+      var reg = o['aba:' + id];
+      if (!reg || !reg.numero) reinformar(id);
+      aplicar(reg);
+    }).catch(function () { aplicar(null); });
   }
   function abaDaJanela() {
     chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(function (t) { lerAba(t && t[0] ? t[0].id : null); }).catch(function () { lerAba(null); });
@@ -43,6 +55,9 @@
   });
 
   window.MutaPje = {
+    /* número do processo aberto na aba ativa do PJe (vazio se nenhum) */
+    processo: function () { return ultimoPje; },
+    classe: function () { return ultimaClasse; },
     /* texto do editor da minuta na aba do PJe (todas as molduras respondem; vale a primeira que achar um editor) */
     lerEditor: function () {
       if (!temChrome) return Promise.reject(new Error('Fora da extensão: sem acesso ao PJe.'));

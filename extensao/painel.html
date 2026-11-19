@@ -17,9 +17,11 @@
       <button role="tab" id="tab-pront" aria-controls="panel-pront" aria-selected="true"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h6l4 4v12.8H6V5.5a2 2 0 0 1 2-2z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg></span><span class="nav-text"><b>Prontuário</b><small>Triagem e produção</small></span></button>
       <button role="tab" id="tab-acervo" aria-controls="panel-acervo" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v4H4zM5.5 9v10h13V9M9 13h6M9 16h6"/></svg></span><span class="nav-text"><b>Ementário</b><small>Precedentes do Compêndio</small></span></button>
       <button role="tab" id="tab-lote" aria-controls="panel-lote" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9h18M9 9v11"/></svg></span><span class="nav-text"><b>Lote</b><small>Amicus Curiae · Collectio</small></span></button>
+      <button role="tab" id="tab-cmp" aria-controls="panel-cmp" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7.5" height="16" rx="1.2"/><rect x="13.5" y="4" width="7.5" height="16" rx="1.2"/><path d="M5.5 8.5h2.5M5.5 12h2.5M16 8.5h2.5M16 12h2.5M16 15.5h2.5"/></svg></span><span class="nav-text"><b>Comparar</b><small>Editor × lote, modelos, matriz</small></span></button>
+      <button role="tab" id="tab-conf" aria-controls="panel-conf" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 6v5.6c0 4.3 3 7.6 7 9.2 4-1.6 7-4.9 7-9.2V6z"/><path d="m9 12.2 2.1 2.1L15.3 10"/></svg></span><span class="nav-text"><b>Conformidade <i class="conf-badge" id="conf-badge" hidden></i></b><small>Padrão do gabinete</small></span></button>
       <button role="tab" id="tab-ajuda" aria-controls="panel-ajuda" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9a2.4 2.4 0 0 1 4.6 1c0 1.5-2.3 2-2.3 3.6M12 17.2h.01"/></svg></span><span class="nav-text"><b>Ajuda</b><small>Instalação e uso</small></span></button>
     </div>
-    <div class="side-foot"><strong>Ficha e rascunho</strong>A ficha do gabinete é a mesma do Ex Officio, com o seu login. O rascunho pessoal fica só neste navegador, um por processo. O que você pesquisa no Ementário não é enviado.</div>
+    <div class="side-foot"><strong>Prontuário no GitHub</strong>O prontuário completo de cada processo fica no GitHub do gabinete e alimenta a ficha e o cartão da pauta do Ex Officio, nos dois sentidos, com o seu login. Uma cópia fica neste navegador para trabalhar sem conexão. O que você pesquisa no Ementário e o texto lido do editor do PJe não saem do navegador.</div>
   </aside>
   <main>
     <!-- PRONTUÁRIO -->
@@ -30,7 +32,7 @@
           <button class="btn line" id="btn-export" type="button">Exportar JSON</button>
           <button class="btn line" id="btn-import" type="button">Importar JSON</button>
           <input type="file" id="file-import" accept="application/json,.json" hidden>
-          <button class="btn danger" id="btn-clear" type="button">Limpar prontuário</button>
+          <button class="btn danger" id="btn-clear" type="button" title="Apaga só a cópia deste navegador; o prontuário do GitHub volta ao reabrir o processo">Limpar cópia local</button>
         </div>
       </header>
       <div class="pje-bar" id="pje-bar">
@@ -43,9 +45,10 @@
       <div class="pmodo-bar">
         <div class="seg" id="pmodo" role="tablist" aria-label="O que editar">
           <button type="button" role="tab" data-m="ficha" aria-selected="true">Ficha do gabinete</button>
-          <button type="button" role="tab" data-m="rascunho" aria-selected="false">Rascunho pessoal</button>
+          <button type="button" role="tab" data-m="rascunho" aria-selected="false">Prontuário completo</button>
         </div>
       </div>
+      <div class="sinc" id="sinc" data-estado="off"><span class="sinc-dot" aria-hidden="true"></span><span class="sinc-txt" id="sinc-txt" role="status" aria-live="polite">Prontuário ainda não ligado ao GitHub.</span><button type="button" class="lnk" id="sinc-agora" hidden>Sincronizar agora</button></div>
       <div id="gab" class="gab"></div>
       <div class="wrap" id="rascunho">
         <div id="prontuario-app"></div>
@@ -152,6 +155,22 @@
       <div class="wrap"><div id="lote-app"></div></div>
     </section>
 
+    <!-- COMPARAR -->
+    <section id="panel-cmp" role="tabpanel" aria-labelledby="tab-cmp" hidden>
+      <header class="head">
+        <div class="rise"><p class="kicker">Editor do PJe × materiais do gabinete</p><h1 class="display">Comparar</h1></div>
+      </header>
+      <div class="wrap"><div id="cmp-app"></div></div>
+    </section>
+
+    <!-- CONFORMIDADE -->
+    <section id="panel-conf" role="tabpanel" aria-labelledby="tab-conf" hidden>
+      <header class="head">
+        <div class="rise"><p class="kicker">Padrão do Des. Fed. Carlos Muta</p><h1 class="display">Conformidade</h1></div>
+      </header>
+      <div class="wrap"><div id="conf-app"></div></div>
+    </section>
+
     <!-- AJUDA -->
     <section id="panel-ajuda" role="tabpanel" aria-labelledby="tab-ajuda" hidden>
       <header class="head">
@@ -167,11 +186,13 @@
               <li>Clique no ícone do Muta na barra do Chrome. O painel abre ao lado da página.</li>
               <li>Com <strong>Acompanhar o PJe</strong> ligado, o painel abre o processo que está na tela.</li>
               <li><strong>Ficha do gabinete</strong>: a ficha do processo do Ex Officio, com o mesmo login. O que você altera é gravado na ficha e a equipe vê.</li>
-              <li><strong>Rascunho pessoal</strong>: o prontuário completo, guardado só neste navegador. <em>Enviar o rascunho à ficha</em> grava na ficha os campos correspondentes; <em>Trazer da ficha</em> preenche os vazios do rascunho.</li>
+              <li><strong>Prontuário completo</strong>: fica no GitHub do gabinete (<code>acervo/prontuarios</code>) e se alimenta da ficha e do cartão da pauta (o prontuário da Ex Officio e da LIA). Ao abrir o processo, o que a equipe registrou entra no prontuário; o que você preenche vai à ficha e ao cartão alguns segundos depois. Se duas pessoas editam ao mesmo tempo, as versões se juntam campo a campo.</li>
+              <li><strong>Comparar</strong>: leia o editor do PJe e escolha a fonte: minuta do lote, modelo do banco, minuta-matriz, matriz do 28,86%, parágrafos-padrão, precedente do Ementário ou texto colado.</li>
+              <li><strong>Conformidade</strong>: confere a minuta do editor com o padrão do gabinete (estrutura, ementa, resultado, IDʼs × prontuário, redação). Com <em>Conformidade ativa</em>, acompanha a minuta enquanto ela é escrita.</li>
               <li><strong>Lote</strong>: com a minuta aberta no editor do PJe (tarefa Aguardando a sessão), clique em <em>Ler o editor do PJe</em> para comparar com a versão registrada no lote, como no botão Comparar do Index. Riscado: está no lote e falta no editor; verde: está só no editor.</li>
               <li>Em <strong>Ementário</strong>, pesquise os precedentes do Relator e use <strong>Vincular ao prontuário</strong>.</li>
             </ol>
-            <p class="muted">O painel só lê o número do processo na tela do PJe. Não clica, não grava e não protocola nada no tribunal.</p>
+            <p class="muted">No PJe, o painel só lê o número do processo e o texto do editor. Não clica, não grava e não protocola nada no tribunal.</p>
           </article>
           <article class="card">
             <h2 class="display">Busca no Ementário</h2>
@@ -190,7 +211,7 @@
           <article class="card">
             <h2 class="display">Atualizar sem perder os dados</h2>
             <ol>
-              <li>Antes, use <strong>Exportar JSON</strong> nos prontuários em andamento.</li>
+              <li>Os prontuários sincronizados já estão no GitHub. Se houver algum só neste navegador (avulso ou sem login), use antes <strong>Exportar JSON</strong>.</li>
               <li>Extraia o ZIP novo <strong>sobre a mesma pasta</strong> e clique em <strong>Recarregar</strong> no cartão do Muta, em <code>chrome://extensions</code>.</li>
               <li>Recarregue a aba do PJe.</li>
             </ol>
@@ -198,7 +219,7 @@
           </article>
           <article class="card">
             <h2 class="display">Dados e sigilo</h2>
-            <p>Os prontuários ficam só neste navegador, na extensão. O JSON exportado não tem senha e pode conter dados sigilosos: guarde-o em local autorizado.</p>
+            <p>Os prontuários com número de processo vão ao GitHub do gabinete (repositório privado procs-muta), com o login do Ex Officio; o prontuário avulso fica só neste navegador. O JSON exportado não tem senha e pode conter dados sigilosos: guarde-o em local autorizado.</p>
             <p>Nenhuma senha do PJe deve ser digitada no painel.</p>
           </article>
         </div>
@@ -223,7 +244,14 @@
 <script src="ementario.js"></script>
 <script src="ficha.js"></script>
 <script src="gabinete.js"></script>
+<script src="sincronia.js"></script>
 <script src="lote.js"></script>
+<script src="comparador.js"></script>
+<script src="fontes.js"></script>
+<script src="editor.js"></script>
+<script src="conformidade-motor.js"></script>
+<script src="comparar.js"></script>
+<script src="conformidade.js"></script>
 <script src="pje.js"></script>
 </body>
 </html>

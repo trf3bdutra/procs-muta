@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Muta · Assistente de gabinete",
   "short_name": "Muta",
-  "version": "0.7.0",
-  "description": "Ficha do processo (Ex Officio), lote, rascunho pessoal e Ementário do Compêndio, em painel lateral ao lado do PJe (Gab. Des. Fed. Carlos Muta, TRF-3).",
+  "version": "0.8.0",
+  "description": "Prontuário e ficha do processo integrados ao GitHub do gabinete, comparativos de texto com o editor do PJe e painel de conformidade (Gab. Des. Fed. Carlos Muta, TRF-3).",
   "minimum_chrome_version": "116",
   "icons": {
     "16": "icones/16.png",
@@ -31,9 +31,11 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://pje2g.trf3.jus.br/*"],
+      "matches": ["https://pje2g.trf3.jus.br/*", "https://frontend-pje.app.trf3.jus.br/*"],
       "js": ["conteudo-pje.js"],
       "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true,
       "run_at": "document_idle"
     }
   ]

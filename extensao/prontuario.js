@@ -73,7 +73,7 @@ function sanitize(p){
 }
 
 /* ---------- Armazenamento por processo ---------- */
-var state=blank(), chaveAtual='avulso';
+var state=blank(), chaveAtual='avulso', remoto=false;
 function avisarTroca(){try{document.dispatchEvent(new CustomEvent('muta:prontuario',{detail:{chave:chaveAtual}}));}catch(e){}}
 function ler(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function lerIndice(){try{var o=JSON.parse(ler(INDICE)||'{}');return o&&typeof o==='object'?o:{};}catch(e){return {};}}
@@ -107,7 +107,10 @@ function persist(){
     localStorage.setItem(PREFIXO+chaveAtual,JSON.stringify(state));
     ix[chaveAtual]={numero:state.full.caso.numero,classe:state.full.caso.classe,atualizadoEm:state.atualizadoEm};
     gravarIndice(ix);localStorage.setItem(ATUAL,chaveAtual);listar();
-    setStatus('Salvo neste navegador às '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})+'.','ok');return true;}
+    if(remoto){setStatus('Prontuário atualizado com o GitHub às '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'.','ok');return true;}
+    setStatus('Salvo neste navegador às '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit',second:'2-digit'})+(window.MutaSincronia?'; enviando ao GitHub…':'.'),'ok');
+    if(window.MutaSincronia&&chaveAtual!=='avulso')window.MutaSincronia.alterado(chaveAtual);
+    return true;}
   catch(e){setStatus('Não foi possível salvar ('+(e&&e.name||'erro')+'). Exporte o JSON para não perder o rascunho.','err');return false;}
 }
 function carregar(chave){
@@ -163,11 +166,18 @@ function wireTabs(tabs,onSelect){
   });
 }
 function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;});}
-var mainTabs=[$('tab-pront'),$('tab-acervo'),$('tab-lote'),$('tab-ajuda')];
-wireTabs(mainTabs,function(i){selectTab(mainTabs,i);if(i===1&&window.MutaEmentario)window.MutaEmentario.abrir();if(i===2&&window.MutaLote)window.MutaLote.abrir();});
-if(location.hash==='#ajuda')selectTab(mainTabs,3);
-if(location.hash==='#lote'){selectTab(mainTabs,2);setTimeout(function(){if(window.MutaLote)window.MutaLote.abrir();},0);}
-if(location.hash==='#ementario'){selectTab(mainTabs,1);setTimeout(function(){if(window.MutaEmentario)window.MutaEmentario.abrir();},0);}
+var mainTabs=[$('tab-pront'),$('tab-acervo'),$('tab-lote'),$('tab-cmp'),$('tab-conf'),$('tab-ajuda')];
+var NOMES=['pront','ementario','lote','cmp','conf','ajuda'];
+function abrirAba(i){
+  selectTab(mainTabs,i);
+  if(i===1&&window.MutaEmentario)window.MutaEmentario.abrir();
+  if(i===2&&window.MutaLote)window.MutaLote.abrir();
+  if(i===3&&window.MutaComparar)window.MutaComparar.abrir();
+  if(i===4&&window.MutaConformidade)window.MutaConformidade.abrir();
+}
+wireTabs(mainTabs,function(i){abrirAba(i);});
+window.MutaAbas={ir:function(nome){var i=NOMES.indexOf(nome);if(i>=0)abrirAba(i);}};
+document.addEventListener('DOMContentLoaded',function(){var h=location.hash.replace('#','');var i=NOMES.indexOf(h==='acervo'?'ementario':h);if(i>0)abrirAba(i);});
 var modeTabs=[$('mode-tri'),$('mode-pro')];
 function setMode(m,save){selectTab(modeTabs,m==='producao'?1:0);if(save){state.etapa=m;persist();}}
 wireTabs(modeTabs,function(i){setMode(i?'producao':'triagem',true);});
@@ -221,11 +231,13 @@ $('file-import').addEventListener('change',function(){
   }).catch(function(e){setStatus('Importação recusada: '+e.message,'err');});
 });
 $('btn-clear').addEventListener('click',function(){
-  Muta.confirmar('Apagar todos os campos e vínculos do prontuário '+rotulo(chaveAtual,lerIndice()[chaveAtual])+' neste navegador? Esta ação não pode ser desfeita.','Apagar').then(function(ok){
+  Muta.confirmar('Apagar a cópia deste navegador do prontuário '+rotulo(chaveAtual,lerIndice()[chaveAtual])+'?'+(chaveAtual!=='avulso'?'\n\nO prontuário gravado no GitHub não é apagado: ele volta quando o processo for reaberto, e alterações locais ainda não enviadas se perdem.':' Esta ação não pode ser desfeita.'),'Apagar').then(function(ok){
     if(!ok)return;
     if(window.MutaProntuarioFull&&window.MutaProntuarioFull.cancelar)window.MutaProntuarioFull.cancelar();
     try{localStorage.removeItem(PREFIXO+chaveAtual);var ix=lerIndice();delete ix[chaveAtual];gravarIndice(ix);}catch(e){}
-    carregar(chaveAtual);render();setStatus('Prontuário limpo.','ok');
+    carregar(chaveAtual);render();setStatus('Cópia local apagada.','ok');
+    /* sem a cópia local, o prontuário volta do GitHub (nada é enviado a partir do prontuário em branco) */
+    if(chaveAtual!=='avulso'&&window.MutaSincronia){try{localStorage.removeItem('muta-pje:sinc:'+chaveAtual);}catch(e){}window.MutaSincronia.recarregar();}
   });
 });
 
@@ -272,6 +284,18 @@ window.MutaProntuarioBridge={
   lerSalvo:lerSalvo,
   abrirProcesso:function(numero,classe){var k=Muta.chaveProcesso(numero);if(!k)return false;return abrir(k,{classe:classe});},
   chaveAtual:function(){return chaveAtual;},
-  setStatus:setStatus
+  setStatus:setStatus,
+  /* sincronia com o GitHub (sincronia.js): o prontuário inteiro, como é guardado, e a troca pelo que veio do servidor */
+  estado:function(){sincronizarComum();return JSON.parse(JSON.stringify(state));},
+  sanitizar:function(o){return sanitize(o);},
+  aplicarRemoto:function(chave,obj){
+    if(chave!==chaveAtual)return false;
+    var novo;try{novo=sanitize(obj);}catch(e){return false;}
+    if(window.MutaProntuarioFull&&window.MutaProntuarioFull.cancelar)window.MutaProntuarioFull.cancelar();
+    if(timer){clearTimeout(timer);timer=null;}
+    state=novo;render();
+    remoto=true;try{persist();}finally{remoto=false;}
+    return true;
+  }
 };
 })();

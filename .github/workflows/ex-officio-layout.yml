@@ -12,6 +12,9 @@ on:
       - 'extensao/**'
       - 'apoio/modus-operandi/fonte/build.py'
       - 'apoio/ex-officio/api/_lote.js'
+      - 'apoio/ex-officio/api/_prontuario.js'
+      - 'apoio/ex-officio/tests/**'
+      - 'scripts/extensao/**'
       - '.github/workflows/vercel-monitor.yml'
       - '.github/workflows/ex-officio-layout.yml'
   workflow_dispatch:

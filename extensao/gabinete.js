@@ -3,7 +3,8 @@
      GET  /api/pauta?ficha=<CNJ>              ficha (modelo), registro do operacional, dados da fonte, controles, gestor
      POST /api/pauta?ficha=1 {cnj, campos}    grava; o servidor recusa o que não é editável ou é só do gestor
    Renderização no padrão do prontuário lateral da Ex Officio (abas, grupos, gravação automática).
-   Também liga o rascunho pessoal (prontuário local) à ficha: "Enviar o rascunho à ficha" e "Trazer da ficha". */
+   A correspondência prontuário ↔ ficha (MAPA) é usada pela sincronia automática (sincronia.js): o prontuário completo
+   vai ao GitHub com os campos correspondentes da ficha, e a ficha preenche o prontuário ao abrir o processo. */
 (function () {
 'use strict';
 var SITE = Muta.SITE, ses = window.MutaSessao, br = window.MutaProntuarioBridge;
@@ -18,7 +19,7 @@ var G = { cnj: '', F: null, op: null, fo: null, gestor: false, ctl: {}, aba: 'Tr
 var MODO_K = 'muta-pje:modo';
 var caixa = $('gab'), stEl = null;
 
-/* ---------- modo do Prontuário: ficha do gabinete ou rascunho pessoal ---------- */
+/* ---------- modo do Prontuário: ficha do gabinete ou prontuário completo ---------- */
 var modo = 'ficha';
 try { modo = localStorage.getItem(MODO_K) === 'rascunho' ? 'rascunho' : 'ficha'; } catch (e) {}
 function aplicarModo() {
@@ -140,9 +141,7 @@ function render() {
     (G.fo ? '<small>' + esc([fonteVal({ fonte: ['classe_judicial', 'Classe'] }), fonteVal({ fonte: ['Assunto'] })].filter(Boolean).join(' · ')) + '</small>' : '') + '</div>' +
     '<span class="gh-u">' + esc(s.usuario) + (s.gestor ? ' · gestor' : '') + ' <button type="button" class="lnk" data-sair>Sair</button></span></div>';
   if (!G.cnj) { caixa.innerHTML = topo + '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos no PJe ou escolha um prontuário com número na lista acima.</div>'; return; }
-  var acoes = '<div class="bar g-acts"><button type="button" class="btn line" data-g="enviar" title="Grava na ficha os campos preenchidos no rascunho pessoal deste processo">Enviar o rascunho à ficha</button>' +
-    '<button type="button" class="btn line" data-g="trazer" title="Preenche os campos vazios do rascunho pessoal com a ficha">Trazer da ficha</button>' +
-    '<button type="button" class="btn line" data-g="atualizar">Atualizar</button><a class="btn line" target="_blank" rel="noopener noreferrer" href="' + SITE + '/equipe/">Ex Officio</a></div>' +
+  var acoes = '<div class="bar g-acts"><button type="button" class="btn line" data-g="atualizar">Atualizar</button><a class="btn line" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/">Ex Officio</a></div>' +
     '<p class="status" id="g-st" role="status" aria-live="polite"></p>';
   if (G.carregando) { caixa.innerHTML = topo + acoes + '<div class="empty">Lendo a ficha do processo…</div>'; stEl = $('g-st'); return; }
   if (G.erro) { caixa.innerHTML = topo + acoes + '<div class="err-box">Não foi possível ler a ficha: ' + esc(G.erro) + '</div>'; stEl = $('g-st'); return; }
@@ -217,7 +216,7 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.g === 'trazer') { trazer(); return; }
 });
 
-/* ---------- rascunho pessoal ↔ ficha do gabinete ---------- */
+/* ---------- prontuário completo ↔ ficha do gabinete ---------- */
 function getP(o, p) { return p.split('.').reduce(function (a, k) { return a == null ? undefined : a[k]; }, o); }
 function setP(o, p, v) { var a = p.split('.'), x = o; for (var i = 0; i < a.length - 1; i++) { if (x[a[i]] == null) x[a[i]] = {}; x = x[a[i]]; } x[a[a.length - 1]] = v; }
 function inv(m) { var o = {}; Object.keys(m).forEach(function (k) { if (!(m[k] in o)) o[m[k]] = k; }); return o; }
@@ -350,7 +349,7 @@ function trazer() {
   if (!n) { st('Nada a trazer: os campos correspondentes do rascunho já estão preenchidos ou a ficha está vazia.', 'ok'); return; }
   if (window.MutaProntuarioFull && window.MutaProntuarioFull.setState) window.MutaProntuarioFull.setState(f);
   br.saveFull(f);
-  st(n + ' campo(s) vazio(s) do rascunho preenchidos com a ficha. Os já preenchidos não mudaram. Veja em Rascunho pessoal.', 'ok');
+  st(n + ' campo(s) vazio(s) do prontuário preenchidos com a ficha. Os já preenchidos não mudaram. Veja em Prontuário completo.', 'ok');
 }
 
 /* ---------- ligações ---------- */
@@ -358,6 +357,48 @@ ses.ouvir(function () { if (modo === 'ficha') carregar(false); if (window.MutaLo
 document.addEventListener('muta:prontuario', function () { if (modo === 'ficha') carregar(false); else if (G.pend && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
 window.addEventListener('pagehide', function () { if (Object.keys(G.pend).length) gravarJa(true); });
 document.addEventListener('visibilitychange', function () { if (document.hidden && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
-window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPendente: function () { return gravarJa(); }, modo: function () { return modo; } };
+/* ---------- correspondência rascunho ↔ ficha, para a sincronia automática (sincronia.js) ---------- */
+function opVal(op, id) { var i = id.indexOf('.'), s = (op || {})[id.slice(0, i)] || {}, v = s[id.slice(i + 1)]; return v == null ? '' : v; }
+/* campos da ficha que o prontuário muda: só valores preenchidos e diferentes do que a ficha já tem */
+function camposFicha(f, op, gestor) {
+  var C = {};
+  MAPA.forEach(function (e) {
+    if (/^producao\.(SERVIDOR|CORRETOR)$/.test(e[0]) && !gestor) return;
+    if (e[3] && !/^producao\.(SERVIDOR|CORRETOR)$/.test(e[0]) && !e[3](f)) return;
+    var fv = paraFicha(e[2], getP(f, e[1]));
+    if (!fv || S(opVal(op, e[0])) === fv) return;
+    C[e[0]] = fv;
+  });
+  if (C['producao.Data da Revisão'] && opVal(op, 'producao.CORRIGIDO') !== 'Sim') C['producao.CORRIGIDO'] = 'Sim';
+  if (C['producao.Data da Liberação'] && opVal(op, 'producao.LIBERADO') !== 'Sim') C['producao.LIBERADO'] = 'Sim';
+  return C;
+}
+/* traz da ficha para o prontuário: preenche o vazio e, se a ficha é mais nova (substituir), troca o divergente */
+function trazerFicha(f, op, fonte, substituir) {
+  var n = [], vazio = function (v) { return v == null || v === '' || v === false; };
+  var padrao = { 'regularidade.impedimento': 'Sem impedimento', 'julgamento.situacao': 'PAUTADO' };
+  var esp = S(opVal(op, 'triagem.Padrão - Espécie'));
+  MAPA.forEach(function (e) {
+    if (/^recursoTipo\.ed(Id|Data|Orgao)$/.test(e[1]) && !(esp === ESP.ed || f.caso.tipoManual === 'ed')) return;
+    if (/^recursoTipo\.agint(Id|Data|Sintese)$/.test(e[1]) && !(esp === ESP.agint || f.caso.tipoManual === 'agint')) return;
+    var fv = opVal(op, e[0]);
+    if (typeof fv !== 'string' || !S(fv)) return;
+    var lv = paraRascunho(e[2], fv); if (lv === undefined) return;
+    var atual = getP(f, e[1]);
+    if (atual === lv) return;
+    if (!vazio(atual) && atual !== padrao[e[1]] && !substituir) return;
+    setP(f, e[1], lv); n.push(e[1]);
+    if ((e[1] === 'origem.decisaoId' || e[1] === 'origem.decisaoData') && !f.origem.decisao) f.origem.decisao = 'Sentença';
+  });
+  var fv2 = function (L) { var o = fonte || {}; for (var i = 0; i < L.length; i++) { var v = S(o[L[i]]); if (v && v !== '####') return v; } return ''; };
+  [['caso.classe', ['classe_judicial', 'Classe']], ['caso.autor', ['polo_ativo']], ['caso.reu', ['polo_passivo']], ['caso.assunto', ['Assunto']], ['caso.secao', ['Seção Competente']]].forEach(function (p) {
+    var v = fv2(p[1]); if (v && vazio(getP(f, p[0]))) { setP(f, p[0], v); n.push(p[0]); }
+  });
+  return n;
+}
+window.MutaMapa = { camposFicha: camposFicha, trazerFicha: trazerFicha, getP: getP, setP: setP };
+window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPendente: function () { return gravarJa(); }, modo: function () { return modo; },
+  /* a sincronia gravou a ficha: o painel da ficha mostra o novo registro sem nova leitura */
+  registro: function (cnj, op) { if (op && dg(cnj) === dg(G.cnj)) { G.op = op; if (modo === 'ficha') render(); } } };
 aplicarModo();
 })();

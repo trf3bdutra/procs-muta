@@ -297,7 +297,9 @@ function detalhe() {
   });
   var ce = el('button', 'btn line', 'Copiar ementa'); ce.type = 'button'; ce.addEventListener('click', function () { copiar(x.e || '', 'Ementa copiada.'); });
   var cn = el('button', 'btn line', 'Copiar número'); cn.type = 'button'; cn.addEventListener('click', function () { copiar(x.n || '', 'Número copiado.'); });
-  bar.append(lk, ce, cn);
+  var cx = el('button', 'btn line', 'Comparar com o editor'); cx.type = 'button';
+  cx.addEventListener('click', function () { if (window.MutaComparar) window.MutaComparar.precedente(x.id); });
+  bar.append(lk, ce, cn, cx);
   if (x.u) { var a = el('a', 'btn line', 'Fonte'); a.href = x.u; a.target = '_blank'; a.rel = 'noopener noreferrer'; bar.append(a); }
   d.append(bar);
   if (x.cur) {
@@ -340,7 +342,18 @@ $('acv-tipo').addEventListener('change', function () { if (B.ok && $('acv-modo')
 $('btn-refresh').addEventListener('click', function () { B.ok = false; FT.cache = {}; FT.ordem = []; B.textosCur = null; carregar(true); });
 $('acv-compendio').href = SITE + '/amicus/compendium/#v=ement';
 
+/* para a aba Comparar: o julgado (ementa e inteiro teor) pelo id do índice */
+function julgado(id) {
+  return carregar().then(function () {
+    var x = null; for (var i = 0; i < B.idx.length; i++) if (B.idx[i].id === id) { x = B.idx[i]; break; }
+    if (!x) return null;
+    return inteiroTeor(x).then(function (it) {
+      return { id: x.id, rotulo: [x.cl || x.c, x.n].filter(Boolean).join(' ') + (x.d ? ', julgado em ' + fmtData(x.d) : ''), ementa: x.e || '', inteiro: it || '' };
+    });
+  });
+}
 window.MutaEmentario = {
+  julgado: julgado,
   abrir: function () { return carregar(); },
   atualizar: function () { if (B.ok) { var s = V.shown; render(); while (V.shown < s && V.shown < V.res.length) mais(); } },
   buscarNumero: function (n) { $('acv-q').value = n; $('acv-modo').value = 'idx'; V.sel = null; carregar().then(buscar); }

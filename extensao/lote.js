@@ -225,5 +225,19 @@ caixa.addEventListener('input', function (e) {
   clearTimeout(tCol); tCol = setTimeout(function () { CP.texto = t.value; CP.colado = !!t.value.trim(); CP.erro = ''; CP.fonte = ''; var m = minutaAtual(); if (m && m.secoes) comparar(m); var f = caixa.querySelector('.cp-fonte'); if (f) f.remove(); }, 350);
 });
 document.addEventListener('muta:prontuario', function () { if (aberta()) atualizar(false); });
-window.MutaLote = { abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor };
+/* para a aba Comparar: as minutas registradas nos lotes para o processo (uma por lote em que ele está) */
+function minutasDoProcesso(chave) {
+  return base(false).then(function () {
+    if (C.erro) throw new Error(C.erro);
+    return Promise.all(procurar(chave).map(function (a) {
+      var mx = String(a.it.processo).slice(0, 10), k = a.lote.id + '/' + mx;
+      var p = V.minuta[k] ? Promise.resolve(V.minuta[k]) : api('id=' + encodeURIComponent(a.lote.id) + '&minuta=' + encodeURIComponent(mx)).then(function (m) { V.minuta[k] = m; return m; });
+      return p.then(function (m) {
+        var secoes = SECS.map(function (s) { var v = (m.secoes || {})[s[0]]; return { t: s[1], ps: Array.isArray(v) ? v : String(v || '').split(/\n+/) }; });
+        return { id: k, rotulo: a.lote.titulo + (a.it.sessao ? ' · sessão de ' + brD(a.it.sessao) : '') + (a.it.item ? ', item ' + a.it.item : ''), secoes: secoes, atualizado: m.atualizado_em || '' };
+      }, function (e) { return { id: k, rotulo: a.lote.titulo, erro: e.status === 404 ? 'Minuta não disponível no lote.' : e.message, secoes: [] }; });
+    }));
+  });
+}
+window.MutaLote = { abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
 })();
