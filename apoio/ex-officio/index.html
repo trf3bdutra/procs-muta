@@ -1856,6 +1856,13 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
     </section>
 
+    <aside class="cmt-fastnav quick-find" id="cmt-fastnav" aria-label="Buscador rápido da pauta">
+      <span class="qf-k">BUSCADOR RÁPIDO</span>
+      <span class="qf-row"><select id="cmt-ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="número + Enter" aria-label="Número do item ou processo"></span>
+      <small>Localiza e destaca o registro na pauta.</small>
+      <button type="button" class="qf-go" id="cmt-ir-go">Ir para</button>
+    </aside>
+
     <aside class="cmt-dr" id="cmt-dr" data-t="a">
       <div class="cmt-dr-h" id="cmt-dr-h">
       <div class="cmt-bbq" id="cmt-bbq" hidden>
@@ -1979,7 +1986,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <span class="exb" role="group" aria-label="Exportar e importar"><button class="b ic3" id="exp-xlsx"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="b ic3" id="exp-meus" aria-label="Exportar só as minhas designações" title="Exportar só as minhas designações"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><path d="M18.5 7v9M15.5 13l3 3 3-3"/></svg></button><button class="b ic3" id="exp-mes" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M12 12.5v5.5M9.5 15.5 12 18l2.5-2.5"/></svg></button><button class="b ic3" id="imp-xlsx" hidden aria-label="Importar monocráticas" title="Importar monocráticas (planilha no padrão da exportação)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7 10l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="b ic3" id="exp-csv" hidden aria-label="Exportar em CSV os processos filtrados (sem filtro, toda a pauta)" title="Exportar em CSV os processos filtrados (sem filtro, toda a pauta)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/></svg></button><button class="b ic3" id="exp-copia" hidden aria-label="Copiar os processos: selecionados, filtrados ou toda a pauta" title="Copiar os processos: selecionados, filtrados ou toda a pauta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button><input type="file" id="imp-arq" accept=".xlsx" hidden></span>
     </div>
     <div class="pt-bar pt-fl">
-      <span class="pt-ir"><span>Ir para</span><select id="ir-k"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="ir-v" placeholder="Digite o número e Enter"></span>
+      <span class="pt-ir quick-find"><span>BUSCADOR RÁPIDO</span><span class="qf-row"><select id="ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="ir-v" inputmode="numeric" autocomplete="off" placeholder="número + Enter" aria-label="Número do item ou processo"></span><small class="qf-help">Enter leva direto ao processo na pauta.</small></span>
       <span class="pt-q"><select id="q-k"><option value="">Todos os campos</option><option value="assunto">Assunto</option><option value="partes">Partes</option><option value="classe">Classe</option><option value="obs">Detalhes</option><option value="cnj">Processo</option></select><input type="search" id="q" placeholder="Digite para filtrar"></span>
       <button class="b" id="f-pri" aria-pressed="false" title="Sustentação oral ou preferência">Prioridades</button><button class="b" id="f-meta" aria-pressed="false">Metas <i></i></button>
       <select id="f-resp" aria-label="Responsável"></select>
@@ -2363,10 +2370,12 @@ function edLayout(on){var vp=$('#v-pauta');on=!!on;if(!!vp._ed===on)return;vp._e
   if(!on){while(EDM.length){var m=EDM.pop();m[1].insertBefore(m[0],m[2]&&m[2].parentNode===m[1]?m[2]:null);}[].forEach.call(document.querySelectorAll('.ed-sep'),function(x){x.remove();});$('#exp-csv').hidden=$('#exp-copia').hidden=true;return;}
   var mv=function(el,dst){if(!el)return;EDM.push([el,el.parentNode,el.nextSibling]);dst.appendChild(el);},tl=$('#ed-tl'),tr=$('#ed-tr'),st=$('#ed-strip');
   [$('#esc'),$('#msit'),$('#exp-meus'),$('#exp-xlsx'),$('#exp-csv'),$('#exp-mes'),$('#imp-xlsx'),$('#exp-copia')].forEach(function(e){mv(e,tl);});mv($('#trm-reg'),tr);mv($('#urq'),$('#trm-urq'));var tin=$('#trm .trb-in'),tu=$('#trm-urq');if(tin&&tu&&tu.parentNode!==tin)tin.appendChild(tu);$('#exp-csv').hidden=$('#exp-copia').hidden=false;
-  [document.querySelector('.pt-ir'),document.querySelector('.pt-q'),$('#f-resp'),$('#f-pri'),$('#f-meta'),$('#f-limpa')].forEach(function(e){mv(e,st);});
+  [document.querySelector('.pt-q'),$('#f-resp'),$('#f-pri'),$('#f-meta'),$('#f-limpa')].forEach(function(e){mv(e,st);});
   var sp=document.createElement('span');sp.className='ed-sep';sp.setAttribute('aria-hidden','true');st.appendChild(sp);
   [document.querySelector('.pt-c'),$('#sel-n'),$('#sel-filt'),$('#sel-limpa')].forEach(function(e){mv(e,st);});}
+function fixQuickFinder(){var q=document.querySelector('#v-pauta .pt-ir'),side=$('#pp-sub');if(q&&side&&q.parentNode!==side)side.appendChild(q);}
 function render(){
+  fixQuickFinder();
   var hdz=document.querySelector('#v-pauta .pt-hd');if(hdz)hdz.hidden=false;
   edLayout(S.fonte!=='urg'&&CTRLV.indexOf(S.fonte)<0);var ED=$('#v-pauta')._ed;
   var L=lista(),V=filtrar(),ss=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},m=ss.marcos||{},h=hoje(),MO=S.fonte==='mono',UR=S.fonte==='urg';
@@ -4594,6 +4603,26 @@ if(bb){var el=$('#cmt-bbq'),on=el&&el.hidden;if(el){el.hidden=!on;}bb.setAttribu
   if(on){var i2=$('#cmt-q2');if(i2)setTimeout(function(){i2.focus();},60);}return;}
 if(e.target.closest&&e.target.closest('#cmt-bbq-x')){var el2=$('#cmt-bbq');if(el2)el2.hidden=true;var b2=$('#cmt-bbq-b');if(b2)b2.setAttribute('aria-expanded','false');return;}});
 document.addEventListener('input',function(e){if(e.target&&e.target.id==='cmt-busca')cmtBuscaAtu(e.target.value);});
+/* Buscador rápido do CMT: item ou processo; não é filtro, é navegação direta. */
+function cmtIrPara(){
+  var inp=$('#cmt-ir-v'),sel=$('#cmt-ir-k');if(!inp||!sel)return;
+  var v=(inp.value||'').trim();if(!v)return;
+  var p=((CMT.dados||{}).pauta)||{},L=p.itens||[],d=dgx(v),it;
+  if(sel.value==='item')it=L.filter(function(x){return String(x.item||'').replace(/^0+/,'')===v.replace(/^0+/,'');})[0];
+  else it=L.filter(function(x){return d.length>=4&&dgx(x.cnj).indexOf(d)>=0;})[0];
+  if(!it){toast('Não encontrei '+(sel.value==='item'?'o item ':'o processo ')+v+' nesta pauta.');var box=$('#cmt-fastnav');if(box){box.classList.remove('flash');void box.offsetWidth;box.classList.add('flash');}return;}
+  CMT.q='';CMT.filtro='todos';var q=$('#cmt-q');if(q)q.value='';cmtPauta();
+  setTimeout(function(){
+    var rows=[].slice.call(document.querySelectorAll('#cmt-rows tr')),tr=rows.filter(function(r){
+      var ii=r.querySelector('.cmt-ii'),cn=r.querySelector('.cnj');
+      return sel.value==='item'?(ii&&String(ii.textContent).trim().replace(/^0+/,'')===String(it.item||'').replace(/^0+/,'')):(cn&&dgx(cn.textContent)===dgx(it.cnj));
+    })[0];
+    if(tr){tr.scrollIntoView({behavior:'smooth',block:'center'});tr.classList.add('qf-hit');setTimeout(function(){tr.classList.remove('qf-hit');},1700);}
+  },40);
+}
+document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='cmt-ir-v'&&e.key==='Enter'){e.preventDefault();cmtIrPara();}});
+document.addEventListener('click',function(e){if(e.target&&e.target.id==='cmt-ir-go'){cmtIrPara();}});
+
 /* decisões: gravam onde já era gravado e podem ser desfeitas */
 function cmtPost(corpo,ok){
   return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(corpo)}).then(function(){toast(ok);CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);})
@@ -8111,6 +8140,43 @@ body.cmt-dr-on #v-cmt .cmt-wrap{padding-right:58px!important}
 #v-cmt .cmt-dr-h{background:var(--ew)}
 html[data-theme=dark] #v-cmt .cmt-dr-h{background:var(--ep)}
 
+
+/* ===== Buscador rápido · Item / Processo =====
+   Componente persistente, no padrão visual do novo acesso: base limpa, filete dourado e foco verde. */
+.quick-find{--qf-bg:var(--ew,#fff);--qf-line:var(--el,#d8d3c6);--qf-ink:var(--ei,#203b39);--qf-mut:var(--em,#617570);--qf-gold:var(--eo,#a57829);--qf-green:var(--eg,#235a55);background:var(--qf-bg);border-top:2px solid var(--qf-gold);padding:10px 0 0}
+.quick-find .qf-k{display:block;margin:0 0 7px;font:700 9px/1.2 var(--emono,monospace);letter-spacing:.16em;text-transform:uppercase;color:var(--qf-mut)}
+.quick-find .qf-row{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:stretch;border-bottom:2px solid var(--qf-gold);background:transparent}
+.quick-find select,.quick-find input{height:38px;border:0;background:transparent;color:var(--qf-ink);outline:0}
+.quick-find select{padding:0 8px;border-right:1px solid var(--qf-line);font:700 11.5px var(--font);color:var(--qf-green)}
+.quick-find input{min-width:0;width:100%;padding:0 9px;font:600 12px var(--emono,monospace)}
+.quick-find .qf-row:focus-within{border-bottom-color:var(--qf-green);box-shadow:0 2px 0 rgba(35,90,85,.08)}
+.quick-find small{display:block;margin-top:6px;color:var(--qf-mut);font-size:10px;line-height:1.35}
+
+/* Pautas: o mesmo localizador fica preso à base do sumário esquerdo. */
+#v-pauta.pt2 .pp-sub{min-height:calc(100vh - 104px)}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find{margin-top:auto;width:100%;height:auto;display:block!important;overflow:visible;border:0;border-top:2px solid var(--eo);border-radius:0;background:transparent}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find>span{display:block;padding:0 0 7px;border:0;background:transparent;font:700 9px var(--emono);letter-spacing:.16em;color:var(--em)}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find .qf-row{display:grid}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find select,#v-pauta.pt2 .pp-sub .pt-ir.quick-find input{height:38px}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find input{width:100%}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find select{border-right:1px solid var(--el)}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find .qf-help{display:block}
+@media(max-width:980px){
+ #v-pauta.pt2 .pp-sub{min-height:0}
+ #v-pauta.pt2 .pp-sub .pt-ir.quick-find{order:99;flex:1 1 100%;margin-top:8px;padding-top:9px}
+}
+
+/* CMT: localizador rápido fixado na base da lateral esquerda. */
+#v-cmt .cmt-fastnav{position:fixed;z-index:24;left:22px;bottom:18px;width:232px;padding:10px 12px 11px;background:var(--ep);border:1px solid var(--el);border-top:2px solid var(--eo);box-shadow:0 12px 28px rgba(32,59,57,.10)}
+#v-cmt .cmt-fastnav .qf-row{grid-template-columns:82px minmax(0,1fr)}
+#v-cmt .cmt-fastnav .qf-go{width:100%;margin-top:7px;height:30px;border:1px solid var(--el);background:transparent;color:var(--eg);font:700 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+#v-cmt .cmt-fastnav .qf-go:hover{border-color:var(--eg);background:var(--ew)}
+#v-cmt .cmt-fastnav.flash{animation:cmtFastPulse .55s ease}
+@keyframes cmtFastPulse{50%{box-shadow:0 0 0 4px rgba(165,120,41,.16),0 12px 28px rgba(32,59,57,.10)}}
+#v-cmt .cmt-tb tr.qf-hit td{animation:qfHit 1.6s ease}
+@keyframes qfHit{0%,100%{background:inherit}30%{background:#fff2c8}}
+@media(max-width:1100px){#v-cmt .cmt-fastnav{left:12px;right:12px;bottom:70px;width:auto;max-width:420px}}
+@media(max-width:780px){#v-cmt .cmt-fastnav{position:static;width:auto;max-width:none;margin:10px 14px 0;box-shadow:none}}
 </style>
 </body>
 </html>
