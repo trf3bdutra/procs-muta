@@ -341,12 +341,12 @@ const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
 let RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
 const params=new URLSearchParams(location.search);
-/* Amicus Curiae · Index: três visões no mesmo arquivo. Rotas canônicas: /index/ (Geral), /index/cm/ (Desembargador) e /index/cg/ (controle geral). As rotas antigas de lotes permanecem apenas como compatibilidade. */
+/* Amicus Curiae · Index: três visões no mesmo arquivo. Rotas canônicas: /index/ (Geral), /index/cmt/ (Desembargador) e /index/cg/ (controle geral). As rotas antigas de lotes permanecem apenas como compatibilidade. */
 const PATH=location.pathname.toLowerCase();
 const MODO=(/^\/index\/cm(?:\/|$)/.test(PATH)||/^\/cmt\/lotes(?:\/|$)/.test(PATH))?'rel':((/^\/index\/cg(?:\/|$)/.test(PATH)||/^\/cg\/lotes(?:\/|$)/.test(PATH))?'cg':'eq'), MODO_REL=MODO==='rel';
 let VZ=MODO==='cg'?'tudo':MODO;
 /* linha de abertura do carregamento, no lugar da saudação do Painel do Desembargador */
-(function(){const e=document.getElementById('ld-s');if(e)e.textContent=MODO==='rel'?'Index · CM.':MODO==='cg'?'Index · CG.':'Index · Geral.'})();
+(function(){const e=document.getElementById('ld-s');if(e)e.textContent=MODO==='rel'?'Index · CMT.':MODO==='cg'?'Index · CG.':'Index · Geral.'})();
 /* link próprio do relator: a chave (k) vale como credencial, como no Painel do relator (/cmt?k=…) */
 const CMTK=(function(){try{const m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){const v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);const q=new URLSearchParams(location.search);q.delete('k');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash.replace(/[#&]?k=[^&#]+/,''))}return sessionStorage.getItem('cmt_k')||''}catch(e){return ''}})();
 async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/painel?lote=1'+(MODO_REL?'&rel=1':MODO==='cg'?'&modo=cg':'')+(q?'&'+q.replace(/^\?/,''):''),{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
@@ -357,7 +357,7 @@ function falha(e){
   if(e.status===401){$('#ld-m').innerHTML=MODO_REL?'Abra esta página pelo link do painel do Desembargador.':'O Amicus Curiae · Index usa o login do Ex Officio.<br><a class="b pri" style="margin-top:14px" href="/equipe/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
   $('#ld-m').textContent='Não foi possível abrir: '+e.message;$('#ld .cmt-ld-b').hidden=true;
 }
-const ROTULO={cg:'CG',eq:'Geral',rel:'CM'};
+const ROTULO={cg:'CG',eq:'Geral',rel:'CMT'};
 function cabecalho(lotes,id,usuario){
   return `<header class="lx-nx"><div class="lx-nx1"><i class="star" aria-hidden="true"></i>
    <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>Index<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
@@ -367,7 +367,7 @@ function cabecalho(lotes,id,usuario){
    ${MODO==='cg'?`<button type="button" class="hb" id="b-novo" title="Criar um lote a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo lote</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
    <a class="hb" href="/cmt/" title="Voltar ao Painel do relator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Painel do relator</span></a>
    ${MODO==='cg'?`<a class="hb" href="/index/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Index · Geral"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-3-5.2"/></svg><span>Index · Geral</span></a>`:''}
-   ${MODO_REL?'':`<a class="hb" href="/index/cm/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Index · CM"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Index · CM</span></a>`}
+   ${MODO_REL?'':`<a class="hb" href="/index/cmt/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Index · CMT"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Index · CMT</span></a>`}
    ${MODO_REL||(CMTK&&!usuario)?'':`<a class="hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`}
    ${MODO_REL?'':'<a class="hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Compendium</span></a>'}
    <button type="button" class="hb" id="tema" title="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Tema</span></button>
@@ -382,7 +382,7 @@ async function inicio(){
     const id=lotes.some(l=>l.id===params.get('id'))?params.get('id'):lotes[0].id;
     const R=await api('?id='+encodeURIComponent(id));
     /* só com a chave do relator (sem login), /lotes/ leva à página dele */
-    if(MODO==='eq'&&R.relator){location.replace('/index/cm/?id='+encodeURIComponent(id)+location.hash);return}
+    if(MODO==='eq'&&R.relator){location.replace('/index/cmt/?id='+encodeURIComponent(id)+location.hash);return}
     LOTE=R.lote; RELATOR=!!R.relator; montar(lotes,id,L.usuario);
   }catch(e){falha(e)}
 }
@@ -698,7 +698,7 @@ function relSel(it){const v=(it.visivel||{}).relator;return v===true?'r1':v===fa
 function textoVis(it){return `equipe ${it.verEquipe?'sim':'não'} · Relator ${it.verRelator?'sim':'não'}${relSel(it)==='ra'?' (automático'+(it.pronto?', pronto)':', em preparo)'):''}`}
 function celulasVis(it){const r=relSel(it);
   return `<td class="vz"><input type="checkbox" data-ve="${it.uid}"${it.verEquipe?' checked':''} title="Visível no Index · Geral (/index/)"></td>`+
-   `<td class="vz"><select data-vr="${it.uid}" title="Visível no Index · CM (/index/cm/)"><option value="ra"${r==='ra'?' selected':''}>Auto</option><option value="r1"${r==='r1'?' selected':''}>Sempre</option><option value="r0"${r==='r0'?' selected':''}>Nunca</option></select><small data-vrs="${it.uid}">${it.verRelator?'vê':'não vê'}</small></td>`}
+   `<td class="vz"><select data-vr="${it.uid}" title="Visível no Index · CMT (/index/cmt/)"><option value="ra"${r==='ra'?' selected':''}>Auto</option><option value="r1"${r==='r1'?' selected':''}>Sempre</option><option value="r0"${r==='r0'?' selected':''}>Nunca</option></select><small data-vrs="${it.uid}">${it.verRelator?'vê':'não vê'}</small></td>`}
 function aplicaVis(it,eq,rl){
   const v=Object.assign({},it.visivel||{});
   if(eq===true)delete v.equipe;else if(eq===false)v.equipe=false;
@@ -729,7 +729,7 @@ function abrirEditar(){
     <label>Assunto contém<input id="ge-a" value="${esc(f.assunto||'')}"></label>
     <label>Classe contém<input id="ge-c" value="${esc(f.classe||'')}"></label>
     <label class="w">Texto livre<input id="ge-x2" value="${esc(f.texto||'')}"></label>
-    <div class="w"><span class="lb">Onde o lote aparece</span><div class="ses"><label><input type="checkbox" id="ge-ve"${(LOTE.visivel||{}).equipe===false?'':' checked'}> No Index · Geral (/index/), no seletor de conjuntos</label><label><input type="checkbox" id="ge-vr"${(LOTE.visivel||{}).relator===false?'':' checked'}> No Index · CM (/index/cm/), no seletor de conjuntos</label></div></div>
+    <div class="w"><span class="lb">Onde o lote aparece</span><div class="ses"><label><input type="checkbox" id="ge-ve"${(LOTE.visivel||{}).equipe===false?'':' checked'}> No Index · Geral (/index/), no seletor de conjuntos</label><label><input type="checkbox" id="ge-vr"${(LOTE.visivel||{}).relator===false?'':' checked'}> No Index · CMT (/index/cmt/), no seletor de conjuntos</label></div></div>
    </div>
    <p class="none" style="font-style:normal">O filtro vale para as próximas sessões associadas; os processos que já estão no lote ficam.</p>
    <div class="acts"><button type="button" class="b pri" id="ge-ok">Salvar</button><span class="k" id="ge-m"></span></div></section>`;
