@@ -112,3 +112,11 @@
 .eqm-pf summary{cursor:pointer;font-size:12px;font-weight:700;color:#24456a;list-style:none}.eqm-pf summary::-webkit-details-marker{display:none}.eqm-pf summary:before{content:"▸ "}.eqm-pf[open] summary:before{content:"▾ "}
 .eqm-pf label{display:block;font-size:11px;font-weight:700;color:#7a8893;margin:8px 0 3px}.eqm-pf .cs-in,.eqm-pf textarea{width:100%;box-sizing:border-box}.eqm-pf textarea{min-height:52px;border:1px solid #d8dfe6;border-radius:8px;padding:6px 8px;font:inherit;font-size:12.5px}
 @media (max-width:1100px){.eqm-ks{grid-template-columns:repeat(3,minmax(0,1fr))}.eqm-g{grid-template-columns:1fr}}
+/* Competências do servidor (cadastro da equipe) */
+.eqm-comp{margin:8px 0 6px;padding:8px 10px;border:1px solid #e3e8ee;border-radius:10px;background:#fafbfc;display:grid;gap:5px}
+.eqm-cl{display:grid;grid-template-columns:92px 1fr;gap:8px;align-items:baseline}.eqm-cl>b{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#7a8893}
+.eqm-cl>div{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.eqm-cl>div>div{display:flex;flex-wrap:wrap;gap:4px;width:100%}
+.eqm-cp{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;line-height:1.3;border-radius:999px;padding:2px 8px;background:#eef2f6;color:#3d4c58;border:1px solid transparent}
+.eqm-cp i{font-style:normal;font-weight:800;color:#24456a}.eqm-cp.esp{background:#e3efe6;color:#1f5a33;border-color:#bcd9c4}.eqm-cp.pre{background:#e6eef8;color:#24456a;border-color:#c5d5ea}
+.eqm-cp.nao{background:#fbe7e0;color:#8a3420;border-color:#efc6b8}.eqm-cp.exp{background:#fff}.eqm-cp.exp.esp,.eqm-cp.exp.pre,.eqm-cp.exp.nao{border-style:dashed}
+.eqm-cp button{border:0;background:#24456a;color:#fff;border-radius:999px;width:16px;height:16px;line-height:16px;padding:0;font-size:12px;font-weight:800;cursor:pointer}

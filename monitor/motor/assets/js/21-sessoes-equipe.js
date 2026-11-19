@@ -595,10 +595,10 @@
   function aderencia(kind, m, inf, ss, H) { var a = N(inf.assunto), sec = N(inf.secao), esp = (inf.c.esp || []).concat(inf.c.tema || []).map(N).filter(Boolean), p = 0, veto = false, why = [];
     var casa = function (L) { return (L || []).some(function (e) { var k = N(e); return k && (k === a || k === sec || esp.indexOf(k) >= 0 || (k.length >= 4 && a.indexOf(k) >= 0)); }); };
     if (kind === 'd') {
-      if (casa(m.exp)) { p += 2; why.push('experiência (+2)'); } if (casa(m.pref)) { p += 2; why.push('preferência (+2)'); } if (casa(m.nao)) { p -= 4; veto = true; why.push('área a evitar (−4)'); }
+      if (casa(m.exp)) { p += 2; why.push('especialidade (+2)'); } if (casa(m.pref)) { p += 2; why.push('preferência (+2)'); } if (casa(m.nao)) { p -= 4; veto = true; why.push('matéria que evita (−4)'); }
       var hs = a ? (H.get(N(m.nome) + '|' + a) || 0) : 0; if (hs) { var pt = Math.min(4, hs) * 0.75; p += pt; why.push(hs + ' minuta(s) no assunto (+' + String(pt).replace('.', ',') + ')'); }
     } else {
-      if (casa(m.exp)) { p += 3; why.push('experiência (+3)'); } if (casa(m.pref)) { p += 2; why.push('preferência (+2)'); } if (casa(m.nao)) { p -= 5; veto = true; why.push('área a evitar (−5)'); }
+      if (casa(m.exp)) { p += 3; why.push('especialidade (+3)'); } if (casa(m.pref)) { p += 2; why.push('preferência (+2)'); } if (casa(m.nao)) { p -= 5; veto = true; why.push('matéria que evita (−5)'); }
       var hc = a ? (H.get(N(m.nome) + '|' + a) || 0) : 0; if (hc) { var pc = Math.min(4, hc) * 2; p += pc; why.push(hc + ' correção(ões) no assunto (+' + pc + ')'); }
       var cg = ss.itens.filter(function (i) { return N(i.corretor) === N(m.nome) && !i.dataCorrecao; }).length; if (cg) { var pg = Math.min(8, cg) * 0.5; p -= pg; why.push(cg + ' correção(ões) pendente(s) (−' + String(pg).replace('.', ',') + ')'); }
     }
@@ -1579,13 +1579,13 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
   }
 
   /* ---------- Equipe: avisos, solicitações de ausência, ausências e cadastro (dados que a Ex Officio usa) ---------- */
-  var EQ = { sol: null, av: null, lendo: false, erro: '' };
-  var ARQ_SOL = 'apoio/equipe-solicitacoes.json', ARQ_AV = 'apoio/equipe-avisos.json';
+  var EQ = { sol: null, av: null, mat: null, lendo: false, erro: '' };
+  var ARQ_SOL = 'apoio/equipe-solicitacoes.json', ARQ_AV = 'apoio/equipe-avisos.json', ARQ_MAT = 'apoio/equipe-matriz.json';
   async function eqLer(rel, vazio) { try { return JSON.parse(await W.ProcsMuta.ler(rel)); } catch (e) { if (/404/.test(e.message)) return vazio; throw e; } }
   function eqCarregar() {
     if (EQ.lendo || !W.ProcsMuta) return; EQ.lendo = true;
-    Promise.all([eqLer(ARQ_SOL, { schema: 'gabcmt.equipe.solicitacoes', versao: 1, registros: [] }), eqLer(ARQ_AV, { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] })])
-      .then(function (r) { EQ.sol = r[0]; EQ.av = r[1]; EQ.erro = ''; }).catch(function (e) { EQ.erro = e.message; }).then(function () { EQ.lendo = false; if (UI.aba === 'equipe') render(); });
+    Promise.all([eqLer(ARQ_SOL, { schema: 'gabcmt.equipe.solicitacoes', versao: 1, registros: [] }), eqLer(ARQ_AV, { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] }), eqLer(ARQ_MAT, { schema: 'gabcmt.equipe.matriz', versao: 1, servidores: [] }).catch(function () { return null; })])
+      .then(function (r) { EQ.sol = r[0]; EQ.av = r[1]; EQ.mat = r[2]; EQ.erro = ''; }).catch(function (e) { EQ.erro = e.message; }).then(function () { EQ.lendo = false; if (UI.aba === 'equipe') render(); });
   }
   async function eqGravar(rel, mut, msg) {
     var atual = await eqLer(rel, rel === ARQ_SOL ? { schema: 'gabcmt.equipe.solicitacoes', versao: 1, registros: [] } : { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] });
@@ -1620,6 +1620,21 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
   /* Aba Equipe: painel do responsável. Topo com indicadores; à esquerda o que pede decisão (solicitações) e quem está fora;
      à direita os avisos; abaixo o cadastro, um cartão por servidor com carga na próxima sessão e perfil recolhível. */
   var URL_EQ = 'https://trf3-muta.vercel.app/equipe/';
+  /* Competências do servidor: especialidade (indicada), prefere, evita e experiência (histórico, apoio/equipe-matriz.json) */
+  var TIPO_AB = { 'Apelação': 'Apelação', 'Apelação e remessa': 'Apel. + remessa', 'Remessa necessária': 'Remessa', 'Agravo de instrumento': 'AI', 'Embargos de declaração': 'ED', 'Agravo interno': 'AgInt', 'Juízo de retratação': 'Retratação', 'Decisão monocrática': 'Monocrática', 'Outras classes': 'Outras' };
+  function matDe(m) { var L = (EQ.mat && EQ.mat.servidores) || [], ks = [N(m.nome)].concat((m.aliases || []).map(N)); return L.find(function (x) { return ks.indexOf(N(x.servidor)) >= 0; }) || null; }
+  function competencias(m) {
+    var x = matDe(m), tem = function (L, a) { return (L || []).some(function (e) { var k = N(e), b = N(a); return k && (k === b || (k.length >= 4 && b.indexOf(k) >= 0)); }); };
+    var chips = function (L, c) { return (L || []).length ? L.map(function (e) { return '<span class="eqm-cp ' + c + '">' + esc(e) + '</span>'; }).join('') : '<span class="eqm-mut">—</span>'; };
+    var lin = function (t, html) { return '<div class="eqm-cl"><b>' + t + '</b><div>' + html + '</div></div>'; };
+    var h = '<div class="eqm-comp">' + lin('Especialidade', chips(m.exp, 'esp')) + lin('Prefere', chips(m.pref, 'pre')) + lin('Evita', chips(m.nao, 'nao'));
+    if (!x) return h + lin('Experiência', '<span class="eqm-mut">' + (EQ.mat ? 'sem minutas no histórico' : 'lendo o histórico…') + '</span>') + '</div>';
+    var tipos = Object.keys(x.tipos || {}).filter(function (k) { return x.tipos[k]; }).sort(function (a, b) { return x.tipos[b] - x.tipos[a]; }).map(function (k) { return (TIPO_AB[k] || k) + ' ' + x.tipos[k]; }).join(' · ');
+    var secs = Object.keys(x.secoes || {}).filter(function (k) { return k !== 'sem seção'; }).map(function (k) { return k + ' ' + x.secoes[k]; }).join(' · ');
+    var ass = Object.keys(x.assuntos || {}).slice(0, 8).map(function (a) { var n = x.assuntos[a], marca = tem(m.exp, a) ? ' esp' : tem(m.nao, a) ? ' nao' : tem(m.pref, a) ? ' pre' : '';
+      return '<span class="eqm-cp exp' + marca + '" title="' + n + ' minuta(s) no histórico">' + esc(a) + ' <i>' + n + '</i>' + (!marca && n >= 3 ? '<button type="button" data-cs="comp-esp" data-a="' + esc(a) + '" title="Indicar como especialidade">+</button>' : '') + '</span>'; }).join('');
+    return h + lin('Experiência', '<small class="eqm-mut">' + x.total + ' minutas · ' + esc(tipos) + (secs ? ' · ' + esc(secs) : '') + '</small><div>' + ass + '</div>') + '</div>';
+  }
   function telaEquipe() {
     if (!EQ.sol && !EQ.lendo && !EQ.erro) eqCarregar();
     var hj = hoje(), em30 = new Date(Date.now() + 30 * 864e5).toISOString().slice(0, 10);
@@ -1664,11 +1679,11 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         '<div class="eqm-tg"><button class="cs-tg" data-mf-tg="minuta" aria-pressed="' + faz(m, 'd') + '">Minuta</button><button class="cs-tg" data-mf-tg="correcao" aria-pressed="' + faz(m, 'c') + '">Correção</button><button class="cs-tg" data-mf-tg="auto" aria-pressed="' + (m.auto !== false) + '">Automático</button></div>' +
         (ps ? '<div class="eqm-cg"><span><b>' + cd + '</b> minuta' + (cd === 1 ? '' : 's') + '</span><span><b>' + cc + '</b> correç' + (cc === 1 ? 'ão' : 'ões') + '</span></div>' : '') +
         ((m.escopos || []).length ? '<p class="eqm-mut">Escopos: ' + esc(m.escopos.join(' | ')) + '</p>' : '') + (m.nota ? '<p class="eqm-mut">' + esc(m.nota) + '</p>' : '') +
-        '<details class="eqm-pf"><summary>Perfil, preferências e histórico</summary>' + (top('d') || top('c') ? '<p class="eqm-mut">' + esc([top('d') ? 'Minutou: ' + top('d') : '', top('c') ? 'Corrigiu: ' + top('c') : ''].filter(Boolean).join(' · ')) + '</p>' : '') +
+        competencias(m) + '<details class="eqm-pf"><summary>Editar competências, apelidos e ausências</summary>' + (top('d') || top('c') ? '<p class="eqm-mut">' + esc([top('d') ? 'Minutou: ' + top('d') : '', top('c') ? 'Corrigiu: ' + top('c') : ''].filter(Boolean).join(' · ')) + '</p>' : '') +
         '<label>Apelidos (separe por ;)</label><input class="cs-in" data-mf="aliases" value="' + esc((m.aliases || []).join('; ')) + '">' +
-        '<label>Preferência</label><textarea data-mf="pref">' + esc((m.pref || []).join('\n')) + '</textarea>' +
-        '<label>Experiência</label><textarea data-mf="exp">' + esc((m.exp || []).join('\n')) + '</textarea>' +
-        '<label>Não gosta</label><textarea data-mf="nao">' + esc((m.nao || []).join('\n')) + '</textarea>' +
+        '<label>Prefere (matérias ou seções que gosta de minutar; uma por linha)</label><textarea data-mf="pref">' + esc((m.pref || []).join('\n')) + '</textarea>' +
+        '<label>Especialidade (o que faz bem, indicado pela chefia; uma por linha)</label><textarea data-mf="exp">' + esc((m.exp || []).join('\n')) + '</textarea>' +
+        '<label>Evita (matérias que não gosta; uma por linha)</label><textarea data-mf="nao">' + esc((m.nao || []).join('\n')) + '</textarea>' +
         '<label>Ausências (AAAA-MM-DD a AAAA-MM-DD, uma por linha)</label><textarea data-mf="aus">' + esc((m.aus || []).map(function (a) { return a.de + ' a ' + a.ate; }).join('\n')) + '</textarea></details></div>';
     });
     return h + '</div></section></div>';
@@ -1860,6 +1875,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       }
     }
     if (a === 'novo-membro') { var nm = root.querySelector('[data-cs-novo-nome]').value.trim(); if (!nm) return; var pp = root.querySelector('[data-cs-novo-papel]').value; S.equipe.push({ id: 'm-' + uid(), nome: nm, papel: pp, minuta: pp === 'equipe', correcao: pp === 'assessoria', auto: true, aliases: [], pref: [], exp: [], nao: [], aus: [], nota: '' }); salvar(); render(); return; }
+    if (mem && a === 'comp-esp') { var mc = S.equipe.find(function (x) { return x.id === mem.dataset.mem; }), as = t.dataset.a || ''; if (mc && as && (mc.exp || []).every(function (e) { return N(e) !== N(as); })) { (mc.exp = mc.exp || []).push(as); HIST = null; salvar(); render(); toast(as + ' indicado como especialidade de ' + mc.nome + '.'); } return; }
     if (mem && a === 'apagar-membro') { var mm = S.equipe.find(function (x) { return x.id === mem.dataset.mem; }); if (mm && W.confirm('Remover ' + mm.nome + ' da equipe?')) { S.equipe = S.equipe.filter(function (x) { return x !== mm; }); salvar(); render(); } return; }
   }
   function mudou(e) {

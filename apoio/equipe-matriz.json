@@ -1,0 +1,586 @@
+{
+ "schema": "gabcmt.equipe.matriz",
+ "versao": 1,
+ "geradoEm": "2026-11-19T14:15:15Z",
+ "geradoPor": "scripts/equipe/matriz_minutas.py",
+ "tipos": [
+  "Apelação",
+  "Apelação e remessa",
+  "Remessa necessária",
+  "Agravo de instrumento",
+  "Embargos de declaração",
+  "Agravo interno",
+  "Juízo de retratação",
+  "Decisão monocrática",
+  "Outras classes"
+ ],
+ "servidores": [
+  {
+   "servidor": "Victor",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 155,
+   "tipos": {
+    "Apelação": 126,
+    "Apelação e remessa": 12,
+    "Remessa necessária": 1,
+    "Agravo de instrumento": 5,
+    "Embargos de declaração": 9,
+    "Agravo interno": 1,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 1,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "2ª Seção": 85,
+    "1ª Seção": 42,
+    "3ª Seção": 24,
+    "sem seção": 4
+   },
+   "assuntos": {
+    "Convalidação de Estudos e Reconhecimento de Diploma": 43,
+    "FIES": 20,
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 15,
+    "Fornecimento de medicamentos": 10,
+    "Anulação e Correção de Provas / Questões": 6,
+    "Aposentadoria Especial (Art. 57/8)": 5,
+    "Inscrição / Documentação": 4,
+    "Anulação": 4
+   },
+   "cadastro": {
+    "exp": [
+     "Convalidação de Estudos e Reconhecimento de Diploma"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Dalete",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 120,
+   "tipos": {
+    "Apelação": 89,
+    "Apelação e remessa": 9,
+    "Remessa necessária": 2,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 17,
+    "Agravo interno": 0,
+    "Juízo de retratação": 3,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "3ª Seção": 81,
+    "2ª Seção": 18,
+    "sem seção": 16,
+    "1ª Seção": 5
+   },
+   "assuntos": {
+    "Pessoa com Deficiência": 26,
+    "Pensão por Morte (Art. 74/9)": 18,
+    "Inscrição / Documentação": 10,
+    "Aposentadoria por Incapacidade Permanente": 10,
+    "Salário-Maternidade (Art. 71/73)": 4,
+    "IRPJ/Imposto de Renda de Pessoa Jurídica": 4,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 4,
+    "Pensão": 2
+   },
+   "cadastro": {
+    "exp": [
+     "Pensão por Morte (Art. 74/9)",
+     "Aposentadoria por Incapacidade Permanente",
+     "Pessoa com Deficiência",
+     "Urbana (Art. 48/51)",
+     "Salário-Maternidade (Art. 71/73)",
+     "Seguro-defeso ao pescado artesanal profissional",
+     "Incapacidade Laborativa Permanente",
+     "Benefício Assistencial (Art. 203,V CF/88)"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Rodrigo",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 111,
+   "tipos": {
+    "Apelação": 100,
+    "Apelação e remessa": 6,
+    "Remessa necessária": 2,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 1,
+    "Agravo interno": 0,
+    "Juízo de retratação": 1,
+    "Decisão monocrática": 1,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "1ª Seção": 56,
+    "3ª Seção": 43,
+    "2ª Seção": 12
+   },
+   "assuntos": {
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 34,
+    "Atraso na Entrega do Imóvel": 24,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 13,
+    "Aposentadoria Especial (Art. 57/8)": 9,
+    "Expurgos Inflacionários / Planos Econômicos": 5,
+    "Inquérito / Processo / Recurso Administrativo": 4,
+    "RMI - Renda Mensal Inicial": 2,
+    "Multas e demais Sanções": 2
+   },
+   "cadastro": {
+    "exp": [
+     "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+     "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+     "Inquérito / Processo / Recurso Administrativo",
+     "Aposentadoria Especial (Art. 57/8)",
+     "Cálculo do fator previdenciário - Lei 9.876/99",
+     "RMI - Renda Mensal Inicial",
+     "Professor",
+     "Correção Monetária de Diferenças Pagas em Atraso"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Debora",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 94,
+   "tipos": {
+    "Apelação": 67,
+    "Apelação e remessa": 5,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 1,
+    "Embargos de declaração": 18,
+    "Agravo interno": 0,
+    "Juízo de retratação": 3,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "3ª Seção": 65,
+    "2ª Seção": 19,
+    "1ª Seção": 9,
+    "sem seção": 1
+   },
+   "assuntos": {
+    "Aposentadoria Rural (Art. 48/51)": 31,
+    "Liberação de Veículo Apreendido": 10,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 9,
+    "Rural (Art. 48/51)": 8,
+    "Sustação/ Alteração de Leilão": 7,
+    "Oncológico": 3,
+    "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)": 2,
+    "Apreensão": 2
+   },
+   "cadastro": {
+    "exp": [
+     "Rural (Art. 48/51)",
+     "Híbrida (Art. 48/106)",
+     "Averbação/Cômputo de tempo de serviço rural (empregado/empregador)",
+     "Indenização por Dano Moral",
+     "Remoção"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "José",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 69,
+   "tipos": {
+    "Apelação": 40,
+    "Apelação e remessa": 13,
+    "Remessa necessária": 1,
+    "Agravo de instrumento": 10,
+    "Embargos de declaração": 2,
+    "Agravo interno": 2,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 1
+   },
+   "secoes": {
+    "2ª Seção": 53,
+    "1ª Seção": 7,
+    "3ª Seção": 5,
+    "sem seção": 4
+   },
+   "assuntos": {
+    "IRPJ/Imposto de Renda de Pessoa Jurídica": 15,
+    "Multas e demais Sanções": 7,
+    "Concurso Público / Edital": 6,
+    "Anulação": 4,
+    "Conselhos Regionais e Afins (Anuidade)": 3,
+    "Concurso Público - Nomeação/ Posse Tardia": 2,
+    "Impostos": 2,
+    "Inscrição / Documentação": 2
+   },
+   "cadastro": {
+    "exp": [
+     "Contribuições Previdenciárias",
+     "Impostos",
+     "Conselhos Regionais e Afins (Anuidade)",
+     "Multas e demais Sanções",
+     "Cessão de créditos não-tributários",
+     "Cofins",
+     "IRPJ/Imposto de Renda de Pessoa Jurídica",
+     "Microempresa"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Estela",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 67,
+   "tipos": {
+    "Apelação": 52,
+    "Apelação e remessa": 3,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 12,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "3ª Seção": 40,
+    "sem seção": 25,
+    "2ª Seção": 2
+   },
+   "assuntos": {
+    "Aposentadoria por Incapacidade Permanente": 13,
+    "Auxílio por Incapacidade Temporária": 10,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 4,
+    "Reajustes e Revisões Específicos": 3,
+    "IRPF/ Imposto de Renda de Pessoa Física": 2,
+    "Por Tempo de Contribuição": 2,
+    "Aposentadoria por Idade (Art. 48/51)": 2,
+    "Restabelecimento": 2
+   },
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Maria Eduarda",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 66,
+   "tipos": {
+    "Apelação": 44,
+    "Apelação e remessa": 7,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 8,
+    "Embargos de declaração": 6,
+    "Agravo interno": 1,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "2ª Seção": 32,
+    "1ª Seção": 22,
+    "sem seção": 9,
+    "3ª Seção": 3
+   },
+   "assuntos": {
+    "Anulação e Correção de Provas / Questões": 6,
+    "Esbulho / Turbação / Ameaça": 5,
+    "Multas e demais Sanções": 4,
+    "Direitos Indígenas": 3,
+    "Classificação e/ ou Preterição": 3,
+    "Reintegração": 3,
+    "Assistência à Saúde": 2,
+    "Ambiental": 2
+   },
+   "cadastro": {
+    "exp": [
+     "Direitos Indígenas",
+     "Esbulho / Turbação / Ameaça",
+     "FGTS/Fundo de Garantia Por Tempo de Serviço",
+     "Reintegração",
+     "Anulação e Correção de Provas / Questões",
+     "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico",
+     "Ambiental",
+     "Restituição de área - FUNAI"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Bruno",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 53,
+   "tipos": {
+    "Apelação": 44,
+    "Apelação e remessa": 0,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 7,
+    "Agravo interno": 2,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "1ª Seção": 26,
+    "3ª Seção": 26,
+    "2ª Seção": 1
+   },
+   "assuntos": {
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 50,
+    "Índice de 28,86% LL 8.622/1993 e 8.627/1993": 2,
+    "Vícios de Construção": 1
+   },
+   "cadastro": {
+    "exp": [
+     "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Lucíola",
+   "noCadastro": false,
+   "minutaNoCadastro": null,
+   "total": 38,
+   "tipos": {
+    "Apelação": 33,
+    "Apelação e remessa": 0,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 4,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 1
+   },
+   "secoes": {
+    "sem seção": 37,
+    "3ª Seção": 1
+   },
+   "assuntos": {
+    "ED": 4,
+    "RMI - Renda Mensal Inicial": 1
+   },
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Wellington",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 25,
+   "tipos": {
+    "Apelação": 16,
+    "Apelação e remessa": 1,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 1,
+    "Embargos de declaração": 1,
+    "Agravo interno": 1,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 5,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "2ª Seção": 13,
+    "1ª Seção": 9,
+    "3ª Seção": 2,
+    "sem seção": 1
+   },
+   "assuntos": {
+    "Multas e demais Sanções": 2,
+    "PIS - Cofins": 2,
+    "Registro Profissional": 2,
+    "Contribuição sobre a folha de salários": 2,
+    "Obras Públicas": 1,
+    "Liberação de Veículo Apreendido": 1,
+    "Índice da URV Lei 8.880/1994": 1,
+    "Funrural": 1
+   },
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Alexander",
+   "noCadastro": true,
+   "minutaNoCadastro": false,
+   "total": 19,
+   "tipos": {
+    "Apelação": 18,
+    "Apelação e remessa": 0,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 1,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "sem seção": 11,
+    "3ª Seção": 8
+   },
+   "assuntos": {
+    "Aposentadoria Especial (Art. 57/8)": 4,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 2,
+    "Agente Agressivo - Ruído": 1,
+    "Alteração do coeficiente de cálculo do benefício": 1,
+    "ED": 1
+   },
+   "cadastro": {
+    "exp": [
+     "Aposentadoria Especial (Art. 57/8)",
+     "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+     "Alteração do coeficiente de cálculo do benefício"
+    ],
+    "pref": [
+     "3ª Seção"
+    ],
+    "nao": [
+     "2ª Seção"
+    ]
+   }
+  },
+  {
+   "servidor": "Lucas",
+   "noCadastro": false,
+   "minutaNoCadastro": null,
+   "total": 12,
+   "tipos": {
+    "Apelação": 12,
+    "Apelação e remessa": 0,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 0,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "sem seção": 12
+   },
+   "assuntos": {},
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Saffioti",
+   "noCadastro": true,
+   "minutaNoCadastro": false,
+   "total": 2,
+   "tipos": {
+    "Apelação": 1,
+    "Apelação e remessa": 1,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 0,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "1ª Seção": 1,
+    "2ª Seção": 1
+   },
+   "assuntos": {
+    "Restituição de área - FUNAI": 1,
+    "Direitos Indígenas": 1
+   },
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Vanilda",
+   "noCadastro": true,
+   "minutaNoCadastro": false,
+   "total": 2,
+   "tipos": {
+    "Apelação": 2,
+    "Apelação e remessa": 0,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 0,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "1ª Seção": 2
+   },
+   "assuntos": {
+    "Contratos Bancários": 1,
+    "Fundo de Saúde do Exército - FUSEX": 1
+   },
+   "cadastro": {
+    "exp": [
+     "Fundo de Saúde do Exército - FUSEX",
+     "Contratos Bancários"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Giovana",
+   "noCadastro": true,
+   "minutaNoCadastro": false,
+   "total": 1,
+   "tipos": {
+    "Apelação": 0,
+    "Apelação e remessa": 1,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 0,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "2ª Seção": 1
+   },
+   "assuntos": {
+    "Cofins": 1
+   },
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
+  }
+ ]
+}
