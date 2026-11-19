@@ -69,7 +69,7 @@
 
   var v = $('versao'); if (v && Muta.versao) v.textContent = 'versão ' + Muta.versao;
   var z = $('lnk-zip'); if (z) z.href = Muta.SITE + '/extensao/muta-pje.zip';
-  var ix = $('lnk-index'); if (ix) ix.href = Muta.SITE + '/lote/';
+  var ix = $('lnk-index'); if (ix) ix.href = Muta.SITE + '/amicus/collectio/';
 
   if (!temChrome) { aplicar(null); return; }
   chrome.tabs.onActivated.addListener(function (info) { lerAba(info.tabId); });
