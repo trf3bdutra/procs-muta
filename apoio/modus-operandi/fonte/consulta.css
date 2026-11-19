@@ -61,3 +61,46 @@
 /* Minuta com a LIA */
 .cq-lia .cql{display:flex;flex-direction:column;gap:3px;font-size:11.5px;font-weight:600;margin:6px 0}.cq-lia select,.cq-lia input[type=text],.cq-lia input:not([type]){font:inherit;font-weight:500;padding:5px 7px;border:1px solid #c8c3b6;background:#fff}
 .cq-lia .cqk2{display:flex;gap:6px;align-items:flex-start;font-size:11.5px;margin:3px 0;line-height:1.35}
+
+/* Consulta · prontuário-base, taxonomia das soluções e personalização */
+#cq .cq-selbar{display:flex;align-items:stretch;gap:6px;margin-top:8px;padding:7px;border:1px solid #d8d3c6;border-radius:7px;background:#f7f6f1}
+#cq .cq-sel-k{display:flex;align-items:center;padding:0 7px;font:700 9.5px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#7b8794}
+#cq .cq-selbar button{display:flex;flex-direction:column;align-items:flex-start;min-width:150px;border:1px solid #d7d2c5;border-radius:5px;background:#fff;padding:7px 10px;color:#203b39;cursor:pointer;text-align:left}
+#cq .cq-selbar button b{font:700 12px Inter,sans-serif}
+#cq .cq-selbar button small{margin-top:2px;font:500 10.5px Inter,sans-serif;color:#6c7975}
+#cq .cq-selbar button[aria-pressed="true"]{border-color:#39736a;background:#edf5f2;box-shadow:inset 0 0 0 1px #39736a}
+#cq-can .cq-pront-base>.cf{border-top:0}
+#cq-can .cq-src,#cq-can .cq-origin{display:inline-flex;border:1px solid #d9ddd9;border-radius:999px;padding:2px 5px;font:650 8.5px/1 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.05em;text-transform:uppercase;color:#61706b;background:#f7f9f8}
+#cq-can .cq-origin{margin-left:4px;vertical-align:1px}
+#cq-can .cq-psec{border-top:1px dashed #ded9cd;padding:7px 0}
+#cq-can .cq-psec:first-of-type{border-top:0}
+#cq-can .cq-psec>summary{cursor:pointer;font:700 10.5px Inter,sans-serif;color:#52645f;list-style:none;margin-bottom:6px}
+#cq-can .cq-psec>summary::-webkit-details-marker{display:none}
+#cq-can .cq-psec>summary:before{content:"▸";display:inline-block;width:13px;color:#81908c}
+#cq-can .cq-psec[open]>summary:before{content:"▾"}
+#cq-can .cq-person{background:#faf8f1}
+#cq-can .cq-extra{display:flex;flex-direction:column;gap:3px;margin:8px 0}
+#cq-can .cq-extra>span{font:700 10.5px Inter,sans-serif;color:#344743}
+#cq-can .cq-extra input{width:100%;box-sizing:border-box;border:1px solid #c8c3b6;border-radius:4px;background:#fff;padding:6px 7px;font:12px Inter,sans-serif;color:#203b39}
+#cq-can .cq-extra small{font:500 9.5px Inter,sans-serif;color:#7a6b47}
+#cq-can .cq-extra small b{color:#5b4777}
+#cq-main .fill.preenchido{background:#e7f3ed;color:#245c48;box-shadow:inset 0 -1px 0 #79ad95}
+#cq-ori .cq-solucoes{border:1px solid #d8d3c6;border-radius:6px;padding:10px;background:#fbfaf6}
+#cq-ori .cq-tipo{padding:9px 0;border-top:1px dashed #d8d3c6}
+#cq-ori .cq-tipo:first-of-type{border-top:0}
+#cq-ori .cq-tipo>b{font:750 12px Inter,sans-serif;color:#203b39}
+#cq-ori .cq-tipo>p{margin:3px 0 7px;font:11.5px/1.4 Inter,sans-serif;color:#617570}
+#cq-ori .cq-modelq{width:100%;box-sizing:border-box;border:1px solid #c8c3b6;border-radius:4px;background:#fff;padding:7px 8px;font:12px Inter,sans-serif;margin-bottom:6px}
+#cq-ori .cq-modsel{display:flex;flex-direction:column;gap:4px}
+#cq-ori .cq-sol{width:100%;display:flex;flex-direction:column;align-items:flex-start;border:1px solid #d6d1c5;border-radius:5px;background:#fff;padding:7px 8px;cursor:pointer;text-align:left;color:#203b39}
+#cq-ori .cq-sol strong{font:700 11.5px/1.3 Inter,sans-serif}
+#cq-ori .cq-sol small{margin-top:3px;font:500 10px/1.35 Inter,sans-serif;color:#687773}
+#cq-ori .cq-sol.sel{border-color:#39736a;background:#edf5f2}
+#cq-ori .cq-sol.rec{border-color:#a78845;background:#fbf6e8}
+#cq-ori .cq-fora{margin-top:7px;border-top:1px dashed #ddd6c5;padding-top:6px}
+#cq-ori .cq-fora summary{cursor:pointer;font:650 10.5px Inter,sans-serif;color:#7b6740}
+#cq-ori .cq-fora div{padding:5px 0}
+#cq-ori .cq-fora div b,#cq-ori .cq-fora div small{display:block}
+#cq-ori .cq-fora div b{font:650 10.5px Inter,sans-serif;color:#53615e}
+#cq-ori .cq-fora div small{font:500 9.5px Inter,sans-serif;color:#8a6a60}
+@media (max-width:860px){#cq .cq-selbar{overflow-x:auto}#cq .cq-selbar button{min-width:145px}}
