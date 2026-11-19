@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-19T06:40:57.686Z",
+ "atualizado_em": "2026-11-19T06:42:00.685Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -179179,7 +179179,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T06:08:06.298Z",
+    "atualizado_em": "2026-11-19T06:42:00.609Z",
     "Origem - Juízo": "Núcleo Adjunto 4.0 - 2ª Vara Federal de Presidente Prudente - VF",
     "Origem - Documentos 1G": [
      {
@@ -179740,19 +179740,65 @@
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovida",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
     "Voto - Descrição": "",
     "Lote": "A corrigir · item 51 · sessão 2026-11-30",
     "Lote - Tipo de caso": "Registro Profissional",
-    "Lote - Resultado": "",
+    "Lote - Resultado": "Desprovida",
     "Lote - Variações": "",
     "Lote - Caso": "",
     "Lote - Observação": "",
-    "Lote - Ajustes da correção": [],
-    "Lote - Pendências": "",
-    "Lote - Minuta": "versão 1 · 2026-11-18 · Texto integral extraído do editor do PJe em 18/11/2026, tarefa [Sessão] Aguardando a sessão."
+    "Lote - Ajustes da correção": [
+     {
+      "secao": "Relatório",
+      "ajuste": "Abertura no padrão (\"remessa necessária à sentença que concedeu a segurança\"), com o dispositivo da sentença (ID 400501797) e a sigla CRM/MS entre parênteses",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Relatório",
+      "ajuste": "Incluída a ausência de recurso voluntário (o despacho de ID 400501802 remete os autos só por força do reexame)",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Relatório",
+      "ajuste": "Parecer: a Procuradoria Regional da República não opinou sobre o mérito (\"falta de interesse\"), só pediu o prosseguimento; frase ajustada para não sugerir manifestação de mérito",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Itens 3, 4 e 6 tinham frases de 60 a 90 palavras; divididos em períodos menores, sem mudar o conteúdo",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Questão com \"saber se\"; item 9 com \"pois\" no lugar de \"vez que\"",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Rodapé no formato do gabinete: tribunal antes de cada referência (STF → STJ → TRF-3), \"TRF3\" → \"TRF-3\", \"CF\" e \"e\" antes do último item",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "\"vez que\" → \"pois\" (custas)",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Acórdão",
+      "ajuste": "Texto do acórdão incluído",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Conferência",
+      "ajuste": "IDs e fatos conferidos: diploma 400501606 (Universidad del Norte), apostila 400501607 (26/11/2025, modalidade simplificada, Decretos 2.460/2005 e 6.372/2021), indeferimento 400501611, informações 400501788 (Ofício Circular 37/2026 e AI 0002987-25.2026.8.27.2700, ID 400501793), sentença 400501797 e pedido de revalidação em dezembro de 2024 (IDs 400501602 e 400501615)",
+      "tipo": "Conferido"
+     }
+    ],
+    "Lote - Pendências": "A apostila (ID 400501607) é digitalizada e o texto extraído embaralha número, folha e livro do registro; conferir no PDF se é \"número 23827, folha 238, livro 65\".",
+    "Lote - Minuta": "versão 2 · 2026-11-19 · Versão corrigida em 19/11/2026 a partir do texto integral da minuta no PJe, conferida com o inteiro teor dos autos (acervo/autos)."
    },
    "pauta": {
     "Status de Julgamento": "",

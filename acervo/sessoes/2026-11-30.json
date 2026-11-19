@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-19T06:40:57.936Z",
+ "atualizadoEm": "2026-11-19T06:42:00.869Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -2393,14 +2393,22 @@
      "mpfx": {
       "id": "405494179"
      },
-     "pendencias": []
+     "pendencias": [
+      {
+       "desc": "A apostila (ID 400501607) é digitalizada e o texto extraído embaralha número, folha e livro do registro; conferir no PDF se é \"número 23827, folha 238, livro 65\".",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
     },
     "lote": {
      "id": "acorrigir",
      "item": 51,
      "autos": 64
     },
-    "editadoPor": "Index"
+    "editadoPor": "Index",
+    "resJulg": "Desprovida"
    }
   },
   {
