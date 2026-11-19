@@ -13,7 +13,7 @@
 <title>Index · Amicus Curiae · CMT</title>
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cmt-eq-tema')||'light')}catch(e){}</script>
 <!-- Painel de lotes (/lotes/): página própria, desenhada como parte do Painel do relator (/cmt), com o mesmo tema (cmt-eq-tema),
-     o mesmo login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave cmt_k / x-cmt-chave).
+     /index/cmt/ é uma visão pública por URL, sem login: acessar essa rota já define o perfil do Desembargador. /index/gc/ permanece restrito ao gestor.
      Dados: /api/painel?lote=1 (api/_lote.js: acervo/lotes/<id>.json, cartões de acervo/sessoes e minutas de acervo/minutas/<id>/).
      Ligações: Painel do relator (/cmt/), Ex Officio (/equipe/) e Consulta do Modus Operandi (/modus/#consulta=AAAA-MM-DD/ITEM). -->
 <style>
@@ -344,11 +344,11 @@ const params=new URLSearchParams(location.search);
 const FILT_SESSAO=String(params.get('sessao')||'').trim(), FILT_MINUTISTA=String(params.get('minutista')||'').trim();
 /* Amicus Curiae · Index: três visões no mesmo arquivo. O nome visual permanece Index; rotas canônicas: /lote/ (Geral), /lote/cmt/ (Desembargador) e /lote/cg/ (controle geral). /index/* e as rotas antigas de lotes permanecem apenas como compatibilidade. */
 const PATH=location.pathname.toLowerCase();
-const MODO=(/^\/lote\/cmt?(?:\/|$)/.test(PATH)||/^\/index\/cm(?:t)?(?:\/|$)/.test(PATH)||/^\/cmt\/lotes(?:\/|$)/.test(PATH))?'rel':((/^\/lote\/cg(?:\/|$)/.test(PATH)||/^\/index\/cg(?:\/|$)/.test(PATH)||/^\/cg\/lotes(?:\/|$)/.test(PATH))?'cg':'eq'), MODO_REL=MODO==='rel';
+const MODO=(/^\/lote\/cmt?(?:\/|$)/.test(PATH)||/^\/index\/cm(?:t)?(?:\/|$)/.test(PATH)||/^\/cmt\/lotes(?:\/|$)/.test(PATH))?'rel':((/^\/lote\/(?:cg|gc)(?:\/|$)/.test(PATH)||/^\/index\/(?:cg|gc)(?:\/|$)/.test(PATH)||/^\/(?:cg|gc)\/lotes(?:\/|$)/.test(PATH))?'cg':'eq'), MODO_REL=MODO==='rel';
 let VZ=MODO==='cg'?'tudo':MODO;
 /* linha de abertura do carregamento, no lugar da saudação do Painel do Desembargador */
 (function(){const e=document.getElementById('ld-s');if(e)e.textContent=MODO==='rel'?'Index · CMT.':MODO==='cg'?'Index · CG.':'Index · Geral.'})();
-/* link próprio do relator: a chave (k) vale como credencial, como no Painel do relator (/cmt?k=…) */
+/* Compatibilidade: links antigos com chave (k) continuam funcionando, mas /index/cmt/ não depende dela. */
 const CMTK=(function(){try{const m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){const v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);const q=new URLSearchParams(location.search);q.delete('k');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash.replace(/[#&]?k=[^&#]+/,''))}return sessionStorage.getItem('cmt_k')||''}catch(e){return ''}})();
 async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/painel?lote=1'+(MODO_REL?'&rel=1':MODO==='cg'?'&modo=cg':'')+(q?'&'+q.replace(/^\?/,''):''),{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 async function post(b){const r=await fetch('/api/painel?lote=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
@@ -394,6 +394,28 @@ function ligaCab(){
   const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const be=$('#b-ed');if(be)be.onclick=abrirEditar;const bs=$('#b-ses');if(bs)bs.onclick=abrirSessoes;
 }
 function gcor(it){return it.grupo&&COR[it.grupo]?COR[it.grupo]:OUT.cor}
+function painelVisLotes(lotes){
+  if(MODO!=='cg')return '';
+  return `<section class="cmt-q" id="g-lotes"><h2><i class="nn">00</i><span>Publicação dos <em>lotes.</em></span><span class="cmt-sp"></span><span class="cmt-n">${lotes.length} lote${lotes.length===1?'':'s'}</span></h2>
+   <p class="none" style="font-style:normal;margin:12px 0">Controle central de quais lotes aparecem no <b>Index · Geral</b> e no <b>Index · CMT</b>. A visão CMT é a página do Desembargador.</p>
+   <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th>Lote</th><th>Sessões</th><th>Processos</th><th>Geral</th><th>Desembargador</th><th></th></tr></thead><tbody>
+   ${lotes.map(l=>{const v=l.visivel||{},eq=v.equipe!==false,rl=v.relator!==false;return `<tr data-lote="${esc(l.id)}"><td><b>${esc(l.titulo||l.id)}</b><br><span class="cmt-n">${esc(l.id)}</span></td><td class="cnj">${(l.sessoes||[]).map(br).join('<br>')}</td><td class="ii">${l.total}</td><td class="vz"><input type="checkbox" data-lve="${esc(l.id)}"${eq?' checked':''}></td><td class="vz"><input type="checkbox" data-lvr="${esc(l.id)}"${rl?' checked':''}></td><td><a class="b" href="/index/gc/?id=${encodeURIComponent(l.id)}">Abrir</a></td></tr>`}).join('')}
+   </tbody></table></div><p class="k" id="gl-m">Alterações são aplicadas imediatamente ao seletor de lotes de cada visão.</p></section>`;
+}
+function ligaVisLotes(){
+  if(MODO!=='cg')return;
+  document.querySelectorAll('[data-lve],[data-lvr]').forEach(cb=>cb.onchange=async()=>{
+    const id=cb.dataset.lve||cb.dataset.lvr, l=LISTA.lotes.find(x=>x.id===id); if(!l)return;
+    const eq=document.querySelector('[data-lve="'+CSS.escape(id)+'"]').checked;
+    const rl=document.querySelector('[data-lvr="'+CSS.escape(id)+'"]').checked;
+    const m=$('#gl-m'); m.textContent='Salvando '+id+'…';
+    try{
+      await post({acao:'lote-visivel',id,equipe:eq,relator:rl});
+      l.visivel={}; if(!eq)l.visivel.equipe=false; if(!rl)l.visivel.relator=false; if(!Object.keys(l.visivel).length)delete l.visivel;
+      m.textContent='Salvo: '+id+(eq?' · Geral ativo':' · Geral oculto')+(rl?' · CMT ativo':' · CMT oculto');
+    }catch(e){cb.checked=!cb.checked;m.textContent='Não salvou: '+e.message}
+  });
+}
 function montar(lotes,id,usuario){
   FLN=Object.fromEntries(LOTE.colunas.map(c=>[c.id,c.rotulo])); COR=Object.fromEntries(LOTE.grupos.map(g=>[g.id,g.cor])); OUT=LOTE.grupo_outros||{rotulo:'Outros',cor:'#9aa0a8'};
   const ord=LOTE.grupos.map(g=>g.id).concat([null]);
@@ -416,6 +438,7 @@ function montar(lotes,id,usuario){
    <button type="button" data-ir="sec-pf"><i>02</i><span>Processos</span><small id="n-pf"></small></button>
    <p class="lx-nota">${nota}</p></nav>
   <div id="gest"></div>
+  ${painelVisLotes(lotes)}
   <section class="lx-sec" id="matriz"><div class="lx-shd"><div><p class="lx-k">01 / Visão do lote</p><h2>Matriz do <em>lote.</em></h2><p class="lx-d">Processos por tipo de caso, com as variações de cada um. Clique numa linha para abrir o perfil do processo.</p></div></div>
   <div class="lx-box">
    <div class="cmt-met" id="met">${grs.map(g=>`<div data-g="${g.k}" style="border-top-color:${g.c}" title="Mostrar ou ocultar"><span>${/^\d+$/.test(g.k)?g.k+' · ':''}${esc(g.r)}</span><b>${pad(g.n)}</b></div>`).join('')}</div>
@@ -442,6 +465,7 @@ function montar(lotes,id,usuario){
   $('#mxb').innerHTML=h;
   $('#profiles').innerHTML=ITENS.map(perfil).join('');
   ligaCab();
+  ligaVisLotes();
   document.querySelectorAll('#mxb tr.r').forEach(r=>r.onclick=()=>vai(r.dataset.u));
   ligaSub();
   document.querySelectorAll('#met [data-g]').forEach(d=>d.onclick=()=>{const g=d.dataset.g;offG.has(g)?offG.delete(g):offG.add(g);d.classList.toggle('off');filtra()});
