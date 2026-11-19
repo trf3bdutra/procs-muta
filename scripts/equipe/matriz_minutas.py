@@ -6,6 +6,8 @@ Fontes (cada processo e tipo conta uma vez; vale a fonte mais recente):
   acervo/planilhas/controle-de-pauta-*.json     Controle de Pauta aposentado (classe, seção, servidor)
   acervo/planilhas/pauta-2026-*-bimestre.json   pautas dos bimestres (apreciação 1º julg / ED / Retrat)
   acervo/operacional.json                       ficha: SERVIDOR e Destino (monocráticas)
+  acervo/planilhas/historico-por-servidor.json  histórico por servidor (14 pautas do OneDrive, 27/04 a 13/11/2026; redator e conferente);
+                                                fonte complementar, a de menor precedência; a matriz marca o que só ele traz
 Classe, seção e assunto que faltarem vêm de acervo/fonte.json. Nomes e apelidos resolvem pelo apoio/equipe.json.
 
 Uso: python3 scripts/equipe/matriz_minutas.py            mostra a matriz
@@ -53,7 +55,17 @@ def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe='', correto
     for k in ('classe', 'secao', 'assunto', 'detalhe', 'data', 'corretor'):   # a fonte mais recente vale, mas não apaga o que a anterior sabia
         if not REG[(p, tp)][k] and ant.get(k): REG[(p, tp)][k] = ant[k]
 
-# 1. ficha (mais antiga em precedência): só o que não aparece nas pautas
+# 0. histórico por servidor (acervo/planilhas/historico-por-servidor.json, pautas do OneDrive): o mais antigo em precedência
+HIST = R / 'acervo/planilhas/historico-por-servidor.json'
+if HIST.exists():
+    for e in json.loads(HIST.read_text(encoding='utf-8'))['registros']:
+        if not e.get('redator'): continue
+        a0 = re.split(r'\s+—\s+', e.get('assunto') or '')[0].strip()
+        ed = bool(re.search(r'\bED\b', e.get('aba') or '')) or N(a0) == 'ED' or N(a0).startswith('EMBARGOS DE DECLARACAO')
+        det = (e.get('detalhe') if ed or not a0 else a0) or ''
+        f = FONTE.get(dg(e['processo']), {}); cl = f.get('classe_judicial') or f.get('DataJud · Classe') or ''
+        poe(e['processo'], e['redator'], tipo(cl, 'ED' if ed else ''), cl, '', '', 'histórico ' + e.get('sessao', ''), e.get('dataMinuta') or '', det, e.get('conferente') or '')
+# 1. ficha: só o que não aparece nas pautas
 for r in ler('acervo/operacional.json')['registros']:
     pr = r.get('producao') or {}; s = pr.get('SERVIDOR')
     if not s: continue
@@ -110,6 +122,7 @@ APELIDO = {  # rótulos curtos das pautas antigas → assunto do gabinete
     'APOSENTADORIA HIBRIDA': 'Aposentadoria Híbrida (Art. 48/106)', 'APOSENTADORIA POR INVALIDEZ': 'Aposentadoria por Incapacidade Permanente',
     'ATC PCD': 'Pessoa com Deficiência', 'ATC PESSOA COM DEFICIENCIA': 'Pessoa com Deficiência', 'SALARIO MATERNIDADE RURAL': 'Salário-Maternidade (Art. 71/73)',
     'AUXILIO-RECLUSAO': 'Auxílio-Reclusão (Art. 80)', 'APOSENTADORIA POR IDADE': 'Aposentadoria por Idade (Art. 48/51)',
+    'AUXILIO-DOENCA': 'Auxílio por Incapacidade Temporária', 'BPC-LOAS': 'Benefício Assistencial (Art. 203,V CF/88)', 'APOSENTADORIA POR INCAPACIDADE': 'Aposentadoria por Incapacidade Permanente',
     'AVERBACAO DE TEMPO DE SERVICO': 'Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)', 'ACAO DE REVISAO': 'Reajustes e Revisões Específicos'}
 def assunto_de(c):
     k = N(c)
@@ -117,10 +130,13 @@ def assunto_de(c):
     if k in APELIDO: return APELIDO[k]
     if k in CONHECIDOS: return CONHECIDOS[k]
     cand = sorted((v for kk, v in CONHECIDOS.items() if kk.startswith(k + ' ') or kk.startswith(k + ' (')), key=len)
-    return cand[0] if cand else ''
+    if cand: return cand[0]
+    dentro = sorted((v for kk, v in CONHECIDOS.items() if len(kk) >= 12 and kk in k), key=len, reverse=True)   # "AI Aposentadoria por …" → o assunto contido
+    return dentro[0] if dentro else ''
 for x in regs:
     if not x['assunto'] and x.get('detalhe'):
         x['assunto'] = assunto_de(re.split(r'\s*[·|]\s*', x['detalhe'])[0])
+        if not x['assunto'] and x['fonte'].startswith('histórico') and x['tipo'] != 'Embargos de declaração' and len(x['detalhe']) <= 80 and '\n' not in x['detalhe']: x['assunto'] = re.split(r'\s*[·|]\s*', x['detalhe'])[0].strip().rstrip('.')   # rótulo da pauta, como veio
         if x['assunto'] and not x['secao'] and SEC.get(N(x['assunto'])): x['secao'] = SEC[N(x['assunto'])].most_common(1)[0][0]; x['secaoInferida'] = True
 for x in regs: x['ramo'] = ramo(x)
 ativos = {m['nome'] for m in EQ}
@@ -140,8 +156,8 @@ def perfil(nome, L):
 saida = {'schema': 'gabcmt.equipe.matriz', 'versao': 1, 'geradoEm': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
          'geradoPor': 'scripts/equipe/matriz_minutas.py', 'tipos': TIPOS,
          'servidores': sorted((perfil(n, L) for n, L in por.items()), key=lambda p: -p['total']),
-         # uma linha por minuta: [redator, tipo, seção, ramo, assunto, corretor] (para cruzar na matriz)
-         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto'], x['corretor']] for x in regs)}
+         # uma linha por minuta: [redator, tipo, seção, ramo, assunto, corretor, só do histórico (1) ou das pautas do Git (0)]
+         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto'], x['corretor'], 1 if x['fonte'].startswith('histórico') else 0] for x in regs)}
 
 if '--gravar' in sys.argv:
     alvo = R / 'apoio/equipe-matriz.json'
