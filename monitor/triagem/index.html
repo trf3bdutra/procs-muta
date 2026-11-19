@@ -231,7 +231,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 #cwt-toast.bad{background:#8a2f22}
 @media (max-width:760px){#pt-view{padding:0 12px}.pt-barra{padding:10px 12px 0}}
 /* ===== Esteira da sessão ===== */
-/* Ab Initio · Pautas — esteira da sessão (87-esteira-pautas.js) */
+/* Caput · Pautas — esteira da sessão (87-esteira-pautas.js) */
 /* Configurações (⚙) e ficha do motor também abrem a partir da Pautas */
 .cwe{--w:#fff;--sel:#fbf6e6;--amb:#fbf3df;--ok0:#eef3f2;--ok1:#e3f1ea;--fundo:#f3f6f4;--m2:#8a8d86;--b2:#c8c3b6;--t:#235a55;--g:#805b18;--g2:#a57829;--g3:#d9a83f;--p:#fbfaf5;--l:#ece9df;--b:#d3dfdc;--tx:#203b39;--m:#617570;--r:#a5382a;color:var(--tx);font:13.5px/1.5 Figtree,'Segoe UI',system-ui,sans-serif;padding:4px 0 60px}
 .cwe *{box-sizing:border-box}
@@ -1812,7 +1812,7 @@ async function lerFonte(msg) { try { if (msg) msg('Lendo a fonte do acervo no pr
 async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; } indexEsc(); }
 function portaToken() { return new Promise((fim) => {
   const v = D.createElement('div'); v.id = 'porta-tk';
-  v.innerHTML = '<form class="pt-c" autocomplete="on"><p class="k" style="margin:0;color:var(--g)">Ab Initio · Gabinete A</p><h2>Entrar na Triagem<span style="color:var(--g2)">.</span></h2>' +
+  v.innerHTML = '<form class="pt-c" autocomplete="on"><p class="k" style="margin:0;color:var(--g)">Caput · Gabinete CMT</p><h2>Entrar no Caput<span style="color:var(--g2)">.</span></h2>' +
     '<p>Use o seu nome e a sua senha da Ex Officio. O acesso ao procs-muta é feito pelo servidor; não é preciso token.</p>' +
     '<input type="text" id="pt-u" placeholder="Nome" autocomplete="username" required aria-label="Nome"><input type="password" id="pt-v" placeholder="Senha" autocomplete="current-password" required aria-label="Senha">' +
     '<p id="pt-e" role="alert" hidden></p><div class="pt-f"><button type="button" class="lk" id="pt-alt" style="font-size:12px">usar token do GitHub</button><span id="pt-s"></span><button type="submit" class="btn pri">Entrar</button></div></form>';
