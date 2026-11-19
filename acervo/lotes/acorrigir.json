@@ -2331,10 +2331,10 @@
    "assunto": "Inscrição / Documentação",
    "grupo": null,
    "tipo_caso": "Inscrição / Documentação",
-   "resultado": "",
+   "resultado": "Desprovido",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Minuta corrigida em 19/11/2026 com conferência nos autos. A sentença usa linguagem de mandado de segurança em ação comum; a minuta descreve como \"julgou procedente o pedido\".",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2413,8 +2413,82 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Inicial citada com o ID da sentença: ID 322052989 → ID 322052727",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Apelação do INEP com o ID da União: ID 322052990 → ID 322052991",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "\"inscrição da autora\" → \"do autor\"",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "Acrescentada a aprovação no Revalida 2024/1 sub judice (IDs 322052992 e 322052995)",
+     "Acrescido"
+    ],
+    [
+     "Voto/Ementa",
+     "Lei 13.969/2019 e \"13.9692019\" → Lei 13.959/2019",
+     "Corrigido"
+    ],
+    [
+     "Voto/Ementa",
+     "IRDR: artigo 927, II → 927, III, do CPC",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "\"ID3 22052986\" → ID 322052986",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Frase sobre a aprovação sub judice não prejudicar o recurso",
+     "Acrescido [VALIDAR]"
+    ],
+    [
+     "Voto/Ementa",
+     "EREsp 1.539.725 sem relator e data",
+     "[VALIDAR]"
+    ],
+    [
+     "Ementa",
+     "Item 4 reescrito (gênero: \"médica\" → \"médico\"); item 5 \"Não majora…\" → \"Não cabe majorar…\"",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé no formato STJ/TRF-3; IRDR com DJe 02/05/2023",
+     "Padronizado"
+    ],
+    [
+     "Voto",
+     "(g.n) → (g.n.); 23/6/2026 → 23/06/2026; \"Rel. p/ acórdão, Des.\" → \"Rel. p/ acórdão Des.\"; espaços iniciais",
+     "Padronizado"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão acrescentado (negou provimento às apelações; Des. Fed. JEAN MARCOS e Juiz Fed. Conv. NEY DE ANDRADE)",
+     "Acrescido"
+    ]
+   ],
+   "pendencias": [
+    "Validar com o Relator a frase sobre a aprovação sub judice no voto.",
+    "Completar relator e data do EREsp 1.539.725."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5000135-89.2024.4.03.6005.json.gz",
