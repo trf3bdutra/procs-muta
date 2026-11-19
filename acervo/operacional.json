@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-19T06:39:56.835Z",
+ "atualizado_em": "2026-11-19T06:40:57.686Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -129323,7 +129323,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T06:08:06.297Z",
+    "atualizado_em": "2026-11-19T06:40:57.544Z",
     "Origem - Juízo": "2ª Vara Federal de Dourados",
     "Origem - Documentos 1G": [
      {
@@ -129862,19 +129862,70 @@
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovida",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
     "Voto - Descrição": "",
     "Lote": "A corrigir · item 44 · sessão 2026-11-30",
     "Lote - Tipo de caso": "Indenização por Dano Material",
-    "Lote - Resultado": "",
+    "Lote - Resultado": "Desprovida",
     "Lote - Variações": "",
     "Lote - Caso": "",
     "Lote - Observação": "",
-    "Lote - Ajustes da correção": [],
+    "Lote - Ajustes da correção": [
+     {
+      "secao": "Relatório",
+      "ajuste": "\"remessa necessária da sentença\" → \"à sentença\"; incluídos autor e ré (Raízen Centro-Sul S.A., sucessora de Biosev S.A., IDs 349502923 e 349502924)",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Relatório",
+      "ajuste": "Parecer em segundo grau é da Procuradoria Regional da República, não do \"Ministério Público Federal\"; \"Ministério Público oficiante\" → \"Ministério Público Federal em primeiro grau\"",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Incluído o conhecimento da remessa necessária (artigo 19 da Lei 4.717/1965, por analogia), fundamento invocado na própria sentença",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "ID 349502916, f. 8, não é \"relação de autos de infração\", é o próprio auto (Biosev S.A., 07/10/2021, BR-267). Frase reescrita; conferido que é o único auto da ré no inquérito civil",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Retirados advérbios enfáticos (\"devidamente\", \"manifestamente\")",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "\"fl.\" → \"f.\"; \"DJEN de\" → \"DJEN\"",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Título: \"IMPROVIMENTO\" → \"REMESSA NECESSÁRIA DESPROVIDA\" e incluído o Tema 1.104/STJ; questão com \"saber se\"; item 4 ajustado ao documento",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Rodapé: retirados CTB 231, V, AgInt no REsp 1.783.304 e AgInt no REsp 1.819.218, que só aparecem dentro da ementa transcrita; incluído o artigo 19 da Lei 4.717/1965; REsp 1.908.497 identificado como Tema 1.104 e o REsp 1.913.392 deixado no voto",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Acórdão",
+      "ajuste": "Texto do acórdão incluído",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Conferência",
+      "ajuste": "IDs conferidos: sentença 349502999 (sujeita a reexame pelo artigo 19 da Lei 4.717/1965), parecer 360639029, memoriais 373648556 e inquérito civil 349502916 (f. 8 e f. 37)",
+      "tipo": "Conferido"
+     }
+    ],
     "Lote - Pendências": "",
-    "Lote - Minuta": "versão 1 · 2026-11-18 · Texto integral extraído do editor do PJe em 18/11/2026, tarefa [Sessão] Aguardando a sessão."
+    "Lote - Minuta": "versão 2 · 2026-11-19 · Versão corrigida em 19/11/2026 a partir do texto integral da minuta no PJe, conferida com o inteiro teor dos autos (acervo/autos)."
    },
    "pauta": {
     "Status de Julgamento": "",
