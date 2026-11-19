@@ -269,7 +269,7 @@ async function gravar(req, res, u, gestor) {
     for (let t = 0; t < 4; t++) {
       const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
-      if(tipoLote(lote)==='pauta'&&(ss.length!==1||ss[0]!==lote.sessoes[0])) return res.status(400).json({ erro:'Este índice pertence a uma sessão. Para outra sessão, crie um índice específico.' });
+      if(tipoLote(lote)==='pauta') return res.status(400).json({ erro:'Os lotes de pauta preservam a seleção original. Crie um novo lote a partir da matriz para outra seleção.' });
       const antes = new Set(lote.sessoes || []), novas = ss.filter(s => !antes.has(s));
       const tem = new Set((lote.itens || []).map(i => i.sessao + '|' + i.processo));
       const manter = (lote.itens || []).filter(i => ss.includes(i.sessao)), fora = (lote.itens || []).filter(i => !ss.includes(i.sessao));
