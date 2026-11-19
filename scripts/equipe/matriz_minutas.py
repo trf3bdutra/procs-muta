@@ -40,7 +40,7 @@ def tipo(classe, aprec=''):
     return 'Outras classes' if c else 'Apelação'   # sem classe na pauta e no acervo: 1º julgamento colegiado
 
 REG = {}   # (processo, tipo) -> registro; fontes lidas da mais antiga para a mais recente
-def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe=''):
+def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe='', corretor=''):
     p = dg(proc); s = pessoa(serv)
     if len(p) != 20 or not s: return
     f = FONTE.get(p, {})
@@ -48,8 +48,9 @@ def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe=''):
     REG[(p, tp)] = {'processo': p, 'servidor': s, 'tipo': tp,
                     'classe': classe or f.get('classe_judicial') or f.get('DataJud · Classe') or '',
                     'secao': secao or f.get('Seção Competente') or '',
-                    'assunto': assunto or f.get('Assunto') or f.get('assunto_judicial') or '', 'fonte': fonte, 'data': data, 'detalhe': detalhe}
-    for k in ('classe', 'secao', 'assunto', 'detalhe', 'data'):   # a fonte mais recente vale, mas não apaga o que a anterior sabia
+                    'assunto': assunto or f.get('Assunto') or f.get('assunto_judicial') or '', 'fonte': fonte, 'data': data, 'detalhe': detalhe,
+                    'corretor': '' if '/' in str(corretor or '') else pessoa(corretor)}   # corretor composto ("Bruno/Alex") era provisório: não conta
+    for k in ('classe', 'secao', 'assunto', 'detalhe', 'data', 'corretor'):   # a fonte mais recente vale, mas não apaga o que a anterior sabia
         if not REG[(p, tp)][k] and ant.get(k): REG[(p, tp)][k] = ant[k]
 
 # 1. ficha (mais antiga em precedência): só o que não aparece nas pautas
@@ -58,7 +59,7 @@ for r in ler('acervo/operacional.json')['registros']:
     if not s: continue
     f = FONTE.get(dg(r['processo']), {}); cl = f.get('classe_judicial') or f.get('DataJud · Classe') or ''
     tp = 'Decisão monocrática' if N(pr.get('Destino')) == 'MONOCRATICA' else tipo(cl)
-    poe(r['processo'], s, tp, cl, '', '', 'ficha', pr.get('MINUTADO') or '')
+    poe(r['processo'], s, tp, cl, '', '', 'ficha', pr.get('MINUTADO') or '', '', pr.get('CORRETOR') or '')
 # 2. pautas dos bimestres
 for arq in sorted(glob.glob(str(R / 'acervo/planilhas/pauta-2026-*-bimestre.json'))):
     for ses, L in json.loads(pathlib.Path(arq).read_text(encoding='utf-8'))['pautas'].items():
@@ -66,18 +67,18 @@ for arq in sorted(glob.glob(str(R / 'acervo/planilhas/pauta-2026-*-bimestre.json
             ap = x.get('Apreciação') or ''
             if N(x.get('Assunto')) in ('ED', 'AGINT'): ap = x['Assunto']
             f = FONTE.get(dg(x.get('Processo')), {})
-            poe(x.get('Processo'), x.get('Servidor'), tipo(f.get('classe_judicial') or '', ap), '', '', '' if N(x.get('Assunto')) in ('ED', 'AGINT') else x.get('Assunto'), 'pauta ' + ses, x.get('Minutado em') or '', x.get('Detalhes') or '')
+            poe(x.get('Processo'), x.get('Servidor'), tipo(f.get('classe_judicial') or '', ap), '', '', '' if N(x.get('Assunto')) in ('ED', 'AGINT') else x.get('Assunto'), 'pauta ' + ses, x.get('Minutado em') or '', x.get('Detalhes') or '', x.get('Revisor') or '')
 # 3. Controle de Pauta aposentado
 for arq in sorted(glob.glob(str(R / 'acervo/planilhas/controle-de-pauta-*.json'))):
     for ses, L in json.loads(pathlib.Path(arq).read_text(encoding='utf-8'))['pautas'].items():
         for x in L:
-            poe(x.get('Processo CNJ'), x.get('Servidor'), tipo(x.get('Classe processual')), x.get('Classe processual'), x.get('Seção'), x.get('Assunto'), 'controle ' + ses, '')
+            poe(x.get('Processo CNJ'), x.get('Servidor'), tipo(x.get('Classe processual')), x.get('Classe processual'), x.get('Seção'), x.get('Assunto'), 'controle ' + ses, '', '', x.get('Corretor/revisor') or '')
 # 4. sessões do Caput (mais recentes)
 for arq in sorted(glob.glob(str(R / 'acervo/sessoes/2*.json'))):
     S = json.loads(pathlib.Path(arq).read_text(encoding='utf-8'))
     for i in S.get('itens') or []:
         ap = i.get('julgamento') if i.get('julgamento') not in ('', '—', 'META', 'AI') else ''
-        poe(i.get('cnj'), i.get('servidor'), tipo(i.get('classe'), ap), i.get('classe'), '', i.get('assunto'), 'sessão ' + S.get('date', pathlib.Path(arq).stem), i.get('dataMinuta') or '')
+        poe(i.get('cnj'), i.get('servidor'), tipo(i.get('classe'), ap), i.get('classe'), '', i.get('assunto'), 'sessão ' + S.get('date', pathlib.Path(arq).stem), i.get('dataMinuta') or '', '', i.get('corretor') or '')
 
 regs = list(REG.values())
 # ramo do direito (TPU/CNJ, apoio/assuntos-cnj.json): pelo código do assunto no acervo; senão pelo nome do assunto
@@ -125,20 +126,22 @@ for x in regs: x['ramo'] = ramo(x)
 ativos = {m['nome'] for m in EQ}
 por = collections.defaultdict(list)
 for x in regs: por[x['servidor']].append(x)
+for x in regs:
+    if x['corretor'] and x['corretor'] not in por: por[x['corretor']] = []
 
 def perfil(nome, L):
     t = collections.Counter(x['tipo'] for x in L); s = collections.Counter(x['secao'] or 'sem seção' for x in L)
     a = collections.Counter(x['assunto'] for x in L if x['assunto']); rm = collections.Counter(x['ramo'] or 'sem ramo' for x in L)
-    m = next((e for e in EQ if e['nome'] == nome), {})
-    return {'servidor': nome, 'noCadastro': nome in ativos, 'minutaNoCadastro': m.get('minuta'), 'total': len(L),
+    m = next((e for e in EQ if e['nome'] == nome), {}); cr = [x for x in regs if x['corretor'] == nome]
+    return {'servidor': nome, 'noCadastro': nome in ativos, 'minutaNoCadastro': m.get('minuta'), 'total': len(L), 'correcoes': len(cr), 'assuntosCorrigidos': dict(collections.Counter(x['assunto'] for x in cr if x['assunto']).most_common(12)),
             'tipos': {k: t.get(k, 0) for k in TIPOS}, 'secoes': dict(s.most_common()), 'ramos': dict(rm.most_common()), 'assuntos': dict(a.most_common(12)),
             'cadastro': {'exp': m.get('exp') or [], 'pref': m.get('pref') or [], 'nao': m.get('nao') or []}}
 
 saida = {'schema': 'gabcmt.equipe.matriz', 'versao': 1, 'geradoEm': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
          'geradoPor': 'scripts/equipe/matriz_minutas.py', 'tipos': TIPOS,
          'servidores': sorted((perfil(n, L) for n, L in por.items()), key=lambda p: -p['total']),
-         # uma linha por minuta: [servidor, tipo, seção, ramo, assunto] (para cruzar na matriz)
-         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto']] for x in regs)}
+         # uma linha por minuta: [redator, tipo, seção, ramo, assunto, corretor] (para cruzar na matriz)
+         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto'], x['corretor']] for x in regs)}
 
 if '--gravar' in sys.argv:
     alvo = R / 'apoio/equipe-matriz.json'

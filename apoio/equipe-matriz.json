@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.equipe.matriz",
  "versao": 1,
- "geradoEm": "2026-11-19T14:30:36Z",
+ "geradoEm": "2026-11-19T14:35:47Z",
  "geradoPor": "scripts/equipe/matriz_minutas.py",
  "tipos": [
   "Apelação",
@@ -20,6 +20,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 155,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 126,
     "Apelação e remessa": 12,
@@ -77,6 +79,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 120,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 89,
     "Apelação e remessa": 9,
@@ -137,6 +141,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 111,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 100,
     "Apelação e remessa": 6,
@@ -196,6 +202,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 94,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 67,
     "Apelação e remessa": 5,
@@ -255,6 +263,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 69,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 40,
     "Apelação e remessa": 13,
@@ -313,6 +323,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 67,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 52,
     "Apelação e remessa": 3,
@@ -359,6 +371,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 66,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 44,
     "Apelação e remessa": 7,
@@ -419,6 +433,21 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 53,
+   "correcoes": 186,
+   "assuntosCorrigidos": {
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 96,
+    "IRPJ/Imposto de Renda de Pessoa Jurídica": 17,
+    "Multas e demais Sanções": 7,
+    "Liberação de Veículo Apreendido": 6,
+    "Oncológico": 4,
+    "PIS": 4,
+    "Índice de 28,86% LL 8.622/1993 e 8.627/1993": 4,
+    "Expurgos Inflacionários / Planos Econômicos": 3,
+    "Conselhos Regionais e Afins (Anuidade)": 3,
+    "Registro Profissional": 3,
+    "IRPF/ Imposto de Renda de Pessoa Física": 2,
+    "Impostos": 2
+   },
    "tipos": {
     "Apelação": 44,
     "Apelação e remessa": 0,
@@ -457,6 +486,8 @@
    "noCadastro": false,
    "minutaNoCadastro": null,
    "total": 38,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 33,
     "Apelação e remessa": 0,
@@ -499,6 +530,8 @@
    "noCadastro": true,
    "minutaNoCadastro": true,
    "total": 25,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 16,
     "Apelação e remessa": 1,
@@ -545,6 +578,21 @@
    "noCadastro": true,
    "minutaNoCadastro": false,
    "total": 19,
+   "correcoes": 225,
+   "assuntosCorrigidos": {
+    "Aposentadoria Rural (Art. 48/51)": 31,
+    "Pessoa com Deficiência": 28,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 27,
+    "Aposentadoria Especial (Art. 57/8)": 18,
+    "Aposentadoria por Incapacidade Permanente": 18,
+    "Pensão por Morte (Art. 74/9)": 17,
+    "Auxílio por Incapacidade Temporária": 11,
+    "Rural (Art. 48/51)": 8,
+    "RMI - Renda Mensal Inicial": 5,
+    "Reajustes e Revisões Específicos": 5,
+    "Salário-Maternidade (Art. 71/73)": 4,
+    "Esbulho / Turbação / Ameaça": 3
+   },
    "tipos": {
     "Apelação": 18,
     "Apelação e remessa": 0,
@@ -591,6 +639,8 @@
    "noCadastro": false,
    "minutaNoCadastro": null,
    "total": 12,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 12,
     "Apelação e remessa": 0,
@@ -624,6 +674,21 @@
    "noCadastro": true,
    "minutaNoCadastro": false,
    "total": 2,
+   "correcoes": 87,
+   "assuntosCorrigidos": {
+    "Inscrição / Documentação": 10,
+    "Fornecimento de medicamentos": 9,
+    "Multas e demais Sanções": 8,
+    "Anulação e Correção de Provas / Questões": 7,
+    "Direitos Indígenas": 5,
+    "Aposentadoria por Incapacidade Permanente": 5,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 4,
+    "Anulação": 3,
+    "Classificação e/ ou Preterição": 3,
+    "Sistema Financeiro da Habitação": 2,
+    "IRPJ/Imposto de Renda de Pessoa Jurídica": 2,
+    "Inquérito / Processo / Recurso Administrativo": 2
+   },
    "tipos": {
     "Apelação": 1,
     "Apelação e remessa": 1,
@@ -657,6 +722,21 @@
    "noCadastro": true,
    "minutaNoCadastro": false,
    "total": 2,
+   "correcoes": 152,
+   "assuntosCorrigidos": {
+    "Convalidação de Estudos e Reconhecimento de Diploma": 44,
+    "FIES": 20,
+    "Anulação e Correção de Provas / Questões": 5,
+    "Inscrição / Documentação": 4,
+    "Anulação": 4,
+    "Exame da Ordem OAB": 4,
+    "Liberação de Veículo Apreendido": 4,
+    "Cédula de Crédito Bancário": 3,
+    "Registro de Empresa": 2,
+    "Revogação/Anulação de multa ambiental": 2,
+    "Dano ao Erário": 2,
+    "Crédito Rural": 2
+   },
    "tipos": {
     "Apelação": 2,
     "Apelação e remessa": 0,
@@ -693,6 +773,8 @@
    "noCadastro": true,
    "minutaNoCadastro": false,
    "total": 1,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
    "tipos": {
     "Apelação": 0,
     "Apelação e remessa": 1,
@@ -718,6 +800,69 @@
     "pref": [],
     "nao": []
    }
+  },
+  {
+   "servidor": "CM",
+   "noCadastro": true,
+   "minutaNoCadastro": false,
+   "total": 0,
+   "correcoes": 14,
+   "assuntosCorrigidos": {
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 3,
+    "Expedição de diplomas e omissão na entrega das notas": 1,
+    "Sustação/Alteração de Leilão": 1,
+    "Hipoteca": 1,
+    "PASEP": 1,
+    "PIS/PASEP": 1
+   },
+   "tipos": {
+    "Apelação": 0,
+    "Apelação e remessa": 0,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 0,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {},
+   "ramos": {},
+   "assuntos": {},
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Renato",
+   "noCadastro": true,
+   "minutaNoCadastro": false,
+   "total": 0,
+   "correcoes": 1,
+   "assuntosCorrigidos": {
+    "Registro Profissional": 1
+   },
+   "tipos": {
+    "Apelação": 0,
+    "Apelação e remessa": 0,
+    "Remessa necessária": 0,
+    "Agravo de instrumento": 0,
+    "Embargos de declaração": 0,
+    "Agravo interno": 0,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 0,
+    "Outras classes": 0
+   },
+   "secoes": {},
+   "ramos": {},
+   "assuntos": {},
+   "cadastro": {
+    "exp": [],
+    "pref": [],
+    "nao": []
+   }
   }
  ],
  "minutas": [
@@ -726,12 +871,6 @@
    "Apelação",
    "",
    "",
-   ""
-  ],
-  [
-   "Alexander",
-   "Apelação",
-   "",
    "",
    ""
   ],
@@ -739,12 +878,6 @@
    "Alexander",
    "Apelação",
    "",
-   "",
-   ""
-  ],
-  [
-   "Alexander",
-   "Apelação",
    "",
    "",
    ""
@@ -754,6 +887,7 @@
    "Apelação",
    "",
    "",
+   "",
    ""
   ],
   [
@@ -761,5803 +895,6648 @@
    "Apelação",
    "",
    "",
-   "ED"
+   "",
+   ""
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   "ED",
+   ""
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Agente Agressivo - Ruído"
+   "Agente Agressivo - Ruído",
+   "Alexander"
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Alteração do coeficiente de cálculo do benefício"
+   "Alteração do coeficiente de cálculo do benefício",
+   "Alexander"
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+   "Averbação/Cômputo/Conversão de tempo de serviço especial",
+   ""
   ],
   [
    "Alexander",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+   "Averbação/Cômputo/Conversão de tempo de serviço especial",
+   ""
   ],
   [
    "Alexander",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+   "Averbação/Cômputo/Conversão de tempo de serviço especial",
+   ""
   ],
   [
    "Bruno",
    "Agravo interno",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Agravo interno",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Vícios de Construção"
+   "Vícios de Construção",
+   "Vanilda"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Bruno",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Dalete",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Pensão"
+   "Pensão",
+   "Vanilda"
   ],
   [
    "Dalete",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Pensão"
-  ],
-  [
-   "Dalete",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO PREVIDENCIÁRIO",
-   "Filho Maior e Inválido"
+   "Pensão",
+   "Vanilda"
   ],
   [
    "Dalete",
    "Apelação",
    "1ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Restituição ao Erário"
+   "Filho Maior e Inválido",
+   "Alexander"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Restituição ao Erário",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "REFIS/Programa de Recuperação Fiscal"
+   "REFIS/Programa de Recuperação Fiscal",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Seguro"
+   "Seguro",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Vanilda"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6) - TEMPO RURAL E ESPECIAL"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6) - TEMPO RURAL E ESPECIAL",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Filho Maior e Inválido"
+   "Filho Maior e Inválido",
+   "Vanilda"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Incapacidade Laborativa Permanente"
+   "Incapacidade Laborativa Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Vanilda"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos- Ap Especial"
+   "Reajustes e Revisões Específicos- Ap Especial",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Pensão por Morte (Art. 74/9))"
+   "Rural (Pensão por Morte (Art. 74/9))",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Salário-Maternidade (Art. 71/73)"
+   "Salário-Maternidade (Art. 71/73)",
+   ""
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Salário-Maternidade (Art. 71/73)"
+   "Salário-Maternidade (Art. 71/73)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Salário-Maternidade (Art. 71/73)"
+   "Salário-Maternidade (Art. 71/73)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Salário-Maternidade (Art. 71/73)"
+   "Salário-Maternidade (Art. 71/73)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Urbana (Art. 48/51)"
+   "Urbana (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Urbana (Art. 48/51)"
+   "Urbana (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Urbana (Pensão por Morte (Art. 74/9))"
+   "Urbana (Pensão por Morte (Art. 74/9))",
+   "Alexander"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Saffioti"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "ICMS/ Imposto sobre Circulação de Mercadorias"
+   "ICMS/ Imposto sobre Circulação de Mercadorias",
+   "Bruno"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "Dalete",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "RMI - Renda Mensal Inicial"
+   "RMI - Renda Mensal Inicial",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "PIS"
+   "PIS",
+   "Bruno"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6) - TEMPO RURAL E ESPECIAL"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6) - TEMPO RURAL E ESPECIAL",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos- Ap Especial"
+   "Reajustes e Revisões Específicos- Ap Especial",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Pensão por Morte (Art. 74/9))"
+   "Rural (Pensão por Morte (Art. 74/9))",
+   "Alexander"
   ],
   [
    "Dalete",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Salário-Maternidade (Art. 71/73)"
+   "Salário-Maternidade (Art. 71/73)",
+   "Alexander"
   ],
   [
    "Dalete",
    "Juízo de retratação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Dalete",
    "Juízo de retratação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "RMI - Renda Mensal Inicial"
+   "RMI - Renda Mensal Inicial",
+   "Alexander"
   ],
   [
    "Dalete",
    "Juízo de retratação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Urbana (Pensão por Morte (Art. 74/9))"
+   "Urbana (Pensão por Morte (Art. 74/9))",
+   "Alexander"
   ],
   [
    "Dalete",
    "Remessa necessária",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "PIS"
+   "PIS",
+   "Bruno"
   ],
   [
    "Dalete",
    "Remessa necessária",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Restabelecimento"
+   "Restabelecimento",
+   "Alexander"
   ],
   [
    "Debora",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO PROCESSUAL CIVIL E DO TRABALHO",
-   "Levantamento de Valor"
+   "Levantamento de Valor",
+   "Saffioti"
   ],
   [
    "Debora",
    "Apelação",
    "",
    "DIREITO PROCESSUAL CIVIL E DO TRABALHO",
-   "Eletiva"
+   "Eletiva",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "",
-   "Sustação/ Alteração de Leilão"
+   "Sustação/ Alteração de Leilão",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "",
-   "Sustação/ Alteração de Leilão"
+   "Sustação/ Alteração de Leilão",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Remoção"
+   "Remoção",
+   "Vanilda"
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sustação/ Alteração de Leilão"
+   "Sustação/ Alteração de Leilão",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sustação/ Alteração de Leilão"
+   "Sustação/ Alteração de Leilão",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sustação/ Alteração de Leilão"
+   "Sustação/ Alteração de Leilão",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sustação/ Alteração de Leilão"
+   "Sustação/ Alteração de Leilão",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sustação/ Alteração de Leilão"
+   "Sustação/ Alteração de Leilão",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Apreensão"
+   "Apreensão",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Garantias Constitucionais"
+   "Garantias Constitucionais",
+   ""
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Não padronizado"
+   "Não padronizado",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Oncológico"
+   "Oncológico",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Oncológico"
+   "Oncológico",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Oncológico"
+   "Oncológico",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Bruno"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Vanilda"
   ],
   [
    "Debora",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "ACESSO"
+   "ACESSO",
+   "Saffioti"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Desconto em Folha de Pagamento/Benefício Previdenciário"
+   "Desconto em Folha de Pagamento/Benefício Previdenciário",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Híbrida (Art. 48/106)"
+   "Aposentadoria Híbrida (Art. 48/106)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Híbrida (Art. 48/106)"
+   "Aposentadoria Híbrida (Art. 48/106)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Vanilda"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+   "Averbação/Cômputo/Conversão de tempo de serviço especial",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Híbrida (Art. 48/106)"
+   "Híbrida (Art. 48/106)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Rural (Art. 48/51)"
+   "Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Apelação e remessa",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Indenização por Dano Moral"
+   "Indenização por Dano Moral",
+   "Vanilda"
   ],
   [
    "Debora",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Vanilda"
   ],
   [
    "Debora",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO DA SAÚDE",
-   "Sem registro na ANVISA"
+   "Sem registro na ANVISA",
+   ""
   ],
   [
    "Debora",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Idade (Art. 48/51)"
+   "Aposentadoria por Idade (Art. 48/51)",
+   "Vanilda"
   ],
   [
    "Debora",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos"
+   "Reajustes e Revisões Específicos",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Apreensão"
+   "Apreensão",
+   "Bruno"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Bruno"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Bruno"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Vanilda"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Vanilda"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Debora",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos"
+   "Reajustes e Revisões Específicos",
+   "Alexander"
   ],
   [
    "Debora",
    "Juízo de retratação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Juízo de retratação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Idade (Art. 48/51)"
+   "Aposentadoria por Idade (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Debora",
    "Juízo de retratação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "",
    "",
-   "ED"
+   "ED",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPF/ Imposto de Renda de Pessoa Física"
+   "IRPF/ Imposto de Renda de Pessoa Física",
+   "Bruno"
   ],
   [
    "Estela",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPF/ Imposto de Renda de Pessoa Física"
+   "IRPF/ Imposto de Renda de Pessoa Física",
+   "Bruno"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Idade (Art. 48/51)"
+   "Aposentadoria por Idade (Art. 48/51)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Idade (Art. 48/51)"
+   "Aposentadoria por Idade (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Saffioti"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Saffioti"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Saffioti"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Saffioti"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Concessão"
+   "Concessão",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Incapacidade Laborativa Permanente"
+   "Incapacidade Laborativa Permanente",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos"
+   "Reajustes e Revisões Específicos",
+   ""
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos"
+   "Reajustes e Revisões Específicos",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos"
+   "Reajustes e Revisões Específicos",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Restabelecimento"
+   "Restabelecimento",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Restabelecimento"
+   "Restabelecimento",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Restituição ao Erário"
+   "Restituição ao Erário",
+   "Alexander"
   ],
   [
    "Estela",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Saffioti"
   ],
   [
    "Estela",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Saffioti"
   ],
   [
    "Estela",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Por Tempo de Contribuição"
+   "Por Tempo de Contribuição",
+   "Saffioti"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Alteração do coeficiente de cálculo do benefício"
+   "Alteração do coeficiente de cálculo do benefício",
+   "Saffioti"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Idade (Art. 48/51)"
+   "Aposentadoria por Idade (Art. 48/51)",
+   "Alexander"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Saffioti"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   "Saffioti"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Saffioti"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Alexander"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Saffioti"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Por Tempo de Contribuição"
+   "Por Tempo de Contribuição",
+   "Saffioti"
   ],
   [
    "Estela",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Reajustes e Revisões Específicos"
+   "Reajustes e Revisões Específicos",
+   "Alexander"
   ],
   [
    "Giovana",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Cofins"
+   "Cofins",
+   "Bruno"
   ],
   [
    "José",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Atualização de Conta"
+   "Atualização de Conta",
+   ""
   ],
   [
    "José",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "CM"
   ],
   [
    "José",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuições Previdenciárias"
+   "Contribuições Previdenciárias",
+   "Bruno"
   ],
   [
    "José",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Microempresa"
+   "Microempresa",
+   "Saffioti"
   ],
   [
    "José",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Cessão de créditos não-tributários"
+   "Cessão de créditos não-tributários",
+   "Bruno"
   ],
   [
    "José",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "José",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Registro Profissional"
+   "Registro Profissional",
+   "Bruno"
   ],
   [
    "José",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Cofins"
+   "Cofins",
+   "Saffioti"
   ],
   [
    "José",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuições Previdenciárias"
+   "Contribuições Previdenciárias",
+   "Bruno"
   ],
   [
    "José",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPF/Imposto de Renda de Pessoa Física"
+   "IRPF/Imposto de Renda de Pessoa Física",
+   "Bruno"
   ],
   [
    "José",
    "Agravo interno",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Atualização de Conta"
+   "Atualização de Conta",
+   ""
   ],
   [
    "José",
    "Agravo interno",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "ACESSO"
+   "ACESSO",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "CM"
   ],
   [
    "José",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Vanilda"
   ],
   [
    "José",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Reintegração"
+   "Reintegração",
+   "Vanilda"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Vanilda"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público - Nomeação/ Posse Tardia"
+   "Concurso Público - Nomeação/ Posse Tardia",
+   ""
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público / Edital"
+   "Concurso Público / Edital",
+   ""
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público / Edital"
+   "Concurso Público / Edital",
+   ""
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público / Edital"
+   "Concurso Público / Edital",
+   ""
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público / Edital"
+   "Concurso Público / Edital",
+   ""
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público / Edital"
+   "Concurso Público / Edital",
+   ""
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inquérito / Processo / Recurso Administrativo"
+   "Inquérito / Processo / Recurso Administrativo",
+   "Vanilda"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Cofins"
+   "Cofins",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Compensação de Prejuízo"
+   "Compensação de Prejuízo",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Conselhos Regionais e Afins (Anuidade)"
+   "Conselhos Regionais e Afins (Anuidade)",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Conselhos Regionais e Afins (Anuidade)"
+   "Conselhos Regionais e Afins (Anuidade)",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Conselhos Regionais e Afins (Anuidade)"
+   "Conselhos Regionais e Afins (Anuidade)",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Saffioti"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Vanilda"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Impostos"
+   "Impostos",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "PIS"
+   "PIS",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "PIS"
+   "PIS",
+   "Bruno"
   ],
   [
    "José",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público - Nomeação/ Posse Tardia"
+   "Concurso Público - Nomeação/ Posse Tardia",
+   ""
   ],
   [
    "José",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Concurso Público / Edital"
+   "Concurso Público / Edital",
+   ""
   ],
   [
    "José",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Exame da Ordem OAB"
+   "Exame da Ordem OAB",
+   "Vanilda"
   ],
   [
    "José",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Piso Salarial"
+   "Piso Salarial",
+   ""
   ],
   [
    "José",
    "Apelação e remessa",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Reintegração"
+   "Reintegração",
+   "Vanilda"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Exame da Ordem OAB"
+   "Exame da Ordem OAB",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "José",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Impostos"
+   "Impostos",
+   "Bruno"
   ],
   [
    "José",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Bruno"
   ],
   [
    "José",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "ACESSO"
+   "ACESSO",
+   "Bruno"
   ],
   [
    "José",
    "Outras classes",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Ingresso e Concurso"
+   "Ingresso e Concurso",
+   "Vanilda"
   ],
   [
    "José",
    "Remessa necessária",
    "2ª Seção",
    "DIREITO CIVIL",
-   "Indenização por Dano Material"
+   "Indenização por Dano Material",
+   "Bruno"
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucas",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio-Reclusão (Art. 80)"
+   "Auxílio-Reclusão (Art. 80)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "",
    "",
-   "ED"
+   "ED",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "",
    "",
-   "ED"
+   "ED",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "",
    "",
-   "ED"
+   "ED",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "",
    "",
-   "ED"
+   "ED",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Benefício Assistencial (Art. 203,V CF/88)"
+   "Benefício Assistencial (Art. 203,V CF/88)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Híbrida (Art. 48/106)"
+   "Aposentadoria Híbrida (Art. 48/106)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Híbrida (Art. 48/106)"
+   "Aposentadoria Híbrida (Art. 48/106)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Híbrida (Art. 48/106)"
+   "Aposentadoria Híbrida (Art. 48/106)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Incapacidade Permanente"
+   "Aposentadoria por Incapacidade Permanente",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   ""
   ],
   [
    "Lucíola",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   ""
   ],
   [
    "Lucíola",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Rural (Art. 48/51)"
+   "Aposentadoria Rural (Art. 48/51)",
+   ""
   ],
   [
    "Lucíola",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   ""
   ],
   [
    "Lucíola",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   ""
   ],
   [
    "Lucíola",
    "Outras classes",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "RMI - Renda Mensal Inicial"
+   "RMI - Renda Mensal Inicial",
+   ""
   ],
   [
    "Maria Eduarda",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
-  ],
-  [
-   "Maria Eduarda",
-   "Agravo de instrumento",
-   "1ª Seção",
-   "DIREITO CIVIL",
-   "Hipoteca"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Prescrição e Decadência"
+   "Hipoteca",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sustação/Alteração de Leilão"
+   "Prescrição e Decadência",
+   "Vanilda"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sustação/Alteração de Leilão",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Assistência à Saúde"
+   "Assistência à Saúde",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "PIS/PASEP"
+   "PIS/PASEP",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "PASEP"
+   "PASEP",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Agravo interno",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Assistência à Saúde"
+   "Assistência à Saúde",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Abono Pecuniário (Art. 78 Lei 8.112/1990)"
+   "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Direitos Indígenas"
+   "Direitos Indígenas",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Direitos Indígenas"
+   "Direitos Indígenas",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Progressão Funcional com Interstício de Doze Meses"
+   "Progressão Funcional com Interstício de Doze Meses",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Reintegração"
+   "Reintegração",
+   "Alexander"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Reintegração"
+   "Reintegração",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Direito de Imagem"
+   "Direito de Imagem",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Esbulho / Turbação / Ameaça"
+   "Esbulho / Turbação / Ameaça",
+   "Alexander"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Esbulho / Turbação / Ameaça"
+   "Esbulho / Turbação / Ameaça",
+   "Alexander"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Esbulho / Turbação / Ameaça"
+   "Esbulho / Turbação / Ameaça",
+   "Alexander"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Esbulho / Turbação / Ameaça"
+   "Esbulho / Turbação / Ameaça",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Indenização por Dano Material"
+   "Indenização por Dano Material",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sistema Financeiro da Habitação"
+   "Sistema Financeiro da Habitação",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "FGTS/Fundo de Garantia Por Tempo de Serviço"
+   "FGTS/Fundo de Garantia Por Tempo de Serviço",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico"
+   "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico",
+   "Alexander"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Classificação e/ ou Preterição"
+   "Classificação e/ ou Preterição",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Classificação e/ ou Preterição"
+   "Classificação e/ ou Preterição",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Classificação e/ ou Preterição"
+   "Classificação e/ ou Preterição",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Direitos Indígenas"
+   "Direitos Indígenas",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Indenização por Dano Moral"
+   "Indenização por Dano Moral",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Metrológica"
+   "Metrológica",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Posse e Exercício"
+   "Posse e Exercício",
+   ""
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Prova Prática- Sentença"
+   "Prova Prática- Sentença",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Não padronizado"
+   "Não padronizado",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Oncológico"
+   "Oncológico",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Planos de saúde"
+   "Planos de saúde",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Perdimento de Bens"
+   "Perdimento de Bens",
+   ""
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Expedição de diplomas e omissão na entrega das notas"
+   "Expedição de diplomas e omissão na entrega das notas",
+   "CM"
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Processo Seletivo"
+   "Processo Seletivo",
+   ""
   ],
   [
    "Maria Eduarda",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Ambiental"
+   "Ambiental",
+   "Alexander"
   ],
   [
    "Maria Eduarda",
    "Apelação e remessa",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Reforma"
+   "Reforma",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Apelação e remessa",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "1/3 de férias"
+   "1/3 de férias",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Repasse de Verbas Públicas"
+   "Repasse de Verbas Públicas",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/ Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/ Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Reintegração"
+   "Reintegração",
+   "Saffioti"
   ],
   [
    "Maria Eduarda",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Esbulho / Turbação / Ameaça"
+   "Esbulho / Turbação / Ameaça",
+   "Vanilda"
   ],
   [
    "Maria Eduarda",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Ambiental"
+   "Ambiental",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO AMBIENTAL",
-   "Revogação/Anulação de multa ambiental"
+   "Revogação/Anulação de multa ambiental",
+   "Bruno"
   ],
   [
    "Maria Eduarda",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Gestante / Adotante / Paternidade"
+   "Gestante / Adotante / Paternidade",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Correção Monetária de Diferenças Pagas em Atraso"
+   "Correção Monetária de Diferenças Pagas em Atraso",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Demarcação"
+   "Demarcação",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Direitos Indígenas"
+   "Direitos Indígenas",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "CM"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Cédula de Crédito Rural"
+   "Cédula de Crédito Rural",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sistema Financeiro da Habitação"
+   "Sistema Financeiro da Habitação",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "1ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Professor"
+   "Professor",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inquérito / Processo / Recurso Administrativo"
+   "Inquérito / Processo / Recurso Administrativo",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Expurgos Inflacionários / Planos Econômicos"
+   "Expurgos Inflacionários / Planos Econômicos",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Expurgos Inflacionários / Planos Econômicos"
+   "Expurgos Inflacionários / Planos Econômicos",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Cálculo do fator previdenciário - Lei 9.876/99"
+   "Cálculo do fator previdenciário - Lei 9.876/99",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuição sobre a folha de salários"
+   "Contribuição sobre a folha de salários",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuições para o SEBRAE, SESC, SENAC, SENAI e outros"
+   "Contribuições para o SEBRAE, SESC, SENAC, SENAI e outros",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Atraso na Entrega do Imóvel"
+   "Atraso na Entrega do Imóvel",
+   ""
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO DA SAÚDE",
-   "Não padronizado"
+   "Não padronizado",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Expurgos Inflacionários / Planos Econômicos"
+   "Expurgos Inflacionários / Planos Econômicos",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Expurgos Inflacionários / Planos Econômicos"
+   "Expurgos Inflacionários / Planos Econômicos",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Alteração do coeficiente de cálculo do benefício"
+   "Alteração do coeficiente de cálculo do benefício",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Alteração do coeficiente de cálculo do benefício"
+   "Alteração do coeficiente de cálculo do benefício",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "RMI - Renda Mensal Inicial"
+   "RMI - Renda Mensal Inicial",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "RMI - Renda Mensal Inicial"
+   "RMI - Renda Mensal Inicial",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Revisão do valor do benefício no primeiro reajuste após a concessão (Art. 21, § 3º, da Lei 8.880/1994)"
+   "Revisão do valor do benefício no primeiro reajuste após a concessão (Art. 21, § 3º, da Lei 8.880/1994)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação",
    "3ª Seção",
    "DIREITO PROCESSUAL CIVIL E DO TRABALHO",
-   "Busca e Apreensão"
+   "Busca e Apreensão",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inquérito / Processo / Recurso Administrativo"
+   "Inquérito / Processo / Recurso Administrativo",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inquérito / Processo / Recurso Administrativo"
+   "Inquérito / Processo / Recurso Administrativo",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuição de Intervenção no Domínio Econômico (CIDE)"
+   "Contribuição de Intervenção no Domínio Econômico (CIDE)",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inquérito / Processo / Recurso Administrativo"
+   "Inquérito / Processo / Recurso Administrativo",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Decisão monocrática",
    "3ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Expurgos Inflacionários / Planos Econômicos"
+   "Expurgos Inflacionários / Planos Econômicos",
+   "Saffioti"
   ],
   [
    "Rodrigo",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Juízo de retratação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Rodrigo",
    "Remessa necessária",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Registro Profissional"
+   "Registro Profissional",
+   "Bruno"
   ],
   [
    "Rodrigo",
    "Remessa necessária",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Registro Profissional"
+   "Registro Profissional",
+   "Bruno"
   ],
   [
    "Saffioti",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Restituição de área - FUNAI"
+   "Restituição de área - FUNAI",
+   "Alexander"
   ],
   [
    "Saffioti",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Direitos Indígenas"
+   "Direitos Indígenas",
+   "Saffioti"
   ],
   [
    "Vanilda",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Contratos Bancários"
+   "Contratos Bancários",
+   "Vanilda"
   ],
   [
    "Vanilda",
    "Apelação",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Fundo de Saúde do Exército - FUSEX"
+   "Fundo de Saúde do Exército - FUSEX",
+   "Saffioti"
   ],
   [
    "Victor",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Cédula de Crédito Bancário"
+   "Cédula de Crédito Bancário",
+   "Vanilda"
   ],
   [
    "Victor",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Agravo de instrumento",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Isenção por Doença ou Acidente em Serviço"
+   "Isenção por Doença ou Acidente em Serviço",
+   "Bruno"
   ],
   [
    "Victor",
    "Agravo de instrumento",
    "3ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "ITR/ Imposto Territorial Rural"
+   "ITR/ Imposto Territorial Rural",
+   "Vanilda"
   ],
   [
    "Victor",
    "Agravo interno",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Cédula de Crédito Bancário"
+   "Cédula de Crédito Bancário",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "",
    "",
-   ""
+   "",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Abono Pecuniário (Art. 78 Lei 8.112/1990)"
+   "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Isonomia"
+   "Isonomia",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Registro de Empresa"
+   "Registro de Empresa",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Contratos Bancários"
+   "Contratos Bancários",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Crédito Rural"
+   "Crédito Rural",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sistema Financeiro da Habitação"
+   "Sistema Financeiro da Habitação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Empréstimo consignado"
+   "Empréstimo consignado",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "1ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Ambiental"
+   "Ambiental",
+   "Alexander"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Ambiental"
+   "Ambiental",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Dano ao Erário"
+   "Dano ao Erário",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Exame da Ordem OAB"
+   "Exame da Ordem OAB",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Indenização por Dano Moral"
+   "Indenização por Dano Moral",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Registro de Empresa"
+   "Registro de Empresa",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO AMBIENTAL",
-   "Revogação/Anulação de multa ambiental"
+   "Revogação/Anulação de multa ambiental",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO CIVIL",
-   "Indenização por Dano Material"
+   "Indenização por Dano Material",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DA SAÚDE",
-   "Fornecimento de medicamentos"
+   "Fornecimento de medicamentos",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Inclusão Indevida em Cadastro de Inadimplentes"
+   "Inclusão Indevida em Cadastro de Inadimplentes",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+   "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "ACESSO"
+   "ACESSO",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Exames de certificação - Diploma"
+   "Exames de certificação - Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação e Correção de Provas / Questões"
+   "Anulação e Correção de Provas / Questões",
+   "Saffioti"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Exame da Ordem OAB"
+   "Exame da Ordem OAB",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Gestante / Adotante / Paternidade"
+   "Gestante / Adotante / Paternidade",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Alexander"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Indenização por Dano Material"
+   "Indenização por Dano Material",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Victor",
    "Apelação",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio-Reclusão (Art. 80)"
+   "Auxílio-Reclusão (Art. 80)",
+   "Alexander"
   ],
   [
    "Victor",
    "Apelação",
    "A conferir",
    "DIREITO AMBIENTAL",
-   "Revogação/Anulação de multa ambiental"
+   "Revogação/Anulação de multa ambiental",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "A conferir",
    "DIREITO ASSISTENCIAL",
-   "Pessoa com Deficiência"
+   "Pessoa com Deficiência",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "A conferir",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "A conferir",
    "DIREITO PREVIDENCIÁRIO",
-   "Auxílio por Incapacidade Temporária"
+   "Auxílio por Incapacidade Temporária",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação",
    "A conferir",
    "DIREITO PREVIDENCIÁRIO",
-   "Pensão por Morte (Art. 74/9)"
+   "Pensão por Morte (Art. 74/9)",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "1ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Anulação"
+   "Anulação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuição Social sobre o Lucro Líquido"
+   "Contribuição Social sobre o Lucro Líquido",
+   "Bruno"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "Convalidação de Estudos e Reconhecimento de Diploma"
+   "Convalidação de Estudos e Reconhecimento de Diploma",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "2ª Seção",
    "DIREITO À EDUCAÇÃO",
-   "FIES"
+   "FIES",
+   "Vanilda"
   ],
   [
    "Victor",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "RMI - Renda Mensal Inicial"
+   "RMI - Renda Mensal Inicial",
+   "Alexander"
   ],
   [
    "Victor",
    "Decisão monocrática",
    "3ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "ITR/ Imposto Territorial Rural"
+   "ITR/ Imposto Territorial Rural",
+   "Vanilda"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Abono Pecuniário (Art. 78 Lei 8.112/1990)"
+   "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
+   ""
   ],
   [
    "Victor",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Crédito Rural"
+   "Crédito Rural",
+   "Vanilda"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Cédula de Crédito Bancário"
+   "Cédula de Crédito Bancário",
+   "Vanilda"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Sistema Financeiro da Habitação"
+   "Sistema Financeiro da Habitação",
+   "Vanilda"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Dano ao Erário"
+   "Dano ao Erário",
+   "Vanilda"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO DO CONSUMIDOR",
-   "Inclusão Indevida em Cadastro de Inadimplentes"
+   "Inclusão Indevida em Cadastro de Inadimplentes",
+   "Vanilda"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "Aposentadoria Especial (Art. 57/8)"
+   "Aposentadoria Especial (Art. 57/8)",
+   "Alexander"
   ],
   [
    "Victor",
    "Embargos de declaração",
    "3ª Seção",
    "DIREITO PREVIDENCIÁRIO",
-   "RMI - Renda Mensal Inicial"
+   "RMI - Renda Mensal Inicial",
+   ""
   ],
   [
    "Victor",
    "Remessa necessária",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Exame da Ordem OAB"
+   "Exame da Ordem OAB",
+   "Vanilda"
   ],
   [
    "Wellington",
    "Agravo de instrumento",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuição sobre a folha de salários"
+   "Contribuição sobre a folha de salários",
+   "Vanilda"
   ],
   [
    "Wellington",
    "Agravo interno",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Contribuição sobre a folha de salários"
+   "Contribuição sobre a folha de salários",
+   "Vanilda"
   ],
   [
    "Wellington",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Jornada de Trabalho"
+   "Jornada de Trabalho",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Reajustes de Remuneração, Proventos ou Pensão"
+   "Reajustes de Remuneração, Proventos ou Pensão",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice da URV Lei 8.880/1994"
+   "Índice da URV Lei 8.880/1994",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "1ª Seção",
    "DIREITO CIVIL",
-   "Quitação"
+   "Quitação",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Certificado de Regularidade - FGTS"
+   "Certificado de Regularidade - FGTS",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "1ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Funrural"
+   "Funrural",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Demarcação"
+   "Demarcação",
+   "Saffioti"
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Energia Elétrica"
+   "Energia Elétrica",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Gratificação Especial de Localidade - GEL"
+   "Gratificação Especial de Localidade - GEL",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Indenização / Terço Constitucional"
+   "Indenização / Terço Constitucional",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   "Saffioti"
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Registro Profissional"
+   "Registro Profissional",
+   "Renato"
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "FUNDEF/ Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do Magistério"
+   "FUNDEF/ Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do Magistério",
+   ""
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de Veículo Apreendido"
+   "Liberação de Veículo Apreendido",
+   "Saffioti"
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Liberação de mercadorias"
+   "Liberação de mercadorias",
+   "Bruno"
   ],
   [
    "Wellington",
    "Apelação",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "PIS - Cofins"
+   "PIS - Cofins",
+   ""
   ],
   [
    "Wellington",
    "Apelação e remessa",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Obras Públicas"
+   "Obras Públicas",
+   ""
   ],
   [
    "Wellington",
    "Decisão monocrática",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação"
+   "Inscrição / Documentação",
+   ""
   ],
   [
    "Wellington",
    "Decisão monocrática",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Multas e demais Sanções"
+   "Multas e demais Sanções",
+   ""
   ],
   [
    "Wellington",
    "Decisão monocrática",
    "2ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Registro Profissional"
+   "Registro Profissional",
+   ""
   ],
   [
    "Wellington",
    "Decisão monocrática",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "Perdimento de Bens"
+   "Perdimento de Bens",
+   "Saffioti"
   ],
   [
    "Wellington",
    "Decisão monocrática",
    "3ª Seção",
    "DIREITO CIVIL",
-   "Prescrição e Decadência"
+   "Prescrição e Decadência",
+   ""
   ],
   [
    "Wellington",
    "Embargos de declaração",
    "2ª Seção",
    "DIREITO TRIBUTÁRIO",
-   "PIS - Cofins"
+   "PIS - Cofins",
+   ""
   ]
  ]
 }
