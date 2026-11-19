@@ -41,7 +41,8 @@ test('CSS de refinamento presente e estruturalmente válido', () => {
 test('regras comuns idênticas nas páginas', () => {
   const main = styleOf(pages[0]).css;
   const lotes = styleOf(pages[1]).css;
-  assert.ok(lotes.startsWith(main.trim()), 'padrão comum deve ser único e idêntico');
+  const common = main.split('/* Painel do desembargador:')[0].trim();
+  assert.ok(lotes.includes(common), 'padrão comum deve ser idêntico nas duas páginas');
 });
 test('áreas centrais usam colunas flexíveis e mantêm navegação responsiva', () => {
   const main = styleOf(pages[0]).css;
@@ -51,6 +52,13 @@ test('áreas centrais usam colunas flexíveis e mantêm navegação responsiva',
   assert.match(lotes, /body\.cx-on\{padding-right:520px\}/);
   assert.match(lotes, /@media\(max-width:1300px\)/);
   assert.match(lotes, /overscroll-behavior-x:contain/);
+});
+test('relator com painéis de notificações e diligências adaptativos', () => {
+  const main = styleOf(pages[0]).css;
+  assert.match(main, /#v-cmt \.cmt-pn-not/);
+  assert.match(main, /#v-cmt \.cmt-pn-dil/);
+  assert.match(main, /#p-not,#p-pen/);
+  assert.match(main, /@media\(max-width:780px\)/);
 });
 test('fluxos operacionais mantidos nos HTML', () => {
   const app = styleOf(pages[0]).html;
