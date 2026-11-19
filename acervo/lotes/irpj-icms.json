@@ -1,1660 +1,1665 @@
 {
- "schema": "gabcmt.lote",
- "versao": 1,
- "id": "irpj-icms",
- "titulo": "IRPJ/CSLL · benefícios fiscais de ICMS",
- "descricao": "Bloco da pauta de 30/11/2026: crédito presumido e demais benefícios fiscais de ICMS nas bases do IRPJ e da CSLL (mandados de segurança). Correção pela matriz modular IRPJ/CSLL; 4 processos corrigidos em 18/11/2026, os demais aguardam autos e minuta.",
- "sessoes": [
-  "2026-11-30"
- ],
- "filtro": {},
- "atualizado_em": "2026-11-18",
- "criado_por": "BD",
- "colunas": [
-  {
-   "id": "LIT",
-   "rotulo": "Litispendência"
-  },
-  {
-   "id": "DIS",
-   "rotulo": "Razões dissociadas"
-  },
-  {
-   "id": "CTR",
-   "rotulo": "Pedido em contrarrazões"
-  },
-  {
-   "id": "INE",
-   "rotulo": "Inépcia alegada"
-  },
-  {
-   "id": "L14",
-   "rotulo": "Lei 14.789/2023"
-  },
-  {
-   "id": "OUT",
-   "rotulo": "Crédito outorgado"
-  },
-  {
-   "id": "RES",
-   "rotulo": "Restituição pedida"
-  },
-  {
-   "id": "CND",
-   "rotulo": "Certidão pedida"
-  },
-  {
-   "id": "EDO",
-   "rotulo": "Embargos na origem"
-  },
-  {
-   "id": "ORI",
-   "rotulo": "Ponto para o Relator"
-  }
- ],
- "grupos": [
-  {
-   "id": "1",
-   "rotulo": "Crédito presumido provado: concessão mantida",
-   "cor": "#2f6db5",
-   "resultado": "Desprovimento",
-   "modelo": "5004504-44.2024 (irpj-1a)"
-  },
-  {
-   "id": "2",
-   "rotulo": "Extinção afastada: mérito julgado",
-   "cor": "#7a5cc2",
-   "resultado": "Parcial provimento; segurança concedida em parte",
-   "modelo": "5004776-38.2024 (irpj-2a)"
-  },
-  {
-   "id": "3",
-   "rotulo": "Sem prova: segurança denegada",
-   "cor": "#1f8a70",
-   "resultado": "Provimento; segurança denegada",
-   "modelo": "5003301-81.2023 (irpj-3a)"
-  },
-  {
-   "id": "4",
-   "rotulo": "Concessão restrita ao crédito presumido",
-   "cor": "#c07a12",
-   "resultado": "Parcial provimento",
-   "modelo": "matriz 5000161-72.2019 (irpj-4a)"
-  }
- ],
- "grupo_outros": {
-  "rotulo": "A triar (sem autos)",
-  "cor": "#5d6b72"
- },
- "minutas": "acervo/minutas/irpj-icms/<processo>.json",
- "itens": [
-  {
-   "sessao": "2026-11-30",
-   "item": 60,
-   "processo": "5001255-79.2024.4.03.6002",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x ENERGETICA SANTA HELENA S/A - EM RECUPERACAO JUDICIAL",
-   "exequente": "ENERGETICA SANTA HELENA S/A - EM RECUPERACAO JUDICIAL",
-   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Desprovimento da apelação e da remessa necessária",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
-   "variacoes": [
-    "L14",
-    "RES",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
-   "peculiaridades": "Mandado de segurança de empresa em recuperação judicial. Crédito presumido de ICMS pelo Acordo 687/2011 (ID 354858307) e aditivos (IDs 354858308 e 354858310). A sentença concedeu a segurança independentemente da Lei 14.789/2023, com compensação e prescrição quinquenal, e condenou a União a reembolsar custas. A apelação da União sustenta a LC 160/2017, a MP 1.185/2023 e a Lei 14.789/2023, e que a restituição só pode ocorrer por precatório.",
-   "peculiaridades_relator": "1) Fundamento da exclusão após a Lei 14.789/2023 uniformizado com o item 66: item 5 da ementa dos embargos na ApelRemNec 5000161-72.2019.4.03.6002 (DJEN 06/05/2026). 2) A minuta original tratava do Tema 1.416/STJ, sem pedido de suspensão nas razões; o parágrafo foi retirado, como na correção do item 66, e o ponto ficou em pendência. 3) Restituição administrativa vedada na fórmula adotada no item 74 (Tema 831/STF; Súmulas 269 e 271/STF).",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
+  "schema": "gabcmt.lote",
+  "versao": 1,
+  "id": "irpj-icms",
+  "titulo": "IRPJ/CSLL · benefícios fiscais de ICMS",
+  "descricao": "Bloco da pauta de 30/11/2026: crédito presumido e demais benefícios fiscais de ICMS nas bases do IRPJ e da CSLL (mandados de segurança). Correção pela matriz modular IRPJ/CSLL; 4 processos corrigidos em 18/11/2026, os demais aguardam autos e minuta.",
+  "sessoes": [
+    "2026-11-30"
+  ],
+  "filtro": {},
+  "atualizado_em": "2026-11-18",
+  "criado_por": "BD",
+  "colunas": [
     {
-     "id": "354858307",
-     "tipo": "Acordo 687/2011 — crédito presumido de ICMS"
+      "id": "LIT",
+      "rotulo": "Litispendência"
     },
     {
-     "id": "354858308",
-     "tipo": "Aditivo ao acordo"
+      "id": "DIS",
+      "rotulo": "Razões dissociadas"
     },
     {
-     "id": "354858310",
-     "tipo": "Aditivo ao acordo"
+      "id": "CTR",
+      "rotulo": "Pedido em contrarrazões"
     },
     {
-     "id": "354858327",
-     "tipo": "Sentença"
+      "id": "INE",
+      "rotulo": "Inépcia alegada"
     },
     {
-     "id": "354858330",
-     "tipo": "Apelação da União"
+      "id": "L14",
+      "rotulo": "Lei 14.789/2023"
     },
     {
-     "id": "354858783",
-     "tipo": "Contrarrazões"
+      "id": "OUT",
+      "rotulo": "Crédito outorgado"
     },
     {
-     "id": "355942741",
-     "tipo": "Parecer da Procuradoria Regional da República"
+      "id": "RES",
+      "rotulo": "Restituição pedida"
+    },
+    {
+      "id": "CND",
+      "rotulo": "Certidão pedida"
+    },
+    {
+      "id": "EDO",
+      "rotulo": "Embargos na origem"
+    },
+    {
+      "id": "ORI",
+      "rotulo": "Ponto para o Relator"
     }
-   ],
-   "mpf": "ID 355942741",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Ementa",
-     "Reescrita no padrão do gabinete: seções em maiúsculas, uma ideia por item, questões reduzidas a duas; dispositivos e jurisprudência citados conforme o voto",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Rodapé: retirados dispositivos não usados (artigo 150, VI, a, da CF; artigo 927, III, do CPC; artigo 39, § 4º, da Lei 9.250/1995) e corrigido o plural indevido; incluídos os julgados efetivamente citados, com relator e data",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Sentença e razões da União na fórmula do gabinete, com os oito itens numerados e o pedido",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Transcrições longas (AgInt no AREsp 2.023.930, AgInt no REsp 1.813.018, ApelRemNec 5000264-80.2020.4.04.7113, REsp 1.968.755, ApelRemNec 5011026-63.2019.4.03.6000) substituídas por fundamentação direta e citação curta, como no item 66",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Lei 14.789/2023: incluído o fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Parágrafo sobre o Tema 1.416/STJ retirado: a suspensão não foi pedida; ponto em pendência",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Enfrentados os itens (3), (7) e (8) das razões: exclusões só por lei federal, liquidez do indébito e restituição por precatório",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
-     "Corrigido"
-    ],
-    [
-     "Acórdão",
-     "Incluído, com a composição da sessão de 30/11/2026",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
-    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
-    "Confirmar nos autos o Acordo 687/2011 e os aditivos (IDs 354858307, 354858308 e 354858310): o enquadramento no grupo 1 depende deles."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 61,
-   "processo": "5002192-32.2023.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x LSL COMERCIO DE CEREAIS LTDA",
-   "exequente": "LSL COMERCIO DE CEREAIS LTDA",
-   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Desprovimento da apelação e da remessa necessária [VALIDAR: depende da prova do crédito presumido]",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida) — enquadramento a validar",
-   "variacoes": [
-    "L14",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
-   "peculiaridades": "Mandado de segurança de comerciante de cereais (LSL Comércio de Cereais Ltda.), 4ª Vara Federal de Campo Grande. A sentença concedeu em parte: exclusão incondicionada do crédito presumido, abstenção de óbices à certidão e de cobrança, demais benefícios condicionados aos requisitos legais (dispensada só a prova do estímulo) e compensação após 29/03/2018. A minuta afirma crédito presumido pelo Decreto estadual 9.889/2000 e pelo Convênio ICMS 100/1997, sem ID da prova.",
-   "peculiaridades_relator": "1) Ponto decisivo a validar nos autos: a minuta funda o crédito presumido no Convênio ICMS 100/1997, que trata de redução de base de cálculo de insumos agropecuários. Se o benefício fruído for redução de base, e não crédito presumido, o caso sai do grupo 1 e pode inverter o resultado, como ocorreu no item 73. 2) A versão corrigida explicita que os demais benefícios seguem o artigo 30 enquanto vigente e, depois, a Lei 14.789/2023, com o fundamento uniformizado com o item 66. Avaliar se a ressalva temporal pede parcial provimento à remessa necessária, já que a sentença condicionou os demais benefícios ao artigo 30 sem limite de tempo. 3) Retirados, por não pedidos, o parágrafo sobre o Tema 1.416/STJ e o tratamento da restituição administrativa, que a sentença não concedeu.",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
+  ],
+  "grupos": [
     {
-     "id": "301500627",
-     "tipo": "Sentença"
+      "id": "1",
+      "rotulo": "Crédito presumido provado: concessão mantida",
+      "cor": "#2f6db5",
+      "resultado": "Desprovimento",
+      "modelo": "5004504-44.2024 (irpj-1a)"
     },
     {
-     "id": "301500630",
-     "tipo": "Apelação da União"
+      "id": "2",
+      "rotulo": "Extinção afastada: mérito julgado",
+      "cor": "#7a5cc2",
+      "resultado": "Parcial provimento; segurança concedida em parte",
+      "modelo": "5004776-38.2024 (irpj-2a)"
     },
     {
-     "id": "301500734",
-     "tipo": "Contrarrazões"
+      "id": "3",
+      "rotulo": "Sem prova: segurança denegada",
+      "cor": "#1f8a70",
+      "resultado": "Provimento; segurança denegada",
+      "modelo": "5003301-81.2023 (irpj-3a)"
     },
     {
-     "id": "302213218",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    },
-    {
-     "id": "306589620",
-     "tipo": "Recebimento da apelação no efeito devolutivo"
+      "id": "4",
+      "rotulo": "Concessão restrita ao crédito presumido",
+      "cor": "#c07a12",
+      "resultado": "Parcial provimento",
+      "modelo": "matriz 5000161-72.2019 (irpj-4a)"
     }
-   ],
-   "mpf": "ID 302213218",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Ementa",
-     "Reescrita no padrão do gabinete; questões reduzidas a duas; rodapé limitado aos dispositivos e julgados usados no voto, com relator e data",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Retirados do rodapé artigo 100 e artigo 150, VI, a, da CF, artigo 927, III, do CPC, artigo 39, § 4º, da Lei 9.250/1995, Tema 831/STF e Súmulas 269, 271/STF e 461/STJ, não usados na versão corrigida",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Dispositivo da sentença organizado em quatro itens, incluída a abstenção de óbices à certidão; razões da União com o pedido",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Transcrições longas substituídas por fundamentação direta, como no item 66",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Enfrentada a tese (4) da União: a sentença já manteve os requisitos legais para os demais benefícios, em harmonia com o Tema 1.182/STJ",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Lei 14.789/2023: demais benefícios sujeitos ao artigo 30 enquanto vigente e depois ao novo regime, com a ApelRemNec 5000161-72.2019.4.03.6002",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Espécie do benefício marcada [VALIDAR]: Convênio ICMS 100/1997 é redução de base de cálculo, sem ID da prova",
-     "Validar"
-    ],
-    [
-     "Voto",
-     "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
-     "Corrigido"
-    ],
-    [
-     "Acórdão",
-     "Incluído, com a composição da sessão de 30/11/2026",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Confirmar nos autos a espécie do benefício fruído (crédito presumido ou redução de base de cálculo) e o ID da prova do Decreto estadual 9.889/2000 e do Convênio ICMS 100/1997.",
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
-    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação."
-   ],
-   "minuta": true
+  ],
+  "grupo_outros": {
+    "rotulo": "A triar (sem autos)",
+    "cor": "#5d6b72"
   },
-  {
-   "sessao": "2026-11-30",
-   "item": 62,
-   "processo": "5002330-62.2024.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x DIMATEX INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-   "exequente": "DIMATEX INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
-   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 63,
-   "processo": "5002405-04.2024.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE x CAMPANARIO AGROPECUARIA LTDA",
-   "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "executado": "CAMPANARIO AGROPECUARIA LTDA",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Desprovimento da apelação e da remessa necessária",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
-   "variacoes": [
-    "L14",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
-   "peculiaridades": "Mandado de segurança de empresa agropecuária (Campanário Agropecuária Ltda.), 2ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Decreto estadual 12.056/2006 (ID 312598538). A sentença concedeu a segurança, com compensação, Taxa SELIC desde cada recolhimento e Manual de Cálculos, e condenou a União a reembolsar custas.",
-   "peculiaridades_relator": "1) Fundamento da exclusão após a Lei 14.789/2023 uniformizado com o item 66 (ApelRemNec 5000161-72.2019.4.03.6002). 2) Enfrentadas as teses (2) e (4) da União — exclusão só por lei federal e pacto federativo invertido —, que a minuta original não respondia diretamente. 3) Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos.",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
+  "minutas": "acervo/minutas/irpj-icms/<processo>.json",
+  "itens": [
     {
-     "id": "312598538",
-     "tipo": "Decreto estadual 12.056/2006 — crédito presumido de ICMS"
+      "sessao": "2026-11-30",
+      "item": 60,
+      "processo": "5001255-79.2024.4.03.6002",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x ENERGETICA SANTA HELENA S/A - EM RECUPERACAO JUDICIAL",
+      "exequente": "ENERGETICA SANTA HELENA S/A - EM RECUPERACAO JUDICIAL",
+      "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Desprovimento da apelação e da remessa necessária",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
+      "variacoes": [
+        "L14",
+        "RES",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+      "peculiaridades": "Mandado de segurança de empresa em recuperação judicial. Crédito presumido de ICMS pelo Acordo 687/2011 (ID 354858307) e aditivos (IDs 354858308 e 354858310). A sentença concedeu a segurança independentemente da Lei 14.789/2023, com compensação e prescrição quinquenal, e condenou a União a reembolsar custas. A apelação da União sustenta a LC 160/2017, a MP 1.185/2023 e a Lei 14.789/2023, e que a restituição só pode ocorrer por precatório.",
+      "peculiaridades_relator": "1) Fundamento da exclusão após a Lei 14.789/2023 uniformizado com o item 66: item 5 da ementa dos embargos na ApelRemNec 5000161-72.2019.4.03.6002 (DJEN 06/05/2026). 2) A minuta original tratava do Tema 1.416/STJ, sem pedido de suspensão nas razões; o parágrafo foi retirado, como na correção do item 66, e o ponto ficou em pendência. 3) Restituição administrativa vedada na fórmula adotada no item 74 (Tema 831/STF; Súmulas 269 e 271/STF).",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "354858307",
+          "tipo": "Acordo 687/2011 — crédito presumido de ICMS"
+        },
+        {
+          "id": "354858308",
+          "tipo": "Aditivo ao acordo"
+        },
+        {
+          "id": "354858310",
+          "tipo": "Aditivo ao acordo"
+        },
+        {
+          "id": "354858327",
+          "tipo": "Sentença"
+        },
+        {
+          "id": "354858330",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "354858783",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "355942741",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        }
+      ],
+      "mpf": "ID 355942741",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Ementa",
+          "Reescrita no padrão do gabinete: seções em maiúsculas, uma ideia por item, questões reduzidas a duas; dispositivos e jurisprudência citados conforme o voto",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Rodapé: retirados dispositivos não usados (artigo 150, VI, a, da CF; artigo 927, III, do CPC; artigo 39, § 4º, da Lei 9.250/1995) e corrigido o plural indevido; incluídos os julgados efetivamente citados, com relator e data",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "Sentença e razões da União na fórmula do gabinete, com os oito itens numerados e o pedido",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Transcrições longas (AgInt no AREsp 2.023.930, AgInt no REsp 1.813.018, ApelRemNec 5000264-80.2020.4.04.7113, REsp 1.968.755, ApelRemNec 5011026-63.2019.4.03.6000) substituídas por fundamentação direta e citação curta, como no item 66",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Lei 14.789/2023: incluído o fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Parágrafo sobre o Tema 1.416/STJ retirado: a suspensão não foi pedida; ponto em pendência",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Enfrentados os itens (3), (7) e (8) das razões: exclusões só por lei federal, liquidez do indébito e restituição por precatório",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+          "Corrigido"
+        ],
+        [
+          "Acórdão",
+          "Incluído, com a composição da sessão de 30/11/2026",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+        "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+        "Confirmar nos autos o Acordo 687/2011 e os aditivos (IDs 354858307, 354858308 e 354858310): o enquadramento no grupo 1 depende deles."
+      ],
+      "minuta": true
     },
     {
-     "id": "312598558",
-     "tipo": "Sentença"
+      "sessao": "2026-11-30",
+      "item": 61,
+      "processo": "5002192-32.2023.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x LSL COMERCIO DE CEREAIS LTDA",
+      "exequente": "LSL COMERCIO DE CEREAIS LTDA",
+      "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Desprovimento da apelação e da remessa necessária [VALIDAR: depende da prova do crédito presumido]",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida) — enquadramento a validar",
+      "variacoes": [
+        "L14",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+      "peculiaridades": "Mandado de segurança de comerciante de cereais (LSL Comércio de Cereais Ltda.), 4ª Vara Federal de Campo Grande. A sentença concedeu em parte: exclusão incondicionada do crédito presumido, abstenção de óbices à certidão e de cobrança, demais benefícios condicionados aos requisitos legais (dispensada só a prova do estímulo) e compensação após 29/03/2018. A minuta afirma crédito presumido pelo Decreto estadual 9.889/2000 e pelo Convênio ICMS 100/1997, sem ID da prova.",
+      "peculiaridades_relator": "1) Ponto decisivo a validar nos autos: a minuta funda o crédito presumido no Convênio ICMS 100/1997, que trata de redução de base de cálculo de insumos agropecuários. Se o benefício fruído for redução de base, e não crédito presumido, o caso sai do grupo 1 e pode inverter o resultado, como ocorreu no item 73. 2) A versão corrigida explicita que os demais benefícios seguem o artigo 30 enquanto vigente e, depois, a Lei 14.789/2023, com o fundamento uniformizado com o item 66. Avaliar se a ressalva temporal pede parcial provimento à remessa necessária, já que a sentença condicionou os demais benefícios ao artigo 30 sem limite de tempo. 3) Retirados, por não pedidos, o parágrafo sobre o Tema 1.416/STJ e o tratamento da restituição administrativa, que a sentença não concedeu.",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "301500627",
+          "tipo": "Sentença"
+        },
+        {
+          "id": "301500630",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "301500734",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "302213218",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        },
+        {
+          "id": "306589620",
+          "tipo": "Recebimento da apelação no efeito devolutivo"
+        }
+      ],
+      "mpf": "ID 302213218",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Ementa",
+          "Reescrita no padrão do gabinete; questões reduzidas a duas; rodapé limitado aos dispositivos e julgados usados no voto, com relator e data",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Retirados do rodapé artigo 100 e artigo 150, VI, a, da CF, artigo 927, III, do CPC, artigo 39, § 4º, da Lei 9.250/1995, Tema 831/STF e Súmulas 269, 271/STF e 461/STJ, não usados na versão corrigida",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "Dispositivo da sentença organizado em quatro itens, incluída a abstenção de óbices à certidão; razões da União com o pedido",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Transcrições longas substituídas por fundamentação direta, como no item 66",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Enfrentada a tese (4) da União: a sentença já manteve os requisitos legais para os demais benefícios, em harmonia com o Tema 1.182/STJ",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Lei 14.789/2023: demais benefícios sujeitos ao artigo 30 enquanto vigente e depois ao novo regime, com a ApelRemNec 5000161-72.2019.4.03.6002",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Espécie do benefício marcada [VALIDAR]: Convênio ICMS 100/1997 é redução de base de cálculo, sem ID da prova",
+          "Validar"
+        ],
+        [
+          "Voto",
+          "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+          "Corrigido"
+        ],
+        [
+          "Acórdão",
+          "Incluído, com a composição da sessão de 30/11/2026",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Confirmar nos autos a espécie do benefício fruído (crédito presumido ou redução de base de cálculo) e o ID da prova do Decreto estadual 9.889/2000 e do Convênio ICMS 100/1997.",
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+        "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação."
+      ],
+      "minuta": true
     },
     {
-     "id": "312598561",
-     "tipo": "Apelação da União"
+      "sessao": "2026-11-30",
+      "item": 62,
+      "processo": "5002330-62.2024.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x DIMATEX INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
+      "exequente": "DIMATEX INDUSTRIA E COMERCIO DE CONFECCOES LTDA",
+      "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": null,
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
     },
     {
-     "id": "312598565",
-     "tipo": "Contrarrazões"
+      "sessao": "2026-11-30",
+      "item": 63,
+      "processo": "5002405-04.2024.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE x CAMPANARIO AGROPECUARIA LTDA",
+      "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "executado": "CAMPANARIO AGROPECUARIA LTDA",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Desprovimento da apelação e da remessa necessária",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
+      "variacoes": [
+        "L14",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+      "peculiaridades": "Mandado de segurança de empresa agropecuária (Campanário Agropecuária Ltda.), 2ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Decreto estadual 12.056/2006 (ID 312598538). A sentença concedeu a segurança, com compensação, Taxa SELIC desde cada recolhimento e Manual de Cálculos, e condenou a União a reembolsar custas.",
+      "peculiaridades_relator": "1) Fundamento da exclusão após a Lei 14.789/2023 uniformizado com o item 66 (ApelRemNec 5000161-72.2019.4.03.6002). 2) Enfrentadas as teses (2) e (4) da União — exclusão só por lei federal e pacto federativo invertido —, que a minuta original não respondia diretamente. 3) Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos.",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "312598538",
+          "tipo": "Decreto estadual 12.056/2006 — crédito presumido de ICMS"
+        },
+        {
+          "id": "312598558",
+          "tipo": "Sentença"
+        },
+        {
+          "id": "312598561",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "312598565",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "312661710",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        },
+        {
+          "id": "312671602",
+          "tipo": "Recebimento da apelação no efeito devolutivo"
+        }
+      ],
+      "mpf": "ID 312661710",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Ementa",
+          "Reescrita no padrão do gabinete, com uma questão em discussão",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Rodapé: súmulas retiradas da lista de dispositivos; AgInt no REsp 2.005.781 duplicado na jurisprudência; retirados dispositivos e julgados não usados; incluídos relator e data",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "Sentença e razões da União na fórmula do gabinete, com o pedido",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Transcrições longas substituídas por fundamentação direta, como no item 66",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Enfrentadas as teses (2) e (4) da União",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+          "Corrigido"
+        ],
+        [
+          "Acórdão",
+          "Incluído, com a composição da sessão de 30/11/2026",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+        "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+        "Confirmar nos autos o Decreto estadual 12.056/2006 (ID 312598538) como ato concessivo de crédito presumido."
+      ],
+      "minuta": true
     },
     {
-     "id": "312661710",
-     "tipo": "Parecer da Procuradoria Regional da República"
+      "sessao": "2026-11-30",
+      "item": 64,
+      "processo": "5002692-64.2024.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "MPS DISTRIBUIDORA MERCANTIL LTDA x UNIAO FEDERAL - FAZENDA NACIONAL",
+      "exequente": "MPS DISTRIBUIDORA MERCANTIL LTDA",
+      "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Desprovimento da apelação da União e da remessa necessária; provimento da apelação da impetrante para estender a exclusão ao PIS e à COFINS",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com extensão ao PIS e à COFINS (Tema 843/STF)",
+      "variacoes": [
+        "L14",
+        "EDO",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+      "peculiaridades": "Apelações cruzadas em mandado de segurança (MPS Distribuidora Mercantil Ltda.), 2ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Acordo 724/2012 e aditivos (ID 356256987), corroborado pelas GIABF (ID 356256988). A sentença, integrada em embargos, concedeu só quanto ao IRPJ e à CSLL; a impetrante pede a extensão ao PIS e à COFINS. Minuta alterada no PJe depois da extração das 16h (+502 caracteres); corrigida sobre a versão nova.",
+      "peculiaridades_relator": "1) Provimento à impetrante pelo Tema 843/STF, julgado em 07/10/2026 (7 a 4); tese transcrita conforme a divulgada; acórdão ainda não publicado e sem notícia de modulação. 2) A ementa original anunciava a questão do cabimento da remessa necessária (artigo 496, § 4º, do CPC), não tratada no voto, que conhece da remessa e lhe nega provimento: questão retirada. 3) Enfrentado o pedido de efeito suspensivo da União, que a minuta original não apreciava. 4) Lei 14.789/2023: fundamento uniformizado com o item 66.",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "Dalete",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [
+        {
+          "id": "356256983",
+          "tipo": "Documento constitutivo da impetrante"
+        },
+        {
+          "id": "356256987",
+          "tipo": "Acordo 724/2012 e aditivos — crédito presumido de ICMS"
+        },
+        {
+          "id": "356256988",
+          "tipo": "Guias de Informação e Apuração de Benefício Fiscal"
+        },
+        {
+          "id": "356257005",
+          "tipo": "Sentença"
+        },
+        {
+          "id": "356257007",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "356257014",
+          "tipo": "Decisão dos embargos de declaração"
+        },
+        {
+          "id": "356257017",
+          "tipo": "Apelação da impetrante"
+        },
+        {
+          "id": "356257019",
+          "tipo": "Contrarrazões da impetrante"
+        },
+        {
+          "id": "356257021",
+          "tipo": "Contrarrazões da União"
+        },
+        {
+          "id": "359322018",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        }
+      ],
+      "mpf": "ID 359322018",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Ementa",
+          "Retirada a questão do cabimento da remessa necessária (artigo 496, § 4º, do CPC), anunciada e não decidida; questões reduzidas a duas",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Rodapé depurado: retirados dispositivos e temas não usados (artigos 97, 151, 153, 155 da CF; artigo 1.021, § 4º, do CPC; Lei 4.506/1964; Temas 69 e 1.125; Súmula Vinculante 10; Súmula 512/STF); julgados com relator e data; Tema 843 com a data do julgamento",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "Razões da União numeradas, com a preliminar de efeito suspensivo; razões e pedido da impetrante; sentença com a decisão dos embargos",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Apreciado o pedido de efeito suspensivo, que a minuta original não enfrentava",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Tema 843/STF com a data do julgamento (07/10/2026) e a tese conferida em fonte pública",
+          "Validado"
+        ],
+        [
+          "Voto",
+          "Transcrições longas substituídas por fundamentação direta, como no item 66",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Retirado o parágrafo do Tema 1.416/STJ, não pedido; ponto em pendência",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+          "Corrigido"
+        ],
+        [
+          "Acórdão",
+          "Incluído, com a composição da sessão de 30/11/2026",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Acompanhar a publicação do acórdão do RE 835.818 (Tema 843) e eventual embargos com pedido de modulação de efeitos antes da sessão de 30/11/2026.",
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+        "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance as apelações."
+      ],
+      "minuta": true
     },
     {
-     "id": "312671602",
-     "tipo": "Recebimento da apelação no efeito devolutivo"
+      "sessao": "2026-11-30",
+      "item": 65,
+      "processo": "5003091-93.2024.4.03.6000",
+      "recurso": "APELAÇÃO CÍVEL",
+      "partes": "ROYAL AGRO CEREAIS LTDA x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "exequente": "ROYAL AGRO CEREAIS LTDA",
+      "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": null,
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "Dalete",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 66,
+      "processo": "5004504-44.2024.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x ROYAL AGRO CEREAIS LTDA",
+      "exequente": "ROYAL AGRO CEREAIS LTDA",
+      "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Desprovimento da apelação e da remessa necessária",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
+      "variacoes": [
+        "L14",
+        "OUT",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+      "peculiaridades": "Mandado de segurança; crédito outorgado de ICMS (Termos de Acordo 1.309/2021 e 1.371/2022). A sentença excluiu os créditos das bases do IRPJ e da CSLL, com compensação dos valores recolhidos a partir de 01/01/2024 (período da Lei 14.789/2023). A União sustenta a sistemática da MP 1.185/2023 e da Lei 14.789/2023.",
+      "peculiaridades_relator": "1) Manter a exclusão do crédito presumido depois da Lei 14.789/2023? A versão corrigida mantém, com apoio no item 5 da ementa dos embargos na ApelRemNec 5000161-72.2019.4.03.6002 (DJEN 06/05/2026).",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "317089711",
+          "tipo": "Petição inicial"
+        },
+        {
+          "id": "317089836",
+          "tipo": "Termos de Acordo 1.309/2021 e 1.371/2022 (crédito outorgado)"
+        },
+        {
+          "id": "317089875",
+          "tipo": "Sentença (27/01/2025)"
+        },
+        {
+          "id": "317089934",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "317089937",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "318024412",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        }
+      ],
+      "mpf": "ID 318024412",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Relatório",
+          "Teses da União omitidas (MP 1.185/2023 e Lei 14.789/2023, habilitação prévia; restrições à compensação): incluídas",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Item 3 aplicava o artigo 30 da Lei 12.973/2014 a período posterior à sua revogação: reescrito pela Lei 14.789/2023",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Crédito outorgado tratado como presumido sem fundamento: incluído o precedente 5028609-86.2018 (sinônimos)",
+          "Aprimorado"
+        ],
+        [
+          "Ementa",
+          "Rodapé: incluída a ApelRemNec 5008172-52.2022.4.03.6110, usada no voto",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vindo da minuta original.",
+        "Confirmar se há ordem de suspensão vigente no Tema 1.182/STJ."
+      ],
+      "minuta": true
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 67,
+      "processo": "5004672-46.2024.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS x PLASTRELA EMBALAGENS FLEXIVEIS LTDA",
+      "exequente": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS",
+      "executado": "PLASTRELA EMBALAGENS FLEXIVEIS LTDA",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": null,
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 69,
+      "processo": "5013703-56.2025.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "BEM INDUSTRIAS DE SEMENTES LTDA x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "exequente": "BEM INDUSTRIAS DE SEMENTES LTDA",
+      "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": null,
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "Dalete",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 70,
+      "processo": "5000123-38.2025.4.03.6006",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE x NOVO MUNDO INDUSTRIA E COMERCIO DE ALIMENTOS LTDA",
+      "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "executado": "NOVO MUNDO INDUSTRIA E COMERCIO DE ALIMENTOS LTDA",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Parcial provimento da apelação e da remessa necessária para afastar a repetição e a restituição administrativa do indébito, mantida a compensação",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com restituição afastada",
+      "variacoes": [
+        "L14",
+        "OUT",
+        "RES",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+      "peculiaridades": "Mandado de segurança (Novo Mundo Indústria e Comércio de Alimentos Ltda.), 1ª Vara Federal de Naviraí. Crédito outorgado de ICMS pelo Termo de Acordo 1.261/2020 e aditivos (ID 343867666), fruído só a partir de 2024, segundo as contrarrazões (ID 343867739). A sentença concedeu a exclusão e autorizou repetição ou compensação, inclusive por requerimento administrativo. A União apela também contra a restituição (Súmulas 269 e 271/STF; Tema 1.262/STF). Há pedido de sustentação oral por videoconferência (ID 408491479).",
+      "peculiaridades_relator": "1) Inversão parcial do resultado: a minuta original negava provimento, mas sua própria fundamentação vedava a restituição e a repetição em mandado de segurança, que a sentença concedeu e a União atacou. A versão corrigida dá parcial provimento para restringir o ressarcimento à compensação, na linha do item 74. 2) Como o incentivo só foi fruído a partir de 2024, todo o período está sob a Lei 14.789/2023: é a mesma pergunta dos itens 66 e 77, com o fundamento uniformizado. 3) Pedido de sustentação oral por videoconferência pendente de verificação. 4) Retirados a questão do Tema 1.416/STJ, não suscitada pelas partes, e o parágrafo sobre reconstituição da escrita fiscal, que não consta da sentença nem das razões relatadas.",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "Dalete",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [
+        {
+          "id": "343867666",
+          "tipo": "Termo de Acordo 1.261/2020 e aditivos — crédito outorgado de ICMS"
+        },
+        {
+          "id": "343867737",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "343867739",
+          "tipo": "Contrarrazões (início da fruição em 2024)"
+        },
+        {
+          "id": "406285525",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        },
+        {
+          "id": "408491479",
+          "tipo": "Pedido de sustentação oral por videoconferência"
+        }
+      ],
+      "mpf": "ID 406285525",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Dispositivo",
+          "De 'nego provimento' para 'dou parcial provimento': a fundamentação vedava a repetição e a restituição concedidas na sentença e atacadas pela União",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Reescrita conforme o novo resultado; questões reduzidas a duas, retirada a do Tema 1.416/STJ, não suscitada",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Rodapé: o primeiro bloco, rotulado 'Jurisprudência relevante citada', era de dispositivos; corrigido o rótulo e depurados dispositivos e julgados",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "ID da sentença ausente: marcado [VALIDAR]; razões da União numeradas, com o Tema 1.262/STF invocado",
+          "Validar"
+        ],
+        [
+          "Voto",
+          "Crédito outorgado tratado como presumido: incluído o precedente 5028609-86.2018 (sinônimos), como no item 66",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Enfrentada a tese da isenção heterônoma (artigo 151, III, da CF)",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Retirados o parágrafo do Tema 1.416/STJ e o da reconstituição da escrita fiscal",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+          "Corrigido"
+        ],
+        [
+          "Acórdão",
+          "Incluído, com a composição da sessão de 30/11/2026",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Validar com o Relator o parcial provimento (restituição e repetição afastadas).",
+        "Indicar o ID da sentença, ausente da minuta original.",
+        "Verificar o pedido de habilitação para sustentação oral por videoconferência (ID 408491479) e sua comunicação para a sessão de 30/11/2026.",
+        "Confirmar se a sentença ou a inicial trataram de recomposição da escrita fiscal, mencionada na minuta original.",
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE) e confirmar que não há suspensão vigente no Tema 1.416/STJ."
+      ],
+      "minuta": true
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 72,
+      "processo": "5003166-35.2024.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "SITREL - SIDERURGICA TRES LAGOAS LTDA x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE - MS",
+      "exequente": "SITREL - SIDERURGICA TRES LAGOAS LTDA",
+      "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE - MS",
+      "assunto": "ICMS/ Imposto sobre Circulação de Mercadorias",
+      "grupo": null,
+      "tipo_caso": "ICMS/ Imposto sobre Circulação de Mercadorias",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Fora do tema? assunto na pauta: ICMS. Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "Dalete",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório)."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 73,
+      "processo": "5003301-81.2023.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE x DALE SORVETES LTDA - EPP",
+      "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "executado": "DALE SORVETES LTDA - EPP",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "3",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Rejeitada a preliminar; provimento da apelação e da remessa necessária para denegar a segurança",
+      "modelo": "matriz IRPJ · grupo 3 (denegação por falta de prova)",
+      "variacoes": [
+        "INE",
+        "EDO",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+      "peculiaridades": "Mandado de segurança impetrado em 25/04/2023. A inicial pediu genericamente a exclusão de benefícios fiscais de ICMS; a emenda delimitou a isenção e a redução de base de cálculo (Convênios ICMS 52/1991, 70/1990 e 112/2008). Não há ato concessivo de crédito presumido nos autos. A sentença, integrada em embargos, concedeu em parte: crédito presumido, demais benefícios com os requisitos do artigo 30 e certidão.",
+      "peculiaridades_relator": "1) Inversão do resultado: a minuta original desprovia; a corrigida denega, por falta de prova do crédito presumido e dos requisitos dos demais benefícios (ApelRemNec 5000093-87.2019.4.03.6143; ApelRemNec 5028609-86.2018.4.03.6100).",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "333970299",
+          "tipo": "Petição inicial"
+        },
+        {
+          "id": "333970483",
+          "tipo": "Emenda à inicial (acolhida)"
+        },
+        {
+          "id": "333970518",
+          "tipo": "Convênio ICMS 52/1991"
+        },
+        {
+          "id": "333970519",
+          "tipo": "Convênio ICMS 70/1990"
+        },
+        {
+          "id": "333970520",
+          "tipo": "Convênio ICMS 112/2008"
+        },
+        {
+          "id": "333970599",
+          "tipo": "Sentença"
+        },
+        {
+          "id": "333970615",
+          "tipo": "Decisão que acolheu os embargos de declaração (14/04/2025)"
+        },
+        {
+          "id": "333970616",
+          "tipo": "Apelação da União (09/06/2025)"
+        },
+        {
+          "id": "333970618",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "334116380",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        }
+      ],
+      "mpf": "ID 334116380",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Voto",
+          "«Na espécie» afirmava que não houve discussão de outras espécies de benefícios, o que contradiz a emenda (ID 333970483): reescrito",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Preliminar de inépcia: enfrentada e rejeitada",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Resultado: desprovimento → provimento para denegar a segurança (sem prova de crédito presumido; demais benefícios sem prova dos requisitos)",
+          "Ponto para o Relator"
+        ]
+      ],
+      "pendencias": [
+        "Validar com o Relator a inversão do resultado.",
+        "Confirmar a decisão de recebimento da apelação (ID 334506706)."
+      ],
+      "minuta": true
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 74,
+      "processo": "5004776-38.2024.4.03.6000",
+      "recurso": "APELAÇÃO CÍVEL",
+      "partes": "ADECOAGRO VALE DO IVINHEMA S.A. x DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "exequente": "ADECOAGRO VALE DO IVINHEMA S.A.",
+      "executado": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "2",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Parcial provimento da apelação para afastar a litispendência e, nos termos do artigo 1.013, § 3º, I, do CPC, conceder parcialmente a segurança",
+      "modelo": "matriz IRPJ · grupo 2 (extinção afastada e mérito julgado)",
+      "variacoes": [
+        "LIT",
+        "RES",
+        "CND",
+        "EDO",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+      "peculiaridades": "Mandado de segurança impetrado em 19/06/2024 para os fatos geradores até 31/12/2023 (Lei 12.973/2014). A sentença o extinguiu por litispendência com o MS 5006612-46.2024.4.03.6000, autuado depois (25/07/2024) e voltado ao período da Lei 14.789/2023. Crédito presumido em saídas interestaduais (Termos de Acordo 834/2005, 899/2006, 672/2011 e 698/2011).",
+      "peculiaridades_relator": "1) Julgar o mérito desde logo (causa madura) ou devolver à origem? A minuta original devolvia; a corrigida julga. 2) Restituição administrativa afastada (Tema 831/STF; Súmulas 269 e 271/STF).",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "346922856",
+          "tipo": "Petição inicial (19/06/2024)"
+        },
+        {
+          "id": "346922866",
+          "tipo": "Termo de Acordo 834/2005"
+        },
+        {
+          "id": "346922867",
+          "tipo": "Termo de Acordo 899/2006"
+        },
+        {
+          "id": "346922864",
+          "tipo": "Termo de Acordo 672/2011"
+        },
+        {
+          "id": "346922865",
+          "tipo": "Termo de Acordo 698/2011"
+        },
+        {
+          "id": "346923593",
+          "tipo": "Sentença (02/07/2025)"
+        },
+        {
+          "id": "346923596",
+          "tipo": "Embargos de declaração da impetrante"
+        },
+        {
+          "id": "346923599",
+          "tipo": "Decisão que rejeitou os embargos (10/10/2025)"
+        },
+        {
+          "id": "346923601",
+          "tipo": "Apelação da impetrante (05/11/2025)"
+        },
+        {
+          "id": "346923605",
+          "tipo": "Contrarrazões da União"
+        },
+        {
+          "id": "347479460",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        }
+      ],
+      "mpf": "ID 347479460",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Relatório",
+          "«ação declaratória» → mandado de segurança",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "Embargos de declaração e pedidos (restituição, compensação e certidão) omitidos: incluídos",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "«adição do ICMS na base de cálculo» → exclusão do crédito presumido das bases do IRPJ e da CSLL",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Precedente CC 5013492-75.2025 citado com número de MS de outra região (5003539-85.2023.4.05.6102): retirado",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Resultado: retorno à origem → julgamento do mérito (artigo 1.013, § 3º, I, do CPC); afastada também pelo critério da ação anterior",
+          "Ponto para o Relator"
+        ],
+        [
+          "Voto",
+          "Decisão dos embargos (ID 346923599) não reconheceu contextos distintos: admitiu que causa de pedir e pedido não são rigorosamente iguais e manteve a extinção por identidade de resultado prático. Texto ajustado e acrescentado que o resultado prático também é diverso (períodos distintos)",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Validar com o Relator o julgamento do mérito nesta instância (causa madura conferida nos autos: informações prestadas, União no feito, Termos de Acordo juntados)."
+      ],
+      "minuta": true
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 75,
+      "processo": "5004985-07.2024.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "ABV COMERCIO DE ALIMENTOS LTDA x DELEGADO DA RECEITA FEDERAL EM CAMPO GRANDE",
+      "exequente": "ABV COMERCIO DE ALIMENTOS LTDA",
+      "executado": "DELEGADO DA RECEITA FEDERAL EM CAMPO GRANDE",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Desprovimento da apelação da União e da remessa necessária [VALIDAR: autuação registra a impetrante como apelante]",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
+      "variacoes": [
+        "L14",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+      "peculiaridades": "Mandado de segurança (ABV Comércio de Alimentos Ltda.), 4ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Acordo 1.377/2022 (ID 323827340). A sentença concedeu a exclusão inclusive após a Lei 14.789/2023, com compensação após 25/06/2019, e condenou a União a reembolsar custas. A autuação do PJe registra a impetrante como apelante e a União como apelada, ao contrário do que relata a minuta.",
+      "peculiaridades_relator": "1) Divergência entre a autuação e a minuta: o PJe registra ABV Comércio de Alimentos Ltda. como apelante e a União como apelada; a minuta relata e julga apelação da União (ID 323827362). Se houver apelação da impetrante, ela não foi examinada. Conferir a peça antes do julgamento. 2) A sentença concedeu expressamente 'mesmo após a Lei 14.789/2023': mesma pergunta dos itens 66 e 77, com o fundamento uniformizado. 3) Retirados, por não pedidos nem concedidos, o parágrafo do Tema 1.416/STJ e o da restituição administrativa.",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "323827340",
+          "tipo": "Acordo 1.377/2022 — crédito presumido de ICMS"
+        },
+        {
+          "id": "323827360",
+          "tipo": "Sentença"
+        },
+        {
+          "id": "323827362",
+          "tipo": "Apelação (da União, segundo a minuta)"
+        },
+        {
+          "id": "323827364",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "327426691",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        },
+        {
+          "id": "327555419",
+          "tipo": "Recebimento da apelação no efeito devolutivo"
+        }
+      ],
+      "mpf": "ID 327426691",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Relatório",
+          "Apelante divergente entre a autuação (impetrante) e a minuta (União): marcado [VALIDAR]",
+          "Validar"
+        ],
+        [
+          "Ementa",
+          "Reescrita no padrão do gabinete, com uma questão em discussão; retirada a questão da restituição, não pedida nem concedida",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Rodapé: súmulas retiradas da lista de dispositivos ('Súmula 271/STF do STF' duplicava o tribunal); julgados com relator e data",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "Razões da União na fórmula do gabinete, com o pedido",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Enfrentadas as teses (2), (3), (4), (5) e (6) da União, que a minuta original não respondia uma a uma",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Transcrições longas substituídas por fundamentação direta, como no item 66",
+          "Aprimorado"
+        ],
+        [
+          "Voto",
+          "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+          "Corrigido"
+        ],
+        [
+          "Acórdão",
+          "Incluído, com a composição da sessão de 30/11/2026",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Conferir quem apelou: a autuação registra a impetrante como apelante; a minuta relata apelação da União (ID 323827362). Retificar a autuação ou incluir no voto o recurso da impetrante.",
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+        "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação."
+      ],
+      "minuta": true
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 76,
+      "processo": "5004846-89.2023.4.03.6000",
+      "recurso": "Apelação Cível",
+      "partes": "ELIAS DURKS MENEZES x ESTADO DE MATO GROSSO DO SUL",
+      "exequente": "ELIAS DURKS MENEZES",
+      "executado": "ESTADO DE MATO GROSSO DO SUL",
+      "assunto": "Não padronizado",
+      "grupo": null,
+      "tipo_caso": "Não padronizado",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Fora do tema? parte contra o Estado de MS, assunto não padronizado: provavelmente outro tema. Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "Rodrigo",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 77,
+      "processo": "5009283-76.2023.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x NAYR INDUSTRIA, COMERCIO E DISTRIBUICAO DE PRODUTOS LTDA",
+      "exequente": "NAYR INDUSTRIA, COMERCIO E DISTRIBUICAO DE PRODUTOS LTDA",
+      "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Apelação conhecida em parte e desprovida; remessa necessária desprovida",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida) com conhecimento parcial",
+      "variacoes": [
+        "DIS",
+        "CTR",
+        "INE",
+        "L14",
+        "EDO",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+      "peculiaridades": "Mandado de segurança de empresa em recuperação judicial; crédito presumido de ICMS (Termo de Acordo 776/2005 e aditivos). A sentença concedeu em parte, só quanto ao crédito presumido, sem limite temporal. A União ataca benefícios desonerativos não contemplados na sentença (razões em parte dissociadas) e pede, eventualmente, limitação à Lei 14.789/2023. A impetrante pede reforma em contrarrazões (dispensa e reversão de reservas).",
+      "peculiaridades_relator": "1) Manter a exclusão sem limite temporal (pergunta da Lei 14.789/2023). 2) Conhecimento parcial por razões dissociadas, no padrão da ApCiv 5008404-35.2024.4.03.6000.",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "347405378",
+          "tipo": "Termo de Acordo 776/2005"
+        },
+        {
+          "id": "347405379",
+          "tipo": "Aditivos do Termo de Acordo (crédito presumido no 3º e no 5º)"
+        },
+        {
+          "id": "347405675",
+          "tipo": "Sentença (04/09/2024)"
+        },
+        {
+          "id": "347405678",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "347405681",
+          "tipo": "Embargos de declaração da impetrante"
+        },
+        {
+          "id": "347405687",
+          "tipo": "Decisão que rejeitou os embargos (29/10/2025)"
+        },
+        {
+          "id": "347405690",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "350001569",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        }
+      ],
+      "mpf": "ID 350001569",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Relatório",
+          "Embargos de declaração na origem e pedido eventual da União (Lei 14.789/2023) omitidos: incluídos",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Conhecimento parcial (razões dissociadas) e pedido em contrarrazões não conhecido: incluídos",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Preliminar de inépcia não enfrentada: incluída e rejeitada",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Faltava «É como voto.»: incluído",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "«conforme o entendimento aplicado no voto»: substituído pelos fundamentos",
+          "Corrigido"
+        ],
+        [
+          "Ementa",
+          "Rodapé citava artigo 97 da CF e artigo 1.021, § 4º, do CPC, estranhos ao caso: retirados",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Confirmar se há ordem de suspensão vigente no Tema 1.182/STJ."
+      ],
+      "minuta": true
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 78,
+      "processo": "5009388-53.2023.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS x LONTANO TRANSPORTES LTDA",
+      "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS",
+      "executado": "LONTANO TRANSPORTES LTDA",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": "1",
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "Desprovimento da apelação e da remessa necessária",
+      "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com recomposição de prejuízo fiscal e base negativa",
+      "variacoes": [
+        "L14",
+        "EDO",
+        "ORI"
+      ],
+      "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+      "peculiaridades": "Mandado de segurança de transportadora (Lontano Transportes Ltda.), 4ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Convênio ICMS 106/1996 (ID 318741801), com registros fiscais (ID 318741800). Sentença parcial, integrada em embargos (ID 318741825): exclusão sem condições, abstenção de cobrança, compensação após 23/11/2018 e recomposição de prejuízo fiscal e base negativa; União condenada em metade das custas. Minuta alterada no PJe depois da extração das 16h (+20 caracteres); corrigida sobre a versão nova.",
+      "peculiaridades_relator": "1) A sentença, ao conceder a recomposição do prejuízo fiscal e da base negativa, refere o 'ICMS incidente sobre valores oriundos da repetição de indébito', e não os créditos presumidos: aparenta erro material. A versão corrigida explicita o alcance correto e marca [VALIDAR]; decidir se corrige de ofício (artigo 494, I, do CPC). 2) A sentença foi parcial e condenou a União em metade das custas, mas a minuta não identifica o que foi negado. 3) Na minuta original havia, após o parágrafo da escrita fiscal, o fecho de um julgado do STJ sobre REINTEGRA, PIS e COFINS, alheio ao caso: retirado. 4) Lei 14.789/2023: fundamento uniformizado com o item 66.",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "Minutada"
+      },
+      "pecas": [
+        {
+          "id": "318741800",
+          "tipo": "Registros fiscais de apuração"
+        },
+        {
+          "id": "318741801",
+          "tipo": "Convênio ICMS 106/1996 — crédito presumido no transporte"
+        },
+        {
+          "id": "318741815",
+          "tipo": "Sentença"
+        },
+        {
+          "id": "318741825",
+          "tipo": "Decisão dos embargos de declaração"
+        },
+        {
+          "id": "318742186",
+          "tipo": "Apelação da União"
+        },
+        {
+          "id": "318742188",
+          "tipo": "Contrarrazões"
+        },
+        {
+          "id": "319062608",
+          "tipo": "Parecer da Procuradoria Regional da República"
+        },
+        {
+          "id": "321997073",
+          "tipo": "Recebimento da apelação no efeito devolutivo"
+        }
+      ],
+      "mpf": "ID 319062608",
+      "triagem": {},
+      "ajustes": [
+        [
+          "Seção",
+          "Ajuste",
+          "Tipo"
+        ],
+        [
+          "Voto",
+          "Retirado o fecho de julgado do STJ sobre REINTEGRA, PIS e COFINS, transcrito no meio do voto e alheio ao caso",
+          "Corrigido"
+        ],
+        [
+          "Relatório",
+          "Sentença organizada em quatro itens; marcada [VALIDAR] a referência a 'ICMS incidente sobre valores oriundos da repetição de indébito'",
+          "Validar"
+        ],
+        [
+          "Ementa",
+          "Reescrita no padrão do gabinete; rodapé com o Convênio ICMS 106/1996 e o EDcl no REsp 1.896.801, usados no voto; súmulas e temas não usados retirados",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Recomposição do prejuízo fiscal e da base negativa com alcance explicitado (créditos presumidos)",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Enfrentadas as teses (3) e (5) da União",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
+          "Corrigido"
+        ],
+        [
+          "Voto",
+          "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
+          "Corrigido"
+        ],
+        [
+          "Acórdão",
+          "Incluído, com a composição da sessão de 30/11/2026",
+          "Corrigido"
+        ]
+      ],
+      "pendencias": [
+        "Confirmar se a referência da sentença ao 'ICMS incidente sobre valores oriundos da repetição de indébito' é erro material.",
+        "Identificar a parte do pedido negada na sentença (concessão parcial; custas pela metade).",
+        "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE) e confirmar que não há suspensão vigente no Tema 1.416/STJ."
+      ],
+      "minuta": true
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 79,
+      "processo": "5002294-20.2024.4.03.6000",
+      "recurso": "APELAÇÃO CÍVEL",
+      "partes": "COPASUL COOPERATIVA AGRICOLA SUL MATOGROSSENSE x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "exequente": "COPASUL COOPERATIVA AGRICOLA SUL MATOGROSSENSE",
+      "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": null,
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 81,
+      "processo": "5012157-97.2024.4.03.6000",
+      "recurso": "APELAÇÃO CÍVEL",
+      "partes": "AMCOR FLEXIBLES TRES LAGOAS LTDA x DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "exequente": "AMCOR FLEXIBLES TRES LAGOAS LTDA",
+      "executado": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+      "assunto": "PIS",
+      "grupo": null,
+      "tipo_caso": "PIS",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Fora do tema? assunto na pauta: PIS. Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 97,
+      "processo": "0008052-22.2011.4.03.6000",
+      "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+      "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x ALDO LOUREIRO DE ALMEIDA",
+      "exequente": "ALDO LOUREIRO DE ALMEIDA",
+      "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+      "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "grupo": null,
+      "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Fora do tema? pessoa física, processo de 2011: conferir se é o mesmo tema. Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "José",
+        "correcao": "Bruno",
+        "situacao": "A minutar"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
+      ],
+      "minuta": false
+    },
+    {
+      "sessao": "2026-11-30",
+      "item": 123,
+      "processo": "5003563-54.2025.4.03.6002",
+      "recurso": "REMESSA NECESSÁRIA CÍVEL",
+      "partes": "TORK OIL SAN PEDRO LTDA x DELEGADO DA RECEITA FEDERAL DE CAMPO GRANDE",
+      "exequente": "TORK OIL SAN PEDRO LTDA",
+      "executado": "DELEGADO DA RECEITA FEDERAL DE CAMPO GRANDE",
+      "assunto": "PIS",
+      "grupo": null,
+      "tipo_caso": "PIS",
+      "resultado": "",
+      "modelo": "",
+      "variacoes": [],
+      "observacao": "Fora do tema? assunto na pauta: PIS (remessa necessária). Sem autos e sem minuta no lote.",
+      "peculiaridades": "",
+      "peculiaridades_relator": "",
+      "orientacao": "",
+      "equipe": {
+        "minuta": "Dalete",
+        "correcao": "Bruno",
+        "situacao": "Corrigida"
+      },
+      "pecas": [],
+      "mpf": "",
+      "triagem": {},
+      "ajustes": [],
+      "pendencias": [
+        "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório).",
+        "Marcado como corrigido no lote \"A corrigir\": conferir antes de refazer."
+      ],
+      "minuta": false
     }
-   ],
-   "mpf": "ID 312661710",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Ementa",
-     "Reescrita no padrão do gabinete, com uma questão em discussão",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Rodapé: súmulas retiradas da lista de dispositivos; AgInt no REsp 2.005.781 duplicado na jurisprudência; retirados dispositivos e julgados não usados; incluídos relator e data",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Sentença e razões da União na fórmula do gabinete, com o pedido",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Transcrições longas substituídas por fundamentação direta, como no item 66",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Enfrentadas as teses (2) e (4) da União",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
-     "Corrigido"
-    ],
-    [
-     "Acórdão",
-     "Incluído, com a composição da sessão de 30/11/2026",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
-    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
-    "Confirmar nos autos o Decreto estadual 12.056/2006 (ID 312598538) como ato concessivo de crédito presumido."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 64,
-   "processo": "5002692-64.2024.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "MPS DISTRIBUIDORA MERCANTIL LTDA x UNIAO FEDERAL - FAZENDA NACIONAL",
-   "exequente": "MPS DISTRIBUIDORA MERCANTIL LTDA",
-   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Desprovimento da apelação da União e da remessa necessária; provimento da apelação da impetrante para estender a exclusão ao PIS e à COFINS",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com extensão ao PIS e à COFINS (Tema 843/STF)",
-   "variacoes": [
-    "L14",
-    "EDO",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
-   "peculiaridades": "Apelações cruzadas em mandado de segurança (MPS Distribuidora Mercantil Ltda.), 2ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Acordo 724/2012 e aditivos (ID 356256987), corroborado pelas GIABF (ID 356256988). A sentença, integrada em embargos, concedeu só quanto ao IRPJ e à CSLL; a impetrante pede a extensão ao PIS e à COFINS. Minuta alterada no PJe depois da extração das 16h (+502 caracteres); corrigida sobre a versão nova.",
-   "peculiaridades_relator": "1) Provimento à impetrante pelo Tema 843/STF, julgado em 07/10/2026 (7 a 4); tese transcrita conforme a divulgada; acórdão ainda não publicado e sem notícia de modulação. 2) A ementa original anunciava a questão do cabimento da remessa necessária (artigo 496, § 4º, do CPC), não tratada no voto, que conhece da remessa e lhe nega provimento: questão retirada. 3) Enfrentado o pedido de efeito suspensivo da União, que a minuta original não apreciava. 4) Lei 14.789/2023: fundamento uniformizado com o item 66.",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "Dalete",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [
-    {
-     "id": "356256983",
-     "tipo": "Documento constitutivo da impetrante"
-    },
-    {
-     "id": "356256987",
-     "tipo": "Acordo 724/2012 e aditivos — crédito presumido de ICMS"
-    },
-    {
-     "id": "356256988",
-     "tipo": "Guias de Informação e Apuração de Benefício Fiscal"
-    },
-    {
-     "id": "356257005",
-     "tipo": "Sentença"
-    },
-    {
-     "id": "356257007",
-     "tipo": "Apelação da União"
-    },
-    {
-     "id": "356257014",
-     "tipo": "Decisão dos embargos de declaração"
-    },
-    {
-     "id": "356257017",
-     "tipo": "Apelação da impetrante"
-    },
-    {
-     "id": "356257019",
-     "tipo": "Contrarrazões da impetrante"
-    },
-    {
-     "id": "356257021",
-     "tipo": "Contrarrazões da União"
-    },
-    {
-     "id": "359322018",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    }
-   ],
-   "mpf": "ID 359322018",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Ementa",
-     "Retirada a questão do cabimento da remessa necessária (artigo 496, § 4º, do CPC), anunciada e não decidida; questões reduzidas a duas",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Rodapé depurado: retirados dispositivos e temas não usados (artigos 97, 151, 153, 155 da CF; artigo 1.021, § 4º, do CPC; Lei 4.506/1964; Temas 69 e 1.125; Súmula Vinculante 10; Súmula 512/STF); julgados com relator e data; Tema 843 com a data do julgamento",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Razões da União numeradas, com a preliminar de efeito suspensivo; razões e pedido da impetrante; sentença com a decisão dos embargos",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Apreciado o pedido de efeito suspensivo, que a minuta original não enfrentava",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Tema 843/STF com a data do julgamento (07/10/2026) e a tese conferida em fonte pública",
-     "Validado"
-    ],
-    [
-     "Voto",
-     "Transcrições longas substituídas por fundamentação direta, como no item 66",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Retirado o parágrafo do Tema 1.416/STJ, não pedido; ponto em pendência",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
-     "Corrigido"
-    ],
-    [
-     "Acórdão",
-     "Incluído, com a composição da sessão de 30/11/2026",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Acompanhar a publicação do acórdão do RE 835.818 (Tema 843) e eventual embargos com pedido de modulação de efeitos antes da sessão de 30/11/2026.",
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
-    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance as apelações."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 65,
-   "processo": "5003091-93.2024.4.03.6000",
-   "recurso": "APELAÇÃO CÍVEL",
-   "partes": "ROYAL AGRO CEREAIS LTDA x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "exequente": "ROYAL AGRO CEREAIS LTDA",
-   "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "Dalete",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 66,
-   "processo": "5004504-44.2024.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x ROYAL AGRO CEREAIS LTDA",
-   "exequente": "ROYAL AGRO CEREAIS LTDA",
-   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Desprovimento da apelação e da remessa necessária",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
-   "variacoes": [
-    "L14",
-    "OUT",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
-   "peculiaridades": "Mandado de segurança; crédito outorgado de ICMS (Termos de Acordo 1.309/2021 e 1.371/2022). A sentença excluiu os créditos das bases do IRPJ e da CSLL, com compensação dos valores recolhidos a partir de 01/01/2024 (período da Lei 14.789/2023). A União sustenta a sistemática da MP 1.185/2023 e da Lei 14.789/2023.",
-   "peculiaridades_relator": "1) Manter a exclusão do crédito presumido depois da Lei 14.789/2023? A versão corrigida mantém, com apoio no item 5 da ementa dos embargos na ApelRemNec 5000161-72.2019.4.03.6002 (DJEN 06/05/2026).",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
-    {
-     "id": "317089711",
-     "tipo": "Petição inicial"
-    },
-    {
-     "id": "317089836",
-     "tipo": "Termos de Acordo 1.309/2021 e 1.371/2022 (crédito outorgado)"
-    },
-    {
-     "id": "317089875",
-     "tipo": "Sentença (27/01/2025)"
-    },
-    {
-     "id": "317089934",
-     "tipo": "Apelação da União"
-    },
-    {
-     "id": "317089937",
-     "tipo": "Contrarrazões"
-    },
-    {
-     "id": "318024412",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    }
-   ],
-   "mpf": "ID 318024412",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Relatório",
-     "Teses da União omitidas (MP 1.185/2023 e Lei 14.789/2023, habilitação prévia; restrições à compensação): incluídas",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Item 3 aplicava o artigo 30 da Lei 12.973/2014 a período posterior à sua revogação: reescrito pela Lei 14.789/2023",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Crédito outorgado tratado como presumido sem fundamento: incluído o precedente 5028609-86.2018 (sinônimos)",
-     "Aprimorado"
-    ],
-    [
-     "Ementa",
-     "Rodapé: incluída a ApelRemNec 5008172-52.2022.4.03.6110, usada no voto",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vindo da minuta original.",
-    "Confirmar se há ordem de suspensão vigente no Tema 1.182/STJ."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 67,
-   "processo": "5004672-46.2024.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS x PLASTRELA EMBALAGENS FLEXIVEIS LTDA",
-   "exequente": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS",
-   "executado": "PLASTRELA EMBALAGENS FLEXIVEIS LTDA",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 69,
-   "processo": "5013703-56.2025.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "BEM INDUSTRIAS DE SEMENTES LTDA x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "exequente": "BEM INDUSTRIAS DE SEMENTES LTDA",
-   "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "Dalete",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 70,
-   "processo": "5000123-38.2025.4.03.6006",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE x NOVO MUNDO INDUSTRIA E COMERCIO DE ALIMENTOS LTDA",
-   "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "executado": "NOVO MUNDO INDUSTRIA E COMERCIO DE ALIMENTOS LTDA",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Parcial provimento da apelação e da remessa necessária para afastar a repetição e a restituição administrativa do indébito, mantida a compensação",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com restituição afastada",
-   "variacoes": [
-    "L14",
-    "OUT",
-    "RES",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
-   "peculiaridades": "Mandado de segurança (Novo Mundo Indústria e Comércio de Alimentos Ltda.), 1ª Vara Federal de Naviraí. Crédito outorgado de ICMS pelo Termo de Acordo 1.261/2020 e aditivos (ID 343867666), fruído só a partir de 2024, segundo as contrarrazões (ID 343867739). A sentença concedeu a exclusão e autorizou repetição ou compensação, inclusive por requerimento administrativo. A União apela também contra a restituição (Súmulas 269 e 271/STF; Tema 1.262/STF). Há pedido de sustentação oral por videoconferência (ID 408491479).",
-   "peculiaridades_relator": "1) Inversão parcial do resultado: a minuta original negava provimento, mas sua própria fundamentação vedava a restituição e a repetição em mandado de segurança, que a sentença concedeu e a União atacou. A versão corrigida dá parcial provimento para restringir o ressarcimento à compensação, na linha do item 74. 2) Como o incentivo só foi fruído a partir de 2024, todo o período está sob a Lei 14.789/2023: é a mesma pergunta dos itens 66 e 77, com o fundamento uniformizado. 3) Pedido de sustentação oral por videoconferência pendente de verificação. 4) Retirados a questão do Tema 1.416/STJ, não suscitada pelas partes, e o parágrafo sobre reconstituição da escrita fiscal, que não consta da sentença nem das razões relatadas.",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "Dalete",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [
-    {
-     "id": "343867666",
-     "tipo": "Termo de Acordo 1.261/2020 e aditivos — crédito outorgado de ICMS"
-    },
-    {
-     "id": "343867737",
-     "tipo": "Apelação da União"
-    },
-    {
-     "id": "343867739",
-     "tipo": "Contrarrazões (início da fruição em 2024)"
-    },
-    {
-     "id": "406285525",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    },
-    {
-     "id": "408491479",
-     "tipo": "Pedido de sustentação oral por videoconferência"
-    }
-   ],
-   "mpf": "ID 406285525",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Dispositivo",
-     "De 'nego provimento' para 'dou parcial provimento': a fundamentação vedava a repetição e a restituição concedidas na sentença e atacadas pela União",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Reescrita conforme o novo resultado; questões reduzidas a duas, retirada a do Tema 1.416/STJ, não suscitada",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Rodapé: o primeiro bloco, rotulado 'Jurisprudência relevante citada', era de dispositivos; corrigido o rótulo e depurados dispositivos e julgados",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "ID da sentença ausente: marcado [VALIDAR]; razões da União numeradas, com o Tema 1.262/STF invocado",
-     "Validar"
-    ],
-    [
-     "Voto",
-     "Crédito outorgado tratado como presumido: incluído o precedente 5028609-86.2018 (sinônimos), como no item 66",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Enfrentada a tese da isenção heterônoma (artigo 151, III, da CF)",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Retirados o parágrafo do Tema 1.416/STJ e o da reconstituição da escrita fiscal",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
-     "Corrigido"
-    ],
-    [
-     "Acórdão",
-     "Incluído, com a composição da sessão de 30/11/2026",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Validar com o Relator o parcial provimento (restituição e repetição afastadas).",
-    "Indicar o ID da sentença, ausente da minuta original.",
-    "Verificar o pedido de habilitação para sustentação oral por videoconferência (ID 408491479) e sua comunicação para a sessão de 30/11/2026.",
-    "Confirmar se a sentença ou a inicial trataram de recomposição da escrita fiscal, mencionada na minuta original.",
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE) e confirmar que não há suspensão vigente no Tema 1.416/STJ."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 72,
-   "processo": "5003166-35.2024.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "SITREL - SIDERURGICA TRES LAGOAS LTDA x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE - MS",
-   "exequente": "SITREL - SIDERURGICA TRES LAGOAS LTDA",
-   "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE - MS",
-   "assunto": "ICMS/ Imposto sobre Circulação de Mercadorias",
-   "grupo": null,
-   "tipo_caso": "ICMS/ Imposto sobre Circulação de Mercadorias",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Fora do tema? assunto na pauta: ICMS. Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "Dalete",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório)."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 73,
-   "processo": "5003301-81.2023.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE x DALE SORVETES LTDA - EPP",
-   "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "executado": "DALE SORVETES LTDA - EPP",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "3",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Rejeitada a preliminar; provimento da apelação e da remessa necessária para denegar a segurança",
-   "modelo": "matriz IRPJ · grupo 3 (denegação por falta de prova)",
-   "variacoes": [
-    "INE",
-    "EDO",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
-   "peculiaridades": "Mandado de segurança impetrado em 25/04/2023. A inicial pediu genericamente a exclusão de benefícios fiscais de ICMS; a emenda delimitou a isenção e a redução de base de cálculo (Convênios ICMS 52/1991, 70/1990 e 112/2008). Não há ato concessivo de crédito presumido nos autos. A sentença, integrada em embargos, concedeu em parte: crédito presumido, demais benefícios com os requisitos do artigo 30 e certidão.",
-   "peculiaridades_relator": "1) Inversão do resultado: a minuta original desprovia; a corrigida denega, por falta de prova do crédito presumido e dos requisitos dos demais benefícios (ApelRemNec 5000093-87.2019.4.03.6143; ApelRemNec 5028609-86.2018.4.03.6100).",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
-    {
-     "id": "333970299",
-     "tipo": "Petição inicial"
-    },
-    {
-     "id": "333970483",
-     "tipo": "Emenda à inicial (acolhida)"
-    },
-    {
-     "id": "333970518",
-     "tipo": "Convênio ICMS 52/1991"
-    },
-    {
-     "id": "333970519",
-     "tipo": "Convênio ICMS 70/1990"
-    },
-    {
-     "id": "333970520",
-     "tipo": "Convênio ICMS 112/2008"
-    },
-    {
-     "id": "333970599",
-     "tipo": "Sentença"
-    },
-    {
-     "id": "333970615",
-     "tipo": "Decisão que acolheu os embargos de declaração (14/04/2025)"
-    },
-    {
-     "id": "333970616",
-     "tipo": "Apelação da União (09/06/2025)"
-    },
-    {
-     "id": "333970618",
-     "tipo": "Contrarrazões"
-    },
-    {
-     "id": "334116380",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    }
-   ],
-   "mpf": "ID 334116380",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Voto",
-     "«Na espécie» afirmava que não houve discussão de outras espécies de benefícios, o que contradiz a emenda (ID 333970483): reescrito",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Preliminar de inépcia: enfrentada e rejeitada",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Resultado: desprovimento → provimento para denegar a segurança (sem prova de crédito presumido; demais benefícios sem prova dos requisitos)",
-     "Ponto para o Relator"
-    ]
-   ],
-   "pendencias": [
-    "Validar com o Relator a inversão do resultado.",
-    "Confirmar a decisão de recebimento da apelação (ID 334506706)."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 74,
-   "processo": "5004776-38.2024.4.03.6000",
-   "recurso": "APELAÇÃO CÍVEL",
-   "partes": "ADECOAGRO VALE DO IVINHEMA S.A. x DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "exequente": "ADECOAGRO VALE DO IVINHEMA S.A.",
-   "executado": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "2",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Parcial provimento da apelação para afastar a litispendência e, nos termos do artigo 1.013, § 3º, I, do CPC, conceder parcialmente a segurança",
-   "modelo": "matriz IRPJ · grupo 2 (extinção afastada e mérito julgado)",
-   "variacoes": [
-    "LIT",
-    "RES",
-    "CND",
-    "EDO",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
-   "peculiaridades": "Mandado de segurança impetrado em 19/06/2024 para os fatos geradores até 31/12/2023 (Lei 12.973/2014). A sentença o extinguiu por litispendência com o MS 5006612-46.2024.4.03.6000, autuado depois (25/07/2024) e voltado ao período da Lei 14.789/2023. Crédito presumido em saídas interestaduais (Termos de Acordo 834/2005, 899/2006, 672/2011 e 698/2011).",
-   "peculiaridades_relator": "1) Julgar o mérito desde logo (causa madura) ou devolver à origem? A minuta original devolvia; a corrigida julga. 2) Restituição administrativa afastada (Tema 831/STF; Súmulas 269 e 271/STF).",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
-    {
-     "id": "346922856",
-     "tipo": "Petição inicial (19/06/2024)"
-    },
-    {
-     "id": "346922866",
-     "tipo": "Termo de Acordo 834/2005"
-    },
-    {
-     "id": "346922867",
-     "tipo": "Termo de Acordo 899/2006"
-    },
-    {
-     "id": "346922864",
-     "tipo": "Termo de Acordo 672/2011"
-    },
-    {
-     "id": "346922865",
-     "tipo": "Termo de Acordo 698/2011"
-    },
-    {
-     "id": "346923593",
-     "tipo": "Sentença (02/07/2025)"
-    },
-    {
-     "id": "346923596",
-     "tipo": "Embargos de declaração da impetrante"
-    },
-    {
-     "id": "346923599",
-     "tipo": "Decisão que rejeitou os embargos (10/10/2025)"
-    },
-    {
-     "id": "346923601",
-     "tipo": "Apelação da impetrante (05/11/2025)"
-    },
-    {
-     "id": "346923605",
-     "tipo": "Contrarrazões da União"
-    },
-    {
-     "id": "347479460",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    }
-   ],
-   "mpf": "ID 347479460",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Relatório",
-     "«ação declaratória» → mandado de segurança",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Embargos de declaração e pedidos (restituição, compensação e certidão) omitidos: incluídos",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "«adição do ICMS na base de cálculo» → exclusão do crédito presumido das bases do IRPJ e da CSLL",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Precedente CC 5013492-75.2025 citado com número de MS de outra região (5003539-85.2023.4.05.6102): retirado",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Resultado: retorno à origem → julgamento do mérito (artigo 1.013, § 3º, I, do CPC); afastada também pelo critério da ação anterior",
-     "Ponto para o Relator"
-    ]
-   ],
-   "pendencias": [
-    "Validar com o Relator o julgamento do mérito nesta instância."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 75,
-   "processo": "5004985-07.2024.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "ABV COMERCIO DE ALIMENTOS LTDA x DELEGADO DA RECEITA FEDERAL EM CAMPO GRANDE",
-   "exequente": "ABV COMERCIO DE ALIMENTOS LTDA",
-   "executado": "DELEGADO DA RECEITA FEDERAL EM CAMPO GRANDE",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Desprovimento da apelação da União e da remessa necessária [VALIDAR: autuação registra a impetrante como apelante]",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida)",
-   "variacoes": [
-    "L14",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
-   "peculiaridades": "Mandado de segurança (ABV Comércio de Alimentos Ltda.), 4ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Acordo 1.377/2022 (ID 323827340). A sentença concedeu a exclusão inclusive após a Lei 14.789/2023, com compensação após 25/06/2019, e condenou a União a reembolsar custas. A autuação do PJe registra a impetrante como apelante e a União como apelada, ao contrário do que relata a minuta.",
-   "peculiaridades_relator": "1) Divergência entre a autuação e a minuta: o PJe registra ABV Comércio de Alimentos Ltda. como apelante e a União como apelada; a minuta relata e julga apelação da União (ID 323827362). Se houver apelação da impetrante, ela não foi examinada. Conferir a peça antes do julgamento. 2) A sentença concedeu expressamente 'mesmo após a Lei 14.789/2023': mesma pergunta dos itens 66 e 77, com o fundamento uniformizado. 3) Retirados, por não pedidos nem concedidos, o parágrafo do Tema 1.416/STJ e o da restituição administrativa.",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
-    {
-     "id": "323827340",
-     "tipo": "Acordo 1.377/2022 — crédito presumido de ICMS"
-    },
-    {
-     "id": "323827360",
-     "tipo": "Sentença"
-    },
-    {
-     "id": "323827362",
-     "tipo": "Apelação (da União, segundo a minuta)"
-    },
-    {
-     "id": "323827364",
-     "tipo": "Contrarrazões"
-    },
-    {
-     "id": "327426691",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    },
-    {
-     "id": "327555419",
-     "tipo": "Recebimento da apelação no efeito devolutivo"
-    }
-   ],
-   "mpf": "ID 327426691",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Relatório",
-     "Apelante divergente entre a autuação (impetrante) e a minuta (União): marcado [VALIDAR]",
-     "Validar"
-    ],
-    [
-     "Ementa",
-     "Reescrita no padrão do gabinete, com uma questão em discussão; retirada a questão da restituição, não pedida nem concedida",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Rodapé: súmulas retiradas da lista de dispositivos ('Súmula 271/STF do STF' duplicava o tribunal); julgados com relator e data",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Razões da União na fórmula do gabinete, com o pedido",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Enfrentadas as teses (2), (3), (4), (5) e (6) da União, que a minuta original não respondia uma a uma",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Transcrições longas substituídas por fundamentação direta, como no item 66",
-     "Aprimorado"
-    ],
-    [
-     "Voto",
-     "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
-     "Corrigido"
-    ],
-    [
-     "Acórdão",
-     "Incluído, com a composição da sessão de 30/11/2026",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Conferir quem apelou: a autuação registra a impetrante como apelante; a minuta relata apelação da União (ID 323827362). Retificar a autuação ou incluir no voto o recurso da impetrante.",
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
-    "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 76,
-   "processo": "5004846-89.2023.4.03.6000",
-   "recurso": "Apelação Cível",
-   "partes": "ELIAS DURKS MENEZES x ESTADO DE MATO GROSSO DO SUL",
-   "exequente": "ELIAS DURKS MENEZES",
-   "executado": "ESTADO DE MATO GROSSO DO SUL",
-   "assunto": "Não padronizado",
-   "grupo": null,
-   "tipo_caso": "Não padronizado",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Fora do tema? parte contra o Estado de MS, assunto não padronizado: provavelmente outro tema. Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "Rodrigo",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 77,
-   "processo": "5009283-76.2023.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x NAYR INDUSTRIA, COMERCIO E DISTRIBUICAO DE PRODUTOS LTDA",
-   "exequente": "NAYR INDUSTRIA, COMERCIO E DISTRIBUICAO DE PRODUTOS LTDA",
-   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Apelação conhecida em parte e desprovida; remessa necessária desprovida",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida) com conhecimento parcial",
-   "variacoes": [
-    "DIS",
-    "CTR",
-    "INE",
-    "L14",
-    "EDO",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
-   "peculiaridades": "Mandado de segurança de empresa em recuperação judicial; crédito presumido de ICMS (Termo de Acordo 776/2005 e aditivos). A sentença concedeu em parte, só quanto ao crédito presumido, sem limite temporal. A União ataca benefícios desonerativos não contemplados na sentença (razões em parte dissociadas) e pede, eventualmente, limitação à Lei 14.789/2023. A impetrante pede reforma em contrarrazões (dispensa e reversão de reservas).",
-   "peculiaridades_relator": "1) Manter a exclusão sem limite temporal (pergunta da Lei 14.789/2023). 2) Conhecimento parcial por razões dissociadas, no padrão da ApCiv 5008404-35.2024.4.03.6000.",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
-    {
-     "id": "347405378",
-     "tipo": "Termo de Acordo 776/2005"
-    },
-    {
-     "id": "347405379",
-     "tipo": "Aditivos do Termo de Acordo (crédito presumido no 3º e no 5º)"
-    },
-    {
-     "id": "347405675",
-     "tipo": "Sentença (04/09/2024)"
-    },
-    {
-     "id": "347405678",
-     "tipo": "Apelação da União"
-    },
-    {
-     "id": "347405681",
-     "tipo": "Embargos de declaração da impetrante"
-    },
-    {
-     "id": "347405687",
-     "tipo": "Decisão que rejeitou os embargos (29/10/2025)"
-    },
-    {
-     "id": "347405690",
-     "tipo": "Contrarrazões"
-    },
-    {
-     "id": "350001569",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    }
-   ],
-   "mpf": "ID 350001569",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Relatório",
-     "Embargos de declaração na origem e pedido eventual da União (Lei 14.789/2023) omitidos: incluídos",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Conhecimento parcial (razões dissociadas) e pedido em contrarrazões não conhecido: incluídos",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Preliminar de inépcia não enfrentada: incluída e rejeitada",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Faltava «É como voto.»: incluído",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "«conforme o entendimento aplicado no voto»: substituído pelos fundamentos",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Rodapé citava artigo 97 da CF e artigo 1.021, § 4º, do CPC, estranhos ao caso: retirados",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Confirmar se há ordem de suspensão vigente no Tema 1.182/STJ."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 78,
-   "processo": "5009388-53.2023.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS x LONTANO TRANSPORTES LTDA",
-   "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS",
-   "executado": "LONTANO TRANSPORTES LTDA",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "1",
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "Desprovimento da apelação e da remessa necessária",
-   "modelo": "matriz IRPJ · grupo 1 (concessão mantida), com recomposição de prejuízo fiscal e base negativa",
-   "variacoes": [
-    "L14",
-    "EDO",
-    "ORI"
-   ],
-   "observacao": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
-   "peculiaridades": "Mandado de segurança de transportadora (Lontano Transportes Ltda.), 4ª Vara Federal de Campo Grande. Crédito presumido de ICMS pelo Convênio ICMS 106/1996 (ID 318741801), com registros fiscais (ID 318741800). Sentença parcial, integrada em embargos (ID 318741825): exclusão sem condições, abstenção de cobrança, compensação após 23/11/2018 e recomposição de prejuízo fiscal e base negativa; União condenada em metade das custas. Minuta alterada no PJe depois da extração das 16h (+20 caracteres); corrigida sobre a versão nova.",
-   "peculiaridades_relator": "1) A sentença, ao conceder a recomposição do prejuízo fiscal e da base negativa, refere o 'ICMS incidente sobre valores oriundos da repetição de indébito', e não os créditos presumidos: aparenta erro material. A versão corrigida explicita o alcance correto e marca [VALIDAR]; decidir se corrige de ofício (artigo 494, I, do CPC). 2) A sentença foi parcial e condenou a União em metade das custas, mas a minuta não identifica o que foi negado. 3) Na minuta original havia, após o parágrafo da escrita fiscal, o fecho de um julgado do STJ sobre REINTEGRA, PIS e COFINS, alheio ao caso: retirado. 4) Lei 14.789/2023: fundamento uniformizado com o item 66.",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "Minutada"
-   },
-   "pecas": [
-    {
-     "id": "318741800",
-     "tipo": "Registros fiscais de apuração"
-    },
-    {
-     "id": "318741801",
-     "tipo": "Convênio ICMS 106/1996 — crédito presumido no transporte"
-    },
-    {
-     "id": "318741815",
-     "tipo": "Sentença"
-    },
-    {
-     "id": "318741825",
-     "tipo": "Decisão dos embargos de declaração"
-    },
-    {
-     "id": "318742186",
-     "tipo": "Apelação da União"
-    },
-    {
-     "id": "318742188",
-     "tipo": "Contrarrazões"
-    },
-    {
-     "id": "319062608",
-     "tipo": "Parecer da Procuradoria Regional da República"
-    },
-    {
-     "id": "321997073",
-     "tipo": "Recebimento da apelação no efeito devolutivo"
-    }
-   ],
-   "mpf": "ID 319062608",
-   "triagem": {},
-   "ajustes": [
-    [
-     "Seção",
-     "Ajuste",
-     "Tipo"
-    ],
-    [
-     "Voto",
-     "Retirado o fecho de julgado do STJ sobre REINTEGRA, PIS e COFINS, transcrito no meio do voto e alheio ao caso",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Sentença organizada em quatro itens; marcada [VALIDAR] a referência a 'ICMS incidente sobre valores oriundos da repetição de indébito'",
-     "Validar"
-    ],
-    [
-     "Ementa",
-     "Reescrita no padrão do gabinete; rodapé com o Convênio ICMS 106/1996 e o EDcl no REsp 1.896.801, usados no voto; súmulas e temas não usados retirados",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Recomposição do prejuízo fiscal e da base negativa com alcance explicitado (créditos presumidos)",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Enfrentadas as teses (3) e (5) da União",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Lei 14.789/2023: fundamento da ApelRemNec 5000161-72.2019.4.03.6002, uniforme com o item 66",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Retirados o parágrafo do Tema 1.416/STJ e o da restituição administrativa, não pedidos e não concedidos",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluído 'Sem honorários (artigo 25 da Lei 12.016/2009)'",
-     "Corrigido"
-    ],
-    [
-     "Acórdão",
-     "Incluído, com a composição da sessão de 30/11/2026",
-     "Corrigido"
-    ]
-   ],
-   "pendencias": [
-    "Confirmar se a referência da sentença ao 'ICMS incidente sobre valores oriundos da repetição de indébito' é erro material.",
-    "Identificar a parte do pedido negada na sentença (concessão parcial; custas pela metade).",
-    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE) e confirmar que não há suspensão vigente no Tema 1.416/STJ."
-   ],
-   "minuta": true
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 79,
-   "processo": "5002294-20.2024.4.03.6000",
-   "recurso": "APELAÇÃO CÍVEL",
-   "partes": "COPASUL COOPERATIVA AGRICOLA SUL MATOGROSSENSE x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "exequente": "COPASUL COOPERATIVA AGRICOLA SUL MATOGROSSENSE",
-   "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 81,
-   "processo": "5012157-97.2024.4.03.6000",
-   "recurso": "APELAÇÃO CÍVEL",
-   "partes": "AMCOR FLEXIBLES TRES LAGOAS LTDA x DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "exequente": "AMCOR FLEXIBLES TRES LAGOAS LTDA",
-   "executado": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
-   "assunto": "PIS",
-   "grupo": null,
-   "tipo_caso": "PIS",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Fora do tema? assunto na pauta: PIS. Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 97,
-   "processo": "0008052-22.2011.4.03.6000",
-   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
-   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x ALDO LOUREIRO DE ALMEIDA",
-   "exequente": "ALDO LOUREIRO DE ALMEIDA",
-   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
-   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Fora do tema? pessoa física, processo de 2011: conferir se é o mesmo tema. Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "José",
-    "correcao": "Bruno",
-    "situacao": "A minutar"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado."
-   ],
-   "minuta": false
-  },
-  {
-   "sessao": "2026-11-30",
-   "item": 123,
-   "processo": "5003563-54.2025.4.03.6002",
-   "recurso": "REMESSA NECESSÁRIA CÍVEL",
-   "partes": "TORK OIL SAN PEDRO LTDA x DELEGADO DA RECEITA FEDERAL DE CAMPO GRANDE",
-   "exequente": "TORK OIL SAN PEDRO LTDA",
-   "executado": "DELEGADO DA RECEITA FEDERAL DE CAMPO GRANDE",
-   "assunto": "PIS",
-   "grupo": null,
-   "tipo_caso": "PIS",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "Fora do tema? assunto na pauta: PIS (remessa necessária). Sem autos e sem minuta no lote.",
-   "peculiaridades": "",
-   "peculiaridades_relator": "",
-   "orientacao": "",
-   "equipe": {
-    "minuta": "Dalete",
-    "correcao": "Bruno",
-    "situacao": "Corrigida"
-   },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
-   "ajustes": [],
-   "pendencias": [
-    "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório).",
-    "Marcado como corrigido no lote \"A corrigir\": conferir antes de refazer."
-   ],
-   "minuta": false
-  }
- ]
+  ]
 }
