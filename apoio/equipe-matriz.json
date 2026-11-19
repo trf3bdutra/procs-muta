@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.equipe.matriz",
  "versao": 1,
- "geradoEm": "2026-11-19T14:15:15Z",
+ "geradoEm": "2026-11-19T14:30:36Z",
  "geradoPor": "scripts/equipe/matriz_minutas.py",
  "tipos": [
   "Apelação",
@@ -32,10 +32,23 @@
     "Outras classes": 0
    },
    "secoes": {
-    "2ª Seção": 85,
-    "1ª Seção": 42,
-    "3ª Seção": 24,
+    "2ª Seção": 99,
+    "1ª Seção": 27,
+    "3ª Seção": 20,
+    "A conferir": 5,
     "sem seção": 4
+   },
+   "ramos": {
+    "DIREITO À EDUCAÇÃO": 65,
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 44,
+    "DIREITO CIVIL": 10,
+    "DIREITO DA SAÚDE": 10,
+    "DIREITO PREVIDENCIÁRIO": 10,
+    "DIREITO TRIBUTÁRIO": 5,
+    "sem ramo": 4,
+    "DIREITO DO CONSUMIDOR": 3,
+    "DIREITO AMBIENTAL": 2,
+    "DIREITO ASSISTENCIAL": 2
    },
    "assuntos": {
     "Convalidação de Estudos e Reconhecimento de Diploma": 43,
@@ -45,7 +58,11 @@
     "Anulação e Correção de Provas / Questões": 6,
     "Aposentadoria Especial (Art. 57/8)": 5,
     "Inscrição / Documentação": 4,
-    "Anulação": 4
+    "Anulação": 4,
+    "Exame da Ordem OAB": 3,
+    "Cédula de Crédito Bancário": 3,
+    "Registro de Empresa": 2,
+    "Revogação/Anulação de multa ambiental": 2
    },
    "cadastro": {
     "exp": [
@@ -72,20 +89,33 @@
     "Outras classes": 0
    },
    "secoes": {
-    "3ª Seção": 81,
+    "3ª Seção": 97,
     "2ª Seção": 18,
-    "sem seção": 16,
-    "1ª Seção": 5
+    "1ª Seção": 4,
+    "sem seção": 1
+   },
+   "ramos": {
+    "DIREITO PREVIDENCIÁRIO": 58,
+    "DIREITO ASSISTENCIAL": 38,
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 13,
+    "DIREITO TRIBUTÁRIO": 8,
+    "sem ramo": 1,
+    "DIREITO À EDUCAÇÃO": 1,
+    "DIREITO CIVIL": 1
    },
    "assuntos": {
     "Pessoa com Deficiência": 26,
-    "Pensão por Morte (Art. 74/9)": 18,
+    "Pensão por Morte (Art. 74/9)": 21,
+    "Benefício Assistencial (Art. 203,V CF/88)": 12,
     "Inscrição / Documentação": 10,
     "Aposentadoria por Incapacidade Permanente": 10,
-    "Salário-Maternidade (Art. 71/73)": 4,
+    "Salário-Maternidade (Art. 71/73)": 5,
     "IRPJ/Imposto de Renda de Pessoa Jurídica": 4,
     "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 4,
-    "Pensão": 2
+    "Pensão": 2,
+    "RMI - Renda Mensal Inicial": 2,
+    "PIS": 2,
+    "Urbana (Pensão por Morte (Art. 74/9))": 2
    },
    "cadastro": {
     "exp": [
@@ -119,9 +149,18 @@
     "Outras classes": 0
    },
    "secoes": {
-    "1ª Seção": 56,
-    "3ª Seção": 43,
+    "1ª Seção": 57,
+    "3ª Seção": 42,
     "2ª Seção": 12
+   },
+   "ramos": {
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 46,
+    "DIREITO PREVIDENCIÁRIO": 29,
+    "DIREITO CIVIL": 26,
+    "DIREITO DO CONSUMIDOR": 5,
+    "DIREITO TRIBUTÁRIO": 3,
+    "DIREITO PROCESSUAL CIVIL E DO TRABALHO": 1,
+    "DIREITO DA SAÚDE": 1
    },
    "assuntos": {
     "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 34,
@@ -131,7 +170,11 @@
     "Expurgos Inflacionários / Planos Econômicos": 5,
     "Inquérito / Processo / Recurso Administrativo": 4,
     "RMI - Renda Mensal Inicial": 2,
-    "Multas e demais Sanções": 2
+    "Multas e demais Sanções": 2,
+    "Registro Profissional": 2,
+    "Alteração do coeficiente de cálculo do benefício": 2,
+    "Cálculo do fator previdenciário - Lei 9.876/99": 1,
+    "Sistema Financeiro da Habitação": 1
    },
    "cadastro": {
     "exp": [
@@ -170,6 +213,17 @@
     "1ª Seção": 9,
     "sem seção": 1
    },
+   "ramos": {
+    "DIREITO PREVIDENCIÁRIO": 60,
+    "DIREITO TRIBUTÁRIO": 10,
+    "DIREITO CIVIL": 6,
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 5,
+    "DIREITO DA SAÚDE": 5,
+    "sem ramo": 4,
+    "DIREITO PROCESSUAL CIVIL E DO TRABALHO": 2,
+    "DIREITO À EDUCAÇÃO": 1,
+    "DIREITO ASSISTENCIAL": 1
+   },
    "assuntos": {
     "Aposentadoria Rural (Art. 48/51)": 31,
     "Liberação de Veículo Apreendido": 10,
@@ -178,7 +232,11 @@
     "Sustação/ Alteração de Leilão": 7,
     "Oncológico": 3,
     "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)": 2,
-    "Apreensão": 2
+    "Apreensão": 2,
+    "Aposentadoria Híbrida (Art. 48/106)": 2,
+    "Aposentadoria por Idade (Art. 48/51)": 2,
+    "Auxílio por Incapacidade Temporária": 2,
+    "Reajustes e Revisões Específicos": 2
    },
    "cadastro": {
     "exp": [
@@ -209,10 +267,17 @@
     "Outras classes": 1
    },
    "secoes": {
-    "2ª Seção": 53,
+    "2ª Seção": 55,
     "1ª Seção": 7,
-    "3ª Seção": 5,
-    "sem seção": 4
+    "3ª Seção": 4,
+    "sem seção": 3
+   },
+   "ramos": {
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 34,
+    "DIREITO TRIBUTÁRIO": 29,
+    "sem ramo": 3,
+    "DIREITO À EDUCAÇÃO": 2,
+    "DIREITO CIVIL": 1
    },
    "assuntos": {
     "IRPJ/Imposto de Renda de Pessoa Jurídica": 15,
@@ -222,7 +287,11 @@
     "Conselhos Regionais e Afins (Anuidade)": 3,
     "Concurso Público - Nomeação/ Posse Tardia": 2,
     "Impostos": 2,
-    "Inscrição / Documentação": 2
+    "Inscrição / Documentação": 2,
+    "Contribuições Previdenciárias": 2,
+    "PIS": 2,
+    "Exame da Ordem OAB": 2,
+    "Reintegração": 2
    },
    "cadastro": {
     "exp": [
@@ -256,19 +325,28 @@
     "Outras classes": 0
    },
    "secoes": {
-    "3ª Seção": 40,
-    "sem seção": 25,
-    "2ª Seção": 2
+    "3ª Seção": 64,
+    "2ª Seção": 2,
+    "sem seção": 1
+   },
+   "ramos": {
+    "DIREITO PREVIDENCIÁRIO": 64,
+    "DIREITO TRIBUTÁRIO": 2,
+    "sem ramo": 1
    },
    "assuntos": {
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 15,
     "Aposentadoria por Incapacidade Permanente": 13,
     "Auxílio por Incapacidade Temporária": 10,
-    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 4,
-    "Reajustes e Revisões Específicos": 3,
+    "Aposentadoria Rural (Art. 48/51)": 10,
+    "Reajustes e Revisões Específicos": 4,
+    "Aposentadoria por Idade (Art. 48/51)": 3,
     "IRPF/ Imposto de Renda de Pessoa Física": 2,
     "Por Tempo de Contribuição": 2,
-    "Aposentadoria por Idade (Art. 48/51)": 2,
-    "Restabelecimento": 2
+    "Restabelecimento": 2,
+    "Restituição ao Erário": 1,
+    "Concessão": 1,
+    "Incapacidade Laborativa Permanente": 1
    },
    "cadastro": {
     "exp": [],
@@ -293,10 +371,19 @@
     "Outras classes": 0
    },
    "secoes": {
-    "2ª Seção": 32,
-    "1ª Seção": 22,
-    "sem seção": 9,
+    "2ª Seção": 33,
+    "1ª Seção": 23,
+    "sem seção": 7,
     "3ª Seção": 3
+   },
+   "ramos": {
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 36,
+    "DIREITO CIVIL": 11,
+    "sem ramo": 7,
+    "DIREITO TRIBUTÁRIO": 6,
+    "DIREITO DA SAÚDE": 3,
+    "DIREITO À EDUCAÇÃO": 2,
+    "DIREITO AMBIENTAL": 1
    },
    "assuntos": {
     "Anulação e Correção de Provas / Questões": 6,
@@ -306,7 +393,11 @@
     "Classificação e/ ou Preterição": 3,
     "Reintegração": 3,
     "Assistência à Saúde": 2,
-    "Ambiental": 2
+    "Ambiental": 2,
+    "FGTS/Fundo de Garantia Por Tempo de Serviço": 1,
+    "Repasse de Verbas Públicas": 1,
+    "IRPJ/ Imposto de Renda de Pessoa Jurídica": 1,
+    "Indenização por Dano Material": 1
    },
    "cadastro": {
     "exp": [
@@ -344,6 +435,10 @@
     "3ª Seção": 26,
     "2ª Seção": 1
    },
+   "ramos": {
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 52,
+    "DIREITO CIVIL": 1
+   },
    "assuntos": {
     "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 50,
     "Índice de 28,86% LL 8.622/1993 e 8.627/1993": 2,
@@ -374,11 +469,23 @@
     "Outras classes": 1
    },
    "secoes": {
-    "sem seção": 37,
-    "3ª Seção": 1
+    "3ª Seção": 34,
+    "sem seção": 4
+   },
+   "ramos": {
+    "DIREITO PREVIDENCIÁRIO": 29,
+    "DIREITO ASSISTENCIAL": 5,
+    "sem ramo": 4
    },
    "assuntos": {
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 16,
+    "Aposentadoria Rural (Art. 48/51)": 4,
     "ED": 4,
+    "Pensão por Morte (Art. 74/9)": 3,
+    "Aposentadoria Híbrida (Art. 48/106)": 3,
+    "Benefício Assistencial (Art. 203,V CF/88)": 3,
+    "Pessoa com Deficiência": 2,
+    "Aposentadoria por Incapacidade Permanente": 2,
     "RMI - Renda Mensal Inicial": 1
    },
    "cadastro": {
@@ -404,10 +511,14 @@
     "Outras classes": 0
    },
    "secoes": {
-    "2ª Seção": 13,
-    "1ª Seção": 9,
-    "3ª Seção": 2,
-    "sem seção": 1
+    "2ª Seção": 15,
+    "1ª Seção": 8,
+    "3ª Seção": 2
+   },
+   "ramos": {
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 13,
+    "DIREITO TRIBUTÁRIO": 10,
+    "DIREITO CIVIL": 2
    },
    "assuntos": {
     "Multas e demais Sanções": 2,
@@ -417,7 +528,11 @@
     "Obras Públicas": 1,
     "Liberação de Veículo Apreendido": 1,
     "Índice da URV Lei 8.880/1994": 1,
-    "Funrural": 1
+    "Funrural": 1,
+    "Certificado de Regularidade - FGTS": 1,
+    "Gratificação Especial de Localidade - GEL": 1,
+    "Indenização / Terço Constitucional": 1,
+    "Demarcação": 1
    },
    "cadastro": {
     "exp": [],
@@ -442,12 +557,17 @@
     "Outras classes": 0
    },
    "secoes": {
-    "sem seção": 11,
-    "3ª Seção": 8
+    "3ª Seção": 13,
+    "sem seção": 6
+   },
+   "ramos": {
+    "DIREITO PREVIDENCIÁRIO": 13,
+    "sem ramo": 6
    },
    "assuntos": {
     "Aposentadoria Especial (Art. 57/8)": 4,
-    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 2,
+    "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 4,
+    "Averbação/Cômputo/Conversão de tempo de serviço especial": 3,
     "Agente Agressivo - Ruído": 1,
     "Alteração do coeficiente de cálculo do benefício": 1,
     "ED": 1
@@ -483,9 +603,16 @@
     "Outras classes": 0
    },
    "secoes": {
-    "sem seção": 12
+    "3ª Seção": 12
    },
-   "assuntos": {},
+   "ramos": {
+    "DIREITO ASSISTENCIAL": 11,
+    "DIREITO PREVIDENCIÁRIO": 1
+   },
+   "assuntos": {
+    "Benefício Assistencial (Art. 203,V CF/88)": 11,
+    "Auxílio-Reclusão (Art. 80)": 1
+   },
    "cadastro": {
     "exp": [],
     "pref": [],
@@ -511,6 +638,9 @@
    "secoes": {
     "1ª Seção": 1,
     "2ª Seção": 1
+   },
+   "ramos": {
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 2
    },
    "assuntos": {
     "Restituição de área - FUNAI": 1,
@@ -540,6 +670,10 @@
    },
    "secoes": {
     "1ª Seção": 2
+   },
+   "ramos": {
+    "DIREITO CIVIL": 1,
+    "DIREITO TRIBUTÁRIO": 1
    },
    "assuntos": {
     "Contratos Bancários": 1,
@@ -573,6 +707,9 @@
    "secoes": {
     "2ª Seção": 1
    },
+   "ramos": {
+    "DIREITO TRIBUTÁRIO": 1
+   },
    "assuntos": {
     "Cofins": 1
    },
@@ -582,5 +719,5845 @@
     "nao": []
    }
   }
+ ],
+ "minutas": [
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "",
+   "",
+   "ED"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Agente Agressivo - Ruído"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Alteração do coeficiente de cálculo do benefício"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+  ],
+  [
+   "Alexander",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+  ],
+  [
+   "Alexander",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+  ],
+  [
+   "Bruno",
+   "Agravo interno",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Agravo interno",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Vícios de Construção"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Bruno",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Pensão"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Pensão"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Filho Maior e Inválido"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Restituição ao Erário"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "REFIS/Programa de Recuperação Fiscal"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Seguro"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6) - TEMPO RURAL E ESPECIAL"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Filho Maior e Inválido"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Incapacidade Laborativa Permanente"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos- Ap Especial"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Pensão por Morte (Art. 74/9))"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Salário-Maternidade (Art. 71/73)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Salário-Maternidade (Art. 71/73)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Salário-Maternidade (Art. 71/73)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Salário-Maternidade (Art. 71/73)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Urbana (Art. 48/51)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Urbana (Art. 48/51)"
+  ],
+  [
+   "Dalete",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Urbana (Pensão por Morte (Art. 74/9))"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "ICMS/ Imposto sobre Circulação de Mercadorias"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "Dalete",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "RMI - Renda Mensal Inicial"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "PIS"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6) - TEMPO RURAL E ESPECIAL"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos- Ap Especial"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Pensão por Morte (Art. 74/9))"
+  ],
+  [
+   "Dalete",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Salário-Maternidade (Art. 71/73)"
+  ],
+  [
+   "Dalete",
+   "Juízo de retratação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Dalete",
+   "Juízo de retratação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "RMI - Renda Mensal Inicial"
+  ],
+  [
+   "Dalete",
+   "Juízo de retratação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Urbana (Pensão por Morte (Art. 74/9))"
+  ],
+  [
+   "Dalete",
+   "Remessa necessária",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "PIS"
+  ],
+  [
+   "Dalete",
+   "Remessa necessária",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Restabelecimento"
+  ],
+  [
+   "Debora",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO PROCESSUAL CIVIL E DO TRABALHO",
+   "Levantamento de Valor"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "",
+   "DIREITO PROCESSUAL CIVIL E DO TRABALHO",
+   "Eletiva"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "",
+   "Sustação/ Alteração de Leilão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "",
+   "Sustação/ Alteração de Leilão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Remoção"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sustação/ Alteração de Leilão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sustação/ Alteração de Leilão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sustação/ Alteração de Leilão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sustação/ Alteração de Leilão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sustação/ Alteração de Leilão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Apreensão"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Garantias Constitucionais"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Não padronizado"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Oncológico"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Oncológico"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Oncológico"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "ACESSO"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Desconto em Folha de Pagamento/Benefício Previdenciário"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Híbrida (Art. 48/106)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Híbrida (Art. 48/106)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Averbação/Cômputo/Conversão de tempo de serviço especial"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Híbrida (Art. 48/106)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação e remessa",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Indenização por Dano Moral"
+  ],
+  [
+   "Debora",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO DA SAÚDE",
+   "Sem registro na ANVISA"
+  ],
+  [
+   "Debora",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Idade (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Apreensão"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Debora",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos"
+  ],
+  [
+   "Debora",
+   "Juízo de retratação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Juízo de retratação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Idade (Art. 48/51)"
+  ],
+  [
+   "Debora",
+   "Juízo de retratação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "",
+   "",
+   "ED"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPF/ Imposto de Renda de Pessoa Física"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPF/ Imposto de Renda de Pessoa Física"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Idade (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Idade (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Averbação/Cômputo de tempo de serviço  rural (empregado/empregador)"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Concessão"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Incapacidade Laborativa Permanente"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Restabelecimento"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Restabelecimento"
+  ],
+  [
+   "Estela",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Restituição ao Erário"
+  ],
+  [
+   "Estela",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Por Tempo de Contribuição"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Alteração do coeficiente de cálculo do benefício"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Idade (Art. 48/51)"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Por Tempo de Contribuição"
+  ],
+  [
+   "Estela",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Reajustes e Revisões Específicos"
+  ],
+  [
+   "Giovana",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Cofins"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Atualização de Conta"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuições Previdenciárias"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Microempresa"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Cessão de créditos não-tributários"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Registro Profissional"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Cofins"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuições Previdenciárias"
+  ],
+  [
+   "José",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPF/Imposto de Renda de Pessoa Física"
+  ],
+  [
+   "José",
+   "Agravo interno",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Atualização de Conta"
+  ],
+  [
+   "José",
+   "Agravo interno",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "ACESSO"
+  ],
+  [
+   "José",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "José",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "José",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "José",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Reintegração"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público - Nomeação/ Posse Tardia"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público / Edital"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público / Edital"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público / Edital"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público / Edital"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público / Edital"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inquérito / Processo / Recurso Administrativo"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Cofins"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Compensação de Prejuízo"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Conselhos Regionais e Afins (Anuidade)"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Conselhos Regionais e Afins (Anuidade)"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Conselhos Regionais e Afins (Anuidade)"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Impostos"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "PIS"
+  ],
+  [
+   "José",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "PIS"
+  ],
+  [
+   "José",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público - Nomeação/ Posse Tardia"
+  ],
+  [
+   "José",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Concurso Público / Edital"
+  ],
+  [
+   "José",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Exame da Ordem OAB"
+  ],
+  [
+   "José",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Piso Salarial"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Reintegração"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Exame da Ordem OAB"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "José",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Impostos"
+  ],
+  [
+   "José",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "José",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "ACESSO"
+  ],
+  [
+   "José",
+   "Outras classes",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Ingresso e Concurso"
+  ],
+  [
+   "José",
+   "Remessa necessária",
+   "2ª Seção",
+   "DIREITO CIVIL",
+   "Indenização por Dano Material"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucas",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio-Reclusão (Art. 80)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "",
+   "",
+   "ED"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "",
+   "",
+   "ED"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "",
+   "",
+   "ED"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "",
+   "",
+   "ED"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Benefício Assistencial (Art. 203,V CF/88)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Híbrida (Art. 48/106)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Híbrida (Art. 48/106)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Híbrida (Art. 48/106)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Incapacidade Permanente"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Lucíola",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Lucíola",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Rural (Art. 48/51)"
+  ],
+  [
+   "Lucíola",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Lucíola",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Lucíola",
+   "Outras classes",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "RMI - Renda Mensal Inicial"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Hipoteca"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Prescrição e Decadência"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sustação/Alteração de Leilão"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Assistência à Saúde"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "PIS/PASEP"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "PASEP"
+  ],
+  [
+   "Maria Eduarda",
+   "Agravo interno",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Assistência à Saúde"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Abono Pecuniário (Art. 78 Lei 8.112/1990)"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Direitos Indígenas"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Direitos Indígenas"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Progressão Funcional com Interstício de Doze Meses"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Reintegração"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Reintegração"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Direito de Imagem"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Esbulho / Turbação / Ameaça"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Esbulho / Turbação / Ameaça"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Esbulho / Turbação / Ameaça"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Esbulho / Turbação / Ameaça"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Indenização por Dano Material"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sistema Financeiro da Habitação"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "FGTS/Fundo de Garantia Por Tempo de Serviço"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Classificação e/ ou Preterição"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Classificação e/ ou Preterição"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Classificação e/ ou Preterição"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Direitos Indígenas"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Indenização por Dano Moral"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Metrológica"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Posse e Exercício"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Prova Prática- Sentença"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Não padronizado"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Oncológico"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Planos de saúde"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Perdimento de Bens"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Expedição de diplomas e omissão na entrega das notas"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Processo Seletivo"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Ambiental"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação e remessa",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Reforma"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação e remessa",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "1/3 de férias"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Repasse de Verbas Públicas"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/ Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "Maria Eduarda",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "Maria Eduarda",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Reintegração"
+  ],
+  [
+   "Maria Eduarda",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Esbulho / Turbação / Ameaça"
+  ],
+  [
+   "Maria Eduarda",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Ambiental"
+  ],
+  [
+   "Maria Eduarda",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Maria Eduarda",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO AMBIENTAL",
+   "Revogação/Anulação de multa ambiental"
+  ],
+  [
+   "Maria Eduarda",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Gestante / Adotante / Paternidade"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Correção Monetária de Diferenças Pagas em Atraso"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Demarcação"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Direitos Indígenas"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Cédula de Crédito Rural"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sistema Financeiro da Habitação"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Professor"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inquérito / Processo / Recurso Administrativo"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Expurgos Inflacionários / Planos Econômicos"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Expurgos Inflacionários / Planos Econômicos"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Cálculo do fator previdenciário - Lei 9.876/99"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuição sobre a folha de salários"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuições para o SEBRAE, SESC, SENAC, SENAI e outros"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Atraso na Entrega do Imóvel"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO DA SAÚDE",
+   "Não padronizado"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Expurgos Inflacionários / Planos Econômicos"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Expurgos Inflacionários / Planos Econômicos"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Alteração do coeficiente de cálculo do benefício"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Alteração do coeficiente de cálculo do benefício"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "RMI - Renda Mensal Inicial"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "RMI - Renda Mensal Inicial"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Revisão do valor do benefício no primeiro reajuste após a concessão (Art. 21, § 3º, da Lei 8.880/1994)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PROCESSUAL CIVIL E DO TRABALHO",
+   "Busca e Apreensão"
+  ],
+  [
+   "Rodrigo",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inquérito / Processo / Recurso Administrativo"
+  ],
+  [
+   "Rodrigo",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inquérito / Processo / Recurso Administrativo"
+  ],
+  [
+   "Rodrigo",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuição de Intervenção no Domínio Econômico (CIDE)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inquérito / Processo / Recurso Administrativo"
+  ],
+  [
+   "Rodrigo",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria por Tempo de Contribuição (Art. 55/6)"
+  ],
+  [
+   "Rodrigo",
+   "Decisão monocrática",
+   "3ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Expurgos Inflacionários / Planos Econômicos"
+  ],
+  [
+   "Rodrigo",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Juízo de retratação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Rodrigo",
+   "Remessa necessária",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Registro Profissional"
+  ],
+  [
+   "Rodrigo",
+   "Remessa necessária",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Registro Profissional"
+  ],
+  [
+   "Saffioti",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Restituição de área - FUNAI"
+  ],
+  [
+   "Saffioti",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Direitos Indígenas"
+  ],
+  [
+   "Vanilda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Contratos Bancários"
+  ],
+  [
+   "Vanilda",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Fundo de Saúde do Exército - FUSEX"
+  ],
+  [
+   "Victor",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Cédula de Crédito Bancário"
+  ],
+  [
+   "Victor",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Isenção por Doença ou Acidente em Serviço"
+  ],
+  [
+   "Victor",
+   "Agravo de instrumento",
+   "3ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "ITR/ Imposto Territorial Rural"
+  ],
+  [
+   "Victor",
+   "Agravo interno",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Cédula de Crédito Bancário"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "",
+   "",
+   ""
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Abono Pecuniário (Art. 78 Lei 8.112/1990)"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Isonomia"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Registro de Empresa"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% LL 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Contratos Bancários"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Crédito Rural"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sistema Financeiro da Habitação"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Empréstimo consignado"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Ambiental"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Ambiental"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Dano ao Erário"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Exame da Ordem OAB"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Indenização por Dano Moral"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Registro de Empresa"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO AMBIENTAL",
+   "Revogação/Anulação de multa ambiental"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO CIVIL",
+   "Indenização por Dano Material"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DA SAÚDE",
+   "Fornecimento de medicamentos"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Inclusão Indevida em Cadastro de Inadimplentes"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "IRPJ/Imposto de Renda de Pessoa Jurídica"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "ACESSO"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Exames de certificação - Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação e Correção de Provas / Questões"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Exame da Ordem OAB"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Gestante / Adotante / Paternidade"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Indenização por Dano Material"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio-Reclusão (Art. 80)"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "A conferir",
+   "DIREITO AMBIENTAL",
+   "Revogação/Anulação de multa ambiental"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "A conferir",
+   "DIREITO ASSISTENCIAL",
+   "Pessoa com Deficiência"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "A conferir",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "A conferir",
+   "DIREITO PREVIDENCIÁRIO",
+   "Auxílio por Incapacidade Temporária"
+  ],
+  [
+   "Victor",
+   "Apelação",
+   "A conferir",
+   "DIREITO PREVIDENCIÁRIO",
+   "Pensão por Morte (Art. 74/9)"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "1ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Anulação"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuição Social sobre o Lucro Líquido"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "Convalidação de Estudos e Reconhecimento de Diploma"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "2ª Seção",
+   "DIREITO À EDUCAÇÃO",
+   "FIES"
+  ],
+  [
+   "Victor",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "RMI - Renda Mensal Inicial"
+  ],
+  [
+   "Victor",
+   "Decisão monocrática",
+   "3ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "ITR/ Imposto Territorial Rural"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Abono Pecuniário (Art. 78 Lei 8.112/1990)"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Crédito Rural"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Cédula de Crédito Bancário"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Sistema Financeiro da Habitação"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Dano ao Erário"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO DO CONSUMIDOR",
+   "Inclusão Indevida em Cadastro de Inadimplentes"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Especial (Art. 57/8)"
+  ],
+  [
+   "Victor",
+   "Embargos de declaração",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "RMI - Renda Mensal Inicial"
+  ],
+  [
+   "Victor",
+   "Remessa necessária",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Exame da Ordem OAB"
+  ],
+  [
+   "Wellington",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuição sobre a folha de salários"
+  ],
+  [
+   "Wellington",
+   "Agravo interno",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Contribuição sobre a folha de salários"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Jornada de Trabalho"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Reajustes de Remuneração, Proventos ou Pensão"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice da URV Lei 8.880/1994"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO CIVIL",
+   "Quitação"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Certificado de Regularidade - FGTS"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Funrural"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Demarcação"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Energia Elétrica"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Gratificação Especial de Localidade - GEL"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Indenização / Terço Constitucional"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Registro Profissional"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "FUNDEF/ Fundo de Manutenção e Desenvolvimento do Ensino Fundamental e de Valorização do Magistério"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de Veículo Apreendido"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Liberação de mercadorias"
+  ],
+  [
+   "Wellington",
+   "Apelação",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "PIS - Cofins"
+  ],
+  [
+   "Wellington",
+   "Apelação e remessa",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Obras Públicas"
+  ],
+  [
+   "Wellington",
+   "Decisão monocrática",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação"
+  ],
+  [
+   "Wellington",
+   "Decisão monocrática",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Multas e demais Sanções"
+  ],
+  [
+   "Wellington",
+   "Decisão monocrática",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Registro Profissional"
+  ],
+  [
+   "Wellington",
+   "Decisão monocrática",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "Perdimento de Bens"
+  ],
+  [
+   "Wellington",
+   "Decisão monocrática",
+   "3ª Seção",
+   "DIREITO CIVIL",
+   "Prescrição e Decadência"
+  ],
+  [
+   "Wellington",
+   "Embargos de declaração",
+   "2ª Seção",
+   "DIREITO TRIBUTÁRIO",
+   "PIS - Cofins"
+  ]
  ]
 }
