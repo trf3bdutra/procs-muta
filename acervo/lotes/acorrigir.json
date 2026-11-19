@@ -3428,7 +3428,7 @@
    "assunto": "Inscrição / Documentação",
    "grupo": null,
    "tipo_caso": "Inscrição / Documentação",
-   "resultado": "",
+   "resultado": "Desprovido",
    "modelo": "",
    "variacoes": [],
    "observacao": "",
@@ -3474,8 +3474,81 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura no padrão (\"apelação à sentença que…\"), com o dispositivo da sentença fiel ao ID 311524740 (inscrição no Revalida 2024/1 sem a imediata apresentação do diploma ou certidão, revalidação condicionada ao diploma)",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Honorários em frase própria, com as despesas processuais, como na sentença",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Razões: \"alegando, em suma\"; incluído o item (7), sobre o IRDR sem trânsito e o efeito suspensivo dos recursos excepcionais (artigo 987, § 1º, do CPC), e o pedido de efeito suspensivo, que o voto declara prejudicado sem que o relatório o mencionasse",
+     "Incluído"
+    ],
+    [
+     "Relatório",
+     "\"Não houve contrarrazões\" → \"Sem contrarrazões (ID 311524743)\", com o ato que intimou o autor",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Artigo 927, II → 927, III, do CPC: o IRDR está no inciso III (mesma correção feita no item 29)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "\"Lei 13.9692019\" → \"Lei 13.959/2019\" (lei do Revalida)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "O argumento (7) não era enfrentado; o parágrafo que introduz a jurisprudência do STJ passou a responder à pendência dos recursos contra o IRDR",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Honorários recursais na fórmula do gabinete (\"o INEP deve suportar…, a ser acrescido ao fixado na origem\"); \"CPC\" com \"do\"",
+     "Redação"
+    ],
+    [
+     "Voto",
+     "Datas e marcas: \"23/6/2026\" → \"23/06/2026\"; \"(g.n)\" → \"(g.n.)\", com espaço antes, nas três transcrições",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "\"IV. DISPOSITIVO E TESE\" sem tese → \"IV. Dispositivo\"; questão com \"saber se\"",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé: incluído o artigo 987, § 1º; ordem STJ → TRF-3; \"TRF3\" → \"TRF-3\"; \"e\" antes do último item",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs conferidos: inicial 311524416 (autor Márcio Basso), sentença 311524740, apelação 311524742 (pede efeito suspensivo) e ato de intimação para contrarrazões 311524743. Não há parecer nos autos",
+     "Conferido"
+    ]
+   ],
+   "pendencias": [
+    "Conferir a situação atual dos recursos especial e extraordinário interpostos contra o acórdão do IRDR 5016497-47.2021.4.03.0000 (marca [VALIDAR] no voto)."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5000188-70.2024.4.03.6005.json.gz",
