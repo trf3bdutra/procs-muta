@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.equipe",
  "versao": 1,
- "atualizadoEm": "2026-11-18T04:33:39.949Z",
+ "atualizadoEm": "2026-11-19T13:56:42.000Z",
  "registros": [
   {
    "id": "m-alexander",
@@ -292,21 +292,17 @@
    ],
    "cargo": "CJ3",
    "minuta": false,
-   "correcao": true,
-   "auto": true,
+   "correcao": false,
+   "auto": false,
    "papel": "assessoria",
-   "atribuicoes": [
-    "Elaboração de minutas"
-   ],
-   "escopos": [
-    "Voto"
-   ],
+   "atribuicoes": [],
+   "escopos": [],
    "situacao": "disponivel",
    "pref": [],
    "nao": [],
    "exp": [],
    "aus": [],
-   "nota": ""
+   "nota": "Não minuta nem corrige: fora da designação."
   },
   {
    "id": "m-victor",
@@ -430,7 +426,7 @@
    "cargo": "",
    "minuta": false,
    "correcao": false,
-   "auto": true,
+   "auto": false,
    "papel": "equipe",
    "atribuicoes": [],
    "escopos": [],
@@ -439,7 +435,7 @@
    "nao": [],
    "exp": [],
    "aus": [],
-   "nota": ""
+   "nota": "Chefe de gabinete em SP; atua neste gabinete como auxílio. Fora da designação."
   },
   {
    "id": "m-cm",
@@ -464,20 +460,6 @@
    "exp": [],
    "aus": [],
    "nota": "Só por escolha manual: a designação automática não o indica."
-  },
-  {
-   "id": "m-rmwjv96havxf8",
-   "nome": "Lucila",
-   "papel": "equipe",
-   "aliases": [],
-   "cargo": "",
-   "atribuicoes": [],
-   "pref": [],
-   "exp": [],
-   "nao": [],
-   "aus": [],
-   "nota": "Veio da equipe antiga do painel.",
-   "minuta": false
   }
  ]
 }

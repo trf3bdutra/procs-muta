@@ -55,8 +55,8 @@
   var EQUIPE_PADRAO = [
     ['Dalete', 'equipe', []], ['Debora', 'equipe', ['Débora']], ['Estela', 'equipe', ['Estela Carneiro']], ['Giovana', 'equipe', []], ['José', 'equipe', ['José V.']],
     ['Maria Eduarda', 'equipe', []], ['Rodrigo', 'equipe', []], ['Victor', 'equipe', ['Víctor Neres', 'Víctor']], ['Wellington', 'equipe', []],
-    ['Alexander', 'assessoria', ['Alex']], ['Bruno', 'assessoria', []], ['Renato', 'assessoria', []], ['Saffioti', 'assessoria', []], ['Salah', 'assessoria', []], ['Vanilda', 'assessoria', []]
-  ].map(function (x) { return { id: 'm-' + N(x[0]).replace(/\W+/g, '-'), nome: x[0], papel: x[1], aliases: x[2], cargo: '', atribuicoes: [], pref: [], exp: [], nao: [], aus: [], nota: '' }; });
+    ['Alexander', 'assessoria', ['Alex']], ['Bruno', 'assessoria', []], ['Renato', 'assessoria', [], { minuta: false, correcao: false, auto: false }], ['Saffioti', 'assessoria', []], ['Salah', 'assessoria', [], { minuta: false, correcao: false, auto: false }], ['Vanilda', 'assessoria', []]
+  ].map(function (x) { return Object.assign({ id: 'm-' + N(x[0]).replace(/\W+/g, '-'), nome: x[0], papel: x[1], aliases: x[2], cargo: '', atribuicoes: [], pref: [], exp: [], nao: [], aus: [], nota: '' }, x[3] || {}); });
   /* grafias da equipe antiga do painel que são a mesma pessoa */
   var MESMO = { 'alex': 'Alexander', 'duda': 'Maria Eduarda', 'debora': 'Debora' };
   var CRIT = ['julg', 'tema', 'hist', 'esp', 'sec', 'pron'];
@@ -619,13 +619,15 @@
   /* ================= designação e correção ================= */
   var HIST = null;
   function membro(nome) { var k = N(nome); return k ? S.equipe.find(function (m) { return N(m.nome) === k || (m.aliases || []).some(function (a) { return N(a) === k; }); }) || null : null; }
+  /* nome do cadastro para um nome ou apelido gravado na sessão; sem cadastro, o próprio nome */
+  function nomeCad(nome) { var m = membro(nome); return m ? m.nome : (nome || ''); }
   function faz(m, kind) { return kind === 'd' ? (m.minuta != null ? !!m.minuta : m.papel === 'equipe') : (m.correcao != null ? !!m.correcao : m.papel === 'assessoria'); }
   function pool(kind) { return S.equipe.filter(function (m) { return faz(m, kind); }); }
   function ausente(m, ss) { var pr = periodo(ss); return diasDisp(m, pr.de, pr.ate) === 0; }
   function historico() {
     if (HIST) return HIST;
     var H = { d: new Map(), c: new Map() }, add = function (k, nome, a) { if (!a) return; var key = N(nome) + '|' + N(a); H[k].set(key, (H[k].get(key) || 0) + 1); };
-    S.sessoes.forEach(function (ss) { ss.itens.forEach(function (i) { if (i.servidor) add('d', i.servidor, i.assunto); if (i.corretor) add('c', i.corretor, i.assunto); }); });
+    S.sessoes.forEach(function (ss) { ss.itens.forEach(function (i) { if (i.servidor) add('d', nomeCad(i.servidor), i.assunto); if (i.corretor) add('c', nomeCad(i.corretor), i.assunto); }); });
     acervo().rows.forEach(function (r) {
       var a = campo(r, ['Assunto', 'Assunto_Principal']); if (!a) return;
       etiquetas(r).forEach(function (t) {
@@ -638,7 +640,7 @@
   }
   function pesoItem(i) { var r = acervo().by.get(dig(i.cnj)), W2 = pesos(), k = ''; try { k = julgKey(i, infoItem(i)); } catch (e) {}
     var t = k === 'ED' ? W2.ed : k === 'AgInt' ? W2.agint : W2.voto, cx = cxDe(i.complexidade || (r && (r.COMPLEXIDADE || r.Dificuldade)) || ''); return Math.round(t * W2['cx' + cx] * 100) / 100; }
-  function carga(nome, kind, ss) { return ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(nome); }).reduce(function (a, i) { return a + pesoItem(i); }, 0); }
+  function carga(nome, kind, ss) { var alvo = N(nomeCad(nome)); return ss.itens.filter(function (i) { return N(nomeCad(kind === 'd' ? i.servidor : i.corretor)) === alvo; }).reduce(function (a, i) { return a + pesoItem(i); }, 0); }
   function desigEfetiva(ss) { return ss && ss.desigOverride ? ss.desigOverride : S.desig; }
   function desigNaTela() { var ss = sessaoReal(); return UI.aba === 'desig' && UI.desigEscopo === 'sessao' && ss ? (ss.desigOverride || (ss.desigOverride = clone(S.desig))) : S.desig; }
   function linha(cid, key, ss) { var k = cid + ':' + N(key), D = ss ? desigEfetiva(ss) : desigNaTela(); return D.rows[k] || { d: '', c: '' }; }
