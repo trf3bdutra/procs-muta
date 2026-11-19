@@ -654,11 +654,41 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .mp-mais{display:block;width:100%;padding:8px;text-align:center}
 .mp-vz{margin:0;padding:14px 12px;color:var(--m);font-size:12.5px}
 @media (max-width:600px){.mp-pn{grid-template-columns:repeat(5,minmax(260px,1fr))}}
+
+/* Chefia e Inteligência · componentes exclusivos; faixas da Triagem/Pautas mantidas */
+#top{height:56px!important;min-height:56px!important;align-items:center!important;flex-wrap:nowrap!important;padding:0 14px!important;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+#top::-webkit-scrollbar{display:none}
+#top #marca{height:100%;align-self:center;margin-right:0;padding-right:12px}
+#top #modulos{gap:12px;flex-wrap:nowrap}
+#top #modulos button{font-size:16px!important;white-space:nowrap}
+#top #abas{height:100%!important;flex:0 1 auto!important;order:0!important;width:auto!important;min-width:0;border-top:0!important;margin:0!important}
+#top #estado{flex:none!important}
+#top #bt-acervo,#top #bt-regras{display:none!important}
+#top .tb{font-size:12px!important;padding:0 12px!important}
+@media(max-width:900px){#top{padding:0 8px!important}#top #modulos{gap:8px}#top #modulos button{font-size:14px!important}#top #abas{max-width:44vw;overflow:auto}}
+.cg-head{display:flex;justify-content:space-between;align-items:baseline;gap:15px;flex-wrap:wrap;margin:20px 0 15px;border-bottom:1px solid var(--b);padding-bottom:12px}
+.cg-head h1{font-size:29px;letter-spacing:-.03em;color:var(--v);margin:0}
+.cg-head p{font-size:12.8px;color:var(--m2);margin:5px 0 0}
+.cg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.cg-box{border:1px solid var(--b);background:var(--w);min-width:0}
+.cg-box>header{padding:11px 14px;border-bottom:1px solid var(--b);background:var(--p);font-weight:700;color:var(--v);font-size:15px}
+.cg-box>p{padding:12px 14px;margin:0;font-size:12.5px;color:var(--m2)}
+.cg-link{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--l2)}
+.cg-link b{display:block;font-size:13px}.cg-link small{display:block;margin-top:2px;color:var(--m2);font-size:11.5px}
+.cg-link button{border:1px solid var(--b2);background:var(--w);color:var(--v);cursor:pointer;padding:5px 11px;font-weight:650;font-size:12px}
+.cg-link button:hover{background:var(--p)}
+.cg-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 14px 14px}
+.cg-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--b);margin-bottom:14px;background:var(--w)}
+.cg-kpis>div{padding:12px 15px;border-right:1px solid var(--l2)}.cg-kpis>div:last-child{border:0}
+.cg-kpis b{font:600 24px "JetBrains Mono",monospace;display:block;color:var(--v)}.cg-kpis span{color:var(--m2);font-size:11.5px}
+.cg-rel{display:flex;align-items:end;gap:8px;flex-wrap:wrap;padding:12px 14px}
+.cg-rel label{font-size:11px;color:var(--m);display:grid;gap:4px}.cg-rel select{min-width:160px}
+@media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header id="top">
-  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button></nav></div></div></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button><button type="button" data-mod="inteligencia" title="Análises e relatórios">Inteligência</button><button type="button" data-mod="chefia" title="Regras, acervo e administração">Chefia</button></nav></div></div></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
@@ -744,7 +774,7 @@ const ESC_ARQ = 'acervo/triagem/escaninhos.json';
 let ESC = { schema: 'gabcmt.escaninhos', versao: 1, atualizadoEm: '', escaninhos: [] }, ESC_V = 0, ESC_GRAV = 0;
 const PEND = new Map(); let GRAVANDO = false, ERRO = '', ULT = '', TENT = 0, T_GRAVA = null;
 const DESF = [];
-let ABA = 'inicio', ABERTAS = LS.get('tri_abas', []);
+let ABA = 'fila', ABERTAS = LS.get('tri_abas', []);
 const SEL = new Set();
 const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], ['Vinho', '#8a2f22'], ['Cinza', '#8a948f'], ['Roxo', '#6a4fb3']];
 const GRUPOS = [['triar', 'Em triagem', '#a57829'], ['nc', 'Não classificadas', '#8a2f22'], ['pauta', 'Já na pauta', '#173f3d'], ['producao', 'Em produção', '#4b7fa8'], ['sobrestados', 'Sobrestados', '#8a70c0'], ['distribuicao', 'Análise da distribuição', '#3b7150'], ['secretaria', 'Com a secretaria', '#8a948f'], ['sem', 'Sem tarefa do gabinete', '#b3ab9c']];
@@ -870,25 +900,25 @@ async function gravar() {
   } catch (e) { ERRO = (e && e.message) || String(e); TENT++; toast('Não gravou: ' + ERRO + '. Nova tentativa em instantes.', true); }
   GRAVANDO = false; pintaGrava();
   if (pendentes()) agendar(ERRO ? Math.min(120000, 10000 * TENT) : 1500);
-  if (ABA === 'inicio') render(); }
+  if (ABA === 'inteligencia') render(); }
 W.addEventListener('beforeunload', (e) => { if (pendentes() || GRAVANDO) { e.preventDefault(); e.returnValue = ''; } });
 
 /* ===================== abas e roteamento ===================== */
-function rotear() { const h = decodeURIComponent(location.hash.slice(1) || 'inicio');
+function rotear() { const h = decodeURIComponent(location.hash.slice(1) || 'fila');
   if (h.indexOf('esc=') === 0) { const id = h.slice(4); if (ESC.escaninhos.some((e) => e.id === id)) { if (ABERTAS.indexOf(id) < 0) { ABERTAS.push(id); LS.set('tri_abas', ABERTAS); } ABA = 'esc:' + id; } else ABA = 'escaninhos'; }
-  else ABA = /^(inicio|fila|escaninhos|pautas)$/.test(h) ? h : (!location.hash && /^\/pautas/.test(location.pathname) ? 'pautas' : 'inicio');
+  else ABA = h === 'inicio' ? 'inteligencia' : /^(fila|escaninhos|pautas|chefia|inteligencia)$/.test(h) ? h : (!location.hash && /^\/pautas/.test(location.pathname) ? 'pautas' : 'fila');
   W.scrollTo(0, 0); render(); }
 W.addEventListener('hashchange', rotear);
 const ir = (h) => { if (location.hash === '#' + h) rotear(); else location.hash = h; };
 function pintaAbas() {
   ABERTAS = ABERTAS.filter((id) => ESC.escaninhos.some((e) => e.id === id));
   const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
-  $('#abas').innerHTML = t('inicio', 'Início') + t('fila', 'Fila de triagem', PRONTO ? U.length : null) +
+  $('#abas').innerHTML = t('fila', 'Fila de triagem', PRONTO ? U.length : null) +
     tabEsc();
   /* módulos no canto esquerdo: Triagem | Pautas; na Pautas, as abas da triagem ficam ocultas */
-  const naP = ABA === 'pautas'; $('#abas').hidden = naP; if (!naP) ULT_TRI = ABA;
-  D.querySelectorAll('#modulos [data-mod]').forEach((b) => { const on = (b.dataset.mod === 'pautas') === naP; b.classList.toggle('on', on); b.setAttribute('aria-current', on ? 'page' : 'false'); }); }
-var ULT_TRI = 'inicio';
+  const mod = ABA === 'pautas' ? 'pautas' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; $('#abas').hidden = mod !== 'triagem'; if (mod === 'triagem') ULT_TRI = ABA;
+  D.querySelectorAll('#modulos [data-mod]').forEach((b) => { const on = b.dataset.mod === mod; b.classList.toggle('on', on); b.setAttribute('aria-current', on ? 'page' : 'false'); }); }
+var ULT_TRI = 'fila';
 /* telas de edição do motor (calendário, etiquetas, designação, marcos, equipe) por cima da página, com barra de volta */
 function telaMotor(aba, depois) { const w = M(); if (!w || !w.CMTSessao) { toast('O motor ainda está carregando; tente em instantes.', true); return; }
   try { w.CMTSessao.abrir(aba); } catch (e) { toast('Não abri a tela: ' + e.message, true); return; }
@@ -913,23 +943,36 @@ function abreEscPop(btn) { fechaEscPop(); const r = btn.getBoundingClientRect(),
   p.addEventListener('click', (ev) => { const b = ev.target.closest('[data-escir]'); if (!b) return; const id = b.dataset.escir; fechaEscPop(); ir(id === '__todos' ? 'escaninhos' : 'esc=' + id); }); }
 D.addEventListener('click', (e) => { if ($('#esc-pop') && !e.target.closest('#esc-pop,[data-escmenu]')) fechaEscPop(); });
 D.addEventListener('keydown', (e) => { if (e.key === 'Escape') fechaEscPop(); });
-$('#modulos').addEventListener('click', (e) => { const b = e.target.closest('[data-mod]'); if (!b) return; ir(b.dataset.mod === 'pautas' ? 'pautas' : (ULT_TRI && ULT_TRI !== 'pautas' ? (ULT_TRI.indexOf('esc:') === 0 ? 'esc=' + ULT_TRI.slice(4) : ULT_TRI) : 'inicio')); });
+$('#modulos').addEventListener('click', (e) => { const b = e.target.closest('[data-mod]'); if (!b) return; const mod = b.dataset.mod; ir(mod === 'triagem' ? (ULT_TRI && ULT_TRI.startsWith('esc:') ? 'esc=' + ULT_TRI.slice(4) : (ULT_TRI || 'fila')) : mod); });
 $('#abas').addEventListener('click', (e) => { if (e.target.closest('[data-escsai]')) { e.stopPropagation(); fechaEscPop(); ir('fila'); return; } const em = e.target.closest('[data-escmenu]'); if (em) { e.stopPropagation(); if ($('#esc-pop')) fechaEscPop(); else abreEscPop(em); return; } const f = e.target.closest('[data-fecha]'); if (f) { e.stopPropagation(); ABERTAS = ABERTAS.filter((x) => x !== f.dataset.fecha); LS.set('tri_abas', ABERTAS); if (ABA === 'esc:' + f.dataset.fecha) ir('fila'); else pintaAbas(); return; }
   const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
 
 /* ===================== render geral ===================== */
-function render() { if (!PRONTO) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', (b.dataset.mod === 'pautas') === naP)); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } return; }
+function render() { if (!PRONTO) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', b.dataset.mod === (naP ? 'pautas' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'))); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } return; }
   F = filtroDe(ABA); pintaAbas(); pintaGrava();
   const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
   m.hidden = naPauta; ap.hidden = !naPauta; D.title = naPauta ? 'Ab Initio · Pautas' : 'Ab Initio · Triagem';
   if (naPauta) { $('#rodape').hidden = true; try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
-  if (ABA === 'inicio') m.innerHTML = vInicio();
+  if (ABA === 'inteligencia') m.innerHTML = vInteligencia();
+  else if (ABA === 'chefia') m.innerHTML = vChefia();
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
   else if (ABA === 'escaninhos') m.innerHTML = vEscaninhos();
   else if (ABA.indexOf('esc:') === 0) m.innerHTML = vEscaninho(ABA.slice(4));
   pintaRodape(); }
 
-/* ---------- Início ---------- */
+
+/* Novos módulos: preservação das funções anteriores */
+function vChefia(){
+  const rr=[['escopo','Escopo da triagem','Tarefas do PJe que entram e ficam fora'],['destino','Destinos processuais','Aptidão e candidatos à monocrática'],['calendario','Calendário forense','Feriados, dias úteis e sessões'],['etiquetas','Etiquetas e tarefas','Indicadores derivados dos relatórios do PJe'],['designacao','Designação e correção','Critérios gerais e adaptações por sessão'],['produtividade','Produtividade','Metas, pesos, capacidade e prazos'],['equipe','Equipe','Perfis, funções e atribuições'],['sessao','Sessões','Configuração e marcos']];
+  const card=(r)=>'<div class="cg-link"><span><b>'+esc(r[1])+'</b><small>'+esc(r[2])+'</small></span><button data-cg-regra="'+r[0]+'">Abrir</button></div>';
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Central de gestão · regras e administração</p><h1>Chefia.</h1><p>As regras já existentes permanecem únicas e são editadas pelos mesmos diálogos, inclusive quando acessadas pelo Pautamento.</p></div></div><div class="cg-grid"><section class="cg-box"><header>Regras do acervo</header>'+rr.slice(0,4).map(card).join('')+'</section><section class="cg-box"><header>Organização do gabinete</header>'+rr.slice(4).map(card).join('')+'</section><section class="cg-box"><header>Importação e atualização do acervo</header><p>Planilhas do PJe, Power BI, importação por tarefa, complementação pelo DataJud e gravação na fonte central. O importador original é preservado.</p><div class="cg-actions"><button class="btn pri" data-cg-acervo="1">Importar / atualizar acervo</button><button class="btn" data-cg-regra="acervo">Regras da fonte</button></div><p>'+nf(ALL.length)+' processos na base carregada · '+nf(U.length)+' em triagem</p></section><section class="cg-box"><header>Integrações e governança</header><p>Fonte canônica: acervo/fonte.json, acervo/operacional.json e acervo/sessoes/. Regras em apoio/regras/. Esta etapa não altera os motores, a Fila nem as Pautas.</p><div class="cg-actions"><button class="btn" data-cg-regra="equipe">Cadastro da equipe</button><button class="btn" data-cg-regra="produtividade">Metas e pesos</button></div></section></div></div>';
+}
+function vInteligencia(){
+  const k=(n,t)=>'<div><b>'+nf(n)+'</b><span>'+t+'</span></div>';
+  const apt=U.filter(o=>o.apto&&!o.pend.length).length;
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Indicadores e relatórios</p><h1>Inteligência.</h1><p>Leitura gerencial da base real, emissão rápida e o diagnóstico da antiga aba Início, preservado abaixo.</p></div></div><div class="cg-kpis">'+k(ALL.length,'Processos na fonte')+k(U.length,'Em triagem')+k(apt,'Aptos sem pendência')+k(sessoes().length,'Sessões futuras')+'</div><div class="cg-grid"><section class="cg-box"><header>Gerador rápido de relatórios</header><p>Reutiliza os formatos e filtros já implementados no exportador da Triagem.</p><div class="cg-rel"><label>Conjunto<select id="cg-rel-tipo"><option value="all">Acervo central</option><option value="tri">Fila de triagem</option><option value="apt">Aptos</option><option value="pend">Com pendências</option></select></label><label>Formato<select id="cg-rel-formato"><option value="xlsx">Excel (.xlsx)</option><option value="csv">CSV</option><option value="doc">Word (.doc)</option><option value="pdf">PDF (impressão)</option><option value="est">Estatísticas CSV</option></select></label><button class="btn pri" data-cg-rel="1">Gerar</button></div><p>Catálogo de relatórios interaplicações e produtividade histórica: integração prevista para a próxima etapa.</p></section><section class="cg-box"><header>Panorama operacional</header><div class="cg-link"><span><b>Escaninhos</b><small>Organização atual da Triagem</small></span><b class="mono">'+nf(ESC.escaninhos.length)+'</b></div><div class="cg-link"><span><b>Com pendências</b><small>Processos em triagem</small></span><b class="mono">'+nf(U.filter(o=>o.pend.length).length)+'</b></div><p>Os dados das Pautas continuam sendo gerenciados exclusivamente pela página original.</p></section></div></div><section><div class="wrap cg-head"><div><h1 style="font-size:21px">Diagnóstico da triagem</h1><p>Todo o painel original de Início permanece aqui, com seus links para a Fila e análises existentes.</p></div></div>'+vInicio().replace('Triagem · início','Triagem · diagnóstico')+'</section>';
+}
+/* ---------- Início (painel incorporado à Inteligência) ---------- */
 function vInicio() {
   const semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri');
   const aptos = U.filter((o) => o.apto), comPend = aptos.filter((o) => o.pend.length), prontos = aptos.filter((o) => !o.pend.length), prM = prontos.filter((o) => o.monoE), prC = prontos.filter((o) => !o.monoE);
@@ -1556,6 +1599,15 @@ function abrirRegras(aba) { if (!W.CMTRegrasGerais) { toast('As regras gerais ai
   W.CMTRegrasGerais.abrir({ motor: M, abrirMotor: telaMotor, pagina: 'triagem', contagem: () => { const o = {}; (FONTE || ((core() || {}).rows) || []).forEach((r) => { const t = String(r.tarefa_atual || '').trim(); if (t) o[t] = (o[t] || 0) + 1; }); return o; }, aba: aba || (NOVAS.length ? 'escopo' : 'destino'), aoGravarEscopo: (j) => { ESCOPO = { triar: (j.triar || []).map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); construir(); render(); toast('Escopo da triagem atualizado: ' + nf(U.length) + ' processos em triagem.'); } }); }
 $('#bt-regras').addEventListener('click', () => { if (!PM() || !(M() && M().CMTSessao)) { toast('O motor ainda está abrindo; tente em instantes.', true); return; } abrirRegras(); });
 $('#bt-acervo').addEventListener('click', () => { if (!PM()) { toast('O motor ainda está abrindo; tente em instantes.', true); return; } abrirAcervo(); });
+D.addEventListener('click', (e) => {
+ const r=e.target.closest('[data-cg-regra]'); if(r){abrirRegras(r.dataset.cgRegra);return;}
+ if(e.target.closest('[data-cg-acervo]')){$('#bt-acervo').click();return;}
+ if(e.target.closest('[data-cg-rel]')){
+  const k=($('#cg-rel-tipo')||{}).value||'all',f=($('#cg-rel-formato')||{}).value||'xlsx';
+  const L=k==='tri'?U:k==='apt'?U.filter(o=>o.apto):k==='pend'?U.filter(o=>o.pend.length):ALL;
+  exportar(f,L,({all:'Acervo central',tri:'Fila de triagem',apt:'Processos aptos',pend:'Processos com pendência'})[k],'Central · Inteligência');return;
+ }
+});
 $('#st-grava').addEventListener('click', () => { if (ERRO || pendentes()) { TENT = 0; gravar(); } });
 
 /* ===================== eventos ===================== */
