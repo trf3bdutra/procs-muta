@@ -270,6 +270,70 @@
      ]
     },
     {
+     "grupo": "Autos extraídos do PJe",
+     "campos": [
+      {
+       "rotulo": "Extraído em",
+       "chave": "Autos - Extraído em",
+       "tipo": "texto",
+       "secao": "origem",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Documentos",
+       "chave": "Autos - Total",
+       "tipo": "texto",
+       "secao": "origem",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "PDF sem texto (digitalizado)",
+       "chave": "Autos - Sem texto",
+       "tipo": "texto",
+       "secao": "origem",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Lista de documentos (IDs)",
+       "chave": "Autos - Documentos",
+       "tipo": "tabela",
+       "secao": "origem",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py",
+       "colunas": [
+        {
+         "chave": "id",
+         "rotulo": "ID",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "documento",
+         "rotulo": "Documento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "juntado",
+         "rotulo": "Juntado por",
+         "tipo": "texto"
+        },
+        {
+         "chave": "formato",
+         "rotulo": "Formato",
+         "tipo": "texto"
+        }
+       ]
+      }
+     ]
+    },
+    {
      "grupo": "Registro no acervo",
      "campos": [
       {
@@ -1217,6 +1281,100 @@
        "chave": "Rev - Nota de atenção",
        "tipo": "texto-longo",
        "secao": "producao"
+      }
+     ]
+    },
+    {
+     "grupo": "Lote e correção (Index)",
+     "campos": [
+      {
+       "rotulo": "Lote",
+       "chave": "Lote",
+       "tipo": "texto",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Tipo de caso",
+       "chave": "Lote - Tipo de caso",
+       "tipo": "texto",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Resultado no lote",
+       "chave": "Lote - Resultado",
+       "tipo": "texto",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Variações",
+       "chave": "Lote - Variações",
+       "tipo": "texto",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Caso",
+       "chave": "Lote - Caso",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Observação",
+       "chave": "Lote - Observação",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Ajustes da correção",
+       "chave": "Lote - Ajustes da correção",
+       "tipo": "tabela",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py",
+       "colunas": [
+        {
+         "chave": "secao",
+         "rotulo": "Seção",
+         "tipo": "texto"
+        },
+        {
+         "chave": "ajuste",
+         "rotulo": "Ajuste",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "tipo",
+         "rotulo": "Tipo",
+         "tipo": "texto"
+        }
+       ]
+      },
+      {
+       "rotulo": "Pendências do lote",
+       "chave": "Lote - Pendências",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
+      },
+      {
+       "rotulo": "Minuta no lote",
+       "chave": "Lote - Minuta",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "editavel": false,
+       "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py"
       }
      ]
     },

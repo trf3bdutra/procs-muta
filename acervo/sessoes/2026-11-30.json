@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-19T00:30:11.464Z",
+ "atualizadoEm": "2026-11-19T06:08:06.434Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -82,14 +82,18 @@
       "tipo": "Sentença",
       "acc": {
        "honor": true
-      }
+      },
+      "id": "396725545",
+      "data": "14/07/2026"
      },
      "pendencias": [
       {
        "desc": "Disponibilizar os documentos do processo ao agente (petições, decisão de origem, recursos, contrarrazões, parecer do MPF) para preenchimento do prontuário",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-16",
-       "por": "LIA · Bruno"
+       "por": "LIA · Bruno",
+       "okEm": "2026-11-19",
+       "okPor": "Index · autos extraídos do PJe"
       },
       {
        "desc": "Conferir a matéria, a decisão de origem e o resultado dos paradigmas antes de qualquer aproveitamento",
@@ -97,14 +101,25 @@
        "em": "2026-11-16",
        "por": "LIA · Bruno"
       }
-     ]
+     ],
+     "tipoJ": "Apelação",
+     "mpfx": {
+      "id": "405581554"
+     },
+     "obsGeral": "Resultado lido do dispositivo da minuta, a confirmar no julgamento."
     },
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-18T21:44:21.951Z",
     "planilhaEtapa": "Corrigido",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-06"
+    "planilhaDataMinuta": "2026-11-06",
+    "resJulg": "Desprovido",
+    "lote": {
+     "id": "acorrigir",
+     "item": 3,
+     "autos": 94
+    }
    }
   },
   {
@@ -238,6 +253,18 @@
        "ok": false,
        "em": "2026-11-18",
        "por": "Claude (autos)"
+      },
+      {
+       "desc": "IDs da sentença (393431657), da apelação (393431658), das contrarrazões (393431663) e do parecer do MPF (406329546) conferidos nos autos.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Litispendência remetida aos autos 5002016-82.2025 (feito posterior), conforme orientação de V. Exa.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
       }
      ]
     },
@@ -255,7 +282,12 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-04"
+    "planilhaDataMinuta": "2026-11-04",
+    "lote": {
+     "id": "2886",
+     "item": 4,
+     "autos": 0
+    }
    }
   },
   {
@@ -428,6 +460,18 @@
        "ok": false,
        "em": "2026-11-16",
        "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Pedido de suspensão (Temas 1.302 e 1.433/STJ) conferido nas contrarrazões (ID 393380639); prescrição subsidiária conferida nos memoriais (ID 406638692).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Sobrestamento e prescrição não estavam enfrentados na minuta: acrescidos com os parágrafos do acervo (5000162-71.2026 e 5007906-02.2025).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
       }
      ],
      "rel": {
@@ -442,7 +486,12 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-04"
+    "planilhaDataMinuta": "2026-11-04",
+    "lote": {
+     "id": "2886",
+     "item": 6,
+     "autos": 0
+    }
    }
   },
   {
@@ -605,6 +654,18 @@
        "ok": false,
        "em": "2026-11-16",
        "por": "LIA · Bruno"
+      },
+      {
+       "desc": "Parecer do MPF, contrarrazões e memoriais conferidos nos autos.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Parágrafos fora do modelo (\"Tampouco procedem…\" e \"O item II da tese…\"), com Tema 480/STJ — manter?",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
       }
      ],
      "rel": {
@@ -618,7 +679,12 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-10"
+    "planilhaDataMinuta": "2026-11-10",
+    "lote": {
+     "id": "2886",
+     "item": 7,
+     "autos": 0
+    }
    }
   },
   {
@@ -770,6 +836,18 @@
        "ok": false,
        "em": "2026-11-18",
        "por": "Claude (autos)"
+      },
+      {
+       "desc": "Sem parecer do MPF nos autos.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Parágrafos fora do modelo (\"Tampouco procedem…\" e \"O item II da tese…\"), com Tema 480/STJ, iguais aos do item 7 — manter?",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
       }
      ]
     },
@@ -788,7 +866,12 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-09"
+    "planilhaDataMinuta": "2026-11-09",
+    "lote": {
+     "id": "2886",
+     "item": 8,
+     "autos": 0
+    }
    }
   },
   {
@@ -938,6 +1021,12 @@
        "ok": false,
        "em": "2026-11-18",
        "por": "Claude (autos)"
+      },
+      {
+       "desc": "Sem parecer do MPF nos autos.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote 2886"
       }
      ]
     },
@@ -956,7 +1045,12 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-09"
+    "planilhaDataMinuta": "2026-11-09",
+    "lote": {
+     "id": "2886",
+     "item": 9,
+     "autos": 0
+    }
    }
   },
   {
@@ -1031,7 +1125,25 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-13"
+    "planilhaDataMinuta": "2026-11-13",
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "agint": {
+      "id": "359087529",
+      "data": "09/03/2026"
+     },
+     "mpfx": {
+      "id": "393537758"
+     },
+     "obsGeral": "Resultado lido do dispositivo da minuta, a confirmar no julgamento.",
+     "pendencias": []
+    },
+    "resJulg": "Desprovido",
+    "lote": {
+     "id": "acorrigir",
+     "item": 12,
+     "autos": 36
+    }
    }
   },
   {
@@ -1312,7 +1424,31 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-06"
+    "planilhaDataMinuta": "2026-11-06",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "354343907",
+      "data": "22/10/2025"
+     },
+     "ed": {
+      "id": "354343901",
+      "data": "07/08/2024"
+     },
+     "mpfx": {
+      "id": "355552948"
+     },
+     "obsGeral": "Resultado lido do dispositivo da minuta, a confirmar no julgamento.",
+     "pendencias": []
+    },
+    "resJulg": "Parcialmente provido",
+    "lote": {
+     "id": "acorrigir",
+     "item": 24,
+     "autos": 48
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1380,7 +1516,25 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-06"
+    "planilhaDataMinuta": "2026-11-06",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "366723827",
+      "data": "27/01/2026"
+     },
+     "mpfx": {
+      "id": "376119842"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 27,
+     "autos": 39
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1436,7 +1590,37 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-09"
+    "planilhaDataMinuta": "2026-11-09",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "322052989",
+      "data": "01/08/2024"
+     },
+     "obsGeral": "Minuta corrigida em 19/11/2026 com conferência nos autos. A sentença usa linguagem de mandado de segurança em ação comum; a minuta descreve como \"julgou procedente o pedido\".",
+     "pendencias": [
+      {
+       "desc": "Validar com o Relator a frase sobre a aprovação sub judice no voto.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Completar relator e data do EREsp 1.539.725.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "resJulg": "Desprovido",
+    "lote": {
+     "id": "acorrigir",
+     "item": 29,
+     "autos": 52
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1458,7 +1642,28 @@
    "ctl": {
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
-    "planilhaReferencia": "2026-11-18"
+    "planilhaReferencia": "2026-11-18",
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "ai": {
+      "id": "376811200",
+      "data": "27/05/2026"
+     },
+     "pendencias": [
+      {
+       "desc": "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 30,
+     "autos": 19
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1481,7 +1686,22 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-09"
+    "planilhaDataMinuta": "2026-11-09",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "311524740",
+      "data": "27/05/2024"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 31,
+     "autos": 36
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1621,7 +1841,33 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "349343817",
+      "data": "02/04/2025"
+     },
+     "ed": {
+      "id": "349343818",
+      "data": "04/04/2025"
+     },
+     "pendencias": [
+      {
+       "desc": "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 36,
+     "autos": 83
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1855,7 +2101,25 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-11"
+    "planilhaDataMinuta": "2026-11-11",
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "349502999",
+      "data": "29/10/2025"
+     },
+     "mpfx": {
+      "id": "360639029"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 44,
+     "autos": 60
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2069,7 +2333,25 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-16"
+    "planilhaDataMinuta": "2026-11-16",
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "400501797",
+      "data": "22/07/2026"
+     },
+     "mpfx": {
+      "id": "405494179"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 51,
+     "autos": 64
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2248,7 +2530,21 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-11"
+    "planilhaDataMinuta": "2026-11-11",
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "agint": {
+      "id": "395891182",
+      "data": "04/09/2026"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 58,
+     "autos": 18
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2304,7 +2600,46 @@
       "registradoEm": "2026-11-18",
       "origem": "Retificação manual solicitada pelo gestor"
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "354858327",
+      "data": "22/07/2025"
+     },
+     "mpfx": {
+      "id": "355942741"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+     "pendencias": [
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar nos autos o Acordo 687/2011 e os aditivos (IDs 354858307, 354858308 e 354858310): o enquadramento no grupo 1 depende deles.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 60,
+     "autos": 41
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2336,7 +2671,43 @@
       "registradoEm": "2026-11-18",
       "origem": "Retificação manual solicitada pelo gestor"
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "301500628",
+      "data": "08/05/2024"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+     "pendencias": [
+      {
+       "desc": "Confirmar nos autos a espécie do benefício fruído (crédito presumido ou redução de base de cálculo) e o ID da prova do Decreto estadual 9.889/2000 e do Convênio ICMS 100/1997.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Desprovimento da apelação e da remessa necessária [VALIDAR: depende da prova do crédito presumido]",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 61,
+     "autos": 51
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2367,7 +2738,33 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "309632808",
+      "data": "27/11/2024"
+     },
+     "mpfx": {
+      "id": "310089460"
+     },
+     "obsGeral": "Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 62,
+     "autos": 45
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2399,7 +2796,46 @@
       "registradoEm": "2026-11-18",
       "origem": "Retificação manual solicitada pelo gestor"
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "312598558",
+      "data": "02/09/2024"
+     },
+     "mpfx": {
+      "id": "312598555"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+     "pendencias": [
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar nos autos o Decreto estadual 12.056/2006 (ID 312598538) como ato concessivo de crédito presumido.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 63,
+     "autos": 49
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2424,7 +2860,49 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-17"
+    "planilhaDataMinuta": "2026-11-17",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "356257005",
+      "data": "30/01/2025"
+     },
+     "ed": {
+      "id": "356257009",
+      "data": "05/03/2025"
+     },
+     "mpfx": {
+      "id": "359322018"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+     "pendencias": [
+      {
+       "desc": "Acompanhar a publicação do acórdão do RE 835.818 (Tema 843) e eventual embargos com pedido de modulação de efeitos antes da sessão de 30/11/2026.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance as apelações.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Desprovimento da apelação da União e da remessa necessária; provimento da apelação da impetrante para estender a exclusão ao PIS e à COFINS",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 64,
+     "autos": 57
+    }
    }
   },
   {
@@ -2455,7 +2933,37 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "383955388",
+      "data": "21/05/2025"
+     },
+     "ed": {
+      "id": "383955393",
+      "data": "30/05/2025"
+     },
+     "mpfx": {
+      "id": "385176561"
+     },
+     "obsGeral": "Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 65,
+     "autos": 74
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2478,7 +2986,40 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-12"
+    "planilhaDataMinuta": "2026-11-12",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "317089875",
+      "data": "27/01/2025"
+     },
+     "mpfx": {
+      "id": "318024412"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+     "pendencias": [
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vindo da minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar se há ordem de suspensão vigente no Tema 1.182/STJ.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 66,
+     "autos": 44
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2509,7 +3050,37 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "380451783",
+      "data": "25/03/2026"
+     },
+     "ed": {
+      "id": "380451788",
+      "data": "02/04/2026"
+     },
+     "mpfx": {
+      "id": "382513502"
+     },
+     "obsGeral": "Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 67,
+     "autos": 52
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2540,7 +3111,36 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "374542838",
+      "data": "12/02/2025"
+     },
+     "ed": {
+      "id": "374542852",
+      "data": "17/07/2025"
+     },
+     "mpfx": {
+      "id": "376847929"
+     },
+     "pendencias": [
+      {
+       "desc": "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 68,
+     "autos": 50
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2571,7 +3171,37 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "389082556",
+      "data": "17/04/2026"
+     },
+     "ed": {
+      "id": "389082559",
+      "data": "29/04/2026"
+     },
+     "mpfx": {
+      "id": "392719356"
+     },
+     "obsGeral": "Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 69,
+     "autos": 44
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2597,7 +3227,57 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-18"
+    "planilhaDataMinuta": "2026-11-18",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "343867732",
+      "data": "08/05/2025"
+     },
+     "mpfx": {
+      "id": "406285525"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+     "pendencias": [
+      {
+       "desc": "Validar com o Relator o parcial provimento (restituição e repetição afastadas).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Indicar o ID da sentença, ausente da minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Verificar o pedido de habilitação para sustentação oral por videoconferência (ID 408491479) e sua comunicação para a sessão de 30/11/2026.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar se a sentença ou a inicial trataram de recomposição da escrita fiscal, mencionada na minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE) e confirmar que não há suspensão vigente no Tema 1.416/STJ.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Parcial provimento da apelação e da remessa necessária para afastar a repetição e a restituição administrativa do indébito, mantida a compensação",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 70,
+     "autos": 43
+    }
    }
   },
   {
@@ -2660,7 +3340,37 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "343454417",
+      "data": "25/06/2025"
+     },
+     "ed": {
+      "id": "343454423",
+      "data": "04/07/2025"
+     },
+     "mpfx": {
+      "id": "352263667"
+     },
+     "obsGeral": "Fora do tema? assunto na pauta: ICMS. Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 72,
+     "autos": 58
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2683,7 +3393,38 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-16"
+    "planilhaDataMinuta": "2026-11-16",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "333970615",
+      "data": "14/04/2025"
+     },
+     "ed": {
+      "id": "333970611",
+      "data": "24/02/2025"
+     },
+     "mpfx": {
+      "id": "334116380"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+     "pendencias": [
+      {
+       "desc": "Validar com o Relator a inversão do resultado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Rejeitada a preliminar; provimento da apelação e da remessa necessária para denegar a segurança",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 73,
+     "autos": 84
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2714,7 +3455,37 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-17"
+    "planilhaDataMinuta": "2026-11-17",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "346923593",
+      "data": "02/07/2025"
+     },
+     "ed": {
+      "id": "346923596",
+      "data": "11/07/2025"
+     },
+     "mpfx": {
+      "id": "347479460"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+     "pendencias": [
+      {
+       "desc": "Validar com o Relator o julgamento do mérito nesta instância (causa madura conferida nos autos: informações prestadas, União no feito, Termos de Acordo juntados).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Parcial provimento da apelação para afastar a litispendência e, nos termos do artigo 1.013, § 3º, I, do CPC, conceder parcialmente a segurança",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 74,
+     "autos": 61
+    }
    }
   },
   {
@@ -2737,7 +3508,46 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-12"
+    "planilhaDataMinuta": "2026-11-12",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "323827360",
+      "data": "08/03/2025"
+     },
+     "mpfx": {
+      "id": "327426691"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+     "pendencias": [
+      {
+       "desc": "Conferir quem apelou: a autuação registra a impetrante como apelante; a minuta relata apelação da União (ID 323827362). Retificar a autuação ou incluir no voto o recurso da impetrante.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Confirmar que não há ordem de suspensão vigente no Tema 1.416/STJ que alcance a apelação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Desprovimento da apelação da União e da remessa necessária [VALIDAR: autuação registra a impetrante como apelante]",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 75,
+     "autos": 38
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2768,7 +3578,37 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "400058794",
+      "data": "19/05/2026"
+     },
+     "ed": {
+      "id": "400058796",
+      "data": "28/05/2026"
+     },
+     "mpfx": {
+      "id": "404904595"
+     },
+     "obsGeral": "Fora do tema? parte contra o Estado de MS, assunto não padronizado: provavelmente outro tema. Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 76,
+     "autos": 256
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2794,7 +3634,37 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-13"
+    "planilhaDataMinuta": "2026-11-13",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "347405675",
+      "data": "04/09/2024"
+     },
+     "ed": {
+      "id": "347405681",
+      "data": "11/11/2024"
+     },
+     "mpfx": {
+      "id": "350001569"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote); o texto original do minutante continua no PJe. Inteiro teor dos autos lido.",
+     "pendencias": [
+      {
+       "desc": "Confirmar se há ordem de suspensão vigente no Tema 1.182/STJ.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Apelação conhecida em parte e desprovida; remessa necessária desprovida",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 77,
+     "autos": 80
+    }
    }
   },
   {
@@ -2817,7 +3687,50 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-13"
+    "planilhaDataMinuta": "2026-11-13",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "318741815",
+      "data": "04/11/2024"
+     },
+     "ed": {
+      "id": "318741828",
+      "data": "19/01/2025"
+     },
+     "mpfx": {
+      "id": "318741820"
+     },
+     "obsGeral": "Minuta corrigida em 18/11/2026 (versão no lote) a partir do texto integral do PJe; o texto original do minutante continua no PJe. Inteiro teor dos autos não lido.",
+     "pendencias": [
+      {
+       "desc": "Confirmar se a referência da sentença ao 'ICMS incidente sobre valores oriundos da repetição de indébito' é erro material.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Identificar a parte do pedido negada na sentença (concessão parcial; custas pela metade).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE) e confirmar que não há suspensão vigente no Tema 1.416/STJ.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "lote": {
+     "id": "irpj-icms",
+     "item": 78,
+     "autos": 53
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2840,7 +3753,37 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-20"
+    "planilhaDataMinuta": "2026-11-20",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "350682668",
+      "data": "13/09/2024"
+     },
+     "ed": {
+      "id": "350682669",
+      "data": "07/10/2024"
+     },
+     "mpfx": {
+      "id": "350947784"
+     },
+     "obsGeral": "Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 79,
+     "autos": 66
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2904,7 +3847,37 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "385290392",
+      "data": "04/03/2025"
+     },
+     "ed": {
+      "id": "385290395",
+      "data": "14/03/2025"
+     },
+     "mpfx": {
+      "id": "387004912"
+     },
+     "obsGeral": "Fora do tema? assunto na pauta: PIS. Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 81,
+     "autos": 53
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2930,7 +3903,24 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-05"
+    "planilhaDataMinuta": "2026-11-05",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "401436250",
+      "data": "29/06/2026"
+     },
+     "mpfx": {
+      "id": "405454036"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 82,
+     "autos": 56
+    }
    }
   },
   {
@@ -3033,7 +4023,25 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-05"
+    "planilhaDataMinuta": "2026-11-05",
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "401098531",
+      "data": "27/07/2026"
+     },
+     "mpfx": {
+      "id": "405471119"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 86,
+     "autos": 49
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3305,7 +4313,29 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "372668718",
+      "data": "03/02/2026"
+     },
+     "pendencias": [
+      {
+       "desc": "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 95,
+     "autos": 75
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3328,7 +4358,30 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-18"
+    "planilhaDataMinuta": "2026-11-18",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "257933489",
+      "data": "16/03/2022"
+     },
+     "ed": {
+      "id": "383321683",
+      "data": "29/06/2026"
+     },
+     "agint": {
+      "id": "356949323",
+      "data": "26/02/2026"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 96,
+     "autos": 65
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3360,7 +4413,25 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Fora do tema? pessoa física, processo de 2011: conferir se é o mesmo tema. Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 97,
+     "autos": 37
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3451,7 +4522,24 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": [
+      {
+       "desc": "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 100,
+     "autos": 19
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3843,7 +4931,27 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-16"
+    "planilhaDataMinuta": "2026-11-16",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "158862492",
+      "data": "17/11/2020"
+     },
+     "ed": {
+      "id": "401296422",
+      "data": "29/09/2026"
+     },
+     "obsGeral": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 115,
+     "autos": 81
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3889,7 +4997,27 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-16"
+    "planilhaDataMinuta": "2026-11-16",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "377918385",
+      "data": "22/01/2026"
+     },
+     "ed": {
+      "id": "401830446",
+      "data": "01/10/2026"
+     },
+     "obsGeral": "Aguardando posição do Dr. · Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 117,
+     "autos": 72
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3913,7 +5041,27 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-12"
+    "planilhaDataMinuta": "2026-11-12",
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "220275776",
+      "data": "28/07/2021"
+     },
+     "agint": {
+      "id": "250855535",
+      "data": "24/12/2021"
+     },
+     "obsGeral": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 118,
+     "autos": 79
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3994,7 +5142,26 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-16"
+    "planilhaDataMinuta": "2026-11-16",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "369934726",
+      "data": "05/12/2025"
+     },
+     "ed": {
+      "id": "401716127",
+      "data": "30/09/2026"
+     },
+     "obsGeral": "com tutela e sobre seus efeitos · Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 121,
+     "autos": 85
+    }
    }
   },
   {
@@ -4020,7 +5187,26 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-12"
+    "planilhaDataMinuta": "2026-11-12",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "263024568",
+      "data": "14/06/2021"
+     },
+     "ed": {
+      "id": "391831768",
+      "data": "13/08/2026"
+     },
+     "obsGeral": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 122,
+     "autos": 77
+    }
    }
   },
   {
@@ -4045,7 +5231,42 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-12"
+    "planilhaDataMinuta": "2026-11-12",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "392682999",
+      "data": "27/07/2026"
+     },
+     "ed": {
+      "id": "402594235",
+      "data": "06/10/2026"
+     },
+     "mpfx": {
+      "id": "394093893"
+     },
+     "obsGeral": "Fora do tema? assunto na pauta: PIS (remessa necessária). Sem autos e sem minuta no lote.",
+     "pendencias": [
+      {
+       "desc": "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Marcado como corrigido no lote \"A corrigir\": conferir antes de refazer.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote irpj-icms"
+      }
+     ]
+    },
+    "lote": {
+     "id": "irpj-icms",
+     "item": 123,
+     "autos": 74
+    }
    }
   },
   {
@@ -4695,7 +5916,27 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (5).xlsx",
     "planilhaReferencia": "2026-11-18",
-    "planilhaDataMinuta": "2026-11-12"
+    "planilhaDataMinuta": "2026-11-12",
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "262402023",
+      "data": "14/06/2022"
+     },
+     "ed": {
+      "id": "391491467",
+      "data": "11/08/2026"
+     },
+     "obsGeral": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 150,
+     "autos": 140
+    },
+    "editadoPor": "Index"
    }
   }
  ],

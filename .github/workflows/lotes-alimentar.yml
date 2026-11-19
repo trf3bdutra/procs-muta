@@ -1,0 +1,38 @@
+name: Lotes · alimentar ficha e prontuários
+# Cada edição das tabelas de um lote no Index (/index/) grava acervo/lotes/<id>.json na main.
+# Este fluxo leva essas informações à ficha única (acervo/operacional.json) e aos cartões das pautas
+# (acervo/sessoes/*.json) com scripts/lotes/alimentar.py. Campos do lote são sobrescritos; campos que a
+# equipe já preencheu na ficha ou no prontuário não são tocados. Se a main andar no meio, refaz (até 3 vezes).
+on:
+  push:
+    branches: [main]
+    paths: ["acervo/lotes/*.json", "acervo/autos/*.json.gz", "scripts/lotes/alimentar.py"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: lotes-alimentar
+  cancel-in-progress: false
+jobs:
+  alimentar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Alimentar e gravar
+        run: |
+          git config user.name 'lotes-alimentar[bot]'
+          git config user.email 'lotes-alimentar[bot]@users.noreply.github.com'
+          for tentativa in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python3 scripts/lotes/alimentar.py
+            if git diff --quiet -- acervo/operacional.json acervo/sessoes; then echo 'Nada a alimentar.'; exit 0; fi
+            git add acervo/operacional.json acervo/sessoes
+            git commit -q -m "Lotes: ficha única e prontuários alimentados pelo Index"
+            if git push -q origin HEAD:main; then exit 0; fi
+            echo "main andou; refazendo ($tentativa)"; sleep 5
+          done
+          exit 1

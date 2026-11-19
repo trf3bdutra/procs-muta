@@ -415,3 +415,6 @@ html.cmt-fx-open{overflow:hidden!important}
 #cmt-fx .rs-obs-ta{width:100%!important;box-sizing:border-box!important;resize:vertical!important;min-height:120px!important;padding:10px 12px!important;border:1px solid #cfdade!important;border-radius:10px!important;background:#fff!important;font:500 12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important;color:var(--cx-ink)!important}
 #cmt-fx .rs-obs-ta:focus{outline:2px solid var(--cx-accent)!important;outline-offset:1px!important}
 #cmt-fx .rs-obs-ac{display:flex!important;gap:8px!important;justify-content:flex-end!important}
+/* tabelas somente leitura longas (ex.: Autos - Documentos, Ajustes do lote): rolagem própria com cabeçalho fixo */
+#cmt-fx .fx-tbl.fx-tb{max-height:340px!important;overflow:auto!important;align-content:start!important}
+#cmt-fx .fx-tb>span.th{position:sticky!important;top:0!important;z-index:1!important}
