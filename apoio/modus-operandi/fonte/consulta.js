@@ -1,6 +1,6 @@
 /* ================= CONSULTA: processo pautado → perfil do caso → folha, canhoto, conformidade e material ================= */
 (function(){
-  var CQ={ses:'',item:'',perfil:null,fonte:'',cal:null,erro:'',busy:false,sel:'',grupo:'',ver:{},usar:'',matriz:false,pront:null,colar:false,m28:null,lia:{peca:'acordao',modo:'GERAÇÃO',res:'',prec:null,mod:true,par:true}};
+  var CQ={ses:'',item:'',perfil:null,fonte:'',cal:null,erro:'',busy:false,sel:'',grupo:'',ver:{},usar:'',matriz:false,pront:null,colar:false,m28:null,extra:{},modelq:'',lia:{peca:'acordao',modo:'GERAÇÃO',res:'',prec:null,mod:true,par:true}};
   var STOP={'de':1,'da':1,'do':1,'das':1,'dos':1,'e':1,'a':1,'o':1,'as':1,'os':1,'em':1,'no':1,'na':1,'nos':1,'nas':1,'por':1,'para':1,'com':1,'sem':1,'um':1,'uma':1,'ao':1,'aos':1,'que':1,'se':1,'ou':1,'nao':1,'sobre':1,'entre':1,'pelo':1,'pela':1,'art':1,'lei':1,'recurso':1,'processo':1,'caso':1};
   function nq(s){return String(s==null?'':s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
   function toks(s){return nq(s).split(/[^a-z0-9]+/).filter(function(w){return w.length>2&&!STOP[w];});}
@@ -62,7 +62,7 @@
     return jget('/api/sessoes').then(function(c){CQ.cal=(c.sessoes||[]).slice().sort(function(a,b){return String(b.date).localeCompare(String(a.date));});})
       .catch(function(er){CQ.cal=[];CQ.erro=er.login?er.message:'As pautas não estão disponíveis aqui: a consulta por sessão funciona no site publicado. O botão Compendium dos cartões continua enviando o caso.';});
   }
-  function zerar(){CQ.sel='';CQ.grupo='';CQ.ver={};CQ.usar='';CQ.matriz=false;}
+  function zerar(){CQ.sel='';CQ.grupo='';CQ.ver={};CQ.usar='';CQ.matriz=false;CQ.extra={};CQ.modelq='';}
   function consultar(){
     var ses=CQ.ses,it=String(CQ.item||'').trim();if(!ses||!it){toastC('Escolha a sessão e informe o item.');return;}
     CQ.busy=true;render();
@@ -81,14 +81,29 @@
     var u={};fortes.forEach(function(w){u[w]=2;});fracos.forEach(function(w){if(!u[w])u[w]=1;});return u;
   }
   function pont(T,campos){var s=0,ach={};campos.forEach(function(c){var t=toks(c[0]);var vis={};t.forEach(function(w){if(T[w]&&!vis[w]){vis[w]=1;s+=T[w]*c[1];ach[w]=1;}});});return {s:s,ach:Object.keys(ach)};}
+  function modeloElegibilidade(P,z){
+    var m=z.x||z,raz=[],imp=[],tj=nq(P.tipoJulgamento||''),aP=nq(P.assunto||''),aM=nq(m.assunto||''),mt=nq((m.classe||'')+' '+(m.nomeModelo||''));
+    var tipos=[['embargos de declaracao',/embargos de declar/],['agravo de instrumento',/agravo de instrumento/],['agravo interno',/agravo interno/],['remessa necessaria',/remessa/],['apelacao',/apelac/]];
+    var caso='';tipos.forEach(function(x){if(!caso&&x[1].test(tj))caso=x[0];});
+    var modt='';tipos.forEach(function(x){if(!modt&&x[1].test(mt))modt=x[0];});
+    if(caso&&modt&&caso!==modt)imp.push('recurso incompatível ('+modt+')');else if(caso&&modt)raz.push('mesmo tipo de recurso');
+    if(aP&&aM){
+      if(aP===aM)raz.push('mesmo assunto');
+      else{var ap=toks(aP),am=toks(aM),inter=ap.filter(function(x){return am.indexOf(x)>=0;});if(inter.length>=2)raz.push('assunto relacionado');else if(z.s<8)imp.push('assunto distinto');}
+    }
+    if(z.s>=12)raz.push('alta aderência ao prontuário');else if(z.s>=6)raz.push('aderência ao prontuário');
+    return {ok:!imp.length&&(z.s>=6||raz.indexOf('mesmo assunto')>=0),razoes:raz,impedimentos:imp};
+  }
   function buscar(P){
     var B=BASE||{},T=termos(P),tj=nq(P.tipoJulgamento||''),aN=nq(P.assunto||'');
     var arr=function(v){return Array.isArray(v)?v.join(' '):(v||'');};
     var prec=(B.prec||[]).map(function(p){var r=pont(T,[[p.assunto,3],[arr(p.subassunto),3],[p.tese,2],[arr(p.espTags),2],[arr(p.temas),1],[p.ementa,1]]);if(aN&&nq(p.assunto)===aN)r.s+=6;return {x:p,s:r.s,ach:r.ach};});
-    var mod=(B.mod||[]).map(function(m){var r=pont(T,[[m.assunto,3],[m.nomeModelo,2],[m.tese,2],[arr(m.especificidadesTags),2],[m.causaPedir,1]]);if(aN&&nq(m.assunto)===aN)r.s+=6;if(tj&&nq((m.classe||'')+' '+(m.nomeModelo||'')).indexOf(tj.split(' ')[0])>=0)r.s+=2;return {x:m,s:r.s,ach:r.ach};});
+    var modTodos=(B.mod||[]).map(function(m){var r=pont(T,[[m.assunto,3],[m.nomeModelo,2],[m.tese,2],[arr(m.especificidadesTags),2],[m.causaPedir,1]]);if(aN&&nq(m.assunto)===aN)r.s+=6;if(tj&&nq((m.classe||'')+' '+(m.nomeModelo||'')).indexOf(tj.split(' ')[0])>=0)r.s+=2;var z={x:m,s:r.s,ach:r.ach};z.el=modeloElegibilidade(P,z);return z;});
     var par=(B.par||[]).map(function(p){var r=pont(T,[[p.titulo,3],[p.nivelTema,2],[p.nivelEspecificidade,2],[p.categoria,1],[p.texto,1]]);return {x:p,s:r.s,ach:r.ach};});
-    var top=function(L){return L.filter(function(z){return z.s>0;}).sort(function(a,b){return b.s-a.s;}).slice(0,10);};
-    return {prec:top(prec),mod:top(mod),par:top(par),T:Object.keys(T)};
+    var top=function(L,n){return L.filter(function(z){return z.s>0;}).sort(function(a,b){return b.s-a.s;}).slice(0,n||10);};
+    var ok=modTodos.filter(function(z){return z.el.ok;}).sort(function(a,b){return b.s-a.s;});
+    var fora=modTodos.filter(function(z){return !z.el.ok&&z.s>0;}).sort(function(a,b){return b.s-a.s;});
+    return {prec:top(prec),mod:ok.slice(0,10),modTodos:modTodos,modFora:fora.slice(0,20),par:top(par),T:Object.keys(T)};
   }
   /* ---------- estrutura aplicada: modelo do banco ou minuta-matriz ---------- */
   function pj(v){if(v==null)return null;if(typeof v==='string'){try{return JSON.parse(v);}catch(er){return null;}}return v;}
@@ -122,8 +137,19 @@
   }
   function corpo(s){
     return String(s||'').split(/\n+/).filter(function(l){return l.trim();}).map(function(l){
-      return '<p class="std">'+e(l.trim()).replace(/\{([^}]{0,120})\}/g,function(_,f){return '<span class="fill">'+f+'</span>';})+'</p>';}).join('')||'<p class="xph">Parágrafo sem texto gravado.</p>';
+      return '<p class="std">'+e(l.trim()).replace(/\{([^}]{0,120})\}/g,function(_,f){var k=String(f).trim(),v=CQ.extra[k];return v!=null&&String(v).trim()?'<span class="fill preenchido">'+e(v)+'</span>':'<span class="fill">'+e(k)+'</span>';})+'</p>';}).join('')||'<p class="xph">Parágrafo sem texto gravado.</p>';
   }
+  function camposComplementares(A){
+    if(!A||!A.x)return [];var seen={},out=[],add=function(t){String(t||'').replace(/\{([^}]{1,120})\}/g,function(_,k){k=String(k).trim();if(!seen[k]){seen[k]=1;out.push(k);}return _;});};
+    parDe(A.x).forEach(function(p){add(p.texto);});add(A.x.textoModelo);add(A.x.fundamentacao);add(A.x.honorarios);add(A.x.resultado);return out.slice(0,30);
+  }
+  function prontBase(P,J){
+    var h='<div class="cq-pront-base"><div class="cf"><div class="cfl"><span>Prontuário do processo</span><span class="cq-src">PAUTA</span></div>';
+    GRP.forEach(function(g){var ks=g[1].filter(function(k){return P[k]!=null&&P[k]!=='';});if(!ks.length)return;h+='<details class="cq-psec" open><summary>'+e(g[0])+'</summary><div class="cqkv">'+ks.map(function(k){return '<div class="cqk">'+e(ROT[k]||k)+'</div><div class="cqv">'+e(val(k,P[k]))+' <span class="cq-origin">Pauta</span></div>';}).join('')+'</div></details>';});
+    if(J&&J.campos){var ks=Object.keys(J.campos).filter(function(k){return J.campos[k]!=null&&J.campos[k]!=='';}).sort();if(ks.length)h+='<details class="cq-psec"><summary>Todos os campos importados <span class="pill">'+ks.length+'</span></summary><div class="cqkv">'+ks.map(function(k){return '<div class="cqk">'+e(k)+'</div><div class="cqv">'+e(val(k,J.campos[k]))+' <span class="cq-origin">Ex Officio</span></div>';}).join('')+'</div></details>';}
+    return h+'</div></div>';
+  }
+  window.CQ_prontuarioBase=prontBase;
   function folha(P,A){
     if(!A.x)return '<div class="cqs"><div class="dpj">FOLHA <small>· sem estrutura aplicável</small></div><div class="cqvz">O gabinete não tem modelo aderente nem minuta-matriz para '+e(P.tipoJulgamento||'este recurso')+'. Escolha um modelo no painel de conformidade.</div></div>';
     var E=esqDe(A.x),B=blocos(A),gs=(E._grupos||[]).filter(Boolean);
@@ -150,7 +176,7 @@
     ['Admissibilidade',['tempestividade','preparo','requisito','mpf','decisaoOrigem','recursos','ed','retratacao']],['Julgamento',['resultado','honorarios','multa']]];
   function val(k,v){if(Array.isArray(v))return v.join(' · ');if(v&&typeof v==='object')return Object.keys(v).map(function(z){return v[z];}).filter(Boolean).join(' · ');return v;}
   function canhoto(P,A){
-    var h='<div class="dcan-h"><span>CANHOTO</span><small>'+(CQ.sel?'trecho selecionado':'caso em consulta')+'</small></div><div class="dcan">';
+    var h='<div class="dcan-h"><span>PRONTUÁRIO DA CONSULTA</span><small>'+(CQ.sel?'trecho selecionado':'base do processo + personalização')+'</small></div><div class="dcan">'+prontBase(P,CQ.pront);
     if(CQ.sel&&A.x){
       var z=blocos(A).filter(function(b){return b.t.id===CQ.sel;})[0];
       if(z){var vi=Math.min(CQ.ver[CQ.sel]||0,Math.max(z.ps.length-1,0));
@@ -162,11 +188,8 @@
           (z.t.grupo?'<li>Parte: '+e(z.t.grupo)+'</li>':'')+(z.t.cv&&z.t.cv.length?'<li>Controvérsias: '+e(z.t.cv.join(' · '))+'</li>':'')+'</ul></div>';
       }
     }
-    GRP.forEach(function(g){
-      var ks=g[1].filter(function(k){return P[k]!=null&&P[k]!=='';});if(!ks.length)return;
-      h+='<div class="cf"><div class="cfl"><span>'+g[0]+'</span></div><div class="cqkv">'+
-        ks.map(function(k){return '<div class="cqk">'+e(ROT[k]||k)+'</div><div class="cqv">'+e(val(k,P[k]))+'</div>';}).join('')+'</div></div>';
-    });
+    var cc=camposComplementares(A);
+    if(cc.length)h+='<div class="cf cq-person"><div class="cfl"><span>Personalização do modelo</span><span class="pill">'+cc.length+'</span></div><p class="meta">Somente campos que o texto selecionado ainda precisa para este caso.</p>'+cc.map(function(k){return '<label class="cq-extra"><span>'+e(k)+'</span><input data-cqextra="'+e(k)+'" value="'+e(CQ.extra[k]||'')+'" placeholder="preencher para esta minuta"><small>'+(CQ.extra[k]?'<b>Manual</b> · Consulta':'Pendente · exigido pelo modelo')+'</small></label>';}).join('')+'</div>';
     h+='<div class="cf"><div class="cfl"><span>Fonte</span></div><p class="meta">'+e(CQ.fonte||'—')+'</p></div>';
     return h+'</div>';
   }
@@ -205,16 +228,27 @@
       (Lx.length?'<div class="dtl">'+Lx.map(function(z){return '<button data-cq="'+tipo+'" data-id="'+e(z.x.id)+'"><span>'+lin(z.x)+'</span><small>'+e(z.ach.slice(0,3).join(' · '))+'</small></button>';}).join('')+'</div>'
         :'<p class="meta">Nada encontrado com os termos do caso.</p>')+(extra||'')+'</div>';
   }
+  function seletorModelos(P,A,R){
+    var q=nq(CQ.modelq||''),todos=(R.mod||[]).filter(function(z){return !q||nq([z.x.nomeModelo,z.x.assunto,z.x.tese,(z.x.especificidadesTags||[]).join(' ')].join(' ')).indexOf(q)>=0;}).slice(0,8);
+    var fora=(R.modFora||[]).filter(function(z){return !q||nq([z.x.nomeModelo,z.x.assunto,z.x.tese].join(' ')).indexOf(q)>=0;}).slice(0,5);
+    var h='<div class="dori cq-solucoes"><p class="kick2"><span>Solução de redação</span><span>3 camadas</span></p>'+
+      '<div class="cq-tipo"><b>Matrizes modulares</b><p>Motor especializado: enquadra o caso e monta módulos, versões e variáveis.</p>'+
+      (window.M2886&&M2886.disponivel()&&M2886.e2886(P,CQ.pront)?'<button class="cq-sol rec" data-sol="m28"><strong>28,86% · cumprimento individual da ACP</strong><small>Elegível para este processo · recomendada</small></button>':'<span class="meta">Nenhuma matriz modular elegível identificada.</span>')+'</div>'+
+      '<div class="cq-tipo"><b>Modelos</b><p>Texto-base relativamente pronto. Só entram como aplicáveis os que passam pela elegibilidade do caso.</p><input class="cq-modelq" id="cq-modelq" type="search" value="'+e(CQ.modelq||'')+'" placeholder="Buscar entre os modelos aplicáveis">'+
+      (todos.length?'<div class="cq-modsel">'+todos.map(function(z){var sel=A.tipo==='mod'&&A.x&&A.x.id===z.x.id;return '<button class="cq-sol'+(sel?' sel':'')+'" data-usar="'+e(z.x.id)+'"><strong>'+e(z.x.nomeModelo||z.x.id)+'</strong><small>'+e((z.el.razoes||[]).join(' · ')||('aderência '+z.s))+'</small></button>';}).join('')+'</div>':'<span class="meta">Nenhum modelo elegível com os critérios atuais.</span>')+
+      (fora.length?'<details class="cq-fora"><summary>Fora dos critérios do caso · '+fora.length+'</summary>'+fora.map(function(z){return '<div><b>'+e(z.x.nomeModelo||z.x.id)+'</b><small>'+e((z.el.impedimentos||[]).join(' · ')||'aderência insuficiente')+'</small></div>';}).join('')+'</details>':'')+'</div>'+
+      '<div class="cq-tipo"><b>Minuta-matriz</b><p>Estrutura genérica da peça, usada quando não há matriz modular ou modelo suficientemente aderente.</p><button class="cq-sol'+(A.tipo==='mat'?' sel':'')+'" data-matriz="1"><strong>Usar estrutura da minuta-matriz</strong><small>'+e(A.mat?nomeDe({tipo:'mat',x:A.mat}):(A.x?nomeDe(A):'estrutura pelo tipo de recurso'))+'</small></button></div></div>';
+    return h;
+  }
   function orientacoes(P,A,R){
     var C=conformidade(P,A,R),mau=C.filter(function(z){return z.s!=='ok';}).length;
-    var h=liaPainel(P,A,R)+'<div class="dori"><p class="kick2"><span>Conformidade</span><span>'+(C.length-mau)+'/'+C.length+'</span></p><div class="cqc">'+
+    var h=seletorModelos(P,A,R)+liaPainel(P,A,R)+'<div class="dori"><p class="kick2"><span>Conformidade</span><span>'+(C.length-mau)+'/'+C.length+'</span></p><div class="cqc">'+
       C.map(function(z){return '<div class="cqi '+z.s+'"><div class="cqih"><b>'+e(z.k)+'</b><i>'+(z.s==='ok'?'em ordem':z.s==='pc'?'conferir':'falta')+'</i></div><p>'+e(z.t)+'</p></div>';}).join('')+'</div>';
     var alt=(R.mod||[]).filter(function(z){return !(A.tipo==='mod'&&z.x.id===A.x.id);}).slice(0,5);
     h+='<div class="cqacs">'+(A.tipo==='mod'?'<button class="dbt" data-matriz="1">Usar só a estrutura da minuta-matriz</button>':'')+
       (A.tipo==='mod'?'<button class="dbt" data-cq="mod" data-id="'+e(A.x.id)+'">Abrir o modelo no Editorial</button>':'<button class="dbt" data-edit="pecas">Abrir a Minuta-Matriz</button>')+
       (CQ.usar||CQ.matriz?'<button class="dbt" data-auto="1">Voltar à escolha automática</button>':'')+'</div></div>';
-    h+=lista('Modelos aplicáveis','mod',alt,function(m){return e(m.nomeModelo||m.id);},
-      alt.length?'<div class="cqacs">'+alt.map(function(z){return '<button class="dfm" data-usar="'+e(z.x.id)+'">Aplicar: '+e(z.x.nomeModelo||z.x.id)+'</button>';}).join('')+'</div>':'');
+    h+=lista('Modelos relacionados','mod',alt,function(m){return e(m.nomeModelo||m.id);});
     h+=lista('Precedentes do relator','prec',R.prec,function(p){return e([p.processo||p.id,p.resultado].filter(Boolean).join(' · '));});
     h+=lista('Parágrafos-padrão','par',R.par,function(p){return e([p.titulo||p.id,p.categoria].filter(Boolean).join(' · '));});
     return h;
@@ -297,14 +331,22 @@
     if(CQ.erro)h+='<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir o Ex Officio</a>':'')+'</div>';
     tp.innerHTML=h;
     var P=CQ.perfil;
-    if(!P){can.innerHTML='';or.innerHTML='';mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA <small>· sem caso em consulta</small></div><div class="cqvz">Escolha a sessão, informe o item da pauta e aperte Enter. O Compendium lê o cartão gravado no procs-muta, aplica ao caso o modelo do banco ou, na falta dele, a minuta-matriz como estrutura, e confere a conformidade.</div></div>';ligar();return;}
+    if(!P){can.innerHTML='';or.innerHTML='';mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA <small>· sem caso em consulta</small></div><div class="cqvz">Escolha a sessão, informe o item da pauta e aperte Enter. O Compendium lê o prontuário gravado no Ex Officio, verifica primeiro se existe matriz modular elegível, depois busca modelos juridicamente compatíveis e usa a minuta-matriz apenas como fallback estrutural.</div></div>';ligar();return;}
     if(!BASE){mn.innerHTML='<div class="cqs"><div class="dpj">FOLHA</div><div class="cqvz">Carregando a base do gabinete…</div></div>';ligar();base().then(render);return;}
-    if(usa28()){window.M2886.render(P,CQ.pront,{can:can,mn:mn,or:or},CQ,render);ligarTopo();return;}
     var R=buscar(P),A=aplicar(P,R);
+    var em28=window.M2886&&M2886.disponivel()&&M2886.e2886(P,CQ.pront);
+    tp.innerHTML+='<div class="cq-selbar"><span class="cq-sel-k">Solução</span>'+(em28?'<button data-sol="m28" aria-pressed="'+(usa28()?'true':'false')+'"><b>Matriz modular</b><small>28,86% · elegível</small></button>':'')+'<button data-sol="modelos" aria-pressed="'+(!usa28()&&A.tipo==='mod'?'true':'false')+'"><b>Modelos</b><small>'+(R.mod.length?R.mod.length+' elegíveis':'nenhum elegível')+'</small></button><button data-sol="matriz" aria-pressed="'+(!usa28()&&A.tipo==='mat'?'true':'false')+'"><b>Minuta-matriz</b><small>estrutura genérica</small></button></div>';
+    if(usa28()){window.M2886.render(P,CQ.pront,{can:can,mn:mn,or:or},CQ,render);ligarTopo();ligarSolucao();return;}
     can.innerHTML=canhoto(P,A);mn.innerHTML=folha(P,A);or.innerHTML=orientacoes(P,A,R);
     ligar();liaLigar(P,A,R);
   }
   function usa28(){return !!(CQ.perfil&&window.M2886&&M2886.disponivel()&&(CQ.m28===true||(CQ.m28!==false&&M2886.e2886(CQ.perfil,CQ.pront))));}
+  function ligarSolucao(){
+    var q=function(sel,fn){Array.prototype.forEach.call(document.querySelectorAll(sel),function(b){b.onclick=function(ev){ev.stopPropagation();fn(b);};});};
+    q('#cq [data-sol="m28"]',function(){CQ.m28=true;CQ.usar='';CQ.matriz=false;CQ.sel='';render();});
+    q('#cq [data-sol="modelos"]',function(){CQ.m28=false;CQ.matriz=false;CQ.usar='';CQ.sel='';render();var x=document.getElementById('cq-modelq');if(x)x.focus();});
+    q('#cq [data-sol="matriz"]',function(){CQ.m28=false;CQ.matriz=true;CQ.usar='';CQ.sel='';render();});
+  }
   function ligarTopo(){
     var s=document.getElementById('cq-ses'),i=document.getElementById('cq-item'),g=document.getElementById('cq-go');
     if(s)s.onchange=function(){CQ.ses=s.value;};
@@ -318,6 +360,7 @@
       catch(er){CQ.erro='Prontuário: '+er.message;}
       render();};
     var m=document.getElementById('cq-m28');if(m)m.onclick=function(){CQ.m28=!usa28();render();};
+    ligarSolucao();
   }
   function ligar(){
     ligarTopo();
@@ -335,6 +378,9 @@
     q('#cq [data-matriz]',function(){CQ.matriz=true;CQ.usar='';CQ.sel='';CQ.grupo='';CQ.ver={};render();});
     q('#cq [data-auto]',function(){zerar();render();});
     q('#cq [data-edit]',function(b){irEditorial(b.getAttribute('data-edit'));});
+    q('#cq [data-sol="m28"]',function(){CQ.m28=true;CQ.usar='';CQ.matriz=false;CQ.sel='';render();});
+    q('#cq [data-cqextra]',function(b){CQ.extra[b.getAttribute('data-cqextra')]=b.value;render();},'onchange');
+    var mq=document.getElementById('cq-modelq');if(mq)mq.oninput=function(){CQ.modelq=mq.value;var pos=mq.selectionStart;render();var n=document.getElementById('cq-modelq');if(n){n.focus();try{n.setSelectionRange(pos,pos);}catch(er){}}};
   }
   window.CQ_render=function(){carregarCal().then(render);};
   var ov=window.VDM_view;
