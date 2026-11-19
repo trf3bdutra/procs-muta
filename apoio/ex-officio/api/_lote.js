@@ -240,7 +240,7 @@ async function gravar(req, res, u, gestor) {
     const existente=await L.lerJson(rel).catch(nada);
     if(existente.dados)return res.status(409).json({erro:'Já existe um lote com esse identificador.'});
     const itens=pedidos.map(c=>novoItem(data,porCnj.get(c)));
-    const criterios={};for(const k of ['assunto','classe','resultado','busca','grupo'])
+    const criterios={};for(const k of ['assunto','classe','resultado','busca','gruposOcultos'])
       if(b.criterios&&b.criterios[k])criterios[k]=String(b.criterios[k]).slice(0,160);
     const lote={schema:'gabcmt.lote',versao:1,tipo:'pauta',origem:'selecao',
       id,titulo,descricao:String(b.descricao||'').trim().slice(0,300),
