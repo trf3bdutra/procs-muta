@@ -965,7 +965,7 @@ function render() {
   m.hidden = naPauta; ap.hidden = !naPauta;
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
   D.title = 'Ab Initio · ' + tit;
-  if (naPauta) { $('#rodape').hidden = true; try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
+  if (naPauta) { $('#rodape').hidden = true; D.body.classList.remove('rod-min'); try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
   if (ABA === 'inteligencia') { m.innerHTML = vInteligencia(); setTimeout(cgRelSincronizar,0); }
   else if (ABA === 'chefia') { m.innerHTML = vChefia(); setTimeout(montarChefia,0); }
   else if (ABA === 'coordenacao') m.innerHTML = vCoordenacao();
@@ -993,7 +993,7 @@ function vChefia(){
     '<div id="cg-regras" aria-label="Regras gerais integradas"><p class="cg-status">Carregando regras…</p></div></div>';
 }
 function vCoordenacao(){
-  const eq=equipeAtual(), serv=[...new Set(U.map(o=>o.servidor).filter(Boolean))];
+  const eq=equipeAtual(), serv=[...new Set(U.map(o=>o.minutante).filter(Boolean))];
   return '<div class="wrap"><div class="cg-head"><div><p class="k">Equipe e execução</p><h1>Coordenação.</h1><p>Distribuição, acompanhamento do time, diligências e organização diária do gabinete.</p></div></div>'+
     '<div class="cg-kpis"><div><b>'+nf(eq.length||serv.length)+'</b><span>pessoas na equipe</span></div><div><b>'+nf(serv.length)+'</b><span>servidores com processos na triagem</span></div><div><b>'+nf(U.filter(o=>o.pend.length).length)+'</b><span>processos com pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
     '<div class="cg-grid"><section class="cg-box"><header>Equipe e capacidade</header><div class="cg-link"><span><b>Cadastro e funções</b><small>Perfis, atribuições e participação em designação automática</small></span><button data-cg-chefia="equipe">Abrir</button></div><div class="cg-link"><span><b>Metas e pesos</b><small>Capacidade, produtividade e critérios de redistribuição</small></span><button data-cg-chefia="produtividade">Abrir</button></div><div class="cg-link"><span><b>Designação</b><small>Critérios gerais e quem recebe cada tipo de processo</small></span><button data-cg-chefia="designacao">Abrir</button></div></section>'+
@@ -1001,7 +1001,7 @@ function vCoordenacao(){
 }
 
 const CG_REL_CAT=[
-['acervo','Acervo central','visão completa da fonte'],['triagem','Fila de triagem','processos no fluxo atual'],['aptos','Aptos para julgamento','aptos sem pendência'],['pendencias','Pendências','itens que exigem providência'],
+['todos','Todos os relatórios','pacote executivo com o catálogo completo'],['acervo','Acervo central','visão completa da fonte'],['triagem','Fila de triagem','processos no fluxo atual'],['aptos','Aptos para julgamento','aptos sem pendência'],['pendencias','Pendências','itens que exigem providência'],
 ['pauta','Selecionados para pauta','destino colegiado'],['mono','Monocráticas','destino do relator'],['escaninhos','Em escaninhos','processos separados para exame'],['semdestino','Sem destino','triagem ainda sem encaminhamento'],
 ['candidatos','Candidatos à monocrática','critérios do art. 932 e correlatos'],['retirados','Retirados / adiados','processos com indicação de retirada'],['ed','Embargos de declaração','classe ou tarefa de ED'],['agravos','Agravos de instrumento','agravos em triagem'],
 ['remessas','Remessas necessárias','remessas e apelações/remessas'],['antigos90','Parados há mais de 90 dias','tempo na tarefa'],['antigos180','Parados há mais de 180 dias','tempo na tarefa'],['sigilosos','Segredo / sigilo','registros sinalizados na fonte'],
@@ -1010,28 +1010,32 @@ const CG_REL_CAT=[
 const CG_REL={id:'acervo',formato:'pdf',titulo:'',sub:'',caps:{resumo:true,tabela:true,obs:true}};
 function cgRelLista(id){
   const tx=o=>nz([o.tarefa,o.assunto,o.cl,(o.etq||[]).join(' '),JSON.stringify(o.row||{})].join(' '));
-  if(id==='triagem')return U;if(id==='aptos')return U.filter(o=>o.apto&&!o.pend.length);if(id==='pendencias')return U.filter(o=>o.pend.length);
+  if(id==='todos')return ALL;if(id==='triagem')return U;if(id==='aptos')return U.filter(o=>o.apto&&!o.pend.length);if(id==='pendencias')return U.filter(o=>o.pend.length);
   if(id==='pauta')return U.filter(o=>o.dest&&o.dest.k==='pauta');if(id==='mono')return U.filter(o=>o.dest&&o.dest.k==='mono');if(id==='escaninhos')return U.filter(o=>o.dest&&o.dest.k==='esc');
   if(id==='semdestino')return U.filter(o=>!o.dest||!o.dest.k);if(id==='candidatos')return U.filter(o=>o.cand);
   if(id==='retirados')return U.filter(o=>/retir|adiad/.test(tx(o)));if(id==='ed')return U.filter(o=>/embargo.*declara|(^|\s)ed(\s|$)/.test(tx(o)));
   if(id==='agravos')return U.filter(o=>/agravo de instrumento|(^|\s)ai(\s|$)/.test(tx(o)));if(id==='remessas')return U.filter(o=>/remessa necess|apela.*remessa/.test(tx(o)));
   if(id==='antigos90')return U.filter(o=>dias(o.desde)>90);if(id==='antigos180')return U.filter(o=>dias(o.desde)>180);
-  if(id==='sigilosos')return ALL.filter(o=>/sigilo|segredo/.test(tx(o)));if(id==='servidores')return U;
+  if(id==='sigilosos')return ALL.filter(o=>o.sigiloso||/sigilo|segredo/.test(tx(o)));if(id==='servidores')return U;
   if(id==='sessoes')return U.filter(o=>o.dest&&o.dest.k==='pauta'); return ALL;
 }
 function cgRelDef(){return CG_REL_CAT.find(x=>x[0]===CG_REL.id)||CG_REL_CAT[0];}
 function cgRelTitulo(){const d=cgRelDef();return CG_REL.titulo||d[1];}
 function cgRelHtml(){
   const d=cgRelDef(),L=cgRelLista(CG_REL.id),ho=new Date().toLocaleString('pt-BR');
+  if(CG_REL.id==='todos'){
+    const cats=CG_REL_CAT.filter(x=>x[0]!=='todos'), rows=cats.map(x=>'<tr><td>'+esc(x[1])+'</td><td>'+nf(cgRelLista(x[0]).length)+'</td><td>'+esc(x[2])+'</td></tr>').join('');
+    return '<h1>'+esc(cgRelTitulo())+'</h1><p>'+esc(CG_REL.sub||d[2])+' · gerado em '+esc(ho)+'</p><h2>Sumário executivo</h2><p>'+nf(ALL.length)+' processos na fonte · '+nf(U.length)+' em triagem · '+nf(sessoes().length)+' sessões futuras.</p><h2>Catálogo consolidado</h2><table><thead><tr><th>Relatório</th><th>Registros</th><th>Escopo</th></tr></thead><tbody>'+rows+'</tbody></table><h2>Notas</h2><p>Use os modelos individuais para editar e exportar cada seção em maior detalhe.</p>';
+  }
   if(CG_REL.id==='sessoes'){
     const rows=sessoes().map(s=>'<tr><td>'+esc(nomeSes(s))+'</td><td>'+esc(br((s.fases||{}).pauta||'' )||'—')+'</td><td>'+nf((s.itens||[]).length)+'</td><td>'+nf((s.previa||[]).length)+'</td></tr>').join('');
     return '<h1>'+esc(cgRelTitulo())+'</h1><p>'+esc(CG_REL.sub||d[2])+' · gerado em '+esc(ho)+'</p>'+(CG_REL.caps.resumo?'<h2>Resumo</h2><p>'+nf(sessoes().length)+' sessão(ões) futura(s) cadastrada(s).</p>':'')+(CG_REL.caps.tabela?'<h2>Sessões</h2><table><thead><tr><th>Sessão</th><th>Pautar até</th><th>Itens</th><th>Pré-pauta</th></tr></thead><tbody>'+rows+'</tbody></table>':'');
   }
   let grupos='';
   if(CG_REL.id==='servidores'){
-    const m={};L.forEach(o=>{const s=o.servidor||'Sem responsável';m[s]=(m[s]||0)+1;});grupos='<h2>Distribuição por servidor</h2><table><thead><tr><th>Servidor</th><th>Processos</th></tr></thead><tbody>'+Object.entries(m).sort((a,b)=>b[1]-a[1]).map(x=>'<tr><td>'+esc(x[0])+'</td><td>'+nf(x[1])+'</td></tr>').join('')+'</tbody></table>';
+    const m={};L.forEach(o=>{const s=o.minutante||'Sem responsável';m[s]=(m[s]||0)+1;});grupos='<h2>Distribuição por servidor</h2><table><thead><tr><th>Servidor</th><th>Processos</th></tr></thead><tbody>'+Object.entries(m).sort((a,b)=>b[1]-a[1]).map(x=>'<tr><td>'+esc(x[0])+'</td><td>'+nf(x[1])+'</td></tr>').join('')+'</tbody></table>';
   }
-  const rows=L.slice(0,120).map(o=>'<tr><td class="mono">'+esc(o.cnj||'')+'</td><td>'+esc(o.cl||'')+'</td><td>'+esc(o.assunto||'')+'</td><td>'+esc(o.tarefa||'')+'</td><td>'+esc(o.servidor||'')+'</td><td>'+esc((o.dest&&o.dest.t)||'')+'</td></tr>').join('');
+  const rows=L.slice(0,120).map(o=>'<tr><td class="mono">'+esc(o.cnj||'')+'</td><td>'+esc(o.cl||'')+'</td><td>'+esc(o.assunto||'')+'</td><td>'+esc(o.tarefa||'')+'</td><td>'+esc(o.minutante||'')+'</td><td>'+esc((o.dest&&o.dest.t)||'')+'</td></tr>').join('');
   const obs=L.length>120?'<p><em>Prévia limitada a 120 linhas; a exportação usa o conjunto completo.</em></p>':'';
   return '<h1>'+esc(cgRelTitulo())+'</h1><p>'+esc(CG_REL.sub||d[2])+' · gerado em '+esc(ho)+'</p>'+
     (CG_REL.caps.resumo?'<h2>Resumo</h2><p><b>'+nf(L.length)+'</b> registro(s) no conjunto selecionado.</p>':'')+
@@ -1054,7 +1058,7 @@ function cgRelSincronizar(){ const f=$('#cg-rel-format'); if(f)f.value=CG_REL.fo
 function cgRelAtualizar(){ const p=$('#cg-rel-prev'); if(p)p.innerHTML=cgRelHtml(); const st=$('.cg-set .cg-status'); if(st)st.textContent=nf(cgRelLista(CG_REL.id).length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.'; }
 function cgRelRows(){
   if(CG_REL.id==='sessoes')return sessoes().map(s=>({Sessao:nomeSes(s),Pautar_ate:br((s.fases||{}).pauta||''),Itens:(s.itens||[]).length,Pre_pauta:(s.previa||[]).length}));
-  return cgRelLista(CG_REL.id).map(o=>({Processo:o.cnj||'',Classe:o.cl||'',Assunto:o.assunto||'',Tarefa:o.tarefa||'',Servidor:o.servidor||'',Destino:(o.dest&&o.dest.t)||''}));
+  return cgRelLista(CG_REL.id).map(o=>({Processo:o.cnj||'',Classe:o.cl||'',Assunto:o.assunto||'',Tarefa:o.tarefa||'',Servidor:o.minutante||'',Destino:(o.dest&&o.dest.t)||''}));
 }
 function cgBaixar(nome,blob){const a=D.createElement('a');a.href=URL.createObjectURL(blob);a.download=nome;D.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
 function cgRelExportar(fmt){
