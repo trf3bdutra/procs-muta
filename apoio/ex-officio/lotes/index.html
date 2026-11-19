@@ -225,6 +225,19 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--eg,#1b5878);color:#fff;padding:8px 16px;font-size:12.5px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
 #toast.on{opacity:1}
 @media print{.lx-nx,.lx-sub,.cmt-hd2 .cmt-ut,.cmt-ph,.pf .nav,.mbar .b{display:none!important}.pf{break-inside:avoid-page}}
+
+/* Collectio: Coleção de Pauta única + Coleções Avulsas */
+.col-areas{border:1px solid var(--el);background:var(--ep);padding:10px;min-width:0;margin-top:10px}
+.col-tipos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-bottom:12px}
+.col-tipos button{border:1px solid var(--el);padding:9px 4px;background:var(--ep2);font:700 11px var(--font);cursor:pointer;min-width:0}
+.col-tipos button[aria-pressed=true]{border-color:var(--eg);color:var(--eg);background:var(--ep)}
+.col-area{min-width:0;display:flex;flex-direction:column;gap:8px}
+.col-area[hidden]{display:none}
+.col-area .lx-sel{display:block;min-width:0}
+.col-area select{width:100%;max-width:100%;min-width:0}
+.col-area .b{white-space:normal}
+@media(max-width:900px){.lx-sub{display:block!important;max-height:none!important}.col-areas{margin:6px 0}.col-areas .col-area{max-width:100%}}
+
 </style>
 <style id="office-layout-refine">
 
@@ -339,7 +352,7 @@ const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>
 const SECS=[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']];
 const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
-let RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
+let RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],sessoes:[],calendario:[],gestor:false}, SELEC=new Set();
 const params=new URLSearchParams(location.search);
 const FILT_SESSAO=String(params.get('sessao')||'').trim(), FILT_MINUTISTA=String(params.get('minutista')||'').trim();
 /* Amicus Curiae · Collectio: três visões no mesmo arquivo. O nome visual permanece Collectio; rotas canônicas: /amicus/collectio/ (Geral), /amicus/collectio/cmt/ (Desembargador) e /amicus/collectio/cg/ (controle geral). /amicus/collectio/* e as rotas antigas de lotes permanecem apenas como compatibilidade. */
@@ -360,13 +373,39 @@ function falha(e){
 }
 const ROTULO={cg:'CG',eq:'Geral',rel:'CMT'};
 
-function opcoesIndices(lotes,atual){
- const option=l=>'<option value="'+esc(l.id)+'"'+(l.id===atual?' selected':'')+'>'+esc(l.titulo)+' · '+(l.total||0)+(l.virtual?' · automática':'')+'</option>';
- const ds=[...new Set(lotes.filter(l=>l.tipo==='pauta').map(l=>l.sessao||(l.sessoes||[])[0]).filter(Boolean))].sort().reverse();
- const rows=ds.map(s=>'<optgroup label="Sessão '+br(s)+'">'+lotes.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===s).sort((a,b)=>(b.virtual?1:0)-(a.virtual?1:0)||String(a.titulo).localeCompare(String(b.titulo),'pt-BR')).map(option).join('')+'</optgroup>');
- const av=lotes.filter(l=>l.tipo!=='pauta');if(av.length)rows.push('<optgroup label="Lotes avulsos">'+av.map(option).join('')+'</optgroup>');
- return rows.join('');
+/* As coleções são duas áreas: Avulsas e Pauta. Sessões são fontes, não coleções. */
+function seletorColecoes(lotes,id) {
+  const pauta=LOTE && LOTE.tipo==='pauta',ses=LOTE&&LOTE.sessoes&&LOTE.sessoes[0]||LISTA.sessoes[0]?.date||'';
+  const sess=LISTA.sessoes||[],avulsos=lotes.filter(l=>l.tipo!=='pauta');
+  const daSessao=lotes.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===ses);
+  const opt=l=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+esc(l.titulo)+' · '+l.total+'</option>';
+  return '<div class="col-areas" aria-label="Coleções do Collectio"><div class="col-tipos">'+
+    '<button type="button" data-colecao="pauta" aria-pressed="'+pauta+'">Coleção de Pauta</button>'+
+    '<button type="button" data-colecao="avulsa" aria-pressed="'+(!pauta)+'">Coleções Avulsas</button></div>'+
+    '<div class="col-area" id="col-pauta"'+(pauta?'':' hidden')+'>'+
+    '<label class="lx-sel">Sessão<select id="sel-sessao">'+sess.map(x=>'<option value="'+esc(x.date)+'"'+(x.date===ses?' selected':'')+'>'+esc(x.nome||br(x.date))+' · '+x.processos+' processos</option>').join('')+'</select></label>'+
+    '<button class="b col-matriz" type="button" id="b-matriz">Matriz geral da sessão</button>'+
+    '<label class="lx-sel">Lotes criados nesta pauta<select id="sel-pauta"><option value="">Escolha um lote da sessão</option>'+daSessao.map(opt).join('')+'</select></label></div>'+
+    '<div class="col-area" id="col-avulsas"'+(pauta?' hidden':'')+'>'+
+    '<label class="lx-sel">Coleção avulsa<select id="sel-avulsas">'+
+    '<option value="">Selecione uma coleção</option>'+avulsos.map(opt).join('')+'</select></label></div></div>';
 }
+function ligarColecoes(lotes) {
+  const go=id=>{if(id)location.search='?id='+encodeURIComponent(id)};
+  document.querySelectorAll('[data-colecao]').forEach(b=>b.onclick=()=>{
+    const pauta=b.dataset.colecao==='pauta';
+    document.querySelector('#col-pauta').hidden=!pauta;
+    document.querySelector('#col-avulsas').hidden=pauta;
+    document.querySelectorAll('[data-colecao]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    if(pauta){const s=document.querySelector('#sel-sessao').value;go('pauta-'+s)}
+    else{const a=lotes.find(l=>l.tipo!=='pauta');if(a)go(a.id)}
+  });
+  const ses=$('#sel-sessao');if(ses)ses.onchange=()=>go('pauta-'+ses.value);
+  const matriz=$('#b-matriz');if(matriz)matriz.onclick=()=>go('pauta-'+ses.value);
+  const lp=$('#sel-pauta');if(lp)lp.onchange=()=>go(lp.value);
+  const la=$('#sel-avulsas');if(la)la.onchange=()=>go(la.value);
+}
+
 function cabecalho(lotes,id,usuario){
   return `<header class="lx-nx"><div class="lx-nx1"><i class="star" aria-hidden="true"></i>
    <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>Collectio<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
@@ -386,9 +425,11 @@ function cabecalho(lotes,id,usuario){
 }
 async function inicio(){
   try{
-    const L=await api('');LISTA={lotes:L.lotes||[],calendario:L.calendario||[],gestor:!!L.gestor};
-    const lotes=LISTA.lotes; if(!lotes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhum lote cadastrado.'+(MODO==='cg'?' Use “Novo lote” para criar o primeiro.':'')+'</p>');ligaCab();if(MODO==='cg')abrirNovo();return}
-    const id=lotes.some(l=>l.id===params.get('id'))?params.get('id'):lotes[0].id;
+    const L=await api('');LISTA={lotes:L.lotes||[],sessoes:L.sessoes||[],calendario:L.calendario||[],gestor:!!L.gestor};
+    const lotes=LISTA.lotes; if(!lotes.length&&!LISTA.sessoes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhuma sessão ou coleção disponível.'+(MODO==='cg'?' Use “Novo lote avulso” para criar o primeiro.':'')+'</p>');ligaCab();if(MODO==='cg')abrirNovo();return}
+    const pedido=params.get('id')||'';
+    const id=(lotes.some(l=>l.id===pedido)||LISTA.sessoes.some(x=>'pauta-'+x.date===pedido))?pedido:
+      (LISTA.sessoes.length?'pauta-'+LISTA.sessoes[0].date:lotes[0].id);
     const R=await api('?id='+encodeURIComponent(id));
     /* só com a chave do relator (sem login), /lotes/ leva à página dele */
     if(MODO==='eq'&&R.relator){location.replace('/amicus/collectio/cmt/?id='+encodeURIComponent(id)+location.hash);return}
@@ -396,7 +437,7 @@ async function inicio(){
   }catch(e){falha(e)}
 }
 function ligaCab(){
-  const sl=$('#sel');if(sl)sl.onchange=()=>{location.search='?id='+encodeURIComponent(sl.value)};
+  ligarColecoes(LISTA.lotes);
   $('#atu').onclick=()=>location.reload();const bc=$('#b-cmp');if(bc)bc.onclick=()=>painel();
   $('#tema').onclick=()=>{const d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('cmt-eq-tema',n)}catch(e){}};
   const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const be=$('#b-ed');if(be){be.disabled=!!(LOTE&&LOTE.virtual);be.onclick=abrirEditar;}const bs=$('#b-ses');if(bs){bs.disabled=!!(LOTE&&LOTE.virtual);bs.onclick=abrirSessoes;}
@@ -432,23 +473,23 @@ function montar(lotes,id,usuario){
   const sit=[...new Set(ITENS.map(i=>i.equipe&&i.equipe.situacao).filter(Boolean))];
   const grs=LOTE.grupos.filter(g=>ITENS.some(i=>i.grupo===g.id)).map(g=>({k:g.id,r:g.rotulo,c:g.cor,n:ITENS.filter(i=>i.grupo===g.id).length}));
   if(ITENS.some(i=>!i.grupo))grs.push({k:'',r:'Outros',c:OUT.cor,n:ITENS.filter(i=>!i.grupo).length});
-    const contexto=LOTE.tipo==='pauta'?'Sessão '+br(LOTE.sessoes[0])+(LOTE.virtual?' · matriz geral automática':' · índice temático'):'Lote avulso';
+    const contexto=LOTE.virtual?'Coleção de Pauta · sessão '+br(LOTE.sessoes[0])+' · matriz geral':LOTE.tipo==='pauta'?'Lote de pauta · sessão '+br(LOTE.sessoes[0]):'Coleção avulsa';
   const nota={cg:'Na gestão aparecem todos os processos. Nas colunas Equipe e Relator, você escolhe o que cada página mostra.',eq:'O Relator vê só os processos liberados para ele.',rel:'Clique num processo para abrir o perfil e a minuta.'}[MODO];
   mostra(cabecalho(lotes,id,usuario)+`<div class="lx">
   <nav class="lx-sub" id="lx-sub" aria-label="Lote e seções da página">
    <div class="lx-lt"><p class="lx-ey">Amicus Curiae · Collectio / ${ROTULO[MODO]}</p>
-    <label class="lx-sel" title="Trocar de lote"><span class="sr">Índices</span><select id="sel">${opcoesIndices(lotes,id)}</select></label>
+    ${seletorColecoes(lotes,id)}
     <p class="lx-lt-n" id="cnt">—</p><p class="lx-lt-d">${esc(contexto)}</p>
     <p class="lx-lt-s">${FILT_SESSAO?`Sessão de ${br(FILT_SESSAO)}`:`Sessões de ${LOTE.sessoes.map(br).join(' e ')}`}${FILT_MINUTISTA?` · Produção: ${esc(FILT_MINUTISTA)}`:''}</p>
     ${LOTE.descricao?`<p class="lx-lt-d">${esc(LOTE.descricao)}</p>`:''}</div>
    <p class="lx-nk">Nesta página</p>
-   <button type="button" data-ir="matriz"><i>01</i><span>Matriz do lote</span><small id="n-mx"></small></button>
+   <button type="button" data-ir="matriz"><i>01</i><span>${LOTE.virtual?'Matriz da sessão':'Matriz do lote'}</span><small id="n-mx"></small></button>
    ${grs.map(g=>`<button type="button" class="g" data-ir-g="${g.k}"><i style="background:${g.c}"></i><span>${esc(g.r)}</span><small data-ng="${g.k}">${g.n}</small></button>`).join('')}
    <button type="button" data-ir="sec-pf"><i>02</i><span>Processos</span><small id="n-pf"></small></button>
    <p class="lx-nota">${nota}</p></nav>
   <div id="gest"></div>
   ${painelVisLotes(lotes)}
-  <section class="lx-sec" id="matriz"><div class="lx-shd"><div><p class="lx-k">01 / Visão do lote</p><h2>Matriz do <em>lote.</em></h2><p class="lx-d">Processos por tipo de caso, com as variações de cada um. Clique numa linha para abrir o perfil do processo.</p></div></div>
+  <section class="lx-sec" id="matriz"><div class="lx-shd"><div><p class="lx-k">01 / Visão do lote</p><h2>${LOTE.virtual?'Matriz geral da <em>sessão.</em>':'Matriz do <em>lote.</em>'}</h2><p class="lx-d">Processos por tipo de caso, com as variações de cada um. Clique numa linha para abrir o perfil do processo.</p></div></div>
   <div class="lx-box">
    <div class="cmt-met" id="met">${grs.map(g=>`<div data-g="${g.k}" style="border-top-color:${g.c}" title="Mostrar ou ocultar"><span>${/^\d+$/.test(g.k)?g.k+' · ':''}${esc(g.r)}</span><b>${pad(g.n)}</b></div>`).join('')}</div>
    <div class="cmt-ph"><div class="cmt-ph-2">
