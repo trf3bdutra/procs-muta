@@ -483,7 +483,11 @@ function montar(lotes,id,usuario){
   document.querySelectorAll('[data-min]').forEach(x=>x.onclick=()=>abreMinuta(x.dataset.min,x));
   const visao=()=>{const rel=VZ==='rel';document.body.classList.toggle('relator',rel);document.querySelectorAll('.pv').forEach(p=>p.textContent=rel?p.dataset.rel:p.dataset.eq)};
   document.querySelectorAll('[data-vz]').forEach(b=>b.onclick=()=>{VZ=b.dataset.vz;document.querySelectorAll('[data-vz]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));visao();filtra()});
-  visao(); if(MODO==='cg')ligaVis();
+  visao(); if(MODO==='cg' && !LOTE.virtual)ligaVis();
+  if(LOTE.virtual){
+    document.querySelectorAll('#mx input[data-ve],#mx select[data-vr]').forEach(el=>{el.disabled=true;el.title='Matriz geral automática: crie um índice temático para editar a visibilidade de processos.'});
+    const barra=$('#vzbar');if(barra){barra.querySelectorAll('button').forEach(el=>el.disabled=true);barra.title='Matriz automática derivada da pauta (somente leitura)';}
+  }
   $('#q').oninput=filtra;$('#ff').onchange=filtra;$('#fs').onchange=filtra;filtra();
   const m=location.hash.match(/^#p=(.+)$/); if(m)setTimeout(()=>vai(decodeURIComponent(m[1])),150);
 }
