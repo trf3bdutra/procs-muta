@@ -341,9 +341,9 @@ const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
 let RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
 const params=new URLSearchParams(location.search);
-/* Amicus Curiae · Index: três visões no mesmo arquivo. Rotas canônicas: /index/ (Geral), /index/cmt/ (Desembargador) e /index/cg/ (controle geral). As rotas antigas de lotes permanecem apenas como compatibilidade. */
+/* Amicus Curiae · Index: três visões no mesmo arquivo. O nome visual permanece Index; rotas canônicas: /lote/ (Geral), /lote/cmt/ (Desembargador) e /lote/cg/ (controle geral). /index/* e as rotas antigas de lotes permanecem apenas como compatibilidade. */
 const PATH=location.pathname.toLowerCase();
-const MODO=(/^\/index\/cm(?:\/|$)/.test(PATH)||/^\/cmt\/lotes(?:\/|$)/.test(PATH))?'rel':((/^\/index\/cg(?:\/|$)/.test(PATH)||/^\/cg\/lotes(?:\/|$)/.test(PATH))?'cg':'eq'), MODO_REL=MODO==='rel';
+const MODO=(/^\/lote\/cmt?(?:\/|$)/.test(PATH)||/^\/index\/cm(?:t)?(?:\/|$)/.test(PATH)||/^\/cmt\/lotes(?:\/|$)/.test(PATH))?'rel':((/^\/lote\/cg(?:\/|$)/.test(PATH)||/^\/index\/cg(?:\/|$)/.test(PATH)||/^\/cg\/lotes(?:\/|$)/.test(PATH))?'cg':'eq'), MODO_REL=MODO==='rel';
 let VZ=MODO==='cg'?'tudo':MODO;
 /* linha de abertura do carregamento, no lugar da saudação do Painel do Desembargador */
 (function(){const e=document.getElementById('ld-s');if(e)e.textContent=MODO==='rel'?'Index · CMT.':MODO==='cg'?'Index · CG.':'Index · Geral.'})();
@@ -353,7 +353,7 @@ async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fet
 async function post(b){const r=await fetch('/api/painel?lote=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function mostra(html){$('#ld').hidden=true;const a=$('#app');a.hidden=false;a.innerHTML=html}
 function falha(e){
-  if(e.status===403&&MODO==='cg'){$('#ld-m').innerHTML='Esta página é só do controle geral.<br><a class="b pri" style="margin-top:14px" href="/index/">Ir para o Index geral</a>';$('#ld .cmt-ld-b').hidden=true;return}
+  if(e.status===403&&MODO==='cg'){$('#ld-m').innerHTML='Esta página é só do controle geral.<br><a class="b pri" style="margin-top:14px" href="/lote/">Ir para o Index geral</a>';$('#ld .cmt-ld-b').hidden=true;return}
   if(e.status===401){$('#ld-m').innerHTML=MODO_REL?'Abra esta página pelo link do painel do Desembargador.':'O Amicus Curiae · Index usa o login do Ex Officio.<br><a class="b pri" style="margin-top:14px" href="/equipe/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
   $('#ld-m').textContent='Não foi possível abrir: '+e.message;$('#ld .cmt-ld-b').hidden=true;
 }
