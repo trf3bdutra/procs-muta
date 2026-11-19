@@ -250,6 +250,25 @@ async function gravar(req, res, u, gestor) {
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
   }
+  /* Controle global: alternar a visibilidade de um lote sem editar seus demais atributos. */
+  if (b.acao === 'visibilidade-lote') {
+    const flags = b.visivel || {};
+    if (!['equipe','relator'].some(k => typeof flags[k] === 'boolean')) return res.status(400).json({ erro: 'Informe equipe ou relator.' });
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      const visivel = Object.assign({}, lote.visivel || {});
+      for (const k of ['equipe', 'relator']) {
+        if (flags[k] === false) visivel[k] = false;
+        else if (flags[k] === true) delete visivel[k];
+      }
+      if (Object.keys(visivel).length) lote.visivel = visivel; else delete lote.visivel;
+      lote.atualizado_em = new Date().toISOString().slice(0, 10);
+      try { await L.gravarJson(rel, lote, sha, 'Index CG (' + u + '): visibilidade do lote ' + id); return res.status(200).json({ ok: true, id, visivel }); }
+      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'O lote mudou; tente novamente.' });
+  }
   if (b.acao === 'editar' || b.acao === 'visivel') {
     for (let t = 0; t < 4; t++) {
       const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
