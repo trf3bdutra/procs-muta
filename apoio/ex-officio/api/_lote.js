@@ -209,6 +209,13 @@ module.exports = async (req, res) => {
     (lote.itens || []).forEach(it => { if (cartoes[it.processo]) it.prontuario = cartoes[it.processo]; });
     lote.itens = (lote.itens || []).filter(ve);
     if (modo !== 'cg') delete lote.retirados;
+    if (String(q.correspondencias||'') === '1') {
+      const avaliar=require('./_collectio_correspondencias').avaliar;
+      const {dados:estrut}=await L.lerJson('modelos/matrizes-estruturais.json');
+      const materia28=/28[.,]86/.test(lote.titulo||'')||lote.itens.some(x=>/28[.,]86/.test(x.assunto||''));
+      const modular=materia28?(await L.lerJson('modelos/matrizes-2886.json')).dados:null;
+      return res.status(200).json(avaliar(lote,estrut||{registros:[]},modular));
+    }
     res.status(200).json({ usuario: u, gestor, relator, modo, lote });
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
