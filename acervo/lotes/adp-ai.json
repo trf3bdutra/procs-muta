@@ -53,12 +53,16 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada",
+   "resultado": "Ato a proferir: decisão sobre o efeito suspensivo (artigo 1.019, I, do CPC) e intimação da agravada para contraminuta (artigo 1.019, II)",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "URG",
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo contra a decisão que rejeitou a exceção de pré-executividade (ID 595913650 nos autos de origem; EF 5010244-56.2019.4.03.6000, contribuições previdenciárias, R$ 853.563,35). Teses: nulidade da citação por edital sem esgotamento das diligências; prescrição intercorrente; CDA sem processo administrativo e memória de cálculo; falta de fundamentação. Pede efeito suspensivo.",
+   "peculiaridades": "Preparo por Pix: o despacho ID 391762871 mandou comprovar pelo comprovante do Tesouro; a agravante juntou o comprovante PagTesouro (ID 392776026) em 20/08/2026. Assunto cadastrado (1/3 de férias) não corresponde à matéria.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -74,9 +78,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão liminar (efeito suspensivo)",
+    "materia": "Execução fiscal — exceção de pré-executividade",
+    "origem": "EF 5010244-56.2019.4.03.6000 (2ª Vara Federal de Campo Grande; capa da origem indica Núcleo Adjunto 4.0 da 2ª Vara Federal de Araçatuba)",
+    "decisao_agravada": "ID 595913650 (autos de origem)",
+    "recurso": "ID 391341575 · 10/08/2026",
+    "preparo": "Pix; comprovante PagTesouro ID 392776026, juntado após o despacho ID 391762871",
+    "monocratica": "Não, por ora",
+    "analisado_em": "19/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: conferir no comprovante PagTesouro (ID 392776026) valor, código 18720-8 e data de 10/08/2026; o arquivo não tem texto extraível",
+    "[VALIDAR] Tempestividade: data da intimação da decisão agravada não consta dos autos do agravo",
+    "Corrigir o assunto cadastrado (1/3 de férias)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
