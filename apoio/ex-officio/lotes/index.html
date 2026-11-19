@@ -226,6 +226,104 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 #toast.on{opacity:1}
 @media print{.lx-nx,.lx-sub,.cmt-hd2 .cmt-ut,.cmt-ph,.pf .nav,.mbar .b{display:none!important}.pf{break-inside:avoid-page}}
 </style>
+<style id="office-layout-refine">
+
+/* Ex Officio | refinamento de proporções — não altera estados, dados ou interações */
+:root{--of-gap:12px;--of-panel-border:var(--el,var(--line,#d8e1e8))}
+#app main,.cv,#v-pauta.pt2,#v-cmt{min-width:0}
+#app main *, .cv *{box-sizing:border-box}
+#app header.nx .nx1,#app header.nx .nx2{min-width:0}
+#app header.nx .nx1>*{min-width:0}
+#app header.nx nav.tabs{min-width:0;scrollbar-width:thin}
+#v-pauta.pt2 .trb,#v-pauta.pt2 .trb-in,#v-pauta.pt2 .pt-lista,
+#v-pauta.pt2 .pt-corpo,#v-pauta.pt2 .pp-sec,#v-pauta.pt2 #lst,
+#v-pauta.pt2 .pc{min-width:0;max-width:100%}
+#v-pauta.pt2 .trb-h,#v-pauta.pt2 .trb-c,
+#v-pauta.pt2 .pt-bar,#v-pauta.pt2 .pt-sel{min-width:0}
+#v-pauta.pt2 .pt-q input,#v-pauta.pt2 .pt-ir input,
+#v-pauta.pt2 .trb-sl select{max-width:100%;min-width:0}
+#v-pauta.pt2 .pp-sub button{min-height:32px}
+#v-pauta.pt2 .pt-lista img,#v-cmt img{max-width:100%;height:auto}
+#p-not,#p-pen{overscroll-behavior:contain;max-width:calc(100vw - 20px)}
+#p-not .nt,#p-pen .nt{min-width:0;overflow-wrap:anywhere}
+#p-not .drw-h,#p-pen .drw-h{min-width:0}
+#p-not :is(button,a,input),#p-pen :is(button,a,input){max-width:100%}
+#app :is(button,a,input,select,textarea):focus-visible,
+.cv :is(button,a,input,select,textarea):focus-visible{outline:2px solid var(--eg,var(--blue,#2d6fa8));outline-offset:2px}
+@media(min-width:981px){
+ #v-pauta.pt2{grid-template-columns:clamp(190px,17vw,232px) minmax(0,1fr);column-gap:clamp(16px,2.1vw,32px)}
+}
+@media(min-width:981px) and (max-width:1240px){
+ #v-pauta.pt2 .trb-p{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #v-pauta.pt2 .trm-k{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:980px){
+ #v-pauta.pt2{min-width:0}
+ #v-pauta.pt2 .pp-sub{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+ #v-pauta.pt2 .trb-p{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #v-pauta.pt2 .trm-k{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:620px){
+ #app main{padding-left:12px;padding-right:12px}
+ #v-pauta.pt2 .trb-in{padding:12px}
+ #v-pauta.pt2 .trb-h{align-items:flex-start;gap:10px}
+ #v-pauta.pt2 .trb-p,#v-pauta.pt2 .trm-k{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #v-pauta.pt2 .trb-p .tp,#v-pauta.pt2 .trm-k>*{min-width:0}
+ #p-not,#p-pen{right:8px!important;width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)}
+}
+@media(prefers-reduced-motion:reduce){
+ #app header.nx *,#v-pauta.pt2 *,#p-not *,#p-pen *, .cv *{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* Lotes | mesmo ritmo de colunas, cartões e controles do Ex Officio */
+.cv{min-width:0}
+.lx,.lx>*{min-width:0}
+.lx-nx1{gap:clamp(8px,1vw,14px)}
+.lx-tabs{min-width:0}
+.lx-h h1{font-size:clamp(34px,3.6vw,52px)}
+.lx-sub{min-width:0;overscroll-behavior:contain}
+.lx-sub button{max-width:100%;overflow-wrap:anywhere}
+.lx-sec,.cmt-q,.pf,.box{min-width:0}
+.cmt-q{max-width:100%}
+.cmt-tw{max-width:calc(100% + 36px);overscroll-behavior-x:contain;scrollbar-width:thin}
+.cmt-tb{table-layout:auto}
+.cmt-tb :is(th,td){overflow-wrap:anywhere}
+.cmt-tb .cnj{overflow-wrap:normal}
+.cmt-ph,.acts,.mbar{min-width:0}
+.cmt-bq input,.cmt-sel,.form :is(input,select,textarea){max-width:100%;min-width:0}
+.lx-cx .cx-c{overscroll-behavior:contain;min-height:0}
+@media(min-width:1301px){
+ .lx{grid-template-columns:clamp(190px,17vw,232px) minmax(0,1fr);column-gap:clamp(16px,2.1vw,32px)}
+ .lx-cx{width:520px}
+ body.cx-on{padding-right:520px}
+ body.cx-on .lx-nx{margin-left:calc(50% - 50vw + 260px);margin-right:calc(50% - 50vw + 260px)}
+}
+@media(max-width:1300px){
+ .lx-cx{width:min(520px,100vw)}
+ body.cx-on{padding-right:0}
+ body.cx-on .lx-nx{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+}
+@media(max-width:900px){
+ .lx{display:block}
+ .lx-sub{display:none}
+ .cv{padding-left:16px;padding-right:16px}
+ .lx-h{margin-top:18px}
+}
+@media(max-width:620px){
+ .cv{padding-left:12px;padding-right:12px}
+ .lx-nx1{padding-left:12px;padding-right:12px}
+ .lx-nx .lx-cad{flex-wrap:wrap;white-space:normal;gap:5px}
+ .lx-cad b,.lx-cr{font-size:18px}
+ .lx-cx{height:100dvh;max-height:100dvh}
+ .lx-cx .cx-c{padding:12px}
+ .cx-c .form,.form{grid-template-columns:minmax(0,1fr)}
+ .cmt-q{padding-left:12px;padding-right:12px}
+ .cmt-q h2,.cmt-met,.cmt-tw{margin-left:-12px;margin-right:-12px}
+ .cmt-q h2{padding-left:12px;padding-right:12px}
+ .cmt-tb{min-width:760px}
+}
+
+</style>
 </head>
 <body class="relator">
 <div class="cv" id="cv">

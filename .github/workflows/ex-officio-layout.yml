@@ -1,0 +1,22 @@
+name: Ex Officio - integridade visual
+on:
+  pull_request:
+    paths:
+      - 'apoio/ex-officio/index.html'
+      - 'apoio/ex-officio/lotes/index.html'
+      - 'apoio/ex-officio/tests/layout-static.test.js'
+      - '.github/workflows/ex-officio-layout.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Conferir estrutura e proporções sem credenciais
+        run: node --test apoio/ex-officio/tests/layout-static.test.js
