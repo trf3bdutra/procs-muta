@@ -1,0 +1,52 @@
+# Perfil de monocráticas do Relator para a Triagem (Caput): indicador de decisão monocrática por classe e assunto.
+# Regera acervo/triagem/perfil-monocraticas.json com scripts/triagem/perfil_monocraticas.py a partir da série
+# histórica (precedentes/jurisprudencia) e dos assuntos do acervo fonte. Roda quando a série ou o script mudam,
+# todo dia de manhã (para alcançar assuntos novos da fonte, cujos commits do robô não disparam workflows) e à mão.
+name: Triagem · perfil de monocráticas
+on:
+  push:
+    branches: [main]
+    paths: ["precedentes/jurisprudencia/**", "scripts/triagem/**", ".github/workflows/triagem-perfil.yml"]
+  schedule:
+    - cron: '17 10 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: triagem-perfil
+  cancel-in-progress: true
+jobs:
+  perfil:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Gerar e gravar
+        run: |
+          git config user.name 'triagem-perfil[bot]'
+          git config user.email 'triagem-perfil[bot]@users.noreply.github.com'
+          for tentativa in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python3 scripts/triagem/perfil_monocraticas.py
+            # só grava se mudou algo além da data de geração
+            if python3 - <<'EOF'
+          import json, subprocess, sys
+          p = 'acervo/triagem/perfil-monocraticas.json'
+          try:
+              antes = json.loads(subprocess.run(['git', 'show', 'HEAD:' + p], capture_output=True, text=True, check=True).stdout)
+          except Exception:
+              sys.exit(1)
+          depois = json.load(open(p, encoding='utf-8'))
+          antes.pop('atualizadoEm', None); depois.pop('atualizadoEm', None)
+          sys.exit(0 if antes == depois else 1)
+          EOF
+            then echo 'Perfil sem mudança.'; exit 0; fi
+            git add acervo/triagem/perfil-monocraticas.json
+            git commit -q -m "Triagem: perfil de monocráticas ($(TZ=America/Cuiaba date +%d/%m/%Y\ %H:%M))"
+            if git push -q origin HEAD:main; then exit 0; fi
+            echo "O repositório andou; tentativa $tentativa refeita."
+          done
+          exit 1

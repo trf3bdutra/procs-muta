@@ -28,6 +28,10 @@ acervo/                        processos em tramitação no gabinete
                                pautas do 2º e 6º bimestres, tarefas do PJe (22/06) e divergências de servidor e revisor a conferir
   operacional-arquivo.json     trabalho registrado de quem saiu do gabinete; volta ao operacional se o processo voltar
   datajud/                     estado da sincronização e relatórios de cada coleta
+  triagem/                     escaninhos.json (escaninhos da Triagem) e perfil-monocraticas.json: perfil das decisões do Relator
+                               por classe e assunto (monocráticas x acórdãos, hipótese do art. 932 e paradigmas), base do
+                               indicador de monocrática da Triagem; gerado por scripts/triagem/perfil_monocraticas.py
+                               (workflow triagem-perfil.yml) a partir de precedentes/jurisprudencia
 
 precedentes/                   processos já julgados pelo relator
   precedentes.jsonl            ementário: 1 julgamento por linha (1.844), com curadoria e catalogação

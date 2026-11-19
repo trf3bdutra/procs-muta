@@ -691,6 +691,40 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 #cg-regras{border:1px solid var(--b);background:var(--w);min-height:640px}
 @media(max-width:1000px){.cg-studio{grid-template-columns:190px minmax(0,1fr)}.cg-set{grid-column:1/-1;border-left:0;border-top:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cg-composer{grid-template-columns:1fr}}
 @media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cg-studio{grid-template-columns:1fr}.cg-cat{max-height:none;border-right:0;border-bottom:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.cg-prev{padding:8px}.cg-paper{padding:22px 18px;min-height:700px}.cg-set{grid-template-columns:1fr}}
+
+/* indicador e painel de monocráticas */
+.mi{--mic:#1b6496;--mif:#e8f0f6;position:relative;display:inline-flex;align-items:center;gap:5px;height:18px;padding:0 6px;border:1px solid color-mix(in srgb,var(--mic) 40%,transparent);border-radius:4px;background:var(--mif);color:var(--mic);font:600 10px "JetBrains Mono",monospace;letter-spacing:.03em;white-space:nowrap;overflow:hidden;vertical-align:middle}
+.mi i{position:absolute;left:0;bottom:0;height:2px;background:var(--mic)}.mi b{font-weight:700}.mi em{font-style:normal;opacity:.75}
+.mi.g{height:26px;font-size:11.5px;padding:0 10px}.mi.g i{height:3px}
+.mi-pn{margin-top:4px}.mi-pn .k{margin:0 0 6px}
+.mi-kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,1.3fr);gap:10px;padding:14px 16px}
+.mi-k{--mic:#1b6496;--mif:#e8f0f6;display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 12px;border:1px solid var(--l);border-left:4px solid var(--mic);border-radius:6px;background:var(--w);cursor:pointer;text-align:left;font:inherit;color:var(--tx)}
+.mi-k:hover,.mi-k.on{background:var(--mif)}.mi-k.on{outline:2px solid var(--mic);outline-offset:-1px}
+.mi-k b{font-size:24px;line-height:1.1;color:var(--mic)}.mi-k small{font-size:11.5px;color:var(--m)}
+.mi-k.nb{cursor:default;border-left-color:var(--b2);gap:6px;background:var(--p)}
+.mi-g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;padding:4px 16px 12px}
+.mi-t{width:100%;border-collapse:collapse;font-size:12.5px}.mi-t th{font:500 10px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--m);text-align:left;padding:5px 6px;border-bottom:1px solid var(--l)}
+.mi-t td{padding:5px 6px;border-bottom:1px solid var(--l2);vertical-align:middle}.mi-t .lk{padding:0;text-align:left}
+.mi-as{padding:4px 16px 12px;overflow-x:auto}
+.mi-mini{display:inline-block;width:70px;height:7px;background:#ece9df;border-radius:4px;overflow:hidden;vertical-align:middle}.mi-mini i{display:block;height:100%;background:#1b6496}
+.mi-ls{padding:4px 16px 8px}
+.mi-it{border:1px solid var(--l);border-radius:6px;margin-bottom:6px;background:var(--w)}.mi-it.on{border-color:#a9bfd0;box-shadow:0 1px 6px rgba(27,100,150,.08)}.mi-it.sel{background:#f6f9fb}
+.mi-r .nm{white-space:nowrap}.mi-r{display:grid;grid-template-columns:20px 214px 64px minmax(0,1fr) 150px minmax(0,220px) 86px;gap:10px;align-items:center;padding:7px 10px;font-size:13px}
+.mi-r .as{display:flex;flex-direction:column;min-width:0}.mi-r .as b,.mi-r .as span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mi-r .as span{font-size:11.5px;color:var(--m)}
+.mi-h1{font-size:12px;color:var(--m2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mi-ac{display:flex;gap:8px;align-items:center;padding:0 14px 10px}
+.mi-an{padding:4px 14px 10px;font-size:13px}
+.mi-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:6px}
+.mi-hp{display:flex;flex-direction:column;line-height:1.25}.mi-hp i{font:500 9.5px "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;font-style:normal;color:var(--m)}.mi-hp b{color:var(--v)}.mi-hp small{color:var(--m);font-size:11.5px}
+.mi-fu{margin:4px 0;padding-left:18px;color:var(--m2);line-height:1.5}.mi-fu li.si{color:var(--az)}
+.mi-hs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.mi-hs span{font-size:11.5px;padding:2px 7px;border:1px solid var(--l);border-radius:10px;background:var(--p)}
+.mi-par{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mi-par li{border-left:3px solid #a9bfd0;padding:4px 10px;background:#f7fafc;border-radius:0 5px 5px 0}
+.mi-ph{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;font-size:12px}.mi-ph span{color:var(--m)}.mi-ph a{margin-left:auto;color:var(--az);font-weight:600;text-decoration:none}
+.mi-pr{display:block;font-size:12.5px;color:var(--tx);margin-top:2px}.mi-pe{display:block;font-size:11.5px;color:var(--m);margin-top:2px}
+.mi-vz{margin:4px 0;font-size:12px;color:var(--m)}
+.tp-s.tp-mi .mi-an{padding:0}
+@media (max-width:1100px){.mi-kpi{grid-template-columns:repeat(2,minmax(0,1fr))}.mi-g2{grid-template-columns:1fr}.mi-r{grid-template-columns:20px 170px 60px minmax(0,1fr) 140px 86px}.mi-h1{display:none}}
 </style>
 <link rel="stylesheet" href="/padrao/loading/gabinete-loader.css">
 <script defer src="/padrao/loading/gabinete-loader.js"></script>
@@ -789,7 +823,7 @@ const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], [
 const GRUPOS = [['triar', 'Em triagem', '#a57829'], ['nc', 'Não classificadas', '#8a2f22'], ['pauta', 'Já na pauta', '#173f3d'], ['producao', 'Em produção', '#4b7fa8'], ['sobrestados', 'Sobrestados', '#8a70c0'], ['distribuicao', 'Análise da distribuição', '#3b7150'], ['secretaria', 'Com a secretaria', '#8a948f'], ['sem', 'Sem tarefa do gabinete', '#b3ab9c']];
 const PRESETS = [['triagem', 'Em triagem', ['triar']], ['gabinete', 'Em tarefa do gabinete', ['triar', 'nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria']], ['fora', 'Fora da triagem', ['nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria', 'sem']], ['todos', 'Todos na fonte', GRUPOS.map((g) => g[0])]];
 const PJ0 = () => ({ num: '', obj: '', ass: '', cla: '', parte: '', doc: '', orgao: '', col: '', ordem: '', prior: '', etq: '', autDe: '', autAte: '', minut: '', cargo: '', sig: false, lim: false, top: false });
-function novoF() { return { pje: PJ0(), pjeAberto: false, base: ['triar'], etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) }; }
+function novoF() { return { pje: PJ0(), pjeAberto: false, base: ['triar'], etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [], mono: [], hipm: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: Object.assign({ mono: 1 }, LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 })) }; }
 const F0 = Object.assign(novoF(), { base: LS.get('tri_base', ['triar']) }), FES = {};
 let F = F0; /* a Fila e cada escaninho têm o próprio estado de busca e filtros */
 function filtroDe(aba) { if (aba.indexOf('esc:') !== 0) return F0; const id = aba.slice(4); return FES[id] || (FES[id] = Object.assign(novoF(), { esc: id, statsAberto: false })); }
@@ -838,10 +872,106 @@ function construir() {
     o.grupo = !t ? 'sem' : TRIAR.has(k) ? 'triar' : IGN.has(k) ? IGN.get(k) : (ESCOPO.lido ? 'nc' : 'sem');
     ALL.push(o); if (o.grupo === 'triar') U.push(o); else if (o.grupo === 'nc') { o.nova = true; NOVAS.push(o); } });
   IDX = new Map(ALL.map((o) => [o.d, o]));
+  miAtualiza();
   ALL.forEach((o) => { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); });
   for (const d of [...SEL]) if (!IDX.has(d)) SEL.delete(d); }
-function refazDest(o) { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
+function refazDest(o) { o.mi = monoInd(o); o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
 const DLAB = Object.fromEntries(DEST.map((x) => [x[0], x[1]])), CLAB = Object.fromEntries(CAND.map((x) => [x[0], x[1]]));
+
+/* ===================== indicador de monocrática (acervo/triagem/perfil-monocraticas.json) =====================
+   Perfil das decisões do Relator na série histórica (precedentes/jurisprudencia): por classe e por assunto, quantas
+   foram monocráticas e quantas acórdãos, e por qual hipótese. Gerado por scripts/triagem/perfil_monocraticas.py.
+   O indicador soma ao perfil os sinais do próprio processo (etiquetas, tarefa, prontuário de triagem). É apoio à
+   triagem: não define destino. */
+const PERFIL_ARQ = 'acervo/triagem/perfil-monocraticas.json';
+let PERFIL = null, PERFIL_ERRO = '';
+const MI_FX = [['Alta', '#1b6496', '#e8f0f6', 0.6], ['Média', '#a57829', '#f8f0dd', 0.3], ['Baixa', '#5c6b67', '#f1efe8', 0]];
+const MI_SEM = 'Sem perfil';
+/* sinais do processo: [chave, rótulo, hipótese, piso do índice] */
+const MI_SIN = {
+  etm: ['Etiqueta de monocrática', '', 0.95],
+  ped: ['Pedido de competência do relator (efeito suspensivo, petição, tutela, restauração)', 'susp', 0.9],
+  ai: ['Agravo de instrumento autuado antes de ' + ANO + ': verificar perda de objeto na origem', 'perda', 0.8],
+  rem: ['Remessa necessária sem apelação: conferir o valor da condenação', 'remnc', 0.8],
+  comp: ['Etiqueta de competência ou prevenção', 'comp', 0.75],
+  prec: ['Precedente qualificado indicado na etiqueta (CPC, art. 932, IV e V)', 'nega', 0.7],
+  ed: ['Embargos de declaração recebidos: monocrática se a decisão embargada for monocrática (CPC, art. 1.024, § 2º)', '', 0]
+};
+function miCelula(x) { if (!x) return null; const n26 = x.m26 + x.a26;
+  if (n26 >= 6) return { m: x.m26, a: x.a26, n: n26, per: ANO_PERFIL(), hip: x.hip26 && Object.keys(x.hip26).length ? x.hip26 : x.hip, causa: x.causa };
+  /* célula pequena em 2026: soma a série anterior com peso 1/2 (outra Turma, outro acervo) */
+  const m = x.m26 + 0.5 * (x.m - x.m26), a = x.a26 + 0.5 * (x.a - x.a26);
+  return { m, a, n: x.m + x.a, per: 'série', hip: x.hip, causa: x.causa }; }
+const ANO_PERFIL = () => String((PERFIL && PERFIL.base && PERFIL.base.anoAtual) || 2026);
+const pct = (v) => Math.round(100 * v) + '%';
+function monoInd(o) {
+  if (!PERFIL) return null;
+  const C = PERFIL.classes[o.cl], cc = miCelula(C);
+  const pc = cc && cc.n ? (cc.m + 1) / (cc.m + cc.a + 2) : 0.25;
+  const A = PERFIL.assuntos[nz(o.assunto)], AC = A && A.classes ? A.classes[o.cl] : null, ac = miCelula(AC);
+  const k = 8; let p = pc, base = 'classe';
+  if (ac && ac.n && !(A && A.generico)) { p = (ac.m + k * pc) / (ac.m + ac.a + k); base = 'assunto'; }
+  const fund = [], r = o.row || {};
+  if (cc && cc.n) fund.push(['classe', 'Classe ' + o.cl + ': ' + pct(cc.m / Math.max(1, cc.m + cc.a)) + ' das decisões do Relator foram monocráticas (' + nf(Math.round(cc.m)) + ' de ' + nf(Math.round(cc.m + cc.a)) + (cc.per === 'série' ? ', série histórica' : ', ' + cc.per) + ')']);
+  else fund.push(['classe', 'Classe ' + o.cl + ': sem decisões do Relator na base']);
+  if (A && A.generico) fund.push(['assunto', 'Assunto “' + o.assunto + '”: rótulo amplo demais para identificar a matéria nos julgados; vale a classe']);
+  else if (ac && ac.n) fund.push(['assunto', 'Mesma matéria e classe: ' + pct(ac.m / Math.max(1, ac.m + ac.a)) + ' monocráticas (' + nf(Math.round(ac.m)) + ' de ' + nf(Math.round(ac.m + ac.a)) + (ac.per === 'série' ? ', série histórica com peso maior para ' + ANO_PERFIL() : ', ' + ac.per) + ')']);
+  else fund.push(['assunto', 'Assunto “' + o.assunto + '”: sem julgados do Relator localizados para esta classe']);
+  let hip = '', sin = [];
+  const adm = [['Tempestividade', 'Intempestivo', 'intempestividade'], ['Preparo', 'Não Recolhido', 'preparo não recolhido'], ['Representação', 'Negativo', 'representação irregular']].filter((x) => String(r[x[0]] || '') === x[1]);
+  if (adm.length) { p = Math.max(p, 0.9); hip = 'inadm'; sin.push('Prontuário: ' + adm.map((x) => x[2]).join(', ') + ' (CPC, art. 932, III)'); }
+  if (o.cand && MI_SIN[o.cand]) { const s = MI_SIN[o.cand]; if (s[2]) p = Math.max(p, s[2]); if (s[1] && !hip) hip = s[1]; sin.push(s[0]); }
+  if (o.monoE && o.cand !== 'etm') { p = Math.max(p, 0.95); sin.push('Etiqueta ou destino de monocrática'); }
+  if (o.apto && !o.monoE) sin.push('Etiqueta de apto para julgamento: indica pauta, conferir');
+  if (o.pend && o.pend.length) sin.push('Pendência: ' + o.pend.join(', '));
+  /* hipótese provável: o sinal do processo; senão, a mais frequente nas monocráticas da matéria (ou da classe) */
+  const H = (ac && ac.m && ac.hip) || (cc && cc.hip) || {}, totH = Object.values(H).reduce((s, v) => s + v, 0);
+  const hips = Object.entries(H).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([h, v]) => [h, totH ? v / totH : 0]);
+  if (!hip && hips.length) hip = hips[0][0];
+  const C2 = (ac && ac.causa) || (cc && cc.causa) || null, causa = hip === 'inadm' && C2 ? Object.keys(C2)[0] : '';
+  const fx = MI_FX.find((x) => p >= x[3]) || MI_FX[2], nBase = base === 'assunto' ? ac.n : cc ? cc.n : 0;
+  const par = (A && A.paradigmas && (A.paradigmas[o.cl] || [])) || [];
+  return { s: p, fx: fx[0], cor: fx[1], fundo: fx[2], hip, hipRot: hip ? (PERFIL.hipoteses[hip] || hip) : '—', hips, causa: causa ? (PERFIL.causas[causa] || causa) : '', base, nBase, fraca: nBase < 5, fund, sin, par }; }
+function miAtualiza(L) { (L || ALL).forEach((o) => { o.mi = monoInd(o); }); }
+const miFaixa = (o) => o.mi ? o.mi.fx : MI_SEM;
+const miHip = (o) => o.mi && o.mi.hip ? o.mi.hipRot : '—';
+function miChip(o, grande) { const m = o.mi; if (!m) return '';
+  return '<span class="mi' + (grande ? ' g' : '') + '" style="--mic:' + m.cor + ';--mif:' + m.fundo + '" title="' + esc('Indicador de monocrática: ' + m.fx + ' (' + pct(m.s) + ') · ' + m.hipRot + (m.fraca ? ' · base pequena' : '')) + '"><i style="width:' + Math.max(6, Math.round(100 * m.s)) + '%"></i><b>' + (grande ? 'Monocrática · ' : 'Mono ') + m.fx + '</b><em>' + pct(m.s) + '</em></span>'; }
+function miParadigmas(m, lim) { const E = (PERFIL && PERFIL.exemplos) || {}; const L = (m.par || []).map((id) => [id, E[id]]).filter((x) => x[1]).slice(0, lim || 3);
+  if (!L.length) return '<p class="mi-vz">Sem monocrática do Relator localizada para esta matéria e classe.</p>';
+  return '<ul class="mi-par">' + L.map(([id, x]) => '<li><span class="mi-ph"><b class="mono">' + esc(x.n || id) + '</b><span>' + esc(br(x.d || '')) + ' · ' + esc(x.cl) + ' · ' + esc((PERFIL.hipoteses[x.h] || x.h || '').replace(/ \(CPC.*$/, '')) + '</span>' + (x.u ? '<a href="' + esc(x.u) + '" target="_blank" rel="noopener">abrir ↗</a>' : '') + '</span><span class="mi-pr">' + esc(x.r || '') + '</span><span class="mi-pe">' + esc(x.e || '') + '</span></li>').join('') + '</ul>'; }
+function miAnalise(o, lim) { const m = o.mi; if (!m) return '<p class="mi-vz">' + (PERFIL_ERRO ? 'Perfil de monocráticas não lido: ' + esc(PERFIL_ERRO) : 'Perfil de monocráticas ainda carregando.') + '</p>';
+  return '<div class="mi-an"><div class="mi-top">' + miChip(o, true) + '<span class="mi-hp"><i>Hipótese provável</i><b>' + esc(m.hipRot) + '</b>' + (m.causa ? '<small>causa mais comum: ' + esc(m.causa) + '</small>' : '') + '</span>' + (m.fraca ? '<span class="tg" style="border-color:var(--r2);color:var(--r)">base pequena</span>' : '') + '</div>' +
+    '<ul class="mi-fu">' + m.fund.map((f) => '<li>' + esc(f[1]) + '</li>').join('') + m.sin.map((s) => '<li class="si">' + esc(s) + '</li>').join('') + '</ul>' +
+    (m.hips.length > 1 ? '<p class="mi-hs">' + m.hips.map(([h, v]) => '<span>' + esc((PERFIL.hipoteses[h] || h).replace(/ \(CPC.*$/, '')) + ' <b>' + pct(v) + '</b></span>').join('') + '</p>' : '') +
+    '<p class="k" style="margin:8px 0 4px">Monocráticas do Relator na mesma matéria</p>' + miParadigmas(m, lim) + '</div>'; }
+let MI_ABERTO = '';
+function vMono(L) {
+  if (!PERFIL) return '<section class="card mi-pn"><div class="ch"><h2>Painel de monocráticas</h2><p>' + (PERFIL_ERRO ? 'não foi possível ler ' + PERFIL_ARQ + ': ' + esc(PERFIL_ERRO) : 'carregando o perfil do Relator…') + '</p></div></section>';
+  const n = L.length || 1, G = MI_FX.map((x) => [x, L.filter((o) => o.mi && o.mi.fx === x[0])]), sem = L.filter((o) => !o.mi).length, B = PERFIL.base || {};
+  const fxSel = F.fac.mono || [], hipSel = F.fac.hipm || [];
+  let h = '<section class="card mi-pn" aria-label="Painel de monocráticas"><div class="ch"><h2>Painel de monocráticas</h2><p>indicador por processo · base: ' + nf(B.monocraticas) + ' monocráticas e ' + nf(B.acordaos) + ' acórdãos do Relator (' + esc((B.anos || []).join(', ')) + '; peso maior para ' + ANO_PERFIL() + ', Turma Regional de MS) · perfil de ' + esc(br(String(PERFIL.atualizadoEm || '').slice(0, 10))) + '</p></div>';
+  h += '<div class="mi-kpi">' + G.map(([x, X]) => '<button type="button" class="mi-k' + (fxSel.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-fac="mono" data-v="' + x[0] + '" style="--mic:' + x[1] + ';--mif:' + x[2] + '"><span class="k" style="color:' + x[1] + '">' + x[0] + '</span><b>' + nf(X.length) + '</b><small>' + pct(X.length / n) + ' dos filtrados' + (x[0] === 'Alta' ? ' · índice ≥ 60%' : x[0] === 'Média' ? ' · 30% a 59%' : ' · abaixo de 30%') + '</small></button>').join('') +
+    '<div class="mi-k nb"><span class="k">Ação</span><button type="button" class="btn sm" data-mi-marca="Alta"' + (G[0][1].length ? '' : ' disabled') + '>Marcar os ' + nf(G[0][1].length) + ' de alta</button><button type="button" class="btn sm" data-mi-ord>' + (F.ord === 'mono' ? 'Lista em ordem do índice ✓' : 'Ordenar a lista pelo índice') + '</button>' + (sem ? '<small>' + nf(sem) + ' sem perfil</small>' : '') + '</div></div>';
+  /* hipóteses e matriz classe × faixa */
+  const HP = contar(L.filter((o) => o.mi && o.mi.fx !== 'Baixa'), miHip), mxH = Math.max(1, ...HP.map((x) => x[1]));
+  const CL = contar(L, (o) => o.cl).slice(0, 8);
+  h += '<div class="mi-g2"><div><p class="k">Hipótese provável · alta e média</p>' + (HP.length ? HP.map((x) => '<button type="button" class="bar' + (hipSel.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-fac="hipm" data-v="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><em>' + esc(x[0]) + '</em><span class="hb"><i style="width:' + Math.max(2, Math.round(100 * x[1] / mxH)) + '%;background:var(--az2)"></i></span><b>' + nf(x[1]) + '</b><span></span></button>').join('') : '<p class="mi-vz">nenhum processo com índice alto ou médio</p>') + '</div>' +
+    '<div><p class="k">Classe × indicador</p><table class="mi-t"><thead><tr><th>Classe</th>' + MI_FX.map((x) => '<th style="color:' + x[1] + '">' + x[0] + '</th>').join('') + '<th>Relator ' + ANO_PERFIL() + '</th></tr></thead><tbody>' +
+    CL.map(([c]) => { const X = L.filter((o) => o.cl === c), P = PERFIL.classes[c]; return '<tr><td><b>' + esc(c) + '</b> <span class="mono" style="color:var(--m)">' + nf(X.length) + '</span></td>' + MI_FX.map((x) => { const v = X.filter((o) => o.mi && o.mi.fx === x[0]).length; return '<td>' + (v ? '<button type="button" class="lk" data-mi-cel="' + esc(c) + '|' + x[0] + '">' + nf(v) + '</button>' : '<span style="color:var(--b2)">0</span>') + '</td>'; }).join('') + '<td class="mono" style="font-size:11.5px">' + (P && P.m26 + P.a26 ? nf(P.m26) + ' mono · ' + nf(P.a26) + ' acórd. (' + pct(P.m26 / (P.m26 + P.a26)) + ')' : '—') + '</td></tr>'; }).join('') + '</tbody></table></div></div>';
+  /* assuntos: onde o Relator mais decide por monocrática */
+  const AS = contar(L, (o) => o.assunto).slice(0, 14);
+  h += '<div class="mi-as"><p class="k">Assuntos dos filtrados · como o Relator decidiu a matéria</p><table class="mi-t"><thead><tr><th>Assunto</th><th>Proc.</th><th>Alta</th><th>Relator: monocráticas / julgados (' + ANO_PERFIL() + ')</th><th>Série histórica</th><th>Hipótese mais comum</th></tr></thead><tbody>' +
+    AS.map(([a, v]) => { const P = PERFIL.assuntos[nz(a)], t = P && P.total, al = L.filter((o) => o.assunto === a && o.mi && o.mi.fx === 'Alta').length, hh = t && Object.keys(t.hip26 || {}).length ? t.hip26 : t && t.hip, h1 = hh && Object.keys(hh)[0];
+      const n26 = t ? t.m26 + t.a26 : 0, ns = t ? t.m + t.a : 0;
+      return '<tr><td><button type="button" class="lk" data-fac="assunto" data-v="' + esc(a) + '" title="filtrar por este assunto">' + esc(a) + '</button>' + (P && P.generico ? ' <span class="tg">amplo</span>' : '') + '</td><td class="mono">' + nf(v) + '</td><td class="mono">' + (al ? '<b style="color:#1b6496">' + nf(al) + '</b>' : '0') + '</td>' +
+        '<td>' + (n26 ? '<span class="mi-mini"><i style="width:' + Math.round(100 * t.m26 / n26) + '%"></i></span> <span class="mono" style="font-size:11.5px">' + nf(t.m26) + ' / ' + nf(n26) + ' · ' + pct(t.m26 / n26) + '</span>' : '<span style="color:var(--m)">—</span>') + '</td><td class="mono" style="font-size:11.5px">' + (ns ? nf(t.m) + ' / ' + nf(ns) + ' · ' + pct(t.m / ns) : '—') + '</td><td style="font-size:12px">' + esc(h1 ? (PERFIL.hipoteses[h1] || h1).replace(/ \(CPC.*$/, '') : '—') + '</td></tr>'; }).join('') + '</tbody></table></div>';
+  /* processos em ordem do índice, com a análise */
+  const O = L.slice().sort((a, b) => (b.mi ? b.mi.s : -1) - (a.mi ? a.mi.s : -1) || String(a.desde || '9').localeCompare(String(b.desde || '9'))), lim = F.lim || 30;
+  h += '<div class="mi-ls"><p class="k">Processos em ordem do índice · clique para ver a análise e os paradigmas</p>' + O.slice(0, lim).map((o) => { const ab = MI_ABERTO === o.d, m = o.mi;
+    return '<div class="mi-it' + (ab ? ' on' : '') + (SEL.has(o.d) ? ' sel' : '') + '"><div class="mi-r"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '">' + o.cnj + '</button><span>' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.tarefa || 'sem tarefa') + '</span></span>' + (miChip(o) || '<span class="tg">sem perfil</span>') + '<span class="mi-h1" title="' + esc(m ? m.hipRot : '') + '">' + esc(m ? m.hipRot.replace(/ \(CPC.*$/, '') : '—') + '</span><button type="button" class="btn sm" data-mi-ex="' + o.d + '" aria-expanded="' + ab + '">' + (ab ? 'Fechar ▴' : 'Análise ▾') + '</button></div>' + (ab ? miAnalise(o, 4) + '<div class="mi-ac"><button type="button" class="btn sm" data-prontuario="' + o.d + '">Prontuário de triagem</button><button type="button" class="btn sm" data-ficha="' + o.d + '">Ficha</button><span style="flex:1"></span><span style="font-size:12px;color:var(--m)">destino atual: ' + esc(o.dest.t) + '</span></div>' : '') + '</div>'; }).join('') +
+    '<div class="mais"><span>' + nf(Math.min(lim, O.length)) + ' de ' + nf(O.length) + '</span>' + (O.length > lim ? '<button type="button" class="lk" data-mais="fila">Mostrar mais 30</button>' : '') + '</div></div>';
+  return h + '<p class="nota">O índice combina a proporção de monocráticas do Relator na mesma classe e matéria (suavizada pela classe) com os sinais do processo: etiquetas, tarefa e campos do prontuário de triagem (tempestividade, preparo, representação). É apoio à triagem: o destino continua a ser definido pela equipe. Perfil gerado por scripts/triagem/perfil_monocraticas.py a partir de precedentes/jurisprudencia.</p></section>'; }
 
 /* ===================== sessões (calendário, pelo motor) ===================== */
 function sessoes() { const s = SES(); let L = []; try { L = ((s && s.estado && s.estado().sessoes) || []).slice(); } catch (e) {} return L.filter((x) => x.data && x.data >= HOJE).sort((a, b) => a.data.localeCompare(b.data)); }
@@ -1148,9 +1278,9 @@ function reg(k, rot, L) { REG[k] = { rot, ids: L.map((o) => o.d) }; }
 function abrirConj(k) { const r = REG[k]; if (!r) return; limparFiltros(); F.conj = { rot: r.rot, ids: new Set(r.ids) }; ir('fila'); }
 
 /* ---------- filtros da Fila ---------- */
-const CAMPOS = [['tarefa', 'Tarefa no PJe'], ['assunto', 'Assunto'], ['etq', 'Etiqueta'], ['classe', 'Classe'], ['secao', 'Seção'], ['partes', 'Partes'], ['desde', 'Data de entrada na tarefa'], ['dist', 'Data de distribuição'], ['prior', 'Prioridade legal'], ['dest', 'Destino da triagem'], ['prov', 'Destino provável']];
+const CAMPOS = [['tarefa', 'Tarefa no PJe'], ['assunto', 'Assunto'], ['etq', 'Etiqueta'], ['classe', 'Classe'], ['secao', 'Seção'], ['partes', 'Partes'], ['desde', 'Data de entrada na tarefa'], ['dist', 'Data de distribuição'], ['prior', 'Prioridade legal'], ['dest', 'Destino da triagem'], ['prov', 'Destino provável'], ['mono', 'Indicador de monocrática'], ['hipm', 'Hipótese provável (monocrática)']];
 const CONDS = [['in', 'é um destes'], ['notin', 'não é nenhum destes'], ['has', 'contém algum trecho'], ['nothas', 'não contém'], ['empty', 'está vazio'], ['notempty', 'não está vazio'], ['between', 'entre datas']];
-const valDe = (o, c) => c === 'etq' ? o.etq : c === 'classe' ? [o.cl] : c === 'prior' ? [o.prior ? 'Sim' : 'Não'] : c === 'dest' ? [o.dest.k ? (o.dest.k === 'esc' ? 'Escaninho: ' + o.dest.t : o.dest.k === 'pauta' ? 'Pauta ' + o.dest.s : 'Monocrática') : 'Sem destino'] : c === 'prov' ? [DLAB[o.prov]] : [o[c] || ''];
+const valDe = (o, c) => c === 'etq' ? o.etq : c === 'classe' ? [o.cl] : c === 'prior' ? [o.prior ? 'Sim' : 'Não'] : c === 'dest' ? [o.dest.k ? (o.dest.k === 'esc' ? 'Escaninho: ' + o.dest.t : o.dest.k === 'pauta' ? 'Pauta ' + o.dest.s : 'Monocrática') : 'Sem destino'] : c === 'prov' ? [DLAB[o.prov]] : c === 'mono' ? [miFaixa(o)] : c === 'hipm' ? [miHip(o)] : [o[c] || ''];
 function tokens(q) { const out = []; String(q || '').replace(/(-?)"([^"]+)"|(-?)(\S+)/g, (m, n1, f, n2, w) => { const neg = !!(n1 || n2), t = nz(f || w); if (t && t !== '-') out.push({ neg, t }); return ''; }); return out; }
 function loteSet() { const s = new Set(); String(F.lote || '').replace(/\d{7}-?\d{2}\.?\d{4}\.?\d\.?\d{2}\.?\d{4}/g, (m) => { s.add(dg(m)); return m; }); return s; }
 function passaCrit(o, c) { const v = valDe(o, c.campo).filter((x) => x !== '' && x != null);
@@ -1168,7 +1298,7 @@ function filtrar(base, sem) {
     if (!passaPje(o)) return false;
     for (const t of toks) { const has = o.hay.indexOf(t.t) >= 0; if (t.neg ? has : !has) return false; }
     for (const c of F.crit) if (!passaCrit(o, c)) return false;
-    for (const f of ['secao', 'classe', 'assunto', 'tarefa', 'prior']) { if (f === sem) continue; const L = F.fac[f]; if (L.length) { const v = f === 'classe' ? o.cl : f === 'prior' ? (o.prior ? 'Sim' : 'Não') : f === 'tarefa' ? (o.tarefa || 'Sem tarefa') : o[f]; if (L.indexOf(v) < 0) return false; } }
+    for (const f of ['secao', 'classe', 'assunto', 'tarefa', 'prior', 'mono', 'hipm']) { if (f === sem) continue; const L = F.fac[f] || []; if (L.length) { const v = f === 'classe' ? o.cl : f === 'prior' ? (o.prior ? 'Sim' : 'Não') : f === 'tarefa' ? (o.tarefa || 'Sem tarefa') : f === 'mono' ? miFaixa(o) : f === 'hipm' ? miHip(o) : o[f]; if (L.indexOf(v) < 0) return false; } }
     if (sem !== 'etq') { if (F.etIn.length && !F.etIn.every((e) => o.etq.indexOf(e) >= 0)) return false; if (F.etOut.length && F.etOut.some((e) => o.etq.indexOf(e) >= 0)) return false; }
     return true; }); }
 function passaPje(o) { const P = F.pje, has = (v, q) => !q || nz(v).indexOf(nz(q)) >= 0;
@@ -1194,7 +1324,7 @@ function formPje() { const P = F.pje, opts = (fn, v) => { const C = contar(ALL, 
     '<div style="display:flex;gap:8px;align-items:end;grid-column:1/-1"><button type="submit" class="btn pri">Pesquisar</button><button type="button" class="btn" data-pjlimpa>Limpar</button><span style="font-size:12px;color:var(--m)">Ordem: pela data de chegada na tarefa. Os campos somam-se aos critérios e aos grupos do acervo filtrado.</span></div></form>'; }
 function limparFiltros() { F.pje = PJ0(); F.q = ''; F.lote = ''; F.crit = []; F.conj = null; F.etIn = []; F.etOut = []; Object.keys(F.fac).forEach((k) => { F.fac[k] = []; }); F.lim = 100; F.statsX = null; }
 function contar(L, fn) { const m = new Map(); L.forEach((o) => { [].concat(fn(o)).forEach((v) => { if (v === '' || v == null) return; m.set(v, (m.get(v) || 0) + 1); }); }); return [...m.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0]))); }
-const ORDS = { cnj: (o) => o.d, classe: (o) => o.cl, assunto: (o) => nz(o.assunto), secao: (o) => o.secao, desde: (o) => o.desde || '9999', tarefa: (o) => nz(o.tarefa || '~'), dest: (o) => o.dest.t };
+const ORDS = { cnj: (o) => o.d, classe: (o) => o.cl, assunto: (o) => nz(o.assunto), secao: (o) => o.secao, desde: (o) => o.desde || '9999', tarefa: (o) => nz(o.tarefa || '~'), dest: (o) => o.dest.t, mono: (o) => o.mi ? 1 - o.mi.s : 2 };
 function ordenar(L) { const f = ORDS[F.ord] || ORDS.cnj; return L.slice().sort((a, b) => { const x = f(a), y = f(b); return (x < y ? -1 : x > y ? 1 : 0) * F.dir; }); }
 
 /* ---------- Fila ---------- */
@@ -1206,8 +1336,8 @@ function chipsAtivos() { const ch = [];
   F.crit.forEach((c, i) => { const cmp = (CAMPOS.find((x) => x[0] === c.campo) || [])[1], cd = (CONDS.find((x) => x[0] === c.cond) || [])[1];
     const vs = c.cond === 'between' ? br(c.de) + ' a ' + br(c.ate) : /empty/.test(c.cond) ? '' : c.vals.concat(c.trechos.map((t) => '“' + t + '”')).join(' ou ');
     ch.push(['<b>' + esc(cmp) + '</b> ' + esc(cd) + ' ' + esc(vs), 'crit', i, /^not/.test(c.cond)]); });
-  const FN = { secao: 'Seção', classe: 'Classe', assunto: 'Assunto', tarefa: 'Tarefa', prior: 'Prioridade' };
-  Object.keys(F.fac).forEach((f) => { if (F.fac[f].length) ch.push(['<b>' + FN[f] + '</b> ' + esc(F.fac[f].join(' ou ')), 'fac', f, false]); });
+  const FN = { secao: 'Seção', classe: 'Classe', assunto: 'Assunto', tarefa: 'Tarefa', prior: 'Prioridade', mono: 'Monocrática', hipm: 'Hipótese' };
+  Object.keys(F.fac).forEach((f) => { if (F.fac[f] && F.fac[f].length) ch.push(['<b>' + FN[f] + '</b> ' + esc(F.fac[f].join(' ou ')), 'fac', f, false]); });
   F.etIn.forEach((e) => ch.push(['<b>Etiqueta</b> tem ' + esc(e), 'etIn', e, false])); F.etOut.forEach((e) => ch.push(['<b>Etiqueta</b> não tem ' + esc(e), 'etOut', e, true]));
   return ch; }
 function vFila(cab, estilo) {
@@ -1219,7 +1349,7 @@ function vFila(cab, estilo) {
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
     '<button type="button" class="btn" id="bt-pje" aria-expanded="' + F.pjeAberto + '">Pesquisa do PJe ' + (F.pjeAberto ? '▴' : '▾') + '</button><button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
     '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
-    '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['mapa', 'Mapa do fluxo'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
+    '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['mapa', 'Mapa do fluxo'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino'], ['mono', 'Monocrática']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
     (emE ? '<button type="button" class="btn" data-ex-direto="copiar">Copiar lista</button>' : '') + '<button type="button" class="btn" data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button><span style="position:relative"><button type="button" class="btn" id="' + (emE ? 'bt-expe' : 'bt-exp') + '" aria-expanded="false">Exportar ▾</button></span></div>';
   if (F.pjeAberto) h += formPje();
   if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), noB = emE ? new Set(BASE().map((o) => o.d)) : IDX, fora = [...s].filter((d) => !noB.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + (emE ? ' no escaninho' : ' entre os em triagem') + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
@@ -1228,6 +1358,7 @@ function vFila(cab, estilo) {
   if (F.ver === 'mapa') return h + vMapa(L) + '</div>';
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
   h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + (emE ? ' no escaninho' : ' no acervo filtrado') + '</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
+  if (F.ver === 'mono') return h + vMono(L) + '</div></div></div>';
   if (F.statsAberto) h += stats(L);
   h += painelEtq(L);
   h += lista(L, F, 'fila') + '</div></div></div>';
@@ -1322,13 +1453,13 @@ function painelEtq(L) { const C = contar(L, (o) => o.etq), q = nz(F.etqQ), V = C
   return h + '<div class="eg">' + V.slice(0, 300).map((x) => { const st = F.etIn.indexOf(x[0]) >= 0 ? 'in' : F.etOut.indexOf(x[0]) >= 0 ? 'out' : ''; return '<button type="button" class="' + st + '" data-etqc="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><span>' + esc(x[0]) + '</span><b>' + nf(x[1]) + '</b></button>'; }).join('') + (V.length ? '' : '<span style="color:var(--m);font-size:12.5px">nenhuma etiqueta</span>') + '</div></section>'; }
 function rail() {
   const blk = (f, tit, ent, extra) => { const ab = !!F.rail[f]; return '<div><button type="button" class="gh" data-rail="' + f + '" aria-expanded="' + ab + '"><span class="k">' + tit + '</span><span>' + (extra || '') + (ab ? '▾' : '▸') + '</span></button>' + (ab ? ent() : '') + '</div>'; };
-  const fac = (f, fn, lim) => () => { const C = contar(filtrar(F.conj ? ALL : BASE(), f), fn); const sel = F.fac[f]; const L = C.slice(0, F.rail[f + 'Todos'] ? 400 : (lim || 8));
+  const fac = (f, fn, lim) => () => { const C = contar(filtrar(F.conj ? ALL : BASE(), f), fn); const sel = F.fac[f] || (F.fac[f] = []); const L = C.slice(0, F.rail[f + 'Todos'] ? 400 : (lim || 8));
     sel.forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
     return L.map((x) => '<button type="button" class="rl' + (sel.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-fac="' + f + '" data-v="' + esc(x[0]) + '" title="' + esc(x[0]) + '"><em>' + esc(x[0]) + '</em><span>' + nf(x[1]) + '</span></button>').join('') + (C.length > (lim || 8) ? '<button type="button" class="lk" data-todos="' + f + '" style="padding:4px 9px">' + (F.rail[f + 'Todos'] ? 'menos' : 'todos (' + C.length + ')') + '</button>' : ''); };
   const etq = () => { const C = contar(filtrar(F.conj ? ALL : BASE(), 'etq'), (o) => o.etq), L = C.slice(0, F.rail.etqTodos ? 400 : 10);
     F.etIn.concat(F.etOut).forEach((v) => { if (!L.some((x) => x[0] === v)) L.push([v, 0]); });
     return '<p style="margin:0 0 4px;font-size:11.5px;color:var(--m)">+ só com a etiqueta · − sem ela</p>' + L.map((x) => '<div class="et"><em title="' + esc(x[0]) + '">' + esc(x[0]) + ' <span class="mono" style="font-size:11px;color:var(--m)">' + nf(x[1]) + '</span></em><span class="pm"><button type="button" class="' + (F.etIn.indexOf(x[0]) >= 0 ? 'on' : '') + '" data-etin="' + esc(x[0]) + '" aria-label="Só com ' + esc(x[0]) + '">+</button><button type="button" class="neg' + (F.etOut.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-etout="' + esc(x[0]) + '" aria-label="Sem ' + esc(x[0]) + '">−</button></span></div>').join('') + (C.length > 10 ? '<button type="button" class="lk" data-todos="etq" style="padding:4px 0">' + (F.rail.etqTodos ? 'menos' : 'todas (' + C.length + ')') + '</button>' : ''); };
-  return blk('secao', 'Seção', fac('secao', (o) => o.secao, 5)) + blk('classe', 'Classe', fac('classe', (o) => o.cl, 6)) + blk('assunto', 'Assunto', fac('assunto', (o) => o.assunto, 8)) + blk('tarefa', 'Tarefa do PJe', fac('tarefa', (o) => o.tarefa || 'Sem tarefa', 8)) + blk('prior', 'Prioridade legal', fac('prior', (o) => o.prior ? 'Sim' : 'Não', 2)) + blk('etq', 'Etiquetas', etq); }
+  return blk('secao', 'Seção', fac('secao', (o) => o.secao, 5)) + blk('classe', 'Classe', fac('classe', (o) => o.cl, 6)) + blk('mono', 'Monocrática · indicador', fac('mono', miFaixa, 4), PERFIL ? '' : '… ') + blk('hipm', 'Monocrática · hipótese', fac('hipm', miHip, 6)) + blk('assunto', 'Assunto', fac('assunto', (o) => o.assunto, 8)) + blk('tarefa', 'Tarefa do PJe', fac('tarefa', (o) => o.tarefa || 'Sem tarefa', 8)) + blk('prior', 'Prioridade legal', fac('prior', (o) => o.prior ? 'Sim' : 'Não', 2)) + blk('etq', 'Etiquetas', etq); }
 function stats(L) {
   const n = L.length, pr = L.filter((o) => o.prior).length, ds = L.map((o) => dias(o.desde)).filter((x) => x != null).sort((a, b) => a - b), med = ds.length ? ds[Math.floor(ds.length / 2)] : null, v180 = ds.filter((x) => x > 180).length, ant = L.map((o) => o.desde).filter(Boolean).sort()[0];
   const col = (tit, k, fn, lim) => { const C = contar(L, fn).slice(0, lim), mx = Math.max(1, ...C.map((x) => x[1]));
@@ -1366,7 +1497,7 @@ function procExp(o){const r=o.row||{},B=[['Próxima ação','pa',r['Próxima aç
     '<span class="pe-ac"><button type="button" class="btn sm" data-ficha="'+o.d+'">Ficha</button><button type="button" class="btn sm pri" data-prontuario="'+o.d+'">Prontuário de triagem</button></span></div></div>';}
 function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>', exp = ABA.indexOf('esc:') === 0, aberto = exp && PROC_EXP_ABERTO === o.d;
   const detalhes = exp && aberto ? procExp(o) : '';
-  return '<div class="proc-item"><div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Abrir prontuário rápido">Triagem</button>' + obsLinha(o) + (exp ? '<button type="button" class="proc-exp-toggle" data-proc-exp="'+o.d+'" aria-expanded="'+aberto+'" title="'+(aberto?'Recolher':'Anotações e providências')+'">'+(aberto?'Recolher ▴':'Anotações ▾')+'</button>' : '') + '</div>' + detalhes + '</div>'; }
+  return '<div class="proc-item"><div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + (o.mi ? ' ' + miChip(o) : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Abrir prontuário rápido">Triagem</button>' + obsLinha(o) + (exp ? '<button type="button" class="proc-exp-toggle" data-proc-exp="'+o.d+'" aria-expanded="'+aberto+'" title="'+(aberto?'Recolher':'Anotações e providências')+'">'+(aberto?'Recolher ▴':'Anotações ▾')+'</button>' : '') + '</div>' + detalhes + '</div>'; }
 function lista(L, st, onde) {
   const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
   const todosMarc = L.length && L.every((o) => SEL.has(o.d));
@@ -1426,7 +1557,7 @@ function fecharPops() { $$('.pop').forEach((p) => p.remove()); CP = null; $$('[a
 
 /* ---------- exportar ---------- */
 const COLS_S = [['Processo', (o) => o.cnj], ['Classe', (o) => o.classe], ['Assunto', (o) => o.assunto], ['Tarefa no PJe', (o) => o.tarefa], ['Na tarefa desde', (o) => br(o.desde)], ['Seção', (o) => o.secao], ['Prioridade', (o) => o.prior ? 'Sim' : ''], ['Destino da triagem', (o) => o.dest.k ? o.dest.t : '']];
-const COLS_C = COLS_S.concat([['Partes', (o) => o.partes], ['Etiquetas', (o) => o.etq.join(', ')], ['Distribuição', (o) => br(o.dist)], ['Destino provável', (o) => DLAB[o.prov]], ['Candidato à monocrática', (o) => CLAB[o.cand] || ''], ['Pendências', (o) => o.pend.join(', ')]]);
+const COLS_C = COLS_S.concat([['Partes', (o) => o.partes], ['Etiquetas', (o) => o.etq.join(', ')], ['Distribuição', (o) => br(o.dist)], ['Destino provável', (o) => DLAB[o.prov]], ['Candidato à monocrática', (o) => CLAB[o.cand] || ''], ['Indicador de monocrática', (o) => o.mi ? o.mi.fx + ' (' + pct(o.mi.s) + ')' : ''], ['Hipótese provável', (o) => o.mi ? o.mi.hipRot : ''], ['Pendências', (o) => o.pend.join(', ')]]);
 function abrirExp(btn, L, titulo, bilhete) { fecharPops(); const p = D.createElement('div'); p.className = 'pop menu'; p.setAttribute('role', 'menu');
   const r = btn.getBoundingClientRect(); p.style.top = (r.bottom + scrollY + 6) + 'px'; p.style.left = Math.max(12, Math.min(r.right + scrollX - 340, innerWidth - 352)) + 'px';
   const alvo = SEL.size && L.some((o) => SEL.has(o.d)) ? L.filter((o) => SEL.has(o.d)) : L;
@@ -1524,7 +1655,7 @@ function abrirProntuarioTriagem(d) {
   const g=document.createElement('aside');g.id='tri-prontuario';g.setAttribute('role','dialog');g.setAttribute('aria-label','Prontuário de triagem');
   g.innerHTML='<div class="tp-head"><div class="tp-tt"><p class="tp-k">02 / Triagem</p><h2>Prontuário <em>de triagem.</em></h2></div><button type="button" class="tp-x" data-tri-close aria-label="Fechar" title="Fechar">×</button></div>'+
   '<div class="tp-id"><b>'+esc(o.cnj)+'</b><span>'+esc(o.assunto||'assunto não informado')+'</span><span>'+esc(o.secao||'')+(o.tarefa?' · '+esc(o.tarefa):'')+'</span></div>'+
-  '<div class="tp-body">'+sec(1,'Admissibilidade',campos.slice(0,3))+sec(2,'MPF e urgência',campos.slice(3,6))+sec(3,'Matéria e gestão',campos.slice(6,8))+sec(4,'Alegações e providências',campos.slice(8))+
+  '<div class="tp-body"><section class="tp-s tp-mi"><h3><em>0</em>Indicador de monocrática</h3>'+miAnalise(o,3)+'</section>'+sec(1,'Admissibilidade',campos.slice(0,3))+sec(2,'MPF e urgência',campos.slice(3,6))+sec(3,'Matéria e gestão',campos.slice(6,8))+sec(4,'Alegações e providências',campos.slice(8))+
   '<p class="tp-nt">Os campos são gravados na ficha única do processo (origem e triagem).</p></div>'+
   '<div class="tp-foot"><button type="button" class="btn" data-ficha="'+d+'">Ficha completa</button><span class="grow"></span><button type="button" class="btn" data-tri-close>Fechar</button><button type="button" class="btn pri" data-tri-save="'+d+'">Salvar</button></div>';
   triPos(g);
@@ -1764,6 +1895,10 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-modo]'))) { F.modo = b.dataset.modo; render(); return; }
   if ((b = q('[data-mapa-no]'))) { const id = b.dataset.mapaNo; MAPA_NO = MAPA_NO === id ? '' : id; MAPA_LIM = {}; render(); return; }
   if ((b = q('[data-mapa-mais]'))) { const i = b.dataset.mapaMais; MAPA_LIM[i] = (MAPA_LIM[i] || 40) + 40; render(); return; }
+  if ((b = q('[data-mi-ex]'))) { const d = b.dataset.miEx; MI_ABERTO = MI_ABERTO === d ? '' : d; render(); return; }
+  if ((b = q('[data-mi-marca]'))) { FILA.filter((o) => o.mi && o.mi.fx === b.dataset.miMarca).forEach((o) => SEL.add(o.d)); render(); toast('Marcados os de índice ' + b.dataset.miMarca.toLowerCase() + ': use “Julgar por monocrática” no rodapé, se confirmados.'); return; }
+  if (q('[data-mi-ord]')) { F.ord = 'mono'; F.dir = 1; F.ver = 'lista'; F.lim = 100; render(); return; }
+  if ((b = q('[data-mi-cel]'))) { const [c, fx] = b.dataset.miCel.split('|'); F.fac.classe = [c]; F.fac.mono = [fx]; F.lim = 30; render(); return; }
   if ((b = q('[data-ver]'))) { F.ver = b.dataset.ver; F.lim = F.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('[data-verE]'))) { FE.ver = b.dataset.vere || b.getAttribute('data-verE'); FE.lim = FE.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('#bt-crit'))) { if ($('#crit-pop')) { fecharPops(); return; } abrirCrit(b); return; }
@@ -1777,7 +1912,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if (q('#bt-salvar')) { const nm = W.prompt('Nome para este filtro:', F.conj ? F.conj.rot : ''); if (!nm) return; const S = LS.get('tri_filtros', []).filter((x) => x.nome !== nm); const cp = JSON.parse(JSON.stringify(Object.assign({}, F, { conj: null, statsX: null }))); S.push({ nome: nm, F: cp }); LS.set('tri_filtros', S); render(); toast('Filtro salvo neste navegador: ' + nm + (F.conj ? ' (o conjunto vindo do Início não entra no filtro salvo)' : '') + '.'); return; }
   if ((b = q('[data-rail]'))) { F.rail[b.dataset.rail] = !F.rail[b.dataset.rail]; LS.set('tri_rail', F.rail); render(); return; }
   if ((b = q('[data-todos]'))) { F.rail[b.dataset.todos + 'Todos'] = !F.rail[b.dataset.todos + 'Todos']; render(); return; }
-  if ((b = q('[data-fac]'))) { const f = b.dataset.fac, v = b.dataset.v, L = F.fac[f], i = L.indexOf(v); if (i >= 0) L.splice(i, 1); else L.push(v); F.lim = 100; render(); return; }
+  if ((b = q('[data-fac]'))) { const f = b.dataset.fac, v = b.dataset.v, L = F.fac[f] || (F.fac[f] = []), i = L.indexOf(v); if (i >= 0) L.splice(i, 1); else L.push(v); F.lim = 100; render(); return; }
   if ((b = q('[data-etin]'))) { const v = b.dataset.etin; F.etOut = F.etOut.filter((x) => x !== v); F.etIn = F.etIn.indexOf(v) >= 0 ? F.etIn.filter((x) => x !== v) : F.etIn.concat(v); render(); return; }
   if ((b = q('[data-etout]'))) { const v = b.dataset.etout; F.etIn = F.etIn.filter((x) => x !== v); F.etOut = F.etOut.indexOf(v) >= 0 ? F.etOut.filter((x) => x !== v) : F.etOut.concat(v); render(); return; }
   if (q('[data-stats]')) { F.statsAberto = !F.statsAberto; LS.set('tri_stats', F.statsAberto); render(); return; }
@@ -1849,6 +1984,9 @@ function portaToken() { return new Promise((fim) => {
   const relogio = setInterval(etapas, 1000); etapas();
   const pEscopo = PM().ler('apoio/regras/escopo-triagem.json').then((t) => { const j = JSON.parse(t); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } ETAPA.escopo = 1; }).catch((e) => { console.warn('[Triagem] escopo', e); ETAPA.escopo = 2; });
   const pFonte = lerFonte().then(() => { ETAPA.fonte = FONTE ? 1 : 2; });
+  /* perfil de monocráticas do Relator: não segura a carga; quando chega, calcula o indicador e redesenha */
+  PM().ler(PERFIL_ARQ).then((t) => { const j = JSON.parse(t); if (!j || !j.classes || !j.assuntos) throw new Error('arquivo sem classes ou assuntos'); PERFIL = j; PERFIL_ERRO = ''; if (PRONTO) { miAtualiza(); render(); } })
+    .catch((e) => { PERFIL_ERRO = e.message || String(e); console.warn('[Triagem] perfil de monocráticas', e); if (PRONTO) render(); });
   const pEsc = lerEscaninhos().then(() => { ETAPA.esc = 1; }).catch((e) => { ETAPA.esc = 2; toast('Não li os escaninhos: ' + e.message + '. Os novos escaninhos serão gravados normalmente.', true); });
   let n = 0; while (!(core() && core().rows && core().rows.length)) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); clearInterval(relogio); return; } if (n === 40) msg('Ainda lendo o trabalho do gabinete…'); await new Promise((r) => setTimeout(r, 400)); }
   ETAPA.motor = 1; etapas();
