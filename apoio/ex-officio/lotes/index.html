@@ -246,6 +246,19 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 .col-select-bar .b{white-space:normal}.col-ch{width:62px;text-align:center}
 .col-ch input{width:17px;height:17px;accent-color:var(--eg);cursor:pointer}
 @media(max-width:900px){.col-select-bar{padding:10px}}
+
+#col-correspondencias{min-width:0}
+#col-correspondencias .lx-shd{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}
+.cor-lead{display:flex;gap:10px;flex-wrap:wrap;padding:12px;border-bottom:1px solid var(--el)}
+.cor-lead span,.cor-note{font-size:11px;color:var(--em);line-height:1.6}
+.cor-gr{padding:10px 0;border-bottom:1px solid var(--el)}
+.cor-gr>summary,.cor-var>summary{cursor:pointer;font-weight:700;color:var(--ei)}
+.cor-gr h4{font-size:13px;margin:14px 0 8px}
+.cor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin:10px 0}
+.cor-p{display:flex;flex-direction:column;gap:5px;border:1px solid var(--el);padding:10px;min-width:0;font-size:12px}
+.cor-p>b{color:var(--ei);overflow-wrap:anywhere}.cor-p span{color:var(--eg)}
+.cor-p small{font-size:11px;color:var(--em);line-height:1.5;overflow-wrap:anywhere}
+.cor-var{padding:10px;border:1px solid var(--el);margin:12px 0}
 </style>
 <style id="office-layout-refine">
 
@@ -525,7 +538,13 @@ function montar(lotes,id,usuario){
    ${ITENS.length?'':`<p class="none">${RELATOR?'Nenhum processo deste lote está pronto ainda.':'Nenhum processo neste lote.'}</p>`}
   </div></section>
   <section class="lx-sec" id="sec-pf"><div class="lx-shd"><div><p class="lx-k">02 / Processo a processo</p><h2>Perfis e <em>minutas.</em></h2><p class="lx-d">Identificação, enquadramento, prontuário e minuta formatada, pronta para copiar.</p></div></div>
-  <div id="profiles"></div></section></div>`);
+  <div id="profiles"></div></section>
+  <section class="lx-sec" id="col-correspondencias">
+   <div class="lx-shd"><div><p class="lx-k">03 / Compendium</p><h2>Correspondências de <em>casos e modelos.</em></h2>
+    <p class="lx-d">Padrões, variações, matrizes estruturais e variáveis de matéria. A correspondência não comprova a adequação do modelo ao mérito do processo.</p></div>
+    <button class="b" type="button" id="cl-cor-carregar">Analisar correspondências</button></div>
+   <div id="cl-cor-body" role="status" aria-live="polite"></div>
+  </section></div>`);
   let h='',last='x';
   for(const it of ITENS){
     const c=gcor(it);
@@ -537,6 +556,7 @@ function montar(lotes,id,usuario){
   $('#mxb').innerHTML=h;
   $('#profiles').innerHTML=ITENS.map(perfil).join('');
   ligaCab();
+  const cc=$('#cl-cor-carregar');if(cc)cc.onclick=carregarCorrespondencias;
   ligaVisLotes();
   if(MODO==='cg'&&LOTE.virtual)ligarSelecao();
   document.querySelectorAll('#mxb tr.r').forEach(r=>r.onclick=()=>vai(r.dataset.u));
@@ -781,6 +801,41 @@ async function copia(v){
 }
 function vai(uid){if(CX.aberto){const it=ITENS.find(i=>i.uid===uid);if(it&&it.minuta){$('#cx-it').value=uid;compara()}}const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
 /* Seleção explícita de processos na matriz da pauta, sem criar coleções por sessão. */
+/* Análise apenas dos campos disponíveis e dos modelos publicados no Compendium. */
+async function carregarCorrespondencias(){
+ const alvo=$('#cl-cor-body'),bt=$('#cl-cor-carregar');if(!alvo||!bt)return;
+ bt.disabled=true;alvo.textContent='Consultando as matrizes do Compendium…';
+ try{
+  const r=await api('?id='+encodeURIComponent(LOTE.id)+'&correspondencias=1');
+  const e=x=>esc(x==null?'':x);
+  const fields={assunto:'Assunto',recurso:'Recurso',resultado:'Resultado',modelo:'Modelo de referência'};
+  const p=x=>'<div class="cor-p"><b>'+e(fields[x.campo]||x.campo)+'</b><span>'+
+    (x.comum?'Comum em todos':'Difere ou está incompleto')+' · '+x.preenchidos+'/'+x.total+'</span>'+
+    '<small>'+(x.valores.length?x.valores.map(e).join(' · '):'Não registrado')+'</small></div>';
+  const one=g=>{
+   const forma=g.estruturais.map(x=>'<div class="cor-p"><b>'+e(x.classe)+' · '+e(x.resultado)+'</b>'+
+    '<span>'+x.processos+' processo(s) · '+x.referencias.length+' matriz(es) formais</span>'+
+    '<small>'+(x.referencias.length?x.referencias.map(m=>e(m.nome)+(m.pronunciamento?' ['+e(m.pronunciamento)+']':'')).join(' · '):'Sem correspondência estrutural pelos dados disponíveis')+'</small></div>').join('');
+   const materia=g.tematica?'<details class="cor-var"><summary>Matriz temática de 28,86%: '+e(g.tematica.nome)+'</summary>'+
+    '<p>Módulos previstos: '+g.tematica.modulos.map(x=>e(x.id)+(x.opcional?' (opcional)':'')).join(' · ')+'</p>'+
+    '<p>Modelos de ementa: '+g.tematica.modelosEmenta.map(e).join(' · ')+'</p>'+
+    '<div class="cor-grid">'+g.tematica.variaveis.map(x=>'<div class="cor-p"><b>'+e(x.rotulo)+'</b>'+
+    '<span>'+e(x.situacao)+' · '+x.identificados+'/'+x.total+'</span>'+
+    '<small>'+e(x.campo||'Sem campo direto')+' · '+e(x.ressalva)+'</small></div>').join('')+'</div></details>':'';
+   return '<details class="cor-gr"><summary>'+e(g.nome)+' <small>· '+g.processos+' processos</small></summary>'+
+     '<div class="cor-grid">'+g.padroes.map(p).join('')+'</div>'+
+     (g.variacoes.length?'<p class="cor-note">Variações: '+g.variacoes.map(x=>e(x.id)+' ('+x.n+')').join(' · ')+'</p>':'')+
+     '<h4>Matrizes estruturais: classe e resultado</h4>'+(forma||'<p>Classe ou resultado insuficientes para apontar uma matriz formal.</p>')+
+     materia+'<p class="cor-note">'+e(g.criterio)+'</p></details>';
+  };
+  alvo.innerHTML='<div class="cor-lead"><b>'+r.total+' processos em '+r.grupos.length+' grupos</b>'+
+    '<span>'+(r.materiaCompendium?'Matriz de matéria: '+e(r.materiaCompendium):'Matrizes formais por recurso e resultado')+'</span></div>'+
+    r.grupos.map(one).join('')+'<p class="cor-note">'+(r.limites||[]).map(e).join(' ')+'</p>';
+  bt.textContent='Atualizar análise';
+ }catch(err){alvo.textContent='Não foi possível consultar o Compendium: '+err.message}
+ finally{bt.disabled=false}
+}
+
 function atualizarSelecao(){
  const e=$('#csel-cont');if(e)e.textContent=SELEC.size+' selecionado'+(SELEC.size===1?'':'s');
  document.querySelectorAll('[data-csel]').forEach(x=>{x.checked=SELEC.has(x.dataset.csel)});
