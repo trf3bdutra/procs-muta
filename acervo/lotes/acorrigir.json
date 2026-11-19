@@ -2034,7 +2034,7 @@
    "assunto": "Anulação",
    "grupo": null,
    "tipo_caso": "Anulação",
-   "resultado": "",
+   "resultado": "Desprovido",
    "modelo": "",
    "variacoes": [],
    "observacao": "",
@@ -2098,8 +2098,56 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura reescrita no padrão (\"apelação à sentença que denegou a segurança\"), mais curta, com o objeto do mandado de segurança e os dois fundamentos da sentença",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Razões: fórmula \"alegando, em suma, que\", \"autoridade coatora\" → \"autoridade impetrada\" e incluído o pedido final da apelação (correção da redação e atribuição de nota), que faltava",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Edital: itens 14.7.3 e 14.8 estão na f. 18 do ID 366723811 (não f. 18-19)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Fundamento da nota zero sem ID: incluída a justificativa técnica do Cebraspe (ID 366723825, f. 12/13), com as linhas desconsideradas (1 a 4, 7 a 11 e 12) e a origem de cada uma",
+     "Incluído"
+    ],
+    [
+     "Voto",
+     "\"(g.n)\" → \"(g.n.)\" nas duas transcrições",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Rodapé: Tema 485 identificado pelo RE 632.853; \"TRF3\" → \"TRF-3\"; \"Juiz Convocado\" → \"Juiz Conv.\", como no voto; \"e\" antes do último item",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs conferidos: sentença 366723827, apelação 366723830, contrarrazões 366723982, parecer 376119842 (opina pelo desprovimento), edital 366723811 e justificativa da banca 366723825",
+     "Conferido"
+    ]
+   ],
+   "pendencias": [
+    "Ponto decisivo para o Relator: só as linhas 1 a 4 e 12 são cópia literal. Se fossem desconsideradas apenas elas, restariam 11 das 16 linhas, acima do mínimo. A insuficiência depende de equiparar a cópia a \"reprodução das informações\" das linhas 7 a 11, como faz o voto (parágrafo sobre a paráfrase)."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5000043-40.2026.4.03.6006.json.gz",
