@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-19T07:51:30.410Z",
+ "atualizado_em": "2026-11-19T07:54:27.691Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -76954,7 +76954,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T06:08:06.323Z",
+    "atualizado_em": "2026-11-19T07:54:27.635Z",
     "Origem - Juízo": "4ª Vara Federal de Campo Grande",
     "Origem - Documentos 1G": [
      {
@@ -78110,19 +78110,55 @@
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Embargos parcialmente acolhidos, sem efeitos infringentes",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
     "Voto - Descrição": "",
     "Lote": "A corrigir · item 150 · sessão 2026-11-30",
     "Lote - Tipo de caso": "Multas e demais Sanções",
-    "Lote - Resultado": "",
+    "Lote - Resultado": "Embargos parcialmente acolhidos, sem efeitos infringentes",
     "Lote - Variações": "",
     "Lote - Caso": "",
     "Lote - Observação": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
-    "Lote - Ajustes da correção": [],
+    "Lote - Ajustes da correção": [
+     {
+      "secao": "Relatório",
+      "ajuste": "Abertura dos embargos com o ID do acórdão (ID 391415221); \"Alegou-se\" → \"Alegou o embargante\", com ID dos embargos (ID 391491467); incluída a alegação sobre a dosimetria da multa (artigo 43 da Lei 10.711/2003), que o voto responde sem que o relatório a mencionasse; espaços e vírgula corrigidos",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Depoimentos: os IDs 262402018 e 262402019 são as duas partes da gravação da audiência, não um arquivo por depoente. Citados os termos de depoimento (IDs 262402016 e 262402017, ambos como informantes, com vínculo de trabalho com o autor) e a gravação",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "\"Em suas razões recursais\" → \"Nos embargos de declaração\"; \"inciso VI\" → \"VI\"; \"com os apontados destacados\" → \"com os apontamentos destacados\" (lista de caça); espaço duplo",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Dispositivo: \"sem efeitos modificativos\" → \"sem efeitos infringentes\", como na ementa",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Rodapé limitado aos dispositivos aplicados no voto dos embargos (o anterior repetia o do acórdão embargado); \"TRF3\" → \"TRF-3\"",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Acórdão",
+      "ajuste": "Texto do acórdão incluído (a seção estava vazia)",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Conferência",
+      "ajuste": "Conteúdo dos depoimentos não conferido: estão só em áudio e vídeo. O processo administrativo (ID 262401772) está digitalizado como imagem em grande parte. IDs conferidos: acórdão 391415221, embargos 391491467, impugnação 405411769, termos 262402015/016/017",
+      "tipo": "Conferido"
+     }
+    ],
     "Lote - Pendências": "",
-    "Lote - Minuta": "versão 1 · 2026-11-18 · Texto integral extraído do editor do PJe em 18/11/2026, tarefa [Sessão - ED] Aguardando a sessão."
+    "Lote - Minuta": "versão 2 · 2026-11-19 · Versão corrigida em 19/11/2026 a partir do texto integral da minuta no PJe, conferida com o inteiro teor dos autos (acervo/autos)."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -126740,7 +126776,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T07:51:30.218Z",
+    "atualizado_em": "2026-11-19T07:54:27.629Z",
     "Origem - Juízo": "2ª Vara Federal de Ponta Porã",
     "Origem - Documentos 1G": [
      {
@@ -127416,7 +127452,7 @@
      },
      {
       "secao": "Voto",
-      "ajuste": "Tutela: não houve liminar anterior; a liberação do veículo foi deferida na própria sentença (ID 377918385). Parágrafo reescrito; \"Havendo trânsito em julgado do acórdão embargado\" → \"após o trânsito em julgado\"",
+      "ajuste": "Tutela: não houve liminar anterior; a liberação do veículo foi deferida na própria sentença (ID 377918385). Parágrafo reescrito na mesma linha do item 121 (mesma locadora, minuta já liberada): a omissão não procede, porque o artigo 302 do CPC já sujeita a beneficiária da tutela cassada à recomposição dos prejuízos, a ser buscada no cumprimento, após o trânsito em julgado",
       "tipo": "Corrigido"
      },
      {
@@ -127440,7 +127476,7 @@
       "tipo": "Conferido"
      }
     ],
-    "Lote - Pendências": "DECISÃO DO RELATOR — o lote registra \"aguardando posição do Dr.\". O acórdão não tratou dos efeitos da reforma sobre a tutela concedida na sentença, e o voto dos embargos esclarece o ponto (revogação da tutela e eventual indenização do artigo 302 do CPC), mas conclui pela rejeição. Esclarecimento de ponto não apreciado costuma levar ao acolhimento parcial, sem efeitos infringentes, como no item 96. Confirmar o conteúdo do esclarecimento e o resultado: rejeição ou acolhimento parcial sem efeitos infringentes.",
+    "Lote - Pendências": "",
     "Lote - Minuta": "versão 2 · 2026-11-19 · Versão corrigida em 19/11/2026 a partir do texto integral da minuta no PJe, conferida com o inteiro teor dos autos (acervo/autos)."
    },
    "pauta": {
@@ -145760,7 +145796,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T06:08:06.318Z",
+    "atualizado_em": "2026-11-19T07:54:27.632Z",
     "Origem - Juízo": "2ª Vara Federal de Dourados",
     "Origem - Documentos 1G": [
      {
@@ -146520,19 +146556,55 @@
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Embargos rejeitados",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
     "Voto - Descrição": "",
     "Lote": "A corrigir · item 121 · sessão 2026-11-30",
     "Lote - Tipo de caso": "Liberação de Veículo Apreendido",
-    "Lote - Resultado": "",
+    "Lote - Resultado": "Embargos rejeitados",
     "Lote - Variações": "",
     "Lote - Caso": "",
     "Lote - Observação": "com tutela e sobre seus efeitos · Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
-    "Lote - Ajustes da correção": [],
+    "Lote - Ajustes da correção": [
+     {
+      "secao": "Relatório",
+      "ajuste": "Abertura dos embargos com o ID do acórdão (ID 398175431); \"A autora opôs embargos de declaração, alegando\" → \"Alegou a embargante\"; ID dos embargos (ID 401716127)",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Relatório",
+      "ajuste": "Contrarrazões sem ID: é a impugnação da União (ID 402391490)",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Incluídos os IDs da tutela que autorizou a entrega e a disposição do veículo (ID 369934717) e da sentença (ID 369934726); \"cabe registrar na origem\" → \"cabe registrar que na origem\"",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "\"73, I e II\" → \"373, I e II\" do CPC (artigo invocado nos embargos); \"acordão\" → \"acórdão\"; \"conclusão adotado\" → \"adotada\"; \"o embargante\" → \"a embargante\"; \"Havendo trânsito em julgado\" → \"Após o trânsito em julgado\"; \"sendo possível\" → \"sempre que possível\"; \"Tampouco houve os demais vícios\" → \"Tampouco se verificam\"",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Refeita: copiava parágrafos inteiros do voto (itens de até 300 palavras). Agora tem um fundamento por item, frases curtas, questões com \"saber se\", cabeçalho com \"EMBARGOS REJEITADOS\" e rodapé sem o artigo 499 do CPC, que o voto não cita",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Acórdão",
+      "ajuste": "Texto do acórdão incluído (a seção estava vazia)",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Conferência",
+      "ajuste": "IDs conferidos: acórdão 398175431, embargos 401716127, impugnação 402391490, auto de infração 369934615, tutela 369934717, sentença 369934726",
+      "tipo": "Conferido"
+     }
+    ],
     "Lote - Pendências": "",
-    "Lote - Minuta": "versão 1 · 2026-11-18 · Texto integral extraído do editor do PJe em 18/11/2026, tarefa [Sessão - ED] Aguardando a sessão."
+    "Lote - Minuta": "versão 2 · 2026-11-19 · Versão corrigida em 19/11/2026 a partir do texto integral da minuta no PJe, conferida com o inteiro teor dos autos (acervo/autos)."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -163955,7 +164027,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T06:08:06.321Z",
+    "atualizado_em": "2026-11-19T07:54:27.634Z",
     "Origem - Juízo": "4ª Vara Federal de Campo Grande",
     "Origem - Documentos 1G": [
      {
@@ -164671,19 +164743,55 @@
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Embargos rejeitados",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
     "Voto - Descrição": "",
     "Lote": "A corrigir · item 122 · sessão 2026-11-30",
     "Lote - Tipo de caso": "Multas e demais Sanções",
-    "Lote - Resultado": "",
+    "Lote - Resultado": "Embargos rejeitados",
     "Lote - Variações": "",
     "Lote - Caso": "",
     "Lote - Observação": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
-    "Lote - Ajustes da correção": [],
+    "Lote - Ajustes da correção": [
+     {
+      "secao": "Voto",
+      "ajuste": "\"os embargos de declaração da União\": a embargante é a autora (Bem Indústrias de Sementes), não a União; corrigido. Também \"o embargante\" → \"a embargante\" (duas vezes)",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Incluída resposta aos itens (5) e (6) dos embargos (alteração do enquadramento legal e reincidência), que o voto não enfrentava: as matérias não constam das razões de apelação (ID 263024578), o que afasta a omissão",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "\"RESP\"/\"DJE\" → \"REsp\"/\"DJe\"; \"Portanto, não se trata\" → \"Como se observa, não se trata\"; \"no julgamento no exame da questão\" → \"no julgamento\"",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Relatório",
+      "ajuste": "Alegações com \"Alegou a embargante\"; \"União Federal\" → \"União\"; MAPA por extenso; \"e/ou\" e \"inciso\" retirados",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Questão com \"consiste em saber se\"; incluído item sobre as matérias não deduzidas na apelação; rodapé em duas linhas, com datas no formato DD/MM/AAAA e \"e\" antes do último",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Acórdão",
+      "ajuste": "Texto do acórdão incluído (a seção estava vazia)",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Conferência",
+      "ajuste": "IDs conferidos: acórdão 391415225 (voto 384058846, que trata das autorizações de transporte como irrelevantes), embargos 391831768, impugnação 410088492, apelação 263024578",
+      "tipo": "Conferido"
+     }
+    ],
     "Lote - Pendências": "",
-    "Lote - Minuta": "versão 1 · 2026-11-18 · Texto integral extraído do editor do PJe em 18/11/2026, tarefa [Sessão - ED] Aguardando a sessão."
+    "Lote - Minuta": "versão 2 · 2026-11-19 · Versão corrigida em 19/11/2026 a partir do texto integral da minuta no PJe, conferida com o inteiro teor dos autos (acervo/autos)."
    },
    "pauta": {
     "Status de Julgamento": "",
