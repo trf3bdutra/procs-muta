@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-19T06:35:53.585Z",
+ "atualizadoEm": "2026-11-19T06:37:37.865Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -1459,7 +1459,20 @@
       "id": "355552948"
      },
      "obsGeral": "Resultado lido do dispositivo da minuta, a confirmar no julgamento.",
-     "pendencias": []
+     "pendencias": [
+      {
+       "desc": "Validar o valor afastado (0,35 ponto: 0,10 no item 4 e 0,25 no item 7), tirado da fundamentação da sentença (ID 354343907).",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A Procuradoria Regional da República opinou por afastar também o item 11 (só manter a questão 1, letra \"b\"); a minuta mantém o item 11. Conferir se é essa a posição do Relator.",
+       "ok": false,
+       "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      }
+     ]
     },
     "resJulg": "Parcialmente provido",
     "lote": {
