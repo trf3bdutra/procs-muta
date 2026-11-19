@@ -103,10 +103,8 @@ module.exports = async (req, res) => {
   const CMT = require('./_cmt');
   const q = req.query || {};
   const login = L.quem(req);
-  /* /index/cmt envia rel=1: leitura pública e estritamente no perfil do Relator.
-     Nenhuma gravação é liberada sem sessão autenticada de gestor. */
-  const relPublico = req.method === 'GET' && String(q.rel || '') === '1';
-  const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null) || (relPublico ? (process.env.CMT_RELATOR || 'CM') : null);
+  /* A rota escolhe a visão, mas não concede acesso. Link do relator usa CMT_CHAVE como credencial. */
+  const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   const gestor = !!(login && L.gestor(login));
   try {
