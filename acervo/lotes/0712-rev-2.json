@@ -1,0 +1,124 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "id": "0712-rev-2",
+ "titulo": "07/12 · REV-2 — Revalida: candidato não formado",
+ "descricao": "Sessão de 07/12/2026. Revalida: candidato não formado na data da inscrição. Base: TRF-3 ApCiv 5001648-92.2024.4.03.6005; STJ REsp 2.260.907. Resultado a validar com o Relator.",
+ "sessoes": [
+  "2026-12-07"
+ ],
+ "filtro": {},
+ "atualizado_em": "2026-11-19",
+ "criado_por": "BD",
+ "colunas": [],
+ "grupos": [
+  {
+   "id": "1",
+   "cor": "#2f6db5",
+   "rotulo": "Revalida: candidato não formado",
+   "resultado": "Proposta: dá provimento à apelação e à remessa, tida por submetida, para denegar a segurança (validar com o Relator)",
+   "modelo": "TRF-3 ApCiv 5001648-92.2024.4.03.6005"
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "Fundamentação própria ou a triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/0712-rev-2/<processo>.json",
+ "itens": [
+  {
+   "sessao": "2026-12-07",
+   "item": 139,
+   "processo": "5001762-31.2024.4.03.6005",
+   "recurso": "APELAÇÃO CÍVEL",
+   "partes": "DIRETOR PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA - INEP x TAMARA DIAS PERES",
+   "exequente": "TAMARA DIAS PERES",
+   "executado": "DIRETOR PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA - INEP",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "1",
+   "tipo_caso": "REV-2 (não formada)",
+   "resultado": "PROPOSTA: dá provimento à apelação e à remessa, tida por submetida, para denegar",
+   "modelo": "TRF-3 ApCiv 5001648-92.2024.4.03.6005",
+   "variacoes": [],
+   "observacao": "Resultado a validar com o Relator; precedente TRF-3 5001648-92 a conferir na fonte oficial",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta (proposta)"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "310764492"
+    },
+    {
+     "peca": "Apelação",
+     "id": "310764493"
+    },
+    {
+     "peca": "Petição inicial",
+     "id": "310764423"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [
+    "Resultado a validar com o Relator; precedente TRF-3 5001648-92 a conferir na fonte oficial"
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 140,
+   "processo": "5001716-42.2024.4.03.6005",
+   "recurso": "APELAÇÃO CÍVEL",
+   "partes": "PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISA ANÍSIO TEIXEIRA (INEP) x THARLE FERNANDES JACINTO",
+   "exequente": "THARLE FERNANDES JACINTO",
+   "executado": "PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISA ANÍSIO TEIXEIRA (INEP)",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "1",
+   "tipo_caso": "REV-2 (não formado)",
+   "resultado": "PROPOSTA: dá provimento à apelação e à remessa, tida por submetida, para denegar",
+   "modelo": "TRF-3 ApCiv 5001648-92.2024.4.03.6005",
+   "variacoes": [],
+   "observacao": "Resultado a validar com o Relator",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta (proposta)"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "310764418"
+    },
+    {
+     "peca": "Apelação",
+     "id": "310764419"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "312876820"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [
+    "Resultado a validar com o Relator"
+   ],
+   "minuta": true
+  }
+ ]
+}
