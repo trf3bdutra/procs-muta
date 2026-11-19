@@ -234,11 +234,11 @@ def montar(var):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l
     abas = ''.join(lin[v] for v in ordem if v in lin)
     SL = '<span class="nx-sl" aria-hidden="true">/</span>'
-    rotulo = ('<a class="eq-cmp" href="/modus/">Compendium</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
-              else '<a class="eq-cmp nx-on" href="/modus/" aria-current="page">Compendium<em>.</em></a>')
+    rotulo = ('<a class="eq-cmp" href="/amicus/compendium/">Compendium</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
+              else '<a class="eq-cmp nx-on" href="/amicus/compendium/" aria-current="page">Compendium<em>.</em></a>')
     k = t.index('<div class="brand tw"><i></i></div>\n') + len('<div class="brand tw"><i></i></div>\n')
     # barra editorial (Expediente), gêmea do Ex Officio: cadernos no título; as abas (.tab) seguem no cabeçalho, ocultas, e a faixa #cmp-nav as aciona
-    t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><nav class="nx-cad" aria-label="Cadernos"><a class="nx-lk" href="/equipe/#inicio" data-eqlink>Ex Officio</a>' + SL + rotulo + '</nav></div>'
+    t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><nav class="nx-cad" aria-label="Cadernos"><a class="nx-lk" href="/exofficio/#inicio" data-eqlink>Ex Officio</a>' + SL + rotulo + '</nav></div>'
                  '<nav class="eqtabs eq-cpn" aria-label="Seções do Compendium"><span class="eq-grp"><span class="tabs eq-sec" role="tablist" aria-label="Seções do Compendium">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
     a = '  </div>\n</header>\n'
     t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a)

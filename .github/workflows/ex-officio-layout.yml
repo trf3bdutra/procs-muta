@@ -6,6 +6,11 @@ on:
       - 'apoio/ex-officio/lotes/index.html'
       - 'apoio/ex-officio/tests/layout-static.test.js'
       - 'apoio/ex-officio/tests/index-visibilidade.test.js'
+      - 'apoio/ex-officio/tests/amicus-index.test.js'
+      - 'apoio/amicus/**'
+      - 'monitor/**'
+      - 'extensao/**'
+      - 'apoio/modus-operandi/fonte/build.py'
       - 'apoio/ex-officio/api/_lote.js'
       - '.github/workflows/vercel-monitor.yml'
       - '.github/workflows/ex-officio-layout.yml'
@@ -22,4 +27,4 @@ jobs:
         with:
           node-version: '22'
       - name: Conferir estrutura e proporções sem credenciais
-        run: node --test apoio/ex-officio/tests/layout-static.test.js apoio/ex-officio/tests/index-visibilidade.test.js
+        run: node --test apoio/ex-officio/tests/*.test.js

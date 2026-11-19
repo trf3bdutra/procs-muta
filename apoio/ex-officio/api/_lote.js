@@ -1,7 +1,7 @@
-/* Amicus Curiae · Index: três visões com o mesmo arquivo e a mesma base de lotes.
-     /lote/cg/   controle geral (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
-     /lote/      visão geral: os processos visíveis para a equipe
-     /lote/cmt/  visão CM (&rel=1, ou link próprio, ou perfil desembargador): os processos visíveis para o Desembargador
+/* Amicus Curiae · Collectio: três visões com o mesmo arquivo e a mesma base de lotes.
+     /amicus/collectio/gc/   controle geral (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
+     /amicus/collectio/      visão geral: os processos visíveis para a equipe
+     /amicus/collectio/cmt/  visão CM (&rel=1, ou link próprio, ou perfil desembargador): os processos visíveis para o Desembargador
    O nome visual permanece "Index". /index/*, /lotes/, /cmt/lotes/ e /cg/lotes/ permanecem apenas como compatibilidade.
    Acesso: login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE).
    Servido pelo /api/painel?lote=1 (a Vercel no plano Hobby aceita no máximo 12 funções; este arquivo, com _, não conta como função).
@@ -93,6 +93,32 @@ function agrupar(lote) {
     lote.itens.forEach(i => { const g = lote.grupos.find(x => x.rotulo === i.assunto); if (g) i.grupo = g.id; });
   }
 }
+
+/* Índices de pauta: projeção da sessão, sem copiar ou modificar os processos.
+   Grupos por assunto são o agrupamento inicial para casos/modelos correlatos. */
+function tipoLote(l) { return l.tipo === 'pauta' && (l.sessoes || []).length === 1 ? 'pauta' : 'avulso'; }
+function idPauta(s) { return 'pauta-' + s; }
+function rotuloAssunto(x) {
+  return String(x.assunto || x.classe || 'Sem assunto informado').trim().replace(/\s+/g,' ').slice(0,130);
+}
+async function indicePauta(s) {
+  const base=await itensSessao(s), itens=base.map(x=>novoItem(s,x));
+  const lot={schema:'gabcmt.lote',versao:1,tipo:'pauta',virtual:true,id:idPauta(s),
+    titulo:'Matriz geral da sessão · '+s.slice(8,10)+'/'+s.slice(5,7)+'/'+s.slice(0,4),
+    descricao:'Indexação inicial da pauta por assunto e casos/modelos correlatos.',
+    sessoes:[s],filtro:{},colunas:[],grupos:[],
+    grupo_outros:{rotulo:'Outros',cor:'#5d6b72'},itens};
+  const assuntoMap=new Map(), grouped=new Map();
+  for (const it of itens) {
+    const assunto=rotuloAssunto(it);const chave=sem(assunto);
+    if(!grouped.has(chave))grouped.set(chave,{nome:assunto,itens:[]});
+    grouped.get(chave).itens.push(it);
+  }
+  const grupos=[...grouped.values()].sort((a,b)=>b.itens.length-a.itens.length||a.nome.localeCompare(b.nome,'pt-BR'));
+  grupos.forEach((g,k)=>{const id='assunto-'+(k+1);lot.grupos.push({id,rotulo:g.nome,cor:CORES[k%CORES.length],resultado:'',modelo:''});g.itens.forEach(it=>{it.grupo=id;it.tipo_caso=g.nome;});});
+  return lot;
+}
+
 async function calendario() {
   const { dados } = await L.lerJson('acervo/sessoes/calendario.json').catch(nada);
   return ((dados && dados.sessoes) || []).map(s => ({ date: s.date, nome: s.nome, processos: s.processos || 0, publicada: !!s.publicada }))
@@ -126,12 +152,25 @@ module.exports = async (req, res) => {
     if (!id) {
       const lista = await L.gh('/contents/acervo/lotes?ref=main').catch(e => (e.status === 404 ? [] : Promise.reject(e)));
       const lotes = [];
+      const existentes=new Set();
       for (const f of (Array.isArray(lista) ? lista : []).filter(f => /^[a-z0-9-]+\.json$/i.test(f.name))) {
         const { dados } = await L.lerJson('acervo/lotes/' + f.name).catch(nada);
         if (!dados || !loteVe(dados)) continue;
+        existentes.add(dados.id);
         if (modo !== 'cg') await anotar(dados);
-        lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, sessoes: dados.sessoes, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
+        lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, tipo:tipoLote(dados), sessao:tipoLote(dados)==='pauta'?dados.sessoes[0]:null,
+          sessoes: dados.sessoes, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
       }
+      const sessoes=(await calendario()).filter(s=>s.publicada);
+      for(const sessao of sessoes){
+        const id=idPauta(sessao.date);
+        if(existentes.has(id))continue;
+        /* Matriz geral automática é apenas uma leitura da pauta; índices editáveis seguem em acervo/lotes. */
+        const total=(await itensSessao(sessao.date)).length;
+        lotes.push({id,titulo:'Matriz geral · '+sessao.date.slice(8,10)+'/'+sessao.date.slice(5,7),tipo:'pauta',virtual:true,
+          sessao:sessao.date,sessoes:[sessao.date],total});
+      }
+      lotes.sort((a,b)=>(a.tipo==='pauta'?0:1)-(b.tipo==='pauta'?0:1)||String(b.sessao||'').localeCompare(String(a.sessao||''))||String(a.titulo).localeCompare(String(b.titulo),'pt-BR'));
       return res.status(200).json({ usuario: u, gestor, relator, modo, lotes, calendario: modo === 'cg' ? await calendario() : [] });
     }
     if (!ID.test(id)) return res.status(400).json({ erro: 'lote inválido' });
@@ -149,7 +188,9 @@ module.exports = async (req, res) => {
       if (!dados) return res.status(404).json({ erro: 'Minuta não disponível para este processo.' });
       return res.status(200).json(dados);
     }
-    const { dados: lote } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
+    const sessaoVirtual=/^pauta-(\\d{4}-\\d{2}-\\d{2})$/.exec(id);
+    const { dados: persistido } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
+    const lote = persistido || (sessaoVirtual && (await calendario()).some(z=>z.date===sessaoVirtual[1]&&z.publicada) ? await indicePauta(sessaoVirtual[1]) : null);
     if (!lote || !loteVe(lote)) return res.status(404).json({ erro: 'Lote não encontrado.' });
     /* cartão do prontuário (Ex Officio) e situação, lidos das sessões do lote no momento da consulta */
     const cartoes = await anotar(lote);
@@ -166,7 +207,9 @@ async function gravar(req, res, u, gestor) {
   const ss = [...new Set((Array.isArray(b.sessoes) ? b.sessoes : []).filter(s => DATA.test(s)))].sort();
   const rel = 'acervo/lotes/' + id + '.json';
   if (b.acao === 'criar') {
+    const tipo=b.tipo==='pauta'?'pauta':'avulso';
     if (!ss.length) return res.status(400).json({ erro: 'Escolha ao menos uma sessão.' });
+    if(tipo==='pauta' && ss.length!==1)return res.status(400).json({ erro: 'Índice de pauta exige uma sessão específica.' });
     const atual = await L.lerJson(rel).catch(nada);
     if (atual.dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });
     const filtro = {}; ['assunto', 'classe', 'texto'].forEach(k => { const v = String((b.filtro || {})[k] || '').trim(); if (v) filtro[k] = v.slice(0, 120); });
@@ -174,11 +217,17 @@ async function gravar(req, res, u, gestor) {
     for (const s of ss) (await itensSessao(s)).filter(x => passa(x, filtro)).forEach(x => itens.push(novoItem(s, x)));
     if (!itens.length) return res.status(400).json({ erro: 'Nenhum processo das sessões escolhidas passa no filtro.' });
     const lote = {
-      schema: 'gabcmt.lote', versao: 1, id, titulo: String(b.titulo || id).slice(0, 80), descricao: String(b.descricao || '').slice(0, 300),
+      schema: 'gabcmt.lote', versao: 1, tipo, id, titulo: String(b.titulo || id).slice(0, 80), descricao: String(b.descricao || '').slice(0, 300),
       sessoes: ss, filtro, atualizado_em: new Date().toISOString().slice(0, 10), criado_por: u,
       colunas: [], grupos: [], grupo_outros: { rotulo: 'Processos do lote', cor: '#5d6b72' }, minutas: 'acervo/minutas/' + id + '/<processo>.json', itens
     };
-    agrupar(lote);
+    if(tipo==='pauta'){
+      const counts=new Map();for(const it of lote.itens){const v=rotuloAssunto(it);const key=sem(v);if(!counts.has(key))counts.set(key,{rotulo:v,itens:[]});counts.get(key).itens.push(it);}
+      [...counts.values()].sort((a,b)=>b.itens.length-a.itens.length||a.rotulo.localeCompare(b.rotulo,'pt-BR')).forEach((g,k)=>{
+        const gid='assunto-'+(k+1);lote.grupos.push({id:gid,rotulo:g.rotulo,cor:CORES[k%CORES.length],resultado:'',modelo:''});
+        g.itens.forEach(it=>{it.grupo=gid;it.tipo_caso=g.rotulo;});
+      });
+    }else agrupar(lote);
     await L.gravarJson(rel, lote, undefined, 'Lotes (' + u + '): cria o lote ' + id + ' (' + itens.length + ' processos; sessões ' + ss.join(', ') + ')');
     return res.status(200).json({ ok: true, id, total: itens.length });
   }
@@ -186,6 +235,7 @@ async function gravar(req, res, u, gestor) {
     for (let t = 0; t < 4; t++) {
       const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      if(tipoLote(lote)==='pauta'&&(ss.length!==1||ss[0]!==lote.sessoes[0])) return res.status(400).json({ erro:'Este índice pertence a uma sessão. Para outra sessão, crie um índice específico.' });
       const antes = new Set(lote.sessoes || []), novas = ss.filter(s => !antes.has(s));
       const tem = new Set((lote.itens || []).map(i => i.sessao + '|' + i.processo));
       const manter = (lote.itens || []).filter(i => ss.includes(i.sessao)), fora = (lote.itens || []).filter(i => !ss.includes(i.sessao));

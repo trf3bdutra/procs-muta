@@ -338,7 +338,7 @@ $('acv-clear').addEventListener('click', function () { $('acv-q').value = ''; $(
 $('acv-more').addEventListener('click', mais);
 $('acv-tipo').addEventListener('change', function () { if (B.ok && $('acv-modo').value !== 'ft') buscar(); });
 $('btn-refresh').addEventListener('click', function () { B.ok = false; FT.cache = {}; FT.ordem = []; B.textosCur = null; carregar(true); });
-$('acv-compendio').href = SITE + '/compendio/#v=ement';
+$('acv-compendio').href = SITE + '/amicus/compendium/#v=ement';
 
 window.MutaEmentario = {
   abrir: function () { return carregar(); },

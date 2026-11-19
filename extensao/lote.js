@@ -1,12 +1,12 @@
-/* Muta · aba Lote (Amicus Curiae · Index)
+/* Muta · aba Lote (Amicus Curiae · Collectio)
    Função principal: conferir a minuta registrada no lote com a minuta que está no editor do PJe
-   (tarefa [Sessão] Aguardando a sessão), com a mesma comparação do botão "Comparar" do Index
+   (tarefa [Sessão] Aguardando a sessão), com a mesma comparação do botão "Comparar" do Collectio
    (parágrafos por LCS; dentro do parágrafo, palavra a palavra; opção de ignorar espaços, aspas e travessões).
      GET /api/painel?lote=1                      lotes visíveis
      GET /api/painel?lote=1&id=<lote>            o lote (itens com o cartão do prontuário)
      GET /api/painel?lote=1&id=<lote>&minuta=X   minuta do processo (X = 10 primeiros caracteres do número)
    O texto do editor vem do conteudo-pje.js (só leitura). Sem editor detectado, dá para colar o texto.
-   Também mostra o perfil do processo no lote. A gestão do lote continua no Index (/lote/). */
+   Também mostra o perfil do processo no lote. A gestão do lote continua no Collectio (/amicus/collectio/). */
 (function () {
 'use strict';
 var SITE = Muta.SITE, ses = window.MutaSessao, br = window.MutaProntuarioBridge;
@@ -57,7 +57,7 @@ function atualizar(forcar) {
   });
 }
 
-/* ---------- comparação (a mesma do Index: lotes/index.html, compara()) ---------- */
+/* ---------- comparação (a mesma do Collectio: lotes/index.html, compara()) ---------- */
 function nrm(t, ws) { t = String(t || ''); if (ws) t = t.replace(/[“”«»„]/g, '"').replace(/[‘’`´]/g, "'").replace(/[–—]/g, '-').replace(/\s+/g, ' '); return t.trim(); }
 function lcs(a, b, eq) {
   var n = a.length, m = b.length, D = [], i, j;
@@ -156,7 +156,7 @@ function textoSec(v) { return Array.isArray(v) ? v.join('\n\n') : String(v || ''
 function render() {
   if (C.erro) { caixa.innerHTML = '<div class="err-box">Não foi possível ler os lotes: ' + esc(C.erro) + '</div>'; return; }
   var lotes = C.lista || [], h = '';
-  var links = '<div class="lt-lotes">' + lotes.map(function (l) { return '<a class="chip" target="_blank" rel="noopener noreferrer" href="' + SITE + '/lote/?id=' + encodeURIComponent(l.id) + '">' + esc(l.titulo) + ' · ' + l.total + '</a>'; }).join(' ') + '</div>';
+  var links = '<div class="lt-lotes">' + lotes.map(function (l) { return '<a class="chip" target="_blank" rel="noopener noreferrer" href="' + SITE + '/amicus/collectio/?id=' + encodeURIComponent(l.id) + '">' + esc(l.titulo) + ' · ' + l.total + '</a>'; }).join(' ') + '</div>';
   if (!V.chave) { caixa.innerHTML = '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos no PJe para conferir a minuta do lote.</div>' + (lotes.length ? '<p class="muted">Lotes do gabinete:</p>' + links : ''); return; }
   var num = Muta.formatarCnj(V.chave);
   if (!V.achados.length) { caixa.innerHTML = '<div class="empty"><h3>' + esc(num) + ' não está em nenhum lote</h3>Ou ainda não está visível para a equipe.</div>' + (lotes.length ? '<p class="muted">Lotes do gabinete:</p>' + links : ''); return; }
@@ -170,7 +170,7 @@ function render() {
     '<h2 class="display">' + esc(it.tipo_caso || (grupo && grupo.rotulo) || 'Processo do lote') + '</h2>' +
     '<div class="mono">' + esc(it.processo) + '</div><div class="muted">' + esc(it.recurso || '') + (it.partes ? ' · ' + esc(it.partes) : '') + '</div>' +
     '<div class="bar"><span class="chip">' + esc(eq.situacao || '—') + '</span>' + (eq.minuta ? '<span class="chip">Minuta: ' + esc(eq.minuta) + '</span>' : '') + (eq.correcao ? '<span class="chip">Correção: ' + esc(eq.correcao) + '</span>' : '') + '</div>' +
-    '<div class="bar"><a class="btn line" target="_blank" rel="noopener noreferrer" href="' + SITE + '/lote/?id=' + encodeURIComponent(l.id) + '#p=' + encodeURIComponent(it.sessao + '-' + it.item) + '">Abrir no Index</a><button type="button" class="btn line" data-atu>Atualizar</button></div>' +
+    '<div class="bar"><a class="btn line" target="_blank" rel="noopener noreferrer" href="' + SITE + '/amicus/collectio/?id=' + encodeURIComponent(l.id) + '#p=' + encodeURIComponent(it.sessao + '-' + it.item) + '">Abrir no Collectio</a><button type="button" class="btn line" data-atu>Atualizar</button></div>' +
     '</article>' +
     '<section class="card lt-cmp" id="lt-cmp"></section>' +
     '<section class="card lt-min" id="lt-min"><div class="empty">Abrindo a minuta do lote…</div></section>' +
