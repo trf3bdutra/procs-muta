@@ -323,7 +323,6 @@
       '<label>Item ou nº do processo<input id="cq-item" value="'+e(CQ.item)+'" placeholder="ex.: 12" autocomplete="off"></label>'+
       '<button class="cq-go" id="cq-go"'+(CQ.busy?' disabled':'')+'>'+(CQ.busy?'Consultando…':'Consultar')+'</button><span class="dbsp"></span>'+
       '<button class="dbt" id="cq-pront">Colar prontuário</button>'+
-      (CQ.perfil&&window.M2886&&M2886.disponivel()?'<button class="dbt" id="cq-m28" aria-pressed="'+(usa28()?'true':'false')+'">Matriz 28,86%</button>':'')+
       (CQ.perfil?'<span class="dbinfo">'+e(CQ.perfil.processo||'')+' · '+e(CQ.fonte)+'</span>':'')+'</div>';
     if(CQ.colar)h+='<div class="cq-cola"><textarea id="cq-cola-t" rows="6" placeholder="Cole aqui o bloco do prontuário (<<<PRONTUARIO_CMT … PRONTUARIO_CMT>>>) ou o JSON baixado da página do prontuário."></textarea>'+
       '<div class="cq-cola-a"><button class="cq-go" id="cq-cola-ok">Carregar o caso</button><button class="dbt" id="cq-cola-x">Cancelar</button>'+
