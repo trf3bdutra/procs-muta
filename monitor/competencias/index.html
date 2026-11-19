@@ -159,6 +159,11 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
 .arv tbody tr:hover td:first-child{text-decoration:none}
 .arv td:last-child{text-align:left;min-width:250px}
 .rkc{display:flex;flex-wrap:wrap;gap:4px}
+.arv .cor{display:flex;flex-direction:column;gap:2px;min-width:200px;font-size:12px}
+.arv .cpd{display:inline-flex;gap:5px;align-items:baseline;cursor:pointer}
+.arv .cpd em,.arv .cax em{font-style:normal;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--mut)}
+.arv .cpd b{color:var(--pre)}.arv .cpd i{font-style:normal;font-size:11px;color:var(--mut)}
+.arv .cax{color:var(--tx)}.arv .cax span{cursor:pointer}
 .rkc span{display:inline-flex;gap:4px;align-items:baseline;font-size:12px;border:1px solid var(--lin);border-radius:999px;padding:1px 8px;background:var(--sup);cursor:pointer;white-space:nowrap}
 .rkc span b{font:800 10.5px var(--f-mono);color:var(--mut)}
 .rkc span i{font-style:normal;font:500 10.5px var(--f-mono);color:var(--mut)}
@@ -256,7 +261,7 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
     </div>
     <div class="card" style="margin-top:14px">
       <div class="flh"><div><h3>Mapa de competências</h3><p class="nota" style="margin:0" id="arv-nota">Seção ▸ ramo ▸ assunto, por servidor. A cor mostra quantas minutas cada um redigiu; as marcas mostram o que a chefia indicou.</p></div>
-        <div class="leg2"><span><i class="mk esp"></i>especialidade</span><span><i class="mk pre"></i>prefere</span><span><i class="mk nao"></i>evita</span><span><span class="tag nao">sem especialista</span> assunto com 5+ minutas e ninguém indicado</span><span>Ranking: no assunto, pontos da designação (esp. = especialidade indicada); na seção e no ramo, quem mais fez</span></div></div>
+        <div class="leg2"><span><i class="mk esp"></i>especialidade</span><span><i class="mk pre"></i>prefere</span><span><i class="mk nao"></i>evita</span><span><span class="tag nao">sem especialista</span> assunto com 5+ minutas e ninguém indicado</span><span>Ranking: no assunto, pontos da designação (esp. = especialidade indicada); na seção e no ramo, quem mais fez</span><span>Correção: padrão pela regra de designação (sem regra, quem mais corrigiu); auxiliares pelo ranking e pelo histórico de correção</span></div></div>
       <div class="mctl"><button type="button" class="btn" data-arv="abrir">Abrir todos os ramos</button><button type="button" class="btn" data-arv="fechar">Fechar todos</button><label class="ck"><input type="checkbox" id="so-lacunas"> Só assuntos sem especialista</label></div>
       <div class="tw"><table id="arvore" class="arv"></table></div>
     </div>
@@ -491,28 +496,39 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
   function arvore(){
     var L=minFil(), srv={};L.forEach(function(x){srv[x.s]=(srv[x.s]||0)+1;});
     var S=Object.keys(srv).sort(function(a,b){var ca=EQ.some(function(e){return e.nome===a;}),cb=EQ.some(function(e){return e.nome===b;});return (cb-ca)||srv[b]-srv[a];});
-    var T={};L.forEach(function(x){var a=T[x.secao]=T[x.secao]||{n:0,c:{},r:{}};a.n++;a.c[x.s]=(a.c[x.s]||0)+1;var b=a.r[x.ramo]=a.r[x.ramo]||{n:0,c:{},a:{}};b.n++;b.c[x.s]=(b.c[x.s]||0)+1;var c=b.a[x.assunto]=b.a[x.assunto]||{n:0,c:{}};c.n++;c.c[x.s]=(c.c[x.s]||0)+1;});
+    var T={};L.forEach(function(x){var a=T[x.secao]=T[x.secao]||{n:0,c:{},r:{},k:{}};a.n++;a.c[x.s]=(a.c[x.s]||0)+1;var b=a.r[x.ramo]=a.r[x.ramo]||{n:0,c:{},a:{},k:{}};b.n++;b.c[x.s]=(b.c[x.s]||0)+1;var c=b.a[x.assunto]=b.a[x.assunto]||{n:0,c:{},k:{}};c.n++;c.c[x.s]=(c.c[x.s]||0)+1;
+      if(x.cor&&!oculto(x.cor)&&EQ.some(function(e){return e.nome===x.cor;})){a.k[x.cor]=(a.k[x.cor]||0)+1;b.k[x.cor]=(b.k[x.cor]||0)+1;c.k[x.cor]=(c.k[x.cor]||0)+1;}});
+    /* correção: corretor padrão (regra de designação; sem regra, quem mais corrigiu) e possíveis auxiliares */
+    var ordK=function(k){return Object.keys(k).sort(function(x,y){return k[y]-k[x];});};
+    var corHtml=function(pad,por,aux){return pad?'<div class="cor"><span class="cpd" data-s="'+esc(pad)+'"><em>padrão</em> <b>'+esc(pad)+'</b> <i>'+esc(por)+'</i></span>'+(aux.length?'<span class="cax"><em>aux.</em> '+aux.slice(0,2).map(function(n){return '<span data-s="'+esc(n)+'">'+esc(n)+'</span>';}).join(' · ')+'</span>':'')+'</div>':'<span class="vazio">sem corretor</span>';};
+    var corAssunto=function(as,c){var g=regra(as,'c'),rk=rankDe(as,'c').map(function(x){return x.nome;}),hist=ordK(c.k);
+      var pad=g&&!oculto(g.nome)?g.nome:(hist[0]||rk[0]||''),por=g&&!oculto(g.nome)?'regra · '+g.por:hist[0]?'quem mais corrigiu':'ranking';
+      var aux=rk.concat(hist).filter(function(n,i,arr){return n!==pad&&arr.indexOf(n)===i;});return corHtml(pad,por,aux);};
+    var corGrupo=function(grp){var reg={};Object.keys(grp.a||{}).forEach(function(as){var g=regra(as,'c');if(g&&!oculto(g.nome))reg[g.nome]=(reg[g.nome]||0)+grp.a[as].n;});
+      var r=ordK(reg),hist=ordK(grp.k),pad=r[0]||hist[0]||'',por=r[0]?'regra em '+nf(reg[r[0]])+' minuta'+(reg[r[0]]>1?'s':''):'quem mais corrigiu';
+      return corHtml(pad,por,r.slice(1).concat(hist).filter(function(n,i,arr){return n!==pad&&arr.indexOf(n)===i;}));};
+    var corSecao=function(a){var tudo={a:{},k:a.k};Object.keys(a.r).forEach(function(rm){Object.keys(a.r[rm].a).forEach(function(as){tudo.a[as]=a.r[rm].a[as];});});return corGrupo(tudo);};
     var max3=1;Object.values(T).forEach(function(a){Object.values(a.r).forEach(function(b){Object.values(b.a).forEach(function(c){Object.values(c.c).forEach(function(v){max3=Math.max(max3,v);});});});});
     var mem=function(n){return EQ.find(function(e){return e.nome===n;});};
     var lac=function(as,c){return as!=='sem assunto'&&c.n>=5&&!EQ.some(function(e){return casa(e.exp,as);});};
     var rkc=function(L,un){return L.length?'<div class="rkc">'+L.slice(0,3).map(function(x,i){return '<span'+(i===0?' class="um"':'')+' data-s="'+esc(x.nome)+'" title="'+esc(x.w||'')+'"><b>'+(i+1)+'º</b>'+esc(x.nome)+(x.esp?' <em>esp.</em>':'')+'<i>'+String(x.v).replace('.',',')+un+'</i></span>';}).join('')+'</div>':'<span class="vazio">ninguém pontua</span>';};
     var rkGrupo=function(c){return Object.keys(c).filter(function(n){return EQ.some(function(e){return e.nome===n;});}).map(function(n){return {nome:n,v:c[n],w:c[n]+' no grupo'};}).sort(function(a,b){return b.v-a.v;});};
     var cel=function(v,max,cls,tt){return '<td class="h'+(cls?' '+cls:'')+'" style="'+heat(v,max)+'" title="'+esc(tt)+'">'+(v||'·')+'</td>';};
-    var h='<thead><tr><th>Seção ▸ ramo ▸ assunto</th>'+S.map(function(n){return '<th class="v" title="'+esc(n)+'">'+esc(n)+'</th>';}).join('')+'<th>Total</th><th style="text-align:left">Ranking · '+(PAPEL==='c'?'correção':'redação')+'</th></tr></thead><tbody>';
+    var h='<thead><tr><th>Seção ▸ ramo ▸ assunto</th>'+S.map(function(n){return '<th class="v" title="'+esc(n)+'">'+esc(n)+'</th>';}).join('')+'<th>Total</th><th style="text-align:left">Ranking · '+(PAPEL==='c'?'correção':'redação')+'</th><th style="text-align:left">Correção · padrão e auxiliares</th></tr></thead><tbody>';
     var ords=Object.keys(T).sort(function(a,b){return oi(ORD.secao,a)-oi(ORD.secao,b);}), linhas=0;
     ords.forEach(function(sc){var a=T[sc],max1=Math.max.apply(null,Object.values(a.c));
       var rams=Object.keys(a.r).sort(function(x,y){return a.r[y].n-a.r[x].n;});
       var nl1=rams.reduce(function(acc,r){return acc+Object.keys(a.r[r].a).filter(function(as){return lac(as,a.r[r].a[as]);}).length;},0);
       if(SO_LAC&&!nl1)return;
-      h+='<tr class="n1"><td>'+esc(sc)+(nl1?' <span class="tag nao">'+nl1+' sem especialista</span>':'')+'</td>'+S.map(function(n){return cel(a.c[n]||0,max1,'',n+' · '+sc+': '+(a.c[n]||0));}).join('')+'<td class="tot">'+nf(a.n)+'</td><td>'+rkc(rkGrupo(a.c),'')+'</td></tr>';
+      h+='<tr class="n1"><td>'+esc(sc)+(nl1?' <span class="tag nao">'+nl1+' sem especialista</span>':'')+'</td>'+S.map(function(n){return cel(a.c[n]||0,max1,'',n+' · '+sc+': '+(a.c[n]||0));}).join('')+'<td class="tot">'+nf(a.n)+'</td><td>'+rkc(rkGrupo(a.c),'')+'</td><td>'+corSecao(a)+'</td></tr>';
       rams.forEach(function(rm){var b=a.r[rm],k=sc+'|'+rm,ab=ABERTO[k]||SO_LAC,max2=Math.max.apply(null,Object.values(b.c));
         var ass=Object.keys(b.a).sort(function(x,y){return b.a[y].n-b.a[x].n;}),nl=ass.filter(function(as){return lac(as,b.a[as]);}).length;
         if(SO_LAC&&!nl)return;
-        h+='<tr class="n2" data-arvk="'+esc(k)+'"><td><span class="tg">'+(ab?'▾':'▸')+'</span>'+esc(rm)+' <small class="nota" style="display:inline">· '+ass.length+' assunto'+(ass.length>1?'s':'')+'</small>'+(nl?' <span class="tag nao">'+nl+'</span>':'')+'</td>'+S.map(function(n){return cel(b.c[n]||0,max2,'',n+' · '+rm+': '+(b.c[n]||0));}).join('')+'<td class="tot">'+nf(b.n)+'</td><td>'+rkc(rkGrupo(b.c),'')+'</td></tr>';
+        h+='<tr class="n2" data-arvk="'+esc(k)+'"><td><span class="tg">'+(ab?'▾':'▸')+'</span>'+esc(rm)+' <small class="nota" style="display:inline">· '+ass.length+' assunto'+(ass.length>1?'s':'')+'</small>'+(nl?' <span class="tag nao">'+nl+'</span>':'')+'</td>'+S.map(function(n){return cel(b.c[n]||0,max2,'',n+' · '+rm+': '+(b.c[n]||0));}).join('')+'<td class="tot">'+nf(b.n)+'</td><td>'+rkc(rkGrupo(b.c),'')+'</td><td>'+corGrupo(b)+'</td></tr>';
         if(!ab)return;
         ass.forEach(function(as){var c=b.a[as],lc=lac(as,c);if(SO_LAC&&!lc)return;linhas++;
           var rk=rankDe(as,PAPEL==='c'?'c':'d').map(function(x){var m=mem(x.nome);return {nome:x.nome,v:x.p,w:x.w.join(' · '),esp:m&&casa(m.exp,as)};});
-          h+='<tr class="n3"><td>'+esc(as)+(lc?' <span class="tag nao">sem especialista</span>':'')+'</td>'+S.map(function(n){var m=mem(n),mk=m?marca(m,as):'';return cel(c.c[n]||0,max3,mk,n+' · '+as+': '+(c.c[n]||0)+(mk?' · '+{esp:'especialidade',pre:'prefere',nao:'evita'}[mk]:''));}).join('')+'<td class="tot">'+nf(c.n)+'</td><td>'+rkc(rk,' pt')+'</td></tr>';});
+          h+='<tr class="n3"><td>'+esc(as)+(lc?' <span class="tag nao">sem especialista</span>':'')+'</td>'+S.map(function(n){var m=mem(n),mk=m?marca(m,as):'';return cel(c.c[n]||0,max3,mk,n+' · '+as+': '+(c.c[n]||0)+(mk?' · '+{esp:'especialidade',pre:'prefere',nao:'evita'}[mk]:''));}).join('')+'<td class="tot">'+nf(c.n)+'</td><td>'+rkc(rk,' pt')+'</td><td>'+corAssunto(as,c)+'</td></tr>';});
       });
     });
     document.getElementById('arvore').innerHTML=h+'</tbody>';
