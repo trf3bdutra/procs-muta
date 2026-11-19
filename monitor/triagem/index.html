@@ -683,12 +683,19 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-kpis b{font:600 24px "JetBrains Mono",monospace;display:block;color:var(--v)}.cg-kpis span{color:var(--m2);font-size:11.5px}
 .cg-rel{display:flex;align-items:end;gap:8px;flex-wrap:wrap;padding:12px 14px}
 .cg-rel label{font-size:11px;color:var(--m);display:grid;gap:4px}.cg-rel select{min-width:160px}
-@media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cg-studio{display:grid;grid-template-columns:230px minmax(0,1fr) 220px;min-height:650px;border:1px solid var(--b);background:var(--w);margin-bottom:18px}
+.cg-cat{border-right:1px solid var(--b);background:var(--p);padding:10px;overflow:auto;max-height:78vh}.cg-cat h3,.cg-set h3{margin:4px 6px 9px;font-size:12px;color:var(--m);text-transform:uppercase;letter-spacing:.08em}.cg-cat button{display:block;width:100%;text-align:left;border:0;border-radius:5px;background:transparent;padding:7px 8px;font:600 12px Figtree,sans-serif;color:var(--m2);cursor:pointer}.cg-cat button:hover{background:var(--l2)}.cg-cat button.on{background:var(--v);color:#fff}.cg-cat button small{display:block;font-weight:400;opacity:.8;margin-top:2px}
+.cg-prev{padding:18px;min-width:0;overflow:auto;background:#eef1ef}.cg-paper{width:min(100%,780px);min-height:900px;margin:0 auto;background:#fff;border:1px solid #d6d9d6;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:34px 38px;color:#1f302e;outline:none}.cg-paper:focus{box-shadow:0 0 0 2px #a57829,0 4px 18px rgba(0,0,0,.08)}.cg-paper h1{font-size:24px;color:var(--v);margin:0 0 4px}.cg-paper h2{font-size:15px;color:var(--v);margin:22px 0 8px;border-bottom:1px solid #ddd;padding-bottom:5px}.cg-paper p{margin:4px 0 10px;font-size:12.5px}.cg-paper table{width:100%;border-collapse:collapse;font-size:10.5px}.cg-paper th,.cg-paper td{border-bottom:1px solid #e7e7e2;padding:5px;text-align:left;vertical-align:top}.cg-paper th{background:#f5f4ef;color:#4f5e5a}.cg-paper .mono{font-size:10px}
+.cg-set{border-left:1px solid var(--b);padding:12px;background:var(--p);overflow:auto}.cg-set label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-set input,.cg-set select,.cg-set textarea{width:100%;box-sizing:border-box}.cg-set .cg-exp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cg-set .cg-exp button{height:32px}
+.cg-composer{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px}.cg-form{border:1px solid var(--b);background:var(--w);padding:14px}.cg-form label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-form input,.cg-form textarea,.cg-form select{width:100%;box-sizing:border-box}.cg-form textarea{min-height:150px}.cg-checks{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 14px;font-size:12px}.cg-checks label{display:flex;align-items:center;gap:5px;margin:0}.cg-checks input{width:auto}.cg-hist{border:1px solid var(--b);background:var(--w)}.cg-hist header{padding:10px 12px;border-bottom:1px solid var(--b);font-weight:700}.cg-msg{padding:10px 12px;border-bottom:1px solid var(--l2)}.cg-msg b{display:block;font-size:12.5px}.cg-msg small{color:var(--m)}.cg-msg p{font-size:12px;margin:4px 0 0;white-space:pre-wrap}.cg-status{font-size:12px;color:var(--m);padding:10px 0}.cg-actions a{color:inherit;text-decoration:none}
+#cg-regras{border:1px solid var(--b);background:var(--w);min-height:640px}
+@media(max-width:1000px){.cg-studio{grid-template-columns:190px minmax(0,1fr)}.cg-set{grid-column:1/-1;border-left:0;border-top:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cg-composer{grid-template-columns:1fr}}
+@media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cg-studio{grid-template-columns:1fr}.cg-cat{max-height:none;border-right:0;border-bottom:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.cg-prev{padding:8px}.cg-paper{padding:22px 18px;min-height:700px}.cg-set{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header id="top">
-  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button><button type="button" data-mod="inteligencia" title="Análises e relatórios">Inteligência</button><button type="button" data-mod="chefia" title="Regras, acervo e administração">Chefia</button></nav></div></div></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button><button type="button" data-mod="coordenacao" title="Equipe, distribuição e acompanhamento">Coordenação</button><button type="button" data-mod="comunicacao" title="Avisos, solicitações e canais">Comunicação</button><button type="button" data-mod="inteligencia" title="Análises e relatórios">Inteligência</button><button type="button" data-mod="chefia" title="Regras, acervo e administração">Chefia</button></nav></div></div></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
@@ -906,7 +913,7 @@ W.addEventListener('beforeunload', (e) => { if (pendentes() || GRAVANDO) { e.pre
 /* ===================== abas e roteamento ===================== */
 function rotear() { const h = decodeURIComponent(location.hash.slice(1) || 'fila');
   if (h.indexOf('esc=') === 0) { const id = h.slice(4); if (ESC.escaninhos.some((e) => e.id === id)) { if (ABERTAS.indexOf(id) < 0) { ABERTAS.push(id); LS.set('tri_abas', ABERTAS); } ABA = 'esc:' + id; } else ABA = 'escaninhos'; }
-  else ABA = h === 'inicio' ? 'inteligencia' : /^(fila|escaninhos|pautas|chefia|inteligencia)$/.test(h) ? h : (!location.hash && /^\/pautas/.test(location.pathname) ? 'pautas' : 'fila');
+  else ABA = h === 'inicio' ? 'inteligencia' : /^(fila|escaninhos|pautas|coordenacao|comunicacao|chefia|inteligencia)$/.test(h) ? h : (!location.hash && /^\/pautas/.test(location.pathname) ? 'pautas' : 'fila');
   W.scrollTo(0, 0); render(); }
 W.addEventListener('hashchange', rotear);
 const ir = (h) => { if (location.hash === '#' + h) rotear(); else location.hash = h; };
@@ -916,7 +923,7 @@ function pintaAbas() {
   $('#abas').innerHTML = t('fila', 'Fila de triagem', PRONTO ? U.length : null) +
     tabEsc();
   /* módulos no canto esquerdo: Triagem | Pautas; na Pautas, as abas da triagem ficam ocultas */
-  const mod = ABA === 'pautas' ? 'pautas' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; $('#abas').hidden = mod !== 'triagem'; if (mod === 'triagem') ULT_TRI = ABA;
+  const mod = ABA === 'pautas' ? 'pautas' : ABA === 'coordenacao' ? 'coordenacao' : ABA === 'comunicacao' ? 'comunicacao' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; $('#abas').hidden = mod !== 'triagem'; if (mod === 'triagem') ULT_TRI = ABA;
   D.querySelectorAll('#modulos [data-mod]').forEach((b) => { const on = b.dataset.mod === mod; b.classList.toggle('on', on); b.setAttribute('aria-current', on ? 'page' : 'false'); }); }
 var ULT_TRI = 'fila';
 /* telas de edição do motor (calendário, etiquetas, designação, marcos, equipe) por cima da página, com barra de volta */
@@ -948,13 +955,21 @@ $('#abas').addEventListener('click', (e) => { if (e.target.closest('[data-escsai
   const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
 
 /* ===================== render geral ===================== */
-function render() { if (!PRONTO) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', b.dataset.mod === (naP ? 'pautas' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'))); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } return; }
+function modAtual(){ return ABA === 'pautas' ? 'pautas' : ABA === 'coordenacao' ? 'coordenacao' : ABA === 'comunicacao' ? 'comunicacao' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; }
+function abaTriagem(){ return ABA === 'fila' || ABA === 'escaninhos' || ABA.indexOf('esc:') === 0; }
+function render() {
+  if (ABA !== 'chefia') { const rg = D.querySelector('#rg.embutida'); if (rg && W.CMTRegrasGerais) try { W.CMTRegrasGerais.fechar(); } catch(e){} }
+  if (!PRONTO) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', b.dataset.mod === modAtual())); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } $('#rodape').hidden = true; return; }
   F = filtroDe(ABA); pintaAbas(); pintaGrava();
   const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
-  m.hidden = naPauta; ap.hidden = !naPauta; D.title = naPauta ? 'Ab Initio · Pautas' : 'Ab Initio · Triagem';
+  m.hidden = naPauta; ap.hidden = !naPauta;
+  const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
+  D.title = 'Ab Initio · ' + tit;
   if (naPauta) { $('#rodape').hidden = true; try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
-  if (ABA === 'inteligencia') m.innerHTML = vInteligencia();
-  else if (ABA === 'chefia') m.innerHTML = vChefia();
+  if (ABA === 'inteligencia') { m.innerHTML = vInteligencia(); setTimeout(cgRelSincronizar,0); }
+  else if (ABA === 'chefia') { m.innerHTML = vChefia(); setTimeout(montarChefia,0); }
+  else if (ABA === 'coordenacao') m.innerHTML = vCoordenacao();
+  else if (ABA === 'comunicacao') { m.innerHTML = vComunicacao(); setTimeout(cgComCarregar,0); }
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
   else if (ABA === 'escaninhos') m.innerHTML = vEscaninhos();
   else if (ABA.indexOf('esc:') === 0) m.innerHTML = vEscaninho(ABA.slice(4));
@@ -962,15 +977,110 @@ function render() { if (!PRONTO) { const naP = ABA === 'pautas'; $('#main').hidd
 
 
 /* Novos módulos: preservação das funções anteriores */
+let CG_CHEFIA_ABA='escopo';
+function equipeAtual(){ try { const s=SES(), e=s && (typeof s.equipe==='function'?s.equipe():s.equipe); return Array.isArray(e)?e:[]; } catch(e){ return []; } }
+function montarChefia(){
+  const alvo=$('#cg-regras'); if(!alvo||!W.CMTRegrasGerais) return;
+  W.CMTRegrasGerais.embutir(alvo,{ motor:M, abrirMotor:telaMotor, pagina:'chefia', aba:CG_CHEFIA_ABA,
+    contagem:()=>{ const o={}; (FONTE||((core()||{}).rows)||[]).forEach(r=>{const t=String(r.tarefa_atual||'').trim();if(t)o[t]=(o[t]||0)+1;}); return o; },
+    aoGravarEscopo:(j)=>{ ESCOPO={triar:(j.triar||[]).map(x=>[x.tarefa,x.motivo||'']),ignorar:j.ignorar||{},lido:true}; montaEscopo(); construir(); toast('Escopo da triagem atualizado.'); }
+  });
+}
 function vChefia(){
-  const rr=[['escopo','Escopo da triagem','Tarefas do PJe que entram e ficam fora'],['destino','Destinos processuais','Aptidão e candidatos à monocrática'],['calendario','Calendário forense','Feriados, dias úteis e sessões'],['etiquetas','Etiquetas e tarefas','Indicadores derivados dos relatórios do PJe'],['designacao','Designação e correção','Critérios gerais e adaptações por sessão'],['produtividade','Produtividade','Metas, pesos, capacidade e prazos'],['equipe','Equipe','Perfis, funções e atribuições'],['sessao','Sessões','Configuração e marcos']];
-  const card=(r)=>'<div class="cg-link"><span><b>'+esc(r[1])+'</b><small>'+esc(r[2])+'</small></span><button data-cg-regra="'+r[0]+'">Abrir</button></div>';
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Central de gestão · regras e administração</p><h1>Chefia.</h1><p>As regras já existentes permanecem únicas e são editadas pelos mesmos diálogos, inclusive quando acessadas pelo Pautamento.</p></div></div><div class="cg-grid"><section class="cg-box"><header>Regras do acervo</header>'+rr.slice(0,4).map(card).join('')+'</section><section class="cg-box"><header>Organização do gabinete</header>'+rr.slice(4).map(card).join('')+'</section><section class="cg-box"><header>Importação e atualização do acervo</header><p>Planilhas do PJe, Power BI, importação por tarefa, complementação pelo DataJud e gravação na fonte central. O importador original é preservado.</p><div class="cg-actions"><button class="btn pri" data-cg-acervo="1">Importar / atualizar acervo</button><button class="btn" data-cg-regra="acervo">Regras da fonte</button></div><p>'+nf(ALL.length)+' processos na base carregada · '+nf(U.length)+' em triagem</p></section><section class="cg-box"><header>Integrações e governança</header><p>Fonte canônica: acervo/fonte.json, acervo/operacional.json e acervo/sessoes/. Regras em apoio/regras/. Esta etapa não altera os motores, a Fila nem as Pautas.</p><div class="cg-actions"><button class="btn" data-cg-regra="equipe">Cadastro da equipe</button><button class="btn" data-cg-regra="produtividade">Metas e pesos</button></div></section></div></div>';
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Central de gestão · administração do gabinete</p><h1>Chefia.</h1><p>Regras, equipe, calendário e governança ficam nesta página. Os diálogos continuam apenas como atalhos contextuais nas demais áreas.</p></div></div>'+
+    '<div class="cg-grid" style="margin-bottom:14px"><section class="cg-box"><header>Acervo e fontes</header><p>Importação PJe/Power BI, atualização da fonte e complementação pelo DataJud.</p><div class="cg-actions"><button class="btn pri" data-cg-acervo="1">Importar / atualizar acervo</button></div><p>'+nf(ALL.length)+' processos na fonte · '+nf(U.length)+' em triagem</p></section>'+
+    '<section class="cg-box"><header>Atalhos administrativos</header><div class="cg-actions"><button class="btn" data-cg-chefia="equipe">Equipe</button><button class="btn" data-cg-chefia="produtividade">Metas e pesos</button><button class="btn" data-cg-chefia="calendario">Calendário</button><button class="btn" data-cg-chefia="designacao">Designação</button></div></section></div>'+
+    '<div id="cg-regras" aria-label="Regras gerais integradas"><p class="cg-status">Carregando regras…</p></div></div>';
+}
+function vCoordenacao(){
+  const eq=equipeAtual(), serv=[...new Set(U.map(o=>o.servidor).filter(Boolean))];
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Equipe e execução</p><h1>Coordenação.</h1><p>Distribuição, acompanhamento do time, diligências e organização diária do gabinete.</p></div></div>'+
+    '<div class="cg-kpis"><div><b>'+nf(eq.length||serv.length)+'</b><span>pessoas na equipe</span></div><div><b>'+nf(serv.length)+'</b><span>servidores com processos na triagem</span></div><div><b>'+nf(U.filter(o=>o.pend.length).length)+'</b><span>processos com pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
+    '<div class="cg-grid"><section class="cg-box"><header>Equipe e capacidade</header><div class="cg-link"><span><b>Cadastro e funções</b><small>Perfis, atribuições e participação em designação automática</small></span><button data-cg-chefia="equipe">Abrir</button></div><div class="cg-link"><span><b>Metas e pesos</b><small>Capacidade, produtividade e critérios de redistribuição</small></span><button data-cg-chefia="produtividade">Abrir</button></div><div class="cg-link"><span><b>Designação</b><small>Critérios gerais e quem recebe cada tipo de processo</small></span><button data-cg-chefia="designacao">Abrir</button></div></section>'+
+    '<section class="cg-box"><header>Operação diária</header><div class="cg-link"><span><b>Office · equipe e diligências</b><small>Avisos, tarefas, ausências e acompanhamento operacional</small></span><button data-cg-url="/office/#cmt">Abrir Office</button></div><div class="cg-link"><span><b>Calendário do gabinete</b><small>Sessões, marcos, feriados e agenda</small></span><button data-cg-chefia="calendario">Abrir</button></div><div class="cg-link"><span><b>Pautas</b><small>Composição e andamento das próximas sessões</small></span><button data-cg-go="pautas">Abrir</button></div></section></div></div>';
+}
+
+const CG_REL_CAT=[
+['acervo','Acervo central','visão completa da fonte'],['triagem','Fila de triagem','processos no fluxo atual'],['aptos','Aptos para julgamento','aptos sem pendência'],['pendencias','Pendências','itens que exigem providência'],
+['pauta','Selecionados para pauta','destino colegiado'],['mono','Monocráticas','destino do relator'],['escaninhos','Em escaninhos','processos separados para exame'],['semdestino','Sem destino','triagem ainda sem encaminhamento'],
+['candidatos','Candidatos à monocrática','critérios do art. 932 e correlatos'],['retirados','Retirados / adiados','processos com indicação de retirada'],['ed','Embargos de declaração','classe ou tarefa de ED'],['agravos','Agravos de instrumento','agravos em triagem'],
+['remessas','Remessas necessárias','remessas e apelações/remessas'],['antigos90','Parados há mais de 90 dias','tempo na tarefa'],['antigos180','Parados há mais de 180 dias','tempo na tarefa'],['sigilosos','Segredo / sigilo','registros sinalizados na fonte'],
+['servidores','Produção por servidor','agrupamento da carga atual'],['sessoes','Sessões futuras','calendário e seleção prévia']
+];
+const CG_REL={id:'acervo',formato:'pdf',titulo:'',sub:'',caps:{resumo:true,tabela:true,obs:true}};
+function cgRelLista(id){
+  const tx=o=>nz([o.tarefa,o.assunto,o.cl,(o.etq||[]).join(' '),JSON.stringify(o.row||{})].join(' '));
+  if(id==='triagem')return U;if(id==='aptos')return U.filter(o=>o.apto&&!o.pend.length);if(id==='pendencias')return U.filter(o=>o.pend.length);
+  if(id==='pauta')return U.filter(o=>o.dest&&o.dest.k==='pauta');if(id==='mono')return U.filter(o=>o.dest&&o.dest.k==='mono');if(id==='escaninhos')return U.filter(o=>o.dest&&o.dest.k==='esc');
+  if(id==='semdestino')return U.filter(o=>!o.dest||!o.dest.k);if(id==='candidatos')return U.filter(o=>o.cand);
+  if(id==='retirados')return U.filter(o=>/retir|adiad/.test(tx(o)));if(id==='ed')return U.filter(o=>/embargo.*declara|(^|\s)ed(\s|$)/.test(tx(o)));
+  if(id==='agravos')return U.filter(o=>/agravo de instrumento|(^|\s)ai(\s|$)/.test(tx(o)));if(id==='remessas')return U.filter(o=>/remessa necess|apela.*remessa/.test(tx(o)));
+  if(id==='antigos90')return U.filter(o=>dias(o.desde)>90);if(id==='antigos180')return U.filter(o=>dias(o.desde)>180);
+  if(id==='sigilosos')return ALL.filter(o=>/sigilo|segredo/.test(tx(o)));if(id==='servidores')return U;
+  if(id==='sessoes')return U.filter(o=>o.dest&&o.dest.k==='pauta'); return ALL;
+}
+function cgRelDef(){return CG_REL_CAT.find(x=>x[0]===CG_REL.id)||CG_REL_CAT[0];}
+function cgRelTitulo(){const d=cgRelDef();return CG_REL.titulo||d[1];}
+function cgRelHtml(){
+  const d=cgRelDef(),L=cgRelLista(CG_REL.id),ho=new Date().toLocaleString('pt-BR');
+  if(CG_REL.id==='sessoes'){
+    const rows=sessoes().map(s=>'<tr><td>'+esc(nomeSes(s))+'</td><td>'+esc(br((s.fases||{}).pauta||'' )||'—')+'</td><td>'+nf((s.itens||[]).length)+'</td><td>'+nf((s.previa||[]).length)+'</td></tr>').join('');
+    return '<h1>'+esc(cgRelTitulo())+'</h1><p>'+esc(CG_REL.sub||d[2])+' · gerado em '+esc(ho)+'</p>'+(CG_REL.caps.resumo?'<h2>Resumo</h2><p>'+nf(sessoes().length)+' sessão(ões) futura(s) cadastrada(s).</p>':'')+(CG_REL.caps.tabela?'<h2>Sessões</h2><table><thead><tr><th>Sessão</th><th>Pautar até</th><th>Itens</th><th>Pré-pauta</th></tr></thead><tbody>'+rows+'</tbody></table>':'');
+  }
+  let grupos='';
+  if(CG_REL.id==='servidores'){
+    const m={};L.forEach(o=>{const s=o.servidor||'Sem responsável';m[s]=(m[s]||0)+1;});grupos='<h2>Distribuição por servidor</h2><table><thead><tr><th>Servidor</th><th>Processos</th></tr></thead><tbody>'+Object.entries(m).sort((a,b)=>b[1]-a[1]).map(x=>'<tr><td>'+esc(x[0])+'</td><td>'+nf(x[1])+'</td></tr>').join('')+'</tbody></table>';
+  }
+  const rows=L.slice(0,120).map(o=>'<tr><td class="mono">'+esc(o.cnj||'')+'</td><td>'+esc(o.cl||'')+'</td><td>'+esc(o.assunto||'')+'</td><td>'+esc(o.tarefa||'')+'</td><td>'+esc(o.servidor||'')+'</td><td>'+esc((o.dest&&o.dest.t)||'')+'</td></tr>').join('');
+  const obs=L.length>120?'<p><em>Prévia limitada a 120 linhas; a exportação usa o conjunto completo.</em></p>':'';
+  return '<h1>'+esc(cgRelTitulo())+'</h1><p>'+esc(CG_REL.sub||d[2])+' · gerado em '+esc(ho)+'</p>'+
+    (CG_REL.caps.resumo?'<h2>Resumo</h2><p><b>'+nf(L.length)+'</b> registro(s) no conjunto selecionado.</p>':'')+
+    grupos+(CG_REL.caps.tabela?'<h2>Processos</h2><table><thead><tr><th>Processo</th><th>Classe</th><th>Assunto</th><th>Tarefa</th><th>Servidor</th><th>Destino</th></tr></thead><tbody>'+rows+'</tbody></table>'+obs:'')+
+    (CG_REL.caps.obs?'<h2>Observações</h2><p>Prévia editável: ajuste títulos, notas e trechos diretamente antes de exportar.</p>':'');
 }
 function vInteligencia(){
-  const k=(n,t)=>'<div><b>'+nf(n)+'</b><span>'+t+'</span></div>';
-  const apt=U.filter(o=>o.apto&&!o.pend.length).length;
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Indicadores e relatórios</p><h1>Inteligência.</h1><p>Leitura gerencial da base real, emissão rápida e o diagnóstico da antiga aba Início, preservado abaixo.</p></div></div><div class="cg-kpis">'+k(ALL.length,'Processos na fonte')+k(U.length,'Em triagem')+k(apt,'Aptos sem pendência')+k(sessoes().length,'Sessões futuras')+'</div><div class="cg-grid"><section class="cg-box"><header>Gerador rápido de relatórios</header><p>Reutiliza os formatos e filtros já implementados no exportador da Triagem.</p><div class="cg-rel"><label>Conjunto<select id="cg-rel-tipo"><option value="all">Acervo central</option><option value="tri">Fila de triagem</option><option value="apt">Aptos</option><option value="pend">Com pendências</option></select></label><label>Formato<select id="cg-rel-formato"><option value="xlsx">Excel (.xlsx)</option><option value="csv">CSV</option><option value="doc">Word (.doc)</option><option value="pdf">PDF (impressão)</option><option value="est">Estatísticas CSV</option></select></label><button class="btn pri" data-cg-rel="1">Gerar</button></div><p>Catálogo de relatórios interaplicações e produtividade histórica: integração prevista para a próxima etapa.</p></section><section class="cg-box"><header>Panorama operacional</header><div class="cg-link"><span><b>Escaninhos</b><small>Organização atual da Triagem</small></span><b class="mono">'+nf(ESC.escaninhos.length)+'</b></div><div class="cg-link"><span><b>Com pendências</b><small>Processos em triagem</small></span><b class="mono">'+nf(U.filter(o=>o.pend.length).length)+'</b></div><p>Os dados das Pautas continuam sendo gerenciados exclusivamente pela página original.</p></section></div></div><section><div class="wrap cg-head"><div><h1 style="font-size:21px">Diagnóstico da triagem</h1><p>Todo o painel original de Início permanece aqui, com seus links para a Fila e análises existentes.</p></div></div>'+vInicio().replace('Triagem · início','Triagem · diagnóstico')+'</section>';
+  const d=cgRelDef(),L=cgRelLista(CG_REL.id),apt=U.filter(o=>o.apto&&!o.pend.length).length;
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Indicadores e relatórios</p><h1>Inteligência.</h1><p>Estúdio unificado de relatórios, com catálogo, prévia editável e exportação em vários formatos.</p></div></div>'+
+    '<div class="cg-kpis"><div><b>'+nf(ALL.length)+'</b><span>processos na fonte</span></div><div><b>'+nf(U.length)+'</b><span>em triagem</span></div><div><b>'+nf(apt)+'</b><span>aptos sem pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
+    '<section class="cg-studio"><aside class="cg-cat"><h3>Relatórios</h3>'+CG_REL_CAT.map(x=>'<button type="button" data-cg-rmodel="'+x[0]+'" class="'+(x[0]===CG_REL.id?'on':'')+'">'+esc(x[1])+'<small>'+esc(x[2])+'</small></button>').join('')+'</aside>'+
+    '<div class="cg-prev"><article id="cg-rel-prev" class="cg-paper" contenteditable="true" spellcheck="false" aria-label="Prévia editável do relatório">'+cgRelHtml()+'</article></div>'+
+    '<aside class="cg-set"><h3>Relatório</h3><label>Título<input id="cg-rel-title" value="'+esc(CG_REL.titulo||d[1])+'"></label><label>Subtítulo<input id="cg-rel-sub" value="'+esc(CG_REL.sub||d[2])+'"></label>'+
+    '<label>Formato<select id="cg-rel-format"><option value="pdf">PDF</option><option value="doc">Word (.doc)</option><option value="xlsx">Excel (.xlsx)</option><option value="csv">CSV</option></select></label>'+
+    '<div class="cg-checks" style="display:grid"><label><input type="checkbox" data-cg-cap="resumo" '+(CG_REL.caps.resumo?'checked':'')+'> Resumo</label><label><input type="checkbox" data-cg-cap="tabela" '+(CG_REL.caps.tabela?'checked':'')+'> Tabela/listagem</label><label><input type="checkbox" data-cg-cap="obs" '+(CG_REL.caps.obs?'checked':'')+'> Observações</label></div>'+
+    '<p class="cg-status">'+nf(L.length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.</p><div class="cg-exp"><button class="btn pri" data-cg-rel-export="pdf">PDF</button><button class="btn" data-cg-rel-export="doc">Word</button><button class="btn" data-cg-rel-export="xlsx">Excel</button><button class="btn" data-cg-rel-export="csv">CSV</button></div></aside></section>'+
+    '<section><div class="cg-head"><div><h1 style="font-size:21px">Diagnóstico da triagem</h1><p>O painel original de Início permanece disponível como leitura gerencial abaixo.</p></div></div>'+vInicio().replace('Triagem · início','Triagem · diagnóstico')+'</section></div>';
+}
+function cgRelSincronizar(){ const f=$('#cg-rel-format'); if(f)f.value=CG_REL.formato; }
+function cgRelAtualizar(){ const p=$('#cg-rel-prev'); if(p)p.innerHTML=cgRelHtml(); const st=$('.cg-set .cg-status'); if(st)st.textContent=nf(cgRelLista(CG_REL.id).length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.'; }
+function cgRelRows(){
+  if(CG_REL.id==='sessoes')return sessoes().map(s=>({Sessao:nomeSes(s),Pautar_ate:br((s.fases||{}).pauta||''),Itens:(s.itens||[]).length,Pre_pauta:(s.previa||[]).length}));
+  return cgRelLista(CG_REL.id).map(o=>({Processo:o.cnj||'',Classe:o.cl||'',Assunto:o.assunto||'',Tarefa:o.tarefa||'',Servidor:o.servidor||'',Destino:(o.dest&&o.dest.t)||''}));
+}
+function cgBaixar(nome,blob){const a=D.createElement('a');a.href=URL.createObjectURL(blob);a.download=nome;D.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+function cgRelExportar(fmt){
+  const prev=$('#cg-rel-prev'), html=prev?prev.innerHTML:cgRelHtml(), slug=cgRelTitulo().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-zA-Z0-9]+/g,'_').replace(/^_|_$/g,'').slice(0,60)||'Relatorio';
+  if(fmt==='pdf'){const w=W.open('','_blank','noopener,noreferrer');if(!w){toast('O navegador bloqueou a janela de impressão.',true);return;}w.document.write('<!doctype html><meta charset="utf-8"><title>'+esc(cgRelTitulo())+'</title><style>body{font:12px Arial;color:#222;margin:18mm}h1{font-size:22px}h2{font-size:14px;margin-top:18px;border-bottom:1px solid #ccc}table{width:100%;border-collapse:collapse;font-size:9px}th,td{padding:4px;border-bottom:1px solid #ddd;text-align:left;vertical-align:top}@page{size:A4;margin:14mm}</style>'+html);w.document.close();w.focus();setTimeout(()=>w.print(),250);return;}
+  if(fmt==='doc'){cgBaixar(slug+'.doc',new Blob(['<meta charset="utf-8"><style>body{font-family:Arial}table{border-collapse:collapse;width:100%}td,th{border:1px solid #ddd;padding:5px}</style>'+html],{type:'application/msword'}));return;}
+  const rows=cgRelRows();
+  if(fmt==='xlsx'&&W.XLSX){const ws=W.XLSX.utils.json_to_sheet(rows),wb=W.XLSX.utils.book_new();W.XLSX.utils.book_append_sheet(wb,ws,'Relatório');W.XLSX.writeFile(wb,slug+'.xlsx');return;}
+  const cols=rows.length?Object.keys(rows[0]):[];const csv=[cols.join(';')].concat(rows.map(r=>cols.map(k=>'"'+String(r[k]??'').replace(/"/g,'""')+'"').join(';'))).join('\n');
+  cgBaixar(slug+'.csv',new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
+}
+
+function vComunicacao(){
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Canais do gabinete</p><h1>Comunicação.</h1><p>Avisos, solicitações e acessos aos canais já usados pelo Office, sem duplicar a base.</p></div></div>'+
+    '<div class="cg-grid" style="margin-bottom:14px"><section class="cg-box"><header>Canais</header><div class="cg-link"><span><b>Office · Comunicações do gabinete</b><small>Notificações, diligências e painel do gabinete</small></span><button data-cg-url="/office/#cmt">Abrir</button></div><div class="cg-link"><span><b>Preferências e sustentações</b><small>Pedidos vinculados à pauta e fechamento diário</small></span><button data-cg-url="/office/#pauta">Abrir</button></div></section>'+
+    '<section class="cg-box"><header>Atalhos</header><p>O envio e o histórico usam o mesmo endpoint de notificações do Office. Se a sessão do Office não estiver autenticada, o sistema informa e mantém o atalho para entrar.</p><div class="cg-actions"><button class="btn" data-cg-url="/office/">Abrir Office</button><button class="btn" data-cg-go="pautas">Ir para Pautas</button></div></section></div>'+
+    '<div class="cg-composer"><form class="cg-form" id="cg-com-form"><h3 style="margin-top:0">Publicar aviso / notificação</h3><label>Título<input name="title" maxlength="160" required></label><label>Mensagem<textarea name="message" maxlength="2000" required></textarea></label>'+
+    '<label>Importância<select name="nivel"><option value="info">Informativo</option><option value="importante">Importante</option><option value="urgente">Urgente</option></select></label><label>Válido até<input type="date" name="ate"></label>'+
+    '<div class="cg-checks"><label><input type="checkbox" name="painel" checked> Painel inicial</label><label><input type="checkbox" name="notificacao" checked> Notificação</label><label><input type="checkbox" name="fixo"> Fixar</label></div><button class="btn pri" type="submit">Publicar</button><p id="cg-com-status" class="cg-status"></p></form>'+
+    '<section class="cg-hist"><header>Histórico recente</header><div id="cg-com-hist"><p class="cg-status" style="padding:12px">Carregando…</p></div></section></div></div>';
+}
+async function cgApi(u,op){op=op||{};op.credentials='same-origin';op.headers=Object.assign({'Content-Type':'application/json'},op.headers||{});const r=await fetch(u,op),j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.erro||('HTTP '+r.status));return j;}
+async function cgComCarregar(){
+  const h=$('#cg-com-hist'),st=$('#cg-com-status');if(!h)return;
+  try{const j=await cgApi('/api/notificacoes?gestao=1'),L=(j.registros||[]).slice().reverse().slice(0,12);h.innerHTML=L.length?L.map(a=>'<div class="cg-msg"><b>'+esc(a.title||'Aviso')+'</b><small>'+esc(a.user||'')+(a.time?' · '+esc(new Date(a.time).toLocaleString('pt-BR')):'')+'</small><p>'+esc(a.message||'')+'</p></div>').join(''):'<p class="cg-status" style="padding:12px">Nenhum aviso publicado.</p>';if(st)st.textContent='';}
+  catch(e){h.innerHTML='<p class="cg-status" style="padding:12px">Não foi possível ler o histórico nesta sessão. Abra o Office para autenticar e tente novamente.</p>';if(st)st.textContent=e.message;}
 }
 /* ---------- Início (painel incorporado à Inteligência) ---------- */
 function vInicio() {
@@ -1470,7 +1580,7 @@ async function aplicarLote(ds) { const c = LOTE_CAMPOS.find((x) => x[0] === RODA
     L.forEach((o) => { o.row[cp] = v; refazDest(o); }); SEL.clear(); render(); toast(c[1] + (v ? ' = ' + v : ' limpo') + ': ' + nf(r.alterados || 0) + ' processo(s) gravado(s) na ficha.');
   } catch (e) { toast('Não foi possível gravar em lote: ' + e.message, true); if (bt) { bt.disabled = false; bt.textContent = 'Aplicar'; } } }
 const RODA = {}; let ROD_MIN = LS.get('tri_rod_min', true); /* rodapé de ações: minimizado por padrão, expansível */
-function pintaRodape() { const r = $('#rodape'); if (!PRONTO || ABA === 'pautas') { r.hidden = true; return; } r.hidden = false;
+function pintaRodape() { const r = $('#rodape'); if (!PRONTO || !abaTriagem()) { r.hidden = true; D.body.classList.remove('rod-min'); return; } r.hidden = false;
   const emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '', L = ABA === 'fila' ? FILA : emEsc ? ESCL : [], n = SEL.size, S = sessoes();
   if (!RODA['r-ses'] || !S.some((s) => s.data === RODA['r-ses'])) RODA['r-ses'] = S[0] ? S[0].data : '';
   const escs = ESC.escaninhos.filter((e) => e.id !== idE); if (RODA['r-esc'] && !escs.some((e) => e.id === RODA['r-esc'])) RODA['r-esc'] = '';
@@ -1600,13 +1710,20 @@ function abrirRegras(aba) { if (!W.CMTRegrasGerais) { toast('As regras gerais ai
 $('#bt-regras').addEventListener('click', () => { if (!PM() || !(M() && M().CMTSessao)) { toast('O motor ainda está abrindo; tente em instantes.', true); return; } abrirRegras(); });
 $('#bt-acervo').addEventListener('click', () => { if (!PM()) { toast('O motor ainda está abrindo; tente em instantes.', true); return; } abrirAcervo(); });
 D.addEventListener('click', (e) => {
- const r=e.target.closest('[data-cg-regra]'); if(r){abrirRegras(r.dataset.cgRegra);return;}
+ const regra=e.target.closest('[data-cg-regra]'); if(regra){abrirRegras(regra.dataset.cgRegra);return;}
+ const ch=e.target.closest('[data-cg-chefia]'); if(ch){CG_CHEFIA_ABA=ch.dataset.cgChefia||'escopo';ir('chefia');return;}
+ const go=e.target.closest('[data-cg-go]'); if(go){ir(go.dataset.cgGo);return;}
+ const url=e.target.closest('[data-cg-url]'); if(url){W.location.href=url.dataset.cgUrl;return;}
  if(e.target.closest('[data-cg-acervo]')){$('#bt-acervo').click();return;}
- if(e.target.closest('[data-cg-rel]')){
-  const k=($('#cg-rel-tipo')||{}).value||'all',f=($('#cg-rel-formato')||{}).value||'xlsx';
-  const L=k==='tri'?U:k==='apt'?U.filter(o=>o.apto):k==='pend'?U.filter(o=>o.pend.length):ALL;
-  exportar(f,L,({all:'Acervo central',tri:'Fila de triagem',apt:'Processos aptos',pend:'Processos com pendência'})[k],'Central · Inteligência');return;
- }
+ const rm=e.target.closest('[data-cg-rmodel]'); if(rm){CG_REL.id=rm.dataset.cgRmodel;CG_REL.titulo='';CG_REL.sub='';render();return;}
+ const cap=e.target.closest('[data-cg-cap]'); if(cap){CG_REL.caps[cap.dataset.cgCap]=cap.checked;cgRelAtualizar();return;}
+ const ex=e.target.closest('[data-cg-rel-export]'); if(ex){CG_REL.formato=ex.dataset.cgRelExport;cgRelExportar(CG_REL.formato);return;}
+});
+D.addEventListener('input',(e)=>{if(ABA!=='inteligencia')return;if(e.target.id==='cg-rel-title'){CG_REL.titulo=e.target.value;cgRelAtualizar();}else if(e.target.id==='cg-rel-sub'){CG_REL.sub=e.target.value;cgRelAtualizar();}});
+D.addEventListener('change',(e)=>{if(e.target.id==='cg-rel-format')CG_REL.formato=e.target.value;});
+D.addEventListener('submit',(e)=>{if(e.target.id!=='cg-com-form')return;e.preventDefault();const f=e.target,E=f.elements,st=$('#cg-com-status'),bt=f.querySelector('[type=submit]');bt.disabled=true;if(st)st.textContent='Publicando…';
+ const d={title:E.title.value,message:E.message.value,link:'',linkTxt:'',nivel:E.nivel.value,painel:E.painel.checked,notificacao:E.notificacao.checked,fixo:E.fixo.checked,ate:E.ate.value,para:[]};
+ cgApi('/api/notificacoes?gestao=1',{method:'POST',body:JSON.stringify(d)}).then(()=>{f.reset();if(st)st.textContent='Aviso publicado.';toast('Aviso publicado.');return cgComCarregar();}).catch(er=>{if(st)st.textContent='Não foi possível publicar: '+er.message;toast('Não foi possível publicar o aviso.',true);}).finally(()=>{bt.disabled=false;});
 });
 $('#st-grava').addEventListener('click', () => { if (ERRO || pendentes()) { TENT = 0; gravar(); } });
 
