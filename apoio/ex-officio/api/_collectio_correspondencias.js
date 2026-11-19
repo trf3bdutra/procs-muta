@@ -4,7 +4,7 @@
 const normal=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
 const classe=s=>{
  const x=normal(s);
- if(/embargos? de declaracao|\bedcl?\b/.test(x))return 'embargos de declaração';
+ if(/embargos? de declaracao|\bedcl?\b|\bed\b/.test(x))return 'embargos de declaração';
  if(/agravo de instrumento|\bai\b/.test(x))return 'agravo de instrumento';
  if(/agravo interno|\bagint\b/.test(x))return 'agravo interno';
  if(/remessa necessaria|\bremnec\b/.test(x))return 'remessa necessária';
