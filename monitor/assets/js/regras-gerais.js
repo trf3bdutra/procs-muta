@@ -63,7 +63,8 @@
     '.rg .rg-msg{padding:9px 12px;border:1px solid #d8d3c6;border-radius:6px;background:#fff;font-size:12.5px}.rg .rg-msg.bad{border-color:#e2b3aa;color:#8a2f22}' +
     '.rg .rg-eq{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:7px 14px;border-top:1px solid #f0ece2;font-size:13px}.rg .rg-eq label{margin-left:10px;font-size:12.5px;white-space:nowrap}' +
     '.rg .rg-add{display:flex;gap:8px;padding:10px 14px;border-top:1px solid #e3ded2}.rg .rg-add input{flex:1;height:30px;border:1px solid #c8c3b6;border-radius:5px;padding:0 8px;font:13px Figtree,sans-serif}' +
-    '@media (max-width:760px){section.rg{grid-template-columns:minmax(0,1fr);top:0;height:100vh;width:100vw;border-radius:0}.rg nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid #d8d3c6}.rg nav p{display:none}.rg .rg-li{grid-template-columns:minmax(0,1fr) 50px}.rg .rg-li select{grid-column:1/-1}.rg .rg-tl{grid-template-columns:minmax(0,1fr)}}';
+    '.rg.embutida{position:relative;left:auto;top:auto;transform:none;width:100%;height:min(78vh,860px);min-height:620px;box-shadow:none;z-index:auto;border-radius:0}.rg.embutida .rg-x{display:none}.rg.embutida .rg-f:empty{display:none}' +
+    '@media (max-width:760px){section.rg{grid-template-columns:minmax(0,1fr);top:0;height:100vh;width:100vw;border-radius:0}.rg.embutida{position:relative;top:auto;height:auto;min-height:720px;width:100%;grid-template-columns:minmax(0,1fr)}.rg nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid #d8d3c6}.rg nav p{display:none}.rg .rg-li{grid-template-columns:minmax(0,1fr) 50px}.rg .rg-li select{grid-column:1/-1}.rg .rg-tl{grid-template-columns:minmax(0,1fr)}}';
   D.head.appendChild(css);
 
   var ABAS = [['TRIAGEM'], ['escopo', 'Escopo da triagem'], ['destino', 'Destino provável e candidatos'], ['ACERVO'], ['acervo', 'Acervo fonte'], ['PAUTAS E EQUIPE'], ['calendario', 'Calendário forense'], ['etiquetas', 'Regras de etiquetas'], ['designacao', 'Regras de designação'], ['produtividade', 'Regras de produtividade'], ['sessao', 'Sessão nova'], ['equipe', 'Equipe']];
@@ -73,14 +74,15 @@
   function contagem() { if (ST && ST.ctx.contagem) { try { return ST.ctx.contagem(); } catch (e) {} } var m = M(), c = m && m.__painelCentralComponent, R = (c && c.rows) || [], out = {}; R.forEach(function (r) { var t = String(r.tarefa_atual || '').trim(); if (t) out[t] = (out[t] || 0) + 1; }); return out; }
 
   function abrir(ctx) {
-    fechar(); ST = { ctx: ctx || {}, aba: (ctx && ctx.aba) || 'escopo', esc: null, orig: '', escErro: '', mud: {}, msg: '', bad: false, ocupado: false, des: null, fonte: null, prod: null, prodOrig: '' };
-    var v = D.createElement('div'); v.className = 'rg-veu'; v.id = 'rg-veu'; v.onclick = fechar;
-    var g = D.createElement('section'); g.className = 'rg'; g.id = 'rg'; g.setAttribute('role', 'dialog'); g.setAttribute('aria-label', 'Regras gerais');
-    D.body.append(v, g);
+    fechar(); ctx = ctx || {}; var alvo = ctx.embutirEm ? (typeof ctx.embutirEm === 'string' ? D.querySelector(ctx.embutirEm) : ctx.embutirEm) : null;
+    ST = { ctx: ctx, aba: ctx.aba || 'escopo', esc: null, orig: '', escErro: '', mud: {}, msg: '', bad: false, ocupado: false, des: null, fonte: null, prod: null, prodOrig: '', embutida: !!alvo };
+    var v = null, g = D.createElement('section'); g.className = 'rg' + (alvo ? ' embutida' : ''); g.id = 'rg'; g.setAttribute('role', alvo ? 'region' : 'dialog'); g.setAttribute('aria-label', 'Regras gerais');
+    if (alvo) { alvo.innerHTML = ''; alvo.appendChild(g); }
+    else { v = D.createElement('div'); v.className = 'rg-veu'; v.id = 'rg-veu'; v.onclick = fechar; D.body.append(v, g); }
     g.addEventListener('click', clique); g.addEventListener('change', muda);
     g.addEventListener('submit', function (e) { var fm = e.target.closest('#rg-evf'); if (!fm) return; e.preventDefault(); incluirEvento(fm); });
     g.addEventListener('input', function (e) { if (e.target.closest('#rg-evf')) { var er = D.getElementById('rg-ever'); if (er) er.textContent = ''; } });
-    D.addEventListener('keydown', tecla);
+    if (!alvo) D.addEventListener('keydown', tecla);
     carregarEscopo(); pintar(); }
   function fechar() { if (ST && ST.ocupado) return; soltarMotor(); var g = D.getElementById('rg'), v = D.getElementById('rg-veu'); if (g) g.remove(); if (v) v.remove(); D.removeEventListener('keydown', tecla); ST = null; }
   function tecla(e) { if (e.key === 'Escape') fechar(); }
@@ -252,9 +254,9 @@
   function pintar() { var g = D.getElementById('rg'); if (!g || !ST) return; var a = ST.aba, tit = (ABAS.find(function (x) { return x[0] === a; }) || [])[1] || '';
     var sc = g.querySelector('.rg-c'), top = sc ? sc.scrollTop : 0;
     g.innerHTML = '<nav aria-label="Seções">' + ABAS.map(function (x) { return x.length === 1 ? '<p>' + x[0] + '</p>' : '<button type="button" data-rg-aba="' + x[0] + '" aria-current="' + (x[0] === a) + '">' + esc(x[1]) + (x[0] === 'escopo' && sujo() ? ' •' : '') + '</button>'; }).join('') + '</nav>' +
-      '<main><div class="rg-h"><h2>' + esc(tit) + '</h2><span class="rg-n" style="font:500 10px JetBrains Mono,monospace;letter-spacing:.14em;text-transform:uppercase;color:#805b18">Regras gerais</span><button type="button" class="rg-x" data-rg="fechar" aria-label="Fechar">×</button></div>' +
+      '<main><div class="rg-h"><h2>' + esc(tit) + '</h2><span class="rg-n" style="font:500 10px JetBrains Mono,monospace;letter-spacing:.14em;text-transform:uppercase;color:#805b18">Regras gerais</span>' + (ST.embutida ? '' : '<button type="button" class="rg-x" data-rg="fechar" aria-label="Fechar">×</button>') + '</div>' +
       (ST.emb ? '<div class="rg-c emb">' + vEmb() + '</div>' : '<div class="rg-c">' + (ST.msg ? '<div class="rg-msg' + (ST.bad ? ' bad' : '') + '" role="status">' + esc(ST.msg) + '</div>' : '') + VIS[a]() + '</div>') +
-      '<div class="rg-f">' + (a === 'escopo' ? '<span class="rg-n" style="margin-right:auto">' + (sujo() ? 'Alterações ainda não gravadas.' : 'Escopo igual ao gravado.') + '</span><button type="button" class="rg-btn" data-rg="desfazer"' + (sujo() && !ST.ocupado ? '' : ' disabled') + '>Desfazer</button><button type="button" class="rg-btn pri" data-rg="gravar"' + (sujo() && !ST.ocupado ? '' : ' disabled') + '>' + (ST.ocupado ? 'Gravando…' : 'Gravar escopo') + '</button>' : a === 'produtividade' && prodOk() ? '<span class="rg-n" style="margin-right:auto">' + (sujoProd() ? 'Alterações ainda não gravadas.' : 'Igual ao gravado.') + '</span><button type="button" class="rg-btn" data-rg="p-padrao"' + (ST.ocupado ? ' disabled' : '') + '>Restaurar padrões</button><button type="button" class="rg-btn" data-rg="p-desfazer"' + (sujoProd() && !ST.ocupado ? '' : ' disabled') + '>Desfazer</button><button type="button" class="rg-btn pri" data-rg="p-gravar"' + (sujoProd() && !ST.ocupado ? '' : ' disabled') + '>' + (ST.ocupado ? 'Gravando…' : 'Gravar') + '</button>' : '<button type="button" class="rg-btn" data-rg="fechar">Fechar</button>') + '</div></main>';
+      '<div class="rg-f">' + (a === 'escopo' ? '<span class="rg-n" style="margin-right:auto">' + (sujo() ? 'Alterações ainda não gravadas.' : 'Escopo igual ao gravado.') + '</span><button type="button" class="rg-btn" data-rg="desfazer"' + (sujo() && !ST.ocupado ? '' : ' disabled') + '>Desfazer</button><button type="button" class="rg-btn pri" data-rg="gravar"' + (sujo() && !ST.ocupado ? '' : ' disabled') + '>' + (ST.ocupado ? 'Gravando…' : 'Gravar escopo') + '</button>' : a === 'produtividade' && prodOk() ? '<span class="rg-n" style="margin-right:auto">' + (sujoProd() ? 'Alterações ainda não gravadas.' : 'Igual ao gravado.') + '</span><button type="button" class="rg-btn" data-rg="p-padrao"' + (ST.ocupado ? ' disabled' : '') + '>Restaurar padrões</button><button type="button" class="rg-btn" data-rg="p-desfazer"' + (sujoProd() && !ST.ocupado ? '' : ' disabled') + '>Desfazer</button><button type="button" class="rg-btn pri" data-rg="p-gravar"' + (sujoProd() && !ST.ocupado ? '' : ' disabled') + '>' + (ST.ocupado ? 'Gravando…' : 'Gravar') + '</button>' : ST.embutida ? '' : '<button type="button" class="rg-btn" data-rg="fechar">Fechar</button>') + '</div></main>';
     var nc = g.querySelector('.rg-c'); if (nc) nc.scrollTop = top; if (ST.emb) posMotor(); }
   function clique(e) { var b = e.target.closest('[data-rg-aba],[data-rg]'); if (!b || b.disabled) return;
     if (b.dataset.rgAba) { soltarMotor(); ST.aba = b.dataset.rgAba; ST.msg = ''; pintar(); return; }
@@ -302,5 +304,5 @@
     } catch (e) { ST.msg = 'Não gravou: ' + (e.message || e); ST.bad = true; }
     ST.ocupado = false; pintar(); }
 
-  W.CMTRegrasGerais = { abrir: abrir, fechar: fechar, aberto: aberto };
+  W.CMTRegrasGerais = { abrir: abrir, embutir: function (alvo, ctx) { ctx = Object.assign({}, ctx || {}, { embutirEm: alvo }); abrir(ctx); }, fechar: fechar, aberto: aberto };
 })(window, document);
