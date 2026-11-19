@@ -8,7 +8,7 @@
   "2026-11-30"
  ],
  "filtro": {},
- "atualizado_em": "2026-11-18",
+ "atualizado_em": "2026-11-19",
  "criado_por": "BD",
  "colunas": [],
  "grupos": [],
@@ -1035,8 +1035,73 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Ementa",
+     "Item 1: a frase solta \"Agravo interno contra decisão que indeferiu o efeito suspensivo.\" não tinha verbo; integrada ao caso em exame (\"Interposto, também, agravo interno…\")",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Questões em discussão: incluída a (iv), sobre a multa diária, impugnada no item (5) das razões e não enfrentada",
+     "Incluído"
+    ],
+    [
+     "Ementa",
+     "Novo item 10 sobre a multa diária (artigo 537, § 1º, do CPC); dispositivo renumerado para 11",
+     "Incluído"
+    ],
+    [
+     "Ementa",
+     "Dispositivos citados: retirados CPC 85, § 11 (não há honorários recursais em agravo de instrumento), 311, IV (fundamento equivocado da decisão de origem), 489, 535, 926, 942 e 1.021, CDC 51, IV, Lei 9.656/1998, Lei 14.454/2022 e \"CC/2002\" sem artigo (vinham das ementas transcritas e o voto afasta o CDC pela Súmula 608/STJ); ficam CPC 297, 497, 536 e 537, § 1º",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Jurisprudência citada: incluída a Súmula 608/STJ, que o voto aplica; referências no formato do gabinete (sem turma e sem \"de\" antes da data)",
+     "Corrigido"
+    ],
+    [
+     "Relatório",
+     "ID 360681840 é ato ordinatório que abre vista do agravo interno, não certidão de ausência de resposta; frase reescrita para indicar o que o documento é",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluída a frase sobre a gratuidade (preparo dispensado e exame remetido à origem, ID 354353769), item (1) das razões",
+     "Incluído"
+    ],
+    [
+     "Voto",
+     "Incluído parágrafo sobre a multa diária, item (5) das razões, sem enfrentamento na versão original (artigo 489, § 1º, IV, do CPC)",
+     "Incluído"
+    ],
+    [
+     "Voto",
+     "\"Nesse contexto\" → \"Neste contexto\" (padrão do gabinete)",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído, espelhando o dispositivo (agravo interno prejudicado; agravo de instrumento desprovido)",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs deste agravo conferidos: 350743266, 354353769, 359090283, 360681840, 368124217, 368518477 e 407404295 (parecer: opina pelo não provimento). Decisão agravada ID 497253914 confere com a cópia juntada (ID 350743270)",
+     "Conferido"
+    ]
+   ],
+   "pendencias": [
+    "Validar o parágrafo incluído sobre a multa diária (artigo 537, § 1º, do CPC).",
+    "Conferir nos autos de origem (5013765-96.2025.4.03.6000) os IDs que não constam deste agravo: 484630251, 494766628, 494766629 a 494766645, 494766638, 537230702 e 605093039.",
+    "Há parecer de outro processo juntado neste agravo (ID 393537758, remessa necessária 0000033-86.2009.4.03.6100); o parecer deste agravo é o ID 407404295. Sem reflexo na minuta."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5001004-54.2026.4.03.0000.json.gz",
