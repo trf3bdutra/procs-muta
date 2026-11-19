@@ -225,6 +225,40 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 #toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--eg,#1b5878);color:#fff;padding:8px 16px;font-size:12.5px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
 #toast.on{opacity:1}
 @media print{.lx-nx,.lx-sub,.cmt-hd2 .cmt-ut,.cmt-ph,.pf .nav,.mbar .b{display:none!important}.pf{break-inside:avoid-page}}
+
+/* Collectio: Coleção de Pauta única + Coleções Avulsas */
+.col-areas{border:1px solid var(--el);background:var(--ep);padding:10px;min-width:0;margin-top:10px}
+.col-tipos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-bottom:12px}
+.col-tipos button{border:1px solid var(--el);padding:9px 4px;background:var(--ep2);font:700 11px var(--font);cursor:pointer;min-width:0}
+.col-tipos button[aria-pressed=true]{border-color:var(--eg);color:var(--eg);background:var(--ep)}
+.col-area{min-width:0;display:flex;flex-direction:column;gap:8px}
+.col-area[hidden]{display:none}
+.col-area .lx-sel{display:block;min-width:0}
+.col-area select{width:100%;max-width:100%;min-width:0}
+.col-area .b{white-space:normal}
+@media(max-width:900px){.lx-sub{display:block!important;max-height:none!important}.col-areas{margin:6px 0}.col-areas .col-area{max-width:100%}}
+
+
+.col-select-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;background:var(--ep2);border:1px solid var(--el);margin-top:10px}
+.col-select-bar>b{font-size:12px;color:var(--ei);margin-right:auto}
+.col-select-bar>p{flex:1 1 100%;font-size:11px;color:var(--em);margin:0}
+.col-select-bar #csel-cont{font:11px var(--emono);color:var(--em)}
+.col-select-bar .b{white-space:normal}.col-ch{width:62px;text-align:center}
+.col-ch input{width:17px;height:17px;accent-color:var(--eg);cursor:pointer}
+@media(max-width:900px){.col-select-bar{padding:10px}}
+
+#col-correspondencias{min-width:0}
+#col-correspondencias .lx-shd{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}
+.cor-lead{display:flex;gap:10px;flex-wrap:wrap;padding:12px;border-bottom:1px solid var(--el)}
+.cor-lead span,.cor-note{font-size:11px;color:var(--em);line-height:1.6}
+.cor-gr{padding:10px 0;border-bottom:1px solid var(--el)}
+.cor-gr>summary,.cor-var>summary{cursor:pointer;font-weight:700;color:var(--ei)}
+.cor-gr h4{font-size:13px;margin:14px 0 8px}
+.cor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;margin:10px 0}
+.cor-p{display:flex;flex-direction:column;gap:5px;border:1px solid var(--el);padding:10px;min-width:0;font-size:12px}
+.cor-p>b{color:var(--ei);overflow-wrap:anywhere}.cor-p span{color:var(--eg)}
+.cor-p small{font-size:11px;color:var(--em);line-height:1.5;overflow-wrap:anywhere}
+.cor-var{padding:10px;border:1px solid var(--el);margin:12px 0}
 </style>
 <style id="office-layout-refine">
 
@@ -339,7 +373,7 @@ const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"]/g,c=>
 const SECS=[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']];
 const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
-let RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
+let RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],sessoes:[],calendario:[],gestor:false}, SELEC=new Set();
 const params=new URLSearchParams(location.search);
 const FILT_SESSAO=String(params.get('sessao')||'').trim(), FILT_MINUTISTA=String(params.get('minutista')||'').trim();
 /* Amicus Curiae · Collectio: três visões no mesmo arquivo. O nome visual permanece Collectio; rotas canônicas: /amicus/collectio/ (Geral), /amicus/collectio/cmt/ (Desembargador) e /amicus/collectio/cg/ (controle geral). /amicus/collectio/* e as rotas antigas de lotes permanecem apenas como compatibilidade. */
@@ -360,20 +394,46 @@ function falha(e){
 }
 const ROTULO={cg:'CG',eq:'Geral',rel:'CMT'};
 
-function opcoesIndices(lotes,atual){
- const option=l=>'<option value="'+esc(l.id)+'"'+(l.id===atual?' selected':'')+'>'+esc(l.titulo)+' · '+(l.total||0)+(l.virtual?' · automática':'')+'</option>';
- const ds=[...new Set(lotes.filter(l=>l.tipo==='pauta').map(l=>l.sessao||(l.sessoes||[])[0]).filter(Boolean))].sort().reverse();
- const rows=ds.map(s=>'<optgroup label="Sessão '+br(s)+'">'+lotes.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===s).sort((a,b)=>(b.virtual?1:0)-(a.virtual?1:0)||String(a.titulo).localeCompare(String(b.titulo),'pt-BR')).map(option).join('')+'</optgroup>');
- const av=lotes.filter(l=>l.tipo!=='pauta');if(av.length)rows.push('<optgroup label="Lotes avulsos">'+av.map(option).join('')+'</optgroup>');
- return rows.join('');
+/* As coleções são duas áreas: Avulsas e Pauta. Sessões são fontes, não coleções. */
+function seletorColecoes(lotes,id) {
+  const pauta=LOTE && LOTE.tipo==='pauta',ses=LOTE&&LOTE.sessoes&&LOTE.sessoes[0]||LISTA.sessoes[0]?.date||'';
+  const sess=LISTA.sessoes||[],avulsos=lotes.filter(l=>l.tipo!=='pauta');
+  const daSessao=lotes.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===ses);
+  const opt=l=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+esc(l.titulo)+' · '+l.total+'</option>';
+  return '<div class="col-areas" aria-label="Coleções do Collectio"><div class="col-tipos">'+
+    '<button type="button" data-colecao="pauta" aria-pressed="'+pauta+'">Coleção de Pauta</button>'+
+    '<button type="button" data-colecao="avulsa" aria-pressed="'+(!pauta)+'">Coleções Avulsas</button></div>'+
+    '<div class="col-area" id="col-pauta"'+(pauta?'':' hidden')+'>'+
+    '<label class="lx-sel">Sessão<select id="sel-sessao">'+sess.map(x=>'<option value="'+esc(x.date)+'"'+(x.date===ses?' selected':'')+'>'+esc(x.nome||br(x.date))+' · '+x.processos+' na pauta</option>').join('')+'</select></label>'+
+    '<button class="b col-matriz" type="button" id="b-matriz">Matriz geral da sessão</button>'+
+    '<label class="lx-sel">Lotes criados nesta pauta<select id="sel-pauta"><option value="">Escolha um lote da sessão</option>'+daSessao.map(opt).join('')+'</select></label></div>'+
+    '<div class="col-area" id="col-avulsas"'+(pauta?' hidden':'')+'>'+
+    '<label class="lx-sel">Coleção avulsa<select id="sel-avulsas">'+
+    '<option value="">Selecione uma coleção</option>'+avulsos.map(opt).join('')+'</select></label></div></div>';
 }
+function ligarColecoes(lotes) {
+  const go=id=>{if(id)location.search='?id='+encodeURIComponent(id)};
+  document.querySelectorAll('[data-colecao]').forEach(b=>b.onclick=()=>{
+    const pauta=b.dataset.colecao==='pauta';
+    document.querySelector('#col-pauta').hidden=!pauta;
+    document.querySelector('#col-avulsas').hidden=pauta;
+    document.querySelectorAll('[data-colecao]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    if(pauta){const s=document.querySelector('#sel-sessao').value;go('pauta-'+s)}
+    else{const a=lotes.find(l=>l.tipo!=='pauta');if(a)go(a.id)}
+  });
+  const ses=$('#sel-sessao');if(ses)ses.onchange=()=>go('pauta-'+ses.value);
+  const matriz=$('#b-matriz');if(matriz)matriz.onclick=()=>go('pauta-'+ses.value);
+  const lp=$('#sel-pauta');if(lp)lp.onchange=()=>go(lp.value);
+  const la=$('#sel-avulsas');if(la)la.onchange=()=>go(la.value);
+}
+
 function cabecalho(lotes,id,usuario){
   return `<header class="lx-nx"><div class="lx-nx1"><i class="star" aria-hidden="true"></i>
    <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>Collectio<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
    <span class="cmt-sp"></span>
    <div class="cmt-ut">
    ${MODO==='cg'?`<button type="button" class="hb" id="b-ed" title="Editar título, descrição e filtro do lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Editar lote</span></button>`:''}
-   ${MODO==='cg'?`<button type="button" class="hb" id="b-novo" title="Criar um lote a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo lote</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
+   ${MODO==='cg'?`<button type="button" class="hb" id="b-novo" title="Criar uma coleção avulsa a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Nova coleção avulsa</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
    <a class="hb" href="/cmt/" title="Voltar ao Painel do relator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Painel do relator</span></a>
    ${MODO==='cg'?`<a class="hb" href="/amicus/collectio/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Collectio · Geral"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-3-5.2"/></svg><span>Collectio · Geral</span></a>`:''}
    ${MODO_REL?'':`<a class="hb" href="/amicus/collectio/cmt/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Collectio · CMT"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Collectio · CMT</span></a>`}
@@ -386,9 +446,11 @@ function cabecalho(lotes,id,usuario){
 }
 async function inicio(){
   try{
-    const L=await api('');LISTA={lotes:L.lotes||[],calendario:L.calendario||[],gestor:!!L.gestor};
-    const lotes=LISTA.lotes; if(!lotes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhum lote cadastrado.'+(MODO==='cg'?' Use “Novo lote” para criar o primeiro.':'')+'</p>');ligaCab();if(MODO==='cg')abrirNovo();return}
-    const id=lotes.some(l=>l.id===params.get('id'))?params.get('id'):lotes[0].id;
+    const L=await api('');LISTA={lotes:L.lotes||[],sessoes:L.sessoes||[],calendario:L.calendario||[],gestor:!!L.gestor};
+    const lotes=LISTA.lotes; if(!lotes.length&&!LISTA.sessoes.length){mostra(cabecalho([],'',L.usuario)+'<div id="gest"></div><p class="none">Nenhuma sessão ou coleção disponível.'+(MODO==='cg'?' Use “Novo lote avulso” para criar o primeiro.':'')+'</p>');ligaCab();if(MODO==='cg')abrirNovo();return}
+    const pedido=params.get('id')||'';
+    const id=(lotes.some(l=>l.id===pedido)||LISTA.sessoes.some(x=>'pauta-'+x.date===pedido))?pedido:
+      (LISTA.sessoes.length?'pauta-'+LISTA.sessoes[0].date:lotes[0].id);
     const R=await api('?id='+encodeURIComponent(id));
     /* só com a chave do relator (sem login), /lotes/ leva à página dele */
     if(MODO==='eq'&&R.relator){location.replace('/amicus/collectio/cmt/?id='+encodeURIComponent(id)+location.hash);return}
@@ -396,10 +458,10 @@ async function inicio(){
   }catch(e){falha(e)}
 }
 function ligaCab(){
-  const sl=$('#sel');if(sl)sl.onchange=()=>{location.search='?id='+encodeURIComponent(sl.value)};
+  ligarColecoes(LISTA.lotes);
   $('#atu').onclick=()=>location.reload();const bc=$('#b-cmp');if(bc)bc.onclick=()=>painel();
   $('#tema').onclick=()=>{const d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('cmt-eq-tema',n)}catch(e){}};
-  const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const be=$('#b-ed');if(be){be.disabled=!!(LOTE&&LOTE.virtual);be.onclick=abrirEditar;}const bs=$('#b-ses');if(bs){bs.disabled=!!(LOTE&&LOTE.virtual);bs.onclick=abrirSessoes;}
+  const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const be=$('#b-ed');if(be){be.disabled=!!(LOTE&&LOTE.virtual);be.onclick=abrirEditar;}const bs=$('#b-ses');if(bs){bs.disabled=!!(LOTE&&(LOTE.virtual||LOTE.tipo==='pauta'));bs.onclick=abrirSessoes;}
 }
 function gcor(it){return it.grupo&&COR[it.grupo]?COR[it.grupo]:OUT.cor}
 function painelVisLotes(lotes){
@@ -430,51 +492,73 @@ function montar(lotes,id,usuario){
   ITENS=LOTE.itens.filter(it=>(!FILT_SESSAO||it.sessao===FILT_SESSAO)&&(!FILT_MINUTISTA||String((it.equipe&&it.equipe.minuta)||'').toLowerCase()===FILT_MINUTISTA.toLowerCase())).sort((a,b)=>ord.indexOf(a.grupo)-ord.indexOf(b.grupo)||a.sessao.localeCompare(b.sessao)||a.item-b.item);
   ITENS.forEach(it=>it.uid=it.sessao+'-'+it.item);
   const sit=[...new Set(ITENS.map(i=>i.equipe&&i.equipe.situacao).filter(Boolean))];
+  const assuntos=[...new Set(ITENS.map(x=>x.assunto||x.tipo_caso).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const recursos=[...new Set(ITENS.map(x=>x.recurso).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const resultados=[...new Set(ITENS.map(x=>x.resultado).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   const grs=LOTE.grupos.filter(g=>ITENS.some(i=>i.grupo===g.id)).map(g=>({k:g.id,r:g.rotulo,c:g.cor,n:ITENS.filter(i=>i.grupo===g.id).length}));
   if(ITENS.some(i=>!i.grupo))grs.push({k:'',r:'Outros',c:OUT.cor,n:ITENS.filter(i=>!i.grupo).length});
-    const contexto=LOTE.tipo==='pauta'?'Sessão '+br(LOTE.sessoes[0])+(LOTE.virtual?' · matriz geral automática':' · índice temático'):'Lote avulso';
+    const contexto=LOTE.virtual?'Coleção de Pauta · sessão '+br(LOTE.sessoes[0])+' · matriz geral':LOTE.tipo==='pauta'?'Lote de pauta · sessão '+br(LOTE.sessoes[0]):'Coleção avulsa';
   const nota={cg:'Na gestão aparecem todos os processos. Nas colunas Equipe e Relator, você escolhe o que cada página mostra.',eq:'O Relator vê só os processos liberados para ele.',rel:'Clique num processo para abrir o perfil e a minuta.'}[MODO];
   mostra(cabecalho(lotes,id,usuario)+`<div class="lx">
-  <nav class="lx-sub" id="lx-sub" aria-label="Lote e seções da página">
+  <nav class="lx-sub" id="lx-sub" aria-label="Coleções, sessões e seções da página">
    <div class="lx-lt"><p class="lx-ey">Amicus Curiae · Collectio / ${ROTULO[MODO]}</p>
-    <label class="lx-sel" title="Trocar de lote"><span class="sr">Índices</span><select id="sel">${opcoesIndices(lotes,id)}</select></label>
+    ${seletorColecoes(lotes,id)}
     <p class="lx-lt-n" id="cnt">—</p><p class="lx-lt-d">${esc(contexto)}</p>
     <p class="lx-lt-s">${FILT_SESSAO?`Sessão de ${br(FILT_SESSAO)}`:`Sessões de ${LOTE.sessoes.map(br).join(' e ')}`}${FILT_MINUTISTA?` · Produção: ${esc(FILT_MINUTISTA)}`:''}</p>
     ${LOTE.descricao?`<p class="lx-lt-d">${esc(LOTE.descricao)}</p>`:''}</div>
    <p class="lx-nk">Nesta página</p>
-   <button type="button" data-ir="matriz"><i>01</i><span>Matriz do lote</span><small id="n-mx"></small></button>
+   <button type="button" data-ir="matriz"><i>01</i><span>${LOTE.virtual?'Matriz da sessão':'Matriz do lote'}</span><small id="n-mx"></small></button>
    ${grs.map(g=>`<button type="button" class="g" data-ir-g="${g.k}"><i style="background:${g.c}"></i><span>${esc(g.r)}</span><small data-ng="${g.k}">${g.n}</small></button>`).join('')}
    <button type="button" data-ir="sec-pf"><i>02</i><span>Processos</span><small id="n-pf"></small></button>
    <p class="lx-nota">${nota}</p></nav>
   <div id="gest"></div>
   ${painelVisLotes(lotes)}
-  <section class="lx-sec" id="matriz"><div class="lx-shd"><div><p class="lx-k">01 / Visão do lote</p><h2>Matriz do <em>lote.</em></h2><p class="lx-d">Processos por tipo de caso, com as variações de cada um. Clique numa linha para abrir o perfil do processo.</p></div></div>
+  <section class="lx-sec" id="matriz"><div class="lx-shd"><div><p class="lx-k">01 / Visão do lote</p><h2>${LOTE.virtual?'Matriz geral da <em>sessão.</em>':'Matriz do <em>lote.</em>'}</h2><p class="lx-d">Processos por tipo de caso, com as variações de cada um. Clique numa linha para abrir o perfil do processo.</p></div></div>
   <div class="lx-box">
    <div class="cmt-met" id="met">${grs.map(g=>`<div data-g="${g.k}" style="border-top-color:${g.c}" title="Mostrar ou ocultar"><span>${/^\d+$/.test(g.k)?g.k+' · ':''}${esc(g.r)}</span><b>${pad(g.n)}</b></div>`).join('')}</div>
    <div class="cmt-ph"><div class="cmt-ph-2">
      ${MODO_REL?'':`<span class="cmt-seg" role="group" aria-label="Visão" title="O que cada página mostra: o Relator vê os processos marcados para ele (no automático, os corrigidos ou liberados).">${(MODO==='cg'?[['tudo','Tudo'],['eq','Como a equipe vê'],['rel','Como o Relator vê']]:[['eq','Equipe'],['rel','Como o Relator vê']]).map(([k,r])=>`<button type="button" data-vz="${k}" aria-pressed="${k===VZ}">${r}</button>`).join('')}</span>`}
      <label class="cmt-bq"><input type="search" id="q" placeholder="item, processo, parte ou variação"></label>
      <select class="cmt-sel" id="ff"><option value="">Todas as variações</option>${LOTE.colunas.map(c=>`<option value="${c.id}">${esc(c.rotulo)}</option>`).join('')}</select>
-     <select class="cmt-sel so-equipe" id="fs"><option value="">Todas as situações</option>${sit.map(s=>`<option>${esc(s)}</option>`).join('')}</select>
+     <select class="cmt-sel" id="fa" aria-label="Filtrar por assunto"><option value="">Todos os assuntos</option>${assuntos.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join('')}</select>
+      <select class="cmt-sel" id="fr" aria-label="Filtrar por recurso"><option value="">Todos os recursos</option>${recursos.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join('')}</select>
+      <select class="cmt-sel" id="fres" aria-label="Filtrar por resultado"><option value="">Todos os resultados</option>${resultados.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join('')}</select>
+      <select class="cmt-sel so-equipe" id="fs"><option value="">Todas as situações</option>${sit.map(s=>`<option>${esc(s)}</option>`).join('')}</select>
    </div></div>
-   ${MODO==='cg'?`<div class="vzbar" id="vzbar"><span>Nos processos filtrados:</span><b>Equipe</b><button type="button" class="b" data-lt="e1">Mostrar</button><button type="button" class="b" data-lt="e0">Ocultar</button><b>Relator</b><button type="button" class="b" data-lt="ra">Automático</button><button type="button" class="b" data-lt="r1">Sempre</button><button type="button" class="b" data-lt="r0">Nunca</button><span class="k" id="vz-m">Automático: o Relator vê quando o processo estiver corrigido ou liberado.</span></div>`:''}
-   <div class="cmt-tw"><table class="cmt-tb" id="mx"><thead><tr><th>Sessão</th><th>Item</th><th>Processo</th><th>Exequente</th><th>Executado</th><th>Rec.</th>${MODO==='cg'?'<th>Equipe</th><th>Relator</th>':''}${LOTE.colunas.map(c=>`<th class="v"><div>${esc(c.rotulo)}</div></th>`).join('')}<th>Observação</th></tr></thead><tbody id="mxb"></tbody></table></div>
+   ${MODO==='cg'&&LOTE.virtual?`<div class="col-select-bar" id="col-select-bar">
+      <b>Selecionar processos da sessão</b>
+      <button class="b" id="csel-vis" type="button">Selecionar filtrados</button>
+      <button class="b" id="csel-limpar" type="button">Limpar seleção</button>
+      <span id="csel-cont" role="status">0 selecionados</span>
+      <button class="b pri" id="csel-criar" type="button">Criar lote desta seleção</button>
+      <p>Use assunto, recurso, resultado, busca ou grupo. A seleção é uma lista explícita de processos, não uma nova coleção.</p>
+    </div>`:''}
+    ${MODO==='cg'?`<div class="vzbar" id="vzbar"><span>Nos processos filtrados:</span><b>Equipe</b><button type="button" class="b" data-lt="e1">Mostrar</button><button type="button" class="b" data-lt="e0">Ocultar</button><b>Relator</b><button type="button" class="b" data-lt="ra">Automático</button><button type="button" class="b" data-lt="r1">Sempre</button><button type="button" class="b" data-lt="r0">Nunca</button><span class="k" id="vz-m">Automático: o Relator vê quando o processo estiver corrigido ou liberado.</span></div>`:''}
+   <div class="cmt-tw"><table class="cmt-tb" id="mx"><thead><tr>${MODO==='cg'&&LOTE.virtual?'<th title="Selecionar processos da matriz">Selecionar</th>':''}<th>Sessão</th><th>Item</th><th>Processo</th><th>Exequente</th><th>Executado</th><th>Rec.</th>${MODO==='cg'?'<th>Equipe</th><th>Relator</th>':''}${LOTE.colunas.map(c=>`<th class="v"><div>${esc(c.rotulo)}</div></th>`).join('')}<th>Observação</th></tr></thead><tbody id="mxb"></tbody></table></div>
    ${ITENS.length?'':`<p class="none">${RELATOR?'Nenhum processo deste lote está pronto ainda.':'Nenhum processo neste lote.'}</p>`}
   </div></section>
   <section class="lx-sec" id="sec-pf"><div class="lx-shd"><div><p class="lx-k">02 / Processo a processo</p><h2>Perfis e <em>minutas.</em></h2><p class="lx-d">Identificação, enquadramento, prontuário e minuta formatada, pronta para copiar.</p></div></div>
-  <div id="profiles"></div></section></div>`);
+  <div id="profiles"></div></section>
+  <section class="lx-sec" id="col-correspondencias">
+   <div class="lx-shd"><div><p class="lx-k">03 / Compendium</p><h2>Correspondências de <em>casos e modelos.</em></h2>
+    <p class="lx-d">Padrões, variações, matrizes estruturais e variáveis de matéria. A correspondência não comprova a adequação do modelo ao mérito do processo.</p></div>
+    <button class="b" type="button" id="cl-cor-carregar">Analisar correspondências</button></div>
+   <div id="cl-cor-body" role="status" aria-live="polite"></div>
+  </section></div>`);
   let h='',last='x';
   for(const it of ITENS){
     const c=gcor(it);
     if(it.grupo!==last){const n=ITENS.filter(i=>i.grupo===it.grupo).length,g=LOTE.grupos.find(x=>x.id===it.grupo);
-      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length+(MODO==='cg'?2:0)}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n ghn">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
+      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length+(MODO==='cg'?2:0)+(MODO==='cg'&&LOTE.virtual?1:0)}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n ghn">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
     const cells=LOTE.colunas.map(f=>`<td class="f">${it.variacoes.includes(f.id)?`<span class="dot" title="${esc(f.rotulo)}" style="background:${f.id==='ORI'?'var(--er)':c}"></span>`:''}</td>`).join('');
-    h+=`<tr class="r${MODO==='cg'&&!it.verEquipe?' oc-e':''}" data-u="${it.uid}"><td style="border-left:4px solid ${c}" class="cnj">${br(it.sessao).slice(0,5)}</td><td class="ii">${pad(it.item)}</td><td class="cnj">${it.processo.slice(0,15)}</td><td>${esc(it.exequente)}</td><td>${esc(it.executado)}</td><td>${/^ED/.test(it.recurso)?'ED':'Apel.'}</td>${MODO==='cg'?celulasVis(it):''}${cells}<td class="obs">${esc(it.observacao)}</td></tr>`;
+    h+=`<tr class="r${MODO==='cg'&&!it.verEquipe?' oc-e':''}" data-u="${it.uid}">${MODO==='cg'&&LOTE.virtual?`<td class="col-ch"><input type="checkbox" data-csel="${it.uid}" aria-label="Selecionar processo ${esc(it.processo)}"></td>`:''}<td style="border-left:4px solid ${c}" class="cnj">${br(it.sessao).slice(0,5)}</td><td class="ii">${pad(it.item)}</td><td class="cnj">${it.processo.slice(0,15)}</td><td>${esc(it.exequente)}</td><td>${esc(it.executado)}</td><td>${/^ED/.test(it.recurso)?'ED':'Apel.'}</td>${MODO==='cg'?celulasVis(it):''}${cells}<td class="obs">${esc(it.observacao)}</td></tr>`;
   }
   $('#mxb').innerHTML=h;
   $('#profiles').innerHTML=ITENS.map(perfil).join('');
   ligaCab();
+  const cc=$('#cl-cor-carregar');if(cc)cc.onclick=carregarCorrespondencias;
   ligaVisLotes();
+  if(MODO==='cg'&&LOTE.virtual)ligarSelecao();
   document.querySelectorAll('#mxb tr.r').forEach(r=>r.onclick=()=>vai(r.dataset.u));
   ligaSub();
   document.querySelectorAll('#met [data-g]').forEach(d=>d.onclick=()=>{const g=d.dataset.g;offG.has(g)?offG.delete(g):offG.add(g);d.classList.toggle('off');filtra()});
@@ -488,7 +572,8 @@ function montar(lotes,id,usuario){
     document.querySelectorAll('#mx input[data-ve],#mx select[data-vr]').forEach(el=>{el.disabled=true;el.title='Matriz geral automática: crie um índice temático para editar a visibilidade de processos.'});
     const barra=$('#vzbar');if(barra){barra.querySelectorAll('button').forEach(el=>el.disabled=true);barra.title='Matriz automática derivada da pauta (somente leitura)';}
   }
-  $('#q').oninput=filtra;$('#ff').onchange=filtra;$('#fs').onchange=filtra;filtra();
+  $('#q').oninput=filtra;$('#ff').onchange=filtra;$('#fs').onchange=filtra;
+  $('#fa').onchange=filtra;$('#fr').onchange=filtra;$('#fres').onchange=filtra;filtra();
   const m=location.hash.match(/^#p=(.+)$/); if(m)setTimeout(()=>vai(decodeURIComponent(m[1])),150);
 }
 function ligaSub(){
@@ -715,18 +800,102 @@ async function copia(v){
   toast(ok?(k==='*'?'Minuta copiada':ks[0][1].charAt(0)+ks[0][1].slice(1).toLowerCase()+' copiado'):'Não foi possível copiar: selecione o texto e use Ctrl+C');
 }
 function vai(uid){if(CX.aberto){const it=ITENS.find(i=>i.uid===uid);if(it&&it.minuta){$('#cx-it').value=uid;compara()}}const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
+/* Seleção explícita de processos na matriz da pauta, sem criar coleções por sessão. */
+/* Análise apenas dos campos disponíveis e dos modelos publicados no Compendium. */
+async function carregarCorrespondencias(){
+ const alvo=$('#cl-cor-body'),bt=$('#cl-cor-carregar');if(!alvo||!bt)return;
+ bt.disabled=true;alvo.textContent='Consultando as matrizes do Compendium…';
+ try{
+  const r=await api('?id='+encodeURIComponent(LOTE.id)+'&correspondencias=1');
+  const e=x=>esc(x==null?'':x);
+  const fields={assunto:'Assunto',recurso:'Recurso',resultado:'Resultado',modelo:'Modelo de referência'};
+  const p=x=>'<div class="cor-p"><b>'+e(fields[x.campo]||x.campo)+'</b><span>'+
+    (x.comum?'Comum em todos':'Difere ou está incompleto')+' · '+x.preenchidos+'/'+x.total+'</span>'+
+    '<small>'+(x.valores.length?x.valores.map(e).join(' · '):'Não registrado')+'</small></div>';
+  const one=g=>{
+   const forma=g.estruturais.map(x=>'<div class="cor-p"><b>'+e(x.classe)+' · '+e(x.resultado)+'</b>'+
+    '<span>'+x.processos+' processo(s) · '+x.referencias.length+' matriz(es) formais</span>'+
+    '<small>'+(x.referencias.length?x.referencias.map(m=>e(m.nome)+(m.pronunciamento?' ['+e(m.pronunciamento)+']':'')).join(' · '):'Sem correspondência estrutural pelos dados disponíveis')+'</small></div>').join('');
+   const materia=g.tematica?'<details class="cor-var"><summary>Matriz temática de 28,86%: '+e(g.tematica.nome)+'</summary>'+
+    '<p>Módulos previstos: '+g.tematica.modulos.map(x=>e(x.id)+(x.opcional?' (opcional)':'')).join(' · ')+'</p>'+
+    '<p>Modelos de ementa: '+g.tematica.modelosEmenta.map(e).join(' · ')+'</p>'+
+    '<div class="cor-grid">'+g.tematica.variaveis.map(x=>'<div class="cor-p"><b>'+e(x.rotulo)+'</b>'+
+    '<span>'+e(x.situacao)+' · '+x.identificados+'/'+x.total+'</span>'+
+    '<small>'+e(x.campo||'Sem campo direto')+' · '+e(x.ressalva)+'</small></div>').join('')+'</div></details>':'';
+   return '<details class="cor-gr"><summary>'+e(g.nome)+' <small>· '+g.processos+' processos</small></summary>'+
+     '<div class="cor-grid">'+g.padroes.map(p).join('')+'</div>'+
+     (g.variacoes.length?'<p class="cor-note">Variações: '+g.variacoes.map(x=>e(x.id)+' ('+x.n+')').join(' · ')+'</p>':'')+
+     '<h4>Matrizes estruturais: classe e resultado</h4>'+(forma||'<p>Classe ou resultado insuficientes para apontar uma matriz formal.</p>')+
+     materia+'<p class="cor-note">'+e(g.criterio)+'</p></details>';
+  };
+  alvo.innerHTML='<div class="cor-lead"><b>'+r.total+' processos em '+r.grupos.length+' grupos</b>'+
+    '<span>'+(r.materiaCompendium?'Matriz de matéria: '+e(r.materiaCompendium):'Matrizes formais por recurso e resultado')+'</span></div>'+
+    r.grupos.map(one).join('')+'<p class="cor-note">'+(r.limites||[]).map(e).join(' ')+'</p>';
+  bt.textContent='Atualizar análise';
+ }catch(err){alvo.textContent='Não foi possível consultar o Compendium: '+err.message}
+ finally{bt.disabled=false}
+}
+
+function atualizarSelecao(){
+ const e=$('#csel-cont');if(e)e.textContent=SELEC.size+' selecionado'+(SELEC.size===1?'':'s');
+ document.querySelectorAll('[data-csel]').forEach(x=>{x.checked=SELEC.has(x.dataset.csel)});
+}
+function ligarSelecao(){
+ SELEC.clear();
+ document.querySelectorAll('[data-csel]').forEach(x=>{
+  x.onclick=e=>e.stopPropagation();
+  x.onchange=()=>{x.checked?SELEC.add(x.dataset.csel):SELEC.delete(x.dataset.csel);atualizarSelecao()};
+ });
+ $('#csel-vis').onclick=()=>{VIS.forEach(uid=>SELEC.add(uid));atualizarSelecao()};
+ $('#csel-limpar').onclick=()=>{SELEC.clear();atualizarSelecao()};
+ $('#csel-criar').onclick=criarDaMatriz;atualizarSelecao();
+}
+function criarDaMatriz(){
+ if(MODO!=='cg'||!LOTE.virtual||!SELEC.size){toast('Selecione os processos desejados na matriz');return}
+ const escolhidos=ITENS.filter(x=>SELEC.has(x.uid));
+ const assunto=$('#fa').value,recurso=$('#fr').value,resultado=$('#fres').value;
+ $('#gest').innerHTML='<section class="cmt-q" id="col-novo-lote"><h2><i class="nn">00</i>'+
+   '<span>Criar <em>lote de pauta.</em></span><span class="cmt-sp"></span>'+
+   '<button type="button" class="b" id="col-x">Fechar</button></h2>'+
+   '<p class="none">Sessão '+br(LOTE.sessoes[0])+' · '+escolhidos.length+' processos escolhidos. Os critérios e a lista exata ficarão registrados neste lote.</p>'+
+   '<div class="form"><label>Título do lote<input id="col-t" required placeholder="Ex.: 28,86% · limitação territorial"></label>'+
+   '<label>Identificador<input id="col-id" placeholder="Ex.: 2886-territorial"></label>'+
+   '<label class="w">Descrição e modelo em comum<textarea id="col-d" rows="3" placeholder="Questão jurídica e modelo de referência (a confirmar)"></textarea></label></div>'+
+   '<div class="acts"><button class="b pri" type="button" id="col-ok">Criar lote com '+escolhidos.length+' processos</button>'+
+   '<span class="k" id="col-msg" role="status"></span></div></section>';
+ $('#col-x').onclick=fechaGest;
+ $('#col-t').oninput=()=>{if(!$('#col-id').dataset.mexido)$('#col-id').value=slug($('#col-t').value)};
+ $('#col-id').oninput=()=>{$('#col-id').dataset.mexido='1'};
+ $('#col-ok').onclick=async()=>{
+  const titulo=$('#col-t').value.trim(),id=slug($('#col-id').value||titulo);
+  if(!titulo||!id){$('#col-msg').textContent='Informe um título válido';return}
+  $('#col-ok').disabled=true;$('#col-msg').textContent='Salvando a seleção…';
+  try{
+   const r=await post({acao:'criar-selecao',id,titulo,descricao:$('#col-d').value,
+    sessao:LOTE.sessoes[0],processos:escolhidos.map(x=>x.processo),
+    criterios:{assunto,classe:recurso,resultado,busca:$('#q').value,gruposOcultos:[...offG].join(',')}});
+   toast('Lote de pauta criado: '+r.total+' processos');location.search='?id='+encodeURIComponent(r.id);
+  }catch(e){$('#col-msg').textContent=e.message;$('#col-ok').disabled=false}
+ };
+ $('#col-novo-lote').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
 function filtra(){
-  const q=$('#q').value.toLowerCase().trim(), f=$('#ff').value, st=$('#fs').value, vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
+  const q=$('#q').value.toLowerCase().trim(), f=$('#ff').value, st=$('#fs').value,
+   assunto=$('#fa').value,recurso=$('#fr').value,resultado=$('#fres').value,
+   vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
   for(const it of ITENS){const e=it.equipe||{};
     const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
-    if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st))vis.add(it.uid)}
+    if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st)&&
+       (!assunto||(it.assunto||it.tipo_caso)===assunto)&&(!recurso||it.recurso===recurso)&&
+       (!resultado||it.resultado===resultado))vis.add(it.uid)}
   document.querySelectorAll('#mxb tr.r').forEach(r=>{r.classList.toggle('hidden',!vis.has(r.dataset.u));r.classList.toggle('hit',CX.hits.has(r.dataset.u))});
   document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)));const x=r.querySelector('.ghn');if(x)x.textContent=n+' processo'+(n>1?'s':'')});
   document.querySelectorAll('.pf').forEach(p=>p.classList.toggle('hidden',!vis.has(p.dataset.u)));
   document.querySelectorAll('#met [data-g]').forEach(d=>{const g=d.dataset.g||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;d.querySelector('b').textContent=pad(n);d.classList.toggle('hidden',!n)});
   const oc=VZ!==MODO&&VZ!=='tudo'?ITENS.filter(i=>!okv(i)).length:0, tot=ITENS.length-oc;
   $('#cnt').textContent=`${pad(vis.size)} de ${pad(tot)} processos`+(oc?` · ${oc} fora da visão ${VZ==='rel'?'do Relator':'da equipe'}`:'');
-  VIS=vis;
+  VIS=vis;if(LOTE.virtual&&MODO==='cg')atualizarSelecao();
   document.querySelectorAll('[data-ng]').forEach(x=>{const g=x.dataset.ng||null,n=ITENS.filter(i=>(i.grupo||null)===g&&vis.has(i.uid)).length;x.textContent=n;x.closest('button').classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&okv(i)))});
   const nm=$('#n-mx'),np=$('#n-pf');if(nm)nm.textContent=vis.size;if(np)np.textContent=vis.size;
 }
@@ -784,9 +953,9 @@ function listaSessoes(marcadas,nome){return `<div class="ses">${LISTA.calendario
 function marcadas(nome){return [...document.querySelectorAll(`input[name="${nome}"]:checked`)].map(x=>x.value)}
 function fechaGest(){$('#gest').innerHTML=''}
 function abrirNovo(){
-  $('#gest').innerHTML=`<section class="cmt-q" id="g-novo"><h2><i class="nn">00</i><span>Novo <em>lote.</em></span><span class="cmt-sp"></span><button type="button" class="b" id="gn-x">Fechar</button></h2>
+  $('#gest').innerHTML=`<section class="cmt-q" id="g-novo"><h2><i class="nn">00</i><span>Nova <em>coleção avulsa.</em></span><span class="cmt-sp"></span><button type="button" class="b" id="gn-x">Fechar</button></h2>
    <div class="form">
-    <label class="w">Tipo de indexação<select id="gn-tipo"><option value="avulso">Lote avulso · seleção temática</option><option value="pauta">Índice de pauta · uma sessão</option></select></label>
+    <p class="none">Coleção avulsa: seleção temática ou operacional independente de uma única pauta. Para criar um lote de pauta, abra a matriz da sessão e selecione os processos.</p>
     <label>Título<input id="gn-t" placeholder="ex.: Lote PIS/COFINS"></label>
     <label>Identificador<input id="gn-id" placeholder="ex.: pis-cofins"></label>
     <label class="w">Descrição<input id="gn-d" placeholder="o que reúne este lote"></label>
@@ -801,7 +970,7 @@ function abrirNovo(){
   $('#gn-t').oninput=()=>{if(!$('#gn-id').dataset.mexido)$('#gn-id').value=slug($('#gn-t').value)};
   $('#gn-id').oninput=()=>{$('#gn-id').dataset.mexido='1'};
   const filtro=()=>({assunto:$('#gn-a').value.trim(),classe:$('#gn-c').value.trim(),texto:$('#gn-x2').value.trim()});
-  $('#gn-p').onclick=async()=>{const ss=marcadas('gn-s');if(!ss.length){toast('Escolha ao menos uma sessão');return}if($('#gn-tipo')&&$('#gn-tipo').value==='pauta'&&ss.length!==1){toast('Índice de pauta exige uma sessão');return}
+  $('#gn-p').onclick=async()=>{const ss=marcadas('gn-s');if(!ss.length){toast('Escolha ao menos uma sessão');return}
     const f=filtro(),q='?previa=1&sessoes='+ss.join(',')+'&assunto='+encodeURIComponent(f.assunto)+'&classe='+encodeURIComponent(f.classe)+'&texto='+encodeURIComponent(f.texto);
     $('#gn-m').textContent='Lendo as sessões…';
     try{const r=await api(q);$('#gn-m').textContent=`${r.total} processo${r.total===1?'':'s'} entram (${Object.entries(r.porSessao).map(([d,n])=>br(d)+': '+n).join(' · ')})`;
@@ -810,7 +979,7 @@ function abrirNovo(){
   $('#gn-ok').onclick=async()=>{const ss=marcadas('gn-s'),id=slug($('#gn-id').value||$('#gn-t').value);
     if(!$('#gn-t').value.trim()){toast('Dê um título ao lote');return} if(!ss.length){toast('Escolha ao menos uma sessão');return}
     $('#gn-ok').disabled=true;$('#gn-m').textContent='Criando o lote…';
-    try{const r=await post({acao:'criar',tipo:$('#gn-tipo').value,id,titulo:$('#gn-t').value.trim(),descricao:$('#gn-d').value.trim(),sessoes:ss,filtro:filtro()});
+    try{const r=await post({acao:'criar',tipo:'avulso',id,titulo:$('#gn-t').value.trim(),descricao:$('#gn-d').value.trim(),sessoes:ss,filtro:filtro()});
       toast('Lote criado com '+r.total+' processos');location.search='?id='+encodeURIComponent(r.id)}
     catch(e){$('#gn-m').textContent=e.message;$('#gn-ok').disabled=false}};
   $('#g-novo').scrollIntoView({behavior:'smooth'});

@@ -119,6 +119,22 @@ async function indicePauta(s) {
   return lot;
 }
 
+/* Na Coleção de Pauta, uma sessão é fonte de processos, nunca uma coleção individual. */
+function agruparPorAssunto(lote) {
+  const grupos = new Map();
+  for (const item of lote.itens || []) {
+    const nome = rotuloAssunto(item), chave = sem(nome);
+    if (!grupos.has(chave)) grupos.set(chave, { nome, itens: [] });
+    grupos.get(chave).itens.push(item);
+  }
+  lote.grupos = [];
+  [...grupos.values()].sort((a,b)=>b.itens.length-a.itens.length||a.nome.localeCompare(b.nome,'pt-BR'))
+    .forEach((g,k)=>{
+      const id = 'assunto-' + (k+1);
+      lote.grupos.push({ id, rotulo:g.nome, cor:CORES[k%CORES.length], resultado:'', modelo:'' });
+      g.itens.forEach(item=>{ item.grupo=id; item.tipo_caso=g.nome; });
+    });
+}
 async function calendario() {
   const { dados } = await L.lerJson('acervo/sessoes/calendario.json').catch(nada);
   return ((dados && dados.sessoes) || []).map(s => ({ date: s.date, nome: s.nome, processos: s.processos || 0, publicada: !!s.publicada }))
@@ -152,26 +168,22 @@ module.exports = async (req, res) => {
     if (!id) {
       const lista = await L.gh('/contents/acervo/lotes?ref=main').catch(e => (e.status === 404 ? [] : Promise.reject(e)));
       const lotes = [];
-      const existentes=new Set();
       for (const f of (Array.isArray(lista) ? lista : []).filter(f => /^[a-z0-9-]+\.json$/i.test(f.name))) {
         const { dados } = await L.lerJson('acervo/lotes/' + f.name).catch(nada);
         if (!dados || !loteVe(dados)) continue;
-        existentes.add(dados.id);
         if (modo !== 'cg') await anotar(dados);
         lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, tipo:tipoLote(dados), sessao:tipoLote(dados)==='pauta'?dados.sessoes[0]:null,
           sessoes: dados.sessoes, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
       }
-      const sessoes=(await calendario()).filter(s=>s.publicada);
-      for(const sessao of sessoes){
-        const id=idPauta(sessao.date);
-        if(existentes.has(id))continue;
-        /* Matriz geral automática é apenas uma leitura da pauta; índices editáveis seguem em acervo/lotes. */
-        const total=(await itensSessao(sessao.date)).length;
-        lotes.push({id,titulo:'Matriz geral · '+sessao.date.slice(8,10)+'/'+sessao.date.slice(5,7),tipo:'pauta',virtual:true,
-          sessao:sessao.date,sessoes:[sessao.date],total});
-      }
-      lotes.sort((a,b)=>(a.tipo==='pauta'?0:1)-(b.tipo==='pauta'?0:1)||String(b.sessao||'').localeCompare(String(a.sessao||''))||String(a.titulo).localeCompare(String(b.titulo),'pt-BR'));
-      return res.status(200).json({ usuario: u, gestor, relator, modo, lotes, calendario: modo === 'cg' ? await calendario() : [] });
+      const agenda = await calendario();
+      const sessoes = agenda.filter(s => gestor || s.publicada);
+      /* Lotes são os registros salvos; sessões não são inseridas na lista de coleções. */
+      lotes.sort((a,b)=>(a.tipo==='pauta'?0:1)-(b.tipo==='pauta'?0:1)||
+        String(b.sessao||'').localeCompare(String(a.sessao||''))||
+        String(a.titulo).localeCompare(String(b.titulo),'pt-BR'));
+      return res.status(200).json({ usuario:u, gestor, relator, modo,
+        lotes, sessoes, calendario:modo==='cg'?agenda:[],
+        colecoes:{avulsas:lotes.filter(l=>l.tipo==='avulso'),pauta:{sessoes,lotes:lotes.filter(l=>l.tipo==='pauta')}} });
     }
     if (!ID.test(id)) return res.status(400).json({ erro: 'lote inválido' });
     const mx = String(q.minuta || '');
@@ -188,15 +200,22 @@ module.exports = async (req, res) => {
       if (!dados) return res.status(404).json({ erro: 'Minuta não disponível para este processo.' });
       return res.status(200).json(dados);
     }
-    const sessaoVirtual=/^pauta-(\\d{4}-\\d{2}-\\d{2})$/.exec(id);
+    const sessaoVirtual=/^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);
     const { dados: persistido } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
-    const lote = persistido || (sessaoVirtual && (await calendario()).some(z=>z.date===sessaoVirtual[1]&&z.publicada) ? await indicePauta(sessaoVirtual[1]) : null);
+    const lote = persistido || (sessaoVirtual && (await calendario()).some(z=>z.date===sessaoVirtual[1]&&(gestor||z.publicada)) ? await indicePauta(sessaoVirtual[1]) : null);
     if (!lote || !loteVe(lote)) return res.status(404).json({ erro: 'Lote não encontrado.' });
     /* cartão do prontuário (Ex Officio) e situação, lidos das sessões do lote no momento da consulta */
     const cartoes = await anotar(lote);
     (lote.itens || []).forEach(it => { if (cartoes[it.processo]) it.prontuario = cartoes[it.processo]; });
     lote.itens = (lote.itens || []).filter(ve);
     if (modo !== 'cg') delete lote.retirados;
+    if (String(q.correspondencias||'') === '1') {
+      const avaliar=require('./_collectio_correspondencias').avaliar;
+      const {dados:estrut}=await L.lerJson('modelos/matrizes-estruturais.json');
+      const materia28=/28[.,]86/.test(lote.titulo||'')||lote.itens.some(x=>/28[.,]86/.test(x.assunto||''));
+      const modular=materia28?(await L.lerJson('modelos/matrizes-2886.json')).dados:null;
+      return res.status(200).json(avaliar(lote,estrut||{registros:[]},modular));
+    }
     res.status(200).json({ usuario: u, gestor, relator, modo, lote });
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
@@ -206,9 +225,37 @@ async function gravar(req, res, u, gestor) {
   if (!ID.test(id)) return res.status(400).json({ erro: 'Identificador inválido: use letras, números e hífen (até 40).' });
   const ss = [...new Set((Array.isArray(b.sessoes) ? b.sessoes : []).filter(s => DATA.test(s)))].sort();
   const rel = 'acervo/lotes/' + id + '.json';
+  if (b.acao === 'criar-selecao') {
+    const data=String(b.sessao||'');
+    if(!DATA.test(data)) return res.status(400).json({erro:'Selecione uma sessão válida.'});
+    if(!(await calendario()).some(x=>x.date===data))return res.status(400).json({erro:'Sessão não cadastrada.'});
+    if(/^pauta-\d{4}-\d{2}-\d{2}$/.test(id))return res.status(400).json({erro:'Identificador reservado à matriz geral.'});
+    const pedidos=Array.isArray(b.processos)?b.processos.map(String):[];
+    if(!pedidos.length||pedidos.length>500||new Set(pedidos).size!==pedidos.length)
+      return res.status(400).json({erro:'Selecione de 1 a 500 processos distintos.'});
+    const origem=await itensSessao(data),porCnj=new Map(origem.map(x=>[String(x.cnj),x]));
+    if(pedidos.some(c=>!porCnj.has(c)))return res.status(400).json({erro:'A seleção contém processo que não pertence à sessão.'});
+    const titulo=String(b.titulo||'').trim().slice(0,80);
+    if(!titulo)return res.status(400).json({erro:'Informe o título do lote.'});
+    const existente=await L.lerJson(rel).catch(nada);
+    if(existente.dados)return res.status(409).json({erro:'Já existe um lote com esse identificador.'});
+    const itens=pedidos.map(c=>novoItem(data,porCnj.get(c)));
+    const criterios={};for(const k of ['assunto','classe','resultado','busca','gruposOcultos'])
+      if(b.criterios&&b.criterios[k])criterios[k]=String(b.criterios[k]).slice(0,160);
+    const lote={schema:'gabcmt.lote',versao:1,tipo:'pauta',origem:'selecao',
+      id,titulo,descricao:String(b.descricao||'').trim().slice(0,300),
+      sessoes:[data],criterios,filtro:{},criado_por:u,
+      atualizado_em:new Date().toISOString().slice(0,10),
+      colunas:[],grupos:[],grupo_outros:{rotulo:'Processos não classificados',cor:'#5d6b72'},
+      minutas:'acervo/minutas/'+id+'/<processo>.json',itens};
+    agruparPorAssunto(lote);
+    await L.gravarJson(rel,lote,undefined,'Collectio ('+u+'): lote '+id+' com '+itens.length+' processos selecionados da pauta '+data);
+    return res.status(200).json({ok:true,id,total:itens.length,sessao:data});
+  }
   if (b.acao === 'criar') {
     const tipo=b.tipo==='pauta'?'pauta':'avulso';
     if (!ss.length) return res.status(400).json({ erro: 'Escolha ao menos uma sessão.' });
+    if (/^pauta-\d{4}-\d{2}-\d{2}$/.test(id))return res.status(400).json({erro:'Identificador reservado à matriz geral.'});
     if(tipo==='pauta' && ss.length!==1)return res.status(400).json({ erro: 'Índice de pauta exige uma sessão específica.' });
     const atual = await L.lerJson(rel).catch(nada);
     if (atual.dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });
@@ -221,13 +268,7 @@ async function gravar(req, res, u, gestor) {
       sessoes: ss, filtro, atualizado_em: new Date().toISOString().slice(0, 10), criado_por: u,
       colunas: [], grupos: [], grupo_outros: { rotulo: 'Processos do lote', cor: '#5d6b72' }, minutas: 'acervo/minutas/' + id + '/<processo>.json', itens
     };
-    if(tipo==='pauta'){
-      const counts=new Map();for(const it of lote.itens){const v=rotuloAssunto(it);const key=sem(v);if(!counts.has(key))counts.set(key,{rotulo:v,itens:[]});counts.get(key).itens.push(it);}
-      [...counts.values()].sort((a,b)=>b.itens.length-a.itens.length||a.rotulo.localeCompare(b.rotulo,'pt-BR')).forEach((g,k)=>{
-        const gid='assunto-'+(k+1);lote.grupos.push({id:gid,rotulo:g.rotulo,cor:CORES[k%CORES.length],resultado:'',modelo:''});
-        g.itens.forEach(it=>{it.grupo=gid;it.tipo_caso=g.rotulo;});
-      });
-    }else agrupar(lote);
+    if(tipo==='pauta')agruparPorAssunto(lote);else agrupar(lote);
     await L.gravarJson(rel, lote, undefined, 'Lotes (' + u + '): cria o lote ' + id + ' (' + itens.length + ' processos; sessões ' + ss.join(', ') + ')');
     return res.status(200).json({ ok: true, id, total: itens.length });
   }
@@ -235,7 +276,7 @@ async function gravar(req, res, u, gestor) {
     for (let t = 0; t < 4; t++) {
       const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
-      if(tipoLote(lote)==='pauta'&&(ss.length!==1||ss[0]!==lote.sessoes[0])) return res.status(400).json({ erro:'Este índice pertence a uma sessão. Para outra sessão, crie um índice específico.' });
+      if(tipoLote(lote)==='pauta') return res.status(400).json({ erro:'Os lotes de pauta preservam a seleção original. Crie um novo lote a partir da matriz para outra seleção.' });
       const antes = new Set(lote.sessoes || []), novas = ss.filter(s => !antes.has(s));
       const tem = new Set((lote.itens || []).map(i => i.sessao + '|' + i.processo));
       const manter = (lote.itens || []).filter(i => ss.includes(i.sessao)), fora = (lote.itens || []).filter(i => !ss.includes(i.sessao));
