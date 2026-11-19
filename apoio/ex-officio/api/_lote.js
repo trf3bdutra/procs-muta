@@ -252,6 +252,57 @@ async function gravar(req, res, u, gestor) {
     await L.gravarJson(rel,lote,undefined,'Collectio ('+u+'): lote '+id+' com '+itens.length+' processos selecionados da pauta '+data);
     return res.status(200).json({ok:true,id,total:itens.length,sessao:data});
   }
+  /* lote a partir de uma lista de processos (sem sessão): tarefas do PJe, triagem do acervo.
+     criar-lista {id, titulo, descricao, origem, itens:[{processo, ...}]}   cria o lote (até 600 processos)
+     itens {id, itens:[{processo, ...}]}   atualiza os campos informados de cada processo; o que não está no lote entra no fim */
+  if (b.acao === 'criar-lista' || b.acao === 'itens') {
+    const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
+    const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'tipo_caso', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada'];
+    const OBJ = ['triagem', 'situacao_atual', 'extracao'];
+    const LST = ['variacoes', 'pendencias', 'pecas'];
+    const limpo = (x, it) => {
+      for (const k of TXT) if (x[k] !== undefined) it[k] = x[k] === null ? null : String(x[k]).slice(0, 2000);
+      for (const k of OBJ) if (x[k] && typeof x[k] === 'object' && !Array.isArray(x[k])) it[k] = Object.assign({}, it[k] || {}, JSON.parse(JSON.stringify(x[k]).slice(0, 8000)));
+      for (const k of LST) if (Array.isArray(x[k])) it[k] = JSON.parse(JSON.stringify(x[k].slice(0, 80)));
+      return it;
+    };
+    const base = (n, cnj) => ({ sessao: '', item: n, processo: cnj, recurso: '', partes: '', exequente: '', executado: '', assunto: '', grupo: null,
+      tipo_caso: '', resultado: '', modelo: '', variacoes: [], observacao: '', peculiaridades: '', peculiaridades_relator: '', orientacao: '',
+      equipe: { minuta: '', correcao: '', situacao: 'A minutar' }, pecas: [], mpf: '', triagem: {}, ajustes: [], pendencias: [], minuta: false });
+    const lista = (Array.isArray(b.itens) ? b.itens : []).filter(x => x && CNJ.test(String(x.processo || '')));
+    if (!lista.length || lista.length > 600) return res.status(400).json({ erro: 'Informe de 1 a 600 processos com número CNJ completo.' });
+    if (b.acao === 'criar-lista') {
+      if (/^pauta-/.test(id)) return res.status(400).json({ erro: 'Identificador reservado à matriz geral.' });
+      const titulo = String(b.titulo || '').trim().slice(0, 80);
+      if (!titulo) return res.status(400).json({ erro: 'Informe o título do lote.' });
+      if ((await L.lerJson(rel).catch(nada)).dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });
+      const vistos = new Set(), itens = [];
+      for (const x of lista) { if (vistos.has(x.processo)) continue; vistos.add(x.processo); itens.push(limpo(x, base(itens.length + 1, x.processo))); }
+      const lote = { schema: 'gabcmt.lote', versao: 1, tipo: 'avulso', origem: String(b.origem || 'lista').slice(0, 80), id, titulo,
+        descricao: String(b.descricao || '').trim().slice(0, 300), sessoes: [], filtro: {}, criado_por: u, atualizado_em: new Date().toISOString().slice(0, 10),
+        colunas: Array.isArray(b.colunas) ? b.colunas.slice(0, 20) : [], grupos: Array.isArray(b.grupos) ? b.grupos.slice(0, 12) : [],
+        grupo_outros: { rotulo: 'A triar', cor: '#9aa0a8' }, minutas: 'acervo/minutas/' + id + '/<processo>.json', itens };
+      await L.gravarJson(rel, lote, undefined, 'Index (' + u + '): lote ' + id + ' com ' + itens.length + ' processos (' + lote.origem + ')');
+      return res.status(200).json({ ok: true, id, total: itens.length });
+    }
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      const mapa = new Map((lote.itens || []).map(i => [i.processo, i]));
+      let alt = 0, novos = 0;
+      for (const x of lista) {
+        let it = mapa.get(x.processo);
+        if (!it) { it = base((lote.itens || []).length + 1, x.processo); lote.itens.push(it); mapa.set(x.processo, it); novos++; }
+        limpo(x, it); alt++;
+      }
+      if (Array.isArray(b.grupos)) lote.grupos = b.grupos.slice(0, 12);
+      if (Array.isArray(b.colunas)) lote.colunas = b.colunas.slice(0, 20);
+      lote.atualizado_em = new Date().toISOString().slice(0, 10);
+      try { await L.gravarJson(rel, lote, sha, 'Index (' + u + '): ' + alt + ' processo(s) atualizados no lote ' + id + (novos ? ' (' + novos + ' novos)' : '')); return res.status(200).json({ ok: true, id, alterados: alt, novos }); }
+      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
+  }
   if (b.acao === 'criar') {
     const tipo=b.tipo==='pauta'?'pauta':'avulso';
     if (!ss.length) return res.status(400).json({ erro: 'Escolha ao menos uma sessão.' });
