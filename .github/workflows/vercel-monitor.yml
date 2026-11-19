@@ -69,10 +69,10 @@ jobs:
           mkdir -p site/public/cmt && cp apoio/ex-officio/index.html site/public/cmt/index.html
           mkdir -p site/public/editor && cp apoio/modus-operandi/modus-operandi-editor.html site/public/editor/index.html
           # CMT · Amicus Curiae · Index: três visões canônicas no mesmo arquivo.
-          # /index/ = Geral; /index/cmtt/ = visão do Desembargador; /index/cg/ = controle geral.
-          mkdir -p site/public/index site/public/index/cmtt site/public/index/cg
+          # /index/ = Geral; /index/cmt/ = visão do Desembargador; /index/cg/ = controle geral.
+          mkdir -p site/public/index site/public/index/cmt site/public/index/cg
           cp apoio/ex-officio/lotes/index.html site/public/index/index.html
-          cp apoio/ex-officio/lotes/index.html site/public/index/cmttt/index.html
+          cp apoio/ex-officio/lotes/index.html site/public/index/cmt/index.html
           cp apoio/ex-officio/lotes/index.html site/public/index/cg/index.html
           # Compatibilidade temporária com as rotas históricas.
           mkdir -p site/public/lotes site/public/cmt/lotes site/public/cg/lotes
@@ -92,7 +92,7 @@ jobs:
           # gerados aqui (não ficam no Git); lidos pelo ementário do Compendium em /jurisprudencia/
           python3 scripts/jurisprudencia/gerar_busca.py
           mkdir -p site/public/jurisprudencia && cp precedentes/jurisprudencia/indice.json.gz site/public/jurisprudencia/ && cp -R precedentes/jurisprudencia/busca site/public/jurisprudencia/
-          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60},"api/acesso.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false},{"source":"/lotes","destination":"/index/","permanent":false},{"source":"/lotes/","destination":"/index/","permanent":false},{"source":"/cmt/lotes","destination":"/index/cmtt/","permanent":false},{"source":"/cmt/lotes/","destination":"/index/cmtt/","permanent":false},{"source":"/cg/lotes","destination":"/index/cg/","permanent":false},{"source":"/cg/lotes/","destination":"/index/cg/","permanent":false}]}\n' > site/vercel.json
+          printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60},"api/acesso.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false},{"source":"/lotes","destination":"/index/","permanent":false},{"source":"/lotes/","destination":"/index/","permanent":false},{"source":"/cmt/lotes","destination":"/index/cmt/","permanent":false},{"source":"/cmt/lotes/","destination":"/index/cmt/","permanent":false},{"source":"/index/cm","destination":"/index/cmt/","permanent":false},{"source":"/index/cm/","destination":"/index/cmt/","permanent":false},{"source":"/cg/lotes","destination":"/index/cg/","permanent":false},{"source":"/cg/lotes/","destination":"/index/cg/","permanent":false}]}\n' > site/vercel.json
       - name: Publica
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
