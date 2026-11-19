@@ -34,3 +34,13 @@
 #cq .m28-f .fill.der,#cq .m28-f .dbody .fill.der{background:#dff3e5;box-shadow:inset 0 -1px 0 #7fbf95}
 #cq-ori .m28-kit summary{cursor:pointer;font-size:12.5px;margin:6px 0}
 #cq-ori .m28-kitt{white-space:pre-wrap;font-size:12px;line-height:1.5;max-height:60vh;overflow:auto;border:1px solid var(--line,#ddd);padding:8px;background:#fcfbf7}
+
+/* Segurança e explicabilidade da matriz modular */
+#cq-can .m28-prov{display:inline-flex;align-items:center;gap:5px;margin-top:5px;padding:3px 6px;border:1px solid #d8ddd9;border-radius:999px;font:650 10.5px/1.2 Inter,sans-serif;width:auto}
+#cq-can .m28-prov.confirmado{background:#edf6f1;border-color:#bcd9ca;color:#27634e}
+#cq-can .m28-prov.derivado{background:#eef3f6;border-color:#c9d6de;color:#3f5e70}
+#cq-can .m28-prov.sugerido{background:#fff7e6;border-color:#ead09d;color:#7a5b17}
+#cq-can .m28-prov.manual{background:#f2eff8;border-color:#d2c6e6;color:#5b4777}
+#cq-can .m28-alert{margin:8px 0 0;padding:8px 9px;border:1px solid #e4c77f;border-radius:5px;background:#fff8e8;color:#6d5318;font:600 11.5px/1.45 Inter,sans-serif}
+#cq-can .m28-mt small.m28-prov{display:inline-flex;margin:3px 0 0}
+#cq-main .m28-f .drn{max-width:48%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
