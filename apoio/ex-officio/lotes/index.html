@@ -618,7 +618,10 @@ function perfil(it,i){
   b+=`<div class="box wide"><h3>Variações e peculiaridades</h3><div class="fl">${fl}</div>`+
      `<p class="pv" style="margin-top:8px" data-eq="${esc(it.peculiaridades)}" data-rel="${esc(it.peculiaridades_relator)}">${esc(it.peculiaridades_relator)}</p>`+
      (it.orientacao?`<p class="ori">Ponto para orientação: ${esc(it.orientacao)}</p>`:'')+(it.observacao?`<p style="color:var(--em)">${esc(it.observacao)}</p>`:'')+`</div>`;
-  if((it.pecas||[]).length||it.mpf) b+=`<div class="box"><h3>Peças nos autos</h3>${dl(Object.fromEntries(it.pecas.map(p=>[p.peca,'ID '+p.id])))}${it.mpf?`<p style="margin-top:6px">${esc(it.mpf)}</p>`:''}</div>`;
+  if((it.pecas||[]).length||it.mpf) b+=`<div class="box"><h3>Peças nos autos</h3>${dl(Object.fromEntries((it.pecas||[]).map(p=>[p.peca||p.tipo,'ID '+p.id])))}${it.mpf?`<p style="margin-top:6px">${esc(it.mpf)}</p>`:''}</div>`;
+  if(it.autos&&(it.autos.documentos||[]).length){const A=it.autos,st=new Set(A.sem_texto||[]);
+    b+=`<div class="box wide"><h3>Autos no PJe · ${A.total} documentos</h3><p class="cmt-n">Inteiro teor extraído em ${esc(br(A.extraido_em))}${st.size?` · ${st.size} PDF sem texto (digitalizado), marcado com ⚠`:''}${(A.faltam||[]).length?` · ${A.faltam.length} documento(s) não lido(s)`:''}.</p>`+
+      `<details><summary>Ver a lista completa de IDs</summary><table><tr><th>ID</th><th>Data</th><th>Documento</th><th>Juntado por</th><th>Formato</th></tr>${A.documentos.map(d=>`<tr><td class="cnj">${esc(d[0])}${st.has(d[0])?' ⚠':''}</td><td>${esc(d[1])}</td><td>${esc(d[3]?d[2]+' · '+d[3]:d[2])}</td><td>${esc(d[4])}</td><td>${esc(d[5])}${d[6]?' · '+d[6]+' p.':''}</td></tr>`).join('')}</table></details></div>`}
   if(t['Apelante']||t['Mérito (triagem)']||t['Preliminares']||t['Obs. da triagem'])
     b+=`<div class="box so-equipe"><h3>Triagem</h3>${dl({'Apelante':esc(t['Apelante']),'Preliminares':esc(t['Preliminares']),'Mérito':esc(t['Mérito (triagem)']),'Observação':esc(t['Obs. da triagem'])})}</div>`;
   if(P){b+=`<div class="box wide"><h3>Prontuário · Ex Officio</h3>${P.sintese?`<p><b>Síntese.</b> ${esc(P.sintese)}</p>`:''}${P.especificidades?`<p><b>Especificidades.</b> ${esc(P.especificidades)}</p>`:''}${P.questoes?`<p><b>Questões.</b> ${esc(P.questoes)}</p>`:''}${P.obsGeral?`<p><b>Observação.</b> ${esc(P.obsGeral)}</p>`:''}`+
