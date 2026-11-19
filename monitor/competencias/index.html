@@ -524,18 +524,19 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
     var lac=function(as,c){return as!=='sem assunto'&&c.n>=5&&!EQ.some(function(e){return casa(e.exp,as);});};
     var rkc=function(L,un){return L.length?'<div class="rkc">'+L.slice(0,3).map(function(x,i){return '<span'+(i===0?' class="um"':'')+' data-s="'+esc(x.nome)+'" title="'+esc(x.w||'')+'"><b>'+(i+1)+'º</b>'+esc(x.nome)+(x.esp?' <em>esp.</em>':'')+'<i>'+String(x.v).replace('.',',')+un+'</i></span>';}).join('')+'</div>':'<span class="vazio">ninguém pontua</span>';};
     var rkGrupo=function(c){return Object.keys(c).filter(function(n){return EQ.some(function(e){return e.nome===n;});}).map(function(n){return {nome:n,v:c[n],w:c[n]+' no grupo'};}).sort(function(a,b){return b.v-a.v;});};
-    var cel=function(v,max,cls,tt){return '<td class="h'+(cls?' '+cls:'')+'" style="'+heat(v,max)+'" title="'+esc(tt)+'">'+(v||'·')+'</td>';};
+    /* gradação na cor da linha: seção (--sc) na linha da seção; ramo (--rc) no ramo e nos assuntos */
+    var cel=function(v,max,cls,tt,cv){var a=v?(0.14+0.76*Math.sqrt(v/max)):0,st=!v?'color:var(--mut)':'background:color-mix(in srgb,var('+(cv||'--sc')+') '+Math.round(a*100)+'%,var(--sup));color:'+(a>0.55?'#fff':'var(--tx)');return '<td class="h'+(cls?' '+cls:'')+'" style="'+st+'" title="'+esc(tt)+'">'+(v||'·')+'</td>';};
     var h='<thead><tr><th>Seção ▸ ramo ▸ assunto</th>'+S.map(function(n){return '<th class="v" title="'+esc(n)+'">'+esc(n)+'</th>';}).join('')+'<th>Total</th><th style="text-align:left">Ranking · '+(PAPEL==='c'?'correção':'redação')+'</th><th style="text-align:left">Correção · padrão e auxiliares</th></tr></thead><tbody>';
     var ords=Object.keys(T).sort(function(a,b){return oi(ORD.secao,a)-oi(ORD.secao,b);}), linhas=0;
     ords.forEach(function(sc){var a=T[sc],max1=Math.max.apply(null,Object.values(a.c));
       var rams=Object.keys(a.r).sort(function(x,y){return a.r[y].n-a.r[x].n;});
       var nl1=rams.reduce(function(acc,r){return acc+Object.keys(a.r[r].a).filter(function(as){return lac(as,a.r[r].a[as]);}).length;},0);
       if(SO_LAC&&!nl1)return;
-      h+='<tr class="n1" style="--sc:'+(COR[sc]||'#8a96a3')+'"><td><i class="dot"></i>'+esc(sc)+(nl1?' <span class="tag nao">'+nl1+' sem especialista</span>':'')+'</td>'+S.map(function(n){return cel(a.c[n]||0,max1,'',n+' · '+sc+': '+(a.c[n]||0));}).join('')+'<td class="tot">'+nf(a.n)+'</td><td>'+rkc(rkGrupo(a.c),'')+'</td><td>'+corSecao(a)+'</td></tr>';
+      h+='<tr class="n1" style="--sc:'+(COR[sc]||'#8a96a3')+'"><td><i class="dot"></i>'+esc(sc)+(nl1?' <span class="tag nao">'+nl1+' sem especialista</span>':'')+'</td>'+S.map(function(n){return cel(a.c[n]||0,max1,'',n+' · '+sc+': '+(a.c[n]||0),'--sc');}).join('')+'<td class="tot">'+nf(a.n)+'</td><td>'+rkc(rkGrupo(a.c),'')+'</td><td>'+corSecao(a)+'</td></tr>';
       rams.forEach(function(rm){var b=a.r[rm],k=sc+'|'+rm,ab=ABERTO[k]||SO_LAC,max2=Math.max.apply(null,Object.values(b.c));
         var ass=Object.keys(b.a).sort(function(x,y){return b.a[y].n-b.a[x].n;}),nl=ass.filter(function(as){return lac(as,b.a[as]);}).length;
         if(SO_LAC&&!nl)return;
-        h+='<tr class="n2" data-arvk="'+esc(k)+'" style="--sc:'+(COR[sc]||'#8a96a3')+';--rc:'+corRamo(rm)+'"><td><span class="tg">'+(ab?'▾':'▸')+'</span><i class="dot"></i>'+esc(rm)+' <small class="nota" style="display:inline">· '+ass.length+' assunto'+(ass.length>1?'s':'')+'</small>'+(nl?' <span class="tag nao">'+nl+'</span>':'')+'</td>'+S.map(function(n){return cel(b.c[n]||0,max2,'',n+' · '+rm+': '+(b.c[n]||0));}).join('')+'<td class="tot">'+nf(b.n)+'</td><td>'+rkc(rkGrupo(b.c),'')+'</td><td>'+corGrupo(b)+'</td></tr>';
+        h+='<tr class="n2" data-arvk="'+esc(k)+'" style="--sc:'+(COR[sc]||'#8a96a3')+';--rc:'+corRamo(rm)+'"><td><span class="tg">'+(ab?'▾':'▸')+'</span><i class="dot"></i>'+esc(rm)+' <small class="nota" style="display:inline">· '+ass.length+' assunto'+(ass.length>1?'s':'')+'</small>'+(nl?' <span class="tag nao">'+nl+'</span>':'')+'</td>'+S.map(function(n){return cel(b.c[n]||0,max2,'',n+' · '+rm+': '+(b.c[n]||0),'--rc');}).join('')+'<td class="tot">'+nf(b.n)+'</td><td>'+rkc(rkGrupo(b.c),'')+'</td><td>'+corGrupo(b)+'</td></tr>';
         if(!ab)return;
         ass.forEach(function(as){var c=b.a[as],lc=lac(as,c);if(SO_LAC&&!lc)return;linhas++;
           var rk=rankDe(as,PAPEL==='c'?'c':'d').map(function(x){var m=mem(x.nome);return {nome:x.nome,v:x.p,w:x.w.join(' · '),esp:m&&casa(m.exp,as)};});
