@@ -2024,6 +2024,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       var k = cid + ':' + N(chave), r = S.desig.rows[k] || (S.desig.rows[k] = { d: '', c: '', cap: String(chave).trim() });
       r[kind] = nome ? (membro(nome) || { nome: nome }).nome : ''; HIST = null; salvar(); return true; },
     matriz: function () { if (!MAT) matrizCarregar(); return MAT; },
+    /* dissociar da matriz de competências (false) ou religar (true); não muda Minuta, Correção nem a designação */
+    equipeMatriz: function (nome, dentro) { var m = membro(nome); if (!m) return false; if (dentro) delete m.matriz; else m.matriz = false; salvar(); return true; },
     equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto'].indexOf(campo) < 0) return false; m[campo] = !!valor; HIST = null; salvar(); return true; },
     publicarMarcos: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return false; ss.marcosPub = on !== false; if (!ss.marcosPub) { ss.publicada = false; ss.pronta = ''; } salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */

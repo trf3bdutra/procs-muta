@@ -8,7 +8,7 @@ R = pathlib.Path(__file__).resolve().parents[2]
 ler = lambda p: json.loads((R / p).read_text(encoding='utf-8'))
 eq = ler('apoio/equipe.json')['registros']
 dg = ler('apoio/regras/designacao.json')['criterios']
-dados = {'equipe': [{k: m.get(k) for k in ['nome', 'cargo', 'papel', 'minuta', 'correcao', 'auto', 'exp', 'pref', 'nao', 'aliases', 'nota']} for m in eq if m['nome'] != 'CM'],
+dados = {'equipe': [{k: m.get(k) for k in ['nome', 'cargo', 'papel', 'minuta', 'correcao', 'auto', 'exp', 'pref', 'nao', 'aliases', 'nota', 'matriz']} for m in eq if m['nome'] != 'CM'],
          'matriz': ler('apoio/equipe-matriz.json'), 'desig': {'ordem': dg['ordem'], 'rows': dg['rows']}, 'prod': ler('apoio/regras/produtividade.json')}
 pag = (R / 'monitor/competencias/index.html').read_text(encoding='utf-8')
 alvo = '<script id="dados" type="application/json">{}</script>'

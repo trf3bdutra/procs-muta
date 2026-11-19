@@ -14,7 +14,7 @@ test('Competências da equipe: página válida e publicada na Coordenação do C
 });
 test('Motor: competências, regras de designação e histórico completo',()=>{
   const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
-  for(const x of ['equipeCompetencias:','desigRegra:','matrizCarregar','apoio/equipe-matriz.json'])assert.ok(m.includes(x),x);
+  for(const x of ['equipeCompetencias:','desigRegra:','equipeMatriz:','matrizCarregar','apoio/equipe-matriz.json'])assert.ok(m.includes(x),x);
   const mat=JSON.parse(read('apoio/equipe-matriz.json'));
   assert.ok(Array.isArray(mat.minutas)&&mat.minutas.every(r=>r.length===11),'linha da matriz com 11 colunas');
 });
