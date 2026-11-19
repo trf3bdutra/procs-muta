@@ -722,6 +722,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .mi-par li{border-left:3px solid #a9bfd0;padding:4px 10px;background:#f7fafc;border-radius:0 5px 5px 0}
 .mi-ph{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;font-size:12px}.mi-ph span{color:var(--m)}.mi-ph a{margin-left:auto;color:var(--az);font-weight:600;text-decoration:none}
 .mi-pr{display:block;font-size:12.5px;color:var(--tx);margin-top:2px}.mi-pe{display:block;font-size:11.5px;color:var(--m);margin-top:2px}
+.mi-ju{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 16px 10px;padding:8px 12px;border:1px solid var(--r2);border-radius:6px;background:#fbf2f0;font-size:12.5px}.mi-ju b{color:var(--r)}.mi-ju span{color:var(--m2)}
 .mi-vz{margin:4px 0;font-size:12px;color:var(--m)}
 .tp-s.tp-mi .mi-an{padding:0}
 @media (max-width:1100px){.mi-kpi{grid-template-columns:repeat(2,minmax(0,1fr))}.mi-g2{grid-template-columns:1fr}.mi-r{grid-template-columns:20px 170px 60px minmax(0,1fr) 140px 86px}.mi-h1{display:none}}
@@ -840,7 +841,7 @@ function proc(f, r) {
   r = r || f;
   const etq = etqDe(f), classe = f.classe_judicial || f.Classe || r.classe_judicial || '', cl = abrev(classe), tarefa = String(f.tarefa_atual || '').trim();
   const sc = String(f['Seção Competente'] || r['Seção Competente'] || '').trim(), se = etq.find((e) => SEC_RX.test(e)) || '';
-  const o = { row: r, d: dg(f.processo || f.Processo), cnj: fmtCnj(f.processo || f.Processo), classe, cl, assunto: String(f.assunto_judicial || f.Assunto || f.Assunto_Principal || '').trim() || '—',
+  const o = { row: r, fonte: f, d: dg(f.processo || f.Processo), cnj: fmtCnj(f.processo || f.Processo), classe, cl, assunto: String(f.assunto_judicial || f.Assunto || f.Assunto_Principal || '').trim() || '—',
     tarefa, desde: iso(f.data_entrada_tarefa), secao: SEC_RX.test(sc) ? sc : (se || 'Sem seção'), secEtq: se, secComp: SEC_RX.test(sc) ? sc : '', prior: /^(sim|s)$/i.test(String(f.prioridade || '').trim()), etq,
     partes: [f.polo_ativo || f.Polo_Ativo, f.polo_passivo || f.Polo_Passivo].filter((x) => x && x !== '####').join(' x '), dist: iso(f['data_distribuição'] || f['Data_Distribuição']) };
   const sim = (v) => /^(sim|s|true|1)$/i.test(String(v == null ? '' : v).trim());
@@ -875,7 +876,7 @@ function construir() {
   miAtualiza();
   ALL.forEach((o) => { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); });
   for (const d of [...SEL]) if (!IDX.has(d)) SEL.delete(d); }
-function refazDest(o) { o.mi = monoInd(o); o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
+function refazDest(o) { o.julg = julgDe(o); o.mi = o.julg ? null : monoInd(o); o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
 const DLAB = Object.fromEntries(DEST.map((x) => [x[0], x[1]])), CLAB = Object.fromEntries(CAND.map((x) => [x[0], x[1]]));
 
 /* ===================== indicador de monocrática (acervo/triagem/perfil-monocraticas.json) =====================
@@ -932,27 +933,40 @@ function monoInd(o) {
   const fx = MI_FX.find((x) => p >= x[3]) || MI_FX[2], nBase = base === 'assunto' ? ac.n : cc ? cc.n : 0;
   const par = (A && A.paradigmas && (A.paradigmas[o.cl] || [])) || [];
   return { s: p, fx: fx[0], cor: fx[1], fundo: fx[2], hip, hipRot: hip ? (PERFIL.hipoteses[hip] || hip) : '—', hips, causa: causa ? (PERFIL.causas[causa] || causa) : '', base, nBase, fraca: nBase < 5, fund, sin, par }; }
-function miAtualiza(L) { (L || ALL).forEach((o) => { o.mi = monoInd(o); }); }
-const miFaixa = (o) => o.mi ? o.mi.fx : MI_SEM;
+/* já julgados, arquivados ou com ato assinado: saem do indicador e do painel (aparecem à parte, com o motivo) */
+const JULG_MOV = /arquiv|baixa definitiva|tr[aâ]nsit|remetidos? os autos .*(origem|inst[aâ]ncia)|julgad|provimento|n[aã]o conhecid|homologad|extint|deliberado em sess[aã]o - julgado/i;
+function julgDe(o) { const r = o.row || {}, f = o.fonte || {};
+  const dec = PERFIL && PERFIL.decididos && PERFIL.decididos[o.d];
+  if (dec && dec.length) { const x = dec[dec.length - 1]; return { k: 'rel', t: (x.t === 'M' ? 'Monocrática' : 'Acórdão') + ' do Relator em ' + br(x.d), r: x.r, u: x.u }; }
+  if (String(r.Assinado || '').trim() || String(r['Data da Assinatura'] || '').trim()) return { k: 'ass', t: 'Ato assinado' + (r['Data da Assinatura'] ? ' em ' + br(iso(r['Data da Assinatura'])) : ''), r: '' };
+  const mv = [f.ultimo_movimento, f['DataJud · Último movimento']].filter(Boolean).find((m) => JULG_MOV.test(m) && !/retirad|adiad/i.test(m));
+  if (mv) return { k: 'mov', t: 'Último movimento: ' + mv, r: '' };
+  return null; }
+function miAtualiza(L) { (L || ALL).forEach((o) => { o.julg = julgDe(o); o.mi = o.julg ? null : monoInd(o); }); }
+const MI_JULG = 'Já julgado ou arquivado';
+const miFaixa = (o) => o.julg ? MI_JULG : o.mi ? o.mi.fx : MI_SEM;
 const miHip = (o) => o.mi && o.mi.hip ? o.mi.hipRot : '—';
-function miChip(o, grande) { const m = o.mi; if (!m) return '';
+function miChip(o, grande) { const m = o.mi; if (o.julg) return '<span class="mi" style="--mic:#8a2f22;--mif:#f8ebe8" title="' + esc(o.julg.t + (o.julg.r ? ' · ' + o.julg.r : '')) + '"><b>Já julgado</b></span>'; if (!m) return '';
   return '<span class="mi' + (grande ? ' g' : '') + '" style="--mic:' + m.cor + ';--mif:' + m.fundo + '" title="' + esc('Indicador de monocrática: ' + m.fx + ' (' + pct(m.s) + ') · ' + m.hipRot + (m.fraca ? ' · base pequena' : '')) + '"><i style="width:' + Math.max(6, Math.round(100 * m.s)) + '%"></i><b>' + (grande ? 'Monocrática · ' : 'Mono ') + m.fx + '</b><em>' + pct(m.s) + '</em></span>'; }
 function miParadigmas(m, lim) { const E = (PERFIL && PERFIL.exemplos) || {}; const L = (m.par || []).map((id) => [id, E[id]]).filter((x) => x[1]).slice(0, lim || 3);
   if (!L.length) return '<p class="mi-vz">Sem monocrática do Relator localizada para esta matéria e classe.</p>';
   return '<ul class="mi-par">' + L.map(([id, x]) => '<li><span class="mi-ph"><b class="mono">' + esc(x.n || id) + '</b><span>' + esc(br(x.d || '')) + ' · ' + esc(x.cl) + ' · ' + esc((PERFIL.hipoteses[x.h] || x.h || '').replace(/ \(CPC.*$/, '')) + '</span>' + (x.u ? '<a href="' + esc(x.u) + '" target="_blank" rel="noopener">abrir ↗</a>' : '') + '</span><span class="mi-pr">' + esc(x.r || '') + '</span><span class="mi-pe">' + esc(x.e || '') + '</span></li>').join('') + '</ul>'; }
-function miAnalise(o, lim) { const m = o.mi; if (!m) return '<p class="mi-vz">' + (PERFIL_ERRO ? 'Perfil de monocráticas não lido: ' + esc(PERFIL_ERRO) : 'Perfil de monocráticas ainda carregando.') + '</p>';
+function miAnalise(o, lim) { if (o.julg) return '<div class="mi-an"><p class="mi-vz" style="color:var(--r)"><b>' + esc(o.julg.t) + '</b>' + (o.julg.r ? ' · ' + esc(o.julg.r) : '') + (o.julg.u ? ' · <a href="' + esc(o.julg.u) + '" target="_blank" rel="noopener">abrir ↗</a>' : '') + '</p><p class="mi-vz">Fora do indicador de monocrática: confira se o processo voltou por embargos, agravo interno ou retratação.</p></div>'; const m = o.mi; if (!m) return '<p class="mi-vz">' + (PERFIL_ERRO ? 'Perfil de monocráticas não lido: ' + esc(PERFIL_ERRO) : 'Perfil de monocráticas ainda carregando.') + '</p>';
   return '<div class="mi-an"><div class="mi-top">' + miChip(o, true) + '<span class="mi-hp"><i>Hipótese provável</i><b>' + esc(m.hipRot) + '</b>' + (m.causa ? '<small>causa mais comum: ' + esc(m.causa) + '</small>' : '') + '</span>' + (m.fraca ? '<span class="tg" style="border-color:var(--r2);color:var(--r)">base pequena</span>' : '') + '</div>' +
     '<ul class="mi-fu">' + m.fund.map((f) => '<li>' + esc(f[1]) + '</li>').join('') + m.sin.map((s) => '<li class="si">' + esc(s) + '</li>').join('') + '</ul>' +
     (m.hips.length > 1 ? '<p class="mi-hs">' + m.hips.map(([h, v]) => '<span>' + esc((PERFIL.hipoteses[h] || h).replace(/ \(CPC.*$/, '')) + ' <b>' + pct(v) + '</b></span>').join('') + '</p>' : '') +
     '<p class="k" style="margin:8px 0 4px">Monocráticas do Relator na mesma matéria</p>' + miParadigmas(m, lim) + '</div>'; }
 let MI_ABERTO = '';
-function vMono(L) {
+function vMono(L0) {
+  const JU = L0.filter((o) => o.julg), L = L0.filter((o) => !o.julg);
   if (!PERFIL) return '<section class="card mi-pn"><div class="ch"><h2>Painel de monocráticas</h2><p>' + (PERFIL_ERRO ? 'não foi possível ler ' + PERFIL_ARQ + ': ' + esc(PERFIL_ERRO) : 'carregando o perfil do Relator…') + '</p></div></section>';
   const n = L.length || 1, G = MI_FX.map((x) => [x, L.filter((o) => o.mi && o.mi.fx === x[0])]), sem = L.filter((o) => !o.mi).length, B = PERFIL.base || {};
   const fxSel = F.fac.mono || [], hipSel = F.fac.hipm || [];
   let h = '<section class="card mi-pn" aria-label="Painel de monocráticas"><div class="ch"><h2>Painel de monocráticas</h2><p>indicador por processo · base: ' + nf(B.monocraticas) + ' monocráticas e ' + nf(B.acordaos) + ' acórdãos do Relator (' + esc((B.anos || []).join(', ')) + '; peso maior para ' + ANO_PERFIL() + ', Turma Regional de MS) · perfil de ' + esc(br(String(PERFIL.atualizadoEm || '').slice(0, 10))) + '</p></div>';
   h += '<div class="mi-kpi">' + G.map(([x, X]) => '<button type="button" class="mi-k' + (fxSel.indexOf(x[0]) >= 0 ? ' on' : '') + '" data-fac="mono" data-v="' + x[0] + '" style="--mic:' + x[1] + ';--mif:' + x[2] + '"><span class="k" style="color:' + x[1] + '">' + x[0] + '</span><b>' + nf(X.length) + '</b><small>' + pct(X.length / n) + ' dos filtrados' + (x[0] === 'Alta' ? ' · índice ≥ 60%' : x[0] === 'Média' ? ' · 30% a 59%' : ' · abaixo de 30%') + '</small></button>').join('') +
     '<div class="mi-k nb"><span class="k">Ação</span><button type="button" class="btn sm" data-mi-marca="Alta"' + (G[0][1].length ? '' : ' disabled') + '>Marcar os ' + nf(G[0][1].length) + ' de alta</button><button type="button" class="btn sm" data-mi-ord>' + (F.ord === 'mono' ? 'Lista em ordem do índice ✓' : 'Ordenar a lista pelo índice') + '</button>' + (sem ? '<small>' + nf(sem) + ' sem perfil</small>' : '') + '</div></div>';
+  if (JU.length) { const mo = contar(JU, (o) => ({ rel: 'decisão do Relator na série', ass: 'ato assinado', mov: 'movimento de julgamento ou arquivamento' })[o.julg.k]);
+    h += '<div class="mi-ju"><b>' + nf(JU.length) + ' fora do painel: já julgados ou arquivados</b><span>' + mo.map((x) => esc(x[0]) + ' ' + nf(x[1])).join(' · ') + '</span><button type="button" class="lk" data-fac="mono" data-v="' + MI_JULG + '">ver quais são</button></div>'; }
   /* hipóteses e matriz classe × faixa */
   const HP = contar(L.filter((o) => o.mi && o.mi.fx !== 'Baixa'), miHip), mxH = Math.max(1, ...HP.map((x) => x[1]));
   const CL = contar(L, (o) => o.cl).slice(0, 8);
@@ -1557,7 +1571,7 @@ function fecharPops() { $$('.pop').forEach((p) => p.remove()); CP = null; $$('[a
 
 /* ---------- exportar ---------- */
 const COLS_S = [['Processo', (o) => o.cnj], ['Classe', (o) => o.classe], ['Assunto', (o) => o.assunto], ['Tarefa no PJe', (o) => o.tarefa], ['Na tarefa desde', (o) => br(o.desde)], ['Seção', (o) => o.secao], ['Prioridade', (o) => o.prior ? 'Sim' : ''], ['Destino da triagem', (o) => o.dest.k ? o.dest.t : '']];
-const COLS_C = COLS_S.concat([['Partes', (o) => o.partes], ['Etiquetas', (o) => o.etq.join(', ')], ['Distribuição', (o) => br(o.dist)], ['Destino provável', (o) => DLAB[o.prov]], ['Candidato à monocrática', (o) => CLAB[o.cand] || ''], ['Indicador de monocrática', (o) => o.mi ? o.mi.fx + ' (' + pct(o.mi.s) + ')' : ''], ['Hipótese provável', (o) => o.mi ? o.mi.hipRot : ''], ['Pendências', (o) => o.pend.join(', ')]]);
+const COLS_C = COLS_S.concat([['Partes', (o) => o.partes], ['Etiquetas', (o) => o.etq.join(', ')], ['Distribuição', (o) => br(o.dist)], ['Destino provável', (o) => DLAB[o.prov]], ['Candidato à monocrática', (o) => CLAB[o.cand] || ''], ['Indicador de monocrática', (o) => o.julg ? MI_JULG + ': ' + o.julg.t : o.mi ? o.mi.fx + ' (' + pct(o.mi.s) + ')' : ''], ['Hipótese provável', (o) => o.mi ? o.mi.hipRot : ''], ['Pendências', (o) => o.pend.join(', ')]]);
 function abrirExp(btn, L, titulo, bilhete) { fecharPops(); const p = D.createElement('div'); p.className = 'pop menu'; p.setAttribute('role', 'menu');
   const r = btn.getBoundingClientRect(); p.style.top = (r.bottom + scrollY + 6) + 'px'; p.style.left = Math.max(12, Math.min(r.right + scrollX - 340, innerWidth - 352)) + 'px';
   const alvo = SEL.size && L.some((o) => SEL.has(o.d)) ? L.filter((o) => SEL.has(o.d)) : L;

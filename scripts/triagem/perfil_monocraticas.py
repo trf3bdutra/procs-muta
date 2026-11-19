@@ -337,6 +337,26 @@ def main():
             'paradigmas': dict(ex_cl),
         }
 
+    # processos da fonte já decididos pelo Relator: decisão (monocrática ou acórdão) na série com data igual ou
+    # posterior à distribuição no gabinete. A Triagem tira esses processos do indicador e os mostra à parte.
+    dg = lambda v: re.sub(r'\D', '', str(v or ''))
+    dist = {dg(f.get('processo')): str(f.get('data_distribuição') or '')[:10] for f in fonte}
+    decididos = collections.defaultdict(list)
+    for ano in sorted(set(ANOS_SERIE) | {ANO_ATUAL}):
+        for tipo, pasta in (('M', 'monocraticas'), ('A', 'acordaos')):
+            for r in ler(pasta, ano):
+                d = dg(r.get('numero_processo'))
+                if d not in dist:
+                    continue
+                data = r.get('data_decisao_iso') or r.get('data_julgamento_iso') or ''
+                if data < (dist[d] or f'{ANO_ATUAL}-01-01'):
+                    continue
+                res = dispositivo(r) if tipo == 'M' else (r.get('resultado_colegiado') or '')
+                decididos[d].append({'t': tipo, 'd': data, 'c': CLASSE.get(r.get('classe_sigla'), r.get('classe_sigla')),
+                                     'r': re.sub(r'\s+', ' ', res).strip()[:200], 'u': r.get('link_impressao') or r.get('link_pje')})
+    for d in decididos:
+        decididos[d].sort(key=lambda x: x['d'])
+
     out = {
         'schema': 'gabcmt.triagem.perfil-monocraticas',
         'versao': 1,
@@ -352,12 +372,13 @@ def main():
         'classes': {cl: sai(v) for cl, v in sorted(classes.items(), key=lambda x: -(x[1]['m'] + x[1]['a']))},
         'assuntos': perfil_ass,
         'exemplos': exemplos,
+        'decididos': dict(decididos),
     }
     SAIDA.parent.mkdir(parents=True, exist_ok=True)
     SAIDA.write_text(json.dumps(out, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print(f'{SAIDA.relative_to(RAIZ)}: {len(perfil_ass)} assuntos, {len(exemplos)} paradigmas, '
           f'{out["base"]["monocraticas"]} monocráticas e {out["base"]["acordaos"]} acórdãos, '
-          f'{SAIDA.stat().st_size // 1024} KB')
+          f'{len(decididos)} processos da fonte já decididos, {SAIDA.stat().st_size // 1024} KB')
     if a.resumo:
         for cl, v in list(out['classes'].items())[:12]:
             print(f'  {cl:10} m26 {v["m26"]:4} a26 {v["a26"]:5} | série m {v["m"]:5} a {v["a"]:5} | {list(v["hip26"].items())[:4]}')
