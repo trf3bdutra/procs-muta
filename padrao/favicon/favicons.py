@@ -55,7 +55,7 @@ PAGINAS = {
     'apoio/cmt-calendario.html': ('gabinete', None),
     'acervo/blocos-destinos.html': ('gabinete', None),
     'apoio/ex-officio/index.html': ('office', 'relator'),
-    'apoio/ex-officio/lotes/index.html': ('office', 'relator'),
+    'apoio/ex-officio/lotes/index.html': ('compendium', None),
     'monitor/index.html': ('abinitio', None),
     'monitor/motor/index.html': ('abinitio', None),
     'monitor/triagem/index.html': ('abinitio', None),
