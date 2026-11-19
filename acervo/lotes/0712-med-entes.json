@@ -3,7 +3,7 @@
  "versao": 1,
  "id": "0712-med-entes",
  "titulo": "07/12 · MED-ENTES — Saúde: União × Estado de MS",
- "descricao": "Sessão de 07/12/2026. Saúde: apelação da União contra o Estado de Mato Grosso do Sul. Base e resultado a definir (125: extinção sem mérito com honorários ao Estado; 128 em extração).",
+ "descricao": "Sessão de 07/12/2026. Ressarcimento interfederativo de medicamento: o Estado de Mato Grosso do Sul pede à União; extinção por perda superveniente (Tema 1.234/STF), honorários contra a União. Apelação da União só sobre honorários.",
  "sessoes": [
   "2026-12-07"
  ],
@@ -15,9 +15,9 @@
   {
    "id": "1",
    "cor": "#2f6db5",
-   "rotulo": "Saúde: União × Estado de MS",
-   "resultado": "A triar",
-   "modelo": "A definir"
+   "rotulo": "Ressarcimento interfederativo: honorários",
+   "resultado": "A definir com o Relator: honorários por causalidade ou por equidade",
+   "modelo": "Sem precedente do Relator localizado no banco local"
   }
  ],
  "grupo_outros": {
@@ -36,11 +36,11 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Fornecimento de medicamentos",
    "grupo": "1",
-   "tipo_caso": "A triar",
-   "resultado": "—",
+   "tipo_caso": "MED-ENTES — ressarcimento interfederativo",
+   "resultado": "A definir: apelação da União só sobre honorários",
    "modelo": "A definir",
    "variacoes": [],
-   "observacao": "Em extração",
+   "observacao": "Sentença 330667790: extinção sem mérito (artigo 485, VI, do CPC), honorários ao Estado; apelação da União 330667791. Par com o item 128",
    "peculiaridades": "Saúde — medicamentos",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -56,9 +56,72 @@
    "mpf": "",
    "ajustes": [],
    "pendencias": [
-    "Em extração"
+    "Definir com o Relator os honorários (causalidade ou equidade)"
    ],
-   "minuta": false
+   "minuta": false,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 37,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "330666723",
+      "04/10/2024",
+      "Contestação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "330667790",
+      "13/05/2025",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "330667791",
+      "23/05/2025",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "330667794",
+      "24/06/2025",
+      "Contrarrazões",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "332082236",
+      "29/07/2025",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "391371924",
+      "10/08/2026",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   }
   },
   {
    "sessao": "2026-12-07",
@@ -70,11 +133,11 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Fornecimento de medicamentos",
    "grupo": "1",
-   "tipo_caso": "A triar",
-   "resultado": "—",
+   "tipo_caso": "MED-ENTES — ressarcimento interfederativo",
+   "resultado": "A definir: apelação da União só sobre honorários",
    "modelo": "A definir",
    "variacoes": [],
-   "observacao": "Em extração",
+   "observacao": "Estado de MS pede ressarcimento de oncológico (R$ 366.022,90). Sentença 329437930: extinção por perda superveniente (Tema 1.234; Portaria GM/MS 6.212/2024), honorários contra a União. Apelação da União 329438032: afastar, recíprocos ou equidade. Efeito suspensivo não conhecido (decisão 389650526). MPF sem interesse (331583860). Par com o item 125",
    "peculiaridades": "Saúde — medicamentos",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -90,9 +153,72 @@
    "mpf": "",
    "ajustes": [],
    "pendencias": [
-    "Em extração"
+    "Definir com o Relator os honorários (causalidade ou equidade)"
    ],
-   "minuta": false
+   "minuta": false,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 36,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "329437919",
+      "03/10/2024",
+      "Contestação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "329437930",
+      "13/05/2025",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "329438032",
+      "05/06/2025",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "329438035",
+      "26/06/2025",
+      "Contrarrazões",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "331583860",
+      "23/07/2025",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "389650526",
+      "05/08/2026",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   }
   }
  ]
 }
