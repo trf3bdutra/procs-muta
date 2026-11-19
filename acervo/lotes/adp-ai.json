@@ -3129,12 +3129,15 @@
    "executado": "MARCIO JOSE DOS SANTOS",
    "assunto": "Conselhos Regionais e Afins (Anuidade)",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Execução fiscal de conselho · arquivamento provisório",
+   "resultado": "Ato a proferir: julgamento do agravo (mérito), depois de conferida a intimação do agravado; provável monocrática [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "VAL"
+   ],
+   "observacao": "Agravo do CRC/MS contra a decisão que determinou o arquivamento provisório da EF 5000125-93.2020.4.03.6002 (1ª Vara Federal de Dourados), contra Marcio José dos Santos. Teses do agravante: a decisão contraria a legislação (item III.I) e há bloqueios de veículos ativos que justificam o prosseguimento (item III.II). Pede efeito suspensivo e reforma.",
+   "peculiaridades": "Preparo recolhido (ID 351641664, conforme o despacho ID 374895774). Sem pedido de tutela recursal. Intimação pessoal do agravado por carta de ordem à Subseção de Dourados (ID 386935490); certidões de 29/09/2026 (ID 401456114) e 08/10/2026 (ID 403200769) com documentos de devolução sem texto extraível.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -3150,9 +3153,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo",
+    "materia": "Execução fiscal de conselho — arquivamento provisório",
+    "origem": "EF 5000125-93.2020.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "Não consta com texto nos autos do agravo [VALIDAR]",
+    "recurso": "ID 350109419 · 15/01/2026",
+    "preparo": "Recolhido (ID 351641664)",
+    "monocratica": "Provável [VALIDAR]",
+    "analisado_em": "19/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Conferir se a carta de ordem (ID 386935490) foi cumprida e se o agravado foi intimado: documentos de devolução (IDs 401456115 e 403200771) sem texto",
+    "[VALIDAR] Ler a decisão agravada nos autos de origem para identificar o fundamento do arquivamento (artigo 8º da Lei 12.514/2011, artigo 40 da LEF ou outro)",
+    "[VALIDAR] Linha do gabinete aplicável após identificar o fundamento"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
