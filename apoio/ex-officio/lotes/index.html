@@ -408,7 +408,7 @@ function montar(lotes,id,usuario){
    <div class="lx-lt"><p class="lx-ey">Amicus Curiae · Index / ${ROTULO[MODO]}</p>
     <label class="lx-sel" title="Trocar de lote"><span class="sr">Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}${MODO==='cg'&&l.visivel&&(l.visivel.equipe===false||l.visivel.relator===false)?' · oculto: '+[l.visivel.equipe===false?'equipe':'',l.visivel.relator===false?'Relator':''].filter(Boolean).join(' e '):''}</option>`).join('')}</select></label>
     <p class="lx-lt-n" id="cnt">—</p>
-    <p class="lx-lt-s">${FILT_SESSAO?`Sessão de ${br(FILT_SESSAO)}`:`Sessões de ${LOTE.sessoes.map(br).join(' e ')}`}${FILT_MINUTISTA?` · minutista: ${esc(FILT_MINUTISTA)}`:''}</p>
+    <p class="lx-lt-s">${FILT_SESSAO?`Sessão de ${br(FILT_SESSAO)}`:`Sessões de ${LOTE.sessoes.map(br).join(' e ')}`}${FILT_MINUTISTA?` · Produção: ${esc(FILT_MINUTISTA)}`:''}</p>
     ${LOTE.descricao?`<p class="lx-lt-d">${esc(LOTE.descricao)}</p>`:''}</div>
    <p class="lx-nk">Nesta página</p>
    <button type="button" data-ir="matriz"><i>01</i><span>Matriz do lote</span><small id="n-mx"></small></button>
