@@ -130,20 +130,17 @@ async function painel(req, res, u) {
     const b = req.body || {}, cnj = String(b.cnj || '').trim();
     if (!cnj && b.acao !== 'responder' && b.acao !== 'acesso') return res.status(400).json({ erro: 'Informe o processo.' });
     try {
-      if (b.acao === 'liberar') {
+      /* etapa do item (minuta, correção, liberação): marcar uma etapa preenche as anteriores vazias;
+         desfazer uma etapa desfaz também as seguintes, como no seletor de etapa da página da pauta */
+      if (b.acao === 'liberar' || b.acao === 'etapa') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, u, true, req.whatsappEvent);
+        const campo = b.acao === 'liberar' ? 'dataLiberacao' : String(b.campo || '');
+        if (!/^(dataMinuta|dataCorrecao|dataLiberacao)$/.test(campo)) return res.status(400).json({ erro: 'Etapa inválida.' });
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, etapa: { campo, desfazer: !!b.desfazer, hoje: hj } }, u, true,
+          b.acao === 'liberar' ? req.whatsappEvent : undefined);
         if (g.status >= 400) return res.status(g.status).json(g.body);
-        return res.status(200).json({ ok: true, cnj, dataLiberacao: b.desfazer ? '' : hj });
-      }
-      /* etapa do item: o relator marca ou desfaz minuta e correção, como na página da pauta */
-      if (b.acao === 'etapa') {
-        if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
-        const campo = String(b.campo || '');
-        if (!/^(dataMinuta|dataCorrecao)$/.test(campo)) return res.status(400).json({ erro: 'Etapa inválida.' });
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { [campo]: b.desfazer ? '' : hj } }, u, true);
-        if (g.status >= 400) return res.status(g.status).json(g.body);
-        return res.status(200).json({ ok: true, cnj, campo, valor: b.desfazer ? '' : hj });
+        const it = (g.body && g.body.item) || {};
+        return res.status(200).json({ ok: true, cnj, campo, dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '' });
       }
       /* retirada ou adiamento do item, deferidos pelo relator: grava o desfecho na pauta */
       if (b.acao === 'situacao') {
