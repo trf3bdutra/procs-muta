@@ -123,12 +123,15 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Tributário · responsabilidade por cisão parcial · extinção parcial sem mérito e declínio de competência",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de VS Empreendimentos e Participações e Serbom Armazéns Gerais Frigoríficos contra a decisão que extinguiu em parte o feito sem resolução de mérito (ID 479403471 nos autos de origem), complementada nos embargos de declaração (ID 565198258); autos de origem 5021736-26.2025.4.03.6100. Teses das agravantes: não respondem pelos créditos da CDA 47.000.873-3 (empresa SAGA), porque a cisão parcial foi registrada em 26/05/2006, antes dos fatos geradores (01/2010 a 03/2014), e a responsabilidade exigiria apuração administrativa. A União sustenta falta de interesse de agir (artigo 485, VI, do CPC) e a regularidade do declínio de competência para a 2ª Vara de Execuções Fiscais de São Paulo, por conexão.",
+   "peculiaridades": "Tutela recursal indeferida (decisão ID 385918818, de 13/07/2026). Contraminuta da União (ID 388425432, de 24/07/2026). Preparo recolhido inicialmente à Justiça Federal de primeiro grau (ID 371549741); o despacho ID 377316374 mandou retificar (artigo 1.007, § 7º, do CPC), e as agravantes juntaram comprovantes em 03/06/2026 (IDs 378271027, 378271029 e 378271030). Origem com final 6100.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -159,9 +162,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Tributário — responsabilidade de empresa cindida; interesse de agir; competência por conexão",
+    "origem": "5021736-26.2025.4.03.6100",
+    "decisao_agravada": "ID 479403471, complementada pelo ID 565198258 (autos de origem)",
+    "recurso": "ID 368235654 · 22/04/2026",
+    "preparo": "Retificado após o despacho ID 377316374; comprovantes sem texto extraível",
+    "monocratica": "Não",
+    "analisado_em": "19/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: conferir os comprovantes de 03/06/2026 (IDs 378271027, 378271029 e 378271030), sem texto extraível",
+    "[VALIDAR] Competência da Turma Regional: a origem tem final 6100; conferir o enquadramento na Resolução PRES 33/2025 adotado na decisão ID 371073977",
+    "[VALIDAR] Ler a decisão agravada e a dos embargos nos autos de origem"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
