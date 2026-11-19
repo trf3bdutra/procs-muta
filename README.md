@@ -61,6 +61,10 @@ apoio/                         recursos de apoio à redação
                                api/ grava em acervo/sessoes e, no mesmo commit, na ficha do processo em acervo/operacional.json (GH_TOKEN da Vercel)
   modus-operandi/               Modus Operandi: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Ex Officio); modus-operandi.html (um só código; o que cada pessoa vê e edita depende do perfil em apoio/acessos.json) e modus-operandi-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
 
+extensao/                      extensão Muta (Chrome/Edge, painel lateral ao lado do PJe): prontuário por processo, que segue o
+                               processo aberto no PJe, e busca no Ementário do Compêndio (curados + série histórica);
+                               publicada em /extensao/muta-pje.zip pelo vercel-monitor.yml (ver extensao/README.md)
+
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo
   ficha.json                   ficha única padrão do processo (abas, grupos e campos; Produção em versão sessão ou monocrática),

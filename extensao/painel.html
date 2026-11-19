@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>Muta · Assistente de gabinete</title>
+<link rel="icon" href="icones/32.png">
+<link rel="stylesheet" href="painel.css">
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand"><span class="name">Muta</span><span class="d"></span><p>Assistente de gabinete</p></div>
+    <div class="nav-label">PRODUÇÃO</div>
+    <div class="nav" role="tablist" aria-label="Seções do Muta">
+      <button role="tab" id="tab-pront" aria-controls="panel-pront" aria-selected="true"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h6l4 4v12.8H6V5.5a2 2 0 0 1 2-2z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg></span><span class="nav-text"><b>Prontuário</b><small>Triagem e produção</small></span></button>
+      <button role="tab" id="tab-acervo" aria-controls="panel-acervo" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v4H4zM5.5 9v10h13V9M9 13h6M9 16h6"/></svg></span><span class="nav-text"><b>Ementário</b><small>Precedentes do Compêndio</small></span></button>
+      <button role="tab" id="tab-lote" aria-controls="panel-lote" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9h18M9 9v11"/></svg></span><span class="nav-text"><b>Lote</b><small>Amicus Curiae · Index</small></span></button>
+      <button role="tab" id="tab-ajuda" aria-controls="panel-ajuda" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9a2.4 2.4 0 0 1 4.6 1c0 1.5-2.3 2-2.3 3.6M12 17.2h.01"/></svg></span><span class="nav-text"><b>Ajuda</b><small>Instalação e uso</small></span></button>
+    </div>
+    <div class="side-foot"><strong>Ficha e rascunho</strong>A ficha do gabinete é a mesma do Ex Officio, com o seu login. O rascunho pessoal fica só neste navegador, um por processo. O que você pesquisa no Ementário não é enviado.</div>
+  </aside>
+  <main>
+    <!-- PRONTUÁRIO -->
+    <section id="panel-pront" role="tabpanel" aria-labelledby="tab-pront">
+      <header class="head">
+        <div class="rise"><p class="kicker">Extensão Muta · ao lado do PJe</p><h1 class="display">Prontuário</h1></div>
+        <div class="bar so-rascunho">
+          <button class="btn line" id="btn-export" type="button">Exportar JSON</button>
+          <button class="btn line" id="btn-import" type="button">Importar JSON</button>
+          <input type="file" id="file-import" accept="application/json,.json" hidden>
+          <button class="btn danger" id="btn-clear" type="button">Limpar prontuário</button>
+        </div>
+      </header>
+      <div class="pje-bar" id="pje-bar">
+        <span class="pje-dot" id="pje-dot" aria-hidden="true"></span>
+        <span class="pje-txt" id="pje-status" role="status" aria-live="polite">Procurando o processo aberto no PJe…</span>
+        <label class="pje-seguir"><input type="checkbox" id="pje-seguir" checked> Acompanhar o PJe</label>
+        <label class="sr" for="pront-lista">Prontuários salvos</label>
+        <select id="pront-lista" title="Prontuários salvos neste navegador"></select>
+      </div>
+      <div class="pmodo-bar">
+        <div class="seg" id="pmodo" role="tablist" aria-label="O que editar">
+          <button type="button" role="tab" data-m="ficha" aria-selected="true">Ficha do gabinete</button>
+          <button type="button" role="tab" data-m="rascunho" aria-selected="false">Rascunho pessoal</button>
+        </div>
+      </div>
+      <div id="gab" class="gab"></div>
+      <div class="wrap" id="rascunho">
+        <div id="prontuario-app"></div>
+        <div class="note"><strong>Estrutura inicial.</strong> Campos legados, mantidos para compatibilidade do JSON.</div>
+        <p id="save-status" class="status" role="status" aria-live="polite"></p>
+
+        <div class="card">
+          <div class="sect-h"><h2 class="display"><span class="prontuario-step">1</span>Identificação</h2><span class="prontuario-count" data-progress="comum">0/4</span></div>
+          <div class="grid">
+            <div><label class="f" for="f-numero">Número do processo</label><input type="text" id="f-numero" data-k="comum.numero" autocomplete="off"></div>
+            <div><label class="f" for="f-classe">Classe</label><input type="text" id="f-classe" data-k="comum.classe" autocomplete="off"></div>
+            <div><label class="f" for="f-partes">Partes</label><input type="text" id="f-partes" data-k="comum.partes" autocomplete="off"></div>
+            <div><label class="f" for="f-assunto">Assunto</label><input type="text" id="f-assunto" data-k="comum.assunto" autocomplete="off"></div>
+          </div>
+        </div>
+
+        <div class="sect">
+          <div class="sect-h mode-heading">
+            <div class="seg" role="tablist" aria-label="Etapa do prontuário">
+              <button role="tab" id="mode-tri" aria-controls="sub-tri" aria-selected="true">Triagem</button>
+              <button role="tab" id="mode-pro" aria-controls="sub-pro" aria-selected="false" tabindex="-1">Produção</button>
+            </div>
+          </div>
+          <div class="card" id="sub-tri" role="tabpanel" aria-labelledby="mode-tri">
+            <div class="sect-h"><h2 class="display">Triagem</h2><span class="prontuario-count" data-progress="triagem">0/3</span></div>
+            <div class="grid">
+              <div class="full"><label class="f" for="f-resumo">Resumo</label><textarea id="f-resumo" data-k="triagem.resumo"></textarea></div>
+              <div><label class="f" for="f-pend">Pendências</label><textarea id="f-pend" data-k="triagem.pendencias"></textarea></div>
+              <div><label class="f" for="f-enc">Encaminhamento</label><textarea id="f-enc" data-k="triagem.encaminhamento"></textarea></div>
+            </div>
+          </div>
+          <div class="card" id="sub-pro" role="tabpanel" aria-labelledby="mode-pro" hidden>
+            <div class="sect-h"><h2 class="display">Produção</h2><span class="prontuario-count" data-progress="producao">0/3</span></div>
+            <div class="grid">
+              <div><label class="f" for="f-tipo">Tipo de peça</label>
+                <select id="f-tipo" data-k="producao.tipo">
+                  <option value="">Selecione</option><option>Despacho</option><option>Decisão monocrática</option><option>Voto</option><option>Ementa</option><option>Outro</option>
+                </select></div>
+              <div class="full"><label class="f" for="f-quest">Questões a decidir</label><textarea id="f-quest" data-k="producao.questoes"></textarea></div>
+              <div class="full"><label class="f" for="f-minuta">Minuta</label><textarea class="draft" id="f-minuta" data-k="producao.minuta"></textarea></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card sect">
+          <div class="sect-h"><h2 class="display">Precedentes vinculados</h2><span class="prontuario-count" data-progress="vinculos">0</span></div>
+          <ul class="links" id="links"></ul>
+          <div class="empty" id="links-empty"><h3>Nenhum precedente vinculado</h3></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EMENTÁRIO (Compêndio) -->
+    <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
+      <header class="head">
+        <div class="rise"><p class="kicker">Compêndio · Des. Fed. Carlos Muta</p><h1 class="display">Ementário</h1></div>
+        <div class="bar">
+          <a class="btn line" id="acv-compendio" target="_blank" rel="noopener noreferrer">Abrir o Compêndio</a>
+          <button class="btn line" id="btn-refresh" type="button">Recarregar</button>
+        </div>
+      </header>
+      <div class="wrap">
+        <div class="note">Mesma base do Ementário do Compêndio: os precedentes curados do gabinete e a série histórica do Relator (Base de Jurisprudência do TRF-3, 1999 em diante). A busca roda aqui, no navegador; nenhum termo pesquisado nem dado do prontuário é transmitido. Confira sempre a fonte antes de citar.</div>
+        <div id="acv-error" class="err-box" role="alert" hidden></div>
+        <p id="acv-status" class="status" role="status" aria-live="polite"></p>
+        <form id="acv-form" class="acv-form" role="search">
+          <label class="sr" for="acv-q">Buscar no Ementário</label>
+          <input type="search" id="acv-q" placeholder='Termos, "frase exata", OU, -excluir, radical*' autocomplete="off">
+          <div class="bar acv-opts">
+            <label class="sr" for="acv-modo">Onde buscar</label>
+            <select id="acv-modo" title="Onde buscar">
+              <option value="idx">Índice: número, classe, ementa e resultado</option>
+              <option value="ft">Texto integral: ementa e inteiro teor</option>
+            </select>
+            <label class="sr" for="acv-tipo">Espécie</label>
+            <select id="acv-tipo" title="Espécie">
+              <option value="">Todos</option>
+              <option value="cur">Curados do gabinete</option>
+              <option value="A">Acórdãos</option>
+              <option value="M">Monocráticas</option>
+            </select>
+            <label class="sr" for="acv-desde">Desde o ano</label>
+            <input type="number" id="acv-desde" min="1999" max="2100" placeholder="Desde (ano)" title="Desde o ano">
+            <button class="btn solid" type="submit">Buscar</button>
+            <button class="btn" type="button" id="acv-clear">Limpar</button>
+          </div>
+        </form>
+        <div class="acv">
+          <div>
+            <div class="list" id="acv-list" aria-label="Resultados"></div>
+            <div style="margin-top:12px;text-align:center"><button class="btn line" id="acv-more" type="button" hidden>Carregar mais</button></div>
+          </div>
+          <div class="card detail" id="acv-detail" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOTE -->
+    <section id="panel-lote" role="tabpanel" aria-labelledby="tab-lote" hidden>
+      <header class="head">
+        <div class="rise"><p class="kicker">Amicus Curiae · Index</p><h1 class="display">Lote</h1></div>
+        <div class="bar"><a class="btn line" id="lnk-index" target="_blank" rel="noopener noreferrer">Abrir o Index</a></div>
+      </header>
+      <div class="wrap"><div id="lote-app"></div></div>
+    </section>
+
+    <!-- AJUDA -->
+    <section id="panel-ajuda" role="tabpanel" aria-labelledby="tab-ajuda" hidden>
+      <header class="head">
+        <div><p class="kicker">Guia de uso · extensão</p><h1 class="display">Ajuda e instalação</h1></div>
+        <span class="chip" id="versao"></span>
+      </header>
+      <div class="wrap">
+        <div class="grid">
+          <article class="card">
+            <h2 class="display">Como usar</h2>
+            <ol>
+              <li>Entre no PJe 2º grau pelo acesso habitual e abra os autos.</li>
+              <li>Clique no ícone do Muta na barra do Chrome. O painel abre ao lado da página.</li>
+              <li>Com <strong>Acompanhar o PJe</strong> ligado, o painel abre o processo que está na tela.</li>
+              <li><strong>Ficha do gabinete</strong>: a ficha do processo do Ex Officio, com o mesmo login. O que você altera é gravado na ficha e a equipe vê.</li>
+              <li><strong>Rascunho pessoal</strong>: o prontuário completo, guardado só neste navegador. <em>Enviar o rascunho à ficha</em> grava na ficha os campos correspondentes; <em>Trazer da ficha</em> preenche os vazios do rascunho.</li>
+              <li><strong>Lote</strong>: com a minuta aberta no editor do PJe (tarefa Aguardando a sessão), clique em <em>Ler o editor do PJe</em> para comparar com a versão registrada no lote, como no botão Comparar do Index. Riscado: está no lote e falta no editor; verde: está só no editor.</li>
+              <li>Em <strong>Ementário</strong>, pesquise os precedentes do Relator e use <strong>Vincular ao prontuário</strong>.</li>
+            </ol>
+            <p class="muted">O painel só lê o número do processo na tela do PJe. Não clica, não grava e não protocola nada no tribunal.</p>
+          </article>
+          <article class="card">
+            <h2 class="display">Busca no Ementário</h2>
+            <p>Mesma sintaxe do Compêndio. Termos soltos: todos precisam aparecer. <code>OU</code> entre termos: qualquer um. <code>"frase exata"</code>. <code>-termo</code> exclui. <code>aposentad*</code> busca pelo radical. Acentos e maiúsculas não importam.</p>
+            <p><strong>Índice</strong> procura em número, classe, órgão, ementa e resultado. <strong>Texto integral</strong> procura também no inteiro teor e baixa os arquivos anuais do recorte; use o filtro de ano para acelerar.</p>
+          </article>
+          <article class="card">
+            <h2 class="display">Instalar no Chrome ou Edge</h2>
+            <ol>
+              <li>Baixe o pacote: <a id="lnk-zip" target="_blank" rel="noopener noreferrer">muta-pje.zip</a>.</li>
+              <li>Extraia o ZIP para uma pasta permanente.</li>
+              <li>Abra <code>chrome://extensions</code> (ou <code>edge://extensions</code>), ative <strong>Modo do desenvolvedor</strong> e use <strong>Carregar sem compactação</strong>, escolhendo a pasta que contém <code>manifest.json</code>.</li>
+              <li>Fixe o ícone do Muta: menu de extensões (quebra-cabeça) › alfinete.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <h2 class="display">Atualizar sem perder os dados</h2>
+            <ol>
+              <li>Antes, use <strong>Exportar JSON</strong> nos prontuários em andamento.</li>
+              <li>Extraia o ZIP novo <strong>sobre a mesma pasta</strong> e clique em <strong>Recarregar</strong> no cartão do Muta, em <code>chrome://extensions</code>.</li>
+              <li>Recarregue a aba do PJe.</li>
+            </ol>
+            <p><strong>Não remova a extensão para atualizar:</strong> remover apaga os prontuários guardados nela.</p>
+          </article>
+          <article class="card">
+            <h2 class="display">Dados e sigilo</h2>
+            <p>Os prontuários ficam só neste navegador, na extensão. O JSON exportado não tem senha e pode conter dados sigilosos: guarde-o em local autorizado.</p>
+            <p>Nenhuma senha do PJe deve ser digitada no painel.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="muta-dialogo" class="dlg">
+  <form method="dialog">
+    <p id="muta-dialogo-msg"></p>
+    <div class="bar dlg-bar">
+      <button class="btn line" value="nao" type="submit">Cancelar</button>
+      <button class="btn solid" value="sim" type="submit" id="muta-dialogo-ok">Confirmar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="comum.js"></script>
+<script src="sessao.js"></script>
+<script src="prontuario.js"></script>
+<script src="ementario.js"></script>
+<script src="ficha.js"></script>
+<script src="gabinete.js"></script>
+<script src="lote.js"></script>
+<script src="pje.js"></script>
+</body>
+</html>

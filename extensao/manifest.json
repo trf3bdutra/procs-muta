@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "Muta · Assistente de gabinete",
+  "short_name": "Muta",
+  "version": "0.7.0",
+  "description": "Ficha do processo (Ex Officio), lote, rascunho pessoal e Ementário do Compêndio, em painel lateral ao lado do PJe (Gab. Des. Fed. Carlos Muta, TRF-3).",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "icones/16.png",
+    "32": "icones/32.png",
+    "48": "icones/48.png",
+    "128": "icones/128.png"
+  },
+  "action": {
+    "default_title": "Abrir o Muta ao lado do PJe",
+    "default_icon": {
+      "16": "icones/16.png",
+      "32": "icones/32.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "painel.html"
+  },
+  "background": {
+    "service_worker": "fundo.js"
+  },
+  "permissions": ["sidePanel", "storage"],
+  "host_permissions": [
+    "https://www.gabinete-cmt.com/*",
+    "https://gabinete-cmt.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://pje2g.trf3.jus.br/*"],
+      "js": ["conteudo-pje.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}
