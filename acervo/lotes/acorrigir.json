@@ -4811,7 +4811,7 @@
    "assunto": "Indenização por Dano Material",
    "grupo": null,
    "tipo_caso": "Indenização por Dano Material",
-   "resultado": "",
+   "resultado": "Desprovida",
    "modelo": "",
    "variacoes": [],
    "observacao": "",
@@ -4923,7 +4923,63 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "\"remessa necessária da sentença\" → \"à sentença\"; incluídos autor e ré (Raízen Centro-Sul S.A., sucessora de Biosev S.A., IDs 349502923 e 349502924)",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Parecer em segundo grau é da Procuradoria Regional da República, não do \"Ministério Público Federal\"; \"Ministério Público oficiante\" → \"Ministério Público Federal em primeiro grau\"",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluído o conhecimento da remessa necessária (artigo 19 da Lei 4.717/1965, por analogia), fundamento invocado na própria sentença",
+     "Incluído"
+    ],
+    [
+     "Voto",
+     "ID 349502916, f. 8, não é \"relação de autos de infração\", é o próprio auto (Biosev S.A., 07/10/2021, BR-267). Frase reescrita; conferido que é o único auto da ré no inquérito civil",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Retirados advérbios enfáticos (\"devidamente\", \"manifestamente\")",
+     "Redação"
+    ],
+    [
+     "Voto",
+     "\"fl.\" → \"f.\"; \"DJEN de\" → \"DJEN\"",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Título: \"IMPROVIMENTO\" → \"REMESSA NECESSÁRIA DESPROVIDA\" e incluído o Tema 1.104/STJ; questão com \"saber se\"; item 4 ajustado ao documento",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Rodapé: retirados CTB 231, V, AgInt no REsp 1.783.304 e AgInt no REsp 1.819.218, que só aparecem dentro da ementa transcrita; incluído o artigo 19 da Lei 4.717/1965; REsp 1.908.497 identificado como Tema 1.104 e o REsp 1.913.392 deixado no voto",
+     "Corrigido"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs conferidos: sentença 349502999 (sujeita a reexame pelo artigo 19 da Lei 4.717/1965), parecer 360639029, memoriais 373648556 e inquérito civil 349502916 (f. 8 e f. 37)",
+     "Conferido"
+    ]
+   ],
    "pendencias": [],
    "minuta": true,
    "autos": {
