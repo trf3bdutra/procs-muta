@@ -5548,7 +5548,7 @@
    "assunto": "Registro Profissional",
    "grupo": null,
    "tipo_caso": "Registro Profissional",
-   "resultado": "",
+   "resultado": "Desprovida",
    "modelo": "",
    "variacoes": [],
    "observacao": "",
@@ -5666,8 +5666,61 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura no padrão (\"remessa necessária à sentença que concedeu a segurança\"), com o dispositivo da sentença (ID 400501797) e a sigla CRM/MS entre parênteses",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Incluída a ausência de recurso voluntário (o despacho de ID 400501802 remete os autos só por força do reexame)",
+     "Incluído"
+    ],
+    [
+     "Relatório",
+     "Parecer: a Procuradoria Regional da República não opinou sobre o mérito (\"falta de interesse\"), só pediu o prosseguimento; frase ajustada para não sugerir manifestação de mérito",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Itens 3, 4 e 6 tinham frases de 60 a 90 palavras; divididos em períodos menores, sem mudar o conteúdo",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Questão com \"saber se\"; item 9 com \"pois\" no lugar de \"vez que\"",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Rodapé no formato do gabinete: tribunal antes de cada referência (STF → STJ → TRF-3), \"TRF3\" → \"TRF-3\", \"CF\" e \"e\" antes do último item",
+     "Redação"
+    ],
+    [
+     "Voto",
+     "\"vez que\" → \"pois\" (custas)",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs e fatos conferidos: diploma 400501606 (Universidad del Norte), apostila 400501607 (26/11/2025, modalidade simplificada, Decretos 2.460/2005 e 6.372/2021), indeferimento 400501611, informações 400501788 (Ofício Circular 37/2026 e AI 0002987-25.2026.8.27.2700, ID 400501793), sentença 400501797 e pedido de revalidação em dezembro de 2024 (IDs 400501602 e 400501615)",
+     "Conferido"
+    ]
+   ],
+   "pendencias": [
+    "A apostila (ID 400501607) é digitalizada e o texto extraído embaralha número, folha e livro do registro; conferir no PDF se é \"número 23827, folha 238, livro 65\"."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5003449-87.2026.4.03.6000.json.gz",
