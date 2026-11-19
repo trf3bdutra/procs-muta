@@ -738,6 +738,16 @@ const M = () => { try { return frame.contentWindow; } catch (e) { return null; }
 const core = () => (M() && M().__painelCentralComponent) || null;
 const SES = () => (M() && M().CMTSessao) || null;
 const PM = () => (M() && M().ProcsMuta) || null;
+/* Competências da equipe (/caput/competencias/, moldura na Coordenação) lê e grava pelo mesmo motor */
+W.CMTCaput = Object.assign(W.CMTCaput || {}, { motor: M, sessao: SES, procsMuta: PM });
+W.addEventListener('message', (e) => { if (e.origin !== location.origin) return; const d = e.data || {}; if (d.tipo === 'cmt:comp-altura') { const f = D.querySelector('#cg-comp iframe'); if (f) f.style.height = Math.max(640, Math.min(30000, +d.h || 0)) + 'px'; } });
+function compEquipe(mostrar) {
+  let w = D.getElementById('cg-comp');
+  if (!w && mostrar) { w = D.createElement('section'); w.id = 'cg-comp'; w.setAttribute('aria-label', 'Competências da equipe');
+    w.innerHTML = '<div class="wrap"><iframe title="Competências da equipe: mapa, perfis, matriz, especialistas e produção" src="/caput/competencias/" style="width:100%;height:1400px;border:0;display:block;border-radius:14px;background:transparent"></iframe></div>';
+    const m = D.getElementById('main'); m.parentNode.insertBefore(w, m.nextSibling); }
+  if (w) w.hidden = !mostrar;
+}
 setInterval(() => { let pede = false; try { const w = M(); pede = !!(w && w.document.querySelector('#procsmuta-token, form input[type=password]')); } catch (e) {} D.body.classList.toggle('tk', pede); }, 400);
 
 /* ===================== regras (as mesmas do Monitor, sobre a fonte do acervo) ===================== */
@@ -963,6 +973,7 @@ $('#abas').addEventListener('click', (e) => { if (e.target.closest('[data-escsai
 function modAtual(){ return ABA === 'pautas' ? 'pautas' : ABA === 'coordenacao' ? 'coordenacao' : ABA === 'comunicacao' ? 'comunicacao' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; }
 function abaTriagem(){ return ABA === 'fila' || ABA === 'escaninhos' || ABA.indexOf('esc:') === 0; }
 function render() {
+  compEquipe(ABA === 'coordenacao');
   if (ABA !== 'chefia') { const rg = D.querySelector('#rg.embutida'); if (rg && W.CMTRegrasGerais) try { W.CMTRegrasGerais.fechar(); } catch(e){} }
   if (!PRONTO) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', b.dataset.mod === modAtual())); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } $('#rodape').hidden = true; return; }
   F = filtroDe(ABA); pintaAbas(); pintaGrava();
@@ -1001,7 +1012,7 @@ function vCoordenacao(){
   const eq=equipeAtual(), serv=[...new Set(U.map(o=>o.minutante).filter(Boolean))];
   return '<div class="wrap"><div class="cg-head"><div><p class="k">Equipe e execução</p><h1>Coordenação.</h1><p>Distribuição, acompanhamento do time, diligências e organização diária do gabinete.</p></div></div>'+
     '<div class="cg-kpis"><div><b>'+nf(eq.length||serv.length)+'</b><span>pessoas na equipe</span></div><div><b>'+nf(serv.length)+'</b><span>servidores com processos na triagem</span></div><div><b>'+nf(U.filter(o=>o.pend.length).length)+'</b><span>processos com pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
-    '<div class="cg-grid"><section class="cg-box"><header>Equipe e capacidade</header><div class="cg-link"><span><b>Cadastro e funções</b><small>Perfis, atribuições e participação em designação automática</small></span><button data-cg-chefia="equipe">Abrir</button></div><div class="cg-link"><span><b>Metas e pesos</b><small>Capacidade, produtividade e critérios de redistribuição</small></span><button data-cg-chefia="produtividade">Abrir</button></div><div class="cg-link"><span><b>Designação</b><small>Critérios gerais e quem recebe cada tipo de processo</small></span><button data-cg-chefia="designacao">Abrir</button></div></section>'+
+    '<div class="cg-grid"><section class="cg-box"><header>Equipe e capacidade</header><div class="cg-link"><span><b>Cadastro e funções</b><small>Perfis, atribuições e participação em designação automática</small></span><button data-cg-chefia="equipe">Abrir</button></div><div class="cg-link"><span><b>Metas e pesos</b><small>Capacidade, produtividade e critérios de redistribuição</small></span><button data-cg-chefia="produtividade">Abrir</button></div><div class="cg-link"><span><b>Designação</b><small>Critérios gerais e quem recebe cada tipo de processo</small></span><button data-cg-chefia="designacao">Abrir</button></div><div class="cg-link"><span><b>Competências da equipe</b><small>Especialidade, prefere, evita, experiência, ranking por assunto e produção no tempo (abaixo)</small></span><button type="button" onclick="document.getElementById(\'cg-comp\').scrollIntoView({behavior:\'smooth\'})">Ver</button></div></section>'+
     '<section class="cg-box"><header>Operação diária</header><div class="cg-link"><span><b>Office · equipe e diligências</b><small>Avisos, tarefas, ausências e acompanhamento operacional</small></span><button data-cg-url="/office/#cmt">Abrir Office</button></div><div class="cg-link"><span><b>Calendário do gabinete</b><small>Sessões, marcos, feriados e agenda</small></span><button data-cg-chefia="calendario">Abrir</button></div><div class="cg-link"><span><b>Pautas</b><small>Composição e andamento das próximas sessões</small></span><button data-cg-go="pautas">Abrir</button></div></section></div></div>';
 }
 

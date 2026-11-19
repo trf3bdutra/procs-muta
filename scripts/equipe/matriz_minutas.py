@@ -30,6 +30,15 @@ pessoa = lambda v: IDX.get(N(v), str(v or '').strip().title()) if str(v or '').s
 
 FONTE = {dg(r.get('processo')): r for r in ler('acervo/fonte.json')['registros']}
 
+def cxDe(v):   # complexidade do Caput: Ω (padrão) = 1, Α (intermediária) = 2, Σ (complexa) = 3; vazio conta como Ω
+    t = N(v)
+    if not t: return 1
+    if re.search(r'OMEGA|PADRAO|BAIXA|Ω', t): return 1
+    if re.search(r'ALFA|ALPHA|INTERMEDI|MEDIA|Α', t): return 2
+    if re.search(r'SIGMA|COMPLEX|ALTA|Σ', t): return 3
+    try: n = round(float(str(v).replace(',', '.'))); return n if 1 <= n <= 3 else 1
+    except ValueError: return 1
+
 def tipo(classe, aprec=''):
     a, c = N(aprec), N(classe)
     if a in ('ED',) or a.startswith('EMBARGOS DE DECL'): return 'Embargos de declaração'
@@ -42,7 +51,7 @@ def tipo(classe, aprec=''):
     return 'Outras classes' if c else 'Apelação'   # sem classe na pauta e no acervo: 1º julgamento colegiado
 
 REG = {}   # (processo, tipo) -> registro; fontes lidas da mais antiga para a mais recente
-def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe='', corretor=''):
+def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe='', corretor='', cx=''):
     p = dg(proc); s = pessoa(serv)
     if len(p) != 20 or not (s or (fonte.startswith('histórico') and corretor)): return   # do histórico, vale também a conferência sem autoria identificada
     f = FONTE.get(p, {})
@@ -51,7 +60,8 @@ def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe='', correto
                     'classe': classe or f.get('classe_judicial') or f.get('DataJud · Classe') or '',
                     'secao': secao or f.get('Seção Competente') or '',
                     'assunto': assunto or f.get('Assunto') or f.get('assunto_judicial') or '', 'fonte': fonte, 'data': data, 'detalhe': detalhe,
-                    'corretor': '' if '/' in str(corretor or '') else pessoa(corretor)}   # corretor composto ("Bruno/Alex") era provisório: não conta
+                    'corretor': '' if '/' in str(corretor or '') else pessoa(corretor), 'cx': cxDe(cx or (f.get('COMPLEXIDADE') or f.get('Dificuldade') or ''))}   # corretor composto ("Bruno/Alex") era provisório: não conta
+    if REG[(p, tp)]['cx'] == 1 and ant.get('cx', 1) > 1: REG[(p, tp)]['cx'] = ant['cx']
     for k in ('classe', 'secao', 'assunto', 'detalhe', 'data', 'corretor'):   # a fonte mais recente vale, mas não apaga o que a anterior sabia
         if not REG[(p, tp)][k] and ant.get(k): REG[(p, tp)][k] = ant[k]
 
@@ -71,7 +81,7 @@ for r in ler('acervo/operacional.json')['registros']:
     if not s: continue
     f = FONTE.get(dg(r['processo']), {}); cl = f.get('classe_judicial') or f.get('DataJud · Classe') or ''
     tp = 'Decisão monocrática' if N(pr.get('Destino')) == 'MONOCRATICA' else tipo(cl)
-    poe(r['processo'], s, tp, cl, '', '', 'ficha', pr.get('MINUTADO') or '', '', pr.get('CORRETOR') or '')
+    poe(r['processo'], s, tp, cl, '', '', 'ficha', pr.get('MINUTADO') or '', '', pr.get('CORRETOR') or '', (r.get('triagem') or {}).get('COMPLEXIDADE') or '')
 # 2. pautas dos bimestres
 for arq in sorted(glob.glob(str(R / 'acervo/planilhas/pauta-2026-*-bimestre.json'))):
     for ses, L in json.loads(pathlib.Path(arq).read_text(encoding='utf-8'))['pautas'].items():
@@ -90,7 +100,7 @@ for arq in sorted(glob.glob(str(R / 'acervo/sessoes/2*.json'))):
     S = json.loads(pathlib.Path(arq).read_text(encoding='utf-8'))
     for i in S.get('itens') or []:
         ap = i.get('julgamento') if i.get('julgamento') not in ('', '—', 'META', 'AI') else ''
-        poe(i.get('cnj'), i.get('servidor'), tipo(i.get('classe'), ap), i.get('classe'), '', i.get('assunto'), 'sessão ' + S.get('date', pathlib.Path(arq).stem), i.get('dataMinuta') or '', '', i.get('corretor') or '')
+        poe(i.get('cnj'), i.get('servidor'), tipo(i.get('classe'), ap), i.get('classe'), '', i.get('assunto'), 'sessão ' + S.get('date', pathlib.Path(arq).stem), i.get('dataMinuta') or '', '', i.get('corretor') or '', i.get('complexidade') or (i.get('ctl') or {}).get('complexidade') or (i.get('ctl') or {}).get('cx') or '')
 
 regs = list(REG.values())
 # ramo do direito (TPU/CNJ, apoio/assuntos-cnj.json): pelo código do assunto no acervo; senão pelo nome do assunto
@@ -163,8 +173,8 @@ def perfil(nome, L):
 saida = {'schema': 'gabcmt.equipe.matriz', 'versao': 1, 'geradoEm': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
          'geradoPor': 'scripts/equipe/matriz_minutas.py', 'tipos': TIPOS,
          'servidores': sorted((perfil(n, L) for n, L in por.items()), key=lambda p: -p['total']),
-         # uma linha por minuta: [redator, tipo, seção, ramo, assunto, corretor, só do histórico (1) ou das pautas do Git (0), data da pauta, data da minuta]
-         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto'], x['corretor'], 1 if x['fonte'].startswith('histórico') else 0, x['sessao'], x['data'] or ''] for x in regs)}
+         # uma linha por minuta: [redator, tipo, seção, ramo, assunto, corretor, só do histórico (1) ou das pautas do Git (0), data da pauta, data da minuta, processo (20 dígitos), complexidade 1 Ω · 2 Α · 3 Σ]
+         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto'], x['corretor'], 1 if x['fonte'].startswith('histórico') else 0, x['sessao'], x['data'] or '', x['processo'], x['cx']] for x in regs)}
 
 if '--gravar' in sys.argv:
     alvo = R / 'apoio/equipe-matriz.json'
