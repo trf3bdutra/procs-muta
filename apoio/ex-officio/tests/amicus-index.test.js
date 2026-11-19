@@ -18,8 +18,8 @@ test('Amicus tem URLs canônicas e redirecionamentos de compatibilidade',()=>{
  assert.ok(read('apoio/amicus/index.html').includes('/amicus/compendium/'));
 });
 test('Seletor separa sessões e lotes avulsos',()=>{
- for(const x of ['opcoesIndices(lotes,id)','Lotes avulsos','Sessão ','Matriz geral']) assert.ok(app.includes(x),x);
- assert.ok(app.includes('gn-tipo'));
+ for(const x of ['seletorColecoes(lotes,id)','Coleção de Pauta','Coleções Avulsas','Matriz geral','sel-sessao','sel-pauta']) assert.ok(app.includes(x),x);
+ assert.ok(app.includes("tipo:'avulso'"));
  assert.ok(api.includes("tipo=b.tipo==='pauta'?'pauta':'avulso'"));
  assert.ok(api.includes("ss.length!==1"));
 });
@@ -27,6 +27,7 @@ test('Matriz automática agrupa assuntos da sessão e não modifica o acervo',()
  for(const x of ['async function indicePauta(s)','rotuloAssunto(it)','virtual:true','it.grupo=id']) assert.ok(api.includes(x),x);
  assert.ok(app.includes("if(LOTE.virtual)"));
  assert.ok(app.includes("if(MODO==='cg' && !LOTE.virtual)ligaVis()"));
+ assert.match(api,/const sessaoVirtual=\/\^pauta-\(\\d\{4\}/);
 });
 test('Permissões originais preservadas',()=>{
  assert.ok(api.includes("CMT.porChave(req)"));
