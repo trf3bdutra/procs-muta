@@ -13,7 +13,7 @@
 <title>Index · Amicus Curiae · CMT</title>
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cmt-eq-tema')||'light')}catch(e){}</script>
 <!-- Painel de lotes (/lotes/): página própria, desenhada como parte do Painel do relator (/cmt), com o mesmo tema (cmt-eq-tema),
-     /index/cmt/ seleciona a visão do Desembargador sem solicitar login interativo, mediante chave válida ou sessão existente. /index/gc/ permanece restrito ao gestor.
+     /amicus/index/cmt/ seleciona a visão do Desembargador sem solicitar login interativo, mediante chave válida ou sessão existente. /amicus/index/gc/ permanece restrito ao gestor.
      Dados: /api/painel?lote=1 (api/_lote.js: acervo/lotes/<id>.json, cartões de acervo/sessoes e minutas de acervo/minutas/<id>/).
      Ligações: Painel do relator (/cmt/), Ex Officio (/equipe/) e Consulta do Modus Operandi (/modus/#consulta=AAAA-MM-DD/ITEM). -->
 <style>
@@ -342,9 +342,9 @@ const pad=n=>String(n).padStart(2,'0');
 let RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],calendario:[],gestor:false};
 const params=new URLSearchParams(location.search);
 const FILT_SESSAO=String(params.get('sessao')||'').trim(), FILT_MINUTISTA=String(params.get('minutista')||'').trim();
-/* Amicus Curiae · Index: três visões no mesmo arquivo. O nome visual permanece Index; rotas canônicas: /lote/ (Geral), /lote/cmt/ (Desembargador) e /lote/cg/ (controle geral). /index/* e as rotas antigas de lotes permanecem apenas como compatibilidade. */
+/* Amicus Curiae · Index: três visões no mesmo arquivo. O nome visual permanece Index; rotas canônicas: /amicus/index/ (Geral), /amicus/index/cmt/ (Desembargador) e /amicus/index/cg/ (controle geral). /amicus/index/* e as rotas antigas de lotes permanecem apenas como compatibilidade. */
 const PATH=location.pathname.toLowerCase();
-const MODO=(/^\/lote\/cmt?(?:\/|$)/.test(PATH)||/^\/index\/cm(?:t)?(?:\/|$)/.test(PATH)||/^\/cmt\/lotes(?:\/|$)/.test(PATH))?'rel':((/^\/lote\/(?:cg|gc)(?:\/|$)/.test(PATH)||/^\/index\/(?:cg|gc)(?:\/|$)/.test(PATH)||/^\/(?:cg|gc)\/lotes(?:\/|$)/.test(PATH))?'cg':'eq'), MODO_REL=MODO==='rel';
+const MODO=(/^\/amicus\/index\/cmt(?:\/|$)/.test(PATH)||/^\/lote\/cmt?(?:\/|$)/.test(PATH)||/^\/index\/cm(?:t)?(?:\/|$)/.test(PATH)||/^\/cmt\/lotes(?:\/|$)/.test(PATH))?'rel':((/^\/amicus\/index\/(?:gc|cg)(?:\/|$)/.test(PATH)||/^\/lote\/(?:cg|gc)(?:\/|$)/.test(PATH)||/^\/index\/(?:cg|gc)(?:\/|$)/.test(PATH)||/^\/(?:cg|gc)\/lotes(?:\/|$)/.test(PATH))?'cg':'eq'), MODO_REL=MODO==='rel';
 let VZ=MODO==='cg'?'tudo':MODO;
 /* linha de abertura do carregamento, no lugar da saudação do Painel do Desembargador */
 (function(){const e=document.getElementById('ld-s');if(e)e.textContent=MODO==='rel'?'Index · CMT.':MODO==='cg'?'Index · CG.':'Index · Geral.'})();
@@ -354,11 +354,19 @@ async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fet
 async function post(b){const r=await fetch('/api/painel?lote=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function mostra(html){$('#ld').hidden=true;const a=$('#app');a.hidden=false;a.innerHTML=html}
 function falha(e){
-  if(e.status===403&&MODO==='cg'){$('#ld-m').innerHTML='Esta página é só do controle geral.<br><a class="b pri" style="margin-top:14px" href="/lote/">Ir para o Index geral</a>';$('#ld .cmt-ld-b').hidden=true;return}
+  if(e.status===403&&MODO==='cg'){$('#ld-m').innerHTML='Esta página é só do controle geral.<br><a class="b pri" style="margin-top:14px" href="/amicus/index/">Ir para o Index geral</a>';$('#ld .cmt-ld-b').hidden=true;return}
   if(e.status===401){$('#ld-m').innerHTML=MODO_REL?'Abra esta página pelo link do painel do Desembargador.':'O Amicus Curiae · Index usa o login do Ex Officio.<br><a class="b pri" style="margin-top:14px" href="/equipe/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
   $('#ld-m').textContent='Não foi possível abrir: '+e.message;$('#ld .cmt-ld-b').hidden=true;
 }
 const ROTULO={cg:'CG',eq:'Geral',rel:'CMT'};
+
+function opcoesIndices(lotes,atual){
+ const option=l=>'<option value="'+esc(l.id)+'"'+(l.id===atual?' selected':'')+'>'+esc(l.titulo)+' · '+(l.total||0)+(l.virtual?' · automática':'')+'</option>';
+ const ds=[...new Set(lotes.filter(l=>l.tipo==='pauta').map(l=>l.sessao||(l.sessoes||[])[0]).filter(Boolean))].sort().reverse();
+ const rows=ds.map(s=>'<optgroup label="Sessão '+br(s)+'">'+lotes.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===s).sort((a,b)=>(b.virtual?1:0)-(a.virtual?1:0)||String(a.titulo).localeCompare(String(b.titulo),'pt-BR')).map(option).join('')+'</optgroup>');
+ const av=lotes.filter(l=>l.tipo!=='pauta');if(av.length)rows.push('<optgroup label="Lotes avulsos">'+av.map(option).join('')+'</optgroup>');
+ return rows.join('');
+}
 function cabecalho(lotes,id,usuario){
   return `<header class="lx-nx"><div class="lx-nx1"><i class="star" aria-hidden="true"></i>
    <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>Index<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
@@ -367,8 +375,8 @@ function cabecalho(lotes,id,usuario){
    ${MODO==='cg'?`<button type="button" class="hb" id="b-ed" title="Editar título, descrição e filtro do lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Editar lote</span></button>`:''}
    ${MODO==='cg'?`<button type="button" class="hb" id="b-novo" title="Criar um lote a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Novo lote</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
    <a class="hb" href="/cmt/" title="Voltar ao Painel do relator"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Painel do relator</span></a>
-   ${MODO==='cg'?`<a class="hb" href="/index/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Index · Geral"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-3-5.2"/></svg><span>Index · Geral</span></a>`:''}
-   ${MODO_REL?'':`<a class="hb" href="/index/cmt/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Index · CMT"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Index · CMT</span></a>`}
+   ${MODO==='cg'?`<a class="hb" href="/amicus/index/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Index · Geral"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-3-5.2"/></svg><span>Index · Geral</span></a>`:''}
+   ${MODO_REL?'':`<a class="hb" href="/amicus/index/cmt/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Index · CMT"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Index · CMT</span></a>`}
    ${MODO_REL||(CMTK&&!usuario)?'':`<a class="hb" href="/equipe/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`}
    ${MODO_REL?'':'<a class="hb" href="/modus/" target="_blank" rel="noopener" title="Modus Operandi: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Compendium</span></a>'}
    <button type="button" class="hb" id="tema" title="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><span>Tema</span></button>
@@ -383,7 +391,7 @@ async function inicio(){
     const id=lotes.some(l=>l.id===params.get('id'))?params.get('id'):lotes[0].id;
     const R=await api('?id='+encodeURIComponent(id));
     /* só com a chave do relator (sem login), /lotes/ leva à página dele */
-    if(MODO==='eq'&&R.relator){location.replace('/index/cmt/?id='+encodeURIComponent(id)+location.hash);return}
+    if(MODO==='eq'&&R.relator){location.replace('/amicus/index/cmt/?id='+encodeURIComponent(id)+location.hash);return}
     LOTE=R.lote; RELATOR=!!R.relator; montar(lotes,id,L.usuario);
   }catch(e){falha(e)}
 }
@@ -391,7 +399,7 @@ function ligaCab(){
   const sl=$('#sel');if(sl)sl.onchange=()=>{location.search='?id='+encodeURIComponent(sl.value)};
   $('#atu').onclick=()=>location.reload();const bc=$('#b-cmp');if(bc)bc.onclick=()=>painel();
   $('#tema').onclick=()=>{const d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('cmt-eq-tema',n)}catch(e){}};
-  const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const be=$('#b-ed');if(be)be.onclick=abrirEditar;const bs=$('#b-ses');if(bs)bs.onclick=abrirSessoes;
+  const bn=$('#b-novo');if(bn)bn.onclick=abrirNovo;const be=$('#b-ed');if(be){be.disabled=!!(LOTE&&LOTE.virtual);be.onclick=abrirEditar;}const bs=$('#b-ses');if(bs){bs.disabled=!!(LOTE&&LOTE.virtual);bs.onclick=abrirSessoes;}
 }
 function gcor(it){return it.grupo&&COR[it.grupo]?COR[it.grupo]:OUT.cor}
 function painelVisLotes(lotes){
@@ -399,12 +407,12 @@ function painelVisLotes(lotes){
   return `<section class="cmt-q" id="g-lotes"><h2><i class="nn">00</i><span>Publicação dos <em>lotes.</em></span><span class="cmt-sp"></span><span class="cmt-n">${lotes.length} lote${lotes.length===1?'':'s'}</span></h2>
    <p class="none" style="font-style:normal;margin:12px 0">Controle central de quais lotes aparecem no <b>Index · Geral</b> e no <b>Index · CMT</b>. A visão CMT é a página do Desembargador.</p>
    <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th>Lote</th><th>Sessões</th><th>Processos</th><th>Geral</th><th>Desembargador</th><th></th></tr></thead><tbody>
-   ${lotes.map(l=>{const v=l.visivel||{},eq=v.equipe!==false,rl=v.relator!==false;return `<tr data-lote="${esc(l.id)}"><td><b>${esc(l.titulo||l.id)}</b><br><span class="cmt-n">${esc(l.id)}</span></td><td class="cnj">${(l.sessoes||[]).map(br).join('<br>')}</td><td class="ii">${l.total}</td><td class="vz"><input type="checkbox" data-lve="${esc(l.id)}"${eq?' checked':''}></td><td class="vz"><input type="checkbox" data-lvr="${esc(l.id)}"${rl?' checked':''}></td><td><a class="b" href="/index/gc/?id=${encodeURIComponent(l.id)}">Abrir</a></td></tr>`}).join('')}
+   ${lotes.map(l=>{const v=l.visivel||{},eq=v.equipe!==false,rl=v.relator!==false;return `<tr data-lote="${esc(l.id)}"><td><b>${esc(l.titulo||l.id)}</b><br><span class="cmt-n">${esc(l.id)}</span></td><td class="cnj">${(l.sessoes||[]).map(br).join('<br>')}</td><td class="ii">${l.total}</td><td class="vz"><input type="checkbox" data-lve="${esc(l.id)}"${eq?' checked':''}${l.virtual?' disabled title="Matriz automática"':''}></td><td class="vz"><input type="checkbox" data-lvr="${esc(l.id)}"${rl?' checked':''}${l.virtual?' disabled title="Matriz automática"':''}></td><td><a class="b" href="/amicus/index/gc/?id=${encodeURIComponent(l.id)}">Abrir</a></td></tr>`}).join('')}
    </tbody></table></div><p class="k" id="gl-m">Alterações são aplicadas imediatamente ao seletor de lotes de cada visão.</p></section>`;
 }
 function ligaVisLotes(){
   if(MODO!=='cg')return;
-  document.querySelectorAll('[data-lve],[data-lvr]').forEach(cb=>cb.onchange=async()=>{
+  document.querySelectorAll('[data-lve]:not(:disabled),[data-lvr]:not(:disabled)').forEach(cb=>cb.onchange=async()=>{
     const id=cb.dataset.lve||cb.dataset.lvr, l=LISTA.lotes.find(x=>x.id===id); if(!l)return;
     const eq=document.querySelector('[data-lve="'+CSS.escape(id)+'"]').checked;
     const rl=document.querySelector('[data-lvr="'+CSS.escape(id)+'"]').checked;
@@ -424,12 +432,13 @@ function montar(lotes,id,usuario){
   const sit=[...new Set(ITENS.map(i=>i.equipe&&i.equipe.situacao).filter(Boolean))];
   const grs=LOTE.grupos.filter(g=>ITENS.some(i=>i.grupo===g.id)).map(g=>({k:g.id,r:g.rotulo,c:g.cor,n:ITENS.filter(i=>i.grupo===g.id).length}));
   if(ITENS.some(i=>!i.grupo))grs.push({k:'',r:'Outros',c:OUT.cor,n:ITENS.filter(i=>!i.grupo).length});
-    const nota={cg:'Na gestão aparecem todos os processos. Nas colunas Equipe e Relator, você escolhe o que cada página mostra.',eq:'O Relator vê só os processos liberados para ele.',rel:'Clique num processo para abrir o perfil e a minuta.'}[MODO];
+    const contexto=LOTE.tipo==='pauta'?'Sessão '+br(LOTE.sessoes[0])+(LOTE.virtual?' · matriz geral automática':' · índice temático'):'Lote avulso';
+  const nota={cg:'Na gestão aparecem todos os processos. Nas colunas Equipe e Relator, você escolhe o que cada página mostra.',eq:'O Relator vê só os processos liberados para ele.',rel:'Clique num processo para abrir o perfil e a minuta.'}[MODO];
   mostra(cabecalho(lotes,id,usuario)+`<div class="lx">
   <nav class="lx-sub" id="lx-sub" aria-label="Lote e seções da página">
    <div class="lx-lt"><p class="lx-ey">Amicus Curiae · Index / ${ROTULO[MODO]}</p>
-    <label class="lx-sel" title="Trocar de lote"><span class="sr">Lote</span><select id="sel">${lotes.map(l=>`<option value="${esc(l.id)}"${l.id===id?' selected':''}>${esc(l.titulo)} · ${l.total}${MODO==='cg'&&l.visivel&&(l.visivel.equipe===false||l.visivel.relator===false)?' · oculto: '+[l.visivel.equipe===false?'equipe':'',l.visivel.relator===false?'Relator':''].filter(Boolean).join(' e '):''}</option>`).join('')}</select></label>
-    <p class="lx-lt-n" id="cnt">—</p>
+    <label class="lx-sel" title="Trocar de lote"><span class="sr">Índices</span><select id="sel">${opcoesIndices(lotes,id)}</select></label>
+    <p class="lx-lt-n" id="cnt">—</p><p class="lx-lt-d">${esc(contexto)}</p>
     <p class="lx-lt-s">${FILT_SESSAO?`Sessão de ${br(FILT_SESSAO)}`:`Sessões de ${LOTE.sessoes.map(br).join(' e ')}`}${FILT_MINUTISTA?` · Produção: ${esc(FILT_MINUTISTA)}`:''}</p>
     ${LOTE.descricao?`<p class="lx-lt-d">${esc(LOTE.descricao)}</p>`:''}</div>
    <p class="lx-nk">Nesta página</p>
@@ -722,8 +731,8 @@ function filtra(){
 function relSel(it){const v=(it.visivel||{}).relator;return v===true?'r1':v===false?'r0':'ra'}
 function textoVis(it){return `equipe ${it.verEquipe?'sim':'não'} · Relator ${it.verRelator?'sim':'não'}${relSel(it)==='ra'?' (automático'+(it.pronto?', pronto)':', em preparo)'):''}`}
 function celulasVis(it){const r=relSel(it);
-  return `<td class="vz"><input type="checkbox" data-ve="${it.uid}"${it.verEquipe?' checked':''} title="Visível no Index · Geral (/index/)"></td>`+
-   `<td class="vz"><select data-vr="${it.uid}" title="Visível no Index · CMT (/index/cmt/)"><option value="ra"${r==='ra'?' selected':''}>Auto</option><option value="r1"${r==='r1'?' selected':''}>Sempre</option><option value="r0"${r==='r0'?' selected':''}>Nunca</option></select><small data-vrs="${it.uid}">${it.verRelator?'vê':'não vê'}</small></td>`}
+  return `<td class="vz"><input type="checkbox" data-ve="${it.uid}"${it.verEquipe?' checked':''} title="Visível no Index · Geral (/amicus/index/)"></td>`+
+   `<td class="vz"><select data-vr="${it.uid}" title="Visível no Index · CMT (/amicus/index/cmt/)"><option value="ra"${r==='ra'?' selected':''}>Auto</option><option value="r1"${r==='r1'?' selected':''}>Sempre</option><option value="r0"${r==='r0'?' selected':''}>Nunca</option></select><small data-vrs="${it.uid}">${it.verRelator?'vê':'não vê'}</small></td>`}
 function aplicaVis(it,eq,rl){
   const v=Object.assign({},it.visivel||{});
   if(eq===true)delete v.equipe;else if(eq===false)v.equipe=false;
@@ -754,7 +763,7 @@ function abrirEditar(){
     <label>Assunto contém<input id="ge-a" value="${esc(f.assunto||'')}"></label>
     <label>Classe contém<input id="ge-c" value="${esc(f.classe||'')}"></label>
     <label class="w">Texto livre<input id="ge-x2" value="${esc(f.texto||'')}"></label>
-    <div class="w"><span class="lb">Onde o lote aparece</span><div class="ses"><label><input type="checkbox" id="ge-ve"${(LOTE.visivel||{}).equipe===false?'':' checked'}> No Index · Geral (/index/), no seletor de conjuntos</label><label><input type="checkbox" id="ge-vr"${(LOTE.visivel||{}).relator===false?'':' checked'}> No Index · CMT (/index/cmt/), no seletor de conjuntos</label></div></div>
+    <div class="w"><span class="lb">Onde o lote aparece</span><div class="ses"><label><input type="checkbox" id="ge-ve"${(LOTE.visivel||{}).equipe===false?'':' checked'}> No Index · Geral (/amicus/index/), no seletor de conjuntos</label><label><input type="checkbox" id="ge-vr"${(LOTE.visivel||{}).relator===false?'':' checked'}> No Index · CMT (/amicus/index/cmt/), no seletor de conjuntos</label></div></div>
    </div>
    <p class="none" style="font-style:normal">O filtro vale para as próximas sessões associadas; os processos que já estão no lote ficam.</p>
    <div class="acts"><button type="button" class="b pri" id="ge-ok">Salvar</button><span class="k" id="ge-m"></span></div></section>`;
@@ -773,6 +782,7 @@ function fechaGest(){$('#gest').innerHTML=''}
 function abrirNovo(){
   $('#gest').innerHTML=`<section class="cmt-q" id="g-novo"><h2><i class="nn">00</i><span>Novo <em>lote.</em></span><span class="cmt-sp"></span><button type="button" class="b" id="gn-x">Fechar</button></h2>
    <div class="form">
+    <label class="w">Tipo de indexação<select id="gn-tipo"><option value="avulso">Lote avulso · seleção temática</option><option value="pauta">Índice de pauta · uma sessão</option></select></label>
     <label>Título<input id="gn-t" placeholder="ex.: Lote PIS/COFINS"></label>
     <label>Identificador<input id="gn-id" placeholder="ex.: pis-cofins"></label>
     <label class="w">Descrição<input id="gn-d" placeholder="o que reúne este lote"></label>
@@ -787,7 +797,7 @@ function abrirNovo(){
   $('#gn-t').oninput=()=>{if(!$('#gn-id').dataset.mexido)$('#gn-id').value=slug($('#gn-t').value)};
   $('#gn-id').oninput=()=>{$('#gn-id').dataset.mexido='1'};
   const filtro=()=>({assunto:$('#gn-a').value.trim(),classe:$('#gn-c').value.trim(),texto:$('#gn-x2').value.trim()});
-  $('#gn-p').onclick=async()=>{const ss=marcadas('gn-s');if(!ss.length){toast('Escolha ao menos uma sessão');return}
+  $('#gn-p').onclick=async()=>{const ss=marcadas('gn-s');if(!ss.length){toast('Escolha ao menos uma sessão');return}if($('#gn-tipo')&&$('#gn-tipo').value==='pauta'&&ss.length!==1){toast('Índice de pauta exige uma sessão');return}
     const f=filtro(),q='?previa=1&sessoes='+ss.join(',')+'&assunto='+encodeURIComponent(f.assunto)+'&classe='+encodeURIComponent(f.classe)+'&texto='+encodeURIComponent(f.texto);
     $('#gn-m').textContent='Lendo as sessões…';
     try{const r=await api(q);$('#gn-m').textContent=`${r.total} processo${r.total===1?'':'s'} entram (${Object.entries(r.porSessao).map(([d,n])=>br(d)+': '+n).join(' · ')})`;
@@ -796,7 +806,7 @@ function abrirNovo(){
   $('#gn-ok').onclick=async()=>{const ss=marcadas('gn-s'),id=slug($('#gn-id').value||$('#gn-t').value);
     if(!$('#gn-t').value.trim()){toast('Dê um título ao lote');return} if(!ss.length){toast('Escolha ao menos uma sessão');return}
     $('#gn-ok').disabled=true;$('#gn-m').textContent='Criando o lote…';
-    try{const r=await post({acao:'criar',id,titulo:$('#gn-t').value.trim(),descricao:$('#gn-d').value.trim(),sessoes:ss,filtro:filtro()});
+    try{const r=await post({acao:'criar',tipo:$('#gn-tipo').value,id,titulo:$('#gn-t').value.trim(),descricao:$('#gn-d').value.trim(),sessoes:ss,filtro:filtro()});
       toast('Lote criado com '+r.total+' processos');location.search='?id='+encodeURIComponent(r.id)}
     catch(e){$('#gn-m').textContent=e.message;$('#gn-ok').disabled=false}};
   $('#g-novo').scrollIntoView({behavior:'smooth'});
