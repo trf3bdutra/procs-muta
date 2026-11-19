@@ -6682,12 +6682,620 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "401435815",
+     "peca": "Petição inicial (15/01/2026)",
+     "tipo": "Petição Inicial",
+     "data": "15/01/2026"
+    },
+    {
+     "id": "401435825",
+     "peca": "Resposta e Recurso - Petição (15/01/2026)",
+     "tipo": "Documento Comprobatório",
+     "data": "15/01/2026"
+    },
+    {
+     "id": "401435826",
+     "peca": "Resposta e Recurso - Questão 1 (15/01/2026)",
+     "tipo": "Documento Comprobatório",
+     "data": "15/01/2026"
+    },
+    {
+     "id": "401435827",
+     "peca": "Resposta e Recurso - Questão 3 (15/01/2026)",
+     "tipo": "Documento Comprobatório",
+     "data": "15/01/2026"
+    },
+    {
+     "id": "401435829",
+     "peca": "Decisão (19/02/2026)",
+     "tipo": "Decisão",
+     "data": "19/02/2026"
+    },
+    {
+     "id": "401435830",
+     "peca": "Informações Prestadas (26/02/2026)",
+     "tipo": "Informações Prestadas",
+     "data": "26/02/2026"
+    },
+    {
+     "id": "401436245",
+     "peca": "Contestação (17/04/2026)",
+     "tipo": "Contestação",
+     "data": "17/04/2026"
+    },
+    {
+     "id": "401436248",
+     "peca": "Despacho (08/06/2026)",
+     "tipo": "Despacho",
+     "data": "08/06/2026"
+    },
+    {
+     "id": "401436249",
+     "peca": "Parecer \"Falta de Interesse\" (MP) (16/06/2026)",
+     "tipo": "Parecer \"Falta de Interesse\" (MP)",
+     "data": "16/06/2026"
+    },
+    {
+     "id": "401436250",
+     "peca": "Sentença tipo A (29/06/2026)",
+     "tipo": "Sentença tipo A",
+     "data": "29/06/2026"
+    },
+    {
+     "id": "401436251",
+     "peca": "Apelação (11/07/2026)",
+     "tipo": "Apelação",
+     "data": "11/07/2026"
+    },
+    {
+     "id": "401436253",
+     "peca": "Despacho (02/09/2026)",
+     "tipo": "Despacho",
+     "data": "02/09/2026"
+    },
+    {
+     "id": "401436254",
+     "peca": "Contrarrazões (17/09/2026)",
+     "tipo": "Contrarrazões",
+     "data": "17/09/2026"
+    },
+    {
+     "id": "401436256",
+     "peca": "Contrarrazões de Recurso (25/09/2026)",
+     "tipo": "Contrarrazões de Recurso",
+     "data": "25/09/2026"
+    },
+    {
+     "id": "405454036",
+     "peca": "Parecer \"Falta de Interesse\" (MP) (19/10/2026)",
+     "tipo": "Parecer \"Falta de Interesse\" (MP)",
+     "data": "19/10/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5000168-26.2026.4.03.6000.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 56,
+    "sem_texto": [
+     "401435823",
+     "401435824",
+     "401436243"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "401435815",
+      "15/01/2026",
+      "Petição Inicial",
+      "Petição inicial",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      14
+     ],
+     [
+      "401435816",
+      "15/01/2026",
+      "Procuração/substabelecimento com reserva de poderes",
+      "Procuração",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      2
+     ],
+     [
+      "401435817",
+      "15/01/2026",
+      "Outros Documentos",
+      "Declaração hipo",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      1
+     ],
+     [
+      "401435818",
+      "15/01/2026",
+      "Documento de Identificação",
+      "Doc pessoal",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      1
+     ],
+     [
+      "401435819",
+      "15/01/2026",
+      "Documento de Identificação",
+      "Comprovante de endereço",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      1
+     ],
+     [
+      "401435820",
+      "15/01/2026",
+      "Outros Documentos",
+      "Edital de abertura",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      43
+     ],
+     [
+      "401435821",
+      "15/01/2026",
+      "Outros Documentos",
+      "Atestado de matricula",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      1
+     ],
+     [
+      "401435822",
+      "15/01/2026",
+      "Outros Documentos",
+      "Gabarito FGV oficial - 44 trabalhista",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      7
+     ],
+     [
+      "401435823",
+      "15/01/2026",
+      "Documento Comprobatório",
+      "Prova integral da Autora",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      9
+     ],
+     [
+      "401435824",
+      "15/01/2026",
+      "Documento Comprobatório",
+      "Espelho individual",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      2
+     ],
+     [
+      "401435825",
+      "15/01/2026",
+      "Documento Comprobatório",
+      "Resposta e Recurso - Petição",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      2
+     ],
+     [
+      "401435826",
+      "15/01/2026",
+      "Documento Comprobatório",
+      "Resposta e Recurso - Questão 1",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      2
+     ],
+     [
+      "401435827",
+      "15/01/2026",
+      "Documento Comprobatório",
+      "Resposta e Recurso - Questão 3",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      2
+     ],
+     [
+      "401435828",
+      "19/01/2026",
+      "Certidão",
+      "",
+      "ISAURA RODRIGUES AUGUSTO",
+      "html",
+      0
+     ],
+     [
+      "401435829",
+      "19/02/2026",
+      "Decisão",
+      "",
+      "DALTON IGOR KITA CONRADO",
+      "html",
+      0
+     ],
+     [
+      "401435830",
+      "26/02/2026",
+      "Informações Prestadas",
+      "",
+      "ALICE BUNN FERRARI",
+      "pdf",
+      23
+     ],
+     [
+      "401435831",
+      "26/02/2026",
+      "Procuração/substabelecimento com reserva de poderes",
+      "Procuração e ata de posse Fev 25",
+      "ALICE BUNN FERRARI",
+      "pdf",
+      5
+     ],
+     [
+      "401436232",
+      "02/03/2026",
+      "Carta Precatória",
+      "",
+      "DALTON IGOR KITA CONRADO",
+      "html",
+      0
+     ],
+     [
+      "401436233",
+      "02/03/2026",
+      "Carta Precatória",
+      "",
+      "DALTON IGOR KITA CONRADO",
+      "html",
+      0
+     ],
+     [
+      "401436234",
+      "02/03/2026",
+      "Outros Documentos",
+      "",
+      "ANGELICA ROSELI BARBOSA LEITE SOUZA",
+      "html",
+      0
+     ],
+     [
+      "401436235",
+      "02/03/2026",
+      "Outros Documentos",
+      "COMPROVANTE DE ENVIO CP DF - 5000168-26.2026.4.03.6000",
+      "ANGELICA ROSELI BARBOSA LEITE SOUZA",
+      "pdf",
+      1
+     ],
+     [
+      "401436236",
+      "02/03/2026",
+      "Outros Documentos",
+      "COMPROVANTE DE ENVIO DE CP RJ - 5000168-26.2026.4.03.6000",
+      "ANGELICA ROSELI BARBOSA LEITE SOUZA",
+      "pdf",
+      1
+     ],
+     [
+      "401436237",
+      "15/03/2026",
+      "Impugnação",
+      "",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      16
+     ],
+     [
+      "401436238",
+      "16/03/2026",
+      "Outros Documentos",
+      "",
+      "ISAURA RODRIGUES AUGUSTO",
+      "html",
+      0
+     ],
+     [
+      "401436239",
+      "16/03/2026",
+      "Outros Documentos",
+      "CP CUMPRIDA DF - 1020934-68.2026.4.01.3400",
+      "ISAURA RODRIGUES AUGUSTO",
+      "pdf",
+      11
+     ],
+     [
+      "401436240",
+      "24/03/2026",
+      "Outros Documentos",
+      "",
+      "ISAURA RODRIGUES AUGUSTO",
+      "html",
+      0
+     ],
+     [
+      "401436241",
+      "24/03/2026",
+      "Outros Documentos",
+      "50204976720264025101 - DEVOLUÇÃO DE CARTA CUMPRIDA RJ",
+      "ISAURA RODRIGUES AUGUSTO",
+      "pdf",
+      16
+     ],
+     [
+      "401436242",
+      "30/03/2026",
+      "Procuração/substabelecimento com reserva de poderes",
+      "",
+      "DECIO FREIRE",
+      "pdf",
+      1
+     ],
+     [
+      "401436243",
+      "30/03/2026",
+      "Outros Documentos",
+      "ESTATUTO",
+      "DECIO FREIRE",
+      "pdf",
+      22
+     ],
+     [
+      "401436244",
+      "30/03/2026",
+      "Procuração/substabelecimento com reserva de poderes",
+      "PROCURAÇÃO DFA",
+      "DECIO FREIRE",
+      "pdf",
+      4
+     ],
+     [
+      "401436245",
+      "17/04/2026",
+      "Contestação",
+      "",
+      "DECIO FREIRE",
+      "pdf",
+      12
+     ],
+     [
+      "401436246",
+      "28/04/2026",
+      "Impugnação",
+      "",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      10
+     ],
+     [
+      "401436247",
+      "01/06/2026",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "ISAURA RODRIGUES AUGUSTO",
+      "html",
+      0
+     ],
+     [
+      "401436248",
+      "08/06/2026",
+      "Despacho",
+      "",
+      "DALTON IGOR KITA CONRADO",
+      "html",
+      0
+     ],
+     [
+      "401436249",
+      "16/06/2026",
+      "Parecer \"Falta de Interesse\" (MP)",
+      "",
+      "LUIZ EDUARDO CAMARGO OUTEIRO HERNANDES",
+      "pdf",
+      3
+     ],
+     [
+      "401436250",
+      "29/06/2026",
+      "Sentença tipo A",
+      "",
+      "NEWTON JOSE FALCAO",
+      "html",
+      0
+     ],
+     [
+      "401436251",
+      "11/07/2026",
+      "Apelação",
+      "",
+      "VINICIUS MARTINS FERREIRA",
+      "pdf",
+      15
+     ],
+     [
+      "401436252",
+      "13/07/2026",
+      "Ciência",
+      "",
+      "MARCOS ANGELO GRIMONE",
+      "pdf",
+      1
+     ],
+     [
+      "401436253",
+      "02/09/2026",
+      "Despacho",
+      "",
+      "NEWTON JOSE FALCAO",
+      "html",
+      0
+     ],
+     [
+      "401436254",
+      "17/09/2026",
+      "Contrarrazões",
+      "",
+      "ALICE BUNN FERRARI",
+      "pdf",
+      23
+     ],
+     [
+      "401436255",
+      "17/09/2026",
+      "Procuração/substabelecimento com reserva de poderes",
+      "Procuração CFOAB Dr. Simonetti Mar 26",
+      "ALICE BUNN FERRARI",
+      "pdf",
+      1
+     ],
+     [
+      "401436256",
+      "25/09/2026",
+      "Contrarrazões de Recurso",
+      "",
+      "DECIO FREIRE",
+      "pdf",
+      14
+     ],
+     [
+      "401436257",
+      "29/09/2026",
+      "Informação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "404532101",
+      "15/10/2026",
+      "Intimação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "405454036",
+      "19/10/2026",
+      "Parecer \"Falta de Interesse\" (MP)",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      4
+     ],
+     [
+      "406097045",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406097057",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406097060",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406097080",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406277327",
+      "23/10/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "407141774",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407141938",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407141943",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407141957",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407350111",
+      "28/10/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "407440241",
+      "28/10/2026",
+      "Petição intercorrente",
+      "",
+      "VINICIUS MARTINS FERREIRA",
+      "html",
+      0
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -6712,12 +7320,515 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "401098497",
+     "peca": "Petição inicial (13/01/2026)",
+     "tipo": "Petição Inicial",
+     "data": "13/01/2026"
+    },
+    {
+     "id": "401098521",
+     "peca": "Decisão (24/02/2026)",
+     "tipo": "Decisão",
+     "data": "24/02/2026"
+    },
+    {
+     "id": "401098525",
+     "peca": "Informações Prestadas (19/03/2026)",
+     "tipo": "Informações Prestadas",
+     "data": "19/03/2026"
+    },
+    {
+     "id": "401098528",
+     "peca": "Parecer \"Falta de Interesse\" (MP) (12/04/2026)",
+     "tipo": "Parecer \"Falta de Interesse\" (MP)",
+     "data": "12/04/2026"
+    },
+    {
+     "id": "401098530",
+     "peca": "Despacho (03/06/2026)",
+     "tipo": "Despacho",
+     "data": "03/06/2026"
+    },
+    {
+     "id": "401098531",
+     "peca": "Sentença (27/07/2026)",
+     "tipo": "Sentença",
+     "data": "27/07/2026"
+    },
+    {
+     "id": "401098585",
+     "peca": "Despacho (25/09/2026)",
+     "tipo": "Despacho",
+     "data": "25/09/2026"
+    },
+    {
+     "id": "405471119",
+     "peca": "Parecer \"Falta de Interesse\" (MP) (19/10/2026)",
+     "tipo": "Parecer \"Falta de Interesse\" (MP)",
+     "data": "19/10/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5000140-58.2026.4.03.6000.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 49,
+    "sem_texto": [
+     "401098506",
+     "401098507",
+     "401098513"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "401098497",
+      "13/01/2026",
+      "Petição Inicial",
+      "Petição inicial",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      11
+     ],
+     [
+      "401098498",
+      "13/01/2026",
+      "Procuração/substabelecimento sem reserva de poderes",
+      "Procuracao",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098499",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Comprovante de endereço",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098500",
+      "13/01/2026",
+      "Documento de Identificação",
+      "RG E CPF - FERNANDA MIRANDA SARMENTO RORIZ",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098501",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Anexo_I_-_Requerimento_assinado - FERNANDA MIRANDA SARMENTO RORIZ",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098502",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Escolha UFGD plataforma Revalida INEP_PNG",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098503",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "email documentação",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098504",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Edital UFGD",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098505",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "CERTIDÃO DE NASCIMENTO - FERNANDA MIRANDA SARMENTO RORIZ (1)",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098506",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "email confirmação",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      2
+     ],
+     [
+      "401098507",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "HISTORICO ESCOLAR - FERNANDA MIRANDA SARMENTO RORIZ",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      9
+     ],
+     [
+      "401098508",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "DIPLOMA - FERNANDA MIRANDA SARMENTO RORIZ",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      6
+     ],
+     [
+      "401098509",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "PORTARIA Nº 726, DE 4 DE NOVEMBRO DE 2025 APROVADOS",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      93
+     ],
+     [
+      "401098510",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "RESOLUÇÃO CFM 2014_2013",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      3
+     ],
+     [
+      "401098511",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "RESOLUÇÃO CFM 2300_2021",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      6
+     ],
+     [
+      "401098512",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Enare nota",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098513",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Nota de corte Pediatria",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      2
+     ],
+     [
+      "401098514",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Cronograma-ENARE-2026-AD",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      3
+     ],
+     [
+      "401098515",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Edital-No-03_2025-Residencia-Medica-Acesso-Direto",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      43
+     ],
+     [
+      "401098516",
+      "13/01/2026",
+      "Custas",
+      "Juntada Custas",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098517",
+      "13/01/2026",
+      "Custas",
+      "Comprovante pagamento Custas",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098518",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "GRUs- UFGD",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098519",
+      "13/01/2026",
+      "Documento Comprobatório",
+      "Comprovante Pagamento UFGD",
+      "BRUNO ALMEIDA KOWALSKI",
+      "pdf",
+      1
+     ],
+     [
+      "401098520",
+      "13/01/2026",
+      "Certidão",
+      "",
+      "MARCIO MASSAYOSHI TOYOTA",
+      "html",
+      0
+     ],
+     [
+      "401098521",
+      "24/02/2026",
+      "Decisão",
+      "",
+      "FELIPE ALVES TAVARES",
+      "html",
+      0
+     ],
+     [
+      "401098522",
+      "25/02/2026",
+      "Mandado",
+      "",
+      "PATRICIA CARDOSO DE MARCO ALMEIDA",
+      "html",
+      0
+     ],
+     [
+      "401098523",
+      "05/03/2026",
+      "Diligência",
+      "",
+      "ELIENAI MOREIRA MARCELINO SANTANA",
+      "html",
+      0
+     ],
+     [
+      "401098524",
+      "05/03/2026",
+      "Outros Documentos",
+      "e-mail CRM",
+      "ELIENAI MOREIRA MARCELINO SANTANA",
+      "pdf",
+      1
+     ],
+     [
+      "401098525",
+      "19/03/2026",
+      "Informações Prestadas",
+      "",
+      "RODRIGO FLAVIO BARBOZA DA SILVA",
+      "pdf",
+      5
+     ],
+     [
+      "401098526",
+      "19/03/2026",
+      "Documento Comprobatório",
+      "Procuração",
+      "RODRIGO FLAVIO BARBOZA DA SILVA",
+      "pdf",
+      1
+     ],
+     [
+      "401098527",
+      "19/03/2026",
+      "Documento Comprobatório",
+      "Termo de posse",
+      "RODRIGO FLAVIO BARBOZA DA SILVA",
+      "pdf",
+      2
+     ],
+     [
+      "401098528",
+      "12/04/2026",
+      "Parecer \"Falta de Interesse\" (MP)",
+      "",
+      "LUIZ EDUARDO CAMARGO OUTEIRO HERNANDES",
+      "pdf",
+      2
+     ],
+     [
+      "401098529",
+      "13/04/2026",
+      "Certidão",
+      "",
+      "PATRICIA CARDOSO DE MARCO ALMEIDA",
+      "html",
+      0
+     ],
+     [
+      "401098530",
+      "03/06/2026",
+      "Despacho",
+      "",
+      "EDUARDA ALENCAR MALUF KIAME",
+      "html",
+      0
+     ],
+     [
+      "401098531",
+      "27/07/2026",
+      "Sentença",
+      "",
+      "EWERTON JOSE DA COSTA ALVES",
+      "html",
+      0
+     ],
+     [
+      "401098582",
+      "30/07/2026",
+      "Diligência",
+      "INTIMAÇÃO CRM MS",
+      "JOSE AILTON PINTO DE MESQUITA FILHO",
+      "html",
+      0
+     ],
+     [
+      "401098583",
+      "30/07/2026",
+      "Diligência",
+      "5000140-58.2026.4.03.6000 CRM RECEBE",
+      "JOSE AILTON PINTO DE MESQUITA FILHO",
+      "pdf",
+      2
+     ],
+     [
+      "401098584",
+      "07/08/2026",
+      "Ciência",
+      "",
+      "MARCOS ANGELO GRIMONE",
+      "pdf",
+      1
+     ],
+     [
+      "401098585",
+      "25/09/2026",
+      "Despacho",
+      "",
+      "EWERTON JOSE DA COSTA ALVES",
+      "html",
+      0
+     ],
+     [
+      "401098586",
+      "28/09/2026",
+      "Informação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "402358305",
+      "05/10/2026",
+      "Intimação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "405471119",
+      "19/10/2026",
+      "Parecer \"Falta de Interesse\" (MP)",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      3
+     ],
+     [
+      "406097880",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098050",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098064",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407142126",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407142130",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407142138",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "409943040",
+      "10/11/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -6742,14 +7853,781 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "372667658",
+     "peca": "Petição inicial (08/07/2024)",
+     "tipo": "Petição Inicial",
+     "data": "08/07/2024"
+    },
+    {
+     "id": "372667666",
+     "peca": "Despacho (09/07/2024)",
+     "tipo": "Despacho",
+     "data": "09/07/2024"
+    },
+    {
+     "id": "372667668",
+     "peca": "Contestação da União-Fazenda Nacional (02/09/2024)",
+     "tipo": "Contestação",
+     "data": "02/09/2024"
+    },
+    {
+     "id": "372667674",
+     "peca": "Decisão (24/10/2024)",
+     "tipo": "Decisão",
+     "data": "24/10/2024"
+    },
+    {
+     "id": "372667677",
+     "peca": "Decisão (13/11/2024)",
+     "tipo": "Decisão",
+     "data": "13/11/2024"
+    },
+    {
+     "id": "372667679",
+     "peca": "OF DIV 35/2024 (19/11/2024)",
+     "tipo": "Informações Prestadas",
+     "data": "19/11/2024"
+    },
+    {
+     "id": "372668690",
+     "peca": "Despacho (22/01/2025)",
+     "tipo": "Despacho",
+     "data": "22/01/2025"
+    },
+    {
+     "id": "372668703",
+     "peca": "Ementa (07/03/2025)",
+     "tipo": "Ementa",
+     "data": "07/03/2025"
+    },
+    {
+     "id": "372668704",
+     "peca": "Voto (07/03/2025)",
+     "tipo": "Voto",
+     "data": "07/03/2025"
+    },
+    {
+     "id": "372668707",
+     "peca": "Decisão (25/03/2025)",
+     "tipo": "Decisão",
+     "data": "25/03/2025"
+    },
+    {
+     "id": "372668718",
+     "peca": "Sentença (03/02/2026)",
+     "tipo": "Sentença",
+     "data": "03/02/2026"
+    },
+    {
+     "id": "372668723",
+     "peca": "Apelação (05/04/2026)",
+     "tipo": "Apelação",
+     "data": "05/04/2026"
+    },
+    {
+     "id": "372668724",
+     "peca": "Contrarrazões de Recurso (06/04/2026)",
+     "tipo": "Contrarrazões de Recurso",
+     "data": "06/04/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [
     "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação."
    ],
-   "minuta": false
+   "minuta": false,
+   "autos": {
+    "arquivo": "acervo/autos/5001389-97.2024.4.03.6005.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 75,
+    "sem_texto": [
+     "372667659",
+     "372668685",
+     "372668701"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "372667658",
+      "08/07/2024",
+      "Petição Inicial",
+      "Petição inicial",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      15
+     ],
+     [
+      "372667659",
+      "08/07/2024",
+      "Procuração/substabelecimento sem reserva de poderes",
+      "procuraçao adriano1",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      2
+     ],
+     [
+      "372667660",
+      "08/07/2024",
+      "Documento de Identificação",
+      "CNH Lu",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      1
+     ],
+     [
+      "372667661",
+      "08/07/2024",
+      "Outros Documentos",
+      "10109722633202401 ADM RED",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      246
+     ],
+     [
+      "372667662",
+      "08/07/2024",
+      "Documento Comprobatório",
+      "TODAS CERTIDÕES",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      9
+     ],
+     [
+      "372667663",
+      "08/07/2024",
+      "Certidão",
+      "",
+      "KAIQUE MOURA BALBUENA",
+      "html",
+      0
+     ],
+     [
+      "372667664",
+      "08/07/2024",
+      "Custas",
+      "",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      1
+     ],
+     [
+      "372667665",
+      "08/07/2024",
+      "Custas",
+      "CUSTAS E PAGAMENTO",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      2
+     ],
+     [
+      "372667666",
+      "09/07/2024",
+      "Despacho",
+      "",
+      "ANA CLAUDIA MANIKOWSKI ANNES",
+      "html",
+      0
+     ],
+     [
+      "372667667",
+      "10/07/2024",
+      "Outros Documentos",
+      "Expedição de Ofício",
+      "EDWILSON BORGES DE ALMEIDA",
+      "pdf",
+      1
+     ],
+     [
+      "372667668",
+      "02/09/2024",
+      "Contestação",
+      "Contestação da União-Fazenda Nacional",
+      "MIGUEL SOUZA DANTAS NETO",
+      "pdf",
+      7
+     ],
+     [
+      "372667669",
+      "02/09/2024",
+      "Documentos Diversos",
+      "PAF 10109722633202401-Parte1",
+      "MIGUEL SOUZA DANTAS NETO",
+      "pdf",
+      146
+     ],
+     [
+      "372667670",
+      "02/09/2024",
+      "Documentos Diversos",
+      "PAF 10109722633202401-Parte2",
+      "MIGUEL SOUZA DANTAS NETO",
+      "pdf",
+      101
+     ],
+     [
+      "372667671",
+      "03/09/2024",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "EDWILSON BORGES DE ALMEIDA",
+      "html",
+      0
+     ],
+     [
+      "372667672",
+      "25/09/2024",
+      "Impugnação",
+      "",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      22
+     ],
+     [
+      "372667673",
+      "25/09/2024",
+      "Documento Comprobatório",
+      "RELATÓRIO PF",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      5
+     ],
+     [
+      "372667674",
+      "24/10/2024",
+      "Decisão",
+      "",
+      "CRISTIANO DO CARMO HARASYMOWICZ DE ALMEIDA TAGUATINGA",
+      "html",
+      0
+     ],
+     [
+      "372667675",
+      "04/11/2024",
+      "Manifestação",
+      "",
+      "DANIELLE SOUZA FERNANDES AMIZO",
+      "pdf",
+      1
+     ],
+     [
+      "372667676",
+      "06/11/2024",
+      "Pedido de reconsideração",
+      "",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      4
+     ],
+     [
+      "372667677",
+      "13/11/2024",
+      "Decisão",
+      "",
+      "ANA CLAUDIA MANIKOWSKI ANNES",
+      "html",
+      0
+     ],
+     [
+      "372667678",
+      "13/11/2024",
+      "Outros Documentos",
+      "Ofício expedido",
+      "EDWILSON BORGES DE ALMEIDA",
+      "pdf",
+      1
+     ],
+     [
+      "372667679",
+      "19/11/2024",
+      "Informações Prestadas",
+      "OF DIV 35/2024",
+      "KATIUSCIA TATIANA RAMIREZ",
+      "pdf",
+      2
+     ],
+     [
+      "372667680",
+      "19/11/2024",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      3
+     ],
+     [
+      "372667681",
+      "19/11/2024",
+      "Documento Comprobatório",
+      "DENUNCIA",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      9
+     ],
+     [
+      "372668682",
+      "19/11/2024",
+      "Documento Comprobatório",
+      "ALVARÁ DE SOLTURA OUTRO ENDEREÇO E CELULAR",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      3
+     ],
+     [
+      "372668683",
+      "19/11/2024",
+      "Documento Comprobatório",
+      "COMPROVAÇÃO DE INTIMAÇÃO DA TESTEMUNHA POR TELEFONE",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      6
+     ],
+     [
+      "372668684",
+      "19/11/2024",
+      "Documento Comprobatório",
+      "COMPROVANTE ENDEREÇO CONDUTOR",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      1
+     ],
+     [
+      "372668685",
+      "19/11/2024",
+      "Documento Comprobatório",
+      "DECLARAÇÃO MARCELO FANAIA",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      2
+     ],
+     [
+      "372668686",
+      "21/11/2024",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "372668687",
+      "22/11/2024",
+      "Manifestação",
+      "",
+      "CECILIA ALVARES MACHADO",
+      "pdf",
+      1
+     ],
+     [
+      "372668688",
+      "29/11/2024",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "EDWILSON BORGES DE ALMEIDA",
+      "html",
+      0
+     ],
+     [
+      "372668689",
+      "05/12/2024",
+      "Manifestação",
+      "Manifestação da União/Fazenda Nacional",
+      "VERONICA MEDEIROS CARDOSO",
+      "html",
+      0
+     ],
+     [
+      "372668690",
+      "22/01/2025",
+      "Despacho",
+      "",
+      "ANA CLAUDIA MANIKOWSKI ANNES",
+      "html",
+      0
+     ],
+     [
+      "372668691",
+      "06/02/2025",
+      "Manifestação",
+      "Manifestação da União/Fazenda Nacional",
+      "VERONICA MEDEIROS CARDOSO",
+      "html",
+      0
+     ],
+     [
+      "372668692",
+      "26/02/2025",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      6
+     ],
+     [
+      "372668693",
+      "26/02/2025",
+      "Documento Comprobatório",
+      "0820932-26.2024.8.12.0001",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      2
+     ],
+     [
+      "372668694",
+      "05/03/2025",
+      "Manifestação",
+      "Manifestação da União/Fazenda Nacional",
+      "VERONICA MEDEIROS CARDOSO",
+      "pdf",
+      2
+     ],
+     [
+      "372668695",
+      "05/03/2025",
+      "TERMO DE AUDIÊNCIA",
+      "Termo de audiência",
+      "RAFAEL FIGUEIREDO BRAZ SPIRLANDELLI",
+      "html",
+      0
+     ],
+     [
+      "372668696",
+      "05/03/2025",
+      "Outros Documentos",
+      "PARTE0~1",
+      "RAFAEL FIGUEIREDO BRAZ SPIRLANDELLI",
+      "midia",
+      0
+     ],
+     [
+      "372668697",
+      "05/03/2025",
+      "Outros Documentos",
+      "PARTE0~2",
+      "RAFAEL FIGUEIREDO BRAZ SPIRLANDELLI",
+      "midia",
+      0
+     ],
+     [
+      "372668698",
+      "05/03/2025",
+      "Outros Documentos",
+      "PARTE0~3",
+      "RAFAEL FIGUEIREDO BRAZ SPIRLANDELLI",
+      "midia",
+      0
+     ],
+     [
+      "372668699",
+      "06/03/2025",
+      "Certidão",
+      "",
+      "DIOGO DOS SANTOS CARNEIRO",
+      "html",
+      0
+     ],
+     [
+      "372668700",
+      "06/03/2025",
+      "Outros Documentos",
+      "5001389-97.2024.4.03.6005 - Email",
+      "DIOGO DOS SANTOS CARNEIRO",
+      "pdf",
+      2
+     ],
+     [
+      "372668701",
+      "06/03/2025",
+      "Outros Documentos",
+      "WhatsApp Image 2025-03-05 at 13.47.37",
+      "DIOGO DOS SANTOS CARNEIRO",
+      "pdf",
+      2
+     ],
+     [
+      "372668702",
+      "07/03/2025",
+      "Relatório",
+      "",
+      "LUCY DEL POZ RIBEIRO",
+      "html",
+      0
+     ],
+     [
+      "372668703",
+      "07/03/2025",
+      "Ementa",
+      "",
+      "LUCY DEL POZ RIBEIRO",
+      "html",
+      0
+     ],
+     [
+      "372668704",
+      "07/03/2025",
+      "Voto",
+      "",
+      "LUCY DEL POZ RIBEIRO",
+      "html",
+      0
+     ],
+     [
+      "372668705",
+      "10/03/2025",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      2
+     ],
+     [
+      "372668706",
+      "24/03/2025",
+      "Certidão",
+      "",
+      "DIOGO DOS SANTOS CARNEIRO",
+      "html",
+      0
+     ],
+     [
+      "372668707",
+      "25/03/2025",
+      "Decisão",
+      "",
+      "RAFAEL FIGUEIREDO BRAZ SPIRLANDELLI",
+      "html",
+      0
+     ],
+     [
+      "372668708",
+      "01/04/2025",
+      "Manifestação",
+      "Manifestação da União/Fazenda Nacional",
+      "VERONICA MEDEIROS CARDOSO",
+      "html",
+      0
+     ],
+     [
+      "372668709",
+      "05/08/2025",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      1
+     ],
+     [
+      "372668710",
+      "05/08/2025",
+      "Documento Comprobatório",
+      "0820932-26.2024.8.12.0001",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      3
+     ],
+     [
+      "372668711",
+      "03/09/2025",
+      "TERMO DE AUDIÊNCIA",
+      "Termo de audiência",
+      "PRISCILLA GALDINI DE ANDRADE",
+      "html",
+      0
+     ],
+     [
+      "372668712",
+      "03/09/2025",
+      "Outros Documentos",
+      "Transcrição da audiencia pt1",
+      "PRISCILLA GALDINI DE ANDRADE",
+      "pdf",
+      2
+     ],
+     [
+      "372668713",
+      "03/09/2025",
+      "Outros Documentos",
+      "Transcrição da audiencia pt2",
+      "PRISCILLA GALDINI DE ANDRADE",
+      "pdf",
+      4
+     ],
+     [
+      "372668714",
+      "03/09/2025",
+      "Outros Documentos",
+      "Parte 01 - 00h00m00s_até_00h11m04s_Reunião em General-20250903_140819-Gravação de Reunião 1",
+      "PRISCILLA GALDINI DE ANDRADE",
+      "midia",
+      0
+     ],
+     [
+      "372668715",
+      "03/09/2025",
+      "Outros Documentos",
+      "Parte 02 - 00h11m04s_até_00h13m57s_Reunião em General-20250903_140819-Gravação de Reunião 1",
+      "PRISCILLA GALDINI DE ANDRADE",
+      "midia",
+      0
+     ],
+     [
+      "372668716",
+      "03/09/2025",
+      "Outros Documentos",
+      "Parte 01 - 00h00m00s_até_00h06m07s_Reunião em General-20250903_140819-Gravação de Reunião",
+      "PRISCILLA GALDINI DE ANDRADE",
+      "midia",
+      0
+     ],
+     [
+      "372668717",
+      "04/12/2025",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      7
+     ],
+     [
+      "372668718",
+      "03/02/2026",
+      "Sentença",
+      "",
+      "MÁRIA RÚBIA ANDRADE MATOS",
+      "html",
+      0
+     ],
+     [
+      "372668719",
+      "09/02/2026",
+      "Certidão",
+      "Código para acesso externo às peças do processo",
+      "EDWILSON BORGES DE ALMEIDA",
+      "html",
+      0
+     ],
+     [
+      "372668720",
+      "09/02/2026",
+      "Outros Documentos",
+      "Intimação da RFB",
+      "EDWILSON BORGES DE ALMEIDA",
+      "pdf",
+      1
+     ],
+     [
+      "372668721",
+      "10/03/2026",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      1
+     ],
+     [
+      "372668722",
+      "10/03/2026",
+      "Documento Comprobatório",
+      "L8732 DOC RETIRADA MONTANA RECEITA FEDERAL02032026",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      1
+     ],
+     [
+      "372668723",
+      "05/04/2026",
+      "Apelação",
+      "",
+      "GISELE GONCALVES RIBEIRO",
+      "pdf",
+      8
+     ],
+     [
+      "372668724",
+      "06/04/2026",
+      "Contrarrazões de Recurso",
+      "",
+      "ADRIANO MAGNO DE OLIVEIRA",
+      "pdf",
+      14
+     ],
+     [
+      "372668725",
+      "11/05/2026",
+      "Informação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "377857478",
+      "01/06/2026",
+      "Certidão",
+      "",
+      "RENATO RICIERI BURIN",
+      "html",
+      0
+     ],
+     [
+      "406098401",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098416",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098486",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407088553",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407088557",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407088561",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -7540,14 +9418,209 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "87756201",
+     "peca": "0000461-20.2013.4.03.6006_VOL_001-1.pdf (08/08/2019)",
+     "tipo": "Petição Inicial",
+     "data": "08/08/2019"
+    },
+    {
+     "id": "285440581",
+     "peca": "Despacho (15/02/2024)",
+     "tipo": "Despacho",
+     "data": "15/02/2024"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [
     "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação."
    ],
-   "minuta": false
+   "minuta": false,
+   "autos": {
+    "arquivo": "acervo/autos/0000461-20.2013.4.03.6006.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 19,
+    "sem_texto": [
+     "303430174"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "87756201",
+      "08/08/2019",
+      "Petição Inicial",
+      "0000461-20.2013.4.03.6006_VOL_001-1.pdf",
+      "LIGIA FERREIRA SAUER",
+      "pdf",
+      1
+     ],
+     [
+      "87756202",
+      "08/08/2019",
+      "Certidão",
+      "",
+      "LIGIA FERREIRA SAUER",
+      "html",
+      0
+     ],
+     [
+      "90337276",
+      "26/08/2019",
+      "Documento Digitalizado",
+      "Volume 01 parte A",
+      "ARIANE SOUZA SILVA",
+      "pdf",
+      104
+     ],
+     [
+      "90337277",
+      "26/08/2019",
+      "Documento Digitalizado",
+      "Volume 01 parte B",
+      "ARIANE SOUZA SILVA",
+      "pdf",
+      46
+     ],
+     [
+      "90337311",
+      "26/08/2019",
+      "Documento Digitalizado",
+      "Anexo 01",
+      "ARIANE SOUZA SILVA",
+      "pdf",
+      98
+     ],
+     [
+      "285428662",
+      "15/02/2024",
+      "Outros Documentos",
+      "E-mail Naviraí",
+      "ENEIDA GAGETE",
+      "pdf",
+      1
+     ],
+     [
+      "285440581",
+      "15/02/2024",
+      "Despacho",
+      "",
+      "RUBENS ALEXANDRE ELIAS CALIXTO",
+      "html",
+      0
+     ],
+     [
+      "285555573",
+      "19/02/2024",
+      "Certidão",
+      "Cumprimento de despacho",
+      "ENEIDA GAGETE",
+      "html",
+      0
+     ],
+     [
+      "303430174",
+      "16/09/2024",
+      "Procuração/substabelecimento com reserva de poderes",
+      "",
+      "ALCIDES NEY JOSE GOMES",
+      "pdf",
+      3
+     ],
+     [
+      "303430175",
+      "16/09/2024",
+      "Petição intercorrente",
+      "PETIÇÃO",
+      "ALCIDES NEY JOSE GOMES",
+      "pdf",
+      1
+     ],
+     [
+      "303430176",
+      "16/09/2024",
+      "Substabelecimento",
+      "SUBSTABELECIMENTO",
+      "ALCIDES NEY JOSE GOMES",
+      "pdf",
+      1
+     ],
+     [
+      "406098753",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098783",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098788",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098791",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407141936",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407141950",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407141953",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407141965",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -7572,12 +9645,939 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "158862452",
+     "peca": "Petição inicial (11/02/2019)",
+     "tipo": "Petição Inicial",
+     "data": "11/02/2019"
+    },
+    {
+     "id": "158862453",
+     "peca": "Mandado de Segurança Michely (11/02/2019)",
+     "tipo": "Petição inicial - PDF",
+     "data": "11/02/2019"
+    },
+    {
+     "id": "158862464",
+     "peca": "Decisão (27/02/2019)",
+     "tipo": "Decisão",
+     "data": "27/02/2019"
+    },
+    {
+     "id": "158862471",
+     "peca": "Informações Prestadas (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862472",
+     "peca": "Informacao 39-2019-MICHELY (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862473",
+     "peca": "AI Thiago Alves (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862474",
+     "peca": "AI Andreia Comboio cigarros (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862475",
+     "peca": "AI Welder Comboio cigarros (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862476",
+     "peca": "BO Thiago Alves (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862477",
+     "peca": "Renavam MICHELY (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862478",
+     "peca": "tela comprot thiago (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862479",
+     "peca": "tela comprot joa evangelista (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862480",
+     "peca": "tela comprot welder (18/03/2019)",
+     "tipo": "Informações Prestadas",
+     "data": "18/03/2019"
+    },
+    {
+     "id": "158862481",
+     "peca": "Decisão (31/07/2019)",
+     "tipo": "Decisão",
+     "data": "31/07/2019"
+    },
+    {
+     "id": "158862482",
+     "peca": "Decisão (01/08/2019)",
+     "tipo": "Decisão",
+     "data": "01/08/2019"
+    },
+    {
+     "id": "158862486",
+     "peca": "Acórdão (1) (31/03/2020)",
+     "tipo": "Decisão",
+     "data": "31/03/2020"
+    },
+    {
+     "id": "158862488",
+     "peca": "Despacho de Inspeção (26/06/2020)",
+     "tipo": "Despacho de Inspeção",
+     "data": "26/06/2020"
+    },
+    {
+     "id": "158862491",
+     "peca": "Sentença (17/11/2020)",
+     "tipo": "Sentença",
+     "data": "17/11/2020"
+    },
+    {
+     "id": "158862492",
+     "peca": "Sentença (17/11/2020)",
+     "tipo": "Sentença",
+     "data": "17/11/2020"
+    },
+    {
+     "id": "158862495",
+     "peca": "Apelação (01/12/2020)",
+     "tipo": "Apelação",
+     "data": "01/12/2020"
+    },
+    {
+     "id": "158862496",
+     "peca": "pet Recurso de Apelação (01/12/2020)",
+     "tipo": "Apelação",
+     "data": "01/12/2020"
+    },
+    {
+     "id": "158862499",
+     "peca": "Contrarrazões (09/02/2021)",
+     "tipo": "Contrarrazões",
+     "data": "09/02/2021"
+    },
+    {
+     "id": "158862500",
+     "peca": "0919 CR veiculo apreendido - reiteracao (09/02/2021)",
+     "tipo": "Contrarrazões",
+     "data": "09/02/2021"
+    },
+    {
+     "id": "160272620",
+     "peca": "Parecer (24/05/2021)",
+     "tipo": "Parecer",
+     "data": "24/05/2021"
+    },
+    {
+     "id": "395196238",
+     "peca": "Ementa (28/09/2026)",
+     "tipo": "Ementa",
+     "data": "28/09/2026"
+    },
+    {
+     "id": "395196243",
+     "peca": "Voto (28/09/2026)",
+     "tipo": "Voto",
+     "data": "28/09/2026"
+    },
+    {
+     "id": "400587567",
+     "peca": "Certidão de julgamento (25/09/2026)",
+     "tipo": "Certidão de Julgamento",
+     "data": "25/09/2026"
+    },
+    {
+     "id": "400937169",
+     "peca": "Acórdão (28/09/2026)",
+     "tipo": "Acórdão",
+     "data": "28/09/2026"
+    },
+    {
+     "id": "401296422",
+     "peca": "Embargos de Declaração (29/09/2026)",
+     "tipo": "Embargos de Declaração",
+     "data": "29/09/2026"
+    },
+    {
+     "id": "401762402",
+     "peca": "Ciência decisao-acordao (01/10/2026)",
+     "tipo": "Petição intercorrente",
+     "data": "01/10/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5000919-57.2019.4.03.6000.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 81,
+    "sem_texto": [
+     "158862454",
+     "158862457",
+     "158862458",
+     "158862459",
+     "158862460",
+     "158862461",
+     "158862462"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "158862452",
+      "11/02/2019",
+      "Petição Inicial",
+      "Petição inicial",
+      "MARIO PANZIERA JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "158862453",
+      "11/02/2019",
+      "Petição inicial - PDF",
+      "Mandado de Segurança Michely",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      30
+     ],
+     [
+      "158862454",
+      "11/02/2019",
+      "Procuração",
+      "procuraçao autenticada",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      2
+     ],
+     [
+      "158862455",
+      "11/02/2019",
+      "Documento Comprobatório",
+      "declaração de justiça gratuita",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "158862456",
+      "11/02/2019",
+      "Documento Comprobatório",
+      "declaração de renda",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "158862457",
+      "11/02/2019",
+      "Documento de Identificação",
+      "documentos pessoais",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      3
+     ],
+     [
+      "158862458",
+      "11/02/2019",
+      "Documento Comprobatório",
+      "auto de infração e processo",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      5
+     ],
+     [
+      "158862459",
+      "11/02/2019",
+      "Outras peças",
+      "cópia da impugnação e restituição do veículo a RF parte 1",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      30
+     ],
+     [
+      "158862460",
+      "11/02/2019",
+      "Outras peças",
+      "cópia da impugnação e restituição do veículo a RF parte 2",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      30
+     ],
+     [
+      "158862461",
+      "11/02/2019",
+      "Outras peças",
+      "cópia da impugnação e restituição do veículo a RF parte 3",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      29
+     ],
+     [
+      "158862462",
+      "11/02/2019",
+      "Outros Documentos",
+      "caso análogo informado a RF",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      11
+     ],
+     [
+      "158862463",
+      "11/02/2019",
+      "Certidão",
+      "",
+      "LUIZ HENRIQUE CAVALHEIRO NANTES",
+      "html",
+      0
+     ],
+     [
+      "158862464",
+      "27/02/2019",
+      "Decisão",
+      "",
+      "SOCRATES LEAO VIEIRA",
+      "html",
+      0
+     ],
+     [
+      "158862465",
+      "27/02/2019",
+      "Mandado",
+      "",
+      "TIAGO JOSE TAMIOZZO",
+      "html",
+      0
+     ],
+     [
+      "158862466",
+      "27/02/2019",
+      "Notificação",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "158862467",
+      "27/02/2019",
+      "Intimação",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "158862468",
+      "28/02/2019",
+      "Diligência",
+      "",
+      "JOSE INACIO MEDEIROS DINIZ FILHO",
+      "html",
+      0
+     ],
+     [
+      "158862469",
+      "28/02/2019",
+      "Certidão de devolução de mandado",
+      "919-57",
+      "JOSE INACIO MEDEIROS DINIZ FILHO",
+      "pdf",
+      1
+     ],
+     [
+      "158862470",
+      "06/03/2019",
+      "Manifestação",
+      "",
+      "MOISES COELHO DE ARAUJO",
+      "html",
+      0
+     ],
+     [
+      "158862471",
+      "18/03/2019",
+      "Informações Prestadas",
+      "",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "158862472",
+      "18/03/2019",
+      "Informações Prestadas",
+      "Informacao 39-2019-MICHELY",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      8
+     ],
+     [
+      "158862473",
+      "18/03/2019",
+      "Informações Prestadas",
+      "AI Thiago Alves",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      4
+     ],
+     [
+      "158862474",
+      "18/03/2019",
+      "Informações Prestadas",
+      "AI Andreia Comboio cigarros",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      5
+     ],
+     [
+      "158862475",
+      "18/03/2019",
+      "Informações Prestadas",
+      "AI Welder Comboio cigarros",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      4
+     ],
+     [
+      "158862476",
+      "18/03/2019",
+      "Informações Prestadas",
+      "BO Thiago Alves",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      34
+     ],
+     [
+      "158862477",
+      "18/03/2019",
+      "Informações Prestadas",
+      "Renavam MICHELY",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      1
+     ],
+     [
+      "158862478",
+      "18/03/2019",
+      "Informações Prestadas",
+      "tela comprot thiago",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      2
+     ],
+     [
+      "158862479",
+      "18/03/2019",
+      "Informações Prestadas",
+      "tela comprot joa evangelista",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      3
+     ],
+     [
+      "158862480",
+      "18/03/2019",
+      "Informações Prestadas",
+      "tela comprot welder",
+      "ZUMILSON CUSTODIO DA SILVA",
+      "pdf",
+      2
+     ],
+     [
+      "158862481",
+      "31/07/2019",
+      "Decisão",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "158862482",
+      "01/08/2019",
+      "Decisão",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "158862483",
+      "07/08/2019",
+      "Manifestação",
+      "Manifestação-PFN",
+      "IZAURA LISBOA RAMOS",
+      "html",
+      0
+     ],
+     [
+      "158862484",
+      "14/08/2019",
+      "Manifestação",
+      "",
+      "EMERSON KALIF SIQUEIRA",
+      "pdf",
+      1
+     ],
+     [
+      "158862485",
+      "31/03/2020",
+      "Certidão",
+      "",
+      "CLADES ROLLWAGEN",
+      "html",
+      0
+     ],
+     [
+      "158862486",
+      "31/03/2020",
+      "Decisão",
+      "Acórdão (1)",
+      "CLADES ROLLWAGEN",
+      "pdf",
+      9
+     ],
+     [
+      "158862487",
+      "31/03/2020",
+      "Certidão",
+      "Certidão Trânsito em Julgado (1)",
+      "CLADES ROLLWAGEN",
+      "pdf",
+      2
+     ],
+     [
+      "158862488",
+      "26/06/2020",
+      "Despacho de Inspeção",
+      "",
+      "LUCAS MEDEIROS GOMES",
+      "html",
+      0
+     ],
+     [
+      "158862489",
+      "10/11/2020",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "MARIO PANZIERA JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "158862490",
+      "10/11/2020",
+      "Petição intercorrente",
+      "pet suspensão do leilão",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      4
+     ],
+     [
+      "158862491",
+      "17/11/2020",
+      "Sentença",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "158862492",
+      "17/11/2020",
+      "Sentença",
+      "",
+      "CLADES ROLLWAGEN",
+      "html",
+      0
+     ],
+     [
+      "158862493",
+      "18/11/2020",
+      "Manifestação",
+      "",
+      "SILVIO PETTENGILL NETO",
+      "pdf",
+      1
+     ],
+     [
+      "158862494",
+      "23/11/2020",
+      "Manifestação",
+      "Manifestação-PFN",
+      "IZAURA LISBOA RAMOS",
+      "html",
+      0
+     ],
+     [
+      "158862495",
+      "01/12/2020",
+      "Apelação",
+      "",
+      "MARIO PANZIERA JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "158862496",
+      "01/12/2020",
+      "Apelação",
+      "pet Recurso de Apelação",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      35
+     ],
+     [
+      "158862497",
+      "31/01/2021",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "NAUDILEY CAPISTRANO DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "158862498",
+      "01/02/2021",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "CLADES ROLLWAGEN",
+      "html",
+      0
+     ],
+     [
+      "158862499",
+      "09/02/2021",
+      "Contrarrazões",
+      "",
+      "MARIA LUCIA INOUYE SHINTATE",
+      "html",
+      0
+     ],
+     [
+      "158862500",
+      "09/02/2021",
+      "Contrarrazões",
+      "0919 CR veiculo apreendido - reiteracao",
+      "MARIA LUCIA INOUYE SHINTATE",
+      "pdf",
+      10
+     ],
+     [
+      "159280357",
+      "11/05/2021",
+      "Certidão",
+      "",
+      "MAISA ALESSANDRA CANHADA",
+      "html",
+      0
+     ],
+     [
+      "159280358",
+      "11/05/2021",
+      "Intimação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "160272620",
+      "24/05/2021",
+      "Parecer",
+      "",
+      "ROSANE CIMA CAMPIOTTO",
+      "pdf",
+      6
+     ],
+     [
+      "394975733",
+      "31/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "394975751",
+      "31/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "394975756",
+      "31/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "394975759",
+      "31/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "394988456",
+      "01/09/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "394988479",
+      "01/09/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "394991432",
+      "01/09/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "394991434",
+      "01/09/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "395196238",
+      "28/09/2026",
+      "Ementa",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "395196239",
+      "28/09/2026",
+      "Relatório",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "395196243",
+      "28/09/2026",
+      "Voto",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "395420399",
+      "02/09/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "400587567",
+      "25/09/2026",
+      "Certidão de Julgamento",
+      "Certidão de julgamento",
+      "DEBORAH SANTOS CONGRO BASTOS",
+      "html",
+      0
+     ],
+     [
+      "400937169",
+      "28/09/2026",
+      "Acórdão",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "401141323",
+      "28/09/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "401296422",
+      "29/09/2026",
+      "Embargos de Declaração",
+      "",
+      "MARIO PANZIERA JUNIOR",
+      "pdf",
+      13
+     ],
+     [
+      "401762402",
+      "01/10/2026",
+      "Petição intercorrente",
+      "Ciência decisao-acordao",
+      "GABRIEL AUGUSTO LUIS TEIXEIRA GONCALVES",
+      "pdf",
+      1
+     ],
+     [
+      "401920340",
+      "02/10/2026",
+      "Ato ordinatório",
+      "",
+      "LISSANDRA CARMEN SCHWERZ DE MEDEIROS",
+      "html",
+      0
+     ],
+     [
+      "402699979",
+      "06/10/2026",
+      "Contraminuta",
+      "IED",
+      "GABRIEL AUGUSTO LUIS TEIXEIRA GONCALVES",
+      "pdf",
+      2
+     ],
+     [
+      "406112740",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112783",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112786",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112789",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407073766",
+      "27/10/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "407125912",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407125959",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407125964",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407125969",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "408481866",
+      "03/11/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -7602,12 +10602,772 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "377918289",
+     "peca": "Petição inicial (28/08/2025)",
+     "tipo": "Petição Inicial",
+     "data": "28/08/2025"
+    },
+    {
+     "id": "377918298",
+     "peca": "COPIA DECISAO DE IMPUGNACAO (28/08/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/08/2025"
+    },
+    {
+     "id": "377918299",
+     "peca": "COPIA DESPACHO DE ENCAMINHAMENTO - 2 (28/08/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/08/2025"
+    },
+    {
+     "id": "377918300",
+     "peca": "COPIA DESPACHO DE ENCAMINHAMENTO (28/08/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/08/2025"
+    },
+    {
+     "id": "377918308",
+     "peca": "COPIA_RELATORIO - SINTEV PERICIAS E LEILOES (28/08/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/08/2025"
+    },
+    {
+     "id": "377918382",
+     "peca": "Despacho (08/09/2025)",
+     "tipo": "Despacho",
+     "data": "08/09/2025"
+    },
+    {
+     "id": "377918383",
+     "peca": "Contestação (21/09/2025)",
+     "tipo": "Contestação",
+     "data": "21/09/2025"
+    },
+    {
+     "id": "377918385",
+     "peca": "Sentença (22/01/2026)",
+     "tipo": "Sentença",
+     "data": "22/01/2026"
+    },
+    {
+     "id": "377918388",
+     "peca": "Informações Prestadas (09/02/2026)",
+     "tipo": "Informações Prestadas",
+     "data": "09/02/2026"
+    },
+    {
+     "id": "377918389",
+     "peca": "Apelação da União/Fazenda Nacional (09/02/2026)",
+     "tipo": "Apelação",
+     "data": "09/02/2026"
+    },
+    {
+     "id": "391791137",
+     "peca": "Voto (15/09/2026)",
+     "tipo": "Voto",
+     "data": "15/09/2026"
+    },
+    {
+     "id": "391796116",
+     "peca": "Ementa (15/09/2026)",
+     "tipo": "Ementa",
+     "data": "15/09/2026"
+    },
+    {
+     "id": "392861863",
+     "peca": "Contrarrazões (20/08/2026)",
+     "tipo": "Contrarrazões",
+     "data": "20/08/2026"
+    },
+    {
+     "id": "397967704",
+     "peca": "Certidão de julgamento (14/09/2026)",
+     "tipo": "Certidão de Julgamento",
+     "data": "14/09/2026"
+    },
+    {
+     "id": "398176482",
+     "peca": "Acórdão (15/09/2026)",
+     "tipo": "Acórdão",
+     "data": "15/09/2026"
+    },
+    {
+     "id": "400444142",
+     "peca": "Ciência acórdão (25/09/2026)",
+     "tipo": "Petição intercorrente",
+     "data": "25/09/2026"
+    },
+    {
+     "id": "401830446",
+     "peca": "Embargos de Declaração (01/10/2026)",
+     "tipo": "Embargos de Declaração",
+     "data": "01/10/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5001473-64.2025.4.03.6005.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 72,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "377918289",
+      "28/08/2025",
+      "Petição Inicial",
+      "Petição inicial",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      21
+     ],
+     [
+      "377918290",
+      "28/08/2025",
+      "Substabelecimento",
+      "Substabelecimento Thiago - Movida Locação de Veículos S.A",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918291",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "Compilado - Atos Constitutivos Movida RAC_compressed",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      119
+     ],
+     [
+      "377918292",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "AUTO DE INFRAÇAO E PERDIMENTO DE MARCADORIAS N 0100100-13477-2024",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      6
+     ],
+     [
+      "377918293",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "AUTO DE INFRAÇAO E PERDIMENTO DE VEICULO N 0100100-130552-2024",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      4
+     ],
+     [
+      "377918294",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "CNH",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "377918295",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "CONTRATO DE LOCAÇAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      3
+     ],
+     [
+      "377918296",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "CONTRATO N 23627740",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918297",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA AVISO DE RECEBIMENTO - AR COMUM",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918298",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA DECISAO DE IMPUGNACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      10
+     ],
+     [
+      "377918299",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA DESPACHO DE ENCAMINHAMENTO - 2",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918300",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA DESPACHO DE ENCAMINHAMENTO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918301",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA IMPUGNACAO - MOVIDA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      7
+     ],
+     [
+      "377918302",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA IMPUGNACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      4
+     ],
+     [
+      "377918303",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA TERMO DE ANALISE DE SOLICITACAO DE JUNTADA 3",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918304",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA TERMO DE ANALISE DE SOLICITACAO DE JUNTADA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918305",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA TERMO DE CIENCIA POR ABERTURA DE MENSAGEM",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918306",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA TERMO DE REGISTRO DE MENSAGEM DE ATO OFICIAL NA CAIXA POSTAL",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918307",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA TERMO DE SOLICITACAO DE JUNTADA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918308",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA_RELATORIO - SINTEV PERICIAS E LEILOES",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "377918309",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "DIARIA DE LOCAÇAO RAC",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "377918310",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "FOTO 2",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918311",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "TERMO CIENCIA POR ABERTURA DE MENSAGEM DTE- INTIMAÇAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918312",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "TERMO DE ABERTURA DE DOCUMETO - INTIMAÇAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918313",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "TERMO DE REGISTRO DE MENSAGEM DE ATO OFICIAL NA CAIXA POSTAÇ - INTIMAÇAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918314",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "TERMO DE SOLICITACAO DE JUNTADA - RELATÓRIO DE VISTORIA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918315",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "CONSULTA AO CNPJ",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918316",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "CONSULTA POR PLACA DO VEICULO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918317",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA FICHA DE IDENTIFICACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918318",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "COPIA TERMO DE ABERTURA DE DOCUMENTO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918319",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "DOCUMENTOS COMPROBATORIOS",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918320",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "FOTO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      19
+     ],
+     [
+      "377918321",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "RELACAO DE MARCADORIAS N 0147800859842024",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918322",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "RESPOSTA MOVIDA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      6
+     ],
+     [
+      "377918323",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "TERMO DE ANALISE DE SOLICITAÇAO DE JUNTADA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "377918324",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "TERMO DE RETENÇAO DE MARCADORIAS",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918325",
+      "28/08/2025",
+      "Documento Comprobatório",
+      "TERMO DE SOLICITAÇAO DE JUNTADA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918326",
+      "28/08/2025",
+      "Certidão",
+      "",
+      "TATILA HASELHORST URIZAR",
+      "html",
+      0
+     ],
+     [
+      "377918327",
+      "29/08/2025",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "EVERTON CHIERICI DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "377918328",
+      "04/09/2025",
+      "Custas",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918329",
+      "04/09/2025",
+      "Outros Documentos",
+      "COMPROVANTE DE PAGAMENTO - CUSTAS",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918330",
+      "04/09/2025",
+      "Outros Documentos",
+      "GUIA DE RECOLHIMENTO DA UNIÃO - GRU",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918331",
+      "04/09/2025",
+      "Outros Documentos",
+      "Substabelecimento Tiago Aued - FLH6E24",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "377918382",
+      "08/09/2025",
+      "Despacho",
+      "",
+      "PRISCILLA GALDINI DE ANDRADE",
+      "html",
+      0
+     ],
+     [
+      "377918383",
+      "21/09/2025",
+      "Contestação",
+      "",
+      "GEISA SANTOS DE AQUINO",
+      "html",
+      0
+     ],
+     [
+      "377918384",
+      "29/09/2025",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "EDWILSON BORGES DE ALMEIDA",
+      "html",
+      0
+     ],
+     [
+      "377918385",
+      "22/01/2026",
+      "Sentença",
+      "",
+      "MÁRIA RÚBIA ANDRADE MATOS",
+      "html",
+      0
+     ],
+     [
+      "377918386",
+      "03/02/2026",
+      "Certidão",
+      "Código para acesso externo às peças do processo",
+      "EDWILSON BORGES DE ALMEIDA",
+      "html",
+      0
+     ],
+     [
+      "377918387",
+      "03/02/2026",
+      "Outros Documentos",
+      "Intimação - RFB",
+      "EDWILSON BORGES DE ALMEIDA",
+      "pdf",
+      1
+     ],
+     [
+      "377918388",
+      "09/02/2026",
+      "Informações Prestadas",
+      "",
+      "JUAN MANUEL DECHANDT ELIZECHE",
+      "pdf",
+      3
+     ],
+     [
+      "377918389",
+      "09/02/2026",
+      "Apelação",
+      "Apelação da União/Fazenda Nacional",
+      "VERONICA MEDEIROS CARDOSO",
+      "pdf",
+      12
+     ],
+     [
+      "377918390",
+      "09/04/2026",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "MURYEL FERNANDA SOUZA CURITY MORAES",
+      "html",
+      0
+     ],
+     [
+      "377918391",
+      "01/06/2026",
+      "Informação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391791136",
+      "15/09/2026",
+      "Relatório",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391791137",
+      "15/09/2026",
+      "Voto",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391796116",
+      "15/09/2026",
+      "Ementa",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391815418",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391815429",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391815486",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "392861863",
+      "20/08/2026",
+      "Contrarrazões",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      18
+     ],
+     [
+      "397967704",
+      "14/09/2026",
+      "Certidão de Julgamento",
+      "Certidão de julgamento",
+      "DEBORAH SANTOS CONGRO BASTOS",
+      "html",
+      0
+     ],
+     [
+      "398176482",
+      "15/09/2026",
+      "Acórdão",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "400444142",
+      "25/09/2026",
+      "Petição intercorrente",
+      "Ciência acórdão",
+      "GABRIEL AUGUSTO LUIS TEIXEIRA GONCALVES",
+      "pdf",
+      1
+     ],
+     [
+      "401830446",
+      "01/10/2026",
+      "Embargos de Declaração",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      32
+     ],
+     [
+      "401920341",
+      "02/10/2026",
+      "Ato ordinatório",
+      "",
+      "LISSANDRA CARMEN SCHWERZ DE MEDEIROS",
+      "html",
+      0
+     ],
+     [
+      "404073493",
+      "13/10/2026",
+      "Petição intercorrente",
+      "IED Turma",
+      "GABRIEL AUGUSTO LUIS TEIXEIRA GONCALVES",
+      "pdf",
+      3
+     ],
+     [
+      "406112842",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112859",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112863",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126087",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126107",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126116",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -7632,12 +11392,862 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "220275754",
+     "peca": "Petição inicial (16/06/2021)",
+     "tipo": "Petição Inicial",
+     "data": "16/06/2021"
+    },
+    {
+     "id": "220275755",
+     "peca": "MANDADO DE SEGURANÇA - GUILEIDE CAROLINA SIMAS MEDEIROS RAMOS (16/06/2021)",
+     "tipo": "Petição inicial - PDF",
+     "data": "16/06/2021"
+    },
+    {
+     "id": "220275762",
+     "peca": "Despacho (17/06/2021)",
+     "tipo": "Despacho",
+     "data": "17/06/2021"
+    },
+    {
+     "id": "220275766",
+     "peca": "Despacho (17/06/2021)",
+     "tipo": "Despacho",
+     "data": "17/06/2021"
+    },
+    {
+     "id": "220275772",
+     "peca": "Informações Prestadas (29/06/2021)",
+     "tipo": "Informações Prestadas",
+     "data": "29/06/2021"
+    },
+    {
+     "id": "220275773",
+     "peca": "Ofício PROGRAD n. 09 (com anexo) (29/06/2021)",
+     "tipo": "Informações Prestadas",
+     "data": "29/06/2021"
+    },
+    {
+     "id": "220275774",
+     "peca": "Sentença (27/07/2021)",
+     "tipo": "Sentença",
+     "data": "27/07/2021"
+    },
+    {
+     "id": "220275776",
+     "peca": "Sentença (28/07/2021)",
+     "tipo": "Sentença",
+     "data": "28/07/2021"
+    },
+    {
+     "id": "220275779",
+     "peca": "Apelação (23/08/2021)",
+     "tipo": "Apelação",
+     "data": "23/08/2021"
+    },
+    {
+     "id": "220275780",
+     "peca": "APELAÇÃO (23/08/2021)",
+     "tipo": "Apelação",
+     "data": "23/08/2021"
+    },
+    {
+     "id": "220275781",
+     "peca": "GUIA E COMPROVANTE DE PAGAMENTO APELAÇÃO (23/08/2021)",
+     "tipo": "Comprovante de Recolhimento de Preparo",
+     "data": "23/08/2021"
+    },
+    {
+     "id": "220275785",
+     "peca": "Contrarrazões (10/09/2021)",
+     "tipo": "Contrarrazões",
+     "data": "10/09/2021"
+    },
+    {
+     "id": "221267856",
+     "peca": "Parecer (30/11/2021)",
+     "tipo": "Parecer",
+     "data": "30/11/2021"
+    },
+    {
+     "id": "221801275",
+     "peca": "Decisão (09/12/2021)",
+     "tipo": "Decisão",
+     "data": "09/12/2021"
+    },
+    {
+     "id": "250855535",
+     "peca": "Agravo Interno (24/12/2021)",
+     "tipo": "Agravo Interno",
+     "data": "24/12/2021"
+    },
+    {
+     "id": "253219891",
+     "peca": "Contrarrazões (11/02/2022)",
+     "tipo": "Contrarrazões",
+     "data": "11/02/2022"
+    },
+    {
+     "id": "253219893",
+     "peca": "CONTRARRAZÕES AO AGRAVO INTERNO (11/02/2022)",
+     "tipo": "Contrarrazões",
+     "data": "11/02/2022"
+    },
+    {
+     "id": "263553844",
+     "peca": "Despacho (06/10/2022)",
+     "tipo": "Despacho",
+     "data": "06/10/2022"
+    },
+    {
+     "id": "391608623",
+     "peca": "Voto (15/09/2026)",
+     "tipo": "Voto",
+     "data": "15/09/2026"
+    },
+    {
+     "id": "397967700",
+     "peca": "Certidão de julgamento (14/09/2026)",
+     "tipo": "Certidão de Julgamento",
+     "data": "14/09/2026"
+    },
+    {
+     "id": "398144949",
+     "peca": "Acórdão (15/09/2026)",
+     "tipo": "Acórdão",
+     "data": "15/09/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5001604-87.2021.4.03.6002.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 79,
+    "sem_texto": [
+     "220275757",
+     "220275758"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "220275754",
+      "16/06/2021",
+      "Petição Inicial",
+      "Petição inicial",
+      "MARCELO CESAR CORDEIRO",
+      "html",
+      0
+     ],
+     [
+      "220275755",
+      "16/06/2021",
+      "Petição inicial - PDF",
+      "MANDADO DE SEGURANÇA - GUILEIDE CAROLINA SIMAS MEDEIROS RAMOS",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      20
+     ],
+     [
+      "220275756",
+      "16/06/2021",
+      "Procuração/Habilitação",
+      "ANEXO 1.Procuração",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      1
+     ],
+     [
+      "220275757",
+      "16/06/2021",
+      "Documento de Identificação",
+      "ANEXO 2. DOCUMENTOS PESSOIAS",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      3
+     ],
+     [
+      "220275758",
+      "16/06/2021",
+      "Outros Documentos",
+      "ANEXO 3.Formulário de Transferência",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      2
+     ],
+     [
+      "220275759",
+      "16/06/2021",
+      "Outros Documentos",
+      "ANEXO 4.1.Processo 23005.002658-2021-44-1-130",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      130
+     ],
+     [
+      "220275760",
+      "16/06/2021",
+      "Outros Documentos",
+      "ANEXO 4.2.Processo 23005.002658-2021-44-131-268",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      138
+     ],
+     [
+      "220275761",
+      "16/06/2021",
+      "Certidão",
+      "",
+      "ADRIANA BARROSO VAZ",
+      "html",
+      0
+     ],
+     [
+      "220275762",
+      "17/06/2021",
+      "Despacho",
+      "",
+      "MOISES ANDERSON COSTA RODRIGUES DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "220275763",
+      "17/06/2021",
+      "Custas",
+      "",
+      "MARCELO CESAR CORDEIRO",
+      "html",
+      0
+     ],
+     [
+      "220275764",
+      "17/06/2021",
+      "Custas",
+      "PETIÇÃO - JUNTADA DE CUSTAS",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      1
+     ],
+     [
+      "220275765",
+      "17/06/2021",
+      "Custas",
+      "GUIA E COMPROVANTE DE PAGAMENTO CUSTAS.",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      2
+     ],
+     [
+      "220275766",
+      "17/06/2021",
+      "Despacho",
+      "",
+      "MARIO SERGIO NOGARI CUELLIS",
+      "html",
+      0
+     ],
+     [
+      "220275767",
+      "18/06/2021",
+      "Manifestação",
+      "",
+      "SILVIO PETTENGILL NETO",
+      "pdf",
+      4
+     ],
+     [
+      "220275768",
+      "22/06/2021",
+      "Diligência",
+      "",
+      "AGNALDO RODRIGUES HERCULANO",
+      "html",
+      0
+     ],
+     [
+      "220275769",
+      "22/06/2021",
+      "Outros Documentos",
+      "UFGD 87",
+      "AGNALDO RODRIGUES HERCULANO",
+      "pdf",
+      1
+     ],
+     [
+      "220275770",
+      "22/06/2021",
+      "Outros Documentos",
+      "UFGD - Pro-Reitora Ensino e Graduação",
+      "AGNALDO RODRIGUES HERCULANO",
+      "pdf",
+      2
+     ],
+     [
+      "220275771",
+      "29/06/2021",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ANGELICA CARRO",
+      "html",
+      0
+     ],
+     [
+      "220275772",
+      "29/06/2021",
+      "Informações Prestadas",
+      "",
+      "SELMA HELENA MARCHIORI HASHIMOTO",
+      "html",
+      0
+     ],
+     [
+      "220275773",
+      "29/06/2021",
+      "Informações Prestadas",
+      "Ofício PROGRAD n. 09 (com anexo)",
+      "SELMA HELENA MARCHIORI HASHIMOTO",
+      "pdf",
+      10
+     ],
+     [
+      "220275774",
+      "27/07/2021",
+      "Sentença",
+      "",
+      "RUBENS PETRUCCI JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "220275775",
+      "27/07/2021",
+      "Outros Documentos",
+      "Preguntas Frecuentes - Universidad del Norte",
+      "RUBENS PETRUCCI JUNIOR",
+      "pdf",
+      2
+     ],
+     [
+      "220275776",
+      "28/07/2021",
+      "Sentença",
+      "",
+      "MARIO SERGIO NOGARI CUELLIS",
+      "html",
+      0
+     ],
+     [
+      "220275777",
+      "28/07/2021",
+      "Manifestação",
+      "",
+      "SILVIO PETTENGILL NETO",
+      "pdf",
+      1
+     ],
+     [
+      "220275778",
+      "06/08/2021",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ANGELICA CARRO",
+      "html",
+      0
+     ],
+     [
+      "220275779",
+      "23/08/2021",
+      "Apelação",
+      "",
+      "MARCELO CESAR CORDEIRO",
+      "html",
+      0
+     ],
+     [
+      "220275780",
+      "23/08/2021",
+      "Apelação",
+      "APELAÇÃO",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      21
+     ],
+     [
+      "220275781",
+      "23/08/2021",
+      "Comprovante de Recolhimento de Preparo",
+      "GUIA E COMPROVANTE DE PAGAMENTO APELAÇÃO",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      2
+     ],
+     [
+      "220275782",
+      "26/08/2021",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "MARIO SERGIO NOGARI CUELLIS",
+      "html",
+      0
+     ],
+     [
+      "220275783",
+      "27/08/2021",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "MARIO SERGIO NOGARI CUELLIS",
+      "html",
+      0
+     ],
+     [
+      "220275784",
+      "30/08/2021",
+      "Manifestação",
+      "",
+      "SILVIO PETTENGILL NETO",
+      "pdf",
+      1
+     ],
+     [
+      "220275785",
+      "10/09/2021",
+      "Contrarrazões",
+      "",
+      "ANGELICA CARRO",
+      "html",
+      0
+     ],
+     [
+      "220275786",
+      "16/09/2021",
+      "TERMO DE REMESSA",
+      "Termo de remessa",
+      "MARIO SERGIO NOGARI CUELLIS",
+      "html",
+      0
+     ],
+     [
+      "221031684",
+      "27/11/2021",
+      "Intimação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "221267856",
+      "30/11/2021",
+      "Parecer",
+      "",
+      "ROSANE CIMA CAMPIOTTO",
+      "pdf",
+      5
+     ],
+     [
+      "221801275",
+      "09/12/2021",
+      "Decisão",
+      "",
+      "ANDRE NABARRETE NETO",
+      "html",
+      0
+     ],
+     [
+      "226721579",
+      "13/12/2021",
+      "Manifestação",
+      "",
+      "ROSANE CIMA CAMPIOTTO",
+      "pdf",
+      1
+     ],
+     [
+      "250855535",
+      "24/12/2021",
+      "Agravo Interno",
+      "",
+      "ANGELICA CARRO",
+      "html",
+      0
+     ],
+     [
+      "251292827",
+      "07/01/2022",
+      "Ato ordinatório",
+      "",
+      "MAURICIO LUIS SPILA THOMAZ",
+      "html",
+      0
+     ],
+     [
+      "253219891",
+      "11/02/2022",
+      "Contrarrazões",
+      "",
+      "MARCELO CESAR CORDEIRO",
+      "html",
+      0
+     ],
+     [
+      "253219893",
+      "11/02/2022",
+      "Contrarrazões",
+      "CONTRARRAZÕES AO AGRAVO INTERNO",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      10
+     ],
+     [
+      "253219895",
+      "11/02/2022",
+      "Documento Comprobatório",
+      "Atestado - Guileide Carolina",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      1
+     ],
+     [
+      "259574804",
+      "15/09/2026",
+      "Relatório",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "261435195",
+      "31/07/2022",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "261435216",
+      "31/07/2022",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "261435239",
+      "31/07/2022",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "262050024",
+      "15/08/2022",
+      "Petição intercorrente",
+      "",
+      "GEISA DE ASSIS RODRIGUES",
+      "html",
+      0
+     ],
+     [
+      "262051134",
+      "15/08/2022",
+      "Manifestação",
+      "manifestação 5001604-87.2021.4.03.6002",
+      "GEISA DE ASSIS RODRIGUES",
+      "pdf",
+      2
+     ],
+     [
+      "262051138",
+      "15/08/2022",
+      "Informação",
+      "OFÍCIO_PRM-DRS-MS-00006422.2022 5001604-87.2021.4.03.6002",
+      "GEISA DE ASSIS RODRIGUES",
+      "pdf",
+      49
+     ],
+     [
+      "263553844",
+      "06/10/2022",
+      "Despacho",
+      "",
+      "ANDRE NABARRETE NETO",
+      "html",
+      0
+     ],
+     [
+      "265460048",
+      "18/10/2022",
+      "Petição intercorrente",
+      "",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      7
+     ],
+     [
+      "266164330",
+      "01/11/2022",
+      "Petição intercorrente",
+      "",
+      "ANGELICA CARRO",
+      "html",
+      0
+     ],
+     [
+      "391608610",
+      "15/09/2026",
+      "Relatório",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391608623",
+      "15/09/2026",
+      "Voto",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391814838",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391814872",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391814879",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391814882",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391955705",
+      "14/08/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "397967700",
+      "14/09/2026",
+      "Certidão de Julgamento",
+      "Certidão de julgamento",
+      "DEBORAH SANTOS CONGRO BASTOS",
+      "html",
+      0
+     ],
+     [
+      "398144949",
+      "15/09/2026",
+      "Acórdão",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "399014083",
+      "18/09/2026",
+      "Embargos Infringentes",
+      "",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      18
+     ],
+     [
+      "399014084",
+      "18/09/2026",
+      "Documentos Diversos",
+      "historico",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      5
+     ],
+     [
+      "399014086",
+      "18/09/2026",
+      "Documentos Diversos",
+      "PRINT DO PORTAL DA ALUNA",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      1
+     ],
+     [
+      "399014087",
+      "18/09/2026",
+      "Documentos Diversos",
+      "relatorio de notas",
+      "MARCELO CESAR CORDEIRO",
+      "pdf",
+      2
+     ],
+     [
+      "399656240",
+      "21/09/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "400146700",
+      "23/09/2026",
+      "Petição intercorrente",
+      "P_PETIÇÃO (OUTRAS)_3390457390 EM 23/09/2026 19:34:23",
+      "DANIELLE MONTEIRO PREZIA ANICETO",
+      "pdf",
+      1
+     ],
+     [
+      "401186367",
+      "28/09/2026",
+      "Ato ordinatório",
+      "",
+      "LISSANDRA CARMEN SCHWERZ DE MEDEIROS",
+      "html",
+      0
+     ],
+     [
+      "402852726",
+      "07/10/2026",
+      "Petição intercorrente",
+      "P_IMPUGNAÇÃO AOS EMBARGOS_3402428760 EM 07/10/2026 08:41:11",
+      "DANIELLE MONTEIRO PREZIA ANICETO",
+      "pdf",
+      2
+     ],
+     [
+      "406112876",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112944",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112948",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112952",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406780009",
+      "26/10/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ],
+     [
+      "407126130",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126163",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126170",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126176",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407385108",
+      "28/10/2026",
+      "Ciência",
+      "",
+      "CRISTINA MARELIM VIANNA",
+      "pdf",
+      1
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -7662,12 +12272,889 @@
     "correcao": "Bruno",
     "situacao": "Liberada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "369934609",
+     "peca": "Petição inicial (28/07/2025)",
+     "tipo": "Petição Inicial",
+     "data": "28/07/2025"
+    },
+    {
+     "id": "369934623",
+     "peca": "-DECISAO DO PROCESSO ADMINISTRATIVO (28/07/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/07/2025"
+    },
+    {
+     "id": "369934624",
+     "peca": "DESPACHO DE ENCAMINHAMENTO 2 (28/07/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/07/2025"
+    },
+    {
+     "id": "369934626",
+     "peca": "DESPACHO DE ENCAMINHAMENTO (28/07/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/07/2025"
+    },
+    {
+     "id": "369934685",
+     "peca": "INFORMAÇOES DO VEICULO (28/07/2025)",
+     "tipo": "Documento Comprobatório",
+     "data": "28/07/2025"
+    },
+    {
+     "id": "369934713",
+     "peca": "Decisão (30/07/2025)",
+     "tipo": "Decisão",
+     "data": "30/07/2025"
+    },
+    {
+     "id": "369934717",
+     "peca": "Decisão (04/08/2025)",
+     "tipo": "Decisão",
+     "data": "04/08/2025"
+    },
+    {
+     "id": "369934720",
+     "peca": "Contestação da União/Fazenda Nacional (21/08/2025)",
+     "tipo": "Contestação",
+     "data": "21/08/2025"
+    },
+    {
+     "id": "369934724",
+     "peca": "Despacho (21/10/2025)",
+     "tipo": "Despacho",
+     "data": "21/10/2025"
+    },
+    {
+     "id": "369934726",
+     "peca": "Sentença (05/12/2025)",
+     "tipo": "Sentença",
+     "data": "05/12/2025"
+    },
+    {
+     "id": "369934727",
+     "peca": "Apelação (29/01/2026)",
+     "tipo": "Apelação",
+     "data": "29/01/2026"
+    },
+    {
+     "id": "369934729",
+     "peca": "Contrarrazões de Recurso (19/03/2026)",
+     "tipo": "Contrarrazões de Recurso",
+     "data": "19/03/2026"
+    },
+    {
+     "id": "391820668",
+     "peca": "Voto (15/09/2026)",
+     "tipo": "Voto",
+     "data": "15/09/2026"
+    },
+    {
+     "id": "391822279",
+     "peca": "Ementa (15/09/2026)",
+     "tipo": "Ementa",
+     "data": "15/09/2026"
+    },
+    {
+     "id": "397967703",
+     "peca": "Certidão de julgamento (14/09/2026)",
+     "tipo": "Certidão de Julgamento",
+     "data": "14/09/2026"
+    },
+    {
+     "id": "398175431",
+     "peca": "Acórdão (15/09/2026)",
+     "tipo": "Acórdão",
+     "data": "15/09/2026"
+    },
+    {
+     "id": "401716127",
+     "peca": "Embargos de Declaração (30/09/2026)",
+     "tipo": "Embargos de Declaração",
+     "data": "30/09/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5001999-40.2025.4.03.6002.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 85,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "369934609",
+      "28/07/2025",
+      "Petição Inicial",
+      "Petição inicial",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      22
+     ],
+     [
+      "369934611",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "",
+      "LEONARDO SULZER PARADA",
+      "html",
+      0
+     ],
+     [
+      "369934612",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "Compilado - Atos Constitutivos Movida RAC_compressed",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      119
+     ],
+     [
+      "369934613",
+      "28/07/2025",
+      "Substabelecimento",
+      "Substabelecimento Thiago - Movida Locação de Veículos S.A",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934614",
+      "28/07/2025",
+      "Substabelecimento",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934615",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "-AUTO DE INFRAÇÃO E PERDIMENTO DE VEÍCULO No 0100100-314815 2024",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      8
+     ],
+     [
+      "369934616",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "AUTO DE INFRACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      7
+     ],
+     [
+      "369934618",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "CNH - JOSE",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934619",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "COMPROVANTE DE PROTOCOLO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934620",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "CONSULTA CNPJ",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934621",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "CONTRATO DE LOCAÇAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      3
+     ],
+     [
+      "369934622",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "CONTRATO Nº 24322774",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934623",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "-DECISAO DO PROCESSO ADMINISTRATIVO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      14
+     ],
+     [
+      "369934624",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "DESPACHO DE ENCAMINHAMENTO 2",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934626",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "DESPACHO DE ENCAMINHAMENTO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934627",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "DOCUMENTO - SENTEV",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "369934628",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "DOCUMENTOS ADUANEIROS - FOTOS",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      8
+     ],
+     [
+      "369934629",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "DOCUMENTOS ADUANEIROS - OUTROS",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      10
+     ],
+     [
+      "369934630",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "DOCUMENTOS COMPROBATORIOS",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934631",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "FICHA DE IDENTIFICACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934683",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "FOTO - JOSE",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934684",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "IMPUGNACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      7
+     ],
+     [
+      "369934685",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "INFORMAÇOES DO VEICULO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934686",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "INTIMACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934687",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "RELAÇAO DE MERCADORIAS",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      3
+     ],
+     [
+      "369934688",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "RELATORIO DE FISCALIZAÇAO DO VEICULO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "369934689",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "RENAVAN",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934690",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "RESPOSTA A INTIMACAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      6
+     ],
+     [
+      "369934691",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TABELA FIPE",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934693",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE ABERTURA DE DOCUMENTO - INTIMAÇAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934694",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE ABERTURA DE DOCUMENTO 3",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934695",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE ABERTURA DE DOCUMENTO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934696",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE ANALISE DE SOLICITACAO DE JUNTADA 4",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "369934697",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE ANALISE DE SOLICITACAO DE JUNTADA 5",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934698",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE ANALISE DE SOLICITACAO DE JUNTADA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934699",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE CIENCIA POR ABERTURA DE MENSAGEM 2",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934700",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE CIENCIA POR ABERTURA DE MENSAGEM 4",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934701",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE CIENCIA POR ABERTURA DE MENSAGEM DTE INTIMAÇAO",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934702",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE CIENCIA POR ABERTURA DE MENSAGEM",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934703",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE DESENTRANHAMENTO 2",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934704",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE REGISTRO DE MENSAGEM DE ATO OFICIAL NA CAIXA POSTAL 2",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934705",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE REGISTRO DE MENSAGEM DE ATO OFICIAL NA CAIXA POSTAL 3",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934706",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE REGISTRO DE MENSAGEM DE ATO OFICIAL NA CAIXA POSTAL 4",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934707",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE REGISTRO DE MENSAGEM DE ATO OFICIAL NA CAIXA POSTAL",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934708",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE SOLICITACAO DE JUNTADA 2",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934709",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE SOLICITACAO DE JUNTADA 6",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934710",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "TERMO DE SOLICITACAO DE JUNTADA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934711",
+      "28/07/2025",
+      "Documento Comprobatório",
+      "VR 01RF DEVAT",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      2
+     ],
+     [
+      "369934712",
+      "28/07/2025",
+      "Certidão",
+      "",
+      "ADRIANA BARROSO VAZ",
+      "html",
+      0
+     ],
+     [
+      "369934713",
+      "30/07/2025",
+      "Decisão",
+      "",
+      "EWERTON TEIXEIRA BUENO",
+      "html",
+      0
+     ],
+     [
+      "369934714",
+      "01/08/2025",
+      "Resposta",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934715",
+      "01/08/2025",
+      "Custas",
+      "COMPROVANTE DE PAGAMENTO -GUIA 01-08-2025",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934716",
+      "01/08/2025",
+      "Custas",
+      "GUIA DE RECOLHIMENTO DA UNIÃO - GRU",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934717",
+      "04/08/2025",
+      "Decisão",
+      "",
+      "EWERTON TEIXEIRA BUENO",
+      "html",
+      0
+     ],
+     [
+      "369934718",
+      "18/08/2025",
+      "Diligência",
+      "",
+      "AGNALDO RODRIGUES HERCULANO",
+      "html",
+      0
+     ],
+     [
+      "369934719",
+      "18/08/2025",
+      "Outros Documentos",
+      "Delegado da Receita Brasilia resposta",
+      "AGNALDO RODRIGUES HERCULANO",
+      "pdf",
+      1
+     ],
+     [
+      "369934720",
+      "21/08/2025",
+      "Contestação",
+      "Contestação da União/Fazenda Nacional",
+      "VERONICA MEDEIROS CARDOSO",
+      "pdf",
+      11
+     ],
+     [
+      "369934721",
+      "09/09/2025",
+      "Outras peças",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934722",
+      "09/09/2025",
+      "Outros Documentos",
+      "STR5J21 - TERMO DE ENTREGA",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      1
+     ],
+     [
+      "369934723",
+      "12/09/2025",
+      "Impugnação",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      15
+     ],
+     [
+      "369934724",
+      "21/10/2025",
+      "Despacho",
+      "",
+      "EWERTON TEIXEIRA BUENO",
+      "html",
+      0
+     ],
+     [
+      "369934725",
+      "24/10/2025",
+      "Manifestação",
+      "",
+      "DANIELLE SOUZA FERNANDES AMIZO",
+      "pdf",
+      1
+     ],
+     [
+      "369934726",
+      "05/12/2025",
+      "Sentença",
+      "",
+      "EWERTON TEIXEIRA BUENO",
+      "html",
+      0
+     ],
+     [
+      "369934727",
+      "29/01/2026",
+      "Apelação",
+      "",
+      "SAMIR DIB BACHOUR",
+      "pdf",
+      15
+     ],
+     [
+      "369934728",
+      "25/02/2026",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "CARINA LUCHESI MORCELI GERVAZONI",
+      "html",
+      0
+     ],
+     [
+      "369934729",
+      "19/03/2026",
+      "Contrarrazões de Recurso",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      15
+     ],
+     [
+      "369934730",
+      "29/04/2026",
+      "Informação",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391815379",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391815397",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391815405",
+      "13/08/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391820665",
+      "15/09/2026",
+      "Relatório",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391820668",
+      "15/09/2026",
+      "Voto",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391822279",
+      "15/09/2026",
+      "Ementa",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "397967703",
+      "14/09/2026",
+      "Certidão de Julgamento",
+      "Certidão de julgamento",
+      "DEBORAH SANTOS CONGRO BASTOS",
+      "html",
+      0
+     ],
+     [
+      "398175431",
+      "15/09/2026",
+      "Acórdão",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "400526337",
+      "25/09/2026",
+      "Ciência",
+      "Ciência vitória",
+      "GABRIEL AUGUSTO LUIS TEIXEIRA GONCALVES",
+      "pdf",
+      1
+     ],
+     [
+      "401716127",
+      "30/09/2026",
+      "Embargos de Declaração",
+      "",
+      "LEONARDO SULZER PARADA",
+      "pdf",
+      34
+     ],
+     [
+      "401727249",
+      "30/09/2026",
+      "Ato ordinatório",
+      "",
+      "LISSANDRA CARMEN SCHWERZ DE MEDEIROS",
+      "html",
+      0
+     ],
+     [
+      "402391490",
+      "05/10/2026",
+      "Contraminuta",
+      "IED",
+      "GABRIEL AUGUSTO LUIS TEIXEIRA GONCALVES",
+      "pdf",
+      2
+     ],
+     [
+      "406113002",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406113009",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406113013",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126294",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126311",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126319",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -7692,12 +13179,902 @@
     "correcao": "Bruno",
     "situacao": "Liberada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "263024527",
+     "peca": "Petição inicial (24/04/2018)",
+     "tipo": "Petição Inicial",
+     "data": "24/04/2018"
+    },
+    {
+     "id": "263024528",
+     "peca": "1. DECLARATÓRIA (24/04/2018)",
+     "tipo": "Petição inicial - PDF",
+     "data": "24/04/2018"
+    },
+    {
+     "id": "263024537",
+     "peca": "10. LAUDOS DE VISTORIA (24/04/2018)",
+     "tipo": "Documento Comprobatório",
+     "data": "24/04/2018"
+    },
+    {
+     "id": "263024540",
+     "peca": "13. LAUDO UNIPASTO PB (24/04/2018)",
+     "tipo": "Documento Comprobatório",
+     "data": "24/04/2018"
+    },
+    {
+     "id": "263024544",
+     "peca": "Decisão (17/05/2018)",
+     "tipo": "Decisão",
+     "data": "17/05/2018"
+    },
+    {
+     "id": "263024545",
+     "peca": "Comprovação de Interposição de Agravo (18/06/2018)",
+     "tipo": "Comprovação de Interposição de Agravo",
+     "data": "18/06/2018"
+    },
+    {
+     "id": "263024546",
+     "peca": "RECIBO DE PROTOCOLO 14.06.18 (18/06/2018)",
+     "tipo": "Comprovação de Interposição de Agravo",
+     "data": "18/06/2018"
+    },
+    {
+     "id": "263024547",
+     "peca": "AGRAVO DE INSTRUMENTO (18/06/2018)",
+     "tipo": "Comprovação de Interposição de Agravo",
+     "data": "18/06/2018"
+    },
+    {
+     "id": "263024549",
+     "peca": "Despacho (20/06/2018)",
+     "tipo": "Despacho",
+     "data": "20/06/2018"
+    },
+    {
+     "id": "263024554",
+     "peca": "Contestação (14/09/2018)",
+     "tipo": "Contestação",
+     "data": "14/09/2018"
+    },
+    {
+     "id": "263024555",
+     "peca": "CONTESTAÇÃO DA UNIÃO (14/09/2018)",
+     "tipo": "Contestação",
+     "data": "14/09/2018"
+    },
+    {
+     "id": "263024556",
+     "peca": "PARECER N. 79-2018 E DOCTOS (14/09/2018)",
+     "tipo": "Informações Prestadas",
+     "data": "14/09/2018"
+    },
+    {
+     "id": "263024561",
+     "peca": "Despacho (18/05/2020)",
+     "tipo": "Despacho",
+     "data": "18/05/2020"
+    },
+    {
+     "id": "263024562",
+     "peca": "Despacho (20/05/2020)",
+     "tipo": "Despacho",
+     "data": "20/05/2020"
+    },
+    {
+     "id": "263024566",
+     "peca": "Decisão Administrativa - Processo 21026005870201711 (06/06/2020)",
+     "tipo": "Documento Comprobatório",
+     "data": "06/06/2020"
+    },
+    {
+     "id": "263024567",
+     "peca": "Sentença (12/06/2021)",
+     "tipo": "Sentença",
+     "data": "12/06/2021"
+    },
+    {
+     "id": "263024568",
+     "peca": "Sentença (14/06/2021)",
+     "tipo": "Sentença",
+     "data": "14/06/2021"
+    },
+    {
+     "id": "263024569",
+     "peca": "Embargos de Declaração (22/06/2021)",
+     "tipo": "Embargos de Declaração",
+     "data": "22/06/2021"
+    },
+    {
+     "id": "263024570",
+     "peca": "22.06.2021.EMBARGOS DE DECLARAÇAO (22/06/2021)",
+     "tipo": "Embargos de Declaração",
+     "data": "22/06/2021"
+    },
+    {
+     "id": "263024575",
+     "peca": "Sentença (04/07/2022)",
+     "tipo": "Sentença",
+     "data": "04/07/2022"
+    },
+    {
+     "id": "263024576",
+     "peca": "Sentença (05/07/2022)",
+     "tipo": "Sentença",
+     "data": "05/07/2022"
+    },
+    {
+     "id": "263024577",
+     "peca": "Apelação (25/07/2022)",
+     "tipo": "Apelação",
+     "data": "25/07/2022"
+    },
+    {
+     "id": "263024578",
+     "peca": "14.07.22 RECURSO DE APELAÇÃO (25/07/2022)",
+     "tipo": "Apelação",
+     "data": "25/07/2022"
+    },
+    {
+     "id": "263024583",
+     "peca": "Contrarrazões (26/08/2022)",
+     "tipo": "Contrarrazões",
+     "data": "26/08/2022"
+    },
+    {
+     "id": "264824904",
+     "peca": "Decisão (13/10/2022)",
+     "tipo": "Decisão",
+     "data": "13/10/2022"
+    },
+    {
+     "id": "384058092",
+     "peca": "Ementa (10/08/2026)",
+     "tipo": "Ementa",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "384058846",
+     "peca": "Voto (10/08/2026)",
+     "tipo": "Voto",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "391395861",
+     "peca": "Certidão de julgamento (10/08/2026)",
+     "tipo": "Certidão de Julgamento",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "391415225",
+     "peca": "Acórdão (10/08/2026)",
+     "tipo": "Acórdão",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "391831768",
+     "peca": "Embargos de Declaração (13/08/2026)",
+     "tipo": "Embargos de Declaração",
+     "data": "13/08/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5002736-93.2018.4.03.6000.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 77,
+    "sem_texto": [
+     "263024529",
+     "263024530",
+     "263024531",
+     "263024537",
+     "263024556",
+     "263024560"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "263024527",
+      "24/04/2018",
+      "Petição Inicial",
+      "Petição inicial",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "263024528",
+      "24/04/2018",
+      "Petição inicial - PDF",
+      "1. DECLARATÓRIA",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      14
+     ],
+     [
+      "263024529",
+      "24/04/2018",
+      "Documento de Identificação",
+      "2. CONTRATO SOCIAL 10ª ALTERAÇÃO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      8
+     ],
+     [
+      "263024530",
+      "24/04/2018",
+      "Procuração",
+      "3. INSTRUMENTO DE PROCURAÇÃO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      4
+     ],
+     [
+      "263024531",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "4. AUTO DE INFRAÇÃO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      4
+     ],
+     [
+      "263024532",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "5. Aut. de Tranporte 150-2017-3003",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024533",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "6. NF000003",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024534",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "7. Aut. de Transporte 064-2017-3835",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024535",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "8. NF000002",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024536",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "9. Transferência.Safrasul.x.Germipasto.21,02.t.campo.38EDM",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024537",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "10. LAUDOS DE VISTORIA",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      3
+     ],
+     [
+      "263024538",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "11. CONTRATO EMBRAPA I",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024539",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "12. CONTRATO EMBRAPA II",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024540",
+      "24/04/2018",
+      "Documento Comprobatório",
+      "13. LAUDO UNIPASTO PB",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024541",
+      "24/04/2018",
+      "Custas",
+      "14. CUSTAS INICIAIS",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024542",
+      "24/04/2018",
+      "Custas",
+      "15. COMPROVANTE PAGAMENTO CUSTAS INICIAIS",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024543",
+      "24/04/2018",
+      "Certidão",
+      "",
+      "LUIZ HENRIQUE CAVALHEIRO NANTES",
+      "html",
+      0
+     ],
+     [
+      "263024544",
+      "17/05/2018",
+      "Decisão",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "263024545",
+      "18/06/2018",
+      "Comprovação de Interposição de Agravo",
+      "",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "263024546",
+      "18/06/2018",
+      "Comprovação de Interposição de Agravo",
+      "RECIBO DE PROTOCOLO 14.06.18",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      2
+     ],
+     [
+      "263024547",
+      "18/06/2018",
+      "Comprovação de Interposição de Agravo",
+      "AGRAVO DE INSTRUMENTO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      16
+     ],
+     [
+      "263024548",
+      "20/06/2018",
+      "Citação e intimação",
+      "",
+      "NAUDILEY CAPISTRANO DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "263024549",
+      "20/06/2018",
+      "Despacho",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "263024550",
+      "25/06/2018",
+      "Intimação",
+      "",
+      "NAUDILEY CAPISTRANO DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "263024551",
+      "26/06/2018",
+      "Manifestação",
+      "",
+      "SIRLAINE LAGE BONIFACIO MARCUCCI PRACUCHO",
+      "html",
+      0
+     ],
+     [
+      "263024552",
+      "26/06/2018",
+      "Documento Comprobatório",
+      "Débitos inscritos",
+      "SIRLAINE LAGE BONIFACIO MARCUCCI PRACUCHO",
+      "pdf",
+      3
+     ],
+     [
+      "263024553",
+      "10/08/2018",
+      "Citação e intimação",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "263024554",
+      "14/09/2018",
+      "Contestação",
+      "",
+      "CARLOS ERILDO DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "263024555",
+      "14/09/2018",
+      "Contestação",
+      "CONTESTAÇÃO DA UNIÃO",
+      "CARLOS ERILDO DA SILVA",
+      "pdf",
+      6
+     ],
+     [
+      "263024556",
+      "14/09/2018",
+      "Informações Prestadas",
+      "PARECER N. 79-2018 E DOCTOS",
+      "CARLOS ERILDO DA SILVA",
+      "pdf",
+      7
+     ],
+     [
+      "263024557",
+      "03/12/2018",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "263024558",
+      "03/12/2018",
+      "Intimação",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "263024559",
+      "12/12/2018",
+      "Impugnação",
+      "",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "263024560",
+      "12/12/2018",
+      "Outros Documentos",
+      "LIBERAÇÃO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      2
+     ],
+     [
+      "263024561",
+      "18/05/2020",
+      "Despacho",
+      "",
+      "LUCAS MEDEIROS GOMES",
+      "html",
+      0
+     ],
+     [
+      "263024562",
+      "20/05/2020",
+      "Despacho",
+      "",
+      "RAQUEL ROSSATO DE LIBRELOTTO STEFANELLO",
+      "html",
+      0
+     ],
+     [
+      "263024563",
+      "02/06/2020",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "263024564",
+      "06/06/2020",
+      "Manifestação",
+      "",
+      "CARLOS ERILDO DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "263024565",
+      "06/06/2020",
+      "Documento Comprobatório",
+      "Nota Técnica 7 e Ofício SISV - Sementes Safrasul",
+      "CARLOS ERILDO DA SILVA",
+      "pdf",
+      4
+     ],
+     [
+      "263024566",
+      "06/06/2020",
+      "Documento Comprobatório",
+      "Decisão Administrativa - Processo 21026005870201711",
+      "CARLOS ERILDO DA SILVA",
+      "pdf",
+      58
+     ],
+     [
+      "263024567",
+      "12/06/2021",
+      "Sentença",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "263024568",
+      "14/06/2021",
+      "Sentença",
+      "",
+      "LUCIANA DAVID DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "263024569",
+      "22/06/2021",
+      "Embargos de Declaração",
+      "",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "263024570",
+      "22/06/2021",
+      "Embargos de Declaração",
+      "22.06.2021.EMBARGOS DE DECLARAÇAO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      5
+     ],
+     [
+      "263024571",
+      "08/03/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "MAURO DE OLIVEIRA CAVALCANTE",
+      "html",
+      0
+     ],
+     [
+      "263024572",
+      "08/03/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "MAURO DE OLIVEIRA CAVALCANTE",
+      "html",
+      0
+     ],
+     [
+      "263024573",
+      "19/04/2022",
+      "Resposta",
+      "",
+      "SANDRA SORDI",
+      "html",
+      0
+     ],
+     [
+      "263024574",
+      "19/04/2022",
+      "Resposta",
+      "RESPOSTA ED SEMENTES SAFRASUL",
+      "SANDRA SORDI",
+      "pdf",
+      3
+     ],
+     [
+      "263024575",
+      "04/07/2022",
+      "Sentença",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "263024576",
+      "05/07/2022",
+      "Sentença",
+      "",
+      "MAURO DE OLIVEIRA CAVALCANTE",
+      "html",
+      0
+     ],
+     [
+      "263024577",
+      "25/07/2022",
+      "Apelação",
+      "",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "263024578",
+      "25/07/2022",
+      "Apelação",
+      "14.07.22 RECURSO DE APELAÇÃO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      5
+     ],
+     [
+      "263024579",
+      "25/07/2022",
+      "Custas",
+      "14.07.22 CUSTAS - RECURSO DE APELAÇÃO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024580",
+      "25/07/2022",
+      "Custas",
+      "25.07.22 COMPROVANTE DE PAGAMENTO - RECURSO DE APELAÇÃO",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      1
+     ],
+     [
+      "263024581",
+      "25/07/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "MAURO DE OLIVEIRA CAVALCANTE",
+      "html",
+      0
+     ],
+     [
+      "263024582",
+      "25/07/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "MAURO DE OLIVEIRA CAVALCANTE",
+      "html",
+      0
+     ],
+     [
+      "263024583",
+      "26/08/2022",
+      "Contrarrazões",
+      "",
+      "ARTUR SOARES DE CASTRO",
+      "html",
+      0
+     ],
+     [
+      "263349580",
+      "06/09/2022",
+      "Certidão",
+      "",
+      "RAIMUNDO CESAR ROCHA",
+      "html",
+      0
+     ],
+     [
+      "264824904",
+      "13/10/2022",
+      "Decisão",
+      "",
+      "ANDRE NABARRETE NETO",
+      "html",
+      0
+     ],
+     [
+      "265270317",
+      "14/10/2022",
+      "Petição intercorrente",
+      "",
+      "ARTUR SOARES DE CASTRO",
+      "html",
+      0
+     ],
+     [
+      "384058092",
+      "10/08/2026",
+      "Ementa",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "384058093",
+      "10/08/2026",
+      "Relatório",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "384058846",
+      "10/08/2026",
+      "Voto",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "385105101",
+      "08/07/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "385105110",
+      "08/07/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "385105113",
+      "08/07/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "391395861",
+      "10/08/2026",
+      "Certidão de Julgamento",
+      "Certidão de julgamento",
+      "DEBORAH SANTOS CONGRO BASTOS",
+      "html",
+      0
+     ],
+     [
+      "391415225",
+      "10/08/2026",
+      "Acórdão",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391831768",
+      "13/08/2026",
+      "Embargos de Declaração",
+      "",
+      "FELIPE DI BENEDETTO JUNIOR",
+      "pdf",
+      9
+     ],
+     [
+      "404217479",
+      "14/10/2026",
+      "Ato ordinatório",
+      "",
+      "LISSANDRA CARMEN SCHWERZ DE MEDEIROS",
+      "html",
+      0
+     ],
+     [
+      "406112689",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112727",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406112734",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126333",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126365",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126379",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "410088492",
+      "11/11/2026",
+      "Petição intercorrente",
+      "P_IMPUGNAÇÃO AOS EMBARGOS_3459128254 EM 11/11/2026 18:57:23",
+      "CRISTIANA MUNDIM MELO",
+      "pdf",
+      4
+     ]
+    ]
+   }
   },
   {
    "sessao": "2026-11-30",
@@ -7722,12 +14099,1542 @@
     "correcao": "Bruno",
     "situacao": "Minutada"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "262401775",
+     "peca": "Petição inicial (27/09/2017)",
+     "tipo": "Petição Inicial",
+     "data": "27/09/2017"
+    },
+    {
+     "id": "262401776",
+     "peca": "ii (27/09/2017)",
+     "tipo": "Petição Inicial",
+     "data": "27/09/2017"
+    },
+    {
+     "id": "262401894",
+     "peca": "Despacho (24/10/2017)",
+     "tipo": "Despacho",
+     "data": "24/10/2017"
+    },
+    {
+     "id": "262401899",
+     "peca": "Despacho - 5000467-18.2017.403.6000 (21/11/2017)",
+     "tipo": "Outros Documentos",
+     "data": "21/11/2017"
+    },
+    {
+     "id": "262401902",
+     "peca": "Contestação (12/12/2017)",
+     "tipo": "Contestação",
+     "data": "12/12/2017"
+    },
+    {
+     "id": "262401903",
+     "peca": "Contesta_Anulatória_Fiscalização MAPA_André Carlos Adams (12/12/2017)",
+     "tipo": "Contestação",
+     "data": "12/12/2017"
+    },
+    {
+     "id": "262401905",
+     "peca": "Contestação (12/12/2017)",
+     "tipo": "Contestação",
+     "data": "12/12/2017"
+    },
+    {
+     "id": "262401906",
+     "peca": "Contesta_Anulatória_Fiscalização MAPA_André Carlos Adams (12/12/2017)",
+     "tipo": "Contestação",
+     "data": "12/12/2017"
+    },
+    {
+     "id": "262401912",
+     "peca": "manifestação contestação (11/02/2018)",
+     "tipo": "Impugnação",
+     "data": "11/02/2018"
+    },
+    {
+     "id": "262401913",
+     "peca": "Despacho (12/04/2018)",
+     "tipo": "Despacho",
+     "data": "12/04/2018"
+    },
+    {
+     "id": "262401930",
+     "peca": "Despacho (17/10/2018)",
+     "tipo": "Despacho",
+     "data": "17/10/2018"
+    },
+    {
+     "id": "262401984",
+     "peca": "Decisão (04/12/2019)",
+     "tipo": "Decisão",
+     "data": "04/12/2019"
+    },
+    {
+     "id": "262401985",
+     "peca": "Despacho (05/03/2020)",
+     "tipo": "Despacho",
+     "data": "05/03/2020"
+    },
+    {
+     "id": "262401987",
+     "peca": "Despacho (31/07/2020)",
+     "tipo": "Despacho",
+     "data": "31/07/2020"
+    },
+    {
+     "id": "262401990",
+     "peca": "Despacho (11/09/2020)",
+     "tipo": "Despacho",
+     "data": "11/09/2020"
+    },
+    {
+     "id": "262401992",
+     "peca": "Despacho (07/01/2021)",
+     "tipo": "Despacho",
+     "data": "07/01/2021"
+    },
+    {
+     "id": "262401993",
+     "peca": "Despacho (26/03/2021)",
+     "tipo": "Despacho",
+     "data": "26/03/2021"
+    },
+    {
+     "id": "262401997",
+     "peca": "Despacho de Inspeção (26/05/2021)",
+     "tipo": "Despacho de Inspeção",
+     "data": "26/05/2021"
+    },
+    {
+     "id": "262401998",
+     "peca": "Despacho (18/08/2021)",
+     "tipo": "Despacho",
+     "data": "18/08/2021"
+    },
+    {
+     "id": "262402000",
+     "peca": "Despacho (30/09/2021)",
+     "tipo": "Despacho",
+     "data": "30/09/2021"
+    },
+    {
+     "id": "262402001",
+     "peca": "Despacho (06/10/2021)",
+     "tipo": "Despacho",
+     "data": "06/10/2021"
+    },
+    {
+     "id": "262402004",
+     "peca": "Despacho (12/11/2021)",
+     "tipo": "Despacho",
+     "data": "12/11/2021"
+    },
+    {
+     "id": "262402010",
+     "peca": "Despacho (10/01/2022)",
+     "tipo": "Despacho",
+     "data": "10/01/2022"
+    },
+    {
+     "id": "262402011",
+     "peca": "Despacho (11/01/2022)",
+     "tipo": "Despacho",
+     "data": "11/01/2022"
+    },
+    {
+     "id": "262402014",
+     "peca": "Memoriais (02/02/2022)",
+     "tipo": "Memoriais",
+     "data": "02/02/2022"
+    },
+    {
+     "id": "262402021",
+     "peca": "Despacho de Inspeção (29/05/2022)",
+     "tipo": "Despacho de Inspeção",
+     "data": "29/05/2022"
+    },
+    {
+     "id": "262402022",
+     "peca": "Sentença (14/06/2022)",
+     "tipo": "Sentença",
+     "data": "14/06/2022"
+    },
+    {
+     "id": "262402023",
+     "peca": "Sentença (14/06/2022)",
+     "tipo": "Sentença",
+     "data": "14/06/2022"
+    },
+    {
+     "id": "262402025",
+     "peca": "Apelação (24/06/2022)",
+     "tipo": "Apelação",
+     "data": "24/06/2022"
+    },
+    {
+     "id": "262402026",
+     "peca": "apelação andré (24/06/2022)",
+     "tipo": "Apelação",
+     "data": "24/06/2022"
+    },
+    {
+     "id": "262402030",
+     "peca": "SENTENÇA - AUTOS 50069356120184036000 e 50004671820174036000 (27/06/2022)",
+     "tipo": "Outros Documentos",
+     "data": "27/06/2022"
+    },
+    {
+     "id": "262402083",
+     "peca": "Contrarrazões (18/08/2022)",
+     "tipo": "Contrarrazões",
+     "data": "18/08/2022"
+    },
+    {
+     "id": "262942514",
+     "peca": "Despacho (30/08/2022)",
+     "tipo": "Despacho",
+     "data": "30/08/2022"
+    },
+    {
+     "id": "264261002",
+     "peca": "5000467-18.2017.4.03.6000 - SENTENÇA - AUTOS 50069356120184036000 e 50004671820174036000 (26/09/2022)",
+     "tipo": "Sentença",
+     "data": "26/09/2022"
+    },
+    {
+     "id": "383661177",
+     "peca": "Voto (10/08/2026)",
+     "tipo": "Voto",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "383661178",
+     "peca": "Ementa (10/08/2026)",
+     "tipo": "Ementa",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "391395860",
+     "peca": "Certidão de julgamento (10/08/2026)",
+     "tipo": "Certidão de Julgamento",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "391415221",
+     "peca": "Acórdão (10/08/2026)",
+     "tipo": "Acórdão",
+     "data": "10/08/2026"
+    },
+    {
+     "id": "391491467",
+     "peca": "Embargos de Declaração (11/08/2026)",
+     "tipo": "Embargos de Declaração",
+     "data": "11/08/2026"
+    },
+    {
+     "id": "406115191",
+     "peca": "Ciência da pauta e memoriais - embargos de declaração (22/10/2026)",
+     "tipo": "Memoriais",
+     "data": "22/10/2026"
+    },
+    {
+     "id": "407878742",
+     "peca": "Memoriais (31/10/2026)",
+     "tipo": "Memoriais",
+     "data": "31/10/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {},
    "ajustes": [],
    "pendencias": [],
-   "minuta": true
+   "minuta": true,
+   "autos": {
+    "arquivo": "acervo/autos/5000467-18.2017.4.03.6000.json.gz",
+    "extraido_em": "2026-11-19",
+    "total": 140,
+    "sem_texto": [
+     "262401772",
+     "262401773",
+     "262401774",
+     "262401780",
+     "262401883",
+     "262401884",
+     "262401885",
+     "262401886",
+     "262401887",
+     "262401888",
+     "262401910",
+     "262401922",
+     "262401925"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "262401771",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401772",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "pa",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      16
+     ],
+     [
+      "262401773",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p9a",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      14
+     ],
+     [
+      "262401774",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p10a",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      10
+     ],
+     [
+      "262401775",
+      "27/09/2017",
+      "Petição Inicial",
+      "Petição inicial",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401776",
+      "27/09/2017",
+      "Petição Inicial",
+      "ii",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      19
+     ],
+     [
+      "262401777",
+      "27/09/2017",
+      "Procuração",
+      "proc",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401778",
+      "27/09/2017",
+      "Documento de Identificação",
+      "doc pessoais",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401779",
+      "27/09/2017",
+      "Outros Documentos",
+      "com end",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401780",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "1",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      4
+     ],
+     [
+      "262401781",
+      "27/09/2017",
+      "Outros Documentos",
+      "depósito integral",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401882",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "a",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      97
+     ],
+     [
+      "262401883",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p 1",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      5
+     ],
+     [
+      "262401884",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p3",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      9
+     ],
+     [
+      "262401885",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p7",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      9
+     ],
+     [
+      "262401886",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p11",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      8
+     ],
+     [
+      "262401887",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p12",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      8
+     ],
+     [
+      "262401888",
+      "27/09/2017",
+      "Documento Comprobatório",
+      "p14",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      5
+     ],
+     [
+      "262401889",
+      "28/09/2017",
+      "Certidão",
+      "",
+      "MARIA IZABEL COUTINHO DE LIMA ZAMPIERI",
+      "html",
+      0
+     ],
+     [
+      "262401890",
+      "29/09/2017",
+      "Outras peças",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401891",
+      "29/09/2017",
+      "Custas",
+      "g",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401892",
+      "29/09/2017",
+      "Custas",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401893",
+      "29/09/2017",
+      "Custas",
+      "GRU",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401894",
+      "24/10/2017",
+      "Despacho",
+      "",
+      "RODRIGO BOAVENTURA MARTINS",
+      "html",
+      0
+     ],
+     [
+      "262401895",
+      "24/10/2017",
+      "Certidão",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "262401896",
+      "24/10/2017",
+      "Citação e intimação",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "262401897",
+      "26/10/2017",
+      "Manifestação",
+      "",
+      "APARECIDO DOS PASSOS JUNIOR",
+      "html",
+      0
+     ],
+     [
+      "262401898",
+      "21/11/2017",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "262401899",
+      "21/11/2017",
+      "Outros Documentos",
+      "Despacho - 5000467-18.2017.403.6000",
+      "RAQUEL ROSSATO",
+      "pdf",
+      1
+     ],
+     [
+      "262401900",
+      "21/11/2017",
+      "Intimação",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "262401901",
+      "21/11/2017",
+      "Intimação",
+      "",
+      "RAQUEL ROSSATO",
+      "html",
+      0
+     ],
+     [
+      "262401902",
+      "12/12/2017",
+      "Contestação",
+      "",
+      "ERIKA SWAMI FERNANDES",
+      "html",
+      0
+     ],
+     [
+      "262401903",
+      "12/12/2017",
+      "Contestação",
+      "Contesta_Anulatória_Fiscalização MAPA_André Carlos Adams",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      10
+     ],
+     [
+      "262401904",
+      "12/12/2017",
+      "Outros Documentos",
+      "Andre Carlos Adams_doc",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      15
+     ],
+     [
+      "262401905",
+      "12/12/2017",
+      "Contestação",
+      "",
+      "ERIKA SWAMI FERNANDES",
+      "html",
+      0
+     ],
+     [
+      "262401906",
+      "12/12/2017",
+      "Contestação",
+      "Contesta_Anulatória_Fiscalização MAPA_André Carlos Adams",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      10
+     ],
+     [
+      "262401907",
+      "12/12/2017",
+      "Outros Documentos",
+      "Andre Carlos Adams_doc",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      15
+     ],
+     [
+      "262401908",
+      "14/12/2017",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401909",
+      "14/12/2017",
+      "Petição intercorrente",
+      "m",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401910",
+      "14/12/2017",
+      "Documento Comprobatório",
+      "ANDRE PESQUISA PFN",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      2
+     ],
+     [
+      "262401911",
+      "11/02/2018",
+      "Impugnação",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401912",
+      "11/02/2018",
+      "Impugnação",
+      "manifestação contestação",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      17
+     ],
+     [
+      "262401913",
+      "12/04/2018",
+      "Despacho",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "262401914",
+      "19/04/2018",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ERIKA SWAMI FERNANDES",
+      "html",
+      0
+     ],
+     [
+      "262401915",
+      "19/04/2018",
+      "Petição intercorrente",
+      "Informa_André Carlos Adams",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      1
+     ],
+     [
+      "262401916",
+      "25/04/2018",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401917",
+      "04/05/2018",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ERIKA SWAMI FERNANDES",
+      "html",
+      0
+     ],
+     [
+      "262401918",
+      "04/05/2018",
+      "Petição intercorrente",
+      "Informa cumprimento_CGde",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      2
+     ],
+     [
+      "262401919",
+      "04/05/2018",
+      "Documento Comprobatório",
+      "André Carlos Adams_cumprimentoPFN",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      1
+     ],
+     [
+      "262401920",
+      "08/06/2018",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401921",
+      "08/06/2018",
+      "Petição intercorrente",
+      "manifestaçãoa",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      5
+     ],
+     [
+      "262401922",
+      "08/06/2018",
+      "Documento Comprobatório",
+      "receita ANDRE",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      4
+     ],
+     [
+      "262401923",
+      "01/09/2018",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401924",
+      "01/09/2018",
+      "Petição intercorrente",
+      "m",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401925",
+      "01/09/2018",
+      "Documento Comprobatório",
+      "ADAMS_000119",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      2
+     ],
+     [
+      "262401926",
+      "01/09/2018",
+      "Documento Comprobatório",
+      "PEDIDO PLANTANDEIRA (002)",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401927",
+      "01/09/2018",
+      "Documento Comprobatório",
+      "PEDIDO TRATOR",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401928",
+      "01/09/2018",
+      "Documento Comprobatório",
+      "PROJETO INVESTIMENTO MAQ AGRICOLA",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401929",
+      "01/09/2018",
+      "Documento Comprobatório",
+      "PROJETO TECNICO CUSTEIO",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401930",
+      "17/10/2018",
+      "Despacho",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "262401931",
+      "06/11/2018",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ERIKA SWAMI FERNANDES",
+      "html",
+      0
+     ],
+     [
+      "262401982",
+      "06/11/2018",
+      "Documento Comprobatório",
+      "Andre Carlos Adams_Info",
+      "ERIKA SWAMI FERNANDES",
+      "pdf",
+      2
+     ],
+     [
+      "262401983",
+      "04/12/2019",
+      "Certidão",
+      "",
+      "CLADES ROLLWAGEN",
+      "html",
+      0
+     ],
+     [
+      "262401984",
+      "04/12/2019",
+      "Decisão",
+      "",
+      "CLADES ROLLWAGEN",
+      "pdf",
+      4
+     ],
+     [
+      "262401985",
+      "05/03/2020",
+      "Despacho",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "262401986",
+      "25/03/2020",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401987",
+      "31/07/2020",
+      "Despacho",
+      "",
+      "DIRLEI GOMES DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262401988",
+      "10/08/2020",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "SILVIA HELENA SERRA",
+      "html",
+      0
+     ],
+     [
+      "262401989",
+      "10/08/2020",
+      "Petição intercorrente",
+      "Peticao Uniao_Proc 5000467_18.2017.4.03.6000",
+      "SILVIA HELENA SERRA",
+      "pdf",
+      1
+     ],
+     [
+      "262401990",
+      "11/09/2020",
+      "Despacho",
+      "",
+      "DIRLEI GOMES DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262401991",
+      "05/12/2020",
+      "Manifestação",
+      "PFN",
+      "CRISTIANO GOMES DA SILVA PALLADINO",
+      "html",
+      0
+     ],
+     [
+      "262401992",
+      "07/01/2021",
+      "Despacho",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "262401993",
+      "26/03/2021",
+      "Despacho",
+      "",
+      "DIRLEI GOMES DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262401994",
+      "31/03/2021",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401995",
+      "03/04/2021",
+      "Manifestação",
+      "",
+      "CECILIA ALVARES MACHADO",
+      "html",
+      0
+     ],
+     [
+      "262401996",
+      "12/04/2021",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262401997",
+      "26/05/2021",
+      "Despacho de Inspeção",
+      "",
+      "LUCAS MEDEIROS GOMES",
+      "html",
+      0
+     ],
+     [
+      "262401998",
+      "18/08/2021",
+      "Despacho",
+      "",
+      "OVIDIA MARIA DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "262401999",
+      "23/08/2021",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ARTUR SOARES DE CASTRO",
+      "html",
+      0
+     ],
+     [
+      "262402000",
+      "30/09/2021",
+      "Despacho",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "262402001",
+      "06/10/2021",
+      "Despacho",
+      "",
+      "OVIDIA MARIA DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "262402002",
+      "14/10/2021",
+      "Outras peças",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262402003",
+      "14/10/2021",
+      "Resposta",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262402004",
+      "12/11/2021",
+      "Despacho",
+      "",
+      "PEDRO PEREIRA DOS SANTOS",
+      "html",
+      0
+     ],
+     [
+      "262402005",
+      "06/12/2021",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "DIRLEI GOMES DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262402006",
+      "06/12/2021",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "DIRLEI GOMES DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262402007",
+      "10/12/2021",
+      "Outras peças",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262402008",
+      "13/12/2021",
+      "Manifestação",
+      "",
+      "ANDREIA MILIAN SILVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262402009",
+      "14/12/2021",
+      "Manifestação",
+      "",
+      "ANDREIA MILIAN SILVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262402010",
+      "10/01/2022",
+      "Despacho",
+      "",
+      "LUCAS MEDEIROS GOMES",
+      "html",
+      0
+     ],
+     [
+      "262402011",
+      "11/01/2022",
+      "Despacho",
+      "",
+      "OVIDIA MARIA DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "262402012",
+      "24/01/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "DIRLEI GOMES DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262402013",
+      "24/01/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "DIRLEI GOMES DE OLIVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262402014",
+      "02/02/2022",
+      "Memoriais",
+      "",
+      "ANDREIA MILIAN SILVEIRA",
+      "html",
+      0
+     ],
+     [
+      "262402015",
+      "03/02/2022",
+      "TERMO DE AUDIÊNCIA",
+      "Termo de audiência",
+      "LUCAS MEDEIROS GOMES",
+      "html",
+      0
+     ],
+     [
+      "262402016",
+      "02/02/2022",
+      "Outros Documentos",
+      "TERMO DE DEPOIMENTO - RUDSON BARROS MARTINS - TESTEMUNHA",
+      "LUCAS MEDEIROS GOMES",
+      "pdf",
+      1
+     ],
+     [
+      "262402017",
+      "02/02/2022",
+      "Outros Documentos",
+      "TERMO DE DEPOIMENTO - VAGNER LOPES DE SOUZA - TESTEMUNHA",
+      "LUCAS MEDEIROS GOMES",
+      "pdf",
+      1
+     ],
+     [
+      "262402018",
+      "02/02/2022",
+      "Outros Documentos",
+      "5000467-18.2017.4.03.6000 - AUDIÊNCIA DE INSTRUÇÃO-20220202_150639-Gravação de Reunião - parte 1",
+      "LUCAS MEDEIROS GOMES",
+      "midia",
+      0
+     ],
+     [
+      "262402019",
+      "02/02/2022",
+      "Outros Documentos",
+      "5000467-18.2017.4.03.6000 - AUDIÊNCIA DE INSTRUÇÃO-20220202_152110-Gravação de Reunião - parte 2",
+      "LUCAS MEDEIROS GOMES",
+      "midia",
+      0
+     ],
+     [
+      "262402020",
+      "22/03/2022",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262402021",
+      "29/05/2022",
+      "Despacho de Inspeção",
+      "",
+      "LUCAS MEDEIROS GOMES",
+      "html",
+      0
+     ],
+     [
+      "262402022",
+      "14/06/2022",
+      "Sentença",
+      "",
+      "LUCAS MEDEIROS GOMES",
+      "html",
+      0
+     ],
+     [
+      "262402023",
+      "14/06/2022",
+      "Sentença",
+      "",
+      "OVIDIA MARIA DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "262402024",
+      "15/06/2022",
+      "Petição intercorrente",
+      "Petição Intercorrente",
+      "ARTUR SOARES DE CASTRO",
+      "html",
+      0
+     ],
+     [
+      "262402025",
+      "24/06/2022",
+      "Apelação",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "262402026",
+      "24/06/2022",
+      "Apelação",
+      "apelação andré",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      13
+     ],
+     [
+      "262402027",
+      "24/06/2022",
+      "Custas",
+      "GUIA APELAÇÃO",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262402028",
+      "24/06/2022",
+      "Custas",
+      "comp pagto",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      1
+     ],
+     [
+      "262402029",
+      "27/06/2022",
+      "Outros Documentos",
+      "",
+      "OVIDIA MARIA DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "262402030",
+      "27/06/2022",
+      "Outros Documentos",
+      "SENTENÇA - AUTOS 50069356120184036000 e 50004671820174036000",
+      "OVIDIA MARIA DA SILVA",
+      "pdf",
+      2
+     ],
+     [
+      "262402031",
+      "27/06/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "OVIDIA MARIA DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "262402082",
+      "27/06/2022",
+      "Ato ordinatório",
+      "Ato Ordinatório",
+      "OVIDIA MARIA DA SILVA",
+      "html",
+      0
+     ],
+     [
+      "262402083",
+      "18/08/2022",
+      "Contrarrazões",
+      "",
+      "ARTUR SOARES DE CASTRO",
+      "html",
+      0
+     ],
+     [
+      "262942514",
+      "30/08/2022",
+      "Despacho",
+      "",
+      "PAULO SERGIO DOMINGUES",
+      "html",
+      0
+     ],
+     [
+      "262997532",
+      "30/08/2022",
+      "Certidão",
+      "",
+      "MARCUS ROBERTO MARSICO LOMBARDI",
+      "html",
+      0
+     ],
+     [
+      "262997557",
+      "30/08/2022",
+      "Documento Comprobatório",
+      "Comprovante de envio de e-mail - 5000467-18.2017.4.03.6000",
+      "MARCUS ROBERTO MARSICO LOMBARDI",
+      "pdf",
+      1
+     ],
+     [
+      "264260380",
+      "26/09/2022",
+      "Certidão",
+      "",
+      "MARCUS ROBERTO MARSICO LOMBARDI",
+      "html",
+      0
+     ],
+     [
+      "264261001",
+      "26/09/2022",
+      "Outros Documentos",
+      "e-mail 4 Vara Federal de Campo Grande",
+      "MARCUS ROBERTO MARSICO LOMBARDI",
+      "pdf",
+      2
+     ],
+     [
+      "264261002",
+      "26/09/2022",
+      "Sentença",
+      "5000467-18.2017.4.03.6000 - SENTENÇA - AUTOS 50069356120184036000 e 50004671820174036000",
+      "MARCUS ROBERTO MARSICO LOMBARDI",
+      "pdf",
+      2
+     ],
+     [
+      "383661177",
+      "10/08/2026",
+      "Voto",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "383661178",
+      "10/08/2026",
+      "Ementa",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "383661179",
+      "10/08/2026",
+      "Relatório",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "385105031",
+      "08/07/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "385105092",
+      "08/07/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "385105096",
+      "08/07/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "385607994",
+      "11/07/2026",
+      "Manifestação",
+      "",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      3
+     ],
+     [
+      "391395860",
+      "10/08/2026",
+      "Certidão de Julgamento",
+      "Certidão de julgamento",
+      "DEBORAH SANTOS CONGRO BASTOS",
+      "html",
+      0
+     ],
+     [
+      "391415221",
+      "10/08/2026",
+      "Acórdão",
+      "",
+      "LUIS CARLOS HIROKI MUTA",
+      "html",
+      0
+     ],
+     [
+      "391491467",
+      "11/08/2026",
+      "Embargos de Declaração",
+      "",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      10
+     ],
+     [
+      "404217475",
+      "14/10/2026",
+      "Ato ordinatório",
+      "",
+      "LISSANDRA CARMEN SCHWERZ DE MEDEIROS",
+      "html",
+      0
+     ],
+     [
+      "405411769",
+      "19/10/2026",
+      "Petição intercorrente",
+      "P_IMPUGNAÇÃO AOS EMBARGOS_3426043559 EM 19/10/2026 13:31:40",
+      "CRISTIANA MUNDIM MELO",
+      "pdf",
+      4
+     ],
+     [
+      "406098669",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098699",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406098706",
+      "22/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "406115191",
+      "22/10/2026",
+      "Memoriais",
+      "Ciência da pauta e memoriais - embargos de declaração",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      5
+     ],
+     [
+      "406758951",
+      "26/10/2026",
+      "Manifestação",
+      "",
+      "JAIRO PIRES MAFRA",
+      "html",
+      0
+     ],
+     [
+      "407126553",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126577",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407126586",
+      "27/10/2026",
+      "Intimação de Pauta",
+      "",
+      "USUÁRIO DO SISTEMA",
+      "html",
+      0
+     ],
+     [
+      "407878742",
+      "31/10/2026",
+      "Memoriais",
+      "",
+      "JAIRO PIRES MAFRA",
+      "pdf",
+      2
+     ]
+    ]
+   }
   }
  ]
 }
