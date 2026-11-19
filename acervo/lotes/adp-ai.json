@@ -442,12 +442,15 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada (PIS e COFINS) · preparo em discussão",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferir a regularidade do preparo em dobro; a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de Costa Vaz Comércio de Alimentos contra a decisão que rejeitou a exceção de pré-executividade (ID 560379721 nos autos de origem; EF 5011102-14.2024.4.03.6000, PIS e COFINS, R$ 145.716,71). A União, na contraminuta (ID 387709321), sustenta a presunção de certeza e liquidez da CDA e o descabimento da exceção para discutir a composição da base de cálculo.",
+   "peculiaridades": "Preparo: o despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC); a guia ID 372624804 constava como \"aguardando realização do pagamento\", e o despacho ID 376122107 (27/05/2026) mandou comprovar pelo Tesouro; a agravante juntou comprovante em 10/06/2026 (ID 379489258). Tutela recursal indeferida pela decisão ID 385924056 (13/07/2026).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -473,9 +476,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto) ou deserção",
+    "materia": "Execução fiscal — exceção de pré-executividade (PIS e COFINS)",
+    "origem": "EF 5011102-14.2024.4.03.6000 (1ª Vara Federal de Campo Grande, conforme a petição; capa indica Núcleo Adjunto 4.0 da 1ª Vara Federal de Araçatuba)",
+    "decisao_agravada": "ID 560379721 (autos de origem)",
+    "recurso": "ID 364874536 · 07/04/2026",
+    "preparo": "Em dobro determinado; comprovante ID 379489258 sem texto extraível",
+    "monocratica": "Possível, se deserto [VALIDAR]",
+    "analisado_em": "19/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: conferir se o comprovante ID 379489258 corresponde ao valor em dobro e é do Tesouro; se não, deserção",
+    "[VALIDAR] Fundamentos específicos da exceção (só a síntese consta do texto extraído)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -505,12 +520,14 @@
    "executado": "EDY SATORU KIMURA",
    "assunto": "Abono de Permanência",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · 28,86% · cumprimento individual da ACP 0005019-15.1997 · ilegitimidade ativa (servidor fora de MS; artigo 16 da LACP)",
+   "resultado": "Ato a proferir: julgamento do agravo do INCRA (voto) pelos modelos vigentes de 28,86%; efeito suspensivo indeferido e há contrarrazões. Mover para o fluxo do lote 28,86%",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do INCRA contra a decisão que, no cumprimento individual da sentença coletiva da ACP 0005019-15.1997.4.03.6000 (autos 5001684-18.2025.4.03.6000), afastou a preliminar de ilegitimidade ativa do exequente Edy Satoru Kimura. Teses do INCRA: servidor não lotado em Mato Grosso do Sul e limitação territorial do artigo 16 da Lei 7.347/1985, na redação da Lei 9.494/1997. Pede a extinção do cumprimento sem resolução do mérito.",
+   "peculiaridades": "Efeito suspensivo indeferido pelo Relator anterior (decisão ID 335797564, de 09/09/2025), com citação de precedentes do TRF-3. Contrarrazões do exequente (ID 338189273), com decisão monocrática do STJ juntada (ID 338189274, sem texto). Redistribuído pela decisão ID 362301004. O processo escapou da exclusão dos 28,86% na montagem da fila.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -541,9 +558,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto) — modelo 28,86%",
+    "materia": "28,86% — limitação territorial e legitimidade ativa",
+    "origem": "Cumprimento individual 5001684-18.2025.4.03.6000",
+    "decisao_agravada": "Não consta com texto nos autos do agravo [VALIDAR]",
+    "recurso": "ID 334099571 · 21/08/2025",
+    "preparo": "Isento (autarquia federal)",
+    "monocratica": "Conforme a linha do lote 28,86% [VALIDAR]",
+    "analisado_em": "19/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Tratar no fluxo do lote 28,86% (modelos vigentes); não minutar por fora",
+    "[VALIDAR] Lotação do exequente e data da sentença coletiva, para o enquadramento no grupo do modelo"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
