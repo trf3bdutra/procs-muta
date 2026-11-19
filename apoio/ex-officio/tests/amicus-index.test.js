@@ -5,16 +5,16 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const app=read('apoio/ex-officio/lotes/index.html');
 const api=read('apoio/ex-officio/api/_lote.js');
 const workflow=read('.github/workflows/vercel-monitor.yml');
-test('Index e backend possuem JavaScript sintaticamente válido',()=>{
+test('Collectio e backend possuem JavaScript sintaticamente válido',()=>{
  new vm.Script(api,{filename:'_lote.js'});
  const scripts=[...app.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
  assert.ok(scripts.length>0);
- scripts.forEach((m,i)=>new vm.Script(m[1],{filename:'index-script-'+i+'.js'}));
+ scripts.forEach((m,i)=>new vm.Script(m[1],{filename:'collectio-script-'+i+'.js'}));
 });
 test('Amicus tem URLs canônicas e redirecionamentos de compatibilidade',()=>{
- for(const x of ['site/public/amicus/index/cmt','site/public/amicus/index/gc','site/public/amicus/compendium','site/public/amicus/index.html']) assert.ok(workflow.includes(x),x);
- for(const x of ['/index/cmt','/index/gc','/lote/cg','/modus/']) assert.ok(workflow.includes(x),x);
- assert.ok(app.includes('/amicus/index/cmt/'));
+ for(const x of ['site/public/amicus/collectio/cmt','site/public/amicus/collectio/gc','site/public/amicus/compendium','site/public/amicus/index.html']) assert.ok(workflow.includes(x),x);
+ for(const x of ['/index/cmt','/index/gc','/lote/cg','/amicus/compendium/']) assert.ok(workflow.includes(x),x);
+ assert.ok(app.includes('/amicus/collectio/cmt/'));
  assert.ok(read('apoio/amicus/index.html').includes('/amicus/compendium/'));
 });
 test('Seletor separa sessões e lotes avulsos',()=>{
