@@ -150,10 +150,18 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
 .arv td.h.esp{box-shadow:inset 0 0 0 2.5px var(--esp)}
 .arv td.h.pre::after{content:"";position:absolute;top:3px;right:3px;width:6px;height:6px;border-radius:50%;background:var(--pre)}
 .arv td.h.nao{background-image:linear-gradient(135deg,transparent 46%,var(--nao) 46% 54%,transparent 54%)!important}
-.arv tr.n1 td:first-child{font-weight:800;font-size:13.5px}
-.arv tr.n1 td{background:var(--bg)}
-.arv tr.n2 td:first-child{padding-left:20px;font-weight:700}
-.arv tr.n3 td:first-child{padding-left:40px;font-weight:500;white-space:normal;min-width:260px;max-width:380px}
+.arv tr.n1 td:first-child{font-weight:800;font-size:13.5px;box-shadow:inset 6px 0 0 var(--sc)}
+.arv tr.n1 td{background:color-mix(in srgb,var(--sc) 16%,var(--sup))}
+.arv tr.n2 td{background:color-mix(in srgb,var(--rc) 9%,var(--sup))}
+.arv tr.n2 td:first-child{box-shadow:inset 6px 0 0 var(--sc),inset 10px 0 0 var(--sup),inset 14px 0 0 var(--rc)}
+.arv tr.n3 td:first-child{box-shadow:inset 6px 0 0 color-mix(in srgb,var(--sc) 45%,var(--sup)),inset 10px 0 0 var(--sup),inset 14px 0 0 color-mix(in srgb,var(--rc) 55%,var(--sup))}
+.arv .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:-1px;background:var(--sc)}
+.arv tr.n2 .dot{background:var(--rc);border-radius:3px}
+.cleg{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:12px;color:var(--mut);margin:4px 0 6px}
+.cleg .cl{font-weight:800;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.cleg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}.cleg i.rd{border-radius:3px}
+.arv tr.n2 td:first-child{padding-left:24px;font-weight:700}
+.arv tr.n3 td:first-child{padding-left:42px;font-weight:500;white-space:normal;min-width:260px;max-width:380px}
 .arv tr.n1,.arv tr.n2{cursor:pointer}
 .arv .tg{display:inline-block;width:14px;color:var(--mut)}
 .arv tbody tr:hover td:first-child{text-decoration:none}
@@ -258,6 +266,7 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
     <div class="card">
       <div class="flh"><div><h3>Mapa de competências</h3><p class="nota" style="margin:0" id="arv-nota">Seção ▸ ramo ▸ assunto, por servidor. A cor mostra quantas minutas cada um redigiu; as marcas mostram o que a chefia indicou.</p></div>
         <div class="leg2"><span><i class="mk esp"></i>especialidade</span><span><i class="mk pre"></i>prefere</span><span><i class="mk nao"></i>evita</span><span><span class="tag nao">sem especialista</span> assunto com 5+ minutas e ninguém indicado</span><span>Ranking: no assunto, pontos da designação (esp. = especialidade indicada); na seção e no ramo, quem mais fez</span><span>Correção: padrão pela regra de designação (sem regra, quem mais corrigiu); auxiliares pelo ranking e pelo histórico de correção</span></div></div>
+      <div class="cleg" id="arv-cores"></div>
       <div class="mctl"><button type="button" class="btn" data-arv="abrir">Abrir todos os ramos</button><button type="button" class="btn" data-arv="fechar">Fechar todos</button><label class="ck"><input type="checkbox" id="so-lacunas"> Só assuntos sem especialista</label></div>
       <div class="tw"><table id="arvore" class="arv"></table></div>
     </div>
@@ -493,6 +502,8 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
     t.text(function(n){return n.c==='tipo'?AB[n.v]:n.v;}).append('tspan').attr('class','q').text(function(n){return '  '+n.value;});
     box.innerHTML='';box.appendChild(svg.node());
   }
+  var RCOR={'Previdenciário':'#2e8a57','Assistencial':'#6aa84f','Administrativo':'#1f8a9c','Tributário':'#b8962e','Educação':'#8c4bb0','Civil':'#c0612b','Saúde':'#c23d5c','Consumidor':'#7a8a2a','Ambiental':'#4f8f3a','Processual civil':'#7a5230','Internacional':'#5a6fd6','Trabalho':'#a0527a'};
+  function corRamo(r){if(RCOR[r])return RCOR[r];var h=0;for(var i=0;i<r.length;i++)h=(h*31+r.charCodeAt(i))%360;return 'hsl('+h+' 35% 50%)';}
   function arvore(){
     var L=minFil(), srv={};L.forEach(function(x){srv[x.s]=(srv[x.s]||0)+1;});
     var S=Object.keys(srv).sort(function(a,b){var ca=EQ.some(function(e){return e.nome===a;}),cb=EQ.some(function(e){return e.nome===b;});return (cb-ca)||srv[b]-srv[a];});
@@ -520,18 +531,20 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
       var rams=Object.keys(a.r).sort(function(x,y){return a.r[y].n-a.r[x].n;});
       var nl1=rams.reduce(function(acc,r){return acc+Object.keys(a.r[r].a).filter(function(as){return lac(as,a.r[r].a[as]);}).length;},0);
       if(SO_LAC&&!nl1)return;
-      h+='<tr class="n1"><td>'+esc(sc)+(nl1?' <span class="tag nao">'+nl1+' sem especialista</span>':'')+'</td>'+S.map(function(n){return cel(a.c[n]||0,max1,'',n+' · '+sc+': '+(a.c[n]||0));}).join('')+'<td class="tot">'+nf(a.n)+'</td><td>'+rkc(rkGrupo(a.c),'')+'</td><td>'+corSecao(a)+'</td></tr>';
+      h+='<tr class="n1" style="--sc:'+(COR[sc]||'#8a96a3')+'"><td><i class="dot"></i>'+esc(sc)+(nl1?' <span class="tag nao">'+nl1+' sem especialista</span>':'')+'</td>'+S.map(function(n){return cel(a.c[n]||0,max1,'',n+' · '+sc+': '+(a.c[n]||0));}).join('')+'<td class="tot">'+nf(a.n)+'</td><td>'+rkc(rkGrupo(a.c),'')+'</td><td>'+corSecao(a)+'</td></tr>';
       rams.forEach(function(rm){var b=a.r[rm],k=sc+'|'+rm,ab=ABERTO[k]||SO_LAC,max2=Math.max.apply(null,Object.values(b.c));
         var ass=Object.keys(b.a).sort(function(x,y){return b.a[y].n-b.a[x].n;}),nl=ass.filter(function(as){return lac(as,b.a[as]);}).length;
         if(SO_LAC&&!nl)return;
-        h+='<tr class="n2" data-arvk="'+esc(k)+'"><td><span class="tg">'+(ab?'▾':'▸')+'</span>'+esc(rm)+' <small class="nota" style="display:inline">· '+ass.length+' assunto'+(ass.length>1?'s':'')+'</small>'+(nl?' <span class="tag nao">'+nl+'</span>':'')+'</td>'+S.map(function(n){return cel(b.c[n]||0,max2,'',n+' · '+rm+': '+(b.c[n]||0));}).join('')+'<td class="tot">'+nf(b.n)+'</td><td>'+rkc(rkGrupo(b.c),'')+'</td><td>'+corGrupo(b)+'</td></tr>';
+        h+='<tr class="n2" data-arvk="'+esc(k)+'" style="--sc:'+(COR[sc]||'#8a96a3')+';--rc:'+corRamo(rm)+'"><td><span class="tg">'+(ab?'▾':'▸')+'</span><i class="dot"></i>'+esc(rm)+' <small class="nota" style="display:inline">· '+ass.length+' assunto'+(ass.length>1?'s':'')+'</small>'+(nl?' <span class="tag nao">'+nl+'</span>':'')+'</td>'+S.map(function(n){return cel(b.c[n]||0,max2,'',n+' · '+rm+': '+(b.c[n]||0));}).join('')+'<td class="tot">'+nf(b.n)+'</td><td>'+rkc(rkGrupo(b.c),'')+'</td><td>'+corGrupo(b)+'</td></tr>';
         if(!ab)return;
         ass.forEach(function(as){var c=b.a[as],lc=lac(as,c);if(SO_LAC&&!lc)return;linhas++;
           var rk=rankDe(as,PAPEL==='c'?'c':'d').map(function(x){var m=mem(x.nome);return {nome:x.nome,v:x.p,w:x.w.join(' · '),esp:m&&casa(m.exp,as)};});
-          h+='<tr class="n3"><td>'+esc(as)+(lc?' <span class="tag nao">sem especialista</span>':'')+'</td>'+S.map(function(n){var m=mem(n),mk=m?marca(m,as):'';return cel(c.c[n]||0,max3,mk,n+' · '+as+': '+(c.c[n]||0)+(mk?' · '+{esp:'especialidade',pre:'prefere',nao:'evita'}[mk]:''));}).join('')+'<td class="tot">'+nf(c.n)+'</td><td>'+rkc(rk,' pt')+'</td><td>'+corAssunto(as,c)+'</td></tr>';});
+          h+='<tr class="n3" style="--sc:'+(COR[sc]||'#8a96a3')+';--rc:'+corRamo(rm)+'"><td>'+esc(as)+(lc?' <span class="tag nao">sem especialista</span>':'')+'</td>'+S.map(function(n){var m=mem(n),mk=m?marca(m,as):'';return cel(c.c[n]||0,max3,mk,n+' · '+as+': '+(c.c[n]||0)+(mk?' · '+{esp:'especialidade',pre:'prefere',nao:'evita'}[mk]:''));}).join('')+'<td class="tot">'+nf(c.n)+'</td><td>'+rkc(rk,' pt')+'</td><td>'+corAssunto(as,c)+'</td></tr>';});
       });
     });
     document.getElementById('arvore').innerHTML=h+'</tbody>';
+    var rams={};L.forEach(function(x){rams[x.ramo]=(rams[x.ramo]||0)+1;});
+    document.getElementById('arv-cores').innerHTML='<span class="cl">Seções</span>'+ords.map(function(x){return '<span><i style="background:'+(COR[x]||'#8a96a3')+'"></i>'+esc(x)+'</span>';}).join('')+'<span class="cl">Ramos</span>'+Object.keys(rams).sort(function(a,b){return rams[b]-rams[a];}).map(function(r){return '<span><i class="rd" style="background:'+corRamo(r)+'"></i>'+esc(r)+'</span>';}).join('');
   }
   function mapa(){chipsMapa();sankey();arvore();var an=document.getElementById('arv-nota');if(an)an.textContent='Seção ▸ ramo ▸ assunto, por servidor. A cor mostra quantas minutas cada um '+(PAPEL==='c'?'corrigiu':'redigiu')+'; as marcas mostram o que a chefia indicou.';}
   /* abre de saída os ramos com mais minutas */
