@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-19T06:08:06.366Z",
+ "atualizado_em": "2026-11-19T06:35:53.359Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -109456,7 +109456,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T06:08:06.285Z",
+    "atualizado_em": "2026-11-19T06:35:53.243Z",
     "Origem - Processo de referência": "5013765-96.2025.4.03.6000",
     "Origem - Juízo": "4ª Vara Federal de Campo Grande",
     "Autos - Extraído em": "2026-11-19",
@@ -109832,9 +109832,65 @@
     "Lote - Variações": "",
     "Lote - Caso": "Home care de beneficiária menor com encefalopatia crônica e ventilação mecânica contínua, prestado desde 2019. Operadora de autogestão inadimplente perante a prestadora, com débito vencido de R$ 327.431,55 e notificações de suspensão. Discussão sobre julgamento extra petita e sobre a imposição de custeio antecipado.",
     "Lote - Observação": "Resultado lido do dispositivo da minuta, a confirmar no julgamento.",
-    "Lote - Ajustes da correção": [],
-    "Lote - Pendências": "",
-    "Lote - Minuta": "versão 1 · 2026-11-18 · Texto integral extraído do editor do PJe em 18/11/2026, tarefa [Sessão] Aguardando a sessão."
+    "Lote - Ajustes da correção": [
+     {
+      "secao": "Ementa",
+      "ajuste": "Item 1: a frase solta \"Agravo interno contra decisão que indeferiu o efeito suspensivo.\" não tinha verbo; integrada ao caso em exame (\"Interposto, também, agravo interno…\")",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Questões em discussão: incluída a (iv), sobre a multa diária, impugnada no item (5) das razões e não enfrentada",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Novo item 10 sobre a multa diária (artigo 537, § 1º, do CPC); dispositivo renumerado para 11",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Dispositivos citados: retirados CPC 85, § 11 (não há honorários recursais em agravo de instrumento), 311, IV (fundamento equivocado da decisão de origem), 489, 535, 926, 942 e 1.021, CDC 51, IV, Lei 9.656/1998, Lei 14.454/2022 e \"CC/2002\" sem artigo (vinham das ementas transcritas e o voto afasta o CDC pela Súmula 608/STJ); ficam CPC 297, 497, 536 e 537, § 1º",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Ementa",
+      "ajuste": "Jurisprudência citada: incluída a Súmula 608/STJ, que o voto aplica; referências no formato do gabinete (sem turma e sem \"de\" antes da data)",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Relatório",
+      "ajuste": "ID 360681840 é ato ordinatório que abre vista do agravo interno, não certidão de ausência de resposta; frase reescrita para indicar o que o documento é",
+      "tipo": "Corrigido"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Incluída a frase sobre a gratuidade (preparo dispensado e exame remetido à origem, ID 354353769), item (1) das razões",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "Incluído parágrafo sobre a multa diária, item (5) das razões, sem enfrentamento na versão original (artigo 489, § 1º, IV, do CPC)",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Voto",
+      "ajuste": "\"Nesse contexto\" → \"Neste contexto\" (padrão do gabinete)",
+      "tipo": "Redação"
+     },
+     {
+      "secao": "Acórdão",
+      "ajuste": "Texto do acórdão incluído, espelhando o dispositivo (agravo interno prejudicado; agravo de instrumento desprovido)",
+      "tipo": "Incluído"
+     },
+     {
+      "secao": "Conferência",
+      "ajuste": "IDs deste agravo conferidos: 350743266, 354353769, 359090283, 360681840, 368124217, 368518477 e 407404295 (parecer: opina pelo não provimento). Decisão agravada ID 497253914 confere com a cópia juntada (ID 350743270)",
+      "tipo": "Conferido"
+     }
+    ],
+    "Lote - Pendências": "Validar o parágrafo incluído sobre a multa diária (artigo 537, § 1º, do CPC).\nConferir nos autos de origem (5013765-96.2025.4.03.6000) os IDs que não constam deste agravo: 484630251, 494766628, 494766629 a 494766645, 494766638, 537230702 e 605093039.\nHá parecer de outro processo juntado neste agravo (ID 393537758, remessa necessária 0000033-86.2009.4.03.6100); o parecer deste agravo é o ID 407404295. Sem reflexo na minuta.",
+    "Lote - Minuta": "versão 2 · 2026-11-19 · Versão corrigida em 19/11/2026 a partir do texto integral da minuta no PJe, conferida com o inteiro teor dos autos (acervo/autos)."
    },
    "pauta": {
     "Status de Julgamento": "",
