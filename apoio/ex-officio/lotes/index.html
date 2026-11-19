@@ -404,7 +404,7 @@ function seletorColecoes(lotes,id) {
     '<button type="button" data-colecao="pauta" aria-pressed="'+pauta+'">Coleção de Pauta</button>'+
     '<button type="button" data-colecao="avulsa" aria-pressed="'+(!pauta)+'">Coleções Avulsas</button></div>'+
     '<div class="col-area" id="col-pauta"'+(pauta?'':' hidden')+'>'+
-    '<label class="lx-sel">Sessão<select id="sel-sessao">'+sess.map(x=>'<option value="'+esc(x.date)+'"'+(x.date===ses?' selected':'')+'>'+esc(x.nome||br(x.date))+' · '+x.processos+' processos</option>').join('')+'</select></label>'+
+    '<label class="lx-sel">Sessão<select id="sel-sessao">'+sess.map(x=>'<option value="'+esc(x.date)+'"'+(x.date===ses?' selected':'')+'>'+esc(x.nome||br(x.date))+' · '+x.processos+' na pauta</option>').join('')+'</select></label>'+
     '<button class="b col-matriz" type="button" id="b-matriz">Matriz geral da sessão</button>'+
     '<label class="lx-sel">Lotes criados nesta pauta<select id="sel-pauta"><option value="">Escolha um lote da sessão</option>'+daSessao.map(opt).join('')+'</select></label></div>'+
     '<div class="col-area" id="col-avulsas"'+(pauta?' hidden':'')+'>'+
@@ -500,7 +500,7 @@ function montar(lotes,id,usuario){
     const contexto=LOTE.virtual?'Coleção de Pauta · sessão '+br(LOTE.sessoes[0])+' · matriz geral':LOTE.tipo==='pauta'?'Lote de pauta · sessão '+br(LOTE.sessoes[0]):'Coleção avulsa';
   const nota={cg:'Na gestão aparecem todos os processos. Nas colunas Equipe e Relator, você escolhe o que cada página mostra.',eq:'O Relator vê só os processos liberados para ele.',rel:'Clique num processo para abrir o perfil e a minuta.'}[MODO];
   mostra(cabecalho(lotes,id,usuario)+`<div class="lx">
-  <nav class="lx-sub" id="lx-sub" aria-label="Lote e seções da página">
+  <nav class="lx-sub" id="lx-sub" aria-label="Coleções, sessões e seções da página">
    <div class="lx-lt"><p class="lx-ey">Amicus Curiae · Collectio / ${ROTULO[MODO]}</p>
     ${seletorColecoes(lotes,id)}
     <p class="lx-lt-n" id="cnt">—</p><p class="lx-lt-d">${esc(contexto)}</p>
@@ -873,7 +873,7 @@ function criarDaMatriz(){
   try{
    const r=await post({acao:'criar-selecao',id,titulo,descricao:$('#col-d').value,
     sessao:LOTE.sessoes[0],processos:escolhidos.map(x=>x.processo),
-    criterios:{assunto,classe:recurso,resultado,busca:$('#q').value,grupo:[...offG].join(',')}});
+    criterios:{assunto,classe:recurso,resultado,busca:$('#q').value,gruposOcultos:[...offG].join(',')}});
    toast('Lote de pauta criado: '+r.total+' processos');location.search='?id='+encodeURIComponent(r.id);
   }catch(e){$('#col-msg').textContent=e.message;$('#col-ok').disabled=false}
  };
@@ -953,7 +953,7 @@ function listaSessoes(marcadas,nome){return `<div class="ses">${LISTA.calendario
 function marcadas(nome){return [...document.querySelectorAll(`input[name="${nome}"]:checked`)].map(x=>x.value)}
 function fechaGest(){$('#gest').innerHTML=''}
 function abrirNovo(){
-  $('#gest').innerHTML=`<section class="cmt-q" id="g-novo"><h2><i class="nn">00</i><span>Novo <em>lote.</em></span><span class="cmt-sp"></span><button type="button" class="b" id="gn-x">Fechar</button></h2>
+  $('#gest').innerHTML=`<section class="cmt-q" id="g-novo"><h2><i class="nn">00</i><span>Nova <em>coleção avulsa.</em></span><span class="cmt-sp"></span><button type="button" class="b" id="gn-x">Fechar</button></h2>
    <div class="form">
     <p class="none">Coleção avulsa: seleção temática ou operacional independente de uma única pauta. Para criar um lote de pauta, abra a matriz da sessão e selecione os processos.</p>
     <label>Título<input id="gn-t" placeholder="ex.: Lote PIS/COFINS"></label>
