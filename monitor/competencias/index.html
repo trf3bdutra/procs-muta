@@ -255,15 +255,15 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
 <main>
   <p class="avs" id="aviso" role="status" hidden></p>
   <section id="v-mapa" aria-labelledby="tab-mapa">
-    <div class="card fl">
-      <div class="flh"><div><h3>Fluxo das minutas</h3><p class="nota" style="margin:0">Cada faixa é um grupo de minutas: da seção ao ramo do direito, ao servidor que minutou e ao tipo de minuta. Clique num bloco para filtrar o mapa abaixo.</p></div><div id="filtro-mapa" class="fchips"></div></div>
-      <div id="sankey" class="sk" role="img" aria-label="Diagrama de fluxo seção, ramo, servidor e tipo de minuta"></div>
-    </div>
-    <div class="card" style="margin-top:14px">
+    <div class="card">
       <div class="flh"><div><h3>Mapa de competências</h3><p class="nota" style="margin:0" id="arv-nota">Seção ▸ ramo ▸ assunto, por servidor. A cor mostra quantas minutas cada um redigiu; as marcas mostram o que a chefia indicou.</p></div>
         <div class="leg2"><span><i class="mk esp"></i>especialidade</span><span><i class="mk pre"></i>prefere</span><span><i class="mk nao"></i>evita</span><span><span class="tag nao">sem especialista</span> assunto com 5+ minutas e ninguém indicado</span><span>Ranking: no assunto, pontos da designação (esp. = especialidade indicada); na seção e no ramo, quem mais fez</span><span>Correção: padrão pela regra de designação (sem regra, quem mais corrigiu); auxiliares pelo ranking e pelo histórico de correção</span></div></div>
       <div class="mctl"><button type="button" class="btn" data-arv="abrir">Abrir todos os ramos</button><button type="button" class="btn" data-arv="fechar">Fechar todos</button><label class="ck"><input type="checkbox" id="so-lacunas"> Só assuntos sem especialista</label></div>
       <div class="tw"><table id="arvore" class="arv"></table></div>
+    </div>
+    <div class="card fl" style="margin-top:14px">
+      <div class="flh"><div><h3>Fluxo das minutas</h3><p class="nota" style="margin:0">Cada faixa é um grupo de minutas: da seção ao ramo do direito, ao servidor que minutou e ao tipo de minuta. Clique num bloco para filtrar o mapa acima.</p></div><div id="filtro-mapa" class="fchips"></div></div>
+      <div id="sankey" class="sk" role="img" aria-label="Diagrama de fluxo seção, ramo, servidor e tipo de minuta"></div>
     </div>
   </section>
   <section id="v-perfis" aria-labelledby="tab-perfis" hidden>
