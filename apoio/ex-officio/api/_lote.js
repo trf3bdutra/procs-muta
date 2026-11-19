@@ -103,10 +103,8 @@ module.exports = async (req, res) => {
   const CMT = require('./_cmt');
   const q = req.query || {};
   const login = L.quem(req);
-  /* /index/cmt envia rel=1: leitura pública e estritamente no perfil do Relator.
-     Nenhuma gravação é liberada sem sessão autenticada de gestor. */
-  const relPublico = req.method === 'GET' && String(q.rel || '') === '1';
-  const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null) || (relPublico ? (process.env.CMT_RELATOR || 'CM') : null);
+  /* A rota escolhe a visão, mas não concede acesso. Link do relator usa CMT_CHAVE como credencial. */
+  const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   const gestor = !!(login && L.gestor(login));
   try {
@@ -249,6 +247,25 @@ async function gravar(req, res, u, gestor) {
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
+  }
+  /* Controle global: alternar a visibilidade de um lote sem editar seus demais atributos. */
+  if (b.acao === 'visibilidade-lote') {
+    const flags = b.visivel || {};
+    if (!['equipe','relator'].some(k => typeof flags[k] === 'boolean')) return res.status(400).json({ erro: 'Informe equipe ou relator.' });
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      const visivel = Object.assign({}, lote.visivel || {});
+      for (const k of ['equipe', 'relator']) {
+        if (flags[k] === false) visivel[k] = false;
+        else if (flags[k] === true) delete visivel[k];
+      }
+      if (Object.keys(visivel).length) lote.visivel = visivel; else delete lote.visivel;
+      lote.atualizado_em = new Date().toISOString().slice(0, 10);
+      try { await L.gravarJson(rel, lote, sha, 'Index CG (' + u + '): visibilidade do lote ' + id); return res.status(200).json({ ok: true, id, visivel }); }
+      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'O lote mudou; tente novamente.' });
   }
   if (b.acao === 'editar' || b.acao === 'visivel') {
     for (let t = 0; t < 4; t++) {

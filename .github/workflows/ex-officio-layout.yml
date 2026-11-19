@@ -5,6 +5,9 @@ on:
       - 'apoio/ex-officio/index.html'
       - 'apoio/ex-officio/lotes/index.html'
       - 'apoio/ex-officio/tests/layout-static.test.js'
+      - 'apoio/ex-officio/tests/index-visibilidade.test.js'
+      - 'apoio/ex-officio/api/_lote.js'
+      - '.github/workflows/vercel-monitor.yml'
       - '.github/workflows/ex-officio-layout.yml'
   workflow_dispatch:
 permissions:
@@ -19,4 +22,4 @@ jobs:
         with:
           node-version: '22'
       - name: Conferir estrutura e proporções sem credenciais
-        run: node --test apoio/ex-officio/tests/layout-static.test.js
+        run: node --test apoio/ex-officio/tests/layout-static.test.js apoio/ex-officio/tests/index-visibilidade.test.js
