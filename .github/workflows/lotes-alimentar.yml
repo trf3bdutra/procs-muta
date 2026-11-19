@@ -1,5 +1,5 @@
 name: Lotes · alimentar ficha e prontuários
-# Cada edição das tabelas de um lote no Index (/index/) grava acervo/lotes/<id>.json na main.
+# Cada edição das tabelas de um lote no Collectio (/amicus/collectio/) grava acervo/lotes/<id>.json na main.
 # Este fluxo leva essas informações à ficha única (acervo/operacional.json) e aos cartões das pautas
 # (acervo/sessoes/*.json) com scripts/lotes/alimentar.py. Campos do lote são sobrescritos; campos que a
 # equipe já preencheu na ficha ou no prontuário não são tocados. Se a main andar no meio, refaz (até 3 vezes).
