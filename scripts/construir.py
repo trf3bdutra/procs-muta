@@ -49,8 +49,12 @@ def main(args):
             "msg(`precedentes.json com ${n} registro(s). No app, abra o Banco de Paradigmas › Precedentes › Importar JSON.`);return}")
     corpo = corpo.replace(antigo, novo)
     j = corpo.index("</style>") + 8
+    # favicon padronizado do gabinete (padrao/favicon/favicons.py gera o bloco)
+    fav = RAIZ / "padrao" / "favicon" / "bloco-gabinete.html"
+    favicon = fav.read_text(encoding="utf-8") if fav.exists() else ""
     (RAIZ / "index.html").write_text(
         '<!doctype html>\n<html lang="pt-BR">\n<head>\n<meta charset="utf-8">\n'
+        + favicon +
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         + cab + "\n" + corpo[:j] + "\n</head>\n<body>\n" + corpo[j:] + "\n</body>\n</html>\n", encoding="utf-8")
     print("index.html regravado")
