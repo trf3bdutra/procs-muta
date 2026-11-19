@@ -6328,7 +6328,7 @@
    "assunto": "Registro Profissional",
    "grupo": null,
    "tipo_caso": "Registro Profissional",
-   "resultado": "",
+   "resultado": "Desprovido",
    "modelo": "",
    "variacoes": [],
    "observacao": "",
@@ -6362,8 +6362,61 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura no padrão, com agravante (Crea-MS) e agravada (Extintores Pasa Ltda.) identificados",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "\"A agravante sustentou\" → \"Alegou o agravante\" (o Conselho), fórmula \"em suma\" e incluídos os pedidos (retratação, processamento do agravo de instrumento e afastamento da multa do artigo 1.021, § 4º), este último enfrentado no voto sem constar do relatório",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "A afirmação de que o Juízo de origem tratou a controvérsia como \"eminentemente de direito\" não tem ID e a decisão de origem não está neste agravo; marcada [VALIDAR]. \"através de\" → \"por\"",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Transcrições: números de processo do TRF-3 sem máscara (\"50174948820254030000\") formatados; \"Desa. Fed.\" → \"Des. Fed.\"; \"Juíza Federal Convocada\" → \"Juíza Conv.\"; retirados os espaços antes de ponto (\"1 .015\", \"PERICIAL .\", \"Des . Fed.\") e corrigidos \"2.Não\", \"Apelação.4.\" e \"feito .5.\"",
+     "Redação"
+    ],
+    [
+     "Voto",
+     "Ponto final que faltava no parágrafo do Tema 988; \"(artigo 1.015, XI, CPC)\" → \"do CPC\"; \"DJe de\"/\"DJEN de\" → sem \"de\"",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Título com \"ARTIGO\" por extenso; questão com \"saber se\"",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Rodapé: datas com barra (16.08.2024 → 16/08/2024), temas agrupados, \"TRF3\" → \"TRF-3\", \"Juíza Conv.\" e \"e\" antes do último item",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs conferidos: decisão monocrática 390386280, agravo interno 395891182 (pede afastamento da multa) e contraminuta 397918439",
+     "Conferido"
+    ]
+   ],
+   "pendencias": [
+    "Indicar o ID da decisão de origem (autos 5011788-06.2024.4.03.6000) que tratou a controvérsia como de direito, ou retirar a frase do voto."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5000336-80.2026.4.03.0001.json.gz",
