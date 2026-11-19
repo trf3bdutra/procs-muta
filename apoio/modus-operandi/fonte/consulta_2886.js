@@ -97,7 +97,7 @@
     if(ac&&te)return ['2','limitação territorial e acordo'];
     if(ac)return ['3','acordo administrativo'];
     if(te)return ['1','limitação territorial'];
-    return ['1','sem indicação: grupo 1 por padrão'];
+    return ['1','sugestão automática: nenhum sinal suficiente para confirmar o grupo',true];
   }
   /* ---------- versões e alternativas ---------- */
   function versaoAuto(id,g,t){
@@ -161,7 +161,7 @@
   function preparar(P,J,forcar){
     if(S.proc===P.processo&&S.j===(J||null)&&!forcar)return;
     var T=textoCaso(P,J),t=nq(T),ga=grupoAuto(P,J,T);
-    S={proc:P.processo,j:J||null,g:ga[0],gPorque:ga[1],on:{},ver:{},um:{},val:{},der:{},porque:{},manual:{},em:'',em1:'rel',mpf:0,mpfNota:''};
+    S={proc:P.processo,j:J||null,g:ga[0],gPorque:ga[1],gSugerido:!!ga[2],gManual:false,on:{},ver:{},um:{},val:{},der:{},porque:{},manual:{},em:'',em1:'rel',mpf:0,mpfNota:''};
     S.sin=sinais(P,J);S.val=preVal(P,J,ga[0]);doOffice(P,J,ga[0],S.val,S.der);
     aplicarGrupo(P,J,t);
     var C=(J&&J.campos)||{},sx=nq(C['mpfx.sentido']||P.mpf||''),hip=nq(C.mpf||''),par=nq(C.parecer||'');
@@ -181,9 +181,9 @@
       if(!r.opcional){S.on[r.mod]=true;}
       else{var re=md.gatilho?new RegExp(md.gatilho,'i'):null,hit=achar(re,t);
         S.on[r.mod]=!!(hit||r.padrao);S.porque[r.mod]=hit?(hit.f?hit.f+': ':'no caso: ')+'“'+hit.m+'”':(r.padrao?'padrão do grupo':'');}
-      if(S.ver[r.mod]==null)S.ver[r.mod]=Math.min(versaoAuto(r.mod,S.g,t),md.versoes.length-1);
+      if(S.ver[r.mod]==null)S.ver[r.mod]=Math.min(versaoAuto(r.mod,S.g,tSin(t)),md.versoes.length-1);
     });
-    G.receita.forEach(function(r){if(r.umDe)r.umDe.forEach(function(id){var md=id&&modu(id);if(md&&S.ver[id]==null)S.ver[id]=Math.min(versaoAuto(id,S.g,t),md.versoes.length-1);});});
+    G.receita.forEach(function(r){if(r.umDe)r.umDe.forEach(function(id){var md=id&&modu(id);if(md&&S.ver[id]==null)S.ver[id]=Math.min(versaoAuto(id,S.g,tSin(t)),md.versoes.length-1);});});
     var rel=G.relatorio||{},pd=rel.padroes||{};Object.keys(pd).forEach(function(k){if(pd[k]&&S.val[k]==null)S.val[k]=pd[k];});
     S.em='';
   }
@@ -252,7 +252,8 @@
   /* ---------- conferência ---------- */
   function conferir(P,J){
     var L=[],add=function(s,k,t){L.push({s:s,k:k,t:t});},D=M(),G=grp(S.g);
-    var cod=/código/.test(S.gPorque||'');add(cod?'ok':'pc','Grupo','Grupo '+S.g+' ('+G.nome+'): '+S.gPorque+'.'+(J&&J.modelo&&J.modelo.id?' Prontuário: '+J.modelo.id+'.':cod?'':' Sem código 2886 no prontuário: conferir o enquadramento pela árvore.'));
+    var cod=/código/.test(S.gPorque||''),gok=cod||S.gManual;
+    add(S.gSugerido&&!S.gManual?'no':(gok?'ok':'pc'),'Grupo','Grupo '+S.g+' ('+G.nome+'): '+S.gPorque+'.'+(S.gSugerido&&!S.gManual?' A matriz não confirmou o enquadramento: escolha o grupo manualmente ou complete o prontuário antes de tratar a minuta como pronta.':(J&&J.modelo&&J.modelo.id?' Prontuário: '+J.modelo.id+'.':gok?'':' Sem código 2886 no prontuário: conferir o enquadramento pela árvore.')));
     var res=P.resultado||(J&&J.campos&&J.campos.resJulg)||'';
     if(res)add(nq(res)===nq(G.resJulg)?'ok':'no','Resultado',nq(res)===nq(G.resJulg)?'Resultado do caso igual ao do grupo: '+G.resJulg+'.':'O caso registra “'+res+'”, e o grupo '+S.g+' fecha em “'+G.resJulg+'”. Não altere o resultado em silêncio: confira o grupo.');
     else add('pc','Resultado','Sem resultado no cartão ou no prontuário. O grupo fecha em “'+G.resJulg+'”.');
@@ -279,15 +280,16 @@
   }
   /* ---------- tela ---------- */
   function canhoto(P,J){
-    var D=M(),G=grp(S.g),h='<div class="dcan-h"><span>MATRIZ 28,86%</span><small>grupo, módulos e variáveis</small></div><div class="dcan">';
-    h+='<div class="cf"><div class="cfl"><span>Grupo</span><span class="pill">'+e(S.g)+'</span></div><div class="m28-gs">'+D.grupos.map(function(x){return '<button data-m28g="'+e(x.id)+'" aria-pressed="'+(x.id===S.g)+'" title="'+e(x.nome)+'">'+e(x.id)+'</button>';}).join('')+'</div><p class="meta">'+e(G.nome)+'</p></div>';
+    var D=M(),G=grp(S.g),h='<div class="dcan-h"><span>MATRIZ 28,86%</span><small>enquadramento, composição, variáveis e conferência</small></div><div class="dcan">';
+    h+='<div class="cf"><div class="cfl"><span>Enquadramento</span><span class="pill">'+e(S.g)+'</span></div><div class="m28-gs">'+D.grupos.map(function(x){return '<button data-m28g="'+e(x.id)+'" aria-pressed="'+(x.id===S.g)+'" title="'+e(x.nome)+'">'+e(x.id)+'</button>';}).join('')+'</div><p class="meta"><b>'+e(G.nome)+'</b></p><p class="meta m28-prov '+(S.gManual?'manual':S.gSugerido?'sugerido':/código/.test(S.gPorque||'')?'confirmado':'derivado')+'">'+(S.gManual?'Manual':S.gSugerido?'Sugerido':/código/.test(S.gPorque||'')?'Confirmado':'Derivado')+' · '+e(S.gPorque)+'</p>'+(S.gSugerido&&!S.gManual?'<p class="m28-alert">Enquadramento não confirmado. A minuta pode ser examinada, mas deve haver escolha manual do grupo ou complementação do prontuário antes da conferência final.</p>':'')+'</div>';
     h+='<div class="cf"><div class="cfl"><span>Módulos do voto</span></div><div class="m28-ml">';
     G.receita.forEach(function(r,i){
       if(r.umDe){h+='<div class="m28-m"><div class="m28-mt"><b>Honorários / alternativa</b>'+(S.porque['um'+i]?'<small>'+e(S.porque['um'+i])+'</small>':'')+'</div><select data-m28um="'+i+'">'+
         r.umDe.map(function(id){return '<option value="'+e(id)+'"'+(S.um[i]===id?' selected':'')+'>'+e(id?modu(id).titulo:'nenhum')+'</option>';}).join('')+'</select>'+verSel(S.um[i])+'</div>';return;}
       var md=modu(r.mod);if(!md)return;
+      var pr=S.porque[r.mod]||'',st=!r.opcional?'confirmado':pr==='marcado à mão'?'manual':pr?'derivado':'sugerido';
       h+='<div class="m28-m'+(S.on[r.mod]?' on':'')+'"><label class="m28-mt"><input type="checkbox" data-m28m="'+e(r.mod)+'"'+(S.on[r.mod]?' checked':'')+(r.opcional?'':' disabled')+'><b>'+e(md.titulo)+'</b>'+
-        (r.opcional?(S.porque[r.mod]?'<small>'+e(S.porque[r.mod])+'</small>':'<small>opcional</small>'):'<small>núcleo</small>')+'</label>'+(S.on[r.mod]?verSel(r.mod):'')+'</div>';
+        '<small class="m28-prov '+st+'">'+(st==='confirmado'?'Confirmado · núcleo':st==='manual'?'Manual':st==='derivado'?'Derivado · '+e(pr):'Sugerido · opcional')+'</small></label>'+(S.on[r.mod]?verSel(r.mod):'')+'</div>';
     });
     h+='</div></div>';
     var R=G.relatorio||{};
@@ -299,7 +301,8 @@
     h+='<div class="cf"><div class="cfl"><span>Variáveis do caso</span><span class="pill">'+us.length+'</span></div>'+us.map(function(k){var d=vdef(k),v=valor(k),id='m28v-'+k;
       var inp=d.tipo==='longo'?'<textarea id="'+id+'" data-m28in="'+e(k)+'" rows="3">'+e(v)+'</textarea>'
         :'<input id="'+id+'" data-m28in="'+e(k)+'" value="'+e(v)+'"'+(d.opcoes?' list="'+id+'-l"':'')+' autocomplete="off">'+(d.opcoes?'<datalist id="'+id+'-l">'+d.opcoes.map(function(o){return '<option value="'+e(o)+'">';}).join('')+'</datalist>':'');
-      return '<div class="m28-v'+(!v.trim()&&d.tipo!=='opcoes'?' falta':'')+'"><label for="'+id+'">'+e(d.rotulo)+(d.campo?' <small>· '+e(d.campo)+'</small>':'')+'</label>'+inp+(S.der[k]&&!S.manual[k]?'<p class="meta m28-der">Preenchido do prontuário ('+e(S.der[k])+'): conferir a redação.</p>':'')+(d.ajuda?'<p class="meta">'+e(d.ajuda)+'</p>':'')+((function(){var x=S.der[k]?'':dica(k,P,J);return x?'<p class="meta m28-dica">No prontuário: '+e(x)+'</p>':'';})())+'</div>';}).join('')+'</div>';
+      var est=S.manual[k]?'manual':S.der[k]?'confirmado':v.trim()?'derivado':'sugerido';
+      return '<div class="m28-v'+(!v.trim()&&d.tipo!=='opcoes'?' falta':'')+'"><label for="'+id+'">'+e(d.rotulo)+(d.campo?' <small>· '+e(d.campo)+'</small>':'')+'</label>'+inp+'<p class="meta m28-prov '+est+'">'+(est==='manual'?'Manual · editado na Consulta':est==='confirmado'?'Confirmado · prontuário ('+e(S.der[k])+')':est==='derivado'?'Derivado · padrão/regra da matriz':'Sugerido · exige preenchimento ou conferência')+'</p>'+(d.ajuda?'<p class="meta">'+e(d.ajuda)+'</p>':'')+((function(){var x=S.der[k]?'':dica(k,P,J);return x?'<p class="meta m28-dica">No prontuário: '+e(x)+'</p>':'';})())+'</div>';}).join('')+'</div>';
     h+='<div class="cf"><button class="dbt" data-m28reset="1">Refazer a escolha automática</button></div>';
     return h+'</div>';
   }
@@ -312,7 +315,7 @@
     pecas().forEach(function(p,i){h+='<div class="cqb"><div class="band"><span class="bl">'+(i===0?'VOTO · ':'')+e(p.titulo)+'</span>'+(p.rotulo&&p.rotulo!=='padrão'?'<span class="pill op">'+e(p.rotulo)+'</span>':'')+'<span class="dsp"></span><span class="drn">'+e(p.origem||'')+'</span></div><div class="dbody">'+
       p.ps.map(function(x){return '<p class="std">'+preencher(x,true)+'</p>';}).join('')+'</div></div>';});
     var em=ementaLinhas();
-    h+='<div class="cqb"><div class="band"><span class="bl">EMENTA</span><span class="dsp"></span><span class="drn">'+(em.cod?'base 2886-'+e(em.cod)+' · '+e(em.proc):'')+'</span></div><div class="dbody">'+em.linhas.map(function(x){return '<p>'+preencher(x,true)+'</p>';}).join('')+'</div></div>';
+    h+='<div class="cqb"><div class="band"><span class="bl">EMENTA</span><span class="dsp"></span><span class="drn">'+(em.cod?'base 2886-'+e(em.cod)+' · '+e(em.proc)+(typeof em.sim==='number'?' · cobertura '+Math.round(em.sim*100)+'%':''):'')+'</span></div><div class="dbody">'+em.linhas.map(function(x){return '<p>'+preencher(x,true)+'</p>';}).join('')+'</div></div>';
     var res=S.on['ADESIVO']?'negou provimento à apelação e ao recurso adesivo':G.acordao;
     h+='<div class="cqb"><div class="band"><span class="bl">ACÓRDÃO</span></div><div class="dbody"><p class="std">Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, '+e(res)+', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.</p></div></div>';
     return h+'</div></div>';
@@ -346,8 +349,8 @@
   function redesenharSemCanhoto(){CTX.mn.innerHTML=folha(CTX.P,CTX.J);CTX.or.innerHTML=painel(CTX.P,CTX.J);ligarFolha();}
   function q(sel,fn,ev){Array.prototype.forEach.call(document.querySelectorAll(sel),function(b){b[ev||'onclick']=function(x){fn(b,x);};});}
   function ligarFolha(){
-    q('#cq-main [data-m28pk]',function(){baixar();});
-    q('#cq-main [data-m28cp]',function(b){copiar(b.getAttribute('data-m28cp')==='txt').then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent=b.getAttribute('data-m28cp')==='txt'?'Copiar como texto':'Copiar a minuta';},1600);},function(){b.textContent='Não foi possível copiar';});});
+    q('#cq-main [data-m28pk]',function(b){if(S.gSugerido&&!S.gManual){b.textContent='Confirme o grupo';setTimeout(function(){b.textContent='Pacote para conferência';},1800);return;}baixar();});
+    q('#cq-main [data-m28cp]',function(b){if(S.gSugerido&&!S.gManual){b.textContent='Confirme o grupo';setTimeout(function(){b.textContent=b.getAttribute('data-m28cp')==='txt'?'Copiar como texto':'Copiar a minuta';},1800);return;}copiar(b.getAttribute('data-m28cp')==='txt').then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent=b.getAttribute('data-m28cp')==='txt'?'Copiar como texto':'Copiar a minuta';},1600);},function(){b.textContent='Não foi possível copiar';});});
     q('#cq-main [data-m28v]',function(b){var el=document.getElementById('m28v-'+b.getAttribute('data-m28v'));if(el){el.focus();el.scrollIntoView({block:'center'});}});
     q('#cq-ori [data-m28sair]',function(){CTX.CQ.m28=false;CTX.voltar();});
     q('#cq-ori [data-m28kit]',function(b){S.kit=b.value;CTX.or.innerHTML=painel(CTX.P,CTX.J);ligarFolha();var d=document.querySelector('#cq-ori .m28-kit');if(d)d.open=true;},'onchange');
@@ -355,7 +358,7 @@
   }
   function ligar(){
     var t=nq(textoCaso(CTX.P,CTX.J));
-    q('#cq-can [data-m28g]',function(b){S.g=b.getAttribute('data-m28g');S.gPorque='escolhido à mão';S.ver={};aplicarGrupo(CTX.P,CTX.J,t);desenhar();});
+    q('#cq-can [data-m28g]',function(b){S.g=b.getAttribute('data-m28g');S.gPorque='escolhido à mão';S.gManual=true;S.gSugerido=false;S.ver={};aplicarGrupo(CTX.P,CTX.J,t);desenhar();});
     q('#cq-can [data-m28m]',function(b){S.on[b.getAttribute('data-m28m')]=b.checked;S.porque[b.getAttribute('data-m28m')]='marcado à mão';desenhar();},'onchange');
     q('#cq-can [data-m28um]',function(b){S.um[+b.getAttribute('data-m28um')]=b.value;S.porque['um'+b.getAttribute('data-m28um')]='escolhido à mão';desenhar();},'onchange');
     q('#cq-can [data-m28ver]',function(b){var x=b.getAttribute('data-m28ver').split(':');S.ver[x[0]]=+x[1];desenhar();});
@@ -373,7 +376,7 @@
       if(S.on[r.mod]){var md=modu(r.mod);mods.push({id:r.mod,titulo:md.titulo,versao:(md.versoes[S.ver[r.mod]||0]||{}).rotulo||'',porque:S.porque[r.mod]||(r.opcional?'':'núcleo')});}});
     var em=ementaLinhas();
     return {schema:'gabcmt-conf-2886-1',geradoEm:new Date().toISOString(),processo:P.processo||'',item:P.item||'',sessao:(CTX.CQ&&CTX.CQ.ses)||'',
-      grupo:{id:S.g,nome:G.nome,porque:S.gPorque,resJulg:G.resJulg},resultadoCaso:P.resultado||(J&&J.campos&&J.campos.resJulg)||'',
+      grupo:{id:S.g,nome:G.nome,porque:S.gPorque,resJulg:G.resJulg,estado:S.gManual?'manual':S.gSugerido?'sugerido':/código/.test(S.gPorque||'')?'confirmado':'derivado'},resultadoCaso:P.resultado||(J&&J.campos&&J.campos.resJulg)||'',
       modulos:mods,variaveis:V,mpf:{opcao:S.mpf,nota:S.mpfNota||''},ementaBase:em.cod?{modelo:'2886-'+em.cod,processo:em.proc,sessao:em.sessao}:null,
       conferenciaMatriz:conferir(P,J).map(function(z){return {situacao:z.s,item:z.k,texto:z.t};}),
       minuta:textoFinal(),prontuario:J||null,perfil:P};}
