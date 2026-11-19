@@ -1,0 +1,48 @@
+'use strict';
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const html=fs.readFileSync(path.resolve(__dirname,'../index.html'),'utf8');
+
+test('rodapé fixo contém seis acessos e mantém uma única busca rápida',()=>{
+  const dock=html.match(/<nav class="cmt-mobile-dock"[\s\S]*?<\/nav>/);
+  assert.ok(dock,'rodapé próprio do desembargador');
+  for(const key of ['search','a','u','d','not','dil']){
+    assert.ok(dock[0].includes('data-cmt-dock="'+key+'"'),key);
+    assert.equal((dock[0].match(new RegExp('data-cmt-dock="'+key+'"','g'))||[]).length,1);
+  }
+  assert.equal((dock[0].match(/data-cmt-dock=/g)||[]).length,6);
+  assert.equal((html.match(/id="cmt-fastnav"/g)||[]).length,1);
+  assert.ok(html.includes('id="cmt-ir-v"'));
+});
+
+test('três painéis existentes preservam ids e recebem cabeçalho móvel',()=>{
+  for(const id of ['cmt-ass','cmt-urg-p','cmt-dv-p','cmt-p-not','cmt-p-dil'])
+    assert.ok(html.includes('id="'+id+'"'),id);
+  for(const id of ['cmt-mobile-pn-title','cmt-mobile-pn-count','cmt-mobile-more','cmt-dr-x'])
+    assert.ok(html.includes('id="'+id+'"'),id);
+  assert.ok(html.includes('function cmtMobileSync()'));
+  assert.ok(html.includes("if(ab&&cmtMobileMode()){cmtGaveta(false)"));
+  assert.ok(html.includes("document.body.classList.remove('cmt-pn-on','cmt-search-on')"));
+});
+
+test('layout apenas no celular: dock, rolagem interna e safe area',()=>{
+  for(const token of [
+    '--cmt-mob-dock-h','grid-template-columns:repeat(6,minmax(0,1fr))',
+    '#v-cmt .cmt-mobile-dock','body.cmt-search-on #v-cmt .cmt-fastnav',
+    '#v-cmt .cmt-dr .cmt-grid','overscroll-behavior:contain',
+    '#v-cmt .cmt-pn-not,#v-cmt .cmt-pn-dil',
+    '@media(max-width:780px) and (prefers-reduced-motion:reduce)'
+  ])assert.ok(html.includes(token),token);
+  assert.ok(html.includes('#v-cmt #cmt-b-not,#v-cmt #cmt-b-dil{display:none!important}'));
+});
+
+test('scripts mantêm sintaxe JavaScript válida',()=>{
+  const scripts=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+  assert.ok(scripts.length>0);
+  scripts.forEach((match,i)=>{
+    if(match[1].trim())new vm.Script(match[1],{filename:'exofficio-script-'+i+'.js'});
+  });
+});

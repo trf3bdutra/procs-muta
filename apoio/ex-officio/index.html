@@ -1856,11 +1856,12 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
     </section>
 
-    <aside class="cmt-fastnav quick-find" id="cmt-fastnav" aria-label="Buscador rápido da pauta">
+    <aside class="cmt-fastnav quick-find" id="cmt-fastnav" role="search" aria-label="Buscador rápido da pauta">
       <span class="qf-k">BUSCADOR RÁPIDO</span>
       <span class="qf-row"><select id="cmt-ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="número + Enter" aria-label="Número do item ou processo"></span>
       <small>Localiza e destaca o registro na pauta.</small>
       <button type="button" class="qf-go" id="cmt-ir-go">Ir para</button>
+      <button type="button" id="cmt-ir-x" class="cmt-fastnav-close" aria-label="Fechar buscador rápido">×</button>
     </aside>
 
     <aside class="cmt-dr" id="cmt-dr" data-t="a">
@@ -1873,8 +1874,11 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <button type="button" class="cmt-dr-k" id="cmt-dr-k" aria-expanded="false" aria-controls="cmt-dr-b"><span>Painéis</span><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
         <div class="cmt-rail" id="cmt-rail"></div>
       </div>
-      <div class="cmt-dr-b" id="cmt-dr-b">
-      <div class="cmt-dr-t">
+      <div class="cmt-dr-b cmt-mobile-pn" id="cmt-dr-b" role="dialog" aria-label="Painéis do desembargador">
+      <div class="cmt-dr-t cmt-mobile-pn-h">
+        <h2 class="cmt-mobile-pn-title" id="cmt-mobile-pn-title" tabindex="-1">Para assinar</h2>
+        <span class="cmt-n cmt-mobile-pn-count" id="cmt-mobile-pn-count"></span>
+        <button type="button" class="cmt-mobile-more" id="cmt-mobile-more" data-cmt-more>Gabinete</button>
         <p class="cmt-ey">Gabinete do Des. Fed. Carlos Muta</p>
         <button type="button" class="cmt-dr-x" id="cmt-dr-x" aria-label="Fechar painéis">Fechar</button>
         <label class="cmt-bq cmt-bq-g"><span class="vh">Buscar processo</span><input type="search" id="cmt-busca" placeholder="Processo, parte ou assunto"></label>
@@ -1946,6 +1950,37 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-pn-b"><div class="cmt-cols4" id="cmt-l-dil"></div></div>
     </aside>
 
+    <nav class="cmt-mobile-dock" id="cmt-mobile-dock" aria-label="Acesso rápido aos painéis do desembargador">
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="search" aria-label="Busca" aria-pressed="false" aria-controls="cmt-fastnav" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+        <span>Busca</span>
+      </button>
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="a" aria-label="Assinar" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M7 16l8-8 3 3-8 8H7zM14 6l2-2 3 3-2 2"/></svg>
+        <span>Assinar</span>
+        <i class="cmt-mobile-count" data-cmt-count="a" hidden></i>
+      </button>
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="u" aria-label="Urgências" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 9v5M12 17h.01"/></svg>
+        <span>Urgências</span>
+        <i class="cmt-mobile-count" data-cmt-count="u" hidden></i>
+      </button>
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="d" aria-label="Dúvidas" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v12H8l-4 3V5z"/><path d="M9 10a3 3 0 0 1 6 0c0 2-3 2-3 4M12 16h.01"/></svg>
+        <span>Dúvidas</span>
+        <i class="cmt-mobile-count" data-cmt-count="d" hidden></i>
+      </button>
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="not" aria-label="Notificações" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
+        <span>Notificações</span>
+        <i class="cmt-mobile-count" data-cmt-count="not" hidden></i>
+      </button>
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="dil" aria-label="Diligências" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="17" rx="1"/><path d="M8 2v4M16 2v4M4 10h16M9 16l2 2 4-4"/></svg>
+        <span>Diligências</span>
+        <i class="cmt-mobile-count" data-cmt-count="dil" hidden></i>
+      </button>
+    </nav>
   </div>
 </main>
 
@@ -4396,6 +4431,64 @@ b.disabled=true;
 function cmtTopo(){var h=document.querySelector('#app header'),t=h?Math.round(h.getBoundingClientRect().height):0;
 document.documentElement.style.setProperty('--cmt-top',t+'px');}
 window.addEventListener('resize',cmtTopo);
+
+/* CMT mobile: rodapé único e painéis com conteúdo e ações originais. */
+function cmtMobileMode(){return window.innerWidth<=780;}
+function cmtMobileSync(){
+ var j=CMT.dados||{},a=j.assinar||{},c={
+ a:(a.assinatura||[]).length,u:(j.urgencias||[]).length,
+ d:(j.duvidas||[]).length+(j.pedidos||[]).length,
+ not:(j.notificacoes||[]).length,
+ dil:(j.diligencias||[]).filter(function(x){return x.minha;}).length};
+ var dr=$('#cmt-dr'),open=!!(dr&&dr.classList.contains('on'));
+ var nt=$('#cmt-p-not'),dl=$('#cmt-p-dil'),pnNot=!!(nt&&!nt.hidden),pnDil=!!(dl&&!dl.hidden);
+ var aba=cmtAba(),title=$('#cmt-mobile-pn-title'),count=$('#cmt-mobile-pn-count');
+ if(title)title.textContent=({a:'Para assinar',u:'Urgências',d:'Dúvidas e pedidos',m:'Gabinete'})[aba]||'Painéis';
+ if(count)count.textContent=aba==='m'?'':String(c[aba]||0)+' registro'+(c[aba]===1?'':'s');
+ var more=$('#cmt-mobile-more');
+ if(more){more.textContent=aba==='m'?'Assinar':'Gabinete';more.setAttribute('aria-label',aba==='m'?'Voltar a Para assinar':'Abrir informações do gabinete');}
+ document.querySelectorAll('#cmt-mobile-dock [data-cmt-dock]').forEach(function(bt){
+  var k=bt.getAttribute('data-cmt-dock'),active=k==='search'?document.body.classList.contains('cmt-search-on'):
+   k==='not'?pnNot:k==='dil'?pnDil:open&&aba===k;
+  bt.setAttribute('aria-pressed',String(active));
+  if(k==='search')bt.setAttribute('aria-expanded',String(active));
+  else{
+   var n=c[k]||0,b=bt.querySelector('[data-cmt-count]');
+   if(b){b.textContent=n>99?'99+':String(n);b.hidden=!n;}
+   bt.setAttribute('aria-label',({a:'Assinar',u:'Urgências',d:'Dúvidas',not:'Notificações',dil:'Diligências'})[k]+(n?' · '+n+' registros':''));
+  }
+ });
+ if(dr)dr.setAttribute('aria-modal',String(cmtMobileMode()&&open));
+ document.body.classList.toggle('cmt-mobile-modal',cmtMobileMode()&&(open||pnNot||pnDil));
+}
+function cmtMobileSearch(show){
+ if(!cmtMobileMode())return;
+ if(show){cmtGaveta(false);cmtPainel('not',false);cmtPainel('dil',false);}
+ document.body.classList.toggle('cmt-search-on',!!show);
+ cmtMobileSync();
+ if(show){var inp=$('#cmt-ir-v');if(inp)inp.focus();}
+}
+document.addEventListener('click',function(e){
+ var b=e.target.closest&&e.target.closest('#cmt-mobile-dock [data-cmt-dock]');
+ if(b&&cmtMobileMode()){
+  e.preventDefault();var k=b.getAttribute('data-cmt-dock');
+  if(k==='search')cmtMobileSearch(!document.body.classList.contains('cmt-search-on'));
+  else if(k==='not'||k==='dil'){var p=$(k==='not'?'#cmt-p-not':'#cmt-p-dil');cmtPainel(k,!!(p&&p.hidden));}
+  else{var dr=$('#cmt-dr'),on=!!(dr&&dr.classList.contains('on'));cmtGaveta(!on||cmtAba()!==k,k);}
+  return;
+ }
+ var more=e.target.closest&&e.target.closest('#cmt-mobile-more');
+ if(more&&cmtMobileMode()){e.preventDefault();cmtGaveta(true,cmtAba()==='m'?'a':'m');return;}
+ if(e.target.closest&&e.target.closest('#cmt-ir-x'))cmtMobileSearch(false);
+});
+document.addEventListener('keydown',function(e){
+ if(e.key==='Escape'&&document.body.classList.contains('cmt-search-on'))cmtMobileSearch(false);
+});
+window.addEventListener('resize',function(){
+ if(!cmtMobileMode())document.body.classList.remove('cmt-search-on','cmt-mobile-modal');
+ cmtMobileSync();
+});
+
 function cmtVisto(){try{return JSON.parse(localStorage.getItem('cmt_visto')||'{}');}catch(e){return {};}}
 function cmtRail(na,nu,nd,hj){
 var v=cmtVisto(),d=function(k,n){var a=Number(v[k]);return (isFinite(a)&&n>a)?(n-a):0;};
@@ -4415,11 +4508,20 @@ return g.getAttribute('data-t')||'a';}
 function cmtGaveta(ab,aba){
 cmtTopo();if(aba)cmtAba(aba);
 var g=$('#cmt-dr');if(!g)return;
+if(ab&&cmtMobileMode()){
+ var n=$('#cmt-p-not'),d=$('#cmt-p-dil');
+ if(n)n.hidden=true;if(d)d.hidden=true;
+ document.body.classList.remove('cmt-pn-on','cmt-search-on');
+}
 g.classList.toggle('on',ab);document.body.classList.toggle('cmt-dr-on',ab);
 var hk=$('#cmt-dr-k');if(hk)hk.setAttribute('aria-expanded',String(!!ab));
 if(ab){var j=CMT.dados||{},as=j.assinar||{};
   try{localStorage.setItem('cmt_visto',JSON.stringify({a:(as.assinatura||[]).length,u:(j.urgencias||[]).length,d:(j.duvidas||[]).length}));}catch(e){}
-  cmtInd();var q=$('#cmt-busca');if(q)q.focus();}}
+  cmtInd();
+  if(cmtMobileMode()){var close=$('#cmt-dr-x');if(close)close.focus();}
+  else {var q=$('#cmt-busca');if(q)q.focus();}
+}
+cmtMobileSync();}
 document.addEventListener('click',function(e){
 var ab=e.target.closest('[data-cdt]');
 if(ab){var k=ab.getAttribute('data-cdt');
@@ -4504,10 +4606,12 @@ el.innerHTML=COL.map(function(c){
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-cdf]');if(!b)return;CMT.dilf=b.getAttribute('data-cdf');cmtDilig();});
 /* painéis próprios: notificações à direita, diligências em faixa larga */
 function cmtPainel(k,ab){var m={not:'#cmt-p-not',dil:'#cmt-p-dil'},el=$(m[k]);if(!el)return;
+if(ab&&cmtMobileMode()){cmtGaveta(false);document.body.classList.remove('cmt-search-on');}
 Object.keys(m).forEach(function(z){var o=$(m[z]);if(o&&z!==k)o.hidden=true;});
 el.hidden=!ab;document.body.classList.toggle('cmt-pn-on',!!ab);
 if(ab&&window.innerWidth>780){var hd=document.querySelector('#v-cmt .cmt-hd2'),t=hd?Math.max(0,Math.round(hd.getBoundingClientRect().bottom)):0;el.style.top=t+'px';}else{el.style.top='';}
-if(ab){if(k==='not')cmtNotif();else cmtDilig();var x=el.querySelector('.cmt-pn-x');if(x)x.focus();}}
+if(ab){if(k==='not')cmtNotif();else cmtDilig();var x=el.querySelector('.cmt-pn-x');if(x)x.focus();}
+cmtMobileSync();}
 document.addEventListener('click',function(e){
 var b=e.target.closest&&e.target.closest('[data-cpn]');
 if(b){var k=b.getAttribute('data-cpn'),el=$(k==='not'?'#cmt-p-not':'#cmt-p-dil');cmtPainel(k,!!(el&&el.hidden));return;}
@@ -4519,7 +4623,7 @@ function cmtInd(){
 var j=CMT.dados||{},as=j.assinar||{},el=$('#cmt-ind');if(!el)return;
 var na=(as.assinatura||[]).length,nu=(j.urgencias||[]).length,nd=(j.duvidas||[]).length+(j.pedidos||[]).length;
 var hj=(j.urgencias||[]).filter(function(x){return x.espera===0;}).length;
-cmtTopo();cmtRail(na,nu,nd,hj);el.innerHTML='<b class="ok">'+na+(na===1?' a assinar':' a assinar')+'</b><b class="al">'+nu+(nu===1?' urgência':' urgências')+(hj?' · '+hj+' hoje':'')+'</b><b class="inf">'+nd+(nd===1?' dúvida':' dúvidas')+((j.pedidos||[]).length?' · '+(j.pedidos||[]).length+' pedido'+((j.pedidos||[]).length===1?'':'s'):'')+'</b>';}
+cmtTopo();cmtRail(na,nu,nd,hj);cmtMobileSync();el.innerHTML='<b class="ok">'+na+(na===1?' a assinar':' a assinar')+'</b><b class="al">'+nu+(nu===1?' urgência':' urgências')+(hj?' · '+hj+' hoje':'')+'</b><b class="inf">'+nd+(nd===1?' dúvida':' dúvidas')+((j.pedidos||[]).length?' · '+(j.pedidos||[]).length+' pedido'+((j.pedidos||[]).length===1?'':'s'):'')+'</b>';}
 function cmtPinta(){
   var j=CMT.dados;if(!j)return;
   if(CMT.entrou){$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;}else{cmtAbertura(j);}
@@ -4611,7 +4715,9 @@ function cmtIrPara(){
   if(sel.value==='item')it=L.filter(function(x){return String(x.item||'').replace(/^0+/,'')===v.replace(/^0+/,'');})[0];
   else it=L.filter(function(x){return d.length>=4&&dgx(x.cnj).indexOf(d)>=0;})[0];
   if(!it){toast('Não encontrei '+(sel.value==='item'?'o item ':'o processo ')+v+' nesta pauta.');var box=$('#cmt-fastnav');if(box){box.classList.remove('flash');void box.offsetWidth;box.classList.add('flash');}return;}
-  CMT.q='';CMT.filtro='todos';var q=$('#cmt-q');if(q)q.value='';cmtPauta();
+  CMT.q='';CMT.filtro='todos';var q=$('#cmt-q');if(q)q.value='';
+   if(cmtMobileMode()){document.body.classList.remove('cmt-search-on');cmtMobileSync();}
+   cmtPauta();
   setTimeout(function(){
     var rows=[].slice.call(document.querySelectorAll('#cmt-rows tr')),tr=rows.filter(function(r){
       var ii=r.querySelector('.cmt-ii'),cn=r.querySelector('.cnj');
@@ -8180,6 +8286,116 @@ html[data-theme=dark] #v-cmt .cmt-dr-h{background:var(--ep)}
 @keyframes qfHit{0%,100%{background:inherit}30%{background:#fff2c8}}
 @media(max-width:1100px){#v-cmt .cmt-fastnav{left:12px;right:12px;bottom:70px;width:auto;max-width:420px}}
 @media(max-width:780px){#v-cmt .cmt-fastnav{position:static;width:auto;max-width:none;margin:10px 14px 0;box-shadow:none}}
+
+/* CMT · Mobile 2026-11-19: dock único, cinco painéis e busca contextual.
+   Desktop permanece com os painéis e posições já existentes. */
+#v-cmt .cmt-mobile-dock,#v-cmt .cmt-mobile-pn-title,#v-cmt .cmt-mobile-pn-count,
+#v-cmt .cmt-mobile-more,#v-cmt .cmt-fastnav-close{display:none}
+@media(max-width:780px){
+ :root{--cmt-mob-dock-h:calc(68px + env(safe-area-inset-bottom,0px))}
+ body.cmt-pg.cmt-mobile-modal{overflow:hidden}
+ #v-cmt .cmt-wrap,body.cmt-dr-on #v-cmt .cmt-wrap{
+  padding-right:0!important;padding-bottom:calc(var(--cmt-mob-dock-h) + 16px)!important}
+ #v-cmt #cmt-b-not,#v-cmt #cmt-b-dil{display:none!important}
+ #v-cmt .cmt-mobile-dock{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));align-items:stretch;
+  position:fixed;inset:auto 0 0 0;z-index:110;height:var(--cmt-mob-dock-h);
+  padding:4px 4px calc(4px + env(safe-area-inset-bottom,0px));
+  background:var(--ew);border-top:1px solid var(--el);
+  box-shadow:0 -5px 22px rgba(18,40,43,.12);gap:2px;box-sizing:border-box}
+ #v-cmt .cmt-mobile-action{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;min-width:0;min-height:48px;gap:4px;
+  padding:4px 1px;border:0;border-top:2px solid transparent;
+  border-radius:0;background:transparent;color:var(--em);
+  cursor:pointer;font:600 8.3px/1.15 var(--font);text-align:center;overflow:visible}
+ #v-cmt .cmt-mobile-action svg{width:19px;height:19px;flex:none}
+ #v-cmt .cmt-mobile-action span{display:block;max-width:100%;overflow-wrap:anywhere}
+ #v-cmt .cmt-mobile-action[aria-pressed=true]{border-top-color:var(--eg);background:var(--ep2);color:var(--ei)}
+ #v-cmt .cmt-mobile-action:focus-visible{outline:2px solid var(--eg);outline-offset:-2px}
+ #v-cmt .cmt-mobile-action[data-cmt-dock=u][aria-pressed=true]{border-top-color:var(--er)}
+ #v-cmt .cmt-mobile-count{
+  position:absolute;top:0;right:0;min-width:14px;height:14px;padding:0 2px;
+  background:var(--eo2);color:#fff;border-radius:8px;
+  font:700 9px/14px var(--emono);font-style:normal;text-align:center}
+ #v-cmt .cmt-mobile-count[hidden]{display:none!important}
+ #v-cmt .cmt-dr{position:fixed!important;inset:0!important;z-index:95!important;pointer-events:none}
+ #v-cmt .cmt-dr-h{display:none!important}
+ #v-cmt .cmt-dr-b{
+  position:fixed!important;top:0!important;left:0!important;right:0!important;
+  bottom:var(--cmt-mob-dock-h)!important;width:100%!important;height:auto!important;
+  max-height:none!important;box-sizing:border-box;border:0!important;
+  padding:0!important;margin:0!important;overflow:hidden!important;
+  display:flex!important;flex-direction:column;background:var(--ep);
+  transform:translateY(105%)!important;visibility:hidden;
+  box-shadow:0 -16px 44px rgba(15,35,43,.14);pointer-events:auto;
+  transition:transform .23s ease,visibility 0s linear .23s}
+ #v-cmt .cmt-dr.on .cmt-dr-b{transform:translateY(0)!important;visibility:visible;transition:transform .23s ease}
+ #v-cmt .cmt-dr-t{
+  display:flex!important;flex:0 0 auto;align-items:center;flex-wrap:wrap;gap:7px;
+  position:relative!important;top:auto!important;z-index:2;margin:0!important;
+  padding:10px 12px!important;min-height:54px;border-bottom:1px solid var(--el);
+  background:var(--ew)}
+ #v-cmt .cmt-dr-t>.cmt-ey,#v-cmt .cmt-dr-t>.cmt-ind,
+ #v-cmt .cmt-dr-t>.cmt-sub,#v-cmt .cmt-dr-t>.cmt-bq-g{display:none!important}
+ #v-cmt .cmt-mobile-pn-title{
+  display:block!important;order:0;flex:1 1 125px;min-width:0;
+  margin:0;font:650 16px/1.2 var(--font);color:var(--ei)}
+ #v-cmt .cmt-mobile-pn-count{display:inline!important;order:1;flex:0 0 auto;font-size:10px;color:var(--em)}
+ #v-cmt .cmt-mobile-more{
+  display:inline-flex!important;order:2;align-items:center;justify-content:center;
+  min-height:34px;padding:0 7px;border:1px solid var(--el);
+  background:transparent;color:var(--ei);font:600 10px var(--font);cursor:pointer}
+ #v-cmt #cmt-atu{order:3;min-height:34px;font-size:10px;padding:0 7px}
+ #v-cmt #cmt-dr-x{order:4;min-height:34px;padding:0 10px;color:var(--ei)}
+ #v-cmt .cmt-dr-tb{display:none!important}
+ #v-cmt .cmt-dr .cmt-grid{
+  display:block!important;flex:1 1 auto;min-height:0;margin:0!important;
+  overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;
+  padding:12px 12px 28px!important}
+ #v-cmt .cmt-dr .cmt-side{display:contents!important}
+ #v-cmt .cmt-dr #cmt-ass,#v-cmt .cmt-dr #cmt-urg-p,
+ #v-cmt .cmt-dr #cmt-dv-p{margin:0!important}
+ #v-cmt .cmt-dr[data-t=m] .cmt-grid{display:none!important}
+ #v-cmt .cmt-dr #cmt-mais{display:none!important}
+ #v-cmt .cmt-dr[data-t=m] #cmt-mais{
+  display:block!important;flex:1;min-height:0;overflow:auto;
+  padding:12px 12px 28px;margin:0!important;overscroll-behavior:contain}
+ #v-cmt .cmt-dr #cmt-ass{min-height:0}
+ #v-cmt .cmt-pn-not,#v-cmt .cmt-pn-dil{
+  position:fixed!important;inset:0 0 var(--cmt-mob-dock-h) 0!important;
+  width:100%!important;height:auto!important;max-height:none!important;
+  z-index:96;box-shadow:0 -16px 44px rgba(15,35,43,.14)}
+ #v-cmt .cmt-pn-h{min-height:54px;gap:8px;padding:10px 12px!important}
+ #v-cmt .cmt-pn-b{padding:12px 12px 28px;overscroll-behavior:contain}
+ #v-cmt .cmt-fastnav{
+  display:none!important;position:fixed!important;z-index:105!important;
+  left:0!important;right:0!important;bottom:var(--cmt-mob-dock-h)!important;
+  top:auto!important;max-width:none!important;width:100%!important;
+  margin:0!important;box-sizing:border-box;
+  padding:14px 14px 13px!important;background:var(--ew);
+  border:1px solid var(--el);border-top:2px solid var(--eo);
+  box-shadow:0 -12px 32px rgba(15,35,43,.14)}
+ body.cmt-search-on #v-cmt .cmt-fastnav{display:block!important}
+ #v-cmt .cmt-fastnav .qf-row{grid-template-columns:86px minmax(0,1fr)}
+ #v-cmt .cmt-fastnav .qf-k{padding-right:36px}
+ #v-cmt .cmt-fastnav .qf-go{height:36px;margin-top:8px}
+ #v-cmt .cmt-fastnav .cmt-fastnav-close{
+  display:grid;place-items:center;position:absolute;right:10px;top:8px;
+  width:32px;height:32px;border:1px solid var(--el);background:var(--ep);
+  color:var(--ei);font-size:19px;cursor:pointer}
+}
+@media(max-width:365px){
+ #v-cmt .cmt-mobile-dock{gap:0;padding-left:2px;padding-right:2px}
+ #v-cmt .cmt-mobile-action{font-size:7.5px}
+ #v-cmt .cmt-mobile-action svg{width:18px;height:18px}
+ #v-cmt .cmt-mobile-pn-title{font-size:14px}
+ #v-cmt .cmt-mobile-more{font-size:9px;padding:0 5px}
+}
+@media(max-width:780px) and (prefers-reduced-motion:reduce){
+ #v-cmt .cmt-dr-b{transition:none!important}
+}
+
 </style>
 </body>
 </html>
