@@ -5,12 +5,13 @@
 # o Modus Operandi público (/modus/, com /compendio/ mantido), a Ex Officio (/equipe/), o Amicus Curiae · Index (/lote/) e as funções /api/* (login da equipe e leitura/gravação
 # das pautas no procs-muta, com o GH_TOKEN guardado na Vercel), o editor do Modus Operandi (/editor/)
 # e a Enciclopédia, servida só pelo /api/compendio a quem tem o modo avançado (apoio/acessos.json).
+# Também publica o pacote da extensão Muta (/extensao/muta-pje.zip) e o ementário curado resumido que ela lê (/jurisprudencia/curados*.json.gz).
 # Requer o segredo VERCEL_TOKEN (Settings › Secrets and variables › Actions).
 name: CMT-monitor na Vercel
 on:
   push:
     branches: [main]
-    paths: ["monitor/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml", "padrao/acervo-fonte.js", "precedentes/jurisprudencia/**", "scripts/jurisprudencia/**"]
+    paths: ["monitor/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", ".github/workflows/vercel-monitor.yml", "padrao/acervo-fonte.js", "precedentes/jurisprudencia/**", "scripts/jurisprudencia/**", "precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "extensao/**"]
   # o commit do Base (feito com o GITHUB_TOKEN) não dispara outros workflows: publica de novo quando ele termina
   workflow_run:
     workflows: ["Base gabcmt"]
@@ -87,6 +88,10 @@ jobs:
           # gerados aqui (não ficam no Git); lidos pelo ementário do Compendium em /jurisprudencia/
           python3 scripts/jurisprudencia/gerar_busca.py
           mkdir -p site/public/jurisprudencia && cp precedentes/jurisprudencia/indice.json.gz site/public/jurisprudencia/ && cp -R precedentes/jurisprudencia/busca site/public/jurisprudencia/
+          # Ementário curado resumido (curados.json.gz e curados-texto.json.gz), lido pela extensão Muta junto com a série histórica
+          python3 scripts/jurisprudencia/gerar_curados.py --saida site/public/jurisprudencia
+          # Extensão Muta (painel lateral ao lado do PJe): pacote para instalar sem compactação, em /extensao/muta-pje.zip
+          mkdir -p site/public/extensao && (cd extensao && zip -qr -X ../site/public/extensao/muta-pje.zip . -x 'README.md')
           printf '{"framework":null,"buildCommand":"","installCommand":"","outputDirectory":"public","functions":{"api/pauta.js":{"maxDuration":60},"api/editor.js":{"maxDuration":60},"api/acesso.js":{"maxDuration":60}},"redirects":[{"source":"/","destination":"/monitor/index.html","permanent":false},{"source":"/monitor","destination":"/monitor/index.html","permanent":false},{"source":"/monitor/","destination":"/monitor/index.html","permanent":false},{"source":"/index","destination":"/lote/","permanent":false},{"source":"/index/","destination":"/lote/","permanent":false},{"source":"/index/cm","destination":"/lote/cmt/","permanent":false},{"source":"/index/cm/","destination":"/lote/cmt/","permanent":false},{"source":"/index/cmt","destination":"/lote/cmt/","permanent":false},{"source":"/index/cmt/","destination":"/lote/cmt/","permanent":false},{"source":"/index/cg","destination":"/lote/cg/","permanent":false},{"source":"/index/cg/","destination":"/lote/cg/","permanent":false},{"source":"/lotes","destination":"/lote/","permanent":false},{"source":"/lotes/","destination":"/lote/","permanent":false},{"source":"/cmt/lotes","destination":"/lote/cmt/","permanent":false},{"source":"/cmt/lotes/","destination":"/lote/cmt/","permanent":false},{"source":"/cg/lotes","destination":"/lote/cg/","permanent":false},{"source":"/cg/lotes/","destination":"/lote/cg/","permanent":false}]}\n' > site/vercel.json
       - name: Publica
         env:
