@@ -10,14 +10,28 @@ const CTL = ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias
 const GESTOR = ['servidor', 'corretor', 'resultado'];   /* designação e desfecho: só o gestor (CMT_GESTOR) */
 const dg = s => String(s || '').replace(/\D/g, '');
 /* grava campos de um processo da pauta; devolve {status, body}. gestorOk: pode designar e registrar o desfecho */
+/* etapa marcada pelo relator: a etapa adiante preenche as anteriores vazias com a data do dia;
+   desfazer uma etapa desfaz também as seguintes (mesma regra do seletor de etapa da página da pauta) */
+const ETAPAS = ['dataMinuta', 'dataCorrecao', 'dataLiberacao'];
+function camposEtapa(it, e) {
+  const k = ETAPAS.indexOf(e.campo), C = {};
+  ETAPAS.forEach((f, i) => {
+    if (e.desfazer) { if (i >= k) C[f] = ''; }
+    else if (i <= k) C[f] = it[f] || e.hoje;
+  });
+  return C;
+}
 async function gravarItem(data, b, u, gestorOk, whatsappEvent) {
-  const rel = 'acervo/sessoes/' + data + '.json', alvo = dg(b.cnj), C = b.campos || {};
+  const rel = 'acervo/sessoes/' + data + '.json', alvo = dg(b.cnj);
+  let C = b.campos || {};
+  if (b.etapa && (ETAPAS.indexOf(b.etapa.campo) < 0 || !L.dataOk(b.etapa.hoje))) return { status: 400, body: { erro: 'Etapa inválida.' } };
   if (alvo.length !== 20) return { status: 400, body: { erro: 'número do processo inválido' } };
   for (let t = 0; t < 4; t++) {
     const { dados, sha } = await L.lerJson(rel);
     const lista = b.lista === 'previa' && !(dados.itens || []).length ? 'previa' : 'itens';
     const it = (dados[lista] || []).find(i => dg(i.cnj) === alvo);
     if (!it) return { status: 404, body: { erro: 'processo fora desta pauta' } };
+    if (b.etapa) C = Object.assign({}, b.campos || {}, camposEtapa(it, b.etapa));
     const mud = [];
     const designacoes = gestorOk ? ['servidor', 'corretor'].filter(k => k in C && L.norm(it[k]) !== L.norm(C[k]))
       .map(k => ({ papel: k === 'servidor' ? 'minuta' : 'correção', de: it[k] || '', para: String(C[k] || '') })) : [];

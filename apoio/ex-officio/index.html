@@ -4017,15 +4017,46 @@ document.addEventListener('click',function(e){if(!e.target.closest||!e.target.cl
 CMT.entrou=true;$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;cmtPinta();
 try{api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify({acao:'acesso'})}).catch(function(){});}catch(x){}});
 function cmtAbrir(){if(CMT.dados&&Date.now()-CMT.atualizado<60000){cmtPinta();return;}cmtCarregar();}
-function cmtCarregar(){
-  if(CMT.carregando)return;CMT.carregando=true;
+/* a sessão pedida (seletor, atalhos, links do painel) vale para as recargas seguintes */
+function cmtCarregar(s){
+  if(typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s))CMT.ses=s;
+  if(CMT.carregando){CMT.denovo=true;return;}CMT.carregando=true;
   if(!CMT.entrou){$('#cmt-load').hidden=false;$('#cmt-wrap').hidden=true;}
   var msgs=['Lendo a ficha única, o calendário das sessões e as pautas publicadas…','Separando o que aguarda assinatura e liberação…','Conferindo urgências, marcos e ausências…'],i=0;
   var tm=setInterval(function(){i=(i+1)%msgs.length;var e=$('#cmt-ld-m');if(e)e.textContent=msgs[i];},1600);
-  api('/api/painel?cmt=1'+(CMT.per||'')).then(function(j){CMT.dados=j;CMT.atualizado=Date.now();cmtPinta();})
+  api('/api/painel?cmt=1'+(CMT.per||'')+(CMT.ses?'&s='+CMT.ses:'')).then(function(j){cmtPendAplica(j);CMT.dados=j;CMT.atualizado=Date.now();cmtPinta();})
     .catch(function(e){CMT.entrou=true;$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
       console.error('[painel do relator]',e);$('#cmt-sub').textContent=(e&&e.erro)||(e&&e.message)||'Não foi possível montar o painel.';})
-    .then(function(){clearInterval(tm);CMT.carregando=false;});}
+    .then(function(){clearInterval(tm);CMT.carregando=false;if(CMT.denovo){CMT.denovo=false;cmtCarregar();}});}
+/* etapas do item (minuta, correção, liberação). A marca aparece na hora; a gravação segue ao servidor.
+   Marcar uma etapa preenche as anteriores vazias; desfazer uma etapa desfaz também as seguintes (como na página da pauta).
+   A leitura logo depois do commit pode vir defasada: a marca local vale até o servidor confirmar, ou por 2 minutos. */
+var CMTET=['dataMinuta','dataCorrecao','dataLiberacao'];
+function cmtEtapaCalc(x){return x.dataLiberacao?'liberado':x.dataCorrecao?'corrigido':x.dataMinuta?'minutado':'pendente';}
+function cmtPendAplica(j){var P=CMT.pend||{},it=((j&&j.pauta)||{}).itens||[],ses=((j&&j.pauta)||{}).date;
+  it.forEach(function(x){var p=P[x.cnj];if(!p||p.ses!==ses)return;
+    if(Date.now()>p.ate||CMTET.every(function(f){return (x[f]||'')===(p.v[f]||'');})){delete P[x.cnj];return;}
+    CMTET.forEach(function(f){x[f]=p.v[f]||'';});x.etapa=cmtEtapaCalc(x);});}
+function cmtRepinta(x){try{cmtInd();}catch(e){}cmtPauta();cmtAtuLote();
+  var pd=document.getElementById('cmt-pdlg'),tr=pd&&pd.querySelector('.cmt-pd-ac .cmt-tr');
+  if(tr&&x&&pd.querySelector('h2')&&pd.querySelector('h2').textContent===x.cnj)tr.innerHTML=cmtPasso(x);}
+function cmtEtapaLocal(x,campo,desfazer){var k=CMTET.indexOf(campo),hj=(CMT.dados||{}).hoje||hoje(),ant={};
+  CMTET.forEach(function(f,i){ant[f]=x[f]||'';if(desfazer){if(i>=k)x[f]='';}else if(i<=k)x[f]=x[f]||hj;});
+  x.etapa=cmtEtapaCalc(x);CMT.pend=CMT.pend||{};
+  CMT.pend[x.cnj]={ses:((CMT.dados||{}).pauta||{}).date,ate:Date.now()+120e3,v:{dataMinuta:x.dataMinuta,dataCorrecao:x.dataCorrecao,dataLiberacao:x.dataLiberacao}};
+  return ant;}
+function cmtEtapa(cnj,campo,desfazer,ok){
+  var sd=((CMT.dados||{}).pauta||{}).date||'',x=(((CMT.dados||{}).pauta||{}).itens||[]).filter(function(y){return y.cnj===cnj;})[0];
+  if(!x){toast('Item fora da pauta exibida.');return Promise.resolve(false);}
+  var ant=cmtEtapaLocal(x,campo,desfazer);cmtRepinta(x);
+  var corpo=campo==='dataLiberacao'?{acao:'liberar',sessao:sd,cnj:cnj,desfazer:!!desfazer}:{acao:'etapa',sessao:sd,cnj:cnj,campo:campo,desfazer:!!desfazer};
+  return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(corpo)}).then(function(r){
+      CMTET.forEach(function(f){if(r&&f in r)x[f]=r[f]||'';});x.etapa=cmtEtapaCalc(x);
+      if(CMT.pend&&CMT.pend[cnj])CMT.pend[cnj].v={dataMinuta:x.dataMinuta,dataCorrecao:x.dataCorrecao,dataLiberacao:x.dataLiberacao};
+      cmtRepinta(x);if(ok)toast(ok);cmtRecarregaTarde();return true;})
+    .catch(function(e){CMTET.forEach(function(f){x[f]=ant[f];});x.etapa=cmtEtapaCalc(x);if(CMT.pend)delete CMT.pend[cnj];cmtRepinta(x);
+      toast((e&&e.erro)||'Não foi possível gravar a etapa.');return false;});}
+function cmtRecarregaTarde(){clearTimeout(CMT.tmR);CMT.tmR=setTimeout(function(){CMT.atualizado=0;cmtCarregar();},8000);}
 /* produtividade pelas regras do gabinete (apoio/regras/produtividade.json; api/_produtividade.js):
    pontos no período contra a meta diária × dias úteis do servidor, descontadas as ausências */
 function pdvPinta(j,eq){var P=j.produtividade,f=function(n){return String(Math.round((Number(n)||0)*100)/100).replace('.',',');};
@@ -4224,7 +4255,12 @@ var x=d.querySelector('[data-x]');if(x)x.addEventListener('click',function(){res
 function cmtDlg(h,aoEnviar){var o=document.getElementById('cmt-dlg');if(o)o.remove();
 var d=document.createElement('dialog');d.id='cmt-dlg';d.className='dv-dlg cmt-dlg';d.innerHTML='<form method="dialog">'+h+'</form>';
 document.body.appendChild(d);
-d.querySelector('[data-x]').onclick=function(){d.close();d.remove();};
+/* todos os botões de fechar (o x do topo e o Fechar/Cancelar do rodapé); antes só o x fechava e o diálogo
+   ficava preso na tela, cobrindo os demais botões do card */
+var fechar=function(){if(d.open)d.close();d.remove();};
+[].forEach.call(d.querySelectorAll('[data-x]'),function(b){b.addEventListener('click',fechar);});
+d.addEventListener('click',function(e){if(e.target===d||(e.target.closest&&e.target.closest('[data-cgo]')))fechar();});
+d.addEventListener('cancel',function(e){e.preventDefault();fechar();});
 var f=d.querySelector('form');
 f.onsubmit=function(e){e.preventDefault();var b=f.querySelector('[type=submit]');if(b)b.disabled=true;
   Promise.resolve(aoEnviar(f)).then(function(){d.close();d.remove();}).catch(function(er){if(b)b.disabled=false;toast(er.message||'Não foi possível registrar.');});};
@@ -4268,9 +4304,8 @@ document.addEventListener('click',function(e){
 var et=e.target.closest&&e.target.closest('[data-cet]');
 if(et){var cj=et.getAttribute('data-cnj'),cp=et.getAttribute('data-cet'),ja=/\bs[12]\b/.test(et.className);
   var nm=cp==='dataMinuta'?'minutada':'corrigida';
-  var grava=function(){et.classList.add('ocupado');
-    cmtPost({acao:'etapa',sessao:((CMT.dados||{}).pauta||{}).date||'',cnj:cj,campo:cp,desfazer:ja},ja?'Marca desfeita.':'Minuta '+nm+'.');};
-  if(ja)cmtConfirmar('ob','Desfazer a marca',cj,'O item deixa de constar como '+nm+'.','Desfazer').then(function(ok){if(ok)grava();});
+  var grava=function(){cmtEtapa(cj,cp,ja,ja?'Marca desfeita.':'Minuta '+nm+'.');};
+  if(ja)cmtConfirmar('ob','Desfazer a marca',cj,'O item deixa de constar como '+nm+(cp==='dataMinuta'?'; a correção e a liberação, se houver, também são desfeitas.':'; a liberação, se houver, também é desfeita.'),'Desfazer').then(function(ok){if(ok)grava();});
   else grava();
   return;}});
 /* devolutiva: apontamento do relator que vira diligência para quem minutou */
@@ -4740,7 +4775,7 @@ document.addEventListener('click',function(e){
   var sd=((CMT.dados||{}).pauta||{}).date;
   var l=e.target.closest&&e.target.closest('[data-cl]');
   if(l){var cnj=l.getAttribute('data-cl'),on=l.classList.contains('on')||/\bs3\b/.test(l.className);
-    var gl=function(){l.classList.add('ocupado');cmtPost({acao:'liberar',sessao:sd,cnj:cnj,desfazer:on},on?'Liberação desfeita.':'Voto liberado.');};
+    var gl=function(){cmtEtapa(cnj,'dataLiberacao',on,on?'Liberação desfeita.':'Voto liberado.');};
     if(on)cmtConfirmar('ob','Desfazer a liberação',cnj,'O voto volta a constar como não liberado.','Desfazer').then(function(ok){if(ok)gl();});
     else gl();
     return;}
@@ -4748,20 +4783,19 @@ document.addEventListener('click',function(e){
   if(d){var c2=d.getAttribute('data-cd'),it2=(((CMT.dados||{}).pauta||{}).itens||[]).filter(function(x){return x.cnj===c2;})[0]||{cnj:c2};
     cmtDevolverDlg(it2);return;}
   var a=e.target.closest&&e.target.closest('[data-cas]');
-  if(a){var c3=a.getAttribute('data-cas');if(confirm('Assinar a monocrática de '+c3+'?'))cmtPost({acao:'assinar',cnj:c3},'Monocrática assinada.');return;}
+  if(a){var c3=a.getAttribute('data-cas');cmtConfirmar('ok','Assinar a monocrática',c3,'A monocrática passa a constar como assinada.','Assinar').then(function(ok){if(ok)cmtPost({acao:'assinar',cnj:c3},'Monocrática assinada.');});return;}
   var dvb=e.target.closest&&e.target.closest('[data-cdv]');
   if(dvb){var c4=dvb.getAttribute('data-cdv'),a4=(((CMT.dados||{}).assinar||{}).assinatura||[]).filter(function(x){return x.cnj===c4;})[0]||{};
-    var t4=prompt('Devolutiva para '+c4+' — vira diligência para '+(a4.servidor||'a equipe')+':');
-    if(t4&&t4.trim())cmtPost({acao:'devolver',cnj:c4,texto:t4.trim(),para:a4.servidor||'',sessao:sd},'Devolutiva enviada.');return;}
+    cmtDevolverDlg({cnj:c4,servidor:a4.servidor||'',assunto:a4.assunto||a4.classe||''});return;}
   var rs=e.target.closest&&e.target.closest('[data-crs]'),rm=e.target.closest&&e.target.closest('[data-crm]');
   if(rs||rm){var id=(rs||rm).getAttribute(rs?'data-crs':'data-crm'),cx=$('#cmt-dv-tx'),tr=(cx&&cx.value.trim())?cx.value:prompt('Resposta à dúvida:');
     if(tr&&tr.trim())cmtPost({acao:'responder',id:id,texto:tr.trim(),manter:!!rm},rm?'Resposta registrada; a dúvida continua aberta.':'Dúvida respondida e concluída.');return;}
   if(e.target&&e.target.id==='cmt-selt'){CMT.sel=CMT.sel||{};var L=cmtFiltra(),todos=L.every(function(x){return CMT.sel[x.cnj];});L.forEach(function(x){CMT.sel[x.cnj]=!todos;});cmtPauta();cmtAtuLote();return;}
   if(e.target&&e.target.id==='cmt-libl'){var m=cmtMarcados();if(!m.length)return;
-    if(!confirm('Liberar '+m.length+(m.length===1?' voto?':' votos?')))return;
-    var seq=Promise.resolve();m.forEach(function(cnj){seq=seq.then(function(){return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify({acao:'liberar',sessao:sd,cnj:cnj})});});});
-    seq.then(function(){CMT.sel={};toast(m.length+(m.length===1?' voto liberado.':' votos liberados.'));CMT.atualizado=0;cmtCarregar(sd);})
-      .catch(function(e){toast((e&&e.erro)||'Não foi possível liberar tudo.');CMT.atualizado=0;cmtCarregar(sd);});return;}});
+    cmtConfirmar('ok','Liberar selecionados',m.length+(m.length===1?' voto':' votos'),'Os itens marcados passam a constar como liberados; minuta e correção vazias recebem a data de hoje.','Liberar').then(function(ok){if(!ok)return;
+      var falhas=0,seq=Promise.resolve();m.forEach(function(cnj){seq=seq.then(function(){return cmtEtapa(cnj,'dataLiberacao',false).then(function(r){if(!r)falhas++;});});});
+      seq.then(function(){CMT.sel={};cmtAtuLote();cmtPauta();var n=m.length-falhas;
+        toast(falhas?n+' de '+m.length+' liberados; '+falhas+' não gravaram.':n+(n===1?' voto liberado.':' votos liberados.'));});});return;}});
 document.addEventListener('click',function(e){if(e.target&&(e.target.id==='cmt-atu'||e.target.id==='cmt-atu2')){CMT.atualizado=0;cmtCarregar();}});
 function cmtEndereco(){return /^#cmt/.test(location.hash)||/\/cmt\/?$/.test(location.pathname);}
 /* o endereço próprio do painel abre direto, sem entrada e sem perfil: a chave do link é a credencial */
