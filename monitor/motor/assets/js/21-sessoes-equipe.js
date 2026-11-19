@@ -624,10 +624,21 @@
   function faz(m, kind) { return kind === 'd' ? (m.minuta != null ? !!m.minuta : m.papel === 'equipe') : (m.correcao != null ? !!m.correcao : m.papel === 'assessoria'); }
   function pool(kind) { return S.equipe.filter(function (m) { return faz(m, kind); }); }
   function ausente(m, ss) { var pr = periodo(ss); return diasDisp(m, pr.de, pr.ate) === 0; }
+  /* matriz de minutas (apoio/equipe-matriz.json): histórico completo de redação e correção, inclusive o histórico de produção;
+     linha = [redator, tipo, seção, ramo, assunto, corretor, só histórico, pauta, data da minuta, processo, complexidade] */
+  var MAT = null, MAT_LENDO = false;
+  function matrizCarregar() {
+    if (MAT || MAT_LENDO || !W.ProcsMuta) return; MAT_LENDO = true;
+    Promise.resolve(W.ProcsMuta.ler('apoio/equipe-matriz.json')).then(function (t) { MAT = JSON.parse(t); HIST = null; }).catch(function () { MAT = { minutas: [] }; }).then(function () { MAT_LENDO = false; });
+  }
   function historico() {
+    if (!MAT) matrizCarregar();
     if (HIST) return HIST;
     var H = { d: new Map(), c: new Map() }, add = function (k, nome, a) { if (!a) return; var key = N(nome) + '|' + N(a); H[k].set(key, (H[k].get(key) || 0) + 1); };
-    S.sessoes.forEach(function (ss) { ss.itens.forEach(function (i) { if (i.servidor) add('d', nomeCad(i.servidor), i.assunto); if (i.corretor) add('c', nomeCad(i.corretor), i.assunto); }); });
+    var naMat = new Set();
+    if (MAT && MAT.minutas) MAT.minutas.forEach(function (r) { if (!r[4]) return; if (r[9]) naMat.add(r[9]); if (r[0]) add('d', nomeCad(r[0]), r[4]); if (r[5]) add('c', nomeCad(r[5]), r[4]); });
+    /* pautas do motor que ainda não entraram na matriz (designações novas) somam por cima, sem contar duas vezes */
+    S.sessoes.forEach(function (ss) { ss.itens.forEach(function (i) { if (naMat.has(dig(i.cnj))) return; if (i.servidor) add('d', nomeCad(i.servidor), i.assunto); if (i.corretor) add('c', nomeCad(i.corretor), i.assunto); }); });
     acervo().rows.forEach(function (r) {
       var a = campo(r, ['Assunto', 'Assunto_Principal']); if (!a) return;
       etiquetas(r).forEach(function (t) {
@@ -2004,6 +2015,17 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     publicar: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.pronta = on === false ? '' : hoje(); ss.publicada = on !== false; if (ss.publicada) ss.marcosPub = true; salvar(); if (root && !root.hidden) render(); return true; },
     /* publicar só os marcos da sessão (calendário e página inicial da Ex Officio); retirar os marcos retira também a listagem */
     /* equipe editada na página Pautas: quem minuta, quem corrige e quem entra na designação automática */
+    /* competências do servidor (especialidade, prefere, evita), da página Competências da equipe (Caput › Coordenação) */
+    equipeCompetencias: function (nome, c) { var m = membro(nome); if (!m || !c) return false;
+      ['exp', 'pref', 'nao'].forEach(function (k) { if (Array.isArray(c[k])) m[k] = c[k].map(function (x) { return String(x || '').trim(); }).filter(Boolean); }); HIST = null; salvar(); return true; },
+    /* regra de designação (minuta d, correção c) de um critério e chave: tema, hist, esp, sec, julg, pron */
+    desigRegra: function (cid, chave, kind, nome) { if (CRIT.indexOf(cid) < 0 || (kind !== 'd' && kind !== 'c') || !String(chave || '').trim()) return false;
+      if (!S.desig) S.desig = desigPadrao(); S.desig.rows = S.desig.rows || {};
+      var k = cid + ':' + N(chave), r = S.desig.rows[k] || (S.desig.rows[k] = { d: '', c: '', cap: String(chave).trim() });
+      r[kind] = nome ? (membro(nome) || { nome: nome }).nome : ''; HIST = null; salvar(); return true; },
+    matriz: function () { if (!MAT) matrizCarregar(); return MAT; },
+    /* dissociar da matriz de competências (false) ou religar (true); não muda Minuta, Correção nem a designação */
+    equipeMatriz: function (nome, dentro) { var m = membro(nome); if (!m) return false; if (dentro) delete m.matriz; else m.matriz = false; salvar(); return true; },
     equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto'].indexOf(campo) < 0) return false; m[campo] = !!valor; HIST = null; salvar(); return true; },
     publicarMarcos: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return false; ss.marcosPub = on !== false; if (!ss.marcosPub) { ss.publicada = false; ss.pronta = ''; } salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */

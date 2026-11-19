@@ -90,6 +90,8 @@ jobs:
           cp monitor/triagem/index.html site/public/caput/index.html
           cp monitor/triagem/index.html site/public/caput/pautas/index.html
           cp monitor/triagem/index.html site/public/monitor/triagem/index.html
+          # Competências da equipe: moldura da Coordenação do Caput (lê e grava pelo motor do Caput)
+          mkdir -p site/public/caput/competencias && cp monitor/competencias/index.html site/public/caput/competencias/index.html
           # Módulo comum "Atualizar acervo fonte" (planilhas → carga → Action acervo-fonte.yml), para qualquer página do site
           mkdir -p site/public/padrao && cp padrao/acervo-fonte.js site/public/padrao/acervo-fonte.js
           # Série histórica do Relator (precedentes/jurisprudencia): índice e arquivos de busca em texto integral,
