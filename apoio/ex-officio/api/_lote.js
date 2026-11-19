@@ -1,8 +1,8 @@
 /* Amicus Curiae · Index: três visões com o mesmo arquivo e a mesma base de lotes.
-     /index/cg/  controle geral (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
-     /index/     visão geral: os processos visíveis para a equipe
-     /index/cm/  visão CM (&rel=1, ou link próprio, ou perfil desembargador): os processos visíveis para o Desembargador
-   Rotas antigas /lotes/, /cmt/lotes/ e /cg/lotes/ permanecem apenas como compatibilidade.
+     /lote/cg/   controle geral (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
+     /lote/      visão geral: os processos visíveis para a equipe
+     /lote/cmt/  visão CM (&rel=1, ou link próprio, ou perfil desembargador): os processos visíveis para o Desembargador
+   O nome visual permanece "Index". /index/*, /lotes/, /cmt/lotes/ e /cg/lotes/ permanecem apenas como compatibilidade.
    Acesso: login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE).
    Servido pelo /api/painel?lote=1 (a Vercel no plano Hobby aceita no máximo 12 funções; este arquivo, com _, não conta como função).
    Leitura (equipe, gestor e relator):
