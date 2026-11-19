@@ -633,6 +633,26 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .mp-leg{position:absolute;left:64px;bottom:12px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--m2)}
 .mp-leg i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:-1px}.mp-leg b{font-family:"JetBrains Mono",ui-monospace,monospace;font-weight:500}
 .mp-dica{color:var(--cz)}
+/* Fila · modo Fases: blueprint em faixas por fase do fluxo */
+.bp{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.bp-h,.bp-g{display:grid;grid-template-columns:116px repeat(4,minmax(168px,1fr));gap:10px;min-width:860px}
+.bp-w{overflow-x:auto;padding-bottom:2px}
+.bp-h span{grid-column:auto;font-size:11.5px;color:var(--m);line-height:1.35}
+.bp-h span:first-child{grid-column:1}
+.bp-h b{display:block;font:600 10.5px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--tx)}
+.bp-fx{display:flex;align-items:center;justify-content:flex-end;text-align:right;font:600 10.5px "JetBrains Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--m2);border-right:3px solid var(--c,#8a948f);padding-right:8px}
+.bp-c{position:relative;border:1px solid var(--b);border-left:3px solid var(--c,#8a948f);background:var(--w);padding:9px 11px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:5px;min-width:0}
+.bp-c:hover{border-color:var(--c,#8a948f)}
+.bp-c.on,.bp-c:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
+.bp-c.vz{opacity:.5}
+.bp-c .bp-n{font-size:13px;font-weight:600;color:var(--g);line-height:1.25}
+.bp-c .bp-v{display:flex;align-items:center;gap:8px}
+.bp-c .bp-v b{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:16px;font-weight:600;color:var(--tx)}
+.bp-c .bp-v i{display:block;height:5px;background:var(--c,#8a948f);min-width:2px}
+.bp-c small{font-size:11.5px;color:var(--m);line-height:1.35}
+.bp-c:not(.fim)::after{content:"";position:absolute;right:-9px;top:50%;margin-top:-5px;border:5px solid transparent;border-left:6px solid var(--b2);z-index:1}
+.bp-nota{font-size:12px;color:var(--m);margin:0}
+.bp-p{max-height:620px}
 .mp-pn{display:grid;grid-template-columns:repeat(5,minmax(220px,1fr));gap:12px;overflow-x:auto}
 .mp-p{background:var(--w);border:1px solid var(--b);display:flex;flex-direction:column;max-height:560px;min-width:0}
 .mp-p header{display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:2px solid var(--b);font-size:13.5px}
@@ -1219,13 +1239,14 @@ function vFila(cab, estilo) {
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
     '<button type="button" class="btn" id="bt-pje" aria-expanded="' + F.pjeAberto + '">Pesquisa do PJe ' + (F.pjeAberto ? '▴' : '▾') + '</button><button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
     '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
-    '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['mapa', 'Mapa do fluxo'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
+    '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['mapa', 'Mapa do fluxo'], ['fases', 'Fases'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
     (emE ? '<button type="button" class="btn" data-ex-direto="copiar">Copiar lista</button>' : '') + '<button type="button" class="btn" data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button><span style="position:relative"><button type="button" class="btn" id="' + (emE ? 'bt-expe' : 'bt-exp') + '" aria-expanded="false">Exportar ▾</button></span></div>';
   if (F.pjeAberto) h += formPje();
   if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), noB = emE ? new Set(BASE().map((o) => o.d)) : IDX, fora = [...s].filter((d) => !noB.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + (emE ? ' no escaninho' : ' entre os em triagem') + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
   h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · ' + (emE ? 'todos do escaninho' : 'todos os em triagem') + '</span>') +
     '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + (emE ? '' : painelBase(L.length, ch.length)) + '</div>';
   if (F.ver === 'mapa') return h + vMapa(L) + '</div>';
+  if (F.ver === 'fases') return h + vFases(L) + '</div>';
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
   h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + (emE ? ' no escaninho' : ' no acervo filtrado') + '</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
   if (F.statsAberto) h += stats(L);
@@ -1263,6 +1284,38 @@ function mpCard(o, et) { const tp = MP_TIPO[o.tp], ob = mpObs(o, et);
     '<button type="button" class="mp-b" data-prontuario="' + o.d + '" aria-label="Prontuário de triagem de ' + o.cnj + '"><span class="mp-l1"><b>' + o.cnj + '</b><i class="mp-tp" style="background:' + tp[1] + '" title="' + tp[2] + '">' + tp[0] + '</i>' + mpIcones(o) + '</span>' +
     '<span class="mp-as" title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</span><span class="mp-tar">PJe: ' + esc(o.tarefa || 'sem tarefa') + '</span>' +
     (ob ? '<span class="mp-ob" style="background:' + ob[3] + '"><em style="color:' + ob[2] + '">' + esc(ob[0]) + '</em><span>' + esc(ob[1]) + '</span></span>' : '') + '</button></div>'; }
+/* ---------- Fila · modo Fases: as fases do fluxo em faixas (monocrática, pauta, fora da fila), com o painel da fase escolhida ---------- */
+const BP_FASES = [['Na fila', 'entrou e ainda não tem destino'], ['Pendência e instrução', 'o que falta para poder julgar'], ['Pronto para decidir', 'sem pendência, destino a lançar'], ['Destino definido', 'já lançado no PJe']];
+function vFases(L) {
+  L.forEach((o) => { o.tp = mpTipo(o); o.et = mpEtapa(o); });
+  const SES = [...new Set(L.filter((o) => o.et.indexOf('ses:') === 0).map((o) => o.et))].sort((a, b) => { const k = (x) => x.slice(4).split('/').reverse().join(''); return k(a).localeCompare(k(b)); });
+  const GR = { 'g:fora': ['n2', 'n3', 'so'], 'g:ses': SES }, ets = (id) => GR[id] || [id], nE = (id) => L.filter((o) => ets(id).indexOf(o.et) >= 0).length;
+  const mx = Math.max(1, L.length);
+  const cel = (id, col, row, nome, sub, cor, fim) => { const n = nE(id);
+    return '<button type="button" class="bp-c' + (fim ? ' fim' : '') + (MAPA_NO === id ? ' on' : '') + (n ? '' : ' vz') + '" data-mapa-no="' + esc(id) + '" aria-pressed="' + (MAPA_NO === id) + '" style="--c:' + cor + ';grid-column:' + col + ';grid-row:' + row + '" title="' + esc(nome + ' · ' + nf(n)) + '">' +
+      '<span class="bp-n">' + esc(nome) + '</span><span class="bp-v"><b>' + nf(n) + '</b><i style="width:' + Math.round(100 * n / mx) + '%"></i></span><small>' + esc(sub) + '</small></button>'; };
+  const faixa = (row, rot, cor) => '<span class="bp-fx" style="--c:' + cor + ';grid-column:1;grid-row:' + row + '">' + esc(rot) + '</span>';
+  let h = '<section class="bp" aria-label="Fases do fluxo da triagem"><div class="bp-w"><div class="bp-h"><span></span>' + BP_FASES.map((f) => '<span><b>' + esc(f[0]) + '</b>' + esc(f[1]) + '</span>').join('') + '</div>' +
+    '<div class="bp-g">' +
+      faixa(1, 'Monocrática', '#1b6496') + faixa(2, 'Pauta', '#24875c') + faixa(3, 'Fora da fila', '#8a2f22') +
+      cel('sp', 2, '1 / span 2', 'A triar', 'sem pendência registrada', '#4f6b62') +
+      cel('n1', 3, '1 / span 2', 'Nível 1 · prazo em curso', 'data certa: segue para a decisão', '#c4604f') +
+      cel('g:fora', 3, 3, 'Níveis 2 e 3 · sobrestado', 'sai da fila e volta ao cessar', '#8a2f22') +
+      cel('pm', 4, 1, 'Pronto · monocrática', 'hipótese do artigo 932', '#1b6496') +
+      cel('ps', 4, 2, 'Pronto · sessão', 'mérito ao colegiado', '#24875c') +
+      cel('mono', 5, 1, 'Monocrática lançada', 'destino gravado', '#1b6496', true) +
+      cel('g:ses', 5, 2, 'Seleção prévia e sessão', SES.length ? nf(SES.length) + ' sessão(ões) com processos' : 'nenhuma sessão com processos', '#1d4c48', true) +
+    '</div></div>' +
+    '<p class="bp-nota">A faixa diz quem assina; a coluna diz em que ponto do fluxo o processo está. Clique numa caixa para abrir os processos dela.</p>';
+  const sel = MAPA_NO && (GR[MAPA_NO] || /^(sp|n1|n2|n3|so|pm|ps|mono)$/.test(MAPA_NO) || MAPA_NO.indexOf('ses:') === 0) ? MAPA_NO : '';
+  const X2 = sel ? L.filter((o) => ets(sel).indexOf(o.et) >= 0) : L, lim = MAPA_LIM[0] || 40, todos = X2.length && X2.every((o) => SEL.has(o.d));
+  const rot = sel ? (GR[sel] ? (sel === 'g:fora' ? 'Fora da fila' : 'Seleção prévia e sessão') : (MP_ET[sel.indexOf('ses:') === 0 ? 'ses' : sel] || [sel])[0]) : 'Todos os filtrados';
+  W.__MAPA_COLS = [X2.map((o) => o.d)];
+  h += '<section class="mp-p bp-p" aria-label="Processos da fase"><header style="border-bottom-color:' + (sel ? mpEtCor(sel === 'g:fora' ? 'n3' : sel === 'g:ses' ? 'ses:' : sel) : '#8a948f') + '"><input type="checkbox" data-mapa-todos="0"' + (todos ? ' checked' : '') + ' aria-label="Marcar todos os processos da fase"><b>' + esc(rot) + '</b><span class="mono">' + nf(X2.length) + '</span><span style="flex:1"></span>' +
+    (sel ? '<button type="button" class="mp-fx" data-mapa-no="">limpar ✕</button>' : '') + '</header><div class="mp-ls">' +
+    (X2.length ? X2.slice(0, lim).map((o) => mpCard(o, o.et)).join('') + (X2.length > lim ? '<button type="button" class="lk mp-mais" data-mapa-mais="0">mostrar mais ' + nf(Math.min(40, X2.length - lim)) + ' de ' + nf(X2.length - lim) + '</button>' : '') : '<p class="mp-vz">Nada nesta fase.</p>') +
+    '</div></section></section>';
+  return h; }
 function vMapa(L) {
   L.forEach((o) => { o.tp = mpTipo(o); o.et = mpEtapa(o); });
   const TP = ['pj', 'ed', 'ag', 'jr'], cnt = (f) => L.filter(f).length, por = (et, t) => L.filter((o) => o.et === et && (!t || o.tp === t));
