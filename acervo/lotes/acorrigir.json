@@ -1496,8 +1496,87 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura no padrão (\"apelação e remessa necessária à sentença que concedeu parcialmente a segurança\"), com os pontos convertidos em \"ponto\" e o edital identificado como Exame Unificado",
+     "Redação"
+    ],
+    [
+     "Relatório",
+     "Apelante identificado: é o Conselho Federal da OAB, não \"a impetrada\"; fórmula \"alegando, em suma, que\" e incluído o pedido de efeito suspensivo (ID 354343912, f. 4), que o voto declara prejudicado sem que o relatório o mencionasse",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Controvérsia delimitada aos itens 4, 7 e 11 da peça e à letra \"b\" da questão 1; \"prova prática-profissional\" → \"peça prático-profissional\"",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Advertência \"O(A) examinando(a) deve fundamentar suas respostas…\" não está no espelho (ID 354343892); está transcrita nas informações (ID 354343902, f. 13)",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "\"(g.n)\" → \"(g.n.)\" nas duas transcrições",
+     "Redação"
+    ],
+    [
+     "Voto",
+     "\"A discordância da apelante\": quem discorda da correção é a impetrante; a apelante é a OAB",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Incluída a conclusão sobre os itens 4 e 7 (reforma e valor afastado: 0,10 + 0,25, conforme a sentença), que faltava entre a fundamentação e o dispositivo",
+     "Incluído"
+    ],
+    [
+     "Voto",
+     "Item 11: frase sem verbo (\"Fato sequer impugnado…\") reescrita",
+     "Redação"
+    ],
+    [
+     "Voto",
+     "Questão 1, letra \"b\": o texto dizia que o gabarito \"apreciou o recurso administrativo\" e usava \"aparente\" e \"eventual\" ao mesmo tempo em que afirmava erro grosseiro. Reescrito com a transcrição do gabarito (ID 354343892, f. 3) e com a razão de o mandado de segurança não contradizer a resposta",
+     "Corrigido"
+    ],
+    [
+     "Voto",
+     "Dispositivo especificado: \"dou parcial provimento\" não dizia o que se reformava; agora afasta 0,35 ponto (itens 4 e 7) e mantém 0,10 (item 11) e 0,60 (questão 1, letra \"b\")",
+     "Corrigido"
+    ],
+    [
+     "Ementa",
+     "Questões com \"saber se\" e conector \"e\"; dispositivo da ementa espelha o do voto",
+     "Redação"
+    ],
+    [
+     "Ementa",
+     "Rodapé no formato do gabinete: Tema 485 identificado pelo RE 632.853; súmulas com o tribunal antes; \"e\" antes do último item",
+     "Redação"
+    ],
+    [
+     "Acórdão",
+     "Texto do acórdão incluído",
+     "Incluído"
+    ],
+    [
+     "Conferência",
+     "IDs conferidos: sentença 354343907, apelação 354343912, contrarrazões 354343915, parecer 355552948 (opina pelo parcial provimento), edital 354343888 (item 3.5.11 na f. 16), espelho 354343892 e peça 354343894",
+     "Conferido"
+    ]
+   ],
+   "pendencias": [
+    "Validar o valor afastado (0,35 ponto: 0,10 no item 4 e 0,25 no item 7), tirado da fundamentação da sentença (ID 354343907).",
+    "A Procuradoria Regional da República opinou por afastar também o item 11 (só manter a questão 1, letra \"b\"); a minuta mantém o item 11. Conferir se é essa a posição do Relator."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5005384-36.2024.4.03.6000.json.gz",
