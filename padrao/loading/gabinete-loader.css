@@ -9,6 +9,14 @@
 [data-cmt-loader-family="office"]{--cmtl-a:#31635b;--cmtl-b:#20494c}
 [data-cmt-loader-family="abinitio"]{--cmtl-a:#245d56;--cmtl-b:#173f46}
 [data-cmt-loader-family="compendium"]{--cmtl-a:#315b70;--cmtl-b:#172e43;--cmtl-accent:#d7b45e}
+[data-cmt-loader-family="central"]{--cmtl-a:#285c59;--cmtl-b:#173a4e;--cmtl-accent:#d4a643}
+.cmtl-full[data-cmt-loader-family="central"],.cmt-load[data-cmt-loader="legacy"][data-cmt-loader-family="central"]{
+  background:
+    radial-gradient(60% 72% at 28% 42%,rgba(49,99,91,.88),transparent 72%),
+    radial-gradient(62% 76% at 76% 56%,rgba(49,91,112,.82),transparent 74%),
+    radial-gradient(130% 100% at 50% 45%,transparent 46%,rgba(8,25,35,.64) 100%),
+    linear-gradient(135deg,#285c59 0%,#204f59 46%,#173a4e 100%);
+}
 [data-cmt-loader-family="relator"],[data-cmt-loader-family="relatorios"]{--cmtl-a:#3f4a43;--cmtl-b:#222a25}
 [data-cmt-loader-family="blue"]{--cmtl-a:#315b70;--cmtl-b:#172e43}
 [data-cmt-loader-family="graphite"]{--cmtl-a:#3f4a43;--cmtl-b:#222a25}
