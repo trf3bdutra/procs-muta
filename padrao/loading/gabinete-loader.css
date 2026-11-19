@@ -71,3 +71,9 @@
 .cmtl-adopt-inline>.cmtl-mini::after{animation-delay:1.35s}.cmtl-adopt-inline>.cmtl-mini svg{width:27px;height:31px;color:#a77c27}
 .cmtl-adopt-inline>.cmtl-inline-track{width:min(260px,68vw);height:3px;margin:8px 0 4px}
 .cmtl-adopt-inline>b{font-size:16px!important;color:#173f3d!important}.cmtl-adopt-inline>span{font-size:12px;color:#718078}
+
+.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .star{
+  display:grid!important;place-items:center!important;width:57px!important;height:64px!important;margin:0!important;
+  background:transparent!important;clip-path:none!important;animation:none!important;
+}
+.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .star svg{width:57px;height:64px;color:var(--cmtl-accent)}
