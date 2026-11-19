@@ -238,6 +238,14 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 .col-area .b{white-space:normal}
 @media(max-width:900px){.lx-sub{display:block!important;max-height:none!important}.col-areas{margin:6px 0}.col-areas .col-area{max-width:100%}}
 
+
+.col-select-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 14px;background:var(--ep2);border:1px solid var(--el);margin-top:10px}
+.col-select-bar>b{font-size:12px;color:var(--ei);margin-right:auto}
+.col-select-bar>p{flex:1 1 100%;font-size:11px;color:var(--em);margin:0}
+.col-select-bar #csel-cont{font:11px var(--emono);color:var(--em)}
+.col-select-bar .b{white-space:normal}.col-ch{width:62px;text-align:center}
+.col-ch input{width:17px;height:17px;accent-color:var(--eg);cursor:pointer}
+@media(max-width:900px){.col-select-bar{padding:10px}}
 </style>
 <style id="office-layout-refine">
 
@@ -471,6 +479,9 @@ function montar(lotes,id,usuario){
   ITENS=LOTE.itens.filter(it=>(!FILT_SESSAO||it.sessao===FILT_SESSAO)&&(!FILT_MINUTISTA||String((it.equipe&&it.equipe.minuta)||'').toLowerCase()===FILT_MINUTISTA.toLowerCase())).sort((a,b)=>ord.indexOf(a.grupo)-ord.indexOf(b.grupo)||a.sessao.localeCompare(b.sessao)||a.item-b.item);
   ITENS.forEach(it=>it.uid=it.sessao+'-'+it.item);
   const sit=[...new Set(ITENS.map(i=>i.equipe&&i.equipe.situacao).filter(Boolean))];
+  const assuntos=[...new Set(ITENS.map(x=>x.assunto||x.tipo_caso).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const recursos=[...new Set(ITENS.map(x=>x.recurso).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const resultados=[...new Set(ITENS.map(x=>x.resultado).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   const grs=LOTE.grupos.filter(g=>ITENS.some(i=>i.grupo===g.id)).map(g=>({k:g.id,r:g.rotulo,c:g.cor,n:ITENS.filter(i=>i.grupo===g.id).length}));
   if(ITENS.some(i=>!i.grupo))grs.push({k:'',r:'Outros',c:OUT.cor,n:ITENS.filter(i=>!i.grupo).length});
     const contexto=LOTE.virtual?'Coleção de Pauta · sessão '+br(LOTE.sessoes[0])+' · matriz geral':LOTE.tipo==='pauta'?'Lote de pauta · sessão '+br(LOTE.sessoes[0]):'Coleção avulsa';
@@ -496,10 +507,21 @@ function montar(lotes,id,usuario){
      ${MODO_REL?'':`<span class="cmt-seg" role="group" aria-label="Visão" title="O que cada página mostra: o Relator vê os processos marcados para ele (no automático, os corrigidos ou liberados).">${(MODO==='cg'?[['tudo','Tudo'],['eq','Como a equipe vê'],['rel','Como o Relator vê']]:[['eq','Equipe'],['rel','Como o Relator vê']]).map(([k,r])=>`<button type="button" data-vz="${k}" aria-pressed="${k===VZ}">${r}</button>`).join('')}</span>`}
      <label class="cmt-bq"><input type="search" id="q" placeholder="item, processo, parte ou variação"></label>
      <select class="cmt-sel" id="ff"><option value="">Todas as variações</option>${LOTE.colunas.map(c=>`<option value="${c.id}">${esc(c.rotulo)}</option>`).join('')}</select>
-     <select class="cmt-sel so-equipe" id="fs"><option value="">Todas as situações</option>${sit.map(s=>`<option>${esc(s)}</option>`).join('')}</select>
+     <select class="cmt-sel" id="fa" aria-label="Filtrar por assunto"><option value="">Todos os assuntos</option>${assuntos.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join('')}</select>
+      <select class="cmt-sel" id="fr" aria-label="Filtrar por recurso"><option value="">Todos os recursos</option>${recursos.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join('')}</select>
+      <select class="cmt-sel" id="fres" aria-label="Filtrar por resultado"><option value="">Todos os resultados</option>${resultados.map(a=>`<option value="${esc(a)}">${esc(a)}</option>`).join('')}</select>
+      <select class="cmt-sel so-equipe" id="fs"><option value="">Todas as situações</option>${sit.map(s=>`<option>${esc(s)}</option>`).join('')}</select>
    </div></div>
-   ${MODO==='cg'?`<div class="vzbar" id="vzbar"><span>Nos processos filtrados:</span><b>Equipe</b><button type="button" class="b" data-lt="e1">Mostrar</button><button type="button" class="b" data-lt="e0">Ocultar</button><b>Relator</b><button type="button" class="b" data-lt="ra">Automático</button><button type="button" class="b" data-lt="r1">Sempre</button><button type="button" class="b" data-lt="r0">Nunca</button><span class="k" id="vz-m">Automático: o Relator vê quando o processo estiver corrigido ou liberado.</span></div>`:''}
-   <div class="cmt-tw"><table class="cmt-tb" id="mx"><thead><tr><th>Sessão</th><th>Item</th><th>Processo</th><th>Exequente</th><th>Executado</th><th>Rec.</th>${MODO==='cg'?'<th>Equipe</th><th>Relator</th>':''}${LOTE.colunas.map(c=>`<th class="v"><div>${esc(c.rotulo)}</div></th>`).join('')}<th>Observação</th></tr></thead><tbody id="mxb"></tbody></table></div>
+   ${MODO==='cg'&&LOTE.virtual?`<div class="col-select-bar" id="col-select-bar">
+      <b>Selecionar processos da sessão</b>
+      <button class="b" id="csel-vis" type="button">Selecionar filtrados</button>
+      <button class="b" id="csel-limpar" type="button">Limpar seleção</button>
+      <span id="csel-cont" role="status">0 selecionados</span>
+      <button class="b pri" id="csel-criar" type="button">Criar lote desta seleção</button>
+      <p>Use assunto, recurso, resultado, busca ou grupo. A seleção é uma lista explícita de processos, não uma nova coleção.</p>
+    </div>`:''}
+    ${MODO==='cg'?`<div class="vzbar" id="vzbar"><span>Nos processos filtrados:</span><b>Equipe</b><button type="button" class="b" data-lt="e1">Mostrar</button><button type="button" class="b" data-lt="e0">Ocultar</button><b>Relator</b><button type="button" class="b" data-lt="ra">Automático</button><button type="button" class="b" data-lt="r1">Sempre</button><button type="button" class="b" data-lt="r0">Nunca</button><span class="k" id="vz-m">Automático: o Relator vê quando o processo estiver corrigido ou liberado.</span></div>`:''}
+   <div class="cmt-tw"><table class="cmt-tb" id="mx"><thead><tr>${MODO==='cg'&&LOTE.virtual?'<th title="Selecionar processos da matriz">Selecionar</th>':''}<th>Sessão</th><th>Item</th><th>Processo</th><th>Exequente</th><th>Executado</th><th>Rec.</th>${MODO==='cg'?'<th>Equipe</th><th>Relator</th>':''}${LOTE.colunas.map(c=>`<th class="v"><div>${esc(c.rotulo)}</div></th>`).join('')}<th>Observação</th></tr></thead><tbody id="mxb"></tbody></table></div>
    ${ITENS.length?'':`<p class="none">${RELATOR?'Nenhum processo deste lote está pronto ainda.':'Nenhum processo neste lote.'}</p>`}
   </div></section>
   <section class="lx-sec" id="sec-pf"><div class="lx-shd"><div><p class="lx-k">02 / Processo a processo</p><h2>Perfis e <em>minutas.</em></h2><p class="lx-d">Identificação, enquadramento, prontuário e minuta formatada, pronta para copiar.</p></div></div>
@@ -508,14 +530,15 @@ function montar(lotes,id,usuario){
   for(const it of ITENS){
     const c=gcor(it);
     if(it.grupo!==last){const n=ITENS.filter(i=>i.grupo===it.grupo).length,g=LOTE.grupos.find(x=>x.id===it.grupo);
-      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length+(MODO==='cg'?2:0)}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n ghn">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
+      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${7+LOTE.colunas.length+(MODO==='cg'?2:0)+(MODO==='cg'&&LOTE.virtual?1:0)}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n ghn">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
     const cells=LOTE.colunas.map(f=>`<td class="f">${it.variacoes.includes(f.id)?`<span class="dot" title="${esc(f.rotulo)}" style="background:${f.id==='ORI'?'var(--er)':c}"></span>`:''}</td>`).join('');
-    h+=`<tr class="r${MODO==='cg'&&!it.verEquipe?' oc-e':''}" data-u="${it.uid}"><td style="border-left:4px solid ${c}" class="cnj">${br(it.sessao).slice(0,5)}</td><td class="ii">${pad(it.item)}</td><td class="cnj">${it.processo.slice(0,15)}</td><td>${esc(it.exequente)}</td><td>${esc(it.executado)}</td><td>${/^ED/.test(it.recurso)?'ED':'Apel.'}</td>${MODO==='cg'?celulasVis(it):''}${cells}<td class="obs">${esc(it.observacao)}</td></tr>`;
+    h+=`<tr class="r${MODO==='cg'&&!it.verEquipe?' oc-e':''}" data-u="${it.uid}">${MODO==='cg'&&LOTE.virtual?`<td class="col-ch"><input type="checkbox" data-csel="${it.uid}" aria-label="Selecionar processo ${esc(it.processo)}"></td>`:''}<td style="border-left:4px solid ${c}" class="cnj">${br(it.sessao).slice(0,5)}</td><td class="ii">${pad(it.item)}</td><td class="cnj">${it.processo.slice(0,15)}</td><td>${esc(it.exequente)}</td><td>${esc(it.executado)}</td><td>${/^ED/.test(it.recurso)?'ED':'Apel.'}</td>${MODO==='cg'?celulasVis(it):''}${cells}<td class="obs">${esc(it.observacao)}</td></tr>`;
   }
   $('#mxb').innerHTML=h;
   $('#profiles').innerHTML=ITENS.map(perfil).join('');
   ligaCab();
   ligaVisLotes();
+  if(MODO==='cg'&&LOTE.virtual)ligarSelecao();
   document.querySelectorAll('#mxb tr.r').forEach(r=>r.onclick=()=>vai(r.dataset.u));
   ligaSub();
   document.querySelectorAll('#met [data-g]').forEach(d=>d.onclick=()=>{const g=d.dataset.g;offG.has(g)?offG.delete(g):offG.add(g);d.classList.toggle('off');filtra()});
@@ -529,7 +552,8 @@ function montar(lotes,id,usuario){
     document.querySelectorAll('#mx input[data-ve],#mx select[data-vr]').forEach(el=>{el.disabled=true;el.title='Matriz geral automática: crie um índice temático para editar a visibilidade de processos.'});
     const barra=$('#vzbar');if(barra){barra.querySelectorAll('button').forEach(el=>el.disabled=true);barra.title='Matriz automática derivada da pauta (somente leitura)';}
   }
-  $('#q').oninput=filtra;$('#ff').onchange=filtra;$('#fs').onchange=filtra;filtra();
+  $('#q').oninput=filtra;$('#ff').onchange=filtra;$('#fs').onchange=filtra;
+  $('#fa').onchange=filtra;$('#fr').onchange=filtra;$('#fres').onchange=filtra;filtra();
   const m=location.hash.match(/^#p=(.+)$/); if(m)setTimeout(()=>vai(decodeURIComponent(m[1])),150);
 }
 function ligaSub(){
@@ -756,18 +780,67 @@ async function copia(v){
   toast(ok?(k==='*'?'Minuta copiada':ks[0][1].charAt(0)+ks[0][1].slice(1).toLowerCase()+' copiado'):'Não foi possível copiar: selecione o texto e use Ctrl+C');
 }
 function vai(uid){if(CX.aberto){const it=ITENS.find(i=>i.uid===uid);if(it&&it.minuta){$('#cx-it').value=uid;compara()}}const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
+/* Seleção explícita de processos na matriz da pauta, sem criar coleções por sessão. */
+function atualizarSelecao(){
+ const e=$('#csel-cont');if(e)e.textContent=SELEC.size+' selecionado'+(SELEC.size===1?'':'s');
+ document.querySelectorAll('[data-csel]').forEach(x=>{x.checked=SELEC.has(x.dataset.csel)});
+}
+function ligarSelecao(){
+ SELEC.clear();
+ document.querySelectorAll('[data-csel]').forEach(x=>{
+  x.onclick=e=>e.stopPropagation();
+  x.onchange=()=>{x.checked?SELEC.add(x.dataset.csel):SELEC.delete(x.dataset.csel);atualizarSelecao()};
+ });
+ $('#csel-vis').onclick=()=>{VIS.forEach(uid=>SELEC.add(uid));atualizarSelecao()};
+ $('#csel-limpar').onclick=()=>{SELEC.clear();atualizarSelecao()};
+ $('#csel-criar').onclick=criarDaMatriz;atualizarSelecao();
+}
+function criarDaMatriz(){
+ if(MODO!=='cg'||!LOTE.virtual||!SELEC.size){toast('Selecione os processos desejados na matriz');return}
+ const escolhidos=ITENS.filter(x=>SELEC.has(x.uid));
+ const assunto=$('#fa').value,recurso=$('#fr').value,resultado=$('#fres').value;
+ $('#gest').innerHTML='<section class="cmt-q" id="col-novo-lote"><h2><i class="nn">00</i>'+
+   '<span>Criar <em>lote de pauta.</em></span><span class="cmt-sp"></span>'+
+   '<button type="button" class="b" id="col-x">Fechar</button></h2>'+
+   '<p class="none">Sessão '+br(LOTE.sessoes[0])+' · '+escolhidos.length+' processos escolhidos. Os critérios e a lista exata ficarão registrados neste lote.</p>'+
+   '<div class="form"><label>Título do lote<input id="col-t" required placeholder="Ex.: 28,86% · limitação territorial"></label>'+
+   '<label>Identificador<input id="col-id" placeholder="Ex.: 2886-territorial"></label>'+
+   '<label class="w">Descrição e modelo em comum<textarea id="col-d" rows="3" placeholder="Questão jurídica e modelo de referência (a confirmar)"></textarea></label></div>'+
+   '<div class="acts"><button class="b pri" type="button" id="col-ok">Criar lote com '+escolhidos.length+' processos</button>'+
+   '<span class="k" id="col-msg" role="status"></span></div></section>';
+ $('#col-x').onclick=fechaGest;
+ $('#col-t').oninput=()=>{if(!$('#col-id').dataset.mexido)$('#col-id').value=slug($('#col-t').value)};
+ $('#col-id').oninput=()=>{$('#col-id').dataset.mexido='1'};
+ $('#col-ok').onclick=async()=>{
+  const titulo=$('#col-t').value.trim(),id=slug($('#col-id').value||titulo);
+  if(!titulo||!id){$('#col-msg').textContent='Informe um título válido';return}
+  $('#col-ok').disabled=true;$('#col-msg').textContent='Salvando a seleção…';
+  try{
+   const r=await post({acao:'criar-selecao',id,titulo,descricao:$('#col-d').value,
+    sessao:LOTE.sessoes[0],processos:escolhidos.map(x=>x.processo),
+    criterios:{assunto,classe:recurso,resultado,busca:$('#q').value,grupo:[...offG].join(',')}});
+   toast('Lote de pauta criado: '+r.total+' processos');location.search='?id='+encodeURIComponent(r.id);
+  }catch(e){$('#col-msg').textContent=e.message;$('#col-ok').disabled=false}
+ };
+ $('#col-novo-lote').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
 function filtra(){
-  const q=$('#q').value.toLowerCase().trim(), f=$('#ff').value, st=$('#fs').value, vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
+  const q=$('#q').value.toLowerCase().trim(), f=$('#ff').value, st=$('#fs').value,
+   assunto=$('#fa').value,recurso=$('#fr').value,resultado=$('#fres').value,
+   vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
   for(const it of ITENS){const e=it.equipe||{};
     const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
-    if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st))vis.add(it.uid)}
+    if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st)&&
+       (!assunto||(it.assunto||it.tipo_caso)===assunto)&&(!recurso||it.recurso===recurso)&&
+       (!resultado||it.resultado===resultado))vis.add(it.uid)}
   document.querySelectorAll('#mxb tr.r').forEach(r=>{r.classList.toggle('hidden',!vis.has(r.dataset.u));r.classList.toggle('hit',CX.hits.has(r.dataset.u))});
   document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)));const x=r.querySelector('.ghn');if(x)x.textContent=n+' processo'+(n>1?'s':'')});
   document.querySelectorAll('.pf').forEach(p=>p.classList.toggle('hidden',!vis.has(p.dataset.u)));
   document.querySelectorAll('#met [data-g]').forEach(d=>{const g=d.dataset.g||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;d.querySelector('b').textContent=pad(n);d.classList.toggle('hidden',!n)});
   const oc=VZ!==MODO&&VZ!=='tudo'?ITENS.filter(i=>!okv(i)).length:0, tot=ITENS.length-oc;
   $('#cnt').textContent=`${pad(vis.size)} de ${pad(tot)} processos`+(oc?` · ${oc} fora da visão ${VZ==='rel'?'do Relator':'da equipe'}`:'');
-  VIS=vis;
+  VIS=vis;if(LOTE.virtual&&MODO==='cg')atualizarSelecao();
   document.querySelectorAll('[data-ng]').forEach(x=>{const g=x.dataset.ng||null,n=ITENS.filter(i=>(i.grupo||null)===g&&vis.has(i.uid)).length;x.textContent=n;x.closest('button').classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&okv(i)))});
   const nm=$('#n-mx'),np=$('#n-pf');if(nm)nm.textContent=vis.size;if(np)np.textContent=vis.size;
 }
