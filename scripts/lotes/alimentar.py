@@ -110,7 +110,7 @@ def main(lotes):
             o, t, pr = r.setdefault('origem', {}), r.setdefault('triagem', {}), r.setdefault('producao', {})
             antes = json.dumps(r, ensure_ascii=False, sort_keys=True)
             eq = it.get('equipe') or {}
-            pr['Lote'] = f"{L.get('titulo', lote_id)} · item {it['item']} · sessão {it.get('sessao', '')}"
+            pr['Lote'] = f"{L.get('titulo', lote_id)} · item {it['item']}" + (f" · sessão {it['sessao']}" if it.get('sessao') else '')
             pr['Lote - Tipo de caso'] = it.get('tipo_caso') or it.get('assunto') or ''
             pr['Lote - Resultado'] = it.get('resultado') or ''
             pr['Lote - Variações'] = '; '.join(it.get('variacoes') or [])
