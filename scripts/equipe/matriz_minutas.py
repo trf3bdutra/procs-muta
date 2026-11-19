@@ -44,7 +44,7 @@ def tipo(classe, aprec=''):
 REG = {}   # (processo, tipo) -> registro; fontes lidas da mais antiga para a mais recente
 def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe='', corretor=''):
     p = dg(proc); s = pessoa(serv)
-    if len(p) != 20 or not s: return
+    if len(p) != 20 or not (s or (fonte.startswith('histórico') and corretor)): return   # do histórico, vale também a conferência sem autoria identificada
     f = FONTE.get(p, {})
     ant = REG.get((p, tp), {})
     REG[(p, tp)] = {'processo': p, 'servidor': s, 'tipo': tp,
@@ -59,12 +59,12 @@ def poe(proc, serv, tp, classe, secao, assunto, fonte, data, detalhe='', correto
 HIST = R / 'acervo/planilhas/historico-por-servidor.json'
 if HIST.exists():
     for e in json.loads(HIST.read_text(encoding='utf-8'))['registros']:
-        if not e.get('redator'): continue
+        if not e.get('redator') and not e.get('conferente'): continue
         a0 = re.split(r'\s+—\s+', e.get('assunto') or '')[0].strip()
         ed = bool(re.search(r'\bED\b', e.get('aba') or '')) or N(a0) == 'ED' or N(a0).startswith('EMBARGOS DE DECLARACAO')
         det = (e.get('detalhe') if ed or not a0 else a0) or ''
         f = FONTE.get(dg(e['processo']), {}); cl = f.get('classe_judicial') or f.get('DataJud · Classe') or ''
-        poe(e['processo'], e['redator'], tipo(cl, 'ED' if ed else ''), cl, '', '', 'histórico ' + e.get('sessao', ''), e.get('dataMinuta') or '', det, e.get('conferente') or '')
+        poe(e['processo'], e.get('redator') or '', tipo(cl, 'ED' if ed else ''), cl, '', '', 'histórico ' + e.get('sessao', ''), e.get('dataMinuta') or '', det, e.get('conferente') or '')
 # 1. ficha: só o que não aparece nas pautas
 for r in ler('acervo/operacional.json')['registros']:
     pr = r.get('producao') or {}; s = pr.get('SERVIDOR')
@@ -139,9 +139,16 @@ for x in regs:
         if not x['assunto'] and x['fonte'].startswith('histórico') and x['tipo'] != 'Embargos de declaração' and len(x['detalhe']) <= 80 and '\n' not in x['detalhe']: x['assunto'] = re.split(r'\s*[·|]\s*', x['detalhe'])[0].strip().rstrip('.')   # rótulo da pauta, como veio
         if x['assunto'] and not x['secao'] and SEC.get(N(x['assunto'])): x['secao'] = SEC[N(x['assunto'])].most_common(1)[0][0]; x['secaoInferida'] = True
 for x in regs: x['ramo'] = ramo(x)
+def ses_de(f):   # data da pauta a partir da fonte ("sessão 2026-11-13", "controle 26-10-2026", "pauta 27/04/2026", "histórico 2026-06-08")
+    m = re.search(r'(\d{4})-(\d{2})-(\d{2})', f)
+    if m: return m[0]
+    m = re.search(r'(\d{2})[-/](\d{2})[-/](\d{4})', f)
+    return f'{m[3]}-{m[2]}-{m[1]}' if m else ''
+for x in regs: x['sessao'] = ses_de(x['fonte'])
 ativos = {m['nome'] for m in EQ}
 por = collections.defaultdict(list)
-for x in regs: por[x['servidor']].append(x)
+for x in regs:
+    if x['servidor']: por[x['servidor']].append(x)
 for x in regs:
     if x['corretor'] and x['corretor'] not in por: por[x['corretor']] = []
 
@@ -156,8 +163,8 @@ def perfil(nome, L):
 saida = {'schema': 'gabcmt.equipe.matriz', 'versao': 1, 'geradoEm': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
          'geradoPor': 'scripts/equipe/matriz_minutas.py', 'tipos': TIPOS,
          'servidores': sorted((perfil(n, L) for n, L in por.items()), key=lambda p: -p['total']),
-         # uma linha por minuta: [redator, tipo, seção, ramo, assunto, corretor, só do histórico (1) ou das pautas do Git (0)]
-         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto'], x['corretor'], 1 if x['fonte'].startswith('histórico') else 0] for x in regs)}
+         # uma linha por minuta: [redator, tipo, seção, ramo, assunto, corretor, só do histórico (1) ou das pautas do Git (0), data da pauta, data da minuta]
+         'minutas': sorted([x['servidor'], x['tipo'], x['secao'], x['ramo'], x['assunto'], x['corretor'], 1 if x['fonte'].startswith('histórico') else 0, x['sessao'], x['data'] or ''] for x in regs)}
 
 if '--gravar' in sys.argv:
     alvo = R / 'apoio/equipe-matriz.json'
