@@ -5,9 +5,22 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 
 ## O que faz
 
-- **Prontuário por processo.** O painel lê o número CNJ do processo aberto na aba do PJe e abre o prontuário desse processo.
-  Cada processo tem o seu, guardado no armazenamento da extensão (chave: os 20 dígitos do número). A lista no topo
-  reabre qualquer prontuário salvo; "Acompanhar o PJe" desligado congela o prontuário aberto.
+O painel lê o número CNJ do processo aberto na aba do PJe e acompanha esse processo em todas as abas.
+"Acompanhar o PJe" desligado congela o processo aberto; a lista no topo reabre qualquer prontuário salvo.
+
+- **Ficha do gabinete (Prontuário › Ficha do gabinete).** A ficha única do processo da Ex Officio
+  (`padrao/ficha.json` → `acervo/operacional.json`), com o login da equipe (cookie `cmt_eq` do site; quem já entrou no
+  Ex Officio no mesmo Chrome entra direto). Abas Processo, Triagem, Produção, Controles especiais e Pauta, no padrão do
+  prontuário lateral da Ex Officio; o que se altera é gravado na hora por `POST /api/pauta?ficha=1`, com as mesmas
+  regras do servidor (designação só do gestor; o que tem correspondência no cartão da pauta vai junto).
+- **Rascunho pessoal (Prontuário › Rascunho pessoal).** O prontuário completo da versão independente, um por processo,
+  guardado só no navegador (chave: os 20 dígitos do número). Liga-se à ficha por dois botões:
+  *Enviar o rascunho à ficha* (grava os campos correspondentes, com confirmação que lista o que muda) e
+  *Trazer da ficha* (preenche só os campos vazios do rascunho, inclusive classe, partes e assunto do acervo).
+  A correspondência de campos está em `MAPA`, no `gabinete.js`.
+- **Lote.** Procura o processo nos lotes do Amicus Curiae · Index (`/api/painel?lote=1`) e mostra o perfil no lote:
+  tipo de caso, resultado, modelo, variações, peculiaridades da equipe e do Relator, MPF, peças (ID copiável),
+  ajustes da correção, pendências e a minuta do lote por seção, com cópia. A gestão continua no Index.
 - **Ementário do Compêndio.** A antiga aba Acervo agora busca na mesma base do Ementário do Compêndio:
   o ementário curado (`precedentes/precedentes.jsonl`) e a série histórica do Relator (`precedentes/jurisprudencia`),
   sem repetição. A sintaxe de busca é a do Compêndio (E, OU, "frase", -excluir, radical\*), em dois modos:
@@ -19,13 +32,16 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 ## Arquivos
 
 ```
-manifest.json      MV3: painel lateral, permissões sidePanel e storage, acesso a www.gabinete-cmt.com
+manifest.json      MV3: painel lateral, permissões sidePanel e storage, acesso a www.gabinete-cmt.com (dados e API)
 fundo.js           service worker: ícone abre o painel; guarda o processo de cada aba (chrome.storage.session)
 conteudo-pje.js    lê o número CNJ na página do PJe (pje2g.trf3.jus.br)
 painel.html/.css   painel (Prontuário, Ementário, Ajuda)
 comum.js           site, download com gzip, diálogo de confirmação, número CNJ
 prontuario.js      estado e gravação do prontuário, por processo (localStorage da extensão)
-ficha.js           ficha completa do prontuário (análise guiada, julgamento, ciclo da minuta)
+ficha.js           rascunho pessoal: ficha completa (análise guiada, julgamento, ciclo da minuta)
+sessao.js          login do Ex Officio (/api/login) e chamadas à API do site
+gabinete.js        ficha do gabinete (Ex Officio) e correspondência rascunho ↔ ficha
+lote.js            aba Lote (Amicus Curiae · Index)
 ementario.js       busca no Ementário do Compêndio
 pje.js             painel acompanha o processo da aba ativa
 icones/            ícones 16, 32, 48 e 128

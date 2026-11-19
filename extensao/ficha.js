@@ -249,7 +249,7 @@ function updateProgress(){
 }
 function updateComputed(){
   var k=kind(),deadlineEl=host.querySelector('#pf-deadline');if(deadlineEl)deadlineEl.textContent=deadline();
-  var notice=host.querySelector('.pf-notice');if(notice){notice.classList.toggle('urgent',!!full.caso.urgente);notice.innerHTML=full.caso.urgente?'<strong>URGENTE · sinalização só neste navegador.</strong> O prontuário fica na extensão, um por processo; nenhum aviso é enviado à Pauta ou à equipe. Confira os autos e as regras antes de usar.':'<strong>Prontuário do processo.</strong> Gravado só neste navegador, um por processo; do PJe, o painel lê apenas o número do processo aberto. Não há sincronização com a Pauta ou a equipe; confira os autos e as regras antes de usar.';}
+  var notice=host.querySelector('.pf-notice');if(notice){notice.classList.toggle('urgent',!!full.caso.urgente);notice.innerHTML=full.caso.urgente?'<strong>URGENTE · sinalização só neste navegador.</strong> O rascunho fica só neste navegador; nenhum aviso é enviado à Pauta ou à equipe. Confira os autos e as regras antes de usar.':'<strong>Rascunho pessoal.</strong> Fica só neste navegador, um por processo. Para a equipe ver, use “Enviar o rascunho à ficha” em Ficha do gabinete. Confira os autos e as regras antes de usar.';}
   host.querySelectorAll('[data-kind-panel]').forEach(function(el){el.hidden=el.dataset.kindPanel!==k;});
   var prep=host.querySelector('[data-path="regularidade.preparo"]'),typeExempt=['ed','agint','jr','rn'].includes(k),autoExempt=full.regularidade.dpu||full.regularidade.ajg,blocked=typeExempt||autoExempt;
   if(prep){prep.disabled=full.modo==='ficha'||blocked;if(typeExempt&&!autoExempt)prep.value='Não se Aplica';if(autoExempt)prep.value='Dispensado';if(autoExempt)prep.title='Dispensado automaticamente por AJG/DPU';else if(typeExempt)prep.title='Não se aplica a esta espécie';}
@@ -460,7 +460,7 @@ function render(restorePath){
   var k=kind(),results=RESULT[k],pieces=full.pecas||[],resources=full.recursos||[];
   var kindOptions=[['','Automático · identificar pela classe/etiquetas']].concat(ORDER.map(function(x){return[x,KIND[x]];}));
   var prepOptions=['—','Comprovado','Dispensado','Não Recolhido','A conferir','Não se Aplica'];
-  host.innerHTML=`<div class="pf-notice"><strong>Prontuário do processo.</strong> Gravado só neste navegador, um por processo; do PJe, o painel lê apenas o número do processo aberto. Não há sincronização com a Pauta ou a equipe; confira os autos e as regras antes de usar.</div>
+  host.innerHTML=`<div class="pf-notice"><strong>Rascunho pessoal.</strong> Fica só neste navegador, um por processo. Para a equipe ver, use “Enviar o rascunho à ficha” em Ficha do gabinete. Confira os autos e as regras antes de usar.</div>
   <div class="pf-toolbar"><div class="seg" role="tablist" aria-label="Modo do prontuário"><button type="button" data-pf-mode="ficha">Ficha</button><button type="button" data-pf-mode="preencher">Preencher</button></div><button type="button" class="btn line pf-edit-only" id="pf-save">Salvar agora</button><button type="button" class="btn line pf-edit-only" id="pf-discard">Restaurar salvo</button><span id="pf-mode-hint" class="muted"></span><span id="pf-status" class="pf-status" role="status" aria-live="polite">Salvamento local automático</span></div>
   ${group('1','Identificação e classificação','caso',`<div class="pf-grid">
     ${field('caso.numero','Número do processo','0000000-00.0000.4.03.0000')}

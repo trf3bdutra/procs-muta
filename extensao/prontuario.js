@@ -74,6 +74,7 @@ function sanitize(p){
 
 /* ---------- Armazenamento por processo ---------- */
 var state=blank(), chaveAtual='avulso';
+function avisarTroca(){try{document.dispatchEvent(new CustomEvent('muta:prontuario',{detail:{chave:chaveAtual}}));}catch(e){}}
 function ler(k){try{return localStorage.getItem(k);}catch(e){return null;}}
 function lerIndice(){try{var o=JSON.parse(ler(INDICE)||'{}');return o&&typeof o==='object'?o:{};}catch(e){return {};}}
 function gravarIndice(ix){localStorage.setItem(INDICE,JSON.stringify(ix));}
@@ -99,7 +100,7 @@ function persist(){
     var k=Muta.chaveProcesso(state.full.caso.numero),ix=lerIndice();
     if(chaveAtual==='avulso'&&k){
       if(ix[k]){setStatus('Já existe prontuário salvo para '+state.full.caso.numero+'. Este continua como avulso; abra o outro pela lista.','err');}
-      else{localStorage.removeItem(PREFIXO+'avulso');delete ix.avulso;chaveAtual=k;}
+      else{localStorage.removeItem(PREFIXO+'avulso');delete ix.avulso;chaveAtual=k;setTimeout(avisarTroca,0);}
     }
     if(vazio()&&!ix[chaveAtual]){localStorage.setItem(ATUAL,chaveAtual);listar();return true;}
     state.atualizadoEm=new Date().toISOString();
@@ -162,9 +163,10 @@ function wireTabs(tabs,onSelect){
   });
 }
 function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;});}
-var mainTabs=[$('tab-pront'),$('tab-acervo'),$('tab-ajuda')];
-wireTabs(mainTabs,function(i){selectTab(mainTabs,i);if(i===1&&window.MutaEmentario)window.MutaEmentario.abrir();});
-if(location.hash==='#ajuda')selectTab(mainTabs,2);
+var mainTabs=[$('tab-pront'),$('tab-acervo'),$('tab-lote'),$('tab-ajuda')];
+wireTabs(mainTabs,function(i){selectTab(mainTabs,i);if(i===1&&window.MutaEmentario)window.MutaEmentario.abrir();if(i===2&&window.MutaLote)window.MutaLote.abrir();});
+if(location.hash==='#ajuda')selectTab(mainTabs,3);
+if(location.hash==='#lote'){selectTab(mainTabs,2);setTimeout(function(){if(window.MutaLote)window.MutaLote.abrir();},0);}
 if(location.hash==='#ementario'){selectTab(mainTabs,1);setTimeout(function(){if(window.MutaEmentario)window.MutaEmentario.abrir();},0);}
 var modeTabs=[$('mode-tri'),$('mode-pro')];
 function setMode(m,save){selectTab(modeTabs,m==='producao'?1:0);if(save){state.etapa=m;persist();}}
@@ -215,6 +217,7 @@ $('file-import').addEventListener('change',function(){
     descarregar();
     chaveAtual=Muta.chaveProcesso(next.full.caso.numero||next.comum.numero)||'avulso';
     state=next;render();if(persist())setStatus('Prontuário importado e salvo neste navegador.','ok');
+    avisarTroca();
   }).catch(function(e){setStatus('Importação recusada: '+e.message,'err');});
 });
 $('btn-clear').addEventListener('click',function(){
@@ -240,6 +243,7 @@ function abrir(chave,origem){
   if(origem&&origem.classe&&r==='novo'&&!state.full.caso.classe)state.full.caso.classe=origem.classe;
   localStorage.setItem(ATUAL,chaveAtual);
   render();
+  avisarTroca();
   if(r==='ok')setStatus('Prontuário de '+rotulo(chaveAtual,lerIndice()[chaveAtual])+' aberto'+(state.atualizadoEm?' (última gravação: '+new Date(state.atualizadoEm).toLocaleString('pt-BR')+')':'')+'.','ok');
   else if(r==='novo')setStatus(chaveAtual==='avulso'?'Prontuário avulso em branco.':'Novo prontuário para '+state.full.caso.numero+'. Ele é salvo quando você preencher algum campo.');
   return true;
