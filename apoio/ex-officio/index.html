@@ -849,6 +849,14 @@ html[data-theme=dark] #v-pauta.ed.mono .urg{--ubg:#2a1a18;--ul:#5a3434;--ur:#e07
   #app header #salvo{display:none}
   html,body{overflow-x:hidden}
 }
+/* títulos das páginas (e os rótulos acima deles) alinhados à direita: Início, Pautas, Monocráticas e Monitoramento */
+#v-inicio .ini-ey,#v-inicio .ini-h1,#v-inicio .ini-sub,#v-inicio .ini-st{text-align:right}
+#v-pauta .trb-h>div:first-child{margin-left:auto;text-align:right;display:flex;flex-direction:column;align-items:flex-end}
+#v-pauta .trb-h .trb-ey{position:static!important;align-self:flex-end;text-align:right}
+#v-pauta .trb-h .trb-eyr{justify-content:flex-end}
+#v-pauta .pt-h{flex-direction:row-reverse}#v-pauta .pt-h>div:first-child{text-align:right}
+#v-pauta.ctl .ctl-lead{text-align:right}
+#v-pauta #pt-ey{justify-content:flex-end}
 /* cabeçalho: a marca leva ao Início; Amicus Curiae menor, com ponto final, cresce ao passar o cursor */
 #app header.nx .nx-cad a.nx-on{text-decoration:none;cursor:pointer}#app header.nx [data-home]{cursor:pointer}
 #app header.nx .nx-cad a.eq-cmp{font-size:15px!important;font-weight:550;letter-spacing:-.02em;color:var(--em)!important;transition:font-size .15s ease,color .15s ease}
