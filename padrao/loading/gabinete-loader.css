@@ -77,3 +77,29 @@
   background:transparent!important;clip-path:none!important;animation:none!important;
 }
 .cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .star svg{width:57px;height:64px;color:var(--cmtl-accent)}
+
+
+/* Ex Officio · tela de loading alinhada ao novo acesso do Gabinete:
+   mesmo fundo institucional, régua superior, círculos e marca d'água em baixa opacidade. */
+.cmtl-full[data-cmt-loader-family="office"],.cmt-load[data-cmt-loader="legacy"][data-cmt-loader-family="office"]{
+  background:
+    radial-gradient(85% 75% at 0 0,#3a6c5f 0%,rgba(46,93,82,.58) 38%,transparent 72%),
+    radial-gradient(65% 60% at 100% 100%,rgba(14,44,52,.72),transparent 75%),
+    linear-gradient(150deg,#2e5d52 0%,#275550 42%,#1f4c4f 72%,#193f48 100%);
+}
+.cmtl-full[data-cmt-loader-family="office"]::after,.cmt-load[data-cmt-loader="legacy"][data-cmt-loader-family="office"]::after{
+  content:"";position:absolute;z-index:-1;left:-560px;bottom:-650px;width:1180px;aspect-ratio:1;
+  border:1px solid rgba(143,209,185,.12);border-radius:50%;pointer-events:none;
+  box-shadow:0 0 0 160px transparent,0 0 0 161px rgba(255,255,255,.07);
+}
+.cmtl-full[data-cmt-loader-family="office"] .cmtl-watermark{
+  left:max(-290px,-16vw);right:auto;top:auto;bottom:-310px;width:min(760px,80vw);height:auto;
+  transform:rotate(-8deg);opacity:.11;color:#8fd1b9;
+}
+.cmtl-full[data-cmt-loader-family="office"] .cmtl-content::before,
+.cmt-load[data-cmt-loader="legacy"][data-cmt-loader-family="office"] .cmt-ld-mk::before{
+  border-color:rgba(212,166,67,.68);
+}
+.cmtl-full[data-cmt-loader-family="office"]{
+  border-top:4px solid transparent;border-image:linear-gradient(90deg,#183c29,#1f5a48 45%,#0f4a5c) 1;
+}
