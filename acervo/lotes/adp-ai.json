@@ -1499,7 +1499,7 @@
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
    "grupo": "g5",
-   "tipo_caso": "AI · Cumprimento de sentença contra o INSS · honorários na impugnação acolhida",
+   "tipo_caso": "AI · Cumprimento de sentença contra o INSS · impugnação acolhida · honorários de sucumbência contra o exequente × honorários em favor do exequente (artigo 85, § 3º, do CPC)",
    "resultado": "Ato a proferir: julgamento do agravo (voto); o pedido de tutela recursal não foi examinado por falta de fundamentação e há contrarrazões",
    "modelo": "",
    "variacoes": [
@@ -1578,7 +1578,87 @@
     "representacao": "Advogado Marcos Piovezan Fernandes (OAB/MG 97.622; cadastro SP458673-A); procuração não identificada com texto [VALIDAR]",
     "preparo": "Após o despacho ID 376460865 (26/05/2026), pago R$ 64,26 por GRU judicial em 27/05/2026 (comprovante ID 376774420; guia ID 376774421)."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Cumprimento de sentença contra o INSS · impugnação acolhida · honorários de sucumbência contra o exequente × honorários em favor do exequente (artigo 85, § 3º, do CPC)",
+   "especificidades": "Preparo: após o despacho ID 376460865, comprovante bancário de GRU de R$ 64,26 (ID 376774420) e guia (ID 376774421), sem comprovante STN [VALIDAR] · Despacho ID 384227427 (07/07/2026) não examinou a tutela recursal por falta de demonstração dos requisitos · Partes: exequente Auditor-Fiscal da RFB e executado INSS: conferir o polo e se se trata de cumprimento de sentença coletiva (28,86%) [VALIDAR] · Procuração não identificada com texto [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença contra o INSS · impugnação acolhida · honorários de sucumbência contra o exequente × honorários em favor do exequente (artigo 85, § 3º, do CPC)",
+     "sintese": "Cumprimento de sentença de Antonio Cesar de Campos (Auditor-Fiscal da RFB) contra o INSS (autos 5005594-87.2024.4.03.6000). O juízo acolheu a impugnação e os cálculos do INSS e condenou o exequente em honorários; o exequente agravou pedindo honorários em seu favor.",
+     "questoes": "1) Regularidade do preparo; 2) cabimento de honorários contra o exequente no acolhimento da impugnação da Fazenda Pública; 3) fixação de honorários em favor do exequente.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 376152900 (25/05/2026): honorários de sucumbência devidos no cumprimento de sentença, impugnado ou não; fixação em favor do exequente nos percentuais do artigo 85, § 3º, do CPC; precedentes de TRFs juntados sem texto.",
+      "contrarrazoes": "Contrarrazões do INSS ID 395395639 (02/09/2026): acolhidos a impugnação e os cálculos do INSS, os honorários cabem contra o exequente; pede o desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Acolheu a impugnação e os cálculos do INSS e condenou o exequente em honorários."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-05-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Antonio Cesar de Campos",
+       "tipo": "Agravo de instrumento",
+       "id": "376152900",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "376152900",
+       "data": "2026-05-25"
+      },
+      {
+       "desc": "Despacho sobre o preparo",
+       "id": "376460865",
+       "data": "2026-05-26"
+      },
+      {
+       "desc": "Comprovante bancário de custas",
+       "id": "376774420",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Despacho sobre a tutela recursal",
+       "id": "384227427",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Contrarrazões do INSS",
+       "id": "395395639",
+       "data": "2026-09-02"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN; identificar a decisão agravada; conferir o polo passivo e a origem coletiva",
+     "especificidades": "Preparo: após o despacho ID 376460865, comprovante bancário de GRU de R$ 64,26 (ID 376774420) e guia (ID 376774421), sem comprovante STN [VALIDAR] · Despacho ID 384227427 (07/07/2026) não examinou a tutela recursal por falta de demonstração dos requisitos · Partes: exequente Auditor-Fiscal da RFB e executado INSS: conferir o polo e se se trata de cumprimento de sentença coletiva (28,86%) [VALIDAR] · Procuração não identificada com texto [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-07"
+    }
+   }
   },
   {
    "sessao": "",
