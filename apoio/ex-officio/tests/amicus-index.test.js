@@ -63,3 +63,11 @@ test('Pendência do prontuário confrontada com a tabela de peças',()=>{
  assert.match(confPend('Confirmar no sistema o ID 598870878 atribuído à sentença.',P,{}),/ID 598870878 não está na tabela de peças, que registra sentença com ID 396555413/);
  assert.equal(confPend('Conferir a tempestividade.',P,{}),'');
 });
+test('Barra do Amicus Curiae: Collectio e Compendium com a mesma barra, sem citar um ao outro, ambos com o Ex Officio',()=>{
+ const build=read('apoio/modus-operandi/fonte/build.py'), nav=read('apoio/modus-operandi/fonte/nav_editorial.css');
+ assert.ok(!app.includes('title="Compendium: Ementário'),'Collectio sem o Compendium na barra');
+ assert.ok(app.includes('href="/exofficio/" title="Ex Officio'));
+ assert.ok(build.includes('CMT · Amicus Curiae') && build.includes('<span>Ex Officio</span>'));
+ assert.ok(!/collectio/i.test(build.slice(build.indexOf('EXO = '),build.indexOf("a = '  </div>\\n</header>\\n'"))),'Compendium sem o Collectio na barra');
+ assert.ok(nav.includes('header.top.nx #cmp-nav{flex:0 1 auto;min-width:0;overflow-x:auto'));
+});

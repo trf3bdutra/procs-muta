@@ -513,13 +513,13 @@ function ligarColecoes(lotes) {
 }
 
 function cabecalho(lotes,id,usuario){
-  /* Barra: título; logo à direita dele, os atalhos para o Ex Officio e o Compendium; na ponta, as ações da página.
+  /* Barra: título; logo à direita dele, o atalho para o Ex Officio; na ponta, as ações da página.
      "Voltar à matriz" e "Tema" são só ícones (o nome vai no title e no aria-label). */
   const exo=MODO_REL||(CMTK&&!usuario)?'':`<a class="hb" href="/exofficio/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`;
-  const cmp=MODO_REL?'':'<a class="hb" href="/amicus/compendium/" target="_blank" rel="noopener" title="Compendium: Ementário, Editorial, Diretrizes e Consulta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span>Compendium</span></a>';
+  /* barra do Amicus Curiae, a mesma do Compendium: o Compendium não aparece aqui (nem o Collectio na barra dele); o Ex Officio aparece nas duas */
   return `<header class="lx-nx"><div class="lx-nx1"><i class="star" aria-hidden="true"></i>
    <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>Collectio<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
-   ${exo||cmp?`<nav class="lx-ir" aria-label="Outras ferramentas">${exo}${cmp}</nav>`:''}
+   ${exo?`<nav class="lx-ir" aria-label="Outras ferramentas">${exo}</nav>`:''}
    <span class="cmt-sp"></span>
    <div class="cmt-ut">
    ${MODO==='cg'?`<button type="button" class="hb" id="b-ed" title="Editar título, descrição e filtro do lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Editar lote</span></button>`:''}

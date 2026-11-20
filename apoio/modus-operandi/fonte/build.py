@@ -242,7 +242,11 @@ def montar(var):
               else '<a class="eq-cmp nx-on" href="/amicus/compendium/" aria-current="page">Compendium<em>.</em></a>')
     k = t.index('<div class="brand tw"><i></i></div>\n') + len('<div class="brand tw"><i></i></div>\n')
     # barra editorial (Expediente), gêmea do Ex Officio: cadernos no título; as abas (.tab) seguem no cabeçalho, ocultas, e a faixa #cmp-nav as aciona
-    t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">Gabinete CMT</span><nav class="nx-cad" aria-label="Cadernos"><a class="nx-lk" href="/exofficio/#inicio" data-eqlink>Ex Officio</a>' + SL + rotulo + '</nav></div>'
+    # barra do Amicus Curiae, a mesma do Collectio: marca "CMT · Amicus Curiae", título da ferramenta e, à direita dele, o atalho do Ex Officio.
+    # O Collectio não aparece aqui (nem o Compendium na barra do Collectio); o Ex Officio aparece nas duas.
+    EXO = ('<nav class="nx-ir" aria-label="Outras ferramentas"><a class="nx-irl" href="/exofficio/#inicio" data-eqlink title="Ex Officio: pautas, cartões e ficha do processo">'
+           + SV('<path d="M3 7h18M3 12h18M3 17h18"/>') + '<span>Ex Officio</span></a></nav>')
+    t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">CMT · Amicus Curiae</span><nav class="nx-cad" aria-label="Amicus Curiae">' + rotulo + '</nav></div>' + EXO +
                  '<nav class="eqtabs eq-cpn" aria-label="Seções do Compendium"><span class="eq-grp"><span class="tabs eq-sec" role="tablist" aria-label="Seções do Compendium">' + abas + '</span></span></nav><span class="eqsp"></span>\n') + t[k:]
     a = '  </div>\n</header>\n'
     t = troca(t, a, '    <span id="ac-chip" class="ac-chip"></span>\n' + a)
