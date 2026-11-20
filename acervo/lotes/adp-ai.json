@@ -1033,15 +1033,15 @@
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Acidente de Trabalho",
    "grupo": null,
-   "tipo_caso": "AI · Previdenciário/acidentário (origem estadual 8.12) · representação processual a regularizar",
-   "resultado": "Ato a proferir: conferir a regularização da representação (procurações juntadas em 12/05/2026) e intimar o INSS para contraminuta; antes, conferir a competência (assunto cadastrado: acidente de trabalho)",
+   "tipo_caso": "AI · Cumprimento de sentença previdenciário (competência delegada, Anastácio) · laudo contábil e pedido de nova perícia",
+   "resultado": "Ato a proferir: conferir a regularização da representação (procurações de 12/05/2026) e intimar o INSS para contraminuta; depois, julgamento do agravo (voto). Antes, conferir a competência: a ação de origem tratava também de auxílio-doença por acidente de trabalho",
    "modelo": "",
    "variacoes": [
     "ADM",
     "VAL"
    ],
-   "observacao": "Agravo de Lourdes Silvana Pincer da Silva contra decisão proferida no processo 0001667-11.2007.8.12.0052 (justiça estadual, Aquidauana), contra o INSS. A petição do agravo (ID 316202313) e a cópia dos autos de origem não têm texto extraível; objeto e teses não puderam ser lidos.",
-   "peculiaridades": "Decisão ID 365154675 (11/05/2026): tutela recursal indeferida e prazo de 5 dias para juntar procuração, sob pena de não conhecimento. Procurações juntadas em 12/05/2026 (IDs 372825993 e 372826000). Não há contraminuta nos autos. Assunto cadastrado: acidente de trabalho. Etiquetas: AI - Cump.Sent.; APTO; Prevenção.",
+   "observacao": "Agravo de Lourdes Silvana Pincer da Silva, sucessora de Bonifácio Pereira, contra a decisão de fls. 623 e 626-628 da Vara Única da Comarca de Anastácio (processo 0001667-11.2007.8.12.0052), no cumprimento da sentença que concedeu aposentadoria por idade desde 06/09/2007 (trânsito em 02/08/2013). Teses: o perito analisou a inicial de execução errada (fls. 215-220) e não a de fls. 463-469, com cálculo de R$ 582.710,11 (principal de R$ 495.018,66 e honorários de R$ 87.691,45); pede efeito suspensivo, complementação do laudo ou cálculo pela contadoria do Tribunal.",
+   "peculiaridades": "Decisão ID 365154675 (11/05/2026): tutela recursal indeferida e prazo para juntar procuração, sob pena de não conhecimento. Procuração e cópias de procurações extraídas dos autos do TJMS juntadas em 12/05/2026 (IDs 372825993 e 372826000). Cópia dos autos de origem (ID 316202319) com texto corrompido. Assunto cadastrado (acidente de trabalho) reflete só parte da ação de origem.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1063,21 +1063,21 @@
    ],
    "mpf": "",
    "triagem": {
-    "ato": "Despacho (intimação do INSS) ou não conhecimento",
-    "materia": "A identificar: petição sem texto extraível",
-    "origem": "0001667-11.2007.8.12.0052 (justiça estadual, Aquidauana)",
-    "decisao_agravada": "Não identificada [VALIDAR]",
-    "recurso": "ID 316202313 · 28/02/2025 (sem texto extraível)",
+    "ato": "Despacho (intimação do INSS), depois voto",
+    "materia": "Cumprimento de sentença previdenciário — cálculos e perícia contábil",
+    "origem": "0001667-11.2007.8.12.0052 (Vara Única de Anastácio; competência delegada)",
+    "decisao_agravada": "Fls. 623 e 626-628 dos autos de origem; não juntada com texto legível",
+    "recurso": "ID 316202313 · 28/02/2025",
     "preparo": "Não consta [VALIDAR]",
-    "monocratica": "A definir",
+    "monocratica": "Não",
     "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] Ler a petição do agravo no PJe (arquivo sem texto extraível) para identificar a decisão agravada e as teses",
-    "[VALIDAR] Competência: se a causa for acidentária (artigo 109, I, da CF), a competência recursal é do TJMS",
-    "[VALIDAR] Conferir se as procurações de 12/05/2026 regularizam a representação no prazo",
-    "[VALIDAR] Preparo ou gratuidade"
+    "[VALIDAR] Competência: a ação de origem cumulava auxílio-doença acidentário e aposentadoria por idade; o título executado é a aposentadoria por idade (previdenciária)",
+    "[VALIDAR] Conferir se as procurações juntadas em 12/05/2026 foram outorgadas pela agravante e no prazo",
+    "[VALIDAR] Preparo ou gratuidade",
+    "[VALIDAR] Intimação do INSS: certificar o prazo da contraminuta"
    ],
    "minuta": false,
    "classe": "AI",
@@ -1096,6 +1096,17 @@
     "ultima_informacao": "Certidão · ID 316457083 · 05/03/2025",
     "ultima_movimentacao": "20/07/2026 17:33 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Bonifácio Pereira obteve na justiça estadual, em competência delegada, a aposentadoria por idade desde 06/09/2007 (trânsito em 02/08/2013); a ação pedia também o restabelecimento de auxílio-doença acidentário. No cumprimento de sentença, a sucessora contesta o laudo contábil que teria partido da inicial de execução errada.",
+    "inicial": "Ação de concessão de benefício previdenciário com tutela antecipada (0001667-11.2007.8.12.0052): restabelecimento de auxílio-doença por acidente de trabalho e conversão em aposentadoria por idade; não juntada com texto legível",
+    "decisao_recorrida": "Decisão de fls. 623 e 626-628 dos autos de origem, sobre o laudo contábil; não juntada com texto legível (cópia ID 316202319 corrompida)",
+    "recurso": "Agravo de instrumento ID 316202313 (28/02/2025): erro do perito ao usar a inicial de execução de fls. 215-220 em vez da de fls. 463-469; cálculo de R$ 582.710,11 com INPC e juros na forma da Lei 11.960/2009 e da Lei 12.703/2012; pede efeito suspensivo, complementação do laudo ou cálculos da contadoria.",
+    "resposta": "Não consta: o INSS foi intimado pelo despacho ID 317380468 (19/03/2025), mas não há contraminuta nos autos",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Jair dos Santos Pelliccioni (OAB/MS 2.391). Procuração exigida pela decisão ID 365154675; juntadas em 12/05/2026 petição com procuração (ID 372825993) e cópias de procurações dos autos do TJMS (ID 372826000). Conferir se outorgadas pela agravante [VALIDAR]",
+    "preparo": "Não consta recolhimento nem pedido de gratuidade identificado [VALIDAR]"
    }
   },
   {
