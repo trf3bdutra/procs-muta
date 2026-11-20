@@ -5598,13 +5598,15 @@
    "exequente": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "executado": "TEREZA CRISTINA PEDROSSIAN CORTADA AMORIM",
    "assunto": "Atos Administrativos",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g2",
+   "tipo_caso": "AI do IBAMA · Ambiental · tutela que suspendeu embargo de área rural após prescrição da pretensão punitiva · efeito suspensivo negado",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), após o prazo de contraminuta; efeito suspensivo negado em 20/05/2026",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do IBAMA contra a decisão da 1ª Vara Federal de Campo Grande (processo 5005728-80.2025.4.03.6000) que suspendeu o embargo 342333-C (auto de infração 443712-D, processo administrativo 02043.000339/2011-04) da Fazenda Theomar III – Miragem, em Porto Murtinho/MS, a pedido de Tereza Cristina Pedrossian Cortada Amorim e outras, por ter sido reconhecida a prescrição da pretensão punitiva. O IBAMA sustenta que o embargo não tem natureza punitiva, mas de recuperação ambiental, e que sua cessação depende de prova da regularidade (artigo 15-B do Decreto 6.514/2008; IN IBAMA 8/2024): faltam a inclusão das APP no CAR e o PRADA das áreas degradadas, ou a aprovação do CAR pelo IMASUL.",
+   "peculiaridades": "Reposição florestal de 22.742 m³ já comprovada no processo administrativo. Tempestividade alegada: intimação em 03/04/2026, prazo em dobro. Não consta contraminuta das agravadas. Valor da causa R$ 1.318,00.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -5625,7 +5627,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Ambiental — embargo administrativo; prescrição da pretensão punitiva; regularização (CAR/PRADA)",
+    "origem": "5005728-80.2025.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Decisão que deferiu a tutela; ID não identificado [VALIDAR]",
+    "recurso": "ID 366439887 · 14/04/2026",
+    "preparo": "Isento (autarquia federal)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -5645,6 +5656,87 @@
     "ultima_informacao": "",
     "ultima_movimentacao": "18/06/2026 15:01 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Área rural em Porto Murtinho/MS está embargada pelo IBAMA desde 2011. Reconhecida a prescrição da pretensão punitiva, as proprietárias obtiveram em tutela a suspensão do embargo. O IBAMA alega que o embargo visa à recuperação ambiental e que a regularidade da área não foi comprovada.",
+    "inicial": "Ação declaratória c/c anulatória 5005728-80.2025.4.03.6000 para anular o embargo ambiental da Fazenda Theomar III – Miragem",
+    "decisao_recorrida": "Decisão da 1ª Vara Federal de Campo Grande que deferiu a tutela e suspendeu de imediato o embargo 342333-C",
+    "recurso": "Agravo ID 366439887 (14/04/2026): (1) natureza não punitiva do embargo, voltado à recuperação ambiental; (2) cessação condicionada à prova de regularidade (artigo 15-B do Decreto 6.514/2008; IN IBAMA 8/2024); (3) pendências de APP fora do CAR e de PRADA, conforme a Informação Técnica 47/2021. Pede efeito suspensivo e a revogação da tutela.",
+    "resposta": "Não consta contraminuta",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "IBAMA: procurador federal (mandato legal)",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Embargo ambiental; prescrição; desembargo; CAR e PRADA",
+     "sintese": "Área rural em Porto Murtinho/MS está embargada pelo IBAMA desde 2011. Reconhecida a prescrição da pretensão punitiva, as proprietárias obtiveram em tutela a suspensão do embargo. O IBAMA alega que o embargo visa à recuperação ambiental e que a regularidade da área não foi comprovada.",
+     "questoes": "1) Efeito da prescrição da pretensão punitiva sobre o embargo; 2) natureza do embargo (sanção ou medida de recuperação); 3) requisitos do desembargo.",
+     "rel": {
+      "razoes": "Agravo (ID 366439887): embargo como medida de recuperação; cessação condicionada à regularização; pendências de CAR e PRADA.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Deferiu a tutela e suspendeu o embargo 342333-C."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-04-14",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2026-04-03"
+     },
+     "recursos": [
+      {
+       "parte": "IBAMA",
+       "tipo": "Agravo de instrumento",
+       "id": "366439887",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "366439887",
+       "data": "2026-04-14"
+      },
+      {
+       "desc": "Manifestação técnica do IBAMA",
+       "id": "366439894",
+       "data": "2026-04-14"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo",
+       "id": "367196051",
+       "data": "2026-05-20"
+      }
+     ],
+     "pendencias": [
+      "Certificar o decurso do prazo de contraminuta [VALIDAR]",
+      "Identificar o ID da decisão agravada na cópia dos autos (ID 366439892) [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-05-20"
+    }
    }
   },
   {
