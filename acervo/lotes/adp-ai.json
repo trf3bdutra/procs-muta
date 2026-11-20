@@ -3021,7 +3021,7 @@
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
    "grupo": "g1",
-   "tipo_caso": "AI · Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação · intimação pessoal da codevedora · tutela indeferida",
+   "tipo_caso": "AI · Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação da propriedade · falta de intimação pessoal da codevedora para purgar a mora e das datas dos leilões",
    "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 14/07/2026 e há contraminuta da CEF",
    "modelo": "",
    "variacoes": [
@@ -3106,7 +3106,92 @@
     "representacao": "Agravante: advogados Thiago Arribamar Adorno (OAB/MS 25.774-A) e João Pedro Rocha Araújo (OAB/MS 23.683); procuração ID 371836286 sem texto. CEF: procuração pública (ID 387931319)",
     "preparo": "Recolhido de início à Justiça Federal de primeiro grau; retificado após o despacho ID 384198069 com GRU ao TRF-3 de R$ 64,26 (UG 090029, código 18720-8, ID 385047301)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação da propriedade · falta de intimação pessoal da codevedora para purgar a mora e das datas dos leilões",
+   "especificidades": "Tutela recursal indeferida (ID 386124483, 14/07/2026) · Preparo: primeiro recolhimento à Justiça Federal de 1º grau; após o despacho ID 384198069, guia ao TRF-3 com UG 090029 e código 18720-8 (ID 385047301) e comprovante sem texto (ID 385047304), sem comprovante STN legível [VALIDAR] · CEF invoca o Tema 1.288/STJ e pede honorários recursais · Procuração sem texto (ID 371836286) [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação da propriedade · falta de intimação pessoal da codevedora para purgar a mora e das datas dos leilões",
+     "sintese": "Maria Aparecida de Carvalho Iunes, codevedora fiduciante de imóvel financiado pela CEF, alega que só o cônjuge foi notificado para purgar a mora e que não foi intimada das datas dos leilões; pediu a suspensão da consolidação, negada na origem.",
+     "questoes": "1) Regularidade do preparo retificado; 2) necessidade de intimação pessoal da codevedora fiduciante para purgar a mora; 3) intimação das datas dos leilões; 4) suspensão dos efeitos da consolidação.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 371819017 (07/05/2026): falta de intimação pessoal da codevedora para purgar a mora e das datas dos leilões; pede tutela recursal para suspender os efeitos da consolidação.",
+      "contrarrazoes": "Contraminuta da CEF ID 387931318 (22/07/2026): regularidade do procedimento e da consolidação (Tema 1.288/STJ); desprovimento e honorários recursais."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "575844356",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência para suspender os efeitos da consolidação da propriedade fiduciária."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "575844356"
+     },
+     "adm": {
+      "prot": "2026-05-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "371819017",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "371819017",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Cópia da decisão agravada",
+       "id": "371836282",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Despacho sobre o preparo",
+       "id": "384198069",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Guia GRU ao TRF-3",
+       "id": "385047301",
+       "data": "2026-07-08"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "386124483",
+       "data": "2026-07-14"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "387931318",
+       "data": "2026-07-22"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN; conferir a procuração",
+     "especificidades": "Tutela recursal indeferida (ID 386124483, 14/07/2026) · Preparo: primeiro recolhimento à Justiça Federal de 1º grau; após o despacho ID 384198069, guia ao TRF-3 com UG 090029 e código 18720-8 (ID 385047301) e comprovante sem texto (ID 385047304), sem comprovante STN legível [VALIDAR] · CEF invoca o Tema 1.288/STJ e pede honorários recursais · Procuração sem texto (ID 371836286) [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-14"
+    }
+   }
   },
   {
    "sessao": "",
