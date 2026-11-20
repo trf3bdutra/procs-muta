@@ -636,7 +636,7 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
    "grupo": "g4",
-   "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada · prescrição intercorrente",
+   "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada · prescrição intercorrente · cancelamento administrativo das inscrições noticiado na origem",
    "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi deferido em 12/10/2024 e há contraminuta. Antes, conferir na origem se a execução já foi extinta (possível perda de objeto)",
    "modelo": "",
    "variacoes": [
@@ -721,7 +721,82 @@
     "representacao": "Procuração sem reserva de poderes (ID 291918589, extraída dos autos de origem, assinada em 03/12/2021) e substabelecimento (ID 291918590, sem texto); advogados Leandro Rodrigues de Melo (OAB/MS 15.577) e Leonardo Ros Ortiz (OAB/MS 15.695)",
     "preparo": "Guia (ID 292077246) e comprovante (ID 292077251, sem texto extraível) juntados em 11/06/2024."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Execução fiscal · exceção de pré-executividade rejeitada · prescrição intercorrente · cancelamento administrativo das inscrições noticiado na origem",
+   "especificidades": "Efeito suspensivo deferido (ID 306626954, 12/10/2024); a União pede sua cassação na contraminuta (ID 309542618) · Notícia de pedido de extinção da execução por cancelamento administrativo das inscrições (ID 250567661 da origem): conferir perda de objeto [VALIDAR] · Divergência de vara: 6ª ou 7ª Vara Federal de Campo Grande [VALIDAR] · Preparo: guia e comprovante bancário (IDs 292077244 a 292077251), sem comprovante STN [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · exceção de pré-executividade rejeitada · prescrição intercorrente · cancelamento administrativo das inscrições noticiado na origem",
+     "sintese": "Execução fiscal da União contra a Rádio Clube (associação recreativa), ajuizada em 2006. A executada opôs exceção de pré-executividade alegando prescrição intercorrente, rejeitada pelo juízo; a exequente teria pedido nos autos de origem a extinção por cancelamento administrativo das inscrições.",
+     "questoes": "1) Subsistência do interesse recursal diante do cancelamento administrativo das inscrições; 2) regularidade do preparo; 3) prescrição intercorrente na execução fiscal.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 291918588 (07/06/2024): prescrição intercorrente; pede efeito suspensivo, reforma para acolher a exceção e extinguir a execução.",
+      "contrarrazoes": "Contraminuta da União ID 309542618 (04/12/2024): manutenção da decisão, desprovimento e cassação do efeito suspensivo."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "324318639",
+      "juizo": "Vara Federal de Campo Grande (6ª ou 7ª) [VALIDAR]",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Deferido",
+      "id": "324318639"
+     },
+     "adm": {
+      "prot": "2024-06-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Rádio Clube",
+       "tipo": "Agravo de instrumento",
+       "id": "291918588",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "291918588",
+       "data": "2024-06-07"
+      },
+      {
+       "desc": "Decisão que deferiu o efeito suspensivo",
+       "id": "306626954",
+       "data": "2024-10-12"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "309542618",
+       "data": "2024-12-04"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "362603364",
+       "data": "2026-03-26"
+      }
+     ],
+     "pendencias": "Conferir na origem a extinção da execução; conferir a vara; conferir o comprovante STN",
+     "especificidades": "Efeito suspensivo deferido (ID 306626954, 12/10/2024); a União pede sua cassação na contraminuta (ID 309542618) · Notícia de pedido de extinção da execução por cancelamento administrativo das inscrições (ID 250567661 da origem): conferir perda de objeto [VALIDAR] · Divergência de vara: 6ª ou 7ª Vara Federal de Campo Grande [VALIDAR] · Preparo: guia e comprovante bancário (IDs 292077244 a 292077251), sem comprovante STN [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2024-10-12"
+    }
+   }
   },
   {
    "sessao": "",
