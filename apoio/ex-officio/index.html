@@ -2434,7 +2434,7 @@ function render(){
   var eDia=$('#ses-dia'),eSem=$('#ses-sem');
   if(eDia)eDia.textContent=S.ses?br(S.ses).slice(0,5):'—';
   if(eSem)eSem.textContent=S.ses?String(diaSem(S.ses)).split(',')[0]:'';
-  $('#ses-sub').textContent=S.ses?[br(S.ses),ss.hora||'',qdo].filter(Boolean).join(' · '):'';
+  $('#ses-sub').textContent=S.ses?[ss.hora||'',qdo].filter(Boolean).join(' · '):'';
   var n=function(f){return L.filter(f).length;},jul=n(function(i){return /^julgad/i.test(i.resultado||'');}),adi=n(function(i){return /^adiad/i.test(i.resultado||'');}),ret=n(function(i){return /^retirad/i.test(i.resultado||'');});
   var mi=n(function(i){return i.dataMinuta;}),co=n(function(i){return i.dataCorrecao;}),li=n(function(i){return i.dataLiberacao;}),al=n(function(i){return alertas(i).length;}),ic=n(function(i){return (i.ctl||{}).intercor;}),sem=n(function(i){return !i.servidor||i.servidor==='—';}),mt=n(metaDe);
   $('#pt-st').textContent=ic+' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'+(mt===1?'':'s');if(MO)bandaMono();prontLateral();var tx=MO?'Exportar em Excel as monocráticas filtradas (sem filtro, todas)':'Exportar em Excel os processos filtrados (sem filtro, toda a pauta)';$('#exp-xlsx').title=tx;$('#exp-xlsx').setAttribute('aria-label',tx);$('#exp-meus').hidden=MO&&!ED;$('#exp-mes').hidden=$('#imp-xlsx').hidden=!MO;if(MO){var tm='Exportar as monocráticas do período em tela ('+monoPer().lb+')';$('#exp-mes').title=tm;$('#exp-mes').setAttribute('aria-label',tm);}
@@ -8768,6 +8768,21 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
  #v-pauta.pt2:not(.mono) #trb-p{margin-top:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
 }
 #v-pauta.pt2 #pp-lst{margin:0!important;padding:0!important;border:0!important;height:0;overflow:hidden}
+/* cartão da sessão compacto: data e prazo numa linha, setas ao lado; a própria data abre a lista de sessões */
+#v-pauta.pt2 .pp-ses{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"k k nav" "d sub sub";
+  column-gap:8px;row-gap:3px;align-items:end;padding:9px 10px 10px 12px;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+#v-pauta.pt2 .pp-ses:hover{background:var(--ep2);border-color:var(--el2)}
+#v-pauta.pt2 .pp-ses:focus-within{border-color:var(--eg);box-shadow:0 0 0 3px rgba(35,90,85,.12)}
+#v-pauta.pt2 .pp-ses .pp-ses-h{display:contents}
+#v-pauta.pt2 .pp-ses .pp-ses-k{grid-area:k}
+#v-pauta.pt2 .pp-ses .pp-ses-nav{grid-area:nav;align-self:center;position:relative;z-index:2}
+#v-pauta.pt2 .pp-ses .pp-ses-d{grid-area:d;align-items:baseline}
+#v-pauta.pt2 .pp-ses .pp-ses-d b{font-size:22px}
+#v-pauta.pt2 .pp-ses .pp-ses-d::after{content:"";align-self:center;width:6px;height:6px;margin:0 2px 0 1px;border-right:1.5px solid var(--em);border-bottom:1.5px solid var(--em);transform:translateY(-2px) rotate(45deg)}
+#v-pauta.pt2 .pp-ses #ses-sub{grid-area:sub;margin:0 0 1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#v-pauta.pt2 .pp-ses .trb-sl{position:absolute;inset:0;z-index:1;margin:0}
+#v-pauta.pt2 .pp-ses .trb-sl select{width:100%;height:100%;opacity:0;cursor:pointer;border:0}
+#v-pauta.pt2 .pp-ses #ver{grid-column:1/-1;position:relative;z-index:2;margin-top:6px}
 </style>
 </body>
 </html>
