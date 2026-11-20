@@ -974,7 +974,7 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
    "grupo": "g4",
-   "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada (PIS e COFINS) · preparo em discussão",
+   "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada · PIS e COFINS · composição da base de cálculo e certeza da CDA",
    "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferir a regularidade do preparo em dobro; a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
    "variacoes": [
@@ -1055,7 +1055,92 @@
     "representacao": "Advogados Gabriel Barbosa Corrêa (OAB/MS 28.299) e Hugo Cagnin Conforte (OAB/MS 27.601) assinam as petições; procuração não identificada com texto [VALIDAR]",
     "preparo": "Sem comprovação inicial: despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC). Guia Pix ID 372624804 \"aguardando realização do pagamento\"; despacho ID 376122107 mandou comprovar pelo Tesouro; comprovante juntado em 10/06/2026 (ID 379489258), sem texto extraível."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Execução fiscal · exceção de pré-executividade rejeitada · PIS e COFINS · composição da base de cálculo e certeza da CDA",
+   "especificidades": "Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID 372624804) e despacho ID 376122107 para comprovar pelo Tesouro; comprovante STN juntado em 10/06/2026 (ID 379489258): conferir valor do dobro e prazo [VALIDAR] · Tutela recursal indeferida (ID 385924056, 13/07/2026) · Número do agravo com final 0001 · Procuração não identificada com texto [VALIDAR] · Fundamentos específicos do agravo não extraídos [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · exceção de pré-executividade rejeitada · PIS e COFINS · composição da base de cálculo e certeza da CDA",
+     "sintese": "Execução fiscal da União contra Costa Vaz Comércio de Alimentos (PIS e COFINS, R$ 145.716,71). A exceção de pré-executividade foi rejeitada; daí o agravo, sem preparo inicial comprovado.",
+     "questoes": "1) Regularidade do preparo em dobro; 2) cabimento da exceção de pré-executividade para discutir a base de cálculo do PIS e da COFINS; 3) certeza e liquidez das CDAs.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 364874536 (07/04/2026): reforma da decisão que rejeitou a exceção quanto às CDAs (IDs 342438830 a 342438833 da origem); fundamentos específicos não constam do trecho extraído.",
+      "contrarrazoes": "Contraminuta da União ID 387709321 (28/07/2026): presunção de certeza e liquidez da CDA; descabimento da exceção para discutir a composição da base de cálculo."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "560379721",
+      "juizo": "1ª Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "560379721"
+     },
+     "adm": {
+      "prot": "2026-04-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Costa Vaz Comércio de Alimentos",
+       "tipo": "Agravo de instrumento",
+       "id": "364874536",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "364874536",
+       "data": "2026-04-07"
+      },
+      {
+       "desc": "Despacho: recolhimento em dobro",
+       "id": "366467045",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Despacho: comprovação pelo Tesouro",
+       "id": "376122107",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Comprovante STN",
+       "id": "379489258",
+       "data": "2026-06-10"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "385924056",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "387709321",
+       "data": "2026-07-28"
+      }
+     ],
+     "pendencias": "Conferir o valor e o prazo do dobro; conferir a procuração",
+     "especificidades": "Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID 372624804) e despacho ID 376122107 para comprovar pelo Tesouro; comprovante STN juntado em 10/06/2026 (ID 379489258): conferir valor do dobro e prazo [VALIDAR] · Tutela recursal indeferida (ID 385924056, 13/07/2026) · Número do agravo com final 0001 · Procuração não identificada com texto [VALIDAR] · Fundamentos específicos do agravo não extraídos [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-13"
+    }
+   }
   },
   {
    "sessao": "",
