@@ -9992,13 +9992,13 @@
    "exequente": "MARCIO CARNEIRO DE OLIVEIRA",
    "executado": "RAFAEL BURIOL",
    "assunto": "Contratos Bancários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g1",
+   "tipo_caso": "AI · Alienação fiduciária · nulidade da consolidação da propriedade e dos leilões · intimação para purgação da mora · imissão na posse dos adquirentes",
+   "resultado": "Ato a proferir: julgamento do agravo (voto)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Marcio Carneiro de Oliveira contra a decisão da 1ª Vara Federal de Campo Grande/MS (ação 5005047-76.2026.4.03.6000) que indeferiu a tutela de urgência para suspender os efeitos da consolidação da propriedade fiduciária em favor da CEF, a alienação do imóvel (matrícula 95.682 do 2º Registro de Imóveis de Campo Grande) e a ordem de desocupação. O agravante sustenta que o procedimento extrajudicial completo não está nos autos, que a averbação não prova a regularidade da intimação para purgar a mora e que a decisão usou documentos de outro processo sem contraditório.",
+   "peculiaridades": "Gratuidade deferida na origem. Tutela recursal indeferida (ID 386634194). Ação conexa no JEF e ação de imissão na posse na Justiça Estadual. Imóvel residencial da família do agravante.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -10026,7 +10026,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Não localizado · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5005047-76.2026.4.03.6000, 5011155-71.2024.4.03.6201, 0819586-69.2026.8.12.0001 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5005047-76.2026.4.03.6000, 5011155-71.2024.4.03.6201, 0819586-69.2026.8.12.0001 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Alienação fiduciária de imóvel; nulidade da consolidação e da venda; intimação para purgar a mora; tutela de urgência",
+    "origem": "5005047-76.2026.4.03.6000 (1ª Vara Federal de Campo Grande/MS)",
+    "decisao_agravada": "Decisão ID 592797382 da origem, 07/07/2026",
+    "recurso": "ID 386420152 · 15/07/2026",
+    "preparo": "Gratuidade deferida na origem",
+    "monocratica": "Possível (tema recorrente de consolidação regular pela matrícula) [VALIDAR precedente]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -10047,6 +10055,94 @@
     "ultima_informacao": "Certidão · ID 386487352 · 15/07/2026",
     "ultima_movimentacao": "13/08/2026 16:03 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Alienação fiduciária · nulidade da consolidação da propriedade e dos leilões · intimação para purgação da mora · imissão na posse dos adquirentes",
+   "especificidades": "Gratuidade deferida na origem · Tutela recursal indeferida (ID 386634194, 17/07/2026) · Contrarrazões da CEF (ID 391281055) e dos adquirentes Rafael e Andreia Buriol (ID 391467442) · Ação anterior no JEF sobre o mesmo contrato (5011155-71.2024.4.03.6201), com conexão reconhecida e não remessa pela competência absoluta do JEF · Ação de imissão na posse dos adquirentes na Justiça Estadual (0819586-69.2026.8.12.0001) · Data da consolidação divergente: prenotação de 15/05/2024 na decisão (ID 386634194) e 22/11/2024 nas contrarrazões da CEF [VALIDAR]",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "O agravante financiou imóvel residencial com a CEF, com alienação fiduciária. Inadimplente, ajuizou ação no JEF para regularizar a dívida. A propriedade foi consolidada e o imóvel vendido a terceiros, que ajuizaram ação de imissão na posse. A nova ação, que pede a nulidade do procedimento, teve a tutela de urgência indeferida.",
+    "inicial": "Ação declaratória de nulidade de consolidação da propriedade fiduciária, de leilões e de venda direta, com cancelamento de registros e indenização (5005047-76.2026.4.03.6000, 1ª Vara Federal de Campo Grande/MS), valor da causa R$ 125.000,00",
+    "decisao_recorrida": "Decisão ID 592797382 da origem (07/07/2026): conexão com a ação do JEF sem remessa, pela competência absoluta; a matrícula registra o procedimento do artigo 26 da Lei 9.514/1997; documentos da ação do JEF indicam intimação pessoal em 24/06/2024; ausente probabilidade do direito, tutela indeferida",
+    "recurso": "Agravo ID 386420152 (15/07/2026): (1) ausência do procedimento extrajudicial completo; (2) a averbação não prova a validade da intimação para purgar a mora; (3) ônus da CEF de exibir o procedimento; (4) uso de documentos de outro processo sem contraditório; (5) tentativa prévia de regularizar a dívida; (6) risco de desocupação da residência. Pede tutela recursal e, subsidiariamente, suspensão só da desocupação e exibição do procedimento pela CEF.",
+    "resposta": "CEF ID 391281055 (10/08/2026): regularidade da consolidação (Lei 9.514/1997, com as alterações da Lei 13.465/2017); purgação da mora restrita ao período anterior à consolidação; desprovimento. Adquirentes Rafael e Andreia Buriol ID 391467442 (11/08/2026): regularidade do procedimento, boa-fé dos adquirentes, ônus do agravante de obter a documentação; desprovimento.",
+    "parecer": "Não consta",
+    "outros": "Decisão ID 386634194 (17/07/2026): indeferiu a tutela recursal; consolidação por prenotação de 15/05/2024 com fé pública; desconstituição depende de dilação probatória.",
+    "representacao": "Agravante: advogado Lirodiou Silva (OAB/MS 22.208). CEF: procuração ID 391281060 e substabelecimento ID 391281061. Adquirentes: advogada Lorena Cristina de Oliveira Gomide (OAB/MG 188.496).",
+    "preparo": "Dispensado: gratuidade deferida na origem (certidão ID 386487352)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Alienação fiduciária · nulidade da consolidação da propriedade e dos leilões · intimação para purgação da mora · imissão na posse dos adquirentes",
+     "sintese": "O agravante financiou imóvel residencial com a CEF, com alienação fiduciária. Inadimplente, ajuizou ação no JEF para regularizar a dívida. A propriedade foi consolidada e o imóvel vendido a terceiros, que ajuizaram ação de imissão na posse. A nova ação, que pede a nulidade do procedimento, teve a tutela de urgência indeferida.",
+     "questoes": "1) Prova da regularidade da intimação para purgação da mora (artigo 26 da Lei 9.514/1997); 2) presunção de veracidade dos registros e necessidade de dilação probatória; 3) probabilidade do direito e perigo de dano para suspender a desocupação.",
+     "rel": {
+      "razoes": "Agravo (ID 386420152): (1) ausência do procedimento extrajudicial completo; (2) averbação não prova a intimação; (3) ônus da CEF de exibi-lo; (4) uso de prova de outro processo; (5) tentativa prévia de regularização; (6) risco de desocupação.",
+      "contrarrazoes": "CEF (ID 391281055) e adquirentes (ID 391467442): regularidade da consolidação; boa-fé dos adquirentes; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "592797382",
+      "data": "2026-07-07",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Indeferiu os pedidos de tutela de urgência, por ausência de probabilidade do direito."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "592797382",
+      "data": "2026-07-07"
+     },
+     "adm": {
+      "prot": "2026-07-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Marcio Carneiro de Oliveira",
+       "tipo": "Agravo de instrumento",
+       "id": "386420152",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "386420152",
+       "data": "2026-07-15"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "386634194",
+       "data": "2026-07-17"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "391281055",
+       "data": "2026-08-10"
+      },
+      {
+       "desc": "Contraminuta dos adquirentes",
+       "id": "391467442",
+       "data": "2026-08-11"
+      }
+     ],
+     "especificidades": "Gratuidade deferida na origem · Tutela recursal indeferida (ID 386634194, 17/07/2026) · Contrarrazões da CEF (ID 391281055) e dos adquirentes Rafael e Andreia Buriol (ID 391467442) · Ação anterior no JEF sobre o mesmo contrato (5011155-71.2024.4.03.6201), com conexão reconhecida e não remessa pela competência absoluta do JEF · Ação de imissão na posse dos adquirentes na Justiça Estadual (0819586-69.2026.8.12.0001) · Data da consolidação divergente: prenotação de 15/05/2024 na decisão (ID 386634194) e 22/11/2024 nas contrarrazões da CEF [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-17"
+    }
    }
   },
   {
