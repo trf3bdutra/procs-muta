@@ -3203,7 +3203,7 @@
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
    "grupo": "g1",
-   "tipo_caso": "AI · Alienação fiduciária de imóvel · consolidação · constituição em mora · tutela indeferida",
+   "tipo_caso": "AI · Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação da propriedade · nulidade da constituição em mora e dos atos expropriatórios · CDC e inversão do ônus da prova",
    "resultado": "Ato a proferir: julgamento do agravo (voto); liminar indeferida em 18/08/2026 e há contrarrazões da CEF",
    "modelo": "",
    "variacoes": [
@@ -3287,7 +3287,77 @@
     "representacao": "Agravante: advogada Vanessa Gouveia (OAB/SP 336.694); procuração não identificada com texto [VALIDAR]. CEF: advogados Márcio Sequeira da Silva e Sérgio Machado Cezimbra (OAB/RS)",
     "preparo": "Dispensado: gratuidade concedida na origem (ID 593706673 da origem)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação da propriedade · nulidade da constituição em mora e dos atos expropriatórios · CDC e inversão do ônus da prova",
+   "especificidades": "Liminar recursal indeferida (ID 391632847, 18/08/2026), que reconheceu a gratuidade da origem (ID 593706673 da origem) · Petição de interposição endereçada ao TJMS · Procuração não identificada com texto [VALIDAR] · Decisão agravada não juntada com texto [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação da propriedade · nulidade da constituição em mora e dos atos expropriatórios · CDC e inversão do ônus da prova",
+     "sintese": "Adalberto Jorge Camargo da Silva, devedor fiduciante de imóvel da CEF (matrícula 95.662), contesta a constituição em mora e a consolidação da propriedade; a tutela para suspender os efeitos foi negada na origem.",
+     "questoes": "1) Regularidade da constituição em mora e do procedimento de consolidação; 2) aplicação do CDC e inversão do ônus da prova; 3) suspensão dos efeitos da consolidação.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 390641218 (05/08/2026): nulidade da constituição em mora e dos atos expropriatórios; CDC e inversão do ônus da prova; efeito suspensivo.",
+      "contrarrazoes": "Contrarrazões da CEF ID 398052273 (15/09/2026): manutenção da decisão e desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência para suspender os efeitos da consolidação da propriedade fiduciária do imóvel da matrícula 95.662."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-08-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "390641218",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "390641218",
+       "data": "2026-08-05"
+      },
+      {
+       "desc": "Decisão que indeferiu a liminar recursal",
+       "id": "391632847",
+       "data": "2026-08-18"
+      },
+      {
+       "desc": "Contrarrazões da CEF",
+       "id": "398052273",
+       "data": "2026-09-15"
+      }
+     ],
+     "pendencias": "Identificar a decisão agravada; conferir a procuração",
+     "especificidades": "Liminar recursal indeferida (ID 391632847, 18/08/2026), que reconheceu a gratuidade da origem (ID 593706673 da origem) · Petição de interposição endereçada ao TJMS · Procuração não identificada com texto [VALIDAR] · Decisão agravada não juntada com texto [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-08-18"
+    }
+   }
   },
   {
    "sessao": "",
