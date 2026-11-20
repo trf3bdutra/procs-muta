@@ -281,6 +281,17 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-cab .cwe-marcos input[readonly]{border:0!important;background:transparent!important;padding:0!important;height:18px!important;font-weight:600;color:var(--tx)}
 .cwe-cab .cwe-marcos input[readonly].vazio{color:var(--g2)}
 .cwe-cab .cwe-mkb button{height:26px;padding:0 10px}
+.cwe-ses{gap:6px}
+.cwe-ses button{border:1px solid var(--b)!important;border-radius:9px;background:var(--w)!important;padding:7px 10px!important;cursor:pointer}
+.cwe-ses button:hover{border-color:var(--t)!important}
+.cwe-ses button .sd{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.cwe-ses button .sd b{font:700 13.5px ui-monospace,'IBM Plex Mono',monospace;letter-spacing:-.02em}
+.cwe-ses button .sd em{font:600 9.5px ui-monospace,monospace;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--m2)}
+.cwe-ses button .sp{display:block;height:3px;margin:5px 0 3px;border-radius:2px;background:var(--l);overflow:hidden}.cwe-ses button .sp i{display:block;height:100%;background:var(--t)}
+.cwe-ses button small{display:block;font:10.5px ui-monospace,monospace;color:var(--m2)}
+.cwe-ses button.on{background:var(--t)!important;border-color:var(--t)!important;color:#fff!important;padding-left:10px!important}
+.cwe-ses button.on .sd em,.cwe-ses button.on small{color:rgba(255,255,255,.78)}.cwe-ses button.on .sp{background:rgba(255,255,255,.25)}.cwe-ses button.on .sp i{background:#fff}
+.cwe-ses button.passada:not(.on){opacity:.72}
 .cwe-sesnova{display:block;width:100%;margin-top:8px;padding:6px 10px;border:1px dashed var(--b2);border-radius:7px;background:transparent;color:var(--t);font-weight:700;font-size:12px;text-align:left;cursor:pointer}.cwe-sesnova:hover{background:var(--w)}
 .cwe-cabab{display:flex;gap:4px;padding:6px 10px;border-top:1px solid var(--l)}
 .cwe-cabab>button{border:1px solid transparent;background:transparent;border-radius:7px;padding:4px 10px;font-weight:700;font-size:12px;color:var(--t);cursor:pointer}
@@ -2065,7 +2076,10 @@ function portaToken() { return new Promise((fim) => {
     const hoje = HOJE(), lista = A.sessionData();
     const ant = lista.filter((x) => x.data < hoje), vis = lista.filter((x) => x.data >= hoje || est.arq || x.id === ss.id);
     const sub = (x) => { const n = (x.itens || []).length; if (!n) return (x.previa || []).length ? (x.previa || []).length + ' na seleção prévia' : 'sem pauta'; const m = (x.itens || []).filter((i) => i.dataMinuta).length; return m + ' de ' + n + ' minutadas'; };
-    return `<span class="cwe-k">SESSÕES</span><div class="cwe-ses">${vis.map((x) => `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}"><b>${e(A.br(x.data))}</b><small>${e(x.data < hoje ? 'realizada · ' + sub(x) : sub(x))}</small></button>`).join('')}</div>
+    /* sessões como cartões de seleção (data, dia, barra de minutadas), para não confundir com a esteira de etapas abaixo */
+    const pct = (x) => { const n = (x.itens || []).length; return n ? Math.round(100 * (x.itens || []).filter((i) => i.dataMinuta).length / n) : -1; };
+    const dia = (x) => { const t = new Date(x.data + 'T12:00:00'); return isNaN(t) ? '' : SEM[t.getDay()].slice(0, 3); };
+    return `<span class="cwe-k">SESSÕES</span><div class="cwe-ses">${vis.map((x) => { const p = pct(x); return `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}" aria-current="${x.id === ss.id}"><span class="sd"><b>${e(A.br(x.data))}</b><em>${e(x.data < hoje ? 'realizada' : dia(x))}</em></span>${p >= 0 ? `<span class="sp" aria-hidden="true"><i style="width:${p}%"></i></span>` : ''}<small>${e(sub(x))}</small></button>`; }).join('')}</div>
       <button type="button" class="cwe-sesnova" data-cwt="create-session" title="Cadastrar outra sessão">+ Nova sessão</button>
       ${ant.length ? `<button type="button" class="cwe-arq" data-cwe="arq">${est.arq ? 'Ocultar as realizadas' : 'Ver realizadas e arquivadas (' + ant.length + ')'}</button>` : ''}`;
   }
