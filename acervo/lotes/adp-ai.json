@@ -3744,7 +3744,7 @@
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
    "grupo": "g2",
-   "tipo_caso": "AI · Execução fiscal do IBAMA · gratuidade da justiça para massa falida indeferida",
+   "tipo_caso": "AI · Ambiental · execução fiscal do IBAMA · gratuidade da justiça para massa falida (Súmula 481/STJ)",
    "resultado": "Ato a proferir: julgamento do agravo (voto ou monocrática) sobre a gratuidade da massa falida; sem pedido de tutela e há contrarrazões do IBAMA",
    "modelo": "",
    "variacoes": [
@@ -3819,7 +3819,74 @@
     "representacao": "Massa falida representada pela administradora judicial Cury Administradora Judicial (advogado José Eduardo Chemin Cury, OAB/MS 9.560); termo de nomeação não identificado [VALIDAR]",
     "preparo": "Não recolhido; dispensado enquanto se discute a própria gratuidade (artigo 101, § 1º, do CPC) [VALIDAR]"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Ambiental · execução fiscal do IBAMA · gratuidade da justiça para massa falida (Súmula 481/STJ)",
+   "especificidades": "Recurso limitado à gratuidade: preparo dispensado enquanto discutida (artigo 101, § 1º, do CPC) · Sem pedido de tutela; despacho ID 366759545 mandou intimar a agravada · IBAMA pede não conhecimento por manifesta improcedência ou desprovimento · Massa falida representada pela administradora judicial (termo de nomeação nos autos) · Etiqueta LOTE MULTA - AI",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Ambiental · execução fiscal do IBAMA · gratuidade da justiça para massa falida (Súmula 481/STJ)",
+     "sintese": "O IBAMA executa crédito contra REPRAM, hoje em falência. A massa falida pediu gratuidade e opôs exceção de pré-executividade; o juízo indeferiu ambas, e a massa agravou só quanto à gratuidade, alegando insuficiência de recursos.",
+     "questoes": "1) Gratuidade da justiça para massa falida: presunção ou prova da insuficiência (Súmula 481/STJ).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 364958596 (07/04/2026): concessão da gratuidade à massa falida, com extrato bancário (ID 364958602) e quadro geral de credores (ID 364958604).",
+      "contrarrazoes": "Contrarrazões do IBAMA ID 375249489 (11/05/2026): não conhecimento por manifesta improcedência ou desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a gratuidade da justiça e rejeitou a exceção de pré-executividade (cópias IDs 364958606 e 364958608)."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "364958596",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "364958596",
+       "data": "2026-04-07"
+      },
+      {
+       "desc": "Despacho: intimação da agravada",
+       "id": "366759545",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Contrarrazões do IBAMA",
+       "id": "375249489",
+       "data": "2026-05-11"
+      }
+     ],
+     "pendencias": "Conferir o conteúdo da decisão agravada",
+     "especificidades": "Recurso limitado à gratuidade: preparo dispensado enquanto discutida (artigo 101, § 1º, do CPC) · Sem pedido de tutela; despacho ID 366759545 mandou intimar a agravada · IBAMA pede não conhecimento por manifesta improcedência ou desprovimento · Massa falida representada pela administradora judicial (termo de nomeação nos autos) · Etiqueta LOTE MULTA - AI"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   }
   },
   {
    "sessao": "",
