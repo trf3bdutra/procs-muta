@@ -269,7 +269,25 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe .pri{background:var(--t);border-color:var(--t);color:var(--w)}
 .cwe-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start}
 .cwe-nav{position:sticky;top:68px;border-top:2px solid var(--t);padding-top:11px;margin-top:22px}
-.cwe-cab .cwe-top{padding-top:14px}
+.cwe-cab{margin:22px 0 18px;border:1px solid var(--b);border-top:2px solid var(--t);background:var(--w)}
+.cwe-cab .cwe-top{padding:10px 14px 8px;align-items:center;gap:8px 16px}
+.cwe-cab .cwe-top>div:first-child{flex:1 1 420px}
+.cwe-hl{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px}
+.cwe-cab .cwe-top h1{margin:0!important;font-size:24px!important;letter-spacing:-.025em}
+.cwe-cab .cwe-julg{margin-top:3px!important;font-size:11.5px}
+.cwe-cab .cwe-marcos{margin:0;border:0;border-top:1px solid var(--l);background:var(--p)}
+.cwe-cab .cwe-mk{background:transparent;border-right:1px solid var(--l)}
+.cwe-cab .cwe-marcos label{padding:4px 10px}
+.cwe-cab .cwe-marcos input[readonly]{border:0!important;background:transparent!important;padding:0!important;height:18px!important;font-weight:600;color:var(--tx)}
+.cwe-cab .cwe-marcos input[readonly].vazio{color:var(--g2)}
+.cwe-cab .cwe-mkb button{height:26px;padding:0 10px}
+.cwe-nav{border:1px solid var(--b)!important;border-top:2px solid var(--t)!important;background:var(--w);padding:10px 0 8px!important}
+.cwe-nh{display:flex!important;justify-content:space-between;align-items:baseline;padding:0 12px}.cwe-nh small{font:inherit;color:var(--m2)}
+.cwe-nav .cwe-k2{margin-top:12px!important;padding:10px 12px 0!important;border-top:1px solid var(--l)!important}
+.cwe-nav .cwe-ses button,.cwe-nav .cwe-esteira li>button{border-left-color:transparent;padding-left:12px}
+.cwe-nav .cwe-ses button.on,.cwe-nav .cwe-esteira li.sel>button{padding-left:9px}
+.cwe-nav .cwe-arq{margin:6px 12px 0}
+.cwe-num td.it{font:600 12px ui-monospace,monospace;text-align:right;width:44px}.cwe-num tr.al td{background:#fbeeea}.cwe-num td .cwe-tg{margin-right:4px}
 .cwe-k2{display:block;margin-top:22px;padding-top:11px;border-top:2px solid var(--t)}
 .cwe-ses{display:flex;flex-direction:column;margin-top:10px}
 .cwe-ses button{display:block;width:100%;text-align:left;border:0;border-left:1px solid var(--b2);background:transparent;padding:7px 10px;color:var(--tx)}
@@ -1944,7 +1962,17 @@ function portaToken() { return new Promise((fim) => {
     const metas = lines.filter((x) => (x.metas || []).length).length;
     const f = realizada ? 5 : !pauta ? 1 : (info.unassigned || info.unrevised) ? 3 : 4;
     let cur = est.etapa || f; if (pauta && cur === 1) cur = 2;
-    return { ss, s, info, lines, itens, pauta, realizada, raw, plan, planMap, acv, previa, conf, foraAc, assDiv, foraTar, tipos, metas, f, cur };
+    /* numeração da pauta: o PDF manda; confere o número de cada item no app */
+    const num = (() => { const L = itens.slice().sort((a, b) => (+a.item || 1e9) - (+b.item || 1e9)), cn = {}, cp = {};
+      L.forEach((x) => { const n = +x.item; if (n > 0) cn[n] = (cn[n] || 0) + 1; const dg = A.digits(x.cnj); cp[dg] = (cp[dg] || 0) + 1; });
+      const max = Math.max(0, ...Object.keys(cn).map(Number)), faltam = []; for (let n = 1; n <= max; n++) if (!cn[n]) faltam.push(n);
+      const rows = L.map((x) => { const dg = A.digits(x.cnj), n = +x.item, al = [], inf = [];
+        if (!(n > 0)) al.push('sem número do item'); else if (cn[n] > 1) al.push('número repetido');
+        if (cp[dg] > 1) al.push('processo repetido'); if (!acv(x.cnj)) al.push('fora do acervo');
+        if (x.itemAnterior && String(x.itemAnterior) !== String(x.item)) inf.push('era o item ' + x.itemAnterior);
+        return { x, dg, al, inf }; });
+      return { rows, max, faltam, alertas: rows.filter((r) => r.al.length).length + faltam.length }; })();
+    return { ss, s, info, lines, itens, pauta, realizada, raw, plan, planMap, acv, previa, conf, num, foraAc, assDiv, foraTar, tipos, metas, f, cur };
   }
 
   /* ---------- cabeçalho, marcos, esteira ---------- */
@@ -1953,8 +1981,8 @@ function portaToken() { return new Promise((fim) => {
     const desc = [dia, ss.hora || '', d.pauta ? d.itens.length + ' itens' : 'sem pauta oficial', d.realizada ? 'realizada' : ss.publicada ? 'pauta publicada' : ss.marcosPub ? 'marcos publicados' : d.pauta ? 'pauta não publicada' : 'seleção prévia'].filter(Boolean).join(' · ');
     const mg = magistrados().map((m) => { const at = (m.atuacao || []).find((x) => /Turma Regional/i.test(x.orgao || '')) || {}; return `<span><b>${e(m.nome)}</b> <small>${e(at.papel || m.cargo || '')}</small></span>`; }).join('');
     const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da etapa 5'], ['copiar', 'Copiar a lista', 'área de transferência']];
-    return `<div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p>
-      ${mg ? `<p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg}<small>· composição padrão</small></p>` : ''}</div>
+    return `<div class="cwe-top"><div><div class="cwe-hl"><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p></div>
+      ${mg ? `<p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg}</p>` : ''}</div>
       <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicar na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar' : 'Publicar os marcos da sessão na Ex Officio'}">${ss.marcosPub || ss.publicada ? '● Marcos publicados' : 'Publicar marcos'}</button><button type="button" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" class="${ss.publicada ? 'on' : 'pri'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} title="${ss.publicada ? 'Pauta publicada na Ex Officio: clique para retirar' : d.pauta ? 'Publicar a pauta (processos e marcos) na Ex Officio' : 'Importe o PDF da pauta antes de publicar'}">${ss.publicada ? '● Pauta publicada' : 'Publicar pauta'}</button></span><button type="button" data-cwt="create-session" title="Cadastrar outra sessão">+ Sessão</button>
       <span class="cwe-expwrap"><button type="button" data-cwe="exp" aria-expanded="${est.exp}">Exportar ▾</button>${est.exp ? `<span class="cwe-menu" role="menu">${exp.map(([k, t, s]) => `<button type="button" role="menuitem" data-cwe="x-${k}"><b>${e(t)}</b><small>${e(s)}</small></button>`).join('')}</span>` : ''}</span>
       <button type="button" data-cwe="cfg" title="Configurações das pautas" aria-label="Configurações das pautas">⚙</button></div></div>`;
@@ -1967,11 +1995,11 @@ function portaToken() { return new Promise((fim) => {
       <span class="cwe-mkb"><button type="button" data-cwe="m-sug" title="Liberação: dias úteis antes da sessão; entrega das minutas: primeiro dia útil em que a capacidade da equipe cobre os pontos pendentes (Regras gerais › produtividade)">Sugerir pelas regras</button><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
   }
   function esteira(d) {
-    const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e conferência'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
+    const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e numeração dos itens'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
     const ok = 'ok', pd = 'pd', vz = 'vz'; const i = d.info;
     const C = [
       [['Sessão cadastrada', 'feito', ok], ['Processos na seleção prévia', d.previa.length + ' processos', d.previa.length ? ok : pd], ['Rascunho de regras e designação', 'na Triagem', vz]],
-      [['PDF da pauta importado', d.pauta ? d.itens.length + ' itens' : 'aguardando o PDF', d.pauta ? ok : vz], ['Conferência com a seleção prévia', d.pauta ? `${d.conf.fora.length} fora · ${d.conf.novos.length} novos · ${d.conf.batem.length} batem` : 'depois do PDF', !d.pauta ? vz : (d.ss.conferencia || {}).confirmada ? ok : pd]],
+      [['PDF da pauta importado', d.pauta ? d.itens.length + ' itens' : 'aguardando o PDF', d.pauta ? ok : vz], ['Numeração conferida', d.pauta ? (d.num.alertas ? d.num.alertas + ' alerta(s) · ' : '') + 'itens 1 a ' + d.num.max : 'depois do PDF', !d.pauta ? vz : d.num.alertas ? pd : (d.ss.conferencia || {}).confirmada ? ok : pd]],
       [['A · Regras de etiquetas', `${d.tipos.ED} ED · ${d.tipos.AgInt} AgInt · ${d.tipos.JR} JR · ${d.tipos.ret} retirados`, d.pauta ? ok : vz, 0], ['B · Designação e correção', `${i.unassigned} sem minutante · ${i.unrevised} sem corretor`, !d.pauta ? vz : (i.unassigned || i.unrevised) ? pd : ok, 1]],
       [['Conferência final', `${d.foraAc} fora do acervo · ${d.assDiv} assuntos · ${d.foraTar} fora de tarefa de sessão`, !d.pauta ? vz : (d.foraAc || d.assDiv) ? pd : ok], ['Pauta publicada à equipe', d.ss.publicada ? (d.ss.pronta ? 'publicada em ' + A.br(d.ss.pronta) : 'publicada') : d.realizada ? 'sessão realizada' : 'a publicar', d.ss.pronta ? ok : vz]],
       [['Painel integral', 'números e distribuição', d.pauta ? ok : vz], ['Produção', `${i.lines.filter((x) => x.dataMinuta).length} minutadas · ${i.released} liberadas`, i.released ? ok : vz]]
@@ -1989,7 +2017,7 @@ function portaToken() { return new Promise((fim) => {
     const hoje = HOJE(), lista = A.sessionData();
     const ant = lista.filter((x) => x.data < hoje), vis = lista.filter((x) => x.data >= hoje || est.arq || x.id === ss.id);
     const sub = (x) => { const n = (x.itens || []).length; if (!n) return (x.previa || []).length ? (x.previa || []).length + ' na seleção prévia' : 'sem pauta'; const m = (x.itens || []).filter((i) => i.dataMinuta).length; return m + ' de ' + n + ' minutadas'; };
-    return `<span class="cwe-k">SESSÕES</span><div class="cwe-ses">${vis.map((x) => `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}"><b>${e(A.br(x.data))}</b><small>${e(x.data < hoje ? 'realizada · ' + sub(x) : sub(x))}</small></button>`).join('')}</div>
+    return `<span class="cwe-k cwe-nh">SESSÕES <small>${vis.length}</small></span><div class="cwe-ses">${vis.map((x) => `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}"><b>${e(A.br(x.data))}</b><small>${e(x.data < hoje ? 'realizada · ' + sub(x) : sub(x))}</small></button>`).join('')}</div>
       ${ant.length ? `<button type="button" class="cwe-arq" data-cwe="arq">${est.arq ? 'Ocultar as realizadas' : 'Ver realizadas e arquivadas (' + ant.length + ')'}</button>` : ''}`;
   }
 
@@ -2060,33 +2088,22 @@ function portaToken() { return new Promise((fim) => {
   }
 
   function etapa2(ss, d) {
-    const drop = `<div class="cwe-drop"><span><span class="cwe-k">ESPELHO DA PAUTA · SESSÃO DE ${e(A.br(ss.data))}</span><b>${d.pauta ? 'Pauta oficial importada · ' + d.itens.length + ' itens' : 'Arraste o PDF da pauta aqui ou escolha o arquivo.'}</b><small>${e(ss.arquivo || 'resumo do espelho de pauta em PDF')}</small></span><button type="button" class="pri" data-cwt="import-pdf">${d.pauta ? 'Reimportar o PDF' : 'Importar PDF'}</button><input type="file" id="cwt-pdf-file" accept=".pdf,application/pdf" hidden></div>`;
-    if (!d.pauta) return `<section class="cwe-st"><h2>2 · Pauta oficial</h2><p>Oficializado o registro no PJe, chega o PDF do Resumo do Espelho de Pauta. O PDF oficializa a listagem: cada processo da seleção prévia recebe o número do seu item.</p>${drop}</section>`;
-    const conf = (ss.conferencia || {}).confirmada, prox = proxSessao(ss);
-    const ass = (dg) => { const it = d.raw.get(dg) || {}; const r = d.acv(dg) || {}; return it.assunto || r.Assunto || r.assunto_judicial || '—'; };
-    const tg = (cl, t) => `<span class="cwe-tg ${cl}">${e(t)}</span>`;
-    const semPrevia = !d.previa.length;
-    const G = [
-      ['fora', 'Ficaram de fora', 'estavam na seleção prévia e não vieram no PDF', 'r', d.conf.fora, 'Marcados na seleção prévia e ausentes do PDF. Escolha o destino de cada um.', 'Onde está', (dg) => { const o = ondeEsta(dg, ss); return o.length ? 'pauta' + (o.length > 1 ? 's' : '') + ' de ' + o.join(' e ') : 'nenhuma pauta'; }, () => tg('r', 'tirar a marca'),
-        [prox ? `<button type="button" class="pri" data-cwe="c2-passar" data-v="${e(prox.id)}">Passar à próxima sessão (${e(A.br(prox.data).slice(0, 5))})</button>` : '', `<button type="button" data-cwe="c2-devolver">Devolver à Triagem</button>`]],
-      ['novos', semPrevia ? 'Itens do PDF' : 'Novos', semPrevia ? 'a sessão não tinha seleção prévia gravada' : 'vieram no PDF sem estar na seleção prévia', 'a', d.conf.novos, semPrevia ? 'Sem seleção prévia, a conferência só lista os itens do PDF.' : 'Entraram na pauta pelo PDF, sem rascunho da Triagem. Recebem as regras e a designação na etapa 3, com os demais.', 'Tarefa no PJe', (dg) => (d.acv(dg) || {}).tarefa_atual || '—', () => tg('a', 'na pauta · sem rascunho'),
-        [`<button type="button" data-cwe="triagem">Abrir na Triagem</button>`]],
-      ['batem', 'Batem', 'estavam na seleção prévia e vieram no PDF', 'g', d.conf.batem, 'O PDF oficializa: recebem o número do item. O rascunho de regras e designação feito na Triagem segue para a etapa 3.', 'Seção', (dg) => { const x = d.lines.find((l) => A.digits(l.cnj) === dg); return x?.secao || '—'; }, () => tg('g', 'na pauta'), []]
-    ].filter((g) => !(semPrevia && g[0] !== 'novos'));
-    const res = G.map(([k, t, s, cl, l]) => `<a href="#cwe-g-${k}" class="${cl}"><b>${l.length}</b><span>${e(t)}</span><small>${e(s)}</small></a>`).join('');
-    const corpo = G.map(([k, t, , cl, l, aj, c3, f3, f4, acoes]) => {
-      const vis = est.c2[k] ? l : l.slice(0, 5);
-      return `<tbody id="cwe-g-${k}"><tr class="gh ${cl}"><td colspan="5"><div><b class="n">${l.length}</b><b>${e(t)}</b><span>${e(aj)}</span><span class="cwe-acoes in">${acoes.join('')}</span></div></td></tr>
-        ${vis.map((dg) => `<tr><td>${ck('c2' + k, dg)}</td><td><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(dg))}</button></td><td>${e(ass(dg))}</td><td class="m">${e(f3(dg))}</td><td>${f4(dg)}</td></tr>`).join('')}
-        ${l.length > 5 ? `<tr><td colspan="5"><button type="button" class="cwe-mais2" data-cwe="c2-mais" data-v="${k}">${est.c2[k] ? 'Mostrar só os 5 primeiros' : 'Mostrar os outros ' + (l.length - 5)}</button></td></tr>` : ''}</tbody>`;
-    }).join('');
+    const drop = `<div class="cwe-drop"><span><span class="cwe-k">ESPELHO DA PAUTA · SESSÃO DE ${e(A.br(ss.data))}</span><b>${d.pauta ? 'Pauta oficial importada · ' + d.itens.length + ' itens' : 'Arraste o PDF da pauta aqui ou escolha o arquivo.'}</b><small>${e([ss.arquivo || 'resumo do espelho de pauta em PDF', ss.numero ? 'pauta nº ' + ss.numero : ''].filter(Boolean).join(' · '))}</small></span><button type="button" class="pri" data-cwt="import-pdf">${d.pauta ? 'Reimportar o PDF' : 'Importar PDF'}</button><input type="file" id="cwt-pdf-file" accept=".pdf,application/pdf" hidden></div>`;
+    if (!d.pauta) return `<section class="cwe-st"><h2>2 · Pauta oficial</h2><p>Chega o PDF do Resumo do Espelho de Pauta. Ele define a pauta: quais processos entram e o número do item de cada um.</p>${drop}</section>`;
+    const conf = (ss.conferencia || {}).confirmada, N = d.num, tg = (cl, t) => `<span class="cwe-tg ${cl}">${e(t)}</span>`;
+    const comAl = N.rows.filter((r) => r.al.length), so = !!est.c2.so && comAl.length, L = so ? comAl : N.rows, vis = est.c2.todos || so ? L : L.slice(0, 60);
+    const res = [[d.itens.length, 'itens no PDF', 'conforme o espelho importado', 'g'], [N.max ? '1 a ' + N.max : '—', 'numeração', N.faltam.length ? 'faltam ' + N.faltam.slice(0, 8).join(', ') + (N.faltam.length > 8 ? '…' : '') : 'sequência completa', N.faltam.length ? 'r' : 'g'],
+      [comAl.length, 'itens com alerta', 'número repetido ou ausente, processo repetido, fora do acervo', comAl.length ? 'r' : 'g'], [N.rows.filter((r) => r.inf.length).length, 'números alterados', 'na última reimportação do PDF', 'a']];
+    const fora = d.conf.fora, prox = proxSessao(ss);
     return `<section class="cwe-st"><h2>2 · Pauta oficial</h2>
-      <p>O PDF oficializa a listagem: cada processo recebe o número do seu item. Tudo numa lista só: no topo os que ficaram de fora, depois os novos e, embaixo, os que batem.</p>
+      <p>O PDF define a pauta. Aqui se confere, item por item, o número que cada processo recebeu no app a partir do PDF.</p>
       ${drop}
-      <div class="cwe-res">${res}</div>
-      <div class="cwe-lst"><div class="cwe-lst-h"><span><b>Uma lista só</b>, na ordem: ficaram de fora, novos e os que batem.</span>${conf ? `<span class="cwe-ok">Pauta oficial conferida em ${e(A.br(conf))}</span>` : ''}<button type="button" class="pri" data-cwe="c2-confirmar">${conf ? 'Confirmar de novo' : 'Confirmar a pauta oficial'}</button></div>
-        <div class="cwe-tbl"><table><thead><tr><th></th><th>Processo</th><th>Assunto</th><th>Detalhe</th><th>Situação ou destino</th></tr></thead>${corpo}</table></div></div>
-      <p class="cwe-nota">Ao confirmar, os processos que batem ficam como pautados na Triagem. Quem ficou de fora volta à Triagem ou passa para a seleção prévia da próxima sessão. A gravação vai ao procs-muta como o botão Gravar triagem.</p>
+      <div class="cwe-res">${res.map(([n, t, sb, cl]) => `<a class="${cl}"><b>${e(String(n))}</b><span>${e(t)}</span><small>${e(sb)}</small></a>`).join('')}</div>
+      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs"><button type="button" data-cwe="c2-so" data-v="0" aria-pressed="${!so}">Todos os itens</button><button type="button" data-cwe="c2-so" data-v="1" aria-pressed="${!!so}" ${comAl.length ? '' : 'disabled'}>Só com alerta (${comAl.length})</button></span>${conf ? `<span class="cwe-ok">Numeração conferida em ${e(A.br(conf))}</span>` : ''}<button type="button" class="pri" data-cwe="c2-confirmar">${conf ? 'Conferir de novo' : 'Confirmar a numeração'}</button></div>
+        <div class="cwe-tbl"><table class="cwe-num"><thead><tr><th>Item</th><th>Processo</th><th>Classe</th><th>Partes</th><th>Conferência</th></tr></thead><tbody>
+        ${vis.map((r) => `<tr class="${r.al.length ? 'al' : ''}"><td class="it">${e(r.x.item || '—')}</td><td><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(r.dg)}">${e(A.cnj(r.x.cnj))}</button></td><td>${e((r.x.classe || '').split(' - ')[0] || '—')}</td><td class="m">${e((r.x.partes || '').slice(0, 90) || '—')}</td><td>${r.al.map((t) => tg('r', t)).join('') + r.inf.map((t) => tg('a', t)).join('') || tg('g', 'confere')}</td></tr>`).join('')}
+        ${L.length > vis.length ? `<tr><td colspan="5"><button type="button" class="cwe-mais2" data-cwe="c2-todos">Mostrar os outros ${L.length - vis.length}</button></td></tr>` : ''}</tbody></table></div></div>
+      ${fora.length ? `<p class="cwe-nota">${fora.length} processo(s) marcados para esta sessão na Triagem não vieram no PDF. <button type="button" class="cwe-lnk" data-cwe="c2-devolver">Devolver à Triagem</button>${prox ? ` · <button type="button" class="cwe-lnk" data-cwe="c2-passar" data-v="${e(prox.id)}">passar à sessão de ${e(A.br(prox.data).slice(0, 5))}</button>` : ''}</p>` : ''}
       <div class="cwe-acoes"><button type="button" class="pri" data-cwe="etapa" data-n="3">Próximo: preparar →</button></div></section>`;
   }
 
@@ -2305,15 +2322,17 @@ function portaToken() { return new Promise((fim) => {
     if (k === 'fechar-sel') { const t = d.lines.map((x) => A.cnj(x.cnj)).join('\n'); (navigator.clipboard?.writeText(t) || Promise.reject()).then(() => A.msg(d.lines.length + ' números copiados para o registro no PJe. A seleção segue editável na Triagem até o PDF da pauta.')).catch(() => A.msg('Não foi possível copiar.', true)); return true; }
     if (k === 'venc-passar' || k === 'venc-devolver') { const v = vencidas().find((x) => x.id === b.dataset.v); if (!v) return true;
       mover({ id: '*' }, v.cnjs, k === 'venc-passar' ? ss.id : null, k === 'venc-passar' ? 'Passar para a sessão de ' + A.br(ss.data) + ' os processos marcados para ' + A.br(v.data) + '?' : 'Devolver à Triagem (tirar a marca de seleção prévia) os processos marcados para ' + A.br(v.data) + '?'); return true; }
-    if (k === 'c2-passar') { const p = A.sessionData().find((x) => x.id === b.dataset.v); mover(ss, marcados('c2fora', d.conf.fora), b.dataset.v, 'Passar os que ficaram de fora para a seleção prévia da sessão de ' + (p ? A.br(p.data) : '') + '?'); return true; }
-    if (k === 'c2-devolver') { mover(ss, marcados('c2fora', d.conf.fora), null, 'Devolver à Triagem os que ficaram de fora (tirar a marca de seleção prévia)?'); return true; }
+    if (k === 'c2-passar') { const p = A.sessionData().find((x) => x.id === b.dataset.v); mover(ss, d.conf.fora, b.dataset.v, 'Passar os que ficaram de fora para a seleção prévia da sessão de ' + (p ? A.br(p.data) : '') + '?'); return true; }
+    if (k === 'c2-devolver') { mover(ss, d.conf.fora, null, 'Devolver à Triagem os que ficaram de fora (tirar a marca de seleção prévia)?'); return true; }
     if (k === 'c2-confirmar') {
       if (!s?.confirmarPauta) { A.msg('Motor indisponível.', true); return true; }
-      const bt = marcados('c2batem', d.conf.batem);
-      if (!W.confirm('Confirmar a pauta oficial de ' + A.br(ss.data) + '?\n\n' + d.itens.length + ' itens do PDF.' + (bt.length ? ' ' + bt.length + ' processo(s) da seleção prévia passam a pautados na Triagem.' : ''))) return true;
+      const bt = d.conf.batem;
+      if (!W.confirm('Confirmar a numeração da pauta de ' + A.br(ss.data) + '?\n\n' + d.itens.length + ' itens, de 1 a ' + d.num.max + ', conforme o PDF.' + (d.num.alertas ? '\n\nHá ' + d.num.alertas + ' alerta(s) na conferência.' : ''))) return true;
       s.confirmarPauta(ss.id);
       if (bt.length && s.moverPrevia) { const r = s.moverPrevia(ss.id, bt, 'pautar'); Promise.resolve(r.gravando).catch((er) => A.msg('Falha ao gravar a triagem: ' + (er?.message || er), true)).then(() => A.render()); }
-      A.msg('Pauta oficial conferida.'); A.render(); return true; }
+      A.msg('Numeração conferida.'); A.render(); return true; }
+    if (k === 'c2-so') { est.c2.so = b.dataset.v === '1'; A.render(); return true; }
+    if (k === 'c2-todos') { est.c2.todos = true; A.render(); return true; }
     if (k === 'etq-aplicar') { if (!s?.aplicarConversoes) { A.msg('Motor indisponível.', true); return true; }
       const L = convDados(ss, d).filter((p) => p.proposta?.dif.length && marcado('etq', A.digits(p.cnj))).map((p) => p.cnj);
       if (!L.length || !W.confirm('Aplicar as conversões de etiquetas a ' + L.length + ' processo(s)?\n\nFixa apreciação, meta e MPF que vieram das regras. O que foi fixado à mão não muda.')) return true;
@@ -2464,7 +2483,7 @@ function portaToken() { return new Promise((fim) => {
     if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapa3, etapa4, etapa5][d.cur](ss, d);
-    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
+    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-nh cwe-k2">ESTEIRA <small>${e(A.br(ss.data).slice(0, 5))}</small></span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
     requestAnimationFrame(mesaSync);
   }
 

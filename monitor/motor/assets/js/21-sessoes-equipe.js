@@ -1716,7 +1716,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       var ss = S.sessoes.find(function (x) { return x.data && x.data === p.data; });
       if (ss && ss.itens.length && !W.confirm('Já existe a sessão de ' + br(p.data) + '. Atualizar a lista de itens? As designações dos processos que continuam na pauta são mantidas.')) return { ok: false, cancelado: true, erro: 'Importação cancelada.' };
       var antigos = new Map(((ss && ss.previa) || []).concat((ss && ss.itens) || []).map(function (i) { return [dig(i.cnj), i]; }));
-      var itens = meus.map(function (x) { var o = antigos.get(dig(x.cnj)) || {}; return Object.assign({ servidor: '', corretor: '', obs: '', tipoManual: '' }, o, x); });
+      /* o PDF define o número do item; se a reimportação mudou o número, guarda o anterior para a conferência da etapa 2 */
+      var itens = meus.map(function (x) { var o = antigos.get(dig(x.cnj)) || {}, r = Object.assign({ servidor: '', corretor: '', obs: '', tipoManual: '' }, o, x); if (o.item && String(o.item) !== String(x.item)) r.itemAnterior = String(o.item); else delete r.itemAnterior; return r; });
       var prevL = ((ss && ss.previa) || []).map(function (i) { return dig(i.cnj); }), pautL = itens.map(function (i) { return dig(i.cnj); });
       var conf = prevL.length ? { em: hoje(), ok: pautL.filter(function (c) { return prevL.indexOf(c) >= 0; }).length, fora: ((ss && ss.previa) || []).filter(function (i) { return pautL.indexOf(dig(i.cnj)) < 0; }).map(function (i) { return i.cnj; }), novos: itens.filter(function (i) { return prevL.indexOf(dig(i.cnj)) < 0; }).map(function (i) { return i.cnj; }) } : null;
       if (ss) { ss.itens = itens; ss.arquivo = nome; ss.numero = p.numero || ss.numero; }
