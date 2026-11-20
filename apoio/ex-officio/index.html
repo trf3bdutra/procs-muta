@@ -4442,13 +4442,13 @@ var id=(CMT.dv&&dv.some(function(y){return y.id===CMT.dv;}))?CMT.dv:dv[0].id;CMT
 var tag=function(t){return t==='duvida'?'':'<em class="cmt-tg '+t+'">'+(t==='retirada'?'retirada':'adiamento')+'</em>';};
 lis.innerHTML=dv.map(function(x){return '<button type="button" data-cdvs="'+esc(x.id)+'" aria-pressed="'+(x.id===id)+'"><span><b>'+tag(x.tipo)+esc(x.de||x.titulo||'Dúvida')+'</b><small>'+esc(x.numero||x.titulo||'')+'</small></span><time>'+esc(x.em?br(String(x.em).slice(0,10)):'')+'</time></button>';}).join('');
 var x=dv.filter(function(y){return y.id===id;})[0]||dv[0],ped=x.tipo!=='duvida';
-ab.innerHTML='<p class="cmt-fc-n">'+esc(x.numero||x.titulo||'—')+'</p>'+
+ab.innerHTML='<div class="dv-q"><p class="cmt-fc-n">'+esc(x.numero||x.titulo||'—')+'</p>'+
 '<p class="cmt-fc-s">'+(ped?'Pedido de '+esc(x.tipo)+(x.de?' · '+esc(x.de):''):esc(x.prioridade||'Dúvida'))+'</p>'+
 '<p class="q">'+esc(x.texto||'(sem texto)')+'</p>'+
-(x.resposta?'<p class="cmt-fc-k">Já respondida</p><p class="cmt-fc-r">'+esc(x.resposta)+'</p>':'')+
-'<p class="cmt-fc-k">'+(ped?'Decisão':'Devolutiva')+'</p><label class="vh" for="cmt-dv-tx">'+(ped?'Decisão':'Devolutiva')+'</label><textarea id="cmt-dv-tx" rows="'+(ped?3:4)+'" placeholder="'+(ped?'Fundamento da decisão, se quiser registrar…':'Escreva a orientação à equipe…')+'"></textarea>'+
-(ped?'<div class="ac"><button type="button" class="pri" data-cpd="defere" data-cid="'+esc(x.id)+'">Deferir o pedido</button><button type="button" data-cpd="indefere" data-cid="'+esc(x.id)+'">Indeferir</button></div>'
-   :'<div class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder'+(x.de?' a '+esc(x.de):'')+'</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></div>');}
+(x.resposta?'<p class="cmt-fc-k">Já respondida</p><p class="cmt-fc-r">'+esc(x.resposta)+'</p>':'')+'</div>'+
+'<div class="dv-r"><p class="cmt-fc-k">'+(ped?'Decisão':'Devolutiva')+'</p><label class="vh" for="cmt-dv-tx">'+(ped?'Decisão':'Devolutiva')+'</label><textarea id="cmt-dv-tx" rows="'+(ped?3:4)+'" placeholder="'+(ped?'Fundamento da decisão, se quiser registrar…':'Escreva a orientação à equipe…')+'"></textarea>'+
+(ped?'<div class="ac"><button type="button" class="pri" data-cpd="defere" data-cid="'+esc(x.id)+'">Deferir o pedido</button><button type="button" data-cpd="indefere" data-cid="'+esc(x.id)+'">Indeferir</button></div></div>'
+   :'<div class="ac"><button type="button" class="pri" data-crs="'+esc(x.id)+'">Responder'+(x.de?' a '+esc(x.de):'')+'</button><button type="button" data-crm="'+esc(x.id)+'">Responder sem concluir</button></div></div>');}
 /* nota que fica no item: o que foi decidido, quando e a pedido de quem */
 function cmtNotaSit(pd){
 var j=CMT.dados||{},it=(((j.pauta||{}).itens)||[]).filter(function(x){return dgx(x.cnj)===dgx(pd.numero);})[0]||{};
@@ -8709,6 +8709,28 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 :is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa:is(.s1,.s2):not(.inf):hover :is(i,b),:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa[data-cl].s3:hover :is(i,b){border-color:var(--er);color:var(--er)}
 :is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa.s1.inf:hover :is(i,b){border-color:#9fd0b6;color:#28744b}
 :is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa.s2.inf:hover :is(i,b){border-color:#9cc0e0;color:#245b8c}
+/* dúvida aberta em duas colunas: o pedido à esquerda, a resposta à direita (sem sobra vazia) */
+@media (min-width:781px){
+ #v-cmt .cmt-gv .cmt-dvb{max-width:none;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:0 28px;align-items:start}
+ #v-cmt .cmt-gv .cmt-dvb>.dv-r{padding-left:24px;border-left:1px solid var(--el)}
+ #v-cmt .cmt-gv .cmt-dvb>.dv-r>.cmt-fc-k:first-child{margin-top:0}
+ #v-cmt .cmt-gv .cmt-dvb>.dv-r{display:flex;flex-direction:column;gap:8px;min-width:0}
+ #v-cmt .cmt-gv .cmt-dvb>.dv-r textarea{width:100%;box-sizing:border-box;min-height:96px}
+ #v-cmt .cmt-gv .cmt-dvb>.dv-r .ac{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+ #v-cmt .cmt-gv .cmt-dvb>.dv-r .ac button{flex:1 1 auto;width:auto}
+ #v-cmt .cmt-gv .cmt-dvb>.dv-r .ac .pri{flex:2 1 auto}
+ #v-cmt .cmt-gv .cmt-dvb>.cmt-vazio{grid-column:1/-1}
+}
+/* cabeçalho numa linha também com o painel de assinatura aberto (até 1519 px) */
+@media (min-width:781px) and (max-width:1519px){
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-hd2-h{font-size:16px}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-hd2 .hb{padding:0 5px;letter-spacing:.06em;font-size:10px}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-hd2 .cmt-fastnav input{width:90px}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-hd2 .cmt-fastnav .qf-kb{padding:0 5px}
+}
+@media (min-width:781px) and (max-width:1399px){
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-hd2 .star{display:none}
+}
 </style>
 </body>
 </html>
