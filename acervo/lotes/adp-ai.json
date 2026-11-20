@@ -9355,13 +9355,13 @@
    "exequente": "CHRISTIAN FLORIANO FARIA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Compra e Venda",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Contratos bancários e CEF · SFH · seguro habitacional MIP · negativa de cobertura por doença preexistente · suspensão das prestações após o óbito do mutuário",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto); apreciar antes o pedido de regularização do polo ativo (ID 356541921) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Christian Floriano Faria contra a decisão da 1ª Vara Federal de Três Lagoas (ação de cobrança securitária 5000059-03.2026.4.03.6003) que indeferiu a tutela de urgência para suspender a cobrança das prestações de dois contratos de financiamento habitacional após o óbito do mutuário, diante da negativa de cobertura do seguro MIP por doença preexistente. O agravante sustenta que a declaração de saúde não era obrigatória, que os prêmios foram pagos sem ressalva e que não há prova de má-fé do segurado.",
+   "peculiaridades": "Efeito suspensivo indeferido na 1ª Turma por exigir a controvérsia dilação probatória. Pedido de substituição do agravante pelo espólio pendente [VALIDAR]. Dois agravados: CEF e Caixa Seguradora.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -9394,7 +9394,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Sem custas (certidão) · certidão sem custas: ID 356485557 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5000059-03.2026.4.03.6003 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5000059-03.2026.4.03.6003 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "SFH: seguro MIP; negativa de cobertura por doença preexistente; suspensão das prestações",
+    "origem": "1ª Vara Federal de Três Lagoas · 5000059-03.2026.4.03.6003",
+    "decisao_agravada": "Decisão que indeferiu a tutela de urgência [VALIDAR ID]",
+    "recurso": "ID 356372470 · 23/02/2026",
+    "preparo": "Justiça gratuita (deferida na origem, segundo o agravante) [VALIDAR]",
+    "monocratica": "Não indicada: há duas respostas e pedido de alteração do polo ativo",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -9415,6 +9423,108 @@
     "ultima_informacao": "Certidão · ID 365638467 · 10/04/2026",
     "ultima_movimentacao": "10/04/2026 15:33 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Contratos bancários e CEF · SFH · seguro habitacional MIP · negativa de cobertura por doença preexistente · suspensão das prestações após o óbito do mutuário",
+   "especificidades": "Efeito suspensivo indeferido pelo Des. Fed. Herbert de Bruyn, 1ª Turma, antes da redistribuição (ID 356516978, 24/02/2026) · Pedido de regularização do polo ativo para o Espólio de Rubens Aparecido Faria, representado pela inventariante (ID 356541921): conferir se foi apreciado [VALIDAR] · Duas respostas: CEF (ID 357613294) e Caixa Seguradora (ID 362827338) · Agravante reiterou a tutela (ID 361453824) · Gratuidade alegadamente deferida na origem; certidão de ausência de custas (ID 356485557)",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Após o óbito do mutuário, a seguradora negou a cobertura MIP por doença preexistente e a CEF manteve a cobrança das prestações; o juízo indeferiu a tutela para suspendê-las.",
+    "inicial": "Ação de cobrança securitária 5000059-03.2026.4.03.6003, 1ª Vara Federal de Três Lagoas, contra a CEF e a Caixa Seguradora",
+    "decisao_recorrida": "Decisão que indeferiu a tutela de urgência para suspender a cobrança das prestações (ID da origem [VALIDAR]); publicada em 04/02/2026, segundo o agravante",
+    "recurso": "Agravo ID 356372470 (23/02/2026): (1) declaração de doença preexistente não exigida na contratação; (2) prêmios pagos sem ressalva por cerca de cinco anos; (3) ausência de prova de má-fé (artigos 6º, III e VIII, 14 e 47 do CDC e 373, II, do CPC); e (4) perigo de dano pelo acréscimo do saldo devedor e risco de negativação.",
+    "resposta": "CEF, ID 357613294 (02/03/2026): necessidade de dilação probatória e inexistência de perigo de dano. Caixa Seguradora, ID 362827338 (27/03/2026): omissão intencional de doença preexistente e ausência de probabilidade do direito.",
+    "parecer": "Não consta",
+    "outros": "Decisão ID 356516978 (24/02/2026, Des. Fed. Herbert de Bruyn): indeferiu o efeito suspensivo. Petição de regularização do polo ativo ID 356541921 (24/02/2026). Manifestação do agravante ID 361453824 (20/03/2026). Decisão de redistribuição ID 365175995 (08/04/2026).",
+    "representacao": "Agravante: advogados constituídos (ID 356541929). Agravadas: CEF e Caixa Seguradora, com advogados.",
+    "preparo": "Não recolhido; agravante alega gratuidade deferida na origem (certidão ID 356485557) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contratos bancários e CEF · SFH · seguro habitacional MIP · negativa de cobertura por doença preexistente · suspensão das prestações após o óbito do mutuário",
+     "sintese": "Após o óbito do mutuário, a seguradora negou a cobertura MIP por doença preexistente e a CEF manteve a cobrança das prestações; o juízo indeferiu a tutela para suspendê-las.",
+     "questoes": "1) Regularização do polo ativo (espólio); 2) probabilidade do direito à cobertura MIP diante da alegada doença preexistente; 3) suspensão da cobrança das prestações desde o óbito.",
+     "rel": {
+      "razoes": "Agravo (ID 356372470): (1) declaração de saúde não exigida; (2) prêmios pagos sem ressalva; (3) ausência de prova de má-fé; e (4) perigo de dano.",
+      "contrarrazoes": "CEF (ID 357613294): dilação probatória e ausência de perigo de dano. Caixa Seguradora (ID 362827338): omissão intencional de doença preexistente."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "[VALIDAR]",
+      "juizo": "1ª Vara Federal de Três Lagoas",
+      "dispositivo": "Indeferiu a tutela de urgência para suspender a cobrança das prestações dos contratos de financiamento."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-02-23",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Christian Floriano Faria",
+       "tipo": "Agravo de instrumento",
+       "id": "356372470",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "356372470",
+       "data": "2026-02-23"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "356516978",
+       "data": "2026-02-24"
+      },
+      {
+       "desc": "Petição de regularização do polo ativo",
+       "id": "356541921",
+       "data": "2026-02-24"
+      },
+      {
+       "desc": "Contrarrazões da CEF",
+       "id": "357613294",
+       "data": "2026-03-02"
+      },
+      {
+       "desc": "Manifestação do agravante",
+       "id": "361453824",
+       "data": "2026-03-20"
+      },
+      {
+       "desc": "Contraminuta da Caixa Seguradora",
+       "id": "362827338",
+       "data": "2026-03-27"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "365175995",
+       "data": "2026-04-08"
+      }
+     ],
+     "pendencias": "Identificar o ID da decisão agravada; conferir o deferimento da gratuidade na origem; apreciar o pedido de regularização do polo ativo",
+     "especificidades": "Efeito suspensivo indeferido pelo Des. Fed. Herbert de Bruyn, 1ª Turma, antes da redistribuição (ID 356516978, 24/02/2026) · Pedido de regularização do polo ativo para o Espólio de Rubens Aparecido Faria, representado pela inventariante (ID 356541921): conferir se foi apreciado [VALIDAR] · Duas respostas: CEF (ID 357613294) e Caixa Seguradora (ID 362827338) · Agravante reiterou a tutela (ID 361453824) · Gratuidade alegadamente deferida na origem; certidão de ausência de custas (ID 356485557)"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-02-24"
+    }
    }
   },
   {
