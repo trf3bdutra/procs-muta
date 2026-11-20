@@ -7221,13 +7221,16 @@
    "exequente": "MINISTERIO PUBLICO FEDERAL - PR/MS",
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Dano Moral Coletivo Decorrente de Dano Ambiental",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g2",
+   "tipo_caso": "AI do MPF · ACP ambiental (atrazina na Bacia do Rio Dourados) · competência territorial (Dourados × Campo Grande)",
+   "resultado": "Ato a proferir: provável decisão monocrática julgando prejudicado o agravo, porque o Conflito de Competência 5015811-79.2026.4.03.0000 (2ª Seção, julgado em 05/08/2026, segundo a contraminuta da Globachem) declarou competente a 1ª Vara Federal de Dourados [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "VAL"
+   ],
+   "observacao": "Agravo do MPF contra a decisão (ID 578840036 da origem) da 1ª Vara Federal de Dourados que, na ACP 5003565-24.2025.4.03.6002 (MPF × IBAMA e 28 empresas fabricantes ou comercializadoras de atrazina), declinou da competência para Campo Grande por considerar regional o dano. Teses: competência funcional do local do dano (artigo 2º da LACP), epicentro na Bacia do Rio Dourados e nas comunidades Guarani-Kaiowá; inaplicabilidade do IAC 10/STJ; controle de convencionalidade (OC-23/17 e OC-32/25 da Corte IDH) e protocolos do CNJ; o juízo de Campo Grande suscitou conflito negativo. Contrarrazões de várias rés e do IBAMA; parecer da PRR pelo provimento.",
+   "peculiaridades": "Tutela recursal indeferida (decisão ID 379524581, 12/06/2026), com ofício à relatoria do conflito. A Globachem, não cadastrada como agravada, apresentou contraminuta espontânea (ID 391765095) e informou que o CC 5015811-79.2026.4.03.0000 foi julgado procedente em 05/08/2026 para declarar competente a 1ª Vara de Dourados. MPF agravante: prazo em dobro e isenção de preparo.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -7263,7 +7266,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Monocrática (prejudicialidade) [VALIDAR]",
+    "materia": "Processo coletivo ambiental — competência do local do dano (artigo 2º da LACP; artigo 93 do CDC)",
+    "origem": "ACP 5003565-24.2025.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "ID 578840036 da origem (declínio de competência)",
+    "recurso": "ID 376483069 · 27/05/2026",
+    "preparo": "Isento (MPF)",
+    "monocratica": "Provável, por prejudicialidade [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7283,6 +7295,18 @@
     "ultima_informacao": "Certidão · ID 377290877 · 29/05/2026",
     "ultima_movimentacao": " 14:08 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "O MPF ajuizou em Dourados ACP contra o IBAMA e 28 empresas por contaminação da Bacia do Rio Dourados por atrazina, com reflexo nas comunidades Guarani-Kaiowá. O juízo de Dourados declinou para Campo Grande por considerar o dano regional; o de Campo Grande suscitou conflito negativo; o MPF agravou do declínio.",
+    "inicial": "ACP 5003565-24.2025.4.03.6002, ajuizada em 18/11/2025 (segundo a contraminuta da Globachem): tutela ambiental e sanitária da Bacia do Rio Dourados contra a contaminação por atrazina; pedidos de indisponibilidade de bens e de suspensão da comercialização do herbicida",
+    "decisao_recorrida": "Decisão ID 578840036 da 1ª Vara Federal de Dourados (intimação do MPF em 07/05/2026): dano de abrangência regional; competência da capital (artigo 93, II, do CDC; IAC 10/STJ)",
+    "recurso": "Agravo do MPF ID 376483069 (27/05/2026): (1) competência absoluta e funcional do local do dano (artigo 2º da LACP); (2) epicentro na Bacia do Rio Dourados e nas aldeias Jaguapiru, Bororó e Guyraroka; (3) inaplicabilidade do IAC 10/STJ; (4) controle de convencionalidade (OC-23/17 e OC-32/25) e protocolos do CNJ; (5) o juízo de Campo Grande também se declarou incompetente. Pede efeito suspensivo ativo e a fixação da competência em Dourados.",
+    "resposta": "Contrarrazões do IBAMA (ID 385382381) e de rés (IDs 385162309, 385159751, 385144048, 385128015); contraminuta espontânea da Globachem (ID 391765095, 13/08/2026): ilegitimidade passiva (nunca comercializou atrazina), inovação recursal, competência da capital por dano regional (artigo 93, II, do CDC; Tema 1.075/STF; IAC 10/STJ) e notícia do julgamento do CC 5015811-79.2026.",
+    "parecer": "PRR3 ID 380725634 (16/06/2026): provimento do agravo, competência do local do dano (artigo 2º da LACP)",
+    "memoriais": "Não consta",
+    "representacao": "MPF (representação legal); rés por advogados constituídos (procurações sem texto extraível)",
+    "preparo": "Isento (MPF)"
    }
   },
   {
