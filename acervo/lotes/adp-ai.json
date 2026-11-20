@@ -8401,13 +8401,15 @@
    "exequente": "EMPRESA BRASILEIRA DE SERVICOS HOSPITALARES - EBSERH",
    "executado": "ANTONIA NORMA COSTA DOS SANTOS",
    "assunto": "Classificação e/ou Preterição",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI da EBSERH · Concurso (Edital 03/2023, área assistencial) · tutela que manteve candidata nas vagas de PcD · efeito suspensivo negado (3ª Turma, 2024)",
+   "resultado": "Ato a proferir: voto para a pauta, após conferir o andamento da origem (o feito chegou a ser pautado na 3ª Turma em março de 2026 e foi redistribuído antes do julgamento) [VALIDAR prejudicialidade]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da Empresa Brasileira de Serviços Hospitalares (EBSERH) contra a decisão ID 316778971 da 2ª Vara Federal de Campo Grande (processo 5001491-37.2024.4.03.6000) que suspendeu os atos que desclassificaram Antonia Norma Costa dos Santos das vagas de pessoa com deficiência no concurso do Edital 03-EBSERH/Nacional (área assistencial), garantindo sua permanência nas demais etapas, no resultado e na eventual contratação. O juízo apontou que o laudo complementar apresentado no recurso administrativo não foi analisado pela banca. A EBSERH defende a regularidade da perícia, a interpretação estrita da deficiência (Lei 13.146/2015; Decreto 3.298/1999) e o perigo inverso aos demais candidatos.",
+   "peculiaridades": "Efeito suspensivo negado (ID 292452173, Des. Fed. Nery Júnior). Preparo da EBSERH recolhido após o despacho ID 290064482 (IDs 292424390 e 292424391) — a contraminuta menciona decisão que negou à EBSERH as prerrogativas da Fazenda Pública. Intimações de pauta em 10 e 11/03/2026 (IDs 359250094, 359250108 e 359524733) e redistribuição em 04/05/2026. Pedido de intimação exclusiva em nome de Taís Mariana Lima Pereira (OAB/MS 20.453-A).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -8438,7 +8440,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Voto para a pauta (verificar a origem antes)",
+    "materia": "Concurso público — reserva de vagas para pessoa com deficiência; avaliação da banca",
+    "origem": "5001491-37.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 316778971 (autos de origem)",
+    "recurso": "ID 289872765 · 02/05/2024",
+    "preparo": "Recolhido em 18/06/2024 (IDs 292424390 e 292424391)",
+    "monocratica": "Não, salvo prejudicialidade",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -8458,6 +8469,103 @@
     "ultima_informacao": "Certidão · ID 371485627 · 06/05/2026",
     "ultima_movimentacao": "06/05/2026 17:00 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidata desclassificada das vagas de pessoa com deficiência no concurso da EBSERH obteve tutela para permanecer na reserva, porque a banca não analisou o laudo complementar do recurso administrativo. A EBSERH recorre.",
+    "inicial": "Ação de procedimento comum 5001491-37.2024.4.03.6000 contra a EBSERH e outros para manter a autora nas vagas de PcD",
+    "decisao_recorrida": "Decisão ID 316778971: tutela para suspender a desclassificação da autora das vagas de PcD e garantir sua participação nas etapas seguintes, no resultado e na contratação",
+    "recurso": "Agravo ID 289872765 (02/05/2024): (1) legalidade da perícia da banca; (2) enquadramento estrito da deficiência (Lei 13.146/2015; Decreto 3.298/1999; Decreto 6.949/2009); (3) perigo inverso e isonomia com os demais candidatos. Pede efeito suspensivo e reforma.",
+    "resposta": "Antonia Norma Costa dos Santos ID 293838942 (15/07/2024): manutenção da decisão; precedentes do TRF3; negativa à EBSERH das prerrogativas da Fazenda Pública.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "EBSERH: advogada Ynara Moraes Boranga (OAB/SP 338.507). Agravada: Taís Mariana Lima Pereira (OAB/MS 20.453-A)",
+    "preparo": "Recolhido em 18/06/2024"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Concurso público; pessoa com deficiência; reserva de vagas; avaliação biopsicossocial; EBSERH",
+     "sintese": "Candidata desclassificada das vagas de pessoa com deficiência no concurso da EBSERH obteve tutela para permanecer na reserva, porque a banca não analisou o laudo complementar do recurso administrativo. A EBSERH recorre.",
+     "questoes": "1) Situação atual da ação de origem e do concurso; 2) dever da banca de examinar os documentos do recurso administrativo; 3) enquadramento da deficiência.",
+     "rel": {
+      "razoes": "Agravo (ID 289872765): legalidade da perícia; enquadramento estrito; perigo inverso.",
+      "contrarrazoes": "Agravada (ID 293838942): manutenção da tutela."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "316778971",
+      "juizo": "2ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Deferiu a tutela para manter a autora nas vagas de PcD."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2024-05-02",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "EBSERH",
+       "tipo": "Agravo de instrumento",
+       "id": "289872765",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "289872765",
+       "data": "2024-05-02"
+      },
+      {
+       "desc": "Despacho sobre o preparo",
+       "id": "290064482",
+       "data": "2024-06-05"
+      },
+      {
+       "desc": "Comprovante de preparo",
+       "id": "292424391",
+       "data": "2024-06-18"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo (3ª Turma)",
+       "id": "292452173",
+       "data": "2024-06-24"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "293838942",
+       "data": "2024-07-15"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "369913761",
+       "data": "2026-05-04"
+      }
+     ],
+     "pendencias": [
+      "Consultar a ação de origem (sentença, contratação) [VALIDAR]",
+      "Conferir o teor do despacho ID 290064482 [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "tipoAto": "Voto",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2024-06-24"
+    }
    }
   },
   {
