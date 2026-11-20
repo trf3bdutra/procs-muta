@@ -255,14 +255,34 @@ async function gravar(req, res, u, gestor) {
   /* lote a partir de uma lista de processos (sem sessão): tarefas do PJe, triagem do acervo.
      criar-lista {id, titulo, descricao, origem, itens:[{processo, ...}]}   cria o lote (até 600 processos)
      itens {id, itens:[{processo, ...}]}   atualiza os campos informados de cada processo; o que não está no lote entra no fim */
+  /* autos {id, autos:[{cnj, extraido_em, lista, docs, faltam, texto}]}: inteiro teor extraído no navegador,
+     gravado em acervo/autos/<CNJ>.json.gz (mesmo formato do scripts/autos/registrar.py), num só commit */
+  if (b.acao === 'autos') {
+    const zlib = require('zlib'), CNJA = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
+    const lista = (Array.isArray(b.autos) ? b.autos : []).filter(a => a && CNJA.test(String(a.cnj || ''))).slice(0, 40);
+    if (!lista.length) return res.status(400).json({ erro: 'Nenhum autos válido.' });
+    const arqs = lista.map(a => {
+      const dados = { cnj: a.cnj, extraido_em: String(a.extraido_em || ''), lista: typeof a.lista === 'string' ? a.lista : JSON.stringify(a.lista || []),
+        docs: typeof a.docs === 'string' ? a.docs : JSON.stringify(a.docs || []), faltam: Array.isArray(a.faltam) ? a.faltam : [], texto: String(a.texto || '') };
+      return { caminho: 'acervo/autos/' + a.cnj + '.json.gz', conteudo: zlib.gzipSync(Buffer.from(JSON.stringify(dados))) };
+    });
+    const ref = await L.gh('/git/ref/heads/main'), base = await L.gh('/git/commits/' + ref.object.sha);
+    const tree = [];
+    for (const f of arqs) { const blob = await L.gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: f.conteudo.toString('base64'), encoding: 'base64' }) }); tree.push({ path: f.caminho, mode: '100644', type: 'blob', sha: blob.sha }); }
+    const t = await L.gh('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree }) });
+    const c = await L.gh('/git/commits', { method: 'POST', body: JSON.stringify({ message: 'Autos (' + u + '): inteiro teor de ' + arqs.length + ' processo(s) do lote ' + id, tree: t.sha, parents: [ref.object.sha] }) });
+    try { await L.gh('/git/refs/heads/main', { method: 'PATCH', body: JSON.stringify({ sha: c.sha }) }); }
+    catch (e) { if (e.status === 422 || e.status === 409) return res.status(409).json({ erro: 'O repositório mudou; tente de novo.' }); throw e; }
+    return res.status(200).json({ ok: true, gravados: arqs.length, commit: c.sha });
+  }
   if (b.acao === 'criar-lista' || b.acao === 'itens') {
     const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
     const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'tipo_caso', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada'];
-    const OBJ = ['triagem', 'situacao_atual', 'extracao'];
+    const OBJ = ['triagem', 'situacao_atual', 'extracao', 'teor'];
     const LST = ['variacoes', 'pendencias', 'pecas'];
     const limpo = (x, it) => {
       for (const k of TXT) if (x[k] !== undefined) it[k] = x[k] === null ? null : String(x[k]).slice(0, 2000);
-      for (const k of OBJ) if (x[k] && typeof x[k] === 'object' && !Array.isArray(x[k])) it[k] = Object.assign({}, it[k] || {}, JSON.parse(JSON.stringify(x[k]).slice(0, 8000)));
+      for (const k of OBJ) if (x[k] && typeof x[k] === 'object' && !Array.isArray(x[k])) it[k] = Object.assign({}, it[k] || {}, JSON.parse(JSON.stringify(x[k]).length > 30000 ? '{}' : JSON.stringify(x[k])));
       for (const k of LST) if (Array.isArray(x[k])) it[k] = JSON.parse(JSON.stringify(x[k].slice(0, 80)));
       return it;
     };
