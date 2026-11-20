@@ -11531,13 +11531,13 @@
    "exequente": "GILBERTO DAL VESCO",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Contribuição sobre a folha de salários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal · prescrição do crédito tributário (artigo 174 do CTN) · pedido de parcelamento da Lei 11.941/2009 cancelado como causa interruptiva (Súmula 653/STJ) · exceção de pré-executividade rejeitada",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto ou decisão monocrática), conferido antes o preparo [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Gilberto Dal Vesco ME contra a decisão da 1ª Vara Federal de Dourados que, na execução fiscal 0002357-13.2013.4.03.6002, rejeitou a exceção de pré-executividade em que se alegou a prescrição de créditos previdenciários constituídos em 07/05/2007, com ajuizamento em 08/07/2013. A agravante sustenta que o pedido de parcelamento da Lei 11.941/2009, cancelado sem consolidação, não interrompeu a prescrição.",
+   "peculiaridades": "Preparo com comprovante bancário, sem comprovante STN [VALIDAR]. Tutela recursal indeferida. Controvérsia sobre a interrupção da prescrição pelo pedido de parcelamento cancelado (Súmula 653/STJ).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -11570,7 +11570,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Só a guia · só a guia: ID 372783823 · certidão sem custas: ID 372404062 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 0002357-13.2013.4.03.6002 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 0002357-13.2013.4.03.6002 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento",
+    "materia": "Execução fiscal: prescrição; interrupção por pedido de parcelamento cancelado",
+    "origem": "1ª Vara Federal de Dourados · 0002357-13.2013.4.03.6002",
+    "decisao_agravada": "Decisão que rejeitou a exceção de pré-executividade [VALIDAR ID]",
+    "recurso": "ID 371727325 · 07/05/2026",
+    "preparo": "Comprovante bancário, não aceito [VALIDAR]",
+    "monocratica": "Possível (Súmula 653/STJ), conferido antes o preparo [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -11591,6 +11599,93 @@
     "ultima_informacao": "Certidão · ID 380391761 · 15/06/2026",
     "ultima_movimentacao": " 18:13 · Há 2 documentos não lidos",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · prescrição do crédito tributário (artigo 174 do CTN) · pedido de parcelamento da Lei 11.941/2009 cancelado como causa interruptiva (Súmula 653/STJ) · exceção de pré-executividade rejeitada",
+   "especificidades": "Preparo: guia de R$ 64,26 e comprovante bancário de 11/05/2026 (IDs 372783823 e 372783824), sem comprovante STN [VALIDAR] · Tutela recursal indeferida in limine pelo Relator (ID 384237480, 06/07/2026) · Créditos previdenciários (NFLD) constituídos em 07/05/2007; pedido de parcelamento em 23/10/2009, cancelado; execução ajuizada em 08/07/2013 · Possível aplicação da Súmula 653/STJ [VALIDAR] · Há dois documentos não lidos no PJe",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A agravante, executada por créditos previdenciários constituídos em 2007 e cobrados a partir de 2013, teve rejeitada a exceção de pré-executividade, pois o juízo considerou interrompida a prescrição pelo pedido de parcelamento de 2009.",
+    "inicial": "Execução fiscal 0002357-13.2013.4.03.6002 da União (Fazenda Nacional) contra Gilberto Dal Vesco ME (CDAs 37.038.803-8 e 37.038.804-6)",
+    "decisao_recorrida": "Decisão da 1ª Vara Federal de Dourados que rejeitou a exceção de pré-executividade (ID 292073620 da origem é a exceção) [VALIDAR ID e data da decisão]",
+    "recurso": "Agravo ID 371727325 (07/05/2026): (1) decurso de mais de cinco anos entre a constituição definitiva (07/05/2007) e o ajuizamento (08/07/2013); (2) pedido de parcelamento cancelado sem consolidação não interrompe a prescrição; e (3) efeito suspensivo pelo risco de constrição.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 391335546 (10/08/2026): o pedido de parcelamento de 23/10/2009, ainda que cancelado, interrompeu a prescrição (artigo 174, parágrafo único, IV, do CTN e Súmula 653/STJ).",
+    "parecer": "Não consta",
+    "outros": "Certidão sem custas ID 372404062. Petição com guia e comprovante IDs 372783822 a 372783824 (12/05/2026). Decisão de redistribuição ID 372591215. Despacho de remessa à Turma Regional ID 379947520 (12/06/2026). Decisão do Relator ID 384237480 (06/07/2026): indeferiu a tutela recursal in limine. Ciência com renúncia ao prazo ID 386149320.",
+    "representacao": "Agravante: advogado constituído. Agravada: Procuradoria-Geral da Fazenda Nacional.",
+    "preparo": "Guia de R$ 64,26 e comprovante bancário (IDs 372783823 e 372783824); sem comprovante STN [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · prescrição do crédito tributário (artigo 174 do CTN) · pedido de parcelamento da Lei 11.941/2009 cancelado como causa interruptiva (Súmula 653/STJ) · exceção de pré-executividade rejeitada",
+     "sintese": "A agravante, executada por créditos previdenciários constituídos em 2007 e cobrados a partir de 2013, teve rejeitada a exceção de pré-executividade, pois o juízo considerou interrompida a prescrição pelo pedido de parcelamento de 2009.",
+     "questoes": "1) Regularidade do preparo; 2) interrupção da prescrição pelo pedido de parcelamento cancelado (Súmula 653/STJ); 3) prescrição dos créditos.",
+     "rel": {
+      "razoes": "Agravo (ID 371727325): (1) prescrição quinquenal; (2) parcelamento cancelado sem consolidação não interrompe; e (3) efeito suspensivo.",
+      "contrarrazoes": "União (ID 391335546): interrupção pelo pedido de parcelamento (Súmula 653/STJ)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "[VALIDAR]",
+      "juizo": "1ª Vara Federal de Dourados",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-05-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Gilberto Dal Vesco ME",
+       "tipo": "Agravo de instrumento",
+       "id": "371727325",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "371727325",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Guia e comprovante de custas",
+       "id": "372783824",
+       "data": "2026-05-12"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "384237480",
+       "data": "2026-07-06"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "391335546",
+       "data": "2026-08-10"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN; identificar o ID e a data da decisão agravada; ler os dois documentos não lidos",
+     "especificidades": "Preparo: guia de R$ 64,26 e comprovante bancário de 11/05/2026 (IDs 372783823 e 372783824), sem comprovante STN [VALIDAR] · Tutela recursal indeferida in limine pelo Relator (ID 384237480, 06/07/2026) · Créditos previdenciários (NFLD) constituídos em 07/05/2007; pedido de parcelamento em 23/10/2009, cancelado; execução ajuizada em 08/07/2013 · Possível aplicação da Súmula 653/STJ [VALIDAR] · Há dois documentos não lidos no PJe"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-06"
+    }
    }
   },
   {
