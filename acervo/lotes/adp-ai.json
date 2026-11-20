@@ -4716,7 +4716,7 @@
    "executado": "NELSON NUNES FERREIRA JUNIOR",
    "assunto": "Anulação",
    "grupo": "g9",
-   "tipo_caso": "AI do Cebraspe · concurso público (CNU da Justiça Eleitoral) · candidato com deficiência · tutela que o manteve na lista PcD",
+   "tipo_caso": "AI · Concurso público e ensino · Concurso Nacional Unificado da Justiça Eleitoral · candidato com deficiência desconsiderado na avaliação biopsicossocial · tutela que o manteve na lista",
    "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 03/07/2026 e há contrarrazões",
    "modelo": "",
    "variacoes": [
@@ -4798,7 +4798,82 @@
     "representacao": "Agravado: procuração assinada digitalmente (ID 388088519) ao advogado Thiago Helton M. Ribeiro (OAB/MG 168.703). Agravante: não identificada [VALIDAR]",
     "preparo": "GRU de R$ 64,26 ao TRF-3 (ID 335824198, código 18720-8, contribuinte Cebraspe); comprovante sem conteúdo (ID 335824195)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Concurso público e ensino · Concurso Nacional Unificado da Justiça Eleitoral · candidato com deficiência desconsiderado na avaliação biopsicossocial · tutela que o manteve na lista",
+   "especificidades": "Agravante: Cebraspe · Tutela recursal indeferida (ID 384182419, 03/07/2026) · Preparo: guia ao TRF-3 com UG 090029 e código 18720-8 (ID 335824198) e comprovante sem conteúdo (ID 335824195), sem comprovante STN legível [VALIDAR] · Petição do agravo não extraída com texto [VALIDAR] · Agravado pede tramitação prioritária (pessoa com deficiência) · Procuração do agravante não identificada [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Concurso público e ensino · Concurso Nacional Unificado da Justiça Eleitoral · candidato com deficiência desconsiderado na avaliação biopsicossocial · tutela que o manteve na lista",
+     "sintese": "Nelson Nunes Ferreira Júnior, aprovado no concurso unificado da Justiça Eleitoral para Técnico Judiciário do TRE/MS na vaga de pessoa com deficiência, foi desconsiderado como PcD na avaliação biopsicossocial; obteve tutela que o manteve na lista, e o Cebraspe agravou.",
+     "questoes": "1) Regularidade do preparo; 2) controle judicial da avaliação biopsicossocial; 3) manutenção do agravado na lista de pessoas com deficiência.",
+     "rel": {
+      "razoes": "Agravo do Cebraspe: reforma da tutela; razões não extraídas com texto nos autos [VALIDAR]",
+      "contrarrazoes": "Contrarrazões ID 388087481 (23/07/2026): deficiência comprovada por laudos e pela avaliação biopsicossocial; prioridade de tramitação; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Deferiu a tutela de urgência para suspender o ato que desconsiderou o agravado como pessoa com deficiência, mantendo-o na lista de aprovados."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "[VALIDAR]",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Certidão sem custas",
+       "id": "335773409",
+       "data": ""
+      },
+      {
+       "desc": "Guia GRU ao TRF-3",
+       "id": "335824198",
+       "data": ""
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "384182419",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Contrarrazões do agravado",
+       "id": "388087481",
+       "data": "2026-07-23"
+      }
+     ],
+     "pendencias": "Extrair a petição do agravo e a decisão agravada; conferir o preparo e a procuração",
+     "especificidades": "Agravante: Cebraspe · Tutela recursal indeferida (ID 384182419, 03/07/2026) · Preparo: guia ao TRF-3 com UG 090029 e código 18720-8 (ID 335824198) e comprovante sem conteúdo (ID 335824195), sem comprovante STN legível [VALIDAR] · Petição do agravo não extraída com texto [VALIDAR] · Agravado pede tramitação prioritária (pessoa com deficiência) · Procuração do agravante não identificada [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-03"
+    }
+   }
   },
   {
    "sessao": "",
