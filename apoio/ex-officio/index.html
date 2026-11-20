@@ -1827,6 +1827,15 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <button type="button" class="hb hbx nx-tx" id="cmt-b-dvt" data-cdt="d" title="Dúvidas e pedidos" aria-label="Dúvidas e pedidos" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg><span>Dúvidas</span><i class="bdg" id="cmt-n-dv-t" hidden></i></button>
         <button type="button" class="hb ic" id="cmt-atu2" title="Atualizar" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button>
       </div>
+    <aside class="cmt-fastnav quick-find" id="cmt-fastnav" role="search" aria-label="Buscador rápido da pauta">
+        <span class="qf-k">BUSCADOR RÁPIDO</span>
+        <span class="qf-row"><select id="cmt-ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="nº + Enter" aria-label="Número do item ou processo"></span>
+        <small>Localiza e destaca o registro na pauta.</small>
+        <button type="button" class="qf-go" id="cmt-ir-go">Ir para</button>
+        <button type="button" id="cmt-ir-x" class="cmt-fastnav-close" aria-label="Recolher o buscador rápido" title="Recolher">×</button>
+        <button type="button" id="cmt-ir-abre" class="qf-pill" aria-label="Abrir o buscador rápido (tecla /)">Ir para item <kbd>/</kbd></button>
+      </aside>
+    
     </div>
 
     <section class="cmt-q cmt-dk" id="cmt-pauta">
@@ -1862,14 +1871,6 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-rodp"><p class="cmt-rc" id="cmt-rc"></p><p class="cmt-leg" id="cmt-leg"></p></div>
     </section>
 
-    <aside class="cmt-fastnav quick-find" id="cmt-fastnav" role="search" aria-label="Buscador rápido da pauta">
-      <span class="qf-k">BUSCADOR RÁPIDO</span>
-      <span class="qf-row"><select id="cmt-ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="número + Enter" aria-label="Número do item ou processo"></span>
-      <small>Localiza e destaca o registro na pauta.</small>
-      <button type="button" class="qf-go" id="cmt-ir-go">Ir para</button>
-      <button type="button" id="cmt-ir-x" class="cmt-fastnav-close" aria-label="Recolher o buscador rápido" title="Recolher">×</button>
-      <button type="button" id="cmt-ir-abre" class="qf-pill" aria-label="Abrir o buscador rápido (tecla /)">Ir para item <kbd>/</kbd></button>
-    </aside>
 
     <aside class="cmt-dr" id="cmt-dr" data-t="a">
       <div class="cmt-dr-h" id="cmt-dr-h">
@@ -2028,7 +2029,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <span class="exb" role="group" aria-label="Exportar e importar"><button class="b ic3" id="exp-xlsx"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="b ic3" id="exp-meus" aria-label="Exportar só as minhas designações" title="Exportar só as minhas designações"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0"/><path d="M18.5 7v9M15.5 13l3 3 3-3"/></svg></button><button class="b ic3" id="exp-mes" hidden><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M12 12.5v5.5M9.5 15.5 12 18l2.5-2.5"/></svg></button><button class="b ic3" id="imp-xlsx" hidden aria-label="Importar monocráticas" title="Importar monocráticas (planilha no padrão da exportação)"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V5M7 10l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button><button class="b ic3" id="exp-csv" hidden aria-label="Exportar em CSV os processos filtrados (sem filtro, toda a pauta)" title="Exportar em CSV os processos filtrados (sem filtro, toda a pauta)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 13h5M10 17h5"/></svg></button><button class="b ic3" id="exp-copia" hidden aria-label="Copiar os processos: selecionados, filtrados ou toda a pauta" title="Copiar os processos: selecionados, filtrados ou toda a pauta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button><input type="file" id="imp-arq" accept=".xlsx" hidden></span>
     </div>
     <div class="pt-bar pt-fl">
-      <span class="pt-ir quick-find"><span>BUSCADOR RÁPIDO</span><span class="qf-row"><select id="ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="ir-v" inputmode="numeric" autocomplete="off" placeholder="número + Enter" aria-label="Número do item ou processo"></span><small class="qf-help">Enter leva direto ao processo na pauta.</small></span>
+      <span class="pt-ir quick-find"><span>BUSCADOR RÁPIDO</span><span class="qf-row"><select id="ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="ir-v" inputmode="numeric" autocomplete="off" placeholder="nº + Enter" aria-label="Número do item ou processo"></span><small class="qf-help">Enter leva direto ao processo na pauta.</small></span>
       <span class="pt-q"><select id="q-k"><option value="">Todos os campos</option><option value="assunto">Assunto</option><option value="partes">Partes</option><option value="classe">Classe</option><option value="obs">Detalhes</option><option value="cnj">Processo</option></select><input type="search" id="q" placeholder="Digite para filtrar"></span>
       <button class="b" id="f-pri" aria-pressed="false" title="Sustentação oral ou preferência">Prioridades</button><button class="b" id="f-meta" aria-pressed="false">Metas <i></i></button>
       <select id="f-resp" aria-label="Responsável"></select>
@@ -8483,17 +8484,8 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 320px}
 /* etapa marcada por inferência (sem data própria) */
 #v-cmt .cmt-pa.inf i{border-style:dashed}
 #v-cmt button.cmt-pa.inf{cursor:help}
-/* buscador rápido recolhível e destaque do item localizado */
+/* destaque do item localizado */
 #v-cmt .cmt-fastnav .qf-pill{display:none}
-@media (min-width:781px){
- #v-cmt .cmt-fastnav .cmt-fastnav-close{display:block;position:absolute;top:6px;right:8px;width:22px;height:22px;border:0;background:none;color:var(--em);font-size:16px;line-height:1;cursor:pointer}
- #v-cmt .cmt-fastnav .cmt-fastnav-close:hover{color:var(--eg)}
- #v-cmt .cmt-fastnav.min{width:auto;padding:0;border-top-width:1px;box-shadow:0 6px 16px rgba(32,59,57,.10)}
- #v-cmt .cmt-fastnav.min>*{display:none!important}
- #v-cmt .cmt-fastnav.min>.qf-pill{display:inline-flex!important;align-items:center;gap:8px;height:34px;padding:0 12px;border:0;background:none;color:var(--eg);font:700 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
- #v-cmt .cmt-fastnav.min>.qf-pill kbd{font:10px var(--emono);border:1px solid var(--el);padding:1px 5px;color:var(--em);background:var(--ew)}
- #v-cmt .cmt-wrap{padding-bottom:150px}
-}
 #v-cmt .cmt-tb tr.qf-hit td{animation:qfHit 3s ease}
 #v-cmt .cmt-tb tr.qf-hit td:first-child{box-shadow:inset 3px 0 0 var(--eo)}
 @media (prefers-reduced-motion:reduce){#v-cmt .cmt-tb tr.qf-hit td{animation:none;background:#fff2c8}}
@@ -8558,9 +8550,24 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-ch{margin:0;order:-1;transform:rotat
  body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-tb{min-width:0}
 }
 @media (prefers-reduced-motion:reduce){body.cmt-asl-on #v-cmt .cmt-asl,body.cmt-asl-on #v-cmt,body.cmt-asl-on #v-cmt .cmt-asl-ch{transition:none}}
-/* o buscador rápido vai para o canto direito, longe do painel de assinatura */
-@media (min-width:781px){body.cmt-asl-on #v-cmt .cmt-fastnav{left:auto;right:22px}}
 @media print{#v-cmt .cmt-asl{display:none!important}}
+/* cabeçalho do relator fixo no topo ao rolar, com o buscador rápido integrado (computador) */
+@media (min-width:781px){
+ #v-cmt .cmt-hd2{position:sticky;top:var(--cmt-top,0px);z-index:25;background:#eef2f4;box-shadow:0 8px 14px -14px rgba(32,59,57,.45)}
+ #v-cmt .cmt-hd2 .cmt-fastnav{position:static;display:flex;align-items:center;gap:0;width:auto;max-width:none;margin:0 0 0 auto;padding:0;
+   border:1px solid var(--el);background:var(--ew);box-shadow:none;animation:none}
+ #v-cmt .cmt-hd2 .cmt-fastnav.flash{animation:cmtFastPulse .55s ease}
+ #v-cmt .cmt-hd2 .cmt-fastnav .qf-k,#v-cmt .cmt-hd2 .cmt-fastnav small,#v-cmt .cmt-hd2 .cmt-fastnav .cmt-fastnav-close,#v-cmt .cmt-hd2 .cmt-fastnav .qf-pill{display:none!important}
+ #v-cmt .cmt-hd2 .cmt-fastnav .qf-row{display:flex;align-items:center;gap:0;margin:0;border:0}
+ #v-cmt .cmt-hd2 .cmt-fastnav select{height:34px;width:auto;border:0;border-right:1px solid var(--el);background:transparent;color:var(--eg);
+   font:700 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;padding:0 6px 0 10px;cursor:pointer}
+ #v-cmt .cmt-hd2 .cmt-fastnav input{height:34px;width:150px;border:0;background:transparent;color:var(--ei);font:12px var(--emono);padding:0 10px;outline:0}
+ #v-cmt .cmt-hd2 .cmt-fastnav .qf-go{width:auto;height:34px;margin:0;padding:0 12px;border:0;border-left:1px solid var(--el);background:var(--ep)}
+ #v-cmt .cmt-hd2 .cmt-fastnav:focus-within{border-color:var(--eg)}
+}
+@media (min-width:781px){#v-cmt .cmt-hd2-h,#v-cmt .cmt-hd2 .qf-go{white-space:nowrap}}
+/* telas menores: o cabeçalho fica numa linha só (sai a linha "Gabinete do Des. Fed. Carlos Muta") */
+@media (min-width:781px) and (max-width:1519px){#v-cmt .cmt-hd2 .cmt-ey{display:none}#v-cmt .cmt-hd2{gap:8px}#v-cmt .cmt-hd2 .cmt-fastnav input{width:96px}#v-cmt .cmt-hd2 .hb{padding:0 6px}}
 </style>
 </body>
 </html>
