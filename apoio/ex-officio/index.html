@@ -1832,7 +1832,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <span class="qf-k">BUSCADOR RÁPIDO</span>
         <span class="qf-row"><button type="button" class="qf-kb" id="cmt-ir-kb" title="Clique para buscar por processo" aria-label="Buscando por item · clique para trocar">Item</button><select id="cmt-ir-k" aria-label="Localizar por" hidden><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="nº + Enter" aria-label="Número do item ou processo"></span>
         <small>Localiza e destaca o registro na pauta.</small>
-        <button type="button" class="qf-go" id="cmt-ir-go">Ir para</button>
+        <button type="button" class="qf-go" id="cmt-ir-go" aria-label="Ir para" title="Ir para (Enter)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         <button type="button" id="cmt-ir-x" class="cmt-fastnav-close" aria-label="Recolher o buscador rápido" title="Recolher">×</button>
         <button type="button" id="cmt-ir-abre" class="qf-pill" aria-label="Abrir o buscador rápido (tecla /)">Ir para item <kbd>/</kbd></button>
       </aside>
@@ -4303,9 +4303,10 @@ var et=e.target.closest&&e.target.closest('[data-cet]');
 if(et){if(/\binf\b/.test(et.className)){toast('Etapa sem data registrada: não há marca a desfazer.');return;}
   var cj=et.getAttribute('data-cnj'),cp=et.getAttribute('data-cet'),ja=/\bs[12]\b/.test(et.className);
   var nm=cp==='dataMinuta'?'minutada':'corrigida';
-  var grava=function(){et.classList.add('ocupado');
+  var grava=function(){
     var sd0=((CMT.dados||{}).pauta||{}).date||'';
-    cmtPost({acao:'etapa',sessao:sd0,cnj:cj,campo:cp,desfazer:ja},ja?'Marca desfeita.':'Minuta '+nm+'.',ja?null:{acao:'etapa',sessao:sd0,cnj:cj,campo:cp,desfazer:true});};
+    cmtPost({acao:'etapa',sessao:sd0,cnj:cj,campo:cp,desfazer:ja},ja?'Marca desfeita.':'Minuta '+nm+'.',ja?null:{acao:'etapa',sessao:sd0,cnj:cj,campo:cp,desfazer:true},et,
+      function(b){b.classList.toggle(cp==='dataMinuta'?'s1':'s2',!ja);});};
   if(ja)cmtConfirmar('ob','Desfazer a marca',cj,'O item deixa de constar como '+nm+'.','Desfazer').then(function(ok){if(ok)grava();});
   else grava();
   return;}});
@@ -4567,7 +4568,7 @@ function cmtRail(na,nu,nd,hj){
 var v=cmtVisto(),d=function(k,n){var a=Number(v[k]);return (isFinite(a)&&n>a)?(n-a):0;};
 var it=[['a','ok',na,'assinar',d('a',na)],['u','al'+(hj?' hj':''),nu,'urgências',d('u',nu)],['d','inf',nd,'dúvidas',d('d',nd)]];
 var bu=$('#cmt-n-urg-t'),bd=$('#cmt-n-dv-t'),an=$('#cmt-asl-n');
-if(bu){bu.textContent=nu;bu.hidden=!nu;}if(bd){bd.textContent=nd;bd.hidden=!nd;}if(an)an.textContent=na;
+if(bu){bu.textContent=nu;bu.hidden=!nu;}if(bd){bd.textContent=nd;bd.hidden=!nd;}if(an)an.innerHTML='<span class="n">'+na+'</span><span class="u"> '+(na===1?'voto':'votos')+'</span>';
 var el=$('#cmt-rail');
 if(el)el.innerHTML=it.map(function(x){return '<button type="button" data-cdt="'+x[0]+'" class="'+x[1]+(x[4]?' nov':'')+'" title="'+x[2]+' '+x[3]+'"><i>'+x[2]+'</i><small>'+x[3]+'</small>'+(x[4]?'<s>+'+x[4]+'</s>':'')+'</button>';}).join('');
 var tb=$('#cmt-dr-tb'),at=cmtAba();
@@ -4822,13 +4823,17 @@ function cmtIrPara(){
   },40);
 }
 document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='cmt-ir-v'&&e.key==='Enter'){e.preventDefault();cmtIrPara();}});
-document.addEventListener('click',function(e){if(e.target&&e.target.id==='cmt-ir-go'){cmtIrPara();}});
+document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('#cmt-ir-go')){cmtIrPara();}});
 
 /* decisões: gravam onde já era gravado e podem ser desfeitas */
-function cmtPost(corpo,ok,volta){
+function cmtPost(corpo,ok,volta,el,feito){
+  if(el){if(el.classList.contains('ocupado'))return Promise.resolve();el.classList.add('ocupado');el.setAttribute('aria-busy','true');}
   return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(corpo)}).then(function(){
-    if(volta)toastAcao(ok,'Desfazer',function(){cmtPost(volta,'Desfeito.');});else toast(ok);CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);})
-    .catch(function(e){toast((e&&e.erro)||'Não foi possível gravar.');});}
+    if(el){el.classList.remove('ocupado');el.removeAttribute('aria-busy');if(feito)feito(el);el.classList.add('feito');}
+    if(volta)toastAcao(ok,'Desfazer',function(){cmtPost(volta,'Desfeito.');});else toast(ok);
+    /* com botão: a marca fica um instante à vista antes de a pauta se recompor */
+    var rec=function(){CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);};if(el)setTimeout(rec,1100);else rec();})
+    .catch(function(e){if(el){el.classList.remove('ocupado');el.removeAttribute('aria-busy');}toast((e&&e.erro)||'Não foi possível gravar.');});}
 function cmtMarcados(){return Object.keys(CMT.sel||{}).filter(function(k){return CMT.sel[k];});}
 function cmtAtuLote(){var n=cmtMarcados().length,b=$('#cmt-libl');if(b){b.disabled=!n;b.textContent=n?'Liberar selecionados ('+n+')':'Liberar selecionados';}}
 document.addEventListener('change',function(e){var c=e.target;if(c&&c.hasAttribute&&c.hasAttribute('data-cx')){CMT.sel=CMT.sel||{};CMT.sel[c.getAttribute('data-cx')]=c.checked;cmtAtuLote();}});
@@ -4836,10 +4841,9 @@ document.addEventListener('click',function(e){
   var sd=((CMT.dados||{}).pauta||{}).date;
   var l=e.target.closest&&e.target.closest('[data-cl]');
   if(l){var cnj=l.getAttribute('data-cl'),on=l.classList.contains('on')||/\bs3\b/.test(l.className);
-    var gl=function(){l.classList.add('ocupado');cmtPost({acao:'liberar',sessao:sd,cnj:cnj,desfazer:on},on?'Liberação desfeita.':'Voto liberado.',on?null:{acao:'liberar',sessao:sd,cnj:cnj,desfazer:true});};
-    var xl=(((CMT.dados||{}).pauta||{}).itens||[]).filter(function(y){return y.cnj===cnj;})[0];
+    var gl=function(){cmtPost({acao:'liberar',sessao:sd,cnj:cnj,desfazer:on},on?'Liberação desfeita.':'Voto liberado.',on?null:{acao:'liberar',sessao:sd,cnj:cnj,desfazer:true},l,
+      function(b){b.classList.toggle('s3',!on);b.classList.toggle('act',on);var t=b.querySelector('b');if(t)t.textContent=on?'Liberar':'Liberado';});};
     if(on)cmtConfirmar('ob','Desfazer a liberação',cnj,'O voto volta a constar como não liberado.','Desfazer').then(function(ok){if(ok)gl();});
-    else if(xl&&!xl.dataCorrecao)cmtConfirmar('ob','Liberar sem correção',cnj,'Não há correção registrada para este voto.','Liberar').then(function(ok){if(ok)gl();});
     else gl();
     return;}
   var d=e.target.closest&&e.target.closest('[data-cd]');
@@ -8653,6 +8657,51 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-ch{margin:0;order:-1;transform:rotat
 #v-cmt .cmt-urk .cmt-vazio{font-size:12px;color:var(--em);margin:4px 0}
 @media (max-width:780px){#v-cmt .cmt-urk{grid-template-columns:minmax(0,1fr);padding:10px 12px}#v-cmt #cmt-b-gab{display:none!important}}
 @media (prefers-reduced-motion:reduce){#v-cmt .cmt-gv-in{transition:none}}
+/* buscador rápido no padrão do cabeçalho: sem caixa, sublinhado, letras do cabeçalho; Ir para em ícone */
+@media (min-width:781px){
+ #v-cmt .cmt-hd2 .cmt-fastnav{border:0;border-bottom:1px solid var(--el);background:none;gap:2px}
+ #v-cmt .cmt-hd2 .cmt-fastnav:focus-within{border-bottom-color:var(--eg)}
+ #v-cmt .cmt-hd2 .cmt-fastnav .qf-kb{height:32px;min-width:0;border:0;background:none;color:var(--ei);font:400 10.5px var(--emono);letter-spacing:.1em;padding:0 8px}
+ #v-cmt .cmt-hd2 .cmt-fastnav .qf-kb:hover{color:var(--eo2);background:none}
+ #v-cmt .cmt-hd2 .cmt-fastnav input{height:32px;width:120px;padding:0 6px;font:400 12px var(--emono);color:var(--ei)}
+ #v-cmt .cmt-hd2 .cmt-fastnav input::placeholder{color:var(--em);opacity:.8}
+ #v-cmt .cmt-hd2 .cmt-fastnav .qf-go{width:30px;height:30px;padding:0;border:0;background:none;color:var(--ei2,var(--ei));display:inline-grid;place-items:center;cursor:pointer}
+ #v-cmt .cmt-hd2 .cmt-fastnav .qf-go:hover{color:var(--eo2);background:none}
+}
+#v-cmt .qf-go svg{pointer-events:none}
+@media (max-width:780px){#v-cmt .cmt-fastnav .qf-go{display:inline-flex;align-items:center;justify-content:center;gap:6px}#v-cmt .cmt-fastnav .qf-go::after{content:"Ir para"}}
+/* Para assinar no padrão dos painéis: faixa dourada no topo, cabeçalho claro, cartão e botões do app */
+body.cmt-asl-on #v-cmt .cmt-asl{background:var(--ep);border-top:2px solid var(--eg)}
+body.cmt-asl-on #v-cmt .cmt-asl-k{min-height:54px;padding:10px 12px 10px 18px;background:var(--ew)}
+body.cmt-asl-on #v-cmt .cmt-asl-t{font-size:17px;letter-spacing:-.02em}
+body.cmt-asl-on #v-cmt .cmt-asl-n{min-width:0;padding:0;background:none;color:var(--em);font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase}
+body.cmt-asl-on #v-cmt .cmt-asl-ch{width:30px;height:30px;padding:7px;box-sizing:border-box;border:1px solid var(--el);background:var(--ew)}
+body.cmt-asl-on #v-cmt .cmt-asl-k:hover .cmt-asl-ch{border-color:var(--ei);color:var(--ei)}
+body.cmt-asl-on #v-cmt .cmt-asl-b{padding:14px}
+body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2{display:flex;align-items:center;margin:0 0 10px;padding:0}
+body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2 .cmt-n{font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-fbar{padding:0 0 10px;background:none;border:0}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-ass-b{border:1px solid var(--el);border-top:2px solid var(--eo);background:var(--ew);padding:14px 16px 16px}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-fc-l span{width:84px}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-fc-ac{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:14px}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-fc-ac button{height:34px;min-width:0;padding:0 8px;font-size:12.5px;font-weight:700}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-fc-ac button.pri{grid-column:1/-1;height:38px;font-size:13px}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-ass-ft{margin-top:10px;border:1px solid var(--el);background:var(--ew)}
+body.cmt-asl-on #v-cmt .cmt-asl-b .cmt-ar{border:1px solid var(--el);background:var(--ew);padding:10px 12px;margin:0 0 8px}
+/* recolhido: só o número, em destaque */
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-n .u{display:none}
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-n{min-width:20px;padding:1px 5px;background:var(--eg);color:var(--ew);text-align:center}
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
+/* liberar e etapas: carregamento girando dentro do próprio ícone */
+@keyframes cmtGira{to{transform:rotate(360deg)}}
+#v-cmt .cmt-pa i,dialog.cmt-pdlg .cmt-pa i{position:relative}
+#v-cmt .cmt-pa.ocupado,dialog.cmt-pdlg .cmt-pa.ocupado{opacity:1!important;pointer-events:none}
+#v-cmt .cmt-pa.ocupado b,dialog.cmt-pdlg .cmt-pa.ocupado b{opacity:.6}
+#v-cmt .cmt-pa.ocupado i svg,dialog.cmt-pdlg .cmt-pa.ocupado i svg{opacity:0}
+#v-cmt .cmt-pa.ocupado i::after,dialog.cmt-pdlg .cmt-pa.ocupado i::after{content:"";position:absolute;inset:4px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:cmtGira .7s linear infinite}
+#v-cmt .cmt-pa.feito i,dialog.cmt-pdlg .cmt-pa.feito i{animation:cmtFeito .5s ease}
+@keyframes cmtFeito{0%{transform:scale(.7)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){#v-cmt .cmt-pa.ocupado i::after,dialog.cmt-pdlg .cmt-pa.ocupado i::after{animation-duration:2s}#v-cmt .cmt-pa.feito i,dialog.cmt-pdlg .cmt-pa.feito i{animation:none}}
 </style>
 </body>
 </html>
