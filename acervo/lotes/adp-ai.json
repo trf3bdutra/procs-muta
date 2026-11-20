@@ -8241,13 +8241,15 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ALINE VALENCIO DE SOUZA",
    "assunto": "Classificação e/ou Preterição",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI da União · Concurso público · liminar em tutela cautelar antecedente para a candidata prosseguir nas etapas · efeito suspensivo negado (4ª Turma, 2023)",
+   "resultado": "Ato a proferir: consultar a ação de origem (provável sentença ou fim do certame desde 2023); se superada a liminar, decisão monocrática de prejudicialidade (artigo 932, III, do CPC); se não, julgamento do agravo [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União, de 26/07/2023, contra a decisão que, em tutela cautelar antecedente proposta por Aline Valencio de Souza, deferiu liminar \"para determinar à ré que admita a autora nas próximas etapas do concurso em igualdade de condições com os demais candidatos\" (ID 293792483, origem). Discute-se erro na aplicação de cláusula do edital. Efeito suspensivo negado por falta de perigo concreto (ID 278145071, Des. Fed. André Nabarrete, 25/08/2023). Contraminuta da agravada (ID 279823496, 14/09/2023): interpretação do edital mais favorável ao candidato. Redistribuído à TRgMS em 10/04/2026.",
+   "peculiaridades": "Agravo de 2023 sem julgamento: risco alto de perda de objeto (cautelar antecedente convertida em ação principal, sentença ou conclusão do concurso). Petição inicial do agravo ilegível na extração (texto codificado): razões, número da origem e concurso não identificados [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -8273,7 +8275,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Consultar a origem; provável monocrática de prejudicialidade",
+    "materia": "Concurso público — interpretação de cláusula do edital; prosseguimento nas etapas",
+    "origem": "Tutela cautelar antecedente [VALIDAR número e vara]",
+    "decisao_agravada": "ID 293792483 (autos de origem)",
+    "recurso": "ID 277661332 · 26/07/2023",
+    "preparo": "Isento (União)",
+    "monocratica": "Provável (prejudicialidade) [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -8293,6 +8304,92 @@
     "ultima_informacao": "Certidão · ID 365652389 · 10/04/2026",
     "ultima_movimentacao": "10/04/2026 16:30 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidata obteve em 2023 liminar para prosseguir nas etapas de concurso, por erro na aplicação de cláusula do edital. A União recorreu; o efeito suspensivo foi negado e o agravo segue sem julgamento desde então.",
+    "inicial": "Tutela cautelar antecedente de Aline Valencio de Souza contra a União [VALIDAR concurso e número]",
+    "decisao_recorrida": "Decisão ID 293792483 (origem): admissão da autora nas próximas etapas do concurso em igualdade de condições",
+    "recurso": "Agravo ID 277661332 (26/07/2023): razões ilegíveis na extração; pedido de efeito suspensivo por lesão ao interesse público e à legalidade [VALIDAR]",
+    "resposta": "Aline Valencio de Souza ID 279823496 (14/09/2023): erro na aplicação do edital; interpretação favorável ao candidato; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "União: AGU. Agravada: advogados Juliano Quelho Witzler Ribeiro (OAB/SP 275.314) e João Pedro Rocha Araújo (OAB/MS 23.683 e 15.116-A) [VALIDAR]",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Concurso público; edital; tutela cautelar antecedente; prosseguimento no certame",
+     "sintese": "Candidata obteve em 2023 liminar para prosseguir nas etapas de concurso, por erro na aplicação de cláusula do edital. A União recorreu; o efeito suspensivo foi negado e o agravo segue sem julgamento desde então.",
+     "questoes": "1) Perda superveniente do objeto; 2) interpretação da cláusula do edital; 3) teoria do fato consumado.",
+     "rel": {
+      "razoes": "Agravo da União (ID 277661332): ilegível na extração [VALIDAR].",
+      "contrarrazoes": "Agravada (ID 279823496): interpretação favorável ao candidato; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "293792483",
+      "dispositivo": "Deferiu liminar para a autora prosseguir nas etapas do concurso."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2023-07-26",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "277661332",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "277661332",
+       "data": "2023-07-26"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo (4ª Turma)",
+       "id": "278145071",
+       "data": "2023-08-25"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "279823496",
+       "data": "2023-09-14"
+      },
+      {
+       "desc": "Despacho de redistribuição",
+       "id": "365449952",
+       "data": "2026-04-10"
+      }
+     ],
+     "pendencias": [
+      "Consultar a ação de origem (sentença, conversão em ação principal, fim do concurso) [VALIDAR]",
+      "Ler as razões do agravo no PJe (texto ilegível na extração)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "hip932": "III — prejudicado [VALIDAR]",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2023-08-25"
+    }
    }
   },
   {
