@@ -3951,13 +3951,16 @@
    "exequente": "MARIA EDITE ALMEIDA DE OLIVEIRA",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Aposentadoria por Idade (Art. 48/51)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "AI · Previdenciário · MS · restabelecimento de benefício suspenso sem conclusão do processo administrativo · tutela postergada",
+   "resultado": "Ato a proferir: URGENTE — apreciar a tutela recursal, postergada em 16/04/2026 (idosa; benefício suspenso desde abril de 2024), ou julgar desde logo o agravo; MPF sem interesse",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL",
+    "URG"
+   ],
+   "observacao": "Agravo de Maria Edite Almeida de Oliveira contra a decisão ID 561063813 da 1ª Vara Federal de Campo Grande que, no mandado de segurança 5001635-11.2024.4.03.6000 contra o Gerente Executivo do INSS em Campo Grande, indeferiu a liminar para restabelecer o benefício. A agravante alega que o benefício foi suspenso em abril de 2024 antes de decisão definitiva no processo administrativo, sem decisão fundamentada nem possibilidade de recurso, e que o INSS teria admitido \"erro administrativo\".",
+   "peculiaridades": "Prioridade do Estatuto da Pessoa Idosa. Gratuidade (ID 363437836, f. 28). O despacho ID 366538823 (16/04/2026) postergou a tutela para depois da contraminuta e mandou ouvir o MPF; parecer ID 381369085 (19/06/2026) sem interesse. Não consta contraminuta do INSS. Espécie do benefício não identificada [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -3978,7 +3981,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão sobre a tutela recursal ou julgamento do agravo",
+    "materia": "Previdenciário — suspensão de benefício e devido processo administrativo (MS)",
+    "origem": "5001635-11.2024.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 561063813 (autos de origem); intimação em 10/03/2026 segundo a agravante",
+    "recurso": "ID 363437833 · 30/03/2026",
+    "preparo": "Dispensado (gratuidade)",
+    "monocratica": "Possível após o prazo do INSS [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -3998,6 +4010,95 @@
     "ultima_informacao": "Certidão · ID 363574267 · 31/03/2026",
     "ultima_movimentacao": "19/06/2026 15:24 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Segurada idosa teve o benefício suspenso pelo INSS em abril de 2024, antes da conclusão do processo administrativo de revisão, que segue sem decisão. A liminar no mandado de segurança foi negada; no Tribunal, a tutela foi postergada.",
+    "inicial": "Mandado de segurança 5001635-11.2024.4.03.6000 contra o Gerente Executivo do INSS em Campo Grande para restabelecer o benefício",
+    "decisao_recorrida": "Decisão ID 561063813 da 1ª Vara Federal de Campo Grande, que indeferiu a liminar; texto não lido [VALIDAR]",
+    "recurso": "Agravo ID 363437833 (30/03/2026): (1) suspensão como punição antecipada, sem decisão definitiva; (2) ausência de decisão fundamentada e supressão do recurso administrativo; (3) admissão de \"erro administrativo\" pelo INSS; (4) controvérsia formal, sem dilação probatória; (5) natureza alimentar e quase dois anos de inércia. Pede o restabelecimento imediato do benefício.",
+    "resposta": "Não consta contraminuta do INSS",
+    "parecer": "MPF ID 381369085 (19/06/2026): ausência de interesse; opina pelo prosseguimento",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogado Ricardo Almeida de Oliveira; procuração não identificada com texto [VALIDAR]",
+    "preparo": "Dispensado: gratuidade (ID 363437836, f. 28)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Suspensão de benefício; devido processo administrativo; mandado de segurança",
+     "sintese": "Segurada idosa teve o benefício suspenso pelo INSS em abril de 2024, antes da conclusão do processo administrativo de revisão, que segue sem decisão. A liminar no mandado de segurança foi negada; no Tribunal, a tutela foi postergada.",
+     "questoes": "1) Legalidade da suspensão antes da decisão definitiva no processo administrativo (artigo 69 da Lei 8.212/1991) [VALIDAR]; 2) urgência pela natureza alimentar e pela idade.",
+     "rel": {
+      "razoes": "Agravo (ID 363437833): suspensão antes de decisão definitiva; ausência de fundamentação e de recurso administrativo; admissão de erro pelo INSS; natureza alimentar e inércia de quase dois anos.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "561063813",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Indeferiu a liminar no mandado de segurança."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Postergado"
+     },
+     "adm": {
+      "prot": "2026-03-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false,
+      "intim": "2026-03-10"
+     },
+     "mpfx": {
+      "sentido": "Sem interesse",
+      "id": "381369085"
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "363437833",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "363437833",
+       "data": "2026-03-30"
+      },
+      {
+       "desc": "Despacho que postergou a tutela",
+       "id": "366538823",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "381369085",
+       "data": "2026-06-19"
+      }
+     ],
+     "pendencias": [
+      "Certificar o decurso do prazo de contraminuta do INSS [VALIDAR]",
+      "Identificar a espécie do benefício e o motivo da suspensão [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Parecer juntado",
+     "parecer": "Sem interesse",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgNivel": "Alta",
+     "urgSit": "Postergada",
+     "urgPedido": "Restabelecimento do benefício suspenso em abril de 2024",
+     "urgObs": "Pessoa idosa; tutela postergada em 16/04/2026 para depois da contraminuta"
+    }
    }
   },
   {
