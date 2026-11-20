@@ -485,7 +485,7 @@ html[data-theme=dark] #v-pauta.ed .trb{--t-ok-ink:#0a1821}
 #v-pauta.ed #lst.cards{border:1px solid var(--el);border-top:0;margin-top:0;display:block;background:var(--ew)}
 #v-pauta.ed #lst.cards .pc.edr:last-child{border-bottom:0}#v-pauta.ed #lst.cards .empty{background:transparent;border:0}
 #v-pauta.ed #lst .pc.edr{background:transparent;border:0;border-bottom:1px solid var(--el);border-radius:0;box-shadow:none;margin:0}
-#v-pauta.ed #lst .pc.edr.al{background:var(--eos)}
+
 #v-pauta.ed #lst .pc.edr:hover{background:var(--ep)}
 /* cartão aberto no prontuário: o mesmo desenho nas Monocráticas e na Pauta (cartão branco sobre a lista, filete verde à direita, voltado ao prontuário) */
 #v-pauta.ed #lst .pc.edr.prt-sel{background:var(--ew);outline:0;box-shadow:inset -2px 0 0 var(--eg)}
@@ -2754,6 +2754,10 @@ function liaDlg(it){var old=document.getElementById('lia-dlg');if(old)old.remove
   d.addEventListener('close',function(){if(d.parentNode)d.remove();});
   pinta();document.body.appendChild(d);d.showModal();}
 /* etiqueta de responsáveis do cartão: minutante com a data da minuta (editável no calendário) e corretor */
+/* cor do cartão: o fundo mostra a etapa; a faixa da esquerda, o problema mais grave
+   (vermelho: intercorrência em aberto · laranja: pendência registrada no cartão · amarelo: alerta automático de admissibilidade) */
+function pbCls(it,A,c){if(c.intercor&&!c.intercorOk)return ' pb-ic';var P=(((c.cartao||{}).pendencias)||[]).filter(function(p){return p&&p.desc&&!p.ok;}).length;
+  if(P)return ' pb-pd';return A.length>P?' pb-al':'';}
 function tagResp(it){var mn=it.servidor&&it.servidor!=='—'?it.servidor:'',cr=it.corretor&&it.corretor!=='—'?it.corretor:'',dm=it.dataMinuta||'';
   var dt=dm?'<label class="mr-dt" title="Minutado em '+esc(br(dm))+' · clique para alterar a data"><span>'+esc(br(dm).slice(0,5))+'</span><input type="date" data-d="dataMinuta" value="'+esc(dm)+'" max="'+hoje()+'" aria-label="Data da minuta" tabindex="-1"></label>':'';
   if(!mn&&!cr&&!dt)return '';
@@ -2776,7 +2780,7 @@ function cartao(it){
     var stM=[['Minutado',svm('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta'],['Corrigido',svm('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Revisão'],['Liberado',svm('<path d="M4 12l15-7-5 15-3-6z"/>'),'Para assinatura']]
       .map(function(x,i){var ok=i+1<=oM,tt=ok&&i+1===oM?x[2]+' · clique para desfazer':ok?x[2]:'Marcar: '+x[2].toLowerCase();return (i?'<i class="ln'+(ok?' ok':'')+'"></i>':'')+'<button class="sp'+(ok?' ok':i===oM?' nx':'')+'" data-a="et" data-v="'+(i+1===oM?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+tt+'" aria-label="'+tt+'" aria-pressed="'+ok+'"'+(asn?' disabled':'')+'>'+x[1]+'</button>';}).join('')+
       '<i class="ln'+(asn?' ok':'')+'"></i><span class="sp sp-as'+(asn?' ok':'')+'" role="img" title="'+(asn?'Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):''):'Assinatura: registrada na ficha do processo (Produção)')+'" aria-label="'+(asn?'Assinada':'Ainda não assinada')+'">'+svm('<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>')+'</span>';
-    return '<article class="pc cpt edr mrw ee'+oM+(meu(it)?' meu':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Com minuta','Revisada','Para assinatura','Assinada'][oM])+' · clique na linha para abrir o prontuário de produção">'+
+    return '<article class="pc cpt edr mrw ee'+oM+(meu(it)?' meu':'')+pbCls(it,A,c)+'" data-k="'+k+'" title="'+esc(['Sem minuta','Com minuta','Revisada','Para assinatura','Assinada'][oM])+' · clique na linha para abrir o prontuário de produção">'+
       
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar decisão '+esc(it.item||'')+'">'+
       '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="Tipo de julgamento (ato)'+(it.tarefa?' · tarefa no PJe: '+esc(it.tarefa):'')+'">'+esc(c.tipoAto||'tipo de ato não informado')+'</span>'+
@@ -2790,7 +2794,7 @@ function cartao(it){
     var stE=[['Minutado',sv('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta entregue'],['Corrigido',sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Correção concluída'],['Liberado',sv('<path d="M4 12l15-7-5 15-3-6z"/>'),'Voto liberado']]
       .map(function(x,i){var ok=i+1<=o,tt=ok&&i+1===o?x[2]+' · clique para desfazer':ok?x[2]:'Marcar: '+x[2].toLowerCase();return (i?'<i class="ln'+(ok?' ok':'')+'"></i>':'')+'<button class="sp'+(ok?' ok':i===o?' nx':'')+'" data-a="et" data-v="'+(i+1===o?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+tt+'" aria-label="'+tt+'" aria-pressed="'+ok+'">'+x[1]+'</button>';}).join('');
     /* mesmo cartão das Monocráticas: sinalizações na coluna da esquerda, uma linha de identificação, síntese e etiqueta de responsáveis, etapas */
-    return '<article class="pc cpt edr mrw ee'+o+(meu(it)?' meu':'')+(A.length?' al':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Minutado','Corrigido','Liberado'][o]||'')+' · clique na linha para abrir o prontuário de produção">'+
+    return '<article class="pc cpt edr mrw ee'+o+(meu(it)?' meu':'')+(A.length?' al':'')+pbCls(it,A,c)+'" data-k="'+k+'" title="'+esc(['Sem minuta','Minutado','Corrigido','Liberado'][o]||'')+' · clique na linha para abrir o prontuário de produção">'+
       
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar item '+esc(it.item||'')+'">'+
       '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="Apreciação">'+esc(aprec(it))+'</span>'+
@@ -8905,6 +8909,16 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 .mrw .mr-tg .mr-dt:hover{background:var(--ew);color:var(--eg)}
 .mrw .mr-tg .mr-dt span{padding:0;border:0;text-decoration:underline dotted;text-underline-offset:2px}
 .mrw .mr-tg .mr-dt input{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;border:0;padding:0}
+
+/* cartões: fundo pela etapa (minutado verde, corrigido azul, liberado roxo); faixa à esquerda pelo problema mais grave */
+#v-pauta.ed #lst .pc.edr.mrw.ee1{background:rgba(40,116,75,.09)}
+#v-pauta.ed #lst .pc.edr.mrw.ee2{background:rgba(36,91,140,.09)}
+#v-pauta.ed #lst .pc.edr.mrw.ee3,#v-pauta.ed #lst .pc.edr.mrw.ee4{background:rgba(109,69,150,.09)}
+#v-pauta.ed #lst .pc.edr.mrw:hover{background-image:linear-gradient(rgba(0,0,0,.035),rgba(0,0,0,.035))}
+#v-pauta.ed #lst .pc.edr.mrw.pb-ic::before,#v-pauta.ed #lst .pc.edr.mrw.pb-pd::before,#v-pauta.ed #lst .pc.edr.mrw.pb-al::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;z-index:1;pointer-events:none}
+#v-pauta.ed #lst .pc.edr.mrw.pb-ic::before{background:#b3261e}
+#v-pauta.ed #lst .pc.edr.mrw.pb-pd::before{background:#d9822b}
+#v-pauta.ed #lst .pc.edr.mrw.pb-al::before{background:#e0b52f}
 </style>
 </body>
 </html>
