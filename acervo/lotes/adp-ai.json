@@ -17814,8 +17814,8 @@
    "exequente": "ALCIDES JESUS PERALTA BERNAL",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Esbulho / Turbação / Ameaça",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g1",
+   "tipo_caso": "Alienação fiduciária · imóvel · interdito proibitório após a consolidação da propriedade · nulidade da intimação extrajudicial",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -17884,6 +17884,88 @@
     "outros": "Decisão ID 385272708 (09/07/2026, publicada em 14/07/2026): indeferiu a tutela recursal; citou o AI 5000060-94.2026.4.03.9201, não conhecido, na ação conexa. Procurações juntadas em 14/05/2026 (ID 373389008) e 17/06/2026 (ID 380948244), em imagem. Boletins de ocorrência ID 368295607.",
     "representacao": "Agravante: advogados Edgar Sá e Silva Acosta, Oswaldo Meza Baptista e Walquíria M. Moraes Barbosa; procurações em imagem (IDs 373389008 e 380948244) [VALIDAR]. Agravada: CEF.",
     "preparo": "Dispensado: o agravante alega gratuidade deferida na origem [VALIDAR]"
+   },
+   "assunto_detalhado": "Alienação fiduciária de imóvel — interdito proibitório após a consolidação da propriedade",
+   "especificidades": "Agravante idoso (prioridade alegada) · Consolidação da propriedade em 17/07/2025; ação ajuizada em 01/12/2025 · Tutela recursal indeferida (ID 385272708, 09/07/2026) · CEF intimada; prazo decorrido em 10/08/2026 · Ação conexa 5010260-97.2025.4.03.6000 com AI 5000060-94.2026.4.03.9201 não conhecido · Procurações em imagem (IDs 373389008 e 380948244)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Alienação fiduciária de imóvel — interdito proibitório após a consolidação da propriedade",
+     "subassuntos": "Alienação fiduciária · imóvel · interdito proibitório após a consolidação da propriedade · nulidade da intimação extrajudicial",
+     "sintese": "",
+     "questoes": "1) Posse juridicamente protegida do devedor após a consolidação da propriedade (REsp 2.092.980); 2) nulidade da intimação extrajudicial; 3) prova de turbação por agentes da CEF.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a liminar de mandado proibitório."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "368295604",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "368295604",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Boletins de ocorrência",
+       "id": "368295607",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Procuração",
+       "id": "373389008",
+       "data": "2026-05-14"
+      },
+      {
+       "desc": "Procuração",
+       "id": "380948244",
+       "data": "2026-06-17"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "385272708",
+       "data": "2026-07-09"
+      }
+     ],
+     "pendencias": "Conferir a gratuidade na origem e a procuração (imagens)",
+     "especificidades": "Agravante idoso (prioridade alegada) · Consolidação da propriedade em 17/07/2025; ação ajuizada em 01/12/2025 · Tutela recursal indeferida (ID 385272708, 09/07/2026) · CEF intimada; prazo decorrido em 10/08/2026 · Ação conexa 5010260-97.2025.4.03.6000 com AI 5000060-94.2026.4.03.9201 não conhecido · Procurações em imagem (IDs 373389008 e 380948244)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Intimado sem manifestação",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-09"
+    }
    }
   },
   {
