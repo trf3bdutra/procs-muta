@@ -8079,13 +8079,15 @@
    "exequente": "LEOPOLDO MAYER DE FREITAS NETO",
    "executado": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "assunto": "Classificação e/ou Preterição",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI · Concurso para professor (UFMS) · aproveitamento do aprovado pela UFPE vedado pelo item 22.8 do edital · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal negada em 05/08/2026; contraminutas da UFPE e da UFMS",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Leopoldo Mayer de Freitas Neto contra a decisão ID 596118412 da 1ª Vara Federal de Campo Grande (processo 5004658-91.2026.4.03.6000) que indeferiu a tutela para declarar possível o aproveitamento, pela Universidade Federal de Pernambuco, do concurso da UFMS regido pelo Edital PROGEP/UFMS 108/2025, afastar a interpretação restritiva do item 22.8 do edital e determinar à UFMS as providências para o aproveitamento no cargo de professor do magistério superior. O juízo considerou o aproveitamento ato discricionário e vedado expressamente pelo item 22.8.",
+   "peculiaridades": "Gratuidade deferida na origem (ID 596118412), reconhecida na decisão ID 390312992 apesar do pedido do agravante. A UFPE figura como terceira interessada e apresentou contraminuta (ID 390978069). Ação referida como mandado de segurança no próprio agravo [VALIDAR classe]. Tutela de conteúdo satisfativo e risco de cadeia de atos (nomeação e posse).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -8116,7 +8118,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Concurso público — aproveitamento de aprovado por outra instituição; vinculação ao edital",
+    "origem": "5004658-91.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 596118412 (autos de origem)",
+    "recurso": "ID 389132579 · 28/07/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -8136,6 +8147,89 @@
     "ultima_informacao": "Certidão · ID 389844459 · 31/07/2026",
     "ultima_movimentacao": "01/10/2026 00:40 · DECORRIDO PRAZO DE UNIVERSIDADE FEDERAL DE PERNAMBUCO EM 30/09/2026 23:59.",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidato aprovado em concurso da UFMS para professor busca ser aproveitado pela UFPE, mas o item 22.8 do edital veda o uso do resultado para esse fim. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação 5004658-91.2026.4.03.6000 contra a UFMS, com a UFPE como interessada, para viabilizar o aproveitamento do concurso do Edital PROGEP/UFMS 108/2025",
+    "decisao_recorrida": "Decisão ID 596118412: aproveitamento é discricionário e o item 22.8 do edital o veda expressamente; ausente a probabilidade do direito",
+    "recurso": "Agravo ID 389132579 (28/07/2026): (1) possibilidade jurídica do aproveitamento entre instituições federais; (2) interpretação restritiva do item 22.8 contrária à legalidade, eficiência e razoabilidade; (3) interesse da UFPE. Pede liminar para declarar o aproveitamento possível e determinar providências à UFMS.",
+    "resposta": "UFPE ID 390978069 (07/08/2026): legalidade da cláusula do edital; ausência de direito subjetivo; tutela satisfativa. UFMS ID 399366264 (20/09/2026): ausência de requisitos; irreversibilidade e dano inverso.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: procuração anexa (anexo 02) segundo a petição [VALIDAR ID]. UFMS e UFPE: procuradores federais",
+    "preparo": "Dispensado: gratuidade deferida na origem"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Concurso público; magistério superior; aproveitamento por outra instituição; vinculação ao edital",
+     "sintese": "Candidato aprovado em concurso da UFMS para professor busca ser aproveitado pela UFPE, mas o item 22.8 do edital veda o uso do resultado para esse fim. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Validade e alcance do item 22.8 do Edital PROGEP/UFMS 108/2025; 2) discricionariedade do aproveitamento; 3) tutela satisfativa contra a Fazenda Pública.",
+     "rel": {
+      "razoes": "Agravo (ID 389132579): possibilidade jurídica do aproveitamento; interpretação restritiva do item 22.8; eficiência.",
+      "contrarrazoes": "UFPE (ID 390978069) e UFMS (ID 399366264): legalidade do edital; ausência de direito subjetivo; dano inverso."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "596118412",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-07-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false,
+      "intim": "2026-07-24"
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "389132579",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "389132579",
+       "data": "2026-07-28"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "390312992",
+       "data": "2026-08-05"
+      },
+      {
+       "desc": "Contraminuta da UFPE",
+       "id": "390978069",
+       "data": "2026-08-07"
+      },
+      {
+       "desc": "Contraminuta da UFMS",
+       "id": "399366264",
+       "data": "2026-09-20"
+      }
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-08-05"
+    }
    }
   },
   {
