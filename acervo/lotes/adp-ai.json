@@ -4552,7 +4552,7 @@
    "executado": "ADRIANA FORTALEZA DO NASCIMENTO FERNANDES",
    "assunto": "Anuidades OAB",
    "grupo": "g3",
-   "tipo_caso": "AI da OAB/MS · execução de título extrajudicial (anuidades) · decisão contrária ao prosseguimento",
+   "tipo_caso": "AI · Execução da OAB · Execuções da OAB · execução de anuidades contra advogada · decisão contrária ao prosseguimento da execução",
    "resultado": "Ato a proferir: conferir o preparo (sem comprovante) e a contraminuta; depois, julgamento do agravo, possivelmente monocrático pela linha do gabinete para execuções da OAB [VALIDAR]",
    "modelo": "",
    "variacoes": [
@@ -4629,7 +4629,82 @@
     "representacao": "OAB/MS pelo advogado Marcelo Nogueira da Silva (OAB/MS 13.300); agravada advogada (OAB/MS 24.499)",
     "preparo": "Sem comprovante: documento de custas ID 339611724 sem conteúdo"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Execução da OAB · Execuções da OAB · execução de anuidades contra advogada · decisão contrária ao prosseguimento da execução",
+   "especificidades": "Tutela recursal postergada para depois da contraminuta (despacho ID 339689634) e não apreciada · Agravada intimada; sem contraminuta nos autos · Preparo sem comprovante STN: comprovante bancário de R$ 64,26 (ID 339611724) [VALIDAR] · Conteúdo da decisão agravada não identificado [VALIDAR] · Mesmas razões do AI 5027793-27.2025.4.03.0000",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução da OAB · Execuções da OAB · execução de anuidades contra advogada · decisão contrária ao prosseguimento da execução",
+     "sintese": "A OAB/MS executa anuidades da advogada Adriana Fortaleza do Nascimento; o juízo decidiu contra o prosseguimento da execução, e a OAB agravou.",
+     "questoes": "1) Regularidade do preparo; 2) conteúdo e fundamento da decisão agravada; 3) prosseguimento da execução de anuidades da OAB.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 339606316 (16/10/2025): prosseguimento da execução; natureza e custeio da OAB; dispensa das peças obrigatórias por serem eletrônicos os autos.",
+      "contrarrazoes": "Não consta: agravada intimada pelo despacho ID 339689634, sem contraminuta nos autos"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "[VALIDAR: decisão na execução 5000419-15.2024.4.03.6000 contrária ao prosseguimento]"
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "339606316",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "339606316",
+       "data": "2025-10-16"
+      },
+      {
+       "desc": "Comprovante bancário de custas",
+       "id": "339611724",
+       "data": "2025-10-16"
+      },
+      {
+       "desc": "Despacho: tutela postergada",
+       "id": "339689634",
+       "data": "2025-10-20"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "369866616",
+       "data": "2026-04-30"
+      }
+     ],
+     "pendencias": "Conferir o preparo; identificar a decisão agravada; certificar o prazo da contraminuta",
+     "especificidades": "Tutela recursal postergada para depois da contraminuta (despacho ID 339689634) e não apreciada · Agravada intimada; sem contraminuta nos autos · Preparo sem comprovante STN: comprovante bancário de R$ 64,26 (ID 339611724) [VALIDAR] · Conteúdo da decisão agravada não identificado [VALIDAR] · Mesmas razões do AI 5027793-27.2025.4.03.0000"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2025-10-16"
+    }
+   }
   },
   {
    "sessao": "",
