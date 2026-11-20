@@ -23316,8 +23316,8 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "MARIA ANGELA ORTIZ DIAS",
    "assunto": "Tratamento Domiciliar (Home Care)",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g12",
+   "tipo_caso": "Saúde · atendimento domiciliar (home care) 24 horas · beneficiária do FUSEx · tutela de urgência",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -23365,6 +23365,83 @@
     "outros": "Decisão ID 367175328 (27/04/2026, publicada em 30/04/2026): indeferiu a tutela recursal in limine, intimou a agravada e determinou vista ao MPF (pessoa idosa).",
     "representacao": "Agravante: União (AGU). Agravada: Maria Ângela Ortiz Dias, curatelada, representada pela filha Adriana Draghichevich; advogado Antonio Gomes do Vale (procurações IDs 374031588 e 374031595; curatela ID 374031593).",
     "preparo": "União isenta (Lei 9.289/1996)."
+   },
+   "assunto_detalhado": "Saúde — atendimento domiciliar (home care) 24 horas a beneficiária do FUSEx",
+   "especificidades": "Agravada idosa (83 anos), curatelada, com sequelas de dois AVC isquêmicos e alimentação por sonda · FUSEx prestava 12 horas diárias de enfermagem domiciliar · Relatório da Organização Militar recomenda modalidade de menor complexidade · Efeito suspensivo indeferido (ID 367175328, 27/04/2026) · Parecer do MPF pelo desprovimento (ID 376433313)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Saúde — atendimento domiciliar (home care) 24 horas a beneficiária do FUSEx",
+     "subassuntos": "Saúde · atendimento domiciliar (home care) 24 horas · beneficiária do FUSEx · tutela de urgência",
+     "sintese": "",
+     "questoes": "1) Probabilidade do direito ao home care 24 horas diante da prescrição médica e do relatório da Organização Militar; 2) limites normativos da atenção domiciliar do FUSEx; 3) perigo de dano e impacto orçamentário.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Justiça Federal em Campo Grande [VALIDAR vara]",
+      "dispositivo": "Deferiu em parte a tutela de urgência para manter o home care integral (24 horas) enquanto persistir a prescrição médica."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "367011170",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "367011170",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "367175328",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "374031596",
+       "data": "2026-05-17"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "376433313",
+       "data": "2026-05-26"
+      }
+     ],
+     "pendencias": "Identificar a vara e o ID da decisão agravada",
+     "especificidades": "Agravada idosa (83 anos), curatelada, com sequelas de dois AVC isquêmicos e alimentação por sonda · FUSEx prestava 12 horas diárias de enfermagem domiciliar · Relatório da Organização Militar recomenda modalidade de menor complexidade · Efeito suspensivo indeferido (ID 367175328, 27/04/2026) · Parecer do MPF pelo desprovimento (ID 376433313)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Idoso em risco",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-04-27"
+    }
    }
   },
   {
