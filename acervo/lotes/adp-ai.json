@@ -3481,13 +3481,16 @@
    "exequente": "RAFAELA BENAN ZARA",
    "executado": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "assunto": "Anulação e Correção de Provas / Questões",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI · Concurso para professor do magistério superior (UFMS, Naviraí) · impedimento de examinadora e critério fora do edital · tutela pendente",
+   "resultado": "Ato a proferir: URGENTE — conferir o complemento do preparo (juntado em 15/10/2026) e decidir o pedido de tutela recursal; depois, intimar a UFMS para contraminuta",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL",
+    "URG"
+   ],
+   "observacao": "Agravo de Rafaela Benan Zara contra a decisão ID 601430136 (processo 5006320-90.2026.4.03.6000, Campo Grande) que indeferiu a liminar em ação contra a UFMS. A agravante, 3ª colocada para a vaga de Tecnologia de Arquitetura e Urbanismo (Campus de Naviraí), alega vínculo de pesquisa entre uma examinadora e o 1º colocado, desconto na prova didática por critério fora do item 14.4.8 do Edital PROGEP 23/2026, erro de fato na contagem de orientações e motivação genérica no recurso administrativo. Resultado homologado em 19/06/2026 (Edital PROGEP 84/2026).",
+   "peculiaridades": "Preparo: o despacho ID 402691112 (07/10/2026) apontou valor inferior ao da tabela (IDs 400216434 e 400425009) e deu 5 dias para complementar, sob pena de deserção; guia e comprovante juntados em 15/10/2026 (IDs 404595335 e 404595336), a conferir. A agravante reiterou o pedido urgente de tutela (ID 404595333). A UFMS ainda não foi intimada.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -3508,7 +3511,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão sobre tutela recursal, após conferir o preparo",
+    "materia": "Concurso público — magistério superior; impessoalidade da banca e critérios do edital",
+    "origem": "5006320-90.2026.4.03.6000 (Campo Grande) [VALIDAR vara]",
+    "decisao_agravada": "ID 601430136 (autos de origem)",
+    "recurso": "ID 400194731 · 24/09/2026",
+    "preparo": "Complemento juntado em 15/10/2026 (IDs 404595335 e 404595336), a conferir",
+    "monocratica": "Não; decisão liminar",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -3528,6 +3540,89 @@
     "ultima_informacao": "Certidão · ID 400557710 · 25/09/2026",
     "ultima_movimentacao": "15/10/2026 16:18 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidata aprovada em 3º lugar em concurso da UFMS para professor do Campus de Naviraí aponta vínculo de pesquisa entre uma examinadora e o 1º colocado e desconto de nota por critério fora do edital. A liminar foi negada na origem.",
+    "inicial": "Ação 5006320-90.2026.4.03.6000 contra a UFMS para reconhecer ilegalidades na avaliação, afastar descontos e revisar a classificação",
+    "decisao_recorrida": "Decisão ID 601430136, que indeferiu a liminar por ausência dos requisitos do artigo 300 do CPC; texto não lido [VALIDAR]",
+    "recurso": "Agravo ID 400194731 (24/09/2026): (1) vínculo acadêmico e projeto de pesquisa comum entre a examinadora Mariana Watzel e o 1º colocado; (2) a examinadora foi concorrente da agravante em concurso anterior; (3) desconto na prova didática por critério fora do edital; (4) erro de fato na contagem de orientações; (5) resposta genérica ao recurso administrativo. Pede tutela para impedir a nomeação ou assegurar a classificação [VALIDAR pedido].",
+    "resposta": "Não há: a UFMS ainda não foi intimada",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogado Emanuel Jorge Fauth de Freitas Junior (OAB/PR 57.601); procuração não identificada com texto [VALIDAR]",
+    "preparo": "Recolhido a menor; complemento juntado em 15/10/2026 após o despacho ID 402691112"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Concurso público — magistério superior; impessoalidade da banca",
+     "sintese": "Candidata aprovada em 3º lugar em concurso da UFMS para professor do Campus de Naviraí aponta vínculo de pesquisa entre uma examinadora e o 1º colocado e desconto de nota por critério fora do edital. A liminar foi negada na origem.",
+     "questoes": "1) Regularidade do preparo após o complemento; 2) impedimento ou suspeição de examinadora; 3) critério de avaliação fora do edital (Tema 485/STF); 4) urgência diante da nomeação do 1º colocado.",
+     "rel": {
+      "razoes": "Agravo (ID 400194731): vínculo entre examinadora e 1º colocado; examinadora concorrente da agravante em concurso anterior; critério fora do edital na prova didática; erro na contagem de orientações; motivação genérica do recurso administrativo.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "601430136",
+      "dispositivo": "Indeferiu a liminar."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Pendente"
+     },
+     "adm": {
+      "prot": "2026-09-24",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "400194731",
+       "contra": "Não intimada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "400194731",
+       "data": "2026-09-24"
+      },
+      {
+       "desc": "Despacho para complementar o preparo",
+       "id": "402691112",
+       "data": "2026-10-07"
+      },
+      {
+       "desc": "Petição com o complemento do preparo e reiteração da tutela",
+       "id": "404595333",
+       "data": "2026-10-15"
+      }
+     ],
+     "pendencias": [
+      "Conferir o complemento do preparo (IDs 404595335 e 404595336)",
+      "Tempestividade: ciência em 02/09/2026 é alegação da agravante [VALIDAR]",
+      "Ler a decisão agravada (ID 400216432 veio sem texto)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgNivel": "Alta",
+     "urgSit": "Pendente",
+     "urgPedido": "Afastar descontos e revisar a classificação antes da nomeação do 1º colocado [VALIDAR]",
+     "urgObs": "Reiterada em 15/10/2026 (ID 404595333)"
+    }
    }
   },
   {
