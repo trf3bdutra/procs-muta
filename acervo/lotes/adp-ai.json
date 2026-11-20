@@ -1060,12 +1060,16 @@
    "executado": "JOAO BATISTA BALBINO",
    "assunto": "Adicional de 25%",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI do INSS · benefício por incapacidade implantado antes da perícia judicial (competência delegada)",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 29/04/2026, contraminuta e parecer do MPF (falta de interesse) nos autos",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "PRI",
+    "MONO",
+    "VAL"
+   ],
+   "observacao": "Agravo do INSS contra a decisão que, no processo 5000031-48.2026.8.12.0022 (justiça estadual, competência delegada), determinou a implantação de benefício por incapacidade a João Batista Balbino antes da perícia judicial. Teses do INSS: falta de perícia prévia e perda da qualidade de segurado; pede a revogação da tutela e a devolução dos valores recebidos. O agravado, nas contrarrazões (ID 376460044), pede o desprovimento e honorários recursais.",
+   "peculiaridades": "Decisão ID 366561345 (29/04/2026): indeferiu a tutela recursal (quadro de AVC respaldado por laudos; revisão da tutela pode ser pedida na origem) e mandou ouvir o MPF por envolver idoso. Parecer do MPF (ID 378287673, 03/06/2026): ausência de interesse. Agravante isento de preparo (autarquia).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1101,9 +1105,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto ou monocrática)",
+    "materia": "Previdenciário — tutela de urgência; implantação de benefício antes da perícia",
+    "origem": "5000031-48.2026.8.12.0022 (competência delegada)",
+    "decisao_agravada": "Não consta com texto (documentos IDs 365077490 a 365077492 sem texto) [VALIDAR]",
+    "recurso": "ID 365077488 · 08/04/2026",
+    "preparo": "Isento (autarquia)",
+    "monocratica": "Possível, conforme a linha do gabinete para \"implantação de benefício antes da perícia\" [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Linha do gabinete e modelo para implantação de benefício antes da perícia (etiqueta recorrente no acervo)",
+    "[VALIDAR] Conferir se a perícia já foi feita na origem (possível perda de objeto)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -1133,12 +1149,15 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Adidos, Agregados e Adjuntos",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Militar · encostamento para tratamento de saúde sem remuneração (pedido de adição/agregação)",
+   "resultado": "Ato a proferir: julgamento do agravo (voto) ou prejudicialidade; tutela recursal indeferida em 22/08/2025 e há contraminuta. Conferir antes se a ação de origem foi sentenciada",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de Matheus Ramires Camilo de Melo, militar do Exército, contra a decisão da 1ª Vara Federal de Campo Grande que, no processo 5003211-05.2025.4.03.6000, deferiu em parte a tutela para que a União fizesse o encostamento do autor só para continuidade do tratamento médico, sem remuneração (ID 392584645 dos autos de origem). Pede a manutenção na condição de adido/agregado. A União, na contraminuta (ID 334897431), pede o desprovimento.",
+   "peculiaridades": "Tutela recursal indeferida pelo Relator anterior (decisão ID 334228943). A certidão ID 333703046 registra a falta de comprovante de custas; não consta decisão sobre gratuidade. Feito de 2025.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1169,9 +1188,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto) ou prejudicialidade",
+    "materia": "Militar — encostamento e agregação para tratamento de saúde",
+    "origem": "5003211-05.2025.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 392584645 (autos de origem), transcrita na decisão ID 334228943",
+    "recurso": "ID 333506628 · 15/08/2025",
+    "preparo": "Sem comprovante (certidão ID 333703046); gratuidade não examinada [VALIDAR]",
+    "monocratica": "Possível, se houver perda de objeto [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo ou gratuidade: certidão de falta de custas sem providência posterior",
+    "[VALIDAR] Situação da ação de origem (sentença superveniente)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
