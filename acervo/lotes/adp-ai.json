@@ -10450,13 +10450,13 @@
    "exequente": "HDM TRADING IMPORTACAO E EXPORTACAO LTDA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Contratos Bancários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Contratos bancários e CEF · execução de título extrajudicial (cédula bancária) · prescrição intercorrente (artigo 921 do CPC)",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto ou decisão), conferido antes o preparo [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de HDM Trading Importação e Exportação Ltda. EPP contra a decisão ID 346658761 da 2ª Vara Federal de Campo Grande que, na execução de título extrajudicial 0002252-42.2013.4.03.6000 movida pela CEF, rejeitou o reconhecimento da prescrição intercorrente. A agravante sustenta a inércia da exequente por mais de cinco anos, até o pedido de novas consultas aos sistemas Bacenjud, Renajud e Infojud (ID 304640670 da origem).",
+   "peculiaridades": "Preparo em dobro com comprovante bancário, sem comprovante STN [VALIDAR]. Tutela recursal indeferida. Sem contraminuta da CEF.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -10484,7 +10484,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 378039861 · despacho/decisão sobre preparo: ID 374902322 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 378039861 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
+    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento",
+    "materia": "Execução de título extrajudicial da CEF: prescrição intercorrente",
+    "origem": "2ª Vara Federal de Campo Grande · 0002252-42.2013.4.03.6000",
+    "decisao_agravada": "ID 346658761 dos autos de origem",
+    "recurso": "ID 371418355 · 06/05/2026",
+    "preparo": "Dobro recolhido por comprovante bancário, não aceito [VALIDAR]",
+    "monocratica": "Possível, conferido antes o preparo [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -10505,6 +10513,98 @@
     "ultima_informacao": "Certidão · ID 374617996 · 19/05/2026",
     "ultima_movimentacao": "05/09/2026 00:40 · DECORRIDO PRAZO DE CAIXA ECONÔMICA FEDERAL EM 04/09/2026 23:59.",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Contratos bancários e CEF · execução de título extrajudicial (cédula bancária) · prescrição intercorrente (artigo 921 do CPC)",
+   "especificidades": "Preparo: intimação para recolhimento em dobro (ID 374902322); juntados a GRU de R$ 128,52 e comprovante bancário (ID 378039861), sem comprovante STN [VALIDAR deserção] · Tutela recursal indeferida in limine pelo Relator (ID 384884213, 07/07/2026) · Agravante reiterou a suspensão da execução diante de atos de constrição (ID 383540050) · CEF intimada não apresentou contraminuta (prazo decorrido em 04/09/2026) · Petição de interposição endereçada por erro ao TJMS",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Executada pela CEF desde 2013, a agravante pediu o reconhecimento da prescrição intercorrente, alegando mais de cinco anos sem impulso útil da exequente; o juízo rejeitou o pedido.",
+    "inicial": "Execução de título extrajudicial 0002252-42.2013.4.03.6000 (cédula bancária) da CEF contra HDM Trading Importação e Exportação Ltda. EPP e outros",
+    "decisao_recorrida": "Decisão ID 346658761 dos autos de origem: rejeitou a prescrição intercorrente, por não ter havido suspensão por ausência de bens nem decurso do prazo após o ano de suspensão (artigo 921, §§ 1º a 4º, do CPC) [VALIDAR data]",
+    "recurso": "Agravo ID 371418355 (06/05/2026): (1) inércia da exequente por mais de cinco anos; (2) diligências infrutíferas não interrompem a prescrição; e (3) pedido de suspensão da execução.",
+    "resposta": "CEF intimada; não apresentou contraminuta (prazo decorrido em 04/09/2026).",
+    "parecer": "Não consta",
+    "outros": "Decisão de redistribuição ID 373633314 (18/05/2026). Despacho ID 374902322 (21/05/2026): recolhimento em dobro. Petição com comprovante ID 378039861 (02/06/2026). Reiteração da suspensão ID 383540050 (30/06/2026). Decisão ID 384884213 (07/07/2026): indeferiu a tutela recursal in limine.",
+    "representacao": "Agravante: advogada constituída. Agravada: CEF.",
+    "preparo": "Dobro: GRU de R$ 128,52 (código 18720-8) com comprovante bancário (ID 378039861); sem comprovante STN [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contratos bancários e CEF · execução de título extrajudicial (cédula bancária) · prescrição intercorrente (artigo 921 do CPC)",
+     "sintese": "Executada pela CEF desde 2013, a agravante pediu o reconhecimento da prescrição intercorrente, alegando mais de cinco anos sem impulso útil da exequente; o juízo rejeitou o pedido.",
+     "questoes": "1) Regularidade do preparo recolhido em dobro; 2) ocorrência de prescrição intercorrente na execução de título extrajudicial (artigo 921 do CPC).",
+     "rel": {
+      "razoes": "Agravo (ID 371418355): (1) inércia da exequente por mais de cinco anos; (2) diligências infrutíferas não interrompem a prescrição; e (3) suspensão da execução.",
+      "contrarrazoes": "Não apresentadas."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "346658761",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou o pedido de reconhecimento da prescrição intercorrente."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "346658761"
+     },
+     "adm": {
+      "prot": "2026-05-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "HDM Trading Importação e Exportação Ltda. EPP",
+       "tipo": "Agravo de instrumento",
+       "id": "371418355",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "371418355",
+       "data": "2026-05-06"
+      },
+      {
+       "desc": "Despacho: recolhimento em dobro",
+       "id": "374902322",
+       "data": "2026-05-21"
+      },
+      {
+       "desc": "Comprovante de preparo",
+       "id": "378039861",
+       "data": "2026-06-02"
+      },
+      {
+       "desc": "Petição de reiteração da suspensão",
+       "id": "383540050",
+       "data": "2026-06-30"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "384884213",
+       "data": "2026-07-07"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN do recolhimento em dobro; conferir a data de intimação da decisão agravada",
+     "especificidades": "Preparo: intimação para recolhimento em dobro (ID 374902322); juntados a GRU de R$ 128,52 e comprovante bancário (ID 378039861), sem comprovante STN [VALIDAR deserção] · Tutela recursal indeferida in limine pelo Relator (ID 384884213, 07/07/2026) · Agravante reiterou a suspensão da execução diante de atos de constrição (ID 383540050) · CEF intimada não apresentou contraminuta (prazo decorrido em 04/09/2026) · Petição de interposição endereçada por erro ao TJMS"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-07"
+    }
    }
   },
   {
