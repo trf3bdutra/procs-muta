@@ -106,6 +106,13 @@
    "cor": "#5c6b2e",
    "resultado": "A definir (responsabilidade do proprietário; boa-fé)",
    "modelo": ""
+  },
+  {
+   "id": "g11",
+   "rotulo": "Contratos bancários e CEF: revisional e cobrança",
+   "cor": "#2e5c6b",
+   "resultado": "A definir (tutela para suspender cobrança; capitalização)",
+   "modelo": ""
   }
  ],
  "grupo_outros": {
@@ -6894,13 +6901,15 @@
    "exequente": "SONAR COMERCIO DE PECAS E SERVICOS LTDA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Cédula de Crédito Bancário",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Revisional de cédula de crédito bancário contra a CEF · tutela para suspender cobranças e atos executórios · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), com exame da preliminar de dialeticidade da CEF; tutela recursal negada em 06/07/2026",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Sonar Comércio de Peças e Serviços Ltda. contra a decisão ID 582999799 da 4ª Vara Federal de Campo Grande (ação revisional 5003337-55.2025.4.03.6000) que indeferiu a tutela para suspender cobranças, buscas de bens e atos executórios relativos a cédulas de crédito bancário. A agravante alega capitalização diária de juros sem previsão nem indicação da taxa diária, com descaracterização da mora, e pede a cessação de arresto sobre seus bens.",
+   "peculiaridades": "Gratuidade de pessoa jurídica alegadamente deferida na origem (ID 361365195, origem) [VALIDAR]. A CEF aponta contradição: o recurso afirma, no cabimento, que a gratuidade foi rejeitada, e invoca razões desconectadas (arresto, \"primeiro agravante citado\"). Endereçamento a \"Tribunal Federal do Estado do Mato Grosso do Sul\". Remessa à TRgMS pelo Des. Fed. Renato Becho (ID 379668932). Precedentes citados são de tribunais estaduais.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -6926,7 +6935,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Contratos bancários — revisional de cédula de crédito; capitalização diária; mora",
+    "origem": "5003337-55.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 582999799 (autos de origem)",
+    "recurso": "ID 378270819 · 03/06/2026",
+    "preparo": "Dispensado (gratuidade alegada) [VALIDAR]",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -6946,6 +6964,92 @@
     "ultima_informacao": "Certidão · ID 379756296 · 11/06/2026",
     "ultima_movimentacao": "18/08/2026 17:34 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Empresa devedora de cédulas de crédito bancário da CEF ajuizou revisional alegando capitalização diária de juros sem previsão contratual e pediu, em tutela, a suspensão das cobranças e dos atos executórios. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação revisional de cédula de crédito bancário 5003337-55.2025.4.03.6000 contra a CEF, com pedido de tutela de urgência",
+    "decisao_recorrida": "Decisão ID 582999799 da 4ª Vara Federal de Campo Grande, que indeferiu a tutela de urgência; texto não lido [VALIDAR]",
+    "recurso": "Agravo ID 378270819 (03/06/2026): (1) capitalização diária sem cláusula específica nem taxa efetiva diária; (2) descaracterização da mora; (3) precedentes do STJ e de tribunais estaduais. Pede efeito suspensivo para cessar arresto e atos executórios.",
+    "resposta": "CEF ID 390937452 (07/08/2026): preliminar de deficiência de fundamentação e contradições internas (dialeticidade); no mérito, ausência dos requisitos da tutela.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogado Luiz Matheus Sebba Correia Rousseau de Castro (OAB/GO 52.152); procuração não identificada com texto [VALIDAR]. CEF: advogado Leonardo Falcão Ribeiro",
+    "preparo": "Dispensado: gratuidade alegada (ID 361365195, origem) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cédula de crédito bancário; ação revisional; capitalização de juros; mora; tutela de urgência",
+     "sintese": "Empresa devedora de cédulas de crédito bancário da CEF ajuizou revisional alegando capitalização diária de juros sem previsão contratual e pediu, em tutela, a suspensão das cobranças e dos atos executórios. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Dialeticidade (preliminar da CEF); 2) gratuidade da pessoa jurídica e preparo; 3) requisitos para suspender a cobrança em revisional (descaracterização da mora).",
+     "rel": {
+      "razoes": "Agravo (ID 378270819): capitalização diária sem previsão; descaracterização da mora; suspensão dos atos executórios.",
+      "contrarrazoes": "CEF (ID 390937452): dialeticidade; ausência dos requisitos."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "582999799",
+      "juizo": "4ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-06-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "378270819",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "378270819",
+       "data": "2026-06-03"
+      },
+      {
+       "desc": "Despacho de remessa à TRgMS",
+       "id": "379668932",
+       "data": "2026-06-11"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "384230529",
+       "data": "2026-07-06"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "390937452",
+       "data": "2026-08-07"
+      }
+     ],
+     "pendencias": [
+      "Confirmar a gratuidade da pessoa jurídica na origem [VALIDAR]",
+      "Tempestividade: termo inicial alegado (citação em 21/05/2026) não condiz com a decisão agravada [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-06"
+    }
    }
   },
   {
