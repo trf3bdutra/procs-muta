@@ -6575,13 +6575,15 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "SEBASTIAO RAMOS HIPOLITO",
    "assunto": "Averbação/Cômputo/Conversão de tempo de serviço especial",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "AI do INSS · Cumprimento provisório de multa diária (competência delegada) · requisitório antes do trânsito em julgado · efeito suspensivo DEFERIDO (10ª Turma, 2025)",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), após verificar o andamento da apelação 5005344-22.2023.4.03.9999 e do AI 5004477-19.2024.4.03.0000 (conexos; podem ter tornado prejudicado ou definitivo o tema) [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do INSS contra a decisão da 2ª Vara Cível da Comarca de Paranaíba/MS (cumprimento provisório 0802256-76.2024.8.12.0018) que homologou o cálculo de Sebastião Ramos Hipólito relativo à multa diária pelo atraso na implantação de benefício e mandou expedir precatório ou RPV. O INSS sustenta que não cabe execução provisória de quantia contra a Fazenda Pública sem trânsito em julgado (Tema 28/STF), pois pendem a apelação sobre o benefício e o agravo sobre o cabimento da multa.",
+   "peculiaridades": "Efeito suspensivo deferido na 10ª Turma (ID 324292054, 13/05/2025). Trâmite com discussão de prevenção (informação ID 314243826; despachos IDs 315361080 e 315774025). Conexos: ApCiv 5005344-22.2023.4.03.9999 (benefício) e AI 5004477-19.2024.4.03.0000 (multa), ambos da relatoria do Des. Fed. Baptista Pereira na época. Redistribuição à TRgMS não identificada na leitura [VALIDAR]. Não consta contraminuta.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -6602,7 +6604,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Verificar os conexos e julgar o agravo (voto)",
+    "materia": "Cumprimento provisório contra a Fazenda Pública — multa diária; requisitório; Tema 28/STF",
+    "origem": "0802256-76.2024.8.12.0018 (2ª Vara Cível de Paranaíba/MS, competência delegada)",
+    "decisao_agravada": "Decisão que homologou o cálculo da multa e determinou a expedição de requisitório; ID não identificado [VALIDAR]",
+    "recurso": "ID 314197080 · 12/02/2025",
+    "preparo": "Isento (autarquia federal)",
+    "monocratica": "Possível (Tema 28/STF) [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -6622,6 +6633,92 @@
     "ultima_informacao": "Certidão · ID 324797908 · 19/05/2025",
     "ultima_movimentacao": "20/03/2026 18:00 · REDISTRIBUÍDO POR SORTEIO EM RAZÃO DE CRIAÇÃO DE UNIDADE JUDICIÁRIA",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Segurado executa provisoriamente a multa diária fixada pelo atraso na implantação de aposentadoria, ainda pendentes a apelação sobre o benefício e o agravo sobre a própria multa. O juízo homologou o cálculo e mandou expedir requisitório; o Tribunal suspendeu a decisão.",
+    "inicial": "Cumprimento provisório 0802256-76.2024.8.12.0018 da multa diária fixada no processo 0805808-83.2023.8.12.0018 (ação principal 0803569-43.2022.8.12.0018)",
+    "decisao_recorrida": "Decisão da 2ª Vara Cível de Paranaíba/MS que homologou o cálculo do exequente e determinou a expedição de precatório ou RPV (intimação do INSS em 06/02/2025)",
+    "recurso": "Agravo ID 314197080 (12/02/2025): (1) cabimento (artigo 1.015, parágrafo único, do CPC); (2) prevenção da apelação 5005344-22.2023.4.03.9999 e do AI 5004477-19.2024.4.03.0000; (3) impossibilidade de execução provisória de quantia contra a Fazenda Pública sem trânsito em julgado (artigo 100 da Constituição; Tema 28/STF). Pede efeito suspensivo.",
+    "resposta": "Não consta contraminuta",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "INSS: procuradora federal Renata Moura Souza. Agravado: advogados Robson Queiroz de Rezende (OAB/MS 9.350) e Tiago do Amaral Laurencio Munholi (OAB/MS 10.560)",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento provisório; multa diária; Fazenda Pública; precatório/RPV; Tema 28/STF",
+     "sintese": "Segurado executa provisoriamente a multa diária fixada pelo atraso na implantação de aposentadoria, ainda pendentes a apelação sobre o benefício e o agravo sobre a própria multa. O juízo homologou o cálculo e mandou expedir requisitório; o Tribunal suspendeu a decisão.",
+     "questoes": "1) Situação atual da apelação e do AI conexos (prejudicialidade); 2) execução provisória de quantia contra a Fazenda Pública (Tema 28/STF).",
+     "rel": {
+      "razoes": "Agravo (ID 314197080): ausência de trânsito em julgado; Tema 28/STF; prevenção.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "2ª Vara Cível da Comarca de Paranaíba/MS",
+      "dispositivo": "Homologou o cálculo da multa e determinou a expedição de precatório ou RPV."
+     },
+     "ai": {
+      "hip": "Liquidação/cumprimento de sentença (artigo 1.015, parágrafo único, do CPC)",
+      "efeito": "Deferido"
+     },
+     "adm": {
+      "prot": "2025-02-12",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2025-02-06"
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Agravo de instrumento",
+       "id": "314197080",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "314197080",
+       "data": "2025-02-12"
+      },
+      {
+       "desc": "Informação sobre prevenção",
+       "id": "314243826",
+       "data": "2025-02-12"
+      },
+      {
+       "desc": "Decisão que deferiu o efeito suspensivo (10ª Turma)",
+       "id": "324292054",
+       "data": "2025-05-16"
+      },
+      {
+       "desc": "Certidão",
+       "id": "324797908",
+       "data": "2025-05-19"
+      }
+     ],
+     "pendencias": [
+      "Consultar a ApCiv 5005344-22.2023.4.03.9999 e o AI 5004477-19.2024.4.03.0000 [VALIDAR]",
+      "Conferir a redistribuição e a intimação do agravado [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2025-05-16"
+    }
    }
   },
   {
