@@ -49,3 +49,19 @@ test('Mesa: designação inicial e seleção em lote',()=>{
   assert.ok(!pag.includes("why.push(['','designação atual'])"),'gravado não pesa na proposta');
   for(const x of ['data-a="proposta"','Refazer tudo pela proposta','data-ck="','data-ckg="','data-lote="d"','data-lote="c"','sel-proposta','sel-limpar'])assert.ok(pag.includes(x),x);
 });
+test('Pautas: cabeçalho compacto ao lado do painel e etapa 2 pela numeração do PDF',()=>{
+  const c=read('monitor/triagem/index.html');
+  assert.ok(c.includes('<div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>'),'cabeçalho na coluna principal');
+  assert.ok(c.includes('class="cwe-sesnova" data-cwt="create-session"'),'+ Nova sessão no painel lateral');
+  assert.ok(c.includes("'Numeração conferida'")&&!c.includes("'Conferência com a seleção prévia'"),'etapa 2 confere a numeração, não a seleção prévia');
+  for(const x of ["'número repetido'","'processo repetido'","'sem número do item'","'era o item '",'Confirmar a numeração'])assert.ok(c.includes(x),x);
+  assert.ok(read('monitor/motor/assets/js/21-sessoes-equipe.js').includes('r.itemAnterior = String(o.item)'),'reimportação guarda o número anterior');
+});
+test('Pautas: painel da sessão integrado ao cabeçalho e julgadores com substituições',()=>{
+  const c=read('monitor/triagem/index.html');
+  assert.ok(c.includes("const corpo = [null, etapa1, etapa2, etapaEtq, etapaDes, etapa4][d.cur](ss, d);"),'esteira: seleção, pauta, etiquetagem, designação, publicar');
+  assert.ok(!c.includes("['Painel da sessão', 'todas as estatísticas']"),'painel não é etapa');
+  for(const x of ['function cabAbas(ss, d)','data-cwe="painel"','data-cwe="j-ed"','function julgEditor(ss, d)','function sugestoesJ(ss, d)','data-cwe="j-sub-add"','data-cwe="j-novo-ok"',"'apoio/magistrados.json'"])assert.ok(c.includes(x),x);
+  const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
+  for(const x of ['definirJulgadores: function','julgadoresDoItem: function','if (ss.julgadores) o.julgadores = ss.julgadores;','docs[i] && docs[i].julgadores'])assert.ok(m.includes(x),x);
+});

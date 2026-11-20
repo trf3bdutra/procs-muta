@@ -12,19 +12,20 @@ test('Caput é a central principal e preserva módulos existentes',()=>{
   }
   assert.ok(page.includes("D.title = 'Caput · ' + tit"));
 });
-test('A entrada Caput abre Inteligência e Pautas permanecem acessíveis',()=>{
-  assert.match(page,/const eCaput=\/\^/);
-  assert.ok(page.includes("eCaput?'inteligencia':'fila'"));
-  assert.ok(page.includes("ehPautas?'pautas'"));
-  assert.ok(page.includes("location.hash"));
+test('A entrada Caput abre Inteligência e cada aba tem caminho próprio em /caput/',()=>{
+  assert.ok(page.includes("if (/^\\/caput$/.test(p)) return 'inteligencia';"),'/caput abre Inteligência');
+  assert.ok(page.includes("fila: 'triagem'")&&page.includes("pautas: 'pautas'"),'abas mapeadas a caminhos');
+  assert.ok(page.includes("history.pushState(null, '', alvo + location.search)"),'troca de aba muda o caminho');
+  assert.ok(page.includes("location.hash"),'endereços antigos com # continuam valendo');
 });
 test('Caput é servido sem duplicar APIs ou motor',()=>{
-  for(const x of ['site/public/caput/index.html','site/public/caput/pautas/index.html','site/public/monitor/triagem/index.html'])assert.ok(wf.includes(x),x);
+  for(const x of ['site/public/caput/index.html','site/public/monitor/triagem/index.html'])assert.ok(wf.includes(x),x);
+  assert.ok(wf.includes('"rewrites":[{"source":"/caput/:aba(triagem|pautas|coordenacao|comunicacao|inteligencia|chefia|escaninhos)","destination":"/caput/index.html"}'),'abas do Caput por caminho');
   for(const x of ['/init/assets/js/regras-gerais.js','/init/assets/js/gh-ponte.js'])assert.ok(page.includes(x),x);
   assert.ok(legacy.includes("location.replace('/caput/' + location.hash)"));
 });
 test('Rotas históricas redirecionam à central sem alterar os dados',()=>{
-  for(const x of ['/triagem','/pautas','/caput/#fila','/caput/#pautas'])assert.ok(wf.includes(x),x);
+  for(const x of ['"/triagem","destination":"/caput/triagem"','"/pautas","destination":"/caput/pautas"'])assert.ok(wf.includes(x),x);
   const script=[...page.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
   assert.ok(script.length>0);
   script.forEach((m,i)=>new vm.Script(m[1],{filename:'caput-script-'+i+'.js'}));
