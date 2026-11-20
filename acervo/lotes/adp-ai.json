@@ -2500,8 +2500,8 @@
    "exequente": "MATHEUS RAMIRES CAMILO DE MELO",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Adidos, Agregados e Adjuntos",
-   "grupo": null,
-   "tipo_caso": "AI · Militar · encostamento para tratamento de saúde sem remuneração (pedido de adição/agregação)",
+   "grupo": "",
+   "tipo_caso": "AI · Administrativo · militar temporário do Exército · encostamento só para tratamento de saúde, sem remuneração × reintegração como adido ou agregado",
    "resultado": "Ato a proferir: julgamento do agravo (voto) ou prejudicialidade; tutela recursal indeferida em 22/08/2025 e há contraminuta. Conferir antes se a ação de origem foi sentenciada",
    "modelo": "",
    "variacoes": [
@@ -2586,7 +2586,87 @@
     "representacao": "Advogados Fagner de Oliveira Melo (OAB/MS 21.507) e Everson Mateus Rodrigues da Luz (OAB/MS 22.975); procuração não identificada com texto [VALIDAR]",
     "preparo": "Sem comprovante (certidão ID 333703046); gratuidade não apreciada nos autos do agravo [VALIDAR]"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Administrativo · militar temporário do Exército · encostamento só para tratamento de saúde, sem remuneração × reintegração como adido ou agregado",
+   "especificidades": "Sem grupo adequado entre os 12 (matéria militar) · Tutela recursal indeferida (ID 334228943, 22/08/2025) · Preparo: sem comprovante (certidão ID 333703046) e gratuidade não apreciada no agravo [VALIDAR] · Agravo de 2025 contra decisão de tutela: conferir se a ação de origem foi sentenciada (perda de objeto) [VALIDAR] · Procuração não identificada com texto [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Administrativo · militar temporário do Exército · encostamento só para tratamento de saúde, sem remuneração × reintegração como adido ou agregado",
+     "sintese": "Matheus Ramires Camilo de Melo, militar do Exército em tratamento de saúde, pediu manutenção como adido ou agregado com remuneração. O juízo deferiu só o encostamento para tratamento, sem remuneração; o militar agravou.",
+     "questoes": "1) Subsistência do interesse recursal diante de eventual sentença; 2) preparo ou gratuidade; 3) direito do militar à manutenção como adido ou agregado, com remuneração, durante o tratamento.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 333506628 (15/08/2025): manutenção na condição de adido ou agregado; pede antecipação da tutela recursal.",
+      "contrarrazoes": "Contraminuta da União ID 334897431 (29/08/2025): manutenção da decisão e desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "392584645",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Deferiu em parte a tutela para que a União fizesse o encostamento do autor só para continuidade do tratamento médico, sem remuneração."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "392584645"
+     },
+     "adm": {
+      "prot": "2025-08-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "333506628",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "333506628",
+       "data": "2025-08-15"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "333703046",
+       "data": "2025-08-18"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "334228943",
+       "data": "2025-08-22"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "334897431",
+       "data": "2025-08-29"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "362604316",
+       "data": "2026-03-26"
+      }
+     ],
+     "pendencias": "Conferir a sentença na origem; conferir o preparo ou a gratuidade; conferir a procuração",
+     "especificidades": "Sem grupo adequado entre os 12 (matéria militar) · Tutela recursal indeferida (ID 334228943, 22/08/2025) · Preparo: sem comprovante (certidão ID 333703046) e gratuidade não apreciada no agravo [VALIDAR] · Agravo de 2025 contra decisão de tutela: conferir se a ação de origem foi sentenciada (perda de objeto) [VALIDAR] · Procuração não identificada com texto [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-08-22"
+    }
+   }
   },
   {
    "sessao": "",
