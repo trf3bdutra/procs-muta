@@ -4237,7 +4237,7 @@
    "executado": "POLYANA ABDALLA TAVARES",
    "assunto": "Anuidades OAB",
    "grupo": "g3",
-   "tipo_caso": "AI da OAB/MS · execução de título extrajudicial (anuidades) · suspensão da execução",
+   "tipo_caso": "AI · Execução da OAB · Execuções da OAB · execução de anuidades contra advogada · suspensão da execução pelo juízo",
    "resultado": "Ato a proferir: conferir o preparo (sem comprovante); se regular ou regularizado, julgamento do agravo, possivelmente monocrático pela linha do gabinete para execuções da OAB [VALIDAR]",
    "modelo": "",
    "variacoes": [
@@ -4314,7 +4314,79 @@
     "representacao": "OAB/MS pelo advogado Marcelo Nogueira da Silva (OAB/MS 13.300), do departamento de execução; procuração não identificada [VALIDAR]",
     "preparo": "Sem comprovante: certidão ID 340110104; documento de custas ID 340124368 sem conteúdo"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Execução da OAB · Execuções da OAB · execução de anuidades contra advogada · suspensão da execução pelo juízo",
+   "especificidades": "Preparo sem comprovante STN: certidão ID 340110104 e comprovante bancário (ID 340124368) [VALIDAR] · Agravada sem advogado constituído e não intimada para contraminuta · Fundamento da suspensão não identificado nos autos do agravo [VALIDAR] · Procuração da OAB/MS não identificada [VALIDAR] · Intimação da decisão agravada em 14/10/2025, segundo a agravante",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução da OAB · Execuções da OAB · execução de anuidades contra advogada · suspensão da execução pelo juízo",
+     "sintese": "A OAB/MS executa anuidades da advogada Polyana Abdalla Tavares; o juízo suspendeu a execução e a OAB agravou pedindo o prosseguimento.",
+     "questoes": "1) Regularidade do preparo; 2) intimação da agravada; 3) descabimento da suspensão da execução de anuidades da OAB.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 340087358 (20/10/2025): natureza singular da OAB e dependência das anuidades; descabimento do sobrestamento; prosseguimento da execução.",
+      "contrarrazoes": "Não consta: a agravada não foi intimada"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Suspendeu a execução de título extrajudicial 5003973-21.2025.4.03.6000."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-20",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "340087358",
+       "contra": "Intimada para responder"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "340087358",
+       "data": "2025-10-20"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "340110104",
+       "data": "2025-10-20"
+      },
+      {
+       "desc": "Comprovante bancário de custas",
+       "id": "340124368",
+       "data": "2025-10-20"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "362248928",
+       "data": "2026-03-24"
+      }
+     ],
+     "pendencias": "Conferir o preparo; intimar a agravada (artigo 1.019, II, do CPC); identificar o fundamento da decisão agravada",
+     "especificidades": "Preparo sem comprovante STN: certidão ID 340110104 e comprovante bancário (ID 340124368) [VALIDAR] · Agravada sem advogado constituído e não intimada para contraminuta · Fundamento da suspensão não identificado nos autos do agravo [VALIDAR] · Procuração da OAB/MS não identificada [VALIDAR] · Intimação da decisão agravada em 14/10/2025, segundo a agravante"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   }
   },
   {
    "sessao": "",
