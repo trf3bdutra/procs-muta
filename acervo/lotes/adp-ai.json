@@ -9071,13 +9071,13 @@
    "exequente": "SEMALO INDUSTRIA E COMERCIO DE ALIMENTOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g7",
+   "tipo_caso": "AI · Tributário · PIS e COFINS · exclusão de benefícios e incentivos fiscais de ICMS da base de cálculo (créditos presumidos: Tema 843/STF, sobrestamento · demais incentivos: Lei 14.789/2023) · mandado de segurança · decisão parcial de mérito",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), conferidos o cabimento e a situação do Tema 843/STF [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Semalo Indústria e Comércio de Alimentos Ltda. contra a decisão ID 352616258, integrada pela decisão ID 378337012, da 4ª Vara Federal de Campo Grande que, no mandado de segurança 5002823-39.2024.4.03.6000, indeferiu a liminar e sobrestou o feito quanto aos créditos presumidos de ICMS (Tema 843/STF) e julgou parcialmente o mérito, denegando a segurança quanto aos demais incentivos fiscais de ICMS. A agravante pede a exclusão desses benefícios da base de cálculo do PIS e da COFINS, independentemente da classificação da subvenção.",
+   "peculiaridades": "Tutela recursal indeferida na 4ª Turma após embargos de declaração. Cabimento do agravo contra a parte de mérito a conferir [VALIDAR]. Tema 843/STF com sobrestamento.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -9120,7 +9120,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 333170431, 333171933 · só a guia: ID 333171932 · certidão sem custas: ID 332744953 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 333171933 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
+    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "PIS e COFINS: benefícios fiscais de ICMS; Tema 843/STF; mandado de segurança",
+    "origem": "4ª Vara Federal de Campo Grande · MS 5002823-39.2024.4.03.6000",
+    "decisao_agravada": "IDs 352616258 e 378337012 dos autos de origem",
+    "recurso": "ID 332708333 · 06/08/2025",
+    "preparo": "Comprovante bancário, não aceito [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -9141,6 +9149,99 @@
     "ultima_informacao": "Certidão · ID 379519665 · 10/06/2026",
     "ultima_movimentacao": "10/08/2026 15:16 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Tributário · PIS e COFINS · exclusão de benefícios e incentivos fiscais de ICMS da base de cálculo (créditos presumidos: Tema 843/STF, sobrestamento · demais incentivos: Lei 14.789/2023) · mandado de segurança · decisão parcial de mérito",
+   "especificidades": "Origem em mandado de segurança (5002823-39.2024.4.03.6000, 4ª Vara Federal de Campo Grande): parecer do MPF sem exame de mérito (ID 388659245) · Decisão da 4ª Turma (Des. Fed. Marcelo Saraiva) julgou prejudicado o agravo (ID 337965159); acolhidos os embargos de declaração, revogou a decisão e indeferiu a tutela recursal (ID 341847117, 10/11/2025) · Cabimento: o agravo impugna a decisão ID 352616258 \"integrada pela sentença ID 378337012\"; conferir se houve decisão parcial de mérito (artigo 356, § 5º, do CPC) ou sentença apelável [VALIDAR] · Situação atual do Tema 843/STF [VALIDAR] · Preparo: comprovante bancário (IDs 333170431 e 333171933), sem comprovante STN [VALIDAR] · Renúncia de uma das advogadas anotada (despacho ID 386744240)",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A impetrante busca afastar a tributação pelo PIS e pela COFINS dos benefícios fiscais de ICMS; o juízo sobrestou a parte dos créditos presumidos (Tema 843/STF) e denegou a segurança quanto aos demais incentivos.",
+    "inicial": "Mandado de segurança 5002823-39.2024.4.03.6000, 4ª Vara Federal de Campo Grande, de Semalo Indústria e Comércio de Alimentos Ltda. contra o Delegado da Receita Federal do Brasil",
+    "decisao_recorrida": "Decisão ID 352616258, integrada pela decisão ID 378337012, dos autos de origem: indeferiu a liminar e sobrestou o feito quanto aos créditos presumidos de ICMS; denegou a segurança quanto aos demais incentivos (artigos 356, II, e 487, I, do CPC)",
+    "recurso": "Agravo ID 332708333 (06/08/2025): (1) cabimento contra decisão parcial de mérito (artigos 354, parágrafo único, 356, § 5º, e 1.015, II e XIII, do CPC); (2) exclusão dos benefícios fiscais de ICMS da base do PIS e da COFINS; e (3) antecipação da tutela recursal.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 336183366 (13/09/2025) [VALIDAR teor]; resposta aos embargos de declaração ID 341362472.",
+    "parecer": "MPF, ID 388659245 (26/07/2026): ausência de interesse que justifique a intervenção.",
+    "outros": "Decisão ID 337965159 (14/10/2025): julgou prejudicado o agravo. Embargos de declaração ID 340672573 (23/10/2025). Decisão ID 341847117 (10/11/2025): acolheu os embargos, revogou a decisão e indeferiu a tutela recursal. Decisão de redistribuição ID 375281176 (09/06/2026). Renúncia de mandato ID 386727432. Despacho ID 386744240 (17/07/2026): vista ao MPF.",
+    "representacao": "Agravante: advogados constituídos (renúncia de uma advogada anotada). Agravada: Procuradoria-Geral da Fazenda Nacional.",
+    "preparo": "Comprovante bancário (IDs 333170431 e 333171933) e guia (ID 333171932); sem comprovante STN [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Tributário · PIS e COFINS · exclusão de benefícios e incentivos fiscais de ICMS da base de cálculo (créditos presumidos: Tema 843/STF, sobrestamento · demais incentivos: Lei 14.789/2023) · mandado de segurança · decisão parcial de mérito",
+     "sintese": "A impetrante busca afastar a tributação pelo PIS e pela COFINS dos benefícios fiscais de ICMS; o juízo sobrestou a parte dos créditos presumidos (Tema 843/STF) e denegou a segurança quanto aos demais incentivos.",
+     "questoes": "1) Cabimento do agravo contra a parte de mérito (decisão parcial ou sentença); 2) sobrestamento pelo Tema 843/STF quanto aos créditos presumidos; 3) exclusão dos demais incentivos de ICMS da base do PIS e da COFINS.",
+     "rel": {
+      "razoes": "Agravo (ID 332708333): (1) cabimento contra decisão parcial de mérito; (2) exclusão dos benefícios fiscais de ICMS; e (3) tutela recursal.",
+      "contrarrazoes": "União (ID 336183366) [VALIDAR teor]."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "352616258",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a liminar e sobrestou o feito quanto aos créditos presumidos de ICMS; denegou a segurança quanto aos demais incentivos fiscais."
+     },
+     "ai": {
+      "hip": "Mérito do processo",
+      "efeito": "Indeferido",
+      "id": "352616258"
+     },
+     "adm": {
+      "prot": "2025-08-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Semalo Indústria e Comércio de Alimentos Ltda.",
+       "tipo": "Agravo de instrumento",
+       "id": "332708333",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "332708333",
+       "data": "2025-08-06"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "336183366",
+       "data": "2025-09-13"
+      },
+      {
+       "desc": "Decisão que julgou prejudicado o agravo",
+       "id": "337965159",
+       "data": "2025-10-14"
+      },
+      {
+       "desc": "Decisão nos embargos de declaração: tutela recursal indeferida",
+       "id": "341847117",
+       "data": "2025-11-10"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "388659245",
+       "data": "2026-07-26"
+      }
+     ],
+     "pendencias": "Conferir o cabimento; conferir a situação do Tema 843/STF; conferir o comprovante STN",
+     "especificidades": "Origem em mandado de segurança (5002823-39.2024.4.03.6000, 4ª Vara Federal de Campo Grande): parecer do MPF sem exame de mérito (ID 388659245) · Decisão da 4ª Turma (Des. Fed. Marcelo Saraiva) julgou prejudicado o agravo (ID 337965159); acolhidos os embargos de declaração, revogou a decisão e indeferiu a tutela recursal (ID 341847117, 10/11/2025) · Cabimento: o agravo impugna a decisão ID 352616258 \"integrada pela sentença ID 378337012\"; conferir se houve decisão parcial de mérito (artigo 356, § 5º, do CPC) ou sentença apelável [VALIDAR] · Situação atual do Tema 843/STF [VALIDAR] · Preparo: comprovante bancário (IDs 333170431 e 333171933), sem comprovante STN [VALIDAR] · Renúncia de uma das advogadas anotada (despacho ID 386744240)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-11-10"
+    }
    }
   },
   {
