@@ -1956,7 +1956,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     </aside>
 
     <aside class="cmt-pn cmt-pn-dil" id="cmt-p-dil" hidden aria-label="Diligências">
-      <div class="cmt-pn-h"><h2>Diligências</h2><span class="cmt-seg" id="cmt-dilf" role="group" aria-label="Recorte das diligências"><button type="button" data-cdf="comigo" aria-pressed="true">Comigo</button><button type="button" data-cdf="minhas" aria-pressed="false">Que pedi</button><button type="button" data-cdf="todas" aria-pressed="false">Todas</button></span><span class="cmt-n" id="cmt-n-dil2">—</span><span class="cmt-sp"></span><button type="button" class="cmt-pn-x" data-cpx="dil" aria-label="Fechar">×</button></div>
+      <div class="cmt-pn-h"><h2>Diligências</h2><span class="cmt-n" id="cmt-n-dil2">—</span><span class="cmt-sp"></span><button type="button" class="cmt-pn-x" data-cpx="dil" aria-label="Fechar">×</button></div>
       <div class="cmt-pn-b"><div class="cmt-cols4" id="cmt-l-dil"></div></div>
     </aside>
 
@@ -4666,10 +4666,10 @@ if(v){CMT.q=dgx(v.getAttribute('data-cnnum'));CMT.filtro='todos';
   var q=$('#cmt-q');if(q)q.value=CMT.q;
   cmtPainel('not',false);cmtPauta();return;}});
 function cmtDilig(){
-var j=CMT.dados||{},T=j.diligencias||[],f=CMT.dilf||'comigo';
+var j=CMT.dados||{},T=j.diligencias||[],f='todas';
 var L=f==='comigo'?T.filter(function(x){return x.minha;}):f==='minhas'?T.filter(function(x){return x.dele;}):T;
 var el=$('#cmt-l-dil'),n=$('#cmt-n-dil2'),h=$('#cmt-n-dil');
-if(n)n.textContent=L.length+' de '+T.length;
+if(n)n.textContent=T.length+(T.length===1?' diligência':' diligências');
 var nm=T.filter(function(x){return x.minha;}).length;if(h){h.textContent=nm;h.hidden=!nm;}
 [].forEach.call(document.querySelectorAll('[data-cdf]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cdf')===f));});
 if(!el)return;
