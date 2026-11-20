@@ -4,7 +4,9 @@ Padrão (o mesmo dos cartões do prontuário e das fichas):
 - assunto: o assunto cadastrado no PJe, como veio (pode estar errado ou vago).
 - assunto_detalhado: o assunto do PJe corrigido e preciso, preenchido na triagem.
 - tipo_caso: cadeia "Matéria · tipo · aspecto distintivo", com segmentos separados por " · ".
-  A matéria vem do grupo do lote quando o texto não a traz (ex.: g6 → "Previdenciário").
+  A matéria vem do grupo do lote quando o texto não a traz (ex.: g6 → "Previdenciário"). Nome canônico e
+  aliases no vocabulário comum padrao/tipo-caso.json, o mesmo dos precedentes do Compêndio
+  (scripts/catalogo/tipo_caso.py): é a chave da busca de precedentes pelo tipo de caso.
   Substitui o antigo "subassunto", que deixou de existir.
 - especificidades: fatos que distinguem o caso, um por segmento " · ", com o ID quando houver.
 O cartão do prontuário guarda o tipo de caso na chave "subassuntos" (mantida por compatibilidade) e o
@@ -17,9 +19,11 @@ Uso: python3 scripts/lotes/tipo_caso.py acervo/lotes/adp-ai.json
 import json, re, sys, unicodedata
 from pathlib import Path
 
-MATERIA = {'g1': 'Alienação fiduciária', 'g2': 'Ambiental', 'g3': 'Execução da OAB', 'g4': 'Execução fiscal',
-           'g5': 'Cumprimento de sentença', 'g6': 'Previdenciário', 'g7': 'Tributário', 'g8': '28,86%',
-           'g9': 'Concurso público', 'g10': 'Aduaneiro', 'g11': 'Contratos bancários', 'g12': 'Saúde'}
+RAIZ = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(RAIZ / 'scripts'))
+import tipocaso  # noqa: E402  vocabulário comum (padrao/tipo-caso.json), o mesmo dos precedentes do Compêndio
+
+MATERIA = tipocaso.MATERIA_GRUPO
 
 
 def nz(s):
@@ -36,9 +40,12 @@ def tipo_caso(texto, grupo=None):
     S = segs(texto)
     if not S:
         return ''
-    m = MATERIA.get(grupo or '')
-    if m and nz(m).split()[0] not in nz(S[0]):
-        S = [m] + S
+    if tipocaso.materia_de(S[0]):
+        S = tipocaso.segs(tipocaso.canonico(' · '.join(S)))   # alias da matéria → nome canônico
+    else:
+        m = MATERIA.get(grupo or '')
+        if m and nz(m).split()[0] not in nz(S[0]):
+            S = [m] + S
     S[0] = S[0][:1].upper() + S[0][1:]
     return ' · '.join(S)
 

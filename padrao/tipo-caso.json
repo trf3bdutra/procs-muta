@@ -1,0 +1,361 @@
+{
+  "schema": "gabA.tipoCaso",
+  "versao": "1.0.0",
+  "atualizado_em": "2026-11-20",
+  "descricao": "Tipo de caso: cadeia \"Matéria · tipo · aspecto distintivo\", com segmentos separados por \" · \". Substitui o antigo \"subassunto\" nos processos (Collectio, prontuário, ficha, pauta) e nos precedentes do Compêndio (Ementário e Repositório). A matéria é o primeiro segmento e é a chave da interconexão: processos e precedentes usam o mesmo nome canônico, e a busca de precedentes compara primeiro a matéria e depois os demais segmentos.",
+  "regras": [
+    "Matéria: nome canônico desta lista; formas alternativas ficam em \"aliases\" e são reconhecidas na busca.",
+    "Tipo: a espécie dentro da matéria (no precedente, o assunto do catálogo quando não repete a matéria).",
+    "Aspecto distintivo: o que separa o caso dos demais da mesma matéria e do mesmo tipo.",
+    "Assunto do PJe fica no campo próprio (pode estar errado ou vago); o assunto corrigido vai em \"assunto detalhado\".",
+    "Assunto do catálogo sem matéria nesta lista: a matéria passa a ser o próprio assunto, até ser incluído aqui.",
+    "Precedente sem assunto no vocabulário: a matéria vem do ramo do direito catalogado (ver \"ramos\"), e o assunto passa a ser o tipo."
+  ],
+  "materias": [
+    {
+      "nome": "Alienação fiduciária",
+      "grupo": "g1",
+      "aliases": [
+        "Alienação fiduciária de imóvel",
+        "Alienação fiduciária de imóvel (Lei 9.514/1997)",
+        "Alienação fiduciária de bem imóvel"
+      ],
+      "assuntos": [
+        "Alienação Fiduciária"
+      ]
+    },
+    {
+      "nome": "Ambiental",
+      "grupo": "g2",
+      "aliases": [
+        "Ação civil pública ambiental",
+        "ACP ambiental",
+        "Embargo ambiental",
+        "Direito ambiental"
+      ],
+      "assuntos": [
+        "Ambiental",
+        "Área de Preservação Permanente"
+      ]
+    },
+    {
+      "nome": "Execução da OAB",
+      "grupo": "g3",
+      "aliases": [
+        "OAB",
+        "Execução de anuidade da OAB",
+        "Anuidade da OAB"
+      ],
+      "assuntos": []
+    },
+    {
+      "nome": "Execução fiscal",
+      "grupo": "g4",
+      "aliases": [
+        "Execução fiscal de conselho profissional",
+        "Dívida ativa"
+      ],
+      "assuntos": [
+        "Dívida Ativa (Execução Fiscal)"
+      ]
+    },
+    {
+      "nome": "Cumprimento de sentença",
+      "grupo": "g5",
+      "aliases": [
+        "Cumprimento provisório",
+        "Cumprimento de sentença coletiva",
+        "Cumprimento de sentença contra o INSS",
+        "Cumprimento de sentença contra a União",
+        "Cumprimento de sentença contra a Fazenda Pública",
+        "Cumprimento de sentença da CEF",
+        "Execução contra a Fazenda Pública"
+      ],
+      "assuntos": [
+        "Cumprimento de Sentença",
+        "Efeito Suspensivo / Impugnação / Embargos à Execução"
+      ]
+    },
+    {
+      "nome": "Previdenciário",
+      "grupo": "g6",
+      "aliases": [
+        "Benefício previdenciário",
+        "INSS"
+      ],
+      "assuntos": [
+        "Benefício por Incapacidade",
+        "Rural (Art. 48/51)",
+        "Benefício Assistencial (Art. 203,V CF/88)",
+        "Averbação/Cômputo/Conversão de tempo de serviço especial",
+        "Pensão por Morte (Art. 74/9)",
+        "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
+        "Aposentadoria Especial (Art. 57/8)",
+        "Híbrida (Art. 48/106)",
+        "Auxílio-Acidente (Art. 86)",
+        "Salário-Maternidade (Art. 71/73)",
+        "Rural (Pensão por Morte (Art. 74/9))",
+        "Aposentadoria por Idade (Art. 48/51)",
+        "Auxílio-Reclusão (Art. 80)",
+        "IRSM de Fevereiro de 1994(39,67%)",
+        "Reajustes e Revisões Específicos",
+        "Desconto em Folha de Pagamento/Benefício Previdenciário"
+      ]
+    },
+    {
+      "nome": "Tributário",
+      "grupo": "g7",
+      "aliases": [
+        "Direito tributário"
+      ],
+      "assuntos": [
+        "PIS - Cofins",
+        "PIS e Cofins",
+        "Contribuições Previdenciárias",
+        "Regime Monofásico",
+        "Contribuições",
+        "ICMS/Importação"
+      ]
+    },
+    {
+      "nome": "28,86%",
+      "grupo": "g8",
+      "aliases": [
+        "Reajuste de 28,86%",
+        "Índice de 28,86%",
+        "28,86"
+      ],
+      "assuntos": [
+        "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+        "Reajuste de 28,86% (ACP 0005019-15.1997.4.03.6000)"
+      ]
+    },
+    {
+      "nome": "Concurso público",
+      "grupo": "g9",
+      "aliases": [
+        "Concurso público e ensino",
+        "Ensino",
+        "Ensino superior"
+      ],
+      "assuntos": [
+        "Processo Seletivo",
+        "Reserva de Vagas",
+        "Residência Médica"
+      ]
+    },
+    {
+      "nome": "Aduaneiro",
+      "grupo": "g10",
+      "aliases": [
+        "Perdimento",
+        "Comércio exterior"
+      ],
+      "assuntos": [
+        "Apreensão",
+        "Liberação de Veículo Apreendido",
+        "IPI, importação e comércio exterior"
+      ]
+    },
+    {
+      "nome": "Contratos bancários",
+      "grupo": "g11",
+      "aliases": [
+        "Contratos bancários e CEF",
+        "CEF",
+        "Contratos com a CEF",
+        "SFH"
+      ],
+      "assuntos": [
+        "Minha Casa, Minha Vida",
+        "Cédula de Crédito Rural",
+        "Execução Contratual"
+      ]
+    },
+    {
+      "nome": "Saúde",
+      "grupo": "g12",
+      "aliases": [
+        "Medicamentos",
+        "Direito à saúde"
+      ],
+      "assuntos": [
+        "Sistema Único de Saúde (SUS)"
+      ]
+    },
+    {
+      "nome": "Administrativo",
+      "grupo": "",
+      "aliases": [
+        "Servidor público",
+        "Licitações e contratos"
+      ],
+      "assuntos": [
+        "Contratos Administrativos",
+        "Atos Administrativos",
+        "Acumulação de Cargos",
+        "Processo Administrativo Disciplinar / Sindicância",
+        "Enquadramento",
+        "Indenização / Terço Constitucional",
+        "Gestante / Adotante / Paternidade",
+        "Locação / Permissão / Concessão / Autorização / Cessão de Uso",
+        "Metrológica",
+        "Programa Mais Médicos"
+      ]
+    },
+    {
+      "nome": "Militar",
+      "grupo": "",
+      "aliases": [
+        "Servidor militar"
+      ],
+      "assuntos": [
+        "Serviço Militar",
+        "Fundo de Saúde do Exército - FUSEX"
+      ]
+    },
+    {
+      "nome": "Conselhos profissionais",
+      "grupo": "",
+      "aliases": [
+        "Conselho profissional"
+      ],
+      "assuntos": [
+        "Registro Profissional",
+        "Exercício Profissional",
+        "Profissional",
+        "Exame da Ordem OAB"
+      ]
+    },
+    {
+      "nome": "Indígena",
+      "grupo": "",
+      "aliases": [
+        "Demarcação de terra indígena",
+        "Direitos indígenas"
+      ],
+      "assuntos": []
+    },
+    {
+      "nome": "Reforma agrária",
+      "grupo": "",
+      "aliases": [
+        "Desapropriação para reforma agrária"
+      ],
+      "assuntos": []
+    },
+    {
+      "nome": "Trânsito",
+      "grupo": "",
+      "aliases": [],
+      "assuntos": [
+        "Sistema Nacional de Trânsito"
+      ]
+    },
+    {
+      "nome": "Civil",
+      "grupo": "",
+      "aliases": [
+        "Posse",
+        "Embargos de terceiro"
+      ],
+      "assuntos": [
+        "Propriedade",
+        "Reintegração de Posse",
+        "Acidente de Trânsito",
+        "Prestação de Serviços"
+      ]
+    },
+    {
+      "nome": "Processual",
+      "grupo": "",
+      "aliases": [
+        "Processo civil",
+        "Direito processual"
+      ],
+      "assuntos": [
+        "Honorários Advocatícios",
+        "Gratuidade da Justiça",
+        "Competência da Justiça Federal",
+        "Perda Superveniente do Objeto",
+        "Distribuição",
+        "Tutela Provisória / Efeito Suspensivo",
+        "Suspeição / Impedimento",
+        "Litispendência",
+        "Sucessão Processual / Habilitação",
+        "Dialeticidade Recursal",
+        "Tutela de Urgência"
+      ]
+    }
+  ],
+  "ramos": [
+    [
+      "aduaneir",
+      "Aduaneiro"
+    ],
+    [
+      "ambiental",
+      "Ambiental"
+    ],
+    [
+      "militar",
+      "Militar"
+    ],
+    [
+      "previdenci",
+      "Previdenciário"
+    ],
+    [
+      "prevideci",
+      "Previdenciário"
+    ],
+    [
+      "assisten",
+      "Previdenciário"
+    ],
+    [
+      "assisencial",
+      "Previdenciário"
+    ],
+    [
+      "acident",
+      "Previdenciário"
+    ],
+    [
+      "tribut",
+      "Tributário"
+    ],
+    [
+      "transito",
+      "Trânsito"
+    ],
+    [
+      "agrari",
+      "Reforma agrária"
+    ],
+    [
+      "bancari",
+      "Contratos bancários"
+    ],
+    [
+      "administrativ",
+      "Administrativo"
+    ],
+    [
+      "consumidor",
+      "Civil"
+    ],
+    [
+      "(?<!processual )civil",
+      "Civil"
+    ],
+    [
+      "processual",
+      "Processual"
+    ],
+    [
+      "processo civil",
+      "Processual"
+    ]
+  ]
+}

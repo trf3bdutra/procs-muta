@@ -31,9 +31,9 @@ function deSerie(r) {
 }
 function deCurado(r) {
   var x = { id: r.id, sid: '', cur: true, t: 'A', n: r.n || '', c: r.c || '', cl: r.cl || '', o: r.o || '', d: r.d || '', p: r.p || '',
-    e: r.e || '', r: r.r || '', ass: r.as || '', temas: r.tm || '', tese: r.ts || '', sub: r.sb || '', u: r.u || '', it: !!r.it, ano: String(r.d || '').slice(0, 4) };
+    e: r.e || '', r: r.r || '', ass: r.as || '', temas: r.tm || '', tese: r.ts || '', tc: r.tc || r.sb || '', mat: r.mt || '', u: r.u || '', it: !!r.it, ano: String(r.d || '').slice(0, 4) };
   if (/monocr|decis/i.test(r.pr || '')) x.t = 'M';
-  x._q = nz([x.n, x.c, x.cl, x.o, x.e, x.r, x.ass, x.temas, x.tese, x.sub].join(' ')); return x;
+  x._q = nz([x.n, x.c, x.cl, x.o, x.e, x.r, x.ass, x.temas, x.tese, x.mat, x.tc].join(' ')); return x;
 }
 function carregar(forcar) {
   if (B.carregando) return B.carregando;
@@ -304,7 +304,7 @@ function detalhe() {
   d.append(bar);
   if (x.cur) {
     var cat = el('div', 'cat');
-    [['Assunto', x.ass], ['Subassunto', x.sub], ['Temas', x.temas], ['Tese', x.tese]].forEach(function (p) { if (p[1]) { var r = el('p'); r.append(el('b', null, p[0] + ': '), document.createTextNode(p[1])); cat.append(r); } });
+    [['Assunto', x.ass], ['Tipo de caso', x.tc], ['Temas', x.temas], ['Tese', x.tese]].forEach(function (p) { if (p[1]) { var r = el('p'); r.append(el('b', null, p[0] + ': '), document.createTextNode(p[1])); cat.append(r); } });
     if (cat.childNodes.length) d.append(cat);
   }
   d.append(el('p', 'tag', 'Ementa'), el('pre', null, x.e || 'Sem ementa no índice.'));

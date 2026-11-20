@@ -450,6 +450,7 @@ details.x-parte .x-doc{margin-bottom:10px}
 @media (max-width:860px){.pp-top{grid-template-columns:1fr}}
 .pp-path{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin:8px 0 0}
 .pp-path+.pp-ass{margin-top:2px}
+.pp-tc{font-size:12px;color:var(--mut);margin:4px 0 0}.pp-tc b{font-weight:600;color:inherit}.pp-tc small{font-size:10px;font-weight:700;border:1px dashed var(--mut);border-radius:999px;padding:0 6px;margin-left:4px}
 .pp-sub{color:var(--mut);font-weight:600}.pp-sub small{font-size:10px;font-weight:700;border:1px dashed var(--mut);border-radius:999px;padding:0 6px;vertical-align:2px}
 .pp-tags span{font-size:11.5px}
 .pp-rel.cr li{flex-direction:column;align-items:stretch;gap:3px}

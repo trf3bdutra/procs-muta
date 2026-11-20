@@ -5,6 +5,7 @@ a partir desta pasta e da base do procs-muta. Perfis (equipe, avancado, editor):
 Fontes (todas no procs-muta):
   template.html · ementario.js · ementario.css      página e código
   ../../vade-mecum.json · usos_auto.json            Vade Mecum (temas, súmulas, jurisprudência, normas, regimento…) e usos localizados
+  ../../../padrao/tipo-caso.json                    vocabulário do tipo de caso (matéria · tipo · aspecto), comum a processos e precedentes
   editorial_pecas.json                              estrutura das peças, forma, expressões a evitar e tensões
   editorial_d.js · editorial_d.css · editorial_apoios.json   Minuta-Matriz (arquitetura D) e apoios do canhoto
   roteiros.json                                     roteiro da minuta (mestre, espécie, assunto e transversais)
@@ -89,8 +90,11 @@ for ln, r in enumerate((RAIZ/'precedentes/precedentes.jsonl').read_text(encoding
     x = {k: r[k] for k in K if r.get(k) not in (None, '', [], {})}
     cur, cat = r.get('curadoria') or {}, r.get('catalogacao') or {}
     if cur.get('tese'): x['tese'] = cur['tese']
-    if cur.get('subassunto'): x['subassunto'] = cur['subassunto']
-    elif cat.get('subassuntoSugerido'): x['subassunto'], x['subSug'] = cat['subassuntoSugerido'], True
+    # tipo de caso "Matéria · tipo · aspecto distintivo" (padrao/tipo-caso.json), o mesmo dos processos;
+    # o conferido na curadoria prevalece sobre o sugerido (scripts/catalogo/tipo_caso.py)
+    if cur.get('tipoCaso') or cur.get('subassunto'): x['tipoCaso'] = cur.get('tipoCaso') or cur['subassunto']
+    elif cat.get('tipoCasoSugerido'): x['tipoCaso'], x['tcSug'] = cat['tipoCasoSugerido'], True
+    if cat.get('materia'): x['materia'] = cat['materia']
     if cur.get('especificidadesTags'): x['espTags'] = cur['especificidadesTags']
     if cur.get('especificidades'): x['esp'] = cur['especificidades']
     if cur.get('observacoes'): x['obs'] = cur['observacoes']
@@ -264,8 +268,11 @@ def montar(var):
         t = t.replace('<title>Modus Operandi</title>', '<title>Compendium · Gabinete CMT</title>', 1)
     css += (H/'nav_editorial.css').read_text(encoding='utf-8') + (H/'tema_editorial.css').read_text(encoding='utf-8') + (H/'padrao_paginas.css').read_text(encoding='utf-8')
     return t, js, css, pre
+_TCV = json.loads((RAIZ/'padrao/tipo-caso.json').read_text(encoding='utf-8'))
+TCJ = json.dumps({'materias': [{'nome': m['nome'], 'aliases': m.get('aliases', [])} for m in _TCV['materias']]}, ensure_ascii=False, separators=(',', ':'))
 def gerar_html(var):
     t, js, css, pre = montar(var)
+    js = 'window.TIPO_CASO=' + TCJ + ';\n' + js   # vocabulário comum do tipo de caso (Ementário e Consulta)
     for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
              ('/*__DATA__*/', (RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')),
              ('/*__EDITORIAL__*/', EDJ),

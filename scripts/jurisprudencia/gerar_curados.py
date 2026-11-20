@@ -10,7 +10,8 @@ em /jurisprudencia/ (não ficam no Git):
   curados.json.gz        {"schema": "gabcmt.jurisprudencia.curados", "registros": [...]}
                          chaves curtas: id, n (processo), c (sigla), cl (classe), pr (pronunciamento),
                          o (órgão), d (julgamento), p (publicação), e (ementa), r (resultado),
-                         as (assunto), tm (temas), ts (tese), sb (subassunto), u (fonte), it (tem inteiro teor)
+                         as (assunto), tm (temas), ts (tese), tc (tipo de caso: matéria · tipo · aspecto),
+                         mt (matéria canônica, padrao/tipo-caso.json), u (fonte), it (tem inteiro teor)
   curados-texto.json.gz  {"schema": "gabcmt.jurisprudencia.curados-texto", "textos": {id: inteiro teor}}
 
 Mesmo conteúdo público do Ementário do Compêndio; CPF e CNPJ são retirados dos textos.
@@ -65,7 +66,8 @@ def main():
             'd': r.get('dataJulgamento'), 'p': r.get('dataPublicacao'),
             'e': limpa(r.get('ementa')), 'r': limpa(r.get('resultado')),
             'as': r.get('assunto'), 'tm': r.get('temas'), 'ts': limpa(cur.get('tese')),
-            'sb': cur.get('subassunto') or cat.get('subassuntoSugerido'), 'u': r.get('urlFonte'),
+            'tc': cur.get('tipoCaso') or cur.get('subassunto') or cat.get('tipoCasoSugerido'),
+            'mt': cat.get('materia'), 'u': r.get('urlFonte'),
         }
         if r.get('id') in textos:
             x['it'] = True

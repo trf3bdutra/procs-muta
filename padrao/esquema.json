@@ -32,9 +32,9 @@
     "causaPedir": {
      "type": "string"
     },
-    "subassunto": {
+    "tipoCaso": {
      "type": "string",
-     "description": "Subassunto conferido na curadoria (área = ramoDireito › assunto › subassunto), como nos cards de processo."
+     "description": "Tipo de caso conferido na curadoria: \"Matéria · tipo · aspecto distintivo\" (padrao/tipo-caso.json), o mesmo padrão dos processos; substitui o antigo subassunto. Sem curadoria vale catalogacao.tipoCasoSugerido."
     },
     "especificidades": {
      "type": "string"
@@ -147,7 +147,7 @@
     },
     "catalogacao": {
      "type": "object",
-     "description": "classificação automática (temaId, grauIgualdade, temaSugerido…); nunca editada à mão"
+     "description": "classificação automática (temaId, grauIgualdade, temaSugerido, materia e tipoCasoSugerido — scripts/catalogo/tipo_caso.py…); nunca editada à mão"
     },
     "modeloVinculado": {
      "type": "object"

@@ -80,6 +80,9 @@
     var fortes=toks([P.assunto,P.subassuntos,P.especificidades].join(' ')),fracos=toks([P.questoes,(P.recursos||[]).join(' '),P.decisaoOrigem,(P.ed||{}).vicio,(P.retratacao||{}).tema].join(' '));
     var u={};fortes.forEach(function(w){u[w]=2;});fracos.forEach(function(w){if(!u[w])u[w]=1;});return u;
   }
+  /* tipo de caso "Matéria · tipo · aspecto distintivo" (padrao/tipo-caso.json): a matéria canônica liga o processo aos precedentes */
+  var TCV=(function(){var A={},V=window.TIPO_CASO||{};(V.materias||[]).forEach(function(m){[m.nome].concat(m.aliases||[]).forEach(function(a){A[nq(a).trim()]=m.nome;});});return A;})();
+  function matDe(s){var p=nq(String(s||'').split(/\s+·\s+|;\s+/)[0]).trim();if(!p)return '';if(TCV[p])return TCV[p];var b='';Object.keys(TCV).forEach(function(a){if(a.length>b.length&&(p.indexOf(a+' ')===0||p.indexOf(a+'(')===0))b=a;});return b?TCV[b]:'';}
   function pont(T,campos){var s=0,ach={};campos.forEach(function(c){var t=toks(c[0]);var vis={};t.forEach(function(w){if(T[w]&&!vis[w]){vis[w]=1;s+=T[w]*c[1];ach[w]=1;}});});return {s:s,ach:Object.keys(ach)};}
   function modeloElegibilidade(P,z){
     var m=z.x||z,raz=[],imp=[],tj=nq(P.tipoJulgamento||''),aP=nq(P.assunto||''),aM=nq(m.assunto||''),mt=nq((m.classe||'')+' '+(m.nomeModelo||''));
@@ -95,9 +98,9 @@
     return {ok:!imp.length&&(z.s>=6||raz.indexOf('mesmo assunto')>=0),razoes:raz,impedimentos:imp};
   }
   function buscar(P){
-    var B=BASE||{},T=termos(P),tj=nq(P.tipoJulgamento||''),aN=nq(P.assunto||'');
+    var B=BASE||{},T=termos(P),tj=nq(P.tipoJulgamento||''),aN=nq(P.assunto||''),mP=matDe(P.subassuntos)||matDe(P.assunto);
     var arr=function(v){return Array.isArray(v)?v.join(' '):(v||'');};
-    var prec=(B.prec||[]).map(function(p){var r=pont(T,[[p.assunto,3],[arr(p.subassunto),3],[p.tese,2],[arr(p.espTags),2],[arr(p.temas),1],[p.ementa,1]]);if(aN&&nq(p.assunto)===aN)r.s+=6;return {x:p,s:r.s,ach:r.ach};});
+    var prec=(B.prec||[]).map(function(p){var r=pont(T,[[p.assunto,3],[arr(p.tipoCaso||p.subassunto),3],[p.tese,2],[arr(p.espTags),2],[arr(p.temas),1],[p.ementa,1]]);if(aN&&nq(p.assunto)===aN)r.s+=6;if(mP&&(p.materia||matDe(p.tipoCaso))===mP){r.s+=4;r.ach.unshift(mP);}return {x:p,s:r.s,ach:r.ach};});
     var modTodos=(B.mod||[]).map(function(m){var r=pont(T,[[m.assunto,3],[m.nomeModelo,2],[m.tese,2],[arr(m.especificidadesTags),2],[m.causaPedir,1]]);if(aN&&nq(m.assunto)===aN)r.s+=6;if(tj&&nq((m.classe||'')+' '+(m.nomeModelo||'')).indexOf(tj.split(' ')[0])>=0)r.s+=2;var z={x:m,s:r.s,ach:r.ach};z.el=modeloElegibilidade(P,z);return z;});
     var par=(B.par||[]).map(function(p){var r=pont(T,[[p.titulo,3],[p.nivelTema,2],[p.nivelEspecificidade,2],[p.categoria,1],[p.texto,1]]);return {x:p,s:r.s,ach:r.ach};});
     var top=function(L,n){return L.filter(function(z){return z.s>0;}).sort(function(a,b){return b.s-a.s;}).slice(0,n||10);};
@@ -171,7 +174,7 @@
     return h+'</div></div>';
   }
   /* ---------- canhoto: campos do caso e, quando há trecho aberto, o trecho ---------- */
-  var ROT={processo:'Processo',item:'Item',classe:'Classe',assunto:'Assunto',subassuntos:'Subassuntos',especificidades:'Especificidades',questoes:'Questões controvertidas',tipoJulgamento:'Tipo de julgamento',decisaoOrigem:'Decisão na origem',recursos:'Recursos',tempestividade:'Tempestividade',preparo:'Preparo',requisito:'Outro requisito',mpf:'MPF',ed:'ED · vício',retratacao:'Retratação',resultado:'Resultado',consectarios:'Consectários',honorarios:'Honorários',multa:'Multa',servidor:'Servidor'};
+  var ROT={processo:'Processo',item:'Item',classe:'Classe',assunto:'Assunto',subassuntos:'Tipo de caso',especificidades:'Especificidades',questoes:'Questões controvertidas',tipoJulgamento:'Tipo de julgamento',decisaoOrigem:'Decisão na origem',recursos:'Recursos',tempestividade:'Tempestividade',preparo:'Preparo',requisito:'Outro requisito',mpf:'MPF',ed:'ED · vício',retratacao:'Retratação',resultado:'Resultado',consectarios:'Consectários',honorarios:'Honorários',multa:'Multa',servidor:'Servidor'};
   var GRP=[['Identificação',['processo','item','classe','tipoJulgamento','servidor']],['Matéria',['assunto','subassuntos','especificidades','questoes']],
     ['Admissibilidade',['tempestividade','preparo','requisito','mpf','decisaoOrigem','recursos','ed','retratacao']],['Julgamento',['resultado','honorarios','multa']]];
   function val(k,v){if(Array.isArray(v))return v.join(' · ');if(v&&typeof v==='object')return Object.keys(v).map(function(z){return v[z];}).filter(Boolean).join(' · ');return v;}
@@ -197,7 +200,7 @@
   function conformidade(P,A,R){
     var L=[],add=function(s,k,t){L.push({s:s,k:k,t:t});};
     var faltam=['subassuntos','especificidades','questoes'].filter(function(k){return !P[k];});
-    if(!faltam.length)add('ok','Cartão do processo','Assunto, subassuntos, especificidades e questões preenchidos.');
+    if(!faltam.length)add('ok','Cartão do processo','Assunto, tipo de caso, especificidades e questões preenchidos.');
     else add(faltam.length===3?'no':'pc','Cartão do processo','Sem '+faltam.map(function(k){return (ROT[k]||k).toLowerCase();}).join(', ')+'. A pesquisa usa só o que está no cartão: complete no Ex Officio.');
     if(A.tipo==='mod')add('ok','Estrutura aplicada','Modelo do banco'+(A.forcado?' escolhido à mão':'')+': '+nomeDe(A)+'.');
     else if(A.x)add('pc','Estrutura aplicada','Sem modelo de matéria aderente: aplicada a minuta-matriz '+nomeDe(A)+', só como estrutura. A redação é do caso.');

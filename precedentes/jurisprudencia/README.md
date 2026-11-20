@@ -55,7 +55,7 @@ cd precedentes/jurisprudencia && sha256sum -c SHA256SUMS
 ## Relação com `precedentes.jsonl`
 
 `precedentes/precedentes.jsonl` (1.844 registros, só de 2026) é o ementário **curado** que
-alimenta o Modus Operandi: tem assunto, tese, subassunto e tags revisados a mão. Esta pasta é a
+alimenta o Modus Operandi: tem assunto, tese, tipo de caso (matéria · tipo · aspecto, padrao/tipo-caso.json) e tags revisados a mão. Esta pasta é a
 série bruta, sem curadoria. As duas convivem; a série histórica não substitui o ementário.
 
 ## Leitura

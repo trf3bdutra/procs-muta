@@ -85,7 +85,7 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
-| Subassunto | `Tema` | texto longo | operacional · `triagem` | 0 de 4.725 |  |
+| Tipo de caso | `Tema` | texto longo | operacional · `triagem` | 0 de 4.725 |  |
 | Complexidade | `COMPLEXIDADE` | regra · calculado | operacional · `triagem` | 1 de 4.725 | lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ |
 | Tipo de voto | `Tipo de Voto` | texto | operacional · `triagem` | 0 de 4.725 |  |
 | Preliminares | `Prelim.` | Sim/— | operacional · `triagem` | 0 de 4.725 |  |
@@ -259,7 +259,7 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
   3. Urgência (`Urgência` = medida, `Urgência - Nível`, `Urgência - Apreciação`, `Urgência - Observação`, `Urgência - Data`, `Urgência - Painel`) e MPF (parecer, custos legis).
   4. Matéria: `Tipo de Julgamento` (automático pela classe), complexidade, metas (várias, separadas por `;` em `META`).
   5. Encaminhamento: `Destino`, `Hipóteses Monocrática` (contagens das monocráticas do relator em 2026), sugestão automática e `O que falta sanar`.
-  - Etiquetas do PJe com S/E/O (Subassuntos = `Tema`, `Especificidades`, `Observações`) e `Síntese Processual`.
+  - Etiquetas do PJe com S/E/O (Tipo de caso = `Tema`, `Especificidades`, `Observações`) e `Síntese Processual`.
   - Produção (minuta, correção, equipe, próximo passo) fica só no Controle de Pauta.
 - As sessões gravadas pela área Sessões vão para `pauta.sessoes` (formato em seções).
 
