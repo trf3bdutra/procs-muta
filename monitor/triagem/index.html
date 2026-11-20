@@ -313,6 +313,23 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .rg-its{display:flex;flex-direction:column;gap:2px;padding:4px 0 8px 12px}
 .rg-its>span{display:grid;grid-template-columns:56px auto minmax(0,1fr);gap:8px;align-items:baseline;font-size:11.5px}.rg-its em{font-style:normal;font:10.5px ui-monospace,monospace;color:var(--m2)}.rg-its small{color:var(--m)}
 .rg-its>span.dif small{color:#b5452f}
+.cwe-pubg .cwe-pico{position:relative;display:inline-grid;place-items:center;width:30px;height:28px;padding:0!important;border:1px solid var(--b2)!important;border-radius:7px;background:var(--w)!important;color:var(--m)!important;cursor:pointer}
+.cwe-pubg .cwe-pico i{position:absolute;right:3px;top:3px;width:6px;height:6px;border-radius:50%;background:var(--b2)}
+.cwe-pubg .cwe-pico.on{color:var(--t)!important;border-color:var(--t)!important;background:#eef6f2!important}.cwe-pubg .cwe-pico.on i{background:#2e8b57}
+.cwe-pubg .cwe-pico:disabled{opacity:.45;cursor:not-allowed}
+.cwe-julg .cwe-lnk{margin-left:6px;font-size:11px}
+.cwe-marcos label.inv input{color:#b5452f!important}.cwe-marcos label.inv{color:#b5452f}
+.cwe-inv{align-self:center;margin:0 10px;border:1px solid #e8b9ad;background:#fbeeea;color:#9a3b24;border-radius:999px;padding:3px 10px;font-weight:700;font-size:11px;cursor:pointer;white-space:nowrap}
+.cwe-ptabs{display:inline-flex;gap:2px;margin-left:8px;padding-left:10px;border-left:1px solid var(--l)}
+.cwe-ptabs button{border:0;background:transparent;border-radius:7px;padding:4px 10px;font-weight:600;font-size:12px;color:var(--m);cursor:pointer}
+.cwe-ptabs button[aria-selected="true"]{background:var(--p);color:var(--tx);box-shadow:inset 0 -2px var(--g2)}
+.cwe-mked .cwe-av{margin:0;border-left:3px solid #c0392b;background:#fbeeea;padding:8px 12px;border-radius:8px;font-size:12.5px}
+.cwe-mked{display:flex;flex-direction:column;gap:10px;padding:10px 0 4px}
+.cwe-mkg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.cwe-mkg label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700;color:var(--tx)}.cwe-mkg label small{display:block;font-weight:400;font-size:10.5px;color:var(--m2)}
+.cwe-mkg input{height:30px;border:1px solid var(--b2);border-radius:7px;padding:0 8px;font:12px ui-monospace,monospace;background:var(--w);color:var(--tx)}
+.cwe-mkg label.inv input{border-color:#d9876f;background:#fbeeea}
+.cwe-mked .cwe-mkb{display:flex;gap:10px;align-items:center;padding:0}
 .cwe-cabab{display:flex;gap:4px;padding:6px 10px;border-top:1px solid var(--l)}
 .cwe-cabab>button{border:1px solid transparent;background:transparent;border-radius:7px;padding:4px 10px;font-weight:700;font-size:12px;color:var(--t);cursor:pointer}
 .cwe-cabab>button[aria-expanded="true"]{background:var(--p);border-color:var(--b)}
@@ -2080,21 +2097,31 @@ function portaToken() { return new Promise((fim) => {
     const mg = (J.composicao || []).map((m) => `<span><b>${e(m.nome)}</b> <small>${e(m.papel)}</small></span>`).join('') + (nSub ? `<span class="cwe-tg a">${nSub} substituiç${nSub > 1 ? 'ões' : 'ão'}</span>` : '');
     const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da sessão'], ['copiar', 'Copiar a lista', 'área de transferência']];
     return `<div class="cwe-top"><div><div class="cwe-hl"><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p></div>
-      <p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg || '<small>carregando o cadastro…</small>'}</p></div>
-      <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicar na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar' : 'Publicar os marcos da sessão na Ex Officio'}">${ss.marcosPub || ss.publicada ? '● Marcos publicados' : 'Publicar marcos'}</button><button type="button" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" class="${ss.publicada ? 'on' : 'pri'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} title="${ss.publicada ? 'Pauta publicada na Ex Officio: clique para retirar' : d.pauta ? 'Publicar a pauta (processos e marcos) na Ex Officio' : 'Importe o PDF da pauta antes de publicar'}">${ss.publicada ? '● Pauta publicada' : 'Publicar pauta'}</button></span>
+      <p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg || '<small>carregando o cadastro…</small>'}<button type="button" class="cwe-lnk" data-cwe="j-ed">editar</button></p></div>
+      <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicação na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" class="cwe-pico ${ss.marcosPub || ss.publicada ? 'on' : ''}" data-cwe="m-pub" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio · clique para retirar' : 'Marcos não publicados · clique para publicar na Ex Officio'}" aria-label="Marcos na Ex Officio"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><i></i></button><button type="button" class="cwe-pico ${ss.publicada ? 'on' : ''}" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} aria-pressed="${!!ss.publicada}" title="${ss.publicada ? 'Pauta publicada na Ex Officio · clique para retirar' : d.pauta ? 'Pauta não publicada · clique para publicar (processos e marcos)' : 'Importe o PDF da pauta antes de publicar'}" aria-label="Pauta na Ex Officio"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg><i></i></button></span>
       <span class="cwe-expwrap"><button type="button" data-cwe="exp" aria-expanded="${est.exp}">Exportar ▾</button>${est.exp ? `<span class="cwe-menu" role="menu">${exp.map(([k, t, s]) => `<button type="button" role="menuitem" data-cwe="x-${k}"><b>${e(t)}</b><small>${e(s)}</small></button>`).join('')}</span>` : ''}</span>
       <button type="button" data-cwe="cfg" title="Configurações das pautas" aria-label="Configurações das pautas">⚙</button></div></div>`;
   }
   /* painel da sessão e julgadores: expansíveis, dentro do cartão da sessão */
-  function cabAbas(ss, d) { const pain = est.painel == null ? d.realizada : est.painel, J = julgDe(ss), nS = (J.substituicoes || []).length, nG = d.pauta ? sugestoesJ(ss, d).length : 0;
-    return `<div class="cwe-cabab"><button type="button" data-cwe="j-ed" aria-expanded="${!!est.jEd}">Julgadores e substituições${nS ? ' · ' + nS : ''}${nG ? ` <span class="cwe-tg r">${nG} a indicar</span>` : ''} ${est.jEd ? '▴' : '▾'}</button><button type="button" data-cwe="painel" aria-expanded="${!!pain}">Painel da sessão ${pain ? '▴' : '▾'}</button></div>
-      ${est.jEd ? julgEditor(ss, d) : ''}${pain ? `<div class="cwe-painel">${etapa5(ss, d, true)}</div>` : ''}`; }
+  /* painel da sessão (no cartão): números, julgadores e substituições, marcos */
+  function cabAbas(ss, d) { const pain = est.painel == null ? d.realizada : est.painel, J = julgDe(ss), nS = (J.substituicoes || []).length, nG = d.pauta ? sugestoesJ(ss, d).length : 0, tab = est.pTab || 'num';
+    const T = [['num', 'Números da sessão', ''], ['julg', 'Julgadores e substituições', (nS ? ' · ' + nS : '') + (nG ? ` <span class="cwe-tg r">${nG} a indicar</span>` : '')], ['marcos', 'Marcos', '']];
+    return `<div class="cwe-cabab"><button type="button" data-cwe="painel" aria-expanded="${!!pain}">Painel da sessão ${pain ? '▴' : '▾'}</button>${pain ? `<span class="cwe-ptabs" role="tablist">${T.map(([k, t, x]) => `<button type="button" role="tab" data-cwe="p-tab" data-v="${k}" aria-selected="${tab === k}">${e(t)}${x}</button>`).join('')}</span>` : nG ? `<span class="cwe-tg r" title="Etiquetas de impedimento ou suspeição pedem substituto">${nG} substituição(ões) a indicar</span>` : ''}</div>
+      ${pain ? `<div class="cwe-painel">${tab === 'julg' ? julgEditor(ss, d) : tab === 'marcos' ? marcosEditor(ss) : etapa5(ss, d, true)}</div>` : ''}`; }
   function marcos(ss) {
-    const f = ss.fases || {};
+    const f = ss.fases || {}, inv = !!(f.inicio && f.minutas && f.inicio > f.minutas);
     const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', 'data']];
-    return `<section class="cwe-marcos" aria-label="Marcos da sessão"><button type="button" class="cwe-regras" data-cwe="cfg-0">regras</button><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
-      ${M.map(([t, v, o, k]) => est.mEd && k ? `<label title="${e(t + ' · ' + o)}">${e(t)}<input type="date" data-cwe-mk="${k}" value="${e(v || '')}"></label>` : `<label title="${e(t + ' · ' + o)}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
-      <span class="cwe-mkb"><button type="button" data-cwe="m-sug" title="Liberação: dias úteis antes da sessão; entrega das minutas: primeiro dia útil em que a capacidade da equipe cobre os pontos pendentes (Regras gerais › produtividade)">Sugerir pelas regras</button><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
+    return `<section class="cwe-marcos" aria-label="Marcos da sessão"><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
+      ${M.map(([t, v, o, k]) => `<label title="${e(t + ' · ' + o)}" class="${inv && (k === 'inicio' || k === 'minutas') ? 'inv' : ''}">${e(t)}<input readonly value="${e(v ? A.br(v) : 'a definir')}" class="${v ? '' : 'vazio'}"></label>`).join('')}
+      ${inv ? `<button type="button" class="cwe-inv" data-cwe="p-tab" data-v="marcos" title="A entrega das minutas (${e(A.br(f.minutas))}) está antes do início da preparação (${e(A.br(f.inicio))}): não sobra prazo para minutar. Corrija os marcos no painel da sessão.">⚠ Início depois da entrega</button>` : ''}</section>`;
+  }
+  /* edição dos marcos, dentro do painel da sessão */
+  function marcosEditor(ss) {
+    const f = ss.fases || {}, inv = !!(f.inicio && f.minutas && f.inicio > f.minutas);
+    const M = [['Peço dia', f.pauta, 'pautar até (calendário do tribunal)', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', 'data']];
+    return `<div class="cwe-mked">${inv ? `<p class="cwe-av"><b>Marcos invertidos:</b> a entrega das minutas (${e(A.br(f.minutas))}) está antes do início da preparação (${e(A.br(f.inicio))}). O prazo para minutar fica negativo; o Caput usa a entrega pela regra de liberação até a correção.</p>` : ''}
+      <div class="cwe-mkg">${M.map(([t, v, o, k]) => `<label class="${inv && (k === 'inicio' || k === 'minutas') ? 'inv' : ''}"><span>${e(t)}<small>${e(o)}</small></span><input type="date" data-cwe-mk="${k}" value="${e(v || '')}"></label>`).join('')}</div>
+      <div class="cwe-mkb"><button type="button" data-cwe="m-sug" title="Liberação: dias úteis antes da sessão; entrega das minutas: primeiro dia útil em que a capacidade da equipe cobre os pontos pendentes (Regras gerais › produtividade)">Sugerir pelas regras</button><button type="button" class="cwe-lnk" data-cwe="cfg-0">regras dos marcos</button></div></div>`;
   }
   function esteira(d) {
     const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e numeração dos itens'], ['Etiquetagem', 'tipo de julgamento, meta e MPF'], ['Designação', 'redator e corretor'], ['Publicar a pauta', 'conferência final e equipe']];
@@ -2337,7 +2364,7 @@ function portaToken() { return new Promise((fim) => {
     const muda = (p) => { const d = vD(p), c = vC(p); return (d && d !== (p.servidor || '')) || (c && c !== (p.corretor || '')); };
     const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && muda(p)).length;
     return `<section class="cwe-st"><h2>4 · Designação de redator e corretor</h2>${tabs}
-      <p>Regras de designação do gabinete${Z.escopo === 'sessao' ? ', com o ajuste desta sessão' : ''}, na ordem cadastrada. A mesa abaixo propõe minutante e corretor para todos os processos desta sessão: regra, continuidade do acórdão, especialidade, histórico e lote. Revise por grupo, troque o que quiser e use “Aplicar à pauta”. A carga só é informada; nada impede designar acima da meta.</p>${Z.periodo?.efetivo?.invertido ? `<p class="cwe-av"><b>Marcos invertidos:</b> o Início (${e(A.br(ss.fases?.inicio || ''))}) está depois da Entrega (${e(A.br(ss.fases?.minutas || ''))}). A carga usa o período de ${e(A.br(Z.periodo.efetivo.de))} a ${e(A.br(Z.periodo.efetivo.ate))}; corrija em Editar marcos.</p>` : ''}
+
       <div class="cwe-mesa-bar"><span class="cwe-k">MESA DE DESIGNAÇÃO · SESSÃO DE ${e(A.br(ss.data))}</span><small>${Ls.length} processos · grava no procs-muta pelo “Aplicar à pauta” da mesa</small><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicar a pauta →</button></div>
       <div class="cwe-mesa-slot" data-s="${e(ss.id)}"></div>
       <div class="cwe-kpis cwe-k4">${kpi(Ls.length, 'Processos na pauta', `${Ls.filter((p) => p.servidor).length} com minutante · ${Ls.filter((p) => p.corretor).length} com corretor`)}${kpi(`${porRegD} · ${porRegC}`, 'Preenchidos por regra', 'minutantes · corretores')}${kpi(`${brD} · ${brC}`, 'Sem regra que case', 'minutantes · corretores, a escolher', brD + brC ? 'a' : '')}${kpi(aus.length, 'Ausências no período', aus.length ? aus.join(', ') : `nenhuma cadastrada entre ${A.br(Z.periodo.de).slice(0, 5)} e ${A.br(Z.periodo.ate).slice(0, 5)}`)}</div>
@@ -2515,7 +2542,8 @@ function portaToken() { return new Promise((fim) => {
       else if (k === 'exp') est.exp = !est.exp;
       else if (k === 'rg') { est.rgAb = est.rgAb || {}; est.rgAb[b.dataset.k] = !est.rgAb[b.dataset.k]; }
       else if (k === 'rgc') { est.rgCat = est.rgCat || {}; est.rgCat[b.dataset.k] = !est.rgCat[b.dataset.k]; }
-      else if (k === 'j-ed') { est.jEd = !est.jEd; est.jNovo = false; }
+      else if (k === 'p-tab') { est.pTab = b.dataset.v; est.painel = true; est.jNovo = false; }
+      else if (k === 'j-ed') { est.pTab = 'julg'; est.painel = true; est.jNovo = false; }
       else if (k === 'painel') { const d0 = dados(ss); est.painel = !(est.painel == null ? d0.realizada : est.painel); }
       else if (k === 'j-rem') { const i = +b.dataset.i; salvarJ(ss, (j) => { const m = j.composicao[i]; j.composicao.splice(i, 1); if (m) j.substituicoes = j.substituicoes.filter((sb) => sb.sai !== m.id); }); }
       else if (k === 'j-sub-add') salvarJ(ss, (j) => j.substituicoes.push({ sai: (j.composicao.find((m) => m.papel !== 'relator') || {}).id || '', entra: null, motivo: 'impedimento', itens: 'todos' }));

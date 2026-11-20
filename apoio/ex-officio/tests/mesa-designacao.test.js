@@ -76,3 +76,8 @@ test('Designação: painel de regras para minuta e correção, com categorias e 
   const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(m.includes('designacaoPorRegra: function')&&m.includes("cid: cid, chave: hit || inf.assunto || '—'"),'motor diz a regra e a categoria de cada processo');
 });
+test('Cartão da sessão: Ex Officio em ícones, aviso de marcos invertidos no cartão, painel com números, julgadores e marcos',()=>{
+  const c=read('monitor/triagem/index.html');
+  for(const x of ['class="cwe-pico','function marcosEditor(ss)','class="cwe-inv" data-cwe="p-tab" data-v="marcos"',"['julg', 'Julgadores e substituições'","['marcos', 'Marcos'",'data-cwe="j-ed">editar</button>'])assert.ok(c.includes(x),x);
+  assert.ok(!c.includes('Regras de designação do gabinete${Z.escopo'),'sem o texto de abertura na Designação');
+});
