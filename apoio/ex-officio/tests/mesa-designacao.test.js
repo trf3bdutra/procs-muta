@@ -52,7 +52,7 @@ test('Mesa: designação inicial e seleção em lote',()=>{
 test('Pautas: cabeçalho compacto ao lado do painel e etapa 2 pela numeração do PDF',()=>{
   const c=read('monitor/triagem/index.html');
   assert.ok(c.includes('<div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>'),'cabeçalho na coluna principal');
-  assert.ok(c.includes('class="cwe-sesnova" data-cwt="create-session"'),'+ Nova sessão no painel lateral');
+  assert.ok(c.includes('class="cwe-sesnova" data-cwe="ses-nova"')&&c.includes('function novaSessaoDlg()'),'+ Nova sessão no painel lateral, com diálogo');
   assert.ok(c.includes("'Numeração conferida'")&&!c.includes("'Conferência com a seleção prévia'"),'etapa 2 confere a numeração, não a seleção prévia');
   for(const x of ["'número repetido'","'processo repetido'","'sem número do item'","'era o item '",'Confirmar a numeração'])assert.ok(c.includes(x),x);
   assert.ok(read('monitor/motor/assets/js/21-sessoes-equipe.js').includes('r.itemAnterior = String(o.item)'),'reimportação guarda o número anterior');

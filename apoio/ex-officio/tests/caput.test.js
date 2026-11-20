@@ -7,13 +7,14 @@ const legacy=read('monitor/index.html');
 const wf=read('.github/workflows/vercel-monitor.yml');
 test('Caput é a central principal e preserva módulos existentes',()=>{
   assert.ok(page.includes('<title>Caput · Central do Gabinete</title>'));
-  for(const id of ['triagem','pautas','coordenacao','comunicacao','inteligencia','chefia']){
+  for(const id of ['triagem','pautas','coordenacao','comunicacao','chefia']){
     assert.ok(page.includes('data-mod="'+id+'"'),'módulo '+id);
   }
   assert.ok(page.includes("D.title = 'Caput · ' + tit"));
 });
-test('A entrada Caput abre Inteligência e cada aba tem caminho próprio em /caput/',()=>{
-  assert.ok(page.includes("if (/^\\/caput$/.test(p)) return 'inteligencia';"),'/caput abre Inteligência');
+test('A entrada Caput abre a Chefia (com os relatórios da antiga Inteligência) e cada aba tem caminho próprio em /caput/',()=>{
+  assert.ok(page.includes("if (/^\\/caput$/.test(p)) return 'chefia';"),'/caput abre a Chefia');
+  assert.ok(page.includes('function vRelatorios()')&&page.includes("abas:['escopo','destino','acervo','calendario','etiquetas']")&&page.includes("abas:['equipe','designacao','produtividade']"),'Inteligência na Chefia; equipe e regras na Coordenação');
   assert.ok(page.includes("fila: 'triagem'")&&page.includes("pautas: 'pautas'"),'abas mapeadas a caminhos');
   assert.ok(page.includes("history.pushState(null, '', alvo + location.search)"),'troca de aba muda o caminho');
   assert.ok(page.includes("location.hash"),'endereços antigos com # continuam valendo');
