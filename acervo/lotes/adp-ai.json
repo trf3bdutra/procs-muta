@@ -299,8 +299,8 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
    "grupo": "g7",
-   "tipo_caso": "AI · Tributário · responsabilidade por cisão parcial · extinção parcial sem mérito e declínio de competência",
-   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida e há contraminuta",
+   "tipo_caso": "AI · Tributário · responsabilidade de sociedades resultantes de cisão parcial por débitos da cindida (CDA 47.000.873-3) · extinção parcial por falta de interesse de agir · declínio de competência por conexão",
+   "resultado": "Ato a proferir: conferir antes a competência da Turma Regional de MS (origem em São Paulo) [VALIDAR]; se mantida, julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [
     "VAL"
@@ -384,7 +384,87 @@
     "representacao": "Advogados Michelle Lacsko de Araujo (OAB/SP 302.891) e Munder Hassan Gebara (OAB/MS 5.485) assinam as petições; procuração não identificada nos documentos com texto [VALIDAR]",
     "preparo": "Recolhido de início à Justiça Federal de primeiro grau (GRU 2026/090015/0016090288, paga em 20/04/2026, UG 090015, código 18710-0; ID 371549741). Após o despacho ID 377316374 (29/05/2026), recolhido ao TRF-3 em 02/06/2026: R$ 64,26 por Pix (ID 378271029), PagTesouro com UG 090029 e código 18720-8 (ID 378271027) e comprovante do portal de custas (ID 378271030). Regularizado no prazo de 5 dias."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Tributário · responsabilidade de sociedades resultantes de cisão parcial por débitos da cindida (CDA 47.000.873-3) · extinção parcial por falta de interesse de agir · declínio de competência por conexão",
+   "especificidades": "ORIGEM FORA DE MS: ação 5021736-26.2025.4.03.6100 (São Paulo), com declínio para a 2ª Vara de Execuções Fiscais de São Paulo (5030008-54.2025.4.03.6182): conferir a competência da Turma Regional de MS e a redistribuição [VALIDAR] · Tutela recursal indeferida (ID 385918818, 13/07/2026) · Preparo: primeiro recolhimento com UG e código de 1º grau; após o despacho ID 377316374, comprovante STN com UG 090029 e código 18720-8 (ID 378271027) · Execução fiscal relacionada em Coxim (0000876-29.2015.4.03.6007) [VALIDAR] · Procuração não identificada nos documentos com texto [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Tributário · responsabilidade de sociedades resultantes de cisão parcial por débitos da cindida (CDA 47.000.873-3) · extinção parcial por falta de interesse de agir · declínio de competência por conexão",
+     "sintese": "Ação de VS Empreendimentos e Participações e Serbom Armazéns Gerais Frigoríficos contra a União para afastar a responsabilidade pelos créditos da CDA 47.000.873-3, cobrados da empresa SAGA, da qual se cindiram em 2006. O juízo extinguiu em parte o feito sem resolução de mérito e declinou da competência; daí o agravo.",
+     "questoes": "1) Competência da Turma Regional de MS para agravo oriundo de São Paulo; 2) interesse de agir na ação que discute a responsabilidade das sociedades cindidas; 3) declínio de competência por conexão com a execução fiscal; 4) responsabilidade por débitos posteriores à cisão parcial.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 368235654 (22/04/2026): a cisão parcial foi registrada na JUCEMS em 26/05/2006, antes dos fatos geradores (01/2010 a 03/2014); a responsabilidade das agravantes exigiria apuração administrativa formal. Pede efeito suspensivo ativo e reforma.",
+      "contrarrazoes": "Contraminuta da União ID 388425432 (24/07/2026): falta de interesse de agir (artigo 485, VI, do CPC), regularidade do declínio de competência para a 2ª Vara de Execuções Fiscais de São Paulo por conexão e prevenção (artigos 55 e 59 do CPC) e ausência dos requisitos do artigo 300 do CPC."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "479403471",
+      "juizo": "Vara Federal de São Paulo [VALIDAR]",
+      "dispositivo": "Extinguiu em parte o feito sem resolução de mérito e declinou da competência para a 2ª Vara de Execuções Fiscais de São Paulo; embargos de declaração decididos pela decisão ID 565198258."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Indeferido",
+      "id": "479403471"
+     },
+     "adm": {
+      "prot": "2026-04-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "VS Empreendimentos e Participações e outra",
+       "tipo": "Agravo de instrumento",
+       "id": "368235654",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "368235654",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Despacho sobre o preparo",
+       "id": "377316374",
+       "data": "2026-05-29"
+      },
+      {
+       "desc": "Comprovante STN",
+       "id": "378271027",
+       "data": "2026-06-02"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "385918818",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "388425432",
+       "data": "2026-07-24"
+      }
+     ],
+     "pendencias": "Conferir a competência; conferir a procuração; conferir a tempestividade",
+     "especificidades": "ORIGEM FORA DE MS: ação 5021736-26.2025.4.03.6100 (São Paulo), com declínio para a 2ª Vara de Execuções Fiscais de São Paulo (5030008-54.2025.4.03.6182): conferir a competência da Turma Regional de MS e a redistribuição [VALIDAR] · Tutela recursal indeferida (ID 385918818, 13/07/2026) · Preparo: primeiro recolhimento com UG e código de 1º grau; após o despacho ID 377316374, comprovante STN com UG 090029 e código 18720-8 (ID 378271027) · Execução fiscal relacionada em Coxim (0000876-29.2015.4.03.6007) [VALIDAR] · Procuração não identificada nos documentos com texto [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-13"
+    }
+   }
   },
   {
    "sessao": "",
