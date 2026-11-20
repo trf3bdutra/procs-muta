@@ -3795,13 +3795,15 @@
    "exequente": "ROSSANA GALLI VEIGA FRANCO FELICIO",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Aposentadoria Especial (Art. 57/8)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "AI · Previdenciário · tutela para converter aposentadoria por tempo de contribuição em especial · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), após o prazo de contraminuta do INSS; tutela recursal indeferida em 18/08/2026",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Rossana Galli Veiga Franco Felicio contra a decisão ID 595723964 da 1ª Vara Federal de Campo Grande (processo 5004924-78.2026.4.03.6000) que indeferiu a tutela para converter a aposentadoria por tempo de contribuição (NB 207.637.383-1, DER 02/02/2023) em aposentadoria especial, com DIB em 03/05/2017. A agravante, auxiliar em saúde bucal, invoca relatório do INSS (\"Análise do direito perfil 4604\", de 15/02/2024) que apontaria 26 anos, 4 meses e 3 dias de tempo especial em 13/11/2019. O juízo exigiu cognição exauriente.",
+   "peculiaridades": "Gratuidade deferida na origem (ID 595723964), reconhecida na decisão ID 391601609 apesar da certidão ID 390624215. Benefício já em manutenção (carta de concessão ID 390524919): o pedido é de revisão/conversão, não de benefício novo, o que pesa contra a urgência. Não consta contraminuta do INSS.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -3822,7 +3824,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Previdenciário — aposentadoria especial; tutela de urgência",
+    "origem": "5004924-78.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 595723964 (autos de origem), de 21/07/2026 segundo a agravante",
+    "recurso": "ID 390524901 · 04/08/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -3842,6 +3853,93 @@
     "ultima_informacao": "Certidão · ID 390624215 · 05/08/2026",
     "ultima_movimentacao": "15/10/2026 16:50 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Segurada aposentada por tempo de contribuição desde a DER de 02/02/2023 pede, em tutela, a conversão em aposentadoria especial com DIB em 03/05/2017, com base em relatório do INSS que apontaria mais de 25 anos de atividade especial. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação 5004924-78.2026.4.03.6000 contra o INSS para conceder aposentadoria especial (espécie 46), sem fator previdenciário",
+    "decisao_recorrida": "Decisão ID 595723964 (juiz federal substituto Guilherme Vicente Lopes Leites), que deferiu a gratuidade e indeferiu a tutela por demandar cognição exauriente a contagem do tempo especial",
+    "recurso": "Agravo ID 390524901 (04/08/2026): (1) o próprio INSS reconheceu o direito à aposentadoria especial antes da EC 103/2019; (2) exposição a agentes biológicos, químicos e radiações ionizantes; (3) caráter alimentar; (4) reversibilidade. Pede a implantação imediata da aposentadoria especial, com multa diária.",
+    "resposta": "Não consta contraminuta do INSS",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogado João da Cruz Oliveira da Silva (OAB/MS 22.313), procuração ID 390524924",
+    "preparo": "Dispensado: gratuidade deferida na origem (ID 595723964)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Aposentadoria especial; conversão; tutela de urgência",
+     "sintese": "Segurada aposentada por tempo de contribuição desde a DER de 02/02/2023 pede, em tutela, a conversão em aposentadoria especial com DIB em 03/05/2017, com base em relatório do INSS que apontaria mais de 25 anos de atividade especial. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Probabilidade do direito à aposentadoria especial à vista do relatório do INSS; 2) perigo de dano, com benefício já em manutenção.",
+     "rel": {
+      "razoes": "Agravo (ID 390524901): reconhecimento do direito pelo próprio INSS; exposição a agentes nocivos; caráter alimentar; reversibilidade.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "595723964",
+      "data": "2026-07-21",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "julgador": "Guilherme Vicente Lopes Leites",
+      "dispositivo": "Deferiu a gratuidade e indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-08-04",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "390524901",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "390524901",
+       "data": "2026-08-04"
+      },
+      {
+       "desc": "Procuração",
+       "id": "390524924",
+       "data": "2026-08-04"
+      },
+      {
+       "desc": "Certidão de ausência de custas",
+       "id": "390624215",
+       "data": "2026-08-05"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "391601609",
+       "data": "2026-08-18"
+      }
+     ],
+     "pendencias": [
+      "Certificar o decurso do prazo de contraminuta do INSS [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-08-18"
+    }
    }
   },
   {
