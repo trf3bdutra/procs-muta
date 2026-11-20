@@ -7307,6 +7307,95 @@
     "memoriais": "Não consta",
     "representacao": "MPF (representação legal); rés por advogados constituídos (procurações sem texto extraível)",
     "preparo": "Isento (MPF)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "relacionado": "Conflito de Competência 5015811-79.2026.4.03.0000 (2ª Seção)",
+     "subassuntos": "Ação civil pública ambiental — competência territorial",
+     "sintese": "O MPF ajuizou em Dourados ACP contra o IBAMA e 28 empresas por contaminação da Bacia do Rio Dourados por atrazina, com reflexo nas comunidades Guarani-Kaiowá. O juízo de Dourados declinou para Campo Grande por considerar o dano regional; o de Campo Grande suscitou conflito negativo; o MPF agravou do declínio.",
+     "questoes": "1) Se o agravo perdeu o objeto com o julgamento do CC 5015811-79.2026.4.03.0000, que declarou competente a 1ª Vara de Dourados; 2) se não, competência do local do dano (artigo 2º da LACP) × capital para dano regional (artigo 93, II, do CDC; IAC 10/STJ).",
+     "especificidades": "Relação com conflito de competência julgado pela 2ª Seção; Globachem apresentou contraminuta espontânea sem estar cadastrada como agravada.",
+     "rel": {
+      "razoes": "Agravo do MPF (ID 376483069): (1) competência absoluta e funcional do local do dano; (2) epicentro na Bacia do Rio Dourados e nas aldeias Guarani-Kaiowá; (3) inaplicabilidade do IAC 10/STJ; (4) controle de convencionalidade e protocolos do CNJ; (5) o juízo da capital também se declarou incompetente. Pede efeito suspensivo ativo e fixação da competência em Dourados.",
+      "contrarrazoes": "IBAMA (ID 385382381) e rés (IDs 385162309, 385159751, 385144048, 385128015, 391765095): competência da capital por dano regional (artigo 93, II, do CDC; Tema 1.075/STF; IAC 10/STJ), inovação recursal e, quanto à Globachem, ilegitimidade passiva; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "578840036",
+      "juizo": "1ª Vara Federal de Dourados/MS",
+      "dispositivo": "Declínio da competência para uma das Varas Federais de Campo Grande/MS, por abrangência regional do dano (conforme a decisão ID 379524581)."
+     },
+     "ai": {
+      "id": "578840036",
+      "hip": "Outra",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "intim": "2026-05-07",
+      "prot": "2026-05-27",
+      "prazo": "15",
+      "dobro": true,
+      "dpu": false,
+      "ajg": false
+     },
+     "mpfx": {
+      "sentido": "Provimento do recurso",
+      "id": "380725634"
+     },
+     "recursos": [
+      {
+       "parte": "Outra",
+       "tipo": "Agravo de instrumento",
+       "id": "376483069",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento do MPF",
+       "id": "376483069",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "379524581",
+       "data": "2026-06-12"
+      },
+      {
+       "desc": "Parecer da PRR3",
+       "id": "380725634",
+       "data": "2026-06-16"
+      },
+      {
+       "desc": "Contrarrazões do IBAMA",
+       "id": "385382381",
+       "data": "2026-07-10"
+      },
+      {
+       "desc": "Contraminuta da Globachem (notícia do CC)",
+       "id": "391765095",
+       "data": "2026-08-13"
+      }
+     ],
+     "obsGeral": "Conferir no PJe o acórdão do CC 5015811-79.2026.4.03.0000 e seu trânsito; se confirmado, o agravo fica prejudicado."
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Há preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "ACP/ação popular",
+     "parecer": "Com parecer",
+     "tipoAto": "Decisão monocrática (art. 932)",
+     "hip932": "III · recurso inadmissível, prejudicado ou sem impugnação específica",
+     "fundamento": "Perda de objeto pelo julgamento do CC 5015811-79.2026.4.03.0000 [VALIDAR]",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-12",
+     "intercor": "Agravada Globachem não cadastrada no polo; contraminuta espontânea."
+    }
    }
   },
   {
