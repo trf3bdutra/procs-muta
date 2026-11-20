@@ -756,7 +756,7 @@ function perfil(it,i){
      `<p class="pv" style="margin-top:8px" data-eq="${esc(it.peculiaridades)}" data-rel="${esc(it.peculiaridades_relator)}">${esc(it.peculiaridades_relator)}</p>`+
      (it.orientacao?`<p class="ori">Ponto para orientação: ${esc(it.orientacao)}</p>`:'')+(it.observacao?`<p style="color:var(--em)">${esc(it.observacao)}</p>`:'')+`</div>`;
   {const T=it.triagem||{},S=it.situacao_atual||{},X=it.teor||{},E=it.extracao||{};
-   if(T.ato||T.materia) b+=`<div class="box wide"><h3>Triagem do recurso${T.analisado_em?' · '+esc(T.analisado_em):''}</h3>${dl({'Ato a proferir':esc(T.ato),'Matéria':esc(T.materia),'Origem':esc(T.origem),'Decisão recorrida':esc(T.decisao_agravada||T.sentenca),'Recurso':esc(T.recurso),'Preparo':esc(T.preparo),'Monocrática':esc(T.monocratica)})}</div>`;
+   if(T.ato||T.materia||T.conf_preparo||T.conf_prevencao) b+=`<div class="box wide"><h3>Triagem do recurso${T.analisado_em?' · '+esc(T.analisado_em):''}</h3>${dl({'Ato a proferir':esc(T.ato),'Matéria':esc(T.materia),'Origem':esc(T.origem),'Decisão recorrida':esc(T.decisao_agravada||T.sentenca),'Recurso':esc(T.recurso),'Preparo':esc(T.preparo),'Conferência do preparo':esc(T.conf_preparo),'Prevenção e conexão':esc(T.conf_prevencao),'Monocrática':esc(T.monocratica)})}</div>`;
    if(S.ultima_decisao||S.ultima_movimentacao) b+=`<div class="box"><h3>Situação atual nos autos</h3>${dl({'Última decisão':esc(S.ultima_decisao),'Última peça':esc(S.ultima_peca),'Última informação':esc(S.ultima_informacao),'Última movimentação':esc(S.ultima_movimentacao)})}<p class="cmt-n" style="margin-top:6px">${esc(S.aviso||'')}${E.em?' · extraído em '+esc(E.em)+(E.documentos?' · '+esc(E.documentos)+' documentos':''):''}</p></div>`;
    if(X.sintese_fatica||X.recurso) b+=`<div class="box wide"><h3>Teor das peças</h3>${X.sintese_fatica?`<p><b>Síntese fática.</b> ${esc(X.sintese_fatica)}</p>`:''}${dl({'Inicial':esc(X.inicial),'Decisão ou sentença recorrida':esc(X.decisao_recorrida),'Recurso':esc(X.recurso),'Resposta':esc(X.resposta),'Parecer':esc(X.parecer),'Memoriais':esc(X.memoriais),'Representação':esc(X.representacao),'Preparo':esc(X.preparo)})}</div>`;}
   {const PT=it.prontuario_triagem||{},C=PT.cartao||{},K=PT.ctl||{},A=C.adm||{},O=C.orig||{},AI=C.ai||{},R=C.rel||{},MX=C.mpfx||{},br2=v=>v===true?'sim':v===false?'não':esc(v);
@@ -917,7 +917,7 @@ function filtra(){
    assunto=$('#fa').value,recurso=$('#fr').value,resultado=$('#fres').value,
    vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
   for(const it of ITENS){const e=it.equipe||{};
-    const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,it.subassunto,it.especificidades,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
+    const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,it.subassunto,it.especificidades,(it.triagem||{}).conf_preparo,(it.triagem||{}).conf_prevencao,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
     if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st)&&
        (!assunto||assuntoDe(it)===assunto)&&(!recurso||it.recurso===recurso)&&
        (!resultado||it.resultado===resultado))vis.add(it.uid)}
