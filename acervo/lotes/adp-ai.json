@@ -7585,13 +7585,15 @@
    "exequente": "GERMANO FRANCISCO BELLAN",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Certificado de Regularidade - FGTS",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal de crédito rural cedido à União (MP 2.196-3/2001) · exceção de pré-executividade rejeitada (preclusão e dilação probatória) · nulidade da CDA (Tema 1.350/STJ)",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); sem pedido liminar apreciado; contraminuta da Fazenda Nacional e memoriais dos agravantes",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Germano Francisco Bellan e Sônia Beatriz Cambruzzi Bellan contra a decisão (f. 359-361) da 1ª Vara Cível da Comarca de Maracaju/MS (execução fiscal 0002750-16.2006.8.12.0014) que rejeitou a segunda exceção de pré-executividade por preclusão consumativa (a primeira, de f. 38-84, foi rejeitada às f. 208-214) e por exigir dilação probatória. Os agravantes sustentam nulidade da CDA de crédito rural cedido pelo Banco do Brasil à União por erro de fundamentação dos encargos de mora, que deveriam observar o artigo 5º da MP 2.196-3/2001, invocando o Tema 1.350/STJ (REsp 2.194.734) e o REsp 1.045.472 (repetitivo).",
+   "peculiaridades": "Execução de 2006. Decisão agravada com fundamento autônomo de preclusão consumativa, a exigir impugnação específica. Memoriais (ID 366988304, 16/04/2026) em substituição à sustentação oral. Preparo comprovado (ID 355476538, ilegível na extração). Despacho inicial do Des. Fed. Nelton dos Santos (ID 358541437).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -7612,7 +7614,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução fiscal — crédito rural cedido (MP 2.196-3/2001); exceção de pré-executividade; nulidade da CDA",
+    "origem": "0002750-16.2006.8.12.0014 (1ª Vara Cível de Maracaju/MS, competência delegada)",
+    "decisao_agravada": "Decisão de f. 359-361 dos autos de origem",
+    "recurso": "ID 354569014 · 12/02/2026",
+    "preparo": "Comprovante juntado (ID 355476538), a conferir",
+    "monocratica": "Possível (Tema 1.350/STJ) [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7632,6 +7643,91 @@
     "ultima_informacao": "Certidão · ID 354682097 · 13/02/2026",
     "ultima_movimentacao": " 16:00 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Produtores rurais executados pela União por crédito rural cedido pelo Banco do Brasil alegam, em segunda exceção de pré-executividade, que a CDA aplicou encargos de mora diversos dos previstos no artigo 5º da MP 2.196-3/2001. O juízo rejeitou a exceção por preclusão e por depender de prova.",
+    "inicial": "Execução fiscal 0002750-16.2006.8.12.0014 da União (Fazenda Nacional) fundada em CDA de crédito rural cedido (MP 2.196-3/2001)",
+    "decisao_recorrida": "Decisão de f. 359-361: cabimento restrito da exceção; preclusão consumativa, pois a primeira exceção, que também alegava nulidade da CDA, foi rejeitada (f. 208-214); necessidade de dilação probatória",
+    "recurso": "Agravo ID 354569014 (12/02/2026): (1) erro de fundamentação da CDA quanto aos encargos de mora (artigo 5º da MP 2.196-3/2001); (2) Tema 1.350/STJ (REsp 2.194.734) e REsp 1.045.472; (3) nulidade de ordem pública. Pede a nulidade da CDA e da execução.",
+    "resposta": "Fazenda Nacional ID 361062836 (24/03/2026): presunção de certeza e liquidez da CDA (artigo 204 do CTN; artigo 3º da Lei 6.830/1980); descabimento de matéria de prova em exceção (Súmula 393/STJ); desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Agravantes ID 366988304 (16/04/2026): erro de fundamentação, não mero vício formal, da CDA",
+    "representacao": "Agravantes: advogados Cícero João de Oliveira (OAB/MS 3.316) e Creunedes Ramos Pereira (OAB/MS 11.745), procuração ID 355200206",
+    "preparo": "Comprovante ID 355476538"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal; crédito rural cedido à União; MP 2.196-3/2001; exceção de pré-executividade; preclusão",
+     "sintese": "Produtores rurais executados pela União por crédito rural cedido pelo Banco do Brasil alegam, em segunda exceção de pré-executividade, que a CDA aplicou encargos de mora diversos dos previstos no artigo 5º da MP 2.196-3/2001. O juízo rejeitou a exceção por preclusão e por depender de prova.",
+     "questoes": "1) Preclusão consumativa pela primeira exceção; 2) cabimento da exceção para discutir encargos da CDA (Súmula 393/STJ); 3) aplicação do Tema 1.350/STJ e do artigo 5º da MP 2.196-3/2001.",
+     "rel": {
+      "razoes": "Agravo (ID 354569014): erro de fundamentação da CDA; Tema 1.350/STJ; nulidade de ordem pública.",
+      "contrarrazoes": "Fazenda Nacional (ID 361062836): presunção da CDA; Súmula 393/STJ; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "1ª Vara Cível da Comarca de Maracaju/MS",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução (artigo 1.015, parágrafo único, do CPC)",
+      "efeito": "Não requerido"
+     },
+     "adm": {
+      "prot": "2026-02-12",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2026-02-02"
+     },
+     "recursos": [
+      {
+       "parte": "Executados",
+       "tipo": "Agravo de instrumento",
+       "id": "354569014",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "354569014",
+       "data": "2026-02-12"
+      },
+      {
+       "desc": "Procuração",
+       "id": "355200206",
+       "data": "2026-02-20"
+      },
+      {
+       "desc": "Comprovante de preparo",
+       "id": "355476538",
+       "data": "2026-02-20"
+      },
+      {
+       "desc": "Contraminuta da Fazenda Nacional",
+       "id": "361062836",
+       "data": "2026-03-24"
+      },
+      {
+       "desc": "Memoriais",
+       "id": "366988304",
+       "data": "2026-04-16"
+      }
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Comprovado",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgSit": "Sem pedido"
+    }
    }
   },
   {
