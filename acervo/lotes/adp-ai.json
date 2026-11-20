@@ -7061,13 +7061,15 @@
    "exequente": "ELVIO RODRIGUES",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Cédula de Crédito Bancário",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Embargos à execução de cédulas de crédito rural (CEF, R$ 12,4 milhões) · efeito suspensivo sem garantia do juízo · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela negada em 16/04/2026 por falta de garantia do juízo (artigo 919, § 1º, do CPC); contraminuta da CEF e MPF sem interesse",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Elvio Rodrigues, produtor rural, contra a decisão nos embargos à execução 5000195-03.2026.4.03.6002 (Dourados) que negou efeito suspensivo aos embargos opostos à execução 5002795-31.2025.4.03.6002, pela qual a CEF cobra R$ 12.417.889,28 de cédulas de crédito rural. O agravante alega juros acima de 12% ao ano (Decreto-lei 167/1967), capitalização não pactuada, encargos equivalentes à comissão de permanência, direito ao alongamento por quebras de safra, e oferece como caução o imóvel hipotecado (matrícula 26.173).",
+   "peculiaridades": "A decisão ID 366527474 assentou que a hipoteca da cédula não equivale à penhora, depósito ou caução exigidos pelo artigo 919, § 1º, do CPC (artigo 835, § 3º), e que a execução não estava garantida (ID 545678428, origem); postergou o exame dos demais requisitos. Parte idosa. Preparo comprovado em 19/03/2026 (ID 361234558, ilegível na extração). Pedido de intimação exclusiva em nome de Gustavo Passarelli da Silva (OAB/MS 7.602).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -7103,7 +7105,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução de cédula de crédito rural — efeito suspensivo dos embargos; garantia do juízo",
+    "origem": "Embargos à execução 5000195-03.2026.4.03.6002 (Subseção de Dourados) [VALIDAR vara]",
+    "decisao_agravada": "Decisão que negou efeito suspensivo aos embargos; ID não identificado [VALIDAR]",
+    "recurso": "ID 361094436 · 18/03/2026",
+    "preparo": "Comprovante juntado em 19/03/2026 (ID 361234558)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7123,6 +7134,100 @@
     "ultima_informacao": "",
     "ultima_movimentacao": "02/06/2026 15:22 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Produtor rural executado pela CEF em R$ 12,4 milhões de cédulas de crédito rural opôs embargos e pediu efeito suspensivo, oferecendo o imóvel já hipotecado como caução. O juízo negou o efeito; o Tribunal manteve a negativa por falta de garantia do juízo.",
+    "inicial": "Embargos à execução 5000195-03.2026.4.03.6002 contra a CEF: juros acima de 12% ao ano, comissão de permanência, capitalização e alongamento da dívida rural",
+    "decisao_recorrida": "Decisão que negou efeito suspensivo aos embargos, por falta de garantia do juízo e de requisitos (artigo 919, § 1º, do CPC); texto não lido [VALIDAR]",
+    "recurso": "Agravo ID 361094436 (18/03/2026): (1) fundamentação genérica; (2) juros acima de 12% ao ano em crédito rural; (3) capitalização não pactuada; (4) encargos equivalentes à comissão de permanência; (5) quebras de safra e direito ao alongamento; (6) hipoteca como garantia idônea. Pede efeito suspensivo aos embargos.",
+    "resposta": "CEF ID 371504466 (06/05/2026): ausência de garantia do juízo; observância do artigo 919 do CPC; uso protelatório dos embargos; desprovimento.",
+    "parecer": "MPF ID 371691890 (07/05/2026): sem interesse; prosseguimento",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogados Gustavo Passarelli da Silva (OAB/MS 7.602) e Juliana Miranda Rodrigues da Cunha Passarelli (OAB/MS 9.047); procuração não identificada com texto [VALIDAR]. CEF: Luís Fernando Barbosa Pasquini (OAB/MS 13.654)",
+    "preparo": "Comprovante juntado em 19/03/2026 (ID 361234558)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cédula de crédito rural; embargos à execução; efeito suspensivo; garantia do juízo; juros",
+     "sintese": "Produtor rural executado pela CEF em R$ 12,4 milhões de cédulas de crédito rural opôs embargos e pediu efeito suspensivo, oferecendo o imóvel já hipotecado como caução. O juízo negou o efeito; o Tribunal manteve a negativa por falta de garantia do juízo.",
+     "questoes": "1) Garantia do juízo: hipoteca cedular versus penhora, depósito ou caução (artigos 919, § 1º, e 835, § 3º, do CPC); 2) probabilidade do direito quanto aos encargos; 3) perigo de dano.",
+     "rel": {
+      "razoes": "Agravo (ID 361094436): fundamentação genérica; juros, capitalização e comissão de permanência; alongamento; hipoteca como garantia.",
+      "contrarrazoes": "CEF (ID 371504466): falta de garantia do juízo; artigo 919 do CPC; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "dispositivo": "Negou efeito suspensivo aos embargos à execução."
+     },
+     "ai": {
+      "hip": "Tutela provisória / efeito suspensivo de embargos",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-03-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "mpfx": {
+      "sentido": "Sem interesse",
+      "id": "371691890"
+     },
+     "recursos": [
+      {
+       "parte": "Embargante",
+       "tipo": "Agravo de instrumento",
+       "id": "361094436",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "361094436",
+       "data": "2026-03-18"
+      },
+      {
+       "desc": "Comprovante de preparo",
+       "id": "361234558",
+       "data": "2026-03-19"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "366527474",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "371504466",
+       "data": "2026-05-06"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "371691890",
+       "data": "2026-05-07"
+      }
+     ],
+     "pendencias": [
+      "Conferir o comprovante de preparo (ID 361234558, ilegível) [VALIDAR]",
+      "Anotar a intimação exclusiva em nome de Gustavo Passarelli da Silva"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Parecer juntado",
+     "parecer": "Sem interesse",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-04-16"
+    }
    }
   },
   {
