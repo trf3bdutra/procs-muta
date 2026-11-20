@@ -4398,7 +4398,7 @@
    "executado": "ORDEM DOS ADVOGADOS DO BRASIL SECAO MATO GROSSO DO SUL",
    "assunto": "Anuidades OAB",
    "grupo": "g3",
-   "tipo_caso": "AI de advogada × OAB/MS · embargos à execução de anuidades · valor mínimo do artigo 8º da Lei 12.514/2011",
+   "tipo_caso": "AI · Execução da OAB · Execuções da OAB · embargos à execução de anuidades · valor inferior ao mínimo do artigo 8º da Lei 12.514/2011 (redação da Lei 14.195/2021)",
    "resultado": "Ato a proferir: certificar o prazo da contraminuta e julgar o agravo; provável monocrática pela linha do gabinete para execuções da OAB (aplicabilidade do artigo 8º da Lei 12.514/2011 à OAB) [VALIDAR]",
    "modelo": "",
    "variacoes": [
@@ -4468,7 +4468,79 @@
     "representacao": "Agravante advoga em causa própria (OAB/MS 10.165)",
     "preparo": "Gratuidade deferida pelo despacho ID 344716055, após determinação de recolhimento em dobro (ID 342572883)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Execução da OAB · Execuções da OAB · embargos à execução de anuidades · valor inferior ao mínimo do artigo 8º da Lei 12.514/2011 (redação da Lei 14.195/2021)",
+   "especificidades": "Gratuidade deferida (despacho ID 344716055), após ordem de recolhimento em dobro (ID 342572883) · OAB/MS intimada; sem contraminuta nos autos · Agravante advoga em causa própria",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução da OAB · Execuções da OAB · embargos à execução de anuidades · valor inferior ao mínimo do artigo 8º da Lei 12.514/2011 (redação da Lei 14.195/2021)",
+     "sintese": "A OAB/MS executa anuidades de R$ 2.853,62 contra a advogada Andréa Sallum Congro, que opôs embargos alegando valor abaixo do mínimo legal para execução; o juízo deu seguimento à execução, e ela agravou.",
+     "questoes": "1) Aplicação à OAB do valor mínimo do artigo 8º da Lei 12.514/2011; 2) extinção da execução de anuidades.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 341926933 (03/11/2025): valor inferior ao mínimo do artigo 8º da Lei 12.514/2011, na redação da Lei 14.195/2021; extinção da execução.",
+      "contrarrazoes": "Não consta: OAB intimada pelo despacho ID 344716055, sem contraminuta nos autos"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "365022389",
+      "juizo": "1ª Vara Federal de Três Lagoas",
+      "dispositivo": "Nos embargos à execução, deu seguimento à execução de título extrajudicial 5000873-54.2022.4.03.6003."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": "365022389"
+     },
+     "adm": {
+      "prot": "2025-11-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "341926933",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "341926933",
+       "data": "2025-11-03"
+      },
+      {
+       "desc": "Despacho: recolhimento em dobro",
+       "id": "342572883",
+       "data": "2025-11-18"
+      },
+      {
+       "desc": "Despacho: gratuidade e intimação da OAB",
+       "id": "344716055",
+       "data": "2025-12-04"
+      },
+      {
+       "desc": "Despacho de redistribuição",
+       "id": "366701161",
+       "data": "2026-04-16"
+      }
+     ],
+     "pendencias": "Certificar o prazo da contraminuta",
+     "especificidades": "Gratuidade deferida (despacho ID 344716055), após ordem de recolhimento em dobro (ID 342572883) · OAB/MS intimada; sem contraminuta nos autos · Agravante advoga em causa própria"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   }
   },
   {
    "sessao": "",
