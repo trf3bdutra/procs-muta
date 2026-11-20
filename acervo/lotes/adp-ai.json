@@ -4761,13 +4761,15 @@
    "exequente": "VILMA MARTINS FERREIRA",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Apreensão",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g10",
+   "tipo_caso": "AI · Aduaneiro · multa de R$ 399.258,00 a proprietária registral de caminhão com cigarros estrangeiros · tutela recursal indeferida",
+   "resultado": "Ato a proferir: despacho — retificar a representação da União para a Procuradoria da Fazenda Nacional (pedido da AGU, ID 391981615) e intimá-la para contraminuta; depois, julgamento do agravo",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Vilma Martins Ferreira contra a decisão da 2ª Vara Federal de Campo Grande (processo 5003181-33.2026.4.03.6000) que indeferiu a tutela para suspender a exigibilidade da multa de R$ 399.258,00 do Auto de Infração 0100100-244543-2024, lavrado após a apreensão, em 25/07/2024 em Mundo Novo/MS, do caminhão Mercedes Benz 1313 (placa ADS1E54) com 199.629 maços de cigarros estrangeiros. A agravante diz ter vendido o veículo antes dos fatos, sem transferir o registro no Detran, e que o artigo 134 do CTB não se aplica a infração aduaneira. O juízo aplicou a responsabilidade do alienante que não comunica a venda.",
+   "peculiaridades": "Petição endereçada a Câmara Cível do TJMS. A AGU informou (ID 391981615, 14/08/2026) que a representação cabe à PFN e pediu a retificação do cadastro; não há contraminuta. Divergência na data da venda: maio de 2024 no agravo e maio de 2025 na inicial [VALIDAR]. O nome aparece como \"Vilma Martins Pereira\" na petição da AGU. Gratuidade na origem (ID 596662143).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -4788,7 +4790,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho de regularização da representação e nova intimação para contraminuta",
+    "materia": "Aduaneiro — multa a proprietário registral; responsabilidade e artigo 134 do CTB",
+    "origem": "5003181-33.2026.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Não identificada por ID [VALIDAR]",
+    "recurso": "ID 389458035 · 29/07/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Não, por ora",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -4808,6 +4819,92 @@
     "ultima_informacao": "Certidão · ID 390228505 · 03/08/2026",
     "ultima_movimentacao": "08/10/2026 16:11 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Caminhão registrado em nome da agravante foi encontrado abandonado em Mundo Novo/MS, em 25/07/2024, com cigarros estrangeiros, e a Receita lhe aplicou multa de R$ 399.258,00. Ela alega que vendera o veículo antes, sem transferir o registro. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação anulatória de auto de infração c/c declaratória de inexistência de débito 5003181-33.2026.4.03.6000, com pedido de suspensão da exigibilidade da multa",
+    "decisao_recorrida": "Decisão da 2ª Vara Federal de Campo Grande que deferiu a gratuidade e indeferiu a tutela: o proprietário que não comunica a venda ao Detran responde pelas multas (artigo 134 do CTB)",
+    "recurso": "Agravo ID 389458035 (29/07/2026): (1) venda e tradição do veículo antes da infração; (2) o artigo 134 do CTB só alcança infrações de trânsito; (3) responsabilidade aduaneira exige prova da participação (artigo 112 do CTN); (4) precedentes do TRF3 e da Turma Recursal de MS; (5) risco de constrição pelo valor da multa. Pede a suspensão da exigibilidade.",
+    "resposta": "Não há contraminuta; a AGU (ID 391981615) declinou da representação em favor da PFN",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: procuração ID 389458042; advogado não identificado na leitura [VALIDAR]. União: representação a retificar para a PFN",
+    "preparo": "Dispensado: gratuidade deferida na origem (ID 596662143)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Multa aduaneira; proprietário registral; alienação não comunicada; cigarros",
+     "sintese": "Caminhão registrado em nome da agravante foi encontrado abandonado em Mundo Novo/MS, em 25/07/2024, com cigarros estrangeiros, e a Receita lhe aplicou multa de R$ 399.258,00. Ela alega que vendera o veículo antes, sem transferir o registro. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Regularização da representação da União (PFN); 2) responsabilidade do proprietário registral por infração aduaneira e alcance do artigo 134 do CTB; 3) prova da alienação anterior.",
+     "rel": {
+      "razoes": "Agravo (ID 389458035): alienação anterior; inaplicabilidade do artigo 134 do CTB a infração aduaneira; necessidade de prova da participação; precedentes.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "2ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Deferiu a gratuidade e indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-07-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "389458035",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "389458035",
+       "data": "2026-07-29"
+      },
+      {
+       "desc": "Procuração",
+       "id": "389458042",
+       "data": "2026-07-29"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "390289021",
+       "data": "2026-08-06"
+      },
+      {
+       "desc": "Petição da AGU sobre a representação (PFN)",
+       "id": "391981615",
+       "data": "2026-08-14"
+      }
+     ],
+     "pendencias": [
+      "Retificar a autuação para a PFN e reabrir o prazo de contraminuta",
+      "Data da venda divergente entre inicial e agravo [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "intercor": "Representação da União a regularizar (PFN)",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-08-06"
+    }
    }
   },
   {
