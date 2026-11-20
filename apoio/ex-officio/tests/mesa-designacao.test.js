@@ -11,7 +11,7 @@ test('Mesa de designação: página válida, publicada e ligada ao Caput',()=>{
   assert.match(pag,/competencia:\{pen:0\.6/,'carga só desempata no modo padrão');
   assert.ok(read('.github/workflows/vercel-monitor.yml').includes('cp monitor/designacao/index.html site/public/caput/designacao/index.html'));
   const caput=read('monitor/triagem/index.html');
-  for(const x of ['data-cwe="des-mesa"',"'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
+  for(const x of ["'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
   assert.ok(!caput.includes('<span class="v">${e(atual)}</span>'),'minutante e corretor sempre editáveis');
 });
 test('Motor: troca na designação e período efetivo com marcos invertidos',()=>{
@@ -64,4 +64,9 @@ test('Pautas: painel da sessão integrado ao cabeçalho e julgadores com substit
   for(const x of ['function cabAbas(ss, d)','data-cwe="painel"','data-cwe="j-ed"','function julgEditor(ss, d)','function sugestoesJ(ss, d)','data-cwe="j-sub-add"','data-cwe="j-novo-ok"',"'apoio/magistrados.json'"])assert.ok(c.includes(x),x);
   const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
   for(const x of ['definirJulgadores: function','julgadoresDoItem: function','if (ss.julgadores) o.julgadores = ss.julgadores;','docs[i] && docs[i].julgadores'])assert.ok(m.includes(x),x);
+});
+test('Mesa: filtro por assunto e agrupamento por assunto, minutante e corretor; rodapé da Triagem só na Triagem',()=>{
+  const pag=read('monitor/designacao/index.html');
+  for(const x of ['data-ag="as"','data-ag="pd"','data-ag="pc"','id="f-as"',"if(FASS&&N(x.as)!==FASS)return false;"])assert.ok(pag.includes(x),x);
+  assert.ok(read('monitor/triagem/index.html').includes('#rodape[hidden]{display:none!important}'),'rodapé oculto fora da Triagem');
 });

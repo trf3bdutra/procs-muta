@@ -110,6 +110,7 @@ body.temsel .toast{bottom:150px}
 .selbar select{margin-left:4px;padding:4px 6px;border-radius:8px;border:1px solid #b9c6d6}
 .selbar .lk{background:none;border:0;color:#1f3b5c;text-decoration:underline;cursor:pointer;font:inherit;padding:0}
 body.temsel main{padding-bottom:150px}
+#f-as{max-width:260px;height:34px;border:1px solid var(--lin);border-radius:999px;padding:0 10px;background:var(--sup);color:var(--tx);font:inherit;font-size:13px}
 </style>
 </head>
 <body>
@@ -141,6 +142,7 @@ body.temsel main{padding-bottom:150px}
         <button type="button" data-f="meta" aria-pressed="false">META</button>
       </div>
       <label for="busca" hidden>Buscar</label><input id="busca" type="search" placeholder="Processo, assunto ou pessoa">
+      <select id="f-as" aria-label="Filtrar por assunto"><option value="">Todos os assuntos</option></select>
       <div class="seg" role="group" aria-label="Prioridade da proposta">
         <button type="button" data-mo="competencia" aria-pressed="true" title="Regra do gabinete, continuidade (ED e AgInt), especialidade, histórico e lote. A carga só é apontada.">Regras e competência</button>
         <button type="button" data-mo="equilibrio" aria-pressed="false" title="Opcional: redistribui pela meta de cada um">Equilibrar carga</button>
@@ -149,6 +151,9 @@ body.temsel main{padding-bottom:150px}
       <div class="seg ag" role="group" aria-label="Agrupar por">
         <span class="agl">Agrupar por</span>
         <button type="button" data-ag="bloco" aria-pressed="true" title="Lotes, ED e AgInt, e os demais por seção">Lote e seção</button>
+        <button type="button" data-ag="as" aria-pressed="false" title="Um grupo por assunto">Assunto</button>
+        <button type="button" data-ag="pd" aria-pressed="false" title="Um grupo por minutante">Minutante</button>
+        <button type="button" data-ag="pc" aria-pressed="false" title="Um grupo por corretor">Corretor</button>
         <button type="button" data-ag="md" aria-pressed="false" title="Pelo motivo da escolha do minutante">Motivo do minutante</button>
         <button type="button" data-ag="mc" aria-pressed="false" title="Pelo motivo da escolha do corretor">Motivo do corretor</button>
       </div>
@@ -216,7 +221,7 @@ body.temsel main{padding-bottom:150px}
   document.getElementById('tit').textContent='Mesa de designação · pauta de '+D.sessao.data.slice(8,10)+'/'+D.sessao.data.slice(5,7)+'/'+D.sessao.data.slice(0,4);
   /* embed=1: dentro de Pautas › Designação; o botão alterna a tela cheia */
   var EMBED=new URLSearchParams(location.search).get('embed')==='1';
-  if(VIVO){document.getElementById('b-fechar').hidden=false;document.getElementById('b-aplicar').textContent='Aplicar à pauta';if(EMBED)document.getElementById('b-fechar').textContent='Tela cheia';}
+  if(VIVO){document.getElementById('b-fechar').hidden=EMBED;document.getElementById('b-aplicar').textContent='Aplicar à pauta';}
   window.addEventListener('message',function(ev){if(ev.origin!==location.origin||!ev.data)return;if(ev.data.tipo==='cmt:mesa-modo')document.getElementById('b-fechar').textContent=ev.data.full?'Sair da tela cheia':'Tela cheia';});
   document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&VIVO){try{window.parent.postMessage({tipo:'cmt:mesa-fechar'},location.origin);}catch(er){}}});
   function diasUteis(a,b){var n=0,d=new Date(a+'T12:00:00'),f=new Date(b+'T12:00:00');var U=VIVO&&VIVO.diasUteis&&VIVO.diasUteis.util;while(d<=f){var w=d.getDay(),k=d.toISOString().slice(0,10);if(U?U(k):(w&&w<6&&!FER[k]))n++;d.setDate(d.getDate()+1);}return n;}
@@ -321,7 +326,8 @@ body.temsel main{padding-bottom:150px}
     var sob=k==='d'&&v&&CAPD[v]!=null&&CARGA[v]>CAPD[v];
     return '<div class="ds"><span class="lb">'+(k==='d'?'Minutante':'Corretor')+(sob?' <span class="sc" title="'+esc(v)+' fica acima da capacidade no período. Só um aviso.">↑ acima da meta</span>':'')+'</span><span class="ln"><select data-sel="'+k+'" data-i="'+x.i+'" class="'+(mud?'mud':'')+(man?' man':'')+'" aria-label="'+(k==='d'?'Minutante':'Corretor')+' do item '+x.i+'"><option value="">— ninguém —</option>'+opts(cand,v,pool)+optsEx(k,v)+'</select>'+
       (mud?'<span class="at">gravado: <s>'+esc(at)+'</s></span>':'')+'</span><span class="why">'+chips(why)+'</span></div>';}
-  function passa(x){var b=N(BUSCA);if(b&&N([x.cnj,x.as,x.d,x.c,fin(x,'d'),fin(x,'c'),x.partes].join(' ')).indexOf(b)<0)return false;
+  var FASS='';
+  function passa(x){if(FASS&&N(x.as)!==FASS)return false;var b=N(BUSCA);if(b&&N([x.cnj,x.as,x.d,x.c,fin(x,'d'),fin(x,'c'),x.partes].join(' ')).indexOf(b)<0)return false;
     if(FIL==='nov')return !x.d||!x.c;if(FIL==='ed')return x.t==='ED'||x.t==='AgInt';if(FIL==='meta')return x.t==='META';return true;}
   var CARGA={};
   /* agrupamento: por lote e seção, ou pelo motivo da escolha (minutante ou corretor) */
@@ -334,18 +340,20 @@ body.temsel main{padding-bottom:150px}
     if(tem(function(w){return w[0]==='c';}))return 'cont';var r=W.filter(function(w){return w[0]==='r';})[0];if(r)return 'regra|'+r[1].replace(/^regra · /,'');
     if(tem(function(w){return w[0]==='e';}))return 'esp';if(tem(function(w){return /no histórico/.test(w[1]);}))return 'hist';if(tem(function(w){return w[0]==='l';}))return 'lote';
     return 'carga';}
-  function grupo(x){return AG==='bloco'?bloco(x):motivo(x,AG==='md'?'d':'c');}
+  function grupo(x){if(AG==='bloco')return bloco(x);if(AG==='as')return 'A|'+(x.as||'sem assunto');if(AG==='pd')return 'D|'+(fin(x,'d')||'sem minutante');if(AG==='pc')return 'C|'+(fin(x,'c')||'sem corretor');return motivo(x,AG==='md'?'d':'c');}
+  var AGP={as:1,pd:1,pc:1};
   function infoMotivo(k){var b=k.split('|')[0],m=MOTIVOS.filter(function(q){return q[0]===b;})[0]||[b,b,''];return {ord:MOTIVOS.indexOf(m),nome:m[1]+(k.indexOf('|')>0?' · '+k.split('|')[1]:''),sub:m[2]};}
-  function nomeGrupo(k){return AG==='bloco'?nomeBloco(k):infoMotivo(k).nome;}
+  function nomeGrupo(k){return AG==='bloco'?nomeBloco(k):AGP[AG]?k.slice(2):infoMotivo(k).nome;}
   function blocos(){CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[];IT.forEach(function(x){var k=grupo(x);if(!G[k]){G[k]=[];ord.push(k);}G[k].push(x);});
     if(AG==='bloco')ord.sort(function(a,b){var r=function(k){return k.indexOf('L:')===0?0:k==='T:ED'?1:2;};return r(a)-r(b)||G[b].length-G[a].length;});
+    else if(AGP[AG])ord.sort(function(a,b){return G[b].length-G[a].length||a.localeCompare(b);});
     else ord.sort(function(a,b){return infoMotivo(a).ord-infoMotivo(b).ord||G[b].length-G[a].length;});
-    var kd=AG==='mc'?'c':'d';
-    var h='';ord.forEach(function(k){var L=G[k].filter(passa);if(!L.length)return;var dist={};G[k].forEach(function(x){var d=fin(x,kd)||'ninguém';dist[d]=(dist[d]||0)+1;});
+    var kd=(AG==='mc'||AG==='pd')?'c':'d';
+    var h='';ord.forEach(function(k){var L=G[k].filter(passa);if(!L.length)return;var dist={};L.forEach(function(x){var d=fin(x,kd)||'ninguém';dist[d]=(dist[d]||0)+1;});
       var dd=Object.keys(dist).sort(function(a,b){return dist[b]-dist[a];}).map(function(n){return n+' '+dist[n];}).join(' · ');
       var lim=ABERTO[k]?L.length:Math.min(L.length,12);
       var todosG=L.every(function(x){return SEL[x.i];});
-      h+='<section class="bl'+(AG==='bloco'?'':' mo-'+k.split('|')[0])+'"><div class="bh"><input type="checkbox" class="ck" data-ckg="'+esc(k)+'"'+(todosG?' checked':'')+' aria-label="Selecionar todo o grupo" title="Selecionar todos os processos deste grupo"><h3>'+esc(nomeGrupo(k))+'</h3><span class="ct">'+G[k].length+' processo'+(G[k].length>1?'s':'')+'</span><span class="dist">'+(kd==='c'?'correção: ':'minuta: ')+esc(dd)+'</span>'+(AG==='bloco'?'':'<span class="sub">'+esc(infoMotivo(k).sub)+'</span>')+
+      h+='<section class="bl'+(AG==='bloco'||AGP[AG]?'':' mo-'+k.split('|')[0])+'"><div class="bh"><input type="checkbox" class="ck" data-ckg="'+esc(k)+'"'+(todosG?' checked':'')+' aria-label="Selecionar todo o grupo" title="Selecionar todos os processos deste grupo"><h3>'+esc(nomeGrupo(k))+'</h3><span class="ct">'+L.length+' processo'+(L.length>1?'s':'')+'</span><span class="dist">'+(kd==='c'?'correção: ':'minuta: ')+esc(dd)+'</span>'+(AG==='bloco'||AGP[AG]?'':'<span class="sub">'+esc(infoMotivo(k).sub)+'</span>')+
         '<span class="bulk"><label>'+(AG==='bloco'?'Bloco todo':'Grupo todo')+': <select data-bulk="d" data-b="'+esc(k)+'"><option value="">minutante…</option>'+PD.map(function(m){return '<option>'+esc(m.nome)+'</option>';}).join('')+optsEx('d','')+'</select></label><select data-bulk="c" data-b="'+esc(k)+'" aria-label="Corretor do bloco"><option value="">corretor…</option>'+PC.map(function(m){return '<option>'+esc(m.nome)+'</option>';}).join('')+'</select></span></div>'+
         L.slice(0,lim).map(function(x){var mud=(x.d&&fin(x,'d')!==x.d)||(x.c&&fin(x,'c')!==x.c);return '<div class="rw'+(mud?' mud':'')+(SEL[x.i]?' sel':'')+'" data-rw="'+x.i+'"><div class="pr"><span class="t1"><input type="checkbox" class="ck" data-ck="'+x.i+'"'+(SEL[x.i]?' checked':'')+' aria-label="Selecionar o item '+x.i+'"><span class="it">item '+x.i+'</span><span class="cnj">'+esc(x.cnj)+'</span>'+(x.t?'<span class="tg '+x.t+'">'+x.t+'</span>':'')+'</span><span class="as">'+esc(x.as)+'</span><span class="mt">'+esc([x.cl,x.sec].filter(Boolean).join(' · '))+((x.t==='ED'||x.t==='AgInt')&&x.od?' · acórdão: '+esc(x.od):'')+'</span></div>'+campo(x,'d')+campo(x,'c')+'</div>';}).join('')+
         (L.length>lim?'<button type="button" class="mais" data-mais="'+esc(k)+'">Mostrar mais '+(L.length-lim)+'</button>':'')+'</section>';});
@@ -373,6 +381,9 @@ body.temsel main{padding-bottom:150px}
     if(t.dataset.aus){AUS[t.dataset.aus]=t.checked;propor();tudo();toast(t.dataset.aus+(t.checked?' ausente: proposta recalculada.':' de volta: proposta recalculada.'));return;}
     if(t.id==='p-de'||t.id==='p-ate'){if(t.id==='p-de')de=t.value;else ate=t.value;propor();tudo();}});
   document.getElementById('busca').addEventListener('input',function(e){BUSCA=e.target.value;blocos();});
+  (function(){var C={},R={};IT.forEach(function(x){var k=N(x.as);C[k]=(C[k]||0)+1;if(!R[k])R[k]=x.as||'sem assunto';});var sel=document.getElementById('f-as');
+    sel.innerHTML='<option value="">Todos os assuntos ('+IT.length+')</option>'+Object.keys(C).sort(function(a,b){return C[b]-C[a]||R[a].localeCompare(R[b]);}).map(function(k){return '<option value="'+esc(k)+'">'+esc(R[k])+' ('+C[k]+')</option>';}).join('');
+    sel.addEventListener('change',function(){FASS=sel.value;ABERTO={};blocos();selbar();});})();
   document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-mo],[data-ag]');if(!t)return;
     if(t.dataset.ag){AG=t.dataset.ag;ABERTO={};document.querySelectorAll('[data-ag]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.mo){MOD=t.dataset.mo;document.querySelectorAll('[data-mo]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});propor();tudo();toast('Proposta recalculada: '+t.textContent+'.');return;}
