@@ -289,7 +289,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-cab .cwe-marcos input[readonly].vazio{color:var(--g2)}
 .cwe-cab .cwe-mkb button{height:26px;padding:0 10px}
 .cwe-ses{gap:6px}
-.cwe-ses button{border:1px solid var(--b)!important;border-radius:9px;background:transparent!important;padding:7px 10px!important;cursor:pointer}
+.cwe-ses button{border:1px solid transparent!important;border-radius:9px;background:transparent!important;padding:7px 10px!important;cursor:pointer}
 .cwe-ses button:hover{border-color:var(--t)!important}
 .cwe-ses button .sd{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
 .cwe-ses button .sd b{font:700 13.5px ui-monospace,'IBM Plex Mono',monospace;letter-spacing:-.02em}
@@ -331,6 +331,10 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-cab .cwe-marcos label.pend .mkv b{background:#fff3cf;box-shadow:0 0 0 2px #fff3cf;border-radius:3px}
 .mkcal{display:inline-grid;place-items:center;width:20px;height:20px;padding:0;border:0;border-radius:5px;background:transparent;color:var(--m2);cursor:pointer}.mkcal:hover{background:var(--w);color:var(--t)}
 .mkhid{position:absolute;left:0;bottom:0;width:1px!important;height:1px!important;opacity:0;pointer-events:none;border:0!important;padding:0!important}
+.cwe-svg{display:inline-flex;align-items:center;gap:8px;padding:0 8px;border-right:1px solid var(--l);margin-right:4px}
+.cwe-svg button.pri,.cwe-svg button.pub{height:28px;padding:0 12px;border-radius:7px;font-weight:700;font-size:12px;cursor:pointer}
+.cwe-svg button.pri{background:var(--t);border:1px solid var(--t);color:#fff}
+.cwe-svg button.pub{background:#eef6f2;border:1px solid var(--t);color:var(--t)}
 .mksv{display:flex;align-items:center;gap:8px;padding:0 10px}.mksv .pri{height:26px;padding:0 10px;border-radius:7px;border:1px solid var(--t);font-weight:700;font-size:11.5px}
 .cwe-mkg label.pend input{border-color:#e0b84a;background:#fff8e1}
 .cwe-mked .cwe-av{margin:0;border-left:3px solid #c0392b;background:#fbeeea;padding:8px 12px;border-radius:8px;font-size:12.5px}
@@ -2027,10 +2031,20 @@ function portaToken() { return new Promise((fim) => {
   function papelPadrao(m) { const at = (m.atuacao || []).find((x) => /Turma Regional/i.test(x.orgao || '')) || {}; const p = at.papel || ''; return /relator/i.test(p) ? 'relator' : /convocad/i.test(p) ? 'vogal (juiz federal convocado)' : 'vogal'; }
   const magObj = (m, papel) => ({ id: m.id, nome: m.nome, cargo: m.cargo || '', papel: papel || papelPadrao(m) });
   function compPadrao() { return magistrados().filter((m) => (m.atuacao || []).some((x) => /Turma Regional/i.test(x.orgao || ''))).map((m) => magObj(m)).sort((a, b) => (a.papel === 'relator' ? -1 : 0) - (b.papel === 'relator' ? -1 : 0)); }
-  function julgDe(ss) { return ss.julgadores || { composicao: compPadrao(), substituicoes: [], novos: [] }; }
+  function julgDe(ss) { return (est.jPend && est.jPend[ss.id]) || ss.julgadores || { composicao: compPadrao(), substituicoes: [], novos: [] }; }
   function cadastroJ(ss) { const J = julgDe(ss), L = magistrados().map((m) => magObj(m)); (J.novos || []).forEach((m) => { if (!L.some((x) => x.id === m.id)) L.push(m); }); return L; }
   function salvarJ(ss, mut) { const s = A.getSes(); const j = JSON.parse(JSON.stringify(julgDe(ss))); j.novos = j.novos || []; j.substituicoes = j.substituicoes || []; mut(j);
-    if (!s?.definirJulgadores?.(ss.id, j)) { A.msg('Motor indisponível.', true); return; } A.msg('Julgadores atualizados. Gravação automática no procs-muta em instantes.'); }
+    est.jPend = est.jPend || {}; est.jPend[ss.id] = j; }
+  /* alterações pendentes da sessão (marcos e julgadores): só gravam em "Salvar alterações"; depois, se a sessão
+     estiver publicada, "Publicar alterações" leva à Ex Officio */
+  const temPend = (ss) => !!((est.mkPend && Object.keys(est.mkPend).length) || (est.jPend && est.jPend[ss.id]));
+  function salvarSessao(ss) { const s = A.getSes(), P = est.mkPend || {}; let erro = '';
+    Object.keys(P).forEach((kk) => { if (erro) return; if (kk === 'data') { const r = s?.data?.(ss.id, P[kk]); if (r && r.erro) erro = r.erro; } else s?.fase?.(ss.id, kk, P[kk]); });
+    if (erro) { A.msg(erro, true); return false; }
+    if (est.jPend && est.jPend[ss.id]) { if (!s?.definirJulgadores?.(ss.id, est.jPend[ss.id])) { A.msg('Motor indisponível para gravar os julgadores.', true); return false; } delete est.jPend[ss.id]; }
+    est.mkPend = {}; if (ss.publicada || ss.marcosPub) { est.pubPend = est.pubPend || {}; est.pubPend[ss.id] = true; }
+    setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 300);
+    A.msg('Alterações salvas. Gravando no procs-muta…' + (ss.publicada || ss.marcosPub ? ' Use “Publicar alterações” para levar à Ex Officio.' : '')); return true; }
   const alcanceDe = (sb) => sb.alcance || (sb.itens === 'todos' || !sb.itens ? 'todos' : 'itens');
   const itensTxt = (v) => v === 'todos' ? 'todos' : (v || []).join(', ');
   function itensDe(t) { t = String(t || '').trim(); if (!t || /todos/i.test(t)) return 'todos'; const out = [];
@@ -2110,6 +2124,7 @@ function portaToken() { return new Promise((fim) => {
     return `<div class="cwe-top"><div><div class="cwe-hl"><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p></div>
       <p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg || '<small>carregando o cadastro…</small>'}<button type="button" class="cwe-jico" data-cwe="j-ed" title="Editar julgadores e substituições" aria-label="Editar julgadores e substituições"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button></p></div>
       <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicação na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" class="cwe-pico ${ss.marcosPub || ss.publicada ? 'on' : ''}" data-cwe="m-pub" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio · clique para retirar' : 'Marcos não publicados · clique para publicar na Ex Officio'}" aria-label="Marcos na Ex Officio"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><i></i></button><button type="button" class="cwe-pico ${ss.publicada ? 'on' : ''}" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} aria-pressed="${!!ss.publicada}" title="${ss.publicada ? 'Pauta publicada na Ex Officio · clique para retirar' : d.pauta ? 'Pauta não publicada · clique para publicar (processos e marcos)' : 'Importe o PDF da pauta antes de publicar'}" aria-label="Pauta na Ex Officio"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg><i></i></button></span>
+      ${temPend(ss) ? `<span class="cwe-svg"><button type="button" class="pri" data-cwe="mk-salvar" title="Grava os marcos e os julgadores alterados">Salvar alterações</button><button type="button" class="cwe-lnk" data-cwe="mk-desc">descartar</button></span>` : est.pubPend && est.pubPend[ss.id] ? `<span class="cwe-svg"><button type="button" class="pub" data-cwe="pub-alt" title="Leva as alterações salvas à Ex Officio">Publicar alterações</button></span>` : ''}
       <span class="cwe-expwrap"><button type="button" data-cwe="exp" aria-expanded="${est.exp}">Exportar ▾</button>${est.exp ? `<span class="cwe-menu" role="menu">${exp.map(([k, t, s]) => `<button type="button" role="menuitem" data-cwe="x-${k}"><b>${e(t)}</b><small>${e(s)}</small></button>`).join('')}</span>` : ''}</span></div></div>`;
   }
   /* painel da sessão e julgadores: expansíveis, dentro do cartão da sessão */
@@ -2123,7 +2138,6 @@ function portaToken() { return new Promise((fim) => {
     const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', 'data']];
     return `<section class="cwe-marcos" aria-label="Marcos da sessão"><span class="cwe-mk"><span class="cwe-k">MARCOS</span></span>
       ${M.map(([t, v0, o, k]) => { const pend = est.mkPend && est.mkPend[k] != null, v = pend ? est.mkPend[k] : v0; return `<label title="${e(t + ' · ' + o)}" class="${inv && (k === 'inicio' || k === 'minutas') ? 'inv' : ''} ${pend ? 'pend' : ''}">${e(t)}<span class="mkv"><b class="${v ? '' : 'vazio'}">${e(v ? A.br(v) : 'a definir')}</b><button type="button" class="mkcal" data-cwe="mk-cal" data-k="${k}" title="Escolher a data" aria-label="Escolher a data de ${e(t)}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><input type="date" class="mkhid" data-cwe-mkp="${k}" value="${e(v || '')}" tabindex="-1" aria-hidden="true"></span></label>`; }).join('')}
-      ${est.mkPend && Object.keys(est.mkPend).length ? `<span class="mksv"><button type="button" class="pri" data-cwe="mk-salvar">Salvar alterações</button><button type="button" class="cwe-lnk" data-cwe="mk-desc">descartar</button></span>` : ''}
       ${inv ? `<button type="button" class="cwe-inv" data-cwe="p-tab" data-v="marcos" title="A entrega das minutas (${e(A.br(f.minutas))}) está antes do início da preparação (${e(A.br(f.inicio))}): não sobra prazo para minutar. Corrija os marcos no painel da sessão.">⚠ Início depois da entrega</button>` : ''}</section>`;
   }
   /* edição dos marcos, dentro do painel da sessão */
@@ -2132,10 +2146,10 @@ function portaToken() { return new Promise((fim) => {
     const M = [['Peço dia', f.pauta, 'pautar até (calendário do tribunal)', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', 'data']];
     return `<div class="cwe-mked">${inv ? `<p class="cwe-av"><b>Marcos invertidos:</b> a entrega das minutas (${e(A.br(f.minutas))}) está antes do início da preparação (${e(A.br(f.inicio))}). O prazo para minutar fica negativo; o Caput usa a entrega pela regra de liberação até a correção.</p>` : ''}
       <div class="cwe-mkg">${M.map(([t, v0, o, k]) => { const pend = est.mkPend && est.mkPend[k] != null, v = pend ? est.mkPend[k] : v0; return `<label class="${inv && (k === 'inicio' || k === 'minutas') ? 'inv' : ''} ${pend ? 'pend' : ''}"><span>${e(t)}<small>${e(o)}</small></span><input type="date" data-cwe-mkp="${k}" value="${e(v || '')}"></label>`; }).join('')}</div>
-      <div class="cwe-mkb">${est.mkPend && Object.keys(est.mkPend).length ? `<button type="button" class="pri" data-cwe="mk-salvar">Salvar alterações</button><button type="button" data-cwe="mk-desc">Descartar</button>` : ''}<button type="button" data-cwe="m-sug" title="Liberação: dias úteis antes da sessão; entrega das minutas: primeiro dia útil em que a capacidade da equipe cobre os pontos pendentes (Regras gerais › produtividade)">Sugerir pelas regras</button><button type="button" class="cwe-lnk" data-cwe="cfg-0">regras dos marcos</button></div></div>`;
+      <div class="cwe-mkb"><button type="button" data-cwe="m-sug" title="Liberação: dias úteis antes da sessão; entrega das minutas: primeiro dia útil em que a capacidade da equipe cobre os pontos pendentes (Regras gerais › produtividade)">Sugerir pelas regras</button><button type="button" class="cwe-lnk" data-cwe="cfg-0">regras dos marcos</button></div></div>`;
   }
   function esteira(d) {
-    const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e numeração dos itens'], ['Etiquetagem', 'tipo de julgamento, meta e MPF'], ['Designação', 'redator e corretor'], ['Publicar a pauta', 'conferência final e equipe']];
+    const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e numeração dos itens'], ['Etiquetagem', 'tipo de julgamento, meta e MPF'], ['Designação', 'redator e corretor'], ['Publicação', 'conferência final e Ex Officio']];
     const ok = 'ok', pd = 'pd', vz = 'vz'; const i = d.info;
     const C = [
       [['Sessão cadastrada', 'feito', ok], ['Processos na seleção prévia', d.previa.length + ' processos', d.previa.length ? ok : pd], ['Rascunho de regras e designação', 'na Triagem', vz]],
@@ -2376,7 +2390,7 @@ function portaToken() { return new Promise((fim) => {
     const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && muda(p)).length;
     return `<section class="cwe-st"><h2>4 · Designação de redator e corretor</h2>${tabs}
 
-      <div class="cwe-mesa-bar"><span class="sp"></span><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicar a pauta →</button></div>
+      <div class="cwe-mesa-bar"><span class="sp"></span><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicação →</button></div>
       <div class="cwe-mesa-slot" data-s="${e(ss.id)}"></div>
       <div class="cwe-kpis cwe-k4">${kpi(Ls.length, 'Processos na pauta', `${Ls.filter((p) => p.servidor).length} com minutante · ${Ls.filter((p) => p.corretor).length} com corretor`)}${kpi(`${porRegD} · ${porRegC}`, 'Preenchidos por regra', 'minutantes · corretores')}${kpi(`${brD} · ${brC}`, 'Sem regra que case', 'minutantes · corretores, a escolher', brD + brC ? 'a' : '')}${kpi(aus.length, 'Ausências no período', aus.length ? aus.join(', ') : `nenhuma cadastrada entre ${A.br(Z.periodo.de).slice(0, 5)} e ${A.br(Z.periodo.ate).slice(0, 5)}`)}</div>
       ${painelRegras(ss, Z)}
@@ -2384,7 +2398,7 @@ function portaToken() { return new Promise((fim) => {
           ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
       <details class="cwe-old" ${est.listaAb ? 'open' : ''}><summary data-cwe="des-lista">Lista simples por regra, sem a mesa</summary>
       <section class="cwe-carga">${quadro('MINUTA · EQUIPE', Z.minutantes, 'd')}${quadro('CORREÇÃO · ASSESSORIA', Z.corretores, 'c')}</section>
-      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a aplicar</b> · preenchimentos e trocas marcados</span><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicar a pauta →</button></div>
+      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a aplicar</b> · preenchimentos e trocas marcados</span><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicação →</button></div>
         ${vis.map((p) => { const dg = A.digits(p.cnj); return `<article class="cwe-pc"><div class="t">${ck('dsg', dg)}<span class="it">item ${e(p.item || '—')}</span><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(p.cnj))}</button><span class="as">${e(p.assunto || '—')} · ${e(p.recurso || p.classe || '')} · ${e(p.secao || '')}</span><span class="ct">${e(AP_T[p.tipo] || p.tipo || '1º julgamento')}</span></div>
           <div class="ds"><div><span>MINUTANTE</span>${sel('d', p)}</div><div><span>CORRETOR</span>${sel('c', p)}</div></div></article>`; }).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}
         <div class="cwe-mostra"><span>mostrando ${vis.length} de ${L.length}</span>${L.length > vis.length ? `<button type="button" data-cwe="des-mais">Mostrar mais 50</button><button type="button" data-cwe="des-todos">Mostrar todos</button>` : ''}</div></div></details></section>`;
@@ -2401,7 +2415,7 @@ function portaToken() { return new Promise((fim) => {
     const cf = [['', d.itens.length, 'itens no espelho', 'pauta oficial importada', ''], ['fora', d.foraAc, 'fora do acervo fonte', 'sem registro no acervo', d.foraAc ? 'r' : 'g'], ['ass', d.assDiv, 'assuntos divergentes', 'pauta × acervo fonte', d.assDiv ? 'a' : 'g'], ['tar', d.foraTar, 'fora de tarefa de sessão', 'tarefa atual sem [Sessão]', d.foraTar ? 'a' : 'g'], ['des', semDes.length, 'sem designação', 'minutante ou corretor', semDes.length ? 'a' : 'g']];
     const ab = est.cf && LST[est.cf] ? LST[est.cf] : null;
     const pub = ss.publicada ? (ss.pronta || 'sim') : '';
-    return `<section class="cwe-st"><h2>5 · Publicar a pauta e acompanhar</h2>
+    return `<section class="cwe-st"><h2>5 · Publicação</h2>
       <p>A pauta vai à equipe depois de uma conferência rápida. Os marcos seguem por conta própria, no quadro acima da esteira.</p>
       ${d.pauta ? `<div class="cwe-final"><div class="h"><span class="cwe-k">CONFERÊNCIA FINAL · ANTES DE PUBLICAR</span><small>espelho da pauta × acervo fonte</small></div>
         <div class="g">${cf.map(([k, n, t, s, c]) => k ? `<button type="button" class="${c} ${est.cf === k ? 'on' : ''}" data-cwe="cf" data-v="${k}" ${n ? '' : 'disabled'}><b>${n}</b>${e(t)}<small>${e(s)}</small></button>` : `<span><b>${n}</b>${e(t)}<small>${e(s)}</small></span>`).join('')}</div>
@@ -2554,10 +2568,10 @@ function portaToken() { return new Promise((fim) => {
       else if (k === 'rg') { est.rgAb = est.rgAb || {}; est.rgAb[b.dataset.k] = !est.rgAb[b.dataset.k]; }
       else if (k === 'rgc') { est.rgCat = est.rgCat || {}; est.rgCat[b.dataset.k] = !est.rgCat[b.dataset.k]; }
       else if (k === 'mk-cal') { const inp = b.parentElement.querySelector('.mkhid'); try { inp.showPicker(); } catch (er) { inp.focus(); inp.click(); } return; }
-      else if (k === 'mk-desc') est.mkPend = {};
-      else if (k === 'mk-salvar') { const s = A.getSes(), P = est.mkPend || {}; let erro = '';
-        Object.keys(P).forEach((kk) => { if (erro) return; if (kk === 'data') { const r = s?.data?.(ss.id, P[kk]); if (r && r.erro) erro = r.erro; } else s?.fase?.(ss.id, kk, P[kk]); });
-        if (erro) { A.msg(erro, true); return; } est.mkPend = {}; A.msg('Marcos salvos. Gravação automática no procs-muta em instantes.'); }
+      else if (k === 'mk-desc') { est.mkPend = {}; if (est.jPend) delete est.jPend[ss.id]; }
+      else if (k === 'mk-salvar') { if (!salvarSessao(ss)) return; }
+      else if (k === 'pub-alt') { const s = A.getSes(); if (ss.marcosPub || ss.publicada) s?.publicarMarcos?.(ss.id, true); if (ss.publicada) s?.publicar?.(ss.id, true); if (est.pubPend) delete est.pubPend[ss.id];
+        setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 300); A.msg('Alterações publicadas na Ex Officio. Gravando no procs-muta…'); }
       else if (k === 'p-tab') { est.pTab = b.dataset.v; est.painel = true; est.jNovo = false; }
       else if (k === 'j-ed') { est.pTab = 'julg'; est.painel = true; est.jNovo = false; }
       else if (k === 'painel') { const d0 = dados(ss); est.painel = !(est.painel == null ? d0.realizada : est.painel); }
@@ -2663,7 +2677,7 @@ function portaToken() { return new Promise((fim) => {
     A = api; const view = api.view; ligar(view);
     const ss = api.selectedSession();
     if (!ss) { view.innerHTML = `<div class="cwe"><div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Nenhuma sessão cadastrada</h1><p>Cadastre a data do julgamento para começar a seleção prévia.</p></div><div class="cwe-tools"><button type="button" class="pri" data-cwt="create-session">Cadastrar sessão</button></div></div></div>`; return; }
-    if (est.ses !== ss.id) { est.ses = ss.id; est.mkPend = {}; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
+    if (est.ses !== ss.id) { est.ses = ss.id; est.mkPend = {}; est.jPend = {}; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapaEtq, etapaDes, etapa4][d.cur](ss, d);
     view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
