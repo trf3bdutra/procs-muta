@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.equipe.matriz",
  "versao": 1,
- "geradoEm": "2026-11-20T20:12:20Z",
+ "geradoEm": "2026-11-20T22:23:28Z",
  "geradoPor": "scripts/equipe/matriz_minutas.py",
  "tipos": [
   "Apelação",
@@ -236,65 +236,6 @@
    }
   },
   {
-   "servidor": "Victor",
-   "noCadastro": true,
-   "minutaNoCadastro": true,
-   "total": 171,
-   "correcoes": 0,
-   "assuntosCorrigidos": {},
-   "tipos": {
-    "Apelação": 134,
-    "Apelação e remessa": 12,
-    "Remessa necessária": 1,
-    "Agravo de instrumento": 5,
-    "Embargos de declaração": 17,
-    "Agravo interno": 1,
-    "Juízo de retratação": 0,
-    "Decisão monocrática": 1,
-    "Outras classes": 0
-   },
-   "secoes": {
-    "2ª Seção": 103,
-    "1ª Seção": 35,
-    "3ª Seção": 20,
-    "sem seção": 8,
-    "A conferir": 5
-   },
-   "ramos": {
-    "DIREITO À EDUCAÇÃO": 69,
-    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 52,
-    "DIREITO PREVIDENCIÁRIO": 10,
-    "DIREITO CIVIL": 10,
-    "DIREITO DA SAÚDE": 10,
-    "sem ramo": 8,
-    "DIREITO TRIBUTÁRIO": 5,
-    "DIREITO DO CONSUMIDOR": 3,
-    "DIREITO AMBIENTAL": 2,
-    "DIREITO ASSISTENCIAL": 2
-   },
-   "assuntos": {
-    "Convalidação de Estudos e Reconhecimento de Diploma": 43,
-    "FIES": 24,
-    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 23,
-    "Fornecimento de medicamentos": 10,
-    "Anulação e Correção de Provas / Questões": 6,
-    "Aposentadoria Especial (Art. 57/8)": 5,
-    "Inscrição / Documentação": 4,
-    "Anulação": 4,
-    "Cédula de Crédito Bancário": 3,
-    "Exame da Ordem OAB": 3,
-    "Revogação/Anulação de multa ambiental": 2,
-    "Inclusão Indevida em Cadastro de Inadimplentes": 2
-   },
-   "cadastro": {
-    "exp": [
-     "Convalidação de Estudos e Reconhecimento de Diploma"
-    ],
-    "pref": [],
-    "nao": []
-   }
-  },
-  {
    "servidor": "Vanilda",
    "noCadastro": true,
    "minutaNoCadastro": false,
@@ -357,6 +298,65 @@
     "exp": [
      "Fundo de Saúde do Exército - FUSEX",
      "Contratos Bancários"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Victor",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 170,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
+   "tipos": {
+    "Apelação": 133,
+    "Apelação e remessa": 12,
+    "Remessa necessária": 1,
+    "Agravo de instrumento": 5,
+    "Embargos de declaração": 17,
+    "Agravo interno": 1,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 1,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "2ª Seção": 103,
+    "1ª Seção": 35,
+    "3ª Seção": 19,
+    "sem seção": 8,
+    "A conferir": 5
+   },
+   "ramos": {
+    "DIREITO À EDUCAÇÃO": 69,
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 51,
+    "DIREITO PREVIDENCIÁRIO": 10,
+    "DIREITO CIVIL": 10,
+    "DIREITO DA SAÚDE": 10,
+    "sem ramo": 8,
+    "DIREITO TRIBUTÁRIO": 5,
+    "DIREITO DO CONSUMIDOR": 3,
+    "DIREITO AMBIENTAL": 2,
+    "DIREITO ASSISTENCIAL": 2
+   },
+   "assuntos": {
+    "Convalidação de Estudos e Reconhecimento de Diploma": 43,
+    "FIES": 24,
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 23,
+    "Fornecimento de medicamentos": 10,
+    "Anulação e Correção de Provas / Questões": 6,
+    "Aposentadoria Especial (Art. 57/8)": 5,
+    "Inscrição / Documentação": 4,
+    "Anulação": 4,
+    "Cédula de Crédito Bancário": 3,
+    "Revogação/Anulação de multa ambiental": 2,
+    "Inclusão Indevida em Cadastro de Inadimplentes": 2,
+    "Ambiental": 2
+   },
+   "cadastro": {
+    "exp": [
+     "Convalidação de Estudos e Reconhecimento de Diploma"
     ],
     "pref": [],
     "nao": []
@@ -544,11 +544,11 @@
    "servidor": "José",
    "noCadastro": true,
    "minutaNoCadastro": true,
-   "total": 100,
+   "total": 101,
    "correcoes": 0,
    "assuntosCorrigidos": {},
    "tipos": {
-    "Apelação": 71,
+    "Apelação": 72,
     "Apelação e remessa": 13,
     "Remessa necessária": 1,
     "Agravo de instrumento": 10,
@@ -561,11 +561,11 @@
    "secoes": {
     "2ª Seção": 68,
     "1ª Seção": 21,
-    "3ª Seção": 10,
+    "3ª Seção": 11,
     "sem seção": 1
    },
    "ramos": {
-    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 54,
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 55,
     "DIREITO TRIBUTÁRIO": 35,
     "DIREITO PREVIDENCIÁRIO": 5,
     "DIREITO À EDUCAÇÃO": 3,
@@ -582,9 +582,9 @@
     "Contribuições Previdenciárias": 3,
     "Inquérito / Processo / Recurso Administrativo": 3,
     "Conselhos Regionais e Afins (Anuidade)": 3,
+    "Exame da Ordem OAB": 3,
     "Aposentadoria por Incapacidade Permanente": 2,
-    "Atualização de Conta": 2,
-    "Conselhos Regionais de Fiscalização Profissional e Afins": 2
+    "Atualização de Conta": 2
    },
    "cadastro": {
     "exp": [
@@ -16085,6 +16085,19 @@
    "Apelação",
    "3ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Exame da Ordem OAB",
+   "Vanilda",
+   0,
+   "2026-11-30",
+   "2026-11-16",
+   "50012069220254036005",
+   1
+  ],
+  [
+   "José",
+   "Apelação",
+   "3ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
    "Piso Salarial",
    "",
    0,
@@ -27700,19 +27713,6 @@
    "2026-11-30",
    "",
    "50003766220214036007",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "3ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Exame da Ordem OAB",
-   "Vanilda",
-   0,
-   "2026-11-30",
-   "2026-11-16",
-   "50012069220254036005",
    1
   ],
   [
