@@ -4884,8 +4884,8 @@
    "exequente": "M. A. B LIMA & CIA LTDA",
    "executado": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "assunto": "Anulação",
-   "grupo": null,
-   "tipo_caso": "AI · Administrativo · penalidade de impedimento de licitar (UFMS) · tutela deferida em parte na origem",
+   "grupo": "",
+   "tipo_caso": "AI · Administrativo · licitações · penalidade de impedimento de licitar e contratar aplicada pela UFMS · nulidade do processo administrativo · tutela deferida em parte na origem",
    "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferido o preparo; tutela recursal indeferida em 30/01/2026 e há contrarrazões da União e da UFMS",
    "modelo": "",
    "variacoes": [
@@ -4969,7 +4969,87 @@
     "representacao": "Procuração com reserva de poderes (ID 352519725) a Canton Matos Advogados",
     "preparo": "Solicitação Pix de R$ 64,26 (ID 352529775) \"aguardando realização do pagamento\"; comprovantes sem conteúdo (IDs 352529776 e 352529777); manifestação ID 352529759 sobre a forma de recolhimento"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Administrativo · licitações · penalidade de impedimento de licitar e contratar aplicada pela UFMS · nulidade do processo administrativo · tutela deferida em parte na origem",
+   "especificidades": "Sem grupo adequado entre os 12 (matéria administrativa) · Tutela recursal indeferida (ID 352675226, 30/01/2026) · Preparo: comprovante STN em formato de lista (Consulta de Pagamentos de GRU, ID 352529777) [VALIDAR]; solicitação Pix \"aguardando pagamento\" (ID 352529775) · Contrarrazões da União e da UFMS",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Administrativo · licitações · penalidade de impedimento de licitar e contratar aplicada pela UFMS · nulidade do processo administrativo · tutela deferida em parte na origem",
+     "sintese": "A UFMS aplicou a M. A. B. Lima & Cia penalidades em processo administrativo de contratação, entre elas o impedimento de licitar; a empresa obteve na origem a suspensão só dessa penalidade e agravou para ampliar a tutela.",
+     "questoes": "1) Regularidade do preparo; 2) nulidade do Processo Administrativo 23104.004898/2025-99; 3) suspensão das demais penalidades além do impedimento de licitar.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 352519724 (29/01/2026): nulidade do processo administrativo; exclusão das demais penalidades; risco de asfixia financeira; antecipação da tutela recursal.",
+      "contrarrazoes": "Contrarrazões da União ID 365273942 (27/03/2026) e da UFMS ID 362392356 (25/03/2026): presunção de legitimidade do ato e necessidade de instrução; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "473092717",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Deferiu em parte a tutela para suspender a penalidade de impedimento de licitar e contratar com a União."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "473092717"
+     },
+     "adm": {
+      "prot": "2026-01-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "352519724",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "352519724",
+       "data": "2026-01-29"
+      },
+      {
+       "desc": "Comprovante STN (lista)",
+       "id": "352529777",
+       "data": "2026-01-29"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "352675226",
+       "data": "2026-01-30"
+      },
+      {
+       "desc": "Contrarrazões da UFMS",
+       "id": "362392356",
+       "data": "2026-03-25"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "365273942",
+       "data": "2026-03-27"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN em formato de lista",
+     "especificidades": "Sem grupo adequado entre os 12 (matéria administrativa) · Tutela recursal indeferida (ID 352675226, 30/01/2026) · Preparo: comprovante STN em formato de lista (Consulta de Pagamentos de GRU, ID 352529777) [VALIDAR]; solicitação Pix \"aguardando pagamento\" (ID 352529775) · Contrarrazões da União e da UFMS"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-01-30"
+    }
+   }
   },
   {
    "sessao": "",
