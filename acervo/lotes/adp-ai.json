@@ -9,7 +9,7 @@
  "sessoes": [],
  "filtro": {},
  "criado_por": "Bruno",
- "atualizado_em": "2026-11-19",
+ "atualizado_em": "2026-11-20",
  "colunas": [
   {
    "id": "URG",
@@ -761,12 +761,14 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Cumprimento de sentença contra a União · destaque (reserva) de honorários contratuais indeferido",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); sem pedido de efeito suspensivo; a União foi intimada e só manifestou ciência",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Melo & Araújo Sociedade de Advogados contra a decisão da 1ª Vara Federal de Campo Grande que, no cumprimento de sentença contra a Fazenda Pública 0008112-19.2016.4.03.6000, indeferiu a reserva de honorários contratuais em favor da sociedade. Pede a reserva em relação a exequentes nominados (entre eles, Joseph e Kildare) e a majoração de honorários (artigo 85, § 11, do CPC).",
+   "peculiaridades": "Despacho ID 298397136 (16/08/2024): sem pedido de efeito suspensivo; intimada a União para contraminuta. A União só manifestou ciência (ID 301044447, 19/08/2024); não há contraminuta nos autos. Preparo: boleto e comprovante de 23/07/2024 (IDs 294288480 e 294289633), sem texto extraível. Feito de 2024.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -782,9 +784,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Cumprimento de sentença — destaque de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994)",
+    "origem": "0008112-19.2016.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Não consta com texto nos autos do agravo [VALIDAR]",
+    "recurso": "ID 294172234 · 22/07/2024",
+    "preparo": "Comprovante ID 294289633, sem texto extraível",
+    "monocratica": "Possível, conforme a linha do gabinete sobre destaque de honorários [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Ler a decisão agravada e o contrato e aditivo (ID 294172238, sem texto) para conferir os requisitos do destaque",
+    "[VALIDAR] Preparo: comprovante de 23/07/2024 sem texto extraível",
+    "[VALIDAR] Situação atual do cumprimento de sentença (possível expedição do requisitório já feita)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -814,12 +829,14 @@
    "executado": "FUNDACAO DE APOIO A PESQUISA AO ENSINO E A CULTURA",
    "assunto": "ACESSO",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Ensino superior · vestibular UFMS · cotas raciais (heteroidentificação) · liminar indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto) ou prejudicialidade; a tutela recursal foi indeferida em 26/03/2025 e há contrarrazões da FUFMS. Conferir antes se a ação de origem já foi sentenciada",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Izabella da Costa Ribeiro contra a decisão que, na ação 5000202-26.2025.4.03.6003 (Três Lagoas), contra a FAPEC e a FUFMS, indeferiu a liminar para matrícula no curso de Direito (campus de Três Lagoas) pelas vagas reservadas a pretos e pardos do Edital 303/2024. Teses da agravante: prevalência da autodeclaração; nulidade das cláusulas 6.1 e 1.13.2 do edital; subsidiariamente, habilitação na ampla concorrência. A FUFMS, nas contrarrazões (ID 322047613), pede o desprovimento.",
+   "peculiaridades": "Tutela recursal indeferida pelo Relator anterior (decisão ID 318695100). A certidão ID 318956763 registra que a FAPEC não foi intimada. A redistribuição foi lançada como \"Decisão Monocrática Terminativa Sem Resolução\" (ID 373132678), mas o conteúdo é só a remessa à Turma Regional. Feito de 2025.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -850,9 +867,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto) ou prejudicialidade",
+    "materia": "Ensino superior — cotas raciais; heteroidentificação",
+    "origem": "5000202-26.2025.4.03.6003 (Três Lagoas)",
+    "decisao_agravada": "Transcrita na decisão ID 318695100",
+    "recurso": "ID 316861477 · 10/03/2025",
+    "preparo": "Não consta; pedido de gratuidade com documento de hipossuficiência (ID 316863891) [VALIDAR]",
+    "monocratica": "Possível, se houver perda de objeto [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Situação da ação de origem: se sentenciada, o agravo fica prejudicado",
+    "[VALIDAR] Intimação da FAPEC para contrarrazões (certidão ID 318956763)",
+    "[VALIDAR] Gratuidade ou preparo do agravo"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
