@@ -2309,12 +2309,15 @@
    "executado": "ORDEM DOS ADVOGADOS DO BRASIL SECAO MATO GROSSO DO SUL",
    "assunto": "Anuidades OAB",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI de advogada × OAB/MS · embargos à execução de anuidades · valor mínimo do artigo 8º da Lei 12.514/2011",
+   "resultado": "Ato a proferir: certificar o prazo da contraminuta e julgar o agravo; provável monocrática pela linha do gabinete para execuções da OAB (aplicabilidade do artigo 8º da Lei 12.514/2011 à OAB) [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "VAL"
+   ],
+   "observacao": "Agravo de Andréa Sallum Congro, em causa própria, contra a decisão ID 365022389 que, nos embargos à execução 5000055-97.2025.4.03.6003 (1ª Vara Federal de Três Lagoas), deu seguimento à execução de título extrajudicial 5000873-54.2022.4.03.6003 movida pela OAB/MS. Tese: o valor executado (R$ 2.853,62) é inferior ao mínimo do artigo 8º da Lei 12.514/2011, na redação da Lei 14.195/2021.",
+   "peculiaridades": "Sem preparo: o despacho ID 342572883 (18/11/2025) mandou recolher em dobro; a agravante pediu gratuidade (ID 344493533), deferida pelo despacho ID 344716055 (04/12/2025), que também mandou intimar a OAB para contraminuta. Não há contraminuta nos autos. Grupo: execuções da OAB.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -2330,9 +2333,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (monocrática provável)",
+    "materia": "Execução de anuidades da OAB — artigo 8º da Lei 12.514/2011",
+    "origem": "Embargos à execução 5000055-97.2025.4.03.6003 (1ª Vara Federal de Três Lagoas); execução 5000873-54.2022.4.03.6003",
+    "decisao_agravada": "ID 365022389 da origem (cópia ID 341926934)",
+    "recurso": "ID 341926933 · 03/11/2025",
+    "preparo": "Dispensado: gratuidade deferida (ID 344716055)",
+    "monocratica": "Provável [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Linha do gabinete: aplicação do artigo 8º da Lei 12.514/2011 às execuções da OAB",
+    "[VALIDAR] Certificar o decurso do prazo da contraminuta"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -2350,6 +2365,17 @@
     "ultima_informacao": "Certidão · ID 367014622 · 16/04/2026",
     "ultima_movimentacao": "16/04/2026 18:13 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "A OAB/MS executa anuidades de R$ 2.853,62 contra a advogada Andréa Sallum Congro, que opôs embargos alegando valor abaixo do mínimo legal para execução; o juízo deu seguimento à execução, e ela agravou.",
+    "inicial": "Embargos à execução 5000055-97.2025.4.03.6003; não juntados em cópia com texto",
+    "decisao_recorrida": "Decisão ID 365022389 dos embargos, que deu seguimento à execução (cópia ID 341926934)",
+    "recurso": "Agravo de instrumento ID 341926933 (03/11/2025): valor inferior ao mínimo do artigo 8º da Lei 12.514/2011, na redação da Lei 14.195/2021; extinção da execução.",
+    "resposta": "Não consta: OAB intimada pelo despacho ID 344716055, sem contraminuta nos autos",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante advoga em causa própria (OAB/MS 10.165)",
+    "preparo": "Gratuidade deferida pelo despacho ID 344716055, após determinação de recolhimento em dobro (ID 342572883)"
    }
   },
   {
@@ -2362,12 +2388,16 @@
    "executado": "ADRIANA FORTALEZA DO NASCIMENTO FERNANDES",
    "assunto": "Anuidades OAB",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI da OAB/MS · execução de título extrajudicial (anuidades) · decisão contrária ao prosseguimento",
+   "resultado": "Ato a proferir: conferir o preparo (sem comprovante) e a contraminuta; depois, julgamento do agravo, possivelmente monocrático pela linha do gabinete para execuções da OAB [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo da OAB/MS contra decisão proferida na execução de título extrajudicial 5000419-15.2024.4.03.6000, contra a advogada Adriana Fortaleza do Nascimento. Pede a reforma para prosseguimento da execução; mesmas razões do 5027793-27 (natureza singular da OAB e dependência das anuidades).",
+   "peculiaridades": "A agravante disse que juntaria o comprovante de preparo em um dia útil; o documento de custas (ID 339611724) não tem conteúdo. O Relator anterior postergou a tutela para após a contraminuta (despacho ID 339689634); não há contraminuta nos autos. Grupo: execuções da OAB (com 5027793-27 e 5029452-71).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -2388,9 +2418,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho (preparo e contraminuta) ou julgamento",
+    "materia": "Execução de anuidades da OAB",
+    "origem": "Execução 5000419-15.2024.4.03.6000",
+    "decisao_agravada": "Não consta com texto nos autos do agravo [VALIDAR]",
+    "recurso": "ID 339606316 · 16/10/2025",
+    "preparo": "Sem comprovante (documento ID 339611724 vazio) [VALIDAR]",
+    "monocratica": "Possível (linha M00339) [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: intimar para recolher em dobro (artigo 1.007, § 4º, do CPC) se não houver comprovante",
+    "[VALIDAR] Fundamento da decisão agravada",
+    "[VALIDAR] Certificar o prazo da contraminuta"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -2408,6 +2451,17 @@
     "ultima_informacao": "Certidão · ID 371178052 · 05/05/2026",
     "ultima_movimentacao": "05/05/2026 12:12 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "A OAB/MS executa anuidades da advogada Adriana Fortaleza do Nascimento; o juízo decidiu contra o prosseguimento da execução, e a OAB agravou.",
+    "inicial": "Não consta nos autos do recurso",
+    "decisao_recorrida": "Decisão na execução 5000419-15.2024.4.03.6000; conteúdo não identificado nos autos do agravo [VALIDAR]",
+    "recurso": "Agravo de instrumento ID 339606316 (16/10/2025): prosseguimento da execução; natureza e custeio da OAB; dispensa das peças obrigatórias por serem eletrônicos os autos.",
+    "resposta": "Não consta: agravada intimada pelo despacho ID 339689634, sem contraminuta nos autos",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "OAB/MS pelo advogado Marcelo Nogueira da Silva (OAB/MS 13.300); agravada advogada (OAB/MS 24.499)",
+    "preparo": "Sem comprovante: documento de custas ID 339611724 sem conteúdo"
    }
   },
   {
