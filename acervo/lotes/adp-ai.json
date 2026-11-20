@@ -3898,7 +3898,7 @@
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
    "grupo": "g2",
-   "tipo_caso": "AI · Ambiental · embargo do IBAMA sobre imóvel rural · proprietário não intimado no processo administrativo · tutela concedida em reconsideração",
+   "tipo_caso": "AI · Ambiental · termo de embargo do IBAMA sobre imóvel rural · proprietário não cientificado do processo administrativo movido contra terceiro",
    "resultado": "Ato a proferir: julgamento do agravo (voto) ou prejudicialidade; tutela recursal concedida em 30/04/2025 em reconsideração e há contraminuta do IBAMA. Conferir antes se a ação de origem foi sentenciada",
    "modelo": "",
    "variacoes": [
@@ -3988,7 +3988,87 @@
     "representacao": "Advogados Luiz Augusto Pinheiro de Lacerda (OAB/MS 9.498) e Virgílio Ferreira de Pinho Neto (OAB/MS 15.422); procuração não identificada com texto [VALIDAR]",
     "preparo": "Petição de juntada das custas de 2º grau (ID 311661382); o arquivo de custas (ID 311661383) não tem conteúdo legível [VALIDAR]"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Ambiental · termo de embargo do IBAMA sobre imóvel rural · proprietário não cientificado do processo administrativo movido contra terceiro",
+   "especificidades": "Tutela recursal: indeferida (ID 311845957, 02/04/2025) e depois concedida em reconsideração (ID 322629025, 30/04/2025), com suspensão dos efeitos do embargo no PA 02014.000046/2022-19 até o julgamento do agravo ou a sentença · Agravo de 2025: conferir se a ação de origem foi sentenciada (perda de objeto) [VALIDAR] · Certidão juntada em 04/11/2026 não extraída [VALIDAR] · Preparo: só a guia ilegível (ID 311661383) [VALIDAR] · Procuração não identificada com texto [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Ambiental · termo de embargo do IBAMA sobre imóvel rural · proprietário não cientificado do processo administrativo movido contra terceiro",
+     "sintese": "O IBAMA embargou área de imóvel rural em Ponta Porã em processo administrativo contra o pai do agravante; o agravante, que se diz proprietário, alega não ter sido cientificado e pediu a suspensão do embargo, negada na origem e concedida no Tribunal em reconsideração.",
+     "questoes": "1) Subsistência do interesse recursal diante de eventual sentença; 2) preparo; 3) nulidade do embargo ambiental por falta de ciência do proprietário no processo administrativo.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 311625831 (14/01/2025): proprietário não intimado no processo administrativo; ônus excessivo do embargo; pedido de reconsideração ID 320355526 (08/04/2025), acolhido.",
+      "contrarrazoes": "Contrarrazões do IBAMA ID 321189006 (15/04/2025): manutenção da decisão por seus fundamentos."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "350298280",
+      "juizo": "2ª Vara Federal de Ponta Porã",
+      "dispositivo": "Indeferiu a liminar para suspender o embargo ambiental, por ciência do autor de longa data do processo administrativo."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Deferido",
+      "id": "350298280"
+     },
+     "adm": {
+      "prot": "2025-01-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "311625831",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "311625831",
+       "data": "2025-01-14"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "311845957",
+       "data": "2025-04-02"
+      },
+      {
+       "desc": "Pedido de reconsideração",
+       "id": "320355526",
+       "data": "2025-04-08"
+      },
+      {
+       "desc": "Contrarrazões do IBAMA",
+       "id": "321189006",
+       "data": "2025-04-15"
+      },
+      {
+       "desc": "Decisão que reconsiderou e concedeu a tutela recursal",
+       "id": "322629025",
+       "data": "2025-04-30"
+      }
+     ],
+     "pendencias": "Conferir a sentença na origem e a certidão de 04/11/2026; conferir o preparo e a procuração",
+     "especificidades": "Tutela recursal: indeferida (ID 311845957, 02/04/2025) e depois concedida em reconsideração (ID 322629025, 30/04/2025), com suspensão dos efeitos do embargo no PA 02014.000046/2022-19 até o julgamento do agravo ou a sentença · Agravo de 2025: conferir se a ação de origem foi sentenciada (perda de objeto) [VALIDAR] · Certidão juntada em 04/11/2026 não extraída [VALIDAR] · Preparo: só a guia ilegível (ID 311661383) [VALIDAR] · Procuração não identificada com texto [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Reconsideração de liminar",
+     "urgSit": "Apreciada · reconsiderada",
+     "urgData": "2025-04-30"
+    }
+   }
   },
   {
    "sessao": "",
