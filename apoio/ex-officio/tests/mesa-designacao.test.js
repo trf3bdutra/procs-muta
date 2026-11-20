@@ -96,3 +96,12 @@ test('Cartão da sessão: um Salvar alterações para marcos e julgadores e Publ
   for(const x of ['function salvarSessao(ss)','data-cwe="pub-alt"','class="cwe-svg"',"['Publicação', 'conferência final e Ex Officio']",'est.jPend[ss.id] = j;'])assert.ok(c.includes(x),x);
   assert.ok(c.includes('.cwe-ses button{border:1px solid transparent!important;'),'sessões não selecionadas sem borda');
 });
+test('Office: prévia da minuta gera a proclamação com o resultado do prontuário e os julgadores da sessão',()=>{
+  const s=read('apoio/ex-officio/index.html');
+  const pick=(a,b)=>s.slice(s.indexOf(a),s.indexOf(b,s.indexOf(a)));
+  const ctx={esc:x=>String(x),S:{doc:{julgadores:{composicao:[{id:'r',nome:'Luis Carlos Hiroki Muta',cargo:'Desembargador Federal',papel:'relator'},{id:'j',nome:'Jean Marcos',cargo:'Desembargador Federal',papel:'vogal'},{id:'n',nome:'Ney Gustavo Paes de Andrade',cargo:'Juiz Federal',papel:'vogal (juiz federal convocado)'}],substituicoes:[{sai:'n',entra:{id:'x',nome:'Beltrano Teste',cargo:'Juiz Federal Convocado'},motivo:'impedimento',alcance:'itens',itens:['12']}]}}}};
+  vm.createContext(ctx);vm.runInContext(pick('var DISP_V=','function previaMinuta('),ctx);
+  const t=vm.runInContext('proclamacao({item:"12",ctl:{resJulg:"Desprovido"}},"Apelação").txt',ctx);
+  assert.match(t,/por unanimidade, negou provimento à apelação, nos termos do voto do Desembargador Federal CARLOS MUTA \(Relator\)\. Votaram o Desembargador Federal JEAN MARCOS e o Juiz Federal Convocado BELTRANO TESTE,/);
+  assert.ok(s.includes("['Relatório','Ementa','Dispositivo','Proclamação','Tudo']")&&s.includes('data-pm-pr'));
+});
