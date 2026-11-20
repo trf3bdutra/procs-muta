@@ -1810,6 +1810,10 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <div class="cmt-ld-b"><i></i></div>
     <button type="button" class="cmt-ld-go" id="cmt-ld-go" hidden>Entrar no painel</button>
   </div>
+  <aside class="cmt-asl" id="cmt-asl" aria-label="Para assinar">
+    <button type="button" class="cmt-asl-k" id="cmt-asl-k" aria-expanded="true" aria-controls="cmt-asl-b" title="Recolher o painel de assinatura"><span class="cmt-asl-t">Para <em>assinar.</em></span><b class="cmt-asl-n" id="cmt-asl-n">0</b><svg class="cmt-asl-ch" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <div class="cmt-asl-b" id="cmt-asl-b"></div>
+  </aside>
   <div class="cmt-wrap" id="cmt-wrap" hidden>
 
     <div class="cmt-hd2">
@@ -1819,6 +1823,8 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-ut">
         <button type="button" class="hb hbx nx-tx" id="cmt-b-not" data-cpn="not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="cmt-n-not" hidden></i></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-dil" data-cpn="dil" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="cmt-n-dil" hidden></i></button>
+        <button type="button" class="hb hbx nx-tx" id="cmt-b-urg" data-cdt="u" title="Urgências" aria-label="Urgências" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg><span>Urgências</span><i class="bdg" id="cmt-n-urg-t" hidden></i></button>
+        <button type="button" class="hb hbx nx-tx" id="cmt-b-dvt" data-cdt="d" title="Dúvidas e pedidos" aria-label="Dúvidas e pedidos" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg><span>Dúvidas</span><i class="bdg" id="cmt-n-dv-t" hidden></i></button>
         <button type="button" class="hb ic" id="cmt-atu2" title="Atualizar" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button>
       </div>
     </div>
@@ -4462,6 +4468,19 @@ window.addEventListener('resize',cmtTopo);
 
 /* CMT mobile: rodapé único e painéis com conteúdo e ações originais. */
 function cmtMobileMode(){return window.innerWidth<=780;}
+/* Para assinar: no computador, painel fixo à esquerda (recolhível); no celular, volta à gaveta */
+function cmtAslMin(m){document.body.classList.toggle('cmt-asl-min',!!m);try{localStorage.setItem('cmt_asl_min',m?'1':'0');}catch(e){}
+  var k=document.getElementById('cmt-asl-k');if(k){k.setAttribute('aria-expanded',String(!m));k.title=m?'Abrir o painel de assinatura':'Recolher o painel de assinatura';}}
+function cmtAslPos(){var s=document.getElementById('cmt-ass'),b=document.getElementById('cmt-asl-b'),g=document.getElementById('cmt-grid'),w=document.getElementById('cmt-wrap');
+  if(!s||!b||!g)return;var desk=!cmtMobileMode();
+  document.body.classList.toggle('cmt-asl-on',desk&&!!w&&!w.hidden);
+  if(desk&&s.parentNode!==b)b.appendChild(s);
+  if(!desk&&s.parentNode!==g)g.insertBefore(s,g.firstChild);}
+(function(){try{if(localStorage.getItem('cmt_asl_min')==='1')document.body.classList.add('cmt-asl-min');}catch(e){}
+  var w=document.getElementById('cmt-wrap');if(w&&window.MutationObserver)new MutationObserver(cmtAslPos).observe(w,{attributes:true,attributeFilter:['hidden']});
+  window.addEventListener('resize',function(){clearTimeout(cmtAslPos._t);cmtAslPos._t=setTimeout(cmtAslPos,120);});
+  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#cmt-asl-k'))cmtAslMin(!document.body.classList.contains('cmt-asl-min'));});
+  cmtAslPos();if(document.body.classList.contains('cmt-asl-min'))cmtAslMin(true);})();
 function cmtMobileSync(){
  var j=CMT.dados||{},a=j.assinar||{},c={
  a:(a.assinatura||[]).length,u:(j.urgencias||[]).length,
@@ -4522,12 +4541,14 @@ function cmtVisto(){try{return JSON.parse(localStorage.getItem('cmt_visto')||'{}
 function cmtRail(na,nu,nd,hj){
 var v=cmtVisto(),d=function(k,n){var a=Number(v[k]);return (isFinite(a)&&n>a)?(n-a):0;};
 var it=[['a','ok',na,'assinar',d('a',na)],['u','al'+(hj?' hj':''),nu,'urgências',d('u',nu)],['d','inf',nd,'dúvidas',d('d',nd)]];
+var bu=$('#cmt-n-urg-t'),bd=$('#cmt-n-dv-t'),an=$('#cmt-asl-n');
+if(bu){bu.textContent=nu;bu.hidden=!nu;}if(bd){bd.textContent=nd;bd.hidden=!nd;}if(an)an.textContent=na;
 var el=$('#cmt-rail');
 if(el)el.innerHTML=it.map(function(x){return '<button type="button" data-cdt="'+x[0]+'" class="'+x[1]+(x[4]?' nov':'')+'" title="'+x[2]+' '+x[3]+'"><i>'+x[2]+'</i><small>'+x[3]+'</small>'+(x[4]?'<s>+'+x[4]+'</s>':'')+'</button>';}).join('');
 var tb=$('#cmt-dr-tb'),at=cmtAba();
 var jd=CMT.dados||{};
 var mais=[['m','',null,'gabinete',0]];
-if(tb)tb.innerHTML=it.concat(mais).map(function(x){
+if(tb)tb.innerHTML=it.concat(mais).filter(function(x){return x[0]!=='a'||cmtMobileMode();}).map(function(x){
   return '<button type="button" role="tab" data-cdt="'+x[0]+'" class="'+x[1]+'" aria-selected="'+(at===x[0])+'">'+x[3]+(x[2]==null?'':'<i>'+x[2]+'</i>')+(x[4]?'<s>+'+x[4]+'</s>':'')+'</button>';}).join('');
 var h=$('#cmt-dr-h');if(h)h.classList.toggle('nov',it.some(function(x){return x[4];}));}
 function cmtAba(a){var g=$('#cmt-dr');if(!g)return 'a';
@@ -4535,6 +4556,8 @@ if(a){g.setAttribute('data-t',a);var tb=$('#cmt-dr-tb');if(tb)[].forEach.call(tb
   var b2=$('#cmt-dr-b');if(b2)b2.scrollTop=0;}
 return g.getAttribute('data-t')||'a';}
 function cmtGaveta(ab,aba){
+if(ab&&aba==='a'&&!cmtMobileMode()){cmtAslMin(false);return;}
+if(ab&&!aba&&!cmtMobileMode()&&cmtAba()==='a')aba='u';
 cmtTopo();if(aba)cmtAba(aba);
 var g=$('#cmt-dr');if(!g)return;
 if(ab&&cmtMobileMode()){
@@ -4543,6 +4566,7 @@ if(ab&&cmtMobileMode()){
  document.body.classList.remove('cmt-pn-on','cmt-search-on');
 }
 g.classList.toggle('on',ab);document.body.classList.toggle('cmt-dr-on',ab);
+[['#cmt-b-urg','u'],['#cmt-b-dvt','d']].forEach(function(p){var b=$(p[0]);if(b)b.setAttribute('aria-expanded',String(!!ab&&cmtAba()===p[1]));});
 var hk=$('#cmt-dr-k');if(hk)hk.setAttribute('aria-expanded',String(!!ab));
 if(ab){var j=CMT.dados||{},as=j.assinar||{};
   try{localStorage.setItem('cmt_visto',JSON.stringify({a:(as.assinatura||[]).length,u:(j.urgencias||[]).length,d:(j.duvidas||[]).length}));}catch(e){}
@@ -4554,6 +4578,7 @@ cmtMobileSync();}
 document.addEventListener('click',function(e){
 var ab=e.target.closest('[data-cdt]');
 if(ab){var k=ab.getAttribute('data-cdt');
+  if(ab.closest('.cmt-ut')&&$('#cmt-dr').classList.contains('on')&&cmtAba()===k){cmtGaveta(false);return;}
   if($('#cmt-dr').classList.contains('on')&&ab.closest('#cmt-dr-tb')){cmtAba(k);return;}
   cmtGaveta(true,k);return;}
 if(e.target.closest('#cmt-dr-h')&&!e.target.closest('#cmt-bbq-b')){cmtGaveta(!$('#cmt-dr').classList.contains('on'));return;}
@@ -8489,6 +8514,53 @@ body.cmt-dr-on #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{flex:1 1 320px}
  #v-cmt .cmt-ses-c b{font-size:17px}
  #v-cmt .cmt-ses-c::after{right:11px}
 }
+/* topo: Urgências e Dúvidas ao lado de Diligências; o trilho lateral sai no computador */
+@media (min-width:781px){
+ #v-cmt #cmt-dr-h{display:none!important}
+ #v-cmt .cmt-wrap,body.cmt-dr-on #v-cmt .cmt-wrap{padding-right:0!important}
+ #v-cmt .cmt-ut .hb[aria-expanded="true"]{color:var(--ei);box-shadow:inset 0 -2px 0 var(--eg)}
+}
+@media (max-width:780px){#v-cmt #cmt-b-urg,#v-cmt #cmt-b-dvt,#v-cmt .cmt-asl{display:none!important}}
+/* Para assinar: painel fixo à esquerda, recolhível */
+#v-cmt .cmt-asl{display:none}
+body.cmt-asl-on #v-cmt .cmt-asl{display:flex;flex-direction:column;position:fixed;z-index:26;left:0;top:var(--cmt-top,0px);bottom:0;width:340px;
+  background:var(--ew);border-right:1px solid var(--el);box-shadow:6px 0 22px rgba(32,59,57,.06);transition:width .2s ease}
+body.cmt-asl-on #v-cmt .cmt-asl-k{display:flex;align-items:center;gap:10px;width:100%;padding:14px 14px 12px 18px;border:0;border-bottom:1px solid var(--el);
+  background:var(--ep);color:var(--ei);cursor:pointer;text-align:left;font:inherit}
+body.cmt-asl-on #v-cmt .cmt-asl-t{font-size:15px;font-weight:650;white-space:nowrap}
+body.cmt-asl-on #v-cmt .cmt-asl-t em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+body.cmt-asl-on #v-cmt .cmt-asl-n{min-width:20px;padding:1px 6px;background:var(--eg);color:var(--ew);font:400 11px/1.4 var(--emono);text-align:center}
+body.cmt-asl-on #v-cmt .cmt-asl-ch{margin-left:auto;color:var(--em);transition:transform .2s ease}
+body.cmt-asl-on #v-cmt .cmt-asl-k:hover .cmt-asl-ch{color:var(--eg)}
+body.cmt-asl-on #v-cmt .cmt-asl-k:focus-visible{outline:2px solid var(--eg);outline-offset:-2px}
+body.cmt-asl-on #v-cmt .cmt-asl-b{flex:1 1 auto;min-height:0;overflow:auto;padding:12px 14px 18px}
+body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass{display:flex;flex-direction:column;height:auto;min-height:0;min-width:0;margin:0;padding:0;border:0;background:none}
+body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2 .nn,body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2>em{display:none}
+body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2{font-size:0;margin:0 0 10px;gap:8px}
+body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2>*{font-size:11px}
+body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass button{max-width:100%}
+/* recolhido: só a lombada, com o número */
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl{width:46px}
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-b{display:none}
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{flex-direction:column;justify-content:flex-start;gap:12px;height:100%;padding:16px 0;border-bottom:0}
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-t{writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px}
+body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-ch{margin:0;order:-1;transform:rotate(180deg)}
+/* o conteúdo cede espaço ao painel: a coluna central desliza para a direita e, se faltar largura, encolhe */
+@media (min-width:781px){
+ body.cmt-asl-on #v-cmt{transition:margin-left .2s ease,max-width .2s ease}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt{margin-left:max(356px,calc((100% - 1180px) / 2));margin-right:auto;max-width:min(1180px,calc(100% - 372px))}
+ body.cmt-asl-on.cmt-asl-min #v-cmt{margin-left:max(62px,calc((100% - 1180px) / 2));margin-right:auto;max-width:min(1180px,calc(100% - 78px))}
+}
+/* telas até 1519 px com o painel aberto: etapas só com ícones (o rótulo fica na dica) para a pauta caber sem rolar */
+@media (min-width:781px) and (max-width:1519px){
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-tb .cmt-pa b{display:none}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-tb th:nth-child(6),body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-tb td:nth-child(6){width:132px}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-tb{min-width:0}
+}
+@media (prefers-reduced-motion:reduce){body.cmt-asl-on #v-cmt .cmt-asl,body.cmt-asl-on #v-cmt,body.cmt-asl-on #v-cmt .cmt-asl-ch{transition:none}}
+/* o buscador rápido vai para o canto direito, longe do painel de assinatura */
+@media (min-width:781px){body.cmt-asl-on #v-cmt .cmt-fastnav{left:auto;right:22px}}
+@media print{#v-cmt .cmt-asl{display:none!important}}
 </style>
 </body>
 </html>
