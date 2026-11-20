@@ -12659,13 +12659,13 @@
    "exequente": "RALPHO FONSECA RIBEIRO FILHO",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Crédito Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal · crédito rural cedido à União (MP 2.196-3/2001) · ausência do instrumento de cessão e do processo administrativo · exceção de pré-executividade rejeitada",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto ou decisão monocrática, conforme precedente vinculante) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Ralpho Fonseca Ribeiro Filho, José Paulo da Silva, Antônio Joaquim Ribeiro Neto, Claudinei José da Silva e Tomás Pupo Fonseca Ribeiro contra a decisão (ID 564141570 da origem) que rejeitou a exceção de pré-executividade na execução fiscal 0000749-87.2007.4.03.6002, fundada em crédito rural cedido pelo Banco do Brasil à União. Os agravantes sustentam a ilegitimidade ativa da União por falta do instrumento de cessão, a nulidade por ausência do processo administrativo e a desnecessidade de dilação probatória.",
+   "peculiaridades": "Sem pedido de urgência. Comprovante de preparo por Pix bancário, aceito no despacho do Relator, sem comprovante STN [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -12693,7 +12693,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "SÓ \"aguardando pagamento\" (não aceito) · \"Aguardando pagamento\": ID 367810996 · comprovante bancário: ID 367810997 · valor R$ 64,26 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 0000749-87.2007.4.03.6002 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 0000749-87.2007.4.03.6002 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento",
+    "materia": "Execução fiscal de crédito rural cedido à União: instrumento de cessão; processo administrativo; exceção de pré-executividade",
+    "origem": "Vara Federal de Dourados · 0000749-87.2007.4.03.6002 [VALIDAR vara]",
+    "decisao_agravada": "ID 564141570 dos autos de origem",
+    "recurso": "ID 367272800 · 17/04/2026",
+    "preparo": "Pix bancário aceito em despacho; sem comprovante STN [VALIDAR]",
+    "monocratica": "Possível, se houver precedente repetitivo aplicável [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -12714,6 +12722,90 @@
     "ultima_informacao": "Certidão de Dívida Ativa - CDA · ID 373361844 · 14/05/2026",
     "ultima_movimentacao": "30/06/2026 15:31 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · crédito rural cedido à União (MP 2.196-3/2001) · ausência do instrumento de cessão e do processo administrativo · exceção de pré-executividade rejeitada",
+   "especificidades": "Sem pedido de urgência (despacho ID 368776541) · Preparo: despacho do Relator deu o preparo por recolhido (ID 367810997), mas o comprovante é de Pix bancário, sem comprovante STN, e a guia indica código 20466 [VALIDAR] · Cinco agravantes (Ralpho Fonseca Ribeiro Filho e outros) · Portaria de feriados juntada com o agravo (ID 367272801) para a tempestividade · Execução fiscal 0000749-87.2007.4.03.6002 · Possível precedente repetitivo do STJ sobre a execução fiscal de créditos rurais cedidos (MP 2.196-3/2001) [VALIDAR tema]",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Os agravantes, executados pela União por crédito rural cedido pelo Banco do Brasil, tiveram rejeitada a exceção de pré-executividade em que alegavam a falta do instrumento de cessão e do processo administrativo.",
+    "inicial": "Execução fiscal 0000749-87.2007.4.03.6002 da União (Fazenda Nacional) contra os agravantes, com base em CDA de crédito rural cedido (MP 2.196-3/2001)",
+    "decisao_recorrida": "Decisão ID 564141570 dos autos de origem: rejeitou a exceção de pré-executividade (cessão decorrente de lei especial, presunção de certeza e liquidez da CDA, suficiência da indicação do processo administrativo e necessidade de dilação probatória) [VALIDAR data]",
+    "recurso": "Agravo ID 367272800 (17/04/2026): (1) ilegitimidade ativa da União pela falta do instrumento de cessão; (2) nulidade pela ausência do processo administrativo e cerceamento de defesa; e (3) fato incontroverso, sem necessidade de dilação probatória.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 373361841 (14/05/2026): validade da CDA e ausência de prejuízo à defesa; junta extrato da inscrição (ID 373361844).",
+    "parecer": "Não consta",
+    "outros": "Petição e comprovantes de custas IDs 367810993, 367810996 e 367810997 (20/04/2026). Decisão de redistribuição ID 368423004 (23/04/2026). Despacho do Relator ID 368776541 (30/04/2026): preparo recolhido, sem pedido de urgência, intimação para contraminuta.",
+    "representacao": "Agravantes: advogados constituídos. Agravada: Procuradoria-Geral da Fazenda Nacional.",
+    "preparo": "Pix de R$ 64,26 ao TRF-3 (ID 367810997), dado por recolhido no despacho ID 368776541; sem comprovante STN [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · crédito rural cedido à União (MP 2.196-3/2001) · ausência do instrumento de cessão e do processo administrativo · exceção de pré-executividade rejeitada",
+     "sintese": "Os agravantes, executados pela União por crédito rural cedido pelo Banco do Brasil, tiveram rejeitada a exceção de pré-executividade em que alegavam a falta do instrumento de cessão e do processo administrativo.",
+     "questoes": "1) Legitimidade da União para executar crédito rural cedido sem a juntada do instrumento de cessão; 2) nulidade da execução pela ausência do processo administrativo; 3) cabimento da exceção de pré-executividade.",
+     "rel": {
+      "razoes": "Agravo (ID 367272800): (1) ilegitimidade ativa; (2) ausência do processo administrativo; e (3) desnecessidade de dilação probatória.",
+      "contrarrazoes": "União (ID 373361841): validade da CDA e ausência de prejuízo à defesa."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "564141570",
+      "juizo": "[VALIDAR: Vara Federal de Dourados]",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": "564141570"
+     },
+     "adm": {
+      "prot": "2026-04-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Ralpho Fonseca Ribeiro Filho e outros",
+       "tipo": "Agravo de instrumento",
+       "id": "367272800",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "367272800",
+       "data": "2026-04-17"
+      },
+      {
+       "desc": "Comprovante de custas (Pix)",
+       "id": "367810997",
+       "data": "2026-04-20"
+      },
+      {
+       "desc": "Despacho do Relator",
+       "id": "368776541",
+       "data": "2026-04-30"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "373361841",
+       "data": "2026-05-14"
+      }
+     ],
+     "pendencias": "Conferir a data de intimação da decisão agravada; conferir o recolhimento pelo comprovante STN; verificar precedente repetitivo do STJ",
+     "especificidades": "Sem pedido de urgência (despacho ID 368776541) · Preparo: despacho do Relator deu o preparo por recolhido (ID 367810997), mas o comprovante é de Pix bancário, sem comprovante STN, e a guia indica código 20466 [VALIDAR] · Cinco agravantes (Ralpho Fonseca Ribeiro Filho e outros) · Portaria de feriados juntada com o agravo (ID 367272801) para a tempestividade · Execução fiscal 0000749-87.2007.4.03.6002 · Possível precedente repetitivo do STJ sobre a execução fiscal de créditos rurais cedidos (MP 2.196-3/2001) [VALIDAR tema]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
    }
   },
   {
