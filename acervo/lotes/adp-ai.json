@@ -36,7 +36,64 @@
    "rotulo": "Pendência [VALIDAR]"
   }
  ],
- "grupos": [],
+ "grupos": [
+  {
+   "id": "g1",
+   "rotulo": "Alienação fiduciária: consolidação e leilão",
+   "cor": "#2f6db5",
+   "resultado": "A definir (intimação pessoal, purgação da mora, leilão)",
+   "modelo": ""
+  },
+  {
+   "id": "g2",
+   "rotulo": "Ambiental: IBAMA e ICMBio",
+   "cor": "#1f8a70",
+   "resultado": "A definir",
+   "modelo": ""
+  },
+  {
+   "id": "g3",
+   "rotulo": "Execuções da OAB",
+   "cor": "#c07a12",
+   "resultado": "Linha do gabinete para execução da OAB (M00339) [VALIDAR]",
+   "modelo": "M00339 (banco de monocráticas) [VALIDAR]"
+  },
+  {
+   "id": "g4",
+   "rotulo": "Execução fiscal: exceção de pré-executividade",
+   "cor": "#7a5cc2",
+   "resultado": "A definir",
+   "modelo": ""
+  },
+  {
+   "id": "g5",
+   "rotulo": "Cumprimento de sentença: cálculos e honorários",
+   "cor": "#b8562f",
+   "resultado": "A definir",
+   "modelo": ""
+  },
+  {
+   "id": "g6",
+   "rotulo": "Previdenciário: tutela, perícia e tempo especial",
+   "cor": "#3a4a5c",
+   "resultado": "A definir",
+   "modelo": ""
+  },
+  {
+   "id": "g7",
+   "rotulo": "Tributário: mérito e certidão",
+   "cor": "#8a5a9e",
+   "resultado": "A definir",
+   "modelo": ""
+  },
+  {
+   "id": "g8",
+   "rotulo": "28,86%: fluxo do lote 28,86%",
+   "cor": "#4f7f3a",
+   "resultado": "Modelos vigentes do lote 28,86%",
+   "modelo": "Lote 28,86%"
+  }
+ ],
  "grupo_outros": {
   "rotulo": "A triar",
   "cor": "#9aa0a8"
@@ -52,7 +109,7 @@
    "exequente": "LINK PARTS INDUSTRIA, COMERCIO E SERVICOS DE PECAS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
-   "grupo": null,
+   "grupo": "g4",
    "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada",
    "resultado": "Ato a proferir: decisão sobre o efeito suspensivo (artigo 1.019, I, do CPC) e intimação da agravada para contraminuta (artigo 1.019, II)",
    "modelo": "",
@@ -121,7 +178,8 @@
     "memoriais": "Não consta",
     "representacao": "Não há procuração própria nos autos do agravo; o advogado Rodrigo Schmidt Casemiro (OAB/MS 13.400) assina as petições. Conferir procuração na cópia dos autos de origem (ID 391343256) [VALIDAR]",
     "preparo": "Pago em 10/08/2026 por Pix (ID 391362109). Após o despacho ID 391762871, juntado o comprovante PagTesouro (ID 392776026): GRU 2026/090029/0036361519, paga em 10/08/2026, UG 090029 (TRF-3), código 18720-8 (custas de 2ª instância), referência do próprio agravo. Preparo comprovado; valor de R$ 64,26 informado pela agravante."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -132,7 +190,7 @@
    "exequente": "VS EMPREENDIMENTOS E PARTICIPACOES LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
-   "grupo": null,
+   "grupo": "g7",
    "tipo_caso": "AI · Tributário · responsabilidade por cisão parcial · extinção parcial sem mérito e declínio de competência",
    "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
@@ -215,7 +273,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogados Michelle Lacsko de Araujo (OAB/SP 302.891) e Munder Hassan Gebara (OAB/MS 5.485) assinam as petições; procuração não identificada nos documentos com texto [VALIDAR]",
     "preparo": "Recolhido de início à Justiça Federal de primeiro grau (GRU 2026/090015/0016090288, paga em 20/04/2026, UG 090015, código 18710-0; ID 371549741). Após o despacho ID 377316374 (29/05/2026), recolhido ao TRF-3 em 02/06/2026: R$ 64,26 por Pix (ID 378271029), PagTesouro com UG 090029 e código 18720-8 (ID 378271027) e comprovante do portal de custas (ID 378271030). Regularizado no prazo de 5 dias."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -226,7 +285,7 @@
    "exequente": "CORREA DA COSTA EVENTOS RURAIS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
-   "grupo": null,
+   "grupo": "g7",
    "tipo_caso": "AI · MS tributário · lucro presumido: majoração de 10% dos percentuais de presunção (IRPJ e CSLL) · liminar indeferida",
    "resultado": "Ato a proferir: decisão sobre a tutela recursal (artigo 1.019, I, do CPC) e intimação da agravada, depois de conferido o preparo complementar",
    "modelo": "",
@@ -302,7 +361,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogada Telma Valéria Curiel Marcon (OAB/MS 6.355) assina as petições; procuração não identificada nos autos do agravo [VALIDAR]",
     "preparo": "Recolhido de início R$ 10,64, valor insuficiente (despacho ID 391747692, 14/08/2026, Tabela V da Resolução PRES 138/2017). Complementação em 28/08/2026: Pix de R$ 64,26 ao TRF-3 (ID 394168452), com guia (ID 394168450)."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -313,7 +373,7 @@
    "exequente": "RADIO CLUBE",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
-   "grupo": null,
+   "grupo": "g4",
    "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada · prescrição intercorrente",
    "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi deferido em 12/10/2024 e há contraminuta. Antes, conferir na origem se a execução já foi extinta (possível perda de objeto)",
    "modelo": "",
@@ -396,7 +456,8 @@
     "memoriais": "Não consta",
     "representacao": "Procuração sem reserva de poderes (ID 291918589, extraída dos autos de origem, assinada em 03/12/2021) e substabelecimento (ID 291918590, sem texto); advogados Leandro Rodrigues de Melo (OAB/MS 15.577) e Leonardo Ros Ortiz (OAB/MS 15.695)",
     "preparo": "Guia (ID 292077246) e comprovante (ID 292077251, sem texto extraível) juntados em 11/06/2024."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -407,7 +468,7 @@
    "exequente": "MUNICIPIO DE CAMPO GRANDE",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
-   "grupo": null,
+   "grupo": "g7",
    "tipo_caso": "AI · Tributário · certidão de regularidade fiscal (CPEN) · débitos alcançados por coisa julgada (FUNSERV)",
    "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi deferida em 03/12/2025 e há contraminuta",
    "modelo": "",
@@ -484,7 +545,8 @@
     "memoriais": "Não consta",
     "representacao": "Procuradores municipais (representação legal; dispensa procuração)",
     "preparo": "Isento (Município)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -495,7 +557,7 @@
    "exequente": "COSTA VAZ COMERCIO DE ALIMENTOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
-   "grupo": null,
+   "grupo": "g4",
    "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada (PIS e COFINS) · preparo em discussão",
    "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferir a regularidade do preparo em dobro; a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
@@ -574,7 +636,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogados Gabriel Barbosa Corrêa (OAB/MS 28.299) e Hugo Cagnin Conforte (OAB/MS 27.601) assinam as petições; procuração não identificada com texto [VALIDAR]",
     "preparo": "Sem comprovação inicial: despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC). Guia Pix ID 372624804 \"aguardando realização do pagamento\"; despacho ID 376122107 mandou comprovar pelo Tesouro; comprovante juntado em 10/06/2026 (ID 379489258), sem texto extraível."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -585,7 +648,7 @@
    "exequente": "INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
    "executado": "EDY SATORU KIMURA",
    "assunto": "Abono de Permanência",
-   "grupo": null,
+   "grupo": "g8",
    "tipo_caso": "AI · 28,86% · cumprimento individual da ACP 0005019-15.1997 · ilegitimidade ativa (servidor fora de MS; artigo 16 da LACP)",
    "resultado": "Ato a proferir: julgamento do agravo do INCRA (voto) pelos modelos vigentes de 28,86%; efeito suspensivo indeferido e há contrarrazões. Mover para o fluxo do lote 28,86%",
    "modelo": "",
@@ -667,7 +730,8 @@
     "memoriais": "Não consta",
     "representacao": "INCRA representado pela Procuradoria-Geral Federal (representação legal)",
     "preparo": "Isento (autarquia federal)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -678,7 +742,7 @@
    "exequente": "VANESSA LOPES BRANDAO PINTO",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Abono de Permanência",
-   "grupo": null,
+   "grupo": "g5",
    "tipo_caso": "AI · Cumprimento de sentença contra o INSS · herdeiros · valor incontroverso e saldo remanescente",
    "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
@@ -760,7 +824,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogados Marco Antônio Girão d’Ávila (OAB/MS 7.456) e Ricardo Girão d’Ávila (OAB/MS 8.213) assinam as petições; procuração não identificada com texto [VALIDAR]",
     "preparo": "Recolhido pelo portal de custas (ID 359070470; código 20466, contribuinte Vanessa Lopes Brandão Pinto), reconhecido na decisão ID 367018477."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -771,7 +836,7 @@
    "exequente": "ANTONIO CESAR DE CAMPOS",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
-   "grupo": null,
+   "grupo": "g5",
    "tipo_caso": "AI · Cumprimento de sentença contra o INSS · honorários na impugnação acolhida",
    "resultado": "Ato a proferir: julgamento do agravo (voto); o pedido de tutela recursal não foi examinado por falta de fundamentação e há contrarrazões",
    "modelo": "",
@@ -848,7 +913,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogado Marcos Piovezan Fernandes (OAB/MG 97.622; cadastro SP458673-A); procuração não identificada com texto [VALIDAR]",
     "preparo": "Após o despacho ID 376460865 (26/05/2026), pago R$ 64,26 por GRU judicial em 27/05/2026 (comprovante ID 376774420; guia ID 376774421)."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -859,7 +925,7 @@
    "exequente": "MELO & ARAUJO SOCIEDADE DE ADVOGADOS",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
-   "grupo": null,
+   "grupo": "g5",
    "tipo_caso": "AI · Cumprimento de sentença contra a União · destaque (reserva) de honorários contratuais indeferido",
    "resultado": "Ato a proferir: julgamento do agravo (voto); sem pedido de efeito suspensivo; a União foi intimada e só manifestou ciência",
    "modelo": "",
@@ -927,7 +993,8 @@
     "memoriais": "Não consta",
     "representacao": "Sociedade agravante em causa própria, por seus advogados João Paulo dos Santos Melo (OAB/RN 5.291) e José Nicodemos de Araújo Júnior; procuração da sociedade não identificada com texto [VALIDAR]",
     "preparo": "GRU judicial de R$ 64,26 paga em 23/07/2024 (comprovante ID 294289633; guia ID 294288480)."
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1021,7 +1088,8 @@
     "memoriais": "Não consta",
     "representacao": "Procuração com reserva de poderes (ID 316863882) outorgada por Izabella da Costa Ribeiro ao advogado Gabriel dos Santos Gomes (OAB/SP 467.149)",
     "preparo": "Não consta recolhimento; juntada declaração de hipossuficiência (ID 316863891); gratuidade não apreciada nos autos do agravo [VALIDAR]"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1032,7 +1100,7 @@
    "exequente": "LOURDES SILVANA PINCER DA SILVA",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Acidente de Trabalho",
-   "grupo": null,
+   "grupo": "g5",
    "tipo_caso": "AI · Cumprimento de sentença previdenciário (competência delegada, Anastácio) · laudo contábil e pedido de nova perícia",
    "resultado": "Ato a proferir: conferir a regularização da representação (procurações de 12/05/2026) e intimar o INSS para contraminuta; depois, julgamento do agravo (voto). Antes, conferir a competência: a ação de origem tratava também de auxílio-doença por acidente de trabalho",
    "modelo": "",
@@ -1107,7 +1175,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogado Jair dos Santos Pelliccioni (OAB/MS 2.391). Procuração exigida pela decisão ID 365154675; juntadas em 12/05/2026 petição com procuração (ID 372825993) e cópias de procurações dos autos do TJMS (ID 372826000). Conferir se outorgadas pela agravante [VALIDAR]",
     "preparo": "Não consta recolhimento nem pedido de gratuidade identificado [VALIDAR]"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1118,7 +1187,7 @@
    "exequente": "ESTADO DE MATO GROSSO DO SUL",
    "executado": "NORIVAL ANTONIO DE OLIVEIRA",
    "assunto": "Acidente de Trabalho - Ressarcimento ao Erário",
-   "grupo": null,
+   "grupo": "g5",
    "tipo_caso": "AI · Cumprimento de sentença · impugnação rejeitada · legitimidade passiva do Estado de MS (JUCEMS devedora)",
    "resultado": "Ato a proferir: julgamento do agravo (voto), depois de certificado o prazo da contraminuta; a tutela recursal foi indeferida em 11/05/2026",
    "modelo": "",
@@ -1191,7 +1260,8 @@
     "memoriais": "Não consta",
     "representacao": "Procuradoria-Geral do Estado (representação legal)",
     "preparo": "Isento (Fazenda Pública)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1202,7 +1272,7 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "JOAO BATISTA BALBINO",
    "assunto": "Adicional de 25%",
-   "grupo": null,
+   "grupo": "g6",
    "tipo_caso": "AI do INSS · benefício por incapacidade implantado antes da perícia judicial (competência delegada)",
    "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 29/04/2026, contraminuta e parecer do MPF (falta de interesse) nos autos",
    "modelo": "",
@@ -1291,7 +1361,8 @@
     "memoriais": "Não consta",
     "representacao": "INSS pela Procuradoria-Geral Federal; agravado pelo advogado Paulo César Vieira de Araújo (OAB/MS 8.627)",
     "preparo": "Isento (autarquia)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1385,7 +1456,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogados Fagner de Oliveira Melo (OAB/MS 21.507) e Everson Mateus Rodrigues da Luz (OAB/MS 22.975); procuração não identificada com texto [VALIDAR]",
     "preparo": "Sem comprovante (certidão ID 333703046); gratuidade não apreciada nos autos do agravo [VALIDAR]"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1396,7 +1468,7 @@
    "exequente": "WILLIAN MAACHAR",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Adimplemento e Extinção",
-   "grupo": null,
+   "grupo": "g5",
    "tipo_caso": "AI · Cumprimento de sentença da CEF · excesso de execução rejeitado · embargos de declaração pendentes",
    "resultado": "Ato a proferir: julgamento do agravo (voto), com exame ou prejudicialidade dos embargos de declaração opostos contra a decisão que negou o efeito suspensivo; efeito suspensivo negado em 18/06/2025 e há contraminuta",
    "modelo": "",
@@ -1478,7 +1550,8 @@
     "memoriais": "Não consta",
     "representacao": "Agravante: advogados Thadeu Striquer (OAB/MS 12.510) e Brunna Yara Maluf Luccas Correia Striquer (OAB/MS 24.922). CEF: procuração pública (ID 331314969) e substabelecimento (ID 331314971) a Diego Roberto Pinheiro Ferreira e outros",
     "preparo": "Dispensado: gratuidade concedida pela decisão ID 327230932"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1489,7 +1562,7 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "IVAN BEZERRA",
    "assunto": "Agente Agressivo - Ruído",
-   "grupo": null,
+   "grupo": "g6",
    "tipo_caso": "AI do INSS · julgamento antecipado parcial de mérito · tempo especial (ruído, ergonomia, agentes químicos)",
    "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 14/07/2026 e há contraminuta",
    "modelo": "",
@@ -1566,7 +1639,8 @@
     "memoriais": "Não consta",
     "representacao": "INSS pela Procuradoria-Geral Federal; agravado pela advogada Fabiane Brito Lemes (OAB/MS 9.180), com substabelecimento com reserva a Sonaly Armando Mendes (ID 391388027)",
     "preparo": "Isento (autarquia)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1577,7 +1651,7 @@
    "exequente": "MARIA APARECIDA CARVALHO IUNES",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
-   "grupo": null,
+   "grupo": "g1",
    "tipo_caso": "AI · Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação · intimação pessoal da codevedora · tutela indeferida",
    "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 14/07/2026 e há contraminuta da CEF",
    "modelo": "",
@@ -1660,7 +1734,8 @@
     "memoriais": "Não consta",
     "representacao": "Agravante: advogados Thiago Arribamar Adorno (OAB/MS 25.774-A) e João Pedro Rocha Araújo (OAB/MS 23.683); procuração ID 371836286 sem texto. CEF: procuração pública (ID 387931319)",
     "preparo": "Recolhido de início à Justiça Federal de primeiro grau; retificado após o despacho ID 384198069 com GRU ao TRF-3 de R$ 64,26 (UG 090029, código 18720-8, ID 385047301)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1671,7 +1746,7 @@
    "exequente": "ADALBERTO JORGE CAMARGO DA SILVA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
-   "grupo": null,
+   "grupo": "g1",
    "tipo_caso": "AI · Alienação fiduciária de imóvel · consolidação · constituição em mora · tutela indeferida",
    "resultado": "Ato a proferir: julgamento do agravo (voto); liminar indeferida em 18/08/2026 e há contrarrazões da CEF",
    "modelo": "",
@@ -1753,7 +1828,8 @@
     "memoriais": "Não consta",
     "representacao": "Agravante: advogada Vanessa Gouveia (OAB/SP 336.694); procuração não identificada com texto [VALIDAR]. CEF: advogados Márcio Sequeira da Silva e Sérgio Machado Cezimbra (OAB/RS)",
     "preparo": "Dispensado: gratuidade concedida na origem (ID 593706673 da origem)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1764,7 +1840,7 @@
    "exequente": "LUCIA HELENA DE ARRUDA MESQUITA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
-   "grupo": null,
+   "grupo": "g1",
    "tipo_caso": "AI · Alienação fiduciária de imóvel · leilão extrajudicial · intimação pessoal · agravo interno pendente",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno contra a decisão liminar (ID 366397187) julgado prejudicado ou em conjunto [VALIDAR]; há contraminuta e resposta ao agravo interno",
    "modelo": "",
@@ -1853,7 +1929,8 @@
     "memoriais": "Não consta",
     "representacao": "Procuração ad judicia et extra com pedido de gratuidade (ID 352376461), outorgada por Lúcia Helena de Arruda ao advogado Marcelo Alves dos Santos (OAB/MS 22.128)",
     "preparo": "Sem comprovante (certidão ID 352461001); pedido de gratuidade na procuração, sem decisão identificada [VALIDAR]"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1864,7 +1941,7 @@
    "exequente": "OSVALDO FIRMINO DE SOUZA",
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
-   "grupo": null,
+   "grupo": "g2",
    "tipo_caso": "AI · Embargos à execução fiscal do IBAMA (multa ambiental) · efeito suspensivo negado aos embargos",
    "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi postergada e não foi apreciada; há contrarrazões do IBAMA e parecer do MPF (falta de interesse)",
    "modelo": "",
@@ -1944,7 +2021,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogados Gustavo Passarelli da Silva (OAB/MS 7.602) e Cláudio de Rosa Guimarães (OAB/MS 7.620); procuração não identificada com texto [VALIDAR]",
     "preparo": "Recolhido em 09/04/2026 (ID 365385112, comprovante com texto corrompido), reconhecido no despacho ID 366540367"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -1955,7 +2033,7 @@
    "exequente": "REPRAM - RECICLAGEM E PRESERVACAO AMBIENTAL LTDA",
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
-   "grupo": null,
+   "grupo": "g2",
    "tipo_caso": "AI · Execução fiscal do IBAMA · gratuidade da justiça para massa falida indeferida",
    "resultado": "Ato a proferir: julgamento do agravo (voto ou monocrática) sobre a gratuidade da massa falida; sem pedido de tutela e há contrarrazões do IBAMA",
    "modelo": "",
@@ -2028,7 +2106,8 @@
     "memoriais": "Não consta",
     "representacao": "Massa falida representada pela administradora judicial Cury Administradora Judicial (advogado José Eduardo Chemin Cury, OAB/MS 9.560); termo de nomeação não identificado [VALIDAR]",
     "preparo": "Não recolhido; dispensado enquanto se discute a própria gratuidade (artigo 101, § 1º, do CPC) [VALIDAR]"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -2039,7 +2118,7 @@
    "exequente": "SAMUEL PELOI JUNIOR",
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
-   "grupo": null,
+   "grupo": "g2",
    "tipo_caso": "AI · Ambiental · embargo do IBAMA sobre imóvel rural · proprietário não intimado no processo administrativo · tutela concedida em reconsideração",
    "resultado": "Ato a proferir: julgamento do agravo (voto) ou prejudicialidade; tutela recursal concedida em 30/04/2025 em reconsideração e há contraminuta do IBAMA. Conferir antes se a ação de origem foi sentenciada",
    "modelo": "",
@@ -2127,7 +2206,8 @@
     "memoriais": "Não consta",
     "representacao": "Advogados Luiz Augusto Pinheiro de Lacerda (OAB/MS 9.498) e Virgílio Ferreira de Pinho Neto (OAB/MS 15.422); procuração não identificada com texto [VALIDAR]",
     "preparo": "Petição de juntada das custas de 2º grau (ID 311661382); o arquivo de custas (ID 311661383) não tem conteúdo legível [VALIDAR]"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -2138,7 +2218,7 @@
    "exequente": "INSTITUTO CHICO MENDES DE CONSERVAÇÃO DA BIODIVERSIDADE",
    "executado": "ADEVANILDO DOMINGOS DA SILVA",
    "assunto": "Ambiental",
-   "grupo": null,
+   "grupo": "g2",
    "tipo_caso": "AI do ICMBio · cumprimento de sentença de ACP ambiental (Parque Nacional de Ilha Grande) · obrigação imposta à autarquia",
    "resultado": "Ato a proferir: certificar o prazo da contraminuta do executado e abrir vista ao MPF (autor da ACP); depois, julgamento do agravo (voto). Tutela recursal indeferida em 09/06/2026",
    "modelo": "",
@@ -2211,7 +2291,8 @@
     "memoriais": "Não consta",
     "representacao": "ICMBio pela Procuradoria-Geral Federal (representação legal)",
     "preparo": "Isento (autarquia)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -2222,7 +2303,7 @@
    "exequente": "ORDEM DOS ADVOGADOS DO BRASIL SECAO MATO GROSSO DO SUL",
    "executado": "POLYANA ABDALLA TAVARES",
    "assunto": "Anuidades OAB",
-   "grupo": null,
+   "grupo": "g3",
    "tipo_caso": "AI da OAB/MS · execução de título extrajudicial (anuidades) · suspensão da execução",
    "resultado": "Ato a proferir: conferir o preparo (sem comprovante); se regular ou regularizado, julgamento do agravo, possivelmente monocrático pela linha do gabinete para execuções da OAB [VALIDAR]",
    "modelo": "",
@@ -2297,7 +2378,8 @@
     "memoriais": "Não consta",
     "representacao": "OAB/MS pelo advogado Marcelo Nogueira da Silva (OAB/MS 13.300), do departamento de execução; procuração não identificada [VALIDAR]",
     "preparo": "Sem comprovante: certidão ID 340110104; documento de custas ID 340124368 sem conteúdo"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -2308,7 +2390,7 @@
    "exequente": "ANDREA SALLUM CONGRO",
    "executado": "ORDEM DOS ADVOGADOS DO BRASIL SECAO MATO GROSSO DO SUL",
    "assunto": "Anuidades OAB",
-   "grupo": null,
+   "grupo": "g3",
    "tipo_caso": "AI de advogada × OAB/MS · embargos à execução de anuidades · valor mínimo do artigo 8º da Lei 12.514/2011",
    "resultado": "Ato a proferir: certificar o prazo da contraminuta e julgar o agravo; provável monocrática pela linha do gabinete para execuções da OAB (aplicabilidade do artigo 8º da Lei 12.514/2011 à OAB) [VALIDAR]",
    "modelo": "",
@@ -2376,7 +2458,8 @@
     "memoriais": "Não consta",
     "representacao": "Agravante advoga em causa própria (OAB/MS 10.165)",
     "preparo": "Gratuidade deferida pelo despacho ID 344716055, após determinação de recolhimento em dobro (ID 342572883)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -2387,7 +2470,7 @@
    "exequente": "ORDEM DOS ADVOGADOS DO BRASIL SECAO MATO GROSSO DO SUL",
    "executado": "ADRIANA FORTALEZA DO NASCIMENTO FERNANDES",
    "assunto": "Anuidades OAB",
-   "grupo": null,
+   "grupo": "g3",
    "tipo_caso": "AI da OAB/MS · execução de título extrajudicial (anuidades) · decisão contrária ao prosseguimento",
    "resultado": "Ato a proferir: conferir o preparo (sem comprovante) e a contraminuta; depois, julgamento do agravo, possivelmente monocrático pela linha do gabinete para execuções da OAB [VALIDAR]",
    "modelo": "",
@@ -2462,7 +2545,8 @@
     "memoriais": "Não consta",
     "representacao": "OAB/MS pelo advogado Marcelo Nogueira da Silva (OAB/MS 13.300); agravada advogada (OAB/MS 24.499)",
     "preparo": "Sem comprovante: documento de custas ID 339611724 sem conteúdo"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -2553,7 +2637,8 @@
     "memoriais": "Não consta",
     "representacao": "Agravado: procuração assinada digitalmente (ID 388088519) ao advogado Thiago Helton M. Ribeiro (OAB/MG 168.703). Agravante: não identificada [VALIDAR]",
     "preparo": "GRU de R$ 64,26 ao TRF-3 (ID 335824198, código 18720-8, contribuinte Cebraspe); comprovante sem conteúdo (ID 335824195)"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -2646,7 +2731,8 @@
     "memoriais": "Não consta",
     "representacao": "Procuração com reserva de poderes (ID 352519725) a Canton Matos Advogados",
     "preparo": "Solicitação Pix de R$ 64,26 (ID 352529775) \"aguardando realização do pagamento\"; comprovantes sem conteúdo (IDs 352529776 e 352529777); manifestação ID 352529759 sobre a forma de recolhimento"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
@@ -5469,7 +5555,8 @@
     "ultima_informacao": "Certidão · ID 403200769 · 08/10/2026",
     "ultima_movimentacao": "08/10/2026 19:22 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
-   }
+   },
+   "bloco": "1"
   },
   {
    "sessao": "",
