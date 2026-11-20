@@ -67,6 +67,8 @@ const V = {
   parecer: v => ({ triagem: { 'MPF': { 'Com parecer': 'Com Parecer', 'Aguardando parecer': 'Sem Parecer', 'Intimado sem manifestação': 'Sem Parecer' }[v] || '' } }),
   prelim: v => ({ triagem: { 'Prelim.': v } }),
   intercor: v => ({ triagem: { 'Intercorrências': v } }),
+  /* sustentação oral ou preferência do cartão (Virtual, Presencial, Preferência) → ficha (Videoconferência, Presencial, Preferência) */
+  sopref: v => ({ pauta: { 'Sustentação oral': ({ 'Virtual': 'Videoconferência', 'Presencial': 'Presencial', 'Preferência': 'Preferência' })[v] || '' } }),
   /* retirada e adiamento decididos pelo relator: vão ao Status de Julgamento da ficha */
   resultado: v => (/^retirad/i.test(v) ? { pauta: { 'Status de Julgamento': 'RETIRADO DE PAUTA' } }
     : /^adiad/i.test(v) ? { pauta: { 'Status de Julgamento': 'ADIADO' } }
@@ -108,6 +110,8 @@ function paraCartao(mud, it) {
   if (tem(t, 'MPF')) k.parecer = t.MPF === 'Com Parecer' ? 'Com parecer' : t.MPF === 'Sem Parecer' ? (/^(Aguardando|Intimado)/.test(c.parecer || '') ? c.parecer : 'Aguardando parecer') : '';
   if (tem(t, 'Prelim.') && (naLista(LISTAS.prelim, t['Prelim.']) || !t['Prelim.'])) k.prelim = naLista(LISTAS.prelim, t['Prelim.']) || '';
   if (tem(t, 'Intercorrências')) k.intercor = t['Intercorrências'];
+  const pa = mud.pauta || {};
+  if (tem(pa, 'Sustentação oral')) k.sopref = ({ 'Videoconferência': 'Virtual', 'Virtual': 'Virtual', 'Presencial': 'Presencial', 'Preferência': 'Preferência' })[pa['Sustentação oral']] || '';
   if (tem(p, 'Voto - Resultado') && (naLista(LISTAS.resJulg, p['Voto - Resultado']) || !p['Voto - Resultado'])) k.resJulg = naLista(LISTAS.resJulg, p['Voto - Resultado']) || '';
   if (tem(p, 'Voto - Honorários') && (naLista(LISTAS.honor, p['Voto - Honorários']) || !p['Voto - Honorários'])) k.honor = naLista(LISTAS.honor, p['Voto - Honorários']) || '';
   if (tem(p, 'Tópico-síntese') && naLista(LISTAS.simnao, p['Tópico-síntese'])) k.topico = naLista(LISTAS.simnao, p['Tópico-síntese']);
