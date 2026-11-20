@@ -55,3 +55,11 @@ test('Compendium (correspondências) é aba do painel lateral, não seção da p
  assert.ok(!app.includes('id="col-correspondencias"'));
  for(const x of ['data-cx="cor"','id="cx-cor"','id="cl-cor-carregar"','id="cl-cor-body"','CX_TIT']) assert.ok(app.includes(x),x);
 });
+test('Pendência do prontuário confrontada com a tabela de peças',()=>{
+ const m=app.match(/const semAc=[\s\S]*?\nfunction dl\(/); assert.ok(m);
+ const confPend=new Function(m[0].replace(/\nfunction dl\($/,'')+';return confPend')();
+ const P={pecas:[{desc:'Sentença extintiva',id:'396555413'},{desc:'Apelação do exequente',id:'396555414'},{desc:'Contrarrazões da União',id:'396555416'}]};
+ assert.match(confPend('Confirmar o número de identificação da peça de apelação no segundo grau; não consta nos dados fornecidos.',P,{}),/já traz Apelação do exequente \(ID 396555414\)/);
+ assert.match(confPend('Confirmar no sistema o ID 598870878 atribuído à sentença.',P,{}),/ID 598870878 não está na tabela de peças, que registra sentença com ID 396555413/);
+ assert.equal(confPend('Conferir a tempestividade.',P,{}),'');
+});
