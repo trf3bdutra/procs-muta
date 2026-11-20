@@ -5748,13 +5748,16 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "GISLAINE INACIO DOS SANTOS",
    "assunto": "Auxílio por Incapacidade Temporária",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "AI do INSS · Benefício por incapacidade ACIDENTÁRIO (segundo a contraminuta) · tutela concedida antes da perícia · efeito suspensivo negado",
+   "resultado": "Ato a proferir: ATENÇÃO À COMPETÊNCIA — se confirmada a natureza acidentária (acidente de trabalho em 02/03/2026), declinar da competência ao Tribunal de Justiça de Mato Grosso do Sul (artigo 109, I, da Constituição; Súmula 15/STJ) [VALIDAR]; se não, julgar o agravo",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL",
+    "COMP"
+   ],
+   "observacao": "Agravo do INSS contra a decisão (f. 69-72) da Vara Única da Comarca de Itaporã/MS (processo 0800696-71.2026.8.12.0037) que concedeu a Gislaine Inacio dos Santos tutela para implantar benefício por incapacidade temporária antes da perícia judicial. O INSS alega falta de qualidade de segurado/carência na DII, pede a devolução dos valores (Tema 692/STJ) e, subsidiariamente, DCB em 120 dias (artigo 60, §§ 8º e 9º, da Lei 8.213/1991). A agravada afirma que o benefício é acidentário (acidente de trabalho em 02/03/2026) e que a carência é dispensada (artigo 26, II, da Lei 8.213/1991).",
+   "peculiaridades": "Indício de incompetência absoluta da Justiça Federal: a contraminuta descreve ação de benefício acidentário. A natureza acidentária é alegação da agravada e precisa ser confirmada na inicial e na decisão de origem. Razões do INSS genéricas (sem dados do caso), o que pode ensejar exame de dialeticidade.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -5785,7 +5788,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Verificar a natureza acidentária; se confirmada, declinar ao TJMS",
+    "materia": "Previdenciário/acidentário — benefício por incapacidade; competência",
+    "origem": "0800696-71.2026.8.12.0037 (Vara Única de Itaporã/MS)",
+    "decisao_agravada": "Decisão de f. 69-72 dos autos de origem",
+    "recurso": "ID 376847688 · 27/05/2026",
+    "preparo": "Isento (autarquia federal)",
+    "monocratica": "Sim, se reconhecida a incompetência [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -5805,6 +5817,86 @@
     "ultima_informacao": "Certidão · ID 377306221 · 29/05/2026",
     "ultima_movimentacao": "09/09/2026 16:46 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Segurada obteve na Justiça Estadual tutela para implantar benefício por incapacidade temporária antes da perícia. O INSS recorre por falta de qualidade de segurado ou carência. A segurada afirma que a incapacidade decorre de acidente de trabalho em 02/03/2026.",
+    "inicial": "Ação 0800696-71.2026.8.12.0037 contra o INSS para conceder benefício por incapacidade temporária (acidentário, segundo a agravada) [VALIDAR]",
+    "decisao_recorrida": "Decisão de f. 69-72 da Vara Única de Itaporã/MS, que concedeu a tutela de urgência e mandou implantar o benefício",
+    "recurso": "Agravo ID 376847688 (27/05/2026): (1) ausência de qualidade de segurado ou carência na DII; (2) devolução dos valores recebidos por tutela revogada (Tema 692/STJ); (3) subsidiariamente, DCB em 120 dias. Pede efeito suspensivo.",
+    "resposta": "Gislaine Inacio dos Santos ID 387965700 (23/07/2026): benefício acidentário; dispensa de carência (artigo 26, II, da Lei 8.213/1991); dano inverso; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "INSS: procurador federal. Agravada: advogados Luis Henrique Miranda (OAB/MS 14.809) e Graziele Araújo Barbosa de Brito (OAB/MS 27.452); procuração não identificada com texto [VALIDAR]",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Benefício por incapacidade; acidente de trabalho; competência; tutela antes da perícia",
+     "sintese": "Segurada obteve na Justiça Estadual tutela para implantar benefício por incapacidade temporária antes da perícia. O INSS recorre por falta de qualidade de segurado ou carência. A segurada afirma que a incapacidade decorre de acidente de trabalho em 02/03/2026.",
+     "questoes": "1) Competência: natureza acidentária do benefício (artigo 109, I, da Constituição; Súmula 15/STJ); 2) dialeticidade das razões genéricas do INSS; 3) carência e qualidade de segurado; 4) DCB.",
+     "rel": {
+      "razoes": "Agravo (ID 376847688): falta de qualidade de segurado/carência; devolução dos valores (Tema 692/STJ); DCB em 120 dias.",
+      "contrarrazoes": "Agravada (ID 387965700): benefício acidentário; carência dispensada; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "Vara Única da Comarca de Itaporã/MS",
+      "dispositivo": "Concedeu a tutela de urgência para implantar o benefício por incapacidade temporária."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-05-27",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Agravo de instrumento",
+       "id": "376847688",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "376847688",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo",
+       "id": "385276586",
+       "data": "2026-07-09"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "387965700",
+       "data": "2026-07-23"
+      }
+     ],
+     "pendencias": [
+      "Confirmar a natureza acidentária na inicial e na decisão de origem (competência) [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "hip932": "Incompetência — declínio ao TJMS [VALIDAR]",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-09"
+    }
    }
   },
   {
