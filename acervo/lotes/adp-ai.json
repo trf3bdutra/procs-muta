@@ -5067,12 +5067,14 @@
    "executado": "JOSE BARBOSA ROMERO",
    "assunto": "Aquisição",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Embargos de terceiro · efeito suspensivo à apelação contra imissão na posse de imóvel arrematado · tutela indeferida (4ª Turma, 2024)",
+   "resultado": "Ato a proferir: verificar o andamento da apelação nos embargos de terceiro 0001025-42.2012.4.03.6003; se já distribuída ou julgada, decisão monocrática de prejudicialidade (artigo 932, III, do CPC); se não, julgamento do agravo [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de José Cecílio da Silva Filho contra a decisão da 1ª Vara Federal de Três Lagoas (embargos de terceiro 0001025-42.2012.4.03.6003, ID 346701285 na origem) que, após a sentença de improcedência, deixou de apreciar o pedido de efeito suspensivo à apelação e de sustar a imissão de João Gonçalves da Silva na posse do imóvel da matrícula 9.737 (CRI de Três Lagoas), arrematado no cumprimento de sentença 0000062-78.2005.4.03.6003. O agravante diz ter comprado o imóvel de José Barbosa Romero antes da ação e residir nele com a família; o prazo de desocupação vencia em 02/12/2024.",
+   "peculiaridades": "Agravo de 29/11/2024, decidido na 4ª Turma (Des. Fed. Marcelo Saraiva) em 29/11/2024 (ID 309343589: indeferiu a tutela por exigir dilação probatória e por caber ao Tribunal o pedido de efeito suspensivo) e redistribuído à TRgMS em 23/04/2026. Quase dois anos depois, a imissão provavelmente se consumou e a apelação pode já estar no Tribunal: risco de perda de objeto. Preparo: guia juntada (ID 309342447), sem comprovante de pagamento identificado [VALIDAR]. A contraminuta de João Gonçalves da Silva (ID 309392834) refere ação anulatória de arrematação (0000889-11.2013.4.03.6003) também julgada improcedente.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -5103,7 +5105,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Verificar a apelação e decidir pela prejudicialidade ou julgar o agravo",
+    "materia": "Processual — embargos de terceiro; efeito suspensivo à apelação; imissão na posse",
+    "origem": "0001025-42.2012.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "ID 346701285 (autos de origem)",
+    "recurso": "ID 309296547 · 29/11/2024",
+    "preparo": "Guia juntada (ID 309342447); pagamento não confirmado [VALIDAR]",
+    "monocratica": "Provável, se prejudicado [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -5123,6 +5134,99 @@
     "ultima_informacao": "Certidão · ID 368751629 · 24/04/2026",
     "ultima_movimentacao": "27/04/2026 00:41 · PUBLICADO DECISÃO EM 27/04/2026.",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Terceiro que alega ter comprado de José Barbosa Romero o imóvel da matrícula 9.737 antes da execução teve os embargos de terceiro julgados improcedentes e recebeu ordem de desocupação em favor do arrematante. Pediu efeito suspensivo à apelação; o juízo remeteu a questão ao Tribunal, e a 4ª Turma negou a tutela em 2024.",
+    "inicial": "Embargos de terceiro 0001025-42.2012.4.03.6003 para desconstituir penhora e arrematação do imóvel da matrícula 9.737",
+    "decisao_recorrida": "Decisão ID 346701285 (origem): após a sentença, esgotada a prestação jurisdicional (artigo 494 do CPC), as alegações sobre o efeito suspensivo deveriam ser apreciadas pelo Tribunal; remessa após as contrarrazões",
+    "recurso": "Agravo ID 309296547 (29/11/2024): (1) aquisição do imóvel anterior à ação executiva; (2) prazo de 7 dias para desocupar a residência da família; (3) omissão do juízo sobre o efeito suspensivo; (4) cabimento do duplo efeito. Pede a suspensão da imissão na posse até o trânsito em julgado dos embargos.",
+    "resposta": "João Gonçalves da Silva ID 309392834 (02/12/2024): improcedência dos embargos e da anulatória de arrematação; arrematação perfeita; pede manutenção da imissão.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogados Júlio César dos Reis Savóia (OAB/SP 159.000) e Cinthia Ataíde do Prado Pacheco Martins (OAB/SP 281.338); procuração anexa segundo a petição [VALIDAR ID]",
+    "preparo": "Guia juntada em 29/11/2024 (ID 309342447) com petição ID 309342444"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Embargos de terceiro; efeito suspensivo à apelação; arrematação; imissão na posse",
+     "sintese": "Terceiro que alega ter comprado de José Barbosa Romero o imóvel da matrícula 9.737 antes da execução teve os embargos de terceiro julgados improcedentes e recebeu ordem de desocupação em favor do arrematante. Pediu efeito suspensivo à apelação; o juízo remeteu a questão ao Tribunal, e a 4ª Turma negou a tutela em 2024.",
+     "questoes": "1) Perda de objeto pela chegada ou julgamento da apelação; 2) regularidade do preparo; 3) cabimento do efeito suspensivo à apelação em embargos de terceiro.",
+     "rel": {
+      "razoes": "Agravo (ID 309296547): aquisição anterior; risco de desocupação; omissão sobre o efeito suspensivo; duplo efeito.",
+      "contrarrazoes": "João Gonçalves da Silva (ID 309392834): improcedência das ações do agravante; manutenção da imissão."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "346701285",
+      "juizo": "1ª Vara Federal de Três Lagoas/MS",
+      "dispositivo": "Remeteu ao Tribunal o pedido de efeito suspensivo à apelação."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2024-11-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Embargante (terceiro)",
+       "tipo": "Agravo de instrumento",
+       "id": "309296547",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "309296547",
+       "data": "2024-11-29"
+      },
+      {
+       "desc": "Guia de custas",
+       "id": "309342447",
+       "data": "2024-11-29"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela (4ª Turma)",
+       "id": "309343589",
+       "data": "2024-12-02"
+      },
+      {
+       "desc": "Contraminuta de João Gonçalves da Silva",
+       "id": "309392834",
+       "data": "2024-12-02"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "367195067",
+       "data": "2026-04-23"
+      }
+     ],
+     "pendencias": [
+      "Consultar a apelação nos embargos de terceiro 0001025-42.2012.4.03.6003 (prejudicialidade) [VALIDAR]",
+      "Comprovante de pagamento das custas [VALIDAR]",
+      "Contraminuta dos demais agravados [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "hip932": "III — prejudicado [VALIDAR]",
+     "urgTipo": "Efeito suspensivo à apelação",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2024-12-02"
+    }
    }
   },
   {
