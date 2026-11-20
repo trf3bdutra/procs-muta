@@ -105,3 +105,11 @@ test('Office: prévia da minuta gera a proclamação com o resultado do prontuá
   assert.match(t,/por unanimidade, negou provimento à apelação, nos termos do voto do Desembargador Federal CARLOS MUTA \(Relator\)\. Votaram o Desembargador Federal JEAN MARCOS e o Juiz Federal Convocado BELTRANO TESTE,/);
   assert.ok(s.includes("['Relatório','Ementa','Dispositivo','Proclamação','Tudo']")&&s.includes('data-pm-pr'));
 });
+
+test('Nova sessão: convocados e substituições já na criação; começa na etapa 1 (sem pauta) ou 2 (com PDF)',()=>{
+  const fs=require('fs'),p=require('path');const cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('data-cwe="nv-sub-add"')&&cap.includes('data-cwe-nvs="alcance"'),'substituições no diálogo');
+  assert.ok(cap.includes('substituicoes: nv.subs.filter((sb) => sb.sai && sb.entra)'),'grava as substituições ao criar');
+  assert.ok(cap.includes('est.etapa = pdf ? 2 : 1'),'etapa inicial');
+  assert.ok(cap.includes("desigMemo(ss, 'R')")&&cap.includes("desigMemo(ss, 'Z')"),'designação memorizada entre renders');
+});
