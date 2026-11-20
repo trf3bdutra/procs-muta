@@ -9000,13 +9000,13 @@
    "exequente": "LUIS CLAUDIO RAGALZI GODOY",
    "executado": "UNIÃO FEDERAL",
    "assunto": "CNH - Carteira Nacional de Habilitação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "",
+   "tipo_caso": "AI · Administrativo · trânsito · cassação da CNH por permitir a condução por pessoa com CNH vencida · autuações da PRF e do DETRAN/MS após a alienação do veículo · litisconsórcio passivo União e DETRAN/MS (cumulação de pedidos, artigo 327 do CPC)",
+   "resultado": "Ato a proferir: embargos de declaração (ID 349500463) sobre a gratuidade e as custas; julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Luís Cláudio Ragalzi Godoy e Giancarlo Godoy Ragalzi contra a decisão da 2ª Vara Federal de Campo Grande que, na ação ordinária 5011011-84.2025.4.03.6000 contra a União e o DETRAN/MS, excluiu o DETRAN/MS do polo passivo por inadmissível cumulação de pedidos e indeferiu a tutela de urgência para suspender a cassação da CNH do primeiro agravante. Os agravantes sustentam que o veículo autuado foi vendido ao segundo agravante em 2018 e que a única penalidade decorre de atos da PRF e do DETRAN/MS.",
+   "peculiaridades": "Embargos de declaração pendentes sobre a exigência de custas, diante da gratuidade deferida na origem. Tutela recursal deferida em parte.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -9039,7 +9039,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Sem custas (certidão) · certidão sem custas: ID 346274896 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 0824152-59.2025.8.12.0110 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 0824152-59.2025.8.12.0110 · conferido em 20/11/2026",
+    "ato": "Embargos de declaração pendentes e julgamento do agravo de instrumento",
+    "materia": "Trânsito: cassação da CNH; legitimidade do DETRAN/MS; cumulação de pedidos",
+    "origem": "2ª Vara Federal de Campo Grande · 5011011-84.2025.4.03.6000",
+    "decisao_agravada": "[VALIDAR ID]",
+    "recurso": "ID 346212784 · 10/12/2025",
+    "preparo": "Justiça gratuita (deferida na origem); embargos pendentes",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -9060,6 +9068,104 @@
     "ultima_informacao": "Certidão · ID 387571617 · 20/07/2026",
     "ultima_movimentacao": " 19:34 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Administrativo · trânsito · cassação da CNH por permitir a condução por pessoa com CNH vencida · autuações da PRF e do DETRAN/MS após a alienação do veículo · litisconsórcio passivo União e DETRAN/MS (cumulação de pedidos, artigo 327 do CPC)",
+   "especificidades": "Sem grupo adequado entre os 12 (matéria administrativa de trânsito) · Tutela recursal deferida em parte pelo Des. Fed. Wilson Zauhy, 4ª Turma (ID 346481556, 20/12/2025): reconheceu a legitimidade passiva do DETRAN/MS e determinou o recolhimento de custas · Embargos de declaração dos agravantes (ID 349500463, 09/01/2026) pendentes: gratuidade deferida na origem (cópia ID 346212786) · DETRAN/MS endereçou petição à 4ª Turma após a redistribuição (ID 394949249) · Ação anterior na Justiça Estadual citada (0824152-59.2025.8.12.0110) [VALIDAR]",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "O DETRAN/MS cassou a CNH do primeiro agravante por autuações da PRF e do DETRAN/MS relativas a veículo que diz ter vendido ao segundo agravante; o juízo excluiu o DETRAN/MS e negou a tutela.",
+    "inicial": "Ação ordinária 5011011-84.2025.4.03.6000, 2ª Vara Federal de Campo Grande, de Luís Cláudio Ragalzi Godoy e Giancarlo Godoy Ragalzi contra a União e o DETRAN/MS",
+    "decisao_recorrida": "Decisão da 2ª Vara Federal de Campo Grande que excluiu o DETRAN/MS do polo passivo (artigo 327 do CPC) e indeferiu a tutela de urgência [VALIDAR ID e data]",
+    "recurso": "Agravo ID 346212784 (10/12/2025): (1) competência da Justiça Federal e legitimidade do DETRAN/MS, por resultar a cassação de atos da PRF e do DETRAN/MS; (2) alienação do veículo em 2018 ao segundo agravante; e (3) tutela recursal para suspender a cassação da CNH.",
+    "resposta": "União, contraminuta ID 349732681 (11/01/2026): responsabilidade do proprietário que não indica o condutor (artigo 257, § 7º, do CTB) e parentesco do adquirente. DETRAN/MS, contrarrazões aos embargos ID 353197695 (04/02/2026).",
+    "parecer": "Não consta",
+    "outros": "Decisão ID 346481556 (20/12/2025, Des. Fed. Wilson Zauhy): deferiu em parte a tutela recursal para manter o DETRAN/MS no polo passivo e determinou o recolhimento de custas. Embargos de declaração ID 349500463 (09/01/2026). Decisão de redistribuição ID 383688307 (20/07/2026). Ciência do DETRAN/MS ID 394949249.",
+    "representacao": "Agravantes: advogado constituído. Agravados: Advocacia-Geral da União e Procuradoria-Geral do Estado de MS.",
+    "preparo": "Gratuidade deferida na origem (cópia ID 346212786); exigência de custas impugnada em embargos de declaração"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Administrativo · trânsito · cassação da CNH por permitir a condução por pessoa com CNH vencida · autuações da PRF e do DETRAN/MS após a alienação do veículo · litisconsórcio passivo União e DETRAN/MS (cumulação de pedidos, artigo 327 do CPC)",
+     "sintese": "O DETRAN/MS cassou a CNH do primeiro agravante por autuações da PRF e do DETRAN/MS relativas a veículo que diz ter vendido ao segundo agravante; o juízo excluiu o DETRAN/MS e negou a tutela.",
+     "questoes": "1) Embargos de declaração sobre a exigência de custas, diante da gratuidade deferida na origem; 2) legitimidade passiva do DETRAN/MS e cumulação de pedidos na Justiça Federal; 3) tutela de urgência contra a cassação da CNH.",
+     "rel": {
+      "razoes": "Agravo (ID 346212784): (1) legitimidade do DETRAN/MS; (2) alienação do veículo em 2018; e (3) tutela recursal.",
+      "contrarrazoes": "União (ID 349732681): artigo 257, § 7º, do CTB."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "[VALIDAR]",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Excluiu o DETRAN/MS do polo passivo e indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Deferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-12-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Luís Cláudio Ragalzi Godoy e outro",
+       "tipo": "Agravo de instrumento",
+       "id": "346212784",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Luís Cláudio Ragalzi Godoy e outro",
+       "tipo": "Embargos de declaração",
+       "id": "349500463",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "346212784",
+       "data": "2025-12-10"
+      },
+      {
+       "desc": "Decisão que deferiu em parte a tutela recursal",
+       "id": "346481556",
+       "data": "2025-12-20"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "349500463",
+       "data": "2026-01-09"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "349732681",
+       "data": "2026-01-11"
+      },
+      {
+       "desc": "Contrarrazões do DETRAN/MS aos embargos",
+       "id": "353197695",
+       "data": "2026-02-04"
+      }
+     ],
+     "pendencias": "Julgar os embargos de declaração; identificar o ID da decisão agravada; verificar a ação estadual anterior",
+     "especificidades": "Sem grupo adequado entre os 12 (matéria administrativa de trânsito) · Tutela recursal deferida em parte pelo Des. Fed. Wilson Zauhy, 4ª Turma (ID 346481556, 20/12/2025): reconheceu a legitimidade passiva do DETRAN/MS e determinou o recolhimento de custas · Embargos de declaração dos agravantes (ID 349500463, 09/01/2026) pendentes: gratuidade deferida na origem (cópia ID 346212786) · DETRAN/MS endereçou petição à 4ª Turma após a redistribuição (ID 394949249) · Ação anterior na Justiça Estadual citada (0824152-59.2025.8.12.0110) [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · parcialmente deferida",
+     "urgData": "2025-12-20"
+    }
    }
   },
   {
