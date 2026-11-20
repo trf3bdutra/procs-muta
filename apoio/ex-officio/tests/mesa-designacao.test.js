@@ -19,3 +19,14 @@ test('Motor: troca na designação e período efetivo com marcos invertidos',()=
   assert.ok(m.includes('o.trocar && it.servidor !== o.d')&&m.includes('o.trocar && it.corretor !== o.c'));
   assert.ok(m.includes('invertido')&&m.includes('efetivo: periodo(ss)'));
 });
+test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
+  const R=JSON.parse(read('apoio/equipe.json')).registros,by=n=>R.find(m=>m.nome===n);
+  assert.equal(by('CM').correcao,false);
+  for(const n of ['Alexander','Vanilda','Saffioti','Giovana']){assert.equal(by(n).minuta,false,n);assert.equal(by(n).minutaEventual,true,n);}
+  const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
+  assert.ok(m.includes('eventuais: S.equipe.filter(function (m) { return m.minutaEventual && !faz(m, \'d\'); })'));
+  assert.ok(m.includes("'minutaEventual'].indexOf(campo)"));
+  assert.ok(read('monitor/triagem/index.html').includes('Minutam só por exceção'));
+  const pag=read('monitor/designacao/index.html');
+  assert.ok(pag.includes('optsEx(k,v)')&&pag.includes('var EV=EQ.filter'));
+});

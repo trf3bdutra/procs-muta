@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.equipe",
  "versao": 1,
- "atualizadoEm": "2026-11-19T13:56:42.000Z",
+ "atualizadoEm": "2026-11-20T20:20:51.000Z",
  "registros": [
   {
    "id": "m-alexander",
@@ -38,7 +38,8 @@
     "Alteração do coeficiente de cálculo do benefício"
    ],
    "aus": [],
-   "nota": ""
+   "nota": "",
+   "minutaEventual": true
   },
   {
    "id": "m-bruno",
@@ -88,7 +89,8 @@
    "nao": [],
    "exp": [],
    "aus": [],
-   "nota": ""
+   "nota": "",
+   "minutaEventual": true
   },
   {
    "id": "m-vanilda",
@@ -113,7 +115,8 @@
     "Contratos Bancários"
    ],
    "aus": [],
-   "nota": ""
+   "nota": "",
+   "minutaEventual": true
   },
   {
    "id": "m-giovana",
@@ -135,7 +138,8 @@
    "nao": [],
    "exp": [],
    "aus": [],
-   "nota": ""
+   "nota": "",
+   "minutaEventual": true
   },
   {
    "id": "m-dalete",
@@ -447,7 +451,7 @@
    ],
    "cargo": "Desembargador",
    "minuta": false,
-   "correcao": true,
+   "correcao": false,
    "auto": false,
    "papel": "assessoria",
    "atribuicoes": [

@@ -2191,10 +2191,10 @@ function portaToken() { return new Promise((fim) => {
     const vis = L.slice(0, est.desTake);
     const sel = (kind, p) => { const atual = kind === 'd' ? p.servidor : p.corretor, sug = kind === 'd' ? p.sugD : p.sugC, P = kind === 'd' ? Z.minutantes : Z.corretores, v = kind === 'd' ? vD(p) : vC(p);
       /* sempre editável: quem já está designado aparece selecionado e pode ser trocado */
-      const nomes = P.map((m) => m.nome); if (atual && !nomes.includes(atual)) nomes.unshift(atual);
+      const nomes = P.map((m) => m.nome), exc = kind === 'd' ? (Z.eventuais || []).map((m) => m.nome).filter((n) => !nomes.includes(n)) : []; if (atual && !nomes.includes(atual) && !exc.includes(atual)) nomes.unshift(atual);
       const cls = atual && v === atual ? 'cur' : v ? (sug && v === sug.nome ? 'reg' : 'man') : 'vz';
       const nota = atual && v === atual ? ((kind === 'd' ? p.porD : p.porC) || 'já designado') : atual && v !== atual ? 'troca: era ' + atual : sug && v === sug.nome ? 'por regra: ' + sug.por : v ? 'escolha manual' : 'nenhuma regra casa';
-      return `<select data-cwe-esc="${kind}" data-p="${e(A.digits(p.cnj))}" class="${cls}"><option value="">— escolher —</option>${nomes.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}</select><small>${e(nota)}</small>`; };
+      return `<select data-cwe-esc="${kind}" data-p="${e(A.digits(p.cnj))}" class="${cls}"><option value="">— escolher —</option>${nomes.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}${exc.length ? `<optgroup label="Minutam só por exceção">${exc.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}</optgroup>` : ''}</select><small>${e(nota)}</small>`; };
     const muda = (p) => { const d = vD(p), c = vC(p); return (d && d !== (p.servidor || '')) || (c && c !== (p.corretor || '')); };
     const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && muda(p)).length;
     return `<section class="cwe-st"><h2>3 · Preparar · B · Designação e correção</h2>${tabs}

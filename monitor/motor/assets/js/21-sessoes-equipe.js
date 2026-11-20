@@ -1690,7 +1690,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       var fora = (m.aus || []).find(function (a) { return a.de <= hj && a.ate >= hj; }), cd = ps ? carga(m.nome, 'd', ps) : 0, cc = ps ? carga(m.nome, 'c', ps) : 0;
       h += '<div class="eqm-m' + (fora ? ' fora' : '') + '" data-mem="' + esc(m.id) + '"><div class="eqm-mh"><div class="eqm-av">' + esc(String(m.nome).slice(0, 2).toUpperCase()) + '</div><div class="eqm-tx"><b>' + esc(m.nome) + '</b><span>' + esc([m.cargo].concat(m.atribuicoes || []).filter(Boolean).join(' · ') || 'sem cargo informado') + '</span></div>' +
         (fora ? '<span class="eqm-tag am">fora até ' + esc(br(fora.ate).slice(0, 5)) + '</span>' : '') + '<button class="eqm-x" data-cs="apagar-membro" title="Remover do cadastro">×</button></div>' +
-        '<div class="eqm-tg"><button class="cs-tg" data-mf-tg="minuta" aria-pressed="' + faz(m, 'd') + '">Minuta</button><button class="cs-tg" data-mf-tg="correcao" aria-pressed="' + faz(m, 'c') + '">Correção</button><button class="cs-tg" data-mf-tg="auto" aria-pressed="' + (m.auto !== false) + '">Automático</button></div>' +
+        '<div class="eqm-tg"><button class="cs-tg" data-mf-tg="minuta" aria-pressed="' + faz(m, 'd') + '">Minuta</button><button class="cs-tg" data-mf-tg="correcao" aria-pressed="' + faz(m, 'c') + '">Correção</button><button class="cs-tg" data-mf-tg="auto" aria-pressed="' + (m.auto !== false) + '">Automático</button>' + (faz(m, 'd') ? '' : '<button class="cs-tg" data-mf-tg="minutaEventual" aria-pressed="' + !!m.minutaEventual + '" title="Pode minutar, mas em regra não: aparece na escolha manual e nunca é proposto">Minuta por exceção</button>') + '</div>' +
         (ps ? '<div class="eqm-cg"><span><b>' + cd + '</b> minuta' + (cd === 1 ? '' : 's') + '</span><span><b>' + cc + '</b> correç' + (cc === 1 ? 'ão' : 'ões') + '</span></div>' : '') +
         ((m.escopos || []).length ? '<p class="eqm-mut">Escopos: ' + esc(m.escopos.join(' | ')) + '</p>' : '') + (m.nota ? '<p class="eqm-mut">' + esc(m.nota) + '</p>' : '') +
         competencias(m) + '<details class="eqm-pf"><summary>Editar competências, apelidos e ausências</summary>' + (top('d') || top('c') ? '<p class="eqm-mut">' + esc([top('d') ? 'Minutou: ' + top('d') : '', top('c') ? 'Corrigiu: ' + top('c') : ''].filter(Boolean).join(' · ')) + '</p>' : '') +
@@ -1803,7 +1803,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       if (xa === 'xp-del') { xpTira(t.dataset.d); return; }
       return; }
     if (t.dataset.mfTg) { var mt = S.equipe.find(function (x) { return x.id === t.closest('[data-mem]').dataset.mem; }); if (!mt) return; var kk = t.dataset.mfTg;
-      if (kk === 'auto') mt.auto = mt.auto === false; else { mt.minuta = faz(mt, 'd'); mt.correcao = faz(mt, 'c'); mt[kk] = !mt[kk]; mt.papel = mt.correcao && !mt.minuta ? 'assessoria' : 'equipe'; }
+      if (kk === 'auto') mt.auto = mt.auto === false; else if (kk === 'minutaEventual') mt.minutaEventual = !mt.minutaEventual; else { mt.minuta = faz(mt, 'd'); mt.correcao = faz(mt, 'c'); mt[kk] = !mt[kk]; mt.papel = mt.correcao && !mt.minuta ? 'assessoria' : 'equipe'; }
       HIST = null; salvar(); render(); return; }
     if (t.dataset.cs === 'cor-auto') { var sx0 = S.sessoes.find(function (x) { return x.id === t.dataset.csSesCor; }); if (sx0) { sx0.cor = ''; salvar(); CAL.sig = ''; render(); } return; }
     if (t.dataset.aba) { UI.aba = t.dataset.aba; render(); return; }
@@ -2010,7 +2010,9 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
           sugD: it.servidor ? null : escolher('d', it, ss), sugC: it.corretor ? null : escolher('c', it, ss) }; });
       var gente = function (kind) { return pool(kind).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss), atual: ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(m.nome); }).length }; }); };
       return { criterios: D.ordem.map(function (cid) { return { id: cid, t: CRIT_T[cid] || cid, d: !!(D.on[cid] && D.on[cid].d), c: !!(D.on[cid] && D.on[cid].c) }; }), equilibrar: D.equilibrar !== false, escopo: ss.desigOverride ? 'sessao' : 'geral',
-        periodo: { de: de, ate: ate, efetivo: periodo(ss) }, fases: ss.fases || {}, data: ss.data, minutantes: gente('d'), corretores: gente('c'), linhas: linhas }; },
+        periodo: { de: de, ate: ate, efetivo: periodo(ss) }, fases: ss.fases || {}, data: ss.data, minutantes: gente('d'), corretores: gente('c'),
+        /* minuta por exceção: só na escolha manual, nunca proposto pela regra */
+        eventuais: S.equipe.filter(function (m) { return m.minutaEventual && !faz(m, 'd'); }).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss), atual: ss.itens.filter(function (i) { return N(i.servidor) === N(m.nome); }).length }; }), linhas: linhas }; },
     aplicarDesignacao: function (id, lista) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return 0; var by = new Map(ss.itens.map(function (i) { return [dig(i.cnj), i]; })), n = 0;
       (lista || []).forEach(function (o) { var it = by.get(dig(o.cnj)); if (!it) return; var m = 0;
         /* trocar: a mesa de designação pode substituir quem já estava designado (vazio continua sem efeito) */
@@ -2032,7 +2034,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     matriz: function () { if (!MAT) matrizCarregar(); return MAT; },
     /* dissociar da matriz de competências (false) ou religar (true); não muda Minuta, Correção nem a designação */
     equipeMatriz: function (nome, dentro) { var m = membro(nome); if (!m) return false; if (dentro) delete m.matriz; else m.matriz = false; salvar(); return true; },
-    equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto'].indexOf(campo) < 0) return false; m[campo] = !!valor; HIST = null; salvar(); return true; },
+    equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto', 'minutaEventual'].indexOf(campo) < 0) return false; m[campo] = !!valor; HIST = null; salvar(); return true; },
     publicarMarcos: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return false; ss.marcosPub = on !== false; if (!ss.marcosPub) { ss.publicada = false; ss.pronta = ''; } salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */
     /* regras criadas pela esteira, sem sair da página Pautas */
