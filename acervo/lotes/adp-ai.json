@@ -2678,8 +2678,8 @@
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Adimplemento e Extinção",
    "grupo": "g5",
-   "tipo_caso": "AI · Cumprimento de sentença da CEF · excesso de execução rejeitado · embargos de declaração pendentes",
-   "resultado": "Ato a proferir: julgamento do agravo (voto), com exame ou prejudicialidade dos embargos de declaração opostos contra a decisão que negou o efeito suspensivo; efeito suspensivo negado em 18/06/2025 e há contraminuta",
+   "tipo_caso": "AI · Cumprimento de sentença da CEF · excesso de execução e enriquecimento ilícito rejeitados · índices de atualização",
+   "resultado": "Ato a proferir: embargos de declaração (ID 329017923) contra a decisão que negou o efeito suspensivo e julgamento do agravo (voto)",
    "modelo": "",
    "variacoes": [
     "VAL"
@@ -2762,7 +2762,93 @@
     "representacao": "Agravante: advogados Thadeu Striquer (OAB/MS 12.510) e Brunna Yara Maluf Luccas Correia Striquer (OAB/MS 24.922). CEF: procuração pública (ID 331314969) e substabelecimento (ID 331314971) a Diego Roberto Pinheiro Ferreira e outros",
     "preparo": "Dispensado: gratuidade concedida pela decisão ID 327230932"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Cumprimento de sentença da CEF · excesso de execução e enriquecimento ilícito rejeitados · índices de atualização",
+   "especificidades": "Embargos de declaração do agravante (ID 329017923, 27/06/2025) contra a decisão que negou o efeito suspensivo (ID 327230932): pendentes; CEF impugnou (ID 331412233) · Gratuidade deferida na decisão ID 327230932 · Decisão agravada em cópia sem texto (ID 323445926) [VALIDAR] · Feito de 2025",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença da CEF · excesso de execução e enriquecimento ilícito rejeitados · índices de atualização",
+     "sintese": "Cumprimento de sentença da CEF contra Willian Maachar (5001147-66.2018.4.03.6000). O executado alegou excesso de execução, rejeitado pelo juízo; agravou indicando como correto o valor de R$ 208.230,18.",
+     "questoes": "1) Embargos de declaração contra a decisão que negou o efeito suspensivo; 2) excesso de execução e critérios de atualização no cumprimento de sentença da CEF.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 323445916 (06/05/2025): excesso de execução; cálculo pelos mesmos índices da exequente resulta em R$ 208.230,18; pede efeito suspensivo e gratuidade. Embargos de declaração ID 329017923 (27/06/2025) contra a decisão que negou o efeito suspensivo.",
+      "contrarrazoes": "Contraminuta da CEF ID 331314968 (21/07/2025) e impugnação aos embargos de declaração ID 331412233 (22/07/2025)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Rejeitou as alegações de excesso de execução e de enriquecimento ilícito."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-05-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "323445916",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte ré",
+       "tipo": "Embargos de declaração",
+       "id": "329017923",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "323445916",
+       "data": "2025-05-06"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo",
+       "id": "327230932",
+       "data": "2025-06-18"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "329017923",
+       "data": "2025-06-27"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "331314968",
+       "data": "2025-07-21"
+      },
+      {
+       "desc": "Impugnação aos embargos",
+       "id": "331412233",
+       "data": "2025-07-22"
+      }
+     ],
+     "pendencias": "Julgar os embargos de declaração; identificar a decisão agravada",
+     "especificidades": "Embargos de declaração do agravante (ID 329017923, 27/06/2025) contra a decisão que negou o efeito suspensivo (ID 327230932): pendentes; CEF impugnou (ID 331412233) · Gratuidade deferida na decisão ID 327230932 · Decisão agravada em cópia sem texto (ID 323445926) [VALIDAR] · Feito de 2025"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-06-18"
+    }
+   }
   },
   {
    "sessao": "",
