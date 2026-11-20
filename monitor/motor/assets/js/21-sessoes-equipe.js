@@ -482,7 +482,9 @@
     if (m1 && MESES[N(m1[2])]) { data = m1[3] + '-' + MESES[N(m1[2])] + '-' + String(m1[1]).padStart(2, '0'); hora = m1[4]; }
     var m2 = /Sess[aã]o de\s+(\d{2})\/(\d{2})\/(\d{4})\s+[àa]s\s+(\d{2}:\d{2})/i.exec(src); if (!data && m2) { data = m2[3] + '-' + m2[2] + '-' + m2[1]; hora = m2[4]; }
     var m3 = /Sess[aã]o\s*#\s*(\d+)/i.exec(src); if (m3) num = m3[1];
-    var limpo = src.replace(/Sess[aã]o de Julgamento[^\n]{0,200}?P[aá]gina\s+\d+\s+de\s+\d+/g, ' ').replace(/P[aá]gina\s+\d+\s+de\s+\d+/g, ' ').replace(/^\s*Sess[aã]o de Julgamento .*$/gm, ' ');
+    /* cabeçalho de página "Sessão de Julgamento ORDINÁRIA … de AAAA às HH:MM": sai também quando o PDF o junta ao processo anterior */
+    var CAB = /Sess[aã]o de Julgamento\s+(?:ORDIN|EXTRAORDIN|VIRTUAL|PRESENCIAL|TELEPRESENCIAL)[\s\S]{0,220}?\d{4}\s+[àa]s\s+\d{1,2}[:h]\d{2}/gi;
+    var limpo = src.replace(/Sess[aã]o de Julgamento[^\n]{0,200}?P[aá]gina\s+\d+\s+de\s+\d+/g, ' ').replace(CAB, ' ').replace(/P[aá]gina\s+\d+\s+de\s+\d+/g, ' ').replace(/^\s*Sess[aã]o de Julgamento .*$/gm, ' ');
     var re = new RegExp('#\\s*(\\d{1,4})\\s+' + CNJ, 'g'), starts = [], m;
     while ((m = re.exec(limpo))) starts.push({ i: m.index, fim: re.lastIndex, item: m[1], cnj: m[2] });
     if (!starts.length) { re = new RegExp('Processo\\s+' + CNJ, 'g'); while ((m = re.exec(limpo))) starts.push({ i: m.index, fim: re.lastIndex, item: '', cnj: m[1] }); }
@@ -490,10 +492,10 @@
     var itens = [];
     starts.forEach(function (s, k) {
       var chunk = limpo.slice(s.fim, k + 1 < starts.length ? starts[k + 1].i : limpo.length).replace(/\s+/g, ' ')
-        .replace(/Sess[aã]o de Julgamento\s.{0,200}?P[aá]gina\s+\d+\s+de\s+\d+/gi, ' ').replace(/P[aá]gina\s+\d+\s+de\s+\d+/gi, ' ').replace(/\s+/g, ' ').trim();
+        .replace(/Sess[aã]o de Julgamento\s.{0,200}?P[aá]gina\s+\d+\s+de\s+\d+/gi, ' ').replace(CAB, ' ').replace(/P[aá]gina\s+\d+\s+de\s+\d+/gi, ' ').replace(/\s+/g, ' ').trim();
       var f = function (rot) {
         var r = new RegExp('(?:^|\\s)' + rot + '\\s+(.*?)(?=\\s(?:' + LAB.join('|') + ')\\s|$)', 'i').exec(chunk);
-        return r ? r[1].replace(/\s*Processos Pautados\s*$/i, '').trim() : '';
+        return r ? r[1].replace(/\s*Processos Pautados\s*$/i, '').replace(/\bLL\s+(?=\d)/g, 'Lei ').trim() : '';
       };
       var item = s.item || f('N[uú]mero de ordem');
       itens.push({ item: item, cnj: s.cnj, assunto: f('Assunto principal') || f('Assunto'), classe: f('Classe'), relator: f('Relator') || f('[ÓO]rg[aã]o julgador'), partes: f('Partes') });

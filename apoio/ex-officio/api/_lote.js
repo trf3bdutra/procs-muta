@@ -1,7 +1,8 @@
-/* Amicus Curiae · Collectio: três visões com o mesmo arquivo e a mesma base de lotes.
-     /amicus/collectio/gc/   controle geral (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
-     /amicus/collectio/      visão geral: os processos visíveis para a equipe
-     /amicus/collectio/cmt/  visão CM (&rel=1, ou link próprio, ou perfil desembargador): os processos visíveis para o Desembargador
+/* Amicus Curiae · Collectio: duas páginas com o mesmo arquivo e a mesma base de lotes.
+     /amicus/collectio/      página geral: a equipe vê os processos visíveis para ela; o Desembargador (perfil desembargador
+                             ou link próprio com a chave) vê, na mesma página, só os processos liberados para ele
+     /amicus/collectio/cg/   controle e gestão (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
+   /amicus/collectio/cmt/ (antiga página do Desembargador) e /amicus/collectio/gc/ continuam abrindo, só como compatibilidade.
    O nome visual permanece "Index". /index/*, /lotes/, /cmt/lotes/ e /cg/lotes/ permanecem apenas como compatibilidade.
    Acesso: login do Ex Officio (cookie cmt_eq) ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE).
    Servido pelo /api/painel?lote=1 (a Vercel no plano Hobby aceita no máximo 12 funções; este arquivo, com _, não conta como função).
@@ -40,11 +41,23 @@ const CORES = ['#2f6db5', '#7a5cc2', '#1f8a70', '#c07a12', '#b8562f', '#3a4a5c',
 const ENT = /UNI[ÃA]O|INSS|INSTITUTO NACIONAL|BANCO CENTRAL|FUNDA[CÇ][AÃ]O|CAIXA ECON|EMPRESA BRASILEIRA|CONSELHO|AG[ÊE]NCIA|UNIVERSIDADE|FAZENDA/i;
 /* M: memória de uma requisição (cada sessão e o calendário são lidos uma vez só, mesmo com vários lotes) */
 const memoria = () => ({ sessoes: new Map(), cal: null });
+/* O PDF da pauta repete, no alto de cada página, "Sessão de Julgamento ORDINÁRIA … de AAAA às HH:MM"; quando a quebra de página
+   cai no meio de um processo, esse cabeçalho grudava no assunto, nas partes ou na classe (e a matriz ganhava grupos-fantasma).
+   limpaPauta tira o cabeçalho e corrige "LL 8.622" (Lei) na leitura, sem alterar os arquivos da sessão. */
+const CAB_SESSAO = /\s*Sess[aã]o de Julgamento\s+(?:ORDIN|EXTRAORDIN|VIRTUAL|PRESENCIAL|TELEPRESENCIAL)[\s\S]{0,220}?\d{4}\s+[àa]s\s+\d{1,2}[:h]\d{2}/gi;
+const limpaPauta = t => String(t || '').replace(CAB_SESSAO, ' ').replace(/\bLL\s+(?=\d)/g, 'Lei ').replace(/\s+/g, ' ').trim();
+const limpaItemPauta = x => x && typeof x === 'object' ? Object.assign({}, x, { assunto: limpaPauta(x.assunto), partes: limpaPauta(x.partes), classe: limpaPauta(x.classe) }) : x;
+function limpaLote(lote) {
+  (lote.itens || []).forEach(it => { for (const k of ['assunto', 'tipo_caso', 'partes', 'exequente', 'executado', 'recurso']) if (typeof it[k] === 'string') it[k] = limpaPauta(it[k]); });
+  (lote.grupos || []).forEach(g => { if (typeof g.rotulo === 'string') g.rotulo = limpaPauta(g.rotulo); });
+  return lote;
+}
 async function itensSessao(s, M) {
   if (!DATA.test(s)) return [];
   if (M && M.sessoes.has(s)) return M.sessoes.get(s);
   const p = L.lerJson('acervo/sessoes/' + s + '.json').catch(nada)
-    .then(({ dados }) => dados ? (Array.isArray(dados) ? dados : (dados.itens || dados.processos || [])) : []);
+    .then(({ dados }) => dados ? (Array.isArray(dados) ? dados : (dados.itens || dados.processos || [])) : [])
+    .then(lista => lista.map(limpaItemPauta));
   if (M) M.sessoes.set(s, p);
   return p;
 }
@@ -281,6 +294,7 @@ module.exports = async (req, res) => {
     (lote.itens || []).forEach(it => { if (cartoes[it.processo]) it.prontuario = cartoes[it.processo]; });
     lote.itens = (lote.itens || []).filter(ve);
     if (modo !== 'cg') delete lote.retirados;
+    limpaLote(lote);
     if (String(q.correspondencias||'') === '1') {
       const avaliar=require('./_collectio_correspondencias').avaliar;
       const {dados:estrut}=await L.lerJson('modelos/matrizes-estruturais.json');
@@ -288,7 +302,7 @@ module.exports = async (req, res) => {
       const modular=materia28?(await L.lerJson('modelos/matrizes-2886.json')).dados:null;
       return res.status(200).json(avaliar(lote,estrut||{registros:[]},modular));
     }
-    res.status(200).json({ usuario: u, gestor, relator, modo, lote });
+    res.status(200).json({ usuario: u, gestor, relator, modo, lote: limpaLote(lote) });
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
 async function gravar(req, res, u, gestor) {

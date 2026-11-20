@@ -1,5 +1,5 @@
 /* GET /api/painel?cmt=1  painel do desembargador (api/_cmt.js)
-   GET /api/painel?lote=1  Amicus Curiae · Collectio (api/_lote.js; /amicus/collectio/, /amicus/collectio/cmt/ e /amicus/collectio/cg/)
+   GET /api/painel?lote=1  Amicus Curiae · Collectio (api/_lote.js; /amicus/collectio/ e /amicus/collectio/cg/)
    GET /api/painel  página inicial do servidor: calendário das pautas publicadas e todos os processos dele (minuta e correção) */
 const L = require('./_lib');
 const E = require('./_entregas');
