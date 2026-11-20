@@ -1992,7 +1992,15 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     definirJulgadores: function (id, j) { var sx = S.sessoes.find(function (x) { return x.id === id; }); if (!sx) return false; sx.julgadores = j ? JSON.parse(JSON.stringify(j)) : null; salvar(); return true; },
     julgadoresDoItem: function (id, cnj) { var sx = S.sessoes.find(function (x) { return x.id === id; }); if (!sx || !sx.julgadores) return []; var it = (sx.itens || []).find(function (i) { return dig(i.cnj) === dig(cnj); }), n = it ? String(it.item || '') : '';
       var J = sx.julgadores, comp = (J.composicao || []).map(function (m) { return Object.assign({}, m); });
-      (J.substituicoes || []).forEach(function (sb) { if (!(sb.itens === 'todos' || (Array.isArray(sb.itens) && n && sb.itens.map(String).indexOf(n) >= 0))) return;
+      var inf = it ? infoItem(it) : {}, txt = N([inf.assunto, inf.classe, inf.recurso, it && it.assunto, it && it.classe].join(' ')), row = it ? acervo().by.get(dig(it.cnj)) : null, etq = String((row && (row.Etiquetas || row.etiquetas)) || '').split(/\s*,\s*/);
+      var vale = function (sb) { var al = sb.alcance || (sb.itens === 'todos' || !sb.itens ? 'todos' : 'itens');
+        if (al === 'todos') return true;
+        if (al === 'itens') return Array.isArray(sb.itens) && !!n && sb.itens.map(String).indexOf(n) >= 0;
+        if (al === 'casos') return String(sb.casos || '').split(/[,;]/).map(N).filter(Boolean).some(function (c) { return txt.indexOf(c) >= 0; });
+        if (al === 'impedimento') { var m = comp.find(function (x) { return x.id === sb.sai; }) || (J.composicao || []).find(function (x) { return x.id === sb.sai; }); if (!m) return false; var nm = N(m.nome);
+          return etq.some(function (t) { var g = t.match(/^(impedimento|suspei[cç][aã]o)\s*(?:[-—]\s*)?(?:dra?\.?\s*|des\.?\s*)?(.+)$/i); if (!g) return false; var z = N(g[2]); return z && (nm === z || nm.indexOf(z + ' ') === 0 || z.indexOf(nm) === 0); }); }
+        return false; };
+      (J.substituicoes || []).forEach(function (sb) { if (!vale(sb)) return;
         var k = comp.findIndex(function (m) { return m.id === sb.sai; }); if (k < 0 || !sb.entra) return; var ent = (J.extras || []).concat(J.cadastro || []).find(function (m) { return m.id === sb.entra.id || m.id === sb.entra; }) || (typeof sb.entra === 'object' ? sb.entra : { id: sb.entra, nome: sb.entra });
         comp[k] = { id: ent.id, nome: ent.nome, cargo: ent.cargo || '', papel: comp[k].papel, substitui: comp[k].nome, motivo: sb.motivo || '' }; });
       return comp; },

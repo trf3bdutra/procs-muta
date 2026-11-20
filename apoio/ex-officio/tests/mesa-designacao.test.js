@@ -78,6 +78,16 @@ test('Designação: painel de regras para minuta e correção, com categorias e 
 });
 test('Cartão da sessão: Ex Officio em ícones, aviso de marcos invertidos no cartão, painel com números, julgadores e marcos',()=>{
   const c=read('monitor/triagem/index.html');
-  for(const x of ['class="cwe-pico','function marcosEditor(ss)','class="cwe-inv" data-cwe="p-tab" data-v="marcos"',"['julg', 'Julgadores e substituições'","['marcos', 'Marcos'",'data-cwe="j-ed">editar</button>'])assert.ok(c.includes(x),x);
+  for(const x of ['class="cwe-pico','function marcosEditor(ss)','class="cwe-inv" data-cwe="p-tab" data-v="marcos"',"['julg', 'Julgadores e substituições'","['marcos', 'Marcos'",'class="cwe-jico" data-cwe="j-ed"'])assert.ok(c.includes(x),x);
   assert.ok(!c.includes('Regras de designação do gabinete${Z.escopo'),'sem o texto de abertura na Designação');
+});
+test('Marcos editáveis no cartão com salvar, julgadores por alcance, calendário com sessões e julgadores, grupos recolhíveis',()=>{
+  const c=read('monitor/triagem/index.html');
+  for(const x of ['data-cwe="mk-cal"','data-cwe="mk-salvar"','data-cwe-mkp','class="cwe-jico"',"['casos', 'nos casos de…']","['impedimento', 'onde houver impedimento ou suspeição de quem sai']",'abrirJulgadores'])assert.ok(c.includes(x),x);
+  assert.ok(!c.includes('title="Configurações das pautas" aria-label="Configurações das pautas">⚙'),'sem o botão de configurações');
+  const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
+  assert.ok(m.includes("if (al === 'casos')")&&m.includes("if (al === 'impedimento')"),'motor resolve o alcance');
+  assert.ok(read('monitor/assets/js/regras-gerais.js').includes('function vSesJulg()'),'calendário com sessões e julgadores');
+  const pag=read('monitor/designacao/index.html');
+  for(const x of ['data-grtodos="1"','function aberto(k,n)',"if(EMBED)document.body.classList.add('emb');",'Lendo o histórico da equipe'])assert.ok(pag.includes(x),x);
 });
