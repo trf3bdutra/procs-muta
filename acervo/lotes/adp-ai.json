@@ -17132,8 +17132,8 @@
    "exequente": "MARCELO WALTON",
    "executado": "FUNDACAO NACIONAL DOS POVOS INDIGENAS - FUNAI",
    "assunto": "Demarcação",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Indígena · demarcação de terra indígena (Decreto 1.775/1996) · suspensão dos efeitos do RICD sobre imóvel rural · tutela de urgência",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), examinada antes a preliminar de deserção",
    "modelo": "",
    "variacoes": [],
@@ -17207,6 +17207,98 @@
     "outros": "Certidão sem custas ID 380428493 (15/06/2026). Guia \"aguardando pagamento\" ID 380885202. Despacho ID 381391124 (20/06/2026): comprovar o recolhimento em 5 dias. Comprovante Pix ID 383782893 (pago em 16/06/2026). Decisão ID 385908755 (13/07/2026): indeferiu a tutela recursal in limine e mandou dar vista ao MPF.",
     "representacao": "Agravantes: advogados constituídos (Gustavo Passarelli da Silva e outros). Agravadas: União (AGU) e FUNAI (PGF).",
     "preparo": "Pix de R$ 64,26 ao TRF-3 (ID 383782893), após guia \"aguardando pagamento\" e despacho ID 381391124; sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Indígena — demarcação de terra indígena; suspensão dos efeitos do RICD sobre imóvel rural",
+   "especificidades": "Prioridade na tarefa do PJe · Sem grupo adequado entre os 12 (matéria indígena) · Fazenda Conchita-Cuê, matrícula 20.450 do CRI de Caarapó; RICD do processo administrativo 08620.038398/2014-75 (cerca de 55.000 hectares) · Tutela recursal indeferida in limine (ID 385908755, 13/07/2026) · Preparo: guia \"aguardando pagamento\" (ID 380885202), despacho ID 381391124 e comprovante Pix de 16/06/2026 (ID 383782893), sem comprovante STN; a União suscita deserção [VALIDAR] · Parecer do MPF pelo desprovimento (ID 389232849, lançado como contraminuta)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Indígena — demarcação de terra indígena; suspensão dos efeitos do RICD sobre imóvel rural",
+     "subassuntos": "Indígena · demarcação de terra indígena (Decreto 1.775/1996) · suspensão dos efeitos do RICD sobre imóvel rural · tutela de urgência",
+     "sintese": "",
+     "questoes": "1) Preliminar de deserção (comprovante Pix sem STN); 2) suspensão dos efeitos do RICD e do processo demarcatório sobre o imóvel dos agravantes; 3) presunção de legitimidade do RICD e necessidade de dilação probatória.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Dourados",
+      "dispositivo": "Indeferiu a tutela de urgência para suspender os efeitos do RICD quanto à Fazenda Conchita-Cuê."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-06-12",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "380002265",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "380002265",
+       "data": "2026-06-12"
+      },
+      {
+       "desc": "Despacho sobre o preparo",
+       "id": "381391124",
+       "data": "2026-06-20"
+      },
+      {
+       "desc": "Comprovante Pix",
+       "id": "383782893",
+       "data": "2026-07-01"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "385908755",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "389232849",
+       "data": "2026-07-28"
+      },
+      {
+       "desc": "Contraminuta da FUNAI",
+       "id": "389437935",
+       "data": "2026-07-29"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "390350834",
+       "data": "2026-08-03"
+      }
+     ],
+     "pendencias": "Examinar a deserção (comprovante STN); identificar o ID da decisão agravada",
+     "especificidades": "Prioridade na tarefa do PJe · Sem grupo adequado entre os 12 (matéria indígena) · Fazenda Conchita-Cuê, matrícula 20.450 do CRI de Caarapó; RICD do processo administrativo 08620.038398/2014-75 (cerca de 55.000 hectares) · Tutela recursal indeferida in limine (ID 385908755, 13/07/2026) · Preparo: guia \"aguardando pagamento\" (ID 380885202), despacho ID 381391124 e comprovante Pix de 16/06/2026 (ID 383782893), sem comprovante STN; a União suscita deserção [VALIDAR] · Parecer do MPF pelo desprovimento (ID 389232849, lançado como contraminuta)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Há preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Indígenas (CF 232)",
+     "parecer": "Com parecer",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-13"
+    }
    }
   },
   {
