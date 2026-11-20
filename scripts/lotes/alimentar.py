@@ -95,6 +95,14 @@ def main(lotes):
     op = carrega_json(OP)
     regs = {dg(r.get('processo')): r for r in op.get('registros', [])}
     sessoes, mud_op, mud_s = {}, 0, {}
+    em_pauta = {}
+    for sp0 in sorted(glob.glob(os.path.join(RAIZ, 'acervo/sessoes/2*.json'))):
+        try:
+            S0 = carrega_json(sp0)
+        except Exception:
+            continue
+        for y in (S0.get('itens') if isinstance(S0, dict) else S0) or []:
+            em_pauta[dg(y.get('cnj'))] = sp0
     for lote_id in lotes:
         L = carrega_json(os.path.join(RAIZ, 'acervo/lotes', lote_id + '.json'))
         for it in L.get('itens', []):
@@ -143,6 +151,26 @@ def main(lotes):
                 o['Outras peças'] = [{'tipo': x['tipo'] + (' · ' + x['desc'] if x['desc'] and x['desc'] != x['tipo'] else ''), 'ids': x['ids'], 'data': x['data'], 'texto': x['por']} for x in outras_j]
             if parecer and vazio(t.get('ID do Parecer MPF')):
                 t['ID do Parecer MPF'] = parecer[0]
+            PR = it.get('prontuario_triagem') or {}
+            PC, PL = PR.get('cartao') or {}, PR.get('ctl') or {}
+            def fp(sec, k, v):
+                if not vazio(v) and vazio(sec.get(k)):
+                    sec[k] = v
+            fp(t, 'Síntese Fática', PC.get('sintese')); fp(t, 'Especificidades', PC.get('especificidades'))
+            fp(t, 'Alegações', (PC.get('rel') or {}).get('razoes')); fp(t, 'Tipo de Julgamento', PC.get('tipoJ'))
+            fp(t, 'Tempestividade', PL.get('tempest')); fp(t, 'Preparo', PL.get('preparo')); fp(t, 'Representação', PL.get('repres'))
+            fp(t, 'Prelim.', PL.get('prelim')); fp(t, 'Mídias', PL.get('midias')); fp(t, 'MPF', PL.get('mpf'))
+            fp(t, 'Parecer - Sentido', (PC.get('mpfx') or {}).get('sentido')); fp(t, 'ID do Parecer MPF', (PC.get('mpfx') or {}).get('id'))
+            fp(t, 'Hipóteses Monocrática', PL.get('hip932')); fp(t, 'Intercorrências', PL.get('intercor'))
+            fp(t, 'Urgência', PL.get('urgTipo')); fp(t, 'Urgência - Nível', PL.get('urgNivel')); fp(t, 'Urgência - Apreciação', PL.get('urgSit'))
+            fp(t, 'Urgência - Data', PL.get('urgPedido')); fp(t, 'Urgência - Observação', PL.get('urgObs'))
+            A0 = PC.get('adm') or {}
+            fp(t, 'Tempest - Publicação', A0.get('intim')); fp(t, 'Tempest - Protocolo', A0.get('prot')); fp(t, 'Tempest - Prazo legal', A0.get('prazo'))
+            if A0.get('dobro') is True: fp(t, 'Tempest - Dobro', 'Sim')
+            O0 = PC.get('orig') or {}
+            fp(o, 'Sentença - ID', O0.get('id')); fp(o, 'Sentença - Data', O0.get('data')); fp(o, 'Origem - Juízo', O0.get('juizo')); fp(o, 'Origem - Julgador', O0.get('julgador'))
+            if vazio(t.get('O que falta sanar')) and it.get('pendencias'):
+                t['O que falta sanar'] = '\n'.join(it['pendencias'])
             if vazio(t.get('Tema')) and (it.get('tipo_caso') or it.get('assunto')):
                 t['Tema'] = it.get('tipo_caso') or it.get('assunto')
             if vazio(pr.get('Voto - Resultado')) and it.get('resultado'):
@@ -154,7 +182,9 @@ def main(lotes):
             ses = it.get('sessao')
             sp = os.path.join(RAIZ, 'acervo/sessoes', (ses or '') + '.json')
             if not ses or not os.path.exists(sp):
-                continue
+                sp = em_pauta.get(dg(cnj))
+                if not sp:
+                    continue
             S = sessoes.setdefault(sp, carrega_json(sp))
             x = next((y for y in S.get('itens', []) if dg(y.get('cnj')) == dg(cnj)), None)
             if x is None:
@@ -169,6 +199,17 @@ def main(lotes):
                     alvo = alvo.setdefault(k, {})
                 if vazio(alvo.get(ks[-1])):
                     alvo[ks[-1]] = v
+            def copia(origem, caminho=''):
+                for k, v in origem.items():
+                    cam = (caminho + '.' + k) if caminho else k
+                    if isinstance(v, dict):
+                        copia(v, cam)
+                    elif k not in ('pendencias',):
+                        poe(cam, v)
+            copia({k: v for k, v in PC.items() if k != 'pendencias'})
+            for k, v in PL.items():
+                if not vazio(v) and vazio(ctl.get(k)):
+                    ctl[k] = v
             tj = tipo_julg(it, rec_j)
             poe('tipoJ', tj)
             if sent:

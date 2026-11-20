@@ -756,6 +756,22 @@ function perfil(it,i){
    if(T.ato||T.materia) b+=`<div class="box wide"><h3>Triagem do recurso${T.analisado_em?' · '+esc(T.analisado_em):''}</h3>${dl({'Ato a proferir':esc(T.ato),'Matéria':esc(T.materia),'Origem':esc(T.origem),'Decisão recorrida':esc(T.decisao_agravada||T.sentenca),'Recurso':esc(T.recurso),'Preparo':esc(T.preparo),'Monocrática':esc(T.monocratica)})}</div>`;
    if(S.ultima_decisao||S.ultima_movimentacao) b+=`<div class="box"><h3>Situação atual nos autos</h3>${dl({'Última decisão':esc(S.ultima_decisao),'Última peça':esc(S.ultima_peca),'Última informação':esc(S.ultima_informacao),'Última movimentação':esc(S.ultima_movimentacao)})}<p class="cmt-n" style="margin-top:6px">${esc(S.aviso||'')}${E.em?' · extraído em '+esc(E.em)+(E.documentos?' · '+esc(E.documentos)+' documentos':''):''}</p></div>`;
    if(X.sintese_fatica||X.recurso) b+=`<div class="box wide"><h3>Teor das peças</h3>${X.sintese_fatica?`<p><b>Síntese fática.</b> ${esc(X.sintese_fatica)}</p>`:''}${dl({'Inicial':esc(X.inicial),'Decisão ou sentença recorrida':esc(X.decisao_recorrida),'Recurso':esc(X.recurso),'Resposta':esc(X.resposta),'Parecer':esc(X.parecer),'Memoriais':esc(X.memoriais),'Representação':esc(X.representacao),'Preparo':esc(X.preparo)})}</div>`;}
+  {const PT=it.prontuario_triagem||{},C=PT.cartao||{},K=PT.ctl||{},A=C.adm||{},O=C.orig||{},AI=C.ai||{},R=C.rel||{},MX=C.mpfx||{},br2=v=>v===true?'sim':v===false?'não':esc(v);
+   if(Object.keys(C).length||Object.keys(K).length) b+=`<div class="box wide"><h3>Prontuário da triagem · campos do Ex Officio</h3>`+
+    dl({'Tipo de julgamento':esc(C.tipoJ),'Recurso relacionado':esc(C.relacionado),'Subassuntos':esc(C.subassuntos),'Questões controvertidas':esc(C.questoes),
+      'Decisão na origem':[O.tipo,O.id&&'ID '+O.id,O.data,O.juizo,O.julgador].filter(Boolean).map(esc).join(' · '),'Dispositivo':esc(O.dispositivo),
+      'Tempestividade':[K.tempest,A.intim&&'intimação '+A.intim,A.prot&&'protocolo '+A.prot,A.prazo&&A.prazo+' dias',A.dobro&&'em dobro'].filter(Boolean).map(esc).join(' · '),
+      'Preparo':[K.preparo,A.ajg&&'justiça gratuita',A.dpu&&'DPU'].filter(Boolean).map(esc).join(' · '),'Outro requisito':[A.req,A.reqObs].filter(Boolean).map(esc).join(' · '),
+      'Preliminares':esc(K.prelim),'Representação':esc(K.repres),'Mídias':esc(K.midias),'Intervenção do MPF':esc(K.mpf),'Parecer':[K.parecer,MX.sentido,MX.id&&'ID '+MX.id].filter(Boolean).map(esc).join(' · '),
+      'AI · decisão agravada':[AI.id&&'ID '+AI.id,AI.data,AI.hip,AI.efeito].filter(Boolean).map(esc).join(' · '),
+      'Embargos de declaração':C.ed&&[C.ed.id&&'ID '+C.ed.id,C.ed.data,C.ed.vicio,C.ed.ponto].filter(Boolean).map(esc).join(' · '),
+      'Agravo interno':C.agint&&[C.agint.id&&'ID '+C.agint.id,C.agint.data,C.agint.sintese].filter(Boolean).map(esc).join(' · '),
+      'Retratação':C.jr&&[C.jr.trib,C.jr.tema,C.jr.questao].filter(Boolean).map(esc).join(' · '),
+      'Urgência':[K.urgTipo,K.urgNivel,K.urgSit,K.urgPedido&&'pedido em '+K.urgPedido].filter(Boolean).map(esc).join(' · '),
+      'Ato (monocrática)':[K.tipoAto,K.hip932,K.fundamento].filter(Boolean).map(esc).join(' · '),'Resultado proposto':esc(K.resJulg),'Honorários':esc(K.honor),'Intercorrência':esc(K.intercor)})+
+    (R.razoes?`<p><b>Razões.</b> ${esc(R.razoes)}</p>`:'')+(R.contrarrazoes?`<p><b>Contrarrazões.</b> ${esc(R.contrarrazoes)}</p>`:'')+
+    ((C.recursos||[]).length?`<table><tr><th>Parte</th><th>Recurso</th><th>ID</th><th>Resposta</th></tr>${C.recursos.map(r=>`<tr><td>${esc(r.parte)}</td><td>${esc(r.tipo)}</td><td class="cnj">${esc(r.id)}</td><td>${esc(r.contra)}</td></tr>`).join('')}</table>`:'')+
+    ((C.pecas||[]).length?`<table><tr><th>Peça</th><th>ID</th><th>Data</th></tr>${C.pecas.map(p=>`<tr><td>${esc(p.desc)}</td><td class="cnj">${esc(p.id)}</td><td>${esc(p.data)}</td></tr>`).join('')}</table>`:'')+`</div>`;}
   if((it.pecas||[]).length||it.mpf) b+=`<div class="box"><h3>Peças nos autos</h3>${dl(Object.fromEntries((it.pecas||[]).map(p=>[p.peca||p.tipo,'ID '+p.id+(p.data?' · '+p.data:'')])))}${it.mpf?`<p style="margin-top:6px">${esc(it.mpf)}</p>`:''}</div>`;
   if(it.autos&&(it.autos.documentos||[]).length){const A=it.autos,st=new Set(A.sem_texto||[]);
     b+=`<div class="box wide"><h3>Autos no PJe · ${A.total} documentos</h3><p class="cmt-n">Inteiro teor extraído em ${esc(br(A.extraido_em))}${st.size?` · ${st.size} PDF sem texto (digitalizado), marcado com ⚠`:''}${(A.faltam||[]).length?` · ${A.faltam.length} documento(s) não lido(s)`:''}.</p>`+
