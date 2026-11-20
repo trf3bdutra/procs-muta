@@ -2001,8 +2001,8 @@
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Acidente de Trabalho",
    "grupo": "g5",
-   "tipo_caso": "AI · Cumprimento de sentença previdenciário (competência delegada, Anastácio) · laudo contábil e pedido de nova perícia",
-   "resultado": "Ato a proferir: conferir a regularização da representação (procurações de 12/05/2026) e intimar o INSS para contraminuta; depois, julgamento do agravo (voto). Antes, conferir a competência: a ação de origem tratava também de auxílio-doença por acidente de trabalho",
+   "tipo_caso": "AI · Cumprimento de sentença · Previdenciário · cumprimento de sentença de aposentadoria por idade (competência delegada, Anastácio) · laudo contábil sobre a conta errada · complementação da perícia ou cálculo pela contadoria",
+   "resultado": "Ato a proferir: conferir a competência (acidente de trabalho) e a regularização da representação [VALIDAR]; julgamento do agravo (voto); INSS sem contraminuta",
    "modelo": "",
    "variacoes": [
     "ADM",
@@ -2078,7 +2078,82 @@
     "representacao": "Advogado Jair dos Santos Pelliccioni (OAB/MS 2.391). Procuração exigida pela decisão ID 365154675; juntadas em 12/05/2026 petição com procuração (ID 372825993) e cópias de procurações dos autos do TJMS (ID 372826000). Conferir se outorgadas pela agravante [VALIDAR]",
     "preparo": "Não consta recolhimento nem pedido de gratuidade identificado [VALIDAR]"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Cumprimento de sentença · Previdenciário · cumprimento de sentença de aposentadoria por idade (competência delegada, Anastácio) · laudo contábil sobre a conta errada · complementação da perícia ou cálculo pela contadoria",
+   "especificidades": "Competência: a ação de origem tratava também de auxílio-doença por acidente de trabalho; conferir se a parte executada é previdenciária comum (competência delegada) [VALIDAR] · Representação: procurações juntadas em 12/05/2026 (IDs 372825993 e 372826000) após a decisão ID 365154675; conferir se outorgadas pela sucessora [VALIDAR] · Tutela recursal indeferida (ID 365154675, 11/05/2026) · INSS intimado; prazo decorrido em 16/07/2026, sem contraminuta · Preparo: sem recolhimento nem pedido de gratuidade identificado (certidão ID 316457083) [VALIDAR] · Decisão agravada sem texto legível (cópia ID 316202319)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença · Previdenciário · cumprimento de sentença de aposentadoria por idade (competência delegada, Anastácio) · laudo contábil sobre a conta errada · complementação da perícia ou cálculo pela contadoria",
+     "sintese": "Bonifácio Pereira obteve na justiça estadual, em competência delegada, a aposentadoria por idade desde 06/09/2007 (trânsito em 02/08/2013); a ação pedia também o restabelecimento de auxílio-doença acidentário. No cumprimento de sentença, a sucessora contesta o laudo contábil que teria partido da inicial de execução errada.",
+     "questoes": "1) Competência da Justiça Federal (delegada) diante de pedido acidentário na origem; 2) regularidade da representação da sucessora; 3) preparo ou gratuidade; 4) erro do laudo contábil e complementação da perícia.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 316202313 (28/02/2025): erro do perito ao usar a inicial de execução de fls. 215-220 em vez da de fls. 463-469; cálculo de R$ 582.710,11 com INPC e juros na forma da Lei 11.960/2009 e da Lei 12.703/2012; pede efeito suspensivo, complementação do laudo ou cálculos da contadoria.",
+      "contrarrazoes": "Não consta: o INSS foi intimado pelo despacho ID 317380468 (19/03/2025), mas não há contraminuta nos autos"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "fls. 623 e 626-628",
+      "juizo": "Vara Única de Anastácio (competência delegada)",
+      "dispositivo": "Decisão sobre o laudo contábil no cumprimento de sentença [VALIDAR teor]."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-02-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Lourdes Silvana Pincer da Silva",
+       "tipo": "Agravo de instrumento",
+       "id": "316202313",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "316202313",
+       "data": "2025-02-28"
+      },
+      {
+       "desc": "Despacho: intimação do INSS",
+       "id": "317380468",
+       "data": "2025-03-19"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal e exigiu procuração",
+       "id": "365154675",
+       "data": "2026-05-11"
+      },
+      {
+       "desc": "Procurações",
+       "id": "372825993",
+       "data": "2026-05-12"
+      }
+     ],
+     "pendencias": "Conferir a competência, a procuração e o preparo; ler a decisão agravada",
+     "especificidades": "Competência: a ação de origem tratava também de auxílio-doença por acidente de trabalho; conferir se a parte executada é previdenciária comum (competência delegada) [VALIDAR] · Representação: procurações juntadas em 12/05/2026 (IDs 372825993 e 372826000) após a decisão ID 365154675; conferir se outorgadas pela sucessora [VALIDAR] · Tutela recursal indeferida (ID 365154675, 11/05/2026) · INSS intimado; prazo decorrido em 16/07/2026, sem contraminuta · Preparo: sem recolhimento nem pedido de gratuidade identificado (certidão ID 316457083) [VALIDAR] · Decisão agravada sem texto legível (cópia ID 316202319)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-05-11"
+    }
+   }
   },
   {
    "sessao": "",
