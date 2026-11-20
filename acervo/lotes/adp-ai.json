@@ -10291,13 +10291,13 @@
    "exequente": "SONIA DAS GRACAS MATOS FERRAZ",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Contratos Bancários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Contratos bancários · execução hipotecária do SFH · prescrição da pretensão executiva · exceção de pré-executividade",
+   "resultado": "Ato a proferir: julgamento do agravo (voto)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Sônia das Graças Matos contra a decisão da 1ª Vara Federal de Dourados/MS (execução hipotecária do SFH 5003064-80.2019.4.03.6002, movida pela CEF, de R$ 96.126,90) que rejeitou a exceção de pré-executividade fundada na prescrição. A agravante sustenta a prescrição quinquenal do artigo 206, § 5º, I, do Código Civil, pois a última parcela venceu em 07/2013 e a execução foi ajuizada em 29/11/2019.",
+   "peculiaridades": "Efeito suspensivo deferido em parte antes da redistribuição. Contraminuta da CEF (ID 367794800). Gratuidade a confirmar [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -10330,7 +10330,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Sem custas (certidão) · certidão sem custas: ID 353015343 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 0076300-46.2000.5.24.0022, 5003064-80.2019.4.03.6002 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 0076300-46.2000.5.24.0022, 5003064-80.2019.4.03.6002 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução hipotecária do SFH; prescrição da pretensão executiva em exceção de pré-executividade",
+    "origem": "5003064-80.2019.4.03.6002 (1ª Vara Federal de Dourados/MS)",
+    "decisao_agravada": "Decisão que rejeitou a exceção de pré-executividade (cópia ID 352702711) [VALIDAR ID e data na origem]",
+    "recurso": "ID 352702701 · 30/01/2026",
+    "preparo": "Gratuidade afirmada pela agravante [VALIDAR]",
+    "monocratica": "Possível, se houver precedente qualificado sobre o termo inicial da prescrição no mútuo do SFH [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -10351,6 +10359,98 @@
     "ultima_informacao": "Certidão · ID 365602401 · 10/04/2026",
     "ultima_movimentacao": " 15:33 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Contratos bancários · execução hipotecária do SFH · prescrição da pretensão executiva · exceção de pré-executividade",
+   "especificidades": "Efeito suspensivo deferido em parte pelo Des. Fed. Herbert de Bruyn antes da redistribuição (ID 353092013, 03/02/2026): suspensos só os atos de constrição e expropriação · Redistribuído à Turma Regional de MS (Resolução 33/2025, IDs 362606133 e 365602401) · Gratuidade afirmada pela agravante, sem a decisão concessiva nos autos do agravo [VALIDAR] · Título: escritura pública de mútuo hipotecário; 53 parcelas vencidas de 03/2009 a 07/2013; execução distribuída em 29/11/2019 · Arrematação do imóvel em processo trabalhista mencionada na decisão agravada",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A CEF executa mútuo hipotecário do SFH com 53 parcelas vencidas entre 03/2009 e 07/2013, em ação distribuída em 29/11/2019. A executada alegou prescrição em exceção de pré-executividade, rejeitada na origem.",
+    "inicial": "Execução hipotecária do SFH 5003064-80.2019.4.03.6002 da CEF (1ª Vara Federal de Dourados/MS), valor da causa R$ 96.126,90",
+    "decisao_recorrida": "Decisão de origem (cópia ID 352702711): prescrição parcela a parcela; ausência de prova inequívoca da prescrição total; necessidade de dilação probatória, inclusive pela arrematação do imóvel em processo trabalhista; matéria própria de embargos à execução [VALIDAR teor integral]",
+    "recurso": "Agravo ID 352702701 (30/01/2026): (1) cabimento contra decisão em execução (artigo 1.015, parágrafo único, do CPC); (2) prescrição como matéria de ordem pública aferível de plano; (3) prescrição quinquenal da dívida líquida em instrumento público (artigo 206, § 5º, I, do Código Civil), contada da última parcela de 07/2013; e (4) contradição da decisão agravada. Pede efeito suspensivo e o acolhimento da exceção.",
+    "resposta": "CEF ID 367794800 (20/04/2026): validade do título; necessidade de dilação probatória; inadequação da via; manutenção da decisão.",
+    "parecer": "Não consta",
+    "outros": "Decisão ID 353092013 (03/02/2026, Des. Fed. Herbert de Bruyn): deferiu em parte o efeito suspensivo, para suspender apenas atos de constrição e expropriação. Decisão ID 362606133 e certidão ID 365602401: redistribuição à Turma Regional de MS.",
+    "representacao": "Agravante: advogado Edner Goulart de Oliveira (OAB/SP 266.217), procuração ID 352702709. CEF: advogado Nei Calderon (OAB/SP 114.904).",
+    "preparo": "Certidão sem custas (ID 353015343); a agravante afirma gratuidade concedida na origem [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contratos bancários · execução hipotecária do SFH · prescrição da pretensão executiva · exceção de pré-executividade",
+     "sintese": "A CEF executa mútuo hipotecário do SFH com 53 parcelas vencidas entre 03/2009 e 07/2013, em ação distribuída em 29/11/2019. A executada alegou prescrição em exceção de pré-executividade, rejeitada na origem.",
+     "questoes": "1) Cabimento da exceção de pré-executividade para a prescrição (Súmula 393/STJ); 2) prazo e termo inicial da prescrição da execução de mútuo hipotecário do SFH; 3) necessidade de dilação probatória.",
+     "rel": {
+      "razoes": "Agravo (ID 352702701): (1) cabimento do agravo; (2) prescrição aferível de plano; (3) prescrição quinquenal desde a última parcela de 07/2013; e (4) contradição da decisão agravada.",
+      "contrarrazoes": "CEF (ID 367794800): validade do título; dilação probatória; manutenção da decisão."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "352702711",
+      "juizo": "1ª Vara Federal de Dourados/MS",
+      "dispositivo": "Rejeitou a exceção de pré-executividade [VALIDAR transcrição]."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Deferido",
+      "id": "352702711"
+     },
+     "adm": {
+      "prot": "2026-01-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Sônia das Graças Matos",
+       "tipo": "Agravo de instrumento",
+       "id": "352702701",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "352702701",
+       "data": "2026-01-30"
+      },
+      {
+       "desc": "Decisão agravada (cópia)",
+       "id": "352702711",
+       "data": "2026-01-30"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "353015343",
+       "data": "2026-02-02"
+      },
+      {
+       "desc": "Decisão que deferiu em parte o efeito suspensivo",
+       "id": "353092013",
+       "data": "2026-02-03"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "367794800",
+       "data": "2026-04-20"
+      }
+     ],
+     "pendencias": "Confirmar a gratuidade na origem e a data da intimação da decisão agravada",
+     "especificidades": "Efeito suspensivo deferido em parte pelo Des. Fed. Herbert de Bruyn antes da redistribuição (ID 353092013, 03/02/2026): suspensos só os atos de constrição e expropriação · Redistribuído à Turma Regional de MS (Resolução 33/2025, IDs 362606133 e 365602401) · Gratuidade afirmada pela agravante, sem a decisão concessiva nos autos do agravo [VALIDAR] · Título: escritura pública de mútuo hipotecário; 53 parcelas vencidas de 03/2009 a 07/2013; execução distribuída em 29/11/2019 · Arrematação do imóvel em processo trabalhista mencionada na decisão agravada"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · parcialmente deferida",
+     "urgData": "2026-02-03"
+    }
    }
   },
   {
