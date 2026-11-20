@@ -1323,7 +1323,7 @@
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Abono de Permanência",
    "grupo": "g5",
-   "tipo_caso": "AI · Cumprimento de sentença contra o INSS · herdeiros · valor incontroverso e saldo remanescente",
+   "tipo_caso": "AI · Cumprimento de sentença contra o INSS · herdeiros · valor incontroverso e pagamento parcial · prosseguimento pelo saldo com expedição de precatório",
    "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
    "variacoes": [
@@ -1407,7 +1407,87 @@
     "representacao": "Advogados Marco Antônio Girão d’Ávila (OAB/MS 7.456) e Ricardo Girão d’Ávila (OAB/MS 8.213) assinam as petições; procuração não identificada com texto [VALIDAR]",
     "preparo": "Recolhido pelo portal de custas (ID 359070470; código 20466, contribuinte Vanessa Lopes Brandão Pinto), reconhecido na decisão ID 367018477."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Cumprimento de sentença contra o INSS · herdeiros · valor incontroverso e pagamento parcial · prosseguimento pelo saldo com expedição de precatório",
+   "especificidades": "Tutela recursal indeferida (ID 367018477, 11/05/2026), que deu o preparo por recolhido · Preparo: pagamento pelo portal de custas/PagTesouro (ID 359070470), sem comprovante STN [VALIDAR] · Manifestações posteriores dos agravantes (IDs 388105112 e 390952138) com documentos sem texto; dois documentos não lidos no PJe · INSS pede majoração de honorários (artigo 85, § 11, do CPC) · Decisão agravada sem texto extraível (cópia ID 390952149) [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença contra o INSS · herdeiros · valor incontroverso e pagamento parcial · prosseguimento pelo saldo com expedição de precatório",
+     "sintese": "Execução contra o INSS no processo 0001204-15.1994.4.03.6000, movida por servidores; os herdeiros de Ana Maria Lopes receberam R$ 30.410,16 em 2020 e sustentam que o valor de R$ 103.042,08 (11/2012) se tornou incontroverso, pedindo o saldo de R$ 72.631,92. O juízo decidiu em sentido contrário (ID 555778881).",
+     "questoes": "1) Valor incontroverso da execução e efeito do pagamento parcial; 2) prosseguimento pelo saldo remanescente com expedição de precatório; 3) honorários recursais.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 358623368 (06/03/2026): valor da execução incontroverso; pagamento parcial; prosseguimento pelo saldo de R$ 72.631,92, atualizado, com precatórios. Manifestações posteriores (IDs 388105112 e 390952138) com documentos sem texto.",
+      "contrarrazoes": "Contraminuta do INSS ID 384634226 (06/07/2026): desprovimento e majoração dos honorários (artigo 85, § 11, do CPC)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "555778881",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "[VALIDAR: teor da decisão ID 555778881 não extraído]"
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "555778881"
+     },
+     "adm": {
+      "prot": "2026-03-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Vanessa Lopes Brandão Pinto e outros",
+       "tipo": "Agravo de instrumento",
+       "id": "358623368",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "358623368",
+       "data": "2026-03-06"
+      },
+      {
+       "desc": "Comprovante de custas",
+       "id": "359070470",
+       "data": "2026-03-06"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "367018477",
+       "data": "2026-05-11"
+      },
+      {
+       "desc": "Contraminuta do INSS",
+       "id": "384634226",
+       "data": "2026-07-06"
+      },
+      {
+       "desc": "Manifestação dos agravantes",
+       "id": "390952138",
+       "data": "2026-08-07"
+      }
+     ],
+     "pendencias": "Ler a decisão agravada e as manifestações posteriores; conferir o comprovante STN",
+     "especificidades": "Tutela recursal indeferida (ID 367018477, 11/05/2026), que deu o preparo por recolhido · Preparo: pagamento pelo portal de custas/PagTesouro (ID 359070470), sem comprovante STN [VALIDAR] · Manifestações posteriores dos agravantes (IDs 388105112 e 390952138) com documentos sem texto; dois documentos não lidos no PJe · INSS pede majoração de honorários (artigo 85, § 11, do CPC) · Decisão agravada sem texto extraível (cópia ID 390952149) [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-05-11"
+    }
+   }
   },
   {
    "sessao": "",
