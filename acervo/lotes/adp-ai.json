@@ -6083,13 +6083,15 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "REGINALDA ROSARIA RODRIGUES DE OLIVEIRA",
    "assunto": "Auxílio por Incapacidade Temporária",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "AI do INSS · Previdenciário (competência delegada) · tutela antes da perícia e cessação condicionada a autorização judicial · efeito suspensivo negado",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); efeito suspensivo negado (ID 394265661) e ratificado após a redistribuição (ID 395871808); contraminuta apresentada",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do INSS contra a decisão (evento 3) da 1ª Vara Cível da Comarca de Paranaíba/MS (processo 5000560-79.2026.8.12.0018) que concedeu a Reginalda Rosaria Rodrigues de Oliveira, auxiliar de serviços gerais com sequelas de hanseníase dimorfa e fibromialgia, tutela para implantar benefício por incapacidade antes da perícia, condicionou a cessação a autorização judicial e fixou multa diária. O INSS invoca a presunção de legitimidade da perícia administrativa e pede, subsidiariamente, DCB pela perícia ou em 120 dias e afastamento da exigência de autorização judicial para cessar.",
+   "peculiaridades": "Distribuído a outro relator (Des. Fed. Marcos Moreira), que negou a liminar (ID 394265661, 31/08/2026); reconhecida a incompetência e redistribuído (ID 394896557); decisão ID 395871808 ratificou a negativa (artigo 64, § 4º, do CPC). O INSS cita teses da TNU (Temas 164 e 246), que não se usam como precedente no voto. Ponto autônomo: cessação condicionada a prévia autorização judicial (artigo 60, §§ 8º e 9º, da Lei 8.213/1991).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -6120,7 +6122,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Previdenciário — tutela antes da perícia; DCB; cessação do benefício",
+    "origem": "5000560-79.2026.8.12.0018 (1ª Vara Cível de Paranaíba/MS, competência delegada)",
+    "decisao_agravada": "Decisão do evento 3 dos autos de origem",
+    "recurso": "ID 393082307 · 21/08/2026",
+    "preparo": "Isento (autarquia federal)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -6140,6 +6151,97 @@
     "ultima_informacao": "Certidão · ID 395095771 · 01/09/2026",
     "ultima_movimentacao": "16/09/2026 15:51 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Segurada auxiliar de serviços gerais, com sequelas de hanseníase e fibromialgia, obteve tutela para receber benefício por incapacidade antes da perícia, sem cessação sem ordem judicial e com multa diária. O INSS recorre.",
+    "inicial": "Ação 5000560-79.2026.8.12.0018 contra o INSS para conceder ou restabelecer benefício por incapacidade",
+    "decisao_recorrida": "Decisão do evento 3 da 1ª Vara Cível de Paranaíba/MS: tutela para implantar o benefício antes da perícia, cessação condicionada a autorização judicial e multa diária",
+    "recurso": "Agravo ID 393082307 (21/08/2026): (1) ausência de verossimilhança sem laudo judicial; (2) presunção de legitimidade da perícia administrativa; (3) atestados particulares insuficientes; (4) subsidiariamente, DCB pela perícia ou em 120 dias da implantação e possibilidade de revisão administrativa sem autorização judicial. Pede efeito suspensivo.",
+    "resposta": "Reginalda Rosaria Rodrigues de Oliveira ID 398334885 (16/09/2026): documentação médica idônea; natureza alimentar; reversibilidade; multa proporcional; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "INSS: procurador federal Érico Tsukasa Hayashida. Agravada: advogados do escritório Ferraz e Mendes (Paranaíba/MS); procuração na cópia dos autos (ID 393082311) [VALIDAR]",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Benefício por incapacidade; tutela antes da perícia; DCB; multa diária",
+     "sintese": "Segurada auxiliar de serviços gerais, com sequelas de hanseníase e fibromialgia, obteve tutela para receber benefício por incapacidade antes da perícia, sem cessação sem ordem judicial e com multa diária. O INSS recorre.",
+     "questoes": "1) Probabilidade do direito com base em documentos particulares, antes da perícia; 2) cessação condicionada a autorização judicial e DCB (artigo 60, §§ 8º e 9º, da Lei 8.213/1991); 3) multa diária.",
+     "rel": {
+      "razoes": "Agravo (ID 393082307): falta de verossimilhança; presunção da perícia administrativa; atestados particulares; DCB e revisão administrativa.",
+      "contrarrazoes": "Agravada (ID 398334885): documentação idônea; natureza alimentar; reversibilidade; multa proporcional."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "1ª Vara Cível da Comarca de Paranaíba/MS",
+      "dispositivo": "Concedeu a tutela para implantar o benefício antes da perícia, condicionou a cessação a autorização judicial e fixou multa diária."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-08-21",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Agravo de instrumento",
+       "id": "393082307",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "393082307",
+       "data": "2026-08-21"
+      },
+      {
+       "desc": "Cópia dos autos de origem",
+       "id": "393082311",
+       "data": "2026-08-21"
+      },
+      {
+       "desc": "Despacho que negou a liminar (Des. Fed. Marcos Moreira)",
+       "id": "394265661",
+       "data": "2026-08-31"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "394896557",
+       "data": "2026-09-01"
+      },
+      {
+       "desc": "Decisão que ratificou a negativa",
+       "id": "395871808",
+       "data": "2026-09-14"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "398334885",
+       "data": "2026-09-16"
+      }
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-09-14"
+    }
    }
   },
   {
