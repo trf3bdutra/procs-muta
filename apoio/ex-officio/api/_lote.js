@@ -32,6 +32,9 @@
 const L = require('./_lib');
 const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/, DATA = /^\d{4}-\d{2}-\d{2}$/;
 const nada = e => { if (e.status === 404) return { dados: null }; throw e; };
+/* lotes podem passar de 1 MB (teor dos processos): leitura pelo texto cru */
+const gravarLote = (rel, dados, sha, msg) => sha && L.commitArquivos ? L.commitArquivos([{ path: rel, txt: JSON.stringify(dados, null, 1) + '\n', sha }], msg) : L.gravarJson(rel, dados, sha, msg);
+const lerLote = async rel => { if (!L.lerGrande) return L.lerJson(rel); const { txt, sha } = await L.lerGrande(rel); return { dados: JSON.parse(txt), sha }; };
 const sem = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const CORES = ['#2f6db5', '#7a5cc2', '#1f8a70', '#c07a12', '#b8562f', '#3a4a5c', '#8a5a9e', '#4f7f3a'];
 const ENT = /UNI[ÃA]O|INSS|INSTITUTO NACIONAL|BANCO CENTRAL|FUNDA[CÇ][AÃ]O|CAIXA ECON|EMPRESA BRASILEIRA|CONSELHO|AG[ÊE]NCIA|UNIVERSIDADE|FAZENDA/i;
@@ -96,7 +99,7 @@ function agrupar(lote) {
 
 /* Índices de pauta: projeção da sessão, sem copiar ou modificar os processos.
    Grupos por assunto são o agrupamento inicial para casos/modelos correlatos. */
-function tipoLote(l) { return l.tipo === 'pauta' && (l.sessoes || []).length === 1 ? 'pauta' : 'avulso'; }
+function tipoLote(l) { if (l.tipo === 'triagem') return 'triagem'; return l.tipo === 'pauta' && (l.sessoes || []).length === 1 ? 'pauta' : 'avulso'; }
 function idPauta(s) { return 'pauta-' + s; }
 function rotuloAssunto(x) {
   return String(x.assunto || x.classe || 'Sem assunto informado').trim().replace(/\s+/g,' ').slice(0,130);
@@ -169,11 +172,11 @@ module.exports = async (req, res) => {
       const lista = await L.gh('/contents/acervo/lotes?ref=main').catch(e => (e.status === 404 ? [] : Promise.reject(e)));
       const lotes = [];
       for (const f of (Array.isArray(lista) ? lista : []).filter(f => /^[a-z0-9-]+\.json$/i.test(f.name))) {
-        const { dados } = await L.lerJson('acervo/lotes/' + f.name).catch(nada);
+        const { dados } = await lerLote('acervo/lotes/' + f.name).catch(nada);
         if (!dados || !loteVe(dados)) continue;
         if (modo !== 'cg') await anotar(dados);
         lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, tipo:tipoLote(dados), sessao:tipoLote(dados)==='pauta'?dados.sessoes[0]:null,
-          sessoes: dados.sessoes, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
+          sessoes: dados.sessoes, tarefa: dados.tarefa || null, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
       }
       const agenda = await calendario();
       const sessoes = agenda.filter(s => gestor || s.publicada);
@@ -183,14 +186,14 @@ module.exports = async (req, res) => {
         String(a.titulo).localeCompare(String(b.titulo),'pt-BR'));
       return res.status(200).json({ usuario:u, gestor, relator, modo,
         lotes, sessoes, calendario:modo==='cg'?agenda:[],
-        colecoes:{avulsas:lotes.filter(l=>l.tipo==='avulso'),pauta:{sessoes,lotes:lotes.filter(l=>l.tipo==='pauta')}} });
+        colecoes:{avulsas:lotes.filter(l=>l.tipo==='avulso'),pauta:{sessoes,lotes:lotes.filter(l=>l.tipo==='pauta')},triagem:lotes.filter(l=>l.tipo==='triagem')} });
     }
     if (!ID.test(id)) return res.status(400).json({ erro: 'lote inválido' });
     const mx = String(q.minuta || '');
     if (mx) {
       if (!PROC.test(mx)) return res.status(400).json({ erro: 'processo inválido' });
       if (modo !== 'cg') {
-        const { dados: lt } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
+        const { dados: lt } = await lerLote('acervo/lotes/' + id + '.json').catch(nada);
         if (!lt || !loteVe(lt)) return res.status(404).json({ erro: 'Lote não encontrado.' });
         await anotar(lt);
         const it = lt && (lt.itens || []).find(i => String(i.processo).slice(0, 10) === mx);
@@ -201,7 +204,7 @@ module.exports = async (req, res) => {
       return res.status(200).json(dados);
     }
     const sessaoVirtual=/^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);
-    const { dados: persistido } = await L.lerJson('acervo/lotes/' + id + '.json').catch(nada);
+    const { dados: persistido } = await lerLote('acervo/lotes/' + id + '.json').catch(nada);
     const lote = persistido || (sessaoVirtual && (await calendario()).some(z=>z.date===sessaoVirtual[1]&&(gestor||z.publicada)) ? await indicePauta(sessaoVirtual[1]) : null);
     if (!lote || !loteVe(lote)) return res.status(404).json({ erro: 'Lote não encontrado.' });
     /* cartão do prontuário (Ex Officio) e situação, lidos das sessões do lote no momento da consulta */
@@ -237,7 +240,7 @@ async function gravar(req, res, u, gestor) {
     if(pedidos.some(c=>!porCnj.has(c)))return res.status(400).json({erro:'A seleção contém processo que não pertence à sessão.'});
     const titulo=String(b.titulo||'').trim().slice(0,80);
     if(!titulo)return res.status(400).json({erro:'Informe o título do lote.'});
-    const existente=await L.lerJson(rel).catch(nada);
+    const existente=await lerLote(rel).catch(nada);
     if(existente.dados)return res.status(409).json({erro:'Já existe um lote com esse identificador.'});
     const itens=pedidos.map(c=>novoItem(data,porCnj.get(c)));
     const criterios={};for(const k of ['assunto','classe','resultado','busca','gruposOcultos'])
@@ -277,7 +280,7 @@ async function gravar(req, res, u, gestor) {
   }
   if (b.acao === 'criar-lista' || b.acao === 'itens') {
     const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
-    const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'tipo_caso', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada'];
+    const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'tipo_caso', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada', 'bloco'];
     const OBJ = ['triagem', 'situacao_atual', 'extracao', 'teor'];
     const LST = ['variacoes', 'pendencias', 'pecas'];
     const limpo = (x, it) => {
@@ -290,15 +293,15 @@ async function gravar(req, res, u, gestor) {
       tipo_caso: '', resultado: '', modelo: '', variacoes: [], observacao: '', peculiaridades: '', peculiaridades_relator: '', orientacao: '',
       equipe: { minuta: '', correcao: '', situacao: 'A minutar' }, pecas: [], mpf: '', triagem: {}, ajustes: [], pendencias: [], minuta: false });
     const lista = (Array.isArray(b.itens) ? b.itens : []).filter(x => x && CNJ.test(String(x.processo || '')));
-    if (!lista.length || lista.length > 600) return res.status(400).json({ erro: 'Informe de 1 a 600 processos com número CNJ completo.' });
+    if ((!lista.length && !b.colecao) || lista.length > 600) return res.status(400).json({ erro: 'Informe de 1 a 600 processos com número CNJ completo.' });
     if (b.acao === 'criar-lista') {
       if (/^pauta-/.test(id)) return res.status(400).json({ erro: 'Identificador reservado à matriz geral.' });
       const titulo = String(b.titulo || '').trim().slice(0, 80);
       if (!titulo) return res.status(400).json({ erro: 'Informe o título do lote.' });
-      if ((await L.lerJson(rel).catch(nada)).dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });
+      if ((await lerLote(rel).catch(nada)).dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });
       const vistos = new Set(), itens = [];
       for (const x of lista) { if (vistos.has(x.processo)) continue; vistos.add(x.processo); itens.push(limpo(x, base(itens.length + 1, x.processo))); }
-      const lote = { schema: 'gabcmt.lote', versao: 1, tipo: 'avulso', origem: String(b.origem || 'lista').slice(0, 80), id, titulo,
+      const lote = { schema: 'gabcmt.lote', versao: 1, tipo: b.tipo === 'triagem' ? 'triagem' : 'avulso', tarefa: String(b.tarefa || '').slice(0, 120) || undefined, origem: String(b.origem || 'lista').slice(0, 80), id, titulo,
         descricao: String(b.descricao || '').trim().slice(0, 300), sessoes: [], filtro: {}, criado_por: u, atualizado_em: new Date().toISOString().slice(0, 10),
         colunas: Array.isArray(b.colunas) ? b.colunas.slice(0, 20) : [], grupos: Array.isArray(b.grupos) ? b.grupos.slice(0, 12) : [],
         grupo_outros: { rotulo: 'A triar', cor: '#9aa0a8' }, minutas: 'acervo/minutas/' + id + '/<processo>.json', itens };
@@ -306,7 +309,7 @@ async function gravar(req, res, u, gestor) {
       return res.status(200).json({ ok: true, id, total: itens.length });
     }
     for (let t = 0; t < 4; t++) {
-      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      const { dados: lote, sha } = await lerLote(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
       const mapa = new Map((lote.itens || []).map(i => [i.processo, i]));
       let alt = 0, novos = 0;
@@ -317,8 +320,10 @@ async function gravar(req, res, u, gestor) {
       }
       if (Array.isArray(b.grupos)) lote.grupos = b.grupos.slice(0, 12);
       if (Array.isArray(b.colunas)) lote.colunas = b.colunas.slice(0, 20);
+      if (b.colecao === 'triagem' || b.colecao === 'avulso') lote.tipo = b.colecao;
+      if (b.tarefa) lote.tarefa = String(b.tarefa).slice(0, 120);
       lote.atualizado_em = new Date().toISOString().slice(0, 10);
-      try { await L.gravarJson(rel, lote, sha, 'Index (' + u + '): ' + alt + ' processo(s) atualizados no lote ' + id + (novos ? ' (' + novos + ' novos)' : '')); return res.status(200).json({ ok: true, id, alterados: alt, novos }); }
+      try { await gravarLote(rel, lote, sha, 'Index (' + u + '): ' + alt + ' processo(s) atualizados no lote ' + id + (novos ? ' (' + novos + ' novos)' : '')); return res.status(200).json({ ok: true, id, alterados: alt, novos }); }
       catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
@@ -328,7 +333,7 @@ async function gravar(req, res, u, gestor) {
     if (!ss.length) return res.status(400).json({ erro: 'Escolha ao menos uma sessão.' });
     if (/^pauta-\d{4}-\d{2}-\d{2}$/.test(id))return res.status(400).json({erro:'Identificador reservado à matriz geral.'});
     if(tipo==='pauta' && ss.length!==1)return res.status(400).json({ erro: 'Índice de pauta exige uma sessão específica.' });
-    const atual = await L.lerJson(rel).catch(nada);
+    const atual = await lerLote(rel).catch(nada);
     if (atual.dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });
     const filtro = {}; ['assunto', 'classe', 'texto'].forEach(k => { const v = String((b.filtro || {})[k] || '').trim(); if (v) filtro[k] = v.slice(0, 120); });
     const itens = [];
@@ -345,7 +350,7 @@ async function gravar(req, res, u, gestor) {
   }
   if (b.acao === 'sessoes') {
     for (let t = 0; t < 4; t++) {
-      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      const { dados: lote, sha } = await lerLote(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
       if(tipoLote(lote)==='pauta') return res.status(400).json({ erro:'Os lotes de pauta preservam a seleção original. Crie um novo lote a partir da matriz para outra seleção.' });
       const antes = new Set(lote.sessoes || []), novas = ss.filter(s => !antes.has(s));
@@ -364,7 +369,7 @@ async function gravar(req, res, u, gestor) {
       lote.itens = manter; lote.sessoes = ss; lote.atualizado_em = new Date().toISOString().slice(0, 10);
       (lote.itens || []).forEach(i => { if (i.grupo == null && (lote.grupos || []).some(g => /^g\d+$/.test(g.id))) { const g = lote.grupos.find(x => x.rotulo === i.assunto); if (g) i.grupo = g.id; } });
       try {
-        await L.gravarJson(rel, lote, sha, 'Lotes (' + u + '): sessões do lote ' + id + ' → ' + (ss.join(', ') || 'nenhuma') + ' (+' + entram + ' −' + saem + ')');
+        await gravarLote(rel, lote, sha, 'Lotes (' + u + '): sessões do lote ' + id + ' → ' + (ss.join(', ') || 'nenhuma') + ' (+' + entram + ' −' + saem + ')');
         return res.status(200).json({ ok: true, entram, voltam, saem, novas, total: lote.itens.length });
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
@@ -396,7 +401,7 @@ async function gravar(req, res, u, gestor) {
   }
   if (b.acao === 'lote-visivel') {
     for (let t = 0; t < 4; t++) {
-      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      const { dados: lote, sha } = await lerLote(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
       const v = {};
       if (b.equipe === false) v.equipe = false;
@@ -404,7 +409,7 @@ async function gravar(req, res, u, gestor) {
       if (Object.keys(v).length) lote.visivel = v; else delete lote.visivel;
       lote.atualizado_em = new Date().toISOString().slice(0, 10);
       try {
-        await L.gravarJson(rel, lote, sha, 'Lotes (' + u + '): publicação do lote ' + id + ' (Geral=' + (b.equipe === false ? 'off' : 'on') + ', CMT=' + (b.relator === false ? 'off' : 'on') + ')');
+        await gravarLote(rel, lote, sha, 'Lotes (' + u + '): publicação do lote ' + id + ' (Geral=' + (b.equipe === false ? 'off' : 'on') + ', CMT=' + (b.relator === false ? 'off' : 'on') + ')');
         return res.status(200).json({ ok: true, visivel: lote.visivel || {} });
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
@@ -415,7 +420,7 @@ async function gravar(req, res, u, gestor) {
     const flags = b.visivel || {};
     if (!['equipe','relator'].some(k => typeof flags[k] === 'boolean')) return res.status(400).json({ erro: 'Informe equipe ou relator.' });
     for (let t = 0; t < 4; t++) {
-      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      const { dados: lote, sha } = await lerLote(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
       const visivel = Object.assign({}, lote.visivel || {});
       for (const k of ['equipe', 'relator']) {
@@ -424,14 +429,14 @@ async function gravar(req, res, u, gestor) {
       }
       if (Object.keys(visivel).length) lote.visivel = visivel; else delete lote.visivel;
       lote.atualizado_em = new Date().toISOString().slice(0, 10);
-      try { await L.gravarJson(rel, lote, sha, 'Index CG (' + u + '): visibilidade do lote ' + id); return res.status(200).json({ ok: true, id, visivel }); }
+      try { await gravarLote(rel, lote, sha, 'Index CG (' + u + '): visibilidade do lote ' + id); return res.status(200).json({ ok: true, id, visivel }); }
       catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou; tente novamente.' });
   }
   if (b.acao === 'editar' || b.acao === 'visivel') {
     for (let t = 0; t < 4; t++) {
-      const { dados: lote, sha } = await L.lerJson(rel).catch(nada);
+      const { dados: lote, sha } = await lerLote(rel).catch(nada);
       if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
       let msg;
       if (b.acao === 'editar') {
@@ -456,7 +461,7 @@ async function gravar(req, res, u, gestor) {
         msg = 'Lotes (' + u + '): visibilidade de ' + n + ' processo(s) no lote ' + id;
       }
       lote.atualizado_em = new Date().toISOString().slice(0, 10);
-      try { await L.gravarJson(rel, lote, sha, msg); return res.status(200).json({ ok: true }); }
+      try { await gravarLote(rel, lote, sha, msg); return res.status(200).json({ ok: true }); }
       catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
