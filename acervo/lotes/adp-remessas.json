@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.lote",
  "versao": 1,
- "tipo": "avulso",
+ "tipo": "triagem",
  "origem": "PJe · Analisar tipo de decisão a proferir",
  "id": "adp-remessas",
  "titulo": "Analisar decisão · Remessas necessárias",
@@ -9,7 +9,7 @@
  "sessoes": [],
  "filtro": {},
  "criado_por": "Bruno",
- "atualizado_em": "2026-11-19",
+ "atualizado_em": "2026-11-20",
  "colunas": [
   {
    "id": "URG",
@@ -5038,5 +5038,6 @@
     "situacao": "pendente"
    }
   }
- ]
+ ],
+ "tarefa": "Analisar tipo de decisão a proferir"
 }
