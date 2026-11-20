@@ -10782,18 +10782,18 @@
    "sessao": "",
    "item": 89,
    "processo": "5000239-80.2026.4.03.0001",
-   "recurso": "Agravo de instrumento",
+   "recurso": "Agravo interno",
    "partes": "MARIZE APARECIDA LEITE SIQUEIRA SILVA LTDA x UNIAO FEDERAL - FAZENDA NACIONAL",
    "exequente": "MARIZE APARECIDA LEITE SIQUEIRA SILVA LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Contribuições Previdenciárias",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AgInt · Execução fiscal · agravo interno contra não conhecimento por deserção · preparo por Pix sem comprovante STN · exceção de pré-executividade",
+   "resultado": "Ato a proferir: julgamento do agravo interno (voto), com exame do pedido de efeito suspensivo",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo interno de Marize Aparecida Leite Siqueira Silva Ltda contra a decisão monocrática que não conheceu do agravo de instrumento por deserção (ID 390624320, 06/08/2026). O agravo de instrumento impugnava a decisão que rejeitou a exceção de pré-executividade na execução fiscal 5009593-14.2025.4.03.6000. A agravante sustenta que o pagamento é incontroverso, que o vício é só documental e que cabia nova intimação (artigo 1.007, § 7º, do CPC), e pede prazo para juntar o comprovante STN da mesma transação.",
+   "peculiaridades": "Agravo interno contra decisão do próprio gabinete que aplicou a regra do comprovante STN. Pedido de efeito suspensivo no agravo interno, não apreciado. Contrarrazões da Fazenda Nacional genéricas (ID 400031205).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -10821,7 +10821,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Comprovante bancário (não aceito) · \"Aguardando pagamento\": ID 387772612 · comprovante bancário: ID 390588542, 387783692 · certidão sem custas: ID 384144802 · despacho/decisão sobre preparo: ID 390624320, 387924034, 384628314 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 390588542, 387783692 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5009593-14.2025.4.03.6000 · Outros números do TRF3 citados (conferir se precedente ou conexo): 5019834-07.2022.4.03.0000 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5009593-14.2025.4.03.6000 · Outros números do TRF3 citados (conferir se precedente ou conexo): 5019834-07.2022.4.03.0000 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo interno (voto)",
+    "materia": "Deserção do agravo de instrumento por falta do comprovante STN; exceção de pré-executividade em execução fiscal",
+    "origem": "5009593-14.2025.4.03.6000 (execução fiscal)",
+    "decisao_agravada": "Decisão monocrática ID 390624320 (06/08/2026)",
+    "recurso": "Agravo interno ID 395660603 · 03/09/2026",
+    "preparo": "Agravo interno sem preparo; deserção do agravo de instrumento é o objeto do recurso",
+    "monocratica": "Não: agravo interno ao colegiado",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -10842,6 +10850,110 @@
     "ultima_informacao": "Certidão · ID 384144802 · 03/07/2026",
     "ultima_movimentacao": "23/09/2026 15:54 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · agravo interno contra não conhecimento por deserção · preparo por Pix sem comprovante STN · exceção de pré-executividade",
+   "especificidades": "Decisão monocrática ID 390624320 (06/08/2026) não conheceu do agravo de instrumento por deserção: após a intimação específica (ID 387924034), a agravante juntou só comprovante Pix (ID 390588542), sem o comprovante STN (artigo 2º, § 2º, III, da Resolução PRES 138/2017) · Agravo interno com pedido de efeito suspensivo ainda não apreciado · A mesma agravante litiga contra a Fazenda Nacional no AI 5000564-55.2026.4.03.0001 [VALIDAR conexão] · Execução fiscal de R$ 68.878,74",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A agravante, intimada a recolher o preparo em dobro e, depois, a comprová-lo pelo comprovante STN, juntou só tela PagTesouro \"aguardando pagamento\" e comprovante Pix. O relator não conheceu do agravo de instrumento por deserção.",
+    "inicial": "Execução fiscal 5009593-14.2025.4.03.6000 da União (Fazenda Nacional), de R$ 68.878,74, com exceção de pré-executividade rejeitada",
+    "decisao_recorrida": "Decisão monocrática ID 390624320 (06/08/2026): o preparo não foi comprovado nos termos do artigo 2º, § 2º, III, da Resolução PRES 138/2017; o comprovante Pix não vincula o pagamento ao processo; houve intimação específica (ID 387924034); agravo de instrumento não conhecido",
+    "recurso": "Agravo interno ID 395660603 (03/09/2026): (1) desproporção da deserção por vício formal, com pagamento incontroverso; (2) possibilidade de saneamento pela juntada do comprovante STN da mesma transação (artigo 1.007, § 7º, do CPC); (3) necessidade de intimação clara antes da deserção (STJ, REsp 2.061.699 e REsp 2.179.949, citados pela parte); (4) risco de bloqueio via SISBAJUD e RENAJUD. Pede efeito suspensivo, prazo para juntar o comprovante STN ou, subsidiariamente, a aceitação do comprovante ID 390588542.",
+    "resposta": "Fazenda Nacional ID 400031205 (23/09/2026): mera reiteração de argumentos; manutenção da decisão.",
+    "parecer": "Não consta",
+    "outros": "Despacho ID 384628314 (07/07/2026): recolhimento em dobro. Despacho ID 387924034 (22/07/2026): comprovação pelo comprovante STN em 5 dias. Manifestações da agravante ID 387770116 e 390588539.",
+    "representacao": "Agravante: advogada Alessandra Vilalva Vaz (OAB/MG 207.950 e OAB/BA 80.326), procuração ID 384068666. Fazenda Nacional: PFN.",
+    "preparo": "Agravo interno sem preparo. No agravo de instrumento: tela \"aguardando pagamento\" (ID 387772612) e comprovantes Pix (IDs 387783692 e 390588542)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "Execução fiscal · agravo interno contra não conhecimento por deserção · preparo por Pix sem comprovante STN · exceção de pré-executividade",
+     "sintese": "A agravante, intimada a recolher o preparo em dobro e, depois, a comprová-lo pelo comprovante STN, juntou só tela PagTesouro \"aguardando pagamento\" e comprovante Pix. O relator não conheceu do agravo de instrumento por deserção.",
+     "questoes": "1) Suficiência do comprovante Pix para o preparo após intimação específica para o comprovante STN; 2) cabimento de nova intimação (artigo 1.007, §§ 2º e 7º, do CPC); 3) efeito suspensivo ao agravo interno.",
+     "rel": {
+      "razoes": "Agravo interno (ID 395660603): (1) desproporção da deserção; (2) saneamento pela juntada do comprovante STN (artigo 1.007, § 7º, do CPC); (3) intimação clara antes da deserção; (4) risco de bloqueio de ativos.",
+      "contrarrazoes": "Fazenda Nacional (ID 400031205): reiteração de argumentos; manutenção da decisão."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "390624320",
+      "data": "2026-08-06",
+      "juizo": "Gabinete do Des. Fed. Carlos Muta",
+      "dispositivo": "Não conheceu do agravo de instrumento por deserção."
+     },
+     "agint": {
+      "id": "390624320",
+      "data": "2026-08-06",
+      "sintese": "Não conhecimento do agravo de instrumento por deserção: após intimação específica, a agravante juntou só comprovante Pix, sem o comprovante STN.",
+      "fund": "Artigo 1.007 do CPC; artigo 2º, § 2º, III, da Resolução PRES 138/2017; artigo 77, IV, do CPC."
+     },
+     "adm": {
+      "prot": "2026-09-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2026-08-17"
+     },
+     "recursos": [
+      {
+       "parte": "Marize Aparecida Leite Siqueira Silva Ltda",
+       "tipo": "Agravo interno",
+       "id": "395660603",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "384068663",
+       "data": "2026-07-02"
+      },
+      {
+       "desc": "Despacho de recolhimento em dobro",
+       "id": "384628314",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Despacho do comprovante STN",
+       "id": "387924034",
+       "data": "2026-07-22"
+      },
+      {
+       "desc": "Comprovante Pix",
+       "id": "390588542",
+       "data": "2026-08-04"
+      },
+      {
+       "desc": "Decisão monocrática de não conhecimento",
+       "id": "390624320",
+       "data": "2026-08-06"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "395660603",
+       "data": "2026-09-03"
+      },
+      {
+       "desc": "Contrarrazões ao agravo interno",
+       "id": "400031205",
+       "data": "2026-09-23"
+      }
+     ],
+     "pendencias": "Apreciar o pedido de efeito suspensivo do agravo interno",
+     "especificidades": "Decisão monocrática ID 390624320 (06/08/2026) não conheceu do agravo de instrumento por deserção: após a intimação específica (ID 387924034), a agravante juntou só comprovante Pix (ID 390588542), sem o comprovante STN (artigo 2º, § 2º, III, da Resolução PRES 138/2017) · Agravo interno com pedido de efeito suspensivo ainda não apreciado · A mesma agravante litiga contra a Fazenda Nacional no AI 5000564-55.2026.4.03.0001 [VALIDAR conexão] · Execução fiscal de R$ 68.878,74"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Pendente · não apreciada"
+    }
    }
   },
   {
