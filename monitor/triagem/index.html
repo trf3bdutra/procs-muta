@@ -268,7 +268,8 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-mkb button,.cwe-acoes button,.cwe-drop button,.cwe-cfg-b>button{height:30px;padding:0 12px;border:1px solid var(--b2);border-radius:7px;background:var(--p);color:var(--tx);font-weight:700;font-size:11.5px;white-space:nowrap}
 .cwe .pri{background:var(--t);border-color:var(--t);color:var(--w)}
 .cwe-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start}
-.cwe-nav{position:sticky;top:68px;border-top:2px solid var(--t);padding-top:11px}
+.cwe-nav{position:sticky;top:68px;border-top:2px solid var(--t);padding-top:11px;margin-top:22px}
+.cwe-cab .cwe-top{padding-top:14px}
 .cwe-k2{display:block;margin-top:22px;padding-top:11px;border-top:2px solid var(--t)}
 .cwe-ses{display:flex;flex-direction:column;margin-top:10px}
 .cwe-ses button{display:block;width:100%;text-align:left;border:0;border-left:1px solid var(--b2);background:transparent;padding:7px 10px;color:var(--tx)}
@@ -2463,7 +2464,7 @@ function portaToken() { return new Promise((fim) => {
     if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapa3, etapa4, etapa5][d.cur](ss, d);
-    view.innerHTML = `<div class="cwe">${cabecalho(ss, d)}${marcos(ss)}<div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main">${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
+    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
     requestAnimationFrame(mesaSync);
   }
 
