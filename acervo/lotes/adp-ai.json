@@ -10377,13 +10377,13 @@
    "exequente": "FABIANO ANTUNES GARCIA",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Contratuais",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "AI · Cumprimento de sentença · honorários de sucumbência · condenação pessoal do advogado da exequente · excesso de execução",
+   "resultado": "Ato a proferir: julgamento do agravo (voto) [VALIDAR preparo: só tela Pix/PagTesouro após a intimação para recolhimento em dobro]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo do advogado Fabiano Antunes Garcia contra a decisão da 2ª Vara Cível da Comarca de Nova Andradina/MS (cumprimento de sentença 0802821-43.2024.8.12.0017, competência delegada) que acolheu a impugnação do INSS, reconheceu excesso de execução de R$ 7.599,06 e condenou a exequente e o seu advogado, na proporção de 98% e 2%, ao pagamento de honorários de 10% sobre o excesso. O agravante sustenta que o advogado não é sujeito passivo da sucumbência e que a decisão não indicou base legal nem conduta ilícita.",
+   "peculiaridades": "Recurso em interesse próprio do patrono, sem extensão da gratuidade da parte (despacho ID 381968780). Preparo em dobro comprovado só por tela Pix/PagTesouro (ID 384657295). Tutela recursal indeferida (ID 387778229). Contraminuta não consta [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -10406,7 +10406,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "GRATUIDADE · Pix/PagTesouro (não aceito): ID 384657295 · gratuidade em: ID 381968780, 376975998 · certidão sem custas: ID 377843230 · despacho/decisão sobre preparo: ID 381968780 · valor R$ 128,52 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 0802821-43.2024.8.12.0017 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 0802821-43.2024.8.12.0017 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Cumprimento de sentença previdenciário; honorários pelo excesso de execução; condenação pessoal do advogado da exequente",
+    "origem": "0802821-43.2024.8.12.0017 (2ª Vara Cível de Nova Andradina/MS, competência delegada)",
+    "decisao_agravada": "Decisão de f. 242-243 (ID 376975998), intimação por relação remetida em 27/05/2026",
+    "recurso": "ID 376975992 · 28/05/2026",
+    "preparo": "Recolhimento em dobro comprovado só por tela Pix/PagTesouro (ID 384657295, R$ 128,52); sem comprovante STN",
+    "monocratica": "Possível, se o preparo for regularizado [VALIDAR precedente sobre a condenação pessoal do advogado]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -10427,6 +10435,103 @@
     "ultima_informacao": "Certidão · ID 377843230 · 01/06/2026",
     "ultima_movimentacao": "18/09/2026 16:00 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Cumprimento de sentença · honorários de sucumbência · condenação pessoal do advogado da exequente · excesso de execução",
+   "especificidades": "Recurso do patrono em interesse próprio: o despacho ID 381968780 (24/06/2026) afastou a extensão da gratuidade ao advogado e determinou o recolhimento em dobro · Preparo: só tela Pix/PagTesouro de 06/07/2026 (R$ 128,52; ID 384657295), não o comprovante STN exigido · Tutela recursal indeferida (ID 387778229, 21/07/2026) · Contraminuta do INSS não consta [VALIDAR decurso de prazo] · Exequente menor impúbere, sem reflexo no capítulo recorrido",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Na execução de verbas previdenciárias, a exequente concordou com a impugnação do INSS. O juízo reconheceu o excesso de execução e condenou a exequente e o seu advogado ao pagamento de honorários ao procurador do INSS, pelo princípio da causalidade.",
+    "inicial": "Cumprimento de sentença 0802821-43.2024.8.12.0017 de Eliza Beatriz Duarte dos Santos, menor representada pela genitora, contra o INSS (2ª Vara Cível de Nova Andradina/MS)",
+    "decisao_recorrida": "Decisão de f. 242-243 (ID 376975998): acolheu a impugnação, reconheceu excesso de R$ 7.599,06 (R$ 7.440,01 de principal e R$ 159,05 de honorários), homologou o cálculo do INSS e condenou a exequente e o seu advogado a honorários de 10% sobre o excesso, na proporção de 98% e 2%",
+    "recurso": "Agravo ID 376975992 (28/05/2026): (1) o advogado não responde pela sucumbência da parte (artigo 85 do CPC; artigo 23 da Lei 8.906/1994); (2) ausência de título, de base legal e de conduta ilícita que autorizem a responsabilização pessoal; (3) vício de fundamentação (artigos 141, 489, § 1º, e 492 do CPC); (4) arbitrariedade da fração de 2%. Pede a exclusão da condenação pessoal.",
+    "resposta": "Não consta [VALIDAR decurso do prazo para contraminuta]",
+    "parecer": "Não consta",
+    "outros": "Despacho ID 381968780 (24/06/2026): recurso em interesse próprio do patrono; gratuidade não se estende ao advogado; recolhimento em dobro em 5 dias. Decisão ID 387778229 (21/07/2026): indeferiu a tutela recursal e determinou a intimação para contraminuta.",
+    "representacao": "Agravante: advogado em causa própria, Fabiano Antunes Garcia (OAB/MS 15.312). INSS: Procuradoria Federal.",
+    "preparo": "Certidão sem custas (ID 377843230); despacho de recolhimento em dobro (ID 381968780); tela Pix/PagTesouro de 06/07/2026, R$ 128,52 (ID 384657295)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença · honorários de sucumbência · condenação pessoal do advogado da exequente · excesso de execução",
+     "sintese": "Na execução de verbas previdenciárias, a exequente concordou com a impugnação do INSS. O juízo reconheceu o excesso de execução e condenou a exequente e o seu advogado ao pagamento de honorários ao procurador do INSS, pelo princípio da causalidade.",
+     "questoes": "1) Preparo do recurso do patrono comprovado só por tela Pix/PagTesouro; 2) possibilidade de condenação pessoal do advogado da exequente aos honorários de sucumbência do incidente.",
+     "rel": {
+      "razoes": "Agravo (ID 376975992): (1) o advogado não responde pela sucumbência da parte; (2) ausência de base legal e de conduta ilícita; (3) vício de fundamentação; (4) arbitrariedade da fração de 2%.",
+      "contrarrazoes": "Não consta [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "376975998",
+      "juizo": "2ª Vara Cível da Comarca de Nova Andradina/MS",
+      "dispositivo": "Acolheu a impugnação para reconhecer o excesso de R$ 7.599,06 e condenou a exequente e o seu advogado ao pagamento de honorários de 10% sobre o excesso."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "376975998"
+     },
+     "adm": {
+      "prot": "2026-05-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Fabiano Antunes Garcia (advogado)",
+       "tipo": "Agravo de instrumento",
+       "id": "376975992",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "376975992",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Decisão agravada",
+       "id": "376975998",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "377843230",
+       "data": "2026-06-01"
+      },
+      {
+       "desc": "Despacho de recolhimento em dobro",
+       "id": "381968780",
+       "data": "2026-06-24"
+      },
+      {
+       "desc": "Tela Pix/PagTesouro",
+       "id": "384657295",
+       "data": "2026-07-06"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "387778229",
+       "data": "2026-07-21"
+      }
+     ],
+     "pendencias": "Comprovante STN do preparo em dobro; certidão de decurso do prazo para contraminuta",
+     "especificidades": "Recurso do patrono em interesse próprio: o despacho ID 381968780 (24/06/2026) afastou a extensão da gratuidade ao advogado e determinou o recolhimento em dobro · Preparo: só tela Pix/PagTesouro de 06/07/2026 (R$ 128,52; ID 384657295), não o comprovante STN exigido · Tutela recursal indeferida (ID 387778229, 21/07/2026) · Contraminuta do INSS não consta [VALIDAR decurso de prazo] · Exequente menor impúbere, sem reflexo no capítulo recorrido"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-21"
+    }
    }
   },
   {
