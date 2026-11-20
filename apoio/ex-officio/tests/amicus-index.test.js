@@ -47,3 +47,7 @@ test('Leitura da pauta tira o cabeçalho da sessão grudado no processo',()=>{
  assert.equal(f('Atraso na Entrega do Imóvel Sessão de Julgamento ORDINÁRIA PRESENCIAL / VIDEOCONFERÊNCIA, segunda- feira, 7 de dezembro de 2026 às 14:00'),'Atraso na Entrega do Imóvel');
  assert.equal(f('Índice de 28,86% LL 8.622/1993 e 8.627/1993'),'Índice de 28,86% Lei 8.622/1993 e 8.627/1993');
 });
+test('Matriz: clique isola o assunto e o cabeçalho tem expandir/minimizar todos',()=>{
+ for(const x of ['function aplicaSelG()','ev.ctrlKey||ev.metaKey','id="g-todos"','id="b-min-tudo" data-min-tudo']) assert.ok(app.includes(x),x);
+ assert.ok(!app.includes('title="Mostrar ou ocultar"'));
+});
