@@ -6415,13 +6415,15 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "JOSE RAMAO MARINHO",
    "assunto": "Averbação/Cômputo de tempo de serviço urbano",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "AI do INSS · Cumprimento de sentença (competência delegada) · nova CTC fracionada para averbação em RPPS municipal · efeito suspensivo negado",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); antes, retificar no cadastro o advogado do agravado (pedido da contraminuta); efeito suspensivo negado em 02/07/2026",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do INSS contra a decisão de f. 185-186 do cumprimento de sentença 0801340-81.2024.8.12.0005 (Comarca de Aquidauana/MS) que, diante da recusa da CTC pelo AquidauanaPREV, mandou revisar a Certidão de Tempo de Contribuição de José Ramão Marinho, afastou a impossibilidade de fracionamento para aproveitar o período excedente e determinou nova CTC conforme a Portaria MTP 1.467/2022. O INSS alega ofensa à coisa julgada (artigo 509, § 4º, do CPC), vedação de fracionamento (artigo 511 da IN PRES/INSS 128/2022), parecer técnico juntado após o cumprimento e necessidade de intimar a CEAB.",
+   "peculiaridades": "A contraminuta pede a atualização do cadastro: a advogada Elisiane Pinheiro (OAB/MS 8.334) pediu exclusão na origem e atua Luciano Souza Rios (OAB/MS 17.330), com procuração às f. 155 da origem. O título reconheceu, entre outros, o período de 02/07/1990 a 31/12/1993. O agravado invoca o Tema 1.204/STJ [VALIDAR pertinência]. Tempestividade: intimação em 17/06/2026, prazo em dobro.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -6452,7 +6454,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho de retificação do cadastro e julgamento do agravo (voto)",
+    "materia": "Cumprimento de sentença — obrigação de fazer; CTC; fracionamento; contagem recíproca",
+    "origem": "0801340-81.2024.8.12.0005 (Comarca de Aquidauana/MS, competência delegada)",
+    "decisao_agravada": "Decisão de f. 185-186 dos autos de origem",
+    "recurso": "ID 382656525 · 25/06/2026",
+    "preparo": "Isento (autarquia federal)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -6472,6 +6483,87 @@
     "ultima_informacao": "Certidão · ID 383848315 · 01/07/2026",
     "ultima_movimentacao": "04/09/2026 12:57 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Professor com sentença transitada que mandou o INSS revisar sua CTC teve a certidão recusada pelo regime próprio de Aquidauana. O juízo determinou nova CTC, admitindo o fracionamento do período excedente. O INSS alega que a ordem extrapola o título.",
+    "inicial": "Ação de José Ramão Marinho contra o INSS para revisar a CTC com o reconhecimento de períodos contributivos; em cumprimento de sentença",
+    "decisao_recorrida": "Decisão de f. 185-186: correção da CTC; afastamento da vedação de fracionamento para aproveitar o período excedente no RPPS; emissão de nova CTC conforme a Portaria MTP 1.467/2022",
+    "recurso": "Agravo ID 382656525 (25/06/2026): (1) a decisão altera o título em fase executiva (artigo 509, § 4º, do CPC); (2) a CTC é única e não fracionada (artigo 511 da IN 128/2022); (3) parecer técnico juntado após o cumprimento, sem contraditório; (4) necessidade de oficiar à CEAB; (5) abstenção de penalidades. Pede efeito suspensivo.",
+    "resposta": "José Ramão Marinho ID 387747551 (21/07/2026): inexistência de ofensa à coisa julgada; especificação da obrigação diante de fato superveniente (artigo 536, § 1º, do CPC); retificação do cadastro do advogado.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "INSS: procuradora federal. Agravado: advogado Luciano Souza Rios (OAB/MS 17.330), procuração às f. 155 da origem; cadastro desatualizado",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença; Certidão de Tempo de Contribuição; fracionamento; contagem recíproca; coisa julgada",
+     "sintese": "Professor com sentença transitada que mandou o INSS revisar sua CTC teve a certidão recusada pelo regime próprio de Aquidauana. O juízo determinou nova CTC, admitindo o fracionamento do período excedente. O INSS alega que a ordem extrapola o título.",
+     "questoes": "1) Limites do título na fase de cumprimento (artigo 509, § 4º, do CPC); 2) possibilidade de fracionar a CTC para aproveitamento em RPPS; 3) destinatário da ordem (CEAB).",
+     "rel": {
+      "razoes": "Agravo (ID 382656525): alteração do título; CTC única; parecer técnico sem contraditório; CEAB; penalidades.",
+      "contrarrazoes": "Agravado (ID 387747551): especificação da obrigação; ausência de ofensa à coisa julgada; retificação do cadastro."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "Comarca de Aquidauana/MS [VALIDAR vara]",
+      "dispositivo": "Determinou a revisão e a emissão de nova CTC, admitindo o fracionamento."
+     },
+     "ai": {
+      "hip": "Liquidação/cumprimento de sentença (artigo 1.015, parágrafo único, do CPC)",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-06-25",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2026-06-17"
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Agravo de instrumento",
+       "id": "382656525",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "382656525",
+       "data": "2026-06-25"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo",
+       "id": "383976313",
+       "data": "2026-07-02"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "387747551",
+       "data": "2026-07-21"
+      }
+     ],
+     "pendencias": [
+      "Retificar no PJe o advogado do agravado (Luciano Souza Rios, OAB/MS 17.330)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "intercor": "Retificação do cadastro do advogado do agravado",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-02"
+    }
    }
   },
   {
