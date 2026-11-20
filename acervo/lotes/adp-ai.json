@@ -3315,13 +3315,15 @@
    "exequente": "DOMINGOS SAVIO DE CARVALHO ARRUDA",
    "executado": "FUNDACAO CESGRANRIO",
    "assunto": "Anulação e Correção de Provas / Questões",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI · Concurso Nacional Unificado (Bloco 4) · anulação de 8 questões objetivas · tutela indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal negada no despacho ID 377384022 (08/06/2026), que também mandou comprovar o preparo; GRU paga juntada em 15/06/2026; contraminutas da União e da Cesgranrio",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Domingos Sávio de Carvalho Arruda contra a decisão ID 571156250 da 1ª Vara Federal de Campo Grande (processo 5000261-86.2026.4.03.6000) que indeferiu a tutela para anular 8 questões (8 questões; números não extraídos [VALIDAR]) da prova objetiva do CNU (Bloco 4), com nota de 58,65 pontos. Teses: controle de legalidade de questões com duas alternativas corretas ou fora do edital; perícia emprestada; decisões favoráveis de outros juízos. Distribuído à 4ª Turma e redistribuído à TRgMS.",
+   "peculiaridades": "Preparo: guia ID 366456217 sem pagamento; o despacho ID 377384022 exigiu comprovação em 5 dias, sob pena de deserção; juntada a GRU paga em 14/04/2026 (ID 380428500, em 15/06/2026). Pedido de que a agravada motive o indeferimento dos recursos administrativos. Cesgranrio pede custas e honorários.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -3342,7 +3344,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Concurso público — anulação de questões objetivas (Tema 485/STF)",
+    "origem": "5000261-86.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 571156250 (autos de origem)",
+    "recurso": "ID 366453719 · 14/04/2026",
+    "preparo": "GRU paga em 14/04/2026 (ID 380428500), juntada em 15/06/2026 após o despacho ID 377384022",
+    "monocratica": "Possível, pela linha do Tema 485/STF [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -3362,6 +3373,103 @@
     "ultima_informacao": "Certidão · ID 369899676 · 29/04/2026",
     "ultima_movimentacao": "11/09/2026 17:44 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidato do CNU (Bloco 4), com 58,65 pontos na prova objetiva, pede a anulação de 8 questões por duas alternativas corretas ou conteúdo fora do edital, com atribuição provisória da pontuação. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação 5000261-86.2026.4.03.6000 contra a União e a Fundação Cesgranrio",
+    "decisao_recorrida": "Decisão ID 571156250 da 1ª Vara Federal de Campo Grande, que indeferiu a tutela de urgência; não juntada com texto [VALIDAR]",
+    "recurso": "Agravo (ID 366453719): (1) controle de legalidade de questões com erro grosseiro; (2) violação do edital; (3) decisões de outros juízos; (4) pedido de motivação dos indeferimentos administrativos. Pede pontuação provisória e participação no certame.",
+    "resposta": "União (ID 386924846, 17/07/2026): vinculação ao edital e isonomia. Cesgranrio (ID 391766706, 13/08/2026): desprovimento e periculum in mora inverso.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogado Igor Oliva de Souza (OAB/DF 60.845); procuração não identificada com texto [VALIDAR]. Cesgranrio: procuração (ID 391766707) e substabelecimento (ID 391766708)",
+    "preparo": "GRU paga em 14/04/2026 (ID 380428500), juntada em 15/06/2026 após o despacho ID 377384022"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "relacionado": "Grupo CNU (g9): mesma matéria e advogado",
+     "subassuntos": "Concurso público — CNU; anulação de questões",
+     "sintese": "Candidato do CNU (Bloco 4), com 58,65 pontos na prova objetiva, pede a anulação de 8 questões por duas alternativas corretas ou conteúdo fora do edital, com atribuição provisória da pontuação. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "Cabimento do controle judicial das questões à luz do Tema 485/STF; urgência.",
+     "rel": {
+      "razoes": "Agravo (ID 366453719): (1) controle de legalidade de questões com erro grosseiro; (2) violação do edital; (3) decisões de outros juízos; (4) pedido de motivação dos indeferimentos administrativos. Pede pontuação provisória e participação no certame.",
+      "contrarrazoes": "União (ID 386924846, 17/07/2026): vinculação ao edital e isonomia. Cesgranrio (ID 391766706, 13/08/2026): desprovimento e periculum in mora inverso."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "571156250",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-04-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "366453719",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "366453719",
+       "data": "2026-04-14"
+      },
+      {
+       "desc": "Despacho que negou a tutela e mandou comprovar o preparo",
+       "id": "377384022",
+       "data": "2026-06-08"
+      },
+      {
+       "desc": "GRU paga",
+       "id": "380428500",
+       "data": "2026-06-15"
+      },
+      {
+       "desc": "Despacho de intimação para contraminuta",
+       "id": "386119045",
+       "data": "2026-07-14"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "386924846",
+       "data": "2026-07-17"
+      },
+      {
+       "desc": "Contraminuta da Cesgranrio",
+       "id": "391766706",
+       "data": "2026-08-13"
+      }
+     ],
+     "pendencias": [
+      "Tempestividade: ciência em 08/04/2026 é alegação do agravante [VALIDAR]",
+      "Conferir se a GRU paga em 14/04/2026 atende o artigo 1.007 do CPC"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-08"
+    }
    }
   },
   {
