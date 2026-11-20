@@ -12623,13 +12623,13 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "COIMBRA E SOUZA LTDA",
    "assunto": "Contribuições Previdenciárias",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal · redirecionamento ao sócio por dissolução irregular reconhecida em PARR (Procedimento Administrativo de Reconhecimento de Responsabilidade) · prova indiciária sem certidão de oficial de justiça (Súmula 435/STJ)",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto ou decisão monocrática) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo da União contra a decisão da 2ª Vara Federal de Dourados que, na execução fiscal 5001557-84.2019.4.03.6002 contra Coimbra e Souza Ltda. EPP, indeferiu a inclusão no polo passivo do sócio reconhecido como corresponsável em PARR. A União sustenta que a dissolução irregular pode ser demonstrada por provas indiciárias (inatividade, paralisação e ausência de movimentação financeira), sem necessidade de certidão de oficial de justiça.",
+   "peculiaridades": "Agravante é a União. Sem contraminuta. Tutela recursal indeferida.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -12652,7 +12652,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "ISENTO (ente público) · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5001557-84.2019.4.03.6002 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5001557-84.2019.4.03.6002 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento",
+    "materia": "Execução fiscal: redirecionamento ao sócio; dissolução irregular; PARR",
+    "origem": "2ª Vara Federal de Dourados · 5001557-84.2019.4.03.6002",
+    "decisao_agravada": "Decisão que indeferiu a inclusão do sócio [VALIDAR ID]",
+    "recurso": "ID 379930911 · 12/06/2026",
+    "preparo": "Isento (União)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -12673,6 +12681,88 @@
     "ultima_informacao": "Certidão · ID 380911831 · 17/06/2026",
     "ultima_movimentacao": "20/07/2026 17:33 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · redirecionamento ao sócio por dissolução irregular reconhecida em PARR (Procedimento Administrativo de Reconhecimento de Responsabilidade) · prova indiciária sem certidão de oficial de justiça (Súmula 435/STJ)",
+   "especificidades": "Agravo da União · Tutela recursal indeferida in limine pelo Relator (ID 381408286, 20/06/2026) · Executada intimada não apresentou contraminuta (prazo decorrido em 15/07/2026) · Documentos do PARR juntados (IDs 379967164 a 379971103) · Nome completo do sócio não extraído [VALIDAR] · Execução fiscal 5001557-84.2019.4.03.6002, 2ª Vara Federal de Dourados",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A União reconheceu em PARR a responsabilidade do sócio da executada por dissolução irregular e pediu sua inclusão na execução fiscal; o juízo indeferiu o pedido.",
+    "inicial": "Execução fiscal 5001557-84.2019.4.03.6002 da União (Fazenda Nacional) contra Coimbra e Souza Ltda. EPP",
+    "decisao_recorrida": "Decisão da 2ª Vara Federal de Dourados que indeferiu a inclusão do sócio corresponsável reconhecido em PARR (ciência da União em 04/05/2026) [VALIDAR ID]",
+    "recurso": "Agravo ID 379930911 (12/06/2026): (1) dissolução irregular demonstrada por provas indiciárias e pelo PARR; (2) desnecessidade de certidão de oficial de justiça (AgRg no REsp 1.527.224/SC); e (3) redirecionamento ao sócio-gerente (Súmula 435/STJ).",
+    "resposta": "Executada intimada; não apresentou contraminuta (prazo decorrido em 15/07/2026).",
+    "parecer": "Não consta",
+    "outros": "Documentos do PARR IDs 379967164 a 379971103 (12/06/2026). Despacho de redistribuição ID 380448175 (17/06/2026). Decisão ID 381408286 (20/06/2026): indeferiu a antecipação da tutela recursal. Ciência da União ID 383775885.",
+    "representacao": "Agravante: Procuradoria-Geral da Fazenda Nacional. Agravada: advogados constituídos na origem.",
+    "preparo": "União: isenta"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · redirecionamento ao sócio por dissolução irregular reconhecida em PARR (Procedimento Administrativo de Reconhecimento de Responsabilidade) · prova indiciária sem certidão de oficial de justiça (Súmula 435/STJ)",
+     "sintese": "A União reconheceu em PARR a responsabilidade do sócio da executada por dissolução irregular e pediu sua inclusão na execução fiscal; o juízo indeferiu o pedido.",
+     "questoes": "1) Suficiência das provas indiciárias e do PARR para demonstrar a dissolução irregular; 2) redirecionamento da execução fiscal ao sócio-gerente (Súmula 435/STJ).",
+     "rel": {
+      "razoes": "Agravo (ID 379930911): (1) provas indiciárias e PARR; (2) desnecessidade de certidão de oficial de justiça; e (3) Súmula 435/STJ.",
+      "contrarrazoes": "Não apresentadas."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "[VALIDAR]",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Indeferiu a inclusão no polo passivo do sócio reconhecido como corresponsável em PARR."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-06-12",
+      "prazo": "15",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "379930911",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "379930911",
+       "data": "2026-06-12"
+      },
+      {
+       "desc": "Documentos do PARR",
+       "id": "379967164",
+       "data": "2026-06-12"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "381408286",
+       "data": "2026-06-20"
+      }
+     ],
+     "pendencias": "Identificar o ID da decisão agravada e o nome do sócio",
+     "especificidades": "Agravo da União · Tutela recursal indeferida in limine pelo Relator (ID 381408286, 20/06/2026) · Executada intimada não apresentou contraminuta (prazo decorrido em 15/07/2026) · Documentos do PARR juntados (IDs 379967164 a 379971103) · Nome completo do sócio não extraído [VALIDAR] · Execução fiscal 5001557-84.2019.4.03.6002, 2ª Vara Federal de Dourados"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-20"
+    }
    }
   },
   {
