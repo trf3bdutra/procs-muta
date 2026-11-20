@@ -7413,13 +7413,15 @@
    "exequente": "ELZA FATIMA DELMONDES FERREIRA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Cédula de Produto Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Embargos à execução de cédula rural (CEF, PRONAMP) · efeito suspensivo sem penhora formal (garantias cedulares) · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela negada em 19/06/2026 (falta de garantia do juízo, artigo 919, § 1º, do CPC); contraminuta da CEF e MPF sem interesse. Mesma tese do 5007206-47",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Elza Fátima Delmondes Ferreira, produtora rural, contra a decisão ID 581618892 da 1ª Vara Federal de Campo Grande (embargos à execução 5002997-77.2026.4.03.6000) que recebeu os embargos sem efeito suspensivo na execução 5000531-13.2026.4.03.6000 da Cédula Rural Pignoratícia e Hipotecária 2410795/7452/2024 (PRONAMP, R$ 857.247,60; débito de R$ 936.142,63). A agravante sustenta que o penhor da safra de milho (R$ 1.212.000,00) e a hipoteca da Fazenda Luz da Lua (matrículas 1.773 e 1.774) garantem o juízo e que exigir termo de penhora é formalismo (artigo 835, § 3º, do CPC). Pede também a exclusão de protestos e cadastros.",
+   "peculiaridades": "Preparo pago em 03/06/2026 (R$ 64,26; ID 381482653). A decisão ID 381198904 manteve a exigência de garantia formal do juízo. Tese idêntica à do 5007206-47 (hipoteca cedular não equivale à penhora). Pedido acessório de suspensão de protestos e exclusão de SPC/SERASA.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -7450,7 +7452,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução de cédula de crédito rural — efeito suspensivo dos embargos; garantia do juízo",
+    "origem": "Embargos à execução 5002997-77.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 581618892 (autos de origem)",
+    "recurso": "ID 378405200",
+    "preparo": "Pago em 03/06/2026 (ID 381482653)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7470,6 +7481,99 @@
     "ultima_informacao": "Certidão · ID 379003180 · 08/06/2026",
     "ultima_movimentacao": "06/08/2026 14:38 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Produtora rural executada pela CEF por cédula rural do PRONAMP opôs embargos e pediu efeito suspensivo com base nas garantias cedulares (penhor de safra e hipoteca). O juízo e o Tribunal negaram por falta de garantia formal do juízo.",
+    "inicial": "Embargos à execução 5002997-77.2026.4.03.6000 contra a CEF, com pedido de suspensão da execução 5000531-13.2026.4.03.6000",
+    "decisao_recorrida": "Decisão ID 581618892: a garantia do juízo é requisito cumulativo (artigo 919, § 1º, do CPC; STJ), não suprida pelas garantias do título; necessidade de dilação probatória; embargos recebidos sem efeito suspensivo",
+    "recurso": "Agravo ID 378405200: (1) garantias reais cedulares superam em 211% o débito; (2) formalismo excessivo exigir termo de penhora (artigo 835, § 3º, do CPC); (3) pedido de convalidação das garantias na execução; (4) atividade rural como única fonte de renda. Pede suspensão dos atos de constrição, dos protestos e das inscrições em cadastros.",
+    "resposta": "CEF ID 384860324 (07/07/2026): ausência de garantia do juízo; título com força executiva; necessidade de prova; desprovimento.",
+    "parecer": "MPF ID 390808906 (06/08/2026): sem interesse; prosseguimento",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: procuração não identificada com texto [VALIDAR]. CEF: Mateus Pereira Soares (OAB/RS 60.491)",
+    "preparo": "Pago em 03/06/2026 (ID 381482653)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "relacionado": "5007206-47.2026.4.03.0000 (mesma tese)",
+     "subassuntos": "Cédula de crédito rural; embargos à execução; efeito suspensivo; garantia do juízo",
+     "sintese": "Produtora rural executada pela CEF por cédula rural do PRONAMP opôs embargos e pediu efeito suspensivo com base nas garantias cedulares (penhor de safra e hipoteca). O juízo e o Tribunal negaram por falta de garantia formal do juízo.",
+     "questoes": "1) Garantias cedulares como garantia do juízo para o artigo 919, § 1º, do CPC; 2) suspensão de protestos e cadastros.",
+     "rel": {
+      "razoes": "Agravo (ID 378405200): garantias cedulares suficientes; formalismo; artigo 835, § 3º, do CPC; suspensão de constrições e cadastros.",
+      "contrarrazoes": "CEF (ID 384860324): ausência de garantia do juízo; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "581618892",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Recebeu os embargos sem efeito suspensivo."
+     },
+     "ai": {
+      "hip": "Tutela provisória / efeito suspensivo de embargos",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "mpfx": {
+      "sentido": "Sem interesse",
+      "id": "390808906"
+     },
+     "recursos": [
+      {
+       "parte": "Embargante",
+       "tipo": "Agravo de instrumento",
+       "id": "378405200",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "378405200"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "381198904",
+       "data": "2026-06-19"
+      },
+      {
+       "desc": "Comprovante de custas",
+       "id": "381482653",
+       "data": "2026-06-19"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "384860324",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "390808906",
+       "data": "2026-08-06"
+      }
+     ],
+     "pendencias": [
+      "Data de interposição do agravo e tempestividade do preparo [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Parecer juntado",
+     "parecer": "Sem interesse",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-19"
+    }
    }
   },
   {
