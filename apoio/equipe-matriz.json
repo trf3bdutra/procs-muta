@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.equipe.matriz",
  "versao": 1,
- "geradoEm": "2026-11-20T22:23:28Z",
+ "geradoEm": "2026-11-20T22:36:43Z",
  "geradoPor": "scripts/equipe/matriz_minutas.py",
  "tipos": [
   "Apelação",
@@ -304,65 +304,6 @@
    }
   },
   {
-   "servidor": "Victor",
-   "noCadastro": true,
-   "minutaNoCadastro": true,
-   "total": 170,
-   "correcoes": 0,
-   "assuntosCorrigidos": {},
-   "tipos": {
-    "Apelação": 133,
-    "Apelação e remessa": 12,
-    "Remessa necessária": 1,
-    "Agravo de instrumento": 5,
-    "Embargos de declaração": 17,
-    "Agravo interno": 1,
-    "Juízo de retratação": 0,
-    "Decisão monocrática": 1,
-    "Outras classes": 0
-   },
-   "secoes": {
-    "2ª Seção": 103,
-    "1ª Seção": 35,
-    "3ª Seção": 19,
-    "sem seção": 8,
-    "A conferir": 5
-   },
-   "ramos": {
-    "DIREITO À EDUCAÇÃO": 69,
-    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 51,
-    "DIREITO PREVIDENCIÁRIO": 10,
-    "DIREITO CIVIL": 10,
-    "DIREITO DA SAÚDE": 10,
-    "sem ramo": 8,
-    "DIREITO TRIBUTÁRIO": 5,
-    "DIREITO DO CONSUMIDOR": 3,
-    "DIREITO AMBIENTAL": 2,
-    "DIREITO ASSISTENCIAL": 2
-   },
-   "assuntos": {
-    "Convalidação de Estudos e Reconhecimento de Diploma": 43,
-    "FIES": 24,
-    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 23,
-    "Fornecimento de medicamentos": 10,
-    "Anulação e Correção de Provas / Questões": 6,
-    "Aposentadoria Especial (Art. 57/8)": 5,
-    "Inscrição / Documentação": 4,
-    "Anulação": 4,
-    "Cédula de Crédito Bancário": 3,
-    "Revogação/Anulação de multa ambiental": 2,
-    "Inclusão Indevida em Cadastro de Inadimplentes": 2,
-    "Ambiental": 2
-   },
-   "cadastro": {
-    "exp": [
-     "Convalidação de Estudos e Reconhecimento de Diploma"
-    ],
-    "pref": [],
-    "nao": []
-   }
-  },
-  {
    "servidor": "Maria Eduarda",
    "noCadastro": true,
    "minutaNoCadastro": true,
@@ -421,6 +362,65 @@
      "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico",
      "Ambiental",
      "Restituição de área - FUNAI"
+    ],
+    "pref": [],
+    "nao": []
+   }
+  },
+  {
+   "servidor": "Victor",
+   "noCadastro": true,
+   "minutaNoCadastro": true,
+   "total": 161,
+   "correcoes": 0,
+   "assuntosCorrigidos": {},
+   "tipos": {
+    "Apelação": 126,
+    "Apelação e remessa": 12,
+    "Remessa necessária": 1,
+    "Agravo de instrumento": 3,
+    "Embargos de declaração": 17,
+    "Agravo interno": 1,
+    "Juízo de retratação": 0,
+    "Decisão monocrática": 1,
+    "Outras classes": 0
+   },
+   "secoes": {
+    "2ª Seção": 102,
+    "1ª Seção": 27,
+    "3ª Seção": 19,
+    "sem seção": 8,
+    "A conferir": 5
+   },
+   "ramos": {
+    "DIREITO À EDUCAÇÃO": 69,
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 42,
+    "DIREITO PREVIDENCIÁRIO": 10,
+    "DIREITO CIVIL": 10,
+    "DIREITO DA SAÚDE": 10,
+    "sem ramo": 8,
+    "DIREITO TRIBUTÁRIO": 5,
+    "DIREITO DO CONSUMIDOR": 3,
+    "DIREITO AMBIENTAL": 2,
+    "DIREITO ASSISTENCIAL": 2
+   },
+   "assuntos": {
+    "Convalidação de Estudos e Reconhecimento de Diploma": 43,
+    "FIES": 24,
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 14,
+    "Fornecimento de medicamentos": 10,
+    "Anulação e Correção de Provas / Questões": 6,
+    "Aposentadoria Especial (Art. 57/8)": 5,
+    "Inscrição / Documentação": 4,
+    "Anulação": 4,
+    "Cédula de Crédito Bancário": 3,
+    "Revogação/Anulação de multa ambiental": 2,
+    "Inclusão Indevida em Cadastro de Inadimplentes": 2,
+    "Ambiental": 2
+   },
+   "cadastro": {
+    "exp": [
+     "Convalidação de Estudos e Reconhecimento de Diploma"
     ],
     "pref": [],
     "nao": []
@@ -677,7 +677,7 @@
    "servidor": "Bruno",
    "noCadastro": true,
    "minutaNoCadastro": true,
-   "total": 53,
+   "total": 62,
    "correcoes": 229,
    "assuntosCorrigidos": {
     "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 128,
@@ -694,10 +694,10 @@
     "IRPF/ Imposto de Renda de Pessoa Física": 2
    },
    "tipos": {
-    "Apelação": 44,
+    "Apelação": 51,
     "Apelação e remessa": 0,
     "Remessa necessária": 0,
-    "Agravo de instrumento": 0,
+    "Agravo de instrumento": 2,
     "Embargos de declaração": 7,
     "Agravo interno": 2,
     "Juízo de retratação": 0,
@@ -705,16 +705,16 @@
     "Outras classes": 0
    },
    "secoes": {
-    "1ª Seção": 26,
+    "1ª Seção": 34,
     "3ª Seção": 26,
-    "2ª Seção": 1
+    "2ª Seção": 2
    },
    "ramos": {
-    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 52,
+    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 61,
     "DIREITO CIVIL": 1
    },
    "assuntos": {
-    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 50,
+    "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 59,
     "Índice de 28,86% LL 8.622/1993 e 8.627/1993": 2,
     "Vícios de Construção": 1
    },
@@ -811,7 +811,7 @@
    "noCadastro": true,
    "minutaNoCadastro": false,
    "total": 3,
-   "correcoes": 87,
+   "correcoes": 86,
    "assuntosCorrigidos": {
     "Inscrição / Documentação": 10,
     "Fornecimento de medicamentos": 9,
@@ -2874,6 +2874,32 @@
   ],
   [
    "Bruno",
+   "Agravo de instrumento",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-08-24",
+   "50246251720254030000",
+   1
+  ],
+  [
+   "Bruno",
+   "Agravo de instrumento",
+   "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-08-24",
+   "50001627120264030001",
+   1
+  ],
+  [
+   "Bruno",
    "Agravo interno",
    "1ª Seção",
    "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
@@ -2909,6 +2935,97 @@
    "2026-12-07",
    "",
    "50016869020224036000",
+   1
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-09-17",
+   "50035448820244036000",
+   1
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-09-25",
+   "50012710520254036000",
+   1
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-09-25",
+   "50033869620254036000",
+   1
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-09-25",
+   "50097257120254036000",
+   1
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-09-28",
+   "50026556620264036000",
+   1
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-09-28",
+   "50037974220254036000",
+   1
+  ],
+  [
+   "Bruno",
+   "Apelação",
+   "1ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "Bruno",
+   0,
+   "",
+   "2026-09-28",
+   "50080821520244036000",
    1
   ],
   [
@@ -19937,7 +20054,7 @@
    "Bruno",
    0,
    "2026-11-30",
-   "",
+   "2026-11-13",
    "50010045420264030000",
    1
   ],
@@ -23808,7 +23925,7 @@
    "3ª Seção",
    "DIREITO DO CONSUMIDOR",
    "Expurgos Inflacionários / Planos Econômicos",
-   "Saffioti",
+   "",
    0,
    "",
    "2026-11-13",
@@ -26120,19 +26237,6 @@
    "Victor",
    "Agravo de instrumento",
    "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-08-24",
-   "50246251720254030000",
-   1
-  ],
-  [
-   "Victor",
-   "Agravo de instrumento",
-   "1ª Seção",
    "DIREITO CIVIL",
    "Cédula de Crédito Bancário",
    "Vanilda",
@@ -26140,19 +26244,6 @@
    "2026-11-30",
    "2026-11-13",
    "50080457220264030000",
-   1
-  ],
-  [
-   "Victor",
-   "Agravo de instrumento",
-   "2ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-08-24",
-   "50001627120264030001",
    1
   ],
   [
@@ -26244,97 +26335,6 @@
    "2026-12-07",
    "",
    "50070333620244036000",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-09-17",
-   "50035448820244036000",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-09-25",
-   "50012710520254036000",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-09-25",
-   "50033869620254036000",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-09-25",
-   "50097257120254036000",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-09-28",
-   "50026556620264036000",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-09-28",
-   "50037974220254036000",
-   1
-  ],
-  [
-   "Victor",
-   "Apelação",
-   "1ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "Bruno",
-   0,
-   "",
-   "2026-09-28",
-   "50080821520244036000",
    1
   ],
   [
