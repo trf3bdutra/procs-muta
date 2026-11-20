@@ -65,3 +65,8 @@ test('Pautas: painel da sessão integrado ao cabeçalho e julgadores com substit
   const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
   for(const x of ['definirJulgadores: function','julgadoresDoItem: function','if (ss.julgadores) o.julgadores = ss.julgadores;','docs[i] && docs[i].julgadores'])assert.ok(m.includes(x),x);
 });
+test('Mesa: filtro por assunto e agrupamento por assunto, minutante e corretor; rodapé da Triagem só na Triagem',()=>{
+  const pag=read('monitor/designacao/index.html');
+  for(const x of ['data-ag="as"','data-ag="pd"','data-ag="pc"','id="f-as"',"if(FASS&&N(x.as)!==FASS)return false;"])assert.ok(pag.includes(x),x);
+  assert.ok(read('monitor/triagem/index.html').includes('#rodape[hidden]{display:none!important}'),'rodapé oculto fora da Triagem');
+});
