@@ -4080,8 +4080,8 @@
    "executado": "ADEVANILDO DOMINGOS DA SILVA",
    "assunto": "Ambiental",
    "grupo": "g2",
-   "tipo_caso": "AI do ICMBio · cumprimento de sentença de ACP ambiental (Parque Nacional de Ilha Grande) · obrigação imposta à autarquia",
-   "resultado": "Ato a proferir: certificar o prazo da contraminuta do executado e abrir vista ao MPF (autor da ACP); depois, julgamento do agravo (voto). Tutela recursal indeferida em 09/06/2026",
+   "tipo_caso": "AI · Ambiental · cumprimento de sentença de ACP (Parque Nacional de Ilha Grande) · obrigação imposta ao ICMBio não prevista no título · coisa julgada e separação de Poderes",
+   "resultado": "Ato a proferir: abrir vista ao MPF (autor da ACP); depois, julgamento do agravo (voto). Tutela recursal indeferida em 09/06/2026; executado sem contraminuta",
    "modelo": "",
    "variacoes": [
     "VAL"
@@ -4155,7 +4155,77 @@
     "representacao": "ICMBio pela Procuradoria-Geral Federal (representação legal)",
     "preparo": "Isento (autarquia)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Ambiental · cumprimento de sentença de ACP (Parque Nacional de Ilha Grande) · obrigação imposta ao ICMBio não prevista no título · coisa julgada e separação de Poderes",
+   "especificidades": "Agravante: ICMBio (isento; representação legal) · Tutela recursal indeferida (ID 377935861, 09/06/2026), por periculum in mora reverso · Executado intimado; prazo decorrido em 02/07/2026, sem contraminuta · MPF, autor da ACP, sem manifestação no agravo: abrir vista antes do julgamento [VALIDAR] · Número do agravo com final 0001 · Decisão agravada não juntada com texto",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Ambiental · cumprimento de sentença de ACP (Parque Nacional de Ilha Grande) · obrigação imposta ao ICMBio não prevista no título · coisa julgada e separação de Poderes",
+     "sintese": "O MPF obteve em ACP a condenação de Adevanildo Domingos da Silva a demolir construções em APP no Parque Nacional de Ilha Grande, recuperar a área e indenizar. No cumprimento, o juízo impôs obrigação ao ICMBio, que agravou alegando que não é condenado no título.",
+     "questoes": "1) Intervenção do MPF no agravo; 2) imposição ao ICMBio, no cumprimento de sentença, de obrigação não prevista no título (coisa julgada); 3) separação de Poderes e conversão em perdas e danos.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 373380477 (14/05/2026): violação da coisa julgada; legalidade e separação de Poderes; prejuízo ao erário; subsidiariamente, cumprimento pelo próprio réu ou execução pela autarquia com conversão em perdas e danos.",
+      "contrarrazoes": "Não consta: agravado intimado pela decisão ID 377935861, sem contraminuta nos autos"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "574822912",
+      "juizo": "Vara Federal de Naviraí [VALIDAR]",
+      "dispositivo": "Impôs ao ICMBio obrigação no cumprimento da sentença da ACP 5000969-65.2019.4.03.6006."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "574822912"
+     },
+     "adm": {
+      "prot": "2026-05-14",
+      "prazo": "15",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Outra",
+       "tipo": "Agravo de instrumento",
+       "id": "373380477",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "373380477",
+       "data": "2026-05-14"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "377935861",
+       "data": "2026-06-09"
+      },
+      {
+       "desc": "Ciência do ICMBio",
+       "id": "380426576",
+       "data": "2026-06-15"
+      }
+     ],
+     "pendencias": "Abrir vista ao MPF; identificar o juízo de origem",
+     "especificidades": "Agravante: ICMBio (isento; representação legal) · Tutela recursal indeferida (ID 377935861, 09/06/2026), por periculum in mora reverso · Executado intimado; prazo decorrido em 02/07/2026, sem contraminuta · MPF, autor da ACP, sem manifestação no agravo: abrir vista antes do julgamento [VALIDAR] · Número do agravo com final 0001 · Decisão agravada não juntada com texto"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "ACP/ação popular",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-09"
+    }
+   }
   },
   {
    "sessao": "",
