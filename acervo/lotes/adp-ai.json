@@ -41,12 +41,12 @@
    "id": "g1",
    "rotulo": "Alienação fiduciária: consolidação e leilão",
    "cor": "#2f6db5",
-   "resultado": "A definir (intimação pessoal, purgação da mora, leilão)",
+   "resultado": "A definir",
    "modelo": ""
   },
   {
    "id": "g2",
-   "rotulo": "Ambiental: IBAMA e ICMBio",
+   "rotulo": "Ambiental: IBAMA, ICMBio e ACP",
    "cor": "#1f8a70",
    "resultado": "A definir",
    "modelo": ""
@@ -92,6 +92,13 @@
    "cor": "#4f7f3a",
    "resultado": "Modelos vigentes do lote 28,86%",
    "modelo": "Lote 28,86%"
+  },
+  {
+   "id": "g9",
+   "rotulo": "Concurso público e ensino: questões, PcD e cotas",
+   "cor": "#a33b5c",
+   "resultado": "A definir (Tema 485/STF nas questões objetivas)",
+   "modelo": ""
   }
  ],
  "grupo_outros": {
@@ -2817,13 +2824,15 @@
    "exequente": "ALENCAR JACAMO DOS REIS",
    "executado": "FUNDACAO CESGRANRIO",
    "assunto": "Anulação e Correção de Provas / Questões",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI · Concurso Nacional Unificado (Bloco 4) · anulação de 11 questões objetivas · tutela indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 17/07/2026 (Tema 485/STF e falta de urgência: cronograma encerrado em 2025) e há contraminuta da União",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Alencar Jacamo dos Reis contra a decisão ID 591276630 da 1ª Vara Federal de Campo Grande (processo 5005186-28.2026.4.03.6000) que indeferiu a tutela para anular 11 questões da prova objetiva do CNU (Bloco 4), recalcular a nota (64 pontos) e permitir curso de formação e reserva de vaga. Teses: controle de legalidade de questões com duas alternativas corretas ou fora do conteúdo programático (itens 7.1.1.1 e 7.1.1.1.1 do edital), perícia emprestada do processo 0800535-82.2024.4.05.8404 sobre a questão 35, indeferimento genérico dos recursos administrativos (artigo 50, III, da Lei 9.784/1999). A União pede o desprovimento (ID 387945792).",
+   "peculiaridades": "Gratuidade deferida na origem (ID 591276630), reconhecida na decisão ID 386365631 apesar da certidão ID 386353736. Cesgranrio sem advogado constituído. Ação ajuizada em 23/06/2026; último evento do cronograma em 11/02/2025 e curso de formação concluído antes de 13/08/2025 (decisão ID 386365631).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -2849,7 +2858,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Concurso público — anulação de questões objetivas (Tema 485/STF)",
+    "origem": "5005186-28.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 591276630 da origem",
+    "recurso": "ID 386327069 · 15/07/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Possível, pela linha do Tema 485/STF [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -2869,6 +2887,91 @@
     "ultima_informacao": "Certidão · ID 386353736 · 15/07/2026",
     "ultima_movimentacao": "24/08/2026 18:55 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidato do CNU (Bloco 4), com 64 pontos na prova objetiva, pede a anulação de 11 questões por duas alternativas corretas ou conteúdo fora do edital, com recálculo da nota, curso de formação e reserva de vaga. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação 5005186-28.2026.4.03.6000 (ajuizada em 23/06/2026) contra a União e a Fundação Cesgranrio",
+    "decisao_recorrida": "Decisão ID 591276630 da 1ª Vara Federal de Campo Grande: o Judiciário não substitui a banca; ausência de plausibilidade; indeferiu a tutela de urgência",
+    "recurso": "Agravo ID 386327069 (15/07/2026): (1) controle de legalidade de questões com erro grosseiro; (2) violação dos itens 7.1.1.1 e 7.1.1.1.1 do edital; (3) perícia emprestada sobre a questão 35; (4) recursos administrativos indeferidos sem motivação. Pede anulação das questões, recálculo, curso de formação e reserva de vaga.",
+    "resposta": "Contraminuta da União ID 387945792 (22/07/2026): vinculação ao edital, banca como última instância, isonomia; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Igor Oliva de Souza (OAB/DF 60.845) e Gabriela Rodrigues Lima de Aquino (OAB/DF 87.710); procuração não identificada com texto [VALIDAR]",
+    "preparo": "Dispensado: gratuidade deferida na origem"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Concurso público — CNU; anulação de questões",
+     "sintese": "Candidato do CNU (Bloco 4), com 64 pontos na prova objetiva, pede a anulação de 11 questões por duas alternativas corretas ou conteúdo fora do edital, com recálculo da nota, curso de formação e reserva de vaga. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Cabimento do controle judicial das questões à luz do Tema 485/STF (erro grosseiro ou conteúdo fora do edital); 2) urgência, com o cronograma do concurso encerrado em 2025.",
+     "rel": {
+      "razoes": "Agravo (ID 386327069): (1) controle de legalidade de questões com erro grosseiro; (2) violação dos itens 7.1.1.1 e 7.1.1.1.1 do edital; (3) perícia emprestada sobre a questão 35; (4) recursos administrativos indeferidos sem motivação.",
+      "contrarrazoes": "União (ID 387945792): vinculação ao edital, banca como última instância e isonomia; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "591276630",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Indeferiu a tutela de urgência: o Judiciário não substitui a banca examinadora; ausência de plausibilidade."
+     },
+     "ai": {
+      "id": "591276630",
+      "data": "",
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "intim": "2026-07-02",
+      "prot": "2026-07-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "386327069",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "386327069",
+       "data": "2026-07-15"
+      },
+      {
+       "desc": "Laudo pericial emprestado (questão 35)",
+       "id": "386327071",
+       "data": "2026-07-15"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "386365631",
+       "data": "2026-07-17"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "387945792",
+       "data": "2026-07-22"
+      }
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-17"
+    }
    }
   },
   {
