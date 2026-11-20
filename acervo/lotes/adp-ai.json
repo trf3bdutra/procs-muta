@@ -13728,13 +13728,13 @@
    "exequente": "DAVI JOSE BUNGENSTAB",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Crédito Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Contratos bancários e CEF · ação de alongamento de dívidas de crédito rural · gratuidade da justiça indeferida a produtor rural (artigo 99, § 2º, do CPC · Tema 1.178/STJ)",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto ou decisão monocrática) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Davi José Bungenstab contra a decisão ID 449987716 da 4ª Vara Federal de Campo Grande que, na ação de obrigação de fazer 5010987-56.2025.4.03.6000 contra a CEF para alongamento de dívidas de crédito rural, indeferiu a gratuidade da justiça e determinou o recolhimento das custas sob pena de cancelamento da distribuição. O agravante sustenta prejuízo na atividade rural superior a R$ 6 milhões e passivo de R$ 24,1 milhões, demonstrados na declaração de imposto de renda.",
+   "peculiaridades": "Efeito suspensivo indeferido por patrimônio e renda incompatíveis com a hipossuficiência. Nova advogada constituída.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -13772,7 +13772,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Não localizado · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5010987-56.2025.4.03.6000 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5010987-56.2025.4.03.6000 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento",
+    "materia": "Gratuidade da justiça: produtor rural; renda e patrimônio declarados",
+    "origem": "4ª Vara Federal de Campo Grande · 5010987-56.2025.4.03.6000",
+    "decisao_agravada": "ID 449987716 dos autos de origem",
+    "recurso": "ID 344258300 · 25/11/2025",
+    "preparo": "Não se aplica (artigo 101, § 1º, do CPC)",
+    "monocratica": "Possível (Tema 1.178/STJ) [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -13793,6 +13801,93 @@
     "ultima_informacao": "Certidão · ID 365602405 · 10/04/2026",
     "ultima_movimentacao": " 17:53 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Contratos bancários e CEF · ação de alongamento de dívidas de crédito rural · gratuidade da justiça indeferida a produtor rural (artigo 99, § 2º, do CPC · Tema 1.178/STJ)",
+   "especificidades": "Preparo dispensado enquanto se discute a gratuidade (artigo 101, § 1º, do CPC) · Efeito suspensivo indeferido pelo Des. Fed. Herbert de Bruyn (ID 344686663, 28/11/2025): rendimentos anuais acima de R$ 485 mil e bens acima de R$ 20 milhões na DIRPF 2024 · Substabelecimento sem reserva a nova advogada (IDs 384682160 a 384695333, 06/07/2026): intimações em nome de Sâmara Almeida Recaldes Higa · Há um documento não lido no PJe",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Produtor rural que pede o alongamento de dívidas rurais teve indeferida a gratuidade, apesar de alegar prejuízo e endividamento elevados, à vista de renda e patrimônio declarados.",
+    "inicial": "Ação de obrigação de fazer 5010987-56.2025.4.03.6000, 4ª Vara Federal de Campo Grande, de Davi José Bungenstab contra a CEF (alongamento de dívidas de crédito rural)",
+    "decisao_recorrida": "Decisão ID 449987716 dos autos de origem: indeferiu a gratuidade da justiça e determinou o recolhimento das custas em 15 dias, sob pena de cancelamento da distribuição",
+    "recurso": "Agravo ID 344258300 (25/11/2025): (1) prova da hipossuficiência pela DIRPF (prejuízo de R$ 6.179.991,84 e passivo de R$ 24.156.989,21); (2) presunção do artigo 99, § 3º, do CPC; (3) aplicação analógica da Súmula 481/STJ; e (4) efeito suspensivo ativo.",
+    "resposta": "CEF, contraminuta ID 349380678 (08/01/2026): ausência de prova da hipossuficiência; manutenção.",
+    "parecer": "Não consta",
+    "outros": "Decisão de redistribuição ID 344521661 (26/11/2025). Decisão ID 344686663 (28/11/2025, Des. Fed. Herbert de Bruyn): indeferiu o efeito suspensivo. Decisão de redistribuição ID 362604324 (26/03/2026). Procuração e substabelecimento IDs 384682160 a 384695333 (06/07/2026).",
+    "representacao": "Agravante: advogada constituída por substabelecimento sem reserva. Agravada: CEF, com advogado.",
+    "preparo": "Dispensado na discussão da gratuidade (artigo 101, § 1º, do CPC)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contratos bancários e CEF · ação de alongamento de dívidas de crédito rural · gratuidade da justiça indeferida a produtor rural (artigo 99, § 2º, do CPC · Tema 1.178/STJ)",
+     "sintese": "Produtor rural que pede o alongamento de dívidas rurais teve indeferida a gratuidade, apesar de alegar prejuízo e endividamento elevados, à vista de renda e patrimônio declarados.",
+     "questoes": "1) Afastamento da presunção de hipossuficiência à vista da renda e do patrimônio declarados (artigo 99, § 2º, do CPC; Tema 1.178/STJ); 2) relevância do endividamento rural para a gratuidade.",
+     "rel": {
+      "razoes": "Agravo (ID 344258300): (1) prejuízo e passivo na DIRPF; (2) presunção do artigo 99, § 3º, do CPC; e (3) Súmula 481/STJ por analogia.",
+      "contrarrazoes": "CEF (ID 349380678): ausência de prova da hipossuficiência."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "449987716",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a gratuidade da justiça e determinou o recolhimento das custas, sob pena de cancelamento da distribuição."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Indeferido",
+      "id": "449987716"
+     },
+     "adm": {
+      "prot": "2025-11-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Davi José Bungenstab",
+       "tipo": "Agravo de instrumento",
+       "id": "344258300",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "344258300",
+       "data": "2025-11-25"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "344686663",
+       "data": "2025-11-28"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "349380678",
+       "data": "2026-01-08"
+      },
+      {
+       "desc": "Procuração e substabelecimento",
+       "id": "384682160",
+       "data": "2026-07-06"
+      }
+     ],
+     "pendencias": "Conferir a data de intimação da decisão agravada; ler o documento não lido",
+     "especificidades": "Preparo dispensado enquanto se discute a gratuidade (artigo 101, § 1º, do CPC) · Efeito suspensivo indeferido pelo Des. Fed. Herbert de Bruyn (ID 344686663, 28/11/2025): rendimentos anuais acima de R$ 485 mil e bens acima de R$ 20 milhões na DIRPF 2024 · Substabelecimento sem reserva a nova advogada (IDs 384682160 a 384695333, 06/07/2026): intimações em nome de Sâmara Almeida Recaldes Higa · Há um documento não lido no PJe"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-11-28"
+    }
    }
   },
   {
