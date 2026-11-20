@@ -17493,8 +17493,8 @@
    "exequente": "EMPRESA DE SANEAMENTO DE MATO GROSSO DO SUL S.A.",
    "executado": "MINISTERIO PUBLICO FEDERAL - PR/MS",
    "assunto": "Direitos Indígenas",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Indígena · ação civil pública · fornecimento de água potável a comunidades indígenas em área urbana · obrigação imposta à SANESUL",
    "resultado": "Ato a proferir: decisão sobre o efeito suspensivo pendente ou julgamento do agravo de instrumento (voto) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
@@ -17563,6 +17563,94 @@
     "outros": "Certidão sem comprovante de custas ID 363583084 (31/03/2026). Petição ID 364646060 (06/04/2026) com GRU ID 364646063 e cópia autenticada pelo banco ID 364646064 (OCR). Despacho ID 366542211 (16/04/2026): postergou a apreciação da tutela recursal e intimou o agravado.",
     "representacao": "Agravante: advogados da GEJUR/SANESUL (procuração ID 362643380, ata e termos de posse). Agravado: MPF.",
     "preparo": "GRU 18720-8, UG 090029, R$ 1.000,00, com autenticação mecânica bancária (ID 364646064); sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Indígena — fornecimento de água potável a comunidades indígenas; obrigação imposta à concessionária estadual de saneamento",
+   "especificidades": "Efeito suspensivo pendente desde 26/03/2026 (postergado no despacho ID 366542211, de 16/04/2026) · Conclusos para decisão desde 28/04/2026 · Comunidades Mboreviry Teko Ava e Romero Benites, Naviraí/MS; 150 litros por pessoa ao dia, em até 5 dias · Pedido principal: imputar a obrigação à União; subsidiários: cooperação logística, fornecimento em ponto operacional, remuneração e dilação de prazo · MPF é o agravado (contraminuta ID 369005016) · Preparo: GRU com autenticação bancária (ID 364646064), sem comprovante STN [VALIDAR] · Decisão agravada só em imagem",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Indígena — fornecimento de água potável a comunidades indígenas; obrigação imposta à concessionária estadual de saneamento",
+     "subassuntos": "Indígena · ação civil pública · fornecimento de água potável a comunidades indígenas em área urbana · obrigação imposta à SANESUL",
+     "sintese": "",
+     "questoes": "1) Legitimidade e responsabilidade da SANESUL × União pelo fornecimento emergencial; 2) cooperação logística do Poder Público e fornecimento em ponto operacional; 3) remuneração da concessionária; 4) prazo de cumprimento; 5) preparo sem comprovante STN.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Naviraí",
+      "dispositivo": "Deferiu liminar para a SANESUL fornecer água potável (150 litros por pessoa ao dia), em até 5 dias, às comunidades Mboreviry Teko Ava e Romero Benites."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Pendente de análise",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-03-26",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "362643372",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "362643372",
+       "data": "2026-03-26"
+      },
+      {
+       "desc": "Certidão sem comprovante de custas",
+       "id": "363583084",
+       "data": "2026-03-31"
+      },
+      {
+       "desc": "Petição com GRU",
+       "id": "364646060",
+       "data": "2026-04-06"
+      },
+      {
+       "desc": "GRU com autenticação bancária (OCR)",
+       "id": "364646064",
+       "data": "2026-04-06"
+      },
+      {
+       "desc": "Despacho que postergou a tutela recursal",
+       "id": "366542211",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Contraminuta do MPF",
+       "id": "369005016",
+       "data": "2026-04-25"
+      }
+     ],
+     "pendencias": "Apreciar o efeito suspensivo pendente; conferir o preparo (comprovante STN); identificar data e ID da decisão agravada",
+     "especificidades": "Efeito suspensivo pendente desde 26/03/2026 (postergado no despacho ID 366542211, de 16/04/2026) · Conclusos para decisão desde 28/04/2026 · Comunidades Mboreviry Teko Ava e Romero Benites, Naviraí/MS; 150 litros por pessoa ao dia, em até 5 dias · Pedido principal: imputar a obrigação à União; subsidiários: cooperação logística, fornecimento em ponto operacional, remuneração e dilação de prazo · MPF é o agravado (contraminuta ID 369005016) · Preparo: GRU com autenticação bancária (ID 364646064), sem comprovante STN [VALIDAR] · Decisão agravada só em imagem"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Indígenas (CF 232)",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2026-03-26",
+     "urgObs": "Apreciação postergada em 16/04/2026 (ID 366542211) para após a contraminuta, já apresentada em 25/04/2026."
+    }
    }
   },
   {
