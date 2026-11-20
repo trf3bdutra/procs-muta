@@ -3369,8 +3369,8 @@
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
    "grupo": "g1",
-   "tipo_caso": "AI · Alienação fiduciária de imóvel · leilão extrajudicial · intimação pessoal · agravo interno pendente",
-   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno contra a decisão liminar (ID 366397187) julgado prejudicado ou em conjunto [VALIDAR]; há contraminuta e resposta ao agravo interno",
+   "tipo_caso": "AI · Alienação fiduciária de imóvel (Lei 9.514/1997) · leilão extrajudicial · intimação pessoal para purgar a mora e das datas dos leilões · purgação até a arrematação · preço vil · bem de família",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno (ID 366397187) julgado prejudicado ou em conjunto [VALIDAR]; conferir antes o preparo ou a gratuidade",
    "modelo": "",
    "variacoes": [
     "ADM",
@@ -3460,7 +3460,104 @@
     "representacao": "Procuração ad judicia et extra com pedido de gratuidade (ID 352376461), outorgada por Lúcia Helena de Arruda ao advogado Marcelo Alves dos Santos (OAB/MS 22.128)",
     "preparo": "Sem comprovante (certidão ID 352461001); pedido de gratuidade na procuração, sem decisão identificada [VALIDAR]"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Alienação fiduciária de imóvel (Lei 9.514/1997) · leilão extrajudicial · intimação pessoal para purgar a mora e das datas dos leilões · purgação até a arrematação · preço vil · bem de família",
+   "especificidades": "Agravo interno da agravante (ID 366397187, 14/04/2026) contra a decisão que indeferiu o efeito suspensivo (ID 353269263), integrada nos embargos de declaração (ID 361457556): pendente, com resposta da CEF (ID 371445090) · Preparo: sem comprovante (certidão ID 352461001); pedido de gratuidade na procuração sem decisão identificada; imagem de comprovante pendente de leitura (ID 352376459) [VALIDAR] · Há um documento não lido no PJe",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Alienação fiduciária de imóvel (Lei 9.514/1997) · leilão extrajudicial · intimação pessoal para purgar a mora e das datas dos leilões · purgação até a arrematação · preço vil · bem de família",
+     "sintese": "Lúcia Helena de Arruda Mesquita, devedora fiduciante de imóvel financiado pela CEF, ficou inadimplente; a propriedade foi consolidada e designados leilões. Alega irregularidades no procedimento e pediu a suspensão do leilão, negada na origem e no Tribunal em liminar.",
+     "questoes": "1) Preparo ou gratuidade; 2) agravo interno contra o indeferimento do efeito suspensivo; 3) intimação pessoal para purgar a mora e das datas dos leilões; 4) purgação da mora até a arrematação; 5) preço vil e bem de família.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 352376457 (29/01/2026): falta de intimação pessoal para purgar a mora e das datas dos leilões; purgação até a arrematação; preço vil; bem de família. Embargos de declaração ID 356195459 e agravo interno ID 366397187 contra as decisões monocráticas.",
+      "contrarrazoes": "Contraminuta da CEF ID 360004908 (13/03/2026); respostas aos embargos de declaração (ID 361434016) e ao agravo interno (ID 371445090)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "545309494",
+      "juizo": "1ª Vara Federal de Três Lagoas",
+      "dispositivo": "Indeferiu a liminar para suspender o leilão extrajudicial do imóvel."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "545309494"
+     },
+     "adm": {
+      "prot": "2026-01-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "352376457",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Embargos de declaração",
+       "id": "356195459",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "366397187",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "352376457",
+       "data": "2026-01-29"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "353269263",
+       "data": "2026-02-10"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "360004908",
+       "data": "2026-03-13"
+      },
+      {
+       "desc": "Decisão nos embargos de declaração",
+       "id": "361457556",
+       "data": "2026-03-25"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "366397187",
+       "data": "2026-04-14"
+      },
+      {
+       "desc": "Resposta da CEF ao agravo interno",
+       "id": "371445090",
+       "data": "2026-05-06"
+      }
+     ],
+     "pendencias": "Conferir o preparo ou apreciar a gratuidade; ler o documento não lido",
+     "especificidades": "Agravo interno da agravante (ID 366397187, 14/04/2026) contra a decisão que indeferiu o efeito suspensivo (ID 353269263), integrada nos embargos de declaração (ID 361457556): pendente, com resposta da CEF (ID 371445090) · Preparo: sem comprovante (certidão ID 352461001); pedido de gratuidade na procuração sem decisão identificada; imagem de comprovante pendente de leitura (ID 352376459) [VALIDAR] · Há um documento não lido no PJe"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-02-10"
+    }
+   }
   },
   {
    "sessao": "",
