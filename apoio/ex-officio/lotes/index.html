@@ -259,6 +259,7 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 .cor-p>b{color:var(--ei);overflow-wrap:anywhere}.cor-p span{color:var(--eg)}
 .cor-p small{font-size:11px;color:var(--em);line-height:1.5;overflow-wrap:anywhere}
 .cor-var{padding:10px;border:1px solid var(--el);margin:12px 0}
+.esp{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.esp span{border:1px solid var(--ln,#c9ccd1);border-radius:10px;padding:1px 8px;font-size:.85em;line-height:1.5}
 </style>
 <style id="office-layout-refine">
 
@@ -495,13 +496,15 @@ function ligaVisLotes(){
     }catch(e){cb.checked=!cb.checked;m.textContent='Não salvou: '+e.message}
   });
 }
+const SEG=s=>String(s||'').split(/\s+·\s+/).map(x=>x.trim()).filter(Boolean);
+const assuntoDe=it=>it.assunto||SEG(it.subassunto)[0]||it.tipo_caso;
 function montar(lotes,id,usuario){
   FLN=Object.fromEntries(LOTE.colunas.map(c=>[c.id,c.rotulo])); COR=Object.fromEntries(LOTE.grupos.map(g=>[g.id,g.cor])); OUT=LOTE.grupo_outros||{rotulo:'Outros',cor:'#9aa0a8'};
   const ord=LOTE.grupos.map(g=>g.id).concat([null]);
   ITENS=LOTE.itens.filter(it=>(!FILT_SESSAO||it.sessao===FILT_SESSAO)&&(!FILT_MINUTISTA||String((it.equipe&&it.equipe.minuta)||'').toLowerCase()===FILT_MINUTISTA.toLowerCase())).sort((a,b)=>ord.indexOf(a.grupo)-ord.indexOf(b.grupo)||a.sessao.localeCompare(b.sessao)||a.item-b.item);
   ITENS.forEach(it=>it.uid=it.sessao+'-'+it.item);
   const sit=[...new Set(ITENS.map(i=>i.equipe&&i.equipe.situacao).filter(Boolean))];
-  const assuntos=[...new Set(ITENS.map(x=>x.assunto||x.tipo_caso).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  const assuntos=[...new Set(ITENS.map(assuntoDe).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   const recursos=[...new Set(ITENS.map(x=>x.recurso).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   const resultados=[...new Set(ITENS.map(x=>x.resultado).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   const grs=LOTE.grupos.filter(g=>ITENS.some(i=>i.grupo===g.id)).map(g=>({k:g.id,r:g.rotulo,c:g.cor,n:ITENS.filter(i=>i.grupo===g.id).length}));
@@ -747,7 +750,7 @@ function perfil(it,i){
   const fl=it.variacoes.map(f=>`<span style="background:${f==='ORI'?'var(--er)':c}">${esc(FLN[f]||f)}</span>`).join('')||`<span style="background:${OUT.cor}">sem variações marcadas</span>`;
   const cons=`/amicus/compendium/#consulta=${it.sessao}/${it.item}`;
   let b=`<div class="box"><h3>Identificação</h3>${dl({[it.sessao?'Sessão':'Item']:it.sessao?`${br(it.sessao)} · item ${it.item}`:`${it.item}${it.chegada?' · chegou em '+esc(it.chegada):''}`,'Tarefa':esc(it.tarefa||''),'Etiquetas':esc(it.etiquetas||''),'Processo':`<span class="cnj">${it.processo}</span>`,'Recurso':esc(it.recurso),'Exequente':esc(it.exequente),'Executado':esc(it.executado)})}</div>`;
-  b+=`<div class="box"><h3>Enquadramento</h3>${dl({'Tipo de caso':esc(it.tipo_caso),'Resultado':esc(it.resultado),'Modelo vigente':esc(it.modelo)})}</div>`;
+  b+=`<div class="box"><h3>Enquadramento</h3>${dl({'Tipo de caso':esc(it.tipo_caso),'Subassunto':SEG(it.subassunto).map(esc).join(' › '),'Resultado':esc(it.resultado),'Modelo vigente':esc(it.modelo)})}${SEG(it.especificidades).length?`<p style="margin-top:8px"><b>Especificidades</b></p><div class="esp">${SEG(it.especificidades).map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</div>`;
   b+=`<div class="box so-equipe"><h3>Equipe e situação</h3>${dl({'Minuta':esc(e.minuta),'Correção':esc(e.correcao),'Situação':esc(e.situacao),'Código triagem':esc(t['Código']),'Visível para':MODO==='cg'?`<span data-vtx="${it.uid}">${textoVis(it)}</span>`:''})}</div>`;
   b+=`<div class="box wide"><h3>Variações e peculiaridades</h3><div class="fl">${fl}</div>`+
      `<p class="pv" style="margin-top:8px" data-eq="${esc(it.peculiaridades)}" data-rel="${esc(it.peculiaridades_relator)}">${esc(it.peculiaridades_relator)}</p>`+
@@ -914,9 +917,9 @@ function filtra(){
    assunto=$('#fa').value,recurso=$('#fr').value,resultado=$('#fres').value,
    vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
   for(const it of ITENS){const e=it.equipe||{};
-    const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
+    const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,it.subassunto,it.especificidades,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
     if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st)&&
-       (!assunto||(it.assunto||it.tipo_caso)===assunto)&&(!recurso||it.recurso===recurso)&&
+       (!assunto||assuntoDe(it)===assunto)&&(!recurso||it.recurso===recurso)&&
        (!resultado||it.resultado===resultado))vis.add(it.uid)}
   document.querySelectorAll('#mxb tr.r').forEach(r=>{r.classList.toggle('hidden',!vis.has(r.dataset.u));r.classList.toggle('hit',CX.hits.has(r.dataset.u))});
   document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)));const x=r.querySelector('.ghn');if(x)x.textContent=n+' processo'+(n>1?'s':'')});

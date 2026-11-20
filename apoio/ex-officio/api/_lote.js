@@ -280,7 +280,7 @@ async function gravar(req, res, u, gestor) {
   }
   if (b.acao === 'criar-lista' || b.acao === 'itens') {
     const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
-    const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'tipo_caso', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada', 'bloco'];
+    const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'tipo_caso', 'subassunto', 'especificidades', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada', 'bloco'];
     const OBJ = ['triagem', 'situacao_atual', 'extracao', 'teor', 'prontuario_triagem'];
     const LST = ['variacoes', 'pendencias', 'pecas'];
     const limpo = (x, it) => {

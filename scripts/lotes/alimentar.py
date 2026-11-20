@@ -171,8 +171,9 @@ def main(lotes):
             fp(o, 'Sentença - ID', O0.get('id')); fp(o, 'Sentença - Data', O0.get('data')); fp(o, 'Origem - Juízo', O0.get('juizo')); fp(o, 'Origem - Julgador', O0.get('julgador'))
             if vazio(t.get('O que falta sanar')) and it.get('pendencias'):
                 t['O que falta sanar'] = '\n'.join(it['pendencias'])
-            if vazio(t.get('Tema')) and (it.get('tipo_caso') or it.get('assunto')):
-                t['Tema'] = it.get('tipo_caso') or it.get('assunto')
+            fp(t, 'Especificidades', it.get('especificidades'))
+            if vazio(t.get('Tema')) and (it.get('subassunto') or it.get('tipo_caso') or it.get('assunto')):
+                t['Tema'] = it.get('subassunto') or it.get('tipo_caso') or it.get('assunto')
             if vazio(pr.get('Voto - Resultado')) and it.get('resultado'):
                 pr['Voto - Resultado'] = it['resultado']
             if json.dumps(r, ensure_ascii=False, sort_keys=True) != antes:
