@@ -11,7 +11,7 @@ test('Mesa de designação: página válida, publicada e ligada ao Caput',()=>{
   assert.match(pag,/competencia:\{st:[\d.]+,pen:0\.6/,'carga só desempata no modo padrão');
   assert.ok(read('.github/workflows/vercel-monitor.yml').includes('cp monitor/designacao/index.html site/public/caput/designacao/index.html'));
   const caput=read('monitor/triagem/index.html');
-  for(const x of ['data-cwe="des-mesa"',"src=\"/caput/designacao/?s=","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
+  for(const x of ['data-cwe="des-mesa"',"'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
   assert.ok(!caput.includes('<span class="v">${e(atual)}</span>'),'minutante e corretor sempre editáveis');
 });
 test('Motor: troca na designação e período efetivo com marcos invertidos',()=>{
@@ -34,4 +34,11 @@ test('Mesa: agrupar por motivo do minutante e do corretor',()=>{
   const pag=read('monitor/designacao/index.html');
   for(const x of ['data-ag="bloco"','data-ag="md"','data-ag="mc"','function motivo(x,k)','return grupo(x)===b'])assert.ok(pag.includes(x),x);
   for(const m of ['Escolha manual','Continuidade','Regra do gabinete','Especialidade ou preferência','Experiência no assunto','Mesmo lote ou assunto','Mantém a designação atual','Distribuição pela carga'])assert.ok(pag.includes(m),m);
+});
+test('Mesa dentro da etapa B: modo embutido e tela cheia',()=>{
+  const pag=read('monitor/designacao/index.html');
+  assert.ok(pag.includes("get('embed')==='1'")&&pag.includes("EMBED?'cmt:mesa-tela':'cmt:mesa-fechar'"));
+  const caput=read('monitor/triagem/index.html');
+  assert.ok(caput.includes('requestAnimationFrame(mesaSync)'),'reposiciona a mesa a cada render');
+  assert.ok(caput.includes("h.id = 'cwe-mesa-host'")&&caput.includes('document.body.appendChild(h)'),'moldura fora do HTML refeito pelo render');
 });

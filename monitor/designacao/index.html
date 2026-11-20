@@ -207,7 +207,11 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
   var hoje=new Date().toISOString().slice(0,10);
   var de=(D.periodo&&D.periodo.de)||'2026-11-23', ate=(D.periodo&&D.periodo.ate)||'2026-11-27';
   document.getElementById('tit').textContent='Mesa de designação · pauta de '+D.sessao.data.slice(8,10)+'/'+D.sessao.data.slice(5,7)+'/'+D.sessao.data.slice(0,4);
-  if(VIVO){document.getElementById('b-fechar').hidden=false;document.getElementById('b-aplicar').textContent='Aplicar à pauta';}
+  /* embed=1: dentro de Pautas › Preparar › B; o botão alterna a tela cheia */
+  var EMBED=new URLSearchParams(location.search).get('embed')==='1';
+  if(VIVO){document.getElementById('b-fechar').hidden=false;document.getElementById('b-aplicar').textContent='Aplicar à pauta';if(EMBED)document.getElementById('b-fechar').textContent='Tela cheia';}
+  window.addEventListener('message',function(ev){if(ev.origin!==location.origin||!ev.data)return;if(ev.data.tipo==='cmt:mesa-modo')document.getElementById('b-fechar').textContent=ev.data.full?'Sair da tela cheia':'Tela cheia';});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&VIVO){try{window.parent.postMessage({tipo:'cmt:mesa-fechar'},location.origin);}catch(er){}}});
   function diasUteis(a,b){var n=0,d=new Date(a+'T12:00:00'),f=new Date(b+'T12:00:00');var U=VIVO&&VIVO.diasUteis&&VIVO.diasUteis.util;while(d<=f){var w=d.getDay(),k=d.toISOString().slice(0,10);if(U?U(k):(w&&w<6&&!FER[k]))n++;d.setDate(d.getDate()+1);}return n;}
   /* ausências cadastradas no período já entram marcadas */
   function ausCad(m){return (m.aus||[]).some(function(a){return a.de&&a.ate&&a.de<=ate&&a.ate>=de;});}
@@ -356,7 +360,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
     if(a==='recalc'){propor();tudo();toast('Proposta recalculada; suas escolhas manuais ficaram.');}
     if(a==='manter'){IT.forEach(function(x){ESC[x.i]={d:x.d,c:x.c};});tudo();toast('Tudo de volta à designação atual.');}
     if(a==='proposta'){ESC={};tudo();toast('Proposta restaurada.');}
-    if(a==='fechar'){try{window.parent.postMessage({tipo:'cmt:mesa-fechar'},location.origin);}catch(er){}return;}
+    if(a==='fechar'){try{window.parent.postMessage({tipo:EMBED?'cmt:mesa-tela':'cmt:mesa-fechar'},location.origin);}catch(er){}return;}
     if(a==='copiar'&&VIVO){var M=IT.filter(function(x){return fin(x,'d')!==x.d||fin(x,'c')!==x.c;});
       if(!M.length){toast('Nada mudou em relação à designação atual.');return;}
       var lista=M.map(function(x){var p=PROP[x.i]||{},dd=fin(x,'d'),cc=fin(x,'c'),md=ESC[x.i]&&ESC[x.i].d!=null&&ESC[x.i].d!==p.d,mc=ESC[x.i]&&ESC[x.i].c!=null&&ESC[x.i].c!==p.c;
