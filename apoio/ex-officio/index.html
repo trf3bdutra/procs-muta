@@ -8702,6 +8702,13 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 #v-cmt .cmt-pa.feito i,dialog.cmt-pdlg .cmt-pa.feito i{animation:cmtFeito .5s ease}
 @keyframes cmtFeito{0%{transform:scale(.7)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
 @media (prefers-reduced-motion:reduce){#v-cmt .cmt-pa.ocupado i::after,dialog.cmt-pdlg .cmt-pa.ocupado i::after{animation-duration:2s}#v-cmt .cmt-pa.feito i,dialog.cmt-pdlg .cmt-pa.feito i{animation:none}}
+/* passar o mouse acompanha a cor de cada etapa (verde, azul, roxo); vermelho só quando o clique desfaz */
+:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa[data-cet="dataMinuta"]:hover :is(i,b){border-color:#28744b;color:#28744b}
+:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa[data-cet="dataCorrecao"]:hover :is(i,b){border-color:#245b8c;color:#245b8c}
+:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa[data-cl]:hover :is(i,b){border-color:#6d4596;color:#6d4596}
+:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa:is(.s1,.s2):not(.inf):hover :is(i,b),:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa[data-cl].s3:hover :is(i,b){border-color:var(--er);color:var(--er)}
+:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa.s1.inf:hover :is(i,b){border-color:#9fd0b6;color:#28744b}
+:is(#v-cmt,dialog.cmt-pdlg) button.cmt-pa.s2.inf:hover :is(i,b){border-color:#9cc0e0;color:#245b8c}
 </style>
 </body>
 </html>
