@@ -58,7 +58,6 @@
    "modelo": "",
    "variacoes": [
     "URG",
-    "ADM",
     "VAL"
    ],
    "observacao": "Agravo contra a decisão que rejeitou a exceção de pré-executividade (ID 595913650 nos autos de origem; EF 5010244-56.2019.4.03.6000, contribuições previdenciárias, R$ 853.563,35). Teses: nulidade da citação por edital sem esgotamento das diligências; prescrição intercorrente; CDA sem processo administrativo e memória de cálculo; falta de fundamentação. Pede efeito suspensivo.",
@@ -90,8 +89,8 @@
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] Preparo: conferir no comprovante PagTesouro (ID 392776026) valor, código 18720-8 e data de 10/08/2026; o arquivo não tem texto extraível",
     "[VALIDAR] Tempestividade: data da intimação da decisão agravada não consta dos autos do agravo",
+    "[VALIDAR] Procuração: conferir na cópia dos autos de origem (ID 391343256)",
     "Corrigir o assunto cadastrado (1/3 de férias)"
    ],
    "minuta": false,
@@ -111,6 +110,17 @@
     "ultima_informacao": "Certidão · ID 391726799 · 13/08/2026",
     "ultima_movimentacao": "20/08/2026 14:07 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Execução fiscal da União contra Link Parts Indústria, Comércio e Serviços de Peças (contribuições previdenciárias, R$ 853.563,35). A executada opôs exceção de pré-executividade (nulidade da citação por edital, prescrição intercorrente e CDA deficiente), rejeitada pelo juízo; daí o agravo, com pedido de efeito suspensivo.",
+    "inicial": "Não consta nos autos do recurso (execução fiscal de origem 5010244-56.2019.4.03.6000; capa juntada no ID 391343246)",
+    "decisao_recorrida": "Decisão ID 595913650 dos autos de origem, que rejeitou a exceção de pré-executividade (regularidade da citação por edital, ausência de prescrição intercorrente e higidez das CDAs). Não juntada com texto nos autos do agravo.",
+    "recurso": "Agravo de instrumento ID 391341575 (10/08/2026): nulidade da citação por edital sem esgotamento das diligências; prescrição intercorrente; CDAs sem processo administrativo e memória de cálculo, que impedem verificar duplicidade e cumulação de encargos; falta de fundamentação da decisão. Pede efeito suspensivo e reforma.",
+    "resposta": "Não consta: a agravada ainda não foi intimada para contraminuta",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Não há procuração própria nos autos do agravo; o advogado Rodrigo Schmidt Casemiro (OAB/MS 13.400) assina as petições. Conferir procuração na cópia dos autos de origem (ID 391343256) [VALIDAR]",
+    "preparo": "Pago em 10/08/2026 por Pix (ID 391362109). Após o despacho ID 391762871, juntado o comprovante PagTesouro (ID 392776026): GRU 2026/090029/0036361519, paga em 10/08/2026, UG 090029 (TRF-3), código 18720-8 (custas de 2ª instância), referência do próprio agravo. Preparo comprovado; valor de R$ 64,26 informado pela agravante."
    }
   },
   {
@@ -127,11 +137,10 @@
    "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida e há contraminuta",
    "modelo": "",
    "variacoes": [
-    "ADM",
     "VAL"
    ],
    "observacao": "Agravo de VS Empreendimentos e Participações e Serbom Armazéns Gerais Frigoríficos contra a decisão que extinguiu em parte o feito sem resolução de mérito (ID 479403471 nos autos de origem), complementada nos embargos de declaração (ID 565198258); autos de origem 5021736-26.2025.4.03.6100. Teses das agravantes: não respondem pelos créditos da CDA 47.000.873-3 (empresa SAGA), porque a cisão parcial foi registrada em 26/05/2006, antes dos fatos geradores (01/2010 a 03/2014), e a responsabilidade exigiria apuração administrativa. A União sustenta falta de interesse de agir (artigo 485, VI, do CPC) e a regularidade do declínio de competência para a 2ª Vara de Execuções Fiscais de São Paulo, por conexão.",
-   "peculiaridades": "Tutela recursal indeferida (decisão ID 385918818, de 13/07/2026). Contraminuta da União (ID 388425432, de 24/07/2026). Preparo recolhido inicialmente à Justiça Federal de primeiro grau (ID 371549741); o despacho ID 377316374 mandou retificar (artigo 1.007, § 7º, do CPC), e as agravantes juntaram comprovantes em 03/06/2026 (IDs 378271027, 378271029 e 378271030). Origem com final 6100.",
+   "peculiaridades": "Tutela recursal indeferida (decisão ID 385918818, de 13/07/2026). Contraminuta da União (ID 388425432). Preparo regularizado em 02/06/2026 após o despacho ID 377316374. Origem com final 6100.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -174,9 +183,9 @@
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] Preparo: conferir os comprovantes de 03/06/2026 (IDs 378271027, 378271029 e 378271030), sem texto extraível",
     "[VALIDAR] Competência da Turma Regional: a origem tem final 6100; conferir o enquadramento na Resolução PRES 33/2025 adotado na decisão ID 371073977",
-    "[VALIDAR] Ler a decisão agravada e a dos embargos nos autos de origem"
+    "[VALIDAR] Ler a decisão agravada e a dos embargos nos autos de origem",
+    "[VALIDAR] Procuração das agravantes"
    ],
    "minuta": false,
    "classe": "AI",
@@ -195,6 +204,17 @@
     "ultima_informacao": "Certidão · ID 372025360 · 08/05/2026",
     "ultima_movimentacao": "18/08/2026 17:22 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Ação de VS Empreendimentos e Participações e Serbom Armazéns Gerais Frigoríficos contra a União para afastar a responsabilidade pelos créditos da CDA 47.000.873-3, cobrados da empresa SAGA, da qual se cindiram em 2006. O juízo extinguiu em parte o feito sem resolução de mérito e declinou da competência; daí o agravo.",
+    "inicial": "Não consta nos autos do recurso (autos de origem 5021736-26.2025.4.03.6100)",
+    "decisao_recorrida": "Decisão ID 479403471 dos autos de origem (extinção parcial sem resolução de mérito), complementada nos embargos de declaração (ID 565198258). Não juntada com texto nos autos do agravo.",
+    "recurso": "Agravo de instrumento ID 368235654 (22/04/2026): a cisão parcial foi registrada na JUCEMS em 26/05/2006, antes dos fatos geradores (01/2010 a 03/2014); a responsabilidade das agravantes exigiria apuração administrativa formal. Pede efeito suspensivo ativo e reforma.",
+    "resposta": "Contraminuta da União ID 388425432 (24/07/2026): falta de interesse de agir (artigo 485, VI, do CPC), regularidade do declínio de competência para a 2ª Vara de Execuções Fiscais de São Paulo por conexão e prevenção (artigos 55 e 59 do CPC) e ausência dos requisitos do artigo 300 do CPC.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Michelle Lacsko de Araujo (OAB/SP 302.891) e Munder Hassan Gebara (OAB/MS 5.485) assinam as petições; procuração não identificada nos documentos com texto [VALIDAR]",
+    "preparo": "Recolhido de início à Justiça Federal de primeiro grau (GRU 2026/090015/0016090288, paga em 20/04/2026, UG 090015, código 18710-0; ID 371549741). Após o despacho ID 377316374 (29/05/2026), recolhido ao TRF-3 em 02/06/2026: R$ 64,26 por Pix (ID 378271029), PagTesouro com UG 090029 e código 18720-8 (ID 378271027) e comprovante do portal de custas (ID 378271030). Regularizado no prazo de 5 dias."
    }
   },
   {
