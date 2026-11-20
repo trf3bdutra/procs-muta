@@ -11294,13 +11294,13 @@
    "exequente": "FERREIRA & COMPARIM LTDA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Contratos Bancários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Contratos bancários e CEF · ação revisional de conta e operações de crédito · exibição incidental de documentos · inversão do ônus da prova postergada ao saneamento",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (decisão monocrática ou voto), conferidos o preparo e o cabimento quanto à inversão do ônus da prova [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Ferreira & Comparim Ltda. contra a decisão da 1ª Vara Federal de Dourados que, na ação revisional 5004004-35.2025.4.03.6002 movida contra a CEF, deferiu o sigilo, indeferiu a exibição incidental de documentos e do relatório SCR, por falta de pedido prévio à agência e de recusa da CEF, e postergou ao saneamento a distribuição do ônus da prova. A agravante sustenta que os documentos são comuns às partes, que é dispensável o pedido administrativo e que se aplica o CDC com inversão do ônus da prova.",
+   "peculiaridades": "Preparo com comprovante bancário, sem comprovante STN [VALIDAR]. Inversão do ônus da prova postergada na origem [VALIDAR cabimento nessa parte]. Tutela recursal indeferida.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -11333,7 +11333,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 372859755 · só a guia: ID 372859756 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 372859755 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5004004-35.2025.4.03.6002 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5004004-35.2025.4.03.6002 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento",
+    "materia": "Ação revisional bancária: exibição incidental de documentos; CDC e inversão do ônus da prova",
+    "origem": "1ª Vara Federal de Dourados · 5004004-35.2025.4.03.6002",
+    "decisao_agravada": "Decisão publicada em 22/04/2026 [VALIDAR ID]",
+    "recurso": "ID 372775754 · 12/05/2026",
+    "preparo": "Comprovante bancário, não aceito [VALIDAR]",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -11354,6 +11362,93 @@
     "ultima_informacao": "Certidão · ID 377088360 · 28/05/2026",
     "ultima_movimentacao": "04/08/2026 00:44 · DECORRIDO PRAZO DE FERREIRA & COMPARIM LTDA EM 03/08/2026 23:59.",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Contratos bancários e CEF · ação revisional de conta e operações de crédito · exibição incidental de documentos · inversão do ônus da prova postergada ao saneamento",
+   "especificidades": "Preparo: comprovante do aplicativo da Caixa de R$ 64,26 (ID 372859755) e guia (ID 372859756), sem comprovante STN [VALIDAR] · Cabimento: exibição de documento (artigo 1.015, VI, do CPC); o pedido de aplicação do CDC e inversão do ônus da prova foi postergado ao saneamento na origem, o que afeta o interesse e o cabimento nessa parte [VALIDAR] · Tutela recursal indeferida in limine pelo Relator (ID 384202989, 07/07/2026) · Autos de origem sob sigilo",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Na ação revisional contra a CEF, o juízo negou a exibição incidental de contratos e extratos, por ausência de prévio pedido à instituição, e deixou a distribuição do ônus da prova para o saneamento.",
+    "inicial": "Ação revisional de conta bancária e operações de crédito 5004004-35.2025.4.03.6002, 1ª Vara Federal de Dourados, de Ferreira & Comparim Ltda. contra a CEF",
+    "decisao_recorrida": "Decisão que deferiu o sigilo, indeferiu a exibição de documentos e do relatório SCR e postergou a distribuição do ônus da prova ao saneamento (publicada em 22/04/2026, segundo a agravante) [VALIDAR ID]",
+    "recurso": "Agravo ID 372775754 (12/05/2026): (1) exibição incidental de documentos comuns às partes, sem necessidade de pedido administrativo; (2) aplicação do CDC e inversão do ônus da prova (artigo 6º, VIII); e (3) tutela recursal para a exibição.",
+    "resposta": "CEF, contraminuta ID 387920717 (22/07/2026): ausência de prévio requerimento e de recusa; inversão do ônus da prova é regra de instrução, a ser decidida no saneamento.",
+    "parecer": "Não consta",
+    "outros": "Portaria CATRF3R 48/2025 juntada para a tempestividade (ID 372775755). Decisão de redistribuição ID 375552374 (28/05/2026). Decisão do Relator ID 384202989 (07/07/2026): indeferiu a tutela recursal in limine.",
+    "representacao": "Agravante: advogado constituído. Agravada: CEF, com advogados.",
+    "preparo": "Comprovante do aplicativo da Caixa (R$ 64,26) e guia, sem comprovante STN [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contratos bancários e CEF · ação revisional de conta e operações de crédito · exibição incidental de documentos · inversão do ônus da prova postergada ao saneamento",
+     "sintese": "Na ação revisional contra a CEF, o juízo negou a exibição incidental de contratos e extratos, por ausência de prévio pedido à instituição, e deixou a distribuição do ônus da prova para o saneamento.",
+     "questoes": "1) Regularidade do preparo; 2) cabimento do agravo quanto à inversão do ônus da prova postergada; 3) exibição incidental de documentos comuns sem prévio requerimento à instituição financeira.",
+     "rel": {
+      "razoes": "Agravo (ID 372775754): (1) exibição de documentos comuns; (2) CDC e inversão do ônus da prova; e (3) tutela recursal.",
+      "contrarrazoes": "CEF (ID 387920717): falta de prévio requerimento e de recusa; ônus da prova a ser fixado no saneamento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "[VALIDAR]",
+      "juizo": "1ª Vara Federal de Dourados",
+      "dispositivo": "Deferiu o sigilo; indeferiu a exibição de documentos, inclusive do relatório SCR; postergou ao saneamento a distribuição do ônus da prova."
+     },
+     "ai": {
+      "hip": "Exibição de documento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-05-12",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Ferreira & Comparim Ltda.",
+       "tipo": "Agravo de instrumento",
+       "id": "372775754",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "372775754",
+       "data": "2026-05-12"
+      },
+      {
+       "desc": "Comprovante bancário de custas",
+       "id": "372859755",
+       "data": "2026-05-12"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "384202989",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Contraminuta da CEF",
+       "id": "387920717",
+       "data": "2026-07-22"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN; identificar o ID da decisão agravada",
+     "especificidades": "Preparo: comprovante do aplicativo da Caixa de R$ 64,26 (ID 372859755) e guia (ID 372859756), sem comprovante STN [VALIDAR] · Cabimento: exibição de documento (artigo 1.015, VI, do CPC); o pedido de aplicação do CDC e inversão do ônus da prova foi postergado ao saneamento na origem, o que afeta o interesse e o cabimento nessa parte [VALIDAR] · Tutela recursal indeferida in limine pelo Relator (ID 384202989, 07/07/2026) · Autos de origem sob sigilo"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-07"
+    }
    }
   },
   {
