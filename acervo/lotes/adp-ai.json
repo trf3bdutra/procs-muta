@@ -1765,12 +1765,15 @@
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Alienação fiduciária de imóvel · leilão extrajudicial · intimação pessoal · agravo interno pendente",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno contra a decisão liminar (ID 366397187) julgado prejudicado ou em conjunto [VALIDAR]; há contraminuta e resposta ao agravo interno",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de Lúcia Helena de Arruda Mesquita contra a decisão (ID 545309494 da origem) que, na tutela antecipada antecedente 5000095-45.2026.4.03.6003 (1ª Vara Federal de Três Lagoas), indeferiu a liminar para suspender o leilão extrajudicial do imóvel. Teses: falta de intimação pessoal para purgar a mora e para ciência das datas dos leilões; purgação da mora até a arrematação; ônus da prova; preço vil; imóvel residencial. A CEF pede o desprovimento.",
+   "peculiaridades": "Efeito suspensivo indeferido pelo Relator anterior (decisão ID 353269263, 10/02/2026). Embargos de declaração (ID 356195459) acolhidos em parte, sem efeitos infringentes (decisão ID 361457556, 25/03/2026). Agravo interno (ID 366397187, 14/04/2026), com resposta da CEF (ID 371445090). Contraminuta da CEF (ID 360004908). Certidão ID 352461001: sem comprovante de custas; procuração com pedido de gratuidade. Grupo: alienação fiduciária/leilão.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1806,9 +1809,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Voto no agravo de instrumento; agravo interno prejudicado ou julgado em conjunto",
+    "materia": "Alienação fiduciária — leilão; intimação pessoal; purgação da mora; preço vil",
+    "origem": "Tutela antecedente 5000095-45.2026.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "ID 545309494 da origem; cópia no ID 352376458",
+    "recurso": "ID 352376457 · 29/01/2026",
+    "preparo": "Sem comprovante; gratuidade pedida e não apreciada nos autos do agravo [VALIDAR]",
+    "monocratica": "Não",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Gratuidade: pedida e não apreciada; sem comprovante de preparo",
+    "[VALIDAR] Tratamento do agravo interno pendente (ID 366397187)",
+    "[VALIDAR] Situação do leilão (se já realizado e arrematado)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -1826,6 +1842,17 @@
     "ultima_informacao": "Certidão · ID 373395727 · 14/05/2026",
     "ultima_movimentacao": " 15:52 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Lúcia Helena de Arruda Mesquita, devedora fiduciante de imóvel financiado pela CEF, ficou inadimplente; a propriedade foi consolidada e designados leilões. Alega irregularidades no procedimento e pediu a suspensão do leilão, negada na origem e no Tribunal em liminar.",
+    "inicial": "Tutela antecipada antecedente 5000095-45.2026.4.03.6003; não juntada em cópia com texto",
+    "decisao_recorrida": "Decisão ID 545309494 da 1ª Vara Federal de Três Lagoas, que indeferiu a liminar para suspender o leilão (cópia ID 352376458)",
+    "recurso": "Agravo de instrumento ID 352376457 (29/01/2026): falta de intimação pessoal para purgar a mora e das datas dos leilões; purgação até a arrematação; preço vil; bem de família. Embargos de declaração ID 356195459 e agravo interno ID 366397187 contra as decisões monocráticas.",
+    "resposta": "Contraminuta da CEF ID 360004908 (13/03/2026); respostas aos embargos de declaração (ID 361434016) e ao agravo interno (ID 371445090).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Procuração ad judicia et extra com pedido de gratuidade (ID 352376461), outorgada por Lúcia Helena de Arruda ao advogado Marcelo Alves dos Santos (OAB/MS 22.128)",
+    "preparo": "Sem comprovante (certidão ID 352461001); pedido de gratuidade na procuração, sem decisão identificada [VALIDAR]"
    }
   },
   {
@@ -1838,12 +1865,16 @@
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Embargos à execução fiscal do IBAMA (multa ambiental) · efeito suspensivo negado aos embargos",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi postergada e não foi apreciada; há contrarrazões do IBAMA e parecer do MPF (falta de interesse)",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "URG",
+    "PRI",
+    "VAL"
+   ],
+   "observacao": "Agravo de Osvaldo Firmino de Souza contra a decisão ID 560960353 (10/03/2026) da 6ª Vara Federal de Campo Grande que, nos embargos à execução fiscal 5003493-82.2021.4.03.6000, negou efeito suspensivo aos embargos. A execução (5007810-31.2018.4.03.6000) cobra R$ 3.243.351,72 (CDA 191821), multa de R$ 1.125.000,00 por supressão de 375 ha de APP no Pantanal do Rio Negro (Auto de Infração 542602/D, 27/12/2006). Teses nos embargos: auto lavrado por autoridade incompetente, prescrição da pretensão punitiva, ausência de culpa e área suprimida menor. Pede efeito suspensivo aos embargos.",
+   "peculiaridades": "Preparo recolhido (ID 365385112, confirmado no despacho ID 366540367), após certidão de falta de custas (ID 364741922). Tutela postergada para após a contraminuta (despacho ID 366540367); ainda não apreciada. Contrarrazões do IBAMA (ID 380626124) e parecer do MPF por falta de interesse (ID 380772205), ambos de 16/06/2026. Etiqueta: LOTE MULTA - AI.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1869,9 +1900,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução fiscal — multa ambiental do IBAMA; efeito suspensivo aos embargos (artigo 919, § 1º, do CPC)",
+    "origem": "Embargos à execução fiscal 5003493-82.2021.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 560960353 da origem (cópia ID 364646895)",
+    "recurso": "ID 364646885 · 06/04/2026",
+    "preparo": "Recolhido (ID 365385112)",
+    "monocratica": "Não; verificar o lote \"LOTE MULTA - AI\"",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Garantia do juízo na execução: requisito do artigo 919, § 1º, do CPC",
+    "[VALIDAR] Procuração",
+    "Verificar o lote \"LOTE MULTA - AI\" (etiqueta) para modelo comum"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -1889,6 +1933,17 @@
     "ultima_informacao": "Certidão · ID 364741922 · 06/04/2026",
     "ultima_movimentacao": "18/06/2026 14:38 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "O IBAMA executa multa ambiental de R$ 1.125.000,00 (atualizada em R$ 3.243.351,72) por supressão de 375 ha de APP no Pantanal do Rio Negro em 2006. O executado opôs embargos com nulidade do auto, prescrição e ausência de culpa; o juízo negou efeito suspensivo aos embargos.",
+    "inicial": "Embargos à execução fiscal 5003493-82.2021.4.03.6000: nulidade do auto por incompetência, prescrição da pretensão punitiva, ausência de culpa e área menor; cópia integral juntada (IDs 364646898 e 364646899)",
+    "decisao_recorrida": "Decisão ID 560960353 (10/03/2026, 6ª Vara Federal de Campo Grande), que negou efeito suspensivo aos embargos; cópia ID 364646895",
+    "recurso": "Agravo de instrumento ID 364646885 (06/04/2026): presença dos requisitos para efeito suspensivo dos embargos (probabilidade das teses e risco); pede efeito suspensivo ou antecipação da tutela recursal.",
+    "resposta": "Contrarrazões do IBAMA ID 380626124 (16/06/2026): indeferimento do efeito suspensivo e desprovimento.",
+    "parecer": "MPF ID 380772205 (16/06/2026): falta de interesse que justifique intervenção.",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Gustavo Passarelli da Silva (OAB/MS 7.602) e Cláudio de Rosa Guimarães (OAB/MS 7.620); procuração não identificada com texto [VALIDAR]",
+    "preparo": "Recolhido em 09/04/2026 (ID 365385112, comprovante com texto corrompido), reconhecido no despacho ID 366540367"
    }
   },
   {
