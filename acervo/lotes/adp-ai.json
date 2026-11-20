@@ -476,8 +476,8 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
    "grupo": "g7",
-   "tipo_caso": "AI · MS tributário · lucro presumido: majoração de 10% dos percentuais de presunção (IRPJ e CSLL) · liminar indeferida",
-   "resultado": "Ato a proferir: decisão sobre a tutela recursal (artigo 1.019, I, do CPC) e intimação da agravada, depois de conferido o preparo complementar",
+   "tipo_caso": "AI · Tributário · IRPJ e CSLL · lucro presumido: majoração de 10% dos percentuais de presunção · liminar em mandado de segurança",
+   "resultado": "Ato a proferir: apreciar com prioridade a tutela recursal (artigo 1.019, I, do CPC), conferido o preparo complementar [VALIDAR]; intimar a agravada e dar vista ao MPF",
    "modelo": "",
    "variacoes": [
     "URG",
@@ -554,7 +554,77 @@
     "representacao": "Advogada Telma Valéria Curiel Marcon (OAB/MS 6.355) assina as petições; procuração não identificada nos autos do agravo [VALIDAR]",
     "preparo": "Recolhido de início R$ 10,64, valor insuficiente (despacho ID 391747692, 14/08/2026, Tabela V da Resolução PRES 138/2017). Complementação em 28/08/2026: Pix de R$ 64,26 ao TRF-3 (ID 394168452), com guia (ID 394168450)."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Tributário · IRPJ e CSLL · lucro presumido: majoração de 10% dos percentuais de presunção · liminar em mandado de segurança",
+   "especificidades": "URGÊNCIA PENDENTE: a tutela recursal requerida no agravo (ID 390608275, 04/08/2026) ainda não foi apreciada; autos conclusos desde 01/09/2026 · Preparo: recolhimento insuficiente (R$ 10,64) apontado no despacho ID 391747692; complementação por Pix e guia em 28/08/2026 (IDs 394168441, 394168450 e 394168452), sem comprovante STN [VALIDAR] · Agravada ainda não intimada para contraminuta · Origem em mandado de segurança: vista ao MPF após a contraminuta · Tema repetitivo no acervo: possível lote · Procuração não identificada nos autos do agravo [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Tributário · IRPJ e CSLL · lucro presumido: majoração de 10% dos percentuais de presunção · liminar em mandado de segurança",
+     "sintese": "Mandado de segurança de Correa da Costa Eventos Rurais, optante pelo lucro presumido, contra a majoração de 10% dos percentuais de presunção para IRPJ e CSLL. A liminar foi indeferida pela 2ª Vara Federal de Campo Grande; daí o agravo.",
+     "questoes": "1) Regularidade do preparo complementar; 2) tutela recursal para suspender a exigibilidade da majoração dos percentuais de presunção do lucro presumido; 3) livre concorrência, neutralidade fiscal e segurança jurídica.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 390608275 (04/08/2026): ofensa à livre concorrência e à neutralidade fiscal (artigo 170, IV, da CF) e à segurança jurídica, sem transição no ano-calendário; cita precedente da 4ª Turma do TRF-3 (ID 390608278, sem texto). Pede tutela recursal para suspender a exigibilidade.",
+      "contrarrazoes": "Não consta: a agravada ainda não foi intimada"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "58904695",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a liminar para suspender a exigibilidade da majoração dos percentuais de presunção do lucro presumido."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Pendente de análise",
+      "id": "58904695"
+     },
+     "adm": {
+      "prot": "2026-08-04",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Correa da Costa Eventos Rurais Ltda.",
+       "tipo": "Agravo de instrumento",
+       "id": "390608275",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "390608275",
+       "data": "2026-08-04"
+      },
+      {
+       "desc": "Despacho sobre o preparo",
+       "id": "391747692",
+       "data": "2026-08-14"
+      },
+      {
+       "desc": "Complementação do preparo",
+       "id": "394168441",
+       "data": "2026-08-28"
+      }
+     ],
+     "pendencias": "Apreciar a tutela recursal; conferir o comprovante STN; conferir a procuração; intimar a agravada; vista ao MPF",
+     "especificidades": "URGÊNCIA PENDENTE: a tutela recursal requerida no agravo (ID 390608275, 04/08/2026) ainda não foi apreciada; autos conclusos desde 01/09/2026 · Preparo: recolhimento insuficiente (R$ 10,64) apontado no despacho ID 391747692; complementação por Pix e guia em 28/08/2026 (IDs 394168441, 394168450 e 394168452), sem comprovante STN [VALIDAR] · Agravada ainda não intimada para contraminuta · Origem em mandado de segurança: vista ao MPF após a contraminuta · Tema repetitivo no acervo: possível lote · Procuração não identificada nos autos do agravo [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "urgTipo": "Liminar em mandado de segurança",
+     "urgSit": "Pendente · não apreciada",
+     "urgData": "2026-08-04"
+    }
+   }
   },
   {
    "sessao": "",
