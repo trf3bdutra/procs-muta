@@ -87,7 +87,9 @@ function limpar(b, t) {
 }
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
-  const u = L.exigir(req, res); if (!u) return;
+  /* login do Ex Officio ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE) */
+  const u = L.quem(req) || (require('./_cmt').porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
+  if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   if (req.query && req.query.com) return require('./_comunicar')(req, res, u);
   try {
     if (req.method === 'GET') { const { dados } = await ler(); return res.status(200).json({ tasks: (dados.registros || []).filter(t => !t.excluida), equipe: L.equipe() }); }
