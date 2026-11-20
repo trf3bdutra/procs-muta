@@ -59,6 +59,12 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 #carga{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:60vh;color:var(--m);text-align:center;padding:0 24px}
 #carga b{font-size:16px;color:var(--v)}
 /* Início */
+.btn.ico{display:inline-grid;place-items:center;width:34px;padding:0!important}
+.tri-vg{margin:10px 0 4px;border:1px solid var(--b2,#cfd6d3);border-radius:10px;background:var(--w,#fff)}
+.tri-vg-h{display:flex;align-items:center;gap:16px;width:100%;padding:9px 14px;border:0;background:transparent;text-align:left;cursor:pointer;font:inherit}
+.tri-vg-h .k{color:var(--m)}.tri-vg-r{display:flex;flex-wrap:wrap;gap:4px 16px;flex:1;font-size:12.5px;color:var(--m2)}.tri-vg-r b{font-family:ui-monospace,monospace;font-weight:600}
+.tri-vg-t{font-size:12px;font-weight:600;color:var(--v)}
+.tri-vg-c{padding:0 14px 14px;border-top:1px solid var(--b2,#e2e6e4)}.tri-vg-c .kpis{margin-top:12px}
 .ini-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:18px 0 14px;flex-wrap:wrap}
 .ini-cab p{margin:4px 0 0;font-size:14px;color:var(--m2)}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -996,7 +1002,7 @@ const ir = (h) => { const a = h.indexOf('esc=') === 0 ? 'esc:' + h.slice(4) : h 
 function pintaAbas() {
   ABERTAS = ABERTAS.filter((id) => ESC.escaninhos.some((e) => e.id === id));
   const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
-  $('#abas').innerHTML = t('fila', 'Fila de triagem', PRONTO ? U.length : null) +
+  $('#abas').innerHTML = t('fila', 'Triagem', PRONTO ? U.length : null) +
     tabEsc();
   /* módulos no canto esquerdo: Triagem | Pautas; na Pautas, as abas da triagem ficam ocultas */
   const mod = ABA === 'pautas' ? 'pautas' : ABA === 'coordenacao' ? 'coordenacao' : ABA === 'comunicacao' ? 'comunicacao' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; $('#abas').hidden = mod !== 'triagem'; if (mod === 'triagem') ULT_TRI = ABA;
@@ -1129,7 +1135,7 @@ function vInteligencia(){
     '<label>Formato<select id="cg-rel-format"><option value="pdf">PDF</option><option value="doc">Word (.doc)</option><option value="xlsx">Excel (.xlsx)</option><option value="csv">CSV</option></select></label>'+
     '<div class="cg-checks" style="display:grid"><label><input type="checkbox" data-cg-cap="resumo" '+(CG_REL.caps.resumo?'checked':'')+'> Resumo</label><label><input type="checkbox" data-cg-cap="tabela" '+(CG_REL.caps.tabela?'checked':'')+'> Tabela/listagem</label><label><input type="checkbox" data-cg-cap="obs" '+(CG_REL.caps.obs?'checked':'')+'> Observações</label></div>'+
     '<p class="cg-status">'+nf(L.length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.</p><div class="cg-exp"><button class="btn pri" data-cg-rel-export="pdf">PDF</button><button class="btn" data-cg-rel-export="doc">Word</button><button class="btn" data-cg-rel-export="xlsx">Excel</button><button class="btn" data-cg-rel-export="csv">CSV</button></div></aside></section>'+
-    '<section><div class="cg-head"><div><h1 style="font-size:21px">Diagnóstico da triagem</h1><p>O painel original de Início permanece disponível como leitura gerencial abaixo.</p></div></div>'+vInicio().replace('Triagem · início','Triagem · diagnóstico')+'</section></div>';
+    '<p class="cg-status" style="margin-top:14px">A visão geral da triagem (sem caminho, prontos, candidatos à monocrática, destino provável) fica no topo da <a href="/caput/triagem" data-cg-go="fila">Triagem</a>.</p></div>';
 }
 function cgRelSincronizar(){ const f=$('#cg-rel-format'); if(f)f.value=CG_REL.formato; }
 function cgRelAtualizar(){ const p=$('#cg-rel-prev'); if(p)p.innerHTML=cgRelHtml(); const st=$('.cg-set .cg-status'); if(st)st.textContent=nf(cgRelLista(CG_REL.id).length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.'; }
@@ -1164,13 +1170,13 @@ async function cgComCarregar(){
   catch(e){h.innerHTML='<p class="cg-status" style="padding:12px">Não foi possível ler o histórico nesta sessão. Abra o Office para autenticar e tente novamente.</p>';if(st)st.textContent=e.message;}
 }
 /* ---------- Início (painel incorporado à Inteligência) ---------- */
-function vInicio() {
+function vInicio(emb) {
   const semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri');
   const aptos = U.filter((o) => o.apto), comPend = aptos.filter((o) => o.pend.length), prontos = aptos.filter((o) => !o.pend.length), prM = prontos.filter((o) => o.monoE), prC = prontos.filter((o) => !o.monoE);
   const cands = U.filter((o) => o.cand && !o.dest.k), dados = U.filter((o) => o.dest.k);
   const k = (cor, rot, n, sub, rg, conj) => '<button type="button" class="kpi" style="box-shadow:inset 0 3px 0 ' + cor + '" data-conj="' + conj + '"><span class="k" style="color:' + cor + '">' + rot + '</span><b style="color:' + cor + '">' + nf(n) + '</b><span class="sub">' + sub + '</span>' + (rg ? '<span class="kr">' + rg + '</span>' : '') + '<span class="lk" style="margin-top:2px">Abrir na Fila →</span></button>';
   REG = {}; reg('tri', 'Sem caminho definido', tri); reg('pr', 'Prontos para julgar', prontos); reg('prc', 'Prontos · colegiado', prC); reg('prm', 'Prontos · decisão do relator', prM); reg('cand', 'Candidatos à monocrática', cands); reg('dados', 'Já com destino da triagem', dados); reg('novas', 'Tarefas não classificadas', NOVAS); reg('pend', 'Aptos com pendência', comPend);
-  let h = '<div class="wrap"><div class="ini-cab"><div><p class="k" style="margin:0">Triagem · início</p><p>Só o que leva a uma decisão de triagem. Cada número abre os processos na Fila, já filtrados.</p></div><div style="display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.length) + '</b> em triagem</span><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.filter((o) => o.dest.k).length) + '</b> com destino da triagem</span></div></div>';
+  let h = emb ? '' : '<div class="wrap"><div class="ini-cab"><div><p class="k" style="margin:0">Triagem · início</p><p>Só o que leva a uma decisão de triagem. Cada número abre os processos na Fila, já filtrados.</p></div><div style="display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.length) + '</b> em triagem</span><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.filter((o) => o.dest.k).length) + '</b> com destino da triagem</span></div></div>';
   h += '<div class="kpis">' + k('#a57829', 'Sem caminho definido', tri.length, 'em Triagem de Gabinete ou Analisar tipo de decisão, sem destino', '', 'tri') +
     k('#3b7150', 'Prontos para julgar', prontos.length, nf(prC.length) + ' colegiado · ' + nf(prM.length) + ' relator · ' + nf(comPend.length) + ' aptos com pendência à parte', 'etiqueta Apto / Apto para julgamento ou tarefa “Aptos para julgamento”, sem etiqueta de pendência', 'pr') +
     k('#24506f', 'Candidatos à monocrática', cands.length, 'indícios de decisão do relator, a confirmar', 'sem destino da triagem; os critérios estão abaixo', 'cand') +
@@ -1213,9 +1219,14 @@ function vInicio() {
   ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
     pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
   pr += '</section>';
-  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + ms + pr + '</div></div></div>';
+  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + ms + pr + '</div></div>' + (emb ? '' : '</div>');
   return h; }
 let REG = {}, INI_MAS = false;
+/* Visão geral da triagem (o antigo Início) no topo da Triagem, recolhível; cada número abre o conjunto na lista */
+function visaoGeral() {
+  const ab = LS.get('tri_vg', true), semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri'), pr = U.filter((o) => o.apto && !o.pend.length), cd = U.filter((o) => o.cand && !o.dest.k), ds = U.filter((o) => o.dest.k);
+  const res = [['#a57829', nf(tri.length), 'sem caminho'], ['#3b7150', nf(pr.length), 'prontos para julgar'], ['#24506f', nf(cd.length), 'candidatos à monocrática'], ['#8a948f', nf(ds.length), 'já destinados']].map((x) => '<span><b style="color:' + x[0] + '">' + x[1] + '</b> ' + x[2] + '</span>').join('');
+  return '<section class="tri-vg' + (ab ? ' ab' : '') + '"><button type="button" class="tri-vg-h" data-vg aria-expanded="' + ab + '"><span class="k">Visão geral da triagem</span><span class="tri-vg-r">' + res + '</span><span class="tri-vg-t">' + (ab ? 'recolher ▴' : 'abrir ▾') + '</span></button>' + (ab ? '<div class="tri-vg-c">' + vInicio(true) + '</div>' : '') + '</section>'; }
 function reg(k, rot, L) { REG[k] = { rot, ids: L.map((o) => o.d) }; }
 function abrirConj(k) { const r = REG[k]; if (!r) return; limparFiltros(); F.conj = { rot: r.rot, ids: new Set(r.ids) }; ir('fila'); }
 
@@ -1292,11 +1303,12 @@ function vFila(cab, estilo) {
     '<button type="button" class="btn" id="bt-pje" aria-expanded="' + F.pjeAberto + '">Pesquisa do PJe ' + (F.pjeAberto ? '▴' : '▾') + '</button><button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
     '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
     '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['mapa', 'Mapa do fluxo'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
-    (emE ? '<button type="button" class="btn" data-ex-direto="copiar">Copiar lista</button>' : '') + '<button type="button" class="btn" data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button><span style="position:relative"><button type="button" class="btn" id="' + (emE ? 'bt-expe' : 'bt-exp') + '" aria-expanded="false">Exportar ▾</button></span></div>';
+    '<span style="position:relative"><button type="button" class="btn ico" id="' + (emE ? 'bt-expe' : 'bt-exp') + '" aria-expanded="false" aria-label="Exportar ou copiar a lista" title="Exportar ou copiar: Excel, CSV, PDF, números…"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></button></span></div>';
   if (F.pjeAberto) h += formPje();
   if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), noB = emE ? new Set(BASE().map((o) => o.d)) : IDX, fora = [...s].filter((d) => !noB.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + (emE ? ' no escaninho' : ' entre os em triagem') + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
   h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · ' + (emE ? 'todos do escaninho' : 'todos os em triagem') + '</span>') +
     '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + (emE ? '' : painelBase(L.length, ch.length)) + '</div>';
+  if (!emE && !F.conj) h += visaoGeral();
   if (F.ver === 'mapa') return h + vMapa(L) + '</div>';
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
   h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + (emE ? ' no escaninho' : ' no acervo filtrado') + '</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
@@ -1822,6 +1834,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('#crit-pop [data-cp]'))) { const k = b.dataset.cp; if (k === 'fechar') fecharPops(); else if (k === 'todos' || k === 'nenhum') { if (k === 'nenhum') CP.c.vals = []; else $$('#crit-pop [data-cpv]').forEach((i) => { if (CP.c.vals.indexOf(i.dataset.cpv) < 0) CP.c.vals.push(i.dataset.cpv); }); pintaCrit(); }
     else if (k === 'aplicar') { const c = CP.c; if (/^(in|notin|has|nothas)$/.test(c.cond) && !c.vals.length && !c.trechos.length) { toast('Marque um valor ou escreva um trecho.', true); return; } if (CP.edit != null) F.crit[CP.edit] = c; else F.crit.push(c); F.lim = 100; fecharPops(); render(); } return; }
   if ((b = q('.menu [data-ex]'))) { const p = b.closest('.menu'); const k = b.dataset.ex; fecharPops(); exportar(k, p.__L, p.__t, p.__b); return; }
+  if ((b = q('[data-vg]'))) { LS.set('tri_vg', !LS.get('tri_vg', true)); render(); return; }
   if ((b = q('[data-conj]'))) { abrirConj(b.dataset.conj); return; }
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
   if ((b = q('[data-esc-conj]'))) { const r = REG[b.dataset.escConj]; if (!r) return; editarEscaninho(null, (ne) => { const ds = r.ids; setTimeout(() => acao('Guardado em ' + ne.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [ne.id] })), 0); }); const ti = $('#ge-t'); if (ti) ti.value = r.rot; return; }
