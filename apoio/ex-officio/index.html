@@ -2364,7 +2364,8 @@ function aprec(it){return SIG[tipoJ(it)]||'1º julg';}
 function clSig(c){c=nq(c);if(/agravo de instrumento/.test(c))return 'AI';if(/apelac/.test(c)&&/remessa/.test(c))return 'AC/RN';if(/remessa/.test(c))return 'RN';if(/apelac/.test(c))return 'AC';if(/agravo interno/.test(c))return 'AgInt';if(/embargos/.test(c))return 'ED';return (c||'—').toUpperCase().slice(0,10);}
 function metaDe(it){return (it.ctl||{}).meta||'';}
 function alertas(it){var c=it.ctl||{},A=[];if(c.tempest==='Intempestivo')A.push('Intempestivo');if(c.preparo==='Não recolhido')A.push('Preparo não recolhido');if(/^Irregular/.test(c.repres||''))A.push('Representação irregular');
-  if(c.midias==='Faltantes')A.push('Mídias faltantes');if(c.mpf&&c.mpf!=='Sem hipótese'&&c.parecer&&c.parecer!=='Com parecer')A.push('Parecer do MPF pendente');
+  if(c.midias==='Faltantes')A.push('Mídias faltantes');if(c.mpf&&c.mpf!=='Sem hipótese'&&c.parecer!=='Com parecer')A.push(c.mpf==='Mandado de segurança'?'MS sem parecer do MPF no 2º grau: vista antes do julgamento':'Parecer do MPF pendente');
+  var cd=c.cartao||{};if((cd.tipoJ==='Embargos de Declaração'||cd.tipoJ==='Agravo Interno')&&cd.orgaoAcordao&&!/Regional/i.test(cd.orgaoAcordao))A.push('Acórdão embargado da '+cd.orgaoAcordao+': devolver ao órgão prolator');
   if(c.prelim==='Preliminar de ofício')A.push('Preliminar de ofício a enfrentar');
   ((c.cartao||{}).pendencias||[]).forEach(function(p){if(p&&p.desc&&!p.ok)A.push(p.desc);});return A;}
 function fmtCnj(s){return esc(s||'');}

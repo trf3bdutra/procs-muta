@@ -38,10 +38,15 @@ const lerLote = async rel => { if (!L.lerGrande) return L.lerJson(rel); const { 
 const sem = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const CORES = ['#2f6db5', '#7a5cc2', '#1f8a70', '#c07a12', '#b8562f', '#3a4a5c', '#8a5a9e', '#4f7f3a'];
 const ENT = /UNI[ÃA]O|INSS|INSTITUTO NACIONAL|BANCO CENTRAL|FUNDA[CÇ][AÃ]O|CAIXA ECON|EMPRESA BRASILEIRA|CONSELHO|AG[ÊE]NCIA|UNIVERSIDADE|FAZENDA/i;
-async function itensSessao(s) {
+/* M: memória de uma requisição (cada sessão e o calendário são lidos uma vez só, mesmo com vários lotes) */
+const memoria = () => ({ sessoes: new Map(), cal: null });
+async function itensSessao(s, M) {
   if (!DATA.test(s)) return [];
-  const { dados } = await L.lerJson('acervo/sessoes/' + s + '.json').catch(nada);
-  return dados ? (Array.isArray(dados) ? dados : (dados.itens || dados.processos || [])) : [];
+  if (M && M.sessoes.has(s)) return M.sessoes.get(s);
+  const p = L.lerJson('acervo/sessoes/' + s + '.json').catch(nada)
+    .then(({ dados }) => dados ? (Array.isArray(dados) ? dados : (dados.itens || dados.processos || [])) : []);
+  if (M) M.sessoes.set(s, p);
+  return p;
 }
 function passa(x, f) {
   f = f || {};
@@ -57,17 +62,46 @@ function rxTrecho(de) {
 }
 function situacao(x) { return x.dataLiberacao ? 'Liberada' : x.dataCorrecao ? 'Corrigida' : x.dataMinuta ? 'Minutada' : 'A minutar'; }
 const ORDEM = { 'A minutar': 1, 'Minutada': 2, 'Corrigida': 3, 'Liberada': 4 };
-/* situação de cada processo: a mais adiantada entre a do lote e a do Ex Officio; marca "pronto" (corrigido ou liberado)
-   e devolve os cartões do prontuário lidos das sessões do lote */
-async function anotar(lote) {
-  const cartoes = {}, vivo = {};
-  await Promise.all((lote.sessoes || []).map(async s => (await itensSessao(s)).forEach(x => {
+/* Designação (minutante e corretor): a fonte única é a pauta (acervo/sessoes/AAAA-MM-DD.json), gravada pelo Ex Officio e
+   pela mesa de designação. O lote guarda só a cópia feita quando foi criado; em toda leitura ela é trocada pela da pauta.
+   Ordem de busca: a sessão do próprio item; as demais sessões do lote; para lotes sem sessão (triagem, avulsos), a pauta
+   ainda não realizada mais próxima em que o processo está. Pauta já realizada não designa processo de outro lote. */
+const nomeEq = v => { const s = String(v || '').trim(); return s === '—' || s === '-' ? '' : s; };
+const hojeLocal = () => new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+function designacaoDe(s, x) {
+  const h = ((x.ctl || {}).historicoDesignacoes || []).slice(-3).map(r => ({ em: r.em || '', por: r.por || '', alteracoes: r.alteracoes || [] }));
+  return { sessao: s, item: x.item, minuta: nomeEq(x.servidor), correcao: nomeEq(x.corretor), historico: h };
+}
+function designar(e, d) {
+  const ant = { minuta: nomeEq(e.minuta), correcao: nomeEq(e.correcao) };
+  e.minuta = d.minuta; e.correcao = d.correcao;
+  e.fonte = { sessao: d.sessao, item: d.item };
+  if (d.historico.length) e.historico = d.historico; else delete e.historico;
+  if ((ant.minuta && sem(ant.minuta) !== sem(d.minuta)) || (ant.correcao && sem(ant.correcao) !== sem(d.correcao))) e.copia_lote = ant;
+  else delete e.copia_lote;
+}
+/* situação de cada processo: a mais adiantada entre a do lote e a do Ex Officio; marca "pronto" (corrigido ou liberado);
+   aplica a designação da pauta e devolve os cartões do prontuário lidos das sessões do lote */
+async function anotar(lote, M) {
+  M = M || memoria();
+  const cartoes = {}, vivo = {}, porSessao = {}, futura = {};
+  const proprias = lote.sessoes || [], hoje = hojeLocal();
+  const outras = (await calendarioM(M)).filter(z => z.processos && z.date >= hoje && !proprias.includes(z.date)).map(z => z.date).sort();
+  await Promise.all(proprias.map(async s => (await itensSessao(s, M)).forEach(x => {
     vivo[x.cnj] = situacao(x);
+    porSessao[s + '|' + x.cnj] = porSessao[x.cnj] = porSessao[x.cnj] || designacaoDe(s, x);
     const c = x && x.ctl; if (!c || !c.cartao) return;
     cartoes[x.cnj] = { cartao: c.cartao, editadoPor: c.editadoPor || '', editadoEm: c.editadoEm || '' };
   })));
+  const fora = (lote.itens || []).filter(it => !porSessao[it.processo]);
+  if (fora.length && outras.length) {
+    const lidas = await Promise.all(outras.map(s => itensSessao(s, M)));
+    outras.forEach((s, k) => lidas[k].forEach(x => { if (!futura[x.cnj]) futura[x.cnj] = designacaoDe(s, x); }));
+  }
   (lote.itens || []).forEach(it => {
     const e = it.equipe = it.equipe || {}, sv = vivo[it.processo];
+    const d = (it.sessao && porSessao[it.sessao + '|' + it.processo]) || porSessao[it.processo] || futura[it.processo];
+    if (d) designar(e, d);
     if (sv && (ORDEM[sv] || 0) > (ORDEM[e.situacao] || 0)) e.situacao = sv;
     it.pronto = (ORDEM[e.situacao] || 0) >= 3;
     const v = it.visivel || {};
@@ -143,6 +177,39 @@ async function calendario() {
   return ((dados && dados.sessoes) || []).map(s => ({ date: s.date, nome: s.nome, processos: s.processos || 0, publicada: !!s.publicada }))
     .sort((a, b) => b.date.localeCompare(a.date));
 }
+function calendarioM(M) { if (!M.cal) M.cal = calendario(); return M.cal; }
+/* Rascunho de minuta montado do prontuário (cartão do Ex Officio ou da triagem) e do teor registrados no lote.
+   Só o relatório sai composto, e só com o que está registrado; voto e ementa ficam marcados para minutar.
+   Nada é presumido: o que falta vai como [VALIDAR]. A minuta completa segue o modelo-matriz do tipo de julgamento. */
+function rascunhoMinuta(lote, it, u) {
+  const P = (it.prontuario && it.prontuario.cartao) || (it.prontuario_triagem && it.prontuario_triagem.cartao) || {};
+  const T = it.teor || {}, tri = it.triagem || {}, rel = P.rel || {}, orig = P.orig || {};
+  const pecas = Array.isArray(P.pecas) ? P.pecas : [];
+  const ids = rx => pecas.filter(p => rx.test(String(p.desc || ''))).map(p => p.id).filter(Boolean);
+  const lista = v => { const a = [...new Set(v)]; return a.length > 1 ? 'ID’s ' + a.slice(0, -1).join(', ') + ' e ' + a[a.length - 1] : 'ID ' + a[0]; };
+  const tipo = P.tipoJ || it.recurso || 'Agravo de Instrumento', ai = /agravo de instrumento/i.test(tipo) || /^AI\b/.test(it.tipo_caso || '');
+  const semPonto = s => String(s || '').trim().replace(/[.;]\s*$/, '');
+  const minus = s => { s = semPonto(s); return s ? s.charAt(0).toLowerCase() + s.slice(1) : ''; };
+  const razoes = semPonto(String(rel.razoes || T.recurso || '').replace(/^[^:]{0,80}\):\s*|^[^:(]{0,60}:\s*/, ''));
+  const recorr = ((P.recursos || [])[0] || {}).parte || '[VALIDAR: parte recorrente]';
+  const recId = ((P.recursos || [])[0] || {}).id || (ids(/^agravo de instrumento|^apela|^recurso/i)[0]) || '';
+  const relatorio = [];
+  if (ai) relatorio.push('Trata-se de agravo de instrumento à decisão' + (orig.id ? ' (ID ' + orig.id + ', origem)' : '') + ' que, ' + (tri.origem ? 'nos autos ' + semPonto(tri.origem) + ', ' : '') + (minus(orig.dispositivo) || '[VALIDAR: dispositivo da decisão agravada]') + '.');
+  else relatorio.push('Trata-se de ' + String(tipo).toLowerCase() + (orig.id ? ' à decisão (ID ' + orig.id + ')' : '') + ' que ' + (minus(orig.dispositivo) || '[VALIDAR: dispositivo]') + '.');
+  relatorio.push((ai ? 'Agravou ' : 'Recorreu ') + recorr + (recId ? ' (ID ' + recId + ')' : '') + ', alegando, em suma: ' + (razoes || '[VALIDAR: razões]') + '.');
+  const resp = ids(/contraminuta|contrarraz/i);
+  relatorio.push(resp.length ? 'Houve ' + (ai ? 'contraminuta' : 'contrarrazões') + ' (' + lista(resp) + ').' : '[VALIDAR: ' + (ai ? 'contraminuta' : 'contrarrazões') + ' — não registrada no prontuário]');
+  const mpf = P.mpfx || {};
+  if (mpf.id) relatorio.push('O Ministério Público Federal manifestou-se (ID ' + mpf.id + ')' + (mpf.sentido ? ', [VALIDAR: sentido — ' + mpf.sentido + ']' : '') + '.');
+  relatorio.push('É o relatório.');
+  const ato = tri.ato || String(it.resultado || '').replace(/^Ato a proferir:\s*/i, '') || '[VALIDAR: ato a proferir]';
+  return {
+    schema: 'gabcmt.minuta', versao: '1', lote: lote.id, processo: it.processo, sessao: it.sessao || '', item: it.sessao ? String(it.item) : '',
+    padrao: 'rascunho', origem: 'Rascunho gerado no Collectio por ' + u + ' em ' + new Date().toISOString().slice(0, 10).split('-').reverse().join('/') + ', a partir do prontuário registrado no lote. Voto e ementa a minutar pelo modelo-matriz.',
+    pendencias: ['Conferir cada ID e cada fato do relatório nos autos', 'Minutar o voto: ' + ato, 'Redigir a ementa (Recomendação CNJ 154/2024 adaptada)'].concat(String(P.questoes || '') ? ['Questões: ' + P.questoes] : []),
+    secoes: { relatorio, voto: ['[Minutar o voto pelo modelo-matriz do tipo de julgamento: ' + semPonto(ato) + '.]'], ementa: ['[Redigir a ementa após o voto.]'], acordao: [] }
+  };
+}
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const CMT = require('./_cmt');
@@ -151,7 +218,7 @@ module.exports = async (req, res) => {
   /* A rota escolhe a visão, mas não concede acesso. Link do relator usa CMT_CHAVE como credencial. */
   const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
-  const gestor = !!(login && L.gestor(login));
+  const gestor = !!(login && L.gestor(login)), M = memoria();
   try {
     if (req.method === 'POST') return await gravar(req, res, login, gestor);
     if (req.method !== 'GET') return res.status(405).json({ erro: 'método não aceito' });
@@ -174,7 +241,7 @@ module.exports = async (req, res) => {
       for (const f of (Array.isArray(lista) ? lista : []).filter(f => /^[a-z0-9-]+\.json$/i.test(f.name))) {
         const { dados } = await lerLote('acervo/lotes/' + f.name).catch(nada);
         if (!dados || !loteVe(dados)) continue;
-        if (modo !== 'cg') await anotar(dados);
+        if (modo !== 'cg') await anotar(dados, M);
         lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, tipo:tipoLote(dados), sessao:tipoLote(dados)==='pauta'?dados.sessoes[0]:null,
           sessoes: dados.sessoes, tarefa: dados.tarefa || null, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
       }
@@ -195,7 +262,7 @@ module.exports = async (req, res) => {
       if (modo !== 'cg') {
         const { dados: lt } = await lerLote('acervo/lotes/' + id + '.json').catch(nada);
         if (!lt || !loteVe(lt)) return res.status(404).json({ erro: 'Lote não encontrado.' });
-        await anotar(lt);
+        await anotar(lt, M);
         const it = lt && (lt.itens || []).find(i => String(i.processo).slice(0, 10) === mx);
         if (!it || !ve(it)) return res.status(404).json({ erro: relator ? 'Minuta ainda em preparo.' : 'Minuta não disponível para este processo.' });
       }
@@ -208,7 +275,7 @@ module.exports = async (req, res) => {
     const lote = persistido || (sessaoVirtual && (await calendario()).some(z=>z.date===sessaoVirtual[1]&&(gestor||z.publicada)) ? await indicePauta(sessaoVirtual[1]) : null);
     if (!lote || !loteVe(lote)) return res.status(404).json({ erro: 'Lote não encontrado.' });
     /* cartão do prontuário (Ex Officio) e situação, lidos das sessões do lote no momento da consulta */
-    const cartoes = await anotar(lote);
+    const cartoes = await anotar(lote, M);
     (lote.itens || []).forEach(it => { if (cartoes[it.processo]) it.prontuario = cartoes[it.processo]; });
     lote.itens = (lote.itens || []).filter(ve);
     if (modo !== 'cg') delete lote.retirados;
@@ -399,6 +466,30 @@ async function gravar(req, res, u, gestor) {
     catch (e) { if (e.status === 409) return res.status(409).json({ erro: 'Uma das minutas mudou enquanto isso; tente de novo.' }); throw e; }
     return res.status(200).json({ ok: true, alterados: arqs.length, ocorrencias: feitos.reduce((a, f) => a + f.n, 0), feitos });
   }
+  /* minuta-criar {id, processo}: rascunho da minuta (relatório montado do prontuário; voto e ementa a minutar),
+     gravado em acervo/minutas/<id>/<X>.json, e o processo marcado com minuta no lote, num só commit. Não substitui minuta existente. */
+  if (b.acao === 'minuta-criar') {
+    const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/, proc = String(b.processo || '');
+    if (!CNJ.test(proc)) return res.status(400).json({ erro: 'Informe o número CNJ completo do processo.' });
+    const mx = proc.slice(0, 10), path = 'acervo/minutas/' + id + '/' + mx + '.json';
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha } = await lerLote(rel).catch(nada);
+      if (!lote) return res.status(404).json({ erro: 'Lote não encontrado. Na matriz geral da sessão, crie antes um lote com o processo.' });
+      const it = (lote.itens || []).find(i => i.processo === proc);
+      if (!it) return res.status(404).json({ erro: 'Processo fora deste lote.' });
+      if ((await L.lerJson(path).catch(nada)).dados) return res.status(409).json({ erro: 'Já existe minuta deste processo no lote.' });
+      const copia = JSON.parse(JSON.stringify(lote)), cartoes = await anotar(copia);
+      const vivo = Object.assign({}, copia.itens.find(i => i.processo === proc), cartoes[proc] ? { prontuario: cartoes[proc] } : {});
+      const minuta = rascunhoMinuta(lote, vivo, u);
+      it.minuta = true; lote.atualizado_em = new Date().toISOString().slice(0, 10);
+      try {
+        await L.commitArquivos([{ path, txt: JSON.stringify(minuta, null, 1) + '\n' }, { path: rel, txt: JSON.stringify(lote, null, 1) + '\n', sha }],
+          'Collectio (' + u + '): rascunho de minuta de ' + proc + ' no lote ' + id);
+        return res.status(200).json({ ok: true, processo: proc, minuta });
+      } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
+  }
   if (b.acao === 'lote-visivel') {
     for (let t = 0; t < 4; t++) {
       const { dados: lote, sha } = await lerLote(rel).catch(nada);
@@ -468,3 +559,6 @@ async function gravar(req, res, u, gestor) {
   }
   return res.status(400).json({ erro: 'ação inválida' });
 }
+/* para os testes: projeção da designação e rascunho de minuta */
+module.exports.anotar = anotar;
+module.exports.rascunhoMinuta = rascunhoMinuta;
