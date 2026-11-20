@@ -5239,12 +5239,14 @@
    "executado": "LAVINIA MARIA PEREIRA MORAIS",
    "assunto": "Assistência à Saúde",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI da União · Saúde · home care de menor (Postal Saúde/KZT) com responsabilidade subsidiária da União · efeito suspensivo negado · MPF pelo não conhecimento",
+   "resultado": "Ato a proferir: julgamento do agravo (voto ou monocrática), com exame do interesse recursal da União, apontado pelo MPF; efeito suspensivo negado em 21/01/2026",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão do plantão judicial (processo 5013765-96.2025.4.03.6000) que mandou a KZT Serviços Médicos de Atenção Domiciliar manter o home care da autora, menor dependente de ventilação mecânica, e a Postal Saúde retomar o custeio, com multa diária de R$ 1.000,00; em caso de descumprimento, previu medidas contra a União e o Estado de Mato Grosso do Sul (bloqueio, depósito ou sequestro).",
+   "peculiaridades": "Autora menor (L. M. P. M.). Trâmite: decisão ID 350603286 (20/01/2026) declinou da competência para a 1ª Seção; decisão ID 350760549 (21/01/2026, Des. Fed. Herbert de Bruyn) negou o efeito suspensivo por não haver obrigação imediata à União; redistribuição à TRgMS em 10/04/2026. O Estado de MS nada opôs (ID 354566354). O MPF (ID 376958679) opina pelo não conhecimento por falta de interesse recursal [VALIDAR fundamento]. Não consta contraminuta da agravada.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -5280,7 +5282,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo; possível não conhecimento por falta de interesse recursal",
+    "materia": "Saúde — home care; plano de autogestão; responsabilidade subsidiária de ente público",
+    "origem": "5013765-96.2025.4.03.6000 (plantão judicial de Campo Grande, Coxim, Corumbá e Três Lagoas)",
+    "decisao_agravada": "ID 497253914 (autos de origem)",
+    "recurso": "ID 349780952 · 12/01/2026",
+    "preparo": "Isento (União)",
+    "monocratica": "Possível (artigo 932, III, do CPC) [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -5300,6 +5311,107 @@
     "ultima_informacao": "Certidão · ID 366210007 · 13/04/2026",
     "ultima_movimentacao": "29/05/2026 17:39 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Criança em home care, dependente de ventilação mecânica contínua, obteve no plantão ordem para que a prestadora mantenha o serviço e a Postal Saúde retome o custeio; a União e o Estado só seriam alcançados se houver descumprimento. A União recorre.",
+    "inicial": "Ação de obrigação de fazer com indenização por danos morais contra KZT Serviços Médicos de Atenção Domiciliar, Postal Saúde, União e Estado de Mato Grosso do Sul: manutenção integral do home care",
+    "decisao_recorrida": "Decisão ID 497253914 (plantão): manutenção do home care pela KZT; custeio pela Postal Saúde; medidas assecuratórias contra a União e o Estado se descumprida a ordem; multa diária de R$ 1.000,00 por réu",
+    "recurso": "Agravo ID 349780952 (12/01/2026): insurge-se contra a possibilidade de medidas constritivas contra a União e pede efeito suspensivo [VALIDAR razões na íntegra].",
+    "resposta": "Não consta contraminuta da agravada; o Estado de MS declarou ciência (ID 354566354)",
+    "parecer": "MPF ID 376958679 (28/05/2026): pelo não conhecimento do recurso da União",
+    "memoriais": "Não consta",
+    "representacao": "União: Advocacia-Geral da União (mandato legal)",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Home care; plano de saúde de autogestão; responsabilidade subsidiária da União; menor",
+     "sintese": "Criança em home care, dependente de ventilação mecânica contínua, obteve no plantão ordem para que a prestadora mantenha o serviço e a Postal Saúde retome o custeio; a União e o Estado só seriam alcançados se houver descumprimento. A União recorre.",
+     "questoes": "1) Interesse recursal da União diante de obrigação apenas eventual e subsidiária; 2) legitimidade da União para custear tratamento de beneficiária de plano de autogestão.",
+     "rel": {
+      "razoes": "Agravo (ID 349780952): impugna as medidas previstas contra a União [VALIDAR].",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "497253914",
+      "juizo": "Plantão Judicial de Campo Grande, Coxim, Corumbá e Três Lagoas",
+      "dispositivo": "Deferiu a tutela: manutenção do home care pela KZT, custeio pela Postal Saúde, medidas subsidiárias contra União e Estado, multa diária."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-01-12",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "mpfx": {
+      "sentido": "Não conhecimento",
+      "id": "376958679"
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "349780952",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "349780952",
+       "data": "2026-01-12"
+      },
+      {
+       "desc": "Decisão que declinou da competência",
+       "id": "350603286",
+       "data": "2026-01-20"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo",
+       "id": "350760549",
+       "data": "2026-01-21"
+      },
+      {
+       "desc": "Ciência do Estado de MS",
+       "id": "354566354",
+       "data": "2026-02-12"
+      },
+      {
+       "desc": "Despacho de vista ao MPF",
+       "id": "366466703",
+       "data": "2026-04-28"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "376958679",
+       "data": "2026-05-28"
+      }
+     ],
+     "pendencias": [
+      "Ler as razões da União na íntegra [VALIDAR]",
+      "Conferir intimação e prazo da agravada para contraminuta [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Parecer juntado",
+     "parecer": "Não conhecimento",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-01-21"
+    }
    }
   },
   {
