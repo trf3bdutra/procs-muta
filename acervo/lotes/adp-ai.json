@@ -5908,13 +5908,15 @@
    "exequente": "LEANDRO DIAMANTINO DOS SANTOS RIBEIRO",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Auxílio por Incapacidade Temporária",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "AI · Previdenciário (competência delegada) · restabelecimento de benefício por incapacidade · tutela recursal indeferida e embargos rejeitados · inclusão em pauta já determinada",
+   "resultado": "Ato a proferir: voto para a pauta (a decisão ID 374295759, de 20/05/2026, rejeitou os embargos de declaração e determinou a inclusão em pauta; contraminuta não apresentada)",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Leandro Diamantino dos Santos Ribeiro contra a decisão de 04/02/2026 da 2ª Vara da Comarca de Paranaíba/MS (processo 5000049-81.2026.8.12.0018; cópia ID 355923691, f. 48-49) que indeferiu a tutela para restabelecer benefício por incapacidade por ausência aparente de qualidade de segurado e de prova da persistência da incapacidade. O agravante alega mais de 20 anos de contribuição e doença crônica da coluna cervical. Tutela recursal negada (ID 357633519, Des. Fed. João Consolim) por depender de prova e pela falta de urgência; embargos de declaração rejeitados (ID 374295759).",
+   "peculiaridades": "Divergência sobre a data de cessação do benefício: 16/06/2024 (ID 357633519), abril de 2024 (decisão de origem), 10/2024 (ID 374295759) e 04/10/2025 (embargante, com histórico de créditos ID 359120080). O agravo não enfrentou diretamente a falta de qualidade de segurado, fundamento da decisão de origem. Peças obrigatórias juntadas após o despacho ID 355737628. Gratuidade [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -5940,7 +5942,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Voto para a pauta",
+    "materia": "Previdenciário — restabelecimento de benefício por incapacidade; qualidade de segurado",
+    "origem": "5000049-81.2026.8.12.0018 (2ª Vara de Paranaíba/MS, competência delegada)",
+    "decisao_agravada": "Decisão de 04/02/2026 (cópia ID 355923691, f. 48-49)",
+    "recurso": "ID 353514705",
+    "preparo": "Certidão ID 353860060 sem custas; gratuidade [VALIDAR]",
+    "monocratica": "Não; inclusão em pauta já determinada",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -5960,6 +5971,107 @@
     "ultima_informacao": "Certidão · ID 358453820 · 06/03/2026",
     "ultima_movimentacao": "20/07/2026 17:33 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Segurado com doença da coluna cervical pede o restabelecimento de benefício por incapacidade cessado pelo INSS. O juízo negou a tutela por aparente perda da qualidade de segurado; o Tribunal negou a tutela recursal e rejeitou os embargos de declaração.",
+    "inicial": "Ação 5000049-81.2026.8.12.0018 (ajuizada em 29/01/2026) contra o INSS para restabelecer benefício por incapacidade",
+    "decisao_recorrida": "Decisão de 04/02/2026 da 2ª Vara de Paranaíba/MS: indeferiu a tutela porque o autor provou o recebimento do benefício só até abril de 2024, ausentes em juízo sumário a qualidade de segurado e a persistência da incapacidade",
+    "recurso": "Agravo ID 353514705: (1) mais de 20 anos de contribuição; (2) doença crônica e progressiva da coluna cervical, com incapacidade total; (3) caráter alimentar. Pede o restabelecimento em tutela.",
+    "resposta": "Não houve contraminuta do INSS (decurso registrado no ID 374295759)",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogado Lucas Monteiro de Queiroz (OAB/MS 29.505); procuração na cópia dos autos (ID 355923691) [VALIDAR]",
+    "preparo": "Sem custas (certidão ID 353860060); gratuidade não confirmada [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Benefício por incapacidade; restabelecimento; qualidade de segurado; tutela de urgência",
+     "sintese": "Segurado com doença da coluna cervical pede o restabelecimento de benefício por incapacidade cessado pelo INSS. O juízo negou a tutela por aparente perda da qualidade de segurado; o Tribunal negou a tutela recursal e rejeitou os embargos de declaração.",
+     "questoes": "1) Qualidade de segurado à vista da data real de cessação do benefício; 2) probabilidade do direito sem perícia; 3) urgência.",
+     "rel": {
+      "razoes": "Agravo (ID 353514705): longo histórico contributivo; doença crônica; caráter alimentar.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "data": "2026-02-04",
+      "juizo": "2ª Vara da Comarca de Paranaíba/MS",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "ed": {
+      "id": "359120078",
+      "data": "2026-03-09",
+      "vicio": "Omissão/contradição",
+      "ponto": "Data de cessação do benefício (04/10/2025)"
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "353514705",
+       "contra": "Não apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Embargos de declaração",
+       "id": "359120078",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "353514705"
+      },
+      {
+       "desc": "Cópia dos autos de origem",
+       "id": "355923691",
+       "data": "2026-02-20"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "357633519",
+       "data": "2026-03-05"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "359120078",
+       "data": "2026-03-09"
+      },
+      {
+       "desc": "Decisão que rejeitou os embargos e mandou incluir em pauta",
+       "id": "374295759",
+       "data": "2026-05-20"
+      }
+     ],
+     "pendencias": [
+      "Data do agravo e tempestividade [VALIDAR]",
+      "Fixar a data de cessação do benefício (divergência nos autos) [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "tipoAto": "Voto",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-03-05"
+    }
    }
   },
   {
