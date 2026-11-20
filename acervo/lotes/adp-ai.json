@@ -7739,13 +7739,15 @@
    "exequente": "MTR CREDITOS SELECIONADOS I FUNDO DE INVESTIMENTO EM DIREITOS CREDITORIOS RESPONSABILIDADE LIMITADA",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Cessão de créditos não-tributários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "AI de FIDC cessionário · Cumprimento de sentença previdenciário (competência delegada) · destaque de honorários contratuais após o precatório (artigo 22, § 4º, da Lei 8.906/1994) · efeito suspensivo deferido",
+   "resultado": "Ato a proferir: voto para a pauta, com prioridade (pedido de impulso em 11/09/2026); efeito suspensivo deferido em 13/01/2026 para reter a parcela controvertida",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de MTR Créditos Selecionados I Fundo de Investimento em Direitos Creditórios contra as decisões de f. 503 e 523 (embargos de declaração) da 1ª Vara Cível da Comarca de Nova Andradina/MS (cumprimento de sentença 0800963-50.2019.8.12.0017) que limitaram o valor da cessão do precatório para resguardar honorários contratuais de 40% do advogado de Neide Machado Pereira. O fundo cessionário alega que o contrato de honorários foi juntado após a expedição do precatório (artigo 22, § 4º, da Lei 8.906/1994) e que o percentual é excessivo. Nos memoriais, pede levantamento de 65% (percentual cedido) e reserva de 35% aos honorários.",
+   "peculiaridades": "Efeito suspensivo deferido na 10ª Turma (ID 349526865, Juíza Federal convocada Taís Vargas Ferracini de Campos Gurgel), com apoio no artigo 22, § 1º, da Resolução CJF 822/2023. Contraminuta do advogado interessado (ID 350131043) com preliminar de ilegitimidade e falta de interesse do fundo para impugnar o contrato de honorários. Os memoriais (ID 382867775) alteram o pedido para 65%/35% [VALIDAR inovação]. Pedido de publicações em nome de Letícia Messias (OAB/SP 365.485).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -7771,7 +7773,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Voto para a pauta (prioridade)",
+    "materia": "Cumprimento de sentença — cessão de precatório; destaque de honorários contratuais",
+    "origem": "0800963-50.2019.8.12.0017 (1ª Vara Cível de Nova Andradina/MS, competência delegada)",
+    "decisao_agravada": "Decisões de f. 503 e 523 dos autos de origem",
+    "recurso": "ID 337235924 · 23/09/2025",
+    "preparo": "Comprovante juntado em 24/09/2025 (IDs 337307647 e 337307648)",
+    "monocratica": "Não",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7791,6 +7802,99 @@
     "ultima_informacao": "Certidão · ID 349911247 · 13/01/2026",
     "ultima_movimentacao": " 10:26 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Fundo que adquiriu 65% do crédito de precatório previdenciário recorre da decisão que reservou 40% aos honorários contratuais do advogado da segurada, juntados depois da expedição do precatório. O Tribunal suspendeu o levantamento da parcela controvertida.",
+    "inicial": "Cumprimento de sentença 0800963-50.2019.8.12.0017 de Neide Machado Pereira contra o INSS, com precatório expedido e cessão parcial do crédito ao fundo",
+    "decisao_recorrida": "Decisões de f. 503 e 523: limitação do valor da cessão para resguardar os honorários contratuais de 40%",
+    "recurso": "Agravo ID 337235924 (23/09/2025): (1) contrato de honorários juntado após a expedição do precatório (artigo 22, § 4º, da Lei 8.906/1994); (2) percentual de 40% excessivo; (3) validade da cessão de crédito. Pede efeito suspensivo e reforma.",
+    "resposta": "Neide Machado Pereira / advogado Jorge Talmo de Araújo Moraes ID 350131043 (15/01/2026): ilegitimidade e falta de interesse do fundo para impugnar o contrato de honorários; caráter alimentar e preferencial dos honorários; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Fundo ID 382867775 (26/06/2026): cessão de 65%; levantamento de 65% e reserva de 35% aos honorários",
+    "representacao": "Agravante: advogada Letícia Messias (OAB/SP 365.485); procuração não identificada com texto [VALIDAR]. Interessada: advogados Jorge Talmo de Araújo Moraes e Yasmin Nascimento Pereira",
+    "preparo": "Comprovado em 24/09/2025"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Precatório; cessão de crédito; honorários contratuais; destaque; artigo 22, § 4º, da Lei 8.906/1994",
+     "sintese": "Fundo que adquiriu 65% do crédito de precatório previdenciário recorre da decisão que reservou 40% aos honorários contratuais do advogado da segurada, juntados depois da expedição do precatório. O Tribunal suspendeu o levantamento da parcela controvertida.",
+     "questoes": "1) Legitimidade e interesse do cessionário (preliminar da contraminuta); 2) destaque de honorários contratuais após a expedição do precatório (artigo 22, § 4º, da Lei 8.906/1994; artigo 22, § 1º, da Resolução CJF 822/2023); 3) inovação do pedido nos memoriais.",
+     "rel": {
+      "razoes": "Agravo (ID 337235924): contrato juntado após o precatório; percentual excessivo; validade da cessão.",
+      "contrarrazoes": "Interessada (ID 350131043): ilegitimidade do fundo; prioridade dos honorários; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "1ª Vara Cível da Comarca de Nova Andradina/MS",
+      "dispositivo": "Limitou a cessão do precatório para resguardar honorários contratuais de 40%."
+     },
+     "ai": {
+      "hip": "Liquidação/cumprimento de sentença (artigo 1.015, parágrafo único, do CPC)",
+      "efeito": "Deferido"
+     },
+     "adm": {
+      "prot": "2025-09-23",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Cessionário (FIDC)",
+       "tipo": "Agravo de instrumento",
+       "id": "337235924",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "337235924",
+       "data": "2025-09-23"
+      },
+      {
+       "desc": "Comprovante de preparo",
+       "id": "337307647",
+       "data": "2025-09-24"
+      },
+      {
+       "desc": "Decisão que deferiu o efeito suspensivo",
+       "id": "349526865",
+       "data": "2026-01-13"
+      },
+      {
+       "desc": "Contraminuta da interessada",
+       "id": "350131043",
+       "data": "2026-01-15"
+      },
+      {
+       "desc": "Memoriais do agravante",
+       "id": "382867775",
+       "data": "2026-06-26"
+      },
+      {
+       "desc": "Pedido de inclusão em pauta",
+       "id": "397207088",
+       "data": "2026-09-11"
+      }
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "tipoAto": "Voto",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2026-01-13",
+     "urgObs": "Pedido de impulso em 11/09/2026"
+    }
    }
   },
   {
