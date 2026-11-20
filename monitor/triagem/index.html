@@ -300,6 +300,19 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-ses button.on .sd em,.cwe-ses button.on small{color:rgba(255,255,255,.78)}.cwe-ses button.on .sp{background:rgba(255,255,255,.25)}.cwe-ses button.on .sp i{background:#fff}
 .cwe-ses button.passada:not(.on){opacity:.72}
 .cwe-sesnova{display:block;width:100%;margin-top:8px;padding:6px 10px;border:1px dashed var(--b2);border-radius:7px;background:transparent;color:var(--t);font-weight:700;font-size:12px;text-align:left;cursor:pointer}.cwe-sesnova:hover{background:var(--w)}
+.cwe-1eq{grid-template-columns:1fr!important}
+.cwe-rg .rg-r>button{display:grid;grid-template-columns:22px minmax(0,1fr) 70px 34px 78px;align-items:center;gap:8px;width:100%;padding:7px 4px;border:0;border-top:1px solid var(--l);background:transparent;text-align:left;color:var(--tx);cursor:pointer;font:inherit}
+.cwe-rg .rg-r>button:disabled{cursor:default;opacity:.55}
+.cwe-rg .rg-r .o{font:600 11px ui-monospace,monospace;color:var(--g)}.cwe-rg .rg-r .t{font-size:12.5px;font-weight:600}
+.cwe-rg .bar{display:block;height:5px;background:var(--l);border-radius:3px;overflow:hidden}.cwe-rg .bar i{display:block!important;height:5px!important;background:var(--t)!important;border-radius:3px}
+.cwe-rg .n{font:600 12px ui-monospace,monospace;text-align:right}.cwe-rg small{font:10px ui-monospace,monospace;color:var(--m2)}
+.cwe-rg .rg-r.ab>button{background:var(--p)}
+.rg-cats{padding:2px 0 8px 30px;display:flex;flex-direction:column}
+.rg-c>button{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 34px;gap:8px;align-items:baseline;width:100%;padding:5px 4px;border:0;border-bottom:1px dashed var(--l);background:transparent;text-align:left;cursor:pointer;font:inherit;font-size:12px;color:var(--tx)}
+.rg-c>button .p{color:var(--m);font-size:11.5px}.rg-c.ab>button{font-weight:700}
+.rg-its{display:flex;flex-direction:column;gap:2px;padding:4px 0 8px 12px}
+.rg-its>span{display:grid;grid-template-columns:56px auto minmax(0,1fr);gap:8px;align-items:baseline;font-size:11.5px}.rg-its em{font-style:normal;font:10.5px ui-monospace,monospace;color:var(--m2)}.rg-its small{color:var(--m)}
+.rg-its>span.dif small{color:#b5452f}
 .cwe-cabab{display:flex;gap:4px;padding:6px 10px;border-top:1px solid var(--l)}
 .cwe-cabab>button{border:1px solid transparent;background:transparent;border-radius:7px;padding:4px 10px;font-weight:700;font-size:12px;color:var(--t);cursor:pointer}
 .cwe-cabab>button[aria-expanded="true"]{background:var(--p);border-color:var(--b)}
@@ -2285,6 +2298,19 @@ function portaToken() { return new Promise((fim) => {
       <span class="cwe-acoes"><button type="button" class="pri" data-cwe="nr-salvar">Salvar a regra</button><button type="button" data-cwe="nr-x">Cancelar</button></span><small>Entra no critério "Tema ou assunto"${Z.escopo === 'sessao' ? ', no ajuste desta sessão' : ', nas regras gerais'}.</small></div>`; }
 
   /* 3 · B · designação e correção */
+  /* regras de designação na ordem, uma coluna para a minuta e outra para a correção:
+     quantos processos cada regra decide › categorias da regra › processos (com quem está designado) */
+  function painelRegras(ss, Z) { let R = null; try { R = A.getSes()?.designacaoPorRegra?.(ss.id) || null; } catch (er) { R = null; }
+    if (!R) return '';
+    est.rgAb = est.rgAb || {}; est.rgCat = est.rgCat || {};
+    const col = (kind, tit) => { const L = R[kind] || [], tot = L.reduce((a, r) => a + r.n, 0) || 1;
+      return `<section class="cwe-box cwe-rg"><div class="h"><span><span class="cwe-k">${tit} · REGRAS NESTA ORDEM</span><button type="button" class="cwe-lnk" data-cwe="cfg-3">Editar regras</button></span></div>
+        ${L.map((r, i) => { const k = kind + ':' + r.cid, ab = !!est.rgAb[k], ord = r.cid === 'ader' || r.cid === 'nenhuma' ? '·' : i + 1;
+          return `<div class="rg-r ${r.n ? '' : 'zero'} ${ab ? 'ab' : ''}"><button type="button" data-cwe="rg" data-k="${e(k)}" aria-expanded="${ab}" ${r.n ? '' : 'disabled'}><b class="o">${ord}</b><span class="t">${e(r.t)}</span><span class="bar"><i style="width:${Math.round(100 * r.n / tot)}%"></i></span><b class="n">${r.n}</b><small>${r.n ? (r.seguem === r.n ? 'todos seguem' : r.seguem + ' seguem') : 'nenhum'}</small></button>
+            ${ab ? `<div class="rg-cats">${r.cats.map((c) => { const kc = k + ':' + c.chave, abc = !!est.rgCat[kc], ps = Object.keys(c.pessoas).sort((a, b) => c.pessoas[b] - c.pessoas[a]).map((p) => p + (Object.keys(c.pessoas).length > 1 ? ' ' + c.pessoas[p] : '')).join(' · ') || '—';
+              return `<div class="rg-c ${abc ? 'ab' : ''}"><button type="button" data-cwe="rgc" data-k="${e(kc)}" aria-expanded="${abc}"><span class="t">${e(c.chave)}</span><span class="p">→ ${e(ps)}</span><b class="n">${c.n}</b></button>
+                ${abc ? `<div class="rg-its">${c.itens.map((x) => { const dif = x.atual && x.regra && A.norm(x.atual) !== A.norm(x.regra); return `<span class="${dif ? 'dif' : ''}"><em>item ${e(x.item || '—')}</em><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(A.digits(x.cnj))}">${e(A.cnj(x.cnj))}</button><small>${x.atual ? e(x.atual) + (dif ? ' · regra: ' + e(x.regra) : '') : 'sem designação · regra: ' + e(x.regra || '—')}</small></span>`; }).join('')}</div>` : ''}</div>`; }).join('')}</div>` : ''}</div>`; }).join('')}</section>`; };
+    return `<div class="cwe-2eq">${col('d', 'MINUTA')}${col('c', 'CORREÇÃO')}</div><p class="cwe-nota">A primeira regra que casa decide, separadamente para minuta e para correção. Clique na regra para ver as categorias e, na categoria, os processos. “Seguem” = quem está designado é quem a regra indica.${Z.equilibrar ? ' Equilibrar a carga · ligado.' : ''}</p>`; }
   function etapa3b(ss, d, tabs) {
     let Z = null; try { Z = d.s?.designacao?.(ss.id) || null; } catch (er) { Z = null; }
     if (!Z) return `<section class="cwe-st"><h2>4 · Designação de redator e corretor</h2>${tabs}<p class="cwe-nota">Designação indisponível: motor não carregado.</p></section>`;
@@ -2315,10 +2341,8 @@ function portaToken() { return new Promise((fim) => {
       <div class="cwe-mesa-bar"><span class="cwe-k">MESA DE DESIGNAÇÃO · SESSÃO DE ${e(A.br(ss.data))}</span><small>${Ls.length} processos · grava no procs-muta pelo “Aplicar à pauta” da mesa</small><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicar a pauta →</button></div>
       <div class="cwe-mesa-slot" data-s="${e(ss.id)}"></div>
       <div class="cwe-kpis cwe-k4">${kpi(Ls.length, 'Processos na pauta', `${Ls.filter((p) => p.servidor).length} com minutante · ${Ls.filter((p) => p.corretor).length} com corretor`)}${kpi(`${porRegD} · ${porRegC}`, 'Preenchidos por regra', 'minutantes · corretores')}${kpi(`${brD} · ${brC}`, 'Sem regra que case', 'minutantes · corretores, a escolher', brD + brC ? 'a' : '')}${kpi(aus.length, 'Ausências no período', aus.length ? aus.join(', ') : `nenhuma cadastrada entre ${A.br(Z.periodo.de).slice(0, 5)} e ${A.br(Z.periodo.ate).slice(0, 5)}`)}</div>
-      <div class="cwe-2eq"><section class="cwe-box"><div class="h"><span><span class="cwe-k">REGRAS DE DESIGNAÇÃO · NESTA ORDEM</span><button type="button" class="cwe-lnk" data-cwe="cfg-3">Editar regras</button></span></div>
-          ${Z.criterios.map((k, i) => `<div class="cr ${k.d || k.c ? '' : 'off'}"><b>${i + 1}</b><span><b>${e(k.t)}</b></span><span>${e([k.d ? 'minuta' : '', k.c ? 'correção' : ''].filter(Boolean).join(' · ') || 'desligada')}</span></div>`).join('')}
-          <p>A primeira regra que casa decide, separadamente para minuta e para correção. Ausência cadastrada tira a pessoa do período.${Z.equilibrar ? ' Equilibrar a carga · ligado.' : ''}</p></section>
-        <section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
+      ${painelRegras(ss, Z)}
+      <div class="cwe-2eq cwe-1eq"><section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
           ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
       <details class="cwe-old" ${est.listaAb ? 'open' : ''}><summary data-cwe="des-lista">Lista simples por regra, sem a mesa</summary>
       <section class="cwe-carga">${quadro('MINUTA · EQUIPE', Z.minutantes, 'd')}${quadro('CORREÇÃO · ASSESSORIA', Z.corretores, 'c')}</section>
@@ -2489,6 +2513,8 @@ function portaToken() { return new Promise((fim) => {
       if (k === 'etapa') { const n = +b.dataset.n; if (b.getAttribute('aria-disabled') === 'true') return; est.etapa = n; est.exp = false; }
       else if (k === 'prep') { est.etapa = 3 + (+b.dataset.n || 0); }
       else if (k === 'exp') est.exp = !est.exp;
+      else if (k === 'rg') { est.rgAb = est.rgAb || {}; est.rgAb[b.dataset.k] = !est.rgAb[b.dataset.k]; }
+      else if (k === 'rgc') { est.rgCat = est.rgCat || {}; est.rgCat[b.dataset.k] = !est.rgCat[b.dataset.k]; }
       else if (k === 'j-ed') { est.jEd = !est.jEd; est.jNovo = false; }
       else if (k === 'painel') { const d0 = dados(ss); est.painel = !(est.painel == null ? d0.realizada : est.painel); }
       else if (k === 'j-rem') { const i = +b.dataset.i; salvarJ(ss, (j) => { const m = j.composicao[i]; j.composicao.splice(i, 1); if (m) j.substituicoes = j.substituicoes.filter((sb) => sb.sai !== m.id); }); }
