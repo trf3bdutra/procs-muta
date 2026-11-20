@@ -98,6 +98,10 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 @media (prefers-reduced-motion:reduce){.toast{transition:none}}
 .mu{color:var(--mut)}
 .ds .lb .sc{font-weight:500;letter-spacing:0;text-transform:none;color:#b5452f;font-size:11px;margin-left:4px}
+.seg.ag .agl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a7465;padding:0 6px 0 4px;align-self:center}
+.bh .sub{flex-basis:100%;font-size:12px;color:#7a7465;margin-top:2px}
+.bl.mo-man .bh{border-left:3px solid #b8860b}.bl.mo-cont .bh{border-left:3px solid #1f6f5c}.bl.mo-regra .bh{border-left:3px solid #2c4a7a}.bl.mo-esp .bh{border-left:3px solid #6b4c9a}
+.bl.mo-hist .bh{border-left:3px solid #8a6d3b}.bl.mo-lote .bh{border-left:3px solid #4f7f9a}.bl.mo-atual .bh{border-left:3px solid #9a948a}.bl.mo-carga .bh,.bl.mo-vazio .bh{border-left:3px solid #b5452f}
 </style>
 </head>
 <body>
@@ -136,6 +140,12 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
         <button type="button" data-mo="equilibrio" aria-pressed="false" title="Opcional: redistribui pela meta de cada um">Equilibrar carga</button>
       </div>
       <button type="button" class="btn" data-a="recalc" title="Recalcula a proposta com o período e as ausências atuais; mantém suas escolhas manuais">Recalcular</button>
+      <div class="seg ag" role="group" aria-label="Agrupar por">
+        <span class="agl">Agrupar por</span>
+        <button type="button" data-ag="bloco" aria-pressed="true" title="Lotes, ED e AgInt, e os demais por seção">Lote e seção</button>
+        <button type="button" data-ag="md" aria-pressed="false" title="Pelo motivo da escolha do minutante">Motivo do minutante</button>
+        <button type="button" data-ag="mc" aria-pressed="false" title="Pelo motivo da escolha do corretor">Motivo do corretor</button>
+      </div>
     </div>
     <div id="blocos"></div>
   </main>
@@ -303,13 +313,28 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
   function passa(x){var b=N(BUSCA);if(b&&N([x.cnj,x.as,x.d,x.c,fin(x,'d'),fin(x,'c'),x.partes].join(' ')).indexOf(b)<0)return false;
     if(FIL==='mud')return fin(x,'d')!==x.d||fin(x,'c')!==x.c;if(FIL==='semc')return !x.c;if(FIL==='ed')return x.t==='ED'||x.t==='AgInt';if(FIL==='meta')return x.t==='META';return true;}
   var CARGA={};
-  function blocos(){CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[];IT.forEach(function(x){var k=bloco(x);if(!G[k]){G[k]=[];ord.push(k);}G[k].push(x);});
-    ord.sort(function(a,b){var r=function(k){return k.indexOf('L:')===0?0:k==='T:ED'?1:2;};return r(a)-r(b)||G[b].length-G[a].length;});
-    var h='';ord.forEach(function(k){var L=G[k].filter(passa);if(!L.length)return;var dist={};G[k].forEach(function(x){var d=fin(x,'d');dist[d]=(dist[d]||0)+1;});
+  /* agrupamento: por lote e seção, ou pelo motivo da escolha (minutante ou corretor) */
+  var AG='bloco';
+  var MOTIVOS=[['man','Escolha manual','alterado por você nesta mesa'],['cont','Continuidade','quem minutou ou corrigiu o acórdão embargado ou agravado'],['regra','Regra do gabinete','regra de designação cadastrada; o critério vem no título'],
+    ['esp','Especialidade ou preferência','competência indicada no perfil do servidor'],['hist','Experiência no assunto','mais minutas ou correções no histórico do assunto'],['lote','Mesmo lote ou assunto','mantém o lote e o assunto nas mesmas mãos'],
+    ['atual','Mantém a designação atual','nenhum critério mais forte que quem já estava'],['carga','Distribuição pela carga','nenhum critério casou; vai para quem tem folga'],['vazio','Sem designação','ninguém disponível']];
+  function motivo(x,k){var v=fin(x,k),p=PROP[x.i]||{};if(!v)return 'vazio';if(ESC[x.i]&&ESC[x.i][k]!=null&&ESC[x.i][k]!==p[k])return 'man';
+    var W=(k==='d'?p.wd:p.wc)||[],tem=function(f){return W.some(f);};
+    if(tem(function(w){return w[0]==='c';}))return 'cont';var r=W.filter(function(w){return w[0]==='r';})[0];if(r)return 'regra|'+r[1].replace(/^regra · /,'');
+    if(tem(function(w){return w[0]==='e';}))return 'esp';if(tem(function(w){return /no histórico/.test(w[1]);}))return 'hist';if(tem(function(w){return w[0]==='l';}))return 'lote';
+    if(tem(function(w){return w[1]==='designação atual';}))return 'atual';return 'carga';}
+  function grupo(x){return AG==='bloco'?bloco(x):motivo(x,AG==='md'?'d':'c');}
+  function infoMotivo(k){var b=k.split('|')[0],m=MOTIVOS.filter(function(q){return q[0]===b;})[0]||[b,b,''];return {ord:MOTIVOS.indexOf(m),nome:m[1]+(k.indexOf('|')>0?' · '+k.split('|')[1]:''),sub:m[2]};}
+  function nomeGrupo(k){return AG==='bloco'?nomeBloco(k):infoMotivo(k).nome;}
+  function blocos(){CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[];IT.forEach(function(x){var k=grupo(x);if(!G[k]){G[k]=[];ord.push(k);}G[k].push(x);});
+    if(AG==='bloco')ord.sort(function(a,b){var r=function(k){return k.indexOf('L:')===0?0:k==='T:ED'?1:2;};return r(a)-r(b)||G[b].length-G[a].length;});
+    else ord.sort(function(a,b){return infoMotivo(a).ord-infoMotivo(b).ord||G[b].length-G[a].length;});
+    var kd=AG==='mc'?'c':'d';
+    var h='';ord.forEach(function(k){var L=G[k].filter(passa);if(!L.length)return;var dist={};G[k].forEach(function(x){var d=fin(x,kd)||'ninguém';dist[d]=(dist[d]||0)+1;});
       var dd=Object.keys(dist).sort(function(a,b){return dist[b]-dist[a];}).map(function(n){return n+' '+dist[n];}).join(' · ');
       var lim=ABERTO[k]?L.length:Math.min(L.length,12);
-      h+='<section class="bl"><div class="bh"><h3>'+esc(nomeBloco(k))+'</h3><span class="ct">'+G[k].length+' processo'+(G[k].length>1?'s':'')+'</span><span class="dist">minuta: '+esc(dd)+'</span>'+
-        '<span class="bulk"><label>Bloco todo: <select data-bulk="d" data-b="'+esc(k)+'"><option value="">minutante…</option>'+PD.map(function(m){return '<option>'+esc(m.nome)+'</option>';}).join('')+optsEx('d','')+'</select></label><select data-bulk="c" data-b="'+esc(k)+'" aria-label="Corretor do bloco"><option value="">corretor…</option>'+PC.map(function(m){return '<option>'+esc(m.nome)+'</option>';}).join('')+'</select></span></div>'+
+      h+='<section class="bl'+(AG==='bloco'?'':' mo-'+k.split('|')[0])+'"><div class="bh"><h3>'+esc(nomeGrupo(k))+'</h3><span class="ct">'+G[k].length+' processo'+(G[k].length>1?'s':'')+'</span><span class="dist">'+(kd==='c'?'correção: ':'minuta: ')+esc(dd)+'</span>'+(AG==='bloco'?'':'<span class="sub">'+esc(infoMotivo(k).sub)+'</span>')+
+        '<span class="bulk"><label>'+(AG==='bloco'?'Bloco todo':'Grupo todo')+': <select data-bulk="d" data-b="'+esc(k)+'"><option value="">minutante…</option>'+PD.map(function(m){return '<option>'+esc(m.nome)+'</option>';}).join('')+optsEx('d','')+'</select></label><select data-bulk="c" data-b="'+esc(k)+'" aria-label="Corretor do bloco"><option value="">corretor…</option>'+PC.map(function(m){return '<option>'+esc(m.nome)+'</option>';}).join('')+'</select></span></div>'+
         L.slice(0,lim).map(function(x){var mud=fin(x,'d')!==x.d||fin(x,'c')!==x.c;return '<div class="rw'+(mud?' mud':'')+'"><div class="pr"><span class="t1"><span class="it">item '+x.i+'</span><span class="cnj">'+esc(x.cnj)+'</span>'+(x.t?'<span class="tg '+x.t+'">'+x.t+'</span>':'')+'</span><span class="as">'+esc(x.as)+'</span><span class="mt">'+esc([x.cl,x.sec].filter(Boolean).join(' · '))+((x.t==='ED'||x.t==='AgInt')&&x.od?' · acórdão: '+esc(x.od):'')+'</span></div>'+campo(x,'d')+campo(x,'c')+'</div>';}).join('')+
         (L.length>lim?'<button type="button" class="mais" data-mais="'+esc(k)+'">Mostrar mais '+(L.length-lim)+'</button>':'')+'</section>';});
     document.getElementById('blocos').innerHTML=h||'<p class="mu">Nada com esses filtros.</p>';}
@@ -318,11 +343,12 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 
   document.addEventListener('change',function(e){var t=e.target;
     if(t.dataset.sel){var i=+t.dataset.i,k=t.dataset.sel;ESC[i]=ESC[i]||{};ESC[i][k]=t.value;if(k==='d'){var x=IT.find(function(y){return y.i===i;});if(t.value&&fin(x,'c')===t.value){ESC[i].c=(PROP[i].oc||[]).map(function(c){return c.nome;}).filter(function(n){return n!==t.value;})[0]||'';toast('Corretor trocado: o minutante não corrige a própria minuta.');}}tudo();return;}
-    if(t.dataset.bulk){var b=t.dataset.b,kk=t.dataset.bulk,v=t.value;if(!v)return;IT.filter(function(x){return bloco(x)===b;}).forEach(function(x){ESC[x.i]=ESC[x.i]||{};ESC[x.i][kk]=v;if(kk==='d'&&fin(x,'c')===v)ESC[x.i].c='';});toast(nomeBloco(b)+': '+(kk==='d'?'minutante ':'corretor ')+v);tudo();return;}
+    if(t.dataset.bulk){var b=t.dataset.b,kk=t.dataset.bulk,v=t.value;if(!v)return;IT.filter(function(x){return grupo(x)===b;}).forEach(function(x){ESC[x.i]=ESC[x.i]||{};ESC[x.i][kk]=v;if(kk==='d'&&fin(x,'c')===v)ESC[x.i].c='';});toast(nomeGrupo(b)+': '+(kk==='d'?'minutante ':'corretor ')+v);tudo();return;}
     if(t.dataset.aus){AUS[t.dataset.aus]=t.checked;propor();tudo();toast(t.dataset.aus+(t.checked?' ausente: proposta recalculada.':' de volta: proposta recalculada.'));return;}
     if(t.id==='p-de'||t.id==='p-ate'){if(t.id==='p-de')de=t.value;else ate=t.value;propor();tudo();}});
   document.getElementById('busca').addEventListener('input',function(e){BUSCA=e.target.value;blocos();});
-  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-mo]');if(!t)return;
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-mo],[data-ag]');if(!t)return;
+    if(t.dataset.ag){AG=t.dataset.ag;ABERTO={};document.querySelectorAll('[data-ag]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.mo){MOD=t.dataset.mo;document.querySelectorAll('[data-mo]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});propor();tudo();toast('Proposta recalculada: '+t.textContent+'.');return;}
     if(t.dataset.f){FIL=t.dataset.f;document.querySelectorAll('[data-f]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.mais){ABERTO[t.dataset.mais]=true;blocos();return;}

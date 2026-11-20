@@ -30,3 +30,8 @@ test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
   const pag=read('monitor/designacao/index.html');
   assert.ok(pag.includes('optsEx(k,v)')&&pag.includes('var EV=EQ.filter'));
 });
+test('Mesa: agrupar por motivo do minutante e do corretor',()=>{
+  const pag=read('monitor/designacao/index.html');
+  for(const x of ['data-ag="bloco"','data-ag="md"','data-ag="mc"','function motivo(x,k)','return grupo(x)===b'])assert.ok(pag.includes(x),x);
+  for(const m of ['Escolha manual','Continuidade','Regra do gabinete','Especialidade ou preferência','Experiência no assunto','Mesmo lote ou assunto','Mantém a designação atual','Distribuição pela carga'])assert.ok(pag.includes(m),m);
+});
