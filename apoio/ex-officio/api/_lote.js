@@ -48,7 +48,7 @@ const CAB_SESSAO = /\s*Sess[aã]o de Julgamento\s+(?:ORDIN|EXTRAORDIN|VIRTUAL|PR
 const limpaPauta = t => String(t || '').replace(CAB_SESSAO, ' ').replace(/\bLL\s+(?=\d)/g, 'Lei ').replace(/\s+/g, ' ').trim();
 const limpaItemPauta = x => x && typeof x === 'object' ? Object.assign({}, x, { assunto: limpaPauta(x.assunto), partes: limpaPauta(x.partes), classe: limpaPauta(x.classe) }) : x;
 function limpaLote(lote) {
-  (lote.itens || []).forEach(it => { for (const k of ['assunto', 'tipo_caso', 'partes', 'exequente', 'executado', 'recurso']) if (typeof it[k] === 'string') it[k] = limpaPauta(it[k]); });
+  (lote.itens || []).forEach(it => { for (const k of ['assunto', 'assunto_pauta', 'tipo_caso', 'partes', 'exequente', 'executado', 'recurso']) if (typeof it[k] === 'string') it[k] = limpaPauta(it[k]); });
   (lote.grupos || []).forEach(g => { if (typeof g.rotulo === 'string') g.rotulo = limpaPauta(g.rotulo); });
   return lote;
 }
@@ -97,11 +97,12 @@ function designar(e, d) {
    aplica a designação da pauta e devolve os cartões do prontuário lidos das sessões do lote */
 async function anotar(lote, M) {
   M = M || memoria();
-  const cartoes = {}, vivo = {}, porSessao = {}, futura = {};
+  const cartoes = {}, vivo = {}, porSessao = {}, futura = {}, assPauta = {};
   const proprias = lote.sessoes || [], hoje = hojeLocal();
   const outras = (await calendarioM(M)).filter(z => z.processos && z.date >= hoje && !proprias.includes(z.date)).map(z => z.date).sort();
   await Promise.all(proprias.map(async s => (await itensSessao(s, M)).forEach(x => {
     vivo[x.cnj] = situacao(x);
+    if (x.assunto && !assPauta[x.cnj]) assPauta[x.cnj] = x.assunto;
     porSessao[s + '|' + x.cnj] = porSessao[x.cnj] = porSessao[x.cnj] || designacaoDe(s, x);
     const c = x && x.ctl; if (!c || !c.cartao) return;
     cartoes[x.cnj] = { cartao: c.cartao, editadoPor: c.editadoPor || '', editadoEm: c.editadoEm || '' };
@@ -117,6 +118,8 @@ async function anotar(lote, M) {
     if (d) designar(e, d);
     if (sv && (ORDEM[sv] || 0) > (ORDEM[e.situacao] || 0)) e.situacao = sv;
     it.pronto = (ORDEM[e.situacao] || 0) >= 3;
+    /* hierarquia do caso: Assunto (PJe) › Subassunto › Especificidades. O assunto do PJe vem da pauta quando o lote não o guarda. */
+    if (!it.assunto && assPauta[it.processo]) it.assunto_pauta = assPauta[it.processo];
     const v = it.visivel || {};
     it.verEquipe = v.equipe !== false;
     it.verRelator = v.relator === true || (v.relator !== false && it.pronto);

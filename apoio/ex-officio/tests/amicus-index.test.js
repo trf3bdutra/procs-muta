@@ -55,3 +55,8 @@ test('Compendium (correspondências) é aba do painel lateral, não seção da p
  assert.ok(!app.includes('id="col-correspondencias"'));
  for(const x of ['data-cx="cor"','id="cx-cor"','id="cl-cor-carregar"','id="cl-cor-body"','CX_TIT']) assert.ok(app.includes(x),x);
 });
+test('Hierarquia do caso: Assunto (PJe) › Subassunto › Especificidades',()=>{
+ for(const x of ['function niveis(it)',"'Assunto (PJe)'","'Subassunto'",'tr class="gs"']) assert.ok(app.includes(x),x);
+ assert.ok(!app.includes("'Tipo de caso':esc(it.tipo_caso)"));
+ assert.ok(api.includes('it.assunto_pauta = assPauta[it.processo]'));
+});

@@ -384,6 +384,8 @@ html{overflow-x:clip}                                   /* a barra em largura to
 .cmt-met span{font:600 11px/1.3 var(--font);letter-spacing:0;text-transform:none;color:var(--ei2)}
 .cmt-met div.dem span{color:var(--em);font-weight:500}
 .cmt-met div.on{background:var(--ew);box-shadow:inset 0 -3px 0 var(--eo)}
+.cmt-tb tr.gs td{padding:5px 8px 5px 22px;font-size:12px;color:var(--ei2);background:var(--ep);border-bottom:1px dashed var(--el)}
+.cmt-tb tr.gs .gs-k{font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--eo2);margin-right:6px}
 .cmt-met div.on span{color:var(--ei)}
 .cmt-met div:focus-visible{outline:2px solid var(--eo);outline-offset:-2px}
 /* perfil: identificação à esquerda (quebra só dentro dela) e ações fixas à direita */
@@ -556,7 +558,18 @@ function ligaVisLotes(){
   });
 }
 const SEG=s=>String(s||'').split(/\s+·\s+/).map(x=>x.trim()).filter(Boolean);
-const assuntoDe=it=>it.assunto||SEG(it.subassunto)[0]||it.tipo_caso;
+const semAc=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+/* Hierarquia do caso, a mesma do sistema: 1 Assunto (PJe) › 2 Subassunto › 3 Especificidades.
+   Subassunto: o do lote; senão o do cartão do prontuário; senão o "tipo de caso" do lote, quando não repete o assunto.
+   Especificidades: as do lote; senão as do cartão do prontuário. */
+function niveis(it){
+  const C=(it.prontuario&&it.prontuario.cartao)||(it.prontuario_triagem&&it.prontuario_triagem.cartao)||{};
+  const assunto=it.assunto||it.assunto_pauta||'';
+  let sub=it.subassunto||C.subassuntos||'';
+  if(!sub&&it.tipo_caso&&semAc(it.tipo_caso)!==semAc(assunto))sub=it.tipo_caso;
+  return {assunto,sub,esp:it.especificidades||C.especificidades||''};
+}
+const assuntoDe=it=>{const n=niveis(it);return n.assunto||SEG(n.sub)[0]||it.tipo_caso};
 /* Só processo de pauta tem item: nas coleções de triagem e avulsas o número de ordem é interno e não aparece. */
 const temItem=it=>!!it.sessao;
 function rotItem(it){return temItem(it)?br(it.sessao).slice(0,5)+' · item '+pad(it.item):''}
@@ -611,10 +624,12 @@ function cartoesMatriz(grs){
   if(um.length<2)return grs.map(card).join('');
   return mais.map(card).join('')+`<div data-g="${um.map(g=>g.k).join(',')}" class="dem" role="button" tabindex="0" aria-pressed="false" style="border-top-color:var(--el2)" title="${esc(um.map(g=>g.r).join(' · '))}"><span>Demais assuntos · ${um.length} com um processo cada</span><b>${pad(um.length)}</b></div>`;
 }
+/* dentro do grupo, processos com subassunto primeiro, em ordem alfabética; os sem subassunto ao fim */
+function cmpSub(a,b){const x=semAc(niveis(a).sub),y=semAc(niveis(b).sub);if(x===y)return 0;if(!x)return 1;if(!y)return -1;return x.localeCompare(y,'pt-BR')}
 function montar(lotes,id,usuario){
   FLN=Object.fromEntries(LOTE.colunas.map(c=>[c.id,c.rotulo])); COR=Object.fromEntries(LOTE.grupos.map(g=>[g.id,g.cor])); OUT=LOTE.grupo_outros||{rotulo:'Outros',cor:'#9aa0a8'};
   const ord=LOTE.grupos.map(g=>g.id).concat([null]);
-  ITENS=LOTE.itens.filter(it=>(!FILT_SESSAO||it.sessao===FILT_SESSAO)&&(!FILT_MINUTISTA||String((it.equipe&&it.equipe.minuta)||'').toLowerCase()===FILT_MINUTISTA.toLowerCase())).sort((a,b)=>ord.indexOf(a.grupo)-ord.indexOf(b.grupo)||a.sessao.localeCompare(b.sessao)||a.item-b.item);
+  ITENS=LOTE.itens.filter(it=>(!FILT_SESSAO||it.sessao===FILT_SESSAO)&&(!FILT_MINUTISTA||String((it.equipe&&it.equipe.minuta)||'').toLowerCase()===FILT_MINUTISTA.toLowerCase())).sort((a,b)=>ord.indexOf(a.grupo)-ord.indexOf(b.grupo)||cmpSub(a,b)||a.sessao.localeCompare(b.sessao)||a.item-b.item);
   ITENS.forEach(it=>it.uid=it.sessao+'-'+it.item);
   TEM_ITEM=ITENS.some(temItem);
   VARIAS_SES=new Set(ITENS.map(i=>i.sessao).filter(Boolean)).size>1; TEM_OBS=ITENS.some(i=>String(i.observacao||'').trim());
@@ -670,11 +685,19 @@ function montar(lotes,id,usuario){
   <section class="lx-sec" id="sec-pf"><div class="lx-shd"><button type="button" class="b mn" data-min-sec title="Minimizar">−</button><div><p class="lx-k">02 / Processo a processo</p><h2>Perfis e <em>minutas.</em></h2><p class="lx-d">Identificação, enquadramento, prontuário e minuta formatada, pronta para copiar.</p></div></div>
   <div id="profiles"></div></section>
   </div>`);
-  let h='',last='x';
+  let h='',last='x',lastSub=null;
+  const NC=4+(TEM_ITEM?(VARIAS_SES?2:1):0)+(TEM_OBS?1:0)+(MODO_REL?0:1)+LOTE.colunas.length+(MODO==='cg'?2:0)+(MODO==='cg'&&LOTE.virtual?1:0);
+  /* subdivide o grupo por subassunto quando há mais de um, ou quando o subassunto não repete o rótulo do grupo */
+  const subsG={};ITENS.forEach(i=>{(subsG[i.grupo||'']=subsG[i.grupo||'']||new Set()).add(semAc(niveis(i).sub))});
   for(const it of ITENS){
     const c=gcor(it);
     if(it.grupo!==last){const n=ITENS.filter(i=>i.grupo===it.grupo).length,g=LOTE.grupos.find(x=>x.id===it.grupo);
-      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${4+(TEM_ITEM?(VARIAS_SES?2:1):0)+(TEM_OBS?1:0)+(MODO_REL?0:1)+LOTE.colunas.length+(MODO==='cg'?2:0)+(MODO==='cg'&&LOTE.virtual?1:0)}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n ghn">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo}
+      h+=`<tr class="gh" data-gh="${it.grupo||''}"><td colspan="${4+(TEM_ITEM?(VARIAS_SES?2:1):0)+(TEM_OBS?1:0)+(MODO_REL?0:1)+LOTE.colunas.length+(MODO==='cg'?2:0)+(MODO==='cg'&&LOTE.virtual?1:0)}" style="border-left:4px solid ${c}"><b>${esc(g?(/^\d+$/.test(g.id)?g.id+' · '+(it.tipo_caso.split('·')[1]||g.rotulo).trim():g.rotulo):OUT.rotulo)}</b> · ${esc(g&&g.resultado?g.resultado:'voto próprio')} · <span class="cmt-n ghn">${n} processo${n>1?'s':''}</span></td></tr>`;last=it.grupo;lastSub=null}
+    {const sub=niveis(it).sub,ks=semAc(sub),G=LOTE.grupos.find(x=>x.id===it.grupo),set=subsG[it.grupo||'']||new Set();
+     const mostra=set.size>1||(ks&&(!G||ks!==semAc(G.rotulo)));
+     if(mostra&&ks!==lastSub){const n=ITENS.filter(i=>i.grupo===it.grupo&&semAc(niveis(i).sub)===ks).length;
+       h+=`<tr class="gs" data-gs="${it.grupo||''}" data-sk="${esc(ks)}"><td colspan="${NC}" style="border-left:4px solid ${c}"><span class="gs-k">Subassunto</span> ${ks?esc(SEG(sub).join(' › ')):'<i>a definir</i>'} <span class="cmt-n">· ${n}</span></td></tr>`;}
+     lastSub=ks}
     const cells=LOTE.colunas.map(f=>`<td class="f">${it.variacoes.includes(f.id)?`<span class="dot" title="${esc(f.rotulo)}" style="background:${f.id==='ORI'?'var(--er)':c}"></span>`:''}</td>`).join('');
     h+=`<tr class="r${MODO==='cg'&&!it.verEquipe?' oc-e':''}" data-u="${it.uid}">${MODO==='cg'&&LOTE.virtual?`<td class="col-ch"><input type="checkbox" data-csel="${it.uid}" aria-label="Selecionar processo ${esc(it.processo)}"></td>`:''}${TEM_ITEM?(VARIAS_SES?`<td style="border-left:4px solid ${c}" class="cnj">${it.sessao?br(it.sessao).slice(0,5):''}</td><td class="ii">`:`<td class="ii" style="border-left:4px solid ${c}">`)+`${it.sessao?pad(it.item):''}</td>`:''}<td class="cnj"${TEM_ITEM?'':` style="border-left:4px solid ${c}"`}>${it.processo.slice(0,15)}</td><td>${esc(it.exequente)}</td><td>${esc(it.executado)}</td><td class="rec" title="${esc(it.recurso)}">${/^ED/.test(it.recurso)?'ED':/agravo de instrumento/i.test(it.recurso)?'AI':/agravo interno/i.test(it.recurso)?'AgInt':'Apel.'}</td>${MODO_REL?'':`<td class="dsgc"><span title="Minuta">${(it.equipe||{}).minuta?esc(it.equipe.minuta):'—'}</span>${(it.equipe||{}).correcao?`<small title="Correção">cor. ${esc(it.equipe.correcao)}</small>`:''}</td>`}${MODO==='cg'?celulasVis(it):''}${cells}${TEM_OBS?`<td class="obs">${esc(it.observacao)}</td>`:''}</tr>`;
   }
@@ -874,7 +897,8 @@ function perfil(it,i){
   const fl=it.variacoes.map(f=>`<span style="background:${f==='ORI'?'var(--er)':c}">${esc(FLN[f]||f)}</span>`).join('')||`<span style="background:${OUT.cor}">sem variações marcadas</span>`;
   const cons=`/amicus/compendium/#consulta=${it.sessao}/${it.item}`;
   let b=`<div class="box"><h3>Identificação</h3>${dl({'Sessão':it.sessao?`${br(it.sessao)} · item ${it.item}`:'','Chegada':!it.sessao&&it.chegada?esc(it.chegada):'','Tarefa':esc(it.tarefa||''),'Etiquetas':esc(it.etiquetas||''),'Processo':`<span class="cnj">${it.processo}</span>`,'Recurso':esc(it.recurso),'Exequente':esc(it.exequente),'Executado':esc(it.executado)})}</div>`;
-  b+=`<div class="box"><h3>Enquadramento</h3>${dl({'Tipo de caso':esc(it.tipo_caso),'Subassunto':SEG(it.subassunto).map(esc).join(' › '),'Resultado':esc(it.resultado),'Modelo vigente':esc(it.modelo)})}${SEG(it.especificidades).length?`<p style="margin-top:8px"><b>Especificidades</b></p><div class="esp">${SEG(it.especificidades).map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</div>`;
+  const NV=niveis(it);
+  b+=`<div class="box"><h3>Enquadramento</h3>${dl({'Assunto (PJe)':esc(NV.assunto)||'<span class="cmt-n">não informado</span>','Subassunto':SEG(NV.sub).map(esc).join(' › ')||'<span class="cmt-n">a definir</span>','Resultado':esc(it.resultado),'Modelo vigente':esc(it.modelo)})}${SEG(NV.esp).length?`<p style="margin-top:8px"><b>Especificidades</b></p><div class="esp">${SEG(NV.esp).map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</div>`;
   b+=`<div class="box so-equipe"><h3>Equipe e situação</h3>${dl({'Minuta':esc(e.minuta||'—'),'Correção':esc(e.correcao||'—'),'Designação':e.fonte?`pauta de ${br(e.fonte.sessao)}${e.fonte.item?' · item '+esc(e.fonte.item):''}`:(e.minuta||e.correcao?'registrada no lote (fora de pauta)':'sem designação'),'Antes no lote':e.copia_lote&&MODO==='cg'?esc([e.copia_lote.minuta,e.copia_lote.correcao].filter(Boolean).join(' · ')):'','Alterações':(e.historico||[]).map(h=>esc(br(String(h.em).slice(0,10))+': '+(h.alteracoes||[]).map(a=>a.papel+' '+(a.de||'—')+' → '+(a.para||'—')).join('; '))).join('<br>'),'Situação':esc(e.situacao),'Código triagem':esc(t['Código']),'Visível para':MODO==='cg'?`<span data-vtx="${it.uid}">${textoVis(it)}</span>`:''})}</div>`;
   b+=`<div class="box wide"><h3>Variações e peculiaridades</h3><div class="fl">${fl}</div>`+
      `<p class="pv" style="margin-top:8px" data-eq="${esc(it.peculiaridades)}" data-rel="${esc(it.peculiaridades_relator)}">${esc(it.peculiaridades_relator)}</p>`+
@@ -905,7 +929,7 @@ function perfil(it,i){
       `<details><summary>Ver a lista completa de IDs</summary><table><tr><th>ID</th><th>Data</th><th>Documento</th><th>Juntado por</th><th>Formato</th></tr>${A.documentos.map(d=>`<tr><td class="cnj">${esc(d[0])}${st.has(d[0])?' ⚠':''}</td><td>${esc(d[1])}</td><td>${esc(d[3]?d[2]+' · '+d[3]:d[2])}</td><td>${esc(d[4])}</td><td>${esc(d[5])}${d[6]?' · '+d[6]+' p.':''}</td></tr>`).join('')}</table></details></div>`}
   if(t['Apelante']||t['Mérito (triagem)']||t['Preliminares']||t['Obs. da triagem'])
     b+=`<div class="box so-equipe"><h3>Triagem</h3>${dl({'Apelante':esc(t['Apelante']),'Preliminares':esc(t['Preliminares']),'Mérito':esc(t['Mérito (triagem)']),'Observação':esc(t['Obs. da triagem'])})}</div>`;
-  if(P){b+=`<div class="box wide"><h3>Prontuário · Ex Officio</h3>${P.sintese?`<p><b>Síntese.</b> ${esc(P.sintese)}</p>`:''}${P.especificidades?`<p><b>Especificidades.</b> ${esc(P.especificidades)}</p>`:''}${P.questoes?`<p><b>Questões.</b> ${esc(P.questoes)}</p>`:''}${P.obsGeral?`<p><b>Observação.</b> ${esc(P.obsGeral)}</p>`:''}`+
+  if(P){b+=`<div class="box wide"><h3>Prontuário · Ex Officio</h3>${P.sintese?`<p><b>Síntese.</b> ${esc(P.sintese)}</p>`:''}${P.especificidades&&P.especificidades!==NV.esp?`<p><b>Especificidades.</b> ${esc(P.especificidades)}</p>`:''}${P.questoes?`<p><b>Questões.</b> ${esc(P.questoes)}</p>`:''}${P.obsGeral?`<p><b>Observação.</b> ${esc(P.obsGeral)}</p>`:''}`+
     (P.pecas&&P.pecas.length?`<table><tr><th>Peça</th><th>ID</th><th>Data</th></tr>${P.pecas.map(p=>`<tr><td>${esc(p.desc)}</td><td class="cnj">${esc(p.id)}</td><td>${esc(br(p.data))}</td></tr>`).join('')}</table>`:'')+
     (P.pendencias&&P.pendencias.length?`<div class="so-equipe"><p style="margin-top:8px"><b>Pendências do prontuário</b></p><ul>${P.pendencias.map(p=>`<li>${esc(p.desc)}</li>`).join('')}</ul></div>`:'')+
     `<p class="cmt-n" style="margin-top:6px">Editado por ${esc(it.prontuario.editadoPor)} em ${esc(br(it.prontuario.editadoEm))}</p></div>`}
@@ -915,7 +939,7 @@ function perfil(it,i){
   const mn=it.minuta?`<div class="mbar" id="mb-${it.uid}"><i class="nn">MINUTA</i><button type="button" class="b pri" data-min="${it.uid}">Abrir minuta</button><span class="k" id="mo-${it.uid}"></span></div><div class="doc hidden" id="d-${it.uid}"></div>`
     :`<div class="none nm" id="nm-${it.uid}"><span>Minuta não disponível no painel${e.situacao==='A minutar'?' (processo a minutar)':/Voto próprio|Sem modelo/.test(e.situacao||'')?' (voto próprio, sem acórdão-modelo)':''}.</span>${!MODO_REL&&!LOTE.virtual?`<button type="button" class="b pri so-equipe" data-criar-min="${it.uid}" title="Cria um rascunho: relatório montado do prontuário; voto e ementa a minutar pelo modelo-matriz"${LISTA.gestor?'':' disabled'}>Criar minuta</button>`:LOTE.virtual&&!MODO_REL?'<span class="k">Para criar a minuta, inclua o processo num lote.</span>':''}</div>`;
   return `<section class="cmt-q pf" id="p-${it.uid}" data-u="${it.uid}" style="border-top-color:${c}">
-   <h2><button type="button" class="b mn" data-min-pf aria-expanded="true" title="Minimizar">−</button><span class="pf-id">${temItem(it)?`<i class="nn">ITEM ${pad(it.item)}</i>`:''}<span class="cnj">${it.processo}</span>${it.tipo_caso?`<span class="tg tc" title="${esc(it.tipo_caso)}">${esc(it.tipo_caso)}</span>`:''}${it.resultado?`<span class="tg">${esc(it.resultado)}</span>`:''}${e.situacao?`<span class="tg so-equipe">${esc(e.situacao)}</span>`:''}${dsg(it)}</span>
+   <h2><button type="button" class="b mn" data-min-pf aria-expanded="true" title="Minimizar">−</button><span class="pf-id">${temItem(it)?`<i class="nn">ITEM ${pad(it.item)}</i>`:''}<span class="cnj">${it.processo}</span>${NV.sub||NV.assunto?`<span class="tg tc" title="${esc([NV.assunto,NV.sub].filter(Boolean).join(' › '))}">${esc(NV.sub||NV.assunto)}</span>`:''}${it.resultado?`<span class="tg">${esc(it.resultado)}</span>`:''}${e.situacao?`<span class="tg so-equipe">${esc(e.situacao)}</span>`:''}${dsg(it)}</span>
    <span class="nav">${it.minuta&&!MODO_REL?`<button type="button" class="b so-equipe" data-cmpit="${it.uid}" title="Abre o painel lateral comparando esta minuta">Comparar</button>`:''}<a class="b so-equipe" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Modus Operandi">Consulta ↗</a><span class="pn">${pv?`<button type="button" class="b" data-vai="${pv.uid}" title="Processo anterior">← ${rotCurto(pv)}</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">←</button>'}${nx?`<button type="button" class="b" data-vai="${nx.uid}" title="Próximo processo">${rotCurto(nx)} →</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">→</button>'}</span></span></h2>
    <div class="grid">${b}</div>${mn}</section>`;
 }
@@ -1048,6 +1072,7 @@ function filtra(){
   document.querySelectorAll('#mxb tr.r').forEach(r=>{r.classList.toggle('hidden',!vis.has(r.dataset.u));r.classList.toggle('hit',CX.hits.has(r.dataset.u))});
   document.querySelectorAll('#mxb tr.gh').forEach(r=>{const g=r.dataset.gh||null,n=ITENS.filter(i=>(i.grupo||null)===g&&okv(i)).length;r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&vis.has(i.uid)));const x=r.querySelector('.ghn');if(x)x.textContent=n+' processo'+(n>1?'s':'')});
   document.querySelectorAll('.pf').forEach(p=>p.classList.toggle('hidden',!vis.has(p.dataset.u)));
+  document.querySelectorAll('#mxb tr.gs').forEach(r=>{const g=r.dataset.gs||null,k=r.dataset.sk||'';r.classList.toggle('hidden',!ITENS.some(i=>(i.grupo||null)===g&&semAc(niveis(i).sub)===k&&vis.has(i.uid)))});
   document.querySelectorAll('#met [data-g]').forEach(d=>{const gs=d.dataset.g.split(',').map(g=>g||null),n=ITENS.filter(i=>gs.includes(i.grupo||null)&&okv(i)).length;d.querySelector('b').textContent=pad(d.classList.contains('dem')?new Set(ITENS.filter(i=>gs.includes(i.grupo||null)&&okv(i)).map(i=>i.grupo)).size:n);d.classList.toggle('hidden',!n)});
   const oc=VZ!==MODO&&VZ!=='tudo'?ITENS.filter(i=>!okv(i)).length:0, tot=ITENS.length-oc;
   $('#cnt').textContent=`${pad(vis.size)} de ${pad(tot)} processos`+(oc?` · ${oc} fora da visão ${VZ==='rel'?'do Relator':'da equipe'}`:'');
