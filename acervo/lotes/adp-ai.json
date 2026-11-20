@@ -9839,13 +9839,13 @@
    "exequente": "TOPOSAT ENGENHARIA LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Contrato Administrativo",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal · multa de contrato administrativo (crédito não tributário) · prescrição · transação por adesão",
+   "resultado": "Ato a proferir: decisão inicial (artigo 1.019 do CPC), com exame de eventual pedido de efeito suspensivo e intimação para contraminuta [VALIDAR pedidos]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Toposat Engenharia Ltda contra as decisões da 6ª Vara Federal de Campo Grande/MS (IDs 579180643 e 589274163 da execução fiscal 5003160-96.2022.4.03.6000) que rejeitaram a prescrição de multas contratuais inscritas em dívida ativa, com suspensão do prazo entre 31/10/2012 e 21/06/2021 pelo artigo 199, I, do Código Civil. A agravante sustenta a natureza não tributária do crédito, a inaplicabilidade do CTN e do Código Civil e a prescrição quinquenal do Decreto 20.910/1932 e da Lei 9.873/1999, contada do vencimento das multas em 30/12/2010.",
+   "peculiaridades": "Adesão à transação (Edital PGDAU 11/2025) antes do recurso, com alegação de que a prescrição pode ser discutida. Preparo regularizado pelo comprovante STN após duas intimações. Pedidos do agravo fora do texto extraído [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -9863,7 +9863,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 392687417 · \"Aguardando pagamento\": ID 392687415, 392687419, 388459859 · comprovante bancário: ID 388459861 · certidão sem custas: ID 385901721 · despacho/decisão sobre preparo: ID 390629061, 386369659 · valor R$ 128,52 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem não identificada na extração · Recursos ligados citados nos autos: 5000124-59.2026.4.03.0001 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem não identificada na extração · Recursos ligados citados nos autos: 5000124-59.2026.4.03.0001 · conferido em 20/11/2026",
+    "ato": "Decisão inicial (artigo 1.019 do CPC)",
+    "materia": "Execução fiscal de multa contratual; prescrição de crédito não tributário; efeitos da transação por adesão",
+    "origem": "5003160-96.2022.4.03.6000 (6ª Vara Federal de Campo Grande/MS)",
+    "decisao_agravada": "Decisões IDs 579180643 e 589274163 da origem, publicadas em 22/06/2026 segundo a agravante",
+    "recurso": "ID 385379897 · 10/07/2026",
+    "preparo": "Comprovante STN (ID 392687417, pago em 24/07/2026, R$ 128,52 [VALIDAR valor])",
+    "monocratica": "Não nesta fase",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -9884,6 +9892,95 @@
     "ultima_informacao": "Certidão · ID 385901721 · 13/07/2026",
     "ultima_movimentacao": "20/08/2026 15:19 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · multa de contrato administrativo (crédito não tributário) · prescrição · transação por adesão",
+   "especificidades": "Execução fiscal de R$ 3.068.514,53 por multas dos Contratos 62/2008 a 65/2008 com o MDA · A agravante aderiu à transação do Edital PGDAU 11/2025 em 06/05/2026 e sustenta que a confissão não impede discutir a prescrição (Tema 375/STJ) [VALIDAR interesse recursal] · Preparo em dobro comprovado pelo comprovante STN (ID 392687417, pago em 24/07/2026), após intimação específica (ID 390629061) · Texto extraído do agravo cobre cerca de 13 das 32 páginas: pedidos não lidos [VALIDAR pedido de efeito suspensivo] · Conclusos para decisão em 20/08/2026, sem contraminuta",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A União executa multas aplicadas à agravante em contratos de levantamento topográfico firmados com o MDA em 2008, vencidas em 30/12/2010. O juízo rejeitou a prescrição e, nos embargos de declaração, aplicou a suspensão do artigo 199, I, do Código Civil entre 31/10/2012 e 21/06/2021.",
+    "inicial": "Execução fiscal 5003160-96.2022.4.03.6000 da União (Fazenda Nacional), de R$ 3.068.514,53, por multas contratuais (6ª Vara Federal de Campo Grande/MS)",
+    "decisao_recorrida": "Decisão ID 579180643 e decisão integrativa ID 589274163 da origem: rejeição da prescrição, com aplicação do artigo 199, I, do Código Civil entre 31/10/2012 e 21/06/2021 [VALIDAR teor integral]",
+    "recurso": "Agravo ID 385379897 (10/07/2026): (1) a adesão à transação não impede discutir a prescrição (Tema 375/STJ; nulidade da cláusula de renúncia); (2) natureza não tributária do crédito, oriundo de multa contratual; (3) inaplicabilidade do CTN e do Código Civil; (4) prescrição quinquenal do Decreto 20.910/1932 e da Lei 9.873/1999 desde 30/12/2010.",
+    "resposta": "Não consta",
+    "parecer": "Não consta",
+    "outros": "Despacho ID 386369659 (16/07/2026): recolhimento em dobro. Despacho ID 390629061 (05/08/2026): comprovação pelo comprovante STN. Comprovante STN juntado em 19/08/2026 (ID 392687417).",
+    "representacao": "Agravante: advogados Gustavo Feitosa Beltrão (OAB/MS 12.491) e Eduardo Dias Freitas (OAB/MS 21.058-A) [VALIDAR procuração]. União: PFN.",
+    "preparo": "Tela \"aguardando pagamento\" (ID 388459859) e Pix do Banco do Brasil (ID 388459861); comprovante STN nº 2026/090029/0034035552, pago em 24/07/2026, UG 090029, código 18720-8 (ID 392687417)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · multa de contrato administrativo (crédito não tributário) · prescrição · transação por adesão",
+     "sintese": "A União executa multas aplicadas à agravante em contratos de levantamento topográfico firmados com o MDA em 2008, vencidas em 30/12/2010. O juízo rejeitou a prescrição e, nos embargos de declaração, aplicou a suspensão do artigo 199, I, do Código Civil entre 31/10/2012 e 21/06/2021.",
+     "questoes": "1) Interesse recursal após a adesão à transação; 2) prazo prescricional de multa de contrato administrativo inscrita em dívida ativa; 3) suspensão do prazo pelo artigo 199, I, do Código Civil.",
+     "rel": {
+      "razoes": "Agravo (ID 385379897): (1) a transação não impede discutir a prescrição; (2) natureza não tributária do crédito; (3) inaplicabilidade do CTN e do Código Civil; (4) prescrição quinquenal desde 30/12/2010.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "579180643",
+      "juizo": "6ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Rejeitou a prescrição; a decisão integrativa ID 589274163 aplicou o artigo 199, I, do Código Civil entre 31/10/2012 e 21/06/2021 [VALIDAR transcrição]."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise",
+      "id": "579180643",
+      "data": "2026-06-22"
+     },
+     "adm": {
+      "prot": "2026-07-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2026-06-22",
+      "req": "Interesse recursal",
+      "reqObs": "Adesão à transação do Edital PGDAU 11/2025 em 06/05/2026"
+     },
+     "recursos": [
+      {
+       "parte": "Toposat Engenharia Ltda",
+       "tipo": "Agravo de instrumento",
+       "id": "385379897",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "385379897",
+       "data": "2026-07-10"
+      },
+      {
+       "desc": "Despacho de recolhimento em dobro",
+       "id": "386369659",
+       "data": "2026-07-16"
+      },
+      {
+       "desc": "Despacho do comprovante STN",
+       "id": "390629061",
+       "data": "2026-08-05"
+      },
+      {
+       "desc": "Comprovante STN",
+       "id": "392687417",
+       "data": "2026-08-19"
+      }
+     ],
+     "pendencias": "Ler os pedidos do agravo (texto extraído incompleto); conferir a procuração",
+     "especificidades": "Execução fiscal de R$ 3.068.514,53 por multas dos Contratos 62/2008 a 65/2008 com o MDA · A agravante aderiu à transação do Edital PGDAU 11/2025 em 06/05/2026 e sustenta que a confissão não impede discutir a prescrição (Tema 375/STJ) [VALIDAR interesse recursal] · Preparo em dobro comprovado pelo comprovante STN (ID 392687417, pago em 24/07/2026), após intimação específica (ID 390629061) · Texto extraído do agravo cobre cerca de 13 das 32 páginas: pedidos não lidos [VALIDAR pedido de efeito suspensivo] · Conclusos para decisão em 20/08/2026, sem contraminuta"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Comprovado",
+     "prelim": "Preliminar de ofício",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgSit": "Pendente · não apreciada"
+    }
    }
   },
   {
