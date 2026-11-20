@@ -12050,13 +12050,13 @@
    "exequente": "CENTRO OESTE COMERCIO DE LUBRIFICANTES SA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Contribuição sobre a folha de salários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal · incidente de desconsideração da personalidade jurídica · grupo econômico de fato e confusão patrimonial (artigo 50 do Código Civil) · inclusão de empresa e sócios no polo passivo",
+   "resultado": "Ato a proferir: embargos de declaração (ID 383848446) contra a decisão que indeferiu a tutela recursal e julgamento do agravo de instrumento (voto); apreciar o pedido de segredo de justiça (ID 387183510)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Centro Oeste Comércio de Lubrificantes S.A., Tabajara Ribeiro Pinto e Ubiratan Ribeiro Pinto contra a decisão da 6ª Vara Federal de Campo Grande que, no incidente de desconsideração da personalidade jurídica 5004523-16.2025.4.03.6000, os incluiu no polo passivo das execuções fiscais movidas contra T & M Transporte de Cargas, por grupo econômico de fato e confusão patrimonial. Os agravantes sustentam a ausência dos pressupostos do artigo 50 do Código Civil e que a mera existência de grupo econômico não autoriza a desconsideração.",
+   "peculiaridades": "Embargos de declaração pendentes contra o indeferimento da tutela recursal. Pedido de segredo de justiça. Extração sem o agravo e a decisão agravada [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -12079,7 +12079,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Não localizado · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
+    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026",
+    "ato": "Embargos de declaração pendentes e julgamento do agravo de instrumento",
+    "materia": "Execução fiscal: desconsideração da personalidade jurídica; grupo econômico; confusão patrimonial",
+    "origem": "6ª Vara Federal de Campo Grande · IDPJ 5004523-16.2025.4.03.6000",
+    "decisao_agravada": "Decisão que acolheu o IDPJ [VALIDAR ID]",
+    "recurso": "[VALIDAR ID] · 2026",
+    "preparo": "Não localizado [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -12100,6 +12108,104 @@
     "ultima_informacao": "Certidão · ID 381227480 · 19/06/2026",
     "ultima_movimentacao": "20/07/2026 17:33 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · incidente de desconsideração da personalidade jurídica · grupo econômico de fato e confusão patrimonial (artigo 50 do Código Civil) · inclusão de empresa e sócios no polo passivo",
+   "especificidades": "Embargos de declaração dos agravantes (ID 383848446, 01/07/2026) contra a decisão que indeferiu a tutela recursal (ID 381466084): pendentes · Pedido da União de segredo de justiça (ID 387183510); partes já abreviadas no PJe: usar iniciais na minuta [VALIDAR] · Extração incompleta: faltam o agravo, a decisão agravada e os documentos anteriores a 18/06/2026 (decisão de redistribuição ID 380952965) [VALIDAR] · Preparo não localizado [VALIDAR] · Origem: IDPJ 5004523-16.2025.4.03.6000, 6ª Vara Federal de Campo Grande, referente à execução fiscal 5009963-32.2021.4.03.6000 [VALIDAR número] · Interessada: T & M Transporte de Cargas",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Em incidente de desconsideração, o juízo reconheceu grupo econômico de fato entre a executada T & M Transporte de Cargas e a Centro Oeste Comércio de Lubrificantes, sob direção comum dos irmãos Tabajara e Ubiratan Ribeiro Pinto, e os incluiu no polo passivo das execuções fiscais.",
+    "inicial": "Incidente de desconsideração da personalidade jurídica 5004523-16.2025.4.03.6000 (valor da causa R$ 1.893.484,28), proposto pela União na 6ª Vara Federal de Campo Grande",
+    "decisao_recorrida": "Decisão que acolheu o incidente e incluiu os agravantes no polo passivo das execuções fiscais, por grupo econômico de fato e confusão patrimonial [VALIDAR ID e data]",
+    "recurso": "Agravo [VALIDAR ID e data]: (1) ausência de desvio de finalidade ou confusão patrimonial (artigo 50 do Código Civil); (2) grupo econômico não autoriza, por si, a desconsideração (artigo 50, § 4º); e (3) tutela recursal para a exclusão do polo passivo.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 387183508 (18/07/2026): unidade gerencial, atividades complementares e confusão patrimonial demonstradas; junta a inicial do IDPJ e documentos (IDs 387183509 a 387194945).",
+    "parecer": "Não consta",
+    "outros": "Certidão de redistribuição ID 381227480 (18/06/2026). Decisão ID 381466084 (20/06/2026): indeferiu a antecipação da tutela recursal. Embargos de declaração ID 383848446 (01/07/2026): omissão e falta de fundamentação. Pedido de segredo de justiça ID 387183510.",
+    "representacao": "Agravantes: advogados constituídos. Agravada: Procuradoria-Geral da Fazenda Nacional.",
+    "preparo": "Não localizado na extração [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · incidente de desconsideração da personalidade jurídica · grupo econômico de fato e confusão patrimonial (artigo 50 do Código Civil) · inclusão de empresa e sócios no polo passivo",
+     "sintese": "Em incidente de desconsideração, o juízo reconheceu grupo econômico de fato entre a executada T & M Transporte de Cargas e a Centro Oeste Comércio de Lubrificantes, sob direção comum dos irmãos Tabajara e Ubiratan Ribeiro Pinto, e os incluiu no polo passivo das execuções fiscais.",
+     "questoes": "1) Embargos de declaração contra o indeferimento da tutela recursal; 2) segredo de justiça; 3) presença dos pressupostos da desconsideração (artigo 50 do Código Civil) para incluir os agravantes no polo passivo.",
+     "rel": {
+      "razoes": "Agravo: (1) ausência de desvio de finalidade ou confusão patrimonial; (2) grupo econômico não basta; e (3) tutela recursal.",
+      "contrarrazoes": "União (ID 387183508): grupo econômico de fato e confusão patrimonial demonstrados."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "[VALIDAR]",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Acolheu o incidente de desconsideração e incluiu os agravantes no polo passivo das execuções fiscais."
+     },
+     "ai": {
+      "hip": "Intervenção de terceiros",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Centro Oeste Comércio de Lubrificantes S.A. e outros",
+       "tipo": "Agravo de instrumento",
+       "id": "[VALIDAR]",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Centro Oeste Comércio de Lubrificantes S.A. e outros",
+       "tipo": "Embargos de declaração",
+       "id": "383848446",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Certidão de redistribuição",
+       "id": "381227480",
+       "data": "2026-06-18"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "381466084",
+       "data": "2026-06-20"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "383848446",
+       "data": "2026-07-01"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "387183508",
+       "data": "2026-07-18"
+      },
+      {
+       "desc": "Pedido de segredo de justiça",
+       "id": "387183510",
+       "data": "2026-07-18"
+      }
+     ],
+     "pendencias": "Extrair o agravo, a decisão agravada e o preparo; julgar os embargos de declaração; apreciar o segredo de justiça",
+     "especificidades": "Embargos de declaração dos agravantes (ID 383848446, 01/07/2026) contra a decisão que indeferiu a tutela recursal (ID 381466084): pendentes · Pedido da União de segredo de justiça (ID 387183510); partes já abreviadas no PJe: usar iniciais na minuta [VALIDAR] · Extração incompleta: faltam o agravo, a decisão agravada e os documentos anteriores a 18/06/2026 (decisão de redistribuição ID 380952965) [VALIDAR] · Preparo não localizado [VALIDAR] · Origem: IDPJ 5004523-16.2025.4.03.6000, 6ª Vara Federal de Campo Grande, referente à execução fiscal 5009963-32.2021.4.03.6000 [VALIDAR número] · Interessada: T & M Transporte de Cargas"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-20"
+    }
    }
   },
   {
