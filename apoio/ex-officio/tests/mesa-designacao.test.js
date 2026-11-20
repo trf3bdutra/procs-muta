@@ -7,8 +7,7 @@ test('Mesa de designação: página válida, publicada e ligada ao Caput',()=>{
   assert.ok(pag.includes('<script id="dados" type="application/json">{}</script>'),'cópia do repositório sem dados embutidos');
   [...pag.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((m,i)=>new vm.Script(m[1],{filename:'mesa-'+i+'.js'}));
   assert.ok(pag.includes('aplicarDesignacao(D.sessao.id,lista)'),'aplica pelo motor');
-  assert.ok(pag.includes("MOD='competencia'"),'modo padrão por regras e competência');
-  assert.match(pag,/competencia:\{pen:0\.6/,'carga só desempata no modo padrão');
+  assert.ok(pag.includes('var K0={pen:0.6,lote:2,comp:1.5}')&&!pag.includes('data-mo='),'um critério só (competência); sem “Equilibrar carga”');
   assert.ok(read('.github/workflows/vercel-monitor.yml').includes('cp monitor/designacao/index.html site/public/caput/designacao/index.html'));
   const caput=read('monitor/triagem/index.html');
   for(const x of ["'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
@@ -26,7 +25,6 @@ test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
   const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(m.includes('eventuais: S.equipe.filter(function (m) { return m.minutaEventual && !faz(m, \'d\'); })'));
   assert.ok(m.includes("'minutaEventual'].indexOf(campo)"));
-  assert.ok(read('monitor/triagem/index.html').includes('Minutam só por exceção'));
   const pag=read('monitor/designacao/index.html');
   assert.ok(pag.includes('optsEx(k,v)')&&pag.includes('var EV=EQ.filter'));
 });
@@ -47,7 +45,7 @@ test('Mesa: designação inicial e seleção em lote',()=>{
   assert.ok(!pag.includes('Mexer pouco')&&!pag.includes('trocas de minutante'),'sem vocabulário de troca');
   assert.ok(pag.includes("var g=k==='d'?x.d:x.c;if(g)return g;"),'o gravado fica; a proposta preenche o resto');
   assert.ok(!pag.includes("why.push(['','designação atual'])"),'gravado não pesa na proposta');
-  for(const x of ['data-a="proposta"','Refazer tudo pela proposta','data-ck="','data-ckg="','data-lote="d"','data-lote="c"','sel-proposta','sel-limpar'])assert.ok(pag.includes(x),x);
+  for(const x of ['data-a="proposta"','Substituir também o já gravado','data-ck="','data-ckg="','data-lote="d"','data-lote="c"','sel-proposta','sel-limpar'])assert.ok(pag.includes(x),x);
 });
 test('Pautas: cabeçalho compacto ao lado do painel e etapa 2 pela numeração do PDF',()=>{
   const c=read('monitor/triagem/index.html');
@@ -89,7 +87,7 @@ test('Marcos editáveis no cartão com salvar, julgadores por alcance, calendár
   assert.ok(m.includes("if (al === 'casos')")&&m.includes("if (al === 'impedimento')"),'motor resolve o alcance');
   assert.ok(read('monitor/assets/js/regras-gerais.js').includes('function vSesJulg()'),'calendário com sessões e julgadores');
   const pag=read('monitor/designacao/index.html');
-  for(const x of ['data-grtodos="1"','function aberto(k,n)',"if(EMBED)document.body.classList.add('emb');",'Lendo o histórico da equipe'])assert.ok(pag.includes(x),x);
+  for(const x of ['data-grtodos="1"','function aberto(k,n)',"if(EMBED){document.body.classList.add('emb');",'Lendo o histórico da equipe'])assert.ok(pag.includes(x),x);
 });
 test('Cartão da sessão: um Salvar alterações para marcos e julgadores e Publicar alterações; etapa 5 Publicação',()=>{
   const c=read('monitor/triagem/index.html');
@@ -112,4 +110,11 @@ test('Nova sessão: convocados e substituições já na criação; começa na et
   assert.ok(cap.includes('substituicoes: nv.subs.filter((sb) => sb.sai && sb.entra)'),'grava as substituições ao criar');
   assert.ok(cap.includes('est.etapa = pdf ? 2 : 1'),'etapa inicial');
   assert.ok(cap.includes("desigMemo(ss, 'R')")&&cap.includes("desigMemo(ss, 'Z')"),'designação memorizada entre renders');
+});
+
+test('Etapa 4: a mesa é o cabeçalho da etapa (título, Aplicar, Próximo); Caput sem lista simples duplicada',()=>{
+  const pag=read('monitor/designacao/index.html'),cap=read('monitor/triagem/index.html');
+  assert.ok(pag.includes('4 · Designação de redator e corretor')&&pag.includes('id="b-aplicar-h"')&&pag.includes("tipo:'cmt:mesa-etapa',n:5"),'cabeçalho da etapa na mesa');
+  assert.ok(pag.includes('>Atualizar proposta</button>')&&!pag.includes('>Recalcular<'),'Atualizar proposta');
+  assert.ok(cap.includes("t === 'cmt:mesa-etapa'")&&!cap.includes('Lista simples por regra, sem a mesa')&&cap.includes('cwe-st4'),'Caput sem duplicação');
 });

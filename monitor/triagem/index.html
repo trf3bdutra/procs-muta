@@ -2408,42 +2408,15 @@ function portaToken() { return new Promise((fim) => {
   function etapa3b(ss, d, tabs) {
     const Z = desigMemo(ss, 'Z');
     if (!Z) return `<section class="cwe-st"><h2>4 · Designação de redator e corretor</h2>${tabs}<p class="cwe-nota">Designação indisponível: motor não carregado.</p></section>`;
-    const Ls = Z.linhas, esc = est.dsg;
-    const vD = (p) => esc[A.digits(p.cnj)]?.d ?? (p.servidor || p.sugD?.nome || ''), vC = (p) => esc[A.digits(p.cnj)]?.c ?? (p.corretor || p.sugC?.nome || '');
-    const porRegD = Ls.filter((p) => p.sugD).length, porRegC = Ls.filter((p) => p.sugC).length;
-    const brD = Ls.filter((p) => !p.servidor && !p.sugD).length, brC = Ls.filter((p) => !p.corretor && !p.sugC).length;
-    const aus = Z.minutantes.concat(Z.corretores).filter((m) => m.ausente).map((m) => m.nome);
+    const Ls = Z.linhas;
     const semAss = new Map(); Ls.filter((p) => (!p.servidor && !p.sugD) || (!p.corretor && !p.sugC)).forEach((p) => { const k = p.assunto || '—'; const o = semAss.get(k) || { n: 0, d: 0, c: 0 }; o.n++; if (!p.servidor && !p.sugD) o.d++; if (!p.corretor && !p.sugC) o.c++; semAss.set(k, o); });
     const semA = [...semAss.entries()].sort((a, b) => b[1].n - a[1].n).slice(0, 8);
-    const quadro = (t, P, kind) => { const mx = Math.max(1, ...P.map((m) => m.atual + Ls.filter((p) => (kind === 'd' ? p.sugD : p.sugC)?.nome === m.nome).length));
-      return `<div class="q"><div class="h"><span class="cwe-k">${e(t)}</span><small>só informação · já designados <i class="a"></i> · por regra agora <i class="b"></i></small></div>${P.map((m) => { const nv = Ls.filter((p) => (kind === 'd' ? p.sugD : p.sugC)?.nome === m.nome).length;
-        return `<div class="p ${m.ausente ? 'aus' : ''}"><b>${e(m.nome)}</b><span class="cwe-br"><span class="a" style="width:${100 * m.atual / mx}%"></span><span class="b" style="width:${100 * nv / mx}%"></span></span><span>${m.atual}${nv ? ' + ' + nv : ''}${m.ausente ? ' · ausente' : ''}</span></div>`; }).join('')}</div>`; };
-    const F = [['todos', 'Todos'], ['regra', 'Por regra agora'], ['branco', 'Em branco'], ['feitos', 'Já designados']];
-    const fl = est.desF;
-    const L = Ls.filter((p) => fl === 'todos' ? true : fl === 'regra' ? (p.sugD || p.sugC) : fl === 'branco' ? ((!p.servidor && !p.sugD) || (!p.corretor && !p.sugC)) : (p.servidor && p.corretor));
-    const vis = L.slice(0, est.desTake);
-    const sel = (kind, p) => { const atual = kind === 'd' ? p.servidor : p.corretor, sug = kind === 'd' ? p.sugD : p.sugC, P = kind === 'd' ? Z.minutantes : Z.corretores, v = kind === 'd' ? vD(p) : vC(p);
-      /* sempre editável: quem já está designado aparece selecionado e pode ser trocado */
-      const nomes = P.map((m) => m.nome), exc = kind === 'd' ? (Z.eventuais || []).map((m) => m.nome).filter((n) => !nomes.includes(n)) : []; if (atual && !nomes.includes(atual) && !exc.includes(atual)) nomes.unshift(atual);
-      const cls = atual && v === atual ? 'cur' : v ? (sug && v === sug.nome ? 'reg' : 'man') : 'vz';
-      const nota = atual && v === atual ? ((kind === 'd' ? p.porD : p.porC) || 'já designado') : atual && v !== atual ? 'troca: era ' + atual : sug && v === sug.nome ? 'por regra: ' + sug.por : v ? 'escolha manual' : 'nenhuma regra casa';
-      return `<select data-cwe-esc="${kind}" data-p="${e(A.digits(p.cnj))}" class="${cls}"><option value="">— escolher —</option>${nomes.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}${exc.length ? `<optgroup label="Minutam só por exceção">${exc.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}</optgroup>` : ''}</select><small>${e(nota)}</small>`; };
-    const muda = (p) => { const d = vD(p), c = vC(p); return (d && d !== (p.servidor || '')) || (c && c !== (p.corretor || '')); };
-    const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && muda(p)).length;
-    return `<section class="cwe-st"><h2>4 · Designação de redator e corretor</h2>${tabs}
-
-      <div class="cwe-mesa-bar"><span class="sp"></span><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicação →</button></div>
+    /* a mesa traz o cabeçalho da etapa (título, período, indicadores, Aplicar e Próximo); abaixo, as regras e os assuntos sem regra */
+    return `<section class="cwe-st cwe-st4">
       <div class="cwe-mesa-slot" data-s="${e(ss.id)}"></div>
-      <div class="cwe-kpis cwe-k4">${kpi(Ls.length, 'Processos na pauta', `${Ls.filter((p) => p.servidor).length} com minutante · ${Ls.filter((p) => p.corretor).length} com corretor`)}${kpi(`${porRegD} · ${porRegC}`, 'Preenchidos por regra', 'minutantes · corretores')}${kpi(`${brD} · ${brC}`, 'Sem regra que case', 'minutantes · corretores, a escolher', brD + brC ? 'a' : '')}${kpi(aus.length, 'Ausências no período', aus.length ? aus.join(', ') : `nenhuma cadastrada entre ${A.br(Z.periodo.de).slice(0, 5)} e ${A.br(Z.periodo.ate).slice(0, 5)}`)}</div>
       ${painelRegras(ss, Z)}
       <div class="cwe-2eq cwe-1eq"><section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
-          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
-      <details class="cwe-old" ${est.listaAb ? 'open' : ''}><summary data-cwe="des-lista">Lista simples por regra, sem a mesa</summary>
-      <section class="cwe-carga">${quadro('MINUTA · EQUIPE', Z.minutantes, 'd')}${quadro('CORREÇÃO · ASSESSORIA', Z.corretores, 'c')}</section>
-      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a aplicar</b> · preenchimentos e trocas marcados</span><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicação →</button></div>
-        ${vis.map((p) => { const dg = A.digits(p.cnj); return `<article class="cwe-pc"><div class="t">${ck('dsg', dg)}<span class="it">item ${e(p.item || '—')}</span><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(p.cnj))}</button><span class="as">${e(p.assunto || '—')} · ${e(p.recurso || p.classe || '')} · ${e(p.secao || '')}</span><span class="ct">${e(AP_T[p.tipo] || p.tipo || '1º julgamento')}</span></div>
-          <div class="ds"><div><span>MINUTANTE</span>${sel('d', p)}</div><div><span>CORRETOR</span>${sel('c', p)}</div></div></article>`; }).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}
-        <div class="cwe-mostra"><span>mostrando ${vis.length} de ${L.length}</span>${L.length > vis.length ? `<button type="button" data-cwe="des-mais">Mostrar mais 50</button><button type="button" data-cwe="des-todos">Mostrar todos</button>` : ''}</div></div></details></section>`;
+          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div></section>`;
   }
 
   function etapa4(ss, d) {
@@ -2593,6 +2566,7 @@ function portaToken() { return new Promise((fim) => {
   W.addEventListener('message', (ev) => { if (ev.origin !== location.origin) return; const t = ev.data?.tipo;
     if (t === 'cmt:mesa-tela') mesaTela();
     else if (t === 'cmt:mesa-fechar') { if (MESA.full) mesaTela(false); }
+    else if (t === 'cmt:mesa-etapa') { est.etapa = +ev.data.n || 5; A?.render?.(); W.scrollTo(0, 0); }
     else if (t === 'cmt:mesa-aplicada') { est.dsg = {}; A?.msg((ev.data.n || 0) + ' processo(s) designados pela mesa. Gravando no procs-muta…'); } });
   W.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && MESA.full) mesaTela(false); });
 

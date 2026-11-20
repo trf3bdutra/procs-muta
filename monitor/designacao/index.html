@@ -122,7 +122,10 @@ body.emb .seg,body.emb .seg button,body.emb #f-as,body.emb .btn,body.emb .ds sel
 body.emb .seg button[aria-pressed="true"],body.emb .btn.pri{background:#235a55;border-color:#235a55;color:#fff}
 body.emb .foot{background:#fbfaf5;border-top:2px solid #235a55;box-shadow:none}
 body.emb .bh{background:#fbfaf5}
-body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;padding-bottom:10px}
+body.emb .top .k{display:none}body.emb .top{position:sticky;top:0;z-index:6;background:#fbfaf5;border-bottom:2px solid #235a55;padding:10px 4px;align-items:center}
+body.emb .top h1{font:700 18px/1.2 Figtree,'Segoe UI',sans-serif;letter-spacing:-.02em}body.emb .top .sub{font-size:12.5px}
+.hac{display:flex;gap:14px;align-items:center;margin-left:auto}.lk2{border:0;background:none;color:#805b18;font:600 13px Figtree,'Segoe UI',sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap}
+body.emb #b-aplicar{display:none}body.emb .kp{grid-template-columns:repeat(5,1fr)}
 .carregando{padding:24px 6px;color:var(--mut)}
 .tg-gr{border:0;background:transparent;font-size:13px;color:var(--mut);cursor:pointer;padding:0 4px;margin-right:2px}
 .gr-acoes{display:flex;gap:12px;align-items:center;justify-content:flex-end;font-size:12.5px;color:var(--mut);margin:0 0 8px}.gr-acoes button{border:0;background:none;color:var(--tx);text-decoration:underline;cursor:pointer;font:inherit}
@@ -138,6 +141,7 @@ body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;pa
     <span class="du" id="p-du"></span>
     <button type="button" class="btn" data-a="fechar" id="b-fechar" hidden>Fechar</button>
   </div>
+  <div class="hac" id="hac" hidden><button type="button" class="btn pri" data-a="copiar" id="b-aplicar-h" title="Grava na pauta o que mudou em relação ao que já estava designado">Aplicar à pauta</button><button type="button" class="lk2" data-a="proximo">Próximo: publicação →</button></div>
 </header>
 <div class="alertas" id="alertas"></div>
 <div class="lay">
@@ -158,11 +162,7 @@ body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;pa
       </div>
       <label for="busca" hidden>Buscar</label><input id="busca" type="search" placeholder="Processo, assunto ou pessoa">
       <select id="f-as" aria-label="Filtrar por assunto"><option value="">Todos os assuntos</option></select>
-      <div class="seg" role="group" aria-label="Prioridade da proposta">
-        <button type="button" data-mo="competencia" aria-pressed="true" title="Regra do gabinete, continuidade (ED e AgInt), especialidade, histórico e lote. A carga só é apontada.">Regras e competência</button>
-        <button type="button" data-mo="equilibrio" aria-pressed="false" title="Opcional: redistribui pela meta de cada um">Equilibrar carga</button>
-      </div>
-      <button type="button" class="btn" data-a="recalc" title="Recalcula a proposta com o período e as ausências atuais; mantém suas escolhas manuais">Recalcular</button>
+      <button type="button" class="btn" data-a="recalc" title="Refaz a proposta com o período, as ausências e as regras atuais; mantém o que você escolheu à mão">Atualizar proposta</button>
       <div class="seg ag" role="group" aria-label="Agrupar por">
         <span class="agl">Agrupar por</span>
         <button type="button" data-ag="bloco" aria-pressed="true" title="Lotes, ED e AgInt, e os demais por seção">Lote e seção</button>
@@ -183,7 +183,7 @@ body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;pa
   <span class="r" id="f-alt" hidden><b id="f-ct">0</b> alterados em relação ao gravado</span>
   <span class="sp"></span>
   <button type="button" class="btn" data-a="manter" title="Descarta o que você mudou nesta mesa">Desfazer alterações</button>
-  <button type="button" class="btn" data-a="proposta" hidden title="Substitui também o que já estava gravado na pauta pela proposta da mesa">Refazer tudo pela proposta</button>
+  <button type="button" class="btn" data-a="proposta" hidden title="Põe a proposta da mesa também nos processos que já tinham designação gravada">Substituir também o já gravado</button>
   <button type="button" class="btn pri" data-a="copiar" id="b-aplicar">Copiar lista para aplicar</button>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -243,7 +243,7 @@ body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;pa
   /* embed=1: dentro de Pautas › Designação; o botão alterna a tela cheia */
   var EMBED=new URLSearchParams(location.search).get('embed')==='1';
   /* dentro do Caput, o cartão da sessão já mostra título e marcos: a mesa não os repete */
-  if(EMBED)document.body.classList.add('emb');
+  if(EMBED){document.body.classList.add('emb');document.getElementById('tit').textContent='4 · Designação de redator e corretor';document.getElementById('hac').hidden=!VIVO;}
   if(VIVO){document.getElementById('b-fechar').hidden=EMBED;document.getElementById('b-aplicar').textContent='Aplicar à pauta';}
   window.addEventListener('message',function(ev){if(ev.origin!==location.origin||!ev.data)return;if(ev.data.tipo==='cmt:mesa-modo')document.getElementById('b-fechar').textContent=ev.data.full?'Sair da tela cheia':'Tela cheia';});
   document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&VIVO){try{window.parent.postMessage({tipo:'cmt:mesa-fechar'},location.origin);}catch(er){}}});
@@ -270,9 +270,10 @@ body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;pa
   /* proposta: atribuição gulosa com pontuação explicada e penalidade de carga */
   var PROP={}, ESC={}, CAPD={}, CAPC={};
   /* a carga só desempata (pen baixo) nos modos padrão: é apontada, não obrigatória; “Equilibrar carga” é opcional */
-  var MOD='competencia', PESOS={competencia:{pen:0.6,lote:2,comp:1.5},equilibrio:{pen:5,lote:2,comp:1}};
+  /* um critério só: regra, continuidade, especialidade, histórico e lote; a carga só desempata e é apontada */
+  var K0={pen:0.6,lote:2,comp:1.5};
   function propor(){
-    var du=diasUteis(de,ate), K=PESOS[MOD]; PROP={};
+    var du=diasUteis(de,ate), K=K0; PROP={};
     var LD={},LC={},LT={},AS={}; PD.forEach(function(m){CAPD[m.nome]=AUS[m.nome]?0:meta(m.nome)*du;LD[m.nome]=0;});
     var pres=PC.filter(function(m){return !AUS[m.nome];}); var cota=Math.ceil(IT.length/Math.max(1,pres.length)*1.05);
     PC.forEach(function(m){CAPC[m.nome]=AUS[m.nome]?0:cota;LC[m.nome]=0;});
@@ -331,8 +332,8 @@ body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;pa
   function topo(){var du=diasUteis(de,ate),k=contar(),tot=IT.reduce(function(a,x){return a+peso(x);},0),cap=PD.reduce(function(a,m){return a+(CAPD[m.nome]||0);},0);
     document.getElementById('p-du').textContent=du+' dias úteis';
     document.getElementById('sub').textContent=IT.length+' processos · '+nf(tot)+' pontos de minuta · '+IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).length+' ED/AgInt · '+IT.filter(function(x){return x.t==='META';}).length+' META · '+k.nv+' a designar';
-    document.getElementById('kp').innerHTML=[[nf(tot)+' / '+nf(cap),'pontos de minuta / capacidade da equipe'],[k.nv,'processos a designar'],[k.ok+' de '+IT.length,'com minutante e corretor ao aplicar'],[IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).filter(function(x){return fin(x,'d')===x.od;}).length+' de '+IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).length,'ED e AgInt com quem minutou o acórdão']].map(function(v){return '<div><b>'+esc(v[0])+'</b><span>'+esc(v[1])+'</span></div>';}).join('');
-    document.getElementById('f-d').textContent=k.nv;document.getElementById('f-cn').textContent=k.ok;document.getElementById('f-ct').textContent=k.alt;document.getElementById('f-alt').hidden=!k.alt;document.querySelector('[data-a="proposta"]').hidden=!k.grav;
+    document.getElementById('kp').innerHTML=[[nf(tot)+' / '+nf(cap),'pontos de minuta / capacidade da equipe'],[k.nv,'processos a designar'],[k.ok+' de '+IT.length,'com minutante e corretor ao aplicar'],[IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).filter(function(x){return fin(x,'d')===x.od;}).length+' de '+IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).length,'ED e AgInt com quem minutou o acórdão']].concat(EMBED?[[Object.keys(AUS).filter(function(n){return AUS[n];}).length,(function(L){return L.length?'ausente(s): '+L.join(', '):'ausências no período';})(Object.keys(AUS).filter(function(n){return AUS[n];}))]]:[]).map(function(v){return '<div><b>'+esc(v[0])+'</b><span>'+esc(v[1])+'</span></div>';}).join('');
+    var nAp=IT.filter(function(x){return fin(x,'d')!==x.d||fin(x,'c')!==x.c;}).length,bh=document.getElementById('b-aplicar-h');if(bh){bh.textContent='Aplicar à pauta'+(nAp?' ('+nAp+')':'');bh.disabled=!nAp;}document.getElementById('f-d').textContent=k.nv;document.getElementById('f-cn').textContent=k.ok;document.getElementById('f-ct').textContent=k.alt;document.getElementById('f-alt').hidden=!k.alt;document.querySelector('[data-a="proposta"]').hidden=!k.grav;
     var al=[],F=D.sessao.fases||{}; if(!EMBED&&F.inicio&&F.minutas&&F.inicio>F.minutas)al.push(['er','Marcos invertidos na sessão:','Início '+br(F.inicio)+' depois da Entrega '+br(F.minutas)+'. O período acima usa a entrega pela regra de liberação; corrija em Editar marcos.']);
     var acima=PD.filter(function(m){var v=0;IT.forEach(function(x){if(fin(x,'d')===m.nome)v+=peso(x);});return CAPD[m.nome]&&v>CAPD[m.nome];}).map(function(m){return m.nome;});
     if(acima.length)al.push(['av','Acima da capacidade no período:',acima.join(', ')+'. É só um aviso: a designação não é bloqueada.']);
@@ -410,21 +411,21 @@ body.emb .top .k,body.emb .top h1{display:none}body.emb .top{padding-top:10px;pa
   (function(){var C={},R={};IT.forEach(function(x){var k=N(x.as);C[k]=(C[k]||0)+1;if(!R[k])R[k]=x.as||'sem assunto';});var sel=document.getElementById('f-as');
     sel.innerHTML='<option value="">Todos os assuntos ('+IT.length+')</option>'+Object.keys(C).sort(function(a,b){return C[b]-C[a]||R[a].localeCompare(R[b]);}).map(function(k){return '<option value="'+esc(k)+'">'+esc(R[k])+' ('+C[k]+')</option>';}).join('');
     sel.addEventListener('change',function(){FASS=sel.value;ABERTO={};blocos();selbar();});})();
-  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-mo],[data-ag],[data-gr],[data-grtodos]');if(!t)return;
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-ag],[data-gr],[data-grtodos]');if(!t)return;
     if(t.dataset.gr!=null){var kg=t.dataset.gr,G0={};IT.forEach(function(x){G0[grupo(x)]=1;});ABRE[AG+'|'+kg]=!aberto(kg,Object.keys(G0).length);blocos();return;}
     if(t.dataset.grtodos!=null){var on=t.dataset.grtodos==='1';IT.forEach(function(x){ABRE[AG+'|'+grupo(x)]=on;});blocos();return;}
     if(t.dataset.ag){AG=t.dataset.ag;ABERTO={};document.querySelectorAll('[data-ag]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
-    if(t.dataset.mo){MOD=t.dataset.mo;document.querySelectorAll('[data-mo]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});propor();tudo();toast('Proposta recalculada: '+t.textContent+'.');return;}
     if(t.dataset.f){FIL=t.dataset.f;document.querySelectorAll('[data-f]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.mais){ABERTO[t.dataset.mais]=true;blocos();return;}
     var a=t.dataset.a;
-    if(a==='recalc'){propor();tudo();toast('Proposta recalculada; suas escolhas manuais ficaram.');}
+    if(a==='recalc'){propor();tudo();toast('Proposta atualizada; suas escolhas manuais ficaram.');}
     if(a==='manter'){ESC={};tudo();toast('Alterações desfeitas.');}
     if(a==='proposta'){IT.forEach(function(x){var p=PROP[x.i]||{};ESC[x.i]={d:p.d||'',c:p.c||''};});tudo();toast('Tudo pela proposta da mesa, inclusive o que já estava gravado.');}
     if(a==='sel-manter'){Object.keys(SEL).forEach(function(i){delete ESC[i];});tudo();toast(nSel()+' selecionado(s): alterações desfeitas.');}
     if(a==='sel-proposta'){IT.forEach(function(x){if(SEL[x.i]){var p=PROP[x.i]||{};ESC[x.i]={d:p.d||'',c:p.c||''};}});tudo();toast(nSel()+' selecionado(s) pela proposta da mesa.');}
     if(a==='sel-todos'){IT.filter(passa).forEach(function(x){SEL[x.i]=true;});blocos();selbar();}
     if(a==='sel-limpar'){SEL={};blocos();selbar();}
+    if(a==='proximo'){try{window.parent.postMessage({tipo:'cmt:mesa-etapa',n:5},location.origin);}catch(er){}return;}
     if(a==='fechar'){try{window.parent.postMessage({tipo:EMBED?'cmt:mesa-tela':'cmt:mesa-fechar'},location.origin);}catch(er){}return;}
     if(a==='copiar'&&VIVO){var M=IT.filter(function(x){return fin(x,'d')!==x.d||fin(x,'c')!==x.c;});
       if(!M.length){toast('Nada mudou em relação à designação atual.');return;}
