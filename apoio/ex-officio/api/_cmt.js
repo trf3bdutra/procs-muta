@@ -249,7 +249,8 @@ async function painel(req, res, u) {
     else if (i.mono && i.dataCorrecao && !i.dataLiberacao) assinar.liberacao.push(Object.assign({ desde: i.dataCorrecao }, base));
     if (c.urgTipo && !/^Apreciada/.test(String(c.urgSit || ''))) urgencias.push(Object.assign({
       tipo: c.urgTipo || '', nivel: c.urgNivel || '', pedidoEm: c.urgEm || '', situacao: c.urgSit || '',
-      espera: c.urgEm ? dias(hj, String(c.urgEm).slice(0, 10)) : null
+      espera: c.urgEm ? dias(hj, String(c.urgEm).slice(0, 10)) : null,
+      dataMinuta: i.dataMinuta || '', dataCorrecao: i.dataCorrecao || '', dataLiberacao: i.dataLiberacao || '', assinado: !!i.assinado
     }, base));
   });
   /* produção lançada por dia: minutas de voto (itens das pautas publicadas) e monocráticas (ficha única) */

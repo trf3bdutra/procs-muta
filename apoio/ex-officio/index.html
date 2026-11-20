@@ -1825,17 +1825,19 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <button type="button" class="hb hbx nx-tx" id="cmt-b-dil" data-cpn="dil" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="cmt-n-dil" hidden></i></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-urg" data-cdt="u" title="Urgências" aria-label="Urgências" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg><span>Urgências</span><i class="bdg" id="cmt-n-urg-t" hidden></i></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-dvt" data-cdt="d" title="Dúvidas e pedidos" aria-label="Dúvidas e pedidos" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg><span>Dúvidas</span><i class="bdg" id="cmt-n-dv-t" hidden></i></button>
+        <button type="button" class="hb hbx nx-tx" id="cmt-b-gab" data-cdt="m" title="Gabinete: calendário, comunicados e equipe" aria-label="Gabinete" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg><span>Gabinete</span></button>
         <button type="button" class="hb ic" id="cmt-atu2" title="Atualizar" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button>
       </div>
     <aside class="cmt-fastnav quick-find" id="cmt-fastnav" role="search" aria-label="Buscador rápido da pauta">
         <span class="qf-k">BUSCADOR RÁPIDO</span>
-        <span class="qf-row"><select id="cmt-ir-k" aria-label="Localizar por"><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="nº + Enter" aria-label="Número do item ou processo"></span>
+        <span class="qf-row"><button type="button" class="qf-kb" id="cmt-ir-kb" title="Clique para buscar por processo" aria-label="Buscando por item · clique para trocar">Item</button><select id="cmt-ir-k" aria-label="Localizar por" hidden><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="nº + Enter" aria-label="Número do item ou processo"></span>
         <small>Localiza e destaca o registro na pauta.</small>
         <button type="button" class="qf-go" id="cmt-ir-go">Ir para</button>
         <button type="button" id="cmt-ir-x" class="cmt-fastnav-close" aria-label="Recolher o buscador rápido" title="Recolher">×</button>
         <button type="button" id="cmt-ir-abre" class="qf-pill" aria-label="Abrir o buscador rápido (tecla /)">Ir para item <kbd>/</kbd></button>
       </aside>
     
+      <div class="cmt-gv" id="cmt-gv" aria-live="polite"><div class="cmt-gv-in" id="cmt-gv-in"></div></div>
     </div>
 
     <section class="cmt-q cmt-dk" id="cmt-pauta">
@@ -4418,12 +4420,17 @@ if(ft)ft.innerHTML='<span class="cmt-fc-m">A seguir</span>'+L.slice(pos+1,pos+4)
 function cmtUrg(){
 var ur=((CMT.dados||{}).urgencias)||[],el=$('#cmt-l-urg');if(!el)return;
 if(!ur.length){el.innerHTML='<p class="cmt-vazio" style="padding:10px 16px">Nenhuma urgência aberta.</p>';return;}
-el.innerHTML=ur.map(function(x){var d=x.espera,hoje=(d===0||d>=15);
-var prazo=d==null?'sem prazo':d===0?'vence hoje':d<0?'em '+(-d)+(d===-1?' dia':' dias'):'há '+d+(d===1?' dia':' dias');
-var et=cmtEtapaN(x),nome=['A minutar','Minutada','Em correção','Liberada','Assinada'][et];
-return '<div class="cmt-ur'+(hoje?' hoje':'')+'"><div class="cmt-ur-l"><b>'+esc(x.cnj)+'</b><time>'+esc(prazo)+'</time></div>'+
-'<p>'+esc([x.tipo,x.nivel,x.servidor].filter(Boolean).join(' · ')||'—')+'</p>'+
-'<div class="cmt-ur-a"><span class="cmt-tag'+(et>=3?' ok':et===2?' inf':'')+'">'+nome+'</span><button type="button" class="'+(hoje?'pri':'')+'" data-cfi="'+esc(x.cnj)+'">'+(hoje?'Decidir':'Abrir')+'</button></div></div>';}).join('');}
+/* fase: chegou (sem responsável), em minuta (com quem minuta), revisão e assinatura (já minutada) */
+var fase=function(x){return x.dataMinuta?2:x.servidor?1:0;};
+var card=function(x){var d=x.espera,hoje=(d===0||d>=15);
+  var prazo=d==null?'sem prazo':d===0?'vence hoje':d<0?'em '+(-d)+(d===-1?' dia':' dias'):'há '+d+(d===1?' dia':' dias');
+  var et=x.assinado?4:x.dataLiberacao?3:x.dataCorrecao?2:x.dataMinuta?1:0,nome=['A minutar','Minutada','Corrigida','Liberada','Assinada'][et];
+  return '<div class="cmt-ur'+(hoje?' hoje':'')+'"><div class="cmt-ur-l"><b>'+esc(x.cnj)+'</b><time>'+esc(prazo)+'</time></div>'+
+  '<p>'+esc([x.tipo,x.nivel,x.servidor?'minuta: '+x.servidor:'',x.corretor?'correção: '+x.corretor:''].filter(Boolean).join(' · ')||'—')+'</p>'+
+  '<div class="cmt-ur-a"><span class="cmt-tag'+(et>=3?' ok':et>=1?' inf':'')+'">'+nome+'</span><button type="button" class="'+(hoje?'pri':'')+'" data-cfi="'+esc(x.cnj)+'">'+(hoje?'Decidir':'Abrir')+'</button></div></div>';};
+var COL=['Chegou','Em minuta','Revisão e assinatura'];
+el.innerHTML='<div class="cmt-urk">'+COL.map(function(c,i){var L=ur.filter(function(x){return fase(x)===i;});
+  return '<div class="cmt-urk-c uf'+i+'"><p class="cmt-col-h"><span><em>'+(i+1)+'</em>'+c+'</span><i>'+L.length+'</i></p>'+(L.length?L.map(card).join(''):'<p class="cmt-vazio">Nenhuma.</p>')+'</div>';}).join('')+'</div>';}
 /* 03 · dúvidas, uma a uma */
 function cmtDuvidas(){
 var j=CMT.dados||{},pd=(j.pedidos||[]).map(function(x){return {id:x.id,tipo:x.tipo,titulo:x.titulo,texto:x.texto,numero:x.numero,de:x.de,em:x.em,prioridade:x.prioridade,resposta:x.resposta,sessao:x.sessao};});
@@ -4470,13 +4477,30 @@ window.addEventListener('resize',cmtTopo);
 /* CMT mobile: rodapé único e painéis com conteúdo e ações originais. */
 function cmtMobileMode(){return window.innerWidth<=780;}
 /* Para assinar: no computador, painel fixo à esquerda (recolhível); no celular, volta à gaveta */
+/* gaveta embutida sob o cabeçalho (computador): Diligências, Urgências, Dúvidas e Gabinete, um por vez */
+var CMTGV={dil:'#cmt-p-dil',u:'#cmt-urg-p',d:'#cmt-dv-p',m:'#cmt-mais'};
+function cmtGv(k,abre){var g=document.getElementById('cmt-gv');if(!g)return;var at=g.getAttribute('data-k')||'';
+  if(k&&!abre&&at===k&&g.classList.contains('on'))k=null;
+  if(k)g.setAttribute('data-k',k);g.classList.toggle('on',!!k);document.body.classList.toggle('cmt-gv-on',!!k);
+  var pd=document.getElementById('cmt-p-dil');if(pd&&g.contains(pd))pd.hidden=k!=='dil';
+  if(k==='dil'&&typeof cmtDilig==='function')cmtDilig();if(k==='u'&&typeof cmtUrg==='function')cmtUrg();if(k==='d'&&typeof cmtDuvidas==='function')cmtDuvidas();
+  [['cmt-b-dil','dil'],['cmt-b-urg','u'],['cmt-b-dvt','d'],['cmt-b-gab','m']].forEach(function(p){var b=document.getElementById(p[0]);if(b)b.setAttribute('aria-expanded',String(k===p[1]));});
+  if(k){var gi=document.getElementById('cmt-gv-in');if(gi)gi.scrollTop=0;}}
+function cmtGvPos(){var inn=document.getElementById('cmt-gv-in');if(!inn)return;var desk=!cmtMobileMode();
+  Object.keys(CMTGV).forEach(function(k){var el=document.querySelector(CMTGV[k]);if(!el)return;
+    if(!el._cmtMk){el._cmtMk=document.createComment('cmt-gv '+k);el.parentNode.insertBefore(el._cmtMk,el);}
+    if(desk&&el.parentNode!==inn){el.setAttribute('data-gv',k);inn.appendChild(el);}
+    if(!desk&&el.parentNode===inn){el._cmtMk.parentNode.insertBefore(el,el._cmtMk.nextSibling);if(k==='dil')el.hidden=true;}});
+  if(!desk)cmtGv(null);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('cmt-gv-on')&&!document.querySelector('dialog[open]'))cmtGv(null);});
 function cmtAslMin(m){document.body.classList.toggle('cmt-asl-min',!!m);try{localStorage.setItem('cmt_asl_min',m?'1':'0');}catch(e){}
   var k=document.getElementById('cmt-asl-k');if(k){k.setAttribute('aria-expanded',String(!m));k.title=m?'Abrir o painel de assinatura':'Recolher o painel de assinatura';}}
 function cmtAslPos(){var s=document.getElementById('cmt-ass'),b=document.getElementById('cmt-asl-b'),g=document.getElementById('cmt-grid'),w=document.getElementById('cmt-wrap');
   if(!s||!b||!g)return;var desk=!cmtMobileMode();
   document.body.classList.toggle('cmt-asl-on',desk&&!!w&&!w.hidden);
   if(desk&&s.parentNode!==b)b.appendChild(s);
-  if(!desk&&s.parentNode!==g)g.insertBefore(s,g.firstChild);}
+  if(!desk&&s.parentNode!==g)g.insertBefore(s,g.firstChild);
+  cmtGvPos();}
 (function(){try{if(localStorage.getItem('cmt_asl_min')==='1')document.body.classList.add('cmt-asl-min');}catch(e){}
   var w=document.getElementById('cmt-wrap');if(w&&window.MutationObserver)new MutationObserver(cmtAslPos).observe(w,{attributes:true,attributeFilter:['hidden']});
   window.addEventListener('resize',function(){clearTimeout(cmtAslPos._t);cmtAslPos._t=setTimeout(cmtAslPos,120);});
@@ -4557,8 +4581,7 @@ if(a){g.setAttribute('data-t',a);var tb=$('#cmt-dr-tb');if(tb)[].forEach.call(tb
   var b2=$('#cmt-dr-b');if(b2)b2.scrollTop=0;}
 return g.getAttribute('data-t')||'a';}
 function cmtGaveta(ab,aba){
-if(ab&&aba==='a'&&!cmtMobileMode()){cmtAslMin(false);return;}
-if(ab&&!aba&&!cmtMobileMode()&&cmtAba()==='a')aba='u';
+if(ab&&!cmtMobileMode()){if(aba==='a')cmtAslMin(false);else cmtGv(aba||'u',true);return;}
 cmtTopo();if(aba)cmtAba(aba);
 var g=$('#cmt-dr');if(!g)return;
 if(ab&&cmtMobileMode()){
@@ -4567,7 +4590,7 @@ if(ab&&cmtMobileMode()){
  document.body.classList.remove('cmt-pn-on','cmt-search-on');
 }
 g.classList.toggle('on',ab);document.body.classList.toggle('cmt-dr-on',ab);
-[['#cmt-b-urg','u'],['#cmt-b-dvt','d']].forEach(function(p){var b=$(p[0]);if(b)b.setAttribute('aria-expanded',String(!!ab&&cmtAba()===p[1]));});
+
 var hk=$('#cmt-dr-k');if(hk)hk.setAttribute('aria-expanded',String(!!ab));
 if(ab){var j=CMT.dados||{},as=j.assinar||{};
   try{localStorage.setItem('cmt_visto',JSON.stringify({a:(as.assinatura||[]).length,u:(j.urgencias||[]).length,d:(j.duvidas||[]).length}));}catch(e){}
@@ -4579,7 +4602,7 @@ cmtMobileSync();}
 document.addEventListener('click',function(e){
 var ab=e.target.closest('[data-cdt]');
 if(ab){var k=ab.getAttribute('data-cdt');
-  if(ab.closest('.cmt-ut')&&$('#cmt-dr').classList.contains('on')&&cmtAba()===k){cmtGaveta(false);return;}
+  if(!cmtMobileMode()&&ab.closest('.cmt-ut')){if(k==='a')cmtAslMin(false);else cmtGv(k);return;}
   if($('#cmt-dr').classList.contains('on')&&ab.closest('#cmt-dr-tb')){cmtAba(k);return;}
   cmtGaveta(true,k);return;}
 if(e.target.closest('#cmt-dr-h')&&!e.target.closest('#cmt-bbq-b')){cmtGaveta(!$('#cmt-dr').classList.contains('on'));return;}
@@ -4660,7 +4683,8 @@ el.innerHTML=COL.map(function(c){
       :'<p class="cmt-vazio">—</p>')+'</div>';}).join('');}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-cdf]');if(!b)return;CMT.dilf=b.getAttribute('data-cdf');cmtDilig();});
 /* painéis próprios: notificações à direita, diligências em faixa larga */
-function cmtPainel(k,ab){var m={not:'#cmt-p-not',dil:'#cmt-p-dil'},el=$(m[k]);if(!el)return;
+function cmtPainel(k,ab){if(k==='dil'&&!cmtMobileMode()){cmtGv(ab?'dil':null,true);return;}
+var m={not:'#cmt-p-not',dil:'#cmt-p-dil'},el=$(m[k]);if(!el)return;
 if(ab&&cmtMobileMode()){cmtGaveta(false);document.body.classList.remove('cmt-search-on');}
 Object.keys(m).forEach(function(z){var o=$(m[z]);if(o&&z!==k)o.hidden=true;});
 el.hidden=!ab;document.body.classList.toggle('cmt-pn-on',!!ab);
@@ -4771,6 +4795,14 @@ function cmtQfMin(min){var b=$('#cmt-fastnav');if(!b)return;b.classList.toggle('
 document.addEventListener('keydown',function(e){if(e.key!=='/'||e.ctrlKey||e.metaKey||e.altKey)return;var v=$('#v-cmt');if(!v||v.hidden)return;
   var t=e.target,tg=(t&&t.tagName)||'';if(/INPUT|TEXTAREA|SELECT/.test(tg)||(t&&t.isContentEditable)||document.querySelector('dialog[open]'))return;
   e.preventDefault();if(cmtMobileMode())cmtMobileSearch(true);else cmtQfMin(false);});
+/* Item ⇄ Processo com um clique; número longo colado passa sozinho para Processo */
+function cmtIrK(){var s=$('#cmt-ir-k'),b=$('#cmt-ir-kb'),i=$('#cmt-ir-v');if(!s||!b)return;var it=s.value==='item';
+  b.textContent=it?'Item':'Processo';b.setAttribute('aria-label','Buscando por '+(it?'item':'processo')+' · clique para trocar');
+  b.title='Clique para buscar por '+(it?'processo':'item');if(i)i.placeholder=it?'nº + Enter':'nº do processo';}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#cmt-ir-kb');if(!b)return;var s=$('#cmt-ir-k');if(!s)return;
+  s.value=s.value==='item'?'cnj':'item';cmtIrK();var i=$('#cmt-ir-v');if(i)i.focus();});
+document.addEventListener('input',function(e){if(!e.target||e.target.id!=='cmt-ir-v')return;var s=$('#cmt-ir-k');
+  if(s&&s.value==='item'&&dgx(e.target.value).length>=7){s.value='cnj';cmtIrK();}});
 function cmtIrPara(){
   var inp=$('#cmt-ir-v'),sel=$('#cmt-ir-k');if(!inp||!sel)return;
   var v=(inp.value||'').trim();if(!v)return;
@@ -8559,15 +8591,68 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-ch{margin:0;order:-1;transform:rotat
  #v-cmt .cmt-hd2 .cmt-fastnav.flash{animation:cmtFastPulse .55s ease}
  #v-cmt .cmt-hd2 .cmt-fastnav .qf-k,#v-cmt .cmt-hd2 .cmt-fastnav small,#v-cmt .cmt-hd2 .cmt-fastnav .cmt-fastnav-close,#v-cmt .cmt-hd2 .cmt-fastnav .qf-pill{display:none!important}
  #v-cmt .cmt-hd2 .cmt-fastnav .qf-row{display:flex;align-items:center;gap:0;margin:0;border:0}
- #v-cmt .cmt-hd2 .cmt-fastnav select{height:34px;width:auto;border:0;border-right:1px solid var(--el);background:transparent;color:var(--eg);
-   font:700 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;padding:0 6px 0 10px;cursor:pointer}
- #v-cmt .cmt-hd2 .cmt-fastnav input{height:34px;width:150px;border:0;background:transparent;color:var(--ei);font:12px var(--emono);padding:0 10px;outline:0}
+ #v-cmt .cmt-hd2 .cmt-fastnav input{height:34px;width:130px;border:0;background:transparent;color:var(--ei);font:12px var(--emono);padding:0 10px;outline:0}
  #v-cmt .cmt-hd2 .cmt-fastnav .qf-go{width:auto;height:34px;margin:0;padding:0 12px;border:0;border-left:1px solid var(--el);background:var(--ep)}
  #v-cmt .cmt-hd2 .cmt-fastnav:focus-within{border-color:var(--eg)}
 }
 @media (min-width:781px){#v-cmt .cmt-hd2-h,#v-cmt .cmt-hd2 .qf-go{white-space:nowrap}}
 /* telas menores: o cabeçalho fica numa linha só (sai a linha "Gabinete do Des. Fed. Carlos Muta") */
-@media (min-width:781px) and (max-width:1519px){#v-cmt .cmt-hd2 .cmt-ey{display:none}#v-cmt .cmt-hd2{gap:8px}#v-cmt .cmt-hd2 .cmt-fastnav input{width:96px}#v-cmt .cmt-hd2 .hb{padding:0 6px}}
+@media (min-width:781px) and (max-width:1719px){#v-cmt .cmt-hd2 .cmt-ey{display:none}#v-cmt .cmt-hd2{gap:8px}#v-cmt .cmt-hd2 .cmt-fastnav input{width:96px}#v-cmt .cmt-hd2 .hb{padding:0 6px}}
+/* Item ⇄ Processo: botão que alterna (o select fica oculto) */
+#v-cmt #cmt-ir-k{display:none!important}
+#v-cmt .qf-kb{height:34px;min-width:84px;border:0;border-right:1px solid var(--el);background:transparent;color:var(--eg);font:700 10px var(--emono);
+  letter-spacing:.08em;text-transform:uppercase;padding:0 10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+#v-cmt .qf-kb::after{content:"⇄";font-size:11px;color:var(--em)}
+#v-cmt .qf-kb:hover{background:var(--ep2)}
+#v-cmt .qf-kb:focus-visible{outline:2px solid var(--eg);outline-offset:-2px}
+@media (max-width:780px){#v-cmt .qf-kb{height:40px;border:1px solid var(--el);width:100%}}
+/* gaveta embutida: abre do rodapé do cabeçalho para baixo, na largura do cabeçalho */
+#v-cmt .cmt-gv{display:none}
+@media (min-width:781px){
+ #v-cmt .cmt-hd2{flex-wrap:wrap;row-gap:0}
+ #v-cmt .cmt-hd2>*:not(.cmt-gv){flex-shrink:1;min-width:0}
+ #v-cmt .cmt-hd2 .cmt-ut{flex-shrink:0}
+ #v-cmt .cmt-gv{display:block;flex:1 1 100%;order:99;min-width:0}
+ #v-cmt .cmt-gv-in{max-height:0;overflow:hidden;opacity:0;border:1px solid transparent;border-top-width:2px;background:var(--ep);
+   transition:max-height .28s cubic-bezier(.32,.72,0,1),opacity .18s ease,margin .2s ease;margin-top:0}
+ #v-cmt .cmt-gv.on .cmt-gv-in{max-height:min(64vh,620px);overflow:auto;opacity:1;margin-top:10px;border-color:var(--el);border-top-color:var(--eg);
+   overscroll-behavior:contain;box-shadow:0 14px 26px -18px rgba(32,59,57,.35)}
+ #v-cmt .cmt-gv-in>[data-gv]{display:none!important}
+ #v-cmt .cmt-gv[data-k="dil"] [data-gv="dil"],#v-cmt .cmt-gv[data-k="u"] [data-gv="u"],#v-cmt .cmt-gv[data-k="d"] [data-gv="d"],#v-cmt .cmt-gv[data-k="m"] [data-gv="m"]{display:block!important}
+ /* o painel de diligências perde a posição flutuante */
+ #v-cmt .cmt-gv .cmt-pn{position:static!important;inset:auto!important;width:auto!important;max-height:none!important;transform:none!important;opacity:1!important;
+   box-shadow:none!important;border:0!important;z-index:auto;background:none}
+ #v-cmt .cmt-gv .cmt-pn-h{position:sticky;top:0}
+ #v-cmt .cmt-gv .cmt-pn-dil .cmt-cols4{grid-template-columns:repeat(4,minmax(0,1fr))}
+ #v-cmt .cmt-gv .cmt-q{margin:0;border:0;background:none;box-shadow:none;padding:0}
+ #v-cmt .cmt-gv .cmt-q>h2{position:sticky;top:0;z-index:2;margin:0;padding:10px 18px;background:var(--ew);border-bottom:1px solid var(--el)}
+ #v-cmt .cmt-gv .cmt-q>h2 .nn{display:none}
+ /* urgências: três colunas, na ordem do fluxo */
+ #v-cmt .cmt-gv .cmt-urgl{max-height:none;overflow:visible;background:none}
+ #v-cmt .cmt-gv .cmt-urgp .cmt-uc{margin:0;border-bottom:1px solid var(--el)}
+ #v-cmt .cmt-gv .cmt-rod{padding:0 18px 12px;margin:0}
+ /* dúvidas: cartas lado a lado; a aberta embaixo */
+ #v-cmt .cmt-gv .cmt-dvl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;max-height:none;overflow:visible;border:0;background:none;padding:14px 18px 4px}
+ #v-cmt .cmt-gv .cmt-dvl button{height:100%;align-items:flex-start;border:1px solid var(--el);background:var(--ew);padding:12px 14px;box-shadow:none}
+ #v-cmt .cmt-gv .cmt-dvl button:hover{border-color:#9cc0e0}
+ #v-cmt .cmt-gv .cmt-dvl button[aria-pressed=true]{border-color:#245b8c;box-shadow:inset 0 3px 0 #245b8c}
+ #v-cmt .cmt-gv .cmt-dvb{margin:10px 18px 18px;padding:14px 16px;border:1px solid var(--el);background:var(--ew);max-width:880px}
+ /* gabinete: blocos em duas colunas */
+ #v-cmt .cmt-gv #cmt-mais{margin:0;border:0}
+ #v-cmt .cmt-gv .cmt-mais-b{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:14px 18px}
+ #v-cmt .cmt-gv .cmt-mais-b>.cmt-q{border:1px solid var(--el);background:var(--ew)}
+}
+#v-cmt .cmt-urk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:14px 18px 16px;align-items:start}
+#v-cmt .cmt-urk-c .cmt-col-h{display:flex;align-items:center;justify-content:space-between;margin:0 0 8px;padding:0 0 6px;border-bottom:2px solid var(--el);
+  font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-urk-c .cmt-col-h em{font-style:normal;display:inline-grid;place-items:center;width:16px;height:16px;margin-right:7px;border:1px solid var(--el);font-size:9px}
+#v-cmt .cmt-urk-c.uf0 .cmt-col-h{border-bottom-color:var(--er)}
+#v-cmt .cmt-urk-c.uf1 .cmt-col-h{border-bottom-color:var(--eo2)}
+#v-cmt .cmt-urk-c.uf2 .cmt-col-h{border-bottom-color:var(--eg)}
+#v-cmt .cmt-urk .cmt-ur{border:1px solid #f0dcd3;background:var(--ew);margin:0 0 8px;padding:10px 12px}
+#v-cmt .cmt-urk .cmt-vazio{font-size:12px;color:var(--em);margin:4px 0}
+@media (max-width:780px){#v-cmt .cmt-urk{grid-template-columns:minmax(0,1fr);padding:10px 12px}#v-cmt #cmt-b-gab{display:none!important}}
+@media (prefers-reduced-motion:reduce){#v-cmt .cmt-gv-in{transition:none}}
 </style>
 </body>
 </html>
