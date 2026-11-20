@@ -469,15 +469,16 @@ function render(restorePath){
     ${select('caso.tipoManual','Espécie do julgamento',kindOptions)}
     ${field('caso.autor','Polo ativo / parte autora','Parte autora')}
     ${field('caso.reu','Polo passivo / parte ré','Parte ré')}
-    ${field('caso.assunto','Assunto','Assunto principal')}
-    ${field('caso.subassunto','Subassunto','Tema específico')}
+    ${field('caso.assunto','Assunto (PJe)','Assunto cadastrado no PJe')}
+    ${field('caso.assuntoDetalhado','Assunto detalhado','Assunto do PJe corrigido e preciso')}
+    ${field('caso.subassunto','Tipo de caso','Matéria · tipo · aspecto distintivo')}
     ${field('caso.secao','Seção / órgão','Turma ou seção')}
     ${field('caso.etiquetas','Etiquetas e especificidades','Separadas por vírgula')}
     ${field('caso.meta','Meta / prioridade','Meta ou prioridade')}
     ${field('caso.servidor','Servidor(a) responsável','Nome')}
     ${field('caso.corretor','Revisor(a) / corretor(a)','Nome')}
     ${check('caso.urgente','Urgente · sinalização somente local')}
-  </div><p class="pf-hint">Tipo atual: <strong id="pf-kind-label"></strong>. Automático usa classe, etiquetas e subassunto; uma escolha manual prevalece.</p>`)}
+  </div><p class="pf-hint">Tipo atual: <strong id="pf-kind-label"></strong>. Automático usa classe, etiquetas e tipo de caso; uma escolha manual prevalece.</p>`)}
   ${group('2','Regularidade e admissibilidade','regularidade',`<div class="pf-grid">
     ${select('regularidade.tempestividade','Tempestividade',['Não Verificado','Tempestivo','Intempestivo','Não se Aplica'])}
     ${field('regularidade.intimacao','Data da intimação','', 'date')}
@@ -497,7 +498,7 @@ function render(restorePath){
     ${area('regularidade.mpfInfo','Informações do parecer','Fundamentos ou observação adicional','full')}
   </div><div class="pf-alert" id="pf-deadline"></div><p class="pf-hint">O cálculo pula fins de semana; feriados locais e suspensões precisam ser conferidos nos autos e calendário oficial.</p>${guidePanel('regularidade',k)}`)}
   ${group('3','Processo e origem','origem',`<div class="pf-grid">
-    ${field('origem.subassunto','Subassunto','Tema ou questão jurídica')}
+    ${field('origem.subassunto','Tipo de caso na origem','Tema ou questão jurídica')}
     ${select('origem.decisao','Decisão na origem',['Sentença','Decisão interlocutória','Decisão monocrática','Acórdão'])}
     ${field('origem.decisaoId','ID da decisão','ID do documento')}
     ${field('origem.decisaoData','Data da decisão','','date')}

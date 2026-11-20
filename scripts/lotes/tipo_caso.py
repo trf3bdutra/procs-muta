@@ -1,14 +1,18 @@
-"""Integra subassunto e especificidades ao "tipo de caso" dos itens de um lote do Collectio.
+"""Integra o tipo de caso e as especificidades dos itens de um lote do Collectio.
 
 Padrão (o mesmo dos cartões do prontuário e das fichas):
-- subassunto: cadeia "Matéria · Subassunto · aspecto distintivo", com segmentos separados por " · ".
-  A matéria vem do grupo do lote quando o subassunto não a traz (ex.: g6 → "Previdenciário").
+- assunto: o assunto cadastrado no PJe, como veio (pode estar errado ou vago).
+- assunto_detalhado: o assunto do PJe corrigido e preciso, preenchido na triagem.
+- tipo_caso: cadeia "Matéria · tipo · aspecto distintivo", com segmentos separados por " · ".
+  A matéria vem do grupo do lote quando o texto não a traz (ex.: g6 → "Previdenciário").
+  Substitui o antigo "subassunto", que deixou de existir.
 - especificidades: fatos que distinguem o caso, um por segmento " · ", com o ID quando houver.
-- tipo_caso: "<classe/recorrente> · <subassunto>"; o texto anterior fica em triagem.tipo_caso_anterior.
-O cartão do prontuário (prontuario_triagem.cartao.subassuntos/especificidades) recebe os mesmos textos,
-para que alimentar.py os leve à ficha (Tema/Subassunto e Especificidades) e aos cartões da pauta.
+O cartão do prontuário guarda o tipo de caso na chave "subassuntos" (mantida por compatibilidade) e o
+assunto detalhado em "assuntoDet"; alimentar.py os leva à ficha (Tema e Especificidades) e aos cartões da pauta.
+Itens antigos com "subassunto" são migrados: o texto vai para tipo_caso e o tipo_caso anterior fica em
+triagem.tipo_caso_anterior.
 
-Uso: python3 scripts/lotes/subassunto.py acervo/lotes/adp-ai.json
+Uso: python3 scripts/lotes/tipo_caso.py acervo/lotes/adp-ai.json
 """
 import json, re, sys, unicodedata
 from pathlib import Path
@@ -28,7 +32,7 @@ def segs(s):
     return [x.strip(' .') for x in re.split(r'\s+·\s+', s) if x.strip(' .')]
 
 
-def subassunto(texto, grupo=None):
+def tipo_caso(texto, grupo=None):
     S = segs(texto)
     if not S:
         return ''
@@ -69,22 +73,26 @@ def especificidades(texto):
 
 def classe(tipo_caso):
     t = (tipo_caso or '').split(' · ')[0].strip()
-    return t if len(t) <= 30 else ''
+    return t if len(t) <= 30 and re.fullmatch(r'(AI|AgInt|ED|Apel\w*|ApCiv|ReeNec|RemNecCiv|ResAutCiv|TutCautAnt)', t) else ''
 
 
 def aplicar(it):
     C = (it.get('prontuario_triagem') or {}).get('cartao') or {}
-    sub = subassunto(it.get('subassunto') or C.get('subassuntos'), it.get('grupo'))
-    if not sub:
+    atual = it.get('tipo_caso') or ''
+    cl = classe(atual)
+    base = it.get('subassunto') or C.get('subassuntos') or (atual[len(cl) + 3:] if cl else atual)
+    tc = tipo_caso(base, it.get('grupo'))
+    if not tc:
         return False
     esp = especificidades(it.get('especificidades') or C.get('especificidades') or it.get('peculiaridades'))
-    novo_tc = ' · '.join(x for x in [classe(it.get('tipo_caso')), sub] if x)
-    mudou = (it.get('subassunto'), it.get('especificidades'), it.get('tipo_caso')) != (sub, esp, novo_tc)
-    if it.get('tipo_caso') and it.get('tipo_caso') != novo_tc and not (it.get('triagem') or {}).get('tipo_caso_anterior'):
-        it.setdefault('triagem', {})['tipo_caso_anterior'] = it['tipo_caso']
-    it['subassunto'], it['especificidades'], it['tipo_caso'] = sub, esp, novo_tc
-    if C is not None and it.get('prontuario_triagem'):
-        C['subassuntos'] = sub
+    mudou = 'subassunto' in it or (it.get('especificidades'), atual) != (esp, tc)
+    if atual and atual != tc and not cl and not (it.get('triagem') or {}).get('tipo_caso_anterior'):
+        it.setdefault('triagem', {})['tipo_caso_anterior'] = atual
+    it.pop('subassunto', None)
+    it['especificidades'], it['tipo_caso'] = esp, tc
+    it.setdefault('assunto_detalhado', it.get('assunto_detalhado') or C.get('assuntoDet') or '')
+    if it.get('prontuario_triagem'):
+        C['subassuntos'] = tc
         if esp:
             C['especificidades'] = esp
     return mudou
@@ -95,4 +103,4 @@ if __name__ == '__main__':
     L = json.loads(arq.read_text(encoding='utf-8'))
     n = sum(aplicar(it) for it in L.get('itens', []))
     arq.write_text(json.dumps(L, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
-    print(f'{arq}: {n} item(ns) com subassunto/especificidades atualizados')
+    print(f'{arq}: {n} item(ns) com tipo de caso/especificidades atualizados')

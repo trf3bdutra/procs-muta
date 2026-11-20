@@ -48,7 +48,7 @@ const CAB_SESSAO = /\s*Sess[aã]o de Julgamento\s+(?:ORDIN|EXTRAORDIN|VIRTUAL|PR
 const limpaPauta = t => String(t || '').replace(CAB_SESSAO, ' ').replace(/\bLL\s+(?=\d)/g, 'Lei ').replace(/\s+/g, ' ').trim();
 const limpaItemPauta = x => x && typeof x === 'object' ? Object.assign({}, x, { assunto: limpaPauta(x.assunto), partes: limpaPauta(x.partes), classe: limpaPauta(x.classe) }) : x;
 function limpaLote(lote) {
-  (lote.itens || []).forEach(it => { for (const k of ['assunto', 'tipo_caso', 'partes', 'exequente', 'executado', 'recurso']) if (typeof it[k] === 'string') it[k] = limpaPauta(it[k]); });
+  (lote.itens || []).forEach(it => { for (const k of ['assunto', 'assunto_detalhado', 'tipo_caso', 'partes', 'exequente', 'executado', 'recurso']) if (typeof it[k] === 'string') it[k] = limpaPauta(it[k]); });
   (lote.grupos || []).forEach(g => { if (typeof g.rotulo === 'string') g.rotulo = limpaPauta(g.rotulo); });
   return lote;
 }
@@ -128,7 +128,7 @@ function novoItem(s, x) {
   const c = (x.ctl || {});
   return {
     sessao: s, item: Number(x.item) || x.item, processo: x.cnj, recurso: String(x.classe || '').replace(/^\w+ - /, '') || 'Apelação',
-    partes: x.partes || '', exequente: ex, executado: en, assunto: x.assunto || '', grupo: null, tipo_caso: x.assunto || '',
+    partes: x.partes || '', exequente: ex, executado: en, assunto: x.assunto || '', assunto_detalhado: (c.cartao && c.cartao.assuntoDet) || '', grupo: null, tipo_caso: (c.cartao && c.cartao.subassuntos) || '',
     resultado: x.resultado || c.resJulg || '', modelo: '', variacoes: [], observacao: x.obs || '', peculiaridades: '', peculiaridades_relator: '',
     orientacao: '', equipe: { minuta: x.servidor || '', correcao: x.corretor || '', situacao: situacao(x) }, pecas: [], mpf: '', triagem: {},
     ajustes: [], pendencias: [], minuta: false
@@ -165,7 +165,7 @@ async function indicePauta(s) {
     grouped.get(chave).itens.push(it);
   }
   const grupos=[...grouped.values()].sort((a,b)=>b.itens.length-a.itens.length||a.nome.localeCompare(b.nome,'pt-BR'));
-  grupos.forEach((g,k)=>{const id='assunto-'+(k+1);lot.grupos.push({id,rotulo:g.nome,cor:CORES[k%CORES.length],resultado:'',modelo:''});g.itens.forEach(it=>{it.grupo=id;it.tipo_caso=g.nome;});});
+  grupos.forEach((g,k)=>{const id='assunto-'+(k+1);lot.grupos.push({id,rotulo:g.nome,cor:CORES[k%CORES.length],resultado:'',modelo:''});g.itens.forEach(it=>{it.grupo=id;if(!it.tipo_caso)it.tipo_caso=g.nome;});});
   return lot;
 }
 
@@ -182,7 +182,7 @@ function agruparPorAssunto(lote) {
     .forEach((g,k)=>{
       const id = 'assunto-' + (k+1);
       lote.grupos.push({ id, rotulo:g.nome, cor:CORES[k%CORES.length], resultado:'', modelo:'' });
-      g.itens.forEach(item=>{ item.grupo=id; item.tipo_caso=g.nome; });
+      g.itens.forEach(item=>{ item.grupo=id; if(!item.tipo_caso) item.tipo_caso=g.nome; });
     });
 }
 async function calendario() {
@@ -363,16 +363,19 @@ async function gravar(req, res, u, gestor) {
   }
   if (b.acao === 'criar-lista' || b.acao === 'itens') {
     const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
-    const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'tipo_caso', 'subassunto', 'especificidades', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada', 'bloco'];
+    const TXT = ['recurso', 'partes', 'exequente', 'executado', 'assunto', 'assunto_detalhado', 'tipo_caso', 'especificidades', 'resultado', 'modelo', 'observacao', 'peculiaridades', 'mpf', 'grupo', 'classe', 'tarefa', 'etiquetas', 'chegada', 'bloco'];
     const OBJ = ['triagem', 'situacao_atual', 'extracao', 'teor', 'prontuario_triagem'];
     const LST = ['variacoes', 'pendencias', 'pecas'];
     const limpo = (x, it) => {
+      /* "subassunto" deixou de existir: o mesmo conteúdo agora é o tipo de caso */
+      if (x.subassunto !== undefined && x.tipo_caso === undefined) x = Object.assign({}, x, { tipo_caso: x.subassunto });
+      delete it.subassunto;
       for (const k of TXT) if (x[k] !== undefined) it[k] = x[k] === null ? null : String(x[k]).slice(0, 2000);
       for (const k of OBJ) if (x[k] && typeof x[k] === 'object' && !Array.isArray(x[k])) it[k] = Object.assign({}, it[k] || {}, JSON.parse(JSON.stringify(x[k]).length > 30000 ? '{}' : JSON.stringify(x[k])));
       for (const k of LST) if (Array.isArray(x[k])) it[k] = JSON.parse(JSON.stringify(x[k].slice(0, 80)));
       return it;
     };
-    const base = (n, cnj) => ({ sessao: '', item: n, processo: cnj, recurso: '', partes: '', exequente: '', executado: '', assunto: '', grupo: null,
+    const base = (n, cnj) => ({ sessao: '', item: n, processo: cnj, recurso: '', partes: '', exequente: '', executado: '', assunto: '', assunto_detalhado: '', grupo: null,
       tipo_caso: '', resultado: '', modelo: '', variacoes: [], observacao: '', peculiaridades: '', peculiaridades_relator: '', orientacao: '',
       equipe: { minuta: '', correcao: '', situacao: 'A minutar' }, pecas: [], mpf: '', triagem: {}, ajustes: [], pendencias: [], minuta: false });
     const lista = (Array.isArray(b.itens) ? b.itens : []).filter(x => x && CNJ.test(String(x.processo || '')));

@@ -14,7 +14,7 @@ function str(v) { return typeof v === 'string' ? v : ''; }
 
 /* ---------- Estado do prontuário ---------- */
 function blankFull(){return{
-  caso:{numero:'',item:'',classe:'',autor:'',reu:'',assunto:'',subassunto:'',secao:'',etiquetas:'',meta:'',tipoManual:'',servidor:'',corretor:'',urgente:false},
+  caso:{numero:'',item:'',classe:'',autor:'',reu:'',assunto:'',assuntoDetalhado:'',subassunto:'',secao:'',etiquetas:'',meta:'',tipoManual:'',servidor:'',corretor:'',urgente:false},
   regularidade:{tempestividade:'',intimacao:'',preparo:'',preparoAntesAuto:'',dpu:false,ajg:false,representacao:'',procuracao:'',procuracaoId:'',midias:'',outroRequisito:'',impedimento:'Sem impedimento',mpfAtuacao:'',mpfParecer:'',mpfSentido:'',mpfId:'',mpfInfo:''},
   origem:{subassunto:'',decisao:'',decisaoId:'',decisaoData:'',juizo:'',julgador:'',custas:false,honorarios:false,tutela:false,valor:false,observacao:''},
   recursoTipo:{recorrente:'',recorrenteCustom:'',rnInciso:'',rnValor:'',edId:'',edData:'',edOrgao:'',edVicios:'',edPonto:'',agintId:'',agintData:'',agintSintese:'',agintFundamentos:'',jrId:'',jrData:'',jrPrecedente:'',jrTribunal:'',jrDevolucaoId:'',jrDevolucaoMes:'',jrEd:'',jrQuestao:'',aiId:'',aiData:'',aiInciso:'',aiEfeito:''},

@@ -15,7 +15,7 @@ const L = require('./_lib'), FICHA = require('./_ficha');
 const DIR = 'acervo/prontuarios/', OP = 'acervo/operacional.json';
 const SO_GESTOR = new Set(['producao.SERVIDOR', 'producao.CORRETOR']);
 /* chaves do cartão que a extensão pode gravar direto (as demais vêm pela ficha) */
-const CARTAO_OK = new Set(['pecas', 'recursos', 'orig', 'questoes', 'especificidades', 'sintese', 'subassuntos', 'relacionado', 'rel', 'adm', 'jul', 'ed', 'agint', 'jr', 'ai', 'rem', 'tipoJ', 'obsGeral']);
+const CARTAO_OK = new Set(['pecas', 'recursos', 'orig', 'questoes', 'especificidades', 'sintese', 'subassuntos', 'assuntoDet', 'relacionado', 'rel', 'adm', 'jul', 'ed', 'agint', 'jr', 'ai', 'rem', 'tipoJ', 'obsGeral']);
 const MAX = 400 * 1024;
 const dg = s => String(s || '').replace(/\D/g, '');
 const agora = () => new Date().toISOString();

@@ -557,7 +557,7 @@ function ligaVisLotes(){
   });
 }
 const SEG=s=>String(s||'').split(/\s+·\s+/).map(x=>x.trim()).filter(Boolean);
-const assuntoDe=it=>it.assunto||SEG(it.subassunto)[0]||it.tipo_caso;
+const assuntoDe=it=>it.assunto||it.assunto_detalhado||SEG(it.tipo_caso)[0];
 /* Só processo de pauta tem item: nas coleções de triagem e avulsas o número de ordem é interno e não aparece. */
 const temItem=it=>!!it.sessao;
 function rotItem(it){return temItem(it)?br(it.sessao).slice(0,5)+' · item '+pad(it.item):''}
@@ -802,7 +802,7 @@ async function busca(){
     const fila=com.slice();await Promise.all(Array.from({length:6},async()=>{while(fila.length){const it=fila.shift();try{await getMin(it)}catch(e){}n++;st.textContent=`Lendo as minutas do lote… ${n} de ${com.length}`}}))}
   const Q=sem(q),hits=new Set();let total=0,html='';
   for(const it of ITENS){
-    const m=MDATA[it.uid],partes=[['Dados',[it.processo,it.partes,it.tipo_caso,it.resultado,it.observacao,it.peculiaridades,it.peculiaridades_relator].filter(Boolean).join(' · ')]];
+    const m=MDATA[it.uid],partes=[['Dados',[it.processo,it.partes,it.assunto_detalhado,it.tipo_caso,it.resultado,it.observacao,it.peculiaridades,it.peculiaridades_relator].filter(Boolean).join(' · ')]];
     if(m)SECS.forEach(([k,t])=>{(m.secoes[k]||[]).forEach(p=>partes.push([t,String(p)]))});
     const tr=[];partes.forEach(([t,x])=>{const sx=sem(x);let i=sx.indexOf(Q),c=0;while(i>=0&&c<3){const a=Math.max(0,i-70),b=Math.min(x.length,i+Q.length+70);tr.push(`<p><b>${t[0]+t.slice(1).toLowerCase()}:</b> ${a?'…':''}${esc(x.slice(a,i))}<mark>${esc(x.slice(i,i+Q.length))}</mark>${esc(x.slice(i+Q.length,b))}${b<x.length?'…':''}</p>`);c++;total++;i=sx.indexOf(Q,i+Q.length)}});
     if(tr.length){hits.add(it.uid);html+=`<div class="cx-r" data-hit="${it.uid}"><h6>${temItem(it)?rotItem(it).toUpperCase()+' · ':''}${esc(it.processo.slice(0,15))} · ${esc(String(it.exequente).slice(0,34))}</h6>${tr.slice(0,4).join('')}${tr.length>4?`<p>+${tr.length-4} ocorrência(s)</p>`:''}</div>`}
@@ -894,7 +894,7 @@ function perfil(it,i){
   const fl=it.variacoes.map(f=>`<span style="background:${f==='ORI'?'var(--er)':c}">${esc(FLN[f]||f)}</span>`).join('')||`<span style="background:${OUT.cor}">sem variações marcadas</span>`;
   const cons=`/amicus/compendium/#consulta=${it.sessao}/${it.item}`;
   let b=`<div class="box"><h3>Identificação</h3>${dl({'Sessão':it.sessao?`${br(it.sessao)} · item ${it.item}`:'','Chegada':!it.sessao&&it.chegada?esc(it.chegada):'','Tarefa':esc(it.tarefa||''),'Etiquetas':esc(it.etiquetas||''),'Processo':`<span class="cnj">${it.processo}</span>`,'Recurso':esc(it.recurso),'Exequente':esc(it.exequente),'Executado':esc(it.executado)})}</div>`;
-  b+=`<div class="box"><h3>Enquadramento</h3>${dl({'Tipo de caso':esc(it.tipo_caso),'Subassunto':SEG(it.subassunto).map(esc).join(' › '),'Resultado':esc(it.resultado),'Modelo vigente':esc(it.modelo)})}${SEG(it.especificidades).length?`<p style="margin-top:8px"><b>Especificidades</b></p><div class="esp">${SEG(it.especificidades).map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</div>`;
+  b+=`<div class="box"><h3>Enquadramento</h3>${dl({'Assunto (PJe)':esc(it.assunto),'Assunto detalhado':esc(it.assunto_detalhado),'Tipo de caso':SEG(it.tipo_caso).map(esc).join(' › '),'Resultado':esc(it.resultado),'Modelo vigente':esc(it.modelo)})}${SEG(it.especificidades).length?`<p style="margin-top:8px"><b>Especificidades</b></p><div class="esp">${SEG(it.especificidades).map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</div>`;
   b+=`<div class="box so-equipe"><h3>Equipe e situação</h3>${dl({'Minuta':esc(e.minuta||'—'),'Correção':esc(e.correcao||'—'),'Designação':e.fonte?`pauta de ${br(e.fonte.sessao)}${e.fonte.item?' · item '+esc(e.fonte.item):''}`:(e.minuta||e.correcao?'registrada no lote (fora de pauta)':'sem designação'),'Antes no lote':e.copia_lote&&MODO==='cg'?esc([e.copia_lote.minuta,e.copia_lote.correcao].filter(Boolean).join(' · ')):'','Alterações':(e.historico||[]).map(h=>esc(br(String(h.em).slice(0,10))+': '+(h.alteracoes||[]).map(a=>a.papel+' '+(a.de||'—')+' → '+(a.para||'—')).join('; '))).join('<br>'),'Situação':esc(e.situacao),'Código triagem':esc(t['Código']),'Visível para':MODO==='cg'?`<span data-vtx="${it.uid}">${textoVis(it)}</span>`:''})}</div>`;
   b+=`<div class="box wide"><h3>Variações e peculiaridades</h3><div class="fl">${fl}</div>`+
      `<p class="pv" style="margin-top:8px" data-eq="${esc(it.peculiaridades)}" data-rel="${esc(it.peculiaridades_relator)}">${esc(it.peculiaridades_relator)}</p>`+
@@ -905,7 +905,7 @@ function perfil(it,i){
    if(X.sintese_fatica||X.recurso) b+=`<div class="box wide"><h3>Teor das peças</h3>${X.sintese_fatica?`<p><b>Síntese fática.</b> ${esc(X.sintese_fatica)}</p>`:''}${dl({'Inicial':esc(X.inicial),'Decisão ou sentença recorrida':esc(X.decisao_recorrida),'Recurso':esc(X.recurso),'Resposta':esc(X.resposta),'Parecer':esc(X.parecer),'Memoriais':esc(X.memoriais),'Representação':esc(X.representacao),'Preparo':esc(X.preparo)})}</div>`;}
   {const PT=it.prontuario_triagem||{},C=PT.cartao||{},K=PT.ctl||{},A=C.adm||{},O=C.orig||{},AI=C.ai||{},R=C.rel||{},MX=C.mpfx||{},br2=v=>v===true?'sim':v===false?'não':esc(v);
    if(Object.keys(C).length||Object.keys(K).length) b+=`<div class="box wide"><h3>Prontuário da triagem · campos do Ex Officio</h3>`+
-    dl({'Tipo de julgamento':esc(C.tipoJ),'Recurso relacionado':esc(C.relacionado),'Subassuntos':esc(C.subassuntos),'Questões controvertidas':esc(C.questoes),
+    dl({'Tipo de julgamento':esc(C.tipoJ),'Recurso relacionado':esc(C.relacionado),'Assunto detalhado':esc(C.assuntoDet),'Tipo de caso':esc(C.subassuntos),'Questões controvertidas':esc(C.questoes),
       'Decisão na origem':[O.tipo,O.id&&'ID '+O.id,O.data,O.juizo,O.julgador].filter(Boolean).map(esc).join(' · '),'Dispositivo':esc(O.dispositivo),
       'Tempestividade':[K.tempest,A.intim&&'intimação '+A.intim,A.prot&&'protocolo '+A.prot,A.prazo&&A.prazo+' dias',A.dobro&&'em dobro'].filter(Boolean).map(esc).join(' · '),
       'Preparo':[K.preparo,A.ajg&&'justiça gratuita',A.dpu&&'DPU'].filter(Boolean).map(esc).join(' · '),'Outro requisito':[A.req,A.reqObs].filter(Boolean).map(esc).join(' · '),
@@ -1061,7 +1061,7 @@ function filtra(){
    assunto=$('#fa').value,recurso=$('#fr').value,resultado=$('#fres').value,resp=$('#fd')?$('#fd').value:'',
    vis=new Set(), okv=it=>VZ==='rel'?it.verRelator:VZ==='eq'?it.verEquipe:true;
   for(const it of ITENS){const e=it.equipe||{};
-    const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,it.subassunto,it.especificidades,(it.triagem||{}).conf_preparo,(it.triagem||{}).conf_prevencao,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
+    const hay=[it.processo,it.item,it.partes,it.peculiaridades,it.peculiaridades_relator,it.observacao,it.tipo_caso,it.assunto,it.assunto_detalhado,it.especificidades,(it.triagem||{}).conf_preparo,(it.triagem||{}).conf_prevencao,e.minuta,e.correcao,it.variacoes.map(x=>FLN[x]).join(' ')].join(' ').toLowerCase();
     if(okv(it)&&(!CX.filtra||CX.hits.has(it.uid))&&!offG.has(it.grupo||'')&&(!q||hay.includes(q))&&(!f||it.variacoes.includes(f))&&(!st||e.situacao===st)&&
        (!assunto||assuntoDe(it)===assunto)&&(!recurso||it.recurso===recurso)&&
        (!resultado||it.resultado===resultado)&&(!resp||(resp==='__sem'?!e.minuta&&!e.correcao:e.minuta===resp||e.correcao===resp)))vis.add(it.uid)}

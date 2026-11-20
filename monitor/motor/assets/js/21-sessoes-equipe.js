@@ -1300,7 +1300,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
   function perfilCaso(it, inf) {
     var C = it.cartao || {}, a = C.adm || {}, o = C.orig || {}, j = C.jul || {};
     var x = { processo: it.cnj, classe: it.classe || inf.classe || '', assunto: inf.assunto || '', secao: inf.secao || '', ramo: inf.ramo || '',
-      subassuntos: C.subassuntos || '', especificidades: C.especificidades || '', questoes: C.questoes || '',
+      assuntoDet: C.assuntoDet || '', subassuntos: C.subassuntos || '', especificidades: C.especificidades || '', questoes: C.questoes || '',
       tipoJulgamento: cxTipoJ(it, inf), decisaoOrigem: o.tipo || '', recursos: (C.recursos || []).map(function (r) { return [r.tipo, r.parte].filter(Boolean).join(' · '); }).filter(Boolean),
       tempestividade: it.tempest || '', preparo: it.preparo || '', requisito: a.req || '', mpf: [it.parecer, (C.mpfx || {}).sentido].filter(Boolean).join(' · '),
       ai: C.ai || null, remessa: C.rem || null, ed: C.ed ? { vicio: C.ed.vicio || '' } : null, retratacao: C.jr ? { tema: C.jr.tema || '', tribunal: C.jr.trib || '' } : null,
@@ -1344,7 +1344,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     var pts = (partes || '').split(/\s+[x×]\s+/).filter(Boolean);
     var sec0 = '<section class="pc-wide"><h3><em>◈</em>Caracterização do caso <small class="pc-mut">· dados que alimentam a pesquisa no Modus Operandi</small></h3><div class="pc-grid">' +
       linha('Assunto', esc(inf.assunto || '—')) + linha('Tipo de julgamento', '<select class="cs-sel" data-cs-cx="tipoJ" data-cs-re><option value="">auto: ' + esc(cxTipoJ({ tipoManual: it.tipoManual, classe: it.classe }, inf)) + '</option>' + CX_TJ.map(function (o) { return '<option' + (o === C.tipoJ ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select>') +
-      linha('Subassuntos', ta('subassuntos', 'subassuntos (do inteiro teor)')) + linha('Especificidades', ta('especificidades', 'peculiaridades do caso, distinções')) +
+      linha('Assunto detalhado', ta('assuntoDet', 'assunto do PJe corrigido e preciso')) + linha('Tipo de caso', ta('subassuntos', 'tipo de caso (matéria · tipo · aspecto distintivo)')) + linha('Especificidades', ta('especificidades', 'peculiaridades do caso, distinções')) +
       linha('Questões controvertidas', ta('questoes', 'o que o recurso discute, ponto a ponto')) + linha('Recurso relacionado', inp('relacionado', 'ex.: Apelação relacionada nº …', 'text', 1)) + '</div></section>';
     var sec1 = '<section><h3><em>§</em>Processo e origem</h3>' +
       linha('Partes e papéis', pts.length ? pts.map(function (p, i) { return '<div class="pc-row"><span class="pc-pt">' + esc(p) + '</span>' + sx('papeis.' + i, ['Autor(a)', 'Réu/ré', 'Terceiro']) + '</div>'; }).join('') : '—') +

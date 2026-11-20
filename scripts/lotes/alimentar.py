@@ -4,7 +4,7 @@
 1. Ficha única (acervo/operacional.json)
    - campos do lote, sempre atualizados a partir do lote: producao."Lote …" e origem."Autos …";
    - campos já existentes, preenchidos só quando vazios: Sentença (ID e data), Recursos,
-     Contrarrazões, Outras peças, ID do Parecer MPF, Subassunto, Voto - Resultado.
+     Contrarrazões, Outras peças, ID do Parecer MPF, Tipo de caso, Voto - Resultado.
 2. Prontuário da pauta (acervo/sessoes/<sessão>.json, ctl.cartao), só campos vazios:
    tipo de julgamento, decisão de origem (ID e data), embargos de declaração, agravo interno,
    agravo de instrumento, ID do parecer, resultado, observação geral; e as pendências:
@@ -172,8 +172,8 @@ def main(lotes):
             if vazio(t.get('O que falta sanar')) and it.get('pendencias'):
                 t['O que falta sanar'] = '\n'.join(it['pendencias'])
             fp(t, 'Especificidades', it.get('especificidades'))
-            if vazio(t.get('Tema')) and (it.get('subassunto') or it.get('tipo_caso') or it.get('assunto')):
-                t['Tema'] = it.get('subassunto') or it.get('tipo_caso') or it.get('assunto')
+            if vazio(t.get('Tema')) and (it.get('tipo_caso') or it.get('assunto_detalhado') or it.get('assunto')):
+                t['Tema'] = it.get('tipo_caso') or it.get('assunto_detalhado') or it.get('assunto')
             if vazio(pr.get('Voto - Resultado')) and it.get('resultado'):
                 pr['Voto - Resultado'] = it['resultado']
             if json.dumps(r, ensure_ascii=False, sort_keys=True) != antes:
