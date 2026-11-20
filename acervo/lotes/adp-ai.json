@@ -3569,8 +3569,8 @@
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
    "grupo": "g2",
-   "tipo_caso": "AI · Embargos à execução fiscal do IBAMA (multa ambiental) · efeito suspensivo negado aos embargos",
-   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi postergada e não foi apreciada; há contrarrazões do IBAMA e parecer do MPF (falta de interesse)",
+   "tipo_caso": "AI · Ambiental · embargos à execução fiscal de multa do IBAMA (supressão de APP no Pantanal) · efeito suspensivo aos embargos (artigo 919, § 1º, do CPC)",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), que absorve a tutela recursal postergada e não apreciada; há contrarrazões do IBAMA e parecer do MPF",
    "modelo": "",
    "variacoes": [
     "URG",
@@ -3651,7 +3651,88 @@
     "representacao": "Advogados Gustavo Passarelli da Silva (OAB/MS 7.602) e Cláudio de Rosa Guimarães (OAB/MS 7.620); procuração não identificada com texto [VALIDAR]",
     "preparo": "Recolhido em 09/04/2026 (ID 365385112, comprovante com texto corrompido), reconhecido no despacho ID 366540367"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Ambiental · embargos à execução fiscal de multa do IBAMA (supressão de APP no Pantanal) · efeito suspensivo aos embargos (artigo 919, § 1º, do CPC)",
+   "especificidades": "URGÊNCIA PENDENTE: a tutela recursal foi postergada para depois da contraminuta (despacho ID 366540367) e não foi apreciada; contrarrazões do IBAMA e parecer do MPF juntados em 16/06/2026 · Preparo comprovado por STN (ID 365385112), reconhecido no despacho ID 366540367 · Etiqueta LOTE MULTA - AI · Execução de R$ 3.243.351,72 (CDA 191821) · Número do agravo com final 0001 · Procuração não identificada com texto [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Ambiental · embargos à execução fiscal de multa do IBAMA (supressão de APP no Pantanal) · efeito suspensivo aos embargos (artigo 919, § 1º, do CPC)",
+     "sintese": "O IBAMA executa multa ambiental de R$ 1.125.000,00 (atualizada em R$ 3.243.351,72) por supressão de 375 ha de APP no Pantanal do Rio Negro em 2006. O executado opôs embargos com nulidade do auto, prescrição e ausência de culpa; o juízo negou efeito suspensivo aos embargos.",
+     "questoes": "1) Requisitos do efeito suspensivo aos embargos à execução fiscal (garantia, probabilidade e risco); 2) teses dos embargos: incompetência da autoridade autuante, prescrição da pretensão punitiva, ausência de culpa e extensão da área.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 364646885 (06/04/2026): presença dos requisitos para efeito suspensivo dos embargos (probabilidade das teses e risco); pede efeito suspensivo ou antecipação da tutela recursal.",
+      "contrarrazoes": "Contrarrazões do IBAMA ID 380626124 (16/06/2026): indeferimento do efeito suspensivo e desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "560960353",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Negou efeito suspensivo aos embargos à execução fiscal."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise",
+      "id": "560960353"
+     },
+     "adm": {
+      "prot": "2026-04-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "364646885",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "364646885",
+       "data": "2026-04-06"
+      },
+      {
+       "desc": "Comprovante STN",
+       "id": "365385112",
+       "data": "2026-04-09"
+      },
+      {
+       "desc": "Despacho: preparo e tutela postergada",
+       "id": "366540367",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Contrarrazões do IBAMA",
+       "id": "380626124",
+       "data": "2026-06-16"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "380772205",
+       "data": "2026-06-16"
+      }
+     ],
+     "pendencias": "Conferir a procuração; verificar o lote \"LOTE MULTA - AI\"",
+     "especificidades": "URGÊNCIA PENDENTE: a tutela recursal foi postergada para depois da contraminuta (despacho ID 366540367) e não foi apreciada; contrarrazões do IBAMA e parecer do MPF juntados em 16/06/2026 · Preparo comprovado por STN (ID 365385112), reconhecido no despacho ID 366540367 · Etiqueta LOTE MULTA - AI · Execução de R$ 3.243.351,72 (CDA 191821) · Número do agravo com final 0001 · Procuração não identificada com texto [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2026-04-06"
+    }
+   }
   },
   {
    "sessao": "",
