@@ -10363,12 +10363,12 @@
    "executado": "VERANIZ CARLOS LOVIZON",
    "assunto": "Contratos Bancários",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · PASEP · legitimidade passiva do Banco do Brasil e da União · competência da Justiça Federal · Tema 1.150/STJ",
+   "resultado": "Ato a proferir: despacho de intimação para comprovar o preparo pelo comprovante STN (artigo 2º, § 2º, III, da Resolução PRES 138/2017) ou exame da deserção após a intimação anterior (ID 366239032) [VALIDAR]; depois, julgamento do agravo",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo do Banco do Brasil S.A. contra a decisão ID 505233097 da 2ª Vara Federal de Campo Grande/MS (ação indenizatória 5005063-98.2024.4.03.6000, de Veraniz Carlos Lovizon) que reconheceu a ilegitimidade passiva da União, extinguiu o processo em relação a ela, reconheceu a legitimidade do Banco do Brasil e declinou da competência para a Justiça Estadual. O agravante sustenta que a ação discute índices de correção do PASEP, de responsabilidade da União, e que é mero depositário, com competência da Justiça Federal.",
+   "peculiaridades": "Processo redistribuído pela criação da Turma Regional. Preparo pago no Banco do Brasil e, depois da intimação, comprovado só por guia e comprovante bancário da Caixa. Matéria do Tema 1.150/STJ [VALIDAR aplicação].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -10396,7 +10396,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 368413811, 350938155 · só a guia: ID 368413809 · documento não acessível para leitura: ID 350938154 · certidão sem custas: ID 350592210 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 368413809, 350938155 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
+    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026",
+    "ato": "Despacho de intimação para o comprovante STN do preparo ou exame da deserção [VALIDAR]",
+    "materia": "PASEP: legitimidade passiva do Banco do Brasil e da União; competência da Justiça Federal",
+    "origem": "5005063-98.2024.4.03.6000 (2ª Vara Federal de Campo Grande/MS)",
+    "decisao_agravada": "Decisão saneadora ID 505233097 da origem",
+    "recurso": "ID 350472782 · 19/01/2026",
+    "preparo": "Guia e comprovante do Internet Banking Caixa (IDs 368413809 e 368413811, 21/01/2026, R$ 64,26) após intimação; sem comprovante STN",
+    "monocratica": "Possível (Tema 1.150/STJ) [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -10417,6 +10425,113 @@
     "ultima_informacao": "Certidão · ID 378140815 · 02/06/2026",
     "ultima_movimentacao": "02/06/2026 17:29 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "PASEP · legitimidade passiva do Banco do Brasil e da União · competência da Justiça Federal · Tema 1.150/STJ",
+   "especificidades": "Redistribuído da 1ª Turma (Des. Fed. Cotrim Guimarães e, depois, Des. Fed. Nelton dos Santos) ao Gabinete A em 02/06/2026 (certidão ID 378140815) · Efeito suspensivo indeferido (ID 351071971, 23/01/2026) · Preparo: o despacho ID 366239032 (15/04/2026) rejeitou o aviso de lançamento do Banco do Brasil (ID 350938155) e exigiu o recolhimento correto, sob pena de não conhecimento; veio só guia (ID 368413809) e comprovante do Internet Banking Caixa de 21/01/2026 (ID 368413811, R$ 64,26), sem comprovante STN · Contraminuta só da União (interessada, ID 352037300); do agravado Veraniz Carlos Lovizon não consta [VALIDAR] · Documento ID 350938154 inacessível para leitura",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "O autor pede indenização por desfalques e falta de rendimentos na conta PASEP. O juízo excluiu a União, manteve o Banco do Brasil no polo passivo e declinou da competência para a Justiça Estadual.",
+    "inicial": "Ação indenizatória 5005063-98.2024.4.03.6000 de Veraniz Carlos Lovizon contra o Banco do Brasil e a União (2ª Vara Federal de Campo Grande/MS), por diferenças na conta PASEP",
+    "decisao_recorrida": "Decisão saneadora ID 505233097 da origem: ilegitimidade passiva da União, com extinção em relação a ela (artigo 485, VI, do CPC); legitimidade do Banco do Brasil; declínio da competência para a Justiça Estadual de Campo Grande/MS; honorários de 10% do valor da causa a favor da União, com exigibilidade suspensa",
+    "recurso": "Agravo ID 350472782 (19/01/2026): (1) cabimento pelo artigo 1.015, VII, do CPC; (2) ilegitimidade do Banco do Brasil, mero depositário, porque a lide discute índices de correção (TJLP substituída por INPC, IPCA e SELIC); (3) legitimidade da União, gestora do fundo; (4) competência da Justiça Federal (artigo 109, I, da Constituição Federal). Pede efeito suspensivo e a reforma.",
+    "resposta": "União ID 352037300 (27/01/2026): a lide imputa má gestão só ao Banco do Brasil e não contesta índices do Conselho Diretor; ilegitimidade da União (Tema 1.150/STJ, citado); desprovimento. Agravado: não consta.",
+    "parecer": "Não consta",
+    "outros": "Decisão ID 351071971 (23/01/2026, Des. Fed. Cotrim Guimarães): indeferiu o efeito suspensivo. Despacho ID 366239032 (15/04/2026, Des. Fed. Nelton dos Santos): recolhimento correto do preparo em 5 dias, sob pena de não conhecimento. Despacho ID 375546651: redistribuição à Turma Regional de Mato Grosso do Sul.",
+    "representacao": "Agravante: advogada Louise Rainer Pereira Gionédis (OAB/MS 16.644-A) [VALIDAR procuração, ID 350472786 sem texto]. Agravado: advogado Paulo Monteiro Junior (OAB/MS 23.100). União: AGU.",
+    "preparo": "Certidão sem custas (ID 350592210); aviso de lançamento do Banco do Brasil (ID 350938155); guia GRU Judicial (ID 368413809) e comprovante do Internet Banking Caixa, 21/01/2026, R$ 64,26 (ID 368413811)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "PASEP · legitimidade passiva do Banco do Brasil e da União · competência da Justiça Federal · Tema 1.150/STJ",
+     "sintese": "O autor pede indenização por desfalques e falta de rendimentos na conta PASEP. O juízo excluiu a União, manteve o Banco do Brasil no polo passivo e declinou da competência para a Justiça Estadual.",
+     "questoes": "1) Preparo após intimação, sem comprovante STN; 2) legitimidade passiva do Banco do Brasil e da União em ação sobre desfalques e rendimentos da conta PASEP (Tema 1.150/STJ); 3) competência da Justiça Federal.",
+     "rel": {
+      "razoes": "Agravo (ID 350472782): (1) ilegitimidade do Banco do Brasil, mero depositário; (2) legitimidade da União pelos índices de correção; (3) competência da Justiça Federal.",
+      "contrarrazoes": "União (ID 352037300): a lide imputa má gestão ao Banco do Brasil; ilegitimidade da União; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "505233097",
+      "juizo": "2ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Reconheceu a ilegitimidade passiva da União, extinguindo o processo em relação a ela (artigo 485, VI, do CPC), reconheceu a legitimidade passiva do Banco do Brasil e declinou da competência para uma das Varas Cíveis da Comarca de Campo Grande/MS."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Indeferido",
+      "id": "505233097"
+     },
+     "adm": {
+      "prot": "2026-01-19",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Banco do Brasil S.A.",
+       "tipo": "Agravo de instrumento",
+       "id": "350472782",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "350472782",
+       "data": "2026-01-19"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "350592210",
+       "data": "2026-01-20"
+      },
+      {
+       "desc": "Aviso de lançamento do Banco do Brasil",
+       "id": "350938155",
+       "data": "2026-01-22"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "351071971",
+       "data": "2026-01-23"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "352037300",
+       "data": "2026-01-27"
+      },
+      {
+       "desc": "Despacho do recolhimento correto",
+       "id": "366239032",
+       "data": "2026-04-15"
+      },
+      {
+       "desc": "Guia e comprovante bancário",
+       "id": "368413811",
+       "data": "2026-04-23"
+      },
+      {
+       "desc": "Certidão de redistribuição",
+       "id": "378140815",
+       "data": "2026-06-02"
+      }
+     ],
+     "pendencias": "Decidir sobre o preparo (comprovante STN); conferir a intimação do agravado para contraminuta e a procuração",
+     "especificidades": "Redistribuído da 1ª Turma (Des. Fed. Cotrim Guimarães e, depois, Des. Fed. Nelton dos Santos) ao Gabinete A em 02/06/2026 (certidão ID 378140815) · Efeito suspensivo indeferido (ID 351071971, 23/01/2026) · Preparo: o despacho ID 366239032 (15/04/2026) rejeitou o aviso de lançamento do Banco do Brasil (ID 350938155) e exigiu o recolhimento correto, sob pena de não conhecimento; veio só guia (ID 368413809) e comprovante do Internet Banking Caixa de 21/01/2026 (ID 368413811, R$ 64,26), sem comprovante STN · Contraminuta só da União (interessada, ID 352037300); do agravado Veraniz Carlos Lovizon não consta [VALIDAR] · Documento ID 350938154 inacessível para leitura"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-01-23"
+    }
    }
   },
   {
