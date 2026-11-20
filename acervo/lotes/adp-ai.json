@@ -2983,13 +2983,15 @@
    "exequente": "FABIO ROGERIO RODRIGUES LEOCATES DE MORAES",
    "executado": "FUNDACAO CESGRANRIO",
    "assunto": "Anulação e Correção de Provas / Questões",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI · Concurso Nacional Unificado (Bloco 4) · anulação de 6 questões objetivas · tutela indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), com exame da impugnação à gratuidade feita pela Cesgranrio; tutela recursal indeferida em 17/07/2026 (Tema 485/STF e falta de urgência) e há contraminutas da União e da Cesgranrio",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Fábio Rogério Rodrigues Leocates de Moraes contra a decisão da 1ª Vara Federal de Campo Grande (processo 5004632-93.2026.4.03.6000) que indeferiu a tutela para anular as questões 1 e 4 (manhã) e 17, 22, 38 e 40 (tarde) da prova objetiva do CNU (Bloco 4), recalcular a nota (64,15 pontos) e reservar vaga. Teses idênticas às do 5000284-84 (mesmo advogado): controle de legalidade de questões com erro grosseiro ou fora do edital, perícia emprestada, decisões favoráveis de outros juízos. A União e a Cesgranrio pedem o desprovimento; a Cesgranrio impugna a gratuidade.",
+   "peculiaridades": "Gratuidade deferida na origem (ID 591099212), reconhecida na decisão ID 386365611 apesar da certidão ID 386152518; impugnada pela Cesgranrio em preliminar de contrarrazões. Ação ajuizada em 01/06/2026; cronograma do concurso encerrado em 11/02/2025. Mesmo grupo do 5000284-84.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -3015,7 +3017,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Concurso público — anulação de questões objetivas (Tema 485/STF)",
+    "origem": "5004632-93.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Decisão que indeferiu a tutela (ID não identificado com texto) [VALIDAR]",
+    "recurso": "ID 386103177 · 14/07/2026",
+    "preparo": "Dispensado (gratuidade da origem, impugnada pela Cesgranrio)",
+    "monocratica": "Possível, pela linha do Tema 485/STF [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -3035,6 +3046,88 @@
     "ultima_informacao": "Certidão · ID 386152518 · 14/07/2026",
     "ultima_movimentacao": "24/08/2026 18:59 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidato do CNU (Bloco 4), com 64,15 pontos na prova objetiva, pede a anulação de 6 questões por duas alternativas corretas ou conteúdo fora do edital, com recálculo da nota e reserva de vaga. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação 5004632-93.2026.4.03.6000 (ajuizada em 01/06/2026) contra a União e a Fundação Cesgranrio",
+    "decisao_recorrida": "Decisão da 1ª Vara Federal de Campo Grande que indeferiu a tutela de urgência por ausência dos requisitos; não juntada com texto",
+    "recurso": "Agravo ID 386103177 (14/07/2026): (1) controle de legalidade de questões com erro grosseiro; (2) violação do edital (resposta única e conteúdo programático); (3) perícia emprestada sobre a questão 40; (4) decisões de outros juízos anulando questões do CNU. Pede anulação, recálculo e reserva de vaga.",
+    "resposta": "União ID 387997104 (21/07/2026): vinculação ao edital, banca como última instância e isonomia. Cesgranrio ID 391487768 (11/08/2026): preliminar de impugnação à gratuidade e mérito pelo desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogados Igor Oliva de Souza (OAB/DF 60.845) e Késia da Silva Souza (OAB/DF 74.482), procuração não identificada com texto [VALIDAR]. Cesgranrio: procuração (ID 391487771) e substabelecimento (ID 391487772)",
+    "preparo": "Dispensado: gratuidade deferida na origem (ID 591099212), impugnada pela Cesgranrio"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "relacionado": "5000284-84.2026.4.03.0001 (mesma matéria e advogado)",
+     "subassuntos": "Concurso público — CNU; anulação de questões",
+     "sintese": "Candidato do CNU (Bloco 4), com 64,15 pontos na prova objetiva, pede a anulação de 6 questões por duas alternativas corretas ou conteúdo fora do edital, com recálculo da nota e reserva de vaga. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Impugnação à gratuidade (preliminar da Cesgranrio); 2) cabimento do controle judicial das questões à luz do Tema 485/STF; 3) urgência, com o cronograma encerrado em 2025.",
+     "rel": {
+      "razoes": "Agravo (ID 386103177): (1) controle de legalidade de questões com erro grosseiro; (2) violação do edital; (3) perícia emprestada sobre a questão 40; (4) decisões de outros juízos.",
+      "contrarrazoes": "União (ID 387997104): vinculação ao edital e isonomia. Cesgranrio (ID 391487768): impugnação à gratuidade e desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "1ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Indeferiu a tutela de urgência por ausência dos requisitos."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-07-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "386103177",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "386103177",
+       "data": "2026-07-14"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "386365611",
+       "data": "2026-07-17"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "387997104",
+       "data": "2026-07-22"
+      },
+      {
+       "desc": "Contraminuta da Cesgranrio",
+       "id": "391487768",
+       "data": "2026-08-11"
+      }
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-17"
+    }
    }
   },
   {
