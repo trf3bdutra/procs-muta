@@ -113,6 +113,13 @@
    "cor": "#2e5c6b",
    "resultado": "A definir (tutela para suspender cobrança; capitalização)",
    "modelo": ""
+  },
+  {
+   "id": "g12",
+   "rotulo": "Saúde: cirurgias, medicamentos e home care",
+   "cor": "#6b2e5c",
+   "resultado": "A definir (Tema 793/STF; direcionamento do cumprimento)",
+   "modelo": ""
   }
  ],
  "grupo_outros": {
@@ -7906,13 +7913,15 @@
    "exequente": "ANTONIO JOAO AZUAGA",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Cirurgia",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g12",
+   "tipo_caso": "AI · Saúde (DPU) · procedimento na coluna lombar pelo SUS · tutela recursal deferida em parte · agravo interno da União pendente",
+   "resultado": "Ato a proferir: voto conjunto — julgamento do agravo de instrumento e do agravo interno da União (ID 391809863), este com preliminar de não conhecimento por falta de impugnação específica (artigo 1.021, § 1º, do CPC)",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Antônio João Azuaga, assistido pela DPU, contra a decisão que indeferiu a tutela para realizar procedimento cirúrgico na coluna lombar (infiltração e descompressão medular; na inicial, artrodese com instrumentação, laminectomia e microcirurgia do canal estreito) pelo SUS ou, subsidiariamente, em clínica particular, em ação contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande (com dano moral de R$ 30.000,00). A decisão ID 376872583 deferiu em parte a tutela: os réus, solidariamente, devem garantir a infiltração em unidade pública ou, na falta, privada às suas expensas, com TFD se necessário, em 30 dias.",
+   "peculiaridades": "Agravo interno da União (ID 391809863, 13/08/2026) reproduz a contraminuta do mesmo dia (ID 391809049): falta de interesse, ilegitimidade, fila de espera, custeio em unidade privada e direcionamento pelo Tema 793/STF. A DPU (ID 393385893) pede o não conhecimento (Súmula 182/STJ por analogia). Contraminuta do Estado e do Município não identificada [VALIDAR]. Origem e ID da decisão agravada não identificados na leitura [VALIDAR]. Prazo em dobro da DPU.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -7938,7 +7947,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Voto conjunto (agravo de instrumento e agravo interno)",
+    "materia": "Saúde — procedimento cirúrgico pelo SUS; solidariedade e Tema 793/STF",
+    "origem": "Ação de obrigação de fazer contra União, Estado de MS e Município de Campo Grande [VALIDAR número e vara]",
+    "decisao_agravada": "Decisão que indeferiu a tutela de urgência; ID não identificado [VALIDAR]",
+    "recurso": "Agravo de instrumento (ID não identificado na leitura) e agravo interno da União ID 391809863",
+    "preparo": "Dispensado (DPU)",
+    "monocratica": "Não",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7958,6 +7976,98 @@
     "ultima_informacao": "Certidão · ID 381941697 · 22/06/2026",
     "ultima_movimentacao": "28/10/2026 14:13 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Paciente do SUS com indicação de procedimento na coluna lombar pediu tutela para realizá-lo. Negada na origem, a tutela foi deferida em parte no Tribunal para a infiltração, em unidade pública ou privada, com responsabilidade solidária dos três entes. A União interpôs agravo interno.",
+    "inicial": "Ação de obrigação de fazer contra União, Estado de Mato Grosso do Sul e Município de Campo Grande: procedimento cirúrgico na coluna lombar e dano moral de R$ 30.000,00",
+    "decisao_recorrida": "Decisão de origem que indeferiu a tutela de urgência [VALIDAR teor]",
+    "recurso": "Agravo do autor (DPU): urgência e indicação médica do procedimento pelo SUS [VALIDAR razões]. Agravo interno da União ID 391809863: requisitos do artigo 300 do CPC; vedação de liminar satisfativa (Lei 8.437/1992); falta de interesse; ilegitimidade da União quanto à regulação; respeito à fila; impossibilidade de custeio em unidade privada; direcionamento pelo Tema 793/STF.",
+    "resposta": "União (contraminuta ID 391809049, 13/08/2026): mesmas teses do agravo interno. DPU ao agravo interno (ID 393385893, 24/08/2026): não conhecimento por falta de impugnação específica; mérito pela manutenção.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: Defensoria Pública da União. União: AGU (Rafael José de Queiroz Souza)",
+    "preparo": "Dispensado (DPU)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Saúde; procedimento cirúrgico; SUS; solidariedade; Tema 793/STF; agravo interno",
+     "sintese": "Paciente do SUS com indicação de procedimento na coluna lombar pediu tutela para realizá-lo. Negada na origem, a tutela foi deferida em parte no Tribunal para a infiltração, em unidade pública ou privada, com responsabilidade solidária dos três entes. A União interpôs agravo interno.",
+     "questoes": "1) Conhecimento do agravo interno (artigo 1.021, § 1º, do CPC); 2) legitimidade da União e direcionamento do cumprimento (Tema 793/STF); 3) urgência e fila de regulação; 4) custeio em rede privada.",
+     "rel": {
+      "razoes": "Agravo do autor: indicação médica e urgência [VALIDAR]. Agravo interno da União: ilegitimidade, fila, custeio privado, Tema 793/STF.",
+      "contrarrazoes": "União (ID 391809049); DPU ao agravo interno (ID 393385893)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Deferido em parte"
+     },
+     "agint": {
+      "id": "391809863",
+      "data": "2026-08-13",
+      "sintese": "Reforma da tutela recursal deferida em parte",
+      "fund": "Artigo 300 do CPC; Lei 8.437/1992; ilegitimidade; fila; Tema 793/STF"
+     },
+     "adm": {
+      "dobro": true,
+      "ajg": true,
+      "dpu": true
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora (DPU)",
+       "tipo": "Agravo de instrumento",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "União",
+       "tipo": "Agravo interno",
+       "id": "391809863",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão que deferiu em parte a tutela recursal",
+       "id": "376872583"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "391809049",
+       "data": "2026-08-13"
+      },
+      {
+       "desc": "Agravo interno da União",
+       "id": "391809863",
+       "data": "2026-08-13"
+      },
+      {
+       "desc": "Contrarrazões da DPU ao agravo interno",
+       "id": "393385893",
+       "data": "2026-08-24"
+      }
+     ],
+     "pendencias": [
+      "Identificar a origem, o ID do agravo e da decisão agravada [VALIDAR]",
+      "Contraminuta do Estado e do Município [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Há preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "tipoAto": "Voto",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · deferida em parte"
+    }
    }
   },
   {
