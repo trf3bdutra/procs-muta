@@ -99,6 +99,13 @@
    "cor": "#a33b5c",
    "resultado": "A definir (Tema 485/STF nas questões objetivas)",
    "modelo": ""
+  },
+  {
+   "id": "g10",
+   "rotulo": "Aduaneiro: perdimento de veículos e mercadorias",
+   "cor": "#5c6b2e",
+   "resultado": "A definir (responsabilidade do proprietário; boa-fé)",
+   "modelo": ""
   }
  ],
  "grupo_outros": {
@@ -4593,13 +4600,15 @@
    "exequente": "DEISY JORDAN FUENTES",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Apreensão",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g10",
+   "tipo_caso": "AI · Aduaneiro · perdimento de veículo boliviano (Toyota Noah) · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal negada em 09/07/2026; contraminuta da Fazenda Nacional",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Deisy Jordan Fuentes contra a decisão de 16/06/2026 da 1ª Vara Federal de Corumbá (processo 5000244-38.2026.4.03.6004) que, na ação anulatória contra a União, deferiu a gratuidade, negou a tutela e mandou citar a União com esclarecimentos. Discute-se a pena de perdimento do veículo Toyota/Noah 2005, placa boliviana PQV-4923, apreendido em 28/06/2024 no Posto Esdras. A agravante alega nulidade da intimação por edital e boa-fé (locação do veículo); pede suspensão da destinação ou restituição como fiel depositária.",
+   "peculiaridades": "Gratuidade na origem (ID 588706529), reconhecida na decisão ID 385094680 apesar da certidão ID 385034552. A decisão de tutela afastou a nulidade da intimação por edital e viu ao menos culpa in eligendo da proprietária. Pedido de oitiva de testemunha (Felix Choque Garcia) dirigido à origem. Valor da causa R$ 15.000,00.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -4625,7 +4634,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Aduaneiro — perdimento de veículo estrangeiro; responsabilidade do proprietário",
+    "origem": "5000244-38.2026.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Decisão de 16/06/2026 (cópia ID 384811551)",
+    "recurso": "ID 384811549 · 07/07/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -4645,6 +4663,93 @@
     "ultima_informacao": "Certidão · ID 385034552 · 08/07/2026",
     "ultima_movimentacao": "06/08/2026 14:44 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Veículo de placa boliviana de propriedade da agravante foi apreendido em Corumbá em 28/06/2024 e sofreu pena de perdimento. A agravante alega intimação nula por edital e que o veículo estava locado ao condutor autuado. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação anulatória 5000244-38.2026.4.03.6004 contra a União para suspender o perdimento e restituir o veículo",
+    "decisao_recorrida": "Decisão de 16/06/2026 da 1ª Vara Federal de Corumbá: recebeu a inicial, deferiu a gratuidade, indeferiu a tutela por demandar instrução e mandou citar a União com esclarecimentos",
+    "recurso": "Agravo ID 384811549 (07/07/2026): (1) nulidade da intimação por edital no processo administrativo; (2) boa-fé da proprietária e locação do veículo; (3) fragilidade da prova da responsabilidade; (4) desproporção da retenção, já periciadas as mercadorias (Termo de Retenção 0147600-157113/2024); (5) risco de leilão ou deterioração. Pede a suspensão do perdimento ou a restituição como fiel depositária.",
+    "resposta": "Fazenda Nacional ID 388376061 (24/07/2026): falta de probabilidade do direito; infrações reiteradas com o veículo; apreensão desde 2024 sem iminência de destinação; necessidade de instrução.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogada Cassandra Abbate (OAB/MS 12.554), procuração ID 384811553",
+    "preparo": "Dispensado: gratuidade deferida na origem (ID 588706529)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Pena de perdimento; veículo estrangeiro; responsabilidade do proprietário; intimação por edital",
+     "sintese": "Veículo de placa boliviana de propriedade da agravante foi apreendido em Corumbá em 28/06/2024 e sofreu pena de perdimento. A agravante alega intimação nula por edital e que o veículo estava locado ao condutor autuado. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Validade da intimação por edital no processo administrativo; 2) responsabilidade do proprietário (culpa in eligendo) e boa-fé; 3) urgência, com o veículo retido desde 2024.",
+     "rel": {
+      "razoes": "Agravo (ID 384811549): nulidade da intimação por edital; boa-fé e locação; fragilidade da prova; desproporção; risco de alienação.",
+      "contrarrazoes": "Fazenda Nacional (ID 388376061): falta de probabilidade do direito; infrações reiteradas; ausência de urgência; necessidade de instrução."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "data": "2026-06-16",
+      "juizo": "1ª Vara Federal de Corumbá/MS",
+      "dispositivo": "Deferiu a gratuidade, indeferiu a tutela e determinou a citação da União."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-07-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "384811549",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "384811549",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Cópia da decisão agravada",
+       "id": "384811551",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Procuração",
+       "id": "384811553",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "385094680",
+       "data": "2026-07-09"
+      },
+      {
+       "desc": "Contraminuta da Fazenda Nacional",
+       "id": "388376061",
+       "data": "2026-07-24"
+      }
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo / antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-09"
+    }
    }
   },
   {
