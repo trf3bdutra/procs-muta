@@ -221,7 +221,7 @@ body.temsel main{padding-bottom:150px}
   document.getElementById('tit').textContent='Mesa de designação · pauta de '+D.sessao.data.slice(8,10)+'/'+D.sessao.data.slice(5,7)+'/'+D.sessao.data.slice(0,4);
   /* embed=1: dentro de Pautas › Designação; o botão alterna a tela cheia */
   var EMBED=new URLSearchParams(location.search).get('embed')==='1';
-  if(VIVO){document.getElementById('b-fechar').hidden=false;document.getElementById('b-aplicar').textContent='Aplicar à pauta';if(EMBED)document.getElementById('b-fechar').textContent='Tela cheia';}
+  if(VIVO){document.getElementById('b-fechar').hidden=EMBED;document.getElementById('b-aplicar').textContent='Aplicar à pauta';}
   window.addEventListener('message',function(ev){if(ev.origin!==location.origin||!ev.data)return;if(ev.data.tipo==='cmt:mesa-modo')document.getElementById('b-fechar').textContent=ev.data.full?'Sair da tela cheia':'Tela cheia';});
   document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&VIVO){try{window.parent.postMessage({tipo:'cmt:mesa-fechar'},location.origin);}catch(er){}}});
   function diasUteis(a,b){var n=0,d=new Date(a+'T12:00:00'),f=new Date(b+'T12:00:00');var U=VIVO&&VIVO.diasUteis&&VIVO.diasUteis.util;while(d<=f){var w=d.getDay(),k=d.toISOString().slice(0,10);if(U?U(k):(w&&w<6&&!FER[k]))n++;d.setDate(d.getDate()+1);}return n;}

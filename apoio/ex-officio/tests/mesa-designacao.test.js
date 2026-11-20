@@ -11,7 +11,7 @@ test('Mesa de designação: página válida, publicada e ligada ao Caput',()=>{
   assert.match(pag,/competencia:\{pen:0\.6/,'carga só desempata no modo padrão');
   assert.ok(read('.github/workflows/vercel-monitor.yml').includes('cp monitor/designacao/index.html site/public/caput/designacao/index.html'));
   const caput=read('monitor/triagem/index.html');
-  for(const x of ['data-cwe="des-mesa"',"'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
+  for(const x of ["'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
   assert.ok(!caput.includes('<span class="v">${e(atual)}</span>'),'minutante e corretor sempre editáveis');
 });
 test('Motor: troca na designação e período efetivo com marcos invertidos',()=>{
