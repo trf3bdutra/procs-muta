@@ -11529,13 +11529,13 @@
    "exequente": "CLAUDIO ROBERTO VIERO",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Crédito Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Contratos bancários · execução de cédula rural pignoratícia e hipotecária · restrição via RENAJUD e indisponibilidade via CNIB · proporcionalidade das medidas",
+   "resultado": "Ato a proferir: despacho de intimação para comprovar o preparo pelo comprovante STN (artigo 2º, § 2º, III, da Resolução PRES 138/2017); depois, decisão inicial com exame da tutela recursal",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Gustavo Garcia Silva e Claudio Roberto Viero contra as decisões IDs 597421661 e 599607525 da 1ª Vara Federal de Naviraí/MS (execução de título extrajudicial 5000216-64.2026.4.03.6006, movida pela CEF com base em cédula rural pignoratícia e hipotecária) que autorizaram restrição de veículos via RENAJUD e bloqueio de imóveis via CNIB. Os agravantes sustentam desproporção entre o débito e o patrimônio já identificado, inclusive por laudo da própria CEF, e pedem a suspensão dessas medidas até prova da insuficiência das garantias.",
+   "peculiaridades": "Recurso duplicado (AI 5000608-74.2026.4.03.0001). Preparo em dobro comprovado só por Pix. Tutela recursal pendente. Execução conexa a cautelar com apelação pendente, segundo os agravantes.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -11558,7 +11558,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 401180669 · despacho/decisão sobre preparo: ID 398125963 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5000216-64.2026.4.03.6006 · Outros números do TRF3 citados (conferir se precedente ou conexo): 5000608-74.2026.4.03.0001 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5000216-64.2026.4.03.6006 · Outros números do TRF3 citados (conferir se precedente ou conexo): 5000608-74.2026.4.03.0001 · conferido em 20/11/2026",
+    "ato": "Despacho de intimação para o comprovante STN do preparo",
+    "materia": "Execução de cédula rural pela CEF; restrição via RENAJUD e indisponibilidade via CNIB; proporcionalidade das medidas executivas",
+    "origem": "5000216-64.2026.4.03.6006 (1ª Vara Federal de Naviraí/MS)",
+    "decisao_agravada": "Decisões IDs 597421661 e 599607525 da origem (esta de 17/08/2026)",
+    "recurso": "ID 396760682 · 09/09/2026",
+    "preparo": "Recolhimento em dobro comprovado só por comprovante Pix (ID 401180669, R$ 128,52); sem comprovante STN",
+    "monocratica": "Não nesta fase",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -11579,6 +11587,98 @@
     "ultima_informacao": "Certidão · ID 401145722 · 28/09/2026",
     "ultima_movimentacao": "08/10/2026 13:30 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Contratos bancários · execução de cédula rural pignoratícia e hipotecária · restrição via RENAJUD e indisponibilidade via CNIB · proporcionalidade das medidas",
+   "especificidades": "AI idêntico 5000608-74.2026.4.03.0001, redistribuído ao Gabinete A: a decisão ID 398125963 (24/09/2026) manteve este, por ser o primeiro, e assentou a preclusão consumativa daquele · Autuação retificada para excluir Viero Nutrição Animal Ltda (certidão ID 401145722) · Preparo: recolhimento em dobro determinado (ID 398125963) e comprovado só por comprovante Pix de cooperativa (ID 401180669, 28/09/2026, R$ 128,52), não pelo comprovante STN · Pedido de tutela recursal ainda não apreciado · Recurso parcial: não impugna os capítulos favoráveis sobre SISBAJUD, SERASAJUD e proteção da Fazenda Santa Carmem II · Execução de R$ 4.271.615,10",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A CEF executa cédula rural de R$ 4.271.615,10. O juízo rejeitou a exceção de pré-executividade, preservou por um ano a área produtiva e os semoventes, indeferiu SISBAJUD e SERASAJUD e autorizou RENAJUD, CNIB e INFOJUD. Os executados pedem a contenção das medidas patrimoniais adicionais.",
+    "inicial": "Execução de título extrajudicial 5000216-64.2026.4.03.6006 da CEF (1ª Vara Federal de Naviraí/MS), ajuizada em 19/02/2026, fundada em cédula rural pignoratícia e hipotecária",
+    "decisao_recorrida": "Decisão ID 597421661 da origem: indeferiu SISBAJUD e SERASAJUD e autorizou consulta e restrição via RENAJUD, bloqueio de imóveis via CNIB e INFOJUD; decisão ID 599607525 (17/08/2026): rejeitou embargos de declaração e manteve as medidas [VALIDAR teor integral]",
+    "recurso": "Agravo ID 396760682 (09/09/2026): (1) desproporção entre o débito e o patrimônio identificado, com laudo da CEF; (2) ausência de prova da insuficiência das garantias; (3) distinção entre averbação e indisponibilidade; (4) ausência de indícios de fraude ou ocultação. Pede a suspensão do CNIB e do RENAJUD, a manutenção do INFOJUD só como pesquisa e, subsidiariamente, a conversão do CNIB em mera anotação.",
+    "resposta": "Não consta",
+    "parecer": "Não consta",
+    "outros": "Petição ID 396777378 (09/09/2026): pedido de arquivamento por erro no cadastro de parte. Informação ID 397887009: AI idêntico 5000608-74.2026.4.03.0001 e ausência de custas. Decisão ID 398125963 (24/09/2026): prosseguimento deste agravo, retificação da autuação e recolhimento em dobro.",
+    "representacao": "Agravantes: advogado Edson Garcia Pereira (OAB/PR 74.729-A) [VALIDAR procuração]. CEF: não consta. Banco Central do Brasil cadastrado como interessado.",
+    "preparo": "Comprovante Pix de cooperativa, R$ 128,52, 28/09/2026 (ID 401180669), com petição ID 401180659"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contratos bancários · execução de cédula rural pignoratícia e hipotecária · restrição via RENAJUD e indisponibilidade via CNIB · proporcionalidade das medidas",
+     "sintese": "A CEF executa cédula rural de R$ 4.271.615,10. O juízo rejeitou a exceção de pré-executividade, preservou por um ano a área produtiva e os semoventes, indeferiu SISBAJUD e SERASAJUD e autorizou RENAJUD, CNIB e INFOJUD. Os executados pedem a contenção das medidas patrimoniais adicionais.",
+     "questoes": "1) Preparo em dobro comprovado só por Pix; 2) proporcionalidade do RENAJUD e do CNIB diante das garantias e do patrimônio identificado; 3) tutela recursal.",
+     "rel": {
+      "razoes": "Agravo (ID 396760682): (1) desproporção entre débito e patrimônio; (2) falta de prova da insuficiência das garantias; (3) averbação não é indisponibilidade; (4) ausência de fraude.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "597421661",
+      "juizo": "1ª Vara Federal de Naviraí/MS",
+      "dispositivo": "Autorizou RENAJUD, CNIB e INFOJUD e indeferiu SISBAJUD e SERASAJUD; mantida em embargos de declaração (ID 599607525) [VALIDAR transcrição]."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise",
+      "id": "599607525",
+      "data": "2026-08-17"
+     },
+     "adm": {
+      "prot": "2026-09-09",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Gustavo Garcia Silva e Claudio Roberto Viero",
+       "tipo": "Agravo de instrumento",
+       "id": "396760682",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "396760682",
+       "data": "2026-09-09"
+      },
+      {
+       "desc": "Pedido de arquivamento",
+       "id": "396777378",
+       "data": "2026-09-09"
+      },
+      {
+       "desc": "Informação da Subsecretaria",
+       "id": "397887009",
+       "data": "2026-09-14"
+      },
+      {
+       "desc": "Decisão de prosseguimento e recolhimento em dobro",
+       "id": "398125963",
+       "data": "2026-09-24"
+      },
+      {
+       "desc": "Comprovante Pix de custas",
+       "id": "401180669",
+       "data": "2026-09-28"
+      }
+     ],
+     "pendencias": "Intimar para o comprovante STN; conferir a tempestividade (intimação da decisão dos embargos); apreciar a tutela recursal",
+     "especificidades": "AI idêntico 5000608-74.2026.4.03.0001, redistribuído ao Gabinete A: a decisão ID 398125963 (24/09/2026) manteve este, por ser o primeiro, e assentou a preclusão consumativa daquele · Autuação retificada para excluir Viero Nutrição Animal Ltda (certidão ID 401145722) · Preparo: recolhimento em dobro determinado (ID 398125963) e comprovado só por comprovante Pix de cooperativa (ID 401180669, 28/09/2026, R$ 128,52), não pelo comprovante STN · Pedido de tutela recursal ainda não apreciado · Recurso parcial: não impugna os capítulos favoráveis sobre SISBAJUD, SERASAJUD e proteção da Fazenda Santa Carmem II · Execução de R$ 4.271.615,10"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Pendente · não apreciada"
+    }
    }
   },
   {
