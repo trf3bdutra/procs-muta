@@ -384,6 +384,7 @@ html{overflow-x:clip}                                   /* a barra em largura to
 .cmt-met span{font:600 11px/1.3 var(--font);letter-spacing:0;text-transform:none;color:var(--ei2)}
 .cmt-met div.dem span{color:var(--em);font-weight:500}
 .cmt-met div.on{background:var(--ew);box-shadow:inset 0 -3px 0 var(--eo)}
+.pend-x{display:block;margin-top:2px;font-size:11.5px;color:var(--er)}
 .cmt-met div.on span{color:var(--ei)}
 .cmt-met div:focus-visible{outline:2px solid var(--eo);outline-offset:-2px}
 /* perfil: identificação à esquerda (quebra só dentro dela) e ações fixas à direita */
@@ -868,6 +869,25 @@ async function aplica(){
     $('#tr-de').value=$('#tr-para').value;TR.achados=[];TR.marcados=new Set();setTimeout(async()=>{await trechos();$('#tr-m').textContent=fim},300);
   }catch(e){$('#tr-m').textContent='Não gravou: '+e.message;b.disabled=false;b.dataset.conf=''}
 }
+/* Pendência do prontuário x tabela de peças: avisa quando a pendência pede um ID que a tabela já traz,
+   ou cita um ID que não está entre as peças nem entre os documentos lidos dos autos. Só sinaliza; não altera o cartão. */
+const semAc=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+const PECA_T=[['apela','apelação'],['contrarraz','contrarrazões'],['senten','sentença'],['agravo','agravo'],['embargos','embargos'],['parecer','parecer'],['peti','petição inicial'],['decis','decisão']];
+function confPend(desc,P,it){
+  const d=semAc(desc);if(!d)return '';
+  const pecas=[...(P.pecas||[]).map(x=>({d:x.desc||'',id:String(x.id||'')})),...(it.pecas||[]).map(x=>({d:x.peca||x.tipo||'',id:String(x.id||'')}))].filter(x=>x.id);
+  const ids=new Set(pecas.map(x=>x.id));((it.autos&&it.autos.documentos)||[]).forEach(x=>ids.add(String(x[0])));
+  const notas=[];
+  const fora=(desc.match(/\b\d{8,10}\b/g)||[]).filter(x=>!ids.has(x));
+  /* a peça de que a pendência fala: o termo mais próximo do ID citado (ou o primeiro que aparece) */
+  const ref=fora.length?d.indexOf(fora[0]):0;
+  const termo=PECA_T.filter(([k])=>d.includes(k)).sort((a,b)=>Math.abs(d.indexOf(a[0])-ref)-Math.abs(d.indexOf(b[0])-ref))[0];
+  const doTermo=termo?pecas.filter(x=>semAc(x.d).includes(termo[0])):[];
+  /* ID divergente: a pendência pede para confirmar um ID atribuído a uma peça que a tabela registra com outro ID */
+  if(fora.length&&doTermo.length&&/atribu|consta .{0,40}como|confirmar/.test(d))notas.push('ID '+[...new Set(fora)].join(', ')+' não está na tabela de peças, que registra '+termo[1]+' com ID '+doTermo.map(x=>x.id).join(', '));
+  else if(!fora.length&&doTermo.length&&/nao consta|validar|confirmar o (numero|id)/.test(d))notas.push('a tabela de peças já traz '+doTermo.map(x=>x.d+' (ID '+x.id+')').join('; '));
+  return notas.length?'Conferir: '+notas.join(' · '):'';
+}
 function dl(o){return '<dl>'+Object.entries(o).filter(([k,v])=>v).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${v}</dd>`).join('')+'</dl>'}
 function perfil(it,i){
   const c=gcor(it), e=it.equipe||{}, P=it.prontuario&&it.prontuario.cartao, t=it.triagem||{};
@@ -907,7 +927,7 @@ function perfil(it,i){
     b+=`<div class="box so-equipe"><h3>Triagem</h3>${dl({'Apelante':esc(t['Apelante']),'Preliminares':esc(t['Preliminares']),'Mérito':esc(t['Mérito (triagem)']),'Observação':esc(t['Obs. da triagem'])})}</div>`;
   if(P){b+=`<div class="box wide"><h3>Prontuário · Ex Officio</h3>${P.sintese?`<p><b>Síntese.</b> ${esc(P.sintese)}</p>`:''}${P.especificidades?`<p><b>Especificidades.</b> ${esc(P.especificidades)}</p>`:''}${P.questoes?`<p><b>Questões.</b> ${esc(P.questoes)}</p>`:''}${P.obsGeral?`<p><b>Observação.</b> ${esc(P.obsGeral)}</p>`:''}`+
     (P.pecas&&P.pecas.length?`<table><tr><th>Peça</th><th>ID</th><th>Data</th></tr>${P.pecas.map(p=>`<tr><td>${esc(p.desc)}</td><td class="cnj">${esc(p.id)}</td><td>${esc(br(p.data))}</td></tr>`).join('')}</table>`:'')+
-    (P.pendencias&&P.pendencias.length?`<div class="so-equipe"><p style="margin-top:8px"><b>Pendências do prontuário</b></p><ul>${P.pendencias.map(p=>`<li>${esc(p.desc)}</li>`).join('')}</ul></div>`:'')+
+    (P.pendencias&&P.pendencias.length?`<div class="so-equipe"><p style="margin-top:8px"><b>Pendências do prontuário</b></p><ul>${P.pendencias.map(p=>{const n=confPend(p.desc,P,it);return `<li>${esc(p.desc)}${n?`<span class="pend-x">${esc(n)}</span>`:''}</li>`}).join('')}</ul></div>`:'')+
     `<p class="cmt-n" style="margin-top:6px">Editado por ${esc(it.prontuario.editadoPor)} em ${esc(br(it.prontuario.editadoEm))}</p></div>`}
   if((it.ajustes||[]).length>1){const hd=it.ajustes[0];b+=`<div class="box wide so-equipe"><h3>Quadro de ajustes</h3><table><tr>${hd.map(x=>`<th>${esc(x)}</th>`).join('')}</tr>${it.ajustes.slice(1).map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</table></div>`}
   if((it.pendencias||[]).length) b+=`<div class="box wide so-equipe"><h3>Pendências</h3><ul>${it.pendencias.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>`;
