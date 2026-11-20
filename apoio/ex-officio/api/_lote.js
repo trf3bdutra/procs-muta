@@ -191,12 +191,14 @@ function rascunhoMinuta(lote, it, u) {
   const semPonto = s => String(s || '').trim().replace(/[.;]\s*$/, '');
   const minus = s => { s = semPonto(s); return s ? s.charAt(0).toLowerCase() + s.slice(1) : ''; };
   const razoes = semPonto(String(rel.razoes || T.recurso || '').replace(/^[^:]{0,80}\):\s*|^[^:(]{0,60}:\s*/, ''));
+  /* enumeração no padrão: o último item vem com "e" — (1) …; (2) …; e (3) … */
+  const fechaEnum = t => /\(2\)/.test(t) && !/;\s*e\s*\(\d+\)(?!.*\(\d+\))/.test(t) ? t.replace(/;\s*\((\d+)\)(?!.*\(\d+\))/, '; e ($1)') : t;
   const recorr = ((P.recursos || [])[0] || {}).parte || '[VALIDAR: parte recorrente]';
   const recId = ((P.recursos || [])[0] || {}).id || (ids(/^agravo de instrumento|^apela|^recurso/i)[0]) || '';
   const relatorio = [];
   if (ai) relatorio.push('Trata-se de agravo de instrumento à decisão' + (orig.id ? ' (ID ' + orig.id + ', origem)' : '') + ' que, ' + (tri.origem ? 'nos autos ' + semPonto(tri.origem) + ', ' : '') + (minus(orig.dispositivo) || '[VALIDAR: dispositivo da decisão agravada]') + '.');
   else relatorio.push('Trata-se de ' + String(tipo).toLowerCase() + (orig.id ? ' à decisão (ID ' + orig.id + ')' : '') + ' que ' + (minus(orig.dispositivo) || '[VALIDAR: dispositivo]') + '.');
-  relatorio.push((ai ? 'Agravou ' : 'Recorreu ') + recorr + (recId ? ' (ID ' + recId + ')' : '') + ', alegando, em suma: ' + (razoes || '[VALIDAR: razões]') + '.');
+  relatorio.push((ai ? 'Agravou ' : 'Recorreu ') + recorr + (recId ? ' (ID ' + recId + ')' : '') + ', alegando, em suma: ' + (fechaEnum(razoes) || '[VALIDAR: razões]') + '.');
   const resp = ids(/contraminuta|contrarraz/i);
   relatorio.push(resp.length ? 'Houve ' + (ai ? 'contraminuta' : 'contrarrazões') + ' (' + lista(resp) + ').' : '[VALIDAR: ' + (ai ? 'contraminuta' : 'contrarrazões') + ' — não registrada no prontuário]');
   const mpf = P.mpfx || {};
