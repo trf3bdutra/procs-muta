@@ -91,3 +91,8 @@ test('Marcos editáveis no cartão com salvar, julgadores por alcance, calendár
   const pag=read('monitor/designacao/index.html');
   for(const x of ['data-grtodos="1"','function aberto(k,n)',"if(EMBED)document.body.classList.add('emb');",'Lendo o histórico da equipe'])assert.ok(pag.includes(x),x);
 });
+test('Cartão da sessão: um Salvar alterações para marcos e julgadores e Publicar alterações; etapa 5 Publicação',()=>{
+  const c=read('monitor/triagem/index.html');
+  for(const x of ['function salvarSessao(ss)','data-cwe="pub-alt"','class="cwe-svg"',"['Publicação', 'conferência final e Ex Officio']",'est.jPend[ss.id] = j;'])assert.ok(c.includes(x),x);
+  assert.ok(c.includes('.cwe-ses button{border:1px solid transparent!important;'),'sessões não selecionadas sem borda');
+});
