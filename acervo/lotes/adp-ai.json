@@ -4438,13 +4438,15 @@
    "exequente": "HELVIO MEDEIROS",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Aposentadoria por Tempo de Serviço (Art. 52/4)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "AI · Previdenciário (competência delegada) · tutela para aposentadoria por tempo de contribuição (pedágio de 100%) · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 26/02/2026 por outro relator (Des. Fed. Fonseca Gonçalves), antes da redistribuição [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Helvio Medeiros contra a decisão (f. 713-714) da Vara Cível da Comarca de Bela Vista/MS (processo 0801486-94.2025.8.12.0003) que deferiu a gratuidade e indeferiu a tutela para implantar aposentadoria por tempo de contribuição pela regra do pedágio de 100% (artigo 20 da EC 103/2019; NB 166.657.844-1, DER 18/06/2025). O INSS reconheceu só 6 anos e 4 meses por pendência no vínculo com a Mineração Oro-Yte Ltda. (desde 01/02/1993), ligado a reclamatória trabalhista. O agravante soma 38 anos e 8 meses com o serviço militar.",
+   "peculiaridades": "A decisão ID 356893567 (Des. Fed. Fonseca Gonçalves) apontou que o serviço militar (03/02/1982 a 25/01/1983) não está averbado no CNIS e que, sem ele, não se demonstrou a probabilidade do direito. Gratuidade na origem. Não consta contraminuta do INSS nem a certidão de redistribuição na leitura [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -4465,7 +4467,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Previdenciário — aposentadoria por tempo de contribuição (regra de transição); tutela de urgência",
+    "origem": "0801486-94.2025.8.12.0003 (Vara Cível de Bela Vista/MS, competência delegada)",
+    "decisao_agravada": "Decisão de f. 713-714 dos autos de origem; publicada em 30/01/2026 segundo o agravante",
+    "recurso": "ID 356775008 · 25/02/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -4485,6 +4496,92 @@
     "ultima_informacao": "Certidão · ID 357072943 · 27/02/2026",
     "ultima_movimentacao": "07/05/2026 17:37 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Segurado nascido em 15/10/1963 teve negada a aposentadoria por tempo de contribuição (pedágio de 100%) porque o INSS não computou o vínculo com a Mineração Oro-Yte Ltda., objeto de reclamatória trabalhista. Pede a implantação em tutela. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação 0801486-94.2025.8.12.0003 contra o INSS para conceder a aposentadoria por tempo de contribuição (NB 166.657.844-1)",
+    "decisao_recorrida": "Decisão de f. 713-714 da Vara Cível de Bela Vista/MS: deferiu a gratuidade e indeferiu a tutela por falta de receio de ineficácia, pois o benefício foi negado por falta de requisitos da regra de transição, o que deve ser esclarecido pelo INSS; referiu o Tema 692/STJ",
+    "recurso": "Agravo ID 356775008 (25/02/2026): (1) erro grosseiro do INSS ao computar 6 anos e 4 meses; (2) cumprimento da exigência com a cópia da reclamatória trabalhista; (3) 38 anos e 8 meses de contribuição com o serviço militar (artigo 55, I, da Lei 8.213/1991); (4) caráter alimentar. Pede a implantação imediata.",
+    "resposta": "Não consta contraminuta do INSS",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: procuração anexa segundo a petição; advogado e ID não identificados [VALIDAR]",
+    "preparo": "Dispensado: gratuidade deferida na origem; certidão ID 356881271 sem custas"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Aposentadoria por tempo de contribuição; regra de transição do artigo 20 da EC 103/2019; reclamatória trabalhista; serviço militar",
+     "sintese": "Segurado nascido em 15/10/1963 teve negada a aposentadoria por tempo de contribuição (pedágio de 100%) porque o INSS não computou o vínculo com a Mineração Oro-Yte Ltda., objeto de reclamatória trabalhista. Pede a implantação em tutela. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Cômputo, em tutela, do vínculo reconhecido em reclamatória trabalhista e do serviço militar não averbado; 2) perigo de dano.",
+     "rel": {
+      "razoes": "Agravo (ID 356775008): erro do INSS na contagem; cumprimento da exigência; serviço militar; caráter alimentar.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "Vara Cível da Comarca de Bela Vista/MS",
+      "dispositivo": "Deferiu a gratuidade e indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-02-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false,
+      "intim": "2026-01-30"
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "356775008",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "356775008",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Certidão de ausência de custas",
+       "id": "356881271",
+       "data": "2026-02-26"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal (Des. Fed. Fonseca Gonçalves)",
+       "id": "356893567",
+       "data": "2026-02-26"
+      },
+      {
+       "desc": "Comunicação ao juízo de origem",
+       "id": "357072943",
+       "data": "2026-02-27"
+      }
+     ],
+     "pendencias": [
+      "Conferir a redistribuição e se o INSS apresentou contraminuta [VALIDAR]",
+      "Identificar a procuração [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-02-26"
+    }
    }
   },
   {
