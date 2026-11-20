@@ -8,10 +8,10 @@ test('Mesa de designação: página válida, publicada e ligada ao Caput',()=>{
   [...pag.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((m,i)=>new vm.Script(m[1],{filename:'mesa-'+i+'.js'}));
   assert.ok(pag.includes('aplicarDesignacao(D.sessao.id,lista)'),'aplica pelo motor');
   assert.ok(pag.includes("MOD='competencia'"),'modo padrão por regras e competência');
-  assert.match(pag,/competencia:\{st:[\d.]+,pen:0\.6/,'carga só desempata no modo padrão');
+  assert.match(pag,/competencia:\{pen:0\.6/,'carga só desempata no modo padrão');
   assert.ok(read('.github/workflows/vercel-monitor.yml').includes('cp monitor/designacao/index.html site/public/caput/designacao/index.html'));
   const caput=read('monitor/triagem/index.html');
-  for(const x of ['data-cwe="des-mesa"',"src=\"/caput/designacao/?s=","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
+  for(const x of ['data-cwe="des-mesa"',"'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
   assert.ok(!caput.includes('<span class="v">${e(atual)}</span>'),'minutante e corretor sempre editáveis');
 });
 test('Motor: troca na designação e período efetivo com marcos invertidos',()=>{
@@ -29,4 +29,23 @@ test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
   assert.ok(read('monitor/triagem/index.html').includes('Minutam só por exceção'));
   const pag=read('monitor/designacao/index.html');
   assert.ok(pag.includes('optsEx(k,v)')&&pag.includes('var EV=EQ.filter'));
+});
+test('Mesa: agrupar por motivo do minutante e do corretor',()=>{
+  const pag=read('monitor/designacao/index.html');
+  for(const x of ['data-ag="bloco"','data-ag="md"','data-ag="mc"','function motivo(x,k)','return grupo(x)===b'])assert.ok(pag.includes(x),x);
+  for(const m of ['Escolha manual','Continuidade','Regra do gabinete','Especialidade ou preferência','Experiência no assunto','Mesmo lote ou assunto','Já designado na pauta','Distribuição pela carga'])assert.ok(pag.includes(m),m);
+});
+test('Mesa dentro da etapa B: modo embutido e tela cheia',()=>{
+  const pag=read('monitor/designacao/index.html');
+  assert.ok(pag.includes("get('embed')==='1'")&&pag.includes("EMBED?'cmt:mesa-tela':'cmt:mesa-fechar'"));
+  const caput=read('monitor/triagem/index.html');
+  assert.ok(caput.includes('requestAnimationFrame(mesaSync)'),'reposiciona a mesa a cada render');
+  assert.ok(caput.includes("h.id = 'cwe-mesa-host'")&&caput.includes('document.body.appendChild(h)'),'moldura fora do HTML refeito pelo render');
+});
+test('Mesa: designação inicial e seleção em lote',()=>{
+  const pag=read('monitor/designacao/index.html');
+  assert.ok(!pag.includes('Mexer pouco')&&!pag.includes('trocas de minutante'),'sem vocabulário de troca');
+  assert.ok(pag.includes("var g=k==='d'?x.d:x.c;if(g)return g;"),'o gravado fica; a proposta preenche o resto');
+  assert.ok(!pag.includes("why.push(['','designação atual'])"),'gravado não pesa na proposta');
+  for(const x of ['data-a="proposta"','Refazer tudo pela proposta','data-ck="','data-ckg="','data-lote="d"','data-lote="c"','sel-proposta','sel-limpar'])assert.ok(pag.includes(x),x);
 });
