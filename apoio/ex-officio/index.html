@@ -8757,6 +8757,17 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 #v-cmt .cmt-gv #p-pen .drw-h:before{display:none}
 #v-cmt .cmt-gv #p-pen .pen-f .ck{display:none}
 #v-cmt .cmt-gv #pen-s span:nth-child(2){display:none}
+/* Pauta de julgamento: marcos na linha do título; barras soltas, no alto da coluna, alinhadas ao cartão da sessão */
+@media (min-width:981px){
+ #v-pauta.pt2:not(.mono) #trb .trb-h{grid-column:1;grid-row:1;align-self:end;white-space:nowrap;position:relative;z-index:1}
+ #v-pauta.pt2:not(.mono) #trb .trb-h,#v-pauta.pt2:not(.mono) #trb .trb-h>div:first-child{text-align:left!important}
+ #v-pauta.pt2:not(.mono) #trb .trb-h .trb-eyr{justify-content:flex-start!important}
+ #v-pauta.pt2:not(.mono) #pp-and{grid-column:2;grid-row:1}
+ #v-pauta.pt2:not(.mono) #trb-mk{grid-column:2;grid-row:1;align-self:end;margin:4px 0 22px!important;padding:0 0 0 clamp(48px,calc(320px - 19vw),140px)!important;
+   background:none!important;border:0!important;box-shadow:none!important}
+ #v-pauta.pt2:not(.mono) #trb-p{margin-top:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+}
+#v-pauta.pt2 #pp-lst{margin:0!important;padding:0!important;border:0!important;height:0;overflow:hidden}
 </style>
 </body>
 </html>
