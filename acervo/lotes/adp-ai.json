@@ -9426,13 +9426,13 @@
    "exequente": "CONSELHO REGIONAL DE CONTABILIDADE DO MATO GROSSO DO SUL",
    "executado": "ELIZEU FERREIRA DE ARAGAO",
    "assunto": "Conselhos Regionais e Afins (Anuidade)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal · conselho profissional · piso do artigo 8º da Lei 12.514/2011 · arquivamento (Tema 1.193/STJ)",
+   "resultado": "Ato a proferir: nenhum julgamento pendente nos autos extraídos; conferir trânsito em julgado e baixa [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo do Conselho Regional de Contabilidade de Mato Grosso do Sul contra a decisão da 1ª Vara Federal de Dourados/MS (execução fiscal 5000553-12.2019.4.03.6002, contra Elizeu Ferreira de Aragão) que arquivou a execução por valor inferior ao piso do artigo 8º da Lei 12.514/2011. O recurso já foi julgado por decisão monocrática do Relator (ID 389125028, 28/07/2026), que lhe negou provimento.",
+   "peculiaridades": "Decisão monocrática terminativa já proferida. Processo na tarefa sem ato pendente aparente [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -9460,7 +9460,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Só a guia · só a guia: ID 357881391 · certidão sem custas: ID 353538714 · despacho/decisão sobre preparo: ID 355697892 · conselho profissional: não isento · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 357881391 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
+    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026",
+    "ato": "Nenhum julgamento pendente: decisão monocrática já proferida (ID 389125028); conferir trânsito e baixa [VALIDAR]",
+    "materia": "Piso para execução fiscal de conselho profissional (artigo 8º da Lei 12.514/2011; Tema 1.193/STJ)",
+    "origem": "5000553-12.2019.4.03.6002 (1ª Vara Federal de Dourados/MS)",
+    "decisao_agravada": "Decisão de arquivamento publicada em 25/11/2025",
+    "recurso": "ID 353497453 · 06/02/2026",
+    "preparo": "Só a guia após intimação para recolhimento em dobro (ID 357881391)",
+    "monocratica": "Já proferida (ID 389125028, 28/07/2026)",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -9481,6 +9489,89 @@
     "ultima_informacao": "Certidão · ID 367260020 · 17/04/2026",
     "ultima_movimentacao": "29/09/2026 15:48 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · conselho profissional · piso do artigo 8º da Lei 12.514/2011 · arquivamento (Tema 1.193/STJ)",
+   "especificidades": "Já julgado: decisão monocrática do Des. Fed. Carlos Muta negou provimento ao agravo (ID 389125028, 28/07/2026), com esteio no artigo 932 do CPC e no Tema 1.193/STJ · Nenhum ato posterior nos autos extraídos: conferir trânsito em julgado, eventual agravo interno e motivo de estar na tarefa \"Analisar tipo de decisão a proferir\" [VALIDAR] · Executado sem advogado: agravado não intimado (certidão ID 360641191) · Preparo em dobro: só a guia (ID 357881391), com autenticação ilegível",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "O conselho executa anuidades de valor inferior a cinco vezes R$ 500,00 corrigidos pelo INPC. O juízo arquivou a execução não garantida pelo Tema 1.193/STJ; o agravo foi desprovido monocraticamente.",
+    "inicial": "Execução fiscal 5000553-12.2019.4.03.6002 do CRC/MS contra Elizeu Ferreira de Aragão (1ª Vara Federal de Dourados/MS)",
+    "decisao_recorrida": "Decisão de origem publicada em 25/11/2025: arquivamento da execução não garantida, por valor inferior ao piso dos artigos 6º, I e § 1º, e 8º da Lei 12.514/2011 (Tema 1.193/STJ)",
+    "recurso": "Agravo ID 353497453 (06/02/2026): o piso deve considerar o valor das anuidades efetivamente cobradas pelo conselho, não o valor fixo do artigo 6º, I, da Lei 12.514/2011.",
+    "resposta": "Não houve: executado sem advogado (certidão ID 360641191).",
+    "parecer": "Não consta",
+    "outros": "Despacho ID 355697892 (19/02/2026, Des. Fed. Mônica Nobre): recolhimento em dobro. Redistribuição ID 367157015 (17/04/2026). Decisão monocrática ID 389125028 (28/07/2026): agravo desprovido (artigo 932 do CPC; Tema 1.193/STJ).",
+    "representacao": "Agravante: advogada Tania Carla da Costa Silva (OAB/MS 17.109). Agravado: sem advogado.",
+    "preparo": "Despacho de recolhimento em dobro (ID 355697892); só a guia GRU Judicial de R$ 128,56 [VALIDAR leitura] (ID 357881391)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · conselho profissional · piso do artigo 8º da Lei 12.514/2011 · arquivamento (Tema 1.193/STJ)",
+     "sintese": "O conselho executa anuidades de valor inferior a cinco vezes R$ 500,00 corrigidos pelo INPC. O juízo arquivou a execução não garantida pelo Tema 1.193/STJ; o agravo foi desprovido monocraticamente.",
+     "questoes": "Já decidido: piso mínimo da execução fiscal de conselho profissional pelo valor fixo do artigo 6º, I, da Lei 12.514/2011 (Tema 1.193/STJ).",
+     "rel": {
+      "razoes": "Agravo (ID 353497453): piso pelo valor efetivamente cobrado pelo conselho.",
+      "contrarrazoes": "Não houve: agravado sem advogado."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "1ª Vara Federal de Dourados/MS",
+      "dispositivo": "Determinou o arquivamento dos autos, sem baixa na distribuição, nos termos do artigo 40 da Lei 6.830/1980."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido"
+     },
+     "adm": {
+      "prot": "2026-02-06",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2025-11-25"
+     },
+     "recursos": [
+      {
+       "parte": "Conselho Regional de Contabilidade de Mato Grosso do Sul",
+       "tipo": "Agravo de instrumento",
+       "id": "353497453",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "353497453",
+       "data": "2026-02-06"
+      },
+      {
+       "desc": "Despacho de recolhimento em dobro",
+       "id": "355697892",
+       "data": "2026-02-19"
+      },
+      {
+       "desc": "Guia GRU Judicial",
+       "id": "357881391",
+       "data": "2026-03-03"
+      },
+      {
+       "desc": "Decisão monocrática",
+       "id": "389125028",
+       "data": "2026-07-28"
+      }
+     ],
+     "pendencias": "Conferir trânsito em julgado e baixa; saber por que o processo está na tarefa",
+     "especificidades": "Já julgado: decisão monocrática do Des. Fed. Carlos Muta negou provimento ao agravo (ID 389125028, 28/07/2026), com esteio no artigo 932 do CPC e no Tema 1.193/STJ · Nenhum ato posterior nos autos extraídos: conferir trânsito em julgado, eventual agravo interno e motivo de estar na tarefa \"Analisar tipo de decisão a proferir\" [VALIDAR] · Executado sem advogado: agravado não intimado (certidão ID 360641191) · Preparo em dobro: só a guia (ID 357881391), com autenticação ilegível"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
    }
   },
   {
