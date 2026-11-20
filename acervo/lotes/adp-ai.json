@@ -1956,12 +1956,15 @@
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Execução fiscal do IBAMA · gratuidade da justiça para massa falida indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto ou monocrática) sobre a gratuidade da massa falida; sem pedido de tutela e há contrarrazões do IBAMA",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "VAL"
+   ],
+   "observacao": "Agravo da Massa Falida de REPRAM – Reciclagem e Preservação Ambiental, representada pela administradora judicial Cury Administradora Judicial, contra a decisão da 6ª Vara Federal de Campo Grande que, na execução fiscal 5007899-20.2019.4.03.6000 movida pelo IBAMA, indeferiu a gratuidade e rejeitou a exceção de pré-executividade. O recurso pede só a gratuidade; junta extrato bancário (R$ 8.571,26) e quadro geral de credores. O IBAMA pede o não conhecimento ou o desprovimento (ID 375249489).",
+   "peculiaridades": "Ausência de preparo certificada; o recurso versa sobre a própria gratuidade (despacho ID 366759545, 29/04/2026, que mandou intimar a agravada). Etiqueta: LOTE MULTA - AI.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1982,9 +1985,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto ou monocrática)",
+    "materia": "Gratuidade da justiça — pessoa jurídica em falência",
+    "origem": "EF 5007899-20.2019.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Cópias nos IDs 364958606 e 364958608 (capas extraídas; conteúdo a conferir)",
+    "recurso": "ID 364958596 · 07/04/2026",
+    "preparo": "Não recolhido; recurso sobre a própria gratuidade",
+    "monocratica": "Possível, conforme a linha do gabinete sobre gratuidade de massa falida [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Linha do gabinete sobre gratuidade de massa falida (prova da insuficiência pela pessoa jurídica)",
+    "[VALIDAR] Termo de nomeação da administradora judicial"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -2002,6 +2017,17 @@
     "ultima_informacao": "Certidão · ID 365720441 · 10/04/2026",
     "ultima_movimentacao": "25/05/2026 16:24 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "O IBAMA executa crédito contra REPRAM, hoje em falência. A massa falida pediu gratuidade e opôs exceção de pré-executividade; o juízo indeferiu ambas, e a massa agravou só quanto à gratuidade, alegando insuficiência de recursos.",
+    "inicial": "Não consta nos autos do recurso (EF 5007899-20.2019.4.03.6000)",
+    "decisao_recorrida": "Decisão da 6ª Vara Federal de Campo Grande que indeferiu a gratuidade e rejeitou a exceção de pré-executividade; cópias nos IDs 364958606 e 364958608",
+    "recurso": "Agravo de instrumento ID 364958596 (07/04/2026): concessão da gratuidade à massa falida, com extrato bancário (ID 364958602) e quadro geral de credores (ID 364958604).",
+    "resposta": "Contrarrazões do IBAMA ID 375249489 (11/05/2026): não conhecimento por manifesta improcedência ou desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Massa falida representada pela administradora judicial Cury Administradora Judicial (advogado José Eduardo Chemin Cury, OAB/MS 9.560); termo de nomeação não identificado [VALIDAR]",
+    "preparo": "Não recolhido; dispensado enquanto se discute a própria gratuidade (artigo 101, § 1º, do CPC) [VALIDAR]"
    }
   },
   {
@@ -2014,12 +2040,14 @@
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Ambiental · embargo do IBAMA sobre imóvel rural · proprietário não intimado no processo administrativo · tutela concedida em reconsideração",
+   "resultado": "Ato a proferir: julgamento do agravo (voto) ou prejudicialidade; tutela recursal concedida em 30/04/2025 em reconsideração e há contraminuta do IBAMA. Conferir antes se a ação de origem foi sentenciada",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Samuel Peloi Junior contra a decisão ID 350298280 que, na ação 5000016-94.2025.4.03.6005 (2ª Vara Federal de Ponta Porã), indeferiu a liminar para suspender o embargo ambiental do Termo de Embargo TEQI0KEV. Tese: o agravante, verdadeiro proprietário, não foi cientificado do processo administrativo (movido contra seu pai); a restrição é ônus excessivo. O IBAMA, nas contrarrazões (ID 321189006), pede a manutenção da decisão.",
+   "peculiaridades": "Liminar indeferida pelo Relator anterior (decisão ID 311845957, 02/04/2025); reconsiderada em 30/04/2025 (decisão ID 322629025), que suspendeu os efeitos do embargo no Processo Administrativo 02014.000046/2022-19 até o julgamento do agravo ou a sentença. Feito de 2025.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -2055,9 +2083,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto) ou prejudicialidade",
+    "materia": "Ambiental — embargo administrativo; contraditório no processo administrativo",
+    "origem": "5000016-94.2025.4.03.6005 (2ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "ID 350298280 da origem, transcrita na decisão ID 311845957",
+    "recurso": "ID 311625831 · 14/01/2025",
+    "preparo": "Petição de juntada de custas (ID 311661382); arquivo de custas sem conteúdo (ID 311661383) [VALIDAR]",
+    "monocratica": "Possível, se houver perda de objeto [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Situação da ação de origem (sentença superveniente)",
+    "[VALIDAR] Preparo: arquivo de custas sem conteúdo",
+    "[VALIDAR] Procuração"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -2075,6 +2116,17 @@
     "ultima_informacao": "Certidão · ID 371489654 · 06/05/2026",
     "ultima_movimentacao": "04/11/2026 15:30 · JUNTADA DE CERTIDÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "O IBAMA embargou área de imóvel rural em Ponta Porã em processo administrativo contra o pai do agravante; o agravante, que se diz proprietário, alega não ter sido cientificado e pediu a suspensão do embargo, negada na origem e concedida no Tribunal em reconsideração.",
+    "inicial": "Ação de procedimento comum 5000016-94.2025.4.03.6005; capa juntada no ID 311627186",
+    "decisao_recorrida": "Decisão ID 350298280 da 2ª Vara Federal de Ponta Porã: o autor tinha ciência de longa data do processo administrativo; indeferiu a liminar",
+    "recurso": "Agravo de instrumento ID 311625831 (14/01/2025): proprietário não intimado no processo administrativo; ônus excessivo do embargo; pedido de reconsideração ID 320355526 (08/04/2025), acolhido.",
+    "resposta": "Contrarrazões do IBAMA ID 321189006 (15/04/2025): manutenção da decisão por seus fundamentos.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Luiz Augusto Pinheiro de Lacerda (OAB/MS 9.498) e Virgílio Ferreira de Pinho Neto (OAB/MS 15.422); procuração não identificada com texto [VALIDAR]",
+    "preparo": "Petição de juntada das custas de 2º grau (ID 311661382); o arquivo de custas (ID 311661383) não tem conteúdo legível [VALIDAR]"
    }
   },
   {
