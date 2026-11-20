@@ -114,7 +114,7 @@ body.temsel main{padding-bottom:150px}
 </head>
 <body>
 <header class="top">
-  <div><p class="k">Caput · Pautas · 3 Preparar · B Designação e correção</p><h1 id="tit">Mesa de designação</h1>
+  <div><p class="k">Caput · Pautas · 4 Designação de redator e corretor</p><h1 id="tit">Mesa de designação</h1>
   <p class="sub" id="sub"></p></div>
   <div class="per" role="group" aria-label="Período de produção das minutas">
     <label for="p-de">Produção de<input type="date" id="p-de"></label>
@@ -195,7 +195,7 @@ body.temsel main{padding-bottom:150px}
       equipe:(S.equipe||[]).filter(function(m){return m.nome!=='CM';}).map(function(m){return {nome:m.nome,cargo:m.cargo,papel:m.papel,minuta:m.minuta,correcao:m.correcao,auto:m.auto,exp:m.exp,pref:m.pref,nao:m.nao,aliases:m.aliases,aus:m.aus,minutaEventual:m.minutaEventual};}),
       regras:{ordem:(S.desig&&S.desig.ordem)||[],rows:(S.desig&&S.desig.rows)||{}},hist:{d:hd,c:hc},prod:{pesos:pr.pesos||{},metaPadrao:pr.metaPadrao||{voto:3},metas:pr.metas||{}}};
   }
-  carregar().then(function(D){if(!D||D.erro||!D.itens){document.getElementById('blocos').innerHTML='<p class="mu">'+((D&&D.erro)||'Abra esta página pelo Caput › Pautas › Preparar › Designação.')+'</p>';return;}iniciar(D);});
+  carregar().then(function(D){if(!D||D.erro||!D.itens){document.getElementById('blocos').innerHTML='<p class="mu">'+((D&&D.erro)||'Abra esta página pelo Caput › Pautas › Designação.')+'</p>';return;}iniciar(D);});
   function iniciar(D){
   var N=function(s){return String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\s+/g,' ').trim();};
   var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
@@ -214,7 +214,7 @@ body.temsel main{padding-bottom:150px}
   var hoje=new Date().toISOString().slice(0,10);
   var de=(D.periodo&&D.periodo.de)||'2026-11-23', ate=(D.periodo&&D.periodo.ate)||'2026-11-27';
   document.getElementById('tit').textContent='Mesa de designação · pauta de '+D.sessao.data.slice(8,10)+'/'+D.sessao.data.slice(5,7)+'/'+D.sessao.data.slice(0,4);
-  /* embed=1: dentro de Pautas › Preparar › B; o botão alterna a tela cheia */
+  /* embed=1: dentro de Pautas › Designação; o botão alterna a tela cheia */
   var EMBED=new URLSearchParams(location.search).get('embed')==='1';
   if(VIVO){document.getElementById('b-fechar').hidden=false;document.getElementById('b-aplicar').textContent='Aplicar à pauta';if(EMBED)document.getElementById('b-fechar').textContent='Tela cheia';}
   window.addEventListener('message',function(ev){if(ev.origin!==location.origin||!ev.data)return;if(ev.data.tipo==='cmt:mesa-modo')document.getElementById('b-fechar').textContent=ev.data.full?'Sair da tela cheia':'Tela cheia';});

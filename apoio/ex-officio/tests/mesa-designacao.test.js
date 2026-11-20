@@ -59,7 +59,7 @@ test('Pautas: cabeçalho compacto ao lado do painel e etapa 2 pela numeração d
 });
 test('Pautas: painel da sessão integrado ao cabeçalho e julgadores com substituições',()=>{
   const c=read('monitor/triagem/index.html');
-  assert.ok(c.includes("const corpo = [null, etapa1, etapa2, etapa3, etapa4][d.cur](ss, d);"),'esteira com 4 etapas');
+  assert.ok(c.includes("const corpo = [null, etapa1, etapa2, etapaEtq, etapaDes, etapa4][d.cur](ss, d);"),'esteira: seleção, pauta, etiquetagem, designação, publicar');
   assert.ok(!c.includes("['Painel da sessão', 'todas as estatísticas']"),'painel não é etapa');
   for(const x of ['function cabAbas(ss, d)','data-cwe="painel"','data-cwe="j-ed"','function julgEditor(ss, d)','function sugestoesJ(ss, d)','data-cwe="j-sub-add"','data-cwe="j-novo-ok"',"'apoio/magistrados.json'"])assert.ok(c.includes(x),x);
   const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
