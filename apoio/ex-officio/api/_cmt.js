@@ -110,9 +110,9 @@ async function painel(req, res, u) {
       const [F, { doc }] = await Promise.all([FICHA.catalogo(), FICHA.lerOpLeitura()]);
       const reg = (doc.registros || []).find(r => String(r.processo || '').replace(/\D/g, '') === alvoP) || null;
       const abas = (F.abas || []).map(ab => ({
-        nome: ab.nome || '',
+        nome: ab.nome || ab.aba || '',
         grupos: (ab.grupos || []).map(g => ({
-          nome: g.nome || '',
+          nome: g.nome || g.grupo || '',
           campos: (g.campos || []).map(c => {
             const v = c.secao && reg ? (reg[c.secao] || {})[c.chave] : '';
             return { rotulo: c.rotulo || c.chave || '', valor: Array.isArray(v) ? v : (v == null ? '' : String(v)), tipo: c.tipo || '' };
