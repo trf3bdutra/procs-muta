@@ -10807,13 +10807,13 @@
    "exequente": "MARIZE APARECIDA LEITE SIQUEIRA SILVA LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Contribuição sobre a folha de salários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "AI · Execução fiscal · exceção de pré-executividade rejeitada · nulidade das CDAs, prescrição parcial e excesso de execução · contribuições sobre a folha",
+   "resultado": "Ato a proferir: despacho de intimação para comprovar o preparo pelo comprovante STN (artigo 2º, § 2º, III, da Resolução PRES 138/2017); depois, decisão inicial (artigo 1.019 do CPC)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Marize Aparecida Leite Siqueira Silva Ltda contra a decisão ID 595761280 (28/07/2026) da execução fiscal 5000434-72.2024.4.03.6003 (6ª Vara Federal de Campo Grande/MS, Núcleo Adjunto 4.0), de R$ 241.229,91, que rejeitou a exceção de pré-executividade. A agravante sustenta nulidade das CDAs por inacessibilidade do processo administrativo, prescrição parcial por competência, excesso de execução pela diferença entre as CDAs e a inicial e honorários pelo Tema 421/STJ.",
+   "peculiaridades": "Preparo em dobro comprovado só por comprovante bancário (ID 398329156): falta o comprovante STN. Pedido de efeito suspensivo pendente. Mesma agravante e mesma advogada do AI 5000239-80.2026.4.03.0001.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -10831,7 +10831,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 398329155, 398329156 · certidão sem custas: ID 393937782 · despacho/decisão sobre preparo: ID 396624060 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 398329156 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5000434-72.2024.4.03.6003 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5000434-72.2024.4.03.6003 · conferido em 20/11/2026",
+    "ato": "Despacho de intimação para o comprovante STN do preparo",
+    "materia": "Exceção de pré-executividade em execução fiscal: nulidade das CDAs, prescrição parcial, excesso de execução",
+    "origem": "5000434-72.2024.4.03.6003 (6ª Vara Federal de Campo Grande/MS)",
+    "decisao_agravada": "Decisão ID 595761280 da origem, 28/07/2026, publicada em 03/08/2026 segundo a agravante",
+    "recurso": "ID 393636827 · 25/08/2026",
+    "preparo": "Recolhimento em dobro comprovado só por comprovante do aplicativo da Caixa (ID 398329156, R$ 128,52); sem comprovante STN",
+    "monocratica": "Não nesta fase",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -10852,6 +10860,100 @@
     "ultima_informacao": "Certidão · ID 393937782 · 27/08/2026",
     "ultima_movimentacao": "16/09/2026 15:51 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Execução fiscal · exceção de pré-executividade rejeitada · nulidade das CDAs, prescrição parcial e excesso de execução · contribuições sobre a folha",
+   "especificidades": "Preparo: recolhimento em dobro determinado (ID 396624060, 08/09/2026) e comprovado só por comprovante do aplicativo da Caixa (ID 398329156, 15/09/2026, R$ 128,52), não pelo comprovante STN · Pedido de efeito suspensivo e de antecipação da tutela recursal ainda não apreciado · A mesma agravante teve o AI 5000239-80.2026.4.03.0001, de outra execução fiscal (5009593-14.2025.4.03.6000), não conhecido por deserção pelo mesmo motivo · Peça de interposição endereçada ao juízo de origem, com pedido de juízo de retratação",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A União executa contribuições sobre a folha em seis CDAs. Com penhora via SISBAJUD determinada, a executada opôs exceção de pré-executividade, que foi rejeitada.",
+    "inicial": "Execução fiscal 5000434-72.2024.4.03.6003 da União (Fazenda Nacional), ajuizada em 22/05/2024, de R$ 241.229,91, em seis CDAs",
+    "decisao_recorrida": "Decisão ID 595761280 da origem (28/07/2026): rejeitou a exceção de pré-executividade; os pagamentos parciais foram abatidos (ID 477428047); sem honorários por se tratar de incidente [VALIDAR teor integral, ID 393638451]",
+    "recurso": "Agravo ID 393636827 (25/08/2026): (1) nulidade das CDAs por inacessibilidade do processo administrativo; (2) prescrição parcial, sem exame por competência (artigo 489, § 1º, IV, do CPC); (3) excesso de execução superior a R$ 40.000,00 entre as CDAs e a inicial; (4) honorários em caso de extinção (Tema 421/STJ); (5) risco de constrição via SISBAJUD. Pede efeito suspensivo e antecipação da tutela recursal.",
+    "resposta": "Não consta",
+    "parecer": "Não consta",
+    "outros": "Certidão sem custas (ID 393937782). Despacho ID 396624060 (08/09/2026): recolhimento em dobro.",
+    "representacao": "Agravante: advogada Alessandra Vilalva Vaz (OAB/MG 207.950 e OAB/BA 80.326), procuração ID 393636830. União: PFN.",
+    "preparo": "Comprovante do aplicativo da Caixa, R$ 128,52, 15/09/2026 (ID 398329156), com petição ID 398329155"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · exceção de pré-executividade rejeitada · nulidade das CDAs, prescrição parcial e excesso de execução · contribuições sobre a folha",
+     "sintese": "A União executa contribuições sobre a folha em seis CDAs. Com penhora via SISBAJUD determinada, a executada opôs exceção de pré-executividade, que foi rejeitada.",
+     "questoes": "1) Preparo em dobro comprovado só por comprovante bancário; 2) nulidade das CDAs e prescrição parcial em exceção de pré-executividade (Súmula 393/STJ); 3) excesso de execução aferível de plano.",
+     "rel": {
+      "razoes": "Agravo (ID 393636827): (1) nulidade das CDAs; (2) prescrição parcial por competência; (3) excesso de execução; (4) honorários (Tema 421/STJ); (5) risco de constrição.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "595761280",
+      "data": "2026-07-28",
+      "juizo": "6ª Vara Federal de Campo Grande/MS (Núcleo Adjunto 4.0)",
+      "dispositivo": "Rejeitou a exceção de pré-executividade [VALIDAR transcrição]."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise",
+      "id": "595761280",
+      "data": "2026-07-28"
+     },
+     "adm": {
+      "prot": "2026-08-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false,
+      "intim": "2026-08-03"
+     },
+     "recursos": [
+      {
+       "parte": "Marize Aparecida Leite Siqueira Silva Ltda",
+       "tipo": "Agravo de instrumento",
+       "id": "393636827",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "393636827",
+       "data": "2026-08-25"
+      },
+      {
+       "desc": "Decisão agravada",
+       "id": "393638451",
+       "data": "2026-08-25"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "393937782",
+       "data": "2026-08-27"
+      },
+      {
+       "desc": "Despacho de recolhimento em dobro",
+       "id": "396624060",
+       "data": "2026-09-08"
+      },
+      {
+       "desc": "Comprovante bancário de custas",
+       "id": "398329156",
+       "data": "2026-09-16"
+      }
+     ],
+     "pendencias": "Intimar para o comprovante STN; depois, apreciar o pedido de efeito suspensivo",
+     "especificidades": "Preparo: recolhimento em dobro determinado (ID 396624060, 08/09/2026) e comprovado só por comprovante do aplicativo da Caixa (ID 398329156, 15/09/2026, R$ 128,52), não pelo comprovante STN · Pedido de efeito suspensivo e de antecipação da tutela recursal ainda não apreciado · A mesma agravante teve o AI 5000239-80.2026.4.03.0001, de outra execução fiscal (5009593-14.2025.4.03.6000), não conhecido por deserção pelo mesmo motivo · Peça de interposição endereçada ao juízo de origem, com pedido de juízo de retratação"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Pendente · não apreciada"
+    }
    }
   },
   {
