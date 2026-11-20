@@ -1578,12 +1578,15 @@
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Alienação fiduciária de imóvel (Lei 9.514/1997) · consolidação · intimação pessoal da codevedora · tutela indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 14/07/2026 e há contraminuta da CEF",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de Maria Aparecida de Carvalho Iunes contra a decisão da 1ª Vara Federal de Campo Grande que, nos autos 5002189-72.2026.4.03.6000, indeferiu a tutela para suspender os efeitos da consolidação da propriedade fiduciária. Teses: nulidade do procedimento extrajudicial por falta de intimação pessoal da agravante, codevedora fiduciante, para purgar a mora (só o cônjuge foi notificado) e por falta de intimação das datas dos leilões. A CEF, na contraminuta (ID 387931318), invoca o Tema 1.288/STJ e pede o desprovimento e honorários recursais.",
+   "peculiaridades": "Preparo recolhido de início à Justiça Federal de primeiro grau (IDs 371819029 e 371819030); após o despacho ID 384198069 (03/07/2026), GRU ao TRF-3 de R$ 64,26 (UG 090029, código 18720-8) juntada em 08/07/2026 (ID 385047301; comprovante ID 385047304, sem texto). Tutela recursal indeferida (decisão ID 386124483). Grupo: alienação fiduciária/leilão.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1614,9 +1617,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Alienação fiduciária — intimação pessoal da codevedora; leilões",
+    "origem": "5002189-72.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Cópia no ID 371836282 (Num. 575844356 da origem, 09/04/2026)",
+    "recurso": "ID 371819017 · 07/05/2026",
+    "preparo": "Retificado após o despacho ID 384198069; comprovante ID 385047304 sem texto",
+    "monocratica": "Não",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Comprovante da GRU retificada (ID 385047304) sem texto: conferir pagamento e data (prazo de 5 dias do despacho de 03/07/2026)",
+    "[VALIDAR] Tema 1.288/STJ: conferir o enunciado antes de usar"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -1634,6 +1649,17 @@
     "ultima_informacao": "Certidão · ID 377088349 · 28/05/2026",
     "ultima_movimentacao": "19/08/2026 00:44 · DECORRIDO PRAZO DE CAIXA ECONÔMICA FEDERAL EM 18/08/2026 23:59.",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Maria Aparecida de Carvalho Iunes, codevedora fiduciante de imóvel financiado pela CEF, alega que só o cônjuge foi notificado para purgar a mora e que não foi intimada das datas dos leilões; pediu a suspensão da consolidação, negada na origem.",
+    "inicial": "Petição inicial da ação 5002189-72.2026.4.03.6000 juntada em cópia (ID 371819018): nulidade da notificação para purgação da mora e da consolidação da propriedade",
+    "decisao_recorrida": "Decisão da 1ª Vara Federal de Campo Grande (Num. 575844356 da origem, 09/04/2026) que indeferiu a tutela de urgência; cópia no ID 371836282",
+    "recurso": "Agravo de instrumento ID 371819017 (07/05/2026): falta de intimação pessoal da codevedora para purgar a mora e das datas dos leilões; pede tutela recursal para suspender os efeitos da consolidação.",
+    "resposta": "Contraminuta da CEF ID 387931318 (22/07/2026): regularidade do procedimento e da consolidação (Tema 1.288/STJ); desprovimento e honorários recursais.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogados Thiago Arribamar Adorno (OAB/MS 25.774-A) e João Pedro Rocha Araújo (OAB/MS 23.683); procuração ID 371836286 sem texto. CEF: procuração pública (ID 387931319)",
+    "preparo": "Recolhido de início à Justiça Federal de primeiro grau; retificado após o despacho ID 384198069 com GRU ao TRF-3 de R$ 64,26 (UG 090029, código 18720-8, ID 385047301)"
    }
   },
   {
@@ -1646,12 +1672,14 @@
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Alienação Fiduciária",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI · Alienação fiduciária de imóvel · consolidação · constituição em mora · tutela indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); liminar indeferida em 18/08/2026 e há contrarrazões da CEF",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Adalberto Jorge Camargo da Silva contra a decisão da 1ª Vara Federal de Campo Grande que, nos autos 5005989-11.2026.4.03.6000, indeferiu a tutela para suspender os efeitos da consolidação da propriedade fiduciária do imóvel de matrícula 95.662. Teses: nulidade da constituição em mora e dos atos expropriatórios; aplicação do CDC com inversão do ônus da prova. A CEF pede o desprovimento (ID 398052273).",
+   "peculiaridades": "Agravante beneficiário da gratuidade na origem (ID 593706673 da origem), reconhecida na decisão ID 391632847 apesar da certidão ID 390787963. Petição endereçada ao TJMS. Grupo: alienação fiduciária/leilão.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -1682,9 +1710,21 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Alienação fiduciária — constituição em mora; consolidação",
+    "origem": "5005989-11.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Não consta com texto nos autos do agravo [VALIDAR]",
+    "recurso": "ID 390641218 · 05/08/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Não",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Procuração da agravante",
+    "[VALIDAR] Ler a decisão agravada na origem"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -1702,6 +1742,17 @@
     "ultima_informacao": "Certidão · ID 391614172 · 12/08/2026",
     "ultima_movimentacao": "16/09/2026 15:00 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Adalberto Jorge Camargo da Silva, devedor fiduciante de imóvel da CEF (matrícula 95.662), contesta a constituição em mora e a consolidação da propriedade; a tutela para suspender os efeitos foi negada na origem.",
+    "inicial": "Não consta nos autos do recurso",
+    "decisao_recorrida": "Decisão da 1ª Vara Federal de Campo Grande que indeferiu a tutela de urgência; não juntada com texto",
+    "recurso": "Agravo de instrumento ID 390641218 (05/08/2026): nulidade da constituição em mora e dos atos expropriatórios; CDC e inversão do ônus da prova; efeito suspensivo.",
+    "resposta": "Contrarrazões da CEF ID 398052273 (15/09/2026): manutenção da decisão e desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogada Vanessa Gouveia (OAB/SP 336.694); procuração não identificada com texto [VALIDAR]. CEF: advogados Márcio Sequeira da Silva e Sérgio Machado Cezimbra (OAB/RS)",
+    "preparo": "Dispensado: gratuidade concedida na origem (ID 593706673 da origem)"
    }
   },
   {
