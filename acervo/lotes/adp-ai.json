@@ -11033,13 +11033,13 @@
    "exequente": "ADRIANA APARECIDA RIBEIRO",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Contratos Bancários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Contratos bancários e CEF · embargos de terceiro · restrição Renajud em veículo adquirido por permuta, alienado fiduciariamente · tutela de urgência indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), conferida antes a tempestividade [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Adriana Aparecida Ribeiro contra a decisão ID 565140853 da 1ª Vara Federal de Campo Grande que, nos embargos de terceiro 5011112-24.2025.4.03.6000 opostos à CEF, indeferiu a tutela de urgência para retirar a restrição Renajud do veículo Fiat Uno Way, adquirido por permuta. A agravante sustenta a posse de boa-fé, a quitação do financiamento e o prejuízo ao uso do veículo no trabalho.",
+   "peculiaridades": "Possível intempestividade pela data de ciência indicada na própria petição [VALIDAR]. Tutela recursal indeferida. Gratuidade deferida na origem.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -11072,7 +11072,15 @@
    "mpf": "",
    "triagem": {
     "conf_preparo": "GRATUIDADE · gratuidade em: ID 368782061 · certidão sem custas: ID 368427635 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
-    "conf_prevencao": "Origem: 5011112-24.2025.4.03.6000 · conferido em 20/11/2026"
+    "conf_prevencao": "Origem: 5011112-24.2025.4.03.6000 · conferido em 20/11/2026",
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Embargos de terceiro: restrição Renajud em veículo; tutela de urgência",
+    "origem": "1ª Vara Federal de Campo Grande · 5011112-24.2025.4.03.6000",
+    "decisao_agravada": "ID 565140853 dos autos de origem",
+    "recurso": "ID 368175655 · 22/04/2026",
+    "preparo": "Justiça gratuita",
+    "monocratica": "Possível não conhecimento, se confirmada a intempestividade [VALIDAR]",
+    "analisado_em": "20/11/2026"
    },
    "ajustes": [],
    "pendencias": [],
@@ -11093,6 +11101,88 @@
     "ultima_informacao": "Certidão · ID 368526812 · 23/04/2026",
     "ultima_movimentacao": "29/05/2026 17:50 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "subassunto": "Contratos bancários e CEF · embargos de terceiro · restrição Renajud em veículo adquirido por permuta, alienado fiduciariamente · tutela de urgência indeferida",
+   "especificidades": "Tempestividade: a agravante indica ciência em 25/03/2026; contados 15 dias úteis com os feriados da Semana Santa (01 a 03/04) e de Tiradentes, o prazo terminaria em 20/04/2026 e o agravo foi protocolado em 22/04/2026: conferir a intimação na origem e eventual suspensão de prazo [VALIDAR] · Tutela recursal indeferida pelo Relator (ID 368782061, 30/04/2026) · Gratuidade deferida na origem (ID 565140853 dos autos originários) · Restrição oriunda de ação monitória da CEF contra o alienante",
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "A agravante adquiriu por permuta veículo alienado fiduciariamente e atingido por restrição Renajud em ação monitória da CEF contra o alienante; nos embargos de terceiro, o juízo indeferiu a liminar de retirada da restrição.",
+    "inicial": "Embargos de terceiro 5011112-24.2025.4.03.6000, 1ª Vara Federal de Campo Grande, de Adriana Aparecida Ribeiro contra a CEF",
+    "decisao_recorrida": "Decisão ID 565140853 dos autos de origem: indeferiu a tutela de urgência para retirar a restrição Renajud e deferiu a gratuidade (ciência em 25/03/2026, segundo a agravante)",
+    "recurso": "Agravo ID 368175655 (22/04/2026): (1) aquisição e posse de boa-fé, com pagamento do financiamento, IPVA e licenciamento; (2) perigo de dano pelo uso do veículo no trabalho; e (3) reversibilidade da medida. Pede a retirada da restrição ou, subsidiariamente, a suspensão dos atos executórios sobre o veículo.",
+    "resposta": "CEF, contrarrazões ID 374688895 (19/05/2026): ausência de probabilidade do direito e de perigo de dano; manutenção da decisão.",
+    "parecer": "Não consta",
+    "outros": "Decisão de redistribuição ID 368457074 (23/04/2026). Decisão do Relator ID 368782061 (30/04/2026): indeferiu a antecipação da tutela recursal, pois a restrição Renajud não impede a posse e a alienação fiduciária limita por si a disposição do bem.",
+    "representacao": "Agravante: advogada constituída. Agravada: CEF, com advogados.",
+    "preparo": "Dispensado: gratuidade deferida na origem (ID 565140853 dos autos originários)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contratos bancários e CEF · embargos de terceiro · restrição Renajud em veículo adquirido por permuta, alienado fiduciariamente · tutela de urgência indeferida",
+     "sintese": "A agravante adquiriu por permuta veículo alienado fiduciariamente e atingido por restrição Renajud em ação monitória da CEF contra o alienante; nos embargos de terceiro, o juízo indeferiu a liminar de retirada da restrição.",
+     "questoes": "1) Tempestividade do agravo; 2) probabilidade do direito da terceira adquirente à retirada da restrição Renajud; 3) perigo de dano.",
+     "rel": {
+      "razoes": "Agravo (ID 368175655): (1) posse de boa-fé; (2) perigo de dano; e (3) reversibilidade.",
+      "contrarrazoes": "CEF (ID 374688895): ausência dos requisitos da tutela de urgência."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "565140853",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência para retirar a restrição Renajud do veículo; deferiu a gratuidade."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "565140853"
+     },
+     "adm": {
+      "prot": "2026-04-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Adriana Aparecida Ribeiro",
+       "tipo": "Agravo de instrumento",
+       "id": "368175655",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "368175655",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "368782061",
+       "data": "2026-04-30"
+      },
+      {
+       "desc": "Contrarrazões da CEF",
+       "id": "374688895",
+       "data": "2026-05-19"
+      }
+     ],
+     "pendencias": "Conferir a data de intimação da decisão agravada e a tempestividade",
+     "especificidades": "Tempestividade: a agravante indica ciência em 25/03/2026; contados 15 dias úteis com os feriados da Semana Santa (01 a 03/04) e de Tiradentes, o prazo terminaria em 20/04/2026 e o agravo foi protocolado em 22/04/2026: conferir a intimação na origem e eventual suspensão de prazo [VALIDAR] · Tutela recursal indeferida pelo Relator (ID 368782061, 30/04/2026) · Gratuidade deferida na origem (ID 565140853 dos autos originários) · Restrição oriunda de ação monitória da CEF contra o alienante"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-04-30"
+    }
    }
   },
   {
