@@ -1829,7 +1829,7 @@
    "executado": "FUNDACAO DE APOIO A PESQUISA AO ENSINO E A CULTURA",
    "assunto": "ACESSO",
    "grupo": "g9",
-   "tipo_caso": "AI · Ensino superior · vestibular UFMS · cotas raciais (heteroidentificação) · liminar indeferida",
+   "tipo_caso": "AI · Concurso público e ensino · vestibular UFMS (Edital 303/2024) · cotas para pretos e pardos · heteroidentificação × autodeclaração · liminar de matrícula",
    "resultado": "Ato a proferir: julgamento do agravo (voto) ou prejudicialidade; a tutela recursal foi indeferida em 26/03/2025 e há contrarrazões da FUFMS. Conferir antes se a ação de origem já foi sentenciada",
    "modelo": "",
    "variacoes": [
@@ -1914,7 +1914,82 @@
     "representacao": "Procuração com reserva de poderes (ID 316863882) outorgada por Izabella da Costa Ribeiro ao advogado Gabriel dos Santos Gomes (OAB/SP 467.149)",
     "preparo": "Não consta recolhimento; juntada declaração de hipossuficiência (ID 316863891); gratuidade não apreciada nos autos do agravo [VALIDAR]"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Concurso público e ensino · vestibular UFMS (Edital 303/2024) · cotas para pretos e pardos · heteroidentificação × autodeclaração · liminar de matrícula",
+   "especificidades": "Tutela recursal indeferida (ID 318695100, 26/03/2025) · FAPEC, agravada, não intimada para contraminuta (certidão ID 318956763) [VALIDAR] · Gratuidade não apreciada no agravo; declaração de hipossuficiência (ID 316863891) e imagem de comprovante pendente de leitura (ID 316863886) [VALIDAR] · Agravo de 2025 contra liminar: conferir se a ação de origem foi sentenciada (perda de objeto) [VALIDAR] · Redistribuição lançada como decisão terminativa (ID 373132678), mas só remete à Turma Regional",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Concurso público e ensino · vestibular UFMS (Edital 303/2024) · cotas para pretos e pardos · heteroidentificação × autodeclaração · liminar de matrícula",
+     "sintese": "Izabella da Costa Ribeiro, aprovada no vestibular UFMS 2025 (Direito, Três Lagoas) pelas vagas para pretos e pardos, foi eliminada na heteroidentificação. Pediu liminar para matrícula, indeferida; agravou.",
+     "questoes": "1) Subsistência do interesse recursal diante de eventual sentença; 2) intimação da FAPEC; 3) gratuidade ou preparo; 4) controle judicial da heteroidentificação e prevalência da autodeclaração; 5) habilitação subsidiária na ampla concorrência.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 316861477 (10/03/2025): prevalência da autodeclaração; nulidade das cláusulas 6.1 e 1.13.2 do edital; subsidiariamente, habilitação na ampla concorrência.",
+      "contrarrazoes": "Contrarrazões da FUFMS ID 322047613 (24/04/2025): legalidade da heteroidentificação; pede o desprovimento ou, se determinada a matrícula, que seja condicionada aos demais requisitos. FAPEC não intimada (certidão ID 318956763)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Três Lagoas",
+      "dispositivo": "Indeferiu a liminar para matrícula no curso de Direito pelas vagas reservadas a pretos e pardos."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-03-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Izabella da Costa Ribeiro",
+       "tipo": "Agravo de instrumento",
+       "id": "316861477",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "316861477",
+       "data": "2025-03-10"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "318695100",
+       "data": "2025-03-26"
+      },
+      {
+       "desc": "Certidão: FAPEC não intimada",
+       "id": "318956763",
+       "data": "2025-03-27"
+      },
+      {
+       "desc": "Contrarrazões da FUFMS",
+       "id": "322047613",
+       "data": "2025-04-24"
+      }
+     ],
+     "pendencias": "Conferir a sentença na origem; intimar a FAPEC, se for o caso; apreciar a gratuidade ou conferir o preparo",
+     "especificidades": "Tutela recursal indeferida (ID 318695100, 26/03/2025) · FAPEC, agravada, não intimada para contraminuta (certidão ID 318956763) [VALIDAR] · Gratuidade não apreciada no agravo; declaração de hipossuficiência (ID 316863891) e imagem de comprovante pendente de leitura (ID 316863886) [VALIDAR] · Agravo de 2025 contra liminar: conferir se a ação de origem foi sentenciada (perda de objeto) [VALIDAR] · Redistribuição lançada como decisão terminativa (ID 373132678), mas só remete à Turma Regional"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-03-26"
+    }
+   }
   },
   {
    "sessao": "",
