@@ -2139,12 +2139,14 @@
    "executado": "ADEVANILDO DOMINGOS DA SILVA",
    "assunto": "Ambiental",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI do ICMBio · cumprimento de sentença de ACP ambiental (Parque Nacional de Ilha Grande) · obrigação imposta à autarquia",
+   "resultado": "Ato a proferir: certificar o prazo da contraminuta do executado e abrir vista ao MPF (autor da ACP); depois, julgamento do agravo (voto). Tutela recursal indeferida em 09/06/2026",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do ICMBio contra a decisão ID 574822912 que, no cumprimento da sentença da ACP 5000969-65.2019.4.03.6006 (MPF × Adevanildo Domingos da Silva), impôs obrigação à autarquia. A sentença condenou o réu a demolir construções em APP no Parque Nacional de Ilha Grande, recuperar a área e indenizar. Teses do ICMBio: violação da coisa julgada (o título não lhe impôs obrigação), da legalidade e da separação de Poderes; prejuízo ao erário. Pede efeito suspensivo e reforma.",
+   "peculiaridades": "Tutela recursal indeferida (decisão ID 377935861, 09/06/2026), com fundamento no periculum in mora reverso à coletividade. ICMBio deu ciência (ID 380426576). Não há contraminuta nem manifestação do MPF nos autos. Agravante isento de preparo (autarquia).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -2165,9 +2167,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho (vista ao MPF) e depois voto",
+    "materia": "Ambiental — cumprimento de sentença de ACP; obrigação a ente não condenado",
+    "origem": "ACP 5000969-65.2019.4.03.6006 (cumprimento de sentença)",
+    "decisao_agravada": "ID 574822912 da origem; não juntada com texto nos autos do agravo",
+    "recurso": "ID 373380477 · 14/05/2026",
+    "preparo": "Isento (autarquia)",
+    "monocratica": "Não",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Certificar o decurso do prazo da contraminuta",
+    "[VALIDAR] Intimação do MPF (autor da ACP e fiscal da lei)",
+    "[VALIDAR] Ler a decisão agravada na origem para identificar a obrigação imposta"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -2185,6 +2200,17 @@
     "ultima_informacao": "",
     "ultima_movimentacao": "04/08/2026 14:55 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "O MPF obteve em ACP a condenação de Adevanildo Domingos da Silva a demolir construções em APP no Parque Nacional de Ilha Grande, recuperar a área e indenizar. No cumprimento, o juízo impôs obrigação ao ICMBio, que agravou alegando que não é condenado no título.",
+    "inicial": "Não consta nos autos do recurso (ACP 5000969-65.2019.4.03.6006)",
+    "decisao_recorrida": "Decisão ID 574822912 do cumprimento de sentença, que impôs obrigação ao ICMBio; descrita na decisão ID 377935861",
+    "recurso": "Agravo de instrumento ID 373380477 (14/05/2026): violação da coisa julgada; legalidade e separação de Poderes; prejuízo ao erário; subsidiariamente, cumprimento pelo próprio réu ou execução pela autarquia com conversão em perdas e danos.",
+    "resposta": "Não consta: agravado intimado pela decisão ID 377935861, sem contraminuta nos autos",
+    "parecer": "Não consta (MPF é autor da ACP e não se manifestou no agravo)",
+    "memoriais": "Não consta",
+    "representacao": "ICMBio pela Procuradoria-Geral Federal (representação legal)",
+    "preparo": "Isento (autarquia)"
    }
   },
   {
@@ -2197,12 +2223,16 @@
    "executado": "POLYANA ABDALLA TAVARES",
    "assunto": "Anuidades OAB",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "AI da OAB/MS · execução de título extrajudicial (anuidades) · suspensão da execução",
+   "resultado": "Ato a proferir: conferir o preparo (sem comprovante); se regular ou regularizado, julgamento do agravo, possivelmente monocrático pela linha do gabinete para execuções da OAB [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo da OAB/MS contra decisão que suspendeu a execução de título extrajudicial 5003973-21.2025.4.03.6000, contra a advogada Polyana Abdalla Tavares. Teses: a OAB é entidade singular, depende das contribuições para custear suas funções e não pode ter as execuções sobrestadas. Pede a anulação da decisão e o prosseguimento da execução.",
+   "peculiaridades": "Sem comprovante de preparo: certidão ID 340110104 (20/10/2025) e documento de custas sem conteúdo (ID 340124368); a petição diz que a guia seria juntada após a distribuição. Intimação da decisão agravada em 14/10/2025, segundo a agravante. Agravada sem advogado constituído nos autos do agravo.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -2223,9 +2253,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho (preparo, artigo 1.007, § 4º, do CPC) ou julgamento do agravo",
+    "materia": "Execução de anuidades da OAB — suspensão do feito",
+    "origem": "Execução de título extrajudicial 5003973-21.2025.4.03.6000",
+    "decisao_agravada": "Não consta com texto nos autos do agravo [VALIDAR]",
+    "recurso": "ID 340087358 · 20/10/2025",
+    "preparo": "Sem comprovante [VALIDAR]",
+    "monocratica": "Possível: linha do gabinete para execução da OAB (banco de monocráticas, M00339) [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: intimar para recolher em dobro (artigo 1.007, § 4º, do CPC) se não houver comprovante",
+    "[VALIDAR] Fundamento da suspensão (tema repetitivo ou outro)",
+    "[VALIDAR] Intimação da agravada para contraminuta"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -2243,6 +2286,17 @@
     "ultima_informacao": "Certidão · ID 365310052 · 09/04/2026",
     "ultima_movimentacao": "09/04/2026 07:36 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "A OAB/MS executa anuidades da advogada Polyana Abdalla Tavares; o juízo suspendeu a execução e a OAB agravou pedindo o prosseguimento.",
+    "inicial": "Não consta nos autos do recurso",
+    "decisao_recorrida": "Decisão que suspendeu a execução 5003973-21.2025.4.03.6000; fundamento não identificado nos autos do agravo [VALIDAR]",
+    "recurso": "Agravo de instrumento ID 340087358 (20/10/2025): natureza singular da OAB e dependência das anuidades; descabimento do sobrestamento; prosseguimento da execução.",
+    "resposta": "Não consta: a agravada não foi intimada",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "OAB/MS pelo advogado Marcelo Nogueira da Silva (OAB/MS 13.300), do departamento de execução; procuração não identificada [VALIDAR]",
+    "preparo": "Sem comprovante: certidão ID 340110104; documento de custas ID 340124368 sem conteúdo"
    }
   },
   {
