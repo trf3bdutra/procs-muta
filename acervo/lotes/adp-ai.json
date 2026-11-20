@@ -2165,7 +2165,7 @@
    "executado": "NORIVAL ANTONIO DE OLIVEIRA",
    "assunto": "Acidente de Trabalho - Ressarcimento ao Erário",
    "grupo": "g5",
-   "tipo_caso": "AI · Cumprimento de sentença · impugnação rejeitada · legitimidade passiva do Estado de MS (JUCEMS devedora)",
+   "tipo_caso": "AI · Cumprimento de sentença contra a Fazenda Pública · impugnação rejeitada · legitimidade passiva do Estado de MS por dívida da JUCEMS",
    "resultado": "Ato a proferir: julgamento do agravo (voto), depois de certificado o prazo da contraminuta; a tutela recursal foi indeferida em 11/05/2026",
    "modelo": "",
    "variacoes": [
@@ -2240,7 +2240,77 @@
     "representacao": "Procuradoria-Geral do Estado (representação legal)",
     "preparo": "Isento (Fazenda Pública)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Cumprimento de sentença contra a Fazenda Pública · impugnação rejeitada · legitimidade passiva do Estado de MS por dívida da JUCEMS",
+   "especificidades": "Agravantes: Estado de MS e JUCEMS (isentos; representação legal) · Tutela recursal indeferida (ID 366993362, 11/05/2026) · Agravados intimados; prazos decorridos sem contraminuta (08/06/2026) · Assunto cadastrado (acidente de trabalho - ressarcimento ao erário) não corresponde à matéria · Decisão agravada não juntada com texto [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença contra a Fazenda Pública · impugnação rejeitada · legitimidade passiva do Estado de MS por dívida da JUCEMS",
+     "sintese": "Cumprimento de sentença movido por Norival Antonio de Oliveira e outros contra o Estado de Mato Grosso do Sul e a JUCEMS (0007942-28.2008.4.03.6000). Rejeitada a impugnação, os executados agravaram para excluir o Estado do polo passivo.",
+     "questoes": "1) Legitimidade passiva do Estado de MS no cumprimento de sentença de dívida da JUCEMS; 2) prosseguimento só contra a autarquia.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 329680967 (03/07/2025): exclusão do Estado do polo passivo, com prosseguimento só contra a JUCEMS; pede efeito suspensivo.",
+      "contrarrazoes": "Não consta: agravados intimados pela decisão ID 366993362 (11/05/2026), sem contraminuta nos autos"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Rejeitou a impugnação ao cumprimento de sentença."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-07-03",
+      "prazo": "15",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Estado de MS e JUCEMS",
+       "tipo": "Agravo de instrumento",
+       "id": "329680967",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "329680967",
+       "data": "2025-07-03"
+      },
+      {
+       "desc": "Despacho de redistribuição",
+       "id": "361953230",
+       "data": "2026-03-23"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "366993362",
+       "data": "2026-05-11"
+      }
+     ],
+     "pendencias": "Identificar a decisão agravada",
+     "especificidades": "Agravantes: Estado de MS e JUCEMS (isentos; representação legal) · Tutela recursal indeferida (ID 366993362, 11/05/2026) · Agravados intimados; prazos decorridos sem contraminuta (08/06/2026) · Assunto cadastrado (acidente de trabalho - ressarcimento ao erário) não corresponde à matéria · Decisão agravada não juntada com texto [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-05-11"
+    }
+   }
   },
   {
    "sessao": "",
