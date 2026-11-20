@@ -70,3 +70,9 @@ test('Mesa: filtro por assunto e agrupamento por assunto, minutante e corretor; 
   for(const x of ['data-ag="as"','data-ag="pd"','data-ag="pc"','id="f-as"',"if(FASS&&N(x.as)!==FASS)return false;"])assert.ok(pag.includes(x),x);
   assert.ok(read('monitor/triagem/index.html').includes('#rodape[hidden]{display:none!important}'),'rodapé oculto fora da Triagem');
 });
+test('Designação: painel de regras para minuta e correção, com categorias e processos',()=>{
+  const c=read('monitor/triagem/index.html');
+  for(const x of ['function painelRegras(ss, Z)',"col('d', 'MINUTA')","col('c', 'CORREÇÃO')",'data-cwe="rg"','data-cwe="rgc"','class="rg-its"'])assert.ok(c.includes(x),x);
+  const m=read('monitor/motor/assets/js/21-sessoes-equipe.js');
+  assert.ok(m.includes('designacaoPorRegra: function')&&m.includes("cid: cid, chave: hit || inf.assunto || '—'"),'motor diz a regra e a categoria de cada processo');
+});

@@ -662,7 +662,7 @@
   function escolher(kind, it, ss) {
     var D = desigEfetiva(ss);
     var inf = infoItem(it), a = N(inf.assunto), P = pool(kind).filter(function (m) { return m.auto !== false && !ausente(m, ss); });
-    var mapa = function (cid, chaves) { for (var j = 0; j < chaves.length; j++) { var x = ok(linha(cid, chaves[j], ss)[kind]); if (x) return x; } return ''; };
+    var hit = '', mapa = function (cid, chaves) { for (var j = 0; j < chaves.length; j++) { var x = ok(linha(cid, chaves[j], ss)[kind]); if (x) { hit = chaves[j]; return x; } } return ''; };
     var ok = function (nome) { var m = membro(nome); return m && P.indexOf(m) >= 0 ? m.nome : ''; };
     var menos = function (L) {
       return L.sort(function (x, y) {
@@ -673,22 +673,23 @@
     for (var i = 0; i < D.ordem.length; i++) {
       var cid = D.ordem[i]; if (!D.on[cid] || !D.on[cid][kind]) continue;
       var v = '';
-      if (cid === 'julg') { var jk = julgKey(it, inf); if (jk && !(kind === 'd' && jk === 'META')) v = ok(linha('julg', jk, ss)[kind]); }
+      hit = '';
+      if (cid === 'julg') { var jk = julgKey(it, inf); if (jk && !(kind === 'd' && jk === 'META')) { v = ok(linha('julg', jk, ss)[kind]); hit = jk; } }
       else if (cid === 'tema') v = mapa('tema', inf.c.tema.concat([inf.assunto]));
       else if (cid === 'hist' && (v = mapa('hist', [inf.assunto]))) {}
-      else if (cid === 'hist' && a) { var H = historico()[kind], L = P.map(function (m) { return { m: m, p: H.get(N(m.nome) + '|' + a) || 0 }; }).filter(function (x) { return x.p > 0; }); var b = menos(L); if (b) v = b.m.nome; }
+      else if (cid === 'hist' && a) { var H = historico()[kind], L = P.map(function (m) { return { m: m, p: H.get(N(m.nome) + '|' + a) || 0 }; }).filter(function (x) { return x.p > 0; }); var b = menos(L); if (b) { v = b.m.nome; hit = inf.assunto + ' · pelo histórico'; } }
       else if (cid === 'esp' && (v = mapa('esp', inf.c.esp.concat([inf.assunto, inf.secao])))) {}
       else if (cid === 'esp' && a) {
         var tem = function (lst) { return (lst || []).some(function (e) { var k = N(e); return k && (a === k || a.indexOf(k) >= 0 || k.indexOf(a) >= 0); }); };
         var L2 = P.filter(function (m) { return !tem(m.nao) && (tem(m.pref) || tem(m.exp)); }).map(function (m) { return { m: m, p: tem(m.pref) ? 2 : 1 }; });
-        var b2 = menos(L2); if (b2) v = b2.m.nome;
+        var b2 = menos(L2); if (b2) { v = b2.m.nome; hit = inf.assunto + ' · pelo perfil'; }
       }
-      else if (cid === 'sec') v = ok(linha('sec', inf.secao, ss)[kind]);
-      else if (cid === 'pron') v = ok(linha('pron', 'Voto', ss)[kind]);
-      if (v) return { nome: v, por: CRIT_T[cid] };
+      else if (cid === 'sec') { v = ok(linha('sec', inf.secao, ss)[kind]); hit = inf.secao; }
+      else if (cid === 'pron') { v = ok(linha('pron', 'Voto', ss)[kind]); hit = 'Voto'; }
+      if (v) return { nome: v, por: CRIT_T[cid], cid: cid, chave: hit || inf.assunto || '—' };
     }
-    if (kind === 'd' && inf.c.metas.length && D.on.julg && D.on.julg.d) { var vm = ok(linha('julg', 'META', ss).d); if (vm) return { nome: vm, por: 'META (último critério da minuta)' }; }
-    return porAderencia(kind, it, ss, P);
+    if (kind === 'd' && inf.c.metas.length && D.on.julg && D.on.julg.d) { var vm = ok(linha('julg', 'META', ss).d); if (vm) return { nome: vm, por: 'META (último critério da minuta)', cid: 'julg', chave: 'META' }; }
+    var ad = porAderencia(kind, it, ss, P); if (ad) { ad.cid = 'ader'; ad.chave = inf.assunto || '—'; } return ad;
   }
   function designar(kind, todos) {
     var ss = sessao(); if (!ss) return;
@@ -2024,6 +2025,17 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         periodo: { de: de, ate: ate, efetivo: periodo(ss) }, fases: ss.fases || {}, data: ss.data, minutantes: gente('d'), corretores: gente('c'),
         /* minuta por exceção: só na escolha manual, nunca proposto pela regra */
         eventuais: S.equipe.filter(function (m) { return m.minutaEventual && !faz(m, 'd'); }).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss), atual: ss.itens.filter(function (i) { return N(i.servidor) === N(m.nome); }).length }; }), linhas: linhas }; },
+    /* por regra: para minuta e correção, qual regra (na ordem) e qual categoria decidem cada processo da pauta,
+       e se quem está designado é quem a regra indica */
+    designacaoPorRegra: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return null; var D = desigEfetiva(ss), out = {};
+      ['d', 'c'].forEach(function (kind) { var R = {}, ordem = D.ordem.filter(function (cid) { return D.on[cid] && D.on[cid][kind]; }).concat(['ader', 'nenhuma']);
+        ordem.forEach(function (cid) { R[cid] = { cid: cid, t: cid === 'ader' ? 'Aderência (sem regra que case)' : cid === 'nenhuma' ? 'Ninguém disponível' : CRIT_T[cid] || cid, n: 0, seguem: 0, cats: {} }; });
+        ss.itens.slice().sort(function (a, b) { return (+a.item || 0) - (+b.item || 0); }).forEach(function (it) { var e = escolher(kind, it, ss) || null, cid = e && R[e.cid] ? e.cid : 'nenhuma', ch = (e && e.chave) || '—', atual = kind === 'd' ? it.servidor : it.corretor;
+          var r = R[cid], c = r.cats[ch] || (r.cats[ch] = { chave: ch, n: 0, seguem: 0, pessoas: {}, itens: [] }); r.n++; c.n++;
+          if (e && e.nome) c.pessoas[e.nome] = (c.pessoas[e.nome] || 0) + 1; var seg = !!(e && atual && N(atual) === N(e.nome)); if (seg) { r.seguem++; c.seguem++; }
+          c.itens.push({ item: it.item, cnj: it.cnj, regra: e ? e.nome : '', atual: atual || '' }); });
+        out[kind] = ordem.map(function (cid) { var r = R[cid]; return { cid: r.cid, t: r.t, n: r.n, seguem: r.seguem, cats: Object.keys(r.cats).map(function (k) { return r.cats[k]; }).sort(function (a, b) { return b.n - a.n; }) }; }).filter(function (r) { return r.n || (r.cid !== 'ader' && r.cid !== 'nenhuma'); }); });
+      return out; },
     aplicarDesignacao: function (id, lista) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return 0; var by = new Map(ss.itens.map(function (i) { return [dig(i.cnj), i]; })), n = 0;
       (lista || []).forEach(function (o) { var it = by.get(dig(o.cnj)); if (!it) return; var m = 0;
         /* trocar: a mesa de designação pode substituir quem já estava designado (vazio continua sem efeito) */
