@@ -4274,13 +4274,15 @@
    "exequente": "WEBERTON GONCALVES DE ASSIS",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Aposentadoria por Incapacidade Permanente",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "AI · Assistencial (competência delegada) · restabelecimento de BPC à pessoa com deficiência · tutela recursal indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 18/06/2026; sem contraminuta; MPF sem interesse",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Weberton Gonçalves de Assis, incapaz representado pela curadora Olidia Gonçalves de Assis, contra a decisão da 1ª Vara da Comarca de Camapuã/MS (processo 5000091-69.2026.8.12.0006) que indeferiu a tutela para restabelecer o BPC (NB 119.087.569-9), pago desde 13/04/2001 e cessado em 01/03/2026 por não reconhecimento da deficiência. O juízo determinou perícia e estudo social. Pede também que o INSS se abstenha de cobrar o suposto débito.",
+   "peculiaridades": "Parte incapaz (prioridade anotada; certidão ID 381046965). Gratuidade alegada. A decisão ID 381093684 lembrou que o BPC exige deficiência e miserabilidade e que a perícia e o estudo social já foram determinados. O MPF (ID 392510859) não se manifestou sobre o mérito. Pedido acessório de abstenção de cobrança.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -4306,7 +4308,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Assistencial — BPC à pessoa com deficiência; tutela de urgência",
+    "origem": "5000091-69.2026.8.12.0006 (1ª Vara de Camapuã/MS, competência delegada)",
+    "decisao_agravada": "Decisão publicada em 11/06/2026 segundo o agravante; ID não identificado [VALIDAR]",
+    "recurso": "ID 380734373 · 16/06/2026",
+    "preparo": "Dispensado (gratuidade alegada) [VALIDAR]",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -4326,6 +4337,96 @@
     "ultima_informacao": "Certidão · ID 381046965 · 18/06/2026",
     "ultima_movimentacao": "19/08/2026 13:16 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Pessoa com deficiência, sob curatela, recebeu BPC de 2001 a 01/03/2026, quando o INSS o cessou por não reconhecer a deficiência. Pede em tutela o restabelecimento e a suspensão da cobrança. O juízo determinou perícia e estudo social e negou a tutela; o Tribunal também a negou.",
+    "inicial": "Ação 5000091-69.2026.8.12.0006 contra o INSS para restabelecer o BPC",
+    "decisao_recorrida": "Decisão da 1ª Vara de Camapuã/MS que indeferiu a tutela por exigir dilação probatória (estudo social) e pela conclusão administrativa de ausência de deficiência",
+    "recurso": "Agravo ID 380734373 (16/06/2026): (1) deficiência grave reconhecida por mais de duas décadas; (2) documentação médica de quadro neurológico e mental severo, com dependência integral; (3) caráter alimentar; (4) reversibilidade. Pede o restabelecimento em 5 dias, com multa diária, e a abstenção de cobrança do débito.",
+    "resposta": "Não houve contraminuta (registro do MPF)",
+    "parecer": "MPF ID 392510859 (18/08/2026): sem interesse; opina pelo prosseguimento",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogado Cesar Augusto de Souza Ávila (OAB/MS 15.970); procuração não identificada com texto [VALIDAR]",
+    "preparo": "Dispensado: gratuidade alegada; certidão ID 381046965 sem custas"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "BPC/LOAS; pessoa com deficiência; restabelecimento; tutela de urgência",
+     "sintese": "Pessoa com deficiência, sob curatela, recebeu BPC de 2001 a 01/03/2026, quando o INSS o cessou por não reconhecer a deficiência. Pede em tutela o restabelecimento e a suspensão da cobrança. O juízo determinou perícia e estudo social e negou a tutela; o Tribunal também a negou.",
+     "questoes": "1) Probabilidade do direito sem perícia e estudo social; 2) miserabilidade não demonstrada; 3) pedido de abstenção de cobrança.",
+     "rel": {
+      "razoes": "Agravo (ID 380734373): deficiência reconhecida por mais de 20 anos; documentação médica; caráter alimentar; reversibilidade; abstenção de cobrança.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "1ª Vara da Comarca de Camapuã/MS",
+      "dispositivo": "Indeferiu a tutela de urgência e determinou perícia e estudo social."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-06-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false,
+      "intim": "2026-06-11"
+     },
+     "mpfx": {
+      "sentido": "Sem interesse",
+      "id": "392510859"
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "380734373",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "380734373",
+       "data": "2026-06-16"
+      },
+      {
+       "desc": "Cópia dos autos de origem",
+       "id": "380746333",
+       "data": "2026-06-16"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "381093684",
+       "data": "2026-06-18"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "392510859",
+       "data": "2026-08-18"
+      }
+     ],
+     "pendencias": [
+      "Confirmar gratuidade e procuração/curatela na cópia dos autos (ID 380746333) [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Parecer juntado",
+     "parecer": "Sem interesse",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-18"
+    }
    }
   },
   {
