@@ -7239,13 +7239,16 @@
    "exequente": "NILDO ALVES DE ALBRES",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Cédula de Crédito Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g11",
+   "tipo_caso": "AI · Crédito rural (CEF) · alongamento de cédulas · agravo interno pendente · PEDIDO DE DESISTÊNCIA por acordo (03/11/2026)",
+   "resultado": "Ato a proferir: decisão monocrática homologando a desistência do recurso (artigo 998 do CPC) ou declarando prejudicados o agravo e o agravo interno pela composição das partes, após conferir os poderes da nova procuração (ID 408498235) [VALIDAR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL",
+    "DES"
+   ],
+   "observacao": "Agravo de Nildo Alves de Albres, pecuarista, na ação 5000783-38.2025.4.03.6004 contra a CEF, que busca a prorrogação das cédulas de crédito rural 2164082/0018/2023 e 2189317/0018/2023. A tutela foi deferida em relação a uma operação e negada quanto à outra (item 3.2.15 do MCR: notificação após o vencimento de 25/10/2025). Os embargos de declaração foram convertidos em agravo interno (ID 361459395), com contraminuta da CEF (ID 362231714). Em 03/11/2026, o agravante informou acordo de renegociação e pediu extinção por perda do objeto, desistência, honorários por cada parte e dispensa de custas (artigo 90, § 3º, do CPC).",
+   "peculiaridades": "O advogado anterior, Ricardo Trad Filho (OAB/MS 7.285), comunicou a revogação dos poderes (ID 398985385, 18/09/2026). A desistência veio subscrita por Victória Rizzo de Almeida Inigo Gomes (OAB/MS 31.732), com procuração nova (ID 408498235): conferir poderes para desistir. O pedido de \"desistência da ação\" é matéria da origem; aqui cabe a desistência dos recursos. Ouvir a CEF sobre o acordo é dispensável para a desistência do recurso.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -7276,7 +7279,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão monocrática de homologação da desistência ou de prejudicialidade",
+    "materia": "Crédito rural — prorrogação de cédulas; desistência do recurso",
+    "origem": "5000783-38.2025.4.03.6004 (Subseção de Corumbá) [VALIDAR vara]",
+    "decisao_agravada": "Decisão que deferiu em parte a tutela de prorrogação; ID não identificado [VALIDAR]",
+    "recurso": "Agravo de instrumento (ID não identificado na leitura) e agravo interno ID 361459395",
+    "preparo": "Não verificado",
+    "monocratica": "Sim",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7296,6 +7308,100 @@
     "ultima_informacao": "Certidão · ID 373608048 · 15/05/2026",
     "ultima_movimentacao": " 16:41 · Há 9 documentos não lidos",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Pecuarista pediu a prorrogação de duas cédulas de crédito rural da CEF; a tutela alcançou só uma delas. Pendente agravo interno, as partes renegociaram as dívidas e o agravante pediu a extinção e a desistência.",
+    "inicial": "Ação 5000783-38.2025.4.03.6004 contra a CEF para prorrogar as cédulas de crédito rural 2164082/0018/2023 e 2189317/0018/2023",
+    "decisao_recorrida": "Decisão que deferiu a prorrogação de uma das operações e negou a da cédula 2164082/0018/2023 por notificação posterior ao vencimento (item 3.2.15 do MCR) [VALIDAR]",
+    "recurso": "Agravo interno ID 361459395 (20/03/2026, embargos convertidos): erro de premissa normativa; aplicação dos itens 2.6.4 e 2.6.12 do MCR às duas operações. Pedido de desistência ID 408496531 (03/11/2026): acordo de renegociação; extinção por perda do objeto; honorários por cada parte; dispensa de custas.",
+    "resposta": "CEF ID 362231714 (24/03/2026): requisitos do MCR; pedido de prorrogação após o vencimento; manutenção da decisão",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: nova procuração (ID 408498235) à advogada Victória Rizzo de Almeida Inigo Gomes (OAB/MS 31.732); revogação comunicada pelo advogado anterior (ID 398985385). CEF: Edison Baldi Junior (OAB/SP 206.673)",
+    "preparo": "Não verificado"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Crédito rural; prorrogação de dívida; Manual de Crédito Rural; desistência",
+     "sintese": "Pecuarista pediu a prorrogação de duas cédulas de crédito rural da CEF; a tutela alcançou só uma delas. Pendente agravo interno, as partes renegociaram as dívidas e o agravante pediu a extinção e a desistência.",
+     "questoes": "1) Poderes da nova procuração para desistir; 2) homologação da desistência do agravo e do agravo interno (artigo 998 do CPC) ou prejudicialidade; 3) custas e honorários (sem fixação nesta via).",
+     "rel": {
+      "razoes": "Agravo interno (ID 361459395): enquadramento nos itens 2.6.4 e 2.6.12 do MCR. Desistência (ID 408496531): acordo superveniente.",
+      "contrarrazoes": "CEF (ID 362231714): pedido extemporâneo de prorrogação (item 3.2.15 do MCR)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "dispositivo": "Deferiu em parte a tutela de prorrogação das cédulas de crédito rural."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": ""
+     },
+     "agint": {
+      "id": "361459395",
+      "data": "2026-03-20",
+      "sintese": "Extensão da prorrogação à cédula 2164082/0018/2023",
+      "fund": "Itens 2.6.4 e 2.6.12 do MCR"
+     },
+     "adm": {
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "361459395",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo interno (embargos convertidos)",
+       "id": "361459395",
+       "data": "2026-03-20"
+      },
+      {
+       "desc": "Contraminuta da CEF ao agravo interno",
+       "id": "362231714",
+       "data": "2026-03-24"
+      },
+      {
+       "desc": "Comunicação de revogação de poderes",
+       "id": "398985385",
+       "data": "2026-09-18"
+      },
+      {
+       "desc": "Pedido de desistência",
+       "id": "408496531",
+       "data": "2026-11-03"
+      },
+      {
+       "desc": "Nova procuração",
+       "id": "408498235",
+       "data": "2026-11-03"
+      }
+     ],
+     "pendencias": [
+      "Conferir na procuração ID 408498235 poderes para desistir [VALIDAR]",
+      "Excluir do cadastro o advogado Ricardo Trad Filho"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "intercor": "Pedido de desistência por acordo; revogação de mandato",
+     "tipoAto": "Decisão monocrática",
+     "hip932": "Desistência (artigo 998 do CPC) / prejudicado",
+     "urgSit": "Sem urgência"
+    }
    }
   },
   {
