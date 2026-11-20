@@ -346,7 +346,7 @@
     "preparo": "Retificado após o despacho ID 377316374; comprovantes sem texto extraível",
     "monocratica": "Não",
     "analisado_em": "19/11/2026",
-    "conf_preparo": "STN, mas UG/código de 1º grau — retificar · STN (aceito): ID 378271027, 371549741 · Pix/PagTesouro (não aceito): ID 378271030 · \"Aguardando pagamento\": ID 368235673 · comprovante bancário: ID 378271029 · em imagem (OCR pendente): ID 368235674 · despacho/decisão sobre preparo: ID 377316374 · UG/código de 1º grau (retificar, artigo 1.007, § 7º, do CPC) · valor R$ 64,26/957,69 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "STN, mas UG/código de 1º grau — retificar · STN (aceito): ID 378271027, 371549741 · Pix/PagTesouro (não aceito): ID 378271030 · \"Aguardando pagamento\": ID 368235673 · comprovante bancário: ID 378271029, 368235674 · despacho/decisão sobre preparo: ID 377316374 · UG/código de 1º grau (retificar, artigo 1.007, § 7º, do CPC) · valor R$ 64,26/957,69 · leitura visual (OCR) em 20/11/2026: ID 368235674 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5021736-26.2025.4.03.6100, 5030008-54.2025.4.03.6182, 0000876-29.2015.4.03.6007 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -533,7 +533,7 @@
     "preparo": "Guia e comprovante de 11/06/2024 (IDs 292077246 e 292077251), sem texto extraível",
     "monocratica": "Possível, se houver perda de objeto [VALIDAR]",
     "analisado_em": "19/11/2026",
-    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 292077244 · só a guia: ID 292077246 · em imagem (OCR pendente): ID 292077251 · certidão sem custas: ID 291924683 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 292077244 · só a guia: ID 292077246, 292077251 · certidão sem custas: ID 291924683 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 292077251 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 0007849-36.2006.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -717,7 +717,7 @@
     "preparo": "Em dobro determinado; comprovante ID 379489258 sem texto extraível",
     "monocratica": "Possível, se deserto [VALIDAR]",
     "analisado_em": "19/11/2026",
-    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 372624802 · em imagem (OCR pendente): ID 379489258, 372624804 · certidão sem custas: ID 365175224 · despacho/decisão sobre preparo: ID 376122107, 366467045 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 379489258 · \"Aguardando pagamento\": ID 372624804 · comprovante bancário: ID 372624802 · certidão sem custas: ID 365175224 · despacho/decisão sobre preparo: ID 376122107, 366467045 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 379489258, 372624804 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5011102-14.2024.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -1840,7 +1840,7 @@
     "preparo": "Retificado após o despacho ID 384198069; comprovante ID 385047304 sem texto",
     "monocratica": "Não",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 385047300 · só a guia: ID 385047301 · em imagem (OCR pendente): ID 385047304, 371819030 · certidão sem custas: ID 372595122 · despacho/decisão sobre preparo: ID 384198069 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 385047300, 385047304, 371819030 · só a guia: ID 385047301 · certidão sem custas: ID 372595122 · despacho/decisão sobre preparo: ID 384198069 · valor R$ 64,26/957,69 · leitura visual (OCR) em 20/11/2026: ID 385047304, 371819030 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5002189-72.2026.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -2132,7 +2132,7 @@
     "preparo": "Recolhido (ID 365385112)",
     "monocratica": "Não; verificar o lote \"LOTE MULTA - AI\"",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "Comprovante ilegível na extração — OCR · ilegível (OCR pendente): ID 365385112 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 365385112 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 365385112 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5007810-31.2018.4.03.6000, 5003493-82.2021.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -2321,7 +2321,7 @@
     "preparo": "Petição de juntada de custas (ID 311661382); arquivo de custas sem conteúdo (ID 311661383) [VALIDAR]",
     "monocratica": "Possível, se houver perda de objeto [VALIDAR]",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "Comprovante em imagem — conferir · em imagem (OCR pendente): ID 311661383 · certidão sem custas: ID 311643356 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Só a guia · só a guia: ID 311661383 · certidão sem custas: ID 311643356 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 311661383 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -2497,7 +2497,7 @@
     "preparo": "Sem comprovante [VALIDAR]",
     "monocratica": "Possível: linha do gabinete para execução da OAB (banco de monocráticas, M00339) [VALIDAR]",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "Comprovante em imagem — conferir · em imagem (OCR pendente): ID 340124368 · certidão sem custas: ID 340110104 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 340124368 · certidão sem custas: ID 340110104 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 340124368 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -2668,7 +2668,7 @@
     "preparo": "Sem comprovante (documento ID 339611724 vazio) [VALIDAR]",
     "monocratica": "Possível (linha M00339) [VALIDAR]",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "Comprovante em imagem — conferir · em imagem (OCR pendente): ID 339611724 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 339611724 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 339611724 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · Outros números do TRF3 citados (conferir se precedente ou conexo): 5012662-46.2024.4.03.0000, 5027605-05.2023.4.03.0000, 5026881-98.2023.4.03.0000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -2762,7 +2762,7 @@
     "preparo": "Guia ID 335824198; comprovante ID 335824195 sem conteúdo [VALIDAR]",
     "monocratica": "Não",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 388087470 · só a guia: ID 335824198 · em imagem (OCR pendente): ID 335824195 · certidão sem custas: ID 335773409 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 388087470, 335824195 · só a guia: ID 335824198 · certidão sem custas: ID 335773409 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 335824195 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5007686-04.2025.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -2860,7 +2860,7 @@
     "preparo": "Sem comprovante de pagamento legível [VALIDAR]",
     "monocratica": "Possível, se deserto [VALIDAR]",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "SÓ \"aguardando pagamento\" (não aceito) · \"Aguardando pagamento\": ID 352529775 · em imagem (OCR pendente): ID 352529776, 352529777 · valor R$ 64,26 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 352529777 (Consulta de Pagamentos de GRU em formato de lista [VALIDAR]) · \"Aguardando pagamento\": ID 352529775 · comprovante bancário: ID 352529776 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 352529776, 352529777 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5006521-19.2025.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -3455,7 +3455,7 @@
     "monocratica": "Possível, pela linha do Tema 485/STF [VALIDAR]",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI · Concurso Nacional Unificado (Bloco 4) · anulação de 8 questões objetivas · tutela indeferida",
-    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 380428500 · \"Aguardando pagamento\": ID 366456217 · comprovante bancário: ID 380428492 · em imagem (OCR pendente): ID 366456216 · despacho/decisão sobre preparo: ID 377384022 · valor R$ 64,26 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 380428500 · \"Aguardando pagamento\": ID 366456217 · comprovante bancário: ID 380428492, 366456216 · despacho/decisão sobre preparo: ID 377384022 · valor R$ 64,26/65,93 · leitura visual (OCR) em 20/11/2026: ID 366456216 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5000261-86.2026.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -3628,7 +3628,7 @@
     "monocratica": "Não; decisão liminar",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI · Concurso para professor do magistério superior (UFMS, Naviraí) · impedimento de examinadora e critério fora do edital · tutela pendente",
-    "conf_preparo": "Comprovante em imagem — conferir · só a guia: ID 404595335, 400216433 · em imagem (OCR pendente): ID 404595336, 400216434 · despacho/decisão sobre preparo: ID 402691112 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 404595336, 400216434 · só a guia: ID 404595335, 400216433 · despacho/decisão sobre preparo: ID 402691112 · valor R$ 64,26/5,32 · leitura visual (OCR) em 20/11/2026: ID 404595336, 400216434 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5006320-90.2026.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -3719,7 +3719,7 @@
       "Tempestividade: ciência em 02/09/2026 é alegação da agravante [VALIDAR]",
       "Ler a decisão agravada (ID 400216432 veio sem texto)"
      ],
-     "especificidades": "Preparo: o despacho ID 402691112 (07/10/2026) apontou valor inferior ao da tabela (IDs 400216434 e 400425009) e deu 5 dias para complementar, sob pena de deserção; guia e comprovante juntados em 15/10/2026 (IDs 404595335 e 404595336), a conferir · A agravante reiterou o pedido urgente de tutela (ID 404595333) · A UFMS ainda não foi intimada"
+     "especificidades": "Preparo: o despacho ID 402691112 (07/10/2026) apontou valor inferior ao da tabela (IDs 400216434 e 400425009) e deu 5 dias para complementar, sob pena de deserção; guia e comprovante bancário da Caixa juntados em 15/10/2026 (IDs 404595335 e 404595336; R$ 64,26), não o comprovante STN; o recolhimento anterior (ID 400216434) foi de R$ 5,32 · A agravante reiterou o pedido urgente de tutela (ID 404595333) · A UFMS ainda não foi intimada"
     },
     "ctl": {
      "tempest": "Não verificado",
@@ -3736,7 +3736,7 @@
     }
    },
    "subassunto": "Concurso público · magistério superior · impessoalidade da banca",
-   "especificidades": "Preparo: o despacho ID 402691112 (07/10/2026) apontou valor inferior ao da tabela (IDs 400216434 e 400425009) e deu 5 dias para complementar, sob pena de deserção; guia e comprovante juntados em 15/10/2026 (IDs 404595335 e 404595336), a conferir · A agravante reiterou o pedido urgente de tutela (ID 404595333) · A UFMS ainda não foi intimada"
+   "especificidades": "Preparo: o despacho ID 402691112 (07/10/2026) apontou valor inferior ao da tabela (IDs 400216434 e 400425009) e deu 5 dias para complementar, sob pena de deserção; guia e comprovante bancário da Caixa juntados em 15/10/2026 (IDs 404595335 e 404595336; R$ 64,26), não o comprovante STN; o recolhimento anterior (ID 400216434) foi de R$ 5,32 · A agravante reiterou o pedido urgente de tutela (ID 404595333) · A UFMS ainda não foi intimada"
   },
   {
    "sessao": "",
@@ -6499,7 +6499,7 @@
     "monocratica": "Possível [VALIDAR]",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI · Cumprimento individual de ACP (auxílio-reclusão) · homologação dos cálculos do INSS limitados a 16/06/2012 · tutela recursal indeferida",
-    "conf_preparo": "GRATUIDADE · em imagem (OCR pendente): ID 383619973 · gratuidade em: ID 381496630 · certidão sem custas: ID 379951459 · despacho/decisão sobre preparo: ID 381496630 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "SÓ PIX/PagTesouro (não aceito) — gratuidade não apreciada na origem · Pix/PagTesouro (não aceito): ID 383619973 · gratuidade em: ID 381496630 · certidão sem custas: ID 379951459 · despacho/decisão sobre preparo: ID 381496630 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 383619973 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5002422-97.2025.4.03.6002 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -6597,7 +6597,7 @@
       "Ler o despacho ID 381496630 na íntegra e conferir o comprovante ID 383619973 (sem texto) [VALIDAR]",
       "Certificar o prazo de contraminuta do INSS [VALIDAR]"
      ],
-     "especificidades": "Preparo: o despacho ID 381496630 (20/06/2026) apontou que a gratuidade não foi apreciada na origem e tratou da isenção de custas na execução (Resolução PRES 138/2017) [VALIDAR conteúdo integral]; os agravantes juntaram comprovante de recolhimento em dobro em 30/06/2026 (IDs 383619972 e 383619973, este sem texto) · Não consta contraminuta · O juízo considerou que não houve prova da permanência carcerária no processo administrativo nem recurso administrativo"
+     "especificidades": "Preparo: o despacho ID 381496630 (20/06/2026) apontou que a gratuidade não foi apreciada na origem e tratou da isenção de custas na execução (Resolução PRES 138/2017) [VALIDAR conteúdo integral]; os agravantes juntaram comprovante de recolhimento em dobro em 30/06/2026 (IDs 383619972 e 383619973; este é tela Pix/PagTesouro de R$ 128,52, não o comprovante STN) · Não consta contraminuta · O juízo considerou que não houve prova da permanência carcerária no processo administrativo nem recurso administrativo"
     },
     "ctl": {
      "tempest": "Não verificado",
@@ -6612,7 +6612,7 @@
     }
    },
    "subassunto": "Cumprimento de sentença coletiva · auxílio-reclusão · período de reclusão · cálculos",
-   "especificidades": "Preparo: o despacho ID 381496630 (20/06/2026) apontou que a gratuidade não foi apreciada na origem e tratou da isenção de custas na execução (Resolução PRES 138/2017) [VALIDAR conteúdo integral]; os agravantes juntaram comprovante de recolhimento em dobro em 30/06/2026 (IDs 383619972 e 383619973, este sem texto) · Não consta contraminuta · O juízo considerou que não houve prova da permanência carcerária no processo administrativo nem recurso administrativo"
+   "especificidades": "Preparo: o despacho ID 381496630 (20/06/2026) apontou que a gratuidade não foi apreciada na origem e tratou da isenção de custas na execução (Resolução PRES 138/2017) [VALIDAR conteúdo integral]; os agravantes juntaram comprovante de recolhimento em dobro em 30/06/2026 (IDs 383619972 e 383619973; este é tela Pix/PagTesouro de R$ 128,52, não o comprovante STN) · Não consta contraminuta · O juízo considerou que não houve prova da permanência carcerária no processo administrativo nem recurso administrativo"
   },
   {
    "sessao": "",
@@ -6994,7 +6994,7 @@
     "monocratica": "Possível [VALIDAR]",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI · Cumprimento de sentença previdenciário (competência delegada) · alvará em nome da sociedade de advogados com poderes para receber e dar quitação · tutela recursal indeferida",
-    "conf_preparo": "GRATUIDADE · em imagem (OCR pendente): ID 382416247 · gratuidade em: ID 382357145 · certidão sem custas: ID 371433742 · despacho/decisão sobre preparo: ID 382357145 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "SÓ PIX/PagTesouro (não aceito) — gratuidade da parte não alcança o recurso do patrono · Pix/PagTesouro (não aceito): ID 382416247 · gratuidade em: ID 382357145 · certidão sem custas: ID 371433742 · despacho/decisão sobre preparo: ID 382357145 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 382416247 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 0801183-53.2020.8.12.0004 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -7094,7 +7094,7 @@
       "Conferir valor e data do comprovante de custas (ID 382416247 sem texto) [VALIDAR]",
       "Certificar o prazo de contraminuta do INSS [VALIDAR]"
      ],
-     "especificidades": "O despacho ID 382357145 (24/06/2026) assentou que o recurso versa interesse próprio do patrono e que a gratuidade da parte não o alcança; comprovante de custas juntado no mesmo dia (IDs 382416245 e 382416247, este sem texto) · Declínio de competência da 10ª Turma (ID 371994262) · Interposição antes da publicação da decisão (artigo 218, § 4º, do CPC) · Possível exame de legitimidade/interesse: o recurso é em nome da parte, mas defende interesse dos advogados"
+     "especificidades": "O despacho ID 382357145 (24/06/2026) assentou que o recurso versa interesse próprio do patrono e que a gratuidade da parte não o alcança; comprovante de custas juntado no mesmo dia (IDs 382416245 e 382416247; este é tela Pix/PagTesouro de R$ 128,52, não o comprovante STN) · Declínio de competência da 10ª Turma (ID 371994262) · Interposição antes da publicação da decisão (artigo 218, § 4º, do CPC) · Possível exame de legitimidade/interesse: o recurso é em nome da parte, mas defende interesse dos advogados"
     },
     "ctl": {
      "tempest": "Tempestivo",
@@ -7109,7 +7109,7 @@
     }
    },
    "subassunto": "Cumprimento de sentença · alvará · sociedade de advogados · poderes para receber e dar quitação · honorários",
-   "especificidades": "O despacho ID 382357145 (24/06/2026) assentou que o recurso versa interesse próprio do patrono e que a gratuidade da parte não o alcança; comprovante de custas juntado no mesmo dia (IDs 382416245 e 382416247, este sem texto) · Declínio de competência da 10ª Turma (ID 371994262) · Interposição antes da publicação da decisão (artigo 218, § 4º, do CPC) · Possível exame de legitimidade/interesse: o recurso é em nome da parte, mas defende interesse dos advogados"
+   "especificidades": "O despacho ID 382357145 (24/06/2026) assentou que o recurso versa interesse próprio do patrono e que a gratuidade da parte não o alcança; comprovante de custas juntado no mesmo dia (IDs 382416245 e 382416247; este é tela Pix/PagTesouro de R$ 128,52, não o comprovante STN) · Declínio de competência da 10ª Turma (ID 371994262) · Interposição antes da publicação da decisão (artigo 218, § 4º, do CPC) · Possível exame de legitimidade/interesse: o recurso é em nome da parte, mas defende interesse dos advogados"
   },
   {
    "sessao": "",
@@ -7340,7 +7340,7 @@
     "monocratica": "Possível [VALIDAR]",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI · Embargos à execução de cédulas de crédito rural (CEF, R$ 12,4 milhões) · efeito suspensivo sem garantia do juízo · tutela recursal indeferida",
-    "conf_preparo": "Comprovante ilegível na extração — OCR · ilegível (OCR pendente): ID 361234558 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 361234558 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 361234558 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5000195-03.2026.4.03.6002 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -7443,11 +7443,11 @@
       "Conferir o comprovante de preparo (ID 361234558, ilegível) [VALIDAR]",
       "Anotar a intimação exclusiva em nome de Gustavo Passarelli da Silva"
      ],
-     "especificidades": "A decisão ID 366527474 assentou que a hipoteca da cédula não equivale à penhora, depósito ou caução exigidos pelo artigo 919, § 1º, do CPC (artigo 835, § 3º), e que a execução não estava garantida (ID 545678428, origem); postergou o exame dos demais requisitos · Parte idosa · Preparo comprovado em 19/03/2026 (ID 361234558, ilegível na extração) · Pedido de intimação exclusiva em nome de Gustavo Passarelli da Silva (OAB/MS 7.602)"
+     "especificidades": "A decisão ID 366527474 assentou que a hipoteca da cédula não equivale à penhora, depósito ou caução exigidos pelo artigo 919, § 1º, do CPC (artigo 835, § 3º), e que a execução não estava garantida (ID 545678428, origem); postergou o exame dos demais requisitos · Parte idosa · Preparo: só tela PagTesouro \"aguardando pagamento\" e comprovante Pix do Sicredi de 19/03/2026 (R$ 64,26; ID 361234558), não o comprovante STN exigido · Pedido de intimação exclusiva em nome de Gustavo Passarelli da Silva (OAB/MS 7.602)"
     },
     "ctl": {
      "tempest": "Não verificado",
-     "preparo": "Comprovado",
+     "preparo": "Não verificado",
      "prelim": "Não há",
      "repres": "Não verificado",
      "midias": "Não se aplica",
@@ -7459,7 +7459,7 @@
     }
    },
    "subassunto": "Contratos bancários · Cédula de crédito rural · embargos à execução · efeito suspensivo · garantia do juízo · juros",
-   "especificidades": "A decisão ID 366527474 assentou que a hipoteca da cédula não equivale à penhora, depósito ou caução exigidos pelo artigo 919, § 1º, do CPC (artigo 835, § 3º), e que a execução não estava garantida (ID 545678428, origem); postergou o exame dos demais requisitos · Parte idosa · Preparo comprovado em 19/03/2026 (ID 361234558, ilegível na extração) · Pedido de intimação exclusiva em nome de Gustavo Passarelli da Silva (OAB/MS 7.602)"
+   "especificidades": "A decisão ID 366527474 assentou que a hipoteca da cédula não equivale à penhora, depósito ou caução exigidos pelo artigo 919, § 1º, do CPC (artigo 835, § 3º), e que a execução não estava garantida (ID 545678428, origem); postergou o exame dos demais requisitos · Parte idosa · Preparo: só tela PagTesouro \"aguardando pagamento\" e comprovante Pix do Sicredi de 19/03/2026 (R$ 64,26; ID 361234558), não o comprovante STN exigido · Pedido de intimação exclusiva em nome de Gustavo Passarelli da Silva (OAB/MS 7.602)"
   },
   {
    "sessao": "",
@@ -7699,7 +7699,7 @@
     "monocratica": "Possível [VALIDAR]",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI · Embargos à execução de cédula rural (CEF, PRONAMP) · efeito suspensivo sem penhora formal (garantias cedulares) · tutela recursal indeferida",
-    "conf_preparo": "SÓ PIX/PagTesouro (não aceito) · Pix/PagTesouro (não aceito): ID 381482653 · comprovante bancário: ID 379243588, 379243597 · ilegível (OCR pendente): ID 379243588 · certidão sem custas: ID 379003180 · despacho/decisão sobre preparo: ID 381198904 · valor R$ 64,26 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · Pix/PagTesouro (não aceito): ID 381482653 · comprovante bancário: ID 379243597 · petição de juntada (sem comprovante): ID 379243588 · certidão sem custas: ID 379003180 · despacho/decisão sobre preparo: ID 381198904 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 379243588 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5002997-77.2026.4.03.6000 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -7801,11 +7801,11 @@
      "pendencias": [
       "Data de interposição do agravo e tempestividade do preparo [VALIDAR]"
      ],
-     "especificidades": "Preparo pago em 03/06/2026 (R$ 64,26; ID 381482653) · A decisão ID 381198904 manteve a exigência de garantia formal do juízo · Tese idêntica à do 5007206-47 (hipoteca cedular não equivale à penhora) · Pedido acessório de suspensão de protestos e exclusão de SPC/SERASA"
+     "especificidades": "Preparo: só tela Pix/PagTesouro de 03/06/2026 (R$ 64,26; ID 381482653) e comprovante bancário (ID 379243597), não o comprovante STN exigido · A decisão ID 381198904 manteve a exigência de garantia formal do juízo · Tese idêntica à do 5007206-47 (hipoteca cedular não equivale à penhora) · Pedido acessório de suspensão de protestos e exclusão de SPC/SERASA"
     },
     "ctl": {
      "tempest": "Não verificado",
-     "preparo": "Comprovado",
+     "preparo": "Não verificado",
      "prelim": "Não há",
      "repres": "Não verificado",
      "midias": "Não se aplica",
@@ -7817,7 +7817,7 @@
     }
    },
    "subassunto": "Contratos bancários · Cédula de crédito rural · embargos à execução · efeito suspensivo · garantia do juízo",
-   "especificidades": "Preparo pago em 03/06/2026 (R$ 64,26; ID 381482653) · A decisão ID 381198904 manteve a exigência de garantia formal do juízo · Tese idêntica à do 5007206-47 (hipoteca cedular não equivale à penhora) · Pedido acessório de suspensão de protestos e exclusão de SPC/SERASA"
+   "especificidades": "Preparo: só tela Pix/PagTesouro de 03/06/2026 (R$ 64,26; ID 381482653) e comprovante bancário (ID 379243597), não o comprovante STN exigido · A decisão ID 381198904 manteve a exigência de garantia formal do juízo · Tese idêntica à do 5007206-47 (hipoteca cedular não equivale à penhora) · Pedido acessório de suspensão de protestos e exclusão de SPC/SERASA"
   },
   {
    "sessao": "",
@@ -7867,7 +7867,7 @@
     "monocratica": "Possível (Tema 1.350/STJ) [VALIDAR]",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI · Execução fiscal de crédito rural cedido à União (MP 2.196-3/2001) · exceção de pré-executividade rejeitada (preclusão e dilação probatória) · nulidade da CDA (Tema 1.350/STJ)",
-    "conf_preparo": "Comprovante ilegível na extração — OCR · ilegível (OCR pendente): ID 355476538 · certidão sem custas: ID 354682097 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "SÓ PIX/PagTesouro (não aceito) · Pix/PagTesouro (não aceito): ID 355476538 · certidão sem custas: ID 354682097 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 355476538 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 0002750-16.2006.8.12.0014 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -7964,11 +7964,11 @@
        "data": "2026-04-16"
       }
      ],
-     "especificidades": "Execução de 2006 · Decisão agravada com fundamento autônomo de preclusão consumativa, a exigir impugnação específica · Memoriais (ID 366988304, 16/04/2026) em substituição à sustentação oral · Preparo comprovado (ID 355476538, ilegível na extração) · Despacho inicial do Des. Fed. Nelton dos Santos (ID 358541437)"
+     "especificidades": "Execução de 2006 · Decisão agravada com fundamento autônomo de preclusão consumativa, a exigir impugnação específica · Memoriais (ID 366988304, 16/04/2026) em substituição à sustentação oral · Preparo: só tela Pix/PagTesouro de 16/02/2026 (R$ 64,26; ID 355476538), não o comprovante STN exigido · Despacho inicial do Des. Fed. Nelton dos Santos (ID 358541437)"
     },
     "ctl": {
      "tempest": "Tempestivo",
-     "preparo": "Comprovado",
+     "preparo": "Não verificado",
      "prelim": "Não há",
      "repres": "Regular",
      "midias": "Não se aplica",
@@ -7977,7 +7977,7 @@
     }
    },
    "subassunto": "Execução fiscal · crédito rural cedido à União · MP 2.196-3/2001 · exceção de pré-executividade · preclusão",
-   "especificidades": "Execução de 2006 · Decisão agravada com fundamento autônomo de preclusão consumativa, a exigir impugnação específica · Memoriais (ID 366988304, 16/04/2026) em substituição à sustentação oral · Preparo comprovado (ID 355476538, ilegível na extração) · Despacho inicial do Des. Fed. Nelton dos Santos (ID 358541437)"
+   "especificidades": "Execução de 2006 · Decisão agravada com fundamento autônomo de preclusão consumativa, a exigir impugnação específica · Memoriais (ID 366988304, 16/04/2026) em substituição à sustentação oral · Preparo: só tela Pix/PagTesouro de 16/02/2026 (R$ 64,26; ID 355476538), não o comprovante STN exigido · Despacho inicial do Des. Fed. Nelton dos Santos (ID 358541437)"
   },
   {
    "sessao": "",
@@ -8032,7 +8032,7 @@
     "monocratica": "Não",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI de FIDC cessionário · Cumprimento de sentença previdenciário (competência delegada) · destaque de honorários contratuais após o precatório (artigo 22, § 4º, da Lei 8.906/1994) · efeito suspensivo deferido",
-    "conf_preparo": "Comprovante em imagem — conferir · em imagem (OCR pendente): ID 337307648 · certidão sem custas: ID 337284159 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 337307648 · certidão sem custas: ID 337284159 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 337307648 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 0800963-50.2019.8.12.0017 · Recursos ligados citados nos autos: 5002981-67.2020.4.03.9999 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -8133,11 +8133,11 @@
        "data": "2026-09-11"
       }
      ],
-     "especificidades": "Efeito suspensivo deferido na 10ª Turma (ID 349526865, Juíza Federal convocada Taís Vargas Ferracini de Campos Gurgel), com apoio no artigo 22, § 1º, da Resolução CJF 822/2023 · Contraminuta do advogado interessado (ID 350131043) com preliminar de ilegitimidade e falta de interesse do fundo para impugnar o contrato de honorários · Os memoriais (ID 382867775) alteram o pedido para 65%/35% [VALIDAR inovação] · Pedido de publicações em nome de Letícia Messias (OAB/SP 365.485)"
+     "especificidades": "Efeito suspensivo deferido na 10ª Turma (ID 349526865, Juíza Federal convocada Taís Vargas Ferracini de Campos Gurgel), com apoio no artigo 22, § 1º, da Resolução CJF 822/2023 · Contraminuta do advogado interessado (ID 350131043) com preliminar de ilegitimidade e falta de interesse do fundo para impugnar o contrato de honorários · Os memoriais (ID 382867775) alteram o pedido para 65%/35% [VALIDAR inovação] · Pedido de publicações em nome de Letícia Messias (OAB/SP 365.485) · Preparo: comprovante Pix do Santander e tela PagTesouro \"aguardando pagamento\" (R$ 64,26; ID 337307648), não o comprovante STN exigido"
     },
     "ctl": {
      "tempest": "Não verificado",
-     "preparo": "Comprovado",
+     "preparo": "Não verificado",
      "prelim": "Há preliminares",
      "repres": "Não verificado",
      "midias": "Não se aplica",
@@ -8150,7 +8150,7 @@
     }
    },
    "subassunto": "Cumprimento de sentença · Precatório · cessão de crédito · honorários contratuais · destaque · artigo 22, § 4º, da Lei 8.906/1994",
-   "especificidades": "Efeito suspensivo deferido na 10ª Turma (ID 349526865, Juíza Federal convocada Taís Vargas Ferracini de Campos Gurgel), com apoio no artigo 22, § 1º, da Resolução CJF 822/2023 · Contraminuta do advogado interessado (ID 350131043) com preliminar de ilegitimidade e falta de interesse do fundo para impugnar o contrato de honorários · Os memoriais (ID 382867775) alteram o pedido para 65%/35% [VALIDAR inovação] · Pedido de publicações em nome de Letícia Messias (OAB/SP 365.485)"
+   "especificidades": "Efeito suspensivo deferido na 10ª Turma (ID 349526865, Juíza Federal convocada Taís Vargas Ferracini de Campos Gurgel), com apoio no artigo 22, § 1º, da Resolução CJF 822/2023 · Contraminuta do advogado interessado (ID 350131043) com preliminar de ilegitimidade e falta de interesse do fundo para impugnar o contrato de honorários · Os memoriais (ID 382867775) alteram o pedido para 65%/35% [VALIDAR inovação] · Pedido de publicações em nome de Letícia Messias (OAB/SP 365.485) · Preparo: comprovante Pix do Santander e tela PagTesouro \"aguardando pagamento\" (R$ 64,26; ID 337307648), não o comprovante STN exigido"
   },
   {
    "sessao": "",
@@ -8716,7 +8716,7 @@
     "monocratica": "Não, salvo prejudicialidade",
     "analisado_em": "20/11/2026",
     "tipo_caso_anterior": "AI da EBSERH · Concurso (Edital 03/2023, área assistencial) · tutela que manteve candidata nas vagas de PcD · efeito suspensivo negado (3ª Turma, 2024)",
-    "conf_preparo": "Comprovante ilegível na extração — OCR · só a guia: ID 292424390 · ilegível (OCR pendente): ID 292424391 · despacho/decisão sobre preparo: ID 290064482 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "GRU via SIAFI (variante) — conferir [VALIDAR] · GRU via SIAFI (variante — conferir): ID 292424391 · só a guia: ID 292424390 · despacho/decisão sobre preparo: ID 290064482 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 292424391 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -8822,11 +8822,11 @@
       "Consultar a ação de origem (sentença, contratação) [VALIDAR]",
       "Conferir o teor do despacho ID 290064482 [VALIDAR]"
      ],
-     "especificidades": "Efeito suspensivo negado (ID 292452173, Des. Fed. Nery Júnior) · Preparo da EBSERH recolhido após o despacho ID 290064482 (IDs 292424390 e 292424391) — a contraminuta menciona decisão que negou à EBSERH as prerrogativas da Fazenda Pública · Intimações de pauta em 10 e 11/03/2026 (IDs 359250094, 359250108 e 359524733) e redistribuição em 04/05/2026 · Pedido de intimação exclusiva em nome de Taís Mariana Lima Pereira (OAB/MS 20.453-A)"
+     "especificidades": "Efeito suspensivo negado (ID 292452173, Des. Fed. Nery Júnior) · Preparo da EBSERH recolhido via SIAFI após o despacho ID 290064482 (IDs 292424390 e 292424391; UG favorecida 090029, código 18720-8, R$ 64,26) [VALIDAR aceitação, por não ser a tela STN do PagTesouro] — a contraminuta menciona decisão que negou à EBSERH as prerrogativas da Fazenda Pública · Intimações de pauta em 10 e 11/03/2026 (IDs 359250094, 359250108 e 359524733) e redistribuição em 04/05/2026 · Pedido de intimação exclusiva em nome de Taís Mariana Lima Pereira (OAB/MS 20.453-A)"
     },
     "ctl": {
      "tempest": "Não verificado",
-     "preparo": "Comprovado",
+     "preparo": "Não verificado",
      "prelim": "Não há",
      "repres": "Não verificado",
      "midias": "Não se aplica",
@@ -8838,7 +8838,7 @@
     }
    },
    "subassunto": "Concurso público · pessoa com deficiência · reserva de vagas · avaliação biopsicossocial · EBSERH",
-   "especificidades": "Efeito suspensivo negado (ID 292452173, Des. Fed. Nery Júnior) · Preparo da EBSERH recolhido após o despacho ID 290064482 (IDs 292424390 e 292424391) — a contraminuta menciona decisão que negou à EBSERH as prerrogativas da Fazenda Pública · Intimações de pauta em 10 e 11/03/2026 (IDs 359250094, 359250108 e 359524733) e redistribuição em 04/05/2026 · Pedido de intimação exclusiva em nome de Taís Mariana Lima Pereira (OAB/MS 20.453-A)"
+   "especificidades": "Efeito suspensivo negado (ID 292452173, Des. Fed. Nery Júnior) · Preparo da EBSERH recolhido via SIAFI após o despacho ID 290064482 (IDs 292424390 e 292424391; UG favorecida 090029, código 18720-8, R$ 64,26) [VALIDAR aceitação, por não ser a tela STN do PagTesouro] — a contraminuta menciona decisão que negou à EBSERH as prerrogativas da Fazenda Pública · Intimações de pauta em 10 e 11/03/2026 (IDs 359250094, 359250108 e 359524733) e redistribuição em 04/05/2026 · Pedido de intimação exclusiva em nome de Taís Mariana Lima Pereira (OAB/MS 20.453-A)"
   },
   {
    "sessao": "",
@@ -9126,7 +9126,7 @@
    ],
    "mpf": "",
    "triagem": {
-    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 333170431 · só a guia: ID 333171932 · em imagem (OCR pendente): ID 333171933 · certidão sem custas: ID 332744953 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 333170431, 333171933 · só a guia: ID 333171932 · certidão sem custas: ID 332744953 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 333171933 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -9466,7 +9466,7 @@
    ],
    "mpf": "",
    "triagem": {
-    "conf_preparo": "Comprovante em imagem — conferir · em imagem (OCR pendente): ID 357881391 · certidão sem custas: ID 353538714 · despacho/decisão sobre preparo: ID 355697892 · conselho profissional: não isento · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Só a guia · só a guia: ID 357881391 · certidão sem custas: ID 353538714 · despacho/decisão sobre preparo: ID 355697892 · conselho profissional: não isento · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 357881391 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -9533,7 +9533,7 @@
     "preparo": "Recolhido (ID 351641664)",
     "monocratica": "Provável [VALIDAR]",
     "analisado_em": "19/11/2026",
-    "conf_preparo": "Comprovante em imagem — conferir · em imagem (OCR pendente): ID 351641664 · conselho profissional: não isento · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Só a guia · só a guia: ID 351641664 · conselho profissional: não isento · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 351641664 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5000125-93.2020.4.03.6002 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -9868,7 +9868,7 @@
    ],
    "mpf": "",
    "triagem": {
-    "conf_preparo": "Comprovante em imagem — conferir · em imagem (OCR pendente): ID 378039861 · despacho/decisão sobre preparo: ID 374902322 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 378039861 · despacho/decisão sobre preparo: ID 374902322 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 378039861 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -10076,7 +10076,7 @@
    ],
    "mpf": "",
    "triagem": {
-    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 368413811 · em imagem (OCR pendente): ID 368413809, 350938154, 350938155 · certidão sem custas: ID 350592210 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 368413811, 350938155 · só a guia: ID 368413809 · documento não acessível para leitura: ID 350938154 · certidão sem custas: ID 350592210 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 368413809, 350938155 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -10218,7 +10218,7 @@
    ],
    "mpf": "",
    "triagem": {
-    "conf_preparo": "Comprovante em imagem — conferir · só a guia: ID 372859756 · em imagem (OCR pendente): ID 372859755 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 372859755 · só a guia: ID 372859756 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 372859755 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5004004-35.2025.4.03.6002 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -10406,7 +10406,7 @@
    ],
    "mpf": "",
    "triagem": {
-    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 398329155 · em imagem (OCR pendente): ID 398329156, 393638449 · certidão sem custas: ID 393937782 · despacho/decisão sobre preparo: ID 396624060 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 398329155, 398329156 · certidão sem custas: ID 393937782 · despacho/decisão sobre preparo: ID 396624060 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 398329156 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5000434-72.2024.4.03.6003 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -10589,7 +10589,7 @@
    ],
    "mpf": "",
    "triagem": {
-    "conf_preparo": "SÓ \"aguardando pagamento\" (não aceito) · \"Aguardando pagamento\": ID 387772612 · em imagem (OCR pendente): ID 390588542, 387783692 · certidão sem custas: ID 384144802 · despacho/decisão sobre preparo: ID 390624320, 387924034, 384628314 · valor R$ 128,52 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Comprovante bancário (não aceito) · \"Aguardando pagamento\": ID 387772612 · comprovante bancário: ID 390588542, 387783692 · certidão sem custas: ID 384144802 · despacho/decisão sobre preparo: ID 390624320, 387924034, 384628314 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 390588542, 387783692 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5009593-14.2025.4.03.6000 · Outros números do TRF3 citados (conferir se precedente ou conexo): 5019834-07.2022.4.03.0000 · conferido em 20/11/2026"
    },
    "ajustes": [],
