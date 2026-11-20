@@ -2120,6 +2120,18 @@
        "secao": "pauta"
       },
       {
+       "rotulo": "Sustentação oral ou preferência",
+       "chave": "Sustentação oral",
+       "tipo": "lista",
+       "secao": "pauta",
+       "opcoes": [
+        "Presencial",
+        "Videoconferência",
+        "Preferência"
+       ],
+       "regra": "espelha o cartão da pauta (ctl.sopref) e os pedidos recebidos por e-mail; Videoconferência = Virtual no cartão"
+      },
+      {
        "rotulo": "Publicação da pauta",
        "chave": "Pauta - Publicação",
        "tipo": "texto",

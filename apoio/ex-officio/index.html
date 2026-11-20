@@ -2195,7 +2195,7 @@ function carregar(silencioso){
     $('#pt-ey').textContent='01 / Produção';$('#pt-t').textContent='Pauta de Julgamento';$('#pt-st').textContent='';$('#pt-k').innerHTML='';$('#mk').innerHTML='';$('#pt-n').textContent='';$('#ses-tag').textContent='';$('#ses-sub').textContent='';var vpp=$('#v-pauta');vpp.classList.remove('mono');var hdz=vpp.querySelector('.pt-hd');if(hdz)hdz.hidden=true;var mnz=$('#mono-n');if(mnz)mnz.hidden=true;
     $('#lst').innerHTML='<div class="empty">Nenhuma pauta publicada para a equipe ainda. O responsável publica cada pauta na página Pautas (/pautas).'+(mq.length?'<br>Marcos já publicados: '+mq.map(function(s){return 'sessão de '+esc(br(s.date));}).join(', ')+' (veja o calendário na página inicial).':'')+'</div>';return;}
   var ck='p_'+S.ses,cp=cacheLer(ck);if(cp&&!silencioso){aplicarPauta(JSON.parse(cp._t));render();atualizando(true);}else if(!silencioso)$('#lst').innerHTML='<div class="empty">Lendo a pauta…</div>';
-  return api('/api/pauta?data='+S.ses).then(function(d){if(!vigente(nReq,fReq,sReq))return;var mud=cacheGravar(ck,d);atualizando(false);if((cp&&!mud&&!silencioso)||(S.doc&&editandoLista()))return;aplicarPauta(d);render();})
+  return api('/api/pauta?data='+S.ses).then(function(d){if(!vigente(nReq,fReq,sReq))return;var mud=cacheGravar(ck,d);atualizando(false);if((cp&&!mud&&!silencioso)||(S.doc&&editandoLista()))return;aplicarPauta(d);render();pedContar();})
     .catch(function(e){atualizando(false);if(!vigente(nReq,fReq,sReq))return;if(e.status===404){S.doc={itens:[],previa:[]};render();return;}if(cp&&e.status!==401){toast('Pauta guardada: não consegui atualizar ('+(e.message||e.erro||'erro')+').');return;}falha(e);});
 }
 function marcaSeg(sel,v){Array.prototype.forEach.call(document.querySelectorAll(sel+' button'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===v));});}
@@ -2434,7 +2434,7 @@ function render(){
   var eDia=$('#ses-dia'),eSem=$('#ses-sem');
   if(eDia)eDia.textContent=S.ses?br(S.ses).slice(0,5):'—';
   if(eSem)eSem.textContent=S.ses?String(diaSem(S.ses)).split(',')[0]:'';
-  $('#ses-sub').textContent=S.ses?[br(S.ses),ss.hora||'',qdo].filter(Boolean).join(' · '):'';
+  $('#ses-sub').textContent=S.ses?[ss.hora||'',qdo].filter(Boolean).join(' · '):'';
   var n=function(f){return L.filter(f).length;},jul=n(function(i){return /^julgad/i.test(i.resultado||'');}),adi=n(function(i){return /^adiad/i.test(i.resultado||'');}),ret=n(function(i){return /^retirad/i.test(i.resultado||'');});
   var mi=n(function(i){return i.dataMinuta;}),co=n(function(i){return i.dataCorrecao;}),li=n(function(i){return i.dataLiberacao;}),al=n(function(i){return alertas(i).length;}),ic=n(function(i){return (i.ctl||{}).intercor;}),sem=n(function(i){return !i.servidor||i.servidor==='—';}),mt=n(metaDe);
   $('#pt-st').textContent=ic+' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'+(mt===1?'':'s');if(MO)bandaMono();prontLateral();var tx=MO?'Exportar em Excel as monocráticas filtradas (sem filtro, todas)':'Exportar em Excel os processos filtrados (sem filtro, toda a pauta)';$('#exp-xlsx').title=tx;$('#exp-xlsx').setAttribute('aria-label',tx);$('#exp-meus').hidden=MO&&!ED;$('#exp-mes').hidden=$('#imp-xlsx').hidden=!MO;if(MO){var tm='Exportar as monocráticas do período em tela ('+monoPer().lb+')';$('#exp-mes').title=tm;$('#exp-mes').setAttribute('aria-label',tm);}
@@ -2587,9 +2587,22 @@ document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.
   if(/^(triagem\.Urgência|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.getAttribute('data-fk'))){fdPills();fdRender();}});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=$('#fd');if(o&&!o.hidden)fdFecha();}});
 /* sinalizações do cartão (Pauta e Monocráticas): ícones discretos na linha; cada um abre o diálogo de sinalizações do processo */
+/* sustentação oral e preferência: só aparece quando há registro; ícone por tipo e marcador de atenção (! ou nº de pedidos) */
+var ICNSO={pres:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.4"/><path d="M12 8v4M7 12h10l-1.5 8h-7zM9 20h6"/></svg>',
+  vid:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="13" height="11" rx="2"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/></svg>',
+  prf:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l6-6 6 6M6 18l6-6 6 6"/></svg>'};
+function soTipo(so){return /^pref/i.test(so)?'prf':/^pres/i.test(so)?'pres':'vid';}
+var SOROT={prf:'Preferência',pres:'Sustentação oral presencial',vid:'Sustentação oral por videoconferência'};
+function soPeds(it){return ((S.pedN||{})[dg(it.cnj)])||[];}
+function soInd(it,c){var so=c.sopref||'';if(!so)return '';var tp=soTipo(so),n=Math.max(1,soPeds(it).length);
+  return '<button type="button" class="sn-b on so so-'+tp+'" data-a="sinal" data-f="pri" aria-label="'+esc(SOROT[tp]+(n>1?' · '+n+' pedidos':''))+'">'+ICNSO[tp]+'<i class="so-n">'+(n>1?n:'!')+'</i></button>';}
+/* pedidos de sustentação e preferência recebidos por e-mail, por processo, para o marcador do cartão */
+function pedContar(){if(!S.ses||S.fonte==='mono'||(S.pedSes===S.ses&&Date.now()-(S.pedT||0)<120000))return;var ses=S.ses;S.pedSes=ses;S.pedT=Date.now();
+  api(PED_URI+'&data='+encodeURIComponent(ses)).then(function(j){if(S.ses!==ses)return;var m={};(j.registros||[]).filter(function(p){return p.vinculo;}).forEach(function(p){var k=dg(p.cnj);(m[k]=m[k]||[]).push(p);});
+    var mud=JSON.stringify(Object.keys(m).map(function(k){return k+':'+m[k].length;}))!==JSON.stringify(Object.keys(S.pedN||{}).map(function(k){return k+':'+S.pedN[k].length;}));S.pedN=m;if(mud)render();}).catch(function(){});}
 function sinais(it,A,c){var MO=S.fonte==='mono',b=function(f,on,cls,ic,tt,n){return '<button type="button" class="sn-b'+(on?' on '+cls:'')+'" data-a="sinal" data-f="'+f+'" aria-label="'+esc(tt)+'">'+ic+(n?'<i>'+n+'</i>':'')+'</button>';};
   return '<span class="sn" role="group" aria-label="Sinalizações">'+
-    (MO?'':b('pri',!!c.sopref,'pri',ICN.pri,c.sopref?'Sustentação oral / preferência: '+c.sopref:'Sustentação oral ou preferência: nenhuma · clique para registrar'))+
+    (MO?'':soInd(it,c))+
     b('al',A.length>0,'al',ICN.al,A.length?'Pendências: '+A.join(' · '):'Sem pendências',A.length>1?A.length:'')+
     b('ic',!!c.intercor,c.intercorOk?'ok':'ic2',ICN.ic,c.intercor?'Intercorrência'+(c.intercorOk?' (resolvida)':'')+': '+c.intercor:'Sem intercorrência · clique para registrar')+
     '<button type="button" class="sn-b dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></span>';}
@@ -2597,7 +2610,7 @@ function sinais(it,A,c){var MO=S.fonte==='mono',b=function(f,on,cls,ic,tt,n){ret
 function sinalTip(it,f){var c=it.ctl||{},A=alertas(it),L=function(t,x){return '<b>'+t+'</b>'+x;};
   if(f==='al')return L('Pendências',A.length?'<ul>'+A.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>':'<p>Nenhuma pendência.</p>')+'<small>Clique para conferir, registrar ou resolver.</small>';
   if(f==='ic')return L('Intercorrência',c.intercor?'<p>'+esc(c.intercor)+'</p><p class="'+(c.intercorOk?'ok':'pend')+'">'+(c.intercorOk?'Resolvida':'Em aberto: retém a liberação')+'</p>':'<p>Nenhuma registrada.</p>')+'<small>Clique para '+(c.intercor?'editar':'registrar')+'.</small>';
-  if(f==='pri')return L('Sustentação oral ou preferência','<p>'+(c.sopref?esc(c.sopref):'Nenhuma.')+'</p>')+'<small>Clique para '+(c.sopref?'alterar':'registrar')+'.</small>';
+  if(f==='pri'){var tp=soTipo(c.sopref||''),P=soPeds(it);return L(SOROT[tp],P.length?'<ul>'+P.map(function(p){return '<li>'+esc([p.advogado,p.parte&&('por '+p.parte),p.tipo==='Virtual'?'videoconferência':p.tipo&&p.tipo.toLowerCase()].filter(Boolean).join(' · '))+'</li>';}).join('')+'</ul>':'<p>Registrado na pauta.</p>')+'<small>Clique para ver ou alterar. Para incluir, use a ficha do processo (aba Pauta).</small>';}
   return '';}
 var SNT=null;
 function snTipFora(){if(SNT){SNT.remove();SNT=null;}}
@@ -8757,6 +8770,45 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 #v-cmt .cmt-gv #p-pen .drw-h:before{display:none}
 #v-cmt .cmt-gv #p-pen .pen-f .ck{display:none}
 #v-cmt .cmt-gv #pen-s span:nth-child(2){display:none}
+/* Pauta de julgamento: marcos na linha do título; barras soltas, no alto da coluna, alinhadas ao cartão da sessão */
+@media (min-width:981px){
+ #v-pauta.pt2:not(.mono) #trb .trb-h{grid-column:1;grid-row:1;align-self:end;white-space:nowrap;position:relative;z-index:1}
+ #v-pauta.pt2:not(.mono) #trb .trb-h,#v-pauta.pt2:not(.mono) #trb .trb-h>div:first-child{text-align:left!important}
+ #v-pauta.pt2:not(.mono) #trb .trb-h .trb-eyr{justify-content:flex-start!important}
+ #v-pauta.pt2:not(.mono) #pp-and{grid-column:2;grid-row:1}
+ #v-pauta.pt2:not(.mono) #trb-mk{grid-column:2;grid-row:1;align-self:end;margin:4px 0 22px!important;padding:0 0 0 clamp(48px,calc(320px - 19vw),140px)!important;
+   background:none!important;border:0!important;box-shadow:none!important}
+ #v-pauta.pt2:not(.mono) #trb-p{margin-top:0!important;padding:0!important;background:none!important;border:0!important;box-shadow:none!important}
+}
+#v-pauta.pt2 #pp-lst{margin:0!important;padding:0!important;border:0!important;height:0;overflow:hidden}
+/* cartão da sessão compacto: data e prazo numa linha, setas ao lado; a própria data abre a lista de sessões */
+#v-pauta.pt2 .pp-ses{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"k k nav" "d sub sub";
+  column-gap:8px;row-gap:3px;align-items:end;padding:9px 10px 10px 12px;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+#v-pauta.pt2 .pp-ses:hover{background:var(--ep2);border-color:var(--el2)}
+#v-pauta.pt2 .pp-ses:focus-within{border-color:var(--eg);box-shadow:0 0 0 3px rgba(35,90,85,.12)}
+#v-pauta.pt2 .pp-ses .pp-ses-h{display:contents}
+#v-pauta.pt2 .pp-ses .pp-ses-k{grid-area:k}
+#v-pauta.pt2 .pp-ses .pp-ses-nav{grid-area:nav;align-self:center;position:relative;z-index:2}
+#v-pauta.pt2 .pp-ses .pp-ses-d{grid-area:d;align-items:baseline}
+#v-pauta.pt2 .pp-ses .pp-ses-d b{font-size:22px}
+#v-pauta.pt2 .pp-ses .pp-ses-d::after{content:"";align-self:center;width:6px;height:6px;margin:0 2px 0 1px;border-right:1.5px solid var(--em);border-bottom:1.5px solid var(--em);transform:translateY(-2px) rotate(45deg)}
+#v-pauta.pt2 .pp-ses #ses-sub{grid-area:sub;margin:0 0 1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#v-pauta.pt2 .pp-ses .trb-sl{position:absolute;inset:0;z-index:1;margin:0}
+#v-pauta.pt2 .pp-ses .trb-sl select{width:100%;height:100%;opacity:0;cursor:pointer;border:0}
+#v-pauta.pt2 .pp-ses #ver{grid-column:1/-1;position:relative;z-index:2;margin-top:6px}
+/* cartões da pauta: sempre em duas linhas, como o relator prefere: observação, etiquetas e ícones de ação em cima; etapas embaixo, à direita
+   (antes dependia do tamanho dos nomes: com minutante de nome longo, as etapas desciam; com nome curto, ficavam na mesma linha) */
+@media (min-width:781px){
+ #v-pauta.ed .edr.mrw .gb{flex-wrap:wrap}
+ #v-pauta.ed .edr.mrw .gb::after{content:"";flex:0 0 100%;order:1;height:0}
+ #v-pauta.ed .edr.mrw .gb>.pr{order:2;flex:none;margin-left:auto}
+}
+/* sustentação oral (presencial ou vídeo) e preferência: ícone próprio e marcador de atenção */
+#v-pauta .sn-b.so{position:relative}
+#v-pauta .sn-b.so.so-pres,#v-pauta .sn-b.so.so-vid{color:#245b8c}
+#v-pauta .sn-b.so.so-prf{color:#8a5a12}
+#v-pauta .sn-b.so i.so-n{position:absolute;top:-6px;right:-7px;min-width:14px;height:14px;padding:0 3px;border-radius:7px;background:#b4471f;color:#fff;
+  font:700 9px/14px var(--font,system-ui);font-style:normal;text-align:center;box-shadow:0 0 0 2px var(--ecd,#fff)}
 </style>
 </body>
 </html>
