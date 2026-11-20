@@ -461,7 +461,7 @@ html[data-theme="dark"] .cwe-esteira i.feito{color:#0e2132}
 .cwe-pc .ds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;margin-top:8px}
 .cwe-pc .ds .v{display:block;font-weight:700;font-size:12.5px;color:var(--tx);font-family:inherit;letter-spacing:0}
 .cwe-pc .ds select{height:30px;min-width:180px;max-width:100%;border:1px solid var(--b2);border-radius:6px;background:var(--w);font:inherit;font-size:12.5px;padding:0 6px}
-.cwe-pc .ds select.reg{border-color:#7fb39f;background:#eef6f2}.cwe-pc .ds select.man{border-color:var(--g3);background:var(--amb)}.cwe-pc .ds select.vz{border-style:dashed}
+.cwe-pc .ds select.reg{border-color:#7fb39f;background:#eef6f2}.cwe-pc .ds select.man{border-color:var(--g3);background:var(--amb)}.cwe-pc .ds select.vz{border-style:dashed}.cwe-pc .ds select.cur{border-color:var(--ln,#d8d2c4)}.cwe-st .cwe-av{border-left:3px solid #c0392b;background:#fbeeea;padding:8px 12px;border-radius:8px}
 .cwe-mostra{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;font-size:12px;color:var(--m)}
 .cwe-mostra button{height:28px;padding:0 10px;border:1px solid var(--b2);border-radius:7px;background:var(--w);font-weight:700;font-size:11.5px}
 .cwe-segs{display:inline-flex;border:1px solid var(--b2);border-radius:7px;overflow:hidden;flex:0 0 auto!important}
@@ -2190,11 +2190,15 @@ function portaToken() { return new Promise((fim) => {
     const L = Ls.filter((p) => fl === 'todos' ? true : fl === 'regra' ? (p.sugD || p.sugC) : fl === 'branco' ? ((!p.servidor && !p.sugD) || (!p.corretor && !p.sugC)) : (p.servidor && p.corretor));
     const vis = L.slice(0, est.desTake);
     const sel = (kind, p) => { const atual = kind === 'd' ? p.servidor : p.corretor, sug = kind === 'd' ? p.sugD : p.sugC, P = kind === 'd' ? Z.minutantes : Z.corretores, v = kind === 'd' ? vD(p) : vC(p);
-      if (atual) return `<span class="v">${e(atual)}</span><small>${e((kind === 'd' ? p.porD : p.porC) || 'já designado')}</small>`;
-      return `<select data-cwe-esc="${kind}" data-p="${e(A.digits(p.cnj))}" class="${v ? (sug && v === sug.nome ? 'reg' : 'man') : 'vz'}"><option value="">— escolher —</option>${P.map((m) => `<option ${m.nome === v ? 'selected' : ''}>${e(m.nome)}</option>`).join('')}</select><small>${e(sug && v === sug.nome ? 'por regra: ' + sug.por : v ? 'escolha manual' : 'nenhuma regra casa')}</small>`; };
-    const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && ((!p.servidor && vD(p)) || (!p.corretor && vC(p)))).length;
+      /* sempre editável: quem já está designado aparece selecionado e pode ser trocado */
+      const nomes = P.map((m) => m.nome); if (atual && !nomes.includes(atual)) nomes.unshift(atual);
+      const cls = atual && v === atual ? 'cur' : v ? (sug && v === sug.nome ? 'reg' : 'man') : 'vz';
+      const nota = atual && v === atual ? ((kind === 'd' ? p.porD : p.porC) || 'já designado') : atual && v !== atual ? 'troca: era ' + atual : sug && v === sug.nome ? 'por regra: ' + sug.por : v ? 'escolha manual' : 'nenhuma regra casa';
+      return `<select data-cwe-esc="${kind}" data-p="${e(A.digits(p.cnj))}" class="${cls}"><option value="">— escolher —</option>${nomes.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}</select><small>${e(nota)}</small>`; };
+    const muda = (p) => { const d = vD(p), c = vC(p); return (d && d !== (p.servidor || '')) || (c && c !== (p.corretor || '')); };
+    const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && muda(p)).length;
     return `<section class="cwe-st"><h2>3 · Preparar · B · Designação e correção</h2>${tabs}
-      <p>Regras de designação do gabinete${Z.escopo === 'sessao' ? ', com o ajuste desta sessão' : ''}, na ordem cadastrada. Só se preenche quem está sem minutante ou sem corretor. Onde nenhuma regra casa, o campo fica em branco para escolha.</p>
+      <p>Regras de designação do gabinete${Z.escopo === 'sessao' ? ', com o ajuste desta sessão' : ''}, na ordem cadastrada. Os campos em branco vêm preenchidos pela regra; quem já está designado pode ser trocado no próprio seletor. Onde nenhuma regra casa, o campo fica em branco para escolha. A carga só é informada; nada impede designar acima da meta.</p>${Z.periodo?.efetivo?.invertido ? `<p class="cwe-av"><b>Marcos invertidos:</b> o Início (${e(A.br(ss.fases?.inicio || ''))}) está depois da Entrega (${e(A.br(ss.fases?.minutas || ''))}). A carga usa o período de ${e(A.br(Z.periodo.efetivo.de))} a ${e(A.br(Z.periodo.efetivo.ate))}; corrija em Editar marcos.</p>` : ''}
       <div class="cwe-kpis cwe-k4">${kpi(Ls.length, 'Processos na pauta', `${Ls.filter((p) => p.servidor).length} com minutante · ${Ls.filter((p) => p.corretor).length} com corretor`)}${kpi(`${porRegD} · ${porRegC}`, 'Preenchidos por regra', 'minutantes · corretores')}${kpi(`${brD} · ${brC}`, 'Sem regra que case', 'minutantes · corretores, a escolher', brD + brC ? 'a' : '')}${kpi(aus.length, 'Ausências no período', aus.length ? aus.join(', ') : `nenhuma cadastrada entre ${A.br(Z.periodo.de).slice(0, 5)} e ${A.br(Z.periodo.ate).slice(0, 5)}`)}</div>
       <div class="cwe-2eq"><section class="cwe-box"><div class="h"><span><span class="cwe-k">REGRAS DE DESIGNAÇÃO · NESTA ORDEM</span><button type="button" class="cwe-lnk" data-cwe="cfg-3">Editar regras</button></span></div>
           ${Z.criterios.map((k, i) => `<div class="cr ${k.d || k.c ? '' : 'off'}"><b>${i + 1}</b><span><b>${e(k.t)}</b></span><span>${e([k.d ? 'minuta' : '', k.c ? 'correção' : ''].filter(Boolean).join(' · ') || 'desligada')}</span></div>`).join('')}
@@ -2202,7 +2206,7 @@ function portaToken() { return new Promise((fim) => {
         <section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
           ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
       <section class="cwe-carga">${quadro('MINUTA · EQUIPE', Z.minutantes, 'd')}${quadro('CORREÇÃO · ASSESSORIA', Z.corretores, 'c')}</section>
-      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a preencher</b> · o que veio por regra pode ser trocado; o que está em branco espera escolha</span><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="4">Próximo: publicar a pauta →</button></div>
+      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a aplicar</b> · preenchimentos e trocas marcados</span><button type="button" data-cwe="des-mesa" title="Proposta completa por regra, continuidade, especialidade, histórico e lote, com a carga apontada">Abrir a mesa de designação</button><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="4">Próximo: publicar a pauta →</button></div>
         ${vis.map((p) => { const dg = A.digits(p.cnj); return `<article class="cwe-pc"><div class="t">${ck('dsg', dg)}<span class="it">item ${e(p.item || '—')}</span><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(p.cnj))}</button><span class="as">${e(p.assunto || '—')} · ${e(p.recurso || p.classe || '')} · ${e(p.secao || '')}</span><span class="ct">${e(AP_T[p.tipo] || p.tipo || '1º julgamento')}</span></div>
           <div class="ds"><div><span>MINUTANTE</span>${sel('d', p)}</div><div><span>CORRETOR</span>${sel('c', p)}</div></div></article>`; }).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}
         <div class="cwe-mostra"><span>mostrando ${vis.length} de ${L.length}</span>${L.length > vis.length ? `<button type="button" data-cwe="des-mais">Mostrar mais 50</button><button type="button" data-cwe="des-todos">Mostrar todos</button>` : ''}</div></div></section>`;
@@ -2309,10 +2313,14 @@ function portaToken() { return new Promise((fim) => {
       const L = convDados(ss, d).filter((p) => p.proposta?.man.length && marcado('etq', A.digits(p.cnj))).map((p) => p.cnj);
       if (!L.length || !W.confirm('Substituir, em ' + L.length + ' processo(s), a apreciação, a meta e o MPF fixados à mão pelo que as regras dão agora?')) return true;
       const n = s.aplicarConversoes(ss.id, L, true); A.msg(n + ' processo(s) passaram a seguir as regras. Gravação automática no procs-muta em instantes.'); A.render(); return true; }
+    if (k === 'des-mesa') { abrirMesa(ss.id); return true; }
     if (k === 'des-aplicar') { if (!s?.aplicarDesignacao || !s.designacao) { A.msg('Motor indisponível.', true); return true; }
-      const Z = s.designacao(ss.id); const lista = Z.linhas.filter((p) => marcado('dsg', A.digits(p.cnj))).map((p) => { const o = est.dsg[A.digits(p.cnj)] || {}; const dd = p.servidor ? '' : (o.d ?? p.sugD?.nome ?? ''), cc = p.corretor ? '' : (o.c ?? p.sugC?.nome ?? '');
-        return { cnj: p.cnj, d: dd, c: cc, porD: o.d != null && o.d !== p.sugD?.nome ? 'escolha manual' : p.sugD?.por, porC: o.c != null && o.c !== p.sugC?.nome ? 'escolha manual' : p.sugC?.por }; }).filter((x) => x.d || x.c);
-      if (!lista.length || !W.confirm('Aplicar a designação a ' + lista.length + ' processo(s) da pauta?\n\nSó preenche quem está sem minutante ou sem corretor.')) return true;
+      const Z = s.designacao(ss.id); const lista = Z.linhas.filter((p) => marcado('dsg', A.digits(p.cnj))).map((p) => { const o = est.dsg[A.digits(p.cnj)] || {};
+        const vd = o.d ?? (p.servidor || p.sugD?.nome || ''), vc = o.c ?? (p.corretor || p.sugC?.nome || '');
+        const dd = vd && vd !== (p.servidor || '') ? vd : '', cc = vc && vc !== (p.corretor || '') ? vc : '';
+        return { cnj: p.cnj, d: dd, c: cc, troca: (dd && p.servidor) || (cc && p.corretor), porD: o.d != null && o.d !== p.sugD?.nome ? 'escolha manual' : p.sugD?.por, porC: o.c != null && o.c !== p.sugC?.nome ? 'escolha manual' : p.sugC?.por, trocar: true }; }).filter((x) => x.d || x.c);
+      const nT = lista.filter((x) => x.troca).length;
+      if (!lista.length || !W.confirm('Aplicar a designação a ' + lista.length + ' processo(s) da pauta?\n\n' + (lista.length - nT) + ' preenchimento(s) em branco · ' + nT + ' troca(s) de quem já estava designado.')) return true;
       const n = s.aplicarDesignacao(ss.id, lista); est.dsg = {}; A.msg(n + ' processo(s) designados. Gravação automática no procs-muta em instantes.'); A.render(); return true; }
     if (k === 'm-pub') { if (!s?.publicarMarcos) { A.msg('Motor indisponível.', true); return true; }
       const on = !(ss.marcosPub || ss.publicada);
@@ -2326,6 +2334,21 @@ function portaToken() { return new Promise((fim) => {
       A.msg(on ? 'Pauta publicada. Gravando no procs-muta…' : 'Publicação retirada.'); return true; }
     return false;
   }
+
+  /* Mesa de designação (/caput/designacao/): página em moldura sobre o Caput, lê e grava pelo mesmo motor */
+  function abrirMesa(id) {
+    let ov = document.getElementById('cwe-mesa'); if (ov) ov.remove();
+    ov = document.createElement('div'); ov.id = 'cwe-mesa';
+    ov.style.cssText = 'position:fixed;inset:0;z-index:9999;background:rgba(20,18,14,.45);display:flex;padding:18px';
+    ov.innerHTML = '<iframe title="Mesa de designação da pauta" src="/caput/designacao/?s=' + encodeURIComponent(id) + '" style="flex:1;border:0;border-radius:14px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.25)"></iframe>';
+    ov.addEventListener('click', (ev) => { if (ev.target === ov) fecharMesa(); });
+    document.body.appendChild(ov);
+  }
+  function fecharMesa() { document.getElementById('cwe-mesa')?.remove(); est.dsg = {}; A?.render(); }
+  W.addEventListener('message', (ev) => { if (ev.origin !== location.origin) return; const t = ev.data?.tipo;
+    if (t === 'cmt:mesa-fechar') fecharMesa();
+    else if (t === 'cmt:mesa-aplicada') { est.dsg = {}; A?.msg((ev.data.n || 0) + ' processo(s) designados pela mesa. Gravando no procs-muta…'); } });
+  W.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && document.getElementById('cwe-mesa')) fecharMesa(); });
 
   /* ---------- eventos ---------- */
   function ligar(view) {
@@ -2449,7 +2472,7 @@ function portaToken() { return new Promise((fim) => {
   function msg(t, bad) { if (!t) return; const b = $('#cwt-toast'); b.textContent = t; b.classList.toggle('bad', !!bad); b.hidden = false; clearTimeout(msg.t); msg.t = setTimeout(() => { b.hidden = true; }, 5500); }
   function sessionData() { return (getSes()?.estado()?.sessoes || []).slice().sort((a, b) => (a.data || '').localeCompare(b.data || '')); }
   function selectedSession() { const L = sessionData(); if (!L.length) return null; const c = L.find((x) => x.id === settings.sessId); if (c) return c; const h = new Date().toISOString().slice(0, 10); return L.find((x) => x.data >= h) || L[L.length - 1]; }
-  function sesInfo(ss) { const s = getSes(); const of = (ss.itens || []).length > 0; let lines = []; try { lines = s?.linhas?.(ss.id, of ? 'pos' : 'pre') || []; } catch (e) { console.warn('[Pautas] sessão', e); } return { lines, total: lines.length, isOfficial: of }; }
+  function sesInfo(ss) { const s = getSes(); const of = (ss.itens || []).length > 0; let lines = []; try { lines = s?.linhas?.(ss.id, of ? 'pos' : 'pre') || []; } catch (e) { console.warn('[Pautas] sessão', e); } const it = ss.itens || []; return { lines, total: lines.length, isOfficial: of, unassigned: it.filter((x) => !x.servidor).length, unrevised: it.filter((x) => !x.corretor).length }; }
   let pronto = false;
   function render() {
     if (!pronto) return;
