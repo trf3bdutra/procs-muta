@@ -1152,8 +1152,8 @@
    "executado": "EDY SATORU KIMURA",
    "assunto": "Abono de Permanência",
    "grupo": "g8",
-   "tipo_caso": "AI · 28,86% · cumprimento individual da ACP 0005019-15.1997 · ilegitimidade ativa (servidor fora de MS; artigo 16 da LACP)",
-   "resultado": "Ato a proferir: julgamento do agravo do INCRA (voto) pelos modelos vigentes de 28,86%; efeito suspensivo indeferido e há contrarrazões. Mover para o fluxo do lote 28,86%",
+   "tipo_caso": "AI · 28,86% · cumprimento individual da sentença da ACP 0005019-15.1997.4.03.6000 · ilegitimidade ativa de servidor não lotado em MS · limitação territorial (artigo 16 da Lei 7.347/1985)",
+   "resultado": "Ato a proferir: julgamento do agravo do INCRA (voto) pelos modelos vigentes de 28,86%; mover para o fluxo do lote 28,86%",
    "modelo": "",
    "variacoes": [
     "VAL"
@@ -1236,7 +1236,82 @@
     "representacao": "INCRA representado pela Procuradoria-Geral Federal (representação legal)",
     "preparo": "Isento (autarquia federal)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "28,86% · cumprimento individual da sentença da ACP 0005019-15.1997.4.03.6000 · ilegitimidade ativa de servidor não lotado em MS · limitação territorial (artigo 16 da Lei 7.347/1985)",
+   "especificidades": "Lote 28,86%: usar os modelos vigentes do gabinete · Agravante: INCRA (isento; representação legal) · Efeito suspensivo indeferido (ID 335797564, 09/09/2025) · Contrarrazões com decisão monocrática do STJ sem texto (ID 338189274) [VALIDAR] · Decisão agravada não juntada com texto [VALIDAR] · Processo escapou da exclusão dos 28,86% na montagem da fila: mover para o fluxo do lote",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "28,86% · cumprimento individual da sentença da ACP 0005019-15.1997.4.03.6000 · ilegitimidade ativa de servidor não lotado em MS · limitação territorial (artigo 16 da Lei 7.347/1985)",
+     "sintese": "Cumprimento individual da sentença coletiva da ACP 0005019-15.1997.4.03.6000 (28,86%) movido por Edy Satoru Kimura contra o INCRA. O juízo afastou a preliminar de ilegitimidade ativa; o INCRA agravou.",
+     "questoes": "1) Legitimidade ativa de servidor não lotado em MS para o cumprimento individual da sentença coletiva; 2) limitação territorial do artigo 16 da Lei 7.347/1985.",
+     "rel": {
+      "razoes": "Agravo de instrumento do INCRA ID 334099571 (21/08/2025): exequente não lotado em Mato Grosso do Sul; limitação territorial do artigo 16 da Lei 7.347/1985, na redação da Lei 9.494/1997. Pede efeito suspensivo e extinção do cumprimento sem resolução do mérito.",
+      "contrarrazoes": "Contrarrazões do exequente ID 338189273 (02/10/2025), com decisão monocrática do STJ juntada (ID 338189274, sem texto); pede o desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Afastou a preliminar de ilegitimidade ativa do exequente no cumprimento individual."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-08-21",
+      "prazo": "15",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INCRA",
+       "tipo": "Agravo de instrumento",
+       "id": "334099571",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "334099571",
+       "data": "2025-08-21"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "335797564",
+       "data": "2025-09-09"
+      },
+      {
+       "desc": "Contrarrazões do exequente",
+       "id": "338189273",
+       "data": "2025-10-02"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "362301004",
+       "data": "2026-03-25"
+      }
+     ],
+     "pendencias": "Identificar a decisão agravada; aplicar o modelo vigente de 28,86%",
+     "especificidades": "Lote 28,86%: usar os modelos vigentes do gabinete · Agravante: INCRA (isento; representação legal) · Efeito suspensivo indeferido (ID 335797564, 09/09/2025) · Contrarrazões com decisão monocrática do STJ sem texto (ID 338189274) [VALIDAR] · Decisão agravada não juntada com texto [VALIDAR] · Processo escapou da exclusão dos 28,86% na montagem da fila: mover para o fluxo do lote"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-09-09"
+    }
+   }
   },
   {
    "sessao": "",
