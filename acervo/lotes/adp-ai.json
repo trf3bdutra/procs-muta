@@ -3634,13 +3634,15 @@
    "exequente": "ELAINE CRISTINA BARBOSA SILVEIRA",
    "executado": "FUNDACAO CESGRANRIO",
    "assunto": "Anulação e Correção de Provas / Questões",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g9",
+   "tipo_caso": "AI · Concurso Nacional Unificado · eliminação pelo item 7.1.2.1.1 do edital (correção da discursiva) · tutela indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 29/05/2026; contraminutas da União e da Cesgranrio",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Elaine Cristina Barbosa Silveira contra a decisão ID 577653648 da 1ª Vara Federal de Dourados (processo 5000576-11.2026.4.03.6002) que indeferiu a tutela. A agravante, eliminada do CNU/2024, sustenta contradição do item 7.1.2.1.1 do edital com as demais regras: teria obtido o mínimo de 40% nas objetivas e, ainda assim, não teve a discursiva corrigida. Pede o afastamento do item e o prosseguimento no certame. Alega também vícios em questões objetivas.",
+   "peculiaridades": "Petição endereçada ao Tribunal de Justiça de Mato Grosso do Sul, mas distribuída no TRF3 e redistribuída à TRgMS. Gratuidade deferida na origem (ID 577653648, segundo a agravante). Resultado do concurso publicado em 21/11/2024 e ação de 2026. Matéria diversa da anulação de questões dos demais casos do grupo.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -3666,7 +3668,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Concurso público — CNU; cláusula de eliminação do edital",
+    "origem": "5000576-11.2026.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "ID 577653648 (autos de origem), de 22/04/2026 segundo a agravante",
+    "recurso": "ID 371217222 · 05/05/2026",
+    "preparo": "Dispensado (gratuidade da origem) [VALIDAR]",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -3686,6 +3697,93 @@
     "ultima_informacao": "Certidão · ID 371957749 · 08/05/2026",
     "ultima_movimentacao": "21/07/2026 13:55 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Candidata eliminada do CNU/2024 sustenta que obteve o mínimo de 40% nas provas objetivas e que o item 7.1.2.1.1 do edital, aplicado para não corrigir sua discursiva, contradiz as demais regras do certame. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação 5000576-11.2026.4.03.6002 contra a Fundação Cesgranrio e a União, para prosseguir no certame",
+    "decisao_recorrida": "Decisão ID 577653648 da 1ª Vara Federal de Dourados (22/04/2026, segundo a agravante), que indeferiu a tutela e teria deferido a gratuidade; não juntada com texto [VALIDAR]",
+    "recurso": "Agravo ID 371217222 (05/05/2026): (1) efeito suspensivo para preservar o duplo grau; (2) contradição interna do edital quanto aos critérios de eliminação; (3) vinculação ao edital, legalidade, segurança jurídica e confiança legítima; (4) vícios em questões objetivas. Pede o afastamento do item 7.1.2.1.1 e o prosseguimento no concurso.",
+    "resposta": "União ID 378451722 (04/06/2026): vinculação ao edital, banca como última instância e isonomia. Cesgranrio ID 382437711 (24/06/2026): conformidade da decisão com o Tema 485/STF e ausência de periculum in mora.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogada Débora Coelho Fernandes Silva (OAB/GO 69.301); procuração não identificada com texto [VALIDAR]. Cesgranrio: procuração (ID 382437716) e substabelecimento (ID 382437717)",
+    "preparo": "Dispensado: gratuidade deferida na origem, segundo a agravante [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "relacionado": "Grupo CNU (g9)",
+     "subassuntos": "Concurso público — CNU; eliminação; vinculação ao edital",
+     "sintese": "Candidata eliminada do CNU/2024 sustenta que obteve o mínimo de 40% nas provas objetivas e que o item 7.1.2.1.1 do edital, aplicado para não corrigir sua discursiva, contradiz as demais regras do certame. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Validade e interpretação do item 7.1.2.1.1 do edital; 2) controle judicial (Tema 485/STF); 3) urgência, com resultado publicado em 21/11/2024.",
+     "rel": {
+      "razoes": "Agravo (ID 371217222): contradição interna do edital quanto à eliminação; vinculação ao edital; segurança jurídica; vícios em questões objetivas.",
+      "contrarrazoes": "União (ID 378451722): vinculação ao edital e isonomia. Cesgranrio (ID 382437711): Tema 485/STF e ausência de urgência."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "577653648",
+      "data": "2026-04-22",
+      "juizo": "1ª Vara Federal de Dourados/MS",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-05-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "371217222",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "371217222",
+       "data": "2026-05-05"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "376983515",
+       "data": "2026-05-29"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "378451722",
+       "data": "2026-06-04"
+      },
+      {
+       "desc": "Contraminuta da Cesgranrio",
+       "id": "382437711",
+       "data": "2026-06-24"
+      }
+     ],
+     "pendencias": [
+      "Confirmar gratuidade e data da intimação da decisão agravada [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo / antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-05-29"
+    }
    }
   },
   {
