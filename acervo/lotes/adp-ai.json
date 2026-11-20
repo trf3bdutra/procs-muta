@@ -179,7 +179,81 @@
     "representacao": "Não há procuração própria nos autos do agravo; o advogado Rodrigo Schmidt Casemiro (OAB/MS 13.400) assina as petições. Conferir procuração na cópia dos autos de origem (ID 391343256) [VALIDAR]",
     "preparo": "Pago em 10/08/2026 por Pix (ID 391362109). Após o despacho ID 391762871, juntado o comprovante PagTesouro (ID 392776026): GRU 2026/090029/0036361519, paga em 10/08/2026, UG 090029 (TRF-3), código 18720-8 (custas de 2ª instância), referência do próprio agravo. Preparo comprovado; valor de R$ 64,26 informado pela agravante."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal — exceção de pré-executividade",
+     "sintese": "Execução fiscal da União contra Link Parts Indústria, Comércio e Serviços de Peças (contribuições previdenciárias, R$ 853.563,35). A executada opôs exceção de pré-executividade (nulidade da citação por edital, prescrição intercorrente e CDA deficiente), rejeitada pelo juízo; daí o agravo, com pedido de efeito suspensivo.",
+     "questoes": "1) Validade da citação por edital sem esgotamento das diligências; 2) prescrição intercorrente; 3) higidez das CDAs sem processo administrativo e memória de cálculo; 4) fundamentação da decisão agravada.",
+     "rel": {
+      "razoes": "Agravo da executada (ID 391341575): (1) nulidade da citação por edital sem esgotamento das diligências; (2) prescrição intercorrente; (3) CDAs sem processo administrativo e memória de cálculo, que impedem verificar duplicidade e cumulação de encargos; (4) falta de fundamentação. Pede efeito suspensivo e reforma.",
+      "contrarrazoes": "Não há: a União ainda não foi intimada para contraminuta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "595913650",
+      "juizo": "2ª Vara Federal de Campo Grande/MS (capa da origem: Núcleo Adjunto 4.0 – 2ª Vara Federal de Araçatuba)"
+     },
+     "ai": {
+      "id": "595913650",
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise"
+     },
+     "adm": {
+      "prot": "2026-08-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Outra",
+       "tipo": "Agravo de instrumento",
+       "id": "391341575",
+       "contra": "Intimada para responder"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "391341575",
+       "data": "2026-08-10"
+      },
+      {
+       "desc": "Despacho (comprovar preparo pelo Tesouro)",
+       "id": "391762871",
+       "data": "2026-08-14"
+      },
+      {
+       "desc": "Comprovante PagTesouro da GRU",
+       "id": "392776026",
+       "data": "2026-08-20"
+      },
+      {
+       "desc": "Capa da execução fiscal de origem",
+       "id": "391343246",
+       "data": "2026-08-10"
+      }
+     ],
+     "obsGeral": "Assunto cadastrado (1/3 de férias) não corresponde à matéria. Data da intimação da decisão agravada não consta dos autos do agravo."
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgNivel": "Prioritária (48 h)",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2026-08-10",
+     "tipoAto": "Decisão de urgência",
+     "intercor": "Preparo por Pix; comprovante do Tesouro juntado após o despacho ID 391762871."
+    }
+   }
   },
   {
    "sessao": "",
