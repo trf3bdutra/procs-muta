@@ -287,6 +287,22 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-nav .cwe-ses button,.cwe-nav .cwe-esteira li>button{border-left-color:transparent;padding-left:12px}
 .cwe-nav .cwe-ses button.on,.cwe-nav .cwe-esteira li.sel>button{padding-left:9px}
 .cwe-nav .cwe-arq{margin:6px 12px 0}
+.cwe-cabab{display:flex;gap:4px;padding:6px 10px;border-top:1px solid var(--l)}
+.cwe-cabab>button{border:1px solid transparent;background:transparent;border-radius:7px;padding:4px 10px;font-weight:700;font-size:12px;color:var(--t);cursor:pointer}
+.cwe-cabab>button[aria-expanded="true"]{background:var(--p);border-color:var(--b)}
+.cwe-painel{border-top:1px solid var(--l);padding:4px 14px 14px}.cwe-st-p{margin:0}
+.cwe-jed{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(320px,1.4fr);gap:10px 22px;padding:10px 14px 12px;border-top:1px solid var(--l)}
+.cwe-jed>.cwe-nota{grid-column:1/-1;margin:0}
+.cwe-jcol{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cwe-jrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:2px 8px;padding:5px 0;border-bottom:1px solid var(--l)}
+.cwe-jrow b{font-size:13px}.cwe-jrow small{grid-column:1;grid-row:2;font-size:11px;color:var(--m2)}.cwe-jrow select{grid-row:1/3;grid-column:2}.cwe-jrow .x{grid-row:1/3;grid-column:3}
+.cwe-jed select,.cwe-jed input{height:28px;border:1px solid var(--b2);border-radius:7px;padding:0 6px;font-size:12px;background:var(--w);color:var(--tx);max-width:100%}
+.cwe-jed .x{border:0;background:transparent;font-size:16px;color:var(--m2);cursor:pointer}
+.cwe-jed button:not(.x){height:28px;padding:0 10px;border:1px solid var(--b2);border-radius:7px;background:var(--p);font-weight:700;font-size:12px;align-self:flex-start}
+.cwe-jnovo{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px;background:var(--p);border:1px solid var(--l);border-radius:8px;font-size:12px}
+.cwe-jsub{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--l);font-size:12px}.cwe-jsub label{display:inline-flex;gap:4px;align-items:center}.cwe-jsub input{width:150px}
+.cwe-jsug{margin-top:4px;padding:8px;border:1px dashed var(--g3);border-radius:8px;background:var(--amb);display:flex;flex-direction:column;gap:6px;font-size:12px}.cwe-jsug>div{display:flex;justify-content:space-between;gap:8px;align-items:center}
+@media (max-width:900px){.cwe-jed{grid-template-columns:1fr}}
 .cwe-num td.it{font:600 12px ui-monospace,monospace;text-align:right;width:44px}.cwe-num tr.al td{background:#fbeeea}.cwe-num td .cwe-tg{margin-right:4px}
 .cwe-k2{display:block;margin-top:22px;padding-top:11px;border-top:2px solid var(--t)}
 .cwe-ses{display:flex;flex-direction:column;margin-top:10px}
@@ -1929,6 +1945,39 @@ function portaToken() { return new Promise((fim) => {
   const retirado = (t) => /retirados e adiados/i.test(t || '');
   const situacao = (x) => x.dataLiberacao ? 'Liberado' : x.dataCorrecao ? 'A liberar' : x.dataMinuta ? 'A corrigir' : 'A minutar';
 
+  /* ---------- julgadores da sessão ---------- */
+  const semAc = (x) => String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/^(dr|dra|des|juiz|juiza)\.?\s+/, '').trim();
+  const PAPEIS = ['relator', 'vogal', 'vogal (juiz federal convocado)', 'presidente'];
+  const MOTIVOS_J = ['impedimento', 'suspeição', 'ausência', 'férias', 'convocação', 'outro'];
+  function papelPadrao(m) { const at = (m.atuacao || []).find((x) => /Turma Regional/i.test(x.orgao || '')) || {}; const p = at.papel || ''; return /relator/i.test(p) ? 'relator' : /convocad/i.test(p) ? 'vogal (juiz federal convocado)' : 'vogal'; }
+  const magObj = (m, papel) => ({ id: m.id, nome: m.nome, cargo: m.cargo || '', papel: papel || papelPadrao(m) });
+  function compPadrao() { return magistrados().filter((m) => (m.atuacao || []).some((x) => /Turma Regional/i.test(x.orgao || ''))).map((m) => magObj(m)).sort((a, b) => (a.papel === 'relator' ? -1 : 0) - (b.papel === 'relator' ? -1 : 0)); }
+  function julgDe(ss) { return ss.julgadores || { composicao: compPadrao(), substituicoes: [], novos: [] }; }
+  function cadastroJ(ss) { const J = julgDe(ss), L = magistrados().map((m) => magObj(m)); (J.novos || []).forEach((m) => { if (!L.some((x) => x.id === m.id)) L.push(m); }); return L; }
+  function salvarJ(ss, mut) { const s = A.getSes(); const j = JSON.parse(JSON.stringify(julgDe(ss))); j.novos = j.novos || []; j.substituicoes = j.substituicoes || []; mut(j);
+    if (!s?.definirJulgadores?.(ss.id, j)) { A.msg('Motor indisponível.', true); return; } A.msg('Julgadores atualizados. Gravação automática no procs-muta em instantes.'); }
+  const itensTxt = (v) => v === 'todos' ? 'todos' : (v || []).join(', ');
+  function itensDe(t) { t = String(t || '').trim(); if (!t || /todos/i.test(t)) return 'todos'; const out = [];
+    t.split(/[,;\s]+/).forEach((p) => { const m = p.match(/^(\d+)-(\d+)$/); if (m) { for (let n = +m[1]; n <= +m[2] && out.length < 500; n++) out.push(String(n)); } else if (/^\d+$/.test(p)) out.push(String(+p)); }); return out.length ? out : 'todos'; }
+  /* etiquetas "Impedimento Dr. Fulano" / "Suspeição Dr. Fulano" no acervo sugerem substituições */
+  function sugestoesJ(ss, d) { const J = julgDe(ss), comp = J.composicao || [], cad = magistrados(), G = new Map();
+    d.lines.forEach((x) => { const r = d.acv(x.cnj) || {}; String(r.Etiquetas || r.etiquetas || '').split(/\s*,\s*/).forEach((t) => { const m = t.match(/^(impedimento|suspei[cç][aã]o)\s*(?:[-—]\s*)?(?:dra?\.?\s*|des\.?\s*)?(.+)$/i); if (!m) return;
+      const alvo = semAc(m[2]); const mb = comp.find((c) => { const reg = cad.find((q) => q.id === c.id) || {}; return [c.nome].concat(reg.aliases || []).some((a) => { const z = semAc(a); return z && (z === alvo || z.startsWith(alvo + ' ') || alvo.startsWith(z)); }); }); if (!mb || !x.item) return;
+      const tipo = /^imp/i.test(m[1]) ? 'impedimento' : 'suspeição', coberto = (J.substituicoes || []).some((sb) => sb.sai === mb.id && (sb.itens === 'todos' || (sb.itens || []).includes(String(x.item)))); if (coberto) return;
+      const k = mb.id + '|' + tipo, g = G.get(k) || { mb, tipo, itens: [] }; if (!g.itens.includes(String(x.item))) g.itens.push(String(x.item)); G.set(k, g); }); });
+    return [...G.values()].map((g) => ({ ...g, itens: g.itens.sort((a, b) => a - b) })); }
+  function julgEditor(ss, d) { const J = julgDe(ss), comp = J.composicao || [], cad = cadastroJ(ss), sug = sugestoesJ(ss, d);
+    const opt = (L, v, vazio) => (vazio ? `<option value="">${e(vazio)}</option>` : '') + L.map((m) => `<option value="${e(m.id)}" ${m.id === v ? 'selected' : ''}>${e(m.nome)}${m.cargo ? ' · ' + e(m.cargo) : ''}</option>`).join('');
+    const fora = cad.filter((m) => !comp.some((c) => c.id === m.id));
+    return `<div class="cwe-jed"><div class="cwe-jcol"><span class="cwe-k">COMPOSIÇÃO DA SESSÃO</span>
+        ${comp.map((m, k) => `<div class="cwe-jrow"><b>${e(m.nome)}</b><small>${e(m.cargo)}</small><select data-cwe-j="papel" data-i="${k}" aria-label="Papel de ${e(m.nome)}">${PAPEIS.map((p) => `<option ${p === m.papel ? 'selected' : ''}>${e(p)}</option>`).join('')}</select><button type="button" class="x" data-cwe="j-rem" data-i="${k}" title="Tirar da composição">×</button></div>`).join('') || '<p class="cwe-nota">Nenhum julgador na composição.</p>'}
+        <div class="cwe-jadd"><select data-cwe-j="add" aria-label="Adicionar julgador">${opt(fora, '', '+ adicionar julgador…')}<option value="__novo">Novo magistrado…</option></select></div>
+        ${est.jNovo != null && est.jNovo !== false ? `<div class="cwe-jnovo"><b>${est.jNovo === 'comp' ? 'Novo julgador na composição' : 'Novo magistrado como substituto'}</b><input data-cwe-jn="nome" placeholder="Nome completo" aria-label="Nome do magistrado"><select data-cwe-jn="cargo" aria-label="Cargo">${['Desembargador Federal', 'Juiz Federal Convocado', 'Juiz Federal'].map((c) => `<option>${c}</option>`).join('')}</select><label><input type="checkbox" data-cwe-jn="cad" checked> incluir no cadastro de magistrados</label><button type="button" class="pri" data-cwe="j-novo-ok">Adicionar</button><button type="button" data-cwe="j-novo-x">Cancelar</button></div>` : ''}</div>
+      <div class="cwe-jcol"><span class="cwe-k">SUBSTITUIÇÕES POR PROCESSO</span>
+        ${(J.substituicoes || []).map((sb, k) => `<div class="cwe-jsub"><select data-cwe-js="sai" data-i="${k}" aria-label="Quem sai">${opt(comp, sb.sai, 'quem sai…')}</select><span>substituído por</span><select data-cwe-js="entra" data-i="${k}" aria-label="Quem entra">${opt(fora.concat(sb.entra && !fora.some((m) => m.id === sb.entra.id) ? [sb.entra] : []), sb.entra?.id || '', 'quem entra…')}<option value="__novo">Novo magistrado…</option></select><select data-cwe-js="motivo" data-i="${k}" aria-label="Motivo">${MOTIVOS_J.map((m) => `<option ${m === sb.motivo ? 'selected' : ''}>${m}</option>`).join('')}</select><label>itens <input data-cwe-js="itens" data-i="${k}" value="${e(itensTxt(sb.itens))}" placeholder="todos ou 12, 40, 70-75"></label><button type="button" class="x" data-cwe="j-sub-rem" data-i="${k}" title="Excluir a substituição">×</button></div>`).join('') || '<p class="cwe-nota">Sem substituições: todos os processos com a composição acima.</p>'}
+        <button type="button" data-cwe="j-sub-add">+ Nova substituição</button>
+        ${sug.length ? `<div class="cwe-jsug"><span class="cwe-k">PELAS ETIQUETAS DO ACERVO</span>${sug.map((g) => `<div><span><b>${e(g.mb.nome)}</b> · ${e(g.tipo)} em ${g.itens.length} processo${g.itens.length > 1 ? 's' : ''} (itens ${e(g.itens.slice(0, 12).join(', '))}${g.itens.length > 12 ? '…' : ''})</span><button type="button" data-cwe="j-sug" data-m="${e(g.mb.id)}" data-t="${e(g.tipo)}" data-v="${e(g.itens.join(','))}">Indicar substituto</button></div>`).join('')}</div>` : ''}</div>
+      <p class="cwe-nota">A composição e as substituições ficam gravadas na sessão. Cada processo leva os julgadores que o atingem; é o que a proclamação do acórdão vai usar.</p></div>`; }
   function magistrados() {
     if (est.mag || est.magPedido) return est.mag || [];
     est.magPedido = true;
@@ -1960,8 +2009,8 @@ function portaToken() { return new Promise((fim) => {
     const tipos = { ED: 0, AgInt: 0, JR: 0, ret: 0 };
     lines.forEach((x) => { const t = tipoTarefa(x.tarefa) || (x.julg === 'ED' || x.julg === 'AgInt' || x.julg === 'JR' ? x.julg : ''); if (t) tipos[t]++; if (retirado(x.tarefa)) tipos.ret++; });
     const metas = lines.filter((x) => (x.metas || []).length).length;
-    const f = realizada ? 5 : !pauta ? 1 : (info.unassigned || info.unrevised) ? 3 : 4;
-    let cur = est.etapa || f; if (pauta && cur === 1) cur = 2;
+    const f = realizada ? 4 : !pauta ? 1 : (info.unassigned || info.unrevised) ? 3 : 4;
+    let cur = est.etapa || f; if (pauta && cur === 1) cur = 2; if (cur > 4) cur = 4;
     /* numeração da pauta: o PDF manda; confere o número de cada item no app */
     const num = (() => { const L = itens.slice().sort((a, b) => (+a.item || 1e9) - (+b.item || 1e9)), cn = {}, cp = {};
       L.forEach((x) => { const n = +x.item; if (n > 0) cn[n] = (cn[n] || 0) + 1; const dg = A.digits(x.cnj); cp[dg] = (cp[dg] || 0) + 1; });
@@ -1979,14 +2028,19 @@ function portaToken() { return new Promise((fim) => {
   function cabecalho(ss, d) {
     const dt = new Date(ss.data + 'T12:00:00'); const dia = isNaN(dt) ? '' : SEM[dt.getDay()];
     const desc = [dia, ss.hora || '', d.pauta ? d.itens.length + ' itens' : 'sem pauta oficial', d.realizada ? 'realizada' : ss.publicada ? 'pauta publicada' : ss.marcosPub ? 'marcos publicados' : d.pauta ? 'pauta não publicada' : 'seleção prévia'].filter(Boolean).join(' · ');
-    const mg = magistrados().map((m) => { const at = (m.atuacao || []).find((x) => /Turma Regional/i.test(x.orgao || '')) || {}; return `<span><b>${e(m.nome)}</b> <small>${e(at.papel || m.cargo || '')}</small></span>`; }).join('');
-    const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da etapa 5'], ['copiar', 'Copiar a lista', 'área de transferência']];
+    const J = julgDe(ss), nSub = (J.substituicoes || []).length;
+    const mg = (J.composicao || []).map((m) => `<span><b>${e(m.nome)}</b> <small>${e(m.papel)}</small></span>`).join('') + (nSub ? `<span class="cwe-tg a">${nSub} substituiç${nSub > 1 ? 'ões' : 'ão'}</span>` : '');
+    const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da sessão'], ['copiar', 'Copiar a lista', 'área de transferência']];
     return `<div class="cwe-top"><div><div class="cwe-hl"><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p></div>
-      ${mg ? `<p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg}</p>` : ''}</div>
+      <p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg || '<small>carregando o cadastro…</small>'}</p></div>
       <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicar na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar' : 'Publicar os marcos da sessão na Ex Officio'}">${ss.marcosPub || ss.publicada ? '● Marcos publicados' : 'Publicar marcos'}</button><button type="button" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" class="${ss.publicada ? 'on' : 'pri'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} title="${ss.publicada ? 'Pauta publicada na Ex Officio: clique para retirar' : d.pauta ? 'Publicar a pauta (processos e marcos) na Ex Officio' : 'Importe o PDF da pauta antes de publicar'}">${ss.publicada ? '● Pauta publicada' : 'Publicar pauta'}</button></span><button type="button" data-cwt="create-session" title="Cadastrar outra sessão">+ Sessão</button>
       <span class="cwe-expwrap"><button type="button" data-cwe="exp" aria-expanded="${est.exp}">Exportar ▾</button>${est.exp ? `<span class="cwe-menu" role="menu">${exp.map(([k, t, s]) => `<button type="button" role="menuitem" data-cwe="x-${k}"><b>${e(t)}</b><small>${e(s)}</small></button>`).join('')}</span>` : ''}</span>
       <button type="button" data-cwe="cfg" title="Configurações das pautas" aria-label="Configurações das pautas">⚙</button></div></div>`;
   }
+  /* painel da sessão e julgadores: expansíveis, dentro do cartão da sessão */
+  function cabAbas(ss, d) { const pain = est.painel == null ? d.realizada : est.painel, J = julgDe(ss), nS = (J.substituicoes || []).length, nG = d.pauta ? sugestoesJ(ss, d).length : 0;
+    return `<div class="cwe-cabab"><button type="button" data-cwe="j-ed" aria-expanded="${!!est.jEd}">Julgadores e substituições${nS ? ' · ' + nS : ''}${nG ? ` <span class="cwe-tg r">${nG} a indicar</span>` : ''} ${est.jEd ? '▴' : '▾'}</button><button type="button" data-cwe="painel" aria-expanded="${!!pain}">Painel da sessão ${pain ? '▴' : '▾'}</button></div>
+      ${est.jEd ? julgEditor(ss, d) : ''}${pain ? `<div class="cwe-painel">${etapa5(ss, d, true)}</div>` : ''}`; }
   function marcos(ss) {
     const f = ss.fases || {};
     const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', 'data']];
@@ -1995,14 +2049,13 @@ function portaToken() { return new Promise((fim) => {
       <span class="cwe-mkb"><button type="button" data-cwe="m-sug" title="Liberação: dias úteis antes da sessão; entrega das minutas: primeiro dia útil em que a capacidade da equipe cobre os pontos pendentes (Regras gerais › produtividade)">Sugerir pelas regras</button><button type="button" data-cwe="m-ed" class="${est.mEd ? 'pri' : ''}">${est.mEd ? 'Concluir' : 'Editar marcos'}</button></span></section>`;
   }
   function esteira(d) {
-    const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e numeração dos itens'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe'], ['Painel da sessão', 'todas as estatísticas']];
+    const E = [['Seleção prévia', 'escaninho · rascunho na Triagem'], ['Pauta oficial', 'PDF e numeração dos itens'], ['Preparar', 'regras e designação'], ['Publicar a pauta', 'conferência final e equipe']];
     const ok = 'ok', pd = 'pd', vz = 'vz'; const i = d.info;
     const C = [
       [['Sessão cadastrada', 'feito', ok], ['Processos na seleção prévia', d.previa.length + ' processos', d.previa.length ? ok : pd], ['Rascunho de regras e designação', 'na Triagem', vz]],
       [['PDF da pauta importado', d.pauta ? d.itens.length + ' itens' : 'aguardando o PDF', d.pauta ? ok : vz], ['Numeração conferida', d.pauta ? (d.num.alertas ? d.num.alertas + ' alerta(s) · ' : '') + 'itens 1 a ' + d.num.max : 'depois do PDF', !d.pauta ? vz : d.num.alertas ? pd : (d.ss.conferencia || {}).confirmada ? ok : pd]],
       [['A · Regras de etiquetas', `${d.tipos.ED} ED · ${d.tipos.AgInt} AgInt · ${d.tipos.JR} JR · ${d.tipos.ret} retirados`, d.pauta ? ok : vz, 0], ['B · Designação e correção', `${i.unassigned} sem minutante · ${i.unrevised} sem corretor`, !d.pauta ? vz : (i.unassigned || i.unrevised) ? pd : ok, 1]],
       [['Conferência final', `${d.foraAc} fora do acervo · ${d.assDiv} assuntos · ${d.foraTar} fora de tarefa de sessão`, !d.pauta ? vz : (d.foraAc || d.assDiv) ? pd : ok], ['Pauta publicada à equipe', d.ss.publicada ? (d.ss.pronta ? 'publicada em ' + A.br(d.ss.pronta) : 'publicada') : d.realizada ? 'sessão realizada' : 'a publicar', d.ss.pronta ? ok : vz]],
-      [['Painel integral', 'números e distribuição', d.pauta ? ok : vz], ['Produção', `${i.lines.filter((x) => x.dataMinuta).length} minutadas · ${i.released} liberadas`, i.released ? ok : vz]]
     ];
     return `<ol class="cwe-esteira" aria-label="Etapas da sessão">${E.map(([t, s], k) => {
       const n = k + 1, trava = n === 1 && d.pauta, feito = n < d.f || (n === 2 && d.pauta), agora = n === d.f, sel = n === d.cur;
@@ -2039,7 +2092,7 @@ function portaToken() { return new Promise((fim) => {
   function prontuario(d) {
     const x = d.lines.find((l) => A.digits(l.cnj) === est.sel); if (!x) return '';
     const it = d.raw.get(est.sel) || {}, p = d.planMap.get(est.sel) || {}, r = d.acv(x.cnj) || {};
-    const k = [['Tarefa no PJe', x.tarefa || '—'], ['Seção', x.secao || '—'], ['Distribuição', x.dist ? A.br(x.dist) : '—'], ['Apreciação', p['Apreciação'] || '—'], ['Meta', p.Meta || (x.metas || []).join(' ') || '—'], ['Etapa', p.Etapa || situacao(x)], ['Minutante', x.servidor || '—'], ['Corretor', x.corretor || '—'], ['Tempestividade', p.Tempestividade || '—'], ['Preparo', p.Preparo || '—'], ['Intervenção do MPF', p['Intervenção MPF'] || '—'], ['Etiquetas', r.Etiquetas || r.etiquetas || '—'], ['Pautas anteriores', (x.anteriores || []).join(' · ') || '—'], ['Pendências', p['Pendências'] || 'nenhuma']];
+    const k = [['Tarefa no PJe', x.tarefa || '—'], ['Seção', x.secao || '—'], ['Distribuição', x.dist ? A.br(x.dist) : '—'], ['Apreciação', p['Apreciação'] || '—'], ['Meta', p.Meta || (x.metas || []).join(' ') || '—'], ['Etapa', p.Etapa || situacao(x)], ['Minutante', x.servidor || '—'], ['Corretor', x.corretor || '—'], ['Tempestividade', p.Tempestividade || '—'], ['Preparo', p.Preparo || '—'], ['Intervenção do MPF', p['Intervenção MPF'] || '—'], ['Etiquetas', r.Etiquetas || r.etiquetas || '—'], ['Julgadores', (() => { let L = []; try { L = A.getSes()?.julgadoresDoItem?.(d.ss.id, x.cnj) || []; } catch (er) { L = []; } if (!L.length) L = julgDe(d.ss).composicao || []; return L.map((m) => m.nome + (m.substitui ? ' (substitui ' + m.substitui + ')' : '')).join(' · ') || '—'; })()], ['Pautas anteriores', (x.anteriores || []).join(' · ') || '—'], ['Pendências', p['Pendências'] || 'nenhuma']];
     return `<section class="cwe-prt" aria-label="Prontuário"><div class="cwe-prt-h"><span class="cwe-k">PRONTUÁRIO</span><b>Item ${e(x.item || '—')}</b><button type="button" class="cwe-cnj" data-cwt="ficha" data-p="${e(est.sel)}">${e(A.cnj(x.cnj))}</button><span>${e(x.assunto || '—')} · ${e(x.classe || '')}</span>${it.partes ? `<small>${e(it.partes)}</small>` : ''}
       <span class="cwe-prt-a"><button type="button" data-cwe="prt-prev" title="Anterior">‹</button><button type="button" data-cwe="prt-next" title="Próximo">›</button><button type="button" data-cwt="ficha" data-p="${e(est.sel)}">Abrir a ficha completa</button><button type="button" data-cwe="prt-x" title="Fechar">×</button></span></div>
       <div class="cwe-prt-g">${k.map(([t, v]) => `<span><small>${e(t)}</small>${e(v)}</span>`).join('')}</div></section>`;
@@ -2261,11 +2314,12 @@ function portaToken() { return new Promise((fim) => {
   }
 
   function etapa5(ss, d) {
-    if (!d.pauta) return `<section class="cwe-st"><h2>5 · Painel da sessão</h2><p class="cwe-nota">O painel da sessão aparece depois da pauta oficial. A sessão de ${e(A.br(ss.data))} ainda não tem pauta.</p></section>`;
+    if (!d.pauta) return `<p class="cwe-nota">O painel aparece depois da pauta oficial. A sessão de ${e(A.br(ss.data))} ainda não tem pauta.</p>`;
     const L = d.lines, N = L.length || 1, P = d.plan;
-    const kp = [[L.length, 'itens'], [d.metas, 'com meta CNJ'], [d.tipos.AgInt, 'agravos internos'], [d.tipos.ED, 'embargos'], [d.tipos.JR, 'retratação'], [d.tipos.ret, 'retirados e adiados'], [d.info.unassigned, 'sem minutante'], [d.info.unrevised, 'sem corretor'], [L.filter((x) => x.dataMinuta).length, 'minutadas'], [L.filter((x) => x.dataCorrecao).length, 'corrigidas'], [d.info.released, 'liberadas'], [d.foraAc, 'fora do acervo']];
+    const ap = (re) => P.filter((p) => re.test(p['Apreciação'] || '')).length;
+    const kp = [[L.length, 'itens'], [d.metas, 'com meta CNJ'], [ap(/AgInt/i), 'agravos internos'], [ap(/^ED/i), 'embargos de declaração'], [d.tipos.JR, 'retratação'], [d.tipos.ret, 'retirados e adiados'], [d.info.unassigned, 'sem minutante'], [d.info.unrevised, 'sem corretor'], [L.filter((x) => x.dataMinuta).length, 'minutadas'], [L.filter((x) => x.dataCorrecao).length, 'corrigidas'], [L.filter((x) => x.dataLiberacao).length, 'liberadas'], [d.foraAc, 'fora do acervo']];
     const B = [['APRECIAÇÃO', conta(P, (p) => p['Apreciação'])], ['CLASSE', conta(L, (x) => x.recurso || x.classe)], ['META', conta(P, (p) => p.Meta || 'sem meta')], ['MINUTANTE', conta(L, (x) => x.servidor || 'sem minutante')], ['CORRETOR', conta(L, (x) => x.corretor || 'sem corretor')], ['ASSUNTO · 10 MAIS', conta(L, (x) => x.assunto, 10)], ['SEÇÃO', conta(L, (x) => x.secao)], ['TAREFA NO PJe', conta(L, (x) => x.tarefa || 'sem tarefa', 7)], ['ETAPA', conta(L, situacao)], ['PENDÊNCIAS DA FICHA', conta(P.flatMap((p) => (p['Pendências'] || '').split(' · ').filter(Boolean)).map((t) => ({ t })), (o) => o.t)], ['INTERVENÇÃO DO MPF', conta(P, (p) => p['Intervenção MPF'] || 'sem hipótese marcada')], ['TEMPESTIVIDADE', conta(P, (p) => p.Tempestividade)]];
-    return `<section class="cwe-st"><h2>5 · Painel da sessão</h2><p>Todas as estatísticas da sessão num lugar só. O painel inteiro sai em .csv pelo Exportar.</p>
+    return `<section class="cwe-st cwe-st-p"><p class="cwe-nota">Todas as estatísticas da sessão. O painel inteiro sai em .csv pelo Exportar.</p>
       <div class="cwe-kpis grande">${kp.map(([n, t]) => `<span><b>${n}</b>${t}</span>`).join('')}</div>
       <div class="cwe-blocos">${B.map(([t, rows]) => { const mx = rows.length ? Math.max(...rows.map((r) => r[1])) : 1; return `<div class="cwe-bloco"><p>${t}</p>${rows.length ? rows.map(([k, n]) => `<span class="r"><span class="t" title="${e(k)}">${e(k)}<i><i style="width:${Math.max(3, Math.round(100 * n / mx))}%"></i></i></span><b>${n}</b><small>${pct(n, N)}</small></span>`).join('') : '<small class="cwe-vazio">sem dados</small>'}</div>`; }).join('')}</div></section>`;
   }
@@ -2398,6 +2452,21 @@ function portaToken() { return new Promise((fim) => {
       if (k === 'etapa') { const n = +b.dataset.n; if (b.getAttribute('aria-disabled') === 'true') return; est.etapa = n; est.exp = false; }
       else if (k === 'prep') { est.prep = +b.dataset.n; est.etapa = 3; }
       else if (k === 'exp') est.exp = !est.exp;
+      else if (k === 'j-ed') { est.jEd = !est.jEd; est.jNovo = false; }
+      else if (k === 'painel') { const d0 = dados(ss); est.painel = !(est.painel == null ? d0.realizada : est.painel); }
+      else if (k === 'j-rem') { const i = +b.dataset.i; salvarJ(ss, (j) => { const m = j.composicao[i]; j.composicao.splice(i, 1); if (m) j.substituicoes = j.substituicoes.filter((sb) => sb.sai !== m.id); }); }
+      else if (k === 'j-sub-add') salvarJ(ss, (j) => j.substituicoes.push({ sai: (j.composicao.find((m) => m.papel !== 'relator') || {}).id || '', entra: null, motivo: 'impedimento', itens: 'todos' }));
+      else if (k === 'j-sub-rem') { const i = +b.dataset.i; salvarJ(ss, (j) => j.substituicoes.splice(i, 1)); }
+      else if (k === 'j-sug') salvarJ(ss, (j) => j.substituicoes.push({ sai: b.dataset.m, entra: null, motivo: b.dataset.t, itens: b.dataset.v.split(',') }));
+      else if (k === 'j-novo-x') est.jNovo = false;
+      else if (k === 'j-novo-ok') { const box = b.closest('.cwe-jnovo'), nome = box.querySelector('[data-cwe-jn="nome"]').value.trim(), cargo = box.querySelector('[data-cwe-jn="cargo"]').value, cad = box.querySelector('[data-cwe-jn="cad"]').checked;
+        if (!nome) { A.msg('Informe o nome do magistrado.', true); return; }
+        const m = { id: 'mag-' + semAc(nome).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), nome, cargo, papel: /convocad/i.test(cargo) ? 'vogal (juiz federal convocado)' : 'vogal' };
+        const alvo = est.jNovo;
+        salvarJ(ss, (j) => { if (alvo === 'comp') { if (!j.composicao.some((x) => x.id === m.id)) j.composicao.push(m); } else if (j.substituicoes[alvo]) j.substituicoes[alvo].entra = { id: m.id, nome, cargo };
+          if (!cad && !j.novos.some((x) => x.id === m.id)) j.novos.push({ id: m.id, nome, cargo }); });
+        est.jNovo = false;
+        if (cad) { const pm = A.getMotor()?.ProcsMuta; if (pm?.ler && pm?.gravar) pm.ler('apoio/magistrados.json').then((t) => { const doc = JSON.parse(t); doc.registros = doc.registros || []; if (!doc.registros.some((x) => x.id === m.id)) doc.registros.push({ id: m.id, nome, cargo, atuacao: [{ orgao: 'TRF3 · Turma Regional de Mato Grosso do Sul', papel: m.papel }], aliases: [], fonte: 'Caput · julgadores da sessão de ' + A.br(ss.data) }); doc.atualizadoEm = new Date().toISOString(); est.mag = doc.registros; return pm.gravar({ 'apoio/magistrados.json': JSON.stringify(doc, null, 1) + '\n' }, 'Cadastro de magistrados: ' + nome); }).then(() => { A.msg(nome + ' incluído no cadastro de magistrados.'); A.render(); }).catch((er) => A.msg('Não foi possível gravar o cadastro: ' + er.message, true)); } }
       else if (k === 'arq') est.arq = !est.arq;
       else if (k.startsWith('x-')) { est.exp = false; exportar(k.slice(2), ss, dados(ss)); }
       else if (k === 'cfg') { est.cfg = true; est.exp = false; }
@@ -2451,6 +2520,12 @@ function portaToken() { return new Promise((fim) => {
     });
     view.addEventListener('change', (ev) => {
       const t = ev.target;
+      if (t.dataset.cweJ || t.dataset.cweJs) { const ss = A.selectedSession(); if (!ss) return; const i = +t.dataset.i;
+        if (t.dataset.cweJs === 'entra' && t.value === '__novo') { est.jNovo = i; A.render(); return; }
+        if (t.dataset.cweJ === 'papel') salvarJ(ss, (j) => { j.composicao[i].papel = t.value; });
+        else if (t.dataset.cweJ === 'add') { if (t.value === '__novo') { est.jNovo = 'comp'; A.render(); return; } const m = cadastroJ(ss).find((x) => x.id === t.value); if (m) salvarJ(ss, (j) => j.composicao.push({ ...m, papel: 'vogal' })); }
+        else { const kk = t.dataset.cweJs; salvarJ(ss, (j) => { const sb = j.substituicoes[i]; if (!sb) return; if (kk === 'sai') sb.sai = t.value; else if (kk === 'motivo') sb.motivo = t.value; else if (kk === 'itens') sb.itens = itensDe(t.value); else if (kk === 'entra') { const m = cadastroJ(ss).find((x) => x.id === t.value); sb.entra = m ? { id: m.id, nome: m.nome, cargo: m.cargo } : null; } }); }
+        A.render(); return; }
       if (t.dataset.cweCk) { const k = t.dataset.cweCk, dg = t.dataset.p, S0 = est.desm[k] || (est.desm[k] = new Set()); if (t.checked) S0.delete(dg); else S0.add(dg); A.render(); return; }
       if (t.dataset.cweMk === 'data') { const s = A.getSes(), ss = A.selectedSession(); if (!s?.data || !ss || !t.value) return; const r = s.data(ss.id, t.value); if (r && r.erro) { A.msg(r.erro, true); t.value = ss.data; return; } A.msg('Data da sessão alterada para ' + A.br(t.value) + '. Gravação automática no procs-muta em instantes.'); A.render(); return; }
       if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Gravação automática no procs-muta em instantes.'); } return; }
@@ -2482,8 +2557,8 @@ function portaToken() { return new Promise((fim) => {
     if (!ss) { view.innerHTML = `<div class="cwe"><div class="cwe-top"><div><span class="cwe-k">PAUTAS · SESSÃO</span><h1>Nenhuma sessão cadastrada</h1><p>Cadastre a data do julgamento para começar a seleção prévia.</p></div><div class="cwe-tools"><button type="button" class="pri" data-cwt="create-session">Cadastrar sessão</button></div></div></div>`; return; }
     if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
     const d = dados(ss);
-    const corpo = [null, etapa1, etapa2, etapa3, etapa4, etapa5][d.cur](ss, d);
-    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-nh cwe-k2">ESTEIRA <small>${e(A.br(ss.data).slice(0, 5))}</small></span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
+    const corpo = [null, etapa1, etapa2, etapa3, etapa4][d.cur](ss, d);
+    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-nh cwe-k2">ESTEIRA <small>${e(A.br(ss.data).slice(0, 5))}</small></span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
     requestAnimationFrame(mesaSync);
   }
 
