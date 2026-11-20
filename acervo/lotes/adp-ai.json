@@ -2322,7 +2322,7 @@
    "executado": "JOAO BATISTA BALBINO",
    "assunto": "Adicional de 25%",
    "grupo": "g6",
-   "tipo_caso": "AI do INSS · benefício por incapacidade implantado antes da perícia judicial (competência delegada)",
+   "tipo_caso": "AI · Previdenciário · benefício por incapacidade · tutela de urgência para implantação antes da perícia judicial (competência delegada) · qualidade de segurado",
    "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal indeferida em 29/04/2026, contraminuta e parecer do MPF (falta de interesse) nos autos",
    "modelo": "",
    "variacoes": [
@@ -2413,7 +2413,83 @@
     "representacao": "INSS pela Procuradoria-Geral Federal; agravado pelo advogado Paulo César Vieira de Araújo (OAB/MS 8.627)",
     "preparo": "Isento (autarquia)"
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Previdenciário · benefício por incapacidade · tutela de urgência para implantação antes da perícia judicial (competência delegada) · qualidade de segurado",
+   "especificidades": "Agravante: INSS (isento; representação legal) · Tutela recursal indeferida (ID 366561345, 29/04/2026): AVC respaldado por laudos; revisão pode ser pedida na origem · Agravado idoso: parecer do MPF pela ausência de interesse (ID 378287673) · Agravado pede honorários recursais · Decisão agravada em cópias sem texto (IDs 365077490 a 365077492) [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Previdenciário · benefício por incapacidade · tutela de urgência para implantação antes da perícia judicial (competência delegada) · qualidade de segurado",
+     "sintese": "João Batista Balbino, idoso acometido de AVC, obteve na justiça estadual (competência delegada) tutela para implantação de benefício por incapacidade antes da perícia judicial. O INSS agravou.",
+     "questoes": "1) Tutela de urgência para implantação de benefício por incapacidade antes da perícia judicial; 2) qualidade de segurado; 3) devolução de valores recebidos por tutela; 4) honorários recursais.",
+     "rel": {
+      "razoes": "Agravo do INSS ID 365077488 (08/04/2026): implantação sem perícia judicial prévia; perda da qualidade de segurado; pede efeito suspensivo, revogação da tutela e devolução dos valores.",
+      "contrarrazoes": "Contrarrazões ID 376460044 (26/05/2026): manutenção da tutela; honorários recursais (artigo 85, § 11, do CPC)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Justiça Estadual (competência delegada) · 5000031-48.2026.8.12.0022",
+      "dispositivo": "Concedeu a tutela de urgência para implantação do benefício por incapacidade antes da perícia judicial."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-08",
+      "prazo": "15",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Agravo de instrumento",
+       "id": "365077488",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "365077488",
+       "data": "2026-04-08"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "366561345",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Contrarrazões do agravado",
+       "id": "376460044",
+       "data": "2026-05-26"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "378287673",
+       "data": "2026-06-03"
+      }
+     ],
+     "pendencias": "Ler a decisão agravada",
+     "especificidades": "Agravante: INSS (isento; representação legal) · Tutela recursal indeferida (ID 366561345, 29/04/2026): AVC respaldado por laudos; revisão pode ser pedida na origem · Agravado idoso: parecer do MPF pela ausência de interesse (ID 378287673) · Agravado pede honorários recursais · Decisão agravada em cópias sem texto (IDs 365077490 a 365077492) [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "Idoso (Estatuto)",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-04-29"
+    }
+   }
   },
   {
    "sessao": "",
