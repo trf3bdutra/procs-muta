@@ -5423,13 +5423,15 @@
    "exequente": "Empresa de Saneamento de Mato Grosso do Sul",
    "executado": "MINISTERIO PUBLICO FEDERAL - PR/SP",
    "assunto": "Assistência Social",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g2",
+   "tipo_caso": "AI da SANESUL · ACP · inclusão no polo passivo e ordem de apresentar projeto de distribuição de água (PAR Bocaína, Corumbá) · efeito suspensivo negado",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), após conferir o preparo e as informações do juízo (ofício juntado em 23/10/2026); efeito suspensivo negado em 27/08/2026",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da Empresa de Saneamento de Mato Grosso do Sul (SANESUL) contra a decisão da 1ª Vara Federal de Corumbá, proferida em audiência na ação civil pública 5000615-07.2023.4.03.6004 (ID 581785262, origem), que a incluiu no polo passivo e lhe impôs apresentar, em 3 meses da citação, projeto de sistema de distribuição de água. A agravante alega ilegitimidade passiva: o contrato de programa 007/2019 com o Município de Corumbá limita sua atuação à área urbana e o PAR Bocaína é rural; a obrigação violaria a legalidade, o equilíbrio econômico-financeiro do contrato e a separação de poderes. Pede, subsidiariamente, dilação de prazo.",
+   "peculiaridades": "A decisão ID 385094647 afirmou o cabimento do agravo em ACP (microssistema coletivo; STJ) e negou a tutela: falta de prova do custo do projeto e possibilidade de ressarcimento ao final (artigos 82, § 2º, e 84 do CPC). Preparo: certidão ID 384798163 sem custas; comprovante juntado em 16/07/2026 (IDs 386595072 e 386595073), a conferir quanto à data do pagamento. Informações do juízo juntadas por ofício (ID 406314044, texto ilegível na extração).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -5455,7 +5457,16 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Ação civil pública — saneamento; legitimidade de concessionária; obrigação de fazer",
+    "origem": "ACP 5000615-07.2023.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "ID 581785262 (autos de origem), proferida em audiência",
+    "recurso": "ID 384220897 · 03/07/2026",
+    "preparo": "Comprovante juntado em 16/07/2026 (ID 386595073), a conferir",
+    "monocratica": "Não",
+    "analisado_em": "20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -5475,6 +5486,107 @@
     "ultima_informacao": "Certidão · ID 406314043 · 23/10/2026",
     "ultima_movimentacao": "23/10/2026 18:57 · JUNTADA DE CERTIDÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "bloco": "1",
+   "teor": {
+    "sintese_fatica": "Em ação civil pública sobre abastecimento de água no PAR Bocaína (Corumbá/MS), o juízo incluiu a SANESUL no polo passivo e mandou apresentar projeto de distribuição de água. A concessionária alega que seu contrato só abrange a área urbana.",
+    "inicial": "Ação civil pública 5000615-07.2023.4.03.6004 (MPF e outros autores [VALIDAR]) sobre abastecimento de água no PAR Bocaína",
+    "decisao_recorrida": "Decisão em audiência (ID 581785262, origem): inclusão da SANESUL no polo passivo, citação e apresentação, em 3 meses, do projeto de sistema de distribuição de água; especificação de provas na defesa",
+    "recurso": "Agravo ID 384220897 (03/07/2026): (1) ilegitimidade passiva: contrato de programa 007/2019 restrito à área urbana; (2) encargo não previsto contratualmente; (3) violação da legalidade, do equilíbrio econômico-financeiro e da separação de poderes; (4) custos irrecuperáveis. Pede efeito suspensivo, exclusão da lide e, subsidiariamente, dilação do prazo.",
+    "resposta": "MPF ID 401169757 (28/09/2026): desprovimento [VALIDAR fundamentos]",
+    "parecer": "O MPF é parte; a decisão ID 385094647 previu vista como custos legis [VALIDAR necessidade]",
+    "memoriais": "Não consta",
+    "representacao": "SANESUL: advogado Cássio Francisco Machado Neto (OAB/MS 17.793); procuração não identificada com texto [VALIDAR]",
+    "preparo": "Comprovante de pagamento juntado em 16/07/2026, após a certidão ID 384798163"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Ação civil pública; saneamento básico; legitimidade passiva de concessionária; abastecimento de água em área rural",
+     "sintese": "Em ação civil pública sobre abastecimento de água no PAR Bocaína (Corumbá/MS), o juízo incluiu a SANESUL no polo passivo e mandou apresentar projeto de distribuição de água. A concessionária alega que seu contrato só abrange a área urbana.",
+     "questoes": "1) Regularidade do preparo; 2) cabimento do agravo contra a inclusão no polo passivo em ACP; 3) legitimidade passiva da SANESUL; 4) razoabilidade da obrigação e do prazo.",
+     "rel": {
+      "razoes": "Agravo (ID 384220897): ilegitimidade passiva; contrato restrito à área urbana; legalidade, equilíbrio contratual e separação de poderes; dilação de prazo.",
+      "contrarrazoes": "MPF (ID 401169757): desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "581785262",
+      "juizo": "1ª Vara Federal de Corumbá/MS",
+      "dispositivo": "Incluiu a SANESUL no polo passivo e determinou a apresentação de projeto de distribuição de água em 3 meses."
+     },
+     "ai": {
+      "hip": "Outra (ACP — microssistema coletivo)",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-07-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "mpfx": {
+      "sentido": "Parte (contraminuta)",
+      "id": "401169757"
+     },
+     "recursos": [
+      {
+       "parte": "SANESUL",
+       "tipo": "Agravo de instrumento",
+       "id": "384220897",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "384220897",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Certidão de ausência de custas",
+       "id": "384798163",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Comprovante de custas",
+       "id": "386595073",
+       "data": "2026-07-16"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo",
+       "id": "385094647",
+       "data": "2026-08-27"
+      },
+      {
+       "desc": "Contraminuta do MPF",
+       "id": "401169757",
+       "data": "2026-09-28"
+      },
+      {
+       "desc": "Ofício do juízo de origem (informações)",
+       "id": "406314044",
+       "data": "2026-10-23"
+      }
+     ],
+     "pendencias": [
+      "Conferir a data do pagamento das custas (artigo 1.007 do CPC)",
+      "Ler as informações do juízo (ofício ID 406314044, ilegível na extração)",
+      "Contraminuta dos demais integrantes do polo [VALIDAR]"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Não há",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Parte no feito",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-08-27"
+    }
    }
   },
   {
