@@ -580,7 +580,10 @@
   function uteisEntre(de, ate) { if (!de || !ate || ate < de) return 0; var n = 0, x = de; for (var k = 0; x <= ate && k < 4000; k++, x = isoMais(x, 1)) if (util(x)) n++; return n; }
   function diasDisp(m, de, ate) { if (!de || !ate || ate < de) return 0; var n = 0, x = de, A = m.aus || []; for (var k = 0; x <= ate && k < 4000; k++, x = isoMais(x, 1)) if (util(x) && !A.some(function (a) { return a.de && a.ate && a.de <= x && x <= a.ate; })) n++; return n; }
   function cxDe(v) { var t = N(v); if (!t) return 1; if (/omega|padrao|baixa|ω/.test(t)) return 1; if (/alfa|alpha|intermedi|media|α/.test(t)) return 2; if (/sigma|complex|alta|σ/.test(t)) return 3; var n = Math.round(Number(String(v).replace(',', '.'))); return n >= 1 && n <= 3 ? n : 1; }
-  function periodo(ss) { var h = hoje(), de = (ss.fases && ss.fases.inicio) || h; if (de < h) de = h; var ate = (ss.fases && ss.fases.minutas) || deslocaUteis(ss.data, -regraPainel().liberacao - 1) || ss.data; return { de: de, ate: ate }; }
+  function periodo(ss) { var h = hoje(), de = (ss.fases && ss.fases.inicio) || h; if (de < h) de = h; var ate = (ss.fases && ss.fases.minutas) || deslocaUteis(ss.data, -regraPainel().liberacao - 1) || ss.data;
+    /* marcos invertidos (entrega antes do início) ou entrega já vencida: usa a entrega pela regra de liberação, sem marcar a equipe toda como ausente */
+    var inv = ate < de; if (inv) { var alt = deslocaUteis(ss.data, -regraPainel().liberacao - 1); ate = alt && alt >= de ? alt : de; }
+    return { de: de, ate: ate, invertido: inv }; }
   /* cota de cada minutante: pontos da sessão × dias disponíveis ÷ dias da equipe; sobras para a maior fração */
   var COT = { k: '', t: 0, v: null };
   function cotas(ss) { var ck = ss.id + '|' + ss.itens.length + '|' + ss.itens.map(function (i) { return N(i.servidor); }).join(','); if (COT.k === ck && Date.now() - COT.t < 3000) return COT.v; var v = cotas0(ss); COT = { k: ck, t: Date.now(), v: v }; return v; }
@@ -2000,15 +2003,18 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       if (n) { salvar(); if (root && !root.hidden) render(); } return n; },
     designacao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return null; var D = desigEfetiva(ss);
       var de = (ss.fases && ss.fases.inicio) || ss.data, ate = (ss.fases && ss.fases.minutas) || ss.data;
+      /* marcos invertidos: ausências e cotas pelo período efetivo, em vez de marcar todos como ausentes */
+      var pe = periodo(ss); if (pe.invertido) { de = pe.de; ate = pe.ate; }
       var linhas = ss.itens.slice().sort(function (a, b) { return (+a.item || 0) - (+b.item || 0); }).map(function (it) { var inf = infoItem(it);
         return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tipo: julgKey(it, inf), servidor: it.servidor || '', corretor: it.corretor || '', porD: it.porD || '', porC: it.porC || '',
           sugD: it.servidor ? null : escolher('d', it, ss), sugC: it.corretor ? null : escolher('c', it, ss) }; });
       var gente = function (kind) { return pool(kind).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss), atual: ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(m.nome); }).length }; }); };
       return { criterios: D.ordem.map(function (cid) { return { id: cid, t: CRIT_T[cid] || cid, d: !!(D.on[cid] && D.on[cid].d), c: !!(D.on[cid] && D.on[cid].c) }; }), equilibrar: D.equilibrar !== false, escopo: ss.desigOverride ? 'sessao' : 'geral',
-        periodo: { de: de, ate: ate }, minutantes: gente('d'), corretores: gente('c'), linhas: linhas }; },
+        periodo: { de: de, ate: ate, efetivo: periodo(ss) }, fases: ss.fases || {}, data: ss.data, minutantes: gente('d'), corretores: gente('c'), linhas: linhas }; },
     aplicarDesignacao: function (id, lista) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return 0; var by = new Map(ss.itens.map(function (i) { return [dig(i.cnj), i]; })), n = 0;
       (lista || []).forEach(function (o) { var it = by.get(dig(o.cnj)); if (!it) return; var m = 0;
-        if (o.d && !it.servidor) { it.servidor = o.d; it.porD = o.porD || 'esteira'; m = 1; } if (o.c && !it.corretor) { it.corretor = o.c; it.porC = o.porC || 'esteira'; m = 1; } n += m; });
+        /* trocar: a mesa de designação pode substituir quem já estava designado (vazio continua sem efeito) */
+        if (o.d && (!it.servidor || (o.trocar && it.servidor !== o.d))) { it.servidor = o.d; it.porD = o.porD || 'esteira'; m = 1; } if (o.c && (!it.corretor || (o.trocar && it.corretor !== o.c))) { it.corretor = o.c; it.porC = o.porC || 'esteira'; m = 1; } n += m; });
       if (n) { HIST = null; salvar(); if (root && !root.hidden) render(); } return n; },
     confirmarPauta: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.conferencia = Object.assign({}, ss.conferencia || {}, { confirmada: hoje() }); salvar(); return true; },
     /* publicar a pauta à equipe (Ex Officio): libera a listagem e os marcos; retirar devolve só os marcos */
