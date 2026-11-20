@@ -504,7 +504,7 @@ function cabecalho(lotes,id,usuario){
    ${MODO==='cg'?`<button type="button" class="hb" id="b-ed" title="Editar título, descrição e filtro do lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Editar lote</span></button>`:''}
    ${MODO==='cg'?`<button type="button" class="hb" id="b-novo" title="Criar uma coleção avulsa a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Nova coleção avulsa</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
    ${MODO==='cg'?`<a class="hb" href="/amicus/collectio/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Collectio · Geral"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-3-5.2"/></svg><span>Collectio · Geral</span></a>`:''}
-   ${MODO_REL?'':`<button type="button" class="hb" id="b-cmp" title="Painel lateral: comparar a minuta de um processo com um texto e buscar em todos os processos do lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M14 4v16"/><path d="M17 9h1M17 13h1"/></svg><span>Comparar e buscar</span></button>`}
+   <button type="button" class="hb" id="b-cmp" title="Painel lateral: comparar a minuta com um texto, buscar no lote e ver as correspondências do Compendium"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M14 4v16"/><path d="M17 9h1M17 13h1"/></svg><span>${MODO_REL?'Compendium':'Comparar e buscar'}</span></button>
    <button type="button" class="hb ic" id="b-min-tudo" data-min-tudo title="Minimizar todos os processos" aria-label="Minimizar todos os processos"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20l5-5 5 5"/><path d="M7 4l5 5 5-5"/></svg></button>
    <button type="button" class="hb ic" id="b-topo" title="Voltar à matriz" aria-label="Voltar à matriz"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>
    <button type="button" class="hb ic" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
@@ -669,12 +669,7 @@ function montar(lotes,id,usuario){
   </div></section>
   <section class="lx-sec" id="sec-pf"><div class="lx-shd"><button type="button" class="b mn" data-min-sec title="Minimizar">−</button><div><p class="lx-k">02 / Processo a processo</p><h2>Perfis e <em>minutas.</em></h2><p class="lx-d">Identificação, enquadramento, prontuário e minuta formatada, pronta para copiar.</p></div></div>
   <div id="profiles"></div></section>
-  <section class="lx-sec" id="col-correspondencias">
-   <div class="lx-shd"><button type="button" class="b mn" data-min-sec title="Minimizar">−</button><div><p class="lx-k">03 / Compendium</p><h2>Correspondências de <em>casos e modelos.</em></h2>
-    <p class="lx-d">Padrões, variações, matrizes estruturais e variáveis de matéria. A correspondência não comprova a adequação do modelo ao mérito do processo.</p></div>
-    <button class="b" type="button" id="cl-cor-carregar">Analisar correspondências</button></div>
-   <div id="cl-cor-body" role="status" aria-live="polite"></div>
-  </section></div>`);
+  </div>`);
   let h='',last='x';
   for(const it of ITENS){
     const c=gcor(it);
@@ -686,7 +681,6 @@ function montar(lotes,id,usuario){
   $('#mxb').innerHTML=h;
   $('#profiles').innerHTML=ITENS.map(perfil).join('');
   ligaCab();
-  const cc=$('#cl-cor-carregar');if(cc)cc.onclick=carregarCorrespondencias;
   ligaVisLotes();
   if(MODO==='cg'&&LOTE.virtual)ligarSelecao();
   document.querySelectorAll('#mxb tr.r').forEach(r=>r.onclick=()=>vai(r.dataset.u));
@@ -720,14 +714,18 @@ function ligaSub(){
 }
 /* ---------- painel lateral: comparar a minuta com um texto e buscar em todos os processos do lote ---------- */
 const CX={aberto:false,hits:new Set(),filtra:false,todas:false};
+const CX_TIT={cmp:'Comparar e <em>buscar.</em>',bus:'Comparar e <em>buscar.</em>',tre:'Trechos em <em>lote.</em>',cor:'Correspondências de <em>casos e modelos.</em>'};
 const MDATA={};
 async function getMin(it){if(MDATA[it.uid])return MDATA[it.uid];const m=await api('?id='+encodeURIComponent(LOTE.id)+'&minuta='+it.processo.slice(0,10));MDATA[it.uid]=m;return m}
 function painel(uid){
   if(!$('#cx')){
     const com=ITENS.filter(i=>i.minuta);
-    document.body.insertAdjacentHTML('beforeend',`<aside class="lx-cx cv" id="cx" aria-label="Comparar e buscar"><div class="cx-h"><div><p class="lx-ey" style="margin:0">Painel lateral</p><b>Comparar e <em>buscar.</em></b></div><span class="cmt-sp"></span><button type="button" class="b" id="cx-x">Fechar</button></div>
-    <div class="cx-sw"><span class="cmt-seg" role="group" aria-label="Modo do painel"><button type="button" data-cx="cmp" aria-pressed="true">Comparar</button><button type="button" data-cx="bus" aria-pressed="false">Buscar no lote</button>${MODO==='cg'?'<button type="button" data-cx="tre" aria-pressed="false">Trechos em lote</button>':''}</span></div>
-    <div class="cx-c" id="cx-cmp"><div class="form">
+    document.body.insertAdjacentHTML('beforeend',`<aside class="lx-cx cv" id="cx" aria-label="Painel lateral"><div class="cx-h"><div><p class="lx-ey" style="margin:0">Painel lateral</p><b id="cx-tit">${MODO_REL?CX_TIT.cor:CX_TIT.cmp}</b></div><span class="cmt-sp"></span><button type="button" class="b" id="cx-x">Fechar</button></div>
+    <div class="cx-sw"><span class="cmt-seg" role="group" aria-label="Modo do painel">${MODO_REL?'':'<button type="button" data-cx="cmp" aria-pressed="true">Comparar</button><button type="button" data-cx="bus" aria-pressed="false">Buscar no lote</button>'}${MODO==='cg'?'<button type="button" data-cx="tre" aria-pressed="false">Trechos em lote</button>':''}<button type="button" data-cx="cor" aria-pressed="${MODO_REL}">Compendium</button></span></div>
+    <div class="cx-c hidden" id="cx-cor"><p class="cx-nt">Padrões, variações, matrizes estruturais e variáveis de matéria dos processos deste lote. A correspondência não comprova a adequação do modelo ao mérito do processo.</p>
+      <div class="acts"><button class="b" type="button" id="cl-cor-carregar">Analisar correspondências</button></div>
+      <div id="cl-cor-body" role="status" aria-live="polite"></div></div>
+    <div class="cx-c${MODO_REL?' hidden':''}" id="cx-cmp"><div class="form">
       <label>Processo<select class="cmt-sel" id="cx-it">${com.map(i=>`<option value="${i.uid}">${temItem(i)?rotItem(i)+' · ':''}${esc(i.processo.slice(0,15))} · ${esc(String(i.exequente).slice(0,28))}</option>`).join('')}</select></label>
       <label>Parte<select class="cmt-sel" id="cx-sec"><option value="*">Tudo</option>${SECS.map(([k,t])=>`<option value="${k}">${t[0]+t.slice(1).toLowerCase()}</option>`).join('')}</select></label>
       <label class="w">Texto para comparar<textarea id="cx-txt" placeholder="Cole aqui a minuta, o modelo ou o trecho que quer comparar com a minuta do processo"></textarea></label></div>
@@ -749,7 +747,9 @@ function painel(uid){
       <div class="cx-out" id="tr-prev"></div>
       <div class="acts"><button type="button" class="b pri" id="tr-ok" disabled>Aplicar</button><span class="k" id="tr-m"></span></div></div>`:''}</aside>`);
     $('#cx-x').onclick=()=>painel(false);
-    document.querySelectorAll('[data-cx]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-cx]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));['cmp','bus','tre'].forEach(k=>{const e=$('#cx-'+k);if(e)e.classList.toggle('hidden',b.dataset.cx!==k)});if(b.dataset.cx==='bus')$('#cx-q').focus();if(b.dataset.cx==='tre')trechos()});
+    document.querySelectorAll('[data-cx]').forEach(b=>b.onclick=()=>{const k0=b.dataset.cx;document.querySelectorAll('[data-cx]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));['cmp','bus','tre','cor'].forEach(k=>{const e=$('#cx-'+k);if(e)e.classList.toggle('hidden',k0!==k)});$('#cx-tit').innerHTML=CX_TIT[k0]||CX_TIT.cmp;
+      if(k0==='bus')$('#cx-q').focus();if(k0==='tre')trechos();if(k0==='cor'&&!$('#cl-cor-body').innerHTML.trim())carregarCorrespondencias()});
+    $('#cl-cor-carregar').onclick=carregarCorrespondencias;
     let t1=0,t2=0;
     ['cx-it','cx-sec','cx-ws','cx-sd'].forEach(id=>$('#'+id).onchange=compara);
     $('#cx-txt').oninput=()=>{clearTimeout(t1);t1=setTimeout(compara,350)};
@@ -760,6 +760,7 @@ function painel(uid){
   }
   if(uid===false){CX.aberto=false;$('#cx').hidden=true;document.body.classList.remove('cx-on');CX.filtra=false;$('#cx-fm').checked=false;filtra();return}
   CX.aberto=true;$('#cx').hidden=false;document.body.classList.add('cx-on');
+  if(uid==='cor'||(MODO_REL&&!$('#cl-cor-body').innerHTML.trim())){document.querySelector('[data-cx="cor"]').click();return}
   if(uid&&ITENS.some(i=>i.uid===uid&&i.minuta)){$('#cx-it').value=uid;document.querySelector('[data-cx="cmp"]').click()}
   compara();
 }
@@ -977,7 +978,7 @@ async function carregarCorrespondencias(){
     '<div class="cor-grid">'+g.tematica.variaveis.map(x=>'<div class="cor-p"><b>'+e(x.rotulo)+'</b>'+
     '<span>'+e(x.situacao)+' · '+x.identificados+'/'+x.total+'</span>'+
     '<small>'+e(x.campo||'Sem campo direto')+' · '+e(x.ressalva)+'</small></div>').join('')+'</div></details>':'';
-   return '<details class="cor-gr"><summary>'+e(g.nome)+' <small>· '+g.processos+' processos</small></summary>'+
+   return '<details class="cor-gr"><summary>'+e(g.nome)+' <small>· '+g.processos+' processo'+(g.processos===1?'':'s')+'</small></summary>'+
      '<div class="cor-grid">'+g.padroes.map(p).join('')+'</div>'+
      (g.variacoes.length?'<p class="cor-note">Variações: '+g.variacoes.map(x=>e(x.id)+' ('+x.n+')').join(' · ')+'</p>':'')+
      '<h4>Matrizes estruturais: classe e resultado</h4>'+(forma||'<p>Classe ou resultado insuficientes para apontar uma matriz formal.</p>')+
@@ -985,7 +986,7 @@ async function carregarCorrespondencias(){
   };
   alvo.innerHTML='<div class="cor-lead"><b>'+r.total+' processos em '+r.grupos.length+' grupos</b>'+
     '<span>'+(r.materiaCompendium?'Matriz de matéria: '+e(r.materiaCompendium):'Matrizes formais por recurso e resultado')+'</span></div>'+
-    r.grupos.map(one).join('')+'<p class="cor-note">'+(r.limites||[]).map(e).join(' ')+'</p>';
+    [...r.grupos].sort((x,y)=>y.processos-x.processos||String(x.nome).localeCompare(String(y.nome),'pt-BR')).map(one).join('')+'<p class="cor-note">'+(r.limites||[]).map(e).join(' ')+'</p>';
   bt.textContent='Atualizar análise';
  }catch(err){alvo.textContent='Não foi possível consultar o Compendium: '+err.message}
  finally{bt.disabled=false}

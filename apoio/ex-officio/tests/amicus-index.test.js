@@ -51,3 +51,7 @@ test('Matriz: clique isola o assunto e o cabeçalho tem expandir/minimizar todos
  for(const x of ['function aplicaSelG()','ev.ctrlKey||ev.metaKey','id="g-todos"','id="b-min-tudo" data-min-tudo']) assert.ok(app.includes(x),x);
  assert.ok(!app.includes('title="Mostrar ou ocultar"'));
 });
+test('Compendium (correspondências) é aba do painel lateral, não seção da página',()=>{
+ assert.ok(!app.includes('id="col-correspondencias"'));
+ for(const x of ['data-cx="cor"','id="cx-cor"','id="cl-cor-carregar"','id="cl-cor-body"','CX_TIT']) assert.ok(app.includes(x),x);
+});
