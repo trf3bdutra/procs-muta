@@ -1670,7 +1670,7 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
    "grupo": "g5",
-   "tipo_caso": "AI · Cumprimento de sentença contra a União · destaque (reserva) de honorários contratuais indeferido",
+   "tipo_caso": "AI · Cumprimento de sentença contra a União · destaque (reserva) de honorários contratuais em favor de sociedade de advogados",
    "resultado": "Ato a proferir: julgamento do agravo (voto); sem pedido de efeito suspensivo; a União foi intimada e só manifestou ciência",
    "modelo": "",
    "variacoes": [
@@ -1740,7 +1740,84 @@
     "representacao": "Sociedade agravante em causa própria, por seus advogados João Paulo dos Santos Melo (OAB/RN 5.291) e José Nicodemos de Araújo Júnior; procuração da sociedade não identificada com texto [VALIDAR]",
     "preparo": "GRU judicial de R$ 64,26 paga em 23/07/2024 (comprovante ID 294289633; guia ID 294288480)."
    },
-   "bloco": "1"
+   "bloco": "1",
+   "subassunto": "Cumprimento de sentença contra a União · destaque (reserva) de honorários contratuais em favor de sociedade de advogados",
+   "especificidades": "Sem pedido de efeito suspensivo (despacho ID 298397136) · União intimada só manifestou ciência (ID 301044447); sem contraminuta · Preparo: boleto e comprovante bancário de 23/07/2024 (IDs 294288480 e 294289633), sem comprovante STN [VALIDAR] · Contrato e aditivo sem texto extraível (ID 294172238) [VALIDAR] · Feito de 2024",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença contra a União · destaque (reserva) de honorários contratuais em favor de sociedade de advogados",
+     "sintese": "Cumprimento de sentença contra a União (0008112-19.2016.4.03.6000, 1ª Vara Federal de Campo Grande). A sociedade de advogados Melo & Araújo pediu o destaque dos honorários contratuais de exequentes que representa; o juízo indeferiu.",
+     "questoes": "1) Regularidade do preparo; 2) direito da sociedade de advogados ao destaque dos honorários contratuais em relação aos exequentes nominados; 3) honorários recursais.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 294172234 (22/07/2024): direito ao destaque dos honorários contratuais (contrato e aditivo no ID 294172238, sem texto) em relação a exequentes nominados, entre eles Joseph e Kildare; majoração de honorários (artigo 85, § 11, do CPC).",
+      "contrarrazoes": "Não consta: a União, intimada pelo despacho ID 298397136, só manifestou ciência (ID 301044447)"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a reserva de honorários contratuais em favor da sociedade de advogados."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-07-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Melo & Araújo Sociedade de Advogados",
+       "tipo": "Agravo de instrumento",
+       "id": "294172234",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "294172234",
+       "data": "2024-07-22"
+      },
+      {
+       "desc": "Comprovante bancário de custas",
+       "id": "294289633",
+       "data": "2024-07-23"
+      },
+      {
+       "desc": "Despacho: intimação para contraminuta",
+       "id": "298397136",
+       "data": "2024-08-16"
+      },
+      {
+       "desc": "Ciência da União",
+       "id": "301044447",
+       "data": "2024-08-19"
+      },
+      {
+       "desc": "Despacho de redistribuição",
+       "id": "361976365",
+       "data": "2026-03-23"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN; identificar a decisão agravada; ler o contrato de honorários",
+     "especificidades": "Sem pedido de efeito suspensivo (despacho ID 298397136) · União intimada só manifestou ciência (ID 301044447); sem contraminuta · Preparo: boleto e comprovante bancário de 23/07/2024 (IDs 294288480 e 294289633), sem comprovante STN [VALIDAR] · Contrato e aditivo sem texto extraível (ID 294172238) [VALIDAR] · Feito de 2024"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   }
   },
   {
    "sessao": "",
