@@ -281,12 +281,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-cab .cwe-marcos input[readonly]{border:0!important;background:transparent!important;padding:0!important;height:18px!important;font-weight:600;color:var(--tx)}
 .cwe-cab .cwe-marcos input[readonly].vazio{color:var(--g2)}
 .cwe-cab .cwe-mkb button{height:26px;padding:0 10px}
-.cwe-nav{border:1px solid var(--b)!important;border-top:2px solid var(--t)!important;background:var(--w);padding:10px 0 8px!important}
-.cwe-nh{display:flex!important;justify-content:space-between;align-items:baseline;padding:0 12px}.cwe-nh small{font:inherit;color:var(--m2)}
-.cwe-nav .cwe-k2{margin-top:12px!important;padding:10px 12px 0!important;border-top:1px solid var(--l)!important}
-.cwe-nav .cwe-ses button,.cwe-nav .cwe-esteira li>button{border-left-color:transparent;padding-left:12px}
-.cwe-nav .cwe-ses button.on,.cwe-nav .cwe-esteira li.sel>button{padding-left:9px}
-.cwe-nav .cwe-arq{margin:6px 12px 0}
+.cwe-sesnova{display:block;width:100%;margin-top:8px;padding:6px 10px;border:1px dashed var(--b2);border-radius:7px;background:transparent;color:var(--t);font-weight:700;font-size:12px;text-align:left;cursor:pointer}.cwe-sesnova:hover{background:var(--w)}
 .cwe-cabab{display:flex;gap:4px;padding:6px 10px;border-top:1px solid var(--l)}
 .cwe-cabab>button{border:1px solid transparent;background:transparent;border-radius:7px;padding:4px 10px;font-weight:700;font-size:12px;color:var(--t);cursor:pointer}
 .cwe-cabab>button[aria-expanded="true"]{background:var(--p);border-color:var(--b)}
@@ -2033,7 +2028,7 @@ function portaToken() { return new Promise((fim) => {
     const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da sessão'], ['copiar', 'Copiar a lista', 'área de transferência']];
     return `<div class="cwe-top"><div><div class="cwe-hl"><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p></div>
       <p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg || '<small>carregando o cadastro…</small>'}</p></div>
-      <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicar na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar' : 'Publicar os marcos da sessão na Ex Officio'}">${ss.marcosPub || ss.publicada ? '● Marcos publicados' : 'Publicar marcos'}</button><button type="button" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" class="${ss.publicada ? 'on' : 'pri'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} title="${ss.publicada ? 'Pauta publicada na Ex Officio: clique para retirar' : d.pauta ? 'Publicar a pauta (processos e marcos) na Ex Officio' : 'Importe o PDF da pauta antes de publicar'}">${ss.publicada ? '● Pauta publicada' : 'Publicar pauta'}</button></span><button type="button" data-cwt="create-session" title="Cadastrar outra sessão">+ Sessão</button>
+      <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicar na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" data-cwe="m-pub" class="${ss.marcosPub || ss.publicada ? 'on' : ''}" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio: clique para retirar' : 'Publicar os marcos da sessão na Ex Officio'}">${ss.marcosPub || ss.publicada ? '● Marcos publicados' : 'Publicar marcos'}</button><button type="button" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" class="${ss.publicada ? 'on' : 'pri'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} title="${ss.publicada ? 'Pauta publicada na Ex Officio: clique para retirar' : d.pauta ? 'Publicar a pauta (processos e marcos) na Ex Officio' : 'Importe o PDF da pauta antes de publicar'}">${ss.publicada ? '● Pauta publicada' : 'Publicar pauta'}</button></span>
       <span class="cwe-expwrap"><button type="button" data-cwe="exp" aria-expanded="${est.exp}">Exportar ▾</button>${est.exp ? `<span class="cwe-menu" role="menu">${exp.map(([k, t, s]) => `<button type="button" role="menuitem" data-cwe="x-${k}"><b>${e(t)}</b><small>${e(s)}</small></button>`).join('')}</span>` : ''}</span>
       <button type="button" data-cwe="cfg" title="Configurações das pautas" aria-label="Configurações das pautas">⚙</button></div></div>`;
   }
@@ -2070,7 +2065,8 @@ function portaToken() { return new Promise((fim) => {
     const hoje = HOJE(), lista = A.sessionData();
     const ant = lista.filter((x) => x.data < hoje), vis = lista.filter((x) => x.data >= hoje || est.arq || x.id === ss.id);
     const sub = (x) => { const n = (x.itens || []).length; if (!n) return (x.previa || []).length ? (x.previa || []).length + ' na seleção prévia' : 'sem pauta'; const m = (x.itens || []).filter((i) => i.dataMinuta).length; return m + ' de ' + n + ' minutadas'; };
-    return `<span class="cwe-k cwe-nh">SESSÕES <small>${vis.length}</small></span><div class="cwe-ses">${vis.map((x) => `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}"><b>${e(A.br(x.data))}</b><small>${e(x.data < hoje ? 'realizada · ' + sub(x) : sub(x))}</small></button>`).join('')}</div>
+    return `<span class="cwe-k">SESSÕES</span><div class="cwe-ses">${vis.map((x) => `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}"><b>${e(A.br(x.data))}</b><small>${e(x.data < hoje ? 'realizada · ' + sub(x) : sub(x))}</small></button>`).join('')}</div>
+      <button type="button" class="cwe-sesnova" data-cwt="create-session" title="Cadastrar outra sessão">+ Nova sessão</button>
       ${ant.length ? `<button type="button" class="cwe-arq" data-cwe="arq">${est.arq ? 'Ocultar as realizadas' : 'Ver realizadas e arquivadas (' + ant.length + ')'}</button>` : ''}`;
   }
 
@@ -2558,7 +2554,7 @@ function portaToken() { return new Promise((fim) => {
     if (est.ses !== ss.id) { est.ses = ss.id; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapa3, etapa4][d.cur](ss, d);
-    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-nh cwe-k2">ESTEIRA <small>${e(A.br(ss.data).slice(0, 5))}</small></span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
+    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
     requestAnimationFrame(mesaSync);
   }
 
