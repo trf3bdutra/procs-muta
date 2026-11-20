@@ -2753,6 +2753,11 @@ function liaDlg(it){var old=document.getElementById('lia-dlg');if(old)old.remove
   d.addEventListener('change',function(e){var t=e.target;if(t.hasAttribute('data-lia-i')){R[+t.getAttribute('data-lia-i')].ok=t.checked;var b=d.querySelector('[data-lia=aplicar]');if(b)b.textContent='Aplicar '+R.filter(function(r){return r.ok;}).length+' campo(s)';}});
   d.addEventListener('close',function(){if(d.parentNode)d.remove();});
   pinta();document.body.appendChild(d);d.showModal();}
+/* etiqueta de responsáveis do cartão: minutante com a data da minuta (editável no calendário) e corretor */
+function tagResp(it){var mn=it.servidor&&it.servidor!=='—'?it.servidor:'',cr=it.corretor&&it.corretor!=='—'?it.corretor:'',dm=it.dataMinuta||'';
+  var dt=dm?'<label class="mr-dt" title="Minutado em '+esc(br(dm))+' · clique para alterar a data"><span>'+esc(br(dm).slice(0,5))+'</span><input type="date" data-d="dataMinuta" value="'+esc(dm)+'" max="'+hoje()+'" aria-label="Data da minuta" tabindex="-1"></label>':'';
+  if(!mn&&!cr&&!dt)return '';
+  return '<span class="mr-tg">'+(mn||dt?'<span title="Minutante'+(mn?': '+esc(mn):' não definido')+' · definido no prontuário">Min. <b>'+esc(mn||'—')+'</b>'+dt+'</span>':'')+(cr?'<span title="Corretor: '+esc(cr)+' · definido no prontuário">Cor. <b>'+esc(cr)+'</b></span>':'')+'</span>';}
 function cartao(it){
   var k=dg(it.cnj),ab=!!S.aberto[k],et=etapa(it),C=(it.ctl||{}).cartao||{},tj=tipoJ(it),o={'A fazer':0,'Minutado':1,'Corrigido':2,'Liberado':3,'Assinada':3}[et],A=alertas(it),c=it.ctl||{};
   var stp=[['Minutado','<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg>'],['Corrigido','✓'],['Liberado','➤']]
@@ -2771,7 +2776,6 @@ function cartao(it){
     var stM=[['Minutado',svm('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta'],['Corrigido',svm('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Revisão'],['Liberado',svm('<path d="M4 12l15-7-5 15-3-6z"/>'),'Para assinatura']]
       .map(function(x,i){var ok=i+1<=oM,tt=ok&&i+1===oM?x[2]+' · clique para desfazer':ok?x[2]:'Marcar: '+x[2].toLowerCase();return (i?'<i class="ln'+(ok?' ok':'')+'"></i>':'')+'<button class="sp'+(ok?' ok':i===oM?' nx':'')+'" data-a="et" data-v="'+(i+1===oM?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+tt+'" aria-label="'+tt+'" aria-pressed="'+ok+'"'+(asn?' disabled':'')+'>'+x[1]+'</button>';}).join('')+
       '<i class="ln'+(asn?' ok':'')+'"></i><span class="sp sp-as'+(asn?' ok':'')+'" role="img" title="'+(asn?'Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):''):'Assinatura: registrada na ficha do processo (Produção)')+'" aria-label="'+(asn?'Assinada':'Ainda não assinada')+'">'+svm('<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>')+'</span>';
-    var segs=[['Minutante','Min.',it.servidor],['Corretor','Cor.',it.corretor],['Minutado em','',it.dataMinuta?br(it.dataMinuta).slice(0,5):'']].filter(function(x){return x[2];});
     return '<article class="pc cpt edr mrw ee'+oM+(meu(it)?' meu':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Com minuta','Revisada','Para assinatura','Assinada'][oM])+' · clique na linha para abrir o prontuário de produção">'+
       
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar decisão '+esc(it.item||'')+'">'+
@@ -2779,14 +2783,13 @@ function cartao(it){
       '<span class="mr-as" title="'+esc('Assunto: '+(it.assunto||'não informado')+(it.partes?' · '+it.partes:''))+'">· '+esc(it.assunto||'assunto não informado')+'</span>'+(metaDe(it)?'<em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</span>'+
       (urgDe(it)?'<span class="mr-l2"><em class="e-urg'+(urgPend(it)?' pend':'')+'" title="Pedido urgente: definido no prontuário">'+esc(urgDe(it))+(urgPend(it)?' · não apreciada':' · '+esc(c.urgSit||'apreciada'))+'</em></span>':'')+'</div></span>'+
       '<span class="gb"><input class="mr-ob" data-d="obs" value="'+esc(it.obs||'')+'" placeholder="síntese ou observações…" aria-label="Síntese ou observações da decisão">'+
-      (segs.length?'<span class="mr-tg" title="'+esc(segs.map(function(x){return x[0]+' '+x[2];}).join(' · '))+' · definido no prontuário">'+segs.map(function(x){return '<span>'+(x[1]?x[1]+' ':'')+'<b>'+esc(x[2])+'</b></span>';}).join('')+'</span>':'')+
+      tagResp(it)+
       sinais(it,A,c)+'<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stM+'</div></div></span></div></article>';}
   if(S.fonte!=='mono'&&$('#v-pauta')._ed){
     var sv=function(d){return '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+'</svg>';};
     var stE=[['Minutado',sv('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta entregue'],['Corrigido',sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Correção concluída'],['Liberado',sv('<path d="M4 12l15-7-5 15-3-6z"/>'),'Voto liberado']]
       .map(function(x,i){var ok=i+1<=o,tt=ok&&i+1===o?x[2]+' · clique para desfazer':ok?x[2]:'Marcar: '+x[2].toLowerCase();return (i?'<i class="ln'+(ok?' ok':'')+'"></i>':'')+'<button class="sp'+(ok?' ok':i===o?' nx':'')+'" data-a="et" data-v="'+(i+1===o?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+tt+'" aria-label="'+tt+'" aria-pressed="'+ok+'">'+x[1]+'</button>';}).join('');
     /* mesmo cartão das Monocráticas: sinalizações na coluna da esquerda, uma linha de identificação, síntese e etiqueta de responsáveis, etapas */
-    var segP=[['Minutante','Min.',it.servidor&&it.servidor!=='—'?it.servidor:''],['Corretor','Cor.',it.corretor&&it.corretor!=='—'?it.corretor:''],['Minutado em','',it.dataMinuta?br(it.dataMinuta).slice(0,5):'']].filter(function(x){return x[2];});
     return '<article class="pc cpt edr mrw ee'+o+(meu(it)?' meu':'')+(A.length?' al':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Minutado','Corrigido','Liberado'][o]||'')+' · clique na linha para abrir o prontuário de produção">'+
       
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar item '+esc(it.item||'')+'">'+
@@ -2794,7 +2797,7 @@ function cartao(it){
       '<span class="mr-as" title="'+esc('Assunto: '+(it.assunto||'não informado')+(it.partes?' · '+it.partes:''))+'">· '+esc(it.assunto||'assunto não informado')+'</span>'+(metaDe(it)?'<em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</span>'+
       (it.partes||it.sigilo?'<span class="mr-l2"><span class="mr-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</span>'+(it.sigilo?'<em class="e-urg pend" title="Sigilo: '+esc(it.sigilo)+'">sigilo</em>':'')+'</span>':'')+'</div></span>'+
       '<span class="gb"><input class="mr-ob" data-d="obs" value="'+esc(it.obs||'')+'" placeholder="síntese ou observações…" aria-label="Síntese ou observações do processo">'+
-      (segP.length?'<span class="mr-tg" title="'+esc(segP.map(function(x){return x[0]+' '+x[2];}).join(' · '))+' · definido no prontuário">'+segP.map(function(x){return '<span>'+(x[1]?x[1]+' ':'')+'<b>'+esc(x[2])+'</b></span>';}).join('')+'</span>':'')+
+      tagResp(it)+
       sinais(it,A,c)+'<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stE+'</div></div></span></div></article>';}
   if(!ab||S.fonte!=='mono')return h+'</article>';
   var dt=function(f){return '<input type="date" data-d="'+f+'" value="'+esc(it[f]||'')+'">';};
@@ -3514,6 +3517,10 @@ function gravar(){
 }
 window.addEventListener('beforeunload',function(e){if(nPend()||gravando){e.preventDefault();e.returnValue='';}});
 var RERENDER=/^(tipoJ|orig\.acc\.|adm\.(intim|prot|prazo|dobro|vcausa|aliq|recolhido)|recursos\.\d+\.tipo|subassuntos|questoes|sintese)/;
+document.addEventListener('click',function(e){var l=e.target.closest&&e.target.closest('.mr-dt');if(!l)return;var i=l.querySelector('input');if(i&&i.showPicker){e.preventDefault();try{i.showPicker();}catch(x){i.focus();}}},true);
+document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.closest('.mr-dt'))return;var it=achar(t);if(!it)return;
+  if(!t.value||t.value>hoje()){e.stopImmediatePropagation();t.value=it.dataMinuta||'';toast(!t.value?'A data da minuta não pode ficar vazia; para desfazer, use o ícone de minuta.':'A data da minuta não pode ser futura.');return;}
+  if(it.dataCorrecao&&t.value>it.dataCorrecao){e.stopImmediatePropagation();t.value=it.dataMinuta||'';toast('A minuta não pode ser posterior à correção ('+br(it.dataCorrecao)+').');return;}},true);
 document.addEventListener('change',function(e){var t=e.target,it=achar(t);if(!it)return;
   if(t.hasAttribute('data-p')){var p=t.getAttribute('data-p'),v=t.type==='checkbox'?t.checked:t.type==='radio'?(t.checked?t.value:''):t.value,top=setP(it,p,v),o={};o[top]=cart(it)[top];marcar(it,{cartao:o});if(RERENDER.test(p))render();return;}
   if(t.hasAttribute('data-c')){var k=t.getAttribute('data-c');ctl(it)[k]=t.value;var m={};m[k]=t.value;marcar(it,m);if(/^(resJulg|honor|consect)$/.test(k)&&t.closest('#prq'))prontLateral();return;}
@@ -8888,6 +8895,16 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 #v-pauta.ed #ed-strip>.ed-exp{width:34px;height:34px;padding:0;display:inline-grid;place-items:center;border-radius:0;border:1px solid var(--el2);color:var(--em)}
 #v-pauta.ed #ed-strip>.ed-exp:hover{border-color:var(--eg);color:var(--eg)}
 #v-pauta.ed #ed-strip>.ed-exp[hidden]{display:none}
+
+/* cartões: responsáveis e data da minuta na linha das etapas; a data abre o calendário */
+@media (min-width:781px){
+ #v-pauta.ed .edr.mrw .gb>.mr-tg{order:2;margin-left:auto;align-self:center}
+ #v-pauta.ed .edr.mrw .gb>.mr-tg~.pr{margin-left:10px}
+}
+.mrw .mr-tg .mr-dt{position:relative;display:inline-flex;align-items:center;margin:-2px -7px -2px 7px;padding:2px 7px;border-left:1px solid #d4c6a1;cursor:pointer;color:var(--eo2)}
+.mrw .mr-tg .mr-dt:hover{background:var(--ew);color:var(--eg)}
+.mrw .mr-tg .mr-dt span{padding:0;border:0;text-decoration:underline dotted;text-underline-offset:2px}
+.mrw .mr-tg .mr-dt input{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;border:0;padding:0}
 </style>
 </body>
 </html>
