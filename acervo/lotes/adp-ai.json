@@ -21333,11 +21333,11 @@
    "assunto": "IPTU/ Imposto Predial e Territorial Urbano",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com prioridade pelo tempo de tramitação [VALIDAR vista ao MPF]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo do INCRA contra a decisão que, na execução fiscal de IPTU 5007555-73.2018.4.03.6000 movida pelo Município de Campo Grande, rejeitou sua exceção de pré-executividade. O INCRA alega que o imóvel integra o território quilombola Tia Eva/Vila São Benedito. A tutela recursal, pedida em 2023, foi postergada e não foi apreciada; o Município não respondeu.",
+   "peculiaridades": "Agravo de 2023; tutela recursal pendente desde 30/03/2023 (postergada em 09/09/2025). Comunidade quilombola: avaliar vista ao MPF [VALIDAR]. Município sem contraminuta.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -21358,7 +21358,18 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal — IPTU municipal sobre imóvel em território quilombola; exceção de pré-executividade do INCRA",
+    "origem": "6ª Vara Federal de Campo Grande · 5007555-73.2018.4.03.6000",
+    "decisao_agravada": "ID 274548289 (origem)",
+    "recurso": "ID 272091130 · 30/03/2023",
+    "preparo": "Isento (INCRA)",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Isento (INCRA, autarquia federal) · conferido em 20/11/2026",
+    "conf_prevencao": "Origem: 5007555-73.2018.4.03.6000 · redistribuído do Gab. 20 (Des. Fed. Marisa Santos) à Turma Regional de MS · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -21379,6 +21390,17 @@
     "ultima_informacao": "Certidão · ID 371452993 · 06/05/2026",
     "ultima_movimentacao": "06/05/2026 14:38 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "O Município de Campo Grande executa IPTU de 1997 e 1998 (CDAs 003443/02 a 003446/02) de imóvel na Vila São Benedito, lançado em nome de Otávio Gomes de Araújo; o INCRA opôs exceção de pré-executividade alegando que o imóvel integra o território quilombola Tia Eva/Vila São Benedito (processo administrativo 54290.003453/2007-83), e o juízo a rejeitou.",
+    "inicial": "Execução fiscal 5007555-73.2018.4.03.6000 (6ª Vara Federal de Campo Grande) do Município de Campo Grande, com o INCRA no polo passivo [VALIDAR polos]",
+    "decisao_recorrida": "Decisão ID 274548289 dos autos de origem, que rejeitou a exceção de pré-executividade do INCRA",
+    "recurso": "Agravo do INCRA ID 272091130 (30/03/2023; intimação em 16/02/2023): o imóvel está no território quilombola Tia Eva/Vila São Benedito, cuja titulação cabe ao INCRA (Decreto 4.887/2003; artigo 68 do ADCT); extinção do crédito tributário (artigo 156, V, do CTN); pede antecipação da tutela recursal.",
+    "resposta": "Município de Campo Grande: prazo para contraminuta decorrido em 03/11/2025, sem manifestação.",
+    "parecer": "Sem parecer do MPF [VALIDAR hipótese: comunidade quilombola].",
+    "outros": "Despacho ID 335656478 (09/09/2025, Gab. 20, Des. Fed. Marisa Santos): tutela recursal postergada para após a contraminuta. Despacho ID 342285550 (06/11/2025): consulta sobre o interesse no julgamento; INCRA reafirmou o interesse (ID 343862147, 18/11/2025). Redistribuição à Turma Regional de MS (decisão ID 369879816, 30/04/2026).",
+    "representacao": "Agravante: INCRA (PGF). Agravado: Município de Campo Grande (Denir de Souza Nantes).",
+    "preparo": "INCRA isento."
    }
   },
   {
