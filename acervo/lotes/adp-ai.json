@@ -22081,8 +22081,8 @@
    "exequente": "CLAUDIO LUIZ CASAGRANDE",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPF/Imposto de Renda de Pessoa Física",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · IRPF sobre ganho de capital · simulação de alienação de imóveis entre familiares · exceção de pré-executividade",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -22130,6 +22130,85 @@
     "outros": "Comprovante de GRU paga na CAIXA ID 359798698 (OCR; referência ao processo de origem). Despacho ID 360618586 (16/03/2026, Des. Fed. Leila Paiva): intimação para contraminuta. Manifestação do agravante ID 363786865 (01/04/2026), com acórdão relativo ao irmão. Decisão ID 374910837 (31/05/2026): redistribuição à Turma Regional de MS.",
     "representacao": "Agravante: Ramalho Advogados Associados (José Roberto Ramalho e Ricardo de Souza Ramalho) [VALIDAR procuração]. Agravada: União (PGFN).",
     "preparo": "GRU 18720-8 paga na CAIXA em 05/03/2026, R$ 64,26, com número de referência do processo de origem (ID 359798698, OCR); sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Execução fiscal — IRPF sobre ganho de capital; simulação; exceção de pré-executividade",
+   "especificidades": "Lançamento fundado em simulação de transações imobiliárias familiares · Precedente favorável ao irmão e sócio juntado (ID 363786867) · Preparo por GRU paga na CAIXA com referência do processo de origem (ID 359798698)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — IRPF sobre ganho de capital; simulação; exceção de pré-executividade",
+     "subassuntos": "Execução fiscal · IRPF sobre ganho de capital · simulação de alienação de imóveis entre familiares · exceção de pré-executividade",
+     "sintese": "",
+     "questoes": "1) Cabimento da exceção de pré-executividade para discutir a simulação (Súmula 393/STJ); 2) efeito do julgamento favorável ao irmão e sócio; 3) regularidade do preparo.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Três Lagoas",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-03-12",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "359798697",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "359798697",
+       "data": "2026-03-12"
+      },
+      {
+       "desc": "GRU e comprovante da CAIXA (OCR)",
+       "id": "359798698",
+       "data": "2026-03-12"
+      },
+      {
+       "desc": "Despacho de intimação",
+       "id": "360618586",
+       "data": "2026-03-16"
+      },
+      {
+       "desc": "Manifestação com acórdão do irmão",
+       "id": "363786865",
+       "data": "2026-04-01"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "374000496",
+       "data": "2026-05-17"
+      }
+     ],
+     "pendencias": "Conferir o preparo",
+     "especificidades": "Lançamento fundado em simulação de transações imobiliárias familiares · Precedente favorável ao irmão e sócio juntado (ID 363786867) · Preparo por GRU paga na CAIXA com referência do processo de origem (ID 359798698)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": ""
+    }
    }
   },
   {
