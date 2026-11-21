@@ -14,7 +14,7 @@ test('Caput é a central principal e preserva módulos existentes',()=>{
 });
 test('A entrada Caput abre a Chefia (com os relatórios da antiga Inteligência) e cada aba tem caminho próprio em /caput/',()=>{
   assert.ok(page.includes("if (/^\\/caput$/.test(p)) return 'chefia';"),'/caput abre a Chefia');
-  assert.ok(page.includes('function vRelatorios()')&&page.includes("abas:['escopo','destino','acervo','calendario','etiquetas']")&&page.includes("abas:['equipe','designacao','produtividade']"),'Inteligência na Chefia; equipe e regras na Coordenação');
+  assert.ok(page.includes('function vRelatorios()')&&page.includes("abas:['escopo','destino','acervo','etiquetas']")&&page.includes('function calForense()')&&page.includes("abas:['equipe','designacao','produtividade']"),'Inteligência na Chefia; equipe e regras na Coordenação');
   assert.ok(page.includes("fila: 'triagem'")&&page.includes("pautas: 'pautas'"),'abas mapeadas a caminhos');
   assert.ok(page.includes("history.pushState(null, '', alvo + location.search)"),'troca de aba muda o caminho');
   assert.ok(page.includes("location.hash"),'endereços antigos com # continuam valendo');
@@ -43,4 +43,11 @@ test('Desempenho e início: motor escondido não redesenha; Chefia é a página 
   assert.ok(mot.includes('__oculto()')&&mot.includes('this.__sujo = true')&&mot.includes('this.__vigiaVisivel()'),'motor sem redesenho escondido');
   assert.ok(cap.includes("return 'chefia';\n}")&&cap.includes("if (!PRONTO && (ABA === 'pautas' || naT))"),'Chefia inicial e só a Triagem espera');
   assert.ok(cap.includes('function calChefia()')&&cap.includes('data-cgcal=')&&cap.includes('data-cgses='),'calendário na Chefia');
+});
+
+test('Chefia: primeira no menu, painéis no padrão do Caput, calendário forense no rodapé do calendário, relatórios com altura fixa',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8');
+  assert.ok(cap.indexOf('data-mod="chefia"')<cap.indexOf('data-mod="triagem"'),'Chefia primeiro');
+  assert.ok(cap.includes('<div id="cg-forense">')&&cap.includes('data-cgfo="sessoes"'),'rodapé forense');
+  assert.ok(cap.includes('.cg-tool .cg-studio{height:600px')&&cap.includes('data-cg-rel-export="pdf"'),'relatórios como ferramenta');
 });
