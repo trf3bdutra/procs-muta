@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T02:07:31.334Z",
+ "atualizado_em": "2026-11-21T02:07:38.195Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -233594,7 +233594,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:30:56.071Z",
+    "atualizado_em": "2026-11-21T02:07:38.195Z",
     "Origem - Juízo": "Justiça Federal em Campo Grande [VALIDAR vara]"
    },
    "triagem": {
@@ -233611,8 +233611,8 @@
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "Não verificado",
-    "Preparo": "Não verificado",
+    "Tempestividade": "Não Verificado",
+    "Preparo": "Não Verificado",
     "AJG": "",
     "DPU (controle)": "",
     "Representação": "Regular",
@@ -233622,26 +233622,27 @@
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Sem hipótese",
-    "MPF - Custos Legis": "",
+    "MPF": "Não se Aplica",
+    "MPF - Custos Legis": "Não",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "IPTU/ Imposto Predial e Territorial Urbano",
+    "Tema": "Execução fiscal · tributo municipal sobre imóveis do FAR (PAR/Minha Casa Minha Vida) · imunidade tributária recíproca (Tema 884/STF) e legitimidade da CEF · exceção de pré-executividade",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Sem preliminares",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "2ª Seção, Agravo Interno",
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "Exceção rejeitada por falta de prova pré-constituída de que os imóveis são do FAR · Efeito suspensivo indeferido (ID 363576186, 31/03/2026) · Agravo interno da CEF (ID 365345308) · Município sem contraminuta nos autos extraídos · Preparo por DDRJ/GRU da CAIXA (ID 362169284) · Tema conexo ao AI 5001514-67.2026.4.03.0000"
+    "Especificidades": "Exceção rejeitada por falta de prova pré-constituída de que os imóveis são do FAR · Efeito suspensivo indeferido (ID 363576186, 31/03/2026) · Agravo interno da CEF (ID 365345308) · Município sem contraminuta nos autos extraídos · Preparo por DDRJ/GRU da CAIXA (ID 362169284) · Tema conexo ao AI 5001514-67.2026.4.03.0000",
+    "Síntese Fática": "O Município de Campo Grande executa tributos municipais sobre imóveis que a CEF afirma pertencerem ao FAR (PAR/Minha Casa Minha Vida), com imunidade (Tema 884/STF); o juízo rejeitou a exceção de pré-executividade por falta de prova pré-constituída da origem dos imóveis."
    },
    "producao": {
     "Destino": "",
@@ -233680,7 +233681,8 @@
     "Lote - Observação": "Agravo da CEF contra a decisão que, na execução fiscal 5000648-09.2023.4.03.6000 do Município de Campo Grande, rejeitou a exceção de pré-executividade sobre imóveis do FAR. A CEF alega ilegitimidade e imunidade tributária (Tema 884/STF). O efeito suspensivo foi indeferido em 31/03/2026 e há agravo interno.",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: ApCiv 5003451-31.2020.4.03.6109 (3ª Turma, 11/10/2022); ApCiv 5003993-20.2018.4.03.6109 (3ª Turma, 26/04/2021); ApCiv 5000695-16.2021.4.03.6141 (3ª Turma, 18/11/2022); AI 5031747-81.2025.4.03.0000 (agravo interno prejudicado)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -233690,7 +233692,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5007033-36.2024.4.03.6000",
