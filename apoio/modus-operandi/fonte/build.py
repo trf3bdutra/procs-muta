@@ -269,7 +269,7 @@ def montar(var):
     css += (H/'nav_editorial.css').read_text(encoding='utf-8') + (H/'tema_editorial.css').read_text(encoding='utf-8') + (H/'padrao_paginas.css').read_text(encoding='utf-8')
     return t, js, css, pre
 _TCV = json.loads((RAIZ/'padrao/tipo-caso.json').read_text(encoding='utf-8'))
-TCJ = json.dumps({'materias': [{'nome': m['nome'], 'aliases': m.get('aliases', [])} for m in _TCV['materias']]}, ensure_ascii=False, separators=(',', ':'))
+TCJ = json.dumps({'materias': [{'nome': m['nome'], 'aliases': m.get('aliases', []), 'assuntos': m.get('assuntos', [])} for m in _TCV['materias']]}, ensure_ascii=False, separators=(',', ':'))
 def gerar_html(var):
     t, js, css, pre = montar(var)
     js = 'window.TIPO_CASO=' + TCJ + ';\n' + js   # vocabulário comum do tipo de caso (Ementário e Consulta)

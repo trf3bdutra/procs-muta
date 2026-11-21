@@ -60,8 +60,8 @@ test('Ementário: facetas Matéria e Tipo de caso; Correspondentes pelo tipo de 
 
 test('a matéria do Ementário (JS) é a mesma do vocabulário em Python', () => {
   const s = ler('apoio/modus-operandi/fonte/ementario.js');
-  const ini = s.indexOf('var TCV='), fim = s.indexOf('var DIM={');
-  const f = new Function('window', 'nz', s.slice(ini, fim) + ';return {matDe:matDe,tcResto:tcResto,tcIgual:tcIgual};')(
+  const ini = s.indexOf('var TCV={}'), fim = s.indexOf('var DIM={');
+  const f = new Function('window', 'nz', s.slice(ini, fim) + ';return {matDe:matDe,matAss:matAss,tcResto:tcResto,tcIgual:tcIgual};')(
     { TIPO_CASO: VOC }, x => String(x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase());
   const casos = ['Contratos bancários e CEF · revisão', 'Cumprimento de sentença contra o INSS · x', 'ACP ambiental · dano',
     'Alienação fiduciária de imóvel (Lei 9.514/1997) · leilão', 'Indígena · demarcação', 'aposentadoria rural · prova', 'OAB · anuidade'];
@@ -73,6 +73,9 @@ test('a matéria do Ementário (JS) é a mesma do vocabulário em Python', () =>
   const a = { mat: 'Previdenciário', _ass: 'Rural (Art. 48/51)', tc: 'Previdenciário · Rural (Art. 48/51) · Carência comprovada' };
   const b = { mat: 'Previdenciário', _ass: 'Híbrida (Art. 48/106)', tc: 'Previdenciário · Híbrida (Art. 48/106) · Carência comprovada' };
   assert.strictEqual(f.tcResto(a), 'Carência comprovada');
+  assert.strictEqual(f.matAss('Pis e cofins'), 'Tributário');      // assunto da série histórica
+  assert.strictEqual(f.matAss('Execução fiscal'), 'Execução fiscal');
+  assert.strictEqual(f.matAss('Mandado de segurança'), '');
   assert.ok(f.tcIgual(a, b));
 });
 

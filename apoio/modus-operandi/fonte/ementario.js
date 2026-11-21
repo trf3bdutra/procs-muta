@@ -65,7 +65,7 @@ function ramoAss(x){
       if(!m.replace(RAMOW,'').replace(/[^a-z]/g,''))continue;
       ass=s.charAt(0)+s.slice(1).toLowerCase();break;}
   }
-  x._ramo=ramo;x._ass=ass;
+  x._ramo=ramo;x._ass=ass;if(!x.mat&&ass)x.mat=matAss(ass);
 }
 function prev(x){return String(x.e||'').replace(/^…/,'').replace(/^\s*Vistos\.?\s*/i,'');}
 function titulo(x){var e=prev(x);if(x.t==='A'){var m=e.match(/^((?:[^.]{2,90}\.\s*){1,3})/);return (m?m[1]:e).trim();}return e.split(/(?<=\.)\s/)[0];}
@@ -73,9 +73,10 @@ function siglaO(o){if(!o)return 'órgão n/i';if(/Mato Grosso do Sul/.test(o))re
 
 /* tipo de caso: "Matéria · tipo · aspecto distintivo" (padrao/tipo-caso.json), o mesmo padrão dos processos do gabinete;
    a matéria (1º segmento, nome canônico) liga o precedente ao processo */
-var TCV=(function(){var A={},V=window.TIPO_CASO||{};(V.materias||[]).forEach(function(m){[m.nome].concat(m.aliases||[]).forEach(function(a){A[nz(a).trim()]=m.nome;});});return A;})();
+var TCV={},TCA={};(function(){var V=window.TIPO_CASO||{};(V.materias||[]).forEach(function(m){[m.nome].concat(m.aliases||[]).forEach(function(a){TCV[nz(a).trim()]=m.nome;});(m.assuntos||[]).forEach(function(a){TCA[nz(a).trim()]=m.nome;});});})();
 function tcSegs(s){return String(s||'').split(/\s+·\s+|;\s+|\s+›\s+/).map(function(z){return z.trim().replace(/[ .]+$/,'');}).filter(Boolean);}
 function matDe(s){var p=nz(tcSegs(s)[0]||'').trim();if(!p)return '';if(TCV[p])return TCV[p];var b='';Object.keys(TCV).forEach(function(a){if(a.length>b.length&&(p.indexOf(a+' ')===0||p.indexOf(a+'(')===0))b=a;});return b?TCV[b]:'';}
+function matAss(s){var k=nz(s).trim();return k?(TCA[k]||matDe(s)):'';}
 function tcResto(x){var m=nz(x.mat),a=nz(x._ass);return tcSegs(x.tc).filter(function(z){var k=nz(z);return k!==m&&k!==a;}).join(' · ');}
 function tcIgual(a,b){var r=tcResto(a);return !!r&&a.mat===b.mat&&nz(r)===nz(tcResto(b));}
 var DIM={
@@ -116,7 +117,7 @@ function carregar(){
   base().then(function(B){
     var d=(B.prec||[]).map(function(r){
       var x={id:r.id,t:/^voto/i.test(r.pronunciamento||'Voto')?'A':'M',n:r.processo,c:r.classeSigla||r.especie||'',cl:r.classe||'',o:r.orgao||'',d:r.dataJulgamento||'',p:r.dataPublicacao||'',e:r.ementa||'',r:r.resultado||'',temas:r.temas||'',tese:r.tese||'',disp:r.dispositivosCitados||'',jur:r.jurisprudenciaCitada||'',it:!!r.inteiroTeor,tc:r.tipoCaso||r.subassunto||'',tcS:!!(r.tcSug||r.subSug),mat:r.materia||'',tags:String(r.espTags||'').split(/\s*;\s*/).filter(Boolean),esp:r.esp||'',obs:r.obs||'',proc:r.proc||null,rast:r.rast||null};
-      if(!x.mat)x.mat=matDe(x.tc);x.y=(x.d||'').slice(0,7);x._apr=apreciacao(r);x._ramo=ramoDe(r.ramoDireito);x._rd=r.ramoDireito||'';x._ass=r.assunto||null;
+      if(!x.mat)x.mat=matDe(x.tc)||matAss(r.assunto);x.y=(x.d||'').slice(0,7);x._apr=apreciacao(r);x._ramo=ramoDe(r.ramoDireito);x._rd=r.ramoDireito||'';x._ass=r.assunto||null;
       x._res=SENT[r.sentidoResultado]||(x.r?classRes(x.r):'Sem classificação');
       x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x.temas,x._ass,x.mat,x.tc,x.tags.join(' '),x.esp,x.tese,x.proc?(x.proc.pt||[]).concat(x.proc.ac||[]).map(function(z){return z[1];}).join(' '):''].join(' '));if(x.c&&x.cl)E.clsNome[x.c]=x.cl;return x;});
     d.sort(function(a,b){return (b.d||'').localeCompare(a.d||'');});
