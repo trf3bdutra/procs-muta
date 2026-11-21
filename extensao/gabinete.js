@@ -90,16 +90,29 @@ function tabela(c, v) {
   return '<div class="gt-tab"><table><thead><tr>' + cols.map(function (x) { return '<th>' + esc(x.rotulo || x.chave) + '</th>'; }).join('') + '</tr></thead><tbody>' +
     L.map(function (l) { return '<tr>' + cols.map(function (x) { return '<td>' + esc((l || {})[x.chave] || '') + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
 }
+var DICA = { 'Tempestividade': 'Prazo em dias úteis (artigo 219 do CPC), em dobro para a Fazenda (artigo 183)', 'Preparo': 'Pix ou cartão só com o comprovante do Tesouro; sem preparo, intimar para recolher em dobro antes da deserção',
+  'Representação': 'Procuração nos autos; procurador público e DPU dispensam', 'MPF': 'Situação do parecer do Ministério Público Federal no 2º grau', 'MPF - Custos Legis': 'Hipótese de intervenção obrigatória (artigo 178 do CPC)',
+  'Prelim.': 'Preliminares nas razões ou contrarrazões a decidir antes do mérito', 'Tema': 'Tipo de caso: a matéria em poucas palavras, como no lote', 'Especificidades': 'O que distingue este caso dos parecidos',
+  'Síntese Processual': 'Síntese do processo para quem vai minutar', 'Síntese Fática': 'Fatos relevantes, com o ID das provas', 'Hipóteses Monocrática': 'Inciso do artigo 932 do CPC que autoriza a decisão do relator',
+  'Destino - Situação': 'Pronto para julgar ou pendente (com o que falta)', 'Voto - Resultado': 'Resultado do julgamento', 'Voto - Honorários': 'O que acontece com os honorários (Tema 1.059/STJ para os recursais)',
+  'Tópico-síntese': 'Tópico-síntese do INSS (benefício implantado ou revisto)', 'Mono - Fundamento': 'Precedente ou fundamento que autoriza a decisão do relator', 'Urgência': 'Medida urgente pedida (liminar, tutela, efeito suspensivo)',
+  'Sobrestamento - Motivo': 'Por que o processo está sobrestado', 'Sobrestamento - Tema': 'Tema ou precedente que manda sobrestar', 'Sensível - Categoria': 'Por que o caso é sensível', 'Sensível - Quadro': 'Quadro ou motivo do caso sensível',
+  'Impugnada - ID': 'ID da decisão impugnada (acórdão embargado, decisão agravada)', 'ED - Vício': 'Omissão, contradição, obscuridade ou erro material apontado', 'AgInt - Fundamentos': 'Fundamentos do agravo interno contra a decisão do relator' };
+var TIPO_DICA = { lista: 'escolha uma opção', simnao: 'Sim ou Não', data: 'data', numero: 'número', 'texto-longo': 'texto livre', texto: 'texto curto', tabela: 'lista de linhas (editar na ficha do Ex Officio)' };
+function dicaCampo(c) {
+  var d = DICA[c.chave] || S(c.regra) || '';
+  return c.rotulo + (d ? ': ' + d : '') + ' (' + (TIPO_DICA[c.tipo] || 'campo') + (editavel(c) ? '; grava sozinho na ficha do processo' : '; só leitura') + ')';
+}
 function campo(c) {
   var longo = c.tipo === 'texto-longo' || c.tipo === 'tabela', cls = 'gf' + (longo ? ' w' : '');
   if (c.tipo === 'tabela') {
     var tv = c.secao ? gravado(c.secao, c.chave) : '';
-    return '<div class="' + cls + '"><span class="gl">' + esc(c.rotulo) + (editavel(c) ? ' <small class="muted">· editar na ficha do Ex Officio</small>' : '') + '</span>' + tabela(c, tv) + '</div>';
+    return '<div class="' + cls + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + (editavel(c) ? ' <small class="muted">· editar na ficha do Ex Officio</small>' : '') + '</span>' + tabela(c, tv) + '</div>';
   }
   if (!editavel(c)) {
     var v0 = c.secao ? gravado(c.secao, c.chave) : fonteVal(c);
     if (typeof v0 === 'object') v0 = '';
-    return '<div class="' + cls + '"><span class="gl">' + esc(c.rotulo) + '</span><span class="ro">' + (S(v0) ? esc(/^\d{4}-\d{2}-\d{2}$/.test(S(v0)) ? brD(v0) : v0) : '—') + '</span></div>';
+    return '<div class="' + cls + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span><span class="ro">' + (S(v0) ? esc(/^\d{4}-\d{2}-\d{2}$/.test(S(v0)) ? brD(v0) : v0) : '—') + '</span></div>';
   }
   var id = c.secao + '.' + c.chave, v = V(c.secao, c.chave), bloq = (id === 'producao.SERVIDOR' || id === 'producao.CORRETOR') && !G.gestor, h;
   if (typeof v === 'object') v = '';
@@ -108,7 +121,7 @@ function campo(c) {
   /* lista curta e Sim/Não viram botões, como na gaveta da pauta */
   var OC = c.tipo === 'simnao' ? ['Sim', 'Não'] : c.tipo === 'lista' ? (c.opcoes || []).map(function (o) { return typeof o === 'string' ? o : o.valor; }) : null;
   if (OC && !bloq && OC.length && OC.length <= 6 && OC.every(function (o) { return o.length <= 26; })) {
-    return '<div class="' + cls + (id in G.pend ? ' mud' : '') + '"><span class="gl">' + esc(c.rotulo) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + esc(c.rotulo) + '">' +
+    return '<div class="' + cls + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + esc(c.rotulo) + '">' +
       OC.map(function (o) { return '<button type="button" class="pm-ch' + (o === v ? ' on' : '') + '" data-ch="' + esc(id) + '" data-v="' + esc(o) + '" aria-pressed="' + (o === v) + '">' + esc(o) + '</button>'; }).join('') +
       (v && OC.indexOf(v) < 0 ? '<span class="pm-ch on">' + esc(v) + '</span>' : '') + '</div></div>';
   }
@@ -119,7 +132,7 @@ function campo(c) {
   else if (c.tipo === 'numero') h = '<input type="number"' + at + ' value="' + esc(v) + '">';
   else if (c.tipo === 'texto-longo') h = '<textarea rows="3"' + at + '>' + esc(v) + '</textarea>';
   else h = '<input type="text"' + at + ' value="' + esc(v) + '">';
-  return '<label class="' + cls + (id in G.pend ? ' mud' : '') + '"><span class="gl">' + esc(c.rotulo) + '</span>' + h + '</label>';
+  return '<label class="' + cls + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span>' + h + '</label>';
 }
 function grupoHtml(g, aberto) {
   var n = g.campos.filter(function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? v.length : !!S(v); }).length;
@@ -258,17 +271,17 @@ function cabeca(s) {
     '<div class="pm-top"><span class="pm-fase">' + FASE[Math.min(E.n, FASE.length - 1)] + '</span>' + (dias != null ? '<span class="pm-dd' + (dias > 30 ? ' al' : '') + '">' + dias + ' dias na tarefa<i><i style="width:' + Math.min(100, dias / 60 * 100) + '%"></i></i></span>' : '') + '<span class="sp"></span>' + pills + '</div>' +
     '<div class="pm-l1"><button type="button" class="mono pc-cnj" data-copia="' + esc(G.cnj) + '" title="Copiar o número">' + esc(G.cnj) + '</button>' + (abrev ? '<span class="pc-cl" title="' + esc(classe) + '">' + esc(abrev) + '</span>' : '') +
       tjHtml + (AL.length ? '<button type="button" class="pm-al" data-aba="Autos" title="' + esc(AL.map(function (a) { return a.t; }).join(' · ')) + '">' + AL.length + ' alerta' + (AL.length > 1 ? 's' : '') + '</button>' : '') + '</div>' +
-    (assunto ? '<p class="pm-as"><b>' + esc(assunto) + '</b></p>' : '') +
+    '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (!G.adEd && !S(gravado('triagem', 'Registro - Assunto detalhado')) && !S(V('triagem', 'Assunto detalhado')) ? '<button type="button" class="pm-ad-ic" data-ad="ed" title="Incluir o assunto detalhado (vai para a ficha; o Caput mostra o mesmo)" aria-label="Incluir o assunto detalhado">' + SV('<path d="M12 5v14M5 12h14"/>', 12) + '</button>' : '') + '</p>' +
     assuntoDetalhado() +
     (partes ? '<p class="pm-pt" title="' + esc(partes) + '">' + SV(IC.pt, 14) + '<span>' + esc(partes) + '</span></p>' : '') +
-    '<details class="pm-aut"' + (G.autAb ? ' open' : '') + '><summary data-aut>Autuação, partes e situação</summary>' +
+
+    '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
+    '<div class="pm-resp">' + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
+    '<details class="pm-aut"' + (G.autAb ? ' open' : '') + '><summary data-aut aria-label="Autuação, partes e situação"><i class="pm-aut-h"></i></summary>' +
       (tarefa ? '<div class="pm-tf"><span>Tarefa no PJe</span><b>' + esc(tarefa) + '</b>' + (dias != null ? '<small>' + dias + ' dias</small>' : '') + '</div>' : '') +
       (window.MutaAutos ? '<div class="pm-sit">' + window.MutaAutos.htmlSituacao(gravado('triagem', 'Registro - Situação atual')) + '</div>' : '') +
       (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') + (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
       (etq.length ? '<div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' +
-    '<p class="pm-sh">' + SV(IC.et, 14) + 'Etapas<i>toque para marcar hoje</i></p>' +
-    '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
-    '<div class="pm-resp">' + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
     '</section>';
 }
 /* faixa do usuário no topo do painel, acima das abas */
@@ -300,7 +313,7 @@ function assuntoDetalhado() {
   if (G.adEd) return '<div class="pm-ad ed"><textarea id="pm-ad-tx" rows="2" placeholder="Assunto detalhado (vai para a ficha; o Caput mostra o mesmo)">' + esc(proprio) + '</textarea><span class="pm-ad-b"><button type="button" class="btn solid sm" data-ad="ok">Gravar</button><button type="button" class="lnk" data-ad="x">cancelar</button></span></div>';
   if (lote) return '<p class="pm-ad"><span>' + esc(lote) + '</span><i class="pm-ad-o" title="Do registro da triagem no Caput">Caput</i></p>';
   if (proprio) return '<p class="pm-ad"><span>' + esc(proprio) + '</span><button type="button" class="pm-ad-i" data-ad="ed" title="Editar o assunto detalhado" aria-label="Editar">' + SV(IC.min, 12) + '</button></p>';
-  return '<p class="pm-ad vz"><button type="button" class="pm-ad-add" data-ad="ed">' + SV('<path d="M12 5v14M5 12h14"/>', 12) + 'Assunto detalhado</button></p>';
+  return '';
 }
 /* sinalizações: pendências e intercorrências da ficha, uma por linha ("✓ " no início = resolvida) */
 var SN = [['pd', 'Pendência', 'triagem', 'O que falta sanar'], ['ic', 'Intercorrência', 'triagem', 'Intercorrências']];
@@ -403,14 +416,17 @@ function controlesProcesso() {
   }).join('');
   return '<section class="card pc-sec" id="g-ctl"><div class="pc-sh"><h3>Controles</h3><small class="muted">' + (n ? n + ' em vigor' : 'nenhum em vigor') + '</small></div><div class="ct-l">' + linhas + '</div></section>';
 }
+/* precedentes relacionados do processo aberto: no topo da aba Ementário */
+function casoPrec() { return { cnj: G.cnj, assunto: fonteVal({ fonte: ['Assunto'] }),
+    subassuntos: S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')), questoes: S(V('triagem', 'Alegações')),
+    sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') }; }
+function precEmentario(k) { var ap = $('acv-prec'); if (ap && window.MutaPrecedentes) ap.innerHTML = window.MutaPrecedentes.html(k); }
 function corpoProcesso() {
   var AU = window.MutaAutos, h = sinalizacoes() + notas();
   var ad = gravado('triagem', 'Registro - Assunto detalhado');
   h += '<section class="card pc-sec"><div class="pc-sh"><h3>Síntese e questões</h3></div><div class="gr">' +
     campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div></section>';
-  if (window.MutaPrecedentes) h += window.MutaPrecedentes.html({ cnj: G.cnj, assunto: fonteVal({ fonte: ['Assunto'] }),
-    subassuntos: S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')), questoes: S(V('triagem', 'Alegações')),
-    sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') });
+
   h += grupos('Processo', function (g) { return !FORA_PROC[g.grupo]; }, function () { return true; });
   h += controlesProcesso();
   h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
@@ -502,6 +518,7 @@ function render() {
   var corpo = G.aba === 'Autos' ? corpoAutos() : G.aba === 'Roteiro' ? corpoRoteiro() : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
   var ab = document.activeElement && document.activeElement.dataset ? (document.activeElement.dataset.fk || (document.activeElement.dataset.esp ? 'esp:' + document.activeElement.dataset.esp : '') || (document.activeElement.dataset.q != null ? 'q:' + document.activeElement.dataset.q : '')) : '';
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
+  precEmentario(casoPrec());
   caixa.innerHTML = cabeca(s) + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
   stEl = $('g-st');
   if (ab) {

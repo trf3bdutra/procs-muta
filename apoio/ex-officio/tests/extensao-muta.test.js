@@ -131,7 +131,7 @@ test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designa�
     'producao.SERVIDOR', 'producao.CORRETOR', 'triagem.O que falta sanar', 'triagem.Intercorrências', 'origem.Observações', 'producao.Voto - Resultado', 'producao.Voto - Honorários', 'producao.Tópico-síntese']
     .forEach(k => assert.ok(ks.has(k), k));
   assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\) \+ tabs/);
-  assert.match(gab, /function sinalizacoes\(\)/); assert.match(gab, /function notas\(\)/); assert.match(gab, /toque para marcar hoje/);
+  assert.match(gab, /function sinalizacoes\(\)/); assert.match(gab, /function notas\(\)/); assert.match(gab, /data-et=/);
 });
 
 test('extensão 0.16: modos Processo · Autos · Roteiro de triagem · Produção; peças e inteiro teor em JSON; controles num cartão', () => {
@@ -153,4 +153,11 @@ test('extensão 0.16.4: precedentes relacionados com o critério da gaveta do Ex
   const L = P.relacionados({ cnj: '5000791-85.2025.4.03.6207', assunto: 'Atraso na Entrega do Imóvel' }, C);
   assert.equal(JSON.stringify(L.map(x => x.r.n)), JSON.stringify(['5000001-00.2020.4.03.6000']), 'o próprio processo fica de fora');
   assert.ok(read('extensao/painel.html').includes('src="precedentes.js"'));
+});
+
+test('extensão 0.16.5: dicas em todos os botões e campos; precedentes no Ementário', () => {
+  const html = read('extensao/painel.html'), gab = read('extensao/gabinete.js'), d = read('extensao/dicas.js');
+  assert.ok(html.indexOf('src="dicas.js"') < html.indexOf('</head>'));
+  assert.ok(html.includes('id="acv-prec"'));
+  assert.match(gab, /function dicaCampo\(c\)/); assert.match(d, /MutationObserver/);
 });

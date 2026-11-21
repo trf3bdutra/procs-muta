@@ -8,6 +8,7 @@
 <link rel="icon" href="icones/32.png">
 <link rel="stylesheet" href="painel.css">
 <script src="tema.js"></script>
+<script src="dicas.js"></script>
 </head>
 <body>
 <div class="topo-u" id="topo-u" hidden></div>
@@ -101,6 +102,7 @@
     <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
       
       <div class="wrap">
+        <div id="acv-prec" class="acv-prec"></div>
         <div class="bar acv-top"><a class="btn line sm" id="acv-compendio" title="Mesma base do Ementário do Compêndio: curados do gabinete e série histórica do Relator. A busca roda no navegador; nada é transmitido. Confira a fonte antes de citar." target="_blank" rel="noopener noreferrer">Abrir o Compêndio</a><button class="btn line sm" id="btn-refresh" type="button">Recarregar</button></div>
                 <div id="acv-error" class="err-box" role="alert" hidden></div>
         <p id="acv-status" class="status" role="status" aria-live="polite"></p>

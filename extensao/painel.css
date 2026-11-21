@@ -969,27 +969,14 @@ html[data-tema=escuro] .topo-u{background:#0a1821}
 .pm-l1{flex-wrap:nowrap;min-width:0}.pm-l1 .pc-cnj{font-size:12.5px;white-space:nowrap}
 .pm-l1 .pc-cl,.pm-l1 .pm-tj,.pm-l1 .pm-al{flex:none;white-space:nowrap}
 .pm-l1 .pm-tj{max-width:120px;overflow:hidden;text-overflow:ellipsis}
-/* faixa do processo: escura de ponta a ponta, como a base do app */
-.pc.pm{--fg:#e3ebf2;--muted-fg:#9fb3c4;--line:#27465c;--card:#132a3b;--card2:#132a3b;--soft:#183447;--input:#33566e;--gold:#e6c27a;--field:#0d2130;
-  background:linear-gradient(180deg,#0e2534,#0b1c28)!important;color:#e3ebf2;border:0!important;border-radius:0!important;margin:-9px -11px 0!important;padding:12px 14px 12px!important;box-shadow:none}
-html[data-tema=escuro] .pc.pm{background:linear-gradient(180deg,#081621,#0a1821)!important;border-bottom:1px solid #1e3747!important}
-.pc.pm .pc-cnj{color:#fff}
-.pc.pm .pc-cl{background:transparent;border:1px solid #3a5a70;color:#c9d7e2}
-.pc.pm .pm-tj{background:#e6c27a;color:#0b1c28}.pc.pm .pm-tj.sug{background:transparent;border-color:#6eba8a;color:#9fd6b5}
-.pc.pm .pm-al{background:#4a2622;color:#f2a397}
-.pc.pm .pm-dd{color:#e6c27a}.pc.pm .pm-dd>i{background:#27465c}
-.pc.pm .pm-e.ok .pm-o,.pc.pm .pm-ln>i{background:#2f7a52;border-color:#6eba8a}
-.pc.pm .pm-e.at .pm-o{border-color:#6eba8a;color:#9fd6b5;box-shadow:0 0 0 4px rgba(110,186,138,.15);background:#0b1c28}
-.pc.pm .pm-o{background:#0b1c28}
-.pc.pm .pm-e em{background:#e6c27a;color:#0b1c28}
-.pc.pm .pm-av{background:#14301f;color:#9fd6b5}.pc.pm .pm-pp:nth-child(2) .pm-av{background:#2c2440;color:#c7b6ee}
-.pc.pm .pm-ad-o{background:#2a2716}
-.pc.pm .chip{background:#15303f;border:1px solid #27465c;color:#c9d7e2}
-.pc.pm .pc-dl .pri dd{color:#f2a397}
-.pc.pm .sa-l b,.pc.pm .pm-sit b{color:#e3ebf2}
-.pc.pm .lnk{color:#e6c27a}
-.pc.pm .gp{background:#2e2914;color:#e6c27a}
+/* faixa do processo de ponta a ponta, em tom mais fechado que a página (bege no claro; noite no escuro) */
+.pc.pm{background:hsl(40 30% 90%)!important;border:0!important;border-bottom:1px solid hsl(40 22% 82%)!important;border-radius:0!important;margin:-9px -11px 0!important;padding:12px 14px!important;box-shadow:none}
+.pc.pm .pm-e:not(.ok) .pm-o{background:hsl(40 30% 90%)}
+.pc.pm .pm-pp{background:hsl(40 35% 95%)}
+html[data-tema=escuro] .pc.pm{background:#081621!important;border-bottom-color:#1e3747!important}
+html[data-tema=escuro] .pc.pm .pm-e:not(.ok) .pm-o{background:#081621}html[data-tema=escuro] .pc.pm .pm-pp{background:#0d2130}
 .pc.pm+.pmodos{margin-top:0}
+.pm-et{margin-top:22px}
 /* controles: cartõezinhos compactos, dois por linha; o que está em vigor e tem razão ocupa a linha */
 .ct-l{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 .ct-i{padding:5px 8px;border-radius:8px}.ct-i.wide{grid-column:1/-1}
@@ -1013,3 +1000,18 @@ html[data-tema=escuro] .prec-h a{color:#a9cfe6}
 .prec-l small{font:10px var(--mono);color:var(--gold)}
 .prec-f{display:flex;flex-direction:column;gap:2px;margin-top:6px}.prec-todos{font-size:11.5px;color:var(--gold)}
 .tu-n.muted{font-weight:500}
+/* assunto detalhado: só o ícone, à direita do assunto */
+.pm-as{display:flex;align-items:center;gap:6px}
+.pm-ad-ic{all:unset;cursor:pointer;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;border:1px dashed var(--input);color:var(--muted-fg)}
+.pm-ad-ic:hover{border-color:var(--gold);color:var(--gold)}
+/* autuação: rodapé expansível; fechado, só a alça */
+.pm-aut{margin:8px -14px -12px;font-size:11.5px}
+.pm-aut>summary{list-style:none;cursor:pointer;display:flex;justify-content:center;padding:3px 0 5px;border-top:1px solid hsl(40 22% 82%)}
+.pm-aut>summary::-webkit-details-marker{display:none}
+.pm-aut-h{display:block;width:26px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12' fill='none' stroke='%2390a0aa' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M6 3l6 6 6-6'/%3E%3C/svg%3E") center/18px no-repeat}
+.pm-aut[open]>summary .pm-aut-h{transform:rotate(180deg)}
+.pm-aut>summary:hover .pm-aut-h{filter:brightness(.6)}
+.pm-aut[open]{padding:0 14px 10px}
+html[data-tema=escuro] .pm-aut>summary{border-top-color:#1e3747}
+/* precedentes no topo do Ementário */
+.acv-prec:empty{display:none}.acv-prec{margin-bottom:10px}

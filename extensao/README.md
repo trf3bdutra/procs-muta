@@ -32,6 +32,10 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - **0.16.4:** **Precedentes relacionados** no modo Processo (o mesmo critério da gaveta do Ex Officio: temas, assunto,
   assunto detalhado e questões; curados e série histórica; links para o Ementário do Compendium) — `precedentes.js`; a faixa
   do topo aparece também sem processo aberto e antes do login, com os botões do PJe.
+- **0.16.5:** dicas ao passar o cursor em todos os campos (o que é e o que preencher) e botões (o que fazem) — `dicas.js`
+  e `dicaCampo` em `gabinete.js`; precedentes relacionados no topo da aba Ementário; faixa do processo em bege mais fechado
+  (noite no escuro), sem o título "Etapas"; assunto detalhado só com o ícone à direita do assunto; autuação, partes e
+  situação num rodapé expansível da faixa (fechado, só a alça).
 - Listas curtas e Sim/Não viram botões em todo o prontuário; cabeçalho das abas branco no tema claro.
 
 ## O que muda na 0.15
