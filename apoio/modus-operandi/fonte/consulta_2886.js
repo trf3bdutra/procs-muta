@@ -236,8 +236,9 @@
         return html&&v.trim()?'\u0001V'+k+'\u0003'+v+'\u0002':v;});
     }
     if(!html)return s;
-    return e(s).replace(/\u0001F([a-z0-9_]+)\u0002/g,function(_,k){return '<span class="m28-falta" data-m28v="'+k+'">[VALIDAR: '+e(vdef(k).rotulo)+']</span>';})
-      .replace(/\u0001V([a-z0-9_]+)\u0003([\s\S]*?)\u0002/g,function(_,k,v){return '<span class="fill'+(S.der[k]&&!S.manual[k]?' der':'')+'" data-m28v="'+k+'">'+v+'</span>';});
+    var ce=' contenteditable="plaintext-only" spellcheck="false"';
+    return e(s).replace(/\u0001F([a-z0-9_]+)\u0002/g,function(_,k){return '<span class="m28-falta"'+ce+' data-m28v="'+k+'" title="Clique e escreva: '+e(vdef(k).rotulo)+'">[VALIDAR: '+e(vdef(k).rotulo)+']</span>';})
+      .replace(/\u0001V([a-z0-9_]+)\u0003([\s\S]*?)\u0002/g,function(_,k,v){return '<span class="fill'+(S.der[k]&&!S.manual[k]?' der':'')+'"'+ce+' data-m28v="'+k+'" title="Clique e escreva: '+e(vdef(k).rotulo)+'">'+v+'</span>';});
   }
   function textoFinal(){
     var L=['RELATÓRIO',''];relatorioLinhas().forEach(function(p){L.push(preencher(p,false),'');});
@@ -344,6 +345,20 @@
       return navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([htmlFinal()],{type:'text/html'}),'text/plain':new Blob([t],{type:'text/plain'})})]);}
     return navigator.clipboard.writeText(t);
   }
+  /* ---------- variáveis escritas direto na folha ---------- */
+  var M28ED={};
+  function m28Alvo(ev){return ev.target&&ev.target.closest&&ev.target.closest('#cq-main [data-m28v][contenteditable]');}
+  document.addEventListener('focusin',function(ev){var f=m28Alvo(ev);if(!f)return;M28ED[f.getAttribute('data-m28v')]=0;
+    if(f.classList.contains('m28-falta'))setTimeout(function(){try{var r=document.createRange();r.selectNodeContents(f);var sl=getSelection();sl.removeAllRanges();sl.addRange(r);}catch(er){}},0);});
+  document.addEventListener('input',function(ev){var f=m28Alvo(ev);if(!f)return;var k=f.getAttribute('data-m28v'),v=f.textContent.replace(/\s+/g,' ');
+    if(/^\[VALIDAR:[^\]]*\]$/.test(v.trim()))v='';S.val[k]=v;S.manual[k]=true;M28ED[k]=1;
+    f.classList.toggle('m28-falta',!v.trim());f.classList.toggle('fill',!!v.trim());f.classList.remove('der');
+    Array.prototype.forEach.call(document.querySelectorAll('#cq-main [data-m28v]'),function(o){if(o!==f&&o.getAttribute('data-m28v')===k){o.textContent=v.trim()?v:'[VALIDAR: '+vdef(k).rotulo+']';o.classList.toggle('m28-falta',!v.trim());o.classList.toggle('fill',!!v.trim());}});
+    var i=document.getElementById('m28v-'+k);if(i){i.value=v;if(i.parentNode)i.parentNode.classList.toggle('falta',!v.trim()&&vdef(k).tipo!=='opcoes');var pv=i.parentNode&&i.parentNode.querySelector('.m28-prov');if(pv){pv.className='meta m28-prov manual';pv.textContent='Manual · editado na Consulta';}}});
+  /* ao sair do campo, a folha se recompõe (trechos condicionais, painel de conferência); o canhoto não é redesenhado */
+  document.addEventListener('focusout',function(ev){var f=m28Alvo(ev);if(!f)return;var k=f.getAttribute('data-m28v');if(!M28ED[k])return;M28ED[k]=0;
+    setTimeout(function(){var a=document.activeElement;if(a&&a.closest&&a.closest('#cq-main [data-m28v][contenteditable]'))return;if(CTX.mn)redesenharSemCanhoto();},0);});
+  document.addEventListener('keydown',function(ev){var f=m28Alvo(ev);if(f&&ev.key==='Enter'){ev.preventDefault();f.blur();}});
   /* ---------- API usada pela Consulta ---------- */
   var CTX={};
   function desenhar(){var P=CTX.P,J=CTX.J;CTX.can.innerHTML=canhoto(P,J);CTX.mn.innerHTML=folha(P,J);CTX.or.innerHTML=painel(P,J);ligar();}
@@ -352,7 +367,7 @@
   function ligarFolha(){
     q('#cq-main [data-m28pk]',function(b){if(S.gSugerido&&!S.gManual){b.textContent='Confirme o grupo';setTimeout(function(){b.textContent='Pacote para conferência';},1800);return;}baixar();});
     q('#cq-main [data-m28cp]',function(b){if(S.gSugerido&&!S.gManual){b.textContent='Confirme o grupo';setTimeout(function(){b.textContent=b.getAttribute('data-m28cp')==='txt'?'Copiar como texto':'Copiar a minuta';},1800);return;}copiar(b.getAttribute('data-m28cp')==='txt').then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent=b.getAttribute('data-m28cp')==='txt'?'Copiar como texto':'Copiar a minuta';},1600);},function(){b.textContent='Não foi possível copiar';});});
-    q('#cq-main [data-m28v]',function(b){var el=document.getElementById('m28v-'+b.getAttribute('data-m28v'));if(el){el.focus();el.scrollIntoView({block:'center'});}});
+    /* variáveis na folha: escreve-se no próprio texto (ver os ouvintes de input/focus abaixo); o canhoto acompanha */
     q('#cq-ori [data-m28sair]',function(){CTX.CQ.m28=false;CTX.voltar();});
     q('#cq-ori [data-m28kit]',function(b){S.kit=b.value;CTX.or.innerHTML=painel(CTX.P,CTX.J);ligarFolha();var d=document.querySelector('#cq-ori .m28-kit');if(d)d.open=true;},'onchange');
     q('#cq-ori [data-m28kitcp]',function(b){var K=BASE.m2886kit[S.kit];(navigator.clipboard?navigator.clipboard.writeText(K.texto):Promise.reject()).then(function(){b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar a íntegra';},1500);},function(){b.textContent='Não copiou';});});

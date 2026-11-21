@@ -13,6 +13,8 @@
 #cq-main .cqs{background:#fff;color:#1f2328;border:1px solid #d8d3c6;border-radius:0 0 6px 0;box-shadow:0 1px 2px rgba(32,59,57,.06);padding:0 0 28px;font:15.5px/1.55 Arial,"Liberation Sans",Helvetica,sans-serif;min-height:60vh}
 #cq-main .dpj{padding:16px 28px 6px 56px}
 #cq-main .dtabs{padding-left:22px}
+#cq-main .cqb .band{padding:6px 28px 6px 56px!important}
+#cq-main .cqb .dbody{padding:10px 48px 8px 56px!important}
 #cq-main .cqvz{padding:14px 28px 6px 56px;font:13px/1.6 Inter,"Segoe UI",system-ui,sans-serif;color:#617570}
 #cq-main .cqb{position:relative;cursor:pointer}
 #cq-main .cqb .band .bl{min-width:180px}
@@ -24,6 +26,11 @@
 #cq-main .cqb p.std{text-indent:2.5cm}
 #cq-main .cqb p.xph{font-style:italic;color:#6b7280;text-indent:0;text-align:left}
 #cq-main .fill{background:#f7ecc8;color:#5c430f;box-shadow:inset 0 -1px 0 #d9a83f}
+/* campos preenchíveis: clicar e escrever no próprio texto da folha */
+#cq-main [contenteditable]{cursor:text;border-radius:2px;outline:0;transition:background .12s}
+#cq-main .fill[contenteditable]:hover,#cq-main .m28-falta[contenteditable]:hover{box-shadow:inset 0 -2px 0 #b8862b}
+#cq-main [contenteditable]:focus{background:#fff4cf!important;color:#3d2c06!important;box-shadow:0 0 0 2px #235a55!important}
+#cq-main .fill.preenchido{background:#eaf4ef;color:#1d4f49;box-shadow:inset 0 -1px 0 #7fbf95}
 #cq-main .vs{display:inline-flex;flex-wrap:wrap;border:1px solid #c9d2da;border-radius:4px;overflow:hidden;background:#fff}
 #cq-main .vs button{border:0;border-left:1px solid #dde3e8;background:transparent;padding:3px 9px;font:600 11.5px Inter,"Segoe UI",system-ui,sans-serif;color:#5d6b78;cursor:pointer;max-width:300px;text-align:left}
 #cq-main .vs button:first-child{border-left:0}
