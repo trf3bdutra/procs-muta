@@ -1821,6 +1821,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-hd2-t"><p class="cmt-ey">Gabinete do Des. Fed. Carlos Muta</p><p class="cmt-hd2-h">Painel do <em>Desembargador.</em></p></div>
       <span class="cmt-sp"></span>
       <div class="cmt-ut">
+        <button type="button" class="hb ic" id="cmt-b-bus" title="Buscar item ou processo" aria-label="Buscar item ou processo" aria-controls="cmt-fastnav" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-not" data-cpn="not" title="Notificações" aria-label="Notificações"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span>Notificações</span><i class="bdg" id="cmt-n-not" hidden></i></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-dil" data-cpn="dil" title="Diligências" aria-label="Diligências"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 15l2 2 4-4"/></svg><span>Diligências</span><i class="bdg" id="cmt-n-dil" hidden></i></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-urg" data-cdt="u" title="Urgências" aria-label="Urgências" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg><span>Urgências</span><i class="bdg" id="cmt-n-urg-t" hidden></i></button>
@@ -1830,7 +1831,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       </div>
     <aside class="cmt-fastnav quick-find" id="cmt-fastnav" role="search" aria-label="Buscador rápido da pauta">
         <span class="qf-k">BUSCADOR RÁPIDO</span>
-        <span class="qf-row"><button type="button" class="qf-kb" id="cmt-ir-kb" title="Clique para buscar por processo" aria-label="Buscando por item · clique para trocar">Item</button><select id="cmt-ir-k" aria-label="Localizar por" hidden><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" autocomplete="off" placeholder="nº + Enter" aria-label="Número do item ou processo"></span>
+        <span class="qf-row"><button type="button" class="qf-kb" id="cmt-ir-kb" title="Clique para buscar por processo" aria-label="Buscando por item · clique para trocar">Item</button><select id="cmt-ir-k" aria-label="Localizar por" hidden><option value="item">Item</option><option value="cnj">Processo</option></select><input id="cmt-ir-v" inputmode="numeric" enterkeyhint="go" autocomplete="off" placeholder="nº + Enter" aria-label="Número do item ou processo"></span>
         <small>Localiza e destaca o registro na pauta.</small>
         <button type="button" class="qf-go" id="cmt-ir-go" aria-label="Ir para" title="Ir para (Enter)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         <button type="button" id="cmt-ir-x" class="cmt-fastnav-close" aria-label="Recolher o buscador rápido" title="Recolher">×</button>
@@ -1961,9 +1962,9 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     </aside>
 
     <nav class="cmt-mobile-dock" id="cmt-mobile-dock" aria-label="Acesso rápido aos painéis do desembargador">
-      <button type="button" class="cmt-mobile-action" data-cmt-dock="search" aria-label="Busca" aria-pressed="false" aria-controls="cmt-fastnav" aria-expanded="false">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
-        <span>Busca</span>
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="pauta" aria-label="Pauta" aria-pressed="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg>
+        <span>Pauta</span>
       </button>
       <button type="button" class="cmt-mobile-action" data-cmt-dock="a" aria-label="Assinar" aria-pressed="false">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M7 16l8-8 3 3-8 8H7zM14 6l2-2 3 3-2 2"/></svg>
@@ -1979,11 +1980,6 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v12H8l-4 3V5z"/><path d="M9 10a3 3 0 0 1 6 0c0 2-3 2-3 4M12 16h.01"/></svg>
         <span>Dúvidas</span>
         <i class="cmt-mobile-count" data-cmt-count="d" hidden></i>
-      </button>
-      <button type="button" class="cmt-mobile-action" data-cmt-dock="not" aria-label="Notificações" aria-pressed="false">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>
-        <span>Notificações</span>
-        <i class="cmt-mobile-count" data-cmt-count="not" hidden></i>
       </button>
       <button type="button" class="cmt-mobile-action" data-cmt-dock="dil" aria-label="Diligências" aria-pressed="false">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="17" rx="1"/><path d="M8 2v4M16 2v4M4 10h16M9 16l2 2 4-4"/></svg>
@@ -4208,10 +4204,14 @@ CMT.fsel=CMT.fsel||{};CMT.fsel[s2.getAttribute('data-fc')]=s2.value;cmtPauta();}
 document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#cmt-flimpa'))return;
 CMT.fsel={};CMT.q='';var q=$('#cmt-q');if(q)q.value='';var q2=$('#cmt-q2');if(q2)q2.value='';
 if(CMTMARC.indexOf(CMT.filtro)>=0)CMT.filtro=CMT.aba||'aliberar';cmtPauta();});
+/* Retidos: intercorrência que engloba os retirados de pauta e os adiados para a próxima sessão
+   (resultado registrado, ou intercorrência em aberto que trata de retirada ou adiamento) */
+function cmtRetido(x){if(/^(retirad|adiad)/i.test(x.resultado||''))return true;
+  return x.etapa!=='liberado'&&!!x.intercor&&!x.intercorOk&&/retir|adia/.test(cmtNorm(x.intercor));}
 function cmtTem(lista,cnj){var L=((CMT.dados||{})[lista])||[],d=dgx(cnj);return L.some(function(z){return dgx(z.numero)===d;});}
 function cmtFiltra(){
   var it=((CMT.dados||{}).pauta||{}).itens||[],f=CMT.filtro||'aliberar',q=cmtNorm(CMT.q);if(/^item\s*\d/.test(q))q=q.replace(/^item\s*/,'');
-  var L=f==='todos'?it.slice():f==='aliberar'?it.filter(function(x){return x.etapa!=='liberado';}):f==='retido'?it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;})
+  var L=f==='todos'?it.slice():f==='aliberar'?it.filter(function(x){return x.etapa!=='liberado';}):f==='retido'?it.filter(cmtRetido)
     :f==='sopref'?it.filter(function(x){return !!x.sopref;})
     :f==='minutados'?it.filter(function(x){return !!x.dataMinuta;})
     :f==='corrigidos'?it.filter(function(x){return !!x.dataCorrecao;})
@@ -4238,7 +4238,7 @@ function cmtPauta(){
   var j=CMT.dados,p=j.pauta||{itens:[]},it=p.itens||[];
   var cta={todos:it.length,pendente:0,minutado:0,corrigido:0,liberado:0};
   it.forEach(function(x){cta[x.etapa]=(cta[x.etapa]||0)+1;});
-  var retidos=it.filter(function(x){return x.etapa!=='liberado'&&x.intercor&&!x.intercorOk;}).length;
+  var retidos=it.filter(cmtRetido).length;
   var sesD=$('#cmt-ses-d');if(sesD)sesD.textContent=p.date?br(p.date):'—';
   var nmin0=it.filter(function(x){return x.dataMinuta;}).length,ncor0=it.filter(function(x){return x.dataCorrecao;}).length;
   cta.aliberar=it.length-(cta.liberado||0);cta.retido=retidos;cta.minutados=nmin0;cta.corrigidos=ncor0;
@@ -4249,7 +4249,7 @@ function cmtPauta(){
     var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta');
     var lib=x.etapa==='liberado';
     var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];
-    return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'</td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span>'+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+' em apreciação</span>':'')+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
+    return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'<button type="button" class="cmt-mais-m" aria-label="Ações do item '+esc(String(x.item||''))+'" aria-expanded="false">⋯</button></td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span>'+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+' em apreciação</span>':'')+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
   $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
   var qn=$('#cmt-q-n');if(qn)qn.textContent=(CMT.q||'').trim()?L.length+' de '+it.length:'';
   var qx=$('#cmt-q-x');if(qx)qx.hidden=!(CMT.q||'').trim();
@@ -4266,7 +4266,7 @@ function cmtPauta(){
     '<div><span>Minutados</span><b>'+nmin+'</b><small>de '+it.length+'</small></div>'+
     '<div><span>Corrigidos</span><b>'+ncor+'</b><small>de '+nmin+' minutados</small></div>'+
     '<div><span>Liberados</span><b class="ok">'+(cta.liberado||0)+'</b><small>de '+it.length+'</small></div>'+
-    '<div><span>Retidos</span><b class="al">'+retidos+'</b><small>'+(retidos?'com apontamento':'nenhum retido')+'</small></div>'+
+    '<div><span>Retidos</span><b class="al">'+retidos+'</b><small>'+(retidos?'retirados ou adiados':'nenhum retido')+'</small></div>'+
     '<div class="mk"><span>Próximo marco</span><b class="pq">'+(prox?esc(prox.nome):'sem marco futuro')+'</b><small>'+(prox?br(prox.data)+' · em '+cmtDias(prox.data,j.hoje)+' dias':'cadastre os marcos')+'</small></div>';
   var rtd=it.filter(function(x){return /^retirad/i.test(x.resultado||'');}).length;
   var adiad=it.filter(function(x){return /^adiad/i.test(x.resultado||'');}).length;
@@ -4291,7 +4291,8 @@ function cmtPauta(){
   if(elp)elp.textContent=p.date?'Sessão'+(agS.hora?' · '+agS.hora:'')+(p.previa?' · prévia':''):'Sem pauta';
 var nas=it.filter(function(x){return x.assinado||x.dataAssinatura;}).length,npe=it.length-nmin;
 var pr=$('#cmt-prog');
-if(pr)pr.innerHTML=it.length?'<div class="br"><i class="as" title="Assinados: '+nas+'" style="width:'+(nas*100/it.length)+'%"></i><i class="lb" title="Liberados: '+(cta.liberado||0)+'" style="width:'+(Math.max(0,(cta.liberado||0)-nas)*100/it.length)+'%"></i><i class="co" title="Corrigidos ainda não liberados: '+Math.max(0,ncor-(cta.liberado||0))+'" style="width:'+(Math.max(0,ncor-(cta.liberado||0))*100/it.length)+'%"></i><i class="pe" title="Sem minuta: '+Math.max(0,npe)+'" style="width:'+(Math.max(0,npe)*100/it.length)+'%"></i></div><div class="lg"><span>'+(prox?esc(prox.nome)+' em '+br(prox.data)+' · em '+cmtDias(prox.data,j.hoje)+' dias':'sem marco futuro')+'</span><span style="margin-left:auto">'+(d.marcos&&d.marcos.liberacao&&!(prox&&prox.nome==='Liberação')?'liberação em '+br(d.marcos.liberacao):'')+'</span></div>':'';
+var nco=it.filter(function(x){return x.dataCorrecao&&x.etapa!=='liberado';}).length,nmo=it.filter(function(x){return x.dataMinuta&&!x.dataCorrecao&&x.etapa!=='liberado';}).length,npe2=it.filter(function(x){return !x.dataMinuta&&x.etapa!=='liberado';}).length;
+if(pr)pr.innerHTML=it.length?'<div class="br"><i class="as" title="Assinados: '+nas+'" style="width:'+(nas*100/it.length)+'%"></i><i class="lb" title="Liberados: '+(cta.liberado||0)+'" style="width:'+(Math.max(0,(cta.liberado||0)-nas)*100/it.length)+'%"></i><i class="co" title="Corrigidos ainda não liberados: '+nco+'" style="width:'+(nco*100/it.length)+'%"></i><i class="pe" title="Sem minuta: '+npe2+'" style="width:'+(npe2*100/it.length)+'%"></i></div><div class="lg"><span>'+(prox?esc(prox.nome)+' em '+br(prox.data)+' · em '+cmtDias(prox.data,j.hoje)+' dias':'sem marco futuro')+'</span><span style="margin-left:auto">'+(d.marcos&&d.marcos.liberacao&&!(prox&&prox.nome==='Liberação')?'liberação em '+br(d.marcos.liberacao):'')+'</span></div>'+'<div class="cmt-pl"><span><i class="lb"></i>Liberados '+(cta.liberado||0)+'</span><span><i class="co"></i>Corrigidos '+nco+'</span><span><i class="mi"></i>Minutados '+nmo+'</span><span><i class="pe"></i>Sem minuta '+npe2+'</span></div>':'';
 var lg=$('#cmt-leg');
 if(lg)lg.innerHTML=[['d','Minutado'],['c','Corrigido'],['l','Liberado'],['a','Assinado']].map(function(k){return '<span>'+cmtSvg(CMTICO[k[0]])+k[1]+'</span>';}).join('');if(typeof cmtAtuLote==='function')cmtAtuLote();}
 function cmtCsv(){
@@ -4597,18 +4598,24 @@ function cmtMobileSync(){
  if(more){more.textContent=aba==='m'?'Assinar':'Gabinete';more.setAttribute('aria-label',aba==='m'?'Voltar a Para assinar':'Abrir informações do gabinete');}
  document.querySelectorAll('#cmt-mobile-dock [data-cmt-dock]').forEach(function(bt){
   var k=bt.getAttribute('data-cmt-dock'),active=k==='search'?document.body.classList.contains('cmt-search-on'):
-   k==='not'?pnNot:k==='dil'?pnDil:open&&aba===k;
+   k==='pauta'?!(open||pnNot||pnDil):k==='not'?pnNot:k==='dil'?pnDil:open&&aba===k;
   bt.setAttribute('aria-pressed',String(active));
   if(k==='search')bt.setAttribute('aria-expanded',String(active));
   else{
    var n=c[k]||0,b=bt.querySelector('[data-cmt-count]');
    if(b){b.textContent=n>99?'99+':String(n);b.hidden=!n;}
-   bt.setAttribute('aria-label',({a:'Assinar',u:'Urgências',d:'Dúvidas',not:'Notificações',dil:'Diligências'})[k]+(n?' · '+n+' registros':''));
+   bt.setAttribute('aria-label',({pauta:'Pauta',a:'Assinar',u:'Urgências',d:'Dúvidas',not:'Notificações',dil:'Diligências'})[k]+(n?' · '+n+' registros':''));
   }
  });
+ var vis=$('#cmt-vis'),hh=document.querySelector('.cmt-mobile-pn-h'),h2a=document.querySelector('#cmt-ass>h2');
+ if(vis&&hh&&h2a){if(cmtMobileMode()){if(vis.parentNode!==hh)hh.insertBefore(vis,$('#cmt-mobile-more'));vis.hidden=aba!=='a';}
+  else{if(vis.parentNode!==h2a)h2a.insertBefore(vis,h2a.querySelector('.cmt-sp'));vis.hidden=false;}}
+ var bb=$('#cmt-b-bus');if(bb)bb.setAttribute('aria-expanded',String(document.body.classList.contains('cmt-search-on')));
  if(dr)dr.setAttribute('aria-modal',String(cmtMobileMode()&&open));
  document.body.classList.toggle('cmt-mobile-modal',cmtMobileMode()&&(open||pnNot||pnDil));
 }
+document.addEventListener('click',function(e){var mm=e.target.closest&&e.target.closest('.cmt-mais-m');if(!mm)return;
+ e.preventDefault();e.stopPropagation();var tr=mm.closest('tr');if(!tr)return;var on=tr.classList.toggle('cmt-ac-on');mm.setAttribute('aria-expanded',String(on));},true);
 function cmtMobileSearch(show){
  if(!cmtMobileMode())return;
  if(show){cmtGaveta(false);cmtPainel('not',false);cmtPainel('dil',false);}
@@ -4620,11 +4627,13 @@ document.addEventListener('click',function(e){
  var b=e.target.closest&&e.target.closest('#cmt-mobile-dock [data-cmt-dock]');
  if(b&&cmtMobileMode()){
   e.preventDefault();var k=b.getAttribute('data-cmt-dock');
-  if(k==='search')cmtMobileSearch(!document.body.classList.contains('cmt-search-on'));
+  if(k==='pauta'){cmtGaveta(false);cmtPainel('not',false);cmtPainel('dil',false);document.body.classList.remove('cmt-search-on');cmtMobileSync();window.scrollTo(0,0);}
+  else if(k==='search')cmtMobileSearch(!document.body.classList.contains('cmt-search-on'));
   else if(k==='not'||k==='dil'){var p=$(k==='not'?'#cmt-p-not':'#cmt-p-dil');cmtPainel(k,!!(p&&p.hidden));}
   else{var dr=$('#cmt-dr'),on=!!(dr&&dr.classList.contains('on'));cmtGaveta(!on||cmtAba()!==k,k);}
   return;
  }
+ if(e.target.closest&&e.target.closest('#cmt-b-bus')){e.preventDefault();cmtMobileSearch(!document.body.classList.contains('cmt-search-on'));return;}
  var more=e.target.closest&&e.target.closest('#cmt-mobile-more');
  if(more&&cmtMobileMode()){e.preventDefault();cmtGaveta(true,cmtAba()==='m'?'a':'m');return;}
  if(e.target.closest&&e.target.closest('#cmt-ir-x')){if(cmtMobileMode())cmtMobileSearch(false);else cmtQfMin(true);}
@@ -8950,6 +8959,110 @@ html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee3,html[data-theme=dark] #v-
 /* retirados de pauta e adiados: fundo cinza-claro, acima da cor da etapa */
 #v-pauta.ed #lst .pc.edr.mrw.rx{background:#eeeeec}
 html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.rx{background:rgba(255,255,255,.05)}
+</style>
+<style id="cmt-mobile-redesign">
+/* ===== Painel do Desembargador no celular · redesign de 20/11/2026 =====
+   Última camada de estilo da página: só vale até 780px e só no #v-cmt; o computador não muda. */
+.cmt-mais-m{display:none}
+#v-cmt #cmt-b-bus{display:none!important}
+#cmt-prog .cmt-pl{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:11px;color:var(--em)}
+#cmt-prog .cmt-pl i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+#cmt-prog .cmt-pl i.lb{background:#6d4596}#cmt-prog .cmt-pl i.co{background:#9cc0e0}#cmt-prog .cmt-pl i.mi{background:transparent;box-shadow:inset 0 0 0 1.5px var(--el2)}#cmt-prog .cmt-pl i.pe{background:#e2ded1}
+@media (max-width:780px){
+  /* campos com 16px: o Safari do iPhone deixa de ampliar a tela ao tocar */
+  #v-cmt input,#v-cmt select,#v-cmt textarea{font-size:16px!important}
+
+  /* cabeçalho: marca, busca, notificações e atualizar numa linha, sem a faixa vazia */
+  #v-cmt .cmt-hd2{flex-wrap:nowrap!important;align-items:center!important;min-height:0!important;padding-top:6px!important;padding-bottom:8px!important;gap:8px!important}
+  #v-cmt .cmt-hd2 .cmt-sp{display:none!important}
+  #v-cmt .cmt-hd2-t{flex:1 1 auto!important;min-width:0!important;overflow:hidden!important}
+  #v-cmt .cmt-hd2-h{font-size:16px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #v-cmt .cmt-hd2-h em{font-size:18px!important}
+  #v-cmt .cmt-hd2 .cmt-ey{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;font-size:8.5px!important}
+  #v-cmt .cmt-ut{flex:0 0 auto!important;width:auto!important;margin:0 0 0 auto!important;padding:0!important;border:0!important;background:none!important;gap:2px!important;order:0!important}
+  html body #v-cmt .cmt-ut #cmt-b-not,#v-cmt .cmt-ut #cmt-b-bus{display:inline-flex!important;position:relative;width:36px;height:40px;min-height:40px;padding:0!important;align-items:center;justify-content:center;border:0!important;background:none!important;color:var(--ei)}
+  #v-cmt .cmt-ut #cmt-b-not>span{display:none!important}
+  #v-cmt .cmt-ut #cmt-b-not svg,#v-cmt .cmt-ut #cmt-b-bus svg{width:20px;height:20px}
+  #v-cmt .cmt-ut #cmt-b-not .bdg{position:absolute;top:3px;right:2px}
+  #v-cmt .cmt-ut #cmt-atu2{width:36px!important;height:40px!important;border:0!important;background:none!important}
+
+  /* busca rápida numa linha: Item/Processo, número, ir e fechar */
+  body.cmt-search-on #v-cmt .cmt-fastnav{display:flex!important;align-items:center!important;gap:8px!important;padding:10px 12px!important}
+  body.cmt-search-on #v-cmt .cmt-fastnav .qf-k,body.cmt-search-on #v-cmt .cmt-fastnav>small{display:none!important}
+  body.cmt-search-on #v-cmt .cmt-fastnav .qf-row{flex:1 1 auto!important;min-width:0!important;width:auto!important}
+  body.cmt-search-on #v-cmt .cmt-fastnav #cmt-ir-go{flex:0 0 44px!important;width:44px!important;height:44px!important;min-height:44px!important;padding:0!important;justify-content:center!important;background:var(--eg)!important;color:#fff!important;border-color:var(--eg)!important}
+  body.cmt-search-on #v-cmt .cmt-fastnav #cmt-ir-go::after{content:none!important;display:none!important}
+  body.cmt-search-on #v-cmt .cmt-fastnav #cmt-ir-go svg{width:20px!important;height:20px!important}
+  body.cmt-search-on #v-cmt .cmt-fastnav #cmt-ir-x{position:static!important;flex:0 0 40px!important;width:40px!important;height:44px!important}
+
+  /* pauta de ponta a ponta */
+  #v-cmt #cmt-pauta{margin-left:-12px!important;margin-right:-12px!important;border-left:0!important;border-right:0!important;padding-left:0!important;padding-right:0!important}
+
+  /* placar: sessão numa linha fina e os seis números em grade, sem rolar para o lado */
+  #v-cmt .cmt-placar{padding:0!important;margin:0!important}
+  #v-cmt .cmt-ftl{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:0!important}
+  #v-cmt .cmt-ses-c{position:relative;display:flex!important;flex-direction:row!important;align-items:baseline!important;justify-content:flex-start!important;gap:8px!important;width:auto!important;min-height:0!important;padding:10px 16px!important;border:0!important;border-bottom:1px solid var(--el)!important;background:none!important}
+  #v-cmt .cmt-ses-c #cmt-ses-d{font-size:17px!important;line-height:1.2!important}
+  #v-cmt .cmt-ses-c #cmt-n-pt{font-size:10.5px!important}
+  #v-cmt .cmt-ses-c::after{content:"";width:7px;height:7px;border-right:1.6px solid var(--em);border-bottom:1.6px solid var(--em);transform:rotate(45deg);margin-left:6px;align-self:center}
+  #v-cmt .cmt-ses-c select{position:absolute!important;inset:0!important;opacity:0!important;width:100%!important;height:100%!important}
+  #v-cmt #cmt-ft{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;overflow:visible!important;width:100%!important;border:0!important}
+  #v-cmt #cmt-ft button{min-width:0!important;width:auto!important;padding:9px 12px 8px!important;border:0!important;border-bottom:1px solid var(--el)!important;border-left:1px solid var(--el)!important;text-align:left!important;align-items:flex-start!important}
+  #v-cmt #cmt-ft button:nth-child(3n+1){border-left:0!important}
+  #v-cmt #cmt-ft button b{font-size:20px!important;line-height:1.1!important}
+  #v-cmt #cmt-ft button span{font-size:9.5px!important;letter-spacing:.08em!important}
+  #v-cmt #cmt-ft button[aria-pressed=true]{box-shadow:inset 0 -3px 0 var(--eg)!important}
+  #v-cmt #cmt-prog{padding:10px 16px 4px!important;border:0!important}
+  #v-cmt #cmt-prog .lg{flex-wrap:wrap;gap:2px 10px}
+
+  /* marcadores: só os que têm algo; Filtros vira um botão pequeno na mesma linha */
+  #v-cmt #cmt-pauta .cmt-ph{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:8px!important;padding:10px 16px 12px!important;margin:0!important;border:0!important}
+  #v-cmt #cmt-pauta .cmt-ph-2{order:2!important;flex:0 0 auto!important;width:auto!important;margin:0 0 0 auto!important;padding:0!important;border:0!important}
+  #v-cmt #cmt-pauta #cmt-mfil{width:auto!important;min-height:34px!important;height:34px!important;padding:0 14px!important;border-radius:17px!important}
+  #v-cmt #cmt-pauta #cmt-fsel{order:3!important;flex:1 0 100%!important}
+  #v-cmt #cmt-sit{order:1!important;flex:1 1 0!important;min-width:0!important;margin:0!important;padding:0!important;border:0!important;gap:6px!important}
+  #v-cmt #cmt-sit::before{display:none!important}
+  #v-cmt #cmt-sit .st:not(.on):not(.sel){display:none!important}
+  #v-cmt #cmt-sit .st{min-height:34px!important;padding:0 11px!important;font-size:12.5px!important}
+
+  /* processos de ponta a ponta, sem moldura; as cinco ações ficam no ⋯ */
+  #v-cmt .cmt-tw{margin:0!important;padding:0!important;border-top:1px solid var(--el)!important}
+  #v-cmt #cmt-rows tr{grid-template-columns:30px auto minmax(0,1fr)!important;grid-template-areas:"sel item cnj" "sel assunto assunto" "sel resp resp" "sel etapa etapa" "sel acoes acoes"!important;margin:0!important;border:0!important;border-bottom:1px solid var(--el)!important;border-radius:0!important;box-shadow:none!important;padding:13px 14px 12px 10px!important;column-gap:8px!important}
+  #v-cmt #cmt-rows tr.at{box-shadow:inset 3px 0 0 var(--eo)!important}
+  #v-cmt #cmt-rows td.cmt-ii{align-self:center!important}
+  #v-cmt #cmt-rows td.cnj{display:flex!important;align-items:center!important;gap:6px!important;min-width:0!important}
+  #v-cmt #cmt-rows td[data-l=Servidor]{font-size:12.5px!important;text-transform:none!important;letter-spacing:0!important;white-space:normal!important;overflow:visible!important;margin-top:4px!important;border:0!important;padding:0!important;width:auto!important}
+  #v-cmt #cmt-rows td[data-l=Servidor]::before{content:"Minuta e correção · "!important}
+  #v-cmt #cmt-rows td.cmt-tr{margin-top:10px!important;width:auto!important;border:0!important}
+  #v-cmt #cmt-rows td.cmt-acd{display:none!important}
+  #v-cmt #cmt-rows tr.cmt-ac-on td.cmt-acd{display:block!important;margin-top:10px!important;padding-top:10px!important;border-top:1px dashed var(--el)!important;width:auto!important}
+  #v-cmt #cmt-rows .cmt-mais-m{display:inline-grid!important;place-items:center;margin-left:auto;width:36px;height:30px;border:0;background:none;color:var(--em);font:700 16px/1 Inter,system-ui,sans-serif;letter-spacing:1px;border-radius:8px;cursor:pointer}
+  #v-cmt #cmt-rows tr.cmt-ac-on .cmt-mais-m{background:var(--ep2);color:var(--ei)}
+
+  /* rodapé com cinco abas: Pauta, Assinar, Urgências, Dúvidas e Diligências */
+  #v-cmt .cmt-mobile-dock{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+
+  /* painéis: cabeçalho fino com nome, contagem e um controle; sem Fechar, sem Atualizar e sem o título repetido */
+  #v-cmt #cmt-ass>h2,#v-cmt #cmt-urg-p>h2,#v-cmt #cmt-dv-p>h2{display:none!important}
+  #v-cmt .cmt-mobile-pn-h{gap:8px!important;align-items:center!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-mobile-pn-title{order:0!important;flex:1 1 auto!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-mobile-pn-count{order:1!important;flex:none!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-vis{display:inline-flex!important;flex:none!important;margin:0 0 0 auto!important;order:2!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-vis[hidden]{display:none!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-vis button{min-height:30px!important;height:30px!important;padding:0 10px!important;font-size:12.5px!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-mobile-more{order:3!important;flex:none!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-dr-x,#v-cmt .cmt-mobile-pn-h #cmt-atu,#v-cmt #cmt-p-not .cmt-pn-x,#v-cmt #cmt-p-dil .cmt-pn-x{display:none!important}
+
+  /* urgências rolam com a página (sem caixa com rolagem própria) */
+  #v-cmt #cmt-l-urg{max-height:none!important;overflow:visible!important}
+
+  /* dúvidas: fundamento na largura toda e os botões lado a lado, Deferir à direita */
+  #v-cmt #cmt-dv-p .dv-r{flex-direction:column!important;align-items:stretch!important;gap:8px!important}
+  #v-cmt #cmt-dv-p .dv-r #cmt-dv-tx{width:100%!important;min-height:76px!important}
+  #v-cmt #cmt-dv-p .dv-r .ac{display:grid!important;grid-template-columns:1fr 1.6fr!important;gap:8px!important}
+  #v-cmt #cmt-dv-p .dv-r .ac button{min-height:46px!important;width:100%!important;margin:0!important}
+  #v-cmt #cmt-dv-p .dv-r .ac button:first-child{order:2}
+}
 </style>
 </body>
 </html>

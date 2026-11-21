@@ -6,16 +6,28 @@ const path=require('node:path');
 const vm=require('node:vm');
 const html=fs.readFileSync(path.resolve(__dirname,'../index.html'),'utf8');
 
-test('rodapé fixo contém seis acessos e mantém uma única busca rápida',()=>{
+test('rodapé fixo contém cinco abas; busca e notificações ficam no cabeçalho',()=>{
   const dock=html.match(/<nav class="cmt-mobile-dock"[\s\S]*?<\/nav>/);
   assert.ok(dock,'rodapé próprio do desembargador');
-  for(const key of ['search','a','u','d','not','dil']){
+  for(const key of ['pauta','a','u','d','dil']){
     assert.ok(dock[0].includes('data-cmt-dock="'+key+'"'),key);
     assert.equal((dock[0].match(new RegExp('data-cmt-dock="'+key+'"','g'))||[]).length,1);
   }
-  assert.equal((dock[0].match(/data-cmt-dock=/g)||[]).length,6);
+  assert.equal((dock[0].match(/data-cmt-dock=/g)||[]).length,5);
+  assert.ok(html.includes('id="cmt-b-bus"'),'busca no cabeçalho');
+  assert.ok(html.includes('id="cmt-b-not"'),'notificações no cabeçalho');
+  assert.ok(html.includes('enterkeyhint="go"'));
   assert.equal((html.match(/id="cmt-fastnav"/g)||[]).length,1);
   assert.ok(html.includes('id="cmt-ir-v"'));
+});
+
+test('redesign do celular: ⋯ nas linhas, retidos e barra de progresso',()=>{
+  assert.ok(html.includes('id="cmt-mobile-redesign"'));
+  assert.ok(html.includes('class="cmt-mais-m"'));
+  assert.ok(html.includes('function cmtRetido(x)'));
+  assert.ok(html.includes("f==='retido'?it.filter(cmtRetido)"));
+  assert.ok(!html.includes('Math.max(0,ncor-(cta.liberado||0))'),'corrigidos não podem descontar todos os liberados');
+  assert.ok(html.includes('class="cmt-pl"'));
 });
 
 test('três painéis existentes preservam ids e recebem cabeçalho móvel',()=>{
