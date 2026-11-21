@@ -714,7 +714,7 @@
         "Gratuidade pedida no recurso",
         "Isento (ente público/MP)",
         "Assistência da DPU",
-        "Recolhido sem comprovante STN",
+        "Recolhido sem comprovante do Tesouro (STN)",
         "Recolhido a menor",
         "Recolhido após a interposição",
         "Não recolhido",
@@ -1022,6 +1022,33 @@
        "chave": "Intercorrências",
        "tipo": "texto-longo",
        "secao": "triagem"
+      },
+      {
+       "rotulo": "Situação para julgar",
+       "chave": "Destino - Situação",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Pronto para julgar",
+        "Pendente"
+       ],
+       "vocabulario": "situacao"
+      },
+      {
+       "rotulo": "Outro destino",
+       "chave": "Destino - Outro",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Vista ao MPF",
+        "Devolução ao órgão prolator",
+        "Sobrestamento",
+        "Redistribuição ou prevenção",
+        "Diligência ou intimação",
+        "Baixa ou arquivamento",
+        "Outro"
+       ],
+       "vocabulario": "outro_destino"
       },
       {
        "rotulo": "Destino confirmado em",
@@ -1694,6 +1721,10 @@
      {
       "valor": "Monocrática",
       "rotulo": "Decisão monocrática"
+     },
+     {
+      "valor": "Outro destino",
+      "rotulo": "Outro destino"
      }
     ],
     "regra": "confirmado na triagem (Triagem › Destino); vazio = a definir, com o fluxo da sessão até a confirmação. Sessão (acórdão): designação, minuta, revisão, revisão da ementa, relatório/voto/ementa, liberação e acórdão; Monocrática: designação, minuta, revisão, ato e fundamento (art. 932), decisão, assinatura e publicação"

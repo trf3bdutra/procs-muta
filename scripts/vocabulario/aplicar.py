@@ -37,13 +37,13 @@ grava(pj, js, js0)
 # 2. ficha
 pf = R / 'padrao/ficha.json'
 f0 = pf.read_text(encoding='utf-8'); F = json.loads(f0)
-porchave = {f['ficha']: k for k, f in D['campos'].items() if f.get('ficha')}
+porchave = {f['ficha']: k for k, f in D['campos'].items() if f.get('ficha') and k != 'destino'}
 ROT = {'MPF - Custos Legis': 'Hipótese de intervenção (custos legis)'}
 for a in F['abas']:
     for g in a['grupos']:
         for c in g.get('campos', []):
             k = porchave.get(c.get('chave'))
-            if k and c.get('secao') == 'triagem':
+            if k and c.get('secao') == (D['campos'][k].get('secao') or 'triagem'):
                 c['tipo'] = 'lista'; c['opcoes'] = V.lista(k); c['vocabulario'] = k
                 if c['chave'] in ROT: c['rotulo'] = ROT[c['chave']]
 grava(pf, json.dumps(F, ensure_ascii=False, indent=1) + '\n', f0)

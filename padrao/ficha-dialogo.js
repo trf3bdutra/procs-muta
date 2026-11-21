@@ -83,9 +83,9 @@ function fonteVal(c) { var f = fo(), L = c.fonte || []; for (var i = 0; i < L.le
 function valorCampo(c) { return c.secao ? val(c.secao, c.chave) : fonteVal(c); }
 function editavel(c) { return !!c.secao && c.editavel !== false && !c.calculado; }
 function bloqueado(c) { return (c.chave === 'SERVIDOR' || c.chave === 'CORRETOR') && c.secao === 'producao' && ST.d && ST.d.gestor === false; }
-function destino() { return val('producao', 'Destino') === 'Monocrática' ? 'monocratica' : 'sessao'; }
+function destino() { var v = val('producao', 'Destino'); return v === 'Monocrática' ? 'monocratica' : v === 'Outro destino' ? 'outro' : 'sessao'; }
 /* destino confirmado: "Sessão" ou "Monocrática" (gravado pela triagem ou pelo seletor); vazio = a definir na triagem */
-function destinoDef() { var v = val('producao', 'Destino'); return v === 'Monocrática' ? 'monocratica' : v === 'Sessão' ? 'sessao' : ''; }
+function destinoDef() { var v = val('producao', 'Destino'); return v === 'Monocrática' ? 'monocratica' : v === 'Sessão' ? 'sessao' : v === 'Outro destino' ? 'outro' : ''; } /* destino + situação (colegiado ou monocrática: pronto ou pendente; outro destino) no seletor da ficha */ function destSel() { var v = val('producao', 'Destino'); if (!v) return ''; if (v === 'Outro destino') return 'Outro destino|'; return v + '|' + (val('producao', 'Destino - Situação') || 'Pendente'); }
 function abaDe(nome) { return (F().abas || []).filter(function (a) { return a.aba === nome; })[0]; }
 function slug(s) { return N(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 var CE = 'Controles especiais';
@@ -216,7 +216,7 @@ function faixa() {
     (R.length ? R.map(function (r) { return '<span class="fx-chip t-' + r[2] + '"><i>' + E(r[0]) + '</i>' + E(r[1]) + '</span>'; }).join('') : '<span class="fx-dim">sem regras calculadas</span>') + '</div>' +
     '<ol class="fx-flow" aria-label="Fluxo do processo">' + FL.map(function (s, j) {
       return '<li class="' + (s.feito ? 'is-done' : s.atual ? 'is-cur' : 'is-todo') + '"' + (s.atual ? ' aria-current="step"' : '') + '><span class="fx-dot">' + (s.feito ? svg('ok') : s.atual ? '<i></i>' : '') + '</span>' + (j < FL.length - 1 ? '<span class="fx-line"></span>' : '') +
-        (s.destino ? '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão', 'Sessão'], ['Monocrática', 'Monocrática']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === (destinoDef() === 'monocratica' ? 'Monocrática' : destinoDef() === 'sessao' ? 'Sessão' : '') ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' : '<b>' + E(s.etapa) + '</b>') +
+        (s.destino ? '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão|Pronto para julgar', 'Colegiado · pronto'], ['Sessão|Pendente', 'Colegiado · pendente'], ['Monocrática|Pronto para julgar', 'Monocrática · pronta'], ['Monocrática|Pendente', 'Monocrática · pendente'], ['Outro destino|', 'Outro destino']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === destSel() ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' : '<b>' + E(s.etapa) + '</b>') +
         '<small>' + E([s.quem, s.quando].filter(Boolean).join(' · ')) + '</small></li>';
     }).join('') + '</ol></div>';
 }
@@ -396,7 +396,7 @@ function abaControles(A) {
 function abaResumo() {
   var FL = fluxo(), cur = FL.filter(function (s) { return s.atual; })[0], feitas = FL.filter(function (s) { return s.feito; }).length, f = fo(), P = pendencias(), mono = destino() === 'monocratica';
   var ss = sessoes()[0] || {}, sd = iso(ss.sessao || ss.data || val('pauta', 'Nova sessão de destino'));
-  var defd = destinoDef(), destTxt = !defd ? 'A definir na triagem' : mono ? 'Decisão monocrática' : 'Sessão ' + (brD(sd) || 'a definir'), destSub = mono ? (val('producao', 'Decisão - ID') ? 'ID ' + val('producao', 'Decisão - ID') : val('producao', 'Mono - Tipo de ato') || 'sem pauta') : [ss.item ? 'item ' + ss.item : 'sem item', val('pauta', 'Status de Julgamento').toLowerCase()].filter(Boolean).join(' · ');
+  var defd = destinoDef(), destTxt = !defd ? 'A definir na triagem' : defd === 'outro' ? 'Outro destino' + (val('producao', 'Destino - Outro') ? ': ' + val('producao', 'Destino - Outro') : '') : (mono ? 'Decisão monocrática' : 'Sessão ' + (brD(sd) || 'a definir')) + (val('producao', 'Destino - Situação') ? ' · ' + val('producao', 'Destino - Situação').toLowerCase() : ''), destSub = mono ? (val('producao', 'Decisão - ID') ? 'ID ' + val('producao', 'Decisão - ID') : val('producao', 'Mono - Tipo de ato') || 'sem pauta') : [ss.item ? 'item ' + ss.item : 'sem item', val('pauta', 'Status de Julgamento').toLowerCase()].filter(Boolean).join(' · ');
   var top = '<div class="rs-top"><div class="rs-hero"><div class="rs-step"><span>Próximo passo</span><b>' + E(cur ? ACAO[cur.etapa] || cur.etapa : 'Concluído') + '</b><small>' + E(cur ? [cur.quem, cur.quando].filter(Boolean).join(' · ') : 'todas as etapas feitas') + '</small></div>' +
     '<div class="rs-arrow" aria-hidden="true">»</div><div class="rs-step rs-fim"><span>Destino final</span><b>' + E(destTxt) + '</b><small>' + E(destSub) + '</small></div><div class="rs-prog" title="' + feitas + ' de ' + FL.length + ' etapas"><i style="width:' + Math.round(feitas / FL.length * 100) + '%"></i></div></div>' +
     '<div class="rs-box rs-a3"><span><i class="rs-ic">' + svg('ficha') + '</i>Tarefa do PJe</span><b>' + E(S(f.tarefa_atual) || '—') + '</b><small>' + (iso(f.data_entrada_tarefa) ? 'desde ' + E(brD(iso(f.data_entrada_tarefa))) : 'data de entrada não informada') + '</small></div>' +
@@ -631,7 +631,7 @@ function onClick(ev) {
 }
 function onChange(ev) {
   var t = ev.target;
-  if (t.hasAttribute('data-fx-destino')) { if (t.value === gravado('producao', 'Destino')) return; if (ST.edit) { ST.draft['producao.Destino'] = t.value; render(); } else gravar({ 'producao.Destino': t.value }, t.value === 'Monocrática' ? 'Destino: decisão monocrática.' : t.value === 'Sessão' ? 'Destino: sessão.' : 'Destino a definir na triagem.').catch(function () {}); return; }
+  if (t.hasAttribute('data-fx-destino')) { if (t.value === destSel()) return; var dp = t.value.split('|'), dm = { 'producao.Destino': dp[0] || '', 'producao.Destino - Situação': dp[1] || '' }; if (ST.edit) { Object.assign(ST.draft, dm); render(); } else gravar(dm, dp[0] === 'Monocrática' ? 'Destino: decisão monocrática' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] === 'Sessão' ? 'Destino: colegiado' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] ? 'Destino: outro destino.' : 'Destino a definir na triagem.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-file')) { var f = t.files && t.files[0]; if (f) lerTxt(f); t.value = ''; return; }
   if (t.hasAttribute('data-fx-dest')) { ST.teor.parsed.docs[+t.getAttribute('data-fx-dest')].target = t.value; render(); return; }
   if (t.hasAttribute('data-fx-apply')) { ST.teor.items[+t.getAttribute('data-fx-apply')].apply = t.checked; render(); return; }

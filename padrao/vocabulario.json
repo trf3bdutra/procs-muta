@@ -55,7 +55,7 @@
           "regular"
         ],
         [
-          "Recolhido sem comprovante STN",
+          "Recolhido sem comprovante do Tesouro (STN)",
           "pendente"
         ],
         [
@@ -82,7 +82,8 @@
       "sinonimos": {
         "AJG": "Justiça gratuita",
         "Dispensado": "@dispensado",
-        "Isento (DPU/ente público)": "@isento"
+        "Isento (DPU/ente público)": "@isento",
+        "Recolhido sem comprovante STN": "Recolhido sem comprovante do Tesouro (STN)"
       }
     },
     "repres": {
@@ -354,6 +355,91 @@
         "Embargada": "Embargado(a)",
         "Exequente(s)": "Exequente"
       }
+    },
+    "destino": {
+      "rotulo": "Destino do julgamento",
+      "ficha": "Destino",
+      "secao": "producao",
+      "prontuario": "",
+      "motor": "",
+      "opcoes": [
+        [
+          "Sessão",
+          "na"
+        ],
+        [
+          "Monocrática",
+          "na"
+        ],
+        [
+          "Outro destino",
+          "na"
+        ]
+      ],
+      "sinonimos": {
+        "Colegiado": "Sessão",
+        "Sessão (colegiado)": "Sessão",
+        "Decisão monocrática": "Monocrática"
+      }
+    },
+    "situacao": {
+      "rotulo": "Situação para julgar",
+      "ficha": "Destino - Situação",
+      "secao": "producao",
+      "prontuario": "",
+      "motor": "",
+      "opcoes": [
+        [
+          "Pronto para julgar",
+          "regular"
+        ],
+        [
+          "Pendente",
+          "pendente"
+        ]
+      ],
+      "sinonimos": {
+        "Pronto": "Pronto para julgar",
+        "Pronta": "Pronto para julgar"
+      }
+    },
+    "outro_destino": {
+      "rotulo": "Outro destino",
+      "ficha": "Destino - Outro",
+      "secao": "producao",
+      "prontuario": "",
+      "motor": "",
+      "opcoes": [
+        [
+          "Vista ao MPF",
+          "pendente"
+        ],
+        [
+          "Devolução ao órgão prolator",
+          "na"
+        ],
+        [
+          "Sobrestamento",
+          "pendente"
+        ],
+        [
+          "Redistribuição ou prevenção",
+          "pendente"
+        ],
+        [
+          "Diligência ou intimação",
+          "pendente"
+        ],
+        [
+          "Baixa ou arquivamento",
+          "na"
+        ],
+        [
+          "Outro",
+          "na"
+        ]
+      ],
+      "sinonimos": {}
     }
   }
 }
