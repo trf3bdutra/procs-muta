@@ -63,3 +63,8 @@ test('prontuário: tópico-síntese só é essencial nos casos previdenciários'
   assert.ok(!ehPrev({ assunto: 'Fornecimento de medicamentos', partes: 'FULANO x UNIAO FEDERAL' }));
   assert.ok(app.includes("if(!mono)prtEssencial(el,it);"));
 });
+
+test('prontuário: sem redesenho quando nada mudou; atualização silenciosa sem mudança não redesenha; posição por quadro', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ["if(el._sig===sig&&el.getAttribute('data-k')===S.prt&&el.querySelector('.prt')){prtPos();return;}", 'el._sig=sig;if(sc0)', '(silencioso&&!mud&&S.doc)', "f=requestAnimationFrame(function(){f=0;prtPos();})"]) assert.ok(app.includes(x), x);
+});
