@@ -214,6 +214,7 @@ test('Produtividade: níveis de complexidade (despacho 0,25 · serial 0,5 · pad
   const r=calcular({prod:j,cal:{},equipe:{registros:[{nome:'Ana',papel:'equipe'}]},de:'2026-12-01',ate:'2026-12-01',
     sessoesDocs:[{itens:[it({cnj:'1'}),it({cnj:'2',julgamento:'ED'}),it({cnj:'3',ctl:{meta:'M2A'}}),it({cnj:'4',ctl:{meta:'M7'}}),it({cnj:'5',julgamento:'JR'}),it({cnj:'6',ctl:{lote:{id:'2886'}}}),it({cnj:'7',ctl:{complexidade:'complexa',lote:{id:'x'}}})]}]});
   assert.equal(r.linhas.find(x=>x.nome==='Ana').pontos,1+0.5+2+3+2+0.5+3);
+});
 test('Mesa: indisponível grava na pauta, período sem datas fixas e capacidade descontando outras pautas',()=>{
   const pag=read('caput/designacao/index.html');
   assert.ok(!pag.includes("'2026-11-23', ate=")&&!pag.includes("||'2026-11-27'"),'sem período fixo no código');
