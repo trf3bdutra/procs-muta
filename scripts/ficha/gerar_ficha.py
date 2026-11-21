@@ -103,9 +103,6 @@ def _prod(a):
         g('Revisão do acórdão (ementa)', ['Rev - Ementa', 'Rev - Subementa'], 'sessao'),
         g('Relatório, voto e ementa', ['Relatório Padronizado', 'Adequação Ementa', 'Formatação Subementa', 'Voto - Resultado', 'Voto - Honorários', 'Tópico-síntese', 'Mídias Necessárias', 'Voto - Descrição'], 'sessao'),
         g('Liberação para a sessão', ['LIBERADO', 'Data da Liberação'], 'sessao'),
-        {'grupo': 'Acórdão', 'destino': 'sessao', 'campos': [NOVO('ID do acórdão', 'Acórdão - ID', 'texto'), NOVO('Acórdão assinado', 'Acórdão - Assinado', 'simnao'),
-            NOVO('Acórdão publicado', 'Acórdão - Publicado', 'simnao'), NOVO('Data da publicação', 'Acórdão - Data da publicação', 'data'),
-            NOVO('Embargos de declaração opostos', 'Acórdão - ED opostos', 'simnao'), NOVO('Trânsito em julgado', 'Acórdão - Trânsito', 'data')]},
         # versão monocrática (art. 932)
         {'grupo': 'Ato e fundamento', 'destino': 'monocratica', 'campos': [NOVO('Tipo de ato', 'Mono - Tipo de ato', 'lista', op=TIPO_ATO),
             NOVO('Hipótese do art. 932', 'Hipóteses Monocrática', 'lista', 'triagem', HIP932), NOVO('Precedente ou fundamento', 'Mono - Fundamento', 'texto-longo')]},
@@ -201,6 +198,10 @@ for a in abas:
             {'grupo': 'Espécie e decisão impugnada', 'campos': [C('Espécie', 'Padrão - Espécie', 'lista', 'triagem', ESPECIES, mapa={'ed': 'Embargos de declaração', 'interno': 'Agravo interno', 'retratacao': 'Juízo de retratação'}),
                 C('ID da decisão impugnada', 'Impugnada - ID', 'texto', 'triagem'), C('Data do julgamento / decisão', 'Impugnada - Data', 'data', 'triagem'), C('Órgão julgador', 'Impugnada - Órgão', 'texto', 'triagem'),
                 C('Relator(a)', 'Impugnada - Relator', 'texto', 'triagem'), C('Síntese / ementa', 'Impugnada - Síntese', 'texto-longo', 'triagem')]},
+            # o acórdão recorrido (embargos de declaração): fica na Triagem, não na Produção; as chaves continuam em producao
+            {'grupo': 'Acórdão recorrido (embargos de declaração)', 'campos': [C('ID do acórdão', 'Acórdão - ID', 'texto', 'producao'), C('Acórdão assinado', 'Acórdão - Assinado', 'simnao', 'producao'),
+                C('Acórdão publicado', 'Acórdão - Publicado', 'simnao', 'producao'), C('Data da publicação', 'Acórdão - Data da publicação', 'data', 'producao'),
+                C('Embargos de declaração opostos', 'Acórdão - ED opostos', 'simnao', 'producao'), C('Trânsito em julgado', 'Acórdão - Trânsito', 'data', 'producao')]},
             {'grupo': 'Embargos de declaração', 'quando': {'campo': 'triagem.Padrão - Espécie', 'valor': 'Embargos de declaração'},
              'campos': [C('Vício(s) apontado(s)', 'ED - Vício', 'texto', 'triagem'), C('Ponto dos embargos', 'ED - Ponto', 'texto-longo', 'triagem')]},
             {'grupo': 'Agravo interno', 'quando': {'campo': 'triagem.Padrão - Espécie', 'valor': 'Agravo interno'},

@@ -64,9 +64,10 @@ function controlesDe(fo, op) {
 
 /* ───── estado ───── */
 var ST = { cnj: '', ad: null, d: null, err: '', tab: 'resumo', edit: false, draft: {}, busy: false, view: 'ficha', mostra: {}, histAll: false, teor: null, vz: {}, vzTodos: false };
-/* organização: a aba Pauta fica dentro de "Pauta e controles" (chave Controles especiais); quem abre a ficha na aba Pauta cai nela */
-var PAUTA = 'Pauta', ROT_CE = 'Pauta e controles', PRI_PROC = ['Autuação', 'Partes', 'Tramitação'];
-function tabNorm(t) { return t === PAUTA ? CE : t; }
+/* organização: a aba Pauta fica no fim da Produção (a aba Controles especiais se chama Monitoramento); quem abre a ficha na aba Pauta cai na Produção */
+var PAUTA = 'Pauta', ROT_CE = 'Monitoramento', PRI_PROC = ['Autuação', 'Partes', 'Tramitação'];
+ST.v2 = true;
+function tabNorm(t) { return t === PAUTA ? (ST.v2 ? 'Produção' : CE) : t; }
 function temValor(c) { return c.tipo === 'tabela' ? linhas(c.secao, c.chave).length > 0 : !!S(valorCampo(c)).trim(); }
 var host = null;
 function F() { return ST.d && ST.d.ficha; }
@@ -222,14 +223,62 @@ function faixa() {
 }
 function abas() {
   var P = pendencias(), L = [['resumo', 'Resumo', 0]];
-  (F().abas || []).forEach(function (a) { if (a.aba === PAUTA) return; var n = a.aba === CE ? ativos().length + P.filter(function (p) { return p[1] === PAUTA; }).length : P.filter(function (p) { return p[1] === a.aba; }).length; L.push([a.aba, a.aba === CE ? ROT_CE : a.aba, n, a.aba === CE]); });
+  (F().abas || []).forEach(function (a) { if (a.aba === PAUTA) return; var n = a.aba === CE ? (ST.v2 ? ativos().filter(function (g) { return g !== 'monocratica'; }).length : ativos().length + P.filter(function (p) { return p[1] === PAUTA; }).length) : P.filter(function (p) { return p[1] === a.aba || (ST.v2 && a.aba === 'Produção' && p[1] === PAUTA); }).length; L.push([a.aba, a.aba === CE ? ROT_CE : a.aba, n, a.aba === CE]); });
   return L;
 }
 /* ───── casca v2: topo fino; à esquerda o caso, as etapas, as regras e as pendências; à direita as abas (mesmos campos) ───── */
+/* grupos que a coluna do processo já mostra (etapas): saem da aba na leitura e voltam no modo de edição */
+var FX2_SO_LADO = ['Liberação para a sessão'];
 var FX2_COR = { Pautado: 'p', Minutado: 'm', Corrigido: 'c', Liberado: 'l', 'Sessão': 's', Assinado: 'a', Publicada: 's' };
 var FX2_IC = { Pautado: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>', Minutado: '<path d="M4 20h4L19 9l-4-4L4 16v4z"/>', Corrigido: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', Liberado: '<path d="M4 12l15-7-5 15-3-6z"/>', 'Sessão': '<path d="M12 3v18M5 7h14M7 7l-3 7h6zM17 7l-3 7h6z"/>', Assinado: '<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>', Publicada: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/>' };
 function fx2Sv(d, n) { return '<svg viewBox="0 0 24 24" width="' + (n || 13) + '" height="' + (n || 13) + '" aria-hidden="true">' + d + '</svg>'; }
 function fx2Cl(c) { var k = N(c), M = { 'apelacao civel': 'ApCiv', 'apelacao criminal': 'ApCrim', 'agravo de instrumento': 'AI', 'remessa necessaria civel': 'RemNecCiv', 'remessa necessaria': 'RemNec', 'agravo interno': 'AgInt', 'embargos de declaracao': 'ED', 'mandado de seguranca': 'MS', 'conflito de competencia': 'CC' }; return M[k] || c; }
+/* bloco Monocrática (fim da Produção, quando o destino é monocrática): o título do caso, como no prontuário das monocráticas */
+function fx2MonoX() { try { return JSON.parse(((op().controles || {})._monoExtra) || '{}'); } catch (e) { return {}; } }
+function fx2Mono() {
+  var x = fx2MonoX();
+  return card('Caso da monocrática', (x.titulo ? '<p class="fx2-tit">' + E(x.titulo) + '</p><p class="fx-note">título do caso · aparece no painel do Desembargador (edite no prontuário das monocráticas)</p>' : '<p class="fx-dim">Sem título do caso. Ele é escrito no prontuário das monocráticas e aparece no painel do Desembargador.</p>') +
+    '', { cls: 'fx2-monoc' });
+}
+document.addEventListener('click', function (ev) { var t = ev.target && ev.target.closest && ev.target.closest('#cmt-fx [data-fx-pmv]'); if (!t) return; ST.pmv = t.getAttribute('data-fx-pmv'); ST.pmvCnj = ST.cnj; render(); });
+/* sinalizações dos prontuários (Pauta e Monocráticas): intercorrência, pendências e avisos, mais as pendências calculadas pela ficha */
+function fx2Sinais() {
+  var SG = (ST.d && ST.d.sinais) || [], I = [], dt = function (p) { return [p.por, p.ok ? 'resolvida' + (p.okEm || p.resolvidaEm ? ' em ' + brD(iso(p.okEm || p.resolvidaEm)) : '') : p.em ? brD(iso(p.em)) : ''].filter(Boolean).join(' · '); };
+  SG.forEach(function (o) {
+    if (o.intercor) I.push({ k: 'ic', ok: !!o.intercorOk, t: o.intercorTipo || 'Intercorrência', d: o.intercor, m: [o.origem, o.intercorChamado ? 'chamado ' + o.intercorChamado : '', o.intercorOk ? 'resolvida' : 'retém a liberação'].filter(Boolean).join(' · ') });
+    if (!o.intercor && /^(adiad|retirad)/i.test(o.resultado || '')) I.push({ k: 'ic', ok: !!o.retidoOk, t: /^adiad/i.test(o.resultado) ? 'Adiado' : 'Retirado de pauta', d: o.resultado, m: o.origem });
+    (o.pendencias || []).forEach(function (p) { if (p && p.desc) I.push({ k: 'pd', ok: !!p.ok, t: 'Pendência', d: p.desc, m: [o.origem, dt(p)].filter(Boolean).join(' · ') }); });
+    (o.avisos || []).forEach(function (p) { if (p && p.desc) I.push({ k: 'av', ok: !!p.ok, t: 'Aviso', d: p.desc, m: [o.origem, dt(p)].filter(Boolean).join(' · ') }); });
+  });
+  var P = pendencias(), man = I.map(function (x) { return N(x.d); });
+  P.forEach(function (x) { if (man.indexOf(N(x[0])) < 0) I.push({ k: 'pd', ok: false, t: 'Pendência · calculada', d: x[0], m: 'ficha · aba ' + (x[1] === CE ? ROT_CE : x[1] === PAUTA ? 'Produção' : x[1]), tab: x[1] }); });
+  var n = function (k) { return I.filter(function (x) { return x.k === k && !x.ok; }).length; }, ab = I.filter(function (x) { return !x.ok; }), rs = I.filter(function (x) { return x.ok; });
+  var li = function (x) { return '<' + (x.tab ? 'button type="button" data-fx-tab="' + E(x.tab) + '"' : 'div') + ' class="fx2-sg k-' + x.k + (x.ok ? ' is-ok' : '') + '"><em>' + E(x.t) + '</em><span>' + E(x.d) + '</span><small>' + E(x.m) + '</small></' + (x.tab ? 'button' : 'div') + '>'; };
+  return '<section class="fx2-m"><p class="fx2-sh"><span class="fx2-ic">' + fx2Sv('<path d="M5 21V4h11l-2 4 2 4H5"/>') + '</span>Sinalizações<i>registre e resolva no prontuário</i></p>' +
+    '<div class="fx2-cnt">' + [['ic', 'intercorrência', 'intercorrências'], ['pd', 'pendência', 'pendências'], ['av', 'aviso', 'avisos']].map(function (c) { var v = n(c[0]); return '<span class="k-' + c[0] + (v ? ' on' : '') + '"><b>' + v + '</b>' + (v === 1 ? c[1] : c[2]) + '</span>'; }).join('') + '</div>' +
+    (ab.length ? ab.map(li).join('') : '<p class="fx2-ok">' + svg('ok') + 'Nenhuma sinalização em aberto</p>') + (rs.length ? '<details class="fx2-rs"><summary>' + rs.length + (rs.length > 1 ? ' resolvidas' : ' resolvida') + '</summary>' + rs.map(li).join('') + '</details>' : '') + '</section>';
+}
+/* anotações dos prontuários (Notas sobre o caso), como mensagens */
+function fx2Anot() {
+  var L = []; ((ST.d && ST.d.sinais) || []).forEach(function (o) { (o.notas || []).forEach(function (n) { if (n && n.tx) L.push({ tx: n.tx, por: n.por || '', em: n.em || '', o: o.origem }); }); });
+  L.sort(function (a, b) { return S(a.em).localeCompare(S(b.em)); });
+  var ini = function (n) { n = S(n); var p = n.split(/[\s\/]+/).filter(Boolean); return n ? (p.length > 1 ? p[0][0] + p[1][0] : n.slice(0, 2)).toUpperCase() : '—'; };
+  var hr = function (v) { var d = new Date(v); return isNaN(d) ? '' : brD(iso(v)).slice(0, 5) + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+  return card('Anotações', L.length ? '<div class="fx2-nts">' + L.map(function (n) { return '<div class="fx2-nt"><span class="fx2-av">' + E(ini(n.por)) + '</span><div><p>' + E(n.tx) + '</p><small>' + E([n.por, hr(n.em), n.o].filter(Boolean).join(' · ')) + '</small></div></div>'; }).join('') + '</div>' : '<p class="fx-dim">Sem anotações. As notas escritas nos prontuários da Pauta e das Monocráticas aparecem aqui.</p>', { cls: 'fx2-anot', nota: L.length ? L.length + (L.length > 1 ? ' notas' : ' nota') : '' });
+}
+/* Resumo · rodapé do cartão Processo: a Pauta (no colegiado) ou a Urgência (na monocrática) */
+function fx2RodProc(mono, pau, t) {
+  var h = mono ? (t('Urgência') ? '<div class="rs-tiles">' + [['Medida', t('Urgência')], ['Apreciação', t('Urgência - Apreciação') || 'Pendente · não apreciada', !/^Apreciada/.test(t('Urgência - Apreciação')) ? 'is-warn' : ''], ['Pedido em', brD(iso(t('Urgência - Data')))], ['Nível', t('Urgência - Nível')]].filter(function (x) { return S(x[1]); }).map(function (x) { return '<div class="rs-t ' + (x[2] || '') + '"><span>' + E(x[0]) + '</span><b>' + E(x[1]) + '</b></div>'; }).join('') + '</div>' : '<p class="rs-empty">Sem pedido urgente registrado.</p>') : pau;
+  return '<div class="fx2-rod"><p class="fx2-rodh"><span>' + (mono ? 'Urgência' : 'Pauta') + '</span><button type="button" data-fx-tab="' + (mono ? CE : 'Produção') + '" title="Abrir a aba">Abrir ›</button></p>' + h + '</div>';
+}
+/* produção na coluna (integrada às etapas): quem fez e quando, no colegiado ou na monocrática */
+function fx2Prod() {
+  var p = function (k) { return val('producao', k); }, mono = destino() === 'monocratica', d = function (k) { return brD(iso(p(k))); };
+  var L = mono ? [['Minuta', [p('SERVIDOR'), d('MINUTADO')]], ['Revisão', [p('CORRETOR'), d('Data da Revisão')]], ['Resultado', [p('Voto - Resultado')]], ['Enviada p/ assinatura', [d('Data da Liberação')]], ['Assinada', [sim(p('Assinado')) || iso(p('Data da Assinatura')) ? 'Sim' : '', d('Data da Assinatura')]], ['Publicada', [sim(p('Publicado')) ? 'Sim' : '', d('Mono - Data da publicação')]]]
+    : [['Minuta', [p('SERVIDOR'), d('MINUTADO')]], ['Revisão', [p('CORRETOR'), sim(p('CORRIGIDO')) && !iso(p('Data da Revisão')) ? 'corrigido' : d('Data da Revisão')]], ['Liberado', [sim(p('LIBERADO')) && !iso(p('Data da Liberação')) ? 'Sim' : d('Data da Liberação')]], ['Resultado do voto', [p('Voto - Resultado')]], ['Tópico-síntese', [p('Tópico-síntese')]]];
+  return '<div class="fx2-pro"><p class="fx2-proh"><span>Produção · ' + (mono ? 'monocrática' : 'acórdão') + '</span><button type="button" data-fx-tab="Produção" title="Abrir a aba Produção">Abrir ›</button></p><dl>' +
+    L.map(function (x) { var v = x[1].filter(Boolean).join(' · '); return '<dt>' + E(x[0]) + '</dt><dd' + (v ? '' : ' class="vz"') + '>' + E(v || '—') + '</dd>'; }).join('') + '</dl></div>';
+}
 function fx2Topo() {
   var f = fo(), de = iso(f.data_entrada_tarefa), dd = de ? Math.max(0, Math.round((Date.parse(hoje()) - Date.parse(de)) / 864e5)) : null;
   var L = ST.ad.lista || [], i = L.map(dg).indexOf(dg(ST.cnj));
@@ -246,11 +295,11 @@ function fx2Lado() {
     (as || ta ? '<p class="fx2-as">' + (as ? '<b>' + E(as) + '</b>' : '') + (ta ? '<span>' + E(ta) + '</span>' : '') + '</p>' : '') +
     (partes ? '<p class="fx2-pt" title="' + E(partes) + '">' + fx2Sv('<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15 15c3 0 6 1.5 6 4"/>', 14) + E(partes) + '</p>' : '') + '</section>';
   var FL = fluxo(), nOk = FL.filter(function (x) { return x.feito; }).length, dest = FL.filter(function (x) { return x.destino; })[0];
-  var et = '<p class="fx2-sh"><span class="fx2-ic">' + fx2Sv('<path d="M4 12h4l3-8 4 16 3-8h2"/>') + '</span>Etapas<i>' + nOk + ' de ' + FL.length + '</i></p><ol class="fx2-et" style="--n:' + FL.length + ';--p:' + (FL.length > 1 ? Math.round(Math.max(0, FL.findIndex(function (x) { return !x.feito; }) < 0 ? FL.length - 1 : FL.findIndex(function (x) { return !x.feito; })) / (FL.length - 1) * 100) : 0) + '%" aria-label="Fluxo do processo"><i class="fx2-ln"><i></i></i>' +
-    FL.map(function (x) { return '<li class="c-' + (FX2_COR[x.etapa] || 'p') + (x.feito ? ' is-done' : x.atual ? ' is-cur' : '') + '"' + (x.atual ? ' aria-current="step"' : '') + ' title="' + E([x.etapa, x.quem, x.quando].filter(Boolean).join(' · ')) + '">' + (x.atual ? '<em class="fx2-ag">agora</em>' : '') + '<span class="fx2-c">' + fx2Sv(x.feito ? '<path d="M5 12.5l4.5 4.5L19 7.5"/>' : FX2_IC[x.etapa] || '', 14) + '</span><b>' + E(x.etapa) + '</b><small>' + E(x.quando && x.quando !== 'sem data' && x.quando !== 'pendente' && x.quando !== 'aguardando' && x.quando !== 'sem sessão' ? x.quando : '—') + '</small></li>'; }).join('') + '</ol>' +
-    '<div class="fx2-dest"><span><small>Destino do julgamento</small><b>' + E(dest ? [dest.quem, dest.quando].filter(function (v) { return v && v !== '—'; }).join(' · ') || 'a definir' : 'a definir') + '</b></span><label class="fx2-sel"><select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão|Pronto para julgar', 'Colegiado · pronto'], ['Sessão|Pendente', 'Colegiado · pendente'], ['Monocrática|Pronto para julgar', 'Monocrática · pronta'], ['Monocrática|Pendente', 'Monocrática · pendente'], ['Outro destino|', 'Outro destino']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === destSel() ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label></div>';
-  var R = regras(), rg = '<p class="fx2-sh"><span class="fx2-ic">' + svg('rule') + '</span>Regras<i>calculadas</i></p><div class="fx2-rg">' + (R.length ? R.map(function (r) { return '<span class="fx2-ch t-' + r[2] + '"><i>' + E(r[0]) + '</i>' + E(r[1]) + '</span>'; }).join('') : '<span class="fx-dim">sem regras calculadas</span>') + '</div>';
-  var P = pendencias(), pd = '<p class="fx2-sh"><span class="fx2-ic">' + fx2Sv('<path d="M5 21V4h11l-2 4 2 4H5"/>') + '</span>Pendências<i>' + (P.length || 'nenhuma') + '</i></p>' + (P.length ? P.map(function (x) { var ce = x[1] === CE || x[1] === PAUTA; return '<button type="button" class="fx2-sg' + (ce ? ' is-ce' : '') + '" data-fx-tab="' + E(x[1]) + '" title="Abrir a aba ' + E(x[1] === CE ? ROT_CE : x[1]) + '"><em>' + E(x[1] === CE ? 'Controles' : x[1]) + '</em><span>' + E(x[0]) + '</span></button>'; }).join('') : '<p class="fx2-ok">' + svg('ok') + 'Sem pendências registradas</p>');
+  var et = '<section class="fx2-m"><p class="fx2-sh"><span class="fx2-ic">' + fx2Sv('<path d="M4 12h4l3-8 4 16 3-8h2"/>') + '</span>Etapas<i>' + nOk + ' de ' + FL.length + '</i></p><ol class="fx2-et" style="--n:' + FL.length + ';--p:' + (FL.length > 1 ? Math.round(Math.max(0, FL.findIndex(function (x) { return !x.feito; }) < 0 ? FL.length - 1 : FL.findIndex(function (x) { return !x.feito; })) / (FL.length - 1) * 100) : 0) + '%" aria-label="Fluxo do processo"><i class="fx2-ln"><i></i></i>' +
+    FL.map(function (x) { return '<li class="c-' + (FX2_COR[x.etapa] || 'p') + (x.feito ? ' is-done' : x.atual ? ' is-cur' : '') + '"' + (x.atual ? ' aria-current="step"' : '') + ' title="' + E([x.etapa, x.quem, x.quando].filter(Boolean).join(' · ')) + '">' + (x.atual ? '<em class="fx2-ag">agora</em>' : '') + '<span class="fx2-c">' + fx2Sv(x.feito ? '<path d="M5 12.5l4.5 4.5L19 7.5"/>' : FX2_IC[x.etapa] || '', 14) + '</span><b>' + E(x.etapa) + '</b><small>' + E(x.quando && x.quando !== 'sem data' && x.quando !== 'pendente' && x.quando !== 'aguardando' && x.quando !== 'sem sessão' ? String(x.quando).replace(/^(\d{2}\/\d{2})\/\d{4}$/, '$1') : '—') + '</small></li>'; }).join('') + '</ol>' +
+    fx2Prod() + '</section>';
+  var R = regras(), rg = '<section class="fx2-m"><p class="fx2-sh"><span class="fx2-ic">' + svg('rule') + '</span>Regras<i>calculadas</i></p><div class="fx2-rg">' + (R.length ? R.map(function (r) { return '<span class="fx2-ch t-' + r[2] + '"><i>' + E(r[0]) + '</i>' + E(r[1]) + '</span>'; }).join('') : '<span class="fx-dim">sem regras calculadas</span>') + '</div></section>';
+  var pd = fx2Sinais();
   return '<aside class="fx2-side" aria-label="O processo">' + caso + et + rg + pd + '</aside>';
 }
 function fichaView() {
@@ -379,6 +428,13 @@ function campo(c) {
 }
 var grade = function (campos) { return '<div class="fx-grid">' + campos.map(campo).join('') + '</div>'; };
 function abaGrupos(A) {
+  if (ST.v2 && (A.aba === CE || A.aba === 'Produção')) {
+    /* Monitoramento: só os controles de acompanhamento. Pauta (ou, na monocrática, o caso e o controle da monocrática) vai para o fim da Produção */
+    var mn = ((abaDe(CE) || {}).grupos || []).filter(function (g) { return g.controle === 'monocratica'; });
+    if (A.aba === CE) return abaControles({ grupos: (A.grupos || []).filter(function (g) { return g.controle !== 'monocratica'; }) });
+    var AP2 = abaDe(PAUTA), mono = destino() === 'monocratica';
+    return abaGruposCorpo(A) + (mono ? '<h3 class="fx-sub">Monocrática</h3>' + fx2Mono() + abaControles({ grupos: mn }, true) : AP2 ? '<h3 class="fx-sub">Pauta</h3>' + abaGruposCorpo(AP2) : '');
+  }
   if (A.aba === CE) { var AP = abaDe(PAUTA); return abaControles(A) + (AP ? '<h3 class="fx-sub">' + E(PAUTA) + '</h3>' + abaGruposCorpo(AP) : ''); }
   return abaGruposCorpo(A);
 }
@@ -388,7 +444,7 @@ function abaGruposCorpo(A) {
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
   if (A.seletor) h += '<p class="fx-info-p">' + svg('rule') + '<span><b>' + E(A.seletor.rotulo) + ':</b> ' + (dn === 'monocratica' ? 'decisão monocrática' : destinoDef() ? 'sessão (acórdão)' : 'a definir na triagem (o fluxo mostra o da sessão)') + '. ' + E(A.seletor.regra || '') + '</span></p>';
   if (A.aba === 'Triagem') h += cardDestino() + cardTempest();
-  var gs = (A.grupos || []).filter(function (g) { return (!g.destino || g.destino === dn) && grupoVisivel(g); }), vazios = [];
+  var gs = (A.grupos || []).filter(function (g) { return (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
   h += gs.map(function (g) {
     var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
@@ -407,7 +463,7 @@ function cardDestino() {
   var est = d ? '<b>' + (d === 'monocratica' ? 'Decisão monocrática' : 'Sessão (colegiado)') + '</b> <span class="fx-dim">· confirmado' + (iso(em) ? ' em ' + E(brD(iso(em))) : '') + (por ? ' por ' + E(por) : '') + '</span>' : '<b>A definir</b> <span class="fx-dim">· o processo segue na fila de triagem até a confirmação</span>';
   var bt = function (v, t, on) { return '<button type="button" class="fx-pill' + (on ? ' is-on' : '') + '" data-fx-confdest="' + v + '"' + (ro || on ? ' disabled' : '') + '>' + t + '</button>'; };
   var acoes = bt('Sessão', 'Confirmar sessão', d === 'sessao') + bt('Monocrática', 'Confirmar monocrática', d === 'monocratica') + (d ? '<button type="button" class="fx-pill fx-mini" data-fx-confdest=""' + (ro ? ' disabled' : '') + '>Desfazer</button>' : '');
-  return card('Destino do julgamento', '<p>' + est + '</p>' + (hip && hip !== 'Não se aplica' ? '<p class="fx-note">Hipótese de monocrática anotada: ' + E(hip) + '</p>' : '') + '<div class="fx-acts">' + acoes + '</div>', { cls: 'fx-destino' + (d ? ' is-ok' : ' is-warn') });
+  return card('Destino do julgamento', '<p>' + est + '</p>' + (hip && hip !== 'Não se aplica' ? '<p class="fx-note">Hipótese de monocrática anotada: ' + E(hip) + '</p>' : '') + (ST.v2 ? '<label class="fx2-dsel"><span>Destino</span>' + '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão|Pronto para julgar', 'Colegiado · pronto'], ['Sessão|Pendente', 'Colegiado · pendente'], ['Monocrática|Pronto para julgar', 'Monocrática · pronta'], ['Monocrática|Pendente', 'Monocrática · pendente'], ['Outro destino|', 'Outro destino']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === destSel() ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' + '</label>' : '<div class="fx-acts">' + acoes + '</div>'), { cls: 'fx-destino' + (d ? ' is-ok' : ' is-warn') });
 }
 /* tempestividade calculada pelo calendário forense do gabinete (padrao/calendario-forense.js) */
 function cardTempest() {
@@ -428,9 +484,9 @@ function infoCE(g) {
   if (g === 'urgencia' && (x = L.urgAuto)) return 'Etiqueta do PJe: ' + x;
   return '';
 }
-function abaControles(A) {
+function abaControles(A, si) {
   var n = 0;
-  return '<p class="fx-info-p">' + svg('shield') + '<span>Grupos oficiais de acompanhamento. Cada um vale para o processo pela sua regra; os campos ficam no registro do processo (operacional) e são os mesmos das páginas de controle.</span></p>' +
+  return (si ? '' : '<p class="fx-info-p">' + svg('shield') + '<span>Grupos oficiais de acompanhamento. Cada um vale para o processo pela sua regra; os campos ficam no registro do processo (operacional) e são os mesmos das páginas de controle.</span></p>') +
     (A.grupos || []).map(function (g) {
       var id = g.controle, v = vale(id), ab = v || ST.mostra[id], inf = infoCE(id), inc = CE_INC[id];
       var chip = '<span class="fx-chip ' + (v ? 't-ok' : 't-neutro') + '" style="margin-left:6px">' + (v ? 'vale para este processo' : 'não se aplica') + '</span>';
@@ -452,17 +508,18 @@ function abaResumo() {
   var col = function (tit, aba, cls, corpo) { return '<section class="rs-col rs-c-' + cls + '"><h4><span class="rs-ic">' + svg(cls === 'tri' ? 'rule' : cls === 'pro' ? 'edit' : cls === 'ce' ? 'shield' : 'ficha') + '</span><span>' + E(tit) + '</span><button type="button" data-fx-tab="' + E(aba) + '" title="Abrir a aba">Abrir ›</button></h4>' + corpo + '</section>'; };
   var tri = kv([['Tempestividade', nv(t('Tempestividade')) ? 'Não verificado' : t('Tempestividade'), nv(t('Tempestividade')) ? 'is-warn' : ''], ['Preparo', nv(t('Preparo')) ? 'Não verificado' : t('Preparo'), nv(t('Preparo')) ? 'is-warn' : ''], ['Representação', nv(t('Representação')) ? 'Não verificado' : t('Representação'), nv(t('Representação')) ? 'is-warn' : ''],
     ['MPF', [t('MPF'), t('Parecer - Sentido')].filter(Boolean).join(' · ')], ['Mídias', t('Mídias')], ['AJG · DPU', [sim(t('AJG')) ? 'AJG' : '', sim(t('DPU (controle)')) ? 'DPU' : ''].filter(Boolean).join(' · ')], ['Tipo de julgamento', t('Tipo de Julgamento')], ['Complexidade', t('COMPLEXIDADE')]]);
+  if (ST.v2) tri = '<div class="fx2-dsr' + (defd ? '' : ' is-warn') + '"><span>Destino do julgamento</span><b>' + E(destTxt) + '</b><button type="button" data-fx-tab="Triagem" title="Alterar na aba Triagem">Alterar ›</button></div>' + tri;
   var pro = kv(mono ? [['Servidor', p('SERVIDOR')], ['Minutado em', brD(iso(p('MINUTADO')))], ['Corretor', p('CORRETOR')], ['Revisado em', brD(iso(p('Data da Revisão')))], ['Tipo de ato', p('Mono - Tipo de ato')], ['Resultado', p('Voto - Resultado')], ['Enviada para assinatura', brD(iso(p('Data da Liberação')))], ['Assinada', sim(p('Assinado')) ? 'Sim' : '']]
     : [['Servidor', p('SERVIDOR')], ['Minutado em', brD(iso(p('MINUTADO')))], ['Corretor', p('CORRETOR')], ['Corrigido', sim(p('CORRIGIDO')) ? 'Sim' : brD(iso(p('Data da Revisão')))], ['Liberado', sim(p('LIBERADO')) ? 'Sim' : brD(iso(p('Data da Liberação')))], ['Resultado do voto', p('Voto - Resultado')], ['Tópico-síntese', p('Tópico-síntese')]]);
   var SS = sessoes(), pau = mono ? '<p class="rs-empty">Decisão monocrática: não vai à pauta.</p>' : kv([['Status', val('pauta', 'Status de Julgamento')], ['Sessão original', brD(iso(val('pauta', 'Sessão original')))], ['Sessão de destino', brD(iso(val('pauta', 'Nova sessão de destino')))], ['Seleção', val('pauta', 'JULGAMENTO')]]) +
     (SS.length ? '<ol class="rs-tl">' + SS.slice(0, 6).map(function (s) { return '<li><b class="fx-mono">' + E(brD(iso(s.sessao || s.data)) || s.sessao) + '</b> ' + E([s.item ? 'item ' + s.item : '', s.resultado || ''].filter(Boolean).join(' · ')) + '</li>'; }).join('') + '</ol>' : '');
-  var A = ativos(), ce = A.length ? '<div class="rs-tiles">' + A.map(function (g) {
+  var A = ativos().filter(function (g) { return !ST.v2 || g !== 'monocratica'; }), ce = A.length ? '<div class="rs-tiles">' + A.map(function (g) {
     var v = g === 'urgencia' ? [t('Urgência'), t('Urgência - Apreciação')].filter(Boolean).join(' · ') : g === 'monocratica' ? p('Mono - Tipo de ato') || 'registrada' : g === 'meta' ? val('controles', 'Meta - Situação') || ((naLista().metas || {}).metas || []).map(function (m) { return 'Meta ' + m; }).join(', ') || t('META')
       : g === 'sobrestamento' ? [val('controles', 'Sobrestamento - Motivo') || (naLista().sobrestados || {}).motivoAuto, val('controles', 'Sobrestamento - Tema')].filter(Boolean).join(' · ') : val('controles', 'Sensível - Categoria') || (naLista().sensiveis || {}).catAuto;
     return '<div class="rs-t ' + (g === 'urgencia' && !/^Apreciada/.test(t('Urgência - Apreciação')) ? 'is-warn' : '') + '"><span>' + E({ urgencia: 'Urgência', monocratica: 'Monocrática', meta: 'Meta', sobrestamento: 'Sobrestamento', sensivel: 'Caso sensível' }[g]) + '</span><b>' + E(v || 'sim') + '</b></div>';
   }).join('') + '</div>' : '<p class="rs-empty">Nenhum controle especial vale para este processo.</p>';
   var pr = kv([['Partes', [S(f.polo_ativo || f.Polo_Ativo), S(f.polo_passivo || f.Polo_Passivo)].filter(Boolean).join(' × ')], ['Seção', S(f['Seção Competente'])], ['Distribuição', brD(iso(f['data_distribuição'] || f['Data_Distribuição']))], ['Última movimentação', [S(f.ultimo_movimento || f['Última_Movimentação']), brD(iso(f['Data Último Movimento'] || f['Data_Última_Movimentação']) || S(f['Data Último Movimento']))].filter(Boolean).join(' · ')], ['Sentença', [val('origem', 'Sentença - Decisão'), val('origem', 'Sentença - ID') ? 'ID ' + val('origem', 'Sentença - ID') : ''].filter(Boolean).join(' · ')], ['Responsável', val('origem', 'Responsável')], ['Próxima ação', val('origem', 'Próxima ação')]]);
-  return top + (ST.v2 ? '' : pend) + resumoObs() + '<div class="rs-grid"><div class="rs-stack">' + col('Triagem', 'Triagem', 'tri', tri) + col(CE, CE, 'ce', ce) + '</div><div class="rs-stack">' + col(mono ? 'Pauta' : 'Pauta', 'Pauta', 'jul', pau) + col('Processo', 'Processo', 'processo', pr) + '</div><div class="rs-stack">' + col('Produção · ' + (mono ? 'monocrática' : 'acórdão'), 'Produção', 'pro', pro) + '</div></div>';
+  return top + (ST.v2 ? '' : pend) + (ST.v2 ? fx2Anot() : resumoObs()) + '<div class="rs-grid"><div class="rs-stack">' + col('Triagem', 'Triagem', 'tri', tri) + col(ST.v2 ? ROT_CE : CE, CE, 'ce', ce) + '</div><div class="rs-stack">' + (ST.v2 ? col('Processo', 'Processo', 'processo', pr + fx2RodProc(mono, pau, t)) : col(mono ? 'Pauta' : 'Pauta', 'Pauta', 'jul', pau) + col('Processo', 'Processo', 'processo', pr)) + (ST.v2 ? '' : '</div><div class="rs-stack">' + col('Produção · ' + (mono ? 'monocrática' : 'acórdão'), 'Produção', 'pro', pro)) + '</div></div>';
 }
 
 /* Observações no Resumo: o texto formatado à vista; "Colar resumo" abre o campo ali mesmo (colar já padroniza) e grava só ele */

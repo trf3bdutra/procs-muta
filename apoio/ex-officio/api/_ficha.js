@@ -253,7 +253,18 @@ module.exports = async (req, res, u) => {
       const naLista = mod => require(mod).base().then(B => (Array.isArray(B) ? B : B.lista).find(x => dg(x.cnj) === dg(cnj)) || null).catch(() => null);
       const [bMeta, bSobr, bSens] = await Promise.all([naLista('./_metas'), naLista('./_sobr'), naLista('./_sens')]);
       const op = registro(doc, cnj, F, false) || null;
-      return res.status(200).json({ ficha: F, operacional: op, fonte, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
+      /* sinalizações e anotações dos prontuários: o cartão do processo nas pautas em curso e, nas monocráticas, o registro extra */
+      const sinais = [];
+      try {
+        (await ondeEsta(cnj)).forEach(o => o.its.forEach(i => { const c = i.ctl || {}, ca = c.cartao || {};
+          sinais.push({ origem: 'Pauta de ' + o.path.slice(-10, -5).split('-').reverse().join('/'), intercor: c.intercor || '', intercorTipo: c.intercorTipo || '', intercorOk: c.intercorOk || '', intercorChamado: c.intercorChamado || '', retidoOk: c.retidoOk || '',
+            resultado: i.resultado || '', pendencias: ca.pendencias || [], avisos: ca.avisos || [], notas: ca.notas || [] }); }));
+      } catch (e) { /* sem pauta em curso legível: segue só com o registro */ }
+      if (op) { let x = {}; try { x = JSON.parse((op.controles || {})._monoExtra || '{}'); } catch (e) {}
+        const ca = x.cartao || {}, ic = (op.triagem || {})['Intercorrências'] || '';
+        if (ic || (ca.pendencias || []).length || (ca.avisos || []).length || (ca.notas || []).length)
+          sinais.push({ origem: 'Monocrática', intercor: ic, intercorTipo: x.intercorTipo || '', intercorOk: x.intercorOk || '', intercorChamado: x.intercorChamado || '', retidoOk: x.retidoOk || '', resultado: '', pendencias: ca.pendencias || [], avisos: ca.avisos || [], notas: ca.notas || [] }); }
+      return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     const b = req.body || {}, cnj = String(b.cnj || ''), C = b.campos || {}, E = editaveis(F), mud = {}, recus = [];
