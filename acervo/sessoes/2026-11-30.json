@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T09:54:27.902Z",
+ "atualizadoEm": "2026-11-21T10:54:51.123Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -31,6 +31,27 @@
      "papeis": [
       "Autor(a)",
       "Réu/ré"
+     ],
+     "obsGeral": "Preparo não recolhido",
+     "pendencias": [
+      {
+       "desc": "Os autos deste processo não foram extraídos para o acervo: nenhum ID foi conferido (251721335, f. 5/17, 175/184, 192/199 e 206/234; 338487254; 338487258; 397864919; 395552845; 403337042; 329478470). O parágrafo novo do relatório usa apenas IDʼs e fatos que o próprio voto já afirma.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A minuta está liberada no PJe (relatório, voto e ementa marcados) com o texto original; a versão corrigida só vale se for colada no editor antes da sessão.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 0002516-20.2008.4.03.6005 (monocrática, DJEN 01/10/2026), que manteve a improcedência pela não adesão ao acordo da ADPF 165 e afastou a majoração do artigo 85, § 11, do CPC (Enunciado Administrativo 7/STJ), como a minuta; e ApCiv 0001772-31.2008.4.03.6003 (monocrática, DJEN 04/08/2026), na mesma linha.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
      ]
     },
     "editadoPor": "Bruno",
@@ -38,7 +59,12 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13"
+    "planilhaDataMinuta": "2026-11-13",
+    "lote": {
+     "id": "acorrigir",
+     "item": 1,
+     "autos": 0
+    }
    }
   },
   {
@@ -113,6 +139,24 @@
        "ok": false,
        "em": "2026-11-21",
        "por": "Bruno"
+      },
+      {
+       "desc": "Honorários recursais (V54): a origem fixou R$ 2.000,00 por equidade (artigo 85, § 8º, do CPC), e o voto majora “no equivalente a 1%, a ser acrescido ao fixado na origem”, sem base percentual. Definir a majoração em valor (por exemplo, “majorados para R$ …”).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes não conferidos em fonte oficial: REsp 2.151.392 (DJEN 24/04/2026) e ApCiv 5002647-64.2018.4.03.6002 (DJEN 27/03/2026).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5002079-83.2021.4.03.6118 (1ª Turma, DJEN 18/12/2023), já citada no voto, sobre litisconsórcio afastado e perícia judicial em remoção por saúde; e ApCiv 5004772-72.2019.4.03.6130 (1ª Turma, Intimação via sistema 01/03/2024).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "tipoJ": "Apelação",
@@ -299,6 +343,30 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Decisão do Relator registrada."
+      },
+      {
+       "desc": "Litispendência (V30 e item 10 da ementa): a consulta processual ao cumprimento de sentença 5002016-82.2025.4.03.6000 e o ID 357984129 “daqueles autos” não constam dos autos extraídos. Conferir no PJe a sentença extintiva, a apelação e as contrarrazões do INSS naquele feito, e a anterioridade da propositura deste.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Texto do modelo vigente 2886-1d preservado, com as expressões “pedidos formulado” (V4), “pois igualmente sentença” (V11), “Porém,” (V13), “categoricamente” (V15), “somente aplica-se” (V18), “restrinja-se” (V20) e “absolutamente” (V23). Se o gabinete quiser corrigi-las, o ajuste deve ser feito no próprio modelo.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Precedentes do Relator (fundamentação diversa): na ApCiv 5008082-15.2024.4.03.6000 (Turma Regional, DJEN 08/10/2026), a litispendência alegada em contrarrazões foi remetida à origem, por exigir verificação individualizada com contraditório. A minuta afirma que a questão deve ser decidida no outro feito, com base em consulta processual que não consta dos autos. Considerar a fórmula daquele acórdão.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
       }
      ],
      "papeis": [
@@ -524,6 +592,36 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote 2886"
+      },
+      {
+       "desc": "V25: o ID 393380619 (fichas financeiras do SIAPE) não consta dos autos extraídos; a sentença cita as fichas pelo ID 335711137, do primeiro grau. Conferir no PJe o ID de segundo grau.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Memoriais da União (ID 406638692): acrescentados ao relatório; o pedido subsidiário de prescrição foi declarado prejudicado (V29 e item 8 da ementa). O pedido de prequestionamento não é enfrentado. Confirmar com o Relator.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Texto do modelo vigente 2886-3a preservado, com “Como se observa a legislação” sem vírgula (V12), “(artigo 85, § 11, CPC)” (V30 e item 9 da ementa), “DESPROVIMENTO. HONORÁRIOS RECURSAIS.” (cabeçalho) e “TRF3” e “DJEN de” (rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5008090-89.2024.4.03.6000, ApCiv 5008339-40.2024.4.03.6000 e ApCiv 5006221-91.2024.4.03.6000 (Turma Regional, DJEN 08/10/2026), extinção por acordo administrativo mantida.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
       }
      ],
      "rel": {
@@ -705,6 +803,36 @@
        "desc": "Parágrafos fora do modelo (\"Tampouco procedem…\" e \"O item II da tese…\"), com Tema 480/STJ — manter?",
        "ok": false,
        "em": "2026-11-19",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "A sentença não consta dos autos extraídos, que começam na apelação (ID 391290191); R1 foi mantido como na minuta. Conferir no PJe.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Memoriais juntados em 19/11/2026 (ID 413719590), sem texto nos autos extraídos. Conferir o conteúdo e, se for o caso, acrescentá-los ao relatório.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Texto do modelo vigente 2886-1d preservado (inclusive “pedidos formulado”, “pois igualmente sentença”, “somente aplica-se”, “restrinja-se” e “TRF3” no rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo; a atribuição do artigo 2º-A ao CPC também está no rodapé do modelo.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5002200-72.2024.4.03.6000 (Turma Regional, julgado em 26/10/2026, DJEN 29/10/2026), fonte do modelo vigente 2886-1d; e ApCiv 5013035-22.2024.4.03.6000 (DJEN 07/10/2026).",
+       "ok": false,
+       "em": "2026-11-21",
        "por": "Index · lote 2886"
       }
      ],
@@ -895,6 +1023,36 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Sentença, apelação e contrarrazões (ID 382846496, sentença; ID 382846497, apelação; ID 382846503, contrarrazões) não constam dos autos extraídos, que começam em 31/07/2026; R1 a R3 foram conferidos apenas pelas decisões sobre a deserção. Conferir no PJe.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Memoriais juntados em 19/11/2026 (ID 413718960), sem texto nos autos extraídos. Conferir o conteúdo e, se for o caso, acrescentá-los ao relatório.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Texto do modelo vigente 2886-1d preservado (inclusive “pedidos formulado”, “pois igualmente sentença”, “somente aplica-se”, “restrinja-se” e “TRF3” no rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo; a atribuição do artigo 2º-A ao CPC também está no rodapé do modelo.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5002200-72.2024.4.03.6000 (Turma Regional, julgado em 26/10/2026, DJEN 29/10/2026), fonte do modelo vigente 2886-1d; e ApCiv 5013035-22.2024.4.03.6000 (DJEN 07/10/2026).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
       }
      ],
      "papeis": [
@@ -1072,6 +1230,36 @@
        "ok": false,
        "em": "2026-11-18",
        "por": "Claude (autos)"
+      },
+      {
+       "desc": "Sentença, apelação e contrarrazões (ID 381970331, sentença; ID 381970382, apelação; ID 381970386, contrarrazões) não constam dos autos extraídos, que começam em 31/07/2026; R1 a R3 foram conferidos apenas pelas decisões sobre a deserção. Conferir no PJe.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Memoriais juntados em 19/11/2026 (ID 413718798), sem texto nos autos extraídos. Conferir o conteúdo e, se for o caso, acrescentá-los ao relatório.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Texto do modelo vigente 2886-1d preservado (inclusive “pedidos formulado”, “pois igualmente sentença”, “somente aplica-se”, “restrinja-se” e “TRF3” no rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo; a atribuição do artigo 2º-A ao CPC também está no rodapé do modelo.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5002200-72.2024.4.03.6000 (Turma Regional, julgado em 26/10/2026, DJEN 29/10/2026), fonte do modelo vigente 2886-1d; e ApCiv 5013035-22.2024.4.03.6000 (DJEN 07/10/2026).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote 2886"
       }
      ],
      "papeis": [
@@ -1204,6 +1392,24 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Parágrafo da multa diária reescrito e aprovado pelo corretor, com retirada da marca [VALIDAR] (ajustes do lote acorrigir)."
+      },
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe: o texto do PJe é outro, com a decisão de origem transcrita e sem parte dos ajustes de então. Esta correção parte do texto do PJe.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "IDʼs dos autos de origem (497253914, 484630258, 484630251, 484630253, 494766629 a 494766645, 494766638, 494766628, 537230702 e 605093039) não foram conferidos: não estão nos autos do agravo extraídos.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator: sem julgado recente sobre home care em plano de autogestão. A ApCiv 0003722-19.2015.4.03.6104 (1ª Turma, DJEN 07/07/2023) reconheceu ilegal a limitação do home care em plano de autogestão, na mesma direção da minuta.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -1389,7 +1595,25 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-19"
+    "planilhaDataMinuta": "2026-11-19",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "339340583",
+      "data": "2025-06-30"
+     },
+     "mpfx": {
+      "id": "342976979"
+     },
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 18,
+     "autos": 42
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1412,7 +1636,23 @@
     "meta": "M2B",
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20"
+    "planilhaReferencia": "2026-11-20",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "265238164",
+      "data": "2022-08-15"
+     },
+     "obsGeral": "ANALISAR RETIRADA DE PAUTA - REALIZADO ACORDO NO PROCESSO PRINCIPAL - EXECUÇÃO",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 19,
+     "autos": 22
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1437,11 +1677,20 @@
      "papeis": [
       "Réu/ré",
       "Autor(a)"
-     ]
+     ],
+     "tipoJ": "Apelação",
+     "obsGeral": "PEDIDO DE CONCILIAÇÃO PENDENTE · Pedido de audiência de conciliação não apreciado.\nPendência: Pedido de audiência de conciliação não apreciado. · PEDIDO DE CONCILIAÇÃO PENDENTE · PEDIDO DE CONCILIAÇÃO PENDENTE · Pedido de audiência de conciliação não apreciado. Aguardando retorno do Renato",
+     "pendencias": []
     },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20"
+    "planilhaReferencia": "2026-11-20",
+    "lote": {
+     "id": "acorrigir",
+     "item": 20,
+     "autos": 24
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1466,14 +1715,22 @@
      "papeis": [
       "Réu/ré",
       "Autor(a)"
-     ]
+     ],
+     "tipoJ": "Apelação",
+     "obsGeral": "ANALISAR RETIRADA DE PAUTA - INCOMPETÊNCIA - POSSUI PRIMEIRO JULGAMENTO",
+     "pendencias": []
     },
     "editadoPor": "AgentMail",
     "editadoEm": "2026-11-18T01:41:28.706Z",
     "sopref": "Presencial",
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20"
+    "planilhaReferencia": "2026-11-20",
+    "lote": {
+     "id": "acorrigir",
+     "item": 21,
+     "autos": 23
+    }
    }
   },
   {
@@ -1496,7 +1753,17 @@
     "meta": "M2B",
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20"
+    "planilhaReferencia": "2026-11-20",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 22,
+     "autos": 24
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1522,7 +1789,29 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18"
+    "planilhaDataMinuta": "2026-11-18",
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "pendencias": [
+      {
+       "desc": "A extração dos autos começa no ID 162745665: a petição do agravo (ID 158155604) não foi conferida. Os IDʼs das decisões agravadas e das folhas citadas são dos autos de origem.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Se o Relator quiser manter o precedente invocado pelos agravantes (AgInt no AREsp 1.164.658), conferir número, classe, relator e data antes de citá-lo.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 23,
+     "autos": 16
+    }
    }
   },
   {
@@ -1572,6 +1861,18 @@
        "desc": "DECISÃO DO RELATOR — item 11 da peça: a candidata citou os artigos 186 e 927 do CC no tópico do dano moral, e o item 11 do espelho é do dano material (mesma razão pela qual o voto nega o item 7). O precedente do próprio Relator (ApCiv 5017162-67.2019, 27/10/2020) diz que conferir a correspondência da peça prático-profissional com o espelho é juízo da banca, não revisável. A Procuradoria Regional opinou por afastar também o item 11. A minuta mantém o 0,10 do item 11: confirmar ou afastar.",
        "ok": false,
        "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (ATENÇÃO): em Exame de Ordem, o Relator negou revisão judicial da correção da peça prático-profissional, ainda que alegada correspondência com o espelho (ApCiv 5017162-67.2019.4.03.6100, 3ª Turma, Intimação via sistema 03/11/2020; embargos de declaração rejeitados em 03/02/2021). A minuta reproduz esse fundamento (V7) e dá parcial provimento por erro grosseiro; os dois precedentes da Turma citados no voto também negaram a revisão. Confirmar a orientação com o Relator e, se mantida, explicitar a distinção.",
+       "ok": false,
+       "em": "2026-11-21",
        "por": "Index · lote acorrigir"
       }
      ],
@@ -1685,6 +1986,18 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator: sem julgado sobre redação do ENEM; a minuta segue a linha do Tema 485/STF adotada pelo Relator (ApCiv 5017162-67.2019.4.03.6100, 3ª Turma, Intimação via sistema 03/11/2020).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -1788,6 +2101,30 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Precedente completado: AgInt nos EREsp 1.539.725, Rel. Min. Antonio Carlos Ferreira, DJe 19/10/2017 (ajustes do lote acorrigir)."
+      },
+      {
+       "desc": "Natureza da ação: a minuta fala em “ação ajuizada” e “julgou procedente o pedido”, mas usa “direito líquido e certo” (V29) e a sentença começa por “Trata-se de mandado de segurança impetrado …” (ID 322052989), com classe “Tutela Antecipada Antecedente” no PJe. A extração da sentença não alcança o dispositivo: conferir e uniformizar (ação × mandado de segurança; procedência × concessão).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "AI 5012374-64.2025.4.03.0000 (Rel. Des. Fed. LEILA PAIVA) citado com “intimação via sistema 09/12/2025”: confirmar a data de publicação no DJEN.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5001036-62.2021.4.03.6005 (Turma Regional, julgado em 05/10/2026, Intimação via sistema 13/10/2026), que afastou a exigência de diploma na inscrição no Revalida e negou provimento às apelações.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -1889,6 +2226,18 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Marca [VALIDAR] retirada após consulta à tabela de IRDRs do TRF-3 atualizada em 11/11/2026 (ajustes do lote acorrigir)."
+      },
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Resultado (ATENÇÃO): a minuta dá provimento à apelação (improcedência, por não comprovada a conclusão do curso), mas a pauta registra \"Desprovido\". A distinção é coerente com a ApCiv 5001036-62.2021.4.03.6005 (Turma Regional, Intimação via sistema 13/10/2026), que exige a conclusão do curso, e com a ApCiv 5001596-33.2023.4.03.6005, citada no voto. Atualizar a pauta ou confirmar o resultado com o Relator.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -2097,6 +2446,12 @@
        "desc": "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação.",
        "ok": false,
        "em": "2026-11-19",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Conferir, fora do banco do gabinete, a data de publicação dos acórdãos da Des. Fed. MÔNICA NOBRE (ApCiv 5009525-69.2022.4.03.6000, DJe 05/05/2026) e do Des. Fed. WILSON ZAUHY (ApCiv 5015261-98.2018.4.03.6100, DJe 09/09/2026); o veículo do TRF-3 em 2026 é o DJEN.",
+       "ok": false,
+       "em": "2026-11-21",
        "por": "Index · lote acorrigir"
       }
      ],
@@ -2446,7 +2801,20 @@
      "mpfx": {
       "id": "360639029"
      },
-     "pendencias": [],
+     "pendencias": [
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator: sem julgado posterior ao Tema 1.104/STJ. Os encontrados (AI 0013388-86.2016.4.03.0000 e AI 0029597-67.2015.4.03.0000, Terceira Turma, 2016) afastavam multa judicial em tutela inibitória e são anteriores ao tema; não servem de paradigma.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ],
      "papeis": [
       "Autor(a)",
       "Réu/ré"
@@ -2773,6 +3141,18 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Apostila conferida no PJe (ID 400501607): registro 23827, folha 238, livro 65, Gurupi, 26/11/2025 (ajustes do lote acorrigir)."
+      },
+      {
+       "desc": "Datas de publicação dos três julgados do TRF-3 (ApelRemNec 5000637-48.2023.4.03.6139; ApCiv 5000485-24.2026.4.03.6000; ApCiv 5009755-14.2022.4.03.6000): o veículo foi ajustado para DJEN; conferir as datas.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5005245-51.2019.4.03.6100 (3ª Turma, Intimação via sistema 12/11/2020): realizada a revalidação, o conselho profissional não pode criar novos requisitos para o registro.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -2879,7 +3259,29 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13"
+    "planilhaDataMinuta": "2026-11-13",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "orig": {
+      "tipo": "Sentença",
+      "id": "277617420",
+      "data": "2023-05-05"
+     },
+     "pendencias": [
+      {
+       "desc": "Conferir o ID 277617386 (relação nominal das filiadas), citado no voto: a extração dos autos começa no ID 277617403 e não traz a inicial nem os seus anexos.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 54,
+     "autos": 36
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2942,12 +3344,49 @@
      "papeis": [
       "Autor(a)",
       "Réu/ré"
+     ],
+     "tipoJ": "Apelação",
+     "mpfx": {
+      "id": "372887137"
+     },
+     "obsGeral": "PROCESSO CONEXO JULGADO EM 23/07/2026",
+     "pendencias": [
+      {
+       "desc": "A extração dos autos é parcial (26 documentos, sem a sentença, a apelação e as peças da origem): os IDʼs citados (sentença 286973614/286973623, apelação 286973629, documentos 286971811 e outros) não foram conferidos.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Datas da ação conexa divergem na minuta: o voto diz que a ApCiv 0006102-02.2016.4.03.6000 foi julgada em 23/07/2026, com trânsito em 16/09/2026, mas a citação traz DJEN 22/01/2026. Conferir.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Tema 1.237/STF: conferir as datas de publicação dos primeiros e dos segundos embargos de declaração no ARE 1.385.315 (a minuta dá DJe 06/02/2025 para os dois).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator: nenhum julgado semelhante no banco (morte de indígena em operação policial; Tema 1.237/STF).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
      ]
     },
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13"
+    "planilhaDataMinuta": "2026-11-13",
+    "lote": {
+     "id": "acorrigir",
+     "item": 56,
+     "autos": 20
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2971,7 +3410,48 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-17"
+    "planilhaDataMinuta": "2026-11-17",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": [
+      {
+       "desc": "A extração dos autos é parcial (27 documentos do 2º grau, a partir do ID 280995626): a sentença (ID 269658213), os embargos de declaração (ID 269658230), as apelações (IDʼs 269658235, 269658241 e 269658246), as contrarrazões, o parecer da Procuradoria Regional da República (ID 270831994) e as provas citadas no voto (IDʼs 269657827 a 269658195) não foram conferidos.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A apelação dos autores pediu, no item (4), a manutenção da gratuidade e a extensão às organizações indígenas das prerrogativas da Fazenda Pública (artigo 61 da Lei 6.001/1973). O voto só menciona a gratuidade ao fixar os honorários; a extensão das prerrogativas não foi enfrentada (artigo 489, § 1º, IV, do CPC). Avaliar um parágrafo próprio.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Resultado da ACRISSUL: todos os pedidos da sua apelação levam à improcedência, que foi acolhida; o “parcial” só se explica pelo pedido de extinção por perda do objeto, que veio por petição posterior e foi rejeitado. Confirmar com o Relator se o resultado dela é “parcial provimento” ou “provimento” (resultado mantido como no PJe).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "O rodapé da ementa cita dispositivos que o voto não menciona (CF/1988, artigo 5º, XVII; CPC, artigos 485, VI, e 497, parágrafo único; Código Civil, artigos 104, 166, 186 e 927; Lei 7.102/1983 e Decreto 89.056/1983 só no trecho transcrito da sentença). Conferir se ficam.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator: nenhum julgado semelhante no banco (\"Leilão da Resistência\").",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 57,
+     "autos": 27
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3007,6 +3487,24 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Decisão de origem localizada (ID 596316672 dos autos 5011788-06.2024.4.03.6000) e frase ajustada (ajustes do lote acorrigir)."
+      },
+      {
+       "desc": "O agravo interno pediu o afastamento da multa do artigo 1.021, § 4º, do CPC (R2), e o voto não trata do pedido. O rodapé original citava os Temas 1.201 (multa) e 1.306/STJ (fundamentação per relationem), sinal de parágrafos que saíram do voto. Decidir se o voto examina a multa e se adota a fórmula per relationem do gabinete.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): agravo de instrumento contra indeferimento de prova não é conhecido (AI 5000134-06.2026.4.03.0001, DJEN 16/07/2026; AI 5027310-60.2026.4.03.0000, Intimação via sistema 16/09/2026, monocráticas da Turma Regional).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -3048,7 +3546,57 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18"
+    "planilhaDataMinuta": "2026-11-18",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "mpfx": {
+      "id": "321761740"
+     },
+     "pendencias": [
+      {
+       "desc": "Destinação da indenização por dano moral coletivo: a ementa da minuta do PJe a revertia ao Fundo de Defesa de Direitos Difusos (artigo 13 da Lei 7.347/1985), mas o voto nada diz; a inicial pediu reversão em investimentos diretos em políticas públicas no território da comunidade (decisão ID 326002323, que transcreve os pedidos). Definir no voto e, se for o caso, repor na ementa.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Termo inicial dos juros (Súmula 54/STJ, “desde o evento danoso”) em omissão continuada: o voto não fixa a data do evento danoso. Conferir se convém defini-la (por exemplo, a data a partir da qual a mora se reputou injustificada) para evitar controvérsia na liquidação.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "IDʼs da origem citados no voto e não extraídos: 316932458 (sentença), 316932461 (apelação), 316932427, 316932401, 316932425, 316932442 e 316932434. Os demais IDʼs (316932463, 316932466, 316932468, 316932472, 316932473 e 321761740) foram conferidos.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "O feito passou por conflito de competência (decisões IDʼs 323622454 e 326002323, entre a 1ª e a 4ª Turmas) antes de chegar à Turma Regional; o relatório não registra a ocorrência. Avaliar uma linha.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes: AgInt no REsp 2.153.688 (Rel. Min. PAULO SÉRGIO DOMINGUES) conferido em fonte aberta (Informativo e notícia do STJ de julho/2026), sem confirmação da data do DJEN; RE 1.335.550 (DJe 17/03/2022) não conferido.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator: sem julgado sobre dano moral coletivo por mora na titulação quilombola. O AI 5017114-36.2023.4.03.0000 (1ª Turma, Intimação via sistema 17/10/2023) trata de obrigação de fazer do INCRA em ação civil pública quilombola, sem divergir da minuta.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 59,
+     "autos": 31
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -3170,6 +3718,12 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Levar ao Relator: a inicial (ID 301500595) identifica só isenção, diferimento e redução de base de cálculo; não há prova pré-constituída de fruição de crédito presumido de ICMS. A sentença declarou o direito quanto ao crédito presumido em tese. Avaliar se a declaração se mantém ou se cabe provimento parcial à apelação e à remessa nesse ponto (o resultado da minuta foi mantido).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -3443,6 +3997,12 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Preparo da apelação da impetrante: o comprovante (ID 383955411) é PDF digitalizado, sem texto. Conferir se é o comprovante do Tesouro (PagTesouro, “Pagamento realizado com sucesso”) ou GRU aceita.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -3703,6 +4263,12 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Preparo da apelação: o comprovante (ID 389082566) é de GRU Judicial paga na Caixa Econômica Federal em 01/06/2026, depois da extinção dessa forma de pagamento (03/04/2026). O critério do gabinete para GRU paga depois dessa data ainda está em aberto no Padrão Muta: decidir se basta ou se cabe intimar para o recolhimento pelo PagTesouro.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -3796,6 +4362,12 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Resultado diferente da minuta do PJe (v1): a minuta do PJe nega provimento à apelação e à remessa; a correção dá parcial provimento (a fundamentação vedava a repetição e a restituição concedidas). A troca é proposta da correção e depende do Relator; a v1 continua vigente.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -3895,6 +4467,12 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Superada: autos extraídos em 19/11/2026 no repositório, com relatório, voto e ementa em elaboração (IDs 413621767, 413621760 e 413624473)."
+      },
+      {
+       "desc": "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -3963,6 +4541,12 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Resultado diferente da minuta do PJe (v1): a minuta do PJe nega provimento; a correção dá provimento à apelação e à remessa para denegar a segurança (sem prova de crédito presumido; demais benefícios sem prova dos requisitos). A troca é proposta da correção e depende do Relator; a v1 continua vigente.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -4025,6 +4609,12 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Resultado diferente da minuta do PJe (v1): a minuta do PJe dá provimento para o retorno à origem; a correção julga o mérito desde logo (artigo 1.013, § 3º, I, do CPC), com parcial provimento. A troca é proposta da correção e depende do Relator; a v1 continua vigente.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -4093,6 +4683,12 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote irpj-icms"
+      },
+      {
+       "desc": "Retificar a autuação no PJe: registra a impetrante como apelante, mas a apelação (ID 323827362) é da União.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -4352,6 +4948,12 @@
        "resolvidaEm": "2026-11-20",
        "resolvidaPor": "Claude · revisão das pautas",
        "resolucao": "Superada: os autos extraídos em 19/11/2026 trazem relatório, voto e ementa em elaboração desde 18/11/2026 (IDs 413613609, 413613608 e 413613610)."
+      },
+      {
+       "desc": "Conferir a data e o veículo da ApelRemNec 5008344-96.2023.4.03.6000 (Rel. Des. Fed. JEAN MARCOS), vinda da minuta original como “DJE em 02/06/2026”.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -4516,6 +5118,18 @@
        "ok": false,
        "em": "2026-11-19",
        "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (ATENÇÃO): em Exame de Ordem, o Relator negou revisão judicial da correção da peça prático-profissional, ainda que alegada correspondência com o espelho (ApCiv 5017162-67.2019.4.03.6100, 3ª Turma, Intimação via sistema 03/11/2020; embargos de declaração rejeitados em 03/02/2021). A minuta reproduz esse fundamento (V8) e dá parcial provimento por erro grosseiro, reconhecendo a aprovação; os dois precedentes da Turma citados no voto também negaram a revisão. Confirmar a orientação com o Relator e, se mantida, explicitar a distinção.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -4657,7 +5271,26 @@
      "mpfx": {
       "id": "405471119"
      },
-     "pendencias": [],
+     "pendencias": [
+      {
+       "desc": "CRÍTICA — fundamentação contraditória no PJe: depois da correção de 19/11/2026 entraram no voto os parágrafos V8 a V149. V8 a V12 concluem que a aprovação no Revalida não gera direito líquido e certo à inscrição, ainda que provisória; V150 a V160 e o dispositivo mantêm a inscrição provisória. V13 a V149 transcrevem a Resolução CNE/CES 2/2024 inteira (até a assinatura). Confirmar com o Relator a orientação: se mudou, o resultado passa a ser de provimento da remessa e o voto, a ementa e o acórdão precisam ser refeitos; se não mudou, retirar V8 a V149 (ou manter só os artigos 11 a 14 da resolução). A ementa e o acórdão desta versão seguem o dispositivo atual (desprovimento).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Julgados do TRF-3 citados só com a data de julgamento (ApCiv 5001672-57.2023.4.03.6005; ApelRemNec 5000637-48.2023.4.03.6139; ApelRemNec 5004307-05.2023.4.03.6104): conferir as datas de publicação (DJEN).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme no resultado): o Relator manteve inscrições provisórias em casos idênticos (AI 5032370-14.2026.4.03.0000, DJEN 28/10/2026; AI 5028556-91.2026.4.03.0000, DJEN 13/10/2026), já citados no voto. Isso reforça a pendência crítica: os parágrafos V8 a V12, que negam o direito líquido e certo, contrariam o resultado e esses precedentes.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ],
      "papeis": [
       "Autor(a)",
       "Réu/ré"
@@ -4700,7 +5333,47 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-17"
+    "planilhaDataMinuta": "2026-11-17",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": [
+      {
+       "desc": "A sentença, os embargos de declaração, as apelações, as contrarrazões e os documentos do processo administrativo citados no voto estão no ID 94690757 (Volume 01, digitalizado), cuja extração de texto não alcança essas folhas (f. 2/30, 37/42, 52/89, 139/146, 311/369): rastreamento “aguardando retirada”, edital de 30/06/2008, Ofícios 274 e 1308 e citação de 21/01/2011 não foram conferidos.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "O relatório não registra os embargos de declaração do embargante, nem a decisão que os rejeitou, mencionados no voto (V4) e na apelação dele (R3). Indicar folhas e resultado.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "O rodapé da ementa cita os artigos 10 e 99, § 5º, do CPC, que o voto não menciona. O artigo 10 cabe para justificar o julgamento por fundamento não adotado na sentença (o voto já diz que houve contraditório, V6); o artigo 99, § 5º, sugere exame do preparo da apelação do advogado, ausente do voto. Incluir no voto ou retirar do rodapé.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do TRF-3 não conferidos: ApCiv 0001046-40.2011.4.03.6104 (dada como “DJe 13/11/2026”; o TRF-3 publica no DJEN) e ApCiv 5015441-17.2018.4.03.6100 (só com data de julgamento, “j. em 28/12/2023”). Confirmar veículo e data de publicação.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5000287-68.2023.4.03.6007 (Turma Regional, DJEN 03/07/2026), nulidade da intimação por edital da decisão administrativa após tentativa postal inválida. Hipótese distinta do Tema 1.329/STJ (edital para alegações finais), aplicado pela Turma em favor do IBAMA (ApCiv 5006491-28.2018.4.03.6000 e ApCiv 0004956-86.2017.4.03.6000). Sugestão: citar o primeiro no voto.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 87,
+     "autos": 20
+    }
    }
   },
   {
@@ -4735,7 +5408,17 @@
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
     },
-    "planilhaDataMinuta": "2026-11-19"
+    "planilhaDataMinuta": "2026-11-19",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.\nRENÚNCIA À PRETENSÃO - DECISÃO",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 88,
+     "autos": 36
+    }
    }
   },
   {
@@ -4768,7 +5451,47 @@
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
     },
-    "planilhaDataMinuta": "2026-11-19"
+    "planilhaDataMinuta": "2026-11-19",
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "ai": {
+      "id": "261265622",
+      "data": "2022-07-27"
+     },
+     "obsGeral": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
+     "pendencias": [
+      {
+       "desc": "A agravante não indicou o ID da decisão agravada (a petição traz “ID Xxxxxx”); o relatório segue sem ele. Indicar, se o Relator quiser, o ID da decisão nos autos 0000613-46.2005.4.03.6007.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "IDʼs da origem citados no voto e não extraídos: 170534179 (decisão de 02/12/2021), 19631841 (habilitação do espólio, f. 47/49) e 33123270 (conta da União). O recurso (ID 261265624) e a contraminuta (ID 264327552) foram conferidos.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Composição do julgamento: o Juiz Federal Convocado NEY DE ANDRADE declarou impedimento (artigo 144, II, do CPC), por ter proferido a decisão agravada (decisão ID 396576229; certidão ID 397859370). O acórdão da v2 o registra como impedido e só traz o Desembargador Federal JEAN MARCOS como votante: indicar quem completa o quórum.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): AI 5019163-50.2023.4.03.0000 (1ª Turma, Intimação via sistema 04/12/2023), multa e honorários do artigo 523, § 1º, do CPC sem pagamento voluntário; e AI 5023990-07.2023.4.03.0000 (1ª Turma, DJEN 18/12/2023), excesso de execução sem demonstrativo.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ]
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 89,
+     "autos": 19
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -4793,12 +5516,57 @@
      "papeis": [
       "Autor(a)",
       "Réu/ré"
+     ],
+     "tipoJ": "Apelação",
+     "pendencias": [
+      {
+       "desc": "Composição do julgamento: o Juiz Federal Convocado NEY DE ANDRADE declarou impedimento (artigo 144, II, do CPC), por ter proferido a sentença (decisão ID 389621233; certidão ID 400340996). O acórdão da v2 o registra como impedido e só traz o Desembargador Federal JEAN MARCOS como votante: indicar quem completa o quórum.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "ID da sentença: a minuta usa 264378257, mas a decisão de impedimento (ID 389621233) indica a sentença como ID 264378256. Conferir qual é a sentença e qual é a decisão dos embargos de declaração.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "O relatório não registra: (1) os embargos de declaração e a decisão que os rejeitou, a que o voto alude (V20, “decisão dos embargos de declaração”); (2) o pedido de efeito suspensivo à apelação (ID 265376489) e a decisão que o apreciou (ID 265421636), cujo resultado não está no trecho extraído; e (3) a redistribuição à Primeira Seção (ID 360923440) e o impedimento (ID 389621233).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Retirados do rodapé da ementa, por não constarem do voto: TRF-3, IRDR 0017610-97.2016.4.03.0000; STJ, REsp 1.856.403; TRF-3, ApCiv 0000384-03.2016.4.03.6007, AI 5010769-59.2020.4.03.0000 e ApCiv 0001425-60.2015.4.03.6000; e os artigos 135, III, do CTN, 985, I, do CPC e 3º e 16, § 2º, da Lei 6.830/1980. Repor se o voto vier a citá-los.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "IDʼs da origem citados no voto e não extraídos: 264378257 (sentença), 264378236, 264378232, 264378248 e 264378250. Apelação (ID 264378275) e contrarrazões (ID 264378333) conferidas.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (conforme): ApCiv 5001973-31.2019.4.03.6106 (1ª Turma, Intimação via sistema 27/06/2023): sub-rogação da contribuição ao SENAR sem base legal antes da Lei 13.606/2018.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
      ]
     },
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10"
+    "planilhaDataMinuta": "2026-11-10",
+    "lote": {
+     "id": "acorrigir",
+     "item": 90,
+     "autos": 20
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -4824,7 +5592,10 @@
      "papeis": [
       "Autor(a)",
       "Réu/ré"
-     ]
+     ],
+     "tipoJ": "Apelação",
+     "obsGeral": "SOLICITAÇÃO DE RETIRADA DE PAUTA — Existência de pedido anterior de desistência, não identificado na triagem prévia à inclusão em pauta. Submeter à apreciação do relator; retirada ainda não deliberada.\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11.",
+     "pendencias": []
     },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
@@ -4837,7 +5608,13 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11."
-    }
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 91,
+     "autos": 21
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -4869,7 +5646,18 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Execução Fiscal Não Pautada ApCiv 0001552-89.2015.4.03.6002\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 92,
+     "autos": 32
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -4901,7 +5689,18 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11."
-    }
+    },
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "(ID  378310008)  Pedido de homologação de renúncia da pretensão formulada na ação, nos termos do art. 487,\nIII, ‘c’, do CPC\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11.",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 93,
+     "autos": 29
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -4926,7 +5725,10 @@
      "papeis": [
       "Autor(a)",
       "Réu/ré"
-     ]
+     ],
+     "tipoJ": "Apelação",
+     "obsGeral": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
+     "pendencias": []
     },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
@@ -4939,7 +5741,13 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "lote": {
+     "id": "acorrigir",
+     "item": 94,
+     "autos": 27
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -4980,6 +5788,18 @@
        "em": "2026-11-20",
        "por": "Claude · revisão das pautas",
        "obs": "Movida de Intercorrência em 20/11/2026: alerta a conferir, não processo retirado ou adiado."
+      },
+      {
+       "desc": "ApCiv 5000280-61.2018.4.03.6004 (Rel. Des. Fed. NELTON DOS SANTOS): a minuta traz a data de julgamento (02/06/2020); trocar pela data de publicação, que não consta do banco do gabinete.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "O alerta do Office para este item (“mandado de segurança sem parecer do MPF no 2º grau”) não procede: trata-se de ação declaratória pelo rito comum, sem intervenção obrigatória do Ministério Público Federal. O alerta pode ser baixado.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -5043,7 +5863,20 @@
       "id": "356949323",
       "data": "2026-02-26"
      },
-     "pendencias": [],
+     "pendencias": [
+      {
+       "desc": "A versão corrigida em 19/11/2026 (v1 no Collectio) difere do texto atual do PJe no relatório (razões dos embargos) e na abertura do voto; esta correção parte do texto do PJe.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator: a Turma tem rejeitado embargos de declaração em perdimento de veículo (ApCiv 5001504-61.2023.4.03.6003, Intimação via sistema 22/09/2026; ApCiv 5000818-92.2025.4.03.6005, Intimação via sistema 12/08/2026). A minuta acolhe em parte, sem efeitos infringentes, só para corrigir premissa fática; não há divergência.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ],
      "orgaoAcordao": "6ª Turma",
      "papeis": [
       "Autor(a)",
@@ -5097,6 +5930,18 @@
        "em": "2026-11-20",
        "por": "Claude · revisão das pautas",
        "obs": "Movida de Intercorrência em 20/11/2026: alerta a conferir, não processo retirado ou adiado."
+      },
+      {
+       "desc": "Conferir na sentença (ID 107864764, f. 83) a palavra “publicação” no trecho transcrito (“mostra-se possível a publicação do parágrafo único do art. 173”): provável “aplicação” na origem; a digitalização não permitiu confirmar.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Não há parecer da Procuradoria Regional da República entre os documentos extraídos: conferir no PJe se houve intimação ou manifestação.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -5187,6 +6032,34 @@
      "papeis": [
       "Réu/ré",
       "Autor(a)"
+     ],
+     "tipoJ": "Apelação",
+     "obsGeral": "honorários · Planilha de 18/11: consta como minutado, sem data da minuta; conferir.",
+     "pendencias": [
+      {
+       "desc": "Composição do julgamento: o Juiz Federal Convocado NEY DE ANDRADE declarou impedimento (artigo 144, II, do CPC), por ter examinado a tutela de urgência no primeiro grau (decisão ID 393573470; certidão ID 402415842). O acórdão da v2 o registra como impedido e só traz o Desembargador Federal JEAN MARCOS como votante: indicar quem completa o quórum.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "IDʼs da origem citados no voto e não extraídos: 158280810 (sentença), 158280803, 158280807, 158280477 e 158280778. Apelação (ID 158280817), contrarrazões (ID 158280824) e informação do agravo de instrumento 5021645-10.2019.4.03.0000 (ID 158280819) conferidas.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Honorários de R$ 1.000,00 por equidade (artigo 85, § 8º, do CPC) com base em “valor irrisório atribuído à causa”: o valor da causa não está no voto nem no trecho extraído. Conferir se é irrisório (Tema 1.076/STJ veda a equidade quando o valor da causa não é baixo).",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      },
+      {
+       "desc": "Precedentes do Relator (ATENÇÃO): na ApCiv 0014910-89.2013.4.03.6100 (3ª Turma, Intimação via sistema 12/05/2020), o Relator aplicou a dispensa do artigo 5º, § 3º, da Lei 13.496/2017 à desistência com renúncia para adesão ao PERT, afastando o artigo 90 do CPC. A minuta afasta a dispensa por distinção (ação sobre o procedimento de opção e consolidação, sem discutir os débitos) e não cita esse julgado. Confirmar a distinção com o Relator e, se mantida, enfrentar o precedente.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
      ]
     },
     "editadoPor": "Bruno",
@@ -5194,7 +6067,12 @@
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13"
+    "planilhaDataMinuta": "2026-11-13",
+    "lote": {
+     "id": "acorrigir",
+     "item": 99,
+     "autos": 32
+    }
    }
   },
   {
@@ -5734,7 +6612,14 @@
       "data": "2026-09-29"
      },
      "obsGeral": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
-     "pendencias": [],
+     "pendencias": [
+      {
+       "desc": "Precedentes do Relator: acórdão embargado na ApCiv 5000919-57.2019.4.03.6000 (Turma Regional, Intimação via sistema 28/09/2026), perdimento mantido. A Turma tem rejeitado embargos de declaração em perdimento (ApCiv 5001504-61.2023.4.03.6003, Intimação via sistema 22/09/2026; ApCiv 5000818-92.2025.4.03.6005, Intimação via sistema 12/08/2026). Minuta ainda não importada para o Collectio.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ],
      "papeis": [
       "Autor(a)",
       "Réu/ré"
@@ -5825,6 +6710,12 @@
        "em": "2026-11-20",
        "por": "Claude · revisão das pautas",
        "obs": "Movida de Intercorrência em 20/11/2026: alerta a conferir, não processo retirado ou adiado."
+      },
+      {
+       "desc": "Precedentes do Relator: acórdão embargado na ApCiv 5001473-64.2025.4.03.6005 (Turma Regional, DJEN 24/09/2026). Embargos de declaração de locadoras rejeitados em casos iguais: ApCiv 5001515-84.2023.4.03.6005 (DJEN 02/09/2026), ApCiv 5000458-46.2023.4.03.6000 (DJEN 16/10/2026) e ApelRemNec 5000051-64.2019.4.03.6005 (Intimação via sistema 18/09/2026). Minuta ainda não importada para o Collectio.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -5876,7 +6767,14 @@
       "data": "2021-12-24"
      },
      "obsGeral": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
-     "pendencias": [],
+     "pendencias": [
+      {
+       "desc": "Precedentes do Relator: acórdão embargado na ApCiv 5001604-87.2021.4.03.6002 (Turma Regional, Intimação via sistema 21/09/2026); não há embargos de declaração semelhantes no banco. Minuta ainda não importada para o Collectio.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ],
      "papeis": [
       "Autor(a)",
       "Réu/ré"
@@ -5993,7 +6891,14 @@
       "data": "2026-09-30"
      },
      "obsGeral": "com tutela e sobre seus efeitos · Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
-     "pendencias": [],
+     "pendencias": [
+      {
+       "desc": "Precedentes do Relator: acórdão embargado na ApCiv 5001999-40.2025.4.03.6002 (Turma Regional, DJEN 23/09/2026). Embargos de declaração de locadoras rejeitados em casos iguais: ApCiv 5001515-84.2023.4.03.6005 (DJEN 02/09/2026), ApCiv 5000458-46.2023.4.03.6000 (DJEN 16/10/2026) e ApelRemNec 5000051-64.2019.4.03.6005 (Intimação via sistema 18/09/2026). Minuta ainda não importada para o Collectio.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ],
      "papeis": [
       "Réu/ré",
       "Autor(a)"
@@ -6050,6 +6955,12 @@
        "em": "2026-11-20",
        "por": "Claude · revisão das pautas",
        "obs": "Movida de Intercorrência em 20/11/2026: alerta a conferir, não processo retirado ou adiado."
+      },
+      {
+       "desc": "Precedentes do Relator: acórdão embargado na ApCiv 5002736-93.2018.4.03.6000 (Turma Regional, DJEN 13/08/2026). Embargos de declaração rejeitados em autos de infração do MAPA: ApCiv 5007544-44.2018.4.03.6000 (Intimação via sistema 06/05/2026) e ApCiv 5004624-58.2022.4.03.6000 (Intimação via sistema 05/05/2026). Minuta ainda não importada para o Collectio.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
       }
      ],
      "papeis": [
@@ -6933,7 +7844,14 @@
       "data": "2026-08-11"
      },
      "obsGeral": "Tramita na tarefa [Sessão - ED] Aguardando a sessão.",
-     "pendencias": [],
+     "pendencias": [
+      {
+       "desc": "Precedentes do Relator: acórdão embargado na ApCiv 5000467-18.2017.4.03.6000 (Turma Regional, Intimação via sistema 23/08/2026). Nos casos semelhantes do MAPA, os embargos foram rejeitados (ApCiv 5007544-44.2018.4.03.6000, Intimação via sistema 06/05/2026; ApCiv 5004624-58.2022.4.03.6000, Intimação via sistema 05/05/2026); a pauta prevê acolhimento parcial sem efeitos infringentes: conferir o vício apontado. Minuta ainda não importada para o Collectio.",
+       "ok": false,
+       "em": "2026-11-21",
+       "por": "Index · lote acorrigir"
+      }
+     ],
      "papeis": [
       "Autor(a)",
       "Réu/ré"
