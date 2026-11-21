@@ -87,3 +87,8 @@ test('prontuário: pendência mostra o texto inteiro (altura acompanha o texto)'
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   assert.ok(app.includes('#prq .ac-pl textarea{height:auto!important;min-height:0!important;max-height:none!important}'));
 });
+
+test('pauta: etiqueta Retidos (adiados ou retirados de pauta)', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(app.includes("['rt','Retidos','Adiados ou retirados de pauta',function(i){return /^(adiad|retirad)/i.test(i.resultado||'');}]"));
+});

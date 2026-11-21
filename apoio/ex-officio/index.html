@@ -2633,7 +2633,7 @@ var TGS=[['Recurso',[['ed','ED','Embargos de declaração',function(i){return ti
     ['rn','Remessa','Remessas necessárias',function(i){return tipoJ(i)==='Remessa Necessária'||/remessa/.test(nq(i.classe));}],['jr','Retratação','Juízos de retratação',function(i){return tipoJ(i)==='Juízo de Retratação';}]]],
   ['Prioridade',[['mt','Metas','Processos de meta',function(i){return !!metaDe(i);}],['so','Sustentação','Pedidos de sustentação oral (presencial ou por videoconferência)',function(i){var v=(i.ctl||{}).sopref||'';return !!v&&soTipo(v)!=='prf';}],
     ['pf','Preferência','Pedidos de preferência',function(i){var v=(i.ctl||{}).sopref||'';return !!v&&soTipo(v)==='prf';}]]],
-  ['Atenção',[['pd','Pendências','Processos com pendências ou alertas',function(i){return alertas(i).length>0;}],['ic','Intercorrências','Processos com intercorrência',function(i){return !!(i.ctl||{}).intercor;}]]]];
+  ['Atenção',[['pd','Pendências','Processos com pendências ou alertas',function(i){return alertas(i).length>0;}],['ic','Intercorrências','Processos com intercorrência',function(i){return !!(i.ctl||{}).intercor;}],['rt','Retidos','Adiados ou retirados de pauta',function(i){return /^(adiad|retirad)/i.test(i.resultado||'');}]]]];
 function tgOk(it){var T=S.tg||{};return TGS.every(function(g){var on=g[1].filter(function(x){return T[x[0]];});return !on.length||on.some(function(x){return x[3](it);});});}
 var ETF={min:'dataMinuta',cor:'dataCorrecao',lib:'dataLiberacao'};
 function filtrar(){var L=lista(),q=nq(S.q),e=nq(U.eu),MS=S.fonte==='mono'&&!!$('#v-pauta')._ed,PA=S.fonte!=='mono';
