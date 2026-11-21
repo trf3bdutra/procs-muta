@@ -1206,6 +1206,18 @@ const TAREFA_GRUPOS = {"[Sessão] Preparar relatório e voto":["Aptos","Prepara�
 const TAREFA_GRUPO_ORDEM = ["Aptos","Sessão / julgamento colegiado","Gabinete — análise e minuta","Distribuição / triagem","Prazos / intimações / expediente","Sobrestados / suspensos","Diligências / MPF / contadoria / cumprimento","Baixa / trânsito / remessa / arquivo"];
 
 class Component extends DCLogic {
+  /* Caput: o motor roda escondido (iframe fora da tela). Enquanto escondido, não redesenha o painel antigo
+     (75 mil nós, vários segundos por atualização, travando a página inteira); guarda o estado, mantém os
+     campos derivados das linhas e redesenha uma vez quando o motor fica visível. */
+  __oculto() { try { const fe = window.frameElement; if (!fe || /[?&]painel=1/.test(location.search)) return false; return getComputedStyle(fe).visibility === "hidden" || fe.getBoundingClientRect().right <= 0; } catch (e) { return false; } }
+  __derivar() { clearTimeout(this.__derT); this.__derT = setTimeout(() => { try { this.rows.forEach(r => { this.routeSpecialTags(r); this.syncJudgment(r); r._prontoParaCorrecao = !!workflowDate(r.MINUTADO); }); } catch (e) {} }, 300); }
+  setState(update, cb) {
+    if (this.__montado && this.__oculto()) { const prev = this.state; const patch = typeof update === "function" ? update(prev) : update; this.state = { ...prev, ...(patch || {}) }; this.__sujo = true; this.__derivar(); if (cb) setTimeout(cb, 0); return; }
+    return super.setState(update, cb);
+  }
+  forceUpdate() { if (this.__montado && this.__oculto()) { this.__sujo = true; this.__derivar(); return; } return super.forceUpdate(); }
+  __vigiaVisivel() { if (this.__vigiando) return; this.__vigiando = true; const ver = () => { if (this.__sujo && !this.__oculto()) { this.__sujo = false; super.forceUpdate(); } };
+    try { new parent.MutationObserver(ver).observe(parent.document.body, { attributes: true, attributeFilter: ["class"] }); } catch (e) {} setInterval(ver, 1500); }
   constructor(props) {
     super(props);
     window.__painelCentralComponent = this;
@@ -1238,7 +1250,7 @@ class Component extends DCLogic {
     this._initialState = JSON.parse(JSON.stringify(this.state)); this._initialState.navCollapsed = false;
   }
 
-  componentDidMount() { window.__painelCentralComponent = this; if (!this.__escFecha) { this.__escFecha = e => { if (e.key === "Escape" && this.state.dialog) this.setState({ dialog: false }); }; window.addEventListener("keydown", this.__escFecha); } Promise.resolve(this.loadDB(false)).catch(() => {}).finally(() => { window.__painelPronto = true; window.dispatchEvent(new Event("painel-pronto")); }); }
+  componentDidMount() { window.__painelCentralComponent = this; this.__montado = true; this.__vigiaVisivel(); if (!this.__escFecha) { this.__escFecha = e => { if (e.key === "Escape" && this.state.dialog) this.setState({ dialog: false }); }; window.addEventListener("keydown", this.__escFecha); } Promise.resolve(this.loadDB(false)).catch(() => {}).finally(() => { window.__painelPronto = true; window.dispatchEvent(new Event("painel-pronto")); }); }
 
   refresh() { this.syncConfigSeed(); this.rows.forEach(r => this.syncJudgment(r)); this._sitCache=new Map(); this.forceUpdate(); }
   notify(msg, type) { this.setState({ notice: { msg, type: type || "ok" } }); clearTimeout(this._nt); this._nt = setTimeout(() => this.setState({ notice: null }), 9000); }
