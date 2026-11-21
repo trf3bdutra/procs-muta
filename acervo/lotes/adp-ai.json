@@ -21628,8 +21628,8 @@
    "exequente": "VETORIAL SIDERURGIA S/A",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IPI/ Imposto sobre Produtos Industrializados",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Processual · agravo de instrumento · cabimento contra indeferimento de prova pericial (Tema 988/STJ) · origem: anulatória de IPI",
    "resultado": "Ato a proferir: voto no agravo interno [VALIDAR resultado]",
    "modelo": "",
    "variacoes": [],
@@ -21708,6 +21708,96 @@
     "outros": "Agravo de instrumento ID 371647715 (07/05/2026), contra o indeferimento da prova pericial. Certidão ID 372404074 (10/05/2026) e decisão ID 374341176 (18/05/2026): redistribuição à Turma Regional de MS. Ato ordinatório ID 390814930 (06/08/2026): intimação para contrarrazões. Conclusos para decisão em 10/08/2026.",
     "representacao": "Agravante: advogados constituídos [VALIDAR procuração na cópia dos autos]. Agravada: União (Fazenda Nacional).",
     "preparo": "Agravo de instrumento: GRU 18720-8 (referência do processo de origem) e comprovante bancário CAIXA de 05/05/2026, R$ 64,26 (ID 371647722). Agravo interno sem preparo."
+   },
+   "assunto_detalhado": "Processual — agravo de instrumento contra indeferimento de prova pericial (taxatividade mitigada); origem tributária (IPI)",
+   "especificidades": "Agravo de instrumento não conhecido (artigo 932, III, do CPC) · Ação anulatória de IPI por erro em DCTF (matriz e filial) · Contrarrazões apresentadas",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Processual — agravo de instrumento contra indeferimento de prova pericial (taxatividade mitigada); origem tributária (IPI)",
+     "subassuntos": "Processual · agravo de instrumento · cabimento contra indeferimento de prova pericial (Tema 988/STJ) · origem: anulatória de IPI",
+     "sintese": "",
+     "questoes": "1) Cabimento do agravo de instrumento contra o indeferimento de prova pericial; 2) urgência ou inutilidade do exame na apelação (Tema 988/STJ).",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "384190267",
+      "juizo": "Decisão monocrática do Relator (ID 384190267); origem: 6ª Vara Federal de Campo Grande",
+      "dispositivo": "Não conheceu do agravo de instrumento."
+     },
+     "ai": {
+      "hip": "Tema 988 · urgência",
+      "efeito": "Pendente de análise",
+      "id": "384190267"
+     },
+     "adm": {
+      "prot": "2026-05-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "371647715",
+       "contra": "Não mencionar"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "388905444",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "371647715",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "GRU e comprovante bancário",
+       "id": "371647722",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "374341176",
+       "data": "2026-05-18"
+      },
+      {
+       "desc": "Decisão monocrática (não conhecimento)",
+       "id": "384190267",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "388905444",
+       "data": "2026-07-27"
+      },
+      {
+       "desc": "Contrarrazões da Fazenda Nacional",
+       "id": "392454760",
+       "data": "2026-08-24"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "Agravo de instrumento não conhecido (artigo 932, III, do CPC) · Ação anulatória de IPI por erro em DCTF (matriz e filial) · Contrarrazões apresentadas"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": ""
+    }
    }
   },
   {
