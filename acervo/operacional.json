@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T02:08:04.369Z",
+ "atualizado_em": "2026-11-21T02:08:11.526Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -44843,7 +44843,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:34:31.450Z",
+    "atualizado_em": "2026-11-21T02:08:11.526Z",
     "Origem - Juízo": "4ª Vara Federal de Campo Grande"
    },
    "triagem": {
@@ -44861,7 +44861,7 @@
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
     "Tempestividade": "Tempestivo",
-    "Preparo": "Não verificado",
+    "Preparo": "Não Verificado",
     "AJG": "",
     "DPU (controle)": "",
     "Representação": "Regular",
@@ -44871,26 +44871,27 @@
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Manifestou-se",
-    "MPF - Custos Legis": "",
+    "MPF": "Com Parecer",
+    "MPF - Custos Legis": "Sim",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+    "Tema": "Tributário · IRPJ e CSLL · lucro presumido: majoração de 10% nos percentuais de presunção (Lei Complementar 224/2025)",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Sem preliminares",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "MS, 2ª Seção, IRPJ",
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "Mandado de segurança · Liminar indeferida na origem e tutela recursal indeferida (ID 382779305) · Receita acima de R$ 5.000.000,00 · Preparo recolhido após a interposição, sem intimação do artigo 1.007, § 4º, do CPC"
+    "Especificidades": "Mandado de segurança · Liminar indeferida na origem e tutela recursal indeferida (ID 382779305) · Receita acima de R$ 5.000.000,00 · Preparo recolhido após a interposição, sem intimação do artigo 1.007, § 4º, do CPC",
+    "Síntese Fática": "Empresa optante pelo lucro presumido, com receita acima de R$ 5.000.000,00, impetrou mandado de segurança para apurar o IRPJ e a CSLL sem a majoração de 10% nos percentuais de presunção prevista na Lei Complementar 224/2025. O juízo indeferiu a liminar."
    },
    "producao": {
     "Destino": "",
@@ -44929,7 +44930,8 @@
     "Lote - Observação": "Agravo de instrumento da impetrante contra o indeferimento da liminar em mandado de segurança sobre a majoração de 10% nos percentuais de presunção do IRPJ e da CSLL no lucro presumido (Lei Complementar 224/2025). Tutela recursal indeferida; contraminuta e parecer do MPF nos autos.",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5015444-55.2026.4.03.0000 (TRMS, 25/08/2026); AI 5022338-47.2026.4.03.0000 (TRMS, 25/10/2026); AI 5000301-23.2026.4.03.0001 (TRMS, 05/08/2026)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -44939,7 +44941,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5000048-81.2020.4.03.6003",
