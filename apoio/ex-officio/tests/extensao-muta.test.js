@@ -293,3 +293,11 @@ test('extensão 0.22: redesenho das etiquetas do PJe por tipo (categorias do cat
   assert.match(c, /function estilizarEtiquetas\(card\)/); assert.match(c, /ancora\(c\)\.insertAdjacentElement\('afterend', box\)/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /categorias: cats/);
 });
+
+test('extensão 0.23: ícones de sinalização (lista e cabeçalho dos autos) com quadro de detalhes; recolher a coluna da lista', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /function sinaisHtml\(k, r\)/); assert.match(c, /function dialogoSinais\(k, foco\)/); assert.match(c, /function sinaisAutos\(numero\)/);
+  assert.match(c, /\['ic', '⛔', 'Intercorrências', 'al'\], \['pd', '⚑', 'Pendências', 'av'\], \['nt', '📝', 'Notas', 'mu'\]/);
+  assert.match(c, /function botaoColuna\(C\)/); assert.match(c, /hero18810:lista-oculta/);
+  assert.match(read('apoio/ex-officio/api/_ficha.js'), /notas: linhas\(\(r\.origem \|\| \{\}\)\['Observações'\]\)/);
+});

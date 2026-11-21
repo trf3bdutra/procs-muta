@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.23 · sinalizações em ícones e lista recolhível
+
+- Nos cartões da lista de tarefas e no cabeçalho dos autos digitais: ícones com contagem — ⚡ urgência, 🔔 avisos,
+  ⛔ intercorrências, ⚑ pendências, 📝 notas. O clique abre um quadro com os detalhes (lidos da ficha).
+- Botão "⇤ Ocultar a lista" (canto inferior esquerdo do PJe) recolhe a coluna da lista de processos para dar espaço
+  ao editor e à tarefa; a escolha fica neste navegador.
+
 ## O que muda na 0.22 · etiquetas redesenhadas e só urgências notificadas
 
 - **Redesenho das etiquetas do PJe** nos cartões da lista de tarefas, para toda a equipe: cada tipo (`categorias` em
