@@ -415,7 +415,8 @@ document.addEventListener('keydown',function(e){var m=$('#ed-vm');
   if(edTxtAlvo(e.target)&&(e.ctrlKey||e.metaKey)&&e.shiftKey&&(e.key==='c'||e.key==='C'||e.key==='k'||e.key==='K')){e.preventDefault();edCampoNovo(e.target);}
 },true);
 /* ---------- no painel do desembargador: o painel mostra as alterações e o Salvar na barra dele ---------- */
-function edCmtAvisa(){if(!EDCMT||window.parent===window)return;try{window.parent.postMessage({tipo:'vdm-ed-cmt',n:edPendentes().length},location.origin);}catch(e){}}
+function edCmtAvisa(){if(!EDCMT||window.parent===window)return;var nr=0;try{nr=rapLista().filter(function(r){return r.situacao!=='incorporada';}).length;}catch(e){}
+  try{window.parent.postMessage({tipo:'vdm-ed-cmt',n:edPendentes().length,col:EDS.rap?'rap':EDS.col,rap:nr,sujo:Object.keys(EDCOL).filter(edSujo)},location.origin);}catch(e){}}
 if(EDCMT){var edRender0=edRender;edRender=function(){var r=edRender0.apply(this,arguments);edCmtAvisa();return r;};
   var edGuarda0=edGuarda;edGuarda=function(){var r=edGuarda0.apply(this,arguments);edCmtAvisa();return r;};
   window.VDM_ED_CMT={
@@ -535,25 +536,38 @@ var LPBLOCO={'Cabeçalho':'Abertura','Vocativo':'Abertura','Abertura':'Abertura'
 function lpTx(t){return String(t||'').split(/\n+/).map(function(par){var h=esc(par).replace(/\{\{?\s*([^{}|]+?)(?:\|([^{}]+?))?\s*\}?\}/g,function(m,a,b){return '<span class="lp-v">'+(b||a)+'</span>';})
   .replace(/\[([^\]]{1,80})\]/g,function(m,a){return '<span class="lp-v pf">'+a+'</span>';});return h?'<p>'+h+'</p>':'';}).join('');}
 function lpPen(k,id){return '<button type="button" class="mn-pen" data-lppen="'+k+'|'+esc(id)+'" title="Editar" aria-label="Editar">'+'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></button>';}
-function lpPar(r){return '<div class="lp-c mn-ed'+(edSit('par',r.id)?' mud':'')+'" data-lpid="par|'+esc(r.id)+'" id="lp-par-'+esc(r.id)+'"><h4>'+esc(r.titulo||'(sem título)')+'</h4><div class="lp-t">'+lpTx(r.texto)+'</div>'+
+function lpPar(r){return '<div class="lp-c mn-ed'+(edSit('par',r.id)?' mud':'')+'" data-lpid="par|'+esc(r.id)+'" id="lp-par-'+esc(r.id)+'"><h4>'+esc(r.titulo||'(sem título)')+'</h4>'+(String(r.texto||'').length>360?'<div class="lp-t lp-cl" data-lpcl title="Clique para ler inteiro">':'<div class="lp-t">')+lpTx(r.texto)+'</div>'+
   (r.uso?'<p class="lp-u"><b>Quando usar</b> '+esc(r.uso)+'</p>':'')+'<p class="lp-m">'+esc([LPST[r.status]||r.status,r.nivelSubsecao,r.nivelTema].filter(Boolean).join(' · '))+'</p>'+lpPen('par',r.id)+'</div>';}
-function lpParView(){var L=edFiltrar(edListaDe('par')),G={},ord=[];
-  L.forEach(function(r){var c=r.nivelCategoria||'Outros';if(!G[c]){G[c]=[];ord.push(c);}G[c].push(r);});
-  ord.sort(function(a,b){var i=LPCAT.indexOf(a),j=LPCAT.indexOf(b);return (i<0?99:i)-(j<0?99:j);});
-  return '<header class="lp-hd"><p class="mn-k">Compendium · editor do Desembargador</p><h1>Parágrafos</h1><p class="lp-sub">Como entram na minuta. Passe o mouse e clique no lápis para editar ali mesmo; a busca e os filtros à esquerda valem aqui.</p><button type="button" class="mn-nova" data-lpnovo="par">+ Novo parágrafo</button></header>'+
-    (ord.length?ord.map(function(c,i){var S={},so=[];G[c].forEach(function(r){var k=r.nivelSubsecao||'Geral';if(!S[k]){S[k]=[];so.push(k);}S[k].push(r);});
-      return '<section class="lp-sec"><h2><span>'+(i+1)+'</span>'+esc(c)+'<small>'+G[c].length+'</small></h2>'+so.map(function(k){return (so.length>1||k!=='Geral'?'<h3>'+esc(k)+'</h3>':'')+S[k].map(lpPar).join('');}).join('')+'</section>';}).join('')
-    :'<p class="empty">Nenhum parágrafo com esta busca ou filtro.</p>');}
+/* em que peça o parágrafo entra: campo "peca" quando gravado; sem ele, lido do título, do texto e dos marcadores */
+var LPPECA=['Voto','Monocrática','Despacho'],LPPECAT={'Voto':'Voto','Monocrática':'Monocráticas','Despacho':'Despachos'};
+function lpPeca(r){if(LPPECA.indexOf(r.peca)>=0)return r.peca;var s=nz([r.titulo,r.texto,r.uso,r.especificidadesTags,r.nivelTema,r.categoria].join(' '));
+  if(/\bdespach|\bintime-se\b|\bmanifeste-se\b|\bintimac/.test(s))return 'Despacho';
+  if(/monocrat|decisao terminativa|\bdecido\b|unipessoal|artigo 932|art\. 932/.test(s))return 'Monocrática';return 'Voto';}
+function lpSlug(t){return nz(t).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+function lpParView(){var L=edFiltrar(edListaDe('par')),P={};
+  L.forEach(function(r){var k=lpPeca(r),c=r.nivelCategoria||'Outros';(P[k]=P[k]||{})[c]=(P[k][c]||[]).concat([r]);});
+  var ord=function(o){return Object.keys(o).sort(function(a,b){var i=LPCAT.indexOf(a),j=LPCAT.indexOf(b);return (i<0?99:i)-(j<0?99:j);});};
+  var PK=LPPECA.filter(function(k){return P[k];}),n=function(k){return ord(P[k]).reduce(function(t,c){return t+P[k][c].length;},0);};
+  var toc='<nav class="lp-toc" aria-label="Sumário">'+PK.map(function(k){return '<a class="lp-tk" href="#lp-'+lpSlug(k)+'" data-lpgo="lp-'+lpSlug(k)+'">'+LPPECAT[k]+'<i>'+n(k)+'</i></a>'+
+    ord(P[k]).map(function(c){return '<a href="#lp-'+lpSlug(k+'-'+c)+'" data-lpgo="lp-'+lpSlug(k+'-'+c)+'">'+esc(c)+'<i>'+P[k][c].length+'</i></a>';}).join('');}).join('')+'</nav>';
+  var body='<header class="lp-hd"><p class="mn-k">Compendium · editor do Desembargador</p><h1>Parágrafos</h1><p class="lp-sub">Como entram na minuta, separados por peça. Passe o mouse e clique no lápis para editar ali mesmo; clique no texto para lê-lo inteiro.</p>'+
+    '<div class="lp-bus"><input type="search" id="lp-q" value="'+esc(EDS.q||'')+'" placeholder="Buscar nos parágrafos (título, texto, tema)" aria-label="Buscar nos parágrafos">'+(L.length!==edListaDe('par').length?'<span>'+L.length+' de '+edListaDe('par').length+'</span>':'')+'<button type="button" class="mn-nova" data-lpnovo="par">+ Novo parágrafo</button></div></header>'+
+    (PK.length?PK.map(function(k,ii){return '<section class="lp-pk" id="lp-'+lpSlug(k)+'"><h2><span>'+(ii+1)+'</span>'+LPPECAT[k]+'<small>'+n(k)+'</small></h2>'+
+      ord(P[k]).map(function(c){var S={},so=[];P[k][c].forEach(function(r){var x=r.nivelSubsecao||'Geral';if(!S[x]){S[x]=[];so.push(x);}S[x].push(r);});
+        return '<div class="lp-cat" id="lp-'+lpSlug(k+'-'+c)+'"><h3>'+esc(c)+'<small>'+P[k][c].length+'</small></h3>'+so.map(function(x){return (so.length>1||x!=='Geral'?'<p class="lp-sub2">'+esc(x)+'</p>':'')+S[x].map(lpPar).join('');}).join('')+'</div>';}).join('')+'</section>';}).join('')
+    :'<p class="empty">Nenhum parágrafo com esta busca ou filtro.</p>');
+  return '<div class="lp-grid">'+toc+'<div class="lp-doc">'+body+'</div></div>';}
 function lpEl(p,e,i){return '<div class="lp-c lp-el mn-ed'+(edSit('pec',p.id)?' mud':'')+'" data-lpid="pec|'+esc(p.id)+'|'+i+'"><h4><span class="lp-n">'+(i+1)+'</span>'+esc(String(e.n||'').replace(/^\d+\.\s*/,''))+'</h4>'+
   (e.f?'<div class="lp-t">'+lpTx(e.f)+'</div>':'')+((e.r||[]).length?'<ul class="lp-r">'+e.r.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'')+
   ((e.alts||[]).length?'<details class="lp-alt"><summary>'+e.alts.length+(e.alts.length>1?' alternativas':' alternativa')+'</summary>'+e.alts.map(function(a){return '<div><b>'+esc(a.lab||'Alternativa')+'</b>'+lpTx(a.f)+'</div>';}).join('')+'</details>':'')+lpPen('pec',p.id+'|'+i)+'</div>';}
 function lpPecView(){var L=edListaDe('pec'),q=nz(EDS.q||''),G={},ord=[];
   L.filter(function(p){return !q||nz(JSON.stringify(p)).indexOf(q)>=0;}).forEach(function(p){var g=p.grupo||'Outras';if(!G[g]){G[g]=[];ord.push(g);}G[g].push(p);});
-  return '<header class="lp-hd"><p class="mn-k">Compendium · editor do Desembargador</p><h1>Peças</h1><p class="lp-sub">A sequência de cada peça, trecho a trecho. O lápis edita o nome, a fórmula e as regras do trecho.</p></header>'+
+  var toc='<nav class="lp-toc" aria-label="Sumário">'+ord.map(function(g){return '<span class="lp-tk">'+esc(g)+'</span>'+G[g].map(function(p){return '<a href="#lp-pec-'+esc(p.id)+'" data-lpgo="lp-pec-'+esc(p.id)+'">'+esc(p.t||p.id)+'<i>'+(p.elementos||[]).length+'</i></a>';}).join('');}).join('')+'</nav>';
+  return '<div class="lp-grid">'+toc+'<div class="lp-doc"><header class="lp-hd"><p class="mn-k">Compendium · editor do Desembargador</p><h1>Peças</h1><p class="lp-sub">A sequência de cada peça, trecho a trecho. O lápis edita o nome, a fórmula e as regras do trecho.</p></header>'+
     ord.map(function(g){return '<section class="lp-sec"><h2 class="lp-g">'+esc(g)+'</h2>'+G[g].map(function(p){var bl='';
       return '<article class="lp-pc" id="lp-pec-'+esc(p.id)+'"><h3 class="lp-pt">'+esc(p.t||p.id)+'</h3>'+(p.resumo?'<p class="lp-lead">'+esc(p.resumo)+'</p>':'')+
         (p.elementos||[]).map(function(e,i){var b=p.id==='voto'?LPBLOCO[String(e.n||'').replace(/^\d+\.\s*/,'')]:'',h='';if(b&&b!==bl){h='<p class="lp-bl">'+b+'</p>';bl=b;}return h+lpEl(p,e,i);}).join('')+
-        ((p.notas||[]).length?'<div class="lp-not"><b>Notas</b><ul>'+p.notas.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'')+'</article>';}).join('')+'</section>';}).join('');}
+        ((p.notas||[]).length?'<div class="lp-not"><b>Notas</b><ul>'+p.notas.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'')+'</article>';}).join('')+'</section>';}).join('')+'</div></div>';}
 function lpVista(){var fm=$('#ed-form');if(!fm)return;var sc=fm.scrollTop;fm.innerHTML='<div class="lp-ler" id="ed-ler">'+(EDS.col==='par'?lpParView():lpPecView())+'</div>';fm.scrollTop=sc;}
 function lpAtivo(){return EDCMT&&!EDS.rap&&!EDS.id&&(EDS.col==='par'||EDS.col==='pec');}
 (function(){var edRenderL=edRender;edRender=function(){var r=edRenderL.apply(this,arguments);if(lpAtivo())lpVista();return r;};
@@ -568,7 +582,7 @@ function lpForm(k){var a=k.split('|');
       '<label><span>Texto</span><textarea data-lpc="texto" rows="'+Math.min(16,Math.max(5,Math.ceil(String(r.texto||'').length/90)))+'" class="lp-ta">'+esc(r.texto||'')+'</textarea></label>'+
       '<p class="lp-hint">Campos variáveis: {nome} ou {nome|rótulo}; trecho entre colchetes [ … ] vira campo a preencher.</p>'+
       '<label><span>Quando usar</span><textarea data-lpc="uso" rows="2">'+esc(r.uso||'')+'</textarea></label>'+
-      '<div class="lp-2"><label><span>Onde entra</span><select data-lpc="nivelCategoria">'+op(['Abertura','Fundamento','Aplicação','Encerramento','Genéricos','Documentação'],r.nivelCategoria||'')+'</select></label>'+
+      '<div class="lp-2 lp-3"><label><span>Usado em</span><select data-lpc="peca">'+op(LPPECA,lpPeca(r))+'</select></label><label><span>Onde entra</span><select data-lpc="nivelCategoria">'+op(['Abertura','Fundamento','Aplicação','Encerramento','Genéricos','Documentação'],r.nivelCategoria||'')+'</select></label>'+
       '<label><span>Situação</span><select data-lpc="status">'+op(Object.keys(LPST),r.status||'padrao',LPST)+'</select></label></div>'+
       '<div class="mn-fa"><span style="flex:1"></span><button type="button" data-lpx>Cancelar</button><button type="button" class="pri" data-lpok>Aplicar</button></div></div>';}
   var p=edAcha('pec',a[1]),e=p&&(p.elementos||[])[+a[2]];if(!e)return '';
@@ -581,13 +595,15 @@ function lpAbre(k){var aberto=document.querySelector('#ed-ler [data-lpf]');if(ab
   var el=document.querySelector('#ed-ler [data-lpid="'+k.replace(/"/g,'\\"')+'"]');if(!el)return;el.outerHTML=lpForm(k);
   var f=document.querySelector('#ed-ler [data-lpf]');if(f){var i=f.querySelector('input,textarea');if(i)i.focus();}}
 document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#ed-ler'))return;var b;
+  if((b=e.target.closest('[data-lpgo]'))){e.preventDefault();var al=document.getElementById(b.getAttribute('data-lpgo'));if(al)al.scrollIntoView({behavior:'smooth',block:'start'});return;}
+  if((b=e.target.closest('[data-lpcl]'))&&!e.target.closest('a,button')){b.classList.toggle('ab');return;}
   if((b=e.target.closest('[data-lppen]'))){lpAbre(b.getAttribute('data-lppen'));return;}
   if(e.target.closest('[data-lpnovo]')){edNovo();return;}
   var f=e.target.closest('[data-lpf]');if(!f)return;var a=f.getAttribute('data-lpf').split('|');
   if(e.target.closest('[data-lpx]')){if(a[0]==='par'){var r0=edAcha('par',a[1]);if(r0&&EDS.orig.par[a[1]]==='__novo__'&&!String(r0.texto||'').trim())edDesfaz('par',a[1]);}lpVista();return;}
   if(!e.target.closest('[data-lpok]'))return;var v={};f.querySelectorAll('[data-lpc]').forEach(function(c){v[c.getAttribute('data-lpc')]=c.value;});
   if(a[0]==='par'){var r=edAcha('par',a[1]);if(!v.titulo.trim()||!v.texto.trim()){toast('Título e texto são obrigatórios');return;}
-    var n=JSON.parse(edJ(r));n.titulo=v.titulo.trim();n.texto=v.texto.replace(/\s+$/,'');n.uso=v.uso.trim();n.nivelCategoria=v.nivelCategoria;n.status=v.status;
+    var n=JSON.parse(edJ(r));n.titulo=v.titulo.trim();n.texto=v.texto.replace(/\s+$/,'');n.uso=v.uso.trim();n.nivelCategoria=v.nivelCategoria;n.status=v.status;if(v.peca&&(r.peca||v.peca!==lpPeca(r)))n.peca=v.peca;
     if(edJ(n)!==edJ(r)){edToca('par',r);edPoe(r,n);edGuarda();toast('Alteração aplicada; vale ao salvar');}}
   else{var p=edAcha('pec',a[1]);var n2=JSON.parse(edJ(p)),el=n2.elementos[+a[2]];el.n=v.n.trim()||el.n;el.f=v.f.replace(/\s+$/,'');el.r=v.r.split('\n').map(function(x){return x.trim();}).filter(Boolean);
     if(edJ(n2)!==edJ(p)){edToca('pec',p);edPoe(p,n2);edGuarda();toast('Alteração aplicada; vale ao salvar');}}
@@ -595,3 +611,6 @@ document.addEventListener('click',function(e){if(!e.target.closest||!e.target.cl
 document.addEventListener('keydown',function(e){var f=e.target.closest&&e.target.closest('#ed-ler [data-lpf]');if(!f)return;
   if(e.key==='Escape'){e.preventDefault();e.stopPropagation();f.querySelector('[data-lpx]').click();}
   else if((e.ctrlKey||e.metaKey)&&(e.key==='Enter'||e.key==='s'||e.key==='S')){e.preventDefault();e.stopPropagation();f.querySelector('[data-lpok]').click();}},true);
+/* busca dos Parágrafos dentro da leitura: refaz só a leitura e devolve o cursor ao campo */
+document.addEventListener('input',function(e){if(!e.target||e.target.id!=='lp-q')return;var v=e.target.value;clearTimeout(lpVista._t);
+  lpVista._t=setTimeout(function(){EDS.q=v;lpVista();var q=document.getElementById('lp-q');if(q){q.focus();try{q.setSelectionRange(v.length,v.length);}catch(x){}}},220);});
