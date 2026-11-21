@@ -364,17 +364,25 @@ function htmlSugestoes(secoes) {
   var marc = I.filter(function (i) { return i.apply && i.status !== 'igual'; }).length;
   if (A.sugMsg) return '<p class="status err">' + esc(A.sugMsg) + '</p>';
   if (!I.length) return '<p class="muted">Nada a sugerir nestas partes com o que foi lido' + (Object.keys(A.docs).length ? '' : ' (leia as peças principais para a leitura do texto)') + '.</p>';
+  var valor = function (it) { return dataBr(it.kind === 'tabela' ? it.value.map(function (l) { return Object.keys(l).filter(function (c) { return S(l[c]); }).map(function (c) { return c + ': ' + S(l[c]).slice(0, 90); }).join(' · '); }).join(' | ') : S(it.value)); };
+  /* o que já confere com a ficha não tem o que gravar: fica recolhido numa linha */
+  var pend = I.filter(function (it) { return it.status !== 'igual'; }), iguais = I.filter(function (it) { return it.status === 'igual'; });
   var G = {}, ordem = [];
-  I.forEach(function (it) { var k = (A.sug || []).indexOf(it); if (!G[it.sec]) { G[it.sec] = []; ordem.push(it.sec); } G[it.sec].push([it, k]); });
-  return '<div class="sg">' + ordem.map(function (sec) {
+  pend.forEach(function (it) { var k = (A.sug || []).indexOf(it); if (!G[it.sec]) { G[it.sec] = []; ordem.push(it.sec); } G[it.sec].push([it, k]); });
+  var h = ordem.map(function (sec) {
     return '<h4 class="tr-g">' + esc(sec) + '</h4>' + G[sec].map(function (x) {
-      var it = x[0], k = x[1], v = it.kind === 'tabela' ? it.value.map(function (l) { return Object.keys(l).filter(function (c) { return S(l[c]); }).map(function (c) { return c + ': ' + S(l[c]).slice(0, 90); }).join(' · '); }).join(' | ') : S(it.value);
-      return '<label class="sg-i is-' + it.status + '"><input type="checkbox" data-sg="' + k + '"' + (it.apply ? ' checked' : '') + (it.status === 'igual' ? ' disabled' : '') + '>' +
-        '<span class="sg-b"><span class="sg-h"><b>' + esc(it.label) + '</b><i class="sg-s">' + esc(it.status) + '</i>' + (it.doc ? '<small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</span>' +
-        '<span class="sg-v">' + esc(v.slice(0, 600)) + '</span>' + (it.status === 'conflito' && it.kind !== 'tabela' ? '<small class="muted">Na ficha: ' + esc(S(it.current)) + '</small>' : '') + (it.note ? '<small class="muted">' + esc(it.note) + '</small>' : '') + '</span></label>';
+      var it = x[0], k = x[1], v = valor(it);
+      return '<label class="sg-i is-' + it.status + '"><input type="checkbox" data-sg="' + k + '"' + (it.apply ? ' checked' : '') + '>' +
+        '<span class="sg-b"><span class="sg-h"><b>' + esc(it.label) + '</b><i class="sg-s">' + (it.status === 'conflito' ? 'diverge' : 'novo') + '</i>' + (it.doc ? '<small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</span>' +
+        '<span class="sg-v">' + esc(v.slice(0, 600)) + '</span>' + (it.status === 'conflito' && it.kind !== 'tabela' ? '<small class="muted">Na ficha: ' + esc(dataBr(S(it.current))) + '</small>' : '') + (it.note ? '<small class="muted">' + esc(it.note) + '</small>' : '') + '</span></label>';
     }).join('');
-  }).join('') + '<div class="bar"><button type="button" class="btn solid" data-au="aplicar"' + (marc ? '' : ' disabled') + '>Gravar ' + marc + ' na ficha</button><small class="muted">Só vai o que está marcado. Conflitos só trocam o que está na ficha se marcados.</small></div></div>';
+  }).join('');
+  var conf = iguais.length ? '<details class="sg-ig"><summary>' + (pend.length ? '' : 'Tudo confere com a ficha · ') + iguais.length + ' campo(s) já iguais na ficha</summary><ul>' +
+    iguais.map(function (it) { return '<li><b>' + esc(it.label) + '</b> ' + esc(valor(it).slice(0, 160)) + (it.doc ? ' <small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</li>'; }).join('') + '</ul></details>' : '';
+  return '<div class="sg">' + h + conf + (pend.length ? '<div class="bar"><button type="button" class="btn solid" data-au="aplicar"' + (marc ? '' : ' disabled') + '>Gravar ' + marc + ' na ficha</button><small class="muted">Só vai o que está marcado. O que diverge só troca o que está na ficha se marcado.</small></div>' : '') + '</div>';
 }
+/* datas ISO (2025-07-01) aparecem como 01/07/2025 */
+function dataBr(t) { return String(t || '').replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, '$3/$2/$1'); }
 /* Prontuário › Triagem: a conferência automática dos autos */
 function htmlConferencia() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';

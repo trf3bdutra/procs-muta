@@ -621,3 +621,6 @@ input[type=password]{width:100%;font:inherit;font-size:14px;color:var(--fg);back
   #panel-acervo .wrap,#panel-par .wrap,#panel-dir .wrap{padding:10px 11px 30px}
 }
 .au-a .au-pdf{padding-left:7px;padding-right:7px}
+.sg-ig{margin-top:4px;font-size:11px;color:var(--muted-fg)}
+.sg-ig summary{cursor:pointer;padding:3px 6px;border-radius:6px;background:var(--secondary)}
+.sg-ig ul{margin:4px 0 0;padding-left:18px}.sg-ig li{margin:1px 0}.sg-ig li b{font-weight:600;color:var(--fg)}
