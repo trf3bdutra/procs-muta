@@ -1579,6 +1579,11 @@ html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:
 /* Mural do servidor (shadow root #mu-host) no lugar do quadro antigo; o painel do gabinete (?painel=gabinete) segue com o quadro */
 body:not(.painel-gab) #v-inicio>.hc-hero,body:not(.painel-gab) #v-inicio>.hc-over,body:not(.painel-gab) #v-inicio>.hc-kpis,body:not(.painel-gab) #v-inicio>.hc-board{display:none!important}
 body.painel-gab #mu-host{display:none}#mu-host{margin:0 0 22px}
+/* Mural: calendário à esquerda, avisos e ausências à direita; sem a faixa de sessões em andamento */
+#mu-cal-wrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}#mu-cal-wrap>.cg-cal{margin:0;min-width:0}
+#mu-host .cc-dir{display:none!important}
+.mu-cal-lado{display:flex;flex-direction:column;gap:14px;min-width:0}.mu-cal-lado>.cx{margin:0}
+@media (max-width:1180px){#mu-cal-wrap{grid-template-columns:1fr}}
 /* calendário do gabinete no padrão da Chefia do Caput (mesmo CMTCalendario do motor) */
 .cg-cal{margin-bottom:14px;--p:#fbfaf5;--w:#fff;--tx:#203b39;--m:#5c6b67;--m2:#4f5a57;--b:#d8d3c6;--l:#e3ded2;--v:#173f3d;--g:#805b18}
 html[data-theme=dark] .cg-cal{--p:#182f43;--w:#13293b;--tx:#e6edf3;--m:#a8b8c6;--m2:#8fa2b2;--b:#2d465b;--l:#24394d;--v:#6cc2b4;--g:#e0b45a}.cg-cal #cc-cal{margin:0;padding:0}
@@ -2159,7 +2164,7 @@ html[data-theme=dark] #prq .prt-p>section{background:#132835;border-color:#2c4a5
       <!-- a agenda de entregas deu lugar ao calendário do gabinete, logo abaixo -->
     </aside></div>
     <section class="hc-calendar hc-cal-gab cg-cal" id="hc-cal-full" aria-label="Calendário do gabinete"><div id="cc-cal" class="eq-cal"></div></section>
-    <details class="hc-more"><summary>Meu resumo de minutas, minhas ausências e avisos</summary>
+    <details class="hc-more"><summary>Meu resumo de minutas</summary>
     <div class="ini-d">
       
       <aside class="ini-rail" aria-label="Meus prazos, ausências e avisos">
@@ -2315,7 +2320,12 @@ function montar(P0,cx){CX=cx||{};
   var alvo=document.getElementById('mu-host');if(!alvo)return;
   if(!root){host=alvo;root=host.attachShadow({mode:'open'});root.innerHTML='<style>'+CSS+'</style>'+HTML;ligar();tema();
     /* o calendário do gabinete entra no Mural pelo slot, entre os indicadores e a lista */
-    var cal=document.getElementById('hc-cal-full');if(cal){cal.setAttribute('slot','cal');host.appendChild(cal);}
+    var cal=document.getElementById('hc-cal-full');if(cal){
+      /* à direita do calendário: avisos e atualizações e minhas ausências (os mesmos blocos, com os mesmos ids) */
+      var wr=document.createElement('div');wr.id='mu-cal-wrap';wr.setAttribute('slot','cal');
+      var ld=document.createElement('aside');ld.className='mu-cal-lado';ld.setAttribute('aria-label','Avisos e minhas ausências');
+      var av=document.querySelector('#v-inicio .av-box'),au=document.getElementById('aus-box');if(av)ld.appendChild(av);if(au)ld.appendChild(au);
+      cal.removeAttribute('slot');wr.appendChild(cal);wr.appendChild(ld);host.appendChild(wr);}
     new MutationObserver(tema).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}
   adapta(P0);prep();
   if(F.ses&&!D.sessoes.some(function(s){return s.date===F.ses;}))F.ses='';

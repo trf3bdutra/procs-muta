@@ -162,3 +162,11 @@ test('Pautas: sessão e buscador em linha única; ações de Sinalizações e No
   assert.ok(h.indexOf('notasBloco(it)+\n') < h.indexOf("'<details class=\"ac-s ac-det\" id=\"ac-so\"'"), 'Solicitações depois das Notas');
   assert.match(h, /#prq \.prt-p>section\{background:#fff/);
 });
+
+test('Mural: avisos e minhas ausências à direita do calendário, sem a faixa de sessões em andamento', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cc-dir\{display:none!important\}/);
+  assert.match(h, /wr\.id='mu-cal-wrap'/);
+  assert.match(h, /#mu-cal-wrap\{display:grid;grid-template-columns:minmax\(0,1fr\) 340px/);
+});
