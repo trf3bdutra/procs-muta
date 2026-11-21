@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/init/assets/css/95-ficha-unica.css">
 <style>
-:root{--bg:#f4f2ea;--p:#fbfaf5;--w:#fff;--tx:#203b39;--m:#5c6b67;--m2:#4f5a57;--b:#d8d3c6;--b2:#c8c3b6;--l:#e3ded2;--l2:#f0ece2;--v:#173f3d;--v2:#235a55;--g:#805b18;--g2:#a57829;--ok:#1f5a4a;--ok2:#3b7150;--az:#24506f;--az2:#4b7fa8;--r:#8a2f22;--r2:#e2b3aa;--cz:#8a948f}
+:root{--bg:#f8f6f0;--p:#fbfaf5;--w:#fff;--tx:#203b39;--m:#5c6b67;--m2:#4f5a57;--b:#d8d3c6;--b2:#c8c3b6;--l:#e3ded2;--l2:#f0ece2;--v:#173f3d;--v2:#235a55;--g:#805b18;--g2:#a57829;--ok:#1f5a4a;--ok2:#3b7150;--az:#24506f;--az2:#4b7fa8;--r:#8a2f22;--r2:#e2b3aa;--cz:#8a948f}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 Figtree,system-ui,sans-serif}
 a{color:var(--v2)}
@@ -70,10 +70,10 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 /* Visão geral: cabeçalhos em areia; cartões e painéis no fundo das Estatísticas dos filtrados */
 .tri-vg .ch{background:#e8e1cf!important;box-shadow:none!important;border-bottom:1px solid var(--b)!important}
 /* faixa da Visão geral e do Acervo filtrado: mesmo bege, com a textura de papel */
-.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .22  0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")!important;box-shadow:none!important;border-bottom:1px solid var(--b)!important}.tri-vg .tri-vg-h,.tri-vg .tri-vg-h *,.tri-vg .ch,.tri-vg .ch *{color:var(--v)!important}.tri-vg .ch small,.tri-vg .tri-vg-r{opacity:.85}
+.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .22  0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")!important;box-shadow:none!important;border-bottom:1px solid var(--b)!important}.tri-vg .tri-vg-h,.tri-vg .tri-vg-h *,.tri-vg .ch,.tri-vg .ch *{color:var(--v)!important}.tri-vg .ch small,.tri-vg .tri-vg-r{opacity:.85}
 .tri-vg .kpi,.tri-vg .card{background:var(--p)!important}.tri-vg .li.hd{background:#f7f3e8!important}
 /* textura de papel, discreta, no fundo geral */
-body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .22  0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-attachment:fixed}.tri-vg-c .card{overflow:hidden}.tri-vg-c .ch{background:var(--bg);border-bottom:1px solid var(--b)}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .22  0 0 0 .12 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-attachment:fixed}.tri-vg-c .card{overflow:hidden}.tri-vg-c .ch{background:var(--bg);border-bottom:1px solid var(--b)}
 .ini-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:18px 0 14px;flex-wrap:wrap}
 .ini-cab p{margin:4px 0 0;font-size:14px;color:var(--m2)}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
@@ -984,6 +984,14 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 @media(max-width:1000px){.vo-bd{grid-template-columns:1fr;height:auto}#vo-lst{max-height:560px}.vo-eq{max-height:360px}.vo-m{border-right:0}.cg-faixa.vo-k{grid-template-columns:repeat(3,minmax(0,1fr))}.vo-g li{grid-template-columns:100px minmax(0,1fr);}.vo-et,.vo-rp{display:none}}.cg-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:end;margin:20px 0 16px;padding-bottom:14px;border-bottom:2px solid var(--v)}
 .cg-top h1{font-size:30px;letter-spacing:-.03em;color:var(--v);margin:0;line-height:1}.cg-top .k{margin:0 0 4px}
 .cg-faixa{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--b);background:var(--w)}.cg-faixa>div{padding:8px 14px;border-right:1px solid var(--l2)}.cg-faixa>div:last-child{border:0}
+/* cartões de indicadores no padrão da Visão geral da triagem: fio colorido no topo, rótulo em caixa alta e número na cor */
+.cg-top .cg-faixa,.cwe-kpis{gap:10px;border:0!important;background:none!important}
+.cg-top .cg-faixa>div,.cwe-kpis>span,.cwe-kpis>button{display:flex;flex-direction:column;gap:4px;padding:11px 14px;background:var(--p)!important;border:1px solid var(--b)!important;border-radius:8px!important;box-shadow:inset 0 3px 0 var(--kc);text-align:left;min-width:0}
+.cg-top .cg-faixa>div>span{order:-1;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--kc)}
+.cg-top .cg-faixa>div>b,.cwe-kpis>span>b,.cwe-kpis>button>b{font:500 28px 'JetBrains Mono',monospace!important;letter-spacing:-.02em;line-height:1.05;color:var(--kc)!important}
+.cwe-kpis>span,.cwe-kpis>button{font-size:12px;color:var(--m2)}.cwe-kpis>span small,.cwe-kpis>button small{font-size:11px;color:var(--m)}
+.cg-top .cg-faixa>div:nth-child(4n+1),.cwe-kpis>:nth-child(4n+1){--kc:#a57829}.cg-top .cg-faixa>div:nth-child(4n+2),.cwe-kpis>:nth-child(4n+2){--kc:#3b7150}.cg-top .cg-faixa>div:nth-child(4n+3),.cwe-kpis>:nth-child(4n+3){--kc:#24506f}.cg-top .cg-faixa>div:nth-child(4n+4),.cwe-kpis>:nth-child(4n+4){--kc:#7b8580}
+
 .cg-faixa b{font:600 20px "JetBrains Mono",monospace;display:block;color:var(--v);line-height:1.1}.cg-faixa span{color:var(--m2);font-size:11px}
 .cg-px{border:1px solid var(--b);border-top:2px solid var(--v);background:var(--w);margin-bottom:16px;min-width:0}
 .cg-px>header{display:flex;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid var(--b);background:var(--p)}.cg-px>header>span:first-child{display:flex;flex-direction:column;gap:1px;min-width:0}
@@ -4070,7 +4078,7 @@ function portaToken() { return new Promise((fim) => {
     return { css: css.replace(/html,body\{margin:0\}/g, '').replace(/:root/g, ':host').replace(/\bbody\{/g, '.mb{').replace(/\bbody\./g, '.mb.'), corpo: doc.body.innerHTML, cod };
   }).catch((er) => { MESA.fonte = null; throw er; })); }
   /* ajustes da mesa dentro da página: cabeçalho e coluna da equipe presos abaixo do topo do Caput; barra de baixo presa no fim do bloco */
-  const MESA_CSS = `:host{display:block}.mb{background:transparent!important}.mb.emb .top{top:var(--mt,60px)!important}.mb.emb .side{top:calc(var(--mt,60px) + 76px)!important;max-height:calc(100vh - var(--mt,60px) - 150px)!important}
+  const MESA_CSS = `:host{display:block}.kp{gap:10px!important}.kp>div{display:flex;flex-direction:column;gap:4px;padding:11px 14px!important;background:#fbfaf5!important;border:1px solid #d8d3c6!important;border-radius:8px!important;box-shadow:inset 0 3px 0 var(--kc)!important}.kp>div>span{order:-1;font:500 10px 'JetBrains Mono',monospace!important;letter-spacing:.1em;text-transform:uppercase;color:var(--kc)!important}.kp>div>b{white-space:nowrap;font:500 24px 'JetBrains Mono',monospace!important;letter-spacing:-.02em!important;color:var(--kc)!important}.kp>div:nth-child(4n+1){--kc:#a57829}.kp>div:nth-child(4n+2){--kc:#3b7150}.kp>div:nth-child(4n+3){--kc:#24506f}.kp>div:nth-child(4n+4){--kc:#7b8580}.mb{background:transparent!important}.mb.emb .top{top:var(--mt,60px)!important}.mb.emb .side{top:calc(var(--mt,60px) + 76px)!important;max-height:calc(100vh - var(--mt,60px) - 150px)!important}
     .mb .foot{position:sticky!important;bottom:0;margin-top:10px}.mb .lay{padding-bottom:16px!important}.mb.temsel main{padding-bottom:0!important}`;
   async function mesaMonta(sid) {
     const h = document.createElement('div'); h.id = 'cwe-mesa-host'; h.dataset.s = sid; MESA.host = h;
