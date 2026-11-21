@@ -7,7 +7,7 @@
    GET/POST /api/pauta?planilha=1                          planilhas do Google Drive, por token (ver _planilha.js) */
 const L = require('./_lib'), FICHA = require('./_ficha');
 const DIRETOS = ['dataMinuta', 'dataCorrecao', 'dataLiberacao', 'obs'];
-const CTL = ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias', 'resJulg', 'consect', 'honor', 'topico', 'intercor', 'intercorOk', 'sopref'];
+const CTL = ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias', 'resJulg', 'consect', 'honor', 'topico', 'intercor', 'intercorOk', 'intercorTipo', 'intercorChamado', 'retidoOk', 'sopref'];
 const GESTOR = ['servidor', 'corretor', 'resultado'];   /* designação e desfecho: só o gestor (CMT_GESTOR) */
 const dg = s => String(s || '').replace(/\D/g, '');
 /* grava campos de um processo da pauta; devolve {status, body}. gestorOk: pode designar e registrar o desfecho */

@@ -92,3 +92,13 @@ test('pauta: etiqueta Retidos (adiados ou retirados de pauta)', () => {
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   assert.ok(app.includes("['rt','Retidos','Adiados ou retirados de pauta',function(i){return /^(adiad|retirad)/i.test(i.resultado||'');}]"));
 });
+
+test('prontuário: Sinalizações (intercorrência com chamado ao TI e retido, pendência, aviso) e diligência automática do retido', () => {
+  const path = require('path'), fs = require('fs');
+  const app = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ['function sinalizacoes(it,c,PL,auto)', 'function icAberta(it)', "Intercorrência · chamado ao TI", "data-ac=\"retidoOk\"", "data-acv-ok=", "cart(it).avisos=AV", "ic=n(icAberta)", "(inssParte(it)?f('Tópico-síntese'", "(RN||/remessa/.test(nq(it.classe||''))?f('Remessa necessária'"]) assert.ok(app.includes(x), x);
+  const pauta = fs.readFileSync(path.join(__dirname, '..', 'api', 'pauta.js'), 'utf8');
+  assert.ok(pauta.includes("'intercorTipo', 'intercorChamado', 'retidoOk'"));
+  const pend = fs.readFileSync(path.join(__dirname, '..', 'api', 'pendencias.js'), 'utf8');
+  for (const x of ["origem: 'retido'", "'ret:' + s.date", "if (alvo.origem === 'retido')", "(chamado ao TI)"]) assert.ok(pend.includes(x), x);
+});
