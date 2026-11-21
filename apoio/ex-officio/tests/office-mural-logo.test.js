@@ -68,3 +68,17 @@ test('prontuário: sem redesenho quando nada mudou; atualização silenciosa sem
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ["if(el._sig===sig&&el.getAttribute('data-k')===S.prt&&el.querySelector('.prt')){prtPos();return;}", 'el._sig=sig;if(sc0)', '(silencioso&&!mud&&S.doc)', "f=requestAnimationFrame(function(){f=0;prtPos();})"]) assert.ok(app.includes(x), x);
 });
+
+test('pedido por e-mail: grava tipo e os dados do pedido na seção do prontuário', async () => {
+  const path = require('path');
+  const pauta = require.resolve(path.join(__dirname, '..', 'api', 'pauta.js'));
+  let rec = null;
+  require.cache[pauta] = { id: pauta, filename: pauta, loaded: true, exports: { gravarItem: async (d, b) => { rec = { d, b }; return { status: 200, body: {} }; } } };
+  const P = require(path.join(__dirname, '..', 'api', '_pedidos.js'));
+  await P.marcar('2026-11-30', { lista: 'itens' }, { cnj: '5000791-85.2025.4.03.6207', tipo: 'Virtual', advogado: 'Fulana de Tal', oab: 'MS 12345', parte: 'Autora', recebidoEm: '2026-11-20T15:00:00Z', id: 'so-abc' });
+  delete require.cache[pauta];
+  assert.equal(rec.b.campos.sopref, 'Virtual');
+  assert.deepEqual(rec.b.campos.cartao.so, { advogado: 'Fulana de Tal', oab: 'MS 12345', parte: 'Autora', recebido: '2026-11-20', origem: 'e-mail', pedido: 'so-abc' });
+  const app = require('fs').readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ["fl('Advogado(a)','advogado','nome')", "fl('Pedido recebido em','recebido','','date')", "if(dialogo.id==='ac-so')"]) assert.ok(app.includes(x), x);
+});

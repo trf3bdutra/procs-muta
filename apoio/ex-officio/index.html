@@ -2921,7 +2921,9 @@ function acompHtml(it){var c=it.ctl||{},so=c.sopref||'',PL=(((c.cartao||{}).pend
        abre sozinha se houver pedido marcado ou pedido recebido por e-mail vinculado ao processo */
     '<details class="ac-s ac-det" id="ac-so"'+(so?' open':'')+'><summary><h4>Sustentação oral · preferência'+(so?'<em class="ac-st so">'+esc(SOROT[soTipo(so)])+'</em>':'<em class="ac-st">sem pedido</em>')+'</h4></summary>'+
       '<div class="ac-seg" role="group" aria-label="Pedido de sustentação ou preferência">'+SOB.map(function(x){return '<button type="button" data-ac-so="'+x[0]+'" aria-pressed="'+(so===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>'+
-      '<div class="ped-dados" aria-live="polite"></div><small class="ac-h">Pedidos recebidos por e-mail aparecem aqui quando vinculados ao processo.</small></details>'+
+      (function(){var D=((c.cartao||{}).so)||{},fl=function(r,k,ph,t){return '<label class="ac-sf"><span>'+r+'</span><input data-p="so.'+k+'" type="'+(t||'text')+'" value="'+esc(D[k]||'')+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'></label>';};
+        return '<div class="ac-so-f">'+fl('Advogado(a)','advogado','nome')+fl('OAB','oab','UF 000000')+fl('Parte representada','parte','parte que pediu')+fl('Pedido recebido em','recebido','','date')+'</div>';})()+
+      '<div class="ped-dados" aria-live="polite"></div><small class="ac-h">Pedidos recebidos por e-mail preenchem estes campos ao serem vinculados ao processo.</small></details>'+
     '<section class="ac-s" id="ac-ic"><h4>Intercorrência'+(c.intercor?'<em class="ac-st '+(icA?'al':'ok')+'">'+(icA?'em aberto':'resolvida')+'</em>':'')+'</h4>'+
       '<textarea data-ac="intercor" rows="2" maxlength="1200" placeholder="O que impede ou atrasa a liberação (deixe vazio se não houver)">'+esc(c.intercor||'')+'</textarea>'+
       '<label class="ac-ck"><input type="checkbox" data-ac="intercorOk"'+(c.intercorOk?' checked':'')+(c.intercor?'':' disabled')+'> resolvida</label><small class="ac-h">Em aberto, a intercorrência retém a liberação do voto.</small></section>'+
@@ -4363,7 +4365,11 @@ function pedCard(dialogo,data,cnj,silencioso){
   if(!silencioso)box.textContent='Consultando pedidos recebidos por e-mail…';
   api(PED_URI+'&data='+encodeURIComponent(data)+'&cnj='+encodeURIComponent(cnj)).then(function(j){
     var pedidos=(j.registros||[]).filter(function(p){return p.vinculo&&(!p.cnj||!cnj||dg(p.cnj)===dg(cnj));});
-    box.innerHTML=pedidos.length?pedidos.map(function(p){return '<article>'+pedResumo(p)+'</article>';}).join(''):'';
+    /* prontuário: os dados do e-mail vão para os campos da seção (só onde estiverem vazios) e fica uma linha de origem */
+    if(dialogo.id==='ac-so'){var p0=pedidos[0],F={advogado:p0&&p0.advogado,oab:p0&&p0.oab,parte:p0&&p0.parte,recebido:p0&&p0.recebidoEm?new Date(p0.recebidoEm).toLocaleDateString('sv-SE',{timeZone:'America/Cuiaba'}):''};
+      if(p0)Object.keys(F).forEach(function(k){var i=dialogo.querySelector('[data-p="so.'+k+'"]');if(i&&!i.value&&F[k]){i.value=F[k];i.classList.add('do-email');i.title='Do e-mail do pedido';}});
+      box.innerHTML=pedidos.map(function(p){var r=p.recebidoEm?new Date(p.recebidoEm).toLocaleString('pt-BR',{timeZone:'America/Cuiaba',dateStyle:'short',timeStyle:'short'}):'';return '<p class="ped-l">'+esc(p.titulo)+' · recebido por e-mail'+(r?' em '+esc(r):'')+'</p>';}).join('');}
+    else box.innerHTML=pedidos.length?pedidos.map(function(p){return '<article>'+pedResumo(p)+'</article>';}).join(''):'';
     var dt=box.closest&&box.closest('details');if(dt&&pedidos.length)dt.open=true;
   }).catch(function(e){if(!silencioso)box.textContent=e.message||'Falha ao consultar os pedidos.';});
 }
@@ -9752,6 +9758,13 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 /* descrição da pendência inteira, em quantas linhas precisar (antes cortava numa linha só) */
 #prq .ac-pl textarea{grid-column:2;width:100%;min-height:0;margin:0;border:0!important;background:transparent!important;padding:2px 0!important;resize:none;overflow:hidden;field-sizing:content;font:inherit;font-size:13px;line-height:1.4;color:inherit;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:none!important;cursor:text}
 #prq .ac-pl textarea:focus{outline:0;background:var(--ep2,#f3f1e8)!important}
+/* sustentação oral · preferência: dados do pedido (advogado, OAB, parte, recebimento) */
+#prq .ac-so-f{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:6px 8px;margin:8px 0 4px}
+#prq .ac-sf{display:flex;flex-direction:column;gap:2px;min-width:0}
+#prq .ac-sf span{font:600 9.5px var(--emono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--em)}
+#prq .ac-sf input{width:100%;min-width:0;height:28px!important;font-size:12.5px}
+#prq .ac-sf input.do-email{background:#eef6f2!important;border-color:#9cc0b4!important}
+#prq .ped-l{margin:4px 0 0;font:500 11px var(--emono,monospace);color:#28744b}
 #prq .ac-pl{align-items:start}#prq .ac-pl>input[type=checkbox]{margin-top:5px}
 #prq .ac-pl small{grid-column:2;grid-row:2;font:400 9.5px var(--emono);color:var(--em)}
 #prq .ac-pl button{grid-column:3;grid-row:1/span 2;width:22px;height:22px;border:0;background:none;color:var(--em);cursor:pointer;font-size:15px;border-radius:4px}
