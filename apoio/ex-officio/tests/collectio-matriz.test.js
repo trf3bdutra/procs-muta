@@ -68,7 +68,7 @@ async function comHandler(amb, fn) {
 
 const MX = 'acervo/matrizes/pauta-2026-11-30.json';
 const GR = [{ id: 'G1', rotulo: 'Crédito presumido provado', cor: '#2f6db5', resultado: 'Concessão mantida' }];
-const CO = [{ id: 'PRE', rotulo: 'Prescrição' }];
+const CO = [{ id: 'PRE', rotulo: 'Prescrição' }, { id: 'HON', rotulo: 'Honorários de 18/11', trecho: 'Pela sucumbência recursal' }];
 
 test('o gestor grava a matriz de um lote: grupos e colunas do lote e marcas só dos processos enviados', async () => {
   const amb = ambiente();
@@ -77,7 +77,7 @@ test('o gestor grava a matriz de um lote: grupos e colunas do lote e marcas só 
     assert.equal(r.code, 200, JSON.stringify(r.body));
     const l = amb.data[LOTE];
     assert.deepEqual(l.grupos.map(g => g.id), ['G1']);
-    assert.deepEqual(l.colunas, CO);
+    assert.deepEqual(l.colunas, CO, 'a coluna com trecho guarda o trecho');
     const a = l.itens.find(i => i.processo === P), b = l.itens.find(i => i.processo === Q);
     assert.equal(a.grupo, 'G1'); assert.deepEqual(a.variacoes, ['PRE']); assert.equal(a.observacao, 'Prova do crédito nos autos.');
     assert.ok(!b.grupo && !(b.variacoes || []).length, 'o outro processo não muda');
@@ -106,7 +106,7 @@ test('na pauta da sessão a matriz fica em acervo/matrizes e entra na matriz ger
     assert.equal(g.code, 200, JSON.stringify(g.body));
     const lote = g.body.lote, it = lote.itens.find(i => i.processo === Q), outro = lote.itens.find(i => i.processo === P);
     assert.deepEqual(lote.grupos.map(x => x.id), ['G1']);
-    assert.deepEqual(lote.colunas.map(x => x.id), ['PRE']);
+    assert.deepEqual(lote.colunas.map(x => x.id), ['PRE', 'HON']);
     assert.equal(it.grupo, 'G1'); assert.deepEqual(it.variacoes, ['PRE']); assert.equal(it.observacao, 'Ver a prescrição.');
     assert.ok(!outro.grupo, 'processo sem marca fica sem grupo');
     assert.ok(lote.matriz && lote.matriz.por === 'Bruno');

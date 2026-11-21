@@ -220,8 +220,10 @@ const SECOES = ['relatorio', 'voto', 'ementa', 'acordao'], VID = /^v\d{1,3}$/;
 const caminhoMatriz = id => 'acervo/matrizes/' + id + '.json';
 const COR = /^#[0-9a-f]{3,8}$/i;
 const limpaGrupos = a => (Array.isArray(a) ? a : []).slice(0, 60).filter(g => g && g.id && g.rotulo).map(g => ({ id: String(g.id).slice(0, 60), rotulo: String(g.rotulo).slice(0, 200),
-  cor: COR.test(String(g.cor || '')) ? g.cor : '#5d6b72', resultado: String(g.resultado || '').slice(0, 600), modelo: String(g.modelo || '').slice(0, 300) }));
-const limpaColunas = a => (Array.isArray(a) ? a : []).slice(0, 30).filter(c => c && c.id && c.rotulo).map(c => ({ id: String(c.id).slice(0, 12), rotulo: String(c.rotulo).slice(0, 120) }));
+  cor: COR.test(String(g.cor || '')) ? g.cor : '#5d6b72', resultado: String(g.resultado || '').slice(0, 600), modelo: String(g.modelo || '').slice(0, 300),
+  ...(g.descricao ? { descricao: String(g.descricao).slice(0, 600) } : {}) }));
+/* coluna com trecho: marcada, a minuta deve ter o trecho; sem marca, não deve ter */
+const limpaColunas = a => (Array.isArray(a) ? a : []).slice(0, 30).filter(c => c && c.id && c.rotulo).map(c => Object.assign({ id: String(c.id).slice(0, 12), rotulo: String(c.rotulo).slice(0, 120) }, c.trecho ? { trecho: String(c.trecho).slice(0, 2000) } : {}));
 const limpaMarca = x => ({ grupo: x.grupo ? String(x.grupo).slice(0, 60) : null, variacoes: (Array.isArray(x.variacoes) ? x.variacoes : []).slice(0, 30).map(v => String(v).slice(0, 12)),
   observacao: String(x.observacao || '').slice(0, 2000) });
 function aplicaMatriz(lote, mx) {
