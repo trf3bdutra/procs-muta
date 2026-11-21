@@ -7980,6 +7980,39 @@ window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true);
 })();
 
 
+
+/* botão de copiar: número do processo (no prontuário e nos cartões) e campos de ID do prontuário; peças numa linha só.
+   Enfeita o que a página desenha, sem mexer no desenho original nem nos campos (data-p continua igual). */
+(function(){
+  var ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"/><path d="M5 15V4a1 1 0 0 1 1-1h11"/></svg>';
+  var bt=function(cls,tit){return '<button type="button" class="cpy '+cls+'" title="'+tit+'" aria-label="'+tit+'">'+ICO+'</button>';};
+  function enfeita(){
+    var q=document.getElementById('prq');
+    if(q){
+      var b=q.querySelector('.prt-id>b');if(b&&!(b.nextElementSibling&&b.nextElementSibling.classList.contains('cpy'))&&!b.parentElement.classList.contains('cpy-l')){var w=document.createElement('span');w.className='cpy-l';b.parentNode.insertBefore(w,b);w.appendChild(b);w.insertAdjacentHTML('beforeend',bt('cpy-cnj','Copiar o número do processo'));}
+      Array.prototype.forEach.call(q.querySelectorAll('input[data-p$=".id"],input[data-p="orig.id"],input[data-p$=".numero"],input[data-p$=".cnj"]'),function(i){if(i.parentElement.classList.contains('cpw'))return;var w=document.createElement('span');w.className='cpw';i.parentNode.insertBefore(w,i);w.appendChild(i);w.insertAdjacentHTML('beforeend',bt('cpy-in',/numero|cnj/.test(i.getAttribute('data-p'))?'Copiar o número':'Copiar o ID'));});
+      Array.prototype.forEach.call(q.querySelectorAll('.rec'),function(r){if(!r.classList.contains('rec-pc')&&r.querySelector('input[data-p$=".desc"]'))r.classList.add('rec-pc');
+        var ds=r.querySelector('input[data-p$=".desc"]');if(ds&&ds.title!==ds.value)ds.title=ds.value;
+        if(r.classList.contains('rec-pc')){var es=r.querySelector(':scope>input[data-p$=".esp"]');
+          if(es){r.classList.toggle('sem-esp',!es.value.trim());
+            var eb=r.querySelector(':scope>.esp-b');if(!eb){var xx=r.querySelector(':scope>button.x');var h='<button type="button" class="esp-b" title="Especificação do documento" aria-label="Especificação do documento"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h11M4 12h11M4 18h7"/><path d="M18 15v6M15 18h6"/></svg></button>';if(xx)xx.insertAdjacentHTML('beforebegin',h);else es.insertAdjacentHTML('beforebegin',h);eb=r.querySelector(':scope>.esp-b');}
+            eb.classList.toggle('on',!!es.value.trim());}}
+        var x=r.classList.contains('rec-pc')&&r.querySelector(':scope>button.x');if(x&&!x.dataset.ic){x.dataset.ic='1';x.textContent='×';x.title='Remover a peça';x.setAttribute('aria-label','Remover a peça');}});
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('#v-pauta .mr-l1>.cnj'),function(c){if(c.nextElementSibling&&c.nextElementSibling.classList.contains('cpy'))return;c.insertAdjacentHTML('afterend',bt('cpy-card','Copiar o número do processo'));});
+  }
+  var ag=0;new MutationObserver(function(){if(ag)return;ag=requestAnimationFrame(function(){ag=0;enfeita();});}).observe(document.body,{childList:true,subtree:true});
+  function copia(txt,b){txt=String(txt||'').trim();if(!txt){toast('Nada para copiar.');return;}
+    var ok=function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok');},900);toast('Copiado: '+txt);};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,function(){toast('Não foi possível copiar.');});
+    else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');ok();}catch(e){toast('Não foi possível copiar.');}t.remove();}}
+  /* botão da especificação: mostra o campo e põe o cursor nele; vazio ao sair, some de novo */
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#prq .esp-b');if(!b)return;e.preventDefault();var r=b.closest('.rec'),es=r&&r.querySelector(':scope>input[data-p$=".esp"]');if(!es)return;r.classList.add('esp-on');es.focus();},true);
+  document.addEventListener('focusout',function(e){var t=e.target;if(!t||!t.matches||!t.matches('#prq .rec-pc>input[data-p$=".esp"]'))return;var r=t.closest('.rec');setTimeout(function(){if(!t.value.trim())r.classList.remove('esp-on');r.classList.toggle('sem-esp',!t.value.trim());var eb=r.querySelector(':scope>.esp-b');if(eb)eb.classList.toggle('on',!!t.value.trim());},150);},true);
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.cpy');if(!b)return;e.preventDefault();e.stopPropagation();
+    if(b.classList.contains('cpy-in')){var i=b.parentElement.querySelector('input');copia(i&&i.value,b);}
+    else{var c=b.previousElementSibling;copia(c&&c.textContent,b);}},true);
+})();
 </script>
 <!-- cmt-ficha:fim -->
 <style>
