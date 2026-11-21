@@ -212,3 +212,11 @@ test('Mural: passos do ponto de vista de quem está logado, sinalizações por p
   assert.match(h, /\.mu-cal-lado \.av-box #avisos>\.nt:nth-child\(n\+5\)\{display:none\}/);
   assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
 });
+
+test('Mural: Hoje/Semana como lateral do calendário e aviso em destaque no alto dos Avisos', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-esq\{border:0!important;border-right:1px solid var\(--l\)!important/);
+  assert.match(h, /<div id="av-dest" class="av-dest" hidden aria-live="polite"><\/div><div id="avisos"><\/div>/);
+  assert.match(h, /\(dd&&dx\?av\.slice\(1\):av\)\.concat\(ou\)/);
+});
