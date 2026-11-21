@@ -142,7 +142,9 @@ test('Mural do servidor: desenho do protótipo num shadow root, com o quadro ant
   assert.match(h, /<script id="mu-lib">[\s\S]*attachShadow\(\{mode:'open'\}\)/);
   assert.match(h, /body:not\(\.painel-gab\) #v-inicio>\.hc-board\{display:none!important\}/);
   assert.match(h, /if\(!PAINEL_GAB\)try\{MU\.montar\(P\.dados,\{eu:U\.eu/);
-  assert.match(h, /tl-ft/);
+  assert.match(h, /<slot name=\\"cal\\"><\\\/slot>/);
+  assert.match(h, /return \(ex\.alertasExtra\|\|\[\]\)\.concat\(U,A\.slice\(0,4\)\)/);
+  assert.match(h, /function calMeus\(D\)/);
   assert.match(p, /meta: \(it\.ctl \|\| \{\}\)\.meta/);
   assert.match(p, /pend: \(\(\(it\.ctl/);
 });

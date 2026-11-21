@@ -40,11 +40,11 @@ function montar(el,cal,ex){
       if(!s.marcos.inicioPreparacao&&s.date<iso(new Date(+P(hoje)+40*DIA))) A.push(['y','ti-calendar-question',`${F(s.date)} · preparação, minutas e liberação sem data`,s]);
     });
     const dd0=x=>Math.round((P(x)-P(hoje))/DIA), PZ=[];
-    itens().filter(i=>i.tipo==='prazo'&&i.data&&i.data>=hoje&&dd0(i.data)<=10).sort((a,b)=>a.data.localeCompare(b.data)).forEach(i=>{const n=dd0(i.data);
+    itensV().filter(i=>i.tipo==='prazo'&&i.data&&i.data>=hoje&&dd0(i.data)<=10).sort((a,b)=>a.data.localeCompare(b.data)).forEach(i=>{const n=dd0(i.data);
       PZ.push(['r','ti-alert-triangle',`⚑ ${i.titulo} · prazo-limite ${n===0?'hoje':n===1?'amanhã':'em '+n+' dias ('+F(i.data)+')'}${i.quem?' · '+i.quem:''}`,{date:''}]);});
     const AH=ausDia(hoje); if(AH.length) PZ.push(['y','ti-bell',`Ausentes hoje: ${AH.map(a=>a.quem+' ('+a.sub.toLowerCase()+(a.sit==='prevista'?', prevista':'')+')').join(', ')}`,{date:''}]);
     const U=PZ.concat(doDia(hoje,'alerta').map(x=>['y','ti-bell',`${x.hora?x.hora+' · ':''}${x.quem?x.quem+': ':''}${x.o}${x.s.date?' · sessão '+F(x.s.date):''}`,x.s.date?x.s:{date:''}]));
-    return U.concat(A.slice(0,4));
+    return (ex.alertasExtra||[]).concat(U,A.slice(0,4));
   }
   function tip(e,s,m){
     const p=prog(s), n=s.processos||0, dias=Math.round((P(m.d)-P(hoje))/DIA);
@@ -189,7 +189,9 @@ function montar(el,cal,ex){
     if(hit) ok.push(it.ses&&it.ses!=='*'?(ses.find(s=>s.date===it.ses)||GERAL):GERAL);
     return ok;
   }
-  const doDia=(dia,tipo)=>itens().filter(i=>i.tipo===tipo&&i.tipo!=='ausencia').flatMap(it=>ocorre(it,dia).map(s=>({id:'u'+it.id+':'+dia+':'+(s.date||''),quem:it.quem||'',o:it.titulo,hora:it.hora||'',s,it}))).sort((a,b)=>(a.hora||'99').localeCompare(b.hora||'99'));
+  /* itens de quem está logado (ex.meus, vindos do Ex Officio): só exibição, nunca gravados na agenda */
+  const itensV=()=>itens().concat(ex.meus||[]);
+  const doDia=(dia,tipo)=>itensV().filter(i=>i.tipo===tipo&&i.tipo!=='ausencia').flatMap(it=>ocorre(it,dia).map(s=>({id:'u'+it.id+':'+dia+':'+(s.date||''),quem:it.quem||'',o:it.titulo,hora:it.hora||'',s,it}))).sort((a,b)=>(a.hora||'99').localeCompare(b.hora||'99'));
   const feitos=()=>AG()?AG().get('feitos',{}):ls.get('cc_feitos',{});
   function afazeres(dia){
     const L=[];
