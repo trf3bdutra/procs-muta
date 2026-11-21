@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T06:33:48.264Z",
+ "atualizado_em": "2026-11-21T06:33:53.971Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -299687,57 +299687,58 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.326Z"
+    "atualizado_em": "2026-11-21T06:33:53.971Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Efeito suspensivo",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Apreciada · indeferida",
+    "Urgência - Data": "2026-11-21",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
+    "Tempestividade": "Não verificado",
     "Preparo": "Isento (ente público/MP)",
     "AJG": "Sim",
     "DPU (controle)": "Sim",
-    "Representação": "",
+    "Representação": "Dispensada (procurador público)",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
-    "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "Observação da Representação": "Dispensada a procuração: representação por procurador público.",
+    "MPF": "Não se aplica",
+    "MPF - Custos Legis": "Sem hipótese",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "FGTS/Fundo de Garantia Por Tempo de Serviço",
+    "Tema": "Execução fiscal · exclusão de ofício do sócio do polo passivo · prescrição para o redirecionado e citação por edital",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção, AI - Tutela provisória",
-    "Alegações": "",
+    "Alegações": "1) Exclusão de ofício do sócio do polo passivo; 2) prescrição para o redirecionamento e validade da citação por edital; 3) relação com o AI 5021044-57.2026.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "",
+    "Especificidades": "Julgamento conjunto com o AI 5021044-57.2026 (executada) · Tutela recursal não concedida (ID 390588554, 06/08/2026) · Contraminuta com tese de prescrição (ID 392253874)",
     "_preparoAJG": true,
     "_preparoBeforeAJG": "Não Verificado",
     "_ajgFromDpu": true,
-    "_dpuAuto": true
+    "_dpuAuto": true,
+    "Síntese Fática": "Na execução fiscal contra Nutrisul Comércio e Indústria, redirecionada ao sócio José Clóvis Neves Ramos, o juízo rejeitou a exceção de pré-executividade e excluiu o sócio do polo passivo de ofício; a União agravou."
    },
    "producao": {
     "Destino": "",
@@ -299776,7 +299777,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5009405-57.2017.4.03.0000 (acórdão 3ª Turma, 25/08/2017: provido; sem inércia, inviável a prescrição para o redirecionamento); AI 0009489-17.2015.4.03.0000 (acórdão 1ª Turma, 06/07/2023: Tema 444/STJ, prescrição consumada)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -299786,7 +299788,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5023657-89.2022.4.03.0000",
