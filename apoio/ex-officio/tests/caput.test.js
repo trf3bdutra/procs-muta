@@ -153,7 +153,7 @@ test('Coordenação: seções no padrão da Chefia',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   const i=cap.indexOf('function vCoordenacao(){'),v=cap.slice(i,cap.indexOf('\nconst CG_REL_CAT=[',i));
   assert.ok(v.includes('<div class="wrap cg-chefia co-cab"><div class="cg-top">')&&!v.includes("Operação diária"),'cabeçalho da Coordenação');
-  assert.ok(cap.includes('<div class="co-lay"><div class="co-main"><section class="cg-px co-pf">')&&cap.includes('<section class="cg-px cg-comp-p"><header>')&&cap.includes('<aside class="co-lado"><section class="cg-px">')&&cap.includes('<div id="cg-coord" aria-label="Equipe e regras">'),'Competências principal e Equipe e regras lateral');
+  assert.ok(cap.includes('<div class="co-lay"><section class="cg-px co-pf">')&&cap.includes('<section class="cg-px cg-comp-p"><header>')&&cap.includes('<aside class="co-lado"><section class="cg-px">')&&cap.includes('<div id="cg-coord" aria-label="Equipe e regras">'),'Perfis e Equipe e regras lado a lado; Competências embaixo');
 });
 
 test('Chefia › Calendário: pedidos de ausência e quem está fora, pelo motor',()=>{
@@ -179,7 +179,7 @@ test('Motor: gravar a pauta devolve ctl.lote e as chaves de ctl que vieram do ar
 
 test('Coordenação › Perfis › Competências: especialidade, prefere, evita e experiência (o que era a aba Perfis); matriz dentro de Produção; equipe atual ou com quem saiu',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),cp=cap;
-  for(const x of ['function pfComp(','function pfCompGrava(','data-pfc-poe','data-pfc-mv','data-pfc-dis',"tipo === 'cmt:comp-perfil'","['comp', 'Competências'"])assert.ok(cap.includes(x),x);
+  for(const x of ['function pfComp(','function pfCompGrava(','data-pfc-poe','data-pfc-mv','data-pfc-dis',"tipo === 'cmt:comp-perfil'","['comp', 'Competências e histórico'"])assert.ok(cap.includes(x),x);
   for(const x of ['data-eqh="atual"',"OC={nomes:[],saiu:true}",'Produção e matriz',"if(v==='matriz')v='prod'","tipo:'cmt:comp-perfil'",'window.CMTCompRecarregar()','class="so-fora">Perfis'])assert.ok(cp.includes(x),x);
 });
 
@@ -212,4 +212,10 @@ test('Competências com a pele do Caput: sem título repetido, abas sublinhadas,
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   const tpl=cap.slice(cap.indexOf('<template id="comp-tpl">'),cap.indexOf('</template>'));
   for(const x of ['.cpx .top>div:first-child{display:none}','.cpx .tabs button[aria-selected="true"]{background:none;color:#173f3d','--ac:#173f3d','.cpx .card{border-radius:0','.cpx .tw,.cpx .srvp{border-radius:0}'])assert.ok(tpl.includes(x),x);
+});
+
+test('Coordenação: Perfis inteiro (sem rolagem) com painéis Histórico (minutas, correções, diligências) e Experiência por assunto; Perfis e Equipe na mesma altura; Competências embaixo na largura toda',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['.pf-c{padding:10px 14px 14px}','class=\"pf-pn pf-hist\"','data-pf-h=','class=\"pf-pn pfc-xl\"','function pfComp(m, hist)',".co-lay>.cg-comp-p{grid-column:1/-1}",'.co-lado{position:relative;contain:size;','</aside><section class="cg-px cg-comp-p">'])assert.ok(cap.includes(x),x);
+  assert.ok(!cap.includes("['min', 'Minutas', D0.MIN.length], ['cor', 'Correções', D0.COR.length], ['dil', 'Diligências', D0.DIL.length], ['pres'"),'abas de cima sem minutas/correções/diligências');
 });
