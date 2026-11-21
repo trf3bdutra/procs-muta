@@ -493,12 +493,12 @@ document.addEventListener('keydown',function(e){var f=e.target.closest&&e.target
   else if((e.ctrlKey||e.metaKey)&&(e.key==='Enter'||e.key==='s'||e.key==='S')){e.preventDefault();e.stopPropagation();var o=f.querySelector('[data-mnok]');if(o)o.click();}},true);
 /* ---------- Entradas rápidas: aba própria do editor (ao lado das coleções) ---------- */
 EDS.rap=false;
-window.VDM_RAPTAB=function(){var el=$('#ed-rap');if(el)el.innerHTML=rapHtml('');edRapBtn();};
+window.VDM_RAPTAB=function(){var el=$('#ed-rap');if(el)el.innerHTML=rapHtml('',true);edRapBtn();};
 function edRapBtn(){var b=$('[data-edrap]'),n=rapLista().filter(function(r){return r.situacao!=='incorporada';}).length;if(b)b.innerHTML='Entradas rápidas'+(n?' <i class="ed-rapn">'+n+'</i>':'');}
 (function(){var edRenderR=edRender;edRender=function(){window.VDM_RAP_TAB=!!EDS.rap;var r=edRenderR.apply(this,arguments);
   var seg=$('#ed-ov .ed-cols');if(seg&&!seg.querySelector('[data-edrap]')){seg.insertAdjacentHTML('beforeend','<button data-edrap aria-pressed="'+EDS.rap+'"></button>');edRapBtn();}
   if(EDS.rap){[].forEach.call(document.querySelectorAll('#ed-ov [data-edcol]'),function(b){b.setAttribute('aria-pressed','false');});
-    var bd=$('#ed-ov .ed-body');if(bd){bd.classList.add('ed-rapb');bd.innerHTML='<section class="ed-rap" id="ed-rap">'+rapHtml('')+'</section>';if(window.rapLiga)window.rapLiga($('#ed-rap'));}}
+    var bd=$('#ed-ov .ed-body');if(bd){bd.classList.add('ed-rapb');bd.innerHTML='<section class="ed-rap" id="ed-rap">'+rapHtml('',true)+'</section>';if(window.rapLiga)window.rapLiga($('#ed-rap'));}}
   return r;};})();
 document.addEventListener('click',function(e){if(!e.target.closest)return;
   if(e.target.closest('[data-edrap]')){if(EDS.dirty&&!edAplicar(true))return;EDS.rap=true;EDS.id=null;edRender();return;}

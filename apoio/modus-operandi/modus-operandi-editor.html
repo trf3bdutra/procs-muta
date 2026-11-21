@@ -2177,6 +2177,20 @@ html.ed-cmt .ed-body:has(#ed-ler)>.ed-list,html.ed-cmt .ed-body:has(#ed-man)>.ed
 .lp-ler .lp-cat .lp-c:hover>h4::after{background:#d9c49a}
 .lp-ler .lp-sub2{margin:18px 0 6px;font:600 15px/1.3 Figtree,system-ui,sans-serif;color:#a57829}
 .lp-ler .lp-cat .lp-c>h4{font-size:12px;color:#4a5960}
+
+/* Entradas rápidas no editor: cabeçalho e formulário no alto; embaixo, A incorporar e Incorporadas lado a lado, cada uma com sua rolagem */
+.ed-body.ed-rapb{display:flex!important;overflow:hidden}
+.ed-body.ed-rapb>.ed-rap{display:flex;flex-direction:column;flex:1;min-height:0;width:100%;max-width:1240px;box-sizing:border-box;padding:18px 26px 14px}
+.ed-rap .rap-2{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;margin-top:16px;border:1px solid var(--line,#ded9cc);background:#fff}
+.ed-rap .rap-c{display:flex;flex-direction:column;min-height:0;min-width:0}
+.ed-rap .rap-c+.rap-c{border-left:1px solid var(--line,#ded9cc)}
+.ed-rap .rap-c h3{display:flex;align-items:center;gap:8px;flex:none;margin:0;padding:10px 14px;border-bottom:1px solid var(--line,#ded9cc);font:700 11px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#805b18;background:#fbf4e3}
+.ed-rap .rap-c.ok h3{color:#2f6b45;background:#eef6f0}
+.ed-rap .rap-c h3 i{font-style:normal;min-width:20px;height:18px;padding:0 5px;border-radius:9px;background:currentColor;text-align:center;line-height:18px}
+.ed-rap .rap-c h3 i{color:inherit}.ed-rap .rap-c h3 i{background:none;border:1px solid currentColor}
+.ed-rap .rap-c .rap-l{flex:1;min-height:0;overflow-y:auto;margin:0;padding:12px 14px;scrollbar-width:thin}
+.ed-rap .rap-c .rap-v{margin:0;padding:14px;color:#6b6457;font-size:13px}
+@media (max-width:760px){.ed-rap .rap-2{grid-template-columns:minmax(0,1fr)}.ed-rap .rap-c+.rap-c{border-left:0;border-top:1px solid var(--line,#ded9cc)}}
 /* ===== Barra do Compendium, gêmea da do Ex Officio: marca, cadernos (Ex Officio / Compendium / Editor), seções numeradas (#cmp-nav)
    e utilitários numa faixa só, presa no topo ao rolar. No celular, as seções descem para uma linha própria, em partes iguais. ===== */
 header.top.nx,#cmp-nav{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--ei2:#45605d;--em:#617570;--em2:#55584f;--eg:#235a55;--eo:#a57829;--eo2:#805b18;--ew:#fff;--ebd:#fff;--etb:#d4c6a1;--etf:#f5efd9;--eti:#645530;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif}
@@ -3159,19 +3173,24 @@ function rapLista(){return (RAP.vivo||(ED&&ED.rapidas)||[]).slice().sort(functio
 function rapPode(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
 function rapJ(x){return JSON.stringify(x,function(k,v){return k.charAt(0)==='_'&&k!=='_topicos'&&k!=='_estrutura'?undefined:v;});}
 function rapData(d){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||'');return m?m[3]+'/'+m[2]+'/'+m[1]:esc(d||'');}
-function rapHtml(nq){
+function rapItem(r,pode){var inc=r.situacao==='incorporada';return '<li class="'+(inc?'inc':'')+'"><div class="rap-m"><span class="rap-t">'+esc(r.tipo||'Entrada')+'</span><span>'+rapData(r.data)+'</span>'+(r.autor?'<span>'+esc(r.autor)+'</span>':'')+(inc?'<span class="rap-ok">incorporada'+(r.destino?' em '+esc(r.destino):'')+'</span>':'')+'</div>'+
+      '<p>'+xFm(r.texto||'')+'</p>'+(r.origem?'<p class="rap-o">Origem: '+esc(r.origem)+'</p>':'')+
+      (pode?'<div class="rap-a">'+(inc?'<button class="e-mini" data-rapsit="'+esc(r.id)+'">Voltar para “a incorporar”</button>':'<button class="e-mini" data-rapinc="'+esc(r.id)+'">Marcar como incorporada</button>')+'<button class="e-mini" data-rapdel="'+esc(r.id)+'">Excluir</button></div>':'')+'</li>';}
+function rapHtml(nq,duas){
   var L=rapLista(),nov=L.filter(function(r){return r.situacao!=='incorporada';}).length,pode=rapPode();
   var V=L.filter(function(r){return (RAP.filtro==='todas'||(RAP.filtro==='novas'?r.situacao!=='incorporada':r.situacao==='incorporada'))&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);});
   var h='<div class="rap-h"><div><h2>Entradas rápidas</h2><p>Diretrizes, comandos, atualizações e padronizações fixadas pelo Desembargador, registradas na hora; depois ganham lugar definitivo no manual, nos modelos ou nos parágrafos.</p></div>'+
-    '<div class="rap-f" role="group" aria-label="Filtrar entradas">'+[['novas','A incorporar ('+nov+')'],['incorp','Incorporadas'],['todas','Todas']].map(function(x){return '<button data-rapf="'+x[0]+'" aria-pressed="'+(RAP.filtro===x[0])+'">'+x[1]+'</button>';}).join('')+'</div></div>';
+    (duas?'':'<div class="rap-f" role="group" aria-label="Filtrar entradas">'+[['novas','A incorporar ('+nov+')'],['incorp','Incorporadas'],['todas','Todas']].map(function(x){return '<button data-rapf="'+x[0]+'" aria-pressed="'+(RAP.filtro===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>')+'</div>';
   if(pode)h+='<div class="rap-novo"><select data-raptipo aria-label="Tipo da entrada">'+RAP_TIPOS.map(function(t){return '<option'+(t===RAP.tipo?' selected':'')+'>'+t+'</option>';}).join('')+'</select>'+
     '<textarea data-raptxt rows="2" placeholder="Nova entrada: o que foi fixado, em uma ou duas frases (Ctrl+Enter salva)" aria-label="Texto da entrada">'+esc(RAP.txt)+'</textarea>'+
     '<input data-raporig placeholder="Origem (opcional): processo, reunião, despacho…" value="'+esc(RAP.orig)+'" aria-label="Origem">'+
     '<button class="btn" data-rapadd'+(RAP.grav?' disabled':'')+'>'+(RAP.grav?'Gravando…':'Registrar')+'</button></div>';
   else h+='<p class="rap-ro">'+(window.CMT_SITE?'Leitura. Quem registra, incorpora e exclui entradas é o perfil Editor.':'Aberto como arquivo: o registro de entradas funciona no site do gabinete, para o perfil Editor.')+'</p>';
-  h+=V.length?'<ol class="rap-l">'+V.map(function(r){var inc=r.situacao==='incorporada';return '<li class="'+(inc?'inc':'')+'"><div class="rap-m"><span class="rap-t">'+esc(r.tipo||'Entrada')+'</span><span>'+rapData(r.data)+'</span>'+(r.autor?'<span>'+esc(r.autor)+'</span>':'')+(inc?'<span class="rap-ok">incorporada'+(r.destino?' em '+esc(r.destino):'')+'</span>':'')+'</div>'+
-      '<p>'+xFm(r.texto||'')+'</p>'+(r.origem?'<p class="rap-o">Origem: '+esc(r.origem)+'</p>':'')+
-      (pode?'<div class="rap-a">'+(inc?'<button class="e-mini" data-rapsit="'+esc(r.id)+'">Voltar para “a incorporar”</button>':'<button class="e-mini" data-rapinc="'+esc(r.id)+'">Marcar como incorporada</button>')+'<button class="e-mini" data-rapdel="'+esc(r.id)+'">Excluir</button></div>':'')+'</li>';}).join('')+'</ol>'
+  /* duas=true (aba do editor): A incorporar e Incorporadas lado a lado, cada coluna com a sua rolagem */
+  if(duas){var A=L.filter(function(r){return r.situacao!=='incorporada'&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);}),I=L.filter(function(r){return r.situacao==='incorporada'&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);});
+    var col=function(t,X,vz,c){return '<section class="rap-c '+c+'"><h3>'+t+'<i>'+X.length+'</i></h3>'+(X.length?'<ol class="rap-l">'+X.map(function(r){return rapItem(r,pode);}).join('')+'</ol>':'<p class="rap-v">'+vz+'</p>')+'</section>';};
+    return h+'<div class="rap-2">'+col('A incorporar',A,'Nada a incorporar.','nv')+col('Incorporadas',I,'Nenhuma entrada incorporada ainda.','ok')+'</div>';}
+  h+=V.length?'<ol class="rap-l">'+V.map(function(r){return rapItem(r,pode);}).join('')+'</ol>'
     :'<p class="rap-v">'+(L.length?'Nenhuma entrada neste filtro.':'Nenhuma entrada ainda.')+'</p>';
   return h;}
 function rapGrava(ops,msg,ok){RAP.grav=true;xManual();
@@ -5928,12 +5947,12 @@ document.addEventListener('keydown',function(e){var f=e.target.closest&&e.target
   else if((e.ctrlKey||e.metaKey)&&(e.key==='Enter'||e.key==='s'||e.key==='S')){e.preventDefault();e.stopPropagation();var o=f.querySelector('[data-mnok]');if(o)o.click();}},true);
 /* ---------- Entradas rápidas: aba própria do editor (ao lado das coleções) ---------- */
 EDS.rap=false;
-window.VDM_RAPTAB=function(){var el=$('#ed-rap');if(el)el.innerHTML=rapHtml('');edRapBtn();};
+window.VDM_RAPTAB=function(){var el=$('#ed-rap');if(el)el.innerHTML=rapHtml('',true);edRapBtn();};
 function edRapBtn(){var b=$('[data-edrap]'),n=rapLista().filter(function(r){return r.situacao!=='incorporada';}).length;if(b)b.innerHTML='Entradas rápidas'+(n?' <i class="ed-rapn">'+n+'</i>':'');}
 (function(){var edRenderR=edRender;edRender=function(){window.VDM_RAP_TAB=!!EDS.rap;var r=edRenderR.apply(this,arguments);
   var seg=$('#ed-ov .ed-cols');if(seg&&!seg.querySelector('[data-edrap]')){seg.insertAdjacentHTML('beforeend','<button data-edrap aria-pressed="'+EDS.rap+'"></button>');edRapBtn();}
   if(EDS.rap){[].forEach.call(document.querySelectorAll('#ed-ov [data-edcol]'),function(b){b.setAttribute('aria-pressed','false');});
-    var bd=$('#ed-ov .ed-body');if(bd){bd.classList.add('ed-rapb');bd.innerHTML='<section class="ed-rap" id="ed-rap">'+rapHtml('')+'</section>';if(window.rapLiga)window.rapLiga($('#ed-rap'));}}
+    var bd=$('#ed-ov .ed-body');if(bd){bd.classList.add('ed-rapb');bd.innerHTML='<section class="ed-rap" id="ed-rap">'+rapHtml('',true)+'</section>';if(window.rapLiga)window.rapLiga($('#ed-rap'));}}
   return r;};})();
 document.addEventListener('click',function(e){if(!e.target.closest)return;
   if(e.target.closest('[data-edrap]')){if(EDS.dirty&&!edAplicar(true))return;EDS.rap=true;EDS.id=null;edRender();return;}
