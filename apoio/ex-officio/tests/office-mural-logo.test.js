@@ -254,3 +254,17 @@ test('Mural: histórico sob a lista (coluna da esquerda) e Minhas ausências log
   assert.match(h, /<slot name=\\"avisos\\"><\\\/slot><slot name=\\"aus\\"><\\\/slot>/);
   assert.match(h, /<slot name=\\"hist\\"><\\\/slot>/);
 });
+
+test('Login diário: a sessão vence à meia-noite (UTC-4) do dia em que foi aberta', () => {
+  process.env.CMT_SESSION_SECRET = process.env.CMT_SESSION_SECRET || '0123456789abcdef0123456789abcdef';
+  const L = require('../api/_lib.js'), real = Date.now;
+  try {
+    let ck = ''; const res = { setHeader: (k, v) => { ck = v; } };
+    Date.now = () => Date.parse('2026-11-22T03:30:00Z'); L.emitir(res, 'Bruno');
+    const req = { headers: { cookie: ck.split(';')[0] } };
+    assert.match(ck, /Max-Age=1800/);
+    assert.equal(L.quem(req), 'Bruno');
+    Date.now = () => Date.parse('2026-11-22T04:00:30Z');
+    assert.equal(L.quem(req), null);
+  } finally { Date.now = real; }
+});
