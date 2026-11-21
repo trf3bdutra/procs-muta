@@ -20,3 +20,8 @@ test('Prontuário: pendências legíveis por inteiro e sustentação/preferênci
  assert.ok(app.includes("if(dt&&pedidos.length)dt.open=true;"));
  assert.ok(app.includes("if(x.tagName==='DETAILS')x.open=true;"));
 });
+test('Prontuário: títulos de seção leves e campos compactos',()=>{
+ assert.ok(app.includes('#prq .prt-p>section:nth-of-type(n)>h3{display:flex;align-items:baseline'));
+ assert.ok(app.includes('#prq .sgx button{flex:1 1 auto!important;padding:3px 8px!important'));
+ assert.ok(app.includes('#prq .ac-s,#prq .ac .prt-nt{border:0!important;border-bottom:1px solid var(--el)!important'));
+});
