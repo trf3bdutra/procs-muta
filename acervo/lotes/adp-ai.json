@@ -21107,8 +21107,8 @@
    "exequente": "SILVANA DE CONTO GOMES",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Pagamento",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · crédito rural inscrito em dívida ativa (Lei 11.775/2008) · prescrição intercorrente · impenhorabilidade de até 40 salários mínimos (bloqueio SISBAJUD)",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno prejudicado [VALIDAR]",
    "modelo": "",
    "variacoes": [],
@@ -21192,6 +21192,105 @@
     "outros": "Redistribuição: 2ª Turma (decisão ID 352490427) para a 3ª Turma (certidão ID 352529048) e depois para a Turma Regional de MS. Decisão ID 353001319 (11/03/2026, 3ª Turma): indeferiu a tutela recursal. Agravo interno ID 360657927 (16/03/2026), com notícia de alvará de levantamento (ID 360662239). Decisão ID 371009024 (04/05/2026): deferiu em parte a tutela de urgência para obstar o levantamento de R$ 33.682,00 e mandou incluir o feito na próxima pauta. União ciente, sem recurso (ID 376091905, 25/05/2026).",
     "representacao": "Agravante: advogada Jully Heyder da Cunha Souza [VALIDAR procuração]. Agravada: União (PGFN).",
     "preparo": "PagTesouro/Pix, código 20466, R$ 64,26, em 28/01/2026 (ID 352362350); sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Execução fiscal — crédito rural inscrito em dívida ativa; prescrição intercorrente; impenhorabilidade",
+   "especificidades": "Jurisdição delegada (Camapuã/MS); o Tribunal não acessa a íntegra da origem · Bloqueio de R$ 33.682,00; dívida de R$ 274.461,21 · Parcelamento de 30/06/2014 rescindido em 11/11/2014 · Tutela indeferida (ID 353001319, 11/03/2026) e deferida em parte no agravo interno (ID 371009024, 04/05/2026) para obstar o levantamento · Decisão mandou incluir o feito na próxima pauta · Preparo por PagTesouro/Pix (ID 352362350), sem STN [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — crédito rural inscrito em dívida ativa; prescrição intercorrente; impenhorabilidade",
+     "subassuntos": "Execução fiscal · crédito rural inscrito em dívida ativa (Lei 11.775/2008) · prescrição intercorrente · impenhorabilidade de até 40 salários mínimos (bloqueio SISBAJUD)",
+     "sintese": "",
+     "questoes": "1) Prescrição intercorrente nos períodos de 2008 a 2013 e de 2014 a 2020; 2) suspensões da Lei 11.775/2008 e das Leis 12.844/2013 e 13.340/2016; 3) impenhorabilidade de valor até 40 salários mínimos (artigo 833, X, do CPC); 4) agravo interno prejudicado.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Juízo de Camapuã (jurisdição delegada)",
+      "dispositivo": "Afastou a prescrição intercorrente e manteve o bloqueio SISBAJUD."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Deferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-01-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "352362346",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "360657927",
+       "contra": "Não mencionar"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "352362346",
+       "data": "2026-01-28"
+      },
+      {
+       "desc": "Comprovante PagTesouro/Pix",
+       "id": "352362350",
+       "data": "2026-01-28"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "353001319",
+       "data": "2026-03-11"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "360657927",
+       "data": "2026-03-16"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "361087424",
+       "data": "2026-03-18"
+      },
+      {
+       "desc": "Decisão que deferiu em parte a tutela",
+       "id": "371009024",
+       "data": "2026-05-04"
+      },
+      {
+       "desc": "Ciência da União sem recurso",
+       "id": "376091905",
+       "data": "2026-05-25"
+      }
+     ],
+     "pendencias": "Conferir o preparo (STN) e o ID da decisão agravada; declarar prejudicado o agravo interno",
+     "especificidades": "Jurisdição delegada (Camapuã/MS); o Tribunal não acessa a íntegra da origem · Bloqueio de R$ 33.682,00; dívida de R$ 274.461,21 · Parcelamento de 30/06/2014 rescindido em 11/11/2014 · Tutela indeferida (ID 353001319, 11/03/2026) e deferida em parte no agravo interno (ID 371009024, 04/05/2026) para obstar o levantamento · Decisão mandou incluir o feito na próxima pauta · Preparo por PagTesouro/Pix (ID 352362350), sem STN [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · parcialmente deferida",
+     "urgData": "2026-05-04",
+     "urgObs": "Indeferida em 11/03/2026 (ID 353001319); deferida em parte em 04/05/2026 (ID 371009024) para obstar o levantamento de R$ 33.682,00."
+    }
    }
   },
   {
