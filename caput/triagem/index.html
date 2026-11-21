@@ -95,7 +95,7 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 .tri-em2 .tri-ir{display:block;width:100%;text-align:left;border:0;border-left:1px solid var(--b,#dde3e0);background:none;padding:5px 0 5px 12px;font-family:inherit;font-size:13px;font-weight:400;color:var(--tx);cursor:pointer;text-decoration:none}
 .tri-em2 .tri-ir[aria-current=true]{border-left:2px solid var(--v);padding-left:11px;font-weight:700;color:var(--v)}
 .tri-em2 .tri-em-corpo{border:1px solid var(--b2,#cfd6d3);background:var(--w,#fff);min-height:320px}
-.tri-em2 .tri-nk{margin-top:14px}.tri-em2 .tri-ir{display:flex;align-items:baseline;gap:7px}.tri-em2 .tri-ir span{flex:1;min-width:0}.tri-em2 .tri-ir small{font:400 10.5px 'JetBrains Mono',ui-monospace,monospace;color:#8a8d86}
+.tri-em2 .tri-nk{margin-top:14px}.tri-em2 .tri-nkb{margin-top:12px;font:500 10px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase}.tri-em2 .tri-ir{display:flex;align-items:baseline;gap:7px}.tri-em2 .tri-ir span{flex:1;min-width:0}.tri-em2 .tri-ir small{font:400 10.5px 'JetBrains Mono',ui-monospace,monospace;color:#8a8d86}
 .tri-em2 .tri-em-corpo{background:#fbfaf5}
 @media (max-width:900px){.tri-em2{grid-template-columns:minmax(0,1fr)}.tri-em2 .tri-lado{position:static;padding:0 0 10px}}
 .tri-ld{padding:16px;color:var(--m2);font-size:13.5px;text-align:center}
@@ -2979,17 +2979,19 @@ function seletorLado() {
   return ''; /* Triados e Seleção prévia: a lista das coleções fica abaixo da caixa */
 }
 /* abaixo da caixa: contagem e modo de ver, no lugar do "Nesta página" do Collectio */
+const TRI_TAREFA_PADRAO = 'tarefa:Analisar tipo de decisão a proferir';
+const colSel = (sub) => LS.get('tri_col_' + sub, sub === 'triados' ? TRI_TAREFA_PADRAO : '');
 function navLado() {
   const k = (t) => '<p class="tri-k">' + t + '</p>';
   if (TRI_SUBABA === 'triar') { const sel = LS.get('tri_triar_tarefa', ''), n = sel ? (tarefasTriar().find((x) => x[0] === sel) || [0, 0])[1] : (U || []).length; return '<div class="tri-nav">' + k(nf(n) + ' de ' + nf((U || []).length) + ' processos') + '</div>'; }
   if (!_triIdx) { carregarIdxLotes(); return '<div class="tri-nav">' + k('Carregando as coleções…') + '</div>'; }
-  const sub = TRI_SUBABA, sel = LS.get('tri_col_' + sub, ''), D = _colD[sub], G = gruposLotes(sub);
+  const sub = TRI_SUBABA, sel = colSel(sub), D = _colD[sub], G = gruposLotes(sub);
   const nDe = (x) => { const l = D && D.lotes.find((y) => y.id === x.id); return l ? (l.itens || []).length : (x.n || 0); };
   const tot = [].concat(...G.map((g) => g[1])).reduce((a, x) => a + nDe(x), 0);
   const bt = (id, r, n) => '<button type="button" class="tri-ir" data-trilote="' + esc(id) + '" aria-current="' + (sel === id) + '"><span>' + esc(r) + '</span> <small>' + nf(n) + '</small></button>';
   const tit = (x) => String(x.titulo || x.id).replace(/^(Analisar decisão|Série|Seleção prévia) · /, '');
   return '<div class="tri-nav">' + k('Coleções de ' + (sub === 'selecao' ? 'seleção prévia' : 'triagem')) + bt('', 'Todas', tot) +
-    G.map((g) => '<p class="tri-k tri-nk">' + esc(g[0] === 'Tarefas do PJe' ? 'Analisar tipo de decisão a proferir' : g[0]) + '</p>' + g[1].map((x) => bt(x.id, tit(x), nDe(x))).join('')).join('') + '</div>';
+    G.map((g) => (g[0] === 'Tarefas do PJe' ? '<button type="button" class="tri-ir tri-nkb" data-trilote="' + esc(TRI_TAREFA_PADRAO) + '" aria-current="' + (sel === TRI_TAREFA_PADRAO) + '" title="Todos os lotes da tarefa, sem as séries"><span>Analisar tipo de decisão a proferir</span> <small>' + nf(g[1].reduce((a, x) => a + nDe(x), 0)) + '</small></button>' : '<p class="tri-k tri-nk">' + esc(g[0]) + '</p>') + g[1].map((x) => bt(x.id, tit(x), nDe(x))).join('')).join('') + '</div>';
 }
 function loteSel(sub) {
   if (sub === 'triar' || !_triIdx || _triIdx._erro) return '';
@@ -3048,7 +3050,7 @@ async function lerColecoes(sub) {
 function painelMatrizLote(sub) {
   if (!_colD[sub]) { lerColecoes(sub); return '<div class="tri-ld">Lendo as coleções de ' + (sub === 'selecao' ? 'seleção prévia' : 'triagem') + '…</div>'; }
   if (!_colD[sub].lotes.length) return '<div class="tri-ld">Nenhuma coleção ' + (sub === 'selecao' ? 'de seleção prévia' : 'de triagem') + ' encontrada.</div>';
-  setTimeout(() => { const h = document.getElementById('tri-col-host'); if (h && W.CaputColecoes) W.CaputColecoes.montar(h, _colD[sub], { chave: sub, lote: LS.get('tri_col_' + sub, '') }); }, 0);
+  setTimeout(() => { const h = document.getElementById('tri-col-host'); if (h && W.CaputColecoes) W.CaputColecoes.montar(h, _colD[sub], { chave: sub, lote: colSel(sub) }); }, 0);
   return '<div id="tri-col-host"></div>';
 }
 document.addEventListener('click', (e) => {
@@ -4858,7 +4860,9 @@ async function abrir(){
   render();
 }
 const todos=()=>S.D.lotes.flatMap(l=>l.itens);
-const lotesVis=()=>S.lote?S.D.lotes.filter(l=>l.id===S.lote):S.D.lotes;
+const TAR=()=>S.lote&&S.lote.indexOf('tarefa:')===0?S.lote.slice(7):'';
+const varios=()=>!S.lote||!!TAR();
+const lotesVis=()=>TAR()?S.D.lotes.filter(l=>(l.tarefa||'Triagem')===TAR()):S.lote?S.D.lotes.filter(l=>l.id===S.lote):S.D.lotes;
 const temTri=it=>!vazio(it.triagem)||!vazio(it.prontuario_triagem)||!vazio(it.teor);
 function filtra(l){
   const q=sem(S.q).trim();
@@ -4867,14 +4871,14 @@ function filtra(l){
 function render(){
   const D=S.D, L=lotesVis(), tot=todos();
   const tarefas=[...new Set(D.lotes.map(l=>l.tarefa||'Triagem'))];
-  const l1=S.lote&&L[0];
+  const l1=!varios()&&L[0];
   const itensL=L.flatMap(l=>l.itens), vis=L.reduce((n,l)=>n+filtra(l).length,0);
   const comTri=itensL.filter(temTri).length, comGr=itensL.filter(i=>i.grupo).length, comMin=itensL.filter(i=>i.minuta).length, pend=itensL.reduce((n,i)=>n+nVal(i),0);
   const grupos=l1?(l1.grupos||[]):[], cols=l1?(l1.colunas||[]):[...new Map(L.flatMap(l=>l.colunas||[]).map(c=>[c.id,c])).values()];
   $('#app').innerHTML=`<div class="pg">
   
   <div class="main">
-   <div class="hd"><div><p class="k">Coleção de triagem${l1&&l1.tarefa?' · '+esc(l1.tarefa):''}</p><h1>${l1?esc(l1.titulo).replace(/ · /,' · <em class="it">')+(/ · /.test(l1.titulo)?'.</em>':''):'Toda a <em class="it">triagem.</em>'}</h1></div>
+   <div class="hd"><div><p class="k">Coleção de triagem${l1&&l1.tarefa?' · '+esc(l1.tarefa):''}</p><h1>${l1?esc(l1.titulo).replace(/ · /,' · <em class="it">')+(/ · /.test(l1.titulo)?'.</em>':''):TAR()?esc(TAR()).replace(/ (\S+)$/,' <em class="it">$1.</em>'):'Toda a <em class="it">triagem.</em>'}</h1></div>
     <p class="st">${L.length} ${L.length>1?'coleções':'coleção'} · ${itensL.length} processos${l1&&l1.atualizado_em?'<br>atualizada em '+esc(l1.atualizado_em.split('-').reverse().join('/')):''}</p></div>
    ${l1&&l1.descricao?`<p class="lead">${esc(l1.descricao)}</p>`:''}
    <div class="box">
@@ -4922,14 +4926,14 @@ function celI(k,it){const c=ctl(it),v=it.variacoes||[],et=String(it.etiquetas||'
   if(k==='ext')return (!temTri(it)&&(it.extracao||{}).situacao==='pendente')?SY('○','','Autos ainda não extraídos'):'';
   return ''}
 function tabela(l){
-  const its=filtra(l); if(!its.length&&!S.lote)return '';
+  const its=filtra(l); if(!its.length&&varios())return '';
   l.grupos=l.grupos||[]; l.colunas=l.colunas||[];
   const cols=l.colunas, nc=3+PRT.length+IND.length+cols.length, out=l.grupo_outros||{};
   const ordem=l.grupos.map(g=>({id:g.id,g,rs:its.filter(i=>i.grupo===g.id)})).concat([{id:'__',g:{rotulo:out.rotulo||'Não classificados',cor:out.cor||'#9aa0a8'},rs:its.filter(i=>!i.grupo||!l.grupos.some(g=>g.id===i.grupo))}])
     .filter(o=>o.rs.length&&(!S.grupo||S.grupo===o.id||(S.grupo==='__'&&o.id==='__')));
   const fk=id=>l.id+'|'+id;
   const thv=(r)=>`<th class="v" title="${esc(r)}"><div>${esc(r)}</div></th>`;
-  return `${!S.lote?`<h2 style="margin:22px 0 0;font-size:20px;letter-spacing:-.02em">${esc(l.titulo)} <small class="tg">${its.length} de ${l.itens.length}</small></h2>`:''}
+  return `${varios()?`<h2 style="margin:22px 0 0;font-size:20px;letter-spacing:-.02em">${esc(l.titulo)} <small class="tg">${its.length} de ${l.itens.length}</small></h2>`:''}
   <div class="tw"><table class="tb mx"><thead><tr class="gl"><th></th><th></th><th class="g1" colspan="${PRT.length}">Prontuário da triagem<small>registrado na ficha</small></th><th class="g2" colspan="${IND.length}">Indicadores</th>${cols.length?`<th class="g3" colspan="${cols.length}">Variações</th>`:''}<th></th></tr>
   <tr><th>Processo</th><th>Minuta · correção</th>${PRT.map(x=>thv(x[1])).join('')}${IND.map(x=>thv(x[1])).join('')}${cols.map(c=>thv(c.rotulo)).join('')}<th>Tipo de caso · observação</th></tr></thead>
   <tbody>${ordem.map(o=>{const ab=!S.fechados.has(fk(o.id));return `<tr class="gh" data-grp="${esc(fk(o.id))}"><td colspan="${nc}"><i class="sx">${ab?'−':'+'}</i><span class="q" style="background:${esc(o.g.cor||'#5d6b72')}"></span><b>${esc(o.g.rotulo)}</b>${o.g.resultado?` · <span class="res">${esc(o.g.resultado)}</span>`:''}${o.g.modelo?` <span class="tg in">${esc(o.g.modelo)}</span>`:''}<small>${o.rs.length} processo${o.rs.length===1?'':'s'}</small></td></tr>`+(ab?o.rs.map(it=>linha(l,it,o.g.cor||'#5d6b72')).join(''):'')}).join('')}</tbody></table></div>`;
