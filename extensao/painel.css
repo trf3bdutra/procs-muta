@@ -1015,3 +1015,43 @@ html[data-tema=escuro] .prec-h a{color:#a9cfe6}
 html[data-tema=escuro] .pm-aut>summary{border-top-color:#1e3747}
 /* precedentes no topo do Ementário */
 .acv-prec:empty{display:none}.acv-prec{margin-bottom:10px}
+
+/* ===== 0.16.6 ===== */
+/* faixa do topo: linha do usuário e, embaixo, os avisos de gravação */
+.topo-u{flex-direction:column;align-items:stretch;gap:2px}
+.tu-l{display:flex;align-items:center;gap:4px}
+.tu-st{margin:0;font-size:10.5px;line-height:1.3;color:var(--muted-fg);padding:0 2px 3px}
+.tu-st:empty{display:none}
+.tu-st.ok{color:hsl(160 40% 32%)}.tu-st.err{color:#b0402f}
+html[data-tema=escuro] .tu-st.ok{color:#6eba8a}html[data-tema=escuro] .tu-st.err{color:#f2a397}
+/* sub-abas do prontuário mais compactas: nome e contagem na mesma linha */
+.pmodos{margin:4px 0 8px}
+.pmodos button{flex-direction:row!important;align-items:baseline!important;gap:4px!important;padding:5px 6px 6px!important;font-size:12px!important;white-space:nowrap}
+.pmodos button small{font-size:9.5px!important}
+/* peças: um cartão, uma seção por grupo */
+.pecas .pc-s{border-top:1px dashed var(--line)}
+.pecas .pc-s>summary{list-style:none;display:flex;align-items:center;gap:8px;padding:7px 2px;cursor:pointer}
+.pecas .pc-s>summary::-webkit-details-marker{display:none}
+.pecas .pc-s>summary b{font-size:12.5px;font-weight:650}
+.pecas .pc-s>summary::before{content:"▸";color:var(--muted-fg);font-size:10px}.pecas .pc-s[open]>summary::before{content:"▾"}
+.pecas .pc-s>summary .gn{margin-left:auto;font:700 9.5px var(--mono);color:var(--muted-fg);padding:1px 7px;border-radius:9px;background:var(--soft)}
+.pecas .pc-s .gr{padding:0 2px 10px!important}
+/* tipo de ato em lista */
+.pm-pron-s{width:100%}
+/* partes dentro do rodapé da autuação */
+.pm-aut .pm-pt{margin:8px 0 4px;white-space:normal}
+.pmodos button{font-size:11.5px!important;padding:5px 5px 6px!important}.pmodos button small{font:600 9px var(--mono)!important}
+/* tipo de ato, minuta e correção numa linha */
+.pm-resp{grid-template-columns:1.1fr 1fr 1fr!important;gap:5px!important}
+.pm-pp{padding:4px 8px!important;gap:6px!important}
+.pm-pn{font-size:12px!important}
+.pm-av{width:22px!important;height:22px!important;font-size:9px!important}
+.pm-ato{cursor:default}
+.pm-ato select{all:unset;cursor:pointer;font:600 12px var(--sans);color:var(--fg);width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pm-ato select option{color:#13242f}
+.pm-resp .pm-pp:nth-child(2) .pm-av{background:hsl(160 30% 90%)!important;color:hsl(160 40% 26%)!important}
+.pm-resp .pm-pp:nth-child(3) .pm-av{background:hsl(262 40% 92%)!important;color:hsl(262 35% 38%)!important}
+html[data-tema=escuro] .pm-resp .pm-pp:nth-child(2) .pm-av{background:#14301f!important;color:#9fd6b5!important}
+html[data-tema=escuro] .pm-resp .pm-pp:nth-child(3) .pm-av{background:#2c2440!important;color:#c7b6ee!important}
+.pm-resp .pm-pp.vz .pm-av{background:var(--soft)!important;color:var(--muted-fg)!important}
+.pmodos button{flex:1 1 0!important;justify-content:center}

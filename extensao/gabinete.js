@@ -158,8 +158,8 @@ function pills() {
    - Triagem: conferência automática dos autos; etiquetas sugeridas; o prontuário de triagem da ficha; o registro da triagem do lote;
    - Produção: destino do julgamento, designação, revisão e o que vale para o destino; no fim, a pauta (sessão) ou o controle da monocrática.
    Autuação, partes, tramitação e "autos extraídos" não aparecem como grupos: o cartão, a situação atual e a lista de documentos os substituem. */
-var MODOS = ['Processo', 'Autos', 'Roteiro', 'Produção'];
-var ROT_MODO = { Roteiro: 'Roteiro de triagem' };
+var MODOS = ['Processo', 'Autos', 'Roteiro'];
+var ROT_MODO = {};
 var FORA_PROC = { 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
 var NO_TOPO = { 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1 };
 var CTL_PROC = ['urgencia', 'meta', 'sobrestamento', 'sensivel'];
@@ -273,22 +273,23 @@ function cabeca(s) {
       tjHtml + (AL.length ? '<button type="button" class="pm-al" data-aba="Autos" title="' + esc(AL.map(function (a) { return a.t; }).join(' · ')) + '">' + AL.length + ' alerta' + (AL.length > 1 ? 's' : '') + '</button>' : '') + '</div>' +
     '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (!G.adEd && !S(gravado('triagem', 'Registro - Assunto detalhado')) && !S(V('triagem', 'Assunto detalhado')) ? '<button type="button" class="pm-ad-ic" data-ad="ed" title="Incluir o assunto detalhado (vai para a ficha; o Caput mostra o mesmo)" aria-label="Incluir o assunto detalhado">' + SV('<path d="M12 5v14M5 12h14"/>', 12) + '</button>' : '') + '</p>' +
     assuntoDetalhado() +
-    (partes ? '<p class="pm-pt" title="' + esc(partes) + '">' + SV(IC.pt, 14) + '<span>' + esc(partes) + '</span></p>' : '') +
 
     '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
-    '<div class="pm-resp">' + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
+    '<div class="pm-resp">' + atoSel() + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
     '<details class="pm-aut"' + (G.autAb ? ' open' : '') + '><summary data-aut aria-label="Autuação, partes e situação"><i class="pm-aut-h"></i></summary>' +
+      (partes && !polos ? '<p class="pm-pt" title="' + esc(partes) + '">' + SV(IC.pt, 14) + '<span>' + esc(partes) + '</span></p>' : '') +
+      (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
       (tarefa ? '<div class="pm-tf"><span>Tarefa no PJe</span><b>' + esc(tarefa) + '</b>' + (dias != null ? '<small>' + dias + ' dias</small>' : '') + '</div>' : '') +
       (window.MutaAutos ? '<div class="pm-sit">' + window.MutaAutos.htmlSituacao(gravado('triagem', 'Registro - Situação atual')) + '</div>' : '') +
-      (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') + (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
+      (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') +
       (etq.length ? '<div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' +
     '</section>';
 }
 /* faixa do usuário no topo do painel, acima das abas */
 function faixaUsuario(s) {
-  var t = $('topo-u'); if (!t) return;
+  var t0 = $('topo-u'), t = $('tu-main'); if (!t0 || !t) return;
   var pb = $('pje-bar'); if (pb && t.contains(pb) && PJE_CASA && PJE_CASA.parentNode) PJE_CASA.parentNode.insertBefore(pb, PJE_CASA);
-  t.hidden = false;
+  t0.hidden = false;
   var on = s && s.estado === 'on';
   var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
   t.innerHTML = (on ? '<span class="tu-n"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i>' + esc(s.usuario) + '</span>' : '<span class="tu-n muted">Muta</span>') + '<span class="tu-pje" id="tu-pje-slot"></span>' +
@@ -421,13 +422,23 @@ function casoPrec() { return { cnj: G.cnj, assunto: fonteVal({ fonte: ['Assunto'
     subassuntos: S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')), questoes: S(V('triagem', 'Alegações')),
     sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') }; }
 function precEmentario(k) { var ap = $('acv-prec'); if (ap && window.MutaPrecedentes) ap.innerHTML = window.MutaPrecedentes.html(k); }
+/* peças do processo (sentença, origem, recursos e contrarrazões, outras peças): um cartão só, uma seção por grupo */
+function pecasCartao() {
+  var A = abaModelo('Processo'); if (!A) return '';
+  var gs = A.grupos.filter(function (g) { return !FORA_PROC[g.grupo] && grupoVisivel(g); });
+  if (!gs.length) return '';
+  return '<section class="card pc-sec pecas" id="g-pecas"><div class="pc-sh"><h3>Peças</h3><small class="muted">da ficha do processo</small></div>' + gs.map(function (g) {
+    var n = g.campos.filter(function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? v.length : !!S(v); }).length;
+    return '<details class="pc-s"' + (G.pecAb && G.pecAb[g.grupo] != null ? (G.pecAb[g.grupo] ? ' open' : '') : n ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><b>' + esc(g.grupo) + '</b><span class="gn">' + n + '/' + g.campos.length + '</span></summary><div class="gr">' + g.campos.map(campo).join('') + '</div></details>';
+  }).join('') + '</section>';
+}
 function corpoProcesso() {
   var AU = window.MutaAutos, h = sinalizacoes() + notas();
   var ad = gravado('triagem', 'Registro - Assunto detalhado');
   h += '<section class="card pc-sec"><div class="pc-sh"><h3>Síntese e questões</h3></div><div class="gr">' +
     campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div></section>';
 
-  h += grupos('Processo', function (g) { return !FORA_PROC[g.grupo]; }, function () { return true; });
+  h += pecasCartao();
   h += controlesProcesso();
   h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
   return h;
@@ -450,10 +461,16 @@ var PRON = [['Acórdão (sessão)', 'Sessão', ''], ['Decisão monocrática', 'M
   ['Homologação / extinção', 'Monocrática', 'Homologação / extinção'], ['Outro destino', 'Outro destino', '']];
 function pronAtual() { var d = destGrav(), t = S(V('producao', 'Mono - Tipo de ato'));
   for (var i = 0; i < PRON.length; i++) { if (PRON[i][1] === d && (d !== 'Monocrática' || PRON[i][2] === t || (!t && i === 1))) return i; } return -1; }
+/* tipo de ato no cartão, à esquerda de quem minuta e de quem corrige */
+function atoSel() {
+  var k = pronAtual();
+  return '<label class="pm-pp pm-ato"><span class="pm-pn"><small>Tipo de ato</small><select id="pm-pron" aria-label="Tipo de ato ou pronunciamento"><option value="">a definir</option>' +
+    PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select></span></label>';
+}
 function pronunciamento() {
   var k = pronAtual();
   return '<section class="card pc-sec pm-pron"><div class="pc-sh"><h3>Tipo de ato · pronunciamento</h3><small class="muted">' + (k < 0 ? 'a definir na triagem' : esc(PRON[k][1] === 'Sessão' ? 'vai à sessão' : PRON[k][1] === 'Monocrática' ? 'decisão do relator' : 'outro destino')) + '</small></div>' +
-    '<div class="pm-seg">' + PRON.map(function (x, i) { return '<button type="button" class="pm-ch' + (i === k ? ' on' : '') + '" data-pron="' + i + '">' + esc(x[0]) + '</button>'; }).join('') + '</div></section>';
+    '<select id="pm-pron" class="pm-pron-s" aria-label="Tipo de ato ou pronunciamento"><option value="">— a definir —</option>' + PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select></section>';
 }
 function corpoProducao() {
   var A = abaModelo('Produção'), h = '';
@@ -478,9 +495,9 @@ function preench(nomeAba, filtroG) { var A = abaModelo(nomeAba), t = 0, n = 0; i
   A.grupos.filter(function (g) { return (!g.destino || g.destino === destino()) && grupoVisivel(g) && (!filtroG || filtroG(g)); }).forEach(function (g) { g.campos.forEach(function (c) { if (!c.secao) return; t++; var v = V(c.secao, c.chave); if (Array.isArray(v) ? v.length : S(v)) n++; }); });
   return n + '/' + t; }
 function contaModo(a) {
-  if (a === 'Processo') { var k = 0; SN.forEach(function (q) { snLinhas(q[0]).forEach(function (l) { if (!/^✓/.test(l)) k++; }); }); return k ? k + ' em aberto' : 'nada em aberto'; }
-  if (a === 'Autos') { var AE = window.MutaAutos && window.MutaAutos.estado(); if (!AE || !AE.itens) return 'abrir no PJe'; var nd = window.MutaAutos.lista().length, nl = Object.keys(AE.docs || {}).filter(function (k) { return /^(ok|sem)$/.test(AE.docs[k].estado); }).length; return nd + ' peças · ' + nl + ' lidas'; }
-  if (a === 'Roteiro') { var R = window.MutaRoteiro && window.MutaRoteiro.resumo ? window.MutaRoteiro.resumo(gRot()) : null; return R ? R.ok + '/' + R.total + ' passos' : ''; }
+  if (a === 'Processo') { var k = 0; SN.forEach(function (q) { snLinhas(q[0]).forEach(function (l) { if (!/^✓/.test(l)) k++; }); }); return k ? String(k) : ''; }
+  if (a === 'Autos') { var AE = window.MutaAutos && window.MutaAutos.estado(); if (!AE || !AE.itens) return ''; var nd = window.MutaAutos.lista().length, nl = Object.keys(AE.docs || {}).filter(function (k) { return /^(ok|sem)$/.test(AE.docs[k].estado); }).length; return nl + '/' + nd; }
+  if (a === 'Roteiro') { var R = window.MutaRoteiro && window.MutaRoteiro.resumo ? window.MutaRoteiro.resumo(gRot()) : null; return R ? R.ok + '/' + R.total : ''; }
   if (a === 'Produção') return preench('Produção');
   return '';
 }   /* marcador do lugar original da faixa do PJe (fora do cartão quando não há processo) */
@@ -511,6 +528,7 @@ function render() {
   if (G.erro) { caixa.innerHTML = '<div class="pc"><div class="pc-n"><span class="mono pc-cnj">' + esc(G.cnj) + '</span><span class="sp"></span><button type="button" class="lnk" data-g="atualizar">Atualizar</button></div></div><div class="err-box">Não foi possível ler o prontuário: ' + esc(G.erro) + '</div>' + st0; stEl = $('g-st'); return; }
   if (!G.F) { caixa.innerHTML = st0; stEl = $('g-st'); return; }
   if (G.aba === 'Triagem') G.aba = 'Roteiro';
+  if (G.aba === 'Produção') G.aba = 'Processo';
   if (MODOS.indexOf(G.aba) < 0) G.aba = 'Processo';
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos" role="tablist" aria-label="Parte do prontuário">' + MODOS.map(function (a) {
@@ -527,7 +545,8 @@ function render() {
   }
   window.scrollTo(0, y); if (pp) pp.scrollTop = yp;
 }
-function st(t, c) { if (!stEl) stEl = $('g-st'); if (stEl) { stEl.textContent = t || ''; stEl.className = 'status' + (c ? ' ' + c : ''); } }
+/* avisos de gravação: na faixa acima das abas */
+function st(t, c) { var el = $('tu-st') || stEl || $('g-st'); if (el) { el.textContent = t || ''; el.className = (el.id === 'tu-st' ? 'tu-st' : 'status') + (c ? ' ' + c : ''); } }
 
 /* ---------- gravação ---------- */
 function agendar(ms) { clearTimeout(G.t); G.t = setTimeout(function () { gravarJa().catch(function () {}); }, ms); st('Alterações a gravar…'); }
@@ -567,13 +586,14 @@ caixa.addEventListener('change', function (e) {
   if (t.dataset && t.dataset.esp) { if (window.MutaAutos) window.MutaAutos.especificarJa(t.dataset.esp); return; }
   if (t.dataset && t.dataset.snOk) { var po = t.dataset.snOk.split(':'), Lo = snLinhas(po[0]), io = Number(po[1]); if (Lo[io] != null) Lo[io] = t.checked ? '✓ ' + Lo[io].replace(/^✓\s*/, '') : Lo[io].replace(/^✓\s*/, ''); snGravar(po[0], Lo); return; }
   if (t.id === 'sn-tp') { G.snTp = t.value; return; }
+  if (t.id === 'pm-pron') { var xp = PRON[Number(t.value)]; marcar('producao.Destino', xp ? xp[1] : ''); marcar('producao.Mono - Tipo de ato', xp ? xp[2] : ''); G.dest = null; agendar(400); render(); return; }
   if (t.dataset && t.dataset.rtc) { if (window.MutaRoteiro) window.MutaRoteiro.conferir(t.dataset.rtc, t.checked, gRot()); render(); return; }
   if (!t.dataset || !t.dataset.fk) return;
   marcar(t.dataset.fk, t.value); var l = t.closest('label'); if (l) l.classList.add('mud');
   agendar(900);
   if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Roteiro') render();
 });
-caixa.addEventListener('toggle', function (e) { if (e.target.classList && e.target.classList.contains('pm-aut')) G.autAb = e.target.open; }, true);
+caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-aut')) G.autAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
 caixa.addEventListener('keydown', function (e) {
   if (e.target.id === 'sn-tx' && e.key === 'Enter') { e.preventDefault(); snIncluir(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); adAcao('ok'); }

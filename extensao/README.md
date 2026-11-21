@@ -3,6 +3,15 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.17
+
+- **Prontuário com três modos: Processo · Autos · Roteiro.** A aba Produção saiu (revisão, pauta e julgamento, revisão do
+  acórdão ficam no Ex Officio); o **tipo de ato** virou uma pílula no cartão, à esquerda de quem minuta e de quem corrige.
+- Sub-abas compactas (nome e número na mesma linha; a dica explica o número).
+- **Peças** (sentença, origem, recursos e contrarrazões, outras peças) num cartão só, com uma seção por grupo.
+- Partes no rodapé expansível da autuação.
+- Avisos de gravação ("Não gravou…", "Alterações a gravar…") na faixa acima das abas.
+
 ## O que muda na 0.16
 
 - **Modos do Prontuário: Processo · Autos · Roteiro de triagem · Produção**, com a contagem embaixo de cada um (em
