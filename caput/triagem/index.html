@@ -4241,7 +4241,12 @@ function portaToken() { return new Promise((fim) => {
       if (t.dataset.cweNvs && est.nv) { const i = +t.dataset.i, sb = est.nv.subs[i], kk = t.dataset.cweNvs; if (!sb) return;
         if (kk === 'entra') { if (t.value === '__novo') { est.nv.novo = i; A.render(); return; } const m = magistrados().map((x) => magObj(x)).concat(est.nv.novos.map((x) => novoMag(x.nome, x.cargo))).find((x) => x.id === t.value); sb.entra = m ? { id: m.id, nome: m.nome, cargo: m.cargo } : null; }
         else if (kk === 'alcance') { sb.alcance = t.value; sb.itens = 'todos'; } else if (kk === 'casos') sb.casos = t.value.trim(); else sb[kk] = t.value; A.render(); return; }
-      if (t.dataset.cweMkp) { const ss = A.selectedSession(); if (!ss) return; const k = t.dataset.cweMkp, atual = k === 'data' ? ss.data : (ss.fases || {})[k] || ''; est.mkPend = est.mkPend || {}; if (t.value === atual || !t.value) delete est.mkPend[k]; else est.mkPend[k] = t.value; A.render(); return; }
+      if (t.dataset.cweMkp) { const ss = A.selectedSession(); if (!ss) return; const k = t.dataset.cweMkp, atual = k === 'data' ? ss.data : (ss.fases || {})[k] || '';
+        /* o campo de data dispara "change" a cada dígito do ano (2 → 0002): ano incompleto não entra, e não se redesenha a tela enquanto o campo está em uso, senão a digitação se perde */
+        if (t.value && +t.value.slice(0, 4) < 2000) return;
+        est.mkPend = est.mkPend || {}; if (t.value === atual || !t.value) delete est.mkPend[k]; else est.mkPend[k] = t.value;
+        if (document.activeElement === t && !t.classList.contains('mkhid')) { if (!t.dataset.mkb) { t.dataset.mkb = '1'; t.addEventListener('blur', () => A.render(), { once: true }); } return; }
+        A.render(); return; }
       if (t.dataset.cweMk === 'data') { const s = A.getSes(), ss = A.selectedSession(); if (!s?.data || !ss || !t.value) return; const r = s.data(ss.id, t.value); if (r && r.erro) { A.msg(r.erro, true); t.value = ss.data; return; } A.msg('Data da sessão alterada para ' + A.br(t.value) + '. Gravação automática no procs-muta em instantes.'); A.render(); return; }
       if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Gravação automática no procs-muta em instantes.'); } return; }
       if (t.dataset.cweEq) { const s = A.getSes(); if (s?.equipeDefinir?.(t.dataset.cweEq, t.dataset.k, t.checked)) { A.msg('Equipe atualizada. Gravando no procs-muta…'); clearTimeout(ligar.tq); ligar.tq = setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 1200); A.render(); } return; }
