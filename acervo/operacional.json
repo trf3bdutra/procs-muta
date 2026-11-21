@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:15:50.285Z",
+ "atualizado_em": "2026-11-21T10:16:26.190Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -275336,7 +275336,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.521Z"
+    "atualizado_em": "2026-11-21T10:16:26.190Z"
    },
    "triagem": {
     "Urgência": "",
@@ -275350,42 +275350,43 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "Justiça gratuita",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Isento (ente público/MP)",
     "AJG": "Sim",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "MPF": "Não verificado",
+    "MPF - Custos Legis": "Sem hipótese",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Demissão ou Exoneração",
+    "Tema": "Apelação da União e remessa necessária · auditor fiscal da Receita Federal demitido (Portaria 402, de 10/09/2018) · PAD 17276.720025/2015-81 anulado por servidor não estável na presidência da comissão · reintegração e vencimentos desde a demissão",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "*JUSTIÇA GRATUITA, *SERVIDOR - PROC ADM DISCIPLINAR, 2024, Viviane, *ADVOGADO DESPACHOU, 1ª Seção, Aguardar novos precedentes., redistribuição resolução 33/2025, UFOR - MS, PAD",
-    "Alegações": "",
+    "Alegações": "1) Nulidade de PAD presidido por servidor não estável na instauração (artigo 149 da Lei 8.112/1990); 2) estabilidade superveniente e prejuízo; 3) reintegração e vencimentos; 4) consectários.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "",
+    "Especificidades": "Outros PADs ou ações com pena de demissão ao autor (citados na sentença) [VALIDAR] · Tutela de urgência indeferida (ID 308337226) e agravo de instrumento citado pela União [VALIDAR número] · Prejuízo × nulidade (pas de nullité sans grief)",
     "_preparoAJG": true,
     "_preparoBeforeAJG": "Não Verificado",
-    "_ajgAuto": true
+    "_ajgAuto": true,
+    "Síntese Fática": "Amílcar da Silva Alves Guimarães, auditor fiscal da Receita Federal, foi demitido em 2018 por improbidade apurada no PAD 17276.720025/2015-81 e alegou nulidade porque o presidente da comissão não era estável na instauração. A tutela de urgência foi indeferida (ID 308337226)."
    },
    "producao": {
     "Destino": "",
@@ -275434,7 +275435,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5010871-84.2024.4.03.6000",
