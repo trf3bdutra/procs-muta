@@ -4,6 +4,8 @@
 
    Cartão automático: nasce de uma origem e guarda o vínculo em origem e origemChave, para nunca duplicar.
      intercorrência da pauta  int:<data da sessão>:<CNJ>   enquanto ctl.intercor tem texto e ctl.intercorOk está vazio
+                              (com ctl.intercorTipo "Chamado ao TI", o título diz e a descrição leva o nº do chamado)
+     processo retido          ret:<data da sessão>:<CNJ>   adiado ou retirado de pauta, enquanto ctl.retidoOk está vazio
      urgência da monocrática  urg:<CNJ>                    enquanto a urgência não foi apreciada e a decisão não saiu
    Concluir o cartão resolve a origem (a intercorrência fica marcada como resolvida, com o texto preservado;
    a urgência recebe a apreciação informada). Reabrir desfaz, salvo urgência de monocrática já liberada ou assinada.
@@ -26,10 +28,17 @@ async function origens() {
     const lista = (d.itens || []).length ? d.itens : (d.previa || []);
     lista.forEach(it => {
       const c = it.ctl || {}, txt = String(c.intercor || '').trim();
-      if (!txt || String(c.intercorOk || '').trim() || dg(it.cnj).length !== 20) return;
+      if (dg(it.cnj).length !== 20) return;
+      /* processo retido (adiado ou retirado de pauta): diligência até ser resolvido (incluído em nova sessão ou retirado) */
+      const ret = /^adiad/i.test(it.resultado || '') ? 'adiado' : /^retirad/i.test(it.resultado || '') ? 'retirado de pauta' : '';
+      if (ret && !String(c.retidoOk || '').trim()) abertas.set('ret:' + s.date + ':' + dg(it.cnj), { origem: 'retido', origemChave: 'ret:' + s.date + ':' + dg(it.cnj),
+        title: ('Retido · ' + ret + ' · ' + (it.cnj || '') + (it.item ? ' · item ' + it.item : '')).slice(0, 200),
+        description: 'Processo ' + ret + ' na sessão de ' + s.date.split('-').reverse().join('/') + ': incluir em nova sessão ou retirar.', assignee: String(it.servidor || ''), urgency: 'Alta', dueDate: '', numero: String(it.cnj || ''), sessao: s.date });
+      if (!txt || String(c.intercorOk || '').trim()) return;
+      const ti = c.intercorTipo === 'Chamado ao TI';
       abertas.set('int:' + s.date + ':' + dg(it.cnj), { origem: 'intercor', origemChave: 'int:' + s.date + ':' + dg(it.cnj),
-        title: ('Intercorrência · ' + (it.cnj || '') + (it.item ? ' · item ' + it.item : '')).slice(0, 200),
-        description: txt.slice(0, 2000), assignee: String(it.servidor || ''), urgency: 'Alta', dueDate: '', numero: String(it.cnj || ''), sessao: s.date });
+        title: ('Intercorrência' + (ti ? ' (chamado ao TI)' : '') + ' · ' + (it.cnj || '') + (it.item ? ' · item ' + it.item : '')).slice(0, 200),
+        description: (txt + (ti && c.intercorChamado ? '\nChamado nº ' + c.intercorChamado : '')).slice(0, 2000), assignee: String(it.servidor || ''), urgency: 'Alta', dueDate: '', numero: String(it.cnj || ''), sessao: s.date });
     });
   });
   try {
@@ -58,6 +67,13 @@ async function naOrigem(alvo, b, u, done, descNova) {
     if (descNova != null) campos.intercor = descNova;
     if (!Object.keys(campos).length) return;
     const r = await require('./pauta').gravarItem(data, { cnj, campos }, u, L.gestor(u));
+    if (r.status >= 400) { const e = new Error((r.body || {}).erro || 'não foi possível gravar na pauta'); e.status = r.status; throw e; }
+    return;
+  }
+  if (alvo.origem === 'retido') {
+    if (done === null) return;
+    const parte = String(alvo.origemChave || '').split(':'), data = parte[1], cnj = parte[2];
+    const r = await require('./pauta').gravarItem(data, { cnj, campos: { retidoOk: done ? hojeISO() : '' } }, u, L.gestor(u));
     if (r.status >= 400) { const e = new Error((r.body || {}).erro || 'não foi possível gravar na pauta'); e.status = r.status; throw e; }
     return;
   }

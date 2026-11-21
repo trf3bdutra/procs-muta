@@ -52,7 +52,9 @@ async function acharNaPauta(data, cnj) {
 }
 async function marcar(data, achado, p) {
   const { gravarItem } = require('./pauta');
-  return gravarItem(data, { cnj: p.cnj, lista: achado.lista, campos: { sopref: p.tipo } }, 'AgentMail', false);
+  /* o tipo vai para o campo do cartão (sopref); advogado, OAB, parte e recebimento vão para a seção do prontuário (cartao.so) */
+  const so = { advogado: p.advogado || '', oab: p.oab || '', parte: p.parte || '', recebido: p.recebidoEm ? dataLocal(p.recebidoEm) : '', origem: 'e-mail', pedido: p.id || '' };
+  return gravarItem(data, { cnj: p.cnj, lista: achado.lista, campos: { sopref: p.tipo, cartao: { so } } }, 'AgentMail', false);
 }
 function acharNoDocumento(dados, cnj) {
   const lista = (dados.itens || []).length ? 'itens' : 'previa';
@@ -238,3 +240,4 @@ module.exports.ler = ler;
 module.exports.lerRegistros = lerRegistros;
 module.exports.paraUsuario = paraUsuario;
 module.exports.obterSessao = obterSessao;
+module.exports.marcar = marcar;

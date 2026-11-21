@@ -2704,7 +2704,7 @@ var TGS=[['Recurso',[['ed','ED','Embargos de declaração',function(i){return ti
     ['rn','Remessa','Remessas necessárias',function(i){return tipoJ(i)==='Remessa Necessária'||/remessa/.test(nq(i.classe));}],['jr','Retratação','Juízos de retratação',function(i){return tipoJ(i)==='Juízo de Retratação';}]]],
   ['Prioridade',[['mt','Metas','Processos de meta',function(i){return !!metaDe(i);}],['so','Sustentação','Pedidos de sustentação oral (presencial ou por videoconferência)',function(i){var v=(i.ctl||{}).sopref||'';return !!v&&soTipo(v)!=='prf';}],
     ['pf','Preferência','Pedidos de preferência',function(i){var v=(i.ctl||{}).sopref||'';return !!v&&soTipo(v)==='prf';}]]],
-  ['Atenção',[['pd','Pendências','Processos com pendências ou alertas',function(i){return alertas(i).length>0;}],['ic','Intercorrências','Processos com intercorrência',function(i){return !!(i.ctl||{}).intercor;}]]]];
+  ['Atenção',[['pd','Pendências','Processos com pendências ou alertas',function(i){return alertas(i).length>0;}],['ic','Intercorrências','Processos com intercorrência em aberto (inclusive chamado ao TI e retidos)',function(i){return icAberta(i);}],['rt','Retidos','Adiados ou retirados de pauta',function(i){return /^(adiad|retirad)/i.test(i.resultado||'');}]]]];
 function tgOk(it){var T=S.tg||{};return TGS.every(function(g){var on=g[1].filter(function(x){return T[x[0]];});return !on.length||on.some(function(x){return x[3](it);});});}
 var ETF={min:'dataMinuta',cor:'dataCorrecao',lib:'dataLiberacao'};
 function filtrar(){var L=lista(),q=nq(S.q),e=nq(U.eu),MS=S.fonte==='mono'&&!!$('#v-pauta')._ed,PA=S.fonte!=='mono';
@@ -2799,7 +2799,7 @@ function render(){
   if(eSem)eSem.textContent=S.ses?String(diaSem(S.ses)).split(',')[0]:'';
   $('#ses-sub').textContent=S.ses?[ss.hora||'',qdo].filter(Boolean).join(' · '):'';
   var n=function(f){return L.filter(f).length;},jul=n(function(i){return /^julgad/i.test(i.resultado||'');}),adi=n(function(i){return /^adiad/i.test(i.resultado||'');}),ret=n(function(i){return /^retirad/i.test(i.resultado||'');});
-  var mi=n(function(i){return i.dataMinuta;}),co=n(function(i){return i.dataCorrecao;}),li=n(function(i){return i.dataLiberacao;}),al=n(function(i){return alertas(i).length;}),ic=n(function(i){return (i.ctl||{}).intercor;}),sem=n(function(i){return !i.servidor||i.servidor==='—';}),mt=n(metaDe);
+  var mi=n(function(i){return i.dataMinuta;}),co=n(function(i){return i.dataCorrecao;}),li=n(function(i){return i.dataLiberacao;}),al=n(function(i){return alertas(i).length;}),ic=n(icAberta),sem=n(function(i){return !i.servidor||i.servidor==='—';}),mt=n(metaDe);
   $('#pt-st').textContent='';/* contagem de intercorrências e metas: já está nos filtros (Metas · Intercorrências) */if(MO)bandaMono();prontLateral();var tx=MO?'Exportar em Excel as monocráticas filtradas (sem filtro, todas)':'Exportar em Excel os processos filtrados (sem filtro, toda a pauta)';$('#exp-xlsx').title=tx;$('#exp-xlsx').setAttribute('aria-label',tx);$('#exp-meus').hidden=MO&&!ED;$('#exp-mes').hidden=$('#imp-xlsx').hidden=!MO;if(MO){var tm='Exportar as monocráticas do período em tela ('+monoPer().lb+')';$('#exp-mes').title=tm;$('#exp-mes').setAttribute('aria-label',tm);}
   var det=function(k){if(!S.kx[k])return '';var o='';
     if(k==='p'){var c={};L.forEach(function(i){var a=MO?((i.ctl||{}).tipoAto||'tipo de ato não informado'):aprec(i);c[a]=(c[a]||0)+1;});o=Object.keys(c).map(function(a){return '<span><b>'+c[a]+'</b> '+esc(a)+'</span>';}).join('');}
@@ -2983,53 +2983,84 @@ document.addEventListener('click',function(e){var t=e.target.closest&&e.target.c
   arr.splice(+t.getAttribute('data-nota-x'),1);notasGravar(it,arr,'Nota excluída.');});
 document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='nt-tx'&&e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();var b=document.querySelector('#prq [data-nota-add]');if(b)b.click();}});
 /* ===== Prontuário · aba Acompanhamento: sustentação/preferência, intercorrência, pendências e notas, num lugar só ===== */
-function acompAberto(it){var c=it.ctl||{};return alertas(it).length+(c.intercor&&!c.intercorOk?1:0);}
+function acompAberto(it){var c=it.ctl||{};return alertas(it).length+(c.intercor&&!c.intercorOk?1:0)+(retidoDe(it)&&!c.retidoOk?1:0);}
 function acompHtml(it){var c=it.ctl||{},so=c.sopref||'',PL=(((c.cartao||{}).pendencias)||[]),man=PL.filter(function(p){return p&&p.desc&&!p.ok;}).map(function(p){return p.desc;}),
     auto=alertas(it).filter(function(a){return man.indexOf(a)<0;}),abP=man.length,icA=!!c.intercor&&!c.intercorOk;
-  var SOB=[['','Sem pedido'],['Presencial','Sustentação presencial'],['Virtual','Sustentação por vídeo'],['Preferência','Preferência']];
+  var SOB=[['','Sem pedido'],['Presencial','Sustentação oral presencial'],['Virtual','Sustentação oral por videoconferência'],['Preferência','Preferência']];
   return '<div class="ac">'+
     /* sustentação oral · preferência no próprio prontuário (o mesmo conteúdo do diálogo): recolhida quando não há pedido;
        abre sozinha se houver pedido marcado ou pedido recebido por e-mail vinculado ao processo */
-    '<details class="ac-s ac-det" id="ac-so"'+(so?' open':'')+'><summary><h4>Sustentação oral · preferência'+(so?'<em class="ac-st so">'+esc(SOROT[soTipo(so)])+'</em>':'<em class="ac-st">sem pedido</em>')+'</h4></summary>'+
-      '<div class="ac-seg" role="group" aria-label="Pedido de sustentação ou preferência">'+SOB.map(function(x){return '<button type="button" data-ac-so="'+x[0]+'" aria-pressed="'+(so===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>'+
-      '<div class="ped-dados" aria-live="polite"></div><small class="ac-h">Pedidos recebidos por e-mail aparecem aqui quando vinculados ao processo.</small></details>'+
-    '<section class="ac-s" id="ac-ic"><h4>Intercorrência'+(c.intercor?'<em class="ac-st '+(icA?'al':'ok')+'">'+(icA?'em aberto':'resolvida')+'</em>':'')+'</h4>'+
-      '<textarea data-ac="intercor" rows="2" maxlength="1200" placeholder="O que impede ou atrasa a liberação (deixe vazio se não houver)">'+esc(c.intercor||'')+'</textarea>'+
-      '<label class="ac-ck"><input type="checkbox" data-ac="intercorOk"'+(c.intercorOk?' checked':'')+(c.intercor?'':' disabled')+'> resolvida</label><small class="ac-h">Em aberto, a intercorrência retém a liberação do voto.</small></section>'+
-    '<section class="ac-s" id="ac-pd"><h4>Pendências'+(abP?'<em class="ac-st pd">'+abP+' em aberto</em>':'')+'</h4>'+
-      (PL.length?'<div class="ac-pls">'+PL.map(function(p,i){return '<div class="ac-pl'+(p.ok?' ok':'')+'"><input type="checkbox" data-acp-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Pendência resolvida"><textarea data-acp-d="'+i+'" rows="1" maxlength="300" aria-label="Descrição da pendência" title="'+esc(p.desc||'')+'">'+esc(p.desc||'')+'</textarea><small>'+esc([p.por,p.ok&&p.resolvidaEm?'resolvida em '+br(p.resolvidaEm).slice(0,5):p.em?br(p.em).slice(0,5):''].filter(Boolean).join(' · '))+'</small><button type="button" data-acp-x="'+i+'" aria-label="Excluir pendência" title="Excluir">×</button></div>';}).join('')+'</div>':'')+
-      '<div class="ac-add"><input type="text" id="ac-pd-n" maxlength="300" placeholder="Nova pendência: aguardar contrarrazões, intimar a parte, juntar mídia… (Enter inclui)"><button type="button" class="b" data-acp-add>Incluir</button></div>'+
-      (auto.length?'<p class="ac-h2">Alertas automáticos de admissibilidade</p><ul class="ac-al">'+auto.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul><button type="button" class="ac-lk" data-ac-aba="2">Corrigir na aba Admissibilidade ›</button>':'')+'</section>'+
+    '<details class="ac-s ac-det" id="ac-so"'+(so?' open':'')+'><summary><h4>Solicitações'+(so?'<em class="ac-st so">'+esc(SOROT[soTipo(so)])+'</em>':'<em class="ac-st">sem pedido</em>')+'</h4></summary>'+
+      '<label class="ac-sf ac-sotp"><span>Pedido</span><select data-ac-sosel aria-label="Pedido de sustentação oral ou preferência">'+SOB.map(function(x){return '<option value="'+x[0]+'"'+(so===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+(so&&!SOB.some(function(x){return x[0]===so;})?'<option selected>'+esc(so)+'</option>':'')+'</select></label>'+
+      (function(){var D=((c.cartao||{}).so)||{},fl=function(r,k,ph,t){return '<label class="ac-sf"><span>'+r+'</span><input data-p="so.'+k+'" type="'+(t||'text')+'" value="'+esc(D[k]||'')+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'></label>';};
+        return '<div class="ac-so-f">'+fl('Advogado(a)','advogado','nome')+fl('OAB','oab','UF 000000')+fl('Parte representada','parte','parte que pediu')+fl('Pedido recebido em','recebido','','date')+'</div>';})()+
+      '<div class="ped-dados" aria-live="polite"></div><small class="ac-h">Pedidos recebidos por e-mail preenchem estes campos ao serem vinculados ao processo.</small></details>'+
+    sinalizacoes(it,c,PL,auto)+
     notasBloco(it)+'</div>';}
+/* SINALIZAÇÕES do caso: intercorrências (inclusive chamado ao TI e processo retido: adiado ou retirado de pauta), pendências e avisos.
+   Todas têm checkbox de resolução. Só a intercorrência retém a liberação e abre diligência automática (quadro de Diligências). */
+function retidoDe(it){var r=String(it.resultado||'');return /^adiad/i.test(r)?'Adiado':/^retirad/i.test(r)?'Retirado de pauta':'';}
+function icAberta(it){var c=it.ctl||{};return (!!c.intercor&&!c.intercorOk)||(!!retidoDe(it)&&!c.retidoOk);}
+function sinalizacoes(it,c,PL,auto){var AV=(((c.cartao||{}).avisos)||[]),rt=retidoDe(it),ti=c.intercorTipo==='Chamado ao TI';
+  var nI=(c.intercor&&!c.intercorOk?1:0)+(rt&&!c.retidoOk?1:0),nP=PL.filter(function(p){return p&&p.desc&&!p.ok;}).length,nA=AV.filter(function(a){return a&&a.desc&&!a.ok;}).length;
+  var tp=function(cls,t){return '<span class="sg-tp '+cls+'">'+t+'</span>';},meta=function(p){return esc([p.por,p.ok&&p.resolvidaEm?'resolvida em '+br(p.resolvidaEm).slice(0,5):p.em?br(p.em).slice(0,5):''].filter(Boolean).join(' · '));};
+  var h='<section class="ac-s sg" id="ac-sn"><h4>Sinalizações'+(nI?'<em class="ac-st al">'+nI+' intercorrência'+(nI>1?'s':'')+'</em>':'')+(nP?'<em class="ac-st pd">'+nP+' pendência'+(nP>1?'s':'')+'</em>':'')+(nA?'<em class="ac-st av">'+nA+' aviso'+(nA>1?'s':'')+'</em>':'')+'</h4><div class="ac-pls">';
+  if(c.intercor)h+='<div class="ac-pl sg-r sg-ic'+(c.intercorOk?' ok':'')+'"><input type="checkbox" data-ac="intercorOk"'+(c.intercorOk?' checked':'')+' aria-label="Intercorrência resolvida"><div class="sg-c">'+tp('ic','Intercorrência'+(ti?' · chamado ao TI':''))+
+    '<textarea data-ac="intercor" rows="1" maxlength="1200" aria-label="Descrição da intercorrência">'+esc(c.intercor)+'</textarea>'+(ti?'<label class="sg-ch">Nº do chamado<input data-ac="intercorChamado" value="'+esc(c.intercorChamado||'')+'" placeholder="nº" maxlength="40"></label>':'')+'</div>'+
+    '<small>'+(c.intercorOk?'resolvida':'em aberto · retém a liberação · diligência aberta')+'</small><button type="button" data-ac-icx aria-label="Excluir a intercorrência" title="Excluir">×</button></div>';
+  if(rt)h+='<div class="ac-pl sg-r sg-ic'+(c.retidoOk?' ok':'')+'"><input type="checkbox" data-ac="retidoOk"'+(c.retidoOk?' checked':'')+' aria-label="Retido resolvido"><div class="sg-c">'+tp('ic','Intercorrência · retido')+
+    '<p class="sg-tx">'+esc(rt)+(S.ses?' na sessão de '+esc(br(S.ses)):'')+': incluir em nova sessão ou retirar.</p></div><small>'+(c.retidoOk?'resolvido em '+esc(br(c.retidoOk).slice(0,5)):'em aberto · diligência aberta')+'</small></div>';
+  PL.forEach(function(p,i){h+='<div class="ac-pl sg-r'+(p.ok?' ok':'')+'"><input type="checkbox" data-acp-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Pendência resolvida"><div class="sg-c">'+tp('pd','Pendência')+'<textarea data-acp-d="'+i+'" rows="1" maxlength="300" aria-label="Descrição da pendência" title="'+esc(p.desc||'')+'">'+esc(p.desc||'')+'</textarea></div><small>'+meta(p)+'</small><button type="button" data-acp-x="'+i+'" aria-label="Excluir pendência" title="Excluir">×</button></div>';});
+  AV.forEach(function(p,i){h+='<div class="ac-pl sg-r sg-av'+(p.ok?' ok':'')+'"><input type="checkbox" data-acv-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Aviso resolvido"><div class="sg-c">'+tp('av','Aviso')+'<textarea data-acv-d="'+i+'" rows="1" maxlength="300" aria-label="Descrição do aviso">'+esc(p.desc||'')+'</textarea></div><small>'+meta(p)+'</small><button type="button" data-acv-x="'+i+'" aria-label="Excluir aviso" title="Excluir">×</button></div>';});
+  if(!c.intercor&&!rt&&!PL.length&&!AV.length)h+='<p class="sg-vz">Nenhuma sinalização.</p>';
+  h+='</div><div class="ac-add sg-add"><select id="sg-tp" aria-label="Tipo da sinalização"><option value="pd">Pendência</option><option value="av">Aviso</option>'+
+    '<option value="ti"'+(c.intercor?' disabled':'')+'>Intercorrência · chamado ao TI</option><option value="ic"'+(c.intercor?' disabled':'')+'>Intercorrência · outra</option></select>'+
+    '<input type="text" id="ac-pd-n" maxlength="300" placeholder="Descreva e tecle Enter"><button type="button" class="b" data-acp-add>Incluir</button></div>'+
+    '<small class="ac-h">Intercorrência retém a liberação e abre diligência; pendência e aviso, não.'+(c.intercor?' Já há intercorrência: edite a existente.':'')+'</small>'+
+    (auto.length?'<p class="ac-h2">Alertas automáticos de admissibilidade</p><ul class="ac-al">'+auto.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul><button type="button" class="ac-lk" data-ac-aba="2">Corrigir na aba Admissibilidade ›</button>':'')+'</section>';
+  return h;}
 function acompSalvar(it,m,msg){var sc=[].map.call(document.querySelectorAll('#prq,#prq .prt-body,#prq .prt-p'),function(x){return [x,x.scrollTop];});
   marcar(it,m);var a=document.activeElement;if(a&&a.blur&&a.closest&&a.closest('#prq'))a.blur();render();gravar();
   [].forEach.call(document.querySelectorAll('#prq,#prq .prt-body,#prq .prt-p:not([hidden])'),function(x){var o=sc.filter(function(y){return y[0].className===x.className&&y[0].id===x.id;})[0];if(o)x.scrollTop=o[1];});if(msg)toast(msg);}
 function acompIt(){return lista().filter(function(i){return dg(i.cnj)===S.prt;})[0];}
 function abrirAcomp(it,f){S.prt=dg(it.cnj);S.prtAba=0;var a=document.activeElement;if(a&&a.blur)a.blur();prontLateral();
-  setTimeout(function(){var alvo={pri:'#ac-so',ic:'#ac-ic',al:'#ac-pd',nt:'#prt-nt'}[f]||'#ac-so',x=$('#prq '+alvo);if(!x)return;if(x.tagName==='DETAILS')x.open=true;x.scrollIntoView({behavior:'smooth',block:'start'});
-    var fo={ic:'textarea',al:'#ac-pd-n',nt:'#nt-tx'}[f];var y=fo&&x.querySelector(fo);if(y)y.focus({preventScroll:true});x.classList.add('ac-flash');setTimeout(function(){x.classList.remove('ac-flash');},1200);},80);}
+  setTimeout(function(){var alvo={pri:'#ac-so',ic:'#ac-sn',al:'#ac-sn',nt:'#prt-nt'}[f]||'#ac-so',x=$('#prq '+alvo);if(!x)return;if(x.tagName==='DETAILS')x.open=true;x.scrollIntoView({behavior:'smooth',block:'start'});
+    var fo={ic:'#ac-pd-n',al:'#ac-pd-n',nt:'#nt-tx'}[f];var y=fo&&x.querySelector(fo);if(f==='ic'){var sl=x.querySelector('#sg-tp');if(sl&&!sl.querySelector('[value=ic]').disabled)sl.value='ic';}if(y)y.focus({preventScroll:true});x.classList.add('ac-flash');setTimeout(function(){x.classList.remove('ac-flash');},1200);},80);}
 function acompPend(it,PL,msg){cart(it).pendencias=PL;acompSalvar(it,{cartao:{pendencias:PL}},msg);}
-document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-ac-so],[data-acp-add],[data-acp-x],[data-ac-aba]');if(!t||!t.closest('#prq'))return;var it=acompIt();if(!it)return;
+/* Solicitações: o seletor do pedido grava como os botões antigos (sopref) */
+document.addEventListener('change',function(e){var t=e.target;if(!t||!t.matches||!t.matches('#prq [data-ac-sosel]'))return;var it=acompIt();if(!it)return;var v=t.value;it.ctl=it.ctl||{};if((it.ctl.sopref||'')===v)return;if(v)it.ctl.sopref=v;else delete it.ctl.sopref;acompSalvar(it,{sopref:v},v?SOROT[soTipo(v)]+' registrada.':'Pedido retirado.');});
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-ac-so],[data-acp-add],[data-acp-x],[data-acv-x],[data-ac-icx],[data-ac-aba]');if(!t||!t.closest('#prq'))return;var it=acompIt();if(!it)return;
   if(t.hasAttribute('data-ac-aba')){var bt=$('#prq [data-prt-aba="'+t.getAttribute('data-ac-aba')+'"]');if(bt)bt.click();return;}
   if(t.hasAttribute('data-ac-so')){var v=t.getAttribute('data-ac-so');it.ctl=it.ctl||{};if((it.ctl.sopref||'')===v)return;if(v)it.ctl.sopref=v;else delete it.ctl.sopref;acompSalvar(it,{sopref:v},v?SOROT[soTipo(v)]+' registrada.':'Pedido retirado.');return;}
   var PL=JSON.parse(JSON.stringify((((it.ctl||{}).cartao||{}).pendencias)||[]));
-  if(t.hasAttribute('data-acp-add')){var n=$('#ac-pd-n'),tx=(n&&n.value||'').trim();if(!tx){if(n)n.focus();return;}PL.push({desc:tx,ok:false,em:hoje(),por:U.eu||''});acompPend(it,PL,'Pendência incluída.');setTimeout(function(){var x=$('#ac-pd-n');if(x)x.focus({preventScroll:true});},80);return;}
+  if(t.hasAttribute('data-acp-add')){var n=$('#ac-pd-n'),tx=(n&&n.value||'').trim(),tg=($('#sg-tp')||{}).value||'pd';if(!tx){if(n)n.focus();return;}
+    if(tg==='ti'||tg==='ic'){it.ctl=it.ctl||{};if(it.ctl.intercor){toast('Já há intercorrência neste processo: edite a existente.');return;}var ty=tg==='ti'?'Chamado ao TI':'';it.ctl.intercor=tx;delete it.ctl.intercorOk;if(ty)it.ctl.intercorTipo=ty;else delete it.ctl.intercorTipo;delete it.ctl.intercorChamado;
+      acompSalvar(it,{intercor:tx,intercorOk:'',intercorTipo:ty,intercorChamado:''},'Intercorrência registrada: a diligência será aberta.');return;}
+    if(tg==='av'){var AV=JSON.parse(JSON.stringify((((it.ctl||{}).cartao||{}).avisos)||[]));AV.push({desc:tx,ok:false,em:hoje(),por:U.eu||''});cart(it).avisos=AV;acompSalvar(it,{cartao:{avisos:AV}},'Aviso incluído.');return;}
+    PL.push({desc:tx,ok:false,em:hoje(),por:U.eu||''});acompPend(it,PL,'Pendência incluída.');setTimeout(function(){var x=$('#ac-pd-n');if(x)x.focus({preventScroll:true});},80);return;}
+  if(t.hasAttribute('data-acv-x')){if(!confirm('Excluir este aviso?'))return;var AV2=JSON.parse(JSON.stringify((((it.ctl||{}).cartao||{}).avisos)||[]));AV2.splice(+t.getAttribute('data-acv-x'),1);cart(it).avisos=AV2;acompSalvar(it,{cartao:{avisos:AV2}},'Aviso excluído.');return;}
+  if(t.hasAttribute('data-ac-icx')){if(!confirm('Excluir a intercorrência? A diligência automática será concluída.'))return;it.ctl=it.ctl||{};['intercor','intercorOk','intercorTipo','intercorChamado'].forEach(function(k){delete it.ctl[k];});acompSalvar(it,{intercor:'',intercorOk:'',intercorTipo:'',intercorChamado:''},'Intercorrência excluída.');return;}
   if(t.hasAttribute('data-acp-x')){if(!confirm('Excluir esta pendência?'))return;PL.splice(+t.getAttribute('data-acp-x'),1);acompPend(it,PL,'Pendência excluída.');}});
 document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.closest('#prq .ac'))return;var it=acompIt();if(!it)return;it.ctl=it.ctl||{};
-  if(t.getAttribute('data-ac')==='intercor'){var tx=t.value.trim();if((it.ctl.intercor||'')===tx)return;var m={intercor:tx};if(tx)it.ctl.intercor=tx;else{delete it.ctl.intercor;if(it.ctl.intercorOk){delete it.ctl.intercorOk;m.intercorOk='';}}acompSalvar(it,m,tx?'Intercorrência registrada.':'Intercorrência retirada.');return;}
+  if(t.getAttribute('data-ac')==='intercor'){var tx=t.value.trim();if((it.ctl.intercor||'')===tx)return;var m={intercor:tx};if(tx)it.ctl.intercor=tx;else{delete it.ctl.intercor;if(it.ctl.intercorOk){delete it.ctl.intercorOk;m.intercorOk='';}['intercorTipo','intercorChamado'].forEach(function(k){if(it.ctl[k]){delete it.ctl[k];m[k]='';}});}acompSalvar(it,m,tx?'Intercorrência registrada.':'Intercorrência retirada.');return;}
+  if(t.getAttribute('data-ac')==='intercorChamado'){var nc=t.value.trim();if((it.ctl.intercorChamado||'')===nc)return;if(nc)it.ctl.intercorChamado=nc;else delete it.ctl.intercorChamado;acompSalvar(it,{intercorChamado:nc},'Nº do chamado registrado.');return;}
+  if(t.getAttribute('data-ac')==='retidoOk'){var ro=t.checked?hoje():'';if(ro)it.ctl.retidoOk=ro;else delete it.ctl.retidoOk;acompSalvar(it,{retidoOk:ro},ro?'Retido resolvido: diligência concluída.':'Retido reaberto.');return;}
+  if(t.hasAttribute('data-acv-ok')||t.hasAttribute('data-acv-d')){var AV=JSON.parse(JSON.stringify((((it.ctl||{}).cartao||{}).avisos)||[])),ia=+(t.getAttribute('data-acv-ok')||t.getAttribute('data-acv-d')),a=AV[ia];if(!a)return;
+    if(t.hasAttribute('data-acv-ok')){a.ok=t.checked;if(t.checked){a.resolvidaEm=hoje();a.resolvidaPor=U.eu||'';}else{delete a.resolvidaEm;delete a.resolvidaPor;}}else{var va=t.value.trim();if(!va||a.desc===va)return;a.desc=va;}
+    cart(it).avisos=AV;acompSalvar(it,{cartao:{avisos:AV}},t.hasAttribute('data-acv-ok')?(t.checked?'Aviso resolvido.':'Aviso reaberto.'):'');return;}
   if(t.getAttribute('data-ac')==='intercorOk'){var ok=t.checked&&it.ctl.intercor?'Sim':'';if(ok)it.ctl.intercorOk=ok;else delete it.ctl.intercorOk;acompSalvar(it,{intercorOk:ok},ok?'Intercorrência resolvida.':'Intercorrência reaberta.');return;}
   var PL=JSON.parse(JSON.stringify((((it.ctl||{}).cartao||{}).pendencias)||[]));
   if(t.hasAttribute('data-acp-ok')){var p=PL[+t.getAttribute('data-acp-ok')];if(!p)return;p.ok=t.checked;if(t.checked){p.resolvidaEm=hoje();p.resolvidaPor=U.eu||'';}else{delete p.resolvidaEm;delete p.resolvidaPor;}acompPend(it,PL,t.checked?'Pendência resolvida.':'Pendência reaberta.');return;}
   if(t.hasAttribute('data-acp-d')){var q=PL[+t.getAttribute('data-acp-d')],v=t.value.trim();if(!q||!v||q.desc===v)return;q.desc=v;acompPend(it,PL);}},true);
 /* pendência em texto corrido: Enter grava (sai do campo), Shift+Enter não quebra linha; a altura acompanha o texto */
-document.addEventListener('keydown',function(e){var t=e.target;if(t&&t.tagName==='TEXTAREA'&&t.hasAttribute('data-acp-d')&&e.key==='Enter'){e.preventDefault();t.blur();}},true);
+document.addEventListener('keydown',function(e){var t=e.target;if(t&&t.tagName==='TEXTAREA'&&(t.hasAttribute('data-acp-d')||t.hasAttribute('data-acv-d')||(t.getAttribute('data-ac')==='intercor'&&t.closest('#ac-sn')))&&e.key==='Enter'){e.preventDefault();t.blur();}},true);
 document.addEventListener('input',function(e){var t=e.target;if(t&&t.tagName==='TEXTAREA'&&t.hasAttribute('data-acp-d')){t.title=t.value;if(!CSS.supports('field-sizing','content')){t.style.height='auto';t.style.height=t.scrollHeight+'px';}}},true);
 document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='ac-pd-n'&&e.key==='Enter'){e.preventDefault();var b=$('#prq [data-acp-add]');if(b)b.click();}});
 function sinais(it,A,c){var MO=S.fonte==='mono',b=function(f,on,cls,ic,tt,n){return '<button type="button" class="sn-b'+(on?' on '+cls:'')+'" data-a="sinal" data-f="'+f+'" aria-label="'+esc(tt)+'">'+ic+(n?'<i>'+n+'</i>':'')+'</button>';};
   return '<span class="sn" role="group" aria-label="Sinalizações">'+
     (MO?'':soInd(it,c))+
     b('al',A.length>0,'al',ICN.al,A.length?'Pendências: '+A.join(' · '):'Sem pendências',A.length||'')+
-    b('ic',!!c.intercor,c.intercorOk?'ok':'ic2',ICN.ic,c.intercor?'Intercorrência'+(c.intercorOk?' (resolvida)':'')+': '+c.intercor:'Sem intercorrência · clique para registrar',c.intercor&&!c.intercorOk?1:'')+
+    (function(){var rt=retidoDe(it),ab=(c.intercor&&!c.intercorOk?1:0)+(rt&&!c.retidoOk?1:0),tem=!!c.intercor||!!rt;return b('ic',tem,ab?'ic2':'ok',ICN.ic,tem?[c.intercor?'Intercorrência'+(c.intercorTipo==='Chamado ao TI'?' (chamado ao TI'+(c.intercorChamado?' nº '+c.intercorChamado:'')+')':'')+(c.intercorOk?' (resolvida)':'')+': '+c.intercor:'',rt?rt+(c.retidoOk?' (resolvido)':' · incluir em nova sessão ou retirar'):''].filter(Boolean).join(' · '):'Sem intercorrência · clique para registrar',ab||'');})()+
     (function(){var N=notasDe(it).length;return b('nt',N>0,'nt',ICN.nt,N?N+(N===1?' nota':' notas')+' sobre o caso · clique para ver ou incluir':'Sem notas · clique para incluir uma nota sobre o caso',N||'');})()+
     '<button type="button" class="sn-b dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></span>';}
 /* balão ao passar o cursor: pendências, intercorrência ou sustentação daquele processo */
@@ -3156,7 +3187,7 @@ function liaDlg(it){var old=document.getElementById('lia-dlg');if(old)old.remove
 /* etiqueta de responsáveis do cartão: minutante com a data da minuta (editável no calendário) e corretor */
 /* cor do cartão: o fundo mostra a etapa; a faixa da esquerda, o problema mais grave
    (vermelho: intercorrência em aberto · laranja: pendência registrada no cartão · amarelo: alerta automático de admissibilidade) */
-function pbCls(it,A,c){if(c.intercor&&!c.intercorOk)return ' pb-ic';var P=(((c.cartao||{}).pendencias)||[]).filter(function(p){return p&&p.desc&&!p.ok;}).length;
+function pbCls(it,A,c){if(icAberta(it))return ' pb-ic';var P=(((c.cartao||{}).pendencias)||[]).filter(function(p){return p&&p.desc&&!p.ok;}).length;
   if(P)return ' pb-pd';return A.length>P?' pb-al':'';}
 function tagResp(it){var mn=it.servidor&&it.servidor!=='—'?it.servidor:'',cr=it.corretor&&it.corretor!=='—'?it.corretor:'',dm=it.dataMinuta||'';
   var dt=dm?'<label class="mr-dt" title="Minutado em '+esc(br(dm))+' · clique para alterar a data"><span>'+esc(br(dm).slice(0,5))+'</span><input type="date" data-d="dataMinuta" value="'+esc(dm)+'" max="'+hoje()+'" aria-label="Data da minuta" tabindex="-1"></label>':'';
@@ -3342,6 +3373,8 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
 var PRT_ESS=['[data-p="tipoJ"]','[data-p="subassuntos"]','[data-p="questoes"]','[data-p="sintese"]','[data-p^="papeis."]','[data-p="orig.tipo"]','[data-p="orig.id"]','[data-c="tempest"]','[data-c="preparo"]','[data-c="repres"]','[data-c="prelim"]','[data-c="mpf"]','[data-c="parecer"]','[data-c="resJulg"]','[data-c="honor"]','[data-c="consect"]','[data-p="jul.remessa"]','[data-p="jul.multa"]','[data-p="jul.fund"]','[data-c="topico"]'].join(',');
 try{S.prtModo=localStorage.getItem('eq_prt_modo')||'comp';}catch(e){S.prtModo='comp';}
 /* previdenciário (tópico-síntese entra no modo essencial): INSS como parte ou assunto de benefício (aposentadoria, auxílio, pensão, BPC/LOAS, tempo especial…) */
+/* INSS entre as partes: só então o prontuário mostra o tópico-síntese */
+function inssParte(it){return /instituto nacional do seguro social|\binss\b/.test(nq(it.partes||''));}
 function ehPrev(it){var t=nq([it.partes,it.assunto,it.classe,((it.ctl||{}).cartao||{}).assuntoDet].join(' ')),a=nq(it.assunto);
   /* 28,86% é de servidor (o INSS figura como empregador) e contribuição previdenciária é tributário */
   if(/28[,.]86/.test(a)||(/contribuic/.test(a)&&!/aposentad|tempo de contribuic/.test(a)))return false;
@@ -3977,9 +4010,12 @@ function corpo(it,tj){
      (tj==='Agravo Interno'?f('AgInt · decisão agravada · ID',inp('agint.id','ID'))+f('AgInt · data da decisão',inp('agint.data','','date'))+f('AgInt · síntese da decisão',ta('agint.sintese','síntese'))+f('AgInt · fundamentos',ta('agint.fund','fundamentos do agravo')):'')+
      (tj==='Juízo de Retratação'?f('Retratação · acórdão · ID',inp('jr.id','ID'))+f('Retratação · data do acórdão',inp('jr.data','','date'))+f('Retratação · precedente / tema',inp('jr.tema','Tema nº …'))+f('Retratação · tribunal',sx('jr.trib',['STF','STJ']))+f('Retratação · embargos ao acórdão',sx('jr.ed',['Não houve','Opostos e rejeitados','Opostos e acolhidos','Parcialmente acolhidos','Não conhecidos']))+f('Retratação · questão submetida',ta('jr.questao','questão')):'')+
      '</div></section>'+
-   '<section class="w"><h3><em>1</em>Julgamento · minuta</h3><div class="grid">'+f('Resultado',sc('resJulg',CP.resJulg))+f('Consectários',sc('consect',CP.simnao))+f('Honorários',sc('honor',CP.honor))+
-     (tj==='Embargos de Declaração'||tj==='Agravo Interno'?f('Multa',sx('jul.multa',['Sem multa','Protelatórios · art. 1.026, § 2º','Reiteração · art. 1.026, § 3º','Art. 1.021, § 4º'])):f('Remessa necessária',ck('jul.remessa','Configurada')))+
-     f('Tópico-síntese',sc('topico',CP.simnao)+tl('jul.topico','texto do tópico-síntese','txt'))+f('Fundamentos',tl('jul.fund','um fundamento por questão (Q1, Q2…)','num'))+f('Comentário ao corretor',tl('jul.coment','observação ao corretor','txt'))+'</div>'+
+   /* remessa necessária logo após o resultado, só quando o caso é de remessa; tópico-síntese só com o INSS entre as partes */
+   '<section class="w"><h3><em>1</em>Julgamento · minuta</h3><div class="grid">'+f('Resultado',sc('resJulg',CP.resJulg))+
+     (RN||/remessa/.test(nq(it.classe||''))?f('Remessa necessária',ck('jul.remessa','Configurada')):'')+
+     f('Consectários',sc('consect',CP.simnao))+f('Honorários',sc('honor',CP.honor))+
+     (tj==='Embargos de Declaração'||tj==='Agravo Interno'?f('Multa',sx('jul.multa',['Sem multa','Protelatórios · art. 1.026, § 2º','Reiteração · art. 1.026, § 3º','Art. 1.021, § 4º'])):'')+
+     (inssParte(it)?f('Tópico-síntese',sc('topico',CP.simnao)+tl('jul.topico','texto do tópico-síntese','txt')):'')+f('Fundamentos',tl('jul.fund','um fundamento por questão (Q1, Q2…)','num'))+f('Comentário ao corretor',tl('jul.coment','observação ao corretor','txt'))+'</div>'+
      ((GUIA[tj]||[]).length?'<div class="sub">Análise guiada · '+esc(tj)+'</div>'+GUIA[tj].map(function(qq,i){var p='guia.'+tj.replace(/\W+/g,'')+'.'+i,v=G(p);return '<div class="q"><span>'+esc(qq)+'</span><span>'+['Sim','Não'].map(function(x){return '<label><input type="radio" name="'+esc(it.cnj+p)+'" data-p="'+p+'" value="'+x+'"'+(v===x?' checked':'')+'> '+x+'</label>';}).join('')+'</span></div>';}).join(''):'')+
    '</section></div>';
   return h;
@@ -4434,7 +4470,11 @@ function pedCard(dialogo,data,cnj,silencioso){
   if(!silencioso)box.textContent='Consultando pedidos recebidos por e-mail…';
   api(PED_URI+'&data='+encodeURIComponent(data)+'&cnj='+encodeURIComponent(cnj)).then(function(j){
     var pedidos=(j.registros||[]).filter(function(p){return p.vinculo&&(!p.cnj||!cnj||dg(p.cnj)===dg(cnj));});
-    box.innerHTML=pedidos.length?pedidos.map(function(p){return '<article>'+pedResumo(p)+'</article>';}).join(''):'';
+    /* prontuário: os dados do e-mail vão para os campos da seção (só onde estiverem vazios) e fica uma linha de origem */
+    if(dialogo.id==='ac-so'){var p0=pedidos[0],F={advogado:p0&&p0.advogado,oab:p0&&p0.oab,parte:p0&&p0.parte,recebido:p0&&p0.recebidoEm?new Date(p0.recebidoEm).toLocaleDateString('sv-SE',{timeZone:'America/Cuiaba'}):''};
+      if(p0)Object.keys(F).forEach(function(k){var i=dialogo.querySelector('[data-p="so.'+k+'"]');if(i&&!i.value&&F[k]){i.value=F[k];i.classList.add('do-email');i.title='Do e-mail do pedido';}});
+      box.innerHTML=pedidos.map(function(p){var r=p.recebidoEm?new Date(p.recebidoEm).toLocaleString('pt-BR',{timeZone:'America/Cuiaba',dateStyle:'short',timeStyle:'short'}):'';return '<p class="ped-l">'+esc(p.titulo)+' · recebido por e-mail'+(r?' em '+esc(r):'')+'</p>';}).join('');}
+    else box.innerHTML=pedidos.length?pedidos.map(function(p){return '<article>'+pedResumo(p)+'</article>';}).join(''):'';
     var dt=box.closest&&box.closest('details');if(dt&&pedidos.length)dt.open=true;
   }).catch(function(e){if(!silencioso)box.textContent=e.message||'Falha ao consultar os pedidos.';});
 }
@@ -4733,7 +4773,7 @@ function quadro(){
   $('#pen-s').innerHTML='<span><b>'+abertas.length+'</b> em aberto</span><span><b>'+minhas.length+'</b> suas</span><span><b>'+abertas.filter(function(t){return /Urgente|Alta/.test(t.urgency);}).length+'</b> prioritárias</span><span><b>'+abertas.filter(function(t){return !t.assignee;}).length+'</b> sem responsável</span>';
   $('#board').innerHTML=ETAPAS.map(function(st){var L=F.filter(function(t){return (t.stage||'todo')===st[0];});
     return '<section class="lane" data-st="'+st[0]+'"><h3><span>'+st[1]+'</span><span>'+L.length+'</span></h3>'+L.map(function(t){var at=t.dueDate&&t.dueDate<h&&st[0]!=='done';
-      return '<article class="tk '+esc(t.urgency)+(st[0]==='done'?' done':'')+'" draggable="true" data-tk="'+esc(t.id)+'"><b>'+esc(t.title)+'</b>'+(t.origem?'<small class="tk-or">'+(t.origem==='intercor'?'Intercorrência da pauta':'Urgência da monocrática')+'</small>':'')+'<small>'+esc([t.urgency,t.assignee||'sem responsável'].join(' · '))+'</small>'+
+      return '<article class="tk '+esc(t.urgency)+(st[0]==='done'?' done':'')+'" draggable="true" data-tk="'+esc(t.id)+'"><b>'+esc(t.title)+'</b>'+(t.origem?'<small class="tk-or">'+(t.origem==='intercor'?'Intercorrência da pauta':t.origem==='retido'?'Processo retido':'Urgência da monocrática')+'</small>':'')+'<small>'+esc([t.urgency,t.assignee||'sem responsável'].join(' · '))+'</small>'+
         (t.dueDate?'<small class="'+(at?'dl':'')+'">prazo '+br(t.dueDate)+(at?' · vencida':'')+'</small>':'')+(t.numero?'<small>'+esc(t.numero)+'</small>':'')+
         '<label class="tk-mv"><span class="vh">Mover para</span><select data-mv="'+esc(t.id)+'" aria-label="Mover para">'+ETAPAS.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===st[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></label>'+'</article>';}).join('')+'</section>';}).join('');
 }
@@ -4773,7 +4813,7 @@ function dlgPen(t){PN.ed=t;var f=$('#f-pen'),E=f.elements;f.reset();$('#pen-er')
   ['title','description','assignee','urgency','dueDate','numero','sessao','stage'].forEach(function(k){if(t&&t[k]!=null)E[k].value=t[k];});
   if(!t){E.urgency.value='Média';E.stage.value='todo';E.assignee.value=PN.equipe.filter(function(n){return nq(n)===nq(U.eu);})[0]||'';}
   var or=$('#pen-or');or.hidden=!(t&&t.origem);
- if(t&&t.origem)or.textContent=t.origem==='intercor'?'Cartão da intercorrência da pauta. O que você escrever na descrição vai para o campo Intercorrência; concluir marca a intercorrência como resolvida, sem apagar o texto.':'Cartão da urgência da monocrática. Concluir pede a apreciação e grava na ficha do processo.';
+ if(t&&t.origem)or.textContent=t.origem==='retido'?'Cartão do processo retido (adiado ou retirado de pauta). Concluir marca o retido como resolvido no prontuário.':t.origem==='intercor'?'Cartão da intercorrência da pauta. O que você escrever na descrição vai para o campo Intercorrência; concluir marca a intercorrência como resolvida, sem apagar o texto.':'Cartão da urgência da monocrática. Concluir pede a apreciação e grava na ficha do processo.';
  $('#pen-del').hidden=!(t&&!t.origem&&nq(t.creator)===nq(U.eu));$('#dlg-pen').showModal();E.title.focus();}
 $('#pen-x').onclick=function(){$('#dlg-pen').close();};
 $('#pen-del').onclick=function(){var t=PN.ed;if(!t)return;api('/api/pendencias?id='+encodeURIComponent(t.id),{method:'DELETE'}).then(function(){$('#dlg-pen').close();toast('Diligência excluída.');pendencias();}).catch(function(x){$('#pen-er').textContent=x.message;$('#pen-er').hidden=false;});};
@@ -8045,6 +8085,10 @@ window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true);
     Array.prototype.forEach.call(document.querySelectorAll('#v-pauta .mr-l1>.cnj'),function(c){if(c.nextElementSibling&&c.nextElementSibling.classList.contains('cpy'))return;c.insertAdjacentHTML('afterend',bt('cpy-card','Copiar o número do processo'));});
   }
   var ag=0;new MutationObserver(function(){if(ag)return;ag=requestAnimationFrame(function(){ag=0;enfeita();});}).observe(document.body,{childList:true,subtree:true});
+  /* navegadores sem field-sizing: a pendência cresce pela altura do texto */
+  if(!(window.CSS&&CSS.supports&&CSS.supports('field-sizing','content'))){var cresce=function(t){t.style.setProperty('height','auto','important');t.style.setProperty('height',t.scrollHeight+'px','important');};
+    document.addEventListener('input',function(e){if(e.target&&e.target.matches&&e.target.matches('#prq .ac-pl textarea'))cresce(e.target);});
+    new MutationObserver(function(){[].forEach.call(document.querySelectorAll('#prq .ac-pl textarea'),function(t){if(!t._cr){t._cr=1;cresce(t);}});}).observe(document.body,{childList:true,subtree:true});}
   function copia(txt,b){txt=String(txt||'').trim();if(!txt){toast('Nada para copiar.');return;}
     var ok=function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok');},900);toast('Copiado: '+txt);};
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,function(){toast('Não foi possível copiar.');});
@@ -9826,6 +9870,34 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 /* descrição da pendência inteira, em quantas linhas precisar (antes cortava numa linha só) */
 #prq .ac-pl textarea{grid-column:2;width:100%;min-height:0;margin:0;border:0!important;background:transparent!important;padding:2px 0!important;resize:none;overflow:hidden;field-sizing:content;font:inherit;font-size:13px;line-height:1.4;color:inherit;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:none!important;cursor:text}
 #prq .ac-pl textarea:focus{outline:0;background:var(--ep2,#f3f1e8)!important}
+/* sustentação oral · preferência: dados do pedido (advogado, OAB, parte, recebimento) */
+#prq .ac>*{min-width:0;max-width:100%}#prq #ac-so .ac-seg{flex-wrap:wrap}#prq #ac-so .ac-seg button{flex:1 1 auto}
+/* Solicitações em cartão próprio: fundo e borda distinguem a seção do resto do acompanhamento */
+#prq #ac-so{background:#f3f7fb;border:1px solid #d3e0ea!important;border-left:3px solid #245b8c!important;border-radius:6px;padding:8px 10px 10px!important;margin:6px 0 12px!important;box-shadow:0 1px 2px rgba(20,50,80,.05)}
+#prq #ac-so>summary{padding:0!important}#prq #ac-so .ac-sf input,#prq #ac-so .ac-sf select{background:#fff!important}#prq #ac-so .ac-h{color:#5b6f80}
+html[data-theme=dark] #prq #ac-so{background:#14273a;border-color:#2a4560!important;border-left-color:#5b9bd5!important}html[data-theme=dark] #prq #ac-so .ac-sf input,html[data-theme=dark] #prq #ac-so .ac-sf select{background:#0e1c2a!important}html[data-theme=dark] #prq #ac-so .ac-h{color:#9fb4c6}
+#prq .ac-sotp{margin:8px 0 0}#prq .ac-sotp select{width:100%;height:28px!important;font-size:12.5px}
+#prq .ac-so-f{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:6px 8px;margin:8px 0 4px}
+#prq .ac-sf{display:flex;flex-direction:column;gap:2px;min-width:0}
+#prq .ac-sf span{font:600 9.5px var(--emono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--em)}
+#prq .ac-sf input{width:100%;min-width:0;height:28px!important;font-size:12.5px}
+#prq .ac-sf input.do-email{background:#eef6f2!important;border-color:#9cc0b4!important}
+#prq .ped-l{margin:4px 0 0;font:500 11px var(--emono,monospace);color:#28744b}
+/* a regra geral .prt-pc textarea fixa 34px: aqui a altura acompanha o texto inteiro da pendência */
+#prq .ac-pl textarea{height:auto!important;min-height:0!important;max-height:none!important}
+/* SINALIZAÇÕES: um tipo por etiqueta; a intercorrência em vermelho (retém a liberação), pendência em âmbar, aviso em azul */
+#prq .sg .ac-pl .sg-c{grid-column:2;grid-row:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+#prq .sg-tp{align-self:flex-start;font:700 8.5px var(--emono,monospace);letter-spacing:.1em;text-transform:uppercase;padding:1px 6px;border-radius:999px;background:#fbefe0;color:#9a5a12}
+#prq .sg-tp.ic{background:#fbe4df;color:#9a2f1e}#prq .sg-tp.av{background:#e4eef8;color:#245b8c}
+#prq .sg .ac-pl.sg-ic{border-left-color:#bd4c38}#prq .sg .ac-pl.sg-av{border-left-color:#245b8c}#prq .sg .ac-pl.ok{border-left-color:#28744b}
+#prq .sg .ac-pl.ok .sg-tx{text-decoration:line-through}
+#prq .sg-tx{margin:0;font:400 13px/1.4 var(--font);color:var(--ei)}
+#prq .sg-ch{display:flex;align-items:center;gap:6px;font:600 9.5px var(--emono,monospace);letter-spacing:.06em;text-transform:uppercase;color:var(--em)}
+#prq .sg-ch input{flex:0 1 140px;height:24px!important;font-size:12px}
+#prq .sg-add{margin-top:6px}#prq .sg-add select{flex:0 0 auto;max-width:44%;height:30px}#prq .sg-add input{flex:1;min-width:0}
+#prq .sg-vz{margin:0 0 6px;font:400 12px var(--font);color:var(--em)}
+#prq .ac-st.av{background:#e4eef8;color:#245b8c}
+html[data-theme=dark] #prq .sg-tp{background:#3a2a14;color:#f0c27a}html[data-theme=dark] #prq .sg-tp.ic{background:#4a2622;color:#f2a397}html[data-theme=dark] #prq .sg-tp.av{background:#1d3550;color:#9cc3e8}
 #prq .ac-pl{align-items:start}#prq .ac-pl>input[type=checkbox]{margin-top:5px}
 #prq .ac-pl small{grid-column:2;grid-row:2;font:400 9.5px var(--emono);color:var(--em)}
 #prq .ac-pl button{grid-column:3;grid-row:1/span 2;width:22px;height:22px;border:0;background:none;color:var(--em);cursor:pointer;font-size:15px;border-radius:4px}
