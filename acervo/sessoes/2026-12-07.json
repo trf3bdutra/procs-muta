@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-21T01:33:57.621Z",
+ "atualizadoEm": "2026-11-21T01:34:03.629Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -1864,15 +1864,21 @@
      "pendencias": [
       {
        "desc": "Confirmar, antes da assinatura, a data da sentença da ação civil pública. A petição inicial indica 02/07/2002, enquanto o modelo fornecido traz 02/07/2001. Não há, entre os documentos indicados, manifestação ou parecer do Ministério Público Federal no segundo grau; por isso, não foi incluído parágrafo sobre sua atuação.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "A minuta mantém 02/07/2001, como o acervo assinado do gabinete; sem manifestação do MPF registrada no lote 2886."
       },
       {
        "desc": "Não foram identificados pedidos de tutela de evidência, alegação de prescrição ou litispendência, pedido de revogação da gratuidade, nem alegação autônoma de transação administrativa pela União que acionassem outros módulos opcionais.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Registro de redação, sem providência pendente."
       }
      ]
     },
@@ -1882,7 +1888,8 @@
      "item": 40,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:34:03.629Z"
    }
   },
   {
