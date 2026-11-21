@@ -78,6 +78,13 @@
    "cor": "#2a6a6a",
    "resultado": "Desprovimento (linha do AI 5001313-17.2022.4.03.0000) [VALIDAR Tema 403/STF]",
    "modelo": "Voto ou monocrática da linha do gabinete"
+  },
+  {
+   "id": "RA3",
+   "rotulo": "Apelação com remessa · Saúde: fornecimento de medicamentos",
+   "cor": "#6a2a4a",
+   "resultado": "Voto conforme Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61",
+   "modelo": "Bloco de saúde (medicamentos)"
   }
  ],
  "grupo_outros": {
@@ -9756,12 +9763,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ESTADO DE MATO GROSSO DO SUL",
    "assunto": "Fornecimento de medicamentos",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA3",
+   "tipo_caso": "Apelação da União e remessa necessária · fornecimento de dupilumabe 300 mg (Dupixent) a criança · condenação solidária da União e do Estado, com ressarcimento de 65% pela União ao Estado · honorários de R$ 10.000,00 · processo vindo da Justiça Estadual",
+   "resultado": "Ato a proferir: apelação da União (ID 339531005) e remessa necessária da sentença ID 339531002; contrarrazões (ID 339531011); MPF pelo provimento da apelação da União (ID 365262522) ‖ Proposta pelos precedentes: Voto: aplicar Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 (requisitos do medicamento não incorporado, competência, custeio e ressarcimento); rever os honorários [VALIDAR resultado à luz do parecer do MPF] [VALIDAR: Requisitos do Tema 6/STF no caso (laudo, CONITEC, registro); Regra de custeio do Tema 1.234/STF; Honorários]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União e o Estado, solidariamente, a fornecer dupilumabe à criança Victor Hugo Arruda Rosa, com ressarcimento de 65% pela União, e fixou honorários de R$ 10.000,00. A União invoca o Tema 1.234/STF e os requisitos para medicamento não incorporado; o MPF opinou pelo provimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9772,7 +9781,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — medicamentos",
+    "origem": "Procedimento comum 5005012-58.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 339531002 (02/04/2025)",
+    "recurso": "apelação de União (ID 339531005, 19/04/2025) · remessa necessária",
+    "preparo": "União: Isenta (ente público)",
+    "monocratica": "Não: aplicação das teses do STF sobre medicamentos a caso concreto",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9782,6 +9802,117 @@
    "chegada": "09/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Saúde — fornecimento de dupilumabe (medicamento não incorporado)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026 | última movimentação: 09/04/2026 16:55 · Conclusos para decisão · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · MPF pelo provimento da apelação (ID 365262522) · Bloqueios e transferências já feitos no cumprimento da tutela",
+   "teor": {
+    "sintese_fatica": "Victor Hugo Arruda Rosa, criança representada pela mãe, pediu dupilumabe contra a União e o Estado de Mato Grosso do Sul. A tutela foi deferida e cumprida com bloqueios de valores; a sentença julgou procedente.",
+    "inicial": "Ação do autor, criança, contra a União e o Estado de Mato Grosso do Sul.",
+    "decisao_recorrida": "Sentença ID 339531002 (02/04/2025): julgou procedente o pedido para condenar a União e o Estado, solidariamente, a fornecer dupilumabe 300 mg conforme receita trimestral, com ressarcimento de 65% pela União se o Estado cumprir; confirmou a tutela; honorários de R$ 10.000,00 rateados (corrigido em embargos, ID 339531008).",
+    "recurso": "União (ID 339531005, 19/04/2025): violação das teses do Tema 1.234/STF (competência e custeio); requisitos para medicamento não incorporado (CONITEC, Tema 6/STF); honorários [VALIDAR].",
+    "resposta": "Contrarrazões do autor (ID 339531011).",
+    "parecer": "MPF ID 365262522: Provimento da apelação da União",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Felipe Accioly de Figueiredo (OAB/MS 15.943).",
+    "preparo": "União: Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária · fornecimento de dupilumabe 300 mg (Dupixent) a criança · condenação solidária da União e do Estado, com ressarcimento de 65% pela União ao Estado · honorários de R$ 10.000,00 · processo vindo da Justiça Estadual",
+     "sintese": "Victor Hugo Arruda Rosa, criança representada pela mãe, pediu dupilumabe contra a União e o Estado de Mato Grosso do Sul. A tutela foi deferida e cumprida com bloqueios de valores; a sentença julgou procedente.",
+     "questoes": "1) Requisitos para fornecimento de medicamento não incorporado ao SUS (Tema 6/STF; Súmula Vinculante 61); 2) competência e custeio (Tema 1.234/STF; Súmula Vinculante 60); 3) honorários.",
+     "rel": {
+      "razoes": "União (ID 339531005, 19/04/2025): violação das teses do Tema 1.234/STF (competência e custeio); requisitos para medicamento não incorporado (CONITEC, Tema 6/STF); honorários [VALIDAR].",
+      "contrarrazoes": "Contrarrazões do autor (ID 339531011)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "339531002",
+      "juizo": "Procedimento comum 5005012-58.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para condenar a União e o Estado, solidariamente, a fornecer dupilumabe 300 mg conforme receita trimestral, com ressarcimento de 65% pela União se o Estado cumprir; confirmou a tutela; honorários de R$ 10.000,00 rateados (corrigido em embargos, ID 339531008)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2018-04-26",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "339531005",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "339531002",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "339531002",
+       "data": "2025-04-02"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "339531005",
+       "data": "2025-04-19"
+      },
+      {
+       "desc": "Sentença: embargos do autor acolhidos (honorários)",
+       "id": "339531008",
+       "data": "2025-07-04"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "339531011",
+       "data": "2025-10-14"
+      },
+      {
+       "desc": "Parecer do MPF (provimento da apelação)",
+       "id": "365262522",
+       "data": "2026-04-08"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026 | última movimentação: 09/04/2026 16:55 · Conclusos para decisão · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · MPF pelo provimento da apelação (ID 365262522) · Bloqueios e transferências já feitos no cumprimento da tutela",
+     "assuntoDet": "Saúde — fornecimento de dupilumabe (medicamento não incorporado)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "365262522",
+     "parecerSentido": "Provimento da apelação da União"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 16:55 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026",
+    "ultima_informacao": "Certidão · ID 339646477 · 16/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026 | última movimentação: 09/04/2026 16:55 · Conclusos para decisão"
    }
   },
   {
@@ -9793,12 +9924,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "HEITOR CORREA RIBEIRO",
    "assunto": "Fornecimento de medicamentos",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA3",
+   "tipo_caso": "Apelação da União e remessa necessária · fornecimento de canabidiol 200 mg/mL (Prati-Donaduzzi) a criança com epilepsia refratária · obrigação dirigida primeiro à União e subsidiariamente ao Estado e ao Município · tutela cumprida com depósitos e bloqueios",
+   "resultado": "Ato a proferir: apelação da União (ID 336024281) e remessa necessária da sentença ID 336024240, integrada pela rejeição dos embargos (ID 336024263); MPF pelo provimento parcial (ID 336695551); manifestação do Estado (ID 338225093) ‖ Proposta pelos precedentes: Voto: aplicar Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 e o Tema 1.161/STF (produto à base de canabidiol com autorização da ANVISA) [VALIDAR]; rever honorários e contracautelas [VALIDAR: Situação regulatória do produto na ANVISA; Honorários fixados; Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União, e subsidiariamente o Estado e o Município, a fornecer canabidiol à criança Heitor Corrêa Ribeiro. A União invoca as Súmulas Vinculantes 60 e 61, a falta de registro na ANVISA e pede redução dos honorários e contracautelas. O MPF opinou pelo provimento parcial.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9809,7 +9942,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — medicamentos",
+    "origem": "Procedimento comum 5005632-70.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 336024240 (03/04/2025)",
+    "recurso": "apelação de União (ID 336024281, 10/07/2025) · remessa necessária",
+    "preparo": "União: Isenta (ente público)",
+    "monocratica": "Não: produto sem registro e teses do STF",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9819,6 +9963,112 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Saúde — fornecimento de canabidiol (produto sem registro como medicamento)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal | última peça: Manifestação (MPF) · ID 338225093 · 03/10/2025 | última movimentação: 13/04/2026 09:04 · Juntada de Petição de documento comprobatório · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Canabidiol: autorização sanitária × registro (Tema 1.161/STF) [VALIDAR] · MPF pelo provimento parcial (ID 336695551)",
+   "teor": {
+    "sintese_fatica": "Heitor Corrêa Ribeiro, criança com epilepsia refratária, pediu canabidiol contra a União, o Estado e o Município de Campo Grande. A tutela foi cumprida por depósitos, bloqueios e penhora de valores; a sentença julgou procedente.",
+    "inicial": "Ação do autor, criança, contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande.",
+    "decisao_recorrida": "Sentença ID 336024240 (03/04/2025): julgou procedente o pedido, confirmando a tutela, para condenar os réus a fornecer canabidiol conforme prescrição trimestral, primeiro pela União e subsidiariamente pelo Estado e pelo Município, observado o preço mínimo de mercado até haver PMVG; embargos da União rejeitados (ID 336024263) [VALIDAR honorários].",
+    "recurso": "União (ID 336024281, 10/07/2025): Súmulas Vinculantes 60 e 61; ausência de registro na ANVISA; denominação comum brasileira; honorários excessivos; contracautelas.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 336695551: Provimento parcial da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Autor: advogado Anderson Pires Ribeiro (OAB/MS 9.820).",
+    "preparo": "União: Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária · fornecimento de canabidiol 200 mg/mL (Prati-Donaduzzi) a criança com epilepsia refratária · obrigação dirigida primeiro à União e subsidiariamente ao Estado e ao Município · tutela cumprida com depósitos e bloqueios",
+     "sintese": "Heitor Corrêa Ribeiro, criança com epilepsia refratária, pediu canabidiol contra a União, o Estado e o Município de Campo Grande. A tutela foi cumprida por depósitos, bloqueios e penhora de valores; a sentença julgou procedente.",
+     "questoes": "1) Fornecimento de canabidiol sem registro como medicamento (Temas 6 e 1.161/STF; Súmulas Vinculantes 60 e 61); 2) direcionamento da obrigação; 3) honorários e contracautelas.",
+     "rel": {
+      "razoes": "União (ID 336024281, 10/07/2025): Súmulas Vinculantes 60 e 61; ausência de registro na ANVISA; denominação comum brasileira; honorários excessivos; contracautelas.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "336024240",
+      "juizo": "Procedimento comum 5005632-70.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido, confirmando a tutela, para condenar os réus a fornecer canabidiol conforme prescrição trimestral, primeiro pela União e subsidiariamente pelo Estado e pelo Município, observado o preço mínimo de mercado até haver PMVG; embargos da União rejeitados (ID 336024263) [VALIDAR honorários]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2011-05-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "336024281",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "336024240",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "336024240",
+       "data": "2025-04-03"
+      },
+      {
+       "desc": "Sentença: embargos da União rejeitados",
+       "id": "336024263",
+       "data": "2025-05-19"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "336024281",
+       "data": "2025-07-10"
+      },
+      {
+       "desc": "Parecer do MPF (provimento parcial)",
+       "id": "336695551",
+       "data": "2025-09-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal | última peça: Manifestação (MPF) · ID 338225093 · 03/10/2025 | última movimentação: 13/04/2026 09:04 · Juntada de Petição de documento comprobatório · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Canabidiol: autorização sanitária × registro (Tema 1.161/STF) [VALIDAR] · MPF pelo provimento parcial (ID 336695551)",
+     "assuntoDet": "Saúde — fornecimento de canabidiol (produto sem registro como medicamento)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "336695551",
+     "parecerSentido": "Provimento parcial da apelação"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "13/04/2026 09:04 · Juntada de Petição de documento comprobatório",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal",
+    "ultima_peca": "Manifestação (MPF) · ID 338225093 · 03/10/2025",
+    "ultima_informacao": "Certidão · ID 336090052 · 12/09/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal | última peça: Manifestação (MPF) · ID 338225093 · 03/10/2025 | última movimentação: 13/04/2026 09:04 · Juntada de Petição de documento comprobatório"
    }
   },
   {
@@ -9830,12 +10080,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "MARIANA FERLIN",
    "assunto": "Fornecimento de medicamentos",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA3",
+   "tipo_caso": "Apelações da União, do Estado e do Município de Campo Grande e remessa necessária · fornecimento de eculizumabe (Soliris) a criança com síndrome hemolítico-urêmica atípica · condenação solidária com ressarcimento integral pela União · honorários de R$ 10.000,00 à DPU",
+   "resultado": "Ato a proferir: apelações da União (ID 320673064), do Estado (ID 320673065) e do Município (ID 320673066) e remessa necessária da sentença ID 320673059; contrarrazões da DPU (ID 320673068); MPF pelo desprovimento (ID 334899604) ‖ Proposta pelos precedentes: Voto: aplicar Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 (requisitos, competência e custeio); conferir honorários à DPU contra a União (Tema 1.002/STF) [VALIDAR] [VALIDAR: Requisitos do Tema 6/STF; Regra de custeio do Tema 1.234/STF; Honorários à DPU]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da União, do Estado e do Município e remessa necessária da sentença que os condenou a fornecer eculizumabe à criança Mariana Ferlin, com ressarcimento integral pela União, e fixou honorários à DPU. Os entes invocam as teses do STF sobre medicamentos não incorporados. O MPF opinou pelo desprovimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9846,7 +10098,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Saúde — medicamentos",
+    "origem": "Procedimento comum 5000235-06.2017.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 320673059 (04/12/2024)",
+    "recurso": "apelação de União (ID 320673064, 26/12/2024) e apelação de Estado de Mato Grosso do Sul (ID 320673065, 09/01/2025) e apelação de Município de Campo Grande (ID 320673066, 19/02/2025) · remessa necessária",
+    "preparo": "União: Isenta (ente público); Estado de Mato Grosso do Sul: Isento (ente público); Município de Campo Grande: Isento (ente público)",
+    "monocratica": "Não: alto custo e teses do STF",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isenta (ente público); Estado de Mato Grosso do Sul: Isento (ente público); Município de Campo Grande: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9856,6 +10119,134 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Saúde — fornecimento de eculizumabe (medicamento de alto custo)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 331371724 · 23/07/2025 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026 | última movimentação: 09/04/2026 15:58 · Juntada de Petição de petição intercorrente · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Tutela desde 2017 e AI 5005535-62.2021.4.03.0000 transitado · Honorários à DPU contra a União (Tema 1.002/STF) [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Mariana Ferlin, criança assistida pela DPU, pediu eculizumabe para síndrome hemolítico-urêmica atípica. A tutela foi deferida em 15/12/2017 e mantida no AI 5005535-62.2021.4.03.0000 (transitado); houve perícia. A sentença julgou procedente.",
+    "inicial": "Ação da autora, criança, contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande.",
+    "decisao_recorrida": "Sentença ID 320673059 (04/12/2024): julgou procedente o pedido para condenar os réus, solidariamente, a fornecer eculizumabe conforme receita trimestral, com ressarcimento integral pela União ao Estado e ao Município; confirmou a tutela e mandou restituir valores bloqueados; honorários de R$ 10.000,00 à DPU, rateados.",
+    "recurso": "União (ID 320673064, 26/12/2024): Súmula Vinculante 61 e teses do Tema 1.234/STF; CONITEC [VALIDAR]. Estado de Mato Grosso do Sul (ID 320673065, 09/01/2025): requisitos do Tema 6/STF para medicamento não incorporado (CONITEC, pedido administrativo, evidência científica); PMVG. Município de Campo Grande (ID 320673066, 19/02/2025): [VALIDAR fundamentos].",
+    "resposta": "Contrarrazões da autora pela DPU (ID 320673068).",
+    "parecer": "MPF ID 334899604: Desprovimento dos recursos",
+    "memoriais": "Não consta",
+    "representacao": "Autora assistida pela Defensoria Pública da União.",
+    "preparo": "União: Isenta (ente público); Estado de Mato Grosso do Sul: Isento (ente público); Município de Campo Grande: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da União, do Estado e do Município de Campo Grande e remessa necessária · fornecimento de eculizumabe (Soliris) a criança com síndrome hemolítico-urêmica atípica · condenação solidária com ressarcimento integral pela União · honorários de R$ 10.000,00 à DPU",
+     "sintese": "Mariana Ferlin, criança assistida pela DPU, pediu eculizumabe para síndrome hemolítico-urêmica atípica. A tutela foi deferida em 15/12/2017 e mantida no AI 5005535-62.2021.4.03.0000 (transitado); houve perícia. A sentença julgou procedente.",
+     "questoes": "1) Requisitos para fornecimento de medicamento de alto custo não incorporado (Tema 6/STF; Súmula Vinculante 61); 2) competência e custeio (Tema 1.234/STF; Súmula Vinculante 60); 3) honorários à DPU.",
+     "rel": {
+      "razoes": "União (ID 320673064, 26/12/2024): Súmula Vinculante 61 e teses do Tema 1.234/STF; CONITEC [VALIDAR]. Estado de Mato Grosso do Sul (ID 320673065, 09/01/2025): requisitos do Tema 6/STF para medicamento não incorporado (CONITEC, pedido administrativo, evidência científica); PMVG. Município de Campo Grande (ID 320673066, 19/02/2025): [VALIDAR fundamentos].",
+      "contrarrazoes": "Contrarrazões da autora pela DPU (ID 320673068)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "320673059",
+      "juizo": "Procedimento comum 5000235-06.2017.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para condenar os réus, solidariamente, a fornecer eculizumabe conforme receita trimestral, com ressarcimento integral pela União ao Estado e ao Município; confirmou a tutela e mandou restituir valores bloqueados; honorários de R$ 10.000,00 à DPU, rateados."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2017-09-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "320673064",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul",
+       "tipo": "Apelação",
+       "id": "320673065",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Município de Campo Grande",
+       "tipo": "Apelação",
+       "id": "320673066",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "320673059",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela de urgência deferida",
+       "id": "320670667",
+       "data": "2017-12-15"
+      },
+      {
+       "desc": "Sentença: procedência",
+       "id": "320673059",
+       "data": "2024-12-04"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "320673064",
+       "data": "2024-12-26"
+      },
+      {
+       "desc": "Apelação do Estado",
+       "id": "320673065",
+       "data": "2025-01-09"
+      },
+      {
+       "desc": "Apelação do Município",
+       "id": "320673066",
+       "data": "2025-02-19"
+      },
+      {
+       "desc": "Parecer do MPF (desprovimento)",
+       "id": "334899604",
+       "data": "2025-08-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 331371724 · 23/07/2025 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026 | última movimentação: 09/04/2026 15:58 · Juntada de Petição de petição intercorrente · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Tutela desde 2017 e AI 5005535-62.2021.4.03.0000 transitado · Honorários à DPU contra a União (Tema 1.002/STF) [VALIDAR]",
+     "assuntoDet": "Saúde — fornecimento de eculizumabe (medicamento de alto custo)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "334899604",
+     "parecerSentido": "Desprovimento dos recursos"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 15:58 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 331371724 · 23/07/2025 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026",
+    "ultima_informacao": "Certidão · ID 322006361 · 23/04/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 331371724 · 23/07/2025 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026 | última movimentação: 09/04/2026 15:58 · Juntada de Petição de petição intercorrente"
    }
   },
   {
