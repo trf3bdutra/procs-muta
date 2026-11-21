@@ -163,11 +163,12 @@ test('Pautas: sessão e buscador em linha única; ações de Sinalizações e No
   assert.match(h, /#prq \.prt-p>section\{background:#fff/);
 });
 
-test('Mural: avisos à direita do calendário e ausências como vista do painel do calendário, sem a faixa de sessões em andamento', () => {
+test('Mural: sem a lista de avisos na coluna (destaque no topo), ausências como vista do painel do calendário, sem a faixa de sessões em andamento', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /#mu-host \.cc-dir\{display:none!important\}/);
-  assert.match(h, /av\.setAttribute\('slot','avisos'\)/);
+  assert.doesNotMatch(h, /av\.setAttribute\('slot','avisos'\)/);
+  assert.match(h, /body:not\(\.painel-gab\) #v-inicio>:not\(#mu-host\)\{display:none!important\}/);
   assert.match(h, /if\(au\)\{au\.removeAttribute\('slot'\);cal\.appendChild\(au\);\}/);
   assert.match(h, /<slot name=\\"avisos\\"><\\\/slot>/);
 });
@@ -289,7 +290,7 @@ test('Mural: Histórico como vista alternativa do painel do calendário; dia do 
   assert.match(h, /data-vista="cal">Calendário<\/button><button type="button" data-vista="hist">Histórico<\/button>/);
   assert.match(h, /#hc-cal-full\.ver-hist #cc-cal \.cc-body\{display:none!important\}/);
   assert.match(h, /#hc-cal-full:not\(\.ver-hist\) #prod\{display:none!important\}/);
-  assert.match(h, /new MutationObserver\(sinc\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
+  assert.match(h, /new MutationObserver\(function\(\)\{sinc\(\);cantoJa\(\);\}\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
 });
 
 test('Agenda: todos cadastram; quem não é gestor grava só os próprios itens, privados (visíveis para ele e para a chefia)', async () => {
@@ -392,7 +393,7 @@ test('Ausências: datas pessoais (aniversário, posse, chegada) gravadas por usu
   assert.match(h, /id="pf-aniv"[^]*id="pf-posse"[^]*id="pf-cheg"/);
   assert.match(h, /data-vista="aus">Ausências</);
   assert.match(h, /canto:PAINEL_GAB\?'':ausCanto\(\)/);
-  assert.match(lib, /class="cc-c cc-canto"/);
+  assert.match(lib, /class="cc-c cc-canto fim"/);
   assert.match(h, /function destGira\(L\)\{/);
   assert.match(h, /<slot name=\\"dest\\">/);
 });

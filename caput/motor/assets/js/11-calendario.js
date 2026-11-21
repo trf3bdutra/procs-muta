@@ -108,8 +108,9 @@ function montar(el,cal,ex){
     }
     /* ex.canto: um cartão no espaço vazio do mês (dias úteis depois do último dia ou, se não houver, antes do primeiro) */
     if(ex.canto){const wl=(pad0+n-1)%7, fim=wl>=4?0:4-wl;
-      if(fim>0) h+=`<div class="cc-c cc-canto" style="grid-column:span ${fim}">${ex.canto}</div>`;
-      else if(pad>0) h=h.replace(/(<div class="cc-c cc-o"><\/div>)+/,`<div class="cc-c cc-canto" style="grid-column:span ${pad}">${ex.canto}</div>`);}
+      /* o cartão fica numa coluna só (a última do mês); as outras sobras continuam vazias */
+      if(fim>0) h+='<div class="cc-c cc-o"></div>'.repeat(fim-1)+`<div class="cc-c cc-canto fim">${ex.canto}</div>`;
+      else if(pad>0) h=h.replace('<div class="cc-c cc-o"></div>',`<div class="cc-c cc-canto ini">${ex.canto}</div>`);}
     const leg=ex.chips?`<div class="cc-leg">${vis.filter(s=>s.date>=hoje).map(s=>`<span><i style="background:${s.cor}"></i>Sessão ${F(s.date)}</span>`).join('')}<span><i class="o"></i>marco a cumprir</span><span><i class="r"></i>seu prazo</span><span><i class="h"></i>feriado</span></div>`:'';
     return `<div class="cc-g">${h}</div>${leg}`;
   }
