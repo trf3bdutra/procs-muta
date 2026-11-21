@@ -98,3 +98,8 @@ test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.cg-cal .cc-body{background:var(--p)}.cg-cal .cc-2m>div')&&cap.includes('.cg-cal .cc-esq .cc-esq-b{top:56px!important}'),'painéis por mês');
 });
+
+test('Comunicação: padrão da Chefia, publicar com prévia ao lado do histórico, canais embaixo',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['id="cg-com-form"','id="cg-com-hist"','id="cg-com-status"','name="nivel" value="','name="painel"','name="notificacao"','name="fixo"','name="ate"','function cmPrevia(','function cmCartao(','cm-k-tot','data-cg-url="/office/#cmt"'])assert.ok(cap.includes(x),x);
+});
