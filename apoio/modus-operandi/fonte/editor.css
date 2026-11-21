@@ -264,3 +264,30 @@ html.ed-cmt .ed-body:has(#ed-ler)>.ed-list,html.ed-cmt .ed-body:has(#ed-man)>.ed
 .rap-lp .rap-del:hover{border-color:#a7433d!important;color:#a7433d!important}
 .rap-lp .rap-del.conf{width:auto;padding:0 10px;border-radius:15px;opacity:1;border-color:#a7433d;background:#a7433d;color:#fff;font:600 11.5px Figtree,system-ui,sans-serif}
 @container (max-width:780px){.rap-lp .rap-g{grid-template-columns:minmax(0,1fr)}.rap-lp .rap-fm{position:static}}
+/* busca no topo da coluna esquerda de todas as abas (Parágrafos, Peças, Diretrizes, Entradas rápidas) */
+.lp-tq,.mn-tq{position:sticky;top:0;z-index:2;display:flex;flex-direction:column;gap:3px;margin:0 0 10px;padding:0 0 8px;background:inherit}
+.lp-toc .lp-tq{background:var(--bg,#f4f2ec)}
+.lp-tq input,.mn-tq input{width:100%;box-sizing:border-box;height:32px;padding:0 10px 0 30px;border:1px solid var(--line,#ded9cc);border-radius:0;background:#fffdf8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a8f98' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16 16 4 4'/%3E%3C/svg%3E") 9px center no-repeat;font:13px Figtree,system-ui,sans-serif;color:#1f2d33}
+.lp-tq input:focus,.mn-tq input:focus{outline:0;border-color:#1b5878;background-color:#fff}
+.lp-tq small{font:400 10.5px ui-monospace,monospace;color:#8a8f98;padding-left:2px}
+.lp-toc .lp-tv{margin:4px 2px;font-size:12px;color:#8a8f98}
+.lp-hd .lp-bus:has(>.mn-nova:only-child){display:flex;justify-content:flex-end;margin-top:-6px}
+/* Entradas rápidas: tudo na altura do quadro; só a lista rola */
+.ed-body.ed-rapb{overflow:hidden!important}
+.ed-body.ed-rapb>.ed-rap{height:100%;box-sizing:border-box}
+.ed-rap .rap-lp{height:100%;box-sizing:border-box;display:flex;flex-direction:column;max-width:1120px;padding-top:12px!important;padding-bottom:0!important}
+.rap-lp>.lp-hd{flex:none;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 14px;margin:0 0 10px!important;padding:0!important}
+.rap-lp>.lp-hd .mn-k{flex-basis:100%;margin:0}
+.rap-lp>.lp-hd h1{margin:0!important;font-size:24px!important;line-height:1.1}
+.rap-lp>.lp-hd .lp-sub{margin:0!important;font-size:13px}
+.rap-lp .rap-g{flex:1;min-height:0;align-items:stretch!important;grid-template-columns:280px minmax(0,1fr)}
+.rap-lp .rap-fm{position:static!important;gap:8px!important;overflow:auto;padding-bottom:12px!important}
+.rap-lp .rap-fk{font-size:13px!important;padding-bottom:4px!important}
+.rap-lp .rap-l1{display:flex;gap:6px}.rap-lp .rap-l1 select{flex:1;min-width:0}
+.rap-lp .rap-l1 .rap-reg{flex:none;height:auto;align-self:stretch}
+.rap-lp .rap-fm textarea{min-height:76px!important;font-size:14px!important}
+.rap-lp .rap-tq{position:static;margin-bottom:6px}
+.rap-lp .rap-g>.lp-doc{min-height:0;overflow:auto;padding:0 6px 14px 0}
+.rap-lp .rap-g>.lp-doc>h2{position:sticky;top:0;z-index:1;background:var(--bg,#f4f2ec);margin:0!important;padding-bottom:6px}
+@container (max-width:780px){.rap-lp .rap-g{grid-template-columns:minmax(0,1fr)}}
+.rap-lp .rap-fm .rap-tq input#rap-q{height:32px;padding:0 10px 0 30px;background:#fffdf8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a8f98' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16 16 4 4'/%3E%3C/svg%3E") 9px center no-repeat;font:13px Figtree,system-ui,sans-serif}
