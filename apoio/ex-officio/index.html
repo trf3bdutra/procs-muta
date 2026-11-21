@@ -9830,6 +9830,8 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #v-cmt .cmt-ass-b .cmt-ar>button.pri{flex:1 1 auto!important}
 #v-cmt .cmt-ass-b .cmt-ar>button{flex:0 0 auto}
 #v-cmt .cmt-ass-ft:empty{display:none!important}
+/* lista: os cartões ficam direto no fundo do painel, sem a caixa branca por trás */
+#v-cmt #cmt-c-ass:has(>.cmt-ar){background:none!important;border:0!important;padding:0!important;box-shadow:none!important}
 /* computador: só a lista; o painel lateral usa a mesma altura, o mesmo fundo e o mesmo título do cabeçalho da página */
 @media (min-width:781px){
  #v-cmt #cmt-vis{display:none!important}
