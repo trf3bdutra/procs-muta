@@ -344,3 +344,11 @@ test('Calendário: voltar para hoje, feriado neutro e cabeçalho no padrão da P
   assert.doesNotMatch(html, /\.cg-cal \.cc-fe\{background:#f6ece0/);
   assert.match(html, /\.lado #sgl,\.lado #ofl\{max-height:360px;overflow-y:auto/);
 });
+
+test('Mural: sem o aviso de marcos inválidos; contagem de processos na primeira faixa', () => {
+  const fs = require('fs'), path = require('path');
+  const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+  assert.doesNotMatch(html, /marcos inválidos no calendário/);
+  assert.match(html, /var tt=pri\?'<small class="tot">'\+tot\+'<\/small>':''/);
+  assert.match(html, /\$\('#info'\)\.hidden=!fl\.length/);
+});
