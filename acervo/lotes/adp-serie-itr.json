@@ -1,0 +1,559 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-itr",
+ "titulo": "Série · ITR: APP e reserva legal",
+ "descricao": "Triagem: exclusão de APP e reserva legal da base do ITR. Nenhum processo pautado.",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-21",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "T1",
+   "rotulo": "APP e reserva legal (ADA e averbação)",
+   "cor": "#2f6db5",
+   "resultado": "Voto: ADA inexigível para APP; reserva legal conforme averbação",
+   "modelo": ""
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-itr/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5006108-79.2020.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x JOSE PEREIRA DE SOUZA MARTINS",
+   "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "executado": "JOSE PEREIRA DE SOUZA MARTINS",
+   "assunto": "ITR/ Imposto Territorial Rural",
+   "assunto_detalhado": "ITR — exclusão de APP e reserva legal glosadas por ADA intempestivo",
+   "grupo": "T1",
+   "tipo_caso": "Apelação da União e remessa necessária em ação anulatória · ITR do exercício de 2003 (Fazenda Capão Alto, Gleba B, matrícula 19.633) · auto de infração de 14/12/2007 (PA 13161.002140/2007-04) · glosa de 1.536 ha de reserva legal e 2.098,5 ha de APP por ADA intempestivo · depósito integral · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelação da União (ID 295368679) e remessa necessária da sentença ID 295368675 (republicada nos IDs 295368676 e 295368677); contrarrazões (ID 295368782) ‖ Proposta pelos precedentes: Voto: desprovimento quanto à APP (ADA inexigível) e exame da prova de averbação da reserva legal à época do fato gerador [VALIDAR] [VALIDAR: Averbação da reserva legal à época do fato gerador (2003); Processo prevento]",
+   "modelo": "Origem: lote adp-remessas (grupo RA6) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que excluiu do ITR/2003 as áreas de APP e reserva legal glosadas por ADA intempestivo. A sentença dispensou o ADA e exigiu, para a reserva legal, a averbação na matrícula.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — ITR (APP e reserva legal)",
+    "origem": "Procedimento comum 5006108-79.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 295368675 (15/02/2024)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 295368679, 23/05/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 305622634 · 30/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prevenção\" [VALIDAR processo prevento] · Recebimento da apelação pelo Des. Fed. André Nabarrete, 4ª Turma (ID 302828084) · Averbação da reserva legal nas matrículas 8.899 e 8.900 (IDs 295368673 e 295368674) [VALIDAR] · Linha do TRF3: ADA inexigível; averbação da reserva legal imprescindível · Mesmo grupo de 5000372-29",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; ITR; Prevenção",
+   "chegada": "06/04/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos",
+    "ultima_peca": "Manifestação (PFN) · ID 305622634 · 30/09/2024",
+    "ultima_informacao": "Certidão · ID 298405390 · 12/08/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 305622634 · 30/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "O Espólio de José Pereira de Souza Martins, representado pela inventariante Geny Ratier Pereira Martins, impugna a glosa das áreas de APP e reserva legal no ITR/2003, recusadas porque o ADA foi protocolado em 31/03/2005, fora do prazo da IN SRF 256/2002. O lançamento suplementar foi de R$ 1.644.106,65 e o débito está depositado.",
+    "inicial": "Ação anulatória de débito fiscal contra a União.",
+    "decisao_recorrida": "Sentença ID 295368675 (15/02/2024): julgou procedente o pedido para anular o auto de infração quanto a 1.536 ha de reserva legal e 2.098,5 ha de APP, com recálculo do imposto; honorários nos percentuais mínimos do artigo 85, § 3º, do CPC sobre o valor da causa; levantamento do depósito após o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 295368679, 23/05/2024): exigência do ADA tempestivo como condição da exclusão das áreas ambientais (IN SRF 256/2002) e validade da glosa.",
+    "resposta": "Contrarrazões do espólio (ID 295368782).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Luiz Epelbaum (OAB/MS 6.703).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação anulatória · ITR do exercício de 2003 (Fazenda Capão Alto, Gleba B, matrícula 19.633) · auto de infração de 14/12/2007 (PA 13161.002140/2007-04) · glosa de 1.536 ha de reserva legal e 2.098,5 ha de APP por ADA intempestivo · depósito integral · pedido julgado procedente",
+     "sintese": "O Espólio de José Pereira de Souza Martins, representado pela inventariante Geny Ratier Pereira Martins, impugna a glosa das áreas de APP e reserva legal no ITR/2003, recusadas porque o ADA foi protocolado em 31/03/2005, fora do prazo da IN SRF 256/2002. O lançamento suplementar foi de R$ 1.644.106,65 e o débito está depositado.",
+     "questoes": "1) ITR: exigência do ADA para exclusão de APP e reserva legal; 2) averbação da reserva legal; 3) honorários.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 295368679, 23/05/2024): exigência do ADA tempestivo como condição da exclusão das áreas ambientais (IN SRF 256/2002) e validade da glosa.",
+      "contrarrazoes": "Contrarrazões do espólio (ID 295368782)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "295368675",
+      "juizo": "Procedimento comum 5006108-79.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para anular o auto de infração quanto a 1.536 ha de reserva legal e 2.098,5 ha de APP, com recálculo do imposto; honorários nos percentuais mínimos do artigo 85, § 3º, do CPC sobre o valor da causa; levantamento do depósito após o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2020-09-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "295368679",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "295368675",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: depósito integral deferido",
+       "id": "295368499",
+       "data": "2020-09-30"
+      },
+      {
+       "desc": "Documento: matrícula 8.899 atualizada",
+       "id": "295368673",
+       "data": "2023-06-23"
+      },
+      {
+       "desc": "Documento: matrícula 8.900 atualizada",
+       "id": "295368674",
+       "data": "2023-06-23"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "295368675",
+       "data": "2024-02-15"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "295368679",
+       "data": "2024-05-23"
+      },
+      {
+       "desc": "Contrarrazões do espólio",
+       "id": "295368782",
+       "data": "2024-08-02"
+      },
+      {
+       "desc": "Decisão: recebimento da apelação (4ª Turma)",
+       "id": "302828084",
+       "data": "2024-09-17"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 305622634 · 30/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prevenção\" [VALIDAR processo prevento] · Recebimento da apelação pelo Des. Fed. André Nabarrete, 4ª Turma (ID 302828084) · Averbação da reserva legal nas matrículas 8.899 e 8.900 (IDs 295368673 e 295368674) [VALIDAR] · Linha do TRF3: ADA inexigível; averbação da reserva legal imprescindível · Mesmo grupo de 5000372-29",
+     "assuntoDet": "ITR — exclusão de APP e reserva legal glosadas por ADA intempestivo",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5000372-29.2024.4.03.6004",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x ROBERTO ALBERTINI",
+   "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "executado": "ROBERTO ALBERTINI",
+   "assunto": "ITR/ Imposto Territorial Rural",
+   "assunto_detalhado": "ITR — exclusão de APP e floresta nativa; área de pastagem e multa de ofício",
+   "grupo": "T1",
+   "tipo_caso": "Apelações da União e do espólio e remessa necessária em ação anulatória · ITR do exercício de 2011 (Fazenda Santa Luzia, PA 10140.722163/2015-91) · glosa de APP, floresta nativa e área de pastagem · pedido julgado procedente em parte",
+   "resultado": "Ato a proferir: apelações da União (ID 309489826) e do espólio (ID 309489831) e remessa necessária da sentença ID 309489824; contrarrazões (IDs 309489895 e 309489899) ‖ Proposta pelos precedentes: Voto: não conhecer da remessa (artigo 496, § 3º, I, do CPC); desprover a apelação da União quanto ao ADA; examinar a área de pastagem (prova) e a multa de ofício de 75% (jurisprudência do STF sobre o caráter confiscatório) [VALIDAR] [VALIDAR: Valor do proveito econômico para a remessa; Preparo da apelação do espólio; Decadência do ITR/2011]",
+   "modelo": "Origem: lote adp-remessas (grupo RA6) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da União e do espólio e remessa necessária da sentença que excluiu do ITR/2011 a APP e a floresta nativa e manteve a área de pastagem. A União exige o ADA; o espólio pede a exclusão da pastagem e a redução da multa.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento das apelações (voto); remessa necessária: possível não conhecimento (artigo 496, § 3º, I, do CPC)",
+    "materia": "Tributário — ITR (APP, floresta nativa e pastagem)",
+    "origem": "Procedimento comum 5000372-29.2024.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 309489824 (24/10/2024)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 309489826, 31/10/2024) e apelação de Espólio de Roberto Albertini (ID 309489831, 12/11/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público); Espólio de Roberto Albertini: Comprovante de custas (ID 309489886), sem texto extraído [VALIDAR]",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público); Espólio de Roberto Albertini: Comprovante de custas (ID 309489886), sem texto extraído [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 376741496 · 27/05/2026 | última movimentação: 27/05/2026 10:38 · Juntada de Petição de petição intercorrente · Remessa: proveito econômico inferior a 1.000 salários mínimos (lançamento total de R$ 230.345,89): não cabimento (artigo 496, § 3º, I, do CPC) [VALIDAR] · Petição de 27/05/2026 (ID 376741496) junta sentença da ação 5000622-28.2025.4.03.6004, mesmas partes, que reconheceu a decadência do ITR/2010 (ID 376741497) · Data da notificação do lançamento do ITR/2011 × decadência (artigo 150, § 4º, do CTN) [VALIDAR] · Mesmo grupo de 5006108-79",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; ITR; Nulidade - Lançamentos Tributários",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "27/05/2026 10:38 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Petição intercorrente (agravado) · ID 376741496 · 27/05/2026",
+    "ultima_informacao": "Informação · ID 309489900 · 03/12/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 376741496 · 27/05/2026 | última movimentação: 27/05/2026 10:38 · Juntada de Petição de petição intercorrente"
+   },
+   "teor": {
+    "sintese_fatica": "O Espólio de Roberto Albertini, representado pela inventariante Roberta Albertini Gonçalves, impugna o lançamento suplementar do ITR/2011, que totalizou R$ 230.345,89 com juros e multa. A sentença excluiu a APP e a floresta nativa e manteve a área de pastagem.",
+    "inicial": "Ação anulatória de débito fiscal contra a União.",
+    "decisao_recorrida": "Sentença ID 309489824 (24/10/2024): julgou procedente em parte o pedido para anular o lançamento 9063/00014/2021 e determinar o recálculo do ITR/2011 com exclusão de 161,4 ha de APP e 598,6 ha de floresta nativa, mantida a área de pastagem; sucumbência recíproca.",
+    "recurso": "União (Fazenda Nacional) (ID 309489826, 31/10/2024): exigência do ADA tempestivo para exclusão das áreas ambientais. Espólio de Roberto Albertini (ID 309489831, 12/11/2024): exclusão da área de pastagem e, subsidiariamente, redução da multa de ofício de 75% para 20% (vedação ao confisco).",
+    "resposta": "Contrarrazões do espólio (ID 309489895) e da União (ID 309489899).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Walker Araujo (OAB/MS 29.586-B).",
+    "preparo": "Espólio: comprovante de custas ID 309489886 sem texto [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da União e do espólio e remessa necessária em ação anulatória · ITR do exercício de 2011 (Fazenda Santa Luzia, PA 10140.722163/2015-91) · glosa de APP, floresta nativa e área de pastagem · pedido julgado procedente em parte",
+     "sintese": "O Espólio de Roberto Albertini, representado pela inventariante Roberta Albertini Gonçalves, impugna o lançamento suplementar do ITR/2011, que totalizou R$ 230.345,89 com juros e multa. A sentença excluiu a APP e a floresta nativa e manteve a área de pastagem.",
+     "questoes": "1) Cabimento da remessa (artigo 496, § 3º, I, do CPC); 2) ITR: ADA para APP e floresta nativa; 3) área de pastagem; 4) multa de ofício de 75%.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 309489826, 31/10/2024): exigência do ADA tempestivo para exclusão das áreas ambientais. Espólio de Roberto Albertini (ID 309489831, 12/11/2024): exclusão da área de pastagem e, subsidiariamente, redução da multa de ofício de 75% para 20% (vedação ao confisco).",
+      "contrarrazoes": "Contrarrazões do espólio (ID 309489895) e da União (ID 309489899)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "309489824",
+      "juizo": "Procedimento comum 5000372-29.2024.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "julgou procedente em parte o pedido para anular o lançamento 9063/00014/2021 e determinar o recálculo do ITR/2011 com exclusão de 161,4 ha de APP e 598,6 ha de floresta nativa, mantida a área de pastagem; sucumbência recíproca."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-05-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "309489826",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Espólio de Roberto Albertini",
+       "tipo": "Apelação",
+       "id": "309489831",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "309489824",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido procedente em parte",
+       "id": "309489824",
+       "data": "2024-10-24"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "309489826",
+       "data": "2024-10-31"
+      },
+      {
+       "desc": "Apelação do espólio",
+       "id": "309489831",
+       "data": "2024-11-12"
+      },
+      {
+       "desc": "Comprovante de custas da apelação",
+       "id": "309489886",
+       "data": "2024-11-12"
+      },
+      {
+       "desc": "Contrarrazões do espólio",
+       "id": "309489895",
+       "data": "2024-11-12"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "309489899",
+       "data": "2024-11-25"
+      },
+      {
+       "desc": "Petição: sentença em ação idêntica (ITR/2010)",
+       "id": "376741496",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Documento: sentença da ação 5000622-28.2025.4.03.6004",
+       "id": "376741497",
+       "data": "2026-05-27"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 376741496 · 27/05/2026 | última movimentação: 27/05/2026 10:38 · Juntada de Petição de petição intercorrente · Remessa: proveito econômico inferior a 1.000 salários mínimos (lançamento total de R$ 230.345,89): não cabimento (artigo 496, § 3º, I, do CPC) [VALIDAR] · Petição de 27/05/2026 (ID 376741496) junta sentença da ação 5000622-28.2025.4.03.6004, mesmas partes, que reconheceu a decadência do ITR/2010 (ID 376741497) · Data da notificação do lançamento do ITR/2011 × decadência (artigo 150, § 4º, do CTN) [VALIDAR] · Mesmo grupo de 5006108-79",
+     "assuntoDet": "ITR — exclusão de APP e floresta nativa; área de pastagem e multa de ofício",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5000218-07.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x TIPTORIO AGROPECUARIA S/A",
+   "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "executado": "TIPTORIO AGROPECUARIA S/A",
+   "assunto": "ITR/ Imposto Territorial Rural",
+   "assunto_detalhado": "Agravo da União contra julgamento antecipado parcial do mérito que afastou a glosa da APP (56,4 ha) e da área de interesse ecológico (791,6 ha) no ITR 2010 da Reserva Ecológica Fazenda Arara Azul (Corumbá/MS), por desnecessidade do ADA",
+   "grupo": "T1",
+   "tipo_caso": "Tributário · ITR 2010 · julgamento antecipado parcial do mérito (artigo 356 do CPC) · área de preservação permanente e área de interesse ecológico · dispensa do ADA",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto) ‖ Proposta pelos precedentes: Negar provimento ao agravo da União. A exclusão da área de preservação permanente da base do ITR não depende do ADA (ApCiv 0010900-84.2008.4.03.6000, 3ª Turma, 27/08/2022), e a área de interesse ecológico reconhecida por ato do poder público também o dispensa (ApCiv 5000763-60.2019.4.03.6100, 3ª Turma, 15/03/2022, unidade de conservação em MS). [VALIDAR: existência do ato do órgão competente que declara a área de interesse ecológico ou a reserva particular (artigo 10, § 1º, II, b, da Lei 9.393/1996); tempestividade do agravo (prazo em dobro; data da intimação da União); denominação da agravada (Tiptorio Agropecuária S/A × Tiptorio Processamento de Dados Ltda. × Hedge 44, no PAF)]",
+   "modelo": "Origem: lote adp-ai (grupo A7) · não pautado",
+   "variacoes": [],
+   "observacao": "Agravo da União contra a decisão da 4ª Vara Federal de Campo Grande que, em ação anulatória do ITR 2010 (Reserva Ecológica Fazenda Arara Azul, Corumbá/MS), julgou antecipada e parcialmente o mérito para afastar a glosa da área de preservação permanente e da área de interesse ecológico por falta de ADA. A tutela recursal foi indeferida (ID 382854446) e a autora respondeu.",
+   "peculiaridades": "A contraminuta foi apresentada por \"Tiptorio Processamento de Dados Ltda.\"; a autuação indica \"Tiptorio Agropecuária S/A\" e o PAF, \"Hedge 44 - Processamento de Dados Ltda.\" [VALIDAR denominação]. Decisão agravada sem ID nos autos extraídos.",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "382606014",
+     "data": "25/06/2026"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "385950984",
+     "data": "14/07/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "382854446",
+     "data": "26/06/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "analisado_em": "2026-11-20",
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Tributário · ITR · áreas ambientais e ADA",
+    "origem": "Ação anulatória · 4ª Vara Federal de Campo Grande [VALIDAR número]",
+    "decisao_agravada": "Julgamento antecipado parcial do mérito [VALIDAR ID]",
+    "recurso": "ID 382606014 · 25/06/2026",
+    "preparo": "União: isenta",
+    "monocratica": "ID 382854446 (indeferiu a tutela recursal)",
+    "conf_preparo": "Não se aplica (União).",
+    "conf_prevencao": "Sem prevenção apontada nos autos extraídos."
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 382854446 · 26/06/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Contraminuta (agravado) · ID 385950984 · 14/07/2026 | última movimentação: 20/07/2026 17:33 · CONCLUSOS PARA DECISÃO · Ação anulatória (origem cautelar antecedente) · PAF 10140.723051/2015-57 · Imóvel matrícula 14.792 do 1º CRI de Corumbá · ITR suplementar reduzido na DRJ de R$ 88.143,40 para R$ 15.315,31 · Tutela recursal indeferida (ID 382854446, 26/06/2026)",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção",
+   "chegada": "04/11/2026",
+   "bloco": "2",
+   "situacao_atual": {
+    "ultima_decisao": "Decisão · ID 382854446 · 26/06/2026 — não concedeu a tutela recursal antes do contraditório",
+    "ultima_peca": "Contraminuta (agravado) · ID 385950984 · 14/07/2026",
+    "ultima_informacao": "",
+    "ultima_movimentacao": "20/07/2026 17:33 · CONCLUSOS PARA DECISÃO",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 382854446 · 26/06/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Contraminuta (agravado) · ID 385950984 · 14/07/2026 | última movimentação: 20/07/2026 17:33 · CONCLUSOS PARA DECISÃO"
+   },
+   "teor": {
+    "sintese_fatica": "A autora pede a anulação do ITR suplementar de 2010 da Reserva Ecológica Fazenda Arara Azul (Corumbá/MS). A DRJ restabeleceu a reserva legal e o VTN declarado, mas manteve a glosa da área de preservação permanente (56,4 ha) e da área de interesse ecológico (791,6 ha), por falta de ADA ou de reconhecimento do IBAMA. O juízo da 4ª Vara Federal de Campo Grande julgou antecipada e parcialmente o mérito para afastar essas exigências. A União agravou; a tutela recursal foi indeferida.",
+    "recurso": "Agravo da União ID 382606014 (25/06/2026): a exclusão das áreas ambientais depende do ADA tempestivo ou do reconhecimento pelo IBAMA, segundo a legislação e os fundamentos técnicos do lançamento; pede efeito suspensivo e a reforma do julgamento parcial do mérito.",
+    "resposta": "Contraminuta da autora ID 385950984 (14/07/2026): o ADA é prescindível para as áreas ambientais; a DRJ já reduziu o lançamento; manutenção da decisão."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Agravo da União contra julgamento antecipado parcial do mérito que afastou a glosa da APP (56,4 ha) e da área de interesse ecológico (791,6 ha) no ITR 2010 da Reserva Ecológica Fazenda Arara Azul (Corumbá/MS), por desnecessidade do ADA",
+     "subassuntos": "Tributário · ITR 2010 · julgamento antecipado parcial do mérito (artigo 356 do CPC) · área de preservação permanente e área de interesse ecológico · dispensa do ADA",
+     "sintese": "A autora pede a anulação do ITR suplementar de 2010 da Reserva Ecológica Fazenda Arara Azul (Corumbá/MS). A DRJ restabeleceu a reserva legal e o VTN declarado, mas manteve a glosa da área de preservação permanente (56,4 ha) e da área de interesse ecológico (791,6 ha), por falta de ADA ou de reconhecimento do IBAMA. O juízo da 4ª Vara Federal de Campo Grande julgou antecipada e parcialmente o mérito para afastar essas exigências. A União agravou; a tutela recursal foi indeferida.",
+     "questoes": "1) Exigência do ADA para excluir a área de preservação permanente da base do ITR; 2) exigência de ato do órgão competente para a área de interesse ecológico (artigo 10, § 1º, II, b, da Lei 9.393/1996); 3) fato gerador de 2010.",
+     "rel": {
+      "razoes": "Agravo da União ID 382606014 (25/06/2026): a exclusão das áreas ambientais depende do ADA tempestivo ou do reconhecimento pelo IBAMA, segundo a legislação e os fundamentos técnicos do lançamento; pede efeito suspensivo e a reforma do julgamento parcial do mérito.",
+      "contrarrazoes": "Contraminuta da autora ID 385950984 (14/07/2026): o ADA é prescindível para as áreas ambientais; a DRJ já reduziu o lançamento; manutenção da decisão."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória (julgamento parcial do mérito)",
+      "id": "",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "Julgou antecipada e parcialmente o mérito para afastar as exigências que impediram o restabelecimento da APP e da área de interesse ecológico no ITR 2010."
+     },
+     "ai": {
+      "hip": "Julgamento parcial do mérito (artigo 356, § 5º, do CPC)",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-06-25",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Agravo de instrumento",
+       "id": "382606014",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento da União",
+       "id": "382606014",
+       "data": "2026-06-25"
+      },
+      {
+       "desc": "Decisão: tutela recursal não concedida",
+       "id": "382854446",
+       "data": "2026-06-26"
+      },
+      {
+       "desc": "Contraminuta da autora",
+       "id": "385950984",
+       "data": "2026-07-14"
+      },
+      {
+       "desc": "Cópia do PAF 10140.723051/2015-57",
+       "id": "386109335",
+       "data": "2026-07-14"
+      }
+     ],
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 382854446 · 26/06/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Contraminuta (agravado) · ID 385950984 · 14/07/2026 | última movimentação: 20/07/2026 17:33 · CONCLUSOS PARA DECISÃO · Ação anulatória (origem cautelar antecedente) · PAF 10140.723051/2015-57 · Imóvel matrícula 14.792 do 1º CRI de Corumbá · ITR suplementar reduzido na DRJ de R$ 88.143,40 para R$ 15.315,31 · Tutela recursal indeferida (ID 382854446, 26/06/2026)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "fundamento": "Paradigmas do gabinete: ApCiv 0010900-84.2008.4.03.6000 (3ª Turma, 27/08/2022); ApCiv 5000763-60.2019.4.03.6100 (3ª Turma, 15/03/2022)"
+    }
+   }
+  }
+ ]
+}
