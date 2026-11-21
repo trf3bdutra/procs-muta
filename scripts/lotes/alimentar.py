@@ -195,6 +195,11 @@ def main(lotes):
             def poe(caminho, v):
                 if vazio(v):
                     return
+                if caminho.endswith('.data') and isinstance(v, str):
+                    # o prontuário usa <input type="date">, que só exibe AAAA-MM-DD
+                    m = re.match(r'^(\d{2})/(\d{2})/(\d{4})$', v.strip())
+                    if m:
+                        v = m.group(3) + '-' + m.group(2) + '-' + m.group(1)
                 ks = caminho.split('.'); alvo = c
                 for k in ks[:-1]:
                     alvo = alvo.setdefault(k, {})
