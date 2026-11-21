@@ -18419,8 +18419,8 @@
    "exequente": "MIGUEL XIMENES",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Execução Contratual",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g11",
+   "tipo_caso": "Contratos bancários · execução de título extrajudicial da CEF · honorários periciais na avaliação do imóvel penhorado (Resolução CNJ 232/2016)",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto) [VALIDAR preparo e contraminuta]",
    "modelo": "",
    "variacoes": [],
@@ -18468,6 +18468,80 @@
     "outros": "Despacho ID 353020951 (03/02/2026): antes de indeferir a gratuidade, determinou a comprovação da hipossuficiência ou o recolhimento do preparo. Petição ID 353612386 (07/02/2026) com comprovante bancário ID 353612387. Despacho ID 353944427 (09/02/2026): intimação da agravada para contraminuta. Redistribuição à Turma Regional de MS (Resolução 33/2025; decisão ID 361076336 e certidão ID 362814166). Há 1 documento não lido no PJe.",
     "representacao": "Agravante: advogados João Ricardo Dias de Pinho e Jean Samir Nammoura (procuração na origem, segundo o agravante) [VALIDAR]. Agravada: CEF.",
     "preparo": "Comprovante bancário de pagamento por código de barras (convênio GRU judicial), R$ 64,26, em 06/02/2026 (ID 353612387); sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Contratos bancários — execução de título extrajudicial da CEF; honorários periciais",
+   "especificidades": "Honorários fixados em R$ 7.020,00 (18 horas a R$ 390,00) · Título: escritura de confissão e renegociação de dívida com garantia hipotecária (09/11/1994, R$ 111.078,71) · Gratuidade pedida; depois, comprovante bancário de preparo (ID 353612387) · Contraminuta da CEF não localizada · Há 1 documento não lido no PJe",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Contratos bancários — execução de título extrajudicial da CEF; honorários periciais",
+     "subassuntos": "Contratos bancários · execução de título extrajudicial da CEF · honorários periciais na avaliação do imóvel penhorado (Resolução CNJ 232/2016)",
+     "sintese": "",
+     "questoes": "1) Preparo e pedido de gratuidade; 2) valor dos honorários periciais na avaliação de imóvel (Resolução CNJ 232/2016; razoabilidade e proporcionalidade).",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "484507203",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Fixou os honorários periciais em R$ 7.020,00 e mandou a executada depositá-los em 30 dias."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": "484507203"
+     },
+     "adm": {
+      "prot": "2026-01-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "352704611",
+       "contra": "Intimada para responder"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "352704611",
+       "data": "2026-01-30"
+      },
+      {
+       "desc": "Despacho sobre gratuidade e preparo",
+       "id": "353020951",
+       "data": "2026-02-03"
+      },
+      {
+       "desc": "Comprovante bancário de preparo",
+       "id": "353612387",
+       "data": "2026-02-07"
+      },
+      {
+       "desc": "Despacho de intimação para contraminuta",
+       "id": "353944427",
+       "data": "2026-02-09"
+      }
+     ],
+     "pendencias": "Conferir o preparo (STN), a contraminuta da CEF e o documento não lido",
+     "especificidades": "Honorários fixados em R$ 7.020,00 (18 horas a R$ 390,00) · Título: escritura de confissão e renegociação de dívida com garantia hipotecária (09/11/1994, R$ 111.078,71) · Gratuidade pedida; depois, comprovante bancário de preparo (ID 353612387) · Contraminuta da CEF não localizada · Há 1 documento não lido no PJe"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": ""
+    }
    }
   },
   {
