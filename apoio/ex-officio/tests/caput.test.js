@@ -228,10 +228,15 @@ test('Perfis › Histórico: só o feito, Excel, listar todos e rolagem; Registr
 
 test('Triagem: Acervo filtrado com faixa de cabeçalho e seletor segmentado; Visão geral sobre o bege',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  for(const x of ['<header class="acf-h"><span class="k">Acervo filtrado</span>','.acf .pre{margin-left:auto;display:flex','<div class="acf-b"><div class="acf-n">','.tri-vg{background:transparent!important}','.tri-vg .ch{background:#f4f0e6!important;box-shadow:none!important','.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url(','body{background-image:url("data:image/svg+xml'])assert.ok(cap.includes(x),x);
+  for(const x of ['<header class="acf-h"><span class="k">Acervo filtrado</span>','.acf .pre{margin-left:auto;display:flex','<div class="acf-b"><div class="acf-n">','.tri-vg{background:transparent!important}','.tri-vg .ch{background:#f2ede1 url(','.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url(','body{background-image:url("data:image/svg+xml'])assert.ok(cap.includes(x),x);
 });
 
 test('Cartões de indicadores no padrão da Visão geral (Chefia, Coordenação, Comunicação, Pautas e mesa); fundo geral mais claro',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   for(const x of [':root{--bg:#fcfbf8;','.cg-top .cg-faixa>div,.cwe-kpis>span,.cwe-kpis>button{display:flex;flex-direction:column','box-shadow:inset 0 3px 0 var(--kc)','.kp>div:nth-child(4n+1){--kc:#a57829}'])assert.ok(cap.includes(x),x);
+});
+
+test('Mesa: coluna de capacidade inteira (sem rolagem) e regras de minuta e correção num painel só, acima da lista',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['class="cwe-box cwe-rg cwe-rg1" slot="regras"','<div class="cwe-rg2">${col(\'d\', \'MINUTA\')}${col(\'c\', \'CORREÇÃO\')}</div>',"sl.name = 'regras'",'.mb.emb .side{position:static!important;align-self:start;max-height:none!important;overflow:visible!important}',"querySelector(':scope > .cwe-rg1')"])assert.ok(cap.includes(x),x);
 });
