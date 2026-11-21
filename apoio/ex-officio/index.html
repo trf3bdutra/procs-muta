@@ -2915,12 +2915,12 @@ document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='nt-t
 function acompAberto(it){var c=it.ctl||{};return alertas(it).length+(c.intercor&&!c.intercorOk?1:0);}
 function acompHtml(it){var c=it.ctl||{},so=c.sopref||'',PL=(((c.cartao||{}).pendencias)||[]),man=PL.filter(function(p){return p&&p.desc&&!p.ok;}).map(function(p){return p.desc;}),
     auto=alertas(it).filter(function(a){return man.indexOf(a)<0;}),abP=man.length,icA=!!c.intercor&&!c.intercorOk;
-  var SOB=[['','Sem pedido'],['Presencial','Presencial'],['Virtual','Vídeo'],['Preferência','Preferência']];
+  var SOB=[['','Sem pedido'],['Presencial','Sustentação oral presencial'],['Virtual','Sustentação oral por videoconferência'],['Preferência','Preferência']];
   return '<div class="ac">'+
     /* sustentação oral · preferência no próprio prontuário (o mesmo conteúdo do diálogo): recolhida quando não há pedido;
        abre sozinha se houver pedido marcado ou pedido recebido por e-mail vinculado ao processo */
-    '<details class="ac-s ac-det" id="ac-so"'+(so?' open':'')+'><summary><h4>Sustentação oral · preferência'+(so?'<em class="ac-st so">'+esc(SOROT[soTipo(so)])+'</em>':'<em class="ac-st">sem pedido</em>')+'</h4></summary>'+
-      '<div class="ac-seg" role="group" aria-label="Pedido de sustentação ou preferência">'+SOB.map(function(x){return '<button type="button" data-ac-so="'+x[0]+'" aria-pressed="'+(so===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>'+
+    '<details class="ac-s ac-det" id="ac-so"'+(so?' open':'')+'><summary><h4>Solicitações'+(so?'<em class="ac-st so">'+esc(SOROT[soTipo(so)])+'</em>':'<em class="ac-st">sem pedido</em>')+'</h4></summary>'+
+      '<label class="ac-sf ac-sotp"><span>Pedido</span><select data-ac-sosel aria-label="Pedido de sustentação oral ou preferência">'+SOB.map(function(x){return '<option value="'+x[0]+'"'+(so===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+(so&&!SOB.some(function(x){return x[0]===so;})?'<option selected>'+esc(so)+'</option>':'')+'</select></label>'+
       (function(){var D=((c.cartao||{}).so)||{},fl=function(r,k,ph,t){return '<label class="ac-sf"><span>'+r+'</span><input data-p="so.'+k+'" type="'+(t||'text')+'" value="'+esc(D[k]||'')+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'></label>';};
         return '<div class="ac-so-f">'+fl('Advogado(a)','advogado','nome')+fl('OAB','oab','UF 000000')+fl('Parte representada','parte','parte que pediu')+fl('Pedido recebido em','recebido','','date')+'</div>';})()+
       '<div class="ped-dados" aria-live="polite"></div><small class="ac-h">Pedidos recebidos por e-mail preenchem estes campos ao serem vinculados ao processo.</small></details>'+
@@ -2940,6 +2940,8 @@ function abrirAcomp(it,f){S.prt=dg(it.cnj);S.prtAba=0;var a=document.activeEleme
   setTimeout(function(){var alvo={pri:'#ac-so',ic:'#ac-ic',al:'#ac-pd',nt:'#prt-nt'}[f]||'#ac-so',x=$('#prq '+alvo);if(!x)return;if(x.tagName==='DETAILS')x.open=true;x.scrollIntoView({behavior:'smooth',block:'start'});
     var fo={ic:'textarea',al:'#ac-pd-n',nt:'#nt-tx'}[f];var y=fo&&x.querySelector(fo);if(y)y.focus({preventScroll:true});x.classList.add('ac-flash');setTimeout(function(){x.classList.remove('ac-flash');},1200);},80);}
 function acompPend(it,PL,msg){cart(it).pendencias=PL;acompSalvar(it,{cartao:{pendencias:PL}},msg);}
+/* Solicitações: o seletor do pedido grava como os botões antigos (sopref) */
+document.addEventListener('change',function(e){var t=e.target;if(!t||!t.matches||!t.matches('#prq [data-ac-sosel]'))return;var it=acompIt();if(!it)return;var v=t.value;it.ctl=it.ctl||{};if((it.ctl.sopref||'')===v)return;if(v)it.ctl.sopref=v;else delete it.ctl.sopref;acompSalvar(it,{sopref:v},v?SOROT[soTipo(v)]+' registrada.':'Pedido retirado.');});
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-ac-so],[data-acp-add],[data-acp-x],[data-ac-aba]');if(!t||!t.closest('#prq'))return;var it=acompIt();if(!it)return;
   if(t.hasAttribute('data-ac-aba')){var bt=$('#prq [data-prt-aba="'+t.getAttribute('data-ac-aba')+'"]');if(bt)bt.click();return;}
   if(t.hasAttribute('data-ac-so')){var v=t.getAttribute('data-ac-so');it.ctl=it.ctl||{};if((it.ctl.sopref||'')===v)return;if(v)it.ctl.sopref=v;else delete it.ctl.sopref;acompSalvar(it,{sopref:v},v?SOROT[soTipo(v)]+' registrada.':'Pedido retirado.');return;}
@@ -9760,6 +9762,7 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #prq .ac-pl textarea:focus{outline:0;background:var(--ep2,#f3f1e8)!important}
 /* sustentação oral · preferência: dados do pedido (advogado, OAB, parte, recebimento) */
 #prq .ac>*{min-width:0;max-width:100%}#prq #ac-so .ac-seg{flex-wrap:wrap}#prq #ac-so .ac-seg button{flex:1 1 auto}
+#prq .ac-sotp{margin:8px 0 0}#prq .ac-sotp select{width:100%;height:28px!important;font-size:12.5px}
 #prq .ac-so-f{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:6px 8px;margin:8px 0 4px}
 #prq .ac-sf{display:flex;flex-direction:column;gap:2px;min-width:0}
 #prq .ac-sf span{font:600 9.5px var(--emono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--em)}
