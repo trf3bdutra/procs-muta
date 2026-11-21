@@ -22927,11 +22927,11 @@
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: voto no agravo de instrumento [VALIDAR resultado]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de instrumento da União contra decisão que, em exceção de pré-executividade, excluiu os sócios do polo passivo de execução fiscal e a condenou em honorários de 10% sobre o valor atualizado da execução. Discute-se a responsabilidade dos sócios (CDA, dissolução irregular e preclusão do redirecionamento deferido).",
+   "peculiaridades": "Concluso desde 26/06/2025. Origem na Justiça Estadual (competência delegada, Paranaíba). Honorários fixados em 10% do valor da execução na exclusão de sócios: conferir o critério [VALIDAR]. Dissolução judicial alegada pelos agravados.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -22952,7 +22952,18 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal — redirecionamento aos sócios; exclusão em exceção de pré-executividade; honorários",
+    "origem": "2ª Vara Cível de Paranaíba/MS (competência delegada) · 0002863-60.2003.8.12.0018",
+    "decisao_agravada": "Decisão de fls. 340-343 e embargos rejeitados nas fls. 409-411 (16/05/2025) — ID 325718251",
+    "recurso": "Agravo de instrumento ID 325718244 · 26/05/2025",
+    "preparo": "União isenta",
+    "monocratica": "",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "União: isenção · conferido em 20/11/2026",
+    "conf_prevencao": "Origem: 0002863-60.2003.8.12.0018 · distribuído à 4ª Turma e redistribuído à Turma Regional em 20/03/2026 · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -22973,6 +22984,17 @@
     "ultima_informacao": "Certidão de Dívida Ativa - CDA · ID 325718254 · 26/05/2025",
     "ultima_movimentacao": "20/03/2026 18:00 · REDISTRIBUÍDO POR SORTEIO EM RAZÃO DE CRIAÇÃO DE UNIDADE JUDICIÁRIA",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Execução fiscal da União contra Agropecuária Lopes Cançado S/A (inscrições 13602000584-69, 13202000224-06 e 13602000616-80). O redirecionamento aos sócios fora deferido (fl. 95); depois, em exceção de pré-executividade, o juízo excluiu os sócios do polo passivo e condenou a exequente em honorários.",
+    "inicial": "Execução fiscal 0002863-60.2003.8.12.0018 (2ª Vara Cível de Paranaíba/MS, competência delegada); cópia no ID 325718251.",
+    "decisao_recorrida": "Decisão de fls. 340-343 [VALIDAR data]: acolheu a exceção de pré-executividade, excluiu Torres Homem Cunha Cançado, Maria Carla Cunha Cançado e o espólio de Piragybe Lopes Cançado do polo passivo (nomes fora das CDA; mero inadimplemento; dissolução irregular não comprovada, empresa encontrada no endereço fiscal) e condenou a exequente em honorários de 10% do valor atualizado da execução. Embargos de declaração rejeitados (fls. 409-411; 16/05/2025).",
+    "recurso": "Agravo de instrumento da União ID 325718244 (26/05/2025), sem pedido de efeito suspensivo: administradores constam da CDA; dissolução irregular (Súmula 435/STJ); preclusão da decisão de fl. 95 que deferiu o redirecionamento.",
+    "resposta": "Contraminuta dos agravados ID 328781285 (25/06/2025): dissolução judicial da sociedade requerida em 2001 pelos sócios majoritários (processo 0000703-33.2001.8.12.0018), parcelamentos anteriores e ausência de ato do artigo 135 do CTN.",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Despacho ID 325995425 (28/05/2025): ausente pedido de efeito suspensivo, intimação para contraminuta. Conclusos para decisão em 26/06/2025 (4ª Turma, Des. Fed. Leila Paiva). Redistribuído à Turma Regional de MS em 20/03/2026.",
+    "representacao": "Agravante: União (Procuradoria da Fazenda Nacional). Agravados: advogados Valdemar Zaiden Sobrinho e Danilo Ferreira Bortoli [VALIDAR procuração na cópia].",
+    "preparo": "União: isenta."
    }
   },
   {
