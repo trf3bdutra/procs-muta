@@ -17987,13 +17987,15 @@
    "exequente": "ICL ADMINISTRACAO E PARTICIPACAO LTDA - EPP",
    "executado": "INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
    "assunto": "Desapropriação por Interesse Social para Reforma Agrária",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "Desapropriação para reforma agrária · cumprimento de sentença · juros compensatórios (ADI 2332) e inexigibilidade parcial do título · cálculos",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); há contraminuta do INCRA e parecer do MPF pelo desprovimento; o efeito suspensivo não foi examinado, porque a decisão agravada só produz efeitos após a preclusão (decisão ID 347093430) ‖ Proposta pelos precedentes: juros compensatórios de 6% ao ano sobre a diferença entre a indenização e 80% da oferta, pela ADI 2.332, linha aplicada pelo gabinete; inexigibilidade parcial do título quando a decisão do STF é anterior ao trânsito em julgado (artigo 535, §§ 5º e 7º, do CPC); juros moratórios só com atraso no precatório (Súmula Vinculante 17, citada na decisão ID 347093430) → desprovimento [VALIDAR: Situação do AI conexo 5028989-32.2025.4.03.0000; Sucessão ou cessão entre Incolustre e ICL; Intimação da decisão agravada na origem]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de ICL Administração e Participação contra a decisão que, no cumprimento de sentença da desapropriação 0000385-28.2001.4.03.6002, declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano (artigo 535, §§ 5º e 7º, do CPC, e ADI 2332), fixou-os em 6% ao ano sobre a diferença entre a indenização e 80% da oferta, rejeitou os cálculos da exequente e fixou honorários recíprocos (ID 425628843 da origem). O INCRA (contraminuta ID 344951656) e o MPF (parecer ID 346435971) defendem a manutenção.",
+   "peculiaridades": "Processo redistribuído pela 1ª Turma (Des. Fed. David Dantas) à Turma Regional (decisão ID 365403890, 09/04/2026). A decisão ID 347093430 recebeu o recurso, registrou que a decisão agravada só produz efeitos após a preclusão e mandou trasladar cópia ao AI 5028989-32.2025.4.03.0000. A agravante (ICL) não tem o mesmo nome da expropriada citada pelo INCRA (Incolustre Indústria e Comércio de Lustres) [VALIDAR sucessão ou cessão]. Terceiros interessados: família Vicentin.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -18029,9 +18031,25 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Desapropriação — cumprimento de sentença (juros compensatórios e cálculos)",
+    "origem": "Cumprimento de sentença na desapropriação 0000385-28.2001.4.03.6002 (juízo da origem [VALIDAR])",
+    "decisao_agravada": "ID 425628843 (autos de origem), de 09/09/2025",
+    "recurso": "ID 338894586 · 10/10/2025",
+    "preparo": "Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" (ID 338894624)",
+    "monocratica": "Não indicada: matéria de cálculo com parecer do MPF; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 338894624 · conferido em 21/11/2026 (regra: Pix ou cartão só com o comprovante do Tesouro — PagTesouro \"Pagamento realizado com sucesso\", com \"Identificação do pagamento\")",
+    "conf_prevencao": "Origem: 0000385-28.2001.4.03.6002 · a decisão ID 347093430 mandou trasladar cópia ao AI 5028989-32.2025.4.03.0000 (recurso conexo contra a mesma decisão [VALIDAR]) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] AI conexo 5028989-32.2025.4.03.0000: localizar e avaliar julgamento conjunto",
+    "[VALIDAR] Legitimidade da ICL (sucessão ou cessão da expropriada Incolustre)",
+    "[VALIDAR] Procuração",
+    "[VALIDAR] Tempestividade: intimação da decisão agravada informada só pela agravante (19/09/2025)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -18050,6 +18068,115 @@
     "ultima_informacao": "Certidão · ID 365641176 · 10/04/2026",
     "ultima_movimentacao": " 15:43 · Há 4 documentos não lidos",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Desapropriação por interesse social — cumprimento de sentença: juros compensatórios, juros moratórios e cálculos",
+   "especificidades": "Trânsito em julgado do acórdão em 30/09/2023, posterior ao julgamento de mérito da ADI 2332 (28/05/2018), segundo a decisão ID 347093430 · Diferença de indenização de R$ 306.379,84, a atualizar desde 29/11/2000 · AI conexo 5028989-32.2025.4.03.0000 [VALIDAR julgamento conjunto] · Parecer do MPF pelo desprovimento (ID 346435971) · Divergência de nome entre a agravante e a expropriada [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Em cumprimento de sentença de desapropriação por interesse social para reforma agrária (Fazenda Rancho Loma, Iguatemi/MS), o juízo declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano, aplicou a ADI 2332 (6% ao ano sobre a diferença entre a indenização e 80% da oferta), afastou os cálculos da exequente e determinou novo cálculo.",
+    "inicial": "Não consta nos autos do recurso (desapropriação 0000385-28.2001.4.03.6002)",
+    "decisao_recorrida": "Decisão ID 425628843 dos autos de origem (09/09/2025): inexigibilidade parcial do título quanto aos juros compensatórios de 12% (artigo 535, §§ 5º e 7º, do CPC, e ADI 2332); juros compensatórios de 6% ao ano sobre a diferença, da imissão na posse (28/08/2001) a 30/11/2021; consolidação em 31/08/2025 (EC 113/2021); honorários de R$ 30.000,00 contra a exequente e de R$ 10.000,00 contra o INCRA (artigo 85, § 8º, do CPC). Transcrita na decisão ID 347093430.",
+    "recurso": "Agravo de instrumento ID 338894586 (10/10/2025): preclusão das impugnações do INCRA e homologação dos cálculos da exequente; subsidiariamente, juros moratórios desde 01/01/2002, encargos sobre as benfeitorias até o levantamento e manutenção dos juros compensatórios de 12% fixados no título.",
+    "resposta": "Contraminuta do INCRA ID 344951656 (01/12/2025): título reformado pelo Tribunal (terra nua pelo laudo judicial; benfeitorias pela oferta; juros compensatórios afastados em parte); inexigibilidade pela ADI 2332; ausência de requisitos do efeito suspensivo. Reiterada pela petição ID 347790028.",
+    "parecer": "Parecer do MPF ID 346435971 (12/12/2025): o juízo não é mero homologador dos cálculos; não incidem juros compensatórios nem moratórios sobre as benfeitorias pagas pela oferta; opina pelo não provimento.",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Noé Aparecido da Costa (OAB/PR 11.666) assina o recurso; procuração não identificada nos autos do recurso [VALIDAR]. INCRA representado por procurador federal.",
+    "preparo": "Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" e identificação do pagamento (ID 338894624, 10/10/2025)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Desapropriação para reforma agrária · cumprimento de sentença · juros compensatórios (ADI 2332) e inexigibilidade parcial do título · cálculos",
+     "sintese": "Em cumprimento de sentença de desapropriação por interesse social para reforma agrária (Fazenda Rancho Loma, Iguatemi/MS), o juízo declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano, aplicou a ADI 2332 (6% ao ano sobre a diferença entre a indenização e 80% da oferta), afastou os cálculos da exequente e determinou novo cálculo.",
+     "questoes": "1) Preclusão das impugnações do INCRA aos cálculos e homologação dos cálculos da exequente; 2) juros compensatórios de 12% do título × 6% sobre a diferença (ADI 2332) e inexigibilidade parcial do título (artigo 535, § 5º, do CPC); 3) termo inicial dos juros moratórios e cumulação com os compensatórios; 4) encargos sobre as benfeitorias até o levantamento.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 338894586 (10/10/2025): preclusão das impugnações do INCRA e homologação dos cálculos da exequente; subsidiariamente, juros moratórios desde 01/01/2002, encargos sobre as benfeitorias até o levantamento e manutenção dos juros compensatórios de 12% fixados no título.",
+      "contrarrazoes": "Contraminuta do INCRA ID 344951656 (01/12/2025): título reformado pelo Tribunal (terra nua pelo laudo judicial; benfeitorias pela oferta; juros compensatórios afastados em parte); inexigibilidade pela ADI 2332; ausência de requisitos do efeito suspensivo. Reiterada pela petição ID 347790028."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "425628843",
+      "juizo": "[VALIDAR]",
+      "dispositivo": "Declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano, fixou critérios de cálculo e honorários recíprocos."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não examinado (decisão agravada só produz efeitos após a preclusão)",
+      "id": "425628843"
+     },
+     "adm": {
+      "prot": "2025-10-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "338894586",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "338894586",
+       "data": "2025-10-10"
+      },
+      {
+       "desc": "Comprovante PagTesouro",
+       "id": "338894624",
+       "data": "2025-10-10"
+      },
+      {
+       "desc": "Despacho: apreciação do efeito suspensivo postergada",
+       "id": "339128789",
+       "data": "2025-10-13"
+      },
+      {
+       "desc": "Contraminuta do INCRA",
+       "id": "344951656",
+       "data": "2025-12-01"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "346435971",
+       "data": "2025-12-12"
+      },
+      {
+       "desc": "Decisão: recebimento do recurso e traslado ao AI 5028989-32.2025",
+       "id": "347093430",
+       "data": "2025-12-17"
+      },
+      {
+       "desc": "Decisão: remessa à Turma Regional",
+       "id": "365403890",
+       "data": "2026-04-09"
+      }
+     ],
+     "pendencias": "Localizar o AI conexo 5028989-32.2025; conferir a legitimidade da ICL e a procuração",
+     "especificidades": "Trânsito em julgado do acórdão em 30/09/2023, posterior ao julgamento de mérito da ADI 2332 (28/05/2018), segundo a decisão ID 347093430 · Diferença de indenização de R$ 306.379,84, a atualizar desde 29/11/2000 · AI conexo 5028989-32.2025.4.03.0000 [VALIDAR julgamento conjunto] · Parecer do MPF pelo desprovimento (ID 346435971) · Divergência de nome entre a agravante e a expropriada [VALIDAR]",
+     "assuntoDet": "Desapropriação por interesse social — cumprimento de sentença: juros compensatórios, juros moratórios e cálculos",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Reforma agrária",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2025-12-17",
+     "urgObs": "A decisão ID 347093430 recebeu o recurso sem examinar o efeito suspensivo, porque a decisão agravada só produz efeitos após a preclusão",
+     "fundamento": "Paradigmas do gabinete: ApCiv 0937601-20.1986.4.03.6100 (acórdão 1ª Turma, 06/07/2023: juros compensatórios de 6% ao ano pela ADI 2.332); AR 5007014-22.2023.4.03.0000 (acórdão 1ª Seção, 10/07/2026: desapropriação para reforma agrária, juros compensatórios e moratórios, ADI 2.332) [VALIDAR paradigma específico da inexigibilidade do título]"
+    }
    }
   },
   {
@@ -18571,13 +18698,16 @@
    "exequente": "BSB PRODUTORA DE EQUIPAMENTOS DE PROTECAO INDIVIDUAL S.A.",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Drawback",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g7",
+   "tipo_caso": "Execução fiscal · bloqueio SISBAJUD de R$ 58,8 milhões · transação tributária individual em análise na PGFN · menor onerosidade",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida (decisão ID 379558142), a agravante interpôs agravo interno (ID 384140029) e a agravada foi intimada para responder (ato ID 390576299); não há contraminuta; a intimação da União deve ser conferida, porque a Procuradoria-Regional da União pediu duas vezes o redirecionamento à PFN (IDs 380573514 e 391350700) ‖ Proposta pelos precedentes: o pedido de transação não suspende a exigibilidade (artigo 151 do CTN) nem impede a penhora de dinheiro, preferencial (artigo 11 da Lei 6.830/1980 e artigo 835, I, do CPC); a onerosidade excessiva exige prova e oferta de bens alternativos suficientes, como assentou a decisão ID 379558142 → desprovimento, com o agravo interno prejudicado, se regular o preparo [VALIDAR: Preparo: GRU Judicial paga em 19/05/2026, depois da interposição; comprovante ID 374788351 sem texto; Intimação válida da PFN para contraminuta e para o agravo interno; Retificação da classe processual]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de BSB Produtora de Equipamentos de Proteção Individual contra a decisão que mandou cumprir integralmente o bloqueio SISBAJUD de R$ 58.859.036,25 na EF 5000412-39.2023.4.03.6006 (decisão ID 577206671 da origem). Sustenta que a CAPAG foi revista pela PGFN e que a proposta de transação individual foi protocolada no prazo, e invoca a menor onerosidade e a função social da empresa. A tutela recursal foi indeferida (ID 379558142); há agravo interno (ID 384140029).",
+   "peculiaridades": "Distribuído como Petição Cível à 2ª Seção e redistribuído à Turma Regional (decisão ID 374626698); a agravante pediu a retificação da classe (ID 374788343) [VALIDAR]. Preparo pago em 19/05/2026 por GRU Judicial, depois da interposição e da extinção da GRU Judicial (03/04/2026). A Procuradoria-Regional da União pediu o redirecionamento das intimações à PFN (IDs 380573514 e 391350700).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -18603,9 +18733,24 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), com o agravo interno contra o indeferimento da tutela recursal",
+    "materia": "Execução fiscal — penhora SISBAJUD e transação tributária",
+    "origem": "EF 5000412-39.2023.4.03.6006 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 577206671 (autos de origem), que deferiu o pedido da PFN ID 563740131 e mandou cumprir integralmente a ordem de bloqueio da decisão ID 559134198",
+    "recurso": "ID 373673208 · 15/05/2026",
+    "preparo": "GRU Judicial paga em 19/05/2026, após a interposição; comprovante em imagem (ID 374788351)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · guia GRU (código 18720-8): ID 374788349 · comprovante em imagem, sem texto (OCR pendente): ID 374788351 · certidão sem custas: ID 374534042 · pagamento em 19/05/2026, depois da interposição (15/05/2026) e depois da extinção da GRU Judicial em 03/04/2026 [VALIDAR tratamento] · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5000412-39.2023.4.03.6006 · sem feito anterior distribuído (certidão ID 374534042) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: GRU Judicial paga depois de 03/04/2026 e depois da interposição; ler o comprovante ID 374788351",
+    "[VALIDAR] Intimação da União pela PFN (IDs 380573514 e 391350700); se irregular, renovar antes do julgamento",
+    "[VALIDAR] Classe processual (Petição Cível × Agravo de Instrumento)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -18624,6 +18769,121 @@
     "ultima_informacao": "Certidão · ID 374855112 · 20/05/2026",
     "ultima_movimentacao": " 00:40 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Execução fiscal — penhora de ativos financeiros durante pedido de transação tributária",
+   "especificidades": "Tutela recursal indeferida (ID 379558142, 11/06/2026) · Agravo interno pendente (ID 384140029, 03/07/2026), com intimação da agravada (ato ID 390576299, 04/08/2026) · Sem contraminuta · Representação da União: intimações à PRU, que pediu redirecionamento à PFN [VALIDAR] · Preparo por GRU Judicial depois de 03/04/2026 e depois da interposição; comprovante em imagem (ID 374788351) [VALIDAR] · Classe cadastrada como Petição Cível [VALIDAR retificação]",
+   "teor": {
+    "sintese_fatica": "Em execução fiscal de R$ 48.004.846,29 (CDA 13 4 23 008211-58), o juízo deferiu o pedido da PFN e mandou cumprir integralmente o bloqueio SISBAJUD de R$ 58.859.036,25, porque a transação tributária não se concretizou. A executada agravou, invocando a revisão da CAPAG e a proposta de transação individual em análise.",
+    "inicial": "Não consta nos autos do recurso (EF 5000412-39.2023.4.03.6006)",
+    "decisao_recorrida": "Despacho ID 577206671 da origem (cópia ID 373673222): defere o pedido ID 563740131 e manda priorizar o cumprimento integral da decisão ID 559134198 (bloqueio SISBAJUD; cópia ID 373673225).",
+    "recurso": "Agravo de instrumento ID 373673208 (15/05/2026): premissa fática equivocada de inércia na transação; CAPAG revista pela PGFN (R$ 99.655.562,33) e proposta de transação individual protocolada; bloqueio sobre o capital de giro e a folha de cerca de três mil empregados; menor onerosidade, proporcionalidade, boa-fé e Lei 13.988/2020. Pede a revogação do bloqueio e a suspensão dos atos expropriatórios até a análise administrativa.",
+    "resposta": "Não consta contraminuta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Harmódio Moreira Dutra (OAB/SP 291.410) e Guilherme Bridi Leal (OAB/SP 418.274); procuração juntada como ID 373674592 (sem texto) e substabelecimento ID 377911516 [VALIDAR].",
+    "preparo": "Certidão sem custas (ID 374534042). Guia GRU código 18720-8 (ID 374788349) e comprovante em imagem (ID 374788351), pagos em 19/05/2026, segundo a petição ID 374788343."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · bloqueio SISBAJUD de R$ 58,8 milhões · transação tributária individual em análise na PGFN · menor onerosidade",
+     "sintese": "Em execução fiscal de R$ 48.004.846,29 (CDA 13 4 23 008211-58), o juízo deferiu o pedido da PFN e mandou cumprir integralmente o bloqueio SISBAJUD de R$ 58.859.036,25, porque a transação tributária não se concretizou. A executada agravou, invocando a revisão da CAPAG e a proposta de transação individual em análise.",
+     "questoes": "1) Regularidade do preparo (GRU Judicial paga depois da interposição); 2) cabimento do bloqueio SISBAJUD integral enquanto pende proposta de transação individual na PGFN; 3) menor onerosidade e preservação do capital de giro.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 373673208 (15/05/2026): premissa fática equivocada de inércia na transação; CAPAG revista pela PGFN (R$ 99.655.562,33) e proposta de transação individual protocolada; bloqueio sobre o capital de giro e a folha de cerca de três mil empregados; menor onerosidade, proporcionalidade, boa-fé e Lei 13.988/2020. Pede a revogação do bloqueio e a suspensão dos atos expropriatórios até a análise administrativa.",
+      "contrarrazoes": "Não consta contraminuta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "577206671",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Deferiu o pedido da PFN e mandou cumprir integralmente o bloqueio SISBAJUD."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "577206671"
+     },
+     "adm": {
+      "prot": "2026-05-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "373673208",
+       "contra": "Não apresentada"
+      },
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "384140029",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "373673208",
+       "data": "2026-05-15"
+      },
+      {
+       "desc": "Certidão: classe Petição Cível e sem custas",
+       "id": "374534042",
+       "data": "2026-05-19"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "374626698",
+       "data": "2026-05-20"
+      },
+      {
+       "desc": "Petição de juntada da GRU",
+       "id": "374788343",
+       "data": "2026-05-20"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "379558142",
+       "data": "2026-06-11"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "384140029",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Ato ordinatório: intimação para resposta ao agravo interno",
+       "id": "390576299",
+       "data": "2026-08-04"
+      }
+     ],
+     "pendencias": "Ler o comprovante da GRU; conferir a intimação da PFN e a classe",
+     "especificidades": "Tutela recursal indeferida (ID 379558142, 11/06/2026) · Agravo interno pendente (ID 384140029, 03/07/2026), com intimação da agravada (ato ID 390576299, 04/08/2026) · Sem contraminuta · Representação da União: intimações à PRU, que pediu redirecionamento à PFN [VALIDAR] · Preparo por GRU Judicial depois de 03/04/2026 e depois da interposição; comprovante em imagem (ID 374788351) [VALIDAR] · Classe cadastrada como Petição Cível [VALIDAR retificação]",
+     "assuntoDet": "Execução fiscal — penhora de ativos financeiros durante pedido de transação tributária",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido após a interposição",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-11",
+     "urgObs": "Tutela recursal indeferida (ID 379558142); agravo interno pendente (ID 384140029)",
+     "intercor": "Representação da União a regularizar (PRU pede redirecionamento à PFN)",
+     "fundamento": "Paradigmas do gabinete: AI 5000588-83.2026.4.03.0001 (monocrática TRMS, 14/09/2026: desprovido; preferência pela constrição de ativos financeiros); AI 5017105-79.2020.4.03.0000 (acórdão 3ª Turma, 13/10/2021: preferência legal da penhora de dinheiro); decisão ID 379558142 destes autos (tutela recursal indeferida)"
+    }
    }
   },
   {
@@ -18636,12 +18896,14 @@
    "executado": "BEATRIZ OLENSKI BRAUN",
    "assunto": "Enade",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Ensino superior · ENADE/ENAMED como condição para colação de grau · mandado de segurança · liminar deferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal não foi concedida (decisão ID 387607454), há contraminuta com preliminar de perda do objeto e a vista à Procuradoria Regional da República foi determinada, sem parecer nos autos (etiqueta \"INTIMAR MPF - PRR\") ‖ Proposta pelos precedentes: o gabinete mantém a liminar que afasta o ENADE como condição para a colação de grau, sobretudo com situação fática consolidada → desprovimento; examinar antes a preliminar de perda do objeto [VALIDAR: Intimação do MPF e parecer; Data e ID da liminar agravada]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da UFGD contra a liminar que a proibiu de exigir regularidade no ENADE/ENAMED como condição para a colação de grau e a expedição de documentos de conclusão do curso da impetrante (MS 5001738-41.2026.4.03.6002). A agravada sustenta perda do objeto, com colação de grau já realizada e inscrição no CRM/MS desde 23/06/2026 (IDs 390506134 e 390506145).",
+   "peculiaridades": "Redistribuído pela 2ª Seção à Turma Regional (decisão ID 385924728). A decisão ID 387607454 não concedeu a tutela recursal e mandou dar vista à PRR; não há parecer nos autos [VALIDAR intimação do MPF].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -18672,9 +18934,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), depois do parecer do MPF",
+    "materia": "Ensino superior — ENADE e colação de grau",
+    "origem": "MS 5001738-41.2026.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Liminar no MS 5001738-41.2026.4.03.6002 (ID da origem não indicado no recurso [VALIDAR])",
+    "recurso": "ID 384904326 · 07/07/2026",
+    "preparo": "Isenta (UFGD, ente público)",
+    "monocratica": "Possível, se reconhecida a perda do objeto [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5001738-41.2026.4.03.6002 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Abrir ou conferir a vista ao MPF (decisão ID 387607454)",
+    "[VALIDAR] Perda do objeto: colação de grau por força da liminar (IDs 390506134 e 390506145)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -18693,6 +18969,109 @@
     "ultima_informacao": "Certidão · ID 387577089 · 20/07/2026",
     "ultima_movimentacao": "18/09/2026 15:58 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Ensino superior — exigência de regularidade no ENADE/ENAMED para colação de grau",
+   "especificidades": "Preliminar de perda do objeto na contraminuta: colação de grau consumada e inscrição no CRM/MS (ID 390506134, desde 23/06/2026) · Vista ao MPF determinada, sem parecer [VALIDAR] · Tutela recursal não concedida (ID 387607454, 20/07/2026)",
+   "teor": {
+    "sintese_fatica": "Estudante de Medicina da UFGD impetrou mandado de segurança contra a exigência de regularidade no ENADE/ENAMED para colar grau; o juízo deferiu em parte a liminar e mandou a UFGD abster-se da exigência. A UFGD agravou.",
+    "inicial": "Não consta nos autos do recurso (MS 5001738-41.2026.4.03.6002)",
+    "decisao_recorrida": "Liminar parcialmente deferida na origem para afastar a exigência de regularidade no ENADE/ENAMED como condição para a colação de grau e a expedição de documentos de conclusão (descrita na decisão ID 387607454).",
+    "recurso": "Agravo de instrumento ID 384904326 (07/07/2026): o ENADE é componente curricular obrigatório; a liminar torna o recurso inócuo antes do fim do curso. Pede efeito suspensivo e reforma da decisão.",
+    "resposta": "Contraminuta ID 390506133 (04/08/2026): preliminar de perda superveniente do objeto, pela colação de grau e pela inscrição no CRM/MS; no mérito, ausência de previsão legal de sanção ao estudante.",
+    "parecer": "Não consta (vista determinada pela decisão ID 387607454)",
+    "memoriais": "Não consta",
+    "representacao": "UFGD representada por procuradora federal (dispensada a procuração). Agravada representada pelo advogado Fabrício Braun (OAB/MS 9.475).",
+    "preparo": "Dispensado: autarquia federal."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Ensino superior · ENADE/ENAMED como condição para colação de grau · mandado de segurança · liminar deferida",
+     "sintese": "Estudante de Medicina da UFGD impetrou mandado de segurança contra a exigência de regularidade no ENADE/ENAMED para colar grau; o juízo deferiu em parte a liminar e mandou a UFGD abster-se da exigência. A UFGD agravou.",
+     "questoes": "1) Perda superveniente do objeto pela colação de grau e inscrição no CRM/MS; 2) legalidade da exigência de regularidade no ENADE/ENAMED para a colação de grau.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 384904326 (07/07/2026): o ENADE é componente curricular obrigatório; a liminar torna o recurso inócuo antes do fim do curso. Pede efeito suspensivo e reforma da decisão.",
+      "contrarrazoes": "Contraminuta ID 390506133 (04/08/2026): preliminar de perda superveniente do objeto, pela colação de grau e pela inscrição no CRM/MS; no mérito, ausência de previsão legal de sanção ao estudante."
+     },
+     "orig": {
+      "tipo": "Liminar em mandado de segurança",
+      "id": "[VALIDAR]",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Deferiu em parte a liminar para afastar a exigência do ENADE/ENAMED na colação de grau."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-07-07",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "384904326",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "384904326",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "385924728",
+       "data": "2026-07-17"
+      },
+      {
+       "desc": "Decisão que não concedeu a tutela recursal e abriu vista ao MPF",
+       "id": "387607454",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "390506133",
+       "data": "2026-08-04"
+      },
+      {
+       "desc": "Certidão de inscrição no CRM/MS",
+       "id": "390506134",
+       "data": "2026-08-04"
+      },
+      {
+       "desc": "Declaração de colação de grau",
+       "id": "390506145",
+       "data": "2026-08-04"
+      }
+     ],
+     "pendencias": "Conferir a vista ao MPF",
+     "especificidades": "Preliminar de perda do objeto na contraminuta: colação de grau consumada e inscrição no CRM/MS (ID 390506134, desde 23/06/2026) · Vista ao MPF determinada, sem parecer [VALIDAR] · Tutela recursal não concedida (ID 387607454, 20/07/2026)",
+     "assuntoDet": "Ensino superior — exigência de regularidade no ENADE/ENAMED para colação de grau",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Vista a abrir",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-20",
+     "fundamento": "Paradigmas do gabinete: AI 5012952-32.2022.4.03.0000 (acórdão 3ª Turma, 14/04/2023: desprovido; ENADE, colação de grau e situação fática consolidada); AI 5005555-82.2023.4.03.0000 (monocrática, 24/03/2023: desprovido o agravo contra liminar que afastou o ENADE como requisito para colação de grau)"
+    }
    }
   },
   {
@@ -18876,12 +19255,15 @@
    "executado": "EMPRESA BRASILEIRA DE CORREIOS E TELEGRAFOS",
    "assunto": "Equilíbrio Financeiro",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Contrato administrativo · franquia postal (AGF) · alteração unilateral da remuneração pelos Correios · equilíbrio econômico-financeiro · tutela de urgência indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto) ou, antes, exame da tutela recursal: o despacho ID 337566714 só intimou a agravada, e os embargos de declaração da agravante (ID 338708459) apontam a omissão quanto à tutela; há contraminuta (ID 339317516) ‖ Proposta pelos precedentes: sem paradigma específico sobre a nova tabela de remuneração da franquia postal; o reequilíbrio econômico-financeiro exige prova do prejuízo, o que pesa contra a probabilidade do direito em tutela de urgência → tendência de desprovimento [VALIDAR] [VALIDAR: Valor da GRU (ID 329054695); Embargos de declaração ID 338708459 pendentes]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "URG",
+    "VAL"
+   ],
+   "observacao": "Agravo de Laceni Hidalgo Jorge & Cia (agência de correios franqueada) contra a decisão que indeferiu a tutela de urgência para impedir a ECT de aplicar nova tabela de remuneração e de cobrar diferenças do período anterior (ação 5012028-92.2024.4.03.6000). A ECT, na contraminuta (ID 339317516), sustenta a legalidade da alteração e a vedação de tutela contra a Fazenda Pública.",
+   "peculiaridades": "Tutela recursal não apreciada: o despacho ID 337566714 (Des. Fed. Consuelo Yoshida) só intimou a agravada; a agravante opôs embargos de declaração (ID 338708459), sem decisão. Redistribuído na 2ª Seção (ID 337441739) e depois à Turma Regional (ID 366531834).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -18907,9 +19289,24 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto); a tutela recursal não foi apreciada",
+    "materia": "Contratos administrativos — franquia postal",
+    "origem": "Ação 5012028-92.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 366164888 (autos de origem)",
+    "recurso": "ID 329010016 · 27/06/2025",
+    "preparo": "GRU paga por internet banking (comprovante ID 329054695)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "COMPROVADO (GRU — comprovante de pagamento via internet) · comprovante bancário: ID 329054695 · pagamento em 27/06/2025, antes da extinção da GRU Judicial · valor [VALIDAR] · conferido em 21/11/2026 (regra: GRU com comprovante de caixa eletrônico ou de pagamento via internet — Resolução PRES 138/2017, artigo 2º, § 2º, II)",
+    "conf_prevencao": "Origem: 5012028-92.2024.4.03.6000 · redistribuído na 2ª Seção (decisão ID 337441739) e depois à Turma Regional (despacho ID 366531834) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Tutela recursal e embargos de declaração ID 338708459 pendentes desde 2025",
+    "[VALIDAR] Procuração da agravante",
+    "[VALIDAR] Valor da GRU (ID 329054695)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -18928,6 +19325,121 @@
     "ultima_informacao": "Certidão · ID 366703747 · 15/04/2026",
     "ultima_movimentacao": "15/04/2026 13:10 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Contrato de franquia postal — alteração da remuneração e equilíbrio econômico-financeiro",
+   "especificidades": "Tutela recursal pendente de apreciação desde 27/06/2025 · Embargos de declaração contra o despacho ID 337566714 sem decisão (ID 338708459) · Contraminuta da ECT (ID 339317516) · Valor do preparo a conferir (ID 329054695) [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Agência de correios franqueada ajuizou ação contra a ECT alegando desequilíbrio econômico-financeiro causado por reajustes unilaterais da remuneração do contrato de franquia postal; o juízo indeferiu a tutela de urgência para suspender a nova tabela e a cobrança de diferenças.",
+    "inicial": "Não consta nos autos do recurso (ação 5012028-92.2024.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 366164888 da origem: indeferiu a tutela de urgência (descrita no despacho ID 337566714). Não juntada com texto nos autos do agravo.",
+    "recurso": "Agravo de instrumento ID 329010016 (27/06/2025): alteração unilateral da remuneração sem aditivo contratual rompe o equilíbrio econômico-financeiro (artigos 58 e 65 da Lei 8.666/1993); redução de 25% a 30% da remuneração. Pede efeito suspensivo ativo para impedir a nova tabela e a cobrança de diferenças.",
+    "resposta": "Contraminuta da ECT ID 339317516 (14/10/2025): legalidade da alteração e vedação legal de tutela contra a Fazenda Pública; pede o não conhecimento e o desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Alfredo Bernardini Neto (OAB/SP 231.856), Ana Luiza Figueira Porto (OAB/SP 331.219), Carlos Alberto Day Stoever (OAB/RS 69.130) e José Nelson Vilela Barbosa Filho (OAB/PE 16.302); procuração não identificada nos autos do recurso [VALIDAR]. ECT: substabelecimento ID 339317519.",
+    "preparo": "Comprovante de pagamento por internet banking da Caixa (ID 329054695, 27/06/2025), juntado com a petição ID 329054685."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Contrato administrativo · franquia postal (AGF) · alteração unilateral da remuneração pelos Correios · equilíbrio econômico-financeiro · tutela de urgência indeferida",
+     "sintese": "Agência de correios franqueada ajuizou ação contra a ECT alegando desequilíbrio econômico-financeiro causado por reajustes unilaterais da remuneração do contrato de franquia postal; o juízo indeferiu a tutela de urgência para suspender a nova tabela e a cobrança de diferenças.",
+     "questoes": "1) Alteração unilateral da remuneração do contrato de franquia postal e equilíbrio econômico-financeiro; 2) requisitos da tutela de urgência e restrições à tutela contra a ECT.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 329010016 (27/06/2025): alteração unilateral da remuneração sem aditivo contratual rompe o equilíbrio econômico-financeiro (artigos 58 e 65 da Lei 8.666/1993); redução de 25% a 30% da remuneração. Pede efeito suspensivo ativo para impedir a nova tabela e a cobrança de diferenças.",
+      "contrarrazoes": "Contraminuta da ECT ID 339317516 (14/10/2025): legalidade da alteração e vedação legal de tutela contra a Fazenda Pública; pede o não conhecimento e o desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "366164888",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Pendente",
+      "id": "366164888"
+     },
+     "adm": {
+      "prot": "2025-06-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "329010016",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Embargos de declaração (contra o despacho ID 337566714)",
+       "id": "338708459",
+       "contra": ""
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "329010016",
+       "data": "2025-06-27"
+      },
+      {
+       "desc": "Comprovante da GRU",
+       "id": "329054695",
+       "data": "2025-06-27"
+      },
+      {
+       "desc": "Decisão: redistribuição na 2ª Seção",
+       "id": "337441739",
+       "data": "2025-09-25"
+      },
+      {
+       "desc": "Despacho: intimação da agravada",
+       "id": "337566714",
+       "data": "2025-09-26"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "338708459",
+       "data": "2025-10-08"
+      },
+      {
+       "desc": "Contraminuta da ECT",
+       "id": "339317516",
+       "data": "2025-10-14"
+      },
+      {
+       "desc": "Despacho: redistribuição à Turma Regional",
+       "id": "366531834",
+       "data": "2026-04-14"
+      }
+     ],
+     "pendencias": "Examinar a tutela recursal e os embargos de declaração; conferir a procuração e o valor da GRU",
+     "especificidades": "Tutela recursal pendente de apreciação desde 27/06/2025 · Embargos de declaração contra o despacho ID 337566714 sem decisão (ID 338708459) · Contraminuta da ECT (ID 339317516) · Valor do preparo a conferir (ID 329054695) [VALIDAR]",
+     "assuntoDet": "Contrato de franquia postal — alteração da remuneração e equilíbrio econômico-financeiro",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2025-06-27",
+     "urgNivel": "Alta",
+     "urgObs": "Tutela recursal não apreciada; embargos de declaração ID 338708459 (08/10/2025) apontam a omissão",
+     "fundamento": "Paradigmas do gabinete: ApCiv 5001711-40.2021.4.03.6000 (acórdão TRMS, 30/06/2026: reequilíbrio econômico-financeiro sem comprovação do prejuízo); ApCiv 5016978-48.2018.4.03.6100 (acórdão 3ª Turma, 23/09/2022: franquia postal, apuração de diferenças remuneratórias por processo administrativo); ApCiv 5001605-50.2018.4.03.6108 (acórdão 3ª Turma, 26/09/2020: franquia postal regida pela Lei 11.668/2008)"
+    }
    }
   },
   {
@@ -19276,12 +19788,14 @@
    "executado": "FUNDACAO NACIONAL DO INDIO",
    "assunto": "Esbulho / Turbação / Ameaça",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Indígena · reintegração de posse · suspensão do processo até o julgamento das ADIs 7.582, 7.583 e 7.586 e da ADC 87 (Lei 14.701/2023) e do Tema 1.031/STF",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida (decisão ID 345275731), há contraminuta da FUNAI, manifestação da União e parecer do MPF ‖ Proposta pelos precedentes: sem paradigma do gabinete no banco sobre a suspensão de possessórias pelo Tema 1.031/STF e pelas ações sobre a Lei 14.701/2023; examinar a preliminar do MPF e a ordem de suspensão do STF [VALIDAR] [VALIDAR: Situação dos AI 5020113-25.2024 e 5025551-32.2024; Andamento das ADIs 7.582, 7.583 e 7.586, da ADC 87 e do Tema 1.031/STF]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Laísa Ferreira Lins Lima e Lana Ferreira Lins Lima contra a decisão que suspendeu a reintegração de posse 5001593-53.2024.4.03.6002, contra comunidade indígena Guarani, até o julgamento das ADIs 7.582, 7.583 e 7.586 e da ADC 87 pelo STF. Pedem o cumprimento da tutela antes concedida (ID 332499599 da origem). A FUNAI (ID 357086878) e a União (ID 345922806) defendem a suspensão; o MPF (ID 368520212) opina pela extinção do agravo e da possessória e, subsidiariamente, pelo conhecimento parcial e desprovimento.",
+   "peculiaridades": "A decisão ID 345275731 (Des. Fed. Audrey Gasparini) indeferiu a tutela recursal: a tutela cujo cumprimento se pede foi revogada pelo juízo que a proferiu. Redistribuído à Turma Regional (decisão ID 362417165). Terra indígena Panambi-Lagoa Rica, com relatório circunstanciado aprovado e publicado, segundo o parecer.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -19317,9 +19831,24 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Indígena — reintegração de posse e suspensão pelo STF",
+    "origem": "Reintegração de posse 5001593-53.2024.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "ID 443817457 (autos de origem)",
+    "recurso": "ID 343420489 · 14/11/2025",
+    "preparo": "Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" (ID 343421992, R$ 64,26)",
+    "monocratica": "Não indicada (matéria indígena com parecer do MPF); pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 343421992 · valor R$ 64,26 · comprovante sem texto: ID 343421994 · conferido em 21/11/2026 (regra: Pix ou cartão só com o comprovante do Tesouro — PagTesouro \"Pagamento realizado com sucesso\", com \"Identificação do pagamento\")",
+    "conf_prevencao": "Origem: 5001593-53.2024.4.03.6002 · distribuído por prevenção dos AI 5020113-25.2024.4.03.0000 e 5025551-32.2024.4.03.0000 (certidão ID 343429936) [VALIDAR situação desses agravos] · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] AI preventos 5020113-25.2024.4.03.0000 e 5025551-32.2024.4.03.0000",
+    "[VALIDAR] Situação atual das ações no STF que fundamentam a suspensão",
+    "[VALIDAR] Procuração"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -19338,6 +19867,118 @@
     "ultima_informacao": "Certidão · ID 365431468 · 09/04/2026",
     "ultima_movimentacao": "24/04/2026 12:54 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Possessória contra comunidade indígena — suspensão do processo pelo STF (marco temporal)",
+   "especificidades": "Tutela recursal indeferida (ID 345275731, 03/12/2025) · Parecer do MPF pela extinção do agravo e da possessória (artigo 19, § 2º, da Lei 6.001/1973) e, subsidiariamente, pelo conhecimento parcial e desprovimento (ID 368520212) · Prevenção dos AI 5020113-25.2024 e 5025551-32.2024 [VALIDAR] · Suspensão ligada ao RE 1.017.365 (Tema 1.031/STF) e às ações sobre a Lei 14.701/2023",
+   "teor": {
+    "sintese_fatica": "Proprietárias ajuizaram reintegração de posse contra comunidade indígena Guarani em Dourados/MS; o juízo suspendeu o processo até o julgamento das ADIs 7.582, 7.583 e 7.586 e da ADC 87 pelo STF, e a tutela antes concedida foi revogada pelo juízo que a proferiu.",
+    "inicial": "Não consta nos autos do recurso (reintegração de posse 5001593-53.2024.4.03.6002)",
+    "decisao_recorrida": "Decisão ID 443817457 da origem: suspensão do processo até o julgamento das ADIs 7.582, 7.583 e 7.586 e da ADC 87 (descrita na decisão ID 345275731).",
+    "recurso": "Agravo de instrumento ID 343420489 (14/11/2025): cabimento pelo artigo 1.015, XIII, do CPC; pede o prosseguimento da possessória e o cumprimento da tutela ID 332499599 da origem; invoca precedentes sobre a insuficiência da portaria declaratória para afastar a posse.",
+    "resposta": "Contraminuta da FUNAI ID 357086878 (27/02/2026): suspensão determinada pelo STF no RE 1.017.365 (Tema 1.031) e nas ações sobre a Lei 14.701/2023; pede o desprovimento. Manifestação da União ID 345922806 (08/12/2025) no mesmo sentido.",
+    "parecer": "Parecer do MPF ID 368520212 (23/04/2026): extinção do agravo e da possessória por inadequação da via (artigo 19, § 2º, da Lei 6.001/1973); subsidiariamente, conhecimento parcial e desprovimento.",
+    "memoriais": "Não consta",
+    "representacao": "Advogado com escritório em Caarapó/MS assina o recurso; procuração não identificada nos autos do recurso [VALIDAR]. FUNAI e União por procuradores públicos.",
+    "preparo": "Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" (ID 343421992, R$ 64,26, 14/11/2025)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Indígena · reintegração de posse · suspensão do processo até o julgamento das ADIs 7.582, 7.583 e 7.586 e da ADC 87 (Lei 14.701/2023) e do Tema 1.031/STF",
+     "sintese": "Proprietárias ajuizaram reintegração de posse contra comunidade indígena Guarani em Dourados/MS; o juízo suspendeu o processo até o julgamento das ADIs 7.582, 7.583 e 7.586 e da ADC 87 pelo STF, e a tutela antes concedida foi revogada pelo juízo que a proferiu.",
+     "questoes": "1) Cabimento e extensão do agravo (preliminar do MPF de extinção pela inadequação da via possessória, artigo 19, § 2º, da Lei 6.001/1973); 2) suspensão da possessória até o julgamento pelo STF (Tema 1.031 e Lei 14.701/2023); 3) cumprimento de tutela revogada na origem.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 343420489 (14/11/2025): cabimento pelo artigo 1.015, XIII, do CPC; pede o prosseguimento da possessória e o cumprimento da tutela ID 332499599 da origem; invoca precedentes sobre a insuficiência da portaria declaratória para afastar a posse.",
+      "contrarrazoes": "Contraminuta da FUNAI ID 357086878 (27/02/2026): suspensão determinada pelo STF no RE 1.017.365 (Tema 1.031) e nas ações sobre a Lei 14.701/2023; pede o desprovimento. Manifestação da União ID 345922806 (08/12/2025) no mesmo sentido."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "443817457",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Suspendeu a reintegração de posse até o julgamento das ADIs 7.582, 7.583 e 7.586 e da ADC 87."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "443817457"
+     },
+     "adm": {
+      "prot": "2025-11-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "343420489",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "343420489",
+       "data": "2025-11-14"
+      },
+      {
+       "desc": "Comprovante PagTesouro",
+       "id": "343421992",
+       "data": "2025-11-14"
+      },
+      {
+       "desc": "Certidão de prevenção",
+       "id": "343429936",
+       "data": "2025-11-14"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "345275731",
+       "data": "2025-12-03"
+      },
+      {
+       "desc": "Manifestação da União",
+       "id": "345922806",
+       "data": "2025-12-08"
+      },
+      {
+       "desc": "Contraminuta da FUNAI",
+       "id": "357086878",
+       "data": "2026-02-27"
+      },
+      {
+       "desc": "Decisão: remessa à Turma Regional",
+       "id": "362417165",
+       "data": "2026-03-26"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "368520212",
+       "data": "2026-04-23"
+      }
+     ],
+     "pendencias": "Conferir os agravos preventos e a situação das ações no STF",
+     "especificidades": "Tutela recursal indeferida (ID 345275731, 03/12/2025) · Parecer do MPF pela extinção do agravo e da possessória (artigo 19, § 2º, da Lei 6.001/1973) e, subsidiariamente, pelo conhecimento parcial e desprovimento (ID 368520212) · Prevenção dos AI 5020113-25.2024 e 5025551-32.2024 [VALIDAR] · Suspensão ligada ao RE 1.017.365 (Tema 1.031/STF) e às ações sobre a Lei 14.701/2023",
+     "assuntoDet": "Possessória contra comunidade indígena — suspensão do processo pelo STF (marco temporal)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Indígenas (CF 232)",
+     "parecer": "Com parecer",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-12-03"
+    }
    }
   },
   {
