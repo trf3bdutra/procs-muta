@@ -18421,11 +18421,11 @@
    "assunto": "Execução Contratual",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto) [VALIDAR preparo e contraminuta]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo do Espólio de Miguel Ximenes e Sylvia Silveira Ximenes contra a decisão que, na execução 0003068-20.1996.4.03.6000 movida pela CEF, fixou em R$ 7.020,00 os honorários do perito para avaliar o imóvel penhorado. O agravante sustenta que a perícia é simples e que a Resolução CNJ 232/2016 fixa valor por perícia. Após pedir gratuidade, juntou comprovante bancário de preparo.",
+   "peculiaridades": "Preparo por comprovante bancário, sem STN [VALIDAR]. Contraminuta da CEF não localizada. Há 1 documento não lido no PJe. Redistribuído à Turma Regional de MS em 27/03/2026.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -18435,7 +18435,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Contratos bancários — execução de título extrajudicial da CEF; honorários periciais na avaliação do imóvel penhorado",
+    "origem": "1ª Vara Federal de Campo Grande · 0003068-20.1996.4.03.6000",
+    "decisao_agravada": "ID 484507203 (origem) · 19/12/2025",
+    "recurso": "ID 352704611 · 30/01/2026",
+    "preparo": "Comprovante bancário, sem STN [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Comprovante bancário (não aceito): ID 353612387 · petição: ID 353612386 · despacho sobre preparo/gratuidade: ID 353020951 · valor R$ 64,26 · pago em 06/02/2026 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 0003068-20.1996.4.03.6000 · redistribuído por prevenção em razão de modificação da competência (27/03/2026) · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -18446,7 +18457,18 @@
    "extracao": {
     "situacao": "pendente"
    },
-   "bloco": "2"
+   "bloco": "2",
+   "teor": {
+    "sintese_fatica": "Em execução de título extrajudicial da CEF (escritura de confissão e renegociação de dívida com garantia hipotecária de 09/11/1994), o juízo acolheu a proposta do perito e fixou os honorários da avaliação do imóvel penhorado em R$ 7.020,00 (18 horas a R$ 390,00).",
+    "inicial": "Execução de título extrajudicial 0003068-20.1996.4.03.6000 (1ª Vara Federal de Campo Grande) da CEF contra o Espólio de Miguel Ximenes e Sylvia Silveira Ximenes",
+    "decisao_recorrida": "Decisão ID 484507203 dos autos de origem (19/12/2025), que fixou os honorários periciais em R$ 7.020,00 e mandou a executada depositá-los em 30 dias",
+    "recurso": "Agravo ID 352704611 (30/01/2026): (1) perícia de baixa complexidade (avaliação de imóvel urbano); (2) a Resolução CNJ 232/2016 fixa valor por perícia, não por hora (R$ 430,00 para avaliação de imóvel urbano); (3) violação da razoabilidade e da proporcionalidade (artigo 8º do CPC); pede a redução dos honorários e a gratuidade.",
+    "resposta": "Contraminuta da CEF não localizada nos autos extraídos [VALIDAR].",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Despacho ID 353020951 (03/02/2026): antes de indeferir a gratuidade, determinou a comprovação da hipossuficiência ou o recolhimento do preparo. Petição ID 353612386 (07/02/2026) com comprovante bancário ID 353612387. Despacho ID 353944427 (09/02/2026): intimação da agravada para contraminuta. Redistribuição à Turma Regional de MS (Resolução 33/2025; decisão ID 361076336 e certidão ID 362814166). Há 1 documento não lido no PJe.",
+    "representacao": "Agravante: advogados João Ricardo Dias de Pinho e Jean Samir Nammoura (procuração na origem, segundo o agravante) [VALIDAR]. Agravada: CEF.",
+    "preparo": "Comprovante bancário de pagamento por código de barras (convênio GRU judicial), R$ 64,26, em 06/02/2026 (ID 353612387); sem comprovante STN [VALIDAR]"
+   }
   },
   {
    "sessao": "",
