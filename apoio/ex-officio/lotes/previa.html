@@ -83,9 +83,27 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .met button,.met>div{display:block;text-align:left;padding:10px 12px 12px;border:0;border-left:1px solid var(--el);border-top:3px solid transparent;background:none;color:inherit;cursor:pointer;min-width:0}
 .met>:first-child{border-left:0;padding-left:18px}
 .met button[aria-pressed=true],.met>div.at{border-top-color:var(--eo);background:var(--ew)}
-.met span{display:block;font:400 8.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);line-height:1.35}
-.met b{display:block;font:400 26px var(--emono);letter-spacing:-.03em;color:var(--eo2);margin-top:3px}
-.met small{display:block;font-size:11.5px;color:var(--em);margin-top:2px;line-height:1.35}
+.met>button>span,.met>div>span,.met .col>button>span{display:block;font:400 8.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);line-height:1.35}
+.met>button>b,.met>div>b,.met .col>button>b{display:block;font:400 26px var(--emono);letter-spacing:-.03em;color:var(--eo2);margin-top:3px}
+.met>button>small,.met>div>small,.met .col>button>small{display:block;font-size:11.5px;color:var(--em);margin-top:2px;line-height:1.35}
+.met.fl{align-items:stretch}
+.met.fl .col{border-left:1px solid var(--el);border-top:3px solid transparent;min-width:0;display:flex;flex-direction:column}
+.met.fl .col:first-child{border-left:0}
+.met.fl .col.at{border-top-color:var(--eo);background:var(--ew)}
+.met.fl .col>button{border:0;border-top:0;padding:10px 12px 8px;background:none;width:100%}
+.met.fl>.col:first-child{padding-left:6px}
+.met.fl .col>button:hover b{color:var(--eo)}
+.nx{margin:0 12px;padding:8px 0 6px;border-top:1px dashed var(--el);font-size:12px;line-height:1.4;color:var(--em)}
+.nx b{display:block;font:650 12.5px var(--font);color:var(--ei)}
+.met.fl ul{list-style:none;margin:0 12px 10px;padding:0}
+.met.fl li{display:flex;gap:8px;align-items:baseline;padding:5px 0;border-top:1px solid var(--el)}
+.met.fl li .ii{min-width:24px;font-size:11px}
+.met.fl li button{border:0;background:none;padding:0;color:var(--ei);text-align:left;cursor:pointer;min-width:0}
+.met.fl li button .cnj{font-size:11px}
+.met.fl li button .pt{margin-top:1px;font-size:11px}
+.met.fl li button:hover .cnj{color:var(--eo2);text-decoration:underline}
+.mais{margin:0 12px 12px;padding:0;border:0;background:none;font:400 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--eg2);cursor:pointer;text-align:left}
+.nd{margin:0 12px 12px;font-size:12px;font-style:italic;color:var(--em)}
 .ph{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 0 0}
 .seg{display:inline-flex;border:1px solid var(--el);background:var(--ew)}
 .seg button{height:28px;padding:0 12px;border:0;background:transparent;color:var(--em);font-size:12px;font-weight:700;cursor:pointer}
@@ -145,7 +163,7 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .pf-acts{display:flex;gap:6px;flex-wrap:wrap}
 .flx{margin-top:0}
 .flx>div{cursor:default}
-.flx b{font-size:17px;margin-top:5px}
+.flx>div>b{font-size:17px;margin-top:5px}
 .ban{margin:12px 0 0;padding:9px 12px;border-left:3px solid var(--al);background:rgba(192,122,18,.07);font-size:12.5px;line-height:1.5;color:var(--ei)}
 .ban.ok{border-left-color:var(--ok);background:rgba(31,138,112,.07)}
 .ban.in{border-left-color:var(--eg2);background:rgba(47,123,163,.07)}
@@ -299,8 +317,6 @@ function render(){
   const n=k=>conta(esc0,k);
   const ses=S.sessoes.map(s=>`<option value="${s.date}"${s.date===S.data?' selected':''}>Pauta · ${br(s.date)}</option>`).join('');
   const meus=S.linhas.filter(r=>r.meu).length;
-  const libSemFinal=esc0.filter(r=>r.etapa==='liberada');
-  const aCorrigir=esc0.filter(r=>r.etapa==='corrigir'), aMarcar=esc0.filter(r=>r.etapa==='corrigida'), retidos=esc0.filter(r=>r.etapa==='retido');
   const alertas=esc0.filter(r=>r.nivel);
   $('#app').innerHTML=`<div class="pg">
   <nav class="lx-sub" aria-label="Sessão e seções da página">
@@ -313,8 +329,7 @@ function render(){
    <p class="lx-nk">Nesta página</p>
    <a class="ir" href="#fluxo"><i>01</i><span>Fluxo da minuta</span></a>
    <a class="ir" href="#procs"><i>02</i><span>Processos</span><small>${lst.length}</small></a>
-   <a class="ir" href="#fila"><i>03</i><span>Fila de hoje</span></a>
-   ${S.aberto?`<a class="ir" href="#proc" aria-current="true"><i>04</i><span>Item ${esc((S.linhas.find(r=>r.x.cnj===S.aberto)||{}).x.item)}</span></a>`:''}
+   ${S.aberto?`<a class="ir" href="#proc" aria-current="true"><i>03</i><span>Item ${esc((S.linhas.find(r=>r.x.cnj===S.aberto)||{}).x.item)}</span></a>`:''}
    <p class="lx-nk" style="margin-top:14px">Etapas</p>
    ${ETAPAS.map(([k,r])=>`<button type="button" class="ir" data-et="${k}" aria-current="${S.etapa===k}"><span>${esc(r.replace(/^\d · /,''))}</span><small>${n(k)}</small></button>`).join('')}
    <button type="button" class="ir" data-fo="minutar" aria-current="${S.fora==='minutar'}"><span>Sem minuta</span><small>${n('minutar')}</small></button>
@@ -324,12 +339,12 @@ function render(){
   <div class="main">
    <div class="lx-h"><div><p class="k">Coleção de pauta · sessão de ${br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':'Toda a <em class="it">pauta.</em>'}</h1></div>
     <p class="lx-st">${S.usuario?esc(S.usuario)+' · ':''}${esc0.length} de ${S.linhas.length} processos<br>${alertas.length} com alerta</p></div>
-   <p class="lead">O caminho de cada minuta, da correção à versão final do PJe, numa página só. Cada etapa é um filtro da lista; clique num processo para ver as versões e o que mudou.</p>
+   <p class="lead">O caminho de cada minuta, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos. Clique num processo para ver as versões e o que mudou.</p>
    <span class="aviso">Prévia · só leitura · dados reais da pauta</span>
 
-   <section class="sec" id="fluxo"><div class="shd"><div><p class="k">01 / Produção</p><h2>Fluxo da <em class="it">minuta.</em></h2><p class="d">Minutada · corrigida · no PJe · liberada · versão final. As datas vêm da pauta do Ex Officio; a marca do PJe e a versão final, do Collectio.</p></div></div>
+   <section class="sec" id="fluxo"><div class="shd"><div><p class="k">01 / Produção</p><h2>Fluxo da <em class="it">minuta.</em></h2><p class="d">Cada coluna é uma etapa, com o próximo passo e a fila, na ordem da pauta. As datas vêm da pauta do Ex Officio; a marca do PJe e a versão final, do Collectio. Clique na etapa para filtrar a lista.</p></div></div>
     <div class="box">
-     <div class="met" role="group" aria-label="Etapas">${ETAPAS.map(([k,r,t,d])=>`<button type="button" data-et="${k}" aria-pressed="${S.etapa===k}"><span>${esc(r)}</span><b>${n(k)}</b><small>${esc(d)}</small></button>`).join('')}</div>
+     <div class="met fl" role="group" aria-label="Etapas e fila de cada uma">${ETAPAS.map(e=>colEtapa(e,esc0)).join('')}</div>
      <div class="ph">
       <span class="seg" role="group" aria-label="Recorte"><button type="button" data-vista="meus" aria-pressed="${S.vista==='meus'}"${meus?'':' disabled'}>Minhas correções</button><button type="button" data-vista="todos" aria-pressed="${S.vista==='todos'}">Toda a pauta</button></span>
       <label class="bq"><span class="sr">Buscar</span><input type="search" id="q" placeholder="item, processo, parte ou assunto" value="${esc(S.q)}"></label>
@@ -345,14 +360,6 @@ function render(){
     </table></div></div>
    </section>
 
-   <section class="sec" id="fila"><div class="shd"><div><p class="k">03 / Hoje</p><h2>Fila de <em class="it">hoje.</em></h2><p class="d">O que falta, em ordem, para cada processo ${S.vista==='meus'?'da sua correção':'da pauta'} chegar à sessão com a versão final registrada.</p></div></div>
-    <div class="box"><div class="grid">
-     ${fila('Corrigir',aCorrigir,'minutadas sem correção registrada. Comece pela primeira da pauta.',r=>r.x.servidor||'')}
-     ${fila('Colar no PJe e marcar',aMarcar,'corrigidas. Ao colar no editor do PJe, marque a versão importada: a liberação passa a ser acompanhada aqui.',r=>'corrigida '+brc(r.x.dataCorrecao))}
-     ${fila('Registrar a versão final',libSemFinal,'liberadas sem a versão final do PJe. Registrada, ela mostra o que o Desembargador mudou.',r=>'liberada '+brc(r.x.dataLiberacao))}
-     ${fila('Retirados de pauta',retidos,'fora desta sessão, com a justificativa registrada na pauta.',r=>String(r.c.intercor||'').replace(/^Retirado de pauta \([^)]*\):\s*/,''))}
-    </div></div>
-   </section>
    <div id="proc-w">${S.aberto?procHtml():''}</div>
   </div></div>`;
   ligar();
@@ -367,12 +374,22 @@ function rowHtml(r){
    <td><span class="nm">${esc(x.servidor||'—')}</span></td>
    <td><span class="nm">${esc(x.corretor||'—')}</span></td>
    <td><div class="et" aria-hidden="true">${pul.map(c=>`<i class="${c}"></i>`).join('')}</div><span class="et-t">${esc(r.txt)}</span></td>
-   <td>${r.tags.map(([c,t])=>`<span class="tg ${c}">${esc(t)}</span>`).join('')||'<span class="tg ok">Em dia</span>'}</td>
+   <td>${r.tags.map(([c,t])=>`<span class="tg ${c}">${esc(t)}</span>`).join('')||'<span class="tg ok">Em dia</span>'}${r.retido&&r.c.intercor?`<span class="pt">${esc(String(r.c.intercor).replace(/^Retirado de pauta \([^)]*\):\s*/,''))}</span>`:''}</td>
    <td style="text-align:right"><button type="button" class="b" data-abre="${esc(x.cnj)}">Abrir</button></td></tr>`;
 }
-function fila(t,lst,d,sub){
-  return `<div class="cx"><h3>${esc(t)}</h3><span class="n">${lst.length}</span><p>${esc(d)}</p>
-   ${lst.length?`<ul>${lst.slice(0,6).map(r=>`<li><span class="ii">${esc(r.x.item)}</span><button type="button" data-abre="${esc(r.x.cnj)}">${esc(r.x.cnj)}<span class="pt">${esc(sub(r))}</span></button></li>`).join('')}</ul>${lst.length>6?`<p>e mais ${lst.length-6}.</p>`:''}`:'<p class="vazio" style="padding:0">Nada pendente.</p>'}</div>`;
+/* coluna de uma etapa do fluxo: o número (filtro da lista), o próximo passo e os primeiros processos da fila */
+const PASSO={corrigir:['Corrigir','na ordem da pauta',r=>r.x.servidor?'minuta '+r.x.servidor+(r.x.dataMinuta?' · '+brc(r.x.dataMinuta):''):''],
+  corrigida:['Colar no PJe e marcar','a versão importada, no Collectio',r=>'corrigida '+brc(r.x.dataCorrecao)],
+  pje:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'no PJe '+brc(r.it&&r.it.pje&&r.it.pje.em)],
+  liberada:['Registrar a versão final','texto conferido no PJe',r=>'liberada '+brc(r.x.dataLiberacao)],
+  final:['Pronto para a sessão','com a versão final registrada',r=>'versão final '+brc(r.it&&r.it.final&&r.it.final.em)]};
+function colEtapa([k,r,t,d],base){
+  const lst=base.filter(x=>x.etapa===k).sort((a,b)=>a.item-b.item), [ac,ac2,sub]=PASSO[k], MAX=5;
+  return `<div class="col${S.etapa===k?' at':''}">
+   <button type="button" data-et="${k}" aria-pressed="${S.etapa===k}" title="Filtrar a lista por esta etapa"><span>${esc(r)}</span><b>${lst.length}</b><small>${esc(t)}</small></button>
+   <p class="nx"><b>${esc(ac)}</b> ${esc(ac2)}</p>
+   ${lst.length?`<ul>${lst.slice(0,MAX).map(z=>`<li><span class="ii">${esc(z.x.item)}</span><button type="button" data-abre="${esc(z.x.cnj)}"><span class="cnj">${esc(z.x.cnj.slice(0,15))}</span><span class="pt">${esc(sub(z))}</span></button></li>`).join('')}</ul>${lst.length>MAX?`<button type="button" class="mais" data-et="${k}">+ ${lst.length-MAX} na lista</button>`:''}`:`<p class="nd">Nada nesta etapa.</p>`}
+  </div>`;
 }
 
 /* ---------- processo aberto ---------- */
@@ -393,7 +410,7 @@ function procHtml(){
   else if(r.etapa==='final')ban=`<p class="ban ok">Versão final registrada${it&&it.final?' em '+br(it.final.em):''}. A comparação parte da versão importada no PJe.</p>`;
   const aj=it&&Array.isArray(it.ajustes)?it.ajustes.filter(a=>Array.isArray(a)&&!/^se[cç][aã]o$/i.test(String(a[0]||''))):[];
   const pd=it&&Array.isArray(it.pendencias)?it.pendencias:[];
-  return `<section class="sec" id="proc"><div class="shd"><div><p class="k">04 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
+  return `<section class="sec" id="proc"><div class="shd"><div><p class="k">03 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
    <div class="box">
     <div class="pf-h"><div><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">${z?'Minuta no Collectio: '+esc(z.titulo):'Sem minuta no Collectio'}</span></div>
      <div class="pf-acts">${z?`<a class="b pri" href="/amicus/collectio/?id=${encodeURIComponent(z.lote)}" target="_blank" rel="noopener">Abrir no Collectio</a>`:''}<button type="button" class="b" id="fecha">Fechar</button></div></div>
