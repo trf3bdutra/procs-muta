@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T06:37:52.923Z",
+ "atualizado_em": "2026-11-21T06:41:18.949Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -305649,53 +305649,54 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.327Z"
+    "atualizado_em": "2026-11-21T06:41:18.949Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Antecipação da tutela recursal",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Apreciada · indeferida",
+    "Urgência - Data": "2026-11-21",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
-    "AJG": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Gratuidade pedida no recurso",
+    "AJG": "Pedida no recurso [VALIDAR apreciação]",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Regular",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "MPF": "Não se aplica",
+    "MPF - Custos Legis": "Sem hipótese",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Indenização por Dano Moral",
+    "Tema": "Trânsito · autos de infração da PRF (excesso de dimensões e outras) · suspensão das multas e dos pontos na CNH · tutela de urgência indeferida · gratuidade pedida no recurso",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
-    "Descrição da Preliminar": "",
+    "Prelim.": "Preliminar de ofício",
+    "Descrição da Preliminar": "Tempestividade e gratuidade pedida no recurso [VALIDAR]",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção, Agravo Interno",
-    "Alegações": "",
+    "Alegações": "1) Gratuidade pedida no recurso e tempestividade; 2) suspensão das multas e dos pontos na CNH diante das nulidades alegadas nos autos de infração da PRF.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Gratuidade pedida no recurso, sem preparo (certidão ID 340969954) [VALIDAR apreciação] · Efeito suspensivo indeferido (ID 341125816) · Agravo interno pendente (ID 341985120) · Divergência no número da origem e na data da petição [VALIDAR]",
+    "Síntese Fática": "Motorista autuado pela PRF em oito infrações, entre elas transitar com dimensões acima do limite sem autorização, pediu a suspensão das multas e dos pontos na CNH; o juízo indeferiu a tutela de urgência."
    },
    "producao": {
     "Destino": "",
@@ -305734,7 +305735,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigma do gabinete: AI 5000552-41.2026.4.03.0001 (monocrática TRMS, 14/09/2026: desprovido o agravo contra tutela que suspendeu cobranças de autos de infração) [VALIDAR pertinência, pois a situação é inversa]"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -305744,7 +305746,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5028581-07.2026.4.03.0000",
