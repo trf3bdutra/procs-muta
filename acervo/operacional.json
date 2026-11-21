@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T02:07:38.195Z",
+ "atualizado_em": "2026-11-21T02:07:45.162Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -226665,7 +226665,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:31:38.496Z",
+    "atualizado_em": "2026-11-21T02:07:45.162Z",
     "Origem - Juízo": "1ª Vara Federal de Três Lagoas"
    },
    "triagem": {
@@ -226682,37 +226682,38 @@
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "Não verificado",
-    "Preparo": "Não verificado",
+    "Tempestividade": "Não Verificado",
+    "Preparo": "Não Verificado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "Não verificado",
+    "Representação": "Não Verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Sem hipótese",
-    "MPF - Custos Legis": "",
+    "MPF": "Não se Aplica",
+    "MPF - Custos Legis": "Não",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "IRPF/Imposto de Renda de Pessoa Física",
+    "Tema": "Execução fiscal · IRPF sobre ganho de capital · simulação de alienação de imóveis entre familiares · exceção de pré-executividade",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Sem preliminares",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "2ª Seção, IRPF - Acréscimo patrimonial",
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "Lançamento fundado em simulação de transações imobiliárias familiares · Precedente favorável ao irmão e sócio juntado (ID 363786867) · Preparo por GRU paga na CAIXA com referência do processo de origem (ID 359798698)"
+    "Especificidades": "Lançamento fundado em simulação de transações imobiliárias familiares · Precedente favorável ao irmão e sócio juntado (ID 363786867) · Preparo por GRU paga na CAIXA com referência do processo de origem (ID 359798698)",
+    "Síntese Fática": "Execução fiscal de IRPF sobre ganho de capital, lançado porque o fisco entendeu simulada a alienação de imóveis entre familiares; o juízo rejeitou a exceção de pré-executividade por exigir dilação probatória (Súmula 393/STJ)."
    },
    "producao": {
     "Destino": "",
@@ -226751,7 +226752,8 @@
     "Lote - Observação": "Agravo de Cláudio Luiz Casagrande contra a decisão que, na execução fiscal 5000300-79.2023.4.03.6003, rejeitou a exceção de pré-executividade contra a cobrança de IRPF sobre ganho de capital fundada em simulação de vendas de imóveis. O agravante invoca decisão favorável ao irmão e sócio. A União respondeu.",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5023103-18.2026.4.03.0000 (TRMS, 28/09/2026); AI 5021780-22.2019.4.03.0000 (3ª Turma, 24/07/2020); AI 5000239-80.2026.4.03.0001 (TRMS, 06/08/2026)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -226761,7 +226763,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5006429-12.2023.4.03.6000",
