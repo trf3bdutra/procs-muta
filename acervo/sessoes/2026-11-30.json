@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T06:14:33.824Z",
+ "atualizadoEm": "2026-11-21T09:45:25.081Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -22,6 +22,9 @@
    "dataLiberacao": "2026-11-18",
    "obs": "Preparo não recolhido",
    "ctl": {
+    "mpf": "Interesse público ou social (178, I)",
+    "parecer": "Com parecer",
+    "preparo": "Não recolhido",
     "meta": "M2A",
     "cartao": {
      "tipoJ": "Remessa Necessária",
@@ -32,9 +35,6 @@
     },
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-19T16:35:00.051Z",
-    "mpf": "Interesse público ou social (178, I)",
-    "parecer": "Com parecer",
-    "preparo": "Não recolhido",
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -58,17 +58,17 @@
    "dataLiberacao": "2026-11-19",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "editadoPor": "Victor",
-    "editadoEm": "2026-11-19T16:35:28.179Z",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "Victor",
+    "editadoEm": "2026-11-19T16:35:28.179Z",
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20"
    }
   },
   {
@@ -89,6 +89,7 @@
    "obs": "",
    "ctl": {
     "preparo": "Isento (ente público/MP)",
+    "resJulg": "Desprovido",
     "cartao": {
      "orig": {
       "tipo": "Sentença",
@@ -126,16 +127,15 @@
     },
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-21T04:12:06.899Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-06",
-    "resJulg": "Desprovido",
     "lote": {
      "id": "acorrigir",
      "item": 3,
      "autos": 94
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-06"
    }
   },
   {
@@ -155,8 +155,17 @@
    "dataLiberacao": "2026-11-20",
    "obs": "",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T03:16:09.509Z",
+    "mpf": "Sem hipótese",
+    "parecer": "Com parecer",
+    "prelim": "Há preliminares",
+    "tempest": "Tempestivo",
+    "preparo": "Justiça gratuita",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não",
     "cartao": {
      "orig": {
       "acc": {
@@ -297,26 +306,17 @@
       "Réu/ré"
      ]
     },
-    "tempest": "Tempestivo",
-    "preparo": "Justiça gratuita",
-    "prelim": "Há preliminares",
-    "repres": "Regular",
-    "midias": "Não se aplica",
-    "mpf": "Sem hipótese",
-    "parecer": "Com parecer",
-    "resJulg": "Provido",
-    "consect": "Não",
-    "honor": "Sem honorários recursais",
-    "topico": "Não",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-04",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T03:16:09.509Z",
     "lote": {
      "id": "2886",
      "item": 4,
      "autos": 0
     },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-04",
     "sopref": "Presencial"
    }
   },
@@ -337,18 +337,18 @@
    "dataLiberacao": "2026-11-19",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
-    "editadoPor": "CM",
-    "editadoEm": "2026-11-19T14:54:45.716Z",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "CM",
+    "editadoEm": "2026-11-19T14:54:45.716Z",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -375,7 +375,9 @@
     "preparo": "Justiça gratuita",
     "repres": "Regular",
     "midias": "Não se aplica",
+    "resJulg": "Desprovido",
     "consect": "Não",
+    "honor": "Majorados",
     "topico": "Não",
     "cartao": {
      "tipoJ": "Apelação",
@@ -535,17 +537,15 @@
     },
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-21T01:30:40.738Z",
-    "resJulg": "Desprovido",
-    "honor": "Majorados",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-04",
     "lote": {
      "id": "2886",
      "item": 6,
      "autos": 0
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-04"
    }
   },
   {
@@ -575,6 +575,7 @@
     "resJulg": "Provido",
     "consect": "Não",
     "honor": "Sem honorários recursais",
+    "topico": "Não",
     "cartao": {
      "tipoJ": "Apelação",
      "relacionado": "Tema 1.433/STJ; Tema 1.075/STF; Tema 733/STF; REsp 2.234.888/MS",
@@ -718,16 +719,15 @@
     },
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-21T01:30:45.647Z",
-    "topico": "Não",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "lote": {
      "id": "2886",
      "item": 7,
      "autos": 0
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -747,6 +747,16 @@
    "dataLiberacao": "2026-11-18",
    "obs": "",
    "ctl": {
+    "mpf": "Sem hipótese",
+    "prelim": "Há preliminares",
+    "tempest": "Não verificado",
+    "preparo": "Comprovado",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não",
     "cartao": {
      "tipoJ": "Apelação",
      "relacionado": "Tema 1.433/STJ (ProAfR no REsp 2.234.888); Tema 1.075/STF; Tema 733/STF",
@@ -892,27 +902,17 @@
       "Réu/ré"
      ]
     },
-    "tempest": "Não verificado",
-    "preparo": "Comprovado",
-    "prelim": "Há preliminares",
-    "repres": "Regular",
-    "midias": "Não se aplica",
-    "mpf": "Sem hipótese",
-    "resJulg": "Provido",
-    "consect": "Não",
-    "honor": "Sem honorários recursais",
-    "topico": "Não",
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-21T01:30:51.429Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-09",
     "lote": {
      "id": "2886",
      "item": 8,
      "autos": 0
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-09"
    }
   },
   {
@@ -932,6 +932,16 @@
    "dataLiberacao": "2026-11-19",
    "obs": "",
    "ctl": {
+    "mpf": "Sem hipótese",
+    "prelim": "Há preliminares",
+    "tempest": "Não verificado",
+    "preparo": "Comprovado",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "resJulg": "Provido",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
+    "topico": "Não",
     "cartao": {
      "tipoJ": "Apelação",
      "relacionado": "Tema 1.433/STJ (ProAfR no REsp 2.234.888); Tema 1.075/STF; Tema 733/STF",
@@ -1069,27 +1079,17 @@
       "Réu/ré"
      ]
     },
-    "tempest": "Não verificado",
-    "preparo": "Comprovado",
-    "prelim": "Há preliminares",
-    "repres": "Regular",
-    "midias": "Não se aplica",
-    "mpf": "Sem hipótese",
-    "resJulg": "Provido",
-    "consect": "Não",
-    "honor": "Sem honorários recursais",
-    "topico": "Não",
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-21T01:31:00.042Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-09",
     "lote": {
      "id": "2886",
      "item": 9,
      "autos": 0
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-09"
    }
   },
   {
@@ -1109,18 +1109,18 @@
    "dataLiberacao": "2026-11-20",
    "obs": "Apelação em MS",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-20T20:21:20.512Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-09",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-20T20:21:20.512Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-09"
    }
   },
   {
@@ -1140,19 +1140,19 @@
    "dataLiberacao": "2026-11-20",
    "obs": "",
    "ctl": {
-    "sopref": "Presencial",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-20T20:21:29.222Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-19",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-20T20:21:29.222Z",
+    "sopref": "Presencial",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -1172,12 +1172,7 @@
    "dataLiberacao": "2026-11-18",
    "obs": "",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T02:49:23.998Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
+    "resJulg": "Desprovido",
     "cartao": {
      "tipoJ": "Agravo Interno",
      "agint": {
@@ -1216,12 +1211,17 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Desprovido",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:49:23.998Z",
     "lote": {
      "id": "acorrigir",
      "item": 12,
      "autos": 36
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -1241,16 +1241,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-05",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-05"
    }
   },
   {
@@ -1270,16 +1270,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -1299,16 +1299,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -1328,16 +1328,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -1357,15 +1357,15 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20"
    }
   },
   {
@@ -1433,15 +1433,15 @@
    "obs": "PEDIDO DE CONCILIAÇÃO PENDENTE · Pedido de audiência de conciliação não apreciado.\nPendência: Pedido de audiência de conciliação não apreciado. · PEDIDO DE CONCILIAÇÃO PENDENTE · PEDIDO DE CONCILIAÇÃO PENDENTE · Pedido de audiência de conciliação não apreciado. Aguardando retorno do Renato",
    "ctl": {
     "meta": "M2B",
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20"
    }
   },
   {
@@ -1462,18 +1462,18 @@
    "obs": "ANALISAR RETIRADA DE PAUTA - INCOMPETÊNCIA - POSSUI PRIMEIRO JULGAMENTO",
    "ctl": {
     "meta": "M2B",
-    "sopref": "Presencial",
-    "editadoPor": "AgentMail",
-    "editadoEm": "2026-11-18T01:41:28.706Z",
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "AgentMail",
+    "editadoEm": "2026-11-18T01:41:28.706Z",
+    "sopref": "Presencial",
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20"
    }
   },
   {
@@ -1542,10 +1542,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-06",
+    "resJulg": "Parcialmente provido",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -1583,14 +1580,17 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Parcialmente provido",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:49:30.022Z",
     "lote": {
      "id": "acorrigir",
      "item": 24,
      "autos": 48
     },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T02:49:30.022Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-06"
    }
   },
   {
@@ -1632,16 +1632,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -1661,10 +1661,8 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-06",
+    "tempest": "Intempestivo",
+    "resJulg": "Desprovido",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -1694,15 +1692,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:49:36.015Z",
     "lote": {
      "id": "acorrigir",
      "item": 27,
      "autos": 39
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Desprovido",
-    "tempest": "Intempestivo",
-    "editadoEm": "2026-11-21T02:49:36.015Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-06"
    }
   },
   {
@@ -1732,16 +1732,16 @@
     "resJulg": "Desprovido",
     "consect": "Não",
     "honor": "Majorados",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-18"
    }
   },
   {
@@ -1761,10 +1761,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-09",
+    "resJulg": "Desprovido",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -1798,14 +1795,17 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Desprovido",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:49:41.256Z",
     "lote": {
      "id": "acorrigir",
      "item": 29,
      "autos": 52
     },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T02:49:41.256Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-09"
    }
   },
   {
@@ -1825,9 +1825,6 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
     "cartao": {
      "tipoJ": "Agravo de Instrumento",
      "ai": {
@@ -1847,12 +1844,15 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "acorrigir",
      "item": 30,
      "autos": 19
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20"
    }
   },
   {
@@ -1872,10 +1872,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-09",
+    "resJulg": "Desprovido",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -1899,14 +1896,17 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T03:05:46.249Z",
     "lote": {
      "id": "acorrigir",
      "item": 31,
      "autos": 36
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Desprovido",
-    "editadoEm": "2026-11-21T03:05:46.249Z",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-09",
     "sopref": "Presencial"
    }
   },
@@ -1927,15 +1927,15 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20"
    }
   },
   {
@@ -1955,12 +1955,6 @@
    "dataLiberacao": "",
    "obs": "Planilha de 18/11: a coluna Resultado indica desprovimento. Os demais controles da minuta constam na planilha.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:20:09.707Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18",
     "mpf": "Interesse público ou social (178, I)",
     "parecer": "Com parecer",
     "prelim": "Há preliminares",
@@ -1976,7 +1970,13 @@
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:20:09.707Z",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-18"
    }
   },
   {
@@ -1996,6 +1996,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2007,12 +2013,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Réu/ré",
-      "Autor(a)"
-     ]
     }
    }
   },
@@ -2033,19 +2033,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "planilhaDataMinuta": "2026-11-19",
     "mpf": "Sem hipótese",
     "parecer": "Com parecer",
     "prelim": "Há preliminares",
@@ -2061,7 +2048,20 @@
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -2081,18 +2081,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -2117,12 +2105,24 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "acorrigir",
      "item": 36,
      "autos": 83
     },
-    "editadoPor": "Index",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
     "planilhaDataMinuta": "2026-11-19"
    }
   },
@@ -2143,9 +2143,15 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "sopref": "Presencial",
+    "cartao": {
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
     "editadoPor": "AgentMail",
     "editadoEm": "2026-11-18T01:41:28.700Z",
+    "sopref": "Presencial",
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2157,12 +2163,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Réu/ré",
-      "Autor(a)"
-     ]
     }
    }
   },
@@ -2183,6 +2183,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2194,12 +2200,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Réu/ré",
-      "Autor(a)"
-     ]
     }
    }
   },
@@ -2220,6 +2220,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2231,12 +2237,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -2267,13 +2267,19 @@
     "resJulg": "Desprovido",
     "consect": "Não",
     "honor": "Sem honorários recursais",
+    "intercor": "Dr. Muta, 20/11/2026: mandado de segurança que não foi para parecer do MPF; minuta passa a José (antes, Victor), por divergência de interpretação. Abrir vista ao MPF antes do julgamento [VALIDAR retirada de pauta].",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-20T22:22:29.269Z",
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
     "planilhaDataMinuta": "2026-11-16",
-    "intercor": "Dr. Muta, 20/11/2026: mandado de segurança que não foi para parecer do MPF; minuta passa a José (antes, Victor), por divergência de interpretação. Abrir vista ao MPF antes do julgamento [VALIDAR retirada de pauta].",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-20T22:22:29.269Z",
     "historicoDesignacoes": [
      {
       "em": "2026-11-20T22:22:29.269Z",
@@ -2286,13 +2292,7 @@
        }
       ]
      }
-    ],
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
-    }
+    ]
    }
   },
   {
@@ -2312,19 +2312,19 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "sopref": "Virtual",
-    "editadoPor": "AgentMail",
-    "editadoEm": "2026-11-18T01:41:28.702Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "AgentMail",
+    "editadoEm": "2026-11-18T01:41:28.702Z",
+    "sopref": "Virtual",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -2344,12 +2344,6 @@
    "dataLiberacao": "",
    "obs": "Planilha de 18/11: a coluna Resultado indica desprovimento. Os demais controles da minuta constam na planilha.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:20:13.603Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18",
     "mpf": "Sem hipótese",
     "parecer": "Com parecer",
     "prelim": "Sem preliminares",
@@ -2365,7 +2359,13 @@
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:20:13.603Z",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-18"
    }
   },
   {
@@ -2385,21 +2385,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "editadoPor": "Victor",
-    "editadoEm": "2026-11-19T16:27:37.963Z",
-    "planilhaDataMinuta": "2026-11-19",
     "mpf": "Sem hipótese",
     "parecer": "Com parecer",
     "prelim": "Há preliminares",
@@ -2415,7 +2400,22 @@
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Victor",
+    "editadoEm": "2026-11-19T16:27:37.963Z",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -2435,10 +2435,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
+    "resJulg": "Desprovida",
     "cartao": {
      "tipoJ": "Remessa Necessária",
      "orig": {
@@ -2455,14 +2452,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:49:53.850Z",
     "lote": {
      "id": "acorrigir",
      "item": 44,
      "autos": 60
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Desprovida",
-    "editadoEm": "2026-11-21T02:49:53.850Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -2482,19 +2482,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "planilhaDataMinuta": "2026-11-19",
     "mpf": "Sem hipótese",
     "parecer": "Com parecer",
     "prelim": "Há preliminares",
@@ -2510,7 +2497,20 @@
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -2530,6 +2530,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Sim; liberação Sim (relatório, voto e ementa). Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2545,12 +2551,6 @@
       "ementa"
      ],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Réu/ré",
-      "Autor(a)"
-     ]
     }
    }
   },
@@ -2571,19 +2571,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "planilhaDataMinuta": "2026-11-19",
     "mpf": "Interesse público ou social (178, I)",
     "parecer": "Com parecer",
     "prelim": "Há preliminares",
@@ -2599,7 +2586,20 @@
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -2619,10 +2619,16 @@
    "dataLiberacao": "",
    "obs": "SOLICITAÇÃO DE RETIRADA DE PAUTA — Existência de pedido anterior de desistência, não identificado na triagem prévia à inclusão em pauta. Submeter à apreciação do relator; retirada ainda não deliberada.\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11.",
    "ctl": {
+    "intercor": "Solicitação de retirada de pauta por pedido anterior de desistência — pendente de apreciação.",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "intercor": "Solicitação de retirada de pauta por pedido anterior de desistência — pendente de apreciação.",
     "pjeConferencia": {
      "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
      "referencia": "2026-11-18",
@@ -2631,12 +2637,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -2657,20 +2657,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T03:34:36.588Z",
     "cartao": {
      "papeis": [
       "Réu/ré",
@@ -2685,6 +2671,20 @@
        "obs": "Movida de Intercorrência em 20/11/2026: alerta a conferir, não processo retirado ou adiado."
       }
      ]
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T03:34:36.588Z",
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
     }
    }
   },
@@ -2705,19 +2705,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "planilhaDataMinuta": "2026-11-19",
     "mpf": "Sem hipótese",
     "parecer": "Com parecer",
     "prelim": "Há preliminares",
@@ -2733,7 +2720,20 @@
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -2753,10 +2753,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
+    "resJulg": "Desprovida",
     "cartao": {
      "tipoJ": "Remessa Necessária",
      "orig": {
@@ -2783,14 +2780,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:50:00.511Z",
     "lote": {
      "id": "acorrigir",
      "item": 51,
      "autos": 64
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Desprovida",
-    "editadoEm": "2026-11-21T02:50:00.511Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -2810,6 +2810,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2821,12 +2827,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -2847,16 +2847,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -2899,6 +2899,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2911,13 +2917,7 @@
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
     },
-    "planilhaDataMinuta": "2026-11-19",
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
-    }
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -2938,16 +2938,16 @@
    "obs": "PROCESSO CONEXO JULGADO EM 23/07/2026",
    "ctl": {
     "meta": "M7",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -2991,10 +2991,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
+    "resJulg": "Desprovido",
     "cartao": {
      "tipoJ": "Agravo Interno",
      "agint": {
@@ -3017,14 +3014,17 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:50:07.359Z",
     "lote": {
      "id": "acorrigir",
      "item": 58,
      "autos": 18
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Desprovido",
-    "editadoEm": "2026-11-21T02:50:07.359Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -3068,19 +3068,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
-    "historicoRetificacoes": [
-     {
-      "campo": "dataMinuta",
-      "anterior": "2026-11-13",
-      "novo": "2026-11-18",
-      "registradoEm": "2026-11-18",
-      "origem": "Retificação manual solicitada pelo gestor"
-     }
-    ],
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3117,13 +3105,25 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 60,
      "autos": 41
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13",
+    "historicoRetificacoes": [
+     {
+      "campo": "dataMinuta",
+      "anterior": "2026-11-13",
+      "novo": "2026-11-18",
+      "registradoEm": "2026-11-18",
+      "origem": "Retificação manual solicitada pelo gestor"
+     }
+    ]
    }
   },
   {
@@ -3143,19 +3143,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
-    "historicoRetificacoes": [
-     {
-      "campo": "dataMinuta",
-      "anterior": "2026-11-16",
-      "novo": "2026-11-18",
-      "registradoEm": "2026-11-18",
-      "origem": "Retificação manual solicitada pelo gestor"
-     }
-    ],
+    "resJulg": "Desprovimento da apelação e da remessa necessária [VALIDAR: depende da prova do crédito presumido]",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3189,13 +3177,25 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Desprovimento da apelação e da remessa necessária [VALIDAR: depende da prova do crédito presumido]",
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 61,
      "autos": 51
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16",
+    "historicoRetificacoes": [
+     {
+      "campo": "dataMinuta",
+      "anterior": "2026-11-16",
+      "novo": "2026-11-18",
+      "registradoEm": "2026-11-18",
+      "origem": "Retificação manual solicitada pelo gestor"
+     }
+    ]
    }
   },
   {
@@ -3215,18 +3215,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3251,12 +3239,24 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 62,
      "autos": 45
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    }
    }
   },
   {
@@ -3276,19 +3276,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
-    "historicoRetificacoes": [
-     {
-      "campo": "dataMinuta",
-      "anterior": "2026-11-16",
-      "novo": "2026-11-18",
-      "registradoEm": "2026-11-18",
-      "origem": "Retificação manual solicitada pelo gestor"
-     }
-    ],
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3325,13 +3313,25 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 63,
      "autos": 49
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16",
+    "historicoRetificacoes": [
+     {
+      "campo": "dataMinuta",
+      "anterior": "2026-11-16",
+      "novo": "2026-11-18",
+      "registradoEm": "2026-11-18",
+      "origem": "Retificação manual solicitada pelo gestor"
+     }
+    ]
    }
   },
   {
@@ -3351,12 +3351,7 @@
    "dataLiberacao": "",
    "obs": "PIS/COFINS tema 843 STF · Planilha de 18/11: consta como minutado, sem data da minuta; conferir.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:25.117Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-17",
+    "resJulg": "Desprovimento da apelação da União e da remessa necessária; provimento da apelação da impetrante para estender a exclusão ao PIS e à COFINS",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3397,12 +3392,17 @@
       "Réu/ré"
      ]
     },
-    "resJulg": "Desprovimento da apelação da União e da remessa necessária; provimento da apelação da impetrante para estender a exclusão ao PIS e à COFINS",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:25.117Z",
     "lote": {
      "id": "irpj-icms",
      "item": 64,
      "autos": 57
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-17"
    }
   },
   {
@@ -3422,18 +3422,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3462,12 +3450,24 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 65,
      "autos": 74
     },
-    "editadoPor": "Index",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
     "planilhaDataMinuta": "2026-11-19"
    }
   },
@@ -3488,10 +3488,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3522,13 +3519,16 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 66,
      "autos": 44
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -3548,18 +3548,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Sim; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Sim",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3591,14 +3579,26 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:31:18.443Z",
     "lote": {
      "id": "irpj-icms",
      "item": 67,
      "autos": 52
     },
-    "editadoPor": "Bruno",
-    "planilhaDataMinuta": "2026-11-18",
-    "editadoEm": "2026-11-21T01:31:18.443Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Sim",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-18"
    }
   },
   {
@@ -3618,18 +3618,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -3657,12 +3645,24 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "acorrigir",
      "item": 68,
      "autos": 50
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    }
    }
   },
   {
@@ -3682,18 +3682,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3722,12 +3710,24 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 69,
      "autos": 44
     },
-    "editadoPor": "Index",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
     "planilhaDataMinuta": "2026-11-19"
    }
   },
@@ -3748,13 +3748,7 @@
    "dataLiberacao": "",
    "obs": "Planilha de 18/11: consta como minutado, sem data da minuta; conferir.",
    "ctl": {
-    "sopref": "Virtual",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T01:38:08.017Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18",
+    "resJulg": "Parcial provimento da apelação e da remessa necessária para afastar a repetição e a restituição administrativa do indébito, mantida a compensação",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3809,12 +3803,18 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Parcial provimento da apelação e da remessa necessária para afastar a repetição e a restituição administrativa do indébito, mantida a compensação",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:38:08.017Z",
     "lote": {
      "id": "irpj-icms",
      "item": 70,
      "autos": 43
-    }
+    },
+    "sopref": "Virtual",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-18"
    }
   },
   {
@@ -3834,6 +3834,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -3845,12 +3851,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -3871,19 +3871,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Sim; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Sim",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3915,13 +3902,26 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:31:24.897Z",
     "lote": {
      "id": "irpj-icms",
      "item": 72,
      "autos": 58
     },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T01:31:24.897Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-18",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Sim",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    }
    }
   },
   {
@@ -3941,10 +3941,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
+    "resJulg": "Rejeitada a preliminar; provimento da apelação e da remessa necessária para denegar a segurança",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -3973,13 +3970,16 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Rejeitada a preliminar; provimento da apelação e da remessa necessária para denegar a segurança",
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 73,
      "autos": 84
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -3999,17 +3999,11 @@
    "dataLiberacao": "",
    "obs": "Modelo base: 5000553-35.2017.4.03.6114",
    "ctl": {
-    "tempest": "Intempestivo",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T01:39:29.641Z",
-    "sopref": "Presencial",
     "mpf": "Mandado de segurança",
     "parecer": "Com parecer",
     "prelim": "Há preliminares",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-17",
+    "tempest": "Intempestivo",
+    "resJulg": "Parcial provimento da apelação para afastar a litispendência e, nos termos do artigo 1.013, § 3º, I, do CPC, conceder parcialmente a segurança",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4038,12 +4032,18 @@
       "Réu/ré"
      ]
     },
-    "resJulg": "Parcial provimento da apelação para afastar a litispendência e, nos termos do artigo 1.013, § 3º, I, do CPC, conceder parcialmente a segurança",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:39:29.641Z",
     "lote": {
      "id": "irpj-icms",
      "item": 74,
      "autos": 61
-    }
+    },
+    "sopref": "Presencial",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-17"
    }
   },
   {
@@ -4063,10 +4063,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
+    "resJulg": "Desprovimento da apelação da União e da remessa necessária [VALIDAR: autuação registra a impetrante como apelante]",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4103,13 +4100,16 @@
       "Réu/ré"
      ]
     },
-    "resJulg": "Desprovimento da apelação da União e da remessa necessária [VALIDAR: autuação registra a impetrante como apelante]",
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 75,
      "autos": 38
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -4129,18 +4129,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4169,12 +4157,24 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 76,
      "autos": 256
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    }
    }
   },
   {
@@ -4194,13 +4194,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "sopref": "Virtual",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T16:43:25.668Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
+    "resJulg": "Apelação conhecida em parte e desprovida; remessa necessária desprovida",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -4229,12 +4223,18 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Apelação conhecida em parte e desprovida; remessa necessária desprovida",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T16:43:25.668Z",
     "lote": {
      "id": "irpj-icms",
      "item": 77,
      "autos": 80
-    }
+    },
+    "sopref": "Virtual",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -4254,10 +4254,7 @@
    "dataLiberacao": "",
    "obs": "modelo base - 5011026-63.2019.4.03.6000",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
+    "resJulg": "Desprovimento da apelação e da remessa necessária",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4301,14 +4298,17 @@
       "Autor(a)"
      ]
     },
-    "resJulg": "Desprovimento da apelação e da remessa necessária",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:38:11.824Z",
     "lote": {
      "id": "irpj-icms",
      "item": 78,
      "autos": 53
     },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T01:38:11.824Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -4328,10 +4328,6 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-20",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4363,13 +4359,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T06:14:28.459Z",
     "lote": {
      "id": "irpj-icms",
      "item": 79,
      "autos": 66
     },
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T06:14:28.459Z"
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-20"
    }
   },
   {
@@ -4399,16 +4399,16 @@
     "resJulg": "Desprovido",
     "consect": "Não",
     "honor": "Sem honorários recursais",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -4428,18 +4428,6 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4468,12 +4456,24 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Index",
     "lote": {
      "id": "irpj-icms",
      "item": 81,
      "autos": 53
     },
-    "editadoPor": "Index"
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    }
    }
   },
   {
@@ -4493,13 +4493,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "sopref": "Virtual",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T02:50:14.159Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-05",
+    "resJulg": "Parcialmente provido",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4529,12 +4523,18 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:50:14.159Z",
     "lote": {
      "id": "acorrigir",
      "item": 82,
      "autos": 56
     },
-    "resJulg": "Parcialmente provido"
+    "sopref": "Virtual",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-05"
    }
   },
   {
@@ -4588,16 +4588,16 @@
     "resJulg": "Desprovido",
     "consect": "Não",
     "honor": "Sem honorários recursais",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-17",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-17"
    }
   },
   {
@@ -4617,16 +4617,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-05",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-05"
    }
   },
   {
@@ -4646,10 +4646,7 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-05",
+    "resJulg": "Desprovido",
     "cartao": {
      "tipoJ": "Remessa Necessária",
      "orig": {
@@ -4666,14 +4663,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:50:19.271Z",
     "lote": {
      "id": "acorrigir",
      "item": 86,
      "autos": 49
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Desprovido",
-    "editadoEm": "2026-11-21T02:50:19.271Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-05"
    }
   },
   {
@@ -4693,14 +4693,14 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
+    "midias": "Juntadas",
     "meta": "M2B",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T05:43:18.514Z",
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-17",
-    "midias": "Juntadas",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T05:43:18.514Z"
+    "planilhaDataMinuta": "2026-11-17"
    }
   },
   {
@@ -4721,6 +4721,8 @@
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.\nRENÚNCIA À PRETENSÃO - DECISÃO",
    "ctl": {
     "meta": "M2B",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T06:14:33.824Z",
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -4733,9 +4735,7 @@
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
     },
-    "planilhaDataMinuta": "2026-11-19",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T06:14:33.824Z"
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -4789,16 +4789,16 @@
    "obs": "",
    "ctl": {
     "meta": "M2B",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -4818,11 +4818,17 @@
    "dataLiberacao": "",
    "obs": "SOLICITAÇÃO DE RETIRADA DE PAUTA — Existência de pedido anterior de desistência, não identificado na triagem prévia à inclusão em pauta. Submeter à apreciação do relator; retirada ainda não deliberada.\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11.",
    "ctl": {
+    "intercor": "Solicitação de retirada de pauta por pedido anterior de desistência — pendente de apreciação.",
     "meta": "M2B",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
-    "intercor": "Solicitação de retirada de pauta por pedido anterior de desistência — pendente de apreciação.",
     "pjeConferencia": {
      "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
      "referencia": "2026-11-18",
@@ -4831,12 +4837,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -4922,6 +4922,12 @@
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
     "meta": "M2B",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -4933,12 +4939,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -4959,18 +4959,7 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
+    "midias": "Juntadas",
     "cartao": {
      "tipoJ": "Apelação",
      "orig": {
@@ -4998,15 +4987,26 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T05:43:33.772Z",
     "lote": {
      "id": "acorrigir",
      "item": 95,
      "autos": 75
     },
-    "editadoPor": "Bruno",
-    "planilhaDataMinuta": "2026-11-12",
-    "editadoEm": "2026-11-21T05:43:33.772Z",
-    "midias": "Juntadas"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -5026,10 +5026,8 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-18",
+    "resJulg": "Embargos parcialmente acolhidos, sem efeitos infringentes",
+    "intercor": "Dr. Muta, 19/11/2026: embargos de declaração contra acórdão da 6ª Turma (ID 380861553, 17/06/2026, Des. Fed. Valdeci dos Santos). Devolver ao órgão prolator; não julgar nesta pauta.",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -5052,15 +5050,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:50:24.408Z",
     "lote": {
      "id": "acorrigir",
      "item": 96,
      "autos": 65
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Embargos parcialmente acolhidos, sem efeitos infringentes",
-    "intercor": "Dr. Muta, 19/11/2026: embargos de declaração contra acórdão da 6ª Turma (ID 380861553, 17/06/2026, Des. Fed. Valdeci dos Santos). Devolver ao órgão prolator; não julgar nesta pauta.",
-    "editadoEm": "2026-11-21T02:50:24.408Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-18"
    }
   },
   {
@@ -5081,18 +5081,6 @@
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
     "meta": "M2B",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "obsGeral": "Fora do tema? pessoa física, processo de 2011: conferir se é o mesmo tema. Sem autos e sem minuta no lote.",
@@ -5116,14 +5104,26 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T03:34:52.116Z",
     "lote": {
      "id": "irpj-icms",
      "item": 97,
      "autos": 37
     },
-    "editadoPor": "Bruno",
-    "planilhaDataMinuta": "2026-11-19",
-    "editadoEm": "2026-11-21T03:34:52.116Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    },
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -5153,16 +5153,16 @@
     "resJulg": "Desprovido",
     "consect": "Não",
     "honor": "Sem honorários recursais",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-17",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-17"
    }
   },
   {
@@ -5183,18 +5183,18 @@
    "obs": "honorários · Planilha de 18/11: consta como minutado, sem data da minuta; conferir.",
    "ctl": {
     "meta": "M2B",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:33.408Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:33.408Z",
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -5214,19 +5214,8 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.\nA sentença julgou conjuntamente dois processos. Esse, que esta pautado (em que a apelação trata somente sobre honorários) e a ação cominatória 0000799-91.2013.4.03.6006. Foi interposto recurso somente no caso pautado, mas a ação conexa subiu com remessa necessária e está no gabinete. A sentença proferida à égide do CPC/73, logo, seria necessário o conhecimento da remessa e análise do mérito.",
    "ctl": {
+    "intercor": "Retirado de pauta (grupo GabA/TRMS, 19/11/2026): julgamento conjunto com a RemNecCiv 0000799-91.2013.4.03.6006 no próximo pede-dia.",
     "meta": "M2B",
-    "planilhaEtapa": "A fazer",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "pjeConferencia": {
-     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
-     "referencia": "2026-11-18",
-     "fila": "[Sessão] Aguardando a sessão",
-     "minuta": "Não",
-     "liberacao": "Não",
-     "pecasLiberadas": [],
-     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
     "cartao": {
      "tipoJ": "Apelação",
      "pendencias": [
@@ -5242,14 +5231,25 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T04:03:42.960Z",
     "lote": {
      "id": "acorrigir",
      "item": 100,
      "autos": 19
     },
-    "editadoPor": "Bruno",
-    "intercor": "Retirado de pauta (grupo GabA/TRMS, 19/11/2026): julgamento conjunto com a RemNecCiv 0000799-91.2013.4.03.6006 no próximo pede-dia.",
-    "editadoEm": "2026-11-21T04:03:42.960Z"
+    "planilhaEtapa": "A fazer",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "pjeConferencia": {
+     "fonte": "Relação de 39 processos conferidos no PJe (informada ao gabinete)",
+     "referencia": "2026-11-18",
+     "fila": "[Sessão] Aguardando a sessão",
+     "minuta": "Não",
+     "liberacao": "Não",
+     "pecasLiberadas": [],
+     "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
+    }
    }
   },
   {
@@ -5269,16 +5269,16 @@
    "dataLiberacao": "",
    "obs": "CORRIGIDO - Retratação não acolhida - modelo feito pelo Dr\nok - Retratação não acolhida - modelo feito pelo Dr",
    "ctl": {
-    "planilhaEtapa": "Liberado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Liberado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -5298,16 +5298,16 @@
    "dataLiberacao": "",
    "obs": "Retratação não acolhida. \nEmbargos de declaração corrigido de ofício\nok - Retratação não acolhida",
    "ctl": {
-    "planilhaEtapa": "Liberado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-05",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Liberado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-05"
    }
   },
   {
@@ -5327,18 +5327,18 @@
    "dataLiberacao": "",
    "obs": "CORRIGIDO - Retratação acolhida · Planilha de 18/11: a observação indica retratação não acolhida. Conferir a divergência com a anotação anterior.\nok - Retratação não acolhida",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:19:41.731Z",
-    "planilhaEtapa": "Liberado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:19:41.731Z",
+    "planilhaEtapa": "Liberado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -5358,18 +5358,18 @@
    "dataLiberacao": "",
    "obs": "CORRIGIDO - Retratação acolhida · Planilha de 18/11: a observação indica retratação não acolhida. Conferir a divergência com a anotação anterior.\nok - Dr mudou para não acolher Retratação",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:19:46.068Z",
-    "planilhaEtapa": "Liberado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:19:46.068Z",
+    "planilhaEtapa": "Liberado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -5389,16 +5389,16 @@
    "dataLiberacao": "",
    "obs": "CORRIGIDO - Retratação acolhida\nok - Retratação acolhida",
    "ctl": {
-    "planilhaEtapa": "Liberado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Liberado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -5418,18 +5418,18 @@
    "dataLiberacao": "",
    "obs": "CORRIGIDO - Retratação acolhida - modelo feito pelo Dr · Planilha de 18/11: a observação indica retratação não acolhida. Conferir a divergência com a anotação anterior.\nok - Dr mudou para não acolher Retratação",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:19:50.191Z",
-    "planilhaEtapa": "Liberado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-09",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:19:50.191Z",
+    "planilhaEtapa": "Liberado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-09"
    }
   },
   {
@@ -5449,16 +5449,16 @@
    "dataLiberacao": "",
    "obs": "Retratação - Tema 1300 - sem modelo\nrefazer minuta conforme correção Retratação",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -5478,18 +5478,18 @@
    "dataLiberacao": "",
    "obs": "CORRIGIDO - Retratação acolhida · Planilha de 18/11: a observação indica retratação não acolhida. Conferir a divergência com a anotação anterior.\nok - Dr mudou para não acolher Retratação",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:19:54.260Z",
-    "planilhaEtapa": "Liberado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-05",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:19:54.260Z",
+    "planilhaEtapa": "Liberado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-05"
    }
   },
   {
@@ -5510,6 +5510,12 @@
    "obs": "Apelação\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
     "meta": "M2B",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "Corrigido",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -5522,13 +5528,7 @@
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
     },
-    "planilhaDataMinuta": "2026-11-19",
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
-    }
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -5605,16 +5605,16 @@
    "obs": "",
    "ctl": {
     "meta": "M?",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -5634,7 +5634,22 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão - ED] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "mpf": "Sem hipótese",
+    "prelim": "Sem preliminares",
+    "tempest": "Tempestivo",
+    "preparo": "Não se aplica",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "resJulg": "Rejeitados",
+    "consect": "Não",
+    "honor": "Sem honorários recursais",
     "meta": "M?",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -5647,22 +5662,7 @@
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
     },
-    "planilhaDataMinuta": "2026-11-19",
-    "mpf": "Sem hipótese",
-    "prelim": "Sem preliminares",
-    "tempest": "Tempestivo",
-    "preparo": "Não se aplica",
-    "repres": "Regular",
-    "midias": "Não se aplica",
-    "resJulg": "Rejeitados",
-    "consect": "Não",
-    "honor": "Sem honorários recursais",
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
-    }
+    "planilhaDataMinuta": "2026-11-19"
    }
   },
   {
@@ -5683,6 +5683,12 @@
    "obs": "CONFERÊNCIA PJe — [Sessão - ED] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
     "meta": "M?",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -5694,12 +5700,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -5720,11 +5720,8 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
+    "resJulg": "Embargos rejeitados",
     "meta": "M?",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -5743,14 +5740,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:50:30.322Z",
     "lote": {
      "id": "acorrigir",
      "item": 115,
      "autos": 81
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Embargos rejeitados",
-    "editadoEm": "2026-11-21T02:50:30.322Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -5770,16 +5770,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -5799,10 +5799,7 @@
    "dataLiberacao": "",
    "obs": "Aguardando posição do Dr.",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
+    "resJulg": "Embargos rejeitados",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -5835,14 +5832,17 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T03:35:00.626Z",
     "lote": {
      "id": "acorrigir",
      "item": 117,
      "autos": 72
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Embargos rejeitados",
-    "editadoEm": "2026-11-21T03:35:00.626Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -5862,11 +5862,8 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
+    "resJulg": "Embargos rejeitados",
     "meta": "M?",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
     "cartao": {
      "tipoJ": "Agravo Interno",
      "orig": {
@@ -5885,14 +5882,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T02:50:41.974Z",
     "lote": {
      "id": "acorrigir",
      "item": 118,
      "autos": 79
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Embargos rejeitados",
-    "editadoEm": "2026-11-21T02:50:41.974Z"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -5912,18 +5912,18 @@
    "dataLiberacao": "",
    "obs": "ED Acolhido · Planilha de 18/11: consta como corrigido, sem data. A observação indica embargos de declaração não conhecidos após nova minuta; conferir a divergência com o registro anterior.\nED - minuta refeita - não conhecido",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:49.093Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:49.093Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -5943,6 +5943,12 @@
    "dataLiberacao": "",
    "obs": "CONFERÊNCIA PJe — [Sessão - ED] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -5954,12 +5960,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -5980,12 +5980,7 @@
    "dataLiberacao": "2026-11-17",
    "obs": "com tutela e sobre seus efeitos",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-17T12:59:41.327Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
+    "resJulg": "Embargos rejeitados",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -6004,12 +5999,17 @@
       "Autor(a)"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-17T12:59:41.327Z",
     "lote": {
      "id": "acorrigir",
      "item": 121,
      "autos": 85
     },
-    "resJulg": "Embargos rejeitados"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -6029,13 +6029,8 @@
    "dataLiberacao": "2026-11-17",
    "obs": "",
    "ctl": {
+    "resJulg": "Embargos rejeitados",
     "meta": "M?",
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T03:35:07.575Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -6062,12 +6057,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T03:35:07.575Z",
     "lote": {
      "id": "acorrigir",
      "item": 122,
      "autos": 77
     },
-    "resJulg": "Embargos rejeitados"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -6087,12 +6087,6 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T01:31:35.029Z",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -6130,11 +6124,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:31:35.029Z",
     "lote": {
      "id": "irpj-icms",
      "item": 123,
      "autos": 74
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -6154,16 +6154,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-16",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-16"
    }
   },
   {
@@ -6184,6 +6184,12 @@
    "obs": "CONFERÊNCIA PJe — [Sessão - ED] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe vinculada à sessão ordinária de 30/11/2026.",
    "ctl": {
     "meta": "M?",
+    "cartao": {
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -6195,12 +6201,6 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    },
-    "cartao": {
-     "papeis": [
-      "Autor(a)",
-      "Réu/ré"
-     ]
     }
    }
   },
@@ -6244,18 +6244,18 @@
    "dataLiberacao": "",
    "obs": "voto adaptado - Alex · Planilha de 18/11: a observação indica acolhimento dos embargos quanto ao fator previdenciário.\nED: acolhido fator previdenciário · voto adaptado - Alex",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:19:57.902Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:19:57.902Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -6275,18 +6275,18 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado - voto refeito - Alex · Planilha de 18/11: consta como corrigido, sem data da correção; conferir.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:37.127Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:37.127Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -6306,18 +6306,18 @@
    "dataLiberacao": "",
    "obs": "ED Acolhido - voto refeito - Alex · Planilha de 18/11: consta como corrigido, sem data da correção; conferir.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:41.625Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:41.625Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -6337,16 +6337,16 @@
    "dataLiberacao": "",
    "obs": "ED do autor Rejeitado e ED do INSS Acolhido",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-13",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-13"
    }
   },
   {
@@ -6366,18 +6366,18 @@
    "dataLiberacao": "",
    "obs": "ED Acolhido Parcialmente · Planilha de 18/11: consta como corrigido, sem data da correção; conferir.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:45.659Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:45.659Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -6397,16 +6397,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -6426,16 +6426,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-03",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-03"
    }
   },
   {
@@ -6455,18 +6455,18 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado · Planilha de 18/11: consta como corrigido, sem data da correção; conferir.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:52.430Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:52.430Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -6486,16 +6486,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -6515,16 +6515,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -6544,16 +6544,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -6573,16 +6573,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-05",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-05"
    }
   },
   {
@@ -6602,18 +6602,18 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado · Planilha de 18/11: consta como corrigido, sem data da correção; conferir.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:55.934Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-10",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:55.934Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-10"
    }
   },
   {
@@ -6633,16 +6633,16 @@
    "dataLiberacao": "",
    "obs": "ED Acolhido",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-04",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-04"
    }
   },
   {
@@ -6662,18 +6662,18 @@
    "dataLiberacao": "",
    "obs": "TNU não vinvula o TRF · Planilha de 18/11: a observação indica acolhimento parcial dos embargos de declaração.\nED Acolhido Parcialmente",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:20:01.961Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:20:01.961Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -6693,18 +6693,18 @@
    "dataLiberacao": "",
    "obs": "Embargos de declaração rejeitados. · Planilha de 18/11: a observação indica acolhimento dos embargos de declaração. Conferir a divergência com a anotação anterior.\nED Acolhido",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:20:05.990Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-03",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:20:05.990Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-03"
    }
   },
   {
@@ -6747,16 +6747,16 @@
    "dataLiberacao": "",
    "obs": "ED Acolhido",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-06",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-06"
    }
   },
   {
@@ -6800,18 +6800,18 @@
    "dataLiberacao": "",
    "obs": "ED Acolhido Parcialmente · Planilha de 18/11: consta como corrigido, sem data da correção; conferir.",
    "ctl": {
-    "editadoPor": "Bruno",
-    "editadoEm": "2026-11-18T21:17:59.701Z",
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-18T21:17:59.701Z",
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -6831,16 +6831,16 @@
    "dataLiberacao": "",
    "obs": "ED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-06",
     "cartao": {
      "papeis": [
       "Autor(a)",
       "Réu/ré"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-06"
    }
   },
   {
@@ -6860,16 +6860,16 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-11",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-11"
    }
   },
   {
@@ -6889,16 +6889,16 @@
    "dataLiberacao": "",
    "obs": "Embargos de declaração rejeitados.\nED Rejeitado",
    "ctl": {
-    "planilhaEtapa": "Corrigido",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-03",
     "cartao": {
      "papeis": [
       "Réu/ré",
       "Autor(a)"
      ]
-    }
+    },
+    "planilhaEtapa": "Corrigido",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-03"
    }
   },
   {
@@ -6918,11 +6918,9 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
+    "midias": "Juntadas",
+    "resJulg": "Embargos parcialmente acolhidos, sem efeitos infringentes",
     "meta": "M?",
-    "planilhaEtapa": "Minutado",
-    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
-    "planilhaReferencia": "2026-11-20",
-    "planilhaDataMinuta": "2026-11-12",
     "cartao": {
      "tipoJ": "Embargos de Declaração",
      "orig": {
@@ -6941,15 +6939,17 @@
       "Réu/ré"
      ]
     },
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T05:43:26.034Z",
     "lote": {
      "id": "acorrigir",
      "item": 150,
      "autos": 140
     },
-    "editadoPor": "Bruno",
-    "resJulg": "Embargos parcialmente acolhidos, sem efeitos infringentes",
-    "editadoEm": "2026-11-21T05:43:26.034Z",
-    "midias": "Juntadas"
+    "planilhaEtapa": "Minutado",
+    "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
+    "planilhaReferencia": "2026-11-20",
+    "planilhaDataMinuta": "2026-11-12"
    }
   },
   {
@@ -6959,9 +6959,9 @@
    "classe": "AGRAVO DE INSTRUMENTO",
    "partes": "FUNDACAO NACIONAL DO INDIO x CLAUDINO MARCAL MARQUES",
    "servidor": "Wellington",
-   "corretor": "",
+   "corretor": "Saffioti",
    "criterioMinuta": "etiqueta do PJe",
-   "criterioCorrecao": "",
+   "criterioCorrecao": "regra · julgamento",
    "julgamento": "",
    "resultado": "",
    "dataMinuta": "",
