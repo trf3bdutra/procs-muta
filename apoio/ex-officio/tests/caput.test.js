@@ -119,7 +119,7 @@ test('Etapas da esteira: cabeçalho com rótulo dourado e título grande, sem fu
   const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
   const cap=r('caput/triagem/index.html');
   assert.ok(!/<h2>\d · /.test(cap)&&(cap.match(/class="cwe-et"/g)||[]).length>=9&&cap.includes('.cwe-et{border-top:2px solid var(--v)'),'cabeçalho das etapas');
-  for(const f of ['caput/triagem/index.html','caput/designacao/index.html','caput/competencias/index.html','caput/motor/index.html'])
+  for(const f of ['caput/triagem/index.html','caput/designacao/index.html','caput/motor/index.html'])
     assert.ok(r(f).includes('@supports not selector(::-webkit-scrollbar)')&&r(f).includes('::-webkit-scrollbar-button{display:none'),f);
   assert.ok(r('caput/motor/assets/css/07-identidade.css').includes('@supports not selector(::-webkit-scrollbar)'),'motor css');
 });
@@ -178,9 +178,9 @@ test('Motor: gravar a pauta devolve ctl.lote e as chaves de ctl que vieram do ar
 });
 
 test('Coordenação › Perfis › Competências: especialidade, prefere, evita e experiência (o que era a aba Perfis); matriz dentro de Produção; equipe atual ou com quem saiu',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),cp=fs.readFileSync(p.join(__dirname,'../../../caput/competencias/index.html'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),cp=cap;
   for(const x of ['function pfComp(','function pfCompGrava(','data-pfc-poe','data-pfc-mv','data-pfc-dis',"tipo === 'cmt:comp-perfil'","['comp', 'Competências'"])assert.ok(cap.includes(x),x);
-  for(const x of ['data-eqh="atual"',"OC={nomes:[],saiu:true}",'Produção e matriz',"if(v==='matriz')v='prod'","tipo:'cmt:comp-perfil'",'cmt:comp-recarregar','class="so-fora">Perfis'])assert.ok(cp.includes(x),x);
+  for(const x of ['data-eqh="atual"',"OC={nomes:[],saiu:true}",'Produção e matriz',"if(v==='matriz')v='prod'","tipo:'cmt:comp-perfil'",'window.CMTCompRecarregar()','class="so-fora">Perfis'])assert.ok(cp.includes(x),x);
 });
 
 test('Equipe: indisponível à mão ou pela ausência aprovada cobrindo hoje',()=>{
@@ -194,4 +194,16 @@ test('Comunicação: desembargador (página CMT) como destinatário e painel do 
   for(const x of ['name="dr"',"cgApi('/api/pendencias?com=1'",'id="wa-form"','async function waCarregar(',"cgApi('/api/notificacoes?wa=1'"])assert.ok(cap.includes(x),x);
   assert.ok(n.includes("if (req.query && req.query.wa) return require('./_wa-gabinete')(req, res);"),'rota');
   assert.ok(w.includes('L.gestor(u)')&&w.includes('ZERNIO_API_KEY || e.CAPUT_KEY')&&w.includes("modo === 'livre'")&&w.includes('apoio/equipe-whatsapp.json'),'endpoint');
+});
+
+test('Coordenação › Competências no código do Caput (sem moldura), com tela cheia; Chefia: Hoje na altura dos meses e linha do tempo compacta',()=>{
+  const fs=require('fs'),p=require('path'),vm=require('vm'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8'),cap=r('caput/triagem/index.html');
+  assert.ok(!cap.includes('<iframe title="Competências'),'sem iframe');
+  for(const x of ['<template id="comp-tpl">','window.CMTCompApp=function(document,window,location){','function compMonta(','function compTela(','id="comp-tela"','.cg-comp-p.full{position:fixed','attachShadow','d3-sankey'])assert.ok(cap.includes(x),x);
+  const tpl=cap.slice(cap.indexOf('<template id="comp-tpl">'),cap.indexOf('</template>'));
+  assert.ok(tpl.includes(':host{')&&!/:root|html[,.]/.test(tpl.split('</style>')[0]),'estilo no bloco isolado');
+  const fn=cap.match(/<script>\n\/\* Competências da equipe[\s\S]*?<\/script>/); assert.ok(fn,'script'); new vm.Script(fn[0].replace(/^<script>|<\/script>$/g,''));
+  assert.ok(r('caput/competencias/index.html').includes("location.replace('/caput/coordenacao')"),'página antiga leva à Coordenação');
+  assert.ok(cap.includes('tlLinha: 54')&&r('caput/motor/assets/js/11-calendario.js').includes('const LH=ex.tlLinha||74;'),'linha do tempo');
+  assert.ok(cap.includes('.cg-cal .cc-top>.cc-esq{position:relative!important;top:auto!important;align-self:stretch;contain:size'),'Hoje na altura dos meses');
 });
