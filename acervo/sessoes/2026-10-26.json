@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "26/10/2026",
  "date": "2026-10-26",
- "atualizadoEm": "2026-11-21T17:19:58.094Z",
+ "atualizadoEm": "2026-11-21T23:02:29.931Z",
  "itens": [
   {
    "cnj": "0000008-23.2025.4.03.6000",
@@ -1894,14 +1894,166 @@
    "ctl": {
     "cartao": {
      "tipoJ": "Apelação",
-     "pendencias": []
+     "pendencias": [],
+     "subassuntos": "Apelação de Fundo Nacional de Desenvolvimento da Educacao e de Fundo Nacional de Desenvolvimento da Educacao e de Leandro Aparecido Ghirotto e da União em procedimento comum (FIES) · pedido julgado procedente",
+     "sintese": "Trata-se de ação de procedimento comum ajuizada por LEANDRO APARECIDO GHIROTTO em face de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO - FNDE, BANCO DO BRASIL e UNIÃO FEDERAL, objetivando a suspensão da cobrança das prestações do financiamento até a data da conclusão do programa de residência médica, em 28/02/2026.",
+     "questoes": "[VALIDAR questões] FIES",
+     "rel": {
+      "razoes": "Fundo Nacional de Desenvolvimento da Educacao (ID 352720548, 28/08/2025): tópicos: 2 . Das Razões Para Reforma Da Sentença; 3 . Do Prequestionamento. Fundo Nacional de Desenvolvimento da Educacao [VALIDAR parte] (ID 352720553, 16/09/2025): [VALIDAR razões] Leandro Aparecido Ghirotto (ID 352720556, 18/09/2025): tópicos: 3. Das Razões Recursais; 3.1. Da Aplicabilidade Do Artigo. União (ID 352720561, 06/10/2025): tópicos: 2.1. Das Razões Da Reforma; 2.1.Da Informação Do Ministério Da Saúde - Extinçao Da Ação Em Face Da União A União ,.",
+      "contrarrazoes": "Contrarrazões: ID 352720564 (19/12/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "352720547",
+      "juizo": "Procedimento comum 5002050-85.2024.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "Ante o exposto, julgo procedente o pedido, resolvendo mérito nos termos do artigo 487, I do CPC. Defiro a antecipação de tutela para determinar que os réus suspendam a cobrança das parcelas do FIES relativas ao contrato nº 218.806.647 até o término da Residência Médica em Clínica Médica, previsto para 28/02/2026. Condeno os réus, pro rata, ao pagamento de honorários advocatícios, que fixo em R$1.000,00, nos termos do art. 85, §8º, do CPC."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica"
+     },
+     "adm": {
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Fundo Nacional de Desenvolvimento da Educacao",
+       "tipo": "Apelação",
+       "id": "352720548",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Fundo Nacional de Desenvolvimento da Educacao [VALIDAR parte]",
+       "tipo": "Apelação",
+       "id": "352720553",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Leandro Aparecido Ghirotto",
+       "tipo": "Apelação",
+       "id": "352720556",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "352720561",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "352720503",
+       "data": "2024-09-06",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 13
+       },
+       "trecho": "requerida ao pagamento de honorários sucumbência em 20% do valor da causa. Dá-se à causa o valor de R$ 432.384,30 (quatrocentos e trinta e dois mil trezentos e oitenta e quatro reais e trinta centavos), para fins fiscais. Nestes termos, pede deferimento. Marechal Cândido Rondon/PR, datado …"
+      },
+      {
+       "desc": "Decisão: gratuidade deferida",
+       "id": "352720522",
+       "data": "2024-09-10",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Diante do exposto, INDEFIRO o pedido de antecipação dos efeitos da tutela.CITE-SE e INTIME-SE a parte ré para contestar e especificar as provas que pretende produzir, justificando-as, sob pena de preclusão. Com a vinda da contestação, INTIME-SE a parte autora para, no prazo de 15 dias, apresentar …"
+      },
+      {
+       "desc": "Sentença",
+       "id": "352720547",
+       "data": "2025-08-25",
+       "nota": "Sentença ID 352720547 (25/08/2025): Ante o exposto, julgo procedente o pedido, resolvendo mérito nos termos do artigo 487, I do CPC.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Ante o exposto, julgo procedente o pedido, resolvendo mérito nos termos do artigo 487, I do CPC. Defiro a antecipação de tutela para determinar que os réus suspendam a cobrança das parcelas do FIES relativas ao contrato nº 218.806.647 até o término da Residência Médica em Clínica Médica, previsto …"
+      },
+      {
+       "desc": "Apelação de Fundo Nacional de Desenvolvimento da Educacao",
+       "id": "352720548",
+       "data": "2025-08-28",
+       "nota": "Fundo Nacional de Desenvolvimento da Educacao (ID 352720548, 28/08/2025): tópicos: 2 .",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 2858058157 EM 28/08/2025 09:40:11",
+        "paginas": 10
+       },
+       "trecho": "requer: 1 . a anulação da sentença, para que haja integração à lide da União Federal e do Agente Financeiro do contrato de financiamento estudantil celebrado até 2017.2., acaso já não tenha ocorrido; uma vez que detém atribuições legais para parte do procedimento de concessão do abatimento; 2 . …"
+      },
+      {
+       "desc": "Apelação de Fundo Nacional de Desenvolvimento da Educacao",
+       "id": "352720553",
+       "data": "2025-09-16",
+       "nota": "Fundo Nacional de Desenvolvimento da Educacao [VALIDAR parte] (ID 352720553, 16/09/2025): [VALIDAR razões] Leandro Aparecido Ghirotto (ID 352720556, 18/09/2025): tópicos: 3.",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 18
+       },
+       "trecho": "Diante do exposto, requer-se a revogação da decisão que determinou o cumprimento da ondem judicial, vez que a gestão do aludido programa cabe exclusivamente ao Ministério da Educação em conjunto com a autarquia do PÁGINA 11 DE 18 Sede Curitiba PR · Rua David Carneiro, 270 – São Francisco, CEP …"
+      },
+      {
+       "desc": "Apelação de Leandro Aparecido Ghirotto",
+       "id": "352720556",
+       "data": "2025-09-18",
+       "nota": "Fundo Nacional de Desenvolvimento da Educacao [VALIDAR parte] (ID 352720553, 16/09/2025): [VALIDAR razões] Leandro Aparecido Ghirotto (ID 352720556, 18/09/2025): tópicos: 3.",
+       "pje": {
+        "tipo": "Manifestação",
+        "paginas": 10
+       },
+       "trecho": "Diante do exposto, requer - se : a) O provimento do presente recurso para reformar a sentença quanto à verba honorária, determinando que os honorários advocatícios sejam fixados entre 8 % e 1 0% sobre o valor atualizado da causa, nos termos do art. 85, §§ 3 º e 4 º , do CPC; b) Na remota hipótese …"
+      },
+      {
+       "desc": "Apelação de União",
+       "id": "352720561",
+       "data": "2025-10-06",
+       "nota": "União (ID 352720561, 06/10/2025): tópicos: 2.1.",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 2958645325 EM 06/10/2025 15:41:55",
+        "paginas": 7
+       },
+       "trecho": "Ante o exposto, requer a União seja dado provimento ao presente recurso, reformando-se a r. sentença para julgar improcedentes os pedidos autorais. Nestes termos, pede-se deferimento. São Paulo, 06 de outubro de 2025. NILMA DE CASTRO ABE ADVOGADO DA UNIÃO"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "352720564",
+       "data": "2025-12-19",
+       "nota": "Contrarrazões: ID 352720564 (19/12/2025).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 12
+       },
+       "trecho": "Pelo exposto, requer-se a Vossa Excelência a) Seja negado provimento aos Recursos, a fim de ser reconhecida a ilegitimidade passiva do Banco do Brasil, com a consequente extinção do feito em relação a este nos termos do artigo 485, inciso VI do Código de Processo Civil. b) Bem como seja mantido o …"
+      }
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 353150732 · 04/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 352720547 · 25/08/2025 — sentença: julgou procedente o pedido | última peça: Contrarrazões (apelado) · ID 352720564 · 19/12/2025 | última movimentação: 28/10/2026 00:48 · Decorrido prazo de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO em 27/10/2026 23:59. · Precedentes do Relator a conferir (busca por semelhança): ApCiv 5002193-50.2019.4.03.6002 (06/07/2026, DESPROV): DIREITO PROCESSUAL CIVIL E ADMINISTRATIVO. MANDADO DE SEGURANÇA. FIES. ADITAMENTOS CONTRATUAIS. ERRO OPERACIONAL. SISFIES. DIREITO LÍQUIDO E CERTO. RE · ApelRemNec 5002829-11.2022.4.03.6002 (26/10/2026, DESPROV): DIREITO ADMINISTRATIVO E PROCESSUAL CIVIL. MANDADO DE SEGURANÇA. PROGRAMA DE FINANCIAMENTO ESTUDANTIL (FIES). ABATIMENTO DO SALDO DEVEDOR. MÉDICO ATUA [VALIDAR] · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "FIES — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ],
+     "obsGeral": "Apelação de Fundo Nacional de Desenvolvimento da Educacao e de Fundo Nacional de Desenvolvimento da Educacao e de Leandro Aparecido Ghirotto e da União contra sentença (pedido julgado procedente): Ante o exposto, julgo procedente o pedido, resolvendo mérito nos termos do artigo 487, I do CPC. Defiro a antecipação de tutela para determinar que os réus suspendam a cobrança das parcelas do FIES relativas ao contrato nº 218.806.647 até o"
     },
     "lote": {
      "id": "adp-ap-1s",
      "item": 121,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Index",
+    "tempest": "Não verificado",
+    "preparo": "Não verificado",
+    "prelim": "Sem preliminares",
+    "repres": "Não verificado",
+    "midias": "Não se aplica",
+    "mpf": "Sem hipótese",
+    "parecer": "Não verificado",
+    "resJulg": "Ato a proferir: apelação de Fundo Nacional de Desenvolvimento da Educacao e Fundo Nacional de Desenvolvimento da Educacao e Leandro Aparecido Ghirotto e União (ID 352720548, ID 352720553, ID 352720556, ID 352720561) da sentença ID 352720547; contrarrazões (ID 352720564) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença); Parte apelante]"
    }
   },
   {
