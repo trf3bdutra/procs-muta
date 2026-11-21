@@ -162,3 +162,42 @@ html.ed-cmt .ed-top [data-edzip],html.ed-cmt .ed-top [data-edgit],html.ed-cmt .e
 .ed-rap [data-rapdel].conf{border-color:#a7433d;color:#a7433d}
 /* no editor, as entradas rápidas têm aba própria: saem do topo do manual */
 #ed-man #mn-rap,#ed-man .mn-toc-r{display:none!important}
+/* Parágrafos e Peças em leitura (editor do desembargador) */
+.lp-ler{max-width:820px;margin:0 auto;padding:18px 26px 70px;font-family:'Source Serif 4',Georgia,serif;color:var(--ink,#1f2d33)}
+.lp-ler .lp-hd{margin:6px 0 18px}.lp-ler .lp-hd h1{margin:2px 0 4px;font-size:30px;font-weight:600}
+.lp-ler .mn-k{font:10px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mut,#5d6b72);margin:0}
+.lp-ler .lp-sub{margin:0 0 6px;color:var(--mut,#5d6b72);font-size:14.5px}
+.lp-ler h2{display:flex;align-items:center;gap:10px;margin:30px 0 6px;padding-bottom:8px;border-bottom:1px solid currentColor;font-size:21px;font-weight:600}
+.lp-ler h2 span{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#8a6a2f;color:#fff;font:600 12px Figtree,system-ui,sans-serif}
+.lp-ler h2 small{margin-left:auto;font:400 11px ui-monospace,monospace;color:var(--mut,#5d6b72)}
+.lp-ler h2.lp-g{font:700 11px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;border-bottom-color:var(--line,#ded9cc);color:var(--mut,#5d6b72)}
+.lp-ler h3{margin:20px 0 6px;font:600 15px Figtree,system-ui,sans-serif;color:#1b5878}
+.lp-ler .lp-c{position:relative;margin:0 -14px;padding:10px 48px 10px 14px;border-left:2px solid transparent;transition:background .15s,border-color .15s}
+.lp-ler .lp-c:hover{background:rgba(255,255,255,.6);border-left-color:#c9a45c}
+.lp-ler .lp-c h4{margin:0 0 4px;font:600 15px Figtree,system-ui,sans-serif}
+.lp-ler .lp-t p{margin:0 0 6px;font-size:15.5px;line-height:1.6;text-align:justify}
+.lp-ler .lp-v{display:inline-block;padding:0 6px;border-radius:3px;background:#e3eef8;color:#245b8c;font:600 12px Figtree,system-ui,sans-serif;line-height:1.6;text-indent:0}
+.lp-ler .lp-v.pf{background:#fbf4e3;color:#805b18}
+.lp-ler .lp-u{margin:4px 0 2px;font:13px/1.45 Figtree,system-ui,sans-serif;color:var(--mut,#5d6b72)}.lp-ler .lp-u b{font-weight:600;color:#3f4f57;margin-right:4px}
+.lp-ler .lp-m{margin:0;font:10.5px ui-monospace,monospace;letter-spacing:.04em;color:var(--mut,#8a8f98)}
+.lp-ler .mn-pen{position:absolute;right:6px;top:8px;width:30px;height:30px;display:grid;place-items:center;padding:0;border:1px solid var(--line,#ded9cc);border-radius:50%;background:#fff;color:var(--mut,#5d6b72);cursor:pointer;opacity:0;transition:opacity .15s}
+.lp-ler .mn-ed:hover .mn-pen,.lp-ler .mn-pen:focus-visible{opacity:1}.lp-ler .mn-pen:hover{border-color:#1b5878;color:#1b5878}
+.lp-ler .mn-ed.mud::after{content:"alterado";position:absolute;right:44px;top:13px;font:600 9px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#805b18;background:#fbf4e3;border:1px solid #e3cf9f;padding:1px 6px}
+.lp-ler .lp-pc{margin:10px 0 26px}.lp-ler .lp-pt{font:600 22px 'Source Serif 4',Georgia,serif;color:inherit;margin:18px 0 4px}
+.lp-ler .lp-lead{margin:0 0 10px;font-size:15px;color:#3f4f57}
+.lp-ler .lp-n{display:inline-grid;place-items:center;width:22px;height:22px;margin-right:8px;border:1px solid var(--line,#ded9cc);border-radius:50%;font:600 10.5px Figtree,system-ui,sans-serif;color:var(--mut,#5d6b72);vertical-align:1px}
+.lp-ler .lp-r{margin:4px 0 0;padding-left:20px;font:13.5px/1.5 Figtree,system-ui,sans-serif;color:#3f4f57}
+.lp-ler .lp-alt{margin:6px 0 0;font:13px Figtree,system-ui,sans-serif}.lp-ler .lp-alt summary{cursor:pointer;color:#1b5878;font-weight:600}
+.lp-ler .lp-alt>div{margin:6px 0 0 12px;padding-left:10px;border-left:2px solid var(--line,#ded9cc)}
+.lp-ler .lp-bl{margin:20px 0 4px;font:700 10.5px Figtree,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#a57829}
+.lp-ler .lp-not{margin:12px 0 0;padding:10px 12px;border:1px dashed var(--line,#ded9cc);font:13px Figtree,system-ui,sans-serif}.lp-ler .lp-not ul{margin:4px 0 0;padding-left:18px}
+.lp-ler .mn-f{margin:8px -14px;padding:14px;background:#fff;border:1px solid #1b5878;box-shadow:0 6px 18px rgba(27,88,120,.12);font-family:Figtree,system-ui,sans-serif}
+.lp-ler .mn-f label{display:block;margin:0 0 10px}.lp-ler .mn-f label>span{display:block;margin-bottom:4px;font:600 10px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut,#5d6b72)}
+.lp-ler .mn-f input,.lp-ler .mn-f textarea,.lp-ler .mn-f select{display:block;width:100%;padding:7px 9px;border:1px solid var(--line,#ded9cc);font:14px/1.45 Figtree,system-ui,sans-serif;background:#fbfaf5;color:inherit}
+.lp-ler .mn-f .lp-ta{font:15px/1.6 'Source Serif 4',Georgia,serif;resize:vertical}
+.lp-ler .mn-f input:focus,.lp-ler .mn-f textarea:focus,.lp-ler .mn-f select:focus{outline:0;border-color:#1b5878;background:#fff}
+.lp-ler .lp-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lp-ler .lp-hint{margin:-4px 0 10px;font-size:12px;color:var(--mut,#5d6b72)}
+.lp-ler .mn-fa{display:flex;gap:8px;align-items:center}.lp-ler .mn-fa button{height:32px;padding:0 14px;border:1px solid var(--line,#ded9cc);background:#fff;font:600 12.5px Figtree,system-ui,sans-serif;cursor:pointer}
+.lp-ler .mn-fa button.pri{background:#1b5878;border-color:#1b5878;color:#fff}
+.lp-ler .mn-nova{display:inline-block;margin:6px 0 0;padding:0;border:0;background:none;font:600 13px Figtree,system-ui,sans-serif;color:#1b5878;cursor:pointer}
