@@ -17310,8 +17310,8 @@
    "exequente": "FELIPE PONTES TEIXEIRA",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Demissão ou Exoneração",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Administrativo · processo administrativo disciplinar (PRF) · demissão por uso da imagem institucional em redes sociais · tutela de urgência",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -17390,6 +17390,83 @@
     "outros": "Certidão ID 321149649 (14/04/2025): comprovante de custas não visualizável. Petição ID 321253433 (15/04/2025) com guia ID 321253703 e comprovante bancário ID 321253717 (OCR). Decisão ID 321819936 (22/04/2025, Des. Fed. Herbert de Bruyn): indeferiu a antecipação da tutela recursal. Decisão ID 362603373 (26/03/2026): redistribuição à Turma Regional de MS.",
     "representacao": "Agravante: advogado Agnaldo Felipe do Nascimento Bastos [VALIDAR procuração]. Agravada: União (AGU).",
     "preparo": "Comprovante do aplicativo CAIXA (convênio GRU judicial), R$ 64,26, em 15/04/2025 (ID 321253717, OCR); sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Administrativo — PAD na PRF; demissão por uso da imagem institucional em redes sociais",
+   "especificidades": "Policial rodoviário federal; postagens em redes sociais com símbolos da PRF e fim de lucro, segundo a União · Enquadramento nos artigos 116, IX, e 132, IV, da Lei 8.112/1990 · Tutela recursal indeferida (ID 321819936, 22/04/2025) · Preparo por comprovante bancário (ID 321253717), sem STN [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Administrativo — PAD na PRF; demissão por uso da imagem institucional em redes sociais",
+     "subassuntos": "Administrativo · processo administrativo disciplinar (PRF) · demissão por uso da imagem institucional em redes sociais · tutela de urgência",
+     "sintese": "",
+     "questoes": "1) Probabilidade de nulidade do PAD (contraditório, prova do dolo); 2) tipicidade da conduta em rede social pessoal; 3) perigo de dano na demissão.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-04-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "321130721",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "321130721",
+       "data": "2025-04-14"
+      },
+      {
+       "desc": "Comprovante bancário de preparo (OCR)",
+       "id": "321253717",
+       "data": "2025-04-15"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "321819936",
+       "data": "2025-04-22"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "323077849",
+       "data": "2025-05-02"
+      }
+     ],
+     "pendencias": "Conferir o preparo (STN)",
+     "especificidades": "Policial rodoviário federal; postagens em redes sociais com símbolos da PRF e fim de lucro, segundo a União · Enquadramento nos artigos 116, IX, e 132, IV, da Lei 8.112/1990 · Tutela recursal indeferida (ID 321819936, 22/04/2025) · Preparo por comprovante bancário (ID 321253717), sem STN [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-04-22"
+    }
    }
   },
   {
