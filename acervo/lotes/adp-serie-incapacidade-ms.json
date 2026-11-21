@@ -1,0 +1,514 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-incapacidade-ms",
+ "titulo": "Série · Auxílio por incapacidade em mandado de segurança",
+ "descricao": "Triagem: remessas em mandado de segurança sobre auxílio por incapacidade temporária. Nenhum processo pautado.",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-21",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "I1",
+   "rotulo": "Segurança cumprida pelo INSS",
+   "cor": "#2f6db5",
+   "resultado": "Monocrática: desprovimento ou não conhecimento da remessa",
+   "modelo": ""
+  },
+  {
+   "id": "I2",
+   "rotulo": "Parcelas pretéritas na via mandamental",
+   "cor": "#a33b5c",
+   "resultado": "Voto (Súmulas 269 e 271/STF)",
+   "modelo": ""
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-incapacidade-ms/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5000567-77.2025.4.03.6004",
+   "recurso": "Remessa necessária",
+   "partes": "DIVINA ASSIS RODRIGUES DA SILVA x GERENTE EXECUTIVO INSS - AGÊNCIA CORUMBÁ - MS",
+   "exequente": "DIVINA ASSIS RODRIGUES DA SILVA",
+   "executado": "GERENTE EXECUTIVO INSS - AGÊNCIA CORUMBÁ - MS",
+   "assunto": "Urbano (art. 60)",
+   "assunto_detalhado": "Previdenciário — mandado de segurança: pedido de prorrogação de auxílio por incapacidade temporária",
+   "grupo": "I1",
+   "tipo_caso": "Remessa necessária em mandado de segurança · direito de protocolar pedido de prorrogação de auxílio por incapacidade temporária (NB 610.429.798-0) · INSS alegou esgotamento das prorrogações e, para cumprir a liminar, implantou novo benefício · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 385938939, sem recurso voluntário; o INSS informou o cumprimento, com implantação de novo benefício (IDs 385938934 e 385938941); MPF sem interesse (IDs 385938938 e 388002049) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete em remessa de mandado de segurança previdenciário (RemNecCiv 5002121-53.2025.4.03.6002, 17/06/2026) [VALIDAR paradigma específico sobre pedido de prorrogação] [VALIDAR: Paradigma sobre pedido de prorrogação (esgotamento das prorrogações na Portaria DIRBEN/INSS 991/2022)]",
+   "modelo": "Origem: lote adp-remessas (grupo RM1) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que assegurou a Divina Assis Rodrigues da Silva o pedido de prorrogação do auxílio por incapacidade temporária. Para cumprir a liminar, o INSS implantou novo benefício, de 16/09/2025 a 15/10/2025, por entender esgotadas as prorrogações (ID 385938934). Não houve recurso voluntário.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da remessa necessária: possível decisão monocrática de desprovimento (artigo 932 do CPC)",
+    "materia": "Previdenciário — mandado de segurança",
+    "origem": "Mandado de segurança 5000567-77.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 385938939 (14/05/2026)",
+    "recurso": "Remessa necessária · sentença de 14/05/2026",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), na linha do gabinete em remessa de mandado de segurança previdenciário",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385938939 · 14/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 388002049 · 22/07/2026 | última movimentação: 23/07/2026 14:34 · Conclusos para julgamento · Sem recurso voluntário · Liminar cumprida com novo benefício (ID 385938934) · INSS informou cumprimento da sentença (ID 385938941) · MPF sem interesse (ID 388002049)",
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; apenas remessa; BRUNO; José V.",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "23/07/2026 14:34 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 385938939 · 14/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 388002049 · 22/07/2026",
+    "ultima_informacao": "Informação · ID 385938942 · 13/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385938939 · 14/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 388002049 · 22/07/2026 | última movimentação: 23/07/2026 14:34 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Divina Assis Rodrigues da Silva impetrou mandado de segurança contra o INSS para protocolar pedido de prorrogação do auxílio por incapacidade temporária com cessação fixada em 15/09/2025.",
+    "inicial": "Mandado de segurança contra o Gerente-Executivo do INSS (Agência de Corumbá).",
+    "decisao_recorrida": "Sentença ID 385938939 (14/05/2026): confirmou a liminar e concedeu a segurança para garantir à impetrante o pedido de prorrogação do auxílio por incapacidade temporária NB 610.429.798-0.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 388002049: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Sabrina Hurtado Ramos (OAB/MS 31.338).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · direito de protocolar pedido de prorrogação de auxílio por incapacidade temporária (NB 610.429.798-0) · INSS alegou esgotamento das prorrogações e, para cumprir a liminar, implantou novo benefício · segurança concedida",
+     "sintese": "Divina Assis Rodrigues da Silva impetrou mandado de segurança contra o INSS para protocolar pedido de prorrogação do auxílio por incapacidade temporária com cessação fixada em 15/09/2025.",
+     "questoes": "1) Direito do segurado de protocolar pedido de prorrogação do benefício por incapacidade temporária antes da cessação (artigo 60, §§ 8º e 9º, da Lei 8.213/1991).",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "385938939",
+      "juizo": "Mandado de segurança 5000567-77.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para garantir à impetrante o pedido de prorrogação do auxílio por incapacidade temporária NB 610.429.798-0."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-09-04",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "385938939",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Informações do INSS: novo benefício implantado",
+       "id": "385938934",
+       "data": "2025-09-16"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "385938939",
+       "data": "2026-05-14"
+      },
+      {
+       "desc": "Informação do INSS: sentença cumprida",
+       "id": "385938941",
+       "data": "2026-05-15"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "388002049",
+       "data": "2026-07-22"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385938939 · 14/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 388002049 · 22/07/2026 | última movimentação: 23/07/2026 14:34 · Conclusos para julgamento · Sem recurso voluntário · Liminar cumprida com novo benefício (ID 385938934) · INSS informou cumprimento da sentença (ID 385938941) · MPF sem interesse (ID 388002049)",
+     "assuntoDet": "Previdenciário — mandado de segurança: pedido de prorrogação de auxílio por incapacidade temporária",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "388002049",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5000704-59.2025.4.03.6004",
+   "recurso": "Remessa necessária",
+   "partes": "MUNIR MOHD ABDEL JABER ABDULLAH x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "exequente": "MUNIR MOHD ABDEL JABER ABDULLAH",
+   "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Inquérito / Processo / Recurso Administrativo",
+   "assunto_detalhado": "Previdenciário — mandado de segurança contra indeferimento por ausência à perícia (reanálise cumprida)",
+   "grupo": "I1",
+   "tipo_caso": "Remessa necessária em mandado de segurança · auxílio por incapacidade temporária indeferido por suposto não comparecimento à perícia · anulação do indeferimento e reanálise do requerimento · segurança concedida · INSS sem recurso e benefício já deferido na reanálise",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 391565397, sem recurso voluntário; o INSS informou que não recorreria e cumpriu a sentença, com deferimento do benefício (NB 732.105.918-0) (ID 391565406); MPF sem interesse (IDs 391565395 e 394947156) ‖ Proposta pelos precedentes: Não conhecimento ou desprovimento por decisão monocrática: linha do gabinete em remessa de mandado de segurança previdenciário (RemNecCiv 5005981-73.2022.4.03.6000, 31/07/2026, não conhecimento) [VALIDAR fundamento] ou desprovimento (RemNecCiv 5000523-58.2025.4.03.6004, 09/06/2026) [VALIDAR: Fundamento do não conhecimento na RemNecCiv 5005981-73.2022.4.03.6000]",
+   "modelo": "Origem: lote adp-remessas (grupo RM3) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que anulou o indeferimento do auxílio por incapacidade temporária de Munir Mohd Abdel Jaber Abdullah por suposto não comparecimento à perícia e mandou reanalisar o requerimento. O INSS informou que não recorreria, reabriu o processo (ID 391565402) e deferiu o benefício sob o NB 732.105.918-0 (ID 391565406).",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da remessa necessária: possível decisão monocrática de não conhecimento ou de desprovimento [VALIDAR linha]",
+    "materia": "Previdenciário — mandado de segurança",
+    "origem": "Mandado de segurança 5000704-59.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 391565397 (12/05/2026)",
+    "recurso": "Remessa necessária · sentença de 12/05/2026",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 391565406 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 391565397 · 12/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 394947156 · 31/08/2026 | última movimentação: 01/09/2026 13:35 · Conclusos para julgamento · Sem recurso voluntário · INSS declarou que não recorreria (ID 391565406) · Sentença cumprida e benefício deferido (NB 732.105.918-0) · MPF sem interesse (ID 394947156)",
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; apenas remessa; BRUNO; MS",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "01/09/2026 13:35 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 391565406 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 391565397 · 12/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 394947156 · 31/08/2026",
+    "ultima_informacao": "Informação · ID 391565407 · 12/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 391565406 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 391565397 · 12/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 394947156 · 31/08/2026 | última movimentação: 01/09/2026 13:35 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Munir Mohd Abdel Jaber Abdullah impetrou mandado de segurança contra o indeferimento do auxílio por incapacidade temporária, fundado em ausência à perícia médica a que diz ter comparecido.",
+    "inicial": "Mandado de segurança contra o Gerente-Executivo da Agência da Previdência Social de Corumbá.",
+    "decisao_recorrida": "Sentença ID 391565397 (12/05/2026): concedeu a segurança para anular o indeferimento do auxílio por incapacidade temporária NB 723.146.230-9 por suposto não comparecimento à perícia e determinar a reabertura e a reanálise motivada do requerimento.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 394947156: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Marcelo Tavares Siqueira (OAB/MS 12.320) e Emanuelly Santos Silveira (OAB/MS 28.488).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · auxílio por incapacidade temporária indeferido por suposto não comparecimento à perícia · anulação do indeferimento e reanálise do requerimento · segurança concedida · INSS sem recurso e benefício já deferido na reanálise",
+     "sintese": "Munir Mohd Abdel Jaber Abdullah impetrou mandado de segurança contra o indeferimento do auxílio por incapacidade temporária, fundado em ausência à perícia médica a que diz ter comparecido.",
+     "questoes": "1) Cabimento e resultado da remessa em mandado de segurança previdenciário já cumprido, sem recurso do INSS; 2) nulidade do indeferimento por ausência à perícia.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "391565397",
+      "juizo": "Mandado de segurança 5000704-59.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "concedeu a segurança para anular o indeferimento do auxílio por incapacidade temporária NB 723.146.230-9 por suposto não comparecimento à perícia e determinar a reabertura e a reanálise motivada do requerimento."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "391565397",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "391565397",
+       "data": "2026-05-12"
+      },
+      {
+       "desc": "Informação do INSS: processo reaberto",
+       "id": "391565402",
+       "data": "2026-07-02"
+      },
+      {
+       "desc": "Informação do INSS: análise concluída",
+       "id": "391565404",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Decisão: cumprimento e remessa ao Tribunal",
+       "id": "391565406",
+       "data": "2026-07-09"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "394947156",
+       "data": "2026-08-31"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 391565406 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 391565397 · 12/05/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 394947156 · 31/08/2026 | última movimentação: 01/09/2026 13:35 · Conclusos para julgamento · Sem recurso voluntário · INSS declarou que não recorreria (ID 391565406) · Sentença cumprida e benefício deferido (NB 732.105.918-0) · MPF sem interesse (ID 394947156)",
+     "assuntoDet": "Previdenciário — mandado de segurança contra indeferimento por ausência à perícia (reanálise cumprida)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "394947156",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5007117-03.2025.4.03.6000",
+   "recurso": "Remessa necessária",
+   "partes": "NATHALIA FERNANDA ARGUELHO PRUDENCIO DA SILVA x Sr. GERENTE EXECUTIVO DA GERÊNCIA EXECUTIVA DO INSTITUTO NACIONAL DA SEGURIDADE SOCIAL - AGÊNCIA DA 7 de setembro",
+   "exequente": "NATHALIA FERNANDA ARGUELHO PRUDENCIO DA SILVA",
+   "executado": "Sr. GERENTE EXECUTIVO DA GERÊNCIA EXECUTIVA DO INSTITUTO NACIONAL DA SEGURIDADE SOCIAL - AGÊNCIA DA 7 de setembro",
+   "assunto": "Urbano (art. 60)",
+   "assunto_detalhado": "Previdenciário — mandado de segurança: vigência e prorrogação de auxílio por incapacidade temporária",
+   "grupo": "I2",
+   "tipo_caso": "Remessa necessária em mandado de segurança · auxílio por incapacidade temporária · sentença de extinção (perda do objeto) reformada em embargos de declaração com efeitos infringentes · vigência do benefício até 01/08/2025 com pagamento de parcelas pendentes e direito de pedir prorrogação · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária das sentenças IDs 371458709 e 371458716, sem recurso voluntário [VALIDAR]; MPF sem interesse (IDs 371458696 e 373730141) ‖ Proposta pelos precedentes: Voto: conferir a via mandamental para o pagamento de parcelas pretéritas (Súmulas 269 e 271/STF) e a relação com a sentença do JEF de 19/03/2025; manter quanto à prorrogação [VALIDAR resultado]; paradigma sobre implantação de benefício em mandado de segurança (RemNecCiv 5002121-53.2025.4.03.6002, 17/06/2026) [VALIDAR: Súmulas 269 e 271/STF (parcelas pretéritas); Coisa julgada ou litispendência com a ação no JEF; Recurso voluntário do INSS]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que, ao acolher embargos de declaração com efeitos infringentes, concedeu a segurança a Nathalia Fernanda Arguelho Prudêncio da Silva para que o INSS reconheça a vigência do auxílio por incapacidade temporária até 01/08/2025, pague as parcelas pendentes e assegure o pedido de prorrogação. A primeira sentença havia extinguido o processo por perda do objeto. Não houve recurso voluntário [VALIDAR].",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da remessa necessária (voto) [VALIDAR Súmulas 269 e 271/STF]",
+    "materia": "Previdenciário — mandado de segurança",
+    "origem": "Mandado de segurança 5007117-03.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 371458716 (25/02/2026)",
+    "recurso": "Remessa necessária · sentença de 25/02/2026",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Improvável: a condenação ao pagamento de parcelas pretéritas em mandado de segurança pede exame colegiado",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 371458716 · 25/02/2026 — sentença: concedeu a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 373730141 · 15/05/2026 | última movimentação: 18/05/2026 13:35 · Conclusos para julgamento · Sem recurso voluntário [VALIDAR] · Sentença de extinção reformada em embargos (ID 371458716) · Pagamento de parcelas pretéritas em mandado de segurança (Súmulas 269 e 271/STF) · Sentença do JEF sobre o mesmo benefício · MPF sem interesse (ID 373730141)",
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; apenas remessa; BRUNO; José V.; MS",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "18/05/2026 13:35 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 371458716 · 25/02/2026 — sentença: concedeu a segurança",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 373730141 · 15/05/2026",
+    "ultima_informacao": "Informação · ID 371458718 · 06/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 371458716 · 25/02/2026 — sentença: concedeu a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 373730141 · 15/05/2026 | última movimentação: 18/05/2026 13:35 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Nathalia Fernanda Arguelho Prudêncio da Silva impetrou mandado de segurança contra o INSS sobre a cessação do auxílio por incapacidade temporária, restabelecido em sentença do JEF até 30/05/2025 e concedido administrativamente até 01/08/2025.",
+    "inicial": "Mandado de segurança contra o Gerente-Executivo do INSS em Campo Grande [VALIDAR].",
+    "decisao_recorrida": "Sentença ID 371458716 (25/02/2026): acolheu os embargos de declaração da impetrante, com efeitos infringentes, e concedeu a segurança para que o INSS reconheça a vigência do benefício até 01/08/2025, com pagamento das parcelas pendentes até essa data, e assegure o pedido de prorrogação, mantido o pagamento até a perícia; a sentença anterior (ID 371458709, 11/12/2025) extinguira o processo por perda do objeto.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 373730141: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Ivan Carlos do Prado Polidoro (OAB/MS 14.699) e Igor do Prado Polidoro (OAB/MS 16.927).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · auxílio por incapacidade temporária · sentença de extinção (perda do objeto) reformada em embargos de declaração com efeitos infringentes · vigência do benefício até 01/08/2025 com pagamento de parcelas pendentes e direito de pedir prorrogação · segurança concedida",
+     "sintese": "Nathalia Fernanda Arguelho Prudêncio da Silva impetrou mandado de segurança contra o INSS sobre a cessação do auxílio por incapacidade temporária, restabelecido em sentença do JEF até 30/05/2025 e concedido administrativamente até 01/08/2025.",
+     "questoes": "1) Vigência do auxílio por incapacidade temporária e direito ao pedido de prorrogação; 2) pagamento de parcelas pretéritas em mandado de segurança (Súmulas 269 e 271/STF); 3) relação com a sentença do JEF.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "371458716",
+      "juizo": "Mandado de segurança 5007117-03.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "acolheu os embargos de declaração da impetrante, com efeitos infringentes, e concedeu a segurança para que o INSS reconheça a vigência do benefício até 01/08/2025, com pagamento das parcelas pendentes até essa data, e assegure o pedido de prorrogação, mantido o pagamento até a perícia; a sentença anterior (ID 371458709, 11/12/2025) extinguira o processo por perda do objeto."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-07-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "371458716",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem resolução do mérito",
+       "id": "371458709",
+       "data": "2025-12-11"
+      },
+      {
+       "desc": "Embargos de declaração da impetrante",
+       "id": "371458711",
+       "data": "2026-01-21"
+      },
+      {
+       "desc": "Sentença: embargos acolhidos, segurança concedida",
+       "id": "371458716",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "373730141",
+       "data": "2026-05-15"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 371458716 · 25/02/2026 — sentença: concedeu a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 373730141 · 15/05/2026 | última movimentação: 18/05/2026 13:35 · Conclusos para julgamento · Sem recurso voluntário [VALIDAR] · Sentença de extinção reformada em embargos (ID 371458716) · Pagamento de parcelas pretéritas em mandado de segurança (Súmulas 269 e 271/STF) · Sentença do JEF sobre o mesmo benefício · MPF sem interesse (ID 373730141)",
+     "assuntoDet": "Previdenciário — mandado de segurança: vigência e prorrogação de auxílio por incapacidade temporária",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "373730141",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   }
+  }
+ ]
+}
