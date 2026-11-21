@@ -12,9 +12,11 @@ const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1
 test('a prévia é publicada em /amicus/collectio/previa/', () => {
   assert.match(wf, /cp apoio\/ex-officio\/lotes\/previa\.html site\/public\/amicus\/collectio\/previa\/index\.html/);
 });
-test('a prévia só lê: nenhum POST, nenhuma gravação', () => {
-  assert.doesNotMatch(html, /method\s*:\s*['"]POST['"]/i);
-  assert.doesNotMatch(html, /\bacao\s*:\s*['"]/);
+test('a prévia só grava a matriz: um único POST, com a ação matriz; as leituras são da API do Collectio e da pauta', () => {
+  const posts = [...html.matchAll(/method\s*:\s*['"]POST['"]/gi)];
+  assert.equal(posts.length, 1, 'um só ponto de gravação');
+  assert.match(html, /acao:'matriz'/);
+  assert.equal([...html.matchAll(/\bacao\s*:\s*['"]/g)].length, 1, 'nenhuma outra ação');
   const urls = [...html.matchAll(/[^.]get\('(\/[^']+)/g)].map(m => m[1]);
   assert.ok(urls.length >= 3);
   urls.forEach(u => assert.match(u, /^\/api\/(painel\?lote=1|pauta\?data=)/));

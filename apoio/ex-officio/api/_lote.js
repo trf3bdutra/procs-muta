@@ -37,6 +37,11 @@
    POST ?lote=1 {acao:'minuta-vigente', id, processo, versao}   torna vigente uma versão já registrada
    POST ?lote=1 {acao:'minuta-versao', …, final:true}           versão final: o texto do PJe conferido depois da liberação
                                                (pela pauta ou pela página do Desembargador); guarda base = versão importada no PJe
+   POST ?lote=1 {acao:'matriz', id, grupos, colunas, itens:[{processo, grupo, variacoes, observacao}]}   (gestor) grava a matriz da
+                                               coleção: grupos (tipo de caso, resultado, modelo), colunas de variação e, por processo, grupo,
+                                               variações e observação. Vale em qualquer coleção: nos lotes gravados, no próprio lote (só os
+                                               processos enviados mudam); na pauta da sessão (pauta-AAAA-MM-DD, que não é lote gravado), em
+                                               acervo/matrizes/pauta-AAAA-MM-DD.json, aplicado à matriz geral da sessão em toda leitura
    POST ?lote=1 {acao:'minuta-pje', id, processo, versao, marcado}   (equipe) marca a versão importada no PJe; ao marcar, a etapa de
                                                produção do processo recebe a data da correção, se ainda não tinha
    Para ver o que o Desembargador mudou: no índice das versões (…&versoes=1), compare a versão com "pje" e a versão com "final"
@@ -211,6 +216,22 @@ function calendarioM(M) { if (!M.cal) M.cal = calendario(); return M.cal; }
    (versoes e vigente) fica na própria vigente. Nada se perde: na primeira versão nova, a minuta que já estava no lote é guardada
    antes como v1; se a vigente foi alterada depois (Trechos em lote), essas alterações viram uma versão própria antes da troca. */
 const SECOES = ['relatorio', 'voto', 'ementa', 'acordao'], VID = /^v\d{1,3}$/;
+/* matriz construída na pauta da sessão (a Coleção de Pauta não é lote gravado): grupos, colunas e marcas por processo */
+const caminhoMatriz = id => 'acervo/matrizes/' + id + '.json';
+const COR = /^#[0-9a-f]{3,8}$/i;
+const limpaGrupos = a => (Array.isArray(a) ? a : []).slice(0, 60).filter(g => g && g.id && g.rotulo).map(g => ({ id: String(g.id).slice(0, 60), rotulo: String(g.rotulo).slice(0, 200),
+  cor: COR.test(String(g.cor || '')) ? g.cor : '#5d6b72', resultado: String(g.resultado || '').slice(0, 600), modelo: String(g.modelo || '').slice(0, 300) }));
+const limpaColunas = a => (Array.isArray(a) ? a : []).slice(0, 30).filter(c => c && c.id && c.rotulo).map(c => ({ id: String(c.id).slice(0, 12), rotulo: String(c.rotulo).slice(0, 120) }));
+const limpaMarca = x => ({ grupo: x.grupo ? String(x.grupo).slice(0, 60) : null, variacoes: (Array.isArray(x.variacoes) ? x.variacoes : []).slice(0, 30).map(v => String(v).slice(0, 12)),
+  observacao: String(x.observacao || '').slice(0, 2000) });
+function aplicaMatriz(lote, mx) {
+  if (!mx) return;
+  if ((mx.grupos || []).length) { lote.grupos = mx.grupos; (lote.itens || []).forEach(it => { it.grupo = null; }); }
+  lote.colunas = mx.colunas || [];
+  const m = mx.itens || {};
+  (lote.itens || []).forEach(it => { const x = m[it.processo]; if (!x) return; it.grupo = x.grupo || null; it.variacoes = x.variacoes || []; if (x.observacao) it.observacao = x.observacao; });
+  lote.matriz = { em: mx.atualizado_em || '', por: mx.por || '' };
+}
 const caminhoMin = (id, mx) => 'acervo/minutas/' + id + '/' + mx + '.json';
 const caminhoVer = (id, mx, v) => 'acervo/minutas/' + id + '/versoes/' + mx + '/' + v + '.json';
 const jsonTxt = o => JSON.stringify(o, null, 1) + '\n';
@@ -365,6 +386,7 @@ module.exports = async (req, res) => {
     const { dados: persistido } = await lerLote('acervo/lotes/' + id + '.json').catch(nada);
     const lote = persistido || (sessaoVirtual && (await calendario()).some(z=>z.date===sessaoVirtual[1]&&(gestor||z.publicada)) ? await indicePauta(sessaoVirtual[1]) : null);
     if (!lote || !loteVe(lote)) return res.status(404).json({ erro: 'Lote não encontrado.' });
+    if (!persistido && sessaoVirtual) aplicaMatriz(lote, (await L.lerJson(caminhoMatriz(id)).catch(nada)).dados);
     /* cartão do prontuário (Ex Officio) e situação, lidos das sessões do lote no momento da consulta */
     const cartoes = await anotar(lote, M);
     (lote.itens || []).forEach(it => { if (cartoes[it.processo]) it.prontuario = cartoes[it.processo]; });
@@ -444,6 +466,38 @@ async function gravar(req, res, u, gestor) {
   if (!ID.test(id)) return res.status(400).json({ erro: 'Identificador inválido: use letras, números e hífen (até 40).' });
   const ss = [...new Set((Array.isArray(b.sessoes) ? b.sessoes : []).filter(s => DATA.test(s)))].sort();
   const rel = 'acervo/lotes/' + id + '.json';
+  if (b.acao === 'matriz') {
+    const grupos = Array.isArray(b.grupos) ? limpaGrupos(b.grupos) : null, colunas = Array.isArray(b.colunas) ? limpaColunas(b.colunas) : null;
+    const marcas = (Array.isArray(b.itens) ? b.itens : []).filter(x => x && /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/.test(String(x.processo || ''))).slice(0, 800);
+    const hoje = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+    const sv = /^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha } = await lerLote(rel).catch(nada);
+      if (lote) {
+        /* lote gravado: o próprio lote guarda a matriz; só os processos enviados mudam */
+        if (grupos) lote.grupos = grupos;
+        if (colunas) lote.colunas = colunas;
+        const mapa = new Map((lote.itens || []).map(i => [i.processo, i]));
+        let n = 0;
+        for (const x of marcas) { const it = mapa.get(x.processo); if (!it) continue; Object.assign(it, limpaMarca(x)); n++; }
+        lote.atualizado_em = hoje;
+        try { await gravarLote(rel, lote, sha, 'Collectio (' + u + '): matriz do lote ' + id + ' (' + (lote.grupos || []).length + ' grupos, ' + (lote.colunas || []).length + ' colunas, ' + n + ' processos)'); return res.status(200).json({ ok: true, id, processos: n, grupos: (lote.grupos || []).length, colunas: (lote.colunas || []).length }); }
+        catch (e) { if (e.status !== 409 && e.status !== 422) throw e; continue; }
+      }
+      if (!sv) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      /* pauta da sessão: a matriz fica em acervo/matrizes/, à parte do arquivo da sessão */
+      if (!(await calendario()).some(z => z.date === sv[1])) return res.status(404).json({ erro: 'Sessão não encontrada.' });
+      const { dados: ant, sha: shaM } = await L.lerJson(caminhoMatriz(id)).catch(nada);
+      const mx = ant || { schema: 'gabcmt.matriz', versao: 1, id, sessao: sv[1], grupos: [], colunas: [], itens: {} };
+      if (grupos) mx.grupos = grupos;
+      if (colunas) mx.colunas = colunas;
+      for (const x of marcas) mx.itens[x.processo] = limpaMarca(x);
+      mx.atualizado_em = hoje; mx.por = u;
+      try { await L.gravarJson(caminhoMatriz(id), mx, shaM, 'Collectio (' + u + '): matriz da pauta de ' + sv[1] + ' (' + mx.grupos.length + ' grupos, ' + mx.colunas.length + ' colunas, ' + Object.keys(mx.itens).length + ' processos)'); return res.status(200).json({ ok: true, id, processos: marcas.length, grupos: mx.grupos.length, colunas: mx.colunas.length }); }
+      catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'A matriz mudou várias vezes seguidas; tente de novo.' });
+  }
   if (b.acao === 'criar-selecao') {
     const data=String(b.sessao||'');
     if(!DATA.test(data)) return res.status(400).json({erro:'Selecione uma sessão válida.'});
