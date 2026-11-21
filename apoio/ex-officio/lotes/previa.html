@@ -322,6 +322,7 @@ html[data-theme=dark] .dif ins{background:#1f4a2c;color:#d4f5dc}
 @media(max-width:900px){.pg{display:block}.lx-sub{position:static;max-height:none}.lx-h h1{font-size:38px}.met{grid-template-columns:repeat(2,minmax(0,1fr))}.met>:nth-child(odd){border-left:0;padding-left:18px}}
 @media(max-width:620px){.dif-h,.dif-l{grid-template-columns:1fr}.lx-nx1{padding:0 12px}.pg{padding:0 12px 60px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+.caput-emb header.lx-nx{display:none}.caput-emb .lx-sub{top:8px;max-height:calc(100vh - 16px)}.caput-emb .col-areas{display:none}
 </style>
 </head>
 <body>
@@ -350,6 +351,8 @@ const brc=d=>d?br(d).slice(0,5):'';
 const sem=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();
 const hoje=()=>new Date(Date.now()-4*3600e3).toISOString().slice(0,10);
 const params=new URLSearchParams(location.search);
+/* aberto dentro da triagem do Caput (Triados e Seleção prévia): mostra lotes de triagem e de seleção prévia, sem a barra do Amicus */
+const CAPUT=params.get('caput')==='1';if(CAPUT)document.documentElement.classList.add('caput-emb');
 const PREVIA=/\/previa\//.test(location.pathname);
 if(PREVIA){const c=document.getElementById('crumb');if(c)c.textContent='Prévia'}
 (function(){const id=params.get('id');if(id){const m=/^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);if(m){if(!params.get('sessao'))params.set('sessao',m[1])}else if(!params.get('colecao'))params.set('colecao',id)}
@@ -503,7 +506,7 @@ async function carregar(){
     if(MONO[pc]){await carregarMono(pc);return}
     const lc=pc&&S.lotesLista.find(l=>l.id===pc);
     const dentro=lc&&pedida&&(lc.sessoes||[]).includes(S.data)&&S.data===pedida;
-    if(lc&&['triagem','selecao'].includes(tipoCol(lc))){}
+    if(lc&&!CAPUT&&['triagem','selecao'].includes(tipoCol(lc))){}
     else if(lc){S.colTipo=dentro?'pauta':tipoCol(lc);await carregarLote(lc.id,dentro?S.data:'');return}
     await carregarSessao();
   }catch(e){

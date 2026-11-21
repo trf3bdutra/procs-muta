@@ -556,6 +556,7 @@ const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const pad=n=>String(n).padStart(2,'0');
 let VARIAS_SES=false, TEM_OBS=false, RELATOR=false, VIS=new Set(), PEND=new Map(), TPEND=0, LOTE=null, ITENS=[], FLN={}, COR={}, OUT=null, MIN={}, offG=new Set(), LISTA={lotes:[],sessoes:[],calendario:[],gestor:false}, SELEC=new Set(), TEM_ITEM=false;
 const params=new URLSearchParams(location.search);
+const CAPUT=params.get('caput')==='1'; /* aberto dentro da triagem do Caput */
 const FILT_SESSAO=String(params.get('sessao')||'').trim(), FILT_MINUTISTA=String(params.get('minutista')||'').trim();
 /* Amicus Curiae · Collectio: duas páginas no mesmo arquivo. Rotas canônicas: /amicus/collectio/ (Geral) e /amicus/collectio/cg/ (controle e gestão).
    A antiga página do Desembargador (/amicus/collectio/cmt/ e rotas /index/cm, /lote/cmt, /cmt/lotes) abre a página geral: quem entra com o perfil
@@ -648,7 +649,7 @@ async function inicio(){
     if(MODO!=='cg'&&R.relator){MODO_REL=true;VZ='rel'}
     LOTE=R.lote; RELATOR=!!R.relator;
     /* Lotes legados de triagem e seleção prévia foram migrados para o Caput */
-    if(LOTE&&(LOTE.tipo==='triagem'||LOTE.tipo==='selecao'||LOTE.origem==='escaninho')){
+    if(!CAPUT&&LOTE&&(LOTE.tipo==='triagem'||LOTE.tipo==='selecao'||LOTE.origem==='escaninho')){
       mostra(cabecalho(lotes,id,L.usuario)+'<div class="card" style="margin:2rem auto;max-width:520px;padding:1.5rem"><h2 style="margin-top:0">Coleção migrada</h2><p>As coleções de <strong>Triagem</strong> (lotes das tarefas, séries e escaninhos) e de <strong>Seleção prévia</strong> foram integradas à aba de triagem do Caput.</p><a class="b" href="/caput/triagem/" style="display:inline-block;margin-top:.5rem">Ir para Caput · Triagem →</a></div>');
       ligaCab(); return;
     }
