@@ -429,3 +429,12 @@ test('Mural: coluna da direita até a borda de baixo da lista, sem rolagem próp
   assert.match(h, /overflow:visible!important;display:flex;flex-direction:column;align-self:stretch!important\}/);
   assert.match(h, /#mu-host>#mu-alm>\.cc-esq\{display:block!important;position:static!important;top:auto!important;margin:0!important/);
 });
+
+test('Mural: fundo da tela de carregamento do Gabinete (kit padrao/loading) só na página do Mural', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /document\.body\.classList\.toggle\('mural-pg',v==='inicio'\)/);
+  assert.match(h, /body\.mural-pg:not\(\.painel-gab\)\{background:url\("data:image\/svg\+xml,/);
+  assert.match(h, /linear-gradient\(180deg,var\(--cmtl-green-a,#31635b\),var\(--cmtl-green-b,#20494c\)\) fixed!important\}/);
+  assert.match(h, /:host-context\(body\.mural-pg\) \.hello h1\{color:var\(--cmtl-ivory,#f3f0e8\)\}/);
+});
