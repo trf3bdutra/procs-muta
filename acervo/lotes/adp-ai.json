@@ -20719,8 +20719,8 @@
    "exequente": "MARCOS TOLENTINO DA SILVA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IOC/IOF Imposto sobre operações de crédito, câmbio e seguro, ou relativas a títulos ou valores mobiliários",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · redirecionamento ao sócio · ilegitimidade passiva para débitos anteriores ao ingresso · exceção de pré-executividade",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -20768,6 +20768,93 @@
     "outros": "Preparo: guia PagTesouro \"aguardando pagamento\" e comprovante Pix do Banco do Brasil (ID 366508060, 14/04/2026). Despacho ID 366960016 (17/04/2026, Des. Fed. Marisa Santos): pela Resolução PRES 790/2025, o Pix só vale com o comprovante STN (\"Pagamento realizado com sucesso\" e \"Identificação do pagamento\"); intimação para comprovar em 5 dias, sob pena do artigo 1.007, § 4º, do CPC. Petição ID 368439883 (23/04/2026) com GRU 18720-8 e comprovante de pagamento pelo internet banking da CAIXA (ID 368439886). Redistribuição à Turma Regional de MS (decisão ID 369901459). Decisão ID 384184062 (03/07/2026): indeferiu a tutela recursal.",
     "representacao": "Agravante: advogado Luiz Carlos de Andrade Lopes [VALIDAR procuração]. Agravada: União (PGFN).",
     "preparo": "GRU 18720-8 paga pelo internet banking da CAIXA em 23/04/2026 (ID 368439886), após o despacho ID 366960016; antes, só Pix bancário e guia \"aguardando pagamento\" [VALIDAR artigo 2º, § 2º, II, da Resolução PRES 138/2017, na redação da Resolução 790/2025]"
+   },
+   "assunto_detalhado": "Execução fiscal — ilegitimidade passiva de sócio; exceção de pré-executividade",
+   "especificidades": "Débitos de 2011 a 2015; ingresso do sócio em 11/2014 · Tutela recursal indeferida (ID 384184062, 03/07/2026) · Preparo: Pix bancário recusado (despacho ID 366960016, Resolução PRES 790/2025) e depois GRU com comprovante de internet banking (ID 368439886)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — ilegitimidade passiva de sócio; exceção de pré-executividade",
+     "subassuntos": "Execução fiscal · redirecionamento ao sócio · ilegitimidade passiva para débitos anteriores ao ingresso · exceção de pré-executividade",
+     "sintese": "",
+     "questoes": "1) Regularidade do preparo após a intimação; 2) cabimento da exceção de pré-executividade para a ilegitimidade do sócio (Súmula 393/STJ); 3) responsabilidade do sócio por débitos anteriores ao ingresso.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "558802742",
+      "juizo": "Justiça Federal em Campo Grande [VALIDAR vara]",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "558802742"
+     },
+     "adm": {
+      "prot": "2026-04-13",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "366297148",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "366297148",
+       "data": "2026-04-13"
+      },
+      {
+       "desc": "Pix bancário e guia aguardando pagamento",
+       "id": "366508060",
+       "data": "2026-04-14"
+      },
+      {
+       "desc": "Despacho sobre o comprovante STN",
+       "id": "366960016",
+       "data": "2026-04-17"
+      },
+      {
+       "desc": "GRU com comprovante de internet banking",
+       "id": "368439886",
+       "data": "2026-04-23"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "384184062",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "386737983",
+       "data": "2026-07-16"
+      }
+     ],
+     "pendencias": "Conferir o preparo regularizado",
+     "especificidades": "Débitos de 2011 a 2015; ingresso do sócio em 11/2014 · Tutela recursal indeferida (ID 384184062, 03/07/2026) · Preparo: Pix bancário recusado (despacho ID 366960016, Resolução PRES 790/2025) e depois GRU com comprovante de internet banking (ID 368439886)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-03"
+    }
    }
   },
   {
