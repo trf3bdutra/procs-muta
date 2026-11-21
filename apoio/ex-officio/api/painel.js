@@ -1,5 +1,6 @@
 /* GET /api/painel?cmt=1  painel do desembargador (api/_cmt.js)
    GET /api/painel?lote=1  Amicus Curiae · Collectio (api/_lote.js; /amicus/collectio/ e /amicus/collectio/cg/)
+   GET /api/painel?atividades=1&dias=3  registro de atividades (api/_atividades.js; Chefia do Caput)
    GET /api/painel  página inicial do servidor: calendário das pautas publicadas e todos os processos dele (minuta e correção) */
 const L = require('./_lib');
 const E = require('./_entregas');
@@ -17,6 +18,8 @@ module.exports = async (req, res) => {
   }
   const u = L.exigir(req, res); if (!u) return;
   if (req.query && req.query.fechamentoPng === '1') return require('./_fechamento-png')(req, res, u);
+  /* registro de atividades do gabinete (Chefia do Caput) */
+  if (req.query && req.query.atividades) return require('./_atividades')(req, res, u);
   try {
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
     /* calendário: sessões com marcos publicados; processos, progresso e "meus" só das pautas com listagem publicada */
