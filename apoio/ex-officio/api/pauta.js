@@ -78,7 +78,9 @@ module.exports = async (req, res) => {
       /* importado o PDF, a pauta é fixa: a pré-pauta deixa de existir para a equipe */
       if ((dados.itens || []).length) dados.previa = [];
       /* sigilo vem do acervo (fonte.json): só na resposta, o arquivo da sessão não muda */
-      if (A) ['itens', 'previa'].forEach(k => (dados[k] || []).forEach(i => { const b = A.base[dg(i.cnj)]; if (b && b.sigilo) i.sigilo = b.sigilo; }));
+      /* do acervo, só na resposta: prioridade legal, urgência pelas etiquetas, tarefa atual e entrada nela (indicadores da matriz da pauta) */
+      if (A) ['itens', 'previa'].forEach(k => (dados[k] || []).forEach(i => { const b = A.base[dg(i.cnj)]; if (!b) return; if (b.sigilo) i.sigilo = b.sigilo;
+        const ac = {}; if (b.prioridade) ac.prioridade = b.prioridade; if (b.urgAuto) ac.urgencia = b.urgAuto; if (b.tarefa) ac.tarefa = b.tarefa; if (b.desde) ac.desde = b.desde; if (Object.keys(ac).length) i.acervo = ac; }));
       return res.status(200).json(dados); }
     const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
     if (!(cal.sessoes || []).some(s => s.date === data && s.publicada)) return res.status(403).json({ erro: 'Esta pauta ainda não foi publicada para a equipe.' });

@@ -183,10 +183,14 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .tb tr.gh button small{font:400 10.5px var(--emono);color:var(--em)}
 .tb tr.gh button:hover{color:var(--eo2)}
 .tb.mx{min-width:1100px}
-.tb.mx th.v{width:28px;height:128px;padding:0 0 6px;position:relative;vertical-align:bottom}
-.tb.mx th.v div{writing-mode:vertical-rl;transform:rotate(180deg);margin:0 auto;letter-spacing:.08em;line-height:1.2;max-height:110px}
+.tb.mx th.v{width:28px;height:156px;padding:0 0 6px;position:relative;vertical-align:bottom}
+.tb.mx th.v div{writing-mode:vertical-rl;transform:rotate(180deg);margin:0 auto;letter-spacing:.06em;line-height:1.15;max-height:146px}
 .tb.mx th.v .x{position:absolute;top:2px;left:50%;transform:translateX(-50%)}
 .tb.mx td{vertical-align:middle}
+.tb.mx td.iv{text-align:center;border-left:1px solid var(--el);width:28px;padding:4px 2px;vertical-align:middle;font:400 11px var(--emono);color:var(--ei2);white-space:nowrap}
+.tb.mx td.iv.ok{color:var(--ok)}.tb.mx td.iv.al{color:var(--cr);font-weight:700}.tb.mx td.iv.ik{color:var(--eo2);font-weight:700}.tb.mx td.iv.nd{color:var(--el2)}
+.tb.mx th.vi{border-left:1px solid var(--el)}
+.tb.mx tr.sup th.g3{border-left:1px solid var(--el);border-top:2px solid var(--cr);color:var(--cr)}
 .tb.mx td.fx{font-size:11.5px;white-space:nowrap;border-left:1px solid var(--el);color:var(--ei2)}
 .tb.mx td.fx-res{white-space:normal;min-width:150px;max-width:220px;font-weight:600;color:var(--ei)}
 .tb.mx td.fx-mpf{white-space:normal;min-width:90px}
@@ -370,6 +374,11 @@ function linha(x,cheio){
     if(cheio&&fi)tags.push(['ok','Versão final']);
     if(cheio&&co&&!li&&!pj&&it&&it.minuta)tags.push(['in','Colar no PJe e marcar']);
     const np=it&&Array.isArray(it.pendencias)?it.pendencias.length:0;
+    /* características do processo na pauta: meta do CNJ e julgamento que não é o primeiro */
+    if(c.meta)tags.push(['in','★ Meta '+c.meta]);
+    {const n1={ED:'Embargos de declaração',AgInt:'Agravo interno',JR:'Juízo de retratação'}[x.julgamento]||{'Embargos de Declaração':'Embargos de declaração','Agravo Interno':'Agravo interno','Juízo de Retratação':'Juízo de retratação'}[(c.cartao||{}).tipoJ];if(n1)tags.push(['in',n1])}
+    if(x.acervo&&x.acervo.prioridade)tags.push(['in','Prioridade legal']);
+    if(x.acervo&&x.acervo.urgencia)tags.push(['al','Urgência']);
     if(fontes.length>1)tags.push(['in','Minuta em '+fontes.length+' coleções']);else if(z&&z.compart)tags.push(['in','Minuta em '+z.titulo]);
     if(np&&!li)tags.push(['in',np+(np>1?' pendências':' pendência')+' a validar']);
     if(!String(x.servidor||'').trim()||!String(x.corretor||'').trim())tags.push(['cr','Sem designação']);
@@ -618,11 +627,36 @@ function colEtapa([k,r,t,d],base){
    Collectio. Em qualquer coleção, inclusive na pauta da sessão: na pauta, junta as matrizes dos lotes de onde vêm os processos.
    "Construir" abre um rascunho na própria página (grupos, colunas, classificação, marcas e observação); a prévia não grava. */
 /* na pauta (e nos lotes dentro dela) a matriz já vem com os campos do prontuário da sessão, editados no Ex Officio */
-const FIXOS=[['tipo','Tipo',x=>((x.ctl||{}).cartao||{}).tipoJ],['prelim','Prelim.',x=>(x.ctl||{}).prelim],['mpf','MPF',x=>{const c=x.ctl||{};return [c.mpf,c.parecer].filter(Boolean).join(' · ')}],
-  ['tempest','Tempest.',x=>(x.ctl||{}).tempest],['preparo','Preparo',x=>(x.ctl||{}).preparo],['honor','Honorários',x=>(x.ctl||{}).honor],['consect','Custas · consect.',x=>(x.ctl||{}).consect],
-  ['topico','Tópico síntese',x=>(x.ctl||{}).topico],['sopref','Sustentação',x=>(x.ctl||{}).sopref],['res','Resultado',x=>(x.ctl||{}).resJulg]];
-const CURTO={'Há preliminares':'Há','Sem preliminares':'Sem','Sem honorários recursais':'Sem recursais','Isento (ente público/MP)':'Isento','Justiça gratuita':'AJG','Interesse público ou social (178, I)':'178, I','Com parecer':'com parecer','Intimado sem manifestação':'sem manifestação','Embargos de Declaração':'ED','Remessa Necessária':'Remessa','Agravo Interno':'AgInt','Agravo de Instrumento':'AI','Não se aplica':'n/a'};
-const curto=v=>String(v||'').split(' · ').map(s=>CURTO[s]||s).join(' · ');
+/* campos do prontuário da sessão: colunas verticais com ícone ou código curto (o texto inteiro fica no título da célula);
+   só o resultado, que é texto, fica na horizontal */
+const c_=x=>x.ctl||{}, ca_=x=>(c_(x).cartao)||{};
+const NAO1={ED:'ED',AgInt:'AgInt',JR:'JR','Embargos de Declaração':'ED','Agravo Interno':'AgInt','Juízo de Retratação':'JR'};
+const TIPO={'Apelação':'Ap','Embargos de Declaração':'ED','Remessa Necessária':'Rem','Agravo Interno':'AgInt','Agravo de Instrumento':'AI','Juízo de Retratação':'JR'};
+const FIXOS=[
+  ['tipo','Tipo de julgamento',x=>ca_(x).tipoJ||'',v=>v?{t:TIPO[v]||v.slice(0,5)}:null],
+  ['prelim','Preliminares',x=>c_(x).prelim,v=>/^há/i.test(v)?{t:'■',c:'ik'}:/^sem/i.test(v)?{t:'–',c:'nd'}:null],
+  ['mpf','MPF',x=>[c_(x).mpf,c_(x).parecer].filter(Boolean).join(' · '),v=>!v?null:/sem manifesta/i.test(v)?{t:'!',c:'al'}:/com parecer/i.test(v)?{t:'✓',c:'ok'}:/sem hip/i.test(v)?{t:'–',c:'nd'}:{t:'■',c:'ik'}],
+  ['tempest','Tempestividade',x=>c_(x).tempest,v=>!v?null:/^intemp/i.test(v)?{t:'×',c:'al'}:/n[ãa]o verif/i.test(v)?{t:'?',c:'al'}:/^tempest/i.test(v)?{t:'✓',c:'ok'}:{t:'–',c:'nd'}],
+  ['preparo','Preparo',x=>c_(x).preparo,v=>!v?null:/n[ãa]o recolh/i.test(v)?{t:'×',c:'al'}:/n[ãa]o verif/i.test(v)?{t:'?',c:'al'}:/isent/i.test(v)?{t:'I'}:/gratuit/i.test(v)?{t:'AJG'}:/comprov/i.test(v)?{t:'✓',c:'ok'}:{t:'–',c:'nd'}],
+  ['repres','Representação',x=>c_(x).repres,v=>!v?null:/regular/i.test(v)&&!/irreg/i.test(v)?{t:'✓',c:'ok'}:{t:'!',c:'al'}],
+  ['honor','Honorários recursais',x=>c_(x).honor,v=>!v?null:/major/i.test(v)?{t:'↑'}:/sem/i.test(v)?{t:'–',c:'nd'}:{t:'■',c:'ik'}],
+  ['consect','Custas e consectários',x=>c_(x).consect,v=>!v?null:/^n[ãa]o/i.test(v)?{t:'–',c:'nd'}:{t:'■',c:'ik'}],
+  ['topico','Tópico síntese',x=>c_(x).topico,v=>!v?null:/^n[ãa]o/i.test(v)?{t:'–',c:'nd'}:{t:'■',c:'ik'}],
+  ['sopref','Sustentação oral',x=>c_(x).sopref,v=>!v?null:/presen/i.test(v)?{t:'P',c:'ik'}:/virt|video/i.test(v)?{t:'V',c:'ik'}:{t:'■',c:'ik'}],
+  ['res','Resultado',x=>c_(x).resJulg,null]];
+/* indicadores da pauta: meta, julgamento que não é o primeiro, urgência e prioridade (acervo), admissibilidade, pendências, sigilo e retirada */
+const INDS=[
+  ['meta','Meta',x=>c_(x).meta||'',v=>v?{t:String(v).replace(/^M/,''),c:'ik'}:null],
+  ['nao1','Não é 1º julgamento',x=>NAO1[x.julgamento]||NAO1[ca_(x).tipoJ]||'',v=>v?{t:v,c:'ik'}:null],
+  ['urg','Urgência / liminar pendente',x=>(x.acervo||{}).urgencia||'',v=>v?{t:'■',c:'al'}:null],
+  ['pri','Prioridade legal',x=>(x.acervo||{}).prioridade||'',v=>v?{t:'■',c:'ik'}:null],
+  ['adm','Admissibilidade em discussão',x=>{const c=c_(x),m=[];if(/intemp|n[ãa]o verif/i.test(c.tempest||''))m.push('tempestividade: '+c.tempest);if(/n[ãa]o recolh|n[ãa]o verif/i.test(c.preparo||''))m.push('preparo: '+c.preparo);if(c.repres&&/irreg|pend/i.test(c.repres))m.push('representação: '+c.repres);return m.join(' · ')},v=>v?{t:'■',c:'al'}:null],
+  ['val','Pendência [VALIDAR]',x=>{const p=(ca_(x).pendencias||[]).filter(q=>q&&!q.ok);return p.length?p.length+' pendência'+(p.length>1?'s':'')+': '+p.map(q=>q.desc||q).join(' | '):''},v=>v?{t:String(parseInt(v,10)),c:'al'}:null],
+  ['sig','Sigilo',x=>x.sigilo||'',v=>v?{t:'■',c:'ik'}:null],
+  ['ret','Retirado de pauta',x=>c_(x).intercorTipo?(c_(x).intercor||c_(x).intercorTipo):'',v=>v?{t:'■',c:'al'}:null]];
+function celV([k,,f,r],x){const v=f(x)||'',o=r?r(v):null;
+  if(!r)return `<td class="fx fx-${k}${v&&ALERTA_F.test(v)?' al':''}" title="${esc(v)}">${v?esc(v):'<span class="vz0">—</span>'}</td>`;
+  return `<td class="iv${o&&o.c?' '+o.c:''}" title="${esc(v||'não informado')}">${o?esc(o.t):'<span class="vz0">·</span>'}</td>`}
 const ALERTA_F=/intempest|n[ãa]o recolhido|n[ãa]o verificado|irregular|pendente|sem manifesta/i;
 const comFixos=()=>!S.loteSel||!!S.loteSes;
 const chaveMx=()=>S.loteSel?S.loteSel+'|'+S.loteSes:'pauta-'+S.data;
@@ -662,7 +696,7 @@ async function gravarMatriz(){
 }
 function aviso(t){let e=$('#toast');if(!e){e=document.createElement('div');e.id='toast';document.body.appendChild(e)}e.textContent=t;e.className='on';clearTimeout(e._t);e._t=setTimeout(()=>{e.className=''},4200)}
 function matrizHtml(base){
-  const M=matriz(), ed=S.mxModo==='construir', cols=M.colunas, fx=comFixos()?FIXOS:[], nc=cols.length+fx.length+(fx.length?-3:0);
+  const M=matriz(), ed=S.mxModo==='construir', cols=M.colunas, fx=comFixos()?FIXOS:[], ind=comFixos()?INDS:[], ncol=(fx.length?3:6)+cols.length+fx.length+ind.length;
   const linhas=base.slice().sort((a,b)=>a.item-b.item);
   const ordem=M.grupos.map(g=>({g,rs:linhas.filter(r=>(M.itens[r.x.cnj]||{}).grupo===g.id)})).filter(o=>o.rs.length||ed);
   const soltos=linhas.filter(r=>!M.grupos.some(g=>g.id===(M.itens[r.x.cnj]||{}).grupo));
@@ -674,10 +708,10 @@ function matrizHtml(base){
      ${fx.length?`<td><span class="ii">${esc(x.item)}</span> <span class="cnj">${esc(x.cnj.slice(0,15))}</span> <span class="mono rc">${esc(rec(x.classe))}</span><span class="pt">${esc(x.partes)}</span>${sel}</td>`
        :`<td><span class="ii">${esc(x.item)}</span> <span class="cnj">${esc(x.cnj.slice(0,15))}</span>${sel}</td><td class="pa">${esc(pt[0]||'')}</td><td class="pa">${esc(pt.slice(1).join(' x '))}</td><td class="mono">${esc(rec(x.classe))}</td>`}
      <td class="nm">${esc(x.servidor||'—')} · ${esc(x.corretor||'—')}</td>
-     ${fx.map(([k,,f])=>{const v=f(x);return `<td class="fx fx-${k}${v&&ALERTA_F.test(v)?' al':''}" title="${esc(v||'')}">${v?esc(k==='res'?v:curto(v)):'<span class="vz0">—</span>'}</td>`}).join('')}
+     ${fx.map(f=>celV(f,x)).join('')}${ind.map(f=>celV(f,x)).join('')}
      ${cols.map(c=>{const on=m.variacoes.includes(c.id);return `<td class="f">${ed?`<button type="button" class="mk-b" data-mxcell="${esc(x.cnj)}|${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(c.rotulo)}">${on?`<i class="mk" style="background:${cor}"></i>`:''}</button>`:on?`<i class="mk" style="background:${cor}" title="${esc(c.rotulo)}"></i>`:''}</td>`}).join('')}
      <td class="ob">${ed?`<textarea class="mxo" data-mxobs="${esc(x.cnj)}" rows="2" aria-label="Observação">${esc(m.observacao)}</textarea>`:`<span>${esc(m.observacao)}</span>`}</td></tr>`;};
-  const banda=(rot,res,cor,n,col,id)=>`<tr class="gh mxh"><td colspan="${(fx.length?3:6)+cols.length+fx.length}"><span class="q" style="background:${cor}"></span><b>${esc(rot)}</b>${res?` · <span class="res">${esc(res)}</span>`:''}${col?` <span class="tg in">${esc(col)}</span>`:''} <small>${n} processo${n===1?'':'s'}</small>${ed&&id?` <button type="button" class="x" data-mxgdel="${esc(id)}" title="Excluir o grupo (os processos voltam para não classificados)">×</button>`:''}</td></tr>`;
+  const banda=(rot,res,cor,n,col,id)=>`<tr class="gh mxh"><td colspan="${ncol}"><span class="q" style="background:${cor}"></span><b>${esc(rot)}</b>${res?` · <span class="res">${esc(res)}</span>`:''}${col?` <span class="tg in">${esc(col)}</span>`:''} <small>${n} processo${n===1?'':'s'}</small>${ed&&id?` <button type="button" class="x" data-mxgdel="${esc(id)}" title="Excluir o grupo (os processos voltam para não classificados)">×</button>`:''}</td></tr>`;
   const corpo=ordem.map(o=>banda(o.g.rotulo,o.g.resultado,o.g.cor,o.rs.length,o.g.col,o.g.id)+o.rs.map(r=>linha(r,o.g.cor)).join('')).join('')
     +(soltos.length?banda('Não classificados','',' #9aa0a8',soltos.length,'','')+soltos.map(r=>linha(r,'#9aa0a8')).join(''):'');
   const form=S.mxForm==='g'?`<form class="mxf" id="mxf-g"><label>Grupo (tipo de caso)<input class="sel" name="r" required placeholder="Ex.: Concursos: anulação de questões"></label><label>Resultado proposto<input class="sel" name="s" placeholder="Ex.: Negar provimento por monocrática"></label><button class="b pri">Adicionar grupo</button><button type="button" class="b" data-mxform="">Cancelar</button></form>`
@@ -687,8 +721,8 @@ function matrizHtml(base){
     <div class="box">
      ${ed?`<div class="ph"><button type="button" class="b" data-mxform="g">+ Grupo</button><button type="button" class="b" data-mxform="c">+ Coluna</button>${S.mxRasc[chaveMx()]?'<button type="button" class="b" id="mx-desc">Descartar alterações</button>':''}<span class="sp"></span>${S.gestor?`<button type="button" class="b pri" id="mx-grava"${S.mxRasc[chaveMx()]?'':' disabled'}>Gravar matriz</button>`:'<span class="aviso" style="margin:0">Só o gestor grava a matriz</span>'}</div>${form}`:''}
      <div class="tw"><table class="tb mx">
-      <thead>${fx.length?`<tr class="sup"><th colspan="2"></th><th colspan="${fx.length}" class="g1">Prontuário da sessão <small>editado no Ex Officio</small></th>${cols.length?`<th colspan="${cols.length}" class="g2">Variações</th>`:''}<th></th></tr>`:''}<tr>${fx.length?'<th scope="col">Processo</th>':'<th scope="col">Processo</th><th scope="col">Exequente</th><th scope="col">Executado</th><th scope="col">Rec.</th>'}<th scope="col">Minuta · correção</th>${fx.map(([k,r])=>`<th scope="col" class="fxh">${esc(r)}</th>`).join('')}${cols.map(c=>`<th scope="col" class="v"><div>${esc(c.rotulo)}</div>${ed?`<button type="button" class="x" data-mxcdel="${esc(c.id)}" title="Excluir a coluna">×</button>`:''}</th>`).join('')}<th scope="col">Observação</th></tr></thead>
-      <tbody>${corpo||`<tr><td colspan="${(fx.length?3:6)+cols.length+fx.length}" class="vazio">Nenhum processo neste recorte.</td></tr>`}</tbody>
+      <thead>${fx.length?`<tr class="sup"><th colspan="2"></th><th colspan="${fx.length}" class="g1">Prontuário da sessão <small>editado no Ex Officio</small></th><th colspan="${ind.length}" class="g3">Indicadores</th>${cols.length?`<th colspan="${cols.length}" class="g2">Variações</th>`:''}<th></th></tr>`:''}<tr>${fx.length?'<th scope="col">Processo</th>':'<th scope="col">Processo</th><th scope="col">Exequente</th><th scope="col">Executado</th><th scope="col">Rec.</th>'}<th scope="col">Minuta · correção</th>${fx.concat(ind).map(([k,r,,f])=>f?`<th scope="col" class="v vi"><div>${esc(r)}</div></th>`:`<th scope="col" class="fxh">${esc(r)}</th>`).join('')}${cols.map(c=>`<th scope="col" class="v"><div>${esc(c.rotulo)}</div>${ed?`<button type="button" class="x" data-mxcdel="${esc(c.id)}" title="Excluir a coluna">×</button>`:''}</th>`).join('')}<th scope="col">Observação</th></tr></thead>
+      <tbody>${corpo||`<tr><td colspan="${ncol}" class="vazio">Nenhum processo neste recorte.</td></tr>`}</tbody>
      </table></div>
     </div>
    </section>`;
