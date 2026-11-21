@@ -584,7 +584,7 @@ const ROTULO={cg:'CG',eq:'Geral'};
 function seletorColecoes(lotes,id) {
   const tipo=LOTE?(LOTE.tipo==='pauta'?'pauta':'avulsa'):'avulsa';
   const ses=LOTE&&LOTE.sessoes&&LOTE.sessoes[0]||LISTA.sessoes[0]?.date||'';
-  const sess=LISTA.sessoes||[],avulsos=lotes.filter(l=>l.tipo!=='pauta');
+  const sess=LISTA.sessoes||[],avulsos=lotes.filter(l=>l.tipo!=='pauta'&&l.tipo!=='triagem'&&l.tipo!=='selecao'&&!l.escaninho); /* triagem, séries, seleção prévia e escaninhos ficam no Caput */
   const daSessao=lotes.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===ses);
   const opt=l=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+(l.cor?'● ':'')+esc(l.titulo)+(l.subtitulo?' — '+esc(l.subtitulo):'')+' · '+l.total+'</option>';
   const optAv=avulsos.map(opt).join('');
@@ -648,8 +648,8 @@ async function inicio(){
     if(MODO!=='cg'&&R.relator){MODO_REL=true;VZ='rel'}
     LOTE=R.lote; RELATOR=!!R.relator;
     /* Lotes legados de triagem e seleção prévia foram migrados para o Caput */
-    if(LOTE&&(LOTE.tipo==='triagem'||LOTE.tipo==='selecao')){
-      mostra(cabecalho(lotes,id,L.usuario)+'<div class="card" style="margin:2rem auto;max-width:520px;padding:1.5rem"><h2 style="margin-top:0">Coleção migrada</h2><p>As coleções de <strong>Triagem</strong> e <strong>Seleção prévia</strong> foram integradas à aba de triagem do Caput.</p><a class="b" href="/caput/triagem/" style="display:inline-block;margin-top:.5rem">Ir para Caput · Triagem →</a></div>');
+    if(LOTE&&(LOTE.tipo==='triagem'||LOTE.tipo==='selecao'||LOTE.origem==='escaninho')){
+      mostra(cabecalho(lotes,id,L.usuario)+'<div class="card" style="margin:2rem auto;max-width:520px;padding:1.5rem"><h2 style="margin-top:0">Coleção migrada</h2><p>As coleções de <strong>Triagem</strong> (lotes das tarefas, séries e escaninhos) e de <strong>Seleção prévia</strong> foram integradas à aba de triagem do Caput.</p><a class="b" href="/caput/triagem/" style="display:inline-block;margin-top:.5rem">Ir para Caput · Triagem →</a></div>');
       ligaCab(); return;
     }
     montar(lotes,id,L.usuario);
