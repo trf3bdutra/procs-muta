@@ -29,6 +29,9 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - **0.16.3:** os botões do PJe (acompanhar, trocar de aba, prontuários, ajuda) ficam na faixa do topo, quadrados; o
   cabeçalho do processo vira uma faixa escura de ponta a ponta (cores da base do app); número, classe e tipo numa linha, sem
   repetir a classe por extenso; Controles em cartõezinhos compactos (meta sem razão).
+- **0.16.4:** **Precedentes relacionados** no modo Processo (o mesmo critério da gaveta do Ex Officio: temas, assunto,
+  assunto detalhado e questões; curados e série histórica; links para o Ementário do Compendium) — `precedentes.js`; a faixa
+  do topo aparece também sem processo aberto e antes do login, com os botões do PJe.
 - Listas curtas e Sim/Não viram botões em todo o prontuário; cabeçalho das abas branco no tema claro.
 
 ## O que muda na 0.15

@@ -144,3 +144,13 @@ test('extensão 0.16: modos Processo · Autos · Roteiro de triagem · Produçã
   const ficha = JSON.parse(read('padrao/ficha.json'));
   assert.ok(ficha.abas.some(a => a.grupos.some(g => g.campos.some(c => c.secao === 'triagem' && c.chave === 'Assunto detalhado' && c.editavel !== false))), 'assunto detalhado editável');
 });
+
+test('extensão 0.16.4: precedentes relacionados com o critério da gaveta do Ex Officio', () => {
+  const sandbox = { window: {} }; vm.createContext(sandbox); vm.runInContext(read('extensao/precedentes.js'), sandbox);
+  const P = sandbox.window.MutaPrecedentes;
+  const C = [{ n: '5000001-00.2020.4.03.6000', as: 'Atraso na Entrega do Imóvel', q: ' atraso entrega imovel ', t: {} }, { n: '5000791-85.2025.4.03.6207', as: 'Atraso na Entrega do Imóvel', q: ' atraso entrega imovel ', t: {} }];
+  C.ix = { atraso: [0, 1], entrega: [0, 1], imovel: [0, 1] };
+  const L = P.relacionados({ cnj: '5000791-85.2025.4.03.6207', assunto: 'Atraso na Entrega do Imóvel' }, C);
+  assert.equal(JSON.stringify(L.map(x => x.r.n)), JSON.stringify(['5000001-00.2020.4.03.6000']), 'o próprio processo fica de fora');
+  assert.ok(read('extensao/painel.html').includes('src="precedentes.js"'));
+});
