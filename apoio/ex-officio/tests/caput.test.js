@@ -98,3 +98,9 @@ test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.cg-cal .cc-body{background:var(--p)}.cg-cal .cc-2m>div')&&cap.includes('.cg-cal .cc-esq .cc-esq-b{top:56px!important}'),'painéis por mês');
 });
+
+test('Chefia › Calendário: pedidos de ausência e quem está fora, pelo motor',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  for(const x of ['solicitacoesAusencia: function','decidirAusencia: function','ausencias: function','ausenciaPoe: function','ausenciaTira: function','async function eqDecidir('])assert.ok(m.includes(x),x);
+  for(const x of ['<div id="cg-aus">','function ausPinta(','data-cgau="sim"','data-cgau="poe"','Quem está fora · 6 semanas'])assert.ok(cap.includes(x),x);
+});
