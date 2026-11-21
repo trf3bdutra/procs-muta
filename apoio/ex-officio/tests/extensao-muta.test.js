@@ -415,3 +415,9 @@ test('extensão 0.33.1: quadro do Desembargador fora do menu lateral; selos fora
   assert.match(c, /q\.width < 160/); assert.match(c, /el\.closest\('nav, aside/); assert.match(c, /cw < 280/);
   assert.match(c, /function pontoBloco\(a, card\)/); assert.match(c, /pontoBloco\(ancora\(c\), c\.el\)/);
 });
+
+test('extensão 0.34: botão na lista do PJe liga e desliga o modo HERO (selos e redesenho das etiquetas)', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /function botaoModo\(\)/); assert.match(c, /id = 'hero-modo-btn'/); assert.match(c, /function limparModo\(\)/);
+  assert.match(c, /\{ selos: liga, etqEstilo: liga \}/); assert.match(c, /if \(modoDesligado\(\)\) \{ limparModo\(\)/);
+});

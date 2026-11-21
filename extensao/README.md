@@ -5,6 +5,11 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.34 · liga e desliga o modo HERO na lista
+
+- Botão "HERO ligado / desligado" no canto de baixo da lista de tarefas do PJe, acima de "Ocultar a lista". Desligado, somem os selos, as sinalizações e as sugeridas, e as etiquetas voltam ao desenho do PJe. Um clique liga de novo.
+- A escolha fica neste navegador e é a mesma de sino › Prazos (selos e redesenho das etiquetas).
+
 ## 0.33.1 · correções no PJe real
 
 - O quadro do Desembargador entrava no menu lateral estreito (o ícone de assinaturas tem o mesmo nome): agora só entra no título largo de uma coluna, fora de menus.
