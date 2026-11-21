@@ -2078,6 +2078,31 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
 </style>
 <link rel="stylesheet" href="/padrao/loading/gabinete-loader.css">
 <script defer src="/padrao/loading/gabinete-loader.js"></script>
+<style id="ux-pauta-1121">
+/* Pautas · coluna da esquerda: sessão e buscador rápido em linha única, sem os rótulos */
+#v-pauta.pt2 .pp-sub .pp-ses{grid-template-areas:"d sub nav"!important;grid-template-columns:auto minmax(0,1fr) auto!important;row-gap:0!important;column-gap:0;align-items:center}
+#v-pauta.pt2 .pp-sub .pp-ses .pp-ses-k{display:none!important}
+#v-pauta.pt2 .pp-sub .pp-ses::before{grid-row:1!important;grid-column:1/3!important}
+#v-pauta.pt2 .pp-sub .pp-ses .pp-ses-nav{margin-left:6px;gap:3px}
+#v-pauta.pt2 .pp-sub .pp-ses .pp-ses-d{padding:6px 0 6px 8px!important;gap:5px}#v-pauta.pt2 .pp-sub .pp-ses .pp-ses-d b{font-size:19px!important}#v-pauta.pt2 .pp-sub .pp-ses .pp-ses-d i{display:none}
+#v-pauta.pt2 .pp-sub .pp-ses #ses-sub{letter-spacing:0!important;text-transform:none!important;font-size:10.5px!important;padding-left:2px}#v-pauta.pt2 .pp-sub .pp-ses .b.ic2{width:24px!important;height:24px!important;flex-basis:24px!important}
+#v-pauta.pt2 .pp-sub .pt-ir.quick-find>span:not(.qf-row),#v-pauta.pt2 .pp-sub .pt-ir.quick-find .qf-help,.quick-find .qf-k{display:none!important}
+/* Prontuário · cartões: Sinalizações e Notas com a ação no cabeçalho; seções de Caso, Admissibilidade e Julgamento como cartões */
+#prq #ac-sn>h4 .ac-hb{margin-left:auto;display:inline-flex;gap:6px;align-items:center;font:400 12px var(--font);letter-spacing:0;text-transform:none}
+#prq #ac-sn>h4 .ac-hb select{height:26px;width:108px;font:12px var(--font);padding:0 6px;border:1px solid #eadcc2;border-radius:5px;background:#fff;color:var(--ei,#203b39)}
+#prq #ac-sn>h4 .ac-hb .b,#prq #prt-nt>h3 .nt-add{height:26px;padding:0 10px;font:600 11.5px var(--font);letter-spacing:0;text-transform:none;border-radius:5px;white-space:nowrap}
+#prq #ac-sn>h4 .ac-hb .sg-inc{width:26px;padding:0;font-size:15px;line-height:1}
+#prq #ac-sn .sg-add{display:block!important;margin-top:8px}#prq #ac-sn .sg-add input{width:100%}
+#prq #prt-nt{background:#f4f8f6;border:1px solid #d3e2db!important;border-left:3px solid #235a55!important;border-radius:6px;padding:8px 10px 10px!important;margin:6px 0 12px!important;box-shadow:0 1px 2px rgba(20,60,50,.05)}
+#prq #prt-nt>h3{display:flex;align-items:center;gap:8px;margin:0 0 8px}
+#prq #prt-nt>h3 .nt-add{margin-left:auto}
+#prq #prt-nt .nt-n{display:block}#prq #prt-nt .nt-n textarea{width:100%;background:#fff}
+#prq .prt-p>section{background:#fff;border:1px solid var(--el,#d8d3c6)!important;border-left:3px solid var(--eg,#235a55)!important;border-radius:6px;padding:8px 10px 10px!important;margin:6px 0 12px!important;box-shadow:0 1px 2px rgba(32,59,57,.05)}
+html[data-theme=dark] #prq #prt-nt{background:#13261f;border-color:#2b4a40!important;border-left-color:#6eba8a!important}
+html[data-theme=dark] #prq #prt-nt .nt-n textarea{background:#13202b}
+html[data-theme=dark] #prq #ac-sn>h4 .ac-hb select{background:#13202b;border-color:#4a3c24;color:#ebeff1}
+html[data-theme=dark] #prq .prt-p>section{background:#132835;border-color:#2c4a5c!important;border-left-color:#6eba8a!important}
+</style>
 </head>
 <body>
 <div id="entrada" hidden>
@@ -3195,9 +3220,9 @@ function notasDe(it){var c=it.ctl||{},N=(((c.cartao||{}).notas)||[]).filter(func
   if(it.obs&&String(it.obs).trim())N.unshift({tx:String(it.obs),por:'',em:'',obs:true});return N;}
 function notasTexto(it){return notasDe(it).map(function(n){return n.tx+(n.por||n.em?' ('+[n.por,n.em?br(n.em.slice(0,10)).slice(0,5):''].filter(Boolean).join(', ')+')':'');}).join(' | ');}
 function notasBloco(it){var N=notasDe(it),hr=function(v){if(!v)return '';var d=new Date(v);return isNaN(d)?'':br(v.slice(0,10)).slice(0,5)+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');};
-  return '<section class="prt-nt" id="prt-nt" aria-label="Notas sobre o caso"><h3><span>Notas sobre o caso</span><small>'+(N.length?N.length:'nenhuma')+'</small></h3>'+
+  return '<section class="prt-nt" id="prt-nt" aria-label="Notas sobre o caso"><h3><span>Notas sobre o caso</span><small>'+(N.length?N.length:'nenhuma')+'</small><button type="button" class="b pri nt-add" data-nota-add title="Incluir a nota escrita abaixo (Ctrl+Enter)">+ Incluir nota</button></h3>'+
     (N.length?'<ul class="nt-l">'+N.map(function(n){return '<li><p>'+esc(n.tx)+'</p><small>'+(n.obs?'observação do cartão':esc([n.por,hr(n.em)].filter(Boolean).join(' · ')))+'</small><button type="button" class="nt-x" '+(n.obs?'data-nota-obs':'data-nota-x="'+n.i+'"')+' title="Excluir esta nota" aria-label="Excluir esta nota">×</button></li>';}).join('')+'</ul>':'')+
-    '<div class="nt-n"><textarea id="nt-tx" rows="2" maxlength="2000" placeholder="Nova nota: síntese, observação, lembrete para quem vai revisar… (Ctrl+Enter inclui)"></textarea><button type="button" class="b pri" data-nota-add>Incluir nota</button></div></section>';}
+    '<div class="nt-n"><textarea id="nt-tx" rows="2" maxlength="2000" placeholder="Nova nota: síntese, observação, lembrete para quem vai revisar… (Ctrl+Enter inclui)"></textarea></div></section>';}
 function notasGravar(it,arr,msg){cart(it).notas=arr;marcar(it,{cartao:{notas:arr}});var a=document.activeElement;if(a&&a.blur)a.blur();render();gravar();if(msg)toast(msg);}
 function abrirNotas(it){if(S.fonte!=='mono'){abrirAcomp(it,'nt');return;}S.prt=dg(it.cnj);var a=document.activeElement;if(a&&a.blur)a.blur();prontLateral();
   setTimeout(function(){var b=$('#prt-nt'),t=$('#nt-tx');if(b)b.scrollIntoView({behavior:'smooth',block:'nearest'});if(t)t.focus();},60);}
@@ -3216,13 +3241,14 @@ function acompHtml(it){var c=it.ctl||{},so=c.sopref||'',PL=(((c.cartao||{}).pend
   return '<div class="ac">'+
     /* sustentação oral · preferência no próprio prontuário (o mesmo conteúdo do diálogo): recolhida quando não há pedido;
        abre sozinha se houver pedido marcado ou pedido recebido por e-mail vinculado ao processo */
+    sinalizacoes(it,c,PL,auto)+
+    notasBloco(it)+
     '<details class="ac-s ac-det" id="ac-so"'+(so?' open':'')+'><summary><h4>Solicitações'+(so?'<em class="ac-st so">'+esc(SOROT[soTipo(so)])+'</em>':'<em class="ac-st">sem pedido</em>')+'</h4></summary>'+
       '<label class="ac-sf ac-sotp"><span>Pedido</span><select data-ac-sosel aria-label="Pedido de sustentação oral ou preferência">'+SOB.map(function(x){return '<option value="'+x[0]+'"'+(so===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+(so&&!SOB.some(function(x){return x[0]===so;})?'<option selected>'+esc(so)+'</option>':'')+'</select></label>'+
       (function(){var D=((c.cartao||{}).so)||{},fl=function(r,k,ph,t){return '<label class="ac-sf"><span>'+r+'</span><input data-p="so.'+k+'" type="'+(t||'text')+'" value="'+esc(D[k]||'')+'"'+(ph?' placeholder="'+esc(ph)+'"':'')+'></label>';};
         return '<div class="ac-so-f">'+fl('Advogado(a)','advogado','nome')+fl('OAB','oab','UF 000000')+fl('Parte representada','parte','parte que pediu')+fl('Pedido recebido em','recebido','','date')+'</div>';})()+
       '<div class="ped-dados" aria-live="polite"></div><small class="ac-h">Pedidos recebidos por e-mail preenchem estes campos ao serem vinculados ao processo.</small></details>'+
-    sinalizacoes(it,c,PL,auto)+
-    notasBloco(it)+'</div>';}
+    '</div>';}
 /* SINALIZAÇÕES do caso: intercorrências (inclusive chamado ao TI e processo retido: adiado ou retirado de pauta), pendências e avisos.
    Todas têm checkbox de resolução. Só a intercorrência retém a liberação e abre diligência automática (quadro de Diligências). */
 function retidoDe(it){var r=String(it.resultado||''),t=(it.ctl||{}).intercorTipo||'';return /^adiad/i.test(r)?'Adiado':/^retirad/i.test(r)?'Retirado de pauta':/^(Adiado|Retirado de pauta)$/.test(t)?t:'';}
@@ -3230,7 +3256,8 @@ function icAberta(it){var c=it.ctl||{},m=/^(Adiado|Retirado de pauta)$/.test(c.i
 function sinalizacoes(it,c,PL,auto){var AV=(((c.cartao||{}).avisos)||[]),rtM=/^(Adiado|Retirado de pauta)$/.test(c.intercorTipo||''),rt=rtM?'':retidoDe(it),ti=c.intercorTipo==='Chamado ao TI',itp=c.intercorTipo?' · '+String(c.intercorTipo).toLowerCase():'';
   var nI=(c.intercor&&!c.intercorOk?1:0)+(rt&&!c.retidoOk?1:0),nP=PL.filter(function(p){return p&&p.desc&&!p.ok;}).length,nA=AV.filter(function(a){return a&&a.desc&&!a.ok;}).length;
   var tp=function(cls,t){var ic={ic:ICN.ic,pd:ICN.al,av:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>'}[cls]||'';return '<span class="sg-tp '+cls+'">'+ic.replace(/width="14" height="14"/,'width="10" height="10"')+t+'</span>';},meta=function(p){return esc([p.por,p.ok&&p.resolvidaEm?'resolvida em '+br(p.resolvidaEm).slice(0,5):p.em?br(p.em).slice(0,5):''].filter(Boolean).join(' · '));};
-  var h='<section class="ac-s sg" id="ac-sn"><h4>Sinalizações'+(nI?'<em class="ac-st al">'+nI+' intercorrência'+(nI>1?'s':'')+'</em>':'')+(nP?'<em class="ac-st pd">'+nP+' pendência'+(nP>1?'s':'')+'</em>':'')+(nA?'<em class="ac-st av">'+nA+' aviso'+(nA>1?'s':'')+'</em>':'')+'</h4><div class="ac-pls">';
+  var h='<section class="ac-s sg" id="ac-sn"><h4>Sinalizações'+(nI?'<em class="ac-st al">'+nI+' intercorrência'+(nI>1?'s':'')+'</em>':'')+(nP?'<em class="ac-st pd">'+nP+' pendência'+(nP>1?'s':'')+'</em>':'')+(nA?'<em class="ac-st av">'+nA+' aviso'+(nA>1?'s':'')+'</em>':'')+'<span class="ac-hb"><select id="sg-tp" aria-label="Tipo da sinalização"><option value="pd">Pendência</option><option value="av">Aviso</option>'+
+    ['ti','Chamado ao TI','ad','Adiado','rt','Retirado de pauta','ic','Outra'].reduce(function(o,x,i,A){return i%2?o:o+'<option value="'+x+'"'+(c.intercor?' disabled':'')+'>Intercorrência · '+A[i+1].toLowerCase()+'</option>';},'<optgroup label="Intercorrência">')+'</optgroup></select><button type="button" class="b sg-inc" data-acp-add title="Incluir a sinalização descrita abaixo" aria-label="Incluir a sinalização">+</button></span></h4><div class="ac-pls">';
   /* itens em aberto por seção (Intercorrências, Pendências, Avisos); os resolvidos ficam opacos numa seção recolhida ao fim */
   var sec=function(t,n){return '<p class="sg-sec"><span>'+t+'</span>'+(n?'<i>'+n+'</i>':'')+'</p>';},G={ic:[],pd:[],av:[]},R=[];
   var poe=function(k,ok,html){(ok?R:G[k]).push(html);};
@@ -3246,9 +3273,7 @@ function sinalizacoes(it,c,PL,auto){var AV=(((c.cartao||{}).avisos)||[]),rtM=/^(
   if(G.av.length)h+=sec('Avisos',nA)+G.av.join('');
   if(!G.ic.length&&!G.pd.length&&!G.av.length)h+='<p class="sg-vz">'+(R.length?'Nada em aberto.':'Nenhuma sinalização.')+'</p>';
   if(R.length)h+='<details class="sg-res"'+(S.sgRes?' open':'')+'><summary class="sg-sec"><span>Resolvidas</span><i>'+R.length+'</i></summary>'+R.join('')+'</details>';
-  h+='</div><div class="ac-add sg-add"><select id="sg-tp" aria-label="Tipo da sinalização"><option value="pd">Pendência</option><option value="av">Aviso</option>'+
-    ['ti','Chamado ao TI','ad','Adiado','rt','Retirado de pauta','ic','Outra'].reduce(function(o,x,i,A){return i%2?o:o+'<option value="'+x+'"'+(c.intercor?' disabled':'')+'>Intercorrência · '+A[i+1].toLowerCase()+'</option>';},'<optgroup label="Intercorrência">')+'</optgroup></select>'+
-    '<input type="text" id="ac-pd-n" maxlength="300" placeholder="Descreva e tecle Enter"><button type="button" class="b" data-acp-add>Incluir</button></div>'+
+  h+='</div><div class="ac-add sg-add"><input type="text" id="ac-pd-n" maxlength="300" placeholder="Nova sinalização: descreva e tecle Enter (o tipo fica no alto)"></div>'+
     '<small class="ac-h">Intercorrência retém a liberação e abre diligência; pendência e aviso, não.'+(c.intercor?' Já há intercorrência: edite a existente.':'')+'</small>'+
     (auto.length?'<p class="ac-h2">Alertas automáticos de admissibilidade</p><ul class="ac-al">'+auto.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul><button type="button" class="ac-lk" data-ac-aba="2">Corrigir na aba Admissibilidade ›</button>':'')+'</section>';
   return h;}

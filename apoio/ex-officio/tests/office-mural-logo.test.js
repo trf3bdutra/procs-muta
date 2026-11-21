@@ -151,3 +151,14 @@ test('Mural do servidor: desenho do protótipo num shadow root, com o quadro ant
   assert.match(p, /meta: \(it\.ctl \|\| \{\}\)\.meta/);
   assert.match(p, /pend: \(\(\(it\.ctl/);
 });
+
+test('Pautas: sessão e buscador em linha única; ações de Sinalizações e Notas no cabeçalho; Solicitações no fim; seções como cartões', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#v-pauta\.pt2 \.pp-sub \.pp-ses \.pp-ses-k\{display:none!important\}/);
+  assert.match(h, /\.pt-ir\.quick-find>span:not\(\.qf-row\),#v-pauta\.pt2 \.pp-sub \.pt-ir\.quick-find \.qf-help/);
+  assert.match(h, /<span class="ac-hb"><select id="sg-tp"/);
+  assert.match(h, /class="b pri nt-add" data-nota-add/);
+  assert.ok(h.indexOf('notasBloco(it)+\n') < h.indexOf("'<details class=\"ac-s ac-det\" id=\"ac-so\"'"), 'Solicitações depois das Notas');
+  assert.match(h, /#prq \.prt-p>section\{background:#fff/);
+});
