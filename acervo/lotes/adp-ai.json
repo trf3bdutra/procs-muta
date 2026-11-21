@@ -23059,11 +23059,11 @@
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: voto no agravo de instrumento [VALIDAR resultado]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de instrumento da impetrante contra a liminar parcial em mandado de segurança: pretende estender a exclusão das bases do IRPJ, da CSLL, do PIS e da COFINS à isenção e à redução de base de cálculo de ICMS, já deferida para o crédito presumido. Tutela recursal indeferida; contraminuta e parecer do MPF nos autos.",
+   "peculiaridades": "Tempestividade: a agravante conta o prazo até 27/04/2026 excluindo o ponto facultativo de 20/04/2026 (Portaria CATRF3R 48/2025) [VALIDAR]; sem esse dia, o prazo terminaria em 24/04/2026. Preparo com comprovante STN \"Pagamento realizado com sucesso\" (Resolução PRES 790/2025, item III).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -23094,7 +23094,18 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Tributário — IRPJ, CSLL, PIS e COFINS; benefícios fiscais de ICMS (isenção e redução de base de cálculo) após a Lei 14.789/2023",
+    "origem": "Vara Federal de Campo Grande [VALIDAR vara] · 5006669-30.2025.4.03.6000",
+    "decisao_agravada": "IDs 432225919 (09/10/2025) e 569352177 (25/03/2026), na origem",
+    "recurso": "Agravo de instrumento ID 369359560 · 27/04/2026",
+    "preparo": "Comprovante STN \"Pagamento realizado com sucesso\"",
+    "monocratica": "ID 377946846 (tutela recursal indeferida)",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Guia PagTesouro aguardando pagamento: ID 369359566 · comprovante STN \"Pagamento realizado com sucesso\", serviço 20466, referência 50000648620264030001, Pix, R$ 64,26, 27/04/2026 10:16: ID 369359567 · não é \"Detalhes do Pagamento de GRU\" · conferido em 20/11/2026",
+    "conf_prevencao": "Origem: 5006669-30.2025.4.03.6000 · sem recurso anterior apontado nos autos · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -23115,6 +23126,17 @@
     "ultima_informacao": "",
     "ultima_movimentacao": "10/08/2026 16:52 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Agroindústria de rações para bovinos impetrou mandado de segurança preventivo para excluir das bases do IRPJ, da CSLL, do PIS e da COFINS os benefícios fiscais de ICMS (crédito presumido, isenção e redução de base de cálculo). O juízo deferiu a liminar só para o crédito presumido; os embargos de declaração mantiveram a limitação.",
+    "inicial": "Mandado de segurança 5006669-30.2025.4.03.6000 (Campo Grande), de Adames Indústria e Comércio de Rações e Suplementos Ltda. contra o Delegado da Receita Federal em Campo Grande; cópia integral no ID 369359561.",
+    "decisao_recorrida": "Decisão ID 432225919 (09/10/2025, na origem), integrada pela decisão nos embargos de declaração ID 569352177 (25/03/2026): liminar deferida só para os créditos presumidos de ICMS; negada para isenção e redução de base de cálculo.",
+    "recurso": "Agravo de instrumento ID 369359560 (27/04/2026), com pedido de efeito suspensivo ativo: isenção e redução de base de cálculo de ICMS equivalem a crédito presumido (EREsp 1.517.492 e Tema 1.182/STJ); invalidade da tributação pela Lei 14.789/2023 diante da Lei Complementar 160/2017.",
+    "resposta": "Contraminuta da Fazenda Nacional ID 386074185 (14/07/2026).",
+    "parecer": "MPF ID 389801538 (31/07/2026): falta de interesse para intervir.",
+    "outros": "Decisão do Relator ID 377946846 (08/06/2026): indeferiu a tutela recursal. Agravante: prazo decorrido em 02/07/2026. Conclusos para julgamento em 10/08/2026.",
+    "representacao": "Agravante: procuração nos autos de origem (ID 373907005, na cópia ID 369359561). Agravada: União (Fazenda Nacional).",
+    "preparo": "Petição ID 369359565 com guia PagTesouro \"aguardando realização do pagamento\" (ID 369359566) e comprovante STN \"Pagamento realizado com sucesso\" (ID 369359567): serviço 20466, referência do agravo, Pix, R$ 64,26, pago em 27/04/2026, identificação 1wgOO1yd3u0UqRMfEBHKIL."
    }
   },
   {
