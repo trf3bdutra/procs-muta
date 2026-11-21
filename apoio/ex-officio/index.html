@@ -5468,7 +5468,12 @@ var CMTEDK='vdm-ed-rascunho-v1',CMTEDN={par:'Parágrafos-padrão',pec:'Peças do
 function cmtEdPendN(){var n=0;try{var d=JSON.parse(localStorage.getItem(CMTEDK)||'null');if(d&&d.cols)Object.keys(d.cols).forEach(function(c){if(CMTEDN[c])n+=Object.keys(d.cols[c]).length;});}catch(e){}return n;}
 function cmtEdPend(){var n=cmtEdPendN(),p=document.getElementById('cmt-edl-p'),i=document.getElementById('cmt-gsl-ne'),b=document.getElementById('cmt-cmp-pd');
   if(p)p.innerHTML=n?'<b>'+n+(n===1?' alteração guardada':' alterações guardadas')+'</b> neste navegador, ainda não gravadas no GitHub. <button type="button" data-cedc="">Abrir para revisar e gravar</button>':'Nenhuma alteração pendente. O que você editar fica guardado aqui até ser gravado.';
-  if(i){i.textContent=n;i.hidden=!n;}if(b){b.textContent=n+(n===1?' não gravada':' não gravadas');b.hidden=!n;}}
+  if(i){i.textContent=n;i.hidden=!n;}cmtCmpN(n);}
+/* contagem que o próprio editor manda (vale também para o que ainda não foi guardado no navegador) */
+function cmtCmpN(n){var b=document.getElementById('cmt-cmp-pd'),v=document.getElementById('cmt-cmp-sv');
+  if(b){b.textContent=n?n+(n===1?' alteração':' alterações'):'Sem alterações';b.classList.toggle('on',!!n);}if(v)v.disabled=!n;}
+window.addEventListener('message',function(e){if(e.origin!==location.origin||!e.data||e.data.tipo!=='vdm-ed-cmt')return;cmtCmpN(+e.data.n||0);
+  var i=document.getElementById('cmt-gsl-ne');if(i){i.textContent=e.data.n;i.hidden=!e.data.n;}});
 window.addEventListener('storage',function(e){if(e.key===CMTEDK)cmtEdPend();});
 function cmtSvgB(p,s){return '<svg viewBox="0 0 24 24" width="'+(s||15)+'" height="'+(s||15)+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';}
 function cmtCmpEstado(st){var c=document.getElementById('cmt-cmp');if(!c)return;c.setAttribute('data-st',st);
@@ -5481,7 +5486,9 @@ function cmtCmp(col,q,novo){var c=document.getElementById('cmt-cmp'),vc=document
   if(!c){c=document.createElement('section');c.id='cmt-cmp';c.className='cmt-cmp';c.setAttribute('aria-label','Editor do Compendium');
     try{var hh=+localStorage.getItem('cmt_cmp_h');if(hh>=240)c.style.setProperty('--cmp-h',hh+'px');}catch(e){}
     c.innerHTML='<span class="cmt-cmp-g" title="Arraste para ajustar a altura" aria-hidden="true"></span>'+
-      '<div class="cmt-cmp-h"><span class="cmt-cmp-i">'+cmtSvgB('<path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>')+'</span><b>Editor do <em>Compendium.</em></b><span class="cmt-cmp-s" id="cmt-cmp-s"></span><span class="cmt-cmp-pd" id="cmt-cmp-pd" hidden></span><span class="cmt-sp"></span>'+
+      '<div class="cmt-cmp-h"><span class="cmt-cmp-i">'+cmtSvgB('<path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>')+'</span><b>Editor do <em>Compendium.</em></b><span class="cmt-cmp-s" id="cmt-cmp-s"></span><span class="cmt-sp"></span>'+
+      '<button type="button" class="cmt-cmp-pd" id="cmt-cmp-pd" data-ccmp="alt" title="Ver, abrir e desfazer as alterações">Sem alterações</button>'+
+      '<button type="button" class="cmt-cmp-sv" id="cmt-cmp-sv" data-ccmp="salvar" disabled>Salvar</button><span class="cmt-cmp-dv" aria-hidden="true"></span>'+
       '<button type="button" data-ccmp="min"></button><button type="button" data-ccmp="max"></button>'+
       '<a href="/editor/?cmt=1" target="_blank" rel="noopener" title="Abrir em outra aba" aria-label="Abrir em outra aba">'+cmtSvgB('<path d="M14 4h6v6M20 4l-9 9M18 14v6H4V6h6"/>')+'</a>'+
       '<button type="button" data-ccmp="x" title="Fechar (o que não foi gravado continua guardado)" aria-label="Fechar">'+cmtSvgB('<path d="M6 6l12 12M18 6L6 18"/>')+'</button></div>'+
@@ -5499,6 +5506,8 @@ document.addEventListener('click',function(e){if(!e.target.closest)return;
   var c=e.target.closest('[data-cedc]');if(c){cmtCmp(c.getAttribute('data-cedc'));return;}
   var n=e.target.closest('[data-cedn]');if(n){cmtCmp(n.getAttribute('data-cedn'),'',true);return;}
   var a=e.target.closest('[data-ccmp]');if(a){var cp=document.getElementById('cmt-cmp'),k=a.getAttribute('data-ccmp'),st=cp&&cp.getAttribute('data-st');
+    if(k==='salvar'||k==='alt'){var w=null;try{w=document.getElementById('cmt-cmp-f').contentWindow;}catch(x){}
+      if(w&&w.VDM_ED_CMT){if(st==='min')cmtCmpEstado('aberto');w.VDM_ED_CMT[k==='salvar'?'salvar':'alteracoes']();}else toast('O editor ainda está carregando.');return;}
     if(k==='x'){cmtCmpEstado('fechado');cmtEdPend();}else if(k==='min')cmtCmpEstado(st==='min'?'aberto':'min');else if(k==='max')cmtCmpEstado(st==='max'?'aberto':'max');return;}
   var h=e.target.closest('.cmt-cmp-h');if(h&&!e.target.closest('a,button')){var cp2=document.getElementById('cmt-cmp');if(cp2&&cp2.getAttribute('data-st')==='min')cmtCmpEstado('aberto');}});
 document.addEventListener('submit',function(e){if(e.target&&e.target.id==='cmt-edl-f'){e.preventDefault();var v=(document.getElementById('cmt-edl-qi')||{}).value||'';cmtCmp('',v.trim());}});
@@ -10382,7 +10391,12 @@ html[data-theme=dark] #prq .sg-tp{background:#3a2a14;color:#f0c27a}html[data-the
  #v-cmt .cmt-cmp-h b{font-size:14px;font-weight:650;color:var(--ei);white-space:nowrap}
  #v-cmt .cmt-cmp-h b em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
  #v-cmt .cmt-cmp-s{font:400 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--em);white-space:nowrap}
- #v-cmt .cmt-cmp-pd{display:inline-flex;align-items:center;height:20px;padding:0 8px;border:1px solid #e3cf9f;background:#fbf4e3;color:var(--eo2);font:600 10px var(--emono);white-space:nowrap}
+ #v-cmt .cmt-cmp-h .cmt-cmp-pd{display:inline-flex;align-items:center;width:auto;height:26px;padding:0 10px;border:1px solid var(--el);border-radius:999px;background:var(--ew);color:var(--em);font:400 10.5px var(--emono);white-space:nowrap}
+ #v-cmt .cmt-cmp-h .cmt-cmp-pd.on{border-color:#e3cf9f;background:#fbf4e3;color:var(--eo2);font-weight:600}
+ #v-cmt .cmt-cmp-h .cmt-cmp-sv{display:inline-flex;align-items:center;width:auto;height:30px;padding:0 16px;border-radius:0;background:var(--eg);color:#fff;font:inherit;font-size:12.5px;font-weight:700}
+ #v-cmt .cmt-cmp-h .cmt-cmp-sv:hover,#v-cmt .cmt-cmp-h .cmt-cmp-sv:focus-visible{background:#164a66;color:#fff}
+ #v-cmt .cmt-cmp-h .cmt-cmp-sv:disabled{background:var(--el);color:var(--em);cursor:default}
+ #v-cmt .cmt-cmp-dv{width:1px;height:22px;background:var(--el);flex:none}
  #v-cmt .cmt-cmp-h button,#v-cmt .cmt-cmp-h a{display:grid;place-items:center;flex:none;width:32px;height:32px;min-height:0;margin:0;padding:0;border:0;border-radius:6px;background:none;color:var(--em);cursor:pointer;text-decoration:none}
  #v-cmt .cmt-cmp-h button:hover,#v-cmt .cmt-cmp-h a:hover,#v-cmt .cmt-cmp-h button:focus-visible,#v-cmt .cmt-cmp-h a:focus-visible{background:var(--ep2);color:var(--eg)}
  #v-cmt .cmt-cmp iframe{flex:1 1 auto;width:100%;min-height:0;border:0;background:var(--ew)}

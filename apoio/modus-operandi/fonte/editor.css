@@ -116,3 +116,5 @@ mark.edp-f{background:var(--warn-soft,rgba(224,166,79,.2));color:inherit;border-
 .ed-grid .edf:has(textarea){grid-column:1/-1}
 /* dentro do painel do desembargador (/editor/?cmt=1): quem fecha é a barra do painel */
 html.ed-cmt [data-edx]{display:none!important}
+/* alterações e Salvar ficam na barra do painel; baixar arquivos não se usa ali */
+html.ed-cmt .ed-top [data-edzip],html.ed-cmt .ed-top [data-edgit],html.ed-cmt .ed-top [data-edpend],html.ed-cmt .ed-top [data-edpend]+.meta{display:none!important}
