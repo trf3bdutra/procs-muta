@@ -201,3 +201,14 @@ test('Monocráticas · revisão: prontuário sem abas inertes, Notas alinhadas, 
   assert.match(h, /\.sn-dlg \.dv-r>label\{flex:1 1 0;min-width:0\}/);
   assert.match(h, /\$\('#f-pri'\)\.title=MO\?'Só as decisões com pedido urgente'/);
 });
+
+test('Mural: passos do ponto de vista de quem está logado, sinalizações por processo, ações rápidas e coluna da direita na altura do calendário', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /aguarda:\{t:'Aguardando outros'/);
+  assert.match(h, /k:'corrigir',t:'A corrigir'/);
+  assert.match(h, /data-ab=\\?"pront\\?"[^]*?title=\\?"Abrir o prontuário\\?"/);
+  assert.match(h, /#mu-cal-wrap>\.mu-cal-lado\{align-self:stretch;height:0;min-height:100%;overflow:auto/);
+  assert.match(h, /\.mu-cal-lado \.av-box #avisos>\.nt:nth-child\(n\+5\)\{display:none\}/);
+  assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
+});
