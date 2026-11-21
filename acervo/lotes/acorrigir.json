@@ -13176,10 +13176,14 @@
      "Acórdão",
      "Ausente na minuta do PJe → Incluído, espelhando o dispositivo",
      "EST · MÉDIA"
+    ],
+    [
+     "Voto, na espécie",
+     "IDʼs 383955202, 383955204, 383955205 e 383955206 (anexos da inicial)",
+     "Conferido: DCTF, relação de arrecadação, PER/DCOMP e DCTF; grafia “IDʼs”"
     ]
    ],
    "pendencias": [
-    "IDʼs 383955202, 383955204, 383955205 e 383955206 (voto, “Na espécie”) não constam da lista de documentos extraída, que passa do 383955201 ao 383955203 e deste ao 383955207: conferir no PJe e, se for o caso, trocar pelas IDʼs dos documentos da inicial (por exemplo, 383955203, “Dispositivos legais”, e 383955208, “Planilha benefícios ICMS”).",
     "Preparo da apelação da impetrante: o comprovante (ID 383955411) é PDF digitalizado, sem texto. Conferir se é o comprovante do Tesouro (PagTesouro, “Pagamento realizado com sucesso”) ou GRU aceita."
    ],
    "minuta": true,
@@ -16877,8 +16881,86 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura sem a Forma A: “contra sentença”, sentença citada pelo ID da decisão dos embargos (343454427), e embargos de declaração das duas partes omitidos → Abertura “Trata-se de apelações e remessa necessária à sentença (ID 343454417) que …”, dispositivo enumerado, honorários em frase própria e parágrafo dos embargos (IDʼs 343454422, 343454423 e 343454427)",
+     "DOC · MÉDIA"
+    ],
+    [
+     "Relatório",
+     "Razões das apelações em texto corrido → Enumeração “alegando, em suma, que: (1) …; e (2) …”",
+     "RED · BAIXA"
+    ],
+    [
+     "Relatório, parecer",
+     "“opinou pelo regular processamento do feito” → O parecer (ID 352263667) diz que o MPF “se manifesta pelo prosseguimento do feito”: “manifestou-se pelo prosseguimento do feito”",
+     "FAT · BAIXA"
+    ],
+    [
+     "Voto, preliminares",
+     "“Nesse contexto”; “Lei nº” → “Neste contexto”; “Lei 14.789/2023”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, citações",
+     "Datas com “de”/“em”, “8/4/2022” e nome regimental incompleto (“CAMPBELL MARQUES”); data da ApelRemNec 5011026-63 divergente do banco de julgados → Padrão “Rel. Min. NOME, DJe DD/MM/AAAA”; MAURO CAMPBELL MARQUES; ApelRemNec 5011026-63.2019.4.03.6000: Intimação via sistema 23/02/2023 (banco de julgados)",
+     "JURIS · BAIXA"
+    ],
+    [
+     "Voto, Tema 1.182",
+     "“Nesse diapasão, fixou-se no Tema 1.182, a seguinte tese” → “No Tema 1.182, fixou-se a seguinte tese”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto",
+     "“Em casos tais, assim tem decidido a Corte:” (duas vezes); “CSL” no parágrafo do caso → “Em casos que tais, assim tem decidido esta Turma Regional:” e “Neste sentido:”; “CSLL”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, pacto federativo e reserva de plenário",
+     "“art. 150”; “Súmula Vinculante 10 do STF”; “no julgamento, acerca da” → “artigo 150”; “Súmula Vinculante 10”; “acerca da”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, prejuízo fiscal e base negativa",
+     "Transcrito, depois do precedente do STJ, o dispositivo daquele julgado (REINTEGRA, PIS e COFINS), alheio ao caso → Retirado; a transcrição fecha no trecho sobre compensação e recomposição de prejuízos; “EDcl no REsp 1.896.801”",
+     "JUR · MÉDIA"
+    ],
+    [
+     "Voto, apelação da impetrante",
+     "Frase de abertura truncada (“impõe-se a análise de suas razões recursais, quanto ao pleito …, não assiste razão”) → “Quanto à apelação da impetrante, não procede o pedido de incidência da Taxa SELIC …”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, ressarcimento",
+     "Os parágrafos sobre restituição administrativa não registravam que a sentença a afastou, e a apelação da União sobre o Tema 1.262/STF ficava sem resposta direta → Parágrafo de ligação antes dos parágrafos-padrão (mantidos): a sentença limitou o ressarcimento à compensação",
+     "JUR · MÉDIA"
+    ],
+    [
+     "Voto, fecho",
+     "Sem síntese e sem honorários → “Em suma, …”; “Sem honorários advocatícios (artigo 25 da Lei 12.016/2009).”",
+     "EST · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho com expressão repetida; seções em caixa baixa; questões sem “saber se”; item IV só com a apelação da União (o voto nega provimento às duas apelações); Súmula 461/STJ citada contra o seu sentido; separador e rodapé fora do padrão (temas misturados aos dispositivos) → Cabeçalho refeito; seções em caixa alta; três questões com “saber se”; item das preliminares; item IV “Apelações e remessa necessária desprovidas.”; rodapé com dispositivos e julgados do voto",
+     "EST · ALTA"
+    ],
+    [
+     "Voto, na espécie",
+     "ID 343454392 citado para o Termo de Acordo → Conferido: “Doc. n. 05: Termo de Acordo/Protocolo de Intenções e Aditivos” (anexo da inicial)",
+     "DOC · Conferido"
+    ]
+   ],
+   "pendencias": [
+    "Conferir o inteiro teor da ApelRemNec 5008172-52.2022.4.03.6110 (Rel. Des. Fed. MONICA NOBRE), vinda da minuta original."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5003166-35.2024.4.03.6000.json.gz",
@@ -23977,8 +24059,46 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura sem a Forma A, com o ID da sentença no fim; embargos de declaração da impetrante omitidos → “Trata-se de apelação à sentença (ID 350682668) que …”; incluídos os embargos (ID 350682669) e a rejeição (ID 350682679)",
+     "DOC · MÉDIA"
+    ],
+    [
+     "Relatório",
+     "“sustentando, em síntese”; ocorrência depois do parecer; “opinou pelo regular prosseguimento” → “alegando, em suma”; recebimento da apelação antes do parecer; parecer pelo prosseguimento do feito sem intervenção (ID 350947784)",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, citações",
+     "Datas com “de”/“em”, “8/4/2022” e “CAMPBELL MARQUES” → Padrão “Rel. Min. NOME, DJe DD/MM/AAAA”; MAURO CAMPBELL MARQUES",
+     "JURIS · BAIXA"
+    ],
+    [
+     "Voto, conclusão do mérito",
+     "“deverão ser verificados” (concordância); “Nesse diapasão”; “LC 160/2017” → “será verificado”; “Assim,”; “Lei Complementar 160/2017”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, custas, honorários e dispositivo",
+     "“por ele adiantadas”; sem menção a honorários; dispositivo sem dizer o alcance do provimento em mandado de segurança → “por ela”; “Sem honorários advocatícios (artigo 25 da Lei 12.016/2009).”; “dou parcial provimento à apelação para conceder parcialmente a segurança, nos termos da fundamentação” (mesmo resultado)",
+     "JUR · MÉDIA"
+    ],
+    [
+     "Ementa",
+     "Seções em caixa baixa; questões sem “saber se”; cabeçalho com “PROVIMENTO PARCIAL”; rodapé sem relatores e datas, fora da ordem STF → STJ → TRF-3 → outros e com “TRF4”/“TRF3” → Seções em caixa alta; “saber se”; “APELAÇÃO PARCIALMENTE PROVIDA”; rodapé no padrão, com a Lei 12.016/2009",
+     "EST · MÉDIA"
+    ]
+   ],
+   "pendencias": [
+    "Conferir a data e o veículo da ApelRemNec 5008344-96.2023.4.03.6000 (Rel. Des. Fed. JEAN MARCOS), vinda da minuta original como “DJE em 02/06/2026”."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5002294-20.2024.4.03.6000.json.gz",
@@ -30579,8 +30699,47 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura sem a Forma A, com o ID da sentença no fim; embargos de declaração da União sem IDʼs → “Trata-se de apelações e remessa necessária à sentença (ID 107864764, f. 71/85) que …”, honorários em frase própria; embargos (f. 170/174) e rejeição (ID 107864424, f. 4/5)",
+     "DOC · MÉDIA"
+    ],
+    [
+     "Relatório",
+     "A apelação dos honorários foi atribuída ao embargante; nos autos, recorre a sociedade Pithan & Loubet Advocacia, em nome próprio, com o embargante como interessado (ID 107864764, f. 89/90) → “Apelou a sociedade de advogados Pithan & Loubet Advocacia, em nome próprio …”",
+     "FAT · ALTA"
+    ],
+    [
+     "Relatório",
+     "Memoriais omitidos; “CDA's”, “ID's”, “em síntese” → Memoriais (ID 315023764); “CDAʼs”, “IDʼs”, “em suma”",
+     "DOC · BAIXA"
+    ],
+    [
+     "Voto, transcrição da sentença",
+     "Erros de digitalização no trecho transcrito (“173,1”, “S 2°”, “em06-10-05”, “06 01-06”, “f 1. 05”) → Corrigidos conforme a sentença (ID 107864764, f. 79/83): “173, I”, “§ 2°”, datas e folhas",
+     "DOC · BAIXA"
+    ],
+    [
+     "Voto",
+     "Recurso dos honorários tratado como “do embargante”; “Súmula 555/STJ do Superior Tribunal de Justiça”; “IRPJ/CSL”, “PIS/ COFINS”; “artigo 20, CPC”; sem menção a honorários recursais → Apelação da sociedade de advogados; Súmula 555 do Superior Tribunal de Justiça; IRPJ, CSLL, PIS e COFINS; artigo 20 do CPC/1973; sem majoração recursal (Enunciado Administrativo 7/STJ); fecho “Em suma”",
+     "JUR · MÉDIA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho sem a conclusão; seções em caixa baixa; questões sem “saber se”; item 7 com uma frase só, longa; “arts.”, “Decreto nº”, “REsp 973.733/SC” → Cabeçalho com “APELAÇÕES E REMESSA NECESSÁRIA DESPROVIDAS”; seções em caixa alta; “saber se”; item 7 em duas frases; rodapé no padrão",
+     "EST · MÉDIA"
+    ]
+   ],
+   "pendencias": [
+    "Conferir na sentença (ID 107864764, f. 83) a palavra “publicação” no trecho transcrito (“mostra-se possível a publicação do parágrafo único do art. 173”): provável “aplicação” na origem; a digitalização não permitiu confirmar.",
+    "Não há parecer da Procuradoria Regional da República entre os documentos extraídos: conferir no PJe se houve intimação ou manifestação."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/0008052-22.2011.4.03.6000.json.gz",
