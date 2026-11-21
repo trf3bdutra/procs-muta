@@ -93,3 +93,8 @@ test('Calendário recolhido deixa a faixa da semana atual; Regras gerais com o f
   assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('function faixaSemana(vis)')&&r('caput/triagem/index.html').includes('semanaRecolhida: true'),'faixa recolhida');
   assert.ok(r('caput/assets/js/regras-gerais.js').includes('.rg.embutida .rg-c{background:#fbfaf5'),'fundo igual');
 });
+
+test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por mês',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('.cg-cal .cc-body{background:var(--p)}.cg-cal .cc-2m>div')&&cap.includes('.cg-cal .cc-esq .cc-esq-b{top:56px!important}'),'painéis por mês');
+});
