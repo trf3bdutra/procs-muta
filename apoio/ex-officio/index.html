@@ -1817,6 +1817,9 @@ html[data-theme=dark] #v-pauta.ed #prq .prt:not(.pmn)>.prt-id{background:#0a1821
 #v-pauta.ed #prq .prt.pmn>.prt-id{margin:0 14px 12px;padding:8px 12px;border:1px solid var(--el);border-left:3px solid #173f3d;background:var(--ew,#fff)}html[data-theme=dark] #v-pauta.ed #prq .prt.pmn>.prt-id{background:#0a1821}
 #v-pauta.ed #prq .prt-tabs{border-top:1px solid var(--el)}
 #prq .prt.prt-ess .prt-body .f:not(.ess),#prq .prt.prt-ess .prt-body section:not(.ess),#prq .prt.prt-ess .prt-body .q,#prq .prt.prt-ess .prt-body .sub{display:none!important}
+#prq .prt-essn{display:flex;align-items:center;gap:8px;margin:0;padding:5px 14px;border-bottom:1px solid var(--el,var(--line));background:#eef4f1;font:600 10.5px var(--emono,monospace);letter-spacing:.04em;color:#173f3d}#prq .prt-essn[hidden]{display:none}
+#prq .prt-essn button{margin-left:auto;border:0;background:none;padding:0;font:inherit;color:#173f3d;text-decoration:underline;cursor:pointer}
+html[data-theme=dark] #prq .prt-essn{background:#13302c;color:#a9d6c9}html[data-theme=dark] #prq .prt-essn button{color:#a9d6c9}
 /* Monocráticas: fila de urgências como painel lateral à esquerda, na margem livre da página (telas largas); em telas estreitas, faixa abaixo dos números */
 #v-pauta.urq-lat #trm-urq{position:fixed;margin:0;z-index:6;display:flex;max-height:calc(100vh - 120px);overflow:auto}
 #v-pauta.urq-lat #trm-urq>*{flex:1;min-width:0}
@@ -3263,8 +3266,17 @@ var PRT_ESS=['[data-p="tipoJ"]','[data-p="subassuntos"]','[data-p="questoes"]','
 try{S.prtModo=localStorage.getItem('eq_prt_modo')||'comp';}catch(e){S.prtModo='comp';}
 function prtEssencial(el){var P=el.querySelector('.prt');if(!P)return;[].forEach.call(el.querySelectorAll('.prt-body .f'),function(f){if(f.querySelector(PRT_ESS))f.classList.add('ess');});
   [].forEach.call(el.querySelectorAll('.prt-body section'),function(sc){if(sc.classList.contains('prt-min')||sc.classList.contains('prt-prec')||sc.closest('.ac')||sc.querySelector('.f.ess,.rec'))sc.classList.add('ess');});
-  P.classList.toggle('prt-ess',S.prtModo==='ess');}
-document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-prt-modo]');if(!b)return;S.prtModo=b.getAttribute('data-prt-modo');try{localStorage.setItem('eq_prt_modo',S.prtModo);}catch(x){}prontLateral();});
+  prtModoAplica(el);}
+/* aplica o modo no prontuário aberto, sem redesenhar (não depende de foco nem de campo em edição) e com aviso visível */
+function prtModoAplica(el){el=el||$('#prq');if(!el)return;var P=el.querySelector('.prt');if(!P)return;var e=S.prtModo==='ess';P.classList.toggle('prt-ess',e);
+  var b=el.querySelector('[data-prt-modo]');if(b){b.setAttribute('data-prt-modo',e?'comp':'ess');b.setAttribute('aria-pressed',String(e));b.setAttribute('aria-label',e?'Mostrar todos os campos':'Mostrar só os campos essenciais');b.title=e?'Modo essencial · clique para ver todos os campos':'Modo completo · clique para ver só os essenciais';
+    var pt=b.querySelector('path');if(pt)pt.setAttribute('d',e?'M5 9h14M5 15h9':'M5 6h14M5 10h14M5 14h14M5 18h9');}
+  var nt=P.querySelector('.prt-essn'),tb=P.querySelector('.prt-tabs');
+  if(e&&!nt&&tb){nt=document.createElement('div');nt.className='prt-essn';tb.parentNode.insertBefore(nt,tb.nextSibling);}
+  if(nt){var oc=[].filter.call(P.querySelectorAll('.prt-body .f'),function(f){return !f.classList.contains('ess');}).length;
+    nt.hidden=!e;nt.innerHTML='<span>Modo essencial · '+oc+' campo'+(oc===1?'':'s')+' oculto'+(oc===1?'':'s')+'</span><button type="button" data-prt-modo="comp">Mostrar todos</button>';}}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-prt-modo]');if(!b)return;e.preventDefault();S.prtModo=b.getAttribute('data-prt-modo')==='ess'?'ess':'comp';try{localStorage.setItem('eq_prt_modo',S.prtModo);}catch(x){}
+  if($('#prq .prt'))prtModoAplica();else prontLateral();});
 /* o painel fica parado na tela: mesma coluna da grade, preso ao topo (abaixo da barra) e ao rodapé da janela */
 var PRT_W=400;
 function prtPos(){setTimeout(urqLat,0);var vp=$('#v-pauta'),a=$('#prq'),p=a&&a.querySelector('.prt');
@@ -3862,7 +3874,7 @@ function corpo(it,tj){
      f('Questões controvertidas',tl('questoes','o que o recurso discute, ponto a ponto','num'))+f('Síntese fática',tl('sintese','fatos relevantes do caso, em poucas linhas','txt'))+f('Observação',tl('obsGeral','observação geral sobre o processo','txt'))+f('Detalhes da pauta','<textarea rows="2" data-d="obs" placeholder="anotações (coluna Detalhes)">'+esc(it.obs||'')+'</textarea>')+'</div></section>'+
    '<section><h3><em>2</em>Processo e origem</h3>'+
      f('Partes e papéis',pts.length?pts.map(function(p,i){return '<div class="row"><span style="flex:1 1 140px;font-size:11.5px">'+esc(p)+'</span>'+sx('papeis.'+i,['Autor(a)','Réu/ré','Terceiro'])+'</div>';}).join(''):'—')+
-     f('Decisão na origem',sx('orig.tipo',['Decisão interlocutória','Sentença','Decisão monocrática','Acórdão']))+f('ID da decisão',inp('orig.id','ID'))+f('Data',inp('orig.data','','date'))+
+     f('Decisão na origem · ID · data','<div class="row orig-ln">'+sx('orig.tipo',['Decisão interlocutória','Sentença','Decisão monocrática','Acórdão'])+inp('orig.id','ID')+inp('orig.data','','date')+'</div>')+
      f('Juízo de origem',inp('orig.juizo','vara / juízo'))+f('Julgador(a)',inp('orig.julgador','nome'))+
      f('Acessórios','<div class="row">'+ck('orig.acc.custas','Custas')+ck('orig.acc.honor','Honorários')+ck('orig.acc.tutela','Tutela')+ck('orig.acc.valor','Valor da causa')+'</div>')+
      (G('orig.acc.custas')?f('Custas',inp('orig.custas','informação / valor')):'')+(G('orig.acc.honor')?f('Honorários',inp('orig.honor','contexto')):'')+(G('orig.acc.tutela')?f('Tutela',inp('orig.tutela','deferida / indeferida · ID')):'')+(G('orig.acc.valor')?f('Valor da causa',inp('orig.valor','R$')):'')+'</section>'+
@@ -9917,6 +9929,11 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #prq .rec.rec-pc input[type=date]::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:auto;height:auto;opacity:0;cursor:pointer}
 #prq .rec.rec-pc>.cpw>input{font-size:11px!important;padding:0 20px 0 4px!important}#prq .rec.rec-pc>.cpw>.cpy{width:18px;right:1px}
 #prq .cpw,.pc-cpw{position:relative;display:block;min-width:0}
+/* decisão na origem: tipo · ID · data na mesma linha, como as peças */
+#prq .row.orig-ln{display:grid!important;grid-template-columns:minmax(0,1fr) 104px 92px;gap:6px;align-items:center;flex-wrap:nowrap}
+#prq .row.orig-ln>select,#prq .row.orig-ln>input,#prq .row.orig-ln>.cpw{width:100%!important;min-width:0!important;margin:0}
+#prq .row.orig-ln input[type=date]{padding:0 3px!important;font-size:11px!important;font-family:var(--emono,ui-monospace,monospace)!important;position:relative}
+#prq .row.orig-ln input[type=date]::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:auto;height:auto;opacity:0;cursor:pointer}
 #prq .cpw>input{width:100%;padding-right:24px!important;font-family:var(--emono,ui-monospace,monospace)!important;font-size:11.5px!important}
 .cpy{display:inline-grid;place-items:center;width:20px;height:20px;padding:0;border:0;background:none;color:var(--em,#5d6b72);cursor:pointer;opacity:.7;border-radius:0;flex:none}
 .cpy:hover{opacity:1;color:var(--eg,#1b5878);background:var(--ep2,#f3f1e8)}

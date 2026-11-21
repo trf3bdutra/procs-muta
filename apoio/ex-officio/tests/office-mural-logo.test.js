@@ -40,3 +40,8 @@ test('prontuário: botões do topo numa linha de pills; painel esquerdo com busc
   for (const x of ['<div class="prt-tb">', '<span class="prt-nv">', 'class="prt-x"', '<span class="tl">Ficha</span>', '<span class="tl">Compendium</span>', '#prq .prt-tb .prt-hb,#prq .prt-tb .prt-nv{display:inline-flex','#prq .prt-tb{flex:0 0 auto;margin-left:auto;display:grid', 'function ppSubAltura()', ".pp-sub{height:var(--pp-h", '.pp-sub>.pp-num-rail{order:1;flex:1 1 auto;min-height:0;overflow-y:auto']) assert.ok(app.includes(x), x);
   assert.ok(!app.includes("' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'"));
 });
+
+test('prontuário: modo essencial aplicado sem redesenhar, com aviso; decisão na origem numa linha', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ['function prtModoAplica(el)', "if($('#prq .prt'))prtModoAplica();else prontLateral();", 'prt-essn', '<div class="row orig-ln">', "inp('orig.id','ID')+inp('orig.data','','date')+'</div>'", '#prq .row.orig-ln{display:grid!important']) assert.ok(app.includes(x), x);
+});
