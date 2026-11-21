@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T06:37:41.102Z",
+ "atualizado_em": "2026-11-21T06:37:46.768Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -285505,7 +285505,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.327Z"
+    "atualizado_em": "2026-11-21T06:37:46.768Z"
    },
    "triagem": {
     "Urgência": "",
@@ -285519,39 +285519,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Embargos de Declaração",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Não recolhido",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Regular",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "MPF": "Não verificado",
+    "MPF - Custos Legis": "Mandado de segurança",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Incidência sobre Lucro",
+    "Tema": "Tributário · lucro presumido · majoração de 10% dos percentuais de presunção do IRPJ e da CSLL (Lei Complementar 224/2025) · agravo não conhecido por deserção · embargos de declaração e sentença superveniente",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção, EDcl.",
-    "Alegações": "",
+    "Alegações": "1) Perda superveniente do objeto pela sentença denegatória no mandado de segurança; 2) subsidiariamente, regularidade do preparo à luz dos comprovantes juntados com os embargos.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Agravo não conhecido por deserção (ID 385929133, 13/07/2026) · Embargos de declaração com novos comprovantes PagTesouro (IDs 386601845 e 386601846, sem texto legível) · Impugnação da União (ID 390264444) · Sentença denegatória superveniente (ID 401126233) e pedido de perda do objeto (ID 401126232)",
+    "Síntese Fática": "Empresa do lucro presumido impetrou mandado de segurança contra a majoração de 10% dos percentuais de presunção do IRPJ e da CSLL (artigo 4º, § 4º, VII, e § 5º, da Lei Complementar 224/2025); a liminar foi indeferida, o agravo não foi conhecido por deserção e sobreveio sentença denegatória."
    },
    "producao": {
     "Destino": "",
@@ -285590,7 +285591,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5022338-47.2026.4.03.0000 (monocrática TRMS, 25/10/2026: prejudicado; majoração da presunção do IRPJ e da CSLL pela LC 224/2025); AI 5029858-05.2019.4.03.0000 (acórdão 3ª Turma, 24/07/2020: sentença superveniente no mandado de segurança, perda do objeto)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -285600,7 +285602,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5012814-26.2026.4.03.0000",
