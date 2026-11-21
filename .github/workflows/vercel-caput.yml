@@ -49,6 +49,12 @@ jobs:
         if: steps.v.outputs.publicar == '1'
         with:
           node-version: "20"
+      # Trava do Collectio: se lotes/previa.html perder o que os testes cobrem (por exemplo, gravado por cima com uma cópia
+      # antiga, como em 3e4f452), a publicação para aqui e o site continua na versão anterior.
+      - name: Confere o Collectio
+        if: steps.v.outputs.publicar == '1'
+        working-directory: apoio/ex-officio
+        run: node --test tests/collectio-previa.test.js tests/collectio-matriz.test.js
       - name: Monta a pasta publicada
         if: steps.v.outputs.publicar == '1'
         run: |
