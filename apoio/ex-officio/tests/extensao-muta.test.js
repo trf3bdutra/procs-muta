@@ -116,3 +116,10 @@ test('extensão 0.13: Roteiro por tipo de julgamento usa campos que existem na f
   const html = read('extensao/painel.html'), gab = read('extensao/gabinete.js');
   assert.ok(html.includes('src="roteiro.js"')); assert.match(gab, /'Roteiro'/);
 });
+
+test('extensão 0.14: tema escuro por padrão, carregado no <head>, com botão para o claro', () => {
+  const html = read('extensao/painel.html'), css = read('extensao/painel.css'), tema = read('extensao/tema.js');
+  assert.ok(html.indexOf('src="tema.js"') < html.indexOf('</head>'), 'tema.js no head');
+  assert.ok(html.includes('id="pje-tema"'));
+  assert.match(css, /html\[data-tema=escuro\]\{/); assert.match(tema, /'escuro'/);
+});

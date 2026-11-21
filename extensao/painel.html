@@ -7,6 +7,7 @@
 <title>Muta · Assistente de gabinete</title>
 <link rel="icon" href="icones/32.png">
 <link rel="stylesheet" href="painel.css">
+<script src="tema.js"></script>
 </head>
 <body>
 <div class="layout">
@@ -33,6 +34,7 @@
         <label class="pje-seguir" title="Autos digitais abrem a Triagem (e leem o painel esquerdo dos autos); a tarefa com o editor abre o Comparar (e lê a minuta)"><input type="checkbox" id="pje-aba" checked> Trocar de aba</label>
         <label class="sr" for="pront-lista">Prontuários salvos</label>
         <select id="pront-lista" title="Prontuários salvos neste navegador"></select>
+        <button type="button" id="pje-tema" class="pje-tema" aria-label="Alternar tema claro e escuro">◐</button>
         <button role="tab" type="button" id="tab-ajuda" class="pje-aj" aria-controls="panel-ajuda" aria-selected="false" tabindex="-1" title="Ajuda e instalação">?</button>
       </div>
       <div class="sinc" id="sinc" data-estado="off" hidden><span class="sinc-dot" aria-hidden="true"></span><span class="sinc-txt" id="sinc-txt" role="status" aria-live="polite">Prontuário ainda não ligado ao GitHub.</span><button type="button" class="lnk" id="sinc-agora" hidden>Sincronizar agora</button></div>

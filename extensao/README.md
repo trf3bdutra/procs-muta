@@ -3,6 +3,13 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.14
+
+- **Tema escuro, padrão do painel**, nas cores do Ex Officio escuro (azul-noite, linhas finas, rótulos em mono versalete,
+  destaque em ouro, abas sublinhadas como os filtros da pauta). O botão ◐ ao lado do "?" volta ao tema claro; a escolha fica
+  neste navegador (`tema.js`, carregado no `<head>` para não piscar). As cores fixas do CSS viraram variáveis
+  (`--field`, `--line`, `--soft`), comuns aos dois temas.
+
 ## O que muda na 0.13
 
 - **Roteiro (novo modo do Prontuário: Processo · Triagem · Roteiro · Produção).** A triagem em passos, pelo tipo de
