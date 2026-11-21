@@ -20082,8 +20082,8 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "MAAC TRATORES, PECAS E IMPLEMENTOS AGRICOLAS LTDA",
    "assunto": "ICMS/ Imposto sobre Circulação de Mercadorias",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · reforço de penhora via SISBAJUD · execução suspensa por ação anulatória com garantia insuficiente",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -20131,6 +20131,78 @@
     "outros": "Decisão ID 385889030 (13/07/2026): indeferiu a tutela recursal in limine e mandou intimar a agravada.",
     "representacao": "Agravante: União (PGFN). Agravada: AG/Aires Gonçalves Advogados Associados.",
     "preparo": "União isenta."
+   },
+   "assunto_detalhado": "Execução fiscal — reforço de penhora via SISBAJUD em execução suspensa por ação anulatória",
+   "especificidades": "Ação anulatória 1028829-27.2019.4.01.3400 com sentença de procedência sem trânsito · Execução garantida por penhora de imóveis, segundo a decisão ID 322792709 · União intimada em 28/05/2026; agravo em 07/07/2026 · Tutela recursal indeferida (ID 385889030, 13/07/2026) · Preclusão e inovação recursal alegadas na contraminuta",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — reforço de penhora via SISBAJUD em execução suspensa por ação anulatória",
+     "subassuntos": "Execução fiscal · reforço de penhora via SISBAJUD · execução suspensa por ação anulatória com garantia insuficiente",
+     "sintese": "",
+     "questoes": "1) Preclusão quanto à suspensão da execução e objeto do recurso (decisão que apenas ratifica outra); 2) reforço de penhora em execução suspensa com garantia insuficiente (artigo 15, II, da LEF; artigos 835 e 1.012 do CPC); 3) inovação recursal (fraude à execução).",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "561584897",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Indeferiu o reforço de penhora via SISBAJUD e remeteu os autos ao arquivo até o julgamento da ação anulatória."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "561584897"
+     },
+     "adm": {
+      "prot": "2026-07-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Fazenda Nacional",
+       "tipo": "Agravo de instrumento",
+       "id": "384898780",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "384898780",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "385889030",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "390876258",
+       "data": "2026-08-06"
+      }
+     ],
+     "pendencias": "Conferir a tempestividade diante da decisão anterior ID 365326484",
+     "especificidades": "Ação anulatória 1028829-27.2019.4.01.3400 com sentença de procedência sem trânsito · Execução garantida por penhora de imóveis, segundo a decisão ID 322792709 · União intimada em 28/05/2026; agravo em 07/07/2026 · Tutela recursal indeferida (ID 385889030, 13/07/2026) · Preclusão e inovação recursal alegadas na contraminuta"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Há preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-13"
+    }
    }
   },
   {
