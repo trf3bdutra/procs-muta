@@ -2073,8 +2073,8 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <p><span id="ola-s"></span>Processos, minutas, revisões, liberações e pedidos urgentes em todas as frentes.</p><p id="ola-d" style="margin-top:6px;font-size:11px"></p></div>
       <div class="hc-head-actions"><div id="ola-ch"></div><button class="b" id="hc-recarregar" type="button">↻ Atualizar entregas</button></div>
     </section>
-    <div class="hc-over"><div><h2>Visão operacional</h2><small>Etapas ainda em aberto · dados consolidados das fontes oficiais</small></div>
-      <div class="hc-seg" id="hc-esc" aria-label="Escopo"><button type="button" data-hc-escopo="todos" aria-pressed="true">Todo o gabinete</button><button type="button" data-hc-escopo="minhas" aria-pressed="false">Minhas entregas</button></div></div>
+    <div class="hc-over"><div><h2 id="hc-over-t">Minhas entregas</h2><small>Etapas ainda em aberto sob a sua responsabilidade · dados consolidados das fontes oficiais</small></div>
+      <div class="hc-seg" id="hc-esc" aria-label="Escopo" hidden><button type="button" data-hc-escopo="todos" aria-pressed="false">Todo o gabinete</button><button type="button" data-hc-escopo="minhas" aria-pressed="true">Minhas entregas</button></div></div>
     <div class="hc-kpis" id="hc-kpis" aria-label="Indicadores de entregas"><div class="hc-mute">Carregando indicadores…</div></div>
     <div class="hc-board"><section class="hc-main" aria-label="Relação consolidada de entregas">
       <div class="hc-main-header"><div><h2>Entregas e providências</h2><small>Uma entrega por etapa ativa, vinculada ao processo original</small></div><span class="hc-hint">Somente leitura · alterações nas páginas operacionais</span></div>
@@ -2504,6 +2504,7 @@ function iniciar(nome,gestor){
   try{S.escopo=localStorage.getItem('eq_escopo')||'meus';}catch(e){}
   marcaSeg('#esc',S.escopo);
   sessoesEquipe(true);
+  if(PAINEL_GAB){document.body.classList.add('painel-gab');var ot=$('#hc-over-t');if(ot)ot.textContent='Todo o gabinete';var os=ot&&ot.nextElementSibling;if(os)os.textContent='Etapas ainda em aberto em todas as frentes · dados consolidados das fontes oficiais';P.dados=null;vista('inicio');return;}
   P.dados=null;vista((/^#cmt/.test(location.hash)||/\/cmt\/?$/.test(location.pathname))?'cmt':/mono|urg/.test(location.hash)?'mono':/metas/.test(location.hash)?'metas':/sobr/.test(location.hash)?'sobr':/sens/.test(location.hash)?'sens':/controles|monitoramento/.test(location.hash)?'ctrl':/pauta/.test(location.hash)?'pauta':'inicio');
   notificacoes().then(function(){if(h0==='#notificacoes'){abrePainel('#p-not');setTimeout(marcarLido,1500);}});pendencias().then(function(){if(h0==='#pendencias')abrePainel('#p-pen');});
   clearInterval(S.tCal);S.tCal=setInterval(function(){if(!document.hidden)sessoesEquipe(false);},30000);
@@ -4208,7 +4209,9 @@ function inicio(){
 /* =============================================================
    Central de Entregas · Início — leitura derivada das APIs atuais
    ============================================================= */
-var HC={escopo:'todos',frente:'todas',sessao:'',resp:'',etapa:'',busca:'',estado:'',ordem:'prazo',grupo:'sessao',dia:'',limite:75,mes:''};
+/* Mural: entregas de quem está logado; o painel de todo o gabinete fica na Chefia do Caput (/office/?painel=gabinete, embutido) */
+var PAINEL_GAB=/[?&]painel=gabinete\b/.test(location.search);
+var HC={escopo:PAINEL_GAB?'todos':'minhas',frente:'todas',sessao:'',resp:'',etapa:'',busca:'',estado:'',ordem:'prazo',grupo:'sessao',dia:'',limite:75,mes:''};
 function hcLista(){return ((P.dados||{}).entregas||[]);}
 function hcAtrasada(t){return !!(t.prazo&&t.prazo<hoje());}
 function hcHoje(t){return !!(t.prazo&&t.prazo===hoje());}
@@ -9994,6 +9997,9 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 #v-pauta.ed .trb-p .tp-b.tp-b2 i:hover,#v-pauta.ed .trb-p .tp-b.tp-b2 i.on{filter:brightness(1.15)}
 #v-pauta.ed .trb-p .tp-fal{display:block;margin:5px 0 0 auto;border:0;background:none;padding:0;font:600 10px var(--emono,monospace);letter-spacing:.04em;color:var(--em,#617570);cursor:pointer}
 #v-pauta.ed .trb-p .tp-fal:hover,#v-pauta.ed .trb-p .tp-fal.on{color:#a24a05;text-decoration:underline}
+/* painel de todo o gabinete embutido na Chefia do Caput: sem cabeçalho nem abertura, só a visão operacional */
+html body.painel-gab #app>header.nx,html body.painel-gab #app header.nx,body.painel-gab .hc-hero,body.painel-gab #hc-esc{display:none!important}
+body.painel-gab #v-inicio{padding-top:8px!important}body.painel-gab{background:transparent}
 #v-pauta.ed .trb-p .tp.st-m{box-shadow:inset 3px 0 0 #28744b}
 #v-pauta.ed .trb-p .tp.st-c{box-shadow:inset 3px 0 0 #245b8c}
 #v-pauta.ed .trb-p .tp.st-l{box-shadow:inset 3px 0 0 #6d4596}
