@@ -22357,8 +22357,8 @@
    "exequente": "FLAVIO FREITAS DE LIMA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPF/Imposto de Renda de Pessoa Física",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · bloqueio SISBAJUD concomitante à citação (artigo 854 do CPC · artigo 53 da Lei 8.212/1991) · contraditório",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -22406,6 +22406,83 @@
     "outros": "Comprovante PagTesouro ID 376144182 (\"Pagamento realizado com sucesso\", 25/05/2026) e comprovante Pix do Banco do Brasil ID 376144185. Decisão ID 376984929 (08/06/2026, publicada em 11/06/2026): indeferiu a tutela recursal.",
     "representacao": "Agravante: advogado em causa própria (OAB/MS 7.807). Agravada: União (PGFN).",
     "preparo": "Comprovante PagTesouro \"Pagamento realizado com sucesso\", serviço 20466, referência 50001271420264030001, R$ 64,26, em 25/05/2026 (ID 376144182) [VALIDAR Resolução PRES 790/2025, artigo 2º, § 2º, III]"
+   },
+   "assunto_detalhado": "Execução fiscal — bloqueio SISBAJUD antes da citação",
+   "especificidades": "Bloqueio em 20/05/2026 sem citação válida, segundo o agravante · Agravante advogado em causa própria · Tutela recursal indeferida (ID 376984929, 08/06/2026) · Preparo por comprovante PagTesouro (ID 376144182)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — bloqueio SISBAJUD antes da citação",
+     "subassuntos": "Execução fiscal · bloqueio SISBAJUD concomitante à citação (artigo 854 do CPC · artigo 53 da Lei 8.212/1991) · contraditório",
+     "sintese": "",
+     "questoes": "1) Bloqueio de ativos antes ou concomitante à citação na execução fiscal (artigo 854 do CPC; artigo 53 da Lei 8.212/1991); 2) contraditório prévio e requisitos da medida.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Determinou o bloqueio de ativos via SISBAJUD antes da citação."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-05-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "375418018",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "375418018",
+       "data": "2026-05-22"
+      },
+      {
+       "desc": "Comprovante PagTesouro",
+       "id": "376144182",
+       "data": "2026-05-25"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "376984929",
+       "data": "2026-06-08"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "382115188",
+       "data": "2026-06-23"
+      }
+     ],
+     "pendencias": "Definir o critério de preparo (Resolução PRES 790/2025)",
+     "especificidades": "Bloqueio em 20/05/2026 sem citação válida, segundo o agravante · Agravante advogado em causa própria · Tutela recursal indeferida (ID 376984929, 08/06/2026) · Preparo por comprovante PagTesouro (ID 376144182)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-08"
+    }
    }
   },
   {
