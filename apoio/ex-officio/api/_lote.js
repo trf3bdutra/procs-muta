@@ -409,14 +409,17 @@ async function minutaPje(req, res, u, gestor) {
     sessoes = [it.sessao].concat(lote.sessoes || []).filter((s, i, a) => DATA.test(s || '') && a.indexOf(s) === i);
     const { dados: main, sha: shaMin } = await L.lerJson(pm).catch(nada);
     if (!main) return res.status(404).json({ erro: 'Este processo não tem minuta no lote.' });
-    const lista = indiceVersoes(main), meta = lista.find(x => x.id === v);
-    if (!meta) return res.status(404).json({ erro: 'Versão não encontrada: registre antes a versão (a minuta inicial vira v1 ao registrar outra).' });
+    const arqs = [], lista = indiceVersoes(main).slice();
+    /* minuta ainda sem histórico: a atual vira v1 (guardada), para poder ser marcada */
+    if (!lista.length && v === 'v1') guardarAtual(JSON.parse(JSON.stringify(main)), main, lista, id, mx, arqs);
+    const meta = lista.find(x => x.id === v);
+    if (!meta) return res.status(404).json({ erro: 'Versão não encontrada.' });
     lista.forEach(x => { if (x.pje && (marcar || x === meta)) delete x.pje; });
     if (marcar) { meta.pje = { em: hoje, por: u }; it.pje = { versao: v, em: hoje, por: u }; }
     else if (it.pje && it.pje.versao === v) delete it.pje;
     main.versoes = lista; lote.atualizado_em = hoje;
     try {
-      await L.commitArquivos([{ path: pm, txt: jsonTxt(main), sha: shaMin }, { path: rel, txt: jsonTxt(lote), sha: shaLote }],
+      await L.commitArquivos(arqs.concat([{ path: pm, txt: jsonTxt(main), sha: shaMin }, { path: rel, txt: jsonTxt(lote), sha: shaLote }]),
         'Collectio (' + u + '): versão ' + v + ' da minuta de ' + proc + (marcar ? ' importada no PJe' : ' desmarcada como importada no PJe'));
       fim = main;
     } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }

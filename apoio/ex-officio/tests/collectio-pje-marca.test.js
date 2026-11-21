@@ -123,3 +123,15 @@ test('versão final do PJe guarda a base (a importada) e o resumo no lote; o lot
     assert.equal(it.final.versao, nova.id);
   });
 });
+
+test('minuta sem histórico: marcar v1 guarda a atual como v1 e marca', async () => {
+  const amb = ambiente();
+  delete amb.data[MIN].versoes; delete amb.data[MIN].vigente;
+  await comHandler(amb, async run => {
+    const r = await run('POST', {}, { acao: 'minuta-pje', id: 'acorrigir', processo: P, versao: 'v1' });
+    assert.equal(r.code, 200, JSON.stringify(r.body));
+    assert.deepEqual(amb.data[MIN].versoes.map(v => v.id), ['v1']);
+    assert.ok(amb.data[MIN].versoes[0].pje);
+    assert.ok(amb.data['acervo/minutas/acorrigir/versoes/' + X + '/v1.json'], 'a atual foi guardada como v1');
+  });
+});
