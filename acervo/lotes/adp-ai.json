@@ -22744,8 +22744,8 @@
    "exequente": "RODOLFO RIZZI",
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Revogação/Anulação de multa ambiental",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g2",
+   "tipo_caso": "Ambiental · infração ambiental (IBAMA) · indeferimento de perícia e encerramento da instrução · cabimento do agravo de instrumento (Tema 988/STJ)",
    "resultado": "Ato a proferir: julgamento do agravo interno (voto)",
    "modelo": "",
    "variacoes": [],
@@ -22819,6 +22819,100 @@
     "outros": "Certidão ID 390264377 (03/08/2026): distribuição livre ao Gab. A (Resolução 33/2025) e agravo anterior na mesma ação, AI 5028320-18.2021.4.03.0000 (Des. Fed. Valdeci dos Santos, 6ª Turma). Preparo do agravo de instrumento: comprovante PagTesouro/Pix (ID 389650491). Ato ordinatório ID 403170281 (08/10/2026): intimação do IBAMA para o artigo 1.021, § 2º, do CPC.",
     "representacao": "Agravante: advogados Gustavo Feitosa Beltrão, Natália F. Beltrão de Morais e Fernando M. Ludvig [VALIDAR procuração]. Agravado: IBAMA (PGF).",
     "preparo": "Agravo interno sem preparo. No agravo de instrumento: PagTesouro/Pix, código 20466, R$ 64,26, em 30/07/2026 (ID 389650491)."
+   },
+   "assunto_detalhado": "Ambiental — infração ambiental (IBAMA); indeferimento de perícia e encerramento da instrução",
+   "especificidades": "Agravo interno contra decisão monocrática que não conheceu do agravo de instrumento (ID 390297933, 05/08/2026) · Decisão de origem ID 592580905 (07/07/2026): revogou a perícia, saneou e mandou concluir para sentença · Fatos de 2013 · Agravo anterior na mesma ação: AI 5028320-18.2021.4.03.0000 (6ª Turma) · Contrarrazões do IBAMA ao agravo interno (ID 408162666)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Ambiental — infração ambiental (IBAMA); indeferimento de perícia e encerramento da instrução",
+     "subassuntos": "Ambiental · infração ambiental (IBAMA) · indeferimento de perícia e encerramento da instrução · cabimento do agravo de instrumento (Tema 988/STJ)",
+     "sintese": "",
+     "questoes": "1) Cabimento do agravo de instrumento contra decisão que indefere perícia e encerra a instrução (artigo 1.015 do CPC; Tema 988/STJ); 2) urgência pela inutilidade do exame em preliminar de apelação.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "390297933",
+      "juizo": "Decisão monocrática do Relator (ID 390297933); origem: 2ª Vara Federal de Campo Grande",
+      "dispositivo": "Não conheceu do agravo de instrumento (artigo 932, III, do CPC)."
+     },
+     "ai": {
+      "hip": "Tema 988 · urgência",
+      "efeito": "Não requerido",
+      "id": "390297933"
+     },
+     "adm": {
+      "prot": "2026-07-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "389231413",
+       "contra": "Não mencionar"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "394788766",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "389231413",
+       "data": "2026-07-28"
+      },
+      {
+       "desc": "Comprovante PagTesouro/Pix",
+       "id": "389650491",
+       "data": "2026-07-30"
+      },
+      {
+       "desc": "Certidão de distribuição e agravo anterior",
+       "id": "390264377",
+       "data": "2026-08-03"
+      },
+      {
+       "desc": "Decisão monocrática que não conheceu do agravo",
+       "id": "390297933",
+       "data": "2026-08-05"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "394788766",
+       "data": "2026-08-31"
+      },
+      {
+       "desc": "Contrarrazões do IBAMA ao agravo interno",
+       "id": "408162666",
+       "data": "2026-11-01"
+      }
+     ],
+     "pendencias": "Conferir a prevenção pelo AI 5028320-18.2021.4.03.0000",
+     "especificidades": "Agravo interno contra decisão monocrática que não conheceu do agravo de instrumento (ID 390297933, 05/08/2026) · Decisão de origem ID 592580905 (07/07/2026): revogou a perícia, saneou e mandou concluir para sentença · Fatos de 2013 · Agravo anterior na mesma ação: AI 5028320-18.2021.4.03.0000 (6ª Turma) · Contrarrazões do IBAMA ao agravo interno (ID 408162666)"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2026-08-05",
+     "urgObs": "Tutela recursal prejudicada pelo não conhecimento do agravo de instrumento (ID 390297933)."
+    }
    }
   },
   {
