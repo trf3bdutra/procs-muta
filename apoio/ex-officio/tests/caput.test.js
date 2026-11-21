@@ -36,7 +36,7 @@ test('Rotas históricas redirecionam à central sem alterar os dados',()=>{
 });
 
 test('Triagem: aba única com visão geral recolhível, escaninhos como sub-aba e exportação num ícone',()=>{
-  assert.ok(page.includes("$('#abas').innerHTML = tabEsc();")&&!page.includes("t('fila', 'Triagem'"),'Triagem é a página; só Escaninhos é sub-aba');
+  assert.ok(page.includes("$('#abas').innerHTML = '';")&&page.includes("$('#abas').hidden = true;")&&!page.includes("t('fila', 'Triagem'"),'Triagem é a página, sem subaba no topo');
   assert.ok(page.includes('function visaoGeral()')&&page.includes('vInicio(true)'),'visão geral do antigo Início na Triagem');
   assert.ok(page.includes("+ (!emE && !F.conj ? visaoGeral() : '') + '<div class=\"fl-cab\">"),'visão geral antes da busca e dos filtros');
   assert.ok(page.includes('class="btn ico" id="')&&!page.includes('data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button>'),'Excel e Exportar num botão de ícone');
@@ -218,4 +218,15 @@ test('Coordenação: Perfis inteiro (sem rolagem) com painéis Histórico (minut
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   for(const x of ['.pf-c{padding:10px 14px 14px}','class=\"pf-pn pf-hist\"','data-pf-h=','class=\"pf-pn pfc-xl\"','function pfComp(m, hist)',".co-lay>.cg-comp-p{grid-column:1/-1}",'.co-lado{position:relative;contain:size;','</aside><section class="cg-px cg-comp-p">'])assert.ok(cap.includes(x),x);
   assert.ok(!cap.includes("['min', 'Minutas', D0.MIN.length], ['cor', 'Correções', D0.COR.length], ['dil', 'Diligências', D0.DIL.length], ['pres'"),'abas de cima sem minutas/correções/diligências');
+});
+
+test('Perfis › Histórico: só o feito, Excel, listar todos e rolagem; Registro de atividades recolhido de início',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ["const FEITO = { min: D0.MIN.filter((x) => x.feito), cor: D0.COR.filter((x) => x.feito), dil: D0.DIL.filter((t) => t.stage === 'done') };",'function pfXls()','data-pf-xls','data-pf-todos','Listar todos (','.pf-hist .pf-tb,.pf-hist .pf-dl{max-height:440px;overflow-y:auto','.pfc-xl .pf-pn-c{flex:1 1 auto;min-height:0;overflow-y:auto',"LS.get('cg_atv_ab',false)?'':' cg-min'",'<b>Registro de atividades</b></button>','.cg-atvp.cg-min #cg-atv{display:none}'])assert.ok(cap.includes(x),x);
+  assert.ok(!cap.includes('Todos os usuários e o painel do Desembargador'),'título só "Registro de atividades"');
+});
+
+test('Triagem: Acervo filtrado com faixa de cabeçalho e seletor segmentado; Visão geral sobre o bege',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['<header class="acf-h"><span class="k">Acervo filtrado</span>','.acf .pre{margin-left:auto;display:flex','<div class="acf-b"><div class="acf-n">','.tri-vg{background:var(--bg)!important}'])assert.ok(cap.includes(x),x);
 });
