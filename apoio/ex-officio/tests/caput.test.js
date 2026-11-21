@@ -46,21 +46,21 @@ test('Desempenho e início: motor escondido não redesenha; Chefia é a página 
 });
 
 test('Chefia: primeira no menu, painéis no padrão do Caput, calendário forense no rodapé do calendário, relatórios com altura fixa',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.indexOf('data-mod="chefia"')<cap.indexOf('data-mod="triagem"'),'Chefia primeiro');
   assert.ok(cap.includes('<div id="cg-forense">'),'rodapé forense');
   assert.ok(cap.includes('.cg-tool .cg-studio{height:600px')&&cap.includes('data-cg-rel-export="pdf"'),'relatórios como ferramenta');
 });
 
 test('Calendário forense editável na própria Chefia (sem abrir a tela antiga) e data local no motor',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
   assert.ok(cap.includes('data-cgfx="poe"')&&cap.includes('data-cgfx="jf"')&&!cap.includes('Editar expediente e feriados'),'edição na Chefia');
   assert.ok(m.includes('semExpediente: { poe:')&&m.includes("d.getFullYear() + '-'"),'motor');
 });
 
 test('Chefia: calendário completo do gabinete (o do motor) e regras de etiquetas editáveis nas Regras gerais, iguais às da etapa 3 de Pautas',()=>{
   const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
-  const cap=r('monitor/triagem/index.html'),rg=r('monitor/assets/js/regras-gerais.js'),m=r('monitor/motor/assets/js/21-sessoes-equipe.js');
+  const cap=r('caput/triagem/index.html'),rg=r('caput/assets/js/regras-gerais.js'),m=r('caput/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(cap.includes('<script src="/init/motor/assets/js/11-calendario.js"></script>')&&cap.includes('W.CMTCalendario.montar(CAL_EL'),'calendário do motor na Chefia');
   assert.ok(m.includes('regrasEtiquetas: {')&&m.includes('RX.clear(); HIST = null; salvar(); return true; }'),'API do motor');
   assert.ok(rg.includes("data-rg=\"etq-nova\"")&&rg.includes('SM.conversoes(ses.id)')&&!rg.includes("tela('regras', 'Editar regras de etiquetas')"),'editor nas Regras gerais, contado como na etapa 3');

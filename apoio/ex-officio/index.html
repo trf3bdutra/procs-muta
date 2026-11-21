@@ -4204,7 +4204,7 @@ $('#v-inicio').addEventListener('click',function(e){
   b=e.target.closest('[data-hc-move]');if(b){var p=HC.mes.split('-').map(Number),delta=Number(b.getAttribute('data-hc-move'));HC.mes=new Date(p[0],p[1]-1+delta,1).toISOString().slice(0,7);hcMiniCalendario();return;}
 });
 
-/* calendário: o mesmo painel de sessões do CMT-monitor (CMTCalendario), com as pautas liberadas para a equipe */
+/* calendário: o mesmo painel de sessões do Caput (CMTCalendario), com as pautas liberadas para a equipe */
 var FER_NAC=[['2026-11-02','Finados'],['2026-11-15','Procl. República'],['2026-11-20','Consc. Negra'],['2026-12-25','Natal'],['2027-01-01','Confraternização'],['2027-04-21','Tiradentes'],['2027-05-01','Dia do Trabalho'],['2027-09-07','Independência'],['2027-10-12','N. Sra. Aparecida'],['2027-11-02','Finados'],['2027-11-15','Procl. República'],['2027-11-20','Consc. Negra'],['2027-12-25','Natal']];
 function calendario(){
   var D=P.dados||{sessoes:[],meus:[]},E=D.expediente||{},el=$('#cc-cal');if(!el||!window.CMTCalendario||!$('#hc-cal-full').open)return;
@@ -4213,7 +4213,7 @@ function calendario(){
   window.CMTCalendario.montar(el,{sessoes:(D.sessoes||[]).map(function(s){return {date:s.date,hora:s.hora||'',marcos:s.marcos||{},processos:s.processos||0,cor:s.cor||''};})},
     {progresso:D.progresso||{},feriados:fer,recesso:E.recesso||[],abrir:function(dt){S.ses=dt;try{localStorage.setItem('eq_ses',dt);}catch(e){}var o=$('#ses');if(o)o.value=dt;vista('pauta');carregar();}});
 }
-/* ausências: o pedido vai ao procs-muta e o responsável decide no CMT-monitor (Pautas › Equipe) */
+/* ausências: o pedido vai ao procs-muta e o responsável decide no Caput (Pautas › Equipe) */
 function ausencias(){
   $('#aus-tipo').innerHTML=(P.tipos.length?P.tipos:['Férias','Folga compensatória','Licença','Abono','Curso ou evento','Outro']).map(function(t){return '<option>'+esc(t)+'</option>';}).join('');
   var L=(P.aus||[]).filter(function(a){return a.estado!=='cancelada';}).slice(0,8);
