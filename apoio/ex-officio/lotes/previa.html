@@ -222,6 +222,10 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .mxf{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;padding:12px 0 0}
 .mxf label{display:flex;flex-direction:column;gap:4px;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em);flex:1 1 260px}
 .mxf input{height:30px;font:13px var(--font);text-transform:none;letter-spacing:0}
+#tip{position:fixed;z-index:60;max-width:420px;padding:7px 10px;background:var(--ei,#1c3344);color:#fff;font:12px/1.45 var(--font);box-shadow:0 6px 18px rgba(0,0,0,.18);pointer-events:none;opacity:0;transition:opacity .08s}
+#tip.on{opacity:1}
+#tip b{display:block;font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;opacity:.75;margin-bottom:2px}
+html[data-theme=dark] #tip{background:#ebeff1;color:#0a1821}
 #toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--eg,#1b5878);color:#fff;padding:10px 16px;font:600 13px var(--font);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
 #toast.on{opacity:1}
 .vazio{padding:14px 0 0;color:var(--em);font-style:italic;font-size:12.5px}
@@ -645,7 +649,14 @@ const FIXOS=[
   ['consect','Custas e consectários',x=>c_(x).consect,v=>!v?null:/^n[ãa]o/i.test(v)?{t:'–',c:'nd'}:{t:'■',c:'ik'}],
   ['topico','Tópico síntese',x=>c_(x).topico,v=>!v?null:/^n[ãa]o/i.test(v)?{t:'–',c:'nd'}:{t:'■',c:'ik'}],
   ['sopref','Sustentação oral',x=>c_(x).sopref,v=>!v?null:/presen/i.test(v)?{t:'P',c:'ik'}:/virt|video/i.test(v)?{t:'V',c:'ik'}:{t:'■',c:'ik'}],
-  ['res','Resultado',x=>c_(x).resJulg,null]];
+  ['res','Resultado',x=>c_(x).resJulg,v=>{if(!v)return null;const s=sem(v);
+    if(/parcial/.test(s))return {t:'◐',c:'ik'};
+    if(/nao conhec|inadmit/.test(s))return {t:'∅',c:'al'};
+    if(/prejudic|extint/.test(s))return {t:'⊘'};
+    if(/anula|cassad/.test(s))return {t:'A',c:'ik'};
+    if(/desprov|negad|improced|rejeit|denegad/.test(s))return {t:'↓'};
+    if(/provid|acolh|proced|concedid|deferid/.test(s))return {t:'↑',c:'ok'};
+    return {t:'■',c:'ik'}}]];
 /* indicadores da pauta: meta, julgamento que não é o primeiro, urgência e prioridade (acervo), admissibilidade, pendências, sigilo e retirada */
 const INDS=[
   ['meta','Meta',x=>c_(x).meta||'',v=>v?{t:String(v).replace(/^M/,''),c:'ik'}:null],
@@ -656,9 +667,9 @@ const INDS=[
   ['val','Pendência [VALIDAR]',x=>{const p=(ca_(x).pendencias||[]).filter(q=>q&&!q.ok);return p.length?p.length+' pendência'+(p.length>1?'s':'')+': '+p.map(q=>q.desc||q).join(' | '):''},v=>v?{t:String(parseInt(v,10)),c:'al'}:null],
   ['sig','Sigilo',x=>x.sigilo||'',v=>v?{t:'■',c:'ik'}:null],
   ['ret','Retirado de pauta',x=>c_(x).intercorTipo?(c_(x).intercor||c_(x).intercorTipo):'',v=>v?{t:'■',c:'al'}:null]];
-function celV([k,,f,r],x){const v=f(x)||'',o=r?r(v):null;
-  if(!r)return `<td class="fx fx-${k}${v&&ALERTA_F.test(v)?' al':''}" title="${esc(v)}">${v?esc(v):'<span class="vz0">—</span>'}</td>`;
-  return `<td class="iv${o&&o.c?' '+o.c:''}" title="${esc(v||'não informado')}">${o?esc(o.t):'<span class="vz0">·</span>'}</td>`}
+function celV([k,rot,f,r],x){const v=f(x)||'',o=r?r(v):null,tip=`data-tip="${esc(rot)}" data-val="${esc(v||'não informado')}"`;
+  if(!r)return `<td class="fx fx-${k}${v&&ALERTA_F.test(v)?' al':''}" ${tip}>${v?esc(v):'<span class="vz0">—</span>'}</td>`;
+  return `<td class="iv${o&&o.c?' '+o.c:''}" ${tip}>${o?esc(o.t):'<span class="vz0">·</span>'}</td>`}
 const ALERTA_F=/intempest|n[ãa]o recolhido|n[ãa]o verificado|irregular|pendente|sem manifesta/i;
 const comFixos=()=>!S.loteSel||!!S.loteSes;
 const chaveMx=()=>S.loteSel?S.loteSel+'|'+S.loteSes:'pauta-'+S.data;
@@ -696,6 +707,12 @@ async function gravarMatriz(){
     delete S.mxRasc[chaveMx()];S.mxModo='ver';render();ir('matriz');aviso('Matriz gravada: '+j.grupos+' grupos, '+j.colunas+' colunas.');
   }catch(e){if(b){b.disabled=false;b.textContent='Gravar matriz'}aviso('Não gravou: '+e.message)}
 }
+/* rótulo das células da matriz: o nome da coluna e o que está preenchido */
+(function(){let b=null;const mostra=(td,e)=>{if(!b){b=document.createElement('div');b.id='tip';document.body.appendChild(b)}
+  b.innerHTML=`<b>${esc(td.dataset.tip)}</b><span>${esc(td.dataset.val)}</span>`;b.className='on';
+  const w=b.offsetWidth,hh=b.offsetHeight;let x=e.clientX+14,y=e.clientY+16;if(x+w>innerWidth-8)x=e.clientX-w-14;if(y+hh>innerHeight-8)y=e.clientY-hh-12;b.style.left=x+'px';b.style.top=y+'px'};
+  document.addEventListener('mousemove',e=>{const td=e.target.closest&&e.target.closest('#matriz [data-tip]');if(td)mostra(td,e);else if(b)b.className=''});
+  document.addEventListener('scroll',()=>{if(b)b.className=''},true);})();
 function aviso(t){let e=$('#toast');if(!e){e=document.createElement('div');e.id='toast';document.body.appendChild(e)}e.textContent=t;e.className='on';clearTimeout(e._t);e._t=setTimeout(()=>{e.className=''},4200)}
 function matrizHtml(base){
   const M=matriz(), ed=S.mxModo==='construir', cols=M.colunas, fx=comFixos()?FIXOS:[], ind=comFixos()?INDS:[], ncol=(fx.length?3:6)+cols.length+fx.length+ind.length;
@@ -711,8 +728,8 @@ function matrizHtml(base){
        :`<td><span class="ii">${esc(x.item)}</span> <span class="cnj">${esc(x.cnj.slice(0,15))}</span>${sel}</td><td class="pa">${esc(pt[0]||'')}</td><td class="pa">${esc(pt.slice(1).join(' x '))}</td><td class="mono">${esc(rec(x.classe))}</td>`}
      <td class="nm">${esc(x.servidor||'—')} · ${esc(x.corretor||'—')}</td>
      ${fx.map(f=>celV(f,x)).join('')}${ind.map(f=>celV(f,x)).join('')}
-     ${cols.map(c=>{const on=m.variacoes.includes(c.id);return `<td class="f">${ed?`<button type="button" class="mk-b" data-mxcell="${esc(x.cnj)}|${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(c.rotulo)}">${on?`<i class="mk" style="background:${cor}"></i>`:''}</button>`:on?`<i class="mk" style="background:${cor}" title="${esc(c.rotulo)}"></i>`:''}</td>`}).join('')}
-     <td class="ob">${ed?`<textarea class="mxo" data-mxobs="${esc(x.cnj)}" rows="2" aria-label="Observação">${esc(m.observacao)}</textarea>`:`<span>${esc(m.observacao)}</span>`}</td></tr>`;};
+     ${cols.map(c=>{const on=m.variacoes.includes(c.id);return `<td class="f" data-tip="${esc(c.rotulo)}" data-val="${on?'sim':'não'}">${ed?`<button type="button" class="mk-b" data-mxcell="${esc(x.cnj)}|${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(c.rotulo)}">${on?`<i class="mk" style="background:${cor}"></i>`:''}</button>`:on?`<i class="mk" style="background:${cor}"></i>`:''}</td>`}).join('')}
+     <td class="ob" data-tip="Observação" data-val="${esc(m.observacao||'sem observação')}">${ed?`<textarea class="mxo" data-mxobs="${esc(x.cnj)}" rows="2" aria-label="Observação">${esc(m.observacao)}</textarea>`:`<span>${esc(m.observacao)}</span>`}</td></tr>`;};
   const banda=(rot,res,cor,n,col,id)=>`<tr class="gh mxh"><td colspan="${ncol}"><span class="q" style="background:${cor}"></span><b>${esc(rot)}</b>${res?` · <span class="res">${esc(res)}</span>`:''}${col?` <span class="tg in">${esc(col)}</span>`:''} <small>${n} processo${n===1?'':'s'}</small>${ed&&id?` <button type="button" class="x" data-mxgdel="${esc(id)}" title="Excluir o grupo (os processos voltam para não classificados)">×</button>`:''}</td></tr>`;
   const corpo=ordem.map(o=>banda(o.g.rotulo,o.g.resultado,o.g.cor,o.rs.length,o.g.col,o.g.id)+o.rs.map(r=>linha(r,o.g.cor)).join('')).join('')
     +(soltos.length?banda('Não classificados','',' #9aa0a8',soltos.length,'','')+soltos.map(r=>linha(r,'#9aa0a8')).join(''):'');
