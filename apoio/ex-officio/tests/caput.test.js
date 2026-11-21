@@ -273,3 +273,11 @@ test('Motor: fila única de gravação (sem "ocupado" em laço)',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
   assert.ok(m.includes('var FILA_G = null, ATUAL_G = null;')&&m.includes('async function gravarUmaVez()')&&m.includes('FILA_G = ATUAL_G.catch(function () {}).then(function () { FILA_G = null; return gravar(); })'));
 });
+
+test('Motor: alteração feita durante a gravação continua pendente',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  assert.ok(m.includes("var HS = {}; P.forEach(function (k) { if (k.indexOf('del:') !== 0) HS[k] = hash(conteudo(k)); });"),'marca tirada ao montar os arquivos');
+  assert.ok(m.includes("else S.sync[k] = HS[k]; });"),'ao terminar, usa a marca do enviado, não a do estado atual');
+  const i=m.indexOf('var HS = {}'), j=m.indexOf('await W.ProcsMuta.gravar(files');
+  assert.ok(i>0&&i<j&&!/await/.test(m.slice(m.lastIndexOf("files[ARQ[k]] = JSON.stringify",i),i)),'sem await entre montar os arquivos e tirar a marca');
+});
