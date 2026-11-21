@@ -1565,7 +1565,28 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório, abertura",
+     "“apelações contra sentença” → “apelações à sentença” (Forma A)",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho com mais de três linhas; seções em caixa baixa; questões sem “saber se”; rodapé sem o tribunal antes de cada julgado e com “TRF3” → Cabeçalho enxuto; seções em caixa alta; “saber se”; rodapé “STF, …; STJ, …; e TRF-3, …”",
+     "EST · BAIXA"
+    ],
+    [
+     "Toda a minuta",
+     "IDʼs do relatório e do voto → Conferidos nos autos: todos correspondem às peças indicadas",
+     "DOC · Conferido"
+    ]
+   ],
    "pendencias": [],
    "minuta": true,
    "autos": {
@@ -3128,8 +3149,37 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura “interposto contra decisões proferidas pelo Juízo …”, sem os IDʼs das decisões agravadas (só no voto); razões “sustentaram, em suma (ID …)” → “Trata-se de agravo de instrumento às decisões (IDʼs …, dos autos de origem) que …”; “Alegaram os agravantes (ID 158155604), em suma, que: (1) …”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto",
+     "“ID's”; “não pode ser dissociada” (concordância com “reconhecimento”); “MARCO BELLIZZE”; “Por outro lado” → “IDʼs”; “dissociado”; nome regimental “MARCO AURÉLIO BELLIZZE”; “Contudo,”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, honorários",
+     "Segunda transcrição atribuída ao “AgInt no REsp 1.861.568, Rel. Min. HERMAN BENJAMIN, DJe 16/06/2020” (repete o cabeçalho anterior), com ementa de outro julgado (agravo regimental, artigo 535 do CPC/1973); a ementa da minuta a dava como “AgRg no AREsp 1.164.658”, com a mesma data → Retirada a transcrição, sem fonte verificável; os dois precedentes anteriores sustentam o ponto",
+     "JURIS · ALTA"
+    ],
+    [
+     "Ementa",
+     "Seções em caixa baixa; questões com “verificar se”/“definir se”; rodapé com súmulas e artigos só das ementas transcritas, “publicação em”, órgão julgador e o “AgRg no AREsp 1.164.658” sem fonte → Seções em caixa alta; “saber se”; rodapé com os dispositivos do voto e os julgados transcritos, no padrão “Rel. Min. NOME, DJe DD/MM/AAAA”",
+     "EST · MÉDIA"
+    ]
+   ],
+   "pendencias": [
+    "A extração dos autos começa no ID 162745665: a petição do agravo (ID 158155604) não foi conferida. Os IDʼs das decisões agravadas e das folhas citadas são dos autos de origem.",
+    "Se o Relator quiser manter o precedente invocado pelos agravantes (AgInt no AREsp 1.164.658), conferir número, classe, relator e data antes de citá-lo."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5009018-03.2021.4.03.0000.json.gz",
@@ -8373,8 +8423,31 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "ID da sentença só no fim do parágrafo; “remessa oficial”; “IDs” → Forma A: “à sentença (ID 277617420) que …”; “remessa necessária”; “IDʼs”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto",
+     "“LC 123/2006”; “remessa oficial”; “Rel. Min. MAURO CAMPBELL” → “Lei Complementar 123/2006” (fora das transcrições); “remessa necessária”; nome regimental “MAURO CAMPBELL MARQUES”",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Seções em caixa baixa; questões com “definir se”; “remessa oficial”; “LC”, “CF”; rodapé sem relatores e datas e com “TRF3” → Seções em caixa alta; “saber se”; “remessa necessária”; “Lei Complementar”, “CF/1988”; rodapé no padrão",
+     "EST · BAIXA"
+    ]
+   ],
+   "pendencias": [
+    "Conferir o ID 277617386 (relação nominal das filiadas), citado no voto: a extração dos autos começa no ID 277617403 e não traz a inicial nem os seus anexos."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5010147-90.2018.4.03.6000.json.gz",
