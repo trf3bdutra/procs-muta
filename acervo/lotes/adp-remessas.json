@@ -113,6 +113,13 @@
    "cor": "#6a3a2a",
    "resultado": "Voto: linha da Turma Regional (culpa in vigilando/in eligendo; boa-fé não demonstrada) × prova pré-constituída de boa-fé [VALIDAR]",
    "modelo": "Voto (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026)"
+  },
+  {
+   "id": "RA8",
+   "rotulo": "Apelação com remessa · PIS/COFINS: crédito na revenda de combustíveis (LC 192/2022)",
+   "cor": "#3a5a6a",
+   "resultado": "Provimento: sem crédito em monofasia ou alíquota zero (ApelRemNec 5005209-08.2025.4.03.6000, 20/07/2026)",
+   "modelo": "Monocrática ou voto único (mesmo advogado, mesma sentença-padrão)"
   }
  ],
  "grupo_outros": {
@@ -15685,7 +15692,7 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "AUTO POSTO 5 RODA LTDA",
    "assunto": "PIS",
-   "grupo": "RM2",
+   "grupo": "RA8",
    "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · creditamento de PIS e COFINS na aquisição de diesel por revendedor varejista (artigo 9º da LC 192/2022), de 11/03/2022 a 23/09/2022 (anterioridade fixada na ADI 7.181) · liminar indeferida · segurança concedida em parte",
    "resultado": "Ato a proferir: apelação da União (ID 308999400) e remessa necessária da sentença ID 308999397, integrada pela ID 308999407; contrarrazões (ID 308999414); MPF sem intervenção (ID 309276135) ‖ Proposta pelos precedentes: Provimento da apelação e da remessa para denegar a segurança, na linha da ApelRemNec 5005209-08.2025.4.03.6000 [VALIDAR via: monocrática ou voto] [VALIDAR: Ratificação da apelação após os embargos (artigo 1.024, § 5º, do CPC)]",
    "modelo": "",
@@ -15857,12 +15864,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "DIGITHOBRASIL SOLUCOES EM SOFTWARE LTDA",
    "assunto": "PIS",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA5",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · exclusão do ISS da base de cálculo do PIS e da COFINS · liminar deferida · segurança concedida, com compensação",
+   "resultado": "Ato a proferir: apelação da União (ID 355728881) e remessa necessária da sentença ID 355728876; contrarrazões (ID 355728933); MPF sem intervenção (ID 356840792) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa (Tema 118/STF), após conferir a modulação dos efeitos [VALIDAR] [VALIDAR: Modulação dos efeitos do Tema 118/STF]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS da Digithobrasil, com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -15873,7 +15882,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de desprovimento (artigo 932, IV, b, do CPC)",
+    "materia": "Tributário — PIS/COFINS (ISS na base)",
+    "origem": "Mandado de segurança 5009274-80.2024.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 355728876 (27/01/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 355728881, 09/02/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Sim (artigo 932, IV, b, do CPC): Tema 118/STF, observada a modulação",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -15883,6 +15903,117 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ISS na base do PIS/COFINS (Tema 118/STF)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 356910147 · 26/02/2026 — …10, §2º, VI do Regimento Interno desta Corte, proceda a UFOR, com urgência, à redistribuição do feito a uma das Turmas daquela Colenda Seção.São Paulo, data da assinatura digital.AUDREY GASPARINIDesembargadora Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 356840792 · 25/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 118/STF: o ISS não integra a base de cálculo do PIS e da COFINS (RE 592.616, julgado em 21/10/2026, por 6 a 5); modulação dos efeitos ainda pendente [VALIDAR] · Linha da Turma Regional antes do julgamento: aplicação analógica do Tema 69/STF (ED na ApelRemNec 5001917-88.2020.4.03.6000, 28/04/2026) · Mesmo grupo: 5009355-29 e 5009286-94",
+   "teor": {
+    "sintese_fatica": "Digithobrasil Soluções em Software Ltda. pede a exclusão do ISS da base do PIS e da COFINS e a compensação do indébito. A liminar foi deferida e a sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 355728876 (27/01/2026): ratificou a liminar e concedeu a segurança para recolher o PIS e a COFINS sem o ISS destacado na nota fiscal, com compensação do indébito.",
+    "recurso": "União (Fazenda Nacional) (ID 355728881, 09/02/2026): inclusão do ISS na receita bruta; distinção em relação ao Tema 69/STF; ausência de ordem de suspensão no Tema 118/STF.",
+    "resposta": "Contrarrazões da impetrante (ID 355728933).",
+    "parecer": "MPF ID 356840792: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · exclusão do ISS da base de cálculo do PIS e da COFINS · liminar deferida · segurança concedida, com compensação",
+     "sintese": "Digithobrasil Soluções em Software Ltda. pede a exclusão do ISS da base do PIS e da COFINS e a compensação do indébito. A liminar foi deferida e a sentença concedeu a segurança.",
+     "questoes": "1) Exclusão do ISS da base do PIS e da COFINS (Tema 118/STF); 2) modulação; 3) compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 355728881, 09/02/2026): inclusão do ISS na receita bruta; distinção em relação ao Tema 69/STF; ausência de ordem de suspensão no Tema 118/STF.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 355728933)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "355728876",
+      "juizo": "Mandado de segurança 5009274-80.2024.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "ratificou a liminar e concedeu a segurança para recolher o PIS e a COFINS sem o ISS destacado na nota fiscal, com compensação do indébito."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-26",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "355728881",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "355728876",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "355728866",
+       "data": "2025-02-10"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "355728876",
+       "data": "2026-01-27"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "355728881",
+       "data": "2026-02-09"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "355728933",
+       "data": "2026-02-19"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "356840792",
+       "data": "2026-02-25"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 356910147 · 26/02/2026 — …10, §2º, VI do Regimento Interno desta Corte, proceda a UFOR, com urgência, à redistribuição do feito a uma das Turmas daquela Colenda Seção.São Paulo, data da assinatura digital.AUDREY GASPARINIDesembargadora Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 356840792 · 25/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 118/STF: o ISS não integra a base de cálculo do PIS e da COFINS (RE 592.616, julgado em 21/10/2026, por 6 a 5); modulação dos efeitos ainda pendente [VALIDAR] · Linha da Turma Regional antes do julgamento: aplicação analógica do Tema 69/STF (ED na ApelRemNec 5001917-88.2020.4.03.6000, 28/04/2026) · Mesmo grupo: 5009355-29 e 5009286-94",
+     "assuntoDet": "ISS na base do PIS/COFINS (Tema 118/STF)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "356840792",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 356910147 · 26/02/2026 — …10, §2º, VI do Regimento Interno desta Corte, proceda a UFOR, com urgência, à redistribuição do feito a uma das Turmas daquela Colenda Seção.São Paulo, data da assinatura digital.AUDREY GASPARINIDesembargadora Federal",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 356840792 · 25/02/2026",
+    "ultima_informacao": "Certidão · ID 357811165 · 03/03/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 356910147 · 26/02/2026 — …10, §2º, VI do Regimento Interno desta Corte, proceda a UFOR, com urgência, à redistribuição do feito a uma das Turmas daquela Colenda Seção.São Paulo, data da assinatura digital.AUDREY GASPARINIDesembargadora Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 356840792 · 25/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -15894,12 +16025,14 @@
    "exequente": "IMESUL METALURGICA LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "PIS",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelações da União e da impetrante e remessa necessária em mandado de segurança · momento de tributação (IRPJ, CSLL, PIS e COFINS) do indébito reconhecido judicialmente e compensado · SELIC na repetição (Tema 962/STF) · segurança concedida em parte, integrada por embargos de declaração",
+   "resultado": "Ato a proferir: apelações da União (ID 292010631) e da impetrante (ID 292010642) e remessa necessária da sentença ID 292010621, integrada pela ID 292010635; contrarrazões da União (ID 292010648); MPF sem intervenção (ID 292228629) ‖ Proposta pelos precedentes: Voto: fixar o momento da tributação do indébito compensado, o alcance do Tema 962/STF (ação ressalvada) e o PIS/COFINS sobre a SELIC [VALIDAR] [VALIDAR: Preparo da impetrante (GRU de 11/04/2024); Contrarrazões da impetrante à apelação da União]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da União e da Imesul e remessa necessária da sentença que diferiu a tributação do indébito judicial à homologação das compensações e excluiu a SELIC das bases do IRPJ e da CSLL. A União defende a tributação na primeira declaração de compensação; a impetrante quer a não incidência sobre o crédito e sobre os juros.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -15910,7 +16043,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Tributário — IRPJ/CSLL/PIS/COFINS (indébito judicial)",
+    "origem": "Mandado de segurança 5000962-17.2021.4.03.6002 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 292010621 (20/04/2023)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 292010631, 10/06/2023) e apelação de Imesul Metalúrgica Ltda. (ID 292010642, 25/04/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público); Imesul Metalúrgica Ltda.: GRU judicial paga em 11/04/2024 (ID 292010644) [VALIDAR]",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público); Imesul Metalúrgica Ltda.: GRU judicial paga em 11/04/2024 (ID 292010644) [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -15920,6 +16064,143 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Indébito judicial compensado — momento da tributação; SELIC (Tema 962/STF); PIS/COFINS sobre juros",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 342795036 · 14/11/2025 — recebeu o recurso sem conceder efeito suspensivo | última peça: Petição intercorrente (PFN) · ID 344008089 · 19/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Ação ajuizada antes de 17/09/2021: ressalvada da modulação do Tema 962/STF; a sentença menciona o \"marco temporal\" [VALIDAR] · Momento da tributação do indébito judicial: Solução de Consulta COSIT e linha da 3ª Turma (ApCiv 5002498-94.2020.4.03.6100, 11/09/2021) [VALIDAR] · PIS/COFINS sobre a SELIC: ADI RFB 25/2003 · Efeito suspensivo indeferido pelo Des. Fed. Marcelo Saraiva (ID 342795036) · Sentenças republicadas (IDs 292010622 e 292010636)",
+   "teor": {
+    "sintese_fatica": "Imesul Metalúrgica Ltda. impetrou o mandado de segurança em abril de 2021 para não tributar o indébito reconhecido no Tema 69/STF nem a SELIC sobre ele, ou para diferir a tributação até a homologação das compensações. A sentença acolheu em parte o pedido.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 292010621 (20/04/2023): concedeu em parte a segurança para (1) tributar os créditos de decisão judicial transitada apenas quando liquidados, conforme as homologações das compensações, e (2) excluir das bases do IRPJ e da CSLL a SELIC na repetição de indébito, \"observado o marco temporal\" do Tema 962/STF, com compensação; embargos de declaração da impetrante acolhidos para integrar a sentença quanto ao crédito do Tema 69 (ID 292010635).",
+    "recurso": "União (Fazenda Nacional) (ID 292010631, 10/06/2023): a disponibilidade da receita do crédito judicial ilíquido ocorre na entrega da primeira declaração de compensação (regime de competência). Imesul Metalúrgica Ltda. (ID 292010642, 25/04/2024): exclusão do crédito do Tema 69 das bases do IRPJ e da CSLL e do PIS e da COFINS sobre a SELIC; ilegalidade do ADI RFB 25/2003.",
+    "resposta": "Contrarrazões da União (ID 292010648).",
+    "parecer": "MPF ID 292228629: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Juarez Casagrande (OAB/PR 46.670).",
+    "preparo": "Impetrante: GRU judicial paga em 11/04/2024 (ID 292010644) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da União e da impetrante e remessa necessária em mandado de segurança · momento de tributação (IRPJ, CSLL, PIS e COFINS) do indébito reconhecido judicialmente e compensado · SELIC na repetição (Tema 962/STF) · segurança concedida em parte, integrada por embargos de declaração",
+     "sintese": "Imesul Metalúrgica Ltda. impetrou o mandado de segurança em abril de 2021 para não tributar o indébito reconhecido no Tema 69/STF nem a SELIC sobre ele, ou para diferir a tributação até a homologação das compensações. A sentença acolheu em parte o pedido.",
+     "questoes": "1) Momento da tributação do indébito reconhecido judicialmente e compensado; 2) IRPJ/CSLL sobre a SELIC (Tema 962/STF); 3) PIS/COFINS sobre a SELIC.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 292010631, 10/06/2023): a disponibilidade da receita do crédito judicial ilíquido ocorre na entrega da primeira declaração de compensação (regime de competência). Imesul Metalúrgica Ltda. (ID 292010642, 25/04/2024): exclusão do crédito do Tema 69 das bases do IRPJ e da CSLL e do PIS e da COFINS sobre a SELIC; ilegalidade do ADI RFB 25/2003.",
+      "contrarrazoes": "Contrarrazões da União (ID 292010648)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "292010621",
+      "juizo": "Mandado de segurança 5000962-17.2021.4.03.6002 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu em parte a segurança para (1) tributar os créditos de decisão judicial transitada apenas quando liquidados, conforme as homologações das compensações, e (2) excluir das bases do IRPJ e da CSLL a SELIC na repetição de indébito, \"observado o marco temporal\" do Tema 962/STF, com compensação; embargos de declaração da impetrante acolhidos para integrar a sentença quanto ao crédito do Tema 69 (ID 292010635)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-04-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "292010631",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Imesul Metalúrgica Ltda.",
+       "tipo": "Apelação",
+       "id": "292010642",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "292010621",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida em parte",
+       "id": "292010621",
+       "data": "2023-04-20"
+      },
+      {
+       "desc": "Embargos de declaração da impetrante",
+       "id": "292010626",
+       "data": "2023-05-02"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "292010631",
+       "data": "2023-06-10"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "292010635",
+       "data": "2024-01-29"
+      },
+      {
+       "desc": "Apelação da impetrante",
+       "id": "292010642",
+       "data": "2024-04-25"
+      },
+      {
+       "desc": "Comprovante de GRU judicial",
+       "id": "292010644",
+       "data": "2024-04-25"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "292010648",
+       "data": "2024-05-14"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "292228629",
+       "data": "2024-06-13"
+      },
+      {
+       "desc": "Decisão: efeito suspensivo indeferido",
+       "id": "342795036",
+       "data": "2025-11-14"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 342795036 · 14/11/2025 — recebeu o recurso sem conceder efeito suspensivo | última peça: Petição intercorrente (PFN) · ID 344008089 · 19/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Ação ajuizada antes de 17/09/2021: ressalvada da modulação do Tema 962/STF; a sentença menciona o \"marco temporal\" [VALIDAR] · Momento da tributação do indébito judicial: Solução de Consulta COSIT e linha da 3ª Turma (ApCiv 5002498-94.2020.4.03.6100, 11/09/2021) [VALIDAR] · PIS/COFINS sobre a SELIC: ADI RFB 25/2003 · Efeito suspensivo indeferido pelo Des. Fed. Marcelo Saraiva (ID 342795036) · Sentenças republicadas (IDs 292010622 e 292010636)",
+     "assuntoDet": "Indébito judicial compensado — momento da tributação; SELIC (Tema 962/STF); PIS/COFINS sobre juros",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "292228629",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 342795036 · 14/11/2025 — recebeu o recurso sem conceder efeito suspensivo",
+    "ultima_peca": "Petição intercorrente (PFN) · ID 344008089 · 19/11/2025",
+    "ultima_informacao": "Certidão de devolução de mandado · ID 292010640 · 15/04/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 342795036 · 14/11/2025 — recebeu o recurso sem conceder efeito suspensivo | última peça: Petição intercorrente (PFN) · ID 344008089 · 19/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -15931,12 +16212,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL EM CAMPO GRANDE",
    "executado": "POSTO PENA BRANCA LTDA",
    "assunto": "PIS",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA8",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · creditamento de PIS e COFINS na aquisição de diesel por revendedor varejista (artigo 9º da LC 192/2022), até 23/09/2022 (anterioridade fixada na ADI 7.181) · liminar indeferida · segurança concedida em parte",
+   "resultado": "Ato a proferir: apelação da União (ID 291849330) e remessa necessária da sentença ID 291849323; contrarrazões (ID 291849434); MPF sem intervenção (ID 292233698) ‖ Proposta pelos precedentes: Provimento da apelação e da remessa para denegar a segurança, na linha da ApelRemNec 5005209-08.2025.4.03.6000 [VALIDAR via: monocrática ou voto] [VALIDAR: Termo inicial do crédito na sentença]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que reconheceu a Posto Pena Branca Ltda. crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -15947,7 +16230,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: provimento pela linha da Turma Regional",
+    "materia": "Tributário — PIS/COFINS (combustíveis)",
+    "origem": "Mandado de segurança 5010442-88.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 291849323 (15/12/2023)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 291849330, 16/05/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível: linha consolidada da Turma Regional [VALIDAR fundamento do artigo 932]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -15957,6 +16251,122 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "PIS/COFINS — creditamento na revenda de combustíveis (LC 192/2022)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 292528160 · 03/07/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Manifestação (PFN) · ID 293577883 · 10/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: sem autorização legal para crédito em monofasia ou alíquota zero; o artigo 9º da LC 192/2022 não instituiu regra diversa (ApelRemNec 5005209-08.2025.4.03.6000, 20/07/2026; embargos rejeitados em 15/09/2026) · Sentença-padrão da 2ª Vara Federal de Campo Grande, mesmo advogado: 5010426-37, 5010442-88 e 5010438-51 (julgar juntos) · Sentença republicada (ID 291849324)",
+   "teor": {
+    "sintese_fatica": "Posto Pena Branca Ltda., revendedor varejista de combustíveis, pede créditos de PIS e COFINS sobre a aquisição de diesel no período de alíquota zero da LC 192/2022. A liminar foi indeferida e a sentença acolheu o pedido.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 291849323 (15/12/2023): concedeu em parte a segurança para reconhecer o crédito de PIS e COFINS sobre o custo de aquisição de diesel até 90 dias após a LC 194/2022 (23/09/2022) e a compensação após o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 291849330, 16/05/2024): impossibilidade de crédito em operações monofásicas ou com alíquota zero; o artigo 9º da LC 192/2022 não instituiu direito a crédito.",
+    "resposta": "Contrarrazões da impetrante (ID 291849434).",
+    "parecer": "MPF ID 292233698: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Adriano Greve (OAB/SP 211.900).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · creditamento de PIS e COFINS na aquisição de diesel por revendedor varejista (artigo 9º da LC 192/2022), até 23/09/2022 (anterioridade fixada na ADI 7.181) · liminar indeferida · segurança concedida em parte",
+     "sintese": "Posto Pena Branca Ltda., revendedor varejista de combustíveis, pede créditos de PIS e COFINS sobre a aquisição de diesel no período de alíquota zero da LC 192/2022. A liminar foi indeferida e a sentença acolheu o pedido.",
+     "questoes": "1) Crédito de PIS e COFINS na revenda de combustíveis sujeitos à monofasia e à alíquota zero (LC 192/2022).",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 291849330, 16/05/2024): impossibilidade de crédito em operações monofásicas ou com alíquota zero; o artigo 9º da LC 192/2022 não instituiu direito a crédito.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 291849434)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "291849323",
+      "juizo": "Mandado de segurança 5010442-88.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu em parte a segurança para reconhecer o crédito de PIS e COFINS sobre o custo de aquisição de diesel até 90 dias após a LC 194/2022 (23/09/2022) e a compensação após o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-12-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "291849330",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "291849323",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "291849311",
+       "data": "2023-01-31"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "291849323",
+       "data": "2023-12-15"
+      },
+      {
+       "desc": "Sentença (republicada)",
+       "id": "291849324",
+       "data": "2024-04-11"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "291849330",
+       "data": "2024-05-16"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "291849434",
+       "data": "2024-06-06"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "292233698",
+       "data": "2024-06-14"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 292528160 · 03/07/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Manifestação (PFN) · ID 293577883 · 10/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: sem autorização legal para crédito em monofasia ou alíquota zero; o artigo 9º da LC 192/2022 não instituiu regra diversa (ApelRemNec 5005209-08.2025.4.03.6000, 20/07/2026; embargos rejeitados em 15/09/2026) · Sentença-padrão da 2ª Vara Federal de Campo Grande, mesmo advogado: 5010426-37, 5010442-88 e 5010438-51 (julgar juntos) · Sentença republicada (ID 291849324)",
+     "assuntoDet": "PIS/COFINS — creditamento na revenda de combustíveis (LC 192/2022)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "292233698",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 292528160 · 03/07/2024 — recebeu o recurso sem conceder efeito suspensivo",
+    "ultima_peca": "Manifestação (PFN) · ID 293577883 · 10/07/2024",
+    "ultima_informacao": "Certidão · ID 292187257 · 13/06/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 292528160 · 03/07/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Manifestação (PFN) · ID 293577883 · 10/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -15968,12 +16378,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "POROROCA AUTO POSTO IV LTDA",
    "assunto": "PIS",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA8",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · creditamento de PIS e COFINS na aquisição de diesel por revendedor varejista (artigo 9º da LC 192/2022), até 23/09/2022 (anterioridade fixada na ADI 7.181) · liminar indeferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 293963589) e remessa necessária da sentença ID 293963583; contrarrazões (ID 293963593); MPF sem intervenção (ID 294104134) ‖ Proposta pelos precedentes: Provimento da apelação e da remessa para denegar a segurança, na linha da ApelRemNec 5005209-08.2025.4.03.6000 [VALIDAR via: monocrática ou voto] [VALIDAR: Termo inicial do crédito na sentença]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que reconheceu a Pororoca Auto Posto IV Ltda. crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -15984,7 +16396,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: provimento pela linha da Turma Regional",
+    "materia": "Tributário — PIS/COFINS (combustíveis)",
+    "origem": "Mandado de segurança 5010438-51.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 293963583 (27/10/2023)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 293963589, 25/03/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível: linha consolidada da Turma Regional [VALIDAR fundamento do artigo 932]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -15994,6 +16417,122 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "PIS/COFINS — creditamento na revenda de combustíveis (LC 192/2022)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 293963592 · 03/07/2024 — …a a apresentar as contrarrazões ao recurso, no prazo de 15 dias, nos termos do art. 1010, § 1º, do CPC.Após, subam os autos ao egrégio Tribunal Regional Federal da 3ª Região.CAMPO GRANDE, datado e assinado digitalmente | última peça: Parecer (MPF) · ID 294104134 · 19/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: sem autorização legal para crédito em monofasia ou alíquota zero; o artigo 9º da LC 192/2022 não instituiu regra diversa (ApelRemNec 5005209-08.2025.4.03.6000, 20/07/2026; embargos rejeitados em 15/09/2026) · Sentença-padrão da 2ª Vara Federal de Campo Grande, mesmo advogado: 5010426-37, 5010442-88 e 5010438-51 (julgar juntos) · Sentença republicada (ID 293963584)",
+   "teor": {
+    "sintese_fatica": "Pororoca Auto Posto IV Ltda., revendedor varejista de combustíveis, pede créditos de PIS e COFINS sobre a aquisição de diesel no período de alíquota zero da LC 192/2022. A liminar foi indeferida e a sentença acolheu o pedido.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 293963583 (27/10/2023): concedeu a segurança para reconhecer o crédito de PIS e COFINS sobre o custo de aquisição de diesel até 90 dias após a LC 194/2022 (23/09/2022) e a compensação após o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 293963589, 25/03/2024): impossibilidade de crédito em operações monofásicas ou com alíquota zero; o artigo 9º da LC 192/2022 não instituiu direito a crédito.",
+    "resposta": "Contrarrazões da impetrante (ID 293963593).",
+    "parecer": "MPF ID 294104134: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Adriano Greve (OAB/SP 211.900).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · creditamento de PIS e COFINS na aquisição de diesel por revendedor varejista (artigo 9º da LC 192/2022), até 23/09/2022 (anterioridade fixada na ADI 7.181) · liminar indeferida · segurança concedida",
+     "sintese": "Pororoca Auto Posto IV Ltda., revendedor varejista de combustíveis, pede créditos de PIS e COFINS sobre a aquisição de diesel no período de alíquota zero da LC 192/2022. A liminar foi indeferida e a sentença acolheu o pedido.",
+     "questoes": "1) Crédito de PIS e COFINS na revenda de combustíveis sujeitos à monofasia e à alíquota zero (LC 192/2022).",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 293963589, 25/03/2024): impossibilidade de crédito em operações monofásicas ou com alíquota zero; o artigo 9º da LC 192/2022 não instituiu direito a crédito.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 293963593)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "293963583",
+      "juizo": "Mandado de segurança 5010438-51.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para reconhecer o crédito de PIS e COFINS sobre o custo de aquisição de diesel até 90 dias após a LC 194/2022 (23/09/2022) e a compensação após o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-12-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "293963589",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "293963583",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "293963419",
+       "data": "2023-01-31"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "293963583",
+       "data": "2023-10-27"
+      },
+      {
+       "desc": "Sentença (republicada)",
+       "id": "293963584",
+       "data": "2024-02-26"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "293963589",
+       "data": "2024-03-25"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "293963593",
+       "data": "2024-07-17"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "294104134",
+       "data": "2024-07-19"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 293963592 · 03/07/2024 — …a a apresentar as contrarrazões ao recurso, no prazo de 15 dias, nos termos do art. 1010, § 1º, do CPC.Após, subam os autos ao egrégio Tribunal Regional Federal da 3ª Região.CAMPO GRANDE, datado e assinado digitalmente | última peça: Parecer (MPF) · ID 294104134 · 19/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: sem autorização legal para crédito em monofasia ou alíquota zero; o artigo 9º da LC 192/2022 não instituiu regra diversa (ApelRemNec 5005209-08.2025.4.03.6000, 20/07/2026; embargos rejeitados em 15/09/2026) · Sentença-padrão da 2ª Vara Federal de Campo Grande, mesmo advogado: 5010426-37, 5010442-88 e 5010438-51 (julgar juntos) · Sentença republicada (ID 293963584)",
+     "assuntoDet": "PIS/COFINS — creditamento na revenda de combustíveis (LC 192/2022)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "294104134",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 293963592 · 03/07/2024 — …a a apresentar as contrarrazões ao recurso, no prazo de 15 dias, nos termos do art. 1010, § 1º, do CPC.Após, subam os autos ao egrégio Tribunal Regional Federal da 3ª Região.CAMPO GRANDE, datado e assinado digitalmente",
+    "ultima_peca": "Parecer (MPF) · ID 294104134 · 19/07/2024",
+    "ultima_informacao": "Certidão · ID 294065144 · 18/07/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 293963592 · 03/07/2024 — …a a apresentar as contrarrazões ao recurso, no prazo de 15 dias, nos termos do art. 1010, § 1º, do CPC.Após, subam os autos ao egrégio Tribunal Regional Federal da 3ª Região.CAMPO GRANDE, datado e assinado digitalmente | última peça: Parecer (MPF) · ID 294104134 · 19/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
