@@ -2974,10 +2974,11 @@ async function carregarTriados() {
       try {
         const lote = JSON.parse(await P.ler('acervo/lotes/'+lid+'.json'));
         lotesCarregados.push(lote);
+        const procs = lote.itens || lote.processos || [];
         if (lid.startsWith('adp-serie-')) {
-          if (lote.processos) lote.processos.forEach(p => { const d = p.d||p.num||p.processo; if(d) series.set(d, {id:lid, titulo:lote.titulo||lid}); });
+          procs.forEach(p => { const d = p.d||p.num||p.processo; if(d) series.set(d, {id:lid, titulo:lote.titulo||lid}); });
         } else {
-          if (lote.processos) lote.processos.forEach(p => { const d = p.d||p.num||p.processo; if(d) items.set(d, {...p, _loteId:lid, _loteTitulo:lote.titulo||lid}); });
+          procs.forEach(p => { const d = p.d||p.num||p.processo; if(d) items.set(d, {...p, _loteId:lid, _loteTitulo:lote.titulo||lid}); });
         }
       } catch(e) { /* lote não encontrado, ignora */ }
     }
@@ -3000,7 +3001,8 @@ async function carregarSelecao() {
       try {
         const lote = JSON.parse(await P.ler('acervo/lotes/'+lid+'.json'));
         lotesCarregados.push(lote);
-        if (lote.processos) lote.processos.forEach(p => { const d = p.d||p.num||p.processo; if(d) items.set(d, {...p, _loteId:lid, _loteTitulo:lote.titulo||lid}); });
+        const procs = lote.itens || lote.processos || [];
+        procs.forEach(p => { const d = p.d||p.num||p.processo; if(d) items.set(d, {...p, _loteId:lid, _loteTitulo:lote.titulo||lid}); });
       } catch(e) { /* ignora */ }
     }
     _selCache = {items, lotes:lotesCarregados};
@@ -3031,10 +3033,11 @@ function triadosBands() {
   if (!_triCache||!_triCache.items.size) return '<div class="tri-ld">Nenhum processo triado encontrado.</div>';
   const groups = new Map();
   _triCache.lotes.forEach(lote => {
-    if (lote.id&&!lote.id.startsWith('adp-serie-')&&lote.processos) {
+    const lotProcs = lote.itens || lote.processos || [];
+    if (lote.id&&!lote.id.startsWith('adp-serie-')&&lotProcs.length) {
       const g = lote.titulo||lote.id;
       if (!groups.has(g)) groups.set(g, {lote, procs:[]});
-      lote.processos.forEach(p => { const d=p.d||p.num||p.processo; if(d) groups.get(g).procs.push({...p, _loteId:lote.id, _loteTitulo:g}); });
+      lotProcs.forEach(p => { const d=p.d||p.num||p.processo; if(d) groups.get(g).procs.push({...p, _loteId:lote.id, _loteTitulo:g}); });
     }
   });
   let h = '';
@@ -3053,10 +3056,11 @@ function selecaoBands() {
   if (!_selCache||!_selCache.items.size) return '<div class="tri-ld">Nenhum processo na seleção prévia.</div>';
   const groups = new Map();
   _selCache.lotes.forEach(lote => {
-    if (lote.processos) {
+    const selProcs = lote.itens || lote.processos || [];
+    if (selProcs.length) {
       const g = lote.titulo||lote.id;
       if (!groups.has(g)) groups.set(g, {lote, procs:[]});
-      lote.processos.forEach(p => { groups.get(g).procs.push({...p, _loteId:lote.id, _loteTitulo:g}); });
+      selProcs.forEach(p => { groups.get(g).procs.push({...p, _loteId:lote.id, _loteTitulo:g}); });
     }
   });
   let h = '';
