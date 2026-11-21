@@ -2915,7 +2915,7 @@ document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='nt-t
 function acompAberto(it){var c=it.ctl||{};return alertas(it).length+(c.intercor&&!c.intercorOk?1:0);}
 function acompHtml(it){var c=it.ctl||{},so=c.sopref||'',PL=(((c.cartao||{}).pendencias)||[]),man=PL.filter(function(p){return p&&p.desc&&!p.ok;}).map(function(p){return p.desc;}),
     auto=alertas(it).filter(function(a){return man.indexOf(a)<0;}),abP=man.length,icA=!!c.intercor&&!c.intercorOk;
-  var SOB=[['','Sem pedido'],['Presencial','Sustentação presencial'],['Virtual','Sustentação por vídeo'],['Preferência','Preferência']];
+  var SOB=[['','Sem pedido'],['Presencial','Presencial'],['Virtual','Vídeo'],['Preferência','Preferência']];
   return '<div class="ac">'+
     /* sustentação oral · preferência no próprio prontuário (o mesmo conteúdo do diálogo): recolhida quando não há pedido;
        abre sozinha se houver pedido marcado ou pedido recebido por e-mail vinculado ao processo */
@@ -9759,6 +9759,7 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #prq .ac-pl textarea{grid-column:2;width:100%;min-height:0;margin:0;border:0!important;background:transparent!important;padding:2px 0!important;resize:none;overflow:hidden;field-sizing:content;font:inherit;font-size:13px;line-height:1.4;color:inherit;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:none!important;cursor:text}
 #prq .ac-pl textarea:focus{outline:0;background:var(--ep2,#f3f1e8)!important}
 /* sustentação oral · preferência: dados do pedido (advogado, OAB, parte, recebimento) */
+#prq .ac>*{min-width:0;max-width:100%}#prq #ac-so .ac-seg{flex-wrap:wrap}#prq #ac-so .ac-seg button{flex:1 1 auto}
 #prq .ac-so-f{display:grid;grid-template-columns:minmax(0,1fr) 112px;gap:6px 8px;margin:8px 0 4px}
 #prq .ac-sf{display:flex;flex-direction:column;gap:2px;min-width:0}
 #prq .ac-sf span{font:600 9.5px var(--emono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--em)}
