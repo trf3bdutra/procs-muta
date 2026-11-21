@@ -26,6 +26,9 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
   Atualizar, Ex Officio, Sair) fica no topo do painel, acima das abas.
 - **0.16.2:** a faixa do usuário fica integrada ao cabeçalho, com botões quadrados (atualizar, Ex Officio, tema, sair);
   a tarefa do PJe e a situação atual ficam dentro do expansível "Autuação, partes e situação" do cartão.
+- **0.16.3:** os botões do PJe (acompanhar, trocar de aba, prontuários, ajuda) ficam na faixa do topo, quadrados; o
+  cabeçalho do processo vira uma faixa escura de ponta a ponta (cores da base do app); número, classe e tipo numa linha, sem
+  repetir a classe por extenso; Controles em cartõezinhos compactos (meta sem razão).
 - Listas curtas e Sim/Não viram botões em todo o prontuário; cabeçalho das abas branco no tema claro.
 
 ## O que muda na 0.15
