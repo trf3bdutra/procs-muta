@@ -288,7 +288,8 @@ for _a in _FI['abas']:
             _vis.add(_ap)
             _CA.append({'a': _ap, 'r': _c.get('rotulo') or _c['chave'], 's': _c.get('secao') or '', 'c': _c['chave'], 'f': _c.get('fonte') or [], 'g': _a['aba'] + ' · ' + _g.get('grupo', '')})
 _ESP = [('processo', 'Número do processo'), ('ramo', 'Ramo do direito, pela árvore do CNJ'), ('recorrente', 'Recorrente'),
-        ('resultado', 'Resultado, pelo dispositivo da peça'), ('conclusao', 'Conclusão do cabeçalho da ementa'), ('dispositivo_ementa', 'Item IV da ementa, pelo dispositivo')]
+        ('resultado', 'Resultado, pelo dispositivo da peça'), ('conclusao', 'Conclusão do cabeçalho da ementa'), ('dispositivo_ementa', 'Item IV da ementa, pelo dispositivo'),
+        ('classe_ementa', 'Classe, em maiúsculas (cabeçalho da ementa)'), ('assunto_ementa', 'Assunto, em maiúsculas (cabeçalho da ementa)')]
 CAJ = json.dumps({'campos': [{'a': x, 'r': r, 's': '*', 'g': 'Caso e peça'} for x, r in _ESP] + _CA}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 def gerar_html(var):
     t, js, css, pre = montar(var)
