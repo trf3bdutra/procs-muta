@@ -209,7 +209,7 @@ test('Mural: passos do ponto de vista de quem está logado, sinalizações por p
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /aguarda:\{t:'Aguardando outros'/);
   assert.match(h, /k:'corrigir',t:'A corrigir'/);
-  assert.match(h, /data-ab=\\?"pront\\?"[^]*?>Abrir o prontuário</);
+  assert.match(h, /data-ab="pront" data-ses="'\+esc\(e\.ses\)\+'" data-cnj="'\+esc\(e\.cnj\)\+'">Prontuário</);
   assert.match(h, /\.calrow #lista\{flex:1;min-height:0;overflow:auto/);
   assert.match(h, /<div class=\\"calrow\\"><div class=\\"esq\\"><slot name=\\"cal\\"><\\\/slot><nav class=\\"kpis\\" id=\\"kpis\\"[^>]*><\\\/nav><div class=\\"board\\">/);
   assert.match(h, /#mu-host>\.av-box #avisos>\.nt:nth-child\(n\+3\)\{display:none!important\}/);
@@ -363,7 +363,10 @@ test('Mural v2: saudação com atalhos, Foco de hoje, sessões com trilha, cards
   assert.match(h, /class=\\"focus\\" id=\\"focus\\"/);
   assert.match(h, /\{k:'atr',t:'Vencidos'/);
   assert.match(h, /data-o=\\"prazo\\"/);
-  assert.match(h, /function gaveta\(k\)\{/);
+  assert.doesNotMatch(h, /function gaveta\(k\)\{/);
+  assert.match(h, /function abre\(k\)\{[^\n]*CX\.abrir\(e\.ses,e\.cnj,true\)/);
+  assert.match(h, /data-min="'\+esc\(e\.k\)\+'">✓ Minutado<\/button>/);
+  assert.match(h, /CX\.etapa\(e\.ses,e\.cnj,'dataMinuta'\)/);
   assert.match(h, /function muEtapa\(ses,cnj,campo\)\{if\(\['dataMinuta','dataCorrecao'\]\.indexOf\(campo\)<0\)/);
   assert.match(h, /meta:muMeta,etapa:muEtapa/);
   assert.match(h, /chips:!PAINEL_GAB/);
