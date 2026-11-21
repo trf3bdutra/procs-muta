@@ -1,7 +1,8 @@
 /* Muta · autos digitais no Prontuário (0.11)
    Nos autos digitais do PJe, o painel lê a cronologia (painel esquerdo: documentos com ID, tipo, descrição, data e hora) e:
    - lista os documentos no Prontuário › Processo, com um campo de especificação (gravado em "Outras peças" da ficha) e os
-     botões Inteiro teor (texto do documento, lido no painel) e PDF (o documento no próprio PJe, numa aba nova);
+     botões Inteiro teor (texto do documento, lido no painel; página digitalizada vai ao OCR), OCR (todas as páginas pelo
+     OCR local, ocr.js) e ↗ (o PDF no próprio PJe, numa aba nova);
    - monta a Situação atual (última decisão, última peça, última informação e última movimentação);
    - com o texto das peças, roda o mesmo motor de leitura do inteiro teor do Caput e da Ex Officio (padrao/inteiro-teor.js,
      com o calendário forense): sugere os campos da ficha (sentença, origem, recursos e contrarrazões, outras peças,
@@ -92,29 +93,46 @@ function pdfLib() {
   return L;
 }
 function b64bytes(b64) { var s = atob(b64), u = new Uint8Array(s.length); for (var i = 0; i < s.length; i++) u[i] = s.charCodeAt(i); return u; }
-function textoPdf(b64, max) {
+/* texto do PDF: camada de texto de cada página; a página sem texto (digitalizada) vai ao OCR local (ocr.js).
+   modo 'ocr' passa todas as páginas pelo OCR (camada de texto ruim ou ausente). */
+var OCR_MAX = 30;
+function semTexto(t) { return S(t).replace(/\s/g, '').length < 25; }
+function textoPdf(b64, max, modo, aviso) {
   var L = pdfLib();
   return L.getDocument({ data: b64bytes(b64), isEvalSupported: false, disableFontFace: true }).promise.then(function (pdf) {
     var n = pdf.numPages, ate = Math.min(n, max || 40), partes = [], p = Promise.resolve();
     for (var i = 1; i <= ate; i++) (function (k) {
       p = p.then(function () { return pdf.getPage(k); }).then(function (pg) { return pg.getTextContent(); }).then(function (c) {
-        partes.push(c.items.map(function (it) { return it.str + (it.hasEOL ? '\n' : ' '); }).join('').replace(/[ \t]+\n/g, '\n'));
+        partes[k - 1] = c.items.map(function (it) { return it.str + (it.hasEOL ? '\n' : ' '); }).join('').replace(/[ \t]+\n/g, '\n');
       });
     })(i);
-    return p.then(function () { try { pdf.destroy(); } catch (e) {} return { texto: partes.join('\n'), pags: n, lidas: ate }; });
+    return p.then(function () {
+      var alvo = [];
+      for (var k = 1; k <= Math.min(ate, OCR_MAX); k++) if (modo === 'ocr' || semTexto(partes[k - 1])) alvo.push(k);
+      if (!alvo.length || !window.MutaOcr || !MutaOcr.disponivel()) return { ocr: 0 };
+      return MutaOcr.paginas(pdf, alvo, aviso).then(function (o) {
+        alvo.forEach(function (k) { if (!semTexto(o[k]) || semTexto(partes[k - 1])) partes[k - 1] = o[k]; });
+        return { ocr: alvo.length };
+      });
+    }).then(function (x) {
+      try { pdf.destroy(); } catch (e) {}
+      return { texto: partes.join('\n'), pags: n, lidas: ate, ocr: x.ocr };
+    }, function (e) { try { pdf.destroy(); } catch (e2) {} throw e; });
   });
 }
-function extrair(id) {
+/* modo 'ocr': lê de novo o documento passando todas as páginas pelo OCR */
+function extrair(id, modo) {
   var d = A.docs[id];
-  if (d && (d.estado === 'lendo' || d.estado === 'ok')) return Promise.resolve(d);
+  if (d && (d.estado === 'lendo' || (d.estado === 'ok' && modo !== 'ocr') || (modo === 'ocr' && d.modo === 'ocr' && d.estado === 'ok'))) return Promise.resolve(d);
   var doc = lista().filter(function (x) { return x.id === id; })[0];
-  A.docs[id] = { estado: 'lendo' }; redesenhar();
+  A.docs[id] = { estado: 'lendo', modo: modo || '' }; redesenhar();
+  var aviso = function (f, t) { var x = A.docs[id]; if (x && x.estado === 'lendo') { x.prog = 'OCR ' + f + '/' + t; redesenhar(); } };
   return window.MutaPje.lerDocumento(A.idp, id).then(function (r) {
-    if (r.fmt === 'pdf') return textoPdf(r.b64, doc && PRINC[doc.k] ? 60 : 25).then(function (t) { return { fmt: 'pdf', texto: t.texto, pags: t.pags, lidas: t.lidas, url: r.url }; });
+    if (r.fmt === 'pdf') return textoPdf(r.b64, doc && PRINC[doc.k] ? 60 : 25, modo, aviso).then(function (t) { return { fmt: 'pdf', texto: t.texto, pags: t.pags, lidas: t.lidas, ocr: t.ocr, url: r.url }; });
     return { fmt: 'html', texto: r.texto, pags: 0, url: r.url };
   }).then(function (x) {
     var sem = S(x.texto).replace(/\s/g, '').length < 40;
-    A.docs[id] = { estado: sem ? 'sem' : 'ok', texto: S(x.texto), fmt: x.fmt, pags: x.pags, lidas: x.lidas, url: x.url };
+    A.docs[id] = { estado: sem ? 'sem' : 'ok', modo: modo || '', texto: S(x.texto), fmt: x.fmt, pags: x.pags, lidas: x.lidas, ocr: x.ocr || 0, url: x.url };
     A.sug = null; redesenhar(); return A.docs[id];
   }, function (e) { A.docs[id] = { estado: 'erro', erro: e.message }; redesenhar(); return A.docs[id]; });
 }
@@ -306,10 +324,10 @@ function htmlSituacao(registro) {
 }
 function estadoDoc(id) {
   var d = A.docs[id]; if (!d) return '';
-  if (d.estado === 'lendo') return '<span class="au-st">lendo…</span>';
+  if (d.estado === 'lendo') return '<span class="au-st">' + esc(d.prog || 'lendo…') + '</span>';
   if (d.estado === 'erro') return '<span class="au-st err" title="' + esc(d.erro) + '">erro</span>';
-  if (d.estado === 'sem') return '<span class="au-st al" title="PDF digitalizado: sem camada de texto">sem texto</span>';
-  return '<span class="au-st ok">' + (d.fmt === 'pdf' ? d.pags + ' pág.' : 'texto') + '</span>';
+  if (d.estado === 'sem') return '<span class="au-st al" title="Nem a camada de texto nem o OCR trouxeram texto">sem texto</span>';
+  return '<span class="au-st ok"' + (d.ocr ? ' title="' + d.ocr + ' página(s) lida(s) por OCR: confira nomes, números e datas"' : '') + '>' + (d.fmt === 'pdf' ? d.pags + ' pág.' + (d.ocr ? ' · OCR' : '') : 'texto') + '</span>';
 }
 /* lista de documentos, com especificação (gravada em "Outras peças") e os botões de cada um */
 function htmlDocs() {
@@ -332,9 +350,10 @@ function htmlDocs() {
         '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
         '<div class="au-a"><input type="text" class="au-esp" data-esp="' + esc(d.id) + '" placeholder="Especificação" title="Vai para Outras peças e ocorrências" value="' + esc(espDe(d.id)) + '">' +
         '<button type="button" class="btn line sm" data-au="ext:' + esc(d.id) + '"' + (dd && dd.estado === 'lendo' ? ' disabled' : '') + ' title="Lê o texto do documento no painel">' + (dd && /^(ok|sem)$/.test(dd.estado) ? (ab ? 'Fechar' : 'Ver texto') : 'Inteiro teor') + '</button>' +
-        '<button type="button" class="btn line sm" data-au="pdf:' + esc(d.id) + '" title="Abre o documento no PJe, numa aba nova">PDF</button>' + estadoDoc(d.id) + '</div>' +
+        '<button type="button" class="btn line sm" data-au="ocr:' + esc(d.id) + '"' + (dd && dd.estado === 'lendo' ? ' disabled' : '') + ' title="Lê o documento por OCR, página por página (PDF digitalizado ou com texto ruim). Roda no computador; nada sai dele">OCR</button>' +
+        '<button type="button" class="btn line sm au-pdf" data-au="pdf:' + esc(d.id) + '" title="Abre o PDF no PJe, numa aba nova" aria-label="Abrir o PDF no PJe">↗</button>' + estadoDoc(d.id) + '</div>' +
         (ab && dd && dd.texto ? '<div class="au-tx"><div class="bar"><button type="button" class="lnk" data-au="cp:' + esc(d.id) + '">Copiar o texto</button><small class="muted">' + (dd.fmt === 'pdf' ? dd.pags + ' página(s)' + (dd.lidas < dd.pags ? ', lidas ' + dd.lidas : '') : 'HTML') + '</small></div><pre>' + esc(dd.texto.slice(0, 60000)) + '</pre></div>' : '') +
-        (ab && dd && dd.estado === 'sem' ? '<p class="status err au-tx">PDF digitalizado, sem texto: abra o PDF para ler (o OCR não roda no painel).</p>' : '') + '</div>';
+        (ab && dd && dd.estado === 'sem' ? '<p class="status err au-tx">Sem texto legível, nem pelo OCR' + (dd.pags > OCR_MAX ? ' (o OCR lê até ' + OCR_MAX + ' páginas)' : '') + ': abra o PDF (↗).</p>' : '') + '</div>';
     }).join('') + '</div></section>';
   return h;
 }
@@ -411,6 +430,7 @@ function clique(b) {
   else if (a === 'aplicar') aplicar();
   else if (/^f:/.test(a)) { A.filtro = a.slice(2); redesenhar(); }
   else if (/^ext:/.test(a)) { var id = a.slice(4), d = A.docs[id]; if (d && /^(ok|sem)$/.test(d.estado)) { A.abertos[id] = !A.abertos[id]; redesenhar(); } else { A.abertos[id] = true; extrair(id); } }
+  else if (/^ocr:/.test(a)) { A.abertos[a.slice(4)] = true; extrair(a.slice(4), 'ocr'); }
   else if (/^pdf:/.test(a)) abrirPdf(a.slice(4));
   else if (/^cp:/.test(a)) { var x = A.docs[a.slice(3)]; if (x && x.texto) copiar(x.texto, b); }
   else if (/^al:/.test(a)) { var al = alertas()[Number(a.slice(3))], g = GB(); if (al && al.campo && g.marcar) { g.marcar(al.campo, al.valor); g.gravar().catch(function () {}); } }

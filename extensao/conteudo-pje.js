@@ -19,7 +19,7 @@
      documento (GET, com a sessão de quem está logado); HTML vira texto, PDF segue para o painel extrair o texto. Só leitura. */
 (function () {
   'use strict';
-  var VERSAO = '0.11';
+  var VERSAO = '0.12';
   if (window.__mutaPje === VERSAO) return;
   window.__mutaPje = VERSAO;
 

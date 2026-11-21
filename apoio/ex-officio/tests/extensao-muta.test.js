@@ -89,3 +89,16 @@ test('extensão 0.11: os motores copiados de padrao/ são idênticos aos do site
   ['tab-pront', 'tab-min', 'tab-acervo', 'tab-par', 'tab-dir', 'tab-ajuda', 'panel-min', 'min-conf'].forEach(id => assert.ok(html.includes('id="' + id + '"'), id));
   assert.ok(fs.existsSync(path.join(ext, 'vendor/pdf.worker.min.js')), 'worker do pdf.js');
 });
+
+test('extensão 0.12: OCR local, sem CDN, com o modelo em português e permissão de WebAssembly', () => {
+  const man = JSON.parse(read('extensao/manifest.json')), html = read('extensao/painel.html'), ocr = read('extensao/ocr.js');
+  assert.match(man.content_security_policy.extension_pages, /'wasm-unsafe-eval'/);
+  const ordem = [...html.matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
+  assert.ok(ordem.indexOf('vendor/tesseract/tesseract.min.js') > ordem.indexOf('vendor/pdf.min.js'));
+  assert.ok(ordem.indexOf('ocr.js') > ordem.indexOf('vendor/tesseract/tesseract.min.js') && ordem.indexOf('ocr.js') < ordem.indexOf('autos.js'));
+  ['worker.min.js', 'tesseract-core-simd-lstm.wasm.js', 'tesseract-core-lstm.wasm.js', 'por.traineddata.gz'].forEach(f => assert.ok(fs.existsSync(path.join(ext, 'vendor/tesseract', f)), f));
+  assert.ok(!/https?:\/\//.test(ocr.replace(/\/\*[\s\S]*?\*\//g, '')), 'ocr.js não busca nada fora da extensão');
+  assert.match(ocr, /workerBlobURL: false/); assert.match(ocr, /cacheMethod: 'none'/);
+  const autos = read('extensao/autos.js');
+  assert.match(autos, /data-au="ocr:/); assert.match(autos, /MutaOcr\.paginas/);
+});

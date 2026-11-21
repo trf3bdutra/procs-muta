@@ -3,6 +3,13 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.12
+
+- **OCR local.** Cada documento dos autos tem "Inteiro teor", "OCR" e "↗" (abre o PDF no PJe). "Inteiro teor" lê a camada
+  de texto e manda ao OCR só as páginas digitalizadas; "OCR" passa todas as páginas pelo OCR (texto ruim ou ausente).
+  O OCR é o Tesseract em português, dentro da própria extensão (`vendor/tesseract`, `ocr.js`): nada sai do computador.
+  Lê até 30 páginas por documento; o texto por OCR vem marcado para conferir nomes, números e datas.
+
 ## O que muda na 0.11
 
 Cinco abas, nesta ordem: **Prontuário, Minuta, Ementário, Parágrafos-padrão e Diretrizes**. A Ajuda fica no botão "?" ao lado
@@ -32,7 +39,6 @@ do processo. As abas não têm mais cabeçalho grande: logo abaixo delas vem o c
 - **Parágrafos-padrão.** Busca por palavra e categoria; "Copiar" leva o texto com as vagas em [MAIÚSCULAS].
 - **Diretrizes.** O Manual CMT por capítulos e a lista de caça, com busca.
 
-Pendente: OCR de PDF digitalizado (sem camada de texto, "Ver texto" avisa que não há texto).
 
 ## O que faz (0.10)
 
