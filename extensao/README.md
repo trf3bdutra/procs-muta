@@ -5,6 +5,11 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.28 · designação e trilha de produção nos cartões
+
+- No cartão do processo (lista do PJe), quando designado: "Minuta: nome" e "Correção: nome" como etiquetas, e a trilha
+  de produção em círculos — Min. (data) · Corr. (data) · Lib. (data); círculo cheio quando feito.
+
 ## O que muda na 0.27 · leitura da sentença medida no acervo, avisos e aba Autos
 
 - Medido em 600 processos do acervo (`acervo/autos`): sentença localizada em 457; resultado 66% → 84%, honorários

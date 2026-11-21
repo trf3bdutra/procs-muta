@@ -452,6 +452,10 @@
       '.muta-selos .hs b{font-weight:800}.muta-selos .hs:hover{border-color:#1f4f6b;box-shadow:0 0 0 2px #1f4f6b22}' +
       '.muta-selos .hs-al{background:#fdecea;border-color:#efb3a9;color:#a8321f}.muta-selos .hs-av{background:#fff4e5;border-color:#f0c88a;color:#8a5a10}.muta-selos .hs-mu{background:#eef3f7;border-color:#c9d6e0;color:#1f4f6b}' +
       '.muta-selos.hero-autos{display:inline-flex;margin:0 0 0 8px;vertical-align:middle}' +
+      '.muta-selos .m-pes{background:#ede7f6;border-color:#c9b8e8;color:#4a2a8a;border-radius:6px;gap:4px}.muta-selos .m-pes-c{background:#e3f2ec;border-color:#a9d6bf;color:#1d6b45}' +
+      '.muta-selos .m-trilha{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;padding:0 2px}' +
+      '.muta-selos .m-trilha i{width:9px;height:9px;border-radius:50%;border:1.5px solid #9aa8b3;background:#fff;flex:none}.muta-selos .m-trilha i.ok{background:#2f8a5a;border-color:#2f8a5a}' +
+      '.muta-selos .m-trilha b{width:8px;height:1.5px;background:#c3ccd3}.muta-selos .m-trilha small{font:600 10px system-ui,sans-serif;color:#7d8b96}.muta-selos .m-trilha small.ok{color:#1d6b45}' +
       '#hero-dlg{position:fixed;inset:0;z-index:2147483600;background:rgba(15,25,35,.42);display:grid;place-items:center;font:13px/1.45 system-ui,Segoe UI,sans-serif;color:#1d2730}' +
       '#hero-dlg .hd-bx{width:min(1180px,96vw);max-height:88vh;display:flex;flex-direction:column;background:#fff;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.3);overflow:hidden}' +
       '#hero-dlg header{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:1px solid #e3e8ec}#hero-dlg header>div{flex:1}' +
@@ -500,7 +504,14 @@
     var E = window.MutaEtiquetas; if (!E || !r) return '';
     r = E.preparar(r); var cfg = ENR.cfg || E.CFG, h = [], et = E.etapa(r);
     if (et) h.push('<span class="m-et' + (/^Liberado|Assinada/.test(et) ? ' m-ok' : '') + '" title="Etapa no gabinete (ficha do processo)">' + escS(et) + '</span>');
-    if (r.servidor || r.corretor) h.push('<span title="Minuta: ' + escS(r.servidor || 'não designado') + ' · Correção: ' + escS(r.corretor || 'não designado') + '">M ' + escS(E.iniciais(r.servidor) || '—') + ' · C ' + escS(E.iniciais(r.corretor) || '—') + '</span>');
+    /* designação (como etiqueta) e trilha de produção: minutado (data) · corrigido · liberado */
+    if (r.servidor) h.push('<span class="m-pes" title="Quem minuta">' + ico('pessoa', 10) + 'Minuta: ' + escS(r.servidor) + '</span>');
+    if (r.corretor) h.push('<span class="m-pes m-pes-c" title="Quem corrige">' + ico('check', 10) + 'Correção: ' + escS(r.corretor) + '</span>');
+    if (r.servidor || r.corretor || r.minutado) {
+      var br = function (x) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(x || ''); return m ? m[3] + '/' + m[2] : (x || ''); };
+      var passo = function (ok, rot, data) { return '<i class="tp' + (ok ? ' ok' : '') + '" title="' + ({ 'Min.': 'Minutado', 'Corr.': 'Corrigido', 'Lib.': 'Liberado' }[rot] || rot) + (ok ? (data ? ' em ' + escS(br(data)) : '') : ': pendente') + '"></i><small' + (ok ? ' class="ok"' : '') + '>' + rot + (ok && data ? ' ' + escS(br(data)) : '') + '</small>'; };
+      h.push('<span class="m-trilha" title="Trilha de produção">' + passo(!!r.minutado, 'Min.', r.minutado) + '<b></b>' + passo(!!r.corrigido, 'Corr.', r.corrigidoEm) + '<b></b>' + passo(!!(r.liberado || r.enviado), 'Lib.', r.liberadoEm) + '</span>');
+    }
     r._falta = cat ? E.faltando(r, cat, texto) : [];
     h.push(sinaisHtml(r._k, r));
     return h.join('');

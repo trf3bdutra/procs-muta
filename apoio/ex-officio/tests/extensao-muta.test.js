@@ -337,3 +337,10 @@ test('inteiro teor 0.27: sentença de mérito antes dos embargos; dispositivo co
   assert.match(a, /iso\(atual\) && iso\(atual\) === iso\(it\.value\)/);
   assert.match(read('extensao/painel.css'), /\.pp-top \.dr-idx\{flex-wrap:wrap!important/);
 });
+
+test('extensão 0.28: designação como etiqueta (minuta e correção) e trilha de produção minutado · corrigido · liberado', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /'Minuta: ' \+ escS\(r\.servidor\)/); assert.match(c, /'Correção: ' \+ escS\(r\.corretor\)/);
+  assert.match(c, /passo\(!!r\.minutado, 'Min\.', r\.minutado\)[\s\S]*passo\(!!r\.corrigido, 'Corr\.', r\.corrigidoEm\)[\s\S]*'Lib\.', r\.liberadoEm/);
+  assert.match(read('apoio/ex-officio/api/_ficha.js'), /corrigidoEm: p\['Data da Revisão'\]/);
+});

@@ -314,7 +314,7 @@ async function resumos(req, res) {
       const r = por[k] || {}, f = (FT && FT[k]) || {}, t = r.triagem || {}, p = r.producao || {}, c = r.controles || {};
       out[k] = {
         servidor: p.SERVIDOR || '', corretor: p.CORRETOR || '', destino: p.Destino || '', tipoAto: p['Mono - Tipo de ato'] || '',
-        triado: t['Destino - Confirmado em'] || '', minutado: p.MINUTADO || '', corrigido: p.CORRIGIDO === 'Sim' || !!p['Data da Revisão'],
+        triado: t['Destino - Confirmado em'] || '', minutado: p.MINUTADO || '', corrigidoEm: p['Data da Revisão'] || '', liberadoEm: p['Data da Liberação'] || '', assinadoEm: p['Data da Assinatura'] || '', corrigido: p.CORRIGIDO === 'Sim' || !!p['Data da Revisão'],
         liberado: p.LIBERADO === 'Sim' || (p.Destino !== 'Monocrática' && !!p['Data da Liberação']), enviado: p.Destino === 'Monocrática' && !!p['Data da Liberação'], assinado: p.Assinado === 'Sim' || !!p['Data da Assinatura'],
         urg: t['Urgência'] || '', urgNivel: t['Urgência - Nível'] || '', urgData: t['Urgência - Data'] || '', urgApr: t['Urgência - Apreciação'] || '', urgAprEm: t['Urgência - Apreciada em'] || '',
         pend: linhas(t['O que falta sanar']), ic: linhas(t['Intercorrências']), notas: linhas((r.origem || {})['Observações']), pendT: todas(t['O que falta sanar']), icT: todas(t['Intercorrências']), sintese: String(t['Síntese Processual'] || '').slice(0, 2000), questoes: todas(t['Alegações']),
