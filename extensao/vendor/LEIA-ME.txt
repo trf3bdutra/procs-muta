@@ -1,0 +1,2 @@
+pdf.js 3.11.174 (Mozilla, Apache-2.0): build/pdf.min.js e build/pdf.worker.min.js do pacote pdfjs-dist,
+usados pelo painel para ler o texto dos PDFs dos autos. Atualizar: npm pack pdfjs-dist@<versão> e copiar os dois arquivos.

@@ -20,7 +20,7 @@ var V = { chave: '', achados: [], sel: 0, minuta: {}, tok: 0 };
 var CP = { texto: '', fonte: '', colado: false, sec: 'auto', ws: true, sd: true, lendo: false, erro: '' };
 var SECS = [['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
 
-function aberta() { return !$('panel-lote').hidden; }
+function aberta() { var m = $('panel-min'), d = $('panel-lote'); return !!(m && !m.hidden && d && d.open); }
 function api(q) { return ses.api('/api/painel?lote=1' + (q ? '&' + q : '')); }
 function base(forcar) {
   if (C.carregando) return C.carregando;
@@ -296,5 +296,5 @@ function minutasDoProcesso(chave) {
     }));
   });
 }
-window.MutaLote = { transferir: function () { if (window.MutaAbas) window.MutaAbas.ir('lote'); setTimeout(function () { var x = $('lt-tx'); if (x) x.scrollIntoView({ block: 'start' }); }, 400); }, abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
+window.MutaLote = { transferir: function () { if (window.MutaAbas) window.MutaAbas.ir('min'); var d = $('panel-lote'); if (d && !d.open) { d.open = true; atualizar(false); } setTimeout(function () { var x = $('lt-tx'); if (x) x.scrollIntoView({ block: 'start' }); }, 500); }, abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
 })();

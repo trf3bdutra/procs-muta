@@ -1,5 +1,10 @@
-/* Muta · aba Comparar
-   Compara o texto do editor da minuta no PJe (ou um texto colado) com:
+/* Muta · aba Minuta (0.11: Lote, Comparar e Conformidade numa aba só)
+   No topo, o tipo de pronunciamento (sugerido pela tarefa do PJe e pelo destino do prontuário) e o texto do editor do PJe,
+   minimizável, com os botões do Collectio (localizar o processo nos lotes e mandar o texto do editor para lá).
+   Embaixo, "Comparar com": a minuta-matriz do tipo de julgamento (padrão: confere a estrutura, bloco a bloco), a minuta do
+   Collectio (por seção), os modelos, os precedentes, o texto colado, a triagem, o 28,86% e os parágrafos-padrão.
+   A conformidade fica no rodapé fixo da aba (conformidade.js). Texto original:
+   compara o texto do editor da minuta no PJe (ou um texto colado) com:
    - a minuta do processo registrada nos lotes do Amicus Curiae · Collectio;
    - os modelos do banco do gabinete (sugeridos pela semelhança com o editor);
    - as minutas-matriz por recurso e resultado;
@@ -13,13 +18,49 @@
 var $ = function (id) { return document.getElementById(id); };
 var CX = window.MutaComparador, FT = window.MutaFontes, ED = window.MutaEditor, br = window.MutaProntuarioBridge, esc = CX.esc;
 var caixa = $('cmp-app');
-var FONTES = [['tri', 'Triagem'], ['lote', 'Lote'], ['modelo', 'Modelos'], ['matriz', 'Minuta-matriz'], ['m2886', '28,86%'], ['par', 'Parágrafos-padrão'], ['ement', 'Ementário'], ['colar', 'Texto colado']];
+var FONTES = [['matriz', 'Minuta-matriz'], ['lote', 'Collectio'], ['modelo', 'Modelos'], ['ement', 'Precedentes'], ['colar', 'Texto colado'], ['tri', 'Triagem'], ['m2886', '28,86%'], ['par', 'Parágrafos-padrão']];
+/* tipo de pronunciamento: os mesmos rótulos do banco de modelos e das minutas-matriz */
+var PRONS = [['Voto', 'Acórdão (voto)'], ['Decisão monocrática terminativa', 'Decisão monocrática'], ['Decisão interlocutória', 'Decisão interlocutória'], ['Despacho', 'Despacho']];
 var PARTES = [['tudo', 'Tudo'], ['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
-var C = { fonte: 'lote', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
-try { var g = JSON.parse(localStorage.getItem('muta-pje:comparar') || '{}'); ['fonte', 'parteEd', 'ws', 'sd'].forEach(function (k) { if (g[k] != null) C[k] = g[k]; }); } catch (e) {}
-function guarda() { try { localStorage.setItem('muta-pje:comparar', JSON.stringify({ fonte: C.fonte, parteEd: C.parteEd, ws: C.ws, sd: C.sd })); } catch (e) {} }
-function aberta() { var p = $('panel-cmp'); return p && !p.hidden; }
+var C = { pron: '', pronAuto: '', pronChave: '', edAberto: false, estrutura: true, fonte: 'matriz', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
+try { var g = JSON.parse(localStorage.getItem('muta-pje:comparar') || '{}'); ['parteEd', 'ws', 'sd', 'edAberto'].forEach(function (k) { if (g[k] != null) C[k] = g[k]; }); } catch (e) {}
+function guarda() { try { localStorage.setItem('muta-pje:comparar', JSON.stringify({ parteEd: C.parteEd, ws: C.ws, sd: C.sd, edAberto: C.edAberto })); } catch (e) {} }
+function aberta() { var p = $('panel-min'); return p && !p.hidden; }
 function chave() { var k = br.chaveAtual(); return k && k !== 'avulso' ? k : ''; }
+
+/* ---------- tipo de pronunciamento: tarefa do PJe, destino do prontuário ou escolha ---------- */
+function pronSugerido() {
+  var t = window.MutaPje && window.MutaPje.tarefa ? N(window.MutaPje.tarefa()) : '', GB = window.MutaGabinete, dest = GB && GB.destino ? GB.destino() : '';
+  var tipoAto = GB && GB.V ? N(GB.V('producao', 'Mono - Tipo de ato')) : '';
+  if (/despacho/.test(t) || /^despacho/.test(tipoAto)) return 'Despacho';
+  if (/interlocut|liminar|tutela|urgencia/.test(t) || /urgencia/.test(tipoAto)) return 'Decisão interlocutória';
+  if (/monocrat|decisao terminativa|minutar decisao/.test(t) || dest === 'monocratica') return 'Decisão monocrática terminativa';
+  if (/sessao|relatorio|voto|acordao|ementa/.test(t) || dest === 'sessao') return 'Voto';
+  return 'Voto';
+}
+function N(v) { return String(v == null ? '' : v).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
+/* troca de processo: volta ao pronunciamento sugerido e à minuta-matriz */
+function processo() {
+  var k = chave();
+  if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'matriz'; C.sel = {}; C.q = ''; }
+  C.pronAuto = pronSugerido();
+  return C.pron || C.pronAuto;
+}
+function pronHtml() {
+  var p = processo();
+  return '<div class="mn-pron"><span class="mn-l">Pronunciamento</span><span class="seg">' + PRONS.map(function (x) { return '<button type="button" data-pron="' + esc(x[0]) + '" aria-selected="' + (p === x[0]) + '">' + esc(x[1]) + '</button>'; }).join('') + '</span>' +
+    (C.pron && C.pron !== C.pronAuto ? '<button type="button" class="lnk" data-pron="">voltar ao sugerido</button>' : '<small class="muted">sugerido ' + (window.MutaPje && window.MutaPje.tarefa && window.MutaPje.tarefa() ? 'pela tarefa' : 'pelo destino do prontuário') + '</small>') + '</div>';
+}
+/* tipo de julgamento do processo (ficha), para escolher a minuta-matriz */
+function tipoJulgamento() {
+  var GB = window.MutaGabinete, v = GB && GB.V ? N(GB.V('triagem', 'Tipo de Julgamento')) : '', cl = N((window.MutaPje && window.MutaPje.classe && window.MutaPje.classe()) || '');
+  if (/embargos/.test(v)) return 'ed';
+  if (/agravo interno/.test(v)) return 'agint';
+  if (/agravo de instrumento/.test(v) || /^ai$/.test(cl)) return 'ai';
+  if (/remessa/.test(v) || /remnec/.test(cl)) return 'rem';
+  return 'ap';
+}
+function classeMatriz(m) { var c = N(m.classe); return /^ed/.test(c) ? 'ed' : /^ai/.test(c) ? 'ai' : /remnec/.test(c) ? 'rem' : /agint/.test(c) ? 'agint' : 'ap'; }
 
 /* ---------- editor ---------- */
 function paragrafosEditor() {
@@ -30,12 +71,22 @@ function paragrafosEditor() {
 }
 function editorHtml() {
   var E = ED.estado(), n = E.texto ? E.texto.split(/\s+/).length : 0, P = CX.partes(E.paragrafos || []);
+  return pronHtml() + editorCaixa(E, n, P);
+}
+function editorCaixa(E, n, P) {
   var aviso = E.numero && chave() && E.numero.replace(/\D/g, '') !== chave() ? '<p class="status err">O editor lido está nos autos ' + esc(E.numero) + ', não no processo aberto no painel.</p>' : '';
-  return '<div class="cx-ed card"><div class="cx-ed-h"><b>Editor do PJe</b><span class="muted">' + (E.lendo ? 'Lendo…' : E.texto ? esc(E.fonte) + ' · ' + n.toLocaleString('pt-BR') + ' palavras' + (E.em ? ' · ' + new Date(E.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '') : 'nada lido ainda') + '</span></div>' +
-    '<div class="bar"><button type="button" class="btn solid" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor do PJe') + '</button>' +
-    '<label class="cx-sel">Parte do editor <select data-c="parteEd">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + (p[0] !== 'tudo' && q ? ' · ' + q : '') + '</option>'; }).join('') + '</select></label></div>' +
+  var hora = E.em ? new Date(E.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '';
+  var ps = (E.paragrafos || []).map(function (p) { return p.t; }).filter(Boolean);
+  return '<section class="mn-ed card" data-aberto="' + (C.edAberto ? '1' : '0') + '">' +
+    '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto do editor</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + ' · ' + n.toLocaleString('pt-BR') + ' palavras' + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
+    '<span class="sp"></span><button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
+    '<div class="bar mn-col"><button type="button" class="btn line sm" data-c="col-loc" title="Mostra o processo nos lotes do Collectio, com as versões da minuta">Localizar no Collectio</button>' +
+    '<button type="button" class="btn line sm" data-c="col-env"' + (E.texto ? '' : ' disabled') + ' title="Grava o texto do editor como nova versão da minuta do processo no lote">Mandar ao Collectio</button>' +
+    '<label class="cx-sel">Parte <select data-c="parteEd">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select></label></div>' +
     (E.erro ? '<p class="status err">' + esc(E.erro) + '</p>' : '') + aviso +
-    '<details class="cp-colar"' + (E.colado ? ' open' : '') + '><summary>Colar o texto do editor em vez de ler</summary><textarea data-c="colarEd" placeholder="Cole aqui a minuta do editor do PJe">' + (E.colado ? esc(E.texto) : '') + '</textarea></details></div>';
+    (C.edAberto ? '<div class="mn-tx">' + (ps.length ? ps.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') : '<p class="muted">Abra a tarefa da minuta no PJe e clique em Ler o editor.</p>') + '</div>' +
+      '<details class="cp-colar"' + (E.colado ? ' open' : '') + '><summary>Colar o texto em vez de ler</summary><textarea data-c="colarEd" placeholder="Cole aqui a minuta do editor do PJe">' + (E.colado ? esc(E.texto) : '') + '</textarea></details>' : '') +
+    '</section>';
 }
 
 /* ---------- fontes ---------- */
@@ -96,7 +147,7 @@ function itemAtual() {
   if (C.fonte === 'tri') { var L = (C.tri || []), x = L.filter(function (y) { return y.id === s; })[0] || L[0]; if (x && x.ement) { var j = C.ement[x.ement]; return j && !j.erro && j.secoes && j.secoes.length ? j : null; } return x || null; }
   if (!d) return null;
   if (C.fonte === 'modelo') return d.modelos.filter(function (x) { return x.id === s; })[0] || null;
-  if (C.fonte === 'matriz') return d.matrizes.filter(function (x) { return x.id === s; })[0] || null;
+  if (C.fonte === 'matriz') { if (!s) { var M0 = matrizesOrdenadas(); s = C.sel.matriz = M0.length ? M0[0].x.id : ''; } return d.matrizes.filter(function (x) { return x.id === s; })[0] || null; }
   if (C.fonte === 'm2886') {
     if (/^g:/.test(s || '')) { var g = d.m2886.grupos.filter(function (x) { return 'g:' + x.id === s; })[0]; return g ? { rotulo: 'Matriz 28,86% · grupo ' + g.id + ' · ' + g.nome, secoes: g.secoes } : null; }
     if (/^k:/.test(s || '')) { var k = d.kit2886.filter(function (x) { return 'k:' + x.codigo === s; })[0]; return k ? { rotulo: 'Acórdão-modelo ' + k.codigo + ' · ' + k.ref, secoes: FT.secoesDeTexto(k.texto) } : null; }
@@ -146,11 +197,10 @@ function seletor() {
       itens(L, function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.assunto].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
   }
   if (C.fonte === 'matriz') {
-    var res = window.MutaConformidadeMotor ? window.MutaConformidadeMotor.resultadoDe(paragrafosEditor().filter(function (t) { return /^Ante o exposto,/.test(t); }).join(' ')) : '';
-    var M = ranquear(filtra(d.matrizes, ['nome', 'classe', 'resultado']));
-    if (res) M.sort(function (a, b) { return (casa(b.x, res) - casa(a.x, res)) || (b.s - a.s); });
-    return busca + (res ? '<p class="muted">O dispositivo do editor indica ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) + ': as matrizes desse resultado vêm primeiro.</p>' : '') +
-      itens(M, function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.resultado].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
+    var M = matrizesOrdenadas(), res = resEditor();
+    if (!s && M.length) { s = C.sel.matriz = M[0].x.id; }
+    return busca + '<p class="muted">Matrizes de ' + esc((PRONS.filter(function (x) { return x[0] === processo(); })[0] || [])[1] || processo()) + ' primeiro' + (res ? '; o dispositivo do editor indica ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) : '') + '. A comparação confere a estrutura: os blocos da matriz e as vagas preenchidas.</p>' +
+      itens(M.slice(0, C.q ? 40 : 8), function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.resultado].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
   }
   if (C.fonte === 'm2886') {
     var G = d.m2886.grupos.map(function (g) { return { id: 'g:' + g.id, nome: 'Grupo ' + g.id + ' · ' + g.nome, sub: 'minuta-base da matriz modular · ' + g.resJulg, secoes: g.secoes }; });
@@ -160,6 +210,15 @@ function seletor() {
       '<p class="kicker">Acórdãos-modelo</p>' + itens(ranquear(K), function (x) { return x.nome; }, function (x) { return x.sub; }, function (x) { return x.id; }, s);
   }
   return '';
+}
+function resEditor() { return window.MutaConformidadeMotor ? window.MutaConformidadeMotor.resultadoDe(paragrafosEditor().filter(function (t) { return /^Ante o exposto,/.test(t); }).join(' ')) : ''; }
+/* minutas-matriz: do pronunciamento escolhido e do tipo de julgamento do processo primeiro; depois o resultado do editor e a semelhança */
+function matrizesOrdenadas() {
+  var d = C.dados; if (!d) return [];
+  var p = processo(), tj = tipoJulgamento(), res = resEditor();
+  return ranquear(filtra(d.matrizes, ['nome', 'classe', 'resultado'])).map(function (z) {
+    z.k = (z.x.pron === p ? 4 : 0) + (classeMatriz(z.x) === tj ? 2 : 0) + (res && casa(z.x, res) ? 1 : 0); return z;
+  }).sort(function (a, b) { return (b.k - a.k) || (b.s - a.s); });
 }
 function casa(m, res) {
   var t = String(m.resultado || m.nome || '').toLowerCase();
@@ -182,6 +241,7 @@ function resultadoHtml() {
   var it = itemAtual();
   if (!it) return '<p class="none">Escolha a fonte da comparação.</p>';
   if (it.erro) return '<p class="status err">' + esc(it.erro) + '</p>';
+  var est = C.fonte === 'matriz' ? estruturaHtml(it) : '';
   var r = CX.comparar(blocosFonte(it), paragrafosEditor(), { ws: C.ws, sd: C.sd });
   if (r.erro) return '<p class="status err">' + esc(r.erro) + '</p>';
   var pf = partesFonte(it);
@@ -189,7 +249,24 @@ function resultadoHtml() {
     (pf.length > 1 ? '<label class="cx-sel">Parte da fonte <select data-c="parteFonte"><option value="inteira">Inteira</option>' + pf.map(function (t) { return '<option' + (C.parteFonte === t ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select></label>' : '') + '</div>';
   var st = (r.npar ? r.npar + ' parágrafo' + (r.npar > 1 ? 's' : '') + ' com diferença' : 'Sem diferenças') + ' · ' + r.pct + '% igual' + (r.vagas ? ' · ' + r.vagas + ' vaga(s) do modelo preenchida(s)' : '') +
     (r.faltam.length ? ' · ' + r.faltam.length + ' parágrafo(s) da fonte ausentes no editor' : '') + (r.sobram.length ? ' · ' + r.sobram.length + ' só no editor' : '');
+  if (est) return cab + est + '<details class="mn-dif"><summary>Texto lado a lado com a matriz · ' + esc(st) + '</summary><div class="cx-out">' + r.html + '</div></details>';
   return cab + '<p class="status" role="status">' + st + '</p><div class="cx-out">' + r.html + '</div>';
+}
+/* estrutura: cada bloco da matriz (por seção) e se o editor tem um parágrafo correspondente */
+function estruturaHtml(it) {
+  var PE = paragrafosEditor(); if (!PE.length) return '';
+  var W = PE.map(function (t) { return CX.palavras(t); }), tot = 0, ok = 0;
+  var secs = (it.secoes || []).map(function (s) {
+    var linhas = (s.ps || []).filter(function (p) { return String(p || '').trim(); }).map(function (p) {
+      var vaga = /^\s*(\{\{[^}]*\}\}\s*)+$/.test(p) || /^\s*\[[^\]]*\]\s*$/.test(p);
+      if (vaga) return '<li class="vg"><i>vaga</i><span>' + esc(p.replace(/[{}]/g, '').slice(0, 140)) + '</span></li>';
+      var w = CX.palavras(p), b = 0; W.forEach(function (x) { var v = CX.semelhanca(w, x); if (v > b) b = v; });
+      tot++; var cls = b >= 0.45 ? 'ok' : b >= 0.25 ? 'pa' : 'no'; if (cls === 'ok') ok++;
+      return '<li class="' + cls + '"><i>' + (cls === 'ok' ? '✓' : cls === 'pa' ? '≈' : '✗') + '</i><span>' + esc(p.replace(/\{\{([^}]*)\}\}/g, '[$1]').slice(0, 160)) + '</span></li>';
+    }).join('');
+    return linhas ? '<div class="mn-es"><p class="kicker">' + esc(s.t) + '</p><ul>' + linhas + '</ul></div>' : '';
+  }).join('');
+  return '<p class="status">Estrutura: ' + ok + ' de ' + tot + ' bloco(s) da matriz no editor (✓ presente · ≈ parecido · ✗ ausente). As vagas são o texto do caso.</p><div class="mn-est">' + secs + '</div>';
 }
 /* parágrafos-padrão presentes no editor: para cada parágrafo do editor, o padrão mais parecido (a partir de 45%) */
 function paragrafosPadrao() {
@@ -215,14 +292,14 @@ function paragrafosPadrao() {
 /* ---------- desenho ---------- */
 function render() {
   if (!caixa || !aberta()) return;
-  var y = $('panel-cmp').scrollTop, foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
+  var y = $('panel-min').scrollTop, foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
   caixa.innerHTML = editorHtml() +
     '<div class="seg cx-fontes" role="tablist" aria-label="Comparar com">' + FONTES.map(function (f) { return '<button type="button" role="tab" data-f="' + f[0] + '" aria-selected="' + (C.fonte === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
     '<div class="cx-pick">' + seletor() + '</div>' +
     '<div class="bar cp-opc"><label><input type="checkbox" data-c="ws"' + (C.ws ? ' checked' : '') + '> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-c="sd"' + (C.sd ? ' checked' : '') + '> só as diferenças</label></div>' +
     '<div class="cx-lg"><span><del>riscado</del> na fonte, falta no editor</span><span><ins>verde</ins> só no editor</span><span><mark class="cx-vg">amarelo</mark> preenche vaga do modelo</span></div>' +
     '<div class="cx-res">' + resultadoHtml() + '</div>';
-  $('panel-cmp').scrollTop = y;
+  $('panel-min').scrollTop = y;
   if (foco === 'q') { var q = caixa.querySelector('[data-c=q]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
 }
 function preparar() {
@@ -245,6 +322,10 @@ var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
+  if (b.dataset.pron != null) { C.pron = b.dataset.pron; C.sel.matriz = ''; render(); return; }
+  if (b.dataset.c === 'edtg') { C.edAberto = !C.edAberto; guarda(); render(); return; }
+  if (b.dataset.c === 'col-loc') { var d = $('panel-lote'); if (d) { d.open = true; if (window.MutaLote) window.MutaLote.abrir(); d.scrollIntoView({ block: 'start' }); } return; }
+  if (b.dataset.c === 'col-env') { if (window.MutaLote && window.MutaLote.transferir) window.MutaLote.transferir(); return; }
   if (b.dataset.f) { C.fonte = b.dataset.f; C.q = ''; C.parteFonte = 'inteira'; guarda(); preparar(); return; }
   if (b.dataset.s != null) {
     C.sel[C.fonte] = b.dataset.s; C.parteFonte = 'inteira';
@@ -270,13 +351,14 @@ caixa.addEventListener('input', function (e) {
 ED.ouvir(function () { if (aberta()) render(); });
 document.addEventListener('muta:prontuario', function () { C.lotes = null; C.loteChave = ''; C.tri = null; C.triChave = ''; if (aberta()) preparar(); });
 window.MutaComparar = {
-  triagem: function () { C.fonte = 'tri'; C.tri = null; C.triChave = ''; guarda(); if (window.MutaAbas) window.MutaAbas.ir('cmp'); else window.MutaComparar.abrir(); },
-  abrir: function () { preparar(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().catch(function () {}); },
+  triagem: function () { processo(); C.fonte = 'tri'; C.tri = null; C.triChave = ''; guarda(); if (window.MutaAbas) window.MutaAbas.ir('min'); else window.MutaComparar.abrir(); },
+  abrir: function () { processo(); if (C.fonte === 'matriz' || C.fonte === 'modelo' || C.fonte === 'm2886' || C.fonte === 'par') dados().then(render); preparar(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().catch(function () {}); },
   /* o Ementário manda um julgado para comparar */
   precedente: function (id) {
-    C.fonte = 'ement'; C.sel.ement = id; guarda();
+    processo(); C.fonte = 'ement'; C.sel.ement = id; guarda();
     if (C.ement[id] && C.ement[id].erro) delete C.ement[id];
-    if (window.MutaAbas) window.MutaAbas.ir('cmp'); else window.MutaComparar.abrir();
-  }
+    if (window.MutaAbas) window.MutaAbas.ir('min'); else window.MutaComparar.abrir();
+  },
+  pronunciamento: function () { return processo(); }
 };
 })();

@@ -3,6 +3,37 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.11
+
+Cinco abas, nesta ordem: **Prontuário, Minuta, Ementário, Parágrafos-padrão e Diretrizes**. A Ajuda fica no botão "?" ao lado
+do processo. As abas não têm mais cabeçalho grande: logo abaixo delas vem o cartão do processo.
+
+- **Prontuário único (Processo · Triagem · Produção).** Prontuário e Triagem viraram um só, sem duplicar campos e sem a
+  chave "Ficha do gabinete / Prontuário completo". Pauta e monocrática só aparecem em Produção.
+- **Cartão do processo.** Autuação e partes no topo: classe, assunto, órgão, distribuição, valor da causa, prioridades,
+  polos e advogados, etiquetas.
+- **Processo.** Assunto detalhado, síntese do processo e questões (itens; automáticas quando o texto permite, manuais
+  sempre); controles (urgência, meta, sobrestamento, caso sensível); "Situação atual" no lugar da Tramitação.
+- **Documentos dos autos.** Na página dos autos digitais, a lista de documentos com ID, data e hora da juntada e nome; cada
+  um com campo de especificação (vai para "Outras peças e ocorrências"), "Ver texto" (extrai o inteiro teor, inclusive de
+  PDF, por pdf.js) e "PDF" (abre o documento no PJe). Só leitura: nada é gravado no PJe. O antigo "Registro de autos
+  extraídos do PJe" saiu; a lista é o único lugar.
+- **Preencher pelos autos.** Sentença, origem, recursos e contrarrazões e outras peças saem do inteiro teor lido (motor
+  `padrao-inteiro-teor.js`, o mesmo do site), como sugestões para confirmar.
+- **Triagem automática (sugestões para conferir).** Tempestividade (calendário forense, prazo em dobro da Fazenda), preparo,
+  procuração, órgão prolator (ED e agravo interno), MPF no 2º grau (inclusive parte idosa), contrarrazões com preliminar,
+  remessa necessária, Pix, gratuidade e tipo de julgamento (ED pela tarefa; os demais pelas etiquetas, conferidos pelo
+  último recurso).
+- **Minuta (Lote + Comparar + Conformidade).** Tipo de pronunciamento (automático: "Aguardando a sessão" → acórdão); caixa
+  minimizável com o texto do editor e botões para localizar o processo no Collectio e mandar o texto para lá; "Comparar
+  com", por padrão a minuta-matriz do tipo de julgamento (confere a estrutura: blocos presentes, parecidos, ausentes e
+  vagas preenchidas), além de Collectio, modelos, precedentes, texto colado, triagem, 28,86% e parágrafos-padrão;
+  Conformidade num rodapé fixo e minimizável, com a nota e as contagens.
+- **Parágrafos-padrão.** Busca por palavra e categoria; "Copiar" leva o texto com as vagas em [MAIÚSCULAS].
+- **Diretrizes.** O Manual CMT por capítulos e a lista de caça, com busca.
+
+Pendente: OCR de PDF digitalizado (sem camada de texto, "Ver texto" avisa que não há texto).
+
 ## O que faz (0.10)
 
 O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo em todas as abas. Ele lê tanto os autos digitais

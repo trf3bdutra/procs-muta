@@ -27,8 +27,9 @@ def montar(saida: pathlib.Path) -> None:
     for f in EXT.iterdir():
         if f.is_file() and f.suffix in ('.js', '.css', '.html', '.json'):
             shutil.copy2(f, painel / f.name)
-    if (EXT / 'icones').is_dir():
-        shutil.copytree(EXT / 'icones', painel / 'icones')
+    for sub in ('icones', 'vendor'):
+        if (EXT / sub).is_dir():
+            shutil.copytree(EXT / sub, painel / sub)
     shutil.copy2(AQUI / 'shim.js', painel / 'shim-previa.js')
 
     html = (painel / 'painel.html').read_text(encoding='utf-8')

@@ -14,7 +14,7 @@ test('extensão: JavaScript válido, manifesto lê o painel de tarefas do PJe e 
   const html = read('extensao/painel.html'), ordem = [...html.matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
   ['comum.js', 'sessao.js', 'prontuario.js', 'gabinete.js', 'sincronia.js', 'comparador.js', 'fontes.js', 'editor.js', 'conformidade-motor.js', 'comparar.js', 'conformidade.js', 'pje.js']
     .reduce((ant, f) => { const i = ordem.indexOf(f); assert.ok(i > ant, f + ' fora de ordem'); return i; }, -1);
-  ['panel-cmp', 'panel-conf', 'cmp-app', 'conf-app', 'sinc-txt'].forEach(id => assert.ok(html.includes('id="' + id + '"'), id));
+  ['panel-min', 'panel-conf', 'cmp-app', 'conf-app', 'sinc-txt'].forEach(id => assert.ok(html.includes('id="' + id + '"'), id));
 });
 
 test('conteúdo do PJe: o cabeçalho da tarefa identifica o processo mesmo com a lista ao lado', () => {
@@ -78,4 +78,14 @@ test('pacote de dados da extensão: modelos, matrizes, 28,86%, parágrafos e reg
   assert.ok(d.m2886.grupos[0].secoes.some(s => s.t === 'Voto' && s.ps.some(p => /É como voto\./.test(p))));
   const wf = read('.github/workflows/vercel-caput.yml');
   assert.ok(wf.includes('scripts/extensao/dados.py --saida site/public/extensao/dados'));
+});
+
+test('extensão 0.11: os motores copiados de padrao/ são idênticos aos do site', () => {
+  [['padrao/inteiro-teor.js', 'extensao/padrao-inteiro-teor.js'], ['padrao/calendario-forense.js', 'extensao/padrao-calendario-forense.js']]
+    .forEach(([a, b]) => assert.equal(read(b), read(a), b + ' difere de ' + a + ': copie de novo'));
+  const html = read('extensao/painel.html');
+  ['vendor/pdf.min.js', 'padrao-calendario-forense.js', 'padrao-inteiro-teor.js', 'autos.js', 'paragrafos.js', 'diretrizes.js']
+    .forEach(f => assert.ok(html.includes('src="' + f + '"'), f + ' no painel'));
+  ['tab-pront', 'tab-min', 'tab-acervo', 'tab-par', 'tab-dir', 'tab-ajuda', 'panel-min', 'min-conf'].forEach(id => assert.ok(html.includes('id="' + id + '"'), id));
+  assert.ok(fs.existsSync(path.join(ext, 'vendor/pdf.worker.min.js')), 'worker do pdf.js');
 });

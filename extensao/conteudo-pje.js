@@ -11,11 +11,15 @@
      1 · único número CNJ visível no quadro.
    Em listas de tarefas (vários números e nenhum cabeçalho), vale o processo escolhido na lista (clique no cartão ou
    na caixa de seleção); sem escolha, não informa nada.
-   Informa também o contexto da tela (autos digitais, tarefa com editor) para o painel trocar de aba sozinho, e, a
-   pedido, a cronologia dos autos digitais (painel esquerdo: documentos com ID, tipo, descrição e data). */
+   Informa também o contexto da tela (autos digitais, tarefa com editor) e o nome da tarefa (“[Sessão] Aguardando a sessão”,
+   que indica o tipo de pronunciamento e os embargos de declaração) para o painel trocar de aba sozinho, e, a pedido:
+   - a cronologia dos autos digitais (painel esquerdo: documentos com ID, tipo, descrição, data e hora), com o número
+     interno do processo para baixar os documentos; com {tudo: true}, rola o painel esquerdo até carregar a cronologia inteira;
+   - o conteúdo de um documento dos autos ({tipo: 'muta-doc', idp, id}): o mesmo download que o PJe oferece no botão do
+     documento (GET, com a sessão de quem está logado); HTML vira texto, PDF segue para o painel extrair o texto. Só leitura. */
 (function () {
   'use strict';
-  var VERSAO = '0.10';
+  var VERSAO = '0.11';
   if (window.__mutaPje === VERSAO) return;
   window.__mutaPje = VERSAO;
 
@@ -37,6 +41,12 @@
   function classeDe(texto, numero) {
     var m = RE_CLASSE.exec(texto || '');
     return m && m[2] === numero ? m[1] : '';
+  }
+  /* nome da tarefa aberta, depois do número: "- [Sessão] Aguardando a sessão" */
+  function nomeTarefa(texto, numero) {
+    var re = new RegExp('\\b[A-Z][A-Za-z]{1,13}\\s+' + numero.replace(/[.\-]/g, '\\$&') + '[^\\[\\n]{0,24}?-\\s*(\\[[^\\]\\n]{1,60}\\][^\\n]{0,90})');
+    var m = re.exec(texto || '');
+    return m ? m[1].replace(/\s+/g, ' ').trim().slice(0, 120) : '';
   }
   function tarefa(texto) {
     var m, achados = {};
@@ -92,6 +102,9 @@
   }
   function detectar() {
     var d = detectarNumero();
+    if (d.numero && (d.via === 'tarefa' || d.via === 'seleção na lista')) {
+      try { d.tarefa = nomeTarefa(document.body ? (document.body.innerText || '').slice(0, 300000) : '', d.numero); } catch (e) { d.tarefa = ''; }
+    }
     d.ctx = autosDigitais() ? 'autos' : '';
     try { d.ed = !d.ctx && temEditor(); } catch (e) { d.ed = false; }
     if (!d.ctx) d.ctx = d.ed ? 'editor' : d.via === 'tarefa' ? 'tarefa' : d.via === 'seleção na lista' ? 'lista' : '';
@@ -122,10 +135,10 @@
     espera = null;
     var d;
     try { d = detectar(); } catch (e) { return; }
-    var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed;
+    var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed + '|' + (d.tarefa || '');
     if (chave === ultimo) return;
     ultimo = chave;
-    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, host: location.host }); }
+    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, tarefa: d.tarefa || '', host: location.host }); }
     catch (e) { /* extensão recarregada: esta página fica sem vínculo até ser recarregada */ }
   }
   function agendar() { if (!espera) espera = setTimeout(informar, 700); }
@@ -266,13 +279,73 @@
     });
     return itens;
   }
+  /* número interno do processo, que vai no endereço de download dos documentos ("download/TRF3/2g/<número>/<ID>") */
+  function idInterno() {
+    var tl = document.getElementById('divTimeLine'), m = tl ? /download\/TRF3\/2g\/(\d+)\//.exec(tl.innerHTML) : null;
+    if (m) return m[1];
+    m = /[?&]idProcesso=(\d+)/.exec(location.search) || /download\/TRF3\/2g\/(\d+)\//.exec(document.body ? document.body.innerHTML.slice(0, 400000) : '');
+    return m ? m[1] : '';
+  }
+  /* o painel esquerdo carrega a cronologia aos poucos, ao rolar: rola até parar de crescer (no máximo 60 vezes) */
+  function carregarTudo() {
+    var sc = document.getElementById('divTimeLine:divEventosTimeLine') || document.querySelector('#divTimeLine [id$="divEventosTimeLine"]') || document.getElementById('divTimeLine');
+    var conta = function () { var t = document.getElementById('divTimeLine'); return t ? t.querySelectorAll('a').length : 0; };
+    var parado = 0, voltas = 0, topo = sc ? sc.scrollTop : 0;
+    return new Promise(function (ok) {
+      (function passo() {
+        if (!sc || parado >= 3 || voltas++ >= 60) { if (sc) sc.scrollTop = topo; ok(); return; }
+        var antes = conta(); sc.scrollTop = sc.scrollHeight; try { sc.dispatchEvent(new Event('scroll')); } catch (e) {}
+        setTimeout(function () { parado = conta() > antes ? 0 : parado + 1; passo(); }, 700);
+      })();
+    });
+  }
   try {
     chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
       if (!msg || msg.tipo !== 'muta-autos') return;
-      var itens = lerCronologia();
-      if (!itens) return;
-      var d = detectar() || {};
-      responder({ numero: d.numero || '', itens: itens, docs: itens.reduce(function (n, i) { return n + i.docs.length; }, 0), url: location.host + location.pathname });
+      if (!document.getElementById('divTimeLine')) return;
+      var feito = function () {
+        var itens = lerCronologia() || [], d = detectar() || {};
+        responder({ numero: d.numero || '', itens: itens, docs: itens.reduce(function (n, i) { return n + i.docs.length; }, 0), idp: idInterno(), host: location.host, url: location.host + location.pathname });
+      };
+      if (msg.tudo) { carregarTudo().then(feito); return true; }
+      feito();
+    });
+  } catch (e) {}
+
+  /* conteúdo de um documento dos autos: o download do próprio PJe (só leitura). PDF vai em base64 para o painel ler o texto. */
+  function base64(buf) {
+    var u = new Uint8Array(buf), s = '', k = 0x8000;
+    for (var i = 0; i < u.length; i += k) s += String.fromCharCode.apply(null, u.subarray(i, i + k));
+    return btoa(s);
+  }
+  try {
+    chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
+      if (!msg || msg.tipo !== 'muta-doc') return;
+      if (!document.getElementById('divTimeLine')) return;
+      var idp = String(msg.idp || idInterno()), id = String(msg.id || '');
+      if (!/^\d{3,}$/.test(idp) || !/^\d{5,}$/.test(id)) { responder({ erro: 'documento ou processo sem número' }); return; }
+      var url = location.origin + '/pje/seam/resource/rest/pje-legacy/documento/download/TRF3/2g/' + idp + '/' + id;
+      fetch(url, { credentials: 'include' }).then(function (r) {
+        if (r.status !== 200) throw new Error('o PJe respondeu ' + r.status);
+        var ct = String(r.headers.get('content-type') || '');
+        return r.arrayBuffer().then(function (b) {
+          var pdf = /pdf/i.test(ct) || new TextDecoder('latin1').decode(b.slice(0, 5)) === '%PDF-';
+          if (pdf) {
+            if (b.byteLength > 30 * 1024 * 1024) { responder({ erro: 'PDF grande demais para ler no painel (' + Math.round(b.byteLength / 1048576) + ' MB)', url: url }); return; }
+            responder({ fmt: 'pdf', b64: base64(b), bytes: b.byteLength, url: url }); return;
+          }
+          var h = new TextDecoder('utf-8').decode(b), x = new DOMParser().parseFromString(h, 'text/html');
+          x.querySelectorAll('script,style').forEach(function (e) { e.remove(); });
+          var ps = [];
+          Array.prototype.forEach.call(x.body ? x.body.querySelectorAll('p,li,h1,h2,h3,h4,td,div') : [], function (e) {
+            if (e.querySelector('p,li,h1,h2,h3,h4,td,div')) return;
+            var t = (e.textContent || '').replace(/[ \t\u00a0]+/g, ' ').trim(); if (t) ps.push(t);
+          });
+          var texto = ps.length ? ps.join('\n') : (x.body ? x.body.textContent : h).replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim();
+          responder({ fmt: 'html', texto: texto, bytes: b.byteLength, url: url });
+        });
+      }).catch(function (e) { responder({ erro: String(e && e.message || e), url: url }); });
+      return true;
     });
   } catch (e) {}
 

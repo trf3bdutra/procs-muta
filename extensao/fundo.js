@@ -37,6 +37,9 @@ function consolidar(reg) {
   reg.numero = melhor ? melhor.numero : '';
   reg.classe = melhor ? (melhor.classe || '') : '';
   reg.via = melhor ? (melhor.via || '') : '';
+  /* nome da tarefa aberta ("[Sessão] Aguardando a sessão"): de qualquer quadro com o mesmo número */
+  reg.tarefa = '';
+  Object.keys(fr).forEach(function (k) { var q = fr[k]; if (q && q.tarefa && melhor && q.numero === melhor.numero && !reg.tarefa) reg.tarefa = q.tarefa; });
   /* contexto da tela: autos digitais em qualquer quadro; editor da minuta em qualquer quadro (o quadro do editor pode não ver o número) */
   var ks = Object.keys(fr);
   reg.ctx = ks.some(function (k) { return fr[k] && fr[k].ctx === 'autos'; }) ? 'autos' : (melhor && melhor.ctx) || '';
@@ -61,7 +64,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender) {
   emFila(chave, function () {
     return chrome.storage.session.get(chave).then(function (o) {
       var reg = o[chave] || { quadros: {} };
-      reg.quadros[quadro] = { numero: numero, classe: classe, forca: forca, via: String(msg.via || '').slice(0, 20), ctx: String(msg.ctx || '').slice(0, 10), ed: !!msg.ed, t: Date.now() };
+      reg.quadros[quadro] = { numero: numero, classe: classe, forca: forca, via: String(msg.via || '').slice(0, 20), ctx: String(msg.ctx || '').slice(0, 10), ed: !!msg.ed, tarefa: typeof msg.tarefa === 'string' ? msg.tarefa.slice(0, 120) : '', t: Date.now() };
       consolidar(reg);
       var s = {}; s[chave] = reg;
       return chrome.storage.session.set(s);

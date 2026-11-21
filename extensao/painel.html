@@ -14,28 +14,18 @@
     <div class="brand"><span class="name">Muta</span><span class="d"></span><p>Assistente de gabinete</p></div>
     <div class="nav-label">PRODUÇÃO</div>
     <div class="nav" role="tablist" aria-label="Seções do Muta">
-      <button role="tab" id="tab-pront" aria-controls="panel-pront" aria-selected="true"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h6l4 4v12.8H6V5.5a2 2 0 0 1 2-2z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg></span><span class="nav-text"><b>Prontuário</b><small>Triagem e produção</small></span></button>
-      <button role="tab" id="tab-tri" aria-controls="panel-tri" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"/></svg></span><span class="nav-text"><b>Triagem</b><small>Prontuário de triagem e etiquetas</small></span></button>
-      <button role="tab" id="tab-acervo" aria-controls="panel-acervo" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v4H4zM5.5 9v10h13V9M9 13h6M9 16h6"/></svg></span><span class="nav-text"><b>Ementário</b><small>Precedentes do Compêndio</small></span></button>
-      <button role="tab" id="tab-lote" aria-controls="panel-lote" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9h18M9 9v11"/></svg></span><span class="nav-text"><b>Lote</b><small>Amicus Curiae · Collectio</small></span></button>
-      <button role="tab" id="tab-cmp" aria-controls="panel-cmp" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7.5" height="16" rx="1.2"/><rect x="13.5" y="4" width="7.5" height="16" rx="1.2"/><path d="M5.5 8.5h2.5M5.5 12h2.5M16 8.5h2.5M16 12h2.5M16 15.5h2.5"/></svg></span><span class="nav-text"><b>Comparar</b><small>Editor × lote, modelos, matriz</small></span></button>
-      <button role="tab" id="tab-conf" aria-controls="panel-conf" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 5 6v5.6c0 4.3 3 7.6 7 9.2 4-1.6 7-4.9 7-9.2V6z"/><path d="m9 12.2 2.1 2.1L15.3 10"/></svg></span><span class="nav-text"><b>Conformidade <i class="conf-badge" id="conf-badge" hidden></i></b><small>Padrão do gabinete</small></span></button>
-      <button role="tab" id="tab-ajuda" aria-controls="panel-ajuda" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9a2.4 2.4 0 0 1 4.6 1c0 1.5-2.3 2-2.3 3.6M12 17.2h.01"/></svg></span><span class="nav-text"><b>Ajuda</b><small>Instalação e uso</small></span></button>
+      <button role="tab" id="tab-pront" aria-controls="panel-pront" aria-selected="true"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h6l4 4v12.8H6V5.5a2 2 0 0 1 2-2z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg></span><span class="nav-text"><b>Prontuário</b><small>Processo · Triagem · Produção</small></span></button>
+      <button role="tab" id="tab-min" aria-controls="panel-min" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7.5" height="16" rx="1.2"/><rect x="13.5" y="4" width="7.5" height="16" rx="1.2"/><path d="M5.5 8.5h2.5M5.5 12h2.5M16 8.5h2.5M16 12h2.5M16 15.5h2.5"/></svg></span><span class="nav-text"><b>Minuta <i class="conf-badge" id="conf-badge" hidden></i></b><small>Editor × padrão</small></span></button>
+      <button role="tab" id="tab-acervo" aria-controls="panel-acervo" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v4H4zM5.5 9v10h13V9M9 13h6M9 16h6"/></svg></span><span class="nav-text"><b>Ementário</b><small>Precedentes do Relator</small></span></button>
+      <button role="tab" id="tab-par" aria-controls="panel-par" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 10h14M5 14h9M5 18h6"/><path d="M17 15.5v5M14.5 18h5"/></svg></span><span class="nav-text"><b>Parágrafos</b><small>Parágrafos-padrão</small></span></button>
+      <button role="tab" id="tab-dir" aria-controls="panel-dir" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9.5L19 7.5V20H6z"/><path d="M9 9h6M9 12.5h7M9 16h4"/><path d="M15.5 4v3.5H19"/></svg></span><span class="nav-text"><b>Diretrizes</b><small>Manual do gabinete</small></span></button>
     </div>
     <div class="side-foot"><strong>Prontuário no GitHub</strong>O prontuário completo de cada processo fica no GitHub do gabinete e alimenta a ficha e o cartão da pauta do Ex Officio, nos dois sentidos, com o seu login. Uma cópia fica neste navegador para trabalhar sem conexão. O que você pesquisa no Ementário e o texto lido do editor do PJe não saem do navegador.</div>
   </aside>
   <main>
     <!-- PRONTUÁRIO -->
     <section id="panel-pront" role="tabpanel" aria-labelledby="tab-pront">
-      <header class="head">
-        <div class="rise"><p class="kicker">Extensão Muta · ao lado do PJe</p><h1 class="display">Prontuário</h1></div>
-        <div class="bar so-rascunho">
-          <button class="btn line" id="btn-export" type="button">Exportar JSON</button>
-          <button class="btn line" id="btn-import" type="button">Importar JSON</button>
-          <input type="file" id="file-import" accept="application/json,.json" hidden>
-          <button class="btn danger" id="btn-clear" type="button" title="Apaga só a cópia deste navegador; o prontuário do GitHub volta ao reabrir o processo">Limpar cópia local</button>
-        </div>
-      </header>
+      
       <div class="pje-bar" id="pje-bar">
         <span class="pje-dot" id="pje-dot" aria-hidden="true"></span>
         <span class="pje-txt" id="pje-status" role="status" aria-live="polite">Procurando o processo aberto no PJe…</span>
@@ -43,16 +33,18 @@
         <label class="pje-seguir" title="Autos digitais abrem a Triagem (e leem o painel esquerdo dos autos); a tarefa com o editor abre o Comparar (e lê a minuta)"><input type="checkbox" id="pje-aba" checked> Trocar de aba</label>
         <label class="sr" for="pront-lista">Prontuários salvos</label>
         <select id="pront-lista" title="Prontuários salvos neste navegador"></select>
+        <button role="tab" type="button" id="tab-ajuda" class="pje-aj" aria-controls="panel-ajuda" aria-selected="false" tabindex="-1" title="Ajuda e instalação">?</button>
       </div>
-      <div class="pmodo-bar">
-        <div class="seg" id="pmodo" role="tablist" aria-label="O que editar">
-          <button type="button" role="tab" data-m="ficha" aria-selected="true">Ficha do gabinete</button>
-          <button type="button" role="tab" data-m="rascunho" aria-selected="false">Prontuário completo</button>
-        </div>
-      </div>
-      <div class="sinc" id="sinc" data-estado="off"><span class="sinc-dot" aria-hidden="true"></span><span class="sinc-txt" id="sinc-txt" role="status" aria-live="polite">Prontuário ainda não ligado ao GitHub.</span><button type="button" class="lnk" id="sinc-agora" hidden>Sincronizar agora</button></div>
+      <div class="sinc" id="sinc" data-estado="off" hidden><span class="sinc-dot" aria-hidden="true"></span><span class="sinc-txt" id="sinc-txt" role="status" aria-live="polite">Prontuário ainda não ligado ao GitHub.</span><button type="button" class="lnk" id="sinc-agora" hidden>Sincronizar agora</button></div>
       <div id="gab" class="gab"></div>
-      <div class="wrap" id="rascunho">
+      <div class="wrap" id="rascunho" hidden>
+        <!-- prontuário completo antigo (0.10): fica escondido; a sincronia com o GitHub (acervo/prontuarios) continua -->
+        <div class="bar so-rascunho">
+          <button class="btn line" id="btn-export" type="button">Exportar JSON</button>
+          <button class="btn line" id="btn-import" type="button">Importar JSON</button>
+          <input type="file" id="file-import" accept="application/json,.json" hidden>
+          <button class="btn danger" id="btn-clear" type="button" title="Apaga só a cópia deste navegador; o prontuário do GitHub volta ao reabrir o processo">Limpar cópia local</button>
+        </div>
         <div id="prontuario-app"></div>
         <div class="note"><strong>Estrutura inicial.</strong> Campos legados, mantidos para compatibilidade do JSON.</div>
         <p id="save-status" class="status" role="status" aria-live="polite"></p>
@@ -105,14 +97,9 @@
 
     <!-- EMENTÁRIO (Compêndio) -->
     <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
-      <header class="head">
-        <div class="rise"><p class="kicker">Compêndio · Des. Fed. Carlos Muta</p><h1 class="display">Ementário</h1></div>
-        <div class="bar">
-          <a class="btn line" id="acv-compendio" target="_blank" rel="noopener noreferrer">Abrir o Compêndio</a>
-          <button class="btn line" id="btn-refresh" type="button">Recarregar</button>
-        </div>
-      </header>
+      
       <div class="wrap">
+        <div class="bar acv-top"><a class="btn line" id="acv-compendio" target="_blank" rel="noopener noreferrer">Abrir o Compêndio</a><button class="btn line" id="btn-refresh" type="button">Recarregar</button></div>
         <div class="note">Mesma base do Ementário do Compêndio: os precedentes curados do gabinete e a série histórica do Relator (Base de Jurisprudência do TRF-3, 1999 em diante). A busca roda aqui, no navegador; nenhum termo pesquisado nem dado do prontuário é transmitido. Confira sempre a fonte antes de citar.</div>
         <div id="acv-error" class="err-box" role="alert" hidden></div>
         <p id="acv-status" class="status" role="status" aria-live="polite"></p>
@@ -148,62 +135,45 @@
       </div>
     </section>
 
-    <!-- TRIAGEM -->
-    <section id="panel-tri" role="tabpanel" aria-labelledby="tab-tri" hidden>
-      <header class="head">
-        <div class="rise"><p class="kicker">Caput · Triagem</p><h1 class="display">Triagem</h1></div>
-        <div class="bar"><a class="btn line" id="lnk-caput-tri" target="_blank" rel="noopener noreferrer" href="https://www.gabinete-cmt.com/caput/triagem">Abrir o Caput</a></div>
-      </header>
-      <div class="wrap"><div id="tri-app"></div></div>
+    <!-- MINUTA: o texto do editor do PJe, a comparação (minuta-matriz, Collectio, modelos, precedentes, texto colado)
+         e, no rodapé, a conformidade com o padrão do gabinete -->
+    <section id="panel-min" role="tabpanel" aria-labelledby="tab-min" hidden>
+      <div class="wrap min-wrap">
+        <div id="cmp-app"></div>
+        <details class="card min-col" id="panel-lote"><summary><b>Collectio</b><span class="muted">minuta do processo nos lotes, versões e transferência</span></summary><div id="lote-app"></div></details>
+      </div>
+      <div class="min-conf" id="min-conf">
+        <button type="button" class="mc-h" id="mc-t" aria-expanded="false" aria-controls="panel-conf"><span class="mc-k">Conformidade</span><span class="mc-r" id="mc-resumo">leia o editor</span><span class="mc-i" aria-hidden="true"></span></button>
+        <div class="mc-b" id="panel-conf"><div id="conf-app"></div></div>
+      </div>
     </section>
 
-    <!-- LOTE -->
-    <section id="panel-lote" role="tabpanel" aria-labelledby="tab-lote" hidden>
-      <header class="head">
-        <div class="rise"><p class="kicker">Amicus Curiae · Collectio</p><h1 class="display">Collectio</h1></div>
-        <div class="bar"><a class="btn line" id="lnk-index" target="_blank" rel="noopener noreferrer">Abrir o Index</a></div>
-      </header>
-      <div class="wrap"><div id="lote-app"></div></div>
+    <!-- PARÁGRAFOS-PADRÃO -->
+    <section id="panel-par" role="tabpanel" aria-labelledby="tab-par" hidden>
+      <div class="wrap"><div id="par-app"></div></div>
     </section>
 
-    <!-- COMPARAR -->
-    <section id="panel-cmp" role="tabpanel" aria-labelledby="tab-cmp" hidden>
-      <header class="head">
-        <div class="rise"><p class="kicker">Editor do PJe × materiais do gabinete</p><h1 class="display">Comparar</h1></div>
-      </header>
-      <div class="wrap"><div id="cmp-app"></div></div>
-    </section>
-
-    <!-- CONFORMIDADE -->
-    <section id="panel-conf" role="tabpanel" aria-labelledby="tab-conf" hidden>
-      <header class="head">
-        <div class="rise"><p class="kicker">Padrão do Des. Fed. Carlos Muta</p><h1 class="display">Conformidade</h1></div>
-      </header>
-      <div class="wrap"><div id="conf-app"></div></div>
+    <!-- DIRETRIZES -->
+    <section id="panel-dir" role="tabpanel" aria-labelledby="tab-dir" hidden>
+      <div class="wrap"><div id="dir-app"></div></div>
     </section>
 
     <!-- AJUDA -->
     <section id="panel-ajuda" role="tabpanel" aria-labelledby="tab-ajuda" hidden>
-      <header class="head">
-        <div><p class="kicker">Guia de uso · extensão</p><h1 class="display">Ajuda e instalação</h1></div>
-        <span class="chip" id="versao"></span>
-      </header>
+      <div class="aj-top"><b>Ajuda e instalação</b><span class="chip" id="versao"></span><button type="button" class="lnk" id="aj-volta">← Prontuário</button></div>
       <div class="wrap">
         <div class="grid">
           <article class="card">
             <h2 class="display">Como usar</h2>
             <ol>
-              <li>Entre no PJe 2º grau pelo acesso habitual e abra os autos.</li>
-              <li>Clique no ícone do Muta na barra do Chrome. O painel abre ao lado da página.</li>
-              <li>Com <strong>Acompanhar o PJe</strong> ligado, o painel abre o processo que está na tela.</li>
-              <li><strong>Ficha do gabinete</strong>: a ficha do processo do Ex Officio, com o mesmo login. O que você altera é gravado na ficha e a equipe vê.</li>
-              <li><strong>Prontuário completo</strong>: fica no GitHub do gabinete (<code>acervo/prontuarios</code>) e se alimenta da ficha e do cartão da pauta (o prontuário da Ex Officio e da LIA). Ao abrir o processo, o que a equipe registrou entra no prontuário; o que você preenche vai à ficha e ao cartão alguns segundos depois. Se duas pessoas editam ao mesmo tempo, as versões se juntam campo a campo.</li>
-              <li><strong>Comparar</strong>: leia o editor do PJe e escolha a fonte: minuta do lote, modelo do banco, minuta-matriz, matriz do 28,86%, parágrafos-padrão, precedente do Ementário ou texto colado.</li>
-              <li><strong>Conformidade</strong>: confere a minuta do editor com o padrão do gabinete (estrutura, ementa, resultado, IDʼs × prontuário, redação). Com <em>Conformidade ativa</em>, acompanha a minuta enquanto ela é escrita.</li>
-              <li><strong>Lote</strong>: com a minuta aberta no editor do PJe (tarefa Aguardando a sessão), clique em <em>Ler o editor do PJe</em> para comparar com a versão registrada no lote, como no botão Comparar do Index. Riscado: está no lote e falta no editor; verde: está só no editor.</li>
-              <li>Em <strong>Ementário</strong>, pesquise os precedentes do Relator e use <strong>Vincular ao prontuário</strong>.</li>
+              <li>Entre no PJe 2º grau pelo acesso habitual e clique no ícone do Muta na barra do Chrome: o painel abre ao lado da página.</li>
+              <li>Com <strong>Acompanhar o PJe</strong> ligado, o painel abre o processo que está na tela; com <strong>Trocar de aba</strong>, os autos digitais abrem o Prontuário e a tarefa com o editor abre a Minuta.</li>
+              <li><strong>Prontuário</strong>: a ficha do processo do Ex Officio, com o mesmo login. No topo, o cartão com a autuação e as partes. <em>Processo</em>: assunto, síntese e questões, situação atual, documentos dos autos (especificação e inteiro teor), sentença, origem, recursos, outras peças e os controles. <em>Triagem</em>: a conferência automática dos autos e o prontuário de triagem. <em>Produção</em>: destino, designação, revisão, pauta ou monocrática. O que você altera é gravado na ficha e a equipe vê.</li>
+              <li><strong>Conferência automática</strong>: nos autos digitais, “Ler as peças principais” lê o texto das decisões, recursos, contrarrazões, pareceres, procurações e custas; o painel sugere os campos (tempestividade pelo calendário forense, preparo, procuração, MPF, contrarrazões, remessa necessária, tipo de julgamento) e só grava o que você marcar.</li>
+              <li><strong>Minuta</strong>: o texto do editor do PJe (lido sozinho), o tipo de pronunciamento e a comparação com a minuta-matriz (estrutura), a minuta do Collectio, modelos, precedentes ou texto colado. No rodapé, a conformidade com o padrão do gabinete. O botão Collectio localiza o processo nos lotes e manda o texto do editor para lá.</li>
+              <li><strong>Ementário</strong>, <strong>Parágrafos-padrão</strong> e <strong>Diretrizes</strong>: pesquise, copie e cole no editor.</li>
             </ol>
-            <p class="muted">No PJe, o painel só lê o número do processo e o texto do editor. Não clica, não grava e não protocola nada no tribunal.</p>
+            <p class="muted">No PJe, o painel só lê: o número do processo, o texto do editor, a cronologia dos autos e, quando você pede, o documento (o mesmo download do botão do PJe). Não clica, não grava e não protocola nada no tribunal.</p>
           </article>
           <article class="card">
             <h2 class="display">Busca no Ementário</h2>
@@ -249,7 +219,10 @@
   </form>
 </dialog>
 
+<script src="vendor/pdf.min.js"></script>
 <script src="vocabulario.js"></script>
+<script src="padrao-calendario-forense.js"></script>
+<script src="padrao-inteiro-teor.js"></script>
 <script src="comum.js"></script>
 <script src="sessao.js"></script>
 <script src="prontuario.js"></script>
@@ -266,6 +239,8 @@
 <script src="conformidade-motor.js"></script>
 <script src="comparar.js"></script>
 <script src="conformidade.js"></script>
+<script src="paragrafos.js"></script>
+<script src="diretrizes.js"></script>
 <script src="pje.js"></script>
 </body>
 </html>

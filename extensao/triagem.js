@@ -1,4 +1,8 @@
-/* Muta · aba Triagem: o prontuário de triagem do processo aberto no PJe, o mesmo do Caput · Triagem.
+/* Muta · triagem do processo (0.11: dentro do Prontuário › Triagem; a aba própria saiu)
+   O Prontuário (gabinete.js) desenha os campos da ficha; daqui vêm, a partir do mesmo registro, as etiquetas sugeridas
+   (etiquetasDe) e o registro da triagem do lote (registroDe: matriz e proposta, caso, peças e teor), e os dados da triagem
+   para a aba Minuta comparar (dados, garantir). Texto original da aba, mantido abaixo:
+   o prontuário de triagem do processo aberto no PJe, o mesmo do Caput · Triagem.
    Lê a ficha única do processo (GET /api/pauta?ficha=<CNJ>): os campos do prontuário de triagem (admissibilidade, MPF, urgência,
    matéria e gestão) e o grupo "Registro da triagem (lote)" (proposta, grupo da matriz, situação atual, teor dos autos e peças com
    nota e trecho), gravado a partir dos lotes por scripts/triagem/ficha_lote.py.
@@ -155,7 +159,36 @@ if (caixa) {
 }
 document.addEventListener('muta:prontuario', function () { if (aberta()) carregar(false); });
 if (ses && ses.ouvir) ses.ouvir(function () { if (aberta()) carregar(false); });
+/* blocos para o Prontuário › Triagem, com o registro que o Prontuário já leu (sem nova leitura) */
+function com(op, fo, f) { var o = T.op, f0 = T.fo; T.op = op || {}; T.fo = fo || {}; try { return f(); } finally { T.op = o; T.fo = f0; } }
+function etiquetasDe(op, fo) {
+  return com(op, fo, function () {
+    var sg = sugestoes(), atual = S(gravado('triagem', 'Etiquetas sugeridas')), L = atual ? atual.split(/\s*[;,|]\s*/).filter(Boolean) : [];
+    if (!sg.length && !L.length) return '';
+    return '<section class="card pc-sec"><div class="pc-sh"><h3>Etiquetas sugeridas para o PJe</h3><small class="muted">nas regras do Caput</small></div>' +
+      (sg.length ? '<div class="tr-sg">' + sg.map(function (x) { return '<button type="button" class="chip' + (x.tem ? ' tem' : '') + (L.some(function (e) { return N(e) === N(x.e); }) ? ' on' : '') + '" data-add="' + esc(x.e) + '" title="' + esc(x.por + (x.tem ? ' · o processo já tem' : '')) + '">+ ' + esc(x.e) + '</button>'; }).join('') + '</div>' : '') +
+      (L.length ? '<p class="tr-etq"><b>Escolhidas:</b> ' + esc(L.join('; ')) + ' <button type="button" class="lnk" data-etq-copia>Copiar</button></p>' : '<p class="muted">Clique numa etiqueta para incluir; "Copiar" leva ao PJe.</p>') + '</section>';
+  });
+}
+function registroDe(op, fo) {
+  return com(op, fo, function () {
+    var t = (T.op || {}).triagem || {}, pecas = Array.isArray(R('Peças')) ? R('Peças') : [], h = '';
+    var bl = function (tit, x) { return x ? '<section class="card pc-sec"><div class="pc-sh"><h3>' + esc(tit) + '</h3></div>' + x + '</section>' : ''; };
+    h += bl('Matriz e proposta', linhas(R('Grupo')) + txt('Proposta', R('Proposta')) + txt('Variações', R('Variações')) + txt('Hipótese de monocrática', t['Hipóteses Monocrática']) + txt('Fundamento', gravado('producao', 'Mono - Fundamento')));
+    h += bl('Caso', txt('Síntese fática', t['Síntese Fática']) + txt('Especificidades', t['Especificidades']) + linhas(R('Triagem')));
+    if (S(R('Teor dos autos')) || pecas.length)
+      h += '<section class="card pc-sec"><div class="pc-sh"><h3>Peças e teor dos autos</h3><small class="muted">' + pecas.length + ' peça(s) do registro</small></div><div class="tr-pz">' +
+        (S(R('Teor dos autos')) ? '<div class="tr-teor">' + linhas(R('Teor dos autos')) + '</div>' : '') +
+        pecas.map(function (p) { return '<div class="tr-pc"><div class="tr-pch"><b>' + esc(p.peca) + '</b> <button type="button" class="mono lnk" data-copia="' + esc(p.id) + '" title="Copiar o ID">ID ' + esc(p.id) + '</button> <span class="muted">' + esc(p.data) + '</span></div>' +
+          (p.pje ? '<div class="muted tr-pjx">' + esc(p.pje) + '</div>' : '') + (p.nota ? '<p class="tr-n">' + esc(p.nota) + '</p>' : '') + (p.trecho ? '<blockquote class="tr-q">' + esc(p.trecho) + '</blockquote>' : '') + '</div>'; }).join('') + '</div></section>';
+    var cab = '<section class="card pc-sec tr-reg"><div class="pc-sh"><h3>Registro da triagem</h3><small class="muted">' + esc(R('Lote') || 'sem registro em lote') + '</small></div>' +
+      (R('Assunto detalhado') ? '<p class="tr-ad">' + esc(R('Assunto detalhado')) + '</p>' : '') +
+      '<div class="bar"><button type="button" class="btn line" data-t="cmp">Comparar o editor com a triagem</button>' + (R('Lote') ? '<a class="btn line" target="_blank" rel="noopener noreferrer" href="' + Muta.SITE + '/caput/triagem">Abrir o Caput</a>' : '') + '</div></section>';
+    return cab + h;
+  });
+}
 window.MutaTriagem = {
+  etiquetasDe: etiquetasDe, registroDe: registroDe,
   abrir: function () { carregar(false); },
   render: function () { render(); },
   /* para a aba Comparar: proposta, modelo do grupo e números dos precedentes citados na triagem */
