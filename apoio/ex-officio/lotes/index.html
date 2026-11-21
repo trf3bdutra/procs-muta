@@ -179,6 +179,11 @@ a{color:inherit}
 .vs-h .k{color:var(--em);font-size:11.5px}
 .vs-t{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:12.5px}.vs-t th{text-align:left;font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);padding:4px 6px;border-bottom:1px solid var(--el)}
 .vs-t td{padding:6px;border-bottom:1px solid var(--el);vertical-align:top;color:var(--ei)}.vs-t td.o{color:var(--em);max-width:340px}.vs-t td.a{white-space:nowrap;text-align:right}.vs-t td.a .b{margin-left:4px}
+.vs-t td.pj{white-space:nowrap}.vs-t td.pj label{display:inline-flex;gap:5px;align-items:center;cursor:pointer}.vs-t td.pj small{display:block;color:var(--em);font-size:10.5px;margin-top:2px}
+.vs-t .fi-b{display:inline-block;margin-left:6px;padding:1px 6px;font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;background:#1f8a70;color:#fff}
+.vs-prod{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0 2px;font-size:12px;color:var(--em)}.vs-prod span{padding:2px 8px;border:1px solid var(--el);border-radius:10px}.vs-prod span.on{border-color:#1f8a70;color:#1f8a70}
+.vs-lib{margin:8px 0;padding:8px 10px;border-left:3px solid #c07a12;background:rgba(192,122,18,.07);font-size:12.5px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.vs-lib.ok{border-left-color:#1f8a70;background:rgba(31,138,112,.07)}
+.mbar .pj-c{font:400 10px var(--emono);letter-spacing:.06em;padding:2px 7px;border-radius:10px;border:1px solid #1f8a70;color:#1f8a70}.mbar .pj-c.al{border-color:#c07a12;color:#c07a12}
 .vs-t tr.vg td{background:var(--ep2)}.vs-t .vg-b{display:inline-block;margin-left:6px;padding:1px 6px;font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;background:var(--eo);color:#fff}
 .vs .form{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 140px}.vs .form .w{grid-column:1/-1}.vs .form select{width:100%}
 .vs textarea{width:100%;min-height:220px;resize:vertical;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:13px/1.5 var(--font);padding:8px 9px;text-transform:none;letter-spacing:0}
@@ -1091,7 +1096,12 @@ async function copia(v){
    A vigente é a que se abre aqui, a que o relator vê e a que se copia para o PJe. As outras ficam guardadas no lote,
    sem alteração, e podem ser vistas, copiadas, comparadas entre si ou tornadas vigentes (só o gestor grava). */
 const VS={};
-function barraMinuta(uid){return `<div class="mbar" id="mb-${uid}"><i class="nn">MINUTA</i><button type="button" class="b pri" data-min="${uid}">Abrir minuta</button>${!MODO_REL&&!(LOTE&&LOTE.virtual)?`<button type="button" class="b so-equipe" data-vers="${uid}" title="Versões registradas desta minuta: registrar outra, comparar e escolher a vigente">Versões</button>`:''}<span class="k" id="mo-${uid}"></span></div><div class="doc hidden" id="d-${uid}"></div>${!MODO_REL?`<div class="vs hidden so-equipe" id="vs-${uid}"></div>`:''}`}
+/* marcas da produção na barra da minuta: versão importada no PJe, liberação (pauta ou página do Desembargador) e versão final */
+function marcasPje(it){if(!it||MODO_REL)return '';const d=(it.equipe&&it.equipe.datas)||{},h=[];
+  if(it.pje)h.push(`<span class="pj-c" title="Versão ${esc(it.pje.versao)} importada no PJe em ${esc(br(it.pje.em))}${it.pje.por?' por '+esc(it.pje.por):''}">✓ ${esc(it.pje.versao)} no PJe</span>`);
+  if(d.liberacao)h.push(it.final?`<span class="pj-c" title="Versão final do PJe registrada (${esc(it.final.versao)})">liberada ${esc(br(d.liberacao))} · final ${esc(it.final.versao)}</span>`:`<span class="pj-c al" title="Liberada: conferir no PJe a versão final e registrá-la em Versões">liberada ${esc(br(d.liberacao))} · conferir versão final</span>`);
+  return h.join('')}
+function barraMinuta(uid){const it=ITENS.find(i=>i.uid===uid);return `<div class="mbar" id="mb-${uid}"><i class="nn">MINUTA</i><button type="button" class="b pri" data-min="${uid}">Abrir minuta</button>${!MODO_REL&&!(LOTE&&LOTE.virtual)?`<button type="button" class="b so-equipe" data-vers="${uid}" title="Versões registradas desta minuta: registrar outra, comparar e escolher a vigente">Versões</button>`:''}<span class="so-equipe" id="mp-${uid}">${marcasPje(it)}</span><span class="k" id="mo-${uid}"></span></div><div class="doc hidden" id="d-${uid}"></div>${!MODO_REL?`<div class="vs hidden so-equipe" id="vs-${uid}"></div>`:''}`}
 function poeBarraMinuta(uid){const box=document.getElementById('nm-'+uid);if(box)box.outerHTML=barraMinuta(uid);
   const ab=document.querySelector(`[data-min="${uid}"]`);if(ab)ab.onclick=()=>abreMinuta(uid,ab);
   const bv=document.querySelector(`[data-vers="${uid}"]`);if(bv)bv.onclick=()=>abreVersoes(uid)}
@@ -1299,8 +1309,15 @@ function desenhaVersoes(it,novo){const uid=it.uid,box=$('#vs-'+uid),S=VS[uid],G=
   if(!S.fonteManual||(S.fonte==='versao'&&op.length<2))S.fonte=op.length>1?'versao':'modelo';
   let h=`<div class="vs-h"><b>Versões da minuta</b><span class="k">${S.existe?(vs.length?`${vs.length} versão${vs.length>1?'ões':''} registrada${vs.length>1?'s':''} · vigente ${esc(S.vigente||'—')}${S.editada?' (com trechos alterados em lote depois)':''}`:'só a minuta atual, ainda sem histórico: ao registrar outra, a atual fica guardada como v1'):'nenhuma minuta registrada'}</span><span class="cmt-sp"></span>`+
     `<button type="button" class="b pri" data-vn="1"${G?'':' disabled title="Só o gestor registra versões"'}>${S.existe?'Registrar outra versão':'Registrar minuta'}</button><button type="button" class="b" data-vx="1">Fechar</button></div>`;
-  if(vs.length)h+=`<table class="vs-t"><tr><th>Versão</th><th>Nome</th><th>Registrada</th><th>Origem</th><th>Parágrafos</th><th></th></tr>`+vs.slice().reverse().map(v=>{const vg=v.id===S.vigente;
-    return `<tr class="${vg?'vg':''}"><td><b>${esc(v.id)}</b>${vg?'<span class="vg-b">vigente</span>':''}</td><td>${esc(v.rotulo)}</td><td>${esc([v.por,v.em&&br(v.em)].filter(Boolean).join(' · ')||'—')}</td><td class="o">${esc(v.origem||'')}</td><td>${esc(resumoPar(v.paragrafos))}</td>`+
+  /* produção (Ex Officio): a liberação vem da pauta ou da página do Desembargador; depois dela, a versão final do PJe */
+  const D=(it.equipe&&it.equipe.datas)||{},vPje=vs.find(v=>v.pje),vFin=vs.slice().reverse().find(v=>v.final);
+  h+=`<div class="vs-prod"><b>Produção</b><span class="${D.minuta?'on':''}">minutada ${D.minuta?esc(br(D.minuta)):'—'}</span><span class="${D.correcao?'on':''}">corrigida ${D.correcao?esc(br(D.correcao)):'—'}</span><span class="${D.liberacao?'on':''}">liberada ${D.liberacao?esc(br(D.liberacao)):'—'}</span>${vPje?`<span class="on">${esc(vPje.id)} importada no PJe em ${esc(br(vPje.pje.em))}</span>`:''}</div>`;
+  if(D.liberacao&&!vFin)h+=`<div class="vs-lib"><span>Liberada em ${esc(br(D.liberacao))}. Confira no PJe como ficou a versão final e registre-a aqui${vPje?`, para comparar com a ${esc(vPje.id)} importada`:''}.</span><span class="cmt-sp"></span><button type="button" class="b pri" data-vfin="1"${G?'':' disabled title="Só o gestor registra versões"'}>Registrar versão final do PJe</button></div>`;
+  else if(vFin)h+=`<div class="vs-lib ok"><span>Versão final do PJe: <b>${esc(vFin.id)}</b>${vFin.em?' (registrada em '+esc(br(vFin.em))+')':''}.${vPje&&vPje.id!==vFin.id?'':' Marque em “No PJe” a versão que foi importada, para ver o que o Desembargador mudou.'}</span><span class="cmt-sp"></span>${vPje&&vPje.id!==vFin.id?`<button type="button" class="b pri" data-vdif="1">O que o Desembargador mudou (${esc(vPje.id)} × ${esc(vFin.id)})</button>`:''}</div>`;
+  if(S.existe&&!vs.length)h+=`<div class="vs-lib ok"><label><input type="checkbox" data-vpje="v1"> a minuta atual foi importada no PJe</label><span class="k">(ela passa a ser a v1 do histórico)</span></div>`;
+  if(vs.length)h+=`<table class="vs-t"><tr><th>Versão</th><th>Nome</th><th>Registrada</th><th>Origem</th><th>Parágrafos</th><th title="Versão importada (colada) no editor do PJe. Marcar registra a correção na etapa de produção do processo.">No PJe</th><th></th></tr>`+vs.slice().reverse().map(v=>{const vg=v.id===S.vigente;
+    return `<tr class="${vg?'vg':''}"><td><b>${esc(v.id)}</b>${vg?'<span class="vg-b">vigente</span>':''}${v.final?'<span class="fi-b">final do PJe</span>':''}</td><td>${esc(v.rotulo)}</td><td>${esc([v.por,v.em&&br(v.em)].filter(Boolean).join(' · ')||'—')}</td><td class="o">${esc(v.origem||'')}</td><td>${esc(resumoPar(v.paragrafos))}</td>`+
+      `<td class="pj">${v.final?'—':`<label title="Esta versão foi importada no editor do PJe"><input type="checkbox" data-vpje="${esc(v.id)}"${v.pje?' checked':''}> importada</label>${v.pje?`<small>${esc(br(v.pje.em))}${v.pje.por?' · '+esc(v.pje.por):''}</small>`:''}`}</td>`+
       `<td class="a"><button type="button" class="b" data-vver="${esc(v.id)}">Ver</button><button type="button" class="b" data-vcp="${esc(v.id)}">Copiar</button>${vg&&!S.editada?'':`<button type="button" class="b" data-vvig="${esc(v.id)}"${G?'':' disabled title="Só o gestor troca a vigente"'}>Tornar vigente</button>`}</td></tr>`}).join('')+`</table>`;
   if(S.existe&&op.length)h+=`<div class="vs-sub" data-vcmp><b>Comparar</b><div class="form"><label>Versão A desta minuta (riscado)<select class="cmt-sel" data-vca>${opt(S.vA&&ids.includes(S.vA)?S.vA:a0)}</select></label>`+
     `<label>Comparar com (B, em verde)<select class="cmt-sel" data-vfb>${FONTES_B.map(([k,t])=>`<option value="${k}"${k===S.fonte?' selected':''}>${t}</option>`).join('')}</select></label>`+
@@ -1316,7 +1333,27 @@ function desenhaVersoes(it,novo){const uid=it.uid,box=$('#vs-'+uid),S=VS[uid],G=
   box.innerHTML=h;
   const q=sel=>box.querySelector(sel);
   q('[data-vx]').onclick=()=>box.classList.add('hidden');
-  q('[data-vn]').onclick=()=>{const f=q('[data-vnf]');f.classList.remove('hidden');f.scrollIntoView({behavior:'smooth',block:'nearest'});q('[data-vnr]').focus()};
+  q('[data-vn]').onclick=()=>{S.final=false;const f=q('[data-vnf]');f.classList.remove('hidden');f.scrollIntoView({behavior:'smooth',block:'nearest'});q('[data-vnr]').focus()};
+  /* No PJe: marca a versão importada (só uma); a etapa de produção recebe a data da correção */
+  box.querySelectorAll('[data-vpje]').forEach(c=>c.onchange=async()=>{const v=c.dataset.vpje,marcado=c.checked;c.disabled=true;
+    try{const r=await post({acao:'minuta-pje',id:LOTE.id,processo:it.processo,versao:v,marcado});
+      Object.assign(S,{versoes:r.versoes,vigente:r.vigente});
+      if(marcado)it.pje=r.pje;else if(it.pje&&it.pje.versao===v)delete it.pje;
+      const pr=r.producao,e=it.equipe=it.equipe||{};
+      if(pr&&pr.dataCorrecao){e.datas=Object.assign({},e.datas||{},{correcao:pr.dataCorrecao});if(!/^(Corrigida|Liberada)$/.test(e.situacao||''))e.situacao='Corrigida'}
+      const mp=$('#mp-'+uid);if(mp)mp.innerHTML=marcasPje(it);
+      toast(!marcado?`Versão ${v} desmarcada (a data da correção fica como está)`:pr&&pr.erro?`Versão ${v} marcada como importada no PJe; a pauta não registrou a correção: ${pr.erro}`:pr&&pr.jaRegistrada?`Versão ${v} marcada como importada no PJe (a correção já estava registrada em ${br(pr.dataCorrecao)})`:pr?`Versão ${v} marcada como importada no PJe · correção registrada na produção em ${br(pr.dataCorrecao)}`:`Versão ${v} marcada como importada no PJe (processo fora de pauta: a produção não mudou)`);
+      desenhaVersoes(it)}
+    catch(e){c.checked=!marcado;c.disabled=false;toast(e.message)}});
+  /* versão final do PJe: o formulário de registro já com nome e origem; a final vira a vigente */
+  const vf=q('[data-vfin]');if(vf)vf.onclick=()=>{S.final=true;const f=q('[data-vnf]');f.classList.remove('hidden');
+    q('[data-vnr]').value='Final no PJe (liberada em '+br(D.liberacao)+')';q('[data-vno]').value='Texto do editor do PJe conferido em '+br(new Date().toISOString().slice(0,10))+', depois da liberação'+(vPje?'; base: '+vPje.id+', importada no PJe':'');
+    const vv=q('[data-vnv]');if(vv)vv.checked=true;f.scrollIntoView({behavior:'smooth',block:'nearest'});q('[data-vnt]').focus();confere()};
+  /* o que o Desembargador mudou: A = versão importada no PJe, B = versão final, lado a lado, só as diferenças */
+  const vd=q('[data-vdif]');if(vd)vd.onclick=()=>{Object.assign(S,{fonte:'versao',fonteManual:true,vA:vPje.id,vB:vFin.id,parte:'*'});VS_MODO='lado';desenhaVersoes(it);
+    const nb=$('#vs-'+uid),z=sel=>nb.querySelector(sel);const B=z('[data-vcb]');if(B)B.value=vFin.id;const dd=z('[data-vcd]');if(dd)dd.checked=true;
+    const A=z('[data-vca]');if(A){A.value=vPje.id;A.dispatchEvent(new Event('change'))}
+    const cx=z('[data-vcmp]');if(cx)cx.scrollIntoView({behavior:'smooth',block:'start'})};
   box.querySelectorAll('[data-vver]').forEach(b=>b.onclick=async()=>{const out=q('[data-vout]');out.innerHTML='<p class="none">Lendo…</p>';try{const m=await textoVersao(it,b.dataset.vver);out.innerHTML=`<h5>${esc(b.dataset.vver)} · ${esc(m.rotulo||'')}</h5>`+htmlVersao(m)}catch(e){out.innerHTML=`<p class="none">${esc(e.message)}</p>`}});
   box.querySelectorAll('[data-vcp]').forEach(b=>b.onclick=async()=>{try{await copiaVersao(await textoVersao(it,b.dataset.vcp))}catch(e){toast(e.message)}});
   box.querySelectorAll('[data-vvig]').forEach(b=>b.onclick=async()=>{
@@ -1353,8 +1390,9 @@ function desenhaVersoes(it,novo){const uid=it.uid,box=$('#vs-'+uid),S=VS[uid],G=
   q('[data-vnx]').onclick=()=>{q('[data-vnf]').classList.add('hidden');if(!S.existe)box.classList.add('hidden')};
   ok.onclick=async()=>{const p=confere();if(ok.disabled)return;ok.disabled=true;ok.textContent='Registrando…';
     const vv=q('[data-vnv]'),vig=!vv||vv.checked;
-    try{const r=await post({acao:'minuta-versao',id:LOTE.id,processo:it.processo,rotulo:R.value.trim(),origem:q('[data-vno]').value.trim(),secoes:p.secoes,vigente:vig});
-      const nova=r.versoes[r.versoes.length-1];
+    try{const fin=!!S.final,r=await post(Object.assign({acao:'minuta-versao',id:LOTE.id,processo:it.processo,rotulo:R.value.trim(),origem:q('[data-vno]').value.trim(),secoes:p.secoes,vigente:vig},fin?{final:true}:{}));
+      const nova=r.versoes[r.versoes.length-1];S.final=false;
+      if(fin){it.final={versao:nova.id,em:nova.em};const mp=$('#mp-'+uid);if(mp)mp.innerHTML=marcasPje(it)}
       if(!it.minuta){it.minuta=true;poeBarraMinuta(uid)}
       Object.assign(VS[uid],{versoes:r.versoes,vigente:r.vigente,editada:false,existe:true,vConf:nova.id});
       if(r.trocouVigente)esqueceMinuta(uid);
