@@ -3032,18 +3032,21 @@ function sinalizacoes(it,c,PL,auto){var AV=(((c.cartao||{}).avisos)||[]),rtM=/^(
   var nI=(c.intercor&&!c.intercorOk?1:0)+(rt&&!c.retidoOk?1:0),nP=PL.filter(function(p){return p&&p.desc&&!p.ok;}).length,nA=AV.filter(function(a){return a&&a.desc&&!a.ok;}).length;
   var tp=function(cls,t){var ic={ic:ICN.ic,pd:ICN.al,av:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>'}[cls]||'';return '<span class="sg-tp '+cls+'">'+ic.replace(/width="14" height="14"/,'width="10" height="10"')+t+'</span>';},meta=function(p){return esc([p.por,p.ok&&p.resolvidaEm?'resolvida em '+br(p.resolvidaEm).slice(0,5):p.em?br(p.em).slice(0,5):''].filter(Boolean).join(' · '));};
   var h='<section class="ac-s sg" id="ac-sn"><h4>Sinalizações'+(nI?'<em class="ac-st al">'+nI+' intercorrência'+(nI>1?'s':'')+'</em>':'')+(nP?'<em class="ac-st pd">'+nP+' pendência'+(nP>1?'s':'')+'</em>':'')+(nA?'<em class="ac-st av">'+nA+' aviso'+(nA>1?'s':'')+'</em>':'')+'</h4><div class="ac-pls">';
-  var sec=function(t,n){return '<p class="sg-sec"><span>'+t+'</span>'+(n?'<i>'+n+'</i>':'')+'</p>';};
-  if(c.intercor||rt)h+=sec('Intercorrências',nI);
-  if(c.intercor)h+='<div class="ac-pl sg-r sg-ic'+(c.intercorOk?' ok':'')+'"><input type="checkbox" data-ac="intercorOk"'+(c.intercorOk?' checked':'')+' aria-label="Intercorrência resolvida"><div class="sg-c">'+tp('ic','Intercorrência'+itp)+
+  /* itens em aberto por seção (Intercorrências, Pendências, Avisos); os resolvidos ficam opacos numa seção recolhida ao fim */
+  var sec=function(t,n){return '<p class="sg-sec"><span>'+t+'</span>'+(n?'<i>'+n+'</i>':'')+'</p>';},G={ic:[],pd:[],av:[]},R=[];
+  var poe=function(k,ok,html){(ok?R:G[k]).push(html);};
+  if(c.intercor)poe('ic',!!c.intercorOk,'<div class="ac-pl sg-r sg-ic'+(c.intercorOk?' ok':'')+'"><input type="checkbox" data-ac="intercorOk"'+(c.intercorOk?' checked':'')+' aria-label="Intercorrência resolvida"><div class="sg-c">'+tp('ic','Intercorrência'+itp)+
     '<textarea data-ac="intercor" rows="1" maxlength="1200" aria-label="Descrição da intercorrência">'+esc(c.intercor)+'</textarea>'+(ti?'<label class="sg-ch">Nº do chamado<input data-ac="intercorChamado" value="'+esc(c.intercorChamado||'')+'" placeholder="nº" maxlength="40"></label>':'')+'</div>'+
-    '<small>'+(c.intercorOk?'resolvida':'em aberto · retém a liberação · diligência aberta')+'</small><button type="button" data-ac-icx aria-label="Excluir a intercorrência" title="Excluir">×</button></div>';
-  if(rt)h+='<div class="ac-pl sg-r sg-ic'+(c.retidoOk?' ok':'')+'"><input type="checkbox" data-ac="retidoOk"'+(c.retidoOk?' checked':'')+' aria-label="Retido resolvido"><div class="sg-c">'+tp('ic','Intercorrência · retido')+
-    '<p class="sg-tx">'+esc(rt)+(S.ses?' na sessão de '+esc(br(S.ses)):'')+': incluir em nova sessão ou retirar.</p></div><small>'+(c.retidoOk?'resolvido em '+esc(br(c.retidoOk).slice(0,5)):'em aberto · diligência aberta')+'</small></div>';
-  if(PL.length)h+=sec('Pendências',nP);
-  PL.forEach(function(p,i){h+='<div class="ac-pl sg-r'+(p.ok?' ok':'')+'"><input type="checkbox" data-acp-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Pendência resolvida"><div class="sg-c">'+tp('pd','Pendência')+'<textarea data-acp-d="'+i+'" rows="1" maxlength="300" aria-label="Descrição da pendência" title="'+esc(p.desc||'')+'">'+esc(p.desc||'')+'</textarea></div><small>'+meta(p)+'</small><button type="button" data-acp-x="'+i+'" aria-label="Excluir pendência" title="Excluir">×</button></div>';});
-  if(AV.length)h+=sec('Avisos',nA);
-  AV.forEach(function(p,i){h+='<div class="ac-pl sg-r sg-av'+(p.ok?' ok':'')+'"><input type="checkbox" data-acv-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Aviso resolvido"><div class="sg-c">'+tp('av','Aviso')+'<textarea data-acv-d="'+i+'" rows="1" maxlength="300" aria-label="Descrição do aviso">'+esc(p.desc||'')+'</textarea></div><small>'+meta(p)+'</small><button type="button" data-acv-x="'+i+'" aria-label="Excluir aviso" title="Excluir">×</button></div>';});
-  if(!c.intercor&&!rt&&!PL.length&&!AV.length)h+='<p class="sg-vz">Nenhuma sinalização.</p>';
+    '<small>'+(c.intercorOk?'resolvida':'em aberto · retém a liberação · diligência aberta')+'</small><button type="button" data-ac-icx aria-label="Excluir a intercorrência" title="Excluir">×</button></div>');
+  if(rt)poe('ic',!!c.retidoOk,'<div class="ac-pl sg-r sg-ic'+(c.retidoOk?' ok':'')+'"><input type="checkbox" data-ac="retidoOk"'+(c.retidoOk?' checked':'')+' aria-label="Retido resolvido"><div class="sg-c">'+tp('ic','Intercorrência · retido')+
+    '<p class="sg-tx">'+esc(rt)+(S.ses?' na sessão de '+esc(br(S.ses)):'')+': incluir em nova sessão ou retirar.</p></div><small>'+(c.retidoOk?'resolvido em '+esc(br(c.retidoOk).slice(0,5)):'em aberto · diligência aberta')+'</small></div>');
+  PL.forEach(function(p,i){poe('pd',!!p.ok,'<div class="ac-pl sg-r'+(p.ok?' ok':'')+'"><input type="checkbox" data-acp-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Pendência resolvida"><div class="sg-c">'+tp('pd','Pendência')+'<textarea data-acp-d="'+i+'" rows="1" maxlength="300" aria-label="Descrição da pendência" title="'+esc(p.desc||'')+'">'+esc(p.desc||'')+'</textarea></div><small>'+meta(p)+'</small><button type="button" data-acp-x="'+i+'" aria-label="Excluir pendência" title="Excluir">×</button></div>');});
+  AV.forEach(function(p,i){poe('av',!!p.ok,'<div class="ac-pl sg-r sg-av'+(p.ok?' ok':'')+'"><input type="checkbox" data-acv-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Aviso resolvido"><div class="sg-c">'+tp('av','Aviso')+'<textarea data-acv-d="'+i+'" rows="1" maxlength="300" aria-label="Descrição do aviso">'+esc(p.desc||'')+'</textarea></div><small>'+meta(p)+'</small><button type="button" data-acv-x="'+i+'" aria-label="Excluir aviso" title="Excluir">×</button></div>');});
+  if(G.ic.length)h+=sec('Intercorrências',nI)+G.ic.join('');
+  if(G.pd.length)h+=sec('Pendências',nP)+G.pd.join('');
+  if(G.av.length)h+=sec('Avisos',nA)+G.av.join('');
+  if(!G.ic.length&&!G.pd.length&&!G.av.length)h+='<p class="sg-vz">'+(R.length?'Nada em aberto.':'Nenhuma sinalização.')+'</p>';
+  if(R.length)h+='<details class="sg-res"'+(S.sgRes?' open':'')+'><summary class="sg-sec"><span>Resolvidas</span><i>'+R.length+'</i></summary>'+R.join('')+'</details>';
   h+='</div><div class="ac-add sg-add"><select id="sg-tp" aria-label="Tipo da sinalização"><option value="pd">Pendência</option><option value="av">Aviso</option>'+
     ['ti','Chamado ao TI','ad','Adiado','rt','Retirado de pauta','ic','Outra'].reduce(function(o,x,i,A){return i%2?o:o+'<option value="'+x+'"'+(c.intercor?' disabled':'')+'>Intercorrência · '+A[i+1].toLowerCase()+'</option>';},'<optgroup label="Intercorrência">')+'</optgroup></select>'+
     '<input type="text" id="ac-pd-n" maxlength="300" placeholder="Descreva e tecle Enter"><button type="button" class="b" data-acp-add>Incluir</button></div>'+
@@ -3053,6 +3056,7 @@ function sinalizacoes(it,c,PL,auto){var AV=(((c.cartao||{}).avisos)||[]),rtM=/^(
 function acompSalvar(it,m,msg){var sc=[].map.call(document.querySelectorAll('#prq,#prq .prt-body,#prq .prt-p'),function(x){return [x,x.scrollTop];});
   marcar(it,m);var a=document.activeElement;if(a&&a.blur&&a.closest&&a.closest('#prq'))a.blur();render();gravar();
   [].forEach.call(document.querySelectorAll('#prq,#prq .prt-body,#prq .prt-p:not([hidden])'),function(x){var o=sc.filter(function(y){return y[0].className===x.className&&y[0].id===x.id;})[0];if(o)x.scrollTop=o[1];});if(msg)toast(msg);}
+document.addEventListener('toggle',function(e){var d=e.target;if(d&&d.classList&&d.classList.contains('sg-res'))S.sgRes=d.open;},true);
 function acompIt(){return lista().filter(function(i){return dg(i.cnj)===S.prt;})[0];}
 function abrirAcomp(it,f){S.prt=dg(it.cnj);S.prtAba=0;var a=document.activeElement;if(a&&a.blur)a.blur();prontLateral();
   setTimeout(function(){var alvo={pri:'#ac-so',ic:'#ac-sn',al:'#ac-sn',nt:'#prt-nt'}[f]||'#ac-so',x=$('#prq '+alvo);if(!x)return;if(x.tagName==='DETAILS')x.open=true;x.scrollIntoView({behavior:'smooth',block:'start'});
@@ -9832,10 +9836,10 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
    os problemas ficam nos ícones de sinalização do próprio cartão, sem faixa lateral */
 #v-pauta.ed #lst .pc.edr.mrw.ee1{background:#f1f7f3}
 #v-pauta.ed #lst .pc.edr.mrw.ee2{background:#f0f5fa}
-#v-pauta.ed #lst .pc.edr.mrw.ee3,#v-pauta.ed #lst .pc.edr.mrw.ee4{background:#f7f4fb}
+#v-pauta.ed #lst .pc.edr.mrw.ee3,#v-pauta.ed #lst .pc.edr.mrw.ee4{background:#f2f3fa}
 html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee1{background:rgba(40,116,75,.14)}
 html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee2{background:rgba(36,91,140,.14)}
-html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee3,html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee4{background:rgba(109,69,150,.14)}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee3,html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee4{background:rgba(96,100,175,.14)}
 #v-pauta.ed #lst .pc.edr.mrw:hover{background-image:linear-gradient(rgba(0,0,0,.03),rgba(0,0,0,.03))}
 #v-pauta.ed .ed-tgb button.ed-xl{padding:0 10px;border-left:1px dashed var(--el2);color:var(--eo2)}
 #v-pauta.ed .ed-tgb button.ed-xl:hover{color:#28744b}
@@ -10009,6 +10013,14 @@ html[data-theme=dark] #prq #ac-sn{background:#2a2216;border-color:#4a3c24!import
 #prq .sg-sec i{order:2;font-style:normal;font-weight:700;color:#a24a05}
 #prq .sg-sec span{order:1}#prq .sg-sec::after{order:3}
 html[data-theme=dark] #prq .sg-sec{color:#c8b48c}html[data-theme=dark] #prq .sg-sec::after{border-top-color:#4a3c24}
+/* resolvidas: opacas e recolhidas numa seção ao fim (a escolha de abrir fica até recarregar) */
+#prq .sg-res{margin-top:4px}
+#prq .sg-res>summary{cursor:pointer;list-style:none;color:#28744b}
+#prq .sg-res>summary::-webkit-details-marker{display:none}
+#prq .sg-res>summary::before{content:"›";order:0;display:inline-block;margin-right:2px;transition:transform .15s;font-size:12px}
+#prq .sg-res[open]>summary::before{transform:rotate(90deg)}
+#prq .sg-res>summary i{color:#28744b!important}
+#prq .sg-res .ac-pl{opacity:.55;margin-top:4px}#prq .sg-res .ac-pl:hover{opacity:.85}
 #prq .sg-vz{margin:0 0 6px;font:400 12px var(--font);color:var(--em)}
 #prq .ac-st.av{background:#e4eef8;color:#245b8c}
 html[data-theme=dark] #prq .sg-tp{background:#3a2a14;color:#f0c27a}html[data-theme=dark] #prq .sg-tp.ic{background:#4a2622;color:#f2a397}html[data-theme=dark] #prq .sg-tp.av{background:#1d3550;color:#9cc3e8}
