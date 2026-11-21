@@ -12,7 +12,7 @@ var EDARQ={mod:'modelos',par:'paragrafos',pec:'pecas',dir:'diretrizes',nor:'norm
    e depois de gravar oferece avisar a equipe (mural e notificações de todos) */
 var EDCMT=!!window.VDM_PAGINA_EDITOR&&/[?&]cmt=1(?:&|$)/.test(location.search);
 var EDCMTK=(function(){try{return localStorage.getItem('cmt_k')||sessionStorage.getItem('cmt_k')||'';}catch(e){return '';}})();
-if(EDCMT){delete EDCOL.mod;delete EDCOL.nor;EDS.col='par';document.documentElement.classList.add('ed-cmt');}
+if(EDCMT){delete EDCOL.mod;delete EDCOL.nor;EDCOL.par='Parágrafos';EDCOL.pec='Peças';EDS.col='par';document.documentElement.classList.add('ed-cmt');}
 /* gravação pelo servidor do site (login da Ex Officio + acesso de editor) */
 function edSrv(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
 var EDK='vdm-ed-rascunho-v1';

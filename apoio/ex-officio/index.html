@@ -2158,14 +2158,14 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <form class="cmt-edl-q" id="cmt-edl-f" role="search"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="cmt-edl-qi" type="search" placeholder="Buscar no Compendium e abrir para editar" aria-label="Buscar no Compendium"></form>
       <p class="cmt-edl-h">Coleções</p>
       <div class="cmt-edl-c">
-        <button type="button" data-cedc="par"><i>PP</i><span><b>Parágrafos-padrão</b><small>trechos reutilizáveis das minutas</small></span><em>abrir ›</em></button>
-        <button type="button" data-cedc="pec"><i>PE</i><span><b>Peças do Editorial</b><small>estrutura de cada peça</small></span><em>abrir ›</em></button>
+        <button type="button" data-cedc="par"><i>PP</i><span><b>Parágrafos</b><small>trechos reutilizáveis das minutas</small></span><em>abrir ›</em></button>
+        <button type="button" data-cedc="pec"><i>PE</i><span><b>Peças</b><small>estrutura de cada peça</small></span><em>abrir ›</em></button>
         <button type="button" data-cedc="dir"><i>DI</i><span><b>Diretrizes</b><small>preferências e vedações do gabinete</small></span><em>abrir ›</em></button>
       </div>
       <p class="cmt-edl-h">Alterações não gravadas</p>
       <div class="cmt-edl-p" id="cmt-edl-p"></div>
       <p class="cmt-edl-h">Criar</p>
-      <div class="cmt-edl-n"><button type="button" data-cedn="par">+ Parágrafo-padrão</button><button type="button" data-cedn="dir">+ Diretriz</button></div>
+      <div class="cmt-edl-n"><button type="button" data-cedn="par">+ Parágrafo</button><button type="button" data-cedn="dir">+ Diretriz</button></div>
       <p class="cmt-edl-r">O que for gravado por aqui sai em nome do CMT. Depois de gravar, o editor oferece avisar a equipe pelo mural.</p>
     </div>
   </aside>
@@ -5479,7 +5479,7 @@ document.addEventListener('keydown',function(e){var t=e.target;if(!t||!t.matches
 try{if(cmtGslEst()||localStorage.getItem('cmt_gsl_min')==='1')document.body.classList.add('cmt-gsl-min');}catch(e){}
 try{var tb0=localStorage.getItem('cmt_gsl_tab');if(tb0==='not'||tb0==='ed'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){cmtGslTab(tb0);});else setTimeout(function(){cmtGslTab(tb0);},0);}}catch(e){}
 /* ===== Editor do Compendium no painel: a aba escolhe o que editar; o editor abre preso ao pé da tela, como a caixa de resposta de um fórum ===== */
-var CMTEDK='vdm-ed-rascunho-v1',CMTEDN={par:'Parágrafos-padrão',pec:'Peças do Editorial',dir:'Diretrizes'};
+var CMTEDK='vdm-ed-rascunho-v1',CMTEDN={par:'Parágrafos',pec:'Peças',dir:'Diretrizes'};
 function cmtEdPendN(){var n=0;try{var d=JSON.parse(localStorage.getItem(CMTEDK)||'null');if(d&&d.cols)Object.keys(d.cols).forEach(function(c){if(CMTEDN[c])n+=Object.keys(d.cols[c]).length;});}catch(e){}return n;}
 function cmtEdPend(){var n=cmtEdPendN(),p=document.getElementById('cmt-edl-p'),i=document.getElementById('cmt-gsl-ne'),b=document.getElementById('cmt-cmp-pd');
   if(p)p.innerHTML=n?'<b>'+n+(n===1?' alteração guardada':' alterações guardadas')+'</b> neste navegador, ainda não gravadas no GitHub. <button type="button" data-cedc="">Abrir para revisar e gravar</button>':'Nenhuma alteração pendente. O que você editar fica guardado aqui até ser gravado.';
