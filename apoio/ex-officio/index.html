@@ -2747,9 +2747,9 @@ function nomesEquipe(){var o={};(S.eq||[]).concat(lista().map(function(i){return
 function selR(it,campo){var v=it[campo]||'';if(!U.gestor)return '<span class="rv">'+esc(v||'—')+'</span>';
   return '<select data-r="'+campo+'"><option value="">'+(campo==='corretor'?'Não definido':'—')+'</option>'+nomesEquipe().map(function(n){return '<option'+(nq(n)===nq(v)?' selected':'')+'>'+esc(n)+'</option>';}).join('')+'</select>';}
 var ICN={sg:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',pri:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l3 6 6 .9-4.5 4.3 1 6.3L12 17.6 6.5 20.5l1-6.3L3 9.9 9 9z"/></svg>',
-  al:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
-  ic:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>',
-  nt:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v11l-5 5H5z"/><path d="M14 20v-5h5M8.5 9h7M8.5 12.5h4"/></svg>'};
+  al:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 5 5.5 5 9s-5 4.5-5 9M17 3c0 4.5-5 5.5-5 9s5 4.5 5 9"/></svg>',
+  ic:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>',
+  nt:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5"/><path d="M9 10.8a2 2 0 0 1-1.1 1.8l-1.8.9A2 2 0 0 0 5 15.2V17h14v-1.8a2 2 0 0 0-1.1-1.8l-1.8-.9a2 2 0 0 1-1.1-1.8V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z"/></svg>'};
 /* Pautas no visual editorial: os mesmos controles (com os mesmos ids e funções) mudam de lugar — escopo, modo e exportações viram
    etiquetas presas ao painel; busca, filtros e seleção ficam numa faixa só. Ao sair da pauta, tudo volta ao lugar de origem. */
 var EDM=[];
@@ -3003,7 +3003,7 @@ function retidoDe(it){var r=String(it.resultado||'');return /^adiad/i.test(r)?'A
 function icAberta(it){var c=it.ctl||{};return (!!c.intercor&&!c.intercorOk)||(!!retidoDe(it)&&!c.retidoOk);}
 function sinalizacoes(it,c,PL,auto){var AV=(((c.cartao||{}).avisos)||[]),rt=retidoDe(it),ti=c.intercorTipo==='Chamado ao TI';
   var nI=(c.intercor&&!c.intercorOk?1:0)+(rt&&!c.retidoOk?1:0),nP=PL.filter(function(p){return p&&p.desc&&!p.ok;}).length,nA=AV.filter(function(a){return a&&a.desc&&!a.ok;}).length;
-  var tp=function(cls,t){return '<span class="sg-tp '+cls+'">'+t+'</span>';},meta=function(p){return esc([p.por,p.ok&&p.resolvidaEm?'resolvida em '+br(p.resolvidaEm).slice(0,5):p.em?br(p.em).slice(0,5):''].filter(Boolean).join(' · '));};
+  var tp=function(cls,t){var ic={ic:ICN.ic,pd:ICN.al,av:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>'}[cls]||'';return '<span class="sg-tp '+cls+'">'+ic.replace(/width="14" height="14"/,'width="10" height="10"')+t+'</span>';},meta=function(p){return esc([p.por,p.ok&&p.resolvidaEm?'resolvida em '+br(p.resolvidaEm).slice(0,5):p.em?br(p.em).slice(0,5):''].filter(Boolean).join(' · '));};
   var h='<section class="ac-s sg" id="ac-sn"><h4>Sinalizações'+(nI?'<em class="ac-st al">'+nI+' intercorrência'+(nI>1?'s':'')+'</em>':'')+(nP?'<em class="ac-st pd">'+nP+' pendência'+(nP>1?'s':'')+'</em>':'')+(nA?'<em class="ac-st av">'+nA+' aviso'+(nA>1?'s':'')+'</em>':'')+'</h4><div class="ac-pls">';
   if(c.intercor)h+='<div class="ac-pl sg-r sg-ic'+(c.intercorOk?' ok':'')+'"><input type="checkbox" data-ac="intercorOk"'+(c.intercorOk?' checked':'')+' aria-label="Intercorrência resolvida"><div class="sg-c">'+tp('ic','Intercorrência'+(ti?' · chamado ao TI':''))+
     '<textarea data-ac="intercor" rows="1" maxlength="1200" aria-label="Descrição da intercorrência">'+esc(c.intercor)+'</textarea>'+(ti?'<label class="sg-ch">Nº do chamado<input data-ac="intercorChamado" value="'+esc(c.intercorChamado||'')+'" placeholder="nº" maxlength="40"></label>':'')+'</div>'+
@@ -9887,6 +9887,7 @@ html[data-theme=dark] #prq #ac-so{background:#14273a;border-color:#2a4560!import
 #prq .ac-pl textarea{height:auto!important;min-height:0!important;max-height:none!important}
 /* SINALIZAÇÕES: um tipo por etiqueta; a intercorrência em vermelho (retém a liberação), pendência em âmbar, aviso em azul */
 #prq .sg .ac-pl .sg-c{grid-column:2;grid-row:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+#prq .sg-tp svg{vertical-align:-1px;margin-right:4px}
 #prq .sg-tp{align-self:flex-start;font:700 8.5px var(--emono,monospace);letter-spacing:.1em;text-transform:uppercase;padding:1px 6px;border-radius:999px;background:#fbefe0;color:#9a5a12}
 #prq .sg-tp.ic{background:#fbe4df;color:#9a2f1e}#prq .sg-tp.av{background:#e4eef8;color:#245b8c}
 #prq .sg .ac-pl.sg-ic{border-left-color:#bd4c38}#prq .sg .ac-pl.sg-av{border-left-color:#245b8c}#prq .sg .ac-pl.ok{border-left-color:#28744b}
