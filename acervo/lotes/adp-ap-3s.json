@@ -9,7 +9,7 @@
  "sessoes": [],
  "filtro": {},
  "criado_por": "Bruno",
- "atualizado_em": "2026-11-20",
+ "atualizado_em": "2026-11-21",
  "colunas": [
   {
    "id": "URG",
@@ -36,7 +36,43 @@
    "rotulo": "Pendência [VALIDAR]"
   }
  ],
- "grupos": [],
+ "grupos": [
+  {
+   "id": "AP1",
+   "rotulo": "Apelação · Monocrática (artigo 932 do CPC)",
+   "cor": "#2a6a4a",
+   "resultado": "Monocrática conforme paradigma vinculante ou linha consolidada",
+   "modelo": "Monocrática de apelação"
+  },
+  {
+   "id": "AP2",
+   "rotulo": "Apelação · Voto (paradigma a conferir)",
+   "cor": "#6a5a2a",
+   "resultado": "Voto",
+   "modelo": "Sem paradigma direto"
+  },
+  {
+   "id": "AP3",
+   "rotulo": "Apelação · Não conhecimento, deserção ou prejuízo",
+   "cor": "#6a2a2a",
+   "resultado": "Não conheço da apelação / prejudicada",
+   "modelo": "Monocrática"
+  },
+  {
+   "id": "AP4",
+   "rotulo": "Apelação · Conferir antes (diligência, digitalizado, duplicidade, sobrestamento)",
+   "cor": "#2a4a6a",
+   "resultado": "Conferir no PJe",
+   "modelo": "—"
+  },
+  {
+   "id": "AP5",
+   "rotulo": "Apelação · Já julgada: pendência pós-acórdão (implantação, honorários, trânsito, recursos excepcionais)",
+   "cor": "#5a5a5a",
+   "resultado": "Decisão ou despacho sobre a pendência; recursos excepcionais à Vice-Presidência",
+   "modelo": "Decisão/despacho"
+  }
+ ],
  "grupo_outros": {
   "rotulo": "A triar",
   "cor": "#9aa0a8"
@@ -237,12 +273,14 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "EDSON GARCIA DA SILVA",
    "assunto": "Aposentadoria Especial (Art. 57/8)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP5",
+   "tipo_caso": "Apelação já julgada pela Turma Regional (aposentadoria especial) · embargos de declaração do autor rejeitados em 25/09/2026 · recurso especial do autor interposto em 19/10/2026",
+   "resultado": "Ato a proferir: acórdão da apelação (ID 391418335); embargos de declaração do autor (ID 392852426) rejeitados (acórdão ID 400946817); recurso especial (ID 405495034) ‖ Proposta pelos precedentes: Despacho/certidão: remessa à Vice-Presidência (artigo 1.030 do CPC), sem providência do Relator [VALIDAR: Fluxo do PJe após o recurso especial]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação já julgada pela Turma Regional, com embargos de declaração rejeitados. Pende apenas o recurso especial do autor, de competência da Vice-Presidência.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -253,7 +291,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Sem decisão de mérito pendente no gabinete: encaminhar à Vice-Presidência para juízo de admissibilidade do recurso especial (artigo 1.030 do CPC)",
+    "materia": "Previdenciário — aposentadoria especial",
+    "origem": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+    "decisao_agravada": "Sentença ID [VALIDAR: sentença no processo de origem] ([VALIDAR])",
+    "recurso": "apelação de INSS (ID [VALIDAR], [VALIDAR])",
+    "preparo": "INSS: Isento (autarquia)",
+    "monocratica": "Não se aplica",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -263,6 +312,105 @@
    "chegada": "20/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Pós-julgamento — recurso especial pendente de admissibilidade",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 400946817 · 28/09/2026 — acórdão: rejeitou os embargos de declaração | última peça: Recurso Especial (apelado) · ID 405495034 · 19/10/2026 | última movimentação: 19/10/2026 19:08 · Juntada de Petição de recurso especial · Etiquetas de sessões de 10/08/2026 e 25/09/2026 · Tarefa \"Analisar tipo de decisão\" aberta após o recurso especial: verificar o fluxo no PJe",
+   "teor": {
+    "sintese_fatica": "Edson Garcia da Silva pede aposentadoria especial. A Turma Regional julgou a apelação do INSS em 10/08/2026 e rejeitou os embargos de declaração do autor em 25/09/2026; o autor interpôs recurso especial.",
+    "inicial": "Ação de concessão de aposentadoria especial contra o INSS.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: sentença no processo de origem] ([VALIDAR]): sentença de origem [VALIDAR]; a Turma Regional julgou a apelação (acórdão ID 391418335) e rejeitou os embargos de declaração (acórdão ID 400946817).",
+    "recurso": "INSS (ID [VALIDAR], [VALIDAR]): apelação já julgada (acórdão ID 391418335).",
+    "resposta": "Contrarrazões ao recurso especial a cargo da Vice-Presidência.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Autor com advogado constituído [VALIDAR].",
+    "preparo": "INSS: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação já julgada pela Turma Regional (aposentadoria especial) · embargos de declaração do autor rejeitados em 25/09/2026 · recurso especial do autor interposto em 19/10/2026",
+     "sintese": "Edson Garcia da Silva pede aposentadoria especial. A Turma Regional julgou a apelação do INSS em 10/08/2026 e rejeitou os embargos de declaração do autor em 25/09/2026; o autor interpôs recurso especial.",
+     "questoes": "1) Encaminhamento do recurso especial à Vice-Presidência.",
+     "rel": {
+      "razoes": "INSS (ID [VALIDAR], [VALIDAR]): apelação já julgada (acórdão ID 391418335).",
+      "contrarrazoes": "Contrarrazões ao recurso especial a cargo da Vice-Presidência."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: sentença no processo de origem]",
+      "juizo": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+      "dispositivo": "sentença de origem [VALIDAR]; a Turma Regional julgou a apelação (acórdão ID 391418335) e rejeitou os embargos de declaração (acórdão ID 400946817)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-02-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "[VALIDAR]",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Acórdão da apelação",
+       "id": "391418335",
+       "data": "2026-08-10"
+      },
+      {
+       "desc": "Embargos de declaração do autor",
+       "id": "392852426",
+       "data": "2026-08-20"
+      },
+      {
+       "desc": "Acórdão dos embargos de declaração",
+       "id": "400946817",
+       "data": "2026-09-28"
+      },
+      {
+       "desc": "Recurso especial do autor",
+       "id": "405495034",
+       "data": "2026-10-19"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 400946817 · 28/09/2026 — acórdão: rejeitou os embargos de declaração | última peça: Recurso Especial (apelado) · ID 405495034 · 19/10/2026 | última movimentação: 19/10/2026 19:08 · Juntada de Petição de recurso especial · Etiquetas de sessões de 10/08/2026 e 25/09/2026 · Tarefa \"Analisar tipo de decisão\" aberta após o recurso especial: verificar o fluxo no PJe",
+     "assuntoDet": "Pós-julgamento — recurso especial pendente de admissibilidade",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "19/10/2026 19:08 · Juntada de Petição de recurso especial",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Acórdão · ID 400946817 · 28/09/2026 — acórdão: rejeitou os embargos de declaração",
+    "ultima_decisao_relevante": "Voto · ID 398081247 · 28/09/2026 — …mitido ou rejeitado o recurso, para efeito de prequestionamento, aperfeiçoando-se, pois, com os apontados destacados o julgamento cabível no âmbito da Turma.Ante o exposto, rejeito os embargos de declaração.É como voto",
+    "ultima_peca": "Recurso Especial (apelado) · ID 405495034 · 19/10/2026",
+    "ultima_informacao": "Certidão de Julgamento · ID 400589434 · 25/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 400946817 · 28/09/2026 — acórdão: rejeitou os embargos de declaração | última peça: Recurso Especial (apelado) · ID 405495034 · 19/10/2026 | última movimentação: 19/10/2026 19:08 · Juntada de Petição de recurso especial"
    }
   },
   {
@@ -274,12 +422,14 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "DIASSIS ALVES DE SOUZA",
    "assunto": "Aposentadoria por Incapacidade Permanente",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP4",
+   "tipo_caso": "Apelação do INSS (aposentadoria por incapacidade permanente) · autos baixados em diligência à origem em 28/04/2026 para julgamento de embargos de declaração não apreciados",
+   "resultado": "Ato a proferir: apelação do INSS no processo digitalizado; despacho de baixa em diligência (ID 365391844); certidão de baixa (ID 369634653) ‖ Proposta pelos precedentes: Aguardar o retorno; após, verificar ratificação ou complementação da apelação (artigo 1.024, §§ 4º e 5º, do CPC) [VALIDAR: Retorno dos autos da origem]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS com autos baixados à origem para julgamento de embargos de declaração. Aguarda-se o retorno.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -290,7 +440,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Aguardar o retorno da origem; sem providência no gabinete",
+    "materia": "Previdenciário — incapacidade permanente",
+    "origem": "Ação previdenciária 0803909-87.2022.8.12.0017 (competência delegada) [VALIDAR Comarca]",
+    "decisao_agravada": "Sentença ID [VALIDAR: sentença no processo digitalizado, ID 284825326] ([VALIDAR])",
+    "recurso": "apelação de INSS (ID [VALIDAR: ID 284825326, fls. 83-88], [VALIDAR])",
+    "preparo": "INSS: Isento (autarquia)",
+    "monocratica": "Não se aplica",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -300,6 +461,99 @@
    "chegada": "20/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Diligência — embargos de declaração pendentes na origem",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365391844 · 13/04/2026 — …terposta pelo INSS (ID 284825326, f. 83-88).Ante o exposto, determino a baixa dos autos à Vara de origem para exame dos embargos de declaração.Intime-se.Campo Grande, 13 de abril de 2026.CARLOS MUTADesembargador Federal | última peça: Petição Inicial (advogado de parte) · ID 284825324 · 30/01/2024 | última movimentação: 06/08/2026 14:40 · Conclusos para julgamento · Etiqueta \"NÃO PAUTAR - GIOVANA\" · Prioridade: idoso · Verificar se os autos retornaram da origem [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Diassis Alves de Souza, idoso, obteve sentença em ação de aposentadoria por incapacidade permanente. O Relator determinou a baixa à origem para apreciação dos embargos de declaração do autor (despacho ID 365391844); a baixa foi certificada em 28/04/2026.",
+    "inicial": "Ação de concessão de aposentadoria por incapacidade permanente contra o INSS.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: sentença no processo digitalizado, ID 284825326] ([VALIDAR]): sentença de procedência [VALIDAR]; embargos de declaração do autor não apreciados na origem (ID 284825326, fls. 70-71).",
+    "recurso": "INSS (ID [VALIDAR: ID 284825326, fls. 83-88], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+    "resposta": "No processo digitalizado [VALIDAR].",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Andressa Pereira Clemente (OAB/MS 10.738).",
+    "preparo": "INSS: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS (aposentadoria por incapacidade permanente) · autos baixados em diligência à origem em 28/04/2026 para julgamento de embargos de declaração não apreciados",
+     "sintese": "Diassis Alves de Souza, idoso, obteve sentença em ação de aposentadoria por incapacidade permanente. O Relator determinou a baixa à origem para apreciação dos embargos de declaração do autor (despacho ID 365391844); a baixa foi certificada em 28/04/2026.",
+     "questoes": "1) Embargos de declaração pendentes na origem.",
+     "rel": {
+      "razoes": "INSS (ID [VALIDAR: ID 284825326, fls. 83-88], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+      "contrarrazoes": "No processo digitalizado [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: sentença no processo digitalizado, ID 284825326]",
+      "juizo": "Ação previdenciária 0803909-87.2022.8.12.0017 (competência delegada) [VALIDAR Comarca]",
+      "dispositivo": "sentença de procedência [VALIDAR]; embargos de declaração do autor não apreciados na origem (ID 284825326, fls. 70-71)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-01-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "[VALIDAR: ID 284825326, fls. 83-88]",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Processo digitalizado (sentença, embargos e apelação)",
+       "id": "284825326",
+       "data": "2024-01-30"
+      },
+      {
+       "desc": "Despacho: baixa em diligência",
+       "id": "365391844",
+       "data": "2026-04-13"
+      },
+      {
+       "desc": "Certidão de baixa à origem",
+       "id": "369634653",
+       "data": "2026-04-28"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365391844 · 13/04/2026 — …terposta pelo INSS (ID 284825326, f. 83-88).Ante o exposto, determino a baixa dos autos à Vara de origem para exame dos embargos de declaração.Intime-se.Campo Grande, 13 de abril de 2026.CARLOS MUTADesembargador Federal | última peça: Petição Inicial (advogado de parte) · ID 284825324 · 30/01/2024 | última movimentação: 06/08/2026 14:40 · Conclusos para julgamento · Etiqueta \"NÃO PAUTAR - GIOVANA\" · Prioridade: idoso · Verificar se os autos retornaram da origem [VALIDAR]",
+     "assuntoDet": "Diligência — embargos de declaração pendentes na origem",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "06/08/2026 14:40 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 365391844 · 13/04/2026 — …terposta pelo INSS (ID 284825326, f. 83-88).Ante o exposto, determino a baixa dos autos à Vara de origem para exame dos embargos de declaração.Intime-se.Campo Grande, 13 de abril de 2026.CARLOS MUTADesembargador Federal",
+    "ultima_peca": "Petição Inicial (advogado de parte) · ID 284825324 · 30/01/2024",
+    "ultima_informacao": "Comunicações · ID 369634653 · 28/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365391844 · 13/04/2026 — …terposta pelo INSS (ID 284825326, f. 83-88).Ante o exposto, determino a baixa dos autos à Vara de origem para exame dos embargos de declaração.Intime-se.Campo Grande, 13 de abril de 2026.CARLOS MUTADesembargador Federal | última peça: Petição Inicial (advogado de parte) · ID 284825324 · 30/01/2024 | última movimentação: 06/08/2026 14:40 · Conclusos para julgamento"
    }
   },
   {
@@ -311,12 +565,14 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "ELIAS RODRIGUES DA SILVA",
    "assunto": "Aposentadoria por Incapacidade Permanente",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP4",
+   "tipo_caso": "Apelação do INSS (aposentadoria por incapacidade permanente) · falecimento do apelado · prazo para habilitação de sucessores (despachos de 09/06/2026 e 14/07/2026)",
+   "resultado": "Ato a proferir: apelação do INSS no processo digitalizado; despachos IDs 379083142 e 386167334; manifestação do advogado (ID 381884311) ‖ Proposta pelos precedentes: Despacho: certificar o decurso; intimar o espólio ou os sucessores (artigo 313, § 2º, II, do CPC) se não houver habilitação [VALIDAR] [VALIDAR: Habilitação dos sucessores]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS suspensa pelo falecimento do apelado. O prazo adicional de 30 dias para habilitação dos sucessores foi concedido em 14/07/2026.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -327,7 +583,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Certificar o decurso do prazo; se não houver habilitação, providências do artigo 313, § 2º, II, do CPC",
+    "materia": "Previdenciário — incapacidade permanente",
+    "origem": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+    "decisao_agravada": "Sentença ID [VALIDAR: sentença no processo digitalizado] ([VALIDAR])",
+    "recurso": "apelação de INSS (ID [VALIDAR], [VALIDAR])",
+    "preparo": "INSS: Isento (autarquia)",
+    "monocratica": "Não se aplica",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -337,6 +604,104 @@
    "chegada": "20/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Diligência — habilitação de sucessores do apelado falecido",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 386167334 · 14/07/2026 — …ssores, com as respectivas procurações, conforme determinado na decisão de ID 379083142.Após o transcurso do prazo, retornem os autos conclusos.Intime-se.Campo Grande, data da assinatura.CARLOS MUTADesembargador Federal | última peça: Manifestação (apelado) · ID 381884311 · 22/06/2026 | última movimentação: 03/09/2026 17:05 · Conclusos para decisão · Etiquetas \"NÃO PAUTAR - GIOVANA\" e \"REGULARIZAR REPRESENTAÇÃO\" · Certidão juntada com a manifestação de 22/06/2026 (ID 381884683) [VALIDAR se é a de óbito]",
+   "teor": {
+    "sintese_fatica": "Noticiado o falecimento de Elias Rodrigues da Silva (ID 373471904), o Relator determinou a juntada da certidão de óbito e a habilitação dos sucessores (ID 379083142) e concedeu 30 dias adicionais em 14/07/2026 (ID 386167334).",
+    "inicial": "Ação de concessão de aposentadoria por incapacidade permanente contra o INSS.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: sentença no processo digitalizado] ([VALIDAR]): sentença de procedência [VALIDAR].",
+    "recurso": "INSS (ID [VALIDAR], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+    "resposta": "No processo digitalizado [VALIDAR].",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado constituído pelo apelado falecido [VALIDAR].",
+    "preparo": "INSS: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS (aposentadoria por incapacidade permanente) · falecimento do apelado · prazo para habilitação de sucessores (despachos de 09/06/2026 e 14/07/2026)",
+     "sintese": "Noticiado o falecimento de Elias Rodrigues da Silva (ID 373471904), o Relator determinou a juntada da certidão de óbito e a habilitação dos sucessores (ID 379083142) e concedeu 30 dias adicionais em 14/07/2026 (ID 386167334).",
+     "questoes": "1) Habilitação de sucessores (artigos 313 e 687 a 692 do CPC).",
+     "rel": {
+      "razoes": "INSS (ID [VALIDAR], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+      "contrarrazoes": "No processo digitalizado [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: sentença no processo digitalizado]",
+      "juizo": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+      "dispositivo": "sentença de procedência [VALIDAR]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-05-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "[VALIDAR]",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição: notícia de falecimento",
+       "id": "373471904",
+       "data": "2026-05-14"
+      },
+      {
+       "desc": "Despacho: habilitação de sucessores",
+       "id": "379083142",
+       "data": "2026-06-09"
+      },
+      {
+       "desc": "Manifestação do advogado",
+       "id": "381884311",
+       "data": "2026-06-22"
+      },
+      {
+       "desc": "Despacho: prazo adicional de 30 dias",
+       "id": "386167334",
+       "data": "2026-07-14"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 386167334 · 14/07/2026 — …ssores, com as respectivas procurações, conforme determinado na decisão de ID 379083142.Após o transcurso do prazo, retornem os autos conclusos.Intime-se.Campo Grande, data da assinatura.CARLOS MUTADesembargador Federal | última peça: Manifestação (apelado) · ID 381884311 · 22/06/2026 | última movimentação: 03/09/2026 17:05 · Conclusos para decisão · Etiquetas \"NÃO PAUTAR - GIOVANA\" e \"REGULARIZAR REPRESENTAÇÃO\" · Certidão juntada com a manifestação de 22/06/2026 (ID 381884683) [VALIDAR se é a de óbito]",
+     "assuntoDet": "Diligência — habilitação de sucessores do apelado falecido",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "03/09/2026 17:05 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 386167334 · 14/07/2026 — …ssores, com as respectivas procurações, conforme determinado na decisão de ID 379083142.Após o transcurso do prazo, retornem os autos conclusos.Intime-se.Campo Grande, data da assinatura.CARLOS MUTADesembargador Federal",
+    "ultima_peca": "Manifestação (apelado) · ID 381884311 · 22/06/2026",
+    "ultima_informacao": "Certidão · ID 373471907 · 14/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 386167334 · 14/07/2026 — …ssores, com as respectivas procurações, conforme determinado na decisão de ID 379083142.Após o transcurso do prazo, retornem os autos conclusos.Intime-se.Campo Grande, data da assinatura.CARLOS MUTADesembargador Federal | última peça: Manifestação (apelado) · ID 381884311 · 22/06/2026 | última movimentação: 03/09/2026 17:05 · Conclusos para decisão"
    }
   },
   {
@@ -348,12 +713,14 @@
    "exequente": "MARCOS ADEMAR DE OLIVEIRA",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP5",
+   "tipo_caso": "Apelação já julgada pela Turma Regional (aposentadoria especial desde a DER de 16/08/2016) · embargos de declaração do INSS rejeitados em 14/09/2026, com correção de ofício · pedido do autor de implantação imediata do benefício",
+   "resultado": "Ato a proferir: acórdão (ID 376435905); embargos de declaração do INSS (ID 377339876) rejeitados (acórdão ID 398174203); petição do autor (ID 401187852) ‖ Proposta pelos precedentes: Decisão: determinar ao INSS a implantação do benefício em prazo a fixar [VALIDAR prazo e situação recursal] [VALIDAR: Prazo recursal do INSS; Prazo para implantação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação já julgada pela Turma Regional, que concedeu aposentadoria especial ao autor; os embargos do INSS foram rejeitados. O autor pede a implantação imediata do benefício.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -364,7 +731,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão sobre o pedido de implantação imediata do benefício (tutela específica, artigo 497 do CPC)",
+    "materia": "Previdenciário — aposentadoria especial",
+    "origem": "Procedimento comum 5007616-31.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 362156457 (12/08/2025)",
+    "recurso": "apelação de INSS (ID 362156462, 02/09/2025) e apelação de Marcos Ademar de Oliveira (ID 362156464, 10/12/2025)",
+    "preparo": "INSS: Isento (autarquia); Marcos Ademar de Oliveira: Não verificado",
+    "monocratica": "Não se aplica",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (autarquia); Marcos Ademar de Oliveira: Não verificado · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -374,6 +752,116 @@
    "chegada": "20/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Pós-julgamento — implantação do benefício (artigo 497 do CPC)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 398174203 · 15/09/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado | última peça: Manifestação (apelante) · ID 401187852 · 28/09/2026 | última movimentação: 28/09/2026 19:31 · Conclusos para decisão · Etiquetas \"Pedido de Despacho\" e sessão de 14/09/2026 · Conferir prazo recursal do INSS e eventual recurso excepcional [VALIDAR] · Recursos excepcionais não têm efeito suspensivo (artigo 995 do CPC)",
+   "teor": {
+    "sintese_fatica": "Marcos Ademar de Oliveira obteve na Turma Regional a aposentadoria especial desde a DER (16/08/2016). Após a rejeição dos embargos de declaração do INSS, pediu a implantação imediata do benefício (ID 401187852).",
+    "inicial": "Ação de concessão de aposentadoria especial contra o INSS.",
+    "decisao_recorrida": "Sentença ID 362156457 (12/08/2025): sentença de procedência parcial com diligências sobre períodos sem laudo [VALIDAR]; embargos de declaração do autor rejeitados (ID 362156463); a Turma Regional deu provimento à apelação do autor (acórdão ID 376435905) e rejeitou os embargos do INSS, corrigindo de ofício os consectários (acórdão ID 398174203).",
+    "recurso": "INSS (ID 362156462, 02/09/2025): apelação já julgada. Marcos Ademar de Oliveira (ID 362156464, 10/12/2025): apelação já julgada (provida).",
+    "resposta": "Não se aplica.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Autor com advogada constituída [VALIDAR].",
+    "preparo": "INSS: Isento (autarquia); Marcos Ademar de Oliveira: Não verificado"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação já julgada pela Turma Regional (aposentadoria especial desde a DER de 16/08/2016) · embargos de declaração do INSS rejeitados em 14/09/2026, com correção de ofício · pedido do autor de implantação imediata do benefício",
+     "sintese": "Marcos Ademar de Oliveira obteve na Turma Regional a aposentadoria especial desde a DER (16/08/2016). Após a rejeição dos embargos de declaração do INSS, pediu a implantação imediata do benefício (ID 401187852).",
+     "questoes": "1) Implantação imediata do benefício após o acórdão (artigo 497 do CPC).",
+     "rel": {
+      "razoes": "INSS (ID 362156462, 02/09/2025): apelação já julgada. Marcos Ademar de Oliveira (ID 362156464, 10/12/2025): apelação já julgada (provida).",
+      "contrarrazoes": "Não se aplica."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "362156457",
+      "juizo": "Procedimento comum 5007616-31.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "sentença de procedência parcial com diligências sobre períodos sem laudo [VALIDAR]; embargos de declaração do autor rejeitados (ID 362156463); a Turma Regional deu provimento à apelação do autor (acórdão ID 376435905) e rejeitou os embargos do INSS, corrigindo de ofício os consectários (acórdão ID 398174203)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2018-09-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "362156462",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Marcos Ademar de Oliveira",
+       "tipo": "Apelação",
+       "id": "362156464",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença",
+       "id": "362156457",
+       "data": "2025-08-12"
+      },
+      {
+       "desc": "Acórdão da apelação",
+       "id": "376435905",
+       "data": "2026-05-26"
+      },
+      {
+       "desc": "Embargos de declaração do INSS",
+       "id": "377339876",
+       "data": "2026-05-29"
+      },
+      {
+       "desc": "Acórdão dos embargos de declaração",
+       "id": "398174203",
+       "data": "2026-09-15"
+      },
+      {
+       "desc": "Petição do autor: implantação imediata",
+       "id": "401187852",
+       "data": "2026-09-28"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 398174203 · 15/09/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado | última peça: Manifestação (apelante) · ID 401187852 · 28/09/2026 | última movimentação: 28/09/2026 19:31 · Conclusos para decisão · Etiquetas \"Pedido de Despacho\" e sessão de 14/09/2026 · Conferir prazo recursal do INSS e eventual recurso excepcional [VALIDAR] · Recursos excepcionais não têm efeito suspensivo (artigo 995 do CPC)",
+     "assuntoDet": "Pós-julgamento — implantação do benefício (artigo 497 do CPC)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "28/09/2026 19:31 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Acórdão · ID 398174203 · 15/09/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado",
+    "ultima_decisao_relevante": "Ementa · ID 395654680 · 15/09/2026 — …991, artigos 35, 37, 41-A, § 5º, 57, §§ 3º e 4º, e 58, § 1º.Jurisprudência relevante citada: RE 870.947, Tema 810/STF; ARE 1.557.312, Tema 1.419/STF; EDcl no REsp 1.727.063, Tema 995/STJ; REsp 1.913.152, Tema 1.124/STJ",
+    "ultima_peca": "Manifestação (apelante) · ID 401187852 · 28/09/2026",
+    "ultima_informacao": "Certidão de Julgamento · ID 397970201 · 14/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 398174203 · 15/09/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado | última peça: Manifestação (apelante) · ID 401187852 · 28/09/2026 | última movimentação: 28/09/2026 19:31 · Conclusos para decisão"
    }
   },
   {
@@ -385,12 +873,14 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "CLAUDIR ROSA PEREIRA",
    "assunto": "Aposentadoria por Tempo de Contribuição (Art. 55/6)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP5",
+   "tipo_caso": "Apelação já julgada pela Turma Regional (aposentadoria especial) · embargos de declaração rejeitados em 10/08/2026 · recursos especial e extraordinário em 26/08/2026 · pedido de antiga patrona de reinclusão e reserva de honorários contratuais",
+   "resultado": "Ato a proferir: acórdãos IDs 369519613 e 391419697; petição da antiga patrona (ID 372571340, contrato ID 372571342); recurso especial (ID 393707491) e extraordinário (ID 393708249) ‖ Proposta pelos precedentes: Decisão: anotar a antiga patrona para intimações, se cabível, e remeter o pedido de reserva ao juízo da execução; encaminhar os recursos à Vice-Presidência [VALIDAR] [VALIDAR: Momento e juízo competente para a reserva de honorários contratuais]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação já julgada pela Turma Regional. Pendem o pedido da antiga patrona de reinclusão e reserva de honorários contratuais e os recursos excepcionais.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -401,7 +891,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão sobre o pedido da antiga patrona; após, encaminhamento dos recursos excepcionais à Vice-Presidência",
+    "materia": "Previdenciário — aposentadoria especial",
+    "origem": "Procedimento comum 5000626-13.2021.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 293423166 (27/10/2022)",
+    "recurso": "apelação de INSS (ID 293423174, 20/01/2023)",
+    "preparo": "INSS: Isento (autarquia)",
+    "monocratica": "Não se aplica",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -411,6 +912,120 @@
    "chegada": "20/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Pós-julgamento — reserva de honorários contratuais e recursos excepcionais",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 391419697 · 10/08/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado | última peça: Recurso Extraordinário (PGF) · ID 393708249 · 26/08/2026 | última movimentação: 11/09/2026 00:40 · Decorrido prazo de CLAUDIR ROSA PEREIRA em 10/09/2026 23:59. · Etiquetas \"NÃO PAUTAR - GIOVANA\" e \"Pedido de destaque de honorários\" · Reserva de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994) ocorre na expedição do requisitório, no juízo da execução [VALIDAR] · Recursos excepcionais à Vice-Presidência (artigo 1.030 do CPC)",
+   "teor": {
+    "sintese_fatica": "Claudir Rosa Pereira obteve aposentadoria especial. Após o acórdão, a antiga patrona (Arleide Costa de Oliveira Braga) pediu reinclusão como terceira interessada e reserva de 30% de honorários contratuais (ID 372571340). Há recursos especial e extraordinário.",
+    "inicial": "Ação de concessão de aposentadoria especial contra o INSS.",
+    "decisao_recorrida": "Sentença ID 293423166 (27/10/2022): julgou procedente o pedido de aposentadoria especial (DIB 20/09/2018), com tutela; embargos de declaração acolhidos quanto aos índices (ID 293423175); a Turma Regional julgou a apelação (acórdão ID 369519613) e rejeitou os embargos de declaração (acórdão ID 391419697).",
+    "recurso": "INSS (ID 293423174, 20/01/2023): apelação já julgada.",
+    "resposta": "Não se aplica.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Autor com advogada Milla Antonia Vecchiatti (OAB/MS 30.153); antiga patrona Arleide Costa de Oliveira Braga (OAB/SP 248.308-B).",
+    "preparo": "INSS: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação já julgada pela Turma Regional (aposentadoria especial) · embargos de declaração rejeitados em 10/08/2026 · recursos especial e extraordinário em 26/08/2026 · pedido de antiga patrona de reinclusão e reserva de honorários contratuais",
+     "sintese": "Claudir Rosa Pereira obteve aposentadoria especial. Após o acórdão, a antiga patrona (Arleide Costa de Oliveira Braga) pediu reinclusão como terceira interessada e reserva de 30% de honorários contratuais (ID 372571340). Há recursos especial e extraordinário.",
+     "questoes": "1) Reserva de honorários contratuais de antiga patrona; 2) encaminhamento de recursos excepcionais.",
+     "rel": {
+      "razoes": "INSS (ID 293423174, 20/01/2023): apelação já julgada.",
+      "contrarrazoes": "Não se aplica."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "293423166",
+      "juizo": "Procedimento comum 5000626-13.2021.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "julgou procedente o pedido de aposentadoria especial (DIB 20/09/2018), com tutela; embargos de declaração acolhidos quanto aos índices (ID 293423175); a Turma Regional julgou a apelação (acórdão ID 369519613) e rejeitou os embargos de declaração (acórdão ID 391419697)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-03-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "293423174",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "293423166",
+       "data": "2022-10-27"
+      },
+      {
+       "desc": "Apelação do INSS",
+       "id": "293423174",
+       "data": "2023-01-20"
+      },
+      {
+       "desc": "Acórdão da apelação",
+       "id": "369519613",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Petição da antiga patrona: reserva de honorários",
+       "id": "372571340",
+       "data": "2026-05-11"
+      },
+      {
+       "desc": "Acórdão dos embargos de declaração",
+       "id": "391419697",
+       "data": "2026-08-10"
+      },
+      {
+       "desc": "Recurso especial",
+       "id": "393707491",
+       "data": "2026-08-26"
+      },
+      {
+       "desc": "Recurso extraordinário",
+       "id": "393708249",
+       "data": "2026-08-26"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 391419697 · 10/08/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado | última peça: Recurso Extraordinário (PGF) · ID 393708249 · 26/08/2026 | última movimentação: 11/09/2026 00:40 · Decorrido prazo de CLAUDIR ROSA PEREIRA em 10/09/2026 23:59. · Etiquetas \"NÃO PAUTAR - GIOVANA\" e \"Pedido de destaque de honorários\" · Reserva de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994) ocorre na expedição do requisitório, no juízo da execução [VALIDAR] · Recursos excepcionais à Vice-Presidência (artigo 1.030 do CPC)",
+     "assuntoDet": "Pós-julgamento — reserva de honorários contratuais e recursos excepcionais",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "11/09/2026 00:40 · Decorrido prazo de CLAUDIR ROSA PEREIRA em 10/09/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Acórdão · ID 391419697 · 10/08/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado",
+    "ultima_decisao_relevante": "Ementa · ID 385948215 · 10/08/2026 — …6/2025, art. 3º; CC, arts. 389, p.u., e 406; CPC, arts. 927, III, 1.025; Lei 8.213/1991, art. 41-A; e Lei 8.742/1993, art. 20.Jurisprudência relevante citada: STF, RE 870.947 (Tema 810). STF, ARE 1.557.312 (Tema 1.419)",
+    "ultima_peca": "Recurso Extraordinário (PGF) · ID 393708249 · 26/08/2026",
+    "ultima_informacao": "Certidão de Julgamento · ID 391396535 · 10/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 391419697 · 10/08/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado | última peça: Recurso Extraordinário (PGF) · ID 393708249 · 26/08/2026 | última movimentação: 11/09/2026 00:40 · Decorrido prazo de CLAUDIR ROSA PEREIRA em 10/09/2026 23:59."
    }
   },
   {
@@ -422,12 +1037,14 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "MINELVINA DA SILVA MARTINS",
    "assunto": "Aposentadoria Rural (Art. 48/51)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP4",
+   "tipo_caso": "Apelação do INSS (aposentadoria rural; fase de cumprimento de sentença, processo de origem 0804306-12.2023.8.12.0018) · certidão de redistribuição por prevenção à ApCiv 5001655-33.2024.4.03.9999 e de possível duplicidade",
+   "resultado": "Ato a proferir: certidão da UFOR (ID 392843715); apelação do INSS (ID 392338445); contrarrazões (ID 392338447); petição de fato novo (ID 392338436) ‖ Proposta pelos precedentes: Despacho: esclarecer a natureza do feito (duplicidade × nova apelação no cumprimento) junto à UFOR e às partes [VALIDAR] [VALIDAR: Objeto da apelação; Existência de duplicidade]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "A UFOR certificou que o feito pode ser duplicidade da ApCiv 5001655-33.2024.4.03.9999, já julgada. As peças juntadas indicam apelação do INSS na fase de cumprimento, com notícia de concessão administrativa do benefício.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -438,7 +1055,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Conferir se há duplicidade de distribuição ou nova apelação na fase de cumprimento; conforme o caso, cancelar ou processar",
+    "materia": "Previdenciário — cumprimento de sentença",
+    "origem": "Processo de origem 0804306-12.2023.8.12.0018 (1ª Vara Cível de Paranaíba) [VALIDAR]",
+    "decisao_agravada": "Sentença ID [VALIDAR: decisão ou sentença recorrida] ([VALIDAR])",
+    "recurso": "apelação de INSS (ID 392338445, 17/08/2026)",
+    "preparo": "INSS: Isento (autarquia)",
+    "monocratica": "Não: conferir antes",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -448,6 +1076,108 @@
    "chegada": "20/08/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Duplicidade ou nova apelação na fase de cumprimento — conferir",
+   "especificidades": "► Situação em 21/11/2026: última decisão: — | última peça: Petição intercorrente (apelado) · ID 392338447 · 17/08/2026 | última movimentação: 20/08/2026 16:15 · Conclusos para julgamento · Etiquetas \"Duplicidade\" e \"Analisar\" · Notícia de concessão administrativa e alegada perda de objeto da execução (ID 392338436) · Cálculo da contadoria de R$ 46.008,23 (ID 392338433)",
+   "teor": {
+    "sintese_fatica": "Minelvina da Silva Martins obteve aposentadoria rural na ApCiv 5001655-33.2024.4.03.9999, já julgada e baixada. Foram juntadas peças da fase de cumprimento (apelação do INSS, contrarrazões e notícia de concessão administrativa do benefício). A UFOR certificou prevenção e possível duplicidade (ID 392843715).",
+    "inicial": "Fase de cumprimento de sentença em ação previdenciária contra o INSS.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: decisão ou sentença recorrida] ([VALIDAR]): decisão ou sentença na fase de cumprimento de sentença [VALIDAR].",
+    "recurso": "INSS (ID 392338445, 17/08/2026): apelação na fase de cumprimento de sentença [VALIDAR objeto].",
+    "resposta": "Contrarrazões da exequente (ID 392338447).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogadas Daniele Silva Lamblem Tavares (OAB/MS 14.824) e Amanda Martins Silveira dos Santos (OAB/MS 27.411).",
+    "preparo": "INSS: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS (aposentadoria rural; fase de cumprimento de sentença, processo de origem 0804306-12.2023.8.12.0018) · certidão de redistribuição por prevenção à ApCiv 5001655-33.2024.4.03.9999 e de possível duplicidade",
+     "sintese": "Minelvina da Silva Martins obteve aposentadoria rural na ApCiv 5001655-33.2024.4.03.9999, já julgada e baixada. Foram juntadas peças da fase de cumprimento (apelação do INSS, contrarrazões e notícia de concessão administrativa do benefício). A UFOR certificou prevenção e possível duplicidade (ID 392843715).",
+     "questoes": "1) Duplicidade de distribuição; 2) objeto da apelação na fase de cumprimento.",
+     "rel": {
+      "razoes": "INSS (ID 392338445, 17/08/2026): apelação na fase de cumprimento de sentença [VALIDAR objeto].",
+      "contrarrazoes": "Contrarrazões da exequente (ID 392338447)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: decisão ou sentença recorrida]",
+      "juizo": "Processo de origem 0804306-12.2023.8.12.0018 (1ª Vara Cível de Paranaíba) [VALIDAR]",
+      "dispositivo": "decisão ou sentença na fase de cumprimento de sentença [VALIDAR]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-08-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "392338445",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição: fato novo (concessão administrativa)",
+       "id": "392338436",
+       "data": "2026-08-17"
+      },
+      {
+       "desc": "Cálculo da contadoria",
+       "id": "392338433",
+       "data": "2026-08-17"
+      },
+      {
+       "desc": "Apelação do INSS",
+       "id": "392338445",
+       "data": "2026-08-17"
+      },
+      {
+       "desc": "Contrarrazões da exequente",
+       "id": "392338447",
+       "data": "2026-08-17"
+      },
+      {
+       "desc": "Certidão da UFOR: prevenção e duplicidade",
+       "id": "392843715",
+       "data": "2026-08-20"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: — | última peça: Petição intercorrente (apelado) · ID 392338447 · 17/08/2026 | última movimentação: 20/08/2026 16:15 · Conclusos para julgamento · Etiquetas \"Duplicidade\" e \"Analisar\" · Notícia de concessão administrativa e alegada perda de objeto da execução (ID 392338436) · Cálculo da contadoria de R$ 46.008,23 (ID 392338433)",
+     "assuntoDet": "Duplicidade ou nova apelação na fase de cumprimento — conferir",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/08/2026 16:15 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_peca": "Petição intercorrente (apelado) · ID 392338447 · 17/08/2026",
+    "ultima_informacao": "Certidão · ID 392843715 · 20/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: — | última peça: Petição intercorrente (apelado) · ID 392338447 · 17/08/2026 | última movimentação: 20/08/2026 16:15 · Conclusos para julgamento"
    }
   },
   {
@@ -459,12 +1189,14 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "LAUTERIA QUEIROZ PICOLOMINI",
    "assunto": "Aposentadoria Rural (Art. 48/51)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP4",
+   "tipo_caso": "Apelação do INSS (aposentadoria por idade rural) · procuração da autora não alfabetizada só com impressão digital · intimação para regularizar (decisão de 09/04/2026) · baixa em diligência e juntada de mídias · MPF pede o cumprimento da diligência",
+   "resultado": "Ato a proferir: apelação do INSS no processo digitalizado; decisão ID 365204782; despacho ID 385309642; manifestação do MPF (ID 386342491) ‖ Proposta pelos precedentes: Certificar o decurso do prazo de regularização; reabrir vista ao MPF; não conhecer das contrarrazões, se não regularizada [VALIDAR] [VALIDAR: Cumprimento da regularização da representação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS em aposentadoria por idade rural, pendente a regularização da representação da autora não alfabetizada. O MPF pediu o cumprimento antes do parecer.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -475,7 +1207,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Verificar a regularização; se não cumprida, não conhecer das contrarrazões (artigo 76, § 2º, II, do CPC) e seguir ao julgamento",
+    "materia": "Previdenciário — aposentadoria por idade rural",
+    "origem": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+    "decisao_agravada": "Sentença ID [VALIDAR: sentença no processo digitalizado] ([VALIDAR])",
+    "recurso": "apelação de INSS (ID [VALIDAR], [VALIDAR])",
+    "preparo": "INSS: Isento (autarquia)",
+    "monocratica": "Possível após a diligência",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -485,6 +1228,106 @@
    "chegada": "20/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Diligência — regularização da representação da autora não alfabetizada",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385309642 · 09/07/2026 — abriu vista ao MPF | última peça: Manifestação (MPF) · ID 386342491 · 15/07/2026 | última movimentação: 20/07/2026 17:33 · Conclusos para decisão · Etiquetas \"Não conhecer contrarrazões - art. 76, § 2º\", \"REGULARIZAR REPRESENTAÇÃO\" e \"NÃO PAUTAR - GIOVANA\" · Mídias da audiência juntadas (IDs 375221181 e 385952985) · Prioridade: idosa",
+   "teor": {
+    "sintese_fatica": "Lautéria Queiroz Picolomini, idosa e não alfabetizada, obteve aposentadoria por idade rural. O Relator determinou a regularização da procuração (instrumento público ou procuração a rogo com duas testemunhas, artigo 595 do CC) em 5 dias (ID 365204782).",
+    "inicial": "Ação de concessão de aposentadoria por idade rural contra o INSS.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: sentença no processo digitalizado] ([VALIDAR]): julgou procedente o pedido de aposentadoria por idade rural [VALIDAR].",
+    "recurso": "INSS (ID [VALIDAR], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+    "resposta": "Contrarrazões da autora no processo digitalizado [VALIDAR].",
+    "parecer": "MPF ID 386342491: Pedido de cumprimento da diligência antes do parecer",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Carlos Eduardo Silva Gimenez (OAB/SP 272.040) e José Pedro da Silva Parpinelli (OAB/MS 28.044); procuração irregular.",
+    "preparo": "INSS: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS (aposentadoria por idade rural) · procuração da autora não alfabetizada só com impressão digital · intimação para regularizar (decisão de 09/04/2026) · baixa em diligência e juntada de mídias · MPF pede o cumprimento da diligência",
+     "sintese": "Lautéria Queiroz Picolomini, idosa e não alfabetizada, obteve aposentadoria por idade rural. O Relator determinou a regularização da procuração (instrumento público ou procuração a rogo com duas testemunhas, artigo 595 do CC) em 5 dias (ID 365204782).",
+     "questoes": "1) Regularização da representação de parte não alfabetizada (artigo 595 do CC; artigo 76 do CPC).",
+     "rel": {
+      "razoes": "INSS (ID [VALIDAR], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+      "contrarrazoes": "Contrarrazões da autora no processo digitalizado [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: sentença no processo digitalizado]",
+      "juizo": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+      "dispositivo": "julgou procedente o pedido de aposentadoria por idade rural [VALIDAR]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-08-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "[VALIDAR]",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: regularização da representação",
+       "id": "365204782",
+       "data": "2026-04-09"
+      },
+      {
+       "desc": "Certidão de baixa em diligência",
+       "id": "371707798",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Despacho: mídias e vista à PRR",
+       "id": "385309642",
+       "data": "2026-07-09"
+      },
+      {
+       "desc": "Manifestação do MPF",
+       "id": "386342491",
+       "data": "2026-07-15"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385309642 · 09/07/2026 — abriu vista ao MPF | última peça: Manifestação (MPF) · ID 386342491 · 15/07/2026 | última movimentação: 20/07/2026 17:33 · Conclusos para decisão · Etiquetas \"Não conhecer contrarrazões - art. 76, § 2º\", \"REGULARIZAR REPRESENTAÇÃO\" e \"NÃO PAUTAR - GIOVANA\" · Mídias da audiência juntadas (IDs 375221181 e 385952985) · Prioridade: idosa",
+     "assuntoDet": "Diligência — regularização da representação da autora não alfabetizada",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "386342491",
+     "parecerSentido": "Pedido de cumprimento da diligência antes do parecer"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/07/2026 17:33 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 385309642 · 09/07/2026 — abriu vista ao MPF",
+    "ultima_peca": "Manifestação (MPF) · ID 386342491 · 15/07/2026",
+    "ultima_informacao": "Certidão · ID 375221181 · 13/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385309642 · 09/07/2026 — abriu vista ao MPF | última peça: Manifestação (MPF) · ID 386342491 · 15/07/2026 | última movimentação: 20/07/2026 17:33 · Conclusos para decisão"
    }
   },
   {
@@ -496,12 +1339,14 @@
    "exequente": "LUZIA ARANTES DE MOURA",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Aposentadoria Rural (Art. 48/51)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP4",
+   "tipo_caso": "Apelação da autora (aposentadoria por idade rural) · suspeição declarada pelo Des. Fed. Jean Marcos e redistribuição (07/07/2026) · vista à PRR (28/07/2026) · feito já incluído em pautas anteriores",
+   "resultado": "Ato a proferir: apelação da autora no processo digitalizado; despacho de suspeição (ID 384874794); vista à PRR (ID 388881580) ‖ Proposta pelos precedentes: Aguardar o parecer do MPF; depois, triar o mérito da apelação [VALIDAR] [VALIDAR: Parecer do MPF; Sentença e apelação no processo digitalizado]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da autora em aposentadoria por idade rural, redistribuída por suspeição do relator anterior; aguarda-se o parecer do MPF.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -512,7 +1357,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Aguardar o parecer do MPF; após, julgamento da apelação",
+    "materia": "Previdenciário — aposentadoria por idade rural",
+    "origem": "Ação previdenciária 0800745-27.2021.8.12.0025 (competência delegada) [VALIDAR Comarca]",
+    "decisao_agravada": "Sentença ID [VALIDAR: sentença no processo digitalizado] ([VALIDAR])",
+    "recurso": "apelação de Luzia Arantes de Moura (ID [VALIDAR], [VALIDAR])",
+    "preparo": "Luzia Arantes de Moura: Justiça gratuita [VALIDAR]",
+    "monocratica": "A verificar após o parecer",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Luzia Arantes de Moura: Justiça gratuita [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -522,6 +1378,99 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Diligência — aguardar parecer do MPF após redistribuição por suspeição",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 388881580 · 28/07/2026 — abriu vista ao MPF | última peça: Petição Inicial (advogado de parte) · ID 277777871 · 28/07/2023 | última movimentação: 05/08/2026 13:29 · Conclusos para decisão · Etiqueta \"Suspeição Dr. Jean\" · Prioridade: idosa · Pautas anteriores (16/03/2026 e 10/06/2026) sem julgamento",
+   "teor": {
+    "sintese_fatica": "Luzia Arantes de Moura, idosa, apelou em ação de aposentadoria por idade rural. O feito chegou a ser pautado (intimações de 16/03/2026 e 10/06/2026); o Des. Fed. Jean Marcos declarou suspeição (ID 384874794) e, redistribuído, o Relator abriu vista à PRR (ID 388881580).",
+    "inicial": "Ação de concessão de aposentadoria por idade rural contra o INSS.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: sentença no processo digitalizado] ([VALIDAR]): sentença de improcedência [VALIDAR].",
+    "recurso": "Luzia Arantes de Moura (ID [VALIDAR], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+    "resposta": "No processo digitalizado [VALIDAR].",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado constituído [VALIDAR].",
+    "preparo": "Luzia Arantes de Moura: Justiça gratuita [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da autora (aposentadoria por idade rural) · suspeição declarada pelo Des. Fed. Jean Marcos e redistribuição (07/07/2026) · vista à PRR (28/07/2026) · feito já incluído em pautas anteriores",
+     "sintese": "Luzia Arantes de Moura, idosa, apelou em ação de aposentadoria por idade rural. O feito chegou a ser pautado (intimações de 16/03/2026 e 10/06/2026); o Des. Fed. Jean Marcos declarou suspeição (ID 384874794) e, redistribuído, o Relator abriu vista à PRR (ID 388881580).",
+     "questoes": "1) Aposentadoria por idade rural (a triar após o parecer).",
+     "rel": {
+      "razoes": "Luzia Arantes de Moura (ID [VALIDAR], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+      "contrarrazoes": "No processo digitalizado [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: sentença no processo digitalizado]",
+      "juizo": "Ação previdenciária 0800745-27.2021.8.12.0025 (competência delegada) [VALIDAR Comarca]",
+      "dispositivo": "sentença de improcedência [VALIDAR]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-07-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Luzia Arantes de Moura",
+       "tipo": "Apelação",
+       "id": "[VALIDAR]",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Processo digitalizado da origem",
+       "id": "277777874",
+       "data": "2023-07-28"
+      },
+      {
+       "desc": "Despacho: suspeição e redistribuição",
+       "id": "384874794",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Despacho: vista à PRR",
+       "id": "388881580",
+       "data": "2026-07-28"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 388881580 · 28/07/2026 — abriu vista ao MPF | última peça: Petição Inicial (advogado de parte) · ID 277777871 · 28/07/2023 | última movimentação: 05/08/2026 13:29 · Conclusos para decisão · Etiqueta \"Suspeição Dr. Jean\" · Prioridade: idosa · Pautas anteriores (16/03/2026 e 10/06/2026) sem julgamento",
+     "assuntoDet": "Diligência — aguardar parecer do MPF após redistribuição por suspeição",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "05/08/2026 13:29 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 388881580 · 28/07/2026 — abriu vista ao MPF",
+    "ultima_peca": "Petição Inicial (advogado de parte) · ID 277777871 · 28/07/2023",
+    "ultima_informacao": "Certidão · ID 388381134 · 27/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 388881580 · 28/07/2026 — abriu vista ao MPF | última peça: Petição Inicial (advogado de parte) · ID 277777871 · 28/07/2023 | última movimentação: 05/08/2026 13:29 · Conclusos para decisão"
    }
   },
   {
@@ -533,12 +1482,14 @@
    "exequente": "GERALDO BALDEZ DA SILVA",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Aposentadoria Rural (Art. 48/51)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP5",
+   "tipo_caso": "Apelação já julgada pela Turma Regional em 30/06/2026 (aposentadoria por idade rural, provimento parcial ao autor) · embargos de declaração do INSS julgados em 14/09/2026 · pedido do autor de certidão de trânsito em julgado e baixa",
+   "resultado": "Ato a proferir: acórdão da apelação (ID 383672153); embargos de declaração do INSS (ID 384609016) julgados (acórdão ID 398171640); petição do autor (ID 407398738) ‖ Proposta pelos precedentes: Despacho: à Subsecretaria para certificar o trânsito em julgado e baixar, se não houver recurso pendente [VALIDAR] [VALIDAR: Prazo recursal do INSS após o acórdão dos embargos; Situação do pedido de tutela incidental]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação já julgada pela Turma Regional; nos embargos do INSS foi homologado acordo. O autor pede a certificação do trânsito em julgado e a baixa para cumprimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -549,7 +1500,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho: certificar o trânsito em julgado, se decorrido o prazo sem recurso, e baixar os autos",
+    "materia": "Previdenciário — aposentadoria por idade rural",
+    "origem": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+    "decisao_agravada": "Sentença ID [VALIDAR: sentença no processo de origem] ([VALIDAR])",
+    "recurso": "apelação de Geraldo Baldez da Silva (ID [VALIDAR], [VALIDAR])",
+    "preparo": "Geraldo Baldez da Silva: Não verificado",
+    "monocratica": "Não se aplica",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Geraldo Baldez da Silva: Não verificado · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -559,6 +1521,110 @@
    "chegada": "06/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Pós-julgamento — trânsito em julgado e baixa",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 398171640 · 15/09/2026 — acórdão: homologou o acordo, restando prejudicadas as demais alegações dos embargos de declaração e o pedido de tutela antecipada | última peça: Manifestação (apelante) · ID 407398738 · 28/10/2026 | última movimentação: 20/11/2026 00:40 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 19/11/2026 23:59. · Acordo homologado no acórdão dos embargos de declaração (ID 398171640), prejudicados os embargos e a tutela incidental · Prioridade: idoso · Etiquetas de sessões de 30/06/2026 e 14/09/2026",
+   "teor": {
+    "sintese_fatica": "Geraldo Baldez da Silva, idoso, obteve aposentadoria por idade rural como empregado rural (tratorista e operador de motosserra). Nos embargos de declaração do INSS, a Turma homologou acordo (ID 398171640); o autor pede a certificação do trânsito em julgado e a baixa urgente (ID 407398738).",
+    "inicial": "Ação de concessão de aposentadoria por idade rural contra o INSS.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: sentença no processo de origem] ([VALIDAR]): sentença de origem [VALIDAR]; a Turma Regional deu parcial provimento à apelação do autor (acórdão ID 383672153) e, nos embargos de declaração do INSS, homologou acordo entre as partes, prejudicados os embargos e o pedido de tutela (acórdão ID 398171640).",
+    "recurso": "Geraldo Baldez da Silva (ID [VALIDAR], [VALIDAR]): apelação já julgada (provida em parte).",
+    "resposta": "Não se aplica.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Sandra Mara de Lima Rigo (OAB/MS 3.580).",
+    "preparo": "Geraldo Baldez da Silva: Não verificado"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação já julgada pela Turma Regional em 30/06/2026 (aposentadoria por idade rural, provimento parcial ao autor) · embargos de declaração do INSS julgados em 14/09/2026 · pedido do autor de certidão de trânsito em julgado e baixa",
+     "sintese": "Geraldo Baldez da Silva, idoso, obteve aposentadoria por idade rural como empregado rural (tratorista e operador de motosserra). Nos embargos de declaração do INSS, a Turma homologou acordo (ID 398171640); o autor pede a certificação do trânsito em julgado e a baixa urgente (ID 407398738).",
+     "questoes": "1) Certificação do trânsito em julgado e baixa.",
+     "rel": {
+      "razoes": "Geraldo Baldez da Silva (ID [VALIDAR], [VALIDAR]): apelação já julgada (provida em parte).",
+      "contrarrazoes": "Não se aplica."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: sentença no processo de origem]",
+      "juizo": "Ação previdenciária (competência delegada) [VALIDAR origem]",
+      "dispositivo": "sentença de origem [VALIDAR]; a Turma Regional deu parcial provimento à apelação do autor (acórdão ID 383672153) e, nos embargos de declaração do INSS, homologou acordo entre as partes, prejudicados os embargos e o pedido de tutela (acórdão ID 398171640)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Geraldo Baldez da Silva",
+       "tipo": "Apelação",
+       "id": "[VALIDAR]",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Acórdão da apelação",
+       "id": "383672153",
+       "data": "2026-06-30"
+      },
+      {
+       "desc": "Embargos de declaração do INSS",
+       "id": "384609016",
+       "data": "2026-07-06"
+      },
+      {
+       "desc": "Petição: tutela antecipada incidental",
+       "id": "390694284",
+       "data": "2026-08-05"
+      },
+      {
+       "desc": "Acórdão dos embargos de declaração",
+       "id": "398171640",
+       "data": "2026-09-15"
+      },
+      {
+       "desc": "Petição: certidão de trânsito e baixa",
+       "id": "407398738",
+       "data": "2026-10-28"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 398171640 · 15/09/2026 — acórdão: homologou o acordo, restando prejudicadas as demais alegações dos embargos de declaração e o pedido de tutela antecipada | última peça: Manifestação (apelante) · ID 407398738 · 28/10/2026 | última movimentação: 20/11/2026 00:40 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 19/11/2026 23:59. · Acordo homologado no acórdão dos embargos de declaração (ID 398171640), prejudicados os embargos e a tutela incidental · Prioridade: idoso · Etiquetas de sessões de 30/06/2026 e 14/09/2026",
+     "assuntoDet": "Pós-julgamento — trânsito em julgado e baixa",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/11/2026 00:40 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 19/11/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Acórdão · ID 398171640 · 15/09/2026 — acórdão: homologou o acordo, restando prejudicadas as demais alegações dos embargos de declaração e o pedido de tutela antecipada",
+    "ultima_decisao_relevante": "Voto · ID 378284457 · 30/06/2026 — deu provimento",
+    "ultima_peca": "Manifestação (apelante) · ID 407398738 · 28/10/2026",
+    "ultima_informacao": "Certidão de Julgamento · ID 397970205 · 14/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 398171640 · 15/09/2026 — acórdão: homologou o acordo, restando prejudicadas as demais alegações dos embargos de declaração e o pedido de tutela antecipada | última peça: Manifestação (apelante) · ID 407398738 · 28/10/2026 | última movimentação: 20/11/2026 00:40 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 19/11/2026 23:59."
    }
   },
   {

@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T10:54:51.123Z",
+ "atualizadoEm": "2026-11-21T11:08:59.546Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -1652,7 +1652,10 @@
      "item": 19,
      "autos": 22
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "intercor": "Retirado de pauta (Bruno, 21/11/2026): acordo realizado no processo principal (execução).",
+    "intercorTipo": "Retirado de pauta",
+    "editadoEm": "2026-11-21T11:08:08.643Z"
    }
   },
   {
@@ -1720,8 +1723,8 @@
      "obsGeral": "ANALISAR RETIRADA DE PAUTA - INCOMPETÊNCIA - POSSUI PRIMEIRO JULGAMENTO",
      "pendencias": []
     },
-    "editadoPor": "AgentMail",
-    "editadoEm": "2026-11-18T01:41:28.706Z",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T11:08:14.867Z",
     "sopref": "Presencial",
     "planilhaEtapa": "A fazer",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
@@ -1730,7 +1733,9 @@
      "id": "acorrigir",
      "item": 21,
      "autos": 23
-    }
+    },
+    "intercor": "Retirado de pauta (Bruno, 21/11/2026): incompetência, por já haver primeiro julgamento no processo.",
+    "intercorTipo": "Retirado de pauta"
    }
   },
   {
@@ -2622,7 +2627,7 @@
     "resJulg": "Desprovido",
     "consect": "Não",
     "honor": "Sem honorários recursais",
-    "intercor": "Dr. Muta, 20/11/2026: mandado de segurança que não foi para parecer do MPF; minuta passa a José (antes, Victor), por divergência de interpretação. Abrir vista ao MPF antes do julgamento [VALIDAR retirada de pauta].",
+    "intercor": "Retirado de pauta (Bruno, 21/11/2026): mandado de segurança sem parecer do MPF; abrir vista ao MPF antes do julgamento (Dr. Muta, 20/11/2026). Minuta passa a José (antes, Victor), por divergência de interpretação.",
     "cartao": {
      "papeis": [
       "Autor(a)",
@@ -2630,7 +2635,7 @@
      ]
     },
     "editadoPor": "Bruno",
-    "editadoEm": "2026-11-20T22:22:29.269Z",
+    "editadoEm": "2026-11-21T11:08:21.109Z",
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -2647,7 +2652,8 @@
        }
       ]
      }
-    ]
+    ],
+    "intercorTipo": "Retirado de pauta"
    }
   },
   {
@@ -2987,7 +2993,7 @@
    "dataLiberacao": "",
    "obs": "SOLICITAÇÃO DE RETIRADA DE PAUTA — Existência de pedido anterior de desistência, não identificado na triagem prévia à inclusão em pauta. Submeter à apreciação do relator; retirada ainda não deliberada.\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11.",
    "ctl": {
-    "intercor": "Solicitação de retirada de pauta por pedido anterior de desistência — pendente de apreciação.",
+    "intercor": "Retirado de pauta (Bruno, 21/11/2026): pedido anterior de desistência, não identificado na triagem prévia à inclusão em pauta; submeter à apreciação do Relator.",
     "cartao": {
      "papeis": [
       "Autor(a)",
@@ -3005,7 +3011,10 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11."
-    }
+    },
+    "intercorTipo": "Retirado de pauta",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T11:08:26.664Z"
    }
   },
   {
@@ -5395,7 +5404,7 @@
    "ctl": {
     "meta": "M2B",
     "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T06:14:33.824Z",
+    "editadoEm": "2026-11-21T11:08:48.876Z",
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -5418,7 +5427,9 @@
      "id": "acorrigir",
      "item": 88,
      "autos": 36
-    }
+    },
+    "intercor": "Retirado de pauta (Bruno, 21/11/2026): renúncia à pretensão, a ser apreciada por decisão.",
+    "intercorTipo": "Retirado de pauta"
    }
   },
   {
@@ -5586,7 +5597,7 @@
    "dataLiberacao": "",
    "obs": "SOLICITAÇÃO DE RETIRADA DE PAUTA — Existência de pedido anterior de desistência, não identificado na triagem prévia à inclusão em pauta. Submeter à apreciação do relator; retirada ainda não deliberada.\nCONFERÊNCIA PJe — [Sessão] Aguardando a sessão: minuta Não; liberação Não. Tarefa PJe indica: Processo ainda não incluído em sessão; conferir divergência com a pauta de 30/11.",
    "ctl": {
-    "intercor": "Solicitação de retirada de pauta por pedido anterior de desistência — pendente de apreciação.",
+    "intercor": "Retirado de pauta (Bruno, 21/11/2026): pedido anterior de desistência, não identificado na triagem prévia à inclusão em pauta; submeter à apreciação do Relator.",
     "meta": "M2B",
     "cartao": {
      "papeis": [
@@ -5614,7 +5625,9 @@
      "item": 91,
      "autos": 21
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "intercorTipo": "Retirado de pauta",
+    "editadoEm": "2026-11-21T11:08:36.952Z"
    }
   },
   {
@@ -5700,7 +5713,10 @@
      "item": 93,
      "autos": 29
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "intercor": "Retirado de pauta (Bruno, 21/11/2026): pedido de homologação de renúncia à pretensão (ID 378310008; artigo 487, III, c, do CPC), a ser apreciado por decisão; processo ainda não incluído na sessão no PJe.",
+    "intercorTipo": "Retirado de pauta",
+    "editadoEm": "2026-11-21T11:08:59.546Z"
    }
   },
   {
@@ -6110,7 +6126,7 @@
      ]
     },
     "editadoPor": "Bruno",
-    "editadoEm": "2026-11-21T04:03:42.960Z",
+    "editadoEm": "2026-11-21T11:07:19.604Z",
     "lote": {
      "id": "acorrigir",
      "item": 100,
@@ -6127,7 +6143,8 @@
      "liberacao": "Não",
      "pecasLiberadas": [],
      "avisoInclusao": "Tarefa PJe vinculada à sessão ordinária de 30/11/2026."
-    }
+    },
+    "intercorTipo": "Retirado de pauta"
    }
   },
   {
