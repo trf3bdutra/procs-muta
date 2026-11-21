@@ -273,3 +273,9 @@ test('Motor: fila única de gravação (sem "ocupado" em laço)',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
   assert.ok(m.includes('var FILA_G = null, ATUAL_G = null;')&&m.includes('async function gravarUmaVez()')&&m.includes('FILA_G = ATUAL_G.catch(function () {}).then(function () { FILA_G = null; return gravar(); })'));
 });
+
+test('Marcos: digitação do ano não grava 0001 nem perde o campo',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes("if (t.value && +t.value.slice(0, 4) < 2000) return;"),'ano incompleto não entra');
+  assert.ok(cap.includes("if (document.activeElement === t && !t.classList.contains('mkhid'))"),'sem redesenhar com o campo em uso');
+});
