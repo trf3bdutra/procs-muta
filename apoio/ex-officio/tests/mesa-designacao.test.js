@@ -147,7 +147,7 @@ test('Datas: marcos validados (ano 2000–2100), aviso de marco fora do expedien
 
 test('Mesa: Atualizar proposta ao lado de Aplicar; agrupar pelas regras do painel; coluna de capacidade compacta',()=>{
   const pag=read('caput/designacao/index.html');
-  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn" data-a="limpar"[^>]*>Limpar<\/button><button type="button" class="btn" data-a="desfazer-limpar" hidden>Desfazer limpeza<\/button><button type="button" class="btn" data-a="recalc"[^>]*>Atualizar proposta<\/button><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
+  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
   assert.ok(pag.includes("document.getElementById('b-recalc-tb').hidden=VIVO"),'um só botão no Caput');
   assert.ok(!pag.includes('data-ag="md"')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
   assert.ok(pag.includes('class="sw"')&&pag.includes('.pp .mt{')&&pag.includes("'<span class=\"mt\">'"),'linha da pessoa');
@@ -171,7 +171,7 @@ test('Mesa: capacidade e carga mostram quantos processos cada pessoa tem para mi
 
 test('Mesa: indisponível tira a pessoa também dos processos já designados (vão para a proposta) e desmarcar devolve',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
-  for(const x of ['>indisponível</label>','var AUSX={},LIMPO=null;',"AUSX[nm]=Lx;","designação(ões) restauradas"])assert.ok(m.includes(x),x);
+  for(const x of ['>indisponível</label>','var AUSX={},LIMPO=null,LIVRE=null;',"AUSX[nm]=Lx;","designação(ões) restauradas"])assert.ok(m.includes(x),x);
 });
 
 test('Mesa: Perfis ⇄ compara o perfil dos servidores com os processos do grupo em tela',()=>{
@@ -231,6 +231,7 @@ test('Mesa: fluxo em 4 passos, regras obrigatórias antes da proposta e conferê
   assert.ok(pag.includes("var esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}")&&pag.includes("e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}"),'regra (geral ou do assunto) decide antes do escore');
   for(const x of ['function linhaAssunto(a,L)','class="sec-h"','data-ras=','VIVO.definirRegraAssunto(D.sessao.id,aa,','data-destrava=','var fx=fixa(x,k),trav=!!fx&&v===fx.nome&&!DESTR[x.i+\'|\'+k];'])assert.ok(pag.includes(x),x);
   assert.ok(!pag.includes('class="seg ag"'),'só agrupa por assunto');
+  assert.ok(pag.includes("if(a==='limpar-livre')")&&pag.includes('Limpar o que não é regra')&&pag.includes("if(a==='desfazer-livre')"),'limpar o que não é regra, no painel da proposta');
   assert.ok(pag.includes('function tags(x)')&&pag.includes('mts:(l.metas||[]).map(String)')&&m.includes('metas: (inf.c.metas || [])'),'cartão com tipo de julgamento e META');
   assert.ok(pag.includes("why:[['e','especialista no assunto']]"),'especialista começa selecionado, sem regra fixa');
   assert.ok(m.includes('definirRegraAssunto: function (id, assunto, d, c)'));
