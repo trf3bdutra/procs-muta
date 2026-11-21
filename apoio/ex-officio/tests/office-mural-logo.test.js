@@ -209,7 +209,8 @@ test('Mural: passos do ponto de vista de quem está logado, sinalizações por p
   assert.match(h, /aguarda:\{t:'Aguardando outros'/);
   assert.match(h, /k:'corrigir',t:'A corrigir'/);
   assert.match(h, /data-ab=\\?"pront\\?"[^]*?title=\\?"Abrir o prontuário\\?"/);
-  assert.match(h, /\.calrow>\.lado\{align-self:stretch;height:0;min-height:100%;overflow:auto\}/);
+  assert.match(h, /\.calrow #lista\{flex:1;min-height:0;overflow:auto/);
+  assert.match(h, /<div class=\\"calrow\\"><div class=\\"esq\\"><slot name=\\"cal\\"><\\\/slot><div class=\\"board\\">/);
   assert.match(h, /#mu-host>\.av-box #avisos>\.nt:nth-child\(n\+3\)\{display:none!important\}/);
   assert.match(h, /class=\\"sesc\\" id=\\"sesl\\"/);
   assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
