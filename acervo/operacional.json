@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T01:55:47.357Z",
+ "atualizado_em": "2026-11-21T01:55:55.534Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -305423,13 +305423,13 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:02:20.208Z"
+    "atualizado_em": "2026-11-21T01:55:55.534Z"
    },
    "triagem": {
     "Urgência": "Antecipação da tutela recursal",
     "Urgência - Observação": "Reiterada em 15/10/2026 (ID 404595333)",
     "Urgência - Nível": "Alta",
-    "Urgência - Apreciação": "Pendente",
+    "Urgência - Apreciação": "Pendente · não apreciada",
     "Urgência - Data": "Afastar descontos e revisar a classificação antes da nomeação do 1º colocado [VALIDAR]",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
@@ -305439,37 +305439,37 @@
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "Não verificado",
-    "Preparo": "Não verificado",
+    "Tempestividade": "Não Verificado",
+    "Preparo": "Não Verificado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "Não verificado",
+    "Representação": "Não Verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Sem hipótese",
-    "MPF - Custos Legis": "",
+    "MPF": "Não se Aplica",
+    "MPF - Custos Legis": "Não",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Anulação e Correção de Provas / Questões",
+    "Tema": "Concurso público · magistério superior · impessoalidade da banca",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Não há",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "2ª Seção, Custas, Pedido de Tutela de Urgência",
     "Alegações": "Agravo (ID 400194731): vínculo entre examinadora e 1º colocado; examinadora concorrente da agravante em concurso anterior; critério fora do edital na prova didática; erro na contagem de orientações; motivação genérica do recurso administrativo.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "Preparo: o despacho ID 402691112 (07/10/2026) apontou valor inferior ao da tabela (IDs 400216434 e 400425009) e deu 5 dias para complementar, sob pena de deserção; guia e comprovante juntados em 15/10/2026 (IDs 404595335 e 404595336), a conferir · A agravante reiterou o pedido urgente de tutela (ID 404595333) · A UFMS ainda não foi intimada",
+    "Especificidades": "Preparo: o despacho ID 402691112 (07/10/2026) apontou valor inferior ao da tabela (IDs 400216434 e 400425009) e deu 5 dias para complementar, sob pena de deserção; guia e comprovante bancário da Caixa juntados em 15/10/2026 (IDs 404595335 e 404595336; R$ 64,26), não o comprovante STN; o recolhimento anterior (ID 400216434) foi de R$ 5,32 · A agravante reiterou o pedido urgente de tutela (ID 404595333) · A UFMS ainda não foi intimada",
     "Síntese Fática": "Candidata aprovada em 3º lugar em concurso da UFMS para professor do Campus de Naviraí aponta vínculo de pesquisa entre uma examinadora e o 1º colocado e desconto de nota por critério fora do edital. A liminar foi negada na origem."
    },
    "producao": {
@@ -305509,7 +305509,8 @@
     "Lote - Observação": "Agravo de Rafaela Benan Zara contra a decisão ID 601430136 (processo 5006320-90.2026.4.03.6000, Campo Grande) que indeferiu a liminar em ação contra a UFMS. A agravante, 3ª colocada para a vaga de Tecnologia de Arquitetura e Urbanismo (Campus de Naviraí), alega vínculo de pesquisa entre uma examinadora e o 1º colocado, desconto na prova didática por critério fora do item 14.4.8 do Edital PROGEP 23/2026, erro de fato na contagem de orientações e motivação genérica no recurso administrativo. Resultado homologado em 19/06/2026 (Edital PROGEP 84/2026).",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5000239-80.2026.4.03.0001 (monocrática TRMS, 06/08/2026: Pix sem comprovante STN, não conhecido); AI 5027207-29.2021.4.03.0000 (monocrática, 30/05/2022: Judiciário não substitui a banca); ApCiv 5017162-67.2019.4.03.6100 (acórdão 3ª Turma, 27/10/2020: revisão de correção vedada, Tema 485/STF)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -305519,7 +305520,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5030545-06.2024.4.03.0000",
