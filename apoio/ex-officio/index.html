@@ -9734,10 +9734,12 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #v-pauta.ed .edr.mrw .ga>.sel,#v-pauta.ed .edr.mrw .ga>.it{margin-top:6px}
 #v-pauta.ed .edr.mrw .ga .id{display:grid!important;grid-template-rows:28px 28px;row-gap:6px;align-items:center;min-width:0}
 #v-pauta.ed .edr.mrw .ga .id>.mr-l1,#v-pauta.ed .edr.mrw .ga .id>.mr-l2{min-width:0;margin-top:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#v-pauta.ed .edr.mrw .gb{flex:0 0 auto!important;width:min(360px,45%)!important;max-width:none!important;margin-left:16px!important;row-gap:0!important;column-gap:10px!important}
+#v-pauta.ed .edr.mrw .gb{flex:0 0 auto!important;width:min(400px,48%)!important;max-width:none!important;margin-left:16px!important;row-gap:0!important;column-gap:10px!important;flex-wrap:wrap!important}
 #v-pauta.ed .edr.mrw .gb>.sn{height:28px;align-items:center;margin-bottom:6px}
-#v-pauta.ed .edr.mrw .gb>.pr{height:28px;align-self:center}
-#v-pauta.ed .edr.mrw .gb>.mr-tg{max-width:calc(100% - 140px);overflow:hidden}
+#v-pauta.ed .edr.mrw .gb>.pr{height:28px;align-self:center;flex:none!important;margin-left:0!important}
+/* etiqueta de responsáveis (Min. · data · Cor.) encolhe com reticências em vez de empurrar as etapas para outra linha */
+#v-pauta.ed .edr.mrw .gb>.mr-tg{flex:0 1 auto!important;min-width:0;max-width:calc(100% - 150px);overflow:hidden;white-space:nowrap;align-self:center}
+#v-pauta.ed .edr.mrw .gb>.mr-tg>*{min-width:0;overflow:hidden;text-overflow:ellipsis}
 }
 </style>
 </body>
