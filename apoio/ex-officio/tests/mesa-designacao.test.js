@@ -168,3 +168,8 @@ test('Mesa: capacidade e carga mostram quantos processos cada pessoa tem para mi
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
   for(const x of ["p/ minutar</b>","p/ corrigir</b>","var ND={},NC={};"])assert.ok(m.includes(x),x);
 });
+
+test('Mesa: indisponível tira a pessoa também dos processos já designados (vão para a proposta) e desmarcar devolve',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  for(const x of ['>indisponível</label>','var AUSX={};',"AUSX[nm]=Lx;","designação(ões) restauradas"])assert.ok(m.includes(x),x);
+});

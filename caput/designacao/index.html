@@ -330,6 +330,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       PROP[x.i].c=e.nome;PROP[x.i].wc=e.why;PROP[x.i].oc=cand;});
   }
   /* designação inicial: o que já está gravado na pauta fica; a proposta preenche o resto */
+  var AUSX={};
   var fin=function(x,k){var e=ESC[x.i];if(e&&e[k]!=null)return e[k];var g=k==='d'?x.d:x.c;if(g)return g;var p=PROP[x.i]||{};if(k==='d')return p.d||'';
     var d=fin(x,'d');if(p.c&&p.c!==d)return p.c;var alt=(p.oc||[]).filter(function(c){return c.nome!==d;})[0];return alt?alt.nome:'';};
 
@@ -339,7 +340,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function equipe(){var k=cargas();
     /* quantos processos cada pessoa tem nesta proposta: para minutar e para corrigir */
     var ND={},NC={};IT.forEach(function(x){var d=fin(x,'d'),c=fin(x,'c');if(d)ND[d]=(ND[d]||0)+1;if(c)NC[c]=(NC[c]||0)+1;});var np=function(n){return n+' processo'+(n===1?'':'s');};
-    var aus=function(n,fora,txt){return fora?'<span class="sw off" title="'+txt+'">fora da sessão</span>':'<label class="sw" title="Ausente no período: sai da proposta"><input type="checkbox" data-aus="'+esc(n)+'"'+(AUS[n]?' checked':'')+'>ausente</label>';};
+    var aus=function(n,fora,txt){return fora?'<span class="sw off" title="'+txt+'">fora da sessão</span>':'<label class="sw" title="Indisponível no período: sai da proposta e dos processos designados a ela nesta mesa (vão para a proposta; aplique para gravar)"><input type="checkbox" data-aus="'+esc(n)+'"'+(AUS[n]?' checked':'')+'>indisponível</label>';};
     var barra=function(v,a,cap,un){var mx=Math.max(cap,v,a,1);return '<span class="bar"><i class="'+(v>cap?'x':'')+'" style="width:'+(v/mx*100).toFixed(1)+'%"></i>'+(cap&&cap<mx?'<u style="left:'+(cap/mx*100).toFixed(1)+'%" title="capacidade: '+un(cap)+'"></u>':'')+(a?'<em style="left:'+Math.min(99,a/mx*100).toFixed(1)+'%" title="já gravado: '+un(a)+'"></em>':'')+'</span>';};
     /* sessão em que a pessoa não minuta: linha recolhida, sem barra */
     document.getElementById('eq-d').innerHTML=PD.map(function(m){var cap=CAPD[m.nome]||0,v=k.Ld[m.nome]||0,a=k.La[m.nome]||0,fora=!!FD[m.nome],cor=PC.some(function(c){return c.nome===m.nome;});
@@ -442,7 +443,12 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       tudo();toast(nl+' processo'+(nl>1?'s':'')+': '+(kl==='d'?'minutante ':'corretor ')+vl+(kl==='d'?'. Onde era também o corretor, o corretor ficou em branco.':'.'));return;}
     if(t.dataset.sel){var i=+t.dataset.i,k=t.dataset.sel;ESC[i]=ESC[i]||{};ESC[i][k]=t.value;if(k==='d'){var x=IT.find(function(y){return y.i===i;});if(t.value&&fin(x,'c')===t.value){ESC[i].c=(PROP[i].oc||[]).map(function(c){return c.nome;}).filter(function(n){return n!==t.value;})[0]||'';toast('Corretor trocado: o minutante não corrige a própria minuta.');}}tudo();return;}
     if(t.dataset.bulk){var b=t.dataset.b,kk=t.dataset.bulk,v=t.value;if(!v)return;IT.filter(function(x){return grupo(x)===b;}).forEach(function(x){ESC[x.i]=ESC[x.i]||{};ESC[x.i][kk]=v;if(kk==='d'&&fin(x,'c')===v)ESC[x.i].c='';});toast(nomeGrupo(b)+': '+(kk==='d'?'minutante ':'corretor ')+v);tudo();return;}
-    if(t.dataset.aus){AUS[t.dataset.aus]=t.checked;propor();tudo();toast(t.dataset.aus+(t.checked?' ausente: proposta recalculada.':' de volta: proposta recalculada.'));return;}
+    /* indisponível: a pessoa sai da proposta e também dos processos já designados a ela nesta mesa (minuta e correção), que passam para a proposta;
+       desmarcar devolve o que estava. Nada grava sem "Aplicar à pauta". */
+    if(t.dataset.aus){var nm=t.dataset.aus,nx=0;AUS[nm]=t.checked;propor();
+      if(t.checked){var Lx=[];IT.forEach(function(x){['d','c'].forEach(function(k){if(fin(x,k)===nm){var p=PROP[x.i]||{};ESC[x.i]=ESC[x.i]||{};Lx.push([x.i,k,ESC[x.i][k]]);ESC[x.i][k]=p[k]||'';nx++;}});});AUSX[nm]=Lx;}
+      else{(AUSX[nm]||[]).forEach(function(r){var e=ESC[r[0]];if(!e)return;if(r[2]==null)delete e[r[1]];else e[r[1]]=r[2];nx++;});delete AUSX[nm];}
+      tudo();toast(nm+(t.checked?' indisponível: '+nx+' designação(ões) passaram para a proposta. Aplique à pauta para gravar.':' de volta: '+nx+' designação(ões) restauradas.'));return;}
     if(t.id==='p-de'||t.id==='p-ate'){if(t.id==='p-de')de=t.value;else ate=t.value;propor();tudo();}});
   document.getElementById('busca').addEventListener('input',function(e){BUSCA=e.target.value;blocos();});
   (function(){var C={},R={};IT.forEach(function(x){var k=N(x.as);C[k]=(C[k]||0)+1;if(!R[k])R[k]=x.as||'sem assunto';});var sel=document.getElementById('f-as');
