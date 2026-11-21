@@ -19,8 +19,8 @@ GABINETE = ["Tempestividade", "Preparo", "Representação", "Regularidade", "MPF
 
 # valores padrão do Painel Central: não são informação
 PADRAO = {
-    "Tempestividade": {"Não Verificado"}, "Preparo": {"Não Verificado"}, "Representação": {"Não Verificado"},
-    "MPF": {"Não se Aplica"}, "Mídias": {"Não se Aplica"}, "Status de Julgamento": {"PENDENTE"},
+    "Tempestividade": {"Não Verificado", "Não verificado"}, "Preparo": {"Não Verificado", "Não verificado"}, "Representação": {"Não Verificado", "Não verificado"},
+    "MPF": {"Não se Aplica", "Não se aplica"}, "Mídias": {"Não se Aplica", "Não se aplica"}, "Status de Julgamento": {"PENDENTE"},
     "Regularidade": {"Representação ainda não verificada."},
     "Etiquetas Operacionais": {'[{"name":"VERIFICAR REPRESENTAÇÃO","status":"pendente"}]', "[]"},
 }
@@ -169,7 +169,7 @@ def secionar(o):
         if a in plano:
             plano.setdefault(b, plano.pop(a))
     if plano.get("Preparo") == "AJG":                          # AJG dispensa o preparo
-        plano["Preparo"] = "Dispensado"
+        plano["Preparo"] = "Justiça gratuita"
     imp = str(plano.get("Impedimento / Suspeição") or "")
     if " — " in imp:                                            # "Impedimento — NEY" → tipo + observação
         tipo, nome = imp.split(" — ", 1)

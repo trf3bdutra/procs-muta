@@ -1,3 +1,6 @@
+/* vocabulário único (padrao/vocabulario.js, módulo VOC da página): opções e valores normalizados */
+var VL=function(k,old){return typeof VOC!=='undefined'?VOC.lista(k):old;};
+var VZ=function(k,v){var n=typeof VOC!=='undefined'?VOC.norm(k,v):(v||'');return /^n[aã]o verificado$/i.test(n||'')?'':n;};
 
 /* CMT · Calendário forense do gabinete: feriados, recesso e datas sem expediente, e a contagem de prazos processuais.
    Regras do calendário do Controle de Pauta (app Gabinete CMT): feriados nacionais e da Justiça Federal (Lei 5.010/66, art. 62),
@@ -707,20 +710,20 @@ function regSuggestions(parsed,r,used,add){
       note:`Juntada do recurso no PJe em ${f(rec)}.`+(c&&c.ok===false?` Contado da própria data da decisão (${f(dec)}, ID ${dec.id}), o prazo terminaria em ${br(c.limit)}: a conclusão depende da data da intimação, que o inteiro teor não traz — informe-a no calculador.`:!dec?' Decisão recorrida não selecionada: informe a data da intimação no calculador.':'')});
     add({sec,key:'Tempest - Prazo legal',label:'Prazo legal (dias úteis)',value:String(prazo),current:r['Tempest - Prazo legal'],doc:rec.id,kind:'select',options:['5','15','8','10','30']});
     if(dobro===2)add({sec,key:'Tempest - Dobro',label:'Contagem',value:'2',current:String(r['Tempest - Dobro']||'')==='1'?'':r['Tempest - Dobro'],doc:rec.id,kind:'select',options:['1','2'],note:`Em dobro: ${who.dpu?'Defensoria Pública':who.mp?'Ministério Público':who.conselho?'conselho profissional (autarquia)':'Fazenda Pública'} (arts. 180, 183 e 186 do CPC).`});}
-  if(c&&c.ok===true)add({sec,key:'Tempestividade',label:'Tempestividade',value:'Tempestivo',current:r.Tempestividade==='Não Verificado'?'':r.Tempestividade,doc:`${dec.id}, ${rec.id}`,kind:'select',options:['Não Verificado','Tempestivo','Intempestivo'],
+  if(c&&c.ok===true)add({sec,key:'Tempestividade',label:'Tempestividade',value:'Tempestivo',current:VZ('tempest',r.Tempestividade),doc:`${dec.id}, ${rec.id}`,kind:'select',options:VL('tempest',['Não Verificado','Tempestivo','Intempestivo']),
     note:`Recurso juntado em ${f(rec)}. Ainda que contado da própria data da decisão (${f(dec)}, ID ${dec.id}), o prazo de ${c.total} dias úteis${dobro===2?' (em dobro)':''} só terminaria em ${br(c.limit)}: tempestivo qualquer que seja a data da intimação.`});
   /* preparo: isenção, gratuidade ou GRU com comprovante */
   const gs=used.filter(d=>d.target==='preparo'),ajg=ajgOf(parsed,rec);
-  const P=(value,doc,note)=>add({sec,key:'Preparo',label:'Preparo',value,current:r.Preparo==='Não Verificado'?'':r.Preparo,doc,kind:'select',options:['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica'],note});
-  if(who.publico||who.mp)P('Dispensado',rec.id,`${who.name||'Recorrente'}: isento de preparo (art. 1.007, § 1º, do CPC; art. 4º, I, da Lei 9.289/1996).`);
-  else if(who.dpu&&ajg)P('Dispensado',ajg.d.id,`Assistido pela Defensoria Pública, com gratuidade deferida (ID ${ajg.d.id}).`);
+  const P=(value,doc,note)=>add({sec,key:'Preparo',label:'Preparo',value,current:VZ('preparo',r.Preparo),doc,kind:'select',options:VL('preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']),note});
+  if(who.publico||who.mp)P('Isento (ente público/MP)',rec.id,`${who.name||'Recorrente'}: isento de preparo (art. 1.007, § 1º, do CPC; art. 4º, I, da Lei 9.289/1996).`);
+  else if(who.dpu&&ajg)P('Assistência da DPU',ajg.d.id,`Assistido pela Defensoria Pública, com gratuidade deferida (ID ${ajg.d.id}).`);
   else if(gs.length){const L=gs.map(d=>({d,g:gruInfo(d)})),ok=L.some(x=>x.g.comprovante);
-    P(ok?'Comprovado':'Não Verificado',gs.map(d=>d.id).join(', '),L.map(x=>`ID ${x.d.id} (${f(x.d)}): ${gruTxt(x.g)}`).join(' · ')+(ok?'':' — confira o pagamento.'));}
-  else if(ajg)P('Dispensado',ajg.d.id,`Gratuidade da justiça deferida (ID ${ajg.d.id}, ${f(ajg.d)}: “${ajg.frase}”). Confira se o beneficiário é o recorrente.`);
+    P(ok?'Comprovado':'Não verificado',gs.map(d=>d.id).join(', '),L.map(x=>`ID ${x.d.id} (${f(x.d)}): ${gruTxt(x.g)}`).join(' · ')+(ok?'':' — confira o pagamento.'));}
+  else if(ajg)P('Justiça gratuita',ajg.d.id,`Gratuidade da justiça deferida (ID ${ajg.d.id}, ${f(ajg.d)}: “${ajg.frase}”). Confira se o beneficiário é o recorrente.`);
   if(ajg&&!who.publico)add({sec,key:'AJG',label:'AJG (gratuidade)',value:'Sim',current:yes(r.AJG)?'Sim':'',doc:ajg.d.id,kind:'select',options:['','Sim']});
   if(who.dpu)add({sec,key:'DPU (controle)',label:'Defensoria Pública da União',value:'Sim',current:yes(r['DPU (controle)'])?'Sim':'',doc:rec.id,kind:'select',options:['','Sim']});
   /* representação ex lege: dispensa procuração */
-  if((who.publico||who.dpu||who.mp)&&!used.some(d=>d.target==='procuracao'))add({sec:'Representação',key:'Representação',label:'Representação',value:'Regular',current:r.Representação==='Não Verificado'?'':r.Representação,doc:rec.id,kind:'select',options:['Não Verificado','Regular','Negativo'],
+  if((who.publico||who.dpu||who.mp)&&!used.some(d=>d.target==='procuracao'))add({sec:'Representação',key:'Representação',label:'Representação',value:who.dpu?'Dispensada (DPU)':'Dispensada (procurador público)',current:VZ('repres',r.Representação),doc:rec.id,kind:'select',options:VL('repres',['Não Verificado','Regular','Negativo']),
     note:`${who.dpu?'Defensoria Pública':who.mp?'Ministério Público':'Advocacia pública'}: representação decorrente da lei, sem procuração nos autos.`});
 }
 /* data do documento (juntada/assinatura no cabeçalho do PJe) em DD/MM/AAAA, para os botões de data do card */
@@ -813,7 +816,7 @@ function buildSuggestions(parsed,r,ai){
   const mp=used.filter(d=>d.target==='mpf');
   if(mp.length){
     const d=mp[mp.length-1],x=extractMpf(d),a=ai?.mpf||{};
-    add({sec:'Parecer do MPF',key:'MPF',label:'Houve parecer?',value:'Com Parecer',current:r.MPF,doc:d.id,kind:'select',options:['Não se Aplica','Com Parecer','Sem Parecer']});
+    add({sec:'Parecer do MPF',key:'MPF',label:'Houve parecer?',value:'Com parecer',current:VZ('parecer',r.MPF),doc:d.id,kind:'select',options:VL('parecer',['Não se Aplica','Com Parecer','Sem Parecer'])});
     add({sec:'Parecer do MPF',key:'ID do Parecer MPF',label:'ID do parecer',value:d.id,current:r['ID do Parecer MPF'],doc:d.id,kind:'field'});
     add({sec:'Parecer do MPF',key:'MPF - Data',label:'Data do parecer',value:docBr(d),current:r['MPF - Data'],doc:d.id,kind:'field'});
     add({sec:'Parecer do MPF',key:'Parecer - Sentido',label:'Conclusão do parecer',value:a.sentido||x.sentido,current:r['Parecer - Sentido'],doc:d.id,kind:'select',options:['Prosseguimento do feito','Provimento do recurso','Não provimento do recurso','Outro'],src:a.sentido?'IA':'regra'});
@@ -833,7 +836,7 @@ function buildSuggestions(parsed,r,ai){
   // Representação: procurações do recorrente (ID, data da assinatura, validade e advogados)
   const procs=used.filter(d=>d.target==='procuracao');
   if(procs.length){
-    add({sec:'Representação',key:'Representação',label:'Representação',value:'Regular',current:r.Representação==='Não Verificado'?'':r.Representação,doc:procs.map(d=>d.id).join(', '),kind:'select',options:['Não Verificado','Regular','Negativo']});
+    add({sec:'Representação',key:'Representação',label:'Representação',value:'Regular',current:VZ('repres',r.Representação),doc:procs.map(d=>d.id).join(', '),kind:'select',options:VL('repres',['Não Verificado','Regular','Negativo'])});
     const ex=Array.isArray(r._procuracoes)?r._procuracoes:[],rec=used.find(d=>d.target==='recurso')||parsed.docs.filter(d=>d.kind==='recurso'&&!d.outro).pop();
     procs.forEach(d=>{
       const data=procDate(d.text);let adv=procLawyers(d.text),note='';

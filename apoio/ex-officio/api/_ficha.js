@@ -4,6 +4,7 @@
    POST /api/pauta?ficha=1 {cnj, campos}   campos = { 'triagem.Tempestividade': 'Tempestivo', ... }; cria o registro se faltar
    Também exporta espelho(), usado pela pauta e pelas monocráticas: o que a equipe registra no cartão vai para a ficha no mesmo commit. */
 const L = require('./_lib');
+const VOC = require('./_vocabulario'); /* vocabulário único (padrao/vocabulario.json): ficha e cartão usam os mesmos valores */
 const OP = 'acervo/operacional.json', FONTE = 'acervo/fonte.json', FICHA = 'padrao/ficha.json';
 const SECOES = ['origem', 'triagem', 'producao', 'pauta', 'controles'];
 /* a designação é do gestor; o destino (sessão ou monocrática) a equipe registra, como na página Monocráticas */
@@ -59,13 +60,13 @@ function aplica(r, mud) {
 }
 /* cartão da pauta → campos da ficha (vocabulário do Monitor) */
 const V = {
-  tempest: v => ({ triagem: { 'Tempestividade': /^(Tempestivo|Intempestivo)$/.test(v) ? v : '' } }),
-  preparo: v => ({ triagem: Object.assign({ 'Preparo': { 'Comprovado': 'Comprovado', 'Justiça gratuita': 'Dispensado', 'Isento (DPU/ente público)': 'Dispensado', 'Não recolhido': 'Não Recolhido', 'Não se aplica': 'Não se Aplica' }[v] || '' }, v === 'Justiça gratuita' ? { 'AJG': 'Sim' } : {}) }),
-  repres: v => ({ triagem: Object.assign({ 'Representação': v === 'Regular' || /^Dispensada/.test(v) ? 'Regular' : /^Irregular/.test(v) ? 'Negativo' : '' }, /^(Dispensada|Irregular)/.test(v) ? { 'Observação da Representação': v } : {}) }),
-  midias: v => ({ triagem: { 'Mídias': { 'Juntadas': 'Juntada', 'Faltantes': 'Faltante', 'Não se aplica': 'Não se Aplica' }[v] || '' } }),
-  mpf: v => ({ triagem: v === 'Sem hipótese' ? { 'MPF - Custos Legis': 'Não' } : v ? { 'MPF - Custos Legis': 'Sim', 'Observação MPF': v } : { 'MPF - Custos Legis': '' } }),
-  parecer: v => ({ triagem: { 'MPF': { 'Com parecer': 'Com Parecer', 'Aguardando parecer': 'Sem Parecer', 'Intimado sem manifestação': 'Sem Parecer' }[v] || '' } }),
-  prelim: v => ({ triagem: { 'Prelim.': v } }),
+  tempest: v => ({ triagem: { 'Tempestividade': VOC.norm('tempest', v) } }),
+  preparo: v => { const n = VOC.norm('preparo', v); return { triagem: Object.assign({ 'Preparo': n }, n === 'Justiça gratuita' ? { 'AJG': 'Sim' } : {}, n === 'Assistência da DPU' ? { 'DPU (controle)': 'Sim' } : {}) }; },
+  repres: v => ({ triagem: { 'Representação': VOC.norm('repres', v) } }),
+  midias: v => ({ triagem: { 'Mídias': VOC.norm('midias', v) } }),
+  mpf: v => ({ triagem: { 'MPF - Custos Legis': VOC.norm('mpf', v) } }),
+  parecer: v => ({ triagem: { 'MPF': VOC.norm('parecer', v) } }),
+  prelim: v => ({ triagem: { 'Prelim.': VOC.norm('prelim', v) } }),
   intercor: v => ({ triagem: { 'Intercorrências': v } }),
   /* sustentação oral ou preferência do cartão (Virtual, Presencial, Preferência) → ficha (Videoconferência, Presencial, Preferência) */
   sopref: v => ({ pauta: { 'Sustentação oral': ({ 'Virtual': 'Videoconferência', 'Presencial': 'Presencial', 'Preferência': 'Preferência' })[v] || '' } }),
@@ -102,13 +103,15 @@ const LISTAS = {
 const naLista = (L, v) => L.find(x => x.toLowerCase() === String(v || '').trim().toLowerCase()) || null;
 function paraCartao(mud, it) {
   const c = (it && it.ctl) || {}, d = {}, k = {}, cart = {}, t = mud.triagem || {}, p = mud.producao || {}, tem = (o, x) => Object.prototype.hasOwnProperty.call(o, x);
-  if (tem(t, 'Tempestividade')) k.tempest = /^(Tempestivo|Intempestivo)$/.test(t.Tempestividade) ? t.Tempestividade : '';
-  if (tem(t, 'Preparo')) k.preparo = { 'Comprovado': 'Comprovado', 'Não Recolhido': 'Não recolhido', 'Não se Aplica': 'Não se aplica' }[t.Preparo] ||
-    (t.Preparo === 'Dispensado' ? (/^(Justiça gratuita|Isento)/.test(c.preparo || '') ? c.preparo : 'Justiça gratuita') : '');
-  if (tem(t, 'Representação')) k.repres = t['Representação'] === 'Regular' ? (/^Dispensada/.test(c.repres || '') ? c.repres : 'Regular') : t['Representação'] === 'Negativo' ? 'Irregular – intimar' : '';
-  if (tem(t, 'Mídias')) k.midias = { 'Juntada': 'Juntadas', 'Faltante': 'Faltantes', 'Não se Aplica': 'Não se aplica' }[t['Mídias']] || '';
-  if (tem(t, 'MPF')) k.parecer = t.MPF === 'Com Parecer' ? 'Com parecer' : t.MPF === 'Sem Parecer' ? (/^(Aguardando|Intimado)/.test(c.parecer || '') ? c.parecer : 'Aguardando parecer') : '';
-  if (tem(t, 'Prelim.') && (naLista(LISTAS.prelim, t['Prelim.']) || !t['Prelim.'])) k.prelim = naLista(LISTAS.prelim, t['Prelim.']) || '';
+  /* mesmo vocabulário na ficha e no cartão: só normaliza (valores antigos resolvidos pelo AJG, DPU e observação) */
+  const ctx = { ajg: t.AJG, dpu: t['DPU (controle)'], obs: t['Observação da Representação'] };
+  if (tem(t, 'Tempestividade')) k.tempest = VOC.norm('tempest', t.Tempestividade);
+  if (tem(t, 'Preparo')) k.preparo = VOC.norm('preparo', t.Preparo, ctx);
+  if (tem(t, 'Representação')) k.repres = VOC.norm('repres', t['Representação'], ctx);
+  if (tem(t, 'Mídias')) k.midias = VOC.norm('midias', t['Mídias']);
+  if (tem(t, 'MPF')) k.parecer = VOC.norm('parecer', t.MPF);
+  if (tem(t, 'MPF - Custos Legis')) k.mpf = VOC.norm('mpf', t['MPF - Custos Legis'] === 'Sim' ? (t['Observação MPF'] || 'Sim') : t['MPF - Custos Legis']);
+  if (tem(t, 'Prelim.')) k.prelim = VOC.norm('prelim', t['Prelim.']);
   if (tem(t, 'Intercorrências')) k.intercor = t['Intercorrências'];
   const pa = mud.pauta || {};
   if (tem(pa, 'Sustentação oral')) k.sopref = ({ 'Videoconferência': 'Virtual', 'Virtual': 'Virtual', 'Presencial': 'Presencial', 'Preferência': 'Preferência' })[pa['Sustentação oral']] || '';
@@ -158,12 +161,12 @@ const VC = {
 };
 /* ficha → campos do cartão (Monocráticas e urgências): o inverso de V, no vocabulário do app */
 const INV = {
-  tempest: r => r.triagem.Tempestividade, prelim: r => r.triagem['Prelim.'], intercor: r => r.triagem['Intercorrências'],
-  preparo: r => ({ 'Comprovado': 'Comprovado', 'Não Recolhido': 'Não recolhido', 'Não se Aplica': 'Não se aplica' }[r.triagem.Preparo] || (r.triagem.Preparo === 'Dispensado' ? (r.triagem.AJG === 'Sim' ? 'Justiça gratuita' : 'Isento (DPU/ente público)') : '')),
-  repres: r => { const v = r.triagem['Representação'], o = r.triagem['Observação da Representação'] || ''; return v === 'Regular' ? (/^Dispensada/.test(o) ? o : 'Regular') : v === 'Negativo' ? (/^Irregular/.test(o) ? o : 'Irregular') : ''; },
-  midias: r => ({ 'Juntada': 'Juntadas', 'Faltante': 'Faltantes', 'Não se Aplica': 'Não se aplica' }[r.triagem['Mídias']] || ''),
-  mpf: r => r.triagem['MPF - Custos Legis'] === 'Não' ? 'Sem hipótese' : r.triagem['MPF - Custos Legis'] === 'Sim' ? (r.triagem['Observação MPF'] || '') : '',
-  parecer: r => ({ 'Com Parecer': 'Com parecer', 'Sem Parecer': 'Aguardando parecer' }[r.triagem.MPF] || ''),
+  tempest: r => VOC.norm('tempest', r.triagem.Tempestividade), prelim: r => VOC.norm('prelim', r.triagem['Prelim.']), intercor: r => r.triagem['Intercorrências'],
+  preparo: r => VOC.norm('preparo', r.triagem.Preparo, { ajg: r.triagem.AJG, dpu: r.triagem['DPU (controle)'] }),
+  repres: r => VOC.norm('repres', r.triagem['Representação'], { dpu: r.triagem['DPU (controle)'], obs: r.triagem['Observação da Representação'] }),
+  midias: r => VOC.norm('midias', r.triagem['Mídias']),
+  mpf: r => VOC.norm('mpf', r.triagem['MPF - Custos Legis'] === 'Sim' ? (r.triagem['Observação MPF'] || '') : r.triagem['MPF - Custos Legis']),
+  parecer: r => VOC.norm('parecer', r.triagem.MPF),
   resJulg: r => r.producao['Voto - Resultado'], honor: r => r.producao['Voto - Honorários'], topico: r => r.producao['Tópico-síntese'],
   hip932: r => r.triagem['Hipóteses Monocrática'], tipoAto: r => r.producao['Mono - Tipo de ato'], fundamento: r => r.producao['Mono - Fundamento'],
   urgTipo: r => r.triagem['Urgência'], urgNivel: r => r.triagem['Urgência - Nível'], urgSit: r => r.triagem['Urgência - Apreciação'], urgPedido: r => r.triagem['Urgência - Data'],

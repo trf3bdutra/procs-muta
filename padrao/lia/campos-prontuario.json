@@ -152,7 +152,12 @@
    [
     "Comprovado",
     "Justiça gratuita",
-    "Isento (DPU/ente público)",
+    "Gratuidade pedida no recurso",
+    "Isento (ente público/MP)",
+    "Assistência da DPU",
+    "Recolhido sem comprovante STN",
+    "Recolhido a menor",
+    "Recolhido após a interposição",
     "Não recolhido",
     "Não se aplica",
     "Não verificado"
@@ -204,7 +209,8 @@
    "opcao",
    [
     "Regular",
-    "Dispensada (proc. público/DPU)",
+    "Dispensada (procurador público)",
+    "Dispensada (DPU)",
     "Irregular – intimar",
     "Não verificado"
    ]
@@ -226,15 +232,20 @@
    "opcao",
    [
     "Sem hipótese",
-    "Interesse público (178 I)",
-    "Incapaz (178 II)",
-    "Litígio coletivo terra (178 III)",
+    "Interesse público ou social (178, I)",
+    "Incapaz (178, II)",
+    "Litígio coletivo pela posse de terra (178, III)",
     "Mandado de segurança",
     "ACP/ação popular",
     "Improbidade",
     "Indígenas (CF 232)",
+    "Comunidade quilombola",
+    "Pessoa com deficiência",
     "Idoso em risco",
-    "Reforma agrária"
+    "Reforma agrária",
+    "Reintegração de posse coletiva",
+    "Extradição, expulsão ou deportação",
+    "Outra hipótese"
    ]
   ],
   [
@@ -244,7 +255,10 @@
    [
     "Com parecer",
     "Aguardando parecer",
-    "Intimado sem manifestação"
+    "Intimado sem manifestação",
+    "Vista a abrir",
+    "Não verificado",
+    "Não se aplica"
    ]
   ],
   [

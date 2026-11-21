@@ -1,0 +1,38 @@
+# Leva os dados ao vocabulário único (padrao/vocabulario.json): ficha do processo (acervo/operacional.json),
+# cartões das pautas (acervo/sessoes) e lotes do Collectio (acervo/lotes), com scripts/vocabulario/migrar.py.
+# Roda quando o vocabulário ou o script mudam no main e pode ser disparado à mão. Rodar de novo não muda o que já
+# está no vocabulário. Se o main andar no meio, refaz (até 3 vezes).
+name: Vocabulário único · migrar dados
+on:
+  push:
+    branches: [main]
+    paths: ["padrao/vocabulario.json", "scripts/vocabulario/migrar.py", "scripts/vocabulario.py"]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: lotes-alimentar
+  cancel-in-progress: false
+jobs:
+  migrar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Migrar e gravar
+        run: |
+          git config user.name 'vocabulario[bot]'
+          git config user.email 'vocabulario[bot]@users.noreply.github.com'
+          for tentativa in 1 2 3; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python3 scripts/vocabulario/migrar.py
+            if git diff --quiet -- acervo/operacional.json acervo/sessoes acervo/lotes; then echo 'Nada a migrar.'; exit 0; fi
+            git add acervo/operacional.json acervo/sessoes acervo/lotes
+            git commit -q -m "Vocabulário único: dados da ficha, das pautas e dos lotes migrados"
+            if git push -q origin HEAD:main; then exit 0; fi
+            echo "main andou; refazendo ($tentativa)"; sleep 5
+          done
+          exit 1

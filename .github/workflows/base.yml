@@ -13,6 +13,8 @@ on:
       - "padrao/paradigmas.js"
       - "padrao/lia/Prompt_Minuta_CMT_v3.txt"
       - "padrao/lia/campos-prontuario.json"
+      - "padrao/vocabulario.json"
+      - "scripts/vocabulario/**"
       - "scripts/lia/**"
       - "gerar.py"
       # dados que a equipe grava pelo app não mudam o Vade Mecum nem o manifesto: sem commit do Base e sem nova publicação a cada clique
@@ -41,6 +43,8 @@ jobs:
           node-version: "20"
       - name: Valida e atualiza o manifesto
         run: python3 gerar.py
+      - name: Vocabulário único nas telas (padrao/vocabulario.json)
+        run: python3 scripts/vocabulario/aplicar.py
       - name: Prompts e catálogos da LIA (padrao/lia)
         run: python3 scripts/lia/gerar_prompts.py
       - name: Reconstrói o Vade Mecum (leitura e editor)

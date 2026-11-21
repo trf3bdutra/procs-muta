@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <html style="background:#f4f2ed"><head>
 <title>Ab Initio · Acervo, Sessões e Pauta · Gabinete A</title>
+<!-- voc:inicio --><script>
+/* Vocabulário único do gabinete (padrao/vocabulario.json): ficha do processo, prontuário das pautas, Collectio e Caput
+   falam a mesma língua. Use VOC.lista(campo) para montar as opções, VOC.norm(campo, valor, ctx) para converter valores
+   antigos e VOC.classe(campo, valor) nas regras ('regular', 'pendente', 'irregular', 'na'), no lugar de comparar o texto.
+   ctx (opcional): { ajg, dpu, obs } resolve os genéricos antigos ('Dispensado', 'Isento (DPU/ente público)',
+   'Dispensada (proc. público/DPU)'). Os dados abaixo são gerados por scripts/vocabulario/aplicar.py: não editar à mão. */
+(function (raiz, fab) { var V = fab(); if (typeof module === 'object' && module.exports) module.exports = V; else raiz.VOC = V; })(typeof self !== 'undefined' ? self : this, function () {
+  var D = /*VOC-DADOS*/{"versao":"1.0.0","campos":{"tempest":{"rotulo":"Tempestividade","opcoes":[["Tempestivo","regular"],["Intempestivo","irregular"],["Não verificado","pendente"],["Não se aplica","na"]],"sinonimos":{}},"preparo":{"rotulo":"Preparo","opcoes":[["Comprovado","regular"],["Justiça gratuita","regular"],["Gratuidade pedida no recurso","pendente"],["Isento (ente público/MP)","regular"],["Assistência da DPU","regular"],["Recolhido sem comprovante STN","pendente"],["Recolhido a menor","pendente"],["Recolhido após a interposição","pendente"],["Não recolhido","irregular"],["Não se aplica","na"],["Não verificado","pendente"]],"sinonimos":{"AJG":"Justiça gratuita","Dispensado":"@dispensado","Isento (DPU/ente público)":"@isento"}},"repres":{"rotulo":"Representação","opcoes":[["Regular","regular"],["Dispensada (procurador público)","regular"],["Dispensada (DPU)","regular"],["Irregular – intimar","irregular"],["Não verificado","pendente"]],"sinonimos":{"Negativo":"Irregular – intimar","Irregular":"Irregular – intimar","Irregular - intimar":"Irregular – intimar","Dispensada (proc. público/DPU)":"@dispensada"}},"prelim":{"rotulo":"Preliminares","opcoes":[["Sem preliminares","na"],["Há preliminares","regular"],["Preliminar de ofício","regular"]],"sinonimos":{"Não há":"Sem preliminares","Não":"Sem preliminares","Sim":"Há preliminares"}},"midias":{"rotulo":"Mídias","opcoes":[["Juntadas","regular"],["Faltantes","irregular"],["Não se aplica","na"],["Não verificado","pendente"]],"sinonimos":{"Juntada":"Juntadas","Faltante":"Faltantes"}},"mpf":{"rotulo":"Hipótese de intervenção do MPF","opcoes":[["Sem hipótese","na"],["Interesse público ou social (178, I)","regular"],["Incapaz (178, II)","regular"],["Litígio coletivo pela posse de terra (178, III)","regular"],["Mandado de segurança","regular"],["ACP/ação popular","regular"],["Improbidade","regular"],["Indígenas (CF 232)","regular"],["Comunidade quilombola","regular"],["Pessoa com deficiência","regular"],["Idoso em risco","regular"],["Reforma agrária","regular"],["Reintegração de posse coletiva","regular"],["Extradição, expulsão ou deportação","regular"],["Outra hipótese","regular"]],"sinonimos":{"Não":"Sem hipótese","Parte no feito":"Sem hipótese","Interesse público (178 I)":"Interesse público ou social (178, I)","Incapaz (178 II)":"Incapaz (178, II)","Litígio coletivo terra (178 III)":"Litígio coletivo pela posse de terra (178, III)","Menor de Idade (proteção de crianças e adolescentes)":"Incapaz (178, II)","Interdito (curatela)":"Incapaz (178, II)","Pessoa com Deficiência (acessibilidade e benefícios)":"Pessoa com deficiência","Idoso (vulnerabilidade social)":"Idoso em risco","Idoso (Estatuto)":"Idoso em risco","Comunidade Indígena (direitos originários e terras)":"Indígenas (CF 232)","Comunidade Quilombola (tutela de territórios ancestrais)":"Comunidade quilombola","Conflito Coletivo - Terra Rural (litígios agrários e INCRA)":"Litígio coletivo pela posse de terra (178, III)","Conflito Coletivo - Terra Urbana (ocupações em imóveis da União/CEF)":"Litígio coletivo pela posse de terra (178, III)","Reintegração de Posse Coletiva":"Reintegração de posse coletiva","Mandado de Segurança (fiscalização obrigatória da lei)":"Mandado de segurança","Outros":"Outra hipótese","Não se aplica":"Sem hipótese","Interesse público ou social relevante":"Interesse público ou social (178, I)","Comunidades indígenas":"Indígenas (CF 232)","Comunidades quilombolas e tradicionais":"Comunidade quilombola","Idoso":"Idoso em risco","Incapaz":"Incapaz (178, II)","Litígios coletivos federais pela posse de terra rural ou urbana":"Litígio coletivo pela posse de terra (178, III)","Ação civil pública proposta por outro legitimado":"ACP/ação popular","Ação popular":"ACP/ação popular","Processos de desapropriação para reforma agrária":"Reforma agrária","Ações de improbidade administrativa":"Improbidade","Processos de extradição, expulsão e deportação":"Extradição, expulsão ou deportação"}},"parecer":{"rotulo":"Parecer do MPF","opcoes":[["Com parecer","regular"],["Aguardando parecer","pendente"],["Intimado sem manifestação","regular"],["Vista a abrir","pendente"],["Não verificado","pendente"],["Não se aplica","na"]],"sinonimos":{"Sem Parecer":"Aguardando parecer","Sem parecer":"Aguardando parecer","Parecer juntado":"Com parecer"}},"papel":{"rotulo":"Papel da parte no 1º grau","opcoes":[["Autor(a)","regular"],["Réu/ré","regular"],["Terceiro","regular"]],"sinonimos":{"Autor":"Autor(a)","Autora":"Autor(a)","Réu":"Réu/ré","Ré":"Réu/ré"}}}}/*VOC-FIM*/;
+  var N = function (s) { return String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim().toLowerCase(); };
+  var sim = function (x) { return x === true || /^(sim|s|true|1|2)$/i.test(String(x == null ? '' : x).trim()); };
+  function campo(c) { return (D.campos || {})[c] || null; }
+  function lista(c) { var f = campo(c); return f ? f.opcoes.map(function (o) { return o[0]; }) : []; }
+  function resolve(alvo, ctx) {
+    ctx = ctx || {}; var obs = String(ctx.obs || '').replace(/\(proc\. público\/DPU\)|DPU\/ente público/gi, ''), dpu = sim(ctx.dpu) || /DPU|Defensoria/i.test(obs), ajg = sim(ctx.ajg);
+    if (alvo === '@dispensado') return dpu ? 'Assistência da DPU' : ajg ? 'Justiça gratuita' : 'Isento (ente público/MP)';
+    if (alvo === '@isento') return dpu ? 'Assistência da DPU' : 'Isento (ente público/MP)';
+    if (alvo === '@dispensada') return dpu ? 'Dispensada (DPU)' : 'Dispensada (procurador público)';
+    return alvo;
+  }
+  function norm(c, v, ctx) {
+    var f = campo(c), s = String(v == null ? '' : v).trim();
+    if (!f || !s) return s;
+    var n = N(s), i, o;
+    /* Representação 'Regular' com observação de dispensa (formato antigo da ficha) */
+    if (c === 'repres' && n === 'regular' && ctx && /^Dispensada/i.test(ctx.obs || '')) return resolve('@dispensada', ctx);
+    for (i = 0; i < f.opcoes.length; i++) { o = f.opcoes[i][0]; if (o === s || N(o) === n) return o; }
+    for (o in f.sinonimos) if (o === s || N(o) === n) return resolve(f.sinonimos[o], ctx);
+    return s;
+  }
+  function classe(c, v, ctx) {
+    var f = campo(c), s = norm(c, v, ctx), i;
+    if (!f || !s) return '';
+    for (i = 0; i < f.opcoes.length; i++) if (f.opcoes[i][0] === s) return f.opcoes[i][1];
+    return '';
+  }
+  function eh(c, v, cl, ctx) { return classe(c, v, ctx) === cl; }
+  return { dados: D, lista: lista, norm: norm, classe: classe, eh: eh, rotulo: function (c) { var f = campo(c); return f ? f.rotulo : c; } };
+});
+</script><!-- voc:fim -->
 <script src="/init/assets/js/gh-ponte.js"></script>
 <script src="./assets/js/00-identidade.js"></script>
 <script src="./assets/js/01-runtime-arquivos.js"></script>
@@ -1002,7 +1041,7 @@ const PRE_REVIEW_FIELDS = ["Rev - Ementa", "Rev - Subementa", "Rev - IDs", "Rev 
 const PRE_SENTENCA = ['Procedente','Parcialmente procedente','Improcedente','Extinção sem resolução do mérito','Homologatória','Outra'];
 const PRE_VOTO = ['Dar provimento','Dar parcial provimento','Negar provimento','Não conhecer','Anular a sentença','Extinguir sem resolução do mérito','Prejudicado'];
 const PRE_HONORARIOS = ['Majorar (art. 85, § 11, CPC)','Manter','Inverter','Fixar','Redistribuir','Sem honorários recursais','Não se aplica'];
-const PRE_MPF_REASONS = ['Não se aplica','Interesse público ou social relevante','Comunidades indígenas','Comunidades quilombolas e tradicionais','Idoso','Incapaz','Litígios coletivos federais pela posse de terra rural ou urbana','Mandado de segurança','Ação civil pública proposta por outro legitimado','Ação popular','Processos de desapropriação para reforma agrária','Ações de improbidade administrativa','Processos de extradição, expulsão e deportação','Outros'];
+const PRE_MPF_REASONS = (typeof VOC!=="undefined" ? VOC.lista("mpf") : ['Não se aplica','Interesse público ou social relevante','Comunidades indígenas','Comunidades quilombolas e tradicionais','Idoso','Incapaz','Litígios coletivos federais pela posse de terra rural ou urbana','Mandado de segurança','Ação civil pública proposta por outro legitimado','Ação popular','Processos de desapropriação para reforma agrária','Ações de improbidade administrativa','Processos de extradição, expulsão e deportação','Outros']);
 const CONTROL_COLUMNS = [...PRE_NEW_FIELDS,"Voto","Sessões","Contrarrazões", "Contrarrazões Ausentes", "Descrição das Alegações", "Descrição das Contrarrazões", "Mídias Necessárias", "Memoriais", "Memoriais - Parte", "Memoriais - ID", "Memoriais - Descrição", "Outros Documentos", "Outros - Peça", "Outros - ID", "Outros - Descrição", "Outras Peças","Controladores","AJG","DPU (controle)","Intervenção MPF","ID do Parecer MPF","Alegações","Numeração Prévia","Item (Pauta de Julgamento)","Processo","Assunto","Etiquetar","Etiquetas","Tema","Observações","SERVIDOR","JULGAMENTO","Sessão Destino","Seleção Prévia","Status de Julgamento","Tempestividade","Preparo","Regularidade","Representação","ID da Procuração","Mídias","Impedimento / Suspeição","META","MPF","MPF - Custos Legis","Prelim.","Observação Complementar","O que falta sanar","Refinado","Conferido","Tipo de Voto","MINUTADO","CORRETOR","CORRIGIDO","LIBERADO"];
 const ACERVO_COLUMNS = ["processo","classe_judicial","assunto_judicial","data_distribuição","tarefa_atual","data_entrada_tarefa","prioridade","etiquetas","polo_ativo","advogado_pa","polo_passivo","advogado_pp","dpu","mpf","valor_causa","ultimo_movimento","dt_distribuicao_1g"];
 
@@ -1046,15 +1085,15 @@ const SELECAO_NESTED_COLUMNS = ["Tempestividade","Preparo","Impedimento / Suspei
 const PAUTA_BASE_COLUMNS = ["Item (Pauta de Julgamento)","Processo","Assunto","Etiquetar","Etiquetas","Tema","Observações","SERVIDOR","Tempestividade","Preparo","Regularidade","Representação","ID da Procuração","Mídias","Impedimento / Suspeição","META","MPF","MPF - Custos Legis","Prelim.","Observação Complementar","O que falta sanar","Refinado","Conferido","Tipo de Voto","MINUTADO","CORRETOR","CORRIGIDO","LIBERADO"];
 const DEFAULT_COLUMN_CONFIG = { central: CENTRAL_BASE_COLUMNS, selecao: SELECAO_BASE_COLUMNS, pauta: PAUTA_BASE_COLUMNS };
 const DROPDOWNS = {
-  "Tempestividade": ["Não Verificado","Tempestivo","Intempestivo"],
-  "Preparo": ["Não Verificado","Comprovado","Não Recolhido","AJG"],
-  "Representação": ["Não Verificado","Regular","Negativo"],
-  "Mídias": ["Não se Aplica","Juntada","Faltante"],
-  "MPF": ["Não se Aplica","Com Parecer","Sem Parecer"],
-  "MPF - Custos Legis": ["","Menor de Idade (proteção de crianças e adolescentes)","Pessoa com Deficiência (acessibilidade e benefícios)","Idoso (vulnerabilidade social)","Interdito (curatela)","Comunidade Indígena (direitos originários e terras)","Comunidade Quilombola (tutela de territórios ancestrais)","Conflito Coletivo - Terra Rural (litígios agrários e INCRA)","Conflito Coletivo - Terra Urbana (ocupações em imóveis da União/CEF)","Reintegração de Posse Coletiva","Mandado de Segurança (fiscalização obrigatória da lei)"]
+  "Tempestividade": ["Tempestivo","Intempestivo","Não verificado","Não se aplica"],
+  "Preparo": ["Comprovado","Justiça gratuita","Gratuidade pedida no recurso","Isento (ente público/MP)","Assistência da DPU","Recolhido sem comprovante STN","Recolhido a menor","Recolhido após a interposição","Não recolhido","Não se aplica","Não verificado"],
+  "Representação": ["Regular","Dispensada (procurador público)","Dispensada (DPU)","Irregular – intimar","Não verificado"],
+  "Mídias": ["Juntadas","Faltantes","Não se aplica","Não verificado"],
+  "MPF": ["Com parecer","Aguardando parecer","Intimado sem manifestação","Vista a abrir","Não verificado","Não se aplica"],
+  "MPF - Custos Legis": ["","Interesse público ou social (178, I)","Incapaz (178, II)","Litígio coletivo pela posse de terra (178, III)","Mandado de segurança","ACP/ação popular","Improbidade","Indígenas (CF 232)","Comunidade quilombola","Pessoa com deficiência","Idoso em risco","Reforma agrária","Reintegração de posse coletiva","Extradição, expulsão ou deportação","Outra hipótese"]
 };
 const ALLEGATION_GROUPS = [{"scope": "Recurso", "title": "Pedido de anulação · Erros de procedimento", "items": ["Cerceamento de Defesa", "Extra Petita", "Ultra Petita", "Citra / Infra Petita", "Nulidade por Falta de Fundamentação", "Nulidade de Citação ou Intimação", "Incompetência Absoluta", "Suspeição ou Impedimento do Juiz", "Ausência de Intervenção Obrigatória do Ministério Público", "Julgamento Surpresa"]}, {"scope": "Recurso", "title": "Pedido de reforma · Erros de julgamento", "items": ["Má Valoração da Prova", "Violação de Lei Federal ou da Constituição", "Afastamento de Presunção Legal", "Erro no Cálculo ou Quantificação", "Desproporcionalidade de Danos Morais / Materiais", "Inobservância de Precedentes Obrigatórios"]}, {"scope": "Recurso", "title": "Interlocutórias não agraváveis · Preliminar de apelação", "items": ["Inversão do Ônus da Prova", "Pedido de Segredo de Justiça", "Fixação de Pontos Controvertidos"]}, {"scope": "Contrarrazões", "title": "Pedido de não conhecimento · Admissibilidade recursal", "items": ["Intempestividade", "Deserção", "Falta de Dialeticidade", "Inadequação da Via Eleita", "Ilegitimidade Recursal", "Falta de Interesse Recursal / Ausência de Sucumbência", "Fato Impeditivo ou Extintivo / Preclusão Lógica ou Consumativa", "Perda de Objeto Superveniente"]}, {"scope": "Contrarrazões", "title": "Preliminares do processo · Ordem pública", "items": ["Incompetência Absoluta", "Litispendência ou Coisa Julgada", "Ilegitimidade Passiva ou Ativa Ad Causam", "Falta de Interesse de Agir", "Inépcia da Inicial", "Impugnação à Concessão da Justiça Gratuita", "Defeito de Representação ou Falta de Autorização"]}, {"scope": "Contrarrazões", "title": "Prejudiciais de mérito", "items": ["Prescrição", "Decadência"]}, {"scope": "Contrarrazões", "title": "Pedido de desprovimento · Defesa do mérito", "items": ["Perfeita Aplicação do Direito Material", "Suficiência e Alinhamento das Provas", "Consonância com Súmulas e Jurisprudência Dominante", "Ausência de Demonstração de Prejuízo"]}];
-const BOOLEAN_COLUMNS = new Set(["AJG","DPU (controle)","Prelim.","Refinado","Conferido","CORRIGIDO","LIBERADO"]);
+const BOOLEAN_COLUMNS = new Set(["AJG","DPU (controle)","Refinado","Conferido","CORRIGIDO","LIBERADO"]);
 const SIGILO_COLUMNS = ["Nível_Sigilo","Tempo_Última_Movimentação","SIN_PEND_1JULG","SIN_CLS","DES_ULTIMA_MOVIME_SIGILO"];
 const WORK_COLUMNS = new Set([...CONTROL_COLUMNS.filter(c => !["Processo","Assunto","Etiquetas"].includes(c)), "Regularidade Manual", "Etiquetas Operacionais"]);
 const PRE_CARD_WORK = ["Observações","Regularidade","Intercorrências","Tempestividade","Preparo","Impedimento / Suspeição","Representação","ID da Procuração","MPF","MPF - Custos Legis","ID do Parecer MPF","Alegações","Contrarrazões Ausentes","Prelim.","Descrição das Contrarrazões","Outras Peças","Voto","JULGAMENTO","Sessões","Tema","META","Dificuldade","Item (Pauta de Julgamento)"];
@@ -1126,6 +1165,11 @@ const distMainOf = r => colVal(r, COL.distMain);
 // Última movimentação conforme a planilha principal — base do card "Tarefas atuais".
 const ultMovOf = r => colVal(r, COL.ultMov);
 const truthy = v => ["sim","s","x","ok","1","true","feito","conferido","corrigido"].includes(canon(v));
+/* vocabulário único (padrao/vocabulario.json, módulo VOC embutido na página): as regras leem a classe do valor */
+const vocN = (k,v,ctx) => typeof VOC!=="undefined" ? VOC.norm(k,v,ctx) : txt(v);
+const vocC = (k,v,ctx) => typeof VOC!=="undefined" ? VOC.classe(k,v,ctx) : "";
+const temPrelim = v => truthy(v) || vocC("prelim",v)==="regular";
+const GRATU = v => v==="Justiça gratuita" || v==="Assistência da DPU";
 // Datas de fonte: dia/mês/ano (inclusive ano curto), ISO e números seriais do Excel.
 const sourceDateInfo = v => {
   if (v == null || txt(v)==="") return null;
@@ -1393,8 +1437,10 @@ class Component extends DCLogic {
     });return [...new Set(out)];
   }
   syncFinancialControls(r) {
+    /* valores antigos (Dispensado, AJG, Negativo, Com Parecer…) passam ao vocabulário único */
+    [["Tempestividade","tempest"],["Preparo","preparo"],["Representação","repres"],["Mídias","midias"],["MPF","parecer"],["MPF - Custos Legis","mpf"]].forEach(([c,k])=>{if(txt(r[c]))r[c]=vocN(k,r[c],{ajg:r.AJG,dpu:r["DPU (controle)"],obs:r["Observação da Representação"]});});
     const tags=this.sourceTags(r),raw=canon(colVal(r,["dpu"]));
-    if(r.Preparo==="AJG" && !r._preparoAJG && !r._ajgManual && !txt(r.AJG)){r.AJG="Sim";r._ajgManual=true;}
+    if(GRATU(r.Preparo) && !r._preparoAJG && !r._ajgManual && !txt(r.AJG)){r.AJG="Sim";r._ajgManual=true;}
     const dpuSource=tags.some(t=>this.tagRole(t)==="dpu") || truthy(raw) || this.tagRole(raw)==="dpu";
     if(!r._dpuManual && (dpuSource || r._dpuAuto)) {r["DPU (controle)"]=dpuSource ? "Sim" : "";r._dpuAuto=dpuSource;}
     const dpu=truthy(r["DPU (controle)"]),ajgSource=tags.some(t=>this.tagRole(t)==="ajg");
@@ -1403,17 +1449,18 @@ class Component extends DCLogic {
     if(dpu)r._ajgFromDpu=true;
     else if(r._ajgFromDpu){if(!r._ajgManual && !ajgSource)r.AJG="";delete r._ajgFromDpu;}
     if(truthy(r.AJG)) {
-      if(r.Preparo!=="AJG"){r._preparoBeforeAJG=r.Preparo;r.Preparo="AJG";}r._preparoAJG=true;
-    } else if(r._preparoAJG){if(r.Preparo==="AJG")r.Preparo=r._preparoBeforeAJG || "Não Verificado";delete r._preparoAJG;delete r._preparoBeforeAJG;}
+      const alvo=dpu ? "Assistência da DPU" : "Justiça gratuita";
+      if(r.Preparo!==alvo){if(!GRATU(r.Preparo))r._preparoBeforeAJG=r.Preparo;r.Preparo=alvo;}r._preparoAJG=true;
+    } else if(r._preparoAJG){if(GRATU(r.Preparo))r.Preparo=r._preparoBeforeAJG || "Não verificado";delete r._preparoAJG;delete r._preparoBeforeAJG;}
   }
   financialChange(r,field,value) {
     if(field==="DPU (controle)"){r._dpuManual=true;r[field]=value ? "Sim" : "";}
     else if(field==="AJG"){if(truthy(r["DPU (controle)"]) && !value)return;r._ajgManual=true;r.AJG=value ? "Sim" : "";}
     else if(field==="Preparo") {
-      if(!DROPDOWNS.Preparo.includes(value) || (truthy(r["DPU (controle)"]) && value!=="AJG"))return;
-      if(value==="AJG" && r.Preparo!=="AJG")r._preparoBeforeAJG=r.Preparo;
-      r._ajgManual=true;r.AJG=value==="AJG" ? "Sim" : "";r.Preparo=value;
-      if(value!=="AJG"){delete r._preparoAJG;delete r._preparoBeforeAJG;}
+      if(!DROPDOWNS.Preparo.includes(value) || (truthy(r["DPU (controle)"]) && value!=="Assistência da DPU"))return;
+      if(GRATU(value) && !GRATU(r.Preparo))r._preparoBeforeAJG=r.Preparo;
+      r._ajgManual=true;r.AJG=GRATU(value) ? "Sim" : "";r.Preparo=value;
+      if(!GRATU(value)){delete r._preparoAJG;delete r._preparoBeforeAJG;}
     }
     this.syncFinancialControls(r);this.recompute(r);this.saveDeb();this.refresh();
   }
@@ -1428,12 +1475,12 @@ class Component extends DCLogic {
     return result;
   }
   mpfItems(i) {
-    const r=this.rows[i],self=this,enabled=r["Intervenção MPF"]!=="Não" && (truthy(r["Intervenção MPF"]) || ["Com Parecer","Sem Parecer","Não Verificado"].includes(r.MPF) || !!txt(r["MPF - Custos Legis"]));
-    const result=[this.checkControl("Intervenção do MPF",enabled,v=>{r["Intervenção MPF"]=v ? "Sim" : "Não";if(!v){r._mpfPrevious=r.MPF;r.MPF="Não se Aplica";}else r.MPF=["Com Parecer","Sem Parecer","Não Verificado"].includes(r._mpfPrevious) ? r._mpfPrevious : "Não Verificado";self.recompute(r);self.saveDeb();self.refresh();})];
+    const r=this.rows[i],self=this,enabled=r["Intervenção MPF"]!=="Não" && (truthy(r["Intervenção MPF"]) || ["regular","pendente"].includes(vocC("parecer",r.MPF)) || !!txt(r["MPF - Custos Legis"]));
+    const result=[this.checkControl("Intervenção do MPF",enabled,v=>{r["Intervenção MPF"]=v ? "Sim" : "Não";if(!v){r._mpfPrevious=r.MPF;r.MPF="Não se aplica";}else r.MPF=["regular","pendente"].includes(vocC("parecer",r._mpfPrevious)) ? r._mpfPrevious : "Não verificado";self.recompute(r);self.saveDeb();self.refresh();})];
     if(enabled) {
       const reasons=[...new Set([...DROPDOWNS["MPF - Custos Legis"],txt(r["MPF - Custos Legis"])])];
-      result.push(this.selectControl("Caso de intervenção",r["MPF - Custos Legis"],reasons,v=>{r["MPF - Custos Legis"]=v;self.recompute(r);self.saveDeb();self.refresh();}),this.selectControl("Parecer",r.MPF,["Não Verificado","Sem Parecer","Com Parecer"],v=>{r.MPF=v;self.recompute(r);self.saveDeb();self.refresh();}));
-      if(r.MPF==="Com Parecer")result.push(this.textControl("ID do parecer",r["ID do Parecer MPF"] || "",v=>{r["ID do Parecer MPF"]=v;self.saveDeb();self.refresh();}));
+      result.push(this.selectControl("Caso de intervenção",r["MPF - Custos Legis"],reasons,v=>{r["MPF - Custos Legis"]=v;self.recompute(r);self.saveDeb();self.refresh();}),this.selectControl("Parecer",r.MPF,DROPDOWNS.MPF.filter(v=>v!=="Não se aplica"),v=>{r.MPF=v;self.recompute(r);self.saveDeb();self.refresh();}));
+      if(vocN("parecer",r.MPF)==="Com parecer")result.push(this.textControl("ID do parecer",r["ID do Parecer MPF"] || "",v=>{r["ID do Parecer MPF"]=v;self.saveDeb();self.refresh();}));
     }return result;
   }
   allegationGroups(r) {
@@ -1561,15 +1608,15 @@ class Component extends DCLogic {
     if(key==="MPF") {
       const items=this.mpfItems(i);
       const reason=items.find(c=>c.label==="Caso de intervenção");if(reason)reason.options=[...new Set([...reason.options.map(o=>o.value),...PRE_MPF_REASONS])].map(v=>({value:v,label:v || "Selecione"}));
-      if(txt(r["MPF - Custos Legis"])==="Outros")items.push(this.textControl("Descreva a hipótese",r["Custos Legis - Outros"] || "",v=>self.preCommit(i,"Custos Legis - Outros",v)));
+      if(["Outros","Outra hipótese"].includes(txt(r["MPF - Custos Legis"])))items.push(this.textControl("Descreva a hipótese",r["Custos Legis - Outros"] || "",v=>self.preCommit(i,"Custos Legis - Outros",v)));
       items.push(this.preArea(i,"Observação MPF","Observação do parecer"));
       return controls("PARECER",items);
     }
     if(key==="Alegações")return part("ALEGAÇÕES",[controls("SENTENÇA",[select("Sentença - Decisão",PRE_SENTENCA,"Decisão"),this.textControl("Honorários da sentença",r["Sentença - Honorários"] || "",v=>self.preCommit(i,"Sentença - Honorários",v))]),this.preAllegations(i,"Recurso")]);
     if(key==="Contrarrazões") {
-      if(!r._prePrelimTouched && !truthy(r["Prelim."]) && String(r.Alegações || "").split("\n").some(v=>v.startsWith("Contrarrazões — ") && !v.includes("Pedido de desprovimento · Defesa do mérito")))r["Prelim."]="Sim";
-      const absent=truthy(r["Contrarrazões Ausentes"]),prelim=truthy(r["Prelim."]),groups=this.allegationGroups(r).filter(g=>g.title.startsWith("Contrarrazões · "));
-      const flags=controls("CONTRARRAZÕES",[this.checkControl("Não tem contrarrazões",absent,v=>self.preCommit(i,"Contrarrazões Ausentes",v ? "Sim" : "")),...(!absent ? [this.checkControl("Há preliminar",prelim,v=>self.preCommit(i,"Prelim.",v ? "Sim" : ""))] : [])]);
+      if(!r._prePrelimTouched && !temPrelim(r["Prelim."]) && String(r.Alegações || "").split("\n").some(v=>v.startsWith("Contrarrazões — ") && !v.includes("Pedido de desprovimento · Defesa do mérito")))r["Prelim."]="Há preliminares";
+      const absent=truthy(r["Contrarrazões Ausentes"]),prelim=temPrelim(r["Prelim."]),groups=this.allegationGroups(r).filter(g=>g.title.startsWith("Contrarrazões · "));
+      const flags=controls("CONTRARRAZÕES",[this.checkControl("Não tem contrarrazões",absent,v=>self.preCommit(i,"Contrarrazões Ausentes",v ? "Sim" : "")),...(!absent ? [this.checkControl("Há preliminar",prelim,v=>self.preCommit(i,"Prelim.",v ? "Há preliminares" : "Sem preliminares"))] : [])]);
       const aleg=(col,items,manualCol)=>({col,kind:"allegations",auto:"scoped",tags:items,value:String(r.Alegações || "").split("\n").filter(v=>items.some(g=>v.startsWith("Contrarrazões — "+g.title.split(" · ").slice(1).join(" · ")+" — "))).join("\n"),manual:r[manualCol] || "",onManual:v=>self.preCommit(i,manualCol,v)});
       const parts=[flags];
       if(!absent){if(prelim)parts.push(aleg("TESES PRELIMINARES",groups.filter(g=>!g.title.includes("Pedido de desprovimento")),"Descrição da Preliminar"));parts.push(aleg("DEFESA DO MÉRITO",groups.filter(g=>g.title.includes("Pedido de desprovimento")),"Descrição das Contrarrazões"));}
@@ -1594,7 +1641,7 @@ class Component extends DCLogic {
   preDraft(i,type) {
     const r=this.rows[i],v=c=>txt(r[c]),selected=String(r.Alegações || "").split("\n").filter(Boolean),labels=scope=>selected.filter(x=>x.startsWith(scope+" — ")).map(x=>x.split(" — ").pop()).join("; ");
     let draft;
-    if(type==="rel")draft=["RELATÓRIO",`Processo ${v("Processo")}.`,v("Partes") ? `Partes: ${v("Partes")}.` : "",v("Sentença - Decisão") ? `A sentença julgou a demanda ${v("Sentença - Decisão").toLowerCase()}${v("Sentença - Honorários") ? ", com honorários: "+v("Sentença - Honorários") : ""}.` : "[Informar a decisão recorrida e o ID da sentença.]",labels("Recurso") ? "A parte recorrente alegou: "+labels("Recurso")+"." : "",v("Descrição das Alegações"),truthy(r["Contrarrazões Ausentes"]) ? "Não foram apresentadas contrarrazões." : [labels("Contrarrazões") ? "Em contrarrazões, foram alegados: "+labels("Contrarrazões")+"." : "",v("Descrição da Preliminar"),v("Descrição das Contrarrazões")].filter(Boolean).join("\n"),r.MPF==="Com Parecer" ? "Houve parecer do Ministério Público Federal"+(v("ID do Parecer MPF") ? " (ID "+v("ID do Parecer MPF")+")" : "")+"." : r.MPF==="Sem Parecer" ? "Não consta parecer do Ministério Público Federal." : "","É o relatório."].filter(Boolean).join("\n\n");
+    if(type==="rel")draft=["RELATÓRIO",`Processo ${v("Processo")}.`,v("Partes") ? `Partes: ${v("Partes")}.` : "",v("Sentença - Decisão") ? `A sentença julgou a demanda ${v("Sentença - Decisão").toLowerCase()}${v("Sentença - Honorários") ? ", com honorários: "+v("Sentença - Honorários") : ""}.` : "[Informar a decisão recorrida e o ID da sentença.]",labels("Recurso") ? "A parte recorrente alegou: "+labels("Recurso")+"." : "",v("Descrição das Alegações"),truthy(r["Contrarrazões Ausentes"]) ? "Não foram apresentadas contrarrazões." : [labels("Contrarrazões") ? "Em contrarrazões, foram alegados: "+labels("Contrarrazões")+"." : "",v("Descrição da Preliminar"),v("Descrição das Contrarrazões")].filter(Boolean).join("\n"),vocN("parecer",r.MPF)==="Com parecer" ? "Houve parecer do Ministério Público Federal"+(v("ID do Parecer MPF") ? " (ID "+v("ID do Parecer MPF")+")" : "")+"." : ["Aguardando parecer","Vista a abrir"].includes(vocN("parecer",r.MPF)) ? "Não consta parecer do Ministério Público Federal." : "","É o relatório."].filter(Boolean).join("\n\n");
     else draft=[v("Assunto"),v("Tema"),labels("Recurso"),v("Tópico-síntese"),v("Voto - Resultado"),v("Voto - Honorários")].filter(Boolean).map(x=>x.replace(/\.$/,"").toLocaleUpperCase("pt-BR")).join(". ")+".";
     this.setState({preDraftOpen:true,preDraftTitle:type==="rel" ? "Rascunho de relatório" : "Rascunho de subementa",preDraftText:draft});
   }
@@ -1630,7 +1677,7 @@ class Component extends DCLogic {
     const text=(label,field)=>this.textControl(label,r[field] || "",v=>self.preCommit(i,field,v));
     const media=this.cell(i,"Mídias");
     const mediaItems=[this.selectControl("Mídias",media.value,media.options.map(o=>o.value),v=>media.onSelect(v))];
-    if(r.Mídias==="Faltante")mediaItems.push(area("Mídias necessárias","Mídias Necessárias"));
+    if(vocN("midias",r.Mídias)==="Faltantes")mediaItems.push(area("Mídias necessárias","Mídias Necessárias"));
     const memorial=[this.checkControl("Memoriais",truthy(r.Memoriais),v=>self.preCommit(i,"Memoriais",v ? "Sim" : ""))];
     if(truthy(r.Memoriais))memorial.push(text("De quem","Memoriais - Parte"),text("ID","Memoriais - ID"),area("Descrição","Memoriais - Descrição",true));
     const others=[this.checkControl("Outros",truthy(r["Outros Documentos"]),v=>self.preCommit(i,"Outros Documentos",v ? "Sim" : ""))];
@@ -1675,21 +1722,22 @@ class Component extends DCLogic {
   regularityNotes(r) {
     const n = [];
     if (r["Tempestividade"] === "Intempestivo") n.push("Intempestividade identificada.");
-    if (r["Preparo"] === "Não Recolhido") n.push("Preparo não recolhido.");
-    if (r["Representação"] === "Negativo") n.push("Representação negativa.");
+    if (vocC("preparo", r["Preparo"]) === "irregular") n.push("Preparo não recolhido.");
+    else if (vocC("preparo", r["Preparo"]) === "pendente" && vocN("preparo", r["Preparo"]) !== "Não verificado") n.push("Preparo a regularizar: " + vocN("preparo", r["Preparo"]).toLowerCase() + ".");
+    if (vocC("repres", r["Representação"]) === "irregular") n.push("Representação irregular: intimar.");
     if (!txt(r["Representação"])) n.push("Representação não informada.");
-    if (r["Representação"] === "Não Verificado") n.push("Representação ainda não verificada.");
-    if (r["Mídias"] === "Faltante") n.push("Mídia faltante.");
-    if (r["MPF"] === "Sem Parecer") n.push("MPF sem parecer.");
+    if (vocN("repres", r["Representação"]) === "Não verificado") n.push("Representação ainda não verificada.");
+    if (vocN("midias", r["Mídias"]) === "Faltantes") n.push("Mídia faltante.");
+    if (["Aguardando parecer","Vista a abrir"].includes(vocN("parecer", r["MPF"]))) n.push("MPF sem parecer.");
     return n.join(" ");
   }
   syncDemandTags(r) {
     if (r["Tempestividade"] === "Intempestivo") this.ensureOpTag(r, "ANALISAR INTEMPESTIVIDADE");
-    if (r["Preparo"] === "Não Recolhido") this.ensureOpTag(r, "REGULARIZAR PREPARO");
-    if (r["Representação"] === "Negativo") this.ensureOpTag(r, "REGULARIZAR REPRESENTAÇÃO");
-    if (!txt(r["Representação"]) || r["Representação"] === "Não Verificado") this.ensureOpTag(r, "VERIFICAR REPRESENTAÇÃO");
-    if (r["Mídias"] === "Faltante") this.ensureOpTag(r, "JUNTAR MÍDIA");
-    if (r["MPF"] === "Sem Parecer") this.ensureOpTag(r, "INTIMAR MPF");
+    if (vocC("preparo", r["Preparo"]) === "irregular" || (vocC("preparo", r["Preparo"]) === "pendente" && vocN("preparo", r["Preparo"]) !== "Não verificado")) this.ensureOpTag(r, "REGULARIZAR PREPARO");
+    if (vocC("repres", r["Representação"]) === "irregular") this.ensureOpTag(r, "REGULARIZAR REPRESENTAÇÃO");
+    if (!txt(r["Representação"]) || vocN("repres", r["Representação"]) === "Não verificado") this.ensureOpTag(r, "VERIFICAR REPRESENTAÇÃO");
+    if (vocN("midias", r["Mídias"]) === "Faltantes") this.ensureOpTag(r, "JUNTAR MÍDIA");
+    if (["Aguardando parecer","Vista a abrir"].includes(vocN("parecer", r["MPF"]))) this.ensureOpTag(r, "INTIMAR MPF");
   }
   recompute(r) { this.syncFinancialControls(r);r["Regularidade"] = this.regularityNotes(r); this.syncDemandTags(r); this.routeSpecialTags(r); r["Seção Competente"] = this.secaoCompetente(r); r["Ramo"] = this.ramoAssunto(r); r._prontoParaCorrecao=!!workflowDate(r.MINUTADO); this.syncJudgment(r); }
   ramoAssunto(r) {
@@ -1736,9 +1784,9 @@ class Component extends DCLogic {
     if (!txt(o["Assunto"]) && txt(o["assunto_judicial"])) o["Assunto"] = o["assunto_judicial"];
     if (!txt(o["assunto_judicial"]) && txt(o["Assunto"])) o["assunto_judicial"] = o["Assunto"];
     if (!txt(o["Status de Julgamento"])) o["Status de Julgamento"] = "PENDENTE";
-    ["Representação","Preparo","Tempestividade"].forEach(k => { if (!txt(o[k])) o[k] = "Não Verificado"; });
-    if (!txt(o["Mídias"])) o["Mídias"] = "Não se Aplica";
-    if (!txt(o["MPF"])) o["MPF"] = "Não se Aplica";
+    ["Representação","Preparo","Tempestividade"].forEach(k => { if (!txt(o[k])) o[k] = "Não verificado"; });
+    if (!txt(o["Mídias"])) o["Mídias"] = "Não se aplica";
+    if (!txt(o["MPF"])) o["MPF"] = "Não se aplica";
     o._preOrder = Number(r._preOrder) || Number(o._preOrder) || 0;
     this.recompute(o); return o;
   }
@@ -2629,7 +2677,7 @@ class Component extends DCLogic {
       onText:v => {r["Observações"]=v;self.saveDeb();}
     });
     if(col==="Controladores")return Object.assign(base,{kind:"controls",tags:this.controllerItems(i)});
-    if(col==="MPF")return Object.assign(base,{kind:"controls",tags:this.mpfItems(i),onSelect:v=>{if(!["Não se Aplica","Não Verificado","Sem Parecer","Com Parecer"].includes(v))return;r.MPF=v;r["Intervenção MPF"]=v==="Não se Aplica" ? "Não" : "Sim";self.recompute(r);self.saveDeb();self.refresh();}});
+    if(col==="MPF")return Object.assign(base,{kind:"controls",tags:this.mpfItems(i),onSelect:v=>{if(!DROPDOWNS.MPF.includes(v))return;r.MPF=v;r["Intervenção MPF"]=v==="Não se aplica" ? "Não" : "Sim";self.recompute(r);self.saveDeb();self.refresh();}});
     if(col==="Preparo")return Object.assign(base,{kind:"controls",onSelect:v=>self.financialChange(r,"Preparo",v),tags:[this.checkControl("DPU",truthy(r["DPU (controle)"]),v=>self.financialChange(r,"DPU (controle)",v)),this.checkControl("AJG",truthy(r.AJG),v=>self.financialChange(r,"AJG",v),truthy(r["DPU (controle)"])),this.selectControl("Preparo",r.Preparo,DROPDOWNS.Preparo,v=>self.financialChange(r,"Preparo",v),truthy(r["DPU (controle)"]))]});
     if(["AJG","DPU (controle)"].includes(col))return Object.assign(base,{kind:"check",checked:truthy(r[col]),onCheck:v=>self.financialChange(r,col,v)});
     if(col==="Alegações")return Object.assign(base,{kind:"allegations",tags:this.allegationGroups(r)});
@@ -3503,7 +3551,7 @@ class Component extends DCLogic {
       cols.forEach(c => {
         if(c==="Contrarrazões")o[c]=truthy(r["Contrarrazões Ausentes"]) ? "Não tem" : String(r.Alegações || "").split("\n").filter(v=>v.startsWith("Contrarrazões — ")).join("\n");
         else if(c==="Outras Peças")o[c]=[r.Mídias,r["Mídias Necessárias"],truthy(r.Memoriais) ? ["Memoriais",r["Memoriais - Parte"],r["Memoriais - ID"],r["Memoriais - Descrição"]].filter(Boolean).join(" · ") : "",truthy(r["Outros Documentos"]) ? [r["Outros - Peça"],r["Outros - ID"],r["Outros - Descrição"]].filter(Boolean).join(" · ") : ""].filter(Boolean).join("; ");
-        else if(c==="Controladores")o[c]=[r["Impedimento / Suspeição"],`Tempestividade: ${r.Tempestividade || "Não Verificado"}`,`Preparo: ${r.Preparo || "Não Verificado"}`,`AJG: ${truthy(r.AJG) ? "Sim" : "Não"}`,`DPU: ${truthy(r["DPU (controle)"]) ? "Sim" : "Não"}`].filter(Boolean).join("; ");
+        else if(c==="Controladores")o[c]=[r["Impedimento / Suspeição"],`Tempestividade: ${r.Tempestividade || "Não verificado"}`,`Preparo: ${r.Preparo || "Não verificado"}`,`AJG: ${truthy(r.AJG) ? "Sim" : "Não"}`,`DPU: ${truthy(r["DPU (controle)"]) ? "Sim" : "Não"}`].filter(Boolean).join("; ");
         else if (c === "Etiquetar") o[c] = this.opTags(r).map(t => `${t.name} [${t.status === "autos" ? "NOS AUTOS" : "PENDENTE"}]`).join(", ");
         else if (c === "Regularidade") o[c] = [r["Regularidade"], r["Regularidade Manual"]].filter(Boolean).join(" ");
         else if (fieldKey(c) === "etiquetas" || c === "Etiquetas Originais") o[c] = this.triEtqExport(r, r[c]);
@@ -3851,7 +3899,7 @@ class Component extends DCLogic {
     const etiquetaCounts = new Map();
     items.forEach(({ r }) => String(r["Etiquetas"] || r["etiquetas"] || "").split(/[,;|]+/).map(x => x.trim()).filter(Boolean).forEach(t => etiquetaCounts.set(t, (etiquetaCounts.get(t) || 0) + 1)));
     const byEtiqueta = [...etiquetaCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
-    const withMpf = items.filter(({ r }) => txt(r["MPF"]) && r["MPF"] !== "Não se Aplica").length;
+    const withMpf = items.filter(({ r }) => txt(r["MPF"]) && vocN("parecer", r["MPF"]) !== "Não se aplica").length;
     const withCustosLegis = items.filter(({ r }) => txt(r["MPF - Custos Legis"])).length;
     const byTarefa = this.countBy(items, r => r.tarefa_atual).slice(0, 12);
     const ageInfo = this.ageInfo(items, false);

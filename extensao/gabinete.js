@@ -221,6 +221,8 @@ function getP(o, p) { return p.split('.').reduce(function (a, k) { return a == n
 function setP(o, p, v) { var a = p.split('.'), x = o; for (var i = 0; i < a.length - 1; i++) { if (x[a[i]] == null) x[a[i]] = {}; x = x[a[i]]; } x[a[a.length - 1]] = v; }
 function inv(m) { var o = {}; Object.keys(m).forEach(function (k) { if (!(m[k] in o)) o[m[k]] = k; }); return o; }
 var SIMNAO = { 'Sim': 'Sim', 'Não': 'Não' };
+/* vocabulário único (vocabulario.js): rascunho e ficha usam os mesmos valores; extra converte os valores antigos do rascunho */
+function VM(k, extra) { var o = {}; (typeof VOC !== 'undefined' ? VOC.lista(k) : []).forEach(function (v) { o[v] = v; }); Object.keys(extra || {}).forEach(function (x) { if (!(x in o)) o[x] = extra[x]; }); return o; }
 var RES = { 'Dar provimento': 'Provido', 'Dar parcial provimento': 'Parcialmente provido', 'Negar provimento': 'Desprovido', 'Não conhecer': 'Não conhecido', 'Prejudicado': 'Prejudicado',
   'Rejeitar': 'Rejeitados', 'Acolher sem efeitos infringentes': 'Acolhidos sem efeito infringente', 'Acolher com efeitos infringentes': 'Acolhidos com efeito infringente',
   'Exercer a retratação': 'Retratação exercida', 'Manter o acórdão': 'Acórdão mantido' };
@@ -228,17 +230,17 @@ var HON = { 'Majorar (art. 85, § 11, CPC)': 'Majorados', 'Manter': 'Mantidos', 
 var ESP = { ed: 'Embargos de declaração', agint: 'Agravo interno', jr: 'Juízo de retratação' };
 /* [campo da ficha, caminho no rascunho, mapa rascunho→ficha (opcional), condição (opcional)] */
 var MAPA = [
-  ['triagem.Tempestividade', 'regularidade.tempestividade', { 'Tempestivo': 'Tempestivo', 'Intempestivo': 'Intempestivo', 'Não Verificado': 'Não Verificado' }],
+  ['triagem.Tempestividade', 'regularidade.tempestividade', VM('tempest', { 'Não Verificado': 'Não verificado', 'A conferir': 'Não verificado' })],
   ['triagem.Tempest - Publicação', 'regularidade.intimacao'],
-  ['triagem.Preparo', 'regularidade.preparo', { 'Comprovado': 'Comprovado', 'Dispensado': 'Dispensado', 'Não Recolhido': 'Não Recolhido', 'A conferir': 'Não Verificado', 'Não se Aplica': 'Não se Aplica' }],
+  ['triagem.Preparo', 'regularidade.preparo', VM('preparo', { 'A conferir': 'Não verificado', 'Não Recolhido': 'Não recolhido' })],
   ['triagem.AJG', 'regularidade.ajg', 'bool'],
   ['triagem.DPU (controle)', 'regularidade.dpu', 'bool'],
-  ['triagem.Representação', 'regularidade.representacao', { 'Regular': 'Regular', 'Irregular': 'Negativo', 'A conferir': 'Não Verificado' }],
+  ['triagem.Representação', 'regularidade.representacao', VM('repres', { 'Irregular': 'Irregular – intimar', 'A conferir': 'Não verificado' })],
   ['triagem.ID da Procuração', 'regularidade.procuracaoId'],
-  ['triagem.Mídias', 'regularidade.midias', { 'Juntada': 'Juntada', 'Faltante': 'Faltante', 'Não se aplica': 'Não se Aplica' }],
+  ['triagem.Mídias', 'regularidade.midias', VM('midias', { 'Juntada': 'Juntadas', 'Faltante': 'Faltantes' })],
   ['triagem.Impedimento / Suspeição', 'regularidade.impedimento', { 'Impedimento': 'Impedimento', 'Suspeição': 'Suspeição' }],
-  ['triagem.MPF - Custos Legis', 'regularidade.mpfAtuacao', SIMNAO],
-  ['triagem.MPF', 'regularidade.mpfParecer', { 'Com Parecer': 'Com Parecer', 'Sem Parecer': 'Sem Parecer', 'Não se Aplica': 'Não se Aplica' }],
+  ['triagem.MPF - Custos Legis', 'regularidade.mpfAtuacao', VM('mpf', { 'Não': 'Sem hipótese' })],
+  ['triagem.MPF', 'regularidade.mpfParecer', VM('parecer', { 'Com Parecer': 'Com parecer', 'Sem Parecer': 'Aguardando parecer' })],
   ['triagem.Parecer - Sentido', 'regularidade.mpfSentido', { 'Prosseguimento do feito': 'Prosseguimento do feito', 'Provimento do recurso': 'Provimento do recurso', 'Não provimento do recurso': 'Não provimento do recurso', 'Outro': 'Outro' }],
   ['triagem.ID do Parecer MPF', 'regularidade.mpfId'],
   ['triagem.MPF - Info adicional', 'regularidade.mpfInfo'],
