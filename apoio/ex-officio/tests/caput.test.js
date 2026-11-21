@@ -37,3 +37,10 @@ test('Triagem: aba única com visão geral recolhível, escaninhos como sub-aba 
   assert.ok(page.includes("if (!emE && !F.conj) h += visaoGeral();"));
   assert.ok(page.includes('class="btn ico" id="')&&!page.includes('data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button>'),'Excel e Exportar num botão de ícone');
 });
+
+test('Desempenho e início: motor escondido não redesenha; Chefia é a página inicial; só a Triagem espera o acervo; calendário na Chefia',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),mot=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/index.html'),'utf8');
+  assert.ok(mot.includes('__oculto()')&&mot.includes('this.__sujo = true')&&mot.includes('this.__vigiaVisivel()'),'motor sem redesenho escondido');
+  assert.ok(cap.includes("return 'chefia';\n}")&&cap.includes("if (!PRONTO && (ABA === 'pautas' || naT))"),'Chefia inicial e só a Triagem espera');
+  assert.ok(cap.includes('function calChefia()')&&cap.includes('data-cgcal=')&&cap.includes('data-cgses='),'calendário na Chefia');
+});
