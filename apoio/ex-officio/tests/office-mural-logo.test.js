@@ -421,10 +421,11 @@ test('Mural: aviso em destaque na linha do Foco de hoje; cartões das sessões n
   assert.match(h, /<slot name=\\"alm\\"><\\\/slot><div class=\\"sessions lsess\\" id=\\"sesl\\"[^>]*><\\\/div><section class=\\"panel\\"><h2>Sinalizações em aberto/);
 });
 
-test('Mural: coluna da direita com a altura do calendário, sem rolagem própria; só as sinalizações rolam', () => {
+test('Mural: coluna da direita até a borda de baixo da lista, sem rolagem própria; só as sinalizações rolam', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /\.lado\{position:static!important;max-height:none!important;overflow:visible!important/);
   assert.match(h, /\.lado #sgl\{flex:1 1 auto;min-height:0;max-height:none!important;overflow-y:auto\}/);
-  assert.match(h, /lado\.style\.height=window\.matchMedia\('\(max-width:1180px\)'\)\.matches\?'':cal\.offsetHeight\+'px'/);
+  assert.match(h, /overflow:visible!important;display:flex;flex-direction:column;align-self:stretch!important\}/);
+  assert.match(h, /#mu-host>#mu-alm>\.cc-esq\{display:block!important;position:static!important;top:auto!important;margin:0!important/);
 });
