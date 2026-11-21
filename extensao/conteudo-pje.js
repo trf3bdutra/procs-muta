@@ -19,7 +19,7 @@
      documento (GET, com a sessão de quem está logado); HTML vira texto, PDF segue para o painel extrair o texto. Só leitura. */
 (function () {
   'use strict';
-  var VERSAO = '0.12';
+  var VERSAO = '0.18';
   if (window.__mutaPje === VERSAO) return;
   window.__mutaPje = VERSAO;
 
@@ -175,6 +175,24 @@
     }
     try { return el.ownerDocument.defaultView.getComputedStyle(el).fontStyle === 'italic'; } catch (x) { return false; }
   }
+  /* HTML leve do bloco: o texto com <b>, <i> e <u> onde houver (pela marca ou pelo estilo calculado); nada mais */
+  function escH(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function leve(el, depth) {
+    var out = '', view = el.ownerDocument && el.ownerDocument.defaultView;
+    Array.prototype.forEach.call(el.childNodes, function (n) {
+      if (n.nodeType === 3) { out += escH(n.nodeValue.replace(/[ \t\u00a0]+/g, ' ')); return; }
+      if (n.nodeType !== 1 || /^(SCRIPT|STYLE)$/.test(n.tagName)) return;
+      if (n.tagName === 'BR') { out += '<br>'; return; }
+      var inner = depth > 12 ? escH(n.textContent || '') : leve(n, (depth || 0) + 1); if (!inner) return;
+      var cs = null, cp = null; try { cs = view.getComputedStyle(n); cp = view.getComputedStyle(n.parentNode); } catch (e) {}
+      var b = /^(B|STRONG)$/.test(n.tagName) || (cs && cp && parseInt(cs.fontWeight, 10) >= 600 && parseInt(cp.fontWeight, 10) < 600);
+      var i = /^(I|EM)$/.test(n.tagName) || (cs && cp && cs.fontStyle === 'italic' && cp.fontStyle !== 'italic');
+      var u = n.tagName === 'U' || (cs && cp && /underline/.test(cs.textDecorationLine || '') && !/underline/.test(cp.textDecorationLine || ''));
+      if (u) inner = '<u>' + inner + '</u>'; if (i) inner = '<i>' + inner + '</i>'; if (b) inner = '<b>' + inner + '</b>';
+      out += inner;
+    });
+    return out;
+  }
   function paragrafos(raiz) {
     var lista = [], vistos = 0;
     var blocos = raiz.querySelectorAll(BLOCOS);
@@ -188,7 +206,7 @@
       lista.push({
         t: t, tag: b.tagName.toLowerCase(), cls: String(b.className || '').slice(0, 120),
         recuo: cs ? parseFloat(cs.textIndent) || 0 : 0, alinha: cs ? cs.textAlign : '',
-        neg: proporcao(b, negrito), ita: proporcao(b, italico),
+        neg: proporcao(b, negrito), ita: proporcao(b, italico), h: (function () { try { var x = leve(b, 0).trim(); return /<(b|i|u)>/.test(x) ? x.slice(0, 20000) : ''; } catch (e) { return ''; } })(),
         cita: !!(b.closest && b.closest('blockquote')) || /cita/i.test(String(b.className || ''))
       });
     });
@@ -336,13 +354,15 @@
           }
           var h = new TextDecoder('utf-8').decode(b), x = new DOMParser().parseFromString(h, 'text/html');
           x.querySelectorAll('script,style').forEach(function (e) { e.remove(); });
-          var ps = [];
+          var ps = [], hs = [], marcado = false;
           Array.prototype.forEach.call(x.body ? x.body.querySelectorAll('p,li,h1,h2,h3,h4,td,div') : [], function (e) {
             if (e.querySelector('p,li,h1,h2,h3,h4,td,div')) return;
-            var t = (e.textContent || '').replace(/[ \t\u00a0]+/g, ' ').trim(); if (t) ps.push(t);
+            var t = (e.textContent || '').replace(/[ \t\u00a0]+/g, ' ').trim(); if (!t) return; ps.push(t);
+            /* documento fora da página: o estilo calculado não existe; valem as marcas b/strong/i/em/u */
+            var hh = ''; try { hh = leve(e, 0).trim(); } catch (er) {} if (/<(b|i|u)>/.test(hh)) marcado = true; hs.push(hh || escH(t));
           });
           var texto = ps.length ? ps.join('\n') : (x.body ? x.body.textContent : h).replace(/[ \t]+/g, ' ').replace(/\n\s*\n+/g, '\n').trim();
-          responder({ fmt: 'html', texto: texto, bytes: b.byteLength, url: url });
+          responder({ fmt: 'html', texto: texto, html: marcado ? hs : null, bytes: b.byteLength, url: url });
         });
       }).catch(function (e) { responder({ erro: String(e && e.message || e), url: url }); });
       return true;

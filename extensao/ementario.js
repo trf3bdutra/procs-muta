@@ -334,7 +334,10 @@ function detalhe(x, d) {
     [['Assunto', x.ass], ['Tipo de caso', x.tc], ['Temas', x.temas], ['Tese', x.tese]].forEach(function (p) { if (p[1]) { var r = el('p'); r.append(el('b', null, p[0] + ': '), document.createTextNode(p[1])); cat.append(r); } });
     if (cat.childNodes.length) d.append(cat);
   }
-  d.append(el('p', 'tag', 'Ementa'), el('pre', null, x.e || 'Sem ementa no índice.'));
+  /* ementa justificada; o cabeçalho em caixa alta (ramo, classe, assunto, conclusão) em negrito, como no acórdão */
+  var emd = el('div', 'tx-j ementa'), et = String(x.e || 'Sem ementa no índice.'), mc = /^([^a-zà-ú]{12,}[.:])\s/.exec(et); if (mc) { var cab = mc[1].replace(/\s+(\d+|[IVX]+)\.$/, ''); mc = [cab, cab]; }
+  emd.innerHTML = (mc ? '<p><b>' + esc(mc[1]) + '</b> ' + esc(et.slice(mc[0].length)).replace(/\n+/g, '</p><p>') + '</p>' : '<p>' + esc(et).replace(/\n+/g, '</p><p>') + '</p>');
+  d.append(el('p', 'tag', 'Ementa'), emd);
   if (x.r) d.append(el('p', 'tag', 'Resultado'), el('pre', 'res', x.r));
   var itBox = el('div');
   if (x.it || x.sid || x.cur) {
@@ -343,8 +346,8 @@ function detalhe(x, d) {
       bi.disabled = true; bi.textContent = 'Abrindo o inteiro teor…';
       inteiroTeor(x).then(function (t) {
         itBox.replaceChildren(el('p', 'tag', 'Inteiro teor'));
-        var pre = el('pre', 'it');
-        if (t && V.ft && V.ft.P) { var h = t; pre.innerHTML = destacar(h, V.ft.P); } else if (t && V.qp) pre.innerHTML = destacar(t, V.qp); else pre.textContent = t || 'Inteiro teor indisponível na base; consulte a fonte no TRF-3.';
+        var pre = el('div', 'tx-j it'), pz = function (h) { return '<p>' + h.replace(/\n+/g, '</p><p>') + '</p>'; };
+        if (t && V.ft && V.ft.P) pre.innerHTML = pz(destacar(t, V.ft.P)); else if (t && V.qp) pre.innerHTML = pz(destacar(t, V.qp)); else pre.innerHTML = pz(esc(t || 'Inteiro teor indisponível na base; consulte a fonte no TRF-3.'));
         itBox.append(pre);
         var m = pre.querySelector('mark'); if (m) m.scrollIntoView({ block: 'center' });
       });

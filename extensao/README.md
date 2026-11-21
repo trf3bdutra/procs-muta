@@ -3,6 +3,16 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.18
+
+- **Textos justificados** (com hifenização em português) no texto do editor, no texto dos documentos dos autos, nas
+  ementas e inteiros teores do Ementário, nos parágrafos-padrão e nas diretrizes.
+- **Negrito, itálico e sublinhado onde houver:** o leitor do PJe (`conteudo-pje.js`, `leve()`) guarda, de cada parágrafo do
+  editor e dos documentos HTML dos autos, uma versão só com `<b>`, `<i>` e `<u>` (pela marca ou pelo estilo calculado);
+  o painel mostra essa versão. Recuo de citação e centralização do editor também. No Ementário, o cabeçalho em caixa alta
+  da ementa sai em negrito, como no acórdão. PDF lido por pdf.js ou OCR continua sem formatação.
+- Recarregue a aba do PJe depois de atualizar (o leitor mudou).
+
 ## O que muda na 0.17
 
 - **Prontuário com três modos: Processo · Autos · Roteiro.** A aba Produção saiu (revisão, pauta e julgamento, revisão do

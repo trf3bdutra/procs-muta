@@ -93,7 +93,11 @@ function editorCaixa(E, n, P) {
     '<button type="button" class="btn line sm" data-c="col-env"' + (E.texto ? '' : ' disabled') + ' title="Grava o texto do editor como nova versão da minuta do processo no lote">Mandar ao Collectio</button>' +
     '<label class="cx-sel">Parte <select data-c="parteEd">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select></label></div>' +
     (E.erro ? '<p class="status err">' + esc(E.erro) + '</p>' : '') + aviso +
-    (C.edAberto ? '<div class="mn-tx">' + (ps.length ? ps.map(function (t) { return '<p>' + esc(t) + '</p>'; }).join('') : '<p class="muted">Abra a tarefa da minuta no PJe e clique em Ler o editor.</p>') + '</div>' +
+    (C.edAberto ? '<div class="mn-tx tx-j">' + (ps.length ? (E.paragrafos || []).filter(function (p) { return p.t; }).map(function (p) {
+      /* negrito e itálico do editor: o trecho marcado quando o leitor trouxe; senão, o parágrafo todo quando quase todo marcado */
+      var h = p.h ? String(p.h).replace(/<(?!\/?(b|i|u)>|br>)[^>]*>/g, '') : esc(p.t);
+      if (!p.h && p.neg > 0.8) h = '<b>' + h + '</b>'; if (!p.h && p.ita > 0.8) h = '<i>' + h + '</i>';
+      return '<p' + (p.cita ? ' class="cita"' : p.recuo > 20 ? ' class="rec"' : /center/.test(p.alinha || '') ? ' class="cen"' : '') + '>' + h + '</p>'; }).join('') : '<p class="muted">Abra a tarefa da minuta no PJe e clique em Ler o editor.</p>') + '</div>' +
       '<details class="cp-colar"' + (E.colado ? ' open' : '') + '><summary>Colar o texto em vez de ler</summary><textarea data-c="colarEd" placeholder="Cole aqui a minuta do editor do PJe">' + (E.colado ? esc(E.texto) : '') + '</textarea></details>' : '') +
     '</section>';
 }

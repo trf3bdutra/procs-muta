@@ -96,6 +96,8 @@ function b64bytes(b64) { var s = atob(b64), u = new Uint8Array(s.length); for (v
 /* texto do PDF: camada de texto de cada página; a página sem texto (digitalizada) vai ao OCR local (ocr.js).
    modo 'ocr' passa todas as páginas pelo OCR (camada de texto ruim ou ausente). */
 var OCR_MAX = 30;
+/* só deixa passar <b>, <i>, <u> e <br> do HTML leve que o leitor do PJe monta */
+function limpaH(h) { return String(h || '').replace(/<(?!\/?(b|i|u)>|br>)[^>]*>/g, ''); }
 var SVGDL = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> ';
 function semTexto(t) { return S(t).replace(/\s/g, '').length < 25; }
 function textoPdf(b64, max, modo, aviso) {
@@ -130,10 +132,10 @@ function extrair(id, modo) {
   var aviso = function (f, t) { var x = A.docs[id]; if (x && x.estado === 'lendo') { x.prog = 'OCR ' + f + '/' + t; redesenhar(); } };
   return window.MutaPje.lerDocumento(A.idp, id).then(function (r) {
     if (r.fmt === 'pdf') return textoPdf(r.b64, doc && PRINC[doc.k] ? 60 : 25, modo, aviso).then(function (t) { return { fmt: 'pdf', texto: t.texto, pags: t.pags, lidas: t.lidas, ocr: t.ocr, url: r.url }; });
-    return { fmt: 'html', texto: r.texto, pags: 0, url: r.url };
+    return { fmt: 'html', texto: r.texto, html: r.html || null, pags: 0, url: r.url };
   }).then(function (x) {
     var sem = S(x.texto).replace(/\s/g, '').length < 40;
-    A.docs[id] = { estado: sem ? 'sem' : 'ok', modo: modo || '', texto: S(x.texto), fmt: x.fmt, pags: x.pags, lidas: x.lidas, ocr: x.ocr || 0, url: x.url };
+    A.docs[id] = { estado: sem ? 'sem' : 'ok', modo: modo || '', texto: S(x.texto), html: x.html || null, fmt: x.fmt, pags: x.pags, lidas: x.lidas, ocr: x.ocr || 0, url: x.url };
     A.sug = null; redesenhar(); return A.docs[id];
   }, function (e) { A.docs[id] = { estado: 'erro', erro: e.message }; redesenhar(); return A.docs[id]; });
 }
@@ -387,7 +389,7 @@ function htmlDocs() {
         '<button type="button" class="btn line sm" data-au="ocr:' + esc(d.id) + '"' + (dd && dd.estado === 'lendo' ? ' disabled' : '') + ' title="Lê o documento por OCR, página por página (PDF digitalizado ou com texto ruim). Roda no computador; nada sai dele">OCR</button>' +
         '<button type="button" class="btn line sm" data-au="js:' + esc(d.id) + '" title="Baixa esta peça em JSON (lê o texto antes, se preciso)">JSON</button>' +
         '<button type="button" class="btn line sm au-pdf" data-au="pdf:' + esc(d.id) + '" title="Abre o PDF no PJe, numa aba nova" aria-label="Abrir o PDF no PJe">↗</button>' + estadoDoc(d.id) + '</div>' +
-        (ab && dd && dd.texto ? '<div class="au-tx"><div class="bar"><button type="button" class="lnk" data-au="cp:' + esc(d.id) + '">Copiar o texto</button><small class="muted">' + (dd.fmt === 'pdf' ? dd.pags + ' página(s)' + (dd.lidas < dd.pags ? ', lidas ' + dd.lidas : '') : 'HTML') + '</small></div><pre>' + esc(dd.texto.slice(0, 60000)) + '</pre></div>' : '') +
+        (ab && dd && dd.texto ? '<div class="au-tx"><div class="bar"><button type="button" class="lnk" data-au="cp:' + esc(d.id) + '">Copiar o texto</button><small class="muted">' + (dd.fmt === 'pdf' ? dd.pags + ' página(s)' + (dd.lidas < dd.pags ? ', lidas ' + dd.lidas : '') : 'HTML') + '</small></div>' + (dd.html ? '<div class="tx-j">' + dd.html.slice(0, 1500).map(function (h) { return '<p>' + limpaH(h) + '</p>'; }).join('') + '</div>' : '<div class="tx-j">' + esc(dd.texto.slice(0, 60000)).split(/\n+/).map(function (l) { return '<p>' + l + '</p>'; }).join('') + '</div>') + '</div>' : '') +
         (ab && dd && dd.estado === 'sem' ? '<p class="status err au-tx">Sem texto legível, nem pelo OCR' + (dd.pags > OCR_MAX ? ' (o OCR lê até ' + OCR_MAX + ' páginas)' : '') + ': abra o PDF (↗).</p>' : '') + '</div>';
     }).join('') + '</div></section>';
   return h;

@@ -1125,3 +1125,12 @@ html[data-tema=escuro] .tu-st.ok::before{color:#6eba8a}html[data-tema=escuro] .t
 .tb-l li{padding:5px 8px;border:1px solid var(--line);border-radius:7px;background:var(--soft);font-size:12px;line-height:1.35}
 .tb-l li b{font-weight:600}.tb-l li small{display:block;font-size:11px;color:var(--muted-fg);margin-top:1px}
 .pecas .gr{grid-template-columns:1fr 1fr!important;gap:6px 8px}
+
+/* ===== 0.18 · textos justificados, com negrito e itálico onde houver ===== */
+.tx-j p,.pp-t,.ej p,.prec-l p,.dr-i p,.au-tx p,.mn-tx p{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.tx-j p{margin:0 0 .55em;font-size:12.5px;line-height:1.55}
+.tx-j p.rec{text-indent:2.5em}.tx-j p.cita{margin-left:2.5em;font-size:12px}.tx-j p.cen{text-align:center}
+.tx-j b{font-weight:700}.tx-j i{font-style:italic}
+.ej-d .tx-j.ementa p{font:13px/1.6 var(--serif)}
+.au-tx .tx-j{max-height:420px;overflow:auto;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card2);margin-top:4px}
+.mn-tx.tx-j{max-height:360px;overflow:auto}

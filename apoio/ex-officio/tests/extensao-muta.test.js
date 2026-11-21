@@ -161,3 +161,9 @@ test('extensão 0.16.5: dicas em todos os botões e campos; precedentes no Ement
   assert.ok(html.includes('id="acv-modo-rel"') && html.includes('class="acv-faixa"'));
   assert.match(gab, /function dicaCampo\(c\)/); assert.match(d, /MutationObserver/);
 });
+
+test('extensão 0.18: leitor do PJe guarda negrito, itálico e sublinhado; textos justificados', () => {
+  const c = read('extensao/conteudo-pje.js'), css = read('extensao/painel.css');
+  assert.match(c, /function leve\(el, depth\)/); assert.match(c, /html: marcado \? hs : null/);
+  assert.match(css, /\.tx-j p[^{]*\{text-align:justify;hyphens:auto/);
+});
