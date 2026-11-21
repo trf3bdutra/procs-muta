@@ -146,7 +146,7 @@ function agrupar(lote) {
 
 /* Índices de pauta: projeção da sessão, sem copiar ou modificar os processos.
    Grupos por assunto são o agrupamento inicial para casos/modelos correlatos. */
-function tipoLote(l) { if (l.tipo === 'triagem') return 'triagem'; return l.tipo === 'pauta' && (l.sessoes || []).length === 1 ? 'pauta' : 'avulso'; }
+function tipoLote(l) { if (l.tipo === 'triagem') return 'triagem'; if (l.tipo === 'selecao') return 'selecao'; return l.tipo === 'pauta' && (l.sessoes || []).length === 1 ? 'pauta' : 'avulso'; }
 function idPauta(s) { return 'pauta-' + s; }
 function rotuloAssunto(x) {
   return String(x.assunto || x.classe || 'Sem assunto informado').trim().replace(/\s+/g,' ').slice(0,130);
@@ -255,10 +255,11 @@ module.exports = async (req, res) => {
       const lotes = [];
       for (const f of (Array.isArray(lista) ? lista : []).filter(f => /^[a-z0-9-]+\.json$/i.test(f.name))) {
         const { dados } = await lerLote('acervo/lotes/' + f.name).catch(nada);
-        if (!dados || !loteVe(dados)) continue;
+        if (!dados || (dados.schema && dados.schema !== 'gabcmt.lote') || !loteVe(dados)) continue; /* colecoes.json é o índice, não lote */
+        if (dados.arquivado && modo !== 'cg') continue; /* seleção prévia arquivada: a sessão já tem pauta oficial */
         if (modo !== 'cg') await anotar(dados, M);
-        lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, tipo:tipoLote(dados), sessao:tipoLote(dados)==='pauta'?dados.sessoes[0]:null,
-          sessoes: dados.sessoes, tarefa: dados.tarefa || null, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
+        lotes.push({ id: dados.id, titulo: dados.titulo, descricao: dados.descricao, tipo:tipoLote(dados), sessao:['pauta','selecao'].includes(tipoLote(dados))?dados.sessoes[0]:null,
+          sessoes: dados.sessoes, tarefa: dados.tarefa || null, cor: dados.cor || '', subtitulo: dados.subtitulo || '', escaninho: dados.colecao === 'avulsos', arquivado: !!dados.arquivado, filtro: dados.filtro || null, visivel: modo === 'cg' ? (dados.visivel || {}) : undefined, total: (dados.itens || []).filter(ve).length });
       }
       const agenda = await calendario();
       const sessoes = agenda.filter(s => gestor || s.publicada);
@@ -268,7 +269,7 @@ module.exports = async (req, res) => {
         String(a.titulo).localeCompare(String(b.titulo),'pt-BR'));
       return res.status(200).json({ usuario:u, gestor, relator, modo,
         lotes, sessoes, calendario:modo==='cg'?agenda:[],
-        colecoes:{avulsas:lotes.filter(l=>l.tipo==='avulso'),pauta:{sessoes,lotes:lotes.filter(l=>l.tipo==='pauta')},triagem:lotes.filter(l=>l.tipo==='triagem')} });
+        colecoes:{avulsas:lotes.filter(l=>l.tipo==='avulso'),pauta:{sessoes,lotes:lotes.filter(l=>l.tipo==='pauta')},triagem:lotes.filter(l=>l.tipo==='triagem'),selecao:lotes.filter(l=>l.tipo==='selecao'&&!l.arquivado)} });
     }
     if (!ID.test(id)) return res.status(400).json({ erro: 'lote inválido' });
     const mx = String(q.minuta || '');

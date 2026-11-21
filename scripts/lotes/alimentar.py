@@ -107,6 +107,9 @@ def main(lotes):
             em_pauta[dg(y.get('cnj'))] = sp0
     for lote_id in lotes:
         L = carrega_json(os.path.join(RAIZ, 'acervo/lotes', lote_id + '.json'))
+        # colecoes.json (índice) e lotes arquivados (escaninho apagado, seleção prévia substituída pela pauta) não alimentam
+        if not isinstance(L, dict) or L.get('schema', 'gabcmt.lote') != 'gabcmt.lote' or L.get('arquivado'):
+            continue
         for it in L.get('itens', []):
             cnj = it['processo']
             a = it.get('autos') or {}
@@ -264,6 +267,20 @@ def main(lotes):
         print(os.path.basename(sp), n, 'cartões atualizados')
 
 
+def prioridade(lote_id):
+    """Ordem de alimentação: os campos 'Lote - *' ficam com o lote de maior peso, gravado por último. Seleção prévia e
+    escaninhos (lotes de passagem) vão antes; depois os demais avulsos, a triagem e as pautas."""
+    if lote_id.startswith('selecao-'):
+        return (0, lote_id)
+    if lote_id.startswith('esc-'):
+        return (1, lote_id)
+    try:
+        t = (carrega_json(os.path.join(RAIZ, 'acervo/lotes', lote_id + '.json')) or {}).get('tipo')
+    except Exception:
+        t = None
+    return ({'triagem': 3, 'pauta': 4}.get(t, 2), lote_id)
+
+
 if __name__ == '__main__':
     todos = [os.path.basename(f)[:-5] for f in glob.glob(os.path.join(RAIZ, 'acervo/lotes/*.json'))]
-    main(sys.argv[1:] or todos)
+    main(sys.argv[1:] or sorted(todos, key=prioridade))

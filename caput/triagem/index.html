@@ -1074,7 +1074,7 @@ function pendentes() { return PEND.size + (ESC_V !== ESC_GRAV ? 1 : 0); }
 function pintaGrava() { const b = $('#st-grava'); if (!b) return; const n = pendentes();
   b.classList.toggle('err', !!ERRO && !GRAVANDO); b.classList.toggle('pend', !ERRO && n > 0 && !GRAVANDO); b.classList.toggle('ing', !!GRAVANDO); b.classList.toggle('ok', PRONTO && !GRAVANDO && !ERRO && !n);
   const tx = b.querySelector('span') || b; tx.textContent = !PRONTO ? 'carregando' : GRAVANDO ? 'gravando' : ERRO ? 'erro · tentar (' + n + ')' : n ? n + ' a gravar' : ULT ? 'gravado ' + ULT : 'gravado';
-  b.title = ERRO ? 'Erro: ' + ERRO : 'Grava no procs-muta (acervo/operacional.json e escaninhos)'; }
+  b.title = ERRO ? 'Erro: ' + ERRO : 'Grava no procs-muta (acervo/operacional.json e lotes avulsos do Collectio)'; }
 async function gravar() {
   if (GRAVANDO || !PRONTO) return; const P = PM(); if (!P || !P.gravar) { ERRO = 'motor ainda carregando'; pintaGrava(); return; }
   if (!pendentes()) { pintaGrava(); return; }
@@ -1097,12 +1097,34 @@ async function gravar() {
       arq['acervo/operacional.json'] = JSON.stringify(op, null, 1) + '\n'; msg.push(snap.size + ' destino(s)');
     }
     if (escV !== ESC_GRAV) {
-      let rem = null; try { rem = JSON.parse(await P.ler(ESC_ARQ)); } catch (e) { if (!/HTTP 404/.test(e.message)) throw e; }
-      const ids = new Set(ESC.escaninhos.map((e) => e.id)), apagados = new Set(ESC._apagados || []);
-      ((rem && rem.escaninhos) || []).forEach((e) => { if (!ids.has(e.id) && !apagados.has(e.id)) { e._set = new Set((e.processos || []).map(dg)); ESC.escaninhos.push(e); } });
-      ESC.atualizadoEm = agora;
-      arq[ESC_ARQ] = JSON.stringify({ schema: ESC.schema, versao: 1, atualizadoEm: agora, escaninhos: ESC.escaninhos.map((e) => ({ id: e.id, titulo: e.titulo, subtitulo: e.subtitulo || '', bilhete: e.bilhete || '', cor: e.cor || '#a57829', criadoEm: e.criadoEm || '', atualizadoEm: e.atualizadoEm || '', processos: e.processos })) }, null, 1) + '\n';
-      msg.push('escaninhos');
+      /* cada escaninho é um lote avulso do Collectio: relê o lote, ajusta só a lista de processos (o que já foi registrado
+         em cada processo fica; quem sai vai para lote.retirados) e atualiza o índice das coleções no mesmo commit */
+      let idx = null; try { idx = JSON.parse(await P.ler(ESC_IDX)); } catch (e) { if (!/HTTP 404/.test(e.message)) throw e; }
+      idx = idx || { schema: 'gabcmt.colecoes', versao: 1, colecoes: { pautas: [], triagem: [], avulsos: [], 'selecao-previa': [] } };
+      const av = (idx.colecoes.avulsos = idx.colecoes.avulsos || []), dia = agora.slice(0, 10);
+      const base = (c, n) => { const r = (IDX.get(dg(c)) || {}).row || {}; return { sessao: '', item: n, processo: c, recurso: String(r.Classe || ''), partes: String(r.Partes || ''), exequente: '', executado: '', assunto: String(r.Assunto || ''), assunto_detalhado: '', grupo: null, tipo_caso: String(r.Tema || ''), resultado: '', modelo: '', variacoes: [], observacao: '', peculiaridades: '', peculiaridades_relator: '', orientacao: '', equipe: { minuta: '', correcao: '', situacao: 'A minutar' }, pecas: [], mpf: '', triagem: {}, ajustes: [], pendencias: [], minuta: false }; };
+      for (const e of ESC.escaninhos) {
+        const id = escLote(e.id), rel = 'acervo/lotes/' + id + '.json';
+        let L = null; try { L = JSON.parse(await P.ler(rel)); } catch (x) { if (!/HTTP 404/.test(x.message)) throw x; }
+        L = L || { schema: 'gabcmt.lote', versao: 1, tipo: 'avulso', origem: 'escaninho', id, titulo: '', descricao: '', sessoes: [], filtro: {}, criado_por: 'caput', criado_em: e.criadoEm || agora, colunas: [], grupos: [], grupo_outros: { rotulo: 'A triar', cor: '#9aa0a8' }, minutas: 'acervo/minutas/' + id + '/<processo>.json', itens: [] };
+        const procs = (e.processos || []).map(String), quer = new Set(procs.map(dg));
+        const atual = new Map((L.itens || []).map((i) => [dg(i.processo), i])), ret = new Map((L.retirados || []).map((i) => [dg(i.processo), i]));
+        const sai = (L.itens || []).filter((i) => !quer.has(dg(i.processo)));
+        L.itens = procs.map((c, n) => { const k = dg(c), it = atual.get(k) || ret.get(k) || base(c, n + 1); ret.delete(k); it.item = n + 1; return it; });
+        if (sai.length || ret.size) L.retirados = [...ret.values(), ...sai]; else delete L.retirados;
+        Object.assign(L, { titulo: String(e.titulo || 'Escaninho').slice(0, 80), subtitulo: e.subtitulo || '', bilhete: e.bilhete || '', cor: e.cor || '#a57829', colecao: 'avulsos', atualizado_em: dia }); delete L.arquivado;
+        arq[rel] = JSON.stringify(L, null, 1) + '\n';
+        const ent = { id, titulo: L.titulo, subtitulo: L.subtitulo, cor: L.cor, bilhete: L.bilhete, escaninho: true, n: L.itens.length }, k = av.findIndex((x) => x.id === id);
+        if (k >= 0) av[k] = ent; else av.push(ent);
+      }
+      for (const id0 of (ESC._apagados || [])) { const id = escLote(id0), rel = 'acervo/lotes/' + id + '.json';
+        try { const L = JSON.parse(await P.ler(rel)); Object.assign(L, { arquivado: true, arquivado_em: dia, arquivado_motivo: 'escaninho apagado na triagem do Caput' }); arq[rel] = JSON.stringify(L, null, 1) + '\n'; } catch (x) { if (!/HTTP 404/.test(x.message)) throw x; }
+        const k = av.findIndex((x) => x.id === id); if (k >= 0) av.splice(k, 1); }
+      idx.atualizado_em = agora; arq[ESC_IDX] = JSON.stringify(idx, null, 1) + '\n';
+      /* lido do arquivo antigo: no mesmo commit ele fica marcado como migrado, para não haver duas fontes */
+      if (ESC.fonte !== 'lotes') arq[ESC_ARQ] = JSON.stringify({ schema: 'gabcmt.escaninhos', versao: 2, atualizadoEm: agora, migrado: 'acervo/lotes (coleção Avulsos do Collectio)', lotes: ESC.escaninhos.map((e) => escLote(e.id)), escaninhos: [] }, null, 1) + '\n';
+      ESC.atualizadoEm = agora; ESC.fonte = 'lotes';
+      msg.push('escaninhos (Collectio · Avulsas)');
     }
     await P.gravar(arq, 'Triagem (Ab Initio): ' + msg.join(' e '));
     snap.forEach((ch, d) => { if (PEND.get(d) === ch) PEND.delete(d); });
@@ -1771,7 +1793,7 @@ let PROC_EXP_ABERTO = '';
 function vEscaninho(id) {
   const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return '<div class="wrap vazio">Escaninho não encontrado.</div>';
   const base = BASE(), fora = e.processos.length - base.length, sec = contar(base, (o) => o.secao), pr = base.filter((o) => o.prior).length;
-  const bil = '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete e orientação</p><span><button type="button" class="lk" data-esc-lista="' + esc(e.id) + '">+ Incluir por número</button> · <button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button></span></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem orientação registrada.</p>') + '</div>';
+  const bil = '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete e orientação</p><span><button type="button" class="lk" data-esc-lista="' + esc(e.id) + '">+ Incluir por número</button> · <button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button> · <a class="lk" target="_blank" rel="noopener" title="O escaninho é o lote avulso do Collectio: prontuário, equipe e minutas de cada processo" href="/amicus/collectio/?id=' + encodeURIComponent(escLote(e.id)) + '">Abrir no Collectio ↗</a></span></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem orientação registrada.</p>') + '</div>';
   const h = '<div class="wrap"><div class="esc-resumo" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><div style="flex:1;min-width:180px"><p class="k" style="margin:0">Escaninho · ' + esc(br(String(e.criadoEm || '').slice(0,10)) || '—') + '</p><b style="font-size:19px">' + esc(e.titulo) + '</b><span style="display:block;font-size:12px;color:var(--m)">' + esc(e.subtitulo || '') + '</span></div><b class="mono">' + nf(base.length) + ' processos</b><span style="font-size:12px;color:var(--m)">' + nf(pr) + ' prioritários · ' + nf(fora) + ' fora da triagem</span><button type="button" class="btn sm" data-esc-detalhes aria-expanded="false">Detalhes do escaninho ▾</button></div><div class="esc-detalhes" id="esc-detalhes"><div class="bil"><p class="k">Distribuição por seção</p>' + sec.map((x) => '<p style="margin:4px 0;font-size:12.5px">' + esc(x[0]) + ' <b class="mono">' + nf(x[1]) + '</b></p>').join('') + '</div>' + bil + '</div></div>';
   return vFila(h, ' style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"'); }
 function vEscaninhos() {
@@ -1842,7 +1864,7 @@ function editarEscaninho(id, depois) {
     const t = $('#ge-t').value.trim(); if (!t) { toast('Dê um título ao escaninho.', true); $('#ge-t').focus(); return; }
     const agora = new Date().toISOString();
     if (id) Object.assign(e, { titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, atualizadoEm: agora });
-    else { const ne = { id: 'e' + Date.now().toString(36), titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, criadoEm: agora, atualizadoEm: agora, processos: [], _set: new Set() }; ESC.escaninhos.push(ne); if (depois) depois(ne); }
+    else { const ne = { id: 'esc-e' + Date.now().toString(36), titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, criadoEm: agora, atualizadoEm: agora, processos: [], _set: new Set() }; ESC.escaninhos.push(ne); if (depois) depois(ne); }
     const alvo = id ? e : ESC.escaninhos[ESC.escaninhos.length - 1], r = incluirLista(alvo, $('#ge-l').value);
     ESC_V++; agendar(); fecharGaveta(); render(); toast((id ? 'Escaninho salvo.' : 'Escaninho criado: ' + t + '.') + (r ? ' ' + r : '')); });
   const tl = $('#ge-l', g); if (tl) tl.addEventListener('input', () => { const L = listaCnj(tl.value), M = new Map(U.map((o) => [o.d, o])); const no = L.filter((d) => M.has(d)), ja = no.filter((d) => e._set && e._set.has(d)).length;
@@ -2097,7 +2119,20 @@ D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const tp=docume
 
 /* ===================== arranque ===================== */
 async function lerFonte(msg) { try { if (msg) msg('Lendo a fonte do acervo no procs-muta…'); const j = JSON.parse(await PM().ler('acervo/fonte.json')); if (j && Array.isArray(j.registros)) { FONTE = j.registros; FONTE_EM = j.atualizado_em || ''; } } catch (e) { FONTE = null; toast('Não li a fonte do acervo (' + e.message + '); uso a cópia deste navegador.', true); } }
-async function lerEscaninhos() { const P = PM(); try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; } indexEsc(); }
+/* Escaninhos = coleção Avulsos do Collectio: cada escaninho é o lote acervo/lotes/esc-<id>.json (fonte única), listado em
+   acervo/lotes/colecoes.json. O processo enviado a um escaninho ganha no Collectio o prontuário completo. */
+const ESC_IDX = 'acervo/lotes/colecoes.json';
+const escLote = (id) => (/^esc-/.test(id) ? id : 'esc-' + String(id).toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 36));
+async function lerEscaninhos() { const P = PM(); let ok = false;
+  try { const idx = JSON.parse(await P.ler(ESC_IDX)); const av = (((idx || {}).colecoes || {}).avulsos || []).filter((x) => x.escaninho);
+    const ls = await Promise.all(av.map((x) => P.ler('acervo/lotes/' + x.id + '.json').then((t) => JSON.parse(t)).catch(() => null)));
+    ESC = { schema: 'gabcmt.escaninhos', versao: 2, fonte: 'lotes', atualizadoEm: idx.atualizado_em || '', escaninhos: ls.filter((l) => l && !l.arquivado).map((l) => ({ id: l.id, titulo: l.titulo, subtitulo: l.subtitulo || '', bilhete: l.bilhete || '', cor: l.cor || '#a57829', criadoEm: l.criado_em || '', atualizadoEm: l.atualizado_em || '', processos: (l.itens || []).map((i) => i.processo) })) }; ok = true;
+  } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; }
+  /* antes da migração para os lotes: lê o arquivo antigo (a próxima gravação já vai para os lotes) */
+  if (!ok) try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) { ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); ESC.escaninhos.forEach((e) => { e.id = escLote(e.id); }); if (ESC.escaninhos.length) ESC_V++; } } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; }
+  /* ids antigos (e…) guardados em abas abertas e filtros passam ao id do lote (esc-e…) */
+  ABERTAS = ABERTAS.map(escLote); LS.set('tri_abas', ABERTAS); if (F && F.esc) F.esc = escLote(F.esc); if (RODA && RODA['r-esc']) RODA['r-esc'] = escLote(RODA['r-esc']);
+  indexEsc(); }
 function portaToken() { return new Promise((fim) => {
   const v = D.createElement('div'); v.id = 'porta-tk';
   v.innerHTML = '<form class="pt-c" autocomplete="on"><p class="k" style="margin:0;color:var(--g)">Caput · Gabinete CMT</p><h2>Entrar no Caput<span style="color:var(--g2)">.</span></h2>' +
