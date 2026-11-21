@@ -9742,8 +9742,10 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 
 /* Pautas e Monocráticas · cartão do processo em uma faixa só, também em telas mais estreitas (20/11/2026):
    identificação à esquerda em duas linhas e, à direita, as mesmas duas linhas (sinalizações em cima; responsáveis e etapas embaixo),
-   alinhadas entre si; o bloco da direita não desce mais para baixo do texto. No celular (até 700 px) vale o layout próprio. */
-@media (min-width:701px){
+   alinhadas entre si; o bloco da direita não desce mais para baixo do texto. Vale quando o próprio cartão tem 760 px ou mais
+   (com o prontuário aberto ao lado, ou no celular, o cartão estreito mantém o layout empilhado de antes). */
+#v-pauta.ed .edr.mrw{container-type:inline-size}
+@container (min-width:760px){
 #v-pauta.ed .edr.mrw>.rw{flex-wrap:nowrap!important;align-items:flex-start!important}
 #v-pauta.ed .edr.mrw .ga{flex:1 1 0!important;min-width:0!important;align-items:flex-start!important}
 #v-pauta.ed .edr.mrw .ga>.sel,#v-pauta.ed .edr.mrw .ga>.it{margin-top:6px}
