@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T09:59:39.457Z",
+ "atualizado_em": "2026-11-21T09:59:46.181Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -25651,7 +25651,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.518Z"
+    "atualizado_em": "2026-11-21T09:59:46.181Z"
    },
    "triagem": {
     "Urgência": "",
@@ -25665,43 +25665,44 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Remessa Necessária",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "Isento (ente público/MP)",
+    "Tempestividade": "Não se aplica",
+    "Preparo": "Não se aplica",
     "AJG": "Sim",
     "DPU (controle)": "Sim",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "ACP/ação popular",
+    "ID do Parecer MPF": "400072456",
+    "Parecer - Sentido": "Desprovimento da remessa necessária",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Ato Lesivo ao Patrimônio Artístico, Estético, Histórico ou Turístico",
+    "Tema": "Remessa necessária em ação popular · repasses da União a entidades ligadas ao MST (ANCA e CONCRAB) · desistência do autor e assunção do polo ativo pelo MPF · extinção sem resolução do mérito por inépcia, segundo o parecer [VALIDAR teor da sentença]",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "Cspezami",
-    "Alegações": "",
+    "Alegações": "1) Inépcia da inicial da ação popular (pedidos genéricos; individualização dos atos e agentes); 2) revogação da liminar de suspensão dos repasses.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "",
+    "Especificidades": "Texto da sentença incompleto na extração (conferir no PJe) · MPF autor em primeiro grau · Parecer do MPF de segundo grau pelo desprovimento (ID 400072456) · Feito desmembrado (0003949-40.2009.4.03.6000)",
     "_preparoAJG": true,
     "_preparoBeforeAJG": "Não Verificado",
     "_ajgFromDpu": true,
-    "_dpuAuto": true
+    "_dpuAuto": true,
+    "Síntese Fática": "Fernando José Paes de Barros Gonçalves ajuizou ação popular contra a União e entidades privadas, e agentes públicos, para anular repasses de verbas a entidades que seriam ligadas ao MST e obter ressarcimento. Homologada a desistência do autor, o MPF assumiu o polo ativo."
    },
    "producao": {
     "Destino": "",
@@ -25750,7 +25751,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "0004423-79.2007.4.03.6000",
