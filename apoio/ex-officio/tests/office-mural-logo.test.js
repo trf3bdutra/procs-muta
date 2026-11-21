@@ -107,3 +107,8 @@ test('números da sessão: alertas em botões curtos que levam ao processo', () 
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ['class="kd-it', 'data-ir-k="', "closest('[data-ir-k]')", 'mostrarItemNaPauta(it);});']) assert.ok(app.includes(x), x);
 });
+
+test('buscador rápido sem Enter, processo localizado marcado; Sinalizações em cartão', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ['setTimeout(function(){irPara(true);},380)', 'function achadoLimpa()', "el.classList.add('flash','achado')", 'achadoMarca();prontLateral();', '#v-pauta #lst .pc.achado::before{content:"localizado"', '#prq #ac-sn{background:#fbf6ec']) assert.ok(app.includes(x), x);
+});
