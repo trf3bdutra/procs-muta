@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "26/10/2026",
  "date": "2026-10-26",
- "atualizadoEm": "2026-11-20T21:01:36.457Z",
+ "atualizadoEm": "2026-11-21T10:54:51.129Z",
  "itens": [
   {
    "cnj": "0000008-23.2025.4.03.6000",
@@ -2943,14 +2943,113 @@
    "ctl": {
     "cartao": {
      "tipoJ": "Apelação",
-     "pendencias": []
+     "pendencias": [],
+     "subassuntos": "Apelações do FNDE, da União e do Banco do Brasil e remessa necessária em mandado de segurança · FIES · carência do artigo 6º-B, § 3º, da Lei 10.260/2001 durante residência médica · processo pautado em 26/10/2026 e retirado · etiqueta de sobrestamento pelo Tema 1.417/STJ",
+     "sintese": "Niccole Vasconcelos Maia Gomes, médica com contrato do FIES, pediu a suspensão das prestações durante a residência médica, iniciada em 01/03/2023, com base no artigo 6º-B, § 3º, da Lei 10.260/2001.",
+     "questoes": "1) Carência do FIES durante a residência médica (artigo 6º-B, § 3º, da Lei 10.260/2001) — Tema 1.417/STJ.",
+     "rel": {
+      "razoes": "FNDE (ID 361013802, 27/11/2024): improcedência do pedido de carência [VALIDAR]. União (ID 361013803, 09/12/2024): [VALIDAR fundamentos]. Banco do Brasil (ID 361013807, 23/10/2025): ilegitimidade e papel de agente financeiro [VALIDAR].",
+      "contrarrazoes": "Contrarrazões (IDs 361013811 e 361013812)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "361013791",
+      "juizo": "Mandado de segurança 5006429-12.2023.4.03.6000 (Campo Grande)",
+      "dispositivo": "[VALIDAR dispositivo] reconheceu o direito à carência do artigo 6º-B, § 3º, da Lei 10.260/2001 durante a residência médica [VALIDAR]; embargos do Banco do Brasil decididos em 02/09/2025 (ID 361013805)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica"
+     },
+     "adm": {
+      "prot": "2023-08-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FNDE",
+       "tipo": "Apelação",
+       "id": "361013802",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "361013803",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Banco do Brasil",
+       "tipo": "Apelação",
+       "id": "361013807",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "361013791",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença",
+       "id": "361013791",
+       "data": "2024-09-28"
+      },
+      {
+       "desc": "Apelação do FNDE",
+       "id": "361013802",
+       "data": "2024-11-27"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "361013803",
+       "data": "2024-12-09"
+      },
+      {
+       "desc": "Sentença: embargos do Banco do Brasil",
+       "id": "361013805",
+       "data": "2025-09-02"
+      },
+      {
+       "desc": "Apelação do Banco do Brasil",
+       "id": "361013807",
+       "data": "2025-10-23"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "365668456",
+       "data": "2026-04-10"
+      }
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 361013805 · 02/09/2025 — sentença: rejeitou os embargos de declaração | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 365668456 · 10/04/2026 | última movimentação: 28/10/2026 00:48 · Decorrido prazo de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO em 27/10/2026 23:59. · Retirado de pauta em 26/10/2026 · Etiquetas \"Sobrestar\" e \"Tema 1417 STJ - FIES Carência Residência Médica - Sobrestamento\" · Prazo do FNDE decorrido em 27/10/2026",
+     "assuntoDet": "FIES — carência durante a residência médica (Tema 1.417/STJ)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ],
+     "obsGeral": "Apelações e remessa necessária da sentença em mandado de segurança sobre a carência do FIES durante a residência médica de Niccole Vasconcelos Maia Gomes. O processo foi pautado e retirado em 26/10/2026 e tem etiqueta de sobrestamento pelo Tema 1.417/STJ."
     },
     "lote": {
      "id": "adp-remessas",
      "item": 60,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Index",
+    "tempest": "Não verificado",
+    "preparo": "Não verificado",
+    "prelim": "Sem preliminares",
+    "repres": "Não verificado",
+    "midias": "Não se aplica",
+    "mpf": "Mandado de segurança",
+    "parecer": "Com parecer",
+    "idParecer": "365668456",
+    "parecerSentido": "Prosseguimento do feito, sem intervenção",
+    "resJulg": "Ato a proferir: apelações do FNDE (ID 361013802), da União (ID 361013803) e do Banco do Brasil (ID 361013807) e remessa necessária; contrarrazões (IDs 361013811 e 361013812); pareceres do MPF (IDs 362694842 e 365668456) ‖ Proposta pelos precedentes: Sobrestar até o julgamento do Tema 1.417/STJ [VALIDAR alcance da afetação e se já houve decisão de sobrestamento] [VALIDAR: Dispositivo da sentença; Decisão de sobrestamento já proferida?; Alcance do Tema 1.417/STJ]"
    }
   },
   {
@@ -3584,14 +3683,96 @@
    "ctl": {
     "cartao": {
      "tipoJ": "Apelação",
-     "pendencias": []
+     "pendencias": [],
+     "subassuntos": "Apelação do FNDE e remessa necessária em mandado de segurança · FIES · suspensão das parcelas durante a residência médica (01/03/2024 a 28/02/2026) · liminar deferida · segurança concedida · processo pautado em 26/10/2026 e retirado · etiqueta de sobrestamento pelo Tema 1.417/STJ",
+     "sintese": "Fernanda Moura Rojas, médica com contrato do FIES, obteve liminar (04/07/2025) para suspender as prestações durante a residência médica. A sentença confirmou; o FNDE apelou e, em petição de 08/06/2026, reiterou a ilegitimidade e informou ter comunicado o julgado à CEF.",
+     "questoes": "1) Carência do FIES durante a residência médica (artigo 6º-B, § 3º, da Lei 10.260/2001) — Tema 1.417/STJ; 2) legitimidade do FNDE.",
+     "rel": {
+      "razoes": "FNDE (ID 376994685, 10/05/2026): extinção sem resolução do mérito por ilegitimidade passiva do FNDE; no mérito, ausência do direito à carência [VALIDAR].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 376994692)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "376994683",
+      "juizo": "Mandado de segurança 5009334-53.2024.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para suspender a cobrança das parcelas de amortização do contrato FIES durante toda a residência médica (01/03/2024 a 28/02/2026)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica"
+     },
+     "adm": {
+      "prot": "2024-08-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FNDE",
+       "tipo": "Apelação",
+       "id": "376994685",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "376994683",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "376994669",
+       "data": "2025-07-04"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "376994683",
+       "data": "2026-04-23"
+      },
+      {
+       "desc": "Apelação do FNDE",
+       "id": "376994685",
+       "data": "2026-05-10"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "376994692",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Petição do FNDE na Turma Regional",
+       "id": "379009310",
+       "data": "2026-06-08"
+      }
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 376994683 · 23/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 401370920 · 29/09/2026 | última movimentação: 28/10/2026 00:48 · Decorrido prazo de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO em 27/10/2026 23:59. · Retirado de pauta em 26/10/2026 · Etiquetas \"Sobrestar\" e \"Tema 1417 STJ\" · Residência encerrada em 28/02/2026 (efeitos já exauridos?) [VALIDAR] · Ilegitimidade do FNDE alegada (contrato do FIES antigo, CEF)",
+     "assuntoDet": "FIES — carência durante a residência médica (Tema 1.417/STJ)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ],
+     "obsGeral": "Apelação do FNDE e remessa necessária da sentença que suspendeu as prestações do FIES de Fernanda Moura Rojas durante a residência médica (01/03/2024 a 28/02/2026). O processo foi pautado e retirado em 26/10/2026 e tem etiqueta de sobrestamento pelo Tema 1.417/STJ."
     },
     "lote": {
      "id": "adp-remessas",
      "item": 61,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Index",
+    "tempest": "Não verificado",
+    "preparo": "Isento (ente público/MP)",
+    "prelim": "Há preliminares",
+    "repres": "Não verificado",
+    "midias": "Não se aplica",
+    "mpf": "Mandado de segurança",
+    "parecer": "Com parecer",
+    "idParecer": "380866688",
+    "parecerSentido": "Prosseguimento do feito, sem intervenção",
+    "resJulg": "Ato a proferir: apelação do FNDE (ID 376994685) e remessa necessária da sentença ID 376994683; contrarrazões (ID 376994692); MPF pelo prosseguimento (ID 380866688) ‖ Proposta pelos precedentes: Sobrestar até o julgamento do Tema 1.417/STJ [VALIDAR alcance da afetação]; anotar que o período de residência já terminou [VALIDAR: Decisão de sobrestamento já proferida?; Alcance do Tema 1.417/STJ; Efeitos exauridos com o fim da residência]"
    }
   },
   {
