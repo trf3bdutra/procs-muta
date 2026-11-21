@@ -23756,8 +23756,8 @@
    "exequente": "BERENICE ALBUQUERQUE NUNES",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Reajustes de Remuneração, Proventos ou Pensão",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g8",
+   "tipo_caso": "28,86% · cumprimento de sentença contra a União · juros de mora pelo Manual de Cálculos e retenção do PSS",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), pelos modelos vigentes de 28,86%",
    "modelo": "",
    "variacoes": [],
@@ -23836,6 +23836,88 @@
     "outros": "Certidão ID 366680296 (15/04/2026): distribuição em desacordo com a Resolução 33/2025; sem custas. Decisão ID 366692769 (15/04/2026): redistribuição à Turma Regional de MS. Despacho ID 367271262 (28/04/2026): preparo em dobro. Embargos de declaração ID 369739096 (28/04/2026; gratuidade deferida na origem, ID 369739099). Decisão ID 380056108 (15/06/2026): reconsiderou o despacho, julgou prejudicados os embargos e deferiu a tutela recursal para suspender o cumprimento de sentença.",
     "representacao": "Agravante: espólio representado pela inventariante Mariza da Costa Albuquerque; advogada Mariana Vieira Ferreira [VALIDAR procuração]. Agravada: União (AGU).",
     "preparo": "Justiça gratuita deferida na origem (ID 369739099), reconhecida na decisão ID 380056108."
+   },
+   "assunto_detalhado": "28,86% — cumprimento de sentença; juros de mora e retenção do PSS",
+   "especificidades": "Espólio exequente (inventariante Mariza da Costa Albuquerque) · Valor da causa R$ 969.897,95; PSS de R$ 43.944,22 até 10/2023 segundo a União · Tutela recursal deferida (ID 380056108, 15/06/2026): cumprimento de sentença suspenso · Gratuidade reconhecida; embargos sobre o preparo prejudicados",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "28,86% — cumprimento de sentença; juros de mora e retenção do PSS",
+     "subassuntos": "28,86% · cumprimento de sentença contra a União · juros de mora pelo Manual de Cálculos e retenção do PSS",
+     "sintese": "",
+     "questoes": "1) Taxa de juros de mora pelo Manual de Cálculos para créditos de servidores (1% ao mês até 07/2001; 0,5% ao mês de 08/2001 a 06/2009); 2) retenção do PSS sem previsão no título e alegado julgamento extra petita.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Acolheu em parte a impugnação da União: juros de mora pelo Manual e retenção do PSS sobre o crédito principal."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Deferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-09",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "365397361",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "365397361",
+       "data": "2026-04-09"
+      },
+      {
+       "desc": "Despacho de preparo em dobro",
+       "id": "367271262",
+       "data": "2026-04-28"
+      },
+      {
+       "desc": "Embargos de declaração (gratuidade)",
+       "id": "369739096",
+       "data": "2026-04-28"
+      },
+      {
+       "desc": "Decisão que deferiu a tutela recursal",
+       "id": "380056108",
+       "data": "2026-06-15"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "382241507",
+       "data": "2026-06-23"
+      }
+     ],
+     "pendencias": "Aplicar os modelos vigentes de 28,86%",
+     "especificidades": "Espólio exequente (inventariante Mariza da Costa Albuquerque) · Valor da causa R$ 969.897,95; PSS de R$ 43.944,22 até 10/2023 segundo a União · Tutela recursal deferida (ID 380056108, 15/06/2026): cumprimento de sentença suspenso · Gratuidade reconhecida; embargos sobre o preparo prejudicados"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2026-06-15"
+    }
    }
   },
   {
