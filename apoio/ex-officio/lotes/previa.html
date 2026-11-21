@@ -151,6 +151,20 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .tg.ok{border-color:var(--ok);color:var(--ok)}
 .tg.f{color:#fff;border-color:transparent}
 .tg.f.alta{background:#9a3d2e}.tg.f.media{background:#a57829}.tg.f.baixa{background:#7b8794}
+.sesb{display:flex;flex-wrap:wrap;gap:0;margin-top:14px;border:1px solid var(--el);background:var(--ew);width:max-content;max-width:100%}
+.sesb button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:7px 16px 8px;border:0;border-left:1px solid var(--el);background:transparent;color:var(--em);cursor:pointer;text-align:left}
+.sesb button:first-child{border-left:0}
+.sesb button span{font:400 8.5px var(--emono);letter-spacing:.14em;text-transform:uppercase}
+.sesb button b{font:700 17px var(--font);letter-spacing:-.02em;color:var(--ei)}
+.sesb button small{font:400 10px var(--emono);color:var(--em)}
+.sesb button[aria-pressed=true]{background:var(--ep2);box-shadow:inset 0 3px 0 var(--eo)}
+.sesb button[aria-pressed=true] span{color:var(--eo2)}
+.acts-l{display:flex;gap:6px;flex-wrap:wrap}
+.tb tr.gh td{background:var(--ep2);padding:0;border-bottom:1px solid var(--el)}
+.tb tr.gh button{display:flex;align-items:baseline;gap:8px;width:100%;padding:8px 18px;border:0;background:none;cursor:pointer;text-align:left;font:650 12.5px var(--font);color:var(--ei)}
+.tb tr.gh button i{font:400 12px var(--emono);font-style:normal;color:var(--eo2);width:10px}
+.tb tr.gh button small{font:400 10.5px var(--emono);color:var(--em)}
+.tb tr.gh button:hover{color:var(--eo2)}
 .vazio{padding:14px 0 0;color:var(--em);font-style:italic;font-size:12.5px}
 /* fila */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));margin:0 -18px -16px}
@@ -246,7 +260,7 @@ const ETAPAS_COMPLETO=[['minutar','1 · A minutar','sem minuta','minuta ainda n�
 const ETAPAS_SIMPLES=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','4 · Liberada','liberadas','prontas para a sessão']];
 const completo=()=>S.vista==='meus';
 const etapas=()=>completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
-const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{}};
+const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set()};
 
 async function get(url){const r=await fetch(url,{credentials:'same-origin',headers:{'Accept':'application/json'}});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 /* o gestor lê os lotes como na gestão (&modo=cg): vê todos os processos, inclusive os ainda ocultos da página da equipe */
@@ -296,7 +310,10 @@ async function carregar(){
     msg('Lendo as sessões e os lotes…');
     const L=await get('/api/painel?lote=1');
     S.usuario=L.usuario||'';S.gestor=!!L.gestor;
-    const ses=(L.sessoes||[]).filter(s=>s.processos>0).sort((a,b)=>a.date.localeCompare(b.date));
+    /* só as sessões ativas: publicadas para a equipe, com processos e ainda por realizar */
+    const todas=(L.sessoes||[]).filter(s=>s.processos>0&&s.publicada!==false).sort((a,b)=>a.date.localeCompare(b.date));
+    const ativas=todas.filter(s=>s.date>=hoje());
+    const ses=ativas.length?ativas:todas.slice(-1);
     S.sessoes=ses;
     const pedida=params.get('sessao');
     S.data=(ses.find(s=>s.date===pedida)||ses.find(s=>s.date>=hoje())||ses[ses.length-1]||{}).date||'';
@@ -334,7 +351,7 @@ function render(){
   $('#app').innerHTML=`<div class="pg">
   <nav class="lx-sub" aria-label="Sessão e seções da página">
    <div class="lx-lt">
-    <p class="k">Coleção de pauta</p>
+    <p class="k">Coleção de pauta · sessões ativas</p>
     <label class="lx-sel"><span class="sr">Sessão</span><select id="ses">${ses}</select></label>
     <p class="lx-lt-n">${S.linhas.length} processos${S.usuario?' · '+meus+' com '+esc(S.usuario.toUpperCase())+' na correção':''}</p>
     <p class="lx-lt-s">Sessão de ${br(S.data)}</p>
@@ -349,7 +366,8 @@ function render(){
    <p class="nota">Prévia só de leitura: nada aqui grava. As marcas e as versões continuam no <a href="/amicus/collectio/">Collectio atual</a>.</p>
   </nav>
   <div class="main">
-   <div class="lx-h"><div><p class="k">Coleção de pauta · sessão de ${br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':'Toda a <em class="it">pauta.</em>'}</h1></div>
+   <div class="lx-h"><div><p class="k">Coleção de pauta · sessão de ${br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':'Toda a <em class="it">pauta.</em>'}</h1>
+    <div class="sesb" role="group" aria-label="Sessões ativas">${S.sessoes.map(s=>`<button type="button" data-ses="${s.date}" aria-pressed="${s.date===S.data}"><span>Sessão</span><b>${br(s.date)}</b><small>${s.processos} processos</small></button>`).join('')}</div></div>
     <p class="lx-st">${S.usuario?esc(S.usuario)+' · ':''}${esc0.length} de ${S.linhas.length} processos<br>${alertas.length} com alerta</p></div>
    <p class="lead">${completo()?'O caminho de cada minuta da sua correção, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos.':'O caminho de cada minuta da pauta, da correção à liberação no PJe: cada etapa mostra o que falta e em quais processos.'} Clique num processo para ver as versões e o que mudou.</p>
    <span class="aviso">Prévia · só leitura · dados reais da pauta</span>
@@ -365,10 +383,11 @@ function render(){
     </div>
    </section>
 
-   <section class="sec" id="procs"><div class="shd"><div><p class="k">02 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, na ordem da pauta. A barra mostra as cinco etapas; a vazada com contorno é a etapa pulada.</p></div></div>
+   <section class="sec" id="procs"><div class="shd"><div><p class="k">02 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem da pauta. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
+     <span class="acts-l"><button type="button" class="b" id="abre-t">Abrir todos</button><button type="button" class="b" id="fecha-t">Recolher todos</button></span></div>
     <div class="box"><div class="tw"><table class="tb">
      <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
-     <tbody>${lst.map(rowHtml).join('')||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
+     <tbody>${grupos(lst)||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
     </table></div></div>
    </section>
 
@@ -376,6 +395,15 @@ function render(){
   </div></div>`;
   ligar();
   if(S.aberto)carregarVersoes();
+}
+/* grupos da lista: uma faixa por etapa, que abre e recolhe; "Abrir todos" e "Recolher todos" valem para todas */
+function grupos(lst){
+  const ordem=etapas().map(e=>[e[0],e[1].replace(/^\d · /,'')]).concat([['retido','Retirados de pauta']]);
+  return ordem.map(([k,rot])=>{
+    const g=lst.filter(r=>r.etapa===k); if(!g.length)return '';
+    const aberto=!S.fechados.has(k);
+    return `<tr class="gh"><td colspan="7"><button type="button" data-grp="${k}" aria-expanded="${aberto}"><i aria-hidden="true">${aberto?'−':'+'}</i>${esc(rot)}<small>${g.length}</small></button></td></tr>`+(aberto?g.map(rowHtml).join(''):'');
+  }).join('');
 }
 function rowHtml(r){
   const x=r.x, cls=['r',r.nivel,S.aberto===x.cnj?'on':''].filter(Boolean).join(' ');
@@ -526,7 +554,11 @@ function difPal(x,y){
 
 /* ---------- eventos ---------- */
 function ligar(){
-  const s=$('#ses');if(s)s.onchange=async()=>{S.data=s.value;S.aberto='';S.etapa='';S.fora='';const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a pauta…</p></div>';try{await carregarSessao()}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}};
+  const s=$('#ses');if(s)s.onchange=()=>trocaSessao(s.value);
+  $$('[data-ses]').forEach(b=>b.onclick=()=>{if(b.dataset.ses!==S.data)trocaSessao(b.dataset.ses)});
+  $$('[data-grp]').forEach(b=>b.onclick=()=>{const k=b.dataset.grp;S.fechados.has(k)?S.fechados.delete(k):S.fechados.add(k);render()});
+  const at=$('#abre-t');if(at)at.onclick=()=>{S.fechados.clear();render();ir('procs')};
+  const ft=$('#fecha-t');if(ft)ft.onclick=()=>{etapas().forEach(e=>S.fechados.add(e[0]));S.fechados.add('retido');render();ir('procs')};
   $$('[data-et]').forEach(b=>b.onclick=()=>{const k=b.dataset.et;S.etapa=S.etapa===k?'':k;S.fora='';render();ir('procs')});
   $$('[data-fo]').forEach(b=>b.onclick=()=>{const k=b.dataset.fo;S.fora=S.fora===k?'':k;S.etapa='';render();ir('procs')});
   $$('[data-vista]').forEach(b=>b.onclick=()=>{S.vista=b.dataset.vista;render()});
@@ -536,6 +568,7 @@ function ligar(){
   $$('tr.r').forEach(t=>{t.onclick=()=>abre(t.dataset.p);t.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();abre(t.dataset.p)}}});
   const f=$('#fecha');if(f)f.onclick=()=>{S.aberto='';const u=new URL(location.href);u.searchParams.delete('processo');history.replaceState(null,'',u);render();ir('procs')};
 }
+async function trocaSessao(d){S.data=d;S.aberto='';S.etapa='';S.fora='';const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a pauta…</p></div>';try{await carregarSessao()}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
 function abre(cnj){S.aberto=cnj;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
 function ir(id){const e=document.getElementById(id);if(e)e.scrollIntoView({block:'start'})}
 $('#tema').onclick=()=>{const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('cmt-eq-tema',t)}catch(e){}};
