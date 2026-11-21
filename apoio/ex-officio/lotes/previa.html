@@ -159,7 +159,14 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .sesb button small{font:400 10px var(--emono);color:var(--em)}
 .sesb button[aria-pressed=true]{background:var(--ep2);box-shadow:inset 0 3px 0 var(--eo)}
 .sesb button[aria-pressed=true] span{color:var(--eo2)}
-.acts-l{display:flex;gap:6px;flex-wrap:wrap}
+.seg.pil{align-self:flex-end}
+.seg .sep{display:block;width:1px;background:var(--el);margin:5px 2px}
+.tb tr.mnr td{padding:0 18px 14px;background:var(--ep2)}
+.mdoc{max-height:440px;overflow:auto;background:var(--ew);border:1px solid var(--el);padding:6px 26px 18px;font:14.5px/1.6 var(--eser);color:var(--ei)}
+.mdoc h4{font:400 10px var(--emono);letter-spacing:.2em;text-align:center;margin:16px 0 10px;color:var(--em)}
+.mdoc p{margin:0 0 9px;text-align:justify;text-indent:2.5em}
+.mdoc .mcab{display:flex;justify-content:space-between;gap:10px;text-indent:0;margin:6px 0 0;padding-bottom:6px;border-bottom:1px dashed var(--el);font:400 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--eo2)}
+.b[disabled]{opacity:.4;cursor:not-allowed}
 .tb tr.gh td{background:var(--ep2);padding:0;border-bottom:1px solid var(--el)}
 .tb tr.gh button{display:flex;align-items:baseline;gap:8px;width:100%;padding:8px 18px;border:0;background:none;cursor:pointer;text-align:left;font:650 12.5px var(--font);color:var(--ei)}
 .tb tr.gh button i{font:400 12px var(--emono);font-style:normal;color:var(--eo2);width:10px}
@@ -260,7 +267,7 @@ const ETAPAS_COMPLETO=[['minutar','1 · A minutar','sem minuta','minuta ainda n�
 const ETAPAS_SIMPLES=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','4 · Liberada','liberadas','prontas para a sessão']];
 const completo=()=>S.vista==='meus';
 const etapas=()=>completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
-const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set()};
+const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set()};
 
 async function get(url){const r=await fetch(url,{credentials:'same-origin',headers:{'Accept':'application/json'}});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 /* o gestor lê os lotes como na gestão (&modo=cg): vê todos os processos, inclusive os ainda ocultos da página da equipe */
@@ -384,7 +391,7 @@ function render(){
    </section>
 
    <section class="sec" id="procs"><div class="shd"><div><p class="k">02 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem da pauta. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
-     <span class="acts-l"><button type="button" class="b" id="abre-t">Abrir todos</button><button type="button" class="b" id="fecha-t">Recolher todos</button></span></div>
+     <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
     <div class="box"><div class="tw"><table class="tb">
      <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
      <tbody>${grupos(lst)||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
@@ -395,14 +402,39 @@ function render(){
   </div></div>`;
   ligar();
   if(S.aberto)carregarVersoes();
+  if(S.minAb.size)carregarMinutas();
 }
 /* grupos da lista: uma faixa por etapa, que abre e recolhe; "Abrir todos" e "Recolher todos" valem para todas */
+/* minutas na lista: abertas uma a uma (botão Minuta) ou todas de uma vez; o texto vem do Collectio sob demanda */
+const MIN={};
+/* só há minuta para ler quando o lote do Collectio a registrou (it.minuta) */
+const temMin=r=>!!(r.z&&r.it&&r.it.minuta);
+function minTodas(lst){const c=lst.filter(temMin);return !!c.length&&c.every(r=>S.minAb.has(r.x.cnj))}
+function idMin(cnj){return 'mn-'+cnj.replace(/\D/g,'')}
+function minRow(r){
+  const k=temMin(r)?r.z.lote+'|'+r.x.cnj.slice(0,10):'';
+  return `<tr class="mnr"><td colspan="7"><div class="mdoc" id="${idMin(r.x.cnj)}">${k&&MIN[k]?docHtml(MIN[k]):`<p class="vazio" style="padding:0">${k?'Lendo a minuta…':'Sem minuta no Collectio.'}</p>`}</div></td></tr>`;
+}
+function docHtml(d){
+  if(d&&d.erro)return `<p class="vazio" style="padding:0">${esc(d.erro)}</p>`;
+  const s=d.secoes||{};
+  const cab=`<p class="mcab"><span>Minuta vigente${d.vigente?' · '+esc(d.vigente):''}${d.rotulo?' · '+esc(d.rotulo):''}</span>${d.atualizado_em?`<span>${br(d.atualizado_em)}</span>`:''}</p>`;
+  return cab+SECS.map(([k,rot])=>(s[k]||[]).length?`<h4>${esc(rot.toUpperCase())}</h4>`+(s[k]||[]).map(t=>`<p>${esc(t)}</p>`).join(''):'').join('');
+}
+async function carregarMinutas(){
+  const fila=S.linhas.filter(r=>S.minAb.has(r.x.cnj)&&temMin(r)&&!MIN[r.z.lote+'|'+r.x.cnj.slice(0,10)]);
+  let i=0;
+  const um=async()=>{while(i<fila.length){const r=fila[i++],k=r.z.lote+'|'+r.x.cnj.slice(0,10);
+    try{MIN[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(r.z.lote)+MODO()+'&minuta='+r.x.cnj.slice(0,10))}catch(e){MIN[k]={erro:'Não foi possível ler a minuta: '+e.message}}
+    const el=document.getElementById(idMin(r.x.cnj));if(el)el.innerHTML=docHtml(MIN[k]);}};
+  await Promise.all([um(),um(),um(),um()]);
+}
 function grupos(lst){
   const ordem=etapas().map(e=>[e[0],e[1].replace(/^\d · /,'')]).concat([['retido','Retirados de pauta']]);
   return ordem.map(([k,rot])=>{
     const g=lst.filter(r=>r.etapa===k); if(!g.length)return '';
     const aberto=!S.fechados.has(k);
-    return `<tr class="gh"><td colspan="7"><button type="button" data-grp="${k}" aria-expanded="${aberto}"><i aria-hidden="true">${aberto?'−':'+'}</i>${esc(rot)}<small>${g.length}</small></button></td></tr>`+(aberto?g.map(rowHtml).join(''):'');
+    return `<tr class="gh"><td colspan="7"><button type="button" data-grp="${k}" aria-expanded="${aberto}"><i aria-hidden="true">${aberto?'−':'+'}</i>${esc(rot)}<small>${g.length}</small></button></td></tr>`+(aberto?g.map(r=>rowHtml(r)+(S.minAb.has(r.x.cnj)?minRow(r):'')).join(''):'');
   }).join('');
 }
 function rowHtml(r){
@@ -415,7 +447,7 @@ function rowHtml(r){
    <td><span class="nm">${esc(x.corretor||'—')}</span></td>
    <td><div class="et" aria-hidden="true">${pul.map(c=>`<i class="${c}"></i>`).join('')}</div><span class="et-t">${esc(r.txt)}</span></td>
    <td>${r.tags.map(([c,t])=>`<span class="tg ${c}">${esc(t)}</span>`).join('')||'<span class="tg ok">Em dia</span>'}${r.retido&&r.c.intercor?`<span class="pt">${esc(String(r.c.intercor).replace(/^Retirado de pauta \([^)]*\):\s*/,''))}</span>`:''}</td>
-   <td style="text-align:right"><button type="button" class="b" data-abre="${esc(x.cnj)}">Abrir</button></td></tr>`;
+   <td style="text-align:right;white-space:nowrap"><button type="button" class="b" data-min="${esc(x.cnj)}" aria-expanded="${S.minAb.has(x.cnj)}"${temMin(r)?'':' disabled title="Sem minuta no Collectio"'}>Minuta</button> <button type="button" class="b" data-abre="${esc(x.cnj)}">Abrir</button></td></tr>`;
 }
 /* coluna de uma etapa do fluxo: o número (filtro da lista), o próximo passo e os primeiros processos da fila */
 const PASSO={minutar:['Minutar','pelo minutante designado',r=>r.x.servidor?'minutante '+r.x.servidor:'sem minutante designado'],
@@ -557,6 +589,8 @@ function ligar(){
   const s=$('#ses');if(s)s.onchange=()=>trocaSessao(s.value);
   $$('[data-ses]').forEach(b=>b.onclick=()=>{if(b.dataset.ses!==S.data)trocaSessao(b.dataset.ses)});
   $$('[data-grp]').forEach(b=>b.onclick=()=>{const k=b.dataset.grp;S.fechados.has(k)?S.fechados.delete(k):S.fechados.add(k);render()});
+  $$('[data-min]').forEach(b=>b.onclick=e=>{e.stopPropagation();const c=b.dataset.min;S.minAb.has(c)?S.minAb.delete(c):S.minAb.add(c);render()});
+  const mt=$('#mn-t');if(mt)mt.onclick=()=>{const l=filtradas().filter(temMin);if(minTodas(filtradas()))l.forEach(r=>S.minAb.delete(r.x.cnj));else{l.forEach(r=>S.minAb.add(r.x.cnj));S.fechados.clear()}render();ir('procs')};
   const at=$('#abre-t');if(at)at.onclick=()=>{S.fechados.clear();render();ir('procs')};
   const ft=$('#fecha-t');if(ft)ft.onclick=()=>{etapas().forEach(e=>S.fechados.add(e[0]));S.fechados.add('retido');render();ir('procs')};
   $$('[data-et]').forEach(b=>b.onclick=()=>{const k=b.dataset.et;S.etapa=S.etapa===k?'':k;S.fora='';render();ir('procs')});
