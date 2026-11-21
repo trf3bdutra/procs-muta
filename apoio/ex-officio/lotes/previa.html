@@ -239,7 +239,7 @@ html[data-theme=dark] .st.s-e{--C:#4e9bcb}
 .vt td.o{color:var(--em);font-size:11.5px;max-width:420px}
 .vt tr.vg td{background:var(--ep2)}
 .bd{display:inline-block;margin:0 4px 2px 0;padding:1px 6px;font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--eo)}
-.bd.pj{background:var(--eg)}.bd.fi{background:#1f8a70}
+.bd.pj{background:var(--eg)}.bd.co{background:transparent;color:var(--eo2);box-shadow:inset 0 0 0 1px var(--eo)}.bd.fi{background:#1f8a70}
 .cmpc{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 0;font-size:12px;color:var(--em)}
 .cmpc label{display:inline-flex;gap:6px;align-items:center}
 .cmpc select{max-width:300px}
@@ -312,7 +312,13 @@ function msg(t){const e=$('#ld-m');if(e)e.textContent=t}
 /* ---------- modelo de cada processo: etapas da produção, tiradas da pauta (Ex Officio) e do lote (Collectio) ---------- */
 function linha(x,cheio){
   if(cheio===undefined)cheio=completo();
-  const z=S.por[x.cnj]||null, it=z?z.it:null, c=x.ctl||{};
+  /* a minuta e as informações registradas numa coleção avulsa valem para o processo em qualquer coleção */
+  /* um processo em mais de uma coleção tem uma versão da minuta por coleção; todas entram no histórico dele */
+  let z=S.por[x.cnj]||null; const fontes=[];
+  if(z&&z.it&&z.it.minuta)fontes.push(z);
+  ((S.idxAv&&S.idxAv[x.cnj])||[]).forEach(f=>{if(!fontes.some(q=>q.lote===f.lote))fontes.push(f)});
+  if((!z||!(z.it&&z.it.minuta))&&fontes.length)z=Object.assign({compart:true},fontes[0]);
+  const it=z?z.it:null, c=x.ctl||{};
   const m=!!(x.dataMinuta||(it&&it.minuta)), co=!!x.dataCorrecao, pj=!!(it&&it.pje), li=!!x.dataLiberacao, fi=!!(it&&it.final);
   const retido=/retirad|adiad/i.test(c.intercorTipo||'');
   /* a versão final não é etapa: é o indicador da fase liberada (só nas minhas correções) */
@@ -326,11 +332,12 @@ function linha(x,cheio){
     if(cheio&&fi)tags.push(['ok','Versão final']);
     if(cheio&&co&&!li&&!pj&&it&&it.minuta)tags.push(['in','Colar no PJe e marcar']);
     const np=it&&Array.isArray(it.pendencias)?it.pendencias.length:0;
+    if(fontes.length>1)tags.push(['in','Minuta em '+fontes.length+' coleções']);else if(z&&z.compart)tags.push(['in','Minuta em '+z.titulo]);
     if(np&&!li)tags.push(['in',np+(np>1?' pendências':' pendência')+' a validar']);
     if(!String(x.servidor||'').trim()||!String(x.corretor||'').trim())tags.push(['cr','Sem designação']);
   }
   const txt={minutar:'a minutar',minutada:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'corrigida '+brc(x.dataCorrecao),pje:'no PJe '+brc(it&&it.pje&&it.pje.em),liberada:'liberada '+brc(x.dataLiberacao)+(cheio?(fi?' · versão final ✓':' · sem versão final'):''),retido:'fora da sessão'}[etapa];
-  return {x,z,it,c,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,cheio,fi,
+  return {x,z,it,c,fontes,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,cheio,fi,
     meu:souEu(x.corretor)};
 }
 /* o corretor pode ser dupla ("Bruno/Alex"): basta um dos nomes ser o do login (nome inteiro ou o primeiro nome) */
@@ -368,6 +375,21 @@ async function carregar(){
     $('#app').innerHTML=e.status===401||e.status===403&&!S.usuario?`<div class="load"><p class="t">Entre pelo <em class="it">Ex Officio.</em></p><p>A prévia usa o mesmo login do Collectio. <a href="/exofficio/">Abrir o Ex Officio</a></p></div>`:`<div class="load"><p class="t">Não foi possível <em class="it">ler.</em></p><p>${esc(e.message)}</p></div>`;
   }
 }
+/* índice dos registros das coleções avulsas, por processo: lido uma vez, depois do primeiro desenho */
+async function indiceAvulsas(){
+  if(S.idxAv)return;
+  const ls=(S.lotesLista||[]).filter(l=>tipoCol(l)==='avulsa'&&l.total>0);
+  const R=await Promise.all(ls.map(l=>S.lotes[l.id]?Promise.resolve({lote:S.lotes[l.id]}):get('/api/painel?lote=1&id='+encodeURIComponent(l.id)+MODO()).catch(()=>null)));
+  const idx={};
+  R.forEach(r=>{const l=r&&r.lote;if(!l)return;(l.itens||[]).forEach(it=>{if(!it.minuta)return;
+    /* mais de uma: vale a que já tem versão final, depois a marcada no PJe */
+    (idx[it.processo]=idx[it.processo]||[]).push({lote:l.id,titulo:l.titulo||l.id,it})})});
+  const peso=f=>(f.it.final?2:0)+(f.it.pje?1:0);
+  Object.values(idx).forEach(a=>a.sort((p,q)=>peso(q)-peso(p)));
+  S.idxAv=idx;
+  const muda=S.itens.some(x=>{const z=S.por[x.cnj];return (idx[x.cnj]||[]).some(f=>f.lote!==(z&&z.lote))});
+  if(muda)render();
+}
 const tipoCol=l=>l.tipo==='pauta'?'pauta':l.tipo==='triagem'?'triagem':l.tipo==='selecao'?'selecao':'avulsa';
 const ROT_COL={pauta:'Lote da pauta',selecao:'Seleção prévia',triagem:'Coleção de triagem',avulsa:'Coleção avulsa'};
 async function carregarLote(id,ses){
@@ -383,7 +405,10 @@ async function carregarLote(id,ses){
   S.linhas=S.itens.map(x=>linha(x));
   if(!S.linhas.some(r=>r.meu))S.vista='todos';
   const eu=$('#eu');if(S.usuario){eu.hidden=false;eu.textContent='★ '+S.usuario}
+  const pp=params.get('processo'), ra=pp&&S.linhas.find(r=>r.x.cnj.startsWith(pp));if(ra)S.aberto=ra.x.cnj;
   render();
+  if(ra)ir('proc');
+  indiceAvulsas().catch(()=>{});
 }
 async function carregarSessao(){
   S.loteSel='';S.colTit='';S.loteSes='';
@@ -399,6 +424,7 @@ async function carregarSessao(){
   S.aberto=params.get('processo')&&S.linhas.some(r=>r.x.cnj.startsWith(params.get('processo')))?S.linhas.find(r=>r.x.cnj.startsWith(params.get('processo'))).x.cnj:S.aberto;
   render();
   if(S.aberto&&params.get('processo'))ir('proc');
+  indiceAvulsas().catch(()=>{});
 }
 
 /* ---------- página ---------- */
@@ -481,7 +507,7 @@ function render(){
 /* minutas na lista: abertas uma a uma (botão Minuta) ou todas de uma vez; o texto vem do Collectio sob demanda */
 const MIN={};
 /* só há minuta para ler quando o lote do Collectio a registrou (it.minuta) */
-const temMin=r=>!!(r.z&&r.it&&r.it.minuta);
+const temMin=r=>!!(r.fontes&&r.fontes.length);
 function minTodas(lst){const c=lst.filter(temMin);return !!c.length&&c.every(r=>S.minAb.has(r.x.cnj))}
 function idMin(cnj){return 'mn-'+cnj.replace(/\D/g,'')}
 function minRow(r){
@@ -569,7 +595,7 @@ function procHtml(){
   return `<section class="sec" id="proc"><div class="shd"><div><p class="k">03 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
    <div class="box">
     <div class="pf-h">
-     <div class="pf-id"><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">Minuta ${esc(x.servidor||'—')} · correção ${esc(x.corretor||'—')}${z?' · '+esc(z.titulo):''}</span></div>
+     <div class="pf-id"><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">Minuta ${esc(x.servidor||'—')} · correção ${esc(x.corretor||'—')}${z?' · '+(z.compart?'minuta e registros da coleção '+esc(z.titulo):esc(z.titulo)):''}</span></div>
      ${linhaEtapas(r)}
      <div class="pf-acts">${z?`<a class="b pri" href="/amicus/collectio/?id=${encodeURIComponent(z.lote)}" target="_blank" rel="noopener">Abrir no Collectio</a>`:''}<button type="button" class="b" id="fecha">Fechar</button></div>
     </div>
@@ -582,53 +608,63 @@ function procHtml(){
 /* versões: primeiro um seletor (mostra o texto da versão escolhida); "Comparar" faz surgir o segundo seletor e o lado a lado */
 async function carregarVersoes(){
   const r=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r||!temMin(r))return;
-  const cnj=r.x.cnj, mx=cnj.slice(0,10), lote=r.z.lote, ch=lote+'|'+mx;
+  const cnj=r.x.cnj, mx=cnj.slice(0,10);
   try{
-    const V=S.ver[ch]||(S.ver[ch]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+'&versoes=1'));
+    /* uma lista só: as versões de cada coleção em que o processo tem minuta (a coleção aberta primeiro) */
+    const Vs=await Promise.all(r.fontes.map(f=>{const ch=f.lote+'|'+mx;return S.ver[ch]?Promise.resolve(S.ver[ch]):get('/api/painel?lote=1&id='+encodeURIComponent(f.lote)+MODO()+'&minuta='+mx+'&versoes=1').then(v=>S.ver[ch]=v)}));
     if(S.aberto!==cnj)return;
-    const vs=(V.versoes||[]).slice();
-    $('#vs-k').textContent=vs.length?vs.length+(vs.length>1?' versões':' versão')+(V.vigente?' · vigente '+V.vigente:''):'nenhuma versão registrada';
+    const vs=[];
+    Vs.forEach((V,k)=>{const f=r.fontes[k];
+      (V.versoes||[]).forEach((v,ix)=>vs.push(Object.assign({},v,{k:f.lote+'|'+v.id,lote:f.lote,col:f.titulo,ix,vig:v.id===V.vigente})));
+      /* coleção com minuta ainda sem histórico: o texto atual entra como a versão dela */
+      if(!(V.versoes||[]).length&&V.existe!==false)vs.push({id:'atual',rotulo:V.rotulo||'Minuta atual, sem histórico',origem:V.origem||'',em:V.atualizado_em||'',paragrafos:V.paragrafos,k:f.lote+'|atual',lote:f.lote,col:f.titulo,ix:0,vig:true});});
+    const nc=r.fontes.length;
+    $('#vs-k').textContent=vs.length?vs.length+(vs.length>1?' versões':' versão')+(nc>1?' em '+nc+' coleções':''):'nenhuma versão registrada';
     if(!vs.length){$('#vs').innerHTML='<p class="vazio" style="padding:0">A minuta está no Collectio, mas ainda sem versões registradas.</p>';return}
-    const meta=id=>vs.find(v=>v.id===id)||{};
-    const bd=v=>(v.id===V.vigente?'<span class="bd">vigente</span>':'')+(v.pje?'<span class="bd pj">no PJe</span>':'')+(v.final?'<span class="bd fi">final</span>':'');
-    const op=(sel,fora)=>vs.slice().reverse().filter(v=>v.id!==fora).map(v=>`<option value="${esc(v.id)}"${v.id===sel?' selected':''}>${esc(v.id)} · ${esc((v.rotulo||'').slice(0,70))}${v.em?' · '+brc(v.em):''}</option>`).join('');
-    const a0=(vs.find(v=>v.id===V.vigente)||vs[vs.length-1]).id;
+    const meta=k=>vs.find(v=>v.k===k)||{};
+    const bd=v=>(nc>1?`<span class="bd co">${esc(v.col)}</span>`:'')+(v.vig?'<span class="bd">vigente</span>':'')+(v.pje?'<span class="bd pj">no PJe</span>':'')+(v.final?'<span class="bd fi">final</span>':'');
+    const op=(sel,fora)=>r.fontes.map(f=>{const g=vs.filter(v=>v.lote===f.lote&&v.k!==fora).slice().reverse();if(!g.length)return '';
+      const o=g.map(v=>`<option value="${esc(v.k)}"${v.k===sel?' selected':''}>${esc(v.id)} · ${esc((v.rotulo||'').slice(0,64))}${v.em?' · '+brc(v.em):''}</option>`).join('');
+      return nc>1?`<optgroup label="${esc(f.titulo)}">${o}</optgroup>`:o}).join('');
+    const a0=(vs.find(v=>v.lote===r.fontes[0].lote&&v.vig)||vs.filter(v=>v.lote===r.fontes[0].lote).pop()||vs[0]).k;
     $('#vs').innerHTML=`<div class="vsel">
       <label class="vlb"><span>Versão</span><select class="sel" id="va">${op(a0)}</select></label><span id="va-b"></span>
       <label class="vlb" id="vb-w" hidden><span>comparar com</span><select class="sel" id="vb"></select></label>
       <span class="sp"></span><button type="button" class="b" id="cmp" aria-pressed="false">Comparar</button></div>
      <p class="vor" id="va-o"></p><div id="dif"></div>`;
-    const par=id=>{const v=meta(id),p=v.paragrafos;return p&&typeof p==='object'?SECS.map(([k,,ab])=>ab+' '+(p[k]||0)).join(' · '):''};
-    /* segunda versão sugerida: a final contra a importada no PJe; senão, a marcada no PJe ou a anterior */
-    const outra=a=>{const A=meta(a),pj=vs.find(v=>v.pje),fi=vs.find(v=>v.final),ix=vs.findIndex(v=>v.id===a);
-      if(A.final)return (vs.find(v=>v.id===A.base)||pj||vs[ix-1]||vs[ix+1]||{}).id;
-      if(fi&&fi.id!==a)return fi.id; if(pj&&pj.id!==a)return pj.id; return (vs[ix-1]||vs[ix+1]||{}).id;};
+    const par=k=>{const p=meta(k).paragrafos;return p&&typeof p==='object'?SECS.map(([s,,ab])=>ab+' '+(p[s]||0)).join(' · '):''};
+    /* segunda versão sugerida: na mesma coleção, a final contra a importada no PJe (ou a anterior); sem outra ali, a vigente da outra coleção */
+    const outra=k=>{const A=meta(k),mesma=vs.filter(v=>v.lote===A.lote),pj=mesma.find(v=>v.pje&&v.k!==k),fi=mesma.find(v=>v.final&&v.k!==k),ix=mesma.findIndex(v=>v.k===k);
+      if(A.final){const b=mesma.find(v=>v.id===A.base)||pj||mesma[ix-1];if(b)return b.k}
+      const c=fi||pj||mesma[ix-1]||mesma[ix+1];if(c)return c.k;
+      const o=vs.find(v=>v.lote!==A.lote&&v.vig)||vs.find(v=>v.k!==k);return o&&o.k;};
     const mostra=async()=>{
       const a=$('#va').value, v=meta(a);
       $('#va-b').innerHTML=bd(v);
       $('#va-o').textContent=[v.por,v.em?br(v.em):'',v.origem,par(a)].filter(Boolean).join(' · ');
       const on=S.cmpOn&&vs.length>1;
       $('#vb-w').hidden=!on; $('#cmp').textContent=on?'Fechar comparação':'Comparar'; $('#cmp').setAttribute('aria-pressed',String(on));
-      if(on){const b0=$('#vb').value;$('#vb').innerHTML=op(b0&&b0!==a?b0:outra(a),a);await comparar(lote,mx,vs,a,$('#vb').value)}
-      else{const d=$('#dif');d.innerHTML='<p class="vazio">Lendo a versão…</p>';try{const F=await foto(lote,mx,a);if($('#va')&&$('#va').value===a&&!S.cmpOn)d.innerHTML=`<div class="mdoc">${SECS.map(([k,rot])=>((F.secoes||{})[k]||[]).length?`<h4>${esc(rot.toUpperCase())}</h4>`+F.secoes[k].map(t=>`<p>${esc(t)}</p>`).join(''):'').join('')}</div>`}catch(e){d.innerHTML=`<p class="vazio">Não foi possível ler a versão: ${esc(e.message)}</p>`}}
+      if(on){const b0=$('#vb').value;$('#vb').innerHTML=op(b0&&b0!==a?b0:outra(a),a);await comparar(mx,vs,a,$('#vb').value)}
+      else{const d=$('#dif');d.innerHTML='<p class="vazio">Lendo a versão…</p>';try{const F=await foto(v.lote,mx,v.id);if($('#va')&&$('#va').value===a&&!S.cmpOn)d.innerHTML=`<div class="mdoc">${SECS.map(([s,rot])=>((F.secoes||{})[s]||[]).length?`<h4>${esc(rot.toUpperCase())}</h4>`+F.secoes[s].map(t=>`<p>${esc(t)}</p>`).join(''):'').join('')}</div>`}catch(e){d.innerHTML=`<p class="vazio">Não foi possível ler a versão: ${esc(e.message)}</p>`}}
     };
     $('#va').onchange=mostra;
-    $('#vb').onchange=()=>comparar(lote,mx,vs,$('#va').value,$('#vb').value);
+    $('#vb').onchange=()=>comparar(mx,vs,$('#va').value,$('#vb').value);
     $('#cmp').onclick=()=>{S.cmpOn=!S.cmpOn;if(!S.cmpOn)$('#vb').innerHTML='';mostra()};
     if(vs.length<2)$('#cmp').disabled=true;
     mostra();
   }catch(e){const el=$('#vs');if(el)el.innerHTML=`<p class="vazio" style="padding:0">Não foi possível ler as versões: ${esc(e.message)}</p>`}
 }
 const fotos={};
-async function foto(lote,mx,v){const k=lote+'|'+mx+'|'+v;return fotos[k]||(fotos[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+'&versao='+encodeURIComponent(v)))}
+async function foto(lote,mx,v){const k=lote+'|'+mx+'|'+v;return fotos[k]||(fotos[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+(v==='atual'?'':'&versao='+encodeURIComponent(v))))}
 /* lado a lado: à esquerda a versão mais antiga, à direita a mais nova */
-async function comparar(lote,mx,vs,x1,x2){
+async function comparar(mx,vs,x1,x2){
   const d=$('#dif'); if(!x1||!x2||x1===x2){d.innerHTML='<p class="vazio">Escolha duas versões diferentes.</p>';return}
-  const [a,b]=vs.findIndex(v=>v.id===x1)<vs.findIndex(v=>v.id===x2)?[x1,x2]:[x2,x1];
-  const rot=id=>{const v=vs.find(q=>q.id===id)||{};return id+' · '+(v.rotulo||'')};
+  const m=k=>vs.find(v=>v.k===k)||{}, ord=v=>String(v.em||'')+'|'+String(v.ix).padStart(3,'0');
+  const [A,B]=ord(m(x1))<=ord(m(x2))?[m(x1),m(x2)]:[m(x2),m(x1)];
+  const rot=v=>v.id+' · '+(v.rotulo||'')+(new Set(vs.map(q=>q.lote)).size>1?' · '+v.col:'');
   d.innerHTML='<p class="vazio">Comparando…</p>';
   try{
-    const [FA,FB]=await Promise.all([foto(lote,mx,a),foto(lote,mx,b)]);
+    const [FA,FB]=await Promise.all([foto(A.lote,mx,A.id),foto(B.lote,mx,B.id)]);
     const sa=FA.secoes||{},sb=FB.secoes||{};let h='',dif=0;
     SECS.forEach(([k,rt,ab])=>{
       const pa=(sa[k]||[]).map(String),pb=(sb[k]||[]).map(String);
@@ -646,7 +682,7 @@ async function comparar(lote,mx,vs,x1,x2){
       if(pa.length||pb.length)h+=`<div class="eq" style="color:var(--eo2);border-bottom:1px solid var(--el2)">${rt}</div>`+linhas;
     });
     $('#vs-k').textContent=dif?dif+(dif>1?' parágrafos com diferença':' parágrafo com diferença'):'sem diferença';
-    d.innerHTML=`<div class="dif"><div class="dif-h"><span>${esc(rot(a))}</span><span>${esc(rot(b))}</span></div>${h}</div>`;
+    d.innerHTML=`<div class="dif"><div class="dif-h"><span>${esc(rot(A))}</span><span>${esc(rot(B))}</span></div>${h}</div>`;
   }catch(e){d.innerHTML=`<p class="vazio">Não foi possível comparar: ${esc(e.message)}</p>`}
 }
 /* parágrafos: LCS pelos textos normalizados; os blocos sem par são casados pela posição */
@@ -702,7 +738,7 @@ async function trocaColecao(id,ses){const l=(S.lotesLista||[]).find(x=>x.id===id
 function abre(cnj){S.aberto=cnj;S.cmpOn=false;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
 function ir(id){const e=document.getElementById(id);if(e)e.scrollIntoView({block:'start'})}
 $('#tema').onclick=()=>{const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('cmt-eq-tema',t)}catch(e){}};
-$('#atu').onclick=()=>{S.ver={};for(const k in fotos)delete fotos[k];carregar()};
+$('#atu').onclick=()=>{S.ver={};S.idxAv=null;for(const k in fotos)delete fotos[k];carregar()};
 carregar();
 })();
 </script>
