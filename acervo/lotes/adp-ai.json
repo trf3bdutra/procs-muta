@@ -21648,8 +21648,8 @@
    "exequente": "CAIXA ECONÔMICA FEDERAL",
    "executado": "MUNICIPIO DE CAMPO GRANDE",
    "assunto": "IPTU/ Imposto Predial e Territorial Urbano",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · tributo municipal sobre imóveis do FAR (PAR/Minha Casa Minha Vida) · imunidade tributária recíproca (Tema 884/STF) e legitimidade da CEF · exceção de pré-executividade",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno prejudicado",
    "modelo": "",
    "variacoes": [],
@@ -21697,6 +21697,94 @@
     "outros": "Certidão ID 361062056 (18/03/2026): competência da 2ª Seção; sem custas. Decisão ID 361410771 (20/03/2026, Des. Fed. Renato Becho): redistribuição à 2ª Seção (menciona, por engano, a 1ª Vara Federal de Araçatuba). Comprovante DDRJ/GRU da CAIXA ID 362169284 (OCR). Decisão ID 363576186 (31/03/2026, Des. Fed. Leila Paiva): indeferiu o efeito suspensivo. Agravo interno da CEF ID 365345308 (09/04/2026). Decisão ID 380412752 (17/06/2026): redistribuição à Turma Regional de MS.",
     "representacao": "Agravante: CEF (procuração e substabelecimento IDs 360881730 e 360881731). Agravado: Município de Campo Grande.",
     "preparo": "DDRJ e GRU 18720-8 da CAIXA, R$ 64,26, prazo 24/03/2026 (ID 362169284, OCR); sem comprovante STN [VALIDAR artigo 2º, § 2º, II, da Resolução PRES 138/2017]"
+   },
+   "assunto_detalhado": "Execução fiscal — tributo municipal sobre imóveis do FAR; imunidade e legitimidade da CEF",
+   "especificidades": "Exceção rejeitada por falta de prova pré-constituída de que os imóveis são do FAR · Efeito suspensivo indeferido (ID 363576186, 31/03/2026) · Agravo interno da CEF (ID 365345308) · Município sem contraminuta nos autos extraídos · Preparo por DDRJ/GRU da CAIXA (ID 362169284) · Tema conexo ao AI 5001514-67.2026.4.03.0000",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — tributo municipal sobre imóveis do FAR; imunidade e legitimidade da CEF",
+     "subassuntos": "Execução fiscal · tributo municipal sobre imóveis do FAR (PAR/Minha Casa Minha Vida) · imunidade tributária recíproca (Tema 884/STF) e legitimidade da CEF · exceção de pré-executividade",
+     "sintese": "",
+     "questoes": "1) Prova pré-constituída da vinculação dos imóveis ao FAR; 2) imunidade tributária recíproca (Tema 884/STF) e legitimidade da CEF; 3) agravo interno prejudicado.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Justiça Federal em Campo Grande [VALIDAR vara]",
+      "dispositivo": "Rejeitou a exceção de pré-executividade por exigir dilação probatória."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-03-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "360881722",
+       "contra": "Não mencionar"
+      },
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "365345308",
+       "contra": "Não mencionar"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "360881722",
+       "data": "2026-03-17"
+      },
+      {
+       "desc": "DDRJ/GRU da CAIXA (OCR)",
+       "id": "362169284",
+       "data": "2026-03-24"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "363576186",
+       "data": "2026-03-31"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "365345308",
+       "data": "2026-04-09"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "380412752",
+       "data": "2026-06-17"
+      }
+     ],
+     "pendencias": "Conferir contraminuta do Município e o preparo",
+     "especificidades": "Exceção rejeitada por falta de prova pré-constituída de que os imóveis são do FAR · Efeito suspensivo indeferido (ID 363576186, 31/03/2026) · Agravo interno da CEF (ID 365345308) · Município sem contraminuta nos autos extraídos · Preparo por DDRJ/GRU da CAIXA (ID 362169284) · Tema conexo ao AI 5001514-67.2026.4.03.0000"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-03-31"
+    }
    }
   },
   {
