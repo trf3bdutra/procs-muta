@@ -268,3 +268,8 @@ test('Pautas: gravação ocupada (mesa gravando) não vira laço que trava a pá
   assert.ok(cap.includes('else if (r && r.ocupado) {')&&cap.includes('G.prox = Date.now() + 2000; }'),'espera antes de tentar de novo');
   assert.ok(cap.includes("if (n && !G.gravando && pronto && !s.gravando?.()) {"),'não dispara com outra gravação em curso');
 });
+
+test('Motor: fila única de gravação (sem "ocupado" em laço)',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  assert.ok(m.includes('var FILA_G = null, ATUAL_G = null;')&&m.includes('async function gravarUmaVez()')&&m.includes('FILA_G = ATUAL_G.catch(function () {}).then(function () { FILA_G = null; return gravar(); })'));
+});

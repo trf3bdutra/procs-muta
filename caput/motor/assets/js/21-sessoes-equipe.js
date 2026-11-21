@@ -310,7 +310,14 @@
     if (k === 'equipe') { var R = rg.registros || [], fl = function (L) { return L.filter(function (m) { return m.minuta != null || m.correcao != null || (m.pref || []).length || (m.exp || []).length; }).length; };
       return S.equipe.length < R.length - 2 || (fl(R) >= 3 && fl(S.equipe) < fl(R) * 0.5); }
     return false; }
-  async function gravar() {
+  /* fila única de gravação: quem pede com outra gravação em curso espera a vez e grava o que ficou pendente depois dela.
+     Antes devolvia 'ocupado' na hora, e um chamador que tentava de novo sem pausa travava a página. */
+  var FILA_G = null, ATUAL_G = null;
+  function gravar() {
+    if (ATUAL_G) { if (!FILA_G) FILA_G = ATUAL_G.catch(function () {}).then(function () { FILA_G = null; return gravar(); }); return FILA_G; }
+    ATUAL_G = gravarUmaVez(); return ATUAL_G.finally(function () { ATUAL_G = null; });
+  }
+  async function gravarUmaVez() {
     if (!W.ProcsMuta || !W.ProcsMuta.gravar) { toast('Gravação no procs-muta indisponível nesta página.'); return { ok: false, erro: 'Gravação no procs-muta indisponível nesta página.' }; }
     if (!REPO.lido) return { ok: false, erro: 'O procs-muta ainda não foi lido; aguarde a carga antes de gravar.' };
     if (REPO.gravando) return { ok: false, ocupado: true, erro: 'Gravação em andamento.' };
@@ -2166,6 +2173,6 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       if (pautar || todas) {} else if (preAberta(ss)) sincronizarPrevia(ss); else { ss.previa = (ss.previa || []).filter(function (i) { return !quer.has(dig(i.cnj)); }); salvar(); }
       var g = W.CMTOperacional && W.CMTOperacional.gravar ? W.CMTOperacional.gravar(c.rows) : null;
       return { n: n, gravando: g }; },
-    contagem: function () { var d = hoje(); return S.sessoes.filter(function (x) { return x.data >= d; }).length; }, gravar: gravar, pendentes: pendentes, recarregar: function () { return pendentes().length ? Promise.resolve(false) : carregarRepo().then(function () { return true; }); }, repoLido: function () { return !!REPO.lido; }, gravando: function () { return !!REPO.gravando; }, repo: function () { return REPO; }, regras: function () { return S.regras.filter(function (r) { return r.on; }).length; } };
+    contagem: function () { var d = hoje(); return S.sessoes.filter(function (x) { return x.data >= d; }).length; }, gravar: gravar, pendentes: pendentes, recarregar: function () { return pendentes().length ? Promise.resolve(false) : carregarRepo().then(function () { return true; }); }, repoLido: function () { return !!REPO.lido; }, gravando: function () { return !!(REPO.gravando || ATUAL_G || FILA_G); }, repo: function () { return REPO; }, regras: function () { return S.regras.filter(function (r) { return r.on; }).length; } };
 })();
 

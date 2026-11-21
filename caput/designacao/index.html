@@ -107,7 +107,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .bh .bulk select.on{border-color:var(--ac);color:var(--ac);font-weight:700;background:var(--ok-bg)}
 .bh .sub{flex-basis:100%;font-size:12px;color:#7a7465;margin-top:2px}
 .bl.mo-man .bh{border-left:3px solid #b8860b}.bl.mo-cont .bh{border-left:3px solid #1f6f5c}.bl.mo-regra .bh{border-left:3px solid #2c4a7a}.bl.mo-esp .bh{border-left:3px solid #6b4c9a}
-.bl.mo-R .bh{border-left:3px solid #235a55}.bl.vz{opacity:.6}.bl.vz .bh{border-left:3px dashed #9a948a}.bl.vz .bh h3{font-weight:600}
+.bl.mo-R .bh{border-left:3px solid #235a55}.bl.vz{opacity:.6}.bl.mo-fora .bh{border-left:3px dashed #9a948a}.seg.fora small{font-size:10px;opacity:.75}.seg.fora[hidden]{display:none}.bl.vz .bh{border-left:3px dashed #9a948a}.bl.vz .bh h3{font-weight:600}
 .bl.mo-hist .bh{border-left:3px solid #8a6d3b}.bl.mo-lote .bh{border-left:3px solid #4f7f9a}.bl.mo-grav .bh{border-left:3px solid #9a948a}.bl.mo-carga .bh,.bl.mo-vazio .bh{border-left:3px solid #b5452f}
 .rw .ck,.bh .ck{width:16px;height:16px;margin:0 4px 0 0;accent-color:#1f3b5c;cursor:pointer;align-self:center}
 .rw.sel,.rw.mud.sel{background:#e6eef8!important;box-shadow:inset 3px 0 0 #1f3b5c}
@@ -177,6 +177,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       <label for="busca" hidden>Buscar</label><input id="busca" type="search" placeholder="Processo, assunto ou pessoa">
       <select id="f-as" aria-label="Filtrar por assunto"><option value="">Todos os assuntos</option></select>
       <button type="button" class="btn" id="b-recalc-tb" data-a="recalc" title="Refaz a proposta com o período, as ausências e as regras atuais; mantém o que você escolheu à mão">Atualizar proposta</button>
+      <div class="seg fora" id="fora" role="group" aria-label="Manter fora dos grupos" hidden></div>
       <div class="seg ag" role="group" aria-label="Agrupar por">
         <span class="agl">Agrupar por</span>
         <button type="button" data-ag="bloco" aria-pressed="true" title="Lotes, ED e AgInt, e os demais por seção">Lote e seção</button>
@@ -390,26 +391,30 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(tem(function(w){return w[0]==='c';}))return 'cont';var r=W.filter(function(w){return w[0]==='r';})[0];if(r)return 'regra|'+r[1].replace(/^regra · /,'');
     if(tem(function(w){return w[0]==='e';}))return 'esp';if(tem(function(w){return /no histórico/.test(w[1]);}))return 'hist';if(tem(function(w){return w[0]==='l';}))return 'lote';
     return 'carga';}
-  function grupo(x){if(AG==='bloco')return bloco(x);if(AG==='as')return 'A|'+(x.as||'sem assunto');if(AG==='pd')return 'D|'+(fin(x,'d')||'sem minutante');if(AG==='pc')return 'C|'+(fin(x,'c')||'sem corretor');return motivo(x,AG==='md'?'d':'c');}
+  /* processos de um tipo (META, ED, AgInt…) cuja regra se quer manter: saem dos grupos e ficam num grupo à parte, fora do "Bloco todo" */
+  var FORA={};try{FORA=JSON.parse(localStorage.getItem('mesa_fora')||'{}')||{};}catch(e){FORA={};}
+  function grupo(x){if(x.t&&FORA[x.t])return 'F|'+x.t;if(AG==='bloco')return bloco(x);if(AG==='as')return 'A|'+(x.as||'sem assunto');if(AG==='pd')return 'D|'+(fin(x,'d')||'sem minutante');if(AG==='pc')return 'C|'+(fin(x,'c')||'sem corretor');return motivo(x,AG==='md'?'d':'c');}
   var AGP={as:1,pd:1,pc:1};
   function infoMotivo(k){if(k.indexOf('R|')===0){var kd=k.split('|')[1],r=regras().L[kd].filter(function(q){return q.k===k;})[0]||{o:'',ord:50,t:k.split('|')[2],sub:''};return {ord:r.ord,nome:(r.o?r.o+' · ':'')+r.t,sub:r.sub};}
     if(k==='man')return {ord:0,nome:'Escolha manual',sub:'alterado por você nesta mesa'};var b=k.split('|')[0],m=MOTIVOS.filter(function(q){return q[0]===b;})[0]||[b,b,''];return {ord:MOTIVOS.indexOf(m),nome:m[1]+(k.indexOf('|')>0?' · '+k.split('|')[1]:''),sub:m[2]};}
-  function nomeGrupo(k){return AG==='bloco'?nomeBloco(k):AGP[AG]?k.slice(2):infoMotivo(k).nome;}
+  function nomeGrupo(k){if(k.indexOf('F|')===0)return 'Mantidos pela regra · '+k.slice(2);return AG==='bloco'?nomeBloco(k):AGP[AG]?k.slice(2):infoMotivo(k).nome;}
   var ABRE={};
   function aberto(k,n){return ABRE[AG+'|'+k]!=null?ABRE[AG+'|'+k]:(AG==='bloco'||n<=1);}
-  function blocos(){CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[];IT.forEach(function(x){var k=grupo(x);if(!G[k]){G[k]=[];ord.push(k);}G[k].push(x);});
+  function blocos(){CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[],forak=[];IT.forEach(function(x){var k=grupo(x);if(!G[k]){G[k]=[];if(k.indexOf('F|')===0)forak.push(k);else ord.push(k);}G[k].push(x);});
+    var fe=document.getElementById('fora');if(fe){var TT={};IT.forEach(function(x){if(x.t)TT[x.t]=(TT[x.t]||0)+1;});var tk=Object.keys(TT).sort();fe.hidden=!tk.length;fe.innerHTML=tk.length?'<span class="agl" title="O tipo marcado sai dos grupos (e do Bloco todo) e fica num grupo à parte, com a designação da regra">Manter fora dos grupos</span>'+tk.map(function(k){return '<button type="button" data-fora="'+esc(k)+'" aria-pressed="'+!!FORA[k]+'">'+esc(k)+' <small>'+TT[k]+'</small></button>';}).join(''):'';}
     if(AG==='bloco')ord.sort(function(a,b){var r=function(k){return k.indexOf('L:')===0?0:k==='T:ED'?1:2;};return r(a)-r(b)||G[b].length-G[a].length;});
     else if(AGP[AG])ord.sort(function(a,b){return G[b].length-G[a].length||a.localeCompare(b);});
     else ord.sort(function(a,b){return infoMotivo(a).ord-infoMotivo(b).ord||G[b].length-G[a].length;});
     var kd=(AG==='mc'||AG==='pd')?'c':'d';
-    var vaz={};if((AG==='md'||AG==='mc')&&!regras().off&&FIL==='todos'&&!BUSCA&&!FASS){regras().L[AG==='md'?'d':'c'].forEach(function(r){if(!G[r.k]){G[r.k]=[];ord.push(r.k);vaz[r.k]=1;}});ord.sort(function(a,b){return infoMotivo(a).ord-infoMotivo(b).ord;});}
+    var vaz={};var _ordFim=function(){ord=ord.concat(forak);};if((AG==='md'||AG==='mc')&&!regras().off&&FIL==='todos'&&!BUSCA&&!FASS){regras().L[AG==='md'?'d':'c'].forEach(function(r){if(!G[r.k]){G[r.k]=[];ord.push(r.k);vaz[r.k]=1;}});ord.sort(function(a,b){return infoMotivo(a).ord-infoMotivo(b).ord;});}
+    _ordFim();
     var h='';ord.forEach(function(k){var L=G[k].filter(passa);if(vaz[k]){h+='<section class="bl vz"><div class="bh"><h3>'+esc(infoMotivo(k).nome)+'</h3><span class="ct">nenhum processo nesta pauta</span></div></section>';return;}if(!L.length)return;var dist={};L.forEach(function(x){var d=fin(x,kd)||'ninguém';dist[d]=(dist[d]||0)+1;});
       var dd=Object.keys(dist).sort(function(a,b){return dist[b]-dist[a];}).map(function(n){return n+' '+dist[n];}).join(' · ');
       var ab=aberto(k,ord.length),lim=ABERTO[k]?L.length:Math.min(L.length,12);
       var todosG=L.every(function(x){return SEL[x.i];});
       /* "Bloco todo" mostra a pessoa quando o grupo inteiro está com ela */
       var uni=function(q){var v=fin(L[0],q);return v&&L.every(function(x){return fin(x,q)===v;})?v:'';},uD=uni('d'),uC=uni('c');
-      h+='<section class="bl'+(AG==='bloco'||AGP[AG]?'':' mo-'+k.split('|')[0])+'"><div class="bh"><input type="checkbox" class="ck" data-ckg="'+esc(k)+'"'+(todosG?' checked':'')+' aria-label="Selecionar todo o grupo" title="Selecionar todos os processos deste grupo"><button type="button" class="tg-gr" data-gr="'+esc(k)+'" aria-expanded="'+ab+'" title="'+(ab?'Recolher':'Abrir')+' o grupo">'+(ab?'▾':'▸')+'</button><h3 data-gr="'+esc(k)+'" style="cursor:pointer">'+esc(nomeGrupo(k))+'</h3><span class="ct">'+L.length+' processo'+(L.length>1?'s':'')+'</span><span class="dist">'+(kd==='c'?'correção: ':'minuta: ')+esc(dd)+'</span>'+(AG==='bloco'||AGP[AG]?'':'<span class="sub">'+esc(infoMotivo(k).sub)+'</span>')+
+      h+='<section class="bl'+(k.indexOf('F|')===0?' mo-fora':AG==='bloco'||AGP[AG]?'':' mo-'+k.split('|')[0])+'"><div class="bh"><input type="checkbox" class="ck" data-ckg="'+esc(k)+'"'+(todosG?' checked':'')+' aria-label="Selecionar todo o grupo" title="Selecionar todos os processos deste grupo"><button type="button" class="tg-gr" data-gr="'+esc(k)+'" aria-expanded="'+ab+'" title="'+(ab?'Recolher':'Abrir')+' o grupo">'+(ab?'▾':'▸')+'</button><h3 data-gr="'+esc(k)+'" style="cursor:pointer">'+esc(nomeGrupo(k))+'</h3><span class="ct">'+L.length+' processo'+(L.length>1?'s':'')+'</span><span class="dist">'+(kd==='c'?'correção: ':'minuta: ')+esc(dd)+'</span>'+(AG==='bloco'||AGP[AG]||k.indexOf('F|')===0?'':'<span class="sub">'+esc(infoMotivo(k).sub)+'</span>')+
         '<span class="bulk"><label>'+(AG==='bloco'?'Bloco todo':'Grupo todo')+': <select data-bulk="d" data-b="'+esc(k)+'"'+(uD?' class="on"':'')+'><option value="">'+(uD?'minutante…':'minutante: vários…')+'</option>'+PD.map(function(m){return '<option'+(m.nome===uD?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+optsEx('d',uD)+'</select></label><select data-bulk="c" data-b="'+esc(k)+'" aria-label="Corretor do bloco"'+(uC?' class="on"':'')+'><option value="">'+(uC?'corretor…':'corretor: vários…')+'</option>'+PC.map(function(m){return '<option'+(m.nome===uC?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+'</select></span></div>'+
         (ab?L.slice(0,lim):[]).map(function(x){var mud=(x.d&&fin(x,'d')!==x.d)||(x.c&&fin(x,'c')!==x.c);return '<div class="rw'+(mud?' mud':'')+(SEL[x.i]?' sel':'')+'" data-rw="'+x.i+'"><div class="pr"><input type="checkbox" class="ck" data-ck="'+x.i+'"'+(SEL[x.i]?' checked':'')+' aria-label="Selecionar o item '+x.i+'"><span class="it"><small>item </small>'+x.i+'</span><div class="pb"><span class="l1"><span class="cnj">'+esc(x.cnj)+'</span>'+(x.cl?'<span class="clb">'+esc(x.cl)+'</span>':'')+(x.t&&x.t!==x.cl?'<span class="tg '+x.t+'">'+x.t+'</span>':'')+'<span class="as" title="'+esc(x.as)+'">'+esc(x.as)+'</span></span><span class="mt">'+esc(x.sec||'')+((x.t==='ED'||x.t==='AgInt')&&x.od?(x.sec?' · ':'')+'acórdão: '+esc(x.od):'')+'</span></div></div>'+campo(x,'d')+campo(x,'c')+'</div>';}).join('')+
         (ab&&L.length>lim?'<button type="button" class="mais" data-mais="'+esc(k)+'">Mostrar mais '+(L.length-lim)+'</button>':'')+'</section>';});
@@ -441,9 +446,10 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   (function(){var C={},R={};IT.forEach(function(x){var k=N(x.as);C[k]=(C[k]||0)+1;if(!R[k])R[k]=x.as||'sem assunto';});var sel=document.getElementById('f-as');
     sel.innerHTML='<option value="">Todos os assuntos ('+IT.length+')</option>'+Object.keys(C).sort(function(a,b){return C[b]-C[a]||R[a].localeCompare(R[b]);}).map(function(k){return '<option value="'+esc(k)+'">'+esc(R[k])+' ('+C[k]+')</option>';}).join('');
     sel.addEventListener('change',function(){FASS=sel.value;ABERTO={};blocos();selbar();});})();
-  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-ag],[data-gr],[data-grtodos]');if(!t)return;
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-ag],[data-gr],[data-grtodos],[data-fora]');if(!t)return;
     if(t.dataset.gr!=null){var kg=t.dataset.gr,G0={};IT.forEach(function(x){G0[grupo(x)]=1;});ABRE[AG+'|'+kg]=!aberto(kg,Object.keys(G0).length);blocos();return;}
     if(t.dataset.grtodos!=null){var on=t.dataset.grtodos==='1';IT.forEach(function(x){ABRE[AG+'|'+grupo(x)]=on;});blocos();return;}
+    if(t.dataset.fora!=null){var fk=t.dataset.fora;if(FORA[fk])delete FORA[fk];else FORA[fk]=true;try{localStorage.setItem('mesa_fora',JSON.stringify(FORA));}catch(er){}blocos();return;}
     if(t.dataset.ag){AG=t.dataset.ag;ABERTO={};document.querySelectorAll('[data-ag]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.f){FIL=t.dataset.f;document.querySelectorAll('[data-f]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.mais){ABERTO[t.dataset.mais]=true;blocos();return;}
