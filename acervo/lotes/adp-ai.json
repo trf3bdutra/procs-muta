@@ -21495,8 +21495,8 @@
    "exequente": "CAIXA ECONÔMICA FEDERAL",
    "executado": "MUNICIPIO DE CAMPO GRANDE",
    "assunto": "IPTU/ Imposto Predial e Territorial Urbano",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · tributo municipal sobre imóvel do PAR/FAR · legitimidade da CEF como credora fiduciária (artigo 27, § 8º, da Lei 9.514/1997) · exceção de pré-executividade",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno prejudicado",
    "modelo": "",
    "variacoes": [],
@@ -21544,6 +21544,99 @@
     "outros": "Decisão ID 352210412 (28/01/2026): impedimento do Des. Fed. Marcelo Saraiva. Comprovante de GRU paga na CAIXA (ID 353379749, 04/02/2026). Despacho ID 353272618 (06/02/2026): recolhimento em dobro. Segundo comprovante de GRU (ID 354690806, 12/02/2026). Decisão ID 361687800 (25/03/2026): indeferiu a tutela recursal. Agravo interno da CEF ID 362588392 (26/03/2026). Redistribuição à Turma Regional de MS (16/06/2026).",
     "representacao": "Agravante: CEF (substabelecimento ID 351952925; procuração ID 362588397). Agravado: Município de Campo Grande.",
     "preparo": "Duas GRUs 18720-8 pagas pela CAIXA (R$ 64,26 cada; IDs 353379749 e 354690806), somando o dobro; sem comprovante STN [VALIDAR artigo 2º, § 2º, II, da Resolução PRES 138/2017]"
+   },
+   "assunto_detalhado": "Execução fiscal — tributo municipal; legitimidade da CEF como credora fiduciária",
+   "especificidades": "Arrendamento do PAR encerrado com a aquisição pelo ocupante, segundo a CEF · Tutela recursal indeferida (ID 361687800, 25/03/2026) · Agravo interno da CEF (ID 362588392) · Município sem resposta · Preparo em dobro por GRU paga na CAIXA",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — tributo municipal; legitimidade da CEF como credora fiduciária",
+     "subassuntos": "Execução fiscal · tributo municipal sobre imóvel do PAR/FAR · legitimidade da CEF como credora fiduciária (artigo 27, § 8º, da Lei 9.514/1997) · exceção de pré-executividade",
+     "sintese": "",
+     "questoes": "1) Responsabilidade da credora fiduciária pelos tributos do imóvel (artigo 27, § 8º, da Lei 9.514/1997); 2) representação do FAR pela CEF no PAR (Lei 10.188/2001); 3) agravo interno prejudicado.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "476751706",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou a exceção de pré-executividade da CEF."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "476751706"
+     },
+     "adm": {
+      "prot": "2026-01-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "351952924",
+       "contra": "Não apresentada"
+      },
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "362588392",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "351952924",
+       "data": "2026-01-27"
+      },
+      {
+       "desc": "GRU paga na CAIXA",
+       "id": "353379749",
+       "data": "2026-02-05"
+      },
+      {
+       "desc": "Despacho de recolhimento em dobro",
+       "id": "353272618",
+       "data": "2026-02-06"
+      },
+      {
+       "desc": "Segunda GRU paga",
+       "id": "354690806",
+       "data": "2026-02-13"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "361687800",
+       "data": "2026-03-25"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "362588392",
+       "data": "2026-03-26"
+      }
+     ],
+     "pendencias": "Conferir o preparo em dobro",
+     "especificidades": "Arrendamento do PAR encerrado com a aquisição pelo ocupante, segundo a CEF · Tutela recursal indeferida (ID 361687800, 25/03/2026) · Agravo interno da CEF (ID 362588392) · Município sem resposta · Preparo em dobro por GRU paga na CAIXA"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-03-25"
+    }
    }
   },
   {
