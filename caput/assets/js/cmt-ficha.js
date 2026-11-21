@@ -1106,7 +1106,7 @@ function cabecalho() {
   var nav = L.length > 1 && i >= 0 ? '<button type="button" class="fx-sq" data-fx="ant" title="Processo anterior (Alt+↑)">' + svg('back') + '</button><span class="fx-note">' + (i + 1) + ' de ' + L.length + '</span><button type="button" class="fx-sq" data-fx="prox" title="Próximo processo (Alt+↓)">' + svg('fwd') + '</button>' : '';
   return '<header class="fx-head"><span class="fx-ic">' + svg('ficha') + '</span>' +
     '<div class="fx-tt"><span>' + E(['Ficha do processo', cl, as].filter(Boolean).join(' · ')) + '</span><div class="fx-num"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2><button type="button" class="fx-sq" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' + (partes ? '<small>' + E(partes) + '</small>' : '') + '</div>' +
-    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && (!ST.ad.leitura || ST.ad.teor) ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') + nav + '</div>' +
+    '<div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && (!ST.ad.leitura || ST.ad.teor) ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') + (ST.d && !ST.err ? '<button type="button" class="fx-pill" data-fx="teor-json" title="Baixar o inteiro teor extraído do PJe (.json): lista de peças com ID, tipo e data de juntada, e o texto de cada uma">' + svg('txt') + 'Baixar .json</button>' : '') + nav + '</div>' +
     '<button type="button" class="fx-sq fx-x" data-fx="fechar" aria-label="Fechar" title="Fechar (Esc)">' + svg('x') + '</button></header>';
 }
 function faixa() {
@@ -1182,7 +1182,7 @@ function fx2Topo() {
   var L = ST.ad.lista || [], i = L.map(dg).indexOf(dg(ST.cnj));
   var nav = L.length > 1 && i >= 0 ? '<button type="button" class="fx-sq" data-fx="ant" title="Processo anterior (Alt+↑)">' + svg('back') + '</button><span class="fx2-nv">' + (i + 1) + ' de ' + L.length + '</span><button type="button" class="fx-sq" data-fx="prox" title="Próximo processo (Alt+↓)">' + svg('fwd') + '</button>' : '';
   return '<header class="fx2-top"><span class="fx2-k">Ficha do processo</span>' + (dd != null ? '<span class="fx2-dt' + (dd > 15 ? ' is-al' : '') + '">' + dd + (dd === 1 ? ' dia' : ' dias') + ' na tarefa<span class="fx2-mt"><i style="width:' + Math.min(100, Math.round(dd * 100 / 30)) + '%"></i></span></span>' : '') +
-    '<span class="fx-grow"></span><div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && (!ST.ad.leitura || ST.ad.teor) ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') +
+    '<span class="fx-grow"></span><div class="fx-acts" role="group" aria-label="Ações da ficha">' + (window.CMTInteiroTeor && ST.d && !ST.err && (!ST.ad.leitura || ST.ad.teor) ? '<button type="button" class="fx-pill' + (ST.teor ? ' is-on' : '') + '" data-fx="teor" title="Importar o inteiro teor (.txt do PJe ou .md da extensão TecJustiça): lista os documentos e sugere os campos; grava só o que for confirmado">' + svg('txt') + 'Inteiro teor</button>' : '') + (ST.d && !ST.err ? '<button type="button" class="fx-pill" data-fx="teor-json" title="Baixar o inteiro teor extraído do PJe (.json): lista de peças com ID, tipo e data de juntada, e o texto de cada uma">' + svg('txt') + 'Baixar .json</button>' : '') +
     (ST.d && !ST.err ? '<button type="button" class="fx-pill" data-fx="doc" title="Ficha completa · ler, imprimir ou salvar em PDF">' + svg('print') + 'Ficha completa</button>' : '') + nav + '</div>' +
     '<button type="button" class="fx-sq fx-x" data-fx="fechar" aria-label="Fechar" title="Fechar (Esc)">' + svg('x') + '</button></header>';
 }
@@ -1513,6 +1513,27 @@ function itensTeor(P) {
 }
 function descartarTeor() { if (ST.teor && ST.teor.parsed && ST.teor.parsed.docs) ST.teor.parsed.docs.forEach(function (d) { d.text = ''; }); ST.teor = null; }
 function fecharTeor() { descartarTeor(); render(); }
+/* inteiro teor extraído do PJe (acervo/autos/<CNJ>.json.gz, gravado pela extração dos autos): baixa como .json pela ponte da Ex Officio (sessão de nome e senha) */
+function cnjFmt(v) { var d = dg(v); return d.length === 20 ? d.slice(0, 7) + '-' + d.slice(7, 9) + '.' + d.slice(9, 13) + '.' + d.slice(13, 14) + '.' + d.slice(14, 16) + '.' + d.slice(16) : S(v); }
+function baixarTeorJson() {
+  var c = cnjFmt(ST.cnj); if (dg(c).length !== 20) return avisar('Número do processo inválido para baixar o inteiro teor.', 'err');
+  if (!window.DecompressionStream) return avisar('Este navegador não abre o arquivo compactado; use o Chrome atualizado.', 'err');
+  avisar('Baixando o inteiro teor de ' + c + '…');
+  var abre = function (buf) { var b = new Uint8Array(buf); return b.length > 2 && b[0] === 0x1f && b[1] === 0x8b ? new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer().then(abre) : buf; };
+  fetch('/api/acesso?gh=1&p=' + encodeURIComponent('contents/acervo/autos/' + c + '.json.gz?ref=main'), { headers: { 'X-Ponte-Accept': 'application/vnd.github.raw+json' }, cache: 'no-store', credentials: 'same-origin' })
+    .then(function (r) {
+      if (r.status === 404) throw new Error('o inteiro teor deste processo ainda não foi extraído do PJe');
+      if (r.status === 401) throw new Error('entre na Ex Officio (nome e senha) e tente de novo');
+      if (r.status === 403) throw new Error('sem permissão para o acervo do gabinete');
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.arrayBuffer();
+    }).then(abre).then(function (buf) {
+      var o = JSON.parse(new TextDecoder('utf-8').decode(buf)), a = document.createElement('a'), n = (String(o.texto || '').match(/===== ID /g) || []).length;
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(o, null, 1)], { type: 'application/json' })); a.download = c + '.json'; document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+      avisar('Inteiro teor baixado: ' + c + '.json' + (n ? ' · ' + n + ' peças com texto' : '') + (o.extraido_em ? ' · extraído em ' + brD(String(o.extraido_em).slice(0, 10)) : ''), 'ok');
+    }).catch(function (e) { avisar('Não foi possível baixar o inteiro teor: ' + ((e && e.message) || e), 'err'); });
+}
 function lerTxt(file) {
   var T = TX(); if (!T.parseTxt) return;
   if (!/\.(txt|md|markdown)$/i.test(file.name) && file.type && !/^text\/(plain|markdown|x-markdown)$/.test(file.type)) { ST.teor = { step: 0, err: 'Envie o .txt do inteiro teor exportado pelo PJe ou o .md da extensão TecJustiça.' }; render(); return; }
@@ -1620,6 +1641,7 @@ function onClick(ev) {
     gravar({ 'origem.Observações': ov }, 'Observações gravadas.').then(function (ok) { if (ok) { ST.obsEd = false; ST.obsTx = ''; render(); } }).catch(function () {}); return; }
   if (a === 'teor') { if (ST.teor) fecharTeor(); else { ST.teor = { step: 0 }; render(); } return; }
   if (a === 'teor-fechar') return fecharTeor();
+  if (a === 'teor-json') return baixarTeorJson();
   if (a === 'teor-voltar') { ST.teor.step = 1; render(); return; }
   if (a === 'teor-extrair') { try { ST.teor.items = itensTeor(ST.teor.parsed); ST.teor.step = 2; } catch (e) { console.error('[ficha] inteiro teor · sugestões', e); avisar('Não foi possível extrair os campos: ' + ((e && e.message) || e), 'err'); } render(); return; }
   if (a === 'teor-gravar') return gravarTeor();
