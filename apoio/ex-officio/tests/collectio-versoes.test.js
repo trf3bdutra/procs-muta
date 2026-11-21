@@ -149,7 +149,7 @@ test('só o gestor grava; o relator vê só a vigente, sem o histórico', async 
 
 test('página do Collectio tem o registro e a comparação de versões', () => {
   const html = fs.readFileSync(path.join(ROOT, 'apoio/ex-officio/lotes/index.html'), 'utf8');
-  for (const k of ['data-vers=', 'data-vreg=', "acao:'minuta-versao'", "acao:'minuta-vigente'", 'function difSecoes', 'function parteMinuta', 'Comparar versões'])
+  for (const k of ['data-vers=', 'data-vreg=', "acao:'minuta-versao'", "acao:'minuta-vigente'", 'function difSecoes', 'function parteMinuta', 'data-vcmp><b>Comparar</b>'])
     assert.ok(html.includes(k), 'falta ' + k);
   /* o parser da página reconhece o formato do "Copiar tudo" */
   const src = html.match(/const TIT_SEC=[\s\S]*?\n(?=const textoSecoes)/)[0];
@@ -157,4 +157,28 @@ test('página do Collectio tem o registro e a comparação de versões', () => {
   const p = parteMinuta('PODER JUDICIÁRIO\nRELATÓRIO\n\nTrata-se de apelação.\n\nÉ o relatório.\n\nVOTO\n\nSenhores Desembargadores,\n\nEMENTA\n\nDIREITO.\n\nACÓRDÃO\n\nVistos.');
   assert.deepEqual(p.secoes, { relatorio: ['Trata-se de apelação.', 'É o relatório.'], voto: ['Senhores Desembargadores,'], ementa: ['DIREITO.'], acordao: ['Vistos.'] });
   assert.equal(p.antes, 1);
+});
+
+test('comparação só na caixa de versões, com outras fontes e conformidade; painel lateral sem "Comparar"', () => {
+  const html = fs.readFileSync(path.join(ROOT, 'apoio/ex-officio/lotes/index.html'), 'utf8');
+  assert.ok(!html.includes('id="cx-cmp"') && !html.includes('data-cx="cmp"') && !html.includes('async function compara('), 'o painel lateral não compara mais');
+  for (const k of ['data-vfb', "['modelo','Modelo do banco']", "['matriz','Minuta-Matriz']", "['prec','Precedente do Ementário']", "['texto','Texto colado']",
+    '/extensao/dados/base.json.gz', '/jurisprudencia/indice.json.gz', '/amicus/collectio/conformidade-motor.js', 'function confVersao', 'data-vconf'])
+    assert.ok(html.includes(k), 'falta ' + k);
+  const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/vercel-caput.yml'), 'utf8');
+  assert.ok(wf.includes('cp extensao/conformidade-motor.js site/public/amicus/collectio/conformidade-motor.js'), 'o motor é publicado com o Collectio');
+  /* títulos espaçados dos inteiros teores (“R E L A T Ó R I O”) */
+  const src = html.match(/const TIT_SEC=[\s\S]*?\n(?=const textoSecoes)/)[0];
+  const parteMinuta = new Function(src + ';return parteMinuta')();
+  const p = parteMinuta('PODER JUDICIÁRIO\nR E L A T Ó R I O\nTrata-se.\nÉ o relatório.\nV O T O\nVoto.\nE M E N T A\nDIREITO.');
+  assert.deepEqual(p.secoes, { relatorio: ['Trata-se.', 'É o relatório.'], voto: ['Voto.'], ementa: ['DIREITO.'], acordao: [] });
+});
+
+test('o motor da conformidade analisa a minuta do lote no formato da caixa de versões', () => {
+  const M = require(path.join(ROOT, 'extensao/conformidade-motor.js'));
+  const ps = ['RELATÓRIO', ...NOVA.relatorio, 'VOTO', 'O Desembargador Federal Carlos Muta (Relator):', ...NOVA.voto, 'EMENTA', ...NOVA.ementa, 'ACÓRDÃO', ...NOVA.acordao];
+  const r = M.analisar(ps, { formatacao: false, cartao: { pecas: [{ id: '343454417' }] } });
+  assert.equal(r.peca, 'acordao');
+  assert.ok(Array.isArray(r.itens) && typeof r.nota === 'number');
+  assert.ok(!r.itens.some(x => x.regra === 'ID-prontuario'), 'o ID citado consta das peças informadas');
 });
