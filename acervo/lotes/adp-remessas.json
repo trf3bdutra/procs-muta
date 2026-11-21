@@ -148,6 +148,13 @@
    "cor": "#4a6a6a",
    "resultado": "Desprovimento: titular de serventia, pessoa física, não é contribuinte do salário-educação (linha da Turma: RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR]",
    "modelo": "Monocrática (artigo 932 do CPC)"
+  },
+  {
+   "id": "RA13",
+   "rotulo": "Apelação com remessa · TCFA (IBAMA): comércio de peças e troca de óleo lubrificante",
+   "cor": "#3a6a2a",
+   "resultado": "Desprovimento: atividade não sujeita à TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026) [VALIDAR objeto social de cada caso]",
+   "modelo": "Voto ou monocrática"
   }
  ],
  "grupo_outros": {
@@ -20986,12 +20993,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE - MS",
    "executado": "DEBORA CATIZANE DE OLIVEIRA FRANCO",
    "assunto": "Salário-Educação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA12",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · salário-educação sobre a folha de empregados de serventia extrajudicial · titular de cartório pessoa física · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 295383539) e remessa necessária da sentença ID 295383537; contrarrazões (ID 295383542) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, por decisão monocrática, se confirmada a linha [VALIDAR] [VALIDAR: Paradigma do STJ sobre salário-educação de pessoa física]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de Débora Catizane de Oliveira Franco, titular de cartório, pessoa física.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -21002,7 +21011,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de desprovimento",
+    "materia": "Tributário — salário-educação",
+    "origem": "Mandado de segurança 5003444-70.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 295383537 (09/07/2024)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 295383539, 15/07/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível (artigo 932 do CPC): linha da Turma Regional [VALIDAR paradigma do STJ]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -21012,6 +21032,110 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Salário-educação — titular de cartório (pessoa física)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 295383537 · 09/07/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 306375269 · 04/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: monocrática de desprovimento em remessa sobre salário-educação (RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR identidade de situação] · Titular de serventia extrajudicial, pessoa física, não se enquadra como empresa (artigo 15 da Lei 9.424/1996) [VALIDAR jurisprudência do STJ] · Grupo: 5004026-36 e 5005440-06",
+   "teor": {
+    "sintese_fatica": "Débora Catizane de Oliveira Franco, titular de serventia extrajudicial, pede o reconhecimento da inexigibilidade do salário-educação sobre a remuneração de seus empregados. A sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 295383537 (09/07/2024): concedeu em parte a segurança para declarar inexigível o salário-educação sobre a remuneração dos empregados da serventia extrajudicial da impetrante [VALIDAR parte denegada].",
+    "recurso": "União (Fazenda Nacional) (ID 295383539, 15/07/2024): o titular de cartório equipara-se a empresa para fins de contribuições sobre a folha; incidência do salário-educação [VALIDAR teor].",
+    "resposta": "Contrarrazões do impetrante (ID 295383542).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Juliano Gusson Alves de Arruda (OAB/MS 15.981) e Natália Feitosa Beltrão (OAB/MS 13.355).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · salário-educação sobre a folha de empregados de serventia extrajudicial · titular de cartório pessoa física · segurança concedida",
+     "sintese": "Débora Catizane de Oliveira Franco, titular de serventia extrajudicial, pede o reconhecimento da inexigibilidade do salário-educação sobre a remuneração de seus empregados. A sentença concedeu a segurança.",
+     "questoes": "1) Salário-educação: sujeição passiva do titular de cartório pessoa física; 2) compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 295383539, 15/07/2024): o titular de cartório equipara-se a empresa para fins de contribuições sobre a folha; incidência do salário-educação [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 295383542)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "295383537",
+      "juizo": "Mandado de segurança 5003444-70.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu em parte a segurança para declarar inexigível o salário-educação sobre a remuneração dos empregados da serventia extrajudicial da impetrante [VALIDAR parte denegada]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-04-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "295383539",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "295383537",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "295383537",
+       "data": "2024-07-09"
+      },
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "295383325",
+       "data": "2023-05-31"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "295383539",
+       "data": "2024-07-15"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "295383542",
+       "data": "2024-08-05"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 295383537 · 09/07/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 306375269 · 04/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: monocrática de desprovimento em remessa sobre salário-educação (RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR identidade de situação] · Titular de serventia extrajudicial, pessoa física, não se enquadra como empresa (artigo 15 da Lei 9.424/1996) [VALIDAR jurisprudência do STJ] · Grupo: 5004026-36 e 5005440-06",
+     "assuntoDet": "Salário-educação — titular de cartório (pessoa física)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 295383537 · 09/07/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 306375269 · 04/10/2024",
+    "ultima_informacao": "Ato ordinatório · ID 295383541 · 17/07/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 295383537 · 09/07/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 306375269 · 04/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -21023,12 +21147,14 @@
    "exequente": "MINISTERIO PUBLICO FEDERAL - PR/MS",
    "executado": "SERVAN ANESTESIOLOGIA DE CAMPO GRANDE S/S",
    "assunto": "Sistema Único de Saúde (SUS)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação do MPF e remessa necessária em ação civil pública · cooperativa/sociedade única de anestesiologistas em Campo Grande (SERVAN) · abuso de poder econômico e serviço do SUS no Hospital Universitário · acordo parcial homologado · cisão endossada pelo CADE · pedidos remanescentes (multa de R$ 12 milhões e publicação) julgados improcedentes",
+   "resultado": "Ato a proferir: apelação do MPF (ID 274009381) e remessa necessária da sentença ID 274009377; contrarrazões (ID 274009389); parecer da PRR (ID 276191832) ‖ Proposta pelos precedentes: Voto: examinar a pertinência da multa e da publicação após a cisão endossada pelo CADE (independência das instâncias) [VALIDAR] [VALIDAR: Dispositivo completo da sentença; Conclusão do parecer da PRR]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do MPF e remessa necessária da sentença que, após acordo parcial e cisão endossada pelo CADE, rejeitou a multa de R$ 12 milhões e a publicação da condenação pedidas contra a SERVAN.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -21039,7 +21165,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — ACP (concorrência e SUS)",
+    "origem": "Ação civil pública 0014029-24.2013.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 274009377 (23/02/2023)",
+    "recurso": "apelação de MPF (ID 274009381, 18/04/2023) · remessa necessária",
+    "preparo": "MPF: Isento (ente público/MP)",
+    "monocratica": "Improvável: ação coletiva",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "MPF: Isento (ente público/MP) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -21049,6 +21186,132 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ACP — anestesiologia no SUS (SERVAN): abuso de poder econômico, multa e publicação",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 295547037 · 26/08/2024 — …D E S P A C H O Id. 283615547: Dê-se vista à parte contrária da petição e documentos juntados, para eventual manifestação, no prazo de 15 (quinze) dias.Publique-se. Intime-se | última peça: Petição intercorrente (advogado de parte) · ID 303408698 · 16/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prevenção\" [VALIDAR] · Apelação recebida no efeito devolutivo pela 4ª Turma (ID 277946744) · Remessa em ação civil pública julgada improcedente em parte (artigo 19 da Lei 4.717/1965, por analogia) [VALIDAR] · Sentenças de 2020 e 2022 integram o histórico (acordo e polo passivo)",
+   "teor": {
+    "sintese_fatica": "O MPF ajuizou em 2013 ação civil pública contra a SERVAN, a União e a FUFMS por abuso de poder econômico da sociedade que concentrava os anestesiologistas de Campo Grande, com risco ao atendimento do SUS no Hospital Universitário. Houve acordo parcial e cisão endossada pelo CADE.",
+    "inicial": "Ação civil pública do MPF contra a SERVAN Anestesiologia, a União e a FUFMS (EBSERH assistente).",
+    "decisao_recorrida": "Sentença ID 274009377 (23/02/2023): após homologação de acordo parcial (itens a.1, a.3 e a.4, ID 274009289) e integração do polo passivo pelos sócios, julgou improcedentes os pedidos remanescentes de multa de R$ 12.000.000,00 (artigo 37 da Lei 12.529/2011) e de publicação da condenação, por suficiência da multa e da cisão do CADE [VALIDAR demais itens].",
+    "recurso": "MPF (ID 274009381, 18/04/2023): condenação da SERVAN em multa e publicação; insuficiência das medidas do CADE.",
+    "resposta": "Contrarrazões (ID 274009389) [VALIDAR parte].",
+    "parecer": "MPF ID 276191832: Parecer da PRR [VALIDAR conclusão]",
+    "memoriais": "Não consta",
+    "representacao": "SERVAN e demais réus com advogados constituídos; EBSERH assistente.",
+    "preparo": "MPF: Isento (ente público/MP)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do MPF e remessa necessária em ação civil pública · cooperativa/sociedade única de anestesiologistas em Campo Grande (SERVAN) · abuso de poder econômico e serviço do SUS no Hospital Universitário · acordo parcial homologado · cisão endossada pelo CADE · pedidos remanescentes (multa de R$ 12 milhões e publicação) julgados improcedentes",
+     "sintese": "O MPF ajuizou em 2013 ação civil pública contra a SERVAN, a União e a FUFMS por abuso de poder econômico da sociedade que concentrava os anestesiologistas de Campo Grande, com risco ao atendimento do SUS no Hospital Universitário. Houve acordo parcial e cisão endossada pelo CADE.",
+     "questoes": "1) Abuso de poder econômico em serviço do SUS: multa e publicação após cisão endossada pelo CADE.",
+     "rel": {
+      "razoes": "MPF (ID 274009381, 18/04/2023): condenação da SERVAN em multa e publicação; insuficiência das medidas do CADE.",
+      "contrarrazoes": "Contrarrazões (ID 274009389) [VALIDAR parte]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "274009377",
+      "juizo": "Ação civil pública 0014029-24.2013.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "após homologação de acordo parcial (itens a.1, a.3 e a.4, ID 274009289) e integração do polo passivo pelos sócios, julgou improcedentes os pedidos remanescentes de multa de R$ 12.000.000,00 (artigo 37 da Lei 12.529/2011) e de publicação da condenação, por suficiência da multa e da cisão do CADE [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2019-10-24",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "MPF",
+       "tipo": "Apelação",
+       "id": "274009381",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "274009377",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: homologação de acordo parcial",
+       "id": "274009274",
+       "data": "2020-03-05"
+      },
+      {
+       "desc": "Sentença: retificação do acordo",
+       "id": "274009289",
+       "data": "2020-08-06"
+      },
+      {
+       "desc": "Decisão: integração dos sócios ao polo passivo",
+       "id": "274009372",
+       "data": "2022-12-19"
+      },
+      {
+       "desc": "Sentença: pedidos remanescentes",
+       "id": "274009377",
+       "data": "2023-02-23"
+      },
+      {
+       "desc": "Apelação do MPF",
+       "id": "274009381",
+       "data": "2023-04-18"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "274009389",
+       "data": "2023-05-12"
+      },
+      {
+       "desc": "Parecer da PRR",
+       "id": "276191832",
+       "data": "2023-06-27"
+      },
+      {
+       "desc": "Decisão: recebimento da apelação",
+       "id": "277946744",
+       "data": "2023-08-17"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 295547037 · 26/08/2024 — …D E S P A C H O Id. 283615547: Dê-se vista à parte contrária da petição e documentos juntados, para eventual manifestação, no prazo de 15 (quinze) dias.Publique-se. Intime-se | última peça: Petição intercorrente (advogado de parte) · ID 303408698 · 16/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prevenção\" [VALIDAR] · Apelação recebida no efeito devolutivo pela 4ª Turma (ID 277946744) · Remessa em ação civil pública julgada improcedente em parte (artigo 19 da Lei 4.717/1965, por analogia) [VALIDAR] · Sentenças de 2020 e 2022 integram o histórico (acordo e polo passivo)",
+     "assuntoDet": "ACP — anestesiologia no SUS (SERVAN): abuso de poder econômico, multa e publicação",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "ACP/ação popular",
+     "parecer": "Com parecer",
+     "idParecer": "276191832",
+     "parecerSentido": "Parecer da PRR [VALIDAR conclusão]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 295547037 · 26/08/2024 — …D E S P A C H O Id. 283615547: Dê-se vista à parte contrária da petição e documentos juntados, para eventual manifestação, no prazo de 15 (quinze) dias.Publique-se. Intime-se",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 303408698 · 16/09/2024",
+    "ultima_informacao": "Certidão · ID 274078345 · 15/05/2023",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 295547037 · 26/08/2024 — …D E S P A C H O Id. 283615547: Dê-se vista à parte contrária da petição e documentos juntados, para eventual manifestação, no prazo de 15 (quinze) dias.Publique-se. Intime-se | última peça: Petição intercorrente (advogado de parte) · ID 303408698 · 16/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -21060,12 +21323,14 @@
    "exequente": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "executado": "VEIPECAS COMERCIO IMPORTACAO LTDA",
    "assunto": "Taxa de Fiscalização Ambiental",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA13",
+   "tipo_caso": "Apelação do IBAMA e remessa necessária em ação declaratória · inexistência de débito de TCFA protestado (Intimação 99-07/10/2019 do 2º Cartório de Protestos de Campo Grande) · comércio de peças · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelação do IBAMA (ID 311314407) e remessa necessária da sentença ID 311314406; contrarrazões (ID 311314409) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, se a atividade não constar do Anexo VIII da Lei 6.938/1981 [VALIDAR] [VALIDAR: Objeto social e atividade da autora]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do IBAMA e remessa necessária da sentença que declarou inexistente débito de TCFA protestado contra a Veipeças, empresa de comércio de peças.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -21076,7 +21341,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto ou monocrática)",
+    "materia": "Tributário — TCFA",
+    "origem": "Procedimento comum 5008824-16.2019.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 311314406 (04/09/2024)",
+    "recurso": "apelação de IBAMA (ID 311314407, 06/11/2024) · remessa necessária",
+    "preparo": "IBAMA: Isento (autarquia)",
+    "monocratica": "Possível: linha da Turma Regional [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "IBAMA: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -21086,6 +21362,106 @@
    "chegada": "29/07/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "TCFA — inexistência de débito de empresa de comércio de peças",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 389092199 · 28/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 311314406 · 04/09/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 311314409 · 03/12/2024 | última movimentação: 29/07/2026 13:35 · Conclusos para julgamento · Linha da Turma Regional: comércio e troca de óleo lubrificante em empresa de peças e oficina de motocicletas não é fato gerador da TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026) · Grupo: 5008824-16 e 5008350-40 · Etiquetas \"APTO - CONFERIR\", \"Ibama - multa\" e \"triagem de gabinete\" · Objeto social e atividade efetiva da autora [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Veipeças Comércio Importação Ltda. impugna débito de TCFA levado a protesto pelo IBAMA, alegando que sua atividade não é potencialmente poluidora.",
+    "inicial": "Ação declaratória de inexistência de débito contra o IBAMA.",
+    "decisao_recorrida": "Sentença ID 311314406 (04/09/2024): julgou procedente o pedido para declarar inexistente o débito objeto do protesto (Intimação 99-07/10/2019) e cancelar o título da dívida ativa [VALIDAR demais itens].",
+    "recurso": "IBAMA (ID 311314407, 06/11/2024): a atividade da autora consta do Anexo VIII da Lei 6.938/1981 e sujeita-se à TCFA [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora (ID 311314409).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Dijalma Mazali Alves (OAB/MS 10.279).",
+    "preparo": "IBAMA: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do IBAMA e remessa necessária em ação declaratória · inexistência de débito de TCFA protestado (Intimação 99-07/10/2019 do 2º Cartório de Protestos de Campo Grande) · comércio de peças · pedido julgado procedente",
+     "sintese": "Veipeças Comércio Importação Ltda. impugna débito de TCFA levado a protesto pelo IBAMA, alegando que sua atividade não é potencialmente poluidora.",
+     "questoes": "1) TCFA: sujeição de empresa de comércio de peças e troca de óleo; 2) protesto da CDA.",
+     "rel": {
+      "razoes": "IBAMA (ID 311314407, 06/11/2024): a atividade da autora consta do Anexo VIII da Lei 6.938/1981 e sujeita-se à TCFA [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora (ID 311314409)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "311314406",
+      "juizo": "Procedimento comum 5008824-16.2019.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para declarar inexistente o débito objeto do protesto (Intimação 99-07/10/2019) e cancelar o título da dívida ativa [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2019-10-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "IBAMA",
+       "tipo": "Apelação",
+       "id": "311314407",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "311314406",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "311314406",
+       "data": "2024-09-04"
+      },
+      {
+       "desc": "Apelação do IBAMA",
+       "id": "311314407",
+       "data": "2024-11-06"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "311314409",
+       "data": "2024-12-03"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 389092199 · 28/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 311314406 · 04/09/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 311314409 · 03/12/2024 | última movimentação: 29/07/2026 13:35 · Conclusos para julgamento · Linha da Turma Regional: comércio e troca de óleo lubrificante em empresa de peças e oficina de motocicletas não é fato gerador da TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026) · Grupo: 5008824-16 e 5008350-40 · Etiquetas \"APTO - CONFERIR\", \"Ibama - multa\" e \"triagem de gabinete\" · Objeto social e atividade efetiva da autora [VALIDAR]",
+     "assuntoDet": "TCFA — inexistência de débito de empresa de comércio de peças",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "29/07/2026 13:35 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 389092199 · 28/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 311314406 · 04/09/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 311314409 · 03/12/2024",
+    "ultima_informacao": "Certidão · ID 389364229 · 29/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 389092199 · 28/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 311314406 · 04/09/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 311314409 · 03/12/2024 | última movimentação: 29/07/2026 13:35 · Conclusos para julgamento"
    }
   },
   {
@@ -21097,12 +21473,14 @@
    "exequente": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "executado": "COMETA CAMPO GRANDE COMERCIO DE MOTOS LTDA",
    "assunto": "Taxa de Fiscalização Ambiental",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA13",
+   "tipo_caso": "Apelação do IBAMA e remessa necessária em mandado de segurança · inexigibilidade da TCFA de concessionária de motocicletas (matriz e filial) · liminar indeferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação do IBAMA (ID 282305788) e remessa necessária da sentença ID 282305787; contrarrazões (ID 282305792) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, na linha da ApCiv 5010796-21.2019.4.03.6000 [VALIDAR atividade] [VALIDAR: Objeto social e atividade das impetrantes]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do IBAMA e remessa necessária da sentença que afastou a TCFA de concessionária de motocicletas, matriz e filial.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -21113,7 +21491,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto ou monocrática)",
+    "materia": "Tributário — TCFA",
+    "origem": "Mandado de segurança 5008350-40.2022.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 282305787 (09/10/2023)",
+    "recurso": "apelação de IBAMA (ID 282305788, 12/10/2023) · remessa necessária",
+    "preparo": "IBAMA: Isento (autarquia)",
+    "monocratica": "Possível: linha da Turma Regional [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "IBAMA: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -21123,6 +21512,115 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "TCFA — concessionária de motocicletas (comércio e troca de óleo)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 284705598 · 26/01/2024 — indeferiu a liminar ou a tutela | última peça: Petição intercorrente (advogado de parte) · ID 326192569 · 30/05/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: comércio e troca de óleo lubrificante em empresa de peças e oficina de motocicletas não é fato gerador da TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026) · Grupo: 5008824-16 e 5008350-40 · Efeito suspensivo indeferido pelo Des. Fed. André Nabarrete (ID 284705598) · Etiqueta \"META 6 (até 2025)\"",
+   "teor": {
+    "sintese_fatica": "Cometa Campo Grande Comércio de Motos Ltda. (matriz e filial em Paranaíba) impugna a cobrança da TCFA. A liminar foi indeferida e a sentença concedeu a segurança; o efeito suspensivo foi indeferido na 4ª Turma (ID 284705598).",
+    "inicial": "Mandado de segurança contra o Superintendente do IBAMA em Mato Grosso do Sul.",
+    "decisao_recorrida": "Sentença ID 282305787 (09/10/2023): concedeu a segurança para reconhecer a inexigibilidade da TCFA das impetrantes e vedar inscrição em dívida ativa ou no CADIN e execução fiscal.",
+    "recurso": "IBAMA (ID 282305788, 12/10/2023): enquadramento da atividade no Anexo VIII da Lei 6.938/1981 (comércio de combustíveis e derivados de petróleo) [VALIDAR teor].",
+    "resposta": "Contrarrazões das impetrantes (ID 282305792).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Impetrantes assistidas por advogado constituído [VALIDAR].",
+    "preparo": "IBAMA: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do IBAMA e remessa necessária em mandado de segurança · inexigibilidade da TCFA de concessionária de motocicletas (matriz e filial) · liminar indeferida · segurança concedida",
+     "sintese": "Cometa Campo Grande Comércio de Motos Ltda. (matriz e filial em Paranaíba) impugna a cobrança da TCFA. A liminar foi indeferida e a sentença concedeu a segurança; o efeito suspensivo foi indeferido na 4ª Turma (ID 284705598).",
+     "questoes": "1) TCFA: sujeição de concessionária de motocicletas que realiza troca de óleo.",
+     "rel": {
+      "razoes": "IBAMA (ID 282305788, 12/10/2023): enquadramento da atividade no Anexo VIII da Lei 6.938/1981 (comércio de combustíveis e derivados de petróleo) [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões das impetrantes (ID 282305792)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "282305787",
+      "juizo": "Mandado de segurança 5008350-40.2022.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para reconhecer a inexigibilidade da TCFA das impetrantes e vedar inscrição em dívida ativa ou no CADIN e execução fiscal."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-09-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "IBAMA",
+       "tipo": "Apelação",
+       "id": "282305788",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "282305787",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "282305760",
+       "data": "2022-11-22"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "282305787",
+       "data": "2023-10-09"
+      },
+      {
+       "desc": "Apelação do IBAMA",
+       "id": "282305788",
+       "data": "2023-10-12"
+      },
+      {
+       "desc": "Contrarrazões das impetrantes",
+       "id": "282305792",
+       "data": "2023-11-09"
+      },
+      {
+       "desc": "Decisão: efeito suspensivo indeferido",
+       "id": "284705598",
+       "data": "2024-01-26"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 284705598 · 26/01/2024 — indeferiu a liminar ou a tutela | última peça: Petição intercorrente (advogado de parte) · ID 326192569 · 30/05/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: comércio e troca de óleo lubrificante em empresa de peças e oficina de motocicletas não é fato gerador da TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026) · Grupo: 5008824-16 e 5008350-40 · Efeito suspensivo indeferido pelo Des. Fed. André Nabarrete (ID 284705598) · Etiqueta \"META 6 (até 2025)\"",
+     "assuntoDet": "TCFA — concessionária de motocicletas (comércio e troca de óleo)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 284705598 · 26/01/2024 — indeferiu a liminar ou a tutela",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 326192569 · 30/05/2025",
+    "ultima_informacao": "Certidão · ID 282393227 · 14/11/2023",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 284705598 · 26/01/2024 — indeferiu a liminar ou a tutela | última peça: Petição intercorrente (advogado de parte) · ID 326192569 · 30/05/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -21134,12 +21632,14 @@
    "exequente": "CLARO S/A",
    "executado": "MINISTERIO PUBLICO FEDERAL - PR/MS",
    "assunto": "Telefonia",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM4",
+   "tipo_caso": "Apelações da Claro S.A. e da ANATEL e remessa necessária em ação civil pública do MPF (Corumbá) · qualidade do serviço de telefonia · sentença de procedência [VALIDAR alcance] · processo físico de 2012 digitalizado",
+   "resultado": "Ato a proferir: apelações da Claro e da ANATEL e remessa necessária (processo digitalizado); parecer da PRR pelo desprovimento (ID 120423276) ‖ Proposta pelos precedentes: Voto: conferir as peças digitalizadas e a prevenção; examinar legitimidade, qualidade do serviço e obrigações impostas [VALIDAR] [VALIDAR: Sentença e apelações no PDF digitalizado; Prevenção do Des. Fed. André Nabarrete; Preparo da Claro]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da Claro e da ANATEL e remessa necessária da sentença que acolheu ação civil pública do MPF sobre a qualidade da telefonia em Corumbá. A PRR opinou pelo desprovimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -21150,7 +21650,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Administrativo — ACP (telecomunicações)",
+    "origem": "Ação civil pública 0000120-34.2012.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID [VALIDAR: sentença no processo digitalizado, ID 108966663] ([VALIDAR])",
+    "recurso": "apelação de Claro S.A. (ID [VALIDAR: ID 108966663 e 108966664], [VALIDAR]) e apelação de ANATEL (ID [VALIDAR: ID 108966665 e 108966666], [VALIDAR]) · remessa necessária",
+    "preparo": "Claro S.A.: Não verificado; ANATEL: Isento (autarquia)",
+    "monocratica": "Improvável: ação coletiva",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Claro S.A.: Não verificado; ANATEL: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -21160,6 +21671,114 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ACP — qualidade de serviço de telefonia (Claro, Corumbá)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 308784410 · 18/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 122801087 · 28/01/2020 — …1/22 e 108966664 - fls. 01/17) da Claro S.A e (ids 108966665 fls. 07/17 e 108966666 fls 01/04) da Anatel apenas no efeito devolutivo, nos termos do artigo 14 da Lei nº 7.347/85 . Publique-se. Intime-se. Após, conclusos | última peça: Parecer (MPF) · ID 122966323 · 29/01/2020 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Prevenção reconhecida para o Des. Fed. André Nabarrete (decisão ID 308784410, 18/11/2024): verificar se subsiste após a redistribuição à Turma Regional [VALIDAR] · Etiquetas \"META 2 CNJ (até 2022)\" e \"Prevenção\": prioridade de julgamento · Peças no PDF digitalizado (IDs 108965663 a 108966666) · Mesmo tema de 5009022-53 (ACP telefonia Oi)",
+   "teor": {
+    "sintese_fatica": "O MPF ajuizou em 2012 ação civil pública contra a Claro (sucessora da Embratel) e a ANATEL por deficiência do serviço de telefonia em Corumbá. As apelações foram recebidas no efeito devolutivo (ID 122801087) e a PRR opinou pelo desprovimento (ID 120423276).",
+    "inicial": "Ação civil pública do MPF contra a Claro S.A. e a ANATEL.",
+    "decisao_recorrida": "Sentença ID [VALIDAR: sentença no processo digitalizado, ID 108966663] ([VALIDAR]): julgou procedentes os pedidos do MPF quanto à qualidade do serviço de telefonia [VALIDAR dispositivo].",
+    "recurso": "Claro S.A. (ID [VALIDAR: ID 108966663 e 108966664], [VALIDAR]): razões no processo digitalizado [VALIDAR]. ANATEL (ID [VALIDAR: ID 108966665 e 108966666], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+    "resposta": "Contrarrazões do MPF no processo digitalizado (ID 108966666) [VALIDAR].",
+    "parecer": "MPF ID 120423276: Desprovimento das apelações",
+    "memoriais": "Não consta",
+    "representacao": "Claro: advogados Eduardo Pellegrini de Arruda Alvim (OAB/SP 118.685) e José Manoel de Arruda Alvim Netto (OAB/SP 12.363).",
+    "preparo": "Claro S.A.: Não verificado; ANATEL: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da Claro S.A. e da ANATEL e remessa necessária em ação civil pública do MPF (Corumbá) · qualidade do serviço de telefonia · sentença de procedência [VALIDAR alcance] · processo físico de 2012 digitalizado",
+     "sintese": "O MPF ajuizou em 2012 ação civil pública contra a Claro (sucessora da Embratel) e a ANATEL por deficiência do serviço de telefonia em Corumbá. As apelações foram recebidas no efeito devolutivo (ID 122801087) e a PRR opinou pelo desprovimento (ID 120423276).",
+     "questoes": "1) ACP sobre qualidade de serviço de telefonia; 2) prevenção.",
+     "rel": {
+      "razoes": "Claro S.A. (ID [VALIDAR: ID 108966663 e 108966664], [VALIDAR]): razões no processo digitalizado [VALIDAR]. ANATEL (ID [VALIDAR: ID 108966665 e 108966666], [VALIDAR]): razões no processo digitalizado [VALIDAR].",
+      "contrarrazoes": "Contrarrazões do MPF no processo digitalizado (ID 108966666) [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "[VALIDAR: sentença no processo digitalizado, ID 108966663]",
+      "juizo": "Ação civil pública 0000120-34.2012.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "julgou procedentes os pedidos do MPF quanto à qualidade do serviço de telefonia [VALIDAR dispositivo]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2019-08-01",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Claro S.A.",
+       "tipo": "Apelação",
+       "id": "[VALIDAR: ID 108966663 e 108966664]",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "ANATEL",
+       "tipo": "Apelação",
+       "id": "[VALIDAR: ID 108966665 e 108966666]",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "[VALIDAR: sentença no processo digitalizado, ID 108966663]",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Parecer da PRR (desprovimento)",
+       "id": "120423276",
+       "data": "2020-01-16"
+      },
+      {
+       "desc": "Decisão: recebimento das apelações",
+       "id": "122801087",
+       "data": "2020-01-28"
+      },
+      {
+       "desc": "Decisão: prevenção reconhecida",
+       "id": "308784410",
+       "data": "2024-11-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 308784410 · 18/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 122801087 · 28/01/2020 — …1/22 e 108966664 - fls. 01/17) da Claro S.A e (ids 108966665 fls. 07/17 e 108966666 fls 01/04) da Anatel apenas no efeito devolutivo, nos termos do artigo 14 da Lei nº 7.347/85 . Publique-se. Intime-se. Após, conclusos | última peça: Parecer (MPF) · ID 122966323 · 29/01/2020 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Prevenção reconhecida para o Des. Fed. André Nabarrete (decisão ID 308784410, 18/11/2024): verificar se subsiste após a redistribuição à Turma Regional [VALIDAR] · Etiquetas \"META 2 CNJ (até 2022)\" e \"Prevenção\": prioridade de julgamento · Peças no PDF digitalizado (IDs 108965663 a 108966666) · Mesmo tema de 5009022-53 (ACP telefonia Oi)",
+     "assuntoDet": "ACP — qualidade de serviço de telefonia (Claro, Corumbá)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "ACP/ação popular",
+     "parecer": "Com parecer",
+     "idParecer": "120423276",
+     "parecerSentido": "Desprovimento das apelações"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 308784410 · 18/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Decisão · ID 122801087 · 28/01/2020 — …1/22 e 108966664 - fls. 01/17) da Claro S.A e (ids 108966665 fls. 07/17 e 108966666 fls 01/04) da Anatel apenas no efeito devolutivo, nos termos do artigo 14 da Lei nº 7.347/85 . Publique-se. Intime-se. Após, conclusos",
+    "ultima_peca": "Parecer (MPF) · ID 122966323 · 29/01/2020",
+    "ultima_informacao": "Certidão · ID 309107050 · 26/11/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 308784410 · 18/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 122801087 · 28/01/2020 — …1/22 e 108966664 - fls. 01/17) da Claro S.A e (ids 108966665 fls. 07/17 e 108966666 fls 01/04) da Anatel apenas no efeito devolutivo, nos termos do artigo 14 da Lei nº 7.347/85 . Publique-se. Intime-se. Após, conclusos | última peça: Parecer (MPF) · ID 122966323 · 29/01/2020 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -21171,12 +21790,14 @@
    "exequente": "MINISTERIO PUBLICO FEDERAL - PR/MS",
    "executado": "OI S.A. - EM RECUPERACAO JUDICIAL",
    "assunto": "Telefonia",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação do MPF e remessa necessária em ação civil pública · vício de qualidade do Serviço Móvel Pessoal (Grupo Oi e ANATEL) · inversão do ônus da prova indeferida (agravo de instrumento 5017145-90.2022.4.03.0000) · pedidos julgados improcedentes",
+   "resultado": "Ato a proferir: apelação do MPF (ID 279292933) e remessa necessária da sentença ID 279292831; contrarrazões (IDs 279292937 e 279292938); parecer da PRR (ID 279831379) ‖ Proposta pelos precedentes: Voto: regularizar a representação da Oi; examinar o ônus da prova e o vício de qualidade [VALIDAR] [VALIDAR: Representação processual da Oi; Conclusão do parecer da PRR; Desfecho do agravo de instrumento conexo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do MPF e remessa necessária da sentença que rejeitou ação civil pública sobre a qualidade do Serviço Móvel Pessoal do Grupo Oi.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -21187,7 +21808,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — ACP (telecomunicações)",
+    "origem": "Ação civil pública 5009022-53.2019.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 279292831 (04/07/2023)",
+    "recurso": "apelação de MPF (ID 279292933, 12/07/2023) · remessa necessária",
+    "preparo": "MPF: Isento (ente público/MP)",
+    "monocratica": "Improvável: ação coletiva",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "MPF: Isento (ente público/MP) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -21197,6 +21829,127 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ACP — qualidade do Serviço Móvel Pessoal (Oi)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 279292932 · 05/07/2023 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 375526435 · 22/05/2026 | última movimentação: 22/05/2026 16:16 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes · Agravo de instrumento conexo 5017145-90.2022.4.03.0000 (inversão do ônus da prova) [VALIDAR desfecho] · Oi em recuperação judicial; sucessão (ID 279292939) e renúncia de mandato (ID 366540198, 14/04/2026): regularidade da representação [VALIDAR] · Remessa em ACP improcedente (artigo 19 da Lei 4.717/1965, por analogia) · Sentença republicada (ID 279292932) · Mesmo tema de 0000120-34 (ACP telefonia Claro)",
+   "teor": {
+    "sintese_fatica": "O MPF ajuizou ação civil pública contra a ANATEL e o Grupo Oi por vício de qualidade do Serviço Móvel Pessoal. A inversão do ônus da prova foi indeferida (agravo de instrumento 5017145-90.2022.4.03.0000) e os pedidos foram julgados improcedentes.",
+    "inicial": "Ação civil pública do MPF contra a ANATEL e o Grupo Oi (em recuperação judicial).",
+    "decisao_recorrida": "Sentença ID 279292831 (04/07/2023): julgou improcedentes todos os pedidos, sem custas e honorários (artigo 18 da Lei 7.347/1985), com comunicação ao Relator do agravo de instrumento 5017145-90.2022.4.03.0000; sentença sujeita a reexame.",
+    "recurso": "MPF (ID 279292933, 12/07/2023): reconhecimento do vício de qualidade do SMP, obrigações de fazer e reparação; inversão do ônus da prova [VALIDAR teor].",
+    "resposta": "Contrarrazões das rés (IDs 279292937 e 279292938).",
+    "parecer": "MPF ID 279831379: Parecer da PRR [VALIDAR conclusão]",
+    "memoriais": "Não consta",
+    "representacao": "Oi com renúncia de mandato em 14/04/2026 e novo substabelecimento (ID 375526435) [VALIDAR].",
+    "preparo": "MPF: Isento (ente público/MP)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do MPF e remessa necessária em ação civil pública · vício de qualidade do Serviço Móvel Pessoal (Grupo Oi e ANATEL) · inversão do ônus da prova indeferida (agravo de instrumento 5017145-90.2022.4.03.0000) · pedidos julgados improcedentes",
+     "sintese": "O MPF ajuizou ação civil pública contra a ANATEL e o Grupo Oi por vício de qualidade do Serviço Móvel Pessoal. A inversão do ônus da prova foi indeferida (agravo de instrumento 5017145-90.2022.4.03.0000) e os pedidos foram julgados improcedentes.",
+     "questoes": "1) ACP sobre qualidade do SMP: ônus da prova e vício de qualidade; 2) representação da Oi em recuperação judicial.",
+     "rel": {
+      "razoes": "MPF (ID 279292933, 12/07/2023): reconhecimento do vício de qualidade do SMP, obrigações de fazer e reparação; inversão do ônus da prova [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões das rés (IDs 279292937 e 279292938)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "279292831",
+      "juizo": "Ação civil pública 5009022-53.2019.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou improcedentes todos os pedidos, sem custas e honorários (artigo 18 da Lei 7.347/1985), com comunicação ao Relator do agravo de instrumento 5017145-90.2022.4.03.0000; sentença sujeita a reexame."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2019-10-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "MPF",
+       "tipo": "Apelação",
+       "id": "279292933",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "279292831",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: inversão do ônus da prova indeferida",
+       "id": "279292816",
+       "data": "2022-06-20"
+      },
+      {
+       "desc": "Sentença: pedidos improcedentes",
+       "id": "279292831",
+       "data": "2023-07-04"
+      },
+      {
+       "desc": "Apelação do MPF",
+       "id": "279292933",
+       "data": "2023-07-12"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "279292937",
+       "data": "2023-08-04"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "279292938",
+       "data": "2023-08-04"
+      },
+      {
+       "desc": "Parecer da PRR",
+       "id": "279831379",
+       "data": "2023-09-15"
+      },
+      {
+       "desc": "Renúncia de mandato (Oi)",
+       "id": "366540198",
+       "data": "2026-04-14"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 279292932 · 05/07/2023 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 375526435 · 22/05/2026 | última movimentação: 22/05/2026 16:16 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes · Agravo de instrumento conexo 5017145-90.2022.4.03.0000 (inversão do ônus da prova) [VALIDAR desfecho] · Oi em recuperação judicial; sucessão (ID 279292939) e renúncia de mandato (ID 366540198, 14/04/2026): regularidade da representação [VALIDAR] · Remessa em ACP improcedente (artigo 19 da Lei 4.717/1965, por analogia) · Sentença republicada (ID 279292932) · Mesmo tema de 0000120-34 (ACP telefonia Claro)",
+     "assuntoDet": "ACP — qualidade do Serviço Móvel Pessoal (Oi)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "ACP/ação popular",
+     "parecer": "Com parecer",
+     "idParecer": "279831379",
+     "parecerSentido": "Parecer da PRR [VALIDAR conclusão]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "22/05/2026 16:16 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 279292932 · 05/07/2023 — sentença: julgou improcedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 375526435 · 22/05/2026",
+    "ultima_informacao": "Certidão · ID 279434748 · 04/09/2023",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 279292932 · 05/07/2023 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 375526435 · 22/05/2026 | última movimentação: 22/05/2026 16:16 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes"
    }
   }
  ],
