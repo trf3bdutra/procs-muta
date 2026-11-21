@@ -3698,11 +3698,45 @@ function calcPreparo(G){var vc=numBR(G('adm.vcausa')),al=numBR(G('adm.aliq')),rc
   if(vc==null||al==null)return '<div class="mut">Informe o valor da causa e a alíquota para ver o devido e a diferença.</div>';
   var dv=Math.round(vc*al)/100,df=rc==null?null:Math.round((rc-dv)*100)/100;
   return '<div class="prt-calc"><b>Devido '+moedaBR(dv)+'</b>'+(rc==null?'':' · recolhido '+moedaBR(rc)+' · '+(df>=0?'<span class="ok">sem diferença a recolher</span>':'<span class="no">faltam '+moedaBR(-df)+'</span>'))+'<div class="mut">Deserção só depois da intimação para complementar (art. 1.007, § 2º, do CPC).</div></div>';}
-/* precedentes relacionados: abre o Ementário do Compendium com o tipo de caso e as questões do prontuário */
-function prtPrecedentes(it){var C=(it.ctl||{}).cartao||{},T=lvItens(C.subassuntos).slice(0,3).concat(lvItens(C.questoes).slice(0,2)).map(function(x){return x.replace(/^Q\d+\s+/,'').replace(/\s*\([^)]*\)/g,'').trim();}).filter(Boolean);
-  var q=T.slice(0,2).join(' ');
-  return '<section class="w prt-prec"><h3><em>4</em>Precedentes relacionados</h3>'+(T.length?'<div class="lv-c">'+T.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div>':'<p class="mut">Preencha subassuntos ou questões controvertidas para a busca.</p>')+
-    '<div class="row" style="margin-top:8px">'+(q?'<a class="b" href="/amicus/compendium/#v=ement&amp;q='+encodeURIComponent(q)+'" target="_blank" rel="noopener">Ver no Ementário</a>':'')+'<button class="b" data-a="comp">Consultar no Compendium</button></div></section>';}
+/* precedentes relacionados: julgados do Ementário do Compendium (curados do gabinete) parecidos com o caso do prontuário,
+   cada um com link para abri-lo no Compendium. Semelhança: mesmos temas (STF/STJ), mesmo assunto e palavras do
+   subassunto e das questões; o próprio processo fica de fora. */
+var CURJ={p:null,regs:null};
+function curadosJur(){if(CURJ.p)return CURJ.p;
+  CURJ.p=fetch('/jurisprudencia/curados.json.gz',{cache:'default'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.arrayBuffer();})
+    .then(function(b){var u=new Uint8Array(b);if(u[0]===0x1f&&u[1]===0x8b){if(typeof DecompressionStream==='undefined')throw new Error('navegador sem descompressão');return new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text();}return new TextDecoder().decode(u);})
+    .then(function(t){var o=JSON.parse(t);CURJ.regs=(o&&o.registros)||[];return CURJ.regs;})
+    .catch(function(e){CURJ.p=null;throw e;});
+  return CURJ.p;}
+var PREC_STOP={'para':1,'pela':1,'pelo':1,'como':1,'sobre':1,'entre':1,'contra':1,'quando':1,'sendo':1,'apenas':1,'caso':1,'parte':1,'partes':1,'artigo':1,'processo':1,'recurso':1,'pedido':1,'acordo':1,'sentenca':1,'apelacao':1,'agravo':1,'honorarios':1,'decisao':1,'autos':1,'lei':1,'tema':1,'temas':1,'stf':1,'stj':1,'cpc':1,'uniao':1,'inss':1,'federal':1};
+function precTemas(t){var o={};String(t||'').replace(/Tema\s+(\d[\d.]*)\s*\/?\s*(STF|STJ)?/gi,function(_,n,c){o[n.replace(/\./g,'')+'/'+(c||'').toUpperCase()]=1;});return o;}
+function precPal(t){var o={};nq(t).replace(/[^a-z0-9 ]+/g,' ').split(/\s+/).forEach(function(w){if(w.length>=5&&!PREC_STOP[w]&&!/^\d+$/.test(w))o[w]=1;});return o;}
+function precRelacionados(it,regs){var C=(it.ctl||{}).cartao||{},txt=[C.subassuntos,C.questoes,C.sintese,C.especificidades].join(' ');
+  var TM=precTemas(txt),PW=precPal([C.subassuntos,C.questoes].join(' ')),as=nq(it.assunto||''),eu=dg(it.cnj);
+  /* prontuário ainda sem subassunto nem questões: busca pelo assunto do PJe (mesmo assunto e as palavras dele) */
+  var fraco=!Object.keys(TM).length&&Object.keys(PW).length<2;if(fraco)PW=precPal(it.assunto||'');var nPW=Object.keys(PW).length,corte=fraco?Math.max(2,2+Math.ceil(nPW*0.6)):4;
+  return regs.map(function(r){if(dg(r.n)===eu)return null;var sc=0,mot=[];
+      var rt=precTemas([r.tm,r.ts,r.e].join(' '));Object.keys(TM).forEach(function(k){if(rt[k]){sc+=4;mot.push('Tema '+k.replace('/',' /'));}});
+      if(as&&nq(r.as||'')===as){sc+=2;}
+      var rw=fraco?precPal(r.as||''):precPal([r.as,r.tc,r.ts,(r.e||'').slice(0,600)].join(' ')),n=0;Object.keys(PW).forEach(function(w){if(rw[w])n++;});sc+=Math.min(n,6);
+      if(fraco)mot.push(as&&nq(r.as||'')===as?'mesmo assunto':'assunto parecido');
+      return sc>=corte?{r:r,sc:sc,mot:mot}:null;})
+    .filter(Boolean).sort(function(a,b){return b.sc-a.sc||String(b.r.d||'').localeCompare(String(a.r.d||''));}).slice(0,6);}
+function precPinta(it){var el=document.getElementById('prec-'+dg(it.cnj));if(!el)return;
+  curadosJur().then(function(regs){var L=precRelacionados(it,regs);
+    var bq=it.assunto?'<a class="prec-todos" href="/amicus/compendium/#v=ement&q='+encodeURIComponent(it.assunto)+'" target="_blank" rel="noopener">Buscar “'+esc(it.assunto)+'” em todo o Ementário ↗</a>':'';
+    if(!L.length){el.innerHTML='<p class="mut">Nenhum julgado curado do gabinete com temas, questões ou assunto em comum. Preencha subassuntos e questões no Caso para afinar.</p>'+bq;return;}
+    var lnk=function(ns,lab){return '/amicus/compendium/#v=ement&proc='+encodeURIComponent(ns.join(','))+'&lab='+encodeURIComponent(lab);};
+    el.innerHTML='<ol class="prec-l">'+L.map(function(x){var r=x.r,res=r.r?String(r.r).replace(/\.$/,''):'';
+        return '<li><a href="'+lnk([r.n],r.n)+'" target="_blank" rel="noopener" title="Abrir no Ementário do Compendium">'+esc(r.n)+'</a>'+
+          '<span class="prec-m">'+esc([r.c,r.d?br(r.d):'',res].filter(Boolean).join(' · '))+'</span>'+
+          '<p>'+esc(String(r.ts||r.e||'').slice(0,230))+(String(r.ts||r.e||'').length>230?'…':'')+'</p>'+
+          (x.mot.length?'<small>'+esc(x.mot.join(' · '))+'</small>':'')+'</li>';}).join('')+'</ol>'+
+      '<a class="prec-todos" href="'+lnk(L.map(function(x){return x.r.n;}),'processo '+fmtCnj(it.cnj))+'" target="_blank" rel="noopener">Ver os '+L.length+' no Ementário ↗</a>'+(bq?'<br>'+bq:'');
+  }).catch(function(e){el.innerHTML='<p class="mut">Não foi possível abrir o Ementário ('+esc(e.message)+').</p>';});}
+function prtPrecedentes(it){setTimeout(function(){precPinta(it);},0);
+  return '<section class="w prt-prec"><h3><em>4</em>Precedentes relacionados</h3><div class="prec-c" id="prec-'+dg(it.cnj)+'"><p class="mut">Procurando no Ementário…</p></div>'+
+    '<div class="row" style="margin-top:8px"><button class="b" data-a="comp">Consultar no Compendium</button></div></section>';}
 /* prévia da minuta: relatório, ementa e dispositivo montados dos campos; texto de partida, a conferir */
 var DISP_V={'Provido':'dou provimento','Parcialmente provido':'dou parcial provimento','Desprovido':'nego provimento','Não conhecido':'não conheço','Prejudicado':'julgo prejudicado','Rejeitados':'rejeito os embargos de declaração','Acolhidos sem efeito infringente':'acolho os embargos de declaração, sem efeito infringente','Acolhidos com efeito infringente':'acolho os embargos de declaração, com efeito infringente','Retratação exercida':'em juízo de retratação, reformo o acórdão','Acórdão mantido':'mantenho o acórdão'};
 var DISP_O={'Apelação':['à apelação','da apelação'],'Agravo de Instrumento':['ao agravo de instrumento','do agravo de instrumento'],'Agravo Interno':['ao agravo interno','do agravo interno'],'Remessa Necessária':['à remessa necessária','da remessa necessária']};
@@ -9849,6 +9883,17 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 /* cartões: contagem visível também quando há só uma pendência, nota ou intercorrência; cor do indicador pela sinalização */
 .sn-b.on.nt i{background:var(--eg,#1b5878)}
 .sn-b.on.ic2 i{background:#b8860b}
+
+/* precedentes relacionados (prontuário): lista de julgados do Ementário com link para o Compendium */
+#prq .prec-l{margin:4px 0 0;padding:0;list-style:none;counter-reset:pr}
+#prq .prec-l li{padding:7px 0;border-bottom:1px dotted var(--el)}
+#prq .prec-l li:last-child{border-bottom:0}
+#prq .prec-l a{font:700 11.5px var(--emono,ui-monospace,monospace);color:var(--eg,#1b5878);text-decoration:none}
+#prq .prec-l a:hover{text-decoration:underline}
+#prq .prec-m{margin-left:8px;font-size:11px;color:var(--em)}
+#prq .prec-l p{margin:3px 0 0;font-size:12px;line-height:1.4;color:var(--ei);text-align:justify;hyphens:auto}
+#prq .prec-l small{display:block;margin-top:2px;font:400 10px var(--emono,monospace);color:var(--eo2,#805b18)}
+#prq .prec-todos{display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:var(--eg,#1b5878);text-decoration:none}
 </style>
 </body>
 </html>
