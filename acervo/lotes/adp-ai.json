@@ -26481,12 +26481,12 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Multas e demais Sanções",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal · multa aduaneira (veículo usado no transporte de cigarros) · ex-proprietária que vendeu o semirreboque antes da infração · ação anulatória procedente e mantida pela 4ª Turma · suspensão da execução",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), conferido antes o preparo [VALIDAR] ‖ Proposta pelos precedentes: Dar provimento ao agravo para suspender a execução fiscal em relação à agravante, confirmada a tutela recursal (ID 382232754). A procedência da anulatória da multa, ainda sem trânsito em julgado, afasta a exigibilidade da cobrança fundada no mesmo auto de infração (ApCiv 5015530-17.2020.4.03.6182, 3ª Turma, 07/02/2022), e a sentença foi mantida pela 4ª Turma em 10/08/2026 (fato superveniente, ID 391928008). [VALIDAR: preparo (guia da CEF e comprovante sem texto, juntados em 29/05/2026, depois da certidão ID 376999576; regra do comprovante STN); trânsito em julgado do acórdão da 4ª Turma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Daniela Colognese Domingos contra a decisão ID 580223232 da 6ª Vara Federal de Campo Grande, que indeferiu a tutela de urgência para suspender a execução fiscal 5009074-39.2025.4.03.6000 (multa aduaneira). A tutela recursal foi deferida em 25/06/2026 (ID 382232754). A União respondeu, e a agravante noticiou o desprovimento da apelação da União na anulatória pela 4ª Turma.",
+   "peculiaridades": "Preparo: guia e comprovante juntados em 29/05/2026 (IDs 377292119 e 377292118, sem texto), depois da certidão de falta de comprovante; a guia é descrita como \"guia custas CEF\" [VALIDAR comprovante STN]. Execução de R$ 1.468.760,40 com outros três executados.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -26501,18 +26501,34 @@
      "data": "27/05/2026"
     },
     {
+     "peca": "Decisão no agravo",
+     "id": "382232754",
+     "data": "25/06/2026"
+    },
+    {
      "peca": "Contraminuta",
      "id": "387783811",
      "data": "21/07/2026"
     },
     {
-     "peca": "Decisão no agravo",
-     "id": "382232754",
-     "data": "25/06/2026"
+     "peca": "Petição (fato superveniente)",
+     "id": "391928008",
+     "data": "14/08/2026"
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "analisado_em": "2026-11-20",
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal · multa aduaneira · suspensão por anulatória procedente",
+    "origem": "Execução fiscal 5009074-39.2025.4.03.6000 · 6ª Vara Federal de Campo Grande",
+    "decisao_agravada": "ID 580223232: indeferimento da tutela de urgência",
+    "recurso": "ID 376765668 · 27/05/2026",
+    "preparo": "Guia CEF e comprovante sem texto (29/05/2026) [VALIDAR]",
+    "monocratica": "ID 382232754 (deferiu a tutela recursal)",
+    "conf_preparo": "Certidão ID 376999576 (28/05/2026): sem comprovante. Juntados em 29/05/2026 guia (ID 377292119) e comprovante (ID 377292118), sem texto extraído [VALIDAR STN e data do pagamento]",
+    "conf_prevencao": "Sem prevenção apontada nos autos extraídos."
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -26533,6 +26549,100 @@
     "ultima_informacao": "Certidão · ID 376999576 · 28/05/2026",
     "ultima_movimentacao": " 15:05 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Execução fiscal de multa aduaneira — suspensão da execução em relação à ex-proprietária do semirreboque, com sentença de procedência na ação anulatória do auto de infração, confirmada em apelação",
+   "especificidades": "Execução fiscal 5009074-39.2025.4.03.6000 (R$ 1.468.760,40) · Anulatória 5002388-98.2021.4.03.6120: sentença de procedência (15/06/2022) mantida pela 4ª Turma em 10/08/2026 · Tutela recursal deferida (ID 382232754, 25/06/2026) · Venda do semirreboque em 01/06/2017; infração em 21/08/2018",
+   "teor": {
+    "sintese_fatica": "A União executa multa aduaneira lançada no auto de infração 10142.720118/2019-13 (semirreboque apreendido em 21/08/2018 com cigarros estrangeiros). A agravante, ex-proprietária, comprova a venda do veículo em 01/06/2017 e obteve sentença de procedência na ação anulatória do auto de infração, mantida pela 4ª Turma. O juízo da 6ª Vara Federal de Campo Grande indeferiu a tutela de urgência pedida na exceção de pré-executividade; o relator deferiu a tutela recursal e suspendeu a execução em relação à agravante.",
+    "recurso": "Agravo de Daniela Colognese Domingos ID 376765668 (27/05/2026): ilegitimidade passiva, pois vendeu o semirreboque em 01/06/2017, antes da infração de 21/08/2018; a anulatória 5002388-98.2021.4.03.6120 declarou nula a autuação; pede a suspensão da execução. Petição ID 391928008 (14/08/2026): fato superveniente — a 4ª Turma negou provimento à apelação da União na anulatória (acórdão ID 391417991).",
+    "resposta": "Contraminuta da União ID 387783811 (21/07/2026): reporta-se à decisão agravada; ausência de perigo de dano concreto."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal de multa aduaneira — suspensão da execução em relação à ex-proprietária do semirreboque, com sentença de procedência na ação anulatória do auto de infração, confirmada em apelação",
+     "subassuntos": "Execução fiscal · multa aduaneira (veículo usado no transporte de cigarros) · ex-proprietária que vendeu o semirreboque antes da infração · ação anulatória procedente e mantida pela 4ª Turma · suspensão da execução",
+     "sintese": "A União executa multa aduaneira lançada no auto de infração 10142.720118/2019-13 (semirreboque apreendido em 21/08/2018 com cigarros estrangeiros). A agravante, ex-proprietária, comprova a venda do veículo em 01/06/2017 e obteve sentença de procedência na ação anulatória do auto de infração, mantida pela 4ª Turma. O juízo da 6ª Vara Federal de Campo Grande indeferiu a tutela de urgência pedida na exceção de pré-executividade; o relator deferiu a tutela recursal e suspendeu a execução em relação à agravante.",
+     "questoes": "1) Suspensão da execução fiscal em relação à agravante, com sentença de procedência na anulatória do auto de infração, confirmada em apelação; 2) probabilidade do direito (venda e tradição do veículo antes da infração; Súmula 138/TFR) e perigo de dano.",
+     "rel": {
+      "razoes": "Agravo de Daniela Colognese Domingos ID 376765668 (27/05/2026): ilegitimidade passiva, pois vendeu o semirreboque em 01/06/2017, antes da infração de 21/08/2018; a anulatória 5002388-98.2021.4.03.6120 declarou nula a autuação; pede a suspensão da execução. Petição ID 391928008 (14/08/2026): fato superveniente — a 4ª Turma negou provimento à apelação da União na anulatória (acórdão ID 391417991).",
+      "contrarrazoes": "Contraminuta da União ID 387783811 (21/07/2026): reporta-se à decisão agravada; ausência de perigo de dano concreto."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "580223232",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência pedida na exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Deferido",
+      "id": "580223232"
+     },
+     "adm": {
+      "prot": "2026-05-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Daniela Colognese Domingos",
+       "tipo": "Agravo de instrumento",
+       "id": "376765668",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "376765668",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Certidão: sem comprovante de custas",
+       "id": "376999576",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Guia e comprovante de custas (sem texto)",
+       "id": "377292118",
+       "data": "2026-05-29"
+      },
+      {
+       "desc": "Decisão: tutela recursal deferida, execução suspensa quanto à agravante",
+       "id": "382232754",
+       "data": "2026-06-25"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "387783811",
+       "data": "2026-07-21"
+      },
+      {
+       "desc": "Fato superveniente: acórdão da 4ª Turma na anulatória",
+       "id": "391928008",
+       "data": "2026-08-14"
+      }
+     ],
+     "papeis": [
+      "Executado(a)",
+      "Exequente"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · deferida",
+     "fundamento": "Paradigmas do gabinete: ApCiv 5015530-17.2020.4.03.6182 (3ª Turma, 07/02/2022); decisão ID 382232754 (tutela recursal deferida)"
+    }
    }
   },
   {
