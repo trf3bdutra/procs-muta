@@ -150,8 +150,37 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura “apelação e remessa necessária em ação ordinária …” e sentença em parágrafo separado; vírgula entre sujeito e verbo (“A sentença (ID …), julgou”); honorários no fim da enumeração → Forma A num só parágrafo; honorários em frase própria",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto",
+     "Artigo 36 da Lei 8.112/1990 transcrito sem aspas; citações fora do padrão (“Resp”, relator em caixa baixa, “Segunda Turma”, “DJEN de”, “DJEN de:”, “REsp1.209.909”, “julgado em … DJe de 20/8/2012”); vírgula entre sujeito e verbo (V50); “conforme colhe-se” → Transcrição entre aspas; “REsp 2.151.392, Rel. Min. MARCO AURÉLIO BELLIZZE, DJEN 24/04/2026”; “AgRg no REsp 1.209.909 …, DJe 20/08/2012”; “DJEN 13/04/2023” e “DJEN 27/03/2026”; vírgula retirada; “conforme se colhe”",
+     "RED · MÉDIA"
+    ],
+    [
+     "Ementa",
+     "“APELAÇÃO CÍVEL” no cabeçalho; seções em caixa baixa; sem item sobre os honorários recursais fixados no voto; rodapé com “art./arts.”, dispositivos que o voto não cita (CF/1988, artigo 207; Lei 9.394/1996; CPC, artigo 131; Lei 9.527/1997), “TRF3”, “j.” e sem os dois julgados do Relator citados no voto → Cabeçalho, caixa alta, item 6 sobre o artigo 85, § 11, do CPC e rodapé no padrão, só com o que o voto cita",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
+    ]
+   ],
+   "pendencias": [
+    "Honorários recursais (V54): a origem fixou R$ 2.000,00 por equidade (artigo 85, § 8º, do CPC), e o voto majora “no equivalente a 1%, a ser acrescido ao fixado na origem”, sem base percentual. Definir a majoração em valor (por exemplo, “majorados para R$ …”).",
+    "Precedentes não conferidos em fonte oficial: REsp 2.151.392 (DJEN 24/04/2026) e ApCiv 5002647-64.2018.4.03.6002 (DJEN 27/03/2026)."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5000791-85.2025.4.03.6207.json.gz",
@@ -1107,89 +1136,29 @@
      "Tipo"
     ],
     [
-     "Ementa",
-     "Item 1: a frase solta \"Agravo interno contra decisão que indeferiu o efeito suspensivo.\" não tinha verbo; integrada ao caso em exame (\"Interposto, também, agravo interno…\")",
-     "Redação"
-    ],
-    [
-     "Ementa",
-     "Questões em discussão: incluída a (iv), sobre a multa diária, impugnada no item (5) das razões e não enfrentada",
-     "Incluído"
-    ],
-    [
-     "Ementa",
-     "Novo item 10 sobre a multa diária (artigo 537, § 1º, do CPC); dispositivo renumerado para 11",
-     "Incluído"
-    ],
-    [
-     "Ementa",
-     "Dispositivos citados: retirados CPC 85, § 11 (não há honorários recursais em agravo de instrumento), 311, IV (fundamento equivocado da decisão de origem), 489, 535, 926, 942 e 1.021, CDC 51, IV, Lei 9.656/1998, Lei 14.454/2022 e \"CC/2002\" sem artigo (vinham das ementas transcritas e o voto afasta o CDC pela Súmula 608/STJ); ficam CPC 297, 497, 536 e 537, § 1º",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Jurisprudência citada: incluída a Súmula 608/STJ, que o voto aplica; referências no formato do gabinete (sem turma e sem \"de\" antes da data)",
-     "Corrigido"
-    ],
-    [
      "Relatório",
-     "ID 360681840 é ato ordinatório que abre vista do agravo interno, não certidão de ausência de resposta; frase reescrita para indicar o que o documento é",
-     "Corrigido"
+     "“agravo de instrumento contra decisão proferida, em plantão judiciário, nos autos …, em trâmite na …, que deferiu”; “Indeferido efeito suspensivo” → “agravo de instrumento à decisão que, em plantão judiciário, nos autos … (4ª Vara Federal de Campo Grande/MS), deferiu”; “Indeferido o efeito suspensivo”",
+     "RED · BAIXA"
     ],
     [
      "Voto",
-     "Incluída a frase sobre a gratuidade (preparo dispensado e exame remetido à origem, ID 354353769), item (1) das razões",
-     "Incluído"
+     "Digitação “Em Jjuízo” (V25); transcrição da decisão de origem com a abertura fora das aspas (V9/V10); ementa do AgInt no AREsp 835.892 transcrita sem aspas e com “DJe 30/8/2019”; “RICARDO CUEVA”; “interposto contra”; “Após indeferimento” → “Em Juízo”; aspas abrangendo todo o trecho transcrito; “DJe 30/08/2019: “…””; “RICARDO VILLAS BÔAS CUEVA”; “agravo de instrumento contra”; “Após o indeferimento”",
+     "RED · MÉDIA"
     ],
     [
-     "Voto",
-     "Incluído parágrafo sobre a multa diária, item (5) das razões, sem enfrentamento na versão original (artigo 489, § 1º, IV, do CPC)",
-     "Incluído"
-    ],
-    [
-     "Voto",
-     "\"Nesse contexto\" → \"Neste contexto\" (padrão do gabinete)",
-     "Redação"
+     "Ementa",
+     "Cabeçalho terminado em “RECURSO DESPROVIDO”, sem a multa; seções em caixa baixa; artigos definidos ausentes (itens 1, 2, 5, 6 e 7); “Em julgamento o agravo de instrumento”; dispositivo numa só frase → Cabeçalho com “AGRAVO DE INSTRUMENTO DESPROVIDO. AGRAVO INTERNO PREJUDICADO.”; caixa alta; artigos; “Julgado o agravo de instrumento”; dispositivo em duas frases",
+     "EST · MÉDIA"
     ],
     [
      "Acórdão",
-     "Texto do acórdão incluído, espelhando o dispositivo (agravo interno prejudicado; agravo de instrumento desprovido)",
-     "Incluído"
-    ],
-    [
-     "Conferência",
-     "IDs deste agravo conferidos: 350743266, 354353769, 359090283, 360681840, 368124217, 368518477 e 407404295 (parecer: opina pelo não provimento). Decisão agravada ID 497253914 confere com a cópia juntada (ID 350743270)",
-     "Conferido"
-    ],
-    [
-     "Relatório",
-     "Encurtado de 9 para 6 parágrafos, no padrão dos agravos de instrumento do Relator em 2026 (ex.: AI 5031747-81.2025, 5032401-68.2025 e 5000079-55.2026): retiradas as razões do agravo interno (vira uma linha: \"Indeferido o efeito suspensivo (…), foi interposto agravo interno (…)\"), a menção ao \"então relator\" e o parágrafo da redistribuição por prevenção, que não aparecem em nenhum relatório da série",
-     "Redação"
-    ],
-    [
-     "Relatório",
-     "Abertura no formato da série (\"agravo de instrumento contra decisão proferida… nos autos 5013765-96.2025.4.03.6000, em trâmite na 4ª Vara Federal de Campo Grande/MS\"); a reconsideração indeferida na origem saiu do relatório e continua no voto (ID 605093039 dos autos de origem)",
-     "Redação"
-    ],
-    [
-     "Voto",
-     "Abertura no padrão da série (\"cuida-se, em síntese, de agravo de instrumento… Após o indeferimento do efeito suspensivo, a agravante interpôs agravo interno\") e dispositivo na ordem usada pelo Relator: primeiro o agravo de instrumento, depois o agravo interno prejudicado; ementa e acórdão alinhados",
-     "Redação"
-    ],
-    [
-     "Voto",
-     "Parágrafo da multa diária reescrito no modo como o Relator enfrenta o tema: natureza coercitiva (artigos 536 e 537 do CPC), ajuste só se insuficiente ou excessiva (artigo 537, § 1º, I), multa não serve para penalizar, e exame do valor diário à luz da obrigação. Base: AI 5030242-26.2023 (09/06/2026), AI 5012586-90.2022 (02/12/2022), AI 5004730-41.2023 (31/08/2023) e AI 5023112-19.2022 (03/08/2023). Ementa (item 10) e rodapé alinhados",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Parágrafo da multa diária aprovado pelo corretor; retirada a marca [VALIDAR]",
-     "Validado"
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
     ]
    ],
    "pendencias": [
-    "Conferir nos autos de origem (5013765-96.2025.4.03.6000) os IDs que não constam deste agravo: 484630251, 494766628, 494766629 a 494766645, 494766638, 537230702 e 605093039.",
-    "Há parecer de outro processo juntado neste agravo (ID 393537758, remessa necessária 0000033-86.2009.4.03.6100); o parecer deste agravo é o ID 407404295. Sem reflexo na minuta."
+    "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe: o texto do PJe é outro, com a decisão de origem transcrita e sem parte dos ajustes de então. Esta correção parte do texto do PJe.",
+    "IDʼs dos autos de origem (497253914, 484630258, 484630251, 484630253, 494766629 a 494766645, 494766638, 494766628, 537230702 e 605093039) não foram conferidos: não estão nos autos do agravo extraídos."
    ],
    "minuta": true,
    "autos": {
@@ -3463,92 +3432,32 @@
     ],
     [
      "Relatório",
-     "Abertura no padrão (\"apelação e remessa necessária à sentença que concedeu parcialmente a segurança\"), com os pontos convertidos em \"ponto\" e o edital identificado como Exame Unificado",
-     "Redação"
+     "“requereu atribuição de efeito suspensivo” → “requereu a atribuição”",
+     "RED · BAIXA"
     ],
     [
-     "Relatório",
-     "Apelante identificado: é o Conselho Federal da OAB, não \"a impetrada\"; fórmula \"alegando, em suma, que\" e incluído o pedido de efeito suspensivo (ID 354343912, f. 4), que o voto declara prejudicado sem que o relatório o mencionasse",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Controvérsia delimitada aos itens 4, 7 e 11 da peça e à letra \"b\" da questão 1; \"prova prática-profissional\" → \"peça prático-profissional\"",
-     "Corrigido"
+     "Voto, V35",
+     "Dispositivo com “para reforma a sentença” → “para reformar a sentença” (mesmo resultado)",
+     "RED · MÉDIA"
     ],
     [
      "Voto",
-     "Advertência \"O(A) examinando(a) deve fundamentar suas respostas…\" não está no espelho (ID 354343892); está transcrita nas informações (ID 354343902, f. 13)",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "\"(g.n)\" → \"(g.n.)\" nas duas transcrições",
-     "Redação"
-    ],
-    [
-     "Voto",
-     "\"A discordância da apelante\": quem discorda da correção é a impetrante; a apelante é a OAB",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Incluída a conclusão sobre os itens 4 e 7 (reforma e valor afastado: 0,10 + 0,25, conforme a sentença), que faltava entre a fundamentação e o dispositivo",
-     "Incluído"
-    ],
-    [
-     "Voto",
-     "Item 11: frase sem verbo (\"Fato sequer impugnado…\") reescrita",
-     "Redação"
-    ],
-    [
-     "Voto",
-     "Questão 1, letra \"b\": o texto dizia que o gabarito \"apreciou o recurso administrativo\" e usava \"aparente\" e \"eventual\" ao mesmo tempo em que afirmava erro grosseiro. Reescrito com a transcrição do gabarito (ID 354343892, f. 3) e com a razão de o mandado de segurança não contradizer a resposta",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Dispositivo especificado: \"dou parcial provimento\" não dizia o que se reformava; agora afasta 0,35 ponto (itens 4 e 7) e mantém 0,10 (item 11) e 0,60 (questão 1, letra \"b\")",
-     "Corrigido"
+     "Artigos definidos ausentes (V4, V7, V16, V22); aspas desencontradas na transcrição do edital (V8); “nem de eleger … mas de verificar”; “mas avista-se que se pretende”; “É imperioso destacar” (V26); V34 em período único com “como visto … assim sendo” → Artigos; aspas curvas; paralelismo; “pretende-se, em verdade,”; “Quanto ao item 11,”; V34 em duas orações",
+     "RED · BAIXA"
     ],
     [
      "Ementa",
-     "Questões com \"saber se\" e conector \"e\"; dispositivo da ementa espelha o do voto",
-     "Redação"
-    ],
-    [
-     "Ementa",
-     "Rodapé no formato do gabinete: Tema 485 identificado pelo RE 632.853; súmulas com o tribunal antes; \"e\" antes do último item",
-     "Redação"
+     "Cabeçalho sem a classe e com “PARCIAL PROVIMENTO DA APELAÇÃO E DA REMESSA NECESSÁRIA”; seções em caixa baixa; “Remessa necessária e apelação”; “dentro dos limites, pois, da jurisprudência”; “CC” no rodapé → Cabeçalho com a classe e “APELAÇÃO E REMESSA NECESSÁRIA PARCIALMENTE PROVIDAS”; caixa alta; ordem “Apelação e remessa necessária”; “nos limites da jurisprudência”; “Código Civil”",
+     "EST · MÉDIA"
     ],
     [
      "Acórdão",
-     "Texto do acórdão incluído",
-     "Incluído"
-    ],
-    [
-     "Conferência",
-     "IDs conferidos: sentença 354343907, apelação 354343912, contrarrazões 354343915, parecer 355552948 (opina pelo parcial provimento), edital 354343888 (item 3.5.11 na f. 16), espelho 354343892 e peça 354343894",
-     "Conferido"
-    ],
-    [
-     "Voto",
-     "Retirada a frase \"O ponto sequer foi impugnado na apelação\": a apelação ataca toda a pontuação acrescida, inclusive a do item 11 (ID 354343912, f. 2/3), e a remessa necessária devolve a matéria de qualquer modo",
-     "Corrigido"
-    ],
-    [
-     "Conferência",
-     "Divisão dos 0,35 ponto conferida: pelo espelho transcrito na sentença (ID 354343907), item 4 vale 0,10 + 0,10 (metade = 0,10), item 7 vale 0,50 (metade = 0,25) e item 11 vale 0,10; total 0,45",
-     "Conferido"
-    ],
-    [
-     "Voto",
-     "Retirada a transcrição do precedente do Relator (ApCiv 5017162-67.2019) incluída na primeira correção: a minuta já reproduz o texto padrão do gabinete sobre a matéria, que é o próprio entendimento do Relator, e o precedente servia só para demonstrar alinhamento. Rodapé da ementa ajustado",
-     "Retirado"
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
     ]
    ],
    "pendencias": [
-    "DECISÃO DO RELATOR — item 11 da peça: a candidata citou os artigos 186 e 927 do CC no tópico do dano moral, e o item 11 do espelho é do dano material (mesma razão pela qual o voto nega o item 7). O precedente do próprio Relator (ApCiv 5017162-67.2019, 27/10/2020) diz que conferir a correspondência da peça prático-profissional com o espelho é juízo da banca, não revisável. A Procuradoria Regional opinou por afastar também o item 11. A minuta mantém o 0,10 do item 11: confirmar ou afastar."
+    "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado)."
    ],
    "minuta": true,
    "autos": {
@@ -4079,52 +3988,27 @@
     ],
     [
      "Relatório",
-     "Abertura reescrita no padrão (\"apelação à sentença que denegou a segurança\"), mais curta, com o objeto do mandado de segurança e os dois fundamentos da sentença",
-     "Redação"
-    ],
-    [
-     "Relatório",
-     "Razões: fórmula \"alegando, em suma, que\", \"autoridade coatora\" → \"autoridade impetrada\" e incluído o pedido final da apelação (correção da redação e atribuição de nota), que faltava",
-     "Corrigido"
+     "ID da sentença no fim do parágrafo; artigos definidos ausentes (“contra atribuição”, “desconsideradas linhas”, “mínimo de linhas”, “menção”, “requereu reforma”); aspas retas → ID logo após “sentença”; artigos; aspas curvas",
+     "RED · BAIXA"
     ],
     [
      "Voto",
-     "Edital: itens 14.7.3 e 14.8 estão na f. 18 do ID 366723811 (não f. 18-19)",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Fundamento da nota zero sem ID: incluída a justificativa técnica do Cebraspe (ID 366723825, f. 12/13), com as linhas desconsideradas (1 a 4, 7 a 11 e 12) e a origem de cada uma",
-     "Incluído"
-    ],
-    [
-     "Voto",
-     "\"(g.n)\" → \"(g.n.)\" nas duas transcrições",
-     "Redação"
+     "Artigos definidos ausentes (V3, V9, V15); “conclusão esta que” → Artigos; “conclusão que”",
+     "RED · BAIXA"
     ],
     [
      "Ementa",
-     "Rodapé: Tema 485 identificado pelo RE 632.853; \"TRF3\" → \"TRF-3\"; \"Juiz Convocado\" → \"Juiz Conv.\", como no voto; \"e\" antes do último item",
-     "Redação"
+     "Cabeçalho com a classe após o assunto e “RECURSO DESPROVIDO”; seções em caixa baixa; “consiste em definir se”; artigos definidos ausentes (itens 3 e 4) → Cabeçalho no padrão, com “APELAÇÃO DESPROVIDA”; caixa alta; “consiste em saber se”; artigos",
+     "EST · MÉDIA"
     ],
     [
      "Acórdão",
-     "Texto do acórdão incluído",
-     "Incluído"
-    ],
-    [
-     "Conferência",
-     "IDs conferidos: sentença 366723827, apelação 366723830, contrarrazões 366723982, parecer 376119842 (opina pelo desprovimento), edital 366723811 e justificativa da banca 366723825",
-     "Conferido"
-    ],
-    [
-     "Voto",
-     "Retirada a transcrição do precedente do Relator (ApCiv 5017162-67.2019) incluída na primeira correção: a minuta já reproduz o texto padrão do gabinete sobre a matéria, que é o próprio entendimento do Relator, e o precedente servia só para demonstrar alinhamento. Rodapé da ementa ajustado",
-     "Retirado"
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
     ]
    ],
    "pendencias": [
-    "Não há precedente do Relator sobre paráfrase em redação do Enem. O precedente dele sobre Exame de Ordem (ApCiv 5017162-67.2019) trata a correspondência entre resposta e padrão como juízo da banca, o que apoia a minuta; incluído no voto. Atenção: só as linhas 1 a 4 e 12 são cópia literal; as linhas 7 a 11 são paráfrase."
+    "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado)."
    ],
    "minuta": true,
    "autos": {
@@ -4591,86 +4475,35 @@
     ],
     [
      "Relatório",
-     "Inicial citada com o ID da sentença: ID 322052989 → ID 322052727",
-     "Corrigido"
+     "Abertura “apelações interpostas em ação ajuizada …” e sentença em parágrafo separado; artigos definidos ausentes (“compelir União e INEP a promover inscrição”); “sustentando, em síntese”; “Apelou também”; “sub judice” → Forma A num só parágrafo, honorários em frase própria; artigos; “alegando, em suma”; “Apelou a União”; “com participação assegurada judicialmente”",
+     "RED · MÉDIA"
     ],
     [
-     "Relatório",
-     "Apelação do INEP com o ID da União: ID 322052990 → ID 322052991",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "\"inscrição da autora\" → \"do autor\"",
-     "Corrigido"
-    ],
-    [
-     "Relatório",
-     "Acrescentada a aprovação no Revalida 2024/1 sub judice (IDs 322052992 e 322052995)",
-     "Acrescido"
-    ],
-    [
-     "Voto/Ementa",
-     "Lei 13.969/2019 e \"13.9692019\" → Lei 13.959/2019",
-     "Corrigido"
-    ],
-    [
-     "Voto/Ementa",
-     "IRDR: artigo 927, II → 927, III, do CPC",
-     "Corrigido"
+     "Voto, V30",
+     "Período sem oração principal (“Sucede, porém, que … foi concedida … , tal sequência de fatos não pode deixar de ser considerada”); “liminar ou tutela provisória”; “mais importante” → Dois períodos completos, com “tutela provisória”, sem a ênfase",
+     "RED · MÉDIA"
     ],
     [
      "Voto",
-     "\"ID3 22052986\" → ID 322052986",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Frase sobre a aprovação sub judice não prejudicar o recurso",
-     "Acrescido [VALIDAR]"
-    ],
-    [
-     "Voto/Ementa",
-     "EREsp 1.539.725 sem relator e data",
-     "[VALIDAR]"
+     "Artigos definidos ausentes (V2, V3); travessões e “III e 985, I” (V7); “TRF1”; datas sem dois dígitos (V9, V10); “ID’s”; aspas de fechamento invertidas (V32) → Artigos; vírgulas; “Tribunal Regional Federal da 1ª Região”; “DJEN 03/09/2026” e “DJEN 23/06/2026”; “IDʼs”; aspas",
+     "RED · BAIXA"
     ],
     [
      "Ementa",
-     "Item 4 reescrito (gênero: \"médica\" → \"médico\"); item 5 \"Não majora…\" → \"Não cabe majorar…\"",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Rodapé no formato STJ/TRF-3; IRDR com DJe 02/05/2023",
-     "Padronizado"
-    ],
-    [
-     "Voto",
-     "(g.n) → (g.n.); 23/6/2026 → 23/06/2026; \"Rel. p/ acórdão, Des.\" → \"Rel. p/ acórdão Des.\"; espaços iniciais",
-     "Padronizado"
+     "Seções em caixa baixa; “Apelações interpostas pelo INEP e pela União”; questões sem “saber se”; artigos definidos ausentes (itens 2, 3 e 6); “da candidata” (o autor é homem); rodapé com “TRF3”, sem a Súmula 266/STJ e com o AgInt nos EREsp 1.539.725, que o voto não cita → Caixa alta; “Apelações do INEP e da União”; “saber se”; artigos; “do candidato”; rodapé só com o que o voto cita, na ordem STJ → TRF-3",
+     "EST · MÉDIA"
     ],
     [
      "Acórdão",
-     "Texto do acórdão acrescentado (negou provimento às apelações; Des. Fed. JEAN MARCOS e Juiz Fed. Conv. NEY DE ANDRADE)",
-     "Acrescido"
-    ],
-    [
-     "Voto",
-     "EREsp 1.539.725 completado: AgInt nos EREsp 1.539.725, Rel. Min. ANTONIO CARLOS FERREIRA, DJe 19/10/2017 (como o próprio Relator o cita em votos anteriores); ementa alinhada",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "Frase sobre a aprovação sub judice mantida (fato conferido nos IDs 322052992 e 322052995); retirada a marca [VALIDAR]",
-     "Validado"
-    ],
-    [
-     "Voto",
-     "Retirada a transcrição do precedente do Relator (ApCiv 5001036-62.2021) incluída na primeira correção: a minuta já reproduz o texto padrão do gabinete sobre a matéria, que é o próprio entendimento do Relator, e o precedente servia só para demonstrar alinhamento. Rodapé da ementa ajustado",
-     "Retirado"
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
     ]
    ],
-   "pendencias": [],
+   "pendencias": [
+    "Natureza da ação: a minuta fala em “ação ajuizada” e “julgou procedente o pedido”, mas usa “direito líquido e certo” (V29) e a sentença começa por “Trata-se de mandado de segurança impetrado …” (ID 322052989), com classe “Tutela Antecipada Antecedente” no PJe. A extração da sentença não alcança o dispositivo: conferir e uniformizar (ação × mandado de segurança; procedência × concessão).",
+    "A versão corrigida em 19/11/2026 (v1 no Collectio) não foi aplicada no PJe; esta correção parte do texto atual do PJe (liberado).",
+    "AI 5012374-64.2025.4.03.0000 (Rel. Des. Fed. LEILA PAIVA) citado com “intimação via sistema 09/12/2025”: confirmar a data de publicação no DJEN."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5000135-89.2024.4.03.6005.json.gz",
