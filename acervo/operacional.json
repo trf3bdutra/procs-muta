@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:47:22.383Z",
+ "atualizado_em": "2026-11-21T10:47:28.178Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -262089,7 +262089,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.524Z"
+    "atualizado_em": "2026-11-21T10:47:28.178Z"
    },
    "triagem": {
     "Urgência": "",
@@ -262103,39 +262103,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Isento (ente público/MP)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Mandado de segurança",
+    "ID do Parecer MPF": "356840792",
+    "Parecer - Sentido": "Ausência de interesse que justifique intervenção",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "PIS",
+    "Tema": "Apelação da União e remessa necessária em mandado de segurança · exclusão do ISS da base de cálculo do PIS e da COFINS · liminar deferida · segurança concedida, com compensação",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "DPF MARCELLUS, 2ª Seção, ISS - PIS/COFINS",
-    "Alegações": "",
+    "Alegações": "1) Exclusão do ISS da base do PIS e da COFINS (Tema 118/STF); 2) modulação; 3) compensação.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Tema 118/STF: o ISS não integra a base de cálculo do PIS e da COFINS (RE 592.616, julgado em 21/10/2026, por 6 a 5); modulação dos efeitos ainda pendente [VALIDAR] · Linha da Turma Regional antes do julgamento: aplicação analógica do Tema 69/STF (ED na ApelRemNec 5001917-88.2020.4.03.6000, 28/04/2026) · Mesmo grupo: 5009355-29 e 5009286-94",
+    "Síntese Fática": "Digithobrasil Soluções em Software Ltda. pede a exclusão do ISS da base do PIS e da COFINS e a compensação do indébito. A liminar foi deferida e a sentença concedeu a segurança."
    },
    "producao": {
     "Destino": "",
@@ -262184,7 +262185,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5009283-76.2023.4.03.6000",
