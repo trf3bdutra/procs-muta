@@ -45,3 +45,8 @@ test('prontuário: modo essencial aplicado sem redesenhar, com aviso; decisão n
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ['function prtModoAplica(el)', "if($('#prq .prt'))prtModoAplica();else prontLateral();", 'prt-essn', '<div class="row orig-ln">', "inp('orig.id','ID')+inp('orig.data','','date')+'</div>'", '#prq .row.orig-ln{display:grid!important']) assert.ok(app.includes(x), x);
 });
+
+test('prontuário: sem a prévia da minuta', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(!app.includes('abas[2].html+=previaMinuta('));
+});
