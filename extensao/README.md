@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.25 · inserir no editor do PJe
+
+- Parágrafos-padrão: botão "Inserir" põe o parágrafo no editor do PJe, na posição do cursor (sem cursor no editor, no fim).
+- Ementário: "Citar no editor" insere "Classe número, Rel. Des. Fed. NOME, DJEN data:" e a ementa entre aspas, em itálico
+  e com recuo. A inserção é uma colagem (o editor converte para o formato dele); o texto também fica copiado.
+
 ## O que muda na 0.24 · quadro de sinalizações com registro
 
 - O quadro dos ícones abre em 4 painéis lado a lado: Avisos | Intercorrências | Pendências | Notas (com a síntese e as

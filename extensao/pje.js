@@ -108,6 +108,16 @@
         throw new Error(/Receiving end|port closed|No tab/i.test(String(e && e.message)) ? 'Nenhum editor de texto aberto na aba do PJe (abra a minuta na tarefa e, se a extensão foi atualizada, recarregue a página do PJe).' : (e && e.message) || String(e));
       });
     },
+    /* insere HTML no editor do PJe, na posição do cursor (ou no fim); copia também, para colar à mão se o editor recusar */
+    inserir: function (html, texto) {
+      try { if (navigator.clipboard && window.ClipboardItem) navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([texto || ''], { type: 'text/plain' }) })]).catch(function () {}); } catch (e) {}
+      if (!temChrome) return Promise.reject(new Error('Fora da extensão: copiado para colar no editor.'));
+      return chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(function (t) {
+        var id = t && t[0] ? t[0].id : abaAtiva; if (id == null) throw new Error('Nenhuma aba ativa.');
+        return chrome.tabs.sendMessage(id, { tipo: 'muta-inserir', html: html, texto: texto || '' });
+      }).then(function (r) { if (!r) throw new Error('Nenhum editor aberto na aba do PJe (o texto foi copiado).'); if (r.erro) throw new Error(r.erro); return r; },
+        function (e) { throw new Error(/Receiving end|port closed|No tab/i.test(String(e && e.message)) ? 'Nenhum editor aberto na aba do PJe (o texto foi copiado; recarregue o PJe com F5 se a extensão foi atualizada).' : (e && e.message) || String(e)); });
+    },
     /* cronologia dos autos digitais (painel esquerdo da página dos autos): documentos com ID, tipo, descrição e data */
     lerAutos: function (tudo) {
       if (!temChrome) return Promise.reject(new Error('Fora da extensão: sem acesso ao PJe.'));

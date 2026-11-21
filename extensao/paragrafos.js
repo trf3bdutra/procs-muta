@@ -39,7 +39,7 @@ function render() {
     '<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + ' parágrafos · as partes destacadas são vagas a preencher</p></div>' +
     ordem.map(function (c) {
       return '<h4 class="tr-g">' + esc(c) + ' <small class="muted">' + grupos[c].length + '</small></h4>' + grupos[c].map(function (p) {
-        return '<article class="pp-i"><div class="pp-h"><b>' + esc(p.titulo) + '</b><button type="button" class="btn line sm" data-cp="' + esc(p.id) + '">Copiar</button></div><p class="pp-t">' + comVagas(p.texto) + '</p></article>';
+        return '<article class="pp-i"><div class="pp-h"><b>' + esc(p.titulo) + '</b><span class="pp-ac"><button type="button" class="btn solid sm" data-ins="' + esc(p.id) + '" title="Inserir no editor do PJe, na posição do cursor">Inserir</button><button type="button" class="btn line sm" data-cp="' + esc(p.id) + '">Copiar</button></span></div><p class="pp-t">' + comVagas(p.texto) + '</p></article>';
       }).join('');
     }).join('') + (L.length ? '' : '<div class="empty">Nenhum parágrafo com esses termos.</div>');
   if (foco) { var q = $('pp-q'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }
@@ -49,6 +49,15 @@ if (caixa) {
   caixa.addEventListener('input', function (e) { if (e.target.id !== 'pp-q') return; clearTimeout(tq); tq = setTimeout(function () { P.q = e.target.value; render(); }, 250); });
   caixa.addEventListener('change', function (e) { if (e.target.id === 'pp-cat') { P.cat = e.target.value; render(); } });
   caixa.addEventListener('click', function (e) {
+    var bi = e.target.closest('[data-ins]');
+    if (bi) {
+      var pi = (P.lista || []).filter(function (x) { return x.id === bi.dataset.ins; })[0]; if (!pi || !window.MutaPje || !window.MutaPje.inserir) return;
+      var tx = paraCopiar(pi.texto), html = tx.split(/\n+/).map(function (l) { return '<p>' + esc(l) + '</p>'; }).join('');
+      bi.disabled = true; bi.textContent = 'Inserindo…';
+      window.MutaPje.inserir(html, tx).then(function (r) { bi.textContent = 'Inserido ' + (r.onde || ''); }, function (er) { bi.textContent = 'Copiado'; bi.title = er.message; })
+        .then(function () { setTimeout(function () { bi.disabled = false; bi.textContent = 'Inserir'; }, 1800); });
+      return;
+    }
     var b = e.target.closest('[data-cp]'); if (!b) return;
     var p = (P.lista || []).filter(function (x) { return x.id === b.dataset.cp; })[0]; if (!p) return;
     (navigator.clipboard ? navigator.clipboard.writeText(paraCopiar(p.texto)) : Promise.reject()).then(function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1200); }, function () {});

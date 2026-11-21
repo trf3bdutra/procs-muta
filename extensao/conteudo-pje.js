@@ -380,6 +380,46 @@
     });
   } catch (e) {}
 
+  /* ---------- 0.25 · inserir no editor do PJe (parágrafo-padrão, citação de precedente) na posição do cursor ----------
+     Cola como colagem comum (o editor converte o HTML no formato dele); sem cursor no editor, vai para o fim. */
+  function editorAlvo() {
+    var R = [];
+    var ok = function (el, d) { if (el && visivel(el.ownerDocument === document ? el : (d.defaultView && d.defaultView.frameElement) || el)) R.push({ el: el, doc: d }); };
+    todos('.ProseMirror[contenteditable="true"]').forEach(function (el) { if (!(el.parentElement && el.parentElement.closest('.ProseMirror'))) ok(el, document); });
+    Array.prototype.forEach.call(document.querySelectorAll('iframe'), function (f) {
+      var d; try { d = f.contentDocument; } catch (e) { d = null; } if (!d || !d.body) return;
+      var pm = d.querySelector('.ProseMirror[contenteditable="true"]');
+      if (pm) { if (visivel(f)) R.push({ el: pm, doc: d }); return; }
+      if ((d.body.isContentEditable || d.designMode === 'on') && visivel(f)) R.push({ el: d.body, doc: d });
+    });
+    if (!R.length) todos('[contenteditable="true"], .ck-editor__editable').forEach(function (el) { if (!(el.parentElement && el.parentElement.closest('[contenteditable="true"]'))) ok(el, document); });
+    return R[0] || null;
+  }
+  function inserirNoEditor(html, texto) {
+    var A = editorAlvo(); if (!A) return { erro: 'Nenhum editor de texto aberto nesta tela do PJe.' };
+    var d = A.doc, w = d.defaultView, sel = w.getSelection(), rg = sel && sel.rangeCount ? sel.getRangeAt(0).cloneRange() : null;
+    var dentro = rg && A.el.contains(rg.commonAncestorContainer);
+    try { A.el.focus(); } catch (e) {}
+    sel = w.getSelection();
+    if (dentro) { sel.removeAllRanges(); sel.addRange(rg); }
+    else { var fim = d.createRange(); fim.selectNodeContents(A.el); fim.collapse(false); sel.removeAllRanges(); sel.addRange(fim); }
+    var colou = false;
+    try {
+      var dt = new w.DataTransfer(); dt.setData('text/html', html); dt.setData('text/plain', texto || '');
+      var ev = new w.ClipboardEvent('paste', { clipboardData: dt, bubbles: true, cancelable: true });
+      A.el.dispatchEvent(ev); colou = ev.defaultPrevented;
+    } catch (e) {}
+    if (!colou) { try { colou = d.execCommand('insertHTML', false, html); } catch (e) {} }
+    return colou ? { ok: true, onde: dentro ? 'no cursor' : 'no fim do texto' } : { erro: 'O editor não aceitou a colagem automática; o texto foi copiado: cole com Ctrl+V.' };
+  }
+  try {
+    chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
+      if (!msg || msg.tipo !== 'muta-inserir') return;
+      if (!editorAlvo()) return;
+      responder(inserirNoEditor(String(msg.html || ''), String(msg.texto || '')));
+    });
+  } catch (e) {}
+
   /* ---------- 0.19 · selos na lista de tarefas (só no quadro do painel de tarefas; só leitura) ----------
      Em cada cartão da lista: etapa, quem minuta e quem corrige, urgência não apreciada, intercorrências, pendências,
      dias na tarefa, meta, sobrestamento, caso sensível e as etiquetas do gabinete que faltam no PJe (clique copia). */

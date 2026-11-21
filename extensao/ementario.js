@@ -284,17 +284,32 @@ function mais() {
       (ab ? '' : '<p>' + pv + '</p>') + '<small class="ej-m">' + esc(mot.join(' · ')) + '</small>' +
       '<div class="ej-a"><button type="button" class="btn line sm" data-ej="exp" title="' + (ab ? 'Recolher' : 'Ver a ementa inteira, o resultado, o inteiro teor e as ações') + '">' + (ab ? 'Recolher' : 'Expandir') + '</button>' +
       '<a class="btn line sm" href="' + compendio(x) + '" target="_blank" rel="noopener" title="Abrir este julgado no Ementário do Compêndio">Compendium ↗</a>' +
+      '<button type="button" class="btn solid sm" data-ej="cit" title="Inserir no editor do PJe a citação (classe, número, relator, data) e a ementa entre aspas">Citar no editor</button>' +
       '<button type="button" class="btn line sm" data-ej="cp" title="Copiar a ementa">Copiar ementa</button></div>';
     if (ab) { var d = el('div', 'ej-d detail'); detalhe(x, d); c.append(d); }
     c.addEventListener('click', function (e) {
       var b = e.target.closest('[data-ej]'); if (!b) return;
       if (b.dataset.ej === 'exp') { V.ab[x.id] = !V.ab[x.id]; var s0 = V.shown; render(); while (V.shown < s0 && V.shown < V.res.length) mais(); var n = list.querySelector('[data-id="' + x.id + '"]'); if (n) n.scrollIntoView({ block: 'nearest' }); }
       else if (b.dataset.ej === 'cp') copiar(x.e || '', 'Ementa copiada.');
+      else if (b.dataset.ej === 'cit') citar(x, b);
     });
     list.append(c);
   });
   V.shown = Math.min(V.shown + PAGE, V.res.length);
   var m = $('acv-more'); m.hidden = V.shown >= V.res.length; m.textContent = 'Carregar mais (' + n0(V.res.length - V.shown) + ' restantes)';
+}
+/* citação no padrão do gabinete: "ApCiv 5000000-00.0000.4.03.0000, Rel. Des. Fed. CARLOS MUTA, DJEN DD/MM/AAAA:" + ementa entre aspas, em itálico */
+function citacao(x) {
+  var sig = x.c || x.cl || '', rel = x.rel || 'CARLOS MUTA', data = x.p ? 'DJEN ' + fmtData(x.p) : x.d ? 'julgado em ' + fmtData(x.d) : '';
+  var cab = [sig ? sig + ' ' + (x.n || '') : (x.n || ''), 'Rel. Des. Fed. ' + rel, data].filter(Boolean).join(', ') + ':';
+  var em = String(x.e || '').replace(/\s+/g, ' ').trim();
+  return { texto: cab + '\n"' + em + '"', html: '<p>' + esc(cab) + '</p><p style="margin-left:4cm;text-align:justify"><i>"' + esc(em) + '"</i></p>' };
+}
+function citar(x, b) {
+  var c = citacao(x); if (!window.MutaPje || !window.MutaPje.inserir) { copiar(c.texto, 'Citação copiada.'); return; }
+  b.disabled = true; var o = b.textContent; b.textContent = 'Inserindo…';
+  window.MutaPje.inserir(c.html, c.texto).then(function (r) { status('Citação inserida ' + (r.onde || '') + '.'); }, function (er) { status(er.message); })
+    .then(function () { b.disabled = false; b.textContent = o; });
 }
 function copiar(texto, msg) {
   (navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(texto) : Promise.reject()).then(function () { status(msg); })

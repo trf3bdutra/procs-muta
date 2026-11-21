@@ -309,3 +309,11 @@ test('extensão 0.24: quadro de sinalizações em 4 painéis (notas com síntese
   assert.match(f, /msg\.tipo !== 'muta-sinal'/); assert.match(f, /'✓ ' \+ semMarca\(L\[i\]\)/); assert.match(f, /\/api\/pauta\?ficha=1', \{ method: 'POST'/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /sintese: String\(t\['Síntese Processual'\]/);
 });
+
+test('extensão 0.25: inserir parágrafo-padrão e citação de precedente no editor do PJe (cursor ou fim)', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /msg\.tipo !== 'muta-inserir'/); assert.match(c, /new w\.ClipboardEvent\('paste'/); assert.match(c, /execCommand\('insertHTML'/);
+  assert.match(read('extensao/pje.js'), /inserir: function \(html, texto\)/);
+  assert.match(read('extensao/paragrafos.js'), /data-ins=/); assert.match(read('extensao/ementario.js'), /data-ej="cit"/);
+  assert.match(read('extensao/ementario.js'), /'Rel\. Des\. Fed\. ' \+ rel/);
+});
