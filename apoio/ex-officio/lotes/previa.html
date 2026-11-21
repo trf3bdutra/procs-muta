@@ -185,9 +185,34 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .cx li button{border:0;background:none;padding:0;color:var(--ei);text-align:left;cursor:pointer;font-size:12.5px}
 .cx li button:hover{color:var(--eo2);text-decoration:underline}
 /* processo */
-.pf-h{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start;justify-content:space-between;padding:14px 0 12px;border-bottom:1px solid var(--el)}
+.pf-h{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;padding:12px 0;border-bottom:1px solid var(--el)}
+.pf-id{flex:1 1 260px;min-width:0}
+.pf-acts{display:flex;gap:6px;flex-wrap:wrap;flex:none}
+.stl{position:relative;flex:2 1 380px;display:grid;grid-template-columns:repeat(var(--n),1fr);padding:12px 0 2px;min-width:0}
+.stl-ln{position:absolute;left:calc(50% / var(--n));right:calc(50% / var(--n));top:25px;height:2px;background:var(--el)}
+.stl-ln i{display:block;height:2px;background:linear-gradient(90deg,#2e7d55,#2d6fa8)}
+.st{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--em);text-align:center}
+.st.s-m{--C:#2e7d55}.st.s-r{--C:#2d6fa8}.st.s-p{--C:#a57829}.st.s-e{--C:#1b4f7a}
+html[data-theme=dark] .st.s-e{--C:#4e9bcb}
+.st .c{position:relative;z-index:1;display:grid;place-items:center;width:28px;height:28px;border:2px solid var(--el2);border-radius:50%;background:var(--ew);color:var(--em)}
+.st.ok .c{border-color:var(--C);background:var(--C);color:#fff}
+.st.at .c{border-color:var(--C);color:var(--C);box-shadow:0 0 0 4px color-mix(in srgb,var(--C) 16%,transparent)}
+.st .l{font:700 10px var(--emono);letter-spacing:.1em;text-transform:uppercase}
+.st.ok .l,.st.at .l{color:var(--C)}
+.st.pu .c{border-style:dashed;border-color:var(--al)}
+.st.pu small{color:var(--al)}
+.st small{font:400 10.5px var(--emono);color:var(--em)}
+.st .ag{position:absolute;top:-12px;z-index:2;padding:0 6px;border-radius:7px;background:var(--eg);color:#fff;font:600 9.5px/15px var(--font);font-style:normal}
+.st .vfi{font:400 9.5px var(--emono);font-style:normal;letter-spacing:.04em;text-transform:uppercase}
+.st .vfi.ok{color:var(--ok)}.st .vfi.al{color:var(--al)}
+.vsel{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.vlb{display:inline-flex;gap:8px;align-items:center}
+.vlb[hidden]{display:none}
+.vlb span{font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+.vlb select{max-width:440px}
+.vor{margin:6px 0 0;font-size:11.5px;color:var(--em)}
+#dif{margin-top:10px}
 .pf-h .cnj{font-size:14px}
-.pf-acts{display:flex;gap:6px;flex-wrap:wrap}
 .flx{margin-top:0}
 .flx>div{cursor:default}
 .flx>div>b{font-size:17px;margin-top:5px}
@@ -470,43 +495,45 @@ function colEtapa([k,r,t,d],base){
 }
 
 /* ---------- processo aberto ---------- */
+/* linha de etapas do processo, como no cartão da pauta: círculo por etapa, a linha de progresso e o "agora" na próxima */
+const ICO={m:'<path d="M4 20h4l10-10-4-4L4 16z"/>',r:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',p:'<path d="M12 3v11"/><path d="M7.5 9.5L12 14l4.5-4.5"/><path d="M5 20h14"/>',e:'<path d="M4 12l15-7-5 15-3-6z"/>'};
+const svg=(d,s)=>`<svg viewBox="0 0 24 24" width="${s||14}" height="${s||14}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+function linhaEtapas(r){
+  const x=r.x,it=r.it;
+  const P=r.cheio?[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['No PJe','p',it&&it.pje&&it.pje.em],['Liberação','e',x.dataLiberacao]]
+                 :[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['Liberação','e',x.dataLiberacao]];
+  const n=P.length, ult=r.passos.lastIndexOf(true), at=r.retido||ult+1>=n?-1:ult+1, pct=ult>0?ult/(n-1)*100:0;
+  return `<div class="stl" style="--n:${n}" role="list" aria-label="Etapas">${`<i class="stl-ln" aria-hidden="true"><i style="width:${pct}%"></i></i>`}${P.map((q,k)=>{
+    const ok=r.passos[k], cur=k===at, pul=!ok&&k<ult, vf=q[1]==='e'&&r.cheio&&ok?`<em class="vfi ${r.fi?'ok':'al'}">${r.fi?'✓ versão final':'sem versão final'}</em>`:'';
+    return `<span role="listitem" class="st s-${q[1]}${ok?' ok':''}${cur?' at':''}${pul?' pu':''}" ${pul?'title="Etapa sem data registrada na pauta"':''}>${cur?'<em class="ag">agora</em>':''}<span class="c">${svg(ICO[q[1]])}</span><span class="l">${q[0]}</span><small>${q[2]?brc(q[2]):ok?'✓':pul?'sem data':'—'}</small>${vf}</span>`}).join('')}</div>`;
+}
 function procHtml(){
   const r0=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r0)return '';
   /* o fluxo completo (no PJe e versão final) só vale para as minhas correções */
   const r=linha(r0.x,r0.meu), x=r.x,it=r.it,z=r.z;
-  const cel=r.cheio?[
-    ['1 · Minutada',x.dataMinuta?br(x.dataMinuta):(r.passos[0]?'✓':'—'),x.servidor||''],
-    ['2 · Corrigida',x.dataCorrecao?br(x.dataCorrecao):'—',x.corretor||''],
-    ['3 · No PJe',it&&it.pje?br(it.pje.em):'—',it&&it.pje?'versão '+it.pje.versao+(it.pje.por?' · '+it.pje.por:''):'versão colada no editor'],
-    ['4 · Liberada',x.dataLiberacao?br(x.dataLiberacao):'—',r.fi?'✓ versão final '+it.final.versao+' em '+brc(it.final.em):x.dataLiberacao?'× falta a versão final':'pela pauta ou pela página do Desembargador']]:[
-    ['1 · Minutada',x.dataMinuta?br(x.dataMinuta):(r.passos[0]?'✓':'—'),x.servidor||''],
-    ['2 · Corrigida',x.dataCorrecao?br(x.dataCorrecao):'—',x.corretor||''],
-    ['3 · Liberada',x.dataLiberacao?br(x.dataLiberacao):'—','pela pauta ou pela página do Desembargador']];
-  const atual=r.passos.findIndex(p=>!p);
   let ban='';
   if(r.retido)ban=`<p class="ban in">${esc(r.c.intercor||r.c.intercorTipo)}</p>`;
-  else if(!r.cheio)ban=r.etapa==='liberada'?`<p class="ban ok">Liberada no PJe para a sessão.</p>`:r.etapa==='corrigida'?`<p class="ban in">Corrigida. Falta liberar no PJe.</p>`:'';
-  else if(r.etapa==='liberada'&&r.fi)ban=`<p class="ban ok">Liberada, com a versão final registrada em ${br(it.final.em)}. A comparação parte da versão importada no PJe.</p>`;
-  else if(r.etapa==='liberada')ban=`<p class="ban">Liberada no PJe${r.passos[2]?'':', sem a marca da versão importada'}. Confira o texto final no PJe e registre-o como versão final no Collectio: a comparação abaixo passa a mostrar o que o Desembargador mudou.</p>`;
+  else if(!r.cheio)ban=r.etapa==='corrigida'?`<p class="ban in">Corrigida. Falta liberar no PJe.</p>`:'';
+  else if(r.etapa==='liberada'&&!r.fi)ban=`<p class="ban">Liberada no PJe${r.passos[2]?'':', sem a marca da versão importada'}. Confira o texto final no PJe e registre-o como versão final no Collectio: a comparação passa a mostrar o que o Desembargador mudou.</p>`;
   else if(r.etapa==='corrigida')ban=`<p class="ban in">Corrigida. Ao colar no editor do PJe, marque no Collectio a versão importada.</p>`;
   const aj=it&&Array.isArray(it.ajustes)?it.ajustes.filter(a=>Array.isArray(a)&&!/^se[cç][aã]o$/i.test(String(a[0]||''))):[];
   const pd=it&&Array.isArray(it.pendencias)?it.pendencias:[];
   return `<section class="sec" id="proc"><div class="shd"><div><p class="k">03 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
    <div class="box">
-    <div class="pf-h"><div><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">${z?'Minuta no Collectio: '+esc(z.titulo):'Sem minuta no Collectio'}</span></div>
-     <div class="pf-acts">${z?`<a class="b pri" href="/amicus/collectio/?id=${encodeURIComponent(z.lote)}" target="_blank" rel="noopener">Abrir no Collectio</a>`:''}<button type="button" class="b" id="fecha">Fechar</button></div></div>
-    <div class="met flx" style="grid-template-columns:repeat(${cel.length},minmax(0,1fr))">${cel.map((c,k)=>`<div class="${k===atual&&!r.retido?'at':''}"><span>${esc(c[0])}</span><b>${esc(c[1])}</b><small>${esc(c[2])}</small></div>`).join('')}</div>
+    <div class="pf-h">
+     <div class="pf-id"><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">Minuta ${esc(x.servidor||'—')} · correção ${esc(x.corretor||'—')}${z?' · '+esc(z.titulo):''}</span></div>
+     ${linhaEtapas(r)}
+     <div class="pf-acts">${z?`<a class="b pri" href="/amicus/collectio/?id=${encodeURIComponent(z.lote)}" target="_blank" rel="noopener">Abrir no Collectio</a>`:''}<button type="button" class="b" id="fecha">Fechar</button></div>
+    </div>
     ${ban}
-    <div class="sub"><h3>Versões da minuta <small id="vs-k">${z?'lendo…':'—'}</small></h3><div class="vs" id="vs">${z?'<p class="vazio" style="padding:0">Lendo as versões…</p>':'<p class="vazio" style="padding:0">Este processo ainda não tem minuta registrada no Collectio.</p>'}</div></div>
-    <div class="sub" id="cmp-w" hidden><h3>O que <em class="it" style="font-size:12px;letter-spacing:.06em">mudou</em> <small id="cmp-k"></small></h3>
-     <div class="cmpc"><label>A <select class="sel" id="va"></select></label><label>B <select class="sel" id="vb"></select></label><button type="button" class="b" id="cmp">Comparar</button></div>
-     <div id="dif"></div></div>
+    <div class="sub"><h3>Versões da minuta <small id="vs-k">${temMin(r)?'lendo…':'—'}</small></h3><div class="vs" id="vs">${temMin(r)?'<p class="vazio" style="padding:0">Lendo as versões…</p>':'<p class="vazio" style="padding:0">Este processo ainda não tem minuta registrada no Collectio.</p>'}</div></div>
     ${aj.length?`<div class="sub"><h3>Matriz de ajustes <small>${aj.length} ajuste${aj.length>1?'s':''} da correção</small></h3><table class="aj"><thead><tr><th scope="col">Local</th><th scope="col">Problema</th><th scope="col">Correção</th><th scope="col">Natureza</th></tr></thead><tbody>${aj.map(a=>{const [p,c]=String(a[1]||'').split(/\s*→\s*/);const t=String(a[2]||'');const crit=/alta|cr[ií]tica/i.test(t)?'alta':/m[ée]dia/i.test(t)?'media':'baixa';return `<tr><th scope="row">${esc(a[0])}</th><td>${esc(p)}</td><td class="c">${esc(c||'')}</td><td><span class="tg f ${crit}">${esc(t)}</span></td></tr>`}).join('')}</tbody></table></div>`:''}
     ${pd.length?`<div class="sub"><h3>Pendências <small>${pd.length} a validar</small></h3><ol class="pd">${pd.map((p,k)=>`<li><span class="ii">${k+1}</span><span>${esc(typeof p==='string'?p:(p&&p.desc)||'')}</span></li>`).join('')}</ol></div>`:''}
    </div></section>`;
 }
+/* versões: primeiro um seletor (mostra o texto da versão escolhida); "Comparar" faz surgir o segundo seletor e o lado a lado */
 async function carregarVersoes(){
-  const r=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r||!r.z)return;
+  const r=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r||!temMin(r))return;
   const cnj=r.x.cnj, mx=cnj.slice(0,10), lote=r.z.lote, ch=lote+'|'+mx;
   try{
     const V=S.ver[ch]||(S.ver[ch]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+'&versoes=1'));
@@ -514,31 +541,51 @@ async function carregarVersoes(){
     const vs=(V.versoes||[]).slice();
     $('#vs-k').textContent=vs.length?vs.length+(vs.length>1?' versões':' versão')+(V.vigente?' · vigente '+V.vigente:''):'nenhuma versão registrada';
     if(!vs.length){$('#vs').innerHTML='<p class="vazio" style="padding:0">A minuta está no Collectio, mas ainda sem versões registradas.</p>';return}
-    const pc=p=>p&&typeof p==='object'?SECS.map(([k,,a])=>a+' '+(p[k]||0)).join(' · '):'';
-    $('#vs').innerHTML=`<table class="vt"><thead><tr><th scope="col">Versão</th><th scope="col">Nome e origem</th><th scope="col">Por · em</th><th scope="col">Parágrafos</th></tr></thead><tbody>${vs.slice().reverse().map(v=>`<tr class="${v.id===V.vigente?'vg':''}"><td><b>${esc(v.id)}</b><br>${v.id===V.vigente?'<span class="bd">vigente</span>':''}${v.pje?'<span class="bd pj">no PJe</span>':''}${v.final?'<span class="bd fi">final</span>':''}</td><td>${esc(v.rotulo||'')}<div class="o">${esc(v.origem||'')}</div></td><td class="o">${esc(v.por||'—')}<br>${br(v.em)}</td><td class="o mono">${esc(pc(v.paragrafos))}</td></tr>`).join('')}</tbody></table>`;
-    if(vs.length<2)return;
-    const pj=vs.find(v=>v.pje), fi=vs.find(v=>v.final);
-    const A=(fi&&(vs.find(v=>v.id===fi.base)||pj))||pj||vs[vs.length-2], B=fi||vs.find(v=>v.id===V.vigente&&v.id!==A.id)||vs[vs.length-1];
-    const op=sel=>vs.map(v=>`<option value="${esc(v.id)}"${v.id===sel?' selected':''}>${esc(v.id)} · ${esc((v.rotulo||'').slice(0,60))}</option>`).join('');
-    $('#va').innerHTML=op(A.id);$('#vb').innerHTML=op(B.id===A.id?vs[vs.length-1].id:B.id);
-    $('#cmp-w').hidden=false;
-    $('#cmp').onclick=()=>comparar(lote,mx);
-    comparar(lote,mx);
+    const meta=id=>vs.find(v=>v.id===id)||{};
+    const bd=v=>(v.id===V.vigente?'<span class="bd">vigente</span>':'')+(v.pje?'<span class="bd pj">no PJe</span>':'')+(v.final?'<span class="bd fi">final</span>':'');
+    const op=(sel,fora)=>vs.slice().reverse().filter(v=>v.id!==fora).map(v=>`<option value="${esc(v.id)}"${v.id===sel?' selected':''}>${esc(v.id)} · ${esc((v.rotulo||'').slice(0,70))}${v.em?' · '+brc(v.em):''}</option>`).join('');
+    const a0=(vs.find(v=>v.id===V.vigente)||vs[vs.length-1]).id;
+    $('#vs').innerHTML=`<div class="vsel">
+      <label class="vlb"><span>Versão</span><select class="sel" id="va">${op(a0)}</select></label><span id="va-b"></span>
+      <label class="vlb" id="vb-w" hidden><span>comparar com</span><select class="sel" id="vb"></select></label>
+      <span class="sp"></span><button type="button" class="b" id="cmp" aria-pressed="false">Comparar</button></div>
+     <p class="vor" id="va-o"></p><div id="dif"></div>`;
+    const par=id=>{const v=meta(id),p=v.paragrafos;return p&&typeof p==='object'?SECS.map(([k,,ab])=>ab+' '+(p[k]||0)).join(' · '):''};
+    /* segunda versão sugerida: a final contra a importada no PJe; senão, a marcada no PJe ou a anterior */
+    const outra=a=>{const A=meta(a),pj=vs.find(v=>v.pje),fi=vs.find(v=>v.final),ix=vs.findIndex(v=>v.id===a);
+      if(A.final)return (vs.find(v=>v.id===A.base)||pj||vs[ix-1]||vs[ix+1]||{}).id;
+      if(fi&&fi.id!==a)return fi.id; if(pj&&pj.id!==a)return pj.id; return (vs[ix-1]||vs[ix+1]||{}).id;};
+    const mostra=async()=>{
+      const a=$('#va').value, v=meta(a);
+      $('#va-b').innerHTML=bd(v);
+      $('#va-o').textContent=[v.por,v.em?br(v.em):'',v.origem,par(a)].filter(Boolean).join(' · ');
+      const on=S.cmpOn&&vs.length>1;
+      $('#vb-w').hidden=!on; $('#cmp').textContent=on?'Fechar comparação':'Comparar'; $('#cmp').setAttribute('aria-pressed',String(on));
+      if(on){const b0=$('#vb').value;$('#vb').innerHTML=op(b0&&b0!==a?b0:outra(a),a);await comparar(lote,mx,vs,a,$('#vb').value)}
+      else{const d=$('#dif');d.innerHTML='<p class="vazio">Lendo a versão…</p>';try{const F=await foto(lote,mx,a);if($('#va')&&$('#va').value===a&&!S.cmpOn)d.innerHTML=`<div class="mdoc">${SECS.map(([k,rot])=>((F.secoes||{})[k]||[]).length?`<h4>${esc(rot.toUpperCase())}</h4>`+F.secoes[k].map(t=>`<p>${esc(t)}</p>`).join(''):'').join('')}</div>`}catch(e){d.innerHTML=`<p class="vazio">Não foi possível ler a versão: ${esc(e.message)}</p>`}}
+    };
+    $('#va').onchange=mostra;
+    $('#vb').onchange=()=>comparar(lote,mx,vs,$('#va').value,$('#vb').value);
+    $('#cmp').onclick=()=>{S.cmpOn=!S.cmpOn;if(!S.cmpOn)$('#vb').innerHTML='';mostra()};
+    if(vs.length<2)$('#cmp').disabled=true;
+    mostra();
   }catch(e){const el=$('#vs');if(el)el.innerHTML=`<p class="vazio" style="padding:0">Não foi possível ler as versões: ${esc(e.message)}</p>`}
 }
 const fotos={};
 async function foto(lote,mx,v){const k=lote+'|'+mx+'|'+v;return fotos[k]||(fotos[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+'&versao='+encodeURIComponent(v)))}
-async function comparar(lote,mx){
-  const a=$('#va').value,b=$('#vb').value,d=$('#dif');
-  if(a===b){d.innerHTML='<p class="vazio">Escolha duas versões diferentes.</p>';return}
+/* lado a lado: à esquerda a versão mais antiga, à direita a mais nova */
+async function comparar(lote,mx,vs,x1,x2){
+  const d=$('#dif'); if(!x1||!x2||x1===x2){d.innerHTML='<p class="vazio">Escolha duas versões diferentes.</p>';return}
+  const [a,b]=vs.findIndex(v=>v.id===x1)<vs.findIndex(v=>v.id===x2)?[x1,x2]:[x2,x1];
+  const rot=id=>{const v=vs.find(q=>q.id===id)||{};return id+' · '+(v.rotulo||'')};
   d.innerHTML='<p class="vazio">Comparando…</p>';
   try{
     const [FA,FB]=await Promise.all([foto(lote,mx,a),foto(lote,mx,b)]);
-    const sa=FA.secoes||{},sb=FB.secoes||{};let h='',dif=0,iguais=0;
-    SECS.forEach(([k,rot,ab])=>{
+    const sa=FA.secoes||{},sb=FB.secoes||{};let h='',dif=0;
+    SECS.forEach(([k,rt,ab])=>{
       const pa=(sa[k]||[]).map(String),pb=(sb[k]||[]).map(String);
       const ops=alinha(pa,pb);let blocoIg=0,linhas='';
-      const fecha=()=>{if(blocoIg){linhas+=`<div class="eq">${blocoIg} parágrafo${blocoIg>1?'s':''} igua${blocoIg>1?'is':'l'}</div>`;iguais+=blocoIg;blocoIg=0}};
+      const fecha=()=>{if(blocoIg){linhas+=`<div class="eq">${blocoIg} parágrafo${blocoIg>1?'s':''} igua${blocoIg>1?'is':'l'}</div>`;blocoIg=0}};
       ops.forEach(o=>{
         if(o.t==='='){blocoIg++;return}
         fecha();dif++;
@@ -548,11 +595,10 @@ async function comparar(lote,mx){
         linhas+=`<div class="dif-l">${L}${R}</div>`;
       });
       fecha();
-      if(pa.length||pb.length)h+=`<div class="eq" style="color:var(--eo2);border-bottom:1px solid var(--el2)">${rot}</div>`+linhas;
+      if(pa.length||pb.length)h+=`<div class="eq" style="color:var(--eo2);border-bottom:1px solid var(--el2)">${rt}</div>`+linhas;
     });
-    const ra=($('#va').selectedOptions[0]||{}).textContent||a, rb=($('#vb').selectedOptions[0]||{}).textContent||b;
-    $('#cmp-k').textContent=dif?dif+(dif>1?' parágrafos com diferença':' parágrafo com diferença'):'sem diferença';
-    d.innerHTML=`<div class="dif"><div class="dif-h"><span>A · ${esc(ra)}</span><span>B · ${esc(rb)}</span></div>${h}</div>`;
+    $('#vs-k').textContent=dif?dif+(dif>1?' parágrafos com diferença':' parágrafo com diferença'):'sem diferença';
+    d.innerHTML=`<div class="dif"><div class="dif-h"><span>${esc(rot(a))}</span><span>${esc(rot(b))}</span></div>${h}</div>`;
   }catch(e){d.innerHTML=`<p class="vazio">Não foi possível comparar: ${esc(e.message)}</p>`}
 }
 /* parágrafos: LCS pelos textos normalizados; os blocos sem par são casados pela posição */
@@ -603,7 +649,7 @@ function ligar(){
   const f=$('#fecha');if(f)f.onclick=()=>{S.aberto='';const u=new URL(location.href);u.searchParams.delete('processo');history.replaceState(null,'',u);render();ir('procs')};
 }
 async function trocaSessao(d){S.data=d;S.aberto='';S.etapa='';S.fora='';const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a pauta…</p></div>';try{await carregarSessao()}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
-function abre(cnj){S.aberto=cnj;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
+function abre(cnj){S.aberto=cnj;S.cmpOn=false;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
 function ir(id){const e=document.getElementById(id);if(e)e.scrollIntoView({block:'start'})}
 $('#tema').onclick=()=>{const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('cmt-eq-tema',t)}catch(e){}};
 $('#atu').onclick=()=>{S.ver={};for(const k in fotos)delete fotos[k];carregar()};
