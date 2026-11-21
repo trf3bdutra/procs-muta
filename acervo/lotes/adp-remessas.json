@@ -120,6 +120,20 @@
    "cor": "#3a5a6a",
    "resultado": "Provimento: sem crédito em monofasia ou alíquota zero (ApelRemNec 5005209-08.2025.4.03.6000, 20/07/2026)",
    "modelo": "Monocrática ou voto único (mesmo advogado, mesma sentença-padrão)"
+  },
+  {
+   "id": "RA9",
+   "rotulo": "Apelação com remessa · IRPJ/CSLL: base presumida reduzida para serviços hospitalares (REsp 1.116.399/BA)",
+   "cor": "#5a3a6a",
+   "resultado": "Voto ou monocrática: REsp 1.116.399/BA; prova dos requisitos (sociedade empresária e Anvisa)",
+   "modelo": "Monocrática (artigo 932, IV, b, do CPC) quando a prova pré-constituída bastar"
+  },
+  {
+   "id": "RA10",
+   "rotulo": "Apelação com remessa · Militar: reintegração para reforma por incapacidade (Lei 6.880/1980)",
+   "cor": "#2a3a6a",
+   "resultado": "Voto conforme a perícia: incapacidade para o serviço militar, nexo com o serviço e redação da Lei 6.880/1980 aplicável (antes ou depois da Lei 13.954/2019)",
+   "modelo": "Voto"
   }
  ],
  "grupo_outros": {
@@ -12258,7 +12272,7 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "IPEDI MS INSTITUTO DO PANTANAL ESPECIALIZADO EM DIAGNOSTICO POR IMAGEM DO MATO GROSSO DO SUL LTDA",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": "RM2",
+   "grupo": "RA9",
    "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares e de diagnóstico por imagem (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · segurança concedida",
    "resultado": "Ato a proferir: apelação da União (ID 340496844) e remessa necessária da sentença ID 340496838; contrarrazões com documentos novos (ID 340496845 e seguintes); MPF sem intervenção (ID 340691228) ‖ Proposta pelos precedentes: Voto: conferir a prova pré-constituída dos três requisitos (atividade, sociedade empresária registrada e licença sanitária vigente); desconsiderar ou não os documentos juntados com as contrarrazões [VALIDAR] [VALIDAR: Licença sanitária vigente (renovação protocolada, ID 340496730); Registro como sociedade empresária]",
    "modelo": "",
@@ -17224,12 +17238,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "CLINICA BISMARCK SERVICOS MEDICOS E HOSPITALARES LTDA",
    "assunto": "Redução de Alíquota IR/CSLL - Serviços Hospitalares",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA9",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · liminar indeferida · segurança concedida em parte, excluídas consultas e atividades administrativas",
+   "resultado": "Ato a proferir: apelação da União (ID 345436127) e remessa necessária da sentença ID 345436121; contrarrazões (ID 345436129); MPF sem intervenção (ID 346317009) ‖ Proposta pelos precedentes: Voto ou monocrática: conferir a prova pré-constituída dos requisitos; manter a exclusão das consultas [VALIDAR] [VALIDAR: Prova da sociedade empresária e da licença sanitária]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que assegurou à Clínica Bismarck a base presumida reduzida do IRPJ e da CSLL sobre serviços hospitalares, excluídas consultas e atividades administrativas.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17240,7 +17256,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto ou monocrática)",
+    "materia": "Tributário — IRPJ/CSLL (serviços hospitalares)",
+    "origem": "Mandado de segurança 5000156-25.2025.4.03.6007 (1ª Vara Federal de Coxim)",
+    "decisao_agravada": "Sentença ID 345436121 (04/11/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 345436127, 11/11/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível (artigo 932, IV, b, do CPC): REsp 1.116.399/BA, se a prova pré-constituída bastar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17250,6 +17277,117 @@
    "chegada": "09/03/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "IRPJ/CSLL — base de cálculo reduzida para serviços hospitalares (REsp 1.116.399/BA)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 345436121 · 04/11/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 379065490 · 08/06/2026 | última movimentação: 08/06/2026 16:08 · Juntada de Petição de petição intercorrente · REsp 1.116.399/BA (repetitivo): interpretação objetiva de \"serviços hospitalares\"; requisitos da Lei 11.727/2008 (sociedade empresária e normas da Anvisa) · Mesmo grupo de 5008585-36 (diagnóstico por imagem) · Linha da 3ª Turma (ApCiv 5002425-13.2020.4.03.6104, 23/04/2021)",
+   "teor": {
+    "sintese_fatica": "Clínica Bismarck Serviços Médicos e Hospitalares Ltda. pede a base presumida reduzida do IRPJ e da CSLL para seus serviços hospitalares. A liminar foi indeferida e a sentença concedeu em parte a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 345436121 (04/11/2025): concedeu em parte a segurança para assegurar a apuração do IRPJ e da CSLL pelas bases de 8% e 12% sobre a receita dos serviços hospitalares, excluídas as receitas de consultas e de atividades administrativas [VALIDAR demais itens].",
+    "recurso": "União (Fazenda Nacional) (ID 345436127, 11/11/2025): ausência de prova pré-constituída do preenchimento dos requisitos (sociedade empresária, normas da Anvisa e serviços hospitalares efetivos) [VALIDAR teor].",
+    "resposta": "Contrarrazões da impetrante (ID 345436129).",
+    "parecer": "MPF ID 346317009: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · liminar indeferida · segurança concedida em parte, excluídas consultas e atividades administrativas",
+     "sintese": "Clínica Bismarck Serviços Médicos e Hospitalares Ltda. pede a base presumida reduzida do IRPJ e da CSLL para seus serviços hospitalares. A liminar foi indeferida e a sentença concedeu em parte a segurança.",
+     "questoes": "1) Base de cálculo presumida reduzida do IRPJ e da CSLL para serviços hospitalares; 2) prova pré-constituída dos requisitos.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 345436127, 11/11/2025): ausência de prova pré-constituída do preenchimento dos requisitos (sociedade empresária, normas da Anvisa e serviços hospitalares efetivos) [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 345436129)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "345436121",
+      "juizo": "Mandado de segurança 5000156-25.2025.4.03.6007 (1ª Vara Federal de Coxim)",
+      "dispositivo": "concedeu em parte a segurança para assegurar a apuração do IRPJ e da CSLL pelas bases de 8% e 12% sobre a receita dos serviços hospitalares, excluídas as receitas de consultas e de atividades administrativas [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-07-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "345436127",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "345436121",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "345436114",
+       "data": "2025-07-15"
+      },
+      {
+       "desc": "Sentença: segurança concedida em parte",
+       "id": "345436121",
+       "data": "2025-11-04"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "345436127",
+       "data": "2025-11-11"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "345436129",
+       "data": "2025-11-27"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "346317009",
+       "data": "2025-12-11"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 345436121 · 04/11/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 379065490 · 08/06/2026 | última movimentação: 08/06/2026 16:08 · Juntada de Petição de petição intercorrente · REsp 1.116.399/BA (repetitivo): interpretação objetiva de \"serviços hospitalares\"; requisitos da Lei 11.727/2008 (sociedade empresária e normas da Anvisa) · Mesmo grupo de 5008585-36 (diagnóstico por imagem) · Linha da 3ª Turma (ApCiv 5002425-13.2020.4.03.6104, 23/04/2021)",
+     "assuntoDet": "IRPJ/CSLL — base de cálculo reduzida para serviços hospitalares (REsp 1.116.399/BA)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "346317009",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "08/06/2026 16:08 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 345436121 · 04/11/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Petição intercorrente (agravado) · ID 379065490 · 08/06/2026",
+    "ultima_informacao": "Informação · ID 345436139 · 04/12/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 345436121 · 04/11/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 379065490 · 08/06/2026 | última movimentação: 08/06/2026 16:08 · Juntada de Petição de petição intercorrente"
    }
   },
   {
@@ -17261,12 +17399,14 @@
    "exequente": "RENATO PAES",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Reforma",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA10",
+   "tipo_caso": "Apelações do autor e da União e remessa necessária em ação ordinária · militar temporário com hanseníase, agregado por mais de dez anos por decisão judicial e licenciado em 30/11/2019 · reintegração para reforma (artigos 108, V, e 109 da Lei 6.880/1980) · tutela antecipada · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelações do autor (ID 310092503) e da União (ID 310092504) e remessa necessária da sentença ID 310092502; contrarrazões (IDs 310092506 e 310092507) ‖ Proposta pelos precedentes: Voto: examinar a prova da incapacidade e o enquadramento nos artigos 108 e 109 da Lei 6.880/1980; honorários do autor [VALIDAR] [VALIDAR: Perícia judicial; Ação anterior de reintegração]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações do autor e da União e remessa necessária da sentença que anulou o licenciamento de militar temporário com hanseníase, agregado por mais de dez anos, e determinou sua reforma. A União sustenta cura e aptidão; o autor pede majoração dos honorários.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17277,7 +17417,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Administrativo — militar (reforma)",
+    "origem": "Procedimento comum 5000645-59.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 310092502 (10/07/2024)",
+    "recurso": "apelação de Renato Paes (ID 310092503, 16/08/2024) e apelação de União (ID 310092504, 07/10/2024) · remessa necessária",
+    "preparo": "Renato Paes: Justiça gratuita; União: Isento (ente público)",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Renato Paes: Justiça gratuita; União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17287,6 +17438,127 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Militar — reintegração para reforma por incapacidade (hanseníase); licenciamento após agregação",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 310092505 · 07/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 310092502 · 10/07/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (AGU (PRU)) · ID 310092507 · 10/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Prova da incapacidade definitiva para o serviço militar × laudo administrativo de 2019 (cura com restrição a esforços) [VALIDAR perícia judicial] · Redação da Lei 6.880/1980 anterior ou posterior à Lei 13.954/2019 (licenciamento em 30/11/2019; vigência da Lei 13.954 em 17/12/2019) [VALIDAR] · Ação anterior de reintegração (2008) [VALIDAR número] · Mesmo grupo de 5004665-64",
+   "teor": {
+    "sintese_fatica": "Renato Paes, militar temporário com hanseníase, foi reintegrado por decisão judicial em 2008 e permaneceu agregado até novembro de 2019, quando foi novamente licenciado. Alega incapacidade definitiva para o serviço militar.",
+    "inicial": "Ação ordinária de reintegração e reforma militar contra a União.",
+    "decisao_recorrida": "Sentença ID 310092502 (10/07/2024): ratificou a tutela e julgou procedente o pedido para anular o licenciamento de 30/11/2019 e determinar a reintegração para reforma (artigos 108, V, e 109 da Lei 6.880/1980), com pagamento dos atrasados desde o licenciamento, descontada a compensação pecuniária, e correção pela SELIC a partir da EC 113/2021; honorários no mínimo legal.",
+    "recurso": "Renato Paes (ID 310092503, 16/08/2024): majoração dos honorários fixados no percentual mínimo. União (ID 310092504, 07/10/2024): revogação da tutela; licenciamento regular por término do tempo de serviço; laudo de 07/08/2019 atesta cura e aptidão com restrição a esforços.",
+    "resposta": "Contrarrazões do autor (ID 310092506) e da União (ID 310092507).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Nello Ricci Neto (OAB/MS 8.225); justiça gratuita deferida.",
+    "preparo": "Renato Paes: Justiça gratuita; União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações do autor e da União e remessa necessária em ação ordinária · militar temporário com hanseníase, agregado por mais de dez anos por decisão judicial e licenciado em 30/11/2019 · reintegração para reforma (artigos 108, V, e 109 da Lei 6.880/1980) · tutela antecipada · pedido julgado procedente",
+     "sintese": "Renato Paes, militar temporário com hanseníase, foi reintegrado por decisão judicial em 2008 e permaneceu agregado até novembro de 2019, quando foi novamente licenciado. Alega incapacidade definitiva para o serviço militar.",
+     "questoes": "1) Reintegração para reforma de militar temporário (artigos 108 e 109 da Lei 6.880/1980); 2) incapacidade definitiva × cura; 3) honorários.",
+     "rel": {
+      "razoes": "Renato Paes (ID 310092503, 16/08/2024): majoração dos honorários fixados no percentual mínimo. União (ID 310092504, 07/10/2024): revogação da tutela; licenciamento regular por término do tempo de serviço; laudo de 07/08/2019 atesta cura e aptidão com restrição a esforços.",
+      "contrarrazoes": "Contrarrazões do autor (ID 310092506) e da União (ID 310092507)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "310092502",
+      "juizo": "Procedimento comum 5000645-59.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "ratificou a tutela e julgou procedente o pedido para anular o licenciamento de 30/11/2019 e determinar a reintegração para reforma (artigos 108, V, e 109 da Lei 6.880/1980), com pagamento dos atrasados desde o licenciamento, descontada a compensação pecuniária, e correção pela SELIC a partir da EC 113/2021; honorários no mínimo legal."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2020-01-23",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Renato Paes",
+       "tipo": "Apelação",
+       "id": "310092503",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "310092504",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "310092502",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela antecipada deferida em parte",
+       "id": "310092349",
+       "data": "2020-09-28"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "310092502",
+       "data": "2024-07-10"
+      },
+      {
+       "desc": "Apelação do autor",
+       "id": "310092503",
+       "data": "2024-08-16"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "310092504",
+       "data": "2024-10-07"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "310092506",
+       "data": "2024-10-17"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "310092507",
+       "data": "2024-12-10"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 310092505 · 07/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 310092502 · 10/07/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (AGU (PRU)) · ID 310092507 · 10/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Prova da incapacidade definitiva para o serviço militar × laudo administrativo de 2019 (cura com restrição a esforços) [VALIDAR perícia judicial] · Redação da Lei 6.880/1980 anterior ou posterior à Lei 13.954/2019 (licenciamento em 30/11/2019; vigência da Lei 13.954 em 17/12/2019) [VALIDAR] · Ação anterior de reintegração (2008) [VALIDAR número] · Mesmo grupo de 5004665-64",
+     "assuntoDet": "Militar — reintegração para reforma por incapacidade (hanseníase); licenciamento após agregação",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 310092505 · 07/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 310092502 · 10/07/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (AGU (PRU)) · ID 310092507 · 10/12/2024",
+    "ultima_informacao": "Informação · ID 310092508 · 12/12/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 310092505 · 07/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 310092502 · 10/07/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (AGU (PRU)) · ID 310092507 · 10/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -17298,12 +17570,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "REGINALDO SILVA DOS SANTOS",
    "assunto": "Reforma",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA10",
+   "tipo_caso": "Apelação da União e remessa necessária em ação ordinária · soldado do Exército com lesão do plexo braquial por acidente em instrução (29/08/2013) · licenciamento · perícia: incapacidade permanente para o serviço militar, sem invalidez para a vida civil · pedido julgado parcialmente procedente (reforma com remuneração da graduação)",
+   "resultado": "Ato a proferir: apelação da União (ID 309969065) e remessa necessária da sentença ID 309969064; contrarrazões (ID 309969067) ‖ Proposta pelos precedentes: Voto: tendência de desprovimento, à luz da perícia (incapacidade definitiva para o serviço militar por acidente em serviço) [VALIDAR] [VALIDAR: Teor das razões da União; Data e fundamento do licenciamento]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que reformou soldado com sequela permanente de acidente em instrução, incapaz para o serviço militar e apto para atividades civis, com remuneração da graduação da ativa.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17314,7 +17588,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — militar (reforma)",
+    "origem": "Procedimento comum 5004665-64.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 309969064 (27/09/2024)",
+    "recurso": "apelação de União (ID 309969065, 28/11/2024) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17324,6 +17609,110 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Militar — reforma por acidente em serviço; incapacidade só para o serviço militar",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 309969064 · 27/09/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravado) · ID 309969067 · 10/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Acidente em serviço com nexo (artigo 108, III, da Lei 6.880/1980): reforma independe de invalidez para a vida civil; artigo 110 afastado [VALIDAR linha da Turma] · Redação da Lei 6.880/1980 anterior à Lei 13.954/2019 · Linha da Turma Regional em reforma por acidente em serviço (ApCiv 0013214-90.2014.4.03.6000, 20/07/2026, sem incapacidade) [VALIDAR distinção] · Mesmo grupo de 5000645-59",
+   "teor": {
+    "sintese_fatica": "Reginaldo Silva dos Santos fraturou a clavícula em instrução no Exército em 29/08/2013, com lesão do plexo braquial, e foi licenciado. A perícia judicial concluiu por incapacidade permanente para o serviço militar, decorrente de acidente em serviço, sem incapacidade para a vida civil.",
+    "inicial": "Ação ordinária de reintegração e reforma militar contra a União.",
+    "decisao_recorrida": "Sentença ID 309969064 (27/09/2024): julgou parcialmente procedente o pedido para anular o licenciamento, reintegrar o autor com efeitos desde 20/02/2018 e conceder reforma (artigos 106, II, 108, III, e 109 da Lei 6.880/1980, redação então vigente), com remuneração da graduação da ativa e pagamento dos atrasados; negou a melhoria do artigo 110.",
+    "recurso": "União (ID 309969065, 28/11/2024): ausência de invalidez (o autor exerce atividade remunerada civil); requisitos da reforma não preenchidos [VALIDAR teor].",
+    "resposta": "Contrarrazões do autor (ID 309969067).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Evaldo Correa Chaves (OAB/MS 8.597) e Marlon Ricardo Lima Chaves (OAB/MS 13.370); justiça gratuita deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação ordinária · soldado do Exército com lesão do plexo braquial por acidente em instrução (29/08/2013) · licenciamento · perícia: incapacidade permanente para o serviço militar, sem invalidez para a vida civil · pedido julgado parcialmente procedente (reforma com remuneração da graduação)",
+     "sintese": "Reginaldo Silva dos Santos fraturou a clavícula em instrução no Exército em 29/08/2013, com lesão do plexo braquial, e foi licenciado. A perícia judicial concluiu por incapacidade permanente para o serviço militar, decorrente de acidente em serviço, sem incapacidade para a vida civil.",
+     "questoes": "1) Reforma de militar incapaz para o serviço militar por acidente em serviço (artigos 106, II, 108, III, e 109 da Lei 6.880/1980); 2) remuneração da reforma.",
+     "rel": {
+      "razoes": "União (ID 309969065, 28/11/2024): ausência de invalidez (o autor exerce atividade remunerada civil); requisitos da reforma não preenchidos [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões do autor (ID 309969067)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "309969064",
+      "juizo": "Procedimento comum 5004665-64.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou parcialmente procedente o pedido para anular o licenciamento, reintegrar o autor com efeitos desde 20/02/2018 e conceder reforma (artigos 106, II, 108, III, e 109 da Lei 6.880/1980, redação então vigente), com remuneração da graduação da ativa e pagamento dos atrasados; negou a melhoria do artigo 110."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2018-07-02",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "309969065",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "309969064",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: perícia e justiça gratuita",
+       "id": "309968471",
+       "data": "2018-08-29"
+      },
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "309969064",
+       "data": "2024-09-27"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "309969065",
+       "data": "2024-11-28"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "309969067",
+       "data": "2024-12-10"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 309969064 · 27/09/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravado) · ID 309969067 · 10/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Acidente em serviço com nexo (artigo 108, III, da Lei 6.880/1980): reforma independe de invalidez para a vida civil; artigo 110 afastado [VALIDAR linha da Turma] · Redação da Lei 6.880/1980 anterior à Lei 13.954/2019 · Linha da Turma Regional em reforma por acidente em serviço (ApCiv 0013214-90.2014.4.03.6000, 20/07/2026, sem incapacidade) [VALIDAR distinção] · Mesmo grupo de 5000645-59",
+     "assuntoDet": "Militar — reforma por acidente em serviço; incapacidade só para o serviço militar",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 309969064 · 27/09/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (agravado) · ID 309969067 · 10/12/2024",
+    "ultima_informacao": "Informação · ID 309969068 · 10/12/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 309969064 · 27/09/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravado) · ID 309969067 · 10/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
