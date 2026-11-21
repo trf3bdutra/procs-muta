@@ -364,7 +364,9 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
         var cap=CAPD[m.nome]||1,u=(LD[m.nome]+w)/cap;s-=K.pen*u*u+(u>1?K.pen*1.6*(u-1):0);
         return {nome:m.nome,s:s,why:why};}).sort(function(a,b){return b.s-a.s;});
       /* regra obrigatória: decide antes de tudo (só não vale para quem está indisponível) */
-      var fx=fixa(x,'d'),esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}:cand[0]; if(!esc_){PROP[x.i]={d:'',wd:[],od:cand};return;}
+      var fx=fixa(x,'d'),es=cand.filter(function(c){return c.why.some(function(w){return w[1]==='especialidade';});})[0];
+      /* sem regra fixa, quem tem o assunto como especialidade começa selecionado, independente da carga */
+      var esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}:es?{nome:es.nome,s:es.s,why:[['e','especialista no assunto']].concat(es.why.filter(function(w){return w[1]!=='especialidade';}))}:cand[0]; if(!esc_){PROP[x.i]={d:'',wd:[],od:cand};return;}
       LD[esc_.nome]=(LD[esc_.nome]||0)+w; if(x.lote)LT[x.lote+'|'+esc_.nome]=(LT[x.lote+'|'+esc_.nome]||0)+1; AS[N(x.as)+'|'+esc_.nome]=(AS[N(x.as)+'|'+esc_.nome]||0)+1;
       PROP[x.i]={d:esc_.nome,wd:esc_.why,od:cand};if(x.t!=='ED'&&!DONO[N(x.as)])DONO[N(x.as)]=esc_.nome;
     });
@@ -380,7 +382,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
         var lk=x.lote&&(LCT[x.lote+'|'+m.nome]||0);if(lk){s+=Math.min(2,lk*0.25);why.push(['l','mesmo lote']);}
         var u=(LC[m.nome]+1)/(CAPC[m.nome]||1);s-=K.pen*u*u+(u>1?K.pen*1.6*(u-1):0);
         return {nome:m.nome,s:s,why:why};}).sort(function(a,b){return b.s-a.s;});
-      var fc=fixa(x,'c'),e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}:cand[0];if(!e)return;LC[e.nome]=(LC[e.nome]||0)+1;if(x.lote)LCT[x.lote+'|'+e.nome]=(LCT[x.lote+'|'+e.nome]||0)+1;
+      var fc=fixa(x,'c'),ec=cand.filter(function(c){return c.why.some(function(w){return w[1]==='especialidade';});})[0],e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}:ec?{nome:ec.nome,s:ec.s,why:[['e','especialista no assunto']].concat(ec.why.filter(function(w){return w[1]!=='especialidade';}))}:cand[0];if(!e)return;LC[e.nome]=(LC[e.nome]||0)+1;if(x.lote)LCT[x.lote+'|'+e.nome]=(LCT[x.lote+'|'+e.nome]||0)+1;
       PROP[x.i].c=e.nome;PROP[x.i].wc=e.why;PROP[x.i].oc=cand;});
   }
   /* designação inicial: o que já está gravado na pauta fica; a proposta preenche o resto */
