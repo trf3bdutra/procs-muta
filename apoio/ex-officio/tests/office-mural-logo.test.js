@@ -125,3 +125,10 @@ test('Mural só com as entregas de quem está logado; painel do gabinete embutid
   const caput = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'triagem', 'index.html'), 'utf8');
   for (const x of ['src="/office/?painel=gabinete"', 'function cgGabAltura()']) assert.ok(caput.includes(x), x);
 });
+
+test('Mural: calendário do gabinete aberto no lugar da agenda de entregas', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(!app.includes('▦ Agenda de entregas'));
+  assert.ok(app.includes('id="hc-cal-full" aria-label="Calendário do gabinete"><div id="cc-cal"'));
+  assert.ok(app.includes("if($('#hc-mini-cal'))hcMiniCalendario();calendario();"));
+});
