@@ -25789,13 +25789,15 @@
    "exequente": "MUNICIPIO DE CAMPO GRANDE",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPF/Imposto de Renda de Pessoa Física",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g7",
+   "tipo_caso": "Tributário · IRRF sobre \"Jeton\" e \"Encargos Especiais\" pagos a servidores municipais · lançamento retroativo por mudança de critério jurídico (artigo 146 do CTN) · tutela recursal deferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi deferida pela 4ª Turma para suspender a exigibilidade dos lançamentos (decisão ID 343957074), há contraminuta da PFN (ID 346346984) e o processo, já intimado para pauta em março/2026, foi redistribuído antes do julgamento (decisão ID 366296574) ‖ Proposta pelos precedentes: sem paradigma recuperado no banco para o IRRF sobre \"Jeton\" e \"Encargos Especiais\"; a revisão de lançamento por mudança de critério jurídico é vedada (artigo 146 do CTN), mas a revisão por erro de fato é admitida (artigo 149 do CTN) → resultado depende da natureza das rubricas e do fundamento do lançamento [VALIDAR] [VALIDAR: Natureza remuneratória ou indenizatória das rubricas; Fundamento do lançamento: erro de fato (artigo 149) ou mudança de critério jurídico (artigo 146)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do Município de Campo Grande contra a decisão que indeferiu a tutela de urgência na ação declaratória de inexistência de relação jurídico-tributária contra a União, sobre o IRRF das rubricas \"Jeton\" e \"Encargos Especiais\" pagas a servidores municipais e declaradas na DIRF como rendimentos isentos (intimação da Receita 3/2025, processo administrativo 10140.720542/2025-18). Sustenta que o lançamento retroativo decorre de mudança de critério jurídico (artigo 146 do CTN). A tutela recursal foi deferida (ID 343957074); a PFN (ID 346346984) defende a revisão pelo artigo 149 do CTN.",
+   "peculiaridades": "Tutela recursal deferida pela Des. Fed. Leila Paiva (4ª Turma, ID 343957074, 28/11/2025), com suspensão da exigibilidade (artigo 151, V, do CTN) de todos os lançamentos até a definição da natureza das rubricas. O processo chegou a ser intimado para pauta (IDs 360754741, 360754752 e 360817520) e foi redistribuído antes do julgamento (ID 366296574). Etiqueta \"Pedido de Despacho\".",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -25826,9 +25828,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Tributário — IRRF sobre verbas pagas pelo Município",
+    "origem": "Ação declaratória 5010206-34.2025.4.03.6000 (Campo Grande)",
+    "decisao_agravada": "Decisão que indeferiu a tutela de urgência (cópia ID 341407254)",
+    "recurso": "ID 341407232 · 30/10/2025",
+    "preparo": "Isento (Município)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5010206-34.2025.4.03.6000 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Natureza das rubricas \"Jeton\" e \"Encargos Especiais\"",
+    "[VALIDAR] Etiqueta \"Pedido de Despacho\": conferir o pedido pendente"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -25847,6 +25863,108 @@
     "ultima_informacao": "Certidão · ID 369918140 · 29/04/2026",
     "ultima_movimentacao": " 12:43 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "IRRF do Município sobre verbas de servidores — mudança de critério jurídico e suspensão da exigibilidade",
+   "especificidades": "Tutela recursal deferida (ID 343957074, 28/11/2025): suspensão da exigibilidade dos lançamentos de IRRF sobre \"Jeton\" e \"Encargos Especiais\" · Intimações de pauta na 4ª Turma (março/2026) antes da redistribuição · Holerites e comprovantes de rendimentos de servidores juntados (IDs 341407262 a 341407273)",
+   "teor": {
+    "sintese_fatica": "A Receita Federal intimou o Município de Campo Grande por não reter IRRF sobre as rubricas \"Jeton\" e \"Encargos Especiais\" pagas a servidores e declaradas como isentas; o Município ajuizou ação declaratória e o juízo indeferiu a tutela de urgência.",
+    "inicial": "Ação declaratória 5010206-34.2025.4.03.6000 (trechos na decisão ID 341407254)",
+    "decisao_recorrida": "Decisão da origem (cópia ID 341407254): indeferiu a tutela antecipada por não demonstrada a probabilidade do direito, sem prejuízo de reanálise.",
+    "recurso": "Agravo de instrumento ID 341407232 (30/10/2025): lançamento retroativo por mudança de critério jurídico, vedado pelo artigo 146 do CTN; natureza das rubricas; pede a antecipação da tutela recursal para suspender a exigibilidade.",
+    "resposta": "Contraminuta da PFN ID 346346984 (11/12/2025): a revisão do lançamento é cabível pelas hipóteses do artigo 149 do CTN, sem mudança de critério; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Município representado pela Procuradoria-Geral do Município (procuradora Cecília Saad Cruz Rizkallah, OAB/MS 10.620; nomeação ID 341407246).",
+    "preparo": "Dispensado: Município."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Tributário · IRRF sobre \"Jeton\" e \"Encargos Especiais\" pagos a servidores municipais · lançamento retroativo por mudança de critério jurídico (artigo 146 do CTN) · tutela recursal deferida",
+     "sintese": "A Receita Federal intimou o Município de Campo Grande por não reter IRRF sobre as rubricas \"Jeton\" e \"Encargos Especiais\" pagas a servidores e declaradas como isentas; o Município ajuizou ação declaratória e o juízo indeferiu a tutela de urgência.",
+     "questoes": "1) Natureza das rubricas \"Jeton\" e \"Encargos Especiais\" para fins de IRRF; 2) lançamento retroativo por mudança de critério jurídico (artigo 146 do CTN) × revisão por erro de fato (artigo 149 do CTN); 3) suspensão da exigibilidade (artigo 151, V, do CTN).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 341407232 (30/10/2025): lançamento retroativo por mudança de critério jurídico, vedado pelo artigo 146 do CTN; natureza das rubricas; pede a antecipação da tutela recursal para suspender a exigibilidade.",
+      "contrarrazoes": "Contraminuta da PFN ID 346346984 (11/12/2025): a revisão do lançamento é cabível pelas hipóteses do artigo 149 do CTN, sem mudança de critério; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Deferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-30",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "341407232",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "341407232",
+       "data": "2025-10-30"
+      },
+      {
+       "desc": "Cópia da decisão agravada",
+       "id": "341407254",
+       "data": "2025-10-30"
+      },
+      {
+       "desc": "Decisão que deferiu a tutela recursal",
+       "id": "343957074",
+       "data": "2025-11-28"
+      },
+      {
+       "desc": "Contraminuta da PFN",
+       "id": "346346984",
+       "data": "2025-12-11"
+      },
+      {
+       "desc": "Intimação de pauta (4ª Turma)",
+       "id": "360754741",
+       "data": "2026-03-16"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "366296574",
+       "data": "2026-04-15"
+      }
+     ],
+     "pendencias": "Conferir o pedido de despacho pendente",
+     "especificidades": "Tutela recursal deferida (ID 343957074, 28/11/2025): suspensão da exigibilidade dos lançamentos de IRRF sobre \"Jeton\" e \"Encargos Especiais\" · Intimações de pauta na 4ª Turma (março/2026) antes da redistribuição · Holerites e comprovantes de rendimentos de servidores juntados (IDs 341407262 a 341407273)",
+     "assuntoDet": "IRRF do Município sobre verbas de servidores — mudança de critério jurídico e suspensão da exigibilidade",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2025-11-28",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
@@ -26736,13 +26854,16 @@
    "exequente": "INSTITUTO DE EDUCACAO HARMONIA LTDA - EPP",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · inclusão de terceiro no polo passivo por desconsideração inversa da personalidade jurídica · exceção de pré-executividade acolhida em parte · prazo recursal restituído",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal não foi concedida (decisão ID 382844313) e há contraminuta da PFN (ID 384969249); o preparo foi recolhido por GRU Judicial em 25/06/2026, depois da extinção da GRU Judicial (ID 382605294) [VALIDAR] ‖ Proposta pelos precedentes: a inclusão de terceiro por desconsideração inversa exige os requisitos do artigo 50 do Código Civil e o exame do procedimento (incidente dos artigos 133 a 137 do CPC ou redirecionamento nos próprios autos), que o gabinete examina caso a caso; anterioridade do ato societário em relação à execução pesa contra a fraude → resultado a definir [VALIDAR] [VALIDAR: Preparo por GRU Judicial depois de 03/04/2026; Procedimento adotado para a desconsideração inversa (incidente ou nos próprios autos)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo do Instituto de Educação Harmonia contra a decisão que, na EF 0011591-35.2007.4.03.6000 (contra Auto Peças Chacha), acolheu em parte a exceção de pré-executividade, restituiu o prazo recursal contra a decisão de 27/01/2017 que o incluiu no polo passivo por desconsideração inversa, levantou bloqueios SISBAJUD e rejeitou a sustação do protesto da CDA 13606009494 (ID 588994206 da origem). Sustenta que é terceiro, que a alteração contratual (integralização de imóvel, 10/11/1998) é anterior à execução e que não há sucessão nem fraude. A PFN (ID 384969249) defende a desconsideração inversa para alcançar bens do instituto e da ex-esposa do sócio.",
+   "peculiaridades": "A decisão agravada restituiu expressamente o prazo recursal contra a decisão de 27/01/2017, de modo que o agravo impugna ambas. Preparo por GRU Judicial depois de 03/04/2026 (ID 382605294). Redistribuído da 6ª Turma à Turma Regional (decisão ID 382541871).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -26773,9 +26894,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), depois de conferir o preparo",
+    "materia": "Execução fiscal — desconsideração inversa da personalidade jurídica",
+    "origem": "EF 0011591-35.2007.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 588994206 (autos de origem), de 16/06/2026, e, pela restituição do prazo, a decisão de 27/01/2017 (ID 26482966, págs. 22/26, da origem)",
+    "recurso": "ID 382335206 · 24/06/2026",
+    "preparo": "GRU Judicial paga (comprovante em imagem, ID 382605294), juntada em 25/06/2026",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · comprovante em imagem, sem texto (OCR pendente): ID 382605294 · petição de juntada da GRU Judicial: ID 382598285 · pagamento depois de 03/04/2026 (extinção da GRU Judicial) [VALIDAR tratamento] · conferido em 21/11/2026 (regra: GRU com comprovante de caixa eletrônico ou de pagamento via internet — Resolução PRES 138/2017, artigo 2º, § 2º, II)",
+    "conf_prevencao": "Origem: 0011591-35.2007.4.03.6000 · redistribuído à Turma Regional (decisão ID 382541871) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: ler o comprovante ID 382605294 (GRU Judicial depois de 03/04/2026)",
+    "[VALIDAR] Procuração (ID 382335210 sem texto)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -26794,6 +26929,103 @@
     "ultima_informacao": "Certidão · ID 382574629 · 25/06/2026",
     "ultima_movimentacao": "22/07/2026 12:56 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Execução fiscal — desconsideração inversa e inclusão de pessoa jurídica no polo passivo",
+   "especificidades": "Inclusão no polo passivo em 27/01/2017 por desconsideração inversa (ID 26482966 da origem), com prazo recursal restituído em 16/06/2026 · Bloqueios SISBAJUD levantados; protesto da CDA 13606009494 mantido · Tutela recursal não concedida (ID 382844313) · Preparo por GRU Judicial depois de 03/04/2026 [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Na execução fiscal contra Auto Peças Chacha, redirecionada a sócios, a União obteve em 2017 a inclusão da ex-esposa de um sócio e do Instituto de Educação Harmonia por desconsideração inversa da personalidade jurídica; em 2026, o juízo acolheu em parte a exceção do instituto, restituiu-lhe o prazo recursal e levantou bloqueios, mas manteve a inclusão e o protesto.",
+    "inicial": "Não consta nos autos do recurso (EF 0011591-35.2007.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 588994206 da origem (16/06/2026): acolheu em parte a exceção de pré-executividade, restituiu o prazo recursal contra a decisão de 27/01/2017, levantou os bloqueios SISBAJUD e rejeitou a sustação do protesto (descrita no agravo ID 382335206).",
+    "recurso": "Agravo de instrumento ID 382335206 (24/06/2026): o instituto é terceiro, não consta da CDA nem participou do processo administrativo; a integralização de imóvel em 1998 é anterior à execução (2007), à citação da devedora (2009) e ao redirecionamento (2011); não há sucessão nem fraude. Pede a exclusão do polo passivo e a sustação do protesto.",
+    "resposta": "Contraminuta da PFN ID 384969249 (07/07/2026): presentes os atos que justificam a desconsideração inversa para penhorar bens do instituto e da ex-esposa do sócio; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Vladimir Rossi Lourenço (OAB/MS 3.674) e Rodrigo Marques Moreira (OAB/MS 5.104); procuração ID 382335210 sem texto [VALIDAR].",
+    "preparo": "GRU Judicial paga, juntada com a petição ID 382598285 (comprovante em imagem, ID 382605294), em 25/06/2026."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · inclusão de terceiro no polo passivo por desconsideração inversa da personalidade jurídica · exceção de pré-executividade acolhida em parte · prazo recursal restituído",
+     "sintese": "Na execução fiscal contra Auto Peças Chacha, redirecionada a sócios, a União obteve em 2017 a inclusão da ex-esposa de um sócio e do Instituto de Educação Harmonia por desconsideração inversa da personalidade jurídica; em 2026, o juízo acolheu em parte a exceção do instituto, restituiu-lhe o prazo recursal e levantou bloqueios, mas manteve a inclusão e o protesto.",
+     "questoes": "1) Regularidade do preparo (GRU Judicial depois de 03/04/2026); 2) requisitos da desconsideração inversa da personalidade jurídica para incluir o instituto no polo passivo; 3) sustação do protesto da CDA.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 382335206 (24/06/2026): o instituto é terceiro, não consta da CDA nem participou do processo administrativo; a integralização de imóvel em 1998 é anterior à execução (2007), à citação da devedora (2009) e ao redirecionamento (2011); não há sucessão nem fraude. Pede a exclusão do polo passivo e a sustação do protesto.",
+      "contrarrazoes": "Contraminuta da PFN ID 384969249 (07/07/2026): presentes os atos que justificam a desconsideração inversa para penhorar bens do instituto e da ex-esposa do sócio; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "588994206",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Acolheu em parte a exceção, restituiu o prazo recursal, levantou bloqueios e manteve a inclusão no polo passivo e o protesto."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "588994206"
+     },
+     "adm": {
+      "prot": "2026-06-24",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Terceiro (incluído no polo passivo)",
+       "tipo": "Agravo de instrumento",
+       "id": "382335206",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "382335206",
+       "data": "2026-06-24"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "382541871",
+       "data": "2026-06-25"
+      },
+      {
+       "desc": "Petição de juntada da GRU Judicial",
+       "id": "382598285",
+       "data": "2026-06-25"
+      },
+      {
+       "desc": "Decisão que não concedeu a tutela recursal",
+       "id": "382844313",
+       "data": "2026-06-26"
+      },
+      {
+       "desc": "Contraminuta da PFN",
+       "id": "384969249",
+       "data": "2026-07-07"
+      }
+     ],
+     "pendencias": "Ler o comprovante da GRU; conferir a procuração",
+     "especificidades": "Inclusão no polo passivo em 27/01/2017 por desconsideração inversa (ID 26482966 da origem), com prazo recursal restituído em 16/06/2026 · Bloqueios SISBAJUD levantados; protesto da CDA 13606009494 mantido · Tutela recursal não concedida (ID 382844313) · Preparo por GRU Judicial depois de 03/04/2026 [VALIDAR]",
+     "assuntoDet": "Execução fiscal — desconsideração inversa e inclusão de pessoa jurídica no polo passivo",
+     "papeis": [
+      "Terceiro",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-26",
+     "fundamento": "Paradigmas do gabinete: AI 5002148-15.2016.4.03.0000 (acórdão 6ª Turma, 24/04/2020: desprovido; grupo econômico de fato e confusão patrimonial em execução fiscal, desconsideração inversa); AI 5026106-20.2022.4.03.0000 (acórdão 1ª Turma, 08/06/2023: redirecionamento e incidente de desconsideração em execução fiscal) [VALIDAR pertinência]"
+    }
    }
   },
   {
@@ -26805,13 +27037,15 @@
    "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "executado": "SABINO SOARES DE SOUZA",
    "assunto": "IRSM de Fevereiro de 1994(39,67%)",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "Previdenciário · cumprimento individual da ACP do IRSM de fevereiro/1994 (ACP 0000741-49.2003.4.03.6003) · benefício com DIB em 03/11/1997, sem fevereiro/1994 no período básico · efeito suspensivo deferido",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi deferido (decisão ID 350248705) e há contraminuta (ID 353094446) ‖ Proposta pelos precedentes: benefício sem a competência de fevereiro/1994 no período básico de cálculo não gera diferenças pelo título da ACP 0000741-49.2003.4.03.6003; a Turma Regional tem acolhido a impugnação nesses casos → provimento, se confirmada a DIB e o período básico [VALIDAR: Período básico de cálculo do benefício (inclusão de fevereiro/1994)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do INSS contra a decisão que rejeitou a impugnação e homologou os cálculos do exequente no cumprimento individual da ACP 0000741-49.2003.4.03.6003 (revisão pelo IRSM de fevereiro/1994). Sustenta que a aposentadoria do agravado tem DIB em 03/11/1997 e não teve o salário de contribuição de fevereiro/1994 no período básico de cálculo; pede, subsidiariamente, o afastamento da verba honorária da conta. O efeito suspensivo foi deferido (ID 350248705).",
+   "peculiaridades": "Efeito suspensivo deferido pela Des. Fed. Silvia Rocha (ID 350248705, 19/01/2026), com base na DIB de 03/11/1997 e em precedente da 8ª Turma [VALIDAR órgão]. Decisão de juízo estadual em jurisdição delegada.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -26837,9 +27071,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Previdenciário — cumprimento de sentença coletiva (IRSM de fevereiro/1994)",
+    "origem": "Cumprimento de sentença 0800128-59.2024.8.12.0026 (2ª Vara Cível de Bataguassu, jurisdição delegada)",
+    "decisao_agravada": "Decisão de fls. 1050/1054, complementada pela de fls. 1072/1074, dos autos de origem",
+    "recurso": "ID 291382032 · 27/05/2024",
+    "preparo": "Isento (INSS)",
+    "monocratica": "Possível, pela linha da Turma Regional [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0800128-59.2024.8.12.0026 · ACP 0000741-49.2003.4.03.6003 (certidão ID 291406303) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Carta de concessão: período básico de cálculo e DIB"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -26858,6 +27105,99 @@
     "ultima_informacao": "Certidão · ID 350491872 · 19/01/2026",
     "ultima_movimentacao": "10/04/2026 16:03 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "IRSM de fevereiro/1994 — execução individual de ACP por benefício sem a competência no período básico",
+   "especificidades": "Efeito suspensivo deferido (ID 350248705, 19/01/2026) · DIB em 03/11/1997, fora do intervalo de 02/1994 a 03/1997 · Pedido subsidiário sobre honorários na conta homologada",
+   "teor": {
+    "sintese_fatica": "Segurado executa individualmente a ACP do IRSM de fevereiro/1994 da Subseção de Três Lagoas; o juízo estadual rejeitou a impugnação do INSS e homologou os cálculos do exequente, e o INSS agravou.",
+    "inicial": "Não consta nos autos do recurso (cumprimento de sentença 0800128-59.2024.8.12.0026)",
+    "decisao_recorrida": "Decisão de fls. 1050/1054, complementada pela de fls. 1072/1074, da origem: rejeitou a impugnação do INSS e homologou os cálculos do exequente (descrita na decisão ID 350248705).",
+    "recurso": "Agravo de instrumento ID 291382032 (27/05/2024): a aposentadoria foi concedida em 03/11/1997 e não teve fevereiro/1994 no período básico, de modo que o agravado não é beneficiário do título; subsidiariamente, exclusão dos honorários da conta.",
+    "resposta": "Contraminuta ID 353094446 (03/02/2026): falta de prova das alegações do INSS; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "INSS representado por procuradora federal (dispensada a procuração). Agravado representado pelo advogado Gabriel Fernando Silva Ferreira (OAB/SP 461.258).",
+    "preparo": "Dispensado: autarquia federal."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Previdenciário · cumprimento individual da ACP do IRSM de fevereiro/1994 (ACP 0000741-49.2003.4.03.6003) · benefício com DIB em 03/11/1997, sem fevereiro/1994 no período básico · efeito suspensivo deferido",
+     "sintese": "Segurado executa individualmente a ACP do IRSM de fevereiro/1994 da Subseção de Três Lagoas; o juízo estadual rejeitou a impugnação do INSS e homologou os cálculos do exequente, e o INSS agravou.",
+     "questoes": "1) Alcance do título da ACP do IRSM sobre benefício com DIB em 03/11/1997 (fevereiro/1994 no período básico de cálculo); 2) honorários na conta homologada.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 291382032 (27/05/2024): a aposentadoria foi concedida em 03/11/1997 e não teve fevereiro/1994 no período básico, de modo que o agravado não é beneficiário do título; subsidiariamente, exclusão dos honorários da conta.",
+      "contrarrazoes": "Contraminuta ID 353094446 (03/02/2026): falta de prova das alegações do INSS; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Cível de Bataguassu (jurisdição delegada)",
+      "dispositivo": "Rejeitou a impugnação e homologou os cálculos do exequente."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Deferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-05-27",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "291382032",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "291382032",
+       "data": "2024-05-27"
+      },
+      {
+       "desc": "Certidão de prevenção (ACP)",
+       "id": "291406303",
+       "data": "2024-05-27"
+      },
+      {
+       "desc": "Decisão que deferiu o efeito suspensivo",
+       "id": "350248705",
+       "data": "2026-01-19"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "353094446",
+       "data": "2026-02-03"
+      }
+     ],
+     "pendencias": "Conferir o período básico de cálculo na carta de concessão",
+     "especificidades": "Efeito suspensivo deferido (ID 350248705, 19/01/2026) · DIB em 03/11/1997, fora do intervalo de 02/1994 a 03/1997 · Pedido subsidiário sobre honorários na conta homologada",
+     "assuntoDet": "IRSM de fevereiro/1994 — execução individual de ACP por benefício sem a competência no período básico",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2026-01-19",
+     "fundamento": "Paradigmas do gabinete: ApCiv 5000527-75.2024.4.03.9999 (acórdão TRMS, 15/09/2026: desprovida; ACP 0000741-49.2003, inexistência de diferenças); ApCiv 5108029-73.2024.4.03.9999 (acórdão TRMS, 15/09/2026: desprovida; inexigibilidade do título do IRSM)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
@@ -26869,13 +27209,15 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "EUDES JOAQUIM DE LIMA",
    "assunto": "Isonomia/Equivalência Salarial",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "Servidor público · cumprimento individual de sentença coletiva da ANAJUCLA (PAE dos ex-juízes classistas; RMS 25.841/STF) · ilegitimidade ativa e prescrição alegadas pela União",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi indeferido (decisão ID 319171909) e há contraminuta (ID 322491529) ‖ Proposta pelos precedentes: o gabinete reconhece a legitimidade de juízes classistas ativos e inativos para executar as diferenças da PAE do título coletivo (RMS 25.841/STF não restringiu aos aposentados de 1992 a 1998) e afasta a prescrição → desprovimento; a União invoca decisão do STF em reclamação (Min. André Mendonça, 06/02/2025) que manteve os limites subjetivos aos aposentados sob a Lei 6.903/1981 [VALIDAR impacto na linha do gabinete] [VALIDAR: Situação funcional do exequente no período do título (ativo ou aposentado sob a Lei 6.903/1981); Decisão do STF em reclamação invocada pela União]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão que, no cumprimento individual do título coletivo da ação 0006306-43.2016.4.01.3400 (ANAJUCLA; diferenças da Parcela Autônoma de Equivalência de março/1996 a março/2001, retroativas ao MS coletivo 0737165-73.2001.5.55.5555), rejeitou as alegações de ilegitimidade ativa e de prescrição (Decisões ID 304340679 e ID 347187134 (complemento após embargos de declaração) dos autos de origem). Sustenta que o título beneficia só ex-juízes classistas de 1º grau aposentados sob a Lei 6.903/1981 e seus pensionistas. Eudes Joaquim de Lima defende a legitimidade e a decisão (ID 322491529).",
+   "peculiaridades": "Efeito suspensivo indeferido (ID 319171909, 28/03/2025). A União junta decisões de outros tribunais e decisão do STF em reclamação (Min. André Mendonça, 06/02/2025) sobre os limites subjetivos do título. Redistribuído à Turma Regional (despacho ID 361977984, 23/03/2026). Segundo a decisão agravada transcrita no agravo, o exequente foi juiz classista em atividade de 1996 a 2001 e consta da lista da ação coletiva [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -26901,9 +27243,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Servidor público — PAE de juízes classistas",
+    "origem": "Cumprimento de sentença 5008343-48.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Decisões ID 304340679 e ID 347187134 (complemento após embargos de declaração) dos autos de origem",
+    "recurso": "ID 310016668 · 11/12/2024",
+    "preparo": "Isenta (União)",
+    "monocratica": "Possível, se mantida a linha do gabinete [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: Cumprimento de sentença 5008343-48.2022.4.03.6000 · título coletivo 0006306-43.2016.4.01.3400 (ANAJUCLA) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Situação funcional do exequente no período de março/1996 a março/2001",
+    "[VALIDAR] Alcance da decisão do STF em reclamação (06/02/2025) sobre os limites subjetivos"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -26922,6 +27278,100 @@
     "ultima_informacao": "",
     "ultima_movimentacao": "30/03/2026 12:27 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Juízes classistas — execução individual da PAE (ação coletiva 0006306-43.2016.4.01.3400)",
+   "especificidades": "Série de agravos da União sobre a PAE dos classistas (ação coletiva 0006306-43.2016.4.01.3400) · Efeito suspensivo indeferido (ID 319171909) · Decisão do STF em reclamação invocada pela União [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Ex-juiz classista executa individualmente o título coletivo da ANAJUCLA que reconheceu as diferenças da PAE de março/1996 a março/2001; o juízo rejeitou a impugnação da União quanto à ilegitimidade ativa e à prescrição, e a União agravou.",
+    "inicial": "Não consta nos autos do recurso",
+    "decisao_recorrida": "Decisões ID 304340679 e ID 347187134 (complemento após embargos de declaração) dos autos de origem: rejeitou as alegações de ilegitimidade ativa e de prescrição (descritas no agravo ID 310016668).",
+    "recurso": "Agravo de instrumento ID 310016668 (11/12/2024): o título beneficia só os ex-juízes classistas de 1º grau aposentados sob a Lei 6.903/1981 e seus pensionistas (RMS 25.841/STF); prescrição; precedentes de outros tribunais e do STF. Pede efeito suspensivo e reforma.",
+    "resposta": "Contraminuta ID 322491529 (28/04/2025): legitimidade do exequente e descabimento de alterar o alcance do título no cumprimento (Tema 481/STJ).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "União representada por advogado da União (dispensada a procuração). Agravado representado por advogado constituído [VALIDAR procuração].",
+    "preparo": "Dispensado: União."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Servidor público · cumprimento individual de sentença coletiva da ANAJUCLA (PAE dos ex-juízes classistas; RMS 25.841/STF) · ilegitimidade ativa e prescrição alegadas pela União",
+     "sintese": "Ex-juiz classista executa individualmente o título coletivo da ANAJUCLA que reconheceu as diferenças da PAE de março/1996 a março/2001; o juízo rejeitou a impugnação da União quanto à ilegitimidade ativa e à prescrição, e a União agravou.",
+     "questoes": "1) Legitimidade ativa do ex-juiz classista para executar o título coletivo da PAE (limites subjetivos do RMS 25.841/STF); 2) prescrição.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 310016668 (11/12/2024): o título beneficia só os ex-juízes classistas de 1º grau aposentados sob a Lei 6.903/1981 e seus pensionistas (RMS 25.841/STF); prescrição; precedentes de outros tribunais e do STF. Pede efeito suspensivo e reforma.",
+      "contrarrazoes": "Contraminuta ID 322491529 (28/04/2025): legitimidade do exequente e descabimento de alterar o alcance do título no cumprimento (Tema 481/STJ)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "304340679",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou as alegações de ilegitimidade ativa e de prescrição."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-12-11",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "310016668",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "310016668",
+       "data": "2024-12-11"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "319171909",
+       "data": "2025-03-28"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "322491529",
+       "data": "2025-04-28"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "361977984",
+       "data": "2026-03-23"
+      }
+     ],
+     "pendencias": "Conferir a situação funcional do exequente e a decisão do STF",
+     "especificidades": "Série de agravos da União sobre a PAE dos classistas (ação coletiva 0006306-43.2016.4.01.3400) · Efeito suspensivo indeferido (ID 319171909) · Decisão do STF em reclamação invocada pela União [VALIDAR]",
+     "assuntoDet": "Juízes classistas — execução individual da PAE (ação coletiva 0006306-43.2016.4.01.3400)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-03-28",
+     "fundamento": "Paradigmas do gabinete: AI 5001651-54.2023.4.03.0000 (acórdão 1ª Turma, 26/06/2023: desprovido; legitimidade de classistas ativos e inativos, prescrição afastada; embargos de declaração julgados em 15/09/2023)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público.",
+     "descPrelim": "Ilegitimidade ativa do exequente (agravo)"
+    }
    }
   },
   {
@@ -26933,13 +27383,15 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ELIZEU FERRATO CAVALCANTE",
    "assunto": "Isonomia/Equivalência Salarial",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "Servidor público · cumprimento individual de sentença coletiva da ANAJUCLA (PAE dos ex-juízes classistas; RMS 25.841/STF) · ilegitimidade ativa e prescrição alegadas pela União",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi indeferido (decisão ID 346394132) e há contraminuta (ID 353247904) ‖ Proposta pelos precedentes: o gabinete reconhece a legitimidade de juízes classistas ativos e inativos para executar as diferenças da PAE do título coletivo (RMS 25.841/STF não restringiu aos aposentados de 1992 a 1998) e afasta a prescrição → desprovimento; a União invoca decisão do STF em reclamação (Min. André Mendonça, 06/02/2025) que manteve os limites subjetivos aos aposentados sob a Lei 6.903/1981 [VALIDAR impacto na linha do gabinete] [VALIDAR: Situação funcional do exequente no período do título (ativo ou aposentado sob a Lei 6.903/1981); Decisão do STF em reclamação invocada pela União]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão que, no cumprimento individual do título coletivo da ação 0006306-43.2016.4.01.3400 (ANAJUCLA; diferenças da Parcela Autônoma de Equivalência de março/1996 a março/2001, retroativas ao MS coletivo 0737165-73.2001.5.55.5555), rejeitou as alegações de ilegitimidade ativa e de prescrição (Decisões ID 331219924 e ID 473563098 (complemento) dos autos de origem). Sustenta que o título beneficia só ex-juízes classistas de 1º grau aposentados sob a Lei 6.903/1981 e seus pensionistas. Elizeu Ferrato Cavalcante defende a legitimidade e a decisão (ID 353247904).",
+   "peculiaridades": "Efeito suspensivo indeferido (ID 346394132, 12/12/2025). A União junta decisões de outros tribunais e decisão do STF em reclamação (Min. André Mendonça, 06/02/2025) sobre os limites subjetivos do título. Redistribuído à Turma Regional (despacho ID 375244104, 01/06/2026).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -26965,9 +27417,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Servidor público — PAE de juízes classistas",
+    "origem": "Cumprimento de sentença 5001059-80.2022.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Decisões ID 331219924 e ID 473563098 (complemento) dos autos de origem",
+    "recurso": "ID 345929543 · 08/12/2025",
+    "preparo": "Isenta (União)",
+    "monocratica": "Possível, se mantida a linha do gabinete [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: Cumprimento de sentença 5001059-80.2022.4.03.6002 · título coletivo 0006306-43.2016.4.01.3400 (ANAJUCLA) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Situação funcional do exequente no período de março/1996 a março/2001",
+    "[VALIDAR] Alcance da decisão do STF em reclamação (06/02/2025) sobre os limites subjetivos"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -26986,6 +27452,100 @@
     "ultima_informacao": "Certidão · ID 378134332 · 02/06/2026",
     "ultima_movimentacao": "02/06/2026 16:46 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Juízes classistas — execução individual da PAE (ação coletiva 0006306-43.2016.4.01.3400)",
+   "especificidades": "Série de agravos da União sobre a PAE dos classistas (ação coletiva 0006306-43.2016.4.01.3400) · Efeito suspensivo indeferido (ID 346394132) · Decisão do STF em reclamação invocada pela União [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Ex-juiz classista executa individualmente o título coletivo da ANAJUCLA que reconheceu as diferenças da PAE de março/1996 a março/2001; o juízo rejeitou a impugnação da União quanto à ilegitimidade ativa e à prescrição, e a União agravou.",
+    "inicial": "Não consta nos autos do recurso",
+    "decisao_recorrida": "Decisões ID 331219924 e ID 473563098 (complemento) dos autos de origem: rejeitou as alegações de ilegitimidade ativa e de prescrição (descritas no agravo ID 345929543).",
+    "recurso": "Agravo de instrumento ID 345929543 (08/12/2025): o título beneficia só os ex-juízes classistas de 1º grau aposentados sob a Lei 6.903/1981 e seus pensionistas (RMS 25.841/STF); prescrição; precedentes de outros tribunais e do STF. Pede efeito suspensivo e reforma.",
+    "resposta": "Contraminuta ID 353247904 (05/02/2026): legitimidade do exequente e descabimento de alterar o alcance do título no cumprimento (Tema 481/STJ).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "União representada por advogado da União (dispensada a procuração). Agravado representado por advogado constituído [VALIDAR procuração].",
+    "preparo": "Dispensado: União."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Servidor público · cumprimento individual de sentença coletiva da ANAJUCLA (PAE dos ex-juízes classistas; RMS 25.841/STF) · ilegitimidade ativa e prescrição alegadas pela União",
+     "sintese": "Ex-juiz classista executa individualmente o título coletivo da ANAJUCLA que reconheceu as diferenças da PAE de março/1996 a março/2001; o juízo rejeitou a impugnação da União quanto à ilegitimidade ativa e à prescrição, e a União agravou.",
+     "questoes": "1) Legitimidade ativa do ex-juiz classista para executar o título coletivo da PAE (limites subjetivos do RMS 25.841/STF); 2) prescrição.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 345929543 (08/12/2025): o título beneficia só os ex-juízes classistas de 1º grau aposentados sob a Lei 6.903/1981 e seus pensionistas (RMS 25.841/STF); prescrição; precedentes de outros tribunais e do STF. Pede efeito suspensivo e reforma.",
+      "contrarrazoes": "Contraminuta ID 353247904 (05/02/2026): legitimidade do exequente e descabimento de alterar o alcance do título no cumprimento (Tema 481/STJ)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "331219924",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Rejeitou as alegações de ilegitimidade ativa e de prescrição."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-12-08",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "345929543",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "345929543",
+       "data": "2025-12-08"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "346394132",
+       "data": "2025-12-12"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "353247904",
+       "data": "2026-02-05"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "375244104",
+       "data": "2026-06-01"
+      }
+     ],
+     "pendencias": "Conferir a situação funcional do exequente e a decisão do STF",
+     "especificidades": "Série de agravos da União sobre a PAE dos classistas (ação coletiva 0006306-43.2016.4.01.3400) · Efeito suspensivo indeferido (ID 346394132) · Decisão do STF em reclamação invocada pela União [VALIDAR]",
+     "assuntoDet": "Juízes classistas — execução individual da PAE (ação coletiva 0006306-43.2016.4.01.3400)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-12-12",
+     "fundamento": "Paradigmas do gabinete: AI 5001651-54.2023.4.03.0000 (acórdão 1ª Turma, 26/06/2023: desprovido; legitimidade de classistas ativos e inativos, prescrição afastada; embargos de declaração julgados em 15/09/2023)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público.",
+     "descPrelim": "Ilegitimidade ativa do exequente (agravo)"
+    }
    }
   },
   {
