@@ -166,3 +166,8 @@ test('Coordenação › Perfis: abas com filtros por pessoa (minutas, correçõe
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   for(const x of ['function pfPinta(','function pfDados(','apoio/equipe-pendencias.json','data-pf-p=','data-pf-a=','data-pf-f="tipo"','Presença e ausências','PF.f[fk]','pfPinta();\n  const alvo=$(\'#cg-coord\')'])assert.ok(cap.includes(x),x);
 });
+
+test('Triagem: busca e filtros no cabeçalho do painel Acervo filtrado',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('.fl-cab>.fl-l1{padding:9px 12px;background:var(--bg)')&&cap.includes('.fl-cab>.acf{border:0'),'painel único');
+});
