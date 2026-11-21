@@ -208,6 +208,12 @@ test('Coordenação › Competências no código do Caput (sem moldura), com tel
   assert.ok(cap.includes('.cg-cal .cc-top>.cc-esq{position:relative!important;top:auto!important;align-self:stretch;contain:size'),'Hoje na altura dos meses');
 });
 
+test('Competências com a pele do Caput: sem título repetido, abas sublinhadas, paleta verde e cantos retos',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  const tpl=cap.slice(cap.indexOf('<template id="comp-tpl">'),cap.indexOf('</template>'));
+  for(const x of ['.cpx .top>div:first-child{display:none}','.cpx .tabs button[aria-selected="true"]{background:none;color:#173f3d','--ac:#173f3d','.cpx .card{border-radius:0','.cpx .tw,.cpx .srvp{border-radius:0}'])assert.ok(tpl.includes(x),x);
+});
+
 test('Coordenação: Perfis inteiro (sem rolagem) com painéis Histórico (minutas, correções, diligências) e Experiência por assunto; Perfis e Equipe na mesma altura; Competências embaixo na largura toda',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   for(const x of ['.pf-c{padding:10px 14px 14px}','class=\"pf-pn pf-hist\"','data-pf-h=','class=\"pf-pn pfc-xl\"','function pfComp(m, hist)',".co-lay>.cg-comp-p{grid-column:1/-1}",'.co-lado{position:relative;contain:size;','</aside><section class="cg-px cg-comp-p">'])assert.ok(cap.includes(x),x);
