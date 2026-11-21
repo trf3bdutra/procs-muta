@@ -17517,8 +17517,8 @@
    "exequente": "VICENTE MOTA DE SOUZA LIMA",
    "executado": "JUCINEIA VIEIRA DE OLIVEIRA FREITAS",
    "assunto": "Direito de Imagem",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Processual · competência do Juizado Especial Federal · valor da causa somado ao da reconvenção · declínio de ofício",
    "resultado": "Ato a proferir: examinar a gratuidade pedida no recurso (e, se indeferida, intimar para o preparo) antes do julgamento do agravo [VALIDAR]",
    "modelo": "",
    "variacoes": [],
@@ -17592,6 +17592,83 @@
     "outros": "Certidão sem custas ID 354366371 (11/02/2026). Decisão ID 356770207 (25/02/2026, Des. Fed. Cotrim Guimarães): indeferiu o efeito suspensivo, sem tratar da gratuidade. Redistribuição à Turma Regional de MS (despacho ID 375241026 e certidão ID 376803861).",
     "representacao": "Agravante: advogada constituída (procuração ID 354351819; declaração de hipossuficiência ID 354352736). Agravada: advogados Leonardo Avelino Duarte e outros.",
     "preparo": "Não recolhido. Gratuidade indeferida na origem (parcelamento das custas); novo pedido pendente na origem; pedido de gratuidade no recurso sem apreciação [VALIDAR]"
+   },
+   "assunto_detalhado": "Processual — competência do Juizado Especial Federal; valor da causa e reconvenção",
+   "especificidades": "Declínio de ofício ao JEF pelo valor da ação principal (até 60 salários mínimos) · Reconvenção e alegada necessidade de litisconsórcio do IBAMA/União · Preparo não recolhido; gratuidade indeferida na origem e pedida de novo · Deserção suscitada (ID 361112755) · Efeito suspensivo indeferido (ID 356770207, 25/02/2026)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Processual — competência do Juizado Especial Federal; valor da causa e reconvenção",
+     "subassuntos": "Processual · competência do Juizado Especial Federal · valor da causa somado ao da reconvenção · declínio de ofício",
+     "sintese": "",
+     "questoes": "1) Gratuidade pedida no recurso e preliminar de deserção (artigo 99, § 7º, do CPC); 2) soma do valor da reconvenção para fixar a competência do JEF; 3) complexidade da causa e competência absoluta do JEF.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Reconheceu de ofício a incompetência absoluta e remeteu os autos ao Juizado Especial Federal."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-02-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "354347928",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "354347928",
+       "data": "2026-02-11"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "354366371",
+       "data": "2026-02-11"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "356770207",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "361112755",
+       "data": "2026-03-18"
+      }
+     ],
+     "pendencias": "Examinar a gratuidade e o preparo antes do julgamento",
+     "especificidades": "Declínio de ofício ao JEF pelo valor da ação principal (até 60 salários mínimos) · Reconvenção e alegada necessidade de litisconsórcio do IBAMA/União · Preparo não recolhido; gratuidade indeferida na origem e pedida de novo · Deserção suscitada (ID 361112755) · Efeito suspensivo indeferido (ID 356770207, 25/02/2026)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não recolhido",
+     "prelim": "Há preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-02-25"
+    }
    }
   },
   {
