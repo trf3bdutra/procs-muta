@@ -1,0 +1,858 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "id": "0712-rev",
+ "titulo": "07/12 · REV — Revalida: inscrição e documentação",
+ "descricao": "Sessão de 07/12/2026. Revalida: REV-1 (candidato já formado) e REV-2 (candidato não formado na data da inscrição), unificados num lote; cada um é um grupo.",
+ "sessoes": [
+  "2026-12-07"
+ ],
+ "filtro": {},
+ "atualizado_em": "2026-11-21",
+ "criado_por": "BD",
+ "unificado_de": [
+  "0712-rev-1",
+  "0712-rev-2"
+ ],
+ "colunas": [],
+ "grupos": [
+  {
+   "id": "1",
+   "rotulo": "REV-1 · Revalida: candidato já formado",
+   "cor": "#2f6db5",
+   "resultado": "Nega provimento (MS: sem honorários; ação comum: majoração de 1%)",
+   "modelo": "5000135-89.2024 e 5000188-70 (pauta de 30/11)",
+   "descricao": "Sessão de 07/12/2026. Revalida: diploma ou documentação exigidos na inscrição; candidato já formado. Modelo: minutas corrigidas 5000135-89 e 5000188-70 (pauta de 30/11); IRDR 5/TRF3; Súmula 266/STJ por analogia."
+  },
+  {
+   "id": "2",
+   "rotulo": "REV-2 · Revalida: candidato não formado",
+   "cor": "#7a5cc2",
+   "resultado": "Proposta: dá provimento à apelação e à remessa, tida por submetida, para denegar a segurança (validar com o Relator)",
+   "modelo": "TRF-3 ApCiv 5001648-92.2024.4.03.6005",
+   "descricao": "Sessão de 07/12/2026. Revalida: candidato não formado na data da inscrição. Base: TRF-3 ApCiv 5001648-92.2024.4.03.6005; STJ REsp 2.260.907. Resultado a validar com o Relator."
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "Fundamentação própria ou a triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/0712-rev/<processo>.json",
+ "itens": [
+  {
+   "sessao": "2026-12-07",
+   "item": 133,
+   "processo": "5001908-38.2025.4.03.6005",
+   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+   "partes": "PRESIDENTE INEP - INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA x MARDONYS BEZERRA SOUSA",
+   "exequente": "MARDONYS BEZERRA SOUSA",
+   "executado": "PRESIDENTE INEP - INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "1",
+   "tipo_caso": "REV-1 (MS)",
+   "resultado": "Nega provimento à apelação e à remessa",
+   "modelo": "5000135-89.2024 e 5000188-70 (pauta de 30/11)",
+   "variacoes": [],
+   "observacao": "Contrarrazões não localizadas; IDs escaneados 383340922/383340930",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "383340932"
+    },
+    {
+     "peca": "Apelação do INEP",
+     "id": "383340935"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [
+    "Conferir as contrarrazões (IDs escaneados 383340922 e 383340930)"
+   ],
+   "minuta": true,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 39,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "383340925",
+      "05/12/2025",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "383340931",
+      "27/01/2026",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "383340932",
+      "27/04/2026",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "383340935",
+      "18/05/2026",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "384247993",
+      "03/07/2026",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   },
+   "lote_origem": "0712-rev-1"
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 135,
+   "processo": "5000523-55.2025.4.03.6005",
+   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+   "partes": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA x KARLA LUIZA MAYER",
+   "exequente": "KARLA LUIZA MAYER",
+   "executado": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "1",
+   "tipo_caso": "REV-1 (MS) + aprovação sub judice",
+   "resultado": "Nega provimento à apelação e à remessa",
+   "modelo": "5000135-89.2024 e 5000188-70 (pauta de 30/11)",
+   "variacoes": [],
+   "observacao": "Agravo do INEP (origem 359549609); frase sub judice",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "361141562"
+    },
+    {
+     "peca": "Apelação",
+     "id": "361141565"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "361141570"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "367317510"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": true,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 41,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "361141536",
+      "21/03/2025",
+      "Petição Inicial",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "361141545",
+      "21/03/2025",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "361141547",
+      "26/03/2025",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "361141561",
+      "09/06/2025",
+      "Parecer",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "361141562",
+      "16/10/2025",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "361141565",
+      "17/10/2025",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "361141570",
+      "11/02/2026",
+      "Contrarrazões",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "367317510",
+      "17/04/2026",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   },
+   "lote_origem": "0712-rev-1"
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 137,
+   "processo": "5001528-83.2023.4.03.6005",
+   "recurso": "APELAÇÃO / REMESSA NECESSÁRIA",
+   "partes": "PRESIDENTA DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA ( INEP) x THAIS PAULA BATISTA DE OLIVEIRA CAMACHO",
+   "exequente": "THAIS PAULA BATISTA DE OLIVEIRA CAMACHO",
+   "executado": "PRESIDENTA DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA ( INEP)",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "1",
+   "tipo_caso": "REV-1 (MS) + diploma/aprovação posterior",
+   "resultado": "Nega provimento à apelação e à remessa",
+   "modelo": "5000135-89.2024 e 5000188-70 (pauta de 30/11)",
+   "variacoes": [],
+   "observacao": "Parecer do MPF 315354364 sem texto; voto do agravo de instrumento 314589230",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "314589734"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "314589738"
+    },
+    {
+     "peca": "Apelação",
+     "id": "314589739"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [
+    "Ler o parecer do MPF 315354364 na tela (sem texto extraído)"
+   ],
+   "minuta": true,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 38,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "314589214",
+      "27/06/2023",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589217",
+      "12/07/2023",
+      "Informações",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589223",
+      "12/07/2023",
+      "Informações",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589225",
+      "04/08/2023",
+      "Parecer",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589228",
+      "31/10/2023",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589734",
+      "16/08/2024",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589735",
+      "18/09/2024",
+      "Embargos de Declaração",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589738",
+      "27/10/2024",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "314589739",
+      "16/12/2024",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "315354364",
+      "20/02/2025",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   },
+   "lote_origem": "0712-rev-1"
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 139,
+   "processo": "5001762-31.2024.4.03.6005",
+   "recurso": "APELAÇÃO CÍVEL",
+   "partes": "DIRETOR PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA - INEP x TAMARA DIAS PERES",
+   "exequente": "TAMARA DIAS PERES",
+   "executado": "DIRETOR PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANÍSIO TEIXEIRA - INEP",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "2",
+   "tipo_caso": "REV-2 (não formada)",
+   "resultado": "Proposta: dá provimento à apelação e à remessa, tida por submetida, para denegar a segurança",
+   "modelo": "TRF-3 ApCiv 5001648-92.2024.4.03.6005",
+   "variacoes": [],
+   "observacao": "Inicial 310764423",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta (proposta)"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "310764492"
+    },
+    {
+     "peca": "Apelação",
+     "id": "310764493"
+    },
+    {
+     "peca": "Petição inicial",
+     "id": "310764423"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [
+    "Validar o resultado com o Relator",
+    "Conferir o precedente TRF-3 5001648-92 na fonte oficial"
+   ],
+   "minuta": true,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 4,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "310764483",
+      "29/08/2024",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "310764491",
+      "11/09/2024",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "310764492",
+      "16/10/2024",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "310764493",
+      "22/10/2024",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   },
+   "lote_origem": "0712-rev-2"
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 140,
+   "processo": "5001716-42.2024.4.03.6005",
+   "recurso": "APELAÇÃO CÍVEL",
+   "partes": "PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISA ANÍSIO TEIXEIRA (INEP) x THARLE FERNANDES JACINTO",
+   "exequente": "THARLE FERNANDES JACINTO",
+   "executado": "PRESIDENTE DO INSTITUTO NACIONAL DE ESTUDOS E PESQUISA ANÍSIO TEIXEIRA (INEP)",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "2",
+   "tipo_caso": "REV-2 (não formado)",
+   "resultado": "Proposta: dá provimento à apelação e à remessa, tida por submetida, para denegar a segurança",
+   "modelo": "TRF-3 ApCiv 5001648-92.2024.4.03.6005",
+   "variacoes": [],
+   "observacao": "MPF 312876820 pelo provimento",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta (proposta)"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "310764418"
+    },
+    {
+     "peca": "Apelação",
+     "id": "310764419"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "312876820"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [
+    "Validar o resultado com o Relator"
+   ],
+   "minuta": true,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 5,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "310764407",
+      "27/08/2024",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "310764416",
+      "10/09/2024",
+      "Parecer",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "310764418",
+      "16/10/2024",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "310764419",
+      "22/10/2024",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "312876820",
+      "31/01/2025",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   },
+   "lote_origem": "0712-rev-2"
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 141,
+   "processo": "5000219-90.2024.4.03.6005",
+   "recurso": "APELAÇÃO CÍVEL",
+   "partes": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA x DANIELA TEIXEIRA XAVIER",
+   "exequente": "DANIELA TEIXEIRA XAVIER",
+   "executado": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "1",
+   "tipo_caso": "REV-1 (MS), 2 impetrantes",
+   "resultado": "Nega provimento à apelação e à remessa, tida por submetida",
+   "modelo": "5000135-89.2024 e 5000188-70 (pauta de 30/11)",
+   "variacoes": [],
+   "observacao": "Formação na inscrição; pedido de publicação no DOU (308914877); edição do exame",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Pronta"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "306636169"
+    },
+    {
+     "peca": "Apelação",
+     "id": "306636171"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "306636174"
+    }
+   ],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": true,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 8,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "306636132",
+      "01/02/2024",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "306636135",
+      "01/02/2024",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "306636144",
+      "06/02/2024",
+      "Informações",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "306636145",
+      "04/03/2024",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "306636169",
+      "12/09/2024",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "306636171",
+      "17/09/2024",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "306636174",
+      "07/10/2024",
+      "Contrarrazões",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "307013798",
+      "14/10/2024",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   },
+   "lote_origem": "0712-rev-1"
+  },
+  {
+   "sessao": "2026-12-07",
+   "item": 142,
+   "processo": "5000070-31.2023.4.03.6005",
+   "recurso": "APELAÇÃO CÍVEL",
+   "partes": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA x ELOISA GAETA MENDES",
+   "exequente": "ELOISA GAETA MENDES",
+   "executado": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "1",
+   "tipo_caso": "REV-1 (ação comum)",
+   "resultado": "Nega provimento à apelação; majoração de 1% dos honorários",
+   "modelo": "5000135-89.2024 e 5000188-70 (pauta de 30/11)",
+   "variacoes": [],
+   "observacao": "Formada na UPAP. Sentença 303291222 (procedente; honorários de 10%); apelação 303291224; MPF 303291217. Base: minuta do item 29 de 30/11 (ação comum)",
+   "peculiaridades": "Inscrição — Revalida",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "triagem": {
+    "minuta": "Não iniciada"
+   },
+   "equipe": {
+    "minuta": "Dalete",
+    "correcao": "Saffioti",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "ajustes": [],
+   "pendencias": [
+    "Minutar com base na minuta do item 29 de 30/11"
+   ],
+   "minuta": false,
+   "autos": {
+    "extraido_em": "2026-11-19",
+    "total": 8,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "303291201",
+      "16/01/2023",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "303291202",
+      "16/01/2023",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "303291205",
+      "20/01/2023",
+      "Contestação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "303291217",
+      "24/05/2023",
+      "Parecer (MP)",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "303291218",
+      "27/09/2023",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "303291222",
+      "28/09/2023",
+      "Sentença",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "303291224",
+      "07/11/2023",
+      "Apelação",
+      "",
+      "",
+      "",
+      0
+     ],
+     [
+      "308790830",
+      "22/11/2024",
+      "Decisão",
+      "",
+      "",
+      "",
+      0
+     ]
+    ],
+    "observacao": "Extrator do navegador (19/11/2026): só as peças principais; texto integral fora do repositório."
+   },
+   "lote_origem": "0712-rev-1"
+  }
+ ]
+}
