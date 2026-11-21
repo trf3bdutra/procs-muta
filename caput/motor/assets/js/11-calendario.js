@@ -98,7 +98,7 @@ function montar(el,cal,ex){
         const m=ms.find(x=>x.d===d); if(m){const e=estado(s,m); dot=bola(s,m,m.k==='date'?19:16)+`<span class="t" style="color:${e==='late'?'#c0392b':s.cor}">${({pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação',date:'Sessão '+F(s.date)})[m.k]}</span>`;}
         lanes+=`<div class="cc-lane">${l}${dot}</div>`;});
       const sR0=P(st.semRef||hoje), semR=sR0.getDay()%6?sR0:new Date(+sR0+(sR0.getDay()===6?2:1)*DIA), sg=iso(new Date(+semR-((semR.getDay()+6)%7)*DIA)), sd=iso(new Date(+P(sg)+6*DIA));
-      h+=`<div class="cc-c${fer[d]?' cc-fe':wd>=5?' cc-fds':''}${d===hoje?' cc-hoje':''}${d>=sg&&d<=sd?' cc-sw':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}" data-d="${d}"><span class="cc-n">${dd}${fer[d]?` <small>${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}${extrasDia(d,'m')}</div>`;
+      h+=`<div class="cc-c${fer[d]?' cc-fe':wd>=5?' cc-fds':''}${d===hoje?' cc-hoje':''}${d>=sg&&d<=sd?' cc-sw':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}" data-d="${d}"><span class="cc-n"><b>${dd}</b>${fer[d]?` <small title="${fer[d]}">${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}${extrasDia(d,'m')}</div>`;
     }
     return `<div class="cc-g">${h}</div>`;
   }
@@ -113,7 +113,7 @@ function montar(el,cal,ex){
           l=`<i class="l" style="left:${d>a?0:'50%'};right:${d<b?0:'50%'};${dash};${s.date<hoje?'opacity:.45':''}"></i>`;}
         const m=ms.find(x=>x.d===d); if(m){const e=estado(s,m); dot=bola(s,m,m.k==='date'?19:16)+`<span class="t" style="color:${e==='late'?'#c0392b':s.cor}">${({pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação',date:'Sessão '+F(s.date)})[m.k]}</span>`;}
         lanes+=`<div class="cc-lane">${l}${dot}</div>`;});
-      h+=`<div class="cc-c${fer[d]?' cc-fe':''}${d===hoje?' cc-hoje':''}" data-d="${d}"><span class="cc-n">${P(d).getDate()}${fer[d]?` <small>${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}</div>`; });
+      h+=`<div class="cc-c${fer[d]?' cc-fe':''}${d===hoje?' cc-hoje':''}" data-d="${d}"><span class="cc-n"><b>${P(d).getDate()}</b>${fer[d]?` <small title="${fer[d]}">${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}</div>`; });
     return `<div class="cc-mini"><div class="cc-g">${h}</div></div>`;
   }
   /* ex.semanaLateral: a semana em lista compacta dentro do painel "Hoje", no lugar da faixa sob o calendário */
