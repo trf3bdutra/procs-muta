@@ -65,3 +65,9 @@ test('diligências: seções minimizáveis; Urgências e Concluída começam fec
   assert.ok(html.includes('<details class="cmt-col'));
   assert.ok(html.includes('#v-cmt .cmt-mobile-pn-h #cmt-mobile-more{display:none!important}'));
 });
+
+test('Para assinar: lista é o padrão; fila só no celular',()=>{
+  assert.ok(html.includes('data-cvis="lista" aria-pressed="true"'));
+  assert.ok(html.includes("modo=cmtMobileMode()&&CMT.vis==='fila'?'fila':'lista'"));
+  assert.ok(html.includes('#v-cmt #cmt-vis{display:none!important}'));
+});

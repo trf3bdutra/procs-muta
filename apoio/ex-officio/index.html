@@ -2152,7 +2152,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <div class="cmt-grid" id="cmt-grid">
         <section class="cmt-q cmt-ass" id="cmt-ass">
           <h2><i class="nn">01</i>Para <em>assinar.</em>
-            <span class="cmt-seg" id="cmt-vis" role="group" aria-label="Modo de visualização"><button type="button" data-cvis="lista" aria-pressed="false">Lista</button><button type="button" data-cvis="fila" aria-pressed="true">Fila</button></span>
+            <span class="cmt-seg" id="cmt-vis" role="group" aria-label="Modo de visualização"><button type="button" data-cvis="lista" aria-pressed="true">Lista</button><button type="button" data-cvis="fila" aria-pressed="false">Fila</button></span>
             <span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-pos">—</span></h2>
           <div class="cmt-fbar" id="cmt-fbar" aria-hidden="true"></div>
           <div class="cmt-ass-b" id="cmt-c-ass"></div>
@@ -5133,7 +5133,7 @@ return '<span class="cmt-trl" role="img" aria-label="'+(f.length?f.join(', '):'a
 function cmtEtapaN(x){return (x.assinado||x.dataAssinatura)?4:x.etapa==='liberado'?3:x.etapa==='corrigido'?2:x.etapa==='minutado'?1:0;}
 /* 01 · para assinar, em lista ou em fila */
 function cmtAssinar(){
-var j=CMT.dados||{},as=j.assinar||{},L=as.assinatura||[],modo=CMT.vis||'fila',al=$('#cmt-c-ass'),ft=$('#cmt-ass-ft');
+var j=CMT.dados||{},as=j.assinar||{},L=as.assinatura||[],modo=cmtMobileMode()&&CMT.vis==='fila'?'fila':'lista',al=$('#cmt-c-ass'),ft=$('#cmt-ass-ft');
 var seg=$('#cmt-vis');if(seg)Array.prototype.forEach.call(seg.querySelectorAll('[data-cvis]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-cvis')===modo));});
 var pos=Math.min(CMT.pos||0,Math.max(0,L.length-1));CMT.pos=pos;
 var np=$('#cmt-n-pos');if(np)np.textContent=!L.length?'nada pendente':modo==='fila'?(pos+1)+' de '+L.length:L.length+(L.length===1?' voto':' votos');
@@ -5147,7 +5147,7 @@ var x=L[pos],meta=[x.item?'item '+x.item:'',x.servidor,x.corretor?'corrigido por
 al.innerHTML='<div class="cmt-fc-tg">'+(x.resultado?'<span class="cmt-tag ok">'+esc(x.resultado)+'</span>':'')+(x.meta?'<span class="cmt-tag mt">Meta</span>':'')+(x.urgente?'<span class="cmt-tag al">Urgente</span>':'')+(meta?'<span class="cmt-fc-m">'+esc(meta)+'</span>':'')+'</div>'+
 '<p class="cmt-fc-n">'+esc(x.cnj)+'</p><p class="cmt-fc-s">'+esc([x.classe,x.assunto].filter(Boolean).join(' · ')||'—')+'</p>'+
 '<p class="cmt-fc-k">Registrado no prontuário</p><p class="cmt-fc-r">'+esc(x.resumo||x.dispositivo||'Sem resumo no prontuário; abra a ficha para conferir.')+'</p>'+
-'<div class="cmt-fc-l">'+[['Minutado',[x.servidor,x.dataMinuta?br(x.dataMinuta):''].filter(Boolean).join(' · ')],['Corrigido',[x.corretor,x.dataCorrecao?br(x.dataCorrecao):''].filter(Boolean).join(' · ')],['Liberado',x.desde?br(x.desde):''],['Atenção',x.atencao||'']].map(function(r){return '<div><span>'+r[0]+'</span><em style="font-style:normal">'+esc(r[1]||'—')+'</em></div>';}).join('')+'</div>'+
+'<div class="cmt-fc-l">'+[['Minutado',[x.servidor,x.dataMinuta?br(x.dataMinuta):''].filter(Boolean).join(' · ')],['Corrigido',[x.corretor,x.dataCorrecao?br(x.dataCorrecao):''].filter(Boolean).join(' · ')],['Liberado',x.desde?br(x.desde):''],['Atenção',x.atencao||(!x.dataCorrecao&&x.desde?'Liberado sem correção':'')]].map(function(r){return '<div><span>'+r[0]+'</span><em style="font-style:normal">'+esc(r[1]||'—')+'</em></div>';}).join('')+'</div>'+
 '<div class="cmt-fc-ac"><button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar e seguir</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button><button type="button" data-cpl="1">Pular</button><button type="button" data-cfi="'+esc(x.cnj)+'">Ficha</button></div>';
 if(ft)ft.innerHTML='<span class="cmt-fc-m">A seguir</span>'+L.slice(pos+1,pos+4).map(function(y){return '<b>'+esc(String(y.cnj).split('.')[0])+'</b>';}).join('')+(L.length-pos-4>0?'<span>+'+(L.length-pos-4)+'</span>':'');}
 /* 02 · urgências, a mesma lista das Monocráticas */
@@ -9781,6 +9781,24 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #v-cmt details.cmt-col:not([open])>summary.cmt-col-h{margin-bottom:0}
 #v-cmt .cmt-cols4>details.cmt-col-urg{grid-column:1/-1}
 #v-cmt .cmt-cols4>details.cmt-col-urg>summary.cmt-col-h{color:var(--er);border-bottom-color:var(--er)}
+/* Para assinar em lista: número e nome numa linha, etapas na seguinte e os botões embaixo (sem rolagem lateral) */
+#v-cmt .cmt-ass-b .cmt-ar{flex-wrap:wrap!important;row-gap:10px!important;column-gap:8px!important;align-items:center!important}
+#v-cmt .cmt-ass-b .cmt-ar>.gr{flex:1 0 100%!important;min-width:0!important}
+#v-cmt .cmt-ass-b .cmt-ar>.cmt-trl{flex:1 0 100%!important}
+#v-cmt .cmt-ass-b .cmt-ar>button.pri{flex:1 1 auto!important}
+#v-cmt .cmt-ass-b .cmt-ar>button{flex:0 0 auto}
+/* computador: só a lista; o painel lateral usa a mesma altura, o mesmo fundo e o mesmo título do cabeçalho da página */
+@media (min-width:781px){
+ #v-cmt #cmt-vis{display:none!important}
+ body.cmt-asl-on #v-cmt .cmt-asl{border-top:0!important;background:var(--ep)}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-asl-k{min-height:69px!important;padding:10px 12px 12px 20px!important;background:#eef2f4!important;border-bottom:1px solid var(--el)!important;box-shadow:0 8px 14px -14px rgba(32,59,57,.45)}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-asl-t{font-size:19px!important;letter-spacing:-.01em!important}
+ body.cmt-asl-on:not(.cmt-asl-min) #v-cmt .cmt-asl-n{min-width:0!important;padding:1px 6px!important;background:var(--eo2)!important;color:#fff!important;font:400 10.5px/1.3 var(--emono)!important;letter-spacing:.04em!important}
+ body.cmt-asl-on #v-cmt .cmt-asl-ch{border:0!important;background:none!important;box-shadow:none!important}
+ body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2{display:none!important}
+}
+/* computador: número do processo numa linha só */
+@media (min-width:781px){#v-cmt #cmt-pauta .cmt-tb thead th:nth-child(3){width:178px!important}#v-cmt #cmt-rows td.cnj{white-space:nowrap!important}}
 #v-cmt #cmt-b-bus{display:none!important}
 #cmt-prog .cmt-pl{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:11px;color:var(--em)}
 #cmt-prog .cmt-pl i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
@@ -9831,6 +9849,8 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
   #v-cmt #cmt-ft button[aria-pressed=true]{box-shadow:inset 0 -3px 0 var(--eg)!important}
   #v-cmt #cmt-prog{padding:10px 16px 4px!important;border:0!important}
   #v-cmt #cmt-prog .lg{flex-wrap:wrap;gap:2px 10px}
+  #v-cmt #cmt-prog .cmt-pl{flex-wrap:nowrap!important;gap:4px 9px!important;font-size:10px!important;white-space:nowrap!important}
+  #v-cmt #cmt-prog .cmt-pl i{width:7px!important;height:7px!important;margin-right:4px!important}
 
   /* marcadores: só os que têm algo; Filtros vira um botão pequeno na mesma linha */
   #v-cmt #cmt-pauta .cmt-ph{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;align-items:center!important;gap:8px!important;padding:10px 16px 12px!important;margin:0!important;border:0!important}
