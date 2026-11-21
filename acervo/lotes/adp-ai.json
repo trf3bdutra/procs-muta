@@ -20994,8 +20994,8 @@
    "exequente": "WALDYR CASTRO PEREIRA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "ITR/ Imposto Territorial Rural",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g7",
+   "tipo_caso": "Tributário · ITR (exercícios 2019 e 2020) · ação anulatória · suspensão da exigibilidade com oferta de imóvel em garantia",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com o agravo interno prejudicado [VALIDAR]",
    "modelo": "",
    "variacoes": [],
@@ -21069,6 +21069,105 @@
     "outros": "Decisão ID 319553671 (02/04/2025, Des. Fed. Nery Júnior): indeferiu a liminar (presunção de legitimidade do lançamento; Tema 237/STJ; artigo 9º, III, e artigo 11 da LEF; imóvel fora da ordem legal e não aceito). Agravos internos ID 321827702 e ID 321820110 (22/04/2025, peças idênticas). Redistribuição à Turma Regional de MS por prevenção (04/05/2026). Memoriais ID 381886067 (22/06/2026): agravante idoso e com doença grave; pede prioridade. Há 1 documento não lido no PJe.",
     "representacao": "Agravante: advogados Paulo Tadeu de Barros Mainardi Nagata e Ricardo Youssef Ibrahim [VALIDAR procuração]. Agravada: União (PGFN).",
     "preparo": "Cópia de GRU 18720-8 com autenticação bancária, R$ 64,26 (ID 319514951, OCR); sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Tributário — ITR; ação anulatória; suspensão da exigibilidade com imóvel em garantia",
+   "especificidades": "Prioridade: agravante idoso e com doença grave (memoriais ID 381886067) · Liminar indeferida em 02/04/2025 (ID 319553671) · Agravo interno pendente desde 22/04/2025, em duplicidade (IDs 321827702 e 321820110) · Prevenção pelo AI 5000586-53.2025.4.03.0000 · Preparo por cópia de GRU autenticada no banco (ID 319514951), sem STN [VALIDAR] · Há 1 documento não lido no PJe",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Tributário — ITR; ação anulatória; suspensão da exigibilidade com imóvel em garantia",
+     "subassuntos": "Tributário · ITR (exercícios 2019 e 2020) · ação anulatória · suspensão da exigibilidade com oferta de imóvel em garantia",
+     "sintese": "",
+     "questoes": "1) Suspensão da exigibilidade do ITR com oferta de imóvel em garantia (Tema 237/STJ; artigos 9º e 11 da LEF); 2) presunção de legitimidade do lançamento diante do laudo do contribuinte; 3) agravo interno prejudicado e peça duplicada.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-03-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "319110690",
+       "contra": "Não apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "321827702",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "319110690",
+       "data": "2025-03-27"
+      },
+      {
+       "desc": "GRU autenticada no banco (OCR)",
+       "id": "319514951",
+       "data": "2025-03-31"
+      },
+      {
+       "desc": "Decisão que indeferiu a liminar",
+       "id": "319553671",
+       "data": "2025-04-02"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "321827702",
+       "data": "2025-04-22"
+      },
+      {
+       "desc": "Agravo interno (duplicado)",
+       "id": "321820110",
+       "data": "2025-04-22"
+      },
+      {
+       "desc": "Contrarrazões da União ao agravo interno",
+       "id": "322524923",
+       "data": "2025-04-28"
+      },
+      {
+       "desc": "Memoriais (prioridade)",
+       "id": "381886067",
+       "data": "2026-06-22"
+      }
+     ],
+     "pendencias": "Conferir o preparo (STN), o número da origem e o documento não lido; prioridade",
+     "especificidades": "Prioridade: agravante idoso e com doença grave (memoriais ID 381886067) · Liminar indeferida em 02/04/2025 (ID 319553671) · Agravo interno pendente desde 22/04/2025, em duplicidade (IDs 321827702 e 321820110) · Prevenção pelo AI 5000586-53.2025.4.03.0000 · Preparo por cópia de GRU autenticada no banco (ID 319514951), sem STN [VALIDAR] · Há 1 documento não lido no PJe"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Prioridade legal",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2026-06-22",
+     "urgObs": "Prioridade pedida nos memoriais (idoso com doença grave). Liminar recursal indeferida em 02/04/2025 (ID 319553671)."
+    }
    }
   },
   {
