@@ -22925,8 +22925,8 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "TORRES HOMEM CUNHA CANCADO",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · redirecionamento aos sócios · exclusão em exceção de pré-executividade (CDA, dissolução irregular e preclusão)",
    "resultado": "Ato a proferir: voto no agravo de instrumento [VALIDAR resultado]",
    "modelo": "",
    "variacoes": [],
@@ -22995,6 +22995,80 @@
     "outros": "Despacho ID 325995425 (28/05/2025): ausente pedido de efeito suspensivo, intimação para contraminuta. Conclusos para decisão em 26/06/2025 (4ª Turma, Des. Fed. Leila Paiva). Redistribuído à Turma Regional de MS em 20/03/2026.",
     "representacao": "Agravante: União (Procuradoria da Fazenda Nacional). Agravados: advogados Valdemar Zaiden Sobrinho e Danilo Ferreira Bortoli [VALIDAR procuração na cópia].",
     "preparo": "União: isenta."
+   },
+   "assunto_detalhado": "Execução fiscal — redirecionamento aos sócios: exclusão do polo passivo em exceção de pré-executividade e honorários",
+   "especificidades": "Competência delegada (Paranaíba) · Redirecionamento deferido antes e revogado na exceção · Dissolução judicial alegada · Honorários de 10% do valor da execução contra a União · Concluso desde 26/06/2025",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — redirecionamento aos sócios: exclusão do polo passivo em exceção de pré-executividade e honorários",
+     "subassuntos": "Execução fiscal · redirecionamento aos sócios · exclusão em exceção de pré-executividade (CDA, dissolução irregular e preclusão)",
+     "sintese": "",
+     "questoes": "1) Preclusão da decisão que deferiu o redirecionamento; 2) responsabilidade dos sócios: nomes na CDA, dissolução irregular (Súmula 435/STJ) ou dissolução judicial; 3) honorários na exclusão de sócios.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "325718251",
+      "juizo": "2ª Vara Cível de Paranaíba/MS (competência delegada)",
+      "dispositivo": "Acolheu a exceção de pré-executividade, excluiu os sócios do polo passivo e condenou a União em honorários de 10% do valor atualizado da execução."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": "325718251"
+     },
+     "adm": {
+      "prot": "2025-05-26",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "325718244",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "325718244",
+       "data": "2025-05-26"
+      },
+      {
+       "desc": "Cópia da execução fiscal (decisões nas fls. 340-343 e 409-411)",
+       "id": "325718251",
+       "data": "2025-05-26"
+      },
+      {
+       "desc": "Despacho para contraminuta",
+       "id": "325995425",
+       "data": "2025-05-28"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "328781285",
+       "data": "2025-06-25"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "Competência delegada (Paranaíba) · Redirecionamento deferido antes e revogado na exceção · Dissolução judicial alegada · Honorários de 10% do valor da execução contra a União · Concluso desde 26/06/2025"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": ""
+    }
    }
   },
   {
