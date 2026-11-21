@@ -93,15 +93,21 @@ function montar(el,cal,ex){
     for(let dd=1;dd<=n;dd++){
       const d=`${base}-${String(dd).padStart(2,'0')}`, wd=(pad0+dd-1)%7; if(wd>=5) continue;
       let lanes='';
-      vis.forEach(s=>{const ms=marcos(s), a=ms[0].d, b=s.date; let l='',dot='';
+      /* ex.chips: cada marco vira uma etiqueta no próprio dia, na cor da sessão (cheia quando já passou, vazada quando está por vir, vermelha se venceu) */
+      if(ex.chips) vis.forEach(s=>{const mk=marcos(s).find(x=>x.d===d); if(!mk) return; const e=estado(s,mk);
+        lanes+=`<span class="cc-chip ${mk.k==='date'?'big':e}" data-s="${s.date}" data-k="${mk.k}" style="--c:${s.cor}"><i></i>${({pautarAte:'Pautar até',inicioPreparacao:'Preparação',entregaMinutas:'Entrega',liberacao:'Liberação',date:'Sessão'})[mk.k]} · ${F(s.date)}${mk.k==='date'&&s.hora?' · '+s.hora:''}</span>`;});
+      else vis.forEach(s=>{const ms=marcos(s), a=ms[0].d, b=s.date; let l='',dot='';
         if(d>=a&&d<=b){const dash=ms.length<=2?`background:repeating-linear-gradient(90deg,${s.cor} 0 6px,transparent 6px 10px)`:`background:${s.cor}`;
           l=`<i class="l" style="left:${d>a?0:'50%'};right:${d<b?0:'50%'};${dash};${s.date<hoje?'opacity:.45':''}"></i>`;}
         const m=ms.find(x=>x.d===d); if(m){const e=estado(s,m); dot=bola(s,m,m.k==='date'?19:16)+`<span class="t" style="color:${e==='late'?'#c0392b':s.cor}">${({pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação',date:'Sessão '+F(s.date)})[m.k]}</span>`;}
         lanes+=`<div class="cc-lane">${l}${dot}</div>`;});
       const sR0=P(st.semRef||hoje), semR=sR0.getDay()%6?sR0:new Date(+sR0+(sR0.getDay()===6?2:1)*DIA), sg=iso(new Date(+semR-((semR.getDay()+6)%7)*DIA)), sd=iso(new Date(+P(sg)+6*DIA));
-      h+=`<div class="cc-c${fer[d]?' cc-fe':wd>=5?' cc-fds':''}${d===hoje?' cc-hoje':''}${d>=sg&&d<=sd?' cc-sw':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}" data-d="${d}"><span class="cc-n"><b>${dd}</b>${fer[d]?` <small title="${fer[d]}">${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}${extrasDia(d,'m')}</div>`;
+      const sx=ex.chips&&vis.find(s=>s.date===d);
+      h+=`<div class="cc-c${sx?' cc-sday':''}${fer[d]?' cc-fe':wd>=5?' cc-fds':''}${d===hoje?' cc-hoje':''}${d>=sg&&d<=sd?' cc-sw':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}" data-d="${d}"${sx?` style="--c:${sx.cor}"`:''}><span class="cc-n"><b>${dd}</b>${fer[d]?` <small title="${fer[d]}">${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}${extrasDia(d,'m')}</div>`;
+      if(ex.chips&&wd===4&&[1,2].some(k=>iso(new Date(+P(d)+k*DIA))===hoje)) h+=`<div class="cc-wkn">Hoje é fim de semana · ${FD(hoje,{weekday:'long',day:'numeric'})}</div>`;
     }
-    return `<div class="cc-g">${h}</div>`;
+    const leg=ex.chips?`<div class="cc-leg">${vis.filter(s=>s.date>=hoje).map(s=>`<span><i style="background:${s.cor}"></i>Sessão ${F(s.date)}</span>`).join('')}<span><i class="o"></i>marco a cumprir</span><span><i class="r"></i>seu prazo</span><span><i class="h"></i>feriado</span></div>`:'';
+    return `<div class="cc-g">${h}</div>${leg}`;
   }
   /* ex.semanaRecolhida: com o calendário recolhido, fica uma faixa com a semana atual (seg a sex), linhas e marcos das sessões */
   function faixaSemana(vis){
@@ -296,7 +302,7 @@ function montar(el,cal,ex){
     t=el.querySelector('.cc-tip'); ajustaForm(); const f1=el.querySelector('form.cc-dl [name=titulo]'); if(f1&&!f1.value) f1.focus();
   }
   el.addEventListener('click',e=>{
-    const a=e.target.closest('[data-a]'), sc=e.target.closest('[data-ses]'), m=e.target.closest('.cc-m'), go=e.target.closest('[data-go]');
+    const a=e.target.closest('[data-a]'), sc=e.target.closest('[data-ses]'), m=e.target.closest('.cc-m,.cc-chip'), go=e.target.closest('[data-go]');
     if(a){const k=a.dataset.a;
       if(k==='alx'){st.alx=!st.alx;}
       else if(k==='novo'){st.dlg={modo:'form',it:{tipo:'afazer',freq:'unica'}};}
@@ -336,7 +342,7 @@ function montar(el,cal,ex){
     const L=itens(), k=L.findIndex(i=>i.id===it.id); if(k>=0) L[k]=it; else L.push(it); salvarItens(L); st.dlg=null; render();});
   el.addEventListener('input',e=>{const er=e.target.name&&el.querySelector(`.cc-er[data-er="${e.target.name}"]`); if(er) er.textContent='';});
   el.addEventListener('change',e=>{ if(e.target.name==='freq'||e.target.name==='tipo'){ajustaForm();return;} if(e.target.closest('form.cc-dl')) return;const c=e.target.closest('[data-fz]'); if(!c) return; const fz=feitos(); if(c.checked) fz[c.dataset.fz]=1; else delete fz[c.dataset.fz]; (AG()?AG().set('feitos',fz):ls.set('cc_feitos',fz)); render();});
-  el.addEventListener('mousemove',e=>{const m=e.target.closest('.cc-m'); if(!t) return; if(!m){t.hidden=true;return;}
+  el.addEventListener('mousemove',e=>{const m=e.target.closest('.cc-m,.cc-chip'); if(!t) return; if(!m){t.hidden=true;return;}
     const s=ses.find(x=>x.date===m.dataset.s), mk=marcos(s).find(x=>x.k===m.dataset.k); tip(e,s,mk);});
   el.addEventListener('mouseleave',()=>{if(t)t.hidden=true});
   window.addEventListener('cmt-agenda',()=>{ if(el.isConnected) render(); });
