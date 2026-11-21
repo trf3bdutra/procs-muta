@@ -125,3 +125,9 @@ test('Fora desta sessão: minutas e correções por pauta, gravado na sessão e 
   assert.ok(pag.includes('fora:ss.foraSessao')&&pag.includes('!FD[m.nome]')&&pag.includes('fora das minutas desta sessão'),'mesa');
   assert.ok(cap.includes("['equipe', 'Equipe da sessão'")&&cap.includes('data-cwe-fs=')&&cap.includes('function equipeSessao(ss)'),'painel da sessão');
 });
+
+test('Datas: marcos validados (ano 2000–2100), aviso de marco fora do expediente pelo calendário da Chefia, feriados sem rótulo inventado',()=>{
+  const m=read('monitor/motor/assets/js/21-sessoes-equipe.js'),cap=read('monitor/triagem/index.html');
+  assert.ok(m.includes('function dataOk(d)')&&m.includes("if (v && !dataOk(v))")&&!m.includes('Imac. Conceição'),'motor');
+  assert.ok(cap.includes('fora do expediente</button>')&&cap.includes('min="2000-01-01" max="2100-12-31"'),'Caput');
+});
