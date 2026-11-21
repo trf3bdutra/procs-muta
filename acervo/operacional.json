@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:24:16.227Z",
+ "atualizado_em": "2026-11-21T10:24:24.531Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -275043,7 +275043,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.523Z"
+    "atualizado_em": "2026-11-21T10:24:24.531Z"
    },
    "triagem": {
     "Urgência": "",
@@ -275057,39 +275057,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Isento (ente público/MP)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Mandado de segurança",
+    "ID do Parecer MPF": "359853132",
+    "Parecer - Sentido": "Prosseguimento do feito, sem intervenção",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Inquérito / Processo / Recurso Administrativo",
+    "Tema": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · revisão de ofício de despachos decisórios que haviam deferido ressarcimento de créditos de PIS/COFINS (regime de centrais petroquímicas) · nulidade por mudança de critério jurídico e cancelamento da cobrança de R$ 6.381.394,09 · liminar deferida · segurança concedida",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "PIS, Compensação Tributária",
-    "Alegações": "",
+    "Alegações": "1) Natureza da cobrança de ressarcimento indevido de PIS/COFINS e regime de revisão (CTN, artigo 149 × Lei 9.784/1999, artigos 53 e 54); 2) mudança de critério jurídico (artigo 146 do CTN).",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Roteiro PIS/COFINS do gabinete: cobrança de ressarcimento indevido não é crédito tributário; aplica-se a Lei 9.784/1999 (artigos 53, 54 e 61), com contraditório diferido e revisão no quinquênio (Súmula 473/STF) — possível provimento [VALIDAR] · Etiqueta \"Suspeição Dr. Jean\" [VALIDAR significado]",
+    "Síntese Fática": "O Auto Posto Referência Ltda. obteve, em análise automática, ressarcimento de créditos de PIS/COFINS do setor de centrais petroquímicas; a Receita revisou de ofício os despachos e cobrou a devolução. A liminar suspendeu a exigibilidade (ID 359320781); a sentença anulou a revisão e a cobrança."
    },
    "producao": {
     "Destino": "",
@@ -275138,7 +275139,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5010785-16.2024.4.03.6000",
