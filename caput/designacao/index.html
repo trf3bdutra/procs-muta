@@ -180,6 +180,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
 .carregando{padding:24px 6px;color:var(--mut)}
 .tg-gr{border:0;background:transparent;font-size:13px;color:var(--mut);cursor:pointer;padding:0 4px;margin-right:2px}
 .tb{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:9px 0 9px;margin:4px 0 0;background:transparent;border:0;border-top:2px solid var(--ac);border-bottom:1px solid var(--lin);border-radius:0}
+.lst{border:1px solid var(--lin);border-radius:10px;background:var(--sup);overflow:hidden}.lst .tb{padding:9px 12px;margin:0;border-top:0;background:color-mix(in srgb,var(--ac) 4%,var(--sup))}.lst .sec-h{margin:0;padding:9px 12px 8px;background:color-mix(in srgb,var(--ac) 7%,var(--sup));border-bottom:1px solid var(--lin);border-top:1px solid var(--lin)}.lst .bl{margin:0;border:0;border-bottom:1px solid var(--lin);border-radius:0}
 .tb .tb-t{font:700 13px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-right:6px}
 #blocos>.sec-h:first-child{margin-top:12px}
 .tb .seg{padding:2px;gap:2px}.tb .seg button{padding:3px 9px;font-size:12px}.tb .seg .agl{font:600 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);padding:0 4px 0 6px;align-self:center}
@@ -215,6 +216,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     <div class="pn" id="pn-obr" hidden></div>
     <div class="pn" id="pn-conf" hidden></div>
     <div class="pn" id="pn-prop" hidden></div>
+    <section class="lst" aria-label="Processos por assunto">
     <div class="tb">
       <span class="tb-t">Processos por assunto</span>
       <div class="seg" role="group" aria-label="Mostrar">
@@ -231,6 +233,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       <span class="gr-ac" id="gr-ac"></span>
     </div>
     <div id="blocos"><p class="mu carregando">Carregando a pauta pelo motor do Caput…</p></div>
+    </section>
   </main>
 </div>
 <footer class="foot">
@@ -444,7 +447,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     return nomes.map(function(n,i){return '<option value="'+esc(n)+'"'+(n===v?' selected':'')+'>'+esc(n)+(sc[n]!=null?(i===0?' ★':''):AUS[n]?' · ausente':FD[n]||FC[n]?' · fora desta sessão':' · fora')+'</option>';}).join('');}
   function chips(why){return (why||[]).map(function(w){return '<span class="'+w[0]+'">'+esc(w[1])+'</span>';}).join('');}
   function campo(x,k){var p=PROP[x.i]||{},v=fin(x,k),at=k==='d'?x.d:x.c,mud=!!at&&v!==at,man=ESC[x.i]&&ESC[x.i][k]!=null&&ESC[x.i][k]!==p[k],grav=!!at&&v===at&&!(ESC[x.i]&&ESC[x.i][k]!=null);
-    var cand=k==='d'?p.od||[]:p.oc||[],pool=k==='d'?PD:PC,why=grav?[['','já designado na pauta']]:man?[['','escolha manual']]:(k==='d'?p.wd:p.wc);
+    var cand=k==='d'?p.od||[]:p.oc||[],pool=k==='d'?PD:PC,why=grav?[]:man?[['','escolha manual']]:(k==='d'?p.wd:p.wc);
     var sob=k==='d'&&v&&CAPD[v]!=null&&CARGA[v]>CAPD[v];
     /* preenchido por regra (geral ou do assunto): travado; o cadeado destrava para mudar à mão neste processo */
     var fx=fixa(x,k),trav=!!fx&&v===fx.nome&&!DESTR[x.i+'|'+k],fg=fixo(x);
