@@ -214,11 +214,12 @@ function montar(el,cal,ex){
           const e=est({d}), late=estado(s,{k,d})==='late'&&d<dia;
           return `<li class="${e}${late?' late':''}" data-s="${s.date}" data-k="${k}" title="${nm} · ${F(d)}"><span class="ic"><i class="ti ${ic}"></i></span><span class="nm">${MKC[k]||nm}</span><b>${F(d)}</b></li>`;}).join('')}</ol></div>`;};
     const esq=`<div class="cc-sb cc-esq"><div class="cc-sb-t">${dia===hoje?'Hoje':cap0(FD(dia,{weekday:'long'}))}<span class="cc-dd">${FD(dia,{day:'numeric',month:'long'})}</span><small>${dia===hoje?'alertas e afazeres':'afazeres do dia'}</small><span class="cc-esq-b"><button class="cc-ib cc-tx" data-a="novo" title="Cadastrar afazer, alerta, evento, prazo-limite, data ou ausência" aria-label="Cadastrar">+</button><button class="cc-ib cc-tx" data-a="lista" title="Gerenciar cadastrados" aria-label="Gerenciar">☰</button></span></div>
+      ${dia!==hoje?`<button type="button" class="cc-volta" data-a="hoje" title="Voltar para o dia de hoje">← Voltar para hoje</button>`:''}
       ${dia===hoje?`<div class="cc-al">${(st.alx?alertas():alertas().slice(0,1)).map(a=>`<div class="cc-a ${a[0]}" data-go="${a[3].date}"><i class="ti ${a[1]}"></i>${a[2]}</div>`).join('')||'<small style="color:#8a98a3">Nenhum marco crítico nos próximos 10 dias.</small>'}${alertas().length>1?`<button class="cc-pill" data-a="alx">${st.alx?'menos':'+'+(alertas().length-1)+' alertas'}</button>`:''}</div>`:''}${dia===hoje&&ex.hojeHtml?ex.hojeHtml:''}
       ${(()=>{const L=afazeres(dia),fz=feitos(); if(!L.length){let d=dia,P2=[];for(let i=0;i<30&&!P2.length;i++){d=iso(new Date(+P(d)+DIA));P2=afazeres(d).map(x=>({...x,d}));} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>nenhum</small></div>${P2.length?`<div class="cc-td-nx">Próximos · ${F(P2[0].d)}</div>`+P2.map(x=>`<div class="cc-td-i" data-dia="${x.d}" style="--c:${x.s.cor}"><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></div>`).join(''):''}</div>`;} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>${L.filter(x=>fz[x.id]).length}/${L.length}</small></div>${L.map(x=>`<label class="cc-td-i${fz[x.id]?' ok':''}" style="--c:${x.s.cor}"><input type="checkbox" data-fz="${x.id}"${fz[x.id]?' checked':''}><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></label>`).join('')}</div>`;})()}
       ${dia===hoje&&ex.feitoHtml!=null?(()=>{const fz=feitos(),A=afazeres(dia).filter(x=>fz[x.id]),n=A.length+(ex.feitoN||0);
         /* rodapé "Feito": afazeres marcados como feitos hoje e o que foi registrado hoje (minutas, correções, liberações) */
-        return `<div class="cc-fe2"><div class="cc-td-t">Feito <small>${n||'nada ainda'}</small></div>${n?`<ul class="cc-feito">${A.map(x=>`<li><span class="t af">Afazer</span>${x.o}${x.s.date?`<small>Sessão ${F(x.s.date)}</small>`:''}</li>`).join('')}${ex.feitoHtml}</ul>`:''}</div>`;})():''}
+        return `<div class="cc-fe2${st.fe?' on':''}"><button type="button" class="cc-td-t cc-fe-t" data-a="feito" aria-expanded="${!!st.fe}"${n?'':' disabled'}>Feito <small>${n||'nada ainda'}</small>${n?`<i class="cc-fe-c">${st.fe?'▾':'▸'}</i>`:''}</button>${n&&st.fe?`<ul class="cc-feito">${A.map(x=>`<li><span class="t af">Afazer</span>${x.o}${x.s.date?`<small>Sessão ${F(x.s.date)}</small>`:''}</li>`).join('')}${ex.feitoHtml}</ul>`:''}</div>`;})():''}
 </div>`;
     const dir=`<div class="cc-sb cc-dir">
       <div class="cc-dh"><b>${st.tl?'Linha do tempo das sessões':'Sessões em andamento'}</b><small>${st.tl?'10 semanas · marcos de todas as sessões':(ativas.length?ativas.length+(ativas.length>1?' sessões':' sessão')+' · ':'')+(dia===hoje?'hoje':'em '+F(dia))}</small>
@@ -280,7 +281,7 @@ function montar(el,cal,ex){
       : cap(new Date(+P((st.mes||hoje.slice(0,7))+'-15')).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}));
     el.innerHTML=`<div class="cc${st.min?' min':''}">
       <div class="cc-h"><button class="cc-ib" data-a="min" title="${st.min?'Expandir':'Recolher'}"><i class="ti ti-chevron-${st.min?'down':'up'}"></i></button>
-        <b>Calendário do gabinete</b><span class="cc-dt">${tit}</span><span class="cc-help" title="Marco cheio = cumprido · pulsando = próximo · vermelho = vencido · tracejado = datas a definir. Clique na sessão para destacar o traçado; clique num marco para abrir a sessão em Pautas. Teclas: ← → anterior/próximo · D dia · S semana · M mês · H hoje · T linha do tempo">?</span>
+        ${ex.titulo?ex.titulo(tit):`<b>Calendário do gabinete</b><span class="cc-dt">${tit}</span>`}<span class="cc-help" title="Marco cheio = cumprido · pulsando = próximo · vermelho = vencido · tracejado = datas a definir. Clique na sessão para destacar o traçado; clique num marco para abrir a sessão em Pautas. Teclas: ← → anterior/próximo · D dia · S semana · M mês · H hoje · T linha do tempo">?</span>
         <span class="cc-sp cc-ps">${[['dia','Dia'],['sem','Semana'],['mes','Mês']].map(([k,n])=>`<button class="cc-pill${st.passo===k?' on':''}" data-passo="${k}">${n}</button>`).join('')}</span>
         <span class="cc-sp"><button class="cc-ib" data-a="prev" title="${{dia:'Dia anterior',sem:'Semana anterior',mes:'Mês anterior'}[st.passo]}"><i class="ti ti-chevron-left"></i></button>
         <button class="cc-pill" data-a="hoje">Hoje</button>
@@ -303,7 +304,8 @@ function montar(el,cal,ex){
       else if(k==='fechar'){st.dlg=null;}
       else if(k==='tl'||k==='dvm'||k==='dvt'){st.tl=k==='tl'?!st.tl:k==='dvt';ls.set('cc_tl',st.tl);}
       else if(k==='min'){st.min=!st.min;ls.set('cc_min',st.min);}
-      else if(k==='lado-hoje'||k==='lado-sem'){st.lado=k==='lado-sem'?'sem':'hoje';ls.set('cc_lado',st.lado);}
+      else if(k==='feito'){st.fe=!st.fe;}
+      else if(k==='lado-hoje'||k==='lado-sem'){st.lado=k==='lado-sem'?'sem':'hoje';ls.set('cc_lado',st.lado);if(k==='lado-hoje')st.dia=null;}
       else if(k==='sem'||k==='mes'||k==='ambos'){st.vista=k;ls.set('cc_vista2',k);}
       else if(k==='hoje'){st.ini=null;st.mes=null;st.semRef=null;st.dia=null;}
       else if(k==='wprev'||k==='wnext'){st.semRef=iso(new Date(+P(st.semRef||hoje)+(k==='wnext'?7:-7)*DIA));st.dia=st.semRef;st.mes=st.semRef.slice(0,7);}
