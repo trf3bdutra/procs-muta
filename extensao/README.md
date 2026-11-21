@@ -5,6 +5,15 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.33 · topo, pendências e APTO
+
+- Sinalizações (urgência, avisos, intercorrências, notas) saíram do corpo do cartão: ficam na faixa rosada do topo, onde o PJe põe datas e ícones.
+- Designação (minuta e correção) e a trilha de produção ficam na mesma linha.
+- Pendências recolhíveis no próprio cartão: o título mostra quantas estão abertas; marcar resolve (ou reabre) na ficha.
+- A classificação não repete o que o cartão já mostra (assunto na linha azul, seção como etiqueta).
+- Etiqueta APTO vira só o símbolo: círculo verde com visto; "APTO - CONFERIR" em contorno tracejado. O nome volta ao passar o mouse.
+- Saiu a linha de movimentação.
+
 ## O que muda na 0.32 · estado atual em gerúndio
 
 - O estado atual do cartão é uma frase com verbo no gerúndio e os dias: "Aguardando contrarrazões · há 12 d", "Minutando · José", "Corrigindo · Bruno", "Aguardando apreciação da liminar", "Aguardando assinatura do Relator", "Aguardando a sessão de 07/12", "Aguardando triagem".

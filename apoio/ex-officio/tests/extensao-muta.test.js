@@ -296,7 +296,7 @@ test('extensão 0.22: redesenho das etiquetas do PJe por tipo (categorias do cat
 
 test('extensão 0.23: ícones de sinalização (lista e cabeçalho dos autos) com quadro de detalhes; recolher a coluna da lista', () => {
   const c = read('extensao/conteudo-pje.js');
-  assert.match(c, /function sinaisHtml\(k, r\)/); assert.match(c, /function dialogoSinais\(k, foco\)/); assert.match(c, /function sinaisAutos\(numero\)/);
+  assert.match(c, /function sinaisHtml\(k, r(, op)?\)/); assert.match(c, /function dialogoSinais\(k, foco\)/); assert.match(c, /function sinaisAutos\(numero\)/);
   assert.match(c, /\['ic', 'triangulo', 'Intercorrências', 'al'\], \['pd', 'alfinete', 'Pendências', 'av'\], \['nt', 'nota', 'Notas', 'mu'\]/);
   assert.match(c, /function botaoColuna\(C\)/); assert.match(c, /hero18810:lista-oculta/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /notas: linhas\(\(r\.origem \|\| \{\}\)\['Observações'\]\)/);
@@ -379,7 +379,7 @@ test('extensão 0.30: tipo de caso e etiquetas sugeridas da triagem no cartão; 
 
 test('extensão 0.31: cada família de informação do cartão com um padrão visual', () => {
   const c = read('extensao/conteudo-pje.js');
-  ['hf hf-cls', 'hf hf-st', 'hf hf-ic', 'hf hf-mov', 'hf hf-px', 'm-sgs'].forEach(k => assert.ok(c.includes(k), k));
+  ['hf hf-cls', 'hf hf-st', 'hf hf-ic', 'hf hf-px', 'm-sgs'].forEach(k => assert.ok(c.includes(k), k));
   assert.match(c, /chip\('secao', r\.secao/); assert.match(c, /chip\('camadas', x, 'Subassunto/); assert.match(c, /chip\('alvo', /);
   const f = read('apoio/ex-officio/api/_ficha.js');
   assert.match(f, /secao: String\(f\['Seção Competente'\]/); assert.match(f, /movimento: String\(f\.ultimo_movimento/); assert.match(f, /proxima: String\(\(r\.origem \|\| \{\}\)\['Próxima ação'\]/);
@@ -397,4 +397,15 @@ test('extensão 0.32: estado atual em gerúndio (aguardando, minutando, corrigin
   assert.equal(t({ tarefa: '[Sessão] Aguardando a sessão' }), 'Aguardando a sessão');
   assert.equal(t({ tarefa: 'Analisar tipo de decisão a proferir' }), 'Aguardando triagem');
   assert.match(read('extensao/conteudo-pje.js'), /E\.estado\(r, \{ assinar: cmt \}\)/);
+});
+
+test('extensão 0.33: sinalizações na faixa do topo, pendências recolhíveis, sem repetir etiqueta, APTO como símbolo', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.doesNotMatch(c, /hf hf-mov/, 'sem a linha de movimentação');
+  assert.match(c, /sinaisHtml\(r\._k, r, \{ semPd: true \}\)/); assert.match(c, /hero-sin-topo/);
+  assert.match(c, /<details class="hf-pd"/); assert.match(c, /data-hero-pck/); assert.match(c, /acao: c\.checked \? 'resolver' : 'reabrir'/);
+  assert.match(c, /txt\.indexOf\(t\) < 0/, 'classificação não repete o que já está no cartão');
+  assert.match(c, /\^apto\\b\/i\.test\(nome\)/); assert.match(c, /hero-sym/);
+  assert.match(c, /\.hf-ic\{flex-wrap:nowrap/);
+  assert.match(c, /box\.innerHTML = ' ' \+ html \+ ' '/, 'o bloco não cola no número do processo');
 });
