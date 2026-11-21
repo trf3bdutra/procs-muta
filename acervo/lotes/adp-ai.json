@@ -20255,8 +20255,8 @@
    "exequente": "FRIGO DOURADOS ALIMENTOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · exceção de pré-executividade · nulidade da citação por edital e prescrição · transação individual superveniente",
    "resultado": "Ato a proferir: intimar a agravante sobre a transação alegada (perda do objeto) ou julgar o recurso prejudicado [VALIDAR]",
    "modelo": "",
    "variacoes": [],
@@ -20335,6 +20335,85 @@
     "outros": "Redistribuições: Seção (decisão ID 361045567) e Turma Regional de MS (decisão ID 366232877). Despacho ID 362802952 (27/03/2026): recolhimento em dobro (artigo 1.007, § 4º, do CPC). Comprovante PagTesouro/Pix de R$ 128,52 (ID 365678286, 10/04/2026). Despacho ID 367204909 (30/04/2026): preparo recolhido; intimação para contraminuta.",
     "representacao": "Agravante: advogado Igor Marques Ferreira de Souza (substabelecimento sem reserva ID 360949969) [VALIDAR cadeia de poderes]. Agravada: União (PGFN).",
     "preparo": "Recolhimento em dobro por PagTesouro/Pix, R$ 128,52, em 10/04/2026 (ID 365678286), dado por recolhido no despacho ID 367204909; sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Execução fiscal — exceção de pré-executividade; citação por edital e prescrição",
+   "especificidades": "Primeira citação válida em 23/07/2019, segundo a executada · União alega transação individual dos débitos e perda do objeto (Lei 13.988/2020) · Recolhimento em dobro (artigo 1.007, § 4º, do CPC) por PagTesouro/Pix (ID 365678286), aceito no despacho ID 367204909 · Relatório SIDA juntado (ID 373376080)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — exceção de pré-executividade; citação por edital e prescrição",
+     "subassuntos": "Execução fiscal · exceção de pré-executividade · nulidade da citação por edital e prescrição · transação individual superveniente",
+     "sintese": "",
+     "questoes": "1) Perda do objeto pela transação individual; 2) nulidade da citação por edital; 3) prescrição do crédito tributário; 4) cabimento da exceção de pré-executividade.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "557621065",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Não conheceu da exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": "557621065"
+     },
+     "adm": {
+      "prot": "2026-03-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "360949944",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "360949944",
+       "data": "2026-03-17"
+      },
+      {
+       "desc": "Despacho de recolhimento em dobro",
+       "id": "362802952",
+       "data": "2026-03-27"
+      },
+      {
+       "desc": "Comprovante PagTesouro/Pix",
+       "id": "365678286",
+       "data": "2026-04-10"
+      },
+      {
+       "desc": "Despacho: preparo recolhido",
+       "id": "367204909",
+       "data": "2026-04-30"
+      },
+      {
+       "desc": "Contraminuta da União (transação)",
+       "id": "373376078",
+       "data": "2026-05-14"
+      }
+     ],
+     "pendencias": "Ouvir a agravante sobre a transação individual",
+     "especificidades": "Primeira citação válida em 23/07/2019, segundo a executada · União alega transação individual dos débitos e perda do objeto (Lei 13.988/2020) · Recolhimento em dobro (artigo 1.007, § 4º, do CPC) por PagTesouro/Pix (ID 365678286), aceito no despacho ID 367204909 · Relatório SIDA juntado (ID 373376080)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": ""
+    }
    }
   },
   {
