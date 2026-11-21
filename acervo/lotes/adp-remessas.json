@@ -106,6 +106,13 @@
    "cor": "#2a6a3a",
    "resultado": "Voto: ADA inexigível para APP; reserva legal conforme averbação (linha do TRF3)",
    "modelo": "Voto"
+  },
+  {
+   "id": "RA7",
+   "rotulo": "Apelação com remessa · Perdimento de veículo emprestado a terceiro (responsabilidade do proprietário)",
+   "cor": "#6a3a2a",
+   "resultado": "Voto: linha da Turma Regional (culpa in vigilando/in eligendo; boa-fé não demonstrada) × prova pré-constituída de boa-fé [VALIDAR]",
+   "modelo": "Voto (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026)"
   }
  ],
  "grupo_outros": {
@@ -13766,12 +13773,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "WESLEY CARDOSO FREITAS",
    "assunto": "Liberação de Veículo Apreendido",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA7",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (GM Corsa Sedan Premium) apreendido com mercadorias estrangeiras sem documentação, conduzido por terceiro · liminar deferida (depósito) · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 371217027) e remessa necessária da sentença ID 371217024; contrarrazões (ID 371217029); MPF sem intervenção (ID 371492518) ‖ Proposta pelos precedentes: Voto: examinar a prova pré-constituída da boa-fé à luz da linha da Turma (culpa in vigilando e in eligendo); tendência de provimento da apelação e da remessa [VALIDAR] [VALIDAR: Valor das mercadorias apreendidas; Vínculo entre proprietário e condutor e histórico de autuações]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que anulou o perdimento do GM Corsa de Wesley Cardoso Freitas, apreendido com mercadorias estrangeiras quando conduzido por amigo. A sentença presumiu a boa-fé do proprietário que empresta o veículo.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13782,7 +13791,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Aduaneiro — perdimento de veículo",
+    "origem": "Mandado de segurança 5002022-74.2025.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 371217024 (17/04/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 371217027, 29/04/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável: sentença contrária à linha da Turma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13792,6 +13812,122 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026 | última movimentação: 06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Valor das mercadorias × veículo [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Wesley Cardoso Freitas teve o veículo apreendido pelo DOF/MS em 11/07/2025, na MS-378 (Laguna Carapã), conduzido por amigo que transportava mercadorias estrangeiras sem documentação. Alega boa-fé e desproporção (veículo de R$ 27.604,00).",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Ponta Porã.",
+    "decisao_recorrida": "Sentença ID 371217024 (17/04/2026): concedeu a segurança para declarar a nulidade da pena de perdimento (Auto de Infração e Perdimento de Veículo 0100100-225020/2025) e determinar a restituição do veículo, vedadas a alienação e a oneração até o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 371217027, 29/04/2026): responsabilidade objetiva do proprietário pelo uso do veículo na infração aduaneira; proporcionalidade, pois as mercadorias superam o valor do veículo.",
+    "resposta": "Contrarrazões do impetrante (ID 371217029).",
+    "parecer": "MPF ID 371492518: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (GM Corsa Sedan Premium) apreendido com mercadorias estrangeiras sem documentação, conduzido por terceiro · liminar deferida (depósito) · segurança concedida",
+     "sintese": "Wesley Cardoso Freitas teve o veículo apreendido pelo DOF/MS em 11/07/2025, na MS-378 (Laguna Carapã), conduzido por amigo que transportava mercadorias estrangeiras sem documentação. Alega boa-fé e desproporção (veículo de R$ 27.604,00).",
+     "questoes": "1) Perdimento de veículo conduzido por terceiro: responsabilidade do proprietário e prova da boa-fé; 2) proporcionalidade.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 371217027, 29/04/2026): responsabilidade objetiva do proprietário pelo uso do veículo na infração aduaneira; proporcionalidade, pois as mercadorias superam o valor do veículo.",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 371217029)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "371217024",
+      "juizo": "Mandado de segurança 5002022-74.2025.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+      "dispositivo": "concedeu a segurança para declarar a nulidade da pena de perdimento (Auto de Infração e Perdimento de Veículo 0100100-225020/2025) e determinar a restituição do veículo, vedadas a alienação e a oneração até o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "371217027",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "371217024",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida (fiel depositário)",
+       "id": "371217016",
+       "data": "2025-11-26"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "371217024",
+       "data": "2026-04-17"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "371217027",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Documento: processo administrativo 10109.723747/2025-41",
+       "id": "371217028",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "371217029",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "371492518",
+       "data": "2026-05-06"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026 | última movimentação: 06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Valor das mercadorias × veículo [VALIDAR]",
+     "assuntoDet": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "371492518",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp)",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026",
+    "ultima_informacao": "Informação · ID 371217031 · 05/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026 | última movimentação: 06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp)"
    }
   },
   {
@@ -13803,12 +13939,14 @@
    "exequente": "Delegado da Receita Federal de Campo Grande/MS",
    "executado": "PABLO REI ALEGRE SANTOS",
    "assunto": "Liberação de Veículo Apreendido",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA7",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (Ford Focus 2009) apreendido com mercadorias estrangeiras em compartimento oculto, conduzido por terceiro · liminar indeferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 392442665) e remessa necessária da sentença ID 392442662; contrarrazões (ID 392442667); MPF pelo provimento (ID 405989800) ‖ Proposta pelos precedentes: Voto: tendência de provimento da apelação e da remessa, na linha da Turma, ante o compartimento oculto e a ausência de prova pré-constituída da boa-fé [VALIDAR]; o pedido de ofício (ID 400303377) fica prejudicado ou é apreciado conforme o resultado [VALIDAR: Agravo de instrumento conexo; Valor das mercadorias × veículo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou o perdimento do Ford Focus de Pablo Rei Alegre Santos, apreendido com mercadorias estrangeiras em compartimento oculto quando conduzido por terceiro. O MPF opinou pelo provimento (mercadorias mais de cinco vezes o valor do veículo).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13819,7 +13957,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Aduaneiro — perdimento de veículo",
+    "origem": "Mandado de segurança 5009950-28.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 392442662 (29/06/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 392442665, 13/07/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável: sentença contrária à linha da Turma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13829,6 +13978,123 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026 | última movimentação: 22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Compartimento oculto · Veículo já restituído; petição do impetrante pede ofício à Receita Federal para baixa de restrição (ID 400303377) · Agravo de instrumento conexo [VALIDAR número]",
+   "teor": {
+    "sintese_fatica": "Pablo Rei Alegre Santos teve o veículo apreendido pela PRF em 05/02/2024, na BR-060 (Sidrolândia), conduzido por José Luiz Ruiz Olmedo, com mercadorias estrangeiras em compartimento oculto. Alega ter apenas emprestado o veículo. A liminar foi indeferida; em agravo de instrumento, suspendeu-se o perdimento até a sentença.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 392442662 (29/06/2026): concedeu a segurança para afastar a pena de perdimento e determinar a restituição do veículo, independentemente do pagamento de despesas de pátio ou encargos da apreensão.",
+    "recurso": "União (Fazenda Nacional) (ID 392442665, 13/07/2026): responsabilidade do proprietário que empresta o veículo; mercadorias ocultas em compartimento preparado; proporcionalidade.",
+    "resposta": "Contrarrazões do impetrante (ID 392442667).",
+    "parecer": "MPF ID 405989800: Provimento da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogada constituída; justiça gratuita deferida na origem.",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (Ford Focus 2009) apreendido com mercadorias estrangeiras em compartimento oculto, conduzido por terceiro · liminar indeferida · segurança concedida",
+     "sintese": "Pablo Rei Alegre Santos teve o veículo apreendido pela PRF em 05/02/2024, na BR-060 (Sidrolândia), conduzido por José Luiz Ruiz Olmedo, com mercadorias estrangeiras em compartimento oculto. Alega ter apenas emprestado o veículo. A liminar foi indeferida; em agravo de instrumento, suspendeu-se o perdimento até a sentença.",
+     "questoes": "1) Perdimento de veículo conduzido por terceiro: responsabilidade do proprietário e prova da boa-fé; 2) proporcionalidade.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 392442665, 13/07/2026): responsabilidade do proprietário que empresta o veículo; mercadorias ocultas em compartimento preparado; proporcionalidade.",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 392442667)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "392442662",
+      "juizo": "Mandado de segurança 5009950-28.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para afastar a pena de perdimento e determinar a restituição do veículo, independentemente do pagamento de despesas de pátio ou encargos da apreensão."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "392442665",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "392442662",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "392442637",
+       "data": "2025-01-28"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "392442662",
+       "data": "2026-06-29"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "392442665",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "392442667",
+       "data": "2026-08-03"
+      },
+      {
+       "desc": "Petição: ofício à Receita Federal (restrição do veículo)",
+       "id": "400303377",
+       "data": "2026-09-24"
+      },
+      {
+       "desc": "Parecer do MPF (provimento)",
+       "id": "405989800",
+       "data": "2026-10-22"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026 | última movimentação: 22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Compartimento oculto · Veículo já restituído; petição do impetrante pede ofício à Receita Federal para baixa de restrição (ID 400303377) · Agravo de instrumento conexo [VALIDAR número]",
+     "assuntoDet": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "405989800",
+     "parecerSentido": "Provimento da apelação"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp)",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença tipo A · ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026",
+    "ultima_informacao": "Certidão · ID 396537545 · 08/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026 | última movimentação: 22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp)"
    }
   },
   {
@@ -13840,12 +14106,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "SUPERINTENDENTE FEDERAL DE AGRICULTURA, PECUÁRIA E ABASTECIMENTO EM MATO GROSSO DO SUL",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · multa do MAPA (fiscalização de sementes) · Auto de Infração 02/2017 · nulidade por omissão da origem e da quantidade das amostras (IN MAPA 09/2005) · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 323313104) e remessa necessária da sentença ID 323313086; sem contrarrazões [VALIDAR]; MPF sem intervenção (ID 325420794) ‖ Proposta pelos precedentes: Voto: tendência de provimento da apelação e da remessa, na linha da ApCiv 0002716-27.2017.4.03.6000, salvo prova de prejuízo concreto da amostragem [VALIDAR] [VALIDAR: Contrarrazões; Número do processo administrativo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que anulou multa do MAPA aplicada à Sementes Boi Gordo por omissão da origem das amostras (IN MAPA 09/2005). A Turma Regional entende que a alegada inobservância da amostragem, por si, não anula o auto.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13856,7 +14124,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — multa do MAPA (sementes)",
+    "origem": "Mandado de segurança 5009387-05.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 323313086 (04/02/2025)",
+    "recurso": "apelação de União (ID 323313104, 02/04/2025) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável: sentença contrária à linha da Turma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13866,6 +14145,107 @@
    "chegada": "25/05/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multa do MAPA — sementes: amostragem da IN 09/2005 e presunção de legitimidade",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 323313086 · 04/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 325420794 · 23/05/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: a inobservância da metodologia da IN MAPA 09/2005 não conduz, por si, à nulidade; exige-se demonstração de prejuízo à validade da autuação (ApCiv 0002716-27.2017.4.03.6000, 15/09/2026, apelação provida) · A sentença segue precedente da 4ª Turma (ApCiv 0003384-95.2017.4.03.6000) · Etiqueta \"LOTE MULTA - APCIV\": verificar outros casos do lote · Possível provimento [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Sementes Boi Gordo Ltda. impugna auto de infração do MAPA lavrado em fiscalização de sementes, alegando inobservância das regras de amostragem da IN MAPA 09/2005. A sentença anulou o auto.",
+    "inicial": "Mandado de segurança contra o Superintendente Federal de Agricultura em Mato Grosso do Sul e o Secretário de Defesa Agropecuária do MAPA.",
+    "decisao_recorrida": "Sentença ID 323313086 (04/02/2025): concedeu a segurança para declarar a nulidade do Auto de Infração 02/2017 (processo administrativo 1026.000464/2017-54 [VALIDAR número]) e deferiu a liminar para suspender a cobrança da multa, por omissão de informações sobre a origem das amostras coletadas.",
+    "recurso": "União (ID 323313104, 02/04/2025): presunção de legitimidade do auto de infração e regularidade da coleta de amostras; pede a denegação da segurança.",
+    "resposta": "Não constam contrarrazões [VALIDAR].",
+    "parecer": "MPF ID 325420794: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Camilo Augusto Souza de Campos (OAB/MS 14.995) e Felipe Di Benedetto Junior (OAB/MS 12.234).",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · multa do MAPA (fiscalização de sementes) · Auto de Infração 02/2017 · nulidade por omissão da origem e da quantidade das amostras (IN MAPA 09/2005) · segurança concedida",
+     "sintese": "Sementes Boi Gordo Ltda. impugna auto de infração do MAPA lavrado em fiscalização de sementes, alegando inobservância das regras de amostragem da IN MAPA 09/2005. A sentença anulou o auto.",
+     "questoes": "1) Multa do MAPA: nulidade do auto de infração por inobservância da amostragem da IN 09/2005; 2) presunção de legitimidade.",
+     "rel": {
+      "razoes": "União (ID 323313104, 02/04/2025): presunção de legitimidade do auto de infração e regularidade da coleta de amostras; pede a denegação da segurança.",
+      "contrarrazoes": "Não constam contrarrazões [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "323313086",
+      "juizo": "Mandado de segurança 5009387-05.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar a nulidade do Auto de Infração 02/2017 (processo administrativo 1026.000464/2017-54 [VALIDAR número]) e deferiu a liminar para suspender a cobrança da multa, por omissão de informações sobre a origem das amostras coletadas."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-11-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "323313104",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "323313086",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "323313086",
+       "data": "2025-02-04"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "323313104",
+       "data": "2025-04-02"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "325420794",
+       "data": "2025-05-23"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 323313086 · 04/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 325420794 · 23/05/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: a inobservância da metodologia da IN MAPA 09/2005 não conduz, por si, à nulidade; exige-se demonstração de prejuízo à validade da autuação (ApCiv 0002716-27.2017.4.03.6000, 15/09/2026, apelação provida) · A sentença segue precedente da 4ª Turma (ApCiv 0003384-95.2017.4.03.6000) · Etiqueta \"LOTE MULTA - APCIV\": verificar outros casos do lote · Possível provimento [VALIDAR]",
+     "assuntoDet": "Multa do MAPA — sementes: amostragem da IN 09/2005 e presunção de legitimidade",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "325420794",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 323313086 · 04/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 325420794 · 23/05/2025",
+    "ultima_informacao": "Ato ordinatório · ID 323313105 · 04/04/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 323313086 · 04/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 325420794 · 23/05/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -13877,12 +14257,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "BIOMARIN BRASIL FARMACEUTICA LTDA",
    "assunto": "Não padronizado",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA3",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento do medicamento VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela de urgência deferida · perícia · pedido julgado parcialmente procedente; extinção quanto às empresas BioMarin e Multicare",
+   "resultado": "Ato a proferir: apelação da União (ID 320250099) e remessa necessária da sentença ID 320250097; contrarrazões (ID 320250103); MPF pelo provimento (ID 368244221); petição da União com o Relatório de Recomendação Conitec 1.116 (IDs 404770953 a 404770955) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF, considerada a decisão de não incorporação da Conitec, a perícia judicial e a situação atual das epífises [VALIDAR] [VALIDAR: Conclusão do laudo pericial complementar (ID 320249672); Epífises abertas na data do julgamento; Alcance do item 4 do Tema 1.234/STF após a decisão da Conitec]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União a fornecer vosoritida a criança com acondroplasia. Em 18/06/2026 a Conitec deliberou pela não incorporação do medicamento (Relatório 1.116); o MPF opinou pelo provimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13893,7 +14275,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5006632-08.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 320250097 (12/12/2024)",
+    "recurso": "apelação de União (ID 320250099, 02/01/2025) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável: Temas 6 e 1.234/STF e decisão da Conitec",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13903,6 +14296,137 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec (junho/2026)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172403 · 08/04/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026 | última movimentação: 16/10/2026 08:56 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; com a deliberação de não incorporação da Conitec (152ª reunião, 18/06/2026, ID 404770954), o controle judicial limita-se à legalidade do ato (item 4 do Tema 1.234) [VALIDAR] · Laudo pericial complementar (ID 320249672) sem texto extraído · Epífises ainda abertas na idade atual (cerca de 13 anos) [VALIDAR] · União informa falta temporária de estoque e retomada das entregas em novembro (ID 404770953) · MPF: interesse de incapaz",
+   "teor": {
+    "sintese_fatica": "M. D. L. A. B., menor impúbere representada pelo genitor, portadora de acondroplasia (CID Q77.4), pediu a vosoritida aos 8 anos e 11 meses, antes do fechamento das placas de crescimento. Houve tutela de urgência, perícia judicial e sentença de procedência parcial.",
+    "inicial": "Ação de obrigação de fazer contra a União, com BioMarin e Multicare (excluídas na sentença).",
+    "decisao_recorrida": "Sentença ID 320250097 (12/12/2024): confirmou a tutela de urgência e julgou parcialmente procedente o pedido para condenar a União a fornecer o VOXZOGO (vosoritida), com prescrição atualizada a cada três meses; extinguiu o processo sem mérito quanto à BioMarin e à Multicare; honorários de R$ 10.000,00 em cada relação.",
+    "recurso": "União (ID 320250099, 02/01/2025): ausência dos requisitos dos Temas 6 e 1.234/STF (evidências de alto nível, alternativa no SUS, análise da Conitec); subsidiariamente, direcionamento do cumprimento e contracautelas.",
+    "resposta": "Contrarrazões da autora (ID 320250103).",
+    "parecer": "MPF ID 368244221: Provimento da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Marilia Cristina Boni (OAB/SP 272.715) e Gabriel Victor Bega Brasil (OAB/SP 374.444); justiça gratuita deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento do medicamento VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela de urgência deferida · perícia · pedido julgado parcialmente procedente; extinção quanto às empresas BioMarin e Multicare",
+     "sintese": "M. D. L. A. B., menor impúbere representada pelo genitor, portadora de acondroplasia (CID Q77.4), pediu a vosoritida aos 8 anos e 11 meses, antes do fechamento das placas de crescimento. Houve tutela de urgência, perícia judicial e sentença de procedência parcial.",
+     "questoes": "1) Fornecimento de medicamento registrado e não incorporado (Temas 6 e 1.234/STF); 2) efeito da deliberação de não incorporação da Conitec; 3) honorários.",
+     "rel": {
+      "razoes": "União (ID 320250099, 02/01/2025): ausência dos requisitos dos Temas 6 e 1.234/STF (evidências de alto nível, alternativa no SUS, análise da Conitec); subsidiariamente, direcionamento do cumprimento e contracautelas.",
+      "contrarrazoes": "Contrarrazões da autora (ID 320250103)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "320250097",
+      "juizo": "Procedimento comum 5006632-08.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a tutela de urgência e julgou parcialmente procedente o pedido para condenar a União a fornecer o VOXZOGO (vosoritida), com prescrição atualizada a cada três meses; extinguiu o processo sem mérito quanto à BioMarin e à Multicare; honorários de R$ 10.000,00 em cada relação."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-07-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "320250099",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "320250097",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela de urgência deferida",
+       "id": "320249250",
+       "data": "2022-07-29"
+      },
+      {
+       "desc": "Documento: laudo pericial complementar",
+       "id": "320249672",
+       "data": "2023-10-24"
+      },
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "320250097",
+       "data": "2024-12-12"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "320250099",
+       "data": "2025-01-02"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "320250103",
+       "data": "2025-02-06"
+      },
+      {
+       "desc": "Despacho: vista à PRR",
+       "id": "365172403",
+       "data": "2026-04-08"
+      },
+      {
+       "desc": "Parecer do MPF (provimento)",
+       "id": "368244221",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Petição da União: estoque e Conitec",
+       "id": "404770953",
+       "data": "2026-10-16"
+      },
+      {
+       "desc": "Documento: Relatório de Recomendação Conitec 1.116",
+       "id": "404770954",
+       "data": "2026-10-16"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172403 · 08/04/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026 | última movimentação: 16/10/2026 08:56 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; com a deliberação de não incorporação da Conitec (152ª reunião, 18/06/2026, ID 404770954), o controle judicial limita-se à legalidade do ato (item 4 do Tema 1.234) [VALIDAR] · Laudo pericial complementar (ID 320249672) sem texto extraído · Epífises ainda abertas na idade atual (cerca de 13 anos) [VALIDAR] · União informa falta temporária de estoque e retomada das entregas em novembro (ID 404770953) · MPF: interesse de incapaz",
+     "assuntoDet": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec (junho/2026)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "368244221",
+     "parecerSentido": "Provimento da apelação"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "16/10/2026 08:56 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 365172403 · 08/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026",
+    "ultima_informacao": "Certidão · ID 320746650 · 11/04/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365172403 · 08/04/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026 | última movimentação: 16/10/2026 08:56 · Juntada de Petição de petição intercorrente"
    }
   },
   {
