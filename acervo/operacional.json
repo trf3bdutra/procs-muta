@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:40:14.615Z",
+ "atualizado_em": "2026-11-21T10:42:43.515Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -230564,7 +230564,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.524Z"
+    "atualizado_em": "2026-11-21T10:42:43.515Z"
    },
    "triagem": {
     "Urgência": "",
@@ -230578,43 +230578,44 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
+    "Tempestividade": "Não verificado",
     "Preparo": "Isento (ente público/MP)",
     "AJG": "Sim",
     "DPU (controle)": "Sim",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Sem hipótese",
+    "ID do Parecer MPF": "355798027",
+    "Parecer - Sentido": "Ausência de interesse que justifique intervenção",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Oncológico",
+    "Tema": "Apelações da União e do Estado de Mato Grosso do Sul e remessa necessária em ação de obrigação de fazer · fornecimento de OCTREOTIDA LAR 30 mg para tumor neuroendócrino (CID C17.9) · autor idoso assistido pela DPU · pedido julgado procedente, com obrigação direcionada primeiro à União",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "DPF PATRICIA / EPF IVENS, 2ª Seção, Fornecimento de medicamentos, idoso",
-    "Alegações": "",
+    "Alegações": "1) Fornecimento de medicamento oncológico (Temas 6 e 1.234/STF); 2) direcionamento do cumprimento e ressarcimento; 3) honorários (Tema 1.313/STJ; Tema 1.002/STF).",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "",
+    "Especificidades": "Situação do medicamento no SUS (oncologia via APAC/UNACON) e enquadramento nos Temas 6 e 1.234/STF [VALIDAR] · Apelação do Estado restrita aos honorários: fixação por equidade em demandas de saúde (Tema 1.313/STJ) e ausência de causalidade [VALIDAR tese] · Honorários em favor da DPU contra a União (Tema 1.002/STF) · Cumprimento provisório nos autos 5011629-63.2024.4.03.6000 (ID 349375611) · Prioridade: idoso · Mesmo grupo de 5012036-69 (oncológico, mesma Vara)",
     "_preparoAJG": true,
     "_preparoBeforeAJG": "Não Verificado",
     "_ajgFromDpu": true,
-    "_dpuAuto": true
+    "_dpuAuto": true,
+    "Síntese Fática": "Carmelo Teófilo, idoso, assistido pela DPU, foi diagnosticado com tumor neuroendócrino após enterectomia em 25/02/2020 e pediu a octreotida LAR. A tutela foi inicialmente indeferida e houve sequestro de valores para custeio (ID 349375542). A sentença julgou procedente o pedido."
    },
    "producao": {
     "Destino": "",
@@ -230663,7 +230664,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5006699-36.2023.4.03.6000",
