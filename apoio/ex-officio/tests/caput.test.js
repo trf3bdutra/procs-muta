@@ -103,3 +103,8 @@ test('Chefia › Visão operacional: lista com altura fixa, rolando por dentro',
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.vo-bd{height:560px}')&&cap.includes('#vo-lst{flex:1 1 auto;min-height:0;overflow:auto')&&cap.includes('.vo-g h4{position:sticky;top:0'),'altura fixa');
 });
+
+test('Calendário: os cartões de "Sessões em andamento" ocupam a largura disponível',()=>{
+  const fs=require('fs'),p=require('path'),css=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/css/02-calendario.css'),'utf8');
+  assert.ok(css.includes('.cc-dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))'),'auto-fit');
+});
