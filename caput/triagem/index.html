@@ -833,7 +833,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-set{border-left:1px solid var(--b);padding:12px;background:var(--p);overflow:auto}.cg-set label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-set input,.cg-set select,.cg-set textarea{width:100%;box-sizing:border-box}.cg-set .cg-exp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cg-set .cg-exp button{height:32px}
 .cg-composer{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px}.cg-form{border:1px solid var(--b);background:var(--w);padding:14px}.cg-form label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-form input,.cg-form textarea,.cg-form select{width:100%;box-sizing:border-box}.cg-form textarea{min-height:150px}.cg-checks{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 14px;font-size:12px}.cg-checks label{display:flex;align-items:center;gap:5px;margin:0}.cg-checks input{width:auto}.cg-hist{border:1px solid var(--b);background:var(--w)}.cg-hist header{padding:10px 12px;border-bottom:1px solid var(--b);font-weight:700}.cg-msg{padding:10px 12px;border-bottom:1px solid var(--l2)}.cg-msg b{display:block;font-size:12.5px}.cg-msg small{color:var(--m)}.cg-msg p{font-size:12px;margin:4px 0 0;white-space:pre-wrap}.cg-status{font-size:12px;color:var(--m);padding:10px 0}.cg-actions a{color:inherit;text-decoration:none}
 #cg-regras{background:var(--w);min-height:560px}
-.cg-chefia{padding-bottom:40px}
+.cg-chefia{padding-bottom:40px}.cg-comp-p>header a.btn{margin-left:auto;text-decoration:none}#cg-comp .wrap{padding-bottom:40px}
 .cg-vop .cg-tb a.btn{text-decoration:none}#cg-vo>.cg-status{padding:14px}
 .cg-faixa.vo-k{grid-template-columns:repeat(5,minmax(0,1fr));border-width:0 0 1px}.vo-k .r b{color:var(--r)}.vo-k .g b{color:var(--g)}
 .vo-av{margin:0;padding:6px 14px;font-size:11.5px;color:var(--g);background:#fbf3df;border-bottom:1px solid var(--l)}
@@ -989,7 +989,7 @@ W.addEventListener('message', (e) => { if (e.origin !== location.origin) return;
 function compEquipe(mostrar) {
   let w = D.getElementById('cg-comp');
   if (!w && mostrar) { w = D.createElement('section'); w.id = 'cg-comp'; w.setAttribute('aria-label', 'Competências da equipe');
-    w.innerHTML = '<div class="wrap"><iframe title="Competências da equipe: mapa, perfis, matriz, especialistas e produção" src="/caput/competencias/" style="width:100%;height:1400px;border:0;display:block;border-radius:14px;background:transparent"></iframe></div>';
+    w.innerHTML = '<div class="wrap"><section class="cg-px cg-comp-p"><header><span><span class="k">Competências</span><b>Mapa, perfis, matriz, especialistas e produção</b></span><a class="btn" href="/caput/competencias/" target="_blank" rel="noopener">Abrir em nova aba ↗</a></header><iframe title="Competências da equipe: mapa, perfis, matriz, especialistas e produção" src="/caput/competencias/" style="width:100%;height:1400px;border:0;display:block;background:transparent"></iframe></section></div>';
     const m = D.getElementById('main'); m.parentNode.insertBefore(w, m.nextSibling); }
   if (w) w.hidden = !mostrar;
 }
@@ -1427,10 +1427,15 @@ function montarCoord(){
 function vCoordenacao(){
   let eq=[]; try { eq=(M()?.CMTSessao?.estado?.().equipe)||[]; } catch(e) { eq=[]; } if(!eq.length) eq=equipeAtual();
   const ativos=eq.filter(m=>m.auto!==false&&(m.minuta||m.correcao||m.papel)), serv=[...new Set(U.map(o=>o.minutante).filter(Boolean))];
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Equipe e execução</p><h1>Coordenação.</h1><p>Equipe, regras de designação e de produtividade, operação diária e competências.</p></div></div>'+
-    '<div class="cg-kpis"><div><b>'+nP(eq.length||serv.length)+'</b><span>pessoas no cadastro</span></div><div><b>'+nP(ativos.length)+'</b><span>na designação automática</span></div><div><b>'+nP(U.filter(o=>o.pend.length).length)+'</b><span>processos com pendência</span></div><div><b>'+nP(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
-    '<div id="cg-coord" aria-label="Equipe e regras" style="margin-bottom:14px"><p class="cg-status">Carregando equipe e regras…</p></div>'+
-    '<div class="cg-grid"><section class="cg-box"><header>Operação diária</header><div class="cg-link"><span><b>Office · equipe e diligências</b><small>Avisos, tarefas, ausências e acompanhamento operacional</small></span><button data-cg-url="/office/#cmt">Abrir Office</button></div><div class="cg-link"><span><b>Pautas</b><small>Composição e andamento das próximas sessões</small></span><button data-cg-go="pautas">Abrir</button></div></section></div></div>';
+  /* mesmo padrão de seções da Chefia: cabeçalho com faixa de indicadores e painéis com rótulo e título */
+  const kpi=(v,t)=>'<div><b>'+v+'</b><span>'+t+'</span></div>';
+  const cx=(k,t,extra,corpo,cls)=>'<section class="cg-px'+(cls?' '+cls:'')+'"><header><span><span class="k">'+k+'</span><b>'+t+'</b></span>'+(extra||'')+'</header>'+corpo+'</section>';
+  return '<div class="wrap cg-chefia"><div class="cg-top"><div><p class="k">Equipe e execução</p><h1>Coordenação.</h1></div>'+
+    '<div class="cg-faixa">'+kpi(nP(eq.length||serv.length),'pessoas no cadastro')+kpi(nP(ativos.length),'na designação automática')+kpi(nP(U.filter(o=>o.pend.length).length),'processos com pendência')+kpi(nP(sessoes().length),'sessões futuras')+'</div>'+
+    '<div class="cg-acv"><button class="btn" data-cg-go="pautas">Ir para Pautas</button></div></div>'+
+    cx('Equipe e regras','Equipe, designação e produtividade','','<div id="cg-coord" aria-label="Equipe e regras"><p class="cg-status" style="padding:14px">Carregando equipe e regras…</p></div>')+
+    cx('Operação diária','Ex Officio e pautas','','<div class="cg-link"><span><b>Ex Officio · equipe e diligências</b><small>Avisos, tarefas, ausências e acompanhamento operacional</small></span><button data-cg-url="/office/#cmt">Abrir ↗</button></div><div class="cg-link"><span><b>Pautas</b><small>Composição e andamento das próximas sessões</small></span><button data-cg-go="pautas">Abrir →</button></div>')+
+  '</div>';
 }
 
 const CG_REL_CAT=[
