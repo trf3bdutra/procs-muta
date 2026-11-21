@@ -11,6 +11,8 @@ var SITE = Muta.SITE, ses = window.MutaSessao, br = window.MutaProntuarioBridge;
 var $ = function (id) { return document.getElementById(id); };
 function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 function S(v) { return String(v == null ? '' : v).trim(); }
+/* texto sem acento e em minúsculas, para comparar */
+function N(v) { return S(v).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
 function dg(v) { return String(v || '').replace(/\D/g, ''); }
 function brD(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(v)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(v); }
 

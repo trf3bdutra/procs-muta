@@ -1134,3 +1134,14 @@ html[data-tema=escuro] .tu-st.ok::before{color:#6eba8a}html[data-tema=escuro] .t
 .ej-d .tx-j.ementa p{font:13px/1.6 var(--serif)}
 .au-tx .tx-j{max-height:420px;overflow:auto;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--card2);margin-top:4px}
 .mn-tx.tx-j{max-height:360px;overflow:auto}
+
+/* ===== 0.18.1 · etiquetas de classe e de tipo de julgamento no mesmo padrão ===== */
+.pm-l1 .pc-cl,.pm-l1 .pm-tj,.pc.pm .pc-cl,.pc.pm .pm-tj{all:unset;box-sizing:border-box;display:inline-flex;align-items:center;gap:3px;height:20px;padding:0 8px;border-radius:6px;
+  font:600 11px var(--sans);letter-spacing:0;text-transform:none;white-space:nowrap;border:1px solid var(--input);background:var(--card2);color:var(--fg)}
+.pm-l1 .pm-tj{max-width:130px;overflow:hidden;text-overflow:ellipsis}
+.pm-l1 .pm-tj.sug,.pc.pm .pm-tj.sug{cursor:pointer;border-style:dashed;border-color:hsl(160 35% 55%);color:hsl(160 40% 30%)}
+.pm-l1 .pm-tj.sug:hover{background:hsl(160 40% 38%/.08)}
+.pm-l1 .pm-tj.al,.pc.pm .pm-tj.al{border-color:#d9826b;color:#a4441f}
+html[data-tema=escuro] .pm-l1 .pc-cl,html[data-tema=escuro] .pm-l1 .pm-tj{background:#0d2130;border-color:#33566e;color:#c9d7e2}
+html[data-tema=escuro] .pm-l1 .pm-tj.sug{border-color:#6eba8a;color:#9fd6b5}html[data-tema=escuro] .pm-l1 .pm-tj.al{border-color:#b0542f;color:#f2a397}
+#g-st:empty{display:none}.pmodos{margin-bottom:6px!important}.gbody>:first-child{margin-top:0}

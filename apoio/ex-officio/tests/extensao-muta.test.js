@@ -167,3 +167,8 @@ test('extensão 0.18: leitor do PJe guarda negrito, itálico e sublinhado; texto
   assert.match(c, /function leve\(el, depth\)/); assert.match(c, /html: marcado \? hs : null/);
   assert.match(css, /\.tx-j p[^{]*\{text-align:justify;hyphens:auto/);
 });
+
+test('extensão 0.18.1: gabinete.js define N() (o cartão compara o tipo de julgamento sem acento)', () => {
+  const gab = read('extensao/gabinete.js');
+  assert.match(gab, /\nfunction N\(v\) \{/);
+});

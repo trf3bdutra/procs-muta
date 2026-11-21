@@ -12,6 +12,9 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
   o painel mostra essa versão. Recuo de citação e centralização do editor também. No Ementário, o cabeçalho em caixa alta
   da ementa sai em negrito, como no acórdão. PDF lido por pdf.js ou OCR continua sem formatação.
 - Recarregue a aba do PJe depois de atualizar (o leitor mudou).
+- **0.18.2:** etiquetas de classe e de tipo de julgamento no mesmo padrão (sugestão ainda não gravada, tracejada);
+  corrige o erro que parava o painel quando havia tipo de julgamento gravado e sugestão diferente dos autos; sem espaço vazio
+  depois das sub-abas do prontuário.
 
 ## O que muda na 0.17
 
