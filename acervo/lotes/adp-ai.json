@@ -28389,13 +28389,16 @@
    "exequente": "CAIXA ECONÔMICA FEDERAL",
    "executado": "NIVALDO ALVES",
    "assunto": "Juros Progressivos",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "FGTS · juros progressivos · cumprimento de sentença · homologação dos cálculos do perito · erro material e preclusão",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi indeferido (decisão ID 353507753, com indicação de preclusão de parte das teses) e há contraminuta (ID 357816908), com pedido de prioridade pela idade dos agravados ‖ Proposta pelos precedentes: prevalecem os cálculos do perito ou da contadoria elaborados conforme o título, e as teses não deduzidas na impugnação estão preclusas → desprovimento [VALIDAR: Isenção de custas da CEF (FGTS); Idade dos agravados para a prioridade; Preclusão das teses não deduzidas na impugnação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "PRI",
+    "VAL"
+   ],
+   "observacao": "Agravo da CEF contra a decisão que homologou os cálculos do perito no cumprimento de sentença de juros progressivos do FGTS, fixando R$ 807.228,29 para Edson Balbino de Araújo e R$ 510.492,16 para Nivaldo Alves (05/2024) (ID 484206138 da origem). Aponta erro material na reconstituição do saldo e pede nova remessa à contadoria. O efeito suspensivo foi indeferido (ID 353507753): parte das teses não foi deduzida na impugnação, o que indica preclusão. Os agravados (ID 357816908) pedem o reconhecimento da preclusão e prioridade pela idade.",
+   "peculiaridades": "Decisão ID 353507753 (Des. Fed. Cotrim Guimarães, 09/02/2026): preclusão aparente e periculum in mora inverso. Pedido de prioridade de tramitação pela idade dos agravados (ID 357816908) [VALIDAR idade]. Redistribuído à Turma Regional (despacho ID 375241018).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -28421,9 +28424,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "FGTS — juros progressivos (cumprimento de sentença)",
+    "origem": "Cumprimento de sentença 0005150-09.2005.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 484206138 (autos de origem; cópia ID 353036446)",
+    "recurso": "ID 353036441 · 02/02/2026",
+    "preparo": "Isenção invocada (artigo 24-A, parágrafo único, da Lei 9.028/1995: CEF como agente operador do FGTS); certidão sem custas (ID 353079353)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (CEF como agente operador do FGTS — artigo 24-A, parágrafo único, da Lei 9.028/1995, invocado no agravo) [VALIDAR aceitação] · certidão sem custas: ID 353079353 · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0005150-09.2005.4.03.6000 · redistribuído à Turma Regional (despacho ID 375241018) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Isenção de custas invocada pela CEF (artigo 24-A, parágrafo único, da Lei 9.028/1995)",
+    "[VALIDAR] Prioridade pela idade dos agravados (ID 357816908)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -28443,6 +28460,104 @@
     "ultima_movimentacao": "22/05/2026 14:06 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "FGTS — cumprimento de sentença de juros progressivos: cálculos periciais",
+   "especificidades": "Efeito suspensivo indeferido (ID 353507753): preclusão de parte das teses e confiança no laudo pericial · Crédito homologado de R$ 1.317.720,45 (soma dos dois exequentes, 05/2024) · Isenção de custas invocada pela CEF como agente do FGTS (Lei 9.028/1995) [VALIDAR] · Prioridade pedida pela idade dos agravados [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Em cumprimento de sentença que condenou a CEF a pagar diferenças de juros progressivos nas contas do FGTS, o juízo homologou os cálculos do perito para os dois exequentes; a CEF agravou apontando erro material.",
+    "inicial": "Não consta nos autos do recurso (ação 0005150-09.2005.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 484206138 da origem (cópia ID 353036446): homologou os cálculos do perito (IDs 326322605 e 326322606 da origem), com R$ 807.228,29 para Edson Balbino de Araújo e R$ 510.492,16 para Nivaldo Alves, atualizados para 05/2024.",
+    "recurso": "Agravo de instrumento ID 353036441 (02/02/2026): erro material na reconstituição do saldo e nos juros; pede a anulação da homologação e nova remessa à contadoria ou à contadoria do Tribunal; isenção de custas como agente do FGTS.",
+    "resposta": "Contraminuta ID 357816908 (03/03/2026): preclusão quanto ao parâmetro de recomposição da conta de Nivaldo Alves; acerto do laudo; prioridade pela idade dos agravados.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "CEF representada pela advogada Paula Lopes da Costa Gomes (OAB/MS 11.586); procuração ID 353036465. Agravados: advogado Elder Antônio de Melo Barbosa (OAB/MS 8.992).",
+    "preparo": "Isenção invocada (artigo 24-A, parágrafo único, da Lei 9.028/1995); certidão sem custas (ID 353079353)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "FGTS · juros progressivos · cumprimento de sentença · homologação dos cálculos do perito · erro material e preclusão",
+     "sintese": "Em cumprimento de sentença que condenou a CEF a pagar diferenças de juros progressivos nas contas do FGTS, o juízo homologou os cálculos do perito para os dois exequentes; a CEF agravou apontando erro material.",
+     "questoes": "1) Preclusão das teses não deduzidas na impugnação; 2) erro material nos cálculos periciais (reconstituição do saldo e juros progressivos); 3) isenção de custas da CEF como agente do FGTS.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 353036441 (02/02/2026): erro material na reconstituição do saldo e nos juros; pede a anulação da homologação e nova remessa à contadoria ou à contadoria do Tribunal; isenção de custas como agente do FGTS.",
+      "contrarrazoes": "Contraminuta ID 357816908 (03/03/2026): preclusão quanto ao parâmetro de recomposição da conta de Nivaldo Alves; acerto do laudo; prioridade pela idade dos agravados."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "484206138",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Homologou os cálculos do perito."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "484206138"
+     },
+     "adm": {
+      "prot": "2026-02-02",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "353036441",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "353036441",
+       "data": "2026-02-02"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "353079353",
+       "data": "2026-02-03"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "353507753",
+       "data": "2026-02-09"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "357816908",
+       "data": "2026-03-03"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "375241018",
+       "data": "2026-05-21"
+      }
+     ],
+     "pendencias": "Conferir a isenção de custas e a prioridade",
+     "especificidades": "Efeito suspensivo indeferido (ID 353507753): preclusão de parte das teses e confiança no laudo pericial · Crédito homologado de R$ 1.317.720,45 (soma dos dois exequentes, 05/2024) · Isenção de custas invocada pela CEF como agente do FGTS (Lei 9.028/1995) [VALIDAR] · Prioridade pedida pela idade dos agravados [VALIDAR]",
+     "assuntoDet": "FGTS — cumprimento de sentença de juros progressivos: cálculos periciais",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-02-09",
+     "fundamento": "Paradigmas do gabinete: AI 5024307-05.2023.4.03.0000 (acórdão 1ª Turma, 01/02/2024: desprovido; prevalência dos cálculos da contadoria); ApCiv 0003328-76.2015.4.03.6115 (acórdão 1ª Turma, 01/02/2024: desprovida; homologação dos cálculos, preclusão e equidistância do auxiliar do juízo)",
+     "descPrelim": "Preclusão das teses não deduzidas na impugnação (contraminuta ID 357816908)"
+    }
    }
   },
   {
@@ -28454,13 +28569,16 @@
    "exequente": "FUNDACAO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "executado": "JOSE IVAN ALBUQUERQUE AGUIAR",
    "assunto": "Licença Prêmio",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "Servidor público · licença-prêmio · cumprimento de sentença contra a FUFMS · homologação dos cálculos da contadoria (R$ 583.050,39) · base de cálculo e honorários",
+   "resultado": "Ato a proferir: julgamento do agravo (voto) ou, antes, exame do efeito suspensivo, que não foi apreciado (o despacho ID 365223460 só intimou a agravada; etiqueta \"LIMINAR PENDENTE\"); há contraminuta (ID 365803357); o processo veio ao Gabinete A por suspeição do Des. Fed. Jean Marcos (despacho ID 382772662) ‖ Proposta pelos precedentes: cálculos da contadoria prevalecem quando conformes ao título; quanto aos honorários, a Turma Regional fixou a verba sobre a diferença entre o pretendido e o devido no excesso de execução → provimento parcial possível só nos honorários [VALIDAR] [VALIDAR: Base de cálculo adotada pela FUFMS × contadoria]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "URG",
+    "VAL"
+   ],
+   "observacao": "Agravo da FUFMS contra a decisão que homologou os cálculos da contadoria (R$ 583.050,39) no cumprimento de sentença de licença-prêmio de José Ivan Albuquerque Aguiar (ID 471500160 da origem). Pede o acolhimento da base de cálculo adotada pela universidade e a inversão dos honorários ou, subsidiariamente, honorários só sobre a diferença entre o homologado e o admitido. O agravado (ID 365803357) defende a decisão e pede honorários recursais.",
+   "peculiaridades": "Efeito suspensivo pedido e não apreciado: o despacho ID 365223460 (Des. Fed. Jean Marcos) só intimou a agravada; depois, ele declarou suspeição (ID 382772662) e o processo foi redistribuído ao Gabinete A (certidão ID 383409196). Etiquetas \"LIMINAR PENDENTE\" e \"Suspeição - Jean\".",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -28481,9 +28599,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Exame do efeito suspensivo, ainda não apreciado, ou julgamento do agravo (voto)",
+    "materia": "Servidor público — licença-prêmio (cumprimento de sentença)",
+    "origem": "Cumprimento de sentença 0001330-93.2016.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 471500160 (autos de origem)",
+    "recurso": "ID 356949971 · 26/02/2026",
+    "preparo": "Isenta (FUFMS)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0001330-93.2016.4.03.6000 · suspeição do Des. Fed. Jean Marcos e redistribuição livre (certidão ID 383409196) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Efeito suspensivo pendente: apreciar ou julgar desde logo"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -28503,6 +28634,111 @@
     "ultima_movimentacao": "29/06/2026 17:03 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Cumprimento de sentença contra a FUFMS — licença-prêmio: cálculos da contadoria e honorários",
+   "especificidades": "Efeito suspensivo pendente desde 26/02/2026 (etiqueta \"LIMINAR PENDENTE\") · Suspeição do Des. Fed. Jean Marcos (ID 382772662) · Crédito homologado de R$ 583.050,39 · Pedido de honorários recursais na contraminuta",
+   "teor": {
+    "sintese_fatica": "Servidor obteve condenação da FUFMS ao pagamento de licença-prêmio; no cumprimento, o juízo homologou os cálculos da contadoria (R$ 583.050,39) e a universidade agravou quanto à base de cálculo e aos honorários.",
+    "inicial": "Não consta nos autos do recurso (ação 0001330-93.2016.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 471500160 da origem: homologou os cálculos da contadoria (R$ 583.050,39), com honorários (descrita no agravo e na contraminuta).",
+    "recurso": "Agravo de instrumento ID 356949971 (26/02/2026): base de cálculo da licença-prêmio adotada pela FUFMS; honorários a cargo do agravado ou só sobre a diferença; pede efeito suspensivo.",
+    "resposta": "Contraminuta ID 365803357 (11/04/2026): acerto dos cálculos da contadoria; majoração dos honorários (artigo 85, § 11, do CPC).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "FUFMS representada por procurador federal (dispensada a procuração). Agravado representado pelo advogado João Paulo Setti Aguiar (OAB/AC 3.080).",
+    "preparo": "Dispensado: fundação pública federal."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Servidor público · licença-prêmio · cumprimento de sentença contra a FUFMS · homologação dos cálculos da contadoria (R$ 583.050,39) · base de cálculo e honorários",
+     "sintese": "Servidor obteve condenação da FUFMS ao pagamento de licença-prêmio; no cumprimento, o juízo homologou os cálculos da contadoria (R$ 583.050,39) e a universidade agravou quanto à base de cálculo e aos honorários.",
+     "questoes": "1) Base de cálculo da licença-prêmio convertida em pecúnia (contadoria × FUFMS); 2) honorários no cumprimento de sentença.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 356949971 (26/02/2026): base de cálculo da licença-prêmio adotada pela FUFMS; honorários a cargo do agravado ou só sobre a diferença; pede efeito suspensivo.",
+      "contrarrazoes": "Contraminuta ID 365803357 (11/04/2026): acerto dos cálculos da contadoria; majoração dos honorários (artigo 85, § 11, do CPC)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "471500160",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "Homologou os cálculos da contadoria (R$ 583.050,39)."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente",
+      "id": "471500160"
+     },
+     "adm": {
+      "prot": "2026-02-26",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "356949971",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "356949971",
+       "data": "2026-02-26"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "361965831",
+       "data": "2026-03-23"
+      },
+      {
+       "desc": "Despacho: intimação da agravada",
+       "id": "365223460",
+       "data": "2026-04-08"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "365803357",
+       "data": "2026-04-11"
+      },
+      {
+       "desc": "Despacho: suspeição do relator",
+       "id": "382772662",
+       "data": "2026-06-26"
+      },
+      {
+       "desc": "Certidão de redistribuição ao Gabinete A",
+       "id": "383409196",
+       "data": "2026-06-29"
+      }
+     ],
+     "pendencias": "Apreciar o efeito suspensivo ou julgar",
+     "especificidades": "Efeito suspensivo pendente desde 26/02/2026 (etiqueta \"LIMINAR PENDENTE\") · Suspeição do Des. Fed. Jean Marcos (ID 382772662) · Crédito homologado de R$ 583.050,39 · Pedido de honorários recursais na contraminuta",
+     "assuntoDet": "Cumprimento de sentença contra a FUFMS — licença-prêmio: cálculos da contadoria e honorários",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2026-02-26",
+     "urgNivel": "Média",
+     "urgObs": "Não apreciado: despacho ID 365223460 só intimou a agravada; suspeição e redistribuição em 29/06/2026",
+     "fundamento": "Paradigmas do gabinete: AI 5024307-05.2023.4.03.0000 (acórdão 1ª Turma, 01/02/2024: prevalência dos cálculos da contadoria); ApCiv 0001345-62.2016.4.03.6000 (acórdão TRMS, 05/10/2026: provida; honorários sobre a diferença no excesso de execução)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
@@ -28515,12 +28751,14 @@
    "executado": "CONSELHO REGIONAL DE FISIOTERAPIA E TERAPIA OCUPACIONAL DA OITAVA REGIAO - CREFITO 8",
    "assunto": "Limite de Carga Horária - Jornada Semanal",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Servidor público municipal · jornada de 30 horas semanais de fisioterapeutas e terapeutas ocupacionais (Lei 8.856/1994) · ação do CREFITO contra Município · tutela de urgência deferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), com o agravo interno do Município (ID 388899077) contra a não concessão da tutela recursal (decisão ID 382132398) prejudicado; há contraminuta (IDs 388189831 e 392438904) ‖ Proposta pelos precedentes: sem paradigma recuperado no banco para a jornada de fisioterapeutas e terapeutas ocupacionais municipais (Lei 8.856/1994) em ação de conselho profissional; examinar a legitimidade do conselho e o regime dos servidores [VALIDAR] [VALIDAR: Identificação do conselho agravado (CREFITO 8 × CREFITO 13); Legitimidade do conselho profissional e competência para jornada de servidor municipal estatutário]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do Município de Porto Murtinho contra a tutela de urgência que determinou a redução da jornada dos fisioterapeutas e terapeutas ocupacionais municipais de 40 para 30 horas semanais, em ação do CREFITO (ID 559274300 da origem). A tutela recursal não foi concedida (ID 382132398); o Município interpôs agravo interno (ID 388899077). O CREFITO apresentou contraminuta ao agravo (ID 388189831) e ao agravo interno (ID 392438904), com pedido de honorários recursais.",
+   "peculiaridades": "A petição do agravo indica como agravado o CREFITO 13, e a autuação registra o CREFITO 8 [VALIDAR polo passivo]. Tempestividade sustentada pela intimação por carta precatória recebida em 16/04/2026 (autos 0000046-48.2026.8.12.0040) [VALIDAR]. Redistribuído à Turma Regional (decisão ID 374184183).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -28551,9 +28789,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), com o agravo interno prejudicado",
+    "materia": "Servidor público — jornada de fisioterapeutas (Lei 8.856/1994)",
+    "origem": "Ação 5003293-36.2025.4.03.6000 (Campo Grande)",
+    "decisao_agravada": "ID 559274300 (autos de origem)",
+    "recurso": "ID 373410723 · 14/05/2026",
+    "preparo": "Isento (Município)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · certidão sem custas: ID 373625093 · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5003293-36.2025.4.03.6000 · redistribuído à Turma Regional (decisão ID 374184183) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Polo passivo: CREFITO 8 ou CREFITO 13",
+    "[VALIDAR] Regime dos servidores (estatutário ou celetista) e legitimidade do conselho"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -28573,6 +28825,119 @@
     "ultima_movimentacao": "18/08/2026 16:43 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Jornada de fisioterapeutas e terapeutas ocupacionais — redução de 40 para 30 horas (Município × CREFITO)",
+   "especificidades": "Tutela recursal não concedida (ID 382132398, 23/06/2026) · Agravo interno do Município pendente (ID 388899077), com resposta (ID 392438904) · Divergência entre CREFITO 13 (petição) e CREFITO 8 (autuação) [VALIDAR] · Questão de competência e legitimidade do conselho para a jornada de servidor municipal [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "O conselho regional de fisioterapia ajuizou ação contra o Município de Porto Murtinho para limitar a 30 horas semanais a jornada dos fisioterapeutas e terapeutas ocupacionais municipais; o juízo deferiu a tutela de urgência e o Município agravou.",
+    "inicial": "Não consta nos autos do recurso (ação 5003293-36.2025.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 559274300 da origem: deferiu a tutela de urgência para reduzir a jornada de 40 para 30 horas semanais (descrita na decisão ID 382132398).",
+    "recurso": "Agravo de instrumento ID 373410723 (14/05/2026): autonomia municipal para fixar a jornada de seus servidores; ausência dos requisitos da tutela; pede efeito suspensivo e o indeferimento da tutela.",
+    "resposta": "Contraminuta do CREFITO ID 388189831 (23/07/2026) e resposta ao agravo interno ID 392438904 (18/08/2026): aplicação da Lei 8.856/1994; manutenção da tutela; honorários recursais.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Município representado pelas advogadas Sandra Valéria Grubert Mazucato (OAB/MS 10.161), Maísa Oviedo Milandri (OAB/MS 17.666) e Raíra Albanez Viudes (OAB/MS 21.649) [VALIDAR procuração]. CREFITO: advogado Rogério Mota do Amaral (OAB/MS 13.134).",
+    "preparo": "Dispensado: Município (artigo 1.007, § 1º, do CPC)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Servidor público municipal · jornada de 30 horas semanais de fisioterapeutas e terapeutas ocupacionais (Lei 8.856/1994) · ação do CREFITO contra Município · tutela de urgência deferida",
+     "sintese": "O conselho regional de fisioterapia ajuizou ação contra o Município de Porto Murtinho para limitar a 30 horas semanais a jornada dos fisioterapeutas e terapeutas ocupacionais municipais; o juízo deferiu a tutela de urgência e o Município agravou.",
+     "questoes": "1) Legitimidade do conselho profissional e aplicação da Lei 8.856/1994 a servidores municipais; 2) autonomia do Município para fixar a jornada; 3) requisitos da tutela de urgência.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 373410723 (14/05/2026): autonomia municipal para fixar a jornada de seus servidores; ausência dos requisitos da tutela; pede efeito suspensivo e o indeferimento da tutela.",
+      "contrarrazoes": "Contraminuta do CREFITO ID 388189831 (23/07/2026) e resposta ao agravo interno ID 392438904 (18/08/2026): aplicação da Lei 8.856/1994; manutenção da tutela; honorários recursais."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "559274300",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Deferiu a tutela para reduzir a jornada de 40 para 30 horas semanais."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "559274300"
+     },
+     "adm": {
+      "prot": "2026-05-14",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "373410723",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "388899077",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "373410723",
+       "data": "2026-05-14"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "374184183",
+       "data": "2026-05-18"
+      },
+      {
+       "desc": "Decisão que não concedeu a tutela recursal",
+       "id": "382132398",
+       "data": "2026-06-23"
+      },
+      {
+       "desc": "Contraminuta do CREFITO",
+       "id": "388189831",
+       "data": "2026-07-23"
+      },
+      {
+       "desc": "Agravo interno do Município",
+       "id": "388899077",
+       "data": "2026-07-27"
+      },
+      {
+       "desc": "Ato ordinatório: resposta ao agravo interno",
+       "id": "390547442",
+       "data": "2026-08-04"
+      },
+      {
+       "desc": "Resposta ao agravo interno",
+       "id": "392438904",
+       "data": "2026-08-18"
+      }
+     ],
+     "pendencias": "Conferir o polo passivo e o regime dos servidores",
+     "especificidades": "Tutela recursal não concedida (ID 382132398, 23/06/2026) · Agravo interno do Município pendente (ID 388899077), com resposta (ID 392438904) · Divergência entre CREFITO 13 (petição) e CREFITO 8 (autuação) [VALIDAR] · Questão de competência e legitimidade do conselho para a jornada de servidor municipal [VALIDAR]",
+     "assuntoDet": "Jornada de fisioterapeutas e terapeutas ocupacionais — redução de 40 para 30 horas (Município × CREFITO)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-23",
+     "urgObs": "Agravo interno pendente (ID 388899077)"
+    }
    }
   },
   {
@@ -28584,13 +28949,15 @@
    "exequente": "SIRIUS COMERCIO VAREJISTA DE LURIFICANTES LTDA",
    "executado": "INSTITUTO NACIONAL DE METROLOGIA, QUALIDADE E TECNOLOGIA - INMETRO",
    "assunto": "Metrológica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal do INMETRO · multa administrativa (metrologia) · prescrição e prescrição intercorrente rejeitadas · restituição de valores bloqueados",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); não houve pedido de efeito suspensivo (despacho ID 304735007) e há contraminuta (ID 306354865); antes, conferir o preparo (GRU com comprovante em imagem, ID 304488633) ‖ Proposta pelos precedentes: multa administrativa do poder de polícia segue a Lei 9.873/1999 quanto à prescrição; prescrição intercorrente só com paralisação imputável à exequente → resultado conforme os marcos, a conferir na origem [VALIDAR] [VALIDAR: Preparo: comprovante ID 304488633 sem texto e data do pagamento; Marcos da prescrição (constituição definitiva, ajuizamento, citação e suspensões)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Auto Posto Sirius contra a decisão que rejeitou a prescrição e a prescrição intercorrente na EF 0008153-59.2011.4.03.6000, em que o INMETRO cobra multa administrativa. Pede a extinção da execução, honorários e a restituição dos valores bloqueados e transferidos, mas não penhorados. O INMETRO (ID 306354865) sustenta a ausência de inércia e o desprovimento.",
+   "peculiaridades": "Não houve pedido de efeito suspensivo (despacho ID 304735007, Des. Fed. Marcelo Saraiva). Preparo juntado após a certidão de ausência de custas (IDs 304336835 e 304488633). Etiqueta \"LOTE MULTA - AI\". Redistribuído à Turma Regional (decisão ID 376849363).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -28616,9 +28983,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), depois de conferir o preparo",
+    "materia": "Execução fiscal — multa administrativa do INMETRO (prescrição)",
+    "origem": "EF 0008153-59.2011.4.03.6000 (Campo Grande)",
+    "decisao_agravada": "Decisão que rejeitou a prescrição, disponibilizada em 29/08/2024 (ID não indicado [VALIDAR])",
+    "recurso": "ID 304131190 · 20/09/2024",
+    "preparo": "GRU (guia ID 304488632) e comprovante em imagem (ID 304488633), juntados em 23/09/2024, após a interposição",
+    "monocratica": "Possível, se a linha do gabinete sobre a prescrição de multa administrativa for aplicável [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · guia GRU: ID 304488632 · comprovante em imagem, sem texto (OCR pendente): ID 304488633 · certidão sem custas: ID 304336835 · juntada em 23/09/2024, três dias após a interposição [VALIDAR data do pagamento] · conferido em 21/11/2026 (regra: GRU com comprovante de caixa eletrônico ou de pagamento via internet — Resolução PRES 138/2017, artigo 2º, § 2º, II)",
+    "conf_prevencao": "Origem: 0008153-59.2011.4.03.6000 · redistribuído da 1ª à 2ª Seção (despacho ID 304395875) e à Turma Regional (decisão ID 376849363) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: ler o comprovante ID 304488633 e conferir a data",
+    "[VALIDAR] Linha do tempo da prescrição na origem"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -28638,6 +29019,105 @@
     "ultima_movimentacao": "11/06/2026 09:18 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Execução fiscal de multa do INMETRO — prescrição e prescrição intercorrente",
+   "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Preparo com comprovante em imagem, juntado após a interposição (ID 304488633) [VALIDAR] · Sem pedido de efeito suspensivo · Pedido de restituição de valores bloqueados e não penhorados",
+   "teor": {
+    "sintese_fatica": "O INMETRO executa multa administrativa contra posto de combustíveis desde 2011; o juízo rejeitou a prescrição e a prescrição intercorrente, e a executada agravou.",
+    "inicial": "Não consta nos autos do recurso (EF 0008153-59.2011.4.03.6000)",
+    "decisao_recorrida": "Decisão da origem que rejeitou a prescrição e a prescrição intercorrente, disponibilizada em 29/08/2024 (descrita no agravo ID 304131190).",
+    "recurso": "Agravo de instrumento ID 304131190 (20/09/2024): prescrição e prescrição intercorrente; extinção da execução; honorários; restituição dos valores bloqueados e transferidos, mas não penhorados.",
+    "resposta": "Contraminuta do INMETRO ID 306354865 (04/10/2024): ausência de inércia e de prescrição intercorrente; não conhecimento ou desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Carlo Daniel Coldibelli Francisco (OAB/MS 6.701-B); procuração não identificada nos autos do recurso [VALIDAR]. INMETRO por procurador federal.",
+    "preparo": "Certidão sem custas (ID 304336835); guia GRU (ID 304488632) e comprovante em imagem (ID 304488633), juntados com a petição ID 304482579 em 23/09/2024."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal do INMETRO · multa administrativa (metrologia) · prescrição e prescrição intercorrente rejeitadas · restituição de valores bloqueados",
+     "sintese": "O INMETRO executa multa administrativa contra posto de combustíveis desde 2011; o juízo rejeitou a prescrição e a prescrição intercorrente, e a executada agravou.",
+     "questoes": "1) Regularidade do preparo; 2) prescrição da multa administrativa e prescrição intercorrente; 3) restituição dos valores bloqueados e não penhorados.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 304131190 (20/09/2024): prescrição e prescrição intercorrente; extinção da execução; honorários; restituição dos valores bloqueados e transferidos, mas não penhorados.",
+      "contrarrazoes": "Contraminuta do INMETRO ID 306354865 (04/10/2024): ausência de inércia e de prescrição intercorrente; não conhecimento ou desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Vara de execuções fiscais de Campo Grande [VALIDAR]",
+      "dispositivo": "Rejeitou a prescrição e a prescrição intercorrente."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-20",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "304131190",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "304131190",
+       "data": "2024-09-20"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "304336835",
+       "data": "2024-09-23"
+      },
+      {
+       "desc": "Guia GRU",
+       "id": "304488632",
+       "data": "2024-09-23"
+      },
+      {
+       "desc": "Despacho: intimação do agravado",
+       "id": "304735007",
+       "data": "2024-09-27"
+      },
+      {
+       "desc": "Contraminuta do INMETRO",
+       "id": "306354865",
+       "data": "2024-10-04"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "376849363",
+       "data": "2026-06-09"
+      }
+     ],
+     "pendencias": "Ler o comprovante da GRU; conferir os marcos da prescrição",
+     "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Preparo com comprovante em imagem, juntado após a interposição (ID 304488633) [VALIDAR] · Sem pedido de efeito suspensivo · Pedido de restituição de valores bloqueados e não penhorados",
+     "assuntoDet": "Execução fiscal de multa do INMETRO — prescrição e prescrição intercorrente",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "fundamento": "Paradigma do gabinete: AI 5021280-19.2020.4.03.0000 (acórdão 3ª Turma, 24/11/2020: provido; multa administrativa, Lei 9.873/1999, prescrição intercorrente não consumada)"
+    }
    }
   },
   {
@@ -28649,13 +29129,15 @@
    "exequente": "ANS AGENCIA NACIONAL DE SAUDE SUPLEMENTAR",
    "executado": "UNIMED DE DOURADOS COOPERATIVA TRABALHO MEDICO",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal da ANS · multa administrativa · complementação do depósito em garantia (R$ 15.271,34) · perda do objeto alegada pelos embargos recebidos",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal foi indeferida (decisão ID 329270938), há contraminuta com preliminar de perda do objeto (ID 331441456) e a ANS já se manifestou sobre ela (ID 391331708), após o despacho ID 387570525 ‖ Proposta pelos precedentes: o depósito em garantia deve abranger a atualização e os juros do crédito; insuficiente o depósito, cabe a complementação → provimento, se afastada a perda do objeto [VALIDAR: Número da execução fiscal de origem; Recebimento dos embargos à execução e seus efeitos]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da ANS contra a decisão que, em execução fiscal contra a Unimed de Dourados, indeferiu a intimação da executada para complementar em R$ 15.271,34 o depósito em garantia, por entender integral o depósito feito pelo valor da última atualização (IDs 336802034 e 367818549 da origem). A tutela recursal foi indeferida (ID 329270938). A Unimed (ID 331441456) alega perda do objeto e, no mérito, o desprovimento; a ANS (ID 391331708) sustenta que o recebimento dos embargos não elimina a exigência de garantia integral.",
+   "peculiaridades": "A decisão ID 385481639 (Juiz Federal convocado Ney Gustavo Paes de Andrade) cancelou a distribuição por dependência aos autos 5003345-65.2021.4.03.6002 e mandou redistribuir livremente; o processo veio ao Gabinete A. O despacho ID 387570525 intimou a ANS sobre a preliminar da contraminuta. Etiqueta \"LOTE MULTA - AI\". Pedido de publicações em nome de Roaldo Pereira Espíndola (OAB/MS 10.109).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -28691,9 +29173,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução fiscal — garantia do juízo (ANS)",
+    "origem": "EF da 1ª Vara Federal de Dourados (número não indicado na petição [VALIDAR])",
+    "decisao_agravada": "IDs 336802034 e 367818549 (autos de origem)",
+    "recurso": "ID 329026399 · 27/06/2025",
+    "preparo": "Isenta (ANS)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: EF da 1ª Vara Federal de Dourados [VALIDAR número] · distribuição por dependência aos autos 5003345-65.2021.4.03.6002 cancelada pela decisão ID 385481639 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Número da execução fiscal de origem",
+    "[VALIDAR] Perda do objeto: embargos recebidos com garantia parcial?"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -28713,6 +29209,115 @@
     "ultima_movimentacao": "10/08/2026 18:13 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Execução fiscal da ANS — reforço da garantia por depósito insuficiente",
+   "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Tutela recursal indeferida (ID 329270938) · Preliminar de perda do objeto (ID 331441456), já respondida pela ANS (ID 391331708) · Diferença de R$ 15.271,34 no depósito em garantia · Publicações em nome de Roaldo Pereira Espíndola (OAB/MS 10.109)",
+   "teor": {
+    "sintese_fatica": "Em execução fiscal de multa da ANS contra a Unimed de Dourados, o juízo indeferiu o pedido de intimação da executada para complementar o depósito em garantia, por considerá-lo integral pelo valor da última atualização.",
+    "inicial": "Não consta nos autos do recurso",
+    "decisao_recorrida": "Decisões IDs 336802034 e 367818549 da origem: indeferiram a complementação do depósito (descritas na decisão ID 329270938).",
+    "recurso": "Agravo de instrumento ID 329026399 (27/06/2025): depósito insuficiente; necessidade de garantia integral para a execução e os embargos (artigos 9º, § 4º, 15, I, 32 e 38 da Lei 6.830/1980; Súmula 112/STJ); pede antecipação da tutela recursal e o reforço da penhora.",
+    "resposta": "Contraminuta da Unimed ID 331441456 (22/07/2025): perda do objeto; desprovimento. Manifestação da ANS ID 391331708 (10/08/2026): o recebimento dos embargos não elimina a exigência de garantia integral; não houve perda do objeto.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "ANS representada por procurador federal (dispensada a procuração). Agravada representada pelos advogados Roaldo Pereira Espíndola, Alexandre Magno Calegari Paulino e José Dionízio Fernandes Filho.",
+    "preparo": "Dispensado: autarquia federal."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal da ANS · multa administrativa · complementação do depósito em garantia (R$ 15.271,34) · perda do objeto alegada pelos embargos recebidos",
+     "sintese": "Em execução fiscal de multa da ANS contra a Unimed de Dourados, o juízo indeferiu o pedido de intimação da executada para complementar o depósito em garantia, por considerá-lo integral pelo valor da última atualização.",
+     "questoes": "1) Perda do objeto alegada pela agravada; 2) exigência de complementação do depósito em garantia na execução fiscal (garantia integral atualizada).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 329026399 (27/06/2025): depósito insuficiente; necessidade de garantia integral para a execução e os embargos (artigos 9º, § 4º, 15, I, 32 e 38 da Lei 6.830/1980; Súmula 112/STJ); pede antecipação da tutela recursal e o reforço da penhora.",
+      "contrarrazoes": "Contraminuta da Unimed ID 331441456 (22/07/2025): perda do objeto; desprovimento. Manifestação da ANS ID 391331708 (10/08/2026): o recebimento dos embargos não elimina a exigência de garantia integral; não houve perda do objeto."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "336802034",
+      "juizo": "1ª Vara Federal de Dourados",
+      "dispositivo": "Indeferiu a intimação para complementar o depósito em garantia."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "336802034"
+     },
+     "adm": {
+      "prot": "2025-06-27",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "329026399",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "329026399",
+       "data": "2025-06-27"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "329270938",
+       "data": "2025-06-30"
+      },
+      {
+       "desc": "Contraminuta (perda do objeto)",
+       "id": "331441456",
+       "data": "2025-07-22"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "366583198",
+       "data": "2026-04-15"
+      },
+      {
+       "desc": "Decisão: cancelamento da dependência e redistribuição livre",
+       "id": "385481639",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Despacho: manifestação sobre a preliminar",
+       "id": "387570525",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Manifestação da ANS",
+       "id": "391331708",
+       "data": "2026-08-10"
+      }
+     ],
+     "pendencias": "Conferir o número da origem e os embargos",
+     "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Tutela recursal indeferida (ID 329270938) · Preliminar de perda do objeto (ID 331441456), já respondida pela ANS (ID 391331708) · Diferença de R$ 15.271,34 no depósito em garantia · Publicações em nome de Roaldo Pereira Espíndola (OAB/MS 10.109)",
+     "assuntoDet": "Execução fiscal da ANS — reforço da garantia por depósito insuficiente",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-06-30",
+     "fundamento": "Paradigma do gabinete: AI 5011867-84.2017.4.03.0000 (acórdão 3ª Turma, 20/09/2017: desprovido; insuficiência do depósito judicial por atualização e juros e exigência de complementação)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público.",
+     "descPrelim": "Perda do objeto (contraminuta ID 331441456)"
+    }
    }
   },
   {
