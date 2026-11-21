@@ -12054,12 +12054,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "NASCENTE AZUL EMPREENDIMENTOS TURISTICOS LTDA",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · PERSE (Lei 14.148/2021): exclusão de CNAEs pela Portaria ME 11.266/2022 · CNAEs 9329-8/99 e 7990-2/00 · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 330284636) e remessa necessária da sentença ID 330284429; contrarrazões (ID 330284638); MPF sem intervenção (ID 330710455) ‖ Proposta pelos precedentes: Voto: examinar (1) a validade da Portaria ME 11.266/2022 e da Lei 14.592/2023 quanto à exclusão dos CNAEs; (2) a anterioridade como limite eventual; (3) o requisito do CADASTUR (Tema 1.283/STJ) para o CNAE de serviços turísticos; (4) o termo final do benefício (Lei 14.859/2024) [VALIDAR] [VALIDAR: Enquadramento dos CNAEs nos Anexos I/II da Portaria ME 7.163/2021; CADASTUR em 18/03/2022; Termo final do benefício (Lei 14.859/2024)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou a Portaria ME 11.266/2022 e manteve a Nascente Azul no PERSE, com alíquota zero de PIS, COFINS, IRPJ e CSLL, nos CNAEs 9329-8/99 e 7990-2/00. A União sustenta a validade da redução do rol (MP 1.147/2022 e Lei 14.592/2023).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12070,7 +12072,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — PERSE",
+    "origem": "Mandado de segurança 5002204-46.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 330284429 (01/04/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 330284636, 03/06/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -12080,6 +12093,132 @@
    "chegada": "15/07/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "PERSE — exclusão de CNAE pela Portaria ME 11.266/2022",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 330284429 · 01/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 330710455 · 14/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 1.283/STJ (CADASTUR prévio para prestadores de serviços turísticos; Simples Nacional): verificar se o CNAE 7990-2/00 é do Anexo II e se havia CADASTUR regular em 18/03/2022 (documento \"CADASTUR venc 2022\", ID 330284414) [VALIDAR] · Sentença afasta a Portaria por inteiro, não só pela anterioridade · Habilitação ao PERSE deferida (ID 330284428) · Extinção do benefício pelo artigo 4º-A da Lei 14.148/2021 (Lei 14.859/2024) [VALIDAR limite temporal] · Linha da 3ª Turma (2023): validade das normas complementares do PERSE (ApCiv 5009741-21.2022.4.03.6100)",
+   "teor": {
+    "sintese_fatica": "Nascente Azul Empreendimentos Turísticos Ltda. impugna a exclusão de seus CNAEs do PERSE pela Portaria ME 11.266/2022, invocando segurança jurídica, legalidade, anterioridade e isonomia. A liminar e a sentença mantiveram a alíquota zero.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 330284429 (01/04/2025): ratificou a liminar e concedeu a segurança para suspender, em relação à impetrante, a eficácia da Portaria ME 11.266/2022 quanto a fatos geradores a partir de janeiro/2023, mantidas as regras da Portaria ME 7.163/2021, e assegurar a alíquota zero do artigo 4º da Lei 14.148/2021 (PIS, COFINS, IRPJ e CSLL) sobre as atividades dos CNAEs 9329-8/99 e 7990-2/00.",
+    "recurso": "União (Fazenda Nacional) (ID 330284636, 03/06/2025): validade da alteração do rol de atividades pela Portaria ME 11.266/2022 (MP 1.147/2022) e pela nova redação do artigo 4º da Lei 14.148/2021 dada pela Lei 14.592/2023; inexistência de ofensa à anterioridade.",
+    "resposta": "Contrarrazões da impetrante (ID 330284638).",
+    "parecer": "MPF ID 330710455: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Fabio Monteiro Lima (OAB/DF 43.463) e Leonardo Rodrigues de Lima (OAB/DF 76.630).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · PERSE (Lei 14.148/2021): exclusão de CNAEs pela Portaria ME 11.266/2022 · CNAEs 9329-8/99 e 7990-2/00 · liminar deferida · segurança concedida",
+     "sintese": "Nascente Azul Empreendimentos Turísticos Ltda. impugna a exclusão de seus CNAEs do PERSE pela Portaria ME 11.266/2022, invocando segurança jurídica, legalidade, anterioridade e isonomia. A liminar e a sentença mantiveram a alíquota zero.",
+     "questoes": "1) PERSE: validade da exclusão de CNAEs pela Portaria ME 11.266/2022 e pela Lei 14.592/2023; 2) anterioridade; 3) CADASTUR (Tema 1.283/STJ).",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 330284636, 03/06/2025): validade da alteração do rol de atividades pela Portaria ME 11.266/2022 (MP 1.147/2022) e pela nova redação do artigo 4º da Lei 14.148/2021 dada pela Lei 14.592/2023; inexistência de ofensa à anterioridade.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 330284638)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "330284429",
+      "juizo": "Mandado de segurança 5002204-46.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "ratificou a liminar e concedeu a segurança para suspender, em relação à impetrante, a eficácia da Portaria ME 11.266/2022 quanto a fatos geradores a partir de janeiro/2023, mantidas as regras da Portaria ME 7.163/2021, e assegurar a alíquota zero do artigo 4º da Lei 14.148/2021 (PIS, COFINS, IRPJ e CSLL) sobre as atividades dos CNAEs 9329-8/99 e 7990-2/00."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-03-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "330284636",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "330284429",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Documento: CADASTUR (vencimento 2022)",
+       "id": "330284414",
+       "data": "2023-03-29"
+      },
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "330284420",
+       "data": "2023-05-02"
+      },
+      {
+       "desc": "Despacho: baixa em diligência",
+       "id": "330284426",
+       "data": "2024-06-28"
+      },
+      {
+       "desc": "Documento: habilitação ao PERSE deferida",
+       "id": "330284428",
+       "data": "2024-07-30"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "330284429",
+       "data": "2025-04-01"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "330284636",
+       "data": "2025-06-03"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "330284638",
+       "data": "2025-07-02"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "330710455",
+       "data": "2025-07-14"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 330284429 · 01/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 330710455 · 14/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 1.283/STJ (CADASTUR prévio para prestadores de serviços turísticos; Simples Nacional): verificar se o CNAE 7990-2/00 é do Anexo II e se havia CADASTUR regular em 18/03/2022 (documento \"CADASTUR venc 2022\", ID 330284414) [VALIDAR] · Sentença afasta a Portaria por inteiro, não só pela anterioridade · Habilitação ao PERSE deferida (ID 330284428) · Extinção do benefício pelo artigo 4º-A da Lei 14.148/2021 (Lei 14.859/2024) [VALIDAR limite temporal] · Linha da 3ª Turma (2023): validade das normas complementares do PERSE (ApCiv 5009741-21.2022.4.03.6100)",
+     "assuntoDet": "PERSE — exclusão de CNAE pela Portaria ME 11.266/2022",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "330710455",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 330284429 · 01/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 330710455 · 14/07/2025",
+    "ultima_informacao": "Informação · ID 330284639 · 03/07/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 330284429 · 01/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 330710455 · 14/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -12091,12 +12230,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "IPEDI MS INSTITUTO DO PANTANAL ESPECIALIZADO EM DIAGNOSTICO POR IMAGEM DO MATO GROSSO DO SUL LTDA",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares e de diagnóstico por imagem (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 340496844) e remessa necessária da sentença ID 340496838; contrarrazões com documentos novos (ID 340496845 e seguintes); MPF sem intervenção (ID 340691228) ‖ Proposta pelos precedentes: Voto: conferir a prova pré-constituída dos três requisitos (atividade, sociedade empresária registrada e licença sanitária vigente); desconsiderar ou não os documentos juntados com as contrarrazões [VALIDAR] [VALIDAR: Licença sanitária vigente (renovação protocolada, ID 340496730); Registro como sociedade empresária]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que assegurou ao IPEDI MS a base presumida de 8% (IRPJ) e 12% (CSLL) por serviços de diagnóstico por imagem. A União não impugna a tese do REsp 1.116.399/BA, mas a prova dos requisitos.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12107,7 +12248,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — IRPJ/CSLL (serviços hospitalares)",
+    "origem": "Mandado de segurança 5008585-36.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 340496838 (23/05/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 340496844, 23/09/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível (artigo 932, IV, b, do CPC): REsp 1.116.399/BA, se a prova pré-constituída bastar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -12117,6 +12269,127 @@
    "chegada": "27/10/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "IRPJ/CSLL — base de cálculo reduzida para serviços hospitalares (REsp 1.116.399/BA)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 340496838 · 23/05/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (agravado) · ID 374849974 · 20/05/2026 | última movimentação: 20/05/2026 15:33 · Juntada de Petição de substabelecimento · REsp 1.116.399/BA (repetitivo): interpretação objetiva de \"serviços hospitalares\" · Requisitos da Lei 11.727/2008: sociedade empresária e normas da Anvisa · Licença sanitária e alvará na inicial · Documentos juntados com as contrarrazões (notas fiscais e relação de funcionários): artigo 435 do CPC e prova pré-constituída",
+   "teor": {
+    "sintese_fatica": "IPEDI MS Instituto do Pantanal Especializado em Diagnóstico por Imagem Ltda., clínica de radiologia e ultrassom, pede a base de cálculo presumida reduzida do IRPJ e da CSLL. A sentença reconheceu os requisitos com base no contrato social, na licença sanitária e no alvará.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande (indicado na emenda à inicial).",
+    "decisao_recorrida": "Sentença ID 340496838 (23/05/2025): concedeu a segurança para declarar o direito da impetrante de aplicar os percentuais de 8% e 12% na apuração do IRPJ e da CSLL, com ressarcimento das custas.",
+    "recurso": "União (Fazenda Nacional) (ID 340496844, 23/09/2025): ausência de prova pré-constituída do preenchimento cumulativo dos requisitos (serviço hospitalar efetivo, sociedade empresária e normas da Anvisa), embora reconheça dispensa de recorrer quanto à tese do REsp 1.116.399/BA.",
+    "resposta": "Contrarrazões da impetrante com documentos (ID 340496845).",
+    "parecer": "MPF ID 340691228: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Rodrigo Martins Alcântara (OAB/MS 8.158).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares e de diagnóstico por imagem (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · segurança concedida",
+     "sintese": "IPEDI MS Instituto do Pantanal Especializado em Diagnóstico por Imagem Ltda., clínica de radiologia e ultrassom, pede a base de cálculo presumida reduzida do IRPJ e da CSLL. A sentença reconheceu os requisitos com base no contrato social, na licença sanitária e no alvará.",
+     "questoes": "1) Base de cálculo presumida reduzida do IRPJ e da CSLL para serviços de diagnóstico por imagem; 2) prova pré-constituída dos requisitos.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 340496844, 23/09/2025): ausência de prova pré-constituída do preenchimento cumulativo dos requisitos (serviço hospitalar efetivo, sociedade empresária e normas da Anvisa), embora reconheça dispensa de recorrer quanto à tese do REsp 1.116.399/BA.",
+      "contrarrazoes": "Contrarrazões da impetrante com documentos (ID 340496845)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "340496838",
+      "juizo": "Mandado de segurança 5008585-36.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar o direito da impetrante de aplicar os percentuais de 8% e 12% na apuração do IRPJ e da CSLL, com ressarcimento das custas."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "340496844",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "340496838",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Documento: licença sanitária",
+       "id": "340496729",
+       "data": "2024-08-08"
+      },
+      {
+       "desc": "Documento: alvará de localização",
+       "id": "340496783",
+       "data": "2024-08-08"
+      },
+      {
+       "desc": "Decisão: emenda para indicar a autoridade coatora",
+       "id": "340496828",
+       "data": "2024-11-29"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "340496838",
+       "data": "2025-05-23"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "340496844",
+       "data": "2025-09-23"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "340496845",
+       "data": "2025-10-14"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "340691228",
+       "data": "2025-10-23"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 340496838 · 23/05/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (agravado) · ID 374849974 · 20/05/2026 | última movimentação: 20/05/2026 15:33 · Juntada de Petição de substabelecimento · REsp 1.116.399/BA (repetitivo): interpretação objetiva de \"serviços hospitalares\" · Requisitos da Lei 11.727/2008: sociedade empresária e normas da Anvisa · Licença sanitária e alvará na inicial · Documentos juntados com as contrarrazões (notas fiscais e relação de funcionários): artigo 435 do CPC e prova pré-constituída",
+     "assuntoDet": "IRPJ/CSLL — base de cálculo reduzida para serviços hospitalares (REsp 1.116.399/BA)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "340691228",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/05/2026 15:33 · Juntada de Petição de substabelecimento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 340496838 · 23/05/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Substabelecimento (agravado) · ID 374849974 · 20/05/2026",
+    "ultima_informacao": "Informação · ID 340496852 · 22/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 340496838 · 23/05/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (agravado) · ID 374849974 · 20/05/2026 | última movimentação: 20/05/2026 15:33 · Juntada de Petição de substabelecimento"
    }
   },
   {
@@ -12128,12 +12401,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "UNIAO INDUSTRIA DE SUPLEMENTACAO ANIMAL LTDA",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM1",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) · modulação dos efeitos (RE 1.063.187 ED) · segurança concedida, com compensação",
+   "resultado": "Ato a proferir: apelação da União (ID 302872399) e remessa necessária da sentença ID 302872395 (repetida no ID 302872397); contrarrazões (ID 302872402); MPF sem intervenção (ID 307196964) ‖ Proposta pelos precedentes: Provimento parcial da apelação e da remessa, por decisão monocrática, para limitar os efeitos à modulação do Tema 962/STF e ajustar o regime da compensação [VALIDAR] [VALIDAR: Regime legal da compensação (artigo 74 da Lei 9.430/1996 e artigo 26-A da Lei 11.457/2007)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou o IRPJ e a CSLL sobre a SELIC da repetição de indébito. A ação é de 17/05/2022: incide a modulação do Tema 962/STF (efeitos a partir de 30/09/2021).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12144,7 +12419,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de provimento parcial (artigo 932, V, b, do CPC)",
+    "materia": "Tributário — IRPJ/CSLL (SELIC, Tema 962/STF)",
+    "origem": "Mandado de segurança 5001171-40.2022.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 302872395 (06/09/2023)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 302872399, 13/10/2023) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Sim (artigo 932, IV e V, b, do CPC): Tema 962/STF e embargos de declaração no RE 1.063.187",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -12154,6 +12440,122 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tema 962/STF — IRPJ/CSLL sobre a SELIC na repetição de indébito: modulação",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 302872401 · 24/05/2024 — despacho de inspeção ou correição | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 962/STF com modulação (RE 1.063.187 ED): ação ajuizada após 17/09/2021 · Linha da 3ª Turma (AgInt na ApelRemNec 5027214-54.2021.4.03.6100, 30/05/2023) · Remessa: compensação de IRPJ/CSLL rege-se pelo artigo 74 da Lei 9.430/1996, não pelo artigo 89 da Lei 8.212/1991 [VALIDAR] · Sentença em duplicidade (IDs 302872395 e 302872397) · Etiqueta \"Triagem - Giovana Sato\"",
+   "teor": {
+    "sintese_fatica": "União Indústria de Suplementação Animal Ltda. impetrou o mandado de segurança em 17/05/2022 para excluir a SELIC da repetição de indébito das bases do IRPJ e da CSLL. A sentença concedeu a segurança sem referência à modulação.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 302872395 (06/09/2023): concedeu a segurança para declarar o direito de não computar nas bases do IRPJ e da CSLL a taxa SELIC incidente sobre repetições de indébito e o direito à compensação após o trânsito em julgado (artigo 170-A do CTN), \"observado o artigo 89 da Lei 8.212/1991\".",
+    "recurso": "União (Fazenda Nacional) (ID 302872399, 13/10/2023): aplicação da modulação do Tema 962/STF (efeitos a partir de 30/09/2021, ressalvadas as ações ajuizadas até 17/09/2021); ausência parcial de interesse recursal quanto à tese.",
+    "resposta": "Contrarrazões da impetrante (ID 302872402).",
+    "parecer": "MPF ID 307196964: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Cerino Lorenzetti (OAB/PR 39.974) e outros.",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) · modulação dos efeitos (RE 1.063.187 ED) · segurança concedida, com compensação",
+     "sintese": "União Indústria de Suplementação Animal Ltda. impetrou o mandado de segurança em 17/05/2022 para excluir a SELIC da repetição de indébito das bases do IRPJ e da CSLL. A sentença concedeu a segurança sem referência à modulação.",
+     "questoes": "1) IRPJ/CSLL sobre a SELIC na repetição de indébito: modulação do Tema 962/STF; 2) regime legal da compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 302872399, 13/10/2023): aplicação da modulação do Tema 962/STF (efeitos a partir de 30/09/2021, ressalvadas as ações ajuizadas até 17/09/2021); ausência parcial de interesse recursal quanto à tese.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 302872402)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "302872395",
+      "juizo": "Mandado de segurança 5001171-40.2022.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+      "dispositivo": "concedeu a segurança para declarar o direito de não computar nas bases do IRPJ e da CSLL a taxa SELIC incidente sobre repetições de indébito e o direito à compensação após o trânsito em julgado (artigo 170-A do CTN), \"observado o artigo 89 da Lei 8.212/1991\"."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-05-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "302872399",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "302872395",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar não apreciada; conclusão para sentença",
+       "id": "302872394",
+       "data": "2023-01-13"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "302872395",
+       "data": "2023-09-06"
+      },
+      {
+       "desc": "Sentença (repetida)",
+       "id": "302872397",
+       "data": "2023-09-11"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "302872399",
+       "data": "2023-10-13"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "302872402",
+       "data": "2024-06-11"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "307196964",
+       "data": "2024-10-17"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 302872401 · 24/05/2024 — despacho de inspeção ou correição | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 962/STF com modulação (RE 1.063.187 ED): ação ajuizada após 17/09/2021 · Linha da 3ª Turma (AgInt na ApelRemNec 5027214-54.2021.4.03.6100, 30/05/2023) · Remessa: compensação de IRPJ/CSLL rege-se pelo artigo 74 da Lei 9.430/1996, não pelo artigo 89 da Lei 8.212/1991 [VALIDAR] · Sentença em duplicidade (IDs 302872395 e 302872397) · Etiqueta \"Triagem - Giovana Sato\"",
+     "assuntoDet": "Tema 962/STF — IRPJ/CSLL sobre a SELIC na repetição de indébito: modulação",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "307196964",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 302872401 · 24/05/2024 — despacho de inspeção ou correição",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024",
+    "ultima_informacao": "Ato ordinatório · ID 302872389 · 14/07/2022",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 302872401 · 24/05/2024 — despacho de inspeção ou correição | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
