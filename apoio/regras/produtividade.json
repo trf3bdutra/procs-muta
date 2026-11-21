@@ -1,9 +1,52 @@
 {
  "schema": "gabcmt.regras.produtividade",
  "versao": 1,
- "painel": { "liberacao": 5, "minutasDia": 3, "pertoMeta": 75, "redistribuir": true },
- "pesos": { "voto": 1, "ed": 0.5, "mono": 0.75, "despacho": 0.25, "diligencia": 0.25, "pendencia": 0.25, "revisao": 0.25, "complementar": 0.5, "cx1": 1, "cx2": 1.5, "cx3": 2 },
- "metaPadrao": { "voto": 3, "mono": 0 },
- "metas": { "VICTOR": { "voto": 4 }, "ESTELA": { "voto": 4 } },
- "atualizadoEm": "2026-11-16T23:30:00.000Z"
+ "painel": {
+  "liberacao": 5,
+  "minutasDia": 3,
+  "pertoMeta": 75,
+  "redistribuir": true
+ },
+ "pesos": {
+  "voto": 1,
+  "ed": 0.5,
+  "mono": 1,
+  "despacho": 0.25,
+  "diligencia": 0.25,
+  "pendencia": 0.25,
+  "revisao": 0.25,
+  "complementar": 0.5,
+  "cx1": 1,
+  "cx2": 2,
+  "cx3": 3
+ },
+ "metaPadrao": {
+  "voto": 3,
+  "mono": 0
+ },
+ "metas": {
+  "VICTOR": {
+   "voto": 4
+  },
+  "ESTELA": {
+   "voto": 4
+  }
+ },
+ "atualizadoEm": "2026-11-21T11:45:00.000Z",
+ "niveis": {
+  "_nota": "Pontos: despacho = pesos.despacho; serial = pesos.ed; padrão/intermediária/complexa = pesos.voto × cx1/cx2/cx3. O nível fixado no processo prevalece.",
+  "despacho": 0.25,
+  "serial": 0.5,
+  "padrao": 1,
+  "intermediaria": 2,
+  "complexa": 3,
+  "regras": [
+   "ED e Agravo Interno: serial",
+   "processo em lote: serial",
+   "juízo de retratação: intermediária",
+   "META 2: intermediária (em regra)",
+   "META 7: complexa",
+   "voto e monocrática: padrão"
+  ]
+ }
 }

@@ -211,7 +211,7 @@
       servidor: it.servidor || '', corretor: it.corretor || '', criterioMinuta: it.porD || '', criterioCorrecao: it.porC || '', julgamento: it.tipoManual || '', resultado: it.resultado || '',
       dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', obs: it.obs || '', ctl: ctlDe(it) }; });
   }
-  var CTL_K = ['itemAnterior','detalhes','mpf','parecer','prelim','tempest','preparo','repres','midias','resJulg','consect','honor','topico','intercor','etapa','meta','manual','cartao','editadoPor','editadoEm'];
+  var CTL_K = ['complexidade', 'itemAnterior','detalhes','mpf','parecer','prelim','tempest','preparo','repres','midias','resJulg','consect','honor','topico','intercor','etapa','meta','manual','cartao','editadoPor','editadoEm'];
   /* lote: marca do /lotes (coleção, item e autos), gravada por outro caminho; o motor a lê e precisa devolvê-la intacta.
      _ck: chaves de ctl que vieram do arquivo; as que o motor não conhece também voltam como estavam */
   function ctlDe(it) { var o = {}; CTL_K.concat(['lote'], it._ck || []).forEach(function (k) { if (k !== '_ck' && it[k] && !(k in o)) o[k] = it[k]; }); return o; }
@@ -583,12 +583,13 @@
 
   /* ================= regras do Gabinete CMT: dias úteis, pontos, capacidade e cota =================
      Calendário: dia útil = dia da semana de expediente fora dos dias excluídos (calendário do gabinete).
-     Pontos: peso do tipo (voto, ED/AgInt) × multiplicador da complexidade (Ω, Α, Σ); tabela em apoio/regras/produtividade.json.
+     Pontos (níveis de complexidade, apoio/regras/produtividade.json): despacho 0,25 · serial 0,5 (ED, AgInt e lote) · padrão 1 (voto e monocrática)
+     · intermediária 2 (juízo de retratação e META 2, em regra) · complexa 3 (META 7). O nível fixado à mão no processo prevalece.
      Capacidade: dias úteis de cada servidor no período, descontadas as ausências; a cota da sessão é proporcional a esses dias. */
   var PROD = null;
   function regraPainel() { var p = (PROD && PROD.painel) || {}, n = function (v, d, a, b) { if (v == null || String(v).trim() === '') return d; var x = Number(String(v).replace(',', '.')); return isFinite(x) && x >= a && x <= b ? x : d; };
     return { liberacao: Math.round(n(p.liberacao, 5, 0, 30)), minutasDia: n(p.minutasDia, 3, 0.5, 20) }; }
-  function pesos() { var d = { voto: 1, ed: 0.5, mono: 0.75, cx1: 1, cx2: 1.5, cx3: 2 }, p = (PROD && PROD.pesos) || {}, o = {}; Object.keys(d).forEach(function (k) { var x = Number(p[k]); o[k] = isFinite(x) && x >= 0 && p[k] !== '' && p[k] != null ? x : d[k]; }); o.agint = o.ed; return o; }
+  function pesos() { var d = { voto: 1, ed: 0.5, mono: 1, cx1: 1, cx2: 2, cx3: 3 }, p = (PROD && PROD.pesos) || {}, o = {}; Object.keys(d).forEach(function (k) { var x = Number(p[k]); o[k] = isFinite(x) && x >= 0 && p[k] !== '' && p[k] != null ? x : d[k]; }); o.agint = o.ed; return o; }
   function isoMais(d, n) { var x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); }
   function dataOk(d) { return /^(20\d{2}|2100)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(d || '') && new Date(d + 'T12:00:00Z').toISOString().slice(0, 10) === d; }
   function util(d) { var c = calendario(), wd = c.weekdays && c.weekdays.length ? c.weekdays : [1, 2, 3, 4, 5]; return /^\d{4}-\d{2}-\d{2}$/.test(d || '') && wd.indexOf(new Date(d + 'T12:00:00Z').getUTCDay()) >= 0 && (c.excluded || []).indexOf(d) < 0; }
@@ -675,8 +676,21 @@
     });
     HIST = H; return H;
   }
-  function pesoItem(i) { var r = acervo().by.get(dig(i.cnj)), W2 = pesos(), k = ''; try { k = julgKey(i, infoItem(i)); } catch (e) {}
-    var t = k === 'ED' ? W2.ed : k === 'AgInt' ? W2.agint : W2.voto, cx = cxDe(i.complexidade || (r && (r.COMPLEXIDADE || r.Dificuldade)) || ''); return Math.round(t * W2['cx' + cx] * 100) / 100; }
+  /* nível de complexidade do processo: o fixado no processo prevalece; sem ele, ED/AgInt e lote são serial, META 7 é complexa,
+     juízo de retratação e META 2 são intermediária; depois, a complexidade marcada no acervo; no mais, padrão */
+  var NIVEL_PT = { serial: 0, padrao: 1, intermediaria: 2, complexa: 3 };
+  function nivelDe(v) { var t = N(v); if (!t) return ''; if (/serial|model/.test(t)) return 'serial'; var c = cxDe(v); return c === 3 ? 'complexa' : c === 2 ? 'intermediaria' : 'padrao'; }
+  function nivelItem(i) { var r = acervo().by.get(dig(i.cnj)), k = '', inf = null; try { inf = infoItem(i); k = julgKey(i, inf); } catch (e) {}
+    var fx = nivelDe(i.complexidade); if (fx) return { n: fx, por: 'fixado no processo' };
+    var ms = ((inf && inf.c && inf.c.metas) || []).concat(i.meta ? [i.meta] : []).map(function (m) { return String(m).replace(/^\s*(meta\s*)?m?\s*/i, ''); });
+    if (k === 'ED' || k === 'AgInt') return { n: 'serial', por: k };
+    if (ms.some(function (m) { return /^7/.test(m); })) return { n: 'complexa', por: 'META 7' };
+    if (k === 'JR') return { n: 'intermediaria', por: 'juízo de retratação' };
+    if (ms.some(function (m) { return /^2/.test(m); })) return { n: 'intermediaria', por: 'META 2' };
+    if (i.lote && (i.lote.id || i.lote.colecao || typeof i.lote === 'string')) return { n: 'serial', por: 'lote' };
+    var ac = nivelDe(r && (r.COMPLEXIDADE || r.Dificuldade)); if (ac && ac !== 'padrao') return { n: ac, por: 'complexidade no acervo' };
+    return { n: 'padrao', por: 'padrão' }; }
+  function pesoItem(i) { var W2 = pesos(), n = nivelItem(i).n; return Math.round((n === 'serial' ? W2.ed : W2.voto * W2['cx' + NIVEL_PT[n]]) * 100) / 100; }
   function carga(nome, kind, ss) { if (Date.now() - CARC.t > 3000) CARC = { t: Date.now(), v: {} };
     var sig = kind + '|' + ss.id + '|' + ss.itens.length + '|' + ss.itens.map(function (i) { return (kind === 'd' ? i.servidor : i.corretor) || ''; }).join(','), M = CARC.v[sig];
     if (!M) { M = {}; ss.itens.forEach(function (i) { var p = kind === 'd' ? i.servidor : i.corretor; if (!p) return; var k = N(nomeCad(p)); M[k] = (M[k] || 0) + pesoItem(i); }); CARC.v[sig] = M; }
@@ -1991,6 +2005,10 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     aba: function () { return root && !root.hidden ? UI.aba : ''; },
     novaSessao: function (data) { if (!/^\d{4}-\d{2}-\d{2}$/.test(data || '')) return { erro: 'Informe a data do julgamento.' }; if (S.sessoes.some(function (x) { return x.data === data; })) return { erro: 'Já existe a sessão de ' + br(data) + '.' }; var ns = novaSessao(data); S.sessoes.push(ns); marcosParaPainel(ns); salvar(); if (root && !root.hidden) render(); return { id: ns.id }; },
     /* marco: data ISO válida (anos 2000 a 2100) ou vazio; ano digitado errado (0001) não entra */
+    /* nível de complexidade fixado à mão no processo ('' volta à regra): serial, padrao, intermediaria, complexa */
+    definirNivel: function (id, cnjv, n) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; var it = sf.itens.find(function (x) { return dig(x.cnj) === dig(cnjv); }); if (!it) return false;
+      n = nivelDe(n); if (n) it.complexidade = n; else delete it.complexidade; COT = { k: '', t: 0, v: null }; salvar(); return true; },
+    nivel: function (id, cnjv) { var sf = S.sessoes.find(function (x) { return x.id === id; }); var it = sf && sf.itens.find(function (x) { return dig(x.cnj) === dig(cnjv); }); return it ? Object.assign(nivelItem(it), { pts: pesoItem(it) }) : null; },
     fase: function (id, k, v) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; if (v && !dataOk(v)) { toast('Data inválida: ' + v + '. Use DD/MM/AAAA com ano entre 2000 e 2100.'); return false; } sf.fases = sf.fases || {}; sf.fases[k] = v || ''; salvar(); marcosParaPainel(sf); if (root && !root.hidden) render(); return true; },
     /* muda a data da sessão: o JSON da pauta passa a AAAA-MM-DD.json da nova data e o antigo é apagado na próxima gravação */
     data: function (id, nova) { nova = String(nova || '').slice(0, 10); if (!/^\d{4}-\d{2}-\d{2}$/.test(nova)) return { erro: 'Data inválida.' };
@@ -2076,7 +2094,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       /* marcos invertidos: ausências e cotas pelo período efetivo, em vez de marcar todos como ausentes */
       var pe = periodo(ss); if (pe.invertido) { de = pe.de; ate = pe.ate; }
       var linhas = ss.itens.slice().sort(function (a, b) { return (+a.item || 0) - (+b.item || 0); }).map(function (it) { var inf = infoItem(it);
-        return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tipo: julgKey(it, inf), servidor: it.servidor || '', corretor: it.corretor || '', porD: it.porD || '', porC: it.porC || '',
+        return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tipo: julgKey(it, inf), nivel: nivelItem(it).n, nivelPor: nivelItem(it).por, pts: pesoItem(it), servidor: it.servidor || '', corretor: it.corretor || '', porD: it.porD || '', porC: it.porC || '',
           sugD: it.servidor ? null : escolher('d', it, ss), sugC: it.corretor ? null : escolher('c', it, ss) }; });
       var gente = function (kind) { return pool(kind).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss) || foraSes(m, ss, kind), fora: foraSes(m, ss, kind), atual: ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(m.nome); }).length }; }); };
       return { criterios: D.ordem.map(function (cid) { return { id: cid, t: CRIT_T[cid] || cid, d: !!(D.on[cid] && D.on[cid].d), c: !!(D.on[cid] && D.on[cid].c) }; }), equilibrar: D.equilibrar !== false, escopo: ss.desigOverride ? 'sessao' : 'geral',
@@ -2099,6 +2117,10 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         /* trocar: a mesa de designação pode substituir quem já estava designado (vazio continua sem efeito) */
         if (o.d && (!it.servidor || (o.trocar && it.servidor !== o.d))) { it.servidor = o.d; it.porD = o.porD || 'esteira'; m = 1; } if (o.c && (!it.corretor || (o.trocar && it.corretor !== o.c))) { it.corretor = o.c; it.porC = o.porC || 'esteira'; m = 1; } n += m; });
       if (n) { HIST = null; salvar(); if (root && !root.hidden) render(); } return n; },
+    /* limpa minutante e corretor da pauta (para refazer a designação); processo já minutado ou corrigido fica; devolve o que tirou, para desfazer */
+    limparDesignacao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return []; var bk = [];
+      ss.itens.forEach(function (it) { if (it.dataMinuta || it.dataCorrecao || (!it.servidor && !it.corretor)) return; bk.push({ cnj: it.cnj, d: it.servidor || '', c: it.corretor || '', porD: it.porD || '', porC: it.porC || '' }); it.servidor = ''; it.corretor = ''; it.porD = ''; it.porC = ''; });
+      if (bk.length) { HIST = null; COT = { k: '', t: 0, v: null }; salvar(); if (root && !root.hidden) render(); } return bk; },
     confirmarPauta: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.conferencia = Object.assign({}, ss.conferencia || {}, { confirmada: hoje() }); salvar(); return true; },
     /* publicar a pauta à equipe (Ex Officio): libera a listagem e os marcos; retirar devolve só os marcos */
     publicar: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss || !ss.itens.length) return false; ss.pronta = on === false ? '' : hoje(); ss.publicada = on !== false; if (ss.publicada) ss.marcosPub = true; salvar(); if (root && !root.hidden) render(); return true; },
