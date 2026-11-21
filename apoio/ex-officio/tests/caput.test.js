@@ -233,5 +233,5 @@ test('Triagem: Acervo filtrado com faixa de cabeçalho e seletor segmentado; Vis
 
 test('Cartões de indicadores no padrão da Visão geral (Chefia, Coordenação, Comunicação, Pautas e mesa); fundo geral mais claro',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  for(const x of [':root{--bg:#f8f6f0;','.cg-top .cg-faixa>div,.cwe-kpis>span,.cwe-kpis>button{display:flex;flex-direction:column','box-shadow:inset 0 3px 0 var(--kc)','.kp>div:nth-child(4n+1){--kc:#a57829}'])assert.ok(cap.includes(x),x);
+  for(const x of [':root{--bg:#fcfbf8;','.cg-top .cg-faixa>div,.cwe-kpis>span,.cwe-kpis>button{display:flex;flex-direction:column','box-shadow:inset 0 3px 0 var(--kc)','.kp>div:nth-child(4n+1){--kc:#a57829}'])assert.ok(cap.includes(x),x);
 });
