@@ -108,3 +108,8 @@ test('Calendário: os cartões de "Sessões em andamento" ocupam a largura dispo
   const fs=require('fs'),p=require('path'),css=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/css/02-calendario.css'),'utf8');
   assert.ok(css.includes('.cc-dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))'),'auto-fit');
 });
+
+test('Triagem › Visão geral: cabeçalhos com fundo próprio',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('.tri-vg-h{background:#e9f0ed')&&cap.includes('.tri-vg-c .ch{background:#eef3f1'),'fundo dos cabeçalhos');
+});
