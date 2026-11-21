@@ -52,23 +52,28 @@ for p in glob.glob(str(R / 'acervo/lotes/*.json')):
         ctl = ((it.get('prontuario_triagem') or {}).get('ctl') or {})
         for k in PRONT:
             if ctl.get(k):
-                espec.setdefault(dg(it.get('processo')), {})[k] = V.norm(k, ctl[k])
+                espec.setdefault(dg(it.get('processo')), {})[k] = ctl[k]
 for p in glob.glob(str(R / 'acervo/sessoes/*.json')):
     S = carrega(p)
     for it in S.get('itens', []) if isinstance(S, dict) else []:
         ctl = it.get('ctl') or {}
         for k in PRONT:
             if ctl.get(k) and k not in espec.get(dg(it.get('cnj')), {}):
-                espec.setdefault(dg(it.get('cnj')), {})[k] = V.norm(k, ctl[k])
+                espec.setdefault(dg(it.get('cnj')), {})[k] = ctl[k]
 
 # 2. ficha do processo (operacional)
+FONTE = {dg(x.get('processo') or x.get('Processo')): x for x in carrega(R / 'acervo/fonte.json').get('registros', [])}
+OBS_AUTO = 'Dispensada a procuração: representação por procurador público ou DPU.'
 op_p = R / 'acervo/operacional.json'
 OP = carrega(op_p); n_op = 0
 for r in OP.get('registros', []):
     t = r.get('triagem') or {}
     if not t:
         continue
-    ctx = {'ajg': t.get('AJG'), 'dpu': t.get('DPU (controle)'), 'obs': t.get('Observação da Representação')}
+    if t.get('Observação da Representação') == OBS_AUTO:
+        t['Observação da Representação'] = ''; mud['ficha · observação automática removida'] += 1
+    dpu = t.get('DPU (controle)') or (FONTE.get(dg(r.get('processo'))) or {}).get('dpu')
+    ctx = {'ajg': t.get('AJG'), 'dpu': dpu, 'obs': t.get('Observação da Representação')}
     antes = json.dumps(t, ensure_ascii=False, sort_keys=True)
     for chave, k in FICHA.items():
         v = t.get(chave)
@@ -80,6 +85,7 @@ for r in OP.get('registros', []):
         else:
             n = norma(k, v, ctx)
         e = espec.get(dg(r.get('processo')), {}).get(k)
+        e = V.norm(k, e, ctx) if e else e
         if e and e in V.lista(k) and V.N(v) in GENERICOS and V.classe(k, e) == V.classe(k, n):
             n = e
         if n != v:
@@ -97,10 +103,11 @@ for p in sorted(glob.glob(str(R / 'acervo/sessoes/*.json'))):
     S = carrega(p); alt = False
     for it in S.get('itens', []) if isinstance(S, dict) else []:
         ctl = it.get('ctl') or {}
+        cx = {'dpu': (FONTE.get(dg(it.get('cnj'))) or {}).get('dpu')}
         for k in PRONT:
             v = ctl.get(k)
             if isinstance(v, str) and v:
-                n = norma(k, v)
+                n = norma(k, v, cx)
                 if n != v:
                     ctl[k] = n; mud['pauta · ' + k] += 1; alt = True
         pap = (ctl.get('cartao') or {}).get('papeis')
@@ -120,10 +127,11 @@ for p in sorted(glob.glob(str(R / 'acervo/lotes/*.json'))):
     for it in (its if isinstance(its, list) else list(its.values())):
         PT = it.get('prontuario_triagem') or {}
         ctl = PT.get('ctl') or {}
+        cx = {'dpu': (FONTE.get(dg(it.get('processo'))) or {}).get('dpu')}
         for k in PRONT:
             v = ctl.get(k)
             if isinstance(v, str) and v:
-                n = norma(k, v)
+                n = norma(k, v, cx)
                 if n != v:
                     ctl[k] = n; mud['lote · ' + k] += 1; alt = True
         pap = (PT.get('cartao') or {}).get('papeis')

@@ -30,7 +30,7 @@ def lista(c):
 
 def _resolve(alvo, ctx):
     ctx = ctx or {}
-    obs = re.sub(r'\(proc\. público/DPU\)|DPU/ente público', '', ctx.get('obs') or '', flags=re.I)
+    obs = re.sub(r'\(proc\. público/DPU\)|DPU/ente público|procurador público ou DPU', '', ctx.get('obs') or '', flags=re.I)
     dpu = _sim(ctx.get('dpu')) or bool(re.search(r'DPU|Defensoria', obs, re.I))
     ajg = _sim(ctx.get('ajg'))
     if alvo == '@dispensado':

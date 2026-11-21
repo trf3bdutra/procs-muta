@@ -10,7 +10,7 @@
   function campo(c) { return (D.campos || {})[c] || null; }
   function lista(c) { var f = campo(c); return f ? f.opcoes.map(function (o) { return o[0]; }) : []; }
   function resolve(alvo, ctx) {
-    ctx = ctx || {}; var obs = String(ctx.obs || '').replace(/\(proc\. público\/DPU\)|DPU\/ente público/gi, ''), dpu = sim(ctx.dpu) || /DPU|Defensoria/i.test(obs), ajg = sim(ctx.ajg);
+    ctx = ctx || {}; var obs = String(ctx.obs || '').replace(/\(proc\. público\/DPU\)|DPU\/ente público|procurador público ou DPU/gi, ''), dpu = sim(ctx.dpu) || /DPU|Defensoria/i.test(obs), ajg = sim(ctx.ajg);
     if (alvo === '@dispensado') return dpu ? 'Assistência da DPU' : ajg ? 'Justiça gratuita' : 'Isento (ente público/MP)';
     if (alvo === '@isento') return dpu ? 'Assistência da DPU' : 'Isento (ente público/MP)';
     if (alvo === '@dispensada') return dpu ? 'Dispensada (DPU)' : 'Dispensada (procurador público)';
