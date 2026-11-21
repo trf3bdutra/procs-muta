@@ -102,6 +102,6 @@ test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por
 test('Coordenação: seções no padrão da Chefia',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   const i=cap.indexOf('function vCoordenacao(){'),v=cap.slice(i,cap.indexOf('\nconst CG_REL_CAT=[',i));
-  assert.ok(v.includes('<div class="wrap cg-chefia"><div class="cg-top">')&&v.includes("cx('Equipe e regras'")&&v.includes("cx('Operação diária'")&&v.includes('id="cg-coord"'),'Coordenação');
-  assert.ok(cap.includes('<section class="cg-px cg-comp-p"><header>'),'Competências em painel');
+  assert.ok(v.includes('<div class="wrap cg-chefia co-cab"><div class="cg-top">')&&!v.includes("Operação diária"),'cabeçalho da Coordenação');
+  assert.ok(cap.includes('<div class="co-lay"><section class="cg-px cg-comp-p"><header>')&&cap.includes('<aside class="co-lado"><section class="cg-px">')&&cap.includes('<div id="cg-coord" aria-label="Equipe e regras">'),'Competências principal e Equipe e regras lateral');
 });
