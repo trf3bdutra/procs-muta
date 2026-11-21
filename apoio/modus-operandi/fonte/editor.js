@@ -80,7 +80,19 @@ var ED_NOR=[['Código','Código (identificador)','t',null,1],['Diploma','Diploma
   ['Assunto','Assunto','t'],['Texto literal','Texto literal','A'],['Observação','Observação','a']];
 var ED_DIRPRE={preferencia:'red-dir-',conectivo:'red-con-',verbo:'red-vrb-',correcao:'red-cor-',alerta:'red-ale-'};
 function edSug(k){var c={};edLista().forEach(function(r){var v=r[k];if(typeof v==='string'&&v&&v.length<80)c[v]=(c[v]||0)+1;});return Object.keys(c).sort(function(a,b){return c[b]-c[a];}).slice(0,80);}
+/* no painel do desembargador, o padrão de busca das correções e alertas aparece como palavra ou expressão, sem expressão regular */
+var EDPAL=/^(?:\\b)?((?:[^\\\[\]().*+?{}|^$]|\\s\+)+?)(?:\\b)?$/,EDPALS=/^(?:[^\\\[\]().*+?{}|^$]|\\s\+)+$/;
+function edPalDe(v){v=String(v||'');var m=EDPAL.exec(v);if(m)return m[1].replace(/\\s\+/g,' ');
+  var g=/^\\b\((?:\?:)?(.+)\)\\b$/.exec(v);if(g){var P=g[1].split('|');if(P.every(function(p){return EDPALS.test(p);}))return P.map(function(p){return p.replace(/\\s\+/g,' ');}).join(', ');}
+  return null;}
+function edPalEsc(w){return w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+/g,'\\s+');}
+function edPalPara(w){w=String(w||'').trim();if(!w)return '';var P=w.split(/\s*,\s*/).filter(Boolean);
+  if(P.length>1)return '\\b(?:'+P.map(edPalEsc).join('|')+')\\b';
+  return (/^[A-Za-z0-9_]/.test(w)?'\\b':'')+edPalEsc(w)+(/[A-Za-z0-9_]$/.test(w)?'\\b':'');}
+if(EDCMT){ED_DIR.correcao=[['motivo','Motivo (como aparece no aviso)','a'],['padrao','Palavra ou expressão a procurar','w'],['substituir','Substituir por','t']];
+  ED_DIR.alerta=[['mensagem','Mensagem','a'],['escopo','Onde (ementa, voto, relatório…)','t'],['padrao','Palavra ou expressão a procurar','w']];}
 function edCampo(r,f){var k=f[0],v=r[k],id='edf-'+k.replace(/[^A-Za-z0-9_-]/g,'_'),h='<label class="edf'+(f[4]?' req':'')+'"><span>'+esc(f[1])+(f[4]?' <i>obrigatório</i>':'')+'</span>';
+  if(f[2]==='w'){var pw=edPalDe(v);return pw===null?h+'<p class="meta">Regra de busca especial, mantida como está.</p></label>':h+'<input id="'+id+'" data-k="'+k+'" data-pal="1" value="'+esc(pw)+'" placeholder="ex.: writ  ·  várias, separadas por vírgula"></label>';}
   if(f[2]==='s')h+='<select id="'+id+'" data-k="'+k+'">'+(f[3].indexOf(v)<0&&v?'<option>'+esc(v)+'</option>':'')+f[3].map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';
   else if(f[2]==='a'||f[2]==='A')h+='<textarea id="'+id+'" data-k="'+k+'" class="ed-auto" rows="'+(f[2]==='A'?6:2)+'">'+esc(v==null?'':v)+'</textarea>';
   else if(f[2]==='j')h+='<textarea id="'+id+'" data-k="'+k+'" data-json="1" rows="4" spellcheck="false" class="mono ed-auto">'+esc(v==null?'':JSON.stringify(v,null,1))+'</textarea>';
@@ -188,6 +200,7 @@ function edLerForm(r){
   if(EDS.col==='pec')return edLerPeca(r);
   $$('#ed-form [data-k]').forEach(function(i){var k=i.getAttribute('data-k'),v=i.value;
     if(i.getAttribute('data-json')){if(!v.trim()){delete r[k];return;}try{r[k]=JSON.parse(v);}catch(e){erro='JSON inválido em “'+k+'”.';}return;}
+    if(i.getAttribute('data-pal')){if(edPalDe(r[k])===v.trim())return;r[k]=edPalPara(v);if(r[k]&&!r.flags)r.flags='i';return;}
     if(v===''&&!(k in r))return;r[k]=v;});
   if(EDS.col==='mod'){r.esqueletoModelo=edLerEsq(r);var pm=$('#ed-pm');if(pm){try{var pj=JSON.parse(pm.value||'[]'),pa=typeof r.paragrafosModelo==='string'?jp(r.paragrafosModelo):r.paragrafosModelo;if(JSON.stringify(pj)!==JSON.stringify(pa))r.paragrafosModelo=typeof r.paragrafosModelo==='string'?pyDumps(pj):pj;}catch(e){erro='JSON inválido nos parágrafos alternativos.';}}
     if(r.dataReferencia&&!/^\d{4}-\d{2}-\d{2}$/.test(r.dataReferencia))erro='Data de referência no formato AAAA-MM-DD.';if(!r.assunto)erro='Informe o assunto.';if(!r.nomeModelo)erro='Informe o nome do modelo.';}
