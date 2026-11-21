@@ -1986,6 +1986,10 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <span>Diligências</span>
         <i class="cmt-mobile-count" data-cmt-count="dil" hidden></i>
       </button>
+      <button type="button" class="cmt-mobile-action" data-cmt-dock="m" aria-label="Gabinete" aria-pressed="false">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M4 10h16M12 3 4 7v3h16V7l-8-4zM6 10v8M10 10v8M14 10v8M18 10v8"/></svg>
+        <span>Gabinete</span>
+      </button>
     </nav>
   </div>
 </main>
@@ -4670,7 +4674,7 @@ function cmtMobileSync(){
   else{
    var n=c[k]||0,b=bt.querySelector('[data-cmt-count]');
    if(b){b.textContent=n>99?'99+':String(n);b.hidden=!n;}
-   bt.setAttribute('aria-label',({pauta:'Pauta',a:'Assinar',u:'Urgências',d:'Dúvidas',not:'Notificações',dil:'Diligências'})[k]+(n?' · '+n+' registros':''));
+   bt.setAttribute('aria-label',({pauta:'Pauta',m:'Gabinete',a:'Assinar',u:'Urgências',d:'Dúvidas',not:'Notificações',dil:'Diligências'})[k]+(n?' · '+n+' registros':''));
   }
  });
  var vis=$('#cmt-vis'),hh=document.querySelector('.cmt-mobile-pn-h'),h2a=document.querySelector('#cmt-ass>h2');
@@ -4823,15 +4827,23 @@ if(n)n.textContent=T.length+(T.length===1?' diligência':' diligências');
 var nm=T.filter(function(x){return x.minha;}).length;if(h){h.textContent=nm;h.hidden=!nm;}
 [].forEach.call(document.querySelectorAll('[data-cdf]'),function(z){z.setAttribute('aria-pressed',String(z.getAttribute('data-cdf')===f));});
 if(!el)return;
-var COL=['A fazer','Em andamento','Em revisão','Concluída'];
-el.innerHTML=COL.map(function(c){
-  var dd=L.filter(function(x){return (x.etapa||'A fazer')===c;});
-  return '<div class="cmt-col"><p class="cmt-col-h">'+c+'<i>'+dd.length+'</i></p>'+
-    (dd.length?dd.map(function(x){return '<div class="cmt-card'+(x.minha?' eu':'')+(/urgente/i.test(x.prioridade)?' urg':'')+'">'+
+var COL=['A fazer','Em andamento','Em revisão','Urgências','Concluída'];
+/* seções minimizáveis; Urgências (geradas das monocráticas) e Concluída começam fechadas */
+CMT.dilAb=CMT.dilAb||{'Urgências':false,'Concluída':false};
+var ehUrg=function(x){return /urgente/i.test(x.prioridade||'')||/^urg[eê]ncia\b/i.test(x.titulo||'');};
+var cartao=function(x){return '<div class="cmt-card'+(x.minha?' eu':'')+(ehUrg(x)?' urg':'')+'">'+
       (x.pedido?'<em class="cmt-tg">pedido</em>':'')+'<b>'+esc(x.titulo||'')+'</b>'+
       (x.texto?'<p>'+esc(x.texto)+'</p>':'')+
-      '<small>'+esc([x.prioridade,x.para?'com '+x.para:'sem responsável',x.de?'de '+x.de:'',x.prazo?'prazo '+br(x.prazo):'',x.em?br(String(x.em).slice(0,10)):''].filter(Boolean).join(' · '))+'</small></div>';}).join('')
-      :'<p class="cmt-vazio">—</p>')+'</div>';}).join('');}
+      '<small>'+esc([x.prioridade,x.para?'com '+x.para:'sem responsável',x.de?'de '+x.de:'',x.prazo?'prazo '+br(x.prazo):'',x.em?br(String(x.em).slice(0,10)):''].filter(Boolean).join(' · '))+'</small></div>';};
+el.innerHTML=COL.map(function(c){
+  var dd=c==='Urgências'?L.filter(function(x){return ehUrg(x)&&(x.etapa||'A fazer')!=='Concluída';})
+    :L.filter(function(x){return (x.etapa||'A fazer')===c&&(c==='Concluída'||!ehUrg(x));});
+  if(c==='Urgências'&&!dd.length)return '';
+  var ab=CMT.dilAb[c]!==false;
+  return '<details class="cmt-col'+(c==='Urgências'?' cmt-col-urg':'')+'" data-dsec="'+esc(c)+'"'+(ab?' open':'')+'><summary class="cmt-col-h">'+c+'<i>'+dd.length+'</i></summary>'+
+    (dd.length?dd.map(cartao).join(''):'<p class="cmt-vazio">—</p>')+'</details>';}).join('');}
+document.addEventListener('toggle',function(e){var d=e.target;if(!d||!d.getAttribute||!d.getAttribute('data-dsec'))return;
+  CMT.dilAb=CMT.dilAb||{};CMT.dilAb[d.getAttribute('data-dsec')]=d.open;},true);
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-cdf]');if(!b)return;CMT.dilf=b.getAttribute('data-cdf');cmtDilig();});
 /* painéis próprios: notificações à direita, diligências em faixa larga */
 function cmtPainel(k,ab){if(k==='dil'&&!cmtMobileMode()){cmtGv(ab?'dil':null,true);return;}
@@ -9120,6 +9132,14 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 /* ===== Painel do Desembargador no celular · redesign de 20/11/2026 =====
    Última camada de estilo da página: só vale até 780px e só no #v-cmt; o computador não muda. */
 .cmt-mais-m{display:none}
+#v-cmt details.cmt-col>summary.cmt-col-h{cursor:pointer;list-style:none;user-select:none;justify-content:flex-start;min-height:36px}
+#v-cmt details.cmt-col>summary.cmt-col-h::-webkit-details-marker{display:none}
+#v-cmt details.cmt-col>summary.cmt-col-h::before{content:"";display:inline-block;width:6px;height:6px;margin:0 9px 2px 2px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);transition:transform .15s}
+#v-cmt details.cmt-col[open]>summary.cmt-col-h::before{transform:rotate(45deg);margin-bottom:4px}
+#v-cmt details.cmt-col>summary.cmt-col-h i{margin-left:auto}
+#v-cmt details.cmt-col:not([open])>summary.cmt-col-h{margin-bottom:0}
+#v-cmt .cmt-cols4>details.cmt-col-urg{grid-column:1/-1}
+#v-cmt .cmt-cols4>details.cmt-col-urg>summary.cmt-col-h{color:var(--er);border-bottom-color:var(--er)}
 #v-cmt #cmt-b-bus{display:none!important}
 #cmt-prog .cmt-pl{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:11px;color:var(--em)}
 #cmt-prog .cmt-pl i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
@@ -9195,8 +9215,9 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
   #v-cmt #cmt-rows .cmt-mais-m{display:inline-grid!important;place-items:center;margin-left:auto;width:36px;height:30px;border:0;background:none;color:var(--em);font:700 16px/1 Inter,system-ui,sans-serif;letter-spacing:1px;border-radius:8px;cursor:pointer}
   #v-cmt #cmt-rows tr.cmt-ac-on .cmt-mais-m{background:var(--ep2);color:var(--ei)}
 
-  /* rodapé com cinco abas: Pauta, Assinar, Urgências, Dúvidas e Diligências */
-  #v-cmt .cmt-mobile-dock{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+  /* rodapé com seis abas: Pauta, Assinar, Urgências, Dúvidas, Diligências e Gabinete (o botão Gabinete sai do topo dos painéis) */
+  #v-cmt .cmt-mobile-dock{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+  #v-cmt .cmt-mobile-pn-h #cmt-mobile-more{display:none!important}
 
   /* painéis: cabeçalho fino com nome, contagem e um controle; sem Fechar, sem Atualizar e sem o título repetido */
   #v-cmt #cmt-ass>h2,#v-cmt #cmt-urg-p>h2,#v-cmt #cmt-dv-p>h2{display:none!important}

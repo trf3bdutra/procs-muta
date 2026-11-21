@@ -6,14 +6,14 @@ const path=require('node:path');
 const vm=require('node:vm');
 const html=fs.readFileSync(path.resolve(__dirname,'../index.html'),'utf8');
 
-test('rodapé fixo contém cinco abas; busca e notificações ficam no cabeçalho',()=>{
+test('rodapé fixo contém seis abas (com Gabinete); busca e notificações ficam no cabeçalho',()=>{
   const dock=html.match(/<nav class="cmt-mobile-dock"[\s\S]*?<\/nav>/);
   assert.ok(dock,'rodapé próprio do desembargador');
-  for(const key of ['pauta','a','u','d','dil']){
+  for(const key of ['pauta','a','u','d','dil','m']){
     assert.ok(dock[0].includes('data-cmt-dock="'+key+'"'),key);
     assert.equal((dock[0].match(new RegExp('data-cmt-dock="'+key+'"','g'))||[]).length,1);
   }
-  assert.equal((dock[0].match(/data-cmt-dock=/g)||[]).length,5);
+  assert.equal((dock[0].match(/data-cmt-dock=/g)||[]).length,6);
   assert.ok(html.includes('id="cmt-b-bus"'),'busca no cabeçalho');
   assert.ok(html.includes('id="cmt-b-not"'),'notificações no cabeçalho');
   assert.ok(html.includes('enterkeyhint="go"'));
@@ -57,4 +57,11 @@ test('scripts mantêm sintaxe JavaScript válida',()=>{
   scripts.forEach((match,i)=>{
     if(match[1].trim())new vm.Script(match[1],{filename:'exofficio-script-'+i+'.js'});
   });
+});
+
+test('diligências: seções minimizáveis; Urgências e Concluída começam fechadas',()=>{
+  assert.ok(html.includes("var COL=['A fazer','Em andamento','Em revisão','Urgências','Concluída'];"));
+  assert.ok(html.includes("CMT.dilAb=CMT.dilAb||{'Urgências':false,'Concluída':false};"));
+  assert.ok(html.includes('<details class="cmt-col'));
+  assert.ok(html.includes('#v-cmt .cmt-mobile-pn-h #cmt-mobile-more{display:none!important}'));
 });
