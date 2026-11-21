@@ -182,3 +182,9 @@ test('Coordenação › Perfis › Competências: especialidade, prefere, evita 
   for(const x of ['function pfComp(','function pfCompGrava(','data-pfc-poe','data-pfc-mv','data-pfc-dis',"tipo === 'cmt:comp-perfil'","['comp', 'Competências'"])assert.ok(cap.includes(x),x);
   for(const x of ['data-eqh="atual"',"OC={nomes:[],saiu:true}",'Produção e matriz',"if(v==='matriz')v='prod'","tipo:'cmt:comp-perfil'",'cmt:comp-recarregar','class="so-fora">Perfis'])assert.ok(cp.includes(x),x);
 });
+
+test('Equipe: indisponível à mão ou pela ausência aprovada cobrindo hoje',()=>{
+  const fs=require('fs'),p=require('path'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8'),rg=fs.readFileSync(p.join(__dirname,'../../../caput/assets/js/regras-gerais.js'),'utf8');
+  assert.ok(m.includes('function ausente(m, ss) { if (m.indisp) return true;')&&m.includes("'minutaEventual', 'indisp'].indexOf(campo)")&&m.includes('situacao: function (nome)'),'motor');
+  assert.ok(rg.includes('data-k="indisp"')&&rg.includes('indisponível · ausente até'),'painel Equipe');
+});

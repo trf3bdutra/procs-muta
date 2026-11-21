@@ -26,7 +26,7 @@ test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
   for(const n of ['Alexander','Vanilda','Saffioti','Giovana']){assert.equal(by(n).minuta,false,n);assert.equal(by(n).minutaEventual,true,n);}
   const m=read('caput/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(m.includes('eventuais: S.equipe.filter(function (m) { return m.minutaEventual && !faz(m, \'d\'); })'));
-  assert.ok(m.includes("'minutaEventual'].indexOf(campo)"));
+  assert.ok(m.includes("'minutaEventual', 'indisp'].indexOf(campo)"));
   const pag=read('caput/designacao/index.html');
   assert.ok(pag.includes('optsEx(k,v)')&&pag.includes('var EV=EQ.filter'));
 });
