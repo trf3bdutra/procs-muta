@@ -1,13 +1,10 @@
 # Matriz de minutas por servidor (apoio/equipe-matriz.json): experiência de cada um pelo histórico das pautas e da ficha.
-# Recalcula quando muda uma pauta, a ficha ou o cadastro da equipe. Commits deste fluxo (GITHUB_TOKEN) não disparam fluxos.
+# Recalcula quando muda o cadastro da equipe ou o script; pautas e ficha entram no fluxo de hora em hora (lotes-alimentar.yml). Commits deste fluxo (GITHUB_TOKEN) não disparam fluxos.
 name: Equipe · matriz de minutas
 on:
   push:
     branches: [main]
     paths:
-      - "acervo/sessoes/**"
-      - "acervo/operacional.json"
-      - "acervo/planilhas/**"
       - "apoio/equipe.json"
       - "scripts/equipe/**"
   workflow_dispatch:

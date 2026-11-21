@@ -20,6 +20,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: layout-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   layout:
     runs-on: ubuntu-latest

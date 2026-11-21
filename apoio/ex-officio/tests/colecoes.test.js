@@ -80,6 +80,7 @@ test('coleções: Caput, Collectio, alimentar e fluxo usam a mesma fonte', () =>
   assert.ok(pg.includes('Seleção prévia') && pg.includes('Escaninhos da triagem do Caput'));
   const al = read('scripts/lotes/alimentar.py');
   assert.ok(al.includes("L.get('arquivado')") && al.includes('sorted(todos, key=prioridade)'));
-  const wf = read('.github/workflows/lotes-colecoes.yml');
-  assert.ok(wf.includes('python3 scripts/lotes/colecoes.py') && wf.includes('group: lotes-alimentar'));
+  const wf = read('.github/workflows/lotes-alimentar.yml');
+  assert.ok(wf.indexOf('python3 scripts/lotes/colecoes.py') >= 0 && wf.indexOf('python3 scripts/lotes/colecoes.py') < wf.indexOf('python3 scripts/lotes/alimentar.py'), 'coleções antes do alimentar, no mesmo job horário');
+  assert.ok(!fs.existsSync(path.join(R, '.github/workflows/lotes-colecoes.yml')), 'sem job por gravação');
 });
