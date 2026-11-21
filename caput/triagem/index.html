@@ -924,6 +924,22 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .co-lado .rg.embutida nav{flex-direction:row;flex-wrap:wrap;gap:4px;padding:8px;border-right:0;border-bottom:1px solid var(--b)}.co-lado .rg.embutida nav p{display:none}.co-lado .rg.embutida nav button{width:auto;flex:1 1 auto;text-align:left}
 .co-lado .rg .rg-tl{grid-template-columns:minmax(0,1fr)}.co-lado .rg .rg-eq{grid-template-columns:minmax(0,1fr)}.co-lado .rg .rg-eq label{margin-left:0;margin-right:10px}
 @media(max-width:1200px){.co-lay{grid-template-columns:1fr}.co-lado{position:static}.co-lado>.cg-px{height:auto}.co-lado .rg.embutida{height:620px}}
+.cg-atvp #cg-atv{display:flex;flex-direction:column;max-height:560px}
+.atv-f{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--b);background:var(--w)}
+.atv-seg{display:inline-flex;border:1px solid var(--b)}.atv-seg button{height:30px;padding:0 10px;border:0;background:none;font:600 12px Figtree,sans-serif;color:var(--m);cursor:pointer;white-space:nowrap}
+.atv-seg button+button{border-left:1px solid var(--b)}.atv-seg button[aria-pressed=true]{background:var(--v);color:#fff}.atv-seg button i{font:500 10.5px "JetBrains Mono",monospace;font-style:normal;opacity:.8}
+.atv-f select,.atv-f input{height:32px;padding:0 9px;border:1px solid var(--b);background:#fff;font:13px Figtree,sans-serif;color:inherit}.atv-f input{flex:1;min-width:180px}
+.atv-l{flex:1;min-height:0;overflow-y:auto;padding:4px 14px 12px;scrollbar-width:thin}
+.atv-dia{position:sticky;top:0;z-index:1;margin:0;padding:10px 0 5px;background:var(--w);font:500 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g);border-bottom:1px solid var(--b)}
+.atv-r{display:grid;grid-template-columns:54px 30px minmax(0,1fr);gap:10px;align-items:start;padding:8px 0;border-bottom:1px dotted var(--b)}
+.atv-r time{font:500 12px "JetBrains Mono",monospace;color:var(--m);padding-top:6px}.atv-r time small{display:block;font-size:9.5px;opacity:.8}
+.atv-av{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#e9eef0;color:#36505c;font:700 11px Figtree,sans-serif}
+.atv-r.cmt .atv-av{background:#1b5878;color:#fff}.atv-r.login .atv-av{background:#e8f1ea;color:#2f6b45}.atv-r.login.falha .atv-av{background:#fbeeec;color:#9b3a2e}.atv-r.login.falha .atv-ar{border-color:#d9a7a0;background:#fbeeec;color:#9b3a2e}.atv-r.login .atv-ar{border-color:#b9d6c1;background:#eef6f0;color:#2f6b45}.atv-r.sistema .atv-av{background:#f1ece0;color:#8a7a55}
+.atv-c p{margin:0}.atv-c p:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px}
+.atv-ar{padding:0 6px;border:1px solid var(--b);font:500 10px/1.7 "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--m)}
+.atv-r.cmt .atv-ar{border-color:#b7cfdc;background:#eaf2f6;color:#1b5878}
+.atv-n{font:600 11px "JetBrains Mono",monospace;color:var(--g)}
+.atv-t{margin-top:2px!important;font-size:13px;line-height:1.4;color:var(--m)}.atv-cnj{font:600 12px "JetBrains Mono",monospace;color:var(--v)}
 .cg-vop .cg-tb a.btn{text-decoration:none}#cg-vo>.cg-status{padding:14px}
 .cg-faixa.vo-k{grid-template-columns:repeat(5,minmax(0,1fr));border-width:0 0 1px}.vo-k .r b{color:var(--r)}.vo-k .g b{color:var(--g)}
 .vo-av{margin:0;padding:6px 14px;font-size:11.5px;color:var(--g);background:#fbf3df;border-bottom:1px solid var(--l)}
@@ -2141,7 +2157,7 @@ function render() {
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
   D.title = 'Caput · ' + tit;
   if (naPauta) { $('#rodape').hidden = true; D.body.classList.remove('rod-min'); try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
-  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); CAL_SIG = ''; pintaCal(true); voMontar(); ausPinta(); }, 0); }
+  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); CAL_SIG = ''; pintaCal(true); voMontar(); ausPinta(); atvMontar(); }, 0); }
   else if (ABA === 'coordenacao') { m.innerHTML = vCoordenacao(); setTimeout(montarCoord, 0); }
   else if (ABA === 'comunicacao') { m.innerHTML = vComunicacao(); setTimeout(cgComCarregar,0); }
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
@@ -2317,6 +2333,59 @@ function montarChefia(){
     aoGravarEscopo:(j)=>{ ESCOPO={triar:(j.triar||[]).map(x=>[x.tarefa,x.motivo||'']),ignorar:j.ignorar||{},lido:true}; montaEscopo(); construir(); toast('Escopo da triagem atualizado.'); }
   });
 }
+/* ===== Registro de atividades (Chefia) ===== */
+const ATV = { d: null, lendo: null, dias: 1, quem: '', origem: '', q: '', erro: '' };
+function atvCarregar(forca) {
+  if (ATV.lendo && !forca) return ATV.lendo;
+  const st = $('#atv-st'); if (st) st.textContent = 'lendo…';
+  ATV.lendo = fetch('/api/painel?atividades=1&dias=' + ATV.dias, { credentials: 'same-origin', cache: 'no-store' })
+    .then((r) => r.json().catch(() => ({})).then((j) => { if (!r.ok) throw new Error(j.erro || ('HTTP ' + r.status)); return j; }))
+    .then((j) => { ATV.d = j; ATV.erro = ''; ATV.lido = Date.now(); })
+    .catch((e) => { ATV.erro = e.message || 'falha'; })
+    .finally(() => { ATV.lendo = null; atvPinta(); });
+  return ATV.lendo;
+}
+function atvMontar() { if (!$('#cg-atv')) return; if (!ATV.d || Date.now() - (ATV.lido || 0) > 60e3) atvCarregar(true); else atvPinta(); }
+function atvHora(iso) { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString('pt-BR', { timeZone: 'America/Campo_Grande', hour: '2-digit', minute: '2-digit' }); }
+function atvDia(iso) { const d = new Date(iso); if (isNaN(d)) return ''; const f = (x) => x.toLocaleDateString('pt-BR', { timeZone: 'America/Campo_Grande' });
+  const h = f(new Date()), o = f(new Date(Date.now() - 864e5)), v = f(d); return v === h ? 'Hoje' : v === o ? 'Ontem' : d.toLocaleDateString('pt-BR', { timeZone: 'America/Campo_Grande', weekday: 'long', day: '2-digit', month: '2-digit' }); }
+function atvPinta() {
+  const el = $('#cg-atv'), st = $('#atv-st'); if (!el) return;
+  if (st) st.textContent = ATV.erro ? '' : ATV.d ? 'atualizado às ' + new Date(ATV.lido).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '';
+  if (ATV.erro && !ATV.d) { el.innerHTML = '<p class="cg-status">Não foi possível ler o registro: ' + esc(ATV.erro) + '</p>'; return; }
+  if (!ATV.d) { el.innerHTML = '<p class="cg-status">Lendo o registro…</p>'; return; }
+  const I = ATV.d.itens || [], P = ATV.d.pessoas || {}, nq = ATV.q.trim().toLowerCase();
+  const V = I.filter((x) => (!ATV.quem || x.quem === ATV.quem) && (!ATV.origem || x.origem === ATV.origem) && (!nq || (x.quem + ' ' + x.area + ' ' + x.texto).toLowerCase().indexOf(nq) >= 0));
+  const n = (o) => I.filter((x) => x.origem === o).reduce((t, x) => t + x.n, 0);
+  const pes = Object.keys(P).sort((a, b) => P[b] - P[a]);
+  let h = '<div class="atv-f"><span class="atv-seg" role="group" aria-label="Período">' + [[1, 'Últimas 24 h'], [3, '3 dias'], [7, '7 dias'], [30, '30 dias']].map((p) => '<button type="button" data-atv-dias="' + p[0] + '" aria-pressed="' + (ATV.dias === p[0]) + '">' + p[1] + '</button>').join('') + '</span>' +
+    '<span class="atv-seg" role="group" aria-label="Origem">' + [['', 'Tudo', I.reduce((t, x) => t + x.n, 0)], ['cmt', 'Painel do Desembargador', n('cmt')], ['equipe', 'Equipe', n('equipe')], ['login', 'Logins', n('login')], ['sistema', 'Automático', n('sistema')]].map((o) => '<button type="button" data-atv-org="' + o[0] + '" aria-pressed="' + (ATV.origem === o[0]) + '">' + o[1] + ' <i>' + o[2] + '</i></button>').join('') + '</span>' +
+    '<select data-atv-quem aria-label="Pessoa"><option value="">Todas as pessoas</option>' + pes.map((p) => '<option' + (ATV.quem === p ? ' selected' : '') + ' value="' + esc(p) + '">' + esc(p) + ' (' + P[p] + ')</option>').join('') + '</select>' +
+    '<input type="search" data-atv-q placeholder="Buscar: processo, área, texto" value="' + esc(ATV.q) + '"></div>';
+  if (!V.length) { el.innerHTML = h + '<p class="cg-status" style="padding:14px">Nenhuma atividade neste recorte.</p>'; return; }
+  let dia = '';
+  h += '<div class="atv-l">';
+  V.slice(0, 400).forEach((x) => {
+    const d = atvDia(x.em); if (d !== dia) { dia = d; h += '<p class="atv-dia">' + esc(d) + '</p>'; }
+    const ini = String(x.quem || '?').replace(/[^A-Za-zÀ-ú]/g, '').slice(0, 2).toUpperCase();
+    const tx = esc(x.texto).replace(/\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}/, (m) => '<b class="atv-cnj">' + m + '</b>');
+    h += '<div class="atv-r ' + esc(x.origem) + (x.falha ? ' falha' : '') + '"><time>' + atvHora(x.em) + (x.n > 1 && atvHora(x.ini) !== atvHora(x.em) ? '<small>desde ' + atvHora(x.ini) + '</small>' : '') + '</time>' +
+      '<span class="atv-av" title="' + esc(x.quem) + '">' + esc(ini || '·') + '</span>' +
+      '<div class="atv-c"><p><b>' + esc(x.quem) + '</b><span class="atv-ar">' + esc(x.area) + '</span>' + (x.n > 1 ? '<span class="atv-n">' + x.n + '×</span>' : '') + '</p><p class="atv-t">' + tx + '</p></div></div>';
+  });
+  h += '</div>' + (V.length > 400 ? '<p class="cg-status" style="padding:10px 14px">Mostrando 400 de ' + V.length + ' linhas; filtre por pessoa ou origem.</p>' : '') + (ATV.d.truncado ? '<p class="cg-status" style="padding:10px 14px">Período longo: só as 1.000 gravações mais recentes foram lidas.</p>' : '');
+  el.innerHTML = h;
+}
+document.addEventListener('click', (e) => {
+  const t = e.target.closest && e.target.closest('[data-atv-at],[data-atv-dias],[data-atv-org]'); if (!t) return;
+  if (t.hasAttribute('data-atv-at')) { atvCarregar(true); return; }
+  if (t.hasAttribute('data-atv-dias')) { ATV.dias = +t.getAttribute('data-atv-dias'); atvCarregar(true); atvPinta(); return; }
+  ATV.origem = t.getAttribute('data-atv-org') || ''; atvPinta();
+});
+document.addEventListener('change', (e) => { if (e.target.matches && e.target.matches('[data-atv-quem]')) { ATV.quem = e.target.value; atvPinta(); } });
+document.addEventListener('input', (e) => { if (!(e.target.matches && e.target.matches('[data-atv-q]'))) return; const v = e.target.value; clearTimeout(ATV._t);
+  ATV._t = setTimeout(() => { ATV.q = v; atvPinta(); const q = $('#cg-atv [data-atv-q]'); if (q) { q.focus(); try { q.setSelectionRange(v.length, v.length); } catch (x) {} } }, 200); });
+setInterval(() => { if (ABA === 'chefia' && !D.hidden && $('#cg-atv') && ATV.dias <= 3) atvCarregar(); }, 120e3);
 function vChefia(){
   const apt=U.filter(o=>o.apto&&!o.pend.length).length, kpi=(v,t)=>'<div><b>'+v+'</b><span>'+t+'</span></div>';
   const cx=(k,t,extra,corpo,cls)=>'<section class="cg-px'+(cls?' '+cls:'')+'"><header><span><span class="k">'+k+'</span><b>'+t+'</b></span>'+(extra||'')+'</header>'+corpo+'</section>';
@@ -2325,6 +2394,8 @@ function vChefia(){
     '<div class="cg-acv"><button class="btn pri" data-cg-acervo="1" title="Planilhas do PJe e do Power BI → carga → fonte no GitHub, com complementação pelo DataJud">Importar / atualizar acervo</button></div></div>'+
     /* Visão operacional: entregas e providências em aberto de todo o gabinete, lidas da mesma API do Mural do Ex Officio (mesmo login) e desenhadas aqui */
     cx('Visão operacional','Todo o gabinete · entregas e providências em aberto','<span class="cg-tb"><span class="cg-status" id="vo-st"></span><button class="btn" type="button" data-vo-at="1">↻ Atualizar</button><a class="btn" href="/office/" target="_blank" rel="noopener">Ex Officio ↗</a></span>','<div id="cg-vo"><p class="cg-status">Lendo as entregas…</p></div>','cg-vop')+
+    /* Registro de atividades: quem fez o quê, em todos os apps e no painel do Desembargador (api/_atividades.js) */
+    cx('Registro de atividades','Todos os usuários e o painel do Desembargador','<span class="cg-tb"><span class="cg-status" id="atv-st"></span><button class="btn" type="button" data-atv-at="1">↻ Atualizar</button></span>','<div id="cg-atv"><p class="cg-status">Lendo o registro…</p></div>','cg-atvp')+
     cx('Calendário do gabinete','Sessões, marcos, afazeres e dias sem expediente','','<div id="cg-cal"><p class="cg-status">Calendário carregando…</p></div><div id="cg-forense">'+calForense()+'</div><div id="cg-aus"><p class="cg-status" style="padding:12px 14px">Lendo as ausências da equipe…</p></div>','cg-cal')+
     cx('Regras gerais','Escopo da triagem, destino provável, acervo fonte e etiquetas','','<div id="cg-regras" aria-label="Regras da triagem, acervo e calendário"><p class="cg-status">Carregando regras…</p></div>')+
     vRelatorios()+'</div>';

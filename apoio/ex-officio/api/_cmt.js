@@ -75,7 +75,7 @@ async function avisarAcesso(u) {
       nivel: 'info', painel: false, notificacao: true, para: [gestor], ate, fixo: false,
     });
     dados.atualizadoEm = agora.toISOString();
-    try { await L.gravarJson(AVISOS, dados, sha, 'Painel do relator: entrada registrada para ' + gestor); return antigos; }
+    try { await L.gravarJson(AVISOS, dados, sha, 'Painel do relator: entrada ' + (L.norm(u) === L.norm(process.env.CMT_RELATOR || 'CM') ? 'do Desembargador' : 'de ' + u) + ' registrada para ' + gestor); return antigos; }
     catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
   }
   return null;
@@ -145,11 +145,13 @@ async function painel(req, res, u) {
      As duas gravam onde já era gravado — o item da pauta e a ficha única — e podem ser desfeitas. */
   if (req.method === 'POST') {
     const b = req.body || {}, cnj = String(b.cnj || '').trim();
+    /* gravações feitas daqui levam a marca do painel, para o registro de atividades da Chefia */
+    const uw = (L.norm(u) === L.norm(process.env.CMT_RELATOR || 'CM') ? 'Desembargador' : u) + ' · painel CMT';
     if (!cnj && b.acao !== 'responder' && b.acao !== 'acesso' && b.acao !== 'aviso') return res.status(400).json({ erro: 'Informe o processo.' });
     try {
       if (b.acao === 'liberar') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, u, true, req.whatsappEvent);
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { dataLiberacao: b.desfazer ? '' : hj } }, uw, true, req.whatsappEvent);
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, dataLiberacao: b.desfazer ? '' : hj });
       }
@@ -158,7 +160,7 @@ async function painel(req, res, u) {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
         const campo = String(b.campo || '');
         if (!/^(dataMinuta|dataCorrecao)$/.test(campo)) return res.status(400).json({ erro: 'Etapa inválida.' });
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { [campo]: b.desfazer ? '' : hj } }, u, true);
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos: { [campo]: b.desfazer ? '' : hj } }, uw, true);
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, campo, valor: b.desfazer ? '' : hj });
       }
@@ -169,7 +171,7 @@ async function painel(req, res, u) {
         if (v && !/^(Retirado|Adiado)$/i.test(v)) return res.status(400).json({ erro: 'Situação inválida.' });
         const campos = { resultado: v };
         if (typeof b.obs === 'string' && b.obs.trim()) campos.obs = b.obs.trim().slice(0, 2000);
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos }, u, true);
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos }, uw, true);
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, resultado: v });
       }
@@ -188,7 +190,7 @@ async function painel(req, res, u) {
           if ('avisos' in C.cartao) campos.cartao.avisos = lista(C.cartao.avisos);
         }
         if (!Object.keys(campos).length) return res.status(400).json({ erro: 'Nada a gravar.' });
-        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos }, u, true);
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos }, uw, true);
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj });
       }
@@ -222,7 +224,7 @@ async function painel(req, res, u) {
         return res.status(200).json({ ok: true });
       }
       if (b.acao === 'assinar') {
-        await MONO.gravarMono(cnj, { dataAssinatura: b.desfazer ? '' : hj }, u, true);
+        await MONO.gravarMono(cnj, { dataAssinatura: b.desfazer ? '' : hj }, uw, true);
         return res.status(200).json({ ok: true, cnj, dataAssinatura: b.desfazer ? '' : hj });
       }
       /* devolutiva: vira diligência para o servidor do processo, no mesmo quadro da equipe */
