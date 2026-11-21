@@ -323,6 +323,69 @@ html[data-theme=dark] .dif ins{background:#1f4a2c;color:#d4f5dc}
 @media(max-width:620px){.dif-h,.dif-l{grid-template-columns:1fr}.lx-nx1{padding:0 12px}.pg{padding:0 12px 60px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 .caput-emb header.lx-nx{display:none}.caput-emb .lx-sub{top:8px;max-height:calc(100vh - 16px)}.caput-emb .col-areas{display:none}
+
+/* ---------- prévia do redesign: mesa de trabalho ---------- */
+.mesa{max-width:1720px;margin:0 auto;padding:0 22px 48px}
+.ms-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 28px;align-items:end;padding:20px 0 14px;border-bottom:2px solid var(--eg)}
+.ms-id .k{margin:0 0 4px}
+.ms-id h1{margin:0;font-size:40px;line-height:1.02}
+.ms-st{margin:8px 0 0;font:500 11px var(--emono);letter-spacing:.06em;text-transform:uppercase;color:var(--em)}
+.ms-st .al{color:var(--al)}.ms-st .aviso{display:inline;margin:0;padding:1px 6px}
+.ms-col .col-areas{display:flex;flex-direction:column;align-items:flex-end;gap:8px;border:0;background:none;padding:0;margin:0}
+.ms-col .col-tipos{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--el);background:var(--ew)}
+.ms-col .col-tipos button{height:32px;padding:0 14px;border:0;border-right:1px solid var(--el);background:transparent;color:var(--em);font-size:12.5px;font-weight:700;cursor:pointer;width:auto;margin:0}
+.ms-col .col-tipos button:last-child{border-right:0}
+.ms-col .col-tipos button[aria-pressed=true]{background:var(--eg);color:#fff}
+.ms-col .col-area{display:flex;flex-direction:row;gap:10px;align-items:flex-end;flex-wrap:wrap;justify-content:flex-end;margin:0;padding:0;border:0;background:none}
+.ms-col .col-tipos{margin:0}
+.mesa #procs .tb .pt{display:block;max-width:62ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mesa #procs .tb td{padding-top:8px;padding-bottom:8px}
+.mesa #procs .tb{min-width:0}
+.mesa #procs .tb td:nth-child(6){max-width:300px}.mesa #procs .tb td:nth-child(6) .tg{white-space:normal;max-width:100%;margin-bottom:3px}
+.com-proc #procs .tb .pt{max-width:44ch}.com-proc #procs .tb td:nth-child(6){max-width:200px}
+.ms-col .col-area[hidden]{display:none}
+.ms-col .lx-sel{min-width:200px;margin:0}.ms-col .lx-lt-d{font-size:12px;max-width:360px;text-align:right}
+.ms-reg{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:0;margin:16px 0 0;border:1px solid var(--el);background:var(--ew)}
+.ms-et{position:relative;display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"n n b" "r r b" "a a a" "x x x";align-items:baseline;column-gap:8px;text-align:left;padding:10px 14px 11px;border:0;border-left:1px solid var(--el);background:transparent;cursor:pointer;color:var(--ei);min-width:0}
+.ms-et:first-child{border-left:0}
+.ms-et::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--el)}
+.ms-et:hover{background:var(--ep2)}
+.ms-et[aria-pressed=true]{background:var(--ep2)}.ms-et[aria-pressed=true]::before{background:var(--eo)}
+.ms-et .n{grid-area:n;font:500 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+.ms-et .r{grid-area:r;font-weight:750;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms-et b{grid-area:b;font:400 30px/1 var(--emono);color:var(--eo2);align-self:center}
+.ms-et.zero b{color:var(--el2)}.ms-et.zero .r{color:var(--em)}
+.ms-et .a{grid-area:a;margin-top:6px;font-size:12px;font-weight:650;color:var(--ei2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms-et .a i{font-weight:400;color:var(--em)}
+.ms-et small{grid-area:x;margin-top:3px;font:400 10px var(--emono);letter-spacing:.04em;color:var(--em);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms-et small.al{color:var(--al)}
+.ms-et .vf{grid-area:x;display:block;height:4px;background:var(--el);margin-top:4px}.ms-et .vf i{display:block;height:100%;background:#1f8a70}
+.ms-et .vf+small{grid-row:5;grid-column:1/-1}
+.ms-et.fora::before{background:repeating-linear-gradient(90deg,var(--el2) 0 6px,transparent 6px 10px)}
+.ms-bar{position:sticky;top:64px;z-index:15;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0;background:var(--ep);border-bottom:1px solid var(--el)}
+.ms-bar .bq{flex:0 1 380px;margin:0}.ms-bar .sp{flex:1}
+.ms-abas button{height:30px;min-width:92px}.ms-abas small{font:400 10px var(--emono);margin-left:4px;opacity:.8}
+.ms-work{display:grid;grid-template-columns:minmax(0,1fr);gap:0 22px;align-items:start}
+.mesa.com-proc .ms-work{grid-template-columns:minmax(0,1fr) minmax(480px,46%)}
+.ms-main{min-width:0}
+.ms-main>.sec{margin-top:14px;border-top:0;padding-top:4px}
+.ms-main .shd h2{font-size:24px}
+.mesa .gh .gp{margin-left:14px;font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--em)}.mesa .gh .gp b{color:var(--ei2)}
+.ms-proc{position:sticky;top:122px;max-height:calc(100vh - 134px);overflow:auto;scrollbar-width:thin;margin-top:14px;border:1px solid var(--el2);border-top:3px solid var(--eo);background:var(--ep);box-shadow:0 10px 28px rgba(28,51,68,.10)}
+.ms-proc .sec{margin:0;border-top:0;padding:12px 16px 16px;scroll-margin-top:0}
+.ms-proc .shd{position:sticky;top:-12px;z-index:3;background:var(--ep);margin:-12px -16px 0;padding:12px 16px 8px;border-bottom:1px solid var(--el)}
+.ms-proc .shd h2{font-size:22px}
+.ms-proc .box{border:0;padding:10px 0 0;background:transparent}
+.ms-proc .pf-h{gap:12px 18px}.ms-proc .pf-id{flex:1 1 100%}
+.ms-proc .stl{max-width:none}
+.com-proc #procs .tb{min-width:640px}
+.com-proc #procs .tb th:nth-child(3),.com-proc #procs .tb td:nth-child(3),.com-proc #procs .tb th:nth-child(4),.com-proc #procs .tb td:nth-child(4){display:none}
+.mesa #matriz{margin-top:14px;border-top:0;padding-top:4px}
+.mesa #matriz .tw{max-height:calc(100vh - 230px);overflow:auto}
+.mesa #matriz thead{position:sticky;top:0;z-index:4;background:var(--ew)}
+.ms-nota{margin:18px 0 0;max-width:none}
+@media(max-width:1100px){.mesa.com-proc .ms-work{grid-template-columns:minmax(0,1fr)}.ms-proc{position:static;max-height:none;order:-1}
+ .ms-top{grid-template-columns:1fr}.ms-col .col-areas{align-items:flex-start}.ms-col .col-area{justify-content:flex-start}.ms-reg{grid-template-columns:repeat(3,minmax(0,1fr))}.ms-et:nth-child(3n+1){border-left:0}}
 </style>
 </head>
 <body>
@@ -354,6 +417,8 @@ const params=new URLSearchParams(location.search);
 /* aberto dentro da triagem do Caput (Triados e Seleção prévia): mostra lotes de triagem e de seleção prévia, sem a barra do Amicus */
 const CAPUT=params.get('caput')==='1';if(CAPUT)document.documentElement.classList.add('caput-emb');
 const PREVIA=/\/previa\//.test(location.pathname);
+/* prévia do redesign (mesa de trabalho): só em /amicus/collectio/previa/ (ou com ?mesa=1); o endereço principal segue no layout atual */
+const MESA=PREVIA||/[?&]mesa=1\b/.test(location.search);
 if(PREVIA){const c=document.getElementById('crumb');if(c)c.textContent='Prévia'}
 (function(){const id=params.get('id');if(id){const m=/^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);if(m){if(!params.get('sessao'))params.set('sessao',m[1])}else if(!params.get('colecao'))params.set('colecao',id)}
   const hp=/^#p=(\d{4}-\d{2}-\d{2})-(\d+)$/.exec(decodeURIComponent(location.hash||''));if(hp){if(!params.get('sessao'))params.set('sessao',hp[1]);params.set('item',hp[2])}})();
@@ -608,6 +673,7 @@ function seletorColecoes(){
 }
 function conta(lst,k){return lst.filter(r=>r.etapa===k).length}
 function render(){
+  if(MESA)return renderMesa();
   S.linhas=S.itens.map(x=>linha(x));
   const esc0=escopo(), lst=filtradas();
   const n=k=>conta(esc0,k);
@@ -664,6 +730,56 @@ function render(){
   if(S.aberto){carregarVersoes();conferirTrechos()}
   if(S.minAb.size)carregarMinutas();
 }
+/* ---------- prévia do redesign: mesa de trabalho ----------
+   Mesmos dados, ações e integrações do Collectio; muda a disposição: coleção e contexto numa faixa só, as etapas numa régua
+   que filtra (com o próximo passo e a versão final), Lista e Matriz em abas sobre o mesmo recorte e o processo num painel
+   lateral fixo, sem rolar a página inteira. */
+function regua([k,r,t],base){
+  const lst=base.filter(x=>x.etapa===k), q=(S.mono?PASSO_MONO[k]:(!completo()&&PASSO_SIMPLES[k])||PASSO[k])||[];
+  const ind=S.mono?k==='assinada':k==='liberada'&&completo(), nf=lst.filter(z=>z.fi).length, al=lst.filter(z=>z.nivel).length;
+  return `<button type="button" class="ms-et${lst.length?'':' zero'}" data-et="${k}" aria-pressed="${S.etapa===k}" title="Filtrar a lista por esta etapa">
+    <span class="n">${esc(r.split(' · ')[0])}</span><span class="r">${esc(r.replace(/^\d · /,''))}</span><b>${lst.length}</b>
+    <span class="a">${esc(q[0]||'')}${q[1]?' <i>'+esc(q[1])+'</i>':''}</span>
+    ${ind&&lst.length?`<span class="vf" aria-hidden="true"><i style="width:${Math.round(nf/lst.length*100)}%"></i></span><small>${nf} de ${lst.length} com versão final</small>`:al?`<small class="al">${al} com alerta</small>`:`<small>${esc(t)}</small>`}</button>`;
+}
+function renderMesa(){
+  S.linhas=S.itens.map(x=>linha(x));
+  const esc0=escopo(), lst=filtradas(), n=k=>conta(esc0,k), meus=S.linhas.filter(r=>r.meu).length, alertas=esc0.filter(r=>r.nivel).length;
+  const aba=S.aba==='matriz'?'matriz':'lista';
+  const ctx=S.mono?'Coleção de decisões · '+esc(MONO[S.mono]):S.loteSel?(S.loteSes?'Pauta de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo]||'Coleção')+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data);
+  const titulo=S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel||S.mono?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>');
+  const sub=S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':'da '+(S.vista==='meus'?'correção':S.loteSel||S.mono?'coleção':'sessão');
+  $('#app').innerHTML=`<div class="mesa${S.aberto?' com-proc':''}">
+   <header class="ms-top">
+    <div class="ms-id"><p class="k">${ctx}</p><h1>${titulo}</h1>
+     <p class="ms-st">${esc0.length} de ${S.linhas.length} processos${S.usuario?' · '+meus+' com '+esc(S.usuario)+' na correção':''} · <span class="${alertas?'al':''}">${alertas} com alerta</span>${PREVIA?' · <span class="aviso">Prévia do redesign</span>':''}</p></div>
+    <div class="ms-col" aria-label="Coleções">${seletorColecoes()}</div>
+   </header>
+   <nav class="ms-reg" style="--n:${etapas().length+(S.mono?0:1)}" aria-label="Etapas: filtram a lista e a matriz">${etapas().map(e=>regua(e,esc0)).join('')}${S.mono?'':`<button type="button" class="ms-et fora${n('retido')?'':' zero'}" data-fo="retido" aria-pressed="${S.fora==='retido'}" title="Processos retirados ou adiados"><span class="n">fora</span><span class="r">Retirados</span><b>${n('retido')}</b><span class="a">Fora do fluxo</span><small>retirados ou adiados</small></button>`}</nav>
+   <div class="ms-bar">
+    <span class="seg" role="group" aria-label="Recorte"><button type="button" data-vista="meus" aria-pressed="${S.vista==='meus'}"${meus?'':' disabled'}>Minhas correções</button><button type="button" data-vista="todos" aria-pressed="${S.vista==='todos'}">${S.mono||S.loteSel?'Toda a coleção':'Toda a pauta'}</button></span>
+    <label class="bq"><span class="sr">Buscar</span><input type="search" id="q" placeholder="item, processo, parte ou assunto" value="${esc(S.q)}"></label>
+    ${S.etapa||S.fora||S.q?`<button type="button" class="b" id="limpa">× Limpar filtros</button>`:''}
+    <span class="sp"></span>
+    <span class="seg ms-abas" role="tablist" aria-label="Lista ou matriz"><button type="button" role="tab" data-aba="lista" aria-pressed="${aba==='lista'}" aria-selected="${aba==='lista'}">Lista <small>${lst.length}</small></button><button type="button" role="tab" data-aba="matriz" aria-pressed="${aba==='matriz'}" aria-selected="${aba==='matriz'}">Matriz</button></span>
+   </div>
+   <div class="ms-work">
+    <div class="ms-main">${aba==='matriz'?matrizHtml(S.etapa||S.fora||S.q?lst:esc0):`<section class="sec" id="procs"><div class="shd"><div><h2>Processos <em class="it">${sub}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem ${S.mono?'de registro':'da pauta'}. Clique num processo para abrir o painel ao lado.</p></div>
+      <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
+     <div class="box"><div class="tw"><table class="tb">
+      <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
+      <tbody>${grupos(lst)||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
+     </table></div></div></section>`}</div>
+    ${S.aberto?`<aside class="ms-proc" id="proc-w" aria-label="Processo aberto">${procHtml()}</aside>`:''}
+   </div>
+   <p class="nota ms-nota">Registrar versão, conformidade e Compendium seguem no <a href="/amicus/collectio/classico/">Collectio clássico</a>; a marca do PJe e a matriz se fazem aqui. Sem versão final importada, vale o acórdão (ou a decisão) publicado que chega ao Ementário.</p>
+  </div>`;
+  ligar();
+  $$('[data-aba]').forEach(b=>b.onclick=()=>{S.aba=b.dataset.aba;render();scrollTo(0,0)});
+  if(!S.escMesa){S.escMesa=1;document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.aberto&&!e.target.closest('input,select,textarea')){const f=$('#fecha');if(f)f.click()}})}
+  if(S.aberto){carregarVersoes();conferirTrechos()}
+  if(S.minAb.size)carregarMinutas();
+}
 /* grupos da lista: uma faixa por etapa, que abre e recolhe; "Abrir todos" e "Recolher todos" valem para todas */
 /* minutas na lista: abertas uma a uma (botão Minuta) ou todas de uma vez; o texto vem do Collectio sob demanda */
 const MIN={};
@@ -694,7 +810,7 @@ function grupos(lst){
   return ordem.map(([k,rot])=>{
     const g=lst.filter(r=>r.etapa===k); if(!g.length)return '';
     const aberto=!S.fechados.has(k);
-    return `<tr class="gh"><td colspan="7"><button type="button" data-grp="${k}" aria-expanded="${aberto}"><i aria-hidden="true">${aberto?'−':'+'}</i>${esc(rot)}<small>${g.length}</small></button></td></tr>`+(aberto?g.map(r=>rowHtml(r)+(S.minAb.has(r.x.cnj)?minRow(r):'')).join(''):'');
+    return `<tr class="gh"><td colspan="7"><button type="button" data-grp="${k}" aria-expanded="${aberto}"><i aria-hidden="true">${aberto?'−':'+'}</i>${esc(rot)}<small>${g.length}</small>${MESA&&k!=='retido'?(()=>{const q=(S.mono?PASSO_MONO[k]:(!completo()&&PASSO_SIMPLES[k])||PASSO[k])||[];return q[0]?`<span class="gp">próximo passo · <b>${esc(q[0])}</b> ${esc(q[1])}</span>`:''})():''}</button></td></tr>`+(aberto?g.map(r=>rowHtml(r)+(S.minAb.has(r.x.cnj)?minRow(r):'')).join(''):'');
   }).join('');
 }
 function rowHtml(r){
@@ -1085,7 +1201,11 @@ async function trocaSessao(d){if(!d)return;S.colTipo='pauta';S.loteSel='';S.data
 async function trocaMono(k){S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',k);u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo as decisões…</p></div>';try{await carregarMono(k)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
 async function trocaColecao(id,ses){const l=(S.lotesLista||[]).find(x=>x.id===id);if(!l)return;S.colTipo=ses?'pauta':tipoCol(l);S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',id);if(ses)u.searchParams.set('sessao',ses);else u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a coleção…</p></div>';try{await carregarLote(id,ses)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
 function abre(cnj){S.aberto=cnj;S.cmpOn=false;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
-function ir(id){const e=document.getElementById(id);if(e)e.scrollIntoView({block:'start'})}
+function ir(id){
+  /* na mesa, o processo abre no painel lateral fixo: só volta o painel ao topo (em tela estreita, ele vem para a vista) */
+  if(MESA&&id==='proc'){const p=$('.ms-proc');if(p){p.scrollTop=0;if(innerWidth<1100)p.scrollIntoView({block:'start'})}return}
+  if(MESA&&id==='matriz'&&S.aba!=='matriz')return;
+  const e=document.getElementById(id);if(e)e.scrollIntoView({block:'start'})}
 $('#tema').onclick=()=>{const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('cmt-eq-tema',t)}catch(e){}};
 $('#atu').onclick=()=>{S.ver={};S.idxAv=null;for(const k in fotos)delete fotos[k];carregar()};
 carregar();

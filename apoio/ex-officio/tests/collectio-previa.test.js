@@ -39,6 +39,12 @@ test('sem versão final importada, vale o acórdão (ou a decisão) publicado no
   assert.match(html, /if\(lote==='#pub'\)/, 'a publicação entra no seletor de versões e na comparação');
   assert.match(html, /fiI=!!\(it&&it\.final\), pub=\(!fiI&&/, 'a versão final importada prevalece sobre a publicada');
 });
+test('prévia do redesign (mesa de trabalho) só em /previa/: o endereço principal segue no layout atual', () => {
+  assert.match(html, /const MESA=PREVIA\|\|/);
+  assert.match(html, /if\(MESA\)return renderMesa\(\);/);
+  /* a mesa usa as mesmas ações: etapas, recorte, busca, lista, matriz e o painel do processo */
+  for (const k of ['data-et=', 'data-fo="retido"', 'data-vista="meus"', 'id="q"', 'id="abre-t"', 'id="mn-t"', 'data-aba="matriz"', 'procHtml()', 'matrizHtml(']) assert.ok(html.includes(k), k);
+});
 test('scripts válidos e HTML completo', () => {
   assert.ok(html.includes('</head>') && html.includes('</body>'));
   assert.ok(scripts.length >= 2);
