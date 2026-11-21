@@ -93,3 +93,6 @@ body #v-ement .pg-h.pa-ab,body #v-edit .pg-h.pa-ab,body .pg-h.pa-ab{display:grid
   #x-top .dexp button:not([data-xdocx]):not([data-xpdf]) .pa-tx{display:none}
 }
 @media print{.pg-h.pa-ab .pa-dir,.pg-h.pa-ab .pa-dev{display:none}}
+/* Minuta-Matriz: o seletor de modelos precisa de espaço para o nome do modelo */
+#x-top .dgrp.dtxt>label.dmodl>select{max-width:420px!important;min-width:240px!important}
+@media (max-width:860px){#x-top .dgrp.dtxt>label.dmodl>select{max-width:none!important;min-width:0!important;width:100%!important}}

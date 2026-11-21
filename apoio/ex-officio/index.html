@@ -579,7 +579,8 @@ html[data-theme=dark] .st.ok{background:#183447!important}
 .home-v2 .hc-calendar,.home-v2 .hc-more{margin-top:12px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
 .home-v2 .hc-calendar summary,.home-v2 .hc-more>summary{cursor:pointer;padding:13px 18px;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:space-between;gap:8px;list-style:none}
 .home-v2 .hc-calendar summary:after,.home-v2 .hc-more>summary:after{content:"⌄";font-size:20px;color:var(--mut)}.home-v2 .hc-calendar[open] summary:after,.home-v2 .hc-more[open]>summary:after{content:"⌃"}
-.home-v2 #cc-cal{margin:0 12px 14px}.home-v2 .hc-more .ini-d{display:block;padding:0 12px 12px}.home-v2 .hc-more .ini-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:10px}.home-v2 .hc-more .ini-rail>.cx{min-width:0}
+.home-v2 #cc-cal{margin:0 12px 14px}
+.home-v2 .hc-cal-gab{padding-top:12px}.home-v2 .hc-more .ini-d{display:block;padding:0 12px 12px}.home-v2 .hc-more .ini-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:10px}.home-v2 .hc-more .ini-rail>.cx{min-width:0}
 .home-v2 #prod{margin-top:12px}.home-v2 .hc-hint{font-size:10px;color:var(--mut);margin:0 0 8px}
 @media(max-width:1190px){.home-v2 .hc-board{grid-template-columns:minmax(0,1fr) 300px}.home-v2 .hc-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.home-v2 .hc-more .ini-rail{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:980px){.home-v2 .hc-board{grid-template-columns:1fr}.home-v2 .hc-rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.home-v2 .hc-more .ini-rail{grid-template-columns:1fr}.home-v2 .hc-item{grid-template-columns:minmax(0,1fr) 125px 110px auto}}
@@ -2097,9 +2098,9 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <section class="hc-panel hc-panel-alert"><h2>⚠ Pedidos urgentes <span class="hc-count" id="hc-urgencia-n">—</span></h2><div id="hc-urgencias"><p class="hc-mute">Carregando…</p></div></section>
       <section class="hc-panel"><h2>◷ Próximas sessões</h2><div id="hc-sessoes"></div></section>
       <section class="hc-panel"><h2>♙ Distribuição por servidor</h2><div id="hc-equipe"></div></section>
-      <section class="hc-panel"><h2>▦ Agenda de entregas</h2><div class="hc-cal-nav"><button data-hc-move="-1" type="button" aria-label="Mês anterior">‹</button><b id="hc-mes-label"></b><button data-hc-move="1" type="button" aria-label="Mês seguinte">›</button></div><div class="hc-mini-cal" id="hc-mini-cal"></div><p class="hc-cal-hint">Datas com ponto indicam entregas registradas. Clique para filtrar a lista. Eventos e ausências estão no calendário completo.</p></section>
+      <!-- a agenda de entregas deu lugar ao calendário do gabinete, logo abaixo -->
     </aside></div>
-    <details class="hc-calendar" id="hc-cal-full"><summary>Calendário completo de sessões, prazos, eventos e ausências</summary><div id="cc-cal" class="eq-cal"></div></details>
+    <section class="hc-calendar hc-cal-gab" id="hc-cal-full" aria-label="Calendário do gabinete"><div id="cc-cal" class="eq-cal"></div></section>
     <details class="hc-more"><summary>Meu resumo de minutas, minhas ausências e avisos</summary>
     <div class="ini-d">
       
@@ -4309,7 +4310,7 @@ function hcQuadro(){
   $('#hc-mais').textContent='Mostrar mais ('+(L.length-HC.limite)+' restantes)';
   var avisos=dados.avisosFontes||[];$('#hc-fonte-alerta').hidden=!avisos.length;
   $('#hc-fonte-alerta').textContent=avisos.length?'Atenção: leitura parcial — '+avisos.join('; ')+'. Os totais podem estar incompletos.':'';
-  hcLaterais(base);hcMiniCalendario();
+  hcLaterais(base);if($('#hc-mini-cal'))hcMiniCalendario();calendario();
 }
 function hcLaterais(base){
   var urg=hcLista().filter(function(t){return t.origem==='urgencia'&&(HC.escopo==='todos'||hcMinhas(t));}).sort(function(a,b){return (a.pedidoEm||'9999').localeCompare(b.pedidoEm||'9999');});
@@ -4373,7 +4374,7 @@ $('#hc-modo-grupo').addEventListener('change',function(){HC.grupo=this.value;HC.
 $('#hc-mais').addEventListener('click',function(){HC.limite+=75;hcQuadro();});
 $('#hc-exportar').addEventListener('click',hcExportar);
 $('#hc-recarregar').addEventListener('click',function(){painel();});
-$('#hc-cal-full').addEventListener('toggle',function(){if(this.open){P.calSig=null;calendario();}});
+
 $('#cc-cal').addEventListener('click',function(e){var b=e.target.closest('[data-d], [data-dia]');if(!b)return;HC.dia=b.getAttribute('data-d')||b.getAttribute('data-dia')||'';$('#hc-dia').value=HC.dia;hcQuadro();});
 $('#v-inicio').addEventListener('click',function(e){
   var b=e.target.closest('[data-hc-estado]');if(b){HC.estado=HC.estado===b.getAttribute('data-hc-estado')?'':b.getAttribute('data-hc-estado');hcQuadro();return;}
@@ -4387,7 +4388,7 @@ $('#v-inicio').addEventListener('click',function(e){
 /* calendário: o mesmo painel de sessões do Caput (CMTCalendario), com as pautas liberadas para a equipe */
 var FER_NAC=[['2026-11-02','Finados'],['2026-11-15','Procl. República'],['2026-11-20','Consc. Negra'],['2026-12-25','Natal'],['2027-01-01','Confraternização'],['2027-04-21','Tiradentes'],['2027-05-01','Dia do Trabalho'],['2027-09-07','Independência'],['2027-10-12','N. Sra. Aparecida'],['2027-11-02','Finados'],['2027-11-15','Procl. República'],['2027-11-20','Consc. Negra'],['2027-12-25','Natal']];
 function calendario(){
-  var D=P.dados||{sessoes:[],meus:[]},E=D.expediente||{},el=$('#cc-cal');if(!el||!window.CMTCalendario||!$('#hc-cal-full').open)return;
+  var D=P.dados||{sessoes:[],meus:[]},E=D.expediente||{},el=$('#cc-cal');if(!el||!window.CMTCalendario)return;
   var fer=FER_NAC.slice();(E.semExpediente||[]).forEach(function(d){fer.push([d,(E.nomes||{})[d]||'Sem expediente']);});
   var sig=JSON.stringify([D.sessoes,D.progresso,fer,E.recesso]);if(sig===P.calSig&&el.firstChild)return;P.calSig=sig;
   window.CMTCalendario.montar(el,{sessoes:(D.sessoes||[]).map(function(s){return {date:s.date,hora:s.hora||'',marcos:s.marcos||{},processos:s.processos||0,cor:s.cor||''};})},

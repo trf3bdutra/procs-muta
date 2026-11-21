@@ -432,3 +432,41 @@ body.dsk #x-main .xblk.on{background:#fbf6e6;box-shadow:0 0 0 1px #f0e3bd}
 .dcan .cf.xrot .xri .xrif{margin-top:4px;padding:5px 7px;background:#f4f2ea;border-left:2px solid #c8c3b6;font-size:11.5px;color:#2f3d3a;white-space:pre-wrap}
 .dcan .cf.xrot .xri small{display:block;margin-top:3px;font-size:10px;color:#8a8f88}
 .dcan .cf.xrot .xrie{color:#805b18}
+/* ===== Minuta-Matriz com o caso (antes, Consulta) e texto da folha (Minuta-Matriz, modelo ou matriz modular) ===== */
+.dbar.d2{margin-top:10px;gap:10px 12px}
+.dglab{display:flex;align-items:center;padding:0 12px;border-right:1px solid #d8d3c6;background:#f4f1e8;font:500 9.5px "IBM Plex Mono",monospace;letter-spacing:.12em;color:#805b18;text-transform:uppercase;white-space:nowrap}
+.dgrp>label>input{border:0!important;height:38px;background:transparent;font:600 13.5px Inter,sans-serif;color:#203b39;padding:0 4px;width:110px;box-sizing:border-box}
+.dgrp>label>input:focus{outline:2px solid #8fb5ad;outline-offset:-2px}
+.dgrp.dcaso>label>select{max-width:170px}
+.dcx-go,.dcx-b{border:0;border-right:1px solid #d8d3c6;padding:0 14px;font:700 13px Inter,sans-serif;cursor:pointer;height:40px}
+.dcx-go{background:#235a55;color:#fff}.dcx-go:hover{background:#173f3d}.dcx-go:disabled{opacity:.55}
+.dcx-b{background:#fff;color:#1d4f49;font-weight:600}.dcx-b:hover,.dcx-b[aria-pressed="true"]{background:#e7f1ee}
+.dgrp>button:last-child{border-right:0}
+.dcx-info{display:inline-flex;align-items:center;gap:8px;height:40px;border:1px solid #8fb5ad;border-radius:0;background:#e7f1ee;padding:0 6px 0 12px;font:600 13px Inter,sans-serif;color:#173f3d;max-width:100%;box-sizing:border-box}
+.dcx-info small{font:500 11.5px Inter,sans-serif;color:#4f5a57;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px}
+.dcx-info button{border:0;background:transparent;font-size:18px;line-height:1;color:#4f5a57;cursor:pointer;padding:2px 6px}.dcx-info button:hover{color:#9a3d2e}
+.dgrp.dtxt>label.dmodl>select{max-width:420px;min-width:220px}
+.dgrp.dtxt>label.dmodq{padding:0 8px}.dgrp.dtxt>label.dmodq>input{width:130px;font-weight:500}
+.dcx-nota{font:500 12px Inter,sans-serif;color:#805b18;align-self:center}
+#x-top .cq-cola,#x-top .cq-er{margin-top:10px}
+/* painel direito: abas Caso e Orientações */
+.drtab{display:flex;border-bottom:1px solid #d8d3c6;margin:0 0 12px}
+.drtab button{flex:1;border:0;border-bottom:2px solid transparent;background:transparent;padding:9px 6px 8px;font:700 12.5px Inter,sans-serif;color:#4f5a57;cursor:pointer;text-align:left}
+.drtab button small{font:500 10.5px Inter,sans-serif;color:#805b18;margin-left:4px}
+.drtab button[aria-selected="true"]{color:#173f3d;border-bottom-color:#235a55}
+/* canhoto: prontuário do caso e parágrafos do banco no bloco */
+.dcx-pront{margin:0 0 4px}.dcx-pront .cq-pront-base>.cf{padding-top:4px}
+.dinc-l{list-style:none;margin:0 0 8px;padding:0}
+.dinc-l li{display:flex;align-items:center;gap:4px;font:500 12px Inter,sans-serif;color:#203b39;padding:4px 0;border-bottom:1px dotted #e1ddd2}
+.dinc-l li span{flex:1;min-width:0}
+.dinc-l button{border:1px solid #d8d3c6;background:#fff;border-radius:3px;width:22px;height:22px;cursor:pointer;color:#4f5a57;font-size:12px;line-height:1}
+.dinc-l button:hover:not(:disabled){background:#e7f1ee}.dinc-l button[data-dincrm]:hover{color:#9a3d2e}.dinc-l button:disabled{opacity:.35;cursor:default}
+#x-aside .cq-pick{margin-top:6px}
+.dact.dpk{color:#1d4f49;text-decoration-color:#8fb5ad}
+.dref .dref-t{font:13px/1.5 Georgia,serif;color:#203b39;max-height:320px;overflow:auto;border-left:2px solid #e1ddd2;padding-left:8px}
+/* matriz modular: o motor próprio ocupa as três colunas da página */
+body.dsk #x-wrap.d28>#x-aside,body.dsk #x-wrap.d28>#x-main,body.dsk #x-wrap.d28>#x-ref,body.dsk #x-wrap.d28~#x-banco{display:none!important}
+body.dsk #x-wrap.d28>#cq{grid-column:1/-1;max-width:none;margin:0;padding:6px 0 0}
+#x-wrap.d28 #cq-top{display:none}
+.dcx-info .dcx-t{font:600 12px Inter,sans-serif;color:#1d4f49;border:1px solid #8fb5ad;border-radius:4px;background:#fff;padding:3px 8px;margin-left:4px}
+.dcx-info .dcx-t:hover{background:#fff;color:#173f3d}
