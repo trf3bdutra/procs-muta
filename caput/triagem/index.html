@@ -778,12 +778,18 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-head p{font-size:12.8px;color:var(--m2);margin:5px 0 0}
 .cg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
 .cg-box{border:1px solid var(--b);background:var(--w);min-width:0}
-.cg-cal{margin-bottom:14px}.cg-cal header{display:flex;align-items:center}.cg-cal-nav{margin-left:auto;display:flex;gap:4px}.cg-cal-nav button{border:1px solid var(--b);background:var(--w);border-radius:6px;padding:1px 9px;font:600 12px Figtree,sans-serif;cursor:pointer;color:var(--tx)}
+.cg-cal{margin-bottom:14px}.cg-cal #cc-cal{margin:0;padding:6px 8px}.cg-cal header{display:flex;align-items:center}.cg-cal-nav{margin-left:auto;display:flex;gap:4px}.cg-cal-nav button{border:1px solid var(--b);background:var(--w);border-radius:6px;padding:1px 9px;font:600 12px Figtree,sans-serif;cursor:pointer;color:var(--tx)}
 .cg-cms{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:10px 14px}.cg-cm>b{display:block;font:700 14px Figtree,sans-serif;text-transform:capitalize;margin-bottom:6px}
 .cg-cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}.cg-cg>i{font:500 10px "JetBrains Mono",monospace;color:var(--m);text-align:center;font-style:normal;padding-bottom:2px}
 .cg-cg>span{min-height:58px;border:1px solid var(--l);background:var(--w);padding:2px 3px;display:flex;flex-direction:column;gap:1px;overflow:hidden}.cg-cg>span em{font:600 11px Figtree,sans-serif;font-style:normal;color:var(--m2)}
 .cg-cg>span.fds{background:var(--p)}.cg-cg>span.fe{background:#f6ece0}.cg-cg>span.hj{outline:2px solid var(--v);outline-offset:-2px}.cg-cg>span small{font-size:9.5px;color:#8a5a1a;line-height:1.1}
 .cg-cg .ev{border:0;text-align:left;font:600 10px Figtree,sans-serif;padding:1px 4px;border-radius:3px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.cg-cg .ev.s{background:var(--v);color:#fff}.cg-cg .ev.m{background:#eaf3ef;color:var(--v2)}
+.cg-fo{display:grid;grid-template-columns:1.1fr 1.3fr 1fr;border-top:1px solid var(--b);background:var(--p)}.cg-fo>div{padding:12px 14px;border-right:1px solid var(--l);min-width:0}.cg-fo>div:last-child{border:0}
+.cg-fo h4{margin:0 0 8px;font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--g)}.cg-fo h4 span{color:var(--m);margin-left:4px}
+.cg-fo ul{list-style:none;margin:0;padding:0;max-height:210px;overflow:auto}.cg-fo li .x{border:0;background:none;color:var(--m);cursor:pointer;font-size:14px;padding:0 4px}.cg-fo li .x:hover{color:#a5382a}.cg-fo-add{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.cg-fo-add input,.cg-fo-add select{height:28px;font-size:12px;border:1px solid var(--b2);border-radius:6px;padding:0 6px;min-width:0}.cg-fo-add input[id=cgfx-n]{flex:1 1 120px}.cg-fo li{display:grid;grid-template-columns:44px 30px minmax(0,1fr) auto;gap:6px;align-items:baseline;padding:4px 0;border-bottom:1px solid var(--l);font-size:12px}.cg-fo li b{font:600 12px "JetBrains Mono",monospace}.cg-fo li small{color:var(--m);font-size:10.5px}.cg-fo li i{font-style:normal;color:var(--m);font-size:10.5px}
+.cg-fo-s li{grid-template-columns:70px minmax(0,1fr)!important}.cg-fo-s li>span{display:flex;flex-direction:column;gap:2px}.cg-fo-s small.sub{color:var(--m2)}.cg-fo-s small.av{color:#a5382a;font-weight:600}
+.cg-fo dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;font-size:12px}.cg-fo dt{font-weight:700;color:var(--v)}.cg-fo dd{margin:0;color:var(--m2)}.cg-vz{font-size:11.5px;color:var(--m);margin:8px 0 0}.cg-fo-a{margin-top:8px}
+@media(max-width:1000px){.cg-fo{grid-template-columns:1fr}.cg-fo>div{border-right:0;border-bottom:1px solid var(--l)}}
 .cg-cal-leg{margin:0;padding:0 14px 10px;font-size:11.5px;color:var(--m)}.cg-cal-leg i{display:inline-block;width:10px;height:10px;margin:0 4px 0 10px;vertical-align:-1px}.cg-cal-leg i.s{background:var(--v)}.cg-cal-leg i.m{background:#eaf3ef;border:1px solid #9cc0b4}.cg-cal-leg i.fe{background:#f6ece0;border:1px solid #d9c38f}
 @media (max-width:900px){.cg-cms{grid-template-columns:1fr}}
 
@@ -804,7 +810,17 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-prev{padding:18px;min-width:0;overflow:auto;background:#eef1ef}.cg-paper{width:min(100%,780px);min-height:900px;margin:0 auto;background:#fff;border:1px solid #d6d9d6;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:34px 38px;color:#1f302e;outline:none}.cg-paper:focus{box-shadow:0 0 0 2px #a57829,0 4px 18px rgba(0,0,0,.08)}.cg-paper h1{font-size:24px;color:var(--v);margin:0 0 4px}.cg-paper h2{font-size:15px;color:var(--v);margin:22px 0 8px;border-bottom:1px solid #ddd;padding-bottom:5px}.cg-paper p{margin:4px 0 10px;font-size:12.5px}.cg-paper table{width:100%;border-collapse:collapse;font-size:10.5px}.cg-paper th,.cg-paper td{border-bottom:1px solid #e7e7e2;padding:5px;text-align:left;vertical-align:top}.cg-paper th{background:#f5f4ef;color:#4f5e5a}.cg-paper .mono{font-size:10px}
 .cg-set{border-left:1px solid var(--b);padding:12px;background:var(--p);overflow:auto}.cg-set label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-set input,.cg-set select,.cg-set textarea{width:100%;box-sizing:border-box}.cg-set .cg-exp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cg-set .cg-exp button{height:32px}
 .cg-composer{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px}.cg-form{border:1px solid var(--b);background:var(--w);padding:14px}.cg-form label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-form input,.cg-form textarea,.cg-form select{width:100%;box-sizing:border-box}.cg-form textarea{min-height:150px}.cg-checks{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 14px;font-size:12px}.cg-checks label{display:flex;align-items:center;gap:5px;margin:0}.cg-checks input{width:auto}.cg-hist{border:1px solid var(--b);background:var(--w)}.cg-hist header{padding:10px 12px;border-bottom:1px solid var(--b);font-weight:700}.cg-msg{padding:10px 12px;border-bottom:1px solid var(--l2)}.cg-msg b{display:block;font-size:12.5px}.cg-msg small{color:var(--m)}.cg-msg p{font-size:12px;margin:4px 0 0;white-space:pre-wrap}.cg-status{font-size:12px;color:var(--m);padding:10px 0}.cg-actions a{color:inherit;text-decoration:none}
-#cg-regras{border:1px solid var(--b);background:var(--w);min-height:640px}
+#cg-regras{background:var(--w);min-height:560px}
+.cg-chefia{padding-bottom:40px}.cg-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:end;margin:20px 0 16px;padding-bottom:14px;border-bottom:2px solid var(--v)}
+.cg-top h1{font-size:30px;letter-spacing:-.03em;color:var(--v);margin:0;line-height:1}.cg-top .k{margin:0 0 4px}
+.cg-faixa{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--b);background:var(--w)}.cg-faixa>div{padding:8px 14px;border-right:1px solid var(--l2)}.cg-faixa>div:last-child{border:0}
+.cg-faixa b{font:600 20px "JetBrains Mono",monospace;display:block;color:var(--v);line-height:1.1}.cg-faixa span{color:var(--m2);font-size:11px}
+.cg-px{border:1px solid var(--b);border-top:2px solid var(--v);background:var(--w);margin-bottom:16px;min-width:0}
+.cg-px>header{display:flex;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid var(--b);background:var(--p)}.cg-px>header>span:first-child{display:flex;flex-direction:column;gap:1px;min-width:0}
+.cg-px>header .k{margin:0;font:500 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.cg-px>header b{font:700 15px Figtree,sans-serif;color:var(--v)}
+.cg-px>header .cg-cal-nav,.cg-px>header .cg-tb{margin-left:auto}.cg-tb{display:flex;gap:6px;align-items:center}.cg-tb .cg-status{font-size:11.5px;color:var(--m);margin-right:6px;padding:0}
+.cg-tool .cg-studio{height:600px;min-height:0;border:0;margin:0}.cg-tool .cg-cat,.cg-tool .cg-prev,.cg-tool .cg-set{max-height:none;height:100%;overflow:auto;box-sizing:border-box}.cg-tool .cg-paper{min-height:0}.cg-nota{font-size:11.5px;color:var(--m);margin:10px 0 0}
+@media(max-width:1000px){.cg-top{grid-template-columns:1fr}.cg-tool .cg-studio{height:auto}.cg-tool .cg-cat,.cg-tool .cg-prev,.cg-tool .cg-set{height:auto;max-height:520px}}
 @media(max-width:1000px){.cg-studio{grid-template-columns:190px minmax(0,1fr)}.cg-set{grid-column:1/-1;border-left:0;border-top:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cg-composer{grid-template-columns:1fr}}
 @media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cg-studio{grid-template-columns:1fr}.cg-cat{max-height:none;border-right:0;border-bottom:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.cg-prev{padding:8px}.cg-paper{padding:22px 18px;min-height:700px}.cg-set{grid-template-columns:1fr}}
 </style>
@@ -852,7 +868,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 </head>
 <body>
 <header id="top">
-  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT · Caput</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button><button type="button" data-mod="coordenacao" title="Equipe, distribuição e acompanhamento">Coordenação</button><button type="button" data-mod="comunicacao" title="Avisos, solicitações e canais">Comunicação</button><button type="button" data-mod="chefia" title="Regras, acervo e administração">Chefia</button></nav></div></div></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT · Caput</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="chefia" class="on" title="Calendário, regras, acervo e relatórios">Chefia</button><button type="button" data-mod="triagem" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button><button type="button" data-mod="coordenacao" title="Equipe, distribuição e acompanhamento">Coordenação</button><button type="button" data-mod="comunicacao" title="Avisos, solicitações e canais">Comunicação</button></nav></div></div></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" hidden title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" hidden title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
@@ -867,6 +883,8 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
 <script src="/init/assets/js/regras-gerais.js"></script>
+<link rel="stylesheet" href="/init/motor/assets/css/02-calendario.css">
+<script src="/init/motor/assets/js/11-calendario.js"></script>
 <script>
 (function () {
 'use strict';
@@ -1117,7 +1135,7 @@ function telaMotor(aba, depois) { const w = M(); if (!w || !w.CMTSessao) { toast
   try { w.CMTSessao.abrir(aba); } catch (e) { toast('Não abri a tela: ' + e.message, true); return; }
   let bar = $('#motor-bar'); if (!bar) { bar = D.createElement('div'); bar.id = 'motor-bar'; D.body.appendChild(bar); }
   const ROT = { sessoes: 'Calendário do gabinete e sessões', regras: 'Regras de etiquetas', desig: 'Designação: quem recebe em cada critério', marcos: 'Sessão nova e marcos', equipe: 'Cadastro da equipe' };
-  bar.innerHTML = '<button type="button" class="btn" id="motor-volta">← Voltar às regras gerais</button><b>' + esc(ROT[aba] || 'Edição') + '</b><span>As alterações gravam sozinhas no procs-muta.</span>';
+  bar.innerHTML = '<button type="button" class="btn" id="motor-volta">← Voltar</button><b>' + esc(ROT[aba] || 'Edição') + '</b><span>As alterações gravam sozinhas no procs-muta.</span>';
   D.body.classList.add('motor-on');
   $('#motor-volta').onclick = () => { D.body.classList.remove('motor-on'); try { w.CMTSessao.fechar(); } catch (e) {} bar.remove(); if (depois) depois(); }; }
 W.__telaMotor = telaMotor;
@@ -1155,7 +1173,7 @@ function render() {
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
   D.title = 'Caput · ' + tit;
   if (naPauta) { $('#rodape').hidden = true; D.body.classList.remove('rod-min'); try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
-  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); }, 0); }
+  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); CAL_SIG = ''; pintaCal(true); }, 0); }
   else if (ABA === 'coordenacao') { m.innerHTML = vCoordenacao(); setTimeout(montarCoord, 0); }
   else if (ABA === 'comunicacao') { m.innerHTML = vComunicacao(); setTimeout(cgComCarregar,0); }
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
@@ -1165,45 +1183,73 @@ function render() {
 
 
 /* Chefia › Calendário: sessões, marcos e dias sem expediente do calendário do gabinete (mesma fonte do motor) */
-let CAL_MES = '';
-function calChefia() {
-  const s = SES(); let st = null; try { st = s && s.estado && s.estado(); } catch (e) {} if (!st || !st.sessoes) return '<p class="cg-status">Calendário carregando…</p>';
-  let ex = {}; try { ex = M().CMTExpediente() || {}; } catch (e) {} const sem = new Set(ex.semExpediente || []), nomes = ex.nomes || {}, ws = ex.diasSemana || [1, 2, 3, 4, 5];
-  const hoje = new Date().toISOString().slice(0, 10), base = CAL_MES || hoje.slice(0, 7), EV = {};
-  const add = (d, t, c, id) => { if (/^\d{4}-\d{2}-\d{2}$/.test(d || '')) (EV[d] = EV[d] || []).push({ t, c, id }); };
-  (st.sessoes || []).forEach((ss) => { const f = ss.fases || {}, b = br(ss.data).slice(0, 5); add(ss.data, 'Sessão' + (ss.itens && ss.itens.length ? ' · ' + ss.itens.length : ''), 's', ss.id); add(f.pauta, 'Peço dia ' + b, 'm', ss.id); add(f.inicio, 'Início ' + b, 'm', ss.id); add(f.minutas, 'Entrega ' + b, 'm', ss.id); add(f.liberacao, 'Liberação ' + b, 'm', ss.id); });
-  const mes = (ym) => { const [y, m] = ym.split('-').map(Number), d1 = new Date(Date.UTC(y, m - 1, 1)), n = new Date(Date.UTC(y, m, 0)).getUTCDate(), off = d1.getUTCDay();
-    let h = '<div class="cg-cm"><b>' + d1.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric', timeZone: 'UTC' }) + '</b><div class="cg-cg">' + ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map((x) => '<i>' + x + '</i>').join('') + '<span></span>'.repeat(off);
-    for (let k = 1; k <= n; k++) { const d = ym + '-' + String(k).padStart(2, '0'), w = (off + k - 1) % 7, fe = sem.has(d), fds = ws.indexOf(w) < 0, E = EV[d] || [];
-      h += '<span class="' + [fds ? 'fds' : '', fe ? 'fe' : '', d === hoje ? 'hj' : ''].join(' ') + '" title="' + esc([fe ? (nomes[d] || 'Sem expediente') : ''].concat(E.map((x) => x.t)).filter(Boolean).join(' · ')) + '"><em>' + k + '</em>' + E.map((x) => '<button type="button" class="ev ' + x.c + '" data-cgses="' + esc(x.id) + '">' + esc(x.t) + '</button>').join('') + (fe && !fds ? '<small>' + esc((nomes[d] || 'sem expediente').split(' (')[0]) + '</small>' : '') + '</span>'; }
-    return h + '</div></div>'; };
-  const [y, m] = base.split('-').map(Number), prox = new Date(Date.UTC(y, m, 1)).toISOString().slice(0, 7);
-  return '<div class="cg-cms">' + mes(base) + mes(prox) + '</div><p class="cg-cal-leg"><i class="s"></i>sessão <i class="m"></i>marco <i class="fe"></i>sem expediente · datas em Chefia › Calendário forense</p>'; }
-function pintaCal() { const el = $('#cg-cal'); if (el) el.innerHTML = calChefia(); }
-D.addEventListener('click', (e) => { const b = e.target.closest('[data-cgcal],[data-cgses]'); if (!b) return;
+let CAL_SIG = '', CAL_EL = null;
+function calDados() { const s = SES(); let st = null; try { st = s && s.estado && s.estado(); } catch (e) {} if (!st || !st.sessoes) return null;
+  let ex = {}; try { ex = M().CMTExpediente() || {}; } catch (e) {} const lim = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10), prog = {};
+  const sess = st.sessoes.filter((x) => x.data && x.data >= lim).sort((a, b) => a.data.localeCompare(b.data)).map((x) => { const f = x.fases || {}, it = x.itens || [];
+    prog[x.data] = { minutadas: it.filter((i) => i.dataMinuta).length, corrigidas: it.filter((i) => i.dataCorrecao).length, liberadas: it.filter((i) => i.dataLiberacao).length };
+    return { date: x.data, hora: x.hora || '', marcos: { pautarAte: f.pauta || '', inicioPreparacao: f.inicio || '', entregaMinutas: f.minutas || '', liberacao: f.liberacao || '' }, processos: it.length, _id: x.id, cor: x.cor || '' }; });
+  const fer = (ex.semExpediente || []).map((d) => [d, (ex.nomes || {})[d] || 'Sem expediente']);
+  return { sess, prog, fer, rec: ex.recesso || [] }; }
+function pintaCal(forca) { const el = $('#cg-cal'), fo = $('#cg-forense'); if (fo) fo.innerHTML = calForense(); if (!el) return;
+  const Dd = calDados(); if (!Dd || !W.CMTCalendario) { if (!/carregando/.test(el.textContent)) el.innerHTML = '<p class="cg-status">Calendário carregando…</p>'; return; }
+  try { if (!W.CMTAgenda && M() && M().CMTAgenda) W.CMTAgenda = M().CMTAgenda; } catch (e) {}
+  const sig = JSON.stringify([Dd, HOJE]); if (!forca && sig === CAL_SIG && CAL_EL && el.contains(CAL_EL)) return; CAL_SIG = sig;
+  /* elemento novo a cada montagem: o calendário prende os ouvintes no elemento, e montar de novo no mesmo duplicaria os cliques */
+  const novo = D.createElement('div'); novo.id = 'cc-cal'; if (CAL_EL && el.contains(CAL_EL)) CAL_EL.replaceWith(novo); else { el.innerHTML = ''; el.appendChild(novo); } CAL_EL = novo;
+  W.CMTCalendario.montar(CAL_EL, { sessoes: Dd.sess }, { hoje: HOJE, progresso: Dd.prog, feriados: Dd.fer, recesso: Dd.rec,
+    abrir: (dt) => { const x = Dd.sess.find((y) => y.date === dt); if (!x) return; try { sessionStorage.setItem('pt-ses', x._id); } catch (er) {} try { if (W.CMTPautas && W.CMTPautas.settings) W.CMTPautas.settings.sessId = x._id; } catch (er) {} ir('pautas'); } }); }
+/* rodapé do calendário: o calendário forense (expediente, feriados, sessões e julgadores, contagem dos marcos) */
+function calForense() {
+  const s = SES(); let st = null; try { st = s && s.estado && s.estado(); } catch (e) {} if (!st || !st.sessoes) return '';
+  let ex = {}; try { ex = M().CMTExpediente() || {}; } catch (e) {} const sem = (ex.semExpediente || []).slice().sort(), nomes = ex.nomes || {}, tipos = ex.tipos || {}, sp = new Set(ex.semPrazo || []);
+  const fim = new Date(Date.now() + 120 * 864e5).toISOString().slice(0, 10), prox = sem.filter((d) => d >= HOJE && d <= fim), wd = (d) => ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'][new Date(d + 'T12:00:00Z').getUTCDay()];
+  let pr = {}; try { pr = (s.regrasProdutividade && s.regrasProdutividade()) || {}; } catch (e) {} const lib = +((pr.painel || {}).liberacao) || 5, rit = +((pr.painel || {}).minutasDia) || 3;
+  const U = s.diasUteis || {}, ok = U.dataOk || (() => true), ut = U.util || (() => true);
+  const fut = (st.sessoes || []).filter((x) => x.data >= HOJE).sort((a, b) => a.data.localeCompare(b.data));
+  const aviso = (ss) => { const f = ss.fases || {}, A = []; [['Peço dia', f.pauta], ['Início', f.inicio], ['Entrega', f.minutas], ['Liberação', f.liberacao]].forEach(([t, v]) => { if (!v) A.push(t + ' sem data'); else if (!ok(v)) A.push(t + ' inválido (' + br(v) + ')'); else if (!ut(v)) A.push(t + ' em dia sem expediente (' + br(v) + ')'); });
+    const O = [['Peço dia', f.pauta], ['Início', f.inicio], ['Entrega', f.minutas], ['Liberação', f.liberacao], ['Sessão', ss.data]].filter(([, v]) => v && ok(v)); for (let i = 1; i < O.length; i++) if (O[i][1] < O[i - 1][1]) A.push(O[i][0] + ' antes de ' + O[i - 1][0]); return A; };
+  const jul = (ss) => { const J = ss.julgadores || {}, C = J.composicao || [], Sb = J.substituicoes || [], Fd = ((ss.foraSessao || {}).d || []);
+    return (C.length ? C.map((c) => esc(c.nome.split(' ').slice(0, 2).join(' ')) + (c.papel && c.papel !== 'vogal' ? ' <small>' + esc(c.papel.replace('vogal (juiz federal convocado)', 'convocado')) + '</small>' : '')).join(' · ') : '<small>composição padrão da Turma</small>') +
+      (Sb.length ? '<small class="sub">' + Sb.length + ' substituição(ões)</small>' : '') + (Fd.length ? '<small class="sub">fora das minutas: ' + esc(Fd.join(', ')) + '</small>' : ''); };
+  return '<div class="cg-fo"><div><h4>Sem expediente · próximos 120 dias <span>' + prox.length + '</span></h4>' + (prox.length ? '<ul>' + prox.map((d) => '<li><b>' + br(d).slice(0, 5) + '</b><small>' + wd(d) + '</small><span>' + esc(nomes[d] || 'Sem expediente') + (tipos[d] ? ' <i>' + esc(tipos[d]) + (sp.has(d) ? ' · não conta prazo' : '') + '</i>' : '') + '</span><button type="button" class="x" data-cgfx="tira" data-d="' + d + '" title="Tirar do calendário" aria-label="Tirar ' + br(d) + '">×</button></li>').join('') + '</ul>' : '<p class="cg-vz">Nenhuma data cadastrada. Sem elas, feriados contam como dia útil nos marcos e prazos.</p>') +
+      '<div class="cg-fo-add"><input type="date" id="cgfx-d" min="2000-01-01" max="2100-12-31" aria-label="Data"><input id="cgfx-n" placeholder="Motivo (ex.: feriado municipal)" aria-label="Motivo"><select id="cgfx-t" aria-label="Tipo">' + ['Feriado nacional', 'Feriado da Justiça Federal', 'Feriado estadual', 'Feriado municipal', 'Recesso forense', 'Ponto facultativo', 'Suspensão de expediente', 'Outro'].map((t) => '<option>' + t + '</option>').join('') + '</select><button type="button" class="btn sm" data-cgfx="poe">Incluir</button></div>' +
+      '<div class="cg-fo-a"><button type="button" class="lk" data-cgfx="jf">Incluir os feriados da Justiça Federal de ' + HOJE.slice(0, 4) + ' e ' + (+HOJE.slice(0, 4) + 1) + '</button></div></div>' +
+    '<div><h4>Sessões e julgadores <span>' + fut.length + '</span></h4><ul class="cg-fo-s">' + fut.map((ss) => { const A = aviso(ss); return '<li><button type="button" class="lk" data-cgses="' + esc(ss.id) + '">' + br(ss.data).slice(0, 5) + ' <small>' + wd(ss.data) + '</small></button><span>' + jul(ss) + (A.length ? '<small class="av">⚠ ' + esc(A.join(' · ')) + '</small>' : '') + '</span></li>'; }).join('') + '</ul></div>' +
+    '<div><h4>Contagem dos prazos</h4><dl><dt>Dia útil</dt><dd>dia de expediente (' + ((ex.diasSemana || [1, 2, 3, 4, 5]).length === 5 ? 'segunda a sexta' : 'dias marcados') + ') fora das datas sem expediente</dd><dt>Liberação</dt><dd>' + lib + ' dias úteis antes da sessão</dd><dt>Entrega das minutas</dt><dd>1 dia útil antes da liberação, ou quando a capacidade cobre a pauta (' + rit + ' minutas por dia por servidor)</dd><dt>Recesso</dt><dd>' + ((ex.recesso || []).length ? br(ex.recesso[0]) + ' a ' + br(ex.recesso[1]) : '20/12 a 20/01') + ' · prazos suspensos</dd></dl>' +
+      '<p class="cg-vz">Liberação e ritmo se ajustam em Coordenação › Regras de produtividade; os marcos de cada sessão, no cartão da sessão em Pautas.</p></div></div>'; }
+D.addEventListener('click', (e) => { const b = e.target.closest('[data-cgses],[data-cgfo],[data-cgfx]'); if (!b) return;
+  if (b.dataset.cgfx) { const s = SES(), X = s && s.semExpediente; if (!X) { toast('O motor ainda está carregando; tente em instantes.', true); return; } const k = b.dataset.cgfx;
+    if (k === 'tira') { if (!confirm('Tirar ' + br(b.dataset.d) + ' do calendário? A data volta a contar como dia útil.')) return; X.tira(b.dataset.d); }
+    else if (k === 'poe') { const d = ($('#cgfx-d') || {}).value, n = (($('#cgfx-n') || {}).value || '').trim(), t = ($('#cgfx-t') || {}).value; if (!d) { toast('Informe a data.', true); return; } X.poe([d], t, n || t, !/Ponto facultativo|Outro/.test(t)); }
+    else if (k === 'jf') { const y = +HOJE.slice(0, 4), n = X.sugestaoJF([y, y + 1]); toast(n + ' data(s) da Justiça Federal no calendário.'); }
+    pintaCal(); Promise.resolve(s.gravar && s.gravar()).then((r) => toast(r && r.ok === false && !r.ocupado ? 'Não gravou: ' + (r.erro || '') : 'Calendário gravado no procs-muta.', !!(r && r.ok === false && !r.ocupado))); return; }
+  if (b.dataset.cgfo) { telaMotor(b.dataset.cgfo, () => pintaCal()); return; }
   if (b.dataset.cgses) { const id = b.dataset.cgses; try { sessionStorage.setItem('pt-ses', id); } catch (x) {} try { if (W.CMTPautas && W.CMTPautas.settings) W.CMTPautas.settings.sessId = id; } catch (x) {} ir('pautas'); return; }
-  const v = +b.dataset.cgcal, h = new Date().toISOString().slice(0, 7); if (!v) CAL_MES = h; else { const [y, m] = (CAL_MES || h).split('-').map(Number); CAL_MES = new Date(Date.UTC(y, m - 1 + v, 1)).toISOString().slice(0, 7); } pintaCal(); });
+});
 /* o motor chega depois: o calendário se completa sozinho */
-setInterval(() => { const el = $('#cg-cal'); if (el && /Calendário carregando/.test(el.textContent)) pintaCal(); }, 1000);
+/* sessões, marcos ou expediente mudaram (Pautas, motor, outra aba): o calendário se refaz; sem mudança, nada é redesenhado */
+setInterval(() => { if (ABA !== 'chefia' || D.hidden) return; if ($('#cg-cal')) pintaCal(); }, 2000);
 
 /* Novos módulos: preservação das funções anteriores */
 let CG_CHEFIA_ABA='escopo';
 function equipeAtual(){ try { const s=SES(), e=s && (typeof s.equipe==='function'?s.equipe():s.equipe); return Array.isArray(e)?e:[]; } catch(e){ return []; } }
 function montarChefia(){
   const alvo=$('#cg-regras'); if(!alvo||!W.CMTRegrasGerais) return;
-  W.CMTRegrasGerais.embutir(alvo,{ motor:M, abrirMotor:telaMotor, pagina:'chefia', aba:CG_CHEFIA_ABA, abas:['escopo','destino','acervo','calendario','etiquetas'],
+  W.CMTRegrasGerais.embutir(alvo,{ motor:M, abrirMotor:telaMotor, pagina:'chefia', aba:CG_CHEFIA_ABA, abas:['escopo','destino','acervo','etiquetas'],
     contagem:()=>{ const o={}; (FONTE||((core()||{}).rows)||[]).forEach(r=>{const t=String(r.tarefa_atual||'').trim();if(t)o[t]=(o[t]||0)+1;}); return o; },
     aoGravarEscopo:(j)=>{ ESCOPO={triar:(j.triar||[]).map(x=>[x.tarefa,x.motivo||'']),ignorar:j.ignorar||{},lido:true}; montaEscopo(); construir(); toast('Escopo da triagem atualizado.'); }
   });
 }
 function vChefia(){
-  const apt=U.filter(o=>o.apto&&!o.pend.length).length;
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Central de gestão</p><h1>Chefia.</h1><p>Acervo, regras da triagem, calendário e relatórios do gabinete.</p></div></div>'+
-    '<div class="cg-grid" style="margin-bottom:14px"><section class="cg-box"><header>Acervo e fontes</header><p>Planilhas do PJe e do Power BI → carga → atualização da fonte pelo GitHub (Action), com complementação pelo DataJud.</p><div class="cg-actions"><button class="btn pri" data-cg-acervo="1">Importar / atualizar acervo</button></div><p>'+nP(ALL.length)+' processos na fonte · '+nP(U.length)+' em triagem</p></section>'+
-    '<section class="cg-box"><header>Indicadores</header><div class="cg-kpis" style="margin:0"><div><b>'+nP(ALL.length)+'</b><span>processos na fonte</span></div><div><b>'+nP(U.length)+'</b><span>em triagem</span></div><div><b>'+nP(apt)+'</b><span>aptos sem pendência</span></div><div><b>'+nP(sessoes().length)+'</b><span>sessões futuras</span></div></div></section></div>'+
-    '<section class="cg-box cg-cal" aria-label="Calendário do gabinete"><header>Calendário<span class="cg-cal-nav"><button type="button" data-cgcal="-1" aria-label="Mês anterior">‹</button><button type="button" data-cgcal="0">hoje</button><button type="button" data-cgcal="1" aria-label="Próximo mês">›</button></span></header><div id="cg-cal">'+calChefia()+'</div></section>'+
-    '<div id="cg-regras" aria-label="Regras da triagem, acervo e calendário"><p class="cg-status">Carregando regras…</p></div>'+
-    '<div class="cg-head" style="margin-top:22px"><div><p class="k">Inteligência</p><h1 style="font-size:24px">Relatórios.</h1><p>Catálogo, prévia editável e exportação em PDF, Word, Excel ou CSV.</p></div></div>'+vRelatorios()+'</div>';
+  const apt=U.filter(o=>o.apto&&!o.pend.length).length, kpi=(v,t)=>'<div><b>'+v+'</b><span>'+t+'</span></div>';
+  const cx=(k,t,extra,corpo,cls)=>'<section class="cg-px'+(cls?' '+cls:'')+'"><header><span><span class="k">'+k+'</span><b>'+t+'</b></span>'+(extra||'')+'</header>'+corpo+'</section>';
+  return '<div class="wrap cg-chefia"><div class="cg-top"><div><p class="k">Central de gestão</p><h1>Chefia.</h1></div>'+
+    '<div class="cg-faixa">'+kpi(nP(ALL.length),'processos na fonte')+kpi(nP(U.length),'em triagem')+kpi(nP(apt),'aptos sem pendência')+kpi(nf(sessoes().length),'sessões futuras')+'</div>'+
+    '<div class="cg-acv"><button class="btn pri" data-cg-acervo="1" title="Planilhas do PJe e do Power BI → carga → fonte no GitHub, com complementação pelo DataJud">Importar / atualizar acervo</button></div></div>'+
+    cx('Calendário do gabinete','Sessões, marcos, afazeres e dias sem expediente','','<div id="cg-cal"><p class="cg-status">Calendário carregando…</p></div><div id="cg-forense">'+calForense()+'</div>','cg-cal')+
+    cx('Regras gerais','Escopo da triagem, destino provável, acervo fonte e etiquetas','','<div id="cg-regras" aria-label="Regras da triagem, acervo e calendário"><p class="cg-status">Carregando regras…</p></div>')+
+    vRelatorios()+'</div>';
 }
 /* Coordenação: equipe, regras de designação e de produtividade (regras gerais embutidas), operação diária e competências */
 let CG_COORD_ABA='equipe';
@@ -1264,16 +1310,18 @@ function cgRelHtml(){
 }
 function vRelatorios(){
   const d=cgRelDef(),L=cgRelLista(CG_REL.id);
-  return '<section class="cg-studio"><aside class="cg-cat"><h3>Relatórios</h3>'+CG_REL_CAT.map(x=>'<button type="button" data-cg-rmodel="'+x[0]+'" class="'+(x[0]===CG_REL.id?'on':'')+'">'+esc(x[1])+'<small>'+esc(x[2])+'</small></button>').join('')+'</aside>'+
+  return '<section class="cg-px cg-tool" aria-label="Relatórios"><header><span><span class="k">Inteligência · ferramenta</span><b>Relatórios</b></span>'+
+    '<span class="cg-tb"><span class="cg-status">'+nf(L.length)+' registro(s)</span><button class="btn pri sm" data-cg-rel-export="pdf">PDF</button><button class="btn sm" data-cg-rel-export="doc">Word</button><button class="btn sm" data-cg-rel-export="xlsx">Excel</button><button class="btn sm" data-cg-rel-export="csv">CSV</button></span></header>'+
+    '<div class="cg-studio"><aside class="cg-cat"><h3>Modelos</h3>'+CG_REL_CAT.map(x=>'<button type="button" data-cg-rmodel="'+x[0]+'" class="'+(x[0]===CG_REL.id?'on':'')+'">'+esc(x[1])+'<small>'+esc(x[2])+'</small></button>').join('')+'</aside>'+
     '<div class="cg-prev"><article id="cg-rel-prev" class="cg-paper" contenteditable="true" spellcheck="false" aria-label="Prévia editável do relatório">'+cgRelHtml()+'</article></div>'+
-    '<aside class="cg-set"><h3>Relatório</h3><label>Título<input id="cg-rel-title" value="'+esc(CG_REL.titulo||d[1])+'"></label><label>Subtítulo<input id="cg-rel-sub" value="'+esc(CG_REL.sub||d[2])+'"></label>'+
-    '<label>Formato<select id="cg-rel-format"><option value="pdf">PDF</option><option value="doc">Word (.doc)</option><option value="xlsx">Excel (.xlsx)</option><option value="csv">CSV</option></select></label>'+
+    '<aside class="cg-set"><h3>Ajustes</h3><label>Título<input id="cg-rel-title" value="'+esc(CG_REL.titulo||d[1])+'"></label><label>Subtítulo<input id="cg-rel-sub" value="'+esc(CG_REL.sub||d[2])+'"></label>'+
+    '<label>Formato padrão<select id="cg-rel-format"><option value="pdf">PDF</option><option value="doc">Word (.doc)</option><option value="xlsx">Excel (.xlsx)</option><option value="csv">CSV</option></select></label>'+
     '<div class="cg-checks" style="display:grid"><label><input type="checkbox" data-cg-cap="resumo" '+(CG_REL.caps.resumo?'checked':'')+'> Resumo</label><label><input type="checkbox" data-cg-cap="tabela" '+(CG_REL.caps.tabela?'checked':'')+'> Tabela/listagem</label><label><input type="checkbox" data-cg-cap="obs" '+(CG_REL.caps.obs?'checked':'')+'> Observações</label></div>'+
-    '<p class="cg-status">'+nP(L.length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.</p><div class="cg-exp"><button class="btn pri" data-cg-rel-export="pdf">PDF</button><button class="btn" data-cg-rel-export="doc">Word</button><button class="btn" data-cg-rel-export="xlsx">Excel</button><button class="btn" data-cg-rel-export="csv">CSV</button></div></aside></section>';
+    '<p class="cg-nota">A prévia pode ser editada diretamente antes de exportar.</p></aside></div></section>';
 }
 function vInteligencia(){ return vChefia(); }
 function cgRelSincronizar(){ const f=$('#cg-rel-format'); if(f)f.value=CG_REL.formato; }
-function cgRelAtualizar(){ const p=$('#cg-rel-prev'); if(p)p.innerHTML=cgRelHtml(); const st=$('.cg-set .cg-status'); if(st)st.textContent=nP(cgRelLista(CG_REL.id).length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.'; }
+function cgRelAtualizar(){ const p=$('#cg-rel-prev'); if(p)p.innerHTML=cgRelHtml(); const st=$('.cg-tool .cg-tb .cg-status'); if(st)st.textContent=nf(cgRelLista(CG_REL.id).length)+' registro(s)'; }
 function cgRelRows(){
   if(CG_REL.id==='sessoes')return sessoes().map(s=>({Sessao:nomeSes(s),Pautar_ate:br((s.fases||{}).pauta||''),Itens:(s.itens||[]).length,Pre_pauta:(s.previa||[]).length}));
   return cgRelLista(CG_REL.id).map(o=>({Processo:o.cnj||'',Classe:o.cl||'',Assunto:o.assunto||'',Tarefa:o.tarefa||'',Servidor:o.minutante||'',Destino:(o.dest&&o.dest.t)||''}));
