@@ -213,7 +213,7 @@ test('Mural: passos do ponto de vista de quem está logado, sinalizações por p
   assert.match(h, /\.calrow #lista\{flex:1;min-height:0;overflow:auto/);
   assert.match(h, /<div class=\\"calrow\\"><div class=\\"esq\\"><slot name=\\"cal\\"><\\\/slot><nav class=\\"kpis\\" id=\\"kpis\\"[^>]*><\\\/nav><div class=\\"board\\">/);
   assert.match(h, /#mu-host>\.av-box #avisos>\.nt:nth-child\(n\+3\)\{display:none!important\}/);
-  assert.match(h, /class=\\"sessions\\" id=\\"sesl\\"/);
+  assert.match(h, /class=\\"sessions lsess\\" id=\\"sesl\\"/);
   assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
 });
 
@@ -410,6 +410,13 @@ test('Prontuário: etapas dentro do cartão do processo (Monocráticas e Pauta, 
   assert.match(h, /function prtPauta2\(el,it,o3,ix,V\)\{/);
   assert.match(h, /html body #prq \.pmn2 \.pm-caso\{flex:none;max-height:58vh;overflow-y:auto/);
   assert.match(h, /html body #prq \.pmn2 \.pm-res\{flex-wrap:nowrap!important/);
-  assert.match(h, /<slot name=\\"alm\\"><\\\/slot><section class=\\"panel\\"><h2>Sinalizações em aberto/);
+  assert.match(h, /<slot name=\\"alm\\"><\\\/slot><div class=\\"sessions lsess\\"/);
   assert.match(h, /#mu-host #hc-cal-full \.cc-esq \.cc-al,#mu-host #hc-cal-full \.cc-esq \.cc-al\+\.cc-meta\{display:none!important\}/);
+});
+
+test('Mural: aviso em destaque na linha do Foco de hoje; cartões das sessões na coluna da direita, acima das sinalizações', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /<div class=\\"toprow\\"><div class=\\"focus\\" id=\\"focus\\"[^>]*><\\\/div><slot name=\\"dest\\"><\\\/slot><\\\/div>/);
+  assert.match(h, /<slot name=\\"alm\\"><\\\/slot><div class=\\"sessions lsess\\" id=\\"sesl\\"[^>]*><\\\/div><section class=\\"panel\\"><h2>Sinalizações em aberto/);
 });
