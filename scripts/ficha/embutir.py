@@ -24,6 +24,11 @@ for rel in ['apoio/ex-officio/index.html', 'cmt-monitor.html']:
     p.write_text(s, encoding='utf-8')
     print(rel, 'ok', len(s))
 
+# Caput (caput/triagem): a ficha é carregada de caput/assets (js/cmt-ficha.js e css/95-ficha-unica.css), com as mesmas fontes
+cj, cc = R / 'caput/assets/js/cmt-ficha.js', R / 'caput/assets/css/95-ficha-unica.css'
+if cj.exists():
+    cj.write_text(js, encoding='utf-8'); cc.write_text('\n' + css, encoding='utf-8'); print('caput/assets ok', len(js))
+
 # Caput: o motor (iframe, guardado comprimido em var MOTOR) recebe o calendário forense e o CSS do editor do calendário do gabinete
 import base64, gzip, re
 mon = R / 'cmt-monitor.html'

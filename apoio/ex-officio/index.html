@@ -7394,7 +7394,6 @@ html.cmt-fx-open{overflow:hidden!important}
 #cmt-fx .fx-v2 .rs-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start!important}
 #cmt-fx .fx-v2 .rs-col h4 button{white-space:nowrap!important;flex:none!important}#cmt-fx .fx-v2 .rs-col h4>span:not(.rs-ic){white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;min-width:0!important}
 
-
 /* ===== Ficha v2 modular: painéis encostados, bordas compartilhadas, sem espaço entre eles ===== */
 #cmt-fx .fx-v2 .fx2-side{display:flex!important;flex-direction:column!important;padding-bottom:14px!important}
 #cmt-fx .fx-v2 .fx2-side>*{margin:0!important;border:1px solid var(--cx-line)!important;border-radius:0!important;background:#fff!important}
@@ -7472,6 +7471,7 @@ html.cmt-fx-open{overflow:hidden!important}
 #cmt-fx .fx-v2 .rs-col .fx2-rod{margin-top:auto!important}
 #cmt-fx .fx-v2 .rs-top{align-items:stretch!important}#cmt-fx .fx-v2 .rs-top>*{height:auto!important}
 #cmt-fx .fx-v2 .fx2-side>:last-child{flex:1 0 auto!important}
+
 </style>
 <script id="cmt-ficha">
 /* CMT · Calendário forense do gabinete: feriados, recesso e datas sem expediente, e a contagem de prazos processuais.
@@ -9151,6 +9151,10 @@ window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true);
 })();
 
 
+</script>
+<!-- cmt-ficha:fim -->
+<script id="cmt-ficha-extra">
+/* complementos da Ex Officio à ficha única (fora do bloco que scripts/ficha/embutir.py troca) */
 
 /* botão de copiar: número do processo (no prontuário e nos cartões) e campos de ID do prontuário; peças numa linha só.
    Enfeita o que a página desenha, sem mexer no desenho original nem nos campos (data-p continua igual). */
@@ -9189,7 +9193,6 @@ window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true);
     else{var c=b.previousElementSibling;copia(c&&c.textContent,b);}},true);
 })();
 </script>
-<!-- cmt-ficha:fim -->
 <style>
 
 /* ===== Painel do relator (#cmt): cabeçalho próprio, painéis 01–04 e modo pauta ===== */
