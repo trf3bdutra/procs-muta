@@ -24086,8 +24086,8 @@
    "exequente": "SEIVA PRODUTOS E SERVICOS LTDA",
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Taxa de Fiscalização Ambiental",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · taxa de controle e fiscalização ambiental (TCFA) · exceção de pré-executividade · inatividade da empresa após cisão parcial",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -24166,6 +24166,88 @@
     "outros": "Decisão ID 353878440 (11/02/2026, Des. Fed. Leila Paiva): indeferiu a antecipação da tutela recursal. Decisão ID 368456623 (30/04/2026): redistribuição à Turma Regional de MS (Resolução 33/2025).",
     "representacao": "Agravante: advogados constituídos [VALIDAR procuração]. Agravado: IBAMA (PGF).",
     "preparo": "PagTesouro/Pix, código 20466, R$ 64,26, em 05/02/2026 (ID 353323175); guia \"aguardando pagamento\" ID 353323168; sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Execução fiscal — TCFA (IBAMA); exceção de pré-executividade; inatividade após cisão parcial",
+   "especificidades": "CDAs 259174 e 259175, R$ 77.032,09, do 1º trimestre de 2017 ao 4º trimestre de 2018 · 21ª alteração contratual (cisão parcial); empresas sucessoras desde 2015 e 2016 · Certidão de oficial de justiça sobre a inatividade · Tutela recursal indeferida (ID 353878440, 11/02/2026) · Preparo por PagTesouro/Pix (ID 353323175), sem STN [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — TCFA (IBAMA); exceção de pré-executividade; inatividade após cisão parcial",
+     "subassuntos": "Execução fiscal · taxa de controle e fiscalização ambiental (TCFA) · exceção de pré-executividade · inatividade da empresa após cisão parcial",
+     "sintese": "",
+     "questoes": "1) Prova pré-constituída da inatividade na exceção de pré-executividade; 2) fato gerador da TCFA (artigo 17-B da Lei 6.938/1981) e dever de comunicar o encerramento ao Cadastro Técnico Federal; 3) efeitos da cisão parcial.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Dourados",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-02-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "353314744",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "353314744",
+       "data": "2026-02-05"
+      },
+      {
+       "desc": "Comprovante PagTesouro/Pix",
+       "id": "353323175",
+       "data": "2026-02-05"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "353878440",
+       "data": "2026-02-11"
+      },
+      {
+       "desc": "Contrarrazões do IBAMA",
+       "id": "356790479",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "368456623",
+       "data": "2026-04-30"
+      }
+     ],
+     "pendencias": "Conferir o preparo (STN) e o ID da decisão agravada",
+     "especificidades": "CDAs 259174 e 259175, R$ 77.032,09, do 1º trimestre de 2017 ao 4º trimestre de 2018 · 21ª alteração contratual (cisão parcial); empresas sucessoras desde 2015 e 2016 · Certidão de oficial de justiça sobre a inatividade · Tutela recursal indeferida (ID 353878440, 11/02/2026) · Preparo por PagTesouro/Pix (ID 353323175), sem STN [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-02-11"
+    }
    }
   },
   {
