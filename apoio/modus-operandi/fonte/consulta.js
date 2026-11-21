@@ -364,6 +364,7 @@
   window.CQX={
     tem:function(){return !!CQ.perfil;},
     P:function(){return CQ.perfil;},
+    J:function(){return CQ.pront;},
     R:Rcaso,e28:e28,sugestao:sugestao,
     barra:function(){if(!CQ.cal&&!CQ._cal){CQ._cal=1;carregarCal().then(pinta);}return barraCaso();},
     extra:barraExtra,painel:painel,pickLista:pickLista,

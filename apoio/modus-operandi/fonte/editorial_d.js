@@ -672,3 +672,29 @@ document.addEventListener('input',function(e){var t=e.target;if(!t.matches||!t.c
   if(t.id==='dk-pickq'){DK.pickq=t.value;var ol=$('#dk-pickl'),sel=XP._SEL;if(ol&&sel&&window.CQX)ol.innerHTML=CQX.pickLista(sel.n,sel.k,DK.pickq);
     var m=t.closest('.cq-pick'),mt=m&&m.querySelector('.meta');if(mt)mt.textContent=(DK.pickq?'Resultados da busca.':'Sugestões pelo bloco. Busque para ver outros.')+' Clique para incluir ou retirar.';}});
 document.addEventListener('keydown',function(e){var t=e.target;if(t&&t.id==='dk-pickq'&&e.key==='Escape'){DK.pick='';DK.pickq='';xPagina();}});
+
+/* ===== Campos automáticos (@apelido) e manuais ({{orientação}}) =====
+   @apelido: campo da ficha do processo (apelidos em padrao/ficha.json, catálogo em window.CAMPOS_AUTO) ou valor que a peça e o caso calculam.
+   Com o processo aberto, entra o valor; sem valor, o campo fica pendente, com o rótulo à vista, e aceita digitação.
+   {{orientação}}: campo manual; o texto de dentro diz o que escrever. */
+var ARR=(function(){var M={};((window.CAMPOS_AUTO||{}).campos||[]).forEach(function(c){M[c.a]=c;});return M;})();
+function arrRot(a){var c=ARR[a];return c?c.r:a;}
+var RE_ARR=/(^|[^\w@.\/])@([a-z][a-z0-9_]{1,48})\b/g;
+var _preCamposBase=preCampos;preCampos=function(raw){return _preCamposBase(String(raw||'').replace(RE_ARR,function(m,pre,a){return ARR[a]?pre+'[PREENCHER: @'+a+']':m;}));};
+var _comCamposBase=comCampos;comCampos=function(raw,ctx,fmt){return _comCamposBase(raw,ctx,fmt).replace(/<span class="fill([^"]*)"([^>]*?) aria-label="@([a-z0-9_]+)"([^>]*?)data-ph="@\3"/g,function(m,cl,a1,a,a2){
+  var r=arrRot(a);return '<span class="fill'+cl+' arr"'+a1+' aria-label="'+esc(r)+'"'+a2+'data-ph="@'+a+'" data-rot="'+esc(r)+'"'+(/ auto/.test(cl)?'':' title="Campo da ficha: '+esc(r)+' (@'+a+'). Abra o processo na barra ou escreva aqui."');});};
+/* na cópia, no .docx e na conferência, o campo da ficha ainda vazio aparece pelo rótulo */
+var _camposRBase=camposR;camposR=function(raw,ctx){return _camposRBase(raw,ctx).replace(/@([a-z0-9_]+)/g,function(m,a){return ''+arrRot(a)+'';});};
+var _camposTBase=camposT;camposT=function(raw,ctx){return _camposTBase(raw,ctx).replace(/\[@([a-z0-9_]+)\]/g,function(m,a){return '['+arrRot(a)+']';});};
+/* valores: ficha do processo aberto (campos “seção.Campo” e, para os do acervo, “acervo.coluna”) e os valores que a peça e o caso já calculam */
+function dkValorFicha(v){if(v==null)return '';if(Array.isArray(v))return v.map(function(x){return x&&typeof x==='object'?Object.keys(x).map(function(z){return x[z];}).filter(Boolean).join(' · '):String(x);}).filter(Boolean).join('; ');return String(v);}
+var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
+  var J=window.CQX&&CQX.tem()?CQX.J():null,cp=(J&&J.campos)||{};
+  Object.keys(ARR).forEach(function(a){var c=ARR[a],v='';if(c.s==='*')return;
+    if(c.s)v=cp[c.s+'.'+c.c];else[c.c].concat(c.f||[]).some(function(n){v=cp['acervo.'+n];return v!=null&&v!=='';});
+    v=dkValorFicha(v).trim();if(v)AUTO['@'+a]=v;});
+  var E={processo:'processo',classe:'CLASSE',assunto:'ASSUNTO',ramo:'RAMO',polo_ativo:'polo ativo',polo_passivo:'polo passivo',recorrente:'recorrente',resultado:'resultado',conclusao:'CONCLUSÃO',dispositivo_ementa:'dispositivo da ementa'};
+  Object.keys(E).forEach(function(a){if(!AUTO['@'+a]&&AUTO[E[a]])AUTO['@'+a]=AUTO[E[a]];});
+  var P=window.CQX&&CQX.tem()?CQX.P():null;if(P&&P.processo&&!AUTO['@processo'])AUTO['@processo']=P.processo;};
+/* canhoto “Campos do bloco”: o campo da ficha aparece pelo rótulo */
+var _dkCampoRotBase=dkCampoRot;dkCampoRot=function(f){var ph=f.getAttribute('data-ph')||'';if(ph.charAt(0)==='@')return arrRot(ph.slice(1))+' · ficha';return _dkCampoRotBase(f);};
