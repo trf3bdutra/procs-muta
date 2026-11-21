@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:47:28.178Z",
+ "atualizado_em": "2026-11-21T10:47:33.885Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -114877,7 +114877,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.525Z"
+    "atualizado_em": "2026-11-21T10:47:33.885Z"
    },
    "triagem": {
     "Urgência": "",
@@ -114891,39 +114891,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Não verificado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Mandado de segurança",
+    "ID do Parecer MPF": "292228629",
+    "Parecer - Sentido": "Ausência de interesse que justifique intervenção",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "PIS",
+    "Tema": "Apelações da União e da impetrante e remessa necessária em mandado de segurança · momento de tributação (IRPJ, CSLL, PIS e COFINS) do indébito reconhecido judicialmente e compensado · SELIC na repetição (Tema 962/STF) · segurança concedida em parte, integrada por embargos de declaração",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "DPF PATRICIA / EPF IVENS, 2ª Seção, PIS/COFINS - outros",
-    "Alegações": "",
+    "Alegações": "1) Momento da tributação do indébito reconhecido judicialmente e compensado; 2) IRPJ/CSLL sobre a SELIC (Tema 962/STF); 3) PIS/COFINS sobre a SELIC.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Ação ajuizada antes de 17/09/2021: ressalvada da modulação do Tema 962/STF; a sentença menciona o \"marco temporal\" [VALIDAR] · Momento da tributação do indébito judicial: Solução de Consulta COSIT e linha da 3ª Turma (ApCiv 5002498-94.2020.4.03.6100, 11/09/2021) [VALIDAR] · PIS/COFINS sobre a SELIC: ADI RFB 25/2003 · Efeito suspensivo indeferido pelo Des. Fed. Marcelo Saraiva (ID 342795036) · Sentenças republicadas (IDs 292010622 e 292010636)",
+    "Síntese Fática": "Imesul Metalúrgica Ltda. impetrou o mandado de segurança em abril de 2021 para não tributar o indébito reconhecido no Tema 69/STF nem a SELIC sobre ele, ou para diferir a tributação até a homologação das compensações. A sentença acolheu em parte o pedido."
    },
    "producao": {
     "Destino": "",
@@ -114972,7 +114973,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5000966-43.2024.4.03.6004",
