@@ -76,3 +76,25 @@ aside{top:77px!important}
   #cmp-nav .cn-g.av{flex:1 1 100%;font-size:9px;gap:6px;padding:6px 12px;border-top:1px solid var(--el);border-right:0}
   aside{top:12px!important}
 }
+
+/* ===== Barra do Amicus Curiae (20/11/2026): a mesma do Collectio (/amicus/collectio/).
+   Paleta e filete azuis do Amicus; título "Compendium." com o atalho do Ex Officio logo à direita; as seções encolhem e rolam
+   em vez de passar por cima do título ou dos utilitários. ===== */
+header.top.nx,#cmp-nav{--ep2:#f3f1e8;--el:#ded9cc;--ei:#1c3344;--ei2:#2b4556;--em:#5d6b72;--eg:#1b5878;--eg2:#2f7ba3}
+:root:not([data-theme="light"]) header.top.nx,:root:not([data-theme="light"]) #cmp-nav{--eg:#4e9bcb;--eg2:#76bae6}
+header.top.nx:after{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 50% 100%)!important;box-shadow:none!important}
+header.top.nx .nx-bc{flex:none}
+header.top.nx .nx-ey{font-size:10px}
+header.top.nx .nx-cad .nx-on{color:var(--ei)}
+header.top.nx .nx-ir{display:flex;align-items:center;flex:none;align-self:center;min-height:30px;margin-left:clamp(6px,1.6vw,22px);padding-left:clamp(6px,1.2vw,14px);border-left:1px solid var(--el)}
+header.top.nx .nx-irl{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 9px;font:400 10.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--ei);text-decoration:none;white-space:nowrap}
+header.top.nx .nx-irl:hover{color:var(--eo2)}
+header.top.nx #cmp-nav{flex:0 1 auto;min-width:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+header.top.nx #cmp-nav::-webkit-scrollbar{display:none}
+header.top.nx .eqsp{flex:1 1 0!important;min-width:0}
+header.top.nx .right{flex:none!important}
+@media (max-width:1900px){#cmp-nav .cn-b:before{display:none}#cmp-nav .cn-b{padding:0 10px}#cmp-nav .cn-g:not(.av){display:none}#cmp-nav .cn-g.av{font-size:0;gap:0;padding:0 9px}
+ header.top.nx .mon-lnk{letter-spacing:.04em!important;padding:0 5px!important}header.top.nx{gap:10px!important}}
+@media (max-width:1320px){#cmp-nav .cn-b{padding:0 8px;font-size:12px}}
+@media (max-width:1100px){header.top.nx .nx-irl span{display:none}header.top.nx .nx-irl{padding:0 6px}}
+@media (max-width:980px){header.top.nx .nx-ir{border-left:0;margin-left:0;padding-left:0}header.top.nx #cmp-nav{overflow-x:auto}}
