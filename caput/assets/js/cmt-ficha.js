@@ -1090,9 +1090,14 @@ function avisar(t, tipo) { try { if (ST.ad.avisar) ST.ad.avisar(t, tipo); } catc
 /* ───── desenho ───── */
 function render() {
   if (!host) return;
-  var m = host.querySelector('.fx-main'), y = m ? m.scrollTop : 0;
+  var m = host.querySelector('.fx-main'), y = m ? m.scrollTop : 0, b = host.querySelector('.fx2-body'), yb = b ? b.scrollTop : 0, tb = render._tab;
   host.innerHTML = ST.view === 'doc' && ST.d ? docView() : fichaView();
   var m2 = host.querySelector('.fx-main'); if (m2) m2.scrollTop = y;
+  /* no celular a ficha rola inteira (.fx2-body): mantém a posição; ao trocar de aba, volta ao início da aba e mostra a aba ativa na faixa */
+  var b2 = host.querySelector('.fx2-body'), nv = host.querySelector('.fx2-nav'), sel = host.querySelector('.fx2-nav [aria-selected="true"]');
+  if (b2) { b2.scrollTop = tb !== undefined && tb !== ST.tab && nv ? Math.min(yb, nv.offsetTop - b2.offsetTop) : yb; }
+  if (sel && sel.parentNode.scrollWidth > sel.parentNode.clientWidth) sel.parentNode.scrollLeft = sel.offsetLeft - (sel.parentNode.clientWidth - sel.offsetWidth) / 2;
+  render._tab = ST.tab;
 }
 function cabecalho() {
   var f = fo(), cl = S(f.classe_judicial || f.Classe || f['Descrição da Classe']), as = S(f.Assunto || f.Assunto_Principal || f.assunto_judicial);
