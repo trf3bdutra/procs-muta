@@ -281,3 +281,9 @@ test('Motor: alteração feita durante a gravação continua pendente',()=>{
   const i=m.indexOf('var HS = {}'), j=m.indexOf('await W.ProcsMuta.gravar(files');
   assert.ok(i>0&&i<j&&!/await/.test(m.slice(m.lastIndexOf("files[ARQ[k]] = JSON.stringify",i),i)),'sem await entre montar os arquivos e tirar a marca');
 });
+
+test('Marcos: digitação do ano não grava 0001 nem perde o campo',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes("if (t.value && +t.value.slice(0, 4) < 2000) return;"),'ano incompleto não entra');
+  assert.ok(cap.includes("if (document.activeElement === t && !t.classList.contains('mkhid'))"),'sem redesenhar com o campo em uso');
+});
