@@ -133,3 +133,16 @@ test('Mural: calendário do gabinete aberto no lugar da agenda de entregas', () 
   assert.ok(app.includes('id="hc-cal-full" aria-label="Calendário do gabinete"><div id="cc-cal"'));
   assert.ok(app.includes("if($('#hc-mini-cal'))hcMiniCalendario();calendario();"));
 });
+
+test('Mural do servidor: desenho do protótipo num shadow root, com o quadro antigo só no painel do gabinete', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const p = fs.readFileSync(path.join(__dirname, '..', 'api', 'painel.js'), 'utf8');
+  assert.match(h, /<div id="mu-host"/);
+  assert.match(h, /<script id="mu-lib">[\s\S]*attachShadow\(\{mode:'open'\}\)/);
+  assert.match(h, /body:not\(\.painel-gab\) #v-inicio>\.hc-board\{display:none!important\}/);
+  assert.match(h, /if\(!PAINEL_GAB\)try\{MU\.montar\(P\.dados,\{eu:U\.eu/);
+  assert.match(h, /tl-ft/);
+  assert.match(p, /meta: \(it\.ctl \|\| \{\}\)\.meta/);
+  assert.match(p, /pend: \(\(\(it\.ctl/);
+});
