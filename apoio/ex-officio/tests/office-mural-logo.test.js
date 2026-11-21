@@ -250,7 +250,7 @@ test('Mural: registros da Assessoria fora do calendário de quem não é da asse
 test('Mural: histórico sob a lista (coluna da esquerda) e Minhas ausências logo abaixo dos avisos', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  assert.match(h, /hi\.setAttribute\('slot','hist'\)/);
+  assert.match(h, /hi\.open=true;hi\.removeAttribute\('slot'\);cal\.appendChild\(hi\)/);
   assert.match(h, /<slot name=\\"avisos\\"><\\\/slot><slot name=\\"aus\\"><\\\/slot>/);
   assert.match(h, /<slot name=\\"hist\\"><\\\/slot>/);
 });
@@ -281,4 +281,13 @@ test('Mural: cabeçalho do calendário numa faixa baixa, com a cor da borda como
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /#mu-host \.cg-cal \.cc-h\{background:var\(--l\)!important;border-bottom:0!important;padding:3px 10px 3px 12px!important/);
   assert.match(h, /#mu-host>#hc-cal-full\{padding:0!important;overflow:hidden;border-color:var\(--l\)!important\}/);
+});
+
+test('Mural: Histórico como vista alternativa do painel do calendário; dia do canhoto no cabeçalho', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /data-vista="cal">Calendário<\/button><button type="button" data-vista="hist">Histórico<\/button>/);
+  assert.match(h, /#hc-cal-full\.ver-hist #cc-cal \.cc-body\{display:none!important\}/);
+  assert.match(h, /#hc-cal-full:not\(\.ver-hist\) #prod\{display:none!important\}/);
+  assert.match(h, /new MutationObserver\(sinc\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
 });

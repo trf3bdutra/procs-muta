@@ -1640,11 +1640,33 @@ body:not(.painel-gab) #v-inicio>.hc-more{display:none!important}
 #v-inicio #prod .hw td{padding:6px 10px;border-bottom:1px solid var(--ep2,#f0ece2);white-space:nowrap}
 #v-inicio #prod .hw td:last-child{white-space:normal}
 #v-inicio #prod .hw tr:hover td{background:var(--ep,#fbfaf5)}
-#mu-host>#prod .pg2{grid-template-columns:1fr!important}#mu-host>#prod .pg2>div:first-child .hw{max-height:240px}
+#hc-cal-full #prod .pg2{grid-template-columns:1fr!important}#hc-cal-full #prod .pg2>div:first-child .hw{max-height:240px}
 @media (max-width:980px){#v-inicio #prod .pg2{grid-template-columns:1fr}#v-inicio #prod .pm{grid-template-columns:repeat(2,minmax(0,1fr))}}/* sem Dia/Semana/Mês no Mural: só o mês */
 #mu-host .cg-cal .cc-body{padding:0!important}
 /* painel do calendário: a cor da borda vira o fundo do cabeçalho, que fica numa faixa baixa, colada ao topo */
 #mu-host>#hc-cal-full{padding:0!important;overflow:hidden;border-color:var(--l)!important}
+/* vista alternativa: Calendário ou Histórico de atividades, no mesmo painel */
+#mu-host>#hc-cal-full{position:relative}
+#hc-cal-full .mu-vista{position:absolute;top:3px;right:10px;left:auto;z-index:3;display:flex;align-items:center;gap:2px}
+#hc-cal-full .mu-vista button{height:22px;padding:0 10px;border:0;border-radius:5px;background:transparent;font:700 9.5px var(--emono,monospace);letter-spacing:.12em;text-transform:uppercase;color:var(--em,#55584f);cursor:pointer}
+#hc-cal-full .mu-vista button:hover{color:var(--ei,#203b39)}
+#hc-cal-full .mu-vista button[aria-pressed=true]{background:var(--ew,#fff);color:var(--eg,#235a55);box-shadow:0 1px 2px rgba(28,43,42,.08)}
+#hc-cal-full .mu-dia{margin-right:10px;font:600 12px var(--font);color:var(--ei,#203b39);white-space:nowrap}
+#hc-cal-full.ver-hist .mu-dia{display:none}
+#mu-host .cg-cal .cc-esq{position:relative}#mu-host .cg-cal .cc-esq .cc-sb-t{position:absolute!important;top:0;left:0;right:0;font-size:0!important;line-height:0!important;margin:0!important;padding:0!important;min-height:0!important;height:0;overflow:visible}
+#mu-host .cg-cal .cc-esq .cc-sb-t .cc-dd,#mu-host .cg-cal .cc-esq .cc-sb-t small{display:none!important}
+#mu-host .cg-cal .cc-esq .cc-sb-t .cc-esq-b{top:7px!important;right:10px!important;font-size:13px;line-height:1}
+#mu-host .cg-cal .cc-esq .cc-al{margin-top:0!important}
+#hc-cal-full.ver-hist #cc-cal .cc-body{display:none!important}
+#hc-cal-full.ver-hist #cc-cal .cc-h>*{visibility:hidden}
+#hc-cal-full.ver-hist #cc-cal .cc-h::before{content:"Histórico de atividades";visibility:visible;font:700 12.5px var(--font);color:var(--ei,#203b39);line-height:22px}
+#hc-cal-full:not(.ver-hist) #prod{display:none!important}
+#hc-cal-full #prod{border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important;background:var(--p,#fbfaf5)!important}
+#hc-cal-full #prod>summary{display:none!important}
+#hc-cal-full #prod>.cx-h{position:absolute;top:0;right:200px;margin:0!important;height:28px;align-items:center!important;z-index:2}
+#hc-cal-full #prod>.cx-h>div{display:none}
+#hc-cal-full #prod>.cx-h .b{height:22px!important;padding:0 10px!important;font-size:11px!important}
+#hc-cal-full #prod>p{margin-top:12px!important}
 #mu-host .cg-cal .cc-h{background:var(--l)!important;border-bottom:0!important;padding:3px 10px 3px 12px!important;min-height:0!important;gap:8px!important}
 #mu-host .cg-cal .cc-h>b{font-size:12.5px!important}
 #mu-host .cg-cal .cc-h .cc-dt{font-size:10px!important}
@@ -1657,11 +1679,11 @@ body:not(.painel-gab) #v-inicio>.hc-more{display:none!important}
 /* conteúdo de Hoje/Semana integrado à lateral: abas em linha, seções sem caixa, separadas por fios */
 #mu-host .cg-cal .cc-esq{padding:0 0 14px!important}
 #mu-host .cg-cal .cc-esq>*{margin-left:16px!important;margin-right:16px!important}
-#mu-host .cg-cal .cc-lado{margin:0 0 12px!important;padding:0!important;border:0!important;border-bottom:1px solid var(--l)!important;border-radius:0!important;background:transparent!important;gap:0!important}
+#mu-host .cg-cal .cc-lado{margin:0 0 4px!important;padding:0!important;border:0!important;border-bottom:1px solid var(--l)!important;border-radius:0!important;background:transparent!important;gap:0!important}
 #mu-host .cg-cal .cc-esq>.cc-lado{margin-left:0!important;margin-right:0!important;padding:0 16px!important}
 #mu-host .cg-cal .cc-lado button{flex:0 0 auto!important;padding:11px 2px 9px!important;margin-right:18px;border-radius:0!important;background:transparent!important;color:var(--m)!important;font:700 10px "JetBrains Mono",monospace!important;letter-spacing:.14em;text-transform:uppercase;border-bottom:2px solid transparent!important}
 #mu-host .cg-cal .cc-lado button.on{color:var(--v)!important;border-bottom-color:var(--v)!important}
-#mu-host .cg-cal .cc-esq .cc-al{margin-top:10px!important}
+#mu-host .cg-cal .cc-esq .cc-al{margin-top:0!important}
 #mu-host .cg-cal .cc-esq .cc-a{border-radius:4px!important;border:0!important;border-left:3px solid currentColor!important}
 #mu-host .cg-cal .cc-esq .cc-meta,#mu-host .cg-cal .cc-esq .cc-td{margin-top:12px!important;padding:12px 0 0!important;border:0!important;border-top:1px solid var(--l)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
 #mu-host .cg-cal .cc-esq .cc-meta-h b,#mu-host .cg-cal .cc-esq .cc-td-t{font:700 10px "JetBrains Mono",monospace!important;letter-spacing:.14em;text-transform:uppercase;color:var(--m)!important}
@@ -2482,8 +2504,17 @@ function montar(P0,cx){CX=cx||{};
       /* à direita do calendário: avisos e atualizações e minhas ausências (os mesmos blocos, com os mesmos ids) */
       var av=document.querySelector('#v-inicio .av-box'),au=document.getElementById('aus-box');
       cal.setAttribute('slot','cal');host.appendChild(cal);if(av){av.setAttribute('slot','avisos');host.appendChild(av);}if(au){au.setAttribute('slot','aus');host.appendChild(au);}
-      /* histórico de atividades sob a lista, na coluna da esquerda */
-      var hi=document.getElementById('prod');if(hi){hi.setAttribute('slot','hist');host.appendChild(hi);}}
+      /* histórico de atividades: vista alternativa do próprio painel do calendário, trocada no cabeçalho */
+      var hi=document.getElementById('prod');if(hi){hi.open=true;hi.removeAttribute('slot');cal.appendChild(hi);
+        var vs=document.createElement('div');vs.className='mu-vista';vs.setAttribute('role','group');vs.setAttribute('aria-label','Vista do painel');
+        vs.innerHTML='<span class="mu-dia" aria-live="polite"></span><button type="button" data-vista="cal">Calendário</button><button type="button" data-vista="hist">Histórico</button>';
+        cal.appendChild(vs);
+        /* o dia do canhoto (Hoje ou o dia escolhido) vai para o cabeçalho, para economizar espaço na lateral */
+        var sinc=function(){var t=cal.querySelector('.cc-esq .cc-sb-t'),d=vs.querySelector('.mu-dia');if(!t||!d)return;var n=t.firstChild&&t.firstChild.nodeType===3?t.firstChild.textContent.trim():'',dd=(t.querySelector('.cc-dd')||{}).textContent||'';var x=(n?n+' · ':'')+dd;if(d.textContent!==x)d.textContent=x;};
+        new MutationObserver(sinc).observe(cal,{childList:true,subtree:true});sinc();
+        var poe=function(v){cal.classList.toggle('ver-hist',v==='hist');[].forEach.call(vs.querySelectorAll('[data-vista]'),function(x){x.setAttribute('aria-pressed',String(x.getAttribute('data-vista')===v));});try{localStorage.setItem('mu_vista',v);}catch(e){}};
+        vs.addEventListener('click',function(e){var x=e.target.closest('[data-vista]');if(x)poe(x.getAttribute('data-vista'));});
+        var v0='cal';try{v0=localStorage.getItem('mu_vista')||'cal';}catch(e){}poe(v0);}}
     new MutationObserver(tema).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}
   adapta(P0);prep();
   if(F.ses&&!D.sessoes.some(function(s){return s.date===F.ses;}))F.ses='';
