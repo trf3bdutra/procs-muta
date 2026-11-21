@@ -235,6 +235,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       <button type="button" class="btn" id="b-recalc-tb" data-a="recalc" title="Refaz a proposta com o período, as ausências e as regras atuais; mantém o que você escolheu à mão">Atualizar proposta</button>
       <div class="seg fora" id="fora" role="group" aria-label="Manter fora dos grupos" hidden></div>
       <div class="seg asord" role="group" aria-label="Ordem dos assuntos"><span class="agl">Ordem</span><button type="button" data-asord="pauta" aria-pressed="false" title="Assuntos na ordem em que aparecem na pauta (número do item)">Pauta</button><button type="button" data-asord="qtd" aria-pressed="true" title="Assuntos com mais processos primeiro">Qtd.</button></div>
+      <div class="seg vp" role="group" aria-label="Ver os processos por"><span class="agl">Ver por</span><button type="button" data-ag="as" aria-pressed="true" title="Um grupo por assunto, dividido por seção">Assunto</button><button type="button" data-ag="pd" aria-pressed="false" title="Um grupo por minutante, com os assuntos dentro">Minutante</button><button type="button" data-ag="pc" aria-pressed="false" title="Um grupo por corretor, com os assuntos dentro">Corretor</button></div>
       <span class="gr-ac" id="gr-ac"></span>
     </div>
     <div id="blocos"><p class="mu carregando">Carregando a pauta pelo motor do Caput…</p></div>
@@ -478,7 +479,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(FIL==='nov')return !x.d||!x.c;if(FIL==='ed')return x.t==='ED'||x.t==='AgInt';if(FIL==='meta')return x.t==='META';return true;}
   var CARGA={};
   /* agrupamento: por lote e seção, ou pelo motivo da escolha (minutante ou corretor) */
-  var AG='as';
+  var AG='as';try{var ag0=localStorage.getItem('mesa_ag');if(ag0==='pd'||ag0==='pc')AG=ag0;}catch(e){}
   var MOTIVOS=[['man','Escolha manual','alterado por você nesta mesa'],['obr','Regra obrigatória','decide antes da proposta (passo 2)'],['asr','Regra do assunto','sugestão principal do assunto'],['grav','Já designado na pauta','gravado antes; a mesa não mexe sem você pedir'],['cont','Continuidade','quem minutou ou corrigiu o acórdão embargado ou agravado'],['regra','Regra do gabinete','regra de designação cadastrada; o critério vem no título'],
     ['esp','Especialidade ou preferência','competência indicada no perfil do servidor'],['hist','Experiência no assunto','mais minutas ou correções no histórico do assunto'],['lote','Mesmo lote ou assunto','mantém o lote e o assunto nas mesmas mãos'],
 ['carga','Distribuição pela carga','nenhum critério casou; vai para quem tem folga'],['vazio','Sem designação','ninguém disponível']];
@@ -503,7 +504,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(k==='man')return {ord:0,nome:'Escolha manual',sub:'alterado por você nesta mesa'};var b=k.split('|')[0],m=MOTIVOS.filter(function(q){return q[0]===b;})[0]||[b,b,''];return {ord:MOTIVOS.indexOf(m),nome:m[1]+(k.indexOf('|')>0?' · '+k.split('|')[1]:''),sub:m[2]};}
   function nomeGrupo(k){if(k.indexOf('F|')===0)return 'Mantidos pela regra · '+k.slice(2);if(AG==='lote')return k==='L:'?'Sem lote':(NOMEL[k.slice(2)]||('Lote '+k.slice(2)));return AG==='bloco'?nomeBloco(k):AGP[AG]?k.slice(2):infoMotivo(k).nome;}
   var ABRE={};
-  function aberto(k,n){return ABRE[AG+'|'+k]!=null?ABRE[AG+'|'+k]:(AG==='bloco'||AG==='lote'||AG==='sec'||AG==='as'||n<=1);}
+  function aberto(k,n){return ABRE[AG+'|'+k]!=null?ABRE[AG+'|'+k]:(AG==='bloco'||AG==='lote'||AG==='sec'||AG==='as'||AG==='pd'||AG==='pc'||n<=1);}
   /* perfis dos servidores × processos do grupo em tela: especialidade, prefere, evita, histórico nos assuntos do grupo, carga e quanto já está com cada um */
   var CMP={};
   var ORDAS='qtd';try{ORDAS=localStorage.getItem('mesa_ordas')||'qtd';}catch(e){}if(ORDAS!=='pauta')ORDAS='qtd';
@@ -523,7 +524,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
           '<span>'+(r.no?'<b>'+r.no+'</b> de '+n:'<small>0</small>')+'</span><span class="cmp-c">'+r.cg+'</span>'+
           '<span>'+(r.fora?'':'<button type="button" class="lk" data-cmpa="'+kk+'" data-b="'+esc(k)+'" data-n="'+esc(r.m.nome)+'" title="Põe '+esc(r.m.nome)+' em todo o grupo ('+(kk==='d'?'minuta':'correção')+')">grupo todo</button>')+'</span></div>';}).join('')+'</div>';};
     return '<div class="cmp"><p class="cmp-s">'+n+' processo'+(n===1?'':'s')+' · '+nf(pts)+' pontos · '+esc(top)+'</p>'+tab(PD.concat(EV.filter(function(m){return PD.indexOf(m)<0;})),'d')+tab(PC,'c')+'</div>';}
-  function blocos(){CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[],forak=[];IT.forEach(function(x){var k=grupo(x);if(!G[k]){G[k]=[];if(k.indexOf('F|')===0)forak.push(k);else ord.push(k);}G[k].push(x);});
+  function blocos(){document.querySelectorAll('[data-ag]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.ag===AG));});CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[],forak=[];IT.forEach(function(x){var k=grupo(x);if(!G[k]){G[k]=[];if(k.indexOf('F|')===0)forak.push(k);else ord.push(k);}G[k].push(x);});
     var fe=document.getElementById('fora');if(fe){var TT={};IT.forEach(function(x){if(x.t)TT[x.t]=(TT[x.t]||0)+1;});var tk=Object.keys(TT).sort();fe.hidden=!tk.length;fe.innerHTML=tk.length?'<span class="agl" title="O tipo marcado sai dos assuntos e fica num grupo à parte, com a designação da regra">Fora</span>'+tk.map(function(k){return '<button type="button" data-fora="'+esc(k)+'" aria-pressed="'+!!FORA[k]+'">'+esc(k)+' <small>'+TT[k]+'</small></button>';}).join(''):'';}
     if(AG==='bloco')ord.sort(function(a,b){var r=function(k){return k.indexOf('L:')===0?0:k==='T:ED'?1:2;};return r(a)-r(b)||G[b].length-G[a].length;});
     else if(AG==='as'){var minI={};SECG={};ord.forEach(function(k){var c={};G[k].forEach(function(x){var q=x.sec||'Sem seção';c[q]=(c[q]||0)+1;minI[k]=Math.min(minI[k]||1e9,+x.i||1e9);});SECG[k]=Object.keys(c).sort(function(p,q){return c[q]-c[p];})[0];});
@@ -685,7 +686,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(t.dataset.cmp!=null){CMP[t.dataset.cmp]=!CMP[t.dataset.cmp];blocos();return;}
     if(t.dataset.cmpa){var cb=t.dataset.b,ck=t.dataset.cmpa,cv=t.dataset.n;IT.filter(function(x){return grupo(x)===cb&&passa(x);}).forEach(function(x){ESC[x.i]=ESC[x.i]||{};ESC[x.i][ck]=cv;if(ck==='d'&&fin(x,'c')===cv)ESC[x.i].c='';});toast(nomeGrupo(cb)+': '+(ck==='d'?'minutante ':'corretor ')+cv);tudo();return;}
     if(t.dataset.fora!=null){var fk=t.dataset.fora;if(FORA[fk])delete FORA[fk];else FORA[fk]=true;try{localStorage.setItem('mesa_fora',JSON.stringify(FORA));}catch(er){}blocos();return;}
-    if(t.dataset.ag){AG=t.dataset.ag;ABERTO={};document.querySelectorAll('[data-ag]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
+    if(t.dataset.ag){AG=t.dataset.ag;try{localStorage.setItem('mesa_ag',AG);}catch(er){}ABERTO={};document.querySelectorAll('[data-ag]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.f){FIL=t.dataset.f;document.querySelectorAll('[data-f]').forEach(function(b){b.setAttribute('aria-pressed',String(b===t));});blocos();return;}
     if(t.dataset.mais){ABERTO[t.dataset.mais]=true;blocos();return;}
     var a=t.dataset.a;
