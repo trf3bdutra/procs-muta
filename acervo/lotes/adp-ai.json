@@ -18968,8 +18968,8 @@
    "exequente": "RAFAEL ALVES DOS SANTOS",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Esbulho / Turbação / Ameaça",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Administrativo · bens públicos · reintegração de posse de imóvel da União (extinta RFFSA) · ocupação precária (Súmula 619/STJ)",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -19048,6 +19048,83 @@
     "outros": "Despacho ID 370178501 (30/04/2026, Des. Fed. Renato Becho): remessa à Turma Regional de MS. Decisão ID 377086689 (29/05/2026): indeferiu a antecipação da tutela recursal (Súmula 619/STJ; imóvel desocupado em 28/11/2024; demolição não autorizada).",
     "representacao": "Agravante: Defensoria Pública da União (prazo em dobro). Agravada: União (AGU).",
     "preparo": "Agravante assistido pela DPU; gratuidade [VALIDAR deferimento]."
+   },
+   "assunto_detalhado": "Administrativo — reintegração de posse de imóvel da União (extinta RFFSA)",
+   "especificidades": "Imóvel na Vila Juquita, Maracaju/MS (matrícula 8.220) · Locação irregular a terceiros, segundo a União · Desocupação voluntária em 30 dias; demolição não autorizada · Imóvel desocupado em 28/11/2024, segundo a fiscalização · Tutela recursal indeferida (ID 377086689, 29/05/2026) · DPU; MPF sem intervenção",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Administrativo — reintegração de posse de imóvel da União (extinta RFFSA)",
+     "subassuntos": "Administrativo · bens públicos · reintegração de posse de imóvel da União (extinta RFFSA) · ocupação precária (Súmula 619/STJ)",
+     "sintese": "",
+     "questoes": "1) Natureza da ocupação de imóvel público (Súmula 619/STJ); 2) requisitos da liminar possessória; 3) prazo e condições da desocupação.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Deferiu a liminar de reintegração de posse, com 30 dias para desocupação voluntária."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "369664178",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "369664178",
+       "data": "2026-04-28"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "377086689",
+       "data": "2026-05-29"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "383749024",
+       "data": "2026-07-01"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "385954595",
+       "data": "2026-07-13"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "Imóvel na Vila Juquita, Maracaju/MS (matrícula 8.220) · Locação irregular a terceiros, segundo a União · Desocupação voluntária em 30 dias; demolição não autorizada · Imóvel desocupado em 28/11/2024, segundo a fiscalização · Tutela recursal indeferida (ID 377086689, 29/05/2026) · DPU; MPF sem intervenção"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (proc. público/DPU)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-05-29"
+    }
    }
   },
   {
