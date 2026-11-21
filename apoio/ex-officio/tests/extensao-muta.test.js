@@ -290,7 +290,7 @@ test('extensão 0.22: redesenho das etiquetas do PJe por tipo (categorias do cat
   assert.equal(id('2ª Seção'), 'secao'); assert.equal(id('META 2 CNJ (até 2022)'), 'meta'); assert.equal(id('LOTE 28,86% - APCIV'), 'lote'); assert.equal(id('AI'), 'classe'); assert.equal(id('Aposentadoria por Invalidez'), 'materia');
   assert.deepEqual(JSON.parse(JSON.stringify(E.CATEGORIAS)), cat.categorias, 'cópia de reserva igual ao catálogo');
   const c = read('extensao/conteudo-pje.js');
-  assert.match(c, /function estilizarEtiquetas\(card\)/); assert.match(c, /ancora\(c\)\.insertAdjacentElement\('afterend', box\)/);
+  assert.match(c, /function estilizarEtiquetas\(card\)/); assert.match(c, /ancora\(c\), c\.el\)\.insertAdjacentElement\('afterend', box\)/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /categorias: cats/);
 });
 
