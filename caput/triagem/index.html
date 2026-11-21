@@ -1281,6 +1281,22 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
 @supports not selector(::-webkit-scrollbar){*{scrollbar-width:thin;scrollbar-color:rgba(32,59,57,.28) transparent}}::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}::-webkit-scrollbar-thumb{background:rgba(32,59,57,.28);border-radius:999px;border:2px solid transparent;background-clip:padding-box}::-webkit-scrollbar-thumb:hover{background-color:rgba(32,59,57,.5)}::-webkit-scrollbar-button{display:none;width:0;height:0}
 
 .cpx.emb .so-fora{display:none!important}.papel.eqh{margin-left:4px}
+
+/* pele do Caput: paleta, tipografia e cantos da Coordenação; sem o título repetido (o cabeçalho do painel já diz "Competências") */
+:host{--bg:#fbfaf5;--sup:#fff;--tx:#203b39;--mut:#5c6b67;--lin:#e3ded2;--ac:#173f3d;--heat:23,63,61;--f-dis:Figtree,system-ui,sans-serif;--f-txt:Figtree,system-ui,sans-serif}
+.cpx{font-size:13px;background:#fff}
+.cpx .top{padding:0 14px 8px!important;gap:8px 14px;align-items:center;min-height:44px;background:var(--bg);border-bottom:1px solid #d8d3c6}
+.cpx .top>div:first-child{display:none}
+.cpx .tabs{order:-1;flex:1 0 100%;margin:0 -14px;padding:0 4px!important;border-bottom:1px solid #e3ded2!important;gap:0;background:none;border:0;border-radius:0;padding:0}
+.cpx .tabs button{border-radius:0;border-bottom:2px solid transparent;padding:12px 12px 10px;font:600 13px Figtree,sans-serif;color:#4f5a57}
+.cpx .tabs button[aria-selected="true"]{background:none;color:#173f3d;border-bottom-color:#235a55}
+.cpx .papel{font-size:11px}.cpx .papel button{border-radius:6px;padding:4px 10px;font-size:12px;border-color:#c8c3b6;color:#4f5a57}
+.cpx .papel button[aria-pressed="true"]{background:#173f3d;border-color:#173f3d;color:#fff}
+.cpx main{padding:14px!important}
+.cpx .card{border-radius:0;box-shadow:none;border-color:var(--lin)}
+.cpx .btn{border-radius:6px;border-color:#c8c3b6}
+.cpx h3{font:500 10px "JetBrains Mono",monospace;letter-spacing:.14em;color:#805b18}
+.cpx .ck.hist{margin-left:0}.cpx .srvsel{margin-left:auto}.cpx .srvsel summary{border-radius:6px}.cpx .tw,.cpx .srvp{border-radius:0}
 </style><div class="cpx"><header class="top">
   <div>
     <p class="k">Caput · Coordenação › Equipe</p>

@@ -207,3 +207,9 @@ test('Coordenação › Competências no código do Caput (sem moldura), com tel
   assert.ok(cap.includes('tlLinha: 54')&&r('caput/motor/assets/js/11-calendario.js').includes('const LH=ex.tlLinha||74;'),'linha do tempo');
   assert.ok(cap.includes('.cg-cal .cc-top>.cc-esq{position:relative!important;top:auto!important;align-self:stretch;contain:size'),'Hoje na altura dos meses');
 });
+
+test('Competências com a pele do Caput: sem título repetido, abas sublinhadas, paleta verde e cantos retos',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  const tpl=cap.slice(cap.indexOf('<template id="comp-tpl">'),cap.indexOf('</template>'));
+  for(const x of ['.cpx .top>div:first-child{display:none}','.cpx .tabs button[aria-selected="true"]{background:none;color:#173f3d','--ac:#173f3d','.cpx .card{border-radius:0','.cpx .tw,.cpx .srvp{border-radius:0}'])assert.ok(tpl.includes(x),x);
+});
