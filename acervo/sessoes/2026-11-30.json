@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T01:31:10.143Z",
+ "atualizadoEm": "2026-11-21T01:31:14.437Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -1745,16 +1745,13 @@
      },
      "pendencias": [
       {
-       "desc": "Conferir a situação atual dos recursos especial e extraordinário interpostos contra o acórdão do IRDR 5016497-47.2021.4.03.0000 (marca [VALIDAR] no voto).",
-       "ok": false,
-       "em": "2026-11-19",
-       "por": "Index · lote acorrigir"
-      },
-      {
        "desc": "Situação dos recursos especial e extraordinário contra o acórdão do IRDR 5016497-47.2021.4.03.0000 não localizada em fonte pública; conferir no PJe 2G (consulta do IRDR) ou no NUGEP do TRF-3. O precedente do Relator de 05/10/2026 aplica o IRDR como vinculante sem ressalva.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote acorrigir"
+       "por": "Index · lote acorrigir",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Marca [VALIDAR] retirada após consulta à tabela de IRDRs do TRF-3 atualizada em 11/11/2026 (ajustes do lote acorrigir)."
       }
      ]
     },
@@ -1763,8 +1760,9 @@
      "item": 31,
      "autos": 36
     },
-    "editadoPor": "Index",
-    "resJulg": "Desprovido"
+    "editadoPor": "Bruno",
+    "resJulg": "Desprovido",
+    "editadoEm": "2026-11-21T01:31:14.437Z"
    }
   },
   {
