@@ -228,6 +228,8 @@
   }
   function valor(k){var v=S.val[k];if(v==null){var d=vdef(k);v=d.padrao!=null?d.padrao:'';}return String(v);}
   function preencher(t,html){
+    /* concordância: sujeito no plural (os sucessores, as herdeiras) pede o verbo no plural */
+    if(/^(os|as) /.test(valor('sujeito').trim()))t=String(t).replace(/\{\{sujeito\}\} deve\b/g,'{{sujeito}} devem');
     var s=String(t).replace(/\[\[([\s\S]*?)\]\]/g,function(_,seg){var ok=true;seg.replace(/\{\{([a-z0-9_]+)\}\}/g,function(_,k){if(!valor(k).trim())ok=false;return '';});return ok?seg:'';});
     for(var n=0;n<3&&/\{\{/.test(s);n++){
       s=s.replace(/\{\{([a-z0-9_]+)\}\}/g,function(_,k){var v=valor(k);
