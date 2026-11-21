@@ -8,11 +8,11 @@ var EDS={col:'mod',id:null,q:'',tipoNovo:'preferencia',token:'',conf:null,dirty:
   orig:{mod:{},par:{},pec:{},dir:{},nor:{}},dlg:'',restaura:null,lido:false};
 var EDCOL={mod:'Modelos-matriz',par:'Parágrafos-padrão',pec:'Peças do Editorial',dir:'Diretrizes',nor:'Normas'};
 var EDARQ={mod:'modelos',par:'paragrafos',pec:'pecas',dir:'diretrizes',nor:'normas'};
-/* aberto dentro do painel do desembargador (/editor/?cmt=1): grava em nome do CMT, sem os modelos-matriz,
+/* aberto dentro do painel do desembargador (/editor/?cmt=1): grava em nome do CMT, só parágrafos, peças e diretrizes,
    e depois de gravar oferece avisar a equipe (mural e notificações de todos) */
 var EDCMT=!!window.VDM_PAGINA_EDITOR&&/[?&]cmt=1(?:&|$)/.test(location.search);
 var EDCMTK=(function(){try{return localStorage.getItem('cmt_k')||sessionStorage.getItem('cmt_k')||'';}catch(e){return '';}})();
-if(EDCMT){delete EDCOL.mod;EDS.col='par';document.documentElement.classList.add('ed-cmt');}
+if(EDCMT){delete EDCOL.mod;delete EDCOL.nor;EDS.col='par';document.documentElement.classList.add('ed-cmt');}
 /* gravação pelo servidor do site (login da Ex Officio + acesso de editor) */
 function edSrv(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
 var EDK='vdm-ed-rascunho-v1';

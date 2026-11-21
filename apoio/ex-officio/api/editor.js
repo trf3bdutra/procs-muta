@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
   /* pelo painel do desembargador (/cmt, cabeçalho x-cmt): grava em nome do CMT, com a chave do painel ou o login de um editor,
-     e não mexe nos modelos-matriz */
+     e só mexe em parágrafos-padrão, peças do Editorial e diretrizes */
   const viaCmt = String((req.headers || {})['x-cmt'] || '') === '1';
   let u;
   if (viaCmt) {
@@ -29,7 +29,8 @@ module.exports = async (req, res) => {
   try {
     if (!viaCmt) { const a = await L.acessos(u); if (!a.editor) return res.status(403).json({ erro: 'Sem acesso de editor.' }); }
     const b = req.body || {}, C = b.colecoes || {}, arqs = [], conflitos = [];
-    if (viaCmt && C.mod && C.mod.length) return res.status(403).json({ erro: 'Os modelos-matriz não são editados pelo painel do desembargador.' });
+    if (viaCmt && Object.keys(C).some(c => !['par', 'pec', 'dir'].includes(c) && (C[c] || []).length))
+      return res.status(403).json({ erro: 'Pelo painel do desembargador só se editam parágrafos-padrão, peças do Editorial e diretrizes.' });
     let n = 0;
     for (const c of Object.keys(C)) {
       const A = ARQ[c]; if (!A || !Array.isArray(C[c]) || !C[c].length) continue;
