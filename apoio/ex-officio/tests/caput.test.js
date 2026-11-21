@@ -85,7 +85,7 @@ test('Regras gerais embutidas no visual do painel de Relatórios (altura fixa, m
 
 test('Calendário da Chefia: semana em lista dentro do painel Hoje, sem a faixa sob o calendário',()=>{
   const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
-  assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('function semanaLista(vis)')&&r('caput/triagem/index.html').includes('semanaLateral: true'),'semana no Hoje');
+  assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('function semanaLista(vis)')&&r('caput/motor/assets/js/11-calendario.js').includes('data-a=\"lado-sem\"')&&r('caput/triagem/index.html').includes('semanaLateral: true'),'semana no Hoje');
 });
 
 test('Calendário recolhido deixa a faixa da semana atual; Regras gerais com o fundo da coluna esquerda',()=>{
