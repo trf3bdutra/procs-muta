@@ -625,3 +625,24 @@ input[type=password]{width:100%;font:inherit;font-size:14px;color:var(--fg);back
 .sg-ig summary{cursor:pointer;padding:3px 6px;border-radius:6px;background:var(--secondary)}
 .sg-ig ul{margin:4px 0 0;padding-left:18px}.sg-ig li{margin:1px 0}.sg-ig li b{font-weight:600;color:var(--fg)}
 .au-bl{flex-wrap:nowrap;gap:5px}.au-bl .btn{white-space:nowrap;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}.au-bl [data-au=princ]{margin-left:auto}
+
+/* 0.13 · compacto: botões e campos menores, cartões mais secos, cabeçalhos em versalete */
+.btn{font-size:12.5px;padding:4px 10px;border-radius:7px;line-height:1.3}
+.btn.sm{font-size:11px;padding:2px 8px;border-radius:6px}
+.btn.solid{box-shadow:none}
+.bar{gap:5px}
+input[type=text],input[type=search],input[type=password],input[type=date],input[type=number],textarea,select{font-size:13px;padding:5px 8px;border-radius:7px}
+textarea{min-height:56px}
+.card{padding:12px;border-radius:10px;border-color:hsl(38 18% 87%)}
+.empty{padding:14px;font-size:12px}
+.note{padding:8px 10px;font-size:11.5px;margin-bottom:10px}
+.err-box{padding:8px 10px;font-size:12px}
+.pc-sh h3,.gg>summary b,.gg>summary h3{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:hsl(178 30% 26%)}
+.gg>summary{padding:6px 9px}
+.gg{border-radius:10px;border-color:hsl(38 18% 87%)}
+.acv-form .btn,.acv-opts .btn{font-size:12px;padding:4px 10px}
+.cx-n{font-size:11px;margin:2px 0 4px}
+.status{font-size:11.5px}
+.seg button{font-size:12px;padding:4px 8px}
+.mn-pron small,.mn-pron .muted{font-size:11px}
+.cx-it b,.cx-it .n{font-size:12.5px}

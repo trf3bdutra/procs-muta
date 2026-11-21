@@ -36,7 +36,7 @@ function render() {
   } else {
     var R = D.red.filter(function (x) { return !t.length || casa(x, t); }), por = {}, ord = [];
     R.forEach(function (x) { var k = ESCOPO[x.escopo] || x.escopo || 'Geral'; if (!por[k]) { por[k] = []; ord.push(k); } por[k].push(x); });
-    h = '<p class="muted">Regras de redação que a conformidade aplica na minuta (lista de caça do gabinete).</p>' + ord.map(function (k) {
+    h = ord.map(function (k) {
       return '<section class="dr-cap"><h3>' + esc(k) + '</h3>' + por[k].map(function (x) {
         return '<article class="dr-i"><div class="dr-h"><span class="dr-t ' + esc(x.tipo) + '">' + esc(x.tipo) + '</span><b>' + esc(x.msg) + '</b></div>' + (x.subst ? '<p class="dr-ev"><b>Use:</b> ' + esc(x.subst) + '</p>' : '') + '</article>';
       }).join('') + '</section>';

@@ -57,10 +57,10 @@ function render() {
   if (!caixa || !aberta()) return;
   var E = ED.estado(), r = K.r, y = $('panel-conf').scrollTop;
   var topo = '<div class="cf-top card"><label class="cf-sw"><input type="checkbox" data-k="ativa"' + (K.ativa ? ' checked' : '') + '><span></span><b>Conformidade ativa</b></label>' +
-    '<span class="muted">' + (K.ativa ? 'Relê o editor do PJe a cada 4 segundos e refaz a análise quando o texto muda.' : 'Ligue para acompanhar a minuta enquanto ela é escrita no PJe.') + '</span>' +
-    '<div class="bar"><button type="button" class="btn solid" data-k="agora"' + (E.lendo ? ' disabled' : '') + '>' + (E.lendo ? 'Lendo…' : 'Analisar agora') + '</button>' +
-    (r ? '<button type="button" class="btn line" data-k="copiar">Copiar o relatório</button>' : '') +
-    '<label class="cf-fmt"><input type="checkbox" data-k="fmt"' + (K.fmt ? ' checked' : '') + '> formatação (negrito, itálico, recuo)</label></div>' +
+    ''+
+    '<div class="bar"><button type="button" class="btn solid sm" data-k="agora"' + (E.lendo ? ' disabled' : '') + '>' + (E.lendo ? 'Lendo…' : 'Analisar agora') + '</button>' +
+    (r ? '<button type="button" class="btn line sm" data-k="copiar">Copiar relatório</button>' : '') +
+    '<label class="cf-fmt" title="Confere negrito, itálico e recuo"><input type="checkbox" data-k="fmt"' + (K.fmt ? ' checked' : '') + '> formatação</label></div>' +
     (K.erroDados ? '<p class="status err">' + esc(K.erroDados) + ' A análise segue sem as regras de redação do Compendium.</p>' : '') +
     (E.erro ? '<p class="status err">' + esc(E.erro) + '</p>' : '') +
     (E.texto ? '<p class="muted cf-fonte">Texto: ' + esc(E.fonte) + ' · ' + E.texto.split(/\s+/).length.toLocaleString('pt-BR') + ' palavras' + (K.em ? ' · analisado às ' + new Date(K.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '') + '</p>' : '') + '</div>';
@@ -70,11 +70,10 @@ function render() {
   var resumo = '<div class="cf-res card"><div class="cf-nota" data-n="' + (r.nota >= 85 ? 'ok' : r.nota >= 60 ? 'med' : 'mau') + '"><b>' + r.nota + '</b><small>de 100</small></div>' +
     '<div><p><b>' + esc(PECA[r.peca] || r.peca) + '</b>' + (r.resultado ? ' · resultado: ' + esc(MO.RES_TXT[r.resultado]) : '') + '</p>' +
     '<p class="cf-cont"><span data-sev="alta">' + r.resumo.alta + ' alta</span><span data-sev="media">' + r.resumo.media + ' média</span><span data-sev="baixa">' + r.resumo.baixa + ' baixa</span></p>' +
-    '<p class="muted">Prontuário ' + (contexto().prontuario && contexto().prontuario.caso && contexto().prontuario.caso.numero ? 'de ' + esc(contexto().prontuario.caso.numero) : 'não aberto') + ' · regras do Manual CMT, do Compendium e da lista de caça.</p></div></div>';
+    '</div></div>';
   var filtros = '<div class="seg cf-grupos"><button type="button" data-g="" aria-selected="' + !K.grupo + '">Todos · ' + r.itens.length + '</button>' +
     Object.keys(grupos).map(function (gq) { return '<button type="button" data-g="' + esc(gq) + '" aria-selected="' + (K.grupo === gq) + '">' + esc(gq) + ' · ' + grupos[gq] + '</button>'; }).join('') + '</div>';
-  caixa.innerHTML = topo + resumo + (r.itens.length ? filtros + '<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') +
-    '<p class="muted cf-nota-rod">A conformidade aponta; quem decide é o servidor e o Relator. Ela não confere fatos nos autos: IDʼs e resultado são conferidos contra o prontuário.</p>';
+  caixa.innerHTML = topo + resumo + (r.itens.length ? filtros + '<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') ;
   $('panel-conf').scrollTop = y;
 }
 function relatorioTexto() {

@@ -46,8 +46,7 @@
           <button class="btn danger" id="btn-clear" type="button" title="Apaga só a cópia deste navegador; o prontuário do GitHub volta ao reabrir o processo">Limpar cópia local</button>
         </div>
         <div id="prontuario-app"></div>
-        <div class="note"><strong>Estrutura inicial.</strong> Campos legados, mantidos para compatibilidade do JSON.</div>
-        <p id="save-status" class="status" role="status" aria-live="polite"></p>
+                <p id="save-status" class="status" role="status" aria-live="polite"></p>
 
         <div class="card">
           <div class="sect-h"><h2 class="display"><span class="prontuario-step">1</span>Identificação</h2><span class="prontuario-count" data-progress="comum">0/4</span></div>
@@ -99,9 +98,8 @@
     <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
       
       <div class="wrap">
-        <div class="bar acv-top"><a class="btn line" id="acv-compendio" target="_blank" rel="noopener noreferrer">Abrir o Compêndio</a><button class="btn line" id="btn-refresh" type="button">Recarregar</button></div>
-        <div class="note">Mesma base do Ementário do Compêndio: os precedentes curados do gabinete e a série histórica do Relator (Base de Jurisprudência do TRF-3, 1999 em diante). A busca roda aqui, no navegador; nenhum termo pesquisado nem dado do prontuário é transmitido. Confira sempre a fonte antes de citar.</div>
-        <div id="acv-error" class="err-box" role="alert" hidden></div>
+        <div class="bar acv-top"><a class="btn line sm" id="acv-compendio" title="Mesma base do Ementário do Compêndio: curados do gabinete e série histórica do Relator. A busca roda no navegador; nada é transmitido. Confira a fonte antes de citar." target="_blank" rel="noopener noreferrer">Abrir o Compêndio</a><button class="btn line sm" id="btn-refresh" type="button">Recarregar</button></div>
+                <div id="acv-error" class="err-box" role="alert" hidden></div>
         <p id="acv-status" class="status" role="status" aria-live="polite"></p>
         <form id="acv-form" class="acv-form" role="search">
           <label class="sr" for="acv-q">Buscar no Ementário</label>

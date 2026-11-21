@@ -117,7 +117,6 @@ function render() {
       (S(R('Teor dos autos')) ? '<div class="tr-teor">' + linhas(R('Teor dos autos')) + '</div>' : '') +
       pecas.map(function (p) { return '<div class="tr-pc"><div class="tr-pch"><b>' + esc(p.peca) + '</b> <button type="button" class="mono lnk" data-copia="' + esc(p.id) + '" title="Copiar o ID">ID ' + esc(p.id) + '</button> <span class="muted">' + esc(p.data) + '</span></div>' +
         (p.pje ? '<div class="muted tr-pjx">' + esc(p.pje) + '</div>' : '') + (p.nota ? '<p class="tr-n">' + esc(p.nota) + '</p>' : '') + (p.trecho ? '<blockquote class="tr-q">' + esc(p.trecho) + '</blockquote>' : '') + '</div>'; }).join('') + '</div></section>';
-  if (!R('Lote')) h += '<p class="muted">Este processo ainda não tem registro de triagem em lote: só os campos da ficha aparecem.</p>';
   var y = caixa.scrollTop; caixa.innerHTML = h; caixa.scrollTop = y;
 }
 

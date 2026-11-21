@@ -320,7 +320,7 @@ function htmlSituacao(registro) {
   var reg = S(registro);
   if (!h && reg) h = '<dl class="tr-dl">' + reg.split(/\n+/).map(function (l) { var i = l.indexOf(': '); return i > 0 && i < 40 ? '<dt>' + esc(l.slice(0, i)) + '</dt><dd>' + esc(l.slice(i + 2)) + '</dd>' : '<dd class="w">' + esc(l) + '</dd>'; }).join('') + '</dl>';
   return '<section class="card pc-sec" id="g-sa"><div class="pc-sh"><h3>Situação atual</h3><small class="muted">' + (A.itens && lidoDoProcesso() ? 'autos lidos às ' + hora() : reg ? 'conferida na triagem' : '') + '</small></div>' +
-    (h || '<p class="muted">Abra os autos digitais no PJe: a situação atual sai da cronologia.</p>') + '</section>';
+    (h || '<p class="muted">Abra os autos digitais no PJe.</p>') + '</section>';
 }
 function estadoDoc(id) {
   var d = A.docs[id]; if (!d) return '';
@@ -334,7 +334,7 @@ function htmlDocs() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
   var cab = '<div class="pc-sh"><h3>Documentos dos autos</h3><small class="muted">' + (A.itens ? A.itens.reduce(function (n, i) { return n + (i.docs || []).length; }, 0) + ' na cronologia · lidos às ' + hora() : 'painel esquerdo dos autos digitais') + '</small></div>';
   if (A.erro) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
-  if (!A.itens) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div>' + (tela === 'autos' ? '' : '<p class="muted">Nos autos digitais, a lista de documentos aparece aqui, com data e hora da juntada, o campo de especificação e o inteiro teor de cada um.</p>') + '</section>';
+  if (!A.itens) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div>' + (tela === 'autos' ? '' : '<p class="muted">Abra os autos digitais no PJe.</p>') + '</section>';
   var outro = !lidoDoProcesso() ? '<p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p>' : '';
   var L = lista(), F = A.filtro, V = F === 'pecas' ? L.filter(function (d) { return d.k !== 'outro' && !d.anexo; }) : L;
   var outras = linhasGravadas('origem', 'Outras peças'), espDe = function (id) { if (id in A.esp) return A.esp[id]; var r = outras.filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; };
@@ -363,7 +363,7 @@ function htmlSugestoes(secoes) {
   var I = (A.sug || []).filter(function (it) { return !secoes || naSecao(it.sec, secoes); });
   var marc = I.filter(function (i) { return i.apply && i.status !== 'igual'; }).length;
   if (A.sugMsg) return '<p class="status err">' + esc(A.sugMsg) + '</p>';
-  if (!I.length) return '<p class="muted">Nada a sugerir nestas partes com o que foi lido' + (Object.keys(A.docs).length ? '' : ' (leia as peças principais para a leitura do texto)') + '.</p>';
+  if (!I.length) return '<p class="muted">Nada a sugerir nestas partes com o que foi lido' + (Object.keys(A.docs).length ? '' : ' (leia as peças principais)') + '.</p>';
   var valor = function (it) { return dataBr(it.kind === 'tabela' ? it.value.map(function (l) { return Object.keys(l).filter(function (c) { return S(l[c]); }).map(function (c) { return c + ': ' + S(l[c]).slice(0, 90); }).join(' · '); }).join(' | ') : S(it.value)); };
   /* o que já confere com a ficha não tem o que gravar: fica recolhido numa linha */
   var pend = I.filter(function (it) { return it.status !== 'igual'; }), iguais = I.filter(function (it) { return it.status === 'igual'; });
@@ -379,7 +379,7 @@ function htmlSugestoes(secoes) {
   }).join('');
   var conf = iguais.length ? '<details class="sg-ig"><summary>' + (pend.length ? '' : 'Tudo confere com a ficha · ') + iguais.length + ' campo(s) já iguais na ficha</summary><ul>' +
     iguais.map(function (it) { return '<li><b>' + esc(it.label) + '</b> ' + esc(valor(it).slice(0, 160)) + (it.doc ? ' <small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</li>'; }).join('') + '</ul></details>' : '';
-  return '<div class="sg">' + h + conf + (pend.length ? '<div class="bar"><button type="button" class="btn solid" data-au="aplicar"' + (marc ? '' : ' disabled') + '>Gravar ' + marc + ' na ficha</button><small class="muted">Só vai o que está marcado. O que diverge só troca o que está na ficha se marcado.</small></div>' : '') + '</div>';
+  return '<div class="sg">' + h + conf + (pend.length ? '<div class="bar"><button type="button" class="btn solid sm" data-au="aplicar" title="Só vai o que está marcado"' + (marc ? '' : ' disabled') + '>Gravar ' + marc + ' na ficha</button></div>' : '') + '</div>';
 }
 /* datas ISO (2025-07-01) aparecem como 01/07/2025 */
 function dataBr(t) { return String(t || '').replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, '$3/$2/$1'); }
@@ -387,7 +387,7 @@ function dataBr(t) { return String(t || '').replace(/\b(\d{4})-(\d{2})-(\d{2})\b
 function htmlConferencia() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
   var h = '<section class="card pc-sec cf" id="g-cf"><div class="pc-sh"><h3>Conferência automática dos autos</h3><small class="muted">sugestões para conferir</small></div>';
-  if (!A.itens || !lidoDoProcesso()) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos' : 'Abra os autos digitais no PJe') + ': a extensão confere tempestividade (calendário forense), preparo, procuração, MPF, contrarrazões, remessa necessária e o tipo de julgamento, e sugere os campos da ficha.</p></section>';
+  if (!A.itens || !lidoDoProcesso()) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos.' : 'Abra os autos digitais no PJe.') + '</p></section>';
   var al = alertas();
   h += '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>';
   if (al.length) h += '<div class="al-l">' + al.map(function (a, i) {

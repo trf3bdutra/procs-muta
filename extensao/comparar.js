@@ -185,14 +185,14 @@ function seletor() {
     if (C.triErro) return '<p class="status err">' + esc(C.triErro) + '</p>';
     if (!C.tri.length) return '<div class="empty">Sem proposta, modelo ou precedente registrados na triagem deste processo.</div>';
     var s0 = s || C.tri[0].id;
-    return '<p class="muted">Da triagem do processo (Caput): a proposta, o modelo do grupo e os precedentes citados, abertos pelo Ementário.</p>' +
+    return ''+
       itens(C.tri, function (x) { return x.rotulo; }, function (x) { return x.sub || ''; }, function (x) { return x.id; }, s0) +
       (s0 && /^e:/.test(s0) && C.ement[s0.slice(2)] && C.ement[s0.slice(2)].erro ? '<p class="status err">' + esc(C.ement[s0.slice(2)].erro) + '</p>' : '');
   }
   if (C.fonte === 'colar') return '<textarea class="cx-ref" data-c="ref" placeholder="Cole aqui o texto de referência (outra minuta, voto-paradigma, decisão de origem…)">' + esc(C.ref) + '</textarea>';
   if (C.fonte === 'ement') {
     var vs = br.getLinks ? br.getLinks() : [];
-    h = '<p class="muted">Precedentes vinculados ao prontuário. No Ementário, qualquer julgado tem o botão <b>Comparar com o editor</b>.</p>';
+    h = '';
     var ids = vs.map(function (v) { return { x: { id: v.id, n: v.n, cl: v.cl, d: v.d } }; });
     Object.keys(C.ement).forEach(function (id) { if (!vs.some(function (v) { return v.id === id; }) && C.ement[id].rotulo) ids.unshift({ x: { id: id, n: C.ement[id].rotulo, cl: 'aberto pelo Ementário', d: '' } }); });
     return h + (ids.length ? itens(ids, function (x) { return [x.cl, x.n].filter(Boolean).join(' '); }, function (x) { return x.d || ''; }, function (x) { return x.id; }, s) : '<div class="empty">Nenhum precedente vinculado. Abra o Ementário, pesquise e use Comparar com o editor.</div>') +
@@ -202,19 +202,19 @@ function seletor() {
   if (!d) return '<p class="muted">Baixando os modelos do gabinete…</p>';
   if (C.fonte === 'modelo') {
     var L = ranquear(filtra(d.modelos, ['nome', 'assunto', 'classe', 'tags', 'pron'])).slice(0, C.q ? 40 : 12);
-    return busca + '<p class="muted">' + (C.q ? 'Modelos com “' + esc(C.q) + '”' : 'Modelos mais parecidos com o texto do editor') + ' · ' + d.modelos.length + ' no banco.</p>' +
+    return busca + '<p class="muted cx-n">' + (C.q ? 'com “' + esc(C.q) + '”' : 'mais parecidos com o editor') + ' · ' + d.modelos.length + ' no banco</p>' +
       itens(L, function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.assunto].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
   }
   if (C.fonte === 'matriz') {
     var M = matrizesOrdenadas(), res = resEditor();
     if (!s && M.length) { s = C.sel.matriz = M[0].x.id; }
-    return busca + '<p class="muted">Matrizes de ' + esc((PRONS.filter(function (x) { return x[0] === processo(); })[0] || [])[1] || processo()) + ' primeiro' + (res ? '; o dispositivo do editor indica ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) : '') + '. A comparação confere a estrutura: os blocos da matriz e as vagas preenchidas.</p>' +
+    return busca + (res ? '<p class="muted cx-n">dispositivo do editor: ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) + '</p>' : '') +
       itens(M.slice(0, C.q ? 40 : 8), function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.resultado].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
   }
   if (C.fonte === 'm2886') {
     var G = d.m2886.grupos.map(function (g) { return { id: 'g:' + g.id, nome: 'Grupo ' + g.id + ' · ' + g.nome, sub: 'minuta-base da matriz modular · ' + g.resJulg, secoes: g.secoes }; });
     var K = d.kit2886.map(function (k) { return { id: 'k:' + k.codigo, nome: 'Acórdão-modelo ' + k.codigo, sub: k.ref, texto: k.texto }; });
-    return '<p class="muted">Matriz modular: o texto é do gabinete; só as vagas {{ }} se preenchem. Os acórdãos-modelo são os julgados de referência de cada código.</p>' +
+    return ''+
       '<p class="kicker">Grupos da matriz</p>' + itens(ranquear(G), function (x) { return x.nome; }, function (x) { return x.sub; }, function (x) { return x.id; }, s) +
       '<p class="kicker">Acórdãos-modelo</p>' + itens(ranquear(K), function (x) { return x.nome; }, function (x) { return x.sub; }, function (x) { return x.id; }, s);
   }
@@ -275,7 +275,7 @@ function estruturaHtml(it) {
     }).join('');
     return linhas ? '<div class="mn-es"><p class="kicker">' + esc(s.t) + '</p><ul>' + linhas + '</ul></div>' : '';
   }).join('');
-  return '<p class="status">Estrutura: ' + ok + ' de ' + tot + ' bloco(s) da matriz no editor (✓ presente · ≈ parecido · ✗ ausente). As vagas são o texto do caso.</p><div class="mn-est">' + secs + '</div>';
+  return '<p class="status" title="✓ presente · ≈ parecido · ✗ ausente; as vagas são o texto do caso">Estrutura: ' + ok + '/' + tot + ' blocos</p><div class="mn-est">' + secs + '</div>';
 }
 /* parágrafos-padrão presentes no editor: para cada parágrafo do editor, o padrão mais parecido (a partir de 45%) */
 function paragrafosPadrao() {
@@ -291,7 +291,7 @@ function paragrafosPadrao() {
     if (best && bs >= 0.45) { out.push({ i: i, t: t, p: best, s: bs }); usados[best.id] = 1; }
   });
   if (!out.length) return '<p class="none">Nenhum parágrafo do editor corresponde a parágrafo-padrão do gabinete (a partir de 45% de palavras em comum).</p>';
-  return '<p class="status">' + out.length + ' parágrafo(s) do editor seguem parágrafos-padrão do gabinete. Riscado: texto do padrão que o editor não traz; verde: o que o editor acrescenta ou troca.</p>' +
+  return '<p class="status" title="Riscado: texto do padrão que o editor não traz; verde: o que o editor acrescenta ou troca">' + out.length + ' parágrafo(s) seguem o padrão</p>' +
     out.map(function (o) {
       var dif = CX.difPal(o.p.texto, o.t, C.ws);
       return '<div class="cx-pp"><p class="kicker">' + esc(o.p.cat) + ' · ' + esc(o.p.titulo) + ' · ' + Math.round(100 * o.s) + '%</p><p>' + dif.h + '</p></div>';

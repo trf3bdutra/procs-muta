@@ -205,7 +205,7 @@ function txHtml(l, it) {
   if (!TX.rotulo) TX.rotulo = 'Texto do PJe · ' + (u ? u + ' · ' : '') + hojeBr();
   var p = TX.prev;
   return '<section class="card lt-tx" id="lt-tx"><p class="kicker">Transferir o texto do PJe para o Collectio</p>' +
-    '<p class="muted">Lê a minuta do editor do PJe (tarefa de minuta), separa relatório, voto, ementa e acórdão pelos títulos e grava como nova versão da minuta deste processo no lote <b>' + esc(l.titulo) + '</b>. As versões anteriores ficam guardadas no Collectio.</p>' +
+    '<p class="muted">Nova versão no lote <b>' + esc(l.titulo) + '</b> (as anteriores ficam guardadas).</p>' +
     '<label class="lt-tx-f">Nome da versão <input type="text" data-tx="rotulo" maxlength="80" value="' + esc(TX.rotulo) + '"></label>' +
     '<label class="lt-tx-c"><input type="checkbox" data-tx="vigente"' + (TX.vigente ? ' checked' : '') + '> Tornar vigente (é a versão que o Collectio e o Relator veem); desmarcado, só guarda</label>' +
     (p && p.secoes ? '<p class="muted lt-tx-p">Lido agora' + (p.numero ? ' nos autos ' + esc(p.numero) : '') + ': ' + SECS.map(function (s) { return s[1] + ' ' + p.secoes[s[0]].length + ' §'; }).join(' · ') + '</p>' : '') +
