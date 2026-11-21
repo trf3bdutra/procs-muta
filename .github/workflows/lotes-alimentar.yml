@@ -5,6 +5,9 @@ name: Lotes · alimentar ficha e prontuários
 # equipe já preencheu na ficha ou no prontuário não são tocados. Se a main andar no meio, refaz (até 3 vezes).
 # Economia de minutos do GitHub Actions: em vez de um job por gravação (centenas por dia), roda de hora em hora
 # das 06h às 23h (Cuiabá) e no botão; o mesmo job recalcula a matriz de minutas da equipe (antes, outro fluxo a cada gravação).
+# Antes de alimentar, scripts/lotes/colecoes.py põe em dia as coleções do Collectio ligadas ao Caput: escaninhos da
+# triagem (lotes avulsos esc-*), Seleção prévia (um lote selecao-AAAA-MM-DD por sessão futura sem pauta oficial; arquivado
+# quando a pauta oficial entra) e o índice acervo/lotes/colecoes.json.
 on:
   schedule:
     - cron: '7 10-23 * * *'
@@ -30,11 +33,12 @@ jobs:
           git config user.email 'lotes-alimentar[bot]@users.noreply.github.com'
           for tentativa in 1 2 3; do
             git fetch -q origin main && git reset -q --hard origin/main
+            python3 scripts/lotes/colecoes.py
             python3 scripts/lotes/alimentar.py
             python3 scripts/equipe/matriz_minutas.py --gravar
-            if git diff --quiet -- acervo/operacional.json acervo/sessoes apoio/equipe-matriz.json; then echo 'Nada a gravar.'; exit 0; fi
-            git add acervo/operacional.json acervo/sessoes apoio/equipe-matriz.json
-            git commit -q -m "Lotes: ficha única, prontuários e matriz de minutas"
+            if git diff --quiet -- acervo/operacional.json acervo/sessoes apoio/equipe-matriz.json acervo/lotes acervo/triagem && [ -z "$(git ls-files --others --exclude-standard acervo/lotes)" ]; then echo 'Nada a gravar.'; exit 0; fi
+            git add acervo/operacional.json acervo/sessoes apoio/equipe-matriz.json acervo/lotes acervo/triagem/escaninhos.json
+            git commit -q -m "Lotes: coleções, ficha única, prontuários e matriz de minutas"
             if git push -q origin HEAD:main; then exit 0; fi
             echo "main andou; refazendo ($tentativa)"; sleep 5
           done

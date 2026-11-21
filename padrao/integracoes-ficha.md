@@ -270,6 +270,13 @@ Tempestividade, Preparo, Representação, Preliminares, Mídias, Hipótese de in
   - Produção (minuta, correção, equipe, próximo passo) fica só no Controle de Pauta.
 - As sessões gravadas pela área Sessões vão para `pauta.sessoes` (formato em seções).
 
+## Coleções do Collectio ligadas ao Caput
+
+- **Avulsos = escaninhos.** Cada escaninho da triagem do Caput é um lote avulso `acervo/lotes/esc-<id>.json` (tipo `avulso`, `colecao: avulsos`, `origem: escaninho`), com título, subtítulo, cor e bilhete. É a fonte única: o Caput lê e grava ali; o Collectio mostra o mesmo lote no grupo "Escaninhos da triagem do Caput" e dá a cada processo o prontuário completo. Quem sai do escaninho vai para `lote.retirados`, com o que já foi registrado. Escaninho excluído = lote arquivado. O arquivo antigo `acervo/triagem/escaninhos.json` fica só com a marca `migrado`.
+- **Seleção prévia.** Cada sessão futura do calendário sem pauta oficial tem o lote `selecao-AAAA-MM-DD` (tipo `selecao`), com os processos marcados "SELECIONADO PREVIAMENTE" para a data (`triagem.Seleção Prévia` + `pauta.Nova sessão de destino`). Quando a pauta oficial entra (`acervo/sessoes/AAAA-MM-DD.json` com itens), o lote é arquivado e a sessão segue na coleção Pautas (`pauta-AAAA-MM-DD`).
+- **Índice** `acervo/lotes/colecoes.json`: pautas, triagem, avulsos (com `escaninho: true`) e seleção prévia.
+- **Atualização:** `scripts/lotes/colecoes.py`, no mesmo job horário do alimentar ("Lotes · alimentar ficha e prontuários", 06h–23h de Cuiabá, e no botão). A triagem do Caput grava os escaninhos na hora; a seleção prévia acompanha na rodada seguinte. O alimentar processa seleção prévia e escaninhos antes dos demais lotes, para que os campos `Lote - *` da ficha fiquem com o lote de maior peso (triagem e pauta), e ignora lotes arquivados e o índice.
+
 ## Pendências de integração
 
 | # | Ponto | Situação |
