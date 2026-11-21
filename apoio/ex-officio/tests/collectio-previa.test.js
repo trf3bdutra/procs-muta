@@ -44,6 +44,8 @@ test('prévia do redesign (mesa de trabalho) só em /previa/: o endereço princi
   assert.match(html, /if\(MESA\)return renderMesa\(\);/);
   /* a mesa usa as mesmas ações: etapas, recorte, busca, lista, matriz e o painel do processo */
   for (const k of ['data-et=', 'data-fo="retido"', 'data-vista="meus"', 'id="q"', 'id="abre-t"', 'id="mn-t"', 'data-aba="matriz"', 'procHtml()', 'matrizHtml(']) assert.ok(html.includes(k), k);
+  /* coluna esquerda minimizável, lembrada no navegador */
+  assert.match(html, /id="lat-t"/); assert.match(html, /cmt-collectio-lat/); assert.match(html, /class="ms-lt-mini"/);
 });
 test('scripts válidos e HTML completo', () => {
   assert.ok(html.includes('</head>') && html.includes('</body>'));
