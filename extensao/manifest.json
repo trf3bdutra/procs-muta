@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Muta · Assistente de gabinete",
   "short_name": "Muta",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Prontuário, ficha e prontuário de triagem do processo integrados ao GitHub do gabinete, comparativos de texto com o editor do PJe (lote, triagem, modelos, precedentes), transferência do texto do PJe ao Collectio e painel de conformidade (Gab. Des. Fed. Carlos Muta, TRF-3).",
   "minimum_chrome_version": "116",
   "icons": {
@@ -26,11 +26,14 @@
   },
   "permissions": [
     "sidePanel",
-    "storage"
+    "storage",
+    "scripting"
   ],
   "host_permissions": [
     "https://www.gabinete-cmt.com/*",
-    "https://gabinete-cmt.com/*"
+    "https://gabinete-cmt.com/*",
+    "https://pje2g.trf3.jus.br/*",
+    "https://frontend-pje.app.trf3.jus.br/*"
   ],
   "content_scripts": [
     {

@@ -7,8 +7,19 @@
    Nada sai do navegador: só o número do processo, e só dentro da extensão. */
 'use strict';
 
+/* Depois de instalar ou atualizar a extensão, as abas do PJe já abertas ficam sem o leitor (o Chrome só o põe em páginas
+   carregadas depois): injeta o conteudo-pje.js nelas, em todos os quadros, para o painel funcionar sem recarregar a página. */
+function injetarNasAbasAbertas() {
+  if (!chrome.scripting || !chrome.tabs) return;
+  chrome.tabs.query({ url: ['https://pje2g.trf3.jus.br/*', 'https://frontend-pje.app.trf3.jus.br/*'] }).then(function (abas) {
+    (abas || []).forEach(function (t) {
+      chrome.scripting.executeScript({ target: { tabId: t.id, allFrames: true }, files: ['conteudo-pje.js'] }).catch(function () {});
+    });
+  }).catch(function () {});
+}
 chrome.runtime.onInstalled.addListener(function () {
   chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(function () {});
+  injetarNasAbasAbertas();
 });
 chrome.runtime.onStartup.addListener(function () {
   chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(function () {});
@@ -26,6 +37,10 @@ function consolidar(reg) {
   reg.numero = melhor ? melhor.numero : '';
   reg.classe = melhor ? (melhor.classe || '') : '';
   reg.via = melhor ? (melhor.via || '') : '';
+  /* contexto da tela: autos digitais em qualquer quadro; editor da minuta em qualquer quadro (o quadro do editor pode não ver o número) */
+  var ks = Object.keys(fr);
+  reg.ctx = ks.some(function (k) { return fr[k] && fr[k].ctx === 'autos'; }) ? 'autos' : (melhor && melhor.ctx) || '';
+  reg.ed = ks.some(function (k) { return fr[k] && fr[k].ed; });
   return reg;
 }
 
@@ -46,7 +61,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender) {
   emFila(chave, function () {
     return chrome.storage.session.get(chave).then(function (o) {
       var reg = o[chave] || { quadros: {} };
-      reg.quadros[quadro] = { numero: numero, classe: classe, forca: forca, via: String(msg.via || '').slice(0, 20), t: Date.now() };
+      reg.quadros[quadro] = { numero: numero, classe: classe, forca: forca, via: String(msg.via || '').slice(0, 20), ctx: String(msg.ctx || '').slice(0, 10), ed: !!msg.ed, t: Date.now() };
       consolidar(reg);
       var s = {}; s[chave] = reg;
       return chrome.storage.session.set(s);

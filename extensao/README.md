@@ -3,12 +3,24 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
-## O que faz (0.9)
+## O que faz (0.10)
 
 O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo em todas as abas. Ele lê tanto os autos digitais
 (número no título) quanto o painel de tarefas do PJe, que é carregado num quadro de `frontend-pje.app.trf3.jus.br`
 (número no cabeçalho da tarefa, “ApCiv 5001289-76.2023.4.03.6006 - [Sessão] Aguardando a sessão”).
 "Acompanhar o PJe" desligado congela o processo aberto; a lista no topo reabre qualquer prontuário salvo.
+
+- **Lista de tarefas (0.10).** O processo escolhido na lista do PJe (clique no cartão ou na caixa de seleção) passa a ser o
+  do painel, mesmo sem abrir a tarefa; cliques no editor e em campos de texto não contam.
+- **Trocar de aba (0.10).** Com "Trocar de aba" ligado, a aba do painel segue a tela do PJe: autos digitais → Triagem (e
+  lê o painel esquerdo dos autos); tarefa com o editor da minuta → Comparar (e lê a minuta; a Conformidade analisa a mesma
+  leitura). Só troca quando o processo ou a tela mudam.
+- **Peças dos autos digitais (0.10).** Na Triagem, "Ler o painel dos autos" lê a cronologia da página dos autos (ID, tipo,
+  descrição, data e movimentos de cada documento), separa as peças relevantes (decisões, recursos, MPF, petições, provas),
+  confere os IDs registrados na triagem e, em "Preencher o prontuário", completa só os campos vazios do prontuário: decisão
+  de origem, recursos e contrarrazões, ID do parecer do MPF e "Outras peças". Código em `autos.js`.
+- **Abas já abertas (0.10).** Ao instalar ou atualizar, a extensão põe o leitor nas abas do PJe já abertas (permissão
+  `scripting`), sem precisar recarregar a página.
 
 - **Triagem (0.9).** O prontuário de triagem do processo aberto no PJe, o mesmo do Caput · Triagem, lido da ficha única
   (`GET /api/pauta?ficha=<CNJ>`): admissibilidade, MPF e urgência, matéria e gestão, providências (editáveis; grava só o que
@@ -69,6 +81,7 @@ sessao.js          login do Ex Officio (/api/login) e chamadas à API do site
 gabinete.js        ficha do gabinete (Ex Officio) e correspondência rascunho ↔ ficha
 lote.js            aba Lote (Amicus Curiae · Index) e transferência do texto do PJe ao Collectio
 triagem.js         aba Triagem (prontuário de triagem da ficha, registro do lote, etiquetas sugeridas)
+autos.js           peças dos autos digitais (cronologia do PJe): conferência com a triagem e preenchimento do prontuário
 ementario.js       busca no Ementário do Compêndio
 pje.js             painel acompanha o processo da aba ativa
 icones/            ícones 16, 32, 48 e 128

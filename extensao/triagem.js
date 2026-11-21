@@ -4,7 +4,8 @@
    nota e trecho), gravado a partir dos lotes por scripts/triagem/ficha_lote.py.
    Grava só o que a pessoa mudou (POST /api/pauta?ficha=1 {cnj, campos}); o servidor recusa o que não é editável.
    Daqui saem também: as etiquetas sugeridas para o PJe (copiar), a comparação do editor com a proposta e o precedente da
-   triagem (aba Comparar) e a transferência do texto do editor para o Collectio (aba Lote). */
+   triagem (aba Comparar), a transferência do texto do editor para o Collectio (aba Lote) e, nos autos digitais, a leitura
+   do painel esquerdo do PJe (autos.js: conferência das peças e preenchimento do prontuário). */
 (function () {
 'use strict';
 var ses = window.MutaSessao, br = window.MutaProntuarioBridge;
@@ -91,7 +92,7 @@ function txt(rot, v) { return S(v) ? '<div class="tr-t"><span>' + esc(rot) + '</
 function render() {
   if (!caixa || !aberta()) return;
   if (T.erro) { caixa.innerHTML = '<div class="err-box">Não foi possível ler a ficha: ' + esc(T.erro) + '</div>'; return; }
-  if (!T.cnj) { caixa.innerHTML = '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos ou a tarefa no PJe: o prontuário de triagem do processo aparece aqui.</div>'; return; }
+  if (!T.cnj) { caixa.innerHTML = '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos digitais ou a tarefa no PJe: o prontuário de triagem do processo aparece aqui.</div>'; return; }
   if (T.carregando) { caixa.innerHTML = '<div class="empty">Lendo a ficha de ' + esc(T.cnj) + '…</div>'; return; }
   var t = (T.op || {}).triagem || {}, f = T.fo || {}, nPend = Object.keys(T.pend).length;
   var pecas = Array.isArray(R('Peças')) ? R('Peças') : [];
@@ -99,6 +100,7 @@ function render() {
     '<div class="muted">' + esc([f.classe_judicial || f.Classe, f.Assunto, f.tarefa_atual].filter(Boolean).join(' · ')) + '</div>' +
     (R('Assunto detalhado') ? '<h2 class="display tr-ad">' + esc(R('Assunto detalhado')) + '</h2>' : '') +
     '<div class="bar"><button type="button" class="btn line" data-t="cmp">Comparar o editor com a triagem</button><button type="button" class="btn line" data-t="tx">Transferir texto do PJe ao Collectio</button><button type="button" class="btn line" data-t="atu">Atualizar</button></div></article>';
+  if (window.MutaAutos) h += window.MutaAutos.html(T.cnj, pecas);
   h += '<section class="card tr-b tr-ed"><p class="kicker">Prontuário de triagem <small class="muted">grava na ficha do processo</small></p>' +
     CAMPOS.map(function (g) { return '<h4 class="tr-g">' + esc(g[0]) + '</h4><div class="tr-grid">' + g[1].map(campo).join('') + '</div>'; }).join('') +
     '<div class="bar tr-sv"><button type="button" class="btn solid" data-t="salvar"' + (nPend && !T.gravando ? '' : ' disabled') + '>' + (T.gravando ? 'Gravando…' : nPend ? 'Salvar ' + nPend + ' campo(s)' : 'Nada a salvar') + '</button>' +
@@ -133,6 +135,7 @@ if (caixa) {
   caixa.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
     var a = b.dataset.t;
+    if (b.dataset.au && window.MutaAutos) { window.MutaAutos.clique(b); return; }
     if (a === 'salvar') { salvar(); return; }
     if (a === 'desfaz') { T.pend = {}; T.msg = ''; render(); return; }
     if (a === 'atu') { carregar(true); return; }
@@ -154,6 +157,7 @@ document.addEventListener('muta:prontuario', function () { if (aberta()) carrega
 if (ses && ses.ouvir) ses.ouvir(function () { if (aberta()) carregar(false); });
 window.MutaTriagem = {
   abrir: function () { carregar(false); },
+  render: function () { render(); },
   /* para a aba Comparar: proposta, modelo do grupo e números dos precedentes citados na triagem */
   dados: function () {
     var t = (T.op || {}).triagem || {};

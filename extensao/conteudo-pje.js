@@ -9,17 +9,22 @@
      2 · cabeçalho da tarefa aberta ("ApCiv 5001289-76.2023.4.03.6006 - [Sessão] Aguardando a sessão")
          ou cabeçalho conhecido dos autos com um único número;
      1 · único número CNJ visível no quadro.
-   Em listas de tarefas (vários números e nenhum cabeçalho), não informa nada. */
+   Em listas de tarefas (vários números e nenhum cabeçalho), vale o processo escolhido na lista (clique no cartão ou
+   na caixa de seleção); sem escolha, não informa nada.
+   Informa também o contexto da tela (autos digitais, tarefa com editor) para o painel trocar de aba sozinho, e, a
+   pedido, a cronologia dos autos digitais (painel esquerdo: documentos com ID, tipo, descrição e data). */
 (function () {
   'use strict';
-  if (window.__mutaPje) return;
-  window.__mutaPje = true;
+  var VERSAO = '0.10';
+  if (window.__mutaPje === VERSAO) return;
+  window.__mutaPje = VERSAO;
 
   var CNJ = '(\\d{7}-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4})';
-  var RE = new RegExp('\\b' + CNJ + '\\b', 'g');
-  var RE_CLASSE = new RegExp('\\b([A-Z][A-Za-z]{1,13})\\s+' + CNJ + '\\b');
+  /* sem \b no fim: no PJe o número pode vir colado ao texto seguinte (ícones sem texto entre eles) */
+  var RE = new RegExp('(?<!\\d)' + CNJ + '(?!\\d)', 'g');
+  var RE_CLASSE = new RegExp('\\b([A-Z][A-Za-z]{1,13})\\s+' + CNJ + '(?!\\d)');
   /* cabeçalho da tarefa no painel do PJe: classe, número, ícone de cópia e " - [Tarefa]" */
-  var RE_TAREFA = new RegExp('\\b([A-Z][A-Za-z]{1,13})\\s+' + CNJ + '[^\\n\\[]{0,16}?-\\s*\\[', 'g');
+  var RE_TAREFA = new RegExp('\\b([A-Z][A-Za-z]{1,13})\\s+' + CNJ + '[^\\[]{0,24}?-\\s*\\[', 'g');
   var CABECALHOS = ['#navbar .titulo-topo', '.titulo-topo', '#pageHeader', '.header-processo',
     '#processoIdentificacao', '.dados-processo', '.cabecalho-tarefa', '.titulo-tarefa', 'h1', 'h2', 'h3'];
 
@@ -40,11 +45,66 @@
     var k = Object.keys(achados);
     return k.length === 1 ? { numero: k[0], classe: achados[k[0]] } : null;
   }
+  /* processo escolhido na lista de tarefas: clique no cartão ou na caixa de seleção (o cartão é o menor bloco com um só número) */
+  var SEL = null, tfAnterior = '';
+  function cartaoDe(el) {
+    for (var e = el, i = 0; e && e !== document.body && i < 14; e = e.parentElement, i++) {
+      var nn = numeros((e.innerText || e.textContent || '').slice(0, 4000));
+      if (nn.length === 1) return { numero: nn[0], classe: classeDe(e.innerText || '', nn[0]) };
+      if (nn.length > 1) return null;
+    }
+    return null;
+  }
+  /* cliques no editor, em campos de texto ou em documentos não escolhem processo (o texto da minuta cita outros números) */
+  var FORA = '[contenteditable], .ProseMirror, textarea, select, input:not([type="checkbox"]), .ck-editor, .cke, .cke_editable, iframe, embed, object';
+  function escolher(el) {
+    if (!el || !el.closest || el.closest(FORA)) return;
+    var c = cartaoDe(el);
+    if (!c) return;
+    SEL = { numero: c.numero, classe: c.classe, t: Date.now() };
+    ultimo = null; agendar();
+  }
+  document.addEventListener('click', function (e) { try { if (e.isTrusted) escolher(e.target); } catch (x) {} }, true);
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (!t || t.type !== 'checkbox') return;
+    if (t.checked) { escolher(t); return; }
+    var c = cartaoDe(t);
+    if (c && SEL && SEL.numero === c.numero) {
+      var outro = Array.prototype.filter.call(document.querySelectorAll('input[type="checkbox"]'), function (x) { return x.checked; }).map(cartaoDe).filter(Boolean).pop();
+      SEL = outro ? { numero: outro.numero, classe: outro.classe, t: Date.now() } : null;
+      ultimo = null; agendar();
+    }
+  }, true);
+
+  /* contexto da tela: autos digitais (cronologia à esquerda), tarefa com editor, tarefa, lista */
+  function autosDigitais() { return !!document.getElementById('divTimeLine') || /listAutosDigitais|ConsultaProcesso\/Detalhe/i.test(location.pathname); }
+  function temEditor() {
+    var r = raizes();
+    for (var i = 0; i < r.length; i++) {
+      var el = r[i].querySelector('.ProseMirror, [contenteditable="true"], .ck-editor__editable, .cke_editable');
+      if (el && (el.textContent || '').length >= 80 && visivel(el)) return true;
+    }
+    return Array.prototype.some.call(document.querySelectorAll('iframe'), function (f) {
+      var d; try { d = f.contentDocument; } catch (e) { d = null; }
+      return !!(d && d.body && (d.body.isContentEditable || d.designMode === 'on' || d.querySelector('.ProseMirror')) && (d.body.textContent || '').length >= 80 && visivel(f));
+    });
+  }
   function detectar() {
+    var d = detectarNumero();
+    d.ctx = autosDigitais() ? 'autos' : '';
+    try { d.ed = !d.ctx && temEditor(); } catch (e) { d.ed = false; }
+    if (!d.ctx) d.ctx = d.ed ? 'editor' : d.via === 'tarefa' ? 'tarefa' : d.via === 'seleção na lista' ? 'lista' : '';
+    return d;
+  }
+  function detectarNumero() {
     var t = document.title || '', n = numeros(t);
     if (n.length === 1) return { numero: n[0], classe: classeDe(t, n[0]), forca: 3, via: 'título' };
     var corpo = document.body ? (document.body.innerText || '').slice(0, 300000) : '';
-    var tf = tarefa(corpo);
+    var tf = tarefa(corpo), tfn = tf ? tf.numero : '';
+    /* a tarefa aberta trocou depois da escolha na lista: vale a tarefa */
+    if (tfn !== tfAnterior) { if (tfn && SEL && SEL.numero !== tfn && Date.now() - SEL.t > 1500) SEL = null; tfAnterior = tfn; }
+    if (SEL && corpo.indexOf(SEL.numero) >= 0) return { numero: SEL.numero, classe: SEL.classe || (tf && tf.numero === SEL.numero ? tf.classe : ''), forca: 2, via: tf && tf.numero === SEL.numero ? 'tarefa' : 'seleção na lista' };
     if (tf) return { numero: tf.numero, classe: tf.classe, forca: 2, via: 'tarefa' };
     for (var i = 0; i < CABECALHOS.length; i++) {
       var el = document.querySelector(CABECALHOS[i]);
@@ -62,10 +122,10 @@
     espera = null;
     var d;
     try { d = detectar(); } catch (e) { return; }
-    var chave = d.numero + '|' + d.classe + '|' + d.forca;
+    var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed;
     if (chave === ultimo) return;
     ultimo = chave;
-    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, host: location.host }); }
+    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, host: location.host }); }
     catch (e) { /* extensão recarregada: esta página fica sem vínculo até ser recarregada */ }
   }
   function agendar() { if (!espera) espera = setTimeout(informar, 700); }
@@ -122,13 +182,30 @@
     if (!lista.length) { var tx = textoDe(raiz); if (tx) tx.split(/\n+/).forEach(function (l) { l = l.trim(); if (l) lista.push({ t: l, tag: 'p', cls: '', recuo: 0, alinha: '', neg: 0, ita: 0, cita: false }); }); }
     return lista;
   }
+  /* o documento e as shadow roots abertas (editores montados como componentes) */
+  var RZ = { t: 0, l: null };
+  function raizes() {
+    if (RZ.l && Date.now() - RZ.t < 3000) return RZ.l;
+    var lista = [document], i = 0;
+    while (i < lista.length && lista.length < 60) {
+      var r = lista[i++], els = r.querySelectorAll('*');
+      for (var j = 0; j < els.length && lista.length < 60; j++) if (els[j].shadowRoot) lista.push(els[j].shadowRoot);
+    }
+    RZ.t = Date.now(); RZ.l = lista;
+    return lista;
+  }
+  function todos(sel) {
+    var out = [];
+    raizes().forEach(function (r) { Array.prototype.push.apply(out, r.querySelectorAll(sel)); });
+    return out;
+  }
   function editores() {
     var c = [];
     function add(raiz, vis, fonte) {
       var ps = paragrafos(raiz), t = ps.map(function (p) { return p.t; }).join('\n');
       if (t.length >= 80) c.push({ t: t, ps: ps, vis: vis, fonte: fonte });
     }
-    Array.prototype.forEach.call(document.querySelectorAll('.ProseMirror[contenteditable="true"], .ProseMirror'), function (el) {
+    todos('.ProseMirror[contenteditable="true"], .ProseMirror').forEach(function (el) {
       if (el.parentElement && el.parentElement.closest('.ProseMirror')) return;
       add(el, visivel(el), 'editor do PJe');
     });
@@ -141,7 +218,7 @@
       if (ed) add(b, visivel(f), /cke/.test(b.className || '') || /cke/.test(f.className || '') ? 'CKEditor' : /mce/.test(b.className || '') ? 'TinyMCE' : 'editor (iframe)');
     });
     if (!c.length) {
-      Array.prototype.forEach.call(document.querySelectorAll('[contenteditable="true"], .ck-editor__editable, .cke_editable'), function (el) {
+      todos('[contenteditable="true"], .ck-editor__editable, .cke_editable').forEach(function (el) {
         if (el.parentElement && el.parentElement.closest('[contenteditable="true"]')) return;
         add(el, visivel(el), el.classList.contains('ck-editor__editable') ? 'CKEditor 5' : 'área editável');
       });
@@ -152,6 +229,53 @@
     });
     return c.sort(function (a, b) { return (b.vis - a.vis) || (b.t.length - a.t.length); });
   }
+  /* ---------- autos digitais: a cronologia do painel esquerdo (documentos, movimentos e datas) ----------
+     Lê #divTimeLine da página dos autos digitais: cada bloco tem os movimentos (em maiúsculas), os documentos
+     ("ID - Tipo (descrição) - ID de origem N") e a hora; a data vem do separador anterior. Só lê. */
+  var MESES = { jan: 1, fev: 2, mar: 3, abr: 4, mai: 5, jun: 6, jul: 7, ago: 8, set: 9, out: 10, nov: 11, dez: 12 };
+  function dataBr(t) {
+    var m = /(\d{1,2})\s+([a-zç]{3})\.?\s+(\d{4})/i.exec(t || ''), mm = m && MESES[m[2].toLowerCase()];
+    return mm ? ('0' + m[1]).slice(-2) + '/' + ('0' + mm).slice(-2) + '/' + m[3] : '';
+  }
+  var RE_DOC = /^(\d{6,12})\s*-\s*(.+?)(?:\s*-\s*ID de origem\s*(\d+))?\s*$/;
+  function lerCronologia() {
+    var tl = document.getElementById('divTimeLine');
+    if (!tl) return null;
+    var data = '', itens = [], jaVisto = {};
+    Array.prototype.forEach.call(tl.querySelectorAll('.media'), function (m) {
+      if (m.classList.contains('div-data-rolagem')) return; /* data flutuante da rolagem */
+      if (m.classList.contains('data')) { var d = dataBr(m.textContent); if (d) data = d; return; }
+      if (!m.classList.contains('interno')) return;
+      var it = { data: data, hora: '', docs: [], movs: [], ativo: m.classList.contains('active') }, vistos = {};
+      Array.prototype.forEach.call(m.querySelectorAll('a'), function (a) {
+        var x = RE_DOC.exec(limpa(a.innerText || a.textContent).replace(/\s+/g, ' '));
+        if (!x || vistos[x[1]] || jaVisto[x[1]]) return; /* a página repete a lista inteira em ordem crescente: vale a primeira */
+        vistos[x[1]] = jaVisto[x[1]] = 1;
+        var tipo = x[2], desc = '', p = /^(.*?)\s*\((.*)\)\s*$/.exec(tipo);
+        if (p && p[1]) { tipo = p[1]; desc = p[2]; }
+        it.docs.push({ id: x[1], tipo: tipo.trim(), desc: desc.trim(), origem: x[3] || '' });
+      });
+      limpa(m.innerText || m.textContent).split('\n').forEach(function (l) {
+        l = l.replace(/\s+/g, ' ').trim();
+        if (!l) return;
+        if (/^\d{2}:\d{2}$/.test(l)) { it.hora = l; return; }
+        if (RE_DOC.test(l)) return;
+        if (l.length >= 6 && l === l.toUpperCase() && /[A-ZÀ-Ü]{3}/.test(l)) it.movs.push(l);
+      });
+      if (it.docs.length || (it.movs.length && it.hora)) itens.push(it);
+    });
+    return itens;
+  }
+  try {
+    chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
+      if (!msg || msg.tipo !== 'muta-autos') return;
+      var itens = lerCronologia();
+      if (!itens) return;
+      var d = detectar() || {};
+      responder({ numero: d.numero || '', itens: itens, docs: itens.reduce(function (n, i) { return n + i.docs.length; }, 0), url: location.host + location.pathname });
+    });
+  } catch (e) {}
+
   try {
     chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
       if (!msg || msg.tipo !== 'muta-editor') return;

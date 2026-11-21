@@ -1,6 +1,7 @@
 /* Muta · painel acompanha o processo aberto no PJe
    Lê de chrome.storage.session ("aba:<id>", gravado pelo fundo.js) o processo da aba ativa e, com
-   "Acompanhar o PJe" ligado, abre o prontuário desse processo. */
+   "Acompanhar o PJe" ligado, abre o prontuário desse processo; com "Trocar de aba" ligado, a aba segue a tela do PJe
+   (autos digitais → Triagem; tarefa com o editor → Comparar). */
 (function () {
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
@@ -9,8 +10,21 @@
   var PREF = 'muta-pje:seguir';
   var abaAtiva = null, ultimoPje = '', ultimaClasse = '';
 
-  var seguir = $('pje-seguir');
+  var seguir = $('pje-seguir'), trocar = $('pje-aba'), PREF_ABA = 'muta-pje:aba-auto', ultimoCtx = '';
   try { seguir.checked = localStorage.getItem(PREF) !== '0'; } catch (e) {}
+  try { if (trocar) trocar.checked = localStorage.getItem(PREF_ABA) !== '0'; } catch (e) {}
+
+  /* a aba do painel acompanha a tela do PJe: autos digitais → Triagem (e lê o painel esquerdo dos autos);
+     tarefa com o editor da minuta → Comparar (e lê o editor; a Conformidade analisa a mesma leitura).
+     Só troca quando o processo ou a tela mudam: depois disso a pessoa navega à vontade. */
+  function porContexto(reg) {
+    if (!reg || !reg.numero || !seguir.checked || !(trocar && trocar.checked) || !window.MutaAbas) return;
+    var ctx = reg.ctx === 'autos' ? 'autos' : reg.ed ? 'editor' : '', k = reg.numero + '|' + ctx;
+    if (!ctx || k === ultimoCtx) return;
+    ultimoCtx = k;
+    if (ctx === 'autos') { window.MutaAbas.ir('tri'); if (window.MutaAutos) setTimeout(function () { window.MutaAutos.ler(); }, 300); }
+    else { window.MutaAbas.ir('cmp'); if (window.MutaEditor) setTimeout(function () { window.MutaEditor.ler().catch(function () {}); }, 300); }
+  }
 
   function mostrar(numero, texto, estado) {
     $('pje-status').textContent = texto;
@@ -21,9 +35,11 @@
     ultimoPje = numero; ultimaClasse = classe;
     if (!numero) { mostrar('', temChrome ? 'Nenhum processo aberto na aba ativa do PJe.' : 'Fora da extensão: sem leitura do PJe.', 'off'); return; }
     var atual = br.chaveAtual(), k = Muta.chaveProcesso(numero);
+    var tela = reg.ctx === 'autos' ? ' · autos digitais' : reg.ed ? ' · editor da minuta' : reg.via === 'seleção na lista' ? ' · escolhido na lista' : '';
     if (seguir.checked) {
       br.abrirProcesso(numero, classe);
-      mostrar(numero, 'PJe: ' + (classe ? classe + ' ' : '') + numero, 'on');
+      mostrar(numero, 'PJe: ' + (classe ? classe + ' ' : '') + numero + tela, 'on');
+      porContexto(reg);
     } else {
       mostrar(numero, 'PJe: ' + numero + (k === atual ? '' : ' · acompanhamento desligado'), k === atual ? 'on' : 'pausa');
     }
@@ -49,6 +65,7 @@
     chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(function (t) { lerAba(t && t[0] ? t[0].id : null); }).catch(function () { lerAba(null); });
   }
 
+  if (trocar) trocar.addEventListener('change', function () { try { localStorage.setItem(PREF_ABA, trocar.checked ? '1' : '0'); } catch (e) {} ultimoCtx = ''; });
   seguir.addEventListener('change', function () {
     try { localStorage.setItem(PREF, seguir.checked ? '1' : '0'); } catch (e) {}
     if (temChrome) abaDaJanela(); else aplicar(null);
@@ -70,6 +87,20 @@
         return r;
       }, function (e) {
         throw new Error(/Receiving end|port closed|No tab/i.test(String(e && e.message)) ? 'Nenhum editor de texto aberto na aba do PJe (abra a minuta na tarefa e, se a extensão foi atualizada, recarregue a página do PJe).' : (e && e.message) || String(e));
+      });
+    },
+    /* cronologia dos autos digitais (painel esquerdo da página dos autos): documentos com ID, tipo, descrição e data */
+    lerAutos: function () {
+      if (!temChrome) return Promise.reject(new Error('Fora da extensão: sem acesso ao PJe.'));
+      return chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(function (t) {
+        var id = t && t[0] ? t[0].id : abaAtiva;
+        if (id == null) throw new Error('Nenhuma aba ativa.');
+        return chrome.tabs.sendMessage(id, { tipo: 'muta-autos' });
+      }).then(function (r) {
+        if (!r || !r.itens) throw new Error('A aba ativa não é a dos autos digitais do PJe.');
+        return r;
+      }, function (e) {
+        throw new Error(/Receiving end|port closed|No tab/i.test(String(e && e.message)) ? 'A aba ativa não é a dos autos digitais (ou a página foi aberta antes de instalar a extensão: recarregue com F5).' : (e && e.message) || String(e));
       });
     },
     /* escolha manual na lista de prontuários: desliga o acompanhamento para não ser desfeita */
