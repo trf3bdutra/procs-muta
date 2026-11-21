@@ -22328,13 +22328,17 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ELIZETE INACIA FERREIRA DE ALMEIDA MELLO",
    "assunto": "Gratificação de Incremento da Fiscalização e da Arrecadação - GIFA",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "Servidor público · cumprimento individual de sentença coletiva (GAT, UNAFISCO, REsp 1.585.353/DF) · título atingido pela AR 6.436/DF do STJ · sobrestamento",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferir a situação da AR 6.436/DF no STJ: o processo foi sobrestado e arquivado provisoriamente pela decisão ID 275523592 (14/06/2023), porque a AR foi julgada em 12/04/2023 para rescindir o REsp 1.585.353/DF; o efeito suspensivo foi indeferido (ID 267868353) e há contraminuta (ID 269081855); etiqueta META 2 CNJ (até 2022) ‖ Proposta pelos precedentes: com a procedência da AR 6.436/DF (12/04/2023), o título que fundava a execução da GAT foi rescindido; a 1ª Turma deu provimento aos agravos da União na mesma série, acolhendo a impugnação e fixando sucumbência (artigo 85, §§ 2º e 3º, do CPC) → provimento [VALIDAR: Trânsito em julgado e alcance da AR 6.436/DF; Teor da decisão agravada ID 258224295]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "SOB",
+    "PRI",
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão que, no cumprimento individual do título coletivo da ação 0000423-33.2007.4.01.3400 (UNAFISCO; REsp 1.585.353/DF, incorporação da GAT ao vencimento básico), concedeu prazo para novos cálculos (ID 258224295 da origem). Sustenta que o título não assegura o que se executa e que a AR 6.436/DF afeta o título. A agravada (ID 269081855) defende a natureza vencimental da GAT e pede multa por litigância de má-fé.",
+   "peculiaridades": "A decisão ID 275523592 (Des. Fed. Giselle França, 14/06/2023) registrou que a AR 6.436/DF foi julgada em 12/04/2023, com rescisão do REsp 1.585.353/DF, e mandou arquivar provisoriamente os autos (artigo 313, V, a, do CPC). Redistribuído à Turma Regional (decisão ID 357004477, 27/02/2026). Etiqueta META 2 CNJ (até 2022). Pedido de publicação exclusiva em nome de Marcelo Jaime Ferreira (OAB/DF 15.766).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -22370,9 +22374,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Exame do sobrestamento e julgamento do agravo (voto)",
+    "materia": "Servidor público — cumprimento de sentença coletiva (GAT)",
+    "origem": "Cumprimento de sentença 5007744-51.2018.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 258224295 (autos de origem)",
+    "recurso": "ID 262654658 · 24/08/2022",
+    "preparo": "Isenta (União)",
+    "monocratica": "Possível, conforme o resultado definitivo da AR 6.436/DF [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5007744-51.2018.4.03.6000 · título coletivo da ação 0000423-33.2007.4.01.3400 (UNAFISCO) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Situação atual da AR 6.436/DF (trânsito e efeitos sobre o título coletivo)",
+    "[VALIDAR] Levantar o sobrestamento e julgar (META 2 CNJ)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -22391,6 +22409,104 @@
     "ultima_informacao": "",
     "ultima_movimentacao": " 01:11 · Há 3 documentos não lidos",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Servidor público — execução individual da GAT e rescisão do título pela AR 6.436/DF",
+   "especificidades": "Processo de 2022 (META 2 CNJ) · Sobrestado desde 14/06/2023 pela AR 6.436/DF (ID 275523592) · Efeito suspensivo indeferido (ID 267868353, 19/12/2022) · Pedido de multa por litigância de má-fé na contraminuta · Publicação exclusiva em nome de Marcelo Jaime Ferreira (OAB/DF 15.766)",
+   "teor": {
+    "sintese_fatica": "Auditora fiscal executa individualmente o título coletivo da UNAFISCO que reconheceu a incorporação da GAT ao vencimento básico (REsp 1.585.353/DF); o juízo concedeu prazo para novos cálculos e a União agravou. O STJ julgou a AR 6.436/DF em 12/04/2023, rescindindo o acórdão do REsp, segundo a decisão ID 275523592.",
+    "inicial": "Não consta nos autos do recurso (cumprimento de sentença 5007744-51.2018.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 258224295 da origem: concedeu à União prazo para apresentar novos cálculos (descrita na decisão ID 267868353).",
+    "recurso": "Agravo de instrumento ID 262654658 (24/08/2022): incongruência entre a pretensão executiva e o título (GAT), cognoscível de ofício (artigo 803, I, do CPC); suspensões determinadas no Tribunal e no STJ (AR 6.436/DF). Pede efeito suspensivo e reforma.",
+    "resposta": "Contraminuta ID 269081855 (24/01/2023): natureza vencimental da GAT reconhecida pelo STJ; decisões em reclamações (IDs 269081857 e 269081858); multa por litigância de má-fé.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "União representada por advogado da União (dispensada a procuração). Agravada representada pelos advogados Marcelo Jaime Ferreira (OAB/DF 15.766) e outros.",
+    "preparo": "Dispensado: União."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Servidor público · cumprimento individual de sentença coletiva (GAT, UNAFISCO, REsp 1.585.353/DF) · título atingido pela AR 6.436/DF do STJ · sobrestamento",
+     "sintese": "Auditora fiscal executa individualmente o título coletivo da UNAFISCO que reconheceu a incorporação da GAT ao vencimento básico (REsp 1.585.353/DF); o juízo concedeu prazo para novos cálculos e a União agravou. O STJ julgou a AR 6.436/DF em 12/04/2023, rescindindo o acórdão do REsp, segundo a decisão ID 275523592.",
+     "questoes": "1) Efeito do julgamento da AR 6.436/DF (rescisão do REsp 1.585.353/DF) sobre o título executado; 2) congruência entre a execução e o título (GAT); 3) litigância de má-fé pedida pela agravada.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 262654658 (24/08/2022): incongruência entre a pretensão executiva e o título (GAT), cognoscível de ofício (artigo 803, I, do CPC); suspensões determinadas no Tribunal e no STJ (AR 6.436/DF). Pede efeito suspensivo e reforma.",
+      "contrarrazoes": "Contraminuta ID 269081855 (24/01/2023): natureza vencimental da GAT reconhecida pelo STJ; decisões em reclamações (IDs 269081857 e 269081858); multa por litigância de má-fé."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "258224295",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Concedeu prazo para novos cálculos no cumprimento de sentença."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "258224295"
+     },
+     "adm": {
+      "prot": "2022-08-24",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "262654658",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "262654658",
+       "data": "2022-08-24"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "267868353",
+       "data": "2022-12-19"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "269081855",
+       "data": "2023-01-24"
+      },
+      {
+       "desc": "Decisão de sobrestamento (AR 6.436/DF)",
+       "id": "275523592",
+       "data": "2023-06-14"
+      },
+      {
+       "desc": "Decisão de declínio à Turma Regional",
+       "id": "357004477",
+       "data": "2026-02-27"
+      }
+     ],
+     "pendencias": "Conferir a AR 6.436/DF e levantar o sobrestamento",
+     "especificidades": "Processo de 2022 (META 2 CNJ) · Sobrestado desde 14/06/2023 pela AR 6.436/DF (ID 275523592) · Efeito suspensivo indeferido (ID 267868353, 19/12/2022) · Pedido de multa por litigância de má-fé na contraminuta · Publicação exclusiva em nome de Marcelo Jaime Ferreira (OAB/DF 15.766)",
+     "assuntoDet": "Servidor público — execução individual da GAT e rescisão do título pela AR 6.436/DF",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2022-12-19",
+     "fundamento": "Paradigmas do gabinete: AI 5022902-65.2022.4.03.0000 (acórdão 1ª Turma, 26/06/2023: provido; título rescindido pela AR 6.436/DF); AI 5032125-42.2022.4.03.0000 (acórdão 1ª Turma, 26/06/2023: provido; mesma tese)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
@@ -22403,12 +22519,14 @@
    "executado": "FERNANDA FERREIRA CHAVES",
    "assunto": "Gratificações de Atividade",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Gratuidade da justiça · pedido de revogação após o trânsito em julgado · exigibilidade dos honorários de sucumbência (artigo 98, § 3º, do CPC)",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); não houve pedido de efeito suspensivo (despacho ID 328640511) e há contraminuta (ID 333047625) ‖ Proposta pelos precedentes: a gratuidade pode ser revogada por fato superveniente comprovado, e a impugnação fundada só em critério objetivo de renda não basta → tendência de desprovimento, salvo prova concreta da cessação da insuficiência (artigo 98, § 3º, do CPC) [VALIDAR] [VALIDAR: Data e teor da decisão que concedeu a gratuidade no Tribunal]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do IFMS contra a decisão que indeferiu a revogação da gratuidade concedida à autora, por ter transitado em julgado a decisão que a deferiu e por ter sido proferida pelo Tribunal (ID 366714268 da origem). Pede a revogação ou a exclusão de seus efeitos sobre os honorários de sucumbência, com início do cumprimento de sentença. A agravada (ID 333047625) sustenta a preclusão e a falta de prova de melhora da renda.",
+   "peculiaridades": "A petição do agravo contém campos de modelo não preenchidos (\"ID XXXXX\", \"XXª Vara Federal de São Paulo\"); a decisão agravada está na cópia ID 328498720. Redistribuído pela 1ª Turma à Turma Regional (despacho ID 361978009).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -22429,9 +22547,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Gratuidade da justiça — revogação e sucumbência",
+    "origem": "Ação 0005345-08.2016.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 366714268 (autos de origem), de 09/06/2025 (cópia ID 328498720)",
+    "recurso": "ID 328498719 · 22/06/2025",
+    "preparo": "Isento (IFMS, ente público)",
+    "monocratica": "Possível [VALIDAR linha do gabinete]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0005345-08.2016.4.03.6000 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Decisão que concedeu a gratuidade e seu trânsito"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -22450,6 +22581,101 @@
     "ultima_informacao": "Certidão · ID 363326364 · 30/03/2026",
     "ultima_movimentacao": "30/03/2026 14:28 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Gratuidade da justiça — revogação pedida pela parte vencedora na fase de cumprimento",
+   "especificidades": "Decisão agravada: gratuidade concedida pelo Tribunal e transitada em julgado (ID 366714268 da origem) · Comprovante de rendimentos da autora juntado na origem (ID 305926074) · Petição do agravo com campos de modelo não preenchidos",
+   "teor": {
+    "sintese_fatica": "Na fase posterior ao trânsito em julgado, o IFMS pediu a revogação da gratuidade concedida à autora, servidora, juntando comprovante de rendimentos; o juízo indeferiu o pedido e mandou arquivar os autos.",
+    "inicial": "Não consta nos autos do recurso (ação 0005345-08.2016.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 366714268 da origem (09/06/2025; cópia ID 328498720): indeferiu a revogação da gratuidade, porque a decisão que a concedeu transitou em julgado e foi proferida pelo Tribunal, e mandou arquivar os autos.",
+    "recurso": "Agravo de instrumento ID 328498719 (22/06/2025): a autora tem renda suficiente; pede a revogação da gratuidade ou a exclusão de seus efeitos sobre os honorários de sucumbência, com o início do cumprimento de sentença.",
+    "resposta": "Contraminuta ID 333047625 (11/08/2025): trânsito em julgado da decisão que concedeu a gratuidade; a renda da agravada diminuiu em termos reais; falta de prova pelo agravante.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "IFMS representado por procurador federal (dispensada a procuração). Agravada representada pelos advogados Andrei Meneses Lorenzetto, Carlos Alberto Almeida de Oliveira Filho e Mayara Lopes Pereira.",
+    "preparo": "Dispensado: autarquia federal."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Gratuidade da justiça · pedido de revogação após o trânsito em julgado · exigibilidade dos honorários de sucumbência (artigo 98, § 3º, do CPC)",
+     "sintese": "Na fase posterior ao trânsito em julgado, o IFMS pediu a revogação da gratuidade concedida à autora, servidora, juntando comprovante de rendimentos; o juízo indeferiu o pedido e mandou arquivar os autos.",
+     "questoes": "1) Possibilidade de revogar a gratuidade concedida pelo Tribunal depois do trânsito em julgado; 2) prova da cessação da insuficiência de recursos para afastar a condição suspensiva dos honorários (artigo 98, § 3º, do CPC).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 328498719 (22/06/2025): a autora tem renda suficiente; pede a revogação da gratuidade ou a exclusão de seus efeitos sobre os honorários de sucumbência, com o início do cumprimento de sentença.",
+      "contrarrazoes": "Contraminuta ID 333047625 (11/08/2025): trânsito em julgado da decisão que concedeu a gratuidade; a renda da agravada diminuiu em termos reais; falta de prova pelo agravante."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "366714268",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a revogação da gratuidade e mandou arquivar os autos."
+     },
+     "ai": {
+      "hip": "Gratuidade (rejeição ou revogação)",
+      "efeito": "Não requerido",
+      "id": "366714268"
+     },
+     "adm": {
+      "prot": "2025-06-22",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "328498719",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "328498719",
+       "data": "2025-06-22"
+      },
+      {
+       "desc": "Cópia da decisão agravada",
+       "id": "328498720",
+       "data": "2025-06-22"
+      },
+      {
+       "desc": "Despacho: intimação da agravada",
+       "id": "328640511",
+       "data": "2025-07-22"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "333047625",
+       "data": "2025-08-11"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "361978009",
+       "data": "2026-03-23"
+      }
+     ],
+     "pendencias": "Conferir a decisão que concedeu a gratuidade",
+     "especificidades": "Decisão agravada: gratuidade concedida pelo Tribunal e transitada em julgado (ID 366714268 da origem) · Comprovante de rendimentos da autora juntado na origem (ID 305926074) · Petição do agravo com campos de modelo não preenchidos",
+     "assuntoDet": "Gratuidade da justiça — revogação pedida pela parte vencedora na fase de cumprimento",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "fundamento": "Paradigmas do gabinete: AI 5004740-85.2023.4.03.0000 (acórdão 1ª Turma, 15/09/2023: revogação da gratuidade por fato superveniente); ApCiv 5006437-52.2024.4.03.6000 (acórdão TRMS, 05/10/2026: desprovida; impugnação à gratuidade fundada só em critério objetivo de renda)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
@@ -22624,13 +22850,15 @@
    "exequente": "ARNO ADOLFO WEGNER",
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Idoso",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g6",
+   "tipo_caso": "Previdenciário · cumprimento de sentença em jurisdição delegada · levantamento do crédito do segurado pelo advogado com poderes para receber e dar quitação · segregação de verbas de parte vulnerável",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal não foi concedida (decisão ID 385458333) e o INSS foi intimado para contraminuta, que não consta [VALIDAR] ‖ Proposta pelos precedentes: sem paradigma específico no banco sobre a segregação de verbas de parte vulnerável pelo juízo; examinar antes a legitimidade do advogado para recorrer em nome próprio [VALIDAR] [VALIDAR: Preparo: comprovante ID 384831011 sem texto; Legitimidade do advogado para recorrer em nome próprio; Contraminuta do INSS]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do advogado Arno Adolfo Wegner contra a decisão que, no cumprimento de sentença previdenciário de Cícero Manoel da Rocha contra o INSS, indeferiu a expedição de alvará do valor integral em nome da sociedade de advogados, apesar da procuração com poderes para receber e dar quitação, e mandou expedir alvará para levantamento presencial pela própria parte, segundo a diretriz do juízo de segregar verbas de partes vulneráveis.",
+   "peculiaridades": "Recurso em nome próprio do advogado (interesse na forma de levantamento) [VALIDAR legitimidade]. Redistribuído pela 7ª Turma à Turma Regional (decisão ID 385076046). O agravante recolheu as custas em dobro sem intimação (ID 384831010).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -22656,9 +22884,24 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Cumprimento de sentença previdenciário — levantamento de valores pelo advogado",
+    "origem": "Cumprimento de sentença 0800486-90.2024.8.12.0004 (2ª Vara da Comarca de Amambai, jurisdição delegada)",
+    "decisao_agravada": "Decisão de fls. 204-207 dos autos de origem, liberada em 24/06/2026 (cópia ID 384819816)",
+    "recurso": "ID 384819814 · 07/07/2026",
+    "preparo": "Custas em dobro recolhidas voluntariamente; comprovante em imagem (ID 384831011)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · comprovante em imagem, sem texto (OCR pendente): ID 384831011 · petição de juntada (custas em dobro): ID 384831010 · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0800486-90.2024.8.12.0004 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: ler o comprovante ID 384831011",
+    "[VALIDAR] Legitimidade e interesse recursal do advogado",
+    "[VALIDAR] Contraminuta do INSS (intimação pela decisão ID 385458333)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -22677,6 +22920,104 @@
     "ultima_informacao": "Certidão · ID 385419492 · 10/07/2026",
     "ultima_movimentacao": "18/08/2026 17:22 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Cumprimento de sentença previdenciário — alvará de levantamento em nome da sociedade de advogados",
+   "especificidades": "Decisão de juízo estadual em jurisdição delegada · Recurso do advogado em nome próprio [VALIDAR legitimidade e interesse] · Segregação das verbas de parte hipossuficiente pelo juízo · Preparo em dobro com comprovante em imagem (ID 384831011)",
+   "teor": {
+    "sintese_fatica": "No cumprimento de sentença previdenciário contra o INSS, o juízo estadual negou o levantamento do valor integral pelo advogado, apesar da procuração com poderes para receber e dar quitação, e mandou expedir alvará para levantamento pessoal pelo segurado.",
+    "inicial": "Não consta nos autos do recurso (cumprimento de sentença 0800486-90.2024.8.12.0004)",
+    "decisao_recorrida": "Decisão da origem (fls. 204-207; cópia ID 384819816): indeferiu o levantamento do valor total pelo advogado, adotando a diretriz de segregar verbas de partes hipossuficientes (idosos, analfabetos, indígenas e vulneráveis), e mandou expedir alvará em nome da parte.",
+    "recurso": "Agravo de instrumento ID 384819814 (07/07/2026): a procuração confere poderes expressos para receber e dar quitação; a decisão restringe indevidamente o mandato. Pede efeito suspensivo e a expedição do alvará em nome da sociedade de advogados ou de seus advogados.",
+    "resposta": "Não consta contraminuta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "O agravante, advogado (OAB/MS 12.714), atua em causa própria com Meridiane Tibulo Wegner (OAB/MS 10.627) e Douglas Maciel Soares Cavalheiro (OAB/MS 23.167); procuração da origem juntada (ID 384819817).",
+    "preparo": "Petição ID 384831010 informa custas em dobro; comprovante em imagem (ID 384831011)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Previdenciário · cumprimento de sentença em jurisdição delegada · levantamento do crédito do segurado pelo advogado com poderes para receber e dar quitação · segregação de verbas de parte vulnerável",
+     "sintese": "No cumprimento de sentença previdenciário contra o INSS, o juízo estadual negou o levantamento do valor integral pelo advogado, apesar da procuração com poderes para receber e dar quitação, e mandou expedir alvará para levantamento pessoal pelo segurado.",
+     "questoes": "1) Legitimidade e interesse do advogado para recorrer em nome próprio; 2) levantamento do crédito do segurado pelo advogado com poderes para receber e dar quitação × proteção de parte vulnerável.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 384819814 (07/07/2026): a procuração confere poderes expressos para receber e dar quitação; a decisão restringe indevidamente o mandato. Pede efeito suspensivo e a expedição do alvará em nome da sociedade de advogados ou de seus advogados.",
+      "contrarrazoes": "Não consta contraminuta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara da Comarca de Amambai (jurisdição delegada)",
+      "dispositivo": "Indeferiu o alvará em nome da sociedade de advogados e mandou expedir alvará para levantamento pela parte."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-07-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Terceiro (advogado)",
+       "tipo": "Agravo de instrumento",
+       "id": "384819814",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "384819814",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Cópia da decisão agravada",
+       "id": "384819816",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Petição de juntada das custas em dobro",
+       "id": "384831010",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "385076046",
+       "data": "2026-07-08"
+      },
+      {
+       "desc": "Decisão que não concedeu a tutela recursal",
+       "id": "385458333",
+       "data": "2026-07-13"
+      }
+     ],
+     "pendencias": "Ler o comprovante do preparo; conferir legitimidade e contraminuta",
+     "especificidades": "Decisão de juízo estadual em jurisdição delegada · Recurso do advogado em nome próprio [VALIDAR legitimidade e interesse] · Segregação das verbas de parte hipossuficiente pelo juízo · Preparo em dobro com comprovante em imagem (ID 384831011)",
+     "assuntoDet": "Cumprimento de sentença previdenciário — alvará de levantamento em nome da sociedade de advogados",
+     "papeis": [
+      "Terceiro",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Preliminar de ofício",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-13",
+     "fundamento": "Paradigma do gabinete: AI 5028476-40.2020.4.03.0000 (monocrática, 06/01/2021: não conhecido; levantamento de valores em nome do advogado com poderes para receber e dar quitação) [VALIDAR pertinência]",
+     "descPrelim": "Legitimidade e interesse do advogado para recorrer em nome próprio [VALIDAR]"
+    }
    }
   },
   {
@@ -22688,13 +23029,16 @@
    "exequente": "CMR DISTRIBUIDORA DE MEDICAMENTOS E PRODUTOS VETERINARIOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Incidência sobre Lucro",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g7",
+   "tipo_caso": "Tributário · lucro presumido · majoração de 10% dos percentuais de presunção do IRPJ e da CSLL (Lei Complementar 224/2025) · agravo não conhecido por deserção · embargos de declaração e sentença superveniente",
+   "resultado": "Ato a proferir: decisão nos embargos de declaração (ID 386601844) contra a decisão que não conheceu do agravo por deserção (ID 385929133); a União impugnou (ID 390264444) e a própria agravante informou a sentença que denegou a segurança e pediu o reconhecimento da perda do objeto (ID 401126232) ‖ Proposta pelos precedentes: proferida a sentença no mandado de segurança, perde o objeto o agravo contra a decisão liminar e ficam prejudicados os embargos de declaração → monocrática, artigo 932, III, do CPC [VALIDAR: Telas PagTesouro dos IDs 386601845 e 386601846 (leitura visual)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "ADM"
+   ],
+   "observacao": "Agravo de CMR Distribuidora de Medicamentos e Produtos Veterinários contra o indeferimento da liminar no MS 5001235-26.2026.4.03.6000, que pedia a apuração do IRPJ e da CSLL sem a majoração de 10% dos percentuais de presunção da Lei Complementar 224/2025. O agravo não foi conhecido por deserção (ID 385929133): a guia constava \"aguardando realização do pagamento\" e a intimação do artigo 2º, § 2º, da Resolução PRES 138/2017 não foi atendida. A agravante opôs embargos de declaração com novos comprovantes PagTesouro (ID 386601844) e depois informou a sentença denegatória (ID 401126232).",
+   "peculiaridades": "Sentença denegatória da segurança juntada (ID 401126233; sentença ID 401098069 da origem), com apelação informada pela agravante. A própria agravante pede o reconhecimento da perda do objeto. Redistribuído à Turma Regional (decisão ID 373243929).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -22720,9 +23064,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão monocrática nos embargos de declaração (perda do objeto pela sentença)",
+    "materia": "Tributário — IRPJ e CSLL no lucro presumido (LC 224/2025)",
+    "origem": "MS 5001235-26.2026.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Decisão de 17/04/2026 que indeferiu a liminar no MS 5001235-26.2026.4.03.6000 (cópia no ID 371732890)",
+    "recurso": "ID 371732884 · 07/05/2026",
+    "preparo": "Guia PagTesouro \"Aguardando realização do pagamento\" (ID 371732896); comprovantes bancários posteriores (IDs 377562041 a 377562045); deserção declarada (ID 385929133)",
+    "monocratica": "Sim: embargos de declaração prejudicados pela perda do objeto (sentença no MS, ID 401126233) [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO RECOLHIDO (deserção declarada pela decisão ID 385929133) · \"Aguardando pagamento\": ID 371732896 · comprovante bancário: ID 377562041 · despacho sobre preparo: ID 376833386 · telas PagTesouro sem texto legível com os embargos: IDs 386601845 e 386601846 · certidão sem custas: ID 372595106 · conferido em 21/11/2026 (regra: Pix ou cartão só com o comprovante do Tesouro — PagTesouro \"Pagamento realizado com sucesso\", com \"Identificação do pagamento\")",
+    "conf_prevencao": "Origem: 5001235-26.2026.4.03.6000 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Ler os comprovantes dos IDs 386601845 e 386601846, se os embargos forem examinados no mérito"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -22741,6 +23098,124 @@
     "ultima_informacao": "Certidão · ID 373608066 · 15/05/2026",
     "ultima_movimentacao": " 16:00 · Há 2 documentos não lidos",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "IRPJ e CSLL — majoração da presunção no lucro presumido (LC 224/2025); deserção e perda do objeto",
+   "especificidades": "Agravo não conhecido por deserção (ID 385929133, 13/07/2026) · Embargos de declaração com novos comprovantes PagTesouro (IDs 386601845 e 386601846, sem texto legível) · Impugnação da União (ID 390264444) · Sentença denegatória superveniente (ID 401126233) e pedido de perda do objeto (ID 401126232)",
+   "teor": {
+    "sintese_fatica": "Empresa do lucro presumido impetrou mandado de segurança contra a majoração de 10% dos percentuais de presunção do IRPJ e da CSLL (artigo 4º, § 4º, VII, e § 5º, da Lei Complementar 224/2025); a liminar foi indeferida, o agravo não foi conhecido por deserção e sobreveio sentença denegatória.",
+    "inicial": "Mandado de segurança 5001235-26.2026.4.03.6000 (cópia dos autos no ID 371732890)",
+    "decisao_recorrida": "Decisão de 17/04/2026 da origem: indeferiu a liminar (cópia no ID 371732890).",
+    "recurso": "Agravo de instrumento ID 371732884 (07/05/2026): a majoração da presunção desconsidera o lucro efetivo e onera empresas de margem reduzida; pede tutela recursal para suspender a exigibilidade. Embargos de declaração ID 386601844 (16/07/2026): regularidade do preparo pelos novos comprovantes.",
+    "resposta": "Impugnação da União aos embargos ID 390264444 (03/08/2026): ausência de vícios; rejeição.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Daniel Salume Silva (OAB/ES 20.645); procuração ID 371732888.",
+    "preparo": "Guia \"Aguardando realização do pagamento\" (ID 371732896); despacho ID 376833386 para comprovar pelo artigo 2º, § 2º, da Resolução PRES 138/2017; comprovante bancário de R$ 64,26 em 30/05/2026 (ID 377562041); deserção declarada (ID 385929133)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "subassuntos": "Tributário · lucro presumido · majoração de 10% dos percentuais de presunção do IRPJ e da CSLL (Lei Complementar 224/2025) · agravo não conhecido por deserção · embargos de declaração e sentença superveniente",
+     "sintese": "Empresa do lucro presumido impetrou mandado de segurança contra a majoração de 10% dos percentuais de presunção do IRPJ e da CSLL (artigo 4º, § 4º, VII, e § 5º, da Lei Complementar 224/2025); a liminar foi indeferida, o agravo não foi conhecido por deserção e sobreveio sentença denegatória.",
+     "questoes": "1) Perda superveniente do objeto pela sentença denegatória no mandado de segurança; 2) subsidiariamente, regularidade do preparo à luz dos comprovantes juntados com os embargos.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 371732884 (07/05/2026): a majoração da presunção desconsidera o lucro efetivo e onera empresas de margem reduzida; pede tutela recursal para suspender a exigibilidade. Embargos de declaração ID 386601844 (16/07/2026): regularidade do preparo pelos novos comprovantes.",
+      "contrarrazoes": "Impugnação da União aos embargos ID 390264444 (03/08/2026): ausência de vícios; rejeição."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática (não conhecimento por deserção)",
+      "id": "385929133",
+      "juizo": "Turma Regional de Mato Grosso do Sul",
+      "dispositivo": "Não conheceu do agravo de instrumento por deserção."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Não apreciado",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-07-16",
+      "prazo": "5",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "371732884",
+       "contra": ""
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Embargos de declaração",
+       "id": "386601844",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "371732884",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Guia \"aguardando pagamento\"",
+       "id": "371732896",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Despacho sobre o preparo",
+       "id": "376833386",
+       "data": "2026-05-29"
+      },
+      {
+       "desc": "Decisão de não conhecimento por deserção",
+       "id": "385929133",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "386601844",
+       "data": "2026-07-16"
+      },
+      {
+       "desc": "Impugnação da União",
+       "id": "390264444",
+       "data": "2026-08-03"
+      },
+      {
+       "desc": "Petição: sentença e perda do objeto",
+       "id": "401126232",
+       "data": "2026-09-28"
+      },
+      {
+       "desc": "Cópia da sentença denegatória",
+       "id": "401126233",
+       "data": "2026-09-28"
+      }
+     ],
+     "pendencias": "Decidir os embargos (perda do objeto)",
+     "especificidades": "Agravo não conhecido por deserção (ID 385929133, 13/07/2026) · Embargos de declaração com novos comprovantes PagTesouro (IDs 386601845 e 386601846, sem texto legível) · Impugnação da União (ID 390264444) · Sentença denegatória superveniente (ID 401126233) e pedido de perda do objeto (ID 401126232)",
+     "assuntoDet": "IRPJ e CSLL — majoração da presunção no lucro presumido (LC 224/2025); deserção e perda do objeto",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não recolhido",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado",
+     "hip932": "III — prejudicado (perda superveniente do objeto) [VALIDAR]",
+     "tipoAto": "Decisão monocrática",
+     "fundamento": "Paradigmas do gabinete: AI 5022338-47.2026.4.03.0000 (monocrática TRMS, 25/10/2026: prejudicado; majoração da presunção do IRPJ e da CSLL pela LC 224/2025); AI 5029858-05.2019.4.03.0000 (acórdão 3ª Turma, 24/07/2020: sentença superveniente no mandado de segurança, perda do objeto)"
+    }
    }
   },
   {
@@ -22935,13 +23410,15 @@
    "exequente": "POLIGONAL ENGENHARIA E CONSTRUCOES LTDA",
    "executado": "FUNDAÇÃO UNIVERSIDADE FEDERAL DA GRANDE DOURADOS",
    "assunto": "Indenização por Dano Material",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "Cumprimento de sentença contra a UFGD · reajuste de contrato administrativo (INCC) · homologação dos cálculos da contadoria · honorários sobre o excesso · requisitórios pagos e autos arquivados",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); não houve pedido de tutela recursal (despacho ID 293631335) e há contraminuta (ID 294015648); intimada sobre a perda do interesse recursal pelo pagamento dos requisitórios e arquivamento da origem (despacho ID 387564834), a agravante disse manter interesse (ID 388075087) ‖ Proposta pelos precedentes: prevalecem os cálculos da contadoria elaborados conforme o título, sem violação da coisa julgada; honorários sobre o excesso na impugnação acolhida em parte → desprovimento, se superada a questão do interesse recursal [VALIDAR: Preparo: comprovante ID 293613754 sem texto e data do pagamento; Interesse recursal após o pagamento dos requisitórios]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Poligonal Engenharia e Construções contra a decisão que, no cumprimento de sentença contra a UFGD (reajuste pelo INCC do contrato administrativo 04/2011), acolheu em parte a impugnação, homologou os cálculos da contadoria e fixou honorários de 10% sobre o excesso (ID 327589358 da origem). Pede o acolhimento do seu cálculo de R$ 149.065,11 (03/2022). A UFGD (ID 294015648) defende os cálculos da contadoria.",
+   "peculiaridades": "O despacho ID 387564834 registrou que os requisitórios foram pagos e a origem arquivada em 29/07/2025 e intimou sobre a perda do interesse recursal (artigos 10 e 933 do CPC); a agravante afirmou manter interesse (ID 388075087). Redistribuído pela 4ª Turma à Turma Regional (decisão ID 383688291).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -22967,9 +23444,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Cumprimento de sentença — cálculos e honorários (contrato administrativo)",
+    "origem": "Cumprimento de sentença 0005212-57.2016.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "ID 327589358 (autos de origem)",
+    "recurso": "ID 293584593 · 10/07/2024",
+    "preparo": "GRU (guia ID 293613752) e comprovante em imagem (ID 293613754), juntados em 11/07/2024",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · guia GRU: ID 293613752 · comprovante em imagem, sem texto (OCR pendente): ID 293613754 · juntada em 11/07/2024, um dia após a interposição [VALIDAR data do pagamento] · conferido em 21/11/2026 (regra: GRU com comprovante de caixa eletrônico ou de pagamento via internet — Resolução PRES 138/2017, artigo 2º, § 2º, II)",
+    "conf_prevencao": "Origem: 0005212-57.2016.4.03.6002 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: ler o comprovante ID 293613754 e conferir a data",
+    "[VALIDAR] Interesse recursal: diferença pretendida além dos requisitórios pagos"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -22988,6 +23479,111 @@
     "ultima_informacao": "Certidão · ID 386729683 · 16/07/2026",
     "ultima_movimentacao": "27/07/2026 16:14 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Cumprimento de sentença — cálculos da contadoria e honorários na impugnação (contrato administrativo)",
+   "especificidades": "Crédito homologado de R$ 60.753,14 (ID 387564834) × cálculo da exequente de R$ 149.065,11 · Requisitórios pagos e origem arquivada em 29/07/2025 · Agravante mantém interesse (ID 388075087) · Preparo por GRU com comprovante em imagem (ID 293613754) [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Sentença transitada em julgado em 22/02/2022 reconheceu à construtora o reajuste pelo INCC do contrato administrativo 04/2011 com a UFGD. No cumprimento, o juízo acolheu em parte a impugnação, homologou os cálculos da contadoria (IPCA-E e juros da poupança) e fixou honorários sobre o excesso.",
+    "inicial": "Não consta nos autos do recurso (ação 0005212-57.2016.4.03.6002)",
+    "decisao_recorrida": "Decisão ID 327589358 da origem: acolheu em parte a impugnação, homologou os cálculos da contadoria e condenou a exequente em honorários de 10% sobre o excesso (descrita no agravo e no despacho ID 387564834).",
+    "recurso": "Agravo de instrumento ID 293584593 (10/07/2024): os cálculos da contadoria contrariam a sentença e o acórdão; pede o acolhimento do valor de R$ 149.065,11 (03/2022).",
+    "resposta": "Contraminuta da UFGD ID 294015648 (18/07/2024): a contadoria calculou de acordo com o julgado; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Tiago Bana Franco (OAB/MS 9.454) e Isabella Mosiaga Fattori (OAB/MS 22.891); procuração não identificada nos autos do recurso [VALIDAR].",
+    "preparo": "Guia GRU (ID 293613752) e comprovante em imagem (ID 293613754), juntados com a petição ID 293613747 em 11/07/2024."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença contra a UFGD · reajuste de contrato administrativo (INCC) · homologação dos cálculos da contadoria · honorários sobre o excesso · requisitórios pagos e autos arquivados",
+     "sintese": "Sentença transitada em julgado em 22/02/2022 reconheceu à construtora o reajuste pelo INCC do contrato administrativo 04/2011 com a UFGD. No cumprimento, o juízo acolheu em parte a impugnação, homologou os cálculos da contadoria (IPCA-E e juros da poupança) e fixou honorários sobre o excesso.",
+     "questoes": "1) Interesse recursal após o pagamento dos requisitórios e o arquivamento da origem; 2) critérios de atualização e juros do título (cálculos da contadoria × da exequente); 3) honorários sobre o excesso.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 293584593 (10/07/2024): os cálculos da contadoria contrariam a sentença e o acórdão; pede o acolhimento do valor de R$ 149.065,11 (03/2022).",
+      "contrarrazoes": "Contraminuta da UFGD ID 294015648 (18/07/2024): a contadoria calculou de acordo com o julgado; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "327589358",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Acolheu em parte a impugnação, homologou os cálculos da contadoria e fixou honorários sobre o excesso."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": "327589358"
+     },
+     "adm": {
+      "prot": "2024-07-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "293584593",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "293584593",
+       "data": "2024-07-10"
+      },
+      {
+       "desc": "Guia GRU",
+       "id": "293613752",
+       "data": "2024-07-11"
+      },
+      {
+       "desc": "Despacho: intimação da agravada",
+       "id": "293631335",
+       "data": "2024-07-15"
+      },
+      {
+       "desc": "Contraminuta da UFGD",
+       "id": "294015648",
+       "data": "2024-07-18"
+      },
+      {
+       "desc": "Decisão de declínio à Turma Regional",
+       "id": "383688291",
+       "data": "2026-07-15"
+      },
+      {
+       "desc": "Despacho: perda do interesse (artigos 10 e 933 do CPC)",
+       "id": "387564834",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Petição: mantém interesse",
+       "id": "388075087",
+       "data": "2026-07-23"
+      }
+     ],
+     "pendencias": "Ler o comprovante da GRU; avaliar o interesse recursal",
+     "especificidades": "Crédito homologado de R$ 60.753,14 (ID 387564834) × cálculo da exequente de R$ 149.065,11 · Requisitórios pagos e origem arquivada em 29/07/2025 · Agravante mantém interesse (ID 388075087) · Preparo por GRU com comprovante em imagem (ID 293613754) [VALIDAR]",
+     "assuntoDet": "Cumprimento de sentença — cálculos da contadoria e honorários na impugnação (contrato administrativo)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Preliminar de ofício",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "fundamento": "Paradigmas do gabinete: AI 5024307-05.2023.4.03.0000 (acórdão 1ª Turma, 01/02/2024: desprovido; prevalência dos cálculos da contadoria); AI 5018472-41.2020.4.03.0000 (acórdão 3ª Turma, 23/09/2022: desprovido; incorreção dos cálculos do exequente apontada pela contadoria e honorários)",
+     "descPrelim": "Perda do interesse recursal pelo pagamento dos requisitórios (despacho ID 387564834)"
+    }
    }
   },
   {
