@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.32 · estado atual em gerúndio
+
+- O estado atual do cartão é uma frase com verbo no gerúndio e os dias: "Aguardando contrarrazões · há 12 d", "Minutando · José", "Corrigindo · Bruno", "Aguardando apreciação da liminar", "Aguardando assinatura do Relator", "Aguardando a sessão de 07/12", "Aguardando triagem".
+- Vem da ficha (assinatura, urgência, sobrestamento, MPF, pendências, etapa) e, sem ficha, da tarefa do PJe (`etiquetas.js › estado`). Cores: âmbar aguardando, azul em andamento, vermelho urgência, roxo assinatura, cinza sobrestado, verde concluído.
+- Designação, trilha e sinalizações ficam só como ícones, na linha de baixo; saíram a pílula da etapa e a da tarefa.
+
 ## O que muda na 0.31 · um padrão visual por família de informação
 
 - Classificação (seção, assunto, subassunto do DataJud, especificidade da triagem e tipo de caso): chips suaves índigo com ícone; a seção é sólida, subassunto e especificidade em contorno.

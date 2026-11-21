@@ -379,8 +379,22 @@ test('extensão 0.30: tipo de caso e etiquetas sugeridas da triagem no cartão; 
 
 test('extensão 0.31: cada família de informação do cartão com um padrão visual', () => {
   const c = read('extensao/conteudo-pje.js');
-  ['hf hf-cls', 'hf hf-est', 'hf hf-mov', 'hf hf-px', 'm-sgs'].forEach(k => assert.ok(c.includes(k), k));
+  ['hf hf-cls', 'hf hf-st', 'hf hf-ic', 'hf hf-mov', 'hf hf-px', 'm-sgs'].forEach(k => assert.ok(c.includes(k), k));
   assert.match(c, /chip\('secao', r\.secao/); assert.match(c, /chip\('camadas', x, 'Subassunto/); assert.match(c, /chip\('alvo', /);
   const f = read('apoio/ex-officio/api/_ficha.js');
   assert.match(f, /secao: String\(f\['Seção Competente'\]/); assert.match(f, /movimento: String\(f\.ultimo_movimento/); assert.match(f, /proxima: String\(\(r\.origem \|\| \{\}\)\['Próxima ação'\]/);
+});
+
+test('extensão 0.32: estado atual em gerúndio (aguardando, minutando, corrigindo)', () => {
+  const vm = require('vm'), ctx = { window: {} }; vm.createContext(ctx); vm.runInContext(read('extensao/etiquetas.js'), ctx);
+  const E = ctx.window.MutaEtiquetas, t = r => (E.estado(r) || {}).t;
+  assert.equal(t({ registrado: true, servidor: 'José Victor' }), 'Minutando · José');
+  assert.equal(t({ registrado: true, servidor: 'Maria', minutado: '2026-11-19', corretor: 'Bruno' }), 'Corrigindo · Bruno');
+  assert.equal(t({ registrado: true, pend: ['Aguardar contrarrazões da União'] }), 'Aguardando contrarrazões');
+  assert.equal(t({ registrado: true, urg: 'Liminar', urgData: '2026-11-10' }), 'Aguardando apreciação da liminar');
+  assert.equal(t({ registrado: true, liberado: true, sessao: '07/12/2026' }), 'Aguardando a sessão de 07/12');
+  assert.equal(E.estado({ registrado: true, servidor: 'X' }, { assinar: { aguarda: 2 } }).t, 'Aguardando assinatura do Relator');
+  assert.equal(t({ tarefa: '[Sessão] Aguardando a sessão' }), 'Aguardando a sessão');
+  assert.equal(t({ tarefa: 'Analisar tipo de decisão a proferir' }), 'Aguardando triagem');
+  assert.match(read('extensao/conteudo-pje.js'), /E\.estado\(r, \{ assinar: cmt \}\)/);
 });

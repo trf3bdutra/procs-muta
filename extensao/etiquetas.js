@@ -66,7 +66,36 @@
     }
     return exata ? { id: 'catalogo', nome: 'Catálogo', cor: exata.cor || '#546e7a', estilo: 'solido', icone: '' } : null;
   }
-  g.MutaEtiquetas = { CFG: CFG, CATEGORIAS: CATEGORIAS, ICONES: ICONES, svg: svg, categoriaDe: categoriaDe, preparar: preparar, vale: vale, devidas: devidas, faltando: faltando, etapa: etapa, alertas: alertas, iniciais: iniciais, dias: dias, N: N,
+  /* estado atual em gerúndio (0.32, pedido do gestor): o que o processo está esperando ou o que está sendo feito.
+     Vem da ficha (etapa, pendências, urgência, MPF, sobrestamento) e, sem ficha, da tarefa do PJe.
+     k: ag aguardando · an em andamento · ur urgência · as assinatura · so sobrestado · ok concluído */
+  function estado(r, x) {
+    r = preparar(r); x = x || {};
+    var tf = S(r.tarefa), ntf = N(tf), pd = N((r.pend || []).join(' | ')), pn = function (v) { return S(v).split(/\s+/)[0]; };
+    var E = function (v, c, k, d) { return { v: v, c: c || '', k: k, d: d == null ? r.dias : d, t: v + (c ? ' ' + c : '') }; };
+    if (r.assinado) return E('Aguardando', 'publicação da decisão', 'ok', null);
+    if (x.assinar || r.enviado) return E('Aguardando', 'assinatura do Relator', 'as', x.assinar && x.assinar.aguarda != null ? x.assinar.aguarda : null);
+    if (r.urgPend) return E('Aguardando', 'apreciação da ' + (/liminar/i.test(r.urg) ? 'liminar' : /suspensivo/i.test(r.urg) ? 'suspensividade' : 'urgência'), 'ur', r.urgDias);
+    if (r.sobr) return E('Aguardando', 'julgamento do tema (sobrestado)', 'so');
+    if (/aguardando|vista a abrir/.test(N(r.mpfSit))) return E('Aguardando', 'parecer do MPF', 'ag');
+    if (/contrarraz/.test(pd)) return E('Aguardando', 'contrarrazões', 'ag');
+    if (/preparo|gru|custas/.test(pd)) return E('Aguardando', 'regularização do preparo', 'ag');
+    if (/procura|represent/.test(pd)) return E('Aguardando', 'regularização da representação', 'ag');
+    if (/intima|prazo/.test(pd)) return E('Aguardando', 'prazo de intimação', 'ag');
+    if (r.liberado) { var ds = /(\d{2}\/\d{2})(\/\d{4})?/.exec(S(r.sessao || '')); return E('Aguardando', ds ? 'a sessão de ' + ds[1] : 'a sessão de julgamento', 'ag'); }
+    if (r.corrigido) return E('Aguardando', 'liberação', 'ag');
+    if (r.minutado) return r.corretor ? E('Corrigindo', '· ' + pn(r.corretor), 'an') : E('Aguardando', 'correção', 'ag');
+    if (r.servidor) return E('Minutando', '· ' + pn(r.servidor), 'an');
+    if (r.triado) return E('Aguardando', 'designação', 'ag');
+    if (/aguardando/.test(ntf)) return E('Aguardando', tf.replace(/^\[[^\]]*\]\s*/, '').replace(/^aguardando\s*/i, ''), 'ag');
+    if (/^minutar/.test(ntf)) return E('Minutando', '', 'an');
+    if (/^(revisar|corrigir)/.test(ntf)) return E('Corrigindo', '', 'an');
+    if (/assinar/.test(ntf)) return E('Aguardando', 'assinatura', 'as');
+    if (/conclus/.test(ntf)) return E('Aguardando', 'decisão', 'ag');
+    if (/analisar tipo de decis|triagem/.test(ntf) || r.registrado === false || !r.registrado) return E('Aguardando', 'triagem', 'ag');
+    return tf ? E('Em', tf, 'ag') : null;
+  }
+  g.MutaEtiquetas = { CFG: CFG, CATEGORIAS: CATEGORIAS, ICONES: ICONES, svg: svg, categoriaDe: categoriaDe, preparar: preparar, vale: vale, devidas: devidas, faltando: faltando, etapa: etapa, estado: estado, alertas: alertas, iniciais: iniciais, dias: dias, N: N,
     CAMPOS: [['urgPend', 'Urgência não apreciada'], ['urg', 'Medida urgente'], ['preparo', 'Preparo'], ['repres', 'Representação'], ['tempest', 'Tempestividade'], ['mpfSit', 'Parecer do MPF'],
       ['custos', 'Hipótese de intervenção do MPF'], ['destino', 'Destino'], ['tipoAto', 'Tipo de ato'], ['tipoJ', 'Tipo de julgamento'], ['icN', 'Intercorrências em aberto'], ['pendN', 'Pendências em aberto'],
       ['meta', 'Meta do CNJ'], ['sobr', 'Sobrestado'], ['sens', 'Caso sensível'], ['assunto', 'Assunto'], ['classe', 'Classe'], ['prioridade', 'Prioridade'], ['dias', 'Dias na tarefa'], ['tarefa', 'Tarefa']],

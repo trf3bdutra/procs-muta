@@ -460,6 +460,10 @@
       '.muta-selos .hf-e{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:12px;border:1px solid #dfe4e8;background:#fff;color:#33424c;font:600 10.5px system-ui,sans-serif}.muta-selos .hf-e>i{width:7px;height:7px;border-radius:50%;background:var(--d,#9aa8b3)}' +
       '.muta-selos .hf-e-tr{--d:#9aa8b3}.muta-selos .hf-e-mi{--d:#1a7fc0}.muta-selos .hf-e-co{--d:#e8a10a}.muta-selos .hf-e-li{--d:#00796b}.muta-selos .hf-e-as{--d:#5a3fa0;background:#f6f2fd;border-color:#e0d6f6;color:#4b2f8f}.muta-selos .hf-e-ok{--d:#2f8a5a;background:#f1faf4;border-color:#cfe9d9;color:#2f6e4b}.muta-selos .hf-e-u{--d:#c62828;background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
       '.muta-selos .hf-tf{border:0;background:none;padding:0 2px;color:#66737f;font:500 10.5px system-ui,sans-serif}' +
+      '.muta-selos .hf-st{flex-wrap:nowrap;gap:6px;padding:3px 8px 3px 3px;border-radius:14px;background:var(--sb);border:1px solid var(--sl);color:var(--sc);font:500 11px/1.3 system-ui,sans-serif}' +
+      '.muta-selos .hf-st-ag{--sb:#fff7e8;--sl:#f3d9a4;--sc:#7a4f0c}.muta-selos .hf-st-an{--sb:#eaf3fb;--sl:#c3dcf1;--sc:#145a8a}.muta-selos .hf-st-ur{--sb:#fdecea;--sl:#efb3a9;--sc:#a8321f}.muta-selos .hf-st-as{--sb:#f6f2fd;--sl:#dccff5;--sc:#4b2f8f}.muta-selos .hf-st-so{--sb:#f1f3f5;--sl:#d7dde3;--sc:#4b5a66}.muta-selos .hf-st-ok{--sb:#eef8f2;--sl:#c5e4d1;--sc:#2f6e4b}' +
+      '.muta-selos .hf-si{flex:none;width:20px;height:20px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;background:var(--sc);color:#fff}' +
+      '.muta-selos .hf-st>b{font:800 9.5px system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;flex:none}.muta-selos .hf-sc{border:0;background:none;padding:0;border-radius:0;color:inherit;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}.muta-selos .hf-st time{flex:none;font:600 10px system-ui,sans-serif;font-variant-numeric:tabular-nums;opacity:.75}' +
       '.muta-selos .hf-mov{flex-wrap:nowrap;gap:6px;color:#66737f;font:400 10.5px/1.3 system-ui,sans-serif;border-top:1px solid #eef0f3;padding-top:3px}.muta-selos .hf-mov>i{width:6px;height:6px;border-radius:50%;border:1.5px solid #9aa8b3;flex:none}' +
       '.muta-selos .hf-mt{border:0;background:none;padding:0;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4b5a66;font-weight:400;border-radius:0}.muta-selos .hf-mov time{font:600 10px ui-monospace,Menlo,monospace;color:#7d8b96;flex:none}' +
       '.muta-selos .hf-px{flex-wrap:nowrap;align-items:flex-start;gap:7px;padding:5px 7px;border-radius:9px;border:1px solid #d6e6f5;background:linear-gradient(90deg,#f1f7fd,#fff)}' +
@@ -539,13 +543,14 @@
     if (r.especificidade) cl.push(chip('alvo', r.especificidade.length > 70 ? r.especificidade.slice(0, 68).replace(/\s+\S*$/, '') + '…' : r.especificidade, 'Especificidade: ' + r.especificidade, 'hf-c-o'));
     if (r.tipoCaso) cl.push('<span class="hf-c hf-c-t" title="Tipo de caso na triagem' + (r.tema && r.tema !== r.tipoCaso ? ': ' + escS(r.tema) : '') + '">' + ico('balanca', 11) + '<small>Tipo de caso</small>' + escS(r.tipoCaso) + '</span>');
     if (cl.length) h.push('<div class="hf hf-cls">' + cl.join('') + '</div>');
-    /* estado atual */
+    /* estado atual: frase em gerúndio ("Aguardando contrarrazões", "Minutando · José"), com os dias */
+    var cmt = (CMTL.d && CMTL.d[r._k]) || null, st = E.estado ? E.estado(r, { assinar: cmt }) : null;
+    if (st) {
+      var icS = { ag: 'ampulheta', an: 'lapis', ur: 'raio', as: 'lapis', so: 'pausa', ok: 'check' }[st.k] || 'relogio';
+      h.push('<div class="hf hf-st hf-st-' + st.k + '" title="Estado atual' + (et ? ' · etapa no gabinete: ' + escS(et) : '') + (r.tarefa ? ' · tarefa no PJe: ' + escS(r.tarefa) : '') + '"><span class="hf-si">' + ico(icS, 11) + '</span><b>' + escS(st.v) + '</b><span class="hf-sc">' + escS(st.c) + '</span>' + (st.d != null ? '<time>há ' + st.d + ' d</time>' : '') + '</div>');
+    }
+    /* designação, trilha e sinalizações: só os ícones */
     var es = [];
-    if (et) es.push('<span class="hf-e hf-e-' + etapaCls(et) + '" title="Etapa no gabinete (ficha do processo)"><i></i>' + escS(et) + '</span>');
-    var cmt = (CMTL.d && CMTL.d[r._k]) || null;
-    if (cmt) es.push('<span class="hf-e hf-e-as' + (cmt.urg ? ' hf-e-u' : '') + '" title="Submetida à assinatura do Desembargador' + (cmt.desde ? ' em ' + escS(cmt.desde.split('-').reverse().join('/')) : '') + '"><i></i>Para assinar' + (cmt.tipoAto ? ' · ' + escS(cmt.tipoAto) : '') + (cmt.aguarda != null ? ' · ' + cmt.aguarda + ' d' : '') + '</span>');
-    if (r.tarefa && !/^$/.test(r.tarefa) && txt.indexOf(nrm(r.tarefa)) < 0) es.push('<span class="hf-tf" title="Tarefa atual no PJe">' + escS(r.tarefa) + (r.dias != null ? ' · ' + r.dias + ' d' : '') + '</span>');
-    else if (r.dias != null) es.push('<span class="hf-tf" title="Dias na tarefa">' + r.dias + ' d na tarefa</span>');
     var pes = function (nome, rot, cls) { return '<span class="m-pes ' + cls + '" title="' + rot + ': ' + escS(nome) + '"><i>' + escS(E.iniciais(nome)) + '</i><span><small>' + rot + '</small><b>' + escS(String(nome).split(/\s+/)[0]) + '</b></span></span>'; };
     if (r.servidor) es.push(pes(r.servidor, 'Minuta', 'm-pes-m'));
     if (r.corretor) es.push(pes(r.corretor, 'Correção', 'm-pes-c'));
@@ -557,7 +562,7 @@
     }
     r._falta = cat ? E.faltando(r, cat, texto) : [];
     es.push(sinaisHtml(r._k, r));
-    h.push('<div class="hf hf-est">' + es.join('') + '</div>');
+    h.push('<div class="hf hf-ic">' + es.join('') + '</div>');
     /* movimentação */
     if (r.movimento) h.push('<div class="hf hf-mov" title="Último movimento no PJe"><i></i><span class="hf-mt">' + escS(r.movimento) + '</span>' + (r.movimentoEm ? '<time>' + escS(String(r.movimentoEm).slice(0, 5)) + '</time>' : '') + '</div>');
     /* próxima providência */

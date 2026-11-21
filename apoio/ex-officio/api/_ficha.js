@@ -358,7 +358,8 @@ async function resumos(req, res) {
         subassuntos: [...new Set(String(f['DataJud · Assuntos'] || '').split(/\s*;\s*/).map(x => x.trim()).filter(x => x && SN(x) !== SN(f.Assunto)))].slice(0, 4),
         especificidade: String(t.Especificidades || '').split(/\n+/).map(x => x.trim()).filter(Boolean)[0] || '',
         movimento: String(f.ultimo_movimento || '').trim().slice(0, 240), movimentoEm: String(f['Data Último Movimento'] || '').trim(),
-        proxima: String((r.origem || {})['Próxima ação'] || '').trim().slice(0, 400)
+        proxima: String((r.origem || {})['Próxima ação'] || '').trim().slice(0, 400),
+        sessao: String((r.pauta || {})['Sessão original'] || (r.pauta || {})['Sessão Destino'] || t['Sessão Destino'] || '').trim()
       };
     });
     return res.status(200).json({ resumos: out, em: agora() });
