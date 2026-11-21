@@ -28,7 +28,7 @@
     if (a.prazo) chips.push('<span class="hcm-c hcm-pz">' + ic('calendario', 11) + 'prazo ' + esc(br(a.prazo)) + '</span>');
     if (a.aguarda != null) chips.push('<span class="hcm-c hcm-ag" title="Liberada para assinatura em ' + esc(br(a.desde)) + '">' + ic('relogio', 11) + (a.aguarda ? 'aguarda ' + a.aguarda + ' d' : 'liberada hoje') + '</span>');
     var caso = [a.classe, a.assunto].filter(Boolean).join(' · ');
-    return '<article class="hcm-it' + (u ? ' urg' : '') + '" data-hcm-cnj="' + esc(a.cnj) + '">' +
+    return '<article class="hcm-it' + (u ? ' urg' : '') + (FOCO.t === 'as' && String(a.cnj).replace(/\D/g, '') === String(FOCO.id).replace(/\D/g, '') ? ' foco' : '') + '" data-hcm-cnj="' + esc(a.cnj) + '">' +
       '<div class="hcm-h">' + cnjBtn(a.cnj) + chips.join('') + '</div>' +
       (a.titulo || a.topico ? '<p class="hcm-ti">' + esc(a.titulo || a.topico) + '</p>' : '') +
       (a.titulo && a.topico && a.topico !== a.titulo ? '<p class="hcm-tp">' + esc(a.topico) + '</p>' : '') +
@@ -44,25 +44,31 @@
       '</article>';
   }
   function duvida(d, aberto) {
-    return '<article class="hcm-it hcm-du" data-hcm-id="' + esc(d.id) + '"><div class="hcm-h">' + ic('interrogacao', 13) + '<b class="hcm-dt">' + esc(d.titulo || 'Dúvida') + '</b>' + (d.prioridade ? '<span class="hcm-c' + (/alta|urg/i.test(d.prioridade) ? ' hcm-u' : '') + '">' + esc(d.prioridade) + '</span>' : '') + (d.prazo ? '<span class="hcm-c hcm-pz">' + ic('calendario', 11) + 'até ' + esc(br(d.prazo)) + '</span>' : '') + '</div>' +
+    return '<article class="hcm-it hcm-du' + (FOCO.t === 'du' && FOCO.id === d.id ? ' foco' : '') + '" data-hcm-id="' + esc(d.id) + '"><div class="hcm-h">' + ic('interrogacao', 13) + '<b class="hcm-dt">' + esc(d.titulo || 'Dúvida') + '</b>' + (d.prioridade ? '<span class="hcm-c' + (/alta|urg/i.test(d.prioridade) ? ' hcm-u' : '') + '">' + esc(d.prioridade) + '</span>' : '') + (d.prazo ? '<span class="hcm-c hcm-pz">' + ic('calendario', 11) + 'até ' + esc(br(d.prazo)) + '</span>' : '') + '</div>' +
       '<p class="hcm-ca">' + (d.de ? 'De ' + esc(d.de) : '') + (d.em ? ' · ' + esc(br(d.em)) : '') + (d.numero ? ' · ' + cnjBtn(d.numero) : '') + '</p>' +
       (d.texto ? '<p class="hcm-tx">' + esc(d.texto) + '</p>' : '') + (d.resposta ? '<p class="hcm-ob">' + ic('check', 12) + 'Resposta anterior: ' + esc(d.resposta) + '</p>' : '') +
       (aberto ? '<form class="hcm-f" data-hcm-form="responder" data-id="' + esc(d.id) + '"><textarea rows="3" name="texto" placeholder="Resposta ao servidor" required></textarea>' +
         '<label class="hcm-l"><input type="checkbox" name="manter"> manter a dúvida aberta</label><span class="hcm-fb"><button type="button" class="hcm-b" data-hcm="fechar-du" data-id="' + esc(d.id) + '">cancelar</button><button type="submit" class="hcm-b ok">Responder</button></span></form>'
         : '<div class="hcm-ac"><button type="button" class="hcm-b ok" data-hcm="abrir-du" data-id="' + esc(d.id) + '">' + ic('enviar', 12) + 'Responder</button></div>') + '</article>';
   }
-  var UI = { dev: {}, du: {}, aba: 'as', msg: '' };
+  var UI = { dev: {}, du: {}, aba: 'as', msg: '' }, FOCO = {};
   function html(v, op) {
     op = op || {};
     if (!v) return '<section class="hcm"><p class="hcm-v">Carregando o quadro do Desembargador…</p></section>';
     if (v.erro) return '<section class="hcm"><p class="hcm-v">' + esc(v.erro) + '</p></section>';
-    var A = v.assinatura || [], D = v.duvidas || [], L = v.liberacao || [];
+    var A = (v.assinatura || []).slice(), D = (v.duvidas || []).slice(), L = v.liberacao || [];
+    /* aberto por uma notificação: o item dela vem primeiro, destacado, e a aba certa abre (uma vez) */
+    var F = op.foco || null; FOCO = F || {};
+    if (F && !UI.focado) { UI.focado = true; UI.aba = F.t === 'du' ? 'du' : 'as'; if (F.t === 'du') UI.du[F.id] = true; }
+    var prim = function (L2, f) { var i = -1; L2.forEach(function (x, j) { if (f(x)) i = j; }); if (i > 0) L2.unshift(L2.splice(i, 1)[0]); return i >= 0; };
+    if (F && F.t === 'as') prim(A, function (a) { return String(a.cnj).replace(/\D/g, '') === String(F.id).replace(/\D/g, ''); });
+    if (F && F.t === 'du') prim(D, function (d) { return d.id === F.id; });
     var tab = function (k, t, n) { return '<button type="button" class="hcm-tab" data-hcm="aba" data-aba="' + k + '" aria-selected="' + (UI.aba === k) + '">' + t + (n ? ' <i>' + n + '</i>' : '') + '</button>'; };
     var corpo = UI.aba === 'du' ? (D.length ? D.map(function (d) { return duvida(d, UI.du[d.id]); }).join('') : '<p class="hcm-v">Nenhuma dúvida em aberto' + (v.gestor && !v.des ? ' dirigida a você' : '') + '.</p>')
       : UI.aba === 'li' ? (L.length ? L.map(function (a) { return '<article class="hcm-it"><div class="hcm-h">' + cnjBtn(a.cnj) + '<span class="hcm-c">corrigida em ' + esc(br(a.desde)) + '</span></div><div class="hcm-r">' + pes(a.servidor, 'Minuta', 'm') + pes(a.corretor, 'Correção', 'c') + '</div></article>'; }).join('') : '<p class="hcm-v">Nenhuma monocrática corrigida à espera de liberação.</p>')
       : (A.length ? A.map(function (a) { return item(a, UI.dev[a.cnj]); }).join('') : '<p class="hcm-v">Nenhuma decisão submetida à assinatura.</p>');
     var urg = A.filter(function (a) { return a.urg; }).length;
-    return '<section class="hcm' + (op.pje ? ' hcm-pje' : '') + '">' +
+    return '<section class="hcm' + (op.pje ? ' hcm-pje' : '') + (op.janela ? ' hcm-jan' : '') + '">' +
       '<header class="hcm-hd"><span class="hcm-lg">' + ic('lapis', 14) + '</span><span class="hcm-tt"><b>Para assinatura</b><small>HERO18810 · Gabinete do Des. Fed. Carlos Muta' + (v.em ? ' · ' + esc(new Date(v.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })) : '') + '</small></span>' +
       (urg ? '<span class="hcm-c hcm-u">' + ic('ampulheta', 11) + urg + ' urgente' + (urg > 1 ? 's' : '') + '</span>' : '') +
       '<button type="button" class="hcm-b" data-hcm="ler" title="Atualizar agora">Atualizar</button>' + (op.pje ? '<button type="button" class="hcm-b" data-hcm="recolher" title="Recolher o quadro">' + (op.recolhido ? 'abrir' : 'recolher') + '</button>' : '') + '</header>' +
@@ -129,6 +135,7 @@
     '.hcm-l{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:#4b5a66}.hcm-l select{font:12px system-ui,sans-serif}' +
     '.hcm-dt{font-size:12.5px}.hcm-v{padding:10px;color:#66737f;font-size:12px}.hcm-msg{margin:6px 8px 0;padding:5px 8px;border-radius:6px;background:#eef3f7;color:#1f4f6b;font-size:11.5px}' +
     '.hcm-ft{padding:5px 10px;border-top:1px solid #eee;font-size:10.5px;color:#7a6f92;background:#fcfbfe}' +
+    '.hcm-it.foco{border-color:#5a3fa0;box-shadow:0 0 0 2px #cdbcf0}.hcm-jan{border-radius:0;margin:0;border-left-width:0;border-top:0;box-shadow:none;min-height:100vh}.hcm-jan .hcm-l2{max-height:none}' +
     '.hcm-pje{max-width:640px;min-width:0;width:auto}#hero-cmt{display:block;width:100%;min-width:0;box-sizing:border-box;padding:0 6px}';
   function css(doc) { doc = doc || G.document; if (!doc || doc.getElementById('hcm-css')) return; var st = doc.createElement('style'); st.id = 'hcm-css'; st.textContent = CSS; (doc.head || doc.documentElement).appendChild(st); }
   G.MutaCmt = { html: html, bind: bind, css: css, UI: UI };

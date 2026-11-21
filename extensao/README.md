@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.36 · só sinalizações fora do prontuário; o resto em desenvolvimento
+
+- Nos cartões da lista do PJe ficam só os ícones de sinalização (urgência, avisos, intercorrências, pendências, notas), na faixa do topo, que abrem o quadro de detalhes.
+- Selos do cartão (classificação, estado, designação, trilha, pendências recolhíveis, próxima providência, sugeridas), redesenho das etiquetas, tarefas por etapa no painel do usuário e quadro de assinatura no PJe passam ao "Modo em desenvolvimento" (sino › Prazos), desligado por padrão. O código continua; nada foi apagado.
+- Dúvidas e decisões para assinar chegam como notificação; o clique abre a janela do HERO com o item na frente (cmt.html), com responder, devolver e marcar assinada, com cópia ao gestor.
+
 ## O que muda na 0.35 · painel do usuário por etapa do fluxo
 
 - Nas colunas "Tarefas" e "Minhas tarefas" do painel do usuário do PJe, a lista alfabética dá lugar a 7 grupos (desenho "Painel do PJe — reorganização e redesign"): 1 Assinar e liberar, 2 Sessão com prazo, 3 Recursos internos, 4 Chegadas a examinar, 5 Produção e triagem, 6 Aguardando sessão e 7 Sobrestados (6 e 7 recolhidos), e Outras tarefas no fim.

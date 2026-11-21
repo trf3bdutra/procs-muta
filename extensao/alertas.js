@@ -148,9 +148,10 @@
     var lig = function (k, r, d) { return '<label class="ap-f ap-s"><input type="checkbox" data-pz="' + k + '"' + (c[k] !== false ? ' checked' : '') + '><span>' + r + '</span><small>' + d + '</small></label>'; };
     return num('urgDias', 'Urgência não apreciada', 'dias até o alerta vermelho') +
       num('tarefaDias', 'Tempo na tarefa', 'dias até o aviso (vermelho no dobro)') +
-      lig('selos', 'Selos na lista de tarefas do PJe', 'etapa, designação, alertas e etiquetas que faltam') +
-      lig('etqEstilo', 'Redesenho das etiquetas do PJe', 'cada tipo com cor, estilo e ícone (sino › Etiquetas)') +
-      (A.cmt && !A.cmt.fora ? lig('cmtPje', 'Quadro do Desembargador no PJe', 'decisões para assinatura e dúvidas, no topo da coluna "Para assinatura" da lista') : '') +
+      lig('selos', 'Sinalizações nos cartões da lista do PJe', 'ícones de urgência, avisos, intercorrências, pendências e notas, que abrem o quadro de detalhes') +
+      '<label class="ap-f ap-s"><input type="checkbox" data-pz="dev"' + (c.dev === true ? ' checked' : '') + '><span>Modo em desenvolvimento: cartões e etiquetas</span><small>nos cartões: estado, designação, trilha, classificação, sugeridas e redesenho das etiquetas; no painel do usuário: tarefas por etapa e quadro de assinatura (em teste)</small></label>' +
+      (c.dev === true ? lig('etqEstilo', 'Redesenho das etiquetas do PJe', 'cada tipo com cor, estilo e ícone (sino › Etiquetas)') : '') +
+      (A.cmt && !A.cmt.fora && c.dev === true ? lig('cmtPje', 'Quadro do Desembargador no PJe', 'decisões para assinatura e dúvidas, no topo da coluna "Para assinatura" da lista') : '') +
       lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (ícone azul, título "Gabinete")') +
       (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Chegadas com urgência ou liminar (só gestor)', 'processo novo na lista do PJe com pedido urgente avisa na hora; os demais só entram no relatório') +
         lig('relatorio', 'Relatório de chegadas no fim do dia', 'notificação com o total do dia, que abre o relatório') +
@@ -257,7 +258,7 @@
     });
     p.addEventListener('change', function (e) {
       var i = e.target;
-      if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : i.type === 'time' ? (i.value || '18:00') : Math.max(1, Number(i.value) || 1); gravarCfg(c); return; }
+      if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : i.type === 'time' ? (i.value || '18:00') : Math.max(1, Number(i.value) || 1); gravarCfg(c); if (i.dataset.pz === 'dev') pintar(); return; }
       if (i.dataset.qf === 'op') { colher(); pintar(); }
       if (i.dataset.cf === 'cor' || i.dataset.cf === 'estilo' || i.dataset.cf === 'icone') { colherCat(); pintar(); }
     });

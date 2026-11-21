@@ -307,11 +307,11 @@ chrome.runtime.onStartup.addListener(alarmeCmt);
 chrome.notifications.onClicked.addListener(function (id) {
   if (!/^cmt:/.test(id)) return;
   chrome.notifications.clear(id);
-  /* abre o PJe já aberto (a lista mostra o quadro na coluna Para assinatura); sem ele, a página /cmt */
-  chrome.tabs.query({ url: ['https://pje2g.trf3.jus.br/*'] }).then(function (t) {
-    if (t && t[0]) { chrome.tabs.update(t[0].id, { active: true }); chrome.windows.update(t[0].windowId, { focused: true }); }
-    else chrome.tabs.create({ url: SITE + '/cmt/' });
-  }).catch(function () { chrome.tabs.create({ url: SITE + '/cmt/' }); });
+  /* abre a janela do HERO com o item da notificação na frente (cmt.html), como os demais avisos */
+  var m = /^cmt:(as|du)-(.+)$/.exec(id), alvo = '';
+  if (m && m[1] === 'as') alvo = 'as:' + m[2].replace(/-\d{4}-\d{2}-\d{2}.*$|-$/, '');
+  else if (m) alvo = 'du:' + m[2];
+  chrome.windows.create({ url: chrome.runtime.getURL('cmt.html') + (alvo ? '#' + encodeURIComponent(alvo) : ''), type: 'popup', width: 600, height: 820, focused: true }).catch(function () { chrome.tabs.create({ url: SITE + '/cmt/' }); });
 });
 chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
   if (!msg || (msg.tipo !== 'muta-cmt' && msg.tipo !== 'muta-cmt-acao')) return;

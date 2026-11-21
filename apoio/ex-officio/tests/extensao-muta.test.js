@@ -428,7 +428,19 @@ test('extensão 0.35: painel do usuário do PJe por etapa do fluxo (7 grupos) na
   ['Assinar e liberar', 'Sessão com prazo', 'Recursos internos', 'Chegadas a examinar', 'Produção e triagem', 'Aguardando sessão', 'Sobrestados', 'Outras tarefas'].forEach(g => assert.ok(t.includes("'" + g + "'"), g));
   assert.match(t, /it\.alvo\.click\(\)/, 'a linha do HERO clica na linha original do PJe');
   assert.match(t, /htg-oculto/); assert.match(t, /ver a lista do PJe/); assert.match(t, /window\.MutaModo/);
-  assert.match(read('extensao/conteudo-pje.js'), /window\.MutaModo = \{ desligado: modoDesligado \}/);
+  assert.match(read('extensao/conteudo-pje.js'), /window\.MutaModo = \{ desligado: modoDesligado/);
   assert.match(read('extensao/fundo.js'), /'tarefas-pje\.js'\]/);
   const vm = require('vm'); const ctx = { location: { host: 'x' }, window: {} }; vm.createContext(ctx); vm.runInContext(t, ctx);
+});
+
+test('extensão 0.36: fora do prontuário só as sinalizações; cartões, etiquetas, tarefas por etapa e quadro de assinatura no modo em desenvolvimento; notificação abre a janela do item', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /function emDesenvolvimento\(\) \{ return !!\(ENR\.cfg && ENR\.cfg\.dev === true\); \}/);
+  assert.match(c, /if \(dev\) html = selosHtml/); assert.match(c, /if \(dev\) C\.forEach\(function \(c\) \{ try \{ estilizarEtiquetas/);
+  assert.match(c, /!emDesenvolvimento\(\) \|\| \(ENR\.cfg && ENR\.cfg\.cmtPje === false\)/);
+  assert.match(read('extensao/tarefas-pje.js'), /!window\.MutaModo\.dev\(\)/);
+  assert.match(read('extensao/alertas.js'), /data-pz="dev"' \+ \(c\.dev === true \? ' checked' : ''\)/);
+  assert.match(read('extensao/fundo.js'), /chrome\.runtime\.getURL\('cmt\.html'\)/);
+  ['cmt.html', 'cmt-janela.js'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
+  assert.match(read('extensao/cmt.js'), /op\.foco/);
 });

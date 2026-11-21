@@ -650,15 +650,22 @@
     }
     cssSelos();
     try { botaoColuna(C); } catch (e) {}
-    C.forEach(function (c) { try { estilizarEtiquetas(c.el); } catch (e) {} });
+    /* 0.36 · cartões e etiquetas do HERO ficam no modo em desenvolvimento (sino › Prazos); fora dele, só os ícones de sinalização */
+    var dev = emDesenvolvimento();
+    if (dev) C.forEach(function (c) { try { estilizarEtiquetas(c.el); } catch (e) {} });
+    else if (document.querySelector('.hero-etq')) limparEtiquetas();
     C.forEach(function (c) {
       var r = ENR.dados[c.k]; if (!r) return;
-      var box = c.el.querySelector('.muta-selos');
-      var texto = ((c.el.textContent || '').replace(box ? box.textContent : '', '')).slice(0, 4000); (ENR.textos = ENR.textos || {})[c.k] = texto; var html = selosHtml(Object.assign({ _k: c.k }, r), ENR.cat, texto);
-      if (box && box.getAttribute('data-sig') === html) return;
-      if (!html) { if (box) box.remove(); return; }
-      if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; pontoBloco(ancora(c), c.el).insertAdjacentElement('afterend', box); }
-      box.setAttribute('data-sig', html); box.innerHTML = ' ' + html + ' '; /* espaços nas pontas: o texto do bloco não cola no número do processo */
+      var box = c.el.querySelector('.muta-selos:not(.hero-sin-topo)');
+      var texto = ((c.el.textContent || '').replace(box ? box.textContent : '', '')).slice(0, 4000); (ENR.textos = ENR.textos || {})[c.k] = texto;
+      var html = '';
+      if (dev) html = selosHtml(Object.assign({ _k: c.k }, r), ENR.cat, texto);
+      else { var E = window.MutaEtiquetas, rr = E.preparar(Object.assign({ _k: c.k }, r)); rr._falta = ENR.cat ? E.faltando(rr, ENR.cat, texto) : []; (ENR.sin = ENR.sin || {})[c.k] = sinaisHtml(c.k, rr); }
+      if (!html) { if (box) box.remove(); }
+      else if (!box || box.getAttribute('data-sig') !== html) {
+        if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; pontoBloco(ancora(c), c.el).insertAdjacentElement('afterend', box); }
+        box.setAttribute('data-sig', html); box.innerHTML = ' ' + html + ' '; /* espaços nas pontas: o texto do bloco não cola no número do processo */
+      }
       /* botões de sinalização na faixa do topo do cartão (onde o PJe põe datas e ícones) */
       /* o hospedeiro é o bloco do cartão inteiro (com a faixa do topo), nunca o link do número */
       var host = c.el;
@@ -856,15 +863,19 @@
   }
   /* ---------- 0.34 · liga/desliga o modo HERO na própria lista (selos, sinalizações, sugeridas e redesenho das etiquetas) ----------
      Guarda em muta-prazos (o mesmo do sino › Prazos): selos e etqEstilo juntos. Vale para toda a equipe só neste navegador. */
-  function modoDesligado() { var c = ENR.cfg || {}; return c.selos === false && c.etqEstilo === false; }
-  window.MutaModo = { desligado: modoDesligado };
-  function limparModo() {
-    Array.prototype.forEach.call(document.querySelectorAll('.muta-selos'), function (x) { x.remove(); });
+  function emDesenvolvimento() { return !!(ENR.cfg && ENR.cfg.dev === true); }
+  function limparEtiquetas() {
     Array.prototype.forEach.call(document.querySelectorAll('.hero-etq'), function (el) {
       el.classList.remove('hero-etq', 'hero-solido', 'hero-suave', 'hero-contorno', 'hero-sym');
       ['data-hero-etq', 'data-hero-ic', 'data-hero-sym'].forEach(function (a) { el.removeAttribute(a); });
       el.style.removeProperty('--hc'); el.style.removeProperty('order');
     });
+  }
+  function modoDesligado() { var c = ENR.cfg || {}; return c.selos === false && c.etqEstilo === false; }
+  window.MutaModo = { desligado: modoDesligado, dev: emDesenvolvimento };
+  function limparModo() {
+    Array.prototype.forEach.call(document.querySelectorAll('.muta-selos'), function (x) { x.remove(); });
+    limparEtiquetas();
   }
   function botaoModo() {
     var b = document.getElementById('hero-modo-btn'), off = modoDesligado();
@@ -882,7 +893,7 @@
     b.className = off ? 'off' : '';
     b.setAttribute('aria-pressed', off ? 'false' : 'true');
     b.innerHTML = '<i></i>HERO ' + (off ? 'desligado' : 'ligado');
-    b.title = off ? 'Ligar o modo HERO18810 nos cartões: estado, designação, trilha, sinalizações, sugeridas e etiquetas redesenhadas' : 'Desligar o modo HERO18810: os cartões e as etiquetas voltam ao desenho do PJe';
+    b.title = off ? 'Ligar o HERO18810 nos cartões (sinalizações; no modo em desenvolvimento, também estado, designação, trilha, sugeridas e etiquetas redesenhadas)' : 'Desligar o HERO18810 nos cartões: voltam ao desenho do PJe';
   }
   /* a escolha guardada vale desde o início da página (sem piscar os selos antes de desligar) */
   try { if (LISTA) chrome.storage.local.get('muta-prazos').then(function (o) { if (o && o['muta-prazos']) { ENR.cfg = Object.assign({}, ENR.cfg || {}, o['muta-prazos']); agendarSelos(); } }); } catch (e) {}
@@ -960,7 +971,7 @@
   function quadroCmt() {
     if (!LISTA || !window.MutaCmt) return;
     var v = CMTL.v, box = document.getElementById('hero-cmt');
-    if (!v || v.fora || (ENR.cfg && ENR.cfg.cmtPje === false)) { if (box) box.remove(); return; }
+    if (!v || v.fora || !emDesenvolvimento() || (ENR.cfg && ENR.cfg.cmtPje === false)) { if (box) box.remove(); return; }
     var h = tituloAssinatura();
     if (!h) { if (box) box.remove(); if (CMTL.diag !== 'sem') { CMTL.diag = 'sem'; try { console.info('[HERO18810] coluna "Para assinatura" não encontrada nesta tela'); } catch (e) {} } return; }
     window.MutaCmt.css(document);

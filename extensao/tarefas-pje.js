@@ -25,7 +25,8 @@
 
   function N(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
   function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function desligado() { try { return !!(window.MutaModo && window.MutaModo.desligado()); } catch (e) { return false; } }
+  /* 0.36: o agrupamento fica no modo em desenvolvimento (sino › Prazos) */
+  function desligado() { try { return !window.MutaModo || window.MutaModo.desligado() || !window.MutaModo.dev(); } catch (e) { return true; } }
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
