@@ -1,0 +1,587 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-pensao-militar-tcu",
+ "titulo": "Série · Pensão militar revista por apontamento do TCU",
+ "descricao": "Triagem: revisão de pensão militar (soldo do grau superior) após apontamento do TCU. Nenhum processo pautado.",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-21",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "R1",
+   "rotulo": "Revisão da pensão: decadência e grau superior",
+   "cor": "#2f6db5",
+   "resultado": "Voto: decadência e legalidade da revisão",
+   "modelo": ""
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-pensao-militar-tcu/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5001266-02.2024.4.03.6005",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x MARIA AMALIA BENTOS",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "MARIA AMALIA BENTOS",
+   "assunto": "Pensão",
+   "assunto_detalhado": "Pensão militar — base no soldo de Terceiro-Sargento (Guarnição Especial; TCU); decadência",
+   "grupo": "R1",
+   "tipo_caso": "Apelação da União e remessa necessária em ação ordinária · pensão militar calculada sobre o soldo de Cabo Engajado em vez de Terceiro-Sargento (Acórdão 5929/2021-TCU-2ª Câmara) · acréscimo de Guarnição Especial (artigo 137, VI, da Lei 6.880/1980) para o grau superior (artigo 50, II) · nova sentença após anulação da primeira por falta de citação · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelação da União (ID 381166006) e remessa necessária da sentença ID 381166003; contrarrazões (ID 381166008); MPF sem intervenção (ID 389327741) ‖ Proposta pelos precedentes: Voto: examinar a decadência e o cômputo da Guarnição Especial para o grau superior à luz do artigo 137, § 1º, da Lei 6.880/1980; verificar o cabimento da remessa [VALIDAR] [VALIDAR: Teor das razões da União; Valor do proveito econômico para a remessa]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que restabeleceu a pensão militar de Maria Amália Bentos sobre o soldo de Terceiro-Sargento, afastando a revisão feita com base no Acórdão 5929/2021-TCU-2ª Câmara. A autora invoca a decadência quanto ao ato de reforma de 2005.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — pensão militar",
+    "origem": "Procedimento comum 5001266-02.2024.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 381166003 (07/05/2026)",
+    "recurso": "apelação de União (ID 381166006, 19/05/2026) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 388980448 · 28/07/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 389327741 · 29/07/2026 | última movimentação: 03/08/2026 14:33 · Conclusos para julgamento · Primeira sentença anulada pela 1ª Turma por falta de citação (acórdão ID 327353249, 10/06/2025; trânsito em 07/08/2025, ID 332778094) · Redistribuição à Turma Regional (ID 384643166) · Decadência (artigo 54 da Lei 9.784/1999) × revisão na habilitação da pensão; Tema 445/STF [VALIDAR] · Remessa: proveito econômico possivelmente inferior a 1.000 salários mínimos (artigo 496, § 3º, I, do CPC) [VALIDAR] · Prioridade: idosa",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "1ª Seção; Pensão Militar; PRIORIDADE - Idoso(a); Responsabilidade Civil",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "03/08/2026 14:33 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 388980448 · 28/07/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 389327741 · 29/07/2026",
+    "ultima_informacao": "Certidão · ID 388150475 · 23/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 388980448 · 28/07/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 389327741 · 29/07/2026 | última movimentação: 03/08/2026 14:33 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Maria Amália Bentos, idosa, é pensionista do Cabo reformado Hermínio Colman, falecido em 29/06/2022, que recebia proventos de Terceiro-Sargento desde a reserva (1989). Na habilitação, a pensão foi calculada sobre o soldo de Cabo Engajado por força de acórdão do TCU.",
+    "inicial": "Ação ordinária de revisão de pensão militar cumulada com danos morais contra a União.",
+    "decisao_recorrida": "Sentença ID 381166003 (07/05/2026): julgou parcialmente procedentes os pedidos para anular o ato que fixou a pensão sobre o soldo de Cabo Engajado, restabelecer a base de Terceiro-Sargento (com tutela), pagar as diferenças e as parcelas não recebidas (janeiro/2023 e maio/2023 a janeiro/2024, descontados R$ 7.000,00); danos morais improcedentes; honorários pela União.",
+    "recurso": "União (ID 381166006, 19/05/2026): legalidade da revisão conforme o Acórdão 5929/2021-TCU-2ª Câmara: os acréscimos do artigo 137, VI, da Lei 6.880/1980 não contam para os 30 anos do artigo 50, II [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora (ID 381166008).",
+    "parecer": "MPF ID 389327741: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Francielli Sanchez Salazar (OAB/MS 15.140).",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação ordinária · pensão militar calculada sobre o soldo de Cabo Engajado em vez de Terceiro-Sargento (Acórdão 5929/2021-TCU-2ª Câmara) · acréscimo de Guarnição Especial (artigo 137, VI, da Lei 6.880/1980) para o grau superior (artigo 50, II) · nova sentença após anulação da primeira por falta de citação · pedido julgado parcialmente procedente",
+     "sintese": "Maria Amália Bentos, idosa, é pensionista do Cabo reformado Hermínio Colman, falecido em 29/06/2022, que recebia proventos de Terceiro-Sargento desde a reserva (1989). Na habilitação, a pensão foi calculada sobre o soldo de Cabo Engajado por força de acórdão do TCU.",
+     "questoes": "1) Pensão militar: base no soldo do grau superior com cômputo de Guarnição Especial; 2) decadência; 3) cabimento da remessa.",
+     "rel": {
+      "razoes": "União (ID 381166006, 19/05/2026): legalidade da revisão conforme o Acórdão 5929/2021-TCU-2ª Câmara: os acréscimos do artigo 137, VI, da Lei 6.880/1980 não contam para os 30 anos do artigo 50, II [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora (ID 381166008)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "381166003",
+      "juizo": "Procedimento comum 5001266-02.2024.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+      "dispositivo": "julgou parcialmente procedentes os pedidos para anular o ato que fixou a pensão sobre o soldo de Cabo Engajado, restabelecer a base de Terceiro-Sargento (com tutela), pagar as diferenças e as parcelas não recebidas (janeiro/2023 e maio/2023 a janeiro/2024, descontados R$ 7.000,00); danos morais improcedentes; honorários pela União."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-06-24",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "381166006",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "381166003",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Acórdão da 1ª Turma: sentença anulada (falta de citação)",
+       "id": "327353249",
+       "data": "2025-06-10"
+      },
+      {
+       "desc": "Certidão de trânsito em julgado",
+       "id": "332778094",
+       "data": "2025-08-07"
+      },
+      {
+       "desc": "Contestação da União",
+       "id": "381165995",
+       "data": "2026-01-28"
+      },
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "381166003",
+       "data": "2026-05-07"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "381166006",
+       "data": "2026-05-19"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "381166008",
+       "data": "2026-06-18"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "384643166",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "389327741",
+       "data": "2026-07-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 388980448 · 28/07/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 389327741 · 29/07/2026 | última movimentação: 03/08/2026 14:33 · Conclusos para julgamento · Primeira sentença anulada pela 1ª Turma por falta de citação (acórdão ID 327353249, 10/06/2025; trânsito em 07/08/2025, ID 332778094) · Redistribuição à Turma Regional (ID 384643166) · Decadência (artigo 54 da Lei 9.784/1999) × revisão na habilitação da pensão; Tema 445/STF [VALIDAR] · Remessa: proveito econômico possivelmente inferior a 1.000 salários mínimos (artigo 496, § 3º, I, do CPC) [VALIDAR] · Prioridade: idosa",
+     "assuntoDet": "Pensão militar — base no soldo de Terceiro-Sargento (Guarnição Especial; TCU); decadência",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "389327741",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5000240-60.2024.4.03.6007",
+   "recurso": "Apelação cível",
+   "partes": "MARIA CRISTINA RODRIGUES DA SILVA DE MORAIS x MINISTERIO DA DEFESA - EXERCITO BRASILEIRO",
+   "exequente": "MARIA CRISTINA RODRIGUES DA SILVA DE MORAIS",
+   "executado": "MINISTERIO DA DEFESA - EXERCITO BRASILEIRO",
+   "assunto": "Adicional de Inatividade",
+   "assunto_detalhado": "Pensão militar — revisão por entendimento do TCU após 19 anos; danos morais",
+   "grupo": "R1",
+   "tipo_caso": "Apelações da autora e da União em ação ordinária · pensão militar de viúva reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe (revisão por entendimento do TCU) · melhoria por invalidez do instituidor após a reforma · tutela de urgência · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelações da autora (ID 326464468) e da União (ID 326464472) da sentença ID 326464463; contrarrazões (IDs 326464475, 326464476 e 326464478); MPF sem intervenção (ID 365415722) ‖ Proposta pelos precedentes: Voto: examinar a decadência e a legalidade da revisão; danos morais [VALIDAR] [VALIDAR: Fundamento e data da revisão administrativa; Cabimento de remessa necessária]",
+   "modelo": "Origem: lote adp-ap-3s (grupo AP2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da viúva e da União contra sentença que restabeleceu pensão militar reduzida por revisão baseada em entendimento do TCU, após 19 anos, e negou danos morais.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento das apelações (voto)",
+    "materia": "Administrativo — pensão militar",
+    "origem": "Procedimento comum 5000240-60.2024.4.03.6007 (1ª Vara Federal de Coxim)",
+    "decisao_agravada": "Sentença ID 326464463 (13/03/2025)",
+    "recurso": "apelação de Maria Cristina Rodrigues da Silva de Morais (ID 326464468, 31/03/2025) e apelação de União (ID 326464472, 07/05/2025)",
+    "preparo": "Maria Cristina Rodrigues da Silva de Morais: Justiça gratuita; União: Isento (ente público)",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Maria Cristina Rodrigues da Silva de Morais: Justiça gratuita; União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172409 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026 | última movimentação: 09/04/2026 17:53 · Conclusos para decisão · Decadência (artigo 54 da Lei 9.784/1999) × revisão de pensão por entendimento do TCU; Tema 445/STF [VALIDAR] · Melhoria do artigo 110 da Lei 6.880/1980 para militar já reformado · Petição da autora endereçada ao TJMS no cabeçalho (erro material) · Remessa necessária: sentença sujeita? [VALIDAR] · Mesmo tema de 5001266-02 (adp-remessas)",
+   "classe": "ApCiv",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "PRIORIDADE - Idoso(a)",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 17:53 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 365172409 · 08/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026",
+    "ultima_informacao": "Certidão · ID 326589104 · 03/06/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365172409 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026 | última movimentação: 09/04/2026 17:53 · Conclusos para decisão"
+   },
+   "teor": {
+    "sintese_fatica": "Maria Cristina Rodrigues da Silva de Morais, idosa, viúva pensionista, teve a pensão reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe, por revisão baseada em entendimento do TCU, após mais de 19 anos de pagamento.",
+    "inicial": "Ação ordinária de restabelecimento de pensão militar e danos morais contra a União.",
+    "decisao_recorrida": "Sentença ID 326464463 (13/03/2025): julgou parcialmente procedente o pedido para declarar ilegal a revogação administrativa que reduziu os proventos do instituidor e a pensão e determinar o restabelecimento, com tutela de urgência; rejeitou os danos morais [VALIDAR demais itens].",
+    "recurso": "Maria Cristina Rodrigues da Silva de Morais (ID 326464468, 31/03/2025): danos morais pela privação da verba alimentar e honorários integrais pela União. União (ID 326464472, 07/05/2025): revogação da tutela; legalidade da revisão: a melhoria só cabe a militar da ativa ou da reserva julgado inválido, não ao já reformado.",
+    "resposta": "Contrarrazões das partes (IDs 326464475, 326464476 e 326464478).",
+    "parecer": "MPF ID 365415722: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Glauco Ricci (OAB/MS 27.854); justiça gratuita.",
+    "preparo": "Maria Cristina Rodrigues da Silva de Morais: Justiça gratuita; União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da autora e da União em ação ordinária · pensão militar de viúva reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe (revisão por entendimento do TCU) · melhoria por invalidez do instituidor após a reforma · tutela de urgência · pedido julgado parcialmente procedente",
+     "sintese": "Maria Cristina Rodrigues da Silva de Morais, idosa, viúva pensionista, teve a pensão reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe, por revisão baseada em entendimento do TCU, após mais de 19 anos de pagamento.",
+     "questoes": "1) Revisão de pensão militar por entendimento do TCU após 19 anos (decadência); 2) melhoria do artigo 110 da Lei 6.880/1980; 3) danos morais.",
+     "rel": {
+      "razoes": "Maria Cristina Rodrigues da Silva de Morais (ID 326464468, 31/03/2025): danos morais pela privação da verba alimentar e honorários integrais pela União. União (ID 326464472, 07/05/2025): revogação da tutela; legalidade da revisão: a melhoria só cabe a militar da ativa ou da reserva julgado inválido, não ao já reformado.",
+      "contrarrazoes": "Contrarrazões das partes (IDs 326464475, 326464476 e 326464478)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "326464463",
+      "juizo": "Procedimento comum 5000240-60.2024.4.03.6007 (1ª Vara Federal de Coxim)",
+      "dispositivo": "julgou parcialmente procedente o pedido para declarar ilegal a revogação administrativa que reduziu os proventos do instituidor e a pensão e determinar o restabelecimento, com tutela de urgência; rejeitou os danos morais [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Maria Cristina Rodrigues da Silva de Morais",
+       "tipo": "Apelação",
+       "id": "326464468",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "326464472",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "326464463",
+       "data": "2025-03-13"
+      },
+      {
+       "desc": "Apelação da autora",
+       "id": "326464468",
+       "data": "2025-03-31"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "326464472",
+       "data": "2025-05-07"
+      },
+      {
+       "desc": "Petição de interposição (contrarrazões)",
+       "id": "326464475",
+       "data": "2025-05-15"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "326464478",
+       "data": "2025-05-31"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "365415722",
+       "data": "2026-04-09"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172409 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026 | última movimentação: 09/04/2026 17:53 · Conclusos para decisão · Decadência (artigo 54 da Lei 9.784/1999) × revisão de pensão por entendimento do TCU; Tema 445/STF [VALIDAR] · Melhoria do artigo 110 da Lei 6.880/1980 para militar já reformado · Petição da autora endereçada ao TJMS no cabeçalho (erro material) · Remessa necessária: sentença sujeita? [VALIDAR] · Mesmo tema de 5001266-02 (adp-remessas)",
+     "assuntoDet": "Pensão militar — revisão por entendimento do TCU após 19 anos; danos morais",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "365415722",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5030013-95.2025.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIÃO FEDERAL x OVIDIA PAREDES BAREIRO",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "OVIDIA PAREDES BAREIRO",
+   "assunto": "Pensão",
+   "assunto_detalhado": "Pensão militar — revisão do valor por irregularidade na reforma do instituidor (TCU)",
+   "grupo": "R1",
+   "tipo_caso": "Pensão militar · revisão pela Administração após apontamento do TCU (melhoria de reforma do instituidor) · tutela deferida na origem e suspensa no recurso · agravo da União",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a decisão ID 342973449 suspendeu a tutela deferida na origem, há contraminuta com pedido de reconsideração (ID 343340700) e o MPF declarou falta de interesse (ID 366735364) ‖ Proposta pelos precedentes: Provimento do agravo da União, mantida a suspensão da tutela (ID 342973449), na linha do Relator no AI 5000055-27.2026.4.03.0001 (monocrática, 31/08/2026), que negou tutela para restabelecer pensão militar revista, conferida a decadência [VALIDAR: Decadência (artigo 54 da Lei 9.784/1999) e data do ato revisado; ID e vara da decisão agravada]",
+   "modelo": "Origem: lote adp-ai (grupo A7) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a tutela que restabeleceu a pensão militar de Ovídia Paredes Bareiro no valor anterior à revisão. A União sustenta que a reforma do instituidor no grau superior foi irregular (sem 30 anos de serviço), que reforma e pensão são atos independentes para o TCU e que não houve decadência. O Des. Fed. David Dantas suspendeu a tutela (ID 342973449, 13/11/2025). A agravada pede reconsideração (ID 343340700). O MPF declarou falta de interesse (ID 366735364).",
+   "peculiaridades": "Prioridade de idosa. O processo chegou a ter intimações de pauta na 1ª Turma (11/02/2026) e foi redistribuído pela decisão ID 362818833 (27/03/2026). A pensionista continua recebendo o benefício em valor menor (ID 342973449).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "342368902",
+     "data": "06/11/2025"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "343340700",
+     "data": "13/11/2025"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "362818833",
+     "data": "27/03/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "342973449",
+     "data": "13/11/2025"
+    },
+    {
+     "peca": "Parecer (conferir se do MPF)",
+     "id": "366735364",
+     "data": "15/04/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Administrativo militar — revisão de pensão",
+    "origem": "Ação 5013395-54.2024.4.03.6000 [VALIDAR vara]",
+    "decisao_agravada": "Decisão que deferiu a tutela para restabelecer a pensão no valor anterior à revisão (ID não indicado [VALIDAR])",
+    "recurso": "ID 342368902 · 06/11/2025",
+    "preparo": "Isenta (União)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (União) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5013395-54.2024.4.03.6000 · houve intimações de pauta na 1ª Turma (IDs 354415334, 354415345 e 354415355, 11/02/2026) antes da redistribuição (decisão ID 362818833) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Datas da reforma, da concessão da pensão e da revisão (decadência)",
+    "[VALIDAR] ID da decisão agravada"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366293769 · 13/04/2026 — abriu vista ao MPF | último ato decisório sobre o recurso: ID 342973449 · 13/11/2025 — suspendeu a tutela deferida na origem (efeito suspensivo) | última peça: Parecer (MPF, falta de interesse) · ID 366735364 · 15/04/2026 | última movimentação: 16/04/2026 18:16 · CONCLUSOS PARA JULGAMENTO · Tutela suspensa no recurso (ID 342973449) · Prioridade de idosa · MPF sem interesse (ID 366735364) · Linha do Relator em revisão de pensão militar: AI 5000055-27.2026.4.03.0001 (31/08/2026)",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "1ª Seção; PRIORIDADE - Idoso(a)",
+   "chegada": "04/11/2026",
+   "bloco": "2",
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 366293769 · 13/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer (MPF, falta de interesse) · ID 366735364 · 15/04/2026",
+    "ultima_informacao": "Certidão · ID 364879520 · 07/04/2026",
+    "ultima_movimentacao": "16/04/2026 18:16 · CONCLUSOS PARA JULGAMENTO",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366293769 · 13/04/2026 — abriu vista ao MPF | último ato decisório sobre o recurso: ID 342973449 · 13/11/2025 — suspendeu a tutela deferida na origem (efeito suspensivo) | última peça: Parecer (MPF, falta de interesse) · ID 366735364 · 15/04/2026 | última movimentação: 16/04/2026 18:16 · CONCLUSOS PARA JULGAMENTO",
+    "ultima_decisao_relevante": "Decisão · ID 342973449 · 13/11/2025 — suspendeu a tutela deferida na origem (efeito suspensivo)"
+   },
+   "teor": {
+    "sintese_fatica": "Ovídia Paredes Bareiro teve a pensão militar revista pelo Comando da 9ª Região Militar, após apontamento do TCU sobre a reforma do instituidor no grau superior; o juízo deferiu tutela para restabelecer o valor anterior.",
+    "inicial": "Ação 5013395-54.2024.4.03.6000.",
+    "decisao_recorrida": "Decisão da origem que deferiu a tutela de urgência (descrita no agravo ID 342368902).",
+    "recurso": "Agravo de instrumento da União ID 342368902 (06/11/2025): reforma e pensão são atos independentes; autotutela e força das decisões do TCU; inexistência de decadência, de ofensa à irredutibilidade e de direito adquirido; artigo 2º-B da Lei 9.494/1997.",
+    "resposta": "Contraminuta ID 343340700 (13/11/2025): reconsideração da decisão que suspendeu a tutela; natureza alimentar, segurança jurídica e confiança legítima.",
+    "parecer": "MPF ID 366735364 (15/04/2026): ausência de interesse que justifique a intervenção.",
+    "memoriais": "Não consta",
+    "representacao": "União: Advocacia-Geral da União (procuração dispensada). Agravada: advogado Glauco Ricci (OAB/MS 27.854).",
+    "preparo": "Isenta (União)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Pensão militar · revisão pela Administração após apontamento do TCU (melhoria de reforma do instituidor) · tutela deferida na origem e suspensa no recurso · agravo da União",
+     "sintese": "Ovídia Paredes Bareiro teve a pensão militar revista pelo Comando da 9ª Região Militar, após apontamento do TCU sobre a reforma do instituidor no grau superior; o juízo deferiu tutela para restabelecer o valor anterior.",
+     "questoes": "1) Probabilidade do direito à manutenção da pensão no valor anterior à revisão; 2) decadência administrativa; 3) independência entre reforma e pensão.",
+     "rel": {
+      "razoes": "Agravo de instrumento da União ID 342368902 (06/11/2025): reforma e pensão são atos independentes; autotutela e força das decisões do TCU; inexistência de decadência, de ofensa à irredutibilidade e de direito adquirido; artigo 2º-B da Lei 9.494/1997.",
+      "contrarrazoes": "Contraminuta ID 343340700 (13/11/2025): reconsideração da decisão que suspendeu a tutela; natureza alimentar, segurança jurídica e confiança legítima."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "",
+      "dispositivo": "Deferiu a tutela para restabelecer a pensão no valor anterior à revisão."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Deferido",
+      "id": "342973449"
+     },
+     "adm": {
+      "prot": "2025-11-06",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "342368902",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "342368902",
+       "data": "2025-11-06"
+      },
+      {
+       "desc": "Decisão: suspensão da tutela",
+       "id": "342973449",
+       "data": "2025-11-13"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "343340700",
+       "data": "2025-11-13"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "362818833",
+       "data": "2026-03-27"
+      },
+      {
+       "desc": "Despacho: vista ao MPF",
+       "id": "366293769",
+       "data": "2026-04-13"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "366735364",
+       "data": "2026-04-15"
+      }
+     ],
+     "pendencias": "Conferir a decadência e o ID da decisão agravada",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366293769 · 13/04/2026 — abriu vista ao MPF | último ato decisório sobre o recurso: ID 342973449 · 13/11/2025 — suspendeu a tutela deferida na origem (efeito suspensivo) | última peça: Parecer (MPF, falta de interesse) · ID 366735364 · 15/04/2026 | última movimentação: 16/04/2026 18:16 · CONCLUSOS PARA JULGAMENTO · Tutela suspensa no recurso (ID 342973449) · Prioridade de idosa · MPF sem interesse (ID 366735364) · Linha do Relator em revisão de pensão militar: AI 5000055-27.2026.4.03.0001 (31/08/2026)",
+     "assuntoDet": "Pensão militar — revisão do valor por irregularidade na reforma do instituidor (TCU)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2025-11-13",
+     "idParecer": "366735364",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   }
+  }
+ ]
+}
