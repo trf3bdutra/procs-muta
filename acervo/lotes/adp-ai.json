@@ -18573,8 +18573,8 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "JONIAS RODRIGUES",
    "assunto": "Esbulho / Turbação / Ameaça",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Administrativo · bens públicos · reintegração de posse de imóvel da União (extinta LBA) · perda do objeto por sentença superveniente",
    "resultado": "Ato a proferir: decisão monocrática que julga prejudicado o agravo de instrumento (sentença superveniente)",
    "modelo": "",
    "variacoes": [],
@@ -18648,6 +18648,83 @@
     "outros": "Decisão ID 324103214 (12/05/2025, Des. Fed. Herbert de Bruyn): indeferiu o efeito suspensivo. União aguarda o julgamento (ID 330195081, 08/07/2025). Redistribuição à Turma Regional de MS (decisão ID 362604299). Sentença ID 615641398 da origem (11/11/2026), comunicada no ID 410030635: extinção sem resolução do mérito (artigo 485, VI, do CPC) pela reversão registral do imóvel ao Município de Coxim.",
     "representacao": "Agravante: União (AGU). Agravado: Jonias Rodrigues, sem advogado nos autos do agravo.",
     "preparo": "União isenta."
+   },
+   "assunto_detalhado": "Administrativo — reintegração de posse de imóvel da União; liminar possessória",
+   "especificidades": "Imóvel da Rua da Barra, 207, Coxim/MS (matrícula 13.655; RIP 90650009500-5) · Sentença de 11/11/2026: extinção sem resolução do mérito pela reversão registral ao Município de Coxim · Efeito suspensivo indeferido (ID 324103214, 12/05/2025) · Agravado não localizado",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Administrativo — reintegração de posse de imóvel da União; liminar possessória",
+     "subassuntos": "Administrativo · bens públicos · reintegração de posse de imóvel da União (extinta LBA) · perda do objeto por sentença superveniente",
+     "sintese": "",
+     "questoes": "1) Perda superveniente do objeto pela sentença na origem.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "362140358",
+      "juizo": "Vara Federal de Coxim",
+      "dispositivo": "Indeferiu a liminar de reintegração de posse."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "362140358"
+     },
+     "adm": {
+      "prot": "2025-05-09",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "323831606",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "323831606",
+       "data": "2025-05-09"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "324103214",
+       "data": "2025-05-12"
+      },
+      {
+       "desc": "AR negativo do agravado",
+       "id": "326973888",
+       "data": "2025-06-06"
+      },
+      {
+       "desc": "Comunicação da sentença da origem",
+       "id": "410030635",
+       "data": "2026-11-11"
+      }
+     ],
+     "pendencias": "Julgar prejudicado",
+     "especificidades": "Imóvel da Rua da Barra, 207, Coxim/MS (matrícula 13.655; RIP 90650009500-5) · Sentença de 11/11/2026: extinção sem resolução do mérito pela reversão registral ao Município de Coxim · Efeito suspensivo indeferido (ID 324103214, 12/05/2025) · Agravado não localizado"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-05-12"
+    }
    }
   },
   {
