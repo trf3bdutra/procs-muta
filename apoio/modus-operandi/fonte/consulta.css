@@ -111,3 +111,26 @@
 #cq-ori .cq-fora div b{font:650 10.5px Inter,sans-serif;color:#53615e}
 #cq-ori .cq-fora div small{font:500 9.5px Inter,sans-serif;color:#8a6a60}
 @media (max-width:860px){#cq .cq-selbar{overflow-x:auto}#cq .cq-selbar button{min-width:145px}}
+/* banco de parágrafos padrão: inclusão no corpo da folha, por tópico */
+#cq-main .cq-add{padding:2px 48px 6px 56px}
+#cq-main .cq-addb{border:1px dashed #c8c3b6;background:transparent;border-radius:999px;padding:2px 11px;font:600 11px Inter,"Segoe UI",system-ui,sans-serif;color:#617570;cursor:pointer;opacity:.45;transition:opacity .12s}
+#cq-main .cqb:hover .cq-addb,#cq-main .cqb.on .cq-addb,#cq-main .cq-addb:focus{opacity:1}
+#cq-main .cq-addb:hover{border-color:#235a55;color:#235a55;background:#f1f7f5}
+#cq-main .cq-inc{margin:10px 0 0;padding:6px 0 0 10px;border-left:2px solid #9cc0b4}
+#cq-main .cq-inc-h{display:flex;align-items:center;gap:4px;margin:0 0 4px;font:500 9.5px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#4d7a6f}
+#cq-main .cq-inc-h span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#cq-main .cq-inc-h button{width:20px;height:20px;border:1px solid #d8d3c6;border-radius:999px;background:#fff;color:#617570;font-size:11px;line-height:1;cursor:pointer;padding:0}
+#cq-main .cq-inc-h button:hover:not(:disabled){border-color:#235a55;color:#235a55}
+#cq-main .cq-inc-h button[data-cqrm]:hover{border-color:#9a3d2e;color:#9a3d2e}
+#cq-main .cq-inc-h button:disabled{opacity:.35;cursor:default}
+#cq-main .cq-pick{margin:4px 0 6px;border:1px solid #c8c3b6;border-radius:6px;background:#fbfaf5;padding:10px 12px;cursor:default}
+#cq-main .cq-pick-h{display:flex;gap:8px}
+#cq-main .cq-pick-h input{flex:1;min-width:0;height:32px;border:1px solid #c8c3b6;border-radius:5px;background:#fff;padding:0 9px;font:500 13px Inter,"Segoe UI",system-ui,sans-serif;color:#203b39}
+#cq-main .cq-pick .meta{margin:6px 0 4px;font:12px Inter,sans-serif;color:#617570}
+#cq-main .cq-pick-l{list-style:none;margin:0;padding:0;max-height:340px;overflow:auto;display:flex;flex-direction:column;gap:4px}
+#cq-main .cq-pick-l button{display:grid;gap:1px;width:100%;text-align:left;border:1px solid #e3dfd4;border-radius:5px;background:#fff;padding:6px 9px;cursor:pointer;font:12.5px/1.4 Inter,"Segoe UI",system-ui,sans-serif;color:#203b39}
+#cq-main .cq-pick-l button:hover{border-color:#9cc0b4;background:#f4f9f7}
+#cq-main .cq-pick-l button[aria-pressed="true"]{border-color:#235a55;background:#e7f1ee}
+#cq-main .cq-pick-l button[aria-pressed="true"] b:after{content:" · incluído (clique para retirar)";font-weight:500;color:#235a55}
+#cq-main .cq-pick-l small{font:500 10px "IBM Plex Mono",ui-monospace,monospace;color:#7b8794}
+#cq-main .cq-pick-l span{color:#4f5a57;font-size:12px}

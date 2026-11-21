@@ -349,7 +349,9 @@
   var M28ED={};
   function m28Alvo(ev){return ev.target&&ev.target.closest&&ev.target.closest('#cq-main [data-m28v][contenteditable]');}
   document.addEventListener('focusin',function(ev){var f=m28Alvo(ev);if(!f)return;M28ED[f.getAttribute('data-m28v')]=0;
-    if(f.classList.contains('m28-falta'))setTimeout(function(){try{var r=document.createRange();r.selectNodeContents(f);var sl=getSelection();sl.removeAllRanges();sl.addRange(r);}catch(er){}},0);});
+    m28SelVazio(f);});
+  function m28SelVazio(f){if(f.classList.contains('m28-falta'))setTimeout(function(){try{var r=document.createRange();r.selectNodeContents(f);var sl=getSelection();sl.removeAllRanges();sl.addRange(r);}catch(er){}},0);}
+  document.addEventListener('mouseup',function(ev){var f=m28Alvo(ev);if(f)m28SelVazio(f);});
   document.addEventListener('input',function(ev){var f=m28Alvo(ev);if(!f)return;var k=f.getAttribute('data-m28v'),v=f.textContent.replace(/\s+/g,' ');
     if(/^\[VALIDAR:[^\]]*\]$/.test(v.trim()))v='';S.val[k]=v;S.manual[k]=true;M28ED[k]=1;
     f.classList.toggle('m28-falta',!v.trim());f.classList.toggle('fill',!!v.trim());f.classList.remove('der');
