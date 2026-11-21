@@ -4093,7 +4093,7 @@ function portaToken() { return new Promise((fim) => {
     if (MESA.host !== h) return;
     const R = h.attachShadow({ mode: 'open' }); R.innerHTML = `<style>${F.css}\n${MESA_CSS}</style><div class="mb emb">${F.corpo}</div>`; const mb = R.querySelector('.mb');
     /* encaixe do painel de regras do Caput (minuta e correção) acima da lista da mesa */
-    const mn = R.querySelector('main'), sl = document.createElement('slot'); sl.name = 'regras'; if (mn) mn.insertBefore(sl, mn.querySelector('.tb'));
+    const mn = R.querySelector('main'), sl = document.createElement('slot'); sl.name = 'regras'; if (mn) { const rf = mn.querySelector('.lst') || mn.querySelector('.tb'); mn.insertBefore(sl, rf && rf.parentNode === mn ? rf : null); }
     /* a faixa de seleção (opções para os itens marcados) abre logo abaixo do cabeçalho fixo da etapa */
     const sb = R.getElementById('selbar'), tp = R.querySelector('.top'); if (sb && tp) tp.appendChild(sb);
     const doc = { getElementById: (x) => R.getElementById(x), querySelector: (x) => R.querySelector(x), querySelectorAll: (x) => R.querySelectorAll(x), body: mb, documentElement: mb,
