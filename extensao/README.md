@@ -259,7 +259,12 @@ O mesmo workflow publica o pacote em `https://www.gabinete-cmt.com/extensao/muta
 2. `chrome://extensions` › Modo do desenvolvedor › Carregar sem compactação › pasta com o `manifest.json`.
 3. Fixe o ícone do Muta e abra-o com os autos na tela.
 
-Para atualizar: extraia o ZIP novo sobre a mesma pasta e clique em Recarregar no cartão da extensão.
+Para atualizar (desde a 0.19.1): dê dois cliques em `atualizar-muta.cmd`, na pasta da extensão. Ele baixa o ZIP do site
+(curl e tar do Windows), copia os arquivos por cima e o `manifest.json` por último. O painel do Muta confere a cada
+8 segundos se a versão do manifest em disco mudou e, se mudou, se recarrega sozinho (`chrome.runtime.reload()`):
+não é preciso abrir `chrome://extensions`. Quando o site tem versão mais nova (`/extensao/versao.json`, gerado na
+publicação), aparece "↑ versão" na faixa do topo. Sem o atalho (até a 0.19.0): extraia o ZIP sobre a mesma pasta
+uma última vez e clique em Recarregar no cartão da extensão.
 Não remova a extensão para atualizar: isso apaga os prontuários guardados nela.
 
 ## Testes

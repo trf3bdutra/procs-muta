@@ -115,6 +115,8 @@ jobs:
           python3 scripts/jurisprudencia/gerar_curados.py --saida site/public/jurisprudencia
           # Extensão Muta (painel lateral ao lado do PJe): pacote para instalar sem compactação, em /extensao/muta-pje.zip
           mkdir -p site/public/extensao && (cd extensao && zip -qr -X ../site/public/extensao/muta-pje.zip . -x 'README.md')
+          # Versão publicada: a extensão compara com a instalada e avisa que há atualização (atualizar-muta.cmd baixa e troca os arquivos)
+          node -e "const v=require('./extensao/manifest.json').version;require('fs').writeFileSync('site/public/extensao/versao.json',JSON.stringify({versao:v,zip:'/extensao/muta-pje.zip'}))"
           # Dados da extensão (comparativos e conformidade): modelos, minutas-matriz, matriz do 28,86%, parágrafos-padrão e regras de redação
           python3 scripts/extensao/dados.py --saida site/public/extensao/dados
           # Prévia do painel da extensão (/extensao/previa/): o painel de verdade, com os mesmos arquivos, ao lado de um PJe simulado (nada é gravado)

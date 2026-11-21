@@ -92,10 +92,10 @@
 
   function pintar() {
     var p = $('tu-pop'); if (!p) return;
-    var abas = [['al', 'Alertas'], ['pz', 'Prazos'], ['et', 'Etiquetas']];
+    var abas = [['al', 'Alertas'], ['pz', 'Prazos'], ['et', 'Etiquetas'], ['ver', 'Versão']];
     var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : '') + '</button>'; }).join('') +
       '<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div>';
-    h += '<div class="ap-c">' + (A.aba === 'al' ? pAlertas() : A.aba === 'pz' ? pPrazos() : pEtiquetas()) + '</div>';
+    h += '<div class="ap-c">' + (A.aba === 'al' ? pAlertas() : A.aba === 'pz' ? pPrazos() : A.aba === 'ver' ? pVersao() : pEtiquetas()) + '</div>';
     p.innerHTML = h;
   }
   function pAlertas() {
@@ -192,8 +192,44 @@
       if (i.dataset.qf === 'op') { colher(); pintar(); }
     });
     if (temChrome && chrome.storage.onChanged) chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'session' && ch['muta-alertas']) lerAlertas(); });
-    lerAlertas(); lerCfg();
+    lerAlertas(); lerCfg(); iniciarVersao();
     if (ses && ses.ouvir) ses.ouvir(function () { A.cat = null; A.res = {}; });
+  }
+
+  /* ---------- atualização sem chrome://extensions ----------
+     - os arquivos da pasta mudaram (atualizar-muta.cmd, ou ZIP extraído por cima): o manifest em disco traz versão
+       diferente da carregada → a extensão se recarrega sozinha;
+     - o site publica versão mais nova (/extensao/versao.json) → aviso na faixa do topo com o caminho. */
+  var VER = { local: '', site: '' };
+  function cmpV(a, b) { a = String(a).split('.').map(Number); b = String(b).split('.').map(Number); for (var i = 0; i < 3; i++) { var d = (a[i] || 0) - (b[i] || 0); if (d) return d; } return 0; }
+  function olharDisco() {
+    if (!temChrome || !chrome.runtime || !chrome.runtime.getURL) return;
+    fetch(chrome.runtime.getURL('manifest.json') + '?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (m) {
+      if (m && m.version && m.version !== VER.local) { try { chrome.runtime.reload(); } catch (e) {} }
+    }).catch(function () {});
+  }
+  function olharSite() {
+    var site = window.Muta && window.Muta.SITE; if (!site) return;
+    fetch(site + '/extensao/versao.json?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      VER.site = j && j.versao || ''; aviso();
+    }).catch(function () {});
+  }
+  function aviso() {
+    var t0 = $('topo-u'), b = $('tu-nova'); if (!t0) return;
+    var nova = VER.site && VER.local && cmpV(VER.site, VER.local) > 0;
+    if (!nova) { if (b) b.remove(); return; }
+    if (!b) { b = document.createElement('button'); b.type = 'button'; b.id = 'tu-nova'; b.className = 'tu-nova'; t0.insertBefore(b, $('tu-sino') || $('tu-st') || null);
+      b.addEventListener('click', function (e) { e.stopPropagation(); A.aba = 'ver'; abrir(true); }); }
+    b.textContent = '↑ ' + VER.site; b.title = 'Versão nova do Muta (' + VER.site + '; esta é ' + VER.local + '). Dê dois cliques em atualizar-muta.cmd, na pasta da extensão: o painel se recarrega sozinho.';
+  }
+  function pVersao() {
+    return '<p class="ap-v">Instalada: <b>' + esc(VER.local) + '</b>' + (VER.site ? ' · no site: <b>' + esc(VER.site) + '</b>' : '') + '</p>' +
+      (VER.site && cmpV(VER.site, VER.local) > 0 ? '<ol class="ap-ol"><li>Na pasta onde a extensão foi extraída, dê dois cliques em <b>atualizar-muta.cmd</b>.</li><li>Deixe este painel aberto: ele se recarrega sozinho em alguns segundos.</li><li>Recarregue a aba do PJe.</li></ol><small class="muted">Sem o arquivo (versões até 0.19.0): baixe o ZIP uma última vez e extraia sobre a mesma pasta.</small>' : '<small class="muted">Está em dia.</small>');
+  }
+  function iniciarVersao() {
+    try { VER.local = chrome.runtime.getManifest().version; } catch (e) { return; }
+    setInterval(olharDisco, 8000);
+    olharSite(); setInterval(olharSite, 30 * 60e3);
   }
 
   window.MutaAlertas = { resumoJa: resumoJa, esquecer: esquecer, htmlRoteiro: htmlRoteiro, catalogo: lerCatalogo, montar: montar, _A: A };

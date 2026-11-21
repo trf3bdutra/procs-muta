@@ -1192,3 +1192,6 @@ html[data-tema=escuro] .ap-a.al{background:#3a1d16;color:#f2a397;border-color:#6
 .etq-cat-h{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:5px}
 .etq-cs{display:flex;flex-wrap:wrap;gap:4px}
 html[data-tema=escuro] .tu-pop{background:#0d1f2b;border-color:#1e3747}html:not([data-tema=escuro]) .tu-pop{background:#fff}
+.tu-nova{all:unset;cursor:pointer;flex:none;margin-left:4px;padding:0 7px;height:24px;border-radius:7px;font:700 11px/24px var(--sans);background:hsl(160 40% 38%);color:#fff}
+.tu-nova:hover{filter:brightness(1.1)}
+.ap-ol{margin:4px 0 8px;padding-left:18px;display:grid;gap:3px}

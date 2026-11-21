@@ -202,3 +202,14 @@ test('extensão 0.19: selos da lista não pedem em laço o que o servidor não d
   const c = read('extensao/conteudo-pje.js');
   assert.match(c, /ENR\.pedidos\[k\] = agora/); assert.match(c, /agora - ENR\.pedidos\[k\] > 120e3/);
 });
+
+test('extensão 0.19.1: atualização sem chrome://extensions (atalho no pacote, recarga pelo manifest em disco, versão no site)', () => {
+  const cmd = read('extensao/atualizar-muta.cmd');
+  assert.match(cmd, /\r\n/, 'CRLF');
+  assert.match(cmd, /gabinete-cmt\.com\/extensao\/muta-pje\.zip/);
+  assert.ok(cmd.indexOf('/XF manifest.json') < cmd.indexOf('copy /y "%TMPD%\\manifest.json"'), 'manifest por último');
+  const al = read('extensao/alertas.js');
+  assert.match(al, /chrome\.runtime\.getURL\('manifest\.json'\)/); assert.match(al, /chrome\.runtime\.reload\(\)/); assert.match(al, /\/extensao\/versao\.json/);
+  assert.match(read('.github/workflows/vercel-caput.yml'), /site\/public\/extensao\/versao\.json/);
+  assert.match(read('.gitattributes'), /extensao\/\*\.cmd text eol=crlf/);
+});
