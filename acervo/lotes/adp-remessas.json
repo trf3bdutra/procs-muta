@@ -10258,12 +10258,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "MUNICIPIO DE MIRANDA",
    "assunto": "Fundo de Participação dos Municípios",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da Fazenda Nacional e remessa necessária · Município de Miranda · débito de PASEP (2007 a 2009, procedimento fiscal 0140100.2011.00457) declarado insubsistente por prescrição intercorrente administrativa (artigo 1º, § 1º, da Lei 9.873/1999) · restituição com Selic · honorários de 8% do proveito econômico",
+   "resultado": "Ato a proferir: apelação da Fazenda Nacional (ID 273801342) e remessa necessária da sentença ID 273801325; contrarrazões (ID 273801348) ‖ Proposta pelos precedentes: Voto: examinar a aplicação da prescrição intercorrente da Lei 9.873/1999 a processo administrativo fiscal de crédito tributário (artigo 5º da Lei 9.873/1999) — possível provimento [VALIDAR paradigma]; honorários [VALIDAR: Paradigma do STJ sobre a Lei 9.873/1999 e créditos tributários; Prazo do processo administrativo fiscal]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da Fazenda Nacional e remessa necessária da sentença que declarou prescrito, pela regra da prescrição intercorrente da Lei 9.873/1999, o débito de PASEP do Município de Miranda de 2007 a 2009 e mandou restituir os valores pagos. A Fazenda sustenta que a Lei 9.873/1999 não se aplica a crédito tributário.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10274,7 +10276,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — PASEP (município)",
+    "origem": "Tutela antecedente convertida em procedimento comum 5001772-32.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 273801325 (16/03/2023)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 273801342, 11/04/2023) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)",
+    "monocratica": "Possível, se houver tese do STJ sobre a inaplicabilidade da Lei 9.873/1999 a créditos tributários [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -10284,6 +10297,106 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tributário — PASEP de município: prescrição intercorrente no processo administrativo fiscal",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 273801347 · 12/04/2023 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 273801325 · 16/03/2023 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 273801348 · 09/05/2023 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prescrição intercorrente\" · Lei 9.873/1999 × crédito tributário (artigo 5º da Lei 9.873/1999; jurisprudência do STJ) [VALIDAR] · Sentença repetida (IDs 273801324 e 273801325) · Honorários contra a Fazenda (artigo 85, § 3º, do CPC)",
+   "teor": {
+    "sintese_fatica": "O Município de Miranda pediu o reconhecimento da prescrição do débito de PASEP apurado em procedimento fiscal de 2011 e a restituição. A tutela cautelar foi deferida; a sentença acolheu a prescrição intercorrente com base na Lei 9.873/1999.",
+    "inicial": "Ação do Município de Miranda contra a União (Fazenda Nacional).",
+    "decisao_recorrida": "Sentença ID 273801325 (16/03/2023): extinguiu sem mérito o pedido de excluir da base do PASEP valores de alienação de bens e retenções de todos os fundos; no mais, confirmou a tutela e julgou procedente para declarar insubsistente o débito de PASEP de 2007 a 2009 (procedimento fiscal 0140100.2011.00457) por prescrição intercorrente (artigo 1º, § 1º, da Lei 9.873/1999), com restituição pela Selic e honorários de 8% do proveito econômico.",
+    "recurso": "União (Fazenda Nacional) (ID 273801342, 11/04/2023): inocorrência da prescrição intercorrente administrativa (inaplicabilidade da Lei 9.873/1999 a crédito tributário); subsidiariamente, redução dos honorários.",
+    "resposta": "Contrarrazões do Município (ID 273801348).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Município: advogado Cláudio Roberto Nunes Golgo (OAB/RS 25.345).",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da Fazenda Nacional e remessa necessária · Município de Miranda · débito de PASEP (2007 a 2009, procedimento fiscal 0140100.2011.00457) declarado insubsistente por prescrição intercorrente administrativa (artigo 1º, § 1º, da Lei 9.873/1999) · restituição com Selic · honorários de 8% do proveito econômico",
+     "sintese": "O Município de Miranda pediu o reconhecimento da prescrição do débito de PASEP apurado em procedimento fiscal de 2011 e a restituição. A tutela cautelar foi deferida; a sentença acolheu a prescrição intercorrente com base na Lei 9.873/1999.",
+     "questoes": "1) Prescrição intercorrente no processo administrativo fiscal (Lei 9.873/1999, artigos 1º, § 1º, e 5º); 2) restituição e Selic; 3) honorários.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 273801342, 11/04/2023): inocorrência da prescrição intercorrente administrativa (inaplicabilidade da Lei 9.873/1999 a crédito tributário); subsidiariamente, redução dos honorários.",
+      "contrarrazoes": "Contrarrazões do Município (ID 273801348)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "273801325",
+      "juizo": "Tutela antecedente convertida em procedimento comum 5001772-32.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "extinguiu sem mérito o pedido de excluir da base do PASEP valores de alienação de bens e retenções de todos os fundos; no mais, confirmou a tutela e julgou procedente para declarar insubsistente o débito de PASEP de 2007 a 2009 (procedimento fiscal 0140100.2011.00457) por prescrição intercorrente (artigo 1º, § 1º, da Lei 9.873/1999), com restituição pela Selic e honorários de 8% do proveito econômico."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2020-03-02",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "273801342",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "273801325",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência parcial",
+       "id": "273801325",
+       "data": "2023-03-16"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "273801342",
+       "data": "2023-04-11"
+      },
+      {
+       "desc": "Contrarrazões do Município",
+       "id": "273801348",
+       "data": "2023-05-09"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 273801347 · 12/04/2023 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 273801325 · 16/03/2023 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 273801348 · 09/05/2023 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prescrição intercorrente\" · Lei 9.873/1999 × crédito tributário (artigo 5º da Lei 9.873/1999; jurisprudência do STJ) [VALIDAR] · Sentença repetida (IDs 273801324 e 273801325) · Honorários contra a Fazenda (artigo 85, § 3º, do CPC)",
+     "assuntoDet": "Tributário — PASEP de município: prescrição intercorrente no processo administrativo fiscal",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 273801347 · 12/04/2023 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 273801325 · 16/03/2023 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 273801348 · 09/05/2023",
+    "ultima_informacao": "Certidão · ID 273801331 · 17/03/2023",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 273801347 · 12/04/2023 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 273801325 · 16/03/2023 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 273801348 · 09/05/2023 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -10295,12 +10408,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "ATVOS BIOENERGIA SANTA LUZIA S.A.",
    "assunto": "Funrural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · agroindústria sucroenergética · FUNRURAL, RAT e SENAR (artigo 22-A da Lei 8.212/1991) sobre receitas de créditos de descarbonização (CBIOs) · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da Fazenda Nacional (ID 381089697) e remessa necessária da sentença ID 381089692; contrarrazões (ID 381089699); MPF pelo prosseguimento (ID 382738407) ‖ Proposta pelos precedentes: Voto: examinar se as receitas dos CBIOs compõem a receita bruta da comercialização da produção (artigo 22-A da Lei 8.212/1991) [VALIDAR paradigma] [VALIDAR: Paradigma sobre CBIOs e contribuições do artigo 22-A; Pedido de despacho pendente (etiqueta)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da Fazenda Nacional e remessa necessária da sentença que afastou FUNRURAL, RAT e SENAR sobre as receitas da emissão e revenda de créditos de descarbonização (CBIOs) por agroindústrias sucroenergéticas. A Fazenda sustenta que essas receitas integram a receita bruta tributável.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10311,7 +10426,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — contribuições previdenciárias (agroindústria)",
+    "origem": "Mandado de segurança 5003131-41.2025.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 381089692 (30/03/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 381089697, 28/05/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)",
+    "monocratica": "Possível, se houver jurisprudência dominante (precedente da 3ª Turma citado nas contrarrazões) [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -10321,6 +10447,117 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tributário — contribuições do artigo 22-A da Lei 8.212/1991 sobre receitas de CBIOs",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 381089692 · 30/03/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 382738407 · 26/06/2026 | última movimentação: 26/06/2026 15:03 · Conclusos para julgamento · Etiquetas \"APTO - CONFERIR\" e \"Pedido de Despacho\" · Precedente da 3ª Turma citado nas contrarrazões (ApCiv 5028277-80.2022.4.03.6100) [VALIDAR] · Natureza dos CBIOs (Lei 13.576/2017, RenovaBio)",
+   "teor": {
+    "sintese_fatica": "A Atvos Bioenergia Santa Luzia S.A. e outra, agroindústrias de açúcar e etanol, impetraram mandado de segurança contra a incidência das contribuições do artigo 22-A da Lei 8.212/1991 sobre as receitas dos CBIOs. A liminar foi deferida em 24/04/2025.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal em Campo Grande [VALIDAR].",
+    "decisao_recorrida": "Sentença ID 381089692 (30/03/2026): concedeu a segurança para afastar FUNRURAL, RAT e SENAR sobre os ingressos da emissão primária e da revenda de créditos de descarbonização (CBIOs) [VALIDAR compensação].",
+    "recurso": "União (Fazenda Nacional) (ID 381089697, 28/05/2026): as receitas dos CBIOs integram a receita bruta da agroindústria sujeita ao artigo 22-A da Lei 8.212/1991 [VALIDAR].",
+    "resposta": "Contrarrazões das impetrantes (ID 381089699).",
+    "parecer": "MPF ID 382738407: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrantes assistidas por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · agroindústria sucroenergética · FUNRURAL, RAT e SENAR (artigo 22-A da Lei 8.212/1991) sobre receitas de créditos de descarbonização (CBIOs) · liminar deferida · segurança concedida",
+     "sintese": "A Atvos Bioenergia Santa Luzia S.A. e outra, agroindústrias de açúcar e etanol, impetraram mandado de segurança contra a incidência das contribuições do artigo 22-A da Lei 8.212/1991 sobre as receitas dos CBIOs. A liminar foi deferida em 24/04/2025.",
+     "questoes": "1) Incidência de FUNRURAL, RAT e SENAR (artigo 22-A da Lei 8.212/1991) sobre receitas de CBIOs.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 381089697, 28/05/2026): as receitas dos CBIOs integram a receita bruta da agroindústria sujeita ao artigo 22-A da Lei 8.212/1991 [VALIDAR].",
+      "contrarrazoes": "Contrarrazões das impetrantes (ID 381089699)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "381089692",
+      "juizo": "Mandado de segurança 5003131-41.2025.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para afastar FUNRURAL, RAT e SENAR sobre os ingressos da emissão primária e da revenda de créditos de descarbonização (CBIOs) [VALIDAR compensação]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-04-09",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "381089697",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "381089692",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "381089685",
+       "data": "2025-04-24"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "381089692",
+       "data": "2026-03-30"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "381089697",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Contrarrazões das impetrantes",
+       "id": "381089699",
+       "data": "2026-06-18"
+      },
+      {
+       "desc": "Parecer do MPF (prosseguimento)",
+       "id": "382738407",
+       "data": "2026-06-26"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 381089692 · 30/03/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 382738407 · 26/06/2026 | última movimentação: 26/06/2026 15:03 · Conclusos para julgamento · Etiquetas \"APTO - CONFERIR\" e \"Pedido de Despacho\" · Precedente da 3ª Turma citado nas contrarrazões (ApCiv 5028277-80.2022.4.03.6100) [VALIDAR] · Natureza dos CBIOs (Lei 13.576/2017, RenovaBio)",
+     "assuntoDet": "Tributário — contribuições do artigo 22-A da Lei 8.212/1991 sobre receitas de CBIOs",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "382738407",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "26/06/2026 15:03 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 381089692 · 30/03/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 382738407 · 26/06/2026",
+    "ultima_informacao": "Informação · ID 381089700 · 18/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 381089692 · 30/03/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 382738407 · 26/06/2026 | última movimentação: 26/06/2026 15:03 · Conclusos para julgamento"
    }
   },
   {
@@ -10332,12 +10569,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "INFLEX INDUSTRIA E COMERCIO DE EMBALAGENS LTDA",
    "assunto": "ICMS/ Imposto sobre Circulação de Mercadorias",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · exclusão do crédito presumido de ICMS (incentivo de MS) da base do IRPJ e da CSLL após a Lei 14.789/2023 · compensação desde 01/01/2024 · liminar indeferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da Fazenda Nacional (ID 366682387) e remessa necessária da sentença ID 366682131; contrarrazões (ID 366682389); MPF pelo prosseguimento (ID 369368871) ‖ Proposta pelos precedentes: Voto: examinar a exclusão do crédito presumido de ICMS da base do IRPJ e da CSLL após a Lei 14.789/2023; verificar antes eventual afetação ou repercussão geral pendente que imponha sobrestamento [VALIDAR] [VALIDAR: Afetação pendente sobre a Lei 14.789/2023; Paradigma do Tribunal]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da Fazenda Nacional e remessa necessária da sentença que manteve a exclusão do crédito presumido de ICMS da base do IRPJ e da CSLL mesmo após a Lei 14.789/2023, com compensação desde 2024. A Fazenda defende a nova lei.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10348,7 +10587,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — IRPJ e CSLL",
+    "origem": "Mandado de segurança 5003263-35.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 366682131 (15/12/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 366682387, 06/03/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)",
+    "monocratica": "Não: tema novo após a Lei 14.789/2023 [VALIDAR afetação ou tese pendente]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -10358,6 +10608,117 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tributário — crédito presumido de ICMS na base do IRPJ e da CSLL após a Lei 14.789/2023",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366682131 · 15/12/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369368871 · 27/04/2026 | última movimentação: 27/04/2026 12:30 · Conclusos para decisão · Lei 14.789/2023 × EREsp 1.517.492/STJ (pacto federativo) [VALIDAR] · Tema afetado no STF ou STJ sobre a Lei 14.789/2023? (eventual sobrestamento) [VALIDAR] · Ilegitimidade do PGFN reconhecida",
+   "teor": {
+    "sintese_fatica": "A Inflex Indústria e Comércio de Embalagens Ltda., no lucro real e beneficiária de crédito presumido de ICMS de Mato Grosso do Sul, impetrou mandado de segurança para excluí-lo da base do IRPJ e da CSLL depois da Lei 14.789/2023. A liminar foi indeferida (ID 366682117).",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 366682131 (15/12/2025): extinguiu sem mérito quanto ao Procurador-Geral da Fazenda Nacional (ilegitimidade) e concedeu a segurança para excluir o crédito presumido de ICMS da base do IRPJ (com adicional) e da CSLL após a Lei 14.789/2023, com compensação desde 01/01/2024 e ajuste de prejuízo fiscal e base negativa.",
+    "recurso": "União (Fazenda Nacional) (ID 366682387, 06/03/2026): validade da Lei 14.789/2023, que passou a tributar as subvenções, inclusive o crédito presumido de ICMS [VALIDAR fundamentos].",
+    "resposta": "Contrarrazões da impetrante (ID 366682389).",
+    "parecer": "MPF ID 369368871: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · exclusão do crédito presumido de ICMS (incentivo de MS) da base do IRPJ e da CSLL após a Lei 14.789/2023 · compensação desde 01/01/2024 · liminar indeferida · segurança concedida",
+     "sintese": "A Inflex Indústria e Comércio de Embalagens Ltda., no lucro real e beneficiária de crédito presumido de ICMS de Mato Grosso do Sul, impetrou mandado de segurança para excluí-lo da base do IRPJ e da CSLL depois da Lei 14.789/2023. A liminar foi indeferida (ID 366682117).",
+     "questoes": "1) Exclusão do crédito presumido de ICMS da base do IRPJ e da CSLL após a Lei 14.789/2023; 2) compensação e ajuste de prejuízo fiscal.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 366682387, 06/03/2026): validade da Lei 14.789/2023, que passou a tributar as subvenções, inclusive o crédito presumido de ICMS [VALIDAR fundamentos].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 366682389)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "366682131",
+      "juizo": "Mandado de segurança 5003263-35.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "extinguiu sem mérito quanto ao Procurador-Geral da Fazenda Nacional (ilegitimidade) e concedeu a segurança para excluir o crédito presumido de ICMS da base do IRPJ (com adicional) e da CSLL após a Lei 14.789/2023, com compensação desde 01/01/2024 e ajuste de prejuízo fiscal e base negativa."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-05-02",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "366682387",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "366682131",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "366682117",
+       "data": "2024-05-29"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "366682131",
+       "data": "2025-12-15"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "366682387",
+       "data": "2026-03-06"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "366682389",
+       "data": "2026-04-06"
+      },
+      {
+       "desc": "Parecer do MPF (prosseguimento)",
+       "id": "369368871",
+       "data": "2026-04-27"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366682131 · 15/12/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369368871 · 27/04/2026 | última movimentação: 27/04/2026 12:30 · Conclusos para decisão · Lei 14.789/2023 × EREsp 1.517.492/STJ (pacto federativo) [VALIDAR] · Tema afetado no STF ou STJ sobre a Lei 14.789/2023? (eventual sobrestamento) [VALIDAR] · Ilegitimidade do PGFN reconhecida",
+     "assuntoDet": "Tributário — crédito presumido de ICMS na base do IRPJ e da CSLL após a Lei 14.789/2023",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "369368871",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "27/04/2026 12:30 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 366682131 · 15/12/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 369368871 · 27/04/2026",
+    "ultima_informacao": "Certidão · ID 368682948 · 24/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366682131 · 15/12/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369368871 · 27/04/2026 | última movimentação: 27/04/2026 12:30 · Conclusos para decisão"
    }
   },
   {
