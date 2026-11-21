@@ -12,6 +12,7 @@ test('Caput é a central principal e preserva módulos existentes',()=>{
   }
   assert.ok(page.includes("D.title = 'Caput · ' + tit"));
 });
+
 test('A entrada Caput abre a Chefia (com os relatórios da antiga Inteligência) e cada aba tem caminho próprio em /caput/',()=>{
   assert.ok(page.includes("if (/^\\/caput$/.test(p)) return 'chefia';"),'/caput abre a Chefia');
   assert.ok(page.includes('function vRelatorios()')&&page.includes("abas:['escopo','destino','acervo','etiquetas']")&&page.includes('function calForense()')&&page.includes("abas:['equipe','designacao','produtividade']"),'Inteligência na Chefia; equipe e regras na Coordenação');
@@ -19,18 +20,21 @@ test('A entrada Caput abre a Chefia (com os relatórios da antiga Inteligência)
   assert.ok(page.includes("history.pushState(null, '', alvo + location.search)"),'troca de aba muda o caminho');
   assert.ok(page.includes("location.hash"),'endereços antigos com # continuam valendo');
 });
+
 test('Caput é servido sem duplicar APIs ou motor',()=>{
   for(const x of ['site/public/caput/index.html','site/public/monitor/triagem/index.html'])assert.ok(wf.includes(x),x);
   assert.ok(wf.includes('"rewrites":[{"source":"/caput/:aba(triagem|pautas|coordenacao|comunicacao|inteligencia|chefia|escaninhos)","destination":"/caput/index.html"}'),'abas do Caput por caminho');
   for(const x of ['/init/assets/js/regras-gerais.js','/init/assets/js/gh-ponte.js'])assert.ok(page.includes(x),x);
   assert.ok(legacy.includes("location.replace('/caput/' + location.hash)"));
 });
+
 test('Rotas históricas redirecionam à central sem alterar os dados',()=>{
   for(const x of ['"/triagem","destination":"/caput/triagem"','"/pautas","destination":"/caput/pautas"'])assert.ok(wf.includes(x),x);
   const script=[...page.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
   assert.ok(script.length>0);
   script.forEach((m,i)=>new vm.Script(m[1],{filename:'caput-script-'+i+'.js'}));
 });
+
 test('Triagem: aba única com visão geral recolhível, escaninhos como sub-aba e exportação num ícone',()=>{
   assert.ok(page.includes("$('#abas').innerHTML = tabEsc();")&&!page.includes("t('fila', 'Triagem'"),'Triagem é a página; só Escaninhos é sub-aba');
   assert.ok(page.includes('function visaoGeral()')&&page.includes('vInicio(true)'),'visão geral do antigo Início na Triagem');
@@ -97,6 +101,12 @@ test('Calendário recolhido deixa a faixa da semana atual; Regras gerais com o f
 test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por mês',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.cg-cal .cc-body{background:var(--p)}.cg-cal .cc-2m>div')&&cap.includes('.cg-cal .cc-esq .cc-esq-b{top:56px!important}'),'painéis por mês');
+});
+
+test('Calendário da Chefia: hoje só com o número em pílula; nomes de feriado curtos, numa linha',()=>{
+  const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
+  assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('<span class="cc-n"><b>${dd}</b>'),'número separado');
+  const cap=r('caput/triagem/index.html'); assert.ok(cap.includes('.cg-cal .cc-hoje .cc-n b{')&&cap.includes("replace(/^Dia Nacional de Zumbi e da /, '')"),'pílula e nomes curtos');
 });
 
 test('Designação: categorias de julgamento sem responsável aparecem nas regras; faixa da etapa 4 numa linha',()=>{
