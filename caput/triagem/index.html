@@ -2985,8 +2985,10 @@ function painelEmTriagem() {
   return '<div class="tri-em tri-em2" id="tri-em"><aside class="tri-lado" aria-label="Triagem: coleções">'+(sl?'<div class="tri-caixa">'+sl+'</div>':'')+navLado()+'</aside><div class="tri-em-corpo" id="tri-em-corpo">'+conteudoSubAba()+'</div></div>';
 }
 /* abas A triar | Triados | Seleção prévia: primeira faixa do painel de métricas e filtros de cada vista */
+const temTriC = (it) => !!((it.triagem && Object.keys(it.triagem).length) || (it.prontuario_triagem && Object.keys(it.prontuario_triagem).length) || (it.teor && Object.keys(it.teor).length));
+function nTriados() { const D = _colD.triados; if (!D) return '…'; const v = new Set(); D.lotes.filter((l) => !/^adp-serie-/.test(l.id)).forEach((l) => (l.itens || []).forEach((it) => { if (temTriC(it)) v.add(it.processo); })); return v.size; }
 function abasTri() {
-  return [{id:'triar', r:'A triar', n:U?U.length:0}, {id:'triados', r:'Triados', n:_triCache?_triCache.items.size:somaIdx('triados')}, {id:'selecao', r:'Seleção prévia', n:_selCache?_selCache.items.size:somaIdx('selecao')}].map((t) => Object.assign(t, { on: TRI_SUBABA === t.id }));
+  return [{id:'triar', r:'A triar', n:U?U.length:0}, {id:'triados', r:'Triados', n:nTriados()}, {id:'selecao', r:'Seleção prévia', n:_selCache?_selCache.items.size:somaIdx('selecao')}].map((t) => Object.assign(t, { on: TRI_SUBABA === t.id }));
 }
 function abasTriHtml() {
   return '<div class="at-abas" role="tablist">' + abasTri().map((t) => '<button type="button" data-trisub="' + t.id + '" role="tab" aria-selected="' + t.on + '">' + t.r + '<small>' + (typeof t.n === 'number' ? nf(t.n) : t.n) + '</small></button>').join('') + '</div>';
@@ -3012,7 +3014,7 @@ function navLado() {
   if (TRI_SUBABA === 'triar') { const sel = LS.get('tri_triar_tarefa', ''), n = sel ? (tarefasTriar().find((x) => x[0] === sel) || [0, 0])[1] : (U || []).length; return '<div class="tri-nav">' + k(nf(n) + ' de ' + nf((U || []).length) + ' processos') + '</div>'; }
   if (!_triIdx) { carregarIdxLotes(); return '<div class="tri-nav">' + k('Carregando as coleções…') + '</div>'; }
   const sub = TRI_SUBABA, sel = colSel(sub), D = _colD[sub], G = gruposLotes(sub);
-  const nDe = (x) => { const l = D && D.lotes.find((y) => y.id === x.id); return l ? (l.itens || []).length : (x.n || 0); };
+  const nDe = (x) => { const l = D && D.lotes.find((y) => y.id === x.id); return l ? (sub === 'triados' ? (l.itens || []).filter(temTriC).length : (l.itens || []).length) : (x.n || 0); };
   const tot = [].concat(...G.map((g) => g[1])).reduce((a, x) => a + nDe(x), 0);
   const bt = (id, r, n) => '<button type="button" class="tri-ir" data-trilote="' + esc(id) + '" aria-current="' + (sel === id) + '"><span>' + esc(r) + '</span> <small>' + nf(n) + '</small></button>';
   const tit = (x) => String(x.titulo || x.id).replace(/^(Analisar decisão|Série|Seleção prévia) · /, '');
@@ -4942,7 +4944,7 @@ function render(){
   const D=S.D, L=lotesVis(), tot=todos();
   const tarefas=[...new Set(D.lotes.map(l=>l.tarefa||'Triagem'))];
   const l1=!varios()&&L[0];
-  const itensL=L.flatMap(l=>l.itens), vis=L.reduce((n,l)=>n+filtra(l).length,0);
+  const itensL=L.flatMap(l=>l.itens).filter(it=>!S.tri||(S.tri==='sim'?temTri(it):!temTri(it))), vis=L.reduce((n,l)=>n+filtra(l).length,0);
   const comTri=itensL.filter(temTri).length, comGr=itensL.filter(i=>i.grupo).length, comMin=itensL.filter(i=>i.minuta).length, pend=itensL.reduce((n,i)=>n+nVal(i),0);
   const grupos=l1?(l1.grupos||[]):[], cols=l1?(l1.colunas||[]):[...new Map(L.flatMap(l=>l.colunas||[]).map(c=>[c.id,c])).values()];
   $('#app').innerHTML=`<div class="pg">
@@ -4953,12 +4955,12 @@ function render(){
    ${l1&&l1.descricao?`<p class="lead">${esc(l1.descricao)}</p>`:''}
    <div class="box">
     ${(OPC.abas||[]).length?`<div class="abas" role="tablist">${OPC.abas.map(t=>`<button type="button" data-aba="${esc(t.id)}" role="tab" aria-selected="${!!t.on}">${esc(t.r)}<small>${esc(typeof t.n==="number"?t.n.toLocaleString("pt-BR"):t.n)}</small></button>`).join("")}</div>`:""}
-    <div class="met"><div><span>Processos</span><b>${itensL.length}</b></div><div><span>Com triagem feita</span><b>${comTri}</b></div><div><span>Classificados em grupo</span><b>${comGr}</b></div><div><span>Grupos</span><b>${L.reduce((n,l)=>n+(l.grupos||[]).length,0)}</b></div><div><span>Pendências</span><b>${pend}</b></div><div><span>Minutas</span><b>${comMin}</b></div></div>
+    <div class="met"><div><span>${S.tri==='sim'?'Processos triados':S.tri==='nao'?'Processos a triar':'Processos'}</span><b>${itensL.length}</b></div><div><span>Com triagem feita</span><b>${comTri}</b></div><div><span>Classificados em grupo</span><b>${comGr}</b></div><div><span>Grupos</span><b>${L.reduce((n,l)=>n+(l.grupos||[]).length,0)}</b></div><div><span>Pendências</span><b>${pend}</b></div><div><span>Minutas</span><b>${comMin}</b></div></div>
     <div class="ph">
      <label class="bq"><span class="sr">Buscar</span><input type="search" id="q" placeholder="processo, parte, assunto, tipo de caso, observação, triagem…" value="${esc(S.q)}"></label>
      ${grupos.length?`<select class="sel" id="fg"><option value="">Todos os grupos</option>${grupos.map(g=>`<option value="${esc(g.id)}"${S.grupo===g.id?' selected':''}>${esc(g.rotulo.slice(0,80))}</option>`).join('')}<option value="__"${S.grupo==='__'?' selected':''}>${esc((l1.grupo_outros||{}).rotulo||'Não classificados')}</option></select>`:''}
      ${cols.length?`<select class="sel" id="fc"><option value="">Todas as variações</option>${cols.map(c=>`<option value="${esc(c.id)}"${S.col===c.id?' selected':''}>${esc(c.rotulo)}</option>`).join('')}</select>`:''}
-     <select class="sel" id="ft"><option value="">Triados e a triar</option><option value="sim"${S.tri==='sim'?' selected':''}>Só com triagem feita</option><option value="nao"${S.tri==='nao'?' selected':''}>Só a triar</option></select>
+     <select class="sel" id="ft"><option value="sim"${S.tri==='sim'?' selected':''}>Só com triagem feita</option><option value="">Com triagem e a triar</option><option value="nao"${S.tri==='nao'?' selected':''}>Só a triar</option></select>
      <span class="seg" role="group" aria-label="Exibição"><button type="button" id="exp">Expandir grupos</button><button type="button" id="rec">Recolher</button><i></i><button type="button" id="todos">Abrir todos os processos</button><button type="button" id="nenhum">Fechar</button></span>
     </div>
     <p class="vazio" style="padding:10px 0 0;font-style:normal;font-size:12px">${vis} de ${itensL.length} processos no filtro. Clique numa linha para ver tudo o que foi registrado do processo.</p>
@@ -5065,7 +5067,7 @@ function ligar(){
 
   function montar(host, D, o) {
     o = o || {}; OPC = o; const chave = o.chave || 'triados';
-    S = ESTADOS[chave] || (ESTADOS[chave] = { lote: '', q: '', grupo: '', col: '', tri: '', abertos: new Set(), fechados: new Set(), D: null });
+    S = ESTADOS[chave] || (ESTADOS[chave] = { lote: '', q: '', grupo: '', col: '', tri: chave === 'triados' ? 'sim' : '', abertos: new Set(), fechados: new Set(), D: null });
     if (S.D !== D) { D.lotes.forEach((l) => (l.itens || []).forEach((it) => { if (it._h) return; it._l = l; it._h = sem(JSON.stringify([it.processo, it.partes, it.assunto, it.assunto_detalhado, it.tipo_caso, it.observacao, it.resultado, it.especificidades, it.peculiaridades, it.etiquetas, it.triagem, it.teor])); })); S.D = D; }
     if (o.lote != null && o.lote !== S.lote) { S.lote = o.lote; S.grupo = ''; S.col = ''; }
     root = host.shadowRoot || host.attachShadow({ mode: 'open' });
