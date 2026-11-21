@@ -352,6 +352,8 @@
           : k === 'desig' ? { schema: 'gabcmt.regras.designacao', versao: 1, atualizadoEm: agora, criterios: S.desig }
           : { schema: 'gabcmt.equipe', versao: 1, atualizadoEm: agora, registros: S.equipe }, null, 1) + '\n';
       });
+      /* marca do que foi de fato enviado: alteração feita durante a gravação (outra designação, outra regra) continua pendente e vai na próxima */
+      var HS = {}; P.forEach(function (k) { if (k.indexOf('del:') !== 0) HS[k] = hash(conteudo(k)); });
       if (P.some(function (k) { return k === 'cal' || /^(ses|del):/.test(k); })) {
         var op = null; try { op = JSON.parse(await W.ProcsMuta.ler('acervo/operacional.json')); } catch (e) {}
         if (op && op.schema === 'gabA.operacional') {
@@ -373,7 +375,7 @@
         }
       }
       await W.ProcsMuta.gravar(files, 'Ab Initio: ' + P.map(rotulo).join(', '));
-      P.forEach(function (k) { if (k.indexOf('del:') === 0) delete S.sync['ses:' + k.slice(4)]; else S.sync[k] = hash(conteudo(k)); });
+      P.forEach(function (k) { if (k.indexOf('del:') === 0) delete S.sync['ses:' + k.slice(4)]; else S.sync[k] = HS[k]; });
       S.apagadas = (S.apagadas || []).filter(function (d) { return P.indexOf('del:' + d) < 0; });
       salvar(); toast('Gravado no procs-muta: ' + P.map(rotulo).join(', ') + '.'); RES = { ok: true, partes: P.map(rotulo), em: new Date().toISOString() };
     } catch (e) { toast('Falha ao gravar: ' + e.message); RES = { ok: false, erro: e.message }; }
