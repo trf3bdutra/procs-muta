@@ -2977,12 +2977,14 @@
    "exequente": "WILTON TOMIKAWA",
    "executado": "AGENCIA NACIONAL DE VIGILANCIA SANITARIA - ANVISA",
    "assunto": "Adicional de Periculosidade",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Wilton Tomikawa em procedimento comum (Adicional de Periculosidade) · pedido julgado improcedente",
+   "resultado": "Ato a proferir: apelação de Wilton Tomikawa (ID 292569939) da sentença ID 292569932; contrarrazões (ID 292569937, ID 292569945); parecer do MPF (ID 371498998) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença)] [VALIDAR: a peça recursal veio intitulada \"recurso inominado\" em procedimento comum; recebida como apelação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Wilton Tomikawa contra sentença (pedido julgado improcedente): Diante do exposto, julgo improcedente o pedido inicial, resolvendo o mérito e extinguindo o processo, na forma do art. 487, I, do CPC.Condeno o autor ao pagamento de honorários advocatícios, que fixo em 10% sobre o valor atribuído à causa n",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2993,9 +2995,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Administrativo — servidor público",
+    "origem": "Procedimento comum 5010886-29.2019.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 292569932 (07/10/2022)",
+    "recurso": "apelação de Wilton Tomikawa (ID 292569939, 15/05/2023)",
+    "preparo": "Wilton Tomikawa: Justiça gratuita (afirmada na apelação) [VALIDAR deferimento]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Wilton Tomikawa: Justiça gratuita (afirmada na apelação) [VALIDAR deferimento] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Recurso intitulado \"recurso inominado\" (fungibilidade)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -3003,6 +3018,179 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Adicional de Periculosidade — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 369609331 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 371498998 · 06/05/2026 | última movimentação: 06/05/2026 18:54 · Conclusos para decisão · Embargos de declaração julgados (ID 292569938) · Laudo pericial: ID 292569866, 292569872 · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+   "teor": {
+    "sintese_fatica": "[VALIDAR síntese] WILTON TOMIKAWA x AGENCIA NACIONAL DE VIGILANCIA SANITARIA - ANVISA",
+    "inicial": "Procedimento comum ajuizado(a) em 18/12/2019 (WILTON TOMIKAWA x AGENCIA NACIONAL DE VIGILANCIA SANITARIA - ANVISA).",
+    "decisao_recorrida": "Sentença ID 292569932 (07/10/2022): Diante do exposto, julgo improcedente o pedido inicial, resolvendo o mérito e extinguindo o processo, na forma do art. 487, I, do CPC.Condeno o autor ao pagamento de honorários advocatícios, que fixo em 10% sobre o valor atribuído à causa nos termos do art. 85, § 4º, III, do CPC.Custas pelo autor.Sentença não sujeita à remessa necessária, na forma do art. 496 do CPC.",
+    "recurso": "Wilton Tomikawa (ID 292569939, 15/05/2023): tópicos: 3.533-B Egrégia Turma Recursal Do Juizado Especial De Campo Grande Ms.",
+    "resposta": "Contrarrazões: ID 292569937 (01/11/2022); ID 292569945 (20/06/2024).",
+    "parecer": "MPF ID 371498998: Pelo desprovimento [VALIDAR]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Wilton Tomikawa: Justiça gratuita (afirmada na apelação) [VALIDAR deferimento]."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Wilton Tomikawa em procedimento comum (Adicional de Periculosidade) · pedido julgado improcedente",
+     "sintese": "[VALIDAR síntese] WILTON TOMIKAWA x AGENCIA NACIONAL DE VIGILANCIA SANITARIA - ANVISA",
+     "questoes": "[VALIDAR questões] Adicional de Periculosidade",
+     "rel": {
+      "razoes": "Wilton Tomikawa (ID 292569939, 15/05/2023): tópicos: 3.533-B Egrégia Turma Recursal Do Juizado Especial De Campo Grande Ms.",
+      "contrarrazoes": "Contrarrazões: ID 292569937 (01/11/2022); ID 292569945 (20/06/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "292569932",
+      "juizo": "Procedimento comum 5010886-29.2019.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo improcedente o pedido inicial, resolvendo o mérito e extinguindo o processo, na forma do art. 487, I, do CPC.Condeno o autor ao pagamento de honorários advocatícios, que fixo em 10% sobre o valor atribuído à causa nos termos do art. 85, § 4º, III, do CPC.Custas pelo autor.Sentença não sujeita à remessa necessária, na forma do art. 496 do CPC."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Wilton Tomikawa",
+       "tipo": "Apelação",
+       "id": "292569939",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "292569857",
+       "data": "2019-12-18",
+       "pje": {
+        "tipo": "Petição Inicial"
+       },
+       "trecho": "Ante o exposto, requer: a)O deferimento do pedido da JUSTIÇA GRATUITA por se tratar de pessoa sem condições de patrocinar o presente feito, sem prejuízo do seu próprio sustento, haja visto os argumentos expostos acima. b) A procedência total da presente Ação, condenando a Requerida ao pagamento do …"
+      },
+      {
+       "desc": "Decisão: gratuidade deferida",
+       "id": "292569861",
+       "data": "2021-03-05",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Com a vinda das contestações, intime-se a parte autora para, no prazo de 15 dias, apresentar impugnação à contestação, devendo nessa oportunidade indicar os pontos controvertidos da lide, especificando as provas que pretende produzir e justificando sua pertinência. Em seguida, intime-se o réu, no …"
+      },
+      {
+       "desc": "Laudo pericial",
+       "id": "292569872",
+       "data": "2021-08-02",
+       "nota": "Embargos de declaração julgados (ID 292569938) · Laudo pericial: ID 292569866, 292569872 · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+       "pje": {
+        "tipo": "Documento Comprobatório",
+        "descricao": "THOMIKAWALAUDO",
+        "paginas": 5,
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Sentença",
+       "id": "292569932",
+       "data": "2022-10-07",
+       "nota": "Sentença ID 292569932 (07/10/2022): Diante do exposto, julgo improcedente o pedido inicial, resolvendo o mérito e extinguindo o processo, na forma do art. 487, I, do CPC.Condeno o autor ao pagamento de honorários advocatícios, que fixo em 10% sobre o valor atribuído à causa nos termos do art. 85, § 4º, III, do CPC.Custas pelo autor.Sentença não sujeita à remessa necessária, na forma do art. 496 do CPC.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo improcedente o pedido inicial, resolvendo o mérito e extinguindo o processo, na forma do art. 487, I, do CPC.Condeno o autor ao pagamento de honorários advocatícios, que fixo em 10% sobre o valor atribuído à causa nos termos do art. 85, § 4º, III, do CPC.Custas pelo …"
+      },
+      {
+       "desc": "Decisão nos embargos de declaração",
+       "id": "292569938",
+       "data": "2023-05-05",
+       "nota": "Embargos de declaração julgados (ID 292569938) · Laudo pericial: ID 292569866, 292569872 · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, rejeito os embargos de declaração.Sem reabertura de prazo recursal.Publique-se e intimem-se. Oportunamente, arquivem-se. Campo Grande/MS, datado e assinado conforme certificado digital."
+      },
+      {
+       "desc": "Apelação de Wilton Tomikawa",
+       "id": "292569939",
+       "data": "2023-05-15",
+       "nota": "Wilton Tomikawa (ID 292569939, 15/05/2023): tópicos: 3.533-B Egrégia Turma Recursal Do Juizado Especial De Campo Grande Ms.",
+       "pje": {
+        "tipo": "Recurso inominado"
+       },
+       "trecho": "requerente na forma legal Termos em que se pede e espera D E F E R I M E N T O Campo Grane MS 15 de maio de 2023 Paulo Tadeu de Barros Mainardi Nagata OAB MS 3.533-B Ricardo Youssef Ibrahim OAB MS 4.660"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "292569937",
+       "data": "2022-11-01",
+       "nota": "Contrarrazões: ID 292569937 (01/11/2022); ID 292569945 (20/06/2024).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "requer-se que os embargos de declaração da parte autora não se conhecidos e se, conhecidos, sejam improvidos, pelas razões acima expostas. São Paulo, 01 de novembro de 2022. CELSO HENRIQUES SANT'ANNA PROCURADOR FEDERAL"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "292569945",
+       "data": "2024-06-20",
+       "nota": "Contrarrazões: ID 292569937 (01/11/2022); ID 292569945 (20/06/2024).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 5
+       },
+       "trecho": "Requer a ré o improvimento do recurso inominado da parte autora, para que seja mantida a sentença de improcedência. Campo Grande, 19 de junho de 2024. LUIZA CONCI PROCURADOR FEDERAL"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "371498998",
+       "data": "2026-05-06",
+       "nota": "MPF ID 371498998: Pelo desprovimento [VALIDAR]",
+       "pje": {
+        "tipo": "Parecer de Mérito",
+        "descricao": "MP",
+        "paginas": 5
+       },
+       "trecho": "Ante o exposto, o Ministério Público Federal, pela procuradora regional signatária, manifesta-se pelo não provimento do recurso. São Paulo, 06 de maio de 2026. ( assinado digitalmente ) Zélia Luiza Pierdoná PROCURADORA REGIONAL DA REPÚBLICA 5 Documento assinado via Token digitalmente por ZELIA …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 369609331 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 371498998 · 06/05/2026 | última movimentação: 06/05/2026 18:54 · Conclusos para decisão · Embargos de declaração julgados (ID 292569938) · Laudo pericial: ID 292569866, 292569872 · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "Adicional de Periculosidade — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "371498998",
+     "parecerSentido": "Pelo desprovimento [VALIDAR]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "06/05/2026 18:54 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 369609331 · 28/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 371498998 · 06/05/2026",
+    "ultima_informacao": "Certidão · ID 292642707 · 21/06/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 369609331 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 371498998 · 06/05/2026 | última movimentação: 06/05/2026 18:54 · Conclusos para decisão"
    }
   },
   {
@@ -8505,12 +8693,14 @@
    "exequente": "WALTER CRUZ",
    "executado": "BANCO DO BRASIL SA",
    "assunto": "Cédula de Crédito Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Crédito rural · cédula de crédito rural · Walter Cruz contra União (Fazenda Nacional), Estado de Mato Grosso do Sul e Banco do Brasil · processo da Justiça Estadual (0000078-15.2014.8.12.0027) remetido ao Tribunal",
+   "resultado": "Ato a proferir: os autos vieram da Justiça Estadual em seis volumes digitalizados (IDs 311524747 a 311524752, 13/01/2025); sentença e apelação não identificadas pelo leitor; conferir a competência (União no polo passivo) e localizar as peças [VALIDAR] ‖ Proposta pelos precedentes: Localizar as peças e conferir a competência antes da proposta [VALIDAR] [VALIDAR: Competência (Justiça Estadual × Federal); Sentença e apelação nos volumes]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Processo da Justiça Estadual com a União no polo passivo, remetido ao Tribunal. Conferir competência e localizar sentença e apelação nos volumes.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -8521,9 +8711,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "A verificar: competência e peças nos volumes digitalizados [VALIDAR]",
+    "materia": "Civil — crédito rural",
+    "origem": "Justiça Estadual de Mato Grosso do Sul (processo 0000078-15.2014.8.12.0027)",
+    "decisao_agravada": "Sentença nos volumes digitalizados [VALIDAR ID]",
+    "recurso": "Apelação [VALIDAR ID]",
+    "preparo": "[VALIDAR preparo]",
+    "monocratica": "A verificar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Competência e peças nos volumes digitalizados"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -8531,6 +8734,97 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cédula de crédito rural — processo vindo da Justiça Estadual",
+   "especificidades": "► Situação em 21/11/2026: última decisão: — | última peça: Petição Inicial (advogado de parte) · ID 311524745 · 13/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Justiça Estadual · Volumes digitalizados · Competência a conferir",
+   "teor": {
+    "sintese_fatica": "[VALIDAR]",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença nos volumes digitalizados [VALIDAR ID]",
+    "recurso": "[VALIDAR]",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Crédito rural · cédula de crédito rural · Walter Cruz contra União (Fazenda Nacional), Estado de Mato Grosso do Sul e Banco do Brasil · processo da Justiça Estadual (0000078-15.2014.8.12.0027) remetido ao Tribunal",
+     "sintese": "[VALIDAR]",
+     "questoes": "",
+     "rel": {
+      "razoes": "[VALIDAR]",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Volume digitalizado (1)",
+       "id": "311524747",
+       "data": "2025-01-13",
+       "pje": {
+        "tipo": "Outras peças",
+        "descricao": "0000078 15.2014.12.8.0027 otimizado 2",
+        "paginas": 26
+       },
+       "trecho": "fls. 23 Este documento é copia do original assinado digitalmente por GILBERTO MARTIN ANDREO. Protocolado em 09/01/2014 às 16:58:58, sob o número WBTA14800000777, e liberado nos autos digitais por M2190, em 21/01/2014 às 16:17:36. Para acessar os autos processuais, acesse o site informe o processo …"
+      },
+      {
+       "desc": "Volume digitalizado (6)",
+       "id": "311524752",
+       "data": "2025-01-13",
+       "pje": {
+        "tipo": "Outras peças",
+        "descricao": "0000078 15.2014.12.8.0027 otimizado 7",
+        "paginas": 23
+       },
+       "trecho": "fls. 224 Este documento é copia do original assinado digitalmente por GILBERTO MARTIN ANDREO. Protocolado em 03/03/2020 às 11:40:35, sob o número WBTA20080013996, e liberado nos autos digitais por SAJAT, em 03/03/2020 às 12:15:00. Para acessar os autos processuais, acesse o site informe o processo …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Competência e peças nos volumes digitalizados",
+     "especificidades": "► Situação em 21/11/2026: última decisão: — | última peça: Petição Inicial (advogado de parte) · ID 311524745 · 13/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Justiça Estadual · Volumes digitalizados · Competência a conferir",
+     "assuntoDet": "Cédula de crédito rural — processo vindo da Justiça Estadual",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_peca": "Petição Inicial (advogado de parte) · ID 311524745 · 13/01/2025",
+    "ultima_informacao": "Informação · ID 311524753 · 13/01/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: — | última peça: Petição Inicial (advogado de parte) · ID 311524745 · 13/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -12098,12 +12392,14 @@
    "exequente": "RENATA SILVA SANTOS",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Contratos Bancários",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Renata Silva Santos em procedimento comum (Contratos Bancários) · processo extinto sem resolução do mérito",
+   "resultado": "Ato a proferir: apelação de Renata Silva Santos (ID 307361858) da sentença ID 307361857; contrarrazões (ID 307361862) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença)] [VALIDAR: a peça recursal veio intitulada \"recurso inominado\" em procedimento comum; recebida como apelação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Renata Silva Santos contra sentença (processo extinto sem resolução do mérito): julgo extinto o processo, sem resolução de mérito, nos termos do art. 485, IV, CPC (falta de pressuposto de constituição regular do processo). Isento de custas, diante do pedido de justiça gratuita que ora defiro. Sem honorários.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12114,9 +12410,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Civil — contratos bancários e habitacionais",
+    "origem": "Procedimento comum 5005111-57.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 307361857 (07/08/2024)",
+    "recurso": "apelação de Renata Silva Santos (ID 307361858, 02/09/2024)",
+    "preparo": "Renata Silva Santos: [VALIDAR preparo]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Renata Silva Santos: [VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Recurso intitulado \"recurso inominado\" (fungibilidade)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -12124,6 +12433,127 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Contratos Bancários — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 307438732 · 24/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 307361857 · 07/08/2024 — sentença: extinguiu o processo sem resolução do mérito | última peça: Contrarrazões (apelante) · ID 307361862 · 06/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+   "teor": {
+    "sintese_fatica": "[VALIDAR síntese] RENATA SILVA SANTOS x CAIXA ECONÔMICA FEDERAL",
+    "inicial": "Procedimento comum ajuizado(a) em 28/06/2024 (RENATA SILVA SANTOS x CAIXA ECONÔMICA FEDERAL).",
+    "decisao_recorrida": "Sentença ID 307361857 (07/08/2024): julgo extinto o processo, sem resolução de mérito, nos termos do art. 485, IV, CPC (falta de pressuposto de constituição regular do processo). Isento de custas, diante do pedido de justiça gratuita que ora defiro. Sem honorários.",
+    "recurso": "Renata Silva Santos (ID 307361858, 02/09/2024): tópicos: 5 . Das Razões De Apelação; 7. Da Pretensão Resistida Nas Relação De Consumo.",
+    "resposta": "Contrarrazões: ID 307361862 (06/09/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Renata Silva Santos: [VALIDAR preparo]."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Renata Silva Santos em procedimento comum (Contratos Bancários) · processo extinto sem resolução do mérito",
+     "sintese": "[VALIDAR síntese] RENATA SILVA SANTOS x CAIXA ECONÔMICA FEDERAL",
+     "questoes": "[VALIDAR questões] Contratos Bancários",
+     "rel": {
+      "razoes": "Renata Silva Santos (ID 307361858, 02/09/2024): tópicos: 5 . Das Razões De Apelação; 7. Da Pretensão Resistida Nas Relação De Consumo.",
+      "contrarrazoes": "Contrarrazões: ID 307361862 (06/09/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "307361857",
+      "juizo": "Procedimento comum 5005111-57.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgo extinto o processo, sem resolução de mérito, nos termos do art. 485, IV, CPC (falta de pressuposto de constituição regular do processo). Isento de custas, diante do pedido de justiça gratuita que ora defiro. Sem honorários."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Renata Silva Santos",
+       "tipo": "Apelação",
+       "id": "307361858",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "307361850",
+       "data": "2024-06-28",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 21
+       },
+       "trecho": "Ante o exposto, requer à Vossa Excelência , digne - se : 1. O processamento do feito nos te rmos dos artigos 381, 382 e 383, do Código de Processo Civil ; 2. Requer, a obrigação de exibição pelo banco Réu do contrato empréstimo consignado e demais (original), contrato de portabilidade, Comprovante …"
+      },
+      {
+       "desc": "Sentença",
+       "id": "307361857",
+       "data": "2024-08-07",
+       "nota": "Sentença ID 307361857 (07/08/2024): julgo extinto o processo, sem resolução de mérito, nos termos do art. 485, IV, CPC (falta de pressuposto de constituição regular do processo). Isento de custas, diante do pedido de justiça gratuita que ora defiro. Sem honorários.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "julgo extinto o processo, sem resolução de mérito, nos termos do art. 485, IV, CPC (falta de pressuposto de constituição regular do processo). Isento de custas, diante do pedido de justiça gratuita que ora defiro. Sem honorários.P.R.I.Decorrido o prazo para recurso, sem outros requerimentos, …"
+      },
+      {
+       "desc": "Apelação de Renata Silva Santos",
+       "id": "307361858",
+       "data": "2024-09-02",
+       "nota": "Renata Silva Santos (ID 307361858, 02/09/2024): tópicos: 5 . Das Razões De Apelação; 7. Da Pretensão Resistida Nas Relação De Consumo.",
+       "pje": {
+        "tipo": "Recurso inominado",
+        "paginas": 14
+       },
+       "trecho": "requerimento de concessão do benefí cio da Gratui dade da Justiça. Nestes termos, pede deferimento. Campo Grande /MS, 2 de setembro de 2024 . CELSO GONÇALVES OAB/MS nº 20.050 (Assinado digitalmente)"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "307361862",
+       "data": "2024-09-06",
+       "nota": "Contrarrazões: ID 307361862 (06/09/2024).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 4
+       },
+       "trecho": "Pelo exposto, roga-se pela não conhecimento e improvimento do recurso interposto pela parte requerente, com a manutenção da r. Sentença em seus termos, em face da abso- luta incompetência do Vara Federal. 3. PEDIDOS Ante todo o exposto, pugna a CAIXA, desta feita na qualidade de recorrida, pelo …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 307438732 · 24/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 307361857 · 07/08/2024 — sentença: extinguiu o processo sem resolução do mérito | última peça: Contrarrazões (apelante) · ID 307361862 · 06/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "Contratos Bancários — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 307438732 · 24/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 307361857 · 07/08/2024 — sentença: extinguiu o processo sem resolução do mérito",
+    "ultima_peca": "Contrarrazões (apelante) · ID 307361862 · 06/09/2024",
+    "ultima_informacao": "Certidão · ID 307658707 · 25/10/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 307438732 · 24/10/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 307361857 · 07/08/2024 — sentença: extinguiu o processo sem resolução do mérito | última peça: Contrarrazões (apelante) · ID 307361862 · 06/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -15913,12 +16343,14 @@
    "exequente": "PAULO CESAR COELHO",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Demissão ou Exoneração",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Servidor · Polícia Federal · demissão em processo administrativo disciplinar (prova ilícita) · apelação do autor · já com intimação de pauta e memoriais",
+   "resultado": "Ato a proferir: há intimação de pauta (IDs 394981957 e 394981972, 01/09/2026) e memoriais do autor (IDs 399566079, 21/09/2026, e 401238484, 28/09/2026); conferir em que sessão o processo foi pautado e o que houve (adiamento, retirada) [VALIDAR]; sentença e apelação nos autos físicos digitalizados [VALIDAR IDs] ‖ Proposta pelos precedentes: Voto [VALIDAR sessão anterior e peças] [VALIDAR: Sessão em que foi pautado (intimação de 01/09/2026); IDs da sentença e da apelação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do servidor demitido que pede a nulidade dos processos disciplinares por prova obtida em invasão de domicílio. Já houve intimação de pauta e memoriais: conferir a sessão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -15929,9 +16361,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto) [VALIDAR pauta anterior]",
+    "materia": "Administrativo — servidor público (disciplinar)",
+    "origem": "Ação anulatória (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença nos autos digitalizados [VALIDAR ID]",
+    "recurso": "Apelação de Paulo César Coelho [VALIDAR ID]",
+    "preparo": "[VALIDAR preparo]",
+    "monocratica": "Improvável",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Pauta anterior: intimação de 01/09/2026"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -15939,6 +16384,106 @@
    "chegada": "21/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Demissão — PAD (nulidade por prova ilícita)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 54235934 · 25/03/2019 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | última peça: Memoriais (apelante) · ID 401238484 · 28/09/2026 | última movimentação: 28/09/2026 23:58 · Juntada de Petição de memoriais · Intimação de pauta (01/09/2026) · Memoriais · 116 peças sem texto extraído · Autos físicos digitalizados",
+   "teor": {
+    "sintese_fatica": "Servidor demitido pede a anulação dos PADs que levaram à demissão, por ilicitude da prova.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença nos autos digitalizados [VALIDAR ID]",
+    "recurso": "Apelação do autor [VALIDAR ID]; memoriais IDs 399566079 e 401238484.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Servidor · Polícia Federal · demissão em processo administrativo disciplinar (prova ilícita) · apelação do autor · já com intimação de pauta e memoriais",
+     "sintese": "Servidor demitido pede a anulação dos PADs que levaram à demissão, por ilicitude da prova.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Apelação do autor [VALIDAR ID]; memoriais IDs 399566079 e 401238484.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Intimação de pauta",
+       "id": "394981957",
+       "data": "2026-09-01",
+       "pje": {
+        "tipo": "Intimação de Pauta"
+       }
+      },
+      {
+       "desc": "Memoriais do autor",
+       "id": "399566079",
+       "data": "2026-09-21",
+       "nota": "Apelação do autor [VALIDAR ID]; memoriais IDs 399566079 e 401238484.",
+       "pje": {
+        "tipo": "Memoriais",
+        "paginas": 3
+       },
+       "trecho": "pugna para que esta Colenda Turma, em homenagem à unidade da jurisdição e aos precedentes vinculantes dos Tribunais Superiores: a) Conheça e pondere o fato superveniente consubstanciado na decisão do REsp nº 2.245.328/SP; b) Dê provimento integral ao recurso de apelação , reformando a sentença de …"
+      },
+      {
+       "desc": "Memoriais do autor",
+       "id": "401238484",
+       "data": "2026-09-28",
+       "nota": "Apelação do autor [VALIDAR ID]; memoriais IDs 399566079 e 401238484.",
+       "pje": {
+        "tipo": "Memoriais",
+        "paginas": 3
+       },
+       "trecho": "pugna para que esta Colenda Turma, em homenagem à unidade da jurisdição e ao precedente vinculante do STF e d ê provimento integral ao recurso de apelação , reformando a sentença de primeiro grau para declarar a estrita nulidade do Processo Administrativo Disciplinar amparado em provas ilícitas, …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Pauta anterior: intimação de 01/09/2026",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 54235934 · 25/03/2019 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | última peça: Memoriais (apelante) · ID 401238484 · 28/09/2026 | última movimentação: 28/09/2026 23:58 · Juntada de Petição de memoriais · Intimação de pauta (01/09/2026) · Memoriais · 116 peças sem texto extraído · Autos físicos digitalizados",
+     "assuntoDet": "Demissão — PAD (nulidade por prova ilícita)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "28/09/2026 23:58 · Juntada de Petição de memoriais",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 54235934 · 25/03/2019 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_peca": "Memoriais (apelante) · ID 401238484 · 28/09/2026",
+    "ultima_informacao": "Intimação de Pauta · ID 394981972 · 01/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 54235934 · 25/03/2019 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | última peça: Memoriais (apelante) · ID 401238484 · 28/09/2026 | última movimentação: 28/09/2026 23:58 · Juntada de Petição de memoriais"
    }
   },
   {
@@ -19995,12 +20540,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ALICE VIEIRA MARTINS",
    "assunto": "Esbulho / Turbação / Ameaça",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Possessória · área ocupada pela Comunidade Indígena Guayviry · apelação da União e da FUNAI · sobrestamento pelo RE 1.017.365 (Tema 1.031) a conferir · redistribuído da 1ª Turma",
+   "resultado": "Ato a proferir: decisão de 28/04/2021 (ID 158268651) tratou da suspensão nacional determinada no RE 1.017.365 [VALIDAR teor e se cessou]; redistribuído à Turma Regional pela 1ª Turma (decisão ID 354336982, 11/02/2026); sentença nos autos digitalizados (IDs 151294909 e 151294911) [VALIDAR] ‖ Proposta pelos precedentes: Conferir a suspensão do RE 1.017.365 e o parecer do MPF; depois, voto [VALIDAR] [VALIDAR: Teor da decisão ID 158268651; Parecer do MPF; IDs da sentença e das apelações]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Possessória em área ocupada pela Comunidade Indígena Guayviry, com intervenção do MPF e do CIMI. Conferir se ainda vale a suspensão do RE 1.017.365 e se há parecer do MPF depois do retorno à origem.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -20011,9 +20558,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "A verificar: sobrestamento (RE 1.017.365) e parecer do MPF [VALIDAR]",
+    "materia": "Civil — possessória (direitos indígenas)",
+    "origem": "Ação possessória (Vara Federal de Ponta Porã, autos físicos digitalizados)",
+    "decisao_agravada": "Sentença nos autos digitalizados [VALIDAR ID]",
+    "recurso": "Apelações da União e da FUNAI [VALIDAR IDs]",
+    "preparo": "Isento (ente público)",
+    "monocratica": "Não (interesse indígena, MPF obrigatório)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Suspensão pelo RE 1.017.365 e parecer do MPF"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -20021,6 +20581,95 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Possessória em área indígena (Guayviry)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 354336982 · 11/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 158268651 · 28/04/2021 — abriu vista ao MPF; sobrestou o processo | última peça: Petição intercorrente (advogado de parte) · ID 158798260 · 04/05/2021 | última movimentação: 23/03/2026 11:16 · Conclusos para julgamento · Comunidade indígena · MPF obrigatório · RE 1.017.365 · Autos físicos digitalizados",
+   "teor": {
+    "sintese_fatica": "Alice Vieira Martins pediu a reintegração de posse de área ocupada pela Comunidade Indígena Guayviry [VALIDAR].",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença nos autos digitalizados [VALIDAR ID]",
+    "recurso": "Apelações da União e da FUNAI [VALIDAR IDs e razões].",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Possessória · área ocupada pela Comunidade Indígena Guayviry · apelação da União e da FUNAI · sobrestamento pelo RE 1.017.365 (Tema 1.031) a conferir · redistribuído da 1ª Turma",
+     "sintese": "Alice Vieira Martins pediu a reintegração de posse de área ocupada pela Comunidade Indígena Guayviry [VALIDAR].",
+     "questoes": "",
+     "rel": {
+      "razoes": "Apelações da União e da FUNAI [VALIDAR IDs e razões].",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Decisão (suspensão nacional do RE 1.017.365)",
+       "id": "158268651",
+       "data": "2021-04-28",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "STF, o que ocorrer por último.Diante do exposto, em observância à determinação do Colendo Supremo Tribunal Federal, determino o sobrestamento dos presentes recursos.Intimem-se. São Paulo, 28 de abril de 2021."
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "354336982",
+       "data": "2026-02-11",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "determino a remessa do feito à UFOR para redistribuição à .Cumpra-se.São Paulo, data da assinatura eletrônica.DAVID DANTASDesembargador Federal"
+      }
+     ],
+     "pendencias": "[VALIDAR] Suspensão pelo RE 1.017.365 e parecer do MPF",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 354336982 · 11/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 158268651 · 28/04/2021 — abriu vista ao MPF; sobrestou o processo | última peça: Petição intercorrente (advogado de parte) · ID 158798260 · 04/05/2021 | última movimentação: 23/03/2026 11:16 · Conclusos para julgamento · Comunidade indígena · MPF obrigatório · RE 1.017.365 · Autos físicos digitalizados",
+     "assuntoDet": "Possessória em área indígena (Guayviry)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Interesse de indígenas"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "23/03/2026 11:16 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 354336982 · 11/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Decisão · ID 158268651 · 28/04/2021 — abriu vista ao MPF; sobrestou o processo",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 158798260 · 04/05/2021",
+    "ultima_informacao": "Certidão · ID 158214124 · 27/04/2021",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 354336982 · 11/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 158268651 · 28/04/2021 — abriu vista ao MPF; sobrestou o processo | última peça: Petição intercorrente (advogado de parte) · ID 158798260 · 04/05/2021 | última movimentação: 23/03/2026 11:16 · Conclusos para julgamento"
    }
   },
   {
@@ -20830,12 +21479,14 @@
    "exequente": "THIAGO ATILA PENHA",
    "executado": "FUNDAÇÃO HABITACIONAL DO EXÉRCITO",
    "assunto": "Espécies de Contratos",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Embargos à execução · Fundação Habitacional do Exército · cancelamento da distribuição por falta de custas iniciais · apelação do embargante",
+   "resultado": "Ato a proferir: apelação de Thiago Atila Penha (ID 356951349, 02/07/2025) da sentença que extinguiu os embargos à execução sem resolução do mérito e cancelou a distribuição por falta de recolhimento das custas iniciais (ID 356951348, 12/06/2025; artigos 290 e 485, IV, do CPC) ‖ Proposta pelos precedentes: Voto ou monocrática pelo paradigma do cancelamento da distribuição [VALIDAR paradigma] [VALIDAR: Contrarrazões; Preparo da apelação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Embargos à execução da Fundação Habitacional do Exército: a sentença cancelou a distribuição porque o embargante, intimado, não recolheu as custas iniciais. Apelação do embargante.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -20846,9 +21497,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Processual civil — custas",
+    "origem": "Embargos à execução (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 356951348 (12/06/2025): extinção sem resolução do mérito e cancelamento da distribuição (artigos 290 e 485, IV, do CPC)",
+    "recurso": "Apelação de Thiago Atila Penha · ID 356951349 · 02/07/2025",
+    "preparo": "[VALIDAR preparo]",
+    "monocratica": "Possível, a verificar paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Contrarrazões e preparo"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -20856,6 +21520,104 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cancelamento da distribuição por falta de custas (artigo 290 do CPC)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 356951353 · 14/11/2025 — acórdão: e tese 7. Agravo de instrumento desprovido. | última peça: Apelação (apelante) · ID 356951349 · 02/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Cancelamento da distribuição · Custas iniciais · Contrarrazões a conferir",
+   "teor": {
+    "sintese_fatica": "Thiago Atila Penha opôs embargos à execução movida pela Fundação Habitacional do Exército; intimado a recolher as custas iniciais, não o fez.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença ID 356951348 (12/06/2025): extinção sem resolução do mérito e cancelamento da distribuição (artigos 290 e 485, IV, do CPC)",
+    "recurso": "Apelação ID 356951349 (02/07/2025) [VALIDAR razões].",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Embargos à execução · Fundação Habitacional do Exército · cancelamento da distribuição por falta de custas iniciais · apelação do embargante",
+     "sintese": "Thiago Atila Penha opôs embargos à execução movida pela Fundação Habitacional do Exército; intimado a recolher as custas iniciais, não o fez.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Apelação ID 356951349 (02/07/2025) [VALIDAR razões].",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "356951348",
+      "juizo": "1ª Vara Federal de Corumbá",
+      "dispositivo": "Extinção sem resolução do mérito e cancelamento da distribuição"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Autor(a)",
+       "tipo": "Apelação",
+       "id": "356951349",
+       "contra": "Não verificado"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença",
+       "id": "356951348",
+       "data": "2025-06-12",
+       "nota": "Sentença ID 356951348 (12/06/2025): extinção sem resolução do mérito e cancelamento da distribuição (artigos 290 e 485, IV, do CPC)",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo extinto o processo, sem resolução do mérito, e determino o cancelamento da distribuição, nos termos do art. 290 c/c art. 485, IV do CPC.Sem custas e honorários advocatícios.Publique-se. Intime-se. Oportunamente, arquive-se.Corumbá/MS, datado e assinado eletronicamente. …"
+      },
+      {
+       "desc": "Apelação",
+       "id": "356951349",
+       "data": "2025-07-02",
+       "nota": "Apelação ID 356951349 (02/07/2025) [VALIDAR razões].",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 19
+       },
+       "trecho": "Ante o exposto requer o recebimento do recurso sem que a apelante seja obrigada a fazer o preparo, sob pena de cerceamento de defesa. II.3 - DA GRATUIDADE DE JUSTIÇA O benefício da justiça gratuita encontra seu respaldo dentro da constituição federal que determina que a justiça é de livre acesso a …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Contrarrazões e preparo",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 356951353 · 14/11/2025 — acórdão: e tese 7. Agravo de instrumento desprovido. | última peça: Apelação (apelante) · ID 356951349 · 02/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Cancelamento da distribuição · Custas iniciais · Contrarrazões a conferir",
+     "assuntoDet": "Cancelamento da distribuição por falta de custas (artigo 290 do CPC)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Ementa · ID 356951353 · 14/11/2025 — acórdão: e tese 7. Agravo de instrumento desprovido.",
+    "ultima_peca": "Apelação (apelante) · ID 356951349 · 02/07/2025",
+    "ultima_informacao": "Certidão · ID 359119767 · 09/03/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 356951353 · 14/11/2025 — acórdão: e tese 7. Agravo de instrumento desprovido. | última peça: Apelação (apelante) · ID 356951349 · 02/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -21572,12 +22334,14 @@
    "exequente": "LUCIANO FREIRE DOS SANTOS",
    "executado": "CAIXA ECONOMICA FEDERAL",
    "assunto": "FGTS/Fundo de Garantia Por Tempo de Serviço",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "FGTS · correção das contas vinculadas pela TR (ADI 5.090) · apelação já decidida por monocrática do Relator · agravo interno do autor pendente",
+   "resultado": "Ato a proferir: julgamento do agravo interno do autor (ID 380717579, 16/06/2026) contra a decisão monocrática do Relator (ID 376508923, 12/06/2026); intimação da Caixa para resposta (ato ordinatório ID 388155393, 23/07/2026) [VALIDAR resposta] ‖ Proposta pelos precedentes: Voto no agravo interno, com a linha da decisão agravada (ADI 5.090) [VALIDAR] [VALIDAR: Resposta da Caixa ao agravo interno]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "A apelação (peça intitulada recurso inominado, ID 343999562) já foi decidida por monocrática do Relator; o pendente é o agravo interno do autor. Fora da triagem de apelação.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -21588,9 +22352,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo interno (voto)",
+    "materia": "Civil — FGTS",
+    "origem": "Ação de correção de contas do FGTS (1ª Vara Federal de Coxim)",
+    "decisao_agravada": "Decisão monocrática do Relator ID 376508923 (12/06/2026) no recurso do autor (ID 343999562) [VALIDAR dispositivo]",
+    "recurso": "Agravo interno de Luciano Freire dos Santos · ID 380717579 · 16/06/2026",
+    "preparo": "[VALIDAR preparo: agravo interno sem preparo]",
+    "monocratica": "Não (agravo interno vai a voto)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo: agravo interno sem preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Resposta ao agravo interno (ato ordinatório ID 388155393)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -21598,6 +22375,114 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "FGTS — substituição da TR (ADI 5.090)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 376508923 · 12/06/2026 — intimação sobre perda superveniente do interesse ou do objeto | última peça: Agravo Interno (apelante) · ID 380717579 · 16/06/2026 | última movimentação: 03/09/2026 00:40 · Decorrido prazo de CAIXA ECONOMICA FEDERAL em 02/09/2026 23:59. · Agravo interno pendente · ADI 5.090 · Fora da triagem de apelação",
+   "teor": {
+    "sintese_fatica": "Ação de correção das contas do FGTS pela substituição da TR; sentença de improcedência quanto ao período anterior à ADI 5.090 e de falta de interesse quanto ao futuro; recurso do autor decidido por monocrática; agravo interno.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Decisão monocrática do Relator ID 376508923 (12/06/2026) no recurso do autor (ID 343999562) [VALIDAR dispositivo]",
+    "recurso": "Agravo interno ID 380717579 (16/06/2026) contra a decisão monocrática ID 376508923.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "FGTS · correção das contas vinculadas pela TR (ADI 5.090) · apelação já decidida por monocrática do Relator · agravo interno do autor pendente",
+     "sintese": "Ação de correção das contas do FGTS pela substituição da TR; sentença de improcedência quanto ao período anterior à ADI 5.090 e de falta de interesse quanto ao futuro; recurso do autor decidido por monocrática; agravo interno.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Agravo interno ID 380717579 (16/06/2026) contra a decisão monocrática ID 376508923.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Autor(a)",
+       "tipo": "Agravo interno",
+       "id": "380717579",
+       "contra": "Não verificado"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão monocrática do Relator",
+       "id": "376508923",
+       "data": "2026-06-12",
+       "nota": "Decisão monocrática do Relator ID 376508923 (12/06/2026) no recurso do autor (ID 343999562) [VALIDAR dispositivo] · Agravo interno ID 380717579 (16/06/2026) contra a decisão monocrática ID 376508923.",
+       "pje": {
+        "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito",
+        "descricao": "Decisão"
+       },
+       "trecho": "Ante o exposto, conheço do recurso inominado como apelação e nego-lhe provimento, nos termos do artigo 932, IV, b, do CPC. Publique-se. Intime-se.Oportunamente, arquivem-se os autos.Campo Grande/MS, data da assinatura eletrônica.CARLOS MUTADesembargador Federal"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "380717579",
+       "data": "2026-06-16",
+       "nota": "Agravo interno ID 380717579 (16/06/2026) contra a decisão monocrática ID 376508923.",
+       "pje": {
+        "tipo": "Agravo Interno",
+        "paginas": 3
+       },
+       "trecho": "Diante do exposto, requer: 1. O conhecimento e provimento do presente Agravo Interno; 2. O juízo de retratação para reformar a decisão monocrática, reconhecendo o pedido declaratório de que a remuneração do FGTS não pode ser inferior ao IPCA a partir da publicação da ata da ADI 5090; 3. Caso não …"
+      },
+      {
+       "desc": "Ato ordinatório: intimação para resposta",
+       "id": "388155393",
+       "data": "2026-07-23",
+       "pje": {
+        "tipo": "Ato ordinatório"
+       },
+       "trecho": "APELAÇÃO CÍVEL (198) Nº 0000633-22.2014.4.03.6007 RELATOR: LUIS CARLOS HIROKI MUTA APELANTE: LUCIANO FREIRE DOS SANTOS ADVOGADO do(a) APELANTE: JAIRO PIRES MAFRA - MS7906-A APELADO: CAIXA ECONOMICA FEDERAL ATO ORDINATÓRIO Nos termos da Ordem de Serviço nº 1/2026 da Presidência da , intime-se a …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Resposta ao agravo interno (ato ordinatório ID 388155393)",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 376508923 · 12/06/2026 — intimação sobre perda superveniente do interesse ou do objeto | última peça: Agravo Interno (apelante) · ID 380717579 · 16/06/2026 | última movimentação: 03/09/2026 00:40 · Decorrido prazo de CAIXA ECONOMICA FEDERAL em 02/09/2026 23:59. · Agravo interno pendente · ADI 5.090 · Fora da triagem de apelação",
+     "assuntoDet": "FGTS — substituição da TR (ADI 5.090)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "03/09/2026 00:40 · Decorrido prazo de CAIXA ECONOMICA FEDERAL em 02/09/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 376508923 · 12/06/2026 — intimação sobre perda superveniente do interesse ou do objeto",
+    "ultima_peca": "Agravo Interno (apelante) · ID 380717579 · 16/06/2026",
+    "ultima_informacao": "Ato ordinatório · ID 388155393 · 23/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 376508923 · 12/06/2026 — intimação sobre perda superveniente do interesse ou do objeto | última peça: Agravo Interno (apelante) · ID 380717579 · 16/06/2026 | última movimentação: 03/09/2026 00:40 · Decorrido prazo de CAIXA ECONOMICA FEDERAL em 02/09/2026 23:59."
    }
   },
   {
@@ -22471,12 +23356,14 @@
    "exequente": "HILDA NEVES BERNAL DE MORAIS",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Gratificação de Incentivo",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Servidor · gratificação de incentivo · cumprimento individual de sentença coletiva extinto pela prescrição · apelação das exequentes · penhora no rosto dos autos",
+   "resultado": "Ato a proferir: apelação de Hilda Neves Bernal de Morais e outras contra a sentença que extinguiu o cumprimento individual pela prescrição [VALIDAR IDs da sentença e da apelação]; embargos de declaração (ID 279918663, 18/09/2023) contra a decisão ID 279384405 [VALIDAR se apreciados]; MPF sem interesse (ID 373329729); ofícios do juízo estadual pedindo penhora no rosto dos autos (IDs 309342130, 364961257 e 379967528) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: prescrição da execução individual de sentença coletiva] [VALIDAR: IDs da sentença e da apelação; Decisão ID 279384405 e apreciação dos embargos ID 279918663]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Execução individual de sentença coletiva extinta pela prescrição. Há pedidos de penhora no rosto dos autos vindos do juízo estadual: registrar antes de qualquer levantamento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -22487,9 +23374,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Administrativo — servidor público (execução)",
+    "origem": "Cumprimento individual de sentença coletiva (Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença de extinção pela prescrição [VALIDAR ID]",
+    "recurso": "Apelação das exequentes [VALIDAR ID]",
+    "preparo": "[VALIDAR preparo]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Peças principais não localizadas entre as extraídas"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -22497,6 +23397,141 @@
    "chegada": "21/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Gratificação de incentivo — execução individual de sentença coletiva (prescrição)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172400 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 373329729 · 14/05/2026 | última movimentação: 12/06/2026 16:57 · Juntada de Petição de outras peças · Prescrição da execução individual · Penhora no rosto dos autos · Embargos de declaração de 2023 a conferir",
+   "teor": {
+    "sintese_fatica": "Exequentes pedem diferenças da gratificação de incentivo com base em sentença coletiva; a sentença reconheceu a prescrição.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença de extinção pela prescrição [VALIDAR ID]",
+    "recurso": "Apelação das exequentes [VALIDAR ID e razões]; embargos de declaração ID 279918663.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 373329729 (14/05/2026): não intervenção.",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Servidor · gratificação de incentivo · cumprimento individual de sentença coletiva extinto pela prescrição · apelação das exequentes · penhora no rosto dos autos",
+     "sintese": "Exequentes pedem diferenças da gratificação de incentivo com base em sentença coletiva; a sentença reconheceu a prescrição.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Apelação das exequentes [VALIDAR ID e razões]; embargos de declaração ID 279918663.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Embargos de declaração",
+       "id": "279918663",
+       "data": "2023-09-18",
+       "nota": "Apelação das exequentes [VALIDAR ID e razões]; embargos de declaração ID 279918663.",
+       "pje": {
+        "tipo": "Embargos",
+        "paginas": 5
+       },
+       "trecho": "requer a parte embargante, que Vossas Ex- celências se dignem em conhecer e prover os presentes embargos para os fins de: a) Sanar a premissa equivocada apontada, atribuindo aos em- bargos os efeitos infringentes, para os fins de conhecer e dar provimento a apelação interposta pelo embargante; São …"
+      },
+      {
+       "desc": "Ofício do juízo estadual (penhora)",
+       "id": "309342130",
+       "data": "2024-11-29",
+       "pje": {
+        "tipo": "Outras peças",
+        "descricao": "Of. da 2 Vara Cível da Comarca de Campo Grande MS",
+        "paginas": 2
+       },
+       "trecho": "REPÚBLICA FEDERATIVA DO BRASIL Documento: não assinado. Prioridade: Normal. Motivo de envio: Para conhecimento. Assunto: Boa tarde, prezados! segue em anexo o ofício referente aos autos n°0826199-62.2013.8.12.0001, para providencias. fls. 1409 Este documento é copia do original assinado …"
+      },
+      {
+       "desc": "Pedido de penhora no rosto dos autos",
+       "id": "364961257",
+       "data": "2026-04-07",
+       "pje": {
+        "tipo": "Outros Documentos",
+        "descricao": "Solicitação de penhora no rosto dos autos",
+        "paginas": 2
+       },
+       "trecho": "REPÚBLICA FEDERATIVA DO BRASIL PODER JUDICIÁRIO MALOTE DIGITAL Tipo de documento: Informações Processuais Código de rastreabilidade: 81220264883900 Nome original: 1448.pdf Data: 24/03/2026 15:57:39 Remetente: SJMS - Campo Grande - 2ª Vara - Secretaria - SE02 SJMS - Campo Grande - 2ª Vara - …"
+      },
+      {
+       "desc": "Despacho: vista à PRR",
+       "id": "365172400",
+       "data": "2026-04-08",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Intime-se. Campo Grande, 8 de abril de 2026. CARLOS MUTA Desembargador Federal"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "373329729",
+       "data": "2026-05-14",
+       "nota": "MPF ID 373329729 (14/05/2026): não intervenção.",
+       "pje": {
+        "tipo": "Parecer de Mérito",
+        "descricao": "MP",
+        "paginas": 3
+       },
+       "trecho": "Diante do exposto, o Ministério Público Federal manifesta-se pela ausência de hipótese legal de intervenção obrigatória no feito, nos termos do art. 178 do Código de Processo Civil, requerendo o prosseguimento do julgamento independentemente de parecer de mérito ministerial. Ressalva-se, …"
+      },
+      {
+       "desc": "Ofício do juízo estadual (penhora)",
+       "id": "379967528",
+       "data": "2026-06-12",
+       "pje": {
+        "tipo": "Outras peças",
+        "descricao": "Ofício Juízo Estadual solicita penhora no rosto dos autos",
+        "paginas": 4
+       },
+       "trecho": "REPÚBLICA FEDERATIVA DO BRASIL Documento: não assinado. Prioridade: Normal. Motivo de envio: Para providências. Assunto: URGENTE - reiteração de pedido de penhora no rosto dos autos n.5 006951-15.2018. \u0000 \u0001 \u0002 \u0003 \u0004 \u0005 \u0006 \u0004 \u0005 \u0006 \u0007\u0003 \u0002 \u0005 \u0006 \b \u0005 \u0001 \u0001 \u0005 \u0006 \u0004 \u0005 \u0006 \u0006 \u0005 \u0004 \u000e\u0006 \u000f \u0004 \u0010 \u0011 \u0010 \u0012\u0010 \u0005 \u0006 \u0013 \u0003 \u0014\u0015 \u0005 \u0006 \b \u0003 \u0016 \u0004 \u000e \u0017 \u0018 …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Peças principais não localizadas entre as extraídas",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172400 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 373329729 · 14/05/2026 | última movimentação: 12/06/2026 16:57 · Juntada de Petição de outras peças · Prescrição da execução individual · Penhora no rosto dos autos · Embargos de declaração de 2023 a conferir",
+     "assuntoDet": "Gratificação de incentivo — execução individual de sentença coletiva (prescrição)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "12/06/2026 16:57 · Juntada de Petição de outras peças",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 365172400 · 08/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 373329729 · 14/05/2026",
+    "ultima_informacao": "Certidão · ID 364961254 · 07/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365172400 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 373329729 · 14/05/2026 | última movimentação: 12/06/2026 16:57 · Juntada de Petição de outras peças"
    }
   },
   {
@@ -22895,12 +23930,14 @@
    "exequente": "ONDINA LAPA FERRI",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Gratificação Incorporada / Quintos e Décimos / VPNI",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Servidor · quintos e décimos · cumprimento de sentença contra a Fazenda Pública · apelação da exequente contra decisão da impugnação · MPF sem interesse",
+   "resultado": "Ato a proferir: apelação de Ondina Lapa Ferri (ID 266626054, 07/10/2021) contra a decisão que apreciou a impugnação ao cumprimento de sentença (autos físicos, f. 201/210) [VALIDAR ID]; embargos de declaração apreciados com reabertura do prazo (ID 266626051, 14/09/2021); contrarrazões (ID 266626059); MPF sem interesse (ID 369984663) ‖ Proposta pelos precedentes: Conferir o cabimento (decisão que extingue ou não a execução); conforme o caso, voto ou não conhecimento [VALIDAR] [VALIDAR: Natureza da decisão recorrida (extinção ou não da execução); ID da decisão da impugnação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação contra decisão que resolveu a impugnação ao cumprimento de sentença. Se a decisão não extinguiu a execução, o recurso cabível é o agravo de instrumento (artigo 1.015, parágrafo único, do CPC) [VALIDAR].",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -22911,9 +23948,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto) ou não conhecimento [VALIDAR cabimento]",
+    "materia": "Administrativo — servidor público (execução)",
+    "origem": "Cumprimento de sentença contra a Fazenda Pública (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Decisão da impugnação ao cumprimento de sentença (autos físicos, f. 201/210) [VALIDAR ID]",
+    "recurso": "Apelação de Ondina Lapa Ferri · ID 266626054 · 07/10/2021",
+    "preparo": "Custas recolhidas (boleto ID 266626055, comprovante ID 266626056) [VALIDAR]",
+    "monocratica": "A verificar (cabimento)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Custas recolhidas (boleto ID 266626055, comprovante ID 266626056) [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Cabimento da apelação (artigo 1.015, parágrafo único, do CPC)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -22921,6 +23971,157 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Quintos/décimos — cumprimento de sentença (impugnação)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 369596678 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369984663 · 29/04/2026 | última movimentação: 30/04/2026 17:48 · Conclusos para julgamento · Cumprimento de sentença · Cabimento da apelação a conferir · MPF sem interesse",
+   "teor": {
+    "sintese_fatica": "Execução de quintos e décimos contra a União; decisão na impugnação; apelação da exequente.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Decisão da impugnação ao cumprimento de sentença (autos físicos, f. 201/210) [VALIDAR ID]",
+    "recurso": "Apelação ID 266626054 (07/10/2021) [VALIDAR razões].",
+    "resposta": "Contrarrazões da União ID 266626059 (16/05/2022).",
+    "parecer": "MPF ID 369984663 (29/04/2026): falta de interesse.",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Servidor · quintos e décimos · cumprimento de sentença contra a Fazenda Pública · apelação da exequente contra decisão da impugnação · MPF sem interesse",
+     "sintese": "Execução de quintos e décimos contra a União; decisão na impugnação; apelação da exequente.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Apelação ID 266626054 (07/10/2021) [VALIDAR razões].",
+      "contrarrazoes": "Contrarrazões da União ID 266626059 (16/05/2022)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Autor(a)",
+       "tipo": "Apelação",
+       "id": "266626054",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão nos embargos de declaração (reabre o prazo)",
+       "id": "266626051",
+       "data": "2021-09-14",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, fica reaberto o prazo processual.No mais, tendo em vista o depósito do precatório incontroverso expedido em favor da autora, e considerando o COMUNICADO CONJUNTO DA CORREGEDORIA REGIONAL E DA COORDENADORIA DOS JUIZADOS ESPECIAIS FEDERAIS, a respeito do levantamento de valores …"
+      },
+      {
+       "desc": "Apelação",
+       "id": "266626054",
+       "data": "2021-10-07",
+       "nota": "Apelação ID 266626054 (07/10/2021) [VALIDAR razões].",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "APELAÇÃO ONDINA LAPA FERRI",
+        "paginas": 15
+       },
+       "trecho": "Diante do exposto, a apelante requer o recebimento, conhecimento e provimento deste recurso, a fim de reformar a sentença de primeiro grau para: 1) Resolver/definir que os documentos juntados pela União (págs. 171-172 do processo físico) foram apresentados intempestivamente, bem como NÃO SE PRESTAM …"
+      },
+      {
+       "desc": "Boleto das custas",
+       "id": "266626055",
+       "data": "2021-10-07",
+       "pje": {
+        "tipo": "Outros Documentos",
+        "descricao": "BOLETO CUSTAS APELAÇÃO",
+        "paginas": 1
+       },
+       "trecho": "07/10/2021 08:03 1/1 Gerado a partir de SR. CONTRIBUINTE: ESTA GUIA NÃO PODERÁ SER LIQUIDADA COM CHEQUE MINISTÉRIO DA ECONOMIA SECRETARIA DO TESOURO NACIONAL Guia de Recolhimento da União GRU JUDICIAL Código de Recolhimento 18710-0 Número do Processo 0002406-07.2006.4.03.6000 Competência 10/2021 …"
+      },
+      {
+       "desc": "Comprovante das custas",
+       "id": "266626056",
+       "data": "2021-10-07",
+       "pje": {
+        "tipo": "Custas",
+        "descricao": "COMPROVANTE DE PAGAMENTO",
+        "paginas": 1,
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "266626059",
+       "data": "2022-05-16",
+       "nota": "Contrarrazões da União ID 266626059 (16/05/2022).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "requer que o recurso de apelação interposto pelo Autor seja ao cabo improvido junto a esta Egrégia Corte. Termos em que, Pede deferimento. São Paulo, 13 de maio de 2022. RITA C. Z. GREGORIO Advogada da União"
+      },
+      {
+       "desc": "Despacho: vista à PRR",
+       "id": "369596678",
+       "data": "2026-04-28",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Intime-se. Campo Grande, 28 de abril de 2026. CARLOS MUTADesembargador Federal"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "369984663",
+       "data": "2026-04-29",
+       "nota": "MPF ID 369984663 (29/04/2026): falta de interesse.",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 4
+       },
+       "trecho": "Diante do exposto, nada havendo a requerer, o Ministério Público Federal devolve os presentes autos a esse E. Tribunal para seu regular processamento e julgamento. São Paulo, 29 de abril de 2026. SÉRGIO LAURIA FERREIRA Procurador Regional da República MINISTÉRIO PÚBLICO FEDERAL PRR/3ª REGIÃO - SÃO …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Cabimento da apelação (artigo 1.015, parágrafo único, do CPC)",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 369596678 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369984663 · 29/04/2026 | última movimentação: 30/04/2026 17:48 · Conclusos para julgamento · Cumprimento de sentença · Cabimento da apelação a conferir · MPF sem interesse",
+     "assuntoDet": "Quintos/décimos — cumprimento de sentença (impugnação)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "30/04/2026 17:48 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 369596678 · 28/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 369984663 · 29/04/2026",
+    "ultima_informacao": "Ato ordinatório · ID 266626045 · 14/01/2020",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 369596678 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369984663 · 29/04/2026 | última movimentação: 30/04/2026 17:48 · Conclusos para julgamento"
    }
   },
   {
@@ -34552,12 +35753,14 @@
    "exequente": "RODRIGO ANTONINI",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Produção Agropecuária",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Tributário · FUNRURAL · apelação e remessa já julgadas em 2013 · recursos especial e extraordinário admitidos ou não em 2018 · retorno a conferir",
+   "resultado": "Ato a proferir: apelação e remessa julgadas (decisão terminativa ID 412841112, 14/03/2013; acórdão ID 412841113, D.E. 19/12/2013); juízo de admissibilidade dos recursos especial (ID 412841117) e extraordinário (ID 412841118) em 09/04/2018; em 2020 a origem mandou os autos ao NURT (despacho ID 132713392, ARE 1.233.478) — conferir por que voltou à Turma (retratação, artigo 1.040, II, do CPC, ou outro motivo) [VALIDAR] ‖ Proposta pelos precedentes: Conferir a fase e o motivo do retorno; se for retratação, voto de retratação ou de manutenção [VALIDAR] [VALIDAR: Motivo do retorno à Turma]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Processo já julgado na apelação em 2013; esteve nos tribunais superiores. Não é triagem de apelação: conferir a razão do retorno.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -34568,9 +35771,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho: conferir a fase (retorno dos tribunais superiores) [VALIDAR]",
+    "materia": "Tributário — contribuição do empregador rural",
+    "origem": "Ação de repetição de indébito (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Acórdão ID 412841113 (D.E. 19/12/2013)",
+    "recurso": "Recursos especial e extraordinário (2018) [VALIDAR]",
+    "preparo": "Isento (ente público)",
+    "monocratica": "A verificar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Motivo do retorno dos tribunais superiores"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -34578,6 +35794,128 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "FUNRURAL — fase posterior aos recursos aos tribunais superiores",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 132713392 · 23/03/2020 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 412841118 · 09/04/2018 — …01 de 24/08/2001, que instituiu a Infra-estrutura de Chaves Públicas Brasileira - ICP-Brasil, por: Signatário (a): NERY DA COSTA JUNIOR:10037 Nº de Série do Certificado: 11A21703044B8ADB Data e Hora: 09/04/2018 13:38:41 | última peça: Manifestação (PFN) · ID 132713395 · 24/04/2020 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Já julgado (2013) · Recursos especial e extraordinário · Possível retratação",
+   "teor": {
+    "sintese_fatica": "Ação contra a contribuição sobre a receita da produção rural; apelação e remessa julgadas em 2013.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Acórdão ID 412841113 (D.E. 19/12/2013)",
+    "recurso": "Recursos aos tribunais superiores [VALIDAR].",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Tributário · FUNRURAL · apelação e remessa já julgadas em 2013 · recursos especial e extraordinário admitidos ou não em 2018 · retorno a conferir",
+     "sintese": "Ação contra a contribuição sobre a receita da produção rural; apelação e remessa julgadas em 2013.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Recursos aos tribunais superiores [VALIDAR].",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Decisão terminativa",
+       "id": "412841112",
+       "data": "2013-03-14",
+       "pje": {
+        "tipo": "Decisão Terminativa",
+        "descricao": "Documento nº 2753803 publicado no sistema gedpro em 08/03/2013 00:00:00"
+       },
+       "trecho": "Ante o exposto e com fundamento no artigo 557, §1º-A, do Código de Processo Civil, DOU PARCIAL PROVIMENTO ao recurso de apelação interposto pela União para reconhecer a prescrição quinquenal para eventual compensação e repetição do indébito tributário; e, com fulcro no artigo 557, §1º-A, do Código …"
+      },
+      {
+       "desc": "Acórdão",
+       "id": "412841113",
+       "data": "2013-12-11",
+       "nota": "Acórdão ID 412841113 (D.E. 19/12/2013)",
+       "pje": {
+        "tipo": "Acórdão",
+        "descricao": "Documento nº 3321670 publicado no sistema gedpro em 03/12/2013 13:30:32"
+       },
+       "trecho": "onvocado Documento eletrônico assinado digitalmente conforme MP nº 2.200-2/2001 de 24/08/2001, que instituiu a Infra-estrutura de Chaves Públicas Brasileira - ICP-Brasil, por: Signatário (a): FERNAO POMPEO DE CAMARGO:10276 Nº de Série do Certificado: 475E76B57A95F243 Data e Hora: 11/12/2013 17:22:54"
+      },
+      {
+       "desc": "Decisão",
+       "id": "412841116",
+       "data": "2014-08-22",
+       "pje": {
+        "tipo": "Decisão",
+        "descricao": "Documento nº 3864672 publicado no sistema gedpro em 22/08/2014 00:00:00"
+       },
+       "trecho": "Ante o exposto, com fundamento no artigo 543-B do Código de Processo Civil, determino o sobrestamento do exame de admissibilidade do recurso extraordinário até o trânsito em julgado do mencionado recurso representativo. São Paulo, 22 de agosto de 2014. CECILIA MARCONDES Vice-Presidente Documento …"
+      },
+      {
+       "desc": "Admissibilidade do recurso especial",
+       "id": "412841117",
+       "data": "2018-04-09",
+       "pje": {
+        "tipo": "Juízo de Admissibilidade de Recurso Especial",
+        "descricao": "Documento nº 6848558 publicado no sistema gedpro em 05/04/2018 00:00:00"
+       },
+       "trecho": "Ante o exposto, não admito o recurso especial. Int. São Paulo, 05 de abril de 2018. NERY JUNIOR Vice-Presidente Documento eletrônico assinado digitalmente conforme MP nº 2.200-2/2001 de 24/08/2001, que instituiu a Infra-estrutura de Chaves Públicas Brasileira - ICP-Brasil, por: Signatário (a): NERY …"
+      },
+      {
+       "desc": "Admissibilidade do recurso extraordinário",
+       "id": "412841118",
+       "data": "2018-04-09",
+       "pje": {
+        "tipo": "Decisão de Admissibilidade de Recurso Extraordinário",
+        "descricao": "Documento nº 6848559 publicado no sistema gedpro em 05/04/2018 00:00:00"
+       },
+       "trecho": "Ante o exposto, nego seguimento ao recurso extraordinário. Int. São Paulo, 05 de abril de 2018. NERY JUNIOR Vice-Presidente Documento eletrônico assinado digitalmente conforme MP nº 2.200-2/2001 de 24/08/2001, que instituiu a Infra-estrutura de Chaves Públicas Brasileira - ICP-Brasil, por: …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Motivo do retorno dos tribunais superiores",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 132713392 · 23/03/2020 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 412841118 · 09/04/2018 — …01 de 24/08/2001, que instituiu a Infra-estrutura de Chaves Públicas Brasileira - ICP-Brasil, por: Signatário (a): NERY DA COSTA JUNIOR:10037 Nº de Série do Certificado: 11A21703044B8ADB Data e Hora: 09/04/2018 13:38:41 | última peça: Manifestação (PFN) · ID 132713395 · 24/04/2020 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Já julgado (2013) · Recursos especial e extraordinário · Possível retratação",
+     "assuntoDet": "FUNRURAL — fase posterior aos recursos aos tribunais superiores",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 132713392 · 23/03/2020 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Decisão de Admissibilidade de Recurso Extraordinário · ID 412841118 · 09/04/2018 — …01 de 24/08/2001, que instituiu a Infra-estrutura de Chaves Públicas Brasileira - ICP-Brasil, por: Signatário (a): NERY DA COSTA JUNIOR:10037 Nº de Série do Certificado: 11A21703044B8ADB Data e Hora: 09/04/2018 13:38:41",
+    "ultima_peca": "Manifestação (PFN) · ID 132713395 · 24/04/2020",
+    "ultima_informacao": "Certidão · ID 134281410 · 11/06/2020",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 132713392 · 23/03/2020 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 412841118 · 09/04/2018 — …01 de 24/08/2001, que instituiu a Infra-estrutura de Chaves Públicas Brasileira - ICP-Brasil, por: Signatário (a): NERY DA COSTA JUNIOR:10037 Nº de Série do Certificado: 11A21703044B8ADB Data e Hora: 09/04/2018 13:38:41 | última peça: Manifestação (PFN) · ID 132713395 · 24/04/2020 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -34589,12 +35927,14 @@
    "exequente": "AGROPECUARIA MAERAINHA LTDA - EPP",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Produção Agropecuária",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Tributário · FUNRURAL · sub-rogação (artigo 30, IV, da Lei 8.212/1991) · apelação da autora · processo sobrestado pela ADI 4.395",
+   "resultado": "Ato a proferir: o processo foi sobrestado pela 2ª Turma em razão da suspensão nacional determinada na ADI 4.395 (decisão ID 321246276, 23/04/2025) e redistribuído à Turma Regional (decisão ID 356972613, 27/02/2026); conferir a situação da ADI 4.395 antes de pautar [VALIDAR] ‖ Proposta pelos precedentes: Manter sobrestado até a conclusão da ADI 4.395 [VALIDAR situação]; depois, voto [VALIDAR: Situação da ADI 4.395; IDs da sentença e da apelação nos autos digitalizados]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação sobrestada pela 2ª Turma (ADI 4.395, suspensão nacional) e redistribuída à Turma Regional. Antes de qualquer ato, conferir se a ADI 4.395 foi julgada.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -34605,9 +35945,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho: manter o sobrestamento (ADI 4.395) [VALIDAR]",
+    "materia": "Tributário — contribuição do empregador rural",
+    "origem": "Ação de repetição de indébito (autos físicos digitalizados, 2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença nos autos físicos digitalizados [VALIDAR ID]",
+    "recurso": "Apelação de Agropecuária Maerainha Ltda - EPP [VALIDAR ID]",
+    "preparo": "[VALIDAR preparo]",
+    "monocratica": "A verificar (sobrestamento)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Situação da ADI 4.395 (suspensão nacional)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -34615,6 +35968,95 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "FUNRURAL — sub-rogação (ADI 4.395)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 356972613 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 321246276 · 23/04/2025 — sobrestou o processo | última peça: Petição intercorrente (PFN) · ID 358213118 · 05/03/2026 | última movimentação: 27/03/2026 14:46 · Conclusos para julgamento · Sobrestado · ADI 4.395 · Autos físicos digitalizados · Intimação de pauta anterior na 2ª Turma (07/02/2025)",
+   "teor": {
+    "sintese_fatica": "Ação da Agropecuária Maerainha contra a contribuição sobre a receita da produção rural; sobrestamento pela ADI 4.395.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença nos autos físicos digitalizados [VALIDAR ID]",
+    "recurso": "Apelação da autora [VALIDAR ID e razões].",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Tributário · FUNRURAL · sub-rogação (artigo 30, IV, da Lei 8.212/1991) · apelação da autora · processo sobrestado pela ADI 4.395",
+     "sintese": "Ação da Agropecuária Maerainha contra a contribuição sobre a receita da produção rural; sobrestamento pela ADI 4.395.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Apelação da autora [VALIDAR ID e razões].",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Decisão: sobrestamento (ADI 4.395)",
+       "id": "321246276",
+       "data": "2025-04-23",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "determino o sobrestamento do presente feito.Publique-se.Intimem-se. São Paulo, na data da assinatura digital. ALESSANDRO DIAFERIADesembargador Federal"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "356972613",
+       "data": "2026-02-27",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, com fundamento na Resolução n.º 33/2025 do Órgão Especial do TRF da 3ª Região e na Portaria PRES nº 4528, encaminhem-se os autos à Subsecretaria de Registros e Informações Processuais para a redistribuição do presente recurso à .Intimem-se. Cumpra-se.São Paulo, na data da assinatura …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Situação da ADI 4.395 (suspensão nacional)",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 356972613 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 321246276 · 23/04/2025 — sobrestou o processo | última peça: Petição intercorrente (PFN) · ID 358213118 · 05/03/2026 | última movimentação: 27/03/2026 14:46 · Conclusos para julgamento · Sobrestado · ADI 4.395 · Autos físicos digitalizados · Intimação de pauta anterior na 2ª Turma (07/02/2025)",
+     "assuntoDet": "FUNRURAL — sub-rogação (ADI 4.395)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "27/03/2026 14:46 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 356972613 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Decisão · ID 321246276 · 23/04/2025 — sobrestou o processo",
+    "ultima_peca": "Petição intercorrente (PFN) · ID 358213118 · 05/03/2026",
+    "ultima_informacao": "Intimação de Pauta · ID 313608299 · 07/02/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 356972613 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 321246276 · 23/04/2025 — sobrestou o processo | última peça: Petição intercorrente (PFN) · ID 358213118 · 05/03/2026 | última movimentação: 27/03/2026 14:46 · Conclusos para julgamento"
    }
   },
   {
@@ -35168,12 +36610,14 @@
    "exequente": "MARCIO LIMA JULIO",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Progressão Funcional com Interstício de Doze Meses",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Servidor · Policial Rodoviário Federal · marco inicial da progressão funcional · recurso inominado no Juizado Especial Federal de Corumbá autuado como apelação",
+   "resultado": "Ato a proferir: o feito tramitou sob o rito do Juizado Especial Federal (decisão ID 352535415, 03/07/2025, sobre a competência do Juizado para anulação de ato administrativo); contra ela veio recurso inominado (ID 352535417, 15/07/2025), autuado no Tribunal como apelação; conferir se o recurso cabe à Turma Recursal [VALIDAR] ‖ Proposta pelos precedentes: Conferir a competência: recurso de Juizado Especial Federal vai à Turma Recursal [VALIDAR]; se for o caso, decisão de não conhecimento ou de remessa [VALIDAR: Dispositivo da decisão ID 352535415; Competência: Turma Recursal ou Tribunal]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Recurso inominado de Juizado Especial Federal autuado como apelação e redistribuído à Turma Regional (decisão ID 356972582, 27/02/2026). Conferir a competência antes do mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -35184,9 +36628,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "A verificar: competência (recurso de Juizado Especial Federal) [VALIDAR]",
+    "materia": "Administrativo — servidor público",
+    "origem": "Juizado Especial Federal (1ª Vara Gabinete JEF de Corumbá)",
+    "decisao_agravada": "Decisão ID 352535415 (03/07/2025) [VALIDAR dispositivo]",
+    "recurso": "Recurso inominado de Marcio Lima Julio · ID 352535417 · 15/07/2025",
+    "preparo": "GRU do preparo (ID 352535419) [VALIDAR comprovante]",
+    "monocratica": "A verificar (competência da Turma Recursal)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "GRU do preparo (ID 352535419) [VALIDAR comprovante] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Competência para o recurso (Juizado Especial Federal)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -35194,6 +36651,131 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Progressão funcional (PRF) — rito do Juizado",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 356972582 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 352535415 · 03/07/2025 — …preciação da demanda.Considerando que o feito já se encontra em fase de instrução, redistribua-se no sistema PJe desta Vara, para continuidade pelo procedimento comum. Intimem-se.Oportunamente, dê-se baixa e arquivem-se | última peça: Contrarrazões (AGU (PRU)) · ID 352535423 · 06/01/2026 | última movimentação: 08/04/2026 01:12 · Decorrido prazo de UNIÃO FEDERAL em 07/04/2026 23:59. · Juizado Especial Federal · Recurso inominado · Competência a conferir",
+   "teor": {
+    "sintese_fatica": "Policial rodoviário federal pede a anulação do ato que fixou o marco inicial da sua progressão funcional; rito do Juizado.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Decisão ID 352535415 (03/07/2025) [VALIDAR dispositivo]",
+    "recurso": "Recurso inominado ID 352535417 (15/07/2025).",
+    "resposta": "Contrarrazões da União ID 352535423 (06/01/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Servidor · Policial Rodoviário Federal · marco inicial da progressão funcional · recurso inominado no Juizado Especial Federal de Corumbá autuado como apelação",
+     "sintese": "Policial rodoviário federal pede a anulação do ato que fixou o marco inicial da sua progressão funcional; rito do Juizado.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Recurso inominado ID 352535417 (15/07/2025).",
+      "contrarrazoes": "Contrarrazões da União ID 352535423 (06/01/2026)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "352535415",
+      "juizo": "JEF de Corumbá",
+      "dispositivo": "[VALIDAR]"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Decisão do Juizado",
+       "id": "352535415",
+       "data": "2025-07-03",
+       "nota": "Decisão ID 352535415 (03/07/2025) [VALIDAR dispositivo]",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Intimem-se.Oportunamente, dê-se baixa e arquivem-se.Corumbá/MS, datado e assinado eletronicamente. SABRINA GRESSLER BORGESJuíza Federal Substituta"
+      },
+      {
+       "desc": "Recurso inominado",
+       "id": "352535417",
+       "data": "2025-07-15",
+       "nota": "Recurso inominado ID 352535417 (15/07/2025).",
+       "pje": {
+        "tipo": "Recurso inominado",
+        "paginas": 9
+       },
+       "trecho": "Ante o exposto, o Recorrente requer seja conhecido e provido o presente Recurso Inominado na íntegra , determinando - se: 1. Seja reformada na integralidade a Decisão que determinou o arquivamento do feito ; 2. Que seja determinado o andamento regular no processo no JEF de Corumbá/MS para, ao final …"
+      },
+      {
+       "desc": "GRU do preparo",
+       "id": "352535419",
+       "data": "2025-07-15",
+       "pje": {
+        "tipo": "Documento Comprobatório",
+        "descricao": "14 GRU preparo recurso",
+        "paginas": 1
+       },
+       "trecho": "Código de Recolhimento Número do Processo/Referência Competência Vencimento CPF ou CNPJ do Contribuinte Código da Unidade Gestora Arrecadadora Valor Principal (-) Descontos/Abatimentos (-) Outras Deduções (+) Mora/Multa (+) Juros/Encargos (+) Outros Acréscimos (=) Valor Total Instruções: As …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "352535423",
+       "data": "2026-01-06",
+       "nota": "Contrarrazões da União ID 352535423 (06/01/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3060039785 EM 06/01/2026 16:33:55",
+        "paginas": 2
+       },
+       "trecho": "pugna pela manutenção da r. sentença que extinguiu o feito sem resolução de mérito, nos termos do art. 3º, § 1º, inc. III, da Lei nº 10.259/2001, c/c o art. 51, inc. II, da Lei nº 9.099/95, tendo em vista a impossibilidade de averiguação desse MM. Juízo em causas que objetivem anulação de ato …"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "356972582",
+       "data": "2026-02-27",
+       "nota": "Recurso inominado de Juizado Especial Federal autuado como apelação e redistribuído à Turma Regional (decisão ID 356972582, 27/02/2026). Conferir a competência antes do mérito.",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, com fundamento na Resolução n.º 33/2025 do Órgão Especial do TRF da 3ª Região e na Portaria PRES nº 4528, encaminhem-se os autos à Subsecretaria de Registros e Informações Processuais para a redistribuição do presente recurso à .Intimem-se. Cumpra-se.São Paulo, na data da assinatura …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Competência para o recurso (Juizado Especial Federal)",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 356972582 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 352535415 · 03/07/2025 — …preciação da demanda.Considerando que o feito já se encontra em fase de instrução, redistribua-se no sistema PJe desta Vara, para continuidade pelo procedimento comum. Intimem-se.Oportunamente, dê-se baixa e arquivem-se | última peça: Contrarrazões (AGU (PRU)) · ID 352535423 · 06/01/2026 | última movimentação: 08/04/2026 01:12 · Decorrido prazo de UNIÃO FEDERAL em 07/04/2026 23:59. · Juizado Especial Federal · Recurso inominado · Competência a conferir",
+     "assuntoDet": "Progressão funcional (PRF) — rito do Juizado",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "08/04/2026 01:12 · Decorrido prazo de UNIÃO FEDERAL em 07/04/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 356972582 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Decisão · ID 352535415 · 03/07/2025 — …preciação da demanda.Considerando que o feito já se encontra em fase de instrução, redistribua-se no sistema PJe desta Vara, para continuidade pelo procedimento comum. Intimem-se.Oportunamente, dê-se baixa e arquivem-se",
+    "ultima_peca": "Contrarrazões (AGU (PRU)) · ID 352535423 · 06/01/2026",
+    "ultima_informacao": "Certidão · ID 362785106 · 27/03/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 356972582 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 352535415 · 03/07/2025 — …preciação da demanda.Considerando que o feito já se encontra em fase de instrução, redistribua-se no sistema PJe desta Vara, para continuidade pelo procedimento comum. Intimem-se.Oportunamente, dê-se baixa e arquivem-se | última peça: Contrarrazões (AGU (PRU)) · ID 352535423 · 06/01/2026 | última movimentação: 08/04/2026 01:12 · Decorrido prazo de UNIÃO FEDERAL em 07/04/2026 23:59."
    }
   },
   {
@@ -47298,12 +48880,14 @@
    "exequente": "GABRIEL LEME MEDEIROS",
    "executado": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "assunto": "Reintegração ou Readmissão",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Servidor · reintegração (Fundação Universidade Federal de Mato Grosso do Sul) · apelação · texto das peças não extraído",
+   "resultado": "Ato a proferir: as 80 peças foram baixadas sem texto (apelação ID 307737702, 27/09/2024; sentença ID 307737697, 28/08/2024; contrarrazões ID 307737705, 25/10/2024); a triagem depende de nova extração ‖ Proposta pelos precedentes: Reextrair o inteiro teor e triar [VALIDAR: Nova extração do inteiro teor]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Peças sem texto na extração: refazer a extração antes da triagem.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -47314,9 +48898,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Triagem pendente: extrair de novo o inteiro teor",
+    "materia": "Administrativo — servidor público",
+    "origem": "Vara Federal de Campo Grande",
+    "decisao_agravada": "Sentença ID 307737697 (28/08/2024) [sem texto]",
+    "recurso": "Apelação ID 307737702 (27/09/2024) [sem texto]",
+    "preparo": "[VALIDAR preparo]",
+    "monocratica": "A verificar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Reextrair o inteiro teor (peças sem texto)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -47324,6 +48921,104 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Reintegração — UFMS",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 307737697 · 28/08/2024 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 307737705 · 25/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Inteiro teor sem texto · Reextrair",
+   "teor": {
+    "sintese_fatica": "[VALIDAR]",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença ID 307737697 (28/08/2024) [sem texto]",
+    "recurso": "[VALIDAR]",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Servidor · reintegração (Fundação Universidade Federal de Mato Grosso do Sul) · apelação · texto das peças não extraído",
+     "sintese": "[VALIDAR]",
+     "questoes": "",
+     "rel": {
+      "razoes": "[VALIDAR]",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Sentença (sem texto)",
+       "id": "307737697",
+       "data": "2024-08-28",
+       "nota": "Sentença ID 307737697 (28/08/2024) [sem texto]",
+       "pje": {
+        "tipo": "Sentença",
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Apelação (sem texto)",
+       "id": "307737702",
+       "data": "2024-09-27",
+       "pje": {
+        "tipo": "Apelação",
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Contrarrazões (sem texto)",
+       "id": "307737705",
+       "data": "2024-10-25",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "sem_texto": true
+       }
+      }
+     ],
+     "pendencias": "[VALIDAR] Reextrair o inteiro teor (peças sem texto)",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 307737697 · 28/08/2024 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 307737705 · 25/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Inteiro teor sem texto · Reextrair",
+     "assuntoDet": "Reintegração — UFMS",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 307737697 · 28/08/2024 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 307737705 · 25/10/2024",
+    "ultima_informacao": "Certidão · ID 308190460 · 06/11/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 307737697 · 28/08/2024 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 307737705 · 25/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -48134,12 +49829,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "MARCOS JOSE VIEIRA",
    "assunto": "Responsabilidade Fiscal",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Tributário · responsabilidade do sócio (artigo 135, III, do CTN) · ação declaratória · apelação da União (Fazenda Nacional) · relator anterior impedido · memoriais",
+   "resultado": "Ato a proferir: apelação da União (Fazenda Nacional) (ID 143196709, 29/03/2020) da sentença de procedência integrada por embargos de declaração (autos físicos, f. 522-527) [VALIDAR ID]; contrarrazões (ID 143196713); o relator anterior declarou impedimento (decisão ID 398336307, 16/09/2026); há memoriais (IDs 395060962 e 412002840) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: responsabilidade do sócio, artigo 135, III, do CTN] [VALIDAR: ID da sentença e da decisão dos embargos nos autos digitalizados]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "A sentença declarou a inexistência de responsabilidade do autor pelos débitos de frigoríficos e o excluiu das CDAs e do polo passivo de execuções fiscais (artigo 135, III, do CTN). Apelação da União. O processo veio por impedimento do relator anterior; já havia intimação de pauta (ID 391814453, 13/08/2026) e pedido de sustentação oral (ID 395060961).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -48150,9 +49847,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Tributário — responsabilidade de terceiros",
+    "origem": "Ação declaratória (Vara Federal de Campo Grande, autos físicos digitalizados)",
+    "decisao_agravada": "Sentença de procedência integrada por embargos (autos físicos, f. 522-527) [VALIDAR ID]",
+    "recurso": "Apelação da União (Fazenda Nacional) · ID 143196709 · 29/03/2020",
+    "preparo": "Isento (ente público)",
+    "monocratica": "Improvável",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Sentença integrada (f. 522-527 dos autos físicos)"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -48160,6 +49870,160 @@
    "chegada": "26/10/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Responsabilidade tributária do sócio — exclusão das CDAs",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 398336307 · 16/09/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 366768192 · 15/04/2026 — deferiu a liminar ou a tutela | última peça: Memoriais (PFN) · ID 412002840 · 16/11/2026 | última movimentação: 16/11/2026 10:06 · Juntada de Petição de memoriais · Impedimento do relator anterior (ID 398336307) · Memoriais · Pedido de sustentação oral · Autos físicos digitalizados",
+   "teor": {
+    "sintese_fatica": "Ação declaratória de inexistência de responsabilidade tributária do sócio por débitos de frigoríficos; procedência.",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença de procedência integrada por embargos (autos físicos, f. 522-527) [VALIDAR ID]",
+    "recurso": "Apelação da União ID 143196709: inadequação da via e, no mérito, responsabilidade do sócio [VALIDAR].",
+    "resposta": "Contrarrazões do autor ID 143196713 (06/04/2020).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Tributário · responsabilidade do sócio (artigo 135, III, do CTN) · ação declaratória · apelação da União (Fazenda Nacional) · relator anterior impedido · memoriais",
+     "sintese": "Ação declaratória de inexistência de responsabilidade tributária do sócio por débitos de frigoríficos; procedência.",
+     "questoes": "",
+     "rel": {
+      "razoes": "Apelação da União ID 143196709: inadequação da via e, no mérito, responsabilidade do sócio [VALIDAR].",
+      "contrarrazoes": "Contrarrazões do autor ID 143196713 (06/04/2020)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Réu/ré",
+       "tipo": "Apelação",
+       "id": "143196709",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Apelação da União",
+       "id": "143196709",
+       "data": "2020-03-29",
+       "nota": "Apelação da União ID 143196709: inadequação da via e, no mérito, responsabilidade do sócio [VALIDAR].",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "Apelação. 0003376 60.2013",
+        "paginas": 14
+       },
+       "trecho": "Ante o exposto, a União requer a concessão do efeito su spensivo pleiteado e, ao final, o provimento integral do recurso , para o fim de reformar a sentença ata cada, julgando - se improcedente o pedid o , nos termos da arg umentação adrede exposta . Termos em que pede deferimento. 2 9 de março de …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "143196713",
+       "data": "2020-04-06",
+       "nota": "Contrarrazões do autor ID 143196713 (06/04/2020).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "contrarrazões apel. ok",
+        "paginas": 26
+       },
+       "trecho": "requer o apelado a esse eg. Turma o desprovimento da apelação, mantendo-se a r. sentença tal como proferida. Termos em que, pede e espera deferimento. Campo Grande/MS, 06 de abril de 2020."
+      },
+      {
+       "desc": "Intimação de pauta",
+       "id": "391814453",
+       "data": "2026-08-13",
+       "nota": "A sentença declarou a inexistência de responsabilidade do autor pelos débitos de frigoríficos e o excluiu das CDAs e do polo passivo de execuções fiscais (artigo 135, III, do CTN). Apelação da União. O processo veio por impedimento do relator anterior; já havia intimação de pauta (ID 391814453, 13/08/2026) e pedido de sustentação oral (ID 395060961).",
+       "pje": {
+        "tipo": "Intimação de Pauta"
+       }
+      },
+      {
+       "desc": "Pedido de sustentação oral",
+       "id": "395060961",
+       "data": "2026-09-01",
+       "nota": "A sentença declarou a inexistência de responsabilidade do autor pelos débitos de frigoríficos e o excluiu das CDAs e do polo passivo de execuções fiscais (artigo 135, III, do CTN). Apelação da União. O processo veio por impedimento do relator anterior; já havia intimação de pauta (ID 391814453, 13/08/2026) e pedido de sustentação oral (ID 395060961).",
+       "pje": {
+        "tipo": "Outras peças",
+        "descricao": "Anexo Comprovante pedido sustentação oral",
+        "paginas": 1
+       },
+       "trecho": "1 Henrique Roth Isfer De: naoresponda@trf3.jus.br Enviado em: segunda-feira, 24 de agosto de 2026 18:09 Para: Henrique Roth Isfer Assunto: Pedido de Sustentação Oral - Tribunal Sinalizador de acompanhamento: Acompanhar Status do sinalizador: Sinalizada Pedido de Sustentação Oral - Tribunal …"
+      },
+      {
+       "desc": "Memoriais do autor",
+       "id": "395060962",
+       "data": "2026-09-01",
+       "pje": {
+        "tipo": "Memoriais",
+        "descricao": "Marcos José Vieira Memoriais 3376 60",
+        "paginas": 4
+       },
+       "trecho": "requerente na administração, após a sua retirada da gerência da sociedade (em 12/5/1997), está comprovada pelos seguintes elementos p robatórios: a) o processo administrativo fiscal n. 10140.003519/2001 - 98, no qual a Receita Federal, depois de ampla instrução probatória, entendeu por …"
+      },
+      {
+       "desc": "Decisão: impedimento do relator anterior",
+       "id": "398336307",
+       "data": "2026-09-16",
+       "nota": "Impedimento do relator anterior (ID 398336307) · Memoriais · Pedido de sustentação oral · Autos físicos digitalizados",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Diante do exposto, declaro-me impedido para atuar no presente feito.Encaminhem-se os autos à Subsecretaria para a devida redistribuição.Informo tratar-se de processo incluído em Meta Nacional do Conselho Nacional de Justiça. Intimem-se. Cumpra-se.Campo Grande/MS, data da assinatura eletrônica.JEAN …"
+      },
+      {
+       "desc": "Memoriais da União",
+       "id": "412002840",
+       "data": "2026-11-16",
+       "pje": {
+        "tipo": "Memoriais",
+        "paginas": 5
+       },
+       "trecho": "Diante do exposto, reitera-se que o provimento judicial recorrido causa grave lesão ao erário, consubstanciado na exclusão indevida de responsável solidário legitimamente cobrado. 4. Requer-se, assim, a Vossas Excelências: 1. O acolhimento da preliminar arguida, extinguindo-se o feito sem resolução …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Sentença integrada (f. 522-527 dos autos físicos)",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 398336307 · 16/09/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 366768192 · 15/04/2026 — deferiu a liminar ou a tutela | última peça: Memoriais (PFN) · ID 412002840 · 16/11/2026 | última movimentação: 16/11/2026 10:06 · Juntada de Petição de memoriais · Impedimento do relator anterior (ID 398336307) · Memoriais · Pedido de sustentação oral · Autos físicos digitalizados",
+     "assuntoDet": "Responsabilidade tributária do sócio — exclusão das CDAs",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "16/11/2026 10:06 · Juntada de Petição de memoriais",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 398336307 · 16/09/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Decisão · ID 366768192 · 15/04/2026 — deferiu a liminar ou a tutela",
+    "ultima_peca": "Memoriais (PFN) · ID 412002840 · 16/11/2026",
+    "ultima_informacao": "Certidão · ID 399884265 · 22/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 398336307 · 16/09/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 366768192 · 15/04/2026 — deferiu a liminar ou a tutela | última peça: Memoriais (PFN) · ID 412002840 · 16/11/2026 | última movimentação: 16/11/2026 10:06 · Juntada de Petição de memoriais"
    }
   },
   {
@@ -51376,12 +53240,14 @@
    "exequente": "NIVALDO SILVA FERREIRA",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Suspensão",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Servidor militar · suspensão · apelação de Nivaldo Silva Ferreira · autos físicos digitalizados · redistribuído da 2ª Turma",
+   "resultado": "Ato a proferir: redistribuído à Turma Regional (decisão ID 355755075, 27/02/2026); sentença e apelação não localizadas entre as peças com texto extraído (autos físicos digitalizados) [VALIDAR] ‖ Proposta pelos precedentes: Localizar sentença e apelação nos autos digitalizados antes de definir a proposta [VALIDAR] [VALIDAR: Objeto, sentença e apelação nos autos digitalizados]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Autos físicos digitalizados; as peças principais não aparecem entre as extraídas com texto. Há terceiro interessado (Pedro José da Silva Neto).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -51392,9 +53258,22 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto) [VALIDAR peças]",
+    "materia": "Administrativo",
+    "origem": "Ação ordinária (Vara Federal de Campo Grande, autos físicos digitalizados)",
+    "decisao_agravada": "Sentença [VALIDAR ID]",
+    "recurso": "Apelação de Nivaldo Silva Ferreira [VALIDAR ID]",
+    "preparo": "[VALIDAR preparo]",
+    "monocratica": "A verificar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "[VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Peças principais nos autos digitalizados"
+   ],
    "minuta": false,
    "classe": "ApCiv",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -51402,6 +53281,86 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Suspensão — autos físicos digitalizados",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 355755075 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 131547188 · 07/05/2020 — …H O Id. 125855701: Proceda a Subsecretaria às alterações necessárias para futuras publicações.Publique-se. Intime-se.Após, retornem os autos conclusos. Peixoto Junior Desembargador Federal São Paulo, 7 de maio de 2020 | última peça: Petição intercorrente (apelante) · ID 133205786 · 29/05/2020 | última movimentação: 31/03/2026 01:22 · Decorrido prazo de UNIÃO FEDERAL em 30/03/2026 23:59. · Autos físicos digitalizados · Terceiro interessado · Peças a localizar",
+   "teor": {
+    "sintese_fatica": "[VALIDAR objeto da ação]",
+    "inicial": "[VALIDAR inicial]",
+    "decisao_recorrida": "Sentença [VALIDAR ID]",
+    "recurso": "[VALIDAR apelação]",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "",
+    "preparo": ""
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Servidor militar · suspensão · apelação de Nivaldo Silva Ferreira · autos físicos digitalizados · redistribuído da 2ª Turma",
+     "sintese": "[VALIDAR objeto da ação]",
+     "questoes": "",
+     "rel": {
+      "razoes": "[VALIDAR apelação]",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "",
+      "dispositivo": ""
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [],
+     "pecas": [
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "355755075",
+       "data": "2026-02-27",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, com fundamento na Resolução n.º 33/2025 do Órgão Especial do TRF da 3ª Região e na Portaria PRES nº 4528, encaminhem-se os autos à Subsecretaria de Registros e Informações Processuais para a redistribuição do presente recurso à .Intimem-se. Cumpra-se.São Paulo, na data da assinatura …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Peças principais nos autos digitalizados",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 355755075 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 131547188 · 07/05/2020 — …H O Id. 125855701: Proceda a Subsecretaria às alterações necessárias para futuras publicações.Publique-se. Intime-se.Após, retornem os autos conclusos. Peixoto Junior Desembargador Federal São Paulo, 7 de maio de 2020 | última peça: Petição intercorrente (apelante) · ID 133205786 · 29/05/2020 | última movimentação: 31/03/2026 01:22 · Decorrido prazo de UNIÃO FEDERAL em 30/03/2026 23:59. · Autos físicos digitalizados · Terceiro interessado · Peças a localizar",
+     "assuntoDet": "Suspensão — autos físicos digitalizados",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "31/03/2026 01:22 · Decorrido prazo de UNIÃO FEDERAL em 30/03/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 355755075 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Despacho · ID 131547188 · 07/05/2020 — …H O Id. 125855701: Proceda a Subsecretaria às alterações necessárias para futuras publicações.Publique-se. Intime-se.Após, retornem os autos conclusos. Peixoto Junior Desembargador Federal São Paulo, 7 de maio de 2020",
+    "ultima_peca": "Petição intercorrente (apelante) · ID 133205786 · 29/05/2020",
+    "ultima_informacao": "Ato ordinatório · ID 131631624 · 08/05/2020",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 355755075 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 131547188 · 07/05/2020 — …H O Id. 125855701: Proceda a Subsecretaria às alterações necessárias para futuras publicações.Publique-se. Intime-se.Após, retornem os autos conclusos. Peixoto Junior Desembargador Federal São Paulo, 7 de maio de 2020 | última peça: Petição intercorrente (apelante) · ID 133205786 · 29/05/2020 | última movimentação: 31/03/2026 01:22 · Decorrido prazo de UNIÃO FEDERAL em 30/03/2026 23:59."
    }
   },
   {
