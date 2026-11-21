@@ -300,3 +300,17 @@ html.ed-cmt .ed-body:has(#ed-ler)>.ed-list,html.ed-cmt .ed-body:has(#ed-man)>.ed
 .lp-ler .lp-lead,.lp-ler .lp-sub,.lp-ler .lp-u,.lp-ler .lp-r li,.lp-ler .lp-not li,.lp-ler .lp-alt div,.rap-lp .rap-e .lp-t p,#x-man .mn-doc p,#x-man .mn-doc li{text-align:justify!important}
 .rap-lp .rap-e .lp-t p{text-indent:0!important}
 .lp-ler .mn-f .lp-ta{font-size:14.5px!important;line-height:1.65!important;text-align:justify}
+/* telas estreitas (celular): o sumário some, mas a busca da coluna esquerda fica no topo; justificado com hifenização, cabeçalhos alinhados à esquerda */
+@container (max-width:780px){
+.lp-toc{display:block!important;position:static!important;max-height:none!important;padding:0!important;border:0!important;margin:0 0 12px!important}
+.lp-toc>:not(.lp-tq){display:none!important}
+.lp-ler .lp-t p,.lp-ler .lp-lead,.lp-ler .lp-u,.lp-ler .lp-r li,.lp-ler .lp-not li,.lp-ler .lp-alt div,.rap-lp .rap-e .lp-t p{-webkit-hyphens:auto!important;hyphens:auto!important}
+.lp-ler .lp-sub{text-align:left!important}
+.lp-ler li{-webkit-hyphens:auto!important;hyphens:auto!important}
+}
+@container (max-width:860px){
+.ed-man .mn-toc{display:block!important;position:static!important;max-height:none!important;padding:0!important;border:0!important;background:none!important;margin:0 0 10px!important}
+.ed-man .mn-toc>:not(.mn-tq){display:none!important}
+#x-man .mn-doc p,#x-man .mn-doc li{-webkit-hyphens:auto!important;hyphens:auto!important}
+#x-man .mn-doc .mn-k,#x-man .mn-doc .mn-sub{text-align:left!important;-webkit-hyphens:manual!important;hyphens:manual!important}
+}
