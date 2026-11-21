@@ -953,6 +953,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 @media(max-width:1000px){.wa-g{grid-template-columns:1fr}.wa-form{border-right:0}}
 /* Comunicação */
 .cg-com .cg-top .cg-acv a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.cg-chefia .cg-top .cg-acv{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.cg-chefia .cg-top .cg-acv a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .cm-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,1fr);gap:16px;align-items:start}.cm-grid>.cg-px{margin-bottom:16px}
 .cm-form{padding:14px 16px 12px;display:grid;gap:12px}.cm-f{display:grid;gap:5px;font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--g);position:relative}.cm-f>span{display:block}
 .cm-form input[name=title],.cm-form textarea,.cm-form input[type=date]{width:100%;box-sizing:border-box;border:1px solid var(--b);border-radius:7px;padding:8px 10px;font:14px/1.45 Figtree,sans-serif;letter-spacing:0;text-transform:none;color:var(--tx);background:var(--w)}
@@ -2439,7 +2440,7 @@ function vChefia(){
   const cx=(k,t,extra,corpo,cls)=>'<section class="cg-px'+(cls?' '+cls:'')+'"><header><span><span class="k">'+k+'</span><b>'+t+'</b></span>'+(extra||'')+'</header>'+corpo+'</section>';
   return '<div class="wrap cg-chefia"><div class="cg-top"><div><p class="k">Central de gestão</p><h1>Chefia.</h1></div>'+
     '<div class="cg-faixa">'+kpi(nP(ALL.length),'processos na fonte')+kpi(nP(U.length),'em triagem')+kpi(nP(apt),'aptos sem pendência')+kpi(nf(sessoes().length),'sessões futuras')+'</div>'+
-    '<div class="cg-acv"><button class="btn pri" data-cg-acervo="1" title="Planilhas do PJe e do Power BI → carga → fonte no GitHub, com complementação pelo DataJud">Importar / atualizar acervo</button></div></div>'+
+    '<div class="cg-acv"><button class="btn pri" data-cg-acervo="1" title="Planilhas do PJe e do Power BI → carga → fonte no GitHub, com complementação pelo DataJud">Importar / atualizar acervo</button><a class="btn" href="/extensao/muta-pje.zip" download="muta-pje.zip" title="Extensão Muta para o Chrome (painel lateral no PJe: prontuário, triagem, comparativo, conformidade e transferência do texto para o Collectio). Instalar: descompacte o .zip, abra chrome://extensions, ative o Modo do desenvolvedor e clique em Carregar sem compactação, apontando a pasta descompactada.">⬇ Extensão Muta (PJe)</a></div></div>'+
     /* Visão operacional: entregas e providências em aberto de todo o gabinete, lidas da mesma API do Mural do Ex Officio (mesmo login) e desenhadas aqui */
     cx('Visão operacional','Todo o gabinete · entregas e providências em aberto','<span class="cg-tb"><span class="cg-status" id="vo-st"></span><button class="btn" type="button" data-vo-at="1">↻ Atualizar</button><a class="btn" href="/office/" target="_blank" rel="noopener">Ex Officio ↗</a></span>','<div id="cg-vo"><p class="cg-status">Lendo as entregas…</p></div>','cg-vop')+
     /* Registro de atividades: quem fez o quê, em todos os apps e no painel do Desembargador (api/_atividades.js) */
