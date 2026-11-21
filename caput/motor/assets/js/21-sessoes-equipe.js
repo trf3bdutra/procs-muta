@@ -2094,7 +2094,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       /* marcos invertidos: ausências e cotas pelo período efetivo, em vez de marcar todos como ausentes */
       var pe = periodo(ss); if (pe.invertido) { de = pe.de; ate = pe.ate; }
       var linhas = ss.itens.slice().sort(function (a, b) { return (+a.item || 0) - (+b.item || 0); }).map(function (it) { var inf = infoItem(it);
-        return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tipo: julgKey(it, inf), nivel: nivelItem(it).n, nivelPor: nivelItem(it).por, pts: pesoItem(it), servidor: it.servidor || '', corretor: it.corretor || '', porD: it.porD || '', porC: it.porC || '',
+        return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tipo: julgKey(it, inf), metas: (inf.c.metas || []).concat(it.meta && !(inf.c.metas || []).length ? [String(it.meta).replace(/^m/i, '')] : []).filter(function (m) { return m && m !== '?'; }), nivel: nivelItem(it).n, nivelPor: nivelItem(it).por, pts: pesoItem(it), servidor: it.servidor || '', corretor: it.corretor || '', porD: it.porD || '', porC: it.porC || '',
           sugD: it.servidor ? null : escolher('d', it, ss), sugC: it.corretor ? null : escolher('c', it, ss) }; });
       var gente = function (kind) { return pool(kind).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss) || foraSes(m, ss, kind), fora: foraSes(m, ss, kind), atual: ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(m.nome); }).length }; }); };
       return { criterios: D.ordem.map(function (cid) { return { id: cid, t: CRIT_T[cid] || cid, d: !!(D.on[cid] && D.on[cid].d), c: !!(D.on[cid] && D.on[cid].c) }; }), equilibrar: D.equilibrar !== false, escopo: ss.desigOverride ? 'sessao' : 'geral',
@@ -2117,6 +2117,10 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         /* trocar: a mesa de designação pode substituir quem já estava designado (vazio continua sem efeito) */
         if (o.d && (!it.servidor || (o.trocar && it.servidor !== o.d))) { it.servidor = o.d; it.porD = o.porD || 'esteira'; m = 1; } if (o.c && (!it.corretor || (o.trocar && it.corretor !== o.c))) { it.corretor = o.c; it.porC = o.porC || 'esteira'; m = 1; } n += m; });
       if (n) { HIST = null; salvar(); if (root && !root.hidden) render(); } return n; },
+    /* regras obrigatórias da designação (apoio/regras/designacao.json, criterios.obrig): valem antes da proposta, na ordem.
+       q: 'julg' (ED, AgInt, JR, META, AI), 'sec' (seção), 'lote' (id do lote) ou 'as' (assunto); d: minutante; c: corretor */
+    obrigatorias: function () { return S.desig && Array.isArray(S.desig.obrig) ? JSON.parse(JSON.stringify(S.desig.obrig)) : null; },
+    definirObrigatorias: function (L) { if (!S.desig) return false; S.desig.obrig = (L || []).filter(function (r) { return r && r.q && r.v && (r.d || r.c); }).map(function (r) { return { q: r.q, v: r.v, d: r.d || '', c: r.c || '' }; }); HIST = null; salvar(); return true; },
     /* limpa minutante e corretor da pauta (para refazer a designação); processo já minutado ou corrigido fica; devolve o que tirou, para desfazer */
     limparDesignacao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return []; var bk = [];
       ss.itens.forEach(function (it) { if (it.dataMinuta || it.dataCorrecao || (!it.servidor && !it.corretor)) return; bk.push({ cnj: it.cnj, d: it.servidor || '', c: it.corretor || '', porD: it.porD || '', porC: it.porC || '' }); it.servidor = ''; it.corretor = ''; it.porD = ''; it.porC = ''; });
@@ -2178,6 +2182,9 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       ss.regrasSessao = ss.regrasSessao.filter(function (x) { return x.id !== rid; }); HIST = null; salvar(); return true; },
     criarRegraEtiqueta: function (termo, ef, v) { termo = String(termo || '').trim(); if (!termo || !EF[ef] || (EF[ef].v && !String(v || '').trim())) return false;
       S.regras.push(regra(ef, [{ t: termo, m: 'igual' }], { v: String(v || '').trim(), nome: termo, origem: 'esteira' })); HIST = null; salvar(); if (root && !root.hidden) render(); return true; },
+    /* regra do assunto pela mesa: d ou c em branco tiram a regra; null não mexe */
+    definirRegraAssunto: function (id, assunto, d, c) { var ss = S.sessoes.find(function (x) { return x.id === id; }), D = ss && ss.desigOverride ? ss.desigOverride : S.desig; if (!D || !assunto) return false; D.rows = D.rows || {};
+      var key = 'tema:' + N(assunto), r = D.rows[key] || (D.rows[key] = { d: '', c: '', cap: String(assunto).trim() }); if (d != null) r.d = d || ''; if (c != null) r.c = c || ''; HIST = null; salvar(); return true; },
     regraAssunto: function (id, assunto, d, c) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!assunto || (!d && !c)) return false; var D = ss && ss.desigOverride ? ss.desigOverride : S.desig;
       var key = 'tema:' + N(assunto), r = D.rows[key] || (D.rows[key] = { d: '', c: '', cap: assunto }); if (d) r.d = d; if (c) r.c = c; HIST = null; salvar(); if (root && !root.hidden) render(); return true; },
     previaDaTriagem: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return []; return linhasSelecao(ss).map(function (r) { return dig(r.Processo || r.processo); }); },
