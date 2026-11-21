@@ -573,8 +573,8 @@ html[data-theme="dark"] .cwe-esteira i.feito{color:#0e2132}
 .cwe-segs button[aria-pressed="true"]{background:var(--t);color:var(--w)}
 .cwe-mesa-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:14px 0 8px}.cwe-mesa-bar small{color:var(--m,#6b7471);flex:1}
 .cwe-mesa-slot{margin-bottom:18px}
-#cwe-mesa-host{position:absolute;z-index:20;display:none}#cwe-mesa-host iframe{width:100%;height:100%;border:0;display:block;background:transparent}
-#cwe-mesa-host.full{position:fixed!important;inset:14px!important;width:auto!important;height:auto!important;z-index:2147480500;box-shadow:0 0 0 100vmax rgba(18,40,38,.45),0 10px 40px rgba(0,0,0,.25);border-radius:14px}
+#cwe-mesa-host{display:block;--mt:60px;min-height:300px}
+#cwe-mesa-host.full{position:fixed!important;inset:14px!important;width:auto!important;height:auto!important;overflow:auto;--mt:0px;background:var(--p);z-index:2147480500;box-shadow:0 0 0 100vmax rgba(18,40,38,.45),0 10px 40px rgba(0,0,0,.25);border-radius:14px}
 .cwe-old{margin-top:18px}.cwe-old>summary{cursor:pointer;font-size:13px;color:var(--m,#6b7471);padding:8px 0}
 .cwe-carga{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
 .cwe-carga .q{border:1px solid var(--b);background:var(--w);padding-bottom:6px}
@@ -2787,23 +2787,42 @@ function portaToken() { return new Promise((fim) => {
     return false;
   }
 
-  /* Mesa de designação (/caput/designacao/) dentro de Pautas › 4 · Designação, só da sessão aberta.
-     A moldura fica fora do HTML que o Caput refaz a cada render (senão recarregaria e perderia as escolhas):
-     um hospedeiro fixo no body acompanha a posição do espaço reservado (.cwe-mesa-slot). */
-  const MESA = { host: null, ifr: null, sid: '', full: false };
+  /* Mesa de designação (/caput/designacao/) integrada à etapa 4 da sessão aberta, sem moldura (iframe):
+     o Caput lê a página da mesa e a monta num bloco isolado (shadow DOM), que rola junto com a página.
+     O bloco fica fora do HTML que o Caput refaz a cada render (senão perderia as escolhas): a cada render
+     ele é devolvido ao espaço reservado (.cwe-mesa-slot). Uma só fonte: a página da mesa continua valendo sozinha. */
+  const MESA = { host: null, sid: '', full: false, fonte: null };
+  function mesaFonte() { return MESA.fonte || (MESA.fonte = fetch('/caput/designacao/', { cache: 'no-cache' }).then((r) => r.text()).then((h) => {
+    const doc = new DOMParser().parseFromString(h, 'text/html'), css = [...doc.querySelectorAll('style')].map((x) => x.textContent).join('\n');
+    const cod = [...doc.querySelectorAll('script:not([type]):not([src])')].map((x) => x.textContent).join('\n');
+    doc.querySelectorAll('script:not([type="application/json"])').forEach((x) => x.remove());
+    return { css: css.replace(/html,body\{margin:0\}/g, '').replace(/:root/g, ':host').replace(/\bbody\{/g, '.mb{').replace(/\bbody\./g, '.mb.'), corpo: doc.body.innerHTML, cod };
+  }).catch((er) => { MESA.fonte = null; throw er; })); }
+  /* ajustes da mesa dentro da página: cabeçalho e coluna da equipe presos abaixo do topo do Caput; barra de baixo presa no fim do bloco */
+  const MESA_CSS = `:host{display:block}.mb{background:transparent!important}.mb.emb .top{top:var(--mt,60px)!important}.mb.emb .side{top:calc(var(--mt,60px) + 76px)!important;max-height:calc(100vh - var(--mt,60px) - 150px)!important}
+    .mb .foot{position:sticky!important;bottom:0;margin-top:10px}.mb .lay{padding-bottom:16px!important}.mb.temsel main{padding-bottom:0!important}`;
+  async function mesaMonta(sid) {
+    const h = document.createElement('div'); h.id = 'cwe-mesa-host'; h.dataset.s = sid; MESA.host = h;
+    let F; try { F = await mesaFonte(); } catch (er) { h.innerHTML = '<p class="cwe-nota">A mesa de designação não carregou. Recarregue a página.</p>'; return; }
+    if (MESA.host !== h) return;
+    const R = h.attachShadow({ mode: 'open' }); R.innerHTML = `<style>${F.css}\n${MESA_CSS}</style><div class="mb emb">${F.corpo}</div>`; const mb = R.querySelector('.mb');
+    const doc = { getElementById: (x) => R.getElementById(x), querySelector: (x) => R.querySelector(x), querySelectorAll: (x) => R.querySelectorAll(x), body: mb, documentElement: mb,
+      createElement: (x) => document.createElement(x), addEventListener: (t, f, o) => (t === 'keydown' ? document : R).addEventListener(t, f, o) };
+    const par = { CMTCaput: W.CMTCaput, postMessage: (m, o) => W.postMessage(m, o) };
+    const win = { parent: par, addEventListener: (t, f, o) => W.addEventListener(t, f, o), postMessage: (m, o) => W.postMessage(m, o) };
+    const loc = { search: '?embed=1&s=' + encodeURIComponent(sid), origin: location.origin, href: location.href };
+    try { new Function('document', 'window', 'location', F.cod)(doc, win, loc); } catch (er) { console.error('[mesa]', er); }
+  }
   function mesaSync() {
-    const slot = document.querySelector('.cwe-mesa-slot'), vis = !!(slot && slot.offsetParent);
-    if (!vis) { if (MESA.host) { MESA.host.style.display = 'none'; if (MESA.full) mesaTela(false); } return; }
-    if (!MESA.host) { const h = document.createElement('div'); h.id = 'cwe-mesa-host'; h.innerHTML = '<iframe title="Mesa de designação da sessão"></iframe>'; document.body.appendChild(h); MESA.host = h; MESA.ifr = h.firstChild; }
-    if (MESA.sid !== slot.dataset.s) { MESA.sid = slot.dataset.s; MESA.ifr.src = '/caput/designacao/?embed=1&s=' + encodeURIComponent(MESA.sid); }
-    const alt = Math.max(620, innerHeight - 150); if (slot.style.height !== alt + 'px') slot.style.height = alt + 'px';
-    const h = MESA.host; h.style.display = 'block'; if (MESA.full) return;
-    const r = slot.getBoundingClientRect();
-    h.style.top = (r.top + scrollY) + 'px'; h.style.left = (r.left + scrollX) + 'px'; h.style.width = r.width + 'px'; h.style.height = alt + 'px';
+    const slot = document.querySelector('.cwe-mesa-slot');
+    if (!slot) { if (MESA.full) mesaTela(false); return; }
+    if (!MESA.host || MESA.sid !== slot.dataset.s) { MESA.sid = slot.dataset.s; mesaMonta(MESA.sid); }
+    if (MESA.host.parentNode !== slot) slot.appendChild(MESA.host);
+    /* cabeçalho da mesa preso logo abaixo do topo do Caput */
+    const tp = document.getElementById('top'), mt = tp ? Math.round(tp.getBoundingClientRect().height) + 'px' : '60px'; if (MESA.host.style.getPropertyValue('--mt') !== mt) MESA.host.style.setProperty('--mt', mt);
   }
   function mesaTela(on) { if (!MESA.host) return; MESA.full = on == null ? !MESA.full : !!on; MESA.host.classList.toggle('full', MESA.full); D.body.classList.toggle('cwe-mesa-full', MESA.full);
-    if (!MESA.full) mesaSync(); try { MESA.ifr.contentWindow.postMessage({ tipo: 'cmt:mesa-modo', full: MESA.full }, location.origin); } catch (er) {} }
-  W.addEventListener('resize', mesaSync); setInterval(mesaSync, 300);
+    W.postMessage({ tipo: 'cmt:mesa-modo', full: MESA.full }, location.origin); }
   W.addEventListener('message', (ev) => { if (ev.origin !== location.origin) return; const t = ev.data?.tipo;
     if (t === 'cmt:mesa-tela') mesaTela();
     else if (t === 'cmt:mesa-fechar') { if (MESA.full) mesaTela(false); }
@@ -2962,7 +2981,7 @@ function portaToken() { return new Promise((fim) => {
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapaEtq, etapaDes, etapa4][d.cur](ss, d);
     view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}${est.nv ? novaSessaoDlg() : ''}</div>`;
-    requestAnimationFrame(mesaSync);
+    mesaSync();
   }
 
   W.CMTEsteira = { render, estado: () => ({ ...est }), abrirJulgadores: () => { est.painel = true; est.pTab = 'julg'; } };

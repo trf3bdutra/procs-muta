@@ -10,7 +10,7 @@ test('Mesa de designação: página válida, publicada e ligada ao Caput',()=>{
   assert.ok(pag.includes('var K0={pen:0.6,lote:2,comp:1.5}')&&!pag.includes('data-mo='),'um critério só (competência); sem “Equilibrar carga”');
   assert.ok(read('.github/workflows/vercel-caput.yml').includes('cp caput/designacao/index.html site/public/caput/designacao/index.html'));
   const caput=read('caput/triagem/index.html');
-  for(const x of ["'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
+  for(const x of ["'?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
   assert.ok(!caput.includes('<span class="v">${e(atual)}</span>'),'minutante e corretor sempre editáveis');
 });
 test('Motor: troca na designação e período efetivo com marcos invertidos',()=>{
@@ -37,8 +37,8 @@ test('Mesa dentro da etapa B: modo embutido e tela cheia',()=>{
   const pag=read('caput/designacao/index.html');
   assert.ok(pag.includes("get('embed')==='1'")&&pag.includes("EMBED?'cmt:mesa-tela':'cmt:mesa-fechar'"));
   const caput=read('caput/triagem/index.html');
-  assert.ok(caput.includes('requestAnimationFrame(mesaSync)'),'reposiciona a mesa a cada render');
-  assert.ok(caput.includes("h.id = 'cwe-mesa-host'")&&caput.includes('document.body.appendChild(h)'),'moldura fora do HTML refeito pelo render');
+  assert.ok(caput.includes('    mesaSync();\n  }'),'devolve a mesa ao espaço reservado a cada render');
+  assert.ok(caput.includes("h.id = 'cwe-mesa-host'")&&caput.includes('slot.appendChild(MESA.host)')&&caput.includes("attachShadow({ mode: 'open' })")&&!caput.includes('<iframe title="Mesa'),'mesa integrada à página, sem iframe, fora do HTML refeito pelo render');
 });
 test('Mesa: designação inicial e seleção em lote',()=>{
   const pag=read('caput/designacao/index.html');
