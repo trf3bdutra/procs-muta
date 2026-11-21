@@ -22359,11 +22359,11 @@
    "assunto": "IRPF/Imposto de Renda de Pessoa Física",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Flávio Freitas de Lima, em causa própria, contra o bloqueio SISBAJUD determinado antes da citação na execução fiscal 5003915-12.2025.4.03.6002. Alega violação ao contraditório. A tutela recursal foi indeferida em 08/06/2026; a União respondeu.",
+   "peculiaridades": "Preparo por comprovante PagTesouro com \"Pagamento realizado com sucesso\" e identificação do pagamento [VALIDAR critério do gabinete × Resolução PRES 790/2025]. Tutela recursal indeferida.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -22373,7 +22373,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal — bloqueio SISBAJUD antes da citação",
+    "origem": "2ª Vara Federal de Dourados · 5003915-12.2025.4.03.6002",
+    "decisao_agravada": "Bloqueio SISBAJUD antes da citação [VALIDAR ID]",
+    "recurso": "ID 375418018 · 22/05/2026",
+    "preparo": "PagTesouro \"Pagamento realizado com sucesso\" [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Comprovante STN/PagTesouro \"Pagamento realizado com sucesso\": ID 376144182 (serviço 20466; referência do agravo; identificação 6quledy64Hzb6k2BpXnflr) · Pix BB: ID 376144185 · valor R$ 64,26 · pago em 25/05/2026 · conferido em 20/11/2026 [VALIDAR: aceito pela Resolução PRES 790/2025, artigo 2º, § 2º, III; pendente de decisão do gabinete sobre o critério]",
+    "conf_prevencao": "Origem: 5003915-12.2025.4.03.6002 · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -22384,7 +22395,18 @@
    "extracao": {
     "situacao": "pendente"
    },
-   "bloco": "2"
+   "bloco": "2",
+   "teor": {
+    "sintese_fatica": "Em execução fiscal, o juízo determinou o bloqueio SISBAJUD concomitante à citação; o executado, advogado em causa própria, teve ativos bloqueados em 20/05/2026 sem citação válida e agravou.",
+    "inicial": "Execução fiscal 5003915-12.2025.4.03.6002 (2ª Vara Federal de Dourados) da União (Fazenda Nacional) contra Flávio Freitas de Lima",
+    "decisao_recorrida": "Decisão que determinou o bloqueio de ativos via SISBAJUD antes da citação [VALIDAR ID e data]",
+    "recurso": "Agravo ID 375418018 (22/05/2026; em causa própria): violação ao contraditório, à ampla defesa e ao devido processo legal pelo bloqueio sem citação; ausência dos requisitos da medida acautelatória; pede efeito suspensivo ativo para liberar os valores.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 382115188 (23/06/2026): bloqueio concomitante à citação (artigo 53 da Lei 8.212/1991; artigo 854 do CPC) e perigo na demora presumido.",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Comprovante PagTesouro ID 376144182 (\"Pagamento realizado com sucesso\", 25/05/2026) e comprovante Pix do Banco do Brasil ID 376144185. Decisão ID 376984929 (08/06/2026, publicada em 11/06/2026): indeferiu a tutela recursal.",
+    "representacao": "Agravante: advogado em causa própria (OAB/MS 7.807). Agravada: União (PGFN).",
+    "preparo": "Comprovante PagTesouro \"Pagamento realizado com sucesso\", serviço 20466, referência 50001271420264030001, R$ 64,26, em 25/05/2026 (ID 376144182) [VALIDAR Resolução PRES 790/2025, artigo 2º, § 2º, III]"
+   }
   },
   {
    "sessao": "",
