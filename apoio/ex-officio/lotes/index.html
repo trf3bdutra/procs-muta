@@ -173,6 +173,19 @@ a{color:inherit}
 .doc p.ehd{text-indent:0;font-weight:700}.doc p.esec{text-indent:0;font-weight:700;margin-top:14px}
 .doc p.sep,.doc p.rel{text-indent:0}.doc p.rod{text-indent:0;font-size:13.5px}
 .none{padding:12px 0 0;color:var(--em);font-style:italic;font-size:12.5px}
+/* versões da minuta (registrar mais de uma minuta do processo e comparar) */
+.vs{margin:12px 0 0;padding:14px 18px 16px;background:var(--ew);border:1px solid var(--el);border-left:3px solid var(--eo)}
+.vs-h{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.vs-h b{font:400 10px var(--emono);letter-spacing:.18em;text-transform:uppercase;color:var(--eo2)}
+.vs-h .k{color:var(--em);font-size:11.5px}
+.vs-t{width:100%;border-collapse:collapse;margin:10px 0 4px;font-size:12.5px}.vs-t th{text-align:left;font:400 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);padding:4px 6px;border-bottom:1px solid var(--el)}
+.vs-t td{padding:6px;border-bottom:1px solid var(--el);vertical-align:top;color:var(--ei)}.vs-t td.o{color:var(--em);max-width:340px}.vs-t td.a{white-space:nowrap;text-align:right}.vs-t td.a .b{margin-left:4px}
+.vs-t tr.vg td{background:var(--ep2)}.vs-t .vg-b{display:inline-block;margin-left:6px;padding:1px 6px;font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;background:var(--eo);color:#fff}
+.vs .form{grid-template-columns:minmax(0,1fr) minmax(0,1fr) 140px}.vs .form .w{grid-column:1/-1}.vs .form select{width:100%}
+.vs textarea{width:100%;min-height:220px;resize:vertical;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:13px/1.5 var(--font);padding:8px 9px;text-transform:none;letter-spacing:0}
+.vs .acts label{display:inline-flex;gap:5px;align-items:center;font-size:12px;color:var(--em)}
+.vs-sub{margin:14px 0 0;padding-top:10px;border-top:1px dashed var(--el)}.vs-sub>b{font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+.vs .cx-out{max-height:70vh;overflow-y:auto}.vs .doc{margin-top:8px}
+@media(max-width:760px){.vs .form{grid-template-columns:1fr}.vs-t td.o{max-width:none}}
 /* carregamento no mesmo desenho do Painel do Desembargador (/cmt): selo circular, estrela pulsante e trilho */
 .cmt-load{min-height:62vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center}
 .cmt-ld-mk{display:grid;place-items:center;width:76px;height:76px;border:1px solid rgba(230,194,122,.55);border-radius:50%;margin-bottom:22px}
@@ -683,8 +696,7 @@ function ligaMini(){lerMini();
 async function criaMinuta(uid,btn){const it=ITENS.find(i=>i.uid===uid);if(!it)return;
   btn.disabled=true;btn.textContent='Criando…';
   try{const r=await post({acao:'minuta-criar',id:LOTE.id,processo:it.processo});it.minuta=true;MDATA[uid]=r.minuta;
-    const box=document.getElementById('nm-'+uid);if(box)box.outerHTML=`<div class="mbar" id="mb-${uid}"><i class="nn">MINUTA</i><button type="button" class="b pri" data-min="${uid}">Abrir minuta</button><span class="k" id="mo-${uid}"></span></div><div class="doc hidden" id="d-${uid}"></div>`;
-    const ab=document.querySelector(`[data-min="${uid}"]`);if(ab){ab.onclick=()=>abreMinuta(uid,ab);abreMinuta(uid,ab)}
+    poeBarraMinuta(uid);const ab=document.querySelector(`[data-min="${uid}"]`);if(ab)abreMinuta(uid,ab);
     toast('Rascunho criado: confira o relatório e minute voto e ementa')}
   catch(e){btn.disabled=false;btn.textContent='Criar minuta';toast(e.status===403?'Só o gestor cria minuta':e.message)}}
 /* cartões da matriz: com mais de 12 assuntos, os de um processo só viram um cartão "Demais assuntos" (a lista lateral mantém todos) */
@@ -804,6 +816,8 @@ function montar(lotes,id,usuario){
   $('#q').oninput=filtra;$('#ff').onchange=filtra;$('#fs').onchange=filtra;
   $('#fa').onchange=filtra;$('#fr').onchange=filtra;$('#fres').onchange=filtra;if($('#fd'))$('#fd').onchange=filtra;filtra();ligaMini();
   document.querySelectorAll('[data-criar-min]').forEach(x=>x.onclick=()=>criaMinuta(x.dataset.criarMin,x));
+  document.querySelectorAll('[data-vers]').forEach(x=>x.onclick=()=>abreVersoes(x.dataset.vers));
+  document.querySelectorAll('[data-vreg]').forEach(x=>x.onclick=()=>abreVersoes(x.dataset.vreg,true));
   const m=location.hash.match(/^#p=(.+)$/); if(m)setTimeout(()=>vai(decodeURIComponent(m[1])),150);
 }
 function ligaSub(){
@@ -1039,8 +1053,8 @@ function perfil(it,i){
   if((it.ajustes||[]).length>1){const hd=it.ajustes[0];b+=`<div class="box wide so-equipe"><h3>Quadro de ajustes</h3><table><tr>${hd.map(x=>`<th>${esc(x)}</th>`).join('')}</tr>${it.ajustes.slice(1).map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</table></div>`}
   if((it.pendencias||[]).length) b+=`<div class="box wide so-equipe"><h3>Pendências</h3><ul>${it.pendencias.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></div>`;
   const pv=ITENS[i-1], nx=ITENS[i+1];
-  const mn=it.minuta?`<div class="mbar" id="mb-${it.uid}"><i class="nn">MINUTA</i><button type="button" class="b pri" data-min="${it.uid}">Abrir minuta</button><span class="k" id="mo-${it.uid}"></span></div><div class="doc hidden" id="d-${it.uid}"></div>`
-    :`<div class="none nm" id="nm-${it.uid}"><span>Minuta não disponível no painel${e.situacao==='A minutar'?' (processo a minutar)':/Voto próprio|Sem modelo/.test(e.situacao||'')?' (voto próprio, sem acórdão-modelo)':''}.</span>${!MODO_REL&&!LOTE.virtual?`<button type="button" class="b pri so-equipe" data-criar-min="${it.uid}" title="Cria um rascunho: relatório montado do prontuário; voto e ementa a minutar pelo modelo-matriz"${LISTA.gestor?'':' disabled'}>Criar minuta</button>`:LOTE.virtual&&!MODO_REL?'<span class="k">Para criar a minuta, inclua o processo num lote.</span>':''}</div>`;
+  const mn=it.minuta?barraMinuta(it.uid)
+    :`<div class="none nm" id="nm-${it.uid}"><span>Minuta não disponível no painel${e.situacao==='A minutar'?' (processo a minutar)':/Voto próprio|Sem modelo/.test(e.situacao||'')?' (voto próprio, sem acórdão-modelo)':''}.</span>${!MODO_REL&&!LOTE.virtual?`<button type="button" class="b pri so-equipe" data-criar-min="${it.uid}" title="Cria um rascunho: relatório montado do prontuário; voto e ementa a minutar pelo modelo-matriz"${LISTA.gestor?'':' disabled'}>Criar minuta</button><button type="button" class="b so-equipe" data-vreg="${it.uid}" title="Registra uma minuta já pronta (colada), que fica como a primeira versão do processo no lote"${LISTA.gestor?'':' disabled'}>Registrar minuta</button><div class="vs hidden so-equipe" id="vs-${it.uid}" style="flex-basis:100%"></div>`:LOTE.virtual&&!MODO_REL?'<span class="k">Para criar a minuta, inclua o processo num lote.</span>':''}</div>`;
   return `<section class="cmt-q pf" id="p-${it.uid}" data-u="${it.uid}" style="border-top-color:${c}">
    <h2><button type="button" class="b mn" data-min-pf aria-expanded="true" title="Minimizar">−</button><span class="pf-id">${temItem(it)?`<i class="nn">ITEM ${pad(it.item)}</i>`:''}<span class="cnj">${it.processo}</span>${it.tipo_caso?`<span class="tg tc" title="${esc(it.tipo_caso)}">${esc(it.tipo_caso)}</span>`:''}${it.resultado?`<span class="tg">${esc(it.resultado)}</span>`:''}${e.situacao?`<span class="tg so-equipe">${esc(e.situacao)}</span>`:''}${dsg(it)}</span>
    <span class="nav">${it.minuta&&!MODO_REL?`<button type="button" class="b so-equipe" data-cmpit="${it.uid}" title="Abre o painel lateral comparando esta minuta">Comparar</button>`:''}${it.sessao&&it.item?`<a class="b so-equipe" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Compendium">Consulta ↗</a>`:''}<span class="pn">${pv?`<button type="button" class="b" data-vai="${pv.uid}" title="Processo anterior">← ${rotCurto(pv)}</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">←</button>'}${nx?`<button type="button" class="b" data-vai="${nx.uid}" title="Próximo processo">${rotCurto(nx)} →</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">→</button>'}</span></span></h2>
@@ -1061,7 +1075,7 @@ async function abreMinuta(uid,btn){
     const m=await getMin(it); MIN[uid]=m;
     const S=SECS.filter(([k])=>m.secoes[k]&&m.secoes[k].length);
     d.innerHTML=S.map(([k,t])=>`<h4>${t}</h4>`+m.secoes[k].map((p,i)=>`<p class="${cls(p,k,i)}">${esc(p)}</p>`).join('')).join('');
-    $('#mo-'+uid).textContent=(m.origem||'')+(m.atualizado_em?' · '+br(m.atualizado_em):'');
+    $('#mo-'+uid).textContent=(m.vigente?m.vigente+(m.rotulo?' · '+m.rotulo:'')+(m.origem?' · ':''):'')+(m.origem||'')+(m.atualizado_em?' · '+br(m.atualizado_em):'');
     const mb=$('#mb-'+uid);
     mb.insertAdjacentHTML('beforeend',S.map(([k,t])=>`<button type="button" class="b" data-cp="${uid}|${k}">Copiar ${t.toLowerCase()}</button>`).join('')+`<button type="button" class="b pri" data-cp="${uid}|*">Copiar tudo</button>`);
     mb.querySelectorAll('[data-cp]').forEach(x=>x.onclick=()=>copia(x.dataset.cp));
@@ -1081,6 +1095,119 @@ async function copia(v){
   const rich=ks.map(([x,t])=>(k==='*'?`<p style="text-align:center;font-weight:bold">${t}</p>`:'')+m.secoes[x].map((p,i)=>{const c=cls(p,x,i);const st=c==='cit'?'margin-left:4cm;text-align:justify':(c==='ehd'||c==='esec')?'font-weight:bold;text-align:justify':(c==='rel'||c==='sep'||c==='rod')?'text-align:justify':'text-align:justify;text-indent:2.5cm';return `<p style="${st}">${esc(p)}</p>`}).join('')).join('');
   const ok=await clip(plain,`<div style="font-family:'Times New Roman';font-size:12pt">${rich}</div>`);
   toast(ok?(k==='*'?'Minuta copiada':ks[0][1].charAt(0)+ks[0][1].slice(1).toLowerCase()+' copiado'):'Não foi possível copiar: selecione o texto e use Ctrl+C');
+}
+/* ---------- versões da minuta: registrar mais de uma minuta do processo e comparar as versões ----------
+   A vigente é a que se abre aqui, a que o relator vê e a que se copia para o PJe. As outras ficam guardadas no lote,
+   sem alteração, e podem ser vistas, copiadas, comparadas entre si ou tornadas vigentes (só o gestor grava). */
+const VS={};
+function barraMinuta(uid){return `<div class="mbar" id="mb-${uid}"><i class="nn">MINUTA</i><button type="button" class="b pri" data-min="${uid}">Abrir minuta</button>${!MODO_REL&&!(LOTE&&LOTE.virtual)?`<button type="button" class="b so-equipe" data-vers="${uid}" title="Versões registradas desta minuta: registrar outra, comparar e escolher a vigente">Versões</button>`:''}<span class="k" id="mo-${uid}"></span></div><div class="doc hidden" id="d-${uid}"></div>${!MODO_REL?`<div class="vs hidden so-equipe" id="vs-${uid}"></div>`:''}`}
+function poeBarraMinuta(uid){const box=document.getElementById('nm-'+uid);if(box)box.outerHTML=barraMinuta(uid);
+  const ab=document.querySelector(`[data-min="${uid}"]`);if(ab)ab.onclick=()=>abreMinuta(uid,ab);
+  const bv=document.querySelector(`[data-vers="${uid}"]`);if(bv)bv.onclick=()=>abreVersoes(uid)}
+/* texto colado → seções: cada título (RELATÓRIO, VOTO, EMENTA, ACÓRDÃO) numa linha própria abre a seção; um parágrafo por linha */
+const TIT_SEC=[[/^RELAT[ÓO]RIO$/i,'relatorio'],[/^VOTO$/i,'voto'],[/^EMENTA$/i,'ementa'],[/^AC[ÓO]RD[ÃA]O$/i,'acordao']];
+function parteMinuta(txt){const secoes={relatorio:[],voto:[],ementa:[],acordao:[]};let cur=null,antes=0;
+  String(txt||'').replace(/\r/g,'').split(/\n+/).map(l=>l.replace(/[ \s]+/g,' ').trim()).filter(Boolean).forEach(l=>{
+    const h=TIT_SEC.find(([re])=>re.test(l.replace(/[:.]\s*$/,'')));
+    if(h&&!secoes[h[1]].length&&cur!==h[1]){cur=h[1];return}
+    if(!cur){antes++;return}
+    secoes[cur].push(l)});
+  return {secoes,antes,total:Object.values(secoes).reduce((a,x)=>a+x.length,0)}}
+const textoSecoes=s=>SECS.filter(([k])=>((s||{})[k]||[]).length).map(([k,t])=>t+'\n\n'+s[k].join('\n\n')).join('\n\n');
+const resumoPar=p=>p?SECS.map(([k,t])=>`${t[0]}${t.slice(1).toLowerCase()} ${p[k]||0}`).join(' · '):'';
+async function carregaVersoes(it,forca){if(VS[it.uid]&&!forca)return VS[it.uid];
+  const r=await api('?id='+encodeURIComponent(LOTE.id)+'&minuta='+it.processo.slice(0,10)+'&versoes=1');
+  VS[it.uid]=Object.assign({fotos:(VS[it.uid]||{}).fotos||{}},r);return VS[it.uid]}
+async function textoVersao(it,v){if(v==='atual')return getMin(it);const S=VS[it.uid];
+  if(!S.fotos[v])S.fotos[v]=await api('?id='+encodeURIComponent(LOTE.id)+'&minuta='+it.processo.slice(0,10)+'&versao='+encodeURIComponent(v));return S.fotos[v]}
+function opcoesVersao(S){const o=(S.versoes||[]).map(v=>[v.id,`${v.id} · ${v.rotulo}${v.id===S.vigente?' (vigente)':''}`]);
+  if(S.existe&&(!o.length||S.editada))o.push(['atual',o.length?'Texto atual do painel (vigente com trechos alterados)':'Texto atual do painel']);return o}
+/* parágrafos alterados: emparelha cada um da versão A com o mais parecido da B, na ordem (sem semelhança, fica como incluído ou excluído) */
+const palPar=t=>new Set(String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim().split(' ').filter(Boolean));
+function simPar(a,b){const A=palPar(a),B=palPar(b);let c=0;B.forEach(w=>{if(A.has(w))c++});return A.size+B.size?2*c/(A.size+B.size):1}
+function alinhaPar(dl,ad){const n=dl.length,m=ad.length,L=.4,S=dl.map(a=>ad.map(b=>simPar(a,b))),D=Array.from({length:n+1},()=>new Float64Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)D[i][j]=Math.max(D[i+1][j],D[i][j+1],S[i][j]>=L?D[i+1][j+1]+S[i][j]:-1);
+  const r=[];let i=0,j=0;while(i<n&&j<m){if(S[i][j]>=L&&D[i][j]===D[i+1][j+1]+S[i][j]){r.push([i,j]);i++;j++}else if(D[i][j]===D[i+1][j]){r.push([i,null]);i++}else{r.push([null,j]);j++}}
+  while(i<n)r.push([i++,null]);while(j<m)r.push([null,j++]);return r}
+/* comparação seção a seção: riscado = só na versão A; verde = só na versão B */
+function difSecoes(MA,MB,sec,ws,sd){let h='',ig=0,tot=0,npar=0;
+  SECS.forEach(([k,t])=>{if(sec!=='*'&&sec!==k)return;const PA=((MA.secoes||{})[k]||[]).map(String),PB=((MB.secoes||{})[k]||[]).map(String);if(!PA.length&&!PB.length)return;
+    let hs='',eqn=0,dl=[],ad=[],np=0;
+    const flushEq=()=>{if(eqn){hs+=`<p class="eq">${eqn} parágrafo${eqn>1?'s':''} igua${eqn>1?'is':'l'}</p>`;eqn=0}};
+    const flush=()=>{alinhaPar(dl,ad).forEach(([i,j])=>{if(i!=null&&j!=null){const d=difPal(dl[i],ad[j],ws);hs+=`<p>${d.h}</p>`;ig+=d.igual;tot+=d.tot}else if(i!=null){hs+=`<p><del>${esc(dl[i])}</del></p>`;tot+=dl[i].split(/\s+/).length}else{hs+=`<p><ins>${esc(ad[j])}</ins></p>`;tot+=ad[j].split(/\s+/).length}np++});dl=[];ad=[]};
+    lcs(PA,PB,(x,y)=>nrm(x,ws)===nrm(y,ws)).forEach(o=>{if(o[0]==='='){flush();const w=o[1].split(/\s+/).length;ig+=w;tot+=w;if(sd)eqn++;else hs+=`<p class="so">${esc(o[1])}</p>`}else{flushEq();(o[0]==='-'?dl:ad).push(o[1])}});
+    flush();flushEq();npar+=np;
+    h+=`<h5>${t} · ${np?np+' parágrafo'+(np>1?'s':'')+' com diferença':'sem diferença'}</h5>`+hs});
+  return {h,npar,pct:tot?Math.round(100*ig/tot):100}}
+function htmlVersao(m){return `<div class="doc">`+SECS.filter(([k])=>((m.secoes||{})[k]||[]).length).map(([k,t])=>`<h4>${t}</h4>`+m.secoes[k].map((p,i)=>`<p class="${cls(p,k,i)}">${esc(p)}</p>`).join('')).join('')+`</div>`}
+async function copiaVersao(m){const ks=SECS.filter(([x])=>((m.secoes||{})[x]||[]).length);
+  const plain=ks.map(([x,t])=>t+'\n\n'+m.secoes[x].join('\n\n')).join('\n\n\n');
+  const rich=ks.map(([x,t])=>`<p style="text-align:center;font-weight:bold">${t}</p>`+m.secoes[x].map((p,i)=>{const c=cls(p,x,i);const st=c==='cit'?'margin-left:4cm;text-align:justify':(c==='ehd'||c==='esec')?'font-weight:bold;text-align:justify':(c==='rel'||c==='sep'||c==='rod')?'text-align:justify':'text-align:justify;text-indent:2.5cm';return `<p style="${st}">${esc(p)}</p>`}).join('')).join('');
+  toast(await clip(plain,`<div style="font-family:'Times New Roman';font-size:12pt">${rich}</div>`)?'Versão copiada':'Não foi possível copiar: selecione o texto e use Ctrl+C')}
+/* depois de trocar a vigente, a minuta aberta no cartão e as cópias em memória são lidas de novo */
+function esqueceMinuta(uid){delete MDATA[uid];delete MIN[uid];const d=$('#d-'+uid);if(d){d.innerHTML='';d.classList.add('hidden')}
+  const mb=$('#mb-'+uid);if(mb){mb.querySelectorAll('[data-cp]').forEach(x=>x.remove());const bt=mb.querySelector('[data-min]');if(bt)bt.textContent='Abrir minuta'}const mo=$('#mo-'+uid);if(mo)mo.textContent=''}
+async function abreVersoes(uid,novo){const it=ITENS.find(i=>i.uid===uid),box=$('#vs-'+uid);if(!it||!box)return;
+  if(!box.classList.contains('hidden')&&!novo&&box.dataset.ok){box.classList.add('hidden');return}
+  box.classList.remove('hidden');box.innerHTML='<p class="none">Lendo as versões…</p>';
+  let S;try{S=await carregaVersoes(it,true)}catch(e){box.innerHTML=`<p class="none">${esc(e.message)}</p>`;return}
+  box.dataset.ok='1';desenhaVersoes(it,novo||!S.existe)}
+function desenhaVersoes(it,novo){const uid=it.uid,box=$('#vs-'+uid),S=VS[uid],G=LISTA.gestor,vs=S.versoes||[];
+  const op=opcoesVersao(S),opt=sel=>op.map(([v,t])=>`<option value="${v}"${v===sel?' selected':''}>${esc(t)}</option>`).join('');
+  /* por padrão, B é a mais recente e A é a vigente (ou a anterior a B, se a vigente for a mais recente) */
+  const ids=op.map(o=>o[0]),b1=ids[ids.length-1]||'',a0=S.vigente&&S.vigente!==b1&&ids.includes(S.vigente)?S.vigente:(ids.length>1?ids[ids.length-2]:'');
+  let h=`<div class="vs-h"><b>Versões da minuta</b><span class="k">${S.existe?(vs.length?`${vs.length} versão${vs.length>1?'ões':''} registrada${vs.length>1?'s':''} · vigente ${esc(S.vigente||'—')}${S.editada?' (com trechos alterados em lote depois)':''}`:'só a minuta atual, ainda sem histórico: ao registrar outra, a atual fica guardada como v1'):'nenhuma minuta registrada'}</span><span class="cmt-sp"></span>`+
+    `<button type="button" class="b pri" data-vn="1"${G?'':' disabled title="Só o gestor registra versões"'}>${S.existe?'Registrar outra versão':'Registrar minuta'}</button><button type="button" class="b" data-vx="1">Fechar</button></div>`;
+  if(vs.length)h+=`<table class="vs-t"><tr><th>Versão</th><th>Nome</th><th>Registrada</th><th>Origem</th><th>Parágrafos</th><th></th></tr>`+vs.slice().reverse().map(v=>{const vg=v.id===S.vigente;
+    return `<tr class="${vg?'vg':''}"><td><b>${esc(v.id)}</b>${vg?'<span class="vg-b">vigente</span>':''}</td><td>${esc(v.rotulo)}</td><td>${esc([v.por,v.em&&br(v.em)].filter(Boolean).join(' · ')||'—')}</td><td class="o">${esc(v.origem||'')}</td><td>${esc(resumoPar(v.paragrafos))}</td>`+
+      `<td class="a"><button type="button" class="b" data-vver="${esc(v.id)}">Ver</button><button type="button" class="b" data-vcp="${esc(v.id)}">Copiar</button>${vg&&!S.editada?'':`<button type="button" class="b" data-vvig="${esc(v.id)}"${G?'':' disabled title="Só o gestor troca a vigente"'}>Tornar vigente</button>`}</td></tr>`}).join('')+`</table>`;
+  if(op.length>1)h+=`<div class="vs-sub"><b>Comparar versões</b><div class="form"><label>Versão A (riscado)<select class="cmt-sel" data-vca>${opt(a0)}</select></label><label>Versão B (verde)<select class="cmt-sel" data-vcb>${opt(b1)}</select></label>`+
+    `<label>Parte<select class="cmt-sel" data-vcs><option value="*">Tudo</option>${SECS.map(([k,t])=>`<option value="${k}">${t[0]+t.slice(1).toLowerCase()}</option>`).join('')}</select></label></div>`+
+    `<div class="acts"><label><input type="checkbox" data-vcw checked> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-vcd checked> só as diferenças</label><button type="button" class="b" data-vtroca="1" title="Inverte A e B">⇄ inverter</button><span class="k" data-vst></span></div>`+
+    `<div class="cx-lg"><span><del>riscado</del> está só na versão A</span><span><ins>verde</ins> está só na versão B</span></div></div>`;
+  h+=`<div class="cx-out" data-vout></div>`;
+  h+=`<div class="vs-sub${novo&&G?'':' hidden'}" data-vnf><b>${S.existe?'Registrar outra versão':'Registrar minuta'}</b><div class="form"><label>Nome da versão<input data-vnr maxlength="80" placeholder="Ex.: Corrigida por Bruno"></label><label class="w" style="grid-column:2/-1">Origem ou observação<input data-vno maxlength="400" placeholder="Ex.: conferida nos autos em ${esc(br(new Date().toISOString().slice(0,10)))}"></label>`+
+    `<label class="w">Texto da minuta<textarea data-vnt placeholder="Cole a minuta inteira, com os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO cada um numa linha (o mesmo formato do Copiar tudo); um parágrafo por linha"></textarea></label></div>`+
+    `<div class="acts">${S.existe?'<button type="button" class="b" data-vnb="1" title="Preenche com o texto vigente, para editar e registrar como versão nova">Partir da vigente</button>':''}${S.existe?'<label><input type="checkbox" data-vnv checked> tornar vigente (a que o relator vê e a que se copia para o PJe)</label>':''}<span class="k" data-vns></span></div>`+
+    `<div class="acts"><button type="button" class="b pri" data-vnok="1" disabled>Registrar</button><button type="button" class="b" data-vnx="1">Cancelar</button></div></div>`;
+  box.innerHTML=h;
+  const q=sel=>box.querySelector(sel);
+  q('[data-vx]').onclick=()=>box.classList.add('hidden');
+  q('[data-vn]').onclick=()=>{const f=q('[data-vnf]');f.classList.remove('hidden');f.scrollIntoView({behavior:'smooth',block:'nearest'});q('[data-vnr]').focus()};
+  box.querySelectorAll('[data-vver]').forEach(b=>b.onclick=async()=>{const out=q('[data-vout]');out.innerHTML='<p class="none">Lendo…</p>';try{const m=await textoVersao(it,b.dataset.vver);out.innerHTML=`<h5>${esc(b.dataset.vver)} · ${esc(m.rotulo||'')}</h5>`+htmlVersao(m)}catch(e){out.innerHTML=`<p class="none">${esc(e.message)}</p>`}});
+  box.querySelectorAll('[data-vcp]').forEach(b=>b.onclick=async()=>{try{await copiaVersao(await textoVersao(it,b.dataset.vcp))}catch(e){toast(e.message)}});
+  box.querySelectorAll('[data-vvig]').forEach(b=>b.onclick=async()=>{
+    if(!b.dataset.conf){box.querySelectorAll('[data-vvig]').forEach(x=>{delete x.dataset.conf;x.textContent='Tornar vigente'});b.dataset.conf='1';b.textContent='Confirmar: '+b.dataset.vvig+' vigente';return}
+    b.disabled=true;b.textContent='Gravando…';
+    try{const r=await post({acao:'minuta-vigente',id:LOTE.id,processo:it.processo,versao:b.dataset.vvig});
+      Object.assign(S,{versoes:r.versoes,vigente:r.vigente,editada:false,existe:true});esqueceMinuta(uid);toast(r.igual?'Esta já é a vigente':'Versão '+r.vigente+' é agora a vigente');desenhaVersoes(it)}
+    catch(e){b.disabled=false;b.textContent='Tornar vigente';toast(e.status===403?'Só o gestor troca a vigente':e.message)}});
+  const cmp=async()=>{const A=q('[data-vca]'),B=q('[data-vcb]'),out=q('[data-vout]'),st=q('[data-vst]');if(!A||!B)return;
+    if(A.value===B.value){out.innerHTML='<p class="none">Escolha duas versões diferentes.</p>';st.textContent='';return}
+    st.textContent='Lendo as versões…';
+    try{const [MA,MB]=await Promise.all([textoVersao(it,A.value),textoVersao(it,B.value)]);const d=difSecoes(MA,MB,q('[data-vcs]').value,q('[data-vcw]').checked,q('[data-vcd]').checked);
+      out.innerHTML=d.h||'<p class="none">Sem texto nas partes escolhidas.</p>';st.textContent=d.npar?`${d.npar} parágrafo${d.npar>1?'s':''} com diferença · ${d.pct}% igual`:'Versões iguais'}
+    catch(e){st.textContent=e.message}};
+  box.querySelectorAll('[data-vca],[data-vcb],[data-vcs],[data-vcw],[data-vcd]').forEach(x=>x.onchange=cmp);
+  const tr=q('[data-vtroca]');if(tr)tr.onclick=()=>{const A=q('[data-vca]'),B=q('[data-vcb]'),t=A.value;A.value=B.value;B.value=t;cmp()};
+  if(op.length>1)cmp();
+  /* registrar: reconhece as seções enquanto se cola e só libera o botão com nome e texto */
+  const T=q('[data-vnt]'),R=q('[data-vnr]'),ok=q('[data-vnok]'),ns=q('[data-vns]');
+  const confere=()=>{const p=parteMinuta(T.value);ok.disabled=!G||!p.total||!R.value.trim();
+    ns.textContent=!T.value.trim()?'':!p.total?'Não encontrei os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO, cada um numa linha.':'Reconhecido: '+resumoPar(Object.fromEntries(Object.entries(p.secoes).map(([k,v])=>[k,v.length])))+(p.antes?` · ${p.antes} linha(s) antes do primeiro título ficam de fora`:'');return p};
+  T.oninput=confere;R.oninput=confere;
+  const nb=q('[data-vnb]');if(nb)nb.onclick=async()=>{try{T.value=textoSecoes((await getMin(it)).secoes);confere();T.focus();T.setSelectionRange(0,0);T.scrollTop=0}catch(e){toast(e.message)}};
+  q('[data-vnx]').onclick=()=>{q('[data-vnf]').classList.add('hidden');if(!S.existe)box.classList.add('hidden')};
+  ok.onclick=async()=>{const p=confere();if(ok.disabled)return;ok.disabled=true;ok.textContent='Registrando…';
+    const vv=q('[data-vnv]'),vig=!vv||vv.checked;
+    try{const r=await post({acao:'minuta-versao',id:LOTE.id,processo:it.processo,rotulo:R.value.trim(),origem:q('[data-vno]').value.trim(),secoes:p.secoes,vigente:vig});
+      const nova=r.versoes[r.versoes.length-1];
+      if(!it.minuta){it.minuta=true;poeBarraMinuta(uid)}
+      Object.assign(VS[uid],{versoes:r.versoes,vigente:r.vigente,editada:false,existe:true});
+      if(r.trocouVigente)esqueceMinuta(uid);
+      toast('Versão '+nova.id+' registrada'+(r.trocouVigente?' e vigente':''));
+      const nbx=$('#vs-'+uid);if(nbx){nbx.classList.remove('hidden');nbx.dataset.ok='1';desenhaVersoes(it)}}
+    catch(e){ok.disabled=false;ok.textContent='Registrar';toast(e.status===403?'Só o gestor registra versões':e.message)}};
 }
 let CUR_UID='';
 function vai(uid){CUR_UID=uid;setTimeout(corAtualiza,0);if(CX.aberto){const it=ITENS.find(i=>i.uid===uid);if(it&&it.minuta){$('#cx-it').value=uid;compara()}}const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');if(e.classList.contains('mini'))minimiza(e,false);e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
