@@ -3,6 +3,18 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.15
+
+- **Cabeçalho no formato da gaveta "Para minuta" da pauta.** Fase (para minuta, correção, liberação; na monocrática,
+  revisão, envio e assinatura) e dias na tarefa; número, classe e alertas; assunto e tipo; partes; autuação recolhida.
+  **Etapas** em linha: tocar na próxima marca hoje, tocar na última feita desfaz (campos `producao.*` da ficha, os mesmos da
+  pauta). **Designação** em pílulas (minuta e correção).
+- **Sinalizações** em cartões no modo Processo: pendências e intercorrências da ficha (uma por linha), com caixa de
+  resolvida, exclusão e "Nova sinalização" (Enter). Saíram da lista de campos da Triagem para não repetir.
+- **Notas sobre o caso** em log (`origem.Observações`, "data hora · autor · texto"), com "+ Incluir nota" (Ctrl+Enter).
+- **Decisão da monocrática** em botões (hipótese do artigo 932, resultado, tópico-síntese) e honorários; as datas das etapas e
+  os campos da decisão não se repetem nos grupos de Produção.
+
 ## O que muda na 0.14
 
 - **Tema escuro, padrão do painel**, nas cores do Ex Officio escuro (azul-noite, linhas finas, rótulos em mono versalete,

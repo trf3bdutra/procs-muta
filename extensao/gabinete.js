@@ -140,7 +140,7 @@ function pills() {
    Autuação, partes, tramitação e "autos extraídos" não aparecem como grupos: o cartão, a situação atual e a lista de documentos os substituem. */
 var MODOS = ['Processo', 'Triagem', 'Roteiro', 'Produção'];
 var FORA_PROC = { 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
-var NO_TOPO = { 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1 };
+var NO_TOPO = { 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1 };
 var CTL_PROC = ['urgencia', 'meta', 'sobrestamento', 'sensivel'];
 function abaModelo(nome) { return ((G.F && G.F.abas) || []).filter(function (a) { return a.aba === nome; })[0] || null; }
 function grupoModelo(nome) { var g = null; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (x) { if (!g && x.grupo === nome) g = x; }); }); return g; }
@@ -180,6 +180,128 @@ function cartao(s) {
     '<div class="pc-u"><span>' + esc(s.usuario) + (s.gestor ? ' · gestor' : '') + '</span><button type="button" class="lnk" data-g="atualizar">Atualizar</button><a class="lnk" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/">Ex Officio</a><button type="button" class="lnk" data-sair>Sair</button></div>' +
     '</section>';
 }
+
+/* ---------- 0.15 · cabeçalho no formato da gaveta "Para minuta" da pauta ----------
+   fase e dias na tarefa; número, classe, alertas; assunto e tipo; partes; etapas (tocar na próxima marca hoje, na última
+   feita desfaz); designação de minuta e correção. Os mesmos campos da ficha (producao.*) que a pauta usa. */
+function pad2(n) { return (n < 10 ? '0' : '') + n; }
+function hojeIso() { var d = new Date(); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+function agoraBr() { var d = new Date(); return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function sim(v) { return /^(sim|s|true)$/i.test(S(v)); }
+var SV = function (d, n) { return '<svg viewBox="0 0 24 24" width="' + (n || 16) + '" height="' + (n || 16) + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; };
+var IC = { min: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', rev: '<path d="M20 6 9 17l-5-5"/>', env: '<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>',
+  ass: '<path d="M3 21c3-1 5-4 6-7l3 3c-3 1-6 3-7 6z"/><path d="M14 4l6 6-5 5-6-6z"/>', et: '<path d="M4 12h4l3-8 4 16 3-8h2"/>', pt: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15 15c3 0 6 1.5 6 4"/>',
+  sn: '<path d="M5 21V4h11l-1.5 4L16 12H5"/>', nt: '<path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6M9 17h3"/>', dc: '<path d="M12 3v18M5 7h14M7 7l-3 7h6zM17 7l-3 7h6z"/>' };
+function etapas() {
+  var mono = destino() === 'monocratica', d = function (k) { return S(V('producao', k)); };
+  var L = [{ r: 'Minuta', ic: 'min', ok: !!d('MINUTADO'), dt: d('MINUTADO'), on: { MINUTADO: 1 }, off: ['MINUTADO'] },
+    { r: mono ? 'Revisão' : 'Correção', ic: 'rev', ok: sim(d('CORRIGIDO')) || !!d('Data da Revisão'), dt: d('Data da Revisão'), on: { CORRIGIDO: 'Sim', 'Data da Revisão': 1 }, off: ['CORRIGIDO', 'Data da Revisão'] }];
+  if (mono) L.push({ r: 'Enviada', ic: 'env', ok: !!d('Data da Liberação'), dt: d('Data da Liberação'), on: { 'Data da Liberação': 1 }, off: ['Data da Liberação'] },
+    { r: 'Assinada', ic: 'ass', ok: sim(d('Assinado')) || !!d('Data da Assinatura'), dt: d('Data da Assinatura'), on: { Assinado: 'Sim', 'Data da Assinatura': 1 }, off: ['Assinado', 'Data da Assinatura'] });
+  else L.push({ r: 'Liberação', ic: 'env', ok: sim(d('LIBERADO')) || !!d('Data da Liberação'), dt: d('Data da Liberação'), on: { LIBERADO: 'Sim', 'Data da Liberação': 1 }, off: ['LIBERADO', 'Data da Liberação'] });
+  var n = 0; while (n < L.length && L[n].ok) n++;
+  return { L: L, n: n, mono: mono };
+}
+function marcarEtapa(i) {
+  var E = etapas(), x = E.L[i]; if (!x) return;
+  if (i === E.n) Object.keys(x.on).forEach(function (k) { marcar('producao.' + k, x.on[k] === 1 ? hojeIso() : x.on[k]); });
+  else if (i === E.n - 1) x.off.forEach(function (k) { marcar('producao.' + k, ''); });
+  else return;
+  agendar(500); render();
+}
+function iniciais(v) { var p = S(v).split(/\s+/).filter(Boolean); return p.length ? (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase() : '—'; }
+function diasDesde(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(v)) || /^(\d{2})\/(\d{2})\/(\d{4})/.exec(S(v)); if (!m) return null; var d = m[1].length === 4 ? new Date(+m[1], m[2] - 1, +m[3]) : new Date(+m[3], m[2] - 1, +m[1]); return Math.max(0, Math.floor((Date.now() - d) / 864e5)); }
+function cabeca(s) {
+  var R = {};
+  ['Autuação', 'Partes'].forEach(function (n) { var g = grupoModelo(n); (g ? g.campos : []).forEach(function (c) { R[c.rotulo] = valorDe(c); }); });
+  var classe = R['Classe'] || fonteVal({ fonte: ['classe_judicial', 'Classe'] }), assunto = R['Assunto CNJ'] || fonteVal({ fonte: ['Assunto'] });
+  var abrev = (pjeDoProcesso() ? window.MutaPje.classe() : '') || classe.split(/\s*[\/(]/)[0];
+  var tarefa = (pjeDoProcesso() && window.MutaPje.tarefa && window.MutaPje.tarefa()) || fonteVal({ fonte: ['tarefa_atual'] });
+  var dias = diasDesde(fonteVal({ fonte: ['data_entrada_tarefa'] }));
+  var AL = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }) : [];
+  var E = etapas(), FASE = E.mono ? ['Para minuta', 'Para revisão', 'Para envio', 'Para assinatura', 'Assinada'] : ['Para minuta', 'Para correção', 'Para liberação', 'Liberado'];
+  var partes = S(R['Polo ativo']) ? S(R['Polo ativo']) + (S(R['Polo passivo']) ? ' x ' + S(R['Polo passivo']) : '') : S(R['Partes (texto da pauta)']);
+  var tipoJ = S(V('triagem', 'Tipo de Julgamento')) || S(V('triagem', 'Padrão - Espécie'));
+  var dl = [['Órgão julgador', 'Órgão julgador'], ['Seção', 'Seção competente'], ['Distribuição', 'Distribuição'], ['1º grau', 'Distribuição no 1º grau'], ['Valor da causa', 'Valor da causa'], ['Prioridade', 'Prioridade'], ['Sigilo', 'Sigiloso']]
+    .filter(function (x) { return S(R[x[1]]) && !/^(não|nao|n|false|0)$/i.test(S(R[x[1]])); })
+    .map(function (x) { var v = S(R[x[1]]); if (/^(true|sim|s)$/i.test(v)) v = 'Sim'; else if (x[0] === 'Valor da causa') v = moeda(v); else v = fmtV(R[x[1]]);
+      return '<div' + (x[0] === 'Prioridade' || x[0] === 'Sigilo' ? ' class="pri"' : '') + '><dt>' + esc(x[0]) + '</dt><dd>' + esc(v) + '</dd></div>'; }).join('');
+  var polo = function (rot, p, a) { return S(R[p]) ? '<div class="pc-p"><span>' + esc(rot) + '</span><b>' + esc(R[p]) + '</b>' + (S(R[a]) ? '<small>Adv.: ' + esc(R[a]) + '</small>' : '') + '</div>' : ''; };
+  var polos = polo('Polo ativo', 'Polo ativo', 'Advogado do polo ativo') + polo('Polo passivo', 'Polo passivo', 'Advogado do polo passivo') +
+    (S(R['DPU']) && !/^(não|nao)$/i.test(S(R['DPU'])) ? '<div class="pc-p"><span>DPU</span><b>' + esc(R['DPU']) + '</b></div>' : '') +
+    (S(R['MPF']) && !/^(não|nao)$/i.test(S(R['MPF'])) ? '<div class="pc-p"><span>MPF</span><b>' + esc(R['MPF']) + '</b></div>' : '');
+  var etq = S(R['Etiquetas do PJe']).split(/\s*[;,|]\s*/).filter(Boolean);
+  var pills = ORD_CE.filter(function (g) { return g !== 'monocratica' && vale(g); }).map(function (g) { return '<button type="button" class="gp ' + g + '" data-ir="g-ctl" title="Abrir o controle">' + ROT_CE[g] + '</button>'; }).join('');
+  var et = E.L.map(function (x, i) {
+    var cls = x.ok ? 'ok' : i === E.n ? 'at' : '', t = i === E.n ? 'Marcar hoje' : i === E.n - 1 ? 'Desfazer' : x.ok ? 'Feita' : 'Depois da etapa anterior';
+    return '<button type="button" class="pm-e ' + cls + '" data-et="' + i + '" title="' + t + '">' + (i === E.n ? '<em>agora</em>' : '') + '<span class="pm-o">' + SV(IC[x.ic], 14) + '</span><b>' + esc(x.r) + '</b><small>' + (x.dt ? esc(brD(x.dt).slice(0, 5)) : '—') + '</small></button>';
+  }).join('');
+  var pess = function (k, rot) { var v = S(V('producao', k)); return '<button type="button" class="pm-pp' + (v ? '' : ' vz') + '" data-ir-p="' + k + '" title="Designação em Produção"><span class="pm-av">' + esc(v ? iniciais(v) : '—') + '</span><span class="pm-pn"><small>' + rot + '</small>' + esc(v || 'não designado') + '</span></button>'; };
+  return '<section class="pc pm">' +
+    '<div class="pm-top"><span class="pm-fase">' + FASE[Math.min(E.n, FASE.length - 1)] + '</span>' + (dias != null ? '<span class="pm-dd' + (dias > 30 ? ' al' : '') + '">' + dias + ' dias na tarefa<i><i style="width:' + Math.min(100, dias / 60 * 100) + '%"></i></i></span>' : '') + '<span class="sp"></span>' + pills + '</div>' +
+    '<div class="pm-l1"><button type="button" class="mono pc-cnj" data-copia="' + esc(G.cnj) + '" title="Copiar o número">' + esc(G.cnj) + '</button>' + (abrev ? '<span class="pc-cl" title="' + esc(classe) + '">' + esc(abrev) + '</span>' : '') +
+      (AL.length ? '<button type="button" class="pm-al" data-aba="Triagem" title="' + esc(AL.map(function (a) { return a.t; }).join(' · ')) + '">' + AL.length + ' alerta' + (AL.length > 1 ? 's' : '') + '</button>' : '') + '</div>' +
+    '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (tipoJ ? '<span>' + esc(tipoJ) + '</span>' : classe ? '<span>' + esc(classe) + '</span>' : '') + '</p>' +
+    (tarefa ? '<p class="pc-tf">' + esc(tarefa) + '</p>' : '') +
+    (partes ? '<p class="pm-pt" title="' + esc(partes) + '">' + SV(IC.pt, 14) + '<span>' + esc(partes) + '</span></p>' : '') +
+    ((dl || polos || etq.length) ? '<details class="pm-aut"><summary>Autuação e partes</summary>' + (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') + (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
+      (etq.length ? '<div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' : '') +
+    '<p class="pm-sh">' + SV(IC.et, 14) + 'Etapas<i>toque para marcar hoje</i></p>' +
+    '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
+    '<div class="pm-resp">' + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
+    '<div class="pc-u"><span>' + esc(s.usuario) + (s.gestor ? ' · gestor' : '') + '</span><button type="button" class="lnk" data-g="atualizar">Atualizar</button><a class="lnk" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/">Ex Officio</a><button type="button" class="lnk" data-sair>Sair</button></div>' +
+    '</section>';
+}
+/* sinalizações: pendências e intercorrências da ficha, uma por linha ("✓ " no início = resolvida) */
+var SN = [['pd', 'Pendência', 'triagem', 'O que falta sanar'], ['ic', 'Intercorrência', 'triagem', 'Intercorrências']];
+function snLinhas(t) { var x = SN.filter(function (q) { return q[0] === t; })[0]; return S(V(x[2], x[3])).split(/\n+/).map(S).filter(Boolean); }
+function snGravar(t, L) { var x = SN.filter(function (q) { return q[0] === t; })[0]; marcar(x[2] + '.' + x[3], L.join('\n')); agendar(500); render(); }
+function sinalizacoes() {
+  var cont = {}, itens = [];
+  SN.forEach(function (q) { snLinhas(q[0]).forEach(function (l, i) { var ok = /^✓\s*/.test(l); if (!ok) cont[q[0]] = (cont[q[0]] || 0) + 1; itens.push({ t: q[0], r: q[1], i: i, ok: ok, tx: l.replace(/^✓\s*/, '') }); }); });
+  itens.sort(function (a, b) { return a.ok - b.ok; });
+  var tag = function (t) { return t === 'ic' ? '<em class="sn-st ic">' + cont.ic + ' intercorrência' + (cont.ic > 1 ? 's' : '') + '</em>' : '<em class="sn-st pd">' + cont.pd + ' pendência' + (cont.pd > 1 ? 's' : '') + '</em>'; };
+  return '<section class="card pc-sec sn" id="g-sn"><div class="pc-sh"><h3>' + SV(IC.sn, 13) + ' Sinalizações</h3>' + (cont.ic ? tag('ic') : '') + (cont.pd ? tag('pd') : '') + (!cont.ic && !cont.pd ? '<small class="muted">nada em aberto</small>' : '') + '</div>' +
+    (itens.length ? '<ul class="sn-l">' + itens.map(function (x) {
+      var m = /^(.*?)\s*·\s*([^·]{2,40})\s*·\s*(\d{2}\/\d{2}(?:\/\d{4})?)$/.exec(x.tx);
+      return '<li class="sn-i ' + x.t + (x.ok ? ' ok' : '') + '"><input type="checkbox" data-sn-ok="' + x.t + ':' + x.i + '"' + (x.ok ? ' checked' : '') + ' aria-label="Resolvida"><div><span class="sn-tp ' + x.t + '">' + x.r + '</span><p>' + esc(m ? m[1] : x.tx) + '</p>' + (m ? '<small>' + esc(m[2] + ' · ' + m[3]) + '</small>' : '') + '</div><button type="button" class="sn-x" data-sn-x="' + x.t + ':' + x.i + '" title="Excluir" aria-label="Excluir">×</button></li>';
+    }).join('') + '</ul>' : '') +
+    '<div class="sn-n"><select id="sn-tp" aria-label="Tipo">' + SN.map(function (q) { return '<option value="' + q[0] + '"' + (G.snTp === q[0] ? ' selected' : '') + '>' + q[1] + '</option>'; }).join('') + '</select><input type="text" id="sn-tx" placeholder="Nova sinalização: descreva e tecle Enter"></div>' +
+    '<small class="muted sn-h">Intercorrência retém a liberação; pendência é aviso.</small></section>';
+}
+function snIncluir() {
+  var i = $('sn-tx'), t = ($('sn-tp') || {}).value || 'pd', v = i ? S(i.value) : ''; if (!v) return;
+  var u = ses.estado().usuario || '', d = new Date(), L = snLinhas(t);
+  L.push(v + ' · ' + (u || 'equipe') + ' · ' + pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1)); G.snTp = t; snGravar(t, L);
+}
+/* notas sobre o caso: log em origem.Observações ("DD/MM/AAAA HH:MM · autor · texto"), a nova no fim */
+function notasL() { return S(V('origem', 'Observações')).split(/\n+/).map(S).filter(Boolean); }
+function notas() {
+  var L = notasL();
+  return '<section class="card pc-sec nt" id="g-nt"><div class="pc-sh"><h3>' + SV(IC.nt, 13) + ' Notas sobre o caso</h3><small class="muted">' + (L.length || 'nenhuma') + '</small><span class="sp"></span><button type="button" class="btn solid sm" data-nt-add title="Ctrl+Enter">+ Incluir nota</button></div>' +
+    (L.length ? '<ol class="nt-l">' + L.map(function (l, i) { var m = /^(\d{2}\/\d{2}\/\d{4}(?: \d{2}:\d{2})?)\s*·\s*(?:([^·]{2,40}?)\s*·\s*)?(.+)$/.exec(l);
+      return '<li><p>' + esc(m ? m[3] : l) + '</p>' + (m ? '<small>' + esc([m[2], m[1]].filter(Boolean).join(' · ')) + '</small>' : '') + '<button type="button" class="sn-x" data-nt-x="' + i + '" title="Excluir esta nota" aria-label="Excluir">×</button></li>'; }).join('') + '</ol>' : '') +
+    '<textarea id="nt-tx" rows="2" placeholder="Nova nota: síntese, observação, lembrete para quem vai revisar… (Ctrl+Enter inclui)"></textarea></section>';
+}
+function notaIncluir() { var t = $('nt-tx'), v = t ? S(t.value).replace(/\s*\n+\s*/g, ' ') : ''; if (!v) { if (t) t.focus(); return; } var L = notasL(); L.push(agoraBr() + ' · ' + (ses.estado().usuario || 'equipe') + ' · ' + v); marcar('origem.Observações', L.join('\n')); agendar(500); render(); }
+/* decisão da monocrática em botões, como na gaveta da pauta */
+/* a mesma chave pode estar na ficha como texto e como lista: aqui vale a lista */
+function campoLista(sec, chave) { var c = null; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (g) { (g.campos || []).forEach(function (x) { if (!c && x.chave === chave && (x.secao || '') === sec && x.tipo === 'lista') c = x; }); }); }); return c || campoModelo(sec, chave); }
+function chips(sec, chave, curto) {
+  var c = campoLista(sec, chave) || {}, v = S(V(sec, chave));
+  var O = (c.opcoes || []).map(function (o) { return typeof o === 'string' ? o : o.valor; });
+  return '<div class="pm-seg">' + O.map(function (o) { var r = curto ? o.split(' · ')[0] : o; return '<button type="button" class="pm-ch' + (o === v ? ' on' : '') + ' ' + (/provimento|provido|deferido/i.test(o) ? (/negado|indeferido/i.test(o) ? 'neg' : /parcial/i.test(o) ? 'par' : 'pos') : /não conhec|prejudic|extint/i.test(o) ? 'neu' : '') + '" data-ch="' + esc(sec + '.' + chave) + '" data-v="' + esc(o) + '" title="' + esc(o) + '">' + esc(r) + '</button>'; }).join('') + '</div>';
+}
+function decisaoMono() {
+  var ts = S(V('producao', 'Tópico-síntese'));
+  return '<section class="card pc-sec pm-dec"><div class="pc-sh"><h3>' + SV(IC.dc, 13) + ' Decisão</h3><small class="muted">art. 932 do CPC</small></div>' +
+    '<p class="pm-lb">Hipótese do art. 932</p>' + chips('triagem', 'Hipóteses Monocrática', true) +
+    '<p class="pm-lb">Resultado</p>' + chips('producao', 'Voto - Resultado') +
+    '<div class="pm-r2">' + (function () { var c = campoLista('producao', 'Voto - Honorários'); return c ? campo(Object.assign({}, c, { rotulo: 'Honorários' })) : ''; })() +
+    '<div class="gf"><span class="gl">Tópico-síntese</span><span class="seg">' + ['Sim', 'Não'].map(function (x) { return '<button type="button" data-ch="producao.Tópico-síntese" data-v="' + x + '" aria-selected="' + (ts === x) + '">' + x + '</button>'; }).join('') + '</span></div></div>' +
+    campoRot('producao', 'Mono - Fundamento', 'Precedente ou fundamento') + '</section>';
+}
+
 function campoRot(sec, chave, rot) { var c = campoModelo(sec, chave); if (!c) return ''; return campo(Object.assign({}, c, { rotulo: rot || c.rotulo })); }
 /* questões do processo: uma por linha do campo "Alegações" da ficha */
 function questoes() {
@@ -200,7 +322,7 @@ function controlesProcesso() {
   return '<section class="card pc-sec" id="g-ctl"><div class="pc-sh"><h3>Controles</h3><small class="muted">urgência, meta, sobrestamento e caso sensível</small></div>' + controles({ grupos: gs }) + '</section>';
 }
 function corpoProcesso() {
-  var AU = window.MutaAutos, h = '';
+  var AU = window.MutaAutos, h = sinalizacoes() + notas();
   var ad = gravado('triagem', 'Registro - Assunto detalhado');
   h += '<section class="card pc-sec"><div class="pc-sh"><h3>Assunto e questões</h3></div><div class="gr">' +
     '<div class="gf w"><span class="gl">Assunto detalhado</span>' + (S(ad) ? '<span class="ro">' + esc(ad) + '</span>' : '<span class="ro muted">Vem do registro da triagem (Caput) quando houver.</span>') + '</div>' +
@@ -231,7 +353,15 @@ function corpoProducao() {
     h += '<div class="gsel"><b>' + esc(A.seletor.rotulo) + '</b><span class="seg">' + A.seletor.opcoes.map(function (x) { var k = x.valor === 'Monocrática' ? 'monocratica' : 'sessao'; return '<button type="button" data-dest="' + esc(x.valor) + '" aria-selected="' + (dn === k && (x.valor || !sv)) + '">' + esc(x.rotulo) + '</button>'; }).join('') + '</span>' +
       '<small class="muted">' + (sv ? 'Destino gravado: ' + esc(sv) : 'Destino ainda não definido') + '</small></div>';
   }
-  h += grupos('Produção', null, function (g, i) { return i < 3; });
+  var mono = destino() === 'monocratica';
+  if (mono) h += decisaoMono();
+  /* o que já está no cabeçalho (etapas) e na Decisão em botões não se repete nos grupos */
+  var JA = { MINUTADO: 1, CORRIGIDO: 1, 'Data da Revisão': 1, LIBERADO: 1, 'Data da Liberação': 1, Assinado: 1, 'Data da Assinatura': 1 };
+  if (mono) ['Hipóteses Monocrática', 'Voto - Resultado', 'Voto - Honorários', 'Tópico-síntese', 'Mono - Fundamento'].forEach(function (k) { JA[k] = 1; });
+  h += A.grupos.filter(function (g) { return (!g.destino || g.destino === destino()) && grupoVisivel(g); })
+    .map(function (g) { return Object.assign({}, g, { campos: g.campos.filter(function (c) { return !JA[c.chave]; }) }); })
+    .filter(function (g) { return g.campos.length; })
+    .map(function (g, i) { return grupoHtml(g, i < 2); }).join('');
   if (destino() === 'monocratica') {
     var C = abaModelo(CE), gm = C ? C.grupos.filter(function (g) { return g.controle === 'monocratica'; }) : [];
     if (gm.length) h += '<section class="card pc-sec"><div class="pc-sh"><h3>Monocrática</h3><small class="muted">controle da monocrática</small></div>' + controles({ grupos: gm }) + '</section>';
@@ -259,7 +389,7 @@ function render() {
   var corpo = G.aba === 'Triagem' ? corpoTriagem() : G.aba === 'Roteiro' ? corpoRoteiro() : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
   var ab = document.activeElement && document.activeElement.dataset ? (document.activeElement.dataset.fk || (document.activeElement.dataset.esp ? 'esp:' + document.activeElement.dataset.esp : '') || (document.activeElement.dataset.q != null ? 'q:' + document.activeElement.dataset.q : '')) : '';
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
-  caixa.innerHTML = cartao(s) + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
+  caixa.innerHTML = cabeca(s) + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
   stEl = $('g-st');
   if (ab) {
     var sel = /^esp:/.test(ab) ? '[data-esp="' + ab.slice(4) + '"]' : /^q:/.test(ab) ? '[data-q="' + ab.slice(2) + '"]' : '[data-fk="' + ab.replace(/"/g, '\\"') + '"]';
@@ -305,11 +435,17 @@ caixa.addEventListener('change', function (e) {
   var t = e.target;
   if (t.dataset && t.dataset.sg != null) { if (window.MutaAutos) window.MutaAutos.marcarSugestao(Number(t.dataset.sg), t.checked); return; }
   if (t.dataset && t.dataset.esp) { if (window.MutaAutos) window.MutaAutos.especificarJa(t.dataset.esp); return; }
+  if (t.dataset && t.dataset.snOk) { var po = t.dataset.snOk.split(':'), Lo = snLinhas(po[0]), io = Number(po[1]); if (Lo[io] != null) Lo[io] = t.checked ? '✓ ' + Lo[io].replace(/^✓\s*/, '') : Lo[io].replace(/^✓\s*/, ''); snGravar(po[0], Lo); return; }
+  if (t.id === 'sn-tp') { G.snTp = t.value; return; }
   if (t.dataset && t.dataset.rtc) { if (window.MutaRoteiro) window.MutaRoteiro.conferir(t.dataset.rtc, t.checked, gRot()); render(); return; }
   if (!t.dataset || !t.dataset.fk) return;
   marcar(t.dataset.fk, t.value); var l = t.closest('label'); if (l) l.classList.add('mud');
   agendar(900);
   if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Roteiro') render();
+});
+caixa.addEventListener('keydown', function (e) {
+  if (e.target.id === 'sn-tx' && e.key === 'Enter') { e.preventDefault(); snIncluir(); }
+  else if (e.target.id === 'nt-tx' && e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); notaIncluir(); }
 });
 caixa.addEventListener('input', function (e) {
   var t = e.target;
@@ -322,6 +458,12 @@ caixa.addEventListener('input', function (e) {
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button,a'); if (!b) return;
   if (b.dataset.au != null) { if (window.MutaAutos) window.MutaAutos.clique(b); return; }
+  if (b.dataset.et != null) { marcarEtapa(Number(b.dataset.et)); return; }
+  if (b.dataset.irP) { G.aba = 'Produção'; render(); return; }
+  if (b.dataset.snX) { var px = b.dataset.snX.split(':'), Lx = snLinhas(px[0]); Lx.splice(Number(px[1]), 1); snGravar(px[0], Lx); return; }
+  if (b.hasAttribute('data-nt-add')) { notaIncluir(); return; }
+  if (b.dataset.ntX != null) { var Ln = notasL(); Ln.splice(Number(b.dataset.ntX), 1); marcar('origem.Observações', Ln.join('\n')); agendar(500); render(); return; }
+  if (b.dataset.ch) { var cv = S(V.apply(null, [b.dataset.ch.slice(0, b.dataset.ch.indexOf('.')), b.dataset.ch.slice(b.dataset.ch.indexOf('.') + 1)])); marcar(b.dataset.ch, cv === b.dataset.v ? '' : b.dataset.v); agendar(500); render(); return; }
   if (b.dataset.rt != null) { if (window.MutaRoteiro && window.MutaRoteiro.clique(b, gRot())) render(); return; }
   if (b.dataset.copia) { copiar(b.dataset.copia, b); return; }
   if (b.dataset.aba) { G.aba = b.dataset.aba; render(); var pp = $('panel-pront'); if (pp) pp.scrollTop = 0; return; }

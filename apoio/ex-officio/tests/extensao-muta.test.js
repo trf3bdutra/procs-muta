@@ -123,3 +123,13 @@ test('extensão 0.14: tema escuro por padrão, carregado no <head>, com botão p
   assert.ok(html.includes('id="pje-tema"'));
   assert.match(css, /html\[data-tema=escuro\]\{/); assert.match(tema, /'escuro'/);
 });
+
+test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designação), sinalizações e notas em log nos campos da ficha', () => {
+  const gab = read('extensao/gabinete.js'), ficha = JSON.parse(read('padrao/ficha.json')), ks = new Set();
+  ficha.abas.forEach(a => a.grupos.forEach(g => g.campos.forEach(c => ks.add((c.secao || '') + '.' + c.chave))));
+  ['producao.MINUTADO', 'producao.CORRIGIDO', 'producao.Data da Revisão', 'producao.LIBERADO', 'producao.Data da Liberação', 'producao.Assinado', 'producao.Data da Assinatura',
+    'producao.SERVIDOR', 'producao.CORRETOR', 'triagem.O que falta sanar', 'triagem.Intercorrências', 'origem.Observações', 'producao.Voto - Resultado', 'producao.Voto - Honorários', 'producao.Tópico-síntese']
+    .forEach(k => assert.ok(ks.has(k), k));
+  assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\) \+ tabs/);
+  assert.match(gab, /function sinalizacoes\(\)/); assert.match(gab, /function notas\(\)/); assert.match(gab, /toque para marcar hoje/);
+});
