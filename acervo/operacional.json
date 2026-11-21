@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T11:16:15.207Z",
+ "atualizado_em": "2026-11-21T11:16:23.924Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -60011,7 +60011,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.198Z"
+    "atualizado_em": "2026-11-21T11:16:23.924Z"
    },
    "triagem": {
     "Urgência": "",
@@ -60025,39 +60025,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Recolhido sem comprovante do Tesouro (STN)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "MPF": "Não verificado",
+    "MPF - Custos Legis": "Sem hipótese",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Crédito Rural",
+    "Tema": "Apelação do autor em ação contra a CEF · prorrogação de crédito rural (contratos 2094559/7105/2023 e 2368416/7105/2024) · pedido julgado parcialmente procedente · embargos de declaração rejeitados · preparo com tela \"Aguardando realização do pagamento\"",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "triagem de gabinete",
-    "Alegações": "",
+    "Alegações": "1) Preparo sem comprovante do Tesouro; 2) prorrogação de crédito rural (Súmula 298/STJ).",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Preparo: regra do gabinete (21/11/2026) — Pix só com o comprovante PagTesouro \"Pagamento realizado com sucesso\"; comprovante bancário ou tela \"Aguardando realização do pagamento\" exigem intimação única (artigo 1.007, § 4º, do CPC), sob pena de deserção · Mérito: alongamento da dívida rural é direito do devedor preenchidos os requisitos (Súmula 298/STJ; Manual de Crédito Rural) [VALIDAR]",
+    "Síntese Fática": "Maquielves Lopes Grison, produtor rural, pediu a prorrogação de dívidas de crédito rural com a CEF. A sentença reconheceu o direito à prorrogação, com condições a pactuar."
    },
    "producao": {
     "Destino": "",
@@ -60106,7 +60107,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5000164-58.2018.4.03.6003",
