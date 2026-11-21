@@ -2737,19 +2737,21 @@ function matrizTriagem() {
     {k:'etq', r:'Etiquetas', fn: o => o.etq&&o.etq.length ? '<span title="'+esc(o.etq.join(', '))+'" style="font-size:11px;color:var(--m2)">'+o.etq.length+' etq</span>' : ''},
     {k:'desde', r:'Na tarefa', fn: o => o.desde ? '<span class="mono" style="font-size:11px">'+esc(br(o.desde))+'</span>' : ''},
   ];
-  // agrupa por tarefa
+  // agrupa por assunto
   const groups = new Map();
-  U.forEach(o => { const g = o.tarefa||'Sem tarefa'; if(!groups.has(g)) groups.set(g,[]); groups.get(g).push(o); });
+  U.forEach(o => { const g = o.assunto||'Sem assunto'; if(!groups.has(g)) groups.set(g,[]); groups.get(g).push(o); });
+  // ordena os grupos: maior número de processos primeiro
+  const groupsSorted = new Map([...groups.entries()].sort((a, b) => b[1].length - a[1].length));
   const thStyle = 'position:sticky;top:0;background:var(--bg);font-size:11px;font-weight:700;color:var(--m2);text-transform:uppercase;letter-spacing:.03em;padding:4px 8px;border-bottom:2px solid var(--b);white-space:nowrap;text-align:center';
   const thL = 'position:sticky;top:0;background:var(--bg);font-size:11px;font-weight:700;color:var(--m2);text-transform:uppercase;letter-spacing:.03em;padding:4px 8px;border-bottom:2px solid var(--b);white-space:nowrap;text-align:left';
   const tdStyle = 'padding:3px 8px;font-size:12.5px;border-bottom:1px solid var(--b2,#f0f2f1);text-align:center;vertical-align:middle';
-  let h = '<section class="card" style="overflow:visible"><div class="ch"><h2>Matriz de triagem</h2><p>'+nf(U.length)+' em triagem · por tarefa do PJe · indicadores de cada processo</p></div>';
+  let h = '<section class="card" style="overflow:visible"><div class="ch"><h2>Matriz de triagem</h2><p>'+nf(U.length)+' em triagem · por assunto · indicadores de cada processo</p></div>';
   h += '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="width:100%;border-collapse:collapse;min-width:900px">';
   h += '<thead><tr><th style="'+thL+';min-width:160px">Número</th><th style="'+thL+';min-width:120px">Partes</th><th style="'+thL+';min-width:70px">Classe</th><th style="'+thL+';min-width:160px">Assunto</th><th style="'+thL+';min-width:70px">Seção</th>';
   COLS.forEach(c => { h += '<th style="'+thStyle+'">'+esc(c.r)+'</th>'; });
   h += '</tr></thead><tbody>';
   let rowCt = 0;
-  groups.forEach((procs, g) => {
+  groupsSorted.forEach((procs, g) => {
     const aberto = LS.get('tri_mz_'+g, true);
     h += '<tr><td colspan="'+(5+COLS.length)+'" style="padding:0"><button class="tri-banda-h" data-tribanda="tri_mz_'+esc(g)+'" style="width:100%;padding:5px 10px"><span>'+esc(g)+'</span><small>'+procs.length+' proc.</small><span class="tri-b-arr">'+(aberto?'▲':'▼')+'</span></button></td></tr>';
     if (aberto) {
