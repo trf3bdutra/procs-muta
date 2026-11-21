@@ -228,7 +228,7 @@ test('Perfis › Histórico: só o feito, Excel, listar todos e rolagem; Registr
 
 test('Triagem: Acervo filtrado com faixa de cabeçalho e seletor segmentado; Visão geral sobre o bege',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  for(const x of ['<header class="acf-h"><span class="k">Acervo filtrado</span>','.acf .pre{margin-left:auto;display:flex','<div class="acf-b"><div class="acf-n">','.tri-vg{background:transparent!important}','.tri-vg .ch{background:#e8e1cf!important;box-shadow:none!important','.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url(','body{background-image:url("data:image/svg+xml'])assert.ok(cap.includes(x),x);
+  for(const x of ['<header class="acf-h"><span class="k">Acervo filtrado</span>','.acf .pre{margin-left:auto;display:flex','<div class="acf-b"><div class="acf-n">','.tri-vg{background:transparent!important}','.tri-vg .ch{background:#f4f0e6!important;box-shadow:none!important','.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url(','body{background-image:url("data:image/svg+xml'])assert.ok(cap.includes(x),x);
 });
 
 test('Cartões de indicadores no padrão da Visão geral (Chefia, Coordenação, Comunicação, Pautas e mesa); fundo geral mais claro',()=>{
