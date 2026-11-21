@@ -34,3 +34,9 @@ test('Prontuário: precedentes relacionados vêm do Ementário, com link para o 
  const em=fs.readFileSync(path.resolve(__dirname,'../../modus-operandi/fonte/ementario.js'),'utf8');
  assert.ok(em.includes("irEmentarioProc(p.proc.split(',').filter(Boolean)"));
 });
+
+test('prontuário: botões do topo numa linha de pills; painel esquerdo com buscador rápido no rodapé; sem contador solto', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ['<div class="prt-tb">', '<span class="prt-nv">', 'class="prt-x"', '<span class="tl">Ficha</span>', '<span class="tl">Compendium</span>', '#prq .prt-tb .prt-hb,#prq .prt-tb .prt-nv{display:inline-flex', 'function ppSubAltura()', ".pp-sub{height:var(--pp-h", '.pp-sub>.pp-num-rail{order:1;flex:1 1 auto;min-height:0;overflow-y:auto']) assert.ok(app.includes(x), x);
+  assert.ok(!app.includes("' intercorrência'+(ic===1?'':'s')+' · '+mt+' meta'"));
+});
