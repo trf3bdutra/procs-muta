@@ -4341,7 +4341,7 @@ function portaToken() { return new Promise((fim) => {
     let r; try { r = await s.gravar(); } catch (e) { r = { ok: false, erro: e.message }; }
     G.gravando = false;
     if (r && r.ok) { G.erro = ''; G.tentativa = 0; G.desde = 0; G.ultima = new Date().toTimeString().slice(0, 5); if (manual || !r.nada) msg('Gravado no procs-muta' + (r.partes && r.partes.length ? ': ' + r.partes.join(', ') : '') + '.'); }
-    else if (r && r.ocupado) { /* outra gravação em curso: tenta em seguida */ }
+    else if (r && r.ocupado) { /* outra gravação em curso (a mesa, por exemplo): tenta de novo em 2 s, não na hora; repetir na hora travava a página num laço sem fim */ G.prox = Date.now() + 2000; }
     else { G.erro = (r && r.erro) || 'falha desconhecida'; G.tentativa++; G.prox = Date.now() + Math.min(120000, 10000 * G.tentativa); msg('Não gravou no procs-muta: ' + G.erro + '. As alterações seguem neste navegador; nova tentativa automática em instantes.', true); }
     pend();
   }
@@ -4351,7 +4351,7 @@ function portaToken() { return new Promise((fim) => {
     /* o estado vai para o indicador “gravado” do cabeçalho (o único da página) */
     api.estadoGrava = { pronto, n, gravando: !!(G.gravando || s.gravando?.()), erro: n ? G.erro : '', ultima: G.ultima }; try { W.pintaGrava && W.pintaGrava(); } catch (e) {}
     /* gravação automática: 4 s depois da primeira alteração pendente (ou na hora da nova tentativa, após erro) */
-    if (n && !G.gravando && pronto) { if (!G.desde) G.desde = Date.now(); if (Date.now() - G.desde > 4000 && Date.now() >= G.prox) gravarAgora(false); }
+    if (n && !G.gravando && pronto && !s.gravando?.()) { if (!G.desde) G.desde = Date.now(); if (Date.now() - G.desde > 4000 && Date.now() >= G.prox) gravarAgora(false); }
     if (!n) G.desde = 0;
   }
   api.gravarAgora = gravarAgora;
