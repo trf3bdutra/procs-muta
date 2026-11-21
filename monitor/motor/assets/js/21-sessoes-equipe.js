@@ -12,7 +12,8 @@
   var dig = function (s) { return String(s == null ? '' : s).replace(/\D/g, ''); };
   var uid = function () { return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); };
   var clone = function (o) { return JSON.parse(JSON.stringify(o)); };
-  var hoje = function () { return new Date().toISOString().slice(0, 10); };
+  /* data local (à noite o UTC já é o dia seguinte) */
+  var hoje = function () { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); };
   var br = function (iso) { return /^\d{4}-\d{2}-\d{2}/.test(iso || '') ? iso.slice(8, 10) + '/' + iso.slice(5, 7) + '/' + iso.slice(0, 4) : (iso || ''); };
   var isoDeBr = function (s) { var m = /(\d{2})\/(\d{2})\/(\d{4})/.exec(s || ''); return m ? m[3] + '-' + m[2] + '-' + m[1] : ''; };
 
@@ -1984,6 +1985,9 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     cotas: function (id) { var sf = S.sessoes.find(function (x) { return x.id === id; }); return sf ? cotas(sf) : null; },
     pontos: function (id) { var sf = S.sessoes.find(function (x) { return x.id === id; }); return sf ? sf.itens.reduce(function (a, i) { return a + pesoItem(i); }, 0) : 0; },
     regrasProdutividade: function (j) { if (j && typeof j === 'object') PROD = j; return PROD; },
+    /* datas sem expediente do calendário do gabinete (Chefia › Calendário): incluir, tirar e sugestão da Justiça Federal */
+    semExpediente: { poe: function (datas, tipo, nome, semPrazo) { xpPoe(datas, tipo, nome, semPrazo); return true; }, tira: function (d) { xpTira(d); return true; },
+      sugestaoJF: function (anos) { var F = W.CMTForense, n = 0; if (!F) return 0; (anos || []).forEach(function (y) { F.sugestoes(y).filter(function (o) { return o.on; }).forEach(function (o) { xpPoe([o.date], o.type, o.label, o.semPrazo); n++; }); }); return n; } },
     diasUteis: { util: util, desloca: deslocaUteis, entre: uteisEntre, dataOk: dataOk },
     /* critérios de designação (apoio/regras/designacao.json): ordem e interruptores Designa (d) e Corrige (c) */
     desigDefinir: function (ordem, on) { if (!S.desig) S.desig = { ordem: CRIT.slice(), on: {}, rows: {}, equilibrar: true };

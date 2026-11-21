@@ -48,6 +48,12 @@ test('Desempenho e início: motor escondido não redesenha; Chefia é a página 
 test('Chefia: primeira no menu, painéis no padrão do Caput, calendário forense no rodapé do calendário, relatórios com altura fixa',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8');
   assert.ok(cap.indexOf('data-mod="chefia"')<cap.indexOf('data-mod="triagem"'),'Chefia primeiro');
-  assert.ok(cap.includes('<div id="cg-forense">')&&cap.includes('data-cgfo="sessoes"'),'rodapé forense');
+  assert.ok(cap.includes('<div id="cg-forense">'),'rodapé forense');
   assert.ok(cap.includes('.cg-tool .cg-studio{height:600px')&&cap.includes('data-cg-rel-export="pdf"'),'relatórios como ferramenta');
+});
+
+test('Calendário forense editável na própria Chefia (sem abrir a tela antiga) e data local no motor',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  assert.ok(cap.includes('data-cgfx="poe"')&&cap.includes('data-cgfx="jf"')&&!cap.includes('Editar expediente e feriados'),'edição na Chefia');
+  assert.ok(m.includes('semExpediente: { poe:')&&m.includes("d.getFullYear() + '-'"),'motor');
 });
