@@ -143,7 +143,10 @@ test('Mural do servidor: desenho do protótipo num shadow root, com o quadro ant
   assert.match(h, /body:not\(\.painel-gab\) #v-inicio>\.hc-board\{display:none!important\}/);
   assert.match(h, /if\(!PAINEL_GAB\)try\{MU\.montar\(P\.dados,\{eu:U\.eu/);
   assert.match(h, /<slot name=\\"cal\\"><\\\/slot>/);
-  assert.match(h, /return \(ex\.alertasExtra\|\|\[\]\)\.concat\(U,A\.slice\(0,4\)\)/);
+  const cal = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'motor', 'assets', 'js', '11-calendario.js'), 'utf8');
+  assert.match(cal, /return \(ex\.alertasExtra\|\|\[\]\)\.concat\(U,A\.slice\(0,4\)\)/);
+  assert.match(h, /<script id="cc-cal-lib" src="\/init\/motor\/assets\/js\/11-calendario\.js"><\/script>/);
+  assert.match(h, /semanaLateral:true,semanaRecolhida:true/);
   assert.match(h, /function calMeus\(D\)/);
   assert.match(p, /meta: \(it\.ctl \|\| \{\}\)\.meta/);
   assert.match(p, /pend: \(\(\(it\.ctl/);
