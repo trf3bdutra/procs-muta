@@ -173,3 +173,14 @@ test('Mesa: indisponível tira a pessoa também dos processos já designados (v�
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
   for(const x of ['>indisponível</label>','var AUSX={};',"AUSX[nm]=Lx;","designação(ões) restauradas"])assert.ok(m.includes(x),x);
 });
+
+test('Mesa: Perfis ⇄ compara o perfil dos servidores com os processos do grupo em tela',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  for(const x of ['function cmpPainel(k,L)','data-cmp="','data-cmpa="',"(CMP[k]?cmpPainel(k,L):'')",'Perfis ⇄'])assert.ok(m.includes(x),x);
+  [...m.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((x)=>new (require('vm').Script)(x[1]));
+});
+
+test('Mesa: na regra da minuta e da correção, processos de cada regra organizados por assunto',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  assert.ok(m.includes("var porAs=AG==='md'||AG==='mc';")&&m.includes('<div class=\"sub-as\">'));
+});
