@@ -21,7 +21,7 @@ var CAMPOS = [
   ['Admissibilidade', [['triagem', 'Tempestividade', 'Tempestividade', 's'], ['triagem', 'Preparo', 'Preparo', 's'], ['triagem', 'Representação', 'Representação', 's']]],
   ['MPF e urgência', [['triagem', 'MPF', 'Parecer do MPF', 's'], ['triagem', 'MPF - Custos Legis', 'Hipótese de intervenção', 's'], ['triagem', 'Urgência', 'Urgência', 's'], ['triagem', 'Urgência - Apreciação', 'Apreciação da urgência', 's']]],
   ['Matéria e gestão', [['triagem', 'Tema', 'Tipo de caso', 't'], ['triagem', 'META', 'Meta', 't'], ['triagem', 'Etiquetas sugeridas', 'Etiquetas sugeridas para o PJe', 'e']]],
-  ['Providências', [['triagem', 'O que falta sanar', 'O que falta sanar', 'a'], ['triagem', 'Intercorrências', 'Intercorrências', 'a'], ['origem', 'Próxima ação', 'Próxima ação', 't'], ['origem', 'Observações', 'Observações gerais', 'a']]]
+  ['Providências', [['triagem', 'O que falta sanar', 'Pendências', 'a'], ['triagem', 'Intercorrências', 'Intercorrências', 'a'], ['origem', 'Próxima ação', 'Próxima ação', 't'], ['origem', 'Observações', 'Notas', 'a']]]
 ];
 function aberta() { var p = $('panel-tri'); return p && !p.hidden; }
 function cnjAtual() { var k = br.chaveAtual(); return k && k !== 'avulso' ? Muta.formatarCnj(k) : ''; }
