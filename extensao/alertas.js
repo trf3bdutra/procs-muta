@@ -99,7 +99,7 @@
     p.innerHTML = h;
   }
   function pAlertas() {
-    if (!A.itens.length) return '<p class="muted ap-v">Nenhum alerta. Os alertas surgem quando a lista de tarefas do PJe é aberta com o Muta ligado.</p>';
+    if (!A.itens.length) return '<p class="muted ap-v">Nenhum alerta. Os alertas surgem quando a lista de tarefas do PJe é aberta com o HERO18810 ligado.</p>';
     var L = A.itens.slice().sort(function (a, b) { return al(b) - al(a); });
     return '<small class="muted ap-em">Leitura da lista em ' + esc(quando(A.em)) + ' · toque no número para copiar</small><ul class="ap-l">' + L.map(function (i) {
       return '<li><div class="ap-h"><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(i.k)) + '" title="Copiar o número">' + esc(fmtCnj(i.k)) + '</button><small>' + esc(i.etapa || '') + (i.servidor ? ' · ' + esc(i.servidor) : '') + '</small></div>' +
@@ -220,7 +220,7 @@
     if (!nova) { if (b) b.remove(); return; }
     if (!b) { b = document.createElement('button'); b.type = 'button'; b.id = 'tu-nova'; b.className = 'tu-nova'; t0.insertBefore(b, $('tu-sino') || $('tu-st') || null);
       b.addEventListener('click', function (e) { e.stopPropagation(); A.aba = 'ver'; abrir(true); }); }
-    b.textContent = '↑ ' + VER.site; b.title = 'Versão nova do Muta (' + VER.site + '; esta é ' + VER.local + '). Dê dois cliques em atualizar-muta.cmd, na pasta da extensão: o painel se recarrega sozinho.';
+    b.textContent = '↑ ' + VER.site; b.title = 'Versão nova do HERO18810 (' + VER.site + '; esta é ' + VER.local + '). Dê dois cliques em atualizar-muta.cmd, na pasta da extensão: o painel se recarrega sozinho.';
   }
   function pVersao() {
     return '<p class="ap-v">Instalada: <b>' + esc(VER.local) + '</b>' + (VER.site ? ' · no site: <b>' + esc(VER.site) + '</b>' : '') + '</p>' +

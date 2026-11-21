@@ -214,7 +214,7 @@ $('btn-export').addEventListener('click',function(){
 $('btn-import').addEventListener('click',function(){$('file-import').click();});
 $('file-import').addEventListener('change',function(){
   var file=this.files&&this.files[0];this.value='';if(!file)return;
-  if(file.size>5*1024*1024){setStatus('Arquivo acima de 5 MB; não parece um prontuário exportado pelo Muta.','err');return;}
+  if(file.size>5*1024*1024){setStatus('Arquivo acima de 5 MB; não parece um prontuário exportado pelo HERO18810.','err');return;}
   var next,desc;
   file.text().then(function(txt){
     var data;try{data=JSON.parse(txt);}catch(e){throw new Error('o arquivo não é um JSON válido.');}

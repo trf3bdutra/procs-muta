@@ -1,4 +1,6 @@
-# Extensão Muta · painel lateral ao lado do PJe
+# HERO18810 · extensão do Gab. Muta, painel lateral ao lado do PJe
+
+Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, chaves de armazenamento, `muta-pje.zip`, `atualizar-muta.cmd`) continuam os mesmos, para não perder dados nem atalhos.
 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).

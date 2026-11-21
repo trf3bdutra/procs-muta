@@ -165,7 +165,7 @@ function baixarTudo() {
       if (!t.texto) faltam.push(d.id);
       docs.push({ id: d.id, tipo: d.tipo, descricao: d.desc, juntado_por: '', juntado_em: d.data, formato: t.fmt || '', paginas: t.pags || 0, caracteres: S(t.texto).length, anexo: !!d.anexo, detalhamento: S(A.esp[d.id] || '') , paginas_ocr: t.ocr || 0 });
       sec.push('===== ID ' + d.id + ' | ' + d.tipo + ' | ' + (d.desc || d.tipo) + ' | juntado em ' + d.data + (t.fmt === 'pdf' ? ' | pdf ' + (t.pags || 0) + ' pág.' : t.fmt ? ' | ' + t.fmt : '') + (t.ocr ? ' | OCR ' + t.ocr + ' pág.' : '') + ' =====', S(t.texto), ''); });
-    baixar(cnjArq() + '.json', { cnj: A.cnj || cnjAtual(), extraido_em: new Date().toISOString(), origem: 'Extensão Muta (painel ao lado do PJe)',
+    baixar(cnjArq() + '.json', { cnj: A.cnj || cnjAtual(), extraido_em: new Date().toISOString(), origem: 'Extensão HERO18810 (painel ao lado do PJe)',
       lista: JSON.stringify(L.map(function (d) { return [d.id, d.tipo, d.desc || d.tipo, '', d.data, d.hora || '', d.anexo ? 'anexo' : '']; })), docs: JSON.stringify(docs), faltam: faltam, texto: sec.join('\n') });
     A.todo = null; A.msg = 'Inteiro teor baixado: ' + L.length + ' documento(s)' + (faltam.length ? ', ' + faltam.length + ' sem texto' : '') + '.'; redesenhar();
   });

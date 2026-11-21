@@ -118,7 +118,7 @@ function avisar(cnjs, R, cfg) {
       itens.forEach(function (x) { x.alertas.filter(function (a) { return a.nivel === 'al'; }).forEach(function (a) {
         var id = x.k + ':' + a.k; if (vistos[id] || novos >= 3) return; vistos[id] = hoje; novos++;
         var cnj = x.k.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6');
-        chrome.notifications.create('muta:' + id, { type: 'basic', iconUrl: 'icones/128.png', title: 'Muta · ' + cnj, message: a.t, priority: 1 });
+        chrome.notifications.create('muta:' + id, { type: 'basic', iconUrl: 'icones/128.png', title: 'HERO18810 · ' + cnj, message: a.t, priority: 1 });
       }); });
       return chrome.storage.local.set({ 'muta-avisados': vistos });
     });
@@ -130,7 +130,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
   Promise.all([resumos(cnjs), catalogo(), cfgPrazos()]).then(function (v) {
     responder({ resumos: v[0], catalogo: v[1], cfg: v[2] });
     if (msg.lista) avisar(cnjs, v[0], v[2]);
-  }, function (e) { responder({ erro: e && e.message === 'login' ? 'Entre no painel do Muta para ver os selos.' : String(e && e.message || e) }); });
+  }, function (e) { responder({ erro: e && e.message === 'login' ? 'Entre no painel do HERO18810 para ver os selos.' : String(e && e.message || e) }); });
   return true;
 });
 /* o painel pede para esquecer o cache (catálogo editado, ficha gravada) */

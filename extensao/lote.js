@@ -232,7 +232,7 @@ function txEnviar() {
       if (!ok) return;
       TX.enviando = true; TX.erro = ''; txRedesenha();
       return ses.api('/api/painel?lote=1', { method: 'POST', body: JSON.stringify({ acao: 'minuta-versao', id: a.lote.id, processo: a.it.processo, rotulo: TX.rotulo.trim() || 'Texto do PJe',
-        origem: 'Editor do PJe (' + p.fonte + ') · transferido pela extensão Muta em ' + hojeBr(), secoes: p.secoes, vigente: !!TX.vigente }) })
+        origem: 'Editor do PJe (' + p.fonte + ') · transferido pela extensão HERO18810 em ' + hojeBr(), secoes: p.secoes, vigente: !!TX.vigente }) })
         .then(function (j) {
           TX.enviando = false; TX.msg = 'Gravado no Collectio: versão ' + ((j.versoes || []).slice(-1)[0] || {}).id + (j.trocouVigente ? ', vigente.' : ', guardada.'); TX.rotulo = '';
           var k = a.lote.id + '/' + String(a.it.processo).slice(0, 10); if (j.minuta) V.minuta[k] = j.minuta; else delete V.minuta[k];

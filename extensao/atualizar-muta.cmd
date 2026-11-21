@@ -1,12 +1,12 @@
 @echo off
-rem Atualiza a extensao Muta nesta mesma pasta (dois cliques). Nao precisa abrir chrome://extensions:
-rem com o painel do Muta aberto, a extensao percebe os arquivos novos e se recarrega sozinha.
+rem Atualiza a extensao HERO18810 nesta mesma pasta (dois cliques). Nao precisa abrir chrome://extensions:
+rem com o painel do HERO18810 aberto, a extensao percebe os arquivos novos e se recarrega sozinha.
 rem Usa so o que ja vem no Windows 10/11: curl, tar e robocopy. Os prontuarios guardados na extensao nao sao apagados.
 setlocal
 set "DEST=%~dp0"
 set "TMPZ=%TEMP%\muta-pje.zip"
 set "TMPD=%TEMP%\muta-pje-novo"
-echo Baixando a versao nova do Muta...
+echo Baixando a versao nova do HERO18810...
 curl.exe -fsSL -o "%TMPZ%" "https://www.gabinete-cmt.com/extensao/muta-pje.zip"
 if errorlevel 1 goto erro
 if exist "%TMPD%" rmdir /s /q "%TMPD%"
@@ -21,7 +21,7 @@ copy /y "%TMPD%\manifest.json" "%DEST%manifest.json" >nul
 if errorlevel 1 goto erro
 rmdir /s /q "%TMPD%" & del /q "%TMPZ%"
 echo.
-echo Pronto. Abra (ou deixe aberto) o painel do Muta: ele se recarrega sozinho em alguns segundos.
+echo Pronto. Abra (ou deixe aberto) o painel do HERO18810: ele se recarrega sozinho em alguns segundos.
 echo Recarregue tambem a aba do PJe.
 timeout /t 6 >nul
 exit /b 0
