@@ -136,7 +136,7 @@ test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designa�
 
 test('extensão 0.16: modos Processo · Autos · Roteiro de triagem · Produção; peças e inteiro teor em JSON; controles num cartão', () => {
   const gab = read('extensao/gabinete.js'), au = read('extensao/autos.js'), rt = read('extensao/roteiro.js');
-  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro'\]/);
+  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro'(, 'Gerador')?\]/);
 
   assert.match(au, /data-au="tudojs"/); assert.match(au, /data-au="js:/); assert.match(au, /lista: JSON\.stringify/);
   assert.match(gab, /data-ct="/); assert.match(gab, /function atoSel\(\)/);
@@ -232,4 +232,27 @@ test('inteiro teor: honorários da sentença no padrão "quem paga · quanto e s
   assert.match(H(['Julgo procedente o pedido de reajuste de 28,86%. Condeno a União ao pagamento de honorários de 10% sobre o valor da condenação.'], ''), /^Parte ré \(União\) · 10%/);
   assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'), 'cópia da extensão igual');
   assert.match(read('extensao/gabinete.js'), /function rotuloDe\(c\) \{ return \(\/Honorários\//);
+});
+
+test('extensão 0.20: Gerador monta relatório, dispositivo, ementa, acórdão e proclamação pelas fórmulas do gabinete', () => {
+  const op = { origem: { 'Sentença - ID': '111111111', 'Sentença - Resultado': 'julgou IMPROCEDENTE o pedido, resolvendo o mérito nos termos do artigo 487, I, do CPC', 'Sentença - Reexame': 'Não',
+    'Sentença - Honorários': 'Parte autora · 10% sobre o valor atualizado da causa · exigibilidade suspensa (gratuidade, artigo 98, § 3º, do CPC)',
+    Recursos: [{ parte: 'autora', ids: '222222222', teses: 'ter direito ao benefício por incapacidade\nser nulo o laudo pericial' }], Contrarrazões: [{ parte: 'INSS', ids: '333333333' }] },
+    triagem: { MPF: 'Não se aplica', 'Tipo de Julgamento': 'Apelação' }, producao: { 'Voto - Resultado': 'Negado provimento' } };
+  const ctx = { window: {}, navigator: {} }; ctx.window.window = ctx.window;
+  ctx.window.MutaGabinete = { cnj: () => '5000000-00.2026.4.03.6000', V: (s, k) => (op[s] || {})[k] || '', fo: () => ({ polo_ativo: 'MARIA DA SILVA', polo_passivo: 'INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS', classe_judicial: 'APELAÇÃO CÍVEL', Assunto: 'Auxílio por incapacidade temporária' }) };
+  vm.createContext(ctx); vm.runInContext(read('extensao/gerador.js'), ctx);
+  const D = ctx.window.MutaGerador.docs();
+  assert.equal(D.rel[0], 'Trata-se de apelação à sentença (ID 111111111) que julgou improcedente o pedido. Condenou a autora ao pagamento de honorários advocatícios de 10% sobre o valor atualizado da causa, com exigibilidade suspensa pela gratuidade de justiça (artigo 98, § 3º, do CPC).');
+  assert.equal(D.rel[1], 'Apelou a autora (ID 222222222), alegando, em suma, que: (1) ter direito ao benefício por incapacidade; e (2) ser nulo o laudo pericial.');
+  assert.equal(D.rel[2], 'Houve contrarrazões (ID 333333333).');
+  assert.equal(D.rel[D.rel.length - 1], 'É o relatório.');
+  assert.deepEqual([...D.disp], ['Ante o exposto, nego provimento à apelação.', 'É como voto.']);
+  assert.match(D.em.cab, /^DIREITO PREVIDENCIÁRIO\. APELAÇÃO CÍVEL\. .*APELAÇÃO DESPROVIDA\.$/);
+  assert.equal(D.em.sec[3][1][0].t, 'Apelação desprovida.');
+  assert.equal(D.acordao, 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, negou provimento à apelação, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.');
+  assert.equal(D.procl, 'Por unanimidade, negou provimento à apelação.');
+  const gab = read('extensao/gabinete.js');
+  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro', 'Gerador'\]/);
+  assert.match(read('extensao/painel.html'), /<script src="gerador\.js"><\/script>/);
 });

@@ -1,0 +1,318 @@
+/* HERO18810 · Gerador (Prontuário › Gerador): relatório, dispositivo do voto, ementa, acórdão e proclamação no padrão do
+   gabinete (Padrão Muta 1 e 2; Padrão de ementa do gabinete), pelo tipo de julgamento e pelo resultado escolhido.
+   Fonte: a ficha do processo (o que está gravado ou a gravar) e, onde a ficha está vazia, o que a leitura dos autos achou.
+   Fórmulas transcritas sem reescrever; o que não se confirma na ficha ou nos autos sai como [VALIDAR: …]. Nada é gravado. */
+(function () {
+  'use strict';
+  var S = function (v) { return v == null ? '' : String(v).trim(); };
+  var N = function (v) { return S(v).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var VAL = function (t) { return '[VALIDAR: ' + t + ']'; };
+  var ST = { tipo: '', res: '', cnj: '' };
+
+  /* ---------- dados ---------- */
+  function GB() { return window.MutaGabinete || {}; }
+  function sugDe(alvo) {
+    var AU = window.MutaAutos; if (!AU || !AU.sugestoes) return '';
+    var x = (AU.sugestoes() || []).filter(function (s) { return s.alvo === alvo; })[0];
+    return x ? x.value : '';
+  }
+  function v(sec, k) { var g = GB(), x = g.V ? g.V(sec, k) : ''; if (Array.isArray(x) ? x.length : S(x)) return x; return sugDe(sec + '.' + k) || ''; }
+  function tab(sec, k) { var x = v(sec, k); if (typeof x === 'string') { try { x = JSON.parse(x); } catch (e) { x = []; } } return Array.isArray(x) ? x.filter(function (r) { return r && typeof r === 'object'; }) : []; }
+  function fo(k) { var f = (GB().fo && GB().fo()) || {}; return S(f[k]); }
+  /* itens de alegação: descarta o que não é texto de razão (cabeçalho de documento, carimbo de hora, rótulo solto) */
+  function linhas(t) { return S(t).split(/\n+|;\s*(?=\(?\d+\)|\w)/).map(function (l) { return S(l).replace(/^[-•·\d.)(\s]+/, '').replace(/[.;]+$/, ''); }).filter(function (l) { return l && l.split(/\s+/).length >= 3 && !/^P_|\d{2}:\d{2}:\d{2}|^(apela[çc][ãa]o|recurso|contrarraz[õo]es)$/i.test(l); }); }
+  function enumerar(L) { if (!L.length) return ''; if (L.length === 1) return L[0]; return L.map(function (x, i) { return '(' + (i + 1) + ') ' + x; }).slice(0, -1).join('; ') + '; e (' + L.length + ') ' + L[L.length - 1]; }
+  function ids(t) { var L = S(t).split(/[,;\s]+/).filter(function (x) { return /^\d{6,}$/.test(x); }); return !L.length ? '' : L.length === 1 ? '(ID ' + L[0] + ')' : '(ID’s ' + L.slice(0, -1).join(', ') + ' e ' + L[L.length - 1] + ')'; }
+  function idOu(t, o) { return ids(t) || '(ID ' + VAL(o) + ')'; }
+
+  /* ---------- tipo de julgamento e resultado ---------- */
+  var TIPOS = ['Apelação', 'Remessa Necessária', 'Agravo de Instrumento', 'Embargos de Declaração', 'Agravo Interno', 'Juízo de Retratação'];
+  function tipoDetectado() {
+    var t = N(v('triagem', 'Tipo de Julgamento')), cl = N(fo('classe_judicial') || fo('Classe') || fo('Descrição da Classe'));
+    if (/embargos de declara/.test(t)) return 'Embargos de Declaração';
+    if (/agravo interno/.test(t)) return 'Agravo Interno';
+    if (/retrata/.test(t)) return 'Juízo de Retratação';
+    if (/agravo de instrumento/.test(t) || (!t && /agravo de instrumento/.test(cl))) return 'Agravo de Instrumento';
+    if (/remessa/.test(t) && !/apela/.test(t)) return 'Remessa Necessária';
+    if (/apela/.test(t) || /apela/.test(cl)) return 'Apelação';
+    if (/remessa/.test(cl)) return 'Remessa Necessária';
+    return 'Apelação';
+  }
+  /* resultado: chave → [voto (1ª pessoa), acórdão (3ª pessoa), conclusão da ementa (particípio)] por tipo */
+  function objeto(tipo) {
+    var rec = tab('origem', 'Recursos').length, rn = N(v('origem', 'Sentença - Reexame')) === 'sim';
+    if (tipo === 'Apelação') { var ap = rec > 1 ? 'às apelações' : 'à apelação'; return { art: rec > 1 ? 'das apelações' : 'da apelação', a: rn ? ap + ' e à remessa necessária' : ap, nome: rec > 1 ? 'Apelações' : 'Apelação', fem: true, pl: rec > 1, rn: rn }; }
+    if (tipo === 'Remessa Necessária') return { art: 'da remessa necessária', a: 'à remessa necessária', nome: 'Remessa necessária', fem: true };
+    if (tipo === 'Agravo de Instrumento') return { art: 'do agravo de instrumento', a: 'ao agravo de instrumento', nome: 'Agravo de instrumento', fem: false };
+    if (tipo === 'Agravo Interno') return { art: 'do agravo interno', a: 'ao agravo interno', nome: 'Agravo interno', fem: false };
+    return { art: '', a: '', nome: '', fem: false };
+  }
+  function opcoesRes(tipo) {
+    if (tipo === 'Embargos de Declaração') return [['rej', 'Rejeição'], ['acol', 'Acolhimento'], ['acolp', 'Acolhimento parcial'], ['nc', 'Não conhecimento']];
+    if (tipo === 'Juízo de Retratação') return [['mant', 'Mantém o acórdão'], ['retr', 'Exerce a retratação']];
+    return [['desp', 'Desprovimento'], ['prov', 'Provimento'], ['parc', 'Parcial provimento'], ['ncdesp', 'Conhece em parte e nega'], ['nc', 'Não conhecimento'], ['prej', 'Prejudicado']];
+  }
+  function resDaFicha(tipo) {
+    var r = N(v('producao', 'Voto - Resultado'));
+    if (tipo === 'Embargos de Declaração') return /acolh|provid|provimento/.test(r) && !/negad|nao provid|desprov/.test(r) ? 'acol' : /nao conhec/.test(r) ? 'nc' : 'rej';
+    if (tipo === 'Juízo de Retratação') return 'mant';
+    if (/nao conhec/.test(r)) return 'nc';
+    if (/parcial/.test(r)) return 'parc';
+    if (/dado provimento|^provid|deferido/.test(r)) return 'prov';
+    return 'desp';
+  }
+  function resultado(tipo, k) {
+    var o = objeto(tipo), cmd = VAL('comando: para reformar a sentença e …');
+    if (tipo === 'Embargos de Declaração') return ({
+      rej: ['rejeito os embargos de declaração', 'rejeitou os embargos de declaração', 'EMBARGOS DE DECLARAÇÃO REJEITADOS', 'Embargos de declaração rejeitados.'],
+      acol: ['acolho os embargos de declaração, ' + VAL('sem efeitos modificativos | com efeitos modificativos') + ', para ' + VAL('sanar o vício'), 'acolheu os embargos de declaração, ' + VAL('sem efeitos modificativos | com efeitos modificativos') + ', para ' + VAL('sanar o vício'), 'EMBARGOS DE DECLARAÇÃO ACOLHIDOS', 'Embargos de declaração acolhidos.'],
+      acolp: ['acolho parcialmente os embargos de declaração para, sem efeitos modificativos, ' + VAL('acrescer fundamentação …'), 'acolheu parcialmente os embargos de declaração para, sem efeitos modificativos, ' + VAL('acrescer fundamentação …'), 'EMBARGOS DE DECLARAÇÃO PARCIALMENTE ACOLHIDOS', 'Embargos de declaração parcialmente acolhidos.'],
+      nc: ['não conheço dos embargos de declaração', 'não conheceu dos embargos de declaração', 'EMBARGOS DE DECLARAÇÃO NÃO CONHECIDOS', 'Embargos de declaração não conhecidos.'] })[k];
+    if (tipo === 'Juízo de Retratação') return ({
+      mant: ['em juízo de retratação, mantenho o acórdão ' + VAL('confirmar a fórmula do gabinete'), 'em juízo de retratação, manteve o acórdão ' + VAL('confirmar a fórmula do gabinete'), 'JUÍZO DE RETRATAÇÃO NÃO EXERCIDO', 'Acórdão mantido.'],
+      retr: ['em juízo de retratação, ' + VAL('novo resultado'), 'em juízo de retratação, ' + VAL('novo resultado'), 'JUÍZO DE RETRATAÇÃO EXERCIDO', VAL('dispositivo')] })[k];
+    var pp = function (m, f) { return (o.fem ? f : m) + (o.pl ? 's' : ''); }, nome = o.nome + (o.rn && o.nome === 'Apelação' ? ' e remessa necessária' : '');
+    var nomeCx = nome.toUpperCase(), pl = o.pl || o.rn;
+    var part = function (m, f) { var x = o.fem ? f : m; return pl ? x + (x === x.toUpperCase() ? 'S' : 's') : x; };
+    return ({
+      desp: ['nego provimento ' + o.a, 'negou provimento ' + o.a, nomeCx + ' ' + part('DESPROVIDO', 'DESPROVIDA'), nome + ' ' + part('desprovido', 'desprovida') + '.'],
+      prov: ['dou provimento ' + o.a + ' ' + cmd, 'deu provimento ' + o.a + ' ' + cmd, nomeCx + ' ' + part('PROVIDO', 'PROVIDA'), nome + ' ' + part('provido', 'provida') + '.'],
+      parc: ['dou parcial provimento ' + o.a + ' ' + cmd, 'deu parcial provimento ' + o.a + ' ' + cmd, nomeCx + ' ' + part('PARCIALMENTE PROVIDO', 'PARCIALMENTE PROVIDA'), nome + ' ' + part('parcialmente provido', 'parcialmente provida') + '.'],
+      ncdesp: ['conheço em parte ' + o.art + ' e ' + (pl ? 'nego-lhes' : 'nego-lhe') + ' provimento', 'conheceu em parte ' + o.art + ' e ' + (pl ? 'negou-lhes' : 'negou-lhe') + ' provimento', nomeCx + ' ' + part('PARCIALMENTE CONHECIDO', 'PARCIALMENTE CONHECIDA') + ' E ' + part('DESPROVIDO', 'DESPROVIDA'), nome + ' ' + part('conhecido', 'conhecida') + ' em parte e, nessa extensão, ' + part('desprovido', 'desprovida') + '.'],
+      nc: ['não conheço ' + o.art, 'não conheceu ' + o.art, nomeCx + ' NÃO ' + part('CONHECIDO', 'CONHECIDA'), nome + ' não ' + part('conhecido', 'conhecida') + '.'],
+      prej: ['julgo ' + part('prejudicado', 'prejudicada') + ' ' + o.art.replace(/^d[ao]s? /, function (m) { return m.replace(/^d/, ''); }), 'julgou ' + part('prejudicado', 'prejudicada') + ' ' + o.art.replace(/^d[ao]s? /, function (m) { return m.replace(/^d/, ''); }), nomeCx + ' ' + part('PREJUDICADO', 'PREJUDICADA'), nome + ' ' + part('prejudicado', 'prejudicada') + '.'] })[k] || ['', '', '', ''];
+  }
+
+  /* ---------- partes ---------- */
+  var PELO_NOME = [[/fazenda nacional/i, 'a Fazenda Nacional'], [/\buni[ãa]o\b/i, 'a União'], [/caixa econ[ôo]mica federal|\bcef\b/i, 'a Caixa Econômica Federal'], [/banco central|\bbacen\b/i, 'o Banco Central do Brasil']];
+  function porNome(nome) { for (var i = 0; i < PELO_NOME.length; i++) if (PELO_NOME[i][0].test(nome || '')) return PELO_NOME[i][1]; return ''; }
+  function feminino(nome) {
+    var n = N(nome).replace(/^(o|a)\s+/, '');
+    if (/^(instituto|conselho|departamento|banco|municipio|estado|fundo|servico)\b/.test(n)) return false;
+    if (/^(universidade|fundacao|agencia|caixa|empresa|companhia|cooperativa|associacao|sociedade|uniao|fazenda|autarquia)\b/.test(n)) return true;
+    var p = n.split(/\s+/)[0] || ''; return /a$/.test(p) && !/^(luca|joshua|nicola|elia|jonatha)$/.test(p);
+  }
+  function polos() {
+    var a = fo('polo_ativo') || fo('Polo Ativo'), p = fo('polo_passivo') || fo('Polo Passivo');
+    return { a: a.split(/;|\s+e\s+(?=[A-ZÁ-Ú])/)[0] || '', p: p.split(/;|\s+e\s+(?=[A-ZÁ-Ú])/)[0] || '', aN: a.split(';').filter(Boolean).length, pN: p.split(';').filter(Boolean).length };
+  }
+  /* designação pela posição na origem; pelo nome se União, CEF, BACEN ou Fazenda Nacional */
+  function designa(polo) {
+    var P = polos(), nome = polo === 'autor' ? P.a : P.p, nm = porNome(nome);
+    if (nm) return nm;
+    var ms = /mandado de seguran/i.test(fo('classe_judicial') || fo('Classe'));
+    if (polo === 'autor') { var f = feminino(nome); return ms ? (f ? 'a impetrante' : 'o impetrante') : (P.aN > 1 ? 'os autores' : f ? 'a autora' : 'o autor'); }
+    var fr = feminino(nome); return P.pN > 1 ? 'os réus' : fr ? 'a ré' : 'o réu';
+  }
+  function poloDe(txt) {
+    var n = N(txt); if (!n) return '';
+    if (/\b(autor|autora|autores|requerente|exequente|impetrante|demandante|embargante)\b/.test(n)) return 'autor';
+    if (/\b(re|reu|res|reus|requerid|executad|impetrad|demandad|embargad)/.test(n)) return 're';
+    var P = polos();
+    if (P.a && N(P.a).indexOf(n.slice(0, 12)) >= 0) return 'autor';
+    if (P.p && N(P.p).indexOf(n.slice(0, 12)) >= 0) return 're';
+    if (porNome(txt)) { if (P.p && porNome(P.p) === porNome(txt)) return 're'; if (P.a && porNome(P.a) === porNome(txt)) return 'autor'; }
+    return '';
+  }
+  function quem(txt) { var nm = porNome(txt); if (nm) return nm; var p = poloDe(txt); return p ? designa(p) : VAL(S(txt) ? 'recorrente (lido: ' + S(txt) + ')' : 'recorrente'); }
+  function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+
+  /* ---------- sentença ---------- */
+  function resultadoSentenca() {
+    var r = S(v('origem', 'Sentença - Resultado')), d = N(v('origem', 'Sentença - Decisão'));
+    if (r) {
+      r = r.replace(/\b([A-ZÁ-Ú]{4,}(?:\s+[A-ZÁ-Ú]{2,})*)\b/g, function (m) { return m.toLowerCase(); }).replace(/^(?:o juiz|a ju[íi]za|a sentença)\s+/i, '')
+        .replace(/,?\s*(?:e\s+)?(?:resolvendo|com resolu[çc][ãa]o|extinguindo o (?:processo|feito) com|nos termos d[oe] (?:art|artigo))[\s\S]*$/i, '').replace(/[.;,\s]+$/, '');
+      if (!/^(julgou|extinguiu|denegou|concedeu|homologou|indeferiu|deferiu|rejeitou|acolheu|reconheceu|declarou|condenou|determinou)/i.test(r)) r = VAL('verbo nuclear') + ' ' + r;
+      return r;
+    }
+    return d === 'procedente' ? 'julgou procedente o pedido' : d === 'improcedente' ? 'julgou improcedente o pedido' : d === 'parcialmente procedente' ? 'julgou parcialmente procedente o pedido' : /extin/.test(d) ? 'extinguiu o processo sem resolução do mérito' : /homolog/.test(d) ? 'homologou ' + VAL('o acordo | a desistência') : VAL('o que a sentença decidiu');
+  }
+  /* "Parte ré (INSS) · 10% sobre o valor da condenação (Súmula 111/STJ) · exigibilidade suspensa (…)" → frase do relatório */
+  function fraseHonorarios() {
+    var h = S(v('origem', 'Sentença - Honorários')); if (!h) return VAL('honorários fixados na sentença');
+    return h.split(/\s*\|\s*/).map(function (um) {
+      var p = um.split(/\s*·\s*/), q = p[0] || '';
+      if (/^sem honor/i.test(q)) { var m = /\(([^)]+)\)/.exec(q); return 'Sem condenação em honorários advocatícios' + (m ? ' (' + m[1].replace(/^(mandado de segurança|Juizado):\s*/, '') + ')' : '') + '.'; }
+      if (!/^(parte|ambas|\[VALIDAR)/i.test(q)) return cap(um.replace(/[.;]\s*$/, '')) + '.';
+      var valor = p[1] || VAL('valor'), obs = p.slice(2), sum = /\(Súmula 111\/STJ\)/.test(valor); valor = valor.replace(/\s*\(Súmula 111\/STJ\)/, '');
+      var dev = /^ambas/i.test(q) ? '' : /\(([^)]+)\)/.exec(q) ? quem(/\(([^)]+)\)/.exec(q)[1]) : /autora/i.test(q) ? designa('autor') : /r[ée]/i.test(q) ? designa('re') : VAL('quem paga');
+      var fr = /^ambas/i.test(q) ? 'Fixou honorários advocatícios em sucumbência recíproca, em ' + valor : 'Condenou ' + dev + ' ao pagamento de honorários advocatícios de ' + valor;
+      if (sum) fr += ', observada a Súmula 111/STJ';
+      obs.forEach(function (o) { if (/equidade/.test(o)) fr += ', fixados por equidade (artigo 85, § 8º, do CPC)'; else if (/exigibilidade/.test(o)) fr += ', com exigibilidade suspensa pela gratuidade de justiça (artigo 98, § 3º, do CPC)'; else if (/DPU/.test(o)) fr += ', em favor da Defensoria Pública da União'; else fr += ', ' + o; });
+      return fr + '.';
+    }).join(' ');
+  }
+
+  /* ---------- relatório ---------- */
+  function pRecursos(tipo) {
+    var R = tab('origem', 'Recursos'), verbo = tipo === 'Agravo de Instrumento' ? 'Agravou' : 'Apelou', out = [];
+    if (!R.length) {
+      var al = linhas(v('triagem', 'Alegações'));
+      out.push(verbo + ' ' + VAL('a parte recorrente') + ' (ID ' + VAL('ID do recurso') + '), alegando, em suma, que: ' + (al.length ? enumerar(al) : VAL('razões, em itens')) + '.');
+      return out;
+    }
+    R.forEach(function (r) {
+      var L = linhas(r.preliminares).map(function (x) { return 'preliminarmente, ' + x; }).concat(linhas(r.teses).concat(linhas(r.merito)));
+      if (!L.length && R.length === 1) L = linhas(v('triagem', 'Alegações'));
+      var ped = S(r.pedidos);
+      out.push(verbo + ' ' + quem(r.parte) + ' ' + idOu(r.ids, 'ID do recurso') + ', alegando, em suma, que: ' + (L.length ? enumerar(L) : VAL('razões, em itens')) + (ped ? ', pelo que requereu ' + ped.replace(/^(requer(eu)?|pede)\s+/i, '').replace(/[.;]+$/, '') : '') + '.');
+    });
+    return out;
+  }
+  function pContrarrazoes(tipo) {
+    var C = tab('origem', 'Contrarrazões'), sit = N(v('origem', 'Contrarrazões - Situação')), nome = /agravo/.test(N(tipo)) ? 'contraminuta' : 'contrarrazões';
+    if (C.length) {
+      var com = C.filter(function (c) { return S(c.preliminares); });
+      if (C.length === 1) return 'Houve ' + nome + ' ' + idOu(C[0].ids, 'ID') + (com.length ? ', com arguição preliminar de ' + linhas(com[0].preliminares).join('; ') : '') + '.';
+      return 'Houve ' + nome + ' ' + C.map(function (c, i) { var q = quem(c.parte), d = q.replace(/^(o|a) /, function (m) { return m === 'o ' ? 'do ' : 'da '; }).replace(/^os /, 'dos '); return d + ' ' + idOu(c.ids, 'ID') + (S(c.preliminares) ? ', com arguição preliminar de ' + linhas(c.preliminares).join('; ') : ''); }).reduce(function (a, x, i, L) { return a + (i === 0 ? '' : i === L.length - 1 ? ' e ' : ', ') + x; }, '') + '.';
+    }
+    if (/nao|sem|decorr/.test(sit)) return 'Não houve ' + nome + '.';
+    if (/apresent/.test(sit)) return 'Houve ' + nome + ' (ID ' + VAL('ID') + ').';
+    return VAL('Houve ' + nome + ' (ID …). | Não houve ' + nome + '.');
+  }
+  function pMpf() {
+    var m = N(v('triagem', 'MPF')), s = N(v('triagem', 'Parecer - Sentido')), id = S(v('triagem', 'ID do Parecer MPF'));
+    if (!/com parecer/.test(m) && !id) return '';
+    var t = /prosseguimento/.test(s) ? 'manifestou-se pelo prosseguimento do feito' : /nao provimento/.test(s) ? 'opinou pelo desprovimento do recurso' : /provimento/.test(s) ? 'opinou pelo provimento do recurso' : 'opinou ' + VAL(S(v('triagem', 'Parecer - Sentido (outro)')) || 'sentido do parecer');
+    return 'A Procuradoria Regional da República ' + t + ' ' + idOu(id, 'ID do parecer') + '.';
+  }
+  function relatorio(tipo) {
+    var P = [], sid = S(v('origem', 'Sentença - ID')), rn = N(v('origem', 'Sentença - Reexame')) === 'sim', nRec = tab('origem', 'Recursos').length;
+    var imp = S(v('triagem', 'Impugnada - ID')), impS = S(v('triagem', 'Impugnada - Síntese'));
+    if (tipo === 'Embargos de Declaração') {
+      P.push('Trata-se de embargos de declaração contra acórdão assim ementado:');
+      P.push('“' + VAL('ementa do acórdão embargado' + (imp ? ' (ID ' + imp + ')' : '')) + '”');
+      var pts = linhas(v('triagem', 'ED - Ponto')).concat(linhas(v('triagem', 'Alegações')));
+      var vicio = S(v('triagem', 'ED - Vício')).toLowerCase() || 'omissão';
+      P.push('Alegou-se ' + vicio + ', inclusive em prequestionamento, pois: ' + (pts.length ? enumerar(pts) : VAL('pontos, em itens')) + '.');
+    } else if (tipo === 'Agravo Interno') {
+      P.push('Trata-se de agravo interno à decisão ' + idOu(imp, 'ID da decisão agravada') + ' que ' + (impS || VAL('o que a decisão decidiu')) + '.');
+      var fa = linhas(v('triagem', 'AgInt - Fundamentos')).concat(linhas(v('triagem', 'Alegações')));
+      var R0 = tab('origem', 'Recursos')[0] || {};
+      P.push('Alegou ' + (R0.parte ? quem(R0.parte).replace(/^(a|o) (autora?|réu|ré)$/, function (m, a, b) { return a + ' agravante'; }) : 'o agravante') + ', em suma ' + idOu(R0.ids, 'ID do agravo') + ': ' + (fa.length ? enumerar(fa) : VAL('razões, em itens')) + '.');
+      P.push(pContrarrazoes(tipo).replace(/contrarrazões/g, 'contraminuta'));
+    } else if (tipo === 'Juízo de Retratação') {
+      P.push('Trata-se de juízo de retratação a acórdão da Turma, proferido em ' + (S(v('triagem', 'Impugnada - Data')) ? brD(v('triagem', 'Impugnada - Data')) : VAL('data')) + ', assim ementado ' + idOu(imp, 'ID do acórdão') + ':');
+      P.push('“' + VAL('ementa do acórdão') + '”');
+      var trib = S(v('triagem', 'Retratação - Tribunal')), tema = S(v('triagem', 'Retratação - Tema')), prec = S(v('triagem', 'Retratação - Precedente'));
+      P.push('Na tramitação dos recursos excepcionais perante a Vice-Presidência, houve, em ' + (S(v('triagem', 'Retratação - Devolução mês')) || VAL('mês/ano')) + ', decisão para devolução dos autos à Turma para eventual juízo de retratação face ao julgamento do ' + (prec || VAL('precedente')) + ' ' + (trib === 'STJ' ? 'pelo Superior Tribunal de Justiça' : 'pela Suprema Corte') + ' (Tema ' + (tema || VAL('número')) + ') ' + idOu(v('triagem', 'Retratação - Devolução ID'), 'ID') + '.');
+    } else if (tipo === 'Agravo de Instrumento') {
+      P.push('Trata-se de agravo de instrumento à decisão ' + idOu(imp || sid, 'ID da decisão agravada') + ' que ' + (impS || resultadoSentenca()) + '.');
+      pRecursos(tipo).forEach(function (x) { P.push(x); });
+      P.push(pContrarrazoes(tipo));
+    } else if (tipo === 'Remessa Necessária') {
+      P.push('Trata-se de remessa necessária de sentença ' + idOu(sid, 'ID da sentença') + ' que ' + resultadoSentenca() + '. ' + fraseHonorarios());
+      P.push(nRec ? VAL('há recurso voluntário: conferir o tipo de julgamento') : 'Sem recurso voluntário, subiram os autos por força da remessa necessária.');
+    } else {
+      var ab = rn ? 'Trata-se de remessa necessária e de apelação interposta contra sentença ' : nRec > 2 ? 'Trata-se de apelações à sentença ' : nRec === 2 ? 'Trata-se de dupla apelação à sentença ' : 'Trata-se de apelação à sentença ';
+      P.push(ab + idOu(sid, 'ID da sentença') + ' que ' + resultadoSentenca() + '. ' + fraseHonorarios());
+      pRecursos(tipo).forEach(function (x) { P.push(x); });
+      P.push(pContrarrazoes(tipo));
+    }
+    var mp = /Embargos|Interno|Retrata/.test(tipo) ? '' : pMpf(); if (mp) P.push(mp);
+    P.push('É o relatório.');
+    return P;
+  }
+  function brD(x) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(x)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(x); }
+
+  /* ---------- ementa ---------- */
+  var RAMOS = [[/previdenc|inss|aposentad|auxilio|beneficio|pensao por morte|salario-maternidade|bpc|loas|assistencial/, 'PREVIDENCIÁRIO'], [/tribut|contribui|pis|cofins|imposto|irpf|irpj|ipi|icms|taxa|execucao fiscal|cda/, 'TRIBUTÁRIO'],
+    [/servidor|28,86|militar|licenciamento|concurso|improbidade|licitacao|administrativ|perdimento|aduan/, 'ADMINISTRATIVO'], [/sfh|mcmv|minha casa|contrato|dano moral|responsabilidade civil|consumidor|fies|caixa/, 'CIVIL'],
+    [/saude|medicamento|sus\b|tratamento/, 'CONSTITUCIONAL E ADMINISTRATIVO'], [/ambient|ibama/, 'AMBIENTAL'], [/indigena|funai|terra/, 'CONSTITUCIONAL']];
+  function ramo() {
+    var t = N([fo('Assunto'), v('triagem', 'Assunto detalhado'), v('triagem', 'Registro - Assunto detalhado'), v('triagem', 'Tema')].join(' '));
+    for (var i = 0; i < RAMOS.length; i++) if (RAMOS[i][0].test(t)) return RAMOS[i][1];
+    return VAL('RAMO');
+  }
+  function classeEmenta(tipo) {
+    var cl = N(fo('classe_judicial') || fo('Classe')), base = /agravo de instrumento/.test(cl) ? 'AGRAVO DE INSTRUMENTO' : /remessa/.test(cl) && !/apela/.test(cl) ? 'REMESSA NECESSÁRIA' : /mandado/.test(cl) ? 'APELAÇÃO EM MANDADO DE SEGURANÇA' : 'APELAÇÃO CÍVEL';
+    if (tipo === 'Embargos de Declaração') return 'EMBARGOS DE DECLARAÇÃO EM ' + base;
+    if (tipo === 'Agravo Interno') return 'AGRAVO INTERNO EM ' + base;
+    if (tipo === 'Juízo de Retratação') return 'JUÍZO DE RETRATAÇÃO EM ' + base;
+    if (tipo === 'Remessa Necessária') return 'REMESSA NECESSÁRIA';
+    if (tipo === 'Agravo de Instrumento') return 'AGRAVO DE INSTRUMENTO';
+    return N(v('origem', 'Sentença - Reexame')) === 'sim' ? 'REMESSA NECESSÁRIA E ' + base : base;
+  }
+  function assuntoCx() {
+    var a = S(v('triagem', 'Registro - Assunto detalhado')) || S(v('triagem', 'Assunto detalhado')) || fo('Assunto');
+    a = a.replace(/\s*\(\d+\)\s*/g, ' ').split(/\s*[|›>]\s*|\s*-\s+(?=[A-ZÁ-Ú])/).filter(Boolean).slice(-2).join('. ');
+    return a ? a.toUpperCase().replace(/\.+$/, '') : VAL('ASSUNTO');
+  }
+  function ementa(tipo, k) {
+    var R = resultado(tipo, k), n = 0, it = function (t) { n++; return { n: n, t: t }; }, I = [], II = [], III = [], IV = [];
+    var cab = 'DIREITO ' + ramo() + '. ' + classeEmenta(tipo) + '. ' + assuntoCx() + '. ' + R[2] + '.';
+    if (tipo === 'Embargos de Declaração') I.push(it('Embargos de declaração opostos contra acórdão que ' + VAL('resultado do acórdão embargado') + ', alegando ' + (S(v('triagem', 'ED - Vício')).toLowerCase() || 'omissão') + '.'));
+    else if (tipo === 'Agravo Interno') I.push(it('Agravo interno contra decisão que ' + (S(v('triagem', 'Impugnada - Síntese')) || VAL('o que a decisão decidiu')) + '.'));
+    else if (tipo === 'Juízo de Retratação') I.push(it('Juízo de retratação de acórdão da Turma, após devolução dos autos pela Vice-Presidência, em razão do Tema ' + (S(v('triagem', 'Retratação - Tema')) || VAL('número')) + '.'));
+    else if (tipo === 'Remessa Necessária') I.push(it('Remessa necessária de sentença que ' + resultadoSentenca() + '.'));
+    else if (tipo === 'Agravo de Instrumento') I.push(it('Agravo de instrumento contra decisão que ' + (S(v('triagem', 'Impugnada - Síntese')) || VAL('o que a decisão decidiu')) + '.'));
+    else I.push(it((N(v('origem', 'Sentença - Reexame')) === 'sim' ? 'Remessa necessária e ' + (tab('origem', 'Recursos').length > 1 ? 'apelações' : 'apelação') : tab('origem', 'Recursos').length > 1 ? 'Apelações' : 'Apelação') + ' contra sentença que ' + resultadoSentenca() + '.'));
+    var Q = linhas(v('triagem', 'Alegações')); if (!Q.length) Q = linhas(v('triagem', 'ED - Ponto'));
+    if (Q.length <= 1) II.push(it('A questão em discussão consiste em saber se ' + VAL(Q[0] ? 'reescrever como pergunta: ' + Q[0] : 'questão') + '.'));
+    else { var nn = ['duas', 'três', 'quatro', 'cinco', 'seis'][Math.min(Q.length, 6) - 2]; II.push(it('Há ' + nn + ' questões em discussão: ' + Q.slice(0, 6).map(function (q, i) { return '(' + ['i', 'ii', 'iii', 'iv', 'v', 'vi'][i] + ') saber se ' + VAL(q); }).reduce(function (a, x, i, L) { return a + (i === 0 ? '' : i === L.length - 1 ? '; e ' : '; ') + x; }, '') + '.')); }
+    (Q.length ? Q.slice(0, 6) : ['']).forEach(function (q, i) { III.push(it(VAL('fundamento' + (Q.length > 1 ? ' da questão (' + ['i', 'ii', 'iii', 'iv', 'v', 'vi'][i] + ')' : '')))); });
+    IV.push(it(R[3]));
+    return { cab: cab, sec: [['I. Caso em exame', I], ['II. Questão em discussão', II], ['III. Razões de decidir', III], ['IV. Dispositivo', IV]],
+      rod: ['Dispositivos relevantes citados: ' + VAL('CF/1988, artigo …; Lei …/…, artigo …; e CPC, artigo …') + '.', 'Jurisprudência relevante citada: ' + VAL('STF, …; STJ, …; e TRF-3, …') + '.'] };
+  }
+
+  /* ---------- montagem ---------- */
+  function docs() {
+    var tipo = ST.tipo || tipoDetectado(), k = ST.res || resDaFicha(tipo);
+    if (!opcoesRes(tipo).some(function (o) { return o[0] === k; })) k = opcoesRes(tipo)[0][0];
+    var R = resultado(tipo, k), E = ementa(tipo, k);
+    return { tipo: tipo, k: k, rel: relatorio(tipo), disp: ['Ante o exposto, ' + R[0] + '.', 'É como voto.'], em: E,
+      acordao: 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, ' + R[1] + ', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.',
+      procl: 'Por unanimidade, ' + R[1] + '.' };
+  }
+  function marca(t) { return esc(t).replace(/\[VALIDAR:[^\]]*\]/g, function (m) { return '<mark class="gv">' + m + '</mark>'; }); }
+  function emTexto(E) { return E.cab + '\n' + E.sec.map(function (s) { return s[0] + '\n' + s[1].map(function (x) { return x.n + '. ' + x.t; }).join('\n'); }).join('\n') + '\n__________\n' + E.rod.join('\n'); }
+  function emHtml(E) { return '<p><b>' + esc(E.cab) + '</b></p>' + E.sec.map(function (s) { return '<p><b>' + esc(s[0]) + '</b></p>' + s[1].map(function (x) { return '<p><b>' + x.n + '.</b> ' + esc(x.t) + '</p>'; }).join(''); }).join('') + '<p>__________</p>' + E.rod.map(function (r) { var i = r.indexOf(':'); return '<p><i>' + esc(r.slice(0, i + 1)) + '</i>' + esc(r.slice(i + 1)) + '</p>'; }).join(''); }
+  function bloco(id, titulo, html, nVal) {
+    return '<section class="card pc-sec gr-doc" id="gr-' + id + '"><div class="pc-sh"><h3>' + titulo + '</h3>' + (nVal ? '<small class="gr-nv" title="Trechos a conferir ou completar">' + nVal + ' a validar</small>' : '<small class="muted">pronto</small>') +
+      '<button type="button" class="btn sm" data-gr-copia="' + id + '" title="Copiar para colar no PJe (com negrito e itálico)">Copiar</button></div><div class="gr-tx tx-j">' + html + '</div></section>';
+  }
+  function conta(t) { return (String(t).match(/\[VALIDAR:/g) || []).length; }
+  var ULT = null;
+  function html() {
+    var g = GB(); if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
+    if (ST.cnj !== g.cnj()) { ST.cnj = g.cnj(); ST.tipo = ''; ST.res = ''; }
+    var D = docs(); ULT = D;
+    var chips = function (L, at, sel) { return L.map(function (o) { var k = Array.isArray(o) ? o[0] : o, r = Array.isArray(o) ? o[1] : o; return '<button type="button" class="chip' + (k === sel ? ' on' : '') + '" ' + at + '="' + esc(k) + '">' + esc(r) + '</button>'; }).join(''); };
+    var relT = D.rel.join('\n'), emT = emTexto(D.em);
+    var aviso = !S(v('origem', 'Sentença - Resultado')) && !/Embargos|Interno|Retrata/.test(D.tipo) ? '<p class="gr-av">A sentença ainda não foi lida: em Autos › Peças › Sentença, use "Extrair da peça" para trazer resultado e honorários.</p>' : '';
+    return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">padrão do gabinete · nada é gravado</small></div>' +
+      '<div class="gr-l"><span>Tipo de julgamento</span><div class="chips">' + chips(TIPOS, 'data-gr-tipo', D.tipo) + '</div></div>' +
+      '<div class="gr-l"><span>Resultado</span><div class="chips">' + chips(opcoesRes(D.tipo), 'data-gr-res', D.k) + '</div></div>' + aviso + '</section>' +
+      bloco('rel', 'Relatório', D.rel.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(relT)) +
+      bloco('disp', 'Dispositivo do voto', D.disp.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(D.disp.join(' '))) +
+      bloco('em', 'Ementa', '<p class="gr-cab"><b>' + marca(D.em.cab) + '</b></p>' + D.em.sec.map(function (s) { return '<p><b>' + esc(s[0]) + '</b></p>' + s[1].map(function (x) { return '<p><b>' + x.n + '.</b> ' + marca(x.t) + '</p>'; }).join(''); }).join('') + '<p>__________</p>' + D.em.rod.map(function (r) { var i = r.indexOf(':'); return '<p><i>' + esc(r.slice(0, i + 1)) + '</i>' + marca(r.slice(i + 1)) + '</p>'; }).join(''), conta(emT)) +
+      bloco('ac', 'Acórdão', '<p>' + marca(D.acordao) + '</p>', conta(D.acordao)) +
+      bloco('pr', 'Proclamação do julgamento', '<p>' + marca(D.procl) + '</p>', conta(D.procl));
+  }
+  function textos(id) {
+    var D = ULT || docs();
+    if (id === 'rel') return { t: 'RELATÓRIO\n\n' + D.rel.join('\n\n'), h: D.rel.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') };
+    if (id === 'disp') return { t: D.disp.join('\n\n'), h: D.disp.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') };
+    if (id === 'em') return { t: emTexto(D.em), h: emHtml(D.em) };
+    if (id === 'ac') return { t: D.acordao, h: '<p>' + esc(D.acordao) + '</p>' };
+    return { t: D.procl, h: '<p>' + esc(D.procl) + '</p>' };
+  }
+  function copiar(id, b) {
+    var x = textos(id), ok = function () { if (b) { var o = b.textContent; b.textContent = 'Copiado'; setTimeout(function () { b.textContent = o; }, 1100); } };
+    try {
+      if (window.ClipboardItem && navigator.clipboard.write) { navigator.clipboard.write([new ClipboardItem({ 'text/plain': new Blob([x.t], { type: 'text/plain' }), 'text/html': new Blob([x.h], { type: 'text/html' }) })]).then(ok, function () { navigator.clipboard.writeText(x.t).then(ok); }); return; }
+    } catch (e) {}
+    navigator.clipboard.writeText(x.t).then(ok, function () {});
+  }
+  /* cliques: tratados pelo gabinete.js (delegação), que chama acao() */
+  function acao(b) {
+    if (b.dataset.grTipo) { ST.tipo = b.dataset.grTipo; ST.res = ''; return true; }
+    if (b.dataset.grRes) { ST.res = b.dataset.grRes; return true; }
+    if (b.dataset.grCopia) { copiar(b.dataset.grCopia, b); return false; }
+    return false;
+  }
+  window.MutaGerador = { html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
+})();

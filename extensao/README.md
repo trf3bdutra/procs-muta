@@ -5,6 +5,16 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.20 · Gerador
+
+- **Prontuário › Gerador** (`gerador.js`): relatório, dispositivo do voto, ementa, acórdão e proclamação do julgamento
+  no padrão do gabinete, pelo tipo de julgamento (Apelação, Remessa Necessária, Agravo de Instrumento, Embargos de
+  Declaração, Agravo Interno, Juízo de Retratação) e pelo resultado escolhido (o da ficha vem marcado). Fórmulas do
+  Padrão Muta 1 e 2 e do Padrão de ementa do gabinete, sem reescrever; dados da ficha e, onde ela está vazia, da
+  leitura dos autos. O que não se confirma sai como `[VALIDAR: …]`, destacado, com a contagem em cada bloco.
+  "Copiar" leva o texto com negrito e itálico para colar no PJe. Nada é gravado.
+- Honorários da sentença no padrão "quem paga · quanto e sobre o quê · observações", com 😭 no rótulo (0.19.3).
+
 ## O que muda na 0.19 · prazos, alertas e etiquetas do gabinete
 
 - **Selos na lista de tarefas do PJe** (`conteudo-pje.js`, `etiquetas.js`): em cada cartão de processo, a etapa
