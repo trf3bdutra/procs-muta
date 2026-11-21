@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T06:24:23.133Z",
+ "atualizado_em": "2026-11-21T06:29:31.182Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -303071,53 +303071,54 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.325Z"
+    "atualizado_em": "2026-11-21T06:29:31.182Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Efeito suspensivo",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Apreciada · prejudicada",
+    "Urgência - Data": "2026-11-21",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Comprovado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Reforma agrária",
+    "ID do Parecer MPF": "346435971",
+    "Parecer - Sentido": "Desprovimento",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Desapropriação por Interesse Social para Reforma Agrária",
+    "Tema": "Desapropriação para reforma agrária · cumprimento de sentença · juros compensatórios (ADI 2332) e inexigibilidade parcial do título · cálculos",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção, Desapropriação, AI - Cump.Sent.",
-    "Alegações": "",
+    "Alegações": "1) Preclusão das impugnações do INCRA aos cálculos e homologação dos cálculos da exequente; 2) juros compensatórios de 12% do título × 6% sobre a diferença (ADI 2332) e inexigibilidade parcial do título (artigo 535, § 5º, do CPC); 3) termo inicial dos juros moratórios e cumulação com os compensatórios; 4) encargos sobre as benfeitorias até o levantamento.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Trânsito em julgado do acórdão em 30/09/2023, posterior ao julgamento de mérito da ADI 2332 (28/05/2018), segundo a decisão ID 347093430 · Diferença de indenização de R$ 306.379,84, a atualizar desde 29/11/2000 · AI conexo 5028989-32.2025.4.03.0000 [VALIDAR julgamento conjunto] · Parecer do MPF pelo desprovimento (ID 346435971) · Divergência de nome entre a agravante e a expropriada [VALIDAR]",
+    "Síntese Fática": "Em cumprimento de sentença de desapropriação por interesse social para reforma agrária (Fazenda Rancho Loma, Iguatemi/MS), o juízo declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano, aplicou a ADI 2332 (6% ao ano sobre a diferença entre a indenização e 80% da oferta), afastou os cálculos da exequente e determinou novo cálculo."
    },
    "producao": {
     "Destino": "",
@@ -303156,7 +303157,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: ApCiv 0937601-20.1986.4.03.6100 (acórdão 1ª Turma, 06/07/2023: juros compensatórios de 6% ao ano pela ADI 2.332); AR 5007014-22.2023.4.03.0000 (acórdão 1ª Seção, 10/07/2026: desapropriação para reforma agrária, juros compensatórios e moratórios, ADI 2.332) [VALIDAR paradigma específico da inexigibilidade do título]"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -303166,7 +303168,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5026921-12.2025.4.03.0000",
