@@ -19761,11 +19761,11 @@
    "assunto": "Funrural",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: decisão sobre a tutela recursal pendente ou julgamento do agravo de instrumento (voto) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Frizelo Frigoríficos Ltda. contra a decisão que, na execução fiscal 5001536-75.2023.4.03.6000, rejeitou a exceção de pré-executividade contra a cobrança do FUNRURAL/GILRAT por sub-rogação. A agravante pede o sobrestamento da execução, com base na suspensão determinada na ADI 4.395, e a paralisação do bloqueio SISBAJUD. A tutela recursal foi postergada e renovada em 06/10/2026, sem exame até agora.",
+   "peculiaridades": "Tutela recursal pendente desde 25/02/2026 (postergada em 07/04/2026 e renovada em 06/10/2026). Bloqueio SISBAJUD noticiado. Há 1 documento não lido no PJe. Preparo por comprovante bancário, sem STN [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -19775,7 +19775,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Apreciar a tutela recursal pendente ou levar o agravo a julgamento",
+    "materia": "Execução fiscal — FUNRURAL/GILRAT por sub-rogação; exceção de pré-executividade; ADI 4.395",
+    "origem": "Campo Grande · 5001536-75.2023.4.03.6000 [VALIDAR vara]",
+    "decisao_agravada": "Rejeição da exceção de pré-executividade [VALIDAR ID]",
+    "recurso": "ID 356749441 · 25/02/2026",
+    "preparo": "Comprovante bancário, sem STN [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Comprovante bancário (não aceito): ID 356945032 (GRU e pagamento por internet banking da CAIXA) · petição: ID 356943178 · informação sem custas: ID 356896224 · valor R$ 64,26 · pago em 26/02/2026 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5001536-75.2023.4.03.6000 · prevenção pela RemNecCiv 5000559-20.2022.4.03.6000 afastada (despacho ID 357094717) · redistribuído à Turma Regional de MS · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -19786,7 +19797,18 @@
    "extracao": {
     "situacao": "pendente"
    },
-   "bloco": "2"
+   "bloco": "2",
+   "teor": {
+    "sintese_fatica": "Em execução fiscal de contribuições ao FUNRURAL/GILRAT exigidas do frigorífico por sub-rogação (CDAs 13.4.22.022357-34 e 13.4.22.022358-15; processo administrativo 10140.722474/2022-89), o juízo rejeitou a exceção de pré-executividade por inadequação da via; houve ordem de bloqueio SISBAJUD.",
+    "inicial": "Execução fiscal 5001536-75.2023.4.03.6000 (Justiça Federal em Campo Grande) da União (Fazenda Nacional) contra Frizelo Frigoríficos Ltda. [VALIDAR vara]",
+    "decisao_recorrida": "Decisão que rejeitou a exceção de pré-executividade por inadequação da via [VALIDAR ID e data]",
+    "recurso": "Agravo ID 356749441 (25/02/2026): (1) vício no lançamento e na CDA (natureza e fundamento da dívida); (2) inconstitucionalidade da sub-rogação do FUNRURAL/GILRAT; (3) suspensão nacional determinada cautelarmente na ADI 4.395; pede tutela recursal para sobrestar a execução e os atos constritivos.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 377312417 (29/05/2026): matérias exigem dilação probatória (Temas 202 e 669/STF), próprias dos embargos à execução; presunção de certeza e liquidez da CDA.",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Informação ID 356896224 (26/02/2026): sem custas; possível prevenção pela RemNecCiv 5000559-20.2022.4.03.6000. Despacho ID 357094717 (02/03/2026, Des. Fed. Antonio Morimoto): prevenção não reconhecida (SENAR fora da cobrança). Decisão ID 358251909 (05/03/2026): redistribuição à Turma Regional de MS. Petição ID 362819515 (27/03/2026): reiteração da tutela diante do bloqueio SISBAJUD. Despacho ID 363633215 (07/04/2026): tutela postergada para após a contraminuta. Petição ID 402678063 (06/10/2026): renovação do pedido de tutela recursal. Há 1 documento não lido no PJe.",
+    "representacao": "Agravante: advogados Felipe Ricetti Marques, Andreza Ramos da Silva e Márcio Socorro Pollet (substabelecimento ID 356749447) [VALIDAR procuração]. Agravada: União (PGFN).",
+    "preparo": "GRU 18720-8 e comprovante de pagamento por internet banking da CAIXA, R$ 64,26, em 26/02/2026 (ID 356945032); sem comprovante STN [VALIDAR]"
+   }
   },
   {
    "sessao": "",
