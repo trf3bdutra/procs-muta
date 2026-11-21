@@ -113,3 +113,8 @@ test('Etapas da esteira: cabeçalho com rótulo dourado e título grande, sem fu
     assert.ok(r(f).includes('@supports not selector(::-webkit-scrollbar)')&&r(f).includes('::-webkit-scrollbar-button{display:none'),f);
   assert.ok(r('caput/motor/assets/css/07-identidade.css').includes('@supports not selector(::-webkit-scrollbar)'),'motor css');
 });
+
+test('Etiquetagem: "Criar regra…" em Sem regra abre o formulário junto da etiqueta',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes("boxRegrasPauta(ss, d, 'form')")&&cap.includes("if (onde === 'form') return form;")&&cap.includes("de: et }")&&cap.includes("(onde === 'form') === !!rb.de"),'form junto da etiqueta');
+});

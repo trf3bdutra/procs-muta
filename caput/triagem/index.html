@@ -547,6 +547,7 @@ html[data-theme="dark"] .cwe-esteira i.feito{color:#0e2132}
 .cwe-rb .rbp{margin:0;padding:7px 9px;background:var(--l2);display:flex;flex-direction:column;gap:2px;font-size:11.5px;color:var(--m2)}.cwe-rb .rbp b{color:var(--g)}.cwe-rb small{font-size:11px;color:var(--m)}
 .cwe-box .sr select{height:26px;max-width:140px;font:11.5px Figtree,sans-serif;color:var(--g)}
 .cwe-box .sr{display:grid;grid-template-columns:34px minmax(0,1fr) auto;align-items:center;gap:8px;padding:6px 12px;border-bottom:1px solid #f1eee6}
+.cwe-box .sr.ab{background:#f3f7f5}.cwe-box .sr-f{padding:2px 12px 12px;background:#f3f7f5;border-bottom:1px solid #e3ebe8}.cwe-box .sr-f .cwe-rb{margin:0}
 .cwe-box .sr b{font:500 13px ui-monospace,monospace;color:var(--g)}.cwe-box .sr span{min-width:0;overflow-wrap:anywhere}.cwe-box .sr small{display:block;font-size:10.5px;color:var(--m2)}
 .cwe-box .sr button{height:26px;padding:0 9px;border:1px solid var(--b2);border-radius:6px;background:var(--p);font-weight:700;font-size:11px}
 .cwe-box .cr{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:baseline;padding:7px 12px;border-bottom:1px solid #f1eee6}.cwe-box .cr>b{font:500 13px ui-monospace,monospace;color:var(--g)}.cwe-box .cr>span:last-child{font:10.5px ui-monospace,monospace;color:var(--m)}.cwe-box .cr.off{opacity:.5}
@@ -2582,15 +2583,16 @@ function portaToken() { return new Promise((fim) => {
           <p>A etiqueta de ED só informa. Remessa necessária vem da classe. Para outra regra por tarefa, use "Nova regra" acima com a condição "Tarefa atual no PJe".</p></section>
         ${boxRegrasPadrao(ss, d)}
         <aside class="cwe-box"><div class="h"><span><b>Sem regra, mais frequentes</b></span><small>na pauta de ${e(A.br(ss.data).slice(0, 5))} · escolha a regra de cada etiqueta (vale só nesta pauta)</small></div>
-          ${semL.map(([t, n]) => `<div class="sr"><b>${n}</b><span>${e(t)}</span><select data-cwe-rbsel="${e(t)}" aria-label="Criar regra para a etiqueta ${e(t)}"><option value="">Criar regra…</option>${efeitosRb(d).map((x) => `<option value="${e(x.k)}">${e(x.t)}</option>`).join('')}</select></div>`).join('') || '<p>Todas as etiquetas têm regra.</p>'}</aside></div></div></section>`;
+          ${semL.map(([t, n]) => { const aqui = est.rb?.de === t; return `<div class="sr${aqui ? ' ab' : ''}"><b>${n}</b><span>${e(t)}</span><select data-cwe-rbsel="${e(t)}" aria-label="Criar regra para a etiqueta ${e(t)}"><option value="">Criar regra…</option>${efeitosRb(d).map((x) => `<option value="${e(x.k)}"${aqui && est.rb.ef === x.k ? ' selected' : ''}>${e(x.t)}</option>`).join('')}</select></div>${aqui ? `<div class="sr-f">${boxRegrasPauta(ss, d, 'form')}</div>` : ''}`; }).join('') || '<p>Todas as etiquetas têm regra.</p>'}</aside></div></div></section>`;
   }
 
   /* ===== regras de etiquetas por pauta: criadas aqui valem só nesta sessão (gravadas no arquivo dela); "Tornar padrão" leva às regras gerais ===== */
   function efeitosRb(d) { try { return d.s?.efeitosEtiqueta?.() || []; } catch (er) { return []; } }
-  function boxRegrasPauta(ss, d) { let R = null; try { R = d.s?.regrasPauta?.(ss.id) || null; } catch (er) { R = null; } if (!R) return '';
+  /* onde: 'top' = caixa "Regras desta pauta"; 'form' = só o formulário, aberto junto da etiqueta escolhida em "Sem regra" */
+  function boxRegrasPauta(ss, d, onde = 'top') { let R = null; try { R = d.s?.regrasPauta?.(ss.id) || null; } catch (er) { R = null; } if (!R) return '';
     const rb = est.rb, opt = (L, v) => L.map((x) => `<option value="${e(x.k)}"${x.k === v ? ' selected' : ''}>${e(x.t)}</option>`).join('');
     let form = '';
-    if (rb) { const ef = R.efeitos.find((x) => x.k === rb.ef) || R.efeitos[0]; let prev = []; try { prev = d.s?.previaRegraPauta?.(ss.id, rb) || []; } catch (er) { prev = []; }
+    if (rb && (onde === 'form') === !!rb.de) { const ef = R.efeitos.find((x) => x.k === rb.ef) || R.efeitos[0]; let prev = []; try { prev = d.s?.previaRegraPauta?.(ss.id, rb) || []; } catch (er) { prev = []; }
       const temCond = rb.conds.some((c) => c.op === 'vazio' || String(c.val || '').trim());
       const tarefas = [...new Set((convDados(ss, d) || []).map((p) => p.tarefa).filter(Boolean))].sort();
       form = `<div class="cwe-rb"><div class="rbl"><span class="cwe-k">QUANDO</span><span class="rbg"><button type="button" data-cwe="rb-liga" data-v="E" aria-pressed="${rb.liga !== 'OU'}">E</button><button type="button" data-cwe="rb-liga" data-v="OU" aria-pressed="${rb.liga === 'OU'}">OU</button></span></div>
@@ -2600,6 +2602,7 @@ function portaToken() { return new Promise((fim) => {
         <div class="rbl"><span class="cwe-k">ENTÃO</span></div><select data-rb="ef" aria-label="Efeito">${opt(R.efeitos, rb.ef)}</select>${ef && ef.v ? `<input data-rb="v" value="${e(rb.v || '')}" placeholder="${e(ef.v)}">` : ''}
         <p class="rbp"><b>${temCond ? prev.length + ' processo(s) desta pauta' : 'Preencha uma condição'}</b>${prev.slice(0, 4).map((x) => `<span>item ${e(x.item || '—')} · ${e(A.cnj(x.cnj))}</span>`).join('')}${prev.length > 4 ? `<span>… e mais ${prev.length - 4}</span>` : ''}<button type="button" class="cwe-lnk" data-cwe="rb-previa">atualizar a prévia</button></p>
         <span class="cwe-acoes"><button type="button" class="pri" data-cwe="rb-salvar">Salvar nesta pauta</button><button type="button" data-cwe="rb-x">Cancelar</button></span><small>Vale só para a pauta de ${e(A.br(ss.data))} e fica gravada com ela. "Tornar padrão" leva a regra às configurações.</small></div>`; }
+    if (onde === 'form') return form;
     return `<section class="cwe-box"><div class="h"><span><b>Regras desta pauta</b><button type="button" class="cwe-lnk" data-cwe="rb-abre">${rb ? 'Fechar' : '+ Nova regra'}</button></span><small>por tarefa atual, etiqueta, assunto, classe, meta ou item · valem só em ${e(A.br(ss.data).slice(0, 5))}</small></div>
       ${form}${R.sessao.map((r) => `<div class="rb rbs"><code>${e(r.quando)}</code><b>→ ${e(r.ef)}</b><small>${r.n} proc.</small><span><button type="button" class="cwe-lnk" data-cwe="rb-pad" data-id="${e(r.id)}" title="Levar às regras padrão (configurações): passa a valer em todas as sessões">Tornar padrão</button><button type="button" class="cwe-lnk x" data-cwe="rb-del" data-id="${e(r.id)}" title="Excluir a regra desta pauta">Excluir</button></span></div>`).join('') || (rb ? '' : '<p>Nenhuma regra própria desta pauta.</p>')}</section>`; }
   function boxRegrasPadrao(ss, d) { let R = null; try { R = d.s?.regrasPauta?.(ss.id) || null; } catch (er) { R = null; } if (!R || !R.padrao.length) return '';
@@ -2930,7 +2933,7 @@ function portaToken() { return new Promise((fim) => {
       if (t.dataset.cweMk === 'data') { const s = A.getSes(), ss = A.selectedSession(); if (!s?.data || !ss || !t.value) return; const r = s.data(ss.id, t.value); if (r && r.erro) { A.msg(r.erro, true); t.value = ss.data; return; } A.msg('Data da sessão alterada para ' + A.br(t.value) + '. Gravação automática no procs-muta em instantes.'); A.render(); return; }
       if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Gravação automática no procs-muta em instantes.'); } return; }
       if (t.dataset.cweEq) { const s = A.getSes(); if (s?.equipeDefinir?.(t.dataset.cweEq, t.dataset.k, t.checked)) { A.msg('Equipe atualizada. Gravando no procs-muta…'); clearTimeout(ligar.tq); ligar.tq = setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 1200); A.render(); } return; }
-      if (t.dataset.cweRbsel != null) { if (!t.value) return; const et = t.dataset.cweRbsel, ef = t.value; est.rb = { conds: [{ campo: 'etiqueta', op: 'igual', val: et }], liga: 'E', ef, v: /^(tema|esp)$/.test(ef) ? et : '' }; A.render(); const f = view.querySelector('.cwe-rb'); if (f) f.scrollIntoView({ block: 'nearest' }); return; }
+      if (t.dataset.cweRbsel != null) { if (!t.value) return; const et = t.dataset.cweRbsel, ef = t.value; est.rb = { conds: [{ campo: 'etiqueta', op: 'igual', val: et }], liga: 'E', ef, v: /^(tema|esp)$/.test(ef) ? et : '', de: et }; A.render(); const f = view.querySelector('.sr-f .cwe-rb'); if (f) f.scrollIntoView({ block: 'center', behavior: 'smooth' }); return; }
       if (t.dataset.cweEsc) { const dg = t.dataset.p; est.dsg[dg] = { ...(est.dsg[dg] || {}), [t.dataset.cweEsc]: t.value }; A.render(); }
     });
     /* PDF da pauta arrastado para o quadro da etapa 2 */

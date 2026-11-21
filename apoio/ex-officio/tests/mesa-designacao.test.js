@@ -131,3 +131,11 @@ test('Datas: marcos validados (ano 2000–2100), aviso de marco fora do expedien
   assert.ok(m.includes('function dataOk(d)')&&m.includes("if (v && !dataOk(v))")&&!m.includes('Imac. Conceição'),'motor');
   assert.ok(cap.includes('fora do expediente</button>')&&cap.includes('min="2000-01-01" max="2100-12-31"'),'Caput');
 });
+
+test('Mesa: Atualizar proposta ao lado de Aplicar; agrupar pelas regras do painel; coluna de capacidade compacta',()=>{
+  const pag=read('caput/designacao/index.html');
+  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn" data-a="recalc"[^>]*>Atualizar proposta<\/button><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
+  assert.ok(pag.includes("document.getElementById('b-recalc-tb').hidden=VIVO"),'um só botão no Caput');
+  assert.ok(pag.includes('>Regra da minuta</button>')&&pag.includes('>Regra da correção</button>')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
+  assert.ok(pag.includes('class="sw"')&&pag.includes('.pp .mt{')&&pag.includes("'<span class=\"mt\">'"),'linha da pessoa');
+});
