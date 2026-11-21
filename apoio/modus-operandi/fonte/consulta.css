@@ -104,3 +104,7 @@
 #cq-ori .cq-fora div b{font:650 10.5px Inter,sans-serif;color:#53615e}
 #cq-ori .cq-fora div small{font:500 9.5px Inter,sans-serif;color:#8a6a60}
 @media (max-width:860px){#cq .cq-selbar{overflow-x:auto}#cq .cq-selbar button{min-width:145px}}
+
+/* folha: copiar a minuta montada */
+#cq .cq-copia{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 4px}
+#cq .cq-copia .meta{font-size:11px}

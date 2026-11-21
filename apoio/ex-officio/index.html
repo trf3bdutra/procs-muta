@@ -2351,7 +2351,8 @@ function ctl(it){return it.ctl||(it.ctl={});}
 function cart(it){var c=ctl(it);return c.cartao||(c.cartao={});}
 /* monocrática assinada (ficha · Decisão monocrática): etapa final, depois de “para assinatura” */
 function etapa(it){return it.assinado||it.dataAssinatura?'Assinada':it.dataLiberacao?'Liberado':it.dataCorrecao?'Corrigido':it.dataMinuta?'Minutado':'A fazer';}
-function tipoJ(it){var C=(it.ctl||{}).cartao||{};if(C.tipoJ)return C.tipoJ;var k=it.julgamento||'',c=nq(it.classe);
+var TJA={AGINT:'Agravo Interno',ED:'Embargos de Declaração',JR:'Juízo de Retratação',AI:'Agravo de Instrumento',RN:'Remessa Necessária',AC:'Apelação',AP:'Apelação'};
+function tipoJ(it){var C=(it.ctl||{}).cartao||{},t=String(C.tipoJ||'').trim();if(TJA[t.toUpperCase()])return TJA[t.toUpperCase()];if(t&&!/^[—–-]+$/.test(t))return t;var k=it.julgamento||'',c=nq(it.classe);
   if(k==='ED')return 'Embargos de Declaração';if(k==='AgInt')return 'Agravo Interno';if(k==='JR')return 'Juízo de Retratação';
   if(/agravo de instrumento/.test(c))return 'Agravo de Instrumento';if(/remessa/.test(c)&&!/apelac/.test(c))return 'Remessa Necessária';return 'Apelação';}
 function meu(it){var e=nq(U.eu);return nq(it.servidor)===e||nq(it.corretor)===e;}
@@ -2371,6 +2372,10 @@ function alertas(it){var c=it.ctl||{},A=[];if(c.tempest==='Intempestivo')A.push(
   if(c.midias==='Faltantes')A.push('Mídias faltantes');if(c.mpf&&c.mpf!=='Sem hipótese'&&c.parecer!=='Com parecer')A.push(c.mpf==='Mandado de segurança'?'MS sem parecer do MPF no 2º grau: vista antes do julgamento':'Parecer do MPF pendente');
   var cd=c.cartao||{};if((cd.tipoJ==='Embargos de Declaração'||cd.tipoJ==='Agravo Interno')&&cd.orgaoAcordao&&!/Regional/i.test(cd.orgaoAcordao))A.push('Acórdão embargado da '+cd.orgaoAcordao+': devolver ao órgão prolator');
   if(c.prelim==='Preliminar de ofício')A.push('Preliminar de ofício a enfrentar');
+  /* coerência do cartão: o tipo de julgamento orienta a minuta no Compendium */
+  var tj=nq(tipoJ(it)),cl=nq(it.classe),rj=nq(c.resJulg||'');
+  if((/apelac|remessa/.test(tj)&&/agravo de instrumento/.test(cl))||(/agravo de instrumento/.test(tj)&&/apelac|remessa/.test(cl))||(/remessa/.test(tj)&&/apelac/.test(cl)&&!/remessa/.test(cl)))A.push('Tipo de julgamento ('+tipoJ(it)+') não confere com a classe ('+it.classe+'): conferir no prontuário');
+  if(/embargos/.test(rj)&&!/embargos de declar/.test(tj))A.push('Resultado ('+c.resJulg+') não confere com o tipo de julgamento ('+tipoJ(it)+'): conferir no prontuário');
   ((c.cartao||{}).pendencias||[]).forEach(function(p){if(p&&p.desc&&!p.ok)A.push(p.desc);});return A;}
 function fmtCnj(s){return esc(s||'');}
 /* etiquetas temáticas da pauta: dentro do mesmo tema somam (OU); entre temas restringem (E) */
