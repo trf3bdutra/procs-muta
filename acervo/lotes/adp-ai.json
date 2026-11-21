@@ -17852,8 +17852,8 @@
    "exequente": "INSTITUTO FAMILIA LEGAL",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Entidades Sem Fins Lucrativos",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Processual · gratuidade da justiça · pessoa jurídica sem fins lucrativos (CEBAS) · Súmula 481/STJ",
    "resultado": "Ato a proferir: julgamento do agravo interno (voto)",
    "modelo": "",
    "variacoes": [],
@@ -17901,6 +17901,86 @@
     "outros": "Certidão ID 380624592 (16/06/2026). Petição de ciência ID 384192258 (03/07/2026). Ato ordinatório ID 388155419 (23/07/2026): intimação para o artigo 1.021, § 2º, do CPC. Há 1 documento não lido no PJe.",
     "representacao": "Agravante: advogados constituídos (escritório WGSA) [VALIDAR procuração]. Agravada: União (PGFN).",
     "preparo": "Agravo interno sem preparo; agravo de instrumento contra o indeferimento da gratuidade (artigo 101, § 1º, do CPC)."
+   },
+   "assunto_detalhado": "Processual — gratuidade da justiça a pessoa jurídica sem fins lucrativos",
+   "especificidades": "Agravo interno contra decisão monocrática que negou provimento ao agravo de instrumento (ID 381371644, 25/06/2026) · Entidade com CEBAS; superávit contábil de 2023 · Tese de descabimento do julgamento monocrático (artigo 932, IV, \"a\", do CPC) · Contraminuta da União (ID 400194705)",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Processual — gratuidade da justiça a pessoa jurídica sem fins lucrativos",
+     "subassuntos": "Processual · gratuidade da justiça · pessoa jurídica sem fins lucrativos (CEBAS) · Súmula 481/STJ",
+     "sintese": "",
+     "questoes": "1) Cabimento do julgamento monocrático (artigo 932, IV, \"a\", do CPC); 2) prova da impossibilidade de a pessoa jurídica arcar com os encargos processuais (Súmula 481/STJ); 3) artigo 99, § 2º, do CPC.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "381371644",
+      "juizo": "Decisão monocrática do Relator (ID 381371644); origem: 1ª Vara Federal de Campo Grande",
+      "dispositivo": "Negou provimento ao agravo de instrumento e manteve o indeferimento da gratuidade."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Não requerido",
+      "id": "381371644"
+     },
+     "adm": {
+      "prot": "2026-06-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "380264510",
+       "contra": "Não mencionar"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "387591502",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "380264510",
+       "data": "2026-06-14"
+      },
+      {
+       "desc": "Decisão monocrática",
+       "id": "381371644",
+       "data": "2026-06-25"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "387591502",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Contraminuta da União ao agravo interno",
+       "id": "400194705",
+       "data": "2026-09-24"
+      }
+     ],
+     "pendencias": "Ver o documento não lido no PJe",
+     "especificidades": "Agravo interno contra decisão monocrática que negou provimento ao agravo de instrumento (ID 381371644, 25/06/2026) · Entidade com CEBAS; superávit contábil de 2023 · Tese de descabimento do julgamento monocrático (artigo 932, IV, \"a\", do CPC) · Contraminuta da União (ID 400194705)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": ""
+    }
    }
   },
   {
