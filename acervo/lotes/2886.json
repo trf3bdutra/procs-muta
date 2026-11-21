@@ -169,49 +169,40 @@
      "Tipo"
     ],
     [
-     "Relatório",
-     "Parágrafo das contrarrazões do INSS em duplicidade: retirado",
-     "Corrigido"
+     "Relatório, R2",
+     "Parágrafo da apelação termina com frase colada (“decidido.Houve”) que repete as contrarrazões do INSS, já relatadas no parágrafo seguinte → Frase duplicada retirada",
+     "RED · MÉDIA"
     ],
     [
-     "Relatório",
-     "ID da sentença ausente na abertura: incluído (ID 393431657)",
-     "Corrigido"
+     "Voto, V30",
+     "Concordância: “a matéria não deve ser decidido” → “a matéria não deve ser decidida”",
+     "RED · BAIXA"
     ],
     [
-     "Relatório",
-     "Condenação em custas omitida (consta do dispositivo da sentença e é afastada no voto): incluída; «10% do valor» → «10% sobre o valor»",
-     "Corrigido"
+     "Ementa, cabeçalho",
+     "Cabeçalho extenso, com expressão truncada (“DISCUSSÃO NOS AUTOS EM QUE VERIFICA A REPETIÇÃO DA MESMA DEMANDA”) e conclusões fragmentadas (“ILEGITIMIDADE ATIVA. LIMITAÇÃO TERRITORIAL. INEXISTÊNCIA”) → Cabeçalho enxuto: ramo, classe, assunto e conclusões, com “LITISPENDÊNCIA A SER EXAMINADA NA DEMANDA POSTERIOR”",
+     "EST · MÉDIA"
     ],
     [
-     "Relatório",
-     "«opinou pelo prosseguimento» → «opinou pelo regular prosseguimento» (fórmula do modelo)",
-     "Aprimorado"
+     "Ementa, itens 1, 2, 3, 9 e 10",
+     "Item 1 com sujeito “Apelação interposta … à sentença” em frase de mais de 60 palavras; questões em discussão com “definir se”, “definir o alcance” e “estabelecer se”; ênclise após conjunção (“vez que … restringe-se”, “e limitou-se”); item 10 em frase única de mais de 80 palavras (“tanto é assim que”, “decretou extinto”) → Item 1 em frases curtas; “Há três questões em discussão: (i) saber se …; (ii) saber qual …; e (iii) saber se …”; “pois … se restringe”, “e se limitou”; item 10 em duas frases",
+     "RED · MÉDIA"
     ],
     [
-     "Voto",
-     "«os pedidos formulado» → «formulados»",
-     "Corrigido"
+     "Ementa, rodapé",
+     "Dispositivos sem “e” antes do último e com o artigo 485, V, do CPC, não citado no voto; jurisprudência sem prefixo de tribunal (“Tema 1.075/STF; … ApCiv …”) e com dados da ADI 1.576 MC (relator e DJ) ausentes do voto → Rodapé no padrão (“STF, …; STJ, …; e TRF-3, …”), só com o que o voto cita",
+     "EST · BAIXA"
     ],
     [
-     "Voto",
-     "«pois igualmente sentença» → «igualmente a sentença»",
-     "Corrigido"
-    ],
-    [
-     "Voto",
-     "«a matéria não deve ser decidido» → «decidida»",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Cabeçalho: «EM QUE VERIFICA» → «EM QUE SE VERIFICA»",
-     "Corrigido"
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão na fórmula do modelo vigente 2886-1d, espelhando o dispositivo (“deu provimento à apelação”)",
+     "ESTR · ALTA"
     ]
    ],
    "pendencias": [
-    "IDs da sentença (393431657), da apelação (393431658), das contrarrazões (393431663) e do parecer do MPF (406329546) conferidos nos autos.",
-    "Litispendência remetida aos autos 5002016-82.2025 (feito posterior), conforme orientação de V. Exa."
+    "Litispendência (V30 e item 10 da ementa): a consulta processual ao cumprimento de sentença 5002016-82.2025.4.03.6000 e o ID 357984129 “daqueles autos” não constam dos autos extraídos. Conferir no PJe a sentença extintiva, a apelação e as contrarrazões do INSS naquele feito, e a anterioridade da propositura deste.",
+    "Texto do modelo vigente 2886-1d preservado, com as expressões “pedidos formulado” (V4), “pois igualmente sentença” (V11), “Porém,” (V13), “categoricamente” (V15), “somente aplica-se” (V18), “restrinja-se” (V20) e “absolutamente” (V23). Se o gabinete quiser corrigi-las, o ajuste deve ser feito no próprio modelo.",
+    "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada."
    ],
    "minuta": true,
    "visivel": {
@@ -276,59 +267,41 @@
      "Tipo"
     ],
     [
-     "Relatório",
-     "ID da sentença incluído (ID 393380634)",
-     "Corrigido"
+     "Relatório, R1",
+     "Autor do cumprimento deslocado para depois da descrição da ACP (“… pensionistas, promovido por sucessores …”); “pela limitação territorial”; “titulo” sem acento → Autor junto a “cumprimento de sentença”, como no modelo 2886-1d; “em razão da limitação territorial”; “título”",
+     "RED · BAIXA"
     ],
     [
      "Relatório",
-     "«falta de titulo executivo» → «ausência de título executivo» (termo da sentença)",
-     "Corrigido"
+     "Memoriais da União (ID 406638692, 25/10/2026) não relatados, com pedido subsidiário de prescrição → Parágrafo próprio depois do parecer da Procuradoria Regional da República",
+     "FAT · MÉDIA"
     ],
     [
-     "Relatório",
-     "Condenação em custas omitida: incluída, conforme a sentença",
-     "Corrigido"
+     "Voto, V2",
+     "“a sentença decretou extinto cumprimento de sentença” → “a sentença extinguiu o cumprimento de sentença”",
+     "RED · BAIXA"
     ],
     [
-     "Relatório",
-     "Pedido de suspensão (Temas 1.302 e 1.433/STJ) nas contrarrazões: incluído; ilegitimidade ativa registrada como pedido subsidiário",
-     "Identificado"
-    ],
-    [
-     "Relatório",
-     "Memoriais da União (ID 406638692), com prescrição subsidiária: incluídos",
-     "Identificado"
-    ],
-    [
-     "Voto",
-     "Sobrestamento não enfrentado: parágrafo do acervo (5000162-71.2026) acrescido",
-     "Identificado"
-    ],
-    [
-     "Voto",
-     "Prescrição dos memoriais declarada prejudicada (fórmula do 5007906-02.2025)",
-     "Identificado"
+     "Voto, V29",
+     "Pedido subsidiário de prescrição, formulado em memoriais, sem menção → Declarado prejudicado, com a ilegitimidade ativa, pela manutenção da extinção",
+     "JUR · MÉDIA"
     ],
     [
      "Ementa",
-     "Cabeçalho, item 2 e razões completados com sobrestamento, prescrição e honorários recursais",
-     "Aprimorado"
+     "Honorários recursais só no dispositivo (“9. Apelação desprovida, honorários recursais em acréscimo ao fixado na origem.”), sem item nas razões de decidir; rodapé de jurisprudência fora da forma do modelo (“Tema 550/STJ; Tema 1.102/STJ; TRF3 …”); dispositivos sem “e” antes do último e com artigos do CPC não citados no voto (85, §§ 2º, 3º e 5º; 1.010; e 1.013) → Item 9 sobre o artigo 85, § 11, do CPC (fórmula do modelo 2886-3a, com a gratuidade do voto); “10. Apelação desprovida.”; rodapé de jurisprudência na forma do modelo e de dispositivos só com o que o voto cita; prejudicialidade da prescrição no item 8",
+     "EST · MÉDIA"
     ],
     [
-     "Ementa",
-     "Dispositivo «Apelação desprovida, honorários recursais…» → «Apelação desprovida.», honorários nas razões (modelo 3-a)",
-     "Aprimorado"
-    ],
-    [
-     "Ementa",
-     "«Tema 550/STJ; Tema 1.102/STJ; TRF3» → «STJ, Temas 550, 1.102, 1.302 e 1.433; TRF-3»",
-     "Corrigido"
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão na fórmula do modelo vigente 2886-3a, espelhando o dispositivo (“negou provimento à apelação”)",
+     "ESTR · ALTA"
     ]
    ],
    "pendencias": [
-    "Pedido de suspensão (Temas 1.302 e 1.433/STJ) conferido nas contrarrazões (ID 393380639); prescrição subsidiária conferida nos memoriais (ID 406638692).",
-    "Sobrestamento e prescrição não estavam enfrentados na minuta: acrescidos com os parágrafos do acervo (5000162-71.2026 e 5007906-02.2025)."
+    "V25: o ID 393380619 (fichas financeiras do SIAPE) não consta dos autos extraídos; a sentença cita as fichas pelo ID 335711137, do primeiro grau. Conferir no PJe o ID de segundo grau.",
+    "Memoriais da União (ID 406638692): acrescentados ao relatório; o pedido subsidiário de prescrição foi declarado prejudicado (V29 e item 8 da ementa). O pedido de prequestionamento não é enfrentado. Confirmar com o Relator.",
+    "Texto do modelo vigente 2886-3a preservado, com “Como se observa a legislação” sem vírgula (V12), “(artigo 85, § 11, CPC)” (V30 e item 9 da ementa), “DESPROVIMENTO. HONORÁRIOS RECURSAIS.” (cabeçalho) e “TRF3” e “DJEN de” (rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo.",
+    "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada."
    ],
    "minuta": true,
    "visivel": {
@@ -392,39 +365,26 @@
      "Tipo"
     ],
     [
-     "Relatório",
-     "ID da sentença incluído (ID 391290190)",
-     "Corrigido"
+     "Voto, V28, e ementa, item 10",
+     "Parágrafo do modelo 2886-1d alterado com construção truncada (“deve prosseguir na origem, dispondo sobre a sucumbência ao final e, ainda, quanto às demais questões da impugnação, prejudicados …”) → Texto do modelo restaurado (“prosseguirá na origem, à qual caberá dispor sobre a sucumbência ao final …”) e prejudicialidade dos pedidos de honorários em frase própria",
+     "RED · MÉDIA"
     ],
     [
-     "Relatório",
-     "Parecer do MPF: «opinou pelo regular prosseguimento do feito» → «deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção» (termos do parecer)",
-     "Corrigido"
+     "Ementa, rodapé",
+     "Artigo 2º-A atribuído ao CPC (“CPC, artigos …, 535, § 8º, e artigo 2º-A”), quando é da Lei 9.494/1997; “STJ, Tema 480/STJ” → “Lei 9.494/1997, artigo 2º-A” e “STJ, Tema 480”; “e” antes do último dispositivo",
+     "JUR · MÉDIA"
     ],
     [
-     "Voto",
-     "«formulado» → «formulados»; «igualmente sentença» → «igualmente a sentença»",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Item 1: vírgula e «do reajuste»",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "«igualmente sentença» → «igualmente a sentença»",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Separador, dispositivos citados (Lei 9.494/1997, artigo 2º-A) e «TRF-3»",
-     "Corrigido"
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão na fórmula do modelo vigente 2886-1d, espelhando o dispositivo (“deu provimento à apelação”)",
+     "ESTR · ALTA"
     ]
    ],
    "pendencias": [
-    "Parecer do MPF, contrarrazões e memoriais conferidos nos autos.",
-    "Parágrafos fora do modelo (\"Tampouco procedem…\" e \"O item II da tese…\"), com Tema 480/STJ — manter?"
+    "A sentença não consta dos autos extraídos, que começam na apelação (ID 391290191); R1 foi mantido como na minuta. Conferir no PJe.",
+    "Memoriais juntados em 19/11/2026 (ID 413719590), sem texto nos autos extraídos. Conferir o conteúdo e, se for o caso, acrescentá-los ao relatório.",
+    "Texto do modelo vigente 2886-1d preservado (inclusive “pedidos formulado”, “pois igualmente sentença”, “somente aplica-se”, “restrinja-se” e “TRF3” no rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo; a atribuição do artigo 2º-A ao CPC também está no rodapé do modelo.",
+    "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada."
    ],
    "minuta": true,
    "visivel": {
@@ -486,38 +446,36 @@
      "Tipo"
     ],
     [
-     "Relatório",
-     "ID da sentença incluído (ID 382846496)",
-     "Corrigido"
+     "Voto, V28, e ementa, item 10",
+     "Parágrafo do modelo 2886-1d alterado com construção truncada (“deve prosseguir na origem, dispondo sobre a sucumbência ao final e, ainda, quanto às demais questões da impugnação, prejudicados …”) → Texto do modelo restaurado (“prosseguirá na origem, à qual caberá dispor sobre a sucumbência ao final …”) e prejudicialidade dos pedidos de honorários em frase própria",
+     "RED · MÉDIA"
+    ],
+    [
+     "Ementa, rodapé",
+     "Artigo 2º-A atribuído ao CPC (“CPC, artigos …, 535, § 8º, e artigo 2º-A”), quando é da Lei 9.494/1997; “STJ, Tema 480/STJ” → “Lei 9.494/1997, artigo 2º-A” e “STJ, Tema 480”; “e” antes do último dispositivo",
+     "JUR · MÉDIA"
     ],
     [
      "Relatório",
-     "«10% do valor atualizado» → «10% sobre o valor atualizado» (termo da sentença)",
-     "Corrigido"
+     "Incidente de admissibilidade não relatado: apelação não conhecida por deserção e decisão reformada nos embargos de declaração (ID 392703170 e ID 400100649) → Parágrafo próprio depois das contrarrazões",
+     "FAT · MÉDIA"
     ],
     [
-     "Voto",
-     "«formulado» → «formulados»; «igualmente sentença» → «igualmente a sentença»",
-     "Corrigido"
+     "Ementa, título IV",
+     "“IV. DISPOSITIVO” em caixa alta, diferente dos demais títulos do modelo → “IV. Dispositivo”",
+     "EST · BAIXA"
     ],
     [
-     "Ementa",
-     "Item 1: «para incorporação a partir de janeiro de 1993 de 28,86%» → «para incorporação, a partir de janeiro de 1993, do reajuste de 28,86%»",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "«igualmente sentença» → «igualmente a sentença»; «IV. DISPOSITIVO» → «IV. Dispositivo»",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Separador, dispositivos citados (Lei 9.494/1997, artigo 2º-A) e «TRF-3»",
-     "Corrigido"
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão na fórmula do modelo vigente 2886-1d, espelhando o dispositivo (“deu provimento à apelação”)",
+     "ESTR · ALTA"
     ]
    ],
    "pendencias": [
-    "Parágrafos fora do modelo (\"Tampouco procedem…\" e \"O item II da tese…\"), com Tema 480/STJ, iguais aos do item 7 — manter?"
+    "Sentença, apelação e contrarrazões (ID 382846496, sentença; ID 382846497, apelação; ID 382846503, contrarrazões) não constam dos autos extraídos, que começam em 31/07/2026; R1 a R3 foram conferidos apenas pelas decisões sobre a deserção. Conferir no PJe.",
+    "Memoriais juntados em 19/11/2026 (ID 413718960), sem texto nos autos extraídos. Conferir o conteúdo e, se for o caso, acrescentá-los ao relatório.",
+    "Texto do modelo vigente 2886-1d preservado (inclusive “pedidos formulado”, “pois igualmente sentença”, “somente aplica-se”, “restrinja-se” e “TRF3” no rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo; a atribuição do artigo 2º-A ao CPC também está no rodapé do modelo.",
+    "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada."
    ],
    "minuta": true,
    "visivel": {
@@ -578,27 +536,32 @@
      "Tipo"
     ],
     [
-     "Relatório",
-     "ID da sentença incluído (ID 381970331)",
-     "Corrigido"
+     "Voto, V28, e ementa, item 10",
+     "Parágrafo do modelo 2886-1d alterado com construção truncada (“deve prosseguir na origem, dispondo sobre a sucumbência ao final e, ainda, quanto às demais questões da impugnação, prejudicados …”) → Texto do modelo restaurado (“prosseguirá na origem, à qual caberá dispor sobre a sucumbência ao final …”) e prejudicialidade dos pedidos de honorários em frase própria",
+     "RED · MÉDIA"
+    ],
+    [
+     "Ementa, rodapé",
+     "Artigo 2º-A atribuído ao CPC (“CPC, artigos …, 535, § 8º, e artigo 2º-A”), quando é da Lei 9.494/1997; “STJ, Tema 480/STJ” → “Lei 9.494/1997, artigo 2º-A” e “STJ, Tema 480”; “e” antes do último dispositivo",
+     "JUR · MÉDIA"
     ],
     [
      "Relatório",
-     "«Apelou a parte exequente» → «Apelou o espólio do exequente (ID 381970382), representado pela inventariante»",
-     "Corrigido"
+     "Incidente de admissibilidade não relatado: apelação não conhecida por deserção e decisão reformada nos embargos de declaração (ID 392700615 e ID 400100637) → Parágrafo próprio depois das contrarrazões",
+     "FAT · MÉDIA"
     ],
     [
-     "Voto",
-     "«formulado» → «formulados»; «igualmente sentença» → «igualmente a sentença»",
-     "Corrigido"
-    ],
-    [
-     "Ementa",
-     "Mesmos ajustes da ementa do item 7",
-     "Corrigido"
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão na fórmula do modelo vigente 2886-1d, espelhando o dispositivo (“deu provimento à apelação”)",
+     "ESTR · ALTA"
     ]
    ],
-   "pendencias": [],
+   "pendencias": [
+    "Sentença, apelação e contrarrazões (ID 381970331, sentença; ID 381970382, apelação; ID 381970386, contrarrazões) não constam dos autos extraídos, que começam em 31/07/2026; R1 a R3 foram conferidos apenas pelas decisões sobre a deserção. Conferir no PJe.",
+    "Memoriais juntados em 19/11/2026 (ID 413718798), sem texto nos autos extraídos. Conferir o conteúdo e, se for o caso, acrescentá-los ao relatório.",
+    "Texto do modelo vigente 2886-1d preservado (inclusive “pedidos formulado”, “pois igualmente sentença”, “somente aplica-se”, “restrinja-se” e “TRF3” no rodapé). Se o gabinete quiser corrigi-los, o ajuste deve ser feito no próprio modelo; a atribuição do artigo 2º-A ao CPC também está no rodapé do modelo.",
+    "O processo está liberado no PJe (relatório, voto e ementa) com o texto atual, sem o acórdão. Aplicar a versão corrigida antes da sessão de 30/11/2026, se aprovada."
+   ],
    "minuta": true,
    "visivel": {
     "equipe": false
