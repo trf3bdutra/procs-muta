@@ -19759,8 +19759,8 @@
    "exequente": "FRIZELO FRIGORIFICOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Funrural",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · contribuição do produtor rural por sub-rogação (FUNRURAL/GILRAT) · exceção de pré-executividade · suspensão pela ADI 4.395",
    "resultado": "Ato a proferir: decisão sobre a tutela recursal pendente ou julgamento do agravo de instrumento (voto) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
@@ -19808,6 +19808,94 @@
     "outros": "Informação ID 356896224 (26/02/2026): sem custas; possível prevenção pela RemNecCiv 5000559-20.2022.4.03.6000. Despacho ID 357094717 (02/03/2026, Des. Fed. Antonio Morimoto): prevenção não reconhecida (SENAR fora da cobrança). Decisão ID 358251909 (05/03/2026): redistribuição à Turma Regional de MS. Petição ID 362819515 (27/03/2026): reiteração da tutela diante do bloqueio SISBAJUD. Despacho ID 363633215 (07/04/2026): tutela postergada para após a contraminuta. Petição ID 402678063 (06/10/2026): renovação do pedido de tutela recursal. Há 1 documento não lido no PJe.",
     "representacao": "Agravante: advogados Felipe Ricetti Marques, Andreza Ramos da Silva e Márcio Socorro Pollet (substabelecimento ID 356749447) [VALIDAR procuração]. Agravada: União (PGFN).",
     "preparo": "GRU 18720-8 e comprovante de pagamento por internet banking da CAIXA, R$ 64,26, em 26/02/2026 (ID 356945032); sem comprovante STN [VALIDAR]"
+   },
+   "assunto_detalhado": "Execução fiscal — FUNRURAL/GILRAT por sub-rogação; exceção de pré-executividade",
+   "especificidades": "Tutela recursal pendente: postergada em 07/04/2026 (ID 363633215) e renovada em 06/10/2026 (ID 402678063) · Bloqueio SISBAJUD na origem · CDAs 13.4.22.022357-34 e 13.4.22.022358-15 · Prevenção pela RemNecCiv 5000559-20.2022.4.03.6000 afastada · Preparo por comprovante bancário (ID 356945032), sem STN [VALIDAR] · Há 1 documento não lido no PJe",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — FUNRURAL/GILRAT por sub-rogação; exceção de pré-executividade",
+     "subassuntos": "Execução fiscal · contribuição do produtor rural por sub-rogação (FUNRURAL/GILRAT) · exceção de pré-executividade · suspensão pela ADI 4.395",
+     "sintese": "",
+     "questoes": "1) Suspensão da execução pela cautelar na ADI 4.395; 2) cabimento da exceção de pré-executividade para a inconstitucionalidade da sub-rogação (Temas 202 e 669/STF); 3) nulidade da CDA; 4) tutela recursal pendente.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Justiça Federal em Campo Grande [VALIDAR vara]",
+      "dispositivo": "Rejeitou a exceção de pré-executividade por inadequação da via."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-02-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "356749441",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "356749441",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Comprovante bancário de preparo",
+       "id": "356945032",
+       "data": "2026-02-26"
+      },
+      {
+       "desc": "Reiteração da tutela (SISBAJUD)",
+       "id": "362819515",
+       "data": "2026-03-27"
+      },
+      {
+       "desc": "Despacho que postergou a tutela",
+       "id": "363633215",
+       "data": "2026-04-07"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "377312417",
+       "data": "2026-05-29"
+      },
+      {
+       "desc": "Renovação do pedido de tutela",
+       "id": "402678063",
+       "data": "2026-10-06"
+      }
+     ],
+     "pendencias": "Apreciar a tutela recursal pendente; conferir o preparo e o documento não lido",
+     "especificidades": "Tutela recursal pendente: postergada em 07/04/2026 (ID 363633215) e renovada em 06/10/2026 (ID 402678063) · Bloqueio SISBAJUD na origem · CDAs 13.4.22.022357-34 e 13.4.22.022358-15 · Prevenção pela RemNecCiv 5000559-20.2022.4.03.6000 afastada · Preparo por comprovante bancário (ID 356945032), sem STN [VALIDAR] · Há 1 documento não lido no PJe"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2026-02-25",
+     "urgObs": "Postergada em 07/04/2026 (ID 363633215) para após a contraminuta (apresentada em 29/05/2026); renovada em 06/10/2026 (ID 402678063)."
+    }
    }
   },
   {
