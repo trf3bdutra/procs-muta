@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:31:05.865Z",
+ "atualizado_em": "2026-11-21T10:31:11.599Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -123465,7 +123465,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.523Z"
+    "atualizado_em": "2026-11-21T10:31:11.599Z"
    },
    "triagem": {
     "Urgência": "",
@@ -123479,39 +123479,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Isento (ente público/MP)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Mandado de segurança",
+    "ID do Parecer MPF": "307196964",
+    "Parecer - Sentido": "Ausência de interesse que justifique intervenção",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+    "Tema": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) · modulação dos efeitos (RE 1.063.187 ED) · segurança concedida, com compensação",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção, correção e juros",
-    "Alegações": "",
+    "Alegações": "1) IRPJ/CSLL sobre a SELIC na repetição de indébito: modulação do Tema 962/STF; 2) regime legal da compensação.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Tema 962/STF com modulação (RE 1.063.187 ED): ação ajuizada após 17/09/2021 · Linha da 3ª Turma (AgInt na ApelRemNec 5027214-54.2021.4.03.6100, 30/05/2023) · Remessa: compensação de IRPJ/CSLL rege-se pelo artigo 74 da Lei 9.430/1996, não pelo artigo 89 da Lei 8.212/1991 [VALIDAR] · Sentença em duplicidade (IDs 302872395 e 302872397) · Etiqueta \"Triagem - Giovana Sato\"",
+    "Síntese Fática": "União Indústria de Suplementação Animal Ltda. impetrou o mandado de segurança em 17/05/2022 para excluir a SELIC da repetição de indébito das bases do IRPJ e da CSLL. A sentença concedeu a segurança sem referência à modulação."
    },
    "producao": {
     "Destino": "",
@@ -123560,7 +123561,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5001171-69.2024.4.03.6005",
