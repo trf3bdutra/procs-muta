@@ -5152,11 +5152,12 @@ var d=cmtDlg(cmtDlgTopo(ic,kick,cnj,'')+
  '<div class="dv-a"><button type="button" class="b" data-x="1">Cancelar</button><button type="submit" class="b pri">'+cmtSvg(CMTIC.ok,13)+esc(rot)+'</button></div>',
  function(){res(true);return Promise.resolve();});
 d.addEventListener('close',function(){res(false);});
-var x=d.querySelector('[data-x]');if(x)x.addEventListener('click',function(){res(false);});});}
+[].forEach.call(d.querySelectorAll('[data-x]'),function(x){x.addEventListener('click',function(){res(false);});});});}
 function cmtDlg(h,aoEnviar){var o=document.getElementById('cmt-dlg');if(o)o.remove();
 var d=document.createElement('dialog');d.id='cmt-dlg';d.className='dv-dlg cmt-dlg';d.innerHTML='<form method="dialog">'+h+'</form>';
 document.body.appendChild(d);
-d.querySelector('[data-x]').onclick=function(){d.close();d.remove();};
+/* todos os botões de fechar (o × do topo e o Cancelar do pé) fecham o diálogo */
+[].forEach.call(d.querySelectorAll('[data-x]'),function(x){x.onclick=function(){d.close();d.remove();};});
 var f=d.querySelector('form');
 f.onsubmit=function(e){e.preventDefault();var b=f.querySelector('[type=submit]');if(b)b.disabled=true;
   Promise.resolve(aoEnviar(f)).then(function(){d.close();d.remove();}).catch(function(er){if(b)b.disabled=false;toast(er.message||'Não foi possível registrar.');});};
