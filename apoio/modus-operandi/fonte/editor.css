@@ -118,3 +118,6 @@ mark.edp-f{background:var(--warn-soft,rgba(224,166,79,.2));color:inherit;border-
 html.ed-cmt [data-edx]{display:none!important}
 /* alterações e Salvar ficam na barra do painel; baixar arquivos não se usa ali */
 html.ed-cmt .ed-top [data-edzip],html.ed-cmt .ed-top [data-edgit],html.ed-cmt .ed-top [data-edpend],html.ed-cmt .ed-top [data-edpend]+.meta{display:none!important}
+/* campos a preencher e trechos ligados, em leitura (painel do desembargador) */
+.ed-chips{display:flex;flex-wrap:wrap;gap:5px;padding:4px 0}
+.ed-chips i{font-style:normal;font-size:12px;padding:3px 9px;border:1px solid var(--line,#ded9cc);border-radius:999px;background:var(--paper,#fbfaf5)}

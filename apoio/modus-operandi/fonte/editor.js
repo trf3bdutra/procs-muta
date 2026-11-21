@@ -89,9 +89,14 @@ function edPalEsc(w){return w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+
 function edPalPara(w){w=String(w||'').trim();if(!w)return '';var P=w.split(/\s*,\s*/).filter(Boolean);
   if(P.length>1)return '\\b(?:'+P.map(edPalEsc).join('|')+')\\b';
   return (/^[A-Za-z0-9_]/.test(w)?'\\b':'')+edPalEsc(w)+(/[A-Za-z0-9_]$/.test(w)?'\\b':'');}
-if(EDCMT){ED_DIR.correcao=[['motivo','Motivo (como aparece no aviso)','a'],['padrao','Palavra ou expressão a procurar','w'],['substituir','Substituir por','t']];
+if(EDCMT){ED_PAR=ED_PAR.map(function(f){return f[0]==='variaveis'?['variaveis','Campos a preencher','vv']:f[0]==='vinculos'?['vinculos','Trechos ligados','vl']:f;});
+  ED_DIR.correcao=[['motivo','Motivo (como aparece no aviso)','a'],['padrao','Palavra ou expressão a procurar','w'],['substituir','Substituir por','t']];
   ED_DIR.alerta=[['mensagem','Mensagem','a'],['escopo','Onde (ementa, voto, relatório…)','t'],['padrao','Palavra ou expressão a procurar','w']];}
 function edCampo(r,f){var k=f[0],v=r[k],id='edf-'+k.replace(/[^A-Za-z0-9_-]/g,'_'),h='<label class="edf'+(f[4]?' req':'')+'"><span>'+esc(f[1])+(f[4]?' <i>obrigatório</i>':'')+'</span>';
+  /* campos e vínculos do parágrafo: só a leitura, em palavras (a estrutura técnica fica como está) */
+  if(f[2]==='vv'||f[2]==='vl'){var L0=Array.isArray(v)?v:[],cp=function(t){t=String(t||'');return t===t.toUpperCase()?t.charAt(0)+t.slice(1).toLowerCase():t;};
+    var it=L0.map(function(x){return f[2]==='vv'?cp(x.rotulo||x.campo||'')+(x.preencher_manualmente?' (à mão)':''):cp(x.rotulo||x.ref||x.parte||'')+(x.opcional?' · opcional':'');}).filter(Boolean);
+    return h+(it.length?'<span class="ed-chips">'+it.map(function(t){return '<i>'+esc(t)+'</i>';}).join('')+'</span>':'<span class="meta">nenhum</span>')+'</label>';}
   if(f[2]==='w'){var pw=edPalDe(v);return pw===null?h+'<p class="meta">Regra de busca especial, mantida como está.</p></label>':h+'<input id="'+id+'" data-k="'+k+'" data-pal="1" value="'+esc(pw)+'" placeholder="ex.: writ  ·  várias, separadas por vírgula"></label>';}
   if(f[2]==='s')h+='<select id="'+id+'" data-k="'+k+'">'+(f[3].indexOf(v)<0&&v?'<option>'+esc(v)+'</option>':'')+f[3].map(function(o){return '<option'+(o===v?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';
   else if(f[2]==='a'||f[2]==='A')h+='<textarea id="'+id+'" data-k="'+k+'" class="ed-auto" rows="'+(f[2]==='A'?6:2)+'">'+esc(v==null?'':v)+'</textarea>';
