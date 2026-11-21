@@ -275,3 +275,10 @@ test('Mural: Hoje/Semana integrado à lateral do calendário (abas em linha, se�
   assert.match(h, /#mu-host \.cg-cal \.cc-lado button\.on\{color:var\(--v\)!important;border-bottom-color:var\(--v\)!important\}/);
   assert.match(h, /#mu-host \.cg-cal \.cc-esq \.cc-meta,#mu-host \.cg-cal \.cc-esq \.cc-td\{/);
 });
+
+test('Mural: cabeçalho do calendário numa faixa baixa, com a cor da borda como fundo', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-h\{background:var\(--l\)!important;border-bottom:0!important;padding:3px 10px 3px 12px!important/);
+  assert.match(h, /#mu-host>#hc-cal-full\{padding:0!important;overflow:hidden;border-color:var\(--l\)!important\}/);
+});

@@ -1643,6 +1643,14 @@ body:not(.painel-gab) #v-inicio>.hc-more{display:none!important}
 #mu-host>#prod .pg2{grid-template-columns:1fr!important}#mu-host>#prod .pg2>div:first-child .hw{max-height:240px}
 @media (max-width:980px){#v-inicio #prod .pg2{grid-template-columns:1fr}#v-inicio #prod .pm{grid-template-columns:repeat(2,minmax(0,1fr))}}/* sem Dia/Semana/Mês no Mural: só o mês */
 #mu-host .cg-cal .cc-body{padding:0!important}
+/* painel do calendário: a cor da borda vira o fundo do cabeçalho, que fica numa faixa baixa, colada ao topo */
+#mu-host>#hc-cal-full{padding:0!important;overflow:hidden;border-color:var(--l)!important}
+#mu-host .cg-cal .cc-h{background:var(--l)!important;border-bottom:0!important;padding:3px 10px 3px 12px!important;min-height:0!important;gap:8px!important}
+#mu-host .cg-cal .cc-h>b{font-size:12.5px!important}
+#mu-host .cg-cal .cc-h .cc-dt{font-size:10px!important}
+#mu-host .cg-cal .cc-h .cc-ib,#mu-host .cg-cal .cc-h .cc-help{width:22px!important;height:22px!important;min-height:0!important;font-size:12px!important;background:transparent!important;border-color:transparent!important}
+#mu-host .cg-cal .cc-h .cc-sp{height:auto!important;padding:0!important;background:transparent!important}
+#mu-host .cg-cal .cc-h .cc-sp button,#mu-host .cg-cal .cc-h .cc-sp .cc-pill{height:22px!important;min-height:0!important;padding:0 7px!important;font-size:11.5px!important;background:transparent!important;border-color:transparent!important}
 #mu-host .cg-cal .cc-top{gap:0!important;grid-template-columns:250px minmax(0,1fr)!important;align-items:stretch!important}
 #mu-host .cg-cal .cc-esq{border:0!important;border-right:1px solid var(--l)!important;background:var(--p)!important;padding:14px 16px 16px!important;margin:0!important;border-radius:0!important;box-shadow:none!important}
 #mu-host .cg-cal .cc-top>div:not(.cc-sb){padding:12px 16px 14px;min-width:0}
