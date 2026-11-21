@@ -21,7 +21,7 @@ on:
 permissions:
   contents: read
 env:
-  VERCEL_ORG_ID: team_nyqcxKFhethUSdW52fbXcWpZ
+  VERCEL_ORG_ID: team_qybhS0eH5w9TNuZIApQncd9L
   VERCEL_PROJECT_ID: prj_RvxAJtVYRZd6rouWDzxewAyFE3bR
 jobs:
   # Um job só (cada job cobra no mínimo um minuto). Depois do Base: só publica se ele gravou alguma coisa (o commit "Base: validação e manifesto (<sha>)").
