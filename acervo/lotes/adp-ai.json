@@ -18688,8 +18688,8 @@
    "exequente": "RR SERVICE COMERCIO E SERVICOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "FGTS/Fundo de Garantia Por Tempo de Serviço",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · FGTS e contribuição social · exceção de pré-executividade · prescrição (artigo 23-A da Lei 8.036/1990) e juntada do processo administrativo",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -18737,6 +18737,88 @@
     "outros": "Certidão sem custas ID 368169467 (22/04/2026). Petição ID 368504039 (23/04/2026) com guia ID 368504045 e comprovante Pix Sicredi ID 368504043. Decisão ID 368192254 (30/04/2026): indeferiu a antecipação da tutela recursal (artigo 6º da LEF; artigo 23-A da Lei 8.036/1990 com três hipóteses autônomas de interrupção).",
     "representacao": "Agravante: advogados Antônio Abrão, Ivan Medeiros e Dimas Saad [VALIDAR procuração]. Agravada: União (PGFN).",
     "preparo": "Comprovante Pix do Sicredi ao TRF-3 (conta STN), R$ 64,26, em 23/04/2026 (ID 368504043); sem comprovante STN da GRU [VALIDAR]"
+   },
+   "assunto_detalhado": "Execução fiscal — FGTS e contribuição social; exceção de pré-executividade; prescrição",
+   "especificidades": "CDAs FGMS202400131 e CSMS202400132, R$ 48.400,68 · Notificação de lançamento em 15/12/2020; ajuizamento em 13/08/2024 · Tutela recursal indeferida (ID 368192254, 30/04/2026) · Preparo por Pix bancário (ID 368504043), sem STN [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — FGTS e contribuição social; exceção de pré-executividade; prescrição",
+     "subassuntos": "Execução fiscal · FGTS e contribuição social · exceção de pré-executividade · prescrição (artigo 23-A da Lei 8.036/1990) e juntada do processo administrativo",
+     "sintese": "",
+     "questoes": "1) Necessidade de juntada do processo administrativo (artigo 6º da LEF); 2) interrupção da prescrição do FGTS pelo artigo 23-A da Lei 8.036/1990 sem ciência do devedor; 3) limites da exceção de pré-executividade (Súmula 393/STJ).",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "560536313",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "560536313"
+     },
+     "adm": {
+      "prot": "2026-04-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "367054067",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "367054067",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "368169467",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Comprovante Pix bancário",
+       "id": "368504043",
+       "data": "2026-04-23"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "368192254",
+       "data": "2026-04-30"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "373366125",
+       "data": "2026-05-14"
+      }
+     ],
+     "pendencias": "Conferir o preparo (STN)",
+     "especificidades": "CDAs FGMS202400131 e CSMS202400132, R$ 48.400,68 · Notificação de lançamento em 15/12/2020; ajuizamento em 13/08/2024 · Tutela recursal indeferida (ID 368192254, 30/04/2026) · Preparo por Pix bancário (ID 368504043), sem STN [VALIDAR]"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-04-30"
+    }
    }
   },
   {
