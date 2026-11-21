@@ -1,5 +1,5 @@
 'use strict';
-/* Prévia do Collectio (/amicus/collectio/previa/): página só de leitura, publicada pelo vercel-caput.yml. */
+/* Collectio novo (/amicus/collectio/ e /amicus/collectio/previa/); o anterior segue em /amicus/collectio/classico/ e na gestão (cg). */
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -9,21 +9,25 @@ const html = fs.readFileSync(path.join(ROOT, 'apoio/ex-officio/lotes/previa.html
 const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/vercel-caput.yml'), 'utf8');
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
 
-test('a prévia é publicada em /amicus/collectio/previa/', () => {
+test('o Collectio novo é publicado em /amicus/collectio/ e o anterior em /classico/ e na gestão', () => {
+  assert.match(wf, /cp apoio\/ex-officio\/lotes\/previa\.html site\/public\/amicus\/collectio\/index\.html/);
   assert.match(wf, /cp apoio\/ex-officio\/lotes\/previa\.html site\/public\/amicus\/collectio\/previa\/index\.html/);
+  assert.match(wf, /cp apoio\/ex-officio\/lotes\/index\.html site\/public\/amicus\/collectio\/classico\/index\.html/);
+  assert.match(wf, /cp apoio\/ex-officio\/lotes\/index\.html site\/public\/amicus\/collectio\/cg\/index\.html/);
+  assert.match(html, /location\.replace\('\/amicus\/collectio\/classico\/'/, 'o link do Relator segue para o clássico');
 });
-test('a prévia só grava a matriz: um único POST, com a ação matriz; as leituras são da API do Collectio e da pauta', () => {
+test('só grava a matriz (gestor) e a marca do PJe; as leituras são da API do Collectio e da pauta', () => {
   const posts = [...html.matchAll(/method\s*:\s*['"]POST['"]/gi)];
-  assert.equal(posts.length, 1, 'um só ponto de gravação');
-  assert.match(html, /acao:'matriz'/);
-  assert.equal([...html.matchAll(/\bacao\s*:\s*['"]/g)].length, 1, 'nenhuma outra ação');
+  assert.equal(posts.length, 2, 'dois pontos de gravação');
+  const acoes = [...html.matchAll(/\bacao\s*:\s*'([^']+)'/g)].map(m => m[1]).sort();
+  assert.deepEqual(acoes, ['matriz', 'minuta-pje']);
   const urls = [...html.matchAll(/[^.]get\('(\/[^']+)/g)].map(m => m[1]);
   assert.ok(urls.length >= 3);
   urls.forEach(u => assert.match(u, /^\/api\/(painel\?lote=1|pauta\?data=)/));
 });
 test('scripts válidos e HTML completo', () => {
   assert.ok(html.includes('</head>') && html.includes('</body>'));
-  assert.equal(scripts.length, 2);
+  assert.ok(scripts.length >= 2);
   scripts.forEach(s => assert.doesNotThrow(() => new Function(s)));
 });
 test('mesmo tema do Collectio (cmt-eq-tema) e visual editorial', () => {

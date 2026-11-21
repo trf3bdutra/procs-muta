@@ -69,7 +69,10 @@ jobs:
           # a própria página troca o endereço para o canônico (o Desembargador vê a página geral com o que foi liberado para ele).
           mkdir -p site/public/amicus/collectio/cg site/public/amicus/collectio/cmt site/public/amicus/collectio/gc site/public/amicus/compendium
           cp apoio/amicus/index.html site/public/amicus/index.html
-          cp apoio/ex-officio/lotes/index.html site/public/amicus/collectio/index.html
+          # /amicus/collectio/ é o Collectio novo (fluxo da minuta, matriz construível, versões entre coleções); o anterior segue em
+          # /amicus/collectio/classico/ (registrar versão, conformidade, Compendium e a visão do Relator) e é a página da gestão (cg)
+          cp apoio/ex-officio/lotes/previa.html site/public/amicus/collectio/index.html
+          mkdir -p site/public/amicus/collectio/classico && cp apoio/ex-officio/lotes/index.html site/public/amicus/collectio/classico/index.html
           cp apoio/ex-officio/lotes/index.html site/public/amicus/collectio/cg/index.html
           cp apoio/ex-officio/lotes/index.html site/public/amicus/collectio/cmt/index.html
           cp apoio/ex-officio/lotes/index.html site/public/amicus/collectio/gc/index.html
