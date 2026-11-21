@@ -4,7 +4,9 @@
 - acervo/operacional.json (ficha do processo · seção triagem): Tempestividade, Preparo, Representação, Prelim.,
   Mídias, MPF - Custos Legis (hipótese de intervenção) e MPF (parecer).
   Os genéricos antigos ('Dispensado', 'Regular' com observação de dispensa, 'Sim' no custos legis) são resolvidos
-  pelo AJG, pela DPU e pelas observações; havendo lote ou cartão da pauta com o valor específico da mesma classe,
+  pelo recorrente (1º nome do polo ativo: ente público isento, a própria DPU, CEF ou conselho profissional), pelo
+  advogado do polo ativo, pelo AJG, pela DPU e pelas observações; combinações impossíveis já gravadas ('Assistência da
+  DPU' para ente público, CEF ou conselho) são corrigidas; havendo lote ou cartão da pauta com o valor específico da mesma classe,
   prevalece o específico.
 - acervo/sessoes/*.json (cartões das pautas, ctl): tempest, preparo, repres, prelim, midias, mpf, parecer e papeis.
 - acervo/lotes/*.json (Collectio, prontuario_triagem.ctl e cartao.papeis).
@@ -44,6 +46,14 @@ def norma(k, v, ctx=None):
     return n
 
 
+def parte(fo, partes=None):
+    """Recorrente (1º nome do polo ativo) e advogado particular do polo ativo, para resolver 'Dispensado' e afins."""
+    rec = str(fo.get('polo_ativo') or '').split(' e outros')[0].split(';')[0].strip()
+    if not rec and partes:
+        rec = str(partes).split(' x ')[0].split(' X ')[0].strip()
+    return {'recorrente': rec, 'advogado': fo.get('advogado_pa') or ''}
+
+
 # 1. valores específicos já registrados nos lotes e nas pautas (para resolver os genéricos da ficha)
 espec = {}
 for p in glob.glob(str(R / 'acervo/lotes/*.json')):
@@ -72,8 +82,9 @@ for r in OP.get('registros', []):
         continue
     if t.get('Observação da Representação') == OBS_AUTO:
         t['Observação da Representação'] = ''; mud['ficha · observação automática removida'] += 1
-    dpu = t.get('DPU (controle)') or (FONTE.get(dg(r.get('processo'))) or {}).get('dpu')
-    ctx = {'ajg': t.get('AJG'), 'dpu': dpu, 'obs': t.get('Observação da Representação')}
+    fo = FONTE.get(dg(r.get('processo'))) or {}
+    dpu = t.get('DPU (controle)') or fo.get('dpu')
+    ctx = {'ajg': t.get('AJG'), 'dpu': dpu, 'obs': t.get('Observação da Representação'), **parte(fo)}
     antes = json.dumps(t, ensure_ascii=False, sort_keys=True)
     for chave, k in FICHA.items():
         v = t.get(chave)
@@ -87,7 +98,8 @@ for r in OP.get('registros', []):
         e = espec.get(dg(r.get('processo')), {}).get(k)
         e = V.norm(k, e, ctx) if e else e
         if e and e in V.lista(k) and V.N(v) in GENERICOS and V.classe(k, e) == V.classe(k, n):
-            n = e
+            n = V.coerente(k, e, ctx)
+        n = V.coerente(k, n, ctx)
         if n != v:
             t[chave] = n; mud['ficha · ' + chave] += 1
     if V.norm('preparo', t.get('Preparo')) == 'Justiça gratuita' and not t.get('AJG'):
@@ -103,11 +115,12 @@ for p in sorted(glob.glob(str(R / 'acervo/sessoes/*.json'))):
     S = carrega(p); alt = False
     for it in S.get('itens', []) if isinstance(S, dict) else []:
         ctl = it.get('ctl') or {}
-        cx = {'dpu': (FONTE.get(dg(it.get('cnj'))) or {}).get('dpu')}
+        fo = FONTE.get(dg(it.get('cnj'))) or {}
+        cx = {'dpu': fo.get('dpu'), **parte(fo, it.get('partes'))}
         for k in PRONT:
             v = ctl.get(k)
             if isinstance(v, str) and v:
-                n = norma(k, v, cx)
+                n = V.coerente(k, norma(k, v, cx), cx)
                 if n != v:
                     ctl[k] = n; mud['pauta · ' + k] += 1; alt = True
         pap = (ctl.get('cartao') or {}).get('papeis')
@@ -127,11 +140,12 @@ for p in sorted(glob.glob(str(R / 'acervo/lotes/*.json'))):
     for it in (its if isinstance(its, list) else list(its.values())):
         PT = it.get('prontuario_triagem') or {}
         ctl = PT.get('ctl') or {}
-        cx = {'dpu': (FONTE.get(dg(it.get('processo'))) or {}).get('dpu')}
+        fo = FONTE.get(dg(it.get('processo'))) or {}
+        cx = {'dpu': fo.get('dpu'), **parte(fo, it.get('partes'))}
         for k in PRONT:
             v = ctl.get(k)
             if isinstance(v, str) and v:
-                n = norma(k, v, cx)
+                n = V.coerente(k, norma(k, v, cx), cx)
                 if n != v:
                     ctl[k] = n; mud['lote · ' + k] += 1; alt = True
         pap = (PT.get('cartao') or {}).get('papeis')
