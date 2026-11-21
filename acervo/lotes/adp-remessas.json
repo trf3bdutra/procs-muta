@@ -11072,12 +11072,14 @@
    "exequente": "MINISTERIO PUBLICO FEDERAL - PR/MS",
    "executado": "ESTADO DE MATO GROSSO DO SUL",
    "assunto": "Indenização por Dano Moral",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação do MPF e remessa necessária · ação civil pública contra o Estado de Mato Grosso do Sul · danos morais coletivos de R$ 1.000.000,00 à comunidade indígena Guapoy, de Caarapó, por violação de domicílio em ação policial · pedidos julgados improcedentes",
+   "resultado": "Ato a proferir: apelação do MPF (ID 331440328) e remessa necessária da sentença ID 331440327; contrarrazões do Estado (ID 331440331); MPF de segundo grau pelo provimento (ID 334753898) ‖ Proposta pelos precedentes: Voto: examinar a prova da violação de domicílio e do dano moral coletivo; conferir competência federal (direitos indígenas, artigo 109, XI, da CF) e o cabimento da remessa [VALIDAR] [VALIDAR: Fatos e data da ação policial; Prova testemunhal produzida; Competência federal]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do MPF e remessa necessária da sentença que julgou improcedente a ação civil pública por danos morais coletivos contra o Estado de Mato Grosso do Sul, por suposta violação de domicílio na comunidade indígena Guapoy, de Caarapó. O MPF de segundo grau opinou pelo provimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11088,7 +11090,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Indígenas — ação civil pública",
+    "origem": "Ação civil pública 5001550-24.2021.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 331440327 (13/01/2025)",
+    "recurso": "apelação de MPF (ID 331440328, 20/02/2025) · remessa necessária",
+    "preparo": "MPF: Isento (ente público/MP)",
+    "monocratica": "Não: ACP com prova testemunhal e direitos indígenas",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "MPF: Isento (ente público/MP) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -11098,6 +11111,117 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Indígenas — ACP por danos morais coletivos contra o Estado (inviolabilidade do domicílio)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 331440327 · 13/01/2025 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 334753898 · 27/08/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Comunidade indígena (artigo 232 da CF; MPF autor e fiscal) · Remessa necessária de sentença de improcedência em ACP (analogia ao artigo 19 da Lei 4.717/1965) [VALIDAR cabimento] · Competência federal com o Estado como único réu [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "O MPF ajuizou ação civil pública contra o Estado de Mato Grosso do Sul por danos morais coletivos à comunidade indígena Guapoy, de Caarapó, atribuídos a ingresso policial em residências sem observância da inviolabilidade do domicílio (artigo 5º, XI, da CF; artigo 11.2 da Convenção Americana). Houve instrução com prova testemunhal; a sentença julgou improcedente.",
+    "inicial": "Ação civil pública do MPF contra o Estado de Mato Grosso do Sul.",
+    "decisao_recorrida": "Sentença ID 331440327 (13/01/2025): julgou improcedentes os pedidos, sem custas e honorários, com reexame necessário.",
+    "recurso": "MPF (ID 331440328, 20/02/2025): reforma da sentença para condenar o Estado aos danos morais coletivos pela violação da inviolabilidade domiciliar da comunidade indígena [VALIDAR fundamentos].",
+    "resposta": "Contrarrazões do Estado (ID 331440331).",
+    "parecer": "MPF ID 334753898: Provimento da remessa necessária e da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Autor: Ministério Público Federal.",
+    "preparo": "MPF: Isento (ente público/MP)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do MPF e remessa necessária · ação civil pública contra o Estado de Mato Grosso do Sul · danos morais coletivos de R$ 1.000.000,00 à comunidade indígena Guapoy, de Caarapó, por violação de domicílio em ação policial · pedidos julgados improcedentes",
+     "sintese": "O MPF ajuizou ação civil pública contra o Estado de Mato Grosso do Sul por danos morais coletivos à comunidade indígena Guapoy, de Caarapó, atribuídos a ingresso policial em residências sem observância da inviolabilidade do domicílio (artigo 5º, XI, da CF; artigo 11.2 da Convenção Americana). Houve instrução com prova testemunhal; a sentença julgou improcedente.",
+     "questoes": "1) Responsabilidade do Estado por violação de domicílio em comunidade indígena; 2) dano moral coletivo e valor; 3) cabimento da remessa e competência.",
+     "rel": {
+      "razoes": "MPF (ID 331440328, 20/02/2025): reforma da sentença para condenar o Estado aos danos morais coletivos pela violação da inviolabilidade domiciliar da comunidade indígena [VALIDAR fundamentos].",
+      "contrarrazoes": "Contrarrazões do Estado (ID 331440331)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "331440327",
+      "juizo": "Ação civil pública 5001550-24.2021.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "julgou improcedentes os pedidos, sem custas e honorários, com reexame necessário."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-06-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "MPF",
+       "tipo": "Apelação",
+       "id": "331440328",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "331440327",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: prova testemunhal deferida",
+       "id": "331440305",
+       "data": "2022-03-25"
+      },
+      {
+       "desc": "Sentença: improcedência",
+       "id": "331440327",
+       "data": "2025-01-13"
+      },
+      {
+       "desc": "Apelação do MPF",
+       "id": "331440328",
+       "data": "2025-02-20"
+      },
+      {
+       "desc": "Contrarrazões do Estado",
+       "id": "331440331",
+       "data": "2025-06-16"
+      },
+      {
+       "desc": "Parecer do MPF de segundo grau (provimento)",
+       "id": "334753898",
+       "data": "2025-08-27"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 331440327 · 13/01/2025 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 334753898 · 27/08/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Comunidade indígena (artigo 232 da CF; MPF autor e fiscal) · Remessa necessária de sentença de improcedência em ACP (analogia ao artigo 19 da Lei 4.717/1965) [VALIDAR cabimento] · Competência federal com o Estado como único réu [VALIDAR]",
+     "assuntoDet": "Indígenas — ACP por danos morais coletivos contra o Estado (inviolabilidade do domicílio)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Indígenas (CF 232)",
+     "parecer": "Com parecer",
+     "idParecer": "334753898",
+     "parecerSentido": "Provimento da remessa necessária e da apelação"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 331440327 · 13/01/2025 — sentença: julgou improcedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 334753898 · 27/08/2025",
+    "ultima_informacao": "Informação · ID 331440932 · 15/07/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 331440327 · 13/01/2025 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 334753898 · 27/08/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -11109,12 +11233,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "AUTO POSTO REFERENCIA LTDA",
    "assunto": "Inquérito / Processo / Recurso Administrativo",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · revisão de ofício de despachos decisórios que haviam deferido ressarcimento de créditos de PIS/COFINS (regime de centrais petroquímicas) · nulidade por mudança de critério jurídico e cancelamento da cobrança de R$ 6.381.394,09 · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da Fazenda Nacional (ID 359321043) e remessa necessária da sentença ID 359321040; contrarrazões (ID 359321047); MPF pelo prosseguimento (ID 359853132) ‖ Proposta pelos precedentes: Voto: aplicar o roteiro do gabinete (ressarcimento indevido × crédito tributário; Lei 9.784/1999, artigos 53, 54 e 61; Súmula 473/STF) — possível provimento da apelação e da remessa [VALIDAR resultado] [VALIDAR: Resultado à luz do roteiro do gabinete; Natureza dos créditos ressarcidos e atividade da impetrante; Etiqueta de suspeição]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da Fazenda Nacional e remessa necessária da sentença que anulou a revisão de ofício do ressarcimento de créditos de PIS/COFINS deferido ao Auto Posto Referência Ltda. e a cobrança de R$ 6,4 milhões. A Fazenda sustenta que a cobrança de ressarcimento indevido segue a Lei 9.784/1999 e que os créditos eram incompatíveis com a atividade da impetrante.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11125,7 +11251,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — PIS/COFINS (ressarcimento)",
+    "origem": "Mandado de segurança 5010779-72.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 359321040 (19/11/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 359321043, 10/02/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)",
+    "monocratica": "Não: roteiro do gabinete aponta em sentido diverso da sentença [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -11135,6 +11272,117 @@
    "chegada": "13/03/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tributário — revisão de ofício de ressarcimento de PIS/COFINS e cobrança de ressarcimento indevido",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 359321040 · 19/11/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 359853132 · 12/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Roteiro PIS/COFINS do gabinete: cobrança de ressarcimento indevido não é crédito tributário; aplica-se a Lei 9.784/1999 (artigos 53, 54 e 61), com contraditório diferido e revisão no quinquênio (Súmula 473/STF) — possível provimento [VALIDAR] · Etiqueta \"Suspeição Dr. Jean\" [VALIDAR significado]",
+   "teor": {
+    "sintese_fatica": "O Auto Posto Referência Ltda. obteve, em análise automática, ressarcimento de créditos de PIS/COFINS do setor de centrais petroquímicas; a Receita revisou de ofício os despachos e cobrou a devolução. A liminar suspendeu a exigibilidade (ID 359320781); a sentença anulou a revisão e a cobrança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 359321040 (19/11/2025): concedeu a segurança para anular os despachos decisórios de revisão de ofício que glosaram créditos de PIS/COFINS antes deferidos, por erro de direito (mudança de critério jurídico, fora do artigo 149 do CTN), restabelecendo o ressarcimento, e anular o processo de cobrança 17830.722273/2025-03 (R$ 6.381.394,09).",
+    "recurso": "União (Fazenda Nacional) (ID 359321043, 10/02/2026): a cobrança de ressarcimento indevido não tem natureza tributária e rege-se pela Lei 9.784/1999 (revisão no prazo quinquenal); créditos incompatíveis com a atividade da impetrante (posto de combustíveis).",
+    "resposta": "Contrarrazões da impetrante (ID 359321047).",
+    "parecer": "MPF ID 359853132: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · revisão de ofício de despachos decisórios que haviam deferido ressarcimento de créditos de PIS/COFINS (regime de centrais petroquímicas) · nulidade por mudança de critério jurídico e cancelamento da cobrança de R$ 6.381.394,09 · liminar deferida · segurança concedida",
+     "sintese": "O Auto Posto Referência Ltda. obteve, em análise automática, ressarcimento de créditos de PIS/COFINS do setor de centrais petroquímicas; a Receita revisou de ofício os despachos e cobrou a devolução. A liminar suspendeu a exigibilidade (ID 359320781); a sentença anulou a revisão e a cobrança.",
+     "questoes": "1) Natureza da cobrança de ressarcimento indevido de PIS/COFINS e regime de revisão (CTN, artigo 149 × Lei 9.784/1999, artigos 53 e 54); 2) mudança de critério jurídico (artigo 146 do CTN).",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 359321043, 10/02/2026): a cobrança de ressarcimento indevido não tem natureza tributária e rege-se pela Lei 9.784/1999 (revisão no prazo quinquenal); créditos incompatíveis com a atividade da impetrante (posto de combustíveis).",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 359321047)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "359321040",
+      "juizo": "Mandado de segurança 5010779-72.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para anular os despachos decisórios de revisão de ofício que glosaram créditos de PIS/COFINS antes deferidos, por erro de direito (mudança de critério jurídico, fora do artigo 149 do CTN), restabelecendo o ressarcimento, e anular o processo de cobrança 17830.722273/2025-03 (R$ 6.381.394,09)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "359321043",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "359321040",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "359320781",
+       "data": "2025-10-20"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "359321040",
+       "data": "2025-11-19"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "359321043",
+       "data": "2026-02-10"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "359321047",
+       "data": "2026-03-09"
+      },
+      {
+       "desc": "Parecer do MPF (prosseguimento)",
+       "id": "359853132",
+       "data": "2026-03-12"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 359321040 · 19/11/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 359853132 · 12/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Roteiro PIS/COFINS do gabinete: cobrança de ressarcimento indevido não é crédito tributário; aplica-se a Lei 9.784/1999 (artigos 53, 54 e 61), com contraditório diferido e revisão no quinquênio (Súmula 473/STF) — possível provimento [VALIDAR] · Etiqueta \"Suspeição Dr. Jean\" [VALIDAR significado]",
+     "assuntoDet": "Tributário — revisão de ofício de ressarcimento de PIS/COFINS e cobrança de ressarcimento indevido",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "359853132",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 359321040 · 19/11/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 359853132 · 12/03/2026",
+    "ultima_informacao": "Informação · ID 359321046 · 10/02/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 359321040 · 19/11/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 359853132 · 12/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -11146,12 +11394,14 @@
    "exequente": "CHEFE/GERENTE EXECUTIVO INSS CAMPO GRANDE MS",
    "executado": "ROSANA DE OLIVEIRA BARBOSA",
    "assunto": "Inquérito / Processo / Recurso Administrativo",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação do INSS e remessa necessária em mandado de segurança · demora na conclusão de processo administrativo (benefício à pessoa com deficiência) · ordem para concluir em 15 dias, sob multa diária de R$ 50,00 · segurança concedida",
+   "resultado": "Ato a proferir: apelação do INSS (ID 360630045) e remessa necessária da sentença ID 360630041; MPF pelo desprovimento (ID 365611592) ‖ Proposta pelos precedentes: Desprovimento, na linha da Turma Regional sobre mora administrativa (artigo 49 da Lei 9.784/1999; artigo 41-A, § 5º, da Lei 8.213/1991) [VALIDAR conclusão do processo e paradigma] [VALIDAR: Conclusão do processo administrativo (perda do objeto); Multa diária e prazo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS e remessa necessária da sentença que mandou o INSS concluir em 15 dias o processo administrativo de Rosana de Oliveira Barbosa, pessoa com deficiência, sob multa diária. O INSS alega ilegitimidade, ausência de mora e pede prazo maior e exclusão da multa. O MPF opinou pelo desprovimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11162,7 +11412,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto ou monocrática)",
+    "materia": "Previdenciário — mandado de segurança",
+    "origem": "Mandado de segurança 5007529-31.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 360630041 (22/01/2026)",
+    "recurso": "apelação de INSS (ID 360630045, 18/02/2026) · remessa necessária",
+    "preparo": "INSS: Isento (ente público)",
+    "monocratica": "Possível (artigo 932 do CPC), na linha reiterada da Turma Regional sobre mora administrativa",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -11172,6 +11433,112 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Previdenciário — mora do INSS na análise de requerimento (mandado de segurança)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 360630041 · 22/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 365611592 · 10/04/2026 | última movimentação: 01/07/2026 00:41 · Decorrido prazo de Ministério Público Federal em 30/06/2026 23:59. · Linha da Turma Regional sobre mora administrativa (ApCiv 5003185-70.2026.4.03.6000, 28/09/2026; RemNecCiv 5001090-86.2025.4.03.6005, 09/06/2026) [VALIDAR resultado] · Processo já concluído? (perda do objeto) [VALIDAR] · Multa diária contra a Fazenda",
+   "teor": {
+    "sintese_fatica": "Rosana de Oliveira Barbosa, pessoa com deficiência, impetrou mandado de segurança contra a demora do INSS em concluir seu processo administrativo. A liminar foi deferida em 30/07/2025.",
+    "inicial": "Mandado de segurança contra o Gerente-Executivo do INSS em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 360630041 (22/01/2026): concedeu a segurança, confirmando a liminar, para determinar ao INSS que conclua o processo administrativo da impetrante em 15 dias, sob multa diária de R$ 50,00 [VALIDAR dispositivo].",
+    "recurso": "INSS (ID 360630045, 18/02/2026): ilegitimidade passiva da autoridade; inexistência de mora ilegal; subsidiariamente, ampliação do prazo e exclusão ou redução da multa diária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 365611592: Desprovimento da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "INSS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS e remessa necessária em mandado de segurança · demora na conclusão de processo administrativo (benefício à pessoa com deficiência) · ordem para concluir em 15 dias, sob multa diária de R$ 50,00 · segurança concedida",
+     "sintese": "Rosana de Oliveira Barbosa, pessoa com deficiência, impetrou mandado de segurança contra a demora do INSS em concluir seu processo administrativo. A liminar foi deferida em 30/07/2025.",
+     "questoes": "1) Legitimidade da autoridade; 2) mora ilegal na análise do requerimento (artigo 49 da Lei 9.784/1999); 3) prazo e multa diária.",
+     "rel": {
+      "razoes": "INSS (ID 360630045, 18/02/2026): ilegitimidade passiva da autoridade; inexistência de mora ilegal; subsidiariamente, ampliação do prazo e exclusão ou redução da multa diária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "360630041",
+      "juizo": "Mandado de segurança 5007529-31.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança, confirmando a liminar, para determinar ao INSS que conclua o processo administrativo da impetrante em 15 dias, sob multa diária de R$ 50,00 [VALIDAR dispositivo]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-07-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "360630045",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "360630041",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "360629230",
+       "data": "2025-07-30"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "360630041",
+       "data": "2026-01-22"
+      },
+      {
+       "desc": "Apelação do INSS",
+       "id": "360630045",
+       "data": "2026-02-18"
+      },
+      {
+       "desc": "Parecer do MPF (desprovimento)",
+       "id": "365611592",
+       "data": "2026-04-10"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 360630041 · 22/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 365611592 · 10/04/2026 | última movimentação: 01/07/2026 00:41 · Decorrido prazo de Ministério Público Federal em 30/06/2026 23:59. · Linha da Turma Regional sobre mora administrativa (ApCiv 5003185-70.2026.4.03.6000, 28/09/2026; RemNecCiv 5001090-86.2025.4.03.6005, 09/06/2026) [VALIDAR resultado] · Processo já concluído? (perda do objeto) [VALIDAR] · Multa diária contra a Fazenda",
+     "assuntoDet": "Previdenciário — mora do INSS na análise de requerimento (mandado de segurança)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Pessoa com deficiência",
+     "parecer": "Com parecer",
+     "idParecer": "365611592",
+     "parecerSentido": "Desprovimento da apelação"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "01/07/2026 00:41 · Decorrido prazo de Ministério Público Federal em 30/06/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 360630041 · 22/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 365611592 · 10/04/2026",
+    "ultima_informacao": "Certidão · ID 360675610 · 16/03/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 360630041 · 22/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 365611592 · 10/04/2026 | última movimentação: 01/07/2026 00:41 · Decorrido prazo de Ministério Público Federal em 30/06/2026 23:59."
    }
   },
   {
