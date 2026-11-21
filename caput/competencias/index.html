@@ -237,6 +237,8 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
 [hidden]{display:none!important}
 /* barra de rolagem fina e igual em todo o Caput */
 @supports not selector(::-webkit-scrollbar){*{scrollbar-width:thin;scrollbar-color:rgba(32,59,57,.28) transparent}}::-webkit-scrollbar{width:8px;height:8px}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}::-webkit-scrollbar-thumb{background:rgba(32,59,57,.28);border-radius:999px;border:2px solid transparent;background-clip:padding-box}::-webkit-scrollbar-thumb:hover{background-color:rgba(32,59,57,.5)}::-webkit-scrollbar-button{display:none;width:0;height:0}
+
+html.emb .so-fora{display:none!important}.papel.eqh{margin-left:4px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
@@ -250,16 +252,17 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
   </div>
   <label class="ck hist" title="Pautas de 27/04 a 13/11/2026 do OneDrive (Historico_por_Servidor.xlsx): redator e conferente por processo. Fonte complementar."><input type="checkbox" id="incl-hist" checked> Incluir histórico de produção</label>
   <div class="papel" role="radiogroup" aria-label="Papel no histórico"><span>Ver como</span><button type="button" data-papel="s" aria-pressed="true">Redator</button><button type="button" data-papel="c" aria-pressed="false">Corretor</button></div>
+  <div class="papel eqh" role="radiogroup" aria-label="Quem entra"><span>Equipe</span><button type="button" data-eqh="atual" aria-pressed="true" title="Só quem está no cadastro da equipe (e o Relator)">Atual</button><button type="button" data-eqh="hist" aria-pressed="false" title="Inclui quem já saiu do gabinete">Com quem saiu</button></div>
   <details class="srvsel" id="srvsel"><summary>Servidores na matriz <b id="srv-n"></b></summary>
     <div class="srvp"><p class="nota" style="margin:0 0 8px"><b>Ocultar</b> tira só da sua tela. <b>Dissociar</b> tira das matrizes, do mapa, do ranking e da produção para todos<span id="srv-onde"></span>; não muda a designação, que segue Minuta e Correção do cadastro.</p>
       <label class="ck" style="margin-bottom:6px"><input type="checkbox" id="srv-saiu"> Ocultar quem saiu do gabinete</label>
       <div id="srv-lista"></div></div></details>
   <nav class="tabs" role="tablist" aria-label="Vistas">
     <button type="button" role="tab" id="tab-mapa" aria-selected="true" data-vista="mapa">Mapa</button>
-    <button type="button" role="tab" id="tab-perfis" aria-selected="false" data-vista="perfis">Perfis</button>
-    <button type="button" role="tab" id="tab-matriz" aria-selected="false" data-vista="matriz">Matriz</button>
+    <button type="button" role="tab" id="tab-perfis" aria-selected="false" data-vista="perfis" class="so-fora">Perfis</button>
+    <button type="button" role="tab" id="tab-matriz" aria-selected="false" data-vista="matriz" hidden>Matriz</button>
     <button type="button" role="tab" id="tab-rank" aria-selected="false" data-vista="rank">Especialistas</button>
-    <button type="button" role="tab" id="tab-prod" aria-selected="false" data-vista="prod">Produção</button>
+    <button type="button" role="tab" id="tab-prod" aria-selected="false" data-vista="prod">Produção e matriz</button>
   </nav>
 </header>
 <main>
@@ -360,6 +363,7 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
   /* altura para o Caput ajustar a moldura */
   if(noCaput&&window.ResizeObserver){var ult=0;new ResizeObserver(function(){var h=document.documentElement.scrollHeight;if(Math.abs(h-ult)>4){ult=h;try{window.parent.postMessage({tipo:'cmt:comp-altura',h:h},location.origin);}catch(e){}}}).observe(document.body);}
 
+  if(noCaput)window.addEventListener('message',function(ev){if(ev.origin===location.origin&&ev.data&&ev.data.tipo==='cmt:comp-recarregar')location.reload();});
   function iniciar(D){
   var VIVO=D.vivo||null, GRV=0;
   function gravarJa(msg){if(!VIVO)return;clearTimeout(GRV);GRV=setTimeout(function(){var st=document.getElementById('grv');if(st)st.textContent='Gravando no procs-muta…';
@@ -372,7 +376,7 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
   var nf=function(n){return Number(n||0).toLocaleString('pt-BR');};
   var LS='cmt.competencias.v1', ED={};
   /* ocultar (só nesta tela, guardado no navegador) e dissociar (campo matriz:false no cadastro; no Caput grava no procs-muta) */
-  var LSO='cmt.competencias.ocultos.v1', OC={nomes:[],saiu:false};try{OC=Object.assign(OC,JSON.parse(localStorage.getItem(LSO)||'{}')||{});}catch(e){}
+  var LSO='cmt.competencias.ocultos.v1', OC={nomes:[],saiu:true};  /* padrão: só a equipe atual */try{OC=Object.assign(OC,JSON.parse(localStorage.getItem(LSO)||'{}')||{});}catch(e){}
   function guardaOC(){try{localStorage.setItem(LSO,JSON.stringify(OC));}catch(e){}}
   if(!VIVO){try{ED=JSON.parse(localStorage.getItem(LS)||'{}')||{};}catch(e){ED={};}}
   var EQ=D.equipe.map(function(m){var e=ED[m.nome]||{},o=Object.assign({},m,{exp:e.exp||m.exp||[],pref:e.pref||m.pref||[],nao:e.nao||m.nao||[]});if('matriz' in e){if(e.matriz===false)o.matriz=false;else delete o.matriz;}return o;});
@@ -595,7 +599,7 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
   var PAL=['#2f6db3','#c0612b','#2e8a57','#8c4bb0','#b8962e','#c23d5c','#3a9aa8','#6b7a2a','#7a5230','#5a6fd6','#a0527a','#4f8f3a'];
   var MES=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
   function rotPer(p){if(PR.grupo==='mes'){return MES[+p.slice(5,7)-1]+'/'+p.slice(2,4);}return p.slice(8,10)+'/'+p.slice(5,7);}
-  function producao(){
+  function producao(){if(!document.getElementById('v-matriz').hidden)matriz();
     var med=PAPEL==='c'?'n':PR.medida;
     document.querySelectorAll('[data-pr-grupo]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.prGrupo===PR.grupo));});
     document.querySelectorAll('[data-pr-med]').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.prMed===med));b.disabled=PAPEL==='c'&&b.dataset.prMed==='p';});
@@ -668,27 +672,29 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
     document.getElementById('pr-nota').textContent='Conta '+(PAPEL==='c'?'correções':'minutas')+' registradas por pauta'+(med==='p'?', em pontos: tipo (voto '+pv(PVOTO)+'; ED e agravo interno '+pv(PESO['Embargos de declaração'])+'; monocrática '+pv(PESO['Decisão monocrática'])+') × complexidade (Ω '+pv(PCX[1])+', Α '+pv(PCX[2])+', Σ '+pv(PCX[3])+'), pesos de apoio/regras/produtividade.json':'')+'. Complexidade informada: '+(function(){var c={1:0,2:0,3:0},inf=0;L.forEach(function(x){c[x.cx]=(c[x.cx]||0)+1;});var tot=L.length;return 'Ω '+nf(c[1])+' · Α '+nf(c[2])+' · Σ '+nf(c[3])+(c[2]+c[3]?'':' (nenhum processo com Α ou Σ marcado: sem nível, conta como Ω)');})()+'. É volume registrado, não produtividade aferida: não desconta férias, ausências nem complexidade, e cada processo conta uma vez, na pauta mais recente em que apareceu. '+(INCL_H?'Inclui o histórico de produção, que não comprova correção nem liberação.':'Sem o histórico, só há pautas de abril, outubro e novembro.')+' A pauta de 20/07 tem registro parcial.';
   }
 
-  function vista(v){['mapa','perfis','matriz','rank','prod'].forEach(function(k){document.getElementById('v-'+k).hidden=k!==v;document.getElementById('tab-'+k).setAttribute('aria-selected',String(k===v));});if(v==='matriz')matriz();if(v==='mapa')mapa();if(v==='rank')ranking();if(v==='prod')producao();}
+  /* a matriz fica dentro de Produção (abaixo da evolução); no Caput, Perfis é a seção própria da Coordenação */
+  function vista(v){if(v==='matriz')v='prod';if(v==='perfis'&&noCaput)v='mapa';['mapa','perfis','matriz','rank','prod'].forEach(function(k){var on=k===v||(v==='prod'&&k==='matriz');document.getElementById('v-'+k).hidden=!on;document.getElementById('tab-'+k).setAttribute('aria-selected',String(k===v));});if(v==='mapa')mapa();if(v==='rank')ranking();if(v==='prod')producao();}
   function painelServidores(){
     var nomes={};MINT.forEach(function(x){if(x.red)nomes[x.red]=(nomes[x.red]||0)+1;if(x.cor)nomes[x.cor]=(nomes[x.cor]||0)+1;});EQ.forEach(function(m){if(nomes[m.nome]==null)nomes[m.nome]=0;});
     var L=Object.keys(nomes).sort(function(a,b){return (!!membroDe(b))-(!!membroDe(a))||nomes[b]-nomes[a];});
     var n=L.filter(oculto).length;document.getElementById('srv-n').textContent=n?'· '+n+' fora':'';
     document.getElementById('srv-onde').textContent=VIVO?' (grava no cadastro da equipe, no procs-muta)':' (nesta cópia, só neste navegador)';
-    document.getElementById('srv-saiu').checked=!!OC.saiu;
+    document.getElementById('srv-saiu').checked=!!OC.saiu;document.querySelectorAll('[data-eqh]').forEach(function(b){b.setAttribute('aria-pressed',String((b.dataset.eqh==='atual')===!!OC.saiu));});
     document.getElementById('srv-lista').innerHTML=L.map(function(nm){var m=membroDe(nm),dis=dissociado(nm),oc=OC.nomes.indexOf(nm)>=0||(OC.saiu&&!m&&nm!=='CM');
       return '<div class="srvr'+(oculto(nm)?' fora':'')+'"><span><b>'+esc(nm)+'</b><small>'+(m?(m.cargo||(m.papel==='assessoria'?'Assessoria':'Equipe')):nm==='CM'?'Relator':'saiu do gabinete')+' · '+nf(nomes[nm])+' registros</small></span>'+
         '<button type="button" data-oc="'+esc(nm)+'" aria-pressed="'+oc+'"'+(OC.saiu&&!m&&nm!=='CM'?' disabled title="Oculto por “quem saiu do gabinete”"':'')+'>'+(oc?'Mostrar':'Ocultar')+'</button>'+
         (m?'<button type="button" data-dis="'+esc(nm)+'" aria-pressed="'+dis+'">'+(dis?'Religar':'Dissociar')+'</button>':'<span></span>')+'</div>';}).join('');
   }
-  function redesenha(){aplicaPapel();PR.sel=null;FM.s='';painelServidores();lista();perfil();var vv=['mapa','matriz','rank','prod'].find(function(k){return !document.getElementById('v-'+k).hidden;});if(vv==='mapa')mapa();else if(vv==='matriz')matriz();else if(vv==='rank')ranking();else if(vv==='prod')producao();}
+  function redesenha(){aplicaPapel();PR.sel=null;FM.s='';painelServidores();lista();perfil();var vv=['mapa','rank','prod','matriz'].find(function(k){return !document.getElementById('v-'+k).hidden;});if(vv==='mapa')mapa();else if(vv==='matriz')matriz();else if(vv==='rank')ranking();else if(vv==='prod')producao();}
   function dissociar(nm){var m=membroDe(nm);if(!m)return;var vai=m.matriz!==false;if(vai)m.matriz=false;else delete m.matriz;
     if(VIVO){if(VIVO.CMTSessao.equipeMatriz&&VIVO.CMTSessao.equipeMatriz(m.nome,!vai))gravarJa(m.nome+(vai?' dissociado da matriz.':' de volta à matriz.'));else toast('O motor do Caput não aceitou a mudança.');}
     else{ED[m.nome]=Object.assign({},ED[m.nome]||{},{exp:m.exp,pref:m.pref,nao:m.nao,matriz:m.matriz});try{localStorage.setItem(LS,JSON.stringify(ED));}catch(e){}toast(m.nome+(vai?' dissociado nesta cópia.':' de volta à matriz.'));}
     redesenha();}
   function tudo(){painelServidores();lista();perfil();if(!document.getElementById('v-mapa').hidden)arvore();}
-  function abrir(n){if(!n)return;sel=n;vista('perfis');tudo();try{location.hash='perfis';}catch(e){}window.scrollTo(0,0);}
+  function abrir(n){if(!n)return;if(noCaput){try{window.parent.postMessage({tipo:'cmt:comp-perfil',nome:n},location.origin);}catch(e){}return;}sel=n;vista('perfis');tudo();try{location.hash='perfis';}catch(e){}window.scrollTo(0,0);}
 
   document.addEventListener('click',function(e){
+    var q=e.target.closest('[data-eqh]');if(q){OC.saiu=q.dataset.eqh==='atual';guardaOC();redesenha();return;}
     var t=e.target.closest('[data-oc],[data-dis],[data-aplicar],[data-pr-grupo],[data-pr-med],[data-pr-s],[data-pr-linha],[data-papel],[data-s],[data-vista],[data-tira],[data-mv],[data-acao],[data-dim],[data-fm],[data-arvk],[data-arv]');if(!t)return;
     var m=EQ.find(function(x){return x.nome===sel;});
     if(t.dataset.oc!=null){var nm=t.dataset.oc,i=OC.nomes.indexOf(nm);if(i>=0)OC.nomes.splice(i,1);else OC.nomes.push(nm);guardaOC();redesenha();return;}
@@ -697,7 +703,7 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
     if(t.dataset.prGrupo){PR.grupo=t.dataset.prGrupo;producao();return;}
     if(t.dataset.prMed){PR.medida=t.dataset.prMed;producao();return;}
     if(t.dataset.prS||t.dataset.prLinha){var nn=t.dataset.prS||t.dataset.prLinha,ix=PR.sel.indexOf(nn);if(ix>=0)PR.sel.splice(ix,1);else PR.sel.push(nn);producao();return;}
-    if(t.dataset.papel){PAPEL=t.dataset.papel;PR.sel=null;aplicaPapel();FM.s='';var vv=['mapa','matriz','prod'].find(function(k){return !document.getElementById('v-'+k).hidden;});if(vv==='mapa')mapa();else if(vv==='matriz')matriz();else if(vv==='prod')producao();return;}
+    if(t.dataset.papel){PAPEL=t.dataset.papel;PR.sel=null;aplicaPapel();FM.s='';var vv=['mapa','prod','matriz'].find(function(k){return !document.getElementById('v-'+k).hidden;});if(vv==='mapa')mapa();else if(vv==='matriz')matriz();else if(vv==='prod')producao();return;}
     if(t.dataset.fm){if(t.dataset.fm==='*')FM={secao:'',ramo:'',s:'',tipo:''};else FM[t.dataset.fm]='';mapa();return;}
     if(t.dataset.arvk){ABERTO[t.dataset.arvk]=!ABERTO[t.dataset.arvk];arvore();return;}
     if(t.dataset.arv){if(t.dataset.arv==='abrir')MIN.forEach(function(x){ABERTO[x.secao+'|'+x.ramo]=true;});else ABERTO={};arvore();return;}
@@ -714,7 +720,7 @@ td.as-n{white-space:normal;min-width:240px;max-width:340px}
   document.addEventListener('submit',function(e){var f=e.target.closest('[data-poe]');if(!f)return;e.preventDefault();var k=f.dataset.poe,i=f.querySelector('input'),v=(i.value||'').trim();if(!v)return;var m=EQ.find(function(x){return x.nome===sel;});if(!casa(m[k],v)){m[k]=(m[k]||[]).concat([v]);guardar(m);}tudo();var ni=document.getElementById('add-'+k);if(ni)ni.focus();});
   document.getElementById('busca').addEventListener('input',function(e){filtro=e.target.value;lista();});
   [['r-busca','busca','input'],['r-secao','secao','change'],['r-ramo','ramo','change'],['r-div','div','change'],['r-sem','sem','change']].forEach(function(c){document.getElementById(c[0]).addEventListener(c[2],function(e){RK[c[1]]=e.target.type==='checkbox'?e.target.checked:e.target.value;ranking();});});
-  document.getElementById('incl-hist').addEventListener('change',function(e){INCL_H=e.target.checked;PR.sel=null;aplicaPapel();FM.s='';var vv=['mapa','matriz','rank','prod'].find(function(k){return !document.getElementById('v-'+k).hidden;});if(vv==='mapa')mapa();else if(vv==='matriz')matriz();else if(vv==='rank')ranking();else if(vv==='prod')producao();toast(INCL_H?'Com o histórico de produção: '+nf(MINT.length)+' minutas.':'Só as pautas do procs-muta: '+nf(MIN0.length)+' minutas.');});
+  document.getElementById('incl-hist').addEventListener('change',function(e){INCL_H=e.target.checked;PR.sel=null;aplicaPapel();FM.s='';var vv=['mapa','rank','prod','matriz'].find(function(k){return !document.getElementById('v-'+k).hidden;});if(vv==='mapa')mapa();else if(vv==='matriz')matriz();else if(vv==='rank')ranking();else if(vv==='prod')producao();toast(INCL_H?'Com o histórico de produção: '+nf(MINT.length)+' minutas.':'Só as pautas do procs-muta: '+nf(MIN0.length)+' minutas.');});
   document.getElementById('pr-fut').addEventListener('change',function(e){PR.futuras=e.target.checked;producao();});
   document.getElementById('srv-saiu').addEventListener('change',function(e){OC.saiu=e.target.checked;guardaOC();redesenha();});
   document.addEventListener('click',function(e){var d=document.getElementById('srvsel');if(d&&d.open&&e.target.isConnected&&!d.contains(e.target))d.open=false;  /* botão redesenhado no clique não fecha o painel */});
