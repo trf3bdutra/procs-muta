@@ -34,7 +34,7 @@ test('Rotas históricas redirecionam à central sem alterar os dados',()=>{
 test('Triagem: aba única com visão geral recolhível, escaninhos como sub-aba e exportação num ícone',()=>{
   assert.ok(page.includes("$('#abas').innerHTML = tabEsc();")&&!page.includes("t('fila', 'Triagem'"),'Triagem é a página; só Escaninhos é sub-aba');
   assert.ok(page.includes('function visaoGeral()')&&page.includes('vInicio(true)'),'visão geral do antigo Início na Triagem');
-  assert.ok(page.includes("if (!emE && !F.conj) h += visaoGeral();"));
+  assert.ok(page.includes("+ (!emE && !F.conj ? visaoGeral() : '') + '<div class=\"fl-cab\">"),'visão geral antes da busca e dos filtros');
   assert.ok(page.includes('class="btn ico" id="')&&!page.includes('data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button>'),'Excel e Exportar num botão de ícone');
 });
 
@@ -64,4 +64,10 @@ test('Chefia: calendário completo do gabinete (o do motor) e regras de etiqueta
   assert.ok(cap.includes('<script src="/init/motor/assets/js/11-calendario.js"></script>')&&cap.includes('W.CMTCalendario.montar(CAL_EL'),'calendário do motor na Chefia');
   assert.ok(m.includes('regrasEtiquetas: {')&&m.includes('RX.clear(); HIST = null; salvar(); return true; }'),'API do motor');
   assert.ok(rg.includes("data-rg=\"etq-nova\"")&&rg.includes('SM.conversoes(ses.id)')&&!rg.includes("tela('regras', 'Editar regras de etiquetas')"),'editor nas Regras gerais, contado como na etapa 3');
+});
+
+test('Calendário da Chefia: dois meses lado a lado e visual do Caput',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),cal=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/assets/js/11-calendario.js'),'utf8');
+  assert.ok(cal.includes('ex.meses===2&&st.passo===')&&cal.includes('function mes(vis,b0)'),'dois meses');
+  assert.ok(cap.includes('{ meses: 2, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
 });
