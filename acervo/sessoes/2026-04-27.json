@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "27/04/2026",
  "date": "2026-04-27",
- "atualizadoEm": "2026-11-20T21:01:36.454Z",
+ "atualizadoEm": "2026-11-21T17:19:58.092Z",
  "origem": "acervo/planilhas/pauta-2026-2o-bimestre.json",
  "itens": [
   {
@@ -579,14 +579,136 @@
    "ctl": {
     "cartao": {
      "tipoJ": "Apelação",
-     "pendencias": []
+     "pendencias": [],
+     "subassuntos": "Apelação já julgada pela Turma Regional (aposentadoria especial) · embargos de declaração rejeitados em 10/08/2026 · recursos especial e extraordinário em 26/08/2026 · pedido de antiga patrona de reinclusão e reserva de honorários contratuais",
+     "sintese": "Claudir Rosa Pereira obteve aposentadoria especial. Após o acórdão, a antiga patrona (Arleide Costa de Oliveira Braga) pediu reinclusão como terceira interessada e reserva de 30% de honorários contratuais (ID 372571340). Há recursos especial e extraordinário.",
+     "questoes": "1) Reserva de honorários contratuais de antiga patrona; 2) encaminhamento de recursos excepcionais.",
+     "rel": {
+      "razoes": "INSS (ID 293423174, 20/01/2023): apelação já julgada.",
+      "contrarrazoes": "Não se aplica."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "293423166",
+      "juizo": "Procedimento comum 5000626-13.2021.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "julgou procedente o pedido de aposentadoria especial (DIB 20/09/2018), com tutela; embargos de declaração acolhidos quanto aos índices (ID 293423175); a Turma Regional julgou a apelação (acórdão ID 369519613) e rejeitou os embargos de declaração (acórdão ID 391419697)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica"
+     },
+     "adm": {
+      "prot": "2021-03-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "293423174",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "293423166",
+       "data": "2022-10-27",
+       "nota": "Sentença ID 293423166 (27/10/2022): julgou procedente o pedido de aposentadoria especial (DIB 20/09/2018), com tutela; embargos de declaração acolhidos quanto aos índices (ID 293423175); a Turma Regional julgou a apelação (acórdão ID 369519613) e rejeitou os embargos de declaração (acórdão ID 391419697).",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Ante o exposto, resolvo o mérito do processo, nos termos do artigo 487, inciso I, do Código de Processo Civil e JULGO PROCEDENTE o pedido para condenar o réu a conceder aposentadoria especial ao autor CLAUDIR ROSA PEREIRA, NB 188.756.674-8. A DIB é 20.09.2018 e a DIP é 01.11.2022. Defiro a tutela …"
+      },
+      {
+       "desc": "Apelação do INSS",
+       "id": "293423174",
+       "data": "2023-01-20",
+       "nota": "INSS (ID 293423174, 20/01/2023): apelação já julgada.",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "Ante o exposto, requer o Instituto Nacional do Seguro Social (INSS) seja recebido com efeito suspensivo e dado provimento ao presente recurso para reformar a sentença e julgar improcedente o pedido inicial, condenando a parte autora no pagamento das custas do processo e da verba honorária, com …"
+      },
+      {
+       "desc": "Acórdão da apelação",
+       "id": "369519613",
+       "data": "2026-04-27",
+       "nota": "Sentença ID 293423166 (27/10/2022): julgou procedente o pedido de aposentadoria especial (DIB 20/09/2018), com tutela; embargos de declaração acolhidos quanto aos índices (ID 293423175); a Turma Regional julgou a apelação (acórdão ID 369519613) e rejeitou os embargos de declaração (acórdão ID 391419697).",
+       "pje": {
+        "tipo": "Acórdão"
+       },
+       "trecho": "Ante o exposto, nego provimento à apelação. É como voto. EMENTA DIREITO PREVIDENCIÁRIO. APELAÇÃO. APOSENTADORIA POR TEMPO DE CONTRIBUIÇÃO. TEMPO ESPECIAL. EXPOSIÇÃO A AGENTES BIOLÓGICOS. AUXILIAR DE ENFERMAGEM E OPERADOR DE HEMODINÂMICA. NEGADO PROVIMENTO. I. Caso em exame 1. Apelação interposta …"
+      },
+      {
+       "desc": "Petição da antiga patrona: reserva de honorários",
+       "id": "372571340",
+       "data": "2026-05-11",
+       "nota": "Claudir Rosa Pereira obteve aposentadoria especial. Após o acórdão, a antiga patrona (Arleide Costa de Oliveira Braga) pediu reinclusão como terceira interessada e reserva de 30% de honorários contratuais (ID 372571340). Há recursos especial e extraordinário.",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "paginas": 2
+       },
+       "trecho": "Diante do exposto, requer - se que V.Exa. se digne em determinar que a Secretaria proceda com a REINCLUSÃO dos dados da patrona peticionária como terceira interessada nesta demanda e, com fulcro no artigo 24 §1º da Lei Federal 8906/94, proceder com a RESERVA DOS HONORÁRIOS CONTRATUAIS ( 30% do …"
+      },
+      {
+       "desc": "Acórdão dos embargos de declaração",
+       "id": "391419697",
+       "data": "2026-08-10",
+       "nota": "Sentença ID 293423166 (27/10/2022): julgou procedente o pedido de aposentadoria especial (DIB 20/09/2018), com tutela; embargos de declaração acolhidos quanto aos índices (ID 293423175); a Turma Regional julgou a apelação (acórdão ID 369519613) e rejeitou os embargos de declaração (acórdão ID 391419697).",
+       "pje": {
+        "tipo": "Acórdão"
+       },
+       "trecho": "Ante o exposto, rejeito os embargos de declaração e corrijo, de ofício, o acórdão embargado, nos termos da fundamentação adotada. É como voto. EMENTA DIREITO PROCESSUAL CIVIL E PREVIDENCIÁRIO. EMBARGOS DE DECLARAÇÃO. APOSENTADORIA POR TEMPO DE CONTRIBUIÇÃO. RECONHECIMENTO DE TEMPO DE SERVIÇO …"
+      },
+      {
+       "desc": "Recurso especial",
+       "id": "393707491",
+       "data": "2026-08-26",
+       "pje": {
+        "tipo": "Recurso Especial",
+        "descricao": "P RECURSO ESPECIAL 3350223948 EM 26/08/2026 11:53:09",
+        "paginas": 5
+       },
+       "trecho": "Diante do exposto, a partir da vigência da EC nº 136/25, requer a aplicação dos arts. 389, parágrafo único, e 406 do Código Civil combinados com o art. 41-A da Lei nº 8.213/91, que preveem que, se não houver concomitância entre eles, a correção monetária deverá ser calculada com base no INPC, ao …"
+      },
+      {
+       "desc": "Recurso extraordinário",
+       "id": "393708249",
+       "data": "2026-08-26",
+       "pje": {
+        "tipo": "Recurso Extraordinário",
+        "descricao": "P RECURSO EXTRAORDINÁRIO 3350245689 EM 26/08/2026 11:54:54",
+        "paginas": 5
+       },
+       "trecho": "Ante o exposto, demonstrada a contrariedade ao art. 3º da EC nº 136/25, requer o INSS que o presente recurso extraordinário seja conhecido e provido para reformar o acórdão recorrido, afastando a aplicação da Taxa SELIC como índice único de correção monetária e juros de mora no período anterior à …"
+      }
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 391419697 · 10/08/2026 — acórdão: rejeitou os embargos de declaração e corrigiu, de ofício, o acórdão embargado | última peça: Recurso Extraordinário (PGF) · ID 393708249 · 26/08/2026 | última movimentação: 11/09/2026 00:40 · Decorrido prazo de CLAUDIR ROSA PEREIRA em 10/09/2026 23:59. · Etiquetas \"NÃO PAUTAR - GIOVANA\" e \"Pedido de destaque de honorários\" · Reserva de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994) ocorre na expedição do requisitório, no juízo da execução [VALIDAR] · Recursos excepcionais à Vice-Presidência (artigo 1.030 do CPC)",
+     "assuntoDet": "Pós-julgamento — reserva de honorários contratuais e recursos excepcionais",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ],
+     "obsGeral": "Apelação já julgada pela Turma Regional. Pendem o pedido da antiga patrona de reinclusão e reserva de honorários contratuais e os recursos excepcionais."
     },
     "lote": {
      "id": "adp-ap-3s",
      "item": 10,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Index",
+    "tempest": "Não se aplica",
+    "preparo": "Não se aplica",
+    "prelim": "Sem preliminares",
+    "repres": "Não verificado",
+    "midias": "Não se aplica",
+    "mpf": "Sem hipótese",
+    "parecer": "Não verificado",
+    "resJulg": "Ato a proferir: acórdãos IDs 369519613 e 391419697; petição da antiga patrona (ID 372571340, contrato ID 372571342); recurso especial (ID 393707491) e extraordinário (ID 393708249) ‖ Proposta pelos precedentes: Decisão: anotar a antiga patrona para intimações, se cabível, e remeter o pedido de reserva ao juízo da execução; encaminhar os recursos à Vice-Presidência [VALIDAR] [VALIDAR: Momento e juízo competente para a reserva de honorários contratuais]"
    }
   },
   {

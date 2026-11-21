@@ -4,6 +4,13 @@
  "colecoes": {
   "pautas": [
    {
+    "id": "pauta-2026-12-15",
+    "titulo": "Pauta · 15/12/2026",
+    "sessao": "2026-12-15",
+    "matriz": true,
+    "n": 179
+   },
+   {
     "id": "pauta-2026-12-07",
     "titulo": "Pauta · 07/12/2026",
     "sessao": "2026-12-07",
@@ -58,6 +65,12 @@
     "n": 42
    },
    {
+    "id": "adp-mono-terminativas",
+    "titulo": "Monocráticas terminativas · triagem",
+    "tarefa": "Analisar tipo de decisão a proferir",
+    "n": 80
+   },
+   {
     "id": "adp-remessas",
     "titulo": "Analisar decisão · Remessas necessárias",
     "tarefa": "Analisar tipo de decisão a proferir",
@@ -66,49 +79,49 @@
    {
     "id": "adp-serie-hospitalar",
     "titulo": "Série · IRPJ/CSLL: serviços hospitalares (REsp 1.116.399/BA)",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 3
    },
    {
     "id": "adp-serie-incapacidade-ms",
     "titulo": "Série · Auxílio por incapacidade em mandado de segurança",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 3
    },
    {
     "id": "adp-serie-itr",
     "titulo": "Série · ITR: APP e reserva legal",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 3
    },
    {
     "id": "adp-serie-medicamentos",
     "titulo": "Série · Saúde: fornecimento de medicamentos",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 11
    },
    {
     "id": "adp-serie-pares",
     "titulo": "Série · Pares e votos conjuntos",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 12
    },
    {
     "id": "adp-serie-pensao-militar-tcu",
     "titulo": "Série · Pensão militar revista por apontamento do TCU",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 3
    },
    {
     "id": "adp-serie-perdimento",
     "titulo": "Série · Perdimento: responsabilidade do proprietário",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 8
    },
    {
     "id": "adp-serie-prof-substituto",
     "titulo": "Série · Professor substituto: interstício (Lei 8.745/1993)",
-    "serie": true,
+    "tarefa": "Analisar tipo de decisão a proferir",
     "n": 3
    }
   ],
@@ -132,31 +145,13 @@
     "n": 6
    },
    {
-    "id": "0712-imo-a",
-    "titulo": "07/12 · IMO-A — Atraso na entrega: Campina Verde II (2ª Vara)",
+    "id": "0712-imo",
+    "titulo": "07/12 · IMO — Atraso na entrega do imóvel",
     "subtitulo": "",
     "cor": "",
     "bilhete": "",
     "escaninho": false,
-    "n": 13
-   },
-   {
-    "id": "0712-imo-b",
-    "titulo": "07/12 · IMO-B — Atraso na entrega: Jardim Alvorada (fortuito)",
-    "subtitulo": "",
-    "cor": "",
-    "bilhete": "",
-    "escaninho": false,
-    "n": 6
-   },
-   {
-    "id": "0712-imo-c",
-    "titulo": "07/12 · IMO-C — Atraso na entrega: Campina Verde (1ª Vara)",
-    "subtitulo": "",
-    "cor": "",
-    "bilhete": "",
-    "escaninho": false,
-    "n": 5
+    "n": 24
    },
    {
     "id": "0712-lei-1",
@@ -177,22 +172,13 @@
     "n": 2
    },
    {
-    "id": "0712-rev-1",
-    "titulo": "07/12 · REV-1 — Revalida: candidato já formado",
+    "id": "0712-rev",
+    "titulo": "07/12 · REV — Revalida: inscrição e documentação",
     "subtitulo": "",
     "cor": "",
     "bilhete": "",
     "escaninho": false,
-    "n": 5
-   },
-   {
-    "id": "0712-rev-2",
-    "titulo": "07/12 · REV-2 — Revalida: candidato não formado",
-    "subtitulo": "",
-    "cor": "",
-    "bilhete": "",
-    "escaninho": false,
-    "n": 2
+    "n": 7
    },
    {
     "id": "2886",
@@ -201,7 +187,7 @@
     "cor": "",
     "bilhete": "",
     "escaninho": false,
-    "n": 63
+    "n": 65
    },
    {
     "id": "acorrigir",
@@ -219,17 +205,10 @@
     "cor": "",
     "bilhete": "",
     "escaninho": false,
-    "n": 21
+    "n": 23
    }
   ],
-  "selecao-previa": [
-   {
-    "id": "selecao-2026-12-15",
-    "titulo": "Seleção prévia · 15/12/2026",
-    "sessao": "2026-12-15",
-    "n": 2
-   }
-  ]
+  "selecao-previa": []
  },
- "atualizado_em": "2026-11-21T10:54:49Z"
+ "atualizado_em": "2026-11-21T17:19:56Z"
 }

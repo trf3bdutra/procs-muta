@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "26/10/2026",
  "date": "2026-10-26",
- "atualizadoEm": "2026-11-21T10:54:51.129Z",
+ "atualizadoEm": "2026-11-21T17:19:58.094Z",
  "itens": [
   {
    "cnj": "0000008-23.2025.4.03.6000",
@@ -4372,14 +4372,148 @@
    "ctl": {
     "cartao": {
      "tipoJ": "Apelação",
-     "pendencias": []
+     "pendencias": [],
+     "subassuntos": "Apelação do INSS em ação de pensão por morte movida pelas filhas do segurado (óbito em 16/08/2009) · julgada pela Turma em 13/11/2026: apelação desprovida por unanimidade · aguarda a juntada e a publicação do acórdão",
+     "sintese": "Maria Eduarda Rodrigues Matoso e as irmãs pediram a pensão por morte do pai, falecido em 16/08/2009. A sentença concedeu o benefício; a Turma negou provimento à apelação do INSS em 13/11/2026.",
+     "questoes": "1) Pós-julgamento: juntada e publicação do acórdão; prazos para embargos de declaração e recursos excepcionais.",
+     "rel": {
+      "razoes": "INSS (ID 341580189): perda da qualidade de segurado do instituidor antes do óbito; improcedência.",
+      "contrarrazoes": "Contrarrazões das autoras (ID 341580191, 15/09/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "341580183",
+      "juizo": "Vara Única de Ribas do Rio Pardo/MS",
+      "dispositivo": "procedência: pensão por morte às autoras"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica"
+     },
+     "adm": {
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "341580189",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "341580183",
+       "data": "[VALIDAR]",
+       "nota": "Pensão por morte concedida pela sentença (ID 341580183) a Maria Eduarda Rodrigues Matoso e às irmãs, desde o óbito para a menor e com rateio desde a DER (27/05/2019). A Turma negou provimento à apelação do INSS em 13/11/2026. Antes, o Relator determinou a regularização da representação (IDs 403413909 e 406796119); a autora juntou procuração e justificativa em 28/10/2026 (ID 407404532).",
+       "pje": {
+        "tipo": "Outros Documentos",
+        "paginas": 8
+       },
+       "trecho": "DISPOSITIVO ANTE O EXPOSTO, na forma do artigo 487, inciso I, do Código de Processo Civil, JULGO PROCEDENTE o pedido formulado, para o fim de CONDENAR a parte ré a implantar em favor das autoras o benefício previdenciário de pensão por morte . Comarca de Ribas do Rio Pardo 1ª Vara Modelo 361537 …"
+      },
+      {
+       "desc": "Apelação do INSS",
+       "id": "341580189",
+       "data": "2025-08-20",
+       "nota": "INSS (ID 341580189): perda da qualidade de segurado do instituidor antes do óbito; improcedência.",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 8
+       },
+       "trecho": "Ante o exposto, requer o INSS seja inteiramente provido o presente recurso para reformar a sentença e julgar improcedente o pedido inicial, condenando a parte autora ao pagamento das custas do processo e da verba honorária, com fulcro no art. 85, §§ 2º e 6º, do CPC, sendo indevidos nas hipóteses da …"
+      },
+      {
+       "desc": "Contrarrazões das autoras",
+       "id": "341580191",
+       "data": "2025-09-15",
+       "nota": "Contrarrazões das autoras (ID 341580191, 15/09/2025).",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 7
+       },
+       "trecho": "Diante do exposto, o apelado requer a Vossa Excelência: ______________________________________________________________________ Rua Sagarana, nº 92, Portal do Panamá, CEP 79113-184, Campo Grande-MS Telefone: (67) 98423-1544 / 99682-1462 e-mail: advdiogomarinho@gmail.com a) Que o recurso de apelação …"
+      },
+      {
+       "desc": "Parecer de mérito do MPF",
+       "id": "351642174",
+       "data": "2026-01-26",
+       "nota": "MPF ID 351642174: parecer de mérito · Etiquetas \"2026-10-26 SESSÃO\", \"2026-11-13 SESSÃO\", \"Dalete\" e \"sentença anulada\" · Adiado na sessão de 26/10/2026 · Parecer de mérito do MPF (ID 351642174)",
+       "pje": {
+        "tipo": "Parecer de Mérito",
+        "descricao": "MP",
+        "paginas": 4
+       },
+       "trecho": "Ante o exposto, requeiro o desprovimento da apelação. Márcio Domene Cabrini Procurador Regional da República Página 3 de 4 Documento assinado via Token digitalmente por MARCIO DOMENE CABRINI, em 26/01/2026 10:55. Para verificar a assinatura acesse Chave d9554fd6.a712c67a.244f0160.9bc66143 Notas 1 . …"
+      },
+      {
+       "desc": "Despacho: regularizar a representação",
+       "id": "403413909",
+       "data": "2026-10-13",
+       "nota": "Pensão por morte concedida pela sentença (ID 341580183) a Maria Eduarda Rodrigues Matoso e às irmãs, desde o óbito para a menor e com rateio desde a DER (27/05/2019). A Turma negou provimento à apelação do INSS em 13/11/2026. Antes, o Relator determinou a regularização da representação (IDs 403413909 e 406796119); a autora juntou procuração e justificativa em 28/10/2026 (ID 407404532).",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Ante o exposto, intime-se a autora para, no prazo de 5 (cinco) dias, regularizar a representação processual, sob pena de desentranhamento das contrarrazões, nos termos do artigo 76, § 2º, II, do CPC. Intime-se. Campo Grande, data da assinatura. CARLOS MUTA Desembargador Federal"
+      },
+      {
+       "desc": "Despacho: reiteração",
+       "id": "406796119",
+       "data": "2026-10-26",
+       "nota": "Pensão por morte concedida pela sentença (ID 341580183) a Maria Eduarda Rodrigues Matoso e às irmãs, desde o óbito para a menor e com rateio desde a DER (27/05/2019). A Turma negou provimento à apelação do INSS em 13/11/2026. Antes, o Relator determinou a regularização da representação (IDs 403413909 e 406796119); a autora juntou procuração e justificativa em 28/10/2026 (ID 407404532).",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Considerando o descumprimento do despacho anterior (ID 403413909), intime-se a parte autora para cumprimento improrrogável da determinação retro, sob pena de extinção do feito sem julgamento do mérito, nos termos do artigo 485, IV, do CPC Intime-se. Campo Grande, data da assinatura. CARLOS MUTA …"
+      },
+      {
+       "desc": "Petição: procuração e justificativa",
+       "id": "407404532",
+       "data": "2026-10-28",
+       "nota": "Autoras: advogado Diogo de Souza Marinho da Silva (OAB/MS 16.723); procuração em nome da autora juntada em 28/10/2026 (ID 407404532). · Pensão por morte concedida pela sentença (ID 341580183) a Maria Eduarda Rodrigues Matoso e às irmãs, desde o óbito para a menor e com rateio desde a DER (27/05/2019). A Turma negou provimento à apelação do INSS em 13/11/2026. Antes, o Relator determinou a regularização da …",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "paginas": 2
+       },
+       "trecho": "requer - se que Vossa Excelência, considerando as justificativas apresentadas e a efetiva regularização da representação processual, receba os documentos ora juntados, afastando a aplicação da penalidade anteriormente advertida. Termos em que, Pede Deferimento. Campo Grande – MS, 28 de outubro de …"
+      },
+      {
+       "desc": "Certidão de julgamento: apelação desprovida",
+       "id": "411089244",
+       "data": "2026-11-13",
+       "nota": "Certidão de julgamento ID 411089244 (13/11/2026): \"a Turma Regional de Mato Grosso do Sul, por unanimidade, negou provimento à apelação\".",
+       "pje": {
+        "tipo": "Certidão de Julgamento"
+       },
+       "trecho": "Sessão de Julgamento da Presidente da Sessão: Des. Fed. CARLOS MUTA Procurador(a) da República: Dr(a). OSVALDO CAPELARI JUNIOR Secretário(a): DEBORAH SANTOS CONGRO BASTOSRelator: Gab. A da Processo nº 5169699-78.2025.4.03.9999 - APELAÇÃO CÍVEL (198)APELANTE: INSTITUTO NACIONAL DO SEGURO SOCIAL - …"
+      }
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 406796119 · 26/10/2026 — …umprimento improrrogável da determinação retro, sob pena de extinção do feito sem julgamento do mérito, nos termos do artigo 485, IV, do CPC Intime-se. Campo Grande, data da assinatura. CARLOS MUTA Desembargador Federal | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 407407891 · 28/10/2026 | última movimentação: 13/11/2026 20:48 · Deliberado em Sessão - Julgado - Mérito · Etiquetas \"2026-10-26 SESSÃO\", \"2026-11-13 SESSÃO\", \"Dalete\" e \"sentença anulada\" · Adiado na sessão de 26/10/2026 · Parecer de mérito do MPF (ID 351642174)",
+     "assuntoDet": "Pensão por morte — apelação já julgada (certidão de julgamento de 13/11/2026)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ],
+     "obsGeral": "Pensão por morte concedida pela sentença (ID 341580183) a Maria Eduarda Rodrigues Matoso e às irmãs, desde o óbito para a menor e com rateio desde a DER (27/05/2019). A Turma negou provimento à apelação do INSS em 13/11/2026. Antes, o Relator determinou a regularização da representação (IDs 403413909 e 406796119); a autora juntou procuração e justificativa em 28/10/2026 (ID 407404532)."
     },
     "lote": {
      "id": "adp-ap-3s",
      "item": 29,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Index",
+    "tempest": "Não se aplica",
+    "preparo": "Não se aplica",
+    "prelim": "Sem preliminares",
+    "repres": "Regular",
+    "midias": "Não se aplica",
+    "mpf": "Incapaz (178, II)",
+    "parecer": "Com parecer",
+    "resJulg": "Ato a proferir: a Turma negou provimento à apelação na sessão de 13/11/2026 (certidão ID 411089244); a lista extraída não traz o acórdão assinado ‖ Proposta pelos precedentes: Sem minuta de mérito: conferir a juntada do acórdão (relatório, voto e ementa) e a publicação [VALIDAR] [VALIDAR: Juntada do acórdão assinado; Data da sentença (ID 341580183)]"
    }
   },
   {
