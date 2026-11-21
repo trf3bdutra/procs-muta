@@ -114,3 +114,5 @@ mark.edp-f{background:var(--warn-soft,rgba(224,166,79,.2));color:inherit;border-
 .ed-vm button.on,.ed-vm button:hover{background:var(--gold-soft,rgba(212,171,88,.14))}
 .ed-vm-v{padding:8px;font-size:12px;color:var(--mut,#8a8f98)}
 .ed-grid .edf:has(textarea){grid-column:1/-1}
+/* dentro do painel do desembargador (/editor/?cmt=1): quem fecha é a barra do painel */
+html.ed-cmt [data-edx]{display:none!important}

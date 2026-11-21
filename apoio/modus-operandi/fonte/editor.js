@@ -8,6 +8,11 @@ var EDS={col:'mod',id:null,q:'',tipoNovo:'preferencia',token:'',conf:null,dirty:
   orig:{mod:{},par:{},pec:{},dir:{},nor:{}},dlg:'',restaura:null,lido:false};
 var EDCOL={mod:'Modelos-matriz',par:'Parágrafos-padrão',pec:'Peças do Editorial',dir:'Diretrizes',nor:'Normas'};
 var EDARQ={mod:'modelos',par:'paragrafos',pec:'pecas',dir:'diretrizes',nor:'normas'};
+/* aberto dentro do painel do desembargador (/editor/?cmt=1): grava em nome do CMT, sem os modelos-matriz,
+   e depois de gravar oferece avisar a equipe (mural e notificações de todos) */
+var EDCMT=!!window.VDM_PAGINA_EDITOR&&/[?&]cmt=1(?:&|$)/.test(location.search);
+var EDCMTK=(function(){try{return localStorage.getItem('cmt_k')||sessionStorage.getItem('cmt_k')||'';}catch(e){return '';}})();
+if(EDCMT){delete EDCOL.mod;EDS.col='par';document.documentElement.classList.add('ed-cmt');}
 /* gravação pelo servidor do site (login da Ex Officio + acesso de editor) */
 function edSrv(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
 var EDK='vdm-ed-rascunho-v1';
@@ -38,7 +43,7 @@ function edPoe(r,n){Object.keys(r).forEach(function(k){delete r[k];});Object.key
 function edToca(c,r,novo){if(!(r.id in EDS.orig[c]))EDS.orig[c][r.id]=novo?'__novo__':edJ(r);}
 function edSit(c,id){var o=EDS.orig[c][id];if(o===undefined)return '';var cur=edAcha(c,id);
   if(o==='__novo__')return cur?'novo':'';if(!cur)return 'excluído';return edJ(cur)===o?'':'editado';}
-function edPendentes(){var P=[];Object.keys(EDS.orig).forEach(function(c){Object.keys(EDS.orig[c]).forEach(function(id){var s=edSit(c,id);if(!s){delete EDS.orig[c][id];return;}
+function edPendentes(){var P=[];Object.keys(EDS.orig).forEach(function(c){if(EDCMT&&!EDCOL[c])return;Object.keys(EDS.orig[c]).forEach(function(id){var s=edSit(c,id);if(!s){delete EDS.orig[c][id];return;}
   var cur=edAcha(c,id),r=cur||JSON.parse(EDS.orig[c][id]);P.push({col:c,id:id,sit:s,t:edRot(c,r).t});});});return P;}
 function edSujo(c){return Object.keys(EDS.orig[c]).some(function(id){return !!edSit(c,id);});}
 function edGuarda(){var P=edPendentes();try{if(!P.length){localStorage.removeItem(EDK);return;}
@@ -230,6 +235,7 @@ document.addEventListener('click',function(e){
   if(e.target.closest('[data-edabre]')){edAbrir();return;}
   if(!o)return;
   if(e.target.closest('[data-edx]')){edFechar();return;}
+  if((b=e.target.closest('[data-edntf]'))){edNotificar(b);return;}
   if((b=e.target.closest('[data-edcol]'))){if(EDS.dirty&&!edAplicar(true))return;EDS.col=b.getAttribute('data-edcol');EDS.id=null;EDS.q='';EDS.conf=null;edRender();return;}
   if((b=e.target.closest('[data-edid]'))){edVai(b.getAttribute('data-edid'));return;}
   if(e.target.closest('[data-ednovo]')){edNovo();return;}
@@ -294,7 +300,7 @@ function edArquivo(c){var a=EDM.arquivos[EDARQ[c]],agora=edAgora();
   if(c==='pec')return {path:a.path,txt:JSON.stringify(ED.pecas,null,2)+'\n'};
   if(c==='nor'){var o={};Object.keys(a.head).forEach(function(k){o[k]=a.head[k];});o.atualizadoEm=agora.slice(0,10);o.registros=edLimpa(edListaDe('nor'));return {path:a.path,txt:JSON.stringify(o,null,1)+'\n'};}
   return {path:a.path,txt:JSON.stringify({schema:ED.padrao.schema,versao:ED.padrao.versao,atualizadoEm:agora,registros:ED.padrao.registros},null,1)+'\n'};}
-function edMudados(){return Object.keys(EDARQ).filter(edSujo).map(edArquivo);}
+function edMudados(){return Object.keys(EDARQ).filter(function(c){return (!EDCMT||EDCOL[c])&&edSujo(c);}).map(edArquivo);}
 function edZip(){var F=edMudados();if(!F.length)return;var bl=zipStore(F.map(function(f){return {n:f.path,d:f.txt};}));baixarBlob(new Blob([bl],{type:'application/zip'}),'modus-operandi-alteracoes-'+edHoje()+'.zip');toast('Arquivos gerados nos caminhos do repositório; o rascunho continua guardado até o envio');}
 function edResumo(){var c={};edPendentes().forEach(function(l){var k=EDCOL[l.col];c[k]=(c[k]||0)+1;});return Object.keys(c).map(function(k){return k.toLowerCase()+': '+c[k];}).join('; ');}
 function edDlgToken(){var F=edMudados(),P=edPendentes();return '<div class="ed-dlg" role="dialog" aria-label="Gravar no GitHub"><div class="ed-dlgc"><h3>Gravar no GitHub</h3><p class="meta">Um commit em <b>'+esc(EDM.repo)+'</b> ('+esc(EDM.ramo)+') com '+F.map(function(f){return '<code>'+esc(f.path)+'</code>';}).join(', ')+'. Em seguida o GitHub valida a base e reconstrói o Compendium.</p>'+
@@ -306,12 +312,24 @@ function edGh(caminho,opt){opt=opt||{};return fetch('https://api.github.com/repo
 function edEnviarSrv(msg){var P=edPendentes();if(!P.length)return;var C={};
   P.forEach(function(p){var L=edListaDe(p.col),cur=edAcha(p.col,p.id);(C[p.col]=C[p.col]||[]).push(p.sit==='excluído'?{op:'del',id:p.id,orig:EDS.orig[p.col][p.id]}:{op:'set',id:p.id,rec:edLimpa(cur),orig:EDS.orig[p.col][p.id],idx:L.indexOf(cur)});});
   var bt=$('[data-edenviar]');if(bt)bt.disabled=true;edSt('Gravando…');
-  fetch('/api/editor',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify({msg:msg,colecoes:C})})
+  var Pn=P.map(function(l){return EDCOL[l.col]+' · '+l.sit+' · '+l.t;});
+  fetch('/api/editor',{method:'POST',credentials:'same-origin',cache:'no-store',headers:Object.assign({'Content-Type':'application/json'},EDCMT?{'x-cmt':'1','x-cmt-chave':EDCMTK}:{}),body:JSON.stringify({msg:msg,colecoes:C})})
   .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw new Error(j.erro||('HTTP '+r.status));return j;});})
   .then(function(j){EDS.orig={mod:{},par:{},pec:{},dir:{},nor:{}};edGuarda();
-    EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Gravado</h3><p>'+j.alteracoes+' alteraç'+(j.alteracoes>1?'ões':'ão')+' no commit <a href="'+esc(j.url)+'" target="_blank" rel="noopener">'+esc(String(j.commit).slice(0,7))+'</a>. O GitHub valida a base e reconstrói o Compendium em alguns minutos; até lá, esta página mostra a versão editada.</p><div class="e-dacts"><button class="btn" data-eddlgx>Fechar</button></div></div></div>';edRender();})
+    EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>Gravado</h3><p>'+j.alteracoes+' alteraç'+(j.alteracoes>1?'ões':'ão')+' no commit <a href="'+esc(j.url)+'" target="_blank" rel="noopener">'+esc(String(j.commit).slice(0,7))+'</a>. O GitHub valida a base e reconstrói o Compendium em alguns minutos; até lá, esta página mostra a versão editada.</p>'+
+      (EDCMT?'<label class="edf"><span>Aviso à equipe</span><input id="ed-ntf-t" maxlength="160" value="Compendium atualizado"></label>'+
+        '<label class="edf"><span>Mensagem</span><textarea id="ed-ntf-m" rows="5" maxlength="2000">'+esc(Pn.slice(0,20).join('\n')+(Pn.length>20?'\n+ '+(Pn.length-20)+' alterações':''))+'</textarea></label>'+
+        '<p class="meta">Vai para o mural e para as notificações de toda a equipe, em nome do CMT.</p>':'')+
+      '<div class="e-dacts">'+(EDCMT?'<button class="btn" data-edntf>Notificar equipe</button>':'')+'<button class="btn'+(EDCMT?' ghost':'')+'" data-eddlgx>Fechar</button></div><p class="meta" id="ed-st"></p></div></div>';edRender();})
   .catch(function(e){edSt('Não foi possível gravar: '+e.message);if(bt)bt.disabled=false;});}
 function edSt(t){var s=$('#ed-st');if(s)s.textContent=t;}
+/* aviso à equipe depois de gravar pelo painel do desembargador: mural e notificação de todos, em nome do CMT */
+function edNotificar(b){var t=($('#ed-ntf-t')||{}).value||'',m=($('#ed-ntf-m')||{}).value||'';if(!t.trim()){edSt('Escreva o título do aviso.');return;}
+  b.disabled=true;edSt('Avisando a equipe…');
+  fetch('/api/painel?cmt=1',{method:'POST',credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json','x-cmt-chave':EDCMTK},body:JSON.stringify({acao:'aviso',titulo:t.trim(),texto:m.trim()})})
+  .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw new Error(j.erro||('HTTP '+r.status));return j;});})
+  .then(function(){b.textContent='Equipe notificada';edSt('Aviso publicado no mural e enviado às notificações de toda a equipe.');})
+  .catch(function(e){b.disabled=false;edSt('Não foi possível avisar: '+e.message);});}
 function edEnviar(msg){
   var F=edMudados();if(!F.length)return;var ref,tree;edSt('Conferindo a versão no GitHub…');
   Promise.all(F.map(function(f){var a=Object.keys(EDM.arquivos).map(function(k){return EDM.arquivos[k];}).filter(function(x){return x.path===f.path;})[0];
