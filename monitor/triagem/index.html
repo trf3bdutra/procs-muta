@@ -335,6 +335,16 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-svg button.pri,.cwe-svg button.pub{height:28px;padding:0 12px;border-radius:7px;font-weight:700;font-size:12px;cursor:pointer}
 .cwe-svg button.pri{background:var(--t);border:1px solid var(--t);color:#fff}
 .cwe-svg button.pub{background:#eef6f2;border:1px solid var(--t);color:var(--t)}
+.cwe-dlg-bg{position:fixed;inset:0;z-index:95;background:rgba(18,40,38,.38)}
+.cwe-dlg{position:fixed;z-index:96;left:50%;top:6vh;transform:translateX(-50%);width:min(900px,calc(100vw - 32px));max-height:88vh;display:flex;flex-direction:column;background:var(--w);border:1px solid var(--b);border-top:3px solid var(--t);border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.cwe-dlg-h{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--l)}.cwe-dlg-h b{font-size:16px}.cwe-dlg .x{border:0;background:none;font-size:20px;color:var(--m2);cursor:pointer}
+.cwe-dlg-c{padding:12px 16px;overflow:auto;display:flex;flex-direction:column;gap:10px}
+.cwe-dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:10px 16px;border-top:1px solid var(--l)}.cwe-dlg-f button{height:32px;padding:0 14px;border:1px solid var(--b2);border-radius:8px;background:var(--p);font-weight:700;cursor:pointer}.cwe-dlg-f .pri{background:var(--t);border-color:var(--t);color:#fff}
+.cwe-nvg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) auto;gap:8px;align-items:end}.cwe-nvg input{width:100%;min-width:0;padding:0 4px!important;font-size:11.5px!important}.cwe-nvg label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:700}.cwe-nvg label small{display:block;font-weight:400;font-size:10.5px;color:var(--m2)}
+.cwe-nvg input,.cwe-nvj select{height:30px;border:1px solid var(--b2);border-radius:7px;padding:0 8px;font:12px ui-monospace,monospace;background:var(--w);color:var(--tx)}.cwe-nvg label.big input{border-color:var(--t)}
+.cwe-nvg .lk{border:0;background:none;color:var(--t);text-decoration:underline;cursor:pointer;font-weight:600;font-size:12px;justify-self:start}
+.cwe-nvs{display:flex;flex-direction:column;gap:6px;align-items:flex-start}.cwe-nvs .cwe-jsub{width:100%}.cwe-nvj{display:flex;flex-direction:column;gap:4px}.cwe-nvj>div{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:2px 10px;align-items:center;padding:4px 0;border-bottom:1px solid var(--l)}.cwe-nvj>div small{grid-column:1;color:var(--m2);font-size:11px}.cwe-nvj>div select{grid-row:1/3;grid-column:2}.cwe-nvj>div .x{grid-row:1/3;grid-column:3}
+.cwe-nvt{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cwe-nvt label{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;padding:10px;border:1px solid var(--b2);border-radius:10px;cursor:pointer}.cwe-nvt label small{grid-column:2;color:var(--m2);font-size:11.5px}.cwe-nvt label.on{border-color:var(--t);background:#eef6f2}
 .mksv{display:flex;align-items:center;gap:8px;padding:0 10px}.mksv .pri{height:26px;padding:0 10px;border-radius:7px;border:1px solid var(--t);font-weight:700;font-size:11.5px}
 .cwe-mkg label.pend input{border-color:#e0b84a;background:#fff8e1}
 .cwe-mked .cwe-av{margin:0;border-left:3px solid #c0392b;background:#fbeeea;padding:8px 12px;border-radius:8px;font-size:12.5px}
@@ -560,8 +570,8 @@ html[data-theme="dark"] .cwe-esteira i.feito{color:#0e2132}
 .cwe-segs button{height:30px;padding:0 10px;border:0;border-left:1px solid var(--b2);background:var(--w);font-weight:700;font-size:11.5px;color:var(--m)}.cwe-segs button:first-child{border-left:0}
 .cwe-segs button[aria-pressed="true"]{background:var(--t);color:var(--w)}
 .cwe-mesa-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:14px 0 8px}.cwe-mesa-bar small{color:var(--m,#6b7471);flex:1}
-.cwe-mesa-slot{border:1px solid var(--b);border-radius:14px;background:var(--w);margin-bottom:18px}
-#cwe-mesa-host{position:absolute;z-index:20;display:none}#cwe-mesa-host iframe{width:100%;height:100%;border:0;border-radius:14px;display:block;background:#fff}
+.cwe-mesa-slot{margin-bottom:18px}
+#cwe-mesa-host{position:absolute;z-index:20;display:none}#cwe-mesa-host iframe{width:100%;height:100%;border:0;display:block;background:transparent}
 #cwe-mesa-host.full{position:fixed!important;inset:14px!important;width:auto!important;height:auto!important;z-index:2147480500;box-shadow:0 0 0 100vmax rgba(18,40,38,.45),0 10px 40px rgba(0,0,0,.25);border-radius:14px}
 .cwe-old{margin-top:18px}.cwe-old>summary{cursor:pointer;font-size:13px;color:var(--m,#6b7471);padding:8px 0}
 .cwe-carga{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
@@ -794,7 +804,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 </head>
 <body>
 <header id="top">
-  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT · Caput</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button><button type="button" data-mod="coordenacao" title="Equipe, distribuição e acompanhamento">Coordenação</button><button type="button" data-mod="comunicacao" title="Avisos, solicitações e canais">Comunicação</button><button type="button" data-mod="inteligencia" title="Análises e relatórios">Inteligência</button><button type="button" data-mod="chefia" title="Regras, acervo e administração">Chefia</button></nav></div></div></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT · Caput</span><div class="mc-cad"><nav id="modulos" aria-label="Módulos"><button type="button" data-mod="triagem" class="on" title="Triagem do acervo">Triagem</button><button type="button" data-mod="pautas" title="Pautas de julgamento">Pautas</button><button type="button" data-mod="coordenacao" title="Equipe, distribuição e acompanhamento">Coordenação</button><button type="button" data-mod="comunicacao" title="Avisos, solicitações e canais">Comunicação</button><button type="button" data-mod="chefia" title="Regras, acervo e administração">Chefia</button></nav></div></div></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" hidden title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" hidden title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
@@ -1016,7 +1026,7 @@ async function gravar() {
   } catch (e) { ERRO = (e && e.message) || String(e); TENT++; toast('Não gravou: ' + ERRO + '. Nova tentativa em instantes.', true); }
   GRAVANDO = false; pintaGrava();
   if (pendentes()) agendar(ERRO ? Math.min(120000, 10000 * TENT) : 1500);
-  if (ABA === 'inteligencia') render(); }
+  if (ABA === 'chefia') render(); }
 W.addEventListener('beforeunload', (e) => { if (pendentes() || GRAVANDO) { e.preventDefault(); e.returnValue = ''; } });
 
 /* ===================== abas e roteamento ===================== */
@@ -1029,13 +1039,13 @@ function abaDaRota() {
   if (h) { if (h.indexOf('esc=') === 0) return 'esc:' + h.slice(4); if (h === 'inicio') return 'inteligencia'; if (ROTA_SLUG[h]) return h; }
   const m = p.match(/^\/caput\/([a-z]+)(?:\/([^/]+))?$/);
   if (m) { if (m[1] === 'triagem') return 'fila'; if (m[1] === 'escaninhos' && m[2]) return 'esc:' + decodeURIComponent(m[2]); if (Object.values(ROTA_SLUG).indexOf(m[1]) >= 0) return m[1]; }
-  if (/^\/caput$/.test(p)) return 'inteligencia';
+  if (/^\/caput$/.test(p)) return 'chefia';
   if (/^\/pautas$/.test(p)) return 'pautas';
   return 'fila';
 }
-function caminhoDaAba(a) { return a.indexOf('esc:') === 0 ? '/caput/escaninhos/' + encodeURIComponent(a.slice(4)) : '/caput/' + (ROTA_SLUG[a] || 'triagem'); }
+function caminhoDaAba(a) { if (a === 'inteligencia') a = 'chefia'; return a.indexOf('esc:') === 0 ? '/caput/escaninhos/' + encodeURIComponent(a.slice(4)) : '/caput/' + (ROTA_SLUG[a] || 'triagem'); }
 function rotear() {
-  let a = abaDaRota();
+  let a = abaDaRota(); if (a === 'inteligencia') a = 'chefia';
   if (a.indexOf('esc:') === 0) { const id = a.slice(4); if (ESC.escaninhos.some((e) => e.id === id)) { if (ABERTAS.indexOf(id) < 0) { ABERTAS.push(id); LS.set('tri_abas', ABERTAS); } } else a = 'escaninhos'; }
   ABA = a;
   const alvo = caminhoDaAba(a); if (location.pathname !== alvo || location.hash) { try { history.replaceState(history.state, '', alvo + location.search); } catch (e) {} }
@@ -1047,8 +1057,7 @@ const ir = (h) => { const a = h.indexOf('esc=') === 0 ? 'esc:' + h.slice(4) : h 
 function pintaAbas() {
   ABERTAS = ABERTAS.filter((id) => ESC.escaninhos.some((e) => e.id === id));
   const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
-  $('#abas').innerHTML = t('fila', 'Triagem', PRONTO ? U.length : null) +
-    tabEsc();
+  $('#abas').innerHTML = tabEsc();
   /* módulos no canto esquerdo: Triagem | Pautas; na Pautas, as abas da triagem ficam ocultas */
   const mod = ABA === 'pautas' ? 'pautas' : ABA === 'coordenacao' ? 'coordenacao' : ABA === 'comunicacao' ? 'comunicacao' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; $('#abas').hidden = mod !== 'triagem'; if (mod === 'triagem') ULT_TRI = ABA;
   D.querySelectorAll('#modulos [data-mod]').forEach((b) => { const on = b.dataset.mod === mod; b.classList.toggle('on', on); b.setAttribute('aria-current', on ? 'page' : 'false'); }); }
@@ -1094,9 +1103,8 @@ function render() {
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
   D.title = 'Caput · ' + tit;
   if (naPauta) { $('#rodape').hidden = true; D.body.classList.remove('rod-min'); try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
-  if (ABA === 'inteligencia') { m.innerHTML = vInteligencia(); setTimeout(cgRelSincronizar,0); }
-  else if (ABA === 'chefia') { m.innerHTML = vChefia(); setTimeout(montarChefia,0); }
-  else if (ABA === 'coordenacao') m.innerHTML = vCoordenacao();
+  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); }, 0); }
+  else if (ABA === 'coordenacao') { m.innerHTML = vCoordenacao(); setTimeout(montarCoord, 0); }
   else if (ABA === 'comunicacao') { m.innerHTML = vComunicacao(); setTimeout(cgComCarregar,0); }
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
   else if (ABA === 'escaninhos') m.innerHTML = vEscaninhos();
@@ -1109,23 +1117,32 @@ let CG_CHEFIA_ABA='escopo';
 function equipeAtual(){ try { const s=SES(), e=s && (typeof s.equipe==='function'?s.equipe():s.equipe); return Array.isArray(e)?e:[]; } catch(e){ return []; } }
 function montarChefia(){
   const alvo=$('#cg-regras'); if(!alvo||!W.CMTRegrasGerais) return;
-  W.CMTRegrasGerais.embutir(alvo,{ motor:M, abrirMotor:telaMotor, pagina:'chefia', aba:CG_CHEFIA_ABA,
+  W.CMTRegrasGerais.embutir(alvo,{ motor:M, abrirMotor:telaMotor, pagina:'chefia', aba:CG_CHEFIA_ABA, abas:['escopo','destino','acervo','calendario','etiquetas'],
     contagem:()=>{ const o={}; (FONTE||((core()||{}).rows)||[]).forEach(r=>{const t=String(r.tarefa_atual||'').trim();if(t)o[t]=(o[t]||0)+1;}); return o; },
     aoGravarEscopo:(j)=>{ ESCOPO={triar:(j.triar||[]).map(x=>[x.tarefa,x.motivo||'']),ignorar:j.ignorar||{},lido:true}; montaEscopo(); construir(); toast('Escopo da triagem atualizado.'); }
   });
 }
 function vChefia(){
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Central de gestão · administração do gabinete</p><h1>Chefia.</h1><p>Regras, equipe, calendário e governança ficam nesta página. Os diálogos continuam apenas como atalhos contextuais nas demais áreas.</p></div></div>'+
-    '<div class="cg-grid" style="margin-bottom:14px"><section class="cg-box"><header>Acervo e fontes</header><p>Importação PJe/Power BI, atualização da fonte e complementação pelo DataJud.</p><div class="cg-actions"><button class="btn pri" data-cg-acervo="1">Importar / atualizar acervo</button></div><p>'+nf(ALL.length)+' processos na fonte · '+nf(U.length)+' em triagem</p></section>'+
-    '<section class="cg-box"><header>Atalhos administrativos</header><div class="cg-actions"><button class="btn" data-cg-chefia="equipe">Equipe</button><button class="btn" data-cg-chefia="produtividade">Metas e pesos</button><button class="btn" data-cg-chefia="calendario">Calendário</button><button class="btn" data-cg-chefia="designacao">Designação</button></div></section></div>'+
-    '<div id="cg-regras" aria-label="Regras gerais integradas"><p class="cg-status">Carregando regras…</p></div></div>';
+  const apt=U.filter(o=>o.apto&&!o.pend.length).length;
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Central de gestão</p><h1>Chefia.</h1><p>Acervo, regras da triagem, calendário e relatórios do gabinete.</p></div></div>'+
+    '<div class="cg-grid" style="margin-bottom:14px"><section class="cg-box"><header>Acervo e fontes</header><p>Planilhas do PJe e do Power BI → carga → atualização da fonte pelo GitHub (Action), com complementação pelo DataJud.</p><div class="cg-actions"><button class="btn pri" data-cg-acervo="1">Importar / atualizar acervo</button></div><p>'+nf(ALL.length)+' processos na fonte · '+nf(U.length)+' em triagem</p></section>'+
+    '<section class="cg-box"><header>Indicadores</header><div class="cg-kpis" style="margin:0"><div><b>'+nf(ALL.length)+'</b><span>processos na fonte</span></div><div><b>'+nf(U.length)+'</b><span>em triagem</span></div><div><b>'+nf(apt)+'</b><span>aptos sem pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div></section></div>'+
+    '<div id="cg-regras" aria-label="Regras da triagem, acervo e calendário"><p class="cg-status">Carregando regras…</p></div>'+
+    '<div class="cg-head" style="margin-top:22px"><div><p class="k">Inteligência</p><h1 style="font-size:24px">Relatórios.</h1><p>Catálogo, prévia editável e exportação em PDF, Word, Excel ou CSV.</p></div></div>'+vRelatorios()+'</div>';
+}
+/* Coordenação: equipe, regras de designação e de produtividade (regras gerais embutidas), operação diária e competências */
+let CG_COORD_ABA='equipe';
+function montarCoord(){
+  const alvo=$('#cg-coord'); if(!alvo||!W.CMTRegrasGerais) return;
+  W.CMTRegrasGerais.embutir(alvo,{ motor:M, abrirMotor:telaMotor, pagina:'coordenacao', aba:CG_COORD_ABA, abas:['equipe','designacao','produtividade'] });
 }
 function vCoordenacao(){
-  const eq=equipeAtual(), serv=[...new Set(U.map(o=>o.minutante).filter(Boolean))];
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Equipe e execução</p><h1>Coordenação.</h1><p>Distribuição, acompanhamento do time, diligências e organização diária do gabinete.</p></div></div>'+
-    '<div class="cg-kpis"><div><b>'+nf(eq.length||serv.length)+'</b><span>pessoas na equipe</span></div><div><b>'+nf(serv.length)+'</b><span>servidores com processos na triagem</span></div><div><b>'+nf(U.filter(o=>o.pend.length).length)+'</b><span>processos com pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
-    '<div class="cg-grid"><section class="cg-box"><header>Equipe e capacidade</header><div class="cg-link"><span><b>Cadastro e funções</b><small>Perfis, atribuições e participação em designação automática</small></span><button data-cg-chefia="equipe">Abrir</button></div><div class="cg-link"><span><b>Metas e pesos</b><small>Capacidade, produtividade e critérios de redistribuição</small></span><button data-cg-chefia="produtividade">Abrir</button></div><div class="cg-link"><span><b>Designação</b><small>Critérios gerais e quem recebe cada tipo de processo</small></span><button data-cg-chefia="designacao">Abrir</button></div><div class="cg-link"><span><b>Competências da equipe</b><small>Especialidade, prefere, evita, experiência, ranking por assunto e produção no tempo (abaixo)</small></span><button type="button" onclick="document.getElementById(\'cg-comp\').scrollIntoView({behavior:\'smooth\'})">Ver</button></div></section>'+
-    '<section class="cg-box"><header>Operação diária</header><div class="cg-link"><span><b>Office · equipe e diligências</b><small>Avisos, tarefas, ausências e acompanhamento operacional</small></span><button data-cg-url="/office/#cmt">Abrir Office</button></div><div class="cg-link"><span><b>Calendário do gabinete</b><small>Sessões, marcos, feriados e agenda</small></span><button data-cg-chefia="calendario">Abrir</button></div><div class="cg-link"><span><b>Pautas</b><small>Composição e andamento das próximas sessões</small></span><button data-cg-go="pautas">Abrir</button></div></section></div></div>';
+  let eq=[]; try { eq=(M()?.CMTSessao?.estado?.().equipe)||[]; } catch(e) { eq=[]; } if(!eq.length) eq=equipeAtual();
+  const ativos=eq.filter(m=>m.auto!==false&&(m.minuta||m.correcao||m.papel)), serv=[...new Set(U.map(o=>o.minutante).filter(Boolean))];
+  return '<div class="wrap"><div class="cg-head"><div><p class="k">Equipe e execução</p><h1>Coordenação.</h1><p>Equipe, regras de designação e de produtividade, operação diária e competências.</p></div></div>'+
+    '<div class="cg-kpis"><div><b>'+nf(eq.length||serv.length)+'</b><span>pessoas no cadastro</span></div><div><b>'+nf(ativos.length)+'</b><span>na designação automática</span></div><div><b>'+nf(U.filter(o=>o.pend.length).length)+'</b><span>processos com pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
+    '<div id="cg-coord" aria-label="Equipe e regras" style="margin-bottom:14px"><p class="cg-status">Carregando equipe e regras…</p></div>'+
+    '<div class="cg-grid"><section class="cg-box"><header>Operação diária</header><div class="cg-link"><span><b>Office · equipe e diligências</b><small>Avisos, tarefas, ausências e acompanhamento operacional</small></span><button data-cg-url="/office/#cmt">Abrir Office</button></div><div class="cg-link"><span><b>Pautas</b><small>Composição e andamento das próximas sessões</small></span><button data-cg-go="pautas">Abrir</button></div></section></div></div>';
 }
 
 const CG_REL_CAT=[
@@ -1170,18 +1187,16 @@ function cgRelHtml(){
     grupos+(CG_REL.caps.tabela?'<h2>Processos</h2><table><thead><tr><th>Processo</th><th>Classe</th><th>Assunto</th><th>Tarefa</th><th>Servidor</th><th>Destino</th></tr></thead><tbody>'+rows+'</tbody></table>'+obs:'')+
     (CG_REL.caps.obs?'<h2>Observações</h2><p>Prévia editável: ajuste títulos, notas e trechos diretamente antes de exportar.</p>':'');
 }
-function vInteligencia(){
-  const d=cgRelDef(),L=cgRelLista(CG_REL.id),apt=U.filter(o=>o.apto&&!o.pend.length).length;
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Indicadores e relatórios</p><h1>Inteligência.</h1><p>Estúdio unificado de relatórios, com catálogo, prévia editável e exportação em vários formatos.</p></div></div>'+
-    '<div class="cg-kpis"><div><b>'+nf(ALL.length)+'</b><span>processos na fonte</span></div><div><b>'+nf(U.length)+'</b><span>em triagem</span></div><div><b>'+nf(apt)+'</b><span>aptos sem pendência</span></div><div><b>'+nf(sessoes().length)+'</b><span>sessões futuras</span></div></div>'+
-    '<section class="cg-studio"><aside class="cg-cat"><h3>Relatórios</h3>'+CG_REL_CAT.map(x=>'<button type="button" data-cg-rmodel="'+x[0]+'" class="'+(x[0]===CG_REL.id?'on':'')+'">'+esc(x[1])+'<small>'+esc(x[2])+'</small></button>').join('')+'</aside>'+
+function vRelatorios(){
+  const d=cgRelDef(),L=cgRelLista(CG_REL.id);
+  return '<section class="cg-studio"><aside class="cg-cat"><h3>Relatórios</h3>'+CG_REL_CAT.map(x=>'<button type="button" data-cg-rmodel="'+x[0]+'" class="'+(x[0]===CG_REL.id?'on':'')+'">'+esc(x[1])+'<small>'+esc(x[2])+'</small></button>').join('')+'</aside>'+
     '<div class="cg-prev"><article id="cg-rel-prev" class="cg-paper" contenteditable="true" spellcheck="false" aria-label="Prévia editável do relatório">'+cgRelHtml()+'</article></div>'+
     '<aside class="cg-set"><h3>Relatório</h3><label>Título<input id="cg-rel-title" value="'+esc(CG_REL.titulo||d[1])+'"></label><label>Subtítulo<input id="cg-rel-sub" value="'+esc(CG_REL.sub||d[2])+'"></label>'+
     '<label>Formato<select id="cg-rel-format"><option value="pdf">PDF</option><option value="doc">Word (.doc)</option><option value="xlsx">Excel (.xlsx)</option><option value="csv">CSV</option></select></label>'+
     '<div class="cg-checks" style="display:grid"><label><input type="checkbox" data-cg-cap="resumo" '+(CG_REL.caps.resumo?'checked':'')+'> Resumo</label><label><input type="checkbox" data-cg-cap="tabela" '+(CG_REL.caps.tabela?'checked':'')+'> Tabela/listagem</label><label><input type="checkbox" data-cg-cap="obs" '+(CG_REL.caps.obs?'checked':'')+'> Observações</label></div>'+
-    '<p class="cg-status">'+nf(L.length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.</p><div class="cg-exp"><button class="btn pri" data-cg-rel-export="pdf">PDF</button><button class="btn" data-cg-rel-export="doc">Word</button><button class="btn" data-cg-rel-export="xlsx">Excel</button><button class="btn" data-cg-rel-export="csv">CSV</button></div></aside></section>'+
-    '<p class="cg-status" style="margin-top:14px">A visão geral da triagem (sem caminho, prontos, candidatos à monocrática, destino provável) fica no topo da <a href="/caput/triagem" data-cg-go="fila">Triagem</a>.</p></div>';
+    '<p class="cg-status">'+nf(L.length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.</p><div class="cg-exp"><button class="btn pri" data-cg-rel-export="pdf">PDF</button><button class="btn" data-cg-rel-export="doc">Word</button><button class="btn" data-cg-rel-export="xlsx">Excel</button><button class="btn" data-cg-rel-export="csv">CSV</button></div></aside></section>';
 }
+function vInteligencia(){ return vChefia(); }
 function cgRelSincronizar(){ const f=$('#cg-rel-format'); if(f)f.value=CG_REL.formato; }
 function cgRelAtualizar(){ const p=$('#cg-rel-prev'); if(p)p.innerHTML=cgRelHtml(); const st=$('.cg-set .cg-status'); if(st)st.textContent=nf(cgRelLista(CG_REL.id).length)+' registro(s) neste modelo. A prévia pode ser editada diretamente.'; }
 function cgRelRows(){
@@ -1849,7 +1864,7 @@ $('#bt-regras').addEventListener('click', () => { if (!PM() || !(M() && M().CMTS
 $('#bt-acervo').addEventListener('click', () => { if (!PM()) { toast('O motor ainda está abrindo; tente em instantes.', true); return; } abrirAcervo(); });
 D.addEventListener('click', (e) => {
  const regra=e.target.closest('[data-cg-regra]'); if(regra){abrirRegras(regra.dataset.cgRegra);return;}
- const ch=e.target.closest('[data-cg-chefia]'); if(ch){CG_CHEFIA_ABA=ch.dataset.cgChefia||'escopo';ir('chefia');return;}
+ const ch=e.target.closest('[data-cg-chefia]'); if(ch){const k=ch.dataset.cgChefia||'escopo'; if(/^(equipe|designacao|produtividade)$/.test(k)){CG_COORD_ABA=k;ir('coordenacao');} else {CG_CHEFIA_ABA=k;ir('chefia');} return;}
  const go=e.target.closest('[data-cg-go]'); if(go){ir(go.dataset.cgGo);return;}
  const url=e.target.closest('[data-cg-url]'); if(url){W.location.href=url.dataset.cgUrl;return;}
  if(e.target.closest('[data-cg-acervo]')){$('#bt-acervo').click();return;}
@@ -2045,6 +2060,9 @@ function portaToken() { return new Promise((fim) => {
     est.mkPend = {}; if (ss.publicada || ss.marcosPub) { est.pubPend = est.pubPend || {}; est.pubPend[ss.id] = true; }
     setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 300);
     A.msg('Alterações salvas. Gravando no procs-muta…' + (ss.publicada || ss.marcosPub ? ' Use “Publicar alterações” para levar à Ex Officio.' : '')); return true; }
+  const novoMag = (nome, cargo) => ({ id: 'mag-' + semAc(nome).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), nome, cargo, papel: /convocad/i.test(cargo) ? 'vogal (juiz federal convocado)' : 'vogal' });
+  function cadMag(m, data) { const pm = A.getMotor()?.ProcsMuta; if (!pm?.ler || !pm?.gravar) { A.msg('Motor indisponível para gravar o cadastro de magistrados.', true); return; }
+    pm.ler('apoio/magistrados.json').then((t) => { const doc = JSON.parse(t); doc.registros = doc.registros || []; if (!doc.registros.some((x) => x.id === m.id)) doc.registros.push({ id: m.id, nome: m.nome, cargo: m.cargo, atuacao: [{ orgao: 'TRF3 · Turma Regional de Mato Grosso do Sul', papel: m.papel }], aliases: [], fonte: 'Caput · julgadores da sessão de ' + A.br(data) }); doc.atualizadoEm = new Date().toISOString(); est.mag = doc.registros; return pm.gravar({ 'apoio/magistrados.json': JSON.stringify(doc, null, 1) + '\n' }, 'Cadastro de magistrados: ' + m.nome); }).then(() => { A.msg(m.nome + ' incluído no cadastro de magistrados.'); A.render(); }).catch((er) => A.msg('Não foi possível gravar o cadastro: ' + er.message, true)); }
   const alcanceDe = (sb) => sb.alcance || (sb.itens === 'todos' || !sb.itens ? 'todos' : 'itens');
   const itensTxt = (v) => v === 'todos' ? 'todos' : (v || []).join(', ');
   function itensDe(t) { t = String(t || '').trim(); if (!t || /todos/i.test(t)) return 'todos'; const out = [];
@@ -2133,6 +2151,26 @@ function portaToken() { return new Promise((fim) => {
     const T = [['num', 'Números da sessão', ''], ['julg', 'Julgadores e substituições', (nS ? ' · ' + nS : '') + (nG ? ` <span class="cwe-tg r">${nG} a indicar</span>` : '')], ['marcos', 'Marcos', '']];
     return `<div class="cwe-cabab"><button type="button" data-cwe="painel" aria-expanded="${!!pain}">Painel da sessão ${pain ? '▴' : '▾'}</button>${pain ? `<span class="cwe-ptabs" role="tablist">${T.map(([k, t, x]) => `<button type="button" role="tab" data-cwe="p-tab" data-v="${k}" aria-selected="${tab === k}">${e(t)}${x}</button>`).join('')}</span>` : nG ? `<span class="cwe-tg r" title="Etiquetas de impedimento ou suspeição pedem substituto">${nG} substituição(ões) a indicar</span>` : ''}</div>
       ${pain ? `<div class="cwe-painel">${tab === 'julg' ? julgEditor(ss, d) : tab === 'marcos' ? marcosEditor(ss) : etapa5(ss, d, true)}</div>` : ''}`; }
+  /* + Nova sessão: data, marcos, julgadores e se já há pauta oficial (importar o PDF) ou se começa pela seleção prévia */
+  function novaSessaoDlg() { const nv = est.nv, cad = magistrados().map((m) => magObj(m)).concat(nv.novos.filter((m) => !magistrados().some((x) => x.id === m.id))), fora = cad.filter((m) => !nv.comp.some((c) => c.id === m.id));
+    const opt = (L, v, vazio) => (vazio ? `<option value="">${e(vazio)}</option>` : '') + L.map((m) => `<option value="${e(m.id)}" ${m.id === v ? 'selected' : ''}>${e(m.nome)}${m.cargo ? ' · ' + e(m.cargo) : ''}</option>`).join('');
+    const ALC = [['todos', 'em todos os processos'], ['casos', 'nos casos de…'], ['impedimento', 'onde houver impedimento ou suspeição de quem sai']];
+    const novoF = nv.novo != null ? `<div class="cwe-jnovo"><b>${nv.novo === 'comp' ? 'Novo julgador (convocado)' : 'Novo magistrado como substituto'}</b><input data-cwe-nvn="nome" placeholder="Nome completo" aria-label="Nome do magistrado"><select data-cwe-nvn="cargo" aria-label="Cargo">${['Juiz Federal Convocado', 'Desembargador Federal', 'Juiz Federal'].map((c) => `<option>${c}</option>`).join('')}</select><label><input type="checkbox" data-cwe-nvn="cad" checked> incluir no cadastro de magistrados</label><button type="button" class="pri" data-cwe="nv-novo-ok">Adicionar</button><button type="button" data-cwe="nv-novo-x">Cancelar</button></div>` : '';
+    const F = [['pauta', 'Peço dia', 'pautar até'], ['inicio', 'Início', 'preparação'], ['minutas', 'Entrega', 'das minutas'], ['liberacao', 'Liberação', 'dos votos']];
+    return `<div class="cwe-dlg-bg" data-cwe="nv-x"></div><section class="cwe-dlg" role="dialog" aria-label="Nova sessão"><div class="cwe-dlg-h"><b>Nova sessão</b><button type="button" class="x" data-cwe="nv-x" aria-label="Fechar">×</button></div>
+      <div class="cwe-dlg-c"><div class="cwe-nvg"><label class="big"><span>Data da sessão<small>data do julgamento</small></span><input type="date" data-cwe-nv="data" value="${e(nv.data)}" required></label>
+        ${F.map(([k, t, o]) => `<label><span>${e(t)}<small>${e(o)}</small></span><input type="date" data-cwe-nv="f:${k}" value="${e(nv.f[k] || '')}"></label>`).join('')}
+        <button type="button" class="lk" data-cwe="nv-sug" title="Liberação e entrega pelas regras de produtividade; início hoje">Sugerir pelas regras</button></div>
+        <span class="cwe-k">JULGADORES DA SESSÃO</span>
+        <div class="cwe-nvj">${nv.comp.map((m, i) => `<div><b>${e(m.nome)}</b><small>${e(m.cargo)}</small><select data-cwe-nvj="papel" data-i="${i}" aria-label="Papel">${PAPEIS.map((p) => `<option ${p === m.papel ? 'selected' : ''}>${e(p)}</option>`).join('')}</select><button type="button" class="x" data-cwe="nv-rem" data-i="${i}" aria-label="Tirar">×</button></div>`).join('') || '<p class="cwe-nota">Sem julgadores.</p>'}
+          <select data-cwe-nvj="add" aria-label="Adicionar julgador ou convocado"><option value="">+ adicionar julgador ou convocado…</option>${fora.map((m) => `<option value="${e(m.id)}">${e(m.nome)} · ${e(m.cargo)}</option>`).join('')}<option value="__novo">Novo magistrado…</option></select>${nv.novo === 'comp' ? novoF : ''}</div>
+        <span class="cwe-k">SUBSTITUIÇÕES</span>
+        <div class="cwe-nvs">${nv.subs.map((sb, k) => `<div class="cwe-jsub"><select data-cwe-nvs="sai" data-i="${k}" aria-label="Quem sai">${opt(nv.comp, sb.sai, 'quem sai…')}</select><span>substituído por</span><select data-cwe-nvs="entra" data-i="${k}" aria-label="Quem entra">${opt(fora, sb.entra?.id || '', 'quem entra…')}<option value="__novo">Novo magistrado…</option></select><select data-cwe-nvs="motivo" data-i="${k}" aria-label="Motivo">${MOTIVOS_J.map((m) => `<option ${m === sb.motivo ? 'selected' : ''}>${m}</option>`).join('')}</select><select data-cwe-nvs="alcance" data-i="${k}" aria-label="Em quais processos">${ALC.map(([v, t]) => `<option value="${v}" ${alcanceDe(sb) === v ? 'selected' : ''}>${t}</option>`).join('')}</select>${alcanceDe(sb) === 'casos' ? `<input data-cwe-nvs="casos" data-i="${k}" value="${e(sb.casos || '')}" placeholder="assunto ou classe; separe por vírgula" aria-label="Tipo de caso">` : ''}<button type="button" class="x" data-cwe="nv-sub-rem" data-i="${k}" aria-label="Excluir a substituição">×</button></div>${nv.novo === k ? novoF : ''}`).join('') || '<p class="cwe-nota">Sem substituições: todos os processos com a composição acima.</p>'}
+          <button type="button" class="lk" data-cwe="nv-sub-add">+ substituição</button><small class="cwe-nota">Substituições por item (números da pauta) se indicam no painel da sessão, depois do PDF.</small></div>
+        <span class="cwe-k">COMO A SESSÃO COMEÇA</span>
+        <div class="cwe-nvt"><label class="${nv.tipo === 'pdf' ? 'on' : ''}"><input type="radio" name="nv-tipo" data-cwe-nv="tipo" value="pdf" ${nv.tipo === 'pdf' ? 'checked' : ''}><b>A pauta oficial já foi publicada</b><small>importar o PDF do espelho da pauta agora</small></label>
+          <label class="${nv.tipo === 'previa' ? 'on' : ''}"><input type="radio" name="nv-tipo" data-cwe-nv="tipo" value="previa" ${nv.tipo === 'previa' ? 'checked' : ''}><b>Ainda sem pauta oficial</b><small>começar pela seleção prévia, ligada a esta sessão</small></label></div></div>
+      <div class="cwe-dlg-f"><button type="button" data-cwe="nv-x">Cancelar</button><button type="button" class="pri" data-cwe="nv-ok">${nv.tipo === 'pdf' ? 'Criar e importar o PDF' : 'Criar e abrir a seleção prévia'}</button></div></section>`; }
   function marcos(ss) {
     const f0 = ss.fases || {}, pp = est.mkPend || {}, f = { pauta: pp.pauta ?? f0.pauta, inicio: pp.inicio ?? f0.inicio, minutas: pp.minutas ?? f0.minutas, liberacao: pp.liberacao ?? f0.liberacao }, inv = !!(f.inicio && f.minutas && f.inicio > f.minutas);
     const M = [['Peço dia', f.pauta, 'do calendário do tribunal', 'pauta'], ['Início', f.inicio, 'início da preparação', 'inicio'], ['Entrega', f.minutas, 'entrega das minutas', 'minutas'], ['Liberação', f.liberacao, 'liberação dos votos', 'liberacao'], ['Sessão', ss.data, 'data do julgamento', 'data']];
@@ -2175,7 +2213,7 @@ function portaToken() { return new Promise((fim) => {
     const pct = (x) => { const n = (x.itens || []).length; return n ? Math.round(100 * (x.itens || []).filter((i) => i.dataMinuta).length / n) : -1; };
     const dia = (x) => { const t = new Date(x.data + 'T12:00:00'); return isNaN(t) ? '' : SEM[t.getDay()].slice(0, 3); };
     return `<span class="cwe-k">SESSÕES</span><div class="cwe-ses">${vis.map((x) => { const p = pct(x); return `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}" aria-current="${x.id === ss.id}"><span class="sd"><b>${e(A.br(x.data))}</b><em>${e(x.data < hoje ? 'realizada' : dia(x))}</em></span>${p >= 0 ? `<span class="sp" aria-hidden="true"><i style="width:${p}%"></i></span>` : ''}<small>${e(sub(x))}</small></button>`; }).join('')}</div>
-      <button type="button" class="cwe-sesnova" data-cwt="create-session" title="Cadastrar outra sessão">+ Nova sessão</button>
+      <button type="button" class="cwe-sesnova" data-cwe="ses-nova" title="Cadastrar uma sessão: data, marcos, julgadores e como começa">+ Nova sessão</button>
       ${ant.length ? `<button type="button" class="cwe-arq" data-cwe="arq">${est.arq ? 'Ocultar as realizadas' : 'Ver realizadas e arquivadas (' + ant.length + ')'}</button>` : ''}`;
   }
 
@@ -2352,7 +2390,11 @@ function portaToken() { return new Promise((fim) => {
   /* 3 · B · designação e correção */
   /* regras de designação na ordem, uma coluna para a minuta e outra para a correção:
      quantos processos cada regra decide › categorias da regra › processos (com quem está designado) */
-  function painelRegras(ss, Z) { let R = null; try { R = A.getSes()?.designacaoPorRegra?.(ss.id) || null; } catch (er) { R = null; }
+  function desigSig(ss) { const s = A.getSes(); let st = {}; try { st = s?.estado?.() || {}; } catch (er) { st = {}; }
+    return ss.id + '|' + (ss.itens || []).map((i) => (i.servidor || '') + '/' + (i.corretor || '')).join(',') + '|' + JSON.stringify(ss.fases || {}) + '|' + JSON.stringify(st.desig || {}).length + '|' + JSON.stringify((st.equipe || []).map((m) => [m.nome, m.minuta, m.correcao, m.auto, m.minutaEventual, m.aus])) + '|' + JSON.stringify(ss.desigOverride || null).length; }
+  function desigMemo(ss, k) { const sig = desigSig(ss); est.dMemo = est.dMemo || {}; const c = est.dMemo[k]; if (c && c.sig === sig) return c.v;
+    let v = null; try { v = k === 'Z' ? A.getSes()?.designacao?.(ss.id) || null : A.getSes()?.designacaoPorRegra?.(ss.id) || null; } catch (er) { v = null; } est.dMemo[k] = { sig, v }; return v; }
+  function painelRegras(ss, Z) { const R = desigMemo(ss, 'R');
     if (!R) return '';
     est.rgAb = est.rgAb || {}; est.rgCat = est.rgCat || {};
     const col = (kind, tit) => { const L = R[kind] || [], tot = L.reduce((a, r) => a + r.n, 0) || 1;
@@ -2364,44 +2406,17 @@ function portaToken() { return new Promise((fim) => {
                 ${abc ? `<div class="rg-its">${c.itens.map((x) => { const dif = x.atual && x.regra && A.norm(x.atual) !== A.norm(x.regra); return `<span class="${dif ? 'dif' : ''}"><em>item ${e(x.item || '—')}</em><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(A.digits(x.cnj))}">${e(A.cnj(x.cnj))}</button><small>${x.atual ? e(x.atual) + (dif ? ' · regra: ' + e(x.regra) : '') : 'sem designação · regra: ' + e(x.regra || '—')}</small></span>`; }).join('')}</div>` : ''}</div>`; }).join('')}</div>` : ''}</div>`; }).join('')}</section>`; };
     return `<div class="cwe-2eq">${col('d', 'MINUTA')}${col('c', 'CORREÇÃO')}</div><p class="cwe-nota">A primeira regra que casa decide, separadamente para minuta e para correção. Clique na regra para ver as categorias e, na categoria, os processos. “Seguem” = quem está designado é quem a regra indica.${Z.equilibrar ? ' Equilibrar a carga · ligado.' : ''}</p>`; }
   function etapa3b(ss, d, tabs) {
-    let Z = null; try { Z = d.s?.designacao?.(ss.id) || null; } catch (er) { Z = null; }
+    const Z = desigMemo(ss, 'Z');
     if (!Z) return `<section class="cwe-st"><h2>4 · Designação de redator e corretor</h2>${tabs}<p class="cwe-nota">Designação indisponível: motor não carregado.</p></section>`;
-    const Ls = Z.linhas, esc = est.dsg;
-    const vD = (p) => esc[A.digits(p.cnj)]?.d ?? (p.servidor || p.sugD?.nome || ''), vC = (p) => esc[A.digits(p.cnj)]?.c ?? (p.corretor || p.sugC?.nome || '');
-    const porRegD = Ls.filter((p) => p.sugD).length, porRegC = Ls.filter((p) => p.sugC).length;
-    const brD = Ls.filter((p) => !p.servidor && !p.sugD).length, brC = Ls.filter((p) => !p.corretor && !p.sugC).length;
-    const aus = Z.minutantes.concat(Z.corretores).filter((m) => m.ausente).map((m) => m.nome);
+    const Ls = Z.linhas;
     const semAss = new Map(); Ls.filter((p) => (!p.servidor && !p.sugD) || (!p.corretor && !p.sugC)).forEach((p) => { const k = p.assunto || '—'; const o = semAss.get(k) || { n: 0, d: 0, c: 0 }; o.n++; if (!p.servidor && !p.sugD) o.d++; if (!p.corretor && !p.sugC) o.c++; semAss.set(k, o); });
     const semA = [...semAss.entries()].sort((a, b) => b[1].n - a[1].n).slice(0, 8);
-    const quadro = (t, P, kind) => { const mx = Math.max(1, ...P.map((m) => m.atual + Ls.filter((p) => (kind === 'd' ? p.sugD : p.sugC)?.nome === m.nome).length));
-      return `<div class="q"><div class="h"><span class="cwe-k">${e(t)}</span><small>só informação · já designados <i class="a"></i> · por regra agora <i class="b"></i></small></div>${P.map((m) => { const nv = Ls.filter((p) => (kind === 'd' ? p.sugD : p.sugC)?.nome === m.nome).length;
-        return `<div class="p ${m.ausente ? 'aus' : ''}"><b>${e(m.nome)}</b><span class="cwe-br"><span class="a" style="width:${100 * m.atual / mx}%"></span><span class="b" style="width:${100 * nv / mx}%"></span></span><span>${m.atual}${nv ? ' + ' + nv : ''}${m.ausente ? ' · ausente' : ''}</span></div>`; }).join('')}</div>`; };
-    const F = [['todos', 'Todos'], ['regra', 'Por regra agora'], ['branco', 'Em branco'], ['feitos', 'Já designados']];
-    const fl = est.desF;
-    const L = Ls.filter((p) => fl === 'todos' ? true : fl === 'regra' ? (p.sugD || p.sugC) : fl === 'branco' ? ((!p.servidor && !p.sugD) || (!p.corretor && !p.sugC)) : (p.servidor && p.corretor));
-    const vis = L.slice(0, est.desTake);
-    const sel = (kind, p) => { const atual = kind === 'd' ? p.servidor : p.corretor, sug = kind === 'd' ? p.sugD : p.sugC, P = kind === 'd' ? Z.minutantes : Z.corretores, v = kind === 'd' ? vD(p) : vC(p);
-      /* sempre editável: quem já está designado aparece selecionado e pode ser trocado */
-      const nomes = P.map((m) => m.nome), exc = kind === 'd' ? (Z.eventuais || []).map((m) => m.nome).filter((n) => !nomes.includes(n)) : []; if (atual && !nomes.includes(atual) && !exc.includes(atual)) nomes.unshift(atual);
-      const cls = atual && v === atual ? 'cur' : v ? (sug && v === sug.nome ? 'reg' : 'man') : 'vz';
-      const nota = atual && v === atual ? ((kind === 'd' ? p.porD : p.porC) || 'já designado') : atual && v !== atual ? 'troca: era ' + atual : sug && v === sug.nome ? 'por regra: ' + sug.por : v ? 'escolha manual' : 'nenhuma regra casa';
-      return `<select data-cwe-esc="${kind}" data-p="${e(A.digits(p.cnj))}" class="${cls}"><option value="">— escolher —</option>${nomes.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}${exc.length ? `<optgroup label="Minutam só por exceção">${exc.map((n) => `<option ${n === v ? 'selected' : ''}>${e(n)}</option>`).join('')}</optgroup>` : ''}</select><small>${e(nota)}</small>`; };
-    const muda = (p) => { const d = vD(p), c = vC(p); return (d && d !== (p.servidor || '')) || (c && c !== (p.corretor || '')); };
-    const aplicN = Ls.filter((p) => marcado('dsg', A.digits(p.cnj)) && muda(p)).length;
-    return `<section class="cwe-st"><h2>4 · Designação de redator e corretor</h2>${tabs}
-
-      <div class="cwe-mesa-bar"><span class="sp"></span><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicação →</button></div>
+    /* a mesa traz o cabeçalho da etapa (título, período, indicadores, Aplicar e Próximo); abaixo, as regras e os assuntos sem regra */
+    return `<section class="cwe-st cwe-st4">
       <div class="cwe-mesa-slot" data-s="${e(ss.id)}"></div>
-      <div class="cwe-kpis cwe-k4">${kpi(Ls.length, 'Processos na pauta', `${Ls.filter((p) => p.servidor).length} com minutante · ${Ls.filter((p) => p.corretor).length} com corretor`)}${kpi(`${porRegD} · ${porRegC}`, 'Preenchidos por regra', 'minutantes · corretores')}${kpi(`${brD} · ${brC}`, 'Sem regra que case', 'minutantes · corretores, a escolher', brD + brC ? 'a' : '')}${kpi(aus.length, 'Ausências no período', aus.length ? aus.join(', ') : `nenhuma cadastrada entre ${A.br(Z.periodo.de).slice(0, 5)} e ${A.br(Z.periodo.ate).slice(0, 5)}`)}</div>
       ${painelRegras(ss, Z)}
       <div class="cwe-2eq cwe-1eq"><section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
-          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div>
-      <details class="cwe-old" ${est.listaAb ? 'open' : ''}><summary data-cwe="des-lista">Lista simples por regra, sem a mesa</summary>
-      <section class="cwe-carga">${quadro('MINUTA · EQUIPE', Z.minutantes, 'd')}${quadro('CORREÇÃO · ASSESSORIA', Z.corretores, 'c')}</section>
-      <div class="cwe-lst"><div class="cwe-lst-h"><span class="cwe-segs">${F.map(([k, t]) => `<button type="button" data-cwe="des-f" data-v="${k}" aria-pressed="${fl === k}">${e(t)}</button>`).join('')}</span><span><b>${aplicN} a aplicar</b> · preenchimentos e trocas marcados</span><button type="button" class="pri" data-cwe="des-aplicar" ${aplicN ? '' : 'disabled'}>Aplicar à pauta</button><button type="button" class="cwe-lnk2" data-cwe="etapa" data-n="5">Próximo: publicação →</button></div>
-        ${vis.map((p) => { const dg = A.digits(p.cnj); return `<article class="cwe-pc"><div class="t">${ck('dsg', dg)}<span class="it">item ${e(p.item || '—')}</span><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(dg)}">${e(A.cnj(p.cnj))}</button><span class="as">${e(p.assunto || '—')} · ${e(p.recurso || p.classe || '')} · ${e(p.secao || '')}</span><span class="ct">${e(AP_T[p.tipo] || p.tipo || '1º julgamento')}</span></div>
-          <div class="ds"><div><span>MINUTANTE</span>${sel('d', p)}</div><div><span>CORRETOR</span>${sel('c', p)}</div></div></article>`; }).join('') || '<p class="cwe-vazio">Nenhum processo neste filtro.</p>'}
-        <div class="cwe-mostra"><span>mostrando ${vis.length} de ${L.length}</span>${L.length > vis.length ? `<button type="button" data-cwe="des-mais">Mostrar mais 50</button><button type="button" data-cwe="des-todos">Mostrar todos</button>` : ''}</div></div></details></section>`;
+          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div></section>`;
   }
 
   function etapa4(ss, d) {
@@ -2551,6 +2566,7 @@ function portaToken() { return new Promise((fim) => {
   W.addEventListener('message', (ev) => { if (ev.origin !== location.origin) return; const t = ev.data?.tipo;
     if (t === 'cmt:mesa-tela') mesaTela();
     else if (t === 'cmt:mesa-fechar') { if (MESA.full) mesaTela(false); }
+    else if (t === 'cmt:mesa-etapa') { est.etapa = +ev.data.n || 5; A?.render?.(); W.scrollTo(0, 0); }
     else if (t === 'cmt:mesa-aplicada') { est.dsg = {}; A?.msg((ev.data.n || 0) + ' processo(s) designados pela mesa. Gravando no procs-muta…'); } });
   W.addEventListener('keydown', (ev) => { if (ev.key === 'Escape' && MESA.full) mesaTela(false); });
 
@@ -2572,6 +2588,23 @@ function portaToken() { return new Promise((fim) => {
       else if (k === 'mk-salvar') { if (!salvarSessao(ss)) return; }
       else if (k === 'pub-alt') { const s = A.getSes(); if (ss.marcosPub || ss.publicada) s?.publicarMarcos?.(ss.id, true); if (ss.publicada) s?.publicar?.(ss.id, true); if (est.pubPend) delete est.pubPend[ss.id];
         setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 300); A.msg('Alterações publicadas na Ex Officio. Gravando no procs-muta…'); }
+      else if (k === 'ses-nova') { est.nv = { data: '', f: {}, comp: JSON.parse(JSON.stringify(compPadrao())), subs: [], novos: [], novo: null, tipo: 'previa' }; }
+      else if (k === 'nv-x') est.nv = null;
+      else if (k === 'nv-rem') { const m = est.nv.comp.splice(+b.dataset.i, 1)[0]; if (m) est.nv.subs = est.nv.subs.filter((sb) => sb.sai !== m.id); }
+      else if (k === 'nv-sub-add') est.nv.subs.push({ sai: (est.nv.comp.find((m) => m.papel !== 'relator') || {}).id || '', entra: null, motivo: 'convocação', alcance: 'todos', itens: 'todos' });
+      else if (k === 'nv-sub-rem') { est.nv.subs.splice(+b.dataset.i, 1); if (est.nv.novo === +b.dataset.i) est.nv.novo = null; }
+      else if (k === 'nv-novo-x') est.nv.novo = null;
+      else if (k === 'nv-novo-ok') { const box = b.closest('.cwe-jnovo'), nome = box.querySelector('[data-cwe-nvn="nome"]').value.trim(), cargo = box.querySelector('[data-cwe-nvn="cargo"]').value, cad = box.querySelector('[data-cwe-nvn="cad"]').checked, nv = est.nv;
+        if (!nome) { A.msg('Informe o nome do magistrado.', true); return; } const m = novoMag(nome, cargo);
+        if (nv.novo === 'comp') { if (!nv.comp.some((x) => x.id === m.id)) nv.comp.push(m); } else if (nv.subs[nv.novo]) nv.subs[nv.novo].entra = { id: m.id, nome, cargo };
+        if (!nv.novos.some((x) => x.id === m.id)) nv.novos.push({ id: m.id, nome, cargo, cad }); nv.novo = null; }
+      else if (k === 'nv-sug') { const s = A.getSes(), dt = est.nv.data; if (!dt) { A.msg('Informe a data da sessão.', true); return; } const lib = +((s?.regrasProdutividade?.() || {}).painel || {}).liberacao || 5, des = s?.diasUteis?.desloca;
+        if (!des) { A.msg('Motor indisponível para sugerir.', true); return; } est.nv.f.liberacao = des(dt, -lib) || ''; est.nv.f.minutas = des(dt, -lib - 1) || ''; if (!est.nv.f.inicio) est.nv.f.inicio = new Date().toISOString().slice(0, 10); }
+      else if (k === 'nv-ok') { const s = A.getSes(), nv = est.nv; if (!nv.data) { A.msg('Informe a data da sessão.', true); return; } const r = s?.novaSessao?.(nv.data); if (!r || r.erro) { A.msg((r && r.erro) || 'Motor indisponível.', true); return; }
+        Object.keys(nv.f).forEach((kk) => { if (nv.f[kk]) s.fase(r.id, kk, nv.f[kk]); }); s.definirJulgadores?.(r.id, { composicao: nv.comp, substituicoes: nv.subs.filter((sb) => sb.sai && sb.entra), novos: nv.novos.filter((m) => !m.cad).map(({ id, nome, cargo }) => ({ id, nome, cargo })) }); nv.novos.filter((m) => m.cad).forEach((m) => cadMag(novoMag(m.nome, m.cargo), nv.data));
+        if (A.settings) A.settings.sessId = r.id; try { sessionStorage.setItem('pt-ses', r.id); } catch (er) {} const pdf = nv.tipo === 'pdf'; est.nv = null; est.ses = ''; A.render(); est.etapa = pdf ? 2 : 1; A.render();
+        setTimeout(() => W.CMTPautas?.gravarAgora?.(false), 400); if (pdf) setTimeout(() => A.view.querySelector('[data-cwt="import-pdf"]')?.click(), 250);
+        A.msg('Sessão de ' + A.br(nv.data) + ' cadastrada.' + (pdf ? ' Escolha o PDF da pauta.' : ' Comece pela seleção prévia.')); return; }
       else if (k === 'p-tab') { est.pTab = b.dataset.v; est.painel = true; est.jNovo = false; }
       else if (k === 'j-ed') { est.pTab = 'julg'; est.painel = true; est.jNovo = false; }
       else if (k === 'painel') { const d0 = dados(ss); est.painel = !(est.painel == null ? d0.realizada : est.painel); }
@@ -2582,12 +2615,12 @@ function portaToken() { return new Promise((fim) => {
       else if (k === 'j-novo-x') est.jNovo = false;
       else if (k === 'j-novo-ok') { const box = b.closest('.cwe-jnovo'), nome = box.querySelector('[data-cwe-jn="nome"]').value.trim(), cargo = box.querySelector('[data-cwe-jn="cargo"]').value, cad = box.querySelector('[data-cwe-jn="cad"]').checked;
         if (!nome) { A.msg('Informe o nome do magistrado.', true); return; }
-        const m = { id: 'mag-' + semAc(nome).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''), nome, cargo, papel: /convocad/i.test(cargo) ? 'vogal (juiz federal convocado)' : 'vogal' };
+        const m = novoMag(nome, cargo);
         const alvo = est.jNovo;
         salvarJ(ss, (j) => { if (alvo === 'comp') { if (!j.composicao.some((x) => x.id === m.id)) j.composicao.push(m); } else if (j.substituicoes[alvo]) j.substituicoes[alvo].entra = { id: m.id, nome, cargo };
           if (!cad && !j.novos.some((x) => x.id === m.id)) j.novos.push({ id: m.id, nome, cargo }); });
         est.jNovo = false;
-        if (cad) { const pm = A.getMotor()?.ProcsMuta; if (pm?.ler && pm?.gravar) pm.ler('apoio/magistrados.json').then((t) => { const doc = JSON.parse(t); doc.registros = doc.registros || []; if (!doc.registros.some((x) => x.id === m.id)) doc.registros.push({ id: m.id, nome, cargo, atuacao: [{ orgao: 'TRF3 · Turma Regional de Mato Grosso do Sul', papel: m.papel }], aliases: [], fonte: 'Caput · julgadores da sessão de ' + A.br(ss.data) }); doc.atualizadoEm = new Date().toISOString(); est.mag = doc.registros; return pm.gravar({ 'apoio/magistrados.json': JSON.stringify(doc, null, 1) + '\n' }, 'Cadastro de magistrados: ' + nome); }).then(() => { A.msg(nome + ' incluído no cadastro de magistrados.'); A.render(); }).catch((er) => A.msg('Não foi possível gravar o cadastro: ' + er.message, true)); } }
+        if (cad) cadMag(m, ss.data); }
       else if (k === 'arq') est.arq = !est.arq;
       else if (k.startsWith('x-')) { est.exp = false; exportar(k.slice(2), ss, dados(ss)); }
       else if (k === 'cfg') { est.cfg = true; est.exp = false; }
@@ -2648,6 +2681,11 @@ function portaToken() { return new Promise((fim) => {
         else { const kk = t.dataset.cweJs; salvarJ(ss, (j) => { const sb = j.substituicoes[i]; if (!sb) return; if (kk === 'sai') sb.sai = t.value; else if (kk === 'motivo') sb.motivo = t.value; else if (kk === 'itens') { sb.itens = itensDe(t.value); sb.alcance = sb.itens === 'todos' ? 'todos' : 'itens'; } else if (kk === 'casos') sb.casos = t.value.trim(); else if (kk === 'alcance') { sb.alcance = t.value; if (t.value === 'todos') sb.itens = 'todos'; else if (t.value === 'itens' && sb.itens === 'todos') sb.itens = []; } else if (kk === 'entra') { const m = cadastroJ(ss).find((x) => x.id === t.value); sb.entra = m ? { id: m.id, nome: m.nome, cargo: m.cargo } : null; } }); }
         A.render(); return; }
       if (t.dataset.cweCk) { const k = t.dataset.cweCk, dg = t.dataset.p, S0 = est.desm[k] || (est.desm[k] = new Set()); if (t.checked) S0.delete(dg); else S0.add(dg); A.render(); return; }
+      if (t.dataset.cweNv && est.nv) { const k = t.dataset.cweNv; if (k === 'tipo') { est.nv.tipo = t.value; A.render(); return; } if (k.indexOf('f:') === 0) est.nv.f[k.slice(2)] = t.value; else est.nv[k] = t.value; return; }
+      if (t.dataset.cweNvj && est.nv) { if (t.dataset.cweNvj === 'papel') est.nv.comp[+t.dataset.i].papel = t.value; else if (t.value === '__novo') est.nv.novo = 'comp'; else { const m = magistrados().map((x) => magObj(x)).concat(est.nv.novos.map((x) => novoMag(x.nome, x.cargo))).find((x) => x.id === t.value); if (m) est.nv.comp.push({ ...m, papel: /convocad/i.test(m.cargo) ? 'vogal (juiz federal convocado)' : 'vogal' }); } A.render(); return; }
+      if (t.dataset.cweNvs && est.nv) { const i = +t.dataset.i, sb = est.nv.subs[i], kk = t.dataset.cweNvs; if (!sb) return;
+        if (kk === 'entra') { if (t.value === '__novo') { est.nv.novo = i; A.render(); return; } const m = magistrados().map((x) => magObj(x)).concat(est.nv.novos.map((x) => novoMag(x.nome, x.cargo))).find((x) => x.id === t.value); sb.entra = m ? { id: m.id, nome: m.nome, cargo: m.cargo } : null; }
+        else if (kk === 'alcance') { sb.alcance = t.value; sb.itens = 'todos'; } else if (kk === 'casos') sb.casos = t.value.trim(); else sb[kk] = t.value; A.render(); return; }
       if (t.dataset.cweMkp) { const ss = A.selectedSession(); if (!ss) return; const k = t.dataset.cweMkp, atual = k === 'data' ? ss.data : (ss.fases || {})[k] || ''; est.mkPend = est.mkPend || {}; if (t.value === atual || !t.value) delete est.mkPend[k]; else est.mkPend[k] = t.value; A.render(); return; }
       if (t.dataset.cweMk === 'data') { const s = A.getSes(), ss = A.selectedSession(); if (!s?.data || !ss || !t.value) return; const r = s.data(ss.id, t.value); if (r && r.erro) { A.msg(r.erro, true); t.value = ss.data; return; } A.msg('Data da sessão alterada para ' + A.br(t.value) + '. Gravação automática no procs-muta em instantes.'); A.render(); return; }
       if (t.dataset.cweMk) { const s = A.getSes(), ss = A.selectedSession(); if (s?.fase && ss) { s.fase(ss.id, t.dataset.cweMk, t.value); A.msg('Marco atualizado. Gravação automática no procs-muta em instantes.'); } return; }
@@ -2680,7 +2718,7 @@ function portaToken() { return new Promise((fim) => {
     if (est.ses !== ss.id) { est.ses = ss.id; est.mkPend = {}; est.jPend = {}; est.etapa = 0; est.prep = 0; est.sel = ''; est.q = ''; est.filtro = 'all'; est.take = 60; est.desm = {}; est.c2 = {}; est.etqF = 'todos'; est.etqTake = 50; est.convAb = false; est.convG = new Set(); est.desF = 'todos'; est.desTake = 50; est.dsg = {}; est.cf = ''; est.nr = null; est.mEd = false; }
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapaEtq, etapaDes, etapa4][d.cur](ss, d);
-    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}</div>`;
+    view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}${est.nv ? novaSessaoDlg() : ''}</div>`;
     requestAnimationFrame(mesaSync);
   }
 

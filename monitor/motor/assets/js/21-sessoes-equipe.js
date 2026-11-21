@@ -629,7 +629,10 @@
   function nomeCad(nome) { var m = membro(nome); return m ? m.nome : (nome || ''); }
   function faz(m, kind) { return kind === 'd' ? (m.minuta != null ? !!m.minuta : m.papel === 'equipe') : (m.correcao != null ? !!m.correcao : m.papel === 'assessoria'); }
   function pool(kind) { return S.equipe.filter(function (m) { return faz(m, kind); }); }
-  function ausente(m, ss) { var pr = periodo(ss); return diasDisp(m, pr.de, pr.ate) === 0; }
+  /* caches curtos (3 s): a designação consulta ausência e carga de cada pessoa para cada processo; sem cache, uma pauta de 192 itens levava segundos */
+  var AUSC = { t: 0, v: {} }, CARC = { t: 0, v: {} };
+  function ausente(m, ss) { var pr = periodo(ss), k = ss.id + '|' + m.nome + '|' + pr.de + '|' + pr.ate + '|' + JSON.stringify(m.aus || []); if (Date.now() - AUSC.t > 3000) AUSC = { t: Date.now(), v: {} };
+    if (!(k in AUSC.v)) AUSC.v[k] = diasDisp(m, pr.de, pr.ate) === 0; return AUSC.v[k]; }
   /* matriz de minutas (apoio/equipe-matriz.json): histórico completo de redação e correção, inclusive o histórico de produção;
      linha = [redator, tipo, seção, ramo, assunto, corretor, só histórico, pauta, data da minuta, processo, complexidade] */
   var MAT = null, MAT_LENDO = false;
@@ -657,7 +660,10 @@
   }
   function pesoItem(i) { var r = acervo().by.get(dig(i.cnj)), W2 = pesos(), k = ''; try { k = julgKey(i, infoItem(i)); } catch (e) {}
     var t = k === 'ED' ? W2.ed : k === 'AgInt' ? W2.agint : W2.voto, cx = cxDe(i.complexidade || (r && (r.COMPLEXIDADE || r.Dificuldade)) || ''); return Math.round(t * W2['cx' + cx] * 100) / 100; }
-  function carga(nome, kind, ss) { var alvo = N(nomeCad(nome)); return ss.itens.filter(function (i) { return N(nomeCad(kind === 'd' ? i.servidor : i.corretor)) === alvo; }).reduce(function (a, i) { return a + pesoItem(i); }, 0); }
+  function carga(nome, kind, ss) { if (Date.now() - CARC.t > 3000) CARC = { t: Date.now(), v: {} };
+    var sig = kind + '|' + ss.id + '|' + ss.itens.length + '|' + ss.itens.map(function (i) { return (kind === 'd' ? i.servidor : i.corretor) || ''; }).join(','), M = CARC.v[sig];
+    if (!M) { M = {}; ss.itens.forEach(function (i) { var p = kind === 'd' ? i.servidor : i.corretor; if (!p) return; var k = N(nomeCad(p)); M[k] = (M[k] || 0) + pesoItem(i); }); CARC.v[sig] = M; }
+    return M[N(nomeCad(nome))] || 0; }
   function desigEfetiva(ss) { return ss && ss.desigOverride ? ss.desigOverride : S.desig; }
   function desigNaTela() { var ss = sessaoReal(); return UI.aba === 'desig' && UI.desigEscopo === 'sessao' && ss ? (ss.desigOverride || (ss.desigOverride = clone(S.desig))) : S.desig; }
   function linha(cid, key, ss) { var k = cid + ':' + N(key), D = ss ? desigEfetiva(ss) : desigNaTela(); return D.rows[k] || { d: '', c: '' }; }
