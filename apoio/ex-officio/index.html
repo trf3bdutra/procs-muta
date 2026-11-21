@@ -3259,12 +3259,17 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
       '<div class="prt-urgc"'+(uon?'':' hidden')+'>'+sec(0)+'</div></div>';
     P.querySelector('.prt-body').innerHTML='<div class="pn"><span class="pm-h">Responsáveis</span><div class="prt-prod">'+ff('Minutante',selR(it,'servidor'))+ff('Corretor',selR(it,'corretor'))+'</div><span class="pm-h">Ato e fundamento · art. 932 do CPC</span>'+sec(/Ato e fundamento/)+'</div>';}
   if(!mono)prtBotoes(el,tipoJ(it));
-  if(!mono)prtEssencial(el);
+  if(!mono)prtEssencial(el,it);
   prtPos();}
 /* prontuário: modo essencial (só os campos que decidem o caso) e modo completo; a escolha fica neste navegador */
 var PRT_ESS=['[data-p="tipoJ"]','[data-p="subassuntos"]','[data-p="questoes"]','[data-p="sintese"]','[data-p^="papeis."]','[data-p="orig.tipo"]','[data-p="orig.id"]','[data-c="tempest"]','[data-c="preparo"]','[data-c="repres"]','[data-c="prelim"]','[data-c="mpf"]','[data-c="parecer"]','[data-c="resJulg"]','[data-c="honor"]','[data-c="consect"]','[data-p="jul.remessa"]','[data-p="jul.multa"]','[data-p="jul.fund"]','[data-c="topico"]'].join(',');
 try{S.prtModo=localStorage.getItem('eq_prt_modo')||'comp';}catch(e){S.prtModo='comp';}
-function prtEssencial(el){var P=el.querySelector('.prt');if(!P)return;[].forEach.call(el.querySelectorAll('.prt-body .f'),function(f){if(f.querySelector(PRT_ESS))f.classList.add('ess');});
+/* previdenciário (tópico-síntese entra no modo essencial): INSS como parte ou assunto de benefício (aposentadoria, auxílio, pensão, BPC/LOAS, tempo especial…) */
+function ehPrev(it){var t=nq([it.partes,it.assunto,it.classe,((it.ctl||{}).cartao||{}).assuntoDet].join(' ')),a=nq(it.assunto);
+  /* 28,86% é de servidor (o INSS figura como empregador) e contribuição previdenciária é tributário */
+  if(/28[,.]86/.test(a)||(/contribuic/.test(a)&&!/aposentad|tempo de contribuic/.test(a)))return false;
+  return /instituto nacional do seguro social|\binss\b|previd|aposentad|auxilio[- ](doenca|acidente|reclusao|incapacidade)|beneficio (assistencial|por incapacidade|previdenciario)|pensao por morte|salario[- ]maternidade|\bloas\b|\bbpc\b|tempo (especial|de contribuicao|rural)|segurad[oa] especial|incapacidade (laboral|temporaria|permanente)/.test(t);}
+function prtEssencial(el,it){var P=el.querySelector('.prt');if(!P)return;var prev=!it||ehPrev(it);[].forEach.call(el.querySelectorAll('.prt-body .f'),function(f){if(f.querySelector(PRT_ESS)&&(prev||!f.querySelector('[data-c="topico"]')))f.classList.add('ess');});
   [].forEach.call(el.querySelectorAll('.prt-body section'),function(sc){if(sc.classList.contains('prt-min')||sc.classList.contains('prt-prec')||sc.closest('.ac')||sc.querySelector('.f.ess,.rec'))sc.classList.add('ess');});
   prtModoAplica(el);}
 /* aplica o modo no prontuário aberto, sem redesenhar (não depende de foco nem de campo em edição) e com aviso visível */
