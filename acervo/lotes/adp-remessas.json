@@ -7178,12 +7178,14 @@
    "exequente": "DELEGADO DA ALFANDEGA DA RECEITA FEDERAL DE CORUMBA MS",
    "executado": "TRANSLAGUNA ARMAZANAGEM E TRANSPORTES LTDA",
    "assunto": "Declaração de Trânsito Aduaneiro",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · autorização de transbordo em instalações próprias (Alfândega de Corumbá) · exigência de regularidade perante INSS, fiscos e direitos trabalhistas sem previsão em norma federal · segurança parcialmente concedida, com tutela",
+   "resultado": "Ato a proferir: apelação da Fazenda Nacional (ID 343874440) e remessa necessária da sentença ID 343874437; MPF pelo prosseguimento (ID 344035397) ‖ Proposta pelos precedentes: Voto: examinar a base normativa das exigências (lei × ato infralegal) para a autorização de transbordo [VALIDAR norma e paradigma] [VALIDAR: Norma que fundamenta as exigências; Contrarrazões; Cumprimento da tutela]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da Fazenda Nacional e remessa necessária da sentença que mandou a Alfândega de Corumbá analisar o pedido de autorização de transbordo da Translaguna sem exigir regularidade fiscal e trabalhista não prevista em norma federal.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7194,7 +7196,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Aduaneiro — despacho e trânsito",
+    "origem": "Mandado de segurança 5000276-77.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 343874437 (28/08/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 343874440, 20/10/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7204,6 +7217,107 @@
    "chegada": "30/11/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Aduaneiro — autorização de transbordo: exigências de regularidade fiscal e trabalhista",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 343874437 · 28/08/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 344035397 · 19/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tutela deferida na sentença (análise em 10 dias) · Pedido já analisado? [VALIDAR] · Norma infralegal da Receita sobre transbordo [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "A Translaguna Armazenagem e Transportes Ltda. pediu à Alfândega de Corumbá a renovação da autorização para transbordo em instalações próprias e impugnou a exigência de certidões de regularidade fiscal e trabalhista.",
+    "inicial": "Mandado de segurança contra o Delegado da Alfândega da Receita Federal em Corumbá.",
+    "decisao_recorrida": "Sentença ID 343874437 (28/08/2025): concedeu em parte a segurança para determinar a análise do pedido de autorização de transbordo sem exigir regularidade perante o INSS, os fiscos federal, estadual e municipal e quanto a direitos trabalhistas, não prevista na norma federal; deferiu tutela para análise em 10 dias.",
+    "recurso": "União (Fazenda Nacional) (ID 343874440, 20/10/2025): legalidade das exigências para a autorização de transbordo [VALIDAR fundamentos].",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 344035397: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Mário Sérgio Martins da Silva (OAB/RS 23.566).",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · autorização de transbordo em instalações próprias (Alfândega de Corumbá) · exigência de regularidade perante INSS, fiscos e direitos trabalhistas sem previsão em norma federal · segurança parcialmente concedida, com tutela",
+     "sintese": "A Translaguna Armazenagem e Transportes Ltda. pediu à Alfândega de Corumbá a renovação da autorização para transbordo em instalações próprias e impugnou a exigência de certidões de regularidade fiscal e trabalhista.",
+     "questoes": "1) Legalidade da exigência de regularidade fiscal, previdenciária e trabalhista para autorização de transbordo (princípio da legalidade).",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 343874440, 20/10/2025): legalidade das exigências para a autorização de transbordo [VALIDAR fundamentos].",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "343874437",
+      "juizo": "Mandado de segurança 5000276-77.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "concedeu em parte a segurança para determinar a análise do pedido de autorização de transbordo sem exigir regularidade perante o INSS, os fiscos federal, estadual e municipal e quanto a direitos trabalhistas, não prevista na norma federal; deferiu tutela para análise em 10 dias."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-05-20",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "343874440",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "343874437",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança parcialmente concedida",
+       "id": "343874437",
+       "data": "2025-08-28"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "343874440",
+       "data": "2025-10-20"
+      },
+      {
+       "desc": "Parecer do MPF (prosseguimento)",
+       "id": "344035397",
+       "data": "2025-11-19"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 343874437 · 28/08/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 344035397 · 19/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tutela deferida na sentença (análise em 10 dias) · Pedido já analisado? [VALIDAR] · Norma infralegal da Receita sobre transbordo [VALIDAR]",
+     "assuntoDet": "Aduaneiro — autorização de transbordo: exigências de regularidade fiscal e trabalhista",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "344035397",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 343874437 · 28/08/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer (MPF) · ID 344035397 · 19/11/2025",
+    "ultima_informacao": "Informação · ID 343874442 · 18/11/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 343874437 · 28/08/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 344035397 · 19/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -7215,12 +7329,14 @@
    "exequente": "Auditor Fiscal da Receita Federal do Brasil em Corumbá/MS",
    "executado": "TRANSTODOGAZ - LOCACAO E TRANSPORTE LTDA",
    "assunto": "Declaração de Trânsito Aduaneiro",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · veículo de transportadora brasileira avariado na Bolívia · retorno ao país carregado em outro veículo sem MIC/DTA nem declaração simplificada de importação · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da Fazenda Nacional (ID 308513230) e remessa necessária da sentença ID 308513229; contrarrazões (ID 308513833); MPF pelo prosseguimento (ID 308783655) ‖ Proposta pelos precedentes: Voto ou monocrática: desprovimento por situação consolidada, se confirmado o reingresso do veículo; no mérito, regime aduaneiro do veículo nacional em retorno [VALIDAR] [VALIDAR: Cumprimento da liminar (reingresso do veículo); Fundamentos da apelação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da Fazenda Nacional e remessa necessária da sentença que permitiu o reingresso do veículo avariado da Transtodogaz, carregado em outro veículo, sem MIC/DTA nem declaração simplificada de importação. A liminar foi cumprida em 2024.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7231,7 +7347,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto ou monocrática)",
+    "materia": "Aduaneiro — despacho e trânsito",
+    "origem": "Mandado de segurança 5000489-20.2024.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 308513229 (19/09/2024)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 308513230, 08/11/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)",
+    "monocratica": "Possível, por situação consolidada, se o veículo já reingressou [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7241,6 +7368,117 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Aduaneiro — retorno de veículo nacional avariado no exterior sem MIC/DTA",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 308792722 · 19/11/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Manifestação (PFN) · ID 309499866 · 03/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Liminar de 11/06/2024 (ID 308513205) provavelmente cumprida: situação consolidada [VALIDAR] · Sentença repetida (IDs 308513225 e 308513229)",
+   "teor": {
+    "sintese_fatica": "A Transtodogaz – Locação e Transporte Ltda. teve veículo avariado em território boliviano e pediu para reingressar no país com ele carregado em outro veículo, sem MIC/DTA nem declaração simplificada de importação. A liminar foi deferida em 11/06/2024.",
+    "inicial": "Mandado de segurança contra Auditor-Fiscal da Receita Federal em Corumbá.",
+    "decisao_recorrida": "Sentença ID 308513229 (19/09/2024): confirmou a liminar e concedeu a segurança para que a autoridade se abstenha de exigir MIC/DTA ou declaração simplificada de importação no Siscomex quanto ao veículo da impetrante avariado na Bolívia, autorizada a entrada no país carregado em outro veículo.",
+    "recurso": "União (Fazenda Nacional) (ID 308513230, 08/11/2024): exigibilidade do MIC/DTA ou da declaração de importação para o reingresso do veículo [VALIDAR fundamentos].",
+    "resposta": "Contrarrazões da impetrante (ID 308513833).",
+    "parecer": "MPF ID 308783655: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · veículo de transportadora brasileira avariado na Bolívia · retorno ao país carregado em outro veículo sem MIC/DTA nem declaração simplificada de importação · liminar deferida · segurança concedida",
+     "sintese": "A Transtodogaz – Locação e Transporte Ltda. teve veículo avariado em território boliviano e pediu para reingressar no país com ele carregado em outro veículo, sem MIC/DTA nem declaração simplificada de importação. A liminar foi deferida em 11/06/2024.",
+     "questoes": "1) Exigência de MIC/DTA ou declaração de importação para o reingresso de veículo nacional avariado no exterior; 2) situação consolidada.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 308513230, 08/11/2024): exigibilidade do MIC/DTA ou da declaração de importação para o reingresso do veículo [VALIDAR fundamentos].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 308513833)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "308513229",
+      "juizo": "Mandado de segurança 5000489-20.2024.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para que a autoridade se abstenha de exigir MIC/DTA ou declaração simplificada de importação no Siscomex quanto ao veículo da impetrante avariado na Bolívia, autorizada a entrada no país carregado em outro veículo."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-06-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "308513230",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "308513229",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "308513205",
+       "data": "2024-06-11"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "308513229",
+       "data": "2024-09-19"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "308513230",
+       "data": "2024-11-08"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "308513833",
+       "data": "2024-11-11"
+      },
+      {
+       "desc": "Parecer do MPF (prosseguimento)",
+       "id": "308783655",
+       "data": "2024-11-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 308792722 · 19/11/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Manifestação (PFN) · ID 309499866 · 03/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Liminar de 11/06/2024 (ID 308513205) provavelmente cumprida: situação consolidada [VALIDAR] · Sentença repetida (IDs 308513225 e 308513229)",
+     "assuntoDet": "Aduaneiro — retorno de veículo nacional avariado no exterior sem MIC/DTA",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "308783655",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 308792722 · 19/11/2024 — recebeu o recurso sem conceder efeito suspensivo",
+    "ultima_peca": "Manifestação (PFN) · ID 309499866 · 03/12/2024",
+    "ultima_informacao": "Certidão · ID 308746572 · 14/11/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 308792722 · 19/11/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Manifestação (PFN) · ID 309499866 · 03/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -7252,12 +7490,14 @@
    "exequente": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "executado": "AUGUSTIN MALZAC",
    "assunto": "Demissão ou Exoneração",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da FUFMS e remessa necessária em mandado de segurança · demissão de professor da UFMS (Portaria 16-RTR/UFMS, de 04/01/2024) · PAD que mudou a conduta imputada (agressão física) sem nova oportunidade de defesa · liminar deferida · segurança concedida com retorno do PAD à fase de julgamento",
+   "resultado": "Ato a proferir: apelação da FUFMS (ID 311724160) e remessa necessária da sentença ID 311724158; parecer do MPF (ID 312394675) ‖ Proposta pelos precedentes: Voto: examinar se houve alteração dos fatos imputados (nulidade) ou só da capitulação (o servidor se defende dos fatos), com prejuízo à defesa [VALIDAR paradigma] [VALIDAR: Sentido do parecer do MPF (ID 312394675); Contrarrazões; Teor da indiciação e da nota técnica no PAD]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da FUFMS e remessa necessária da sentença que anulou a demissão do professor Augustin Malzac e devolveu o PAD à fase de julgamento, porque a nota técnica final imputou agressão física, fato do qual não se defendeu. A FUFMS sustenta mera recapitulação dos fatos.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7268,7 +7508,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — servidor (processo disciplinar)",
+    "origem": "Mandado de segurança 5000352-50.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 311724158 (27/09/2024)",
+    "recurso": "apelação de FUFMS (ID 311724160, 29/10/2024) · remessa necessária",
+    "preparo": "FUFMS: Isento (ente público)",
+    "monocratica": "Não: PAD e cerceamento de defesa",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FUFMS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -7278,6 +7529,113 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Servidor — demissão anulada por cerceamento de defesa no PAD (mudança dos fatos imputados)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 311724161 · 25/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 311724158 · 27/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 312394675 · 24/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Liminar de 12/03/2024 suspendeu a demissão (ID 311724145) · Defesa sobre os fatos, não sobre a capitulação (jurisprudência do STJ) [VALIDAR] · Artigo 132, IV, V e XIII, da Lei 8.112/1990",
+   "teor": {
+    "sintese_fatica": "Augustin Malzac, professor da UFMS, foi demitido em PAD que apurava conduta escandalosa e falta de urbanidade em discussão no HUMAP; a nota técnica que fundamentou a demissão passou a imputar agressão física, sem nova defesa. A liminar suspendeu a demissão.",
+    "inicial": "Mandado de segurança contra o Reitor da UFMS.",
+    "decisao_recorrida": "Sentença ID 311724158 (27/09/2024): concedeu a segurança para declarar nulo o ato de demissão e devolver o processo administrativo à fase de julgamento, mantida a liminar que suspendera a Portaria 16-RTR/UFMS, de 04/01/2024.",
+    "recurso": "FUFMS (ID 311724160, 29/10/2024): regularidade do PAD: simples nova capitulação dos fatos, com defesa sobre o conjunto; reforma da sentença [VALIDAR fundamentos].",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 312394675: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogado constituído [VALIDAR].",
+    "preparo": "FUFMS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da FUFMS e remessa necessária em mandado de segurança · demissão de professor da UFMS (Portaria 16-RTR/UFMS, de 04/01/2024) · PAD que mudou a conduta imputada (agressão física) sem nova oportunidade de defesa · liminar deferida · segurança concedida com retorno do PAD à fase de julgamento",
+     "sintese": "Augustin Malzac, professor da UFMS, foi demitido em PAD que apurava conduta escandalosa e falta de urbanidade em discussão no HUMAP; a nota técnica que fundamentou a demissão passou a imputar agressão física, sem nova defesa. A liminar suspendeu a demissão.",
+     "questoes": "1) Nulidade do PAD por alteração dos fatos imputados sem nova oportunidade de defesa (artigos 161 e 168 da Lei 8.112/1990); 2) prejuízo à defesa.",
+     "rel": {
+      "razoes": "FUFMS (ID 311724160, 29/10/2024): regularidade do PAD: simples nova capitulação dos fatos, com defesa sobre o conjunto; reforma da sentença [VALIDAR fundamentos].",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "311724158",
+      "juizo": "Mandado de segurança 5000352-50.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar nulo o ato de demissão e devolver o processo administrativo à fase de julgamento, mantida a liminar que suspendera a Portaria 16-RTR/UFMS, de 04/01/2024."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-01-23",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FUFMS",
+       "tipo": "Apelação",
+       "id": "311724160",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "311724158",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "311724145",
+       "data": "2024-03-12"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "311724158",
+       "data": "2024-09-27"
+      },
+      {
+       "desc": "Apelação da FUFMS",
+       "id": "311724160",
+       "data": "2024-10-29"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "312394675",
+       "data": "2025-01-24"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 311724161 · 25/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 311724158 · 27/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 312394675 · 24/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Liminar de 12/03/2024 suspendeu a demissão (ID 311724145) · Defesa sobre os fatos, não sobre a capitulação (jurisprudência do STJ) [VALIDAR] · Artigo 132, IV, V e XIII, da Lei 8.112/1990",
+     "assuntoDet": "Servidor — demissão anulada por cerceamento de defesa no PAD (mudança dos fatos imputados)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "312394675",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 311724161 · 25/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 311724158 · 27/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer (MPF) · ID 312394675 · 24/01/2025",
+    "ultima_informacao": "Certidão · ID 311886996 · 17/01/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 311724161 · 25/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 311724158 · 27/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 312394675 · 24/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
