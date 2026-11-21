@@ -95,6 +95,24 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 .tri-em2 .tri-ir{display:block;width:100%;text-align:left;border:0;border-left:1px solid var(--b,#dde3e0);background:none;padding:5px 0 5px 12px;font-family:inherit;font-size:13px;font-weight:400;color:var(--tx);cursor:pointer;text-decoration:none}
 .tri-em2 .tri-ir[aria-current=true]{border-left:2px solid var(--v);padding-left:11px;font-weight:700;color:var(--v)}
 .tri-em2 .tri-em-corpo{border:1px solid var(--b2,#cfd6d3);background:var(--w,#fff);min-height:320px}
+.mtz{padding:18px 20px 24px}
+.mtz-k{margin:0;font:500 10px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--m)}
+.mtz-h{display:flex;align-items:center;gap:10px;margin:4px 0 2px}.mtz-h h2{margin:0;font:650 28px/1.1 Figtree,system-ui,sans-serif;letter-spacing:-.02em;color:var(--v)}.mtz-h h2 em{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;color:#a57829}
+.mtz-x{width:26px;height:26px;border:1px solid var(--b2);background:var(--w);cursor:pointer;font-size:16px;line-height:1}
+.mtz-d{margin:0 0 12px;font-size:13px;color:var(--m)}
+.mtz-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));border-left:1px solid var(--b);border-top:1px solid var(--b);margin:0 0 12px}
+.mtz-tile{display:flex;flex-direction:column;justify-content:space-between;gap:6px;min-height:78px;text-align:left;padding:8px 10px;border:0;border-right:1px solid var(--b);border-bottom:1px solid var(--b);border-top:3px solid var(--gc);background:#faf8f2;cursor:pointer;font:400 11.5px/1.25 Figtree,system-ui,sans-serif;color:var(--tx)}
+.mtz-tile b{font:500 20px 'JetBrains Mono',ui-monospace,monospace;color:#8a6d1f}.mtz-tile.on{background:#fff;box-shadow:inset 0 0 0 2px var(--gc)}
+.mtz-f{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}.mtz-f input{flex:1 1 260px;min-height:34px;border:1px solid var(--b2);padding:4px 10px;font:13px Figtree,system-ui,sans-serif}.mtz-f select{min-height:34px;border:1px solid var(--b2);background:var(--w);padding:4px 8px;font:13px Figtree,system-ui,sans-serif}
+.mtz-t{width:100%;border-collapse:collapse;font-size:12.5px}.mtz-t th{position:sticky;top:0;background:#f3f1ea;text-align:left;font:500 10px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--m);padding:6px 8px;border-bottom:1px solid var(--b)}
+.mtz-t td{padding:6px 8px;border-bottom:1px solid var(--b);vertical-align:top}.mtz-t .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px}.mtz-t .nw{white-space:nowrap}.mtz-t .sub{color:var(--m);font-size:11.5px}
+#mtz-tab{overflow-x:auto}.mtz-t .pt{max-width:200px}.mtz-t .pr{max-width:340px}.mtz-t .cl3,.mtz-t .cl4{display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}.mtz-t .cl3{-webkit-line-clamp:3}.mtz-t .cl4{-webkit-line-clamp:4}.mtz-r.ab .cl3,.mtz-r.ab .cl4{-webkit-line-clamp:unset}.mtz-t .lk{border:0;background:none;padding:0;cursor:pointer;font:inherit;color:var(--v);text-decoration:underline dotted}
+.mtz-g td{background:#f6f2e6;border-left:3px solid var(--gc);padding:8px}.mtz-g small{color:var(--m);font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-left:6px}.mtz-g .mtz-gr{margin-top:3px;font-size:12px;color:var(--tx)}.mtz-g .mtz-gm{font-size:11.5px;color:var(--m)}
+.mtz-tg{font:500 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--m);border:1px solid var(--b2);padding:0 4px}
+.mtz-r.sel td{background:#eef4f1}.mtz-r.sem td{color:var(--m)}.mtz-r.ab td{background:#fffdf6}
+.mtz-ch{display:inline-block;margin:0 4px 3px 0;padding:1px 6px;border:1px solid var(--b2);background:var(--w);font-size:11px;white-space:nowrap}.mtz-ch.ok{border-color:#9cc3ae;color:#2f6a4c}.mtz-ch.ruim{border-color:#d9a49b;color:#8a2f22;background:#fbf1ee}
+.mtz-det{padding:6px 0 10px}.mtz-cols{margin:0 0 8px}.mtz-det-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+.mtz-det section{background:var(--w);border:1px solid var(--b);border-left:3px solid var(--v);padding:7px 10px;font-size:12.5px;line-height:1.45}.mtz-det section.w{grid-column:1/-1}.mtz-det h5{margin:0 0 3px;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--v)}.mtz-det ul{margin:0;padding-left:16px}
 @media (max-width:900px){.tri-em2{grid-template-columns:minmax(0,1fr)}.tri-em2 .tri-lado{position:static;padding:0 0 10px}}
 .tri-ld{padding:16px;color:var(--m2);font-size:13.5px;text-align:center}
 .tri-banda{border-bottom:1px solid var(--b2,#eaeeec)}
@@ -2985,22 +3003,19 @@ function seletorLado() {
 function navLado() {
   const k = (t) => '<p class="tri-k">' + t + '</p>';
   if (TRI_SUBABA === 'triar') { const sel = LS.get('tri_triar_tarefa', ''), n = sel ? (tarefasTriar().find((x) => x[0] === sel) || [0, 0])[1] : (U || []).length; return k(nf(n) + ' de ' + nf((U || []).length) + ' processos'); }
-  const v = LS.get('tri_vista_' + TRI_SUBABA, 'matriz'), mot = LS.get('tri_motor', 'novo');
+  const v = LS.get('tri_vista_' + TRI_SUBABA, 'matriz');
   const it = (attr, r, on, t) => '<button type="button" class="tri-ir" ' + attr + ' aria-current="' + on + '" title="' + esc(t) + '">' + r + '</button>';
   let h = '';
-  if (_triIdx && !_triIdx._erro) { const todos = [].concat(...gruposLotes(TRI_SUBABA).map((g) => g[1])); const sel = todos.find((x) => x.id === LS.get('tri_mtz_' + TRI_SUBABA, '')) || todos[0];
-    if (sel) h += k((sel.n != null ? sel.n + ' processos no lote' : sel.id)); }
-  h += '<p class="tri-k" style="margin-top:14px">Ver</p>' + it('data-trivista="matriz"', 'Matriz do lote', v === 'matriz', 'O lote como no Collectio: matriz, grupos, prontuários, ficha e minutas') +
+  const id = loteSel(TRI_SUBABA), L = id && _loteDados[id];
+  if (L) { const its = L.itens || [], tri = its.filter((x) => x.triagem && Object.keys(x.triagem).length).length; h += k(nf(its.length) + ' processos no lote') + k(nf(tri) + ' com triagem'); }
+  h += '<p class="tri-k" style="margin-top:14px">Ver</p>' + it('data-trivista="matriz"', 'Matriz do lote', v === 'matriz', 'Grupos, propostas, admissibilidade e prontuário de cada processo') +
     it('data-trivista="lista"', 'Lista simples', v !== 'matriz', 'Lista dos processos, lote a lote');
-  if (v === 'matriz') h += '<p class="tri-k" style="margin-top:14px">Página</p>' + it('data-trimotor="novo"', 'Collectio', mot !== 'classico', 'Collectio atual (matriz padrão e matriz do lote)') +
-    it('data-trimotor="classico"', 'Collectio clássico', mot === 'classico', 'Collectio clássico (prontuários, conformidade, Compendium)') + (srcLote() ? '<a class="tri-ir" href="' + esc(srcLote().replace(/[?&]caput=1/, '')) + '" target="_blank" rel="noopener">Abrir em nova aba ↗</a>' : '');
   return '<div class="tri-nav">' + h + '</div>';
 }
-function srcLote() {
-  if (TRI_SUBABA === 'triar' || !_triIdx || _triIdx._erro) return '';
-  const todos = [].concat(...gruposLotes(TRI_SUBABA).map((g) => g[1])); if (!todos.length) return '';
-  let sel = LS.get('tri_mtz_' + TRI_SUBABA, ''); if (!todos.some((x) => x.id === sel)) sel = todos[0].id;
-  return LS.get('tri_motor', 'novo') === 'classico' ? '/amicus/collectio/classico/?id=' + encodeURIComponent(sel) + '&caput=1' : '/amicus/collectio/?colecao=' + encodeURIComponent(sel) + '&caput=1';
+function loteSel(sub) {
+  if (sub === 'triar' || !_triIdx || _triIdx._erro) return '';
+  const todos = [].concat(...gruposLotes(sub).map((g) => g[1])); if (!todos.length) return '';
+  const sel = LS.get('tri_mtz_' + sub, ''); return todos.some((x) => x.id === sel) ? sel : todos[0].id;
 }
 function refazTriEm() { const em = document.getElementById('tri-em'); if (em) em.outerHTML = painelEmTriagem(); }
 
@@ -3037,11 +3052,83 @@ function gruposLotes(sub) {
   return [['Tarefas do PJe', tri.filter((x) => !x.serie && !/^adp-serie-/.test(x.id))], ['Séries', tri.filter((x) => x.serie || /^adp-serie-/.test(x.id))],
     ['Escaninhos', (C.avulsos || []).map(ent).filter((x) => x.escaninho)]].filter((g) => g[1].length);
 }
+/* ===== matriz do lote, própria do Caput: lê o lote (acervo/lotes/<id>.json) e mostra grupos, propostas, admissibilidade e o prontuário ===== */
+const _loteDados = {}, _loteLendo = {}; let _mtzAberto = '';
+async function lerLoteMtz(id) {
+  if (_loteLendo[id]) return; _loteLendo[id] = true;
+  await new Promise((r) => setTimeout(r, 0));
+  const P = PM(); if (!P || !P.ler) { _loteLendo[id] = false; setTimeout(() => lerLoteMtz(id), 1500); return; }
+  try { _loteDados[id] = JSON.parse(await P.ler('acervo/lotes/' + id + '.json')); } catch (e) { _loteDados[id] = { _erro: String((e && e.message) || e), itens: [] }; }
+  _loteLendo[id] = false; refazTriEm();
+}
+const rotGrupo = (g) => String(g.rotulo || g.id || '').replace(/^(Ação|Lote|Apelação com remessa|Apelação|Remessa) · /, '');
+const tipoGrupo = (g) => { const m = /^(Ação|Lote|Apelação com remessa|Apelação|Remessa) · /.exec(String(g.rotulo || '')); return m ? m[1] : ''; };
+function gruposDoLote(L) {
+  const its = L.itens || [], G = (L.grupos || []).map((g) => Object.assign({}, g, { itens: [] })), por = new Map(G.map((g) => [String(g.id), g]));
+  const outro = Object.assign({ id: '_', rotulo: (L.grupo_outros && L.grupo_outros.rotulo) || 'Sem grupo', cor: (L.grupo_outros && L.grupo_outros.cor) || '#9aa0a8' }, { itens: [] });
+  its.forEach((it) => { const g = por.get(String(it.grupo == null ? '' : it.grupo)); (g || outro).itens.push(it); });
+  return G.filter((g) => g.itens.length).concat(outro.itens.length ? [outro] : []);
+}
+const propostaDe = (it) => { const r = String(it.resultado || ''); const m = /Proposta pelos precedentes: (.+?)(?: \[VALIDAR: [^\]]+\])?$/.exec(r); return m ? m[1] : ((it.triagem || {}).ato || r.replace(/^Ato a proferir: /, '')); };
+const faltaDe = (it) => { const v = []; const r = String(it.resultado || ''); let m; const rx = /\[VALIDAR: ([^\]]+)\]/g; while ((m = rx.exec(r))) m[1].split(';').forEach((x) => { x = x.trim(); if (x) v.push(x); }); (it.pendencias || []).forEach((x) => { if (typeof x === 'string') v.push(x.replace(/^\[VALIDAR\]\s*/, '')); }); return [...new Set(v)]; };
+const ctlDe = (it) => ((it.prontuario_triagem || {}).ctl) || {};
+function chipAdm(rot, v) { if (!v) return ''; const ruim = /intempest|não recolhido|sem comprovante|a menor|após a interposição|irregular/i.test(v), ok = /^(tempestivo|comprovado|justiça gratuita|isento|assistência|regular|dispensad|não se aplica)/i.test(v);
+  return '<span class="mtz-ch' + (ruim ? ' ruim' : ok ? ' ok' : '') + '" title="' + esc(rot + ': ' + v) + '">' + esc(rot) + ' · ' + esc(v.replace(/ \(.*\)$/, '')) + '</span>'; }
+function detalheMtz(it, L) {
+  const c = (it.prontuario_triagem || {}).cartao || {}, t = it.triagem || {}, teor = it.teor || {}, rel = c.rel || {}, orig = c.orig || {}, sa = it.situacao_atual || {};
+  const sec = (tt, v) => v ? '<section><h5>' + esc(tt) + '</h5><div>' + esc(v) + '</div></section>' : '';
+  const esp = String(it.especificidades || '').replace(sa.resumo || '\u0000', '').replace(/^[ ·]+/, '');
+  const col = (L.colunas || []).filter((x) => (it.variacoes || []).includes(x.id)).map((x) => '<span class="mtz-ch">' + esc(x.rotulo || x.id) + '</span>').join('');
+  const pec = (c.pecas || it.pecas || []).map((p) => '<li>' + esc(p.desc || p.tipo || '') + (p.id ? ' · ID ' + esc(p.id) : '') + (p.data ? ' · ' + esc(String(p.data).length === 10 && p.data[4] === '-' ? br(p.data) : p.data) : '') + '</li>').join('');
+  const fal = faltaDe(it);
+  return '<div class="mtz-det">' + (col ? '<div class="mtz-cols">' + col + '</div>' : '') + '<div class="mtz-det-g">' +
+    sec('Síntese fática', c.sintese || teor.sintese_fatica) + sec('Questões', c.questoes) + sec('Decisão recorrida', (orig.tipo ? orig.tipo + (orig.id ? ' (ID ' + orig.id + ')' : '') + ': ' : '') + (orig.dispositivo || t.decisao_agravada || '')) +
+    sec('Razões do recurso', rel.razoes || t.recurso) + sec('Resposta', rel.contrarrazoes) + sec('Origem', t.origem || orig.juizo) + sec('Proposta', propostaDe(it)) + sec('Monocrática', t.monocratica) +
+    sec('Preparo (conferência)', t.conf_preparo || t.preparo) + sec('Prevenção', t.conf_prevencao) + sec('Especificidades', esp) + sec('Situação atual', sa.resumo) +
+    (fal.length ? '<section><h5>O que falta sanar</h5><ul>' + fal.map((x) => '<li>[VALIDAR] ' + esc(x) + '</li>').join('') + '</ul></section>' : '') +
+    (pec ? '<section class="w"><h5>Peças</h5><ul>' + pec + '</ul></section>' : '') + '</div></div>';
+}
+function tabelaMtz(id) {
+  const L = _loteDados[id]; if (!L) return '';
+  const q = nz(LS.get('tri_mtzq_' + id, '')), gsel = LS.get('tri_mtzg_' + id, ''), so = LS.get('tri_mtzso_' + id, '');
+  const passa = (it) => (!q || nz([it.processo, it.partes, it.exequente, it.executado, it.tipo_caso, it.assunto, it.assunto_detalhado, it.observacao].join(' ')).includes(q)) &&
+    (!so || (so === 'tri' ? (it.triagem && Object.keys(it.triagem).length) : !(it.triagem && Object.keys(it.triagem).length)));
+  const G = gruposDoLote(L).filter((g) => !gsel || g.id === gsel);
+  let h = '<table class="mtz-t"><thead><tr><th></th><th>Item</th><th>Processo</th><th>Partes</th><th>Tipo de caso</th><th>Proposta</th><th>Admissibilidade</th><th>MPF</th><th>Falta</th><th></th></tr></thead><tbody>', n = 0;
+  G.forEach((g) => {
+    const its = g.itens.filter(passa); if (!its.length) return; n += its.length;
+    const ds = its.map((it) => dg(it.processo)), todos = ds.length && ds.every((d) => SEL.has(d));
+    h += '<tr class="mtz-g" style="--gc:' + esc(g.cor || '#9aa0a8') + '"><td><input type="checkbox" data-mtzgrp="' + esc(g.id) + '"' + (todos ? ' checked' : '') + ' aria-label="Marcar o grupo"></td><td colspan="9"><b>' + esc(rotGrupo(g)) + '</b>' + (tipoGrupo(g) ? ' <span class="mtz-tg">' + esc(tipoGrupo(g)) + '</span>' : '') + ' <small>' + its.length + ' processos</small>' +
+      (g.resultado ? '<div class="mtz-gr">' + esc(g.resultado) + '</div>' : '') + (g.modelo ? '<div class="mtz-gm">Modelo: ' + esc(g.modelo) + '</div>' : '') + '</td></tr>';
+    its.forEach((it) => { const d = dg(it.processo), k = ctlDe(it), ab = _mtzAberto === it.processo, fal = faltaDe(it), tri = it.triagem && Object.keys(it.triagem).length;
+      h += '<tr class="mtz-r' + (SEL.has(d) ? ' sel' : '') + (ab ? ' ab' : '') + (tri ? '' : ' sem') + '"><td><input type="checkbox" data-sel="' + d + '"' + (SEL.has(d) ? ' checked' : '') + ' aria-label="Selecionar ' + esc(it.processo) + '"></td>' +
+        '<td class="mono">' + esc(it.item == null ? '' : String(it.item)) + '</td><td class="mono nw"><button type="button" class="lk" data-mtzexp="' + esc(it.processo) + '" title="Ver o prontuário do lote">' + esc(it.processo) + '</button><div class="sub">' + esc(it.classe || it.recurso || '') + '</div></td>' +
+        '<td class="pt"><div class="cl3" title="' + esc(it.partes || '') + '">' + esc(it.exequente || it.partes || '') + (it.executado ? '<div class="sub">× ' + esc(it.executado) + '</div>' : '') + '</div></td>' +
+        '<td><div class="cl3" title="' + esc(it.tipo_caso || '') + '">' + esc(it.assunto_detalhado || it.tipo_caso || it.assunto || '') + '</div></td><td class="pr">' + (tri ? '<div class="cl4" title="' + esc(propostaDe(it)) + '">' + esc(propostaDe(it)) + '</div>' : '<span class="sub">sem triagem' + ((it.extracao || {}).situacao === 'pendente' && !it.autos ? ' · autos a extrair' : '') + '</span>') + '</td>' +
+        '<td>' + chipAdm('Tempest.', k.tempest) + chipAdm('Preparo', k.preparo) + chipAdm('Repres.', k.repres) + (k.urgTipo ? '<span class="mtz-ch ruim">' + esc(k.urgTipo) + '</span>' : '') + '</td>' +
+        '<td>' + (k.mpf && k.mpf !== 'Sem hipótese' ? '<span class="mtz-ch">' + esc(k.mpf) + '</span>' : '<span class="sub">—</span>') + '</td>' +
+        '<td>' + (fal.length ? '<span class="mtz-ch ruim" title="' + esc(fal.join(' · ')) + '">' + fal.length + '</span>' : '') + '</td>' +
+        '<td class="nw"><button type="button" class="btn sm" data-prontuario="' + d + '" title="Prontuário de triagem (ficha)">Prontuário</button> <button type="button" class="btn sm" data-ficha="' + d + '">Ficha</button></td></tr>';
+      if (ab) h += '<tr class="mtz-dr"><td></td><td colspan="9">' + detalheMtz(it, L) + '</td></tr>'; });
+  });
+  h += '</tbody></table>';
+  return n ? h : '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
+}
 function painelMatrizLote(sub) {
   if (!_triIdx) { carregarIdxLotes(); return '<div class="tri-ld">Carregando os lotes…</div>'; }
   if (_triIdx._erro) return '<div class="tri-ld">Erro ao ler o índice dos lotes: ' + esc(_triIdx._erro) + '</div>';
-  const src = srcLote(); if (!src) return '<div class="tri-ld">Nenhum lote ' + (sub === 'selecao' ? 'de seleção prévia' : 'de triagem') + '.</div>';
-  return '<iframe id="tri-mtz-frame" src="' + esc(src) + '" title="Matriz do lote" style="display:block;width:100%;height:calc(100vh - 90px);min-height:640px;border:0;background:#fff"></iframe>';
+  const id = loteSel(sub); if (!id) return '<div class="tri-ld">Nenhum lote ' + (sub === 'selecao' ? 'de seleção prévia' : 'de triagem') + '.</div>';
+  const L = _loteDados[id]; if (!L) { lerLoteMtz(id); return '<div class="tri-ld">Lendo o lote…</div>'; }
+  if (L._erro) return '<div class="tri-ld">Não foi possível ler o lote: ' + esc(L._erro) + '</div>';
+  const G = gruposDoLote(L), gsel = LS.get('tri_mtzg_' + id, ''), its = L.itens || [], so = LS.get('tri_mtzso_' + id, '');
+  const tit = String(L.titulo || id).replace(/^(Analisar decisão|Série|Seleção prévia) · /, '');
+  const tiles = '<div class="mtz-tiles">' + G.map((g) => '<button type="button" class="mtz-tile' + (gsel === g.id ? ' on' : '') + '" data-mtzg="' + esc(g.id) + '" style="--gc:' + esc(g.cor || '#9aa0a8') + '" title="' + esc(g.rotulo || g.id) + (g.resultado ? ' — ' + esc(g.resultado) : '') + '"><span>' + esc(rotGrupo(g)) + '</span><b>' + String(g.itens.length).padStart(2, '0') + '</b></button>').join('') + '</div>';
+  return '<div class="mtz"><p class="mtz-k">01 / Matriz do lote</p><div class="mtz-h">' + (gsel ? '<button type="button" class="mtz-x" data-mtzg="" title="Todos os grupos">–</button>' : '') + '<h2>' + esc(tit) + ' <em>' + (sub === 'selecao' ? 'seleção prévia.' : 'triagem.') + '</em></h2></div>' +
+    '<p class="mtz-d">' + esc(L.descricao || 'Processos por grupo da triagem, com a proposta de cada um. Clique no número para abrir o prontuário do lote.') + '</p>' + (G.length > 1 ? tiles : '') +
+    '<div class="mtz-f"><input type="search" data-mtzq placeholder="processo, parte, tipo de caso ou observação" value="' + esc(LS.get('tri_mtzq_' + id, '')) + '">' +
+    '<select data-mtzg-sel><option value="">Todos os grupos · ' + its.length + '</option>' + G.map((g) => '<option value="' + esc(g.id) + '"' + (gsel === g.id ? ' selected' : '') + '>' + esc(rotGrupo(g)) + ' · ' + g.itens.length + '</option>').join('') + '</select>' +
+    '<select data-mtzso><option value="">Com e sem triagem</option><option value="tri"' + (so === 'tri' ? ' selected' : '') + '>Só com triagem</option><option value="sem"' + (so === 'sem' ? ' selected' : '') + '>Só sem triagem</option></select></div>' +
+    '<div id="mtz-tab">' + tabelaMtz(id) + '</div></div>';
 }
 document.addEventListener('click', (e) => {
   const t = e.target.closest && e.target.closest('[data-trisub],[data-trimtz],[data-trivista],[data-trimotor]'); if (!t || !t.closest('#tri-em')) return;
@@ -3051,6 +3138,22 @@ document.addEventListener('click', (e) => {
   if (t.dataset.trivista) LS.set('tri_vista_' + TRI_SUBABA, t.dataset.trivista);
   if (t.dataset.trimotor) LS.set('tri_motor', t.dataset.trimotor);
   refazTriEm();
+}, true);
+document.addEventListener('click', (e) => {
+  const t = e.target.closest && e.target.closest('[data-mtzg],[data-mtzexp]'); if (!t || !t.closest('#tri-em')) return;
+  e.preventDefault(); e.stopPropagation(); const id = loteSel(TRI_SUBABA);
+  if (t.dataset.mtzexp != null) { _mtzAberto = _mtzAberto === t.dataset.mtzexp ? '' : t.dataset.mtzexp; const tb = document.getElementById('mtz-tab'); if (tb) tb.innerHTML = tabelaMtz(id); return; }
+  if (t.dataset.mtzg != null) { LS.set('tri_mtzg_' + id, LS.get('tri_mtzg_' + id, '') === t.dataset.mtzg ? '' : t.dataset.mtzg); refazTriEm(); }
+}, true);
+let _mtzT = null;
+document.addEventListener('input', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-mtzq]')) return; const id = loteSel(TRI_SUBABA); LS.set('tri_mtzq_' + id, t.value);
+  clearTimeout(_mtzT); _mtzT = setTimeout(() => { const tb = document.getElementById('mtz-tab'); if (tb) tb.innerHTML = tabelaMtz(id); }, 200); }, true);
+document.addEventListener('change', (e) => {
+  const t = e.target; if (!t.closest || !t.closest('#tri-em')) return; const id = loteSel(TRI_SUBABA);
+  if (t.matches('[data-mtzg-sel]')) { LS.set('tri_mtzg_' + id, t.value); refazTriEm(); return; }
+  if (t.matches('[data-mtzso]')) { LS.set('tri_mtzso_' + id, t.value); const tb = document.getElementById('mtz-tab'); if (tb) tb.innerHTML = tabelaMtz(id); return; }
+  if (t.matches('[data-mtzgrp]')) { const L = _loteDados[id]; if (!L) return; const g = gruposDoLote(L).find((x) => String(x.id) === t.dataset.mtzgrp); if (!g) return;
+    g.itens.forEach((it) => { const d = dg(it.processo); if (t.checked) SEL.add(d); else SEL.delete(d); }); const tb = document.getElementById('mtz-tab'); if (tb) tb.innerHTML = tabelaMtz(id); pintaRodape(); }
 }, true);
 document.addEventListener('change', (e) => {
   const t = e.target.closest && e.target.closest('[data-trisel]'); if (!t) return;
