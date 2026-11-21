@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Collectio · minutas do PJe</title>
+<style>
+  :root { --tx:#1f2328; --mu:#5b6470; --li:#d8dde3; --ok:#1a7f37; --no:#b42318; --bg:#f6f7f9; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--tx); background:var(--bg); }
+  main { max-width:760px; margin:32px auto; padding:0 16px; }
+  h1 { font-size:18px; margin:0 0 4px; }
+  p { margin:6px 0; color:var(--mu); }
+  .box { background:#fff; border:1px solid var(--li); border-radius:8px; padding:14px 16px; margin-top:14px; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  td, th { text-align:left; padding:6px 8px; border-top:1px solid var(--li); vertical-align:top; }
+  th { color:var(--mu); font-weight:600; border-top:0; }
+  .ok { color:var(--ok); } .no { color:var(--no); } .mu { color:var(--mu); }
+  code { font-size:12px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Collectio · minutas do PJe</h1>
+  <p>Esta janela recebe as minutas lidas no editor do PJe (tarefa [Sessão] Aguardando a sessão) e as registra como versões no lote do Collectio.
+     Só aceita dados enviados pela janela do PJe que a abriu, com o código da sessão de importação. Exige o login de gestor no Collectio.</p>
+  <div class="box" id="estado">Verificando o login…</div>
+  <div class="box"><table><thead><tr><th>Processo</th><th>Lote</th><th>Resultado</th></tr></thead><tbody id="itens"><tr><td colspan="3" class="mu">Nenhuma minuta recebida.</td></tr></tbody></table></div>
+</main>
+<script>
+(function () {
+  'use strict';
+  var ORIGEM = 'https://pje2g.trf3.jus.br';
+  var CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/, ID = /^[a-z0-9][a-z0-9-]{0,39}$/;
+  var SECOES = ['relatorio', 'voto', 'ementa', 'acordao'];
+  var nonce = (/[#&]n=([A-Za-z0-9_-]{12,64})/.exec(location.hash) || [])[1] || '';
+  var pronto = false, linhas = [];
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function estado(h) { $('estado').innerHTML = h; }
+  function desenha() {
+    $('itens').innerHTML = linhas.length ? linhas.map(function (l) {
+      return '<tr><td><code>' + esc(l.processo) + '</code></td><td>' + esc(l.lote) + '</td><td class="' + (l.ok ? 'ok' : l.ok === false ? 'no' : 'mu') + '">' + esc(l.msg) + '</td></tr>';
+    }).join('') : '<tr><td colspan="3" class="mu">Nenhuma minuta recebida.</td></tr>';
+  }
+  function avisa(dest, m) { try { dest.postMessage(Object.assign({ nonce: nonce }, m), ORIGEM); } catch (e) {} }
+  function secoes(s) {
+    var o = {};
+    SECOES.forEach(function (k) { o[k] = (Array.isArray(s && s[k]) ? s[k] : []).map(function (x) { return String(x == null ? '' : x); }).slice(0, 800); });
+    return o;
+  }
+  function post(b) {
+    return fetch('/api/painel?lote=1', { method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) { var e = new Error(j.erro || ('HTTP ' + r.status)); e.status = r.status; throw e; } return j; }); });
+  }
+  var fila = Promise.resolve();
+  function registrar(it, dest) {
+    var l = { processo: it.processo, lote: it.lote, msg: 'na fila…' };
+    linhas.push(l); desenha();
+    fila = fila.then(function () {
+      l.msg = 'registrando…'; desenha();
+      return post({ acao: 'minuta-versao', id: it.lote, processo: it.processo, rotulo: String(it.rotulo || 'Minuta do PJe').slice(0, 80),
+        origem: String(it.origem || '').slice(0, 400), secoes: secoes(it.secoes), vigente: it.vigente !== false })
+        .then(function (j) {
+          var v = (j.versoes || []).slice(-1)[0] || {};
+          l.ok = true; l.msg = 'versão ' + (v.id || '?') + (j.trocouVigente ? ' (vigente)' : ' (guardada)'); desenha();
+          avisa(dest, { tipo: 'collectio-resultado', processo: it.processo, lote: it.lote, ok: true, versao: v.id || '', vigente: j.vigente || '' });
+        })
+        .catch(function (e) {
+          l.ok = false; l.msg = e.message; desenha();
+          avisa(dest, { tipo: 'collectio-resultado', processo: it.processo, lote: it.lote, ok: false, erro: e.message });
+        });
+    });
+  }
+  window.addEventListener('message', function (e) {
+    if (e.origin !== ORIGEM || !pronto) return;
+    var d = e.data || {};
+    if (d.tipo !== 'collectio-minutas' || !nonce || d.nonce !== nonce || !Array.isArray(d.itens)) return;
+    d.itens.slice(0, 200).forEach(function (it) {
+      if (!it || !CNJ.test(String(it.processo || '')) || !ID.test(String(it.lote || ''))) {
+        linhas.push({ processo: it && it.processo, lote: it && it.lote, ok: false, msg: 'item inválido' }); desenha(); return;
+      }
+      registrar(it, e.source);
+    });
+  });
+  if (!nonce) { estado('<span class="no">Abra esta página pelo PJe: falta o código da sessão de importação.</span>'); return; }
+  fetch('/api/painel?lote=1', { credentials: 'same-origin' })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { st: r.status, j: j }; }); })
+    .then(function (x) {
+      if (x.st === 401) { estado('<span class="no">Faça login no <a href="/amicus/collectio/" target="_blank" rel="noopener">Collectio</a> nesta mesma janela do navegador e depois recarregue esta página.</span>'); return; }
+      if (x.st !== 200) { estado('<span class="no">Collectio indisponível (HTTP ' + x.st + ').</span>'); return; }
+      if (!x.j.gestor) { estado('<span class="no">Só o gestor registra minutas no Collectio.</span>'); return; }
+      pronto = true;
+      estado('<span class="ok">Pronto para receber.</span> Usuário: ' + esc(x.j.usuario || '') + '.' + (window.opener ? '' : ' <span class="no">Esta janela não foi aberta pelo PJe.</span>'));
+      if (window.opener) avisa(window.opener, { tipo: 'collectio-pronto', usuario: x.j.usuario || '' });
+    })
+    .catch(function (e) { estado('<span class="no">Falha ao consultar o Collectio: ' + esc(e.message) + '</span>'); });
+})();
+</script>
+</body>
+</html>
