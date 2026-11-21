@@ -268,3 +268,10 @@ test('Login diário: a sessão vence à meia-noite (UTC-4) do dia em que foi abe
     assert.equal(L.quem(req), null);
   } finally { Date.now = real; }
 });
+
+test('Mural: Hoje/Semana integrado à lateral do calendário (abas em linha, seções sem caixa)', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-lado button\.on\{color:var\(--v\)!important;border-bottom-color:var\(--v\)!important\}/);
+  assert.match(h, /#mu-host \.cg-cal \.cc-esq \.cc-meta,#mu-host \.cg-cal \.cc-esq \.cc-td\{/);
+});
