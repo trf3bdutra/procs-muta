@@ -107,7 +107,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .bh .bulk select.on{border-color:var(--ac);color:var(--ac);font-weight:700;background:var(--ok-bg)}
 .bh .sub{flex-basis:100%;font-size:12px;color:#7a7465;margin-top:2px}
 .bl.mo-man .bh{border-left:3px solid #b8860b}.bl.mo-cont .bh{border-left:3px solid #1f6f5c}.bl.mo-regra .bh{border-left:3px solid #2c4a7a}.bl.mo-esp .bh{border-left:3px solid #6b4c9a}
-.bl.mo-R .bh{border-left:3px solid #235a55}.bl.vz{opacity:.6}.bl.mo-fora .bh{border-left:3px dashed #9a948a}.seg.fora small{font-size:10px;opacity:.75}.seg.fora[hidden]{display:none}.bl.vz .bh{border-left:3px dashed #9a948a}.bl.vz .bh h3{font-weight:600}
+.bl.mo-R .bh{border-left:3px solid #235a55}.bl.vz{opacity:.6}.pp .mt b.np{font-weight:700;color:var(--tx)}.bl.mo-fora .bh{border-left:3px dashed #9a948a}.seg.fora small{font-size:10px;opacity:.75}.seg.fora[hidden]{display:none}.bl.vz .bh{border-left:3px dashed #9a948a}.bl.vz .bh h3{font-weight:600}
 .bl.mo-hist .bh{border-left:3px solid #8a6d3b}.bl.mo-lote .bh{border-left:3px solid #4f7f9a}.bl.mo-grav .bh{border-left:3px solid #9a948a}.bl.mo-carga .bh,.bl.mo-vazio .bh{border-left:3px solid #b5452f}
 .rw .ck,.bh .ck{width:16px;height:16px;margin:0 4px 0 0;accent-color:#1f3b5c;cursor:pointer;align-self:center}
 .rw.sel,.rw.mud.sel{background:#e6eef8!important;box-shadow:inset 3px 0 0 #1f3b5c}
@@ -337,16 +337,18 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   var FIL='todos', BUSCA='', ABERTO={};
   function cargas(){var Ld={},La={},Lc={},Lca={};IT.forEach(function(x){var w=peso(x),d=fin(x,'d'),c=fin(x,'c');Ld[d]=(Ld[d]||0)+w;if(x.d)La[x.d]=(La[x.d]||0)+w;if(c)Lc[c]=(Lc[c]||0)+1;if(x.c)Lca[x.c]=(Lca[x.c]||0)+1;});return {Ld:Ld,La:La,Lc:Lc,Lca:Lca};}
   function equipe(){var k=cargas();
+    /* quantos processos cada pessoa tem nesta proposta: para minutar e para corrigir */
+    var ND={},NC={};IT.forEach(function(x){var d=fin(x,'d'),c=fin(x,'c');if(d)ND[d]=(ND[d]||0)+1;if(c)NC[c]=(NC[c]||0)+1;});var np=function(n){return n+' processo'+(n===1?'':'s');};
     var aus=function(n,fora,txt){return fora?'<span class="sw off" title="'+txt+'">fora da sessão</span>':'<label class="sw" title="Ausente no período: sai da proposta"><input type="checkbox" data-aus="'+esc(n)+'"'+(AUS[n]?' checked':'')+'>ausente</label>';};
     var barra=function(v,a,cap,un){var mx=Math.max(cap,v,a,1);return '<span class="bar"><i class="'+(v>cap?'x':'')+'" style="width:'+(v/mx*100).toFixed(1)+'%"></i>'+(cap&&cap<mx?'<u style="left:'+(cap/mx*100).toFixed(1)+'%" title="capacidade: '+un(cap)+'"></u>':'')+(a?'<em style="left:'+Math.min(99,a/mx*100).toFixed(1)+'%" title="já gravado: '+un(a)+'"></em>':'')+'</span>';};
     /* sessão em que a pessoa não minuta: linha recolhida, sem barra */
     document.getElementById('eq-d').innerHTML=PD.map(function(m){var cap=CAPD[m.nome]||0,v=k.Ld[m.nome]||0,a=k.La[m.nome]||0,fora=!!FD[m.nome],cor=PC.some(function(c){return c.nome===m.nome;});
-      var info=[meta(m.nome)+'/dia',a?'gravado '+nf(a):'',cor?'corrige '+(k.Lc[m.nome]||0):''].filter(Boolean).join(' · ');
+      var info=['<b class="np">'+np(ND[m.nome]||0)+' p/ minutar</b>',meta(m.nome)+'/dia',a?'gravado '+nf(a):'',cor?'corrige '+(k.Lc[m.nome]||0):''].filter(Boolean).join(' · ');
       return '<div class="pp'+(AUS[m.nome]||fora?' aus':'')+(v>cap?' acima':'')+'"><span class="nm">'+esc(m.nome)+'</span><span class="num"><b>'+nf(v)+'</b><small> / '+nf(cap)+'</small></span>'+
         (fora?'':barra(v,a,cap,nf))+'<span class="mt">'+info+'</span>'+aus(m.nome,fora,'fora das minutas desta sessão')+'</div>';}).join('');
     document.getElementById('eq-c').innerHTML=PC.map(function(m){var v=k.Lc[m.nome]||0,a=k.Lca[m.nome]||0,cap=CAPC[m.nome]||0,fora=!!FC[m.nome];
       return '<div class="pp'+(AUS[m.nome]||fora?' aus':'')+(v>cap?' acima':'')+'"><span class="nm">'+esc(m.nome)+'</span><span class="num"><b>'+v+'</b><small> / '+cap+'</small></span>'+
-        (fora?'':barra(v,a,cap,String))+'<span class="mt">'+(a?'gravado '+a:'nada gravado')+'</span>'+aus(m.nome,fora,'fora das correções desta sessão')+'</div>';}).join('');
+        (fora?'':barra(v,a,cap,String))+'<span class="mt"><b class="np">'+np(NC[m.nome]||0)+' p/ corrigir</b> · '+(a?'gravado '+a:'nada gravado')+'</span>'+aus(m.nome,fora,'fora das correções desta sessão')+'</div>';}).join('');
   }
   function contar(){var nv=0,ok=0,alt=0,grav=0;IT.forEach(function(x){var d=fin(x,'d'),c=fin(x,'c');if(!x.d||!x.c)nv++;if(x.d||x.c)grav++;if(d&&c)ok++;if((x.d&&d!==x.d)||(x.c&&c!==x.c))alt++;});return {nv:nv,ok:ok,alt:alt,grav:grav};}
   function topo(){var du=diasUteis(de,ate),k=contar(),tot=IT.reduce(function(a,x){return a+peso(x);},0),cap=PD.reduce(function(a,m){return a+(CAPD[m.nome]||0);},0);
