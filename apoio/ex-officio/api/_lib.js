@@ -24,15 +24,19 @@ function conferir(usuario, senha) {
 }
 function segredo() { const s = process.env.CMT_SESSION_SECRET; if (!s || s.length < 24) throw new Error('CMT_SESSION_SECRET ausente ou curto'); return s; }
 function assinar(v) { return crypto.createHmac('sha256', segredo()).update(v).digest('base64url'); }
+/* login diário: a sessão vale até a meia-noite do dia em que foi aberta, no horário de Mato Grosso do Sul (UTC-4, sem horário de verão) */
+const FUSO = 4 * 3600e3;
+function diaLocal(t) { return new Date(t - FUSO).toISOString().slice(0, 10); }
+function fimDoDia(t) { return Math.floor((t - FUSO) / 864e5) * 864e5 + 864e5 + FUSO; }
 function emitir(res, nome) {
-  const exp = Date.now() + HORAS * 3600e3, v = Buffer.from(JSON.stringify({ u: nome, e: exp })).toString('base64url');
-  res.setHeader('Set-Cookie', `cmt_eq=${v}.${assinar(v)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${HORAS * 3600}`);
+  const agora = Date.now(), exp = Math.min(fimDoDia(agora), agora + HORAS * 3600e3), v = Buffer.from(JSON.stringify({ u: nome, e: exp, d: diaLocal(agora) })).toString('base64url');
+  res.setHeader('Set-Cookie', `cmt_eq=${v}.${assinar(v)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${Math.max(1, Math.ceil((exp - agora) / 1000))}`);
 }
 function sair(res) { res.setHeader('Set-Cookie', 'cmt_eq=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'); }
 function quem(req) {
   const m = /(?:^|;\s*)cmt_eq=([^;]+)/.exec(req.headers.cookie || ''); if (!m) return null;
   const [v, s] = m[1].split('.'); if (!v || !s) return null;
-  try { if (!igual(assinar(v), s)) return null; const o = JSON.parse(Buffer.from(v, 'base64url').toString()); return o.e > Date.now() ? o.u : null; } catch (e) { return null; }
+  try { if (!igual(assinar(v), s)) return null; const o = JSON.parse(Buffer.from(v, 'base64url').toString()), t = Date.now(); return o.e > t && o.d === diaLocal(t) ? o.u : null; } catch (e) { return null; }
 }
 function exigir(req, res) { const u = quem(req); if (!u) { res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' }); return null; } return u; }
 /* Leituras condicionais ao GitHub (ETag): cada instância da função guarda a última resposta de cada GET e pergunta
@@ -133,4 +137,4 @@ async function commitArquivos(arqs, msg) {
   await avisarPlanilha(msg);
   return c;
 }
-module.exports = { ghFetch, gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };
+module.exports = { diaLocal, fimDoDia, ghFetch, gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };

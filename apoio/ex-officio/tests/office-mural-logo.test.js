@@ -209,7 +209,8 @@ test('Mural: passos do ponto de vista de quem está logado, sinalizações por p
   assert.match(h, /aguarda:\{t:'Aguardando outros'/);
   assert.match(h, /k:'corrigir',t:'A corrigir'/);
   assert.match(h, /data-ab=\\?"pront\\?"[^]*?title=\\?"Abrir o prontuário\\?"/);
-  assert.match(h, /\.calrow>\.lado\{align-self:stretch;height:0;min-height:100%;overflow:auto\}/);
+  assert.match(h, /\.calrow #lista\{flex:1;min-height:0;overflow:auto/);
+  assert.match(h, /<div class=\\"calrow\\"><div class=\\"esq\\"><slot name=\\"cal\\"><\\\/slot><div class=\\"board\\">/);
   assert.match(h, /#mu-host>\.av-box #avisos>\.nt:nth-child\(n\+3\)\{display:none!important\}/);
   assert.match(h, /class=\\"sesc\\" id=\\"sesl\\"/);
   assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
@@ -227,7 +228,7 @@ test('Mural: calendário sem os botões Dia/Semana/Mês, sempre no mês', () => 
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /#mu-host \.cg-cal \.cc-ps\{display:none!important\}/);
-  assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);\}/);
+  assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);/);
 });
 
 test('Mural: registros da Assessoria fora do calendário de quem não é da assessoria; meta do dia no canhoto; histórico de atividades', () => {
@@ -244,4 +245,89 @@ test('Mural: registros da Assessoria fora do calendário de quem não é da asse
   assert.match(h, /function calHoje\(D\)/);
   assert.match(h, /<b>Meu histórico de atividades<\/b>/);
   assert.ok(!/>Minha produtividade</.test(h));
+});
+
+test('Mural: histórico sob a lista (coluna da esquerda) e Minhas ausências logo abaixo dos avisos', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /hi\.open=true;hi\.removeAttribute\('slot'\);cal\.appendChild\(hi\)/);
+  assert.match(h, /<slot name=\\"avisos\\"><\\\/slot><slot name=\\"aus\\"><\\\/slot>/);
+  assert.match(h, /<slot name=\\"hist\\"><\\\/slot>/);
+});
+
+test('Login diário: a sessão vence à meia-noite (UTC-4) do dia em que foi aberta', () => {
+  process.env.CMT_SESSION_SECRET = process.env.CMT_SESSION_SECRET || '0123456789abcdef0123456789abcdef';
+  const L = require('../api/_lib.js'), real = Date.now;
+  try {
+    let ck = ''; const res = { setHeader: (k, v) => { ck = v; } };
+    Date.now = () => Date.parse('2026-11-22T03:30:00Z'); L.emitir(res, 'Bruno');
+    const req = { headers: { cookie: ck.split(';')[0] } };
+    assert.match(ck, /Max-Age=1800/);
+    assert.equal(L.quem(req), 'Bruno');
+    Date.now = () => Date.parse('2026-11-22T04:00:30Z');
+    assert.equal(L.quem(req), null);
+  } finally { Date.now = real; }
+});
+
+test('Mural: Hoje/Semana integrado à lateral do calendário (abas em linha, seções sem caixa)', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-lado button\.on\{color:var\(--v\)!important;border-bottom-color:var\(--v\)!important\}/);
+  assert.match(h, /#mu-host \.cg-cal \.cc-esq \.cc-meta,#mu-host \.cg-cal \.cc-esq \.cc-td\{/);
+});
+
+test('Mural: cabeçalho do calendário numa faixa baixa, com a cor da borda como fundo', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-h\{background:var\(--l\)!important;border-bottom:0!important;padding:3px 10px 3px 12px!important/);
+  assert.match(h, /#mu-host>#hc-cal-full\{padding:0!important;overflow:hidden;border-color:var\(--l\)!important\}/);
+});
+
+test('Mural: Histórico como vista alternativa do painel do calendário; dia do canhoto no cabeçalho', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /data-vista="cal">Calendário<\/button><button type="button" data-vista="hist">Histórico<\/button>/);
+  assert.match(h, /#hc-cal-full\.ver-hist #cc-cal \.cc-body\{display:none!important\}/);
+  assert.match(h, /#hc-cal-full:not\(\.ver-hist\) #prod\{display:none!important\}/);
+  assert.match(h, /new MutationObserver\(sinc\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
+});
+
+test('Agenda: todos cadastram; quem não é gestor grava só os próprios itens, privados (visíveis para ele e para a chefia)', async () => {
+  process.env.CMT_SESSION_SECRET = process.env.CMT_SESSION_SECRET || '0123456789abcdef0123456789abcdef';
+  const L = require('../api/_lib.js'), o = { lerJson: L.lerJson, gravarJson: L.gravarJson, exigir: L.exigir, gestor: L.gestor };
+  let store = { itens: [{ id: 'a', criador: 'Bruno' }, { id: 'b', criador: 'Victor', privado: true }, { id: 'c', criador: 'Estela', privado: true }], feitos: { x: 1 } }, USER = 'Victor';
+  L.lerJson = async p => p.includes('agenda') ? { dados: JSON.parse(JSON.stringify(store)), sha: 's' } : { dados: { registros: [] } };
+  L.gravarJson = async (p, doc) => { store = doc; }; L.exigir = () => USER; L.gestor = u => u === 'Bruno';
+  try {
+    const h = require('../api/sessoes.js');
+    const call = (method, body) => new Promise(ok => h({ method, query: { agenda: 1 }, body, headers: {} }, { status(n) { this.n = n; return this; }, json(d) { ok([this.n, d]); }, setHeader() {} }));
+    let [, d] = await call('GET'); assert.deepEqual(d.itens.map(i => i.id), ['a', 'b']);
+    await call('POST', { itens: [{ id: 'b', titulo: 'x', criador: 'Victor' }, { id: 'n1', titulo: 'nova' }], feitos: {} });
+    assert.deepEqual(store.itens.map(i => i.id).sort(), ['a', 'b', 'c', 'n1']);
+    assert.ok(store.itens.find(i => i.id === 'n1').privado && store.itens.find(i => i.id === 'n1').quem === 'Victor');
+    assert.deepEqual(store.feitos, { x: 1 });
+    USER = 'Estela'; [, d] = await call('GET'); assert.deepEqual(d.itens.map(i => i.id).sort(), ['a', 'c']);
+    USER = 'Bruno'; [, d] = await call('GET'); assert.equal(d.itens.length, 4);
+  } finally { Object.assign(L, o); }
+  const h = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /usuario:U\.eu\|\|'',gestor:!!U\.gestor,/);
+  assert.match(h, /#mu-host \.cg-cal \.cc-esq \.cc-al::before\{content:"Alertas e meta do dia"/);
+});
+
+test('Mural: sem a opção de recolher o calendário', () => {
+  const h = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-h \[data-a="min"\]\{display:none!important\}/);
+  assert.match(h, /localStorage\.setItem\('cc_min','false'\)/);
+});
+
+test('Mural: rodapé "Feito" fixo na lateral do calendário, com afazeres marcados e registros do dia', () => {
+  const fs = require('fs'), path = require('path');
+  const lib = fs.readFileSync(path.join(__dirname, '../../../caput/motor/assets/js/11-calendario.js'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+  assert.match(lib, /class="cc-fe2"><div class="cc-td-t">Feito/);
+  assert.match(lib, /afazeres\(dia\)\.filter\(x=>fz\[x\.id\]\)/);
+  assert.match(html, /function calFeito\(D\)/);
+  assert.match(html, /feitoHtml:ME\.feito\?ME\.feito\.html:null/);
+  assert.doesNotMatch(html.slice(html.indexOf('function calHoje'), html.indexOf('function calFeito')), /cc-feito/);
+  assert.doesNotMatch(lib.slice(lib.indexOf('cc-fe2')-200, lib.indexOf('cc-fe2')+600), /<details/);
 });
