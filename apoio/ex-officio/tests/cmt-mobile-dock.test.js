@@ -71,3 +71,13 @@ test('Para assinar: lista é o padrão; fila só no celular',()=>{
   assert.ok(html.includes("modo=cmtMobileMode()&&CMT.vis==='fila'?'fila':'lista'"));
   assert.ok(html.includes('#v-cmt #cmt-vis{display:none!important}'));
 });
+
+test('computador em três colunas e textos de monocrática no Para assinar',()=>{
+  assert.ok(html.includes('id="cmt-gsl"'),'painel do Gabinete à direita');
+  assert.ok(html.includes("document.body.classList.toggle('cmt-col-on',vis)"));
+  assert.ok(html.includes('Confirmar assinatura'));
+  assert.ok(!html.includes("Nenhum voto aguardando assinatura"));
+  assert.ok(html.includes("foi assinada no PJe?"));
+  assert.ok(html.includes('class="cmt-cp"'),'copiar número do processo');
+  assert.ok(html.includes('function cmtIrPara(mudo)'),'busca sem Enter');
+});

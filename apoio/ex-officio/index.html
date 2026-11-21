@@ -2141,6 +2141,10 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <button type="button" class="cmt-asl-k" id="cmt-asl-k" aria-expanded="true" aria-controls="cmt-asl-b" title="Recolher o painel de assinatura"><span class="cmt-asl-t">Para <em>assinar.</em></span><b class="cmt-asl-n" id="cmt-asl-n">0</b><svg class="cmt-asl-ch" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
     <div class="cmt-asl-b" id="cmt-asl-b"></div>
   </aside>
+  <aside class="cmt-gsl" id="cmt-gsl" aria-label="Gabinete">
+    <button type="button" class="cmt-gsl-k" id="cmt-gsl-k" aria-expanded="true" aria-controls="cmt-gsl-b" title="Recolher o painel do gabinete"><svg class="cmt-gsl-ch" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="cmt-gsl-t"><em>Gabinete.</em></span></button>
+    <div class="cmt-gsl-b" id="cmt-gsl-b"></div>
+  </aside>
   <div class="cmt-wrap" id="cmt-wrap" hidden>
 
     <div class="cmt-hd2">
@@ -5040,7 +5044,7 @@ function cmtPauta(){
     var at=[];if(x.intercor&&!x.intercorOk)at.push('intercorrência');if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta');
     var lib=x.etapa==='liberado';
     var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];
-    return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'<button type="button" class="cmt-mais-m" aria-label="Ações do item '+esc(String(x.item||''))+'" aria-expanded="false">⋯</button></td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span>'+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+' em apreciação</span>':'')+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
+    return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'<button type="button" class="cmt-cp" data-ccp="'+esc(x.cnj)+'" title="Copiar número do processo" aria-label="Copiar número do processo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><button type="button" class="cmt-mais-m" aria-label="Ações do item '+esc(String(x.item||''))+'" aria-expanded="false">⋯</button></td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+(x.partes?'<small>'+esc(x.partes)+'</small>':'')+'</span>'+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+' em apreciação</span>':'')+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
   $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
   var qn=$('#cmt-q-n');if(qn)qn.textContent=(CMT.q||'').trim()?L.length+' de '+it.length:'';
   var qx=$('#cmt-q-x');if(qx)qx.hidden=!(CMT.q||'').trim();
@@ -5266,19 +5270,19 @@ function cmtAssinar(){
 var j=CMT.dados||{},as=j.assinar||{},L=as.assinatura||[],modo=cmtMobileMode()&&CMT.vis==='fila'?'fila':'lista',al=$('#cmt-c-ass'),ft=$('#cmt-ass-ft');
 var seg=$('#cmt-vis');if(seg)Array.prototype.forEach.call(seg.querySelectorAll('[data-cvis]'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-cvis')===modo));});
 var pos=Math.min(CMT.pos||0,Math.max(0,L.length-1));CMT.pos=pos;
-var np=$('#cmt-n-pos');if(np)np.textContent=!L.length?'nada pendente':modo==='fila'?(pos+1)+' de '+L.length:L.length+(L.length===1?' voto':' votos');
+var np=$('#cmt-n-pos');if(np)np.textContent=!L.length?'nada pendente':modo==='fila'?(pos+1)+' de '+L.length:L.length+(L.length===1?' monocrática':' monocráticas');
 var fb=$('#cmt-fbar');if(fb){fb.hidden=(modo!=='fila'||!L.length);fb.innerHTML=L.map(function(_,i){return '<i class="'+(i<pos?'ok':i===pos?'at':'')+'"></i>';}).join('');}
 if(!al)return;
-if(!L.length){al.innerHTML='<p class="cmt-vazio">Nenhum voto aguardando assinatura.</p>';if(ft)ft.innerHTML='';return;}
+if(!L.length){al.innerHTML='<p class="cmt-vazio">Nenhuma monocrática aguardando assinatura.</p>';if(ft)ft.innerHTML='';return;}
 if(modo==='lista'){
-al.innerHTML=L.map(function(x){return '<div class="cmt-ar"><div class="gr"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+(x.desde?' · liberada '+esc(br(x.desde)):'')+'</p></div>'+cmtTrilha(3)+'<button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button></div>';}).join('');
+al.innerHTML=L.map(function(x){return '<div class="cmt-ar"><div class="gr"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+(x.desde?' · enviada em '+esc(br(x.desde)):'')+'</p></div>'+cmtTrilha(3)+'<button type="button" class="pri" data-cas="'+esc(x.cnj)+'" title="Confirma que a monocrática foi assinada no PJe">Confirmar assinatura</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button></div>';}).join('');
 if(ft)ft.innerHTML='';return;}
 var x=L[pos],meta=[x.item?'item '+x.item:'',x.servidor,x.corretor?'corrigido por '+x.corretor:''].filter(Boolean).join(' · ');
 al.innerHTML='<div class="cmt-fc-tg">'+(x.resultado?'<span class="cmt-tag ok">'+esc(x.resultado)+'</span>':'')+(x.meta?'<span class="cmt-tag mt">Meta</span>':'')+(x.urgente?'<span class="cmt-tag al">Urgente</span>':'')+(meta?'<span class="cmt-fc-m">'+esc(meta)+'</span>':'')+'</div>'+
 '<p class="cmt-fc-n">'+esc(x.cnj)+'</p><p class="cmt-fc-s">'+esc([x.classe,x.assunto].filter(Boolean).join(' · ')||'—')+'</p>'+
 '<p class="cmt-fc-k">Registrado no prontuário</p><p class="cmt-fc-r">'+esc(x.resumo||x.dispositivo||'Sem resumo no prontuário; abra a ficha para conferir.')+'</p>'+
-'<div class="cmt-fc-l">'+[['Minutado',[x.servidor,x.dataMinuta?br(x.dataMinuta):''].filter(Boolean).join(' · ')],['Corrigido',[x.corretor,x.dataCorrecao?br(x.dataCorrecao):''].filter(Boolean).join(' · ')],['Liberado',x.desde?br(x.desde):''],['Atenção',x.atencao||(!x.dataCorrecao&&x.desde?'Liberado sem correção':'')]].map(function(r){return '<div><span>'+r[0]+'</span><em style="font-style:normal">'+esc(r[1]||'—')+'</em></div>';}).join('')+'</div>'+
-'<div class="cmt-fc-ac"><button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar e seguir</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button><button type="button" data-cpl="1">Pular</button><button type="button" data-cfi="'+esc(x.cnj)+'">Ficha</button></div>';
+'<div class="cmt-fc-l">'+[['Minutado',[x.servidor,x.dataMinuta?br(x.dataMinuta):''].filter(Boolean).join(' · ')],['Corrigido',[x.corretor,x.dataCorrecao?br(x.dataCorrecao):''].filter(Boolean).join(' · ')],['Enviada',x.desde?br(x.desde):''],['Atenção',x.atencao||(!x.dataCorrecao&&x.desde?'Enviada sem correção':'')]].map(function(r){return '<div><span>'+r[0]+'</span><em style="font-style:normal">'+esc(r[1]||'—')+'</em></div>';}).join('')+'</div>'+
+'<div class="cmt-fc-ac"><button type="button" class="pri" data-cas="'+esc(x.cnj)+'" title="Confirma que a monocrática foi assinada no PJe">Confirmar e seguir</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button><button type="button" data-cpl="1">Pular</button><button type="button" data-cfi="'+esc(x.cnj)+'">Ficha</button></div>';
 if(ft)ft.innerHTML='<span class="cmt-fc-m">A seguir</span>'+L.slice(pos+1,pos+4).map(function(y){return '<b>'+esc(String(y.cnj).split('.')[0])+'</b>';}).join('')+(L.length-pos-4>0?'<span>+'+(L.length-pos-4)+'</span>':'');}
 /* 02 · urgências, a mesma lista das Monocráticas */
 function cmtUrg(){
@@ -5353,6 +5357,9 @@ function cmtGv(k,abre){var g=document.getElementById('cmt-gv');if(!g)return;var 
 function cmtGvPos(){var inn=document.getElementById('cmt-gv-in');if(!inn)return;var vc=document.getElementById('v-cmt'),desk0=!cmtMobileMode()&&!!vc&&!vc.hidden;
   Object.keys(CMTGV).forEach(function(k){var el=document.querySelector(CMTGV[k]);if(!el)return;var desk=desk0;
     if(!el._cmtMk){el._cmtMk=document.createComment('cmt-gv '+k);el.parentNode.insertBefore(el._cmtMk,el);}
+    var gb=document.getElementById('cmt-gsl-b');
+    if(k==='m'&&gb){if(desk&&el.parentNode!==gb){el.removeAttribute('data-gv');gb.appendChild(el);el.hidden=false;}
+      if(!desk&&el.parentNode===gb)el._cmtMk.parentNode.insertBefore(el,el._cmtMk.nextSibling);return;}
     if(desk&&el.parentNode!==inn){el.setAttribute('data-gv',k);inn.appendChild(el);}
     if(!desk&&el.parentNode===inn){el._cmtMk.parentNode.insertBefore(el,el._cmtMk.nextSibling);if(k==='dil')el.hidden=true;}});
   if(!desk0)cmtGv(null);}
@@ -5363,12 +5370,19 @@ function cmtGvPos(){var inn=document.getElementById('cmt-gv-in');if(!inn)return;
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('cmt-gv-on')&&!document.querySelector('dialog[open]'))cmtGv(null);});
 function cmtAslMin(m){document.body.classList.toggle('cmt-asl-min',!!m);try{localStorage.setItem('cmt_asl_min',m?'1':'0');}catch(e){}
   var k=document.getElementById('cmt-asl-k');if(k){k.setAttribute('aria-expanded',String(!m));k.title=m?'Abrir o painel de assinatura':'Recolher o painel de assinatura';}}
-function cmtAslPos(){var s=document.getElementById('cmt-ass'),b=document.getElementById('cmt-asl-b'),g=document.getElementById('cmt-grid'),w=document.getElementById('cmt-wrap');
-  if(!s||!b||!g)return;var desk=!cmtMobileMode();
-  document.body.classList.toggle('cmt-asl-on',desk&&!!w&&!w.hidden);
-  if(desk&&s.parentNode!==b)b.appendChild(s);
+/* computador: Para assinar vira uma coluna ao lado do quadro da pauta, e o Gabinete fica no painel da direita */
+function cmtAslPos(){var s=document.getElementById('cmt-ass'),g=document.getElementById('cmt-grid'),w=document.getElementById('cmt-wrap'),pa=document.getElementById('cmt-pauta');
+  if(!s||!g||!pa)return;var desk=!cmtMobileMode(),vis=desk&&!!w&&!w.hidden;
+  var row=document.getElementById('cmt-row');if(!row){row=document.createElement('div');row.id='cmt-row';row.className='cmt-row';pa.parentNode.insertBefore(row,pa);row.appendChild(pa);}
+  document.body.classList.remove('cmt-asl-on');
+  document.body.classList.toggle('cmt-col-on',vis);document.body.classList.toggle('cmt-gsl-on',vis);
+  if(desk&&s.parentNode!==row)row.insertBefore(s,pa);
   if(!desk&&s.parentNode!==g)g.insertBefore(s,g.firstChild);
   cmtGvPos();}
+function cmtGslMin(m){document.body.classList.toggle('cmt-gsl-min',!!m);try{localStorage.setItem('cmt_gsl_min',m?'1':'0');}catch(e){}
+  var k=document.getElementById('cmt-gsl-k');if(k){k.setAttribute('aria-expanded',String(!m));k.title=m?'Abrir o painel do gabinete':'Recolher o painel do gabinete';}}
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#cmt-gsl-k'))cmtGslMin(!document.body.classList.contains('cmt-gsl-min'));});
+try{if(localStorage.getItem('cmt_gsl_min')==='1')document.body.classList.add('cmt-gsl-min');}catch(e){}
 (function(){try{if(localStorage.getItem('cmt_asl_min')==='1')document.body.classList.add('cmt-asl-min');}catch(e){}
   var w=document.getElementById('cmt-wrap');if(w&&window.MutationObserver)new MutationObserver(cmtAslPos).observe(w,{attributes:true,attributeFilter:['hidden']});
   window.addEventListener('resize',function(){clearTimeout(cmtAslPos._t);cmtAslPos._t=setTimeout(cmtAslPos,120);});
@@ -5405,6 +5419,11 @@ function cmtMobileSync(){
  if(dr)dr.setAttribute('aria-modal',String(cmtMobileMode()&&open));
  document.body.classList.toggle('cmt-mobile-modal',cmtMobileMode()&&(open||pnNot||pnDil));
 }
+document.addEventListener('click',function(e){var cp=e.target.closest&&e.target.closest('.cmt-cp');if(!cp)return;
+ e.preventDefault();e.stopPropagation();var n=cp.getAttribute('data-ccp')||'';
+ var ok=function(){cp.classList.add('ok');cp.title='Copiado';toast('Número copiado: '+n);setTimeout(function(){cp.classList.remove('ok');cp.title='Copiar número do processo';},1400);};
+ var alt=function(){var t=document.createElement('textarea');t.value=n;t.setAttribute('readonly','');t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');ok();}catch(x){}t.remove();};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(n).then(ok,alt);else alt();},true);
 document.addEventListener('click',function(e){var mm=e.target.closest&&e.target.closest('.cmt-mais-m');if(!mm)return;
  e.preventDefault();e.stopPropagation();var tr=mm.closest('tr');if(!tr)return;var on=tr.classList.toggle('cmt-ac-on');mm.setAttribute('aria-expanded',String(on));},true);
 function cmtMobileSearch(show){
@@ -5443,7 +5462,7 @@ function cmtRail(na,nu,nd,hj){
 var v=cmtVisto(),d=function(k,n){var a=Number(v[k]);return (isFinite(a)&&n>a)?(n-a):0;};
 var it=[['a','ok',na,'assinar',d('a',na)],['u','al'+(hj?' hj':''),nu,'urgências',d('u',nu)],['d','inf',nd,'dúvidas',d('d',nd)]];
 var bu=$('#cmt-n-urg-t'),bd=$('#cmt-n-dv-t'),an=$('#cmt-asl-n');
-if(bu){bu.textContent=nu;bu.hidden=!nu;}if(bd){bd.textContent=nd;bd.hidden=!nd;}if(an)an.innerHTML='<span class="n">'+na+'</span><span class="u"> '+(na===1?'voto':'votos')+'</span>';
+if(bu){bu.textContent=nu;bu.hidden=!nu;}if(bd){bd.textContent=nd;bd.hidden=!nd;}if(an)an.innerHTML='<span class="n">'+na+'</span><span class="u"> '+(na===1?'monocrática':'monocráticas')+'</span>';
 var el=$('#cmt-rail');
 if(el)el.innerHTML=it.map(function(x){return '<button type="button" data-cdt="'+x[0]+'" class="'+x[1]+(x[4]?' nov':'')+'" title="'+x[2]+' '+x[3]+'"><i>'+x[2]+'</i><small>'+x[3]+'</small>'+(x[4]?'<s>+'+x[4]+'</s>':'')+'</button>';}).join('');
 var tb=$('#cmt-dr-tb'),at=cmtAba();
@@ -5687,13 +5706,13 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   s.value=s.value==='item'?'cnj':'item';cmtIrK();var i=$('#cmt-ir-v');if(i)i.focus();});
 document.addEventListener('input',function(e){if(!e.target||e.target.id!=='cmt-ir-v')return;var s=$('#cmt-ir-k');
   if(s&&s.value==='item'&&dgx(e.target.value).length>=7){s.value='cnj';cmtIrK();}});
-function cmtIrPara(){
+function cmtIrPara(mudo){
   var inp=$('#cmt-ir-v'),sel=$('#cmt-ir-k');if(!inp||!sel)return;
   var v=(inp.value||'').trim();if(!v)return;
   var p=((CMT.dados||{}).pauta)||{},L=p.itens||[],d=dgx(v),it;
   if(sel.value==='item')it=L.filter(function(x){return String(x.item||'').replace(/^0+/,'')===v.replace(/^0+/,'');})[0];
   else it=L.filter(function(x){return d.length>=4&&dgx(x.cnj).indexOf(d)>=0;})[0];
-  if(!it){toast('Não encontrei '+(sel.value==='item'?'o item ':'o processo ')+v+' nesta pauta.');var box=$('#cmt-fastnav');if(box){box.classList.remove('flash');void box.offsetWidth;box.classList.add('flash');}return;}
+  if(!it){if(mudo)return;toast('Não encontrei '+(sel.value==='item'?'o item ':'o processo ')+v+' nesta pauta.');var box=$('#cmt-fastnav');if(box){box.classList.remove('flash');void box.offsetWidth;box.classList.add('flash');}return;}
   CMT.q='';CMT.filtro='todos';var q=$('#cmt-q');if(q)q.value='';
    if(cmtMobileMode()){document.body.classList.remove('cmt-search-on');cmtMobileSync();}
    cmtPauta();
@@ -5705,7 +5724,11 @@ function cmtIrPara(){
     if(tr){tr.scrollIntoView({behavior:'smooth',block:'center'});tr.classList.add('qf-hit');setTimeout(function(){tr.classList.remove('qf-hit');},3000);}
   },40);
 }
-document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='cmt-ir-v'&&e.key==='Enter'){e.preventDefault();cmtIrPara();}});
+document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='cmt-ir-v'&&e.key==='Enter'){e.preventDefault();clearTimeout(CMT.irT);cmtIrPara();}});
+/* sem Enter: ao parar de digitar, vai sozinho ao item (3 dígitos vão na hora) ou ao processo (a partir de 7 dígitos) */
+document.addEventListener('input',function(e){if(!e.target||e.target.id!=='cmt-ir-v')return;clearTimeout(CMT.irT);
+  var v=dgx(e.target.value),s=$('#cmt-ir-k');if(!v||!s)return;var item=s.value==='item';if(!item&&v.length<7)return;
+  CMT.irT=setTimeout(function(){cmtIrPara(true);},item&&v.length>=3?150:700);});
 document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('#cmt-ir-go')){cmtIrPara();}});
 
 /* decisões: gravam onde já era gravado e podem ser desfeitas */
@@ -5733,7 +5756,7 @@ document.addEventListener('click',function(e){
   if(d){var c2=d.getAttribute('data-cd'),it2=(((CMT.dados||{}).pauta||{}).itens||[]).filter(function(x){return x.cnj===c2;})[0]||{cnj:c2};
     cmtDevolverDlg(it2);return;}
   var a=e.target.closest&&e.target.closest('[data-cas]');
-  if(a){var c3=a.getAttribute('data-cas');if(confirm('Assinar a monocrática de '+c3+'?'))cmtPost({acao:'assinar',cnj:c3},'Monocrática assinada.');return;}
+  if(a){var c3=a.getAttribute('data-cas');if(confirm('Confirmar que a monocrática de '+c3+' foi assinada no PJe?'))cmtPost({acao:'assinar',cnj:c3},'Assinatura confirmada.');return;}
   var dvb=e.target.closest&&e.target.closest('[data-cdv]');
   if(dvb){var c4=dvb.getAttribute('data-cdv'),a4=(((CMT.dados||{}).assinar||{}).assinatura||[]).filter(function(x){return x.cnj===c4;})[0]||{};
     var t4=prompt('Devolutiva para '+c4+' — vira diligência para '+(a4.servidor||'a equipe')+':');
@@ -9968,6 +9991,52 @@ html[data-theme=dark] #prq .sg-tp{background:#3a2a14;color:#f0c27a}html[data-the
 #v-cmt .cmt-ass-b .cmt-ar>button.pri{flex:1 1 auto!important}
 #v-cmt .cmt-ass-b .cmt-ar>button{flex:0 0 auto}
 #v-cmt .cmt-ass-ft:empty{display:none!important}
+/* ===== computador · três colunas: Para assinar (coluna ao lado da pauta) · pauta · Gabinete (painel à direita) ===== */
+.cmt-gsl{display:none}
+@media (min-width:781px){
+ body.cmt-gsl-on #v-cmt .cmt-gsl{display:flex;flex-direction:column;position:fixed;z-index:26;right:0;top:var(--cmt-top,0px);bottom:0;width:420px;background:var(--ep);border-left:1px solid var(--el);box-shadow:-6px 0 22px rgba(32,59,57,.06);transition:width .2s ease}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-k{display:flex;align-items:center;gap:10px;width:100%;min-height:69px;padding:10px 20px 12px 16px;border:0;border-bottom:1px solid var(--el);background:var(--ep);color:var(--ei);font:inherit;text-align:left;cursor:pointer}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-t{font-size:19px;font-weight:650;letter-spacing:-.01em;white-space:nowrap}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-t em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-ch{color:var(--em);transition:transform .2s ease;flex:none}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-k:hover .cmt-gsl-ch{color:var(--eg)}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-b{flex:1 1 auto;min-height:0;overflow:auto;padding:12px 14px 18px}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-b #cmt-mais{display:block!important;margin:0!important}
+ body.cmt-gsl-on #v-cmt .cmt-gsl-b #cmt-mais>h2{display:none!important}
+ body.cmt-gsl-on #v-cmt #cmt-b-gab{display:none!important}
+ body.cmt-gsl-on.cmt-gsl-min #v-cmt .cmt-gsl{width:46px}
+ body.cmt-gsl-on.cmt-gsl-min #v-cmt .cmt-gsl-b{display:none}
+ body.cmt-gsl-on.cmt-gsl-min #v-cmt .cmt-gsl-k{flex-direction:column;justify-content:flex-start;gap:12px;height:100%;padding:16px 0;border-bottom:0}
+ body.cmt-gsl-on.cmt-gsl-min #v-cmt .cmt-gsl-t{writing-mode:vertical-rl;font-size:15px}
+ body.cmt-gsl-on.cmt-gsl-min #v-cmt .cmt-gsl-ch{transform:rotate(180deg)}
+ /* o conteúdo cede espaço ao Gabinete */
+ body.cmt-gsl-on #v-cmt{margin-left:0!important;margin-right:436px!important;max-width:none!important;padding-left:24px!important;transition:margin-right .2s ease}
+ body.cmt-gsl-on.cmt-gsl-min #v-cmt{margin-right:62px!important}
+ /* Para assinar: coluna no visual do quadro da pauta */
+ body.cmt-col-on #v-cmt .cmt-row{display:grid;grid-template-columns:290px minmax(0,1fr);gap:16px;align-items:start}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass{position:sticky;top:calc(var(--cmt-top,0px) + 80px);margin:0!important;display:flex!important;flex-direction:column;max-height:calc(100vh - var(--cmt-top,0px) - 92px);overflow:auto}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass>h2{display:flex!important;align-items:baseline;gap:8px;margin:0;padding:14px 16px 12px;border-bottom:1px solid var(--el)}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass>h2 .nn{display:none}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass #cmt-fbar{display:none}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass #cmt-c-ass{padding:0!important}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass .cmt-ar{border:0!important;border-bottom:1px solid var(--el)!important;margin:0!important;padding:12px 16px!important;background:none!important}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass .cmt-ar:hover{background:var(--ep)!important}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass .cmt-ar>button{font-size:12.5px!important;padding:0 9px!important;min-height:34px!important;white-space:nowrap!important}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-ass .cmt-ar>button.pri{flex:1 1 0!important;min-width:0!important}
+ body.cmt-col-on #v-cmt .cmt-row>#cmt-pauta{margin:0!important}
+ /* pauta mais estreita: etapas só com ícones (o rótulo fica na dica) para caber sem rolar */
+ body.cmt-gsl-on:not(.cmt-gsl-min) #v-cmt .cmt-tb .cmt-pa b{display:none}
+ body.cmt-gsl-on:not(.cmt-gsl-min) #v-cmt .cmt-tb{min-width:0}
+ body.cmt-gsl-on #v-cmt #cmt-pauta .cmt-tb thead th:nth-child(3){width:178px!important}
+ body.cmt-gsl-on #v-cmt #cmt-rows td.cnj{font-size:10.5px}
+}
+@media (prefers-reduced-motion:reduce){body.cmt-gsl-on #v-cmt .cmt-gsl,body.cmt-gsl-on #v-cmt{transition:none}}
+/* copiar o número do processo */
+#v-cmt .cmt-cp{display:inline-grid;place-items:center;width:22px;height:22px;margin-left:4px;padding:0;border:0;border-radius:6px;background:none;color:var(--em);opacity:.55;cursor:pointer;vertical-align:middle;flex:none}
+#v-cmt .cmt-cp:hover,#v-cmt .cmt-cp:focus-visible{opacity:1;background:var(--ep2);color:var(--eg)}
+#v-cmt .cmt-cp.ok{opacity:1;color:#2e6a44}
+#v-cmt .cmt-cp svg{width:14px;height:14px}
+@media (max-width:780px){#v-cmt .cmt-cp{width:32px;height:30px;margin-left:0}#v-cmt .cmt-cp svg{width:16px;height:16px}}
 /* lista: os cartões ficam direto no fundo do painel, sem a caixa branca por trás */
 #v-cmt #cmt-c-ass:has(>.cmt-ar){background:none!important;border:0!important;padding:0!important;box-shadow:none!important}
 /* computador: só a lista; o painel lateral usa a mesma altura, o mesmo fundo e o mesmo título do cabeçalho da página */
@@ -9981,7 +10050,7 @@ html[data-theme=dark] #prq .sg-tp{background:#3a2a14;color:#f0c27a}html[data-the
  body.cmt-asl-on #v-cmt .cmt-asl-b #cmt-ass>h2{display:none!important}
 }
 /* computador: número do processo numa linha só */
-@media (min-width:781px){#v-cmt #cmt-pauta .cmt-tb thead th:nth-child(3){width:178px!important}#v-cmt #cmt-rows td.cnj{white-space:nowrap!important}}
+@media (min-width:781px){#v-cmt #cmt-pauta .cmt-tb thead th:nth-child(3){width:202px!important}#v-cmt #cmt-rows td.cnj{white-space:nowrap!important}}
 #v-cmt #cmt-b-bus{display:none!important}
 #cmt-prog .cmt-pl{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:11px;color:var(--em)}
 #cmt-prog .cmt-pl i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
