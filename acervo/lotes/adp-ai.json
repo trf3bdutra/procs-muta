@@ -24088,11 +24088,11 @@
    "assunto": "Taxa de Fiscalização Ambiental",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Seiva Produtos e Serviços Ltda. contra a decisão que, na execução fiscal 5001272-57.2020.4.03.6002, rejeitou a exceção de pré-executividade contra a cobrança de TCFA pelo IBAMA. A agravante alega inatividade após cisão parcial, provada por certidão de oficial de justiça. A tutela recursal foi indeferida; o IBAMA respondeu.",
+   "peculiaridades": "Tutela recursal indeferida antes da redistribuição. Preparo por PagTesouro/Pix, sem STN [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -24123,7 +24123,18 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal — TCFA (IBAMA); exceção de pré-executividade; inatividade após cisão parcial",
+    "origem": "1ª Vara Federal de Dourados · 5001272-57.2020.4.03.6002",
+    "decisao_agravada": "Rejeição da exceção de pré-executividade [VALIDAR ID]",
+    "recurso": "ID 353314744 · 05/02/2026",
+    "preparo": "PagTesouro/Pix, sem STN [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Pix/PagTesouro (não aceito): ID 353323175 · \"Aguardando pagamento\": ID 353323168 · valor R$ 64,26 · pago em 05/02/2026 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5001272-57.2020.4.03.6002 · redistribuído do Gab. 47 (Des. Fed. Leila Paiva) à Turma Regional de MS · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -24144,6 +24155,17 @@
     "ultima_informacao": "Certidão · ID 370187581 · 30/04/2026",
     "ultima_movimentacao": "30/04/2026 17:55 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Em execução fiscal do IBAMA para cobrança de TCFA (CDAs 259174 e 259175, R$ 77.032,09, do 1º trimestre de 2017 ao 4º de 2018), o juízo rejeitou a exceção de pré-executividade da executada, que alegava inatividade após cisão parcial.",
+    "inicial": "Execução fiscal 5001272-57.2020.4.03.6002 (1ª Vara Federal de Dourados) do IBAMA contra Seiva Produtos e Serviços Ltda.",
+    "decisao_recorrida": "Decisão que rejeitou a exceção de pré-executividade (empresa ativa na JUCEMS e no CNPJ; cisão apenas parcial; fato gerador da TCFA, artigo 17-B da Lei 6.938/1981) [VALIDAR ID e data]",
+    "recurso": "Agravo ID 353314744 (05/02/2026): (1) a empresa não exerce mais a atividade que gera a TCFA; (2) reestruturação societária pela 21ª alteração contratual, com cisão parcial e novas empresas desde 2015 e 2016; (3) certidão de oficial de justiça prova a inatividade, sem dilação probatória; pede antecipação da tutela recursal para suspender a execução e o SISBAJUD pela raiz do CNPJ.",
+    "resposta": "IBAMA, contrarrazões ID 356790479 (25/02/2026): a empresa segue ativa e não comunicou o encerramento das atividades ao Cadastro Técnico Federal; manutenção da decisão.",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Decisão ID 353878440 (11/02/2026, Des. Fed. Leila Paiva): indeferiu a antecipação da tutela recursal. Decisão ID 368456623 (30/04/2026): redistribuição à Turma Regional de MS (Resolução 33/2025).",
+    "representacao": "Agravante: advogados constituídos [VALIDAR procuração]. Agravado: IBAMA (PGF).",
+    "preparo": "PagTesouro/Pix, código 20466, R$ 64,26, em 05/02/2026 (ID 353323175); guia \"aguardando pagamento\" ID 353323168; sem comprovante STN [VALIDAR]"
    }
   },
   {
