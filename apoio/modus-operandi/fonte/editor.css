@@ -243,3 +243,17 @@ html.ed-cmt .ed-body:has(#ed-ler)>.ed-list,html.ed-cmt .ed-body:has(#ed-man)>.ed
 .lp-ler .lp-cat .lp-c:hover>h4::after{background:#d9c49a}
 .lp-ler .lp-sub2{margin:18px 0 6px;font:600 15px/1.3 Figtree,system-ui,sans-serif;color:#a57829}
 .lp-ler .lp-cat .lp-c>h4{font-size:12px;color:#4a5960}
+
+/* Entradas rápidas no editor: cabeçalho e formulário no alto; embaixo, A incorporar e Incorporadas lado a lado, cada uma com sua rolagem */
+.ed-body.ed-rapb{display:flex!important;overflow:hidden}
+.ed-body.ed-rapb>.ed-rap{display:flex;flex-direction:column;flex:1;min-height:0;width:100%;max-width:1240px;box-sizing:border-box;padding:18px 26px 14px}
+.ed-rap .rap-2{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;margin-top:16px;border:1px solid var(--line,#ded9cc);background:#fff}
+.ed-rap .rap-c{display:flex;flex-direction:column;min-height:0;min-width:0}
+.ed-rap .rap-c+.rap-c{border-left:1px solid var(--line,#ded9cc)}
+.ed-rap .rap-c h3{display:flex;align-items:center;gap:8px;flex:none;margin:0;padding:10px 14px;border-bottom:1px solid var(--line,#ded9cc);font:700 11px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#805b18;background:#fbf4e3}
+.ed-rap .rap-c.ok h3{color:#2f6b45;background:#eef6f0}
+.ed-rap .rap-c h3 i{font-style:normal;min-width:20px;height:18px;padding:0 5px;border-radius:9px;background:currentColor;text-align:center;line-height:18px}
+.ed-rap .rap-c h3 i{color:inherit}.ed-rap .rap-c h3 i{background:none;border:1px solid currentColor}
+.ed-rap .rap-c .rap-l{flex:1;min-height:0;overflow-y:auto;margin:0;padding:12px 14px;scrollbar-width:thin}
+.ed-rap .rap-c .rap-v{margin:0;padding:14px;color:#6b6457;font-size:13px}
+@media (max-width:760px){.ed-rap .rap-2{grid-template-columns:minmax(0,1fr)}.ed-rap .rap-c+.rap-c{border-left:0;border-top:1px solid var(--line,#ded9cc)}}

@@ -173,6 +173,25 @@ async function painel(req, res, u) {
         if (g.status >= 400) return res.status(g.status).json(g.body);
         return res.status(200).json({ ok: true, cnj, resultado: v });
       }
+      /* sinalizações do item (as mesmas do prontuário e dos cartões da pauta): intercorrência com tipo,
+         pendências e avisos do cartão; grava pelo mesmo caminho da página da pauta (diligência automática incluída) */
+      if (b.acao === 'sinal') {
+        if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
+        const C = b.campos || {}, campos = {};
+        ['intercor', 'intercorOk', 'intercorTipo', 'intercorChamado', 'retidoOk'].forEach(k => { if (k in C) campos[k] = String(C[k] == null ? '' : C[k]).slice(0, 1200); });
+        if (campos.intercorTipo && !/^(Chamado ao TI|Adiado|Retirado de pauta)$/.test(campos.intercorTipo)) return res.status(400).json({ erro: 'Tipo de intercorrência inválido.' });
+        const lista = v => (Array.isArray(v) ? v : []).filter(x => x && String(x.desc || '').trim()).slice(0, 60)
+          .map(x => ({ desc: String(x.desc).trim().slice(0, 300), ok: !!x.ok, em: String(x.em || hj).slice(0, 10), por: String(x.por || 'CMT').slice(0, 60) }));
+        if (C.cartao && typeof C.cartao === 'object') {
+          campos.cartao = {};
+          if ('pendencias' in C.cartao) campos.cartao.pendencias = lista(C.cartao.pendencias);
+          if ('avisos' in C.cartao) campos.cartao.avisos = lista(C.cartao.avisos);
+        }
+        if (!Object.keys(campos).length) return res.status(400).json({ erro: 'Nada a gravar.' });
+        const g = await require('./pauta').gravarItem(b.sessao, { cnj, campos }, u, true);
+        if (g.status >= 400) return res.status(g.status).json(g.body);
+        return res.status(200).json({ ok: true, cnj });
+      }
       /* entrada no painel: avisa o gestor, e nunca atrapalha quem está entrando */
       /* aviso do desembargador à equipe (ex.: depois de gravar no Compendium): mural e notificação de todos, por 7 dias */
       if (b.acao === 'aviso') {
@@ -283,7 +302,7 @@ async function painel(req, res, u) {
       de: 'AgentMail', numero: p.cnj, em: (it && p.vinculadoEm) || p.recebidoEm || '', modalidade: p.tipo || '', item: it ? String(it.item || '') : '',
       advogado: p.advogado || '', oab: p.oab || '', parte: p.parte || '', sessao: ses, aVincular: !it }; });
   /* notificações dirigidas ao relator: comunicados da equipe e avisos gerais ainda válidos */
-  const notificacoes = comunicados.filter(c => !c.lidoEm)
+  let notificacoes = comunicados.filter(c => !c.lidoEm)
     .map(c => ({ id: 'co-' + c.id, tipo: 'comunicado', titulo: c.titulo || 'Comunicado', texto: c.texto || '',
       de: c.de || '', numero: (c.cnjs || [])[0] || '', em: c.em || '', comId: c.id }))
     .concat(((avi || {}).registros || [])
@@ -329,6 +348,19 @@ async function painel(req, res, u) {
   const ordem = (x, y) => String(x.desde || x.pedidoEm || '').localeCompare(String(y.desde || y.pedidoEm || ''));
   assinar.assinatura.sort((x, y) => (!!y.urg - !!x.urg) || ordem(x, y)); assinar.liberacao.sort(ordem);
   urgencias.sort((x, y) => (y.espera || 0) - (x.espera || 0));
+  /* também nas notificações do relator: dúvidas dirigidas a ele, pedidos (possível causa de retirada ou adiamento),
+     decisões submetidas à assinatura e urgências em aberto; cada uma pela data em que chegou */
+  notificacoes = notificacoes
+    .concat(duvidas.map(d => ({ id: 'du-' + d.id, tipo: 'duvida', titulo: d.titulo || 'Dúvida', texto: d.texto || '',
+      de: d.de || '', numero: d.numero || '', em: d.em || '', prazo: d.prazo || '' })))
+    .concat(pedidos.map(d => ({ id: 'pe-' + d.id, tipo: 'pedido', caso: d.tipo, titulo: d.titulo || (d.tipo === 'retirada' ? 'Pedido de retirada de pauta' : 'Pedido de adiamento'),
+      texto: d.texto || '', de: d.de || '', numero: d.numero || '', em: d.em || '', sessao: d.sessao || '' })))
+    .concat(assinar.assinatura.map(a => ({ id: 'as-' + a.cnj, tipo: 'assinatura', titulo: 'Decisão submetida à assinatura' + (a.tipoAto ? ' · ' + a.tipoAto : ''),
+      texto: a.topico || '', de: a.servidor || '', numero: a.cnj, em: a.desde || '', urg: !!a.urg })))
+    .concat(urgencias.map(x => ({ id: 'ur-' + x.cnj, tipo: 'urgencia', titulo: 'Urgência · ' + (x.tipo || 'pedido urgente') + (x.nivel ? ' (' + x.nivel + ')' : ''),
+      texto: [x.situacao || 'pendente', x.obs || ''].filter(Boolean).join(' · '), de: x.servidor || '', numero: x.cnj, em: x.pedidoEm || '' })))
+    .sort((x, y) => String(y.em).localeCompare(String(x.em)))
+    .slice(0, 100);
 
   /* sessões e produção da equipe */
   const todas = ((cal || {}).sessoes || []).filter(s => s.publicada || s.marcosPublicados);
@@ -372,7 +404,8 @@ async function painel(req, res, u) {
     return { cnj: it.cnj, item: it.item || '', classe: it.classe || '', assunto: it.assunto || '', partes: it.partes || '',
       servidor: it.servidor || '', corretor: it.corretor || '', etapa: etapa(it),
       dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '',
-      resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, meta: c.meta || '',
+      resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, intercorTipo: c.intercorTipo || '', intercorChamado: c.intercorChamado || '', retidoOk: c.retidoOk || '',
+      pendencias: ((c.cartao || {}).pendencias) || [], avisos: ((c.cartao || {}).avisos) || [], meta: c.meta || '',
       sopref: c.sopref || '', destaque: c.destaque || '', julgamento: it.julgamento || '', obs: it.obs || '' };
   }) };
   /* marcos da semana: de 7 dias atrás a 7 dias à frente, nas sessões visíveis à equipe (data fora de um ano é erro de cadastro e fica de fora) */

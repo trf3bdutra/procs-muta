@@ -546,19 +546,24 @@ function rapLista(){return (RAP.vivo||(ED&&ED.rapidas)||[]).slice().sort(functio
 function rapPode(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
 function rapJ(x){return JSON.stringify(x,function(k,v){return k.charAt(0)==='_'&&k!=='_topicos'&&k!=='_estrutura'?undefined:v;});}
 function rapData(d){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||'');return m?m[3]+'/'+m[2]+'/'+m[1]:esc(d||'');}
-function rapHtml(nq){
+function rapItem(r,pode){var inc=r.situacao==='incorporada';return '<li class="'+(inc?'inc':'')+'"><div class="rap-m"><span class="rap-t">'+esc(r.tipo||'Entrada')+'</span><span>'+rapData(r.data)+'</span>'+(r.autor?'<span>'+esc(r.autor)+'</span>':'')+(inc?'<span class="rap-ok">incorporada'+(r.destino?' em '+esc(r.destino):'')+'</span>':'')+'</div>'+
+      '<p>'+xFm(r.texto||'')+'</p>'+(r.origem?'<p class="rap-o">Origem: '+esc(r.origem)+'</p>':'')+
+      (pode?'<div class="rap-a">'+(inc?'<button class="e-mini" data-rapsit="'+esc(r.id)+'">Voltar para “a incorporar”</button>':'<button class="e-mini" data-rapinc="'+esc(r.id)+'">Marcar como incorporada</button>')+'<button class="e-mini" data-rapdel="'+esc(r.id)+'">Excluir</button></div>':'')+'</li>';}
+function rapHtml(nq,duas){
   var L=rapLista(),nov=L.filter(function(r){return r.situacao!=='incorporada';}).length,pode=rapPode();
   var V=L.filter(function(r){return (RAP.filtro==='todas'||(RAP.filtro==='novas'?r.situacao!=='incorporada':r.situacao==='incorporada'))&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);});
   var h='<div class="rap-h"><div><h2>Entradas rápidas</h2><p>Diretrizes, comandos, atualizações e padronizações fixadas pelo Desembargador, registradas na hora; depois ganham lugar definitivo no manual, nos modelos ou nos parágrafos.</p></div>'+
-    '<div class="rap-f" role="group" aria-label="Filtrar entradas">'+[['novas','A incorporar ('+nov+')'],['incorp','Incorporadas'],['todas','Todas']].map(function(x){return '<button data-rapf="'+x[0]+'" aria-pressed="'+(RAP.filtro===x[0])+'">'+x[1]+'</button>';}).join('')+'</div></div>';
+    (duas?'':'<div class="rap-f" role="group" aria-label="Filtrar entradas">'+[['novas','A incorporar ('+nov+')'],['incorp','Incorporadas'],['todas','Todas']].map(function(x){return '<button data-rapf="'+x[0]+'" aria-pressed="'+(RAP.filtro===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>')+'</div>';
   if(pode)h+='<div class="rap-novo"><select data-raptipo aria-label="Tipo da entrada">'+RAP_TIPOS.map(function(t){return '<option'+(t===RAP.tipo?' selected':'')+'>'+t+'</option>';}).join('')+'</select>'+
     '<textarea data-raptxt rows="2" placeholder="Nova entrada: o que foi fixado, em uma ou duas frases (Ctrl+Enter salva)" aria-label="Texto da entrada">'+esc(RAP.txt)+'</textarea>'+
     '<input data-raporig placeholder="Origem (opcional): processo, reunião, despacho…" value="'+esc(RAP.orig)+'" aria-label="Origem">'+
     '<button class="btn" data-rapadd'+(RAP.grav?' disabled':'')+'>'+(RAP.grav?'Gravando…':'Registrar')+'</button></div>';
   else h+='<p class="rap-ro">'+(window.CMT_SITE?'Leitura. Quem registra, incorpora e exclui entradas é o perfil Editor.':'Aberto como arquivo: o registro de entradas funciona no site do gabinete, para o perfil Editor.')+'</p>';
-  h+=V.length?'<ol class="rap-l">'+V.map(function(r){var inc=r.situacao==='incorporada';return '<li class="'+(inc?'inc':'')+'"><div class="rap-m"><span class="rap-t">'+esc(r.tipo||'Entrada')+'</span><span>'+rapData(r.data)+'</span>'+(r.autor?'<span>'+esc(r.autor)+'</span>':'')+(inc?'<span class="rap-ok">incorporada'+(r.destino?' em '+esc(r.destino):'')+'</span>':'')+'</div>'+
-      '<p>'+xFm(r.texto||'')+'</p>'+(r.origem?'<p class="rap-o">Origem: '+esc(r.origem)+'</p>':'')+
-      (pode?'<div class="rap-a">'+(inc?'<button class="e-mini" data-rapsit="'+esc(r.id)+'">Voltar para “a incorporar”</button>':'<button class="e-mini" data-rapinc="'+esc(r.id)+'">Marcar como incorporada</button>')+'<button class="e-mini" data-rapdel="'+esc(r.id)+'">Excluir</button></div>':'')+'</li>';}).join('')+'</ol>'
+  /* duas=true (aba do editor): A incorporar e Incorporadas lado a lado, cada coluna com a sua rolagem */
+  if(duas){var A=L.filter(function(r){return r.situacao!=='incorporada'&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);}),I=L.filter(function(r){return r.situacao==='incorporada'&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);});
+    var col=function(t,X,vz,c){return '<section class="rap-c '+c+'"><h3>'+t+'<i>'+X.length+'</i></h3>'+(X.length?'<ol class="rap-l">'+X.map(function(r){return rapItem(r,pode);}).join('')+'</ol>':'<p class="rap-v">'+vz+'</p>')+'</section>';};
+    return h+'<div class="rap-2">'+col('A incorporar',A,'Nada a incorporar.','nv')+col('Incorporadas',I,'Nenhuma entrada incorporada ainda.','ok')+'</div>';}
+  h+=V.length?'<ol class="rap-l">'+V.map(function(r){return rapItem(r,pode);}).join('')+'</ol>'
     :'<p class="rap-v">'+(L.length?'Nenhuma entrada neste filtro.':'Nenhuma entrada ainda.')+'</p>';
   return h;}
 function rapGrava(ops,msg,ok){RAP.grav=true;xManual();
