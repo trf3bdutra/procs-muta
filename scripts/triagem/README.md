@@ -19,6 +19,8 @@ Ajuste as constantes `R`, `REPO` e os caminhos de `out/` antes de usar em outro 
 | `aplicar.py` | `python3 aplicar.py blkNN <lote>`: mescla no lote com a regra da ação `itens`. |
 | `situacao.py` | Situação atual conferida nos autos (`--aplicar` grava no lote). |
 | `ficha_tri.py` | Preenche, na ficha única, o prontuário de triagem do Caput: só campos vazios ou gerados. |
+| `pecas_notas.py` | Detalha as peças do prontuário de triagem: nota da triagem, trecho dos autos e dados do PJe. |
+| `ficha_lote.py` | Leva o registro completo da triagem para a ficha (grupo "Registro da triagem (lote)") e preenche os campos comuns vazios. |
 | `fx.js` | `FX.enviar(lista)`, colado na aba do app: grava os campos da ficha por `/api/pauta?ficha=1`. |
 | `js.py`, `envio.py` | Geram as cargas de lote e de ficha para gravar pela aba do app. |
 | `ler.py`, `ler2.py`, `doc.py`, `ap.py`, `visao.py`, `rm.py` | Leitura dos autos para a triagem. `rm.py` depende do índice de precedentes `prec.pkl`, que fica fora do repositório. |

@@ -151,7 +151,17 @@ Observação: a página do PJe altera o `JSON.stringify`, e por isso `lista`, `d
 - a tabela de documentos (`autos`);
 - as peças principais (`pecas`), só quando o item ainda não tem peças anotadas à mão.
 
-### 3.7 Acompanhamento
+### 3.7 Detalhe das peças
+
+`python3 scripts/triagem/pecas_notas.py [lote …]` completa cada peça do prontuário de triagem (`prontuario_triagem.cartao.pecas`), sem apagar o que foi escrito à mão:
+
+- `nota`: o que a triagem registrou sobre aquele ID (teor, razões, dispositivo, especificidades);
+- `trecho`: trecho do próprio documento nos autos (dispositivo da decisão, fecho ou pedido da petição);
+- `pje`: tipo e descrição no PJe, quem juntou, páginas e se o PDF está sem texto.
+
+Ao escrever novos blocos, a peça pode levar `nota` própria em `pecas` (o `tlib.mk` repassa o campo).
+
+### 3.8 Acompanhamento
 
 - O título da aba da ponte mostra os contadores.
 - `MX3.S.log` e `AP.S.log` guardam as últimas linhas de log; `AP.S.pulados` e `AP.S.erros` guardam os pulados e os erros.
@@ -295,6 +305,10 @@ A ficha (`acervo/operacional.json`, seções `origem`, `triagem`, `producao`, `p
   - Preenche "O que falta sanar" (lista de `[VALIDAR]`), "Síntese Processual" (resumo da situação atual), "Hipóteses Monocrática", "Especificidades" e "Próxima ação" (a proposta).
   - Só preenche campo vazio ou texto gerado antes (iniciado por "► Situação").
 
+- **`scripts/triagem/ficha_lote.py`**, direto no `operacional.json`, seguido de commit. Leva para a ficha o registro completo do lote:
+  - grupo "Registro da triagem (lote)" (aba Triagem, só leitura), sempre atualizado a partir do lote: lote e item, assunto detalhado, grupo da matriz, variações, proposta, modelo, triagem, situação atual, teor dos autos e a tabela de peças com nota e trecho;
+  - campos comuns, só quando vazios: Sentença (ID, data, decisão, resultado), juízo de origem, recursos, contrarrazões e sua situação, autos extraídos (data, total, sem texto), tempestividade (protocolo, prazo, dobro), observação da representação, fundamentos do parecer, síntese fática e alegações.
+
 O formato de gravação é `json.dumps(O, indent=1, ensure_ascii=False) + '\n'`, idêntico byte a byte ao do app.
 
 No Caput, o prontuário de triagem lê a ficha atual ao abrir e grava só os campos que a pessoa alterou. Com isso, não sobrescreve o que outra aba gravou.
@@ -323,11 +337,14 @@ As abas Triados e Seleção prévia usam o componente `CaputColecoes` (shadow DO
 - **À direita:** a matriz, com as colunas Prontuário da triagem, Indicadores e Variações.
 - **Painel do processo** (clique na linha):
   - etiquetas sugeridas para o PJe;
-  - prontuário da triagem, lido da ficha;
-  - caso: síntese, questões, sentença, recurso, resposta e origem;
-  - proposta: grupo, proposta para o processo, hipótese de monocrática, o que falta sanar e próxima ação;
-  - situação atual, peças e minuta;
-  - registro completo do lote.
+  - prontuário da triagem, lido da ficha, e a triagem do lote;
+  - caso: tipo de caso, assunto detalhado, síntese, questões, decisão recorrida, origem, especificidades, peculiaridades e observação;
+  - matriz e proposta: grupo, resultado e modelo do grupo, variações, proposta, hipótese de monocrática, o que falta sanar e próxima ação;
+  - situação atual completa;
+  - peças e teor dos autos num quadro de altura fixa com rolagem: cada peça com dados do PJe, o teor que a cita, a nota da triagem e o trecho dos autos;
+  - minuta.
+- O registro completo do lote não fica mais no painel: está na ficha do processo (aba Triagem › Registro da triagem).
+- A meta do CNJ (ficha ou etiqueta do PJe) aparece como etiqueta sob o nome das partes.
 
 ### 9.3 Etiquetas sugeridas para o PJe
 
