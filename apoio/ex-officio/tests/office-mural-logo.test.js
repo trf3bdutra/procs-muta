@@ -228,7 +228,7 @@ test('Mural: calendário sem os botões Dia/Semana/Mês, sempre no mês', () => 
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /#mu-host \.cg-cal \.cc-ps\{display:none!important\}/);
-  assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);\}/);
+  assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);/);
 });
 
 test('Mural: registros da Assessoria fora do calendário de quem não é da assessoria; meta do dia no canhoto; histórico de atividades', () => {
@@ -312,4 +312,22 @@ test('Agenda: todos cadastram; quem não é gestor grava só os próprios itens,
   const h = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /usuario:U\.eu\|\|'',gestor:!!U\.gestor,/);
   assert.match(h, /#mu-host \.cg-cal \.cc-esq \.cc-al::before\{content:"Alertas e meta do dia"/);
+});
+
+test('Mural: sem a opção de recolher o calendário', () => {
+  const h = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-h \[data-a="min"\]\{display:none!important\}/);
+  assert.match(h, /localStorage\.setItem\('cc_min','false'\)/);
+});
+
+test('Mural: rodapé "Feito" fixo na lateral do calendário, com afazeres marcados e registros do dia', () => {
+  const fs = require('fs'), path = require('path');
+  const lib = fs.readFileSync(path.join(__dirname, '../../../caput/motor/assets/js/11-calendario.js'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+  assert.match(lib, /class="cc-fe2"><div class="cc-td-t">Feito/);
+  assert.match(lib, /afazeres\(dia\)\.filter\(x=>fz\[x\.id\]\)/);
+  assert.match(html, /function calFeito\(D\)/);
+  assert.match(html, /feitoHtml:ME\.feito\?ME\.feito\.html:null/);
+  assert.doesNotMatch(html.slice(html.indexOf('function calHoje'), html.indexOf('function calFeito')), /cc-feito/);
+  assert.doesNotMatch(lib.slice(lib.indexOf('cc-fe2')-200, lib.indexOf('cc-fe2')+600), /<details/);
 });

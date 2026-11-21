@@ -1599,6 +1599,7 @@ html[data-theme=dark] .av-dest{background:#33301c;border-color:#5a4c24;border-le
 #mu-host .cc-dir{display:none!important}
 /* Mural: o painel Hoje/Semana é a lateral do próprio calendário (sem caixa própria), separado por um fio */
 #mu-host .cg-cal .cc-ps{display:none!important}
+#mu-host .cg-cal .cc-h [data-a="min"]{display:none!important}/* sem recolher o calendário no Mural */
 /* Mural: "Meu resumo de minutas" saiu (o Mural já mostra tudo, com os marcos válidos); histórico de atividades no padrão dos painéis */
 body:not(.painel-gab) #v-inicio>.hc-more{display:none!important}
 /* canhoto de Hoje: meta do dia e o que foi feito */
@@ -1690,11 +1691,18 @@ body:not(.painel-gab) #v-inicio>.hc-more{display:none!important}
 #mu-host .cg-cal .cc-esq .cc-meta.fal .cc-meta-h b{color:#b4560a!important}#mu-host .cg-cal .cc-esq .cc-meta.ok .cc-meta-h b{color:#28744b!important}
 #mu-host .cg-cal .cc-esq .cc-td-i{background:transparent!important;box-shadow:none!important;padding:4px 0 4px 9px!important}
 #mu-host .cg-cal .cc-esq .cc-sl-t{margin-top:2px}
+/* rodapé "Feito" da lateral: afazeres marcados e o que foi registrado hoje; sem recolher */
+#mu-host .cg-cal .cc-esq{display:flex!important;flex-direction:column}
+#mu-host .cg-cal .cc-esq .cc-fe2{margin-top:auto!important;padding-top:10px;border-top:1px solid var(--l)}
+#mu-host .cg-cal .cc-esq .cc-fe2 .cc-td-t{font:700 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#28744b;display:flex;gap:8px}
+#mu-host .cg-cal .cc-esq .cc-fe2 .cc-td-t small{margin-left:auto;color:var(--m);letter-spacing:.06em}
+#mu-host .cg-cal .cc-esq .cc-fe2 .cc-feito{border-top:0;padding-top:0;margin-top:6px}
+.cg-cal .cc-feito .t.minuta{background:#fde6cf;color:#b4560a}.cg-cal .cc-feito .t.af{background:#e3f0ea;color:#28744b}
 /* alertas e meta do dia num cartão só, no alto da lateral */
 #mu-host .cg-cal .cc-esq .cc-al{margin-top:0!important;padding:10px 10px 6px!important;border:1px solid var(--l)!important;border-bottom:0!important;border-radius:8px 8px 0 0!important;background:var(--w)!important}
 #mu-host .cg-cal .cc-esq .cc-al::before{content:"Alertas e meta do dia";display:block;margin:0 0 8px;font:700 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
 #mu-host .cg-cal .cc-esq .cc-al+.cc-meta{margin-top:-10px!important;padding:10px!important;border:1px solid var(--l)!important;border-top:1px dashed var(--l)!important;border-radius:0 0 8px 8px!important;background:var(--w)!important}
-#mu-host .cg-cal .cc-esq .cc-al+.cc-meta+.cc-td{margin-top:4px!important}
+#mu-host .cg-cal .cc-esq .cc-al+.cc-meta+.cc-td{margin-top:-4px!important;padding-top:6px!important;border-top:0!important}
 #mu-host .cg-cal .cc-top>div:not(.cc-sb)>.cc-g{border:0!important;padding:0!important;background:transparent!important}
 @media (max-width:760px){#mu-host .cg-cal .cc-top{grid-template-columns:1fr!important}#mu-host .cg-cal .cc-esq{border-right:0!important;border-bottom:1px solid var(--l)!important}}
 .mu-cal-lado{display:flex;flex-direction:column;gap:14px;min-width:0}#mu-host>.cx{margin:0}
@@ -4829,18 +4837,20 @@ function calHoje(D){var h=hoje(),meta=+D.metaDia||3,F=atividades().filter(functi
   var R={minuta:'Minuta',correcao:'Correção',liberacao:'Liberação'};
   return '<div class="cc-meta'+(temMin?(ok?' ok':' fal'):' sm')+'">'+(temMin?'<div class="cc-meta-h"><b>Meta do dia</b><span>'+nm+' de '+meta+' minuta'+(meta>1?'s':'')+'</span></div><i class="cc-meta-b"><em style="width:'+pct+'%"></em></i>'+
     '<small class="cc-meta-c">'+(ok?'Meta cumprida.':'Faltam '+(meta-nm)+' minuta'+(meta-nm>1?'s':'')+' para a meta de hoje.')+'</small>':'<div class="cc-meta-h"><b>Feito hoje</b><span>'+F.length+'</span></div>')+
-    (F.length?'<ul class="cc-feito">'+F.slice(0,8).map(function(a){return '<li><span class="t '+a.at+'">'+R[a.at]+'</span>item '+esc(a.x.item||'—')+' · '+esc(br(a.x.sessao).slice(0,5))+'<small>'+esc(a.x.assunto||'')+'</small></li>';}).join('')+(F.length>8?'<li class="mais">+'+(F.length-8)+' no histórico</li>':'')+'</ul>':'<small class="cc-meta-v">Nada registrado hoje ainda.</small>')+'</div>';}
+    '</div>';}
+function calFeito(D){var h=hoje(),F=atividades().filter(function(a){return a.dia===h;}),R={minuta:'Minutada',correcao:'Corrigida',liberacao:'Liberada'};
+  return {n:F.length,html:F.map(function(a){return '<li><span class="t '+a.at+'">'+R[a.at]+'</span>item '+esc(a.x.item||'—')+' · '+esc(br(a.x.sessao).slice(0,5))+'<small>'+esc(a.x.assunto||'')+'</small></li>';}).join('')};}
 function calendario(){
   var D=P.dados||{sessoes:[],meus:[]},E=D.expediente||{},el=$('#cc-cal');if(!el||!window.CMTCalendario)return;
   var fer=FER_NAC.slice();(E.semExpediente||[]).forEach(function(d){fer.push([d,(E.nomes||{})[d]||'Sem expediente']);});
-  var ME=PAINEL_GAB?{meus:[],alertasExtra:[]}:calMeus(D);ME.hoje=PAINEL_GAB?'':calHoje(D);
+  var ME=PAINEL_GAB?{meus:[],alertasExtra:[]}:calMeus(D);ME.hoje=PAINEL_GAB?'':calHoje(D);ME.feito=PAINEL_GAB?null:calFeito(D);
   var sig=JSON.stringify([D.sessoes,D.progresso,fer,E.recesso,ME,!!U.assessoria,D.metaDia]);if(sig===P.calSig&&el.firstChild)return;P.calSig=sig;
   /* no Mural o calendário fica sempre no mês (os botões Dia/Semana/Mês não aparecem) */
-  if(!PAINEL_GAB)try{localStorage.setItem('cc_passo',JSON.stringify('mes'));}catch(x){}
+  if(!PAINEL_GAB)try{localStorage.setItem('cc_passo',JSON.stringify('mes'));localStorage.setItem('cc_min','false');}catch(x){}
   /* elemento novo a cada montagem: o calendário prende os ouvintes no elemento (como na Chefia) */
   var novo=document.createElement('div');novo.id='cc-cal';novo.className=el.className;el.replaceWith(novo);el=novo;
   window.CMTCalendario.montar(el,{sessoes:(D.sessoes||[]).map(function(s){return {date:s.date,hora:s.hora||'',marcos:s.marcos||{},processos:s.processos||0,cor:s.cor||''};})},
-    {semanaLateral:true,semanaRecolhida:true,hojeHtml:ME.hoje,usuario:U.eu||'',gestor:!!U.gestor,ocultarQuem:!PAINEL_GAB&&!U.assessoria&&!U.gestor?/^assessoria$/i:null,progresso:D.progresso||{},feriados:fer,recesso:E.recesso||[],meus:ME.meus,alertasExtra:ME.alertasExtra,abrir:function(dt){if(dt==='atr'){if(window.MU)window.MU.atrasadas();return;}S.ses=dt;try{localStorage.setItem('eq_ses',dt);}catch(e){}var o=$('#ses');if(o)o.value=dt;vista('pauta');carregar();}});
+    {semanaLateral:true,semanaRecolhida:true,hojeHtml:ME.hoje,feitoHtml:ME.feito?ME.feito.html:null,feitoN:ME.feito?ME.feito.n:0,usuario:U.eu||'',gestor:!!U.gestor,ocultarQuem:!PAINEL_GAB&&!U.assessoria&&!U.gestor?/^assessoria$/i:null,progresso:D.progresso||{},feriados:fer,recesso:E.recesso||[],meus:ME.meus,alertasExtra:ME.alertasExtra,abrir:function(dt){if(dt==='atr'){if(window.MU)window.MU.atrasadas();return;}S.ses=dt;try{localStorage.setItem('eq_ses',dt);}catch(e){}var o=$('#ses');if(o)o.value=dt;vista('pauta');carregar();}});
 }
 /* ausências: o pedido vai ao procs-muta e o responsável decide no Caput (Pautas › Equipe) */
 function ausencias(){
