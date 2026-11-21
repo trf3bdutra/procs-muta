@@ -3667,6 +3667,14 @@ D.addEventListener('click',(e)=>{const b=e.target.closest&&e.target.closest('[da
 addEventListener('scroll',()=>{const g=document.getElementById('tri-prontuario');if(g)triPos(g);},{passive:true});
 /* sugestão de etiquetas do PJe a partir da ficha e da fonte (sem lote): seção, preparo, representação, tempestividade, MPF, urgência */
 const ETQ_SN = (x) => String(x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+/* tipo de caso da ficha em etiqueta curta: tira a espécie do recurso ("Apelação da União e remessa necessária em …"), parênteses e o excesso */
+function etqTipoCaso(t) {
+  t = String(t || '').replace(/^\d+\s*·\s*/, '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim(); if (t.length < 4) return '';
+  let P = t.split(/\s+·\s+/); if (P.length > 1 && /^(apela|remessa|agravo|embargos de declara|recurso)/i.test(P[0])) P = P.slice(1);
+  let r = P.slice(0, 2).join(' - ').split(/\s*;\s*/)[0].replace(/\s+—\s+/g, ' - ');
+  if (r.length > 58) { r = r.slice(0, 59).replace(/\s+\S*$/, ''); for (let k = 0; k < 8; k++) r = r.replace(/[\s,;:·—-]+$/, '').replace(/\s+(da|do|das|dos|de|por|para|pela|pelo|com|sem|e|ou|a|o|as|os|na|no|nas|nos|em|ao|à|aos|às|contra|sobre|entre|que|[IVXL]+|\d+º?|artigo)$/i, ''); }
+  return r.charAt(0).toUpperCase() + r.slice(1);
+}
 function etqSugRow(o) {
   const r = o.row || {}, ja = (o.etq || []).map(ETQ_SN), out = [];
   const add = (e, por) => { if (!e || out.some((x) => ETQ_SN(x.e) === ETQ_SN(e))) return; out.push({ e, por, tem: ja.includes(ETQ_SN(e)) }); };
@@ -3677,7 +3685,7 @@ function etqSugRow(o) {
   if (/aguardando/.test(ETQ_SN(r['MPF'])) || (r['MPF - Custos Legis'] && !/^(sem hip|nao se aplica)/.test(ETQ_SN(r['MPF - Custos Legis'])) && !/com parecer|nao se aplica/.test(ETQ_SN(r['MPF'])))) add('aguardando parecer', 'intervenção do MPF sem parecer');
   if ((r['Urgência'] && /pendente|nao apreciada/.test(ETQ_SN(r['Urgência - Apreciação']))) || o.liminar) add('LIMINAR PENDENTE', 'urgência não apreciada');
   if (/^(possivel|provavel|cabivel)/.test(ETQ_SN(r['Hipóteses Monocrática']))) add('MONOCRÁTICA TERMINATIVA', 'hipótese de monocrática na triagem');
-  const tc = String(r['Tema'] || '').replace(/^\d+\s*·\s*/, '').replace(/\s*\([^)]*\)/g, '').trim(); if (tc && tc.length >= 4) add(tc.length > 58 ? tc.slice(0, 59).replace(/\s+\S*$/, '') : tc, 'tipo de caso na ficha');
+  const tc = etqTipoCaso(r['Tema']); if (tc) add(tc, 'tipo de caso na ficha: ' + String(r['Tema']).slice(0, 120));
   return out;
 }
 function abrirProntuarioTriagem(d, sugExt) {
