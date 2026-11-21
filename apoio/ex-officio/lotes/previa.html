@@ -302,7 +302,7 @@ const ETAPAS_COMPLETO=[['minutar','1 · A minutar','sem minuta','minuta ainda n�
 const ETAPAS_SIMPLES=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','4 · Liberada','liberadas','prontas para a sessão']];
 const completo=()=>S.vista==='meus';
 const etapas=()=>completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
-const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set(),colTipo:'pauta',loteSel:'',colTit:''};
+const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set(),colTipo:'pauta',loteSel:'',colTit:'',loteSes:''};
 
 async function get(url){const r=await fetch(url,{credentials:'same-origin',headers:{'Accept':'application/json'}});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 /* o gestor lê os lotes como na gestão (&modo=cg): vê todos os processos, inclusive os ainda ocultos da página da equipe */
@@ -362,17 +362,19 @@ async function carregar(){
     if(!S.data)throw new Error('Nenhuma sessão publicada.');
     S.lotesLista=(L.lotes||[]);
     const pc=params.get('colecao'), lc=pc&&S.lotesLista.find(l=>l.id===pc);
-    if(lc){S.colTipo=tipoCol(lc);await carregarLote(lc.id)}else await carregarSessao();
+    const dentro=lc&&pedida&&(lc.sessoes||[]).includes(S.data)&&S.data===pedida;
+    if(lc){S.colTipo=dentro?'pauta':tipoCol(lc);await carregarLote(lc.id,dentro?S.data:'')}else await carregarSessao();
   }catch(e){
     $('#app').innerHTML=e.status===401||e.status===403&&!S.usuario?`<div class="load"><p class="t">Entre pelo <em class="it">Ex Officio.</em></p><p>A prévia usa o mesmo login do Collectio. <a href="/exofficio/">Abrir o Ex Officio</a></p></div>`:`<div class="load"><p class="t">Não foi possível <em class="it">ler.</em></p><p>${esc(e.message)}</p></div>`;
   }
 }
 const tipoCol=l=>l.tipo==='pauta'?'pauta':l.tipo==='triagem'?'triagem':l.tipo==='selecao'?'selecao':'avulsa';
 const ROT_COL={pauta:'Lote da pauta',selecao:'Seleção prévia',triagem:'Coleção de triagem',avulsa:'Coleção avulsa'};
-async function carregarLote(id){
+async function carregarLote(id,ses){
   msg('Lendo a coleção…');
   const R=await get('/api/painel?lote=1&id='+encodeURIComponent(id)+MODO()), l=R.lote||{itens:[]};
-  S.loteSel=l.id;S.colTit=l.titulo||l.id;S.lotes={[l.id]:l};S.por={};
+  S.loteSel=l.id;S.colTit=l.titulo||l.id;S.loteSes=ses||'';S.lotes={[l.id]:l};S.por={};
+  if(ses)l.itens=(l.itens||[]).filter(it=>!it.sessao||it.sessao===ses);
   /* designação, datas e retenção vêm da pauta de cada sessão do lote, quando publicada */
   const P={}, ss=[...new Set((l.itens||[]).map(i=>i.sessao).filter(Boolean))];
   await Promise.all(ss.map(s=>get('/api/pauta?data='+s).then(d=>(d.itens||[]).forEach(x=>{P[x.cnj]=x})).catch(()=>{})));
@@ -384,7 +386,7 @@ async function carregarLote(id){
   render();
 }
 async function carregarSessao(){
-  S.loteSel='';S.colTit='';
+  S.loteSel='';S.colTit='';S.loteSes='';
   msg('Lendo a pauta de '+br(S.data)+'…');
   const lotes=S.lotesLista.filter(l=>(l.sessoes||[]).includes(S.data)&&l.total>0&&l.tipo!=='selecao');
   const [P,...R]=await Promise.all([get('/api/pauta?data='+S.data)].concat(lotes.map(l=>get('/api/painel?lote=1&id='+encodeURIComponent(l.id)+MODO()).catch(()=>null))));
@@ -404,15 +406,18 @@ async function carregarSessao(){
 function seletorColecoes(){
   const L=S.lotesLista||[], t=S.colTipo;
   const opt=l=>`<option value="${esc(l.id)}"${l.id===S.loteSel?' selected':''}>${l.cor?'● ':''}${esc(l.titulo)}${l.subtitulo?' — '+esc(l.subtitulo):''} · ${l.total}</option>`;
-  const av=L.filter(l=>tipoCol(l)==='avulsa'), tri=L.filter(l=>l.tipo==='triagem'), sel=L.filter(l=>l.tipo==='selecao'&&!l.arquivado).sort((a,b)=>String(a.sessao).localeCompare(String(b.sessao)));
-  const daSes=L.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===S.data);
+  /* lote com processos de uma sessão ativa é coleção daquela pauta: aparece dentro da Pauta, não nas Avulsas */
+  const naAtiva=l=>(l.sessoes||[]).some(s=>S.sessoes.some(x=>x.date===s));
+  const av=L.filter(l=>tipoCol(l)==='avulsa'&&!naAtiva(l)), tri=L.filter(l=>l.tipo==='triagem'), sel=L.filter(l=>l.tipo==='selecao'&&!l.arquivado).sort((a,b)=>String(a.sessao).localeCompare(String(b.sessao)));
+  const daSes=L.filter(l=>['pauta','avulsa'].includes(tipoCol(l))&&((l.sessoes||[]).includes(S.data)||l.sessao===S.data));
+  const optS=l=>`<option value="${esc(l.id)}"${l.id===S.loteSel&&S.loteSes?' selected':''}>${l.cor?'● ':''}${esc(l.titulo)}${l.subtitulo?' — '+esc(l.subtitulo):''}${(l.sessoes||[]).length>1?' (também em '+l.sessoes.filter(s=>s!==S.data).map(s=>br(s).slice(0,5)).join(', ')+')':' · '+l.total}</option>`;
   const optAv=av.some(l=>l.escaninho)?`<optgroup label="Escaninhos da triagem do Caput">${av.filter(l=>l.escaninho).map(opt).join('')}</optgroup><optgroup label="Outros lotes avulsos">${av.filter(l=>!l.escaninho).map(opt).join('')}</optgroup>`:av.map(opt).join('');
   const tar=[...new Set(tri.map(l=>l.tarefa||'Triagem'))];
   const optTri=tar.map(x=>`<optgroup label="${esc(x)}">${tri.filter(l=>(l.tarefa||'Triagem')===x).map(opt).join('')}</optgroup>`).join('');
   const bt=(k,r)=>`<button type="button" data-ctipo="${k}" aria-pressed="${t===k}">${r}</button>`;
   return `<div class="col-areas"><div class="col-tipos" role="group" aria-label="Tipo de coleção">${bt('pauta','Pauta')}${bt('selecao','Seleção prévia')}${bt('triagem','Triagem')}${bt('avulsa','Avulsas')}</div>
-   <div class="col-area"${t==='pauta'?'':' hidden'}><label class="lx-sel"><span class="cl">Sessão ativa</span><select id="ses">${S.sessoes.map(s=>`<option value="${s.date}"${s.date===S.data&&!S.loteSel?' selected':''}>${br(s.date)} · ${s.processos}</option>`).join('')}${S.loteSel&&t==='pauta'?'<option value="" selected>—</option>':''}</select></label>
-    ${daSes.length?`<label class="lx-sel"><span class="cl">Lotes desta pauta</span><select data-col="1"><option value="">Pauta inteira</option>${daSes.map(opt).join('')}</select></label>`:''}</div>
+   <div class="col-area"${t==='pauta'?'':' hidden'}><label class="lx-sel"><span class="cl">Sessão ativa</span><select id="ses">${S.sessoes.map(s=>`<option value="${s.date}"${s.date===S.data&&(!S.loteSel||S.loteSes)?' selected':''}>${br(s.date)} · ${s.processos}</option>`).join('')}${S.loteSel&&!S.loteSes&&t==='pauta'?'<option value="" selected>—</option>':''}</select></label>
+    ${daSes.length?`<label class="lx-sel"><span class="cl">Coleções desta pauta</span><select data-col="pauta"><option value="">Pauta inteira</option>${daSes.map(optS).join('')}</select></label>`:''}</div>
    <div class="col-area"${t==='selecao'?'':' hidden'}><label class="lx-sel"><span class="cl">Sessão futura</span><select data-col="1"><option value="">${sel.length?'Selecione a sessão':'Nenhuma sessão futura sem pauta oficial'}</option>${sel.map(opt).join('')}</select></label></div>
    <div class="col-area"${t==='triagem'?'':' hidden'}><label class="lx-sel"><span class="cl">Lote de triagem</span><select data-col="1"><option value="">Selecione um lote</option>${optTri}</select></label></div>
    <div class="col-area"${t==='avulsa'?'':' hidden'}><label class="lx-sel"><span class="cl">Coleção avulsa</span><select data-col="1"><option value="">Selecione uma coleção</option>${optAv}</select></label></div></div>`;
@@ -430,7 +435,7 @@ function render(){
     <p class="k">Coleções</p>
     ${seletorColecoes()}
     <p class="lx-lt-n">${S.linhas.length} processos${S.usuario?' · '+meus+' com '+esc(S.usuario.toUpperCase())+' na correção':''}</p>
-    <p class="lx-lt-s">${S.loteSel?esc(S.colTit):'Sessão de '+br(S.data)}</p>
+    <p class="lx-lt-s">${S.loteSel?(S.loteSes?'Sessão de '+br(S.loteSes)+' · ':'')+esc(S.colTit):'Sessão de '+br(S.data)}</p>
    </div>
    <p class="lx-nk">Nesta página</p>
    <a class="ir" href="#fluxo"><i>01</i><span>Fluxo da minuta</span></a>
@@ -442,7 +447,7 @@ function render(){
    <p class="nota">Prévia só de leitura: nada aqui grava. As marcas e as versões continuam no <a href="/amicus/collectio/">Collectio atual</a>.</p>
   </nav>
   <div class="main">
-   <div class="lx-h"><div><p class="k">${S.loteSel?esc(ROT_COL[S.colTipo])+' · '+esc(S.colTit):'Coleção de pauta · sessão de '+br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>')}</h1></div>
+   <div class="lx-h"><div><p class="k">${S.loteSel?(S.loteSes?'Coleção de pauta · sessão de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo])+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>')}</h1></div>
     <p class="lx-st">${S.usuario?esc(S.usuario)+' · ':''}${esc0.length} de ${S.linhas.length} processos<br>${alertas.length} com alerta</p></div>
    <p class="lead">${completo()?'O caminho de cada minuta da sua correção, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos.':'O caminho de cada minuta da pauta, da correção à liberação no PJe: cada etapa mostra o que falta e em quais processos.'} Clique num processo para ver as versões e o que mudou.</p>
    <span class="aviso">Prévia · só leitura · dados reais da pauta</span>
@@ -677,7 +682,7 @@ function difPal(x,y){
 function ligar(){
   const s=$('#ses');if(s)s.onchange=()=>trocaSessao(s.value);
   $$('[data-ctipo]').forEach(b=>b.onclick=()=>{S.colTipo=b.dataset.ctipo;render()});
-  $$('select[data-col]').forEach(s=>s.onchange=()=>{if(s.value)trocaColecao(s.value);else trocaSessao(S.data)});
+  $$('select[data-col]').forEach(s=>s.onchange=()=>{if(s.value)trocaColecao(s.value,s.dataset.col==='pauta'?S.data:'');else trocaSessao(S.data)});
   $$('[data-grp]').forEach(b=>b.onclick=()=>{const k=b.dataset.grp;S.fechados.has(k)?S.fechados.delete(k):S.fechados.add(k);render()});
   $$('[data-min]').forEach(b=>b.onclick=e=>{e.stopPropagation();const c=b.dataset.min;S.minAb.has(c)?S.minAb.delete(c):S.minAb.add(c);render()});
   const mt=$('#mn-t');if(mt)mt.onclick=()=>{const l=filtradas().filter(temMin);if(minTodas(filtradas()))l.forEach(r=>S.minAb.delete(r.x.cnj));else{l.forEach(r=>S.minAb.add(r.x.cnj));S.fechados.clear()}render();ir('procs')};
@@ -693,7 +698,7 @@ function ligar(){
   const f=$('#fecha');if(f)f.onclick=()=>{S.aberto='';const u=new URL(location.href);u.searchParams.delete('processo');history.replaceState(null,'',u);render();ir('procs')};
 }
 async function trocaSessao(d){if(!d)return;S.colTipo='pauta';S.loteSel='';S.data=d;S.aberto='';S.etapa='';S.fora='';const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.delete('processo');u.searchParams.delete('colecao');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a pauta…</p></div>';try{await carregarSessao()}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
-async function trocaColecao(id){const l=(S.lotesLista||[]).find(x=>x.id===id);if(!l)return;S.colTipo=tipoCol(l);S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',id);u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a coleção…</p></div>';try{await carregarLote(id)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
+async function trocaColecao(id,ses){const l=(S.lotesLista||[]).find(x=>x.id===id);if(!l)return;S.colTipo=ses?'pauta':tipoCol(l);S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',id);if(ses)u.searchParams.set('sessao',ses);else u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a coleção…</p></div>';try{await carregarLote(id,ses)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
 function abre(cnj){S.aberto=cnj;S.cmpOn=false;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
 function ir(id){const e=document.getElementById(id);if(e)e.scrollIntoView({block:'start'})}
 $('#tema').onclick=()=>{const d=document.documentElement,t=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',t);try{localStorage.setItem('cmt-eq-tema',t)}catch(e){}};
