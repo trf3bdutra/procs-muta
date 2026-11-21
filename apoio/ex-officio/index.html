@@ -362,7 +362,7 @@ table.pl textarea{resize:vertical;min-height:26px;max-width:210px}table.pl .pd{c
 
 .ola-ey{display:block;font-size:10.5px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
 
-body:not(.gestor) #cc-cal.eq-cal [data-a="novo"],body:not(.gestor) #cc-cal.eq-cal [data-a="lista"]{display:none!important}
+/* cadastrar e gerenciar valem para todos: o que não é gestor cadastra itens só dele (e da chefia) */
 .cx{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;min-width:0}.cx h2{margin:0 0 8px;font-size:14px}
 
 .cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.cal .dw{font-size:10px;font-weight:800;color:var(--mut);text-align:center;letter-spacing:.08em}
@@ -1690,6 +1690,11 @@ body:not(.painel-gab) #v-inicio>.hc-more{display:none!important}
 #mu-host .cg-cal .cc-esq .cc-meta.fal .cc-meta-h b{color:#b4560a!important}#mu-host .cg-cal .cc-esq .cc-meta.ok .cc-meta-h b{color:#28744b!important}
 #mu-host .cg-cal .cc-esq .cc-td-i{background:transparent!important;box-shadow:none!important;padding:4px 0 4px 9px!important}
 #mu-host .cg-cal .cc-esq .cc-sl-t{margin-top:2px}
+/* alertas e meta do dia num cartão só, no alto da lateral */
+#mu-host .cg-cal .cc-esq .cc-al{margin-top:0!important;padding:10px 10px 6px!important;border:1px solid var(--l)!important;border-bottom:0!important;border-radius:8px 8px 0 0!important;background:var(--w)!important}
+#mu-host .cg-cal .cc-esq .cc-al::before{content:"Alertas e meta do dia";display:block;margin:0 0 8px;font:700 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
+#mu-host .cg-cal .cc-esq .cc-al+.cc-meta{margin-top:-10px!important;padding:10px!important;border:1px solid var(--l)!important;border-top:1px dashed var(--l)!important;border-radius:0 0 8px 8px!important;background:var(--w)!important}
+#mu-host .cg-cal .cc-esq .cc-al+.cc-meta+.cc-td{margin-top:4px!important}
 #mu-host .cg-cal .cc-top>div:not(.cc-sb)>.cc-g{border:0!important;padding:0!important;background:transparent!important}
 @media (max-width:760px){#mu-host .cg-cal .cc-top{grid-template-columns:1fr!important}#mu-host .cg-cal .cc-esq{border-right:0!important;border-bottom:1px solid var(--l)!important}}
 .mu-cal-lado{display:flex;flex-direction:column;gap:14px;min-width:0}#mu-host>.cx{margin:0}
@@ -4835,7 +4840,7 @@ function calendario(){
   /* elemento novo a cada montagem: o calendário prende os ouvintes no elemento (como na Chefia) */
   var novo=document.createElement('div');novo.id='cc-cal';novo.className=el.className;el.replaceWith(novo);el=novo;
   window.CMTCalendario.montar(el,{sessoes:(D.sessoes||[]).map(function(s){return {date:s.date,hora:s.hora||'',marcos:s.marcos||{},processos:s.processos||0,cor:s.cor||''};})},
-    {semanaLateral:true,semanaRecolhida:true,hojeHtml:ME.hoje,ocultarQuem:!PAINEL_GAB&&!U.assessoria&&!U.gestor?/^assessoria$/i:null,progresso:D.progresso||{},feriados:fer,recesso:E.recesso||[],meus:ME.meus,alertasExtra:ME.alertasExtra,abrir:function(dt){if(dt==='atr'){if(window.MU)window.MU.atrasadas();return;}S.ses=dt;try{localStorage.setItem('eq_ses',dt);}catch(e){}var o=$('#ses');if(o)o.value=dt;vista('pauta');carregar();}});
+    {semanaLateral:true,semanaRecolhida:true,hojeHtml:ME.hoje,usuario:U.eu||'',gestor:!!U.gestor,ocultarQuem:!PAINEL_GAB&&!U.assessoria&&!U.gestor?/^assessoria$/i:null,progresso:D.progresso||{},feriados:fer,recesso:E.recesso||[],meus:ME.meus,alertasExtra:ME.alertasExtra,abrir:function(dt){if(dt==='atr'){if(window.MU)window.MU.atrasadas();return;}S.ses=dt;try{localStorage.setItem('eq_ses',dt);}catch(e){}var o=$('#ses');if(o)o.value=dt;vista('pauta');carregar();}});
 }
 /* ausências: o pedido vai ao procs-muta e o responsável decide no Caput (Pautas › Equipe) */
 function ausencias(){
@@ -6563,13 +6568,13 @@ api('/api/login').then(function(j){U.des=!!j.desembargador||!!j.gestor;U.assesso
 </script>
 <script id="cmt-agenda">
 /* Agenda do calendário no Ex Officio: afazeres, alertas, eventos, prazos-limite, datas e ausências em acervo/sessoes/agenda.json
-   (a mesma do Caput) e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json). Lê /api/sessoes?agenda=1; só o gestor grava. */
+   (a mesma do Caput) e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json). Lê /api/sessoes?agenda=1; todos gravam (quem não é gestor, só os itens que criou). */
 (function(){ if(window.CMTAgenda) return;
   var D={itens:null,feitos:null,aus:[]},ok=false,t=null,lsf=function(){try{return JSON.parse(localStorage.getItem('cc_feitos')||'{}')}catch(e){return {}}};
   function get(k,d){ if(k==='feitos'&&!document.body.classList.contains('gestor')) return lsf(); return D[k]==null?d:D[k]; }
   function set(k,v){ if(k==='feitos'&&!document.body.classList.contains('gestor')){try{localStorage.setItem('cc_feitos',JSON.stringify(v))}catch(e){} return;}
     D[k]=v; clearTimeout(t); t=setTimeout(gravar,1200); }
-  function gravar(){ if(!document.body.classList.contains('gestor')) return; fetch('/api/sessoes?agenda=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({itens:D.itens||[],feitos:D.feitos||{}})})
+  function gravar(){ fetch('/api/sessoes?agenda=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({itens:D.itens||[],feitos:D.feitos||{}})})
     .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.erro||r.status);if(typeof toast==='function')toast('Agenda gravada');});}).catch(function(e){if(typeof toast==='function')toast('Agenda não gravada: '+e.message);}); }
   function carregar(){ if(ok) return; fetch('/api/sessoes?agenda=1',{credentials:'same-origin',cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();})
     .then(function(j){ok=true;D.itens=j.itens||[];D.feitos=j.feitos||{};D.aus=j.ausencias||[];window.dispatchEvent(new Event('cmt-agenda'));}).catch(function(){}); }

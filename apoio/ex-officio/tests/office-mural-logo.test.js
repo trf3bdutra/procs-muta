@@ -291,3 +291,25 @@ test('Mural: Histórico como vista alternativa do painel do calendário; dia do 
   assert.match(h, /#hc-cal-full:not\(\.ver-hist\) #prod\{display:none!important\}/);
   assert.match(h, /new MutationObserver\(sinc\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
 });
+
+test('Agenda: todos cadastram; quem não é gestor grava só os próprios itens, privados (visíveis para ele e para a chefia)', async () => {
+  process.env.CMT_SESSION_SECRET = process.env.CMT_SESSION_SECRET || '0123456789abcdef0123456789abcdef';
+  const L = require('../api/_lib.js'), o = { lerJson: L.lerJson, gravarJson: L.gravarJson, exigir: L.exigir, gestor: L.gestor };
+  let store = { itens: [{ id: 'a', criador: 'Bruno' }, { id: 'b', criador: 'Victor', privado: true }, { id: 'c', criador: 'Estela', privado: true }], feitos: { x: 1 } }, USER = 'Victor';
+  L.lerJson = async p => p.includes('agenda') ? { dados: JSON.parse(JSON.stringify(store)), sha: 's' } : { dados: { registros: [] } };
+  L.gravarJson = async (p, doc) => { store = doc; }; L.exigir = () => USER; L.gestor = u => u === 'Bruno';
+  try {
+    const h = require('../api/sessoes.js');
+    const call = (method, body) => new Promise(ok => h({ method, query: { agenda: 1 }, body, headers: {} }, { status(n) { this.n = n; return this; }, json(d) { ok([this.n, d]); }, setHeader() {} }));
+    let [, d] = await call('GET'); assert.deepEqual(d.itens.map(i => i.id), ['a', 'b']);
+    await call('POST', { itens: [{ id: 'b', titulo: 'x', criador: 'Victor' }, { id: 'n1', titulo: 'nova' }], feitos: {} });
+    assert.deepEqual(store.itens.map(i => i.id).sort(), ['a', 'b', 'c', 'n1']);
+    assert.ok(store.itens.find(i => i.id === 'n1').privado && store.itens.find(i => i.id === 'n1').quem === 'Victor');
+    assert.deepEqual(store.feitos, { x: 1 });
+    USER = 'Estela'; [, d] = await call('GET'); assert.deepEqual(d.itens.map(i => i.id).sort(), ['a', 'c']);
+    USER = 'Bruno'; [, d] = await call('GET'); assert.equal(d.itens.length, 4);
+  } finally { Object.assign(L, o); }
+  const h = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /usuario:U\.eu\|\|'',gestor:!!U\.gestor,/);
+  assert.match(h, /#mu-host \.cg-cal \.cc-esq \.cc-al::before\{content:"Alertas e meta do dia"/);
+});
