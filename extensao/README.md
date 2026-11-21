@@ -22,6 +22,8 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - **Produção:** tipo de ato · pronunciamento no topo (acórdão, decisão monocrática, urgência, despacho, admissibilidade,
   retratação, homologação, outro destino); saíram "Designação e minuta" (está no cartão) e "Lote e correção (Index)";
   a decisão da monocrática num cartão só, sem repetir campos.
+- **0.16.1:** etapa **Triagem** antes de Minuta (marca `triagem.Destino - Confirmado em/por`); a faixa do usuário (nome,
+  Atualizar, Ex Officio, Sair) fica no topo do painel, acima das abas.
 - Listas curtas e Sim/Não viram botões em todo o prontuário; cabeçalho das abas branco no tema claro.
 
 ## O que muda na 0.15

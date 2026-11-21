@@ -197,12 +197,13 @@ function hojeIso() { var d = new Date(); return d.getFullYear() + '-' + pad2(d.g
 function agoraBr() { var d = new Date(); return pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
 function sim(v) { return /^(sim|s|true)$/i.test(S(v)); }
 var SV = function (d, n) { return '<svg viewBox="0 0 24 24" width="' + (n || 16) + '" height="' + (n || 16) + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; };
-var IC = { min: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', rev: '<path d="M20 6 9 17l-5-5"/>', env: '<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>',
+var IC = { tri: '<path d="M3 5h18l-7 8v6l-4 2v-8z"/>', min: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', rev: '<path d="M20 6 9 17l-5-5"/>', env: '<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>',
   ass: '<path d="M3 21c3-1 5-4 6-7l3 3c-3 1-6 3-7 6z"/><path d="M14 4l6 6-5 5-6-6z"/>', et: '<path d="M4 12h4l3-8 4 16 3-8h2"/>', pt: '<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15 15c3 0 6 1.5 6 4"/>',
   sn: '<path d="M5 21V4h11l-1.5 4L16 12H5"/>', nt: '<path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6M9 17h3"/>', dc: '<path d="M12 3v18M5 7h14M7 7l-3 7h6zM17 7l-3 7h6z"/>' };
 function etapas() {
   var mono = destino() === 'monocratica', d = function (k) { return S(V('producao', k)); };
-  var L = [{ r: 'Minuta', ic: 'min', ok: !!d('MINUTADO'), dt: d('MINUTADO'), on: { MINUTADO: 1 }, off: ['MINUTADO'] },
+  var L = [{ r: 'Triagem', ic: 'tri', ok: !!S(V('triagem', 'Destino - Confirmado em')), dt: S(V('triagem', 'Destino - Confirmado em')), on: { 'triagem.Destino - Confirmado em': 1, 'triagem.Destino - Confirmado por': 'U' }, off: ['triagem.Destino - Confirmado em', 'triagem.Destino - Confirmado por'] },
+    { r: 'Minuta', ic: 'min', ok: !!d('MINUTADO'), dt: d('MINUTADO'), on: { MINUTADO: 1 }, off: ['MINUTADO'] },
     { r: mono ? 'Revisão' : 'Correção', ic: 'rev', ok: sim(d('CORRIGIDO')) || !!d('Data da Revisão'), dt: d('Data da Revisão'), on: { CORRIGIDO: 'Sim', 'Data da Revisão': 1 }, off: ['CORRIGIDO', 'Data da Revisão'] }];
   if (mono) L.push({ r: 'Enviada', ic: 'env', ok: !!d('Data da Liberação'), dt: d('Data da Liberação'), on: { 'Data da Liberação': 1 }, off: ['Data da Liberação'] },
     { r: 'Assinada', ic: 'ass', ok: sim(d('Assinado')) || !!d('Data da Assinatura'), dt: d('Data da Assinatura'), on: { Assinado: 'Sim', 'Data da Assinatura': 1 }, off: ['Assinado', 'Data da Assinatura'] });
@@ -212,8 +213,9 @@ function etapas() {
 }
 function marcarEtapa(i) {
   var E = etapas(), x = E.L[i]; if (!x) return;
-  if (i === E.n) Object.keys(x.on).forEach(function (k) { marcar('producao.' + k, x.on[k] === 1 ? hojeIso() : x.on[k]); });
-  else if (i === E.n - 1) x.off.forEach(function (k) { marcar('producao.' + k, ''); });
+  var cam = function (k) { return k.indexOf('.') > 0 && /^(triagem|producao|origem)\./.test(k) ? k : 'producao.' + k; };
+  if (i === E.n) Object.keys(x.on).forEach(function (k) { marcar(cam(k), x.on[k] === 1 ? hojeIso() : x.on[k] === 'U' ? (ses.estado().usuario || '') : x.on[k]); });
+  else if (i === E.n - 1) x.off.forEach(function (k) { marcar(cam(k), ''); });
   else return;
   agendar(500); render();
 }
@@ -227,7 +229,7 @@ function cabeca(s) {
   var tarefa = (pjeDoProcesso() && window.MutaPje.tarefa && window.MutaPje.tarefa()) || fonteVal({ fonte: ['tarefa_atual'] });
   var dias = diasDesde(fonteVal({ fonte: ['data_entrada_tarefa'] }));
   var AL = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }) : [];
-  var E = etapas(), FASE = E.mono ? ['Para minuta', 'Para revisão', 'Para envio', 'Para assinatura', 'Assinada'] : ['Para minuta', 'Para correção', 'Para liberação', 'Liberado'];
+  var E = etapas(), FASE = E.mono ? ['Para triagem', 'Para minuta', 'Para revisão', 'Para envio', 'Para assinatura', 'Assinada'] : ['Para triagem', 'Para minuta', 'Para correção', 'Para liberação', 'Liberado'];
   var partes = S(R['Polo ativo']) ? S(R['Polo ativo']) + (S(R['Polo passivo']) ? ' x ' + S(R['Polo passivo']) : '') : S(R['Partes (texto da pauta)']);
   var tipoJ = S(V('triagem', 'Tipo de Julgamento')) || S(V('triagem', 'Padrão - Espécie'));
   /* tipo de julgamento: o da ficha; a leitura dos autos (classe, tarefa, último recurso) sugere e confere */
@@ -265,9 +267,19 @@ function cabeca(s) {
     '<p class="pm-sh">' + SV(IC.et, 14) + 'Etapas<i>toque para marcar hoje</i></p>' +
     '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
     '<div class="pm-resp">' + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
-    '<div class="pc-u"><span>' + esc(s.usuario) + (s.gestor ? ' · gestor' : '') + '</span><button type="button" class="lnk" data-g="atualizar">Atualizar</button><a class="lnk" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/">Ex Officio</a><button type="button" class="lnk" data-sair>Sair</button></div>' +
     '</section>';
 }
+/* faixa do usuário no topo do painel, acima das abas */
+function faixaUsuario(s) {
+  var t = $('topo-u'); if (!t) return;
+  if (!s || s.estado !== 'on') { t.hidden = true; t.innerHTML = ''; return; }
+  t.hidden = false;
+  t.innerHTML = '<span class="tu-n"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i>' + esc(s.usuario) + (s.gestor ? ' · gestor' : '') + '</span><span class="sp"></span>' +
+    (G.cnj ? '<button type="button" class="lnk" data-g="atualizar">Atualizar</button>' : '') + '<a class="lnk" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/">Ex Officio</a><button type="button" class="lnk" data-sair>Sair</button>';
+}
+(function () { var t = $('topo-u'); if (!t) return; t.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return;
+  if (b.hasAttribute('data-sair')) { gravarJa().catch(function () {}).then(function () { ses.sair(); }); }
+  else if (b.dataset.g === 'atualizar') { gravarJa().catch(function () {}).then(function () { carregar(true); }); } }); })();
 /* assunto detalhado logo abaixo do assunto: o do Caput (lote) e, na falta, o da ficha, incluído aqui pelo ícone */
 function adAcao(a) {
   if (a === 'ed') { G.adEd = true; render(); var t = $('pm-ad-tx'); if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } return; }
@@ -458,6 +470,7 @@ function corpoRoteiro() {
 }
 function render() {
   if (!caixa) return;
+  faixaUsuario(ses.estado());
   /* a faixa do PJe mora no cartão do processo; antes de redesenhar, volta ao lugar de origem para não se perder */
   var pb = $('pje-bar'); if (pb && caixa.contains(pb) && PJE_CASA && PJE_CASA.parentNode) PJE_CASA.parentNode.insertBefore(pb, PJE_CASA);
   var s = ses.estado();

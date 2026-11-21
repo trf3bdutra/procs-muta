@@ -927,3 +927,10 @@ html:not([data-tema=escuro]) .nav-label{color:hsl(38 60% 40%)}
 .pm-pje .pje-seguir,.pm-pje select,.pm-pje .pje-tema,.pm-pje .pje-aj{width:20px!important;height:20px!important}
 .pm-pje .pje-bar{gap:3px}
 .pm-dd>i{width:30px}
+/* faixa do usuário acima das abas */
+.topo-u{display:flex;align-items:center;gap:10px;padding:4px 12px;font-size:11px;background:var(--card2);border-bottom:1px solid var(--line);color:var(--muted-fg)}
+.topo-u .sp{flex:1}.topo-u .lnk{font-size:11px}
+.tu-n{display:inline-flex;align-items:center;gap:6px;color:var(--fg);font-weight:600}
+.tu-av{font-style:normal;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:700 8.5px var(--sans);background:hsl(160 30% 90%);color:hsl(160 40% 26%)}
+html[data-tema=escuro] .topo-u{background:#0a1821;border-color:#1e3747}html[data-tema=escuro] .tu-av{background:#14301f;color:#9fd6b5}
+.pm-et{--gap:0}
