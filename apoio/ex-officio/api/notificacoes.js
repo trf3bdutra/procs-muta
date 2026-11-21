@@ -123,6 +123,8 @@ module.exports = async (req, res) => {
     });
     ((aus || {}).registros || []).forEach(a => { if (L.norm(a.nome) !== eu || !a.decididoEm || L.norm(a.decididoPor) === eu) return;
       ev.push({ id: 'au-' + a.id + '-' + a.estado, time: a.decididoEm, action: 'ausencia', user: a.decididoPor || 'Responsável', title: 'Ausência ' + a.estado + ' · ' + a.tipo, message: a.de.split('-').reverse().join('/') + (a.ate !== a.de ? ' a ' + a.ate.split('-').reverse().join('/') : '') + (a.obs ? ' · ' + a.obs : '') }); });
+    /* chegadas ao gabinete vistas pela extensão na lista do PJe (só o gestor): urgências e relatório do dia */
+    try { (await require('./_chegadas').eventos(u)).forEach(e => ev.push(e)); } catch (e) { /* registro ilegível: segue sem ele */ }
     ev.sort((a, b) => String(b.time).localeCompare(String(a.time)));
     res.status(200).json({ events: ev.slice(0, 60) });
   } catch (e) { res.status(500).json({ erro: e.message }); }

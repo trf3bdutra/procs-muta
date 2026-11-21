@@ -1,4 +1,5 @@
 /* GET  /api/pauta?mono=1                      monocráticas (ver _mono.js)
+   GET|POST /api/pauta?chegadas=1               chegadas ao gabinete vistas pela extensão na lista do PJe (só o gestor; ver _chegadas.js)
    GET  /api/pauta?data=AAAA-MM-DD            pauta da sessão (itens e pré-pauta)
    POST /api/pauta?data=AAAA-MM-DD  {cnj, lista, campos}   grava campos de um processo, num commit, com nova tentativa se o arquivo mudou;
                                                           o mesmo commit leva os campos à ficha do processo em acervo/operacional.json
@@ -63,6 +64,7 @@ module.exports = async (req, res) => {
   if (req.query.mono) return require('./_mono')(req, res, u);
   if (req.query.fichas) return FICHA.resumos(req, res, u);
   if (req.query.etiquetas) return FICHA.etiquetasGab(req, res, u);
+  if (req.query.chegadas) return require('./_chegadas')(req, res, u);
   if (req.query.ficha) return FICHA(req, res, u);
   if (req.query.prontuario) return require('./_prontuario')(req, res, u);
   if (req.query.metas) return require('./_metas')(req, res, u);

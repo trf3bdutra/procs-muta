@@ -256,3 +256,26 @@ test('extensão 0.20: Gerador monta relatório, dispositivo, ementa, acórdão e
   assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro', 'Gerador'\]/);
   assert.match(read('extensao/painel.html'), /<script src="gerador\.js"><\/script>/);
 });
+
+test('extensão 0.21: chegadas do PJe (só gestor; base sem aviso; urgente avisa na hora) e notificações do app com origem distinta', async () => {
+  const store = { 'muta-gestor': true }, notas = [], posts = [];
+  const chrome = { storage: { local: { get: k => Promise.resolve(Object.fromEntries([].concat(k).map(x => [x, store[x]]))), set: o => { Object.assign(store, o); return Promise.resolve(); } }, session: { set: () => Promise.resolve(), get: () => Promise.resolve({}) }, onChanged: { addListener() {} } },
+    notifications: { create: (id, o) => notas.push([id, o]), onClicked: { addListener() {} }, clear() {} }, action: { setBadgeText() {}, setBadgeBackgroundColor() {}, onClicked: { addListener() {} } },
+    runtime: { onMessage: { addListener() {} }, onInstalled: { addListener() {} }, onStartup: { addListener() {} }, getURL: x => x }, alarms: { onAlarm: { addListener() {} }, create() {} }, sidePanel: { setPanelBehavior: () => Promise.resolve() }, tabs: { query: () => Promise.resolve([]), onUpdated: { addListener() {} }, onActivated: { addListener() {} }, onRemoved: { addListener() {} } }, scripting: {} };
+  const ctx = { self: {}, chrome, console, importScripts() {}, fetch: (u, o) => { posts.push([u, o && o.body]); return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({}) }); }, setTimeout, Date, Promise, JSON, Object, Array, String, Number, isFinite };
+  vm.createContext(ctx); try { vm.runInContext(read('extensao/fundo.js'), ctx); } catch (e) { /* listeners do navegador ausentes no teste */ }
+  const K1 = '50000000020264030000', K2 = '50000000120264030000';
+  await ctx.chegadas([K1], { [K1]: 'Agravo de instrumento' }, 'Triagem', {});
+  assert.equal(notas.length, 0, 'a primeira lista vira a base, sem aviso');
+  await ctx.chegadas([K1, K2], { [K2]: 'AGRAVO DE INSTRUMENTO · pedido de LIMINAR · medicamento' }, 'Analisar pedido', {});
+  assert.equal(notas.length, 1); assert.match(notas[0][0], /^cheg:/); assert.match(notas[0][1].title, /Chegada urgente/); assert.equal(notas[0][1].iconUrl, 'icones/pje-128.png');
+  assert.ok(posts.some(p => /chegadas=1/.test(p[0]) && /"urg":true/.test(p[1])));
+  assert.equal(store['muta-chegadas'].length, 1);
+  store['muta-gestor'] = false; await ctx.chegadas(['50000000220264030000'], {}, '', {}); assert.equal(store['muta-chegadas'].length, 1, 'só gestor');
+  const man = JSON.parse(read('extensao/manifest.json')); assert.ok(man.permissions.includes('alarms'));
+  assert.match(read('extensao/fundo.js'), /iconUrl: 'icones\/app-128\.png', title: '🏛 Gabinete · '/);
+  assert.match(read('extensao/fundo.js'), /iconUrl: 'icones\/pje-128\.png', title: '⚖ PJe · '/);
+  ['icones/app-128.png', 'icones/pje-128.png', 'relatorio.html', 'relatorio.js'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
+  assert.match(read('apoio/ex-officio/api/pauta.js'), /req\.query\.chegadas\) return require\('\.\/_chegadas'\)/);
+  assert.match(read('apoio/ex-officio/api/notificacoes.js'), /require\('\.\/_chegadas'\)\.eventos\(u\)/);
+});

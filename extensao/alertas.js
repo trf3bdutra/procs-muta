@@ -10,13 +10,18 @@
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var SVG = function (p, n) { return '<svg viewBox="0 0 24 24" width="' + (n || 14) + '" height="' + (n || 14) + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>'; };
   var SINO = '<path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>';
-  var A = { itens: [], em: '', cfg: null, cat: null, gestor: false, catErro: '', ed: null, aba: 'al', res: {}, pedindo: {} };
+  var A = { app: [], appEm: '', cheg: [], gestor0: false, itens: [], em: '', cfg: null, cat: null, gestor: false, catErro: '', ed: null, aba: 'al', res: {}, pedindo: {} };
   var temChrome = typeof chrome !== 'undefined' && chrome.storage;
 
   /* ---------- dados ---------- */
   function lerAlertas() {
     if (!temChrome || !chrome.storage.session) return Promise.resolve();
-    return chrome.storage.session.get('muta-alertas').then(function (o) { var v = o['muta-alertas'] || {}; A.itens = v.itens || []; A.em = v.em || ''; sino(); if (aberto()) pintar(); }).catch(function () {});
+    return Promise.all([chrome.storage.session.get(['muta-alertas', 'muta-app']), chrome.storage.local.get(['muta-chegadas', 'muta-gestor'])]).then(function (v) {
+      var o = v[0], a = o['muta-alertas'] || {}, ap = o['muta-app'] || {}; A.itens = a.itens || []; A.em = a.em || ''; A.app = ap.eventos || []; A.appEm = ap.em || '';
+      var hoje = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+      A.gestor0 = !!v[1]['muta-gestor']; A.cheg = (v[1]['muta-chegadas'] || []).filter(function (x) { return new Date(Date.parse(x.em) - 4 * 3600e3).toISOString().slice(0, 10) === hoje; });
+      sino(); if (aberto()) pintar();
+    }).catch(function () {});
   }
   function lerCfg() {
     var base = Object.assign({}, E ? E.CFG : {});
@@ -76,36 +81,58 @@
   function vermelhos() { return A.itens.filter(function (i) { return (i.alertas || []).some(function (a) { return a.nivel === 'al'; }); }).length; }
   function sino() {
     var b = $('tu-sino'); if (!b) return;
-    var n = vermelhos(), t = A.itens.length;
+    var nApp = appPend().length, n = vermelhos() + nApp, t = A.itens.length;
     b.querySelector('b').textContent = n ? String(n) : '';
-    b.classList.toggle('al', !!n);
+    b.classList.toggle('al', !!vermelhos()); b.classList.toggle('ap', !vermelhos() && !!nApp);
     b.title = n ? n + ' processo' + (n > 1 ? 's' : '') + ' com alerta' + (n > 1 ? 's' : '') + ' na lista do PJe' : t ? t + ' processo' + (t > 1 ? 's' : '') + ' com aviso' : 'Alertas, prazos e etiquetas do gabinete';
   }
+  function appPend() { return A.app.filter(function (e) { return !e.resolved && (e.nivel === 'urgente' || e.nivel === 'importante'); }); }
   function aberto() { var p = $('tu-pop'); return p && !p.hidden; }
   function abrir(s) {
     var p = $('tu-pop'); if (!p) return;
     p.hidden = !s; $('tu-sino').setAttribute('aria-expanded', s ? 'true' : 'false');
-    if (s) { Promise.all([lerAlertas(), lerCfg(), lerCatalogo()]).then(pintar); pintar(); }
+    if (s) { try { chrome.runtime.sendMessage({ tipo: 'muta-app-ler' }).catch(function () {}); } catch (e) {} Promise.all([lerAlertas(), lerCfg(), lerCatalogo()]).then(pintar); pintar(); }
   }
   function quando(iso) { if (!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
   function fmtCnj(k) { var d = String(k).replace(/\D/g, ''); return d.length === 20 ? d.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : k; }
 
   function pintar() {
     var p = $('tu-pop'); if (!p) return;
-    var abas = [['al', 'Alertas'], ['pz', 'Prazos'], ['et', 'Etiquetas'], ['ver', 'Versão']];
-    var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : '') + '</button>'; }).join('') +
+    var gst = A.gestor0 || (ses && ses.estado().gestor);
+    var abas = [['al', 'PJe'], ['app', 'Gabinete']].concat(gst ? [['ch', 'Chegadas']] : []).concat([['pz', 'Prazos'], ['et', 'Etiquetas'], ['ver', 'Versão']]);
+    if (A.aba === 'ch' && !gst) A.aba = 'al';
+    var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : '') + '</button>'; }).join('') +
       '<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div>';
-    h += '<div class="ap-c">' + (A.aba === 'al' ? pAlertas() : A.aba === 'pz' ? pPrazos() : A.aba === 'ver' ? pVersao() : pEtiquetas()) + '</div>';
+    h += '<div class="ap-c">' + (A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : A.aba === 'pz' ? pPrazos() : A.aba === 'ver' ? pVersao() : pEtiquetas()) + '</div>';
     p.innerHTML = h;
   }
   function pAlertas() {
     if (!A.itens.length) return '<p class="muted ap-v">Nenhum alerta. Os alertas surgem quando a lista de tarefas do PJe é aberta com o HERO18810 ligado.</p>';
     var L = A.itens.slice().sort(function (a, b) { return al(b) - al(a); });
     return '<small class="muted ap-em">Leitura da lista em ' + esc(quando(A.em)) + ' · toque no número para copiar</small><ul class="ap-l">' + L.map(function (i) {
-      return '<li><div class="ap-h"><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(i.k)) + '" title="Copiar o número">' + esc(fmtCnj(i.k)) + '</button><small>' + esc(i.etapa || '') + (i.servidor ? ' · ' + esc(i.servidor) : '') + '</small></div>' +
+      return '<li class="org-pje"><div class="ap-h"><i class="ap-org pje">PJe</i><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(i.k)) + '" title="Copiar o número">' + esc(fmtCnj(i.k)) + '</button><small>' + esc(i.etapa || '') + (i.servidor ? ' · ' + esc(i.servidor) : '') + '</small></div>' +
         '<div class="ap-as">' + (i.alertas || []).map(function (a) { return '<span class="ap-a ' + (a.nivel === 'al' ? 'al' : 'av') + '">' + esc(a.t) + '</span>'; }).join('') + '</div></li>';
     }).join('') + '</ul>';
     function al(i) { return (i.alertas || []).filter(function (a) { return a.nivel === 'al'; }).length; }
+  }
+  function pApp() {
+    if (!A.app.length) return '<p class="muted ap-v">Sem avisos do app do gabinete' + (A.appEm ? '' : ' (entre no painel para recebê-los)') + '.</p>';
+    return '<small class="muted ap-em">App do gabinete · ' + esc(quando(A.appEm)) + '</small><ul class="ap-l">' + A.app.slice(0, 40).map(function (e) {
+      var pje = e.origem === 'pje';
+      return '<li class="org-' + (pje ? 'pje' : 'app') + (e.resolved ? ' lido' : '') + '"><div class="ap-h"><i class="ap-org ' + (pje ? 'pje' : 'app') + '">' + (pje ? 'PJe' : 'App') + '</i><b class="ap-ti">' + esc(e.title || '') + '</b></div>' +
+        '<div class="ap-ms">' + esc(e.message || '') + '</div><small class="muted">' + esc(quando(e.time)) + (e.user ? ' · ' + esc(e.user) : '') + (e.nivel && e.nivel !== 'info' ? ' · <span class="ap-nv ' + esc(e.nivel) + '">' + esc(e.nivel) + '</span>' : '') +
+        (e.numero ? ' · <button type="button" class="ap-k" data-ap-cnj="' + esc(e.numero) + '">' + esc(e.numero) + '</button>' : '') + '</small></li>';
+    }).join('') + '</ul><a class="lnk" target="_blank" rel="noopener" href="https://www.gabinete-cmt.com/exofficio/">Abrir o app</a>';
+  }
+  function pChegadas() {
+    var U = A.cheg.filter(function (x) { return x.urg; });
+    var lk = temChrome && chrome.runtime.getURL ? chrome.runtime.getURL('relatorio.html') : '#';
+    return '<small class="muted ap-em">Hoje: ' + A.cheg.length + ' chegada' + (A.cheg.length === 1 ? '' : 's') + (U.length ? ' · ' + U.length + ' com urgência' : '') + ' · vistas na lista do PJe</small>' +
+      (A.cheg.length ? '<ul class="ap-l">' + A.cheg.slice().sort(function (a, b) { return b.urg - a.urg; }).map(function (x) {
+        return '<li class="org-pje"><div class="ap-h"><i class="ap-org pje">PJe</i><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(x.k)) + '">' + esc(fmtCnj(x.k)) + '</button><small>' + esc(quando(x.em)) + '</small></div>' +
+          '<div class="ap-as">' + (x.urg ? '<span class="ap-a al">⚡ ' + esc(x.motivos.join(', ')) + '</span>' : (x.motivos || []).length ? '<span class="ap-a av">' + esc(x.motivos.join(', ')) + '</span>' : '') + (x.tarefa ? '<span class="ap-a">' + esc(x.tarefa) + '</span>' : '') + '</div></li>';
+      }).join('') + '</ul>' : '<p class="muted ap-v">Nenhuma chegada vista hoje. As chegadas são registradas quando a lista de tarefas do PJe é aberta com a extensão ligada.</p>') +
+      '<a class="lnk" target="_blank" href="' + lk + '">Relatório completo do dia</a>';
   }
   function pPrazos() {
     var c = A.cfg || (E ? E.CFG : {});
@@ -115,6 +142,10 @@
       num('tarefaDias', 'Tempo na tarefa', 'dias até o aviso (vermelho no dobro)') +
       lig('selos', 'Selos na lista de tarefas do PJe', 'etapa, designação, alertas e etiquetas que faltam') +
       lig('avisos', 'Notificações do Chrome', 'só alertas vermelhos, uma vez por dia por processo') +
+      lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (🏛, ícone azul)') +
+      (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Registrar chegadas (só gestor)', 'processos novos na lista do PJe; urgentes avisam na hora (⚡📥)') +
+        lig('relatorio', 'Relatório de chegadas no fim do dia', 'notificação com o total do dia, que abre o relatório') +
+        '<label class="ap-f"><span>Hora do relatório</span><input type="time" data-pz="relHora" value="' + esc(c.relHora || '18:00') + '"><small>todo dia, neste navegador</small></label>' : '') +
       '<small class="muted ap-v">Vale só neste navegador.</small>';
   }
   function pEtiquetas() {
@@ -188,10 +219,10 @@
     });
     p.addEventListener('change', function (e) {
       var i = e.target;
-      if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : Math.max(1, Number(i.value) || 1); gravarCfg(c); return; }
+      if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : i.type === 'time' ? (i.value || '18:00') : Math.max(1, Number(i.value) || 1); gravarCfg(c); return; }
       if (i.dataset.qf === 'op') { colher(); pintar(); }
     });
-    if (temChrome && chrome.storage.onChanged) chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'session' && ch['muta-alertas']) lerAlertas(); });
+    if (temChrome && chrome.storage.onChanged) chrome.storage.onChanged.addListener(function (ch, area) { if ((area === 'session' && (ch['muta-alertas'] || ch['muta-app'])) || (area === 'local' && ch['muta-chegadas'])) lerAlertas(); });
     lerAlertas(); lerCfg(); iniciarVersao();
     if (ses && ses.ouvir) ses.ouvir(function () { A.cat = null; A.res = {}; });
   }

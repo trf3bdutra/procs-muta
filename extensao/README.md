@@ -5,6 +5,23 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.21 · notificações do app e chegadas do PJe
+
+- **Avisos do app do gabinete** (`/api/notificacoes`) entram na extensão a cada 5 minutos (`chrome.alarms`). Os urgentes
+  e importantes novos viram notificação do Chrome com 🏛 e ícone azul (`icones/app-128.png`); os da lista do PJe saem com
+  ⚖ e ícone laranja (`icones/pje-128.png`). No sino do painel, abas separadas: **PJe** (alertas da lista) e **Gabinete**
+  (avisos do app, com etiqueta App ou PJe e barra azul ou laranja). O número no ícone soma os dois; vermelho se houver
+  alerta do PJe, azul se só houver aviso do app. Na primeira leitura, os avisos já existentes não disparam notificação.
+- **Chegadas (só o gestor)**: o app não tem esse registro; ele nasce na extensão. A cada leitura da lista de tarefas do
+  PJe, número nunca visto e novo no gabinete (sem ficha, ou entrou na tarefa há até 2 dias) vira chegada. A primeira lista
+  vira a base, sem avisos. Urgência pelo texto do cartão (liminar, tutela, efeito suspensivo, medicamento, cirurgia,
+  oncológico, réu preso, bloqueio de valores…) e pelo que a ficha já tiver; urgente avisa na hora (⚡📥, fica na tela até
+  ser vista). Registro local (45 dias) e no site (`apoio/chegadas.json`, `GET|POST /api/pauta?chegadas=1`, 90 dias,
+  só o gestor), que também põe as urgências e o relatório do dia na central de notificações do app.
+- **Relatório do fim do dia** (padrão 18:00, ajustável no sino › Prazos): notificação com o total do dia que abre
+  `relatorio.html` (com urgência primeiro, copiar e imprimir). Sino › Chegadas mostra as de hoje.
+- Ao atualizar, aceite a permissão nova de alarmes.
+
 ## O que muda na 0.20 · Gerador
 
 - **Prontuário › Gerador** (`gerador.js`): relatório, dispositivo do voto, ementa, acórdão e proclamação do julgamento

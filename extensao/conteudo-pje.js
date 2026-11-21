@@ -429,15 +429,22 @@
     if (F.length) h.push('<span class="m-av" data-muta-copia="' + escS(F.map(function (x) { return x.nome; }).join(', ')) + '" title="Etiquetas do gabinete que faltam no PJe: ' + escS(F.map(function (x) { return x.nome + (x.descricao ? ' (' + x.descricao + ')' : ''); }).join('; ')) + '. Clique para copiar.">🏷 ' + F.length + ' a incluir</span>');
     return h.join('');
   }
-  function pedirSelos(ks) {
+  function pedirSelos(ks, textos) {
     if (ENR.pedindo || !ks.length) return; ENR.pedindo = true;
     try {
-      chrome.runtime.sendMessage({ tipo: 'muta-resumos', cnjs: ks, lista: true }).then(function (r) {
+      /* textos: o que o cartão mostra (classe, partes, tarefa, prioridade, etiquetas), para o registro de chegadas do gestor */
+      chrome.runtime.sendMessage({ tipo: 'muta-resumos', cnjs: ks, lista: true, textos: textos || {}, tarefa: tarefaAberta() }).then(function (r) {
         ENR.pedindo = false; ENR.t = Date.now();
         if (!r || r.erro) { ENR.erro = r && r.erro || 'sem resposta'; return; }
         ENR.erro = ''; Object.keys(r.resumos || {}).forEach(function (k) { ENR.dados[k] = r.resumos[k]; }); ENR.cat = r.catalogo; ENR.cfg = r.cfg; agendarSelos();
       }, function () { ENR.pedindo = false; });
     } catch (e) { ENR.pedindo = false; }
+  }
+  /* nome da tarefa aberta na lista (o item selecionado na árvore de tarefas ou o título da página) */
+  function tarefaAberta() {
+    var el = document.querySelector('[aria-selected="true"] .nome-tarefa, .tarefa-selecionada, li.active .nome, [class*="tarefa"][class*="selec"], [aria-current="page"]');
+    var t = el ? el.textContent : '';
+    return (t || '').replace(/\s+/g, ' ').trim().slice(0, 120);
   }
   function aplicarSelos() {
     if (!LISTA) return;
@@ -446,7 +453,10 @@
     var ks = C.map(function (c) { return c.k; });
     /* cada número é pedido no máximo uma vez a cada 2 minutos (o que o servidor não devolver não é pedido em laço) */
     var agora = Date.now(), novos = ks.filter(function (k) { return !ENR.pedidos[k] || agora - ENR.pedidos[k] > 120e3; });
-    if (novos.length) { novos.forEach(function (k) { ENR.pedidos[k] = agora; }); pedirSelos(ks); }
+    if (novos.length) {
+      var tx = {}; C.forEach(function (c) { if (novos.indexOf(c.k) >= 0) tx[c.k] = (c.el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 700); });
+      novos.forEach(function (k) { ENR.pedidos[k] = agora; }); pedirSelos(ks, tx);
+    }
     cssSelos();
     C.forEach(function (c) {
       var r = ENR.dados[c.k]; if (!r) return;
