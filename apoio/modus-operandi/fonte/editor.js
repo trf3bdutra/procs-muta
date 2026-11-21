@@ -371,20 +371,20 @@ document.body.classList.add('vdm-ed');
   if(!window.VDM_PAGINA_EDITOR)return;
   function abre(){var a=alvo();if(edSrv()||!window.CMT_SITE){var o=$('#ed-ov');if(o&&!o.querySelector('.ed-body'))o.remove();edAbrir(a[0],a[1]);}else semAcesso();}
   document.addEventListener('cmt-acesso',abre);window.addEventListener('hashchange',function(){var a=alvo();if(a.length&&(edSrv()||!window.CMT_SITE))edAbrir(a[0],a[1]);});})();
-/* ---------- campos preenchíveis e variáveis do caso: barra sobre o texto em edição e atalho @@ ---------- */
+/* ---------- campos: automáticos (@apelido, da ficha do processo; atalho @) e manuais ({{orientação}}): barra sobre o texto em edição ---------- */
 var EDV={ta:null,ini:-1,q:'',sel:0,itens:[]};
 function edTxtAlvo(t){return t&&t.tagName==='TEXTAREA'&&t.closest&&t.closest('#ed-form')&&!t.closest('.mn-f')&&!t.classList.contains('mono');}
 function edUsados(){var c={};edLista().forEach(function(r){var s=EDS.col==='mod'?r.esqueletoModelo:EDS.col==='par'?r.texto:EDS.col==='pec'?JSON.stringify(r.elementos||[]):'';String(s||'').replace(/\{\{([^}]{1,60})\}\}/g,function(m,a){a=a.trim();c[a]=(c[a]||0)+1;});});
   return Object.keys(c).sort(function(a,b){return c[b]-c[a];}).slice(0,40);}
-function edVarsLista(q){var V=(window.VDM_varsCaso?window.VDM_varsCaso():[]).map(function(v){return {nome:v.nome,d:v.d,v:v.v,g:'Variáveis do caso'};}),nomes={};V.forEach(function(v){nomes[v.nome]=1;});
+function edVarsLista(q){var V=((window.CAMPOS_AUTO||{}).campos||[]).map(function(c){return {nome:c.a,d:c.r+(c.g?' · '+c.g:''),v:'',g:'Campos automáticos (@): ficha do processo e peça',arr:true};}),nomes={};V.forEach(function(v){nomes[v.nome]=1;});
   edUsados().forEach(function(n){if(!nomes[n])V.push({nome:n,d:'Campo já usado nesta coleção',v:'',g:'Campos já usados'});});
   var qq=nz(q||'').trim();if(!qq)return V.slice(0,30);
   function nota(v){var n=nz(v.nome);return n.indexOf(qq)===0?0:n.split(/[^a-z0-9]+/).some(function(w){return w.indexOf(qq)===0;})?1:n.indexOf(qq)>=0?2:nz(v.d).indexOf(qq)>=0?3:9;}
   return V.map(function(v){return [nota(v),v];}).filter(function(x){return x[0]<9;}).sort(function(a,b){return a[0]-b[0];}).map(function(x){return x[1];}).slice(0,30);}
 function edInsere(ta,txt,selIni,selFim){var a=ta.selectionStart,b=ta.selectionEnd;ta.focus();ta.setRangeText(txt,a,b,'end');if(selIni!=null)ta.setSelectionRange(a+selIni,a+selFim);ta.dispatchEvent(new Event('input',{bubbles:true}));}
-function edCampoNovo(ta){var a=ta.selectionStart,b=ta.selectionEnd,s=ta.value.slice(a,b);if(s){edInsere(ta,'{{'+s.trim()+'}}');}else edInsere(ta,'{{campo}}',2,7);}
+function edCampoNovo(ta){var a=ta.selectionStart,b=ta.selectionEnd,s=ta.value.slice(a,b);if(s){edInsere(ta,'{{'+s.trim()+'}}');}else edInsere(ta,'{{orientação do campo}}',2,21);}
 function edTbMostra(ta){var tb=$('#ed-tb');if(!tb){tb=document.createElement('div');tb.id='ed-tb';tb.className='ed-tb';tb.setAttribute('role','toolbar');tb.setAttribute('aria-label','Inserir campos');
-    tb.innerHTML='<button data-edtb="campo" title="Transforma a seleção em campo a preencher, ou insere um campo novo">{{ }} Campo</button><button data-edtb="var" title="Inserir variável preenchida com os dados do caso (atalho: @@)">@@ Variável do caso</button><button data-edtb="ID" title="Inserir [ID]">[ID]</button><button data-edtb="DATA" title="Inserir [DATA]">[DATA]</button><button data-edtb="VALIDAR" title="Marcar trecho a validar">[VALIDAR]</button>';
+    tb.innerHTML='<button data-edtb="campo" title="Campo manual: transforma a seleção em {{orientação}}, ou insere um campo novo; o texto de dentro diz o que escrever">{{ }} Campo manual</button><button data-edtb="var" title="Inserir campo automático, preenchido com a ficha do processo (atalho: @)">@ Campo da ficha</button><button data-edtb="ID" title="Inserir [ID]">[ID]</button><button data-edtb="DATA" title="Inserir [DATA]">[DATA]</button><button data-edtb="VALIDAR" title="Marcar trecho a validar">[VALIDAR]</button>';
     tb.addEventListener('mousedown',function(e){e.preventDefault();});document.body.appendChild(tb);}
   EDV.ta=ta;var r=ta.getBoundingClientRect();tb.hidden=false;tb.style.top=Math.max(4,r.top-tb.offsetHeight-4)+'px';tb.style.left=Math.max(4,Math.min(r.left,window.innerWidth-tb.offsetWidth-8))+'px';}
 function edTbEsconde(){var tb=$('#ed-tb');if(tb)tb.hidden=true;}
@@ -392,20 +392,20 @@ function edCaret(ta){var m=document.createElement('div'),cs=getComputedStyle(ta)
   m.style.position='absolute';m.style.visibility='hidden';m.style.whiteSpace='pre-wrap';m.style.wordWrap='break-word';m.textContent=ta.value.slice(0,ta.selectionStart);var sp=document.createElement('span');sp.textContent='​';m.appendChild(sp);document.body.appendChild(m);
   var r=ta.getBoundingClientRect(),x=r.left+sp.offsetLeft-ta.scrollLeft,y=r.top+sp.offsetTop-ta.scrollTop+parseFloat(cs.lineHeight||'18');m.remove();return {x:x,y:y};}
 function edVmAbre(ta,ini,q){EDV.ta=ta;EDV.ini=ini;EDV.q=q;EDV.sel=0;EDV.itens=edVarsLista(q);var m=$('#ed-vm');if(!m){m=document.createElement('div');m.id='ed-vm';m.className='ed-vm';m.setAttribute('role','listbox');m.addEventListener('mousedown',function(e){e.preventDefault();var b=e.target.closest('[data-vi]');if(b)edVmEscolhe(+b.getAttribute('data-vi'));});document.body.appendChild(m);}
-  if(!EDV.itens.length){m.innerHTML='<div class="ed-vm-v">Nenhuma variável com “'+esc(q)+'”. Enter cria o campo {{'+esc(q||'campo')+'}}.</div>';}
-  else{var g='';m.innerHTML=EDV.itens.map(function(v,i){var h=(v.g!==g?'<div class="ed-vm-g">'+esc(v.g)+'</div>':'');g=v.g;return h+'<button data-vi="'+i+'" role="option" class="'+(i===EDV.sel?'on':'')+'"><b>{{'+esc(v.nome)+'}}</b><small>'+esc(v.d)+(v.v?' · agora: '+esc(String(v.v).slice(0,40)):'')+'</small></button>';}).join('');}
+  if(!EDV.itens.length){m.innerHTML='<div class="ed-vm-v">Nenhum campo automático com “'+esc(q)+'”. Enter cria o campo manual {{'+esc(q||'orientação do campo')+'}}.</div>';}
+  else{var g='';m.innerHTML=EDV.itens.map(function(v,i){var h=(v.g!==g?'<div class="ed-vm-g">'+esc(v.g)+'</div>':'');g=v.g;return h+'<button data-vi="'+i+'" role="option" class="'+(i===EDV.sel?'on':'')+'"><b>'+(v.arr?'@'+esc(v.nome):'{{'+esc(v.nome)+'}}')+'</b><small>'+esc(v.d)+(v.v?' · agora: '+esc(String(v.v).slice(0,40)):'')+'</small></button>';}).join('');}
   var c=edCaret(ta);m.hidden=false;m.style.left=Math.max(4,Math.min(c.x,window.innerWidth-m.offsetWidth-8))+'px';m.style.top=Math.min(c.y+4,window.innerHeight-m.offsetHeight-8)+'px';}
 function edVmFecha(){var m=$('#ed-vm');if(m)m.hidden=true;EDV.ini=-1;}
-function edVmEscolhe(i){var ta=EDV.ta;if(!ta||EDV.ini<0)return;var v=EDV.itens[i],nome=v?v.nome:(EDV.q||'campo'),fim=ta.selectionStart;
-  ta.focus();ta.setRangeText('{{'+nome+'}}',EDV.ini,fim,'end');edVmFecha();ta.dispatchEvent(new Event('input',{bubbles:true}));}
+function edVmEscolhe(i){var ta=EDV.ta;if(!ta||EDV.ini<0)return;var v=EDV.itens[i],nome=v?v.nome:(EDV.q||'orientação do campo'),fim=ta.selectionStart;
+  ta.focus();ta.setRangeText(v&&v.arr?'@'+nome:'{{'+nome+'}}',EDV.ini,fim,'end');edVmFecha();ta.dispatchEvent(new Event('input',{bubbles:true}));}
 function edVmMarca(){$$('#ed-vm [data-vi]').forEach(function(b,i){b.classList.toggle('on',i===EDV.sel);if(i===EDV.sel&&b.scrollIntoView)b.scrollIntoView({block:'nearest'});});}
 document.addEventListener('focusin',function(e){if(edTxtAlvo(e.target))edTbMostra(e.target);else if(!(e.target.closest&&e.target.closest('#ed-tb,#ed-vm')))edTbEsconde();});
 document.addEventListener('focusout',function(e){if(edTxtAlvo(e.target))setTimeout(function(){var a=document.activeElement;if(!edTxtAlvo(a)){edTbEsconde();edVmFecha();}},120);});
 document.addEventListener('scroll',function(){var tb=$('#ed-tb');if(tb&&!tb.hidden&&EDV.ta&&document.activeElement===EDV.ta)edTbMostra(EDV.ta);edVmFecha();},true);
 document.addEventListener('mousedown',function(e){var b=e.target.closest&&e.target.closest('[data-edtb]');if(!b)return;e.preventDefault();var ta=EDV.ta;if(!ta)return;var k=b.getAttribute('data-edtb');
-  if(k==='campo')edCampoNovo(ta);else if(k==='var'){edInsere(ta,'@@');edVmAbre(ta,ta.selectionStart-2,'');}else edInsere(ta,'['+k+']');});
-document.addEventListener('input',function(e){var ta=e.target;if(!edTxtAlvo(ta))return;var antes=ta.value.slice(0,ta.selectionStart),m=/@@([^@{}\[\]\n]{0,40})$/.exec(antes);if(m&&(/\s\s$/.test(m[1])||(/\s/.test(m[1])&&!edVarsLista(m[1]).length)))m=null;
-  if(m)edVmAbre(ta,ta.selectionStart-m[0].length,m[1]);else if(EDV.ini>=0)edVmFecha();});
+  if(k==='campo')edCampoNovo(ta);else if(k==='var'){edInsere(ta,'@');edVmAbre(ta,ta.selectionStart-1,'');}else edInsere(ta,'['+k+']');});
+document.addEventListener('input',function(e){var ta=e.target;if(!edTxtAlvo(ta))return;var antes=ta.value.slice(0,ta.selectionStart),m=/(^|[\s(“"'\/])@([a-z0-9_]{0,40})$/i.exec(antes);
+  if(m)edVmAbre(ta,ta.selectionStart-m[2].length-1,m[2]);else if(EDV.ini>=0)edVmFecha();});
 document.addEventListener('keydown',function(e){var m=$('#ed-vm');
   if(m&&!m.hidden&&EDV.ini>=0&&document.activeElement===EDV.ta){
     if(e.key==='ArrowDown'){e.preventDefault();EDV.sel=Math.min(EDV.sel+1,EDV.itens.length-1);edVmMarca();return;}
