@@ -856,6 +856,10 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-cat{border-right:1px solid var(--b);background:var(--p);padding:10px;overflow:auto;max-height:78vh}.cg-cat h3,.cg-set h3{margin:4px 6px 9px;font-size:12px;color:var(--m);text-transform:uppercase;letter-spacing:.08em}.cg-cat button{display:block;width:100%;text-align:left;border:0;border-radius:5px;background:transparent;padding:7px 8px;font:600 12px Figtree,sans-serif;color:var(--m2);cursor:pointer}.cg-cat button:hover{background:var(--l2)}.cg-cat button.on{background:var(--v);color:#fff}.cg-cat button small{display:block;font-weight:400;opacity:.8;margin-top:2px}
 .cg-prev{padding:18px;min-width:0;overflow:auto;background:#eef1ef}.cg-paper{width:min(100%,780px);min-height:900px;margin:0 auto;background:#fff;border:1px solid #d6d9d6;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:34px 38px;color:#1f302e;outline:none}.cg-paper:focus{box-shadow:0 0 0 2px #a57829,0 4px 18px rgba(0,0,0,.08)}.cg-paper h1{font-size:24px;color:var(--v);margin:0 0 4px}.cg-paper h2{font-size:15px;color:var(--v);margin:22px 0 8px;border-bottom:1px solid #ddd;padding-bottom:5px}.cg-paper p{margin:4px 0 10px;font-size:12.5px}.cg-paper table{width:100%;border-collapse:collapse;font-size:10.5px}.cg-paper th,.cg-paper td{border-bottom:1px solid #e7e7e2;padding:5px;text-align:left;vertical-align:top}.cg-paper th{background:#f5f4ef;color:#4f5e5a}.cg-paper .mono{font-size:10px}
 .cg-set{border-left:1px solid var(--b);padding:12px;background:var(--p);overflow:auto}.cg-set label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-set input,.cg-set select,.cg-set textarea{width:100%;box-sizing:border-box}.cg-set .cg-exp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cg-set .cg-exp button{height:32px}
+.wa-g{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,1fr);gap:0}.wa-form{border-right:1px solid var(--l)}.wa-h{padding:12px 14px;max-height:340px;overflow:auto}.wa-i{position:relative;padding:8px 0 8px 12px;border-bottom:1px solid var(--l2)}.wa-i::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:2px;background:var(--ok)}.wa-i.falhou::before{background:var(--r)}
+.wa-i>div{display:flex;gap:8px;align-items:baseline}.wa-i b{font-size:12.5px}.wa-i.falhou b{color:var(--r)}.wa-i small{font-size:11px;color:var(--m)}.wa-i p{margin:3px 0 0;font-size:12.5px;color:var(--m2);white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.wa-er{display:block;color:var(--r)!important}
+.cm-dr span{border-color:#d9c7a3;color:var(--g)}.cm-dr input:checked+span{border-color:var(--g);color:var(--g);background:#fbf3df}
+@media(max-width:1000px){.wa-g{grid-template-columns:1fr}.wa-form{border-right:0}}
 /* Comunicação */
 .cg-com .cg-top .cg-acv a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .cm-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,1fr);gap:16px;align-items:start}.cm-grid>.cg-px{margin-bottom:16px}
@@ -1755,7 +1759,7 @@ function vComunicacao(){
   const form='<form class="cm-form" id="cg-com-form"><label class="cm-f">Título<input name="title" maxlength="160" required placeholder="Ex.: Sessão de 07/12 — entrega das minutas até 27/11"></label>'+
     '<label class="cm-f">Mensagem<textarea name="message" maxlength="2000" required placeholder="O que a equipe precisa saber ou fazer."></textarea><small class="cm-ct" id="cm-ct">0 / 2000</small></label>'+
     '<div class="cm-row"><div class="cm-f"><span>Importância</span><div class="cm-seg">'+niv+'</div></div><label class="cm-f cm-ate">Válido até<input type="date" name="ate"></label></div>'+
-    '<div class="cm-f"><span>Para</span><div class="cm-pls cm-para" id="cm-para"><label class="cm-pl cm-todos"><input type="checkbox" name="todos" checked><span>Toda a equipe</span></label><small class="cm-mut">carregando a equipe…</small></div></div>'+
+    '<div class="cm-f"><span>Para</span><div class="cm-pls cm-para" id="cm-para"><label class="cm-pl cm-todos"><input type="checkbox" name="todos" checked><span>Toda a equipe</span></label><label class="cm-pl cm-dr" title="Vai como comunicado para a página do desembargador (CMT) e as notificações dele"><input type="checkbox" name="dr"><span>Desembargador · página CMT</span></label><small class="cm-mut">carregando a equipe…</small></div></div>'+
     '<div class="cm-row"><div class="cm-f"><span>Onde aparece</span><div class="cm-seg">'+[['ambos','Mural e notificação','No Mural do Ex Officio e no sino de notificações'],['mural','Só no mural','Só no Mural do Ex Officio, sem notificação']].map((o,i)=>'<label class="cm-nv" style="--c:var(--v2)" title="'+o[2]+'"><input type="radio" name="onde" value="'+o[0]+'"'+(i?'':' checked')+'><span>'+o[1]+'</span></label>').join('')+'</div></div>'+
     '<div class="cm-f"><span>Destaque</span><div class="cm-pls">'+pill('fixo','Fixar no topo',0,'Fica acima dos demais até vencer')+'</div></div></div>'+
     '<div class="cm-prev-w"><span class="cm-k">Prévia</span><div class="cm-msg cm-prev" id="cm-prev"></div></div>'+
@@ -1766,6 +1770,11 @@ function vComunicacao(){
     '<div class="cg-acv"><a class="btn" href="/office/" target="_blank" rel="noopener">Abrir o Ex Officio ↗</a></div></div>'+
     '<div class="cm-grid">'+cx('Publicar','Aviso ou notificação para a equipe','',form,'cm-pub')+
     cx('Histórico','Avisos recentes','<span class="cg-tb"><span class="cg-status" id="cm-h-st"></span></span>','<div id="cg-com-hist" class="cm-hist"><p class="cg-status" style="padding:12px 14px">Carregando…</p></div>','cm-his')+'</div>'+
+    cx('WhatsApp do Dr.','Mensagem ao desembargador pelo Zernio','<span class="cg-tb"><span class="cg-status" id="wa-cfg"></span></span>',
+      '<div class="wa-g"><form class="cm-form wa-form" id="wa-form"><label class="cm-f">Mensagem<textarea name="texto" maxlength="3800" required placeholder="O que o Dr. vai receber no WhatsApp."></textarea><small class="cm-ct" id="wa-ct">0 / 3800</small></label>'+
+      '<div class="cm-f"><span>Como enviar</span><div class="cm-seg"><label class="cm-nv" style="--c:var(--v2)" title="Mensagem livre na conversa do Dr.; o WhatsApp só aceita até 24 h depois da última mensagem dele"><input type="radio" name="modo" value="livre" checked><span>Mensagem livre · janela de 24 h</span></label><label class="cm-nv" style="--c:var(--g)" title="Modelo aprovado pelo WhatsApp, com o texto dentro; vale fora da janela"><input type="radio" name="modo" value="modelo"><span>Modelo aprovado</span></label></div></div>'+
+      '<div class="cm-ft"><p id="wa-st" class="cg-status"></p><button class="btn pri" type="submit">Enviar ao WhatsApp</button></div></form>'+
+      '<div class="wa-h"><span class="cm-k">Últimos envios</span><div id="wa-hist"><p class="cg-status">Carregando…</p></div></div></div>','cm-wa')+
     cx('Canais','Onde a comunicação continua','','<div class="cm-tiles">'+
       tile('✉','Comunicações do gabinete','notificações, diligências e painel do gabinete no Ex Officio','data-cg-url="/office/#cmt"','Abrir ↗')+
       tile('⚑','Preferências e sustentações','pedidos vinculados à pauta e fechamento diário','data-cg-url="/office/#pauta"','Abrir ↗')+
@@ -1777,7 +1786,7 @@ async function cgApi(u,op){op=op||{};op.credentials='same-origin';op.headers=Obj
 const cmData=(d)=>{ if(!d) return ''; const x=String(d).slice(0,10); return /^\d{4}-\d{2}-\d{2}$/.test(x)?x.slice(8,10)+'/'+x.slice(5,7)+'/'+x.slice(0,4):''; };
 function cmCartao(a,prev){ const n=CM_NIV[a.nivel]||CM_NIV.info, vence=a.ate?cmData(a.ate):'', venceu=a.ate&&String(a.ate).slice(0,10)<HOJE;
   const tags=[a.nivel&&a.nivel!=='info'?'<i style="--c:'+n[1]+'">'+n[0]+'</i>':'',a.fixo?'<i>fixado</i>':'',vence?'<i'+(venceu?' class="x"':'')+'>'+(venceu?'venceu ':'até ')+vence+'</i>':''].join('');
-  const para=(a.para||[]).length?'para '+a.para.join(', '):'para toda a equipe', onde=a.notificacao===false?'só no mural':a.painel===false?'só notificação':'mural e notificação';
+  const para=a.soDr?'para o desembargador':((a.para||[]).length?'para '+a.para.join(', '):'para toda a equipe')+(a.dr?' e o desembargador':''), onde=a.notificacao===false?'só no mural':a.painel===false?'só notificação':'mural e notificação';
   const meta=esc([prev?'como vai aparecer':a.user||'',!prev&&a.time?new Date(a.time).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'',para,onde].filter(Boolean).join(' · '));
   return '<div class="cm-msg'+(venceu?' venc':'')+'" style="--c:'+n[1]+'"><div class="cm-mh"><b>'+esc(a.title||(prev?'Título do aviso':'Aviso'))+'</b>'+tags+'</div><small>'+meta+'</small><p>'+esc(a.message||(prev?'A mensagem aparece aqui.':''))+'</p></div>'; }
 const cmPara=(f)=>[...f.querySelectorAll('input[name=para]:checked')].map((x)=>x.value);
@@ -1785,14 +1794,24 @@ const cmPara=(f)=>[...f.querySelectorAll('input[name=para]:checked')].map((x)=>x
 function cmParaSync(ev){ const f=$('#cg-com-form'); if(!f) return; const t=ev&&ev.target, todos=f.elements.todos;
   if(t&&t.name==='todos'&&t.checked) f.querySelectorAll('input[name=para]').forEach((x)=>{x.checked=false;});
   else if(t&&t.name==='para'&&t.checked&&todos) todos.checked=false;
-  if(todos&&!cmPara(f).length) todos.checked=true; }
+  if(todos&&!cmPara(f).length&&!(f.elements.dr&&f.elements.dr.checked)) todos.checked=true; }
 function cmEquipe(nomes){ const box=$('#cm-para'); if(!box) return; const sel=new Set(cmPara($('#cg-com-form')));
   box.querySelectorAll('.cm-pn,.cm-mut').forEach((x)=>x.remove());
   box.insertAdjacentHTML('beforeend',(nomes||[]).map((n)=>'<label class="cm-pl cm-pn"><input type="checkbox" name="para" value="'+esc(n)+'"'+(sel.has(n)?' checked':'')+'><span>'+esc(n)+'</span></label>').join('')||'<small class="cm-mut">equipe indisponível: o aviso vai para todos</small>'); }
 function cmPrevia(){ const f=$('#cg-com-form'); if(!f) return; const E=f.elements, pv=$('#cm-prev'), ct=$('#cm-ct');
   if(ct) ct.textContent=E.message.value.length+' / 2000';
-  if(pv) pv.outerHTML=cmCartao({title:E.title.value,message:E.message.value,nivel:E.nivel.value,ate:E.ate.value,fixo:E.fixo.checked,para:cmPara(f),painel:true,notificacao:E.onde.value!=='mural'},true).replace('class="cm-msg','id="cm-prev" class="cm-msg cm-prev'); }
-async function cgComCarregar(){
+  if(pv) pv.outerHTML=cmCartao({title:E.title.value,message:E.message.value,nivel:E.nivel.value,ate:E.ate.value,fixo:E.fixo.checked,para:cmPara(f),dr:!!(E.dr&&E.dr.checked),soDr:!!(E.dr&&E.dr.checked)&&!E.todos.checked&&!cmPara(f).length,painel:true,notificacao:E.onde.value!=='mural'},true).replace('class="cm-msg','id="cm-prev" class="cm-msg cm-prev'); }
+async function waCarregar(){ const h=$('#wa-hist'),cf=$('#wa-cfg'); if(!h) return;
+  try{ const j=await cgApi('/api/notificacoes?wa=1'), c=j.configurado||{}, falta=[!c.chave&&'chave da Zernio',!c.conta&&'conta',!c.conversa&&'conversa do Dr.',!c.telefone&&'número do Dr.',!c.modelo&&'modelo aprovado'].filter(Boolean);
+    if(cf) cf.textContent=falta.length?'falta no servidor: '+falta.join(', '):'Zernio configurada';
+    const R=j.registros||[]; h.innerHTML=R.length?R.map((x)=>'<div class="wa-i '+esc(x.status)+'"><div><b>'+esc(x.status==='enviado'?'enviado':'não foi')+'</b><small>'+esc((x.modo==='modelo'?'modelo':'livre')+' · '+(x.por||'')+' · '+new Date(x.em).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}))+'</small></div><p>'+esc(x.texto)+'</p>'+(x.detalhe?'<small class="wa-er">'+esc(x.detalhe)+'</small>':'')+'</div>').join(''):'<p class="cg-status">Nada enviado ainda.</p>'; }
+  catch(e){ if(cf) cf.textContent=''; h.innerHTML='<p class="cg-status">Indisponível nesta sessão ('+esc(e.message)+'). Só o gestor, com login no Ex Officio, envia ao WhatsApp do Dr.</p>'; } }
+D.addEventListener('submit',(e)=>{ if(e.target.id!=='wa-form') return; e.preventDefault(); const f=e.target, st=$('#wa-st'), bt=f.querySelector('[type=submit]'), texto=f.elements.texto.value.trim(), modo=f.elements.modo.value; if(!texto) return;
+  bt.disabled=true; if(st) st.textContent='Enviando…';
+  cgApi('/api/notificacoes?wa=1',{method:'POST',body:JSON.stringify({texto,modo})}).then(()=>{ f.reset(); const ct=$('#wa-ct'); if(ct) ct.textContent='0 / 3800'; if(st) st.textContent='Enviado ao WhatsApp do Dr.'; toast('Enviado ao WhatsApp do Dr.'); })
+    .catch((er)=>{ if(st) st.textContent='Não foi: '+er.message+(modo==='livre'?' — fora da janela de 24 h, use "Modelo aprovado".':''); toast('Não foi enviado ao WhatsApp.',true); }).finally(()=>{ bt.disabled=false; waCarregar(); }); });
+D.addEventListener('input',(e)=>{ if(e.target.closest&&e.target.closest('#wa-form textarea')){ const ct=$('#wa-ct'); if(ct) ct.textContent=e.target.value.length+' / 3800'; } });
+async function cgComCarregar(){ waCarregar();
   const h=$('#cg-com-hist'),st=$('#cm-h-st'),f=$('#cg-com-form');if(!h)return;
   if(f&&!f.dataset.ok){f.dataset.ok=1;f.addEventListener('input',cmPrevia);f.addEventListener('change',(ev)=>{cmParaSync(ev);cmPrevia();});f.addEventListener('reset',()=>setTimeout(()=>{cmParaSync();cmPrevia();},0));}
   cmPrevia();
@@ -2452,7 +2471,11 @@ D.addEventListener('input',(e)=>{if(ABA!=='inteligencia')return;if(e.target.id==
 D.addEventListener('change',(e)=>{if(e.target.id==='cg-rel-format')CG_REL.formato=e.target.value;});
 D.addEventListener('submit',(e)=>{if(e.target.id!=='cg-com-form')return;e.preventDefault();const f=e.target,E=f.elements,st=$('#cg-com-status'),bt=f.querySelector('[type=submit]');bt.disabled=true;if(st)st.textContent='Publicando…';
  const d={title:E.title.value,message:E.message.value,link:'',linkTxt:'',nivel:E.nivel.value,painel:true,notificacao:E.onde.value!=='mural',fixo:E.fixo.checked,ate:E.ate.value,para:cmPara(f)};
- cgApi('/api/notificacoes?gestao=1',{method:'POST',body:JSON.stringify(d)}).then(()=>{f.reset();if(st)st.textContent='Aviso publicado.';toast('Aviso publicado.');return cgComCarregar();}).catch(er=>{if(st)st.textContent='Não foi possível publicar: '+er.message;toast('Não foi possível publicar o aviso.',true);}).finally(()=>{bt.disabled=false;});
+ /* equipe (aviso geral) e/ou desembargador (comunicado: página CMT e notificações dele) */
+ const dr=!!(E.dr&&E.dr.checked), eq=E.todos.checked||d.para.length, P=[];
+ if(eq)P.push(cgApi('/api/notificacoes?gestao=1',{method:'POST',body:JSON.stringify(d)}).then(()=>'aviso à equipe'));
+ if(dr)P.push(cgApi('/api/pendencias?com=1',{method:'POST',body:JSON.stringify({titulo:d.title,texto:d.message,cnjs:[]})}).then(()=>'comunicado ao desembargador'));
+ Promise.all(P).then((L)=>{f.reset();const m='Publicado: '+L.join(' e ')+'.';if(st)st.textContent=m;toast(m);return cgComCarregar();}).catch(er=>{if(st)st.textContent='Não foi possível publicar: '+er.message;toast('Não foi possível publicar.',true);}).finally(()=>{bt.disabled=false;});
 });
 $('#st-grava').addEventListener('click', () => { if (PRONTO && (ERRO || pendentes())) { TENT = 0; gravar(); } const mg = W.CMTPautas && W.CMTPautas.estadoGrava; if (mg && (mg.n || mg.erro) && W.CMTPautas.gravarJa) W.CMTPautas.gravarJa(); });
 

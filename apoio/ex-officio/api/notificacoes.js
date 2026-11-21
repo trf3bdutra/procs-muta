@@ -6,6 +6,7 @@ const PEDIDOS = require('./_pedidos');
 const opc = rel => L.lerJson(rel).then(x => x.dados).catch(() => null);
 module.exports = async (req, res) => {
   if (req.query && req.query.gestao) return require('./_avisos')(req, res);
+  if (req.query && req.query.wa) return require('./_wa-gabinete')(req, res);
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
   try {

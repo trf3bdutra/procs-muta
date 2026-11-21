@@ -188,3 +188,10 @@ test('Equipe: indisponível à mão ou pela ausência aprovada cobrindo hoje',()
   assert.ok(m.includes('function ausente(m, ss) { if (m.indisp) return true;')&&m.includes("'minutaEventual', 'indisp'].indexOf(campo)")&&m.includes('situacao: function (nome)'),'motor');
   assert.ok(rg.includes('data-k="indisp"')&&rg.includes('indisponível · ausente até'),'painel Equipe');
 });
+
+test('Comunicação: desembargador (página CMT) como destinatário e painel do WhatsApp do Dr. pela Zernio',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),n=fs.readFileSync(p.join(__dirname,'../notificacoes.js'.replace('../','../api/')),'utf8'),w=fs.readFileSync(p.join(__dirname,'../api/_wa-gabinete.js'),'utf8');
+  for(const x of ['name="dr"',"cgApi('/api/pendencias?com=1'",'id="wa-form"','async function waCarregar(',"cgApi('/api/notificacoes?wa=1'"])assert.ok(cap.includes(x),x);
+  assert.ok(n.includes("if (req.query && req.query.wa) return require('./_wa-gabinete')(req, res);"),'rota');
+  assert.ok(w.includes('L.gestor(u)')&&w.includes('ZERNIO_API_KEY || e.CAPUT_KEY')&&w.includes("modo === 'livre'")&&w.includes('apoio/equipe-whatsapp.json'),'endpoint');
+});
