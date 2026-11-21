@@ -49,6 +49,8 @@ test('prontuário: modo essencial aplicado sem redesenhar, com aviso; decisão n
 test('prontuário: sem a prévia da minuta', () => {
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   assert.ok(!app.includes('abas[2].html+=previaMinuta('));
+});
+
 test('prontuário: tópico-síntese só é essencial nos casos previdenciários', () => {
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   const nq = x => String(x == null ? '' : x).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
