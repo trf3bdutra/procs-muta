@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T01:31:14.437Z",
+ "atualizadoEm": "2026-11-21T01:31:18.443Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -3246,9 +3246,12 @@
      "pendencias": [
       {
        "desc": "Processo ainda sem minuta na pauta; anexar o inteiro teor quando minutado.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote irpj-icms"
+       "por": "Index · lote irpj-icms",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Superada: os autos extraídos em 19/11/2026 trazem relatório, voto e ementa em elaboração (IDs 413628440, 413628443 e 413628446)."
       }
      ]
     },
@@ -3257,8 +3260,9 @@
      "item": 67,
      "autos": 52
     },
-    "editadoPor": "Index",
-    "planilhaDataMinuta": "2026-11-18"
+    "editadoPor": "Bruno",
+    "planilhaDataMinuta": "2026-11-18",
+    "editadoEm": "2026-11-21T01:31:18.443Z"
    }
   },
   {
