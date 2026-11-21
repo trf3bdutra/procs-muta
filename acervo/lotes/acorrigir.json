@@ -5916,9 +5916,55 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório, abertura",
+     "Abertura “contra sentença” e honorários na mesma frase da sentença; faltava “sem resolução do mérito” (a sentença extinguiu com base no artigo 485, IV, do CPC) → Abertura “Trata-se de apelação à sentença (ID …) que …” (Forma A), honorários em frase nova e extinção sem resolução do mérito",
+     "RED · BAIXA"
+    ],
+    [
+     "Relatório, após a abertura",
+     "Embargos de declaração do exequente contra a sentença omitidos, embora o voto se apoie na decisão que os rejeitou → Incluído: “O exequente opôs embargos de declaração (ID 349343818), os quais foram rejeitados (ID 349343821).”",
+     "DOC · MÉDIA"
+    ],
+    [
+     "Relatório, contrarrazões e ocorrências",
+     "Pedido de litigância de má-fé, decidido no voto, ausente do relatório; omitido o recolhimento do preparo em dobro após intimação (despacho ID 391654759; comprovantes PagTesouro IDʼs 393972413 e 393972419) → Incluídos o pedido de má-fé nas contrarrazões e o parágrafo do preparo",
+     "DOC · MÉDIA"
+    ],
+    [
+     "Voto, admissibilidade",
+     "Alegação de dispensa de preparo (item 5 da apelação) sem resposta no voto, embora a ementa cite Lei 9.289/1996, artigo 4º, parágrafo único, CPC, artigo 1.007, § 4º, e Tema 625/STJ → Incluído parágrafo de conhecimento: conselho não isento (Tema 625/STJ, tese transcrita) e preparo recolhido em dobro após intimação",
+     "JUR · ALTA"
+    ],
+    [
+     "Voto, precedentes do Relator",
+     "Citações com veículo incorreto (“DJe 26/05/2017”) e com data de julgamento no lugar da publicação (“j. em 24/08/2020”) → Conferido no banco de julgados: ApReeNec 0001365-44.2016.4.03.6100, e-DJF3 Judicial 1 26/05/2017; ApCiv 5005275-23.2018.4.03.6100, Intimação via sistema 27/08/2020",
+     "JURIS · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Item 4 com 103 palavras e item 1 com 67; sem item sobre o preparo, embora citado no rodapé; IV sem a fórmula de honorários recursais → Itens divididos (uma ideia por item), incluído o preparo e IV “Apelação desprovida, honorários recursais em acréscimo ao fixado na origem.”; cabeçalho com “HONORÁRIOS RECURSAIS”",
+     "EST · MÉDIA"
+    ],
+    [
+     "Ementa, rodapé",
+     "“CF” sem “/1988”, diplomas fora da ordem hierárquica, “TRF3” sem hífen e jurisprudência fora da ordem STF → STJ → TRF-3 → Rodapé reordenado e corrigido",
+     "RED · BAIXA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Incluído, espelhando o dispositivo",
+     "EST · MÉDIA"
+    ]
+   ],
    "pendencias": [
-    "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação."
+    "Conferir, fora do banco do gabinete, a data de publicação dos acórdãos da Des. Fed. MÔNICA NOBRE (ApCiv 5009525-69.2022.4.03.6000, DJe 05/05/2026) e do Des. Fed. WILSON ZAUHY (ApCiv 5015261-98.2018.4.03.6100, DJe 09/09/2026); o veículo do TRF-3 em 2026 é o DJEN."
    ],
    "minuta": true,
    "autos": {
@@ -12824,8 +12870,57 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura com IDʼs trocados (o ID 383955400, da decisão em embargos, aparecia no fim da frase) e razões de apelação em texto corrido, sem enumeração; sigla CONFAZ → Abertura “Trata-se de apelação à sentença (ID 383955388), integrada pela decisão em embargos de declaração (ID 383955400), que …”; razões em “alegando, em suma, que: (1) …; e (4) …”; nome do órgão por extenso",
+     "EST · MÉDIA"
+    ],
+    [
+     "Relatório, parecer",
+     "O parecer (ID 385176561) só se manifestou pelo prosseguimento, sem exame de mérito → Fórmula do gabinete: “opinou pelo prosseguimento do feito, abstendo-se de manifestação sobre o mérito”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, citações",
+     "Citações fora do padrão: UF e turma após o número, “DJe de”, “art.”, EDcl citado como REsp, parênteses e aspas desencontrados, “(g.n)”, data de julgamento junto à de publicação → Classe e número sem UF, relator em caixa alta e veículo com data (“DJe 01/09/2022”, “Intimação via sistema 18/03/2024”); “artigo”; “(g.n.)”",
+     "JURIS · BAIXA"
+    ],
+    [
+     "Voto, dispositivo",
+     "“nego provimento à apelação e à remessa necessária”: denegada a segurança, não há remessa necessária (artigo 14, § 1º, da Lei 12.016/2009), e a classe é só apelação; a ementa já dizia “Apelação desprovida” → “Ante o exposto, nego provimento à apelação.” Resultado mantido",
+     "PROC · ALTA"
+    ],
+    [
+     "Voto, honorários",
+     "Mandado de segurança sem a menção ao descabimento de honorários → “Sem honorários advocatícios (artigo 25 da Lei 12.016/2009).”",
+     "JUR · BAIXA"
+    ],
+    [
+     "Voto, conectivos",
+     "“Em casos tais” e “Destarte” → “Em casos que tais” e “Assim”",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Questões sem “saber se”; item 6 com 60 palavras; “reserva de lucros/incentivos”; sem item sobre a constituição tardia da reserva (V26); separador com 14 sublinhados; rodapé sem espaço após vírgula, fora da ordem e com dispositivo (CPC, artigo 322, § 2º) que só aparece no precedente transcrito → Itens reescritos, item 7 acrescido, separador “__________” e rodapé reordenado no padrão",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Incluído, espelhando o dispositivo",
+     "EST · MÉDIA"
+    ]
+   ],
+   "pendencias": [
+    "IDʼs 383955202, 383955204, 383955205 e 383955206 (voto, “Na espécie”) não constam da lista de documentos extraída, que passa do 383955201 ao 383955203 e deste ao 383955207: conferir no PJe e, se for o caso, trocar pelas IDʼs dos documentos da inicial (por exemplo, 383955203, “Dispositivos legais”, e 383955208, “Planilha benefícios ICMS”).",
+    "Preparo da apelação da impetrante: o comprovante (ID 383955411) é PDF digitalizado, sem texto. Conferir se é o comprovante do Tesouro (PagTesouro, “Pagamento realizado com sucesso”) ou GRU aceita."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5003091-93.2024.4.03.6000.json.gz",
@@ -14117,7 +14212,48 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "ID da sentença no fim do parágrafo; comandos sem enumeração; omitido que a sentença negou a restituição; “sustentando, em síntese”; parecer descrito como “regular prosseguimento”, mas o Ministério Público Federal deixou de se manifestar por falta de interesse (ID 382513502) → Abertura com o ID após a sentença e comandos enumerados; registro de que a restituição foi afastada; “alegando, em suma”; “opinou pela desnecessidade de sua intervenção”",
+     "DOC · MÉDIA"
+    ],
+    [
+     "Voto, redação e citações",
+     "“IRPJ/CSL” e “CSL”, “serem excluídos”, “Lei nº”, “Nesse sentido”; citações com “DJe de”, “DJe em”, data abreviada e nome regimental incompleto (“CAMPBELL MARQUES”); precedente do Relator com veículo errado (ApelRemNec 5011026-63.2019.4.03.6000 foi publicado por Intimação via sistema em 23/02/2023, conforme o banco de julgados) → Corrigidos",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, Tema 1.416/STJ",
+     "Afirmação de que a suspensão alcança só REsp e AREsp, sem referência → Conferido no ofício de afetação (NUGEPNAC/TRF-3, Rel. Min. REGINA HELENA COSTA, 16/03/2026): a suspensão alcança só recursos especiais e agravos em recurso especial; acrescida a referência",
+     "JURIS · BAIXA"
+    ],
+    [
+     "Voto, restituição",
+     "Dois parágrafos sobre a vedação de restituição administrativa (Súmula 461/STJ; Súmulas 269 e 271/STF), mas a sentença já afastou a restituição e a União não recorreu do ponto → Parágrafos retirados, por tratarem de questão fora do recurso e da remessa",
+     "JUR · MÉDIA"
+    ],
+    [
+     "Voto, honorários",
+     "Mandado de segurança sem a menção ao descabimento de honorários → “Sem honorários advocatícios (artigo 25 da Lei 12.016/2009).”",
+     "JUR · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Questões sem “saber se”; item 6 sobre restituição, alheia ao recurso; sem item sobre a afetação do Tema 1.416/STJ, tratada no voto; cabeçalho “RECURSOS DESPROVIDOS”; separador com 11 sublinhados; rodapé com “CF”, “artigos” no singular e precedentes sem relator e data (Tema 831/STF e Súmulas 269 e 271/STF, que saíram com a restituição) → Corrigidos; IV “Apelação e remessa necessária desprovidas.”",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Incluído, espelhando o dispositivo",
+     "EST · MÉDIA"
+    ]
+   ],
    "pendencias": [],
    "minuta": true,
    "autos": {
@@ -15271,8 +15407,46 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "IDʼs trocados na abertura (o da sentença, 389082556, aparecia no fim, e o da decisão em embargos, 389082562, como se fosse a sentença); “sustentando, em síntese, que:” seguido de substantivos; parecer descrito como “regular prosseguimento”, mas o Ministério Público Federal considerou descabida sua manifestação (ID 392719356) → Abertura no padrão, com cada ID após a respectiva peça; “alegando, em suma:”; “opinou pela desnecessidade de sua intervenção”",
+     "DOC · MÉDIA"
+    ],
+    [
+     "Voto, citações e conectivos",
+     "Citações com UF, turma, “DJe de”, “art.”, data de julgamento ao lado da publicação, EDcl citado como REsp, “(g.n)”; “Em casos tais”; “Destarte” → Corrigidos no padrão do gabinete",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, honorários",
+     "Mandado de segurança sem a menção ao descabimento de honorários → “Sem honorários advocatícios (artigo 25 da Lei 12.016/2009).”",
+     "JUR · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Caso em exame com datas por extenso; questões com “verificar se”, “aferir” e “examinar se”; itens 6 e 7 com mais de 60 palavras; “arts.” e “CF/88” no corpo; sigla “ADIs”; separador com 21 sublinhados; rodapé com “artigos 30”, dispositivos não usados no voto (CF/1988, artigo 155, II; CPC, artigos 322, § 2º, e 1.021, § 4º), Súmula Vinculante 10 sem pertinência e precedentes fora da ordem → Itens reescritos e divididos (anterioridade em item próprio); “saber se”; rodapé reordenado e limitado ao que o voto usa",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Incluído, espelhando o dispositivo",
+     "EST · MÉDIA"
+    ],
+    [
+     "Voto, competência de lei complementar",
+     "\"nesse contexto\" → \"neste contexto\"",
+     "RED · BAIXA"
+    ]
+   ],
+   "pendencias": [
+    "Preparo da apelação: o comprovante (ID 389082566) é de GRU Judicial paga na Caixa Econômica Federal em 01/06/2026, depois da extinção dessa forma de pagamento (03/04/2026). O critério do gabinete para GRU paga depois dessa data ainda está em aberto no Padrão Muta: decidir se basta ou se cabe intimar para o recolhimento pelo PagTesouro."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5013703-56.2025.4.03.6000.json.gz",
@@ -28147,9 +28321,56 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório, abertura",
+     "Abertura em dois parágrafos (Forma B) e honorários dentro da enumeração dos comandos da sentença → Parágrafo único (Forma A), comandos enumerados e honorários em frase nova",
+     "EST · BAIXA"
+    ],
+    [
+     "Relatório, apelação",
+     "“sustentando, em suma” → “alegando, em suma”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, citações",
+     "Nome regimental incompleto (“MAURO CAMPBELL”), “Min.” sem “Rel.” no REsp 2.252.305 e classe antiga “AC” → “Rel. Min. MAURO CAMPBELL MARQUES”, “Rel. Min. TEODORO SILVA SANTOS” e “ApCiv”",
+     "JURIS · BAIXA"
+    ],
+    [
+     "Voto, fecho e honorários",
+     "Parágrafo de síntese sem ponto final; honorários recursais sem a base legal → Ponto final e “(artigo 85, § 11, do CPC)”",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Questões com “definir se”, “estabelecer se” e “determinar se”; concordância (“antecedentes … conhecidas”); honorários no item 11 em vez do dispositivo → “saber se” nas três questões; “conhecidos”; IV “Apelação desprovida, honorários recursais em acréscimo ao fixado na origem.”",
+     "RED · MÉDIA"
+    ],
+    [
+     "Ementa, rodapé",
+     "Diplomas fora da ordem; “TRF3”; relator incompleto; “Tema 1.041/STJ (afetação cancelada)” sem relevância para a solução → Rodapé reordenado (STJ → TRF-3), “TRF-3”, nomes regimentais completos; retirado o tema cancelado",
+     "RED · BAIXA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Incluído, espelhando o dispositivo",
+     "EST · MÉDIA"
+    ],
+    [
+     "Voto, citação do REsp 2.252.305",
+     "\"(g.n)\" → \"(g.n.)\"",
+     "RED · BAIXA"
+    ]
+   ],
    "pendencias": [
-    "Minuta não redigida: o documento do PJe tem só o cabeçalho de autuação."
+    "ApCiv 5000280-61.2018.4.03.6004 (Rel. Des. Fed. NELTON DOS SANTOS): a minuta traz a data de julgamento (02/06/2020); trocar pela data de publicação, que não consta do banco do gabinete.",
+    "O alerta do Office para este item (“mandado de segurança sem parecer do MPF no 2º grau”) não procede: trata-se de ação declaratória pelo rito comum, sem intervenção obrigatória do Ministério Público Federal. O alerta pode ser baixado."
    ],
    "minuta": true,
    "autos": {
