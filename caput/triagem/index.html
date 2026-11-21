@@ -32,7 +32,7 @@ button{font:inherit;color:inherit}
 .tg{display:inline-block;font:500 10px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--b);color:var(--m);border-radius:4px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}
 .tg.d-pauta{border-color:#9cc0b4;color:var(--ok);background:#eaf3ef}
 .tg.d-mono{border-color:#a9bfd0;color:var(--az);background:#eaf1f6}
-.tg.d-esc{border-color:#d9c38f;color:#6e4e14;background:#f5efd9}
+
 .tg.pri{border-color:var(--r2);color:var(--r)}
 input[type=checkbox]{accent-color:var(--v);width:15px;height:15px;margin:0;cursor:pointer}
 select,input[type=text],input[type=search],input[type=date],textarea{font:14px Figtree,sans-serif;color:var(--tx);border:1px solid var(--b2);border-radius:6px;background:var(--w)}
@@ -52,7 +52,6 @@ body.motor-on #cmt-motor{left:0;top:48px;height:calc(100vh - 48px);visibility:vi
 #carga-et{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:4px;font-size:13px;color:var(--m2);text-align:left}#carga-et li.ok{color:#3f8a63}#carga-et li.err{color:var(--r)}#carga-et li.tm{font:500 11px 'JetBrains Mono',monospace;color:var(--m)}#carga-dica{margin:12px 0 0;font-size:12.5px;color:var(--m2)}
 #estado .btn.ib{width:34px;padding:0;color:var(--v)}
 #st-grava{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 6px;border:0;background:transparent;font:600 12px Figtree,sans-serif;color:var(--m);cursor:default;white-space:nowrap}#st-grava i{width:8px;height:8px;border-radius:50%;background:#b9c2bf;flex:none}#st-grava.ok i{background:#3f8a63}#st-grava.pend{cursor:pointer;color:#8a5a12}#st-grava.pend i{background:#d29a2c}#st-grava.err{cursor:pointer;color:#a03a2a}#st-grava.err i{background:#c4513f}#st-grava.ing i{background:#3f7fa8;animation:stp 1s ease-in-out infinite}@keyframes stp{50%{opacity:.3}}
-.tb-esc .car{font-size:10px;margin-left:4px;color:var(--m)}#esc-pop{position:fixed;z-index:2147480000;min-width:280px;max-width:380px;max-height:70vh;overflow:auto;background:var(--w,#fff);border:1px solid var(--b2,#cfd6d3);border-radius:8px;padding:6px;box-shadow:0 10px 30px rgba(23,63,61,.18)}#esc-pop button{display:flex;width:100%;align-items:center;gap:8px;border:0;background:transparent;padding:7px 9px;border-radius:6px;font:600 13px Figtree,sans-serif;color:var(--tx);cursor:pointer;text-align:left}#esc-pop button:hover,#esc-pop button.on{background:rgba(23,63,61,.07)}#esc-pop button small{margin-left:auto;font:500 11.5px 'JetBrains Mono',monospace;color:var(--m)}#esc-pop .dot{width:9px;height:9px;border-radius:50%;flex:none}#esc-pop hr{border:0;border-top:1px solid var(--b,#e3e0d6);margin:5px 2px}#esc-pop .vz{padding:8px 9px;font-size:12.5px;color:var(--m)}
 #estado{display:flex;align-items:center;gap:8px;margin-left:auto;align-self:center;white-space:nowrap;flex:none;padding-left:10px}
 main{min-height:calc(100vh - 60px);padding-bottom:140px}
 .wrap{max-width:1480px;margin:0 auto;padding:0 24px}
@@ -267,26 +266,6 @@ html[data-theme="dark"] .row>.obs{background:#2a2a1c}html[data-theme="dark"] .ro
 .grp-h b{color:var(--v)}
 .mais{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--l);font-size:12.5px;color:var(--m);flex-wrap:wrap;gap:8px}
 .vazio{padding:28px 16px;text-align:center;color:var(--m)}
-/* Escaninho */
-.es-cab{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:24px;align-items:start;padding:18px 0 14px}
-.es-cab h1{margin:2px 0 0;font-size:32px;line-height:1.05;font-weight:800;letter-spacing:-.04em;color:var(--v)}
-.es-cab h1 i{font-style:normal;color:var(--g2)}
-.bil{border:1px solid var(--b);background:var(--w);border-radius:8px;padding:12px 14px}
-.bil textarea{width:100%;min-height:70px;padding:8px;margin-top:6px}
-.es-tool{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--b);border-bottom:1px solid var(--b);margin-bottom:12px;position:relative}
-.menu{right:0;top:40px;width:340px;display:flex;flex-direction:column;padding:6px}
-.menu .k{padding:8px 10px 2px}
-.menu button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:7px 10px;border:0;background:transparent;text-align:left;cursor:pointer;border-radius:6px}
-.menu button:hover{background:#f3f8f5}
-.menu button b{font-size:13.5px}.menu button small{font-size:12px;color:var(--m)}
-/* Escaninhos */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.ecard{display:flex;flex-direction:column;gap:6px;padding:15px;border:1px solid var(--b);background:var(--w);border-radius:8px;text-align:left;cursor:pointer}
-.ecard:hover{border-color:var(--v2)}
-.ecard b{font-size:16px;color:var(--v)}
-.ecard .ft{display:flex;justify-content:space-between;align-items:baseline;margin-top:auto}
-.ecard.novo{align-items:center;justify-content:center;border-style:dashed;background:transparent;min-height:140px;font-weight:600;color:var(--m2)}
-.cores{display:flex;gap:8px}.cores button{width:26px;height:26px;border-radius:50%;border:1px solid var(--b2);cursor:pointer}.cores button.on{border:2px solid var(--v);box-shadow:0 0 0 2px #fff inset}
 /* gaveta */
 .veu{position:fixed;inset:0;background:rgba(23,63,61,.28);z-index:45}
 .gaveta{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--p);border-left:2px solid var(--v);box-shadow:-16px 0 40px rgba(23,63,61,.2);display:flex;flex-direction:column;z-index:46}
@@ -721,24 +700,11 @@ html[data-theme="dark"] *{scrollbar-color:rgba(222,226,229,.24) transparent}
 html[data-theme="dark"] ::-webkit-scrollbar-thumb{background-color:rgba(222,226,229,.24)}
 html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background-color:rgba(222,226,229,.45)}
 
-/* Escaninho: lista em primeiro plano; resumo e bilhete recolhidos inicialmente */
-.esc-resumo{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 14px;border:1px solid var(--b);background:var(--w);border-radius:8px;margin:10px 0 12px}.esc-resumo b{color:var(--v)}.esc-detalhes{display:none}.esc-detalhes.on{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:16px;align-items:start;margin-bottom:12px}@media(max-width:860px){.esc-detalhes.on{grid-template-columns:1fr}}
 
 #tri-prontuario{position:fixed;z-index:58;top:0;right:0;bottom:0;width:min(520px,96vw);display:flex;flex-direction:column;background:var(--p);border-left:2px solid var(--v);box-shadow:-16px 0 42px rgba(23,63,61,.2)}#tri-prontuario .tp-head{display:flex;align-items:flex-start;gap:12px;padding:17px 20px 13px;border-bottom:1px solid var(--l)}#tri-prontuario .tp-head h2{margin:4px 0 2px;font-size:21px;color:var(--v)}#tri-prontuario .tp-body{flex:1;overflow:auto;padding:14px 18px 24px;display:flex;flex-direction:column;gap:13px}#tri-prontuario .tp-group{border:1px solid var(--b);border-radius:8px;background:var(--w);overflow:hidden}#tri-prontuario .tp-group h3{margin:0;padding:9px 12px;border-bottom:1px solid var(--l);font-size:12px;color:var(--v);letter-spacing:.04em;text-transform:uppercase}#tri-prontuario .tp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:11px 12px}#tri-prontuario .tp-grid .f{min-width:0}#tri-prontuario .tp-grid .wide{grid-column:1/-1}#tri-prontuario .tp-grid input,#tri-prontuario .tp-grid select,#tri-prontuario .tp-grid textarea{width:100%;min-width:0;padding:8px 9px;font-weight:400}#tri-prontuario .tp-grid textarea{min-height:62px;resize:vertical}#tri-prontuario .tp-foot{display:flex;gap:8px;align-items:center;padding:12px 18px;border-top:1px solid var(--l);background:var(--w)}#tri-prontuario .tp-foot .grow{flex:1}.btn.pront{height:25px;padding:0 8px;font-size:10.5px;border-color:var(--b);color:var(--v);background:var(--p)}@media(max-width:860px){#tri-prontuario{width:100vw}}
 
 .proc-exp{display:none;padding:10px 14px 12px 54px;border-top:1px solid var(--l);background:#faf9f4}.proc-exp.on{display:block}.proc-exp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px}.proc-exp-item{min-width:0}.proc-exp-item b{display:block;margin-bottom:2px;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--m)}.proc-exp-item span{display:block;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12.5px;color:var(--tx)}.proc-exp-foot{display:flex;justify-content:flex-end;margin-top:8px}.proc-exp-toggle{border:0;background:transparent;color:var(--m);font:600 11px Figtree,sans-serif;cursor:pointer;padding:3px 8px}.proc-exp-toggle:hover{color:var(--v)}@media(max-width:860px){.proc-exp{padding-left:12px}.proc-exp-grid{grid-template-columns:1fr}}
 
-/* ===== escaninhos: painel do cartão e prontuário de triagem no padrão do prontuário do Ex Officio ===== */
-.proc-exp{padding:12px 16px 12px 54px!important;background:#fbfaf5!important;border-top:1px solid var(--l)}
-.pe-tri{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.pe-tri span{display:inline-flex;gap:6px;align-items:baseline;padding:2px 8px;border:1px solid var(--b);background:var(--w);font-size:12px}.pe-tri i{font:500 9.5px 'JetBrains Mono',monospace;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--m)}
-.pe-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
-.pe-b{background:var(--w);border:1px solid var(--b);border-left:3px solid var(--v);padding:8px 11px;min-width:0}
-.pe-b h4{margin:0 0 4px;font:600 9.5px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--v)}
-.pe-fs{border-left-color:var(--g2)}.pe-fs h4{color:var(--g)}.pe-ic{border-left-color:var(--r)}.pe-ic h4{color:var(--r)}.pe-ob{border-left-color:var(--az2)}.pe-ob h4{color:var(--az)}
-.pe-t{font-size:12.5px;line-height:1.45;color:var(--tx);overflow-wrap:anywhere}.pe-t p{margin:0 0 3px}.pe-t ul{margin:0 0 3px;padding-left:16px}.pe-t li{margin:1px 0}.pe-t h5{margin:5px 0 2px;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--m)}
-.pe-vz{margin:0;font-size:12.5px;color:var(--m)}
-.pe-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}.pe-sem{font-size:11px;color:var(--m)}.pe-ac{display:flex;gap:6px}
-.proc-exp-toggle{font-size:11.5px!important}
 #tri-prontuario{top:76px;right:16px!important;bottom:16px!important;width:min(400px,94vw)!important;border:1px solid var(--b)!important;border-left:1px solid var(--b)!important;background:#fbfaf5!important;box-shadow:0 8px 28px rgba(23,63,61,.14)!important}
 #tri-prontuario .tp-head{padding:12px 14px 8px!important;border-bottom:0!important;align-items:flex-start}
 #tri-prontuario .tp-tt{flex:1;min-width:0}
@@ -796,9 +762,9 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 #gaveta{width:100vw!important;max-width:100vw!important}
 /* painéis de ponta a ponta, sem margem lateral */
 #main,#pt-view,#main>section,#main>div{padding-left:0!important;padding-right:0!important;margin-left:0!important;margin-right:0!important;max-width:none!important}
-.fl-cab,.fl-grid,.lista,.esc-resumo,.kpis>*,.cwe,.cwe-pc,.proc-item{border-left:0!important;border-right:0!important;border-radius:0!important}
-.esc-resumo,.kpis{margin-left:0!important;margin-right:0!important}
-.fl-cab,.pt-barra,.esc-resumo{padding-left:12px!important;padding-right:12px!important}
+.fl-cab,.fl-grid,.lista,.kpis>*,.cwe,.cwe-pc,.proc-item{border-left:0!important;border-right:0!important;border-radius:0!important}
+.kpis{margin-left:0!important;margin-right:0!important}
+.fl-cab,.pt-barra{padding-left:12px!important;padding-right:12px!important}
 }
 
 /* cabeçalho no padrão do Ex Officio: filetes verdes, estrela, sobretítulo, marca com ponto em itálico, módulos como no "/ Compendium", abas numeradas */
@@ -2043,28 +2009,22 @@ function pendDe(o) { const t = o.etq.map(nz), has = (rx) => t.some((x) => rx.tes
 const CARGA_HTML = (document.getElementById('main') || {}).innerHTML || '';
 const nP = (n) => PRONTO ? nf(n) : '…';
 let FONTE = null, FONTE_EM = '', U = [], NOVAS = [], ALL = [], IDX = new Map(), ROWS_REF = null, ROWS_N = 0, PRONTO = false;
-const ESC_ARQ = 'acervo/triagem/escaninhos.json';
-let ESC = { schema: 'gabcmt.escaninhos', versao: 1, atualizadoEm: '', escaninhos: [] }, ESC_V = 0, ESC_GRAV = 0;
 const PEND = new Map(); let GRAVANDO = false, ERRO = '', ULT = '', TENT = 0, T_GRAVA = null;
 const DESF = [];
-let ABA = 'fila', ABERTAS = LS.get('tri_abas', []);
+let ABA = 'fila';
 const SEL = new Set();
 const CORES = [['Ocre', '#a57829'], ['Azul', '#4b7fa8'], ['Verde', '#3b7150'], ['Vinho', '#8a2f22'], ['Cinza', '#8a948f'], ['Roxo', '#6a4fb3']];
 const GRUPOS = [['triar', 'Em triagem', '#a57829'], ['nc', 'Não classificadas', '#8a2f22'], ['pauta', 'Já na pauta', '#173f3d'], ['producao', 'Em produção', '#4b7fa8'], ['sobrestados', 'Sobrestados', '#8a70c0'], ['distribuicao', 'Análise da distribuição', '#3b7150'], ['secretaria', 'Com a secretaria', '#8a948f'], ['sem', 'Sem tarefa do gabinete', '#b3ab9c']];
 const PRESETS = [['triagem', 'Em triagem', ['triar']], ['gabinete', 'Em tarefa do gabinete', ['triar', 'nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria']], ['fora', 'Fora da triagem', ['nc', 'pauta', 'producao', 'sobrestados', 'distribuicao', 'secretaria', 'sem']], ['todos', 'Todos na fonte', GRUPOS.map((g) => g[0])]];
 const PJ0 = () => ({ num: '', obj: '', ass: '', cla: '', parte: '', doc: '', orgao: '', col: '', ordem: '', prior: '', etq: '', autDe: '', autAte: '', minut: '', cargo: '', sig: false, lim: false, top: false });
 function novoF() { return { pje: PJ0(), pjeAberto: false, base: ['triar'], etqAberto: LS.get('tri_etqp', true), etqQ: '', modo: 'texto', q: '', lote: '', crit: [], fac: { secao: [], classe: [], assunto: [], tarefa: [], prior: [] }, etIn: [], etOut: [], conj: null, ver: 'lista', ord: 'cnj', dir: 1, lim: 100, statsAberto: LS.get('tri_stats', true), statsX: null, rail: LS.get('tri_rail', { secao: 1, classe: 1, etq: 1 }) }; }
-const F0 = Object.assign(novoF(), { base: LS.get('tri_base', ['triar']) }), FES = {};
-let F = F0; /* a Fila e cada escaninho têm o próprio estado de busca e filtros */
-function filtroDe(aba) { if (aba.indexOf('esc:') !== 0) return F0; const id = aba.slice(4); return FES[id] || (FES[id] = Object.assign(novoF(), { esc: id, statsAberto: false })); }
+const F0 = Object.assign(novoF(), { base: LS.get('tri_base', ['triar']) });
+let F = F0;
 const FE = { q: '', lim: 100, ver: 'lista' };
 
-function escDe(d) { for (const e of ESC.escaninhos) if (e._set && e._set.has(d)) return e; return null; }
-function indexEsc() { ESC.escaninhos.forEach((e) => { e.processos = (e.processos || []).map(fmtCnj); e._set = new Set(e.processos.map(dg)); }); }
 function destinoAtual(o) { const r = o.row;
   if (r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' && r['Sessão Destino']) return { k: 'pauta', t: 'pauta ' + String(r['Sessão Destino']).slice(0, 5), s: r['Sessão Destino'] };
   if (r.Destino === 'Monocrática') return { k: 'mono', t: 'monocrática' };
-  const e = escDe(o.d); if (e) return { k: 'esc', t: e.titulo, e };
   return { k: '', t: 'sem destino' }; }
 function proc(f, r) {
   r = r || f;
@@ -2089,7 +2049,7 @@ function proc(f, r) {
   return o; }
 function construir() {
   const c = core(); const R = (c && c.rows) || []; ROWS_REF = R; ROWS_N = R.length;
-  indexEsc();
+
   /* o paradeiro (tarefa, etiquetas, prioridade) vem da fonte do procs-muta, não da cópia do navegador; da cópia vem só o trabalho do gabinete */
   const MR = new Map(); R.forEach((r) => { const d = dg(r.Processo || r.processo); if (d) MR.set(d, r); });
   const F0 = FONTE || R;
@@ -2111,16 +2071,14 @@ const DLAB = Object.fromEntries(DEST.map((x) => [x[0], x[1]])), CLAB = Object.fr
 function sessoes() { const s = SES(); let L = []; try { L = ((s && s.estado && s.estado().sessoes) || []).slice(); } catch (e) {} return L.filter((x) => x.data && x.data >= HOJE).sort((a, b) => a.data.localeCompare(b.data)); }
 const nomeSes = (ss) => br(ss.data);
 
-/* ===================== gravação (acervo/operacional.json + escaninhos), com fila e nova tentativa ===================== */
-function estadoDe(o) { const r = o.row; return { sp: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? 'SELECIONADO PREVIAMENTE' : '', sd: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? (r['Sessão Destino'] || '') : '', mono: r.Destino === 'Monocrática' ? 'Monocrática' : '', esc: ESC.escaninhos.filter((e) => e._set.has(o.d)).map((e) => e.id) }; }
+/* ===================== gravação (acervo/operacional.json), com fila e nova tentativa ===================== */
+function estadoDe(o) { const r = o.row; return { sp: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? 'SELECIONADO PREVIAMENTE' : '', sd: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? (r['Sessão Destino'] || '') : '', mono: r.Destino === 'Monocrática' ? 'Monocrática' : '' }; }
 function poeEstado(o, st) {
   const r = o.row, ch = Object.assign({}, PEND.get(o.d) || {});
   if (st.sp !== undefined) { const ant = r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? r['Sessão Destino'] || '' : ''; const novo = st.sp ? st.sd : '';
     if (ant !== novo || (r['Seleção Prévia'] || '') !== (st.sp || '')) { r['Seleção Prévia'] = st.sp || ''; r['Sessão Destino'] = st.sp ? st.sd : ''; r['Nova sessão de destino'] = r['Sessão Destino']; ch.sp = r['Seleção Prévia']; ch.sd = r['Sessão Destino']; } }
   if (st.mono !== undefined && (r.Destino === 'Monocrática' ? 'Monocrática' : '') !== st.mono) { if (st.mono) r.Destino = 'Monocrática'; else if (r.Destino === 'Monocrática') r.Destino = ''; ch.mono = st.mono; }
-  if (st.esc !== undefined) { let mud = false; ESC.escaninhos.forEach((e) => { const tem = e._set.has(o.d), quer = st.esc.indexOf(e.id) >= 0;
-      if (tem && !quer) { e._set.delete(o.d); e.processos = e.processos.filter((x) => dg(x) !== o.d); mud = true; e.atualizadoEm = new Date().toISOString(); }
-      if (!tem && quer) { e._set.add(o.d); e.processos.push(o.cnj); mud = true; e.atualizadoEm = new Date().toISOString(); } }); if (mud) ESC_V++; }
+
   if (Object.keys(ch).length) PEND.set(o.d, ch);
   refazDest(o); }
 function acao(rot, ds, fn) {
@@ -2132,19 +2090,19 @@ function acao(rot, ds, fn) {
 function desfazer() { const u = DESF.pop(); if (!u) { toast('Nada a desfazer.', true); return; }
   u.antes.forEach((st, d) => { const o = IDX.get(d); if (o) poeEstado(o, st); }); agendar(); render(); toast('Desfeito: ' + u.rot.toLowerCase() + '.'); }
 function agendar(ms) { clearTimeout(T_GRAVA); T_GRAVA = setTimeout(gravar, ms == null ? 3500 : ms); pintaGrava(); }
-function pendentes() { return PEND.size + (ESC_V !== ESC_GRAV ? 1 : 0); }
-/* indicador único de gravação no cabeçalho: triagem (ficha e escaninhos) + sessões, regras e equipe (motor das pautas) */
+function pendentes() { return PEND.size; }
+/* indicador único de gravação no cabeçalho: triagem + sessões, regras e equipe (motor das pautas) */
 function pintaGrava() { const b = $('#st-grava'); if (!b) return; const mg = (W.CMTPautas && W.CMTPautas.estadoGrava) || {}, nT = PRONTO ? pendentes() : 0, n = nT + (mg.n || 0);
   const ing = !!(GRAVANDO || mg.gravando), err = ERRO || mg.erro || '', pr = PRONTO || mg.pronto, ult = [ULT, mg.ultima].filter(Boolean).sort().pop() || '';
   b.classList.toggle('err', !!err && !ing); b.classList.toggle('pend', !err && n > 0 && !ing); b.classList.toggle('ing', ing); b.classList.toggle('ok', !!pr && !ing && !err && !n);
   const tx = b.querySelector('span') || b; tx.textContent = !pr ? 'carregando' : ing ? 'gravando' : err ? 'erro · tentar (' + n + ')' : n ? n + ' a gravar' : ult ? 'gravado ' + ult : 'gravado';
-  b.title = err ? 'Erro: ' + err : n ? n + ' alteração(ões) a gravar no procs-muta; grava sozinho em instantes, ou clique para gravar já' : 'Tudo gravado no procs-muta (triagem, escaninhos do Collectio, sessões, regras e equipe)'; }
+  b.title = err ? 'Erro: ' + err : n ? n + ' alteração(ões) a gravar no procs-muta; grava sozinho em instantes, ou clique para gravar já' : 'Tudo gravado no procs-muta (triagem, sessões, regras e equipe)'; }
 W.pintaGrava = pintaGrava;
 async function gravar() {
   if (GRAVANDO || !PRONTO) return; const P = PM(); if (!P || !P.gravar) { ERRO = 'motor ainda carregando'; pintaGrava(); return; }
   if (!pendentes()) { pintaGrava(); return; }
   GRAVANDO = true; ERRO = ''; pintaGrava();
-  const snap = new Map(PEND), escV = ESC_V, arq = {}, agora = new Date().toISOString(); let msg = [];
+  const snap = new Map(PEND), arq = {}, agora = new Date().toISOString(); let msg = [];
   try {
     if (snap.size) {
       const op = JSON.parse(await P.ler('acervo/operacional.json'));
@@ -2161,39 +2119,8 @@ async function gravar() {
       op.registros.sort((a, b) => String(a.processo).localeCompare(String(b.processo))); op.atualizado_em = agora;
       arq['acervo/operacional.json'] = JSON.stringify(op, null, 1) + '\n'; msg.push(snap.size + ' destino(s)');
     }
-    if (escV !== ESC_GRAV) {
-      /* cada escaninho é um lote avulso do Collectio: relê o lote, ajusta só a lista de processos (o que já foi registrado
-         em cada processo fica; quem sai vai para lote.retirados) e atualiza o índice das coleções no mesmo commit */
-      let idx = null; try { idx = JSON.parse(await P.ler(ESC_IDX)); } catch (e) { if (!/HTTP 404/.test(e.message)) throw e; }
-      idx = idx || { schema: 'gabcmt.colecoes', versao: 1, colecoes: { pautas: [], triagem: [], avulsos: [], 'selecao-previa': [] } };
-      const av = (idx.colecoes.avulsos = idx.colecoes.avulsos || []), dia = agora.slice(0, 10);
-      const base = (c, n) => { const r = (IDX.get(dg(c)) || {}).row || {}; return { sessao: '', item: n, processo: c, recurso: String(r.Classe || ''), partes: String(r.Partes || ''), exequente: '', executado: '', assunto: String(r.Assunto || ''), assunto_detalhado: '', grupo: null, tipo_caso: String(r.Tema || ''), resultado: '', modelo: '', variacoes: [], observacao: '', peculiaridades: '', peculiaridades_relator: '', orientacao: '', equipe: { minuta: '', correcao: '', situacao: 'A minutar' }, pecas: [], mpf: '', triagem: {}, ajustes: [], pendencias: [], minuta: false }; };
-      for (const e of ESC.escaninhos) {
-        const id = escLote(e.id), rel = 'acervo/lotes/' + id + '.json';
-        let L = null; try { L = JSON.parse(await P.ler(rel)); } catch (x) { if (!/HTTP 404/.test(x.message)) throw x; }
-        L = L || { schema: 'gabcmt.lote', versao: 1, tipo: 'avulso', origem: 'escaninho', id, titulo: '', descricao: '', sessoes: [], filtro: {}, criado_por: 'caput', criado_em: e.criadoEm || agora, colunas: [], grupos: [], grupo_outros: { rotulo: 'A triar', cor: '#9aa0a8' }, minutas: 'acervo/minutas/' + id + '/<processo>.json', itens: [] };
-        const procs = (e.processos || []).map(String), quer = new Set(procs.map(dg));
-        const atual = new Map((L.itens || []).map((i) => [dg(i.processo), i])), ret = new Map((L.retirados || []).map((i) => [dg(i.processo), i]));
-        const sai = (L.itens || []).filter((i) => !quer.has(dg(i.processo)));
-        L.itens = procs.map((c, n) => { const k = dg(c), it = atual.get(k) || ret.get(k) || base(c, n + 1); ret.delete(k); it.item = n + 1; return it; });
-        if (sai.length || ret.size) L.retirados = [...ret.values(), ...sai]; else delete L.retirados;
-        Object.assign(L, { titulo: String(e.titulo || 'Escaninho').slice(0, 80), subtitulo: e.subtitulo || '', bilhete: e.bilhete || '', cor: e.cor || '#a57829', colecao: 'avulsos', atualizado_em: dia }); delete L.arquivado;
-        arq[rel] = JSON.stringify(L, null, 1) + '\n';
-        const ent = { id, titulo: L.titulo, subtitulo: L.subtitulo, cor: L.cor, bilhete: L.bilhete, escaninho: true, n: L.itens.length }, k = av.findIndex((x) => x.id === id);
-        if (k >= 0) av[k] = ent; else av.push(ent);
-      }
-      for (const id0 of (ESC._apagados || [])) { const id = escLote(id0), rel = 'acervo/lotes/' + id + '.json';
-        try { const L = JSON.parse(await P.ler(rel)); Object.assign(L, { arquivado: true, arquivado_em: dia, arquivado_motivo: 'escaninho apagado na triagem do Caput' }); arq[rel] = JSON.stringify(L, null, 1) + '\n'; } catch (x) { if (!/HTTP 404/.test(x.message)) throw x; }
-        const k = av.findIndex((x) => x.id === id); if (k >= 0) av.splice(k, 1); }
-      idx.atualizado_em = agora; arq[ESC_IDX] = JSON.stringify(idx, null, 1) + '\n';
-      /* lido do arquivo antigo: no mesmo commit ele fica marcado como migrado, para não haver duas fontes */
-      if (ESC.fonte !== 'lotes') arq[ESC_ARQ] = JSON.stringify({ schema: 'gabcmt.escaninhos', versao: 2, atualizadoEm: agora, migrado: 'acervo/lotes (coleção Avulsos do Collectio)', lotes: ESC.escaninhos.map((e) => escLote(e.id)), escaninhos: [] }, null, 1) + '\n';
-      ESC.atualizadoEm = agora; ESC.fonte = 'lotes';
-      msg.push('escaninhos (Collectio · Avulsas)');
-    }
     await P.gravar(arq, 'Triagem (Ab Initio): ' + msg.join(' e '));
     snap.forEach((ch, d) => { if (PEND.get(d) === ch) PEND.delete(d); });
-    ESC_GRAV = escV; if (ESC_V === escV) ESC._apagados = [];
     ULT = hhmm(); TENT = 0; ERRO = '';
   } catch (e) { ERRO = (e && e.message) || String(e); TENT++; toast('Não gravou: ' + ERRO + '. Nova tentativa em instantes.', true); }
   GRAVANDO = false; pintaGrava();
@@ -2205,31 +2132,29 @@ W.addEventListener('beforeunload', (e) => { if (pendentes() || GRAVANDO) { e.pre
 /* rotas por caminho: /caput/triagem, /caput/pautas, /caput/coordenacao, /caput/comunicacao, /caput/inteligencia,
    /caput/chefia, /caput/escaninhos e /caput/escaninhos/<id>. Endereços antigos (#pautas, /triagem/, /pautas/,
    /monitor/triagem/) continuam abrindo a mesma aba e o endereço passa ao formato novo. */
-const ROTA_SLUG = { fila: 'triagem', escaninhos: 'escaninhos', pautas: 'pautas', coordenacao: 'coordenacao', comunicacao: 'comunicacao', chefia: 'chefia', inteligencia: 'inteligencia' };
+const ROTA_SLUG = { fila: 'triagem', pautas: 'pautas', coordenacao: 'coordenacao', comunicacao: 'comunicacao', chefia: 'chefia', inteligencia: 'inteligencia' };
 function abaDaRota() {
   const p = location.pathname.replace(/\/index\.html$/, '').replace(/\/+$/, ''), h = decodeURIComponent(location.hash.slice(1));
-  if (h) { if (h.indexOf('esc=') === 0) return 'esc:' + h.slice(4); if (h === 'inicio') return 'inteligencia'; if (ROTA_SLUG[h]) return h; }
+  if (h) { if (h === 'inicio') return 'inteligencia'; if (ROTA_SLUG[h]) return h; }
   const m = p.match(/^\/caput\/([a-z]+)(?:\/([^/]+))?$/);
-  if (m) { if (m[1] === 'triagem') return 'fila'; if (m[1] === 'escaninhos' && m[2]) return 'esc:' + decodeURIComponent(m[2]); if (Object.values(ROTA_SLUG).indexOf(m[1]) >= 0) return m[1]; }
+  if (m) { if (m[1] === 'triagem') return 'fila'; if (Object.values(ROTA_SLUG).indexOf(m[1]) >= 0) return m[1]; }
   if (/^\/caput$/.test(p)) return 'chefia';
   if (/^\/pautas$/.test(p)) return 'pautas';
   return 'chefia';
 }
-function caminhoDaAba(a) { if (a === 'inteligencia') a = 'chefia'; return a.indexOf('esc:') === 0 ? '/caput/escaninhos/' + encodeURIComponent(a.slice(4)) : '/caput/' + (ROTA_SLUG[a] || 'triagem'); }
+function caminhoDaAba(a) { if (a === 'inteligencia') a = 'chefia'; return '/caput/' + (ROTA_SLUG[a] || 'triagem'); }
 function rotear() {
   let a = abaDaRota(); if (a === 'inteligencia') a = 'chefia';
-  if (a.indexOf('esc:') === 0) { const id = a.slice(4); if (ESC.escaninhos.some((e) => e.id === id)) { if (ABERTAS.indexOf(id) < 0) { ABERTAS.push(id); LS.set('tri_abas', ABERTAS); } } else a = 'escaninhos'; }
   ABA = a;
   const alvo = caminhoDaAba(a); if (location.pathname !== alvo || location.hash) { try { history.replaceState(history.state, '', alvo + location.search); } catch (e) {} }
   W.scrollTo(0, 0); render(); }
 W.addEventListener('hashchange', rotear);
 W.addEventListener('popstate', rotear);
-const ir = (h) => { const a = h.indexOf('esc=') === 0 ? 'esc:' + h.slice(4) : h === 'inicio' ? 'inteligencia' : h, alvo = caminhoDaAba(a);
+const ir = (h) => { const a = h === 'inicio' ? 'inteligencia' : h, alvo = caminhoDaAba(a);
   if (location.pathname !== alvo || location.hash) { try { history.pushState(null, '', alvo + location.search); } catch (e) { location.hash = h; return; } } rotear(); };
 function pintaAbas() {
-  ABERTAS = ABERTAS.filter((id) => ESC.escaninhos.some((e) => e.id === id));
   const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
-  $('#abas').innerHTML = ''; /* sem a subaba Escaninhos no topo; os escaninhos seguem pelo rodapé de ações e pelo endereço /caput/escaninhos */
+  $('#abas').innerHTML = '';
   /* módulos no canto esquerdo: Triagem | Pautas; na Pautas, as abas da triagem ficam ocultas */
   const mod = ABA === 'pautas' ? 'pautas' : ABA === 'coordenacao' ? 'coordenacao' : ABA === 'comunicacao' ? 'comunicacao' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; $('#abas').hidden = true; if (mod === 'triagem') ULT_TRI = ABA;
   D.querySelectorAll('#modulos [data-mod]').forEach((b) => { const on = b.dataset.mod === mod; b.classList.toggle('on', on); b.setAttribute('aria-current', on ? 'page' : 'false'); }); }
@@ -2243,35 +2168,20 @@ function telaMotor(aba, depois) { const w = M(); if (!w || !w.CMTSessao) { toast
   D.body.classList.add('motor-on');
   $('#motor-volta').onclick = () => { D.body.classList.remove('motor-on'); try { w.CMTSessao.fechar(); } catch (e) {} bar.remove(); if (depois) depois(); }; }
 W.__telaMotor = telaMotor;
-/* escaninhos: uma aba só, com menu (lista com cor e contagem, painel geral); o aberto aparece no nome da aba */
-function escAtual() { return ABA.indexOf('esc:') === 0 ? ESC.escaninhos.find((x) => x.id === ABA.slice(4)) : null; }
-function tabEsc() { const e = escAtual(), on = !!e || ABA === 'escaninhos';
-  return '<button type="button" role="tab" class="tb tb-esc' + (on ? ' on' : '') + '" aria-selected="' + on + '" data-escmenu="1" aria-haspopup="menu" aria-expanded="' + !!$('#esc-pop') + '">' +
-    (e ? '<i class="dot" style="background:' + esc(e.cor || '#8a9a96') + '"></i>' + esc(e.titulo) + ' <small>' + nf(U.filter((o) => e._set.has(o.d)).length) + '</small><span class="x" role="button" aria-label="Fechar o escaninho" data-escsai="1">×</span>'
-      : 'Escaninhos <small>' + nf(ESC.escaninhos.length) + '</small>') + '<span class="car" aria-hidden="true">▾</span></button>'; }
-function fechaEscPop() { const p = $('#esc-pop'); if (p) p.remove(); const b = D.querySelector('[data-escmenu]'); if (b) b.setAttribute('aria-expanded', 'false'); }
-function abreEscPop(btn) { fechaEscPop(); const r = btn.getBoundingClientRect(), e0 = escAtual(), p = D.createElement('div'); p.id = 'esc-pop'; p.setAttribute('role', 'menu');
-  const L = ESC.escaninhos.slice().sort((a, b) => String(a.titulo).localeCompare(String(b.titulo), 'pt-BR'));
-  p.innerHTML = (L.length ? L.map((e) => '<button type="button" role="menuitem" data-escir="' + esc(e.id) + '"' + (e0 && e0.id === e.id ? ' class="on"' : '') + '><i class="dot" style="background:' + esc(e.cor || '#8a9a96') + '"></i>' + esc(e.titulo) + '<small>' + nf(U.filter((o) => e._set.has(o.d)).length) + '</small></button>').join('') : '<div class="vz">Nenhum escaninho ainda.</div>') +
-    '<hr><button type="button" role="menuitem" data-escir="__todos">Painel dos escaninhos <small>criar, organizar</small></button>';
-  p.style.left = Math.max(8, Math.min(r.left, W.innerWidth - 300)) + 'px'; p.style.top = (r.bottom + 6) + 'px'; D.body.appendChild(p); btn.setAttribute('aria-expanded', 'true');
-  p.addEventListener('click', (ev) => { const b = ev.target.closest('[data-escir]'); if (!b) return; const id = b.dataset.escir; fechaEscPop(); ir(id === '__todos' ? 'escaninhos' : 'esc=' + id); }); }
-D.addEventListener('click', (e) => { if ($('#esc-pop') && !e.target.closest('#esc-pop,[data-escmenu]')) fechaEscPop(); });
-D.addEventListener('keydown', (e) => { if (e.key === 'Escape') fechaEscPop(); });
-$('#modulos').addEventListener('click', (e) => { const b = e.target.closest('[data-mod]'); if (!b) return; const mod = b.dataset.mod; ir(mod === 'triagem' ? (ULT_TRI && ULT_TRI.startsWith('esc:') ? 'esc=' + ULT_TRI.slice(4) : (ULT_TRI || 'fila')) : mod); });
-$('#abas').addEventListener('click', (e) => { if (e.target.closest('[data-escsai]')) { e.stopPropagation(); fechaEscPop(); ir('fila'); return; } const em = e.target.closest('[data-escmenu]'); if (em) { e.stopPropagation(); if ($('#esc-pop')) fechaEscPop(); else abreEscPop(em); return; } const f = e.target.closest('[data-fecha]'); if (f) { e.stopPropagation(); ABERTAS = ABERTAS.filter((x) => x !== f.dataset.fecha); LS.set('tri_abas', ABERTAS); if (ABA === 'esc:' + f.dataset.fecha) ir('fila'); else pintaAbas(); return; }
-  const b = e.target.closest('[data-aba]'); if (!b) return; const a = b.dataset.aba; ir(a.indexOf('esc:') === 0 ? 'esc=' + a.slice(4) : a); });
+$('#modulos').addEventListener('click', (e) => { const b = e.target.closest('[data-mod]'); if (!b) return; const mod = b.dataset.mod; ir(mod === 'triagem' ? (ULT_TRI || 'fila') : mod); });
+$('#abas').addEventListener('click', (e) => { const f = e.target.closest('[data-fecha]'); if (f) { e.stopPropagation(); pintaAbas(); return; }
+  const b = e.target.closest('[data-aba]'); if (!b) return; ir(b.dataset.aba); });
 
 /* ===================== render geral ===================== */
 function modAtual(){ return ABA === 'pautas' ? 'pautas' : ABA === 'coordenacao' ? 'coordenacao' : ABA === 'comunicacao' ? 'comunicacao' : ABA === 'chefia' ? 'chefia' : ABA === 'inteligencia' ? 'inteligencia' : 'triagem'; }
-function abaTriagem(){ return ABA === 'fila' || ABA === 'escaninhos' || ABA.indexOf('esc:') === 0; }
+function abaTriagem(){ return ABA === 'fila'; }
 function render() {
   compEquipe(ABA === 'coordenacao');
   if (ABA !== 'chefia') { const rg = D.querySelector('#rg.embutida'); if (rg && W.CMTRegrasGerais) try { W.CMTRegrasGerais.fechar(); } catch(e){} }
-  const naT = ABA === 'fila' || ABA === 'escaninhos' || ABA.indexOf('esc:') === 0;
-  /* o acervo inteiro só segura a Triagem e os escaninhos; Pautas, Chefia, Coordenação e Comunicação abrem sem esperar */
+  const naT = ABA === 'fila';
+  /* o acervo inteiro só segura a Triagem; Pautas, Chefia, Coordenação e Comunicação abrem sem esperar */
   if (!PRONTO && (ABA === 'pautas' || naT)) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', b.dataset.mod === modAtual())); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } else if (!$('#carga')) $('#main').innerHTML = CARGA_HTML; $('#rodape').hidden = true; return; }
-  F = filtroDe(ABA); pintaAbas(); pintaGrava();
+  F = F0; pintaAbas(); pintaGrava();
   const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
   m.hidden = naPauta; ap.hidden = !naPauta;
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
@@ -2281,8 +2191,6 @@ function render() {
   else if (ABA === 'coordenacao') { m.innerHTML = vCoordenacao(); setTimeout(montarCoord, 0); }
   else if (ABA === 'comunicacao') { m.innerHTML = vComunicacao(); setTimeout(cgComCarregar,0); }
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
-  else if (ABA === 'escaninhos') m.innerHTML = vEscaninhos();
-  else if (ABA.indexOf('esc:') === 0) m.innerHTML = vEscaninho(ABA.slice(4));
   pintaRodape(); }
 
 
@@ -2660,7 +2568,7 @@ function vCoordenacao(){
 
 const CG_REL_CAT=[
 ['todos','Todos os relatórios','pacote executivo com o catálogo completo'],['acervo','Acervo central','visão completa da fonte'],['triagem','Fila de triagem','processos no fluxo atual'],['aptos','Aptos para julgamento','aptos sem pendência'],['pendencias','Pendências','itens que exigem providência'],
-['pauta','Selecionados para pauta','destino colegiado'],['mono','Monocráticas','destino do relator'],['escaninhos','Em escaninhos','processos separados para exame'],['semdestino','Sem destino','triagem ainda sem encaminhamento'],
+['pauta','Selecionados para pauta','destino colegiado'],['mono','Monocráticas','destino do relator'],['semdestino','Sem destino','triagem ainda sem encaminhamento'],
 ['candidatos','Candidatos à monocrática','critérios do art. 932 e correlatos'],['retirados','Retirados / adiados','processos com indicação de retirada'],['ed','Embargos de declaração','classe ou tarefa de ED'],['agravos','Agravos de instrumento','agravos em triagem'],
 ['remessas','Remessas necessárias','remessas e apelações/remessas'],['antigos90','Parados há mais de 90 dias','tempo na tarefa'],['antigos180','Parados há mais de 180 dias','tempo na tarefa'],['sigilosos','Segredo / sigilo','registros sinalizados na fonte'],
 ['servidores','Produção por servidor','agrupamento da carga atual'],['sessoes','Sessões futuras','calendário e seleção prévia']
@@ -2669,7 +2577,7 @@ const CG_REL={id:'acervo',formato:'pdf',titulo:'',sub:'',caps:{resumo:true,tabel
 function cgRelLista(id){
   const tx=o=>nz([o.tarefa,o.assunto,o.cl,(o.etq||[]).join(' '),JSON.stringify(o.row||{})].join(' '));
   if(id==='todos')return ALL;if(id==='triagem')return U;if(id==='aptos')return U.filter(o=>o.apto&&!o.pend.length);if(id==='pendencias')return U.filter(o=>o.pend.length);
-  if(id==='pauta')return U.filter(o=>o.dest&&o.dest.k==='pauta');if(id==='mono')return U.filter(o=>o.dest&&o.dest.k==='mono');if(id==='escaninhos')return U.filter(o=>o.dest&&o.dest.k==='esc');
+  if(id==='pauta')return U.filter(o=>o.dest&&o.dest.k==='pauta');if(id==='mono')return U.filter(o=>o.dest&&o.dest.k==='mono');
   if(id==='semdestino')return U.filter(o=>!o.dest||!o.dest.k);if(id==='candidatos')return U.filter(o=>o.cand);
   if(id==='retirados')return U.filter(o=>/retir|adiad/.test(tx(o)));if(id==='ed')return U.filter(o=>/embargo.*declara|(^|\s)ed(\s|$)/.test(tx(o)));
   if(id==='agravos')return U.filter(o=>/agravo de instrumento|(^|\s)ai(\s|$)/.test(tx(o)));if(id==='remessas')return U.filter(o=>/remessa necess|apela.*remessa/.test(tx(o)));
@@ -2864,7 +2772,7 @@ function vInicio(emb) {
   h += '<div class="kpis">' + k('#a57829', 'Sem caminho definido', tri.length, 'em Triagem de Gabinete ou Analisar tipo de decisão, sem destino', '', 'tri') +
     k('#3b7150', 'Prontos para julgar', prontos.length, nf(prC.length) + ' colegiado · ' + nf(prM.length) + ' relator · ' + nf(comPend.length) + ' aptos com pendência à parte', 'etiqueta Apto / Apto para julgamento ou tarefa “Aptos para julgamento”, sem etiqueta de pendência', 'pr') +
     k('#24506f', 'Candidatos à monocrática', cands.length, 'indícios de decisão do relator, a confirmar', 'sem destino da triagem; os critérios estão abaixo', 'cand') +
-    k('#8a948f', 'Já destinados na triagem', dados.length, nf(dados.filter((o) => o.dest.k === 'pauta').length) + ' à pauta · ' + nf(dados.filter((o) => o.dest.k === 'mono').length) + ' monocrática · ' + nf(dados.filter((o) => o.dest.k === 'esc').length) + ' em escaninho', 'ainda na tarefa de triagem do PJe', 'dados') + '</div>';
+    k('#8a948f', 'Já destinados na triagem', dados.length, nf(dados.filter((o) => o.dest.k === 'pauta').length) + ' à pauta · ' + nf(dados.filter((o) => o.dest.k === 'mono').length) + ' monocrática', 'ainda na tarefa de triagem do PJe', 'dados') + '</div>';
   /* sessões */
   const S = sessoes().slice(0, 5);
   let ses = '<section class="card"><div class="ch"><h2>Próximas sessões</h2><p>prontos por seção e o que a triagem já mandou para cada uma</p></div>';
@@ -2895,7 +2803,7 @@ function vInicio(emb) {
   let ms = '<section class="card"><div class="ch"><h2>Massas sem caminho</h2><p>mesmo assunto e Seção · grupos de 6 ou mais · ' + nf(mas.length) + ' grupos</p></div>';
   if (!mas.length) ms += '<p class="nota" style="border:0">Nenhum grupo de 6 ou mais sem destino.</p>';
   mas.slice(0, INI_MAS ? 200 : 8).forEach(([kk, L], i) => { const [sec, ass] = kk.split('|'), ai = L.filter((o) => o.cl === 'AI').length; reg('ms' + i, ass + ' · ' + sec, L);
-    ms += '<div class="li" style="grid-template-columns:44px minmax(0,1fr) 150px"><span class="n" style="text-align:left">' + nf(L.length) + '</span><span><b style="font-weight:600">' + esc(ass) + '</b><small>' + esc(sec) + (ai ? ' · ' + ai + ' AI' : '') + '</small></span><span style="display:flex;gap:12px;justify-content:flex-end"><button type="button" class="lk" data-conj="ms' + i + '">Abrir</button><button type="button" class="lk" data-esc-conj="ms' + i + '">→ Escaninho</button></span></div>'; });
+    ms += '<div class="li" style="grid-template-columns:44px minmax(0,1fr) 150px"><span class="n" style="text-align:left">' + nf(L.length) + '</span><span><b style="font-weight:600">' + esc(ass) + '</b><small>' + esc(sec) + (ai ? ' · ' + ai + ' AI' : '') + '</small></span><span style="display:flex;gap:12px;justify-content:flex-end"><button type="button" class="lk" data-conj="ms' + i + '">Abrir</button></span></div>'; });
   if (mas.length > 8) ms += '<button type="button" class="lk" data-ini-mas style="padding:10px 16px;border-top:1px solid var(--l);width:100%;text-align:left">' + (INI_MAS ? 'Mostrar só os 8 maiores' : 'Mostrar os ' + nf(mas.length) + ' grupos') + '</button>';
   ms += '</section>';
   /* por tarefa do escopo */
@@ -2917,7 +2825,7 @@ function abrirConj(k) { const r = REG[k]; if (!r) return; limparFiltros(); F.con
 /* ---------- filtros da Fila ---------- */
 const CAMPOS = [['tarefa', 'Tarefa no PJe'], ['assunto', 'Assunto'], ['etq', 'Etiqueta'], ['classe', 'Classe'], ['secao', 'Seção'], ['partes', 'Partes'], ['desde', 'Data de entrada na tarefa'], ['dist', 'Data de distribuição'], ['prior', 'Prioridade legal'], ['dest', 'Destino da triagem'], ['prov', 'Destino provável']];
 const CONDS = [['in', 'é um destes'], ['notin', 'não é nenhum destes'], ['has', 'contém algum trecho'], ['nothas', 'não contém'], ['empty', 'está vazio'], ['notempty', 'não está vazio'], ['between', 'entre datas']];
-const valDe = (o, c) => c === 'etq' ? o.etq : c === 'classe' ? [o.cl] : c === 'prior' ? [o.prior ? 'Sim' : 'Não'] : c === 'dest' ? [o.dest.k ? (o.dest.k === 'esc' ? 'Escaninho: ' + o.dest.t : o.dest.k === 'pauta' ? 'Pauta ' + o.dest.s : 'Monocrática') : 'Sem destino'] : c === 'prov' ? [DLAB[o.prov]] : [o[c] || ''];
+const valDe = (o, c) => c === 'etq' ? o.etq : c === 'classe' ? [o.cl] : c === 'prior' ? [o.prior ? 'Sim' : 'Não'] : c === 'dest' ? [o.dest.k ? (o.dest.k === 'pauta' ? 'Pauta ' + o.dest.s : 'Monocrática') : 'Sem destino'] : c === 'prov' ? [DLAB[o.prov]] : [o[c] || ''];
 function tokens(q) { const out = []; String(q || '').replace(/(-?)"([^"]+)"|(-?)(\S+)/g, (m, n1, f, n2, w) => { const neg = !!(n1 || n2), t = nz(f || w); if (t && t !== '-') out.push({ neg, t }); return ''; }); return out; }
 function loteSet() { const s = new Set(); String(F.lote || '').replace(/\d{7}-?\d{2}\.?\d{4}\.?\d\.?\d{2}\.?\d{4}/g, (m) => { s.add(dg(m)); return m; }); return s; }
 function passaCrit(o, c) { const v = valDe(o, c.campo).filter((x) => x !== '' && x != null);
@@ -3002,7 +2910,7 @@ function abasTriHtml() {
   return '<div class="at-abas" role="tablist">' + abasTri().map((t) => '<button type="button" data-trisub="' + t.id + '" role="tab" aria-selected="' + t.on + '">' + t.r + '<small>' + (typeof t.n === 'number' ? nf(t.n) : t.n) + '</small></button>').join('') + '</div>';
 }
 /* soma dos processos dos lotes no índice (antes de ler os lotes) */
-function somaIdx(sub) { if (!_triIdx || _triIdx._erro) return '…'; let n = 0; const G = gruposLotes(sub); (G.length ? [G[0]] : []).forEach((g) => g[1].forEach((x) => { n += Number(x.n) || 0; })); return n; } /* só os lotes das tarefas: séries e escaninhos repetem processos */
+function somaIdx(sub) { if (!_triIdx || _triIdx._erro) return '…'; let n = 0; const G = gruposLotes(sub); (G.length ? [G[0]] : []).forEach((g) => g[1].forEach((x) => { n += Number(x.n) || 0; })); return n; } /* só os lotes das tarefas: séries repetem processos */
 function tarefasTriar() { const m = new Map(); (U || []).forEach((p) => { const g = p.tarefa || p.grupo || 'Triagem'; m.set(g, (m.get(g) || 0) + 1); }); return [...m.entries()]; }
 /* a caixa da esquerda, como Pauta | Avulsas no Collectio: abas e, abaixo, o seletor da coleção */
 function seletorLado() {
@@ -3077,8 +2985,7 @@ function gruposLotes(sub) {
   const C = _triIdx || {}, ent = (x) => (typeof x === 'string' ? { id: x, titulo: x } : x);
   if (sub === 'selecao') return [['Seleção prévia por sessão', (C['selecao-previa'] || []).map(ent)]];
   const tri = (C.triagem || []).map(ent);
-  return [['Tarefas do PJe', tri.filter((x) => !x.serie && !/^adp-serie-/.test(x.id))], ['Séries', tri.filter((x) => x.serie || /^adp-serie-/.test(x.id))],
-    ['Escaninhos', (C.avulsos || []).map(ent).filter((x) => x.escaninho)]].filter((g) => g[1].length);
+  return [['Tarefas do PJe', tri.filter((x) => !x.serie && !/^adp-serie-/.test(x.id))], ['Séries', tri.filter((x) => x.serie || /^adp-serie-/.test(x.id))]].filter((g) => g[1].length);
 }
 /* ===== Triados e Seleção prévia no formato do Collectio · Triagem: os lotes vivos, lidos pela API dos lotes (ou pelo motor) ===== */
 const _colD = {}, _colLendo = {};
@@ -3090,7 +2997,7 @@ async function lerColecoes(sub) {
   const ler = async (id) => { try { const r = await fetch('/api/painel?lote=1&id=' + encodeURIComponent(id), { cache: 'no-store', credentials: 'same-origin' }); if (r.ok) { const j = await r.json(); if (j && j.lote) return j.lote; } } catch (e) {}
     try { const P = PM(); if (P && P.ler) return JSON.parse(await P.ler('acervo/lotes/' + id + '.json')); } catch (e) {} return null; };
   const lotes = (await Promise.all(ids.map(ler))).filter(Boolean);
-  lotes.forEach((l) => { if (/^adp-serie-/.test(l.id)) l.tarefa = 'Séries entre lotes'; else if (l.tipo === 'selecao') l.tarefa = 'Seleção prévia'; else if (l.origem === 'escaninho') l.tarefa = 'Escaninhos'; });
+  lotes.forEach((l) => { if (/^adp-serie-/.test(l.id)) l.tarefa = 'Séries entre lotes'; else if (l.tipo === 'selecao') l.tarefa = 'Seleção prévia'; });
   _colD[sub] = { gerado_em: new Date().toLocaleString('pt-BR'), commit: '', lotes };
   _colLendo[sub] = false; refazTriEm();
 }
@@ -3360,28 +3267,28 @@ function subPainelEm(p, aba) {
 /* ========== fim Em triagem ========== */
 
 function vFila(cab, estilo) {
-  const L = ordenar(filtrar(F.conj ? ALL : BASE())), emE = !!F.esc; FILA = L; if (emE) ESCL = L;
+  const L = ordenar(filtrar(F.conj ? ALL : BASE())); FILA = L;
   /* Busca geral recolhida (padrão): a lista do acervo só é montada ao abrir, como a Visão geral */
   const bgAb = LS.get('tri_bg', false);
   const bgBarra = (ab) => '<section class="tri-vg tri-bg' + (ab ? ' ab' : '') + '"><button type="button" class="tri-vg-h" data-bg aria-expanded="' + ab + '"><span class="k">Busca geral no acervo em triagem</span><span class="tri-vg-r"><span><b>' + nf(L.length) + '</b> no acervo filtrado</span><span><b>' + nf(ALL.length) + '</b> na fonte</span><span>busca, critérios, filtros salvos, mapa do fluxo e exportação</span></span><span class="tri-vg-t">' + (ab ? 'recolher ▴' : 'abrir ▾') + '</span></button></section>';
-  if (!emE && !F.conj && !bgAb) return '<div class="wrap tri-larga"' + (estilo || '') + '>' + (cab || '') + visaoGeral() + painelEmTriagem() + bgBarra(false) + '</div>';
+  if (!F.conj && !bgAb) return '<div class="wrap"' + (estilo || '') + '>' + (cab || '') + visaoGeral() + painelEmTriagem() + bgBarra(false) + '</div>';
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
   /* visão geral da triagem primeiro; busca e filtros depois dela */
-  let h = '<div class="wrap' + (!emE && !F.conj ? ' tri-larga' : '') + '"' + (estilo || '') + '>' + (cab || '') + (!emE && !F.conj ? visaoGeral() + painelEmTriagem() + bgBarra(true) : '') + '<div class="fl-cab" id="tri-busca-geral"><div class="fl-l1" style="position:relative">' +
+  let h = '<div class="wrap"' + (estilo || '') + '>' + (cab || '') + (!F.conj ? visaoGeral() + painelEmTriagem() + bgBarra(true) : '') + '<div class="fl-cab" id="tri-busca-geral"><div class="fl-l1" style="position:relative">' +
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
     (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
     '<button type="button" class="btn" id="bt-pje" aria-expanded="' + F.pjeAberto + '">Pesquisa do PJe ' + (F.pjeAberto ? '▴' : '▾') + '</button><button type="button" class="btn pri" id="bt-crit" aria-expanded="false">+ Critério</button>' +
     '<select id="fl-salvos" aria-label="Filtros salvos"><option value="">Filtros salvos ▾</option>' + salvos.map((s, i) => '<option value="' + i + '">' + esc(s.nome) + '</option>').join('') + (salvos.length ? '<option value="del">Excluir um filtro salvo…</option>' : '') + '</select>' +
     '<span class="k" style="color:var(--m);margin-left:4px">Ver</span><div class="seg" role="group" aria-label="Ver">' + [['lista', 'Lista'], ['mapa', 'Mapa do fluxo'], ['assunto', 'Assunto'], ['tarefa', 'Tarefa'], ['secao', 'Seção'], ['classe', 'Classe'], ['dest', 'Destino']].map((x) => '<button type="button" data-ver="' + x[0] + '" class="' + (F.ver === x[0] ? 'on' : '') + '">' + x[1] + '</button>').join('') + '</div>' +
-    '<span style="position:relative"><button type="button" class="btn ico" id="' + (emE ? 'bt-expe' : 'bt-exp') + '" aria-expanded="false" aria-label="Exportar ou copiar a lista" title="Exportar ou copiar: Excel, CSV, PDF, números…"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></button></span></div>';
+    '<span style="position:relative"><button type="button" class="btn ico" id="bt-exp" aria-expanded="false" aria-label="Exportar ou copiar a lista" title="Exportar ou copiar: Excel, CSV, PDF, números…"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg></button></span></div>';
   if (F.pjeAberto) h += formPje();
-  if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), noB = emE ? new Set(BASE().map((o) => o.d)) : IDX, fora = [...s].filter((d) => !noB.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + (emE ? ' no escaninho' : ' entre os em triagem') + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
-  h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · ' + (emE ? 'todos do escaninho' : 'todos os em triagem') + '</span>') +
-    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + (emE ? '' : painelBase(L.length, ch.length)) + '</div>';
+  if (F.modo === 'lote' && F.lote.trim()) { const s = loteSet(), fora = [...s].filter((d) => !IDX.has(d)); h += '<p style="margin:0;font-size:12.5px;color:var(--m2)">' + nf(s.size) + ' números lidos · ' + nf(s.size - fora.length) + ' entre os em triagem' + (fora.length ? ' · <b style="color:var(--r)">não encontrados (' + fora.length + '):</b> <span class="mono" style="font-size:11.5px">' + fora.slice(0, 30).map(fmtCnj).join(', ') + (fora.length > 30 ? '…' : '') + '</span>' : '') + '</p>'; }
+  h += '<div class="chips"><span class="k" style="color:var(--m);margin-right:2px">Critérios</span>' + (ch.length ? ch.map((c, i) => (i ? '<span class="e">E</span>' : '') + '<span class="chip' + (c[3] ? ' neg' : '') + '"><span>' + c[0] + '</span><button type="button" class="x" aria-label="Retirar" data-tira="' + c[1] + '" data-v="' + esc(c[2]) + '">×</button></span>').join('') : '<span style="font-size:12.5px;color:var(--m)">nenhum · todos os em triagem</span>') +
+    '<span style="flex:1"></span>' + (ch.length ? '<button type="button" class="lk" id="bt-salvar">Salvar este filtro</button><button type="button" class="lk" id="bt-limpar" style="color:var(--r)">Limpar tudo</button>' : '') + '</div>' + painelBase(L.length, ch.length) + '</div>';
   if (F.ver === 'mapa') return h + vMapa(L) + '</div>';
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
-  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + (emE ? ' no escaninho' : ' no acervo filtrado') + '</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
+  h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + ' no acervo filtrado</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
   if (F.statsAberto) h += stats(L);
   h += painelEtq(L);
   h += lista(L, F, 'fila') + '</div></div></div>';
@@ -3463,7 +3370,7 @@ let TRI_SUBABA = LS.get('tri_subaba', 'triar');
 let _triCache = null;  // {items: Map<d,{...}>, lotes:[], series: Map<d,lote>}
 let _selCache = null;  // {items: Map<d,{...}>, lotes:[]}
 let TRI_EXP_D = null;
-function BASE() { if (F.esc) { const e = ESC.escaninhos.find((x) => x.id === F.esc); return e ? U.filter((o) => e._set.has(o.d)) : []; } const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
+function BASE() { const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
 function painelBase(nF, nCrit) { const cnt = {}; ALL.forEach((o) => { cnt[o.grupo] = (cnt[o.grupo] || 0) + 1; }); const S = new Set(F.base), n = ALL.filter((o) => S.has(o.grupo)).length;
   const vivos = (L) => L.filter((g) => cnt[g]).sort().join(','), pr = PRESETS.find((p) => vivos(p[2]) === vivos(F.base)); /* grupos sem processo não contam */
   const nTar = new Set(ALL.filter((o) => S.has(o.grupo)).map((o) => o.tarefa || 'Sem tarefa')).size;
@@ -3525,7 +3432,7 @@ function procExp(o){const r=o.row||{},B=[['Próxima ação','pa',r['Próxima aç
     (cheios.length?'<div class="pe-grid">'+cheios.map(x=>'<section class="pe-b pe-'+x[1]+'"><h4>'+esc(x[0])+'</h4><div class="pe-t">'+expItens(x[2])+'</div></section>').join('')+'</div>':'<p class="pe-vz">Nada anotado neste processo. Use o prontuário de triagem para registrar providências.</p>')+
     '<div class="pe-foot">'+(vazios.length&&cheios.length?'<span class="pe-sem">sem registro: '+vazios.map(x=>esc(x[0].toLowerCase())).join(' · ')+'</span>':'<span></span>')+
     '<span class="pe-ac"><button type="button" class="btn sm" data-ficha="'+o.d+'">Ficha</button><button type="button" class="btn sm pri" data-prontuario="'+o.d+'">Prontuário de triagem</button></span></div></div>';}
-function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>', exp = ABA.indexOf('esc:') === 0, aberto = exp && PROC_EXP_ABERTO === o.d;
+function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '" title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>', exp = ABA.indexOf('esc:') === 0, aberto = exp && PROC_EXP_ABERTO === o.d;
   const detalhes = exp && aberto ? procExp(o) : '';
   return '<div class="proc-item"><div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Abrir prontuário rápido">Triagem</button>' + obsLinha(o) + (exp ? '<button type="button" class="proc-exp-toggle" data-proc-exp="'+o.d+'" aria-expanded="'+aberto+'" title="'+(aberto?'Recolher':'Anotações e providências')+'">'+(aberto?'Recolher ▴':'Anotações ▾')+'</button>' : '') + '</div>' + detalhes + '</div>'; }
 function lista(L, st, onde) {
@@ -3577,13 +3484,13 @@ D.addEventListener('change', (e) => { const t = e.target;
     const s = S[+v]; if (!s) return; Object.assign(F, JSON.parse(JSON.stringify(s.F))); F.conj = null; F.lim = 100; render(); toast('Filtro aplicado: ' + s.nome); return; }
   if (t.dataset.mapaTodos != null) { const ds = (W.__MAPA_COLS || [])[+t.dataset.mapaTodos] || []; ds.forEach((d) => { if (t.checked) SEL.add(d); else SEL.delete(d); }); render(); return; }
   if (t.dataset.sel) { const d = t.dataset.sel; if (t.checked) SEL.add(d); else SEL.delete(d); const r = t.closest('.row,.mp-card'); if (r) r.classList.toggle('sel', t.checked); pintaRodape(); return; }
-  if (t.dataset.selall) { const L = t.dataset.selall === 'fila' ? FILA : ESCL; L.forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
-  if (t.dataset.selgrp != null) { const L = t.dataset.onde === 'fila' ? FILA : ESCL, st = t.dataset.onde === 'fila' ? F : FE, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
+  if (t.dataset.selall) { FILA.forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
+  if (t.dataset.selgrp != null) { const L = FILA, st = F, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
     L.filter((o) => fn(o) === t.dataset.selgrp).forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
   if (t.id === 'r-lc') { RODA['r-lc'] = t.value; RODA['r-lv'] = ''; pintaRodape(); return; }
   if (t.id === 'r-lv') { RODA['r-lv'] = t.value; return; }
-  if (t.id === 'r-ses' || t.id === 'r-esc') { if (t.id === 'r-esc' && t.value === '__novo') { t.value = ''; novoEscaninho(); } RODA[t.id] = t.value; } });
-function fecharPops() { $$('.pop').forEach((p) => p.remove()); CP = null; $$('[aria-expanded="true"]#bt-crit, [aria-expanded="true"]#bt-exp, [aria-expanded="true"]#bt-expe').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
+  if (t.id === 'r-ses') { RODA[t.id] = t.value; } });
+function fecharPops() { $$('.pop').forEach((p) => p.remove()); CP = null; $$('[aria-expanded="true"]#bt-crit, [aria-expanded="true"]#bt-exp').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
 
 /* ---------- exportar ---------- */
 const COLS_S = [['Processo', (o) => o.cnj], ['Classe', (o) => o.classe], ['Assunto', (o) => o.assunto], ['Tarefa no PJe', (o) => o.tarefa], ['Na tarefa desde', (o) => br(o.desde)], ['Seção', (o) => o.secao], ['Prioridade', (o) => o.prior ? 'Sim' : ''], ['Destino da triagem', (o) => o.dest.k ? o.dest.t : '']];
@@ -3642,20 +3549,7 @@ async function exportar(k, L, titulo, bilhete) {
   if (k === 'doc') { baixar(nome + '.doc', new Blob(['﻿<html><head><meta charset="utf-8"></head><body>' + corpo + '</body></html>'], { type: 'application/msword' })); return; }
   if (k === 'pdf') { const w = W.open('', '_blank'); if (!w) { toast('O navegador bloqueou a janela de impressão.', true); return; } w.document.write('<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>' + esc(titulo) + '</title><style>@page{size:A4 landscape;margin:12mm}body{margin:0}</style></head><body>' + corpo + '</body></html>'); w.document.close(); setTimeout(() => w.print(), 300); } }
 
-/* ---------- escaninhos ---------- */
-let ESCL = [];
 let PROC_EXP_ABERTO = '';
-function vEscaninho(id) {
-  const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return '<div class="wrap vazio">Escaninho não encontrado.</div>';
-  const base = BASE(), fora = e.processos.length - base.length, sec = contar(base, (o) => o.secao), pr = base.filter((o) => o.prior).length;
-  const bil = '<div class="bil"><div style="display:flex;justify-content:space-between;align-items:center"><p class="k" style="margin:0">Bilhete e orientação</p><span><button type="button" class="lk" data-esc-lista="' + esc(e.id) + '">+ Incluir por número</button> · <button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar escaninho</button> · <a class="lk" target="_blank" rel="noopener" title="O escaninho é o lote avulso do Collectio: prontuário, equipe e minutas de cada processo" href="/amicus/collectio/?id=' + encodeURIComponent(escLote(e.id)) + '">Abrir no Collectio ↗</a></span></div>' + (e.bilhete ? '<p style="margin:6px 0 0;font-size:13.5px;white-space:pre-wrap">' + esc(e.bilhete) + '</p>' : '<p style="margin:6px 0 0;font-size:13px;color:var(--m)">Sem orientação registrada.</p>') + '</div>';
-  const h = '<div class="wrap"><div class="esc-resumo" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><div style="flex:1;min-width:180px"><p class="k" style="margin:0">Escaninho · ' + esc(br(String(e.criadoEm || '').slice(0,10)) || '—') + '</p><b style="font-size:19px">' + esc(e.titulo) + '</b><span style="display:block;font-size:12px;color:var(--m)">' + esc(e.subtitulo || '') + '</span></div><b class="mono">' + nf(base.length) + ' processos</b><span style="font-size:12px;color:var(--m)">' + nf(pr) + ' prioritários · ' + nf(fora) + ' fora da triagem</span><button type="button" class="btn sm" data-esc-detalhes aria-expanded="false">Detalhes do escaninho ▾</button></div><div class="esc-detalhes" id="esc-detalhes"><div class="bil"><p class="k">Distribuição por seção</p>' + sec.map((x) => '<p style="margin:4px 0;font-size:12.5px">' + esc(x[0]) + ' <b class="mono">' + nf(x[1]) + '</b></p>').join('') + '</div>' + bil + '</div></div>';
-  return vFila(h, ' style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"'); }
-function vEscaninhos() {
-  let h = '<div class="wrap"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;padding:18px 0 14px;flex-wrap:wrap"><div><p class="k" style="margin:0">Triagem · escaninhos</p><h1 style="margin:4px 0 0;font-size:32px;font-weight:800;letter-spacing:-.04em;color:var(--v)">Escaninhos<span style="color:var(--g2)">.</span></h1><p style="margin:4px 0 0;font-size:14px;color:var(--m2)">Pastas para examinar um grupo depois. Clicar num escaninho abre o conteúdo numa aba própria. Ficam gravados no procs-muta, para toda a equipe.</p></div><button type="button" class="btn pri" data-esc-novo>+ Novo escaninho</button></div><div class="cards">';
-  ESC.escaninhos.forEach((e) => { const n = U.filter((o) => e._set.has(o.d)).length;
-    h += '<div class="ecard" role="button" tabindex="0" data-esc-abre="' + esc(e.id) + '" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><span class="k" style="color:var(--m)">' + (ABERTAS.indexOf(e.id) >= 0 ? 'aberto em aba' : 'criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)))) + '</span><b>' + esc(e.titulo) + '</b><span style="font-size:13px;color:var(--m2)">' + esc(e.subtitulo || '') + '</span><span class="ft"><span class="mono" style="font-size:22px;color:var(--v)">' + nf(n) + '</span><span style="display:flex;gap:10px"><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar</button><button type="button" class="lk" style="color:var(--r)" data-esc-del="' + esc(e.id) + '">Excluir</button></span></span></div>'; });
-  h += '<button type="button" class="ecard novo" data-esc-novo>+ Novo escaninho</button></div><p style="font-size:12.5px;color:var(--m)">Excluir um escaninho devolve os processos dele à fila de triagem; nada sai do acervo.</p></div>'; return h; }
 
 var VLc=window.VLc=(k,old)=>typeof VOC!=='undefined'?VOC.lista(k):old; /* vocabulário único (padrao/vocabulario.json) */
   const TRI_COR_=x=>{if(TRI_COR[x])return TRI_COR[x];if(typeof VOC==='undefined')return '';for(const k of ['tempest','preparo','repres','parecer','midias']){if(VOC.lista(k).includes(x)){const c=VOC.classe(k,x);return c==='regular'?(k==='parecer'?'#24506f':'#1f5a4a'):c==='irregular'?'#8a2f22':'';}}return '';};
@@ -3745,38 +3639,6 @@ async function salvarProntuarioTriagem(d){
 
 function gaveta(html, onClose) { fecharGaveta(); const v = D.createElement('div'); v.className = 'veu'; v.id = 'veu'; const g = D.createElement('aside'); g.className = 'gaveta'; g.id = 'gaveta'; g.setAttribute('role', 'dialog'); g.innerHTML = html; D.body.append(v, g); v.onclick = fecharGaveta; gaveta.fim = onClose; const f = g.querySelector('input,textarea,button'); if (f) setTimeout(() => f.focus(), 30); return g; }
 function fecharGaveta() { const g = $('#gaveta'); if (g) { g.remove(); $('#veu') && $('#veu').remove(); if (gaveta.fim) { const f = gaveta.fim; gaveta.fim = null; f(); } } }
-function editarEscaninho(id, depois) {
-  const e = id ? ESC.escaninhos.find((x) => x.id === id) : { titulo: '', subtitulo: '', bilhete: '', cor: '#a57829' }; let cor = e.cor || '#a57829';
-  const g = gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">' + (id ? 'Editar escaninho' : 'Novo escaninho') + '</p><h2>' + esc(id ? e.titulo : 'Novo escaninho') + '<span style="color:var(--g2)">.</span></h2></div><button type="button" class="x" style="font-size:20px" data-gv="fechar" aria-label="Fechar">×</button></div>' +
-    '<div class="gv-c"><label class="f">Título<input type="text" id="ge-t" value="' + esc(e.titulo) + '" maxlength="80"></label><label class="f">Subtítulo<input type="text" id="ge-s" value="' + esc(e.subtitulo || '') + '" maxlength="160"></label><label class="f">Bilhete<textarea id="ge-b" rows="5" placeholder="Orientação para quem for examinar o escaninho">' + esc(e.bilhete || '') + '</textarea></label>' +
-    '<label class="f">Incluir processos<textarea id="ge-l" rows="4" class="mono" style="font-size:12.5px" placeholder="Cole os números (com ou sem máscara), um por linha ou separados por vírgula, espaço ou ponto e vírgula"></textarea><span id="ge-li" style="font-weight:500;font-size:12px;color:var(--m)">Só entram processos do acervo; os demais são informados e ficam de fora.</span></label>' +
-    '<div><span class="f">Cor</span><div class="cores" style="margin-top:6px">' + CORES.map((c) => '<button type="button" aria-label="' + c[0] + '" data-cor="' + c[1] + '" class="' + (c[1] === cor ? 'on' : '') + '" style="background:' + c[1] + '"></button>').join('') + '</div></div>' + (id ? '<p style="font-size:12.5px;color:var(--m)">' + nf(e.processos.length) + ' processo(s) guardado(s).</p>' : '') + '</div>' +
-    '<div class="gv-f">' + (id ? '<button type="button" class="btn" style="color:var(--r);border-color:var(--r2);margin-right:auto" data-gv="excluir">Excluir escaninho</button>' : '') + '<button type="button" class="btn" data-gv="fechar">Cancelar</button><button type="button" class="btn pri" data-gv="salvar">' + (id ? 'Salvar' : 'Criar') + '</button></div>');
-  g.addEventListener('click', (ev) => { const c = ev.target.closest('[data-cor]'); if (c) { cor = c.dataset.cor; $$('[data-cor]', g).forEach((b) => b.classList.toggle('on', b === c)); return; }
-    const a = ev.target.closest('[data-gv]'); if (!a) return; const k = a.dataset.gv;
-    if (k === 'fechar') { fecharGaveta(); return; }
-    if (k === 'excluir') { fecharGaveta(); excluirEscaninho(id); return; }
-    const t = $('#ge-t').value.trim(); if (!t) { toast('Dê um título ao escaninho.', true); $('#ge-t').focus(); return; }
-    const agora = new Date().toISOString();
-    if (id) Object.assign(e, { titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, atualizadoEm: agora });
-    else { const ne = { id: 'esc-e' + Date.now().toString(36), titulo: t, subtitulo: $('#ge-s').value.trim(), bilhete: $('#ge-b').value.trim(), cor, criadoEm: agora, atualizadoEm: agora, processos: [], _set: new Set() }; ESC.escaninhos.push(ne); if (depois) depois(ne); }
-    const alvo = id ? e : ESC.escaninhos[ESC.escaninhos.length - 1], r = incluirLista(alvo, $('#ge-l').value);
-    ESC_V++; agendar(); fecharGaveta(); render(); toast((id ? 'Escaninho salvo.' : 'Escaninho criado: ' + t + '.') + (r ? ' ' + r : '')); });
-  const tl = $('#ge-l', g); if (tl) tl.addEventListener('input', () => { const L = listaCnj(tl.value), M = new Map(U.map((o) => [o.d, o])); const no = L.filter((d) => M.has(d)), ja = no.filter((d) => e._set && e._set.has(d)).length;
-    $('#ge-li', g).textContent = L.length ? nf(L.length) + ' número(s) lido(s): ' + nf(no.length - ja) + ' a incluir' + (ja ? ', ' + nf(ja) + ' já no escaninho' : '') + (L.length - no.length ? ', ' + nf(L.length - no.length) + ' fora do acervo' : '') + '.' : 'Só entram processos do acervo; os demais são informados e ficam de fora.'; });
-  if (depois === 'lista' && tl) setTimeout(() => tl.focus(), 60); }
-/* lista de números → dígitos CNJ (20), sem repetição */
-function listaCnj(t) { const v = new Set(); (String(t || '').match(/\d{7}-?\d{2}\.?\d{4}\.?\d\.?\d{2}\.?\d{4}/g) || []).forEach((m) => v.add(dg(m))); return [...v]; }
-function incluirLista(e, txt) { const L = listaCnj(txt); if (!L.length || !e) return ''; const M = new Map(U.map((o) => [o.d, o])); let inc = 0, ja = 0; const fora = [];
-  L.forEach((d) => { const o = M.get(d); if (!o) { fora.push(fmtCnj(d)); return; } if (e._set.has(d)) { ja++; return; } e._set.add(d); e.processos.push(o.cnj); refazDest(o); inc++; });
-  if (inc) e.atualizadoEm = new Date().toISOString();
-  if (fora.length) console.warn('[escaninho] fora do acervo:', fora.join(', '));
-  return nf(inc) + ' processo(s) incluído(s)' + (ja ? ', ' + nf(ja) + ' já estava(m)' : '') + (fora.length ? ', ' + nf(fora.length) + ' fora do acervo (' + fora.slice(0, 3).join(', ') + (fora.length > 3 ? '…' : '') + ')' : '') + '.'; }
-function novoEscaninho() { editarEscaninho(null, (ne) => { RODA['r-esc'] = ne.id; }); }
-function excluirEscaninho(id) { const e = ESC.escaninhos.find((x) => x.id === id); if (!e) return;
-  gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">Excluir escaninho</p><h2>' + esc(e.titulo) + '</h2><p>Os ' + nf(e.processos.length) + ' processo(s) voltam à fila de triagem. Nada sai do acervo.</p></div></div><div class="gv-f"><button type="button" class="btn" data-gv="n">Cancelar</button><button type="button" class="btn" style="background:var(--r);border-color:var(--r);color:#fff" data-gv="s">Excluir</button></div>').addEventListener('click', (ev) => { const a = ev.target.closest('[data-gv]'); if (!a) return;
-    if (a.dataset.gv === 's') { ESC.escaninhos = ESC.escaninhos.filter((x) => x.id !== id); (ESC._apagados = ESC._apagados || []).push(id); ABERTAS = ABERTAS.filter((x) => x !== id); LS.set('tri_abas', ABERTAS); ESC_V++; U.forEach(refazDest); agendar(); if (ABA === 'esc:' + id) ir('escaninhos'); else render(); toast('Escaninho excluído.'); }
-    fecharGaveta(); }); }
 
 /* ---------- rodapé de ações em bloco ---------- */
 /* edição em lote: campo da ficha (triagem/origem) e valor, gravados num só commit no operacional */
@@ -3794,30 +3656,25 @@ async function aplicarLote(ds) { const c = LOTE_CAMPOS.find((x) => x[0] === RODA
   } catch (e) { toast('Não foi possível gravar em lote: ' + e.message, true); if (bt) { bt.disabled = false; bt.textContent = 'Aplicar'; } } }
 const RODA = {}; let ROD_MIN = LS.get('tri_rod_min', true); /* rodapé de ações: minimizado por padrão, expansível */
 function pintaRodape() { const r = $('#rodape'); if (!PRONTO || !abaTriagem()) { r.hidden = true; D.body.classList.remove('rod-min'); return; } r.hidden = false;
-  const emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '', L = ABA === 'fila' ? FILA : emEsc ? ESCL : [], n = SEL.size, S = sessoes();
+  const L = FILA, n = SEL.size, S = sessoes();
   if (!RODA['r-ses'] || !S.some((s) => s.data === RODA['r-ses'])) RODA['r-ses'] = S[0] ? S[0].data : '';
-  const escs = ESC.escaninhos.filter((e) => e.id !== idE); if (RODA['r-esc'] && !escs.some((e) => e.id === RODA['r-esc'])) RODA['r-esc'] = '';
-  if (!RODA['r-esc'] && escs[0]) RODA['r-esc'] = escs[0].id;
   const dis = n ? '' : ' disabled';
   r.classList.toggle('off', !n); r.classList.toggle('min', ROD_MIN); D.body.classList.toggle('rod-min', ROD_MIN);
-  if (ROD_MIN) { r.innerHTML = '<div class="rmin"><div class="sel"><b>' + nf(n) + '</b><span style="font-size:13px;opacity:.85">selecionado(s)</span>' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + (emEsc ? ' do escaninho' : ' filtrados') + '</button>' : '') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</div><span style="font-size:12.5px;color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (n ? 'Pautar, julgar por monocrática ou guardar em escaninho: abra as ações' : 'Marque processos nas listas para pautar, julgar por monocrática ou guardar em escaninho') + '</span><span style="flex:1"></span>' + (DESF.length ? '<button type="button" class="btn sm" data-r="desfazer" title="' + esc('Desfazer: ' + DESF[DESF.length - 1].rot) + '">Desfazer última</button>' : '') + '</div><button type="button" class="tog" data-r="rodmax" aria-expanded="false">Ações de triagem ▴</button>'; return; }
-  r.innerHTML = '<button type="button" class="tog cheio" data-r="rodmin" aria-expanded="true" title="Minimizar o rodapé">minimizar ▾</button><div class="sel"><span style="font-size:13px;opacity:.8">Selecionados</span><b>' + nf(n) + '</b><span style="display:flex;gap:10px;flex-wrap:wrap">' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + (emEsc ? ' do escaninho' : ' filtrados') + '</button>' : '<span style="font-size:12px;color:#cfe0dc">marque nas listas</span>') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</span></div>' +
+  if (ROD_MIN) { r.innerHTML = '<div class="rmin"><div class="sel"><b>' + nf(n) + '</b><span style="font-size:13px;opacity:.85">selecionado(s)</span>' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + ' filtrados</button>' : '') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</div><span style="font-size:12.5px;color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (n ? 'Pautar ou julgar por monocrática: abra as ações' : 'Marque processos nas listas para pautar ou julgar por monocrática') + '</span><span style="flex:1"></span>' + (DESF.length ? '<button type="button" class="btn sm" data-r="desfazer" title="' + esc('Desfazer: ' + DESF[DESF.length - 1].rot) + '">Desfazer última</button>' : '') + '</div><button type="button" class="tog" data-r="rodmax" aria-expanded="false">Ações de triagem ▴</button>'; return; }
+  r.innerHTML = '<button type="button" class="tog cheio" data-r="rodmin" aria-expanded="true" title="Minimizar o rodapé">minimizar ▾</button><div class="sel"><span style="font-size:13px;opacity:.8">Selecionados</span><b>' + nf(n) + '</b><span style="display:flex;gap:10px;flex-wrap:wrap">' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + ' filtrados</button>' : '<span style="font-size:12px;color:#cfe0dc">marque nas listas</span>') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</span></div>' +
     '<div class="ac"><span class="k" style="color:var(--ok)">Pauta</span><div class="lin"><select id="r-ses" aria-label="Sessão"' + (S.length ? '' : ' disabled') + '>' + (S.length ? S.map((s) => '<option value="' + s.data + '"' + (s.data === RODA['r-ses'] ? ' selected' : '') + '>Sessão de ' + nomeSes(s) + ' · ' + nf((s.itens || []).length || (s.previa || []).length) + (s.itens && s.itens.length ? ' itens' : ' na pré-pauta') + '</option>').join('') : '<option>nenhuma sessão futura</option>') + '</select><button type="button" class="btn" style="background:var(--v2);border-color:var(--v2);color:#fff" data-r="pautar"' + (S.length ? dis : ' disabled') + '>Pautar</button></div><small>entra na seleção prévia da sessão, na página Pautas</small></div>' +
     '<div class="ac"><span class="k" style="color:var(--az)">Monocrática</span><button type="button" class="btn" style="background:var(--az);border-color:var(--az);color:#fff" data-r="mono"' + dis + '>Julgar por monocrática</button><small>vai para as Monocráticas da Ex Officio</small></div>' +
-    '<div class="ac"><span class="k">Escaninho</span><div class="lin"><select id="r-esc" aria-label="Escaninho">' + escs.map((e) => '<option value="' + esc(e.id) + '"' + (e.id === RODA['r-esc'] ? ' selected' : '') + '>' + esc(e.titulo) + ' (' + nf(e.processos.length) + ')</option>').join('') + '<option value="__novo">+ Novo escaninho…</option></select><button type="button" class="btn" style="background:var(--g2);border-color:var(--g2);color:#fff" data-r="guardar"' + (escs.length ? dis : ' disabled') + '>' + (emEsc ? 'Mover' : 'Guardar') + '</button></div><small>' + (emEsc ? 'leva para outro escaninho' : 'para examinar depois, em aba própria') + '</small></div>' +
     '<div class="ac"><span class="k" style="color:var(--g)">Editar em lote</span><div class="lin">' + loteCtl() + '<button type="button" class="btn" style="background:var(--v);border-color:var(--v);color:#fff" data-r="lote"' + dis + '>Aplicar</button></div><small>grava o campo na ficha de todos os marcados, num só registro</small></div>' +
-    '<div class="ac" style="border-right:0;gap:5px">' + (emEsc ? '<button type="button" class="btn sm" data-r="devolver"' + dis + '>Devolver à fila</button>' : '') + '<button type="button" class="btn sm" data-r="desfazer"' + (DESF.length ? '' : ' disabled') + ' title="' + esc(DESF.length ? 'Desfazer: ' + DESF[DESF.length - 1].rot : '') + '">Desfazer última</button><button type="button" class="btn sm" style="color:var(--r);border-color:var(--r2)" data-r="limpardest"' + dis + '>Limpar destino</button></div>'; }
-$('#rodape').addEventListener('click', (e) => { const b = e.target.closest('[data-r]'); if (!b || b.disabled) return; const k = b.dataset.r, ds = [...SEL], emEsc = ABA.indexOf('esc:') === 0, idE = emEsc ? ABA.slice(4) : '';
+    '<div class="ac" style="border-right:0;gap:5px"><button type="button" class="btn sm" data-r="desfazer"' + (DESF.length ? '' : ' disabled') + ' title="' + esc(DESF.length ? 'Desfazer: ' + DESF[DESF.length - 1].rot : '') + '">Desfazer última</button><button type="button" class="btn sm" style="color:var(--r);border-color:var(--r2)" data-r="limpardest"' + dis + '>Limpar destino</button></div>'; }
+$('#rodape').addEventListener('click', (e) => { const b = e.target.closest('[data-r]'); if (!b || b.disabled) return; const k = b.dataset.r, ds = [...SEL];
   if (k === 'rodmin' || k === 'rodmax') { ROD_MIN = k === 'rodmin'; LS.set('tri_rod_min', ROD_MIN); pintaRodape(); return; }
-  if (k === 'todos') { (ABA === 'fila' ? FILA : ESCL).forEach((o) => SEL.add(o.d)); render(); return; }
+  if (k === 'todos') { FILA.forEach((o) => SEL.add(o.d)); render(); return; }
   if (k === 'limpar') { SEL.clear(); render(); return; }
   if (k === 'desfazer') { desfazer(); return; }
-  if (k === 'pautar') { const ss = sessoes().find((s) => s.data === RODA['r-ses']); if (!ss) return; const nm = nomeSes(ss); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '', esc: [] })); return; }
+  if (k === 'pautar') { const ss = sessoes().find((s) => s.data === RODA['r-ses']); if (!ss) return; const nm = nomeSes(ss); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '' })); return; }
   if (k === 'lote') { aplicarLote(ds); return; }
-  if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
-  if (k === 'guardar') { const e2 = ESC.escaninhos.find((x) => x.id === RODA['r-esc']); if (!e2) return; acao((emEsc ? 'Movido para ' : 'Guardado em ') + e2.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [e2.id] })); return; }
-  if (k === 'devolver') { acao('Devolvido à fila', ds, (o) => ({ esc: estadoDe(o).esc.filter((x) => x !== idE) })); return; }
-  if (k === 'limpardest') { acao('Destino limpo', ds, () => ({ sp: '', sd: '', mono: '', esc: [] })); } });
+  if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
+  if (k === 'limpardest') { acao('Destino limpo', ds, () => ({ sp: '', sd: '', mono: '' })); } });
 
 /* ---------- atualizar acervo fonte (padrao/acervo-fonte.js: as três planilhas do dia → carga → GitHub Action) ---------- */
 let IMP = null;
@@ -3961,8 +3818,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-vg]'))) { LS.set('tri_vg', !LS.get('tri_vg', true)); render(); return; }
   if ((b = q('[data-conj]'))) { abrirConj(b.dataset.conj); return; }
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática', esc: [] })); return; }
-  if ((b = q('[data-esc-conj]'))) { const r = REG[b.dataset.escConj]; if (!r) return; editarEscaninho(null, (ne) => { const ds = r.ids; setTimeout(() => acao('Guardado em ' + ne.titulo, ds, () => ({ sp: '', sd: '', mono: '', esc: [ne.id] })), 0); }); const ti = $('#ge-t'); if (ti) ti.value = r.rot; return; }
-  if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
+if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
   if (q('#bt-pje')) { F.pjeAberto = !F.pjeAberto; render(); return; }
   if (q('[data-pjlimpa]')) { F.pje = PJ0(); render(); return; }
   if (q('[data-vertar]')) { F.verTar = !F.verTar; render(); return; }
@@ -3976,10 +3832,8 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-ver]'))) { F.ver = b.dataset.ver; F.lim = F.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('[data-verE]'))) { FE.ver = b.dataset.vere || b.getAttribute('data-verE'); FE.lim = FE.ver === 'lista' ? 100 : 30; render(); return; }
   if ((b = q('#bt-crit'))) { if ($('#crit-pop')) { fecharPops(); return; } abrirCrit(b); return; }
-  if ((b = q('[data-ex-xlsx]'))) { const e2 = F.esc && ESC.escaninhos.find((x) => x.id === F.esc), L = F.esc ? ESCL : FILA, alvo = SEL.size && L.some((o) => SEL.has(o.d)) ? L.filter((o) => SEL.has(o.d)) : L; exportar('xlsx', alvo, e2 ? e2.titulo : (F.conj ? F.conj.rot : 'Fila de triagem'), e2 ? e2.bilhete : ''); return; }
+  if ((b = q('[data-ex-xlsx]'))) { const alvo = SEL.size && FILA.some((o) => SEL.has(o.d)) ? FILA.filter((o) => SEL.has(o.d)) : FILA; exportar('xlsx', alvo, F.conj ? F.conj.rot : 'Fila de triagem', ''); return; }
   if ((b = q('#bt-exp'))) { if ($('.menu')) { fecharPops(); return; } abrirExp(b, FILA, F.conj ? F.conj.rot : 'Fila de triagem', ''); return; }
-  if ((b = q('#bt-expe'))) { if ($('.menu')) { fecharPops(); return; } const e2 = ESC.escaninhos.find((x) => 'esc:' + x.id === ABA); abrirExp(b, ESCL, e2 ? e2.titulo : 'Escaninho', e2 ? e2.bilhete : ''); return; }
-  if ((b = q('[data-ex-direto]'))) { const alvo = SEL.size && ESCL.some((o) => SEL.has(o.d)) ? ESCL.filter((o) => SEL.has(o.d)) : ESCL; exportar('copiar', alvo, '', ''); return; }
   if ((b = q('[data-tira]'))) { const k = b.dataset.tira, v = b.dataset.v; if (k === 'conj') F.conj = null; else if (k === 'pje') F.pje[v] = typeof F.pje[v] === 'boolean' ? false : ''; else if (k === 'q') F.q = ''; else if (k === 'lote') F.lote = ''; else if (k === 'crit') F.crit.splice(+v, 1); else if (k === 'fac') F.fac[v] = []; else if (k === 'etIn') F.etIn = F.etIn.filter((x) => x !== v); else if (k === 'etOut') F.etOut = F.etOut.filter((x) => x !== v); F.lim = 100; render(); return; }
   if ((b = q('.chip span')) && b.closest('.chip').querySelector('[data-tira="crit"]')) { abrirCrit($('#bt-crit'), +b.closest('.chip').querySelector('[data-tira]').dataset.v); return; }
   if (q('#bt-limpar')) { limparFiltros(); render(); return; }
@@ -3996,7 +3850,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if (q('[data-sxso]')) { const x = F.statsX, ids = FILA.filter((o) => sxPassa(o, x)).map((o) => o.d); F.conj = { rot: x.v, ids: new Set(ids) }; F.statsX = null; render(); return; }
   if ((b = q('[data-ord]'))) { const k = b.dataset.ord; if (F.ord === k) F.dir = -F.dir; else { F.ord = k; F.dir = 1; } render(); return; }
   if ((b = q('[data-mais]'))) { const st = b.dataset.mais === 'fila' ? F : FE; st.lim += st.ver === 'lista' ? 100 : 30; render(); return; }
-  if ((b = q('[data-grpso]'))) { const onde = b.dataset.onde, st = onde === 'fila' ? F : FE, L = onde === 'fila' ? FILA : ESCL, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
+  if ((b = q('[data-grpso]'))) { const onde = b.dataset.onde, st = onde === 'fila' ? F : FE, L = FILA, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
     if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
   if ((b = q('[data-tri-close]'))) { const g=document.getElementById('tri-prontuario');if(g)g.remove();return; }
   if ((b = q('[data-tri-save]'))) { salvarProntuarioTriagem(b.dataset.triSave);return; }
@@ -4005,13 +3859,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-tribanda]'))) { const id = b.dataset.tribanda; const cur = LS.get('tri_em_b_'+id, true); LS.set('tri_em_b_'+id, !cur); const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
   if ((b = q('[data-proc-exp]'))) { const d=b.dataset.procExp;PROC_EXP_ABERTO=PROC_EXP_ABERTO===d?'':d;render();return; }
   if ((b = q('[data-prontuario]'))) { abrirProntuarioTriagem(b.dataset.prontuario);return; }
-  if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : ESCL; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; }
-  if ((b = q('[data-esc-detalhes]'))) { const d=document.getElementById('esc-detalhes'); if(d){d.classList.toggle('on');b.setAttribute('aria-expanded',d.classList.contains('on'));b.textContent=d.classList.contains('on')?'Ocultar detalhes ▴':'Detalhes do escaninho ▾';} return; }
-   if ((b = q('[data-esc-abre]')) && !q('[data-esc-edit]') && !q('[data-esc-del]')) { ir('esc=' + b.dataset.escAbre); return; }
-  if ((b = q('[data-esc-lista]'))) { editarEscaninho(b.dataset.escLista, 'lista'); return; }
-  if ((b = q('[data-esc-edit]'))) { editarEscaninho(b.dataset.escEdit); return; }
-  if ((b = q('[data-esc-del]'))) { excluirEscaninho(b.dataset.escDel); return; }
-  if (q('[data-esc-novo]')) { editarEscaninho(null, (ne) => { setTimeout(() => ir('esc=' + ne.id), 0); }); return; } });
+  if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { P.abrir(o.cnj, FILA.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; } });
 D.addEventListener('submit', (e) => { if (e.target.id !== 'pjf') return; e.preventDefault(); const P = F.pje;
   $$('[data-pj]', e.target).forEach((i) => { P[i.dataset.pj] = i.value.trim(); }); $$('[data-pjc]', e.target).forEach((i) => { if (i.dataset.pjc in P) P[i.dataset.pjc] = i.checked; });
   if (P.ordem === 'rec') { F.ord = 'desde'; F.dir = -1; } else if ($$('[data-pj]', e.target).length) { if (F.ord === 'desde' || Object.keys(PJ_ROT).some((k) => P[k])) { F.ord = 'desde'; F.dir = 1; } }
@@ -4021,20 +3869,6 @@ D.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const tp=docume
 
 /* ===================== arranque ===================== */
 async function lerFonte(msg) { try { if (msg) msg('Lendo a fonte do acervo no procs-muta…'); const j = JSON.parse(await PM().ler('acervo/fonte.json')); if (j && Array.isArray(j.registros)) { FONTE = j.registros; FONTE_EM = j.atualizado_em || ''; } } catch (e) { FONTE = null; toast('Não li a fonte do acervo (' + e.message + '); uso a cópia deste navegador.', true); } }
-/* Escaninhos = coleção Avulsos do Collectio: cada escaninho é o lote acervo/lotes/esc-<id>.json (fonte única), listado em
-   acervo/lotes/colecoes.json. O processo enviado a um escaninho ganha no Collectio o prontuário completo. */
-const ESC_IDX = 'acervo/lotes/colecoes.json';
-const escLote = (id) => (/^esc-/.test(id) ? id : 'esc-' + String(id).toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 36));
-async function lerEscaninhos() { const P = PM(); let ok = false;
-  try { const idx = JSON.parse(await P.ler(ESC_IDX)); const av = (((idx || {}).colecoes || {}).avulsos || []).filter((x) => x.escaninho);
-    const ls = await Promise.all(av.map((x) => P.ler('acervo/lotes/' + x.id + '.json').then((t) => JSON.parse(t)).catch(() => null)));
-    ESC = { schema: 'gabcmt.escaninhos', versao: 2, fonte: 'lotes', atualizadoEm: idx.atualizado_em || '', escaninhos: ls.filter((l) => l && !l.arquivado).map((l) => ({ id: l.id, titulo: l.titulo, subtitulo: l.subtitulo || '', bilhete: l.bilhete || '', cor: l.cor || '#a57829', criadoEm: l.criado_em || '', atualizadoEm: l.atualizado_em || '', processos: (l.itens || []).map((i) => i.processo) })) }; ok = true;
-  } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; }
-  /* antes da migração para os lotes: lê o arquivo antigo (a próxima gravação já vai para os lotes) */
-  if (!ok) try { const j = JSON.parse(await P.ler(ESC_ARQ)); if (j && Array.isArray(j.escaninhos)) { ESC = Object.assign({ schema: 'gabcmt.escaninhos', versao: 1 }, j); ESC.escaninhos.forEach((e) => { e.id = escLote(e.id); }); if (ESC.escaninhos.length) ESC_V++; } } catch (e) { if (!/HTTP 404/.test(e.message || '')) throw e; }
-  /* ids antigos (e…) guardados em abas abertas e filtros passam ao id do lote (esc-e…) */
-  ABERTAS = ABERTAS.map(escLote); LS.set('tri_abas', ABERTAS); if (F && F.esc) F.esc = escLote(F.esc); if (RODA && RODA['r-esc']) RODA['r-esc'] = escLote(RODA['r-esc']);
-  indexEsc(); }
 function portaToken() { return new Promise((fim) => {
   const v = D.createElement('div'); v.id = 'porta-tk';
   v.innerHTML = '<form class="pt-c" autocomplete="on"><p class="k" style="margin:0;color:var(--g)">Caput · Gabinete CMT</p><h2>Entrar no Caput<span style="color:var(--g2)">.</span></h2>' +
@@ -4065,19 +3899,18 @@ function portaToken() { return new Promise((fim) => {
   if (PM() && !PM().atual) await portaToken();
   else { try { const G = M().__acervoGitHub; if (G && G.token && PM()) G.token(PM().atual); } catch (e) {} }
   rotear();
-  /* leituras em paralelo: escopo, fonte e escaninhos começam já, enquanto o motor monta o trabalho do gabinete;
+  /* leituras em paralelo: escopo e fonte começam já, enquanto o motor monta o trabalho do gabinete;
      a fonte é baixada uma só vez (o motor e a Triagem compartilham o download) e fica guardada neste navegador */
-  const ETAPA = { motor: 0, escopo: 0, fonte: 0, esc: 0 }, t0 = Date.now();
+  const ETAPA = { motor: 0, escopo: 0, fonte: 0 }, t0 = Date.now();
   const etapas = () => { const c = $('#carga'); if (!c) return; let ul = $('#carga-et'); if (!ul) { ul = D.createElement('ul'); ul.id = 'carga-et'; c.appendChild(ul); const d = D.createElement('p'); d.id = 'carga-dica'; d.innerHTML = 'Enquanto carrega, <b>Pautas</b> e <b>⚙ Regras gerais</b> já funcionam.'; c.appendChild(d); }
-    const L = [['fonte', 'Fonte do acervo (tarefas do PJe)'], ['escopo', 'Escopo da triagem'], ['esc', 'Escaninhos'], ['motor', 'Trabalho do gabinete (destinos, seleção prévia)']];
+    const L = [['fonte', 'Fonte do acervo (tarefas do PJe)'], ['escopo', 'Escopo da triagem'], ['motor', 'Trabalho do gabinete (destinos, seleção prévia)']];
     ul.innerHTML = L.map(([k, t]) => '<li class="' + (ETAPA[k] === 1 ? 'ok' : ETAPA[k] === 2 ? 'err' : '') + '">' + (ETAPA[k] === 1 ? '✓' : ETAPA[k] === 2 ? '!' : '…') + ' ' + t + '</li>').join('') + '<li class="tm">' + Math.round((Date.now() - t0) / 1000) + ' s</li>'; };
   const relogio = setInterval(etapas, 1000); etapas();
   const pEscopo = PM().ler('apoio/regras/escopo-triagem.json').then((t) => { const j = JSON.parse(t); if (j && Array.isArray(j.triar)) { ESCOPO = { triar: j.triar.map((x) => [x.tarefa, x.motivo || '']), ignorar: j.ignorar || {}, lido: true }; montaEscopo(); } ETAPA.escopo = 1; }).catch((e) => { console.warn('[Triagem] escopo', e); ETAPA.escopo = 2; });
   const pFonte = lerFonte().then(() => { ETAPA.fonte = FONTE ? 1 : 2; });
-  const pEsc = lerEscaninhos().then(() => { ETAPA.esc = 1; }).catch((e) => { ETAPA.esc = 2; toast('Não li os escaninhos: ' + e.message + '. Os novos escaninhos serão gravados normalmente.', true); });
   let n = 0; while (!(core() && core().rows && core().rows.length)) { if (++n > 600) { msg('O motor do acervo não carregou em 4 minutos. Recarregue a página.'); clearInterval(relogio); return; } if (n === 40) msg('Ainda lendo o trabalho do gabinete…'); await new Promise((r) => setTimeout(r, 400)); }
   ETAPA.motor = 1; etapas();
-  await Promise.all([pEscopo, pFonte, pEsc]); clearInterval(relogio);
+  await Promise.all([pEscopo, pFonte]); clearInterval(relogio);
   construir(); PRONTO = true; rotear(); acervoData();
   /* o motor pode recarregar o acervo (outra aba gravou, importação): refaz quando as linhas mudam */
   setInterval(() => { if (!PRONTO || D.body.classList.contains('cmt-ficha-on') || $('#gaveta') || $('.pop') || $('#rg')) return; const c = core(); if (!c || !c.rows) return; if (c.rows !== ROWS_REF || c.rows.length !== ROWS_N) { construir(); render(); } }, 4000);
