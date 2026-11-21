@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T01:31:28.815Z",
+ "atualizadoEm": "2026-11-21T01:31:35.029Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -5473,7 +5473,7 @@
    "obs": "",
    "ctl": {
     "editadoPor": "Bruno",
-    "editadoEm": "2026-11-17T12:59:47.881Z",
+    "editadoEm": "2026-11-21T01:31:35.029Z",
     "planilhaEtapa": "Minutado",
     "planilhaOrigem": "Sessão 2026-11-30 (2).xlsx",
     "planilhaReferencia": "2026-11-20",
@@ -5496,9 +5496,12 @@
      "pendencias": [
       {
        "desc": "Anexar o inteiro teor e extrair a minuta do PJe (a extração de 18/11/2026 não está no repositório).",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote irpj-icms"
+       "por": "Index · lote irpj-icms",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Superada: autos extraídos em 19/11/2026 no repositório, com relatório, voto e ementa em elaboração (IDs 410264633, 410264634 e 410266049)."
       },
       {
        "desc": "Marcado como corrigido no lote \"A corrigir\": conferir antes de refazer.",
