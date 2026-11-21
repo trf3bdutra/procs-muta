@@ -19,7 +19,7 @@
      documento (GET, com a sessão de quem está logado); HTML vira texto, PDF segue para o painel extrair o texto. Só leitura. */
 (function () {
   'use strict';
-  var VERSAO = '0.18';
+  var VERSAO = '0.19';
   if (window.__mutaPje === VERSAO) return;
   window.__mutaPje = VERSAO;
 
@@ -379,8 +379,99 @@
     });
   } catch (e) {}
 
+  /* ---------- 0.19 · selos na lista de tarefas (só no quadro do painel de tarefas; só leitura) ----------
+     Em cada cartão da lista: etapa, quem minuta e quem corrige, urgência não apreciada, intercorrências, pendências,
+     dias na tarefa, meta, sobrestamento, caso sensível e as etiquetas do gabinete que faltam no PJe (clique copia). */
+  var ENR = { dados: {}, cat: null, cfg: null, t: 0, pedindo: false, tm: 0, pedidos: {} };
+  var LISTA = location.host === 'frontend-pje.app.trf3.jus.br';
+  function escS(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function cssSelos() {
+    if (document.getElementById('muta-selos-css')) return;
+    var st = document.createElement('style'); st.id = 'muta-selos-css';
+    st.textContent = '.muta-selos{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0 2px;font:600 10.5px/1.2 system-ui,Segoe UI,sans-serif}' +
+      '.muta-selos span{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:9px;border:1px solid #d5dbe1;background:#fff;color:#33424c;white-space:nowrap}' +
+      '.muta-selos .m-et{background:#eef3f7;border-color:#c9d6e0;color:#1f4f6b}.muta-selos .m-al{background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
+      '.muta-selos .m-av{background:#fff4e5;border-color:#f0c88a;color:#8a5a10}.muta-selos .m-ok{background:#eaf6ef;border-color:#b5dcc4;color:#2f6e4b}' +
+      '.muta-selos .m-et-l{background:#1f4f6b;color:#fff;border-color:#1f4f6b}.muta-selos [data-muta-copia]{cursor:copy}.muta-selos .m-mu{color:#6b7a84}';
+    (document.head || document.documentElement).appendChild(st);
+  }
+  function cartoesLista() {
+    if (!LISTA || !document.body || document.getElementById('divTimeLine')) return [];
+    if (numeros((document.body.textContent || '').slice(0, 500000)).length < 2) return [];
+    var out = [], vistos = [], c = 0, n;
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (x) { RE.lastIndex = 0; return RE.test(x.nodeValue) ? 1 : 3; } });
+    while ((n = w.nextNode()) && c < 500) {
+      c++;
+      var el = n.parentElement; if (!el || (el.closest && (el.closest(FORA) || el.closest('.muta-selos')))) continue;
+      var nn = numeros(n.nodeValue); if (nn.length !== 1) continue;
+      var card = null;
+      for (var e = el, i = 0; e && e !== document.body && i < 12; e = e.parentElement, i++) {
+        if (numeros((e.textContent || '').slice(0, 8000)).length === 1) card = e; else break;
+      }
+      if (!card || vistos.indexOf(card) >= 0) continue;
+      vistos.push(card); out.push({ el: card, numero: nn[0], k: nn[0].replace(/\D/g, '') });
+    }
+    return out;
+  }
+  function selosHtml(r, cat, texto) {
+    var E = window.MutaEtiquetas; if (!E || !r) return '';
+    r = E.preparar(r); var cfg = ENR.cfg || E.CFG, h = [], et = E.etapa(r);
+    if (et) h.push('<span class="m-et' + (/^Liberado|Assinada/.test(et) ? ' m-ok' : '') + '" title="Etapa no gabinete (ficha do processo)">' + escS(et) + '</span>');
+    if (r.servidor || r.corretor) h.push('<span title="Minuta: ' + escS(r.servidor || 'não designado') + ' · Correção: ' + escS(r.corretor || 'não designado') + '">M ' + escS(E.iniciais(r.servidor) || '—') + ' · C ' + escS(E.iniciais(r.corretor) || '—') + '</span>');
+    if (r.urgPend) h.push('<span class="' + (r.urgDias != null && r.urgDias >= cfg.urgDias ? 'm-al' : 'm-av') + '" title="Urgência não apreciada' + (r.urg ? ': ' + escS(r.urg) : '') + '">⚡ urgência' + (r.urgDias != null ? ' ' + r.urgDias + 'd' : '') + '</span>');
+    if (r.icN) h.push('<span class="m-al" title="' + escS(r.ic.join(' | ')) + '">⛔ ' + r.icN + ' intercorrência' + (r.icN > 1 ? 's' : '') + '</span>');
+    if (r.pendN) h.push('<span class="m-av" title="' + escS(r.pend.join(' | ')) + '">⚑ ' + r.pendN + ' pendência' + (r.pendN > 1 ? 's' : '') + '</span>');
+    if (r.dias != null && r.dias >= cfg.tarefaDias) h.push('<span class="' + (r.dias >= cfg.tarefaDias * 2 ? 'm-al' : 'm-av') + '" title="Dias na tarefa atual">⏱ ' + r.dias + 'd</span>');
+    if (r.meta) h.push('<span title="Meta do CNJ">★ meta</span>');
+    if (r.sobr) h.push('<span class="m-mu" title="Sobrestado">⏸ sobrestado</span>');
+    if (r.sens) h.push('<span title="Caso sensível">♥ sensível</span>');
+    var F = cat ? E.faltando(r, cat, texto) : [];
+    if (F.length) h.push('<span class="m-av" data-muta-copia="' + escS(F.map(function (x) { return x.nome; }).join(', ')) + '" title="Etiquetas do gabinete que faltam no PJe: ' + escS(F.map(function (x) { return x.nome + (x.descricao ? ' (' + x.descricao + ')' : ''); }).join('; ')) + '. Clique para copiar.">🏷 ' + F.length + ' a incluir</span>');
+    return h.join('');
+  }
+  function pedirSelos(ks) {
+    if (ENR.pedindo || !ks.length) return; ENR.pedindo = true;
+    try {
+      chrome.runtime.sendMessage({ tipo: 'muta-resumos', cnjs: ks, lista: true }).then(function (r) {
+        ENR.pedindo = false; ENR.t = Date.now();
+        if (!r || r.erro) { ENR.erro = r && r.erro || 'sem resposta'; return; }
+        ENR.erro = ''; Object.keys(r.resumos || {}).forEach(function (k) { ENR.dados[k] = r.resumos[k]; }); ENR.cat = r.catalogo; ENR.cfg = r.cfg; agendarSelos();
+      }, function () { ENR.pedindo = false; });
+    } catch (e) { ENR.pedindo = false; }
+  }
+  function aplicarSelos() {
+    if (!LISTA) return;
+    if (ENR.cfg && ENR.cfg.selos === false) { Array.prototype.forEach.call(document.querySelectorAll('.muta-selos'), function (x) { x.remove(); }); return; }
+    var C = cartoesLista(); if (!C.length) return;
+    var ks = C.map(function (c) { return c.k; });
+    /* cada número é pedido no máximo uma vez a cada 2 minutos (o que o servidor não devolver não é pedido em laço) */
+    var agora = Date.now(), novos = ks.filter(function (k) { return !ENR.pedidos[k] || agora - ENR.pedidos[k] > 120e3; });
+    if (novos.length) { novos.forEach(function (k) { ENR.pedidos[k] = agora; }); pedirSelos(ks); }
+    cssSelos();
+    C.forEach(function (c) {
+      var r = ENR.dados[c.k]; if (!r) return;
+      var box = null; for (var i = 0; i < c.el.children.length; i++) if (c.el.children[i].classList.contains('muta-selos')) box = c.el.children[i];
+      var texto = ((c.el.textContent || '').replace(box ? box.textContent : '', '')).slice(0, 4000), html = selosHtml(Object.assign({}, r), ENR.cat, texto);
+      if (box && box.getAttribute('data-sig') === html) return;
+      if (!html) { if (box) box.remove(); return; }
+      if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; c.el.appendChild(box); }
+      box.setAttribute('data-sig', html); box.innerHTML = html;
+    });
+  }
+  function agendarSelos() { if (!LISTA) return; clearTimeout(ENR.tm); ENR.tm = setTimeout(function () { try { aplicarSelos(); } catch (e) {} }, 700); }
+  if (LISTA) {
+    document.addEventListener('click', function (e) {
+      var b = e.target && e.target.closest && e.target.closest('.muta-selos [data-muta-copia]'); if (!b) return;
+      e.preventDefault(); e.stopPropagation();
+      var t = b.getAttribute('data-muta-copia'), o = b.textContent;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'copiado ✓'; setTimeout(function () { b.textContent = o; }, 1300); }, function () {});
+    }, true);
+    try { chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'muta-selos-atualizar') { ENR.pedidos = {}; ENR.cfg = null; agendarSelos(); } }); } catch (e) {}
+  }
+
   informar();
   if (document.body) new MutationObserver(agendar).observe(document.body, { childList: true, subtree: true, characterData: true });
+  if (LISTA && document.body) { new MutationObserver(agendarSelos).observe(document.body, { childList: true, subtree: true }); agendarSelos(); }
   window.addEventListener('focus', function () { ultimo = null; agendar(); });
   document.addEventListener('visibilitychange', function () { if (!document.hidden) { ultimo = null; agendar(); } });
   /* o painel pede de novo quando o registro da aba se perdeu (aba recarregada, extensão atualizada) */

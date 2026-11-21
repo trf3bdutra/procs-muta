@@ -1,0 +1,125 @@
+{
+ "schema": "gabcmt.etiquetas-gabinete",
+ "versao": 1,
+ "atualizadoEm": "2026-11-21",
+ "atualizadoPor": "Bruno",
+ "descricao": "Etiquetas do Gab. A e as regras que as sugerem na extensão Muta (lista de tarefas do PJe e prontuário). Cada regra tem condições sobre o resumo do processo (todas valem). Editável pelo gestor na extensão (Prontuário › Etiquetas do gabinete).",
+ "etiquetas": [
+  {
+   "nome": "LIMINAR PENDENTE",
+   "cor": "#c4402f",
+   "descricao": "Pedido urgente (liminar, tutela, efeito suspensivo) ainda não apreciado",
+   "quando": [
+    {
+     "campo": "urgPend",
+     "op": "tem"
+    }
+   ]
+  },
+  {
+   "nome": "ver. preparo",
+   "cor": "#d27b1c",
+   "descricao": "Preparo a conferir: não recolhido, sem comprovante do Tesouro, a menor ou depois da interposição",
+   "quando": [
+    {
+     "campo": "preparo",
+     "op": "re",
+     "valor": "nao recolhido|sem comprovante|a menor|apos a interposicao|tesouro"
+    }
+   ]
+  },
+  {
+   "nome": "representação",
+   "cor": "#d27b1c",
+   "descricao": "Representação processual irregular",
+   "quando": [
+    {
+     "campo": "repres",
+     "op": "re",
+     "valor": "irregular"
+    }
+   ]
+  },
+  {
+   "nome": "tempestividade",
+   "cor": "#c4402f",
+   "descricao": "Recurso intempestivo",
+   "quando": [
+    {
+     "campo": "tempest",
+     "op": "re",
+     "valor": "^intempest"
+    }
+   ]
+  },
+  {
+   "nome": "aguardando parecer",
+   "cor": "#4e7fa8",
+   "descricao": "Parecer do MPF pendente ou vista a abrir",
+   "quando": [
+    {
+     "campo": "mpfSit",
+     "op": "re",
+     "valor": "aguardando|vista a abrir"
+    }
+   ]
+  },
+  {
+   "nome": "MONOCRÁTICA TERMINATIVA",
+   "cor": "#7a5bb5",
+   "descricao": "Destino: decisão monocrática",
+   "quando": [
+    {
+     "campo": "destino",
+     "op": "igual",
+     "valor": "Monocrática"
+    }
+   ]
+  },
+  {
+   "nome": "INTERCORRÊNCIA",
+   "cor": "#c4402f",
+   "descricao": "Intercorrência em aberto (retém a liberação)",
+   "quando": [
+    {
+     "campo": "icN",
+     "op": "maior",
+     "valor": "0"
+    }
+   ]
+  },
+  {
+   "nome": "META",
+   "cor": "#b98a2a",
+   "descricao": "Processo em meta do CNJ",
+   "quando": [
+    {
+     "campo": "meta",
+     "op": "tem"
+    }
+   ]
+  },
+  {
+   "nome": "SOBRESTADO",
+   "cor": "#5b6b75",
+   "descricao": "Processo sobrestado",
+   "quando": [
+    {
+     "campo": "sobr",
+     "op": "tem"
+    }
+   ]
+  },
+  {
+   "nome": "CASO SENSÍVEL",
+   "cor": "#7a5bb5",
+   "descricao": "Caso sensível (saúde e afins)",
+   "quando": [
+    {
+     "campo": "sens",
+     "op": "tem"
+    }
+   ]
+  }
+ ]
+}

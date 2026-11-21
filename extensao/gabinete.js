@@ -291,6 +291,7 @@ function cabeca(s) {
       (etq.length ? '<div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' +
     '</section>';
 }
+window.MutaRender = function () { render(); };
 /* faixa do usuário no topo do painel, acima das abas */
 function faixaUsuario(s) {
   var t0 = $('topo-u'), t = $('tu-main'); if (!t0 || !t) return;
@@ -525,7 +526,7 @@ function corpoRoteiro() {
   var A = abaModelo('Triagem'), todos = [], TR = window.MutaTriagem, AU = window.MutaAutos;
   if (A) A.grupos.filter(function (g) { return g.grupo !== 'Registro da triagem (lote)' && grupoVisivel(g); }).forEach(function (g) { g.campos.forEach(function (c) { if (c.secao && !FORA_ROT[c.chave]) todos.push([c.secao, c.chave, c.rotulo]); }); });
   return window.MutaRoteiro.html(gRot(), campoRot, questoes, { todos: todos, barra: AU && AU.barra ? AU.barra() : '',
-    etiquetas: TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '', registro: TR && TR.registroDe ? TR.registroDe(G.op, G.fo) : '' });
+    etiquetas: (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : ''), registro: TR && TR.registroDe ? TR.registroDe(G.op, G.fo) : '' });
 }
 function render() {
   if (!caixa) return;
@@ -581,6 +582,7 @@ function gravarJa(keepalive) {
     return Promise.resolve();
   }
   return ses.api('/api/pauta?ficha=1', { method: 'POST', body: corpo }).then(function (j) {
+    if (window.MutaAlertas) window.MutaAlertas.esquecer(cnj);
     if (cnj === G.cnj) { G.op = j.operacional || G.op; render(); }
     var rec = j.recusados || [];
     st(rec.length ? 'Gravado, exceto (sem permissão): ' + rec.join(', ') : j.semMudanca ? 'Nada mudou no prontuário.' : 'Gravado na ficha do processo' + ((j.cartoes || []).length ? ' e no cartão da pauta' : '') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '.', rec.length ? 'err' : 'ok');

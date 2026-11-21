@@ -327,6 +327,19 @@ function alertas() {
     var t3 = texto(d); if (!t3) return;
     if (/\bpix\b/i.test(t3) && !/tesouro nacional|stn|guia de recolhimento da uni[ãa]o|\bgru\b/i.test(t3)) add('al', 'Preparo ID ' + d.id + ': comprovante de Pix sem referência à GRU ou ao Tesouro — conferir se o recolhimento foi para a conta certa.', d.id);
   });
+  /* intimação da decisão recorrida (para a tempestividade): primeira ciência, intimação ou publicação depois dela na cronologia */
+  var impT = /embargos/i.test(recTj || tj) ? acordao : /agravo interno/i.test(recTj || tj) ? ult('decisao') : sen;
+  if (impT && rec) {
+    var dn = function (d) { var m = /(\d{2})\/(\d{2})\/(\d{4})/.exec(d || ''); return m ? m[3] + '-' + m[2] + '-' + m[1] : ''; };
+    var d0 = dn(impT.data), dr = dn(rec.data), RX = /intima[çc][ãa]o|ci[êe]ncia|publica[çc][ãa]o|publicad|disponibiliza|expedi[çc][ãa]o de (intima|comunica)/i;
+    var cand = [];
+    movimentos().forEach(function (m) { var d = dn(m.data); if (d && d >= d0 && (!dr || d <= dr) && RX.test(m.t)) cand.push({ d: d, t: m.t, data: m.data, id: '' }); });
+    L.forEach(function (d) { var x = dn(d.data); if (x && x >= d0 && (!dr || x <= dr) && Number(d.id) > Number(impT.id) && RX.test(d.tipo + ' ' + (d.desc || ''))) cand.push({ d: x, t: d.tipo, data: d.data, id: d.id }); });
+    cand.sort(function (a, b) { return a.d < b.d ? -1 : a.d > b.d ? 1 : 0; });
+    var c0 = cand[0], pubGrav = S(gravado('triagem', 'Tempest - Publicação'));
+    if (c0) add('in', 'Intimação da decisão recorrida (ID ' + impT.id + '): primeira ciência ou publicação na cronologia em ' + c0.data + ' (“' + c0.t + '”' + (c0.id ? ', ID ' + c0.id : '') + '). Conferir a data efetiva e o início do prazo.', c0.id || impT.id, pubGrav ? '' : 'triagem.Tempest - Publicação', pubGrav ? '' : c0.d);
+    else add('in', 'Intimação da decisão recorrida (ID ' + impT.id + '): nenhuma ciência ou publicação na cronologia lida até o recurso — leia a cronologia toda ou confira no PJe.', impT.id);
+  }
   /* gratuidade: decisão que a deferiu e alcance ao recurso */
   var aj = L.filter(function (d) { var t4 = texto(d); return t4 && /(defiro|deferid[ao]s?|concedo|concedid[ao]s?)\s+(os benef[íi]cios d[ao]\s+)?(a\s+)?(gratuidade|justi[çc]a gratuita|assist[êe]ncia judici[áa]ria)/i.test(t4); })[0];
   if (aj) add('in', 'Gratuidade deferida no ID ' + aj.id + ' (' + aj.data + '): alcança o recurso, salvo revogação — o preparo fica dispensado para quem a obteve.', aj.id);

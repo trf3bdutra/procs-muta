@@ -3,6 +3,8 @@
    POST /api/pauta?data=AAAA-MM-DD  {cnj, lista, campos}   grava campos de um processo, num commit, com nova tentativa se o arquivo mudou;
                                                           o mesmo commit leva os campos à ficha do processo em acervo/operacional.json
    GET/POST /api/pauta?ficha=…                             ficha única do processo (ver _ficha.js)
+   GET      /api/pauta?fichas=CNJ1,CNJ2,…                 resumo de vários processos (lista de tarefas do PJe na extensão)
+   GET/POST /api/pauta?etiquetas=1                        catálogo de etiquetas do gabinete (POST: só o gestor)
    GET/POST /api/pauta?prontuario=…                        prontuário completo do processo, da extensão Muta (ver _prontuario.js)
    GET/POST /api/pauta?planilha=1                          planilhas do Google Drive, por token (ver _planilha.js) */
 const L = require('./_lib'), FICHA = require('./_ficha');
@@ -59,6 +61,8 @@ module.exports = async (req, res) => {
   const pelaChave = req.query.ficha && req.method === 'GET' && !L.quem(req) && require('./_cmt').porChave(req);
   const u = pelaChave ? (process.env.CMT_RELATOR || 'CM') : L.exigir(req, res); if (!u) return;
   if (req.query.mono) return require('./_mono')(req, res, u);
+  if (req.query.fichas) return FICHA.resumos(req, res, u);
+  if (req.query.etiquetas) return FICHA.etiquetasGab(req, res, u);
   if (req.query.ficha) return FICHA(req, res, u);
   if (req.query.prontuario) return require('./_prontuario')(req, res, u);
   if (req.query.metas) return require('./_metas')(req, res, u);

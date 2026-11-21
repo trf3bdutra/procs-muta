@@ -3,6 +3,27 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.19 · prazos, alertas e etiquetas do gabinete
+
+- **Selos na lista de tarefas do PJe** (`conteudo-pje.js`, `etiquetas.js`): em cada cartão de processo, a etapa
+  (triagem, minuta, correção, liberação, assinatura), as iniciais de quem minuta e de quem corrige, ⚡ urgência não
+  apreciada com os dias, ⛔ intercorrências, ⚑ pendências, ⏱ dias na tarefa, ★ meta, ⏸ sobrestado, ♥ caso sensível e
+  🏷 as etiquetas do gabinete que faltam no PJe (o toque copia; nada é aplicado no PJe). Os dados vêm em lote de
+  `GET /api/pauta?fichas=CNJ1,CNJ2,…` (até 150; exige o login do painel). Um número que o servidor não devolve só é
+  pedido de novo depois de 2 minutos.
+- **Catálogo de etiquetas do gabinete** (`padrao/etiquetas-gabinete.json`; `GET`/`POST /api/pauta?etiquetas=1`): nome,
+  cor, descrição e condições sobre o resumo do processo (todas devem valer; operações `tem`, `vazio`, `igual`, `contem`,
+  `re`, `maior`). Só o gestor grava. No painel: sino na faixa do topo → aba Etiquetas.
+- **Prazos e alertas** (`fundo.js`, `alertas.js`): a cada leitura da lista, o serviço de fundo guarda os alertas,
+  mostra no ícone da extensão quantos processos têm alerta vermelho e manda notificação do Chrome (no máximo 3 novas
+  por vez; a mesma uma vez por dia por processo e tipo). Limites ajustáveis no sino → Prazos (urgência: 2 dias;
+  tempo na tarefa: 30 dias, vermelho no dobro); selos e notificações podem ser desligados. Vale por navegador.
+- **Roteiro → Etiquetas:** bloco "Regras do catálogo" com as etiquetas que as regras indicam para o processo, as que
+  já estão no PJe e "+ sugerir" para incluir nas sugeridas; "Copiar" leva as que faltam.
+- **Autos → conferência:** sugere a data da intimação da decisão recorrida (primeira ciência, intimação ou publicação
+  na cronologia entre a decisão e o recurso) para "Intimação / publicação" da tempestividade, a conferir.
+- Ao atualizar: recarregue a extensão e a aba do PJe e aceite a permissão nova de notificações.
+
 ## O que muda na 0.18
 
 - **Textos justificados** (com hifenização em português) no texto do editor, no texto dos documentos dos autos, nas

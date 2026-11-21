@@ -297,6 +297,59 @@ function ativos(op, lista) {
   return { urgencia: !!t['Urgência'], monocratica: p.Destino === 'Monocrática', meta: !!lista.metas, sobrestamento: !!lista.sobrestados,
     sensivel: c['Sensível - Excluído'] !== 'Sim' && (!!lista.sensiveis || c['Sensível - Incluído'] === 'Sim'), naLista: lista };
 }
+/* resumo de vários processos de uma vez (só leitura), para a lista de tarefas do PJe na extensão Muta:
+   GET /api/pauta?fichas=CNJ1,CNJ2,… (até 150) → { resumos: { <20 dígitos>: { etapa, designação, urgência, sinalizações, tarefa, etiquetas… } } } */
+async function resumos(req, res) {
+  try {
+    const K = [...new Set(String(req.query.fichas || '').split(',').map(dg).filter(x => x.length === 20))].slice(0, 150);
+    if (!K.length) return res.status(200).json({ resumos: {} });
+    const [{ doc }] = await Promise.all([lerOpLeitura(), fonteDe(K[0])]);
+    const por = {}; (doc.registros || []).forEach(r => { por[dg(r.processo)] = r; });
+    const lista = mod => require(mod).base().then(B => new Set((Array.isArray(B) ? B : (B && B.lista) || []).map(x => dg(x.cnj)))).catch(() => new Set());
+    const [sM, sS, sX] = await Promise.all([lista('./_metas'), lista('./_sobr'), lista('./_sens')]);
+    const linhas = v => String(v || '').split(/\n+/).map(x => x.trim()).filter(x => x && !/^✓/.test(x));
+    const out = {};
+    K.forEach(k => {
+      const r = por[k] || {}, f = (FT && FT[k]) || {}, t = r.triagem || {}, p = r.producao || {}, c = r.controles || {};
+      out[k] = {
+        servidor: p.SERVIDOR || '', corretor: p.CORRETOR || '', destino: p.Destino || '', tipoAto: p['Mono - Tipo de ato'] || '',
+        triado: t['Destino - Confirmado em'] || '', minutado: p.MINUTADO || '', corrigido: p.CORRIGIDO === 'Sim' || !!p['Data da Revisão'],
+        liberado: p.LIBERADO === 'Sim' || (p.Destino !== 'Monocrática' && !!p['Data da Liberação']), enviado: p.Destino === 'Monocrática' && !!p['Data da Liberação'], assinado: p.Assinado === 'Sim' || !!p['Data da Assinatura'],
+        urg: t['Urgência'] || '', urgNivel: t['Urgência - Nível'] || '', urgData: t['Urgência - Data'] || '', urgApr: t['Urgência - Apreciação'] || '', urgAprEm: t['Urgência - Apreciada em'] || '',
+        pend: linhas(t['O que falta sanar']), ic: linhas(t['Intercorrências']),
+        etqSug: t['Etiquetas sugeridas'] || '', etqGab: t['Etiquetas'] || '', tipoJ: t['Tipo de Julgamento'] || '', tempest: t.Tempestividade || '',
+        meta: sM.has(k) || !!t.META, sobr: sS.has(k), sens: (sX.has(k) || c['Sensível - Incluído'] === 'Sim') && c['Sensível - Excluído'] !== 'Sim',
+        tarefa: f.tarefa_atual || '', desde: f.data_entrada_tarefa || '', etqPje: f['Etiquetas Originais'] || '', assunto: f.Assunto || '',
+        classe: f.classe_judicial || f.Classe || '', prioridade: f.prioridade || '', mpf: f.mpf || '', registrado: !!por[k],
+        preparo: t.Preparo || '', repres: t['Representação'] || '', mpfSit: t.MPF || '', custos: t['MPF - Custos Legis'] || ''
+      };
+    });
+    return res.status(200).json({ resumos: out, em: agora() });
+  } catch (e) { return res.status(500).json({ erro: e.message }); }
+}
+module.exports.resumos = resumos;
+/* catálogo de etiquetas do gabinete (padrao/etiquetas-gabinete.json): GET para a equipe; POST só o gestor
+   GET  /api/pauta?etiquetas=1            → { catalogo, gestor }
+   POST /api/pauta?etiquetas=1 {etiquetas} → grava o catálogo */
+const CAT = 'padrao/etiquetas-gabinete.json';
+async function etiquetasGab(req, res, u) {
+  try {
+    if (req.method === 'GET') { const { dados } = await L.lerJson(CAT).catch(() => ({ dados: { etiquetas: [] } })); return res.status(200).json({ catalogo: dados, gestor: L.gestor(u) }); }
+    if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
+    if (!L.gestor(u)) return res.status(403).json({ erro: 'Só o gestor edita o catálogo de etiquetas.' });
+    const E = (req.body || {}).etiquetas;
+    if (!Array.isArray(E) || E.length > 200) return res.status(400).json({ erro: 'catálogo inválido' });
+    const OPS = new Set(['tem', 'vazio', 'igual', 'contem', 're', 'maior']);
+    const limpo = E.map(e => ({ nome: String(e.nome || '').trim().slice(0, 60), cor: /^#[0-9a-f]{3,8}$/i.test(e.cor || '') ? e.cor : '', descricao: String(e.descricao || '').slice(0, 300),
+      quando: (Array.isArray(e.quando) ? e.quando : []).slice(0, 6).map(q => ({ campo: String(q.campo || '').slice(0, 40), op: OPS.has(q.op) ? q.op : 'tem', valor: String(q.valor == null ? '' : q.valor).slice(0, 200) })).filter(q => q.campo) }))
+      .filter(e => e.nome);
+    const atual = await L.lerJson(CAT).catch(() => null);
+    const dados = Object.assign({}, atual ? atual.dados : { schema: 'gabcmt.etiquetas-gabinete', versao: 1 }, { etiquetas: limpo, atualizadoEm: agora().slice(0, 10), atualizadoPor: u });
+    await L.gravarJson(CAT, dados, atual ? atual.sha : undefined, 'Etiquetas do gabinete (' + u + '): ' + limpo.length + ' etiqueta(s)');
+    return res.status(200).json({ ok: true, catalogo: dados });
+  } catch (e) { return res.status(500).json({ erro: e.message }); }
+}
+module.exports.etiquetasGab = etiquetasGab;
 module.exports.espelho = espelho;
 module.exports.gravar = gravar;
 module.exports.paraCtl = paraCtl;

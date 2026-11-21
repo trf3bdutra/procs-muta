@@ -172,3 +172,33 @@ test('extensão 0.18.1: gabinete.js define N() (o cartão compara o tipo de julg
   const gab = read('extensao/gabinete.js');
   assert.match(gab, /\nfunction N\(v\) \{/);
 });
+
+test('extensão 0.19: catálogo de etiquetas do gabinete, regras avaliadas e rotas do site', () => {
+  const man = JSON.parse(read('extensao/manifest.json'));
+  assert.ok(man.permissions.includes('notifications'), 'permissão de notificações');
+  assert.deepEqual(man.content_scripts[0].js.slice(0, 2), ['etiquetas.js', 'conteudo-pje.js'], 'etiquetas.js antes do leitor');
+  assert.match(read('extensao/fundo.js'), /importScripts\('etiquetas\.js'\)/);
+  const ordem = [...read('extensao/painel.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
+  assert.ok(ordem.indexOf('sessao.js') < ordem.indexOf('etiquetas.js') && ordem.indexOf('etiquetas.js') < ordem.indexOf('alertas.js') && ordem.indexOf('alertas.js') < ordem.indexOf('gabinete.js'), 'ordem do painel');
+  const cat = JSON.parse(read('padrao/etiquetas-gabinete.json'));
+  assert.ok(Array.isArray(cat.etiquetas) && cat.etiquetas.length > 0);
+  const ctx = { self: {} }; vm.createContext(ctx); vm.runInContext(read('extensao/etiquetas.js'), ctx);
+  const E = ctx.self.MutaEtiquetas, campos = E.CAMPOS.map(c => c[0]), ops = E.OPS.map(o => o[0]);
+  cat.etiquetas.forEach(e => { assert.ok(e.nome, 'nome'); (e.quando || []).forEach(q => { assert.ok(campos.includes(q.campo), e.nome + ': campo ' + q.campo); assert.ok(ops.includes(q.op), e.nome + ': op ' + q.op); if (q.op === 're') new RegExp(q.valor, 'i'); }); });
+  const nomes = r => E.devidas(r, cat).map(e => e.nome);
+  assert.ok(nomes({ urg: 'Tutela', urgApr: '' }).includes('LIMINAR PENDENTE'));
+  assert.ok(!nomes({ urg: 'Tutela', urgApr: 'Apreciada · deferida' }).includes('LIMINAR PENDENTE'));
+  assert.ok(nomes({ ic: ['falta procuração'] }).includes('INTERCORRÊNCIA'));
+  assert.ok(nomes({ destino: 'Monocrática' }).includes('MONOCRÁTICA TERMINATIVA'));
+  assert.ok(!E.faltando({ meta: true, etqPje: 'Meta' }, cat, '').some(e => e.nome === 'META'), 'etiqueta já presente não falta');
+  assert.equal(E.etapa({ registrado: true, servidor: 'X', minutado: '2026-11-01' }), 'Para correção');
+  assert.ok(E.alertas({ ic: ['x'] }).some(a => a.k === 'ic' && a.nivel === 'al'));
+  const pauta = read('apoio/ex-officio/api/pauta.js'), ficha = read('apoio/ex-officio/api/_ficha.js');
+  assert.match(pauta, /req\.query\.fichas\) return FICHA\.resumos/); assert.match(pauta, /req\.query\.etiquetas\) return FICHA\.etiquetasGab/);
+  assert.match(ficha, /module\.exports\.resumos/); assert.match(ficha, /module\.exports\.etiquetasGab/);
+});
+
+test('extensão 0.19: selos da lista não pedem em laço o que o servidor não devolve', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /ENR\.pedidos\[k\] = agora/); assert.match(c, /agora - ENR\.pedidos\[k\] > 120e3/);
+});
