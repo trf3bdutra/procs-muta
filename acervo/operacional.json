@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T02:08:36.346Z",
+ "atualizado_em": "2026-11-21T02:08:43.714Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -283366,7 +283366,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:34:31.451Z",
+    "atualizado_em": "2026-11-21T02:08:43.714Z",
     "Origem - Juízo": "1ª Vara Federal de Três Lagoas"
    },
    "triagem": {
@@ -283384,7 +283384,7 @@
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
     "Tempestividade": "Tempestivo",
-    "Preparo": "Não verificado",
+    "Preparo": "Não Verificado",
     "AJG": "",
     "DPU (controle)": "",
     "Representação": "Regular",
@@ -283394,26 +283394,27 @@
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Mandado de segurança",
-    "MPF - Custos Legis": "",
+    "MPF": "Sem Parecer",
+    "MPF - Custos Legis": "Sim",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Multas e demais Sanções",
+    "Tema": "Administrativo · ANTT · multas pelo piso mínimo do frete rodoviário (Lei 13.703/2018) · sobrestamento pela ADI 5956",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Sem preliminares",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "2ª Seção, Apresentar Contraminuta",
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "Mandado de segurança · Sobrestamento e liminar negada na origem · Tutela recursal pendente desde 13/05/2026 · Redistribuído pela criação da Turma Regional · Autos de infração de 2025"
+    "Especificidades": "Mandado de segurança · Sobrestamento e liminar negada na origem · Tutela recursal pendente desde 13/05/2026 · Redistribuído pela criação da Turma Regional · Autos de infração de 2025",
+    "Síntese Fática": "Transportadora autuada pela ANTT por descumprimento da política de pisos mínimos do frete rodoviário impetrou mandado de segurança para impedir a cobrança das multas (CADIN, dívida ativa, execução fiscal). O juízo sobrestou o processo até o julgamento da ADI 5956 e não concedeu a liminar."
    },
    "producao": {
     "Destino": "",
@@ -283452,7 +283453,8 @@
     "Lote - Observação": "Agravo de instrumento de transportadora contra decisão que sobrestou mandado de segurança sobre multas da ANTT pelo piso mínimo do frete (ADI 5956) e negou a liminar. Pedido de tutela recursal pendente desde a redistribuição, em 13/05/2026.",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5000907-69.2017.4.03.0000 (3ª Turma, 03/05/2017)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -283462,7 +283464,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5012667-97.2026.4.03.0000",
