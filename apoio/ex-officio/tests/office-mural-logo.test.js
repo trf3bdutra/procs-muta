@@ -179,3 +179,9 @@ test('Monocráticas: fila de urgências aberta na coluna da esquerda, em cartõe
   assert.match(h, /#urg\.urg-col \.pc\.ux\.aberto \.ux-b\{display:grid!important/);
   assert.match(h, /#urg\.urg-col:not\(\.nova\) \.urg-n\{display:none!important\}/);
 });
+
+test('Fila de urgências sem os botões "Comunicar o desembargador" (aviso automático na chegada e na assinatura)', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(!h.includes('<button data-uq-com="') && !h.includes('data-uq-com-todas aria-label'));
+});
