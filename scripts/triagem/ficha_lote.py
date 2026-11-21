@@ -15,6 +15,8 @@ Uso: python3 scripts/triagem/ficha_lote.py [lote ...]   (padrão: adp-ai, adp-re
 import datetime, glob, gzip, json, os, re, sys
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.join(RAIZ, 'scripts'))
+import vocabulario as VOC  # noqa: E402
 OP = os.path.join(RAIZ, 'acervo/operacional.json')
 dg = lambda s: re.sub(r'\D', '', s or '')
 vazio = lambda v: v is None or v == '' or v == [] or v == {}
@@ -148,6 +150,18 @@ def main(lotes):
             if te.get('parecer') and not re.match(r'N[ãa]o consta', te['parecer']):
                 fp(t, 'MPF - Info adicional', te['parecer'])
             fp(t, 'Síntese Fática', c.get('sintese') or te.get('sintese_fatica')); fp(t, 'Alegações', c.get('questoes'))
+            # prontuário de triagem (controles do lote), no vocabulário único, só quando vazios
+            PL = PR.get('ctl') or {}
+            for k, v in [('Tempestividade', VOC.norm('tempest', PL.get('tempest'))), ('Preparo', VOC.norm('preparo', PL.get('preparo'))),
+                         ('Representação', VOC.norm('repres', PL.get('repres'))), ('Prelim.', VOC.norm('prelim', PL.get('prelim'))),
+                         ('Mídias', VOC.norm('midias', PL.get('midias'))), ('MPF - Custos Legis', VOC.norm('mpf', PL.get('mpf'))),
+                         ('MPF', VOC.norm('parecer', PL.get('parecer'))), ('Tipo de Julgamento', c.get('tipoJ')), ('Urgência', PL.get('urgTipo')),
+                         ('Urgência - Apreciação', PL.get('urgSit')), ('Observação da Representação', PL.get('obsRepres')), ('AJG', PL.get('ajg')),
+                         ('Descrição da Preliminar', PL.get('descPrelim')), ('ID do Parecer MPF', PL.get('idParecer')), ('Parecer - Sentido', PL.get('parecerSentido'))]:
+                fp(t, k, v)
+            if it.get('tipo_caso') and (vazio(t.get('Tema')) or t.get('Tema') == it.get('assunto')):
+                t['Tema'] = it['tipo_caso']
+            fp(r.setdefault('producao', {}), 'Mono - Fundamento', PL.get('fundamento'))
             if json.dumps(r, ensure_ascii=False, sort_keys=True) != antes:
                 t['Registro - Atualizado em'] = agora[:10]
                 o['atualizado_em'] = agora

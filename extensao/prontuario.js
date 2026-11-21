@@ -166,14 +166,15 @@ function wireTabs(tabs,onSelect){
   });
 }
 function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;});}
-var mainTabs=[$('tab-pront'),$('tab-acervo'),$('tab-lote'),$('tab-cmp'),$('tab-conf'),$('tab-ajuda')];
-var NOMES=['pront','ementario','lote','cmp','conf','ajuda'];
+var mainTabs=[$('tab-pront'),$('tab-tri'),$('tab-acervo'),$('tab-lote'),$('tab-cmp'),$('tab-conf'),$('tab-ajuda')];
+var NOMES=['pront','tri','ementario','lote','cmp','conf','ajuda'];
 function abrirAba(i){
-  selectTab(mainTabs,i);
-  if(i===1&&window.MutaEmentario)window.MutaEmentario.abrir();
-  if(i===2&&window.MutaLote)window.MutaLote.abrir();
-  if(i===3&&window.MutaComparar)window.MutaComparar.abrir();
-  if(i===4&&window.MutaConformidade)window.MutaConformidade.abrir();
+  selectTab(mainTabs,i);var n=NOMES[i];
+  if(n==='tri'&&window.MutaTriagem)window.MutaTriagem.abrir();
+  if(n==='ementario'&&window.MutaEmentario)window.MutaEmentario.abrir();
+  if(n==='lote'&&window.MutaLote)window.MutaLote.abrir();
+  if(n==='cmp'&&window.MutaComparar)window.MutaComparar.abrir();
+  if(n==='conf'&&window.MutaConformidade)window.MutaConformidade.abrir();
 }
 wireTabs(mainTabs,function(i){abrirAba(i);});
 window.MutaAbas={ir:function(nome){var i=NOMES.indexOf(nome);if(i>=0)abrirAba(i);}};

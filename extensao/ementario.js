@@ -352,8 +352,16 @@ function julgado(id) {
     });
   });
 }
+/* para a aba Comparar (fonte Triagem): os julgados do índice com este número de processo (mais recentes primeiro) */
+function porNumero(numero) {
+  var d = dig(numero);
+  return carregar().then(function () {
+    return B.idx.filter(function (x) { return dig(x.n) === d; }).sort(function (a, b) { return String(b.d).localeCompare(String(a.d)); })
+      .map(function (x) { return { id: x.id, rotulo: [x.cl || x.c, x.n].filter(Boolean).join(' ') + (x.d ? ', ' + (x.t === 'M' ? 'decidido' : 'julgado') + ' em ' + fmtData(x.d) : '') }; });
+  });
+}
 window.MutaEmentario = {
-  julgado: julgado,
+  julgado: julgado, porNumero: porNumero,
   abrir: function () { return carregar(); },
   atualizar: function () { if (B.ok) { var s = V.shown; render(); while (V.shown < s && V.shown < V.res.length) mais(); } },
   buscarNumero: function (n) { $('acv-q').value = n; $('acv-modo').value = 'idx'; V.sel = null; carregar().then(buscar); }

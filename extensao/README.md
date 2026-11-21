@@ -3,13 +3,19 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
-## O que faz (0.8)
+## O que faz (0.9)
 
 O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo em todas as abas. Ele lê tanto os autos digitais
 (número no título) quanto o painel de tarefas do PJe, que é carregado num quadro de `frontend-pje.app.trf3.jus.br`
 (número no cabeçalho da tarefa, “ApCiv 5001289-76.2023.4.03.6006 - [Sessão] Aguardando a sessão”).
 "Acompanhar o PJe" desligado congela o processo aberto; a lista no topo reabre qualquer prontuário salvo.
 
+- **Triagem (0.9).** O prontuário de triagem do processo aberto no PJe, o mesmo do Caput · Triagem, lido da ficha única
+  (`GET /api/pauta?ficha=<CNJ>`): admissibilidade, MPF e urgência, matéria e gestão, providências (editáveis; grava só o que
+  mudou, por `POST /api/pauta?ficha=1`) e o registro da triagem do lote (grupo e modelo da matriz, proposta com o precedente,
+  situação atual, caso, peças e teor dos autos com nota e trecho). Etiquetas sugeridas para o PJe, nas regras do Caput, com
+  as que o processo já tem; um clique inclui no campo "Etiquetas sugeridas" e "Copiar" leva ao PJe. Botões para comparar o
+  editor com a triagem e para transferir o texto do PJe ao Collectio. Código em `triagem.js`.
 - **Prontuário completo, no GitHub.** O prontuário de cada processo fica em `acervo/prontuarios/<20 dígitos>.json` e se
   alimenta, nos dois sentidos, da ficha do processo (`acervo/operacional.json`) e do cartão da pauta (`acervo/sessoes/*.json`,
   o prontuário da Ex Officio e da LIA). Ao abrir o processo, o que a equipe registrou entra no prontuário (preenche o vazio;
@@ -20,7 +26,8 @@ O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo e
   `CART` (cartão) em `sincronia.js`.
 - **Ficha do gabinete.** A ficha única do processo da Ex Officio (`padrao/ficha.json` → `acervo/operacional.json`), com o login
   da equipe (cookie `cmt_eq`), gravada por `POST /api/pauta?ficha=1`.
-- **Comparar.** O texto do editor da minuta no PJe (ou colado) contra: a minuta do lote (Collectio); os modelos do banco
+- **Comparar.** O texto do editor da minuta no PJe (ou colado) contra: a triagem do processo (proposta, grupo e modelo da
+  matriz e os precedentes citados, abertos pelo Ementário pelo número); a minuta do lote (Collectio); os modelos do banco
   (sugeridos pela semelhança); as minutas-matriz por recurso e resultado; a matriz modular e os acórdãos-modelo do 28,86%;
   os parágrafos-padrão; os precedentes do Ementário (vinculados ao prontuário ou pelo botão “Comparar com o editor”); ou
   texto colado. Parágrafos alinhados por LCS e pareados pela semelhança; palavra a palavra dentro do par. Trechos a preencher
@@ -33,6 +40,9 @@ O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo e
   fora das regras de redação. Com “Conformidade ativa”, relê o editor a cada 4 segundos e refaz a análise quando o texto
   muda; o número de alertas altos e médios aparece na aba. Motor em `conformidade-motor.js` (função pura, com testes).
 - **Lote.** A minuta do processo nos lotes do Amicus Curiae · Collectio, com o perfil do processo e a comparação de sempre.
+  **Transferir o texto do PJe para o Collectio (0.9):** lê o editor da tarefa de minuta, separa relatório, voto, ementa e
+  acórdão pelos títulos e grava como nova versão da minuta do processo no lote (`POST /api/painel?lote=1 {acao:'minuta-versao'}`),
+  vigente ou só guardada; as versões anteriores ficam no Collectio. Pede confirmação e confere se o editor é do mesmo processo.
 - **Ementário do Compêndio.** Busca nos precedentes curados e na série histórica do Relator (sintaxe do Compêndio).
 - **Só leitura no PJe.** O `conteudo-pje.js` lê o número do processo e, a pedido do painel, o texto do editor (parágrafos,
   classe, recuo, negrito e itálico). Não clica, não grava e não envia nada ao tribunal.
@@ -57,7 +67,8 @@ prontuario.js      estado e gravação do prontuário, por processo (localStorag
 ficha.js           rascunho pessoal: ficha completa (análise guiada, julgamento, ciclo da minuta)
 sessao.js          login do Ex Officio (/api/login) e chamadas à API do site
 gabinete.js        ficha do gabinete (Ex Officio) e correspondência rascunho ↔ ficha
-lote.js            aba Lote (Amicus Curiae · Index)
+lote.js            aba Lote (Amicus Curiae · Index) e transferência do texto do PJe ao Collectio
+triagem.js         aba Triagem (prontuário de triagem da ficha, registro do lote, etiquetas sugeridas)
 ementario.js       busca no Ementário do Compêndio
 pje.js             painel acompanha o processo da aba ativa
 icones/            ícones 16, 32, 48 e 128

@@ -173,6 +173,7 @@ function render() {
     '<div class="bar"><a class="btn line" target="_blank" rel="noopener noreferrer" href="' + SITE + '/amicus/collectio/?id=' + encodeURIComponent(l.id) + '#p=' + encodeURIComponent(it.sessao + '-' + it.item) + '">Abrir no Collectio</a><button type="button" class="btn line" data-atu>Atualizar</button></div>' +
     '</article>' +
     '<section class="card lt-cmp" id="lt-cmp"></section>' +
+    txHtml(l, it) +
     '<section class="card lt-min" id="lt-min"><div class="empty">Abrindo a minuta do lote…</div></section>' +
     '<details class="card lt-perfil"><summary><h3 class="display">Perfil do processo no lote</h3></summary>' +
     campo('Resultado', it.resultado) + campo('Modelo', it.modelo) +
@@ -187,6 +188,58 @@ function render() {
   caixa.innerHTML = h;
   desenhaCmp();
   minuta(l.id, it);
+}
+/* ---------- transferir o texto do editor do PJe para o Collectio (nova versão da minuta do processo no lote) ---------- */
+var TX = { rotulo: '', vigente: true, prev: null, enviando: false, msg: '', erro: '' };
+function hojeBr() { var d = new Date(); return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + d.getFullYear(); }
+function secoesEditor() {
+  var E = window.MutaEditor ? window.MutaEditor.estado() : null, CX = window.MutaComparador;
+  if (!E || !E.texto || !CX) return null;
+  var P = CX.partes(E.paragrafos || []), o = {};
+  if (!P.achou) return { erro: 'Não achei no editor os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO (um por linha). Sem eles, o Collectio não separa as partes.' };
+  SECS.forEach(function (s) { o[s[0]] = (P[s[0]] || []).map(function (p) { return String(p.t || '').trim(); }).filter(Boolean); });
+  return { secoes: o, fonte: E.fonte || 'editor do PJe', numero: E.numero || '' };
+}
+function txHtml(l, it) {
+  var u = (ses.estado() || {}).usuario || '';
+  if (!TX.rotulo) TX.rotulo = 'Texto do PJe · ' + (u ? u + ' · ' : '') + hojeBr();
+  var p = TX.prev;
+  return '<section class="card lt-tx" id="lt-tx"><p class="kicker">Transferir o texto do PJe para o Collectio</p>' +
+    '<p class="muted">Lê a minuta do editor do PJe (tarefa de minuta), separa relatório, voto, ementa e acórdão pelos títulos e grava como nova versão da minuta deste processo no lote <b>' + esc(l.titulo) + '</b>. As versões anteriores ficam guardadas no Collectio.</p>' +
+    '<label class="lt-tx-f">Nome da versão <input type="text" data-tx="rotulo" maxlength="80" value="' + esc(TX.rotulo) + '"></label>' +
+    '<label class="lt-tx-c"><input type="checkbox" data-tx="vigente"' + (TX.vigente ? ' checked' : '') + '> Tornar vigente (é a versão que o Collectio e o Relator veem); desmarcado, só guarda</label>' +
+    (p && p.secoes ? '<p class="muted lt-tx-p">Lido agora' + (p.numero ? ' nos autos ' + esc(p.numero) : '') + ': ' + SECS.map(function (s) { return s[1] + ' ' + p.secoes[s[0]].length + ' §'; }).join(' · ') + '</p>' : '') +
+    (p && p.erro ? '<p class="status err">' + esc(p.erro) + '</p>' : '') +
+    (TX.erro ? '<p class="status err">' + esc(TX.erro) + '</p>' : '') + (TX.msg ? '<p class="status ok">' + esc(TX.msg) + '</p>' : '') +
+    '<div class="bar"><button type="button" class="btn line" data-tx="ler">Ler o editor</button><button type="button" class="btn solid" data-tx="enviar"' + (TX.enviando ? ' disabled' : '') + '>' + (TX.enviando ? 'Transferindo…' : 'Transferir para o Collectio') + '</button></div></section>';
+}
+function txRedesenha() { var a = V.achados[V.sel], box = $('lt-tx'); if (!a || !box) return; var d = document.createElement('div'); d.innerHTML = txHtml(a.lote, a.it); box.replaceWith(d.firstChild); }
+function txLer() {
+  TX.erro = ''; TX.msg = '';
+  return (window.MutaEditor ? window.MutaEditor.ler() : Promise.reject(new Error('Editor indisponível.'))).then(function () { TX.prev = secoesEditor(); txRedesenha(); return TX.prev; },
+    function (e) { TX.prev = null; TX.erro = 'Não li o editor do PJe: ' + e.message + '. Abra a tarefa de minuta com o texto no editor.'; txRedesenha(); return null; });
+}
+function txEnviar() {
+  var a = V.achados[V.sel]; if (!a) return;
+  txLer().then(function (p) {
+    if (!p || p.erro || !p.secoes) return;
+    if (p.numero && String(p.numero).replace(/\D/g, '') !== V.chave) { TX.erro = 'O editor lido está nos autos ' + p.numero + ', não neste processo.'; txRedesenha(); return; }
+    var n = SECS.reduce(function (t, s) { return t + p.secoes[s[0]].length; }, 0);
+    if (!n) { TX.erro = 'O editor está vazio.'; txRedesenha(); return; }
+    var msg = 'Gravar o texto do editor (' + SECS.map(function (s) { return s[1].toLowerCase() + ' ' + p.secoes[s[0]].length + ' §'; }).join(', ') + ') como nova versão "' + TX.rotulo + '" da minuta de ' + a.it.processo + ' no lote ' + a.lote.titulo + (TX.vigente ? ', vigente' : ', só guardada') + '?';
+    var conf = Muta.confirmar ? Muta.confirmar(msg, 'Transferir') : Promise.resolve(window.confirm(msg));
+    return Promise.resolve(conf).then(function (ok) {
+      if (!ok) return;
+      TX.enviando = true; TX.erro = ''; txRedesenha();
+      return ses.api('/api/painel?lote=1', { method: 'POST', body: JSON.stringify({ acao: 'minuta-versao', id: a.lote.id, processo: a.it.processo, rotulo: TX.rotulo.trim() || 'Texto do PJe',
+        origem: 'Editor do PJe (' + p.fonte + ') · transferido pela extensão Muta em ' + hojeBr(), secoes: p.secoes, vigente: !!TX.vigente }) })
+        .then(function (j) {
+          TX.enviando = false; TX.msg = 'Gravado no Collectio: versão ' + ((j.versoes || []).slice(-1)[0] || {}).id + (j.trocouVigente ? ', vigente.' : ', guardada.'); TX.rotulo = '';
+          var k = a.lote.id + '/' + String(a.it.processo).slice(0, 10); if (j.minuta) V.minuta[k] = j.minuta; else delete V.minuta[k];
+          a.it.minuta = true; render();
+        }, function (e) { TX.enviando = false; TX.erro = e.status === 401 ? 'Entre no Ex Officio para transferir.' : 'Não foi possível transferir: ' + e.message; txRedesenha(); });
+    });
+  });
 }
 function minuta(id, it) {
   var mx = String(it.processo).slice(0, 10), chave = id + '/' + mx;
@@ -212,15 +265,19 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.i != null) { V.sel = +b.dataset.i; render(); return; }
   if (b.hasAttribute('data-atu')) { V.minuta = {}; atualizar(true); return; }
   if (b.dataset.cp === 'ler') { lerEditor(); return; }
+  if (b.dataset.tx === 'ler') { txLer(); return; }
+  if (b.dataset.tx === 'enviar') { txEnviar(); return; }
   if (b.dataset.copia) { copiar(b.dataset.copia, b); return; }
   if (b.dataset.copsec) { e.preventDefault(); var m = minutaAtual(); if (m && m.secoes) copiar(textoSec(m.secoes[b.dataset.copsec]), b); return; }
 });
 caixa.addEventListener('change', function (e) {
+  if (e.target.dataset && e.target.dataset.tx === 'vigente') { TX.vigente = e.target.checked; return; }
   var t = e.target, k = t.dataset && t.dataset.cp; if (!k) return;
   if (k === 'sec') CP.sec = t.value; else if (k === 'ws') CP.ws = t.checked; else if (k === 'sd') CP.sd = t.checked; else return;
   var m = minutaAtual(); if (m && m.secoes) comparar(m);
 });
 caixa.addEventListener('input', function (e) {
+  if (e.target.dataset && e.target.dataset.tx === 'rotulo') { TX.rotulo = e.target.value; return; }
   var t = e.target; if (!t.dataset || t.dataset.cp !== 'txt') return;
   clearTimeout(tCol); tCol = setTimeout(function () { CP.texto = t.value; CP.colado = !!t.value.trim(); CP.erro = ''; CP.fonte = ''; var m = minutaAtual(); if (m && m.secoes) comparar(m); var f = caixa.querySelector('.cp-fonte'); if (f) f.remove(); }, 350);
 });
@@ -239,5 +296,5 @@ function minutasDoProcesso(chave) {
     }));
   });
 }
-window.MutaLote = { abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
+window.MutaLote = { transferir: function () { if (window.MutaAbas) window.MutaAbas.ir('lote'); setTimeout(function () { var x = $('lt-tx'); if (x) x.scrollIntoView({ block: 'start' }); }, 400); }, abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
 })();

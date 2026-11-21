@@ -13,9 +13,9 @@
 var $ = function (id) { return document.getElementById(id); };
 var CX = window.MutaComparador, FT = window.MutaFontes, ED = window.MutaEditor, br = window.MutaProntuarioBridge, esc = CX.esc;
 var caixa = $('cmp-app');
-var FONTES = [['lote', 'Lote'], ['modelo', 'Modelos'], ['matriz', 'Minuta-matriz'], ['m2886', '28,86%'], ['par', 'Parágrafos-padrão'], ['ement', 'Ementário'], ['colar', 'Texto colado']];
+var FONTES = [['tri', 'Triagem'], ['lote', 'Lote'], ['modelo', 'Modelos'], ['matriz', 'Minuta-matriz'], ['m2886', '28,86%'], ['par', 'Parágrafos-padrão'], ['ement', 'Ementário'], ['colar', 'Texto colado']];
 var PARTES = [['tudo', 'Tudo'], ['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
-var C = { fonte: 'lote', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, dados: null, dadosErro: '', ranking: null, rankTxt: '' };
+var C = { fonte: 'lote', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
 try { var g = JSON.parse(localStorage.getItem('muta-pje:comparar') || '{}'); ['fonte', 'parteEd', 'ws', 'sd'].forEach(function (k) { if (g[k] != null) C[k] = g[k]; }); } catch (e) {}
 function guarda() { try { localStorage.setItem('muta-pje:comparar', JSON.stringify({ fonte: C.fonte, parteEd: C.parteEd, ws: C.ws, sd: C.sd })); } catch (e) {} }
 function aberta() { var p = $('panel-cmp'); return p && !p.hidden; }
@@ -52,6 +52,29 @@ function lotes() {
   C.loteErro = '';
   return window.MutaLote.minutasDoProcesso(k).then(function (L) { C.lotes = L; C.loteChave = k; return L; }, function (e) { C.loteErro = e.message; C.lotes = []; C.loteChave = k; return []; });
 }
+/* fonte Triagem: proposta, modelo e precedentes citados no registro da triagem (ficha do processo) */
+function triagem() {
+  var k = chave();
+  if (!k) return Promise.resolve([]);
+  if (C.tri && C.triChave === k) return Promise.resolve(C.tri);
+  if (!window.MutaTriagem) { C.triErro = 'Aba Triagem indisponível.'; C.tri = []; return Promise.resolve([]); }
+  if (window.MutaSessao.estado().estado !== 'on') { C.triErro = 'Entre no Ex Officio para ler a triagem.'; C.tri = []; C.triChave = k; return Promise.resolve([]); }
+  C.triErro = ''; C.tri = null;
+  return window.MutaTriagem.garantir().then(function () {
+    var D = window.MutaTriagem.dados(), L = [];
+    if (D.proposta) L.push({ id: 'p', rotulo: 'Proposta da triagem', sub: 'ato a proferir e proposta pelos precedentes', secoes: [{ t: 'Proposta', ps: FT.porLinhas(D.proposta.replace(/\s*‖\s*/g, '\n').replace(/\s*\[VALIDAR: [^\]]+\]/g, '')) }] });
+    if (D.modelo || D.grupo) L.push({ id: 'g', rotulo: 'Grupo e modelo da matriz', sub: 'resultado e modelo do grupo da triagem', secoes: [{ t: 'Grupo', ps: FT.porLinhas([D.grupo, D.modelo].filter(Boolean).join('\n')) }] });
+    var E = window.MutaEmentario;
+    if (!D.precedentes.length || !E || !E.porNumero) { C.tri = L; C.triChave = k; return L; }
+    return Promise.all(D.precedentes.map(function (n) { return E.porNumero(n).catch(function () { return []; }); })).then(function (R) {
+      R.forEach(function (lst, i) {
+        if (!lst.length) L.push({ id: 'x:' + D.precedentes[i], rotulo: 'Precedente ' + D.precedentes[i], sub: 'citado na triagem; não está no Ementário', secoes: [] });
+        lst.slice(0, 3).forEach(function (j) { L.push({ id: 'e:' + j.id, ement: j.id, rotulo: j.rotulo, sub: 'precedente citado na triagem · Ementário' }); });
+      });
+      C.tri = L; C.triChave = k; return L;
+    });
+  }).catch(function (e) { C.triErro = 'Não li a triagem: ' + e.message; C.tri = []; C.triChave = k; return []; });
+}
 /* semelhança de cada candidato com o editor (para sugerir e ordenar) */
 function textoItem(it) { return (it.secoes || []).map(function (s) { return (s.ps || []).join(' '); }).join(' '); }
 function ranquear(lista) {
@@ -70,6 +93,7 @@ function itemAtual() {
   if (C.fonte === 'lote') return (C.lotes || []).filter(function (x) { return x.id === s; })[0] || (C.lotes || [])[0] || null;
   if (C.fonte === 'colar') return C.ref.trim() ? { rotulo: 'Texto colado', secoes: [{ t: 'Texto colado', ps: FT.porLinhas(C.ref) }] } : null;
   if (C.fonte === 'ement') { var e = C.ement[s]; return e && !e.erro ? e : null; }
+  if (C.fonte === 'tri') { var L = (C.tri || []), x = L.filter(function (y) { return y.id === s; })[0] || L[0]; if (x && x.ement) { var j = C.ement[x.ement]; return j && !j.erro && j.secoes && j.secoes.length ? j : null; } return x || null; }
   if (!d) return null;
   if (C.fonte === 'modelo') return d.modelos.filter(function (x) { return x.id === s; })[0] || null;
   if (C.fonte === 'matriz') return d.matrizes.filter(function (x) { return x.id === s; })[0] || null;
@@ -94,6 +118,16 @@ function seletor() {
     if (C.loteErro) return '<p class="status err">' + esc(C.loteErro) + '</p>';
     if (!C.lotes.length) return '<p class="muted">' + esc(Muta.formatarCnj(chave())) + ' não está em nenhum lote visível à equipe.</p>';
     return itens(C.lotes, function (x) { return x.rotulo; }, function (x) { return x.erro || (x.atualizado ? 'minuta de ' + x.atualizado.slice(0, 10).split('-').reverse().join('/') : 'minuta do lote'); }, function (x) { return x.id; }, s || C.lotes[0].id);
+  }
+  if (C.fonte === 'tri') {
+    if (!chave()) return '<p class="muted">Abra os autos no PJe para comparar com a triagem do processo.</p>';
+    if (C.tri == null) return '<p class="muted">Lendo a triagem do processo…</p>';
+    if (C.triErro) return '<p class="status err">' + esc(C.triErro) + '</p>';
+    if (!C.tri.length) return '<div class="empty">Sem proposta, modelo ou precedente registrados na triagem deste processo.</div>';
+    var s0 = s || C.tri[0].id;
+    return '<p class="muted">Da triagem do processo (Caput): a proposta, o modelo do grupo e os precedentes citados, abertos pelo Ementário.</p>' +
+      itens(C.tri, function (x) { return x.rotulo; }, function (x) { return x.sub || ''; }, function (x) { return x.id; }, s0) +
+      (s0 && /^e:/.test(s0) && C.ement[s0.slice(2)] && C.ement[s0.slice(2)].erro ? '<p class="status err">' + esc(C.ement[s0.slice(2)].erro) + '</p>' : '');
   }
   if (C.fonte === 'colar') return '<textarea class="cx-ref" data-c="ref" placeholder="Cole aqui o texto de referência (outra minuta, voto-paradigma, decisão de origem…)">' + esc(C.ref) + '</textarea>';
   if (C.fonte === 'ement') {
@@ -192,7 +226,8 @@ function render() {
   if (foco === 'q') { var q = caixa.querySelector('[data-c=q]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
 }
 function preparar() {
-  if (C.fonte === 'lote') lotes().then(render);
+  if (C.fonte === 'tri') triagem().then(render);
+  else if (C.fonte === 'lote') lotes().then(render);
   else if (C.fonte === 'modelo' || C.fonte === 'matriz' || C.fonte === 'm2886' || C.fonte === 'par') dados().then(render);
   else if (C.fonte === 'ement' && C.sel.ement && !C.ement[C.sel.ement]) carregarJulgado(C.sel.ement);
   render();
@@ -214,6 +249,7 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.s != null) {
     C.sel[C.fonte] = b.dataset.s; C.parteFonte = 'inteira';
     if (C.fonte === 'ement' && !C.ement[b.dataset.s]) { carregarJulgado(b.dataset.s); return; }
+    if (C.fonte === 'tri' && /^e:/.test(b.dataset.s) && !C.ement[b.dataset.s.slice(2)]) { carregarJulgado(b.dataset.s.slice(2)); return; }
     render(); var r = caixa.querySelector('.cx-res'); if (r) r.scrollIntoView({ block: 'start' }); return;
   }
 });
@@ -232,8 +268,9 @@ caixa.addEventListener('input', function (e) {
   }, 350);
 });
 ED.ouvir(function () { if (aberta()) render(); });
-document.addEventListener('muta:prontuario', function () { C.lotes = null; C.loteChave = ''; if (aberta()) preparar(); });
+document.addEventListener('muta:prontuario', function () { C.lotes = null; C.loteChave = ''; C.tri = null; C.triChave = ''; if (aberta()) preparar(); });
 window.MutaComparar = {
+  triagem: function () { C.fonte = 'tri'; C.tri = null; C.triChave = ''; guarda(); if (window.MutaAbas) window.MutaAbas.ir('cmp'); else window.MutaComparar.abrir(); },
   abrir: function () { preparar(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().catch(function () {}); },
   /* o Ementário manda um julgado para comparar */
   precedente: function (id) {
