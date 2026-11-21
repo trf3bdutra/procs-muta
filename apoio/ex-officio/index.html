@@ -2642,7 +2642,7 @@ function notasBloco(it){var N=notasDe(it),hr=function(v){if(!v)return '';var d=n
     (N.length?'<ul class="nt-l">'+N.map(function(n){return '<li><p>'+esc(n.tx)+'</p><small>'+(n.obs?'observação do cartão':esc([n.por,hr(n.em)].filter(Boolean).join(' · ')))+'</small><button type="button" class="nt-x" '+(n.obs?'data-nota-obs':'data-nota-x="'+n.i+'"')+' title="Excluir esta nota" aria-label="Excluir esta nota">×</button></li>';}).join('')+'</ul>':'')+
     '<div class="nt-n"><textarea id="nt-tx" rows="2" maxlength="2000" placeholder="Nova nota: síntese, observação, lembrete para quem vai revisar… (Ctrl+Enter inclui)"></textarea><button type="button" class="b pri" data-nota-add>Incluir nota</button></div></section>';}
 function notasGravar(it,arr,msg){cart(it).notas=arr;marcar(it,{cartao:{notas:arr}});var a=document.activeElement;if(a&&a.blur)a.blur();render();gravar();if(msg)toast(msg);}
-function abrirNotas(it){S.prt=dg(it.cnj);var a=document.activeElement;if(a&&a.blur)a.blur();prontLateral();
+function abrirNotas(it){if(S.fonte!=='mono'){abrirAcomp(it,'nt');return;}S.prt=dg(it.cnj);var a=document.activeElement;if(a&&a.blur)a.blur();prontLateral();
   setTimeout(function(){var b=$('#prt-nt'),t=$('#nt-tx');if(b)b.scrollIntoView({behavior:'smooth',block:'nearest'});if(t)t.focus();},60);}
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-nota-add],[data-nota-x],[data-nota-obs]');if(!t||!t.closest('#prq'))return;
   var it=lista().filter(function(i){return dg(i.cnj)===S.prt;})[0];if(!it)return;var arr=((((it.ctl||{}).cartao)||{}).notas||[]).slice();
@@ -2651,6 +2651,44 @@ document.addEventListener('click',function(e){var t=e.target.closest&&e.target.c
   if(t.hasAttribute('data-nota-obs')){it.obs='';marcar(it,{obs:''});notasGravar(it,arr,'Nota excluída.');return;}
   arr.splice(+t.getAttribute('data-nota-x'),1);notasGravar(it,arr,'Nota excluída.');});
 document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='nt-tx'&&e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();var b=document.querySelector('#prq [data-nota-add]');if(b)b.click();}});
+/* ===== Prontuário · aba Acompanhamento: sustentação/preferência, intercorrência, pendências e notas, num lugar só ===== */
+function acompAberto(it){var c=it.ctl||{};return alertas(it).length+(c.intercor&&!c.intercorOk?1:0);}
+function acompHtml(it){var c=it.ctl||{},so=c.sopref||'',PL=(((c.cartao||{}).pendencias)||[]),man=PL.filter(function(p){return p&&p.desc&&!p.ok;}).map(function(p){return p.desc;}),
+    auto=alertas(it).filter(function(a){return man.indexOf(a)<0;}),abP=man.length,icA=!!c.intercor&&!c.intercorOk;
+  var SOB=[['','Sem pedido'],['Presencial','Sustentação presencial'],['Virtual','Sustentação por vídeo'],['Preferência','Preferência']];
+  return '<div class="ac">'+
+    '<section class="ac-s" id="ac-so"><h4>Sustentação oral · preferência'+(so?'<em class="ac-st so">'+esc(SOROT[soTipo(so)])+'</em>':'')+'</h4>'+
+      '<div class="ac-seg" role="group" aria-label="Pedido de sustentação ou preferência">'+SOB.map(function(x){return '<button type="button" data-ac-so="'+x[0]+'" aria-pressed="'+(so===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>'+
+      '<div class="ped-dados" aria-live="polite"></div><small class="ac-h">Pedidos recebidos por e-mail aparecem aqui quando vinculados ao processo.</small></section>'+
+    '<section class="ac-s" id="ac-ic"><h4>Intercorrência'+(c.intercor?'<em class="ac-st '+(icA?'al':'ok')+'">'+(icA?'em aberto':'resolvida')+'</em>':'')+'</h4>'+
+      '<textarea data-ac="intercor" rows="2" maxlength="1200" placeholder="O que impede ou atrasa a liberação (deixe vazio se não houver)">'+esc(c.intercor||'')+'</textarea>'+
+      '<label class="ac-ck"><input type="checkbox" data-ac="intercorOk"'+(c.intercorOk?' checked':'')+(c.intercor?'':' disabled')+'> resolvida</label><small class="ac-h">Em aberto, a intercorrência retém a liberação do voto.</small></section>'+
+    '<section class="ac-s" id="ac-pd"><h4>Pendências'+(abP?'<em class="ac-st pd">'+abP+' em aberto</em>':'')+'</h4>'+
+      (PL.length?'<div class="ac-pls">'+PL.map(function(p,i){return '<div class="ac-pl'+(p.ok?' ok':'')+'"><input type="checkbox" data-acp-ok="'+i+'"'+(p.ok?' checked':'')+' aria-label="Pendência resolvida"><input type="text" data-acp-d="'+i+'" value="'+esc(p.desc||'')+'" maxlength="300" aria-label="Descrição da pendência"><small>'+esc([p.por,p.ok&&p.resolvidaEm?'resolvida em '+br(p.resolvidaEm).slice(0,5):p.em?br(p.em).slice(0,5):''].filter(Boolean).join(' · '))+'</small><button type="button" data-acp-x="'+i+'" aria-label="Excluir pendência" title="Excluir">×</button></div>';}).join('')+'</div>':'')+
+      '<div class="ac-add"><input type="text" id="ac-pd-n" maxlength="300" placeholder="Nova pendência: aguardar contrarrazões, intimar a parte, juntar mídia… (Enter inclui)"><button type="button" class="b" data-acp-add>Incluir</button></div>'+
+      (auto.length?'<p class="ac-h2">Alertas automáticos de admissibilidade</p><ul class="ac-al">'+auto.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul><button type="button" class="ac-lk" data-ac-aba="2">Corrigir na aba Admissibilidade ›</button>':'')+'</section>'+
+    notasBloco(it)+'</div>';}
+function acompSalvar(it,m,msg){var sc=[].map.call(document.querySelectorAll('#prq,#prq .prt-body,#prq .prt-p'),function(x){return [x,x.scrollTop];});
+  marcar(it,m);var a=document.activeElement;if(a&&a.blur&&a.closest&&a.closest('#prq'))a.blur();render();gravar();
+  [].forEach.call(document.querySelectorAll('#prq,#prq .prt-body,#prq .prt-p:not([hidden])'),function(x){var o=sc.filter(function(y){return y[0].className===x.className&&y[0].id===x.id;})[0];if(o)x.scrollTop=o[1];});if(msg)toast(msg);}
+function acompIt(){return lista().filter(function(i){return dg(i.cnj)===S.prt;})[0];}
+function abrirAcomp(it,f){S.prt=dg(it.cnj);S.prtAba=0;var a=document.activeElement;if(a&&a.blur)a.blur();prontLateral();
+  setTimeout(function(){var alvo={pri:'#ac-so',ic:'#ac-ic',al:'#ac-pd',nt:'#prt-nt'}[f]||'#ac-so',x=$('#prq '+alvo);if(!x)return;x.scrollIntoView({behavior:'smooth',block:'start'});
+    var fo={ic:'textarea',al:'#ac-pd-n',nt:'#nt-tx'}[f];var y=fo&&x.querySelector(fo);if(y)y.focus({preventScroll:true});x.classList.add('ac-flash');setTimeout(function(){x.classList.remove('ac-flash');},1200);},80);}
+function acompPend(it,PL,msg){cart(it).pendencias=PL;acompSalvar(it,{cartao:{pendencias:PL}},msg);}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-ac-so],[data-acp-add],[data-acp-x],[data-ac-aba]');if(!t||!t.closest('#prq'))return;var it=acompIt();if(!it)return;
+  if(t.hasAttribute('data-ac-aba')){var bt=$('#prq [data-prt-aba="'+t.getAttribute('data-ac-aba')+'"]');if(bt)bt.click();return;}
+  if(t.hasAttribute('data-ac-so')){var v=t.getAttribute('data-ac-so');it.ctl=it.ctl||{};if((it.ctl.sopref||'')===v)return;if(v)it.ctl.sopref=v;else delete it.ctl.sopref;acompSalvar(it,{sopref:v},v?SOROT[soTipo(v)]+' registrada.':'Pedido retirado.');return;}
+  var PL=JSON.parse(JSON.stringify((((it.ctl||{}).cartao||{}).pendencias)||[]));
+  if(t.hasAttribute('data-acp-add')){var n=$('#ac-pd-n'),tx=(n&&n.value||'').trim();if(!tx){if(n)n.focus();return;}PL.push({desc:tx,ok:false,em:hoje(),por:U.eu||''});acompPend(it,PL,'Pendência incluída.');setTimeout(function(){var x=$('#ac-pd-n');if(x)x.focus({preventScroll:true});},80);return;}
+  if(t.hasAttribute('data-acp-x')){if(!confirm('Excluir esta pendência?'))return;PL.splice(+t.getAttribute('data-acp-x'),1);acompPend(it,PL,'Pendência excluída.');}});
+document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.closest('#prq .ac'))return;var it=acompIt();if(!it)return;it.ctl=it.ctl||{};
+  if(t.getAttribute('data-ac')==='intercor'){var tx=t.value.trim();if((it.ctl.intercor||'')===tx)return;var m={intercor:tx};if(tx)it.ctl.intercor=tx;else{delete it.ctl.intercor;if(it.ctl.intercorOk){delete it.ctl.intercorOk;m.intercorOk='';}}acompSalvar(it,m,tx?'Intercorrência registrada.':'Intercorrência retirada.');return;}
+  if(t.getAttribute('data-ac')==='intercorOk'){var ok=t.checked&&it.ctl.intercor?'Sim':'';if(ok)it.ctl.intercorOk=ok;else delete it.ctl.intercorOk;acompSalvar(it,{intercorOk:ok},ok?'Intercorrência resolvida.':'Intercorrência reaberta.');return;}
+  var PL=JSON.parse(JSON.stringify((((it.ctl||{}).cartao||{}).pendencias)||[]));
+  if(t.hasAttribute('data-acp-ok')){var p=PL[+t.getAttribute('data-acp-ok')];if(!p)return;p.ok=t.checked;if(t.checked){p.resolvidaEm=hoje();p.resolvidaPor=U.eu||'';}else{delete p.resolvidaEm;delete p.resolvidaPor;}acompPend(it,PL,t.checked?'Pendência resolvida.':'Pendência reaberta.');return;}
+  if(t.hasAttribute('data-acp-d')){var q=PL[+t.getAttribute('data-acp-d')],v=t.value.trim();if(!q||!v||q.desc===v)return;q.desc=v;acompPend(it,PL);}},true);
+document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='ac-pd-n'&&e.key==='Enter'){e.preventDefault();var b=$('#prq [data-acp-add]');if(b)b.click();}});
 function sinais(it,A,c){var MO=S.fonte==='mono',b=function(f,on,cls,ic,tt,n){return '<button type="button" class="sn-b'+(on?' on '+cls:'')+'" data-a="sinal" data-f="'+f+'" aria-label="'+esc(tt)+'">'+ic+(n?'<i>'+n+'</i>':'')+'</button>';};
   return '<span class="sn" role="group" aria-label="Sinalizações">'+
     (MO?'':soInd(it,c))+
@@ -2933,7 +2971,7 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
       '<div class="f"><span>Assinatura</span><div class="v">'+(it.assinado||it.dataAssinatura?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):'')+'</b>':'<span class="mut">ainda não assinada · registrar na ficha (▤ › Produção)</span>')+'</div></div>'+
       '</div></section>'+(function(){var us=secs.filter(function(x){var h=x.querySelector('h3');return h&&/Pedido urgente/.test(h.textContent);})[0],on=!!urgDe(it);if(!us)return '';var h3=us.querySelector('h3');if(h3)h3.remove();
       return '<div class="prt-urgf'+(on?' on':'')+'"><label class="prt-urgs"><input type="checkbox" data-urg-sw'+(on?' checked':'')+'><b>Pedido urgente</b>'+(on?'<span class="prt-urgt'+(urgPend(it)?' pend':'')+'">'+esc((it.ctl||{}).urgSit||'Pendente · não apreciada')+'</span>':'<small>desligado · ligue para registrar liminar, tutela ou efeito suspensivo</small>')+'</label><div class="prt-urgc"'+(on?'':' hidden')+'>'+us.outerHTML+'</div></div>';})();abas[0].n=3;abas[0].ch=['dataMinuta','dataCorrecao','dataLiberacao'].filter(function(x){return it[x];}).length;}
-  else {abas[0].html+=prtPrecedentes(it);abas[2].html+=previaMinuta(it,tipoJ(it));}
+  else {abas[0].html+=prtPrecedentes(it);abas[2].html+=previaMinuta(it,tipoJ(it));abas.unshift({nome:'Acompanhamento',html:acompHtml(it),n:0,ch:0,cont:acompAberto(it)});}
   var ab=Math.min(S.prtAba||0,abas.length-1),V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),et=etapa(it),ssx=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},pz=mono?'':(ssx.marcos||{}).entregaMinutas||'',dd=pz?dias(hoje(),pz):null,A=alertas(it);
   var mins=it.servidor||'—',cor=it.corretor||'—';
   el.setAttribute('data-k',S.prt);
@@ -2944,8 +2982,9 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
     '<button data-prt="ant" aria-label="Processo anterior" title="Processo anterior"'+(ix>0?'':' disabled')+'>‹</button><button data-prt="prox" aria-label="Próximo processo" title="Próximo processo"'+(ix>=0&&ix<V.length-1?'':' disabled')+'>›</button><button data-prt="x" aria-label="Fechar o prontuário" title="Fechar (Esc)">×</button></div>'+
     '<div class="prt-id"><b>'+esc(it.cnj)+'</b><small>'+esc([it.assunto,it.classe].filter(Boolean).join(' · '))+'</small><small class="prt-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</small>'+
     (mono?'<div class="prt-chs">'+chip('Minutante <b>'+esc(mins)+'</b>')+chip('Corretor <b>'+esc(cor)+'</b>')+chip('Etapa <b>'+esc(etLbl(et))+'</b>')+chip('Entrega <b>'+(pz?esc(br(pz).slice(0,5))+' · '+esc(quando(pz)):'—')+'</b>',dd!=null&&dd<0&&et==='A fazer'?'al':'')+chip('<b>'+A.length+'</b> alerta'+(A.length===1?'':'s'),A.length?'al':'')+'</div>':'')+'</div>'+
-    notasBloco(it)+'<div class="prt-tabs" role="tablist">'+abas.map(function(a,i){return '<button role="tab" data-prt-aba="'+i+'" aria-selected="'+(i===ab)+'"><span class="tn">'+(i+1)+' · </span>'+esc(a.nome)+'<small>'+a.ch+'/'+a.n+'<span> preenchidos</span></small></button>';}).join('')+'</div>'+
+    (mono?notasBloco(it):'')+'<div class="prt-tabs" role="tablist">'+abas.map(function(a,i){return '<button role="tab" data-prt-aba="'+i+'" aria-selected="'+(i===ab)+'"><span class="tn">'+(i+1)+' · </span>'+esc(a.nome)+'<small>'+(a.cont!=null?(a.cont?a.cont+' em aberto':'em dia'):a.ch+'/'+a.n+'<span> preenchidos</span>')+'</small></button>';}).join('')+'</div>'+
     '<div class="pc prt-pc prt-body" data-k="'+S.prt+'">'+abas.map(function(a,i){return '<div class="pn prt-p" data-prt-p="'+i+'"'+(i===ab?'':' hidden')+'>'+(a.html||'<p class="mut">Nada a preencher nesta aba.</p>')+'</div>';}).join('')+'</div></section>';
+  var acs=el.querySelector('#ac-so');if(acs&&(it.ctl||{}).sopref)pedCard(acs,S.ses,it.cnj);
   /* Monocráticas (editorial): sem abas, tudo numa tela; com a urgência ligada, o cartão do processo vira o cartão de urgência */
   if(mono&&vp._ed){var P=el.querySelector('.prt'),c=it.ctl||{},uon=!!urgDe(it),sec=function(re){var x=secs.filter(function(q){var h=q.querySelector('h3');return re===0?q.classList.contains('urg-s'):h&&re.test(h.textContent);})[0];if(!x)return '';x=x.cloneNode(true);var h=x.querySelector('h3');if(h)h.remove();return x.outerHTML;};
     var du=diasDesde(urgIni(it)),ff=function(r,x){return '<div class="f"><span>'+r+'</span><div class="v">'+x+'</div></div>';},dt=function(k){return '<input type="date" data-d="'+k+'" value="'+esc(it[k]||'')+'">';};
@@ -2961,7 +3000,7 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
 var PRT_ESS=['[data-p="tipoJ"]','[data-p="subassuntos"]','[data-p="questoes"]','[data-p="sintese"]','[data-p^="papeis."]','[data-p="orig.tipo"]','[data-p="orig.id"]','[data-c="tempest"]','[data-c="preparo"]','[data-c="repres"]','[data-c="prelim"]','[data-c="mpf"]','[data-c="parecer"]','[data-c="resJulg"]','[data-c="honor"]','[data-c="consect"]','[data-p="jul.remessa"]','[data-p="jul.multa"]','[data-p="jul.fund"]','[data-c="topico"]'].join(',');
 try{S.prtModo=localStorage.getItem('eq_prt_modo')||'comp';}catch(e){S.prtModo='comp';}
 function prtEssencial(el){var P=el.querySelector('.prt');if(!P)return;[].forEach.call(el.querySelectorAll('.prt-body .f'),function(f){if(f.querySelector(PRT_ESS))f.classList.add('ess');});
-  [].forEach.call(el.querySelectorAll('.prt-body section'),function(sc){if(sc.classList.contains('prt-min')||sc.classList.contains('prt-prec')||sc.querySelector('.f.ess,.rec'))sc.classList.add('ess');});
+  [].forEach.call(el.querySelectorAll('.prt-body section'),function(sc){if(sc.classList.contains('prt-min')||sc.classList.contains('prt-prec')||sc.closest('.ac')||sc.querySelector('.f.ess,.rec'))sc.classList.add('ess');});
   P.classList.toggle('prt-ess',S.prtModo==='ess');}
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-prt-modo]');if(!b)return;S.prtModo=b.getAttribute('data-prt-modo');try{localStorage.setItem('eq_prt_modo',S.prtModo);}catch(x){}prontLateral();});
 /* o painel fica parado na tela: mesma coluna da grade, preso ao topo (abaixo da barra) e ao rodapé da janela */
@@ -3582,7 +3621,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-a]')
   if(a==='pront'){S.prt=k;prontLateral();return;}
   if(a==='duvida'){duvidaDlg(it);return;}
   if(a==='lia'){liaDlg(it);return;}
-  if(a==='sinal'){if(b.getAttribute('data-f')==='nt'){abrirNotas(it);return;}sinalDlg(it,b.getAttribute('data-f'));return;}
+  if(a==='sinal'){var sf=b.getAttribute('data-f');if(S.fonte!=='mono'){abrirAcomp(it,sf);return;}if(sf==='nt'){abrirNotas(it);return;}sinalDlg(it,sf);return;}
   if(a==='comp'){var C2=(it.ctl||{}).cartao||{},P={processo:it.cnj,classe:it.classe,assunto:it.assunto,subassuntos:C2.subassuntos,especificidades:C2.especificidades,questoes:C2.questoes,tipoJulgamento:tipoJ(it),decisaoOrigem:(C2.orig||{}).tipo,
       recursos:(C2.recursos||[]).map(function(r){return [r.tipo,r.parte].filter(Boolean).join(' · ');}).filter(Boolean),resultado:(it.ctl||{}).resJulg};
     Object.keys(P).forEach(function(x){if(!P[x]||(Array.isArray(P[x])&&!P[x].length))delete P[x];});
@@ -3729,7 +3768,7 @@ function pedCard(dialogo,data,cnj){
   var box=dialogo.querySelector('.ped-dados');
   box.textContent='Consultando pedidos recebidos por e-mail…';
   api(PED_URI+'&data='+encodeURIComponent(data)+'&cnj='+encodeURIComponent(cnj)).then(function(j){
-    var pedidos=(j.registros||[]).filter(function(p){return p.vinculo;});
+    var pedidos=(j.registros||[]).filter(function(p){return p.vinculo&&(!p.cnj||!cnj||dg(p.cnj)===dg(cnj));});
     box.innerHTML=pedidos.length?pedidos.map(function(p){return '<article>'+pedResumo(p)+'</article>';}).join(''):'';
   }).catch(function(e){box.textContent=e.message||'Falha ao consultar os pedidos.';});
 }
@@ -9038,6 +9077,44 @@ html[data-theme=dark] .prt-min .pm-sw button,html[data-theme=dark] .prt-min .pm-
 html[data-theme=dark] .prt-min .pm-sw button[aria-pressed=true]{background:var(--eg);color:#fff}
 /* com o prontuário aberto, a coluna do meio estreita: faixas de produção em 2 × 2, sem cortar os números */
 #v-pauta.prt-on.ed:not(.mono) .trb-p{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+/* prontuário · aba Acompanhamento */
+#prq .ac{display:flex;flex-direction:column;gap:12px;padding:4px 0 8px}
+#prq .ac-s,#prq .ac .prt-nt{margin:0;padding:10px 12px 12px;border:1px solid var(--el);background:var(--ep);transition:box-shadow .3s}
+#prq .ac-flash{box-shadow:0 0 0 2px var(--eo)}
+#prq .ac-s h4{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 8px;font:700 9.5px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
+#prq .ac-st{font:600 10px var(--font);letter-spacing:0;text-transform:none;font-style:normal;padding:1px 7px;border-radius:999px;background:var(--ep2);color:var(--ei)}
+#prq .ac-st.al{background:#f6dcd8;color:#8f2418}#prq .ac-st.pd{background:#f8e3cc;color:#8a4a0c}#prq .ac-st.ok{background:#e3f0ea;color:#28744b}#prq .ac-st.so{background:#e3eef8;color:#245b8c}
+html[data-theme=dark] #prq .ac-st.al{background:rgba(220,90,70,.2);color:#f0a597}html[data-theme=dark] #prq .ac-st.pd{background:rgba(230,150,60,.2);color:#f0c08a}
+html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6ad}html[data-theme=dark] #prq .ac-st.so{background:rgba(111,165,216,.18);color:#a9c9ea}
+#prq .ac-seg{display:flex;flex-wrap:wrap;border:1px solid var(--el2);width:max-content;max-width:100%}
+#prq .ac-seg button{border:0;border-left:1px solid var(--el2);background:var(--ew);color:var(--ei);font:600 11.5px var(--font);padding:6px 10px;cursor:pointer}
+#prq .ac-seg button:first-child{border-left:0}
+#prq .ac-seg button[aria-pressed=true]{background:var(--eg);color:#fff}
+#prq .ac-s textarea,#prq .ac-s input[type=text]{width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:400 12.5px/1.4 var(--font)}
+#prq .ac-s textarea{resize:vertical;min-height:44px}
+#prq .ac-ck{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font:600 11.5px var(--font);color:var(--ei)}
+#prq .ac-h{display:block;margin-top:6px;font:400 10.5px var(--font);color:var(--em)}
+#prq .ac-h2{margin:10px 0 4px;font:700 9px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+#prq .ac-pls{display:flex;flex-direction:column;gap:5px;margin-bottom:8px}
+#prq .ac-pl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:8px;align-items:center;padding:5px 6px;background:var(--ew);border:1px solid var(--el);border-left:3px solid #d9822b}
+#prq .ac-pl.ok{border-left-color:#28744b;opacity:.7}
+#prq .ac-pl.ok input[type=text]{text-decoration:line-through}
+#prq .ac-pl input[type=text]{grid-column:2;border:0!important;background:transparent!important;padding:2px 0!important}
+#prq .ac-pl small{grid-column:2;grid-row:2;font:400 9.5px var(--emono);color:var(--em)}
+#prq .ac-pl button{grid-column:3;grid-row:1/span 2;width:22px;height:22px;border:0;background:none;color:var(--em);cursor:pointer;font-size:15px;border-radius:4px}
+#prq .ac-pl button:hover{color:#b3261e;background:var(--ep2)}
+#prq .ac-add{display:flex;gap:8px}
+#prq .ac-add .b{white-space:nowrap}
+#prq .ac-al{margin:0;padding-left:18px;font:400 12px/1.45 var(--font);color:var(--ei)}
+#prq .ac-lk{margin-top:6px;border:0;background:none;padding:0;color:var(--eo2);font:600 11.5px var(--font);cursor:pointer}
+#prq .ac-lk:hover{text-decoration:underline}
+#prq .ac .ped-dados:empty{display:none}
+#prq .ac .ped-dados{margin-top:8px;font:400 12px var(--font)}
+/* abas do prontuário em uma linha: nome em cima, contagem embaixo */
+#v-pauta.ed #prq .prt-tabs{display:flex;flex-wrap:nowrap;gap:10px;overflow:visible}
+#v-pauta.ed #prq .prt-tabs{height:auto!important;justify-content:space-between}
+#v-pauta.ed #prq .prt-tabs button{flex:none!important;width:auto!important;min-width:0!important;max-width:none!important;height:auto!important;display:flex!important;flex-direction:column;align-items:flex-start;gap:1px;white-space:nowrap;overflow:visible}
+#v-pauta.ed #prq .prt-tabs button small{display:block;margin-left:0}
 </style>
 <style id="cmt-mobile-redesign">
 /* ===== Painel do Desembargador no celular · redesign de 20/11/2026 =====
