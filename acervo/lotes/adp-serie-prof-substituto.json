@@ -1,0 +1,513 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-prof-substituto",
+ "titulo": "Série · Professor substituto: interstício (Lei 8.745/1993)",
+ "descricao": "Triagem: remessas e apelações sobre o interstício do artigo 9º, III, da Lei 8.745/1993. Nenhum processo pautado.",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-21",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "S1",
+   "rotulo": "Interstício entre contratações",
+   "cor": "#2f6db5",
+   "resultado": "Monocrática ou voto pela linha do gabinete (AI 5001313-17.2022.4.03.0000)",
+   "modelo": ""
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-prof-substituto/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5000225-63.2025.4.03.6005",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO DO SUL x THIAGO AUGUSTO DOS SANTOS",
+   "exequente": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO DO SUL",
+   "executado": "THIAGO AUGUSTO DOS SANTOS",
+   "assunto": "Concurso Público / Edital",
+   "assunto_detalhado": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+   "grupo": "S1",
+   "tipo_caso": "Apelação do IFMS e remessa necessária em mandado de segurança · professor substituto aprovado em seleção do IFMS (Edital 1/2025) com contrato temporário anterior na UFGD encerrado há menos de 24 meses · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação do IFMS (ID 345023231) e remessa necessária da sentença ID 345023228; contrarrazões (ID 345023232); MPF pelo prosseguimento (ID 345963153) ‖ Proposta pelos precedentes: Desprovimento, na linha do gabinete de que o interstício do artigo 9º, III, da Lei 8.745/1993 não alcança contratação por ente diverso (AI 5001313-17.2022.4.03.0000, 30/06/2022) [VALIDAR compatibilidade com o Tema 403/STF e precedentes invocados pelo IFMS] [VALIDAR: Compatibilidade com o Tema 403/STF (RE 635.648); Precedentes invocados pelo IFMS]",
+   "modelo": "Origem: lote adp-remessas (grupo RA2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do IFMS e remessa necessária da sentença que assegurou a Thiago Augusto dos Santos a contratação como professor substituto, apesar de contrato temporário com a UFGD encerrado há menos de 24 meses. O IFMS invoca o artigo 9º, III, da Lei 8.745/1993.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto ou monocrática)",
+    "materia": "Administrativo — contratação temporária (professor substituto)",
+    "origem": "Mandado de segurança 5000225-63.2025.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 345023228 (28/08/2025)",
+    "recurso": "apelação de IFMS (ID 345023231, 30/08/2025) · remessa necessária",
+    "preparo": "IFMS: Isento (ente público)",
+    "monocratica": "Possível (artigo 932 do CPC), se mantida a linha do gabinete",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "IFMS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 345023228 · 28/08/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 345963153 · 08/12/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Mesmo tema de 5002479-24 (adp-remessas, RM1) e 5000252-74 · Tema 403/STF a conferir · IFMS invoca precedentes do Tribunal em sentido contrário [VALIDAR]",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; Concurso Público; MS",
+   "chegada": "10/12/2025",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 345023228 · 28/08/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 345963153 · 08/12/2025",
+    "ultima_informacao": "Informação · ID 345023234 · 19/11/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 345023228 · 28/08/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 345963153 · 08/12/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "Thiago Augusto dos Santos, aprovado em seleção do IFMS para professor substituto, impetrou mandado de segurança contra a recusa fundada no interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, por contrato temporário anterior com a UFGD.",
+    "inicial": "Mandado de segurança contra o Reitor do IFMS.",
+    "decisao_recorrida": "Sentença ID 345023228 (28/08/2025): concedeu a segurança e ratificou a liminar para assegurar a contratação do impetrante como professor substituto, ainda que encerrado há menos de 24 meses o vínculo temporário com a UFGD.",
+    "recurso": "IFMS (ID 345023231, 30/08/2025): impossibilidade da contratação antes de 24 meses do fim do contrato anterior (artigo 9º, III, da Lei 8.745/1993), com invocação de precedentes do Tribunal.",
+    "resposta": "Contrarrazões do impetrante (ID 345023232).",
+    "parecer": "MPF ID 345963153: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante beneficiário da justiça gratuita; advogada constituída [VALIDAR].",
+    "preparo": "IFMS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do IFMS e remessa necessária em mandado de segurança · professor substituto aprovado em seleção do IFMS (Edital 1/2025) com contrato temporário anterior na UFGD encerrado há menos de 24 meses · liminar deferida · segurança concedida",
+     "sintese": "Thiago Augusto dos Santos, aprovado em seleção do IFMS para professor substituto, impetrou mandado de segurança contra a recusa fundada no interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, por contrato temporário anterior com a UFGD.",
+     "questoes": "1) Alcance do interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993 quando o contrato anterior foi com outra instituição.",
+     "rel": {
+      "razoes": "IFMS (ID 345023231, 30/08/2025): impossibilidade da contratação antes de 24 meses do fim do contrato anterior (artigo 9º, III, da Lei 8.745/1993), com invocação de precedentes do Tribunal.",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 345023232)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "345023228",
+      "juizo": "Mandado de segurança 5000225-63.2025.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+      "dispositivo": "concedeu a segurança e ratificou a liminar para assegurar a contratação do impetrante como professor substituto, ainda que encerrado há menos de 24 meses o vínculo temporário com a UFGD."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-02-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "IFMS",
+       "tipo": "Apelação",
+       "id": "345023231",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "345023228",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "345023214",
+       "data": "2025-02-26"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "345023228",
+       "data": "2025-08-28"
+      },
+      {
+       "desc": "Apelação do IFMS",
+       "id": "345023231",
+       "data": "2025-08-30"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "345023232",
+       "data": "2025-09-16"
+      },
+      {
+       "desc": "Parecer do MPF (prosseguimento)",
+       "id": "345963153",
+       "data": "2025-12-08"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 345023228 · 28/08/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 345963153 · 08/12/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Mesmo tema de 5002479-24 (adp-remessas, RM1) e 5000252-74 · Tema 403/STF a conferir · IFMS invoca precedentes do Tribunal em sentido contrário [VALIDAR]",
+     "assuntoDet": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "345963153",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5000252-74.2024.4.03.6007",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO DO SUL x DIEGO DA SILVA GOMES",
+   "exequente": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO DO SUL",
+   "executado": "DIEGO DA SILVA GOMES",
+   "assunto": "Concurso Público / Edital",
+   "assunto_detalhado": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+   "grupo": "S1",
+   "tipo_caso": "Apelação do IFMS e remessa necessária em mandado de segurança · professor substituto de Português com contrato temporário anterior em outra instituição federal · liminar deferida · segurança concedida · IFMS alega nulidade por falta de citação dos demais aprovados",
+   "resultado": "Ato a proferir: apelação do IFMS (ID 319791913) e remessa necessária da sentença ID 319791910; contrarrazões cadastradas como apelação (ID 319791917); MPF pelo desprovimento (ID 320036060) ‖ Proposta pelos precedentes: Desprovimento, afastada a preliminar de litisconsórcio necessário dos demais aprovados [VALIDAR], na linha do gabinete de que o interstício do artigo 9º, III, da Lei 8.745/1993 não alcança contratação por ente diverso (AI 5001313-17.2022.4.03.0000, 30/06/2022) [VALIDAR compatibilidade com o Tema 403/STF e precedentes invocados pelo IFMS] [VALIDAR: Litisconsórcio passivo necessário dos demais aprovados; Compatibilidade com o Tema 403/STF]",
+   "modelo": "Origem: lote adp-remessas (grupo RA2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do IFMS e remessa necessária da sentença que assegurou a Diego da Silva Gomes a contratação como professor substituto, apesar de contrato temporário anterior com outra instituição federal. O IFMS alega nulidade por falta de citação dos demais aprovados e invoca o artigo 9º, III, da Lei 8.745/1993. O MPF opinou pelo desprovimento.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — contratação temporária (professor substituto)",
+    "origem": "Mandado de segurança 5000252-74.2024.4.03.6007 (1ª Vara Federal de Coxim)",
+    "decisao_agravada": "Sentença ID 319791910 (27/02/2025)",
+    "recurso": "apelação de IFMS (ID 319791913, 11/03/2025) · remessa necessária",
+    "preparo": "IFMS: Isento (ente público)",
+    "monocratica": "Possível, se afastada a preliminar de litisconsórcio e mantida a linha do gabinete",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "IFMS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 319791910 · 27/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 320036060 · 04/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Preliminar de litisconsórcio passivo necessário dos demais aprovados · Contrarrazões cadastradas como apelação (ID 319791917) · Mesmo tema de 5000225-63 e 5002479-24 · MPF pelo desprovimento (ID 320036060)",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; Concurso Público",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 319791910 · 27/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 320036060 · 04/04/2025",
+    "ultima_informacao": "Certidão · ID 319956327 · 03/04/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 319791910 · 27/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 320036060 · 04/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "Diego da Silva Gomes, aprovado em seleção do IFMS para professor substituto de Português, foi impedido de ser contratado por contrato temporário anterior com outra instituição federal.",
+    "inicial": "Mandado de segurança contra o Reitor do IFMS.",
+    "decisao_recorrida": "Sentença ID 319791910 (27/02/2025): confirmou a tutela e concedeu a segurança para que o IFMS confirme a contratação definitiva do impetrante, aprovado no processo seletivo do Edital 2/2024, sem considerá-lo impedido pelo artigo 9º, III, da Lei 8.745/1993.",
+    "recurso": "IFMS (ID 319791913, 11/03/2025): nulidade da sentença por falta de citação dos demais aprovados (litisconsortes); no mérito, impossibilidade da contratação antes do interstício de 24 meses.",
+    "resposta": "Contrarrazões do impetrante (ID 319791917, cadastradas como apelação).",
+    "parecer": "MPF ID 320036060: Desprovimento da remessa necessária e da apelação do IFMS",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante beneficiário da justiça gratuita; advogado constituído [VALIDAR].",
+    "preparo": "IFMS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do IFMS e remessa necessária em mandado de segurança · professor substituto de Português com contrato temporário anterior em outra instituição federal · liminar deferida · segurança concedida · IFMS alega nulidade por falta de citação dos demais aprovados",
+     "sintese": "Diego da Silva Gomes, aprovado em seleção do IFMS para professor substituto de Português, foi impedido de ser contratado por contrato temporário anterior com outra instituição federal.",
+     "questoes": "1) Litisconsórcio passivo necessário dos demais aprovados; 2) alcance do interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas.",
+     "rel": {
+      "razoes": "IFMS (ID 319791913, 11/03/2025): nulidade da sentença por falta de citação dos demais aprovados (litisconsortes); no mérito, impossibilidade da contratação antes do interstício de 24 meses.",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 319791917, cadastradas como apelação)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "319791910",
+      "juizo": "Mandado de segurança 5000252-74.2024.4.03.6007 (1ª Vara Federal de Coxim)",
+      "dispositivo": "confirmou a tutela e concedeu a segurança para que o IFMS confirme a contratação definitiva do impetrante, aprovado no processo seletivo do Edital 2/2024, sem considerá-lo impedido pelo artigo 9º, III, da Lei 8.745/1993."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-10-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "IFMS",
+       "tipo": "Apelação",
+       "id": "319791913",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "319791910",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "319791894",
+       "data": "2024-10-30"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "319791910",
+       "data": "2025-02-27"
+      },
+      {
+       "desc": "Apelação do IFMS",
+       "id": "319791913",
+       "data": "2025-03-11"
+      },
+      {
+       "desc": "Contrarrazões do impetrante (cadastradas como apelação)",
+       "id": "319791917",
+       "data": "2025-04-02"
+      },
+      {
+       "desc": "Parecer do MPF (desprovimento)",
+       "id": "320036060",
+       "data": "2025-04-04"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 319791910 · 27/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 320036060 · 04/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Preliminar de litisconsórcio passivo necessário dos demais aprovados · Contrarrazões cadastradas como apelação (ID 319791917) · Mesmo tema de 5000225-63 e 5002479-24 · MPF pelo desprovimento (ID 320036060)",
+     "assuntoDet": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "320036060",
+     "parecerSentido": "Desprovimento da remessa necessária e da apelação do IFMS"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5002479-24.2025.4.03.6000",
+   "recurso": "Remessa necessária",
+   "partes": "THAIS COSTA MEDEIROS x DIRETOR DA DIRETORIA DE PAGAMENTO E REGISTRO DE PESSOAL - DIPAG/PROGEP DA FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "exequente": "THAIS COSTA MEDEIROS",
+   "executado": "DIRETOR DA DIRETORIA DE PAGAMENTO E REGISTRO DE PESSOAL - DIPAG/PROGEP DA FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "assunto": "Admissão / Permanência / Despedida",
+   "assunto_detalhado": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+   "grupo": "S1",
+   "tipo_caso": "Remessa necessária em mandado de segurança · contratação de professora substituta pela UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, por ter sido o contrato anterior com instituição diversa (IFMS) · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 353961609, sem recurso voluntário; MPF sem interesse em primeiro e segundo graus (IDs 353961608 e 355553201) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete de que o interstício do artigo 9º, III, da Lei 8.745/1993 não alcança contratação por ente diverso (AI 5001313-17.2022.4.03.0000, 30/06/2022) [VALIDAR compatibilidade com o Tema 403/STF] [VALIDAR: Compatibilidade com o Tema 403/STF (RE 635.648)]",
+   "modelo": "Origem: lote adp-remessas (grupo RM1) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que concedeu a segurança a Thaís Costa Medeiros para ser contratada como professora substituta da UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, porque o contrato temporário anterior foi com o IFMS, instituição diversa. Não houve recurso voluntário; o MPF declarou falta de interesse.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da remessa necessária: possível decisão monocrática de desprovimento (artigo 932 do CPC)",
+    "materia": "Administrativo — contratação temporária (professor substituto)",
+    "origem": "Mandado de segurança 5002479-24.2025.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 353961609 (27/10/2025)",
+    "recurso": "Remessa necessária · sentença de 27/10/2025",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), na linha do gabinete sobre o interstício entre instituições distintas",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 353961609 · 27/10/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário · MPF sem interesse (ID 355553201) · Interstício entre instituições diversas (linha do AI 5001313-17.2022.4.03.0000) · Tema 403/STF a conferir",
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "1ª Seção; Admissão/Contratação; apenas remessa; MS",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 353961609 · 27/10/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026",
+    "ultima_informacao": "Informação · ID 353961613 · 09/02/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 353961609 · 27/10/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "Thaís Costa Medeiros, aprovada em seleção para professora substituta da UFMS, impetrou mandado de segurança contra a aplicação do interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993 por contrato temporário anterior com o IFMS.",
+    "inicial": "Mandado de segurança contra o Diretor de Pagamento e Registro de Pessoal da UFMS.",
+    "decisao_recorrida": "Sentença ID 353961609 (27/10/2025): confirmou a liminar e concedeu a segurança para o prosseguimento da contratação da impetrante como professora substituta da UFMS, sem a restrição do artigo 9º, III, da Lei 8.745/1993 quanto ao contrato anterior com o IFMS.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 355553201: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Letícia Regina Camargo Kreuz (OAB/PR 65.860).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · contratação de professora substituta pela UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, por ter sido o contrato anterior com instituição diversa (IFMS) · segurança concedida",
+     "sintese": "Thaís Costa Medeiros, aprovada em seleção para professora substituta da UFMS, impetrou mandado de segurança contra a aplicação do interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993 por contrato temporário anterior com o IFMS.",
+     "questoes": "1) Alcance do interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993 quando o contrato anterior foi com outra instituição.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "353961609",
+      "juizo": "Mandado de segurança 5002479-24.2025.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para o prosseguimento da contratação da impetrante como professora substituta da UFMS, sem a restrição do artigo 9º, III, da Lei 8.745/1993 quanto ao contrato anterior com o IFMS."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-03-21",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "353961609",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "353961609",
+       "data": "2025-10-27"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "355553201",
+       "data": "2026-02-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 353961609 · 27/10/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário · MPF sem interesse (ID 355553201) · Interstício entre instituições diversas (linha do AI 5001313-17.2022.4.03.0000) · Tema 403/STF a conferir",
+     "assuntoDet": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "355553201",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   }
+  }
+ ]
+}
