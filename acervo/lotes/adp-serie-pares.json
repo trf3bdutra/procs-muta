@@ -1,0 +1,2139 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-pares",
+ "titulo": "Série · Pares e votos conjuntos",
+ "descricao": "Triagem: pares de processos com a mesma questão, de lotes diferentes. Nenhum processo pautado.",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-21",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "C1",
+   "rotulo": "Tema 962/STF: IRPJ/CSLL sobre a Selic",
+   "cor": "#2f6db5",
+   "resultado": "Monocrática no 5001171-40; voto no 5006639-34 (depósitos judiciais)",
+   "modelo": ""
+  },
+  {
+   "id": "C2",
+   "rotulo": "Destaque de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994)",
+   "cor": "#a33b5c",
+   "resultado": "Voto",
+   "modelo": ""
+  },
+  {
+   "id": "C3",
+   "rotulo": "Desvio de função na enfermagem (FUFMS/EBSERH)",
+   "cor": "#2a6a4a",
+   "resultado": "Voto",
+   "modelo": ""
+  },
+  {
+   "id": "C4",
+   "rotulo": "Desapropriação: juros compensatórios no cumprimento",
+   "cor": "#c07a12",
+   "resultado": "Voto (no 5004693-09, vista ao MPF antes)",
+   "modelo": ""
+  },
+  {
+   "id": "C5",
+   "rotulo": "Home care",
+   "cor": "#5a4aa0",
+   "resultado": "Voto ou prejuízo, conforme a origem",
+   "modelo": ""
+  },
+  {
+   "id": "C6",
+   "rotulo": "Concurso do magistério da UFMS: titulação (voto conjunto)",
+   "cor": "#2a6a6a",
+   "resultado": "Voto conjunto",
+   "modelo": ""
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-pares/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5001171-40.2022.4.03.6005",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x UNIAO INDUSTRIA DE SUPLEMENTACAO ANIMAL LTDA",
+   "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "executado": "UNIAO INDUSTRIA DE SUPLEMENTACAO ANIMAL LTDA",
+   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "assunto_detalhado": "Tema 962/STF — IRPJ/CSLL sobre a SELIC na repetição de indébito: modulação",
+   "grupo": "C1",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) · modulação dos efeitos (RE 1.063.187 ED) · segurança concedida, com compensação",
+   "resultado": "Ato a proferir: apelação da União (ID 302872399) e remessa necessária da sentença ID 302872395 (repetida no ID 302872397); contrarrazões (ID 302872402); MPF sem intervenção (ID 307196964) ‖ Proposta pelos precedentes: Provimento parcial da apelação e da remessa, por decisão monocrática, para limitar os efeitos à modulação do Tema 962/STF e ajustar o regime da compensação [VALIDAR] [VALIDAR: Regime legal da compensação (artigo 74 da Lei 9.430/1996 e artigo 26-A da Lei 11.457/2007)]",
+   "modelo": "Origem: lote adp-remessas (grupo RM1) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou o IRPJ e a CSLL sobre a SELIC da repetição de indébito. A ação é de 17/05/2022: incide a modulação do Tema 962/STF (efeitos a partir de 30/09/2021).",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de provimento parcial (artigo 932, V, b, do CPC)",
+    "materia": "Tributário — IRPJ/CSLL (SELIC, Tema 962/STF)",
+    "origem": "Mandado de segurança 5001171-40.2022.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 302872395 (06/09/2023)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 302872399, 13/10/2023) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Sim (artigo 932, IV e V, b, do CPC): Tema 962/STF e embargos de declaração no RE 1.063.187",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 302872401 · 24/05/2024 — despacho de inspeção ou correição | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 962/STF com modulação (RE 1.063.187 ED): ação ajuizada após 17/09/2021 · Linha da 3ª Turma (AgInt na ApelRemNec 5027214-54.2021.4.03.6100, 30/05/2023) · Remessa: compensação de IRPJ/CSLL rege-se pelo artigo 74 da Lei 9.430/1996, não pelo artigo 89 da Lei 8.212/1991 [VALIDAR] · Sentença em duplicidade (IDs 302872395 e 302872397) · Etiqueta \"Triagem - Giovana Sato\"",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; IRPJ e CSLL - Taxa SELIC; MS; Tema 962 STF - Taxa Selic e repetição de indébito; Triagem - Giovana Sato",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 302872401 · 24/05/2024 — despacho de inspeção ou correição",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024",
+    "ultima_informacao": "Ato ordinatório · ID 302872389 · 14/07/2022",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 302872401 · 24/05/2024 — despacho de inspeção ou correição | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "União Indústria de Suplementação Animal Ltda. impetrou o mandado de segurança em 17/05/2022 para excluir a SELIC da repetição de indébito das bases do IRPJ e da CSLL. A sentença concedeu a segurança sem referência à modulação.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 302872395 (06/09/2023): concedeu a segurança para declarar o direito de não computar nas bases do IRPJ e da CSLL a taxa SELIC incidente sobre repetições de indébito e o direito à compensação após o trânsito em julgado (artigo 170-A do CTN), \"observado o artigo 89 da Lei 8.212/1991\".",
+    "recurso": "União (Fazenda Nacional) (ID 302872399, 13/10/2023): aplicação da modulação do Tema 962/STF (efeitos a partir de 30/09/2021, ressalvadas as ações ajuizadas até 17/09/2021); ausência parcial de interesse recursal quanto à tese.",
+    "resposta": "Contrarrazões da impetrante (ID 302872402).",
+    "parecer": "MPF ID 307196964: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Cerino Lorenzetti (OAB/PR 39.974) e outros.",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) · modulação dos efeitos (RE 1.063.187 ED) · segurança concedida, com compensação",
+     "sintese": "União Indústria de Suplementação Animal Ltda. impetrou o mandado de segurança em 17/05/2022 para excluir a SELIC da repetição de indébito das bases do IRPJ e da CSLL. A sentença concedeu a segurança sem referência à modulação.",
+     "questoes": "1) IRPJ/CSLL sobre a SELIC na repetição de indébito: modulação do Tema 962/STF; 2) regime legal da compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 302872399, 13/10/2023): aplicação da modulação do Tema 962/STF (efeitos a partir de 30/09/2021, ressalvadas as ações ajuizadas até 17/09/2021); ausência parcial de interesse recursal quanto à tese.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 302872402)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "302872395",
+      "juizo": "Mandado de segurança 5001171-40.2022.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+      "dispositivo": "concedeu a segurança para declarar o direito de não computar nas bases do IRPJ e da CSLL a taxa SELIC incidente sobre repetições de indébito e o direito à compensação após o trânsito em julgado (artigo 170-A do CTN), \"observado o artigo 89 da Lei 8.212/1991\"."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-05-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "302872399",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "302872395",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar não apreciada; conclusão para sentença",
+       "id": "302872394",
+       "data": "2023-01-13"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "302872395",
+       "data": "2023-09-06"
+      },
+      {
+       "desc": "Sentença (repetida)",
+       "id": "302872397",
+       "data": "2023-09-11"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "302872399",
+       "data": "2023-10-13"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "302872402",
+       "data": "2024-06-11"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "307196964",
+       "data": "2024-10-17"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 302872401 · 24/05/2024 — despacho de inspeção ou correição | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307196964 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Tema 962/STF com modulação (RE 1.063.187 ED): ação ajuizada após 17/09/2021 · Linha da 3ª Turma (AgInt na ApelRemNec 5027214-54.2021.4.03.6100, 30/05/2023) · Remessa: compensação de IRPJ/CSLL rege-se pelo artigo 74 da Lei 9.430/1996, não pelo artigo 89 da Lei 8.212/1991 [VALIDAR] · Sentença em duplicidade (IDs 302872395 e 302872397) · Etiqueta \"Triagem - Giovana Sato\"",
+     "assuntoDet": "Tema 962/STF — IRPJ/CSLL sobre a SELIC na repetição de indébito: modulação",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "307196964",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5006639-34.2021.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "ENERGISA MATO GROSSO DO SUL - DISTRIBUIDORA DE ENERGIA S.A. x DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+   "exequente": "ENERGISA MATO GROSSO DO SUL - DISTRIBUIDORA DE ENERGIA S.A.",
+   "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
+   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "assunto_detalhado": "Tema 962/STF — SELIC na repetição de indébito e em depósitos judiciais",
+   "grupo": "C1",
+   "tipo_caso": "Apelações da Energisa MS e da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) e no levantamento de depósitos judiciais · segurança concedida em parte · embargos de declaração da impetrante acolhidos sem alteração do resultado",
+   "resultado": "Ato a proferir: apelações da União (ID 270173555) e da impetrante (ID 270173559) e remessa necessária da sentença ID 270173544, integrada pela ID 270173556; contrarrazões (IDs 270173560 e 270173563); MPF sem intervenção (ID 270843640) ‖ Proposta pelos precedentes: Voto: desprovimento da apelação da impetrante (depósitos judiciais fora do Tema 962/STF) e exame da apelação da União e da remessa à luz dos embargos de declaração no RE 1.063.187 (ação ressalvada da modulação) [VALIDAR] [VALIDAR: Preparo da apelação da impetrante (custas recolhidas no teto na impetração); Motivo da retirada de pauta na 4ª Turma (13/10/2025)]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da Energisa MS e da União e remessa necessária da sentença que afastou o IRPJ e a CSLL sobre a SELIC na repetição de indébito, mas não no levantamento de depósitos judiciais. A ação é de 11/08/2021, anterior a 17/09/2021: fica ressalvada da modulação do Tema 962/STF.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Tributário — IRPJ/CSLL (SELIC, Tema 962/STF)",
+    "origem": "Mandado de segurança 5006639-34.2021.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 270173544 (06/09/2022)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 270173555, 06/10/2022) e apelação de Energisa Mato Grosso do Sul - Distribuidora de Energia S.A. (ID 270173559, 23/01/2023) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público); Energisa Mato Grosso do Sul - Distribuidora de Energia S.A.: Recolhimento integral das custas na impetração, segundo a apelante [VALIDAR]",
+    "monocratica": "Improvável: duas apelações e pauta anterior",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público); Energisa Mato Grosso do Sul - Distribuidora de Energia S.A.: Recolhimento integral das custas na impetração, segundo a apelante [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal | última peça: Manifestação (MPF) · ID 271457494 · 17/03/2023 | última movimentação: 13/10/2025 17:45 · Deliberado em Sessão - Retirado · Processo pautado na 4ª Turma (intimações de pauta de 08/09/2025, ID 335663348) e retirado em sessão em 13/10/2025; apelações recebidas pelo Des. Fed. Marcelo Saraiva (ID 271234107) · Tema 962/STF: os embargos de declaração no RE 1.063.187 excluem do paradigma a SELIC sobre depósitos judiciais · Linha da 3ª Turma: AgInt na ApCiv 5005018-81.2021.4.03.6103 (14/04/2023) e AgInt na ApelRemNec 5004971-91.2022.4.03.6000 (20/03/2023) · Sentença em duplicidade (IDs 270173544 e 270173545)",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; IRPJ/CSLL sobre juros e multa",
+   "chegada": "09/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "13/10/2025 17:45 · Deliberado em Sessão - Retirado",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal",
+    "ultima_peca": "Manifestação (MPF) · ID 271457494 · 17/03/2023",
+    "ultima_informacao": "Intimação de Pauta · ID 335663406 · 08/09/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal | última peça: Manifestação (MPF) · ID 271457494 · 17/03/2023 | última movimentação: 13/10/2025 17:45 · Deliberado em Sessão - Retirado"
+   },
+   "teor": {
+    "sintese_fatica": "A Energisa MS impetrou o mandado de segurança em 11/08/2021 para excluir das bases do IRPJ e da CSLL a SELIC recebida em repetição de indébito, inclusive no levantamento de depósitos judiciais. A sentença acolheu o pedido apenas quanto à repetição de indébito.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 270173544 (06/09/2022): concedeu em parte a segurança para declarar a inexigibilidade do IRPJ e da CSLL sobre a SELIC incidente na repetição de indébito, o direito à compensação (artigo 26-A da Lei 11.457/2007, Lei 9.430/1996 e artigo 170-A do CTN) e o lançamento, na parte B do LALUR, do incremento de prejuízo fiscal e base negativa; não abrangeu a SELIC no levantamento de depósitos judiciais (embargos de declaração acolhidos para esclarecer, mantida a conclusão, ID 270173556).",
+    "recurso": "União (Fazenda Nacional) (ID 270173555, 06/10/2022): adequação da sentença ao julgado no RE 1.063.187 (Tema 962/STF), com os esclarecimentos e a modulação dos embargos de declaração. Energisa Mato Grosso do Sul - Distribuidora de Energia S.A. (ID 270173559, 23/01/2023): inexigibilidade do IRPJ e da CSLL também sobre a SELIC no levantamento de depósitos judiciais (natureza de danos emergentes) e regime da compensação.",
+    "resposta": "Contrarrazões da impetrante (ID 270173560) e da União (ID 270173563).",
+    "parecer": "MPF ID 270843640: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Gerson Stocco de Siqueira (OAB/RJ 75.970) e Leandro Daumas Passos (OAB/RJ 93.571).",
+    "preparo": "Impetrante: alega recolhimento integral das custas na impetração [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da Energisa MS e da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) e no levantamento de depósitos judiciais · segurança concedida em parte · embargos de declaração da impetrante acolhidos sem alteração do resultado",
+     "sintese": "A Energisa MS impetrou o mandado de segurança em 11/08/2021 para excluir das bases do IRPJ e da CSLL a SELIC recebida em repetição de indébito, inclusive no levantamento de depósitos judiciais. A sentença acolheu o pedido apenas quanto à repetição de indébito.",
+     "questoes": "1) IRPJ/CSLL sobre a SELIC na repetição de indébito (Tema 962/STF; ação anterior a 17/09/2021); 2) SELIC no levantamento de depósitos judiciais; 3) compensação e LALUR.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 270173555, 06/10/2022): adequação da sentença ao julgado no RE 1.063.187 (Tema 962/STF), com os esclarecimentos e a modulação dos embargos de declaração. Energisa Mato Grosso do Sul - Distribuidora de Energia S.A. (ID 270173559, 23/01/2023): inexigibilidade do IRPJ e da CSLL também sobre a SELIC no levantamento de depósitos judiciais (natureza de danos emergentes) e regime da compensação.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 270173560) e da União (ID 270173563)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "270173544",
+      "juizo": "Mandado de segurança 5006639-34.2021.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu em parte a segurança para declarar a inexigibilidade do IRPJ e da CSLL sobre a SELIC incidente na repetição de indébito, o direito à compensação (artigo 26-A da Lei 11.457/2007, Lei 9.430/1996 e artigo 170-A do CTN) e o lançamento, na parte B do LALUR, do incremento de prejuízo fiscal e base negativa; não abrangeu a SELIC no levantamento de depósitos judiciais (embargos de declaração acolhidos para esclarecer, mantida a conclusão, ID 270173556)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-08-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "270173555",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Energisa Mato Grosso do Sul - Distribuidora de Energia S.A.",
+       "tipo": "Apelação",
+       "id": "270173559",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "270173544",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida em parte",
+       "id": "270173544",
+       "data": "2022-09-06"
+      },
+      {
+       "desc": "Embargos de declaração da impetrante",
+       "id": "270173548",
+       "data": "2022-09-15"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "270173555",
+       "data": "2022-10-06"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "270173556",
+       "data": "2022-12-07"
+      },
+      {
+       "desc": "Apelação da impetrante",
+       "id": "270173559",
+       "data": "2023-01-23"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "270173560",
+       "data": "2023-01-23"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "270173563",
+       "data": "2023-01-26"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "270843640",
+       "data": "2023-03-06"
+      },
+      {
+       "desc": "Decisão: recebimento das apelações (4ª Turma)",
+       "id": "271234107",
+       "data": "2023-03-15"
+      },
+      {
+       "desc": "Intimação de pauta (4ª Turma)",
+       "id": "335663348",
+       "data": "2025-09-08"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal | última peça: Manifestação (MPF) · ID 271457494 · 17/03/2023 | última movimentação: 13/10/2025 17:45 · Deliberado em Sessão - Retirado · Processo pautado na 4ª Turma (intimações de pauta de 08/09/2025, ID 335663348) e retirado em sessão em 13/10/2025; apelações recebidas pelo Des. Fed. Marcelo Saraiva (ID 271234107) · Tema 962/STF: os embargos de declaração no RE 1.063.187 excluem do paradigma a SELIC sobre depósitos judiciais · Linha da 3ª Turma: AgInt na ApCiv 5005018-81.2021.4.03.6103 (14/04/2023) e AgInt na ApelRemNec 5004971-91.2022.4.03.6000 (20/03/2023) · Sentença em duplicidade (IDs 270173544 e 270173545)",
+     "assuntoDet": "Tema 962/STF — SELIC na repetição de indébito e em depósitos judiciais",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "270843640",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5018894-74.2024.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "MELO & ARAUJO SOCIEDADE DE ADVOGADOS x UNIÃO FEDERAL",
+   "exequente": "MELO & ARAUJO SOCIEDADE DE ADVOGADOS",
+   "executado": "UNIÃO FEDERAL",
+   "assunto": "Abono Pecuniário (Art. 78 Lei 8.112/1990)",
+   "assunto_detalhado": "Cumprimento de sentença — destaque de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994)",
+   "grupo": "C2",
+   "tipo_caso": "Cumprimento de sentença · contra a União · destaque (reserva) de honorários contratuais em favor de sociedade de advogados",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); sem pedido de efeito suspensivo; a União foi intimada e só manifestou ciência ‖ Proposta pelos precedentes: Julgamento do agravo (voto). Critério dos precedentes: cabe o destaque dos honorários contratuais quando o contrato é juntado antes da expedição do requisitório (artigo 22, § 4º, da Lei 8.906/1994); o crédito destacado é do advogado. Sem precedente do gabinete sobre destaque em favor de sociedade de advogados: o resultado depende de a sociedade constar do contrato e da procuração de cada exequente nominado. [VALIDAR: Fundamento da decisão agravada; contratos e procurações dos exequentes nominados indicam a sociedade?; comprovante de preparo sem texto (IDs 294288480 e 294289633)]",
+   "modelo": "Origem: lote adp-ai (grupo A7) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Melo & Araújo Sociedade de Advogados contra a decisão da 1ª Vara Federal de Campo Grande que, no cumprimento de sentença contra a Fazenda Pública 0008112-19.2016.4.03.6000, indeferiu a reserva de honorários contratuais em favor da sociedade. Pede a reserva em relação a exequentes nominados (entre eles, Joseph e Kildare) e a majoração de honorários (artigo 85, § 11, do CPC).",
+   "peculiaridades": "Despacho ID 298397136 (16/08/2024): sem pedido de efeito suspensivo; intimada a União para contraminuta. A União só manifestou ciência (ID 301044447, 19/08/2024); não há contraminuta nos autos. Preparo: boleto e comprovante de 23/07/2024 (IDs 294288480 e 294289633), sem texto extraível. Feito de 2024.",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "294172234",
+     "data": "22/07/2024"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Cumprimento de sentença — destaque de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994)",
+    "origem": "0008112-19.2016.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Não consta com texto nos autos do agravo [VALIDAR]",
+    "recurso": "ID 294172234 · 22/07/2024",
+    "preparo": "Comprovante ID 294289633, sem texto extraível",
+    "monocratica": "Possível, conforme a linha do gabinete sobre destaque de honorários [VALIDAR]",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Comprovante bancário (não aceito) · comprovante bancário: ID 294289633 · só a guia: ID 294288480 · certidão sem custas: ID 294181632 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 0008112-19.2016.4.03.6000 · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Ler a decisão agravada e o contrato e aditivo (ID 294172238, sem texto) para conferir os requisitos do destaque",
+    "[VALIDAR] Preparo: comprovante de 23/07/2024 sem texto extraível",
+    "[VALIDAR] Situação atual do cumprimento de sentença (possível expedição do requisitório já feita)",
+    "[VALIDAR] Autos extraídos em 20-21/11/2026 pela linha do tempo do PJe: a lista pode omitir anexos e peças; conferir no PJe antes de concluir"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 361976365 · 23/03/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 298397136 · 16/08/2024 — mandou intimar a agravada para contraminuta | última peça: Petição intercorrente (AGU (PRU)) · ID 301044447 · 19/08/2024 | última movimentação: 27/03/2026 13:28 · Conclusos para julgamento · Sem pedido de efeito suspensivo (despacho ID 298397136) · União intimada só manifestou ciência (ID 301044447); sem contraminuta · Preparo: boleto e comprovante bancário de 23/07/2024 (IDs 294288480 e 294289633), sem comprovante STN [VALIDAR] · Contrato e aditivo sem texto extraível (ID 294172238) [VALIDAR] · Feito de 2024",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "1ª Seção; Honorários advocatícios",
+   "chegada": "04/11/2026",
+   "bloco": "1",
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 361976365 · 23/03/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 301044447 · 19/08/2024",
+    "ultima_informacao": "Certidão · ID 362790562 · 27/03/2026",
+    "ultima_movimentacao": "27/03/2026 13:28 · Conclusos para julgamento",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao_relevante": "Despacho · ID 298397136 · 16/08/2024 — mandou intimar a agravada para contraminuta",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 361976365 · 23/03/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 298397136 · 16/08/2024 — mandou intimar a agravada para contraminuta | última peça: Petição intercorrente (AGU (PRU)) · ID 301044447 · 19/08/2024 | última movimentação: 27/03/2026 13:28 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Cumprimento de sentença contra a União (0008112-19.2016.4.03.6000, 1ª Vara Federal de Campo Grande). A sociedade de advogados Melo & Araújo pediu o destaque dos honorários contratuais de exequentes que representa; o juízo indeferiu.",
+    "inicial": "Não consta nos autos do recurso (capa da origem no ID 294172236)",
+    "decisao_recorrida": "Decisão da 1ª Vara Federal de Campo Grande que indeferiu a reserva de honorários contratuais; não juntada com texto nos autos do agravo.",
+    "recurso": "Agravo de instrumento ID 294172234 (22/07/2024): direito ao destaque dos honorários contratuais (contrato e aditivo no ID 294172238, sem texto) em relação a exequentes nominados, entre eles Joseph e Kildare; majoração de honorários (artigo 85, § 11, do CPC).",
+    "resposta": "Não consta: a União, intimada pelo despacho ID 298397136, só manifestou ciência (ID 301044447)",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Sociedade agravante em causa própria, por seus advogados João Paulo dos Santos Melo (OAB/RN 5.291) e José Nicodemos de Araújo Júnior; procuração da sociedade não identificada com texto [VALIDAR]",
+    "preparo": "GRU judicial de R$ 64,26 paga em 23/07/2024 (comprovante ID 294289633; guia ID 294288480)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença · contra a União · destaque (reserva) de honorários contratuais em favor de sociedade de advogados",
+     "sintese": "Cumprimento de sentença contra a União (0008112-19.2016.4.03.6000, 1ª Vara Federal de Campo Grande). A sociedade de advogados Melo & Araújo pediu o destaque dos honorários contratuais de exequentes que representa; o juízo indeferiu.",
+     "questoes": "1) Regularidade do preparo; 2) direito da sociedade de advogados ao destaque dos honorários contratuais em relação aos exequentes nominados; 3) honorários recursais.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 294172234 (22/07/2024): direito ao destaque dos honorários contratuais (contrato e aditivo no ID 294172238, sem texto) em relação a exequentes nominados, entre eles Joseph e Kildare; majoração de honorários (artigo 85, § 11, do CPC).",
+      "contrarrazoes": "Não consta: a União, intimada pelo despacho ID 298397136, só manifestou ciência (ID 301044447)"
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a reserva de honorários contratuais em favor da sociedade de advogados."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-07-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Outra",
+       "tipo": "Agravo de instrumento",
+       "id": "294172234",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "294172234",
+       "data": "2024-07-22"
+      },
+      {
+       "desc": "Comprovante bancário de custas",
+       "id": "294289633",
+       "data": "2024-07-23"
+      },
+      {
+       "desc": "Despacho: intimação para contraminuta",
+       "id": "298397136",
+       "data": "2024-08-16"
+      },
+      {
+       "desc": "Ciência da União",
+       "id": "301044447",
+       "data": "2024-08-19"
+      },
+      {
+       "desc": "Despacho de redistribuição",
+       "id": "361976365",
+       "data": "2026-03-23"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN; identificar a decisão agravada; ler o contrato de honorários",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 361976365 · 23/03/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 298397136 · 16/08/2024 — mandou intimar a agravada para contraminuta | última peça: Petição intercorrente (AGU (PRU)) · ID 301044447 · 19/08/2024 | última movimentação: 27/03/2026 13:28 · Conclusos para julgamento · Sem pedido de efeito suspensivo (despacho ID 298397136) · União intimada só manifestou ciência (ID 301044447); sem contraminuta · Preparo: boleto e comprovante bancário de 23/07/2024 (IDs 294288480 e 294289633), sem comprovante STN [VALIDAR] · Contrato e aditivo sem texto extraível (ID 294172238) [VALIDAR] · Feito de 2024",
+     "assuntoDet": "Cumprimento de sentença — destaque de honorários contratuais (artigo 22, § 4º, da Lei 8.906/1994)",
+     "papeis": [
+      "Terceiro",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "fundamento": "Paradigmas do gabinete: AI 5009127-51.2020.4.03.0000 (acórdão 3ª Turma, 10/10/2022: destaque com contrato juntado antes do requisitório); AI 5026116-30.2023.4.03.0000 (acórdão 1ª Turma, 09/02/2024: limites do destaque, Súmula Vinculante 47)"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 4,
+   "processo": "5032136-66.2025.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "LIMA & PEGOLO ADVOGADOS ASSOCIADOS SS x UNIÃO FEDERAL",
+   "exequente": "LIMA & PEGOLO ADVOGADOS ASSOCIADOS SS",
+   "executado": "UNIÃO FEDERAL",
+   "assunto": "Reintegração",
+   "assunto_detalhado": "Destaque de honorários contratuais em favor de sociedade de advogados (artigo 22, § 4º, da Lei 8.906/1994)",
+   "grupo": "C2",
+   "tipo_caso": "Cumprimento de sentença contra a União · destaque de honorários contratuais em favor da sociedade de advogados indeferido (falta de cláusula expressa de retenção) · custas dispensadas pelo relator (artigo 82, § 3º, do CPC) · contraminuta pendente",
+   "resultado": "Ato a proferir: a decisão ID 385288702 (17/07/2026, cadastrada como monocrática terminativa) acolheu os embargos de declaração da agravante (ID 345628802), tornou sem efeito a exigência de custas (ID 344670165) e mandou intimar a União para contraminuta; a lista extraída não traz contraminuta ao agravo [VALIDAR no PJe]; as contrarrazões da União (ID 346271316) respondem só aos embargos ‖ Proposta pelos precedentes: Voto, depois da contraminuta ou do prazo: sem paradigma do gabinete no banco sobre a exigência de cláusula expressa de retenção; há linha do gabinete sobre os efeitos do destaque (AI 5009127-51.2020.4.03.0000, 3ª Turma, 10/10/2022) [VALIDAR: Contraminuta da União ao agravo; Cadastro da decisão ID 385288702 como terminativa]",
+   "modelo": "Origem: lote adp-ai (grupo A5) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da Lima & Pegolo Advogados Associados contra a decisão que, no cumprimento de sentença, homologou os cálculos e indeferiu o destaque dos honorários contratuais em favor da sociedade de advogados, por falta de menção expressa ao direito de retenção no contrato (artigo 35, § 2º, do Código de Ética; artigo 22, § 4º, da Lei 8.906/1994). Os embargos da agravante contra a exigência de custas foram acolhidos (ID 385288702), com intimação da União para contraminuta.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), depois da contraminuta da União [VALIDAR prazo]",
+    "materia": "Processual civil — honorários contratuais (destaque na requisição de pagamento)",
+    "origem": "Cumprimento de sentença 5000389-07.2020.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Decisão da 1ª Vara Federal de Corumbá que indeferiu o destaque dos honorários contratuais em favor da sociedade, mantida em embargos (ID 433791819 da origem)",
+    "recurso": "ID 344610544 · 27/11/2025",
+    "preparo": "Dispensado pela decisão ID 385288702, que acolheu os embargos de declaração (artigo 82, § 3º, do CPC)",
+    "monocratica": "Não indicada",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "DISPENSADO · a decisão ID 385288702 tornou sem efeito a exigência de custas do despacho ID 344670165 · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuído pela decisão ID 366748290 (21/04/2026, Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Contraminuta da União"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385288702 · 17/07/2026 — acolheu os embargos de declaração, dispensou as custas e mandou intimar a União para contraminuta | última peça: Contrarrazões aos embargos de declaração (União) · ID 346271316 · 11/12/2025 | última movimentação: [VALIDAR no PJe] · Custas dispensadas (ID 385288702) · Contraminuta da União não localizada na lista extraída [VALIDAR] · Decisão de 17/07/2026 cadastrada como monocrática terminativa [VALIDAR cadastro]",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; AI - Cump.Sent.",
+   "chegada": "20/10/2026",
+   "situacao_atual": {
+    "ultima_decisao": "Decisão · ID 385288702 · 17/07/2026 — acolheu os embargos de declaração, dispensou as custas e mandou intimar a União para contraminuta",
+    "ultima_peca": "Contrarrazões aos embargos de declaração (União) · ID 346271316 · 11/12/2025",
+    "ultima_informacao": "Certidão · ID 368215610 · 22/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385288702 · 17/07/2026 — acolheu os embargos de declaração, dispensou as custas e mandou intimar a União para contraminuta | última peça: Contrarrazões aos embargos de declaração (União) · ID 346271316 · 11/12/2025 | última movimentação: [VALIDAR no PJe]"
+   },
+   "teor": {
+    "sintese_fatica": "No cumprimento de sentença contra a União, a sociedade Lima & Pegolo pediu o destaque dos honorários contratuais em seu favor; o juízo indeferiu por falta de cláusula expressa de retenção.",
+    "inicial": "Cumprimento de sentença 5000389-07.2020.4.03.6004.",
+    "decisao_recorrida": "Decisão da origem: homologou os cálculos e indeferiu o destaque; embargos rejeitados (ID 433791819). Decisão ID 385288702: acolheu os embargos da agravante e dispensou as custas.",
+    "recurso": "Agravo ID 344610544 (27/11/2025): o contrato foi firmado com a sociedade; o artigo 22, § 4º, da Lei 8.906/1994 não exige cláusula de retenção.",
+    "resposta": "Contrarrazões da União ID 346271316 (11/12/2025), só aos embargos de declaração. Contraminuta ao agravo não localizada.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Henrique Lima (OAB/MS 9.979) e Renan Max Faetti (OAB/MS 15.864).",
+    "preparo": "Dispensado (ID 385288702)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Cumprimento de sentença contra a União · destaque de honorários contratuais em favor da sociedade de advogados indeferido (falta de cláusula expressa de retenção) · custas dispensadas pelo relator (artigo 82, § 3º, do CPC) · contraminuta pendente",
+     "sintese": "No cumprimento de sentença contra a União, a sociedade Lima & Pegolo pediu o destaque dos honorários contratuais em seu favor; o juízo indeferiu por falta de cláusula expressa de retenção.",
+     "questoes": "1) Requisitos do destaque de honorários contratuais em favor de sociedade de advogados (artigo 22, § 4º, da Lei 8.906/1994; artigo 35, § 2º, do Código de Ética).",
+     "rel": {
+      "razoes": "Agravo ID 344610544 (27/11/2025): o contrato foi firmado com a sociedade; o artigo 22, § 4º, da Lei 8.906/1994 não exige cláusula de retenção.",
+      "contrarrazoes": "Contrarrazões da União ID 346271316 (11/12/2025), só aos embargos de declaração. Contraminuta ao agravo não localizada."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Corumbá",
+      "dispositivo": "Indeferiu o destaque dos honorários contratuais."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não apreciado",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "344610544",
+       "contra": "Intimada [VALIDAR resposta]"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "344610544",
+       "data": "2025-11-27"
+      },
+      {
+       "desc": "Despacho: recolhimento de custas",
+       "id": "344670165",
+       "data": "2025-11-28"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "345628802",
+       "data": "2025-12-05"
+      },
+      {
+       "desc": "Contrarrazões da União aos embargos",
+       "id": "346271316",
+       "data": "2025-12-11"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "366748290",
+       "data": "2026-04-21"
+      },
+      {
+       "desc": "Decisão: acolheu os embargos e mandou intimar a União",
+       "id": "385288702",
+       "data": "2026-07-17"
+      }
+     ],
+     "pendencias": "[VALIDAR] Contraminuta da União",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385288702 · 17/07/2026 — acolheu os embargos de declaração, dispensou as custas e mandou intimar a União para contraminuta | última peça: Contrarrazões aos embargos de declaração (União) · ID 346271316 · 11/12/2025 | última movimentação: [VALIDAR no PJe] · Custas dispensadas (ID 385288702) · Contraminuta da União não localizada na lista extraída [VALIDAR] · Decisão de 17/07/2026 cadastrada como monocrática terminativa [VALIDAR cadastro]",
+     "assuntoDet": "Destaque de honorários contratuais em favor de sociedade de advogados (artigo 22, § 4º, da Lei 8.906/1994)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 5,
+   "processo": "5005990-98.2023.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL x ELIDA APARECIDA GAIDARGI GONCALVES",
+   "exequente": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "executado": "ELIDA APARECIDA GAIDARGI GONCALVES",
+   "assunto": "Desvio de Função",
+   "assunto_detalhado": "Servidor — desvio de função (auxiliar × técnico de enfermagem): diferenças remuneratórias",
+   "grupo": "C3",
+   "tipo_caso": "Apelações da FUFMS e da EBSERH e remessa necessária · auxiliar de enfermagem em desvio de função como técnica de enfermagem (HUMAP) · diferenças remuneratórias e reflexos, com responsabilidade solidária das rés",
+   "resultado": "Ato a proferir: apelações da FUFMS (ID 337177866) e da EBSERH (ID 337177867) e remessa necessária da sentença ID 337177865; contrarrazões da autora (ID 337177870) ‖ Proposta pelos precedentes: Voto: examinar a legitimidade passiva de cada ré e o período de responsabilidade; no mérito, desvio de função comprovado gera direito às diferenças, sem reenquadramento (Súmula 378/STJ) [VALIDAR prova e período] [VALIDAR: Período do desvio e prescrição; Legitimidade da FUFMS e da EBSERH; Consectários]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da FUFMS e da EBSERH e remessa necessária da sentença que reconheceu o desvio de função da auxiliar de enfermagem Élida Aparecida Gaidargi Gonçalves, que exercia atividades de técnica de enfermagem, e condenou as rés, solidariamente, às diferenças remuneratórias. A FUFMS alega ilegitimidade passiva; ambas negam o desvio.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Administrativo — servidor (desvio de função)",
+    "origem": "Procedimento comum 5005990-98.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 337177865 (22/08/2025)",
+    "recurso": "apelação de FUFMS (ID 337177866, 27/08/2025) e apelação de EBSERH (ID 337177867, 12/09/2025) · remessa necessária",
+    "preparo": "FUFMS: Isento (ente público); EBSERH: Isento (prerrogativas de Fazenda Pública) [VALIDAR]",
+    "monocratica": "Possível em parte, à luz da Súmula 378/STJ, se superada a preliminar [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FUFMS: Isento (ente público); EBSERH: Isento (prerrogativas de Fazenda Pública) [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 337989228 · 01/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 337177865 · 22/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões de Recurso (agravado) · ID 337177870 · 17/09/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Preliminar de ilegitimidade passiva da FUFMS (gestão do HUMAP pela EBSERH desde 2013) · Solidariedade das rés · Prova testemunhal (decisão ID 337177821) · Súmula 378/STJ · Prescrição quinquenal [VALIDAR]",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "1ª Seção; Desvio de função",
+   "chegada": "02/10/2025",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 337989228 · 01/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 337177865 · 22/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões de Recurso (agravado) · ID 337177870 · 17/09/2025",
+    "ultima_informacao": "Certidão · ID 338110513 · 02/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 337989228 · 01/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 337177865 · 22/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões de Recurso (agravado) · ID 337177870 · 17/09/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "Élida Aparecida Gaidargi Gonçalves, auxiliar de enfermagem da UFMS lotada no HUMAP, pediu as diferenças por exercer funções de técnica de enfermagem. Houve prova testemunhal; a sentença acolheu o pedido contra a FUFMS e a EBSERH.",
+    "inicial": "Ação da servidora contra a FUFMS e a EBSERH.",
+    "decisao_recorrida": "Sentença ID 337177865 (22/08/2025): julgou procedente o pedido para reconhecer o desvio de função da autora, que exercia atividades de técnica de enfermagem, e condenar as rés, solidariamente, às diferenças de remuneração entre os cargos e reflexos, observada a progressão [VALIDAR período e consectários].",
+    "recurso": "FUFMS (ID 337177866, 27/08/2025): preliminar de ilegitimidade passiva, porque a gestão do HUMAP passou à EBSERH a partir de 2013; no mérito, inexistência de desvio de função [VALIDAR]. EBSERH (ID 337177867, 12/09/2025): inexistência de desvio de função: a autora exercia as atribuições do próprio cargo [VALIDAR].",
+    "resposta": "Contrarrazões da autora (ID 337177870).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Autora: advogada Joselita Prudente Ferreira (OAB/MS 6.708).",
+    "preparo": "FUFMS: Isento (ente público); EBSERH: Isento (prerrogativas de Fazenda Pública) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da FUFMS e da EBSERH e remessa necessária · auxiliar de enfermagem em desvio de função como técnica de enfermagem (HUMAP) · diferenças remuneratórias e reflexos, com responsabilidade solidária das rés",
+     "sintese": "Élida Aparecida Gaidargi Gonçalves, auxiliar de enfermagem da UFMS lotada no HUMAP, pediu as diferenças por exercer funções de técnica de enfermagem. Houve prova testemunhal; a sentença acolheu o pedido contra a FUFMS e a EBSERH.",
+     "questoes": "1) Legitimidade passiva da FUFMS e da EBSERH; 2) desvio de função e diferenças remuneratórias (Súmula 378/STJ); 3) prescrição e consectários.",
+     "rel": {
+      "razoes": "FUFMS (ID 337177866, 27/08/2025): preliminar de ilegitimidade passiva, porque a gestão do HUMAP passou à EBSERH a partir de 2013; no mérito, inexistência de desvio de função [VALIDAR]. EBSERH (ID 337177867, 12/09/2025): inexistência de desvio de função: a autora exercia as atribuições do próprio cargo [VALIDAR].",
+      "contrarrazoes": "Contrarrazões da autora (ID 337177870)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "337177865",
+      "juizo": "Procedimento comum 5005990-98.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para reconhecer o desvio de função da autora, que exercia atividades de técnica de enfermagem, e condenar as rés, solidariamente, às diferenças de remuneração entre os cargos e reflexos, observada a progressão [VALIDAR período e consectários]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-07-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FUFMS",
+       "tipo": "Apelação",
+       "id": "337177866",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "EBSERH",
+       "tipo": "Apelação",
+       "id": "337177867",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "337177865",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: prova testemunhal deferida",
+       "id": "337177821",
+       "data": "2024-07-09"
+      },
+      {
+       "desc": "Sentença: procedência",
+       "id": "337177865",
+       "data": "2025-08-22"
+      },
+      {
+       "desc": "Apelação da FUFMS",
+       "id": "337177866",
+       "data": "2025-08-27"
+      },
+      {
+       "desc": "Apelação da EBSERH",
+       "id": "337177867",
+       "data": "2025-09-12"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "337177870",
+       "data": "2025-09-17"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 337989228 · 01/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 337177865 · 22/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões de Recurso (agravado) · ID 337177870 · 17/09/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Preliminar de ilegitimidade passiva da FUFMS (gestão do HUMAP pela EBSERH desde 2013) · Solidariedade das rés · Prova testemunhal (decisão ID 337177821) · Súmula 378/STJ · Prescrição quinquenal [VALIDAR]",
+     "assuntoDet": "Servidor — desvio de função (auxiliar × técnico de enfermagem): diferenças remuneratórias",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 6,
+   "processo": "5004515-23.2022.4.03.6201",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "FUNDACAO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL x ALMIR MENDES MARQUES",
+   "exequente": "FUNDACAO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "executado": "ALMIR MENDES MARQUES",
+   "assunto": "Desvio de Função",
+   "assunto_detalhado": "Servidor — desvio de função (atendente de enfermagem × motorista): teletrabalho no período",
+   "grupo": "C3",
+   "tipo_caso": "Apelação da FUFMS e remessa necessária · atendente de enfermagem em desvio de função como motorista (01/2018 a 09/2021) · diferenças remuneratórias integrais · FUFMS pede exclusão dos períodos de teletrabalho e revisão dos honorários",
+   "resultado": "Ato a proferir: apelação da FUFMS (ID 381366837) e remessa necessária da sentença ID 381366833, integrada pela rejeição dos embargos (ID 381366836); MPF sem intervenção (ID 385396955) ‖ Proposta pelos precedentes: Voto ou monocrática: não conhecer da remessa, se a condenação for inferior ao limite do artigo 496, § 3º, I, do CPC [VALIDAR]; quanto à apelação, examinar se o teletrabalho afasta o desvio no período (03/2020 a 05/2020 e 10/2020) e os honorários [VALIDAR: Valor da condenação para o cabimento da remessa; Prova da atividade em teletrabalho; Contrarrazões]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da FUFMS e remessa necessária da sentença que reconheceu o desvio de função do atendente de enfermagem Almir Mendes Marques como motorista de 01/2018 a 09/2021 e mandou pagar as diferenças integrais. A FUFMS pede só a exclusão dos períodos de teletrabalho na pandemia e a revisão dos honorários.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — servidor (desvio de função)",
+    "origem": "Procedimento comum 5004515-23.2022.4.03.6201 (1ª Vara Federal de Campo Grande, após o JEF)",
+    "decisao_agravada": "Sentença ID 381366833 (28/10/2025)",
+    "recurso": "apelação de FUFMS (ID 381366837, 25/03/2026) · remessa necessária",
+    "preparo": "FUFMS: Isento (ente público)",
+    "monocratica": "Possível: apelação restrita ao teletrabalho e aos honorários; remessa possivelmente incabível pelo valor (artigo 496, § 3º, I, do CPC) [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FUFMS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 384934661 · 07/07/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 385396955 · 10/07/2026 | última movimentação: 13/07/2026 14:43 · Conclusos para julgamento · Etiqueta \"PRIORIDADE - Idoso(a)\" · Origem no JEF (excesso de alçada alegado) · Remessa: valor provavelmente inferior a mil salários mínimos (artigo 496, § 3º, I, do CPC) [VALIDAR] · Apelação limitada ao teletrabalho e aos honorários",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "1ª Seção; PRIORIDADE - Idoso(a); Servidor - diferenças",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "13/07/2026 14:43 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 384934661 · 07/07/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 385396955 · 10/07/2026",
+    "ultima_informacao": "Informação · ID 381366839 · 19/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 384934661 · 07/07/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 385396955 · 10/07/2026 | última movimentação: 13/07/2026 14:43 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Almir Mendes Marques, atendente de enfermagem da UFMS, exerceu atividades de motorista e pediu as diferenças. O processo começou no JEF, onde a FUFMS alegou excesso de alçada, e foi sentenciado pela 1ª Vara Federal.",
+    "inicial": "Ação do servidor contra a FUFMS.",
+    "decisao_recorrida": "Sentença ID 381366833 (28/10/2025): julgou parcialmente procedente o pedido para reconhecer o desvio de função do autor como motorista de 01/2018 a 09/2021 e condenar a FUFMS às diferenças entre os cargos, com férias, 13º, adicionais, progressões e plantões, sem redução por afastamentos; embargos da FUFMS sobre o teletrabalho rejeitados (ID 381366836).",
+    "recurso": "FUFMS (ID 381366837, 25/03/2026): exclusão dos períodos de teletrabalho (03/2020 a 05/2020 e 10/2020) e revisão dos honorários, por sucumbência mínima.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 385396955: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Paulo Henrique Soares Corrales (OAB/MS 14.725).",
+    "preparo": "FUFMS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da FUFMS e remessa necessária · atendente de enfermagem em desvio de função como motorista (01/2018 a 09/2021) · diferenças remuneratórias integrais · FUFMS pede exclusão dos períodos de teletrabalho e revisão dos honorários",
+     "sintese": "Almir Mendes Marques, atendente de enfermagem da UFMS, exerceu atividades de motorista e pediu as diferenças. O processo começou no JEF, onde a FUFMS alegou excesso de alçada, e foi sentenciado pela 1ª Vara Federal.",
+     "questoes": "1) Cabimento da remessa pelo valor; 2) desvio de função em período de teletrabalho; 3) honorários e sucumbência mínima.",
+     "rel": {
+      "razoes": "FUFMS (ID 381366837, 25/03/2026): exclusão dos períodos de teletrabalho (03/2020 a 05/2020 e 10/2020) e revisão dos honorários, por sucumbência mínima.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "381366833",
+      "juizo": "Procedimento comum 5004515-23.2022.4.03.6201 (1ª Vara Federal de Campo Grande, após o JEF)",
+      "dispositivo": "julgou parcialmente procedente o pedido para reconhecer o desvio de função do autor como motorista de 01/2018 a 09/2021 e condenar a FUFMS às diferenças entre os cargos, com férias, 13º, adicionais, progressões e plantões, sem redução por afastamentos; embargos da FUFMS sobre o teletrabalho rejeitados (ID 381366836)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-05-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FUFMS",
+       "tipo": "Apelação",
+       "id": "381366837",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "381366833",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência parcial",
+       "id": "381366833",
+       "data": "2025-10-28"
+      },
+      {
+       "desc": "Sentença: embargos da FUFMS rejeitados",
+       "id": "381366836",
+       "data": "2026-03-23"
+      },
+      {
+       "desc": "Apelação da FUFMS",
+       "id": "381366837",
+       "data": "2026-03-25"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "385396955",
+       "data": "2026-07-10"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 384934661 · 07/07/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 385396955 · 10/07/2026 | última movimentação: 13/07/2026 14:43 · Conclusos para julgamento · Etiqueta \"PRIORIDADE - Idoso(a)\" · Origem no JEF (excesso de alçada alegado) · Remessa: valor provavelmente inferior a mil salários mínimos (artigo 496, § 3º, I, do CPC) [VALIDAR] · Apelação limitada ao teletrabalho e aos honorários",
+     "assuntoDet": "Servidor — desvio de função (atendente de enfermagem × motorista): teletrabalho no período",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "385396955",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 7,
+   "processo": "5026912-50.2025.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "ICL ADMINISTRACAO E PARTICIPACAO LTDA - EPP x INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
+   "exequente": "ICL ADMINISTRACAO E PARTICIPACAO LTDA - EPP",
+   "executado": "INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
+   "assunto": "Desapropriação por Interesse Social para Reforma Agrária",
+   "assunto_detalhado": "Desapropriação por interesse social — cumprimento de sentença: juros compensatórios, juros moratórios e cálculos",
+   "grupo": "C4",
+   "tipo_caso": "Desapropriação para reforma agrária · cumprimento de sentença · juros compensatórios (ADI 2332) e inexigibilidade parcial do título · cálculos",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); há contraminuta do INCRA e parecer do MPF pelo desprovimento; o efeito suspensivo não foi examinado, porque a decisão agravada só produz efeitos após a preclusão (decisão ID 347093430) ‖ Proposta pelos precedentes: juros compensatórios de 6% ao ano sobre a diferença entre a indenização e 80% da oferta, pela ADI 2.332, linha aplicada pelo gabinete; inexigibilidade parcial do título quando a decisão do STF é anterior ao trânsito em julgado (artigo 535, §§ 5º e 7º, do CPC); juros moratórios só com atraso no precatório (Súmula Vinculante 17, citada na decisão ID 347093430) → desprovimento [VALIDAR: Situação do AI conexo 5028989-32.2025.4.03.0000; Sucessão ou cessão entre Incolustre e ICL; Intimação da decisão agravada na origem]",
+   "modelo": "Origem: lote adp-ai (grupo A7) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de ICL Administração e Participação contra a decisão que, no cumprimento de sentença da desapropriação 0000385-28.2001.4.03.6002, declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano (artigo 535, §§ 5º e 7º, do CPC, e ADI 2332), fixou-os em 6% ao ano sobre a diferença entre a indenização e 80% da oferta, rejeitou os cálculos da exequente e fixou honorários recíprocos (ID 425628843 da origem). O INCRA (contraminuta ID 344951656) e o MPF (parecer ID 346435971) defendem a manutenção.",
+   "peculiaridades": "Processo redistribuído pela 1ª Turma (Des. Fed. David Dantas) à Turma Regional (decisão ID 365403890, 09/04/2026). A decisão ID 347093430 recebeu o recurso, registrou que a decisão agravada só produz efeitos após a preclusão e mandou trasladar cópia ao AI 5028989-32.2025.4.03.0000. A agravante (ICL) não tem o mesmo nome da expropriada citada pelo INCRA (Incolustre Indústria e Comércio de Lustres) [VALIDAR sucessão ou cessão]. Terceiros interessados: família Vicentin.",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "338894586",
+     "data": "10/10/2025"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "344951656",
+     "data": "01/12/2025"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "365403890",
+     "data": "09/04/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "347093430",
+     "data": "17/12/2025"
+    },
+    {
+     "peca": "Parecer (conferir se do MPF)",
+     "id": "346435971",
+     "data": "12/12/2025"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Desapropriação — cumprimento de sentença (juros compensatórios e cálculos)",
+    "origem": "Cumprimento de sentença na desapropriação 0000385-28.2001.4.03.6002 (juízo da origem [VALIDAR])",
+    "decisao_agravada": "ID 425628843 (autos de origem), de 09/09/2025",
+    "recurso": "ID 338894586 · 10/10/2025",
+    "preparo": "Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" (ID 338894624)",
+    "monocratica": "Não indicada: matéria de cálculo com parecer do MPF; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 338894624 · conferido em 21/11/2026 (regra: Pix ou cartão só com o comprovante do Tesouro — PagTesouro \"Pagamento realizado com sucesso\", com \"Identificação do pagamento\")",
+    "conf_prevencao": "Origem: 0000385-28.2001.4.03.6002 · a decisão ID 347093430 mandou trasladar cópia ao AI 5028989-32.2025.4.03.0000 (recurso conexo contra a mesma decisão [VALIDAR]) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] AI conexo 5028989-32.2025.4.03.0000: localizar e avaliar julgamento conjunto",
+    "[VALIDAR] Legitimidade da ICL (sucessão ou cessão da expropriada Incolustre)",
+    "[VALIDAR] Procuração",
+    "[VALIDAR] Tempestividade: intimação da decisão agravada informada só pela agravante (19/09/2025)",
+    "[VALIDAR] Autos extraídos em 20-21/11/2026 pela linha do tempo do PJe: a lista pode omitir anexos e peças; conferir no PJe antes de concluir"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365403890 · 09/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 347093430 · 17/12/2025 — recebeu o recurso sem conceder efeito suspensivo; mandou intimar a agravada para contraminuta | última peça: Petição intercorrente (PGF) · ID 347790028 · 22/12/2025 | última movimentação: 10/04/2026 15:43 · Conclusos para julgamento · Trânsito em julgado do acórdão em 30/09/2023, posterior ao julgamento de mérito da ADI 2332 (28/05/2018), segundo a decisão ID 347093430 · Diferença de indenização de R$ 306.379,84, a atualizar desde 29/11/2000 · AI conexo 5028989-32.2025.4.03.0000 [VALIDAR julgamento conjunto] · Parecer do MPF pelo desprovimento (ID 346435971) · Divergência de nome entre a agravante e a expropriada [VALIDAR]",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; AI - Cump.Sent.; Desapropriação",
+   "chegada": "04/11/2026",
+   "bloco": "2",
+   "situacao_atual": {
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 365403890 · 09/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_peca": "Petição intercorrente (PGF) · ID 347790028 · 22/12/2025",
+    "ultima_informacao": "Certidão · ID 365641176 · 10/04/2026",
+    "ultima_movimentacao": "10/04/2026 15:43 · Conclusos para julgamento",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao_relevante": "Decisão · ID 347093430 · 17/12/2025 — recebeu o recurso sem conceder efeito suspensivo; mandou intimar a agravada para contraminuta",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365403890 · 09/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 347093430 · 17/12/2025 — recebeu o recurso sem conceder efeito suspensivo; mandou intimar a agravada para contraminuta | última peça: Petição intercorrente (PGF) · ID 347790028 · 22/12/2025 | última movimentação: 10/04/2026 15:43 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Em cumprimento de sentença de desapropriação por interesse social para reforma agrária (Fazenda Rancho Loma, Iguatemi/MS), o juízo declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano, aplicou a ADI 2332 (6% ao ano sobre a diferença entre a indenização e 80% da oferta), afastou os cálculos da exequente e determinou novo cálculo.",
+    "inicial": "Não consta nos autos do recurso (desapropriação 0000385-28.2001.4.03.6002)",
+    "decisao_recorrida": "Decisão ID 425628843 dos autos de origem (09/09/2025): inexigibilidade parcial do título quanto aos juros compensatórios de 12% (artigo 535, §§ 5º e 7º, do CPC, e ADI 2332); juros compensatórios de 6% ao ano sobre a diferença, da imissão na posse (28/08/2001) a 30/11/2021; consolidação em 31/08/2025 (EC 113/2021); honorários de R$ 30.000,00 contra a exequente e de R$ 10.000,00 contra o INCRA (artigo 85, § 8º, do CPC). Transcrita na decisão ID 347093430.",
+    "recurso": "Agravo de instrumento ID 338894586 (10/10/2025): preclusão das impugnações do INCRA e homologação dos cálculos da exequente; subsidiariamente, juros moratórios desde 01/01/2002, encargos sobre as benfeitorias até o levantamento e manutenção dos juros compensatórios de 12% fixados no título.",
+    "resposta": "Contraminuta do INCRA ID 344951656 (01/12/2025): título reformado pelo Tribunal (terra nua pelo laudo judicial; benfeitorias pela oferta; juros compensatórios afastados em parte); inexigibilidade pela ADI 2332; ausência de requisitos do efeito suspensivo. Reiterada pela petição ID 347790028.",
+    "parecer": "Parecer do MPF ID 346435971 (12/12/2025): o juízo não é mero homologador dos cálculos; não incidem juros compensatórios nem moratórios sobre as benfeitorias pagas pela oferta; opina pelo não provimento.",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Noé Aparecido da Costa (OAB/PR 11.666) assina o recurso; procuração não identificada nos autos do recurso [VALIDAR]. INCRA representado por procurador federal.",
+    "preparo": "Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" e identificação do pagamento (ID 338894624, 10/10/2025)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Desapropriação para reforma agrária · cumprimento de sentença · juros compensatórios (ADI 2332) e inexigibilidade parcial do título · cálculos",
+     "sintese": "Em cumprimento de sentença de desapropriação por interesse social para reforma agrária (Fazenda Rancho Loma, Iguatemi/MS), o juízo declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano, aplicou a ADI 2332 (6% ao ano sobre a diferença entre a indenização e 80% da oferta), afastou os cálculos da exequente e determinou novo cálculo.",
+     "questoes": "1) Preclusão das impugnações do INCRA aos cálculos e homologação dos cálculos da exequente; 2) juros compensatórios de 12% do título × 6% sobre a diferença (ADI 2332) e inexigibilidade parcial do título (artigo 535, § 5º, do CPC); 3) termo inicial dos juros moratórios e cumulação com os compensatórios; 4) encargos sobre as benfeitorias até o levantamento.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 338894586 (10/10/2025): preclusão das impugnações do INCRA e homologação dos cálculos da exequente; subsidiariamente, juros moratórios desde 01/01/2002, encargos sobre as benfeitorias até o levantamento e manutenção dos juros compensatórios de 12% fixados no título.",
+      "contrarrazoes": "Contraminuta do INCRA ID 344951656 (01/12/2025): título reformado pelo Tribunal (terra nua pelo laudo judicial; benfeitorias pela oferta; juros compensatórios afastados em parte); inexigibilidade pela ADI 2332; ausência de requisitos do efeito suspensivo. Reiterada pela petição ID 347790028."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "425628843",
+      "juizo": "[VALIDAR]",
+      "dispositivo": "Declarou inexigível em parte o título quanto aos juros compensatórios de 12% ao ano, fixou critérios de cálculo e honorários recíprocos."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não examinado (decisão agravada só produz efeitos após a preclusão)",
+      "id": "425628843"
+     },
+     "adm": {
+      "prot": "2025-10-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "338894586",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "338894586",
+       "data": "2025-10-10"
+      },
+      {
+       "desc": "Comprovante PagTesouro",
+       "id": "338894624",
+       "data": "2025-10-10"
+      },
+      {
+       "desc": "Despacho: apreciação do efeito suspensivo postergada",
+       "id": "339128789",
+       "data": "2025-10-13"
+      },
+      {
+       "desc": "Contraminuta do INCRA",
+       "id": "344951656",
+       "data": "2025-12-01"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "346435971",
+       "data": "2025-12-12"
+      },
+      {
+       "desc": "Decisão: recebimento do recurso e traslado ao AI 5028989-32.2025",
+       "id": "347093430",
+       "data": "2025-12-17"
+      },
+      {
+       "desc": "Decisão: remessa à Turma Regional",
+       "id": "365403890",
+       "data": "2026-04-09"
+      }
+     ],
+     "pendencias": "Localizar o AI conexo 5028989-32.2025; conferir a legitimidade da ICL e a procuração",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365403890 · 09/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 347093430 · 17/12/2025 — recebeu o recurso sem conceder efeito suspensivo; mandou intimar a agravada para contraminuta | última peça: Petição intercorrente (PGF) · ID 347790028 · 22/12/2025 | última movimentação: 10/04/2026 15:43 · Conclusos para julgamento · Trânsito em julgado do acórdão em 30/09/2023, posterior ao julgamento de mérito da ADI 2332 (28/05/2018), segundo a decisão ID 347093430 · Diferença de indenização de R$ 306.379,84, a atualizar desde 29/11/2000 · AI conexo 5028989-32.2025.4.03.0000 [VALIDAR julgamento conjunto] · Parecer do MPF pelo desprovimento (ID 346435971) · Divergência de nome entre a agravante e a expropriada [VALIDAR]",
+     "assuntoDet": "Desapropriação por interesse social — cumprimento de sentença: juros compensatórios, juros moratórios e cálculos",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Reforma agrária",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2025-12-17",
+     "urgObs": "A decisão ID 347093430 recebeu o recurso sem examinar o efeito suspensivo, porque a decisão agravada só produz efeitos após a preclusão",
+     "fundamento": "Paradigmas do gabinete: ApCiv 0937601-20.1986.4.03.6100 (acórdão 1ª Turma, 06/07/2023: juros compensatórios de 6% ao ano pela ADI 2.332); AR 5007014-22.2023.4.03.0000 (acórdão 1ª Seção, 10/07/2026: desapropriação para reforma agrária, juros compensatórios e moratórios, ADI 2.332) [VALIDAR paradigma específico da inexigibilidade do título]",
+     "idParecer": "346435971",
+     "parecerSentido": "Desprovimento"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 8,
+   "processo": "5004693-09.2026.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA x AGROPECUARIA POUSO ALEGRE LTDA - ME",
+   "exequente": "INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
+   "executado": "AGROPECUARIA POUSO ALEGRE LTDA - ME",
+   "assunto": "Desapropriação por Utilidade Pública / DL 3.365/1941",
+   "assunto_detalhado": "Reforma agrária — cumprimento de sentença de desapropriação; juros compensatórios",
+   "grupo": "C4",
+   "tipo_caso": "Reforma agrária · desapropriação por interesse social (cumprimento de sentença) · juros compensatórios e critérios de cálculo",
+   "resultado": "Ato a proferir: vista ao MPF, se exigível, e depois julgamento do agravo de instrumento (voto) [VALIDAR] ‖ Proposta pelos precedentes: Antes: vista ao MPF (desapropriação para reforma agrária, artigo 18, § 2º, da LC 76/1993) — conferir se a intervenção é exigível na fase de cumprimento. Depois, julgamento do agravo (voto). Pelo precedente da Turma Regional: juros compensatórios de 6% ao ano (ADI 2.332), tempus regit actum, incidentes sobre o valor apurado pericialmente; as alegações de legislação superveniente (MP 700/2015; Leis 13.465/2017 e 14.620/2023) foram tratadas como rediscussão → manter os 6% e negar provimento nesse ponto, observado o título. Cominação de acolher o cálculo da parte contrária: sem precedente específico no banco. [VALIDAR: Exigência de vista ao MPF no cumprimento; o que o título fixou sobre os juros compensatórios]",
+   "modelo": "Origem: lote adp-ai (grupo A5) · não pautado",
+   "variacoes": [],
+   "observacao": "Agravo do INCRA contra a decisão que, no cumprimento de sentença de desapropriação 0001631-93.2000.4.03.6002, manteve juros compensatórios de 6% ao ano e mandou apresentar novo cálculo sob pena de acolher o da expropriada. O INCRA alega legislação superveniente, majoração indevida e contradição da ordem. O efeito suspensivo foi indeferido; a expropriada respondeu.",
+   "peculiaridades": "Desapropriação para reforma agrária: sem parecer do MPF nos autos (artigo 18, § 2º, da LC 76/1993) [VALIDAR vista ao MPF antes de pautar]. Execução de R$ 14,4 milhões. Prevenção originária pela ApelRemNec 0001631-93.2000.4.03.6002.",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "356642194",
+     "data": "24/02/2026"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "359534647",
+     "data": "11/03/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "357168926",
+     "data": "27/02/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Vista ao MPF (LC 76/1993) e julgamento do agravo de instrumento",
+    "materia": "Reforma agrária — cumprimento de sentença de desapropriação; juros compensatórios e critérios de cálculo",
+    "origem": "1ª Vara Federal de Naviraí · 0001631-93.2000.4.03.6002",
+    "decisao_agravada": "Rejeição dos embargos de declaração do INCRA [VALIDAR ID]",
+    "recurso": "ID 356642194 · 24/02/2026",
+    "preparo": "Isento (INCRA)",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Isento (INCRA, autarquia federal) · conferido em 20/11/2026",
+    "conf_prevencao": "Origem: 0001631-93.2000.4.03.6002 · prevenção pela ApelRemNec 0001631-93.2000.4.03.6002 (1ª Turma, Des. Fed. Cotrim Guimarães), certidão ID 356720448; hoje na Turma Regional de MS · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Autos extraídos em 20-21/11/2026 pela linha do tempo do PJe: a lista pode omitir anexos e peças; conferir no PJe antes de concluir"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 375433456 · 01/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 357168926 · 27/02/2026 — indeferiu o efeito suspensivo ou a tutela recursal | última peça: Contraminuta (agravado) · ID 359534647 · 11/03/2026 | última movimentação: 02/06/2026 16:55 · Conclusos para julgamento · Execução de R$ 14.429.672,39 (06/2022) · Juros compensatórios de 6% ao ano sobre a diferença entre 80% da oferta e a indenização · Ordem de novo cálculo sob pena de acolher o da expropriada · Efeito suspensivo indeferido (ID 357168926, 27/02/2026) · Sem parecer do MPF (LC 76/1993) [VALIDAR]",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; BRUNO",
+   "chegada": "04/11/2026",
+   "bloco": "2",
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 375433456 · 01/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_peca": "Contraminuta (agravado) · ID 359534647 · 11/03/2026",
+    "ultima_informacao": "Certidão · ID 378135533 · 02/06/2026",
+    "ultima_movimentacao": "02/06/2026 16:55 · Conclusos para julgamento",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao_relevante": "Decisão · ID 357168926 · 27/02/2026 — indeferiu o efeito suspensivo ou a tutela recursal",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 375433456 · 01/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 357168926 · 27/02/2026 — indeferiu o efeito suspensivo ou a tutela recursal | última peça: Contraminuta (agravado) · ID 359534647 · 11/03/2026 | última movimentação: 02/06/2026 16:55 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Em cumprimento de sentença de desapropriação por interesse social para reforma agrária, com execução de R$ 14.429.672,39 (06/2022), o juízo rejeitou os embargos de declaração do INCRA, manteve juros compensatórios de 6% ao ano sobre a diferença entre 80% da oferta e a indenização e mandou o INCRA apresentar novo cálculo, sob pena de acolher o da expropriada.",
+    "inicial": "Cumprimento de sentença 0001631-93.2000.4.03.6002 (1ª Vara Federal de Naviraí) de Agropecuária Pouso Alegre Ltda. ME contra o INCRA",
+    "decisao_recorrida": "Decisão que rejeitou os embargos de declaração do INCRA e manteve os critérios de liquidação (juros compensatórios de 6% ao ano) e a ordem de novo cálculo sob pena de acolhimento do da exequente [VALIDAR ID e data]",
+    "recurso": "Agravo do INCRA ID 356642194 (24/02/2026): (1) legislação superveniente sobre juros compensatórios; (2) critérios de atualização que majoram indevidamente o débito; (3) contradição ao considerar imprestáveis os dois cálculos e cominar o acolhimento de um deles; (4) justa indenização (artigo 184 da CF/1988); pede efeito suspensivo.",
+    "resposta": "Expropriada, contraminuta ID 359534647 (11/03/2026): manutenção dos critérios fixados.",
+    "parecer": "Sem parecer do MPF nos autos extraídos; desapropriação para reforma agrária (artigo 18, § 2º, da LC 76/1993) [VALIDAR vista ao MPF].",
+    "outros": "Certidão ID 356720448 (25/02/2026): redistribuição por dependência ao Des. Fed. Cotrim Guimarães pela ApelRemNec 0001631-93.2000.4.03.6002. Decisão ID 357168926 (27/02/2026): indeferiu o efeito suspensivo. Ciência do INCRA ID 357662547. Redistribuição à Turma Regional de MS (despacho ID 375433456 e certidão ID 378135533).",
+    "representacao": "Agravante: INCRA (PGF). Agravada: advogados Régis Eduardo Tortorella, Rafael Rosa Neto, Nelson Rodrigues de Almeida Júnior e Danielle Zambra.",
+    "preparo": "INCRA isento."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Reforma agrária — cumprimento de sentença de desapropriação; juros compensatórios",
+     "subassuntos": "Reforma agrária · desapropriação por interesse social (cumprimento de sentença) · juros compensatórios e critérios de cálculo",
+     "sintese": "",
+     "questoes": "1) Juros compensatórios na desapropriação (legislação superveniente, taxa e base de cálculo); 2) critérios de atualização; 3) cominação de acolhimento do cálculo da parte contrária; 4) intervenção do MPF (artigo 18, § 2º, da LC 76/1993).",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Naviraí",
+      "dispositivo": "Rejeitou os embargos de declaração do INCRA e manteve os critérios de liquidação, com ordem de novo cálculo."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-02-24",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Outra",
+       "tipo": "Agravo de instrumento",
+       "id": "356642194",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "356642194",
+       "data": "2026-02-24"
+      },
+      {
+       "desc": "Certidão de prevenção",
+       "id": "356720448",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "357168926",
+       "data": "2026-02-27"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "359534647",
+       "data": "2026-03-11"
+      }
+     ],
+     "pendencias": "Abrir vista ao MPF, se exigível (LC 76/1993), antes de pautar",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 375433456 · 01/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 357168926 · 27/02/2026 — indeferiu o efeito suspensivo ou a tutela recursal | última peça: Contraminuta (agravado) · ID 359534647 · 11/03/2026 | última movimentação: 02/06/2026 16:55 · Conclusos para julgamento · Execução de R$ 14.429.672,39 (06/2022) · Juros compensatórios de 6% ao ano sobre a diferença entre 80% da oferta e a indenização · Ordem de novo cálculo sob pena de acolher o da expropriada · Efeito suspensivo indeferido (ID 357168926, 27/02/2026) · Sem parecer do MPF (LC 76/1993) [VALIDAR]",
+     "papeis": [
+      "Executado(a)",
+      "Exequente"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Reforma agrária",
+     "parecer": "Aguardando parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-02-27",
+     "fundamento": "Paradigmas do gabinete: ApelRemNec 0002406-25.2011.4.03.6002 (acórdão TRMS, 12/05/2026: juros compensatórios de 6% pela ADI 2.332; MP 700/2015 e Leis 13.465/2017 e 14.620/2023; embargos acolhidos em parte); ApCiv 0937601-20.1986.4.03.6100 (acórdão 1ª Turma, 06/07/2023: juros compensatórios de 6%, ADI 2.332); AR 5007014-22.2023.4.03.0000 (acórdão 1ª Seção, 10/07/2026: desapropriação para reforma agrária, juros compensatórios)"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 9,
+   "processo": "5000038-88.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIÃO FEDERAL x MARIA ANGELA ORTIZ DIAS",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "MARIA ANGELA ORTIZ DIAS",
+   "assunto": "Tratamento Domiciliar (Home Care)",
+   "assunto_detalhado": "Saúde — atendimento domiciliar (home care) 24 horas a beneficiária do FUSEx",
+   "grupo": "C5",
+   "tipo_caso": "Saúde · atendimento domiciliar (home care) 24 horas · beneficiária do FUSEx · tutela de urgência",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto) ‖ Proposta pelos precedentes: Sem precedente identificado sobre home care no FUSEx. Paradigmas do Relator: em plano de saúde de autogestão, é ilegal a limitação do home care prescrito, mantido o atendimento integral sem limitação de período (ApCiv 0003722-19.2015.4.03.6104, 1ª Turma, 06/07/2023); em sentido oposto, negado home care quando não comprovada a adequação domiciliar (AI 5022203-45.2020.4.03.0000, 3ª Turma, 23/04/2021). Aplicado o primeiro, com prescrição médica vigente e parecer do MPF pelo desprovimento, o agravo da União seria desprovido. [VALIDAR: o paradigma trata de plano de autogestão de empresa pública, não do regime normativo do FUSEx: conferir as normas de atenção domiciliar invocadas pela União e o relatório da Organização Militar sobre a estabilização do quadro; agravada idosa e curatelada; concluso desde 26/05/2026]",
+   "modelo": "Origem: lote adp-ai (grupo A7) · não pautado",
+   "variacoes": [],
+   "observacao": "Agravo da União contra a decisão que, na ação 5001038-71.2026.4.03.6000, manteve o home care integral (24 horas) de beneficiária idosa do FUSEx enquanto persistir a prescrição médica. A União sustenta que a atenção domiciliar do FUSEx tem limites normativos e que o quadro clínico se estabilizou. O efeito suspensivo foi indeferido em 27/04/2026; o MPF opina pelo desprovimento.",
+   "peculiaridades": "Agravada idosa (83 anos) e curatelada. Efeito suspensivo indeferido. Parecer do MPF nos autos. Conclusos para julgamento desde 26/05/2026.",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "367011170",
+     "data": "16/04/2026"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "374031596",
+     "data": "17/05/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "367175328",
+     "data": "27/04/2026"
+    },
+    {
+     "peca": "Parecer (conferir se do MPF)",
+     "id": "376433313",
+     "data": "26/05/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Saúde — atendimento domiciliar (home care) 24 horas a beneficiária do FUSEx",
+    "origem": "Campo Grande · 5001038-71.2026.4.03.6000 [VALIDAR vara]",
+    "decisao_agravada": "Tutela de urgência deferida em parte [VALIDAR ID]",
+    "recurso": "ID 367011170 · 16/04/2026",
+    "preparo": "União isenta",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Isento (União, Lei 9.289/1996) · conferido em 20/11/2026",
+    "conf_prevencao": "Origem: 5001038-71.2026.4.03.6000 · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 367175328 · 27/04/2026 — abriu vista ao MPF; mandou intimar a agravada para contraminuta | última peça: Parecer de Mérito (MPF) · ID 376433313 · 26/05/2026 | última movimentação: 26/05/2026 15:25 · CONCLUSOS PARA JULGAMENTO · Agravada idosa (83 anos), curatelada, com sequelas de dois AVC isquêmicos e alimentação por sonda · FUSEx prestava 12 horas diárias de enfermagem domiciliar · Relatório da Organização Militar recomenda modalidade de menor complexidade · Efeito suspensivo indeferido (ID 367175328, 27/04/2026) · Parecer do MPF pelo desprovimento (ID 376433313)",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "1ª Seção; AI - Tutela provisória; PRIORIDADE - Idoso(a); URGENTE",
+   "chegada": "04/11/2026",
+   "bloco": "2",
+   "situacao_atual": {
+    "ultima_decisao": "Decisão (Despacho) · ID 367175328 · 27/04/2026 — abriu vista ao MPF; mandou intimar a agravada para contraminuta",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 376433313 · 26/05/2026",
+    "ultima_informacao": "Intimação para Manifestação em Agravo de Instrumento · ID 374312714 · 18/05/2026",
+    "ultima_movimentacao": "26/05/2026 15:25 · CONCLUSOS PARA JULGAMENTO",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 367175328 · 27/04/2026 — abriu vista ao MPF; mandou intimar a agravada para contraminuta | última peça: Parecer de Mérito (MPF) · ID 376433313 · 26/05/2026 | última movimentação: 26/05/2026 15:25 · CONCLUSOS PARA JULGAMENTO"
+   },
+   "teor": {
+    "sintese_fatica": "Beneficiária do FUSEx, de 83 anos, acamada após dois AVC isquêmicos e com alimentação por sonda, pediu atendimento domiciliar integral (24 horas); o FUSEx prestava 12 horas diárias; o juízo deferiu em parte a tutela de urgência para manter o home care 24 horas enquanto persistir a prescrição médica.",
+    "inicial": "Ação de obrigação de fazer 5001038-71.2026.4.03.6000 (Campo Grande) de Maria Ângela Ortiz Dias, representada pela curadora Adriana Draghichevich, contra a União [VALIDAR vara]",
+    "decisao_recorrida": "Decisão que deferiu em parte a tutela de urgência: manter o home care integral (24 horas ininterruptas) enquanto persistir a prescrição médica de substituição da internação hospitalar [VALIDAR ID e data]",
+    "recurso": "Agravo da União ID 367011170 (16/04/2026): (1) ausência dos requisitos do artigo 300 do CPC; (2) a atenção domiciliar do FUSEx segue normas internas das Forças Armadas, com condições e limites; (3) relatório da Organização Militar aponta estabilização do quadro e recomenda modalidade de menor complexidade; (4) alto custo e impacto orçamentário; pede efeito suspensivo.",
+    "resposta": "Agravada, contraminuta ID 374031596 (17/05/2026): gravidade do quadro clínico (dependência total, sonda de gastrostomia, Glasgow 9, lesão por pressão) e prescrição médica de home care 24 horas.",
+    "parecer": "MPF, parecer ID 376433313 (26/05/2026): pelo desprovimento; requisitos da tutela de urgência preenchidos; prova pericial da necessidade.",
+    "outros": "Decisão ID 367175328 (27/04/2026, publicada em 30/04/2026): indeferiu a tutela recursal in limine, intimou a agravada e determinou vista ao MPF (pessoa idosa).",
+    "representacao": "Agravante: União (AGU). Agravada: Maria Ângela Ortiz Dias, curatelada, representada pela filha Adriana Draghichevich; advogado Antonio Gomes do Vale (procurações IDs 374031588 e 374031595; curatela ID 374031593).",
+    "preparo": "União isenta (Lei 9.289/1996)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Saúde — atendimento domiciliar (home care) 24 horas a beneficiária do FUSEx",
+     "subassuntos": "Saúde · atendimento domiciliar (home care) 24 horas · beneficiária do FUSEx · tutela de urgência",
+     "sintese": "",
+     "questoes": "1) Probabilidade do direito ao home care 24 horas diante da prescrição médica e do relatório da Organização Militar; 2) limites normativos da atenção domiciliar do FUSEx; 3) perigo de dano e impacto orçamentário.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Justiça Federal em Campo Grande [VALIDAR vara]",
+      "dispositivo": "Deferiu em parte a tutela de urgência para manter o home care integral (24 horas) enquanto persistir a prescrição médica."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "367011170",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "367011170",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "367175328",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "374031596",
+       "data": "2026-05-17"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "376433313",
+       "data": "2026-05-26"
+      }
+     ],
+     "pendencias": "Identificar a vara e o ID da decisão agravada",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 367175328 · 27/04/2026 — abriu vista ao MPF; mandou intimar a agravada para contraminuta | última peça: Parecer de Mérito (MPF) · ID 376433313 · 26/05/2026 | última movimentação: 26/05/2026 15:25 · CONCLUSOS PARA JULGAMENTO · Agravada idosa (83 anos), curatelada, com sequelas de dois AVC isquêmicos e alimentação por sonda · FUSEx prestava 12 horas diárias de enfermagem domiciliar · Relatório da Organização Militar recomenda modalidade de menor complexidade · Efeito suspensivo indeferido (ID 367175328, 27/04/2026) · Parecer do MPF pelo desprovimento (ID 376433313)"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Idoso em risco",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-04-27",
+     "fundamento": "Paradigmas do gabinete: ApCiv 0003722-19.2015.4.03.6104 (1ª Turma, 06/07/2023); AI 5022203-45.2020.4.03.0000 (3ª Turma, 23/04/2021)"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 10,
+   "processo": "5000294-34.2026.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIÃO FEDERAL x LAVINIA MARIA PEREIRA MORAIS",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "LAVINIA MARIA PEREIRA MORAIS",
+   "assunto": "Assistência à Saúde",
+   "assunto_detalhado": "Saúde — home care; plano de autogestão; responsabilidade subsidiária de ente público",
+   "grupo": "C5",
+   "tipo_caso": "Saúde · Home care · plano de saúde de autogestão · responsabilidade subsidiária da União · menor",
+   "resultado": "Ato a proferir: julgamento do agravo (voto ou monocrática), com exame do interesse recursal da União, apontado pelo MPF; efeito suspensivo negado em 21/01/2026 ‖ Proposta pelos precedentes: Conferir antes a sentença na origem (5013765-96.2025.4.03.6000): havendo, julgar prejudicado (artigo 932, III, do CPC). Sem sentença, julgamento do agravo (voto ou monocrática), com exame do interesse recursal da União (obrigação só eventual e subsidiária, como apontou o MPF e a decisão ID 350760549). Sem precedente específico no banco sobre interesse recursal da União em obrigação subsidiária; sobre home care, os precedentes examinam legitimidade e adequação do atendimento domiciliar. [VALIDAR: Sentença na origem; se houve descumprimento que tenha ativado as medidas contra a União]",
+   "modelo": "Origem: lote adp-ai (grupo A2) · não pautado",
+   "variacoes": [
+    "ORI",
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão do plantão judicial (processo 5013765-96.2025.4.03.6000) que mandou a KZT Serviços Médicos de Atenção Domiciliar manter o home care da autora, menor dependente de ventilação mecânica, e a Postal Saúde retomar o custeio, com multa diária de R$ 1.000,00; em caso de descumprimento, previu medidas contra a União e o Estado de Mato Grosso do Sul (bloqueio, depósito ou sequestro).",
+   "peculiaridades": "Autora menor (L. M. P. M.). Trâmite: decisão ID 350603286 (20/01/2026) declinou da competência para a 1ª Seção; decisão ID 350760549 (21/01/2026, Des. Fed. Herbert de Bruyn) negou o efeito suspensivo por não haver obrigação imediata à União; redistribuição à TRgMS em 10/04/2026. O Estado de MS nada opôs (ID 354566354). O MPF (ID 376958679) opina pelo não conhecimento por falta de interesse recursal [VALIDAR fundamento]. Não consta contraminuta da agravada.",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "349780952",
+     "data": "12/01/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "365627686",
+     "data": "10/04/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "350760549",
+     "data": "21/01/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "350603286",
+     "data": "20/01/2026"
+    },
+    {
+     "peca": "Parecer (conferir se do MPF)",
+     "id": "376958679",
+     "data": "28/05/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo; possível não conhecimento por falta de interesse recursal",
+    "materia": "Saúde — home care; plano de autogestão; responsabilidade subsidiária de ente público",
+    "origem": "5013765-96.2025.4.03.6000 (plantão judicial de Campo Grande, Coxim, Corumbá e Três Lagoas)",
+    "decisao_agravada": "ID 497253914 (autos de origem)",
+    "recurso": "ID 349780952 · 12/01/2026",
+    "preparo": "Isento (União)",
+    "monocratica": "Possível (artigo 932, III, do CPC) [VALIDAR]",
+    "analisado_em": "20/11/2026",
+    "tipo_caso_anterior": "AI da União · Saúde · home care de menor (Postal Saúde/KZT) com responsabilidade subsidiária da União · efeito suspensivo negado · MPF pelo não conhecimento",
+    "conf_preparo": "ISENTO (ente público) · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5013765-96.2025.4.03.6000 · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366466703 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 376958679 · 28/05/2026 | última movimentação: 29/05/2026 17:39 · CONCLUSOS PARA JULGAMENTO · Autora menor (L. M. P. M.) · Trâmite: decisão ID 350603286 (20/01/2026) declinou da competência para a 1ª Seção; decisão ID 350760549 (21/01/2026, Des. Fed. Herbert de Bruyn) negou o efeito suspensivo por não haver obrigação imediata à União; redistribuição à TRgMS em 10/04/2026 · O Estado de MS nada opôs (ID 354566354) · O MPF (ID 376958679) opina pelo não conhecimento por falta de interesse recursal [VALIDAR fundamento] · Não consta contraminuta da agravada",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; Apresentar Contraminuta; BRUNO",
+   "chegada": "04/11/2026",
+   "bloco": "1",
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 366466703 · 28/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 376958679 · 28/05/2026",
+    "ultima_informacao": "Certidão · ID 366210007 · 13/04/2026",
+    "ultima_movimentacao": "29/05/2026 17:39 · CONCLUSOS PARA JULGAMENTO",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366466703 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 376958679 · 28/05/2026 | última movimentação: 29/05/2026 17:39 · CONCLUSOS PARA JULGAMENTO"
+   },
+   "teor": {
+    "sintese_fatica": "Criança em home care, dependente de ventilação mecânica contínua, obteve no plantão ordem para que a prestadora mantenha o serviço e a Postal Saúde retome o custeio; a União e o Estado só seriam alcançados se houver descumprimento. A União recorre.",
+    "inicial": "Ação de obrigação de fazer com indenização por danos morais contra KZT Serviços Médicos de Atenção Domiciliar, Postal Saúde, União e Estado de Mato Grosso do Sul: manutenção integral do home care",
+    "decisao_recorrida": "Decisão ID 497253914 (plantão): manutenção do home care pela KZT; custeio pela Postal Saúde; medidas assecuratórias contra a União e o Estado se descumprida a ordem; multa diária de R$ 1.000,00 por réu",
+    "recurso": "Agravo ID 349780952 (12/01/2026): insurge-se contra a possibilidade de medidas constritivas contra a União e pede efeito suspensivo [VALIDAR razões na íntegra].",
+    "resposta": "Não consta contraminuta da agravada; o Estado de MS declarou ciência (ID 354566354)",
+    "parecer": "MPF ID 376958679 (28/05/2026): pelo não conhecimento do recurso da União",
+    "memoriais": "Não consta",
+    "representacao": "União: Advocacia-Geral da União (mandato legal)",
+    "preparo": "Isento"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Saúde · Home care · plano de saúde de autogestão · responsabilidade subsidiária da União · menor",
+     "sintese": "Criança em home care, dependente de ventilação mecânica contínua, obteve no plantão ordem para que a prestadora mantenha o serviço e a Postal Saúde retome o custeio; a União e o Estado só seriam alcançados se houver descumprimento. A União recorre.",
+     "questoes": "1) Interesse recursal da União diante de obrigação apenas eventual e subsidiária; 2) legitimidade da União para custear tratamento de beneficiária de plano de autogestão.",
+     "rel": {
+      "razoes": "Agravo (ID 349780952): impugna as medidas previstas contra a União [VALIDAR].",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "497253914",
+      "juizo": "Plantão Judicial de Campo Grande, Coxim, Corumbá e Três Lagoas",
+      "dispositivo": "Deferiu a tutela: manutenção do home care pela KZT, custeio pela Postal Saúde, medidas subsidiárias contra União e Estado, multa diária."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-01-12",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "mpfx": {
+      "sentido": "Outro",
+      "id": "376958679"
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Agravo de instrumento",
+       "id": "349780952",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "349780952",
+       "data": "2026-01-12"
+      },
+      {
+       "desc": "Decisão que declinou da competência",
+       "id": "350603286",
+       "data": "2026-01-20"
+      },
+      {
+       "desc": "Decisão que negou o efeito suspensivo",
+       "id": "350760549",
+       "data": "2026-01-21"
+      },
+      {
+       "desc": "Ciência do Estado de MS",
+       "id": "354566354",
+       "data": "2026-02-12"
+      },
+      {
+       "desc": "Despacho de vista ao MPF",
+       "id": "366466703",
+       "data": "2026-04-28"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "376958679",
+       "data": "2026-05-28"
+      }
+     ],
+     "pendencias": [
+      "Ler as razões da União na íntegra [VALIDAR]",
+      "Conferir intimação e prazo da agravada para contraminuta [VALIDAR]"
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366466703 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 376958679 · 28/05/2026 | última movimentação: 29/05/2026 17:39 · CONCLUSOS PARA JULGAMENTO · Autora menor (L. M. P. M.) · Trâmite: decisão ID 350603286 (20/01/2026) declinou da competência para a 1ª Seção; decisão ID 350760549 (21/01/2026, Des. Fed. Herbert de Bruyn) negou o efeito suspensivo por não haver obrigação imediata à União; redistribuição à TRgMS em 10/04/2026 · O Estado de MS nada opôs (ID 354566354) · O MPF (ID 376958679) opina pelo não conhecimento por falta de interesse recursal [VALIDAR fundamento] · Não consta contraminuta da agravada",
+     "assuntoDet": "Saúde — home care; plano de autogestão; responsabilidade subsidiária de ente público",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-01-21",
+     "fundamento": "Paradigmas do gabinete: AI 5022203-45.2020.4.03.0000 (acórdão 3ª Turma, 23/04/2021: home care com ventilação mecânica; legitimidade dos entes; desprovido); ApCiv 0003722-19.2015.4.03.6104 (acórdão 1ª Turma, 06/07/2023: plano de autogestão, home care, limitação ilegal)"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 11,
+   "processo": "5003360-35.2024.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL x ALESSANDRA PUCCI MANTELLI GALHARDO",
+   "exequente": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "executado": "ALESSANDRA PUCCI MANTELLI GALHARDO",
+   "assunto": "Inscrição / Documentação",
+   "assunto_detalhado": "Concurso do magistério superior (UFMS) — inscrição indeferida por área do doutorado",
+   "grupo": "C6",
+   "tipo_caso": "Apelação da FUFMS e remessa necessária em mandado de segurança · concurso para o magistério superior da UFMS (Edital PROGEP/UFMS 10/2024, vaga 818, Odontologia/Clínica Odontológica) · inscrição indeferida por titulação incompatível com a área exigida · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da FUFMS (ID 309394392) e remessa necessária da sentença ID 309394388; contrarrazões (ID 309394395); MPF pelo prosseguimento (ID 310137880) ‖ Proposta pelos precedentes: Voto conjunto com 5004392-75: examinar se o doutorado da impetrante se enquadra nas áreas de avaliação do edital (vinculação × razoabilidade); a nomeação e a posse decorrentes da segurança não dispensam o exame do mérito (Tema 476/STF) [VALIDAR: Termo de posse (ID 322630784) sem texto extraído; Áreas de avaliação do edital × titulação]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da FUFMS e remessa necessária da sentença que assegurou a Alessandra Pucci Mantelli Galhardo a inscrição no concurso para professor de Odontologia da UFMS, indeferida por titulação fora das áreas de avaliação do edital. A FUFMS defende a vinculação ao edital.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — concurso público (magistério superior)",
+    "origem": "Mandado de segurança 5003360-35.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 309394388 (11/09/2024)",
+    "recurso": "apelação de FUFMS (ID 309394392, 22/10/2024) · remessa necessária",
+    "preparo": "FUFMS: Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FUFMS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 309394393 · 07/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 309394388 · 11/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 322629777 · 29/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Mesmo edital e mesma tese de 5003360-35.2024.4.03.6000 e 5004392-75.2024.4.03.6000 (julgar juntos) · Impetrante nomeada (Portaria 261-RTR/UFMS, de 06/03/2025, ID 322630783) e empossada em 03/04/2025 por força da segurança (petição ID 322629777) · Tema 476/STF: posse por provimento precário não consolida a situação · Controle judicial de critério técnico do edital",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; Concurso Público",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 309394393 · 07/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 309394388 · 11/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Petição intercorrente (agravado) · ID 322629777 · 29/04/2025",
+    "ultima_informacao": "Informação · ID 309394396 · 02/12/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 309394393 · 07/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 309394388 · 11/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 322629777 · 29/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "Alessandra Pucci Mantelli Galhardo teve a inscrição indeferida no concurso para professor da Faculdade de Odontologia da UFMS porque seu doutorado não corresponderia às áreas de avaliação do edital. A liminar e a sentença asseguraram a inscrição.",
+    "inicial": "Mandado de segurança contra a Pró-Reitora de Gestão de Pessoas da UFMS e a Presidente da Comissão Especial do concurso.",
+    "decisao_recorrida": "Sentença ID 309394388 (11/09/2024): confirmou a liminar e concedeu a segurança para anular o indeferimento da inscrição da impetrante na vaga de Odontologia/Clínica Odontológica e garantir sua participação nas demais fases do concurso.",
+    "recurso": "FUFMS (ID 309394392, 22/10/2024): vinculação ao edital: a titulação da impetrante não corresponde às áreas de avaliação exigidas [VALIDAR].",
+    "resposta": "Contrarrazões da impetrante (ID 309394395).",
+    "parecer": "MPF ID 310137880: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "FUFMS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da FUFMS e remessa necessária em mandado de segurança · concurso para o magistério superior da UFMS (Edital PROGEP/UFMS 10/2024, vaga 818, Odontologia/Clínica Odontológica) · inscrição indeferida por titulação incompatível com a área exigida · liminar deferida · segurança concedida",
+     "sintese": "Alessandra Pucci Mantelli Galhardo teve a inscrição indeferida no concurso para professor da Faculdade de Odontologia da UFMS porque seu doutorado não corresponderia às áreas de avaliação do edital. A liminar e a sentença asseguraram a inscrição.",
+     "questoes": "1) Inscrição em concurso do magistério superior: correspondência da titulação às áreas de avaliação do edital; 2) situação consolidada.",
+     "rel": {
+      "razoes": "FUFMS (ID 309394392, 22/10/2024): vinculação ao edital: a titulação da impetrante não corresponde às áreas de avaliação exigidas [VALIDAR].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 309394395)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "309394388",
+      "juizo": "Mandado de segurança 5003360-35.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para anular o indeferimento da inscrição da impetrante na vaga de Odontologia/Clínica Odontológica e garantir sua participação nas demais fases do concurso."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-05-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FUFMS",
+       "tipo": "Apelação",
+       "id": "309394392",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "309394388",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "309394325",
+       "data": "2024-05-10"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "309394388",
+       "data": "2024-09-11"
+      },
+      {
+       "desc": "Apelação da FUFMS",
+       "id": "309394392",
+       "data": "2024-10-22"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "309394395",
+       "data": "2024-12-02"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "310137880",
+       "data": "2024-12-12"
+      },
+      {
+       "desc": "Petição: nomeação e posse da impetrante",
+       "id": "322629777",
+       "data": "2025-04-29"
+      },
+      {
+       "desc": "Portaria 261-RTR/UFMS (nomeação)",
+       "id": "322630783",
+       "data": "2025-04-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 309394393 · 07/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 309394388 · 11/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 322629777 · 29/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Mesmo edital e mesma tese de 5003360-35.2024.4.03.6000 e 5004392-75.2024.4.03.6000 (julgar juntos) · Impetrante nomeada (Portaria 261-RTR/UFMS, de 06/03/2025, ID 322630783) e empossada em 03/04/2025 por força da segurança (petição ID 322629777) · Tema 476/STF: posse por provimento precário não consolida a situação · Controle judicial de critério técnico do edital",
+     "assuntoDet": "Concurso do magistério superior (UFMS) — inscrição indeferida por área do doutorado",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "310137880",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 12,
+   "processo": "5004392-75.2024.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL x PRÓ-REITOR DE GESTÃO DE PESSOAS DA FUFMS",
+   "exequente": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "executado": "PRÓ-REITOR DE GESTÃO DE PESSOAS DA FUFMS",
+   "assunto": "Inscrição / Documentação",
+   "assunto_detalhado": "Concurso do magistério superior (UFMS) — inscrição indeferida por área do doutorado",
+   "grupo": "C6",
+   "tipo_caso": "Apelação da FUFMS e remessa necessária em mandado de segurança · concurso para o magistério superior da UFMS (Edital PROGEP/UFMS 10/2024, vaga 795, Psicologia, campus Pantanal) · inscrição indeferida por titulação (doutorado em Psicologia Experimental) · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da FUFMS (ID 337282442) e remessa necessária da sentença ID 337282441; contrarrazões (ID 337282447); MPF pelo prosseguimento (ID 338248977) ‖ Proposta pelos precedentes: Voto conjunto com 5003360-35: examinar se o doutorado em Psicologia Experimental se enquadra na área de avaliação Psicologia do edital; o êxito no certame por força da liminar não dispensa o exame do mérito (Tema 476/STF); nomeação e posse [VALIDAR] [VALIDAR: Nomeação e posse do impetrante; Áreas de avaliação do edital × titulação]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da FUFMS e remessa necessária da sentença que assegurou a José Henrique Parra Palumbo a inscrição no concurso para professor de Psicologia do campus Pantanal da UFMS, indeferida por titulação. A FUFMS defende a vinculação ao edital.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — concurso público (magistério superior)",
+    "origem": "Mandado de segurança 5004392-75.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 337282441 (17/06/2025)",
+    "recurso": "apelação de FUFMS (ID 337282442, 26/06/2025) · remessa necessária",
+    "preparo": "FUFMS: Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FUFMS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 337282441 · 17/06/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 338248977 · 03/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Mesmo edital e mesma tese de 5003360-35.2024.4.03.6000 e 5004392-75.2024.4.03.6000 (julgar juntos) · A FUFMS reconhece resultado final exitoso do impetrante obtido por força da liminar (ID 337282437) · Tema 476/STF: provimento precário não consolida a situação · A \"sentença\" ID 337282436 (02/09/2024) é baixa em diligência",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Concurso Público; MS",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 337282441 · 17/06/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 338248977 · 03/10/2025",
+    "ultima_informacao": "Informação · ID 337282448 · 24/09/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 337282441 · 17/06/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 338248977 · 03/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "José Henrique Parra Palumbo, bacharel e doutor em Psicologia (Psicologia Experimental), teve a inscrição indeferida no concurso para professor de Psicologia do campus Pantanal da UFMS por titulação incompatível. A liminar e a sentença asseguraram a inscrição.",
+    "inicial": "Mandado de segurança contra a Pró-Reitora de Gestão de Pessoas da UFMS e a Presidente da Comissão do concurso.",
+    "decisao_recorrida": "Sentença ID 337282441 (17/06/2025): confirmou a liminar e concedeu a segurança para anular o indeferimento da inscrição do impetrante na vaga 795 (Psicologia, CPAN) e garantir sua participação nas demais fases do concurso.",
+    "recurso": "FUFMS (ID 337282442, 26/06/2025): vinculação ao edital: o doutorado do impetrante não corresponde à área de avaliação exigida [VALIDAR].",
+    "resposta": "Contrarrazões do impetrante (ID 337282447).",
+    "parecer": "MPF ID 338248977: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogadas Geórgia Regina Rosa (OAB/PR 111.335) e Ianara Cardoso de Lima (OAB/PR 62.312).",
+    "preparo": "FUFMS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da FUFMS e remessa necessária em mandado de segurança · concurso para o magistério superior da UFMS (Edital PROGEP/UFMS 10/2024, vaga 795, Psicologia, campus Pantanal) · inscrição indeferida por titulação (doutorado em Psicologia Experimental) · liminar deferida · segurança concedida",
+     "sintese": "José Henrique Parra Palumbo, bacharel e doutor em Psicologia (Psicologia Experimental), teve a inscrição indeferida no concurso para professor de Psicologia do campus Pantanal da UFMS por titulação incompatível. A liminar e a sentença asseguraram a inscrição.",
+     "questoes": "1) Inscrição em concurso do magistério superior: correspondência da titulação às áreas de avaliação do edital; 2) situação consolidada.",
+     "rel": {
+      "razoes": "FUFMS (ID 337282442, 26/06/2025): vinculação ao edital: o doutorado do impetrante não corresponde à área de avaliação exigida [VALIDAR].",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 337282447)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "337282441",
+      "juizo": "Mandado de segurança 5004392-75.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para anular o indeferimento da inscrição do impetrante na vaga 795 (Psicologia, CPAN) e garantir sua participação nas demais fases do concurso."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-06-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FUFMS",
+       "tipo": "Apelação",
+       "id": "337282442",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "337282441",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "337282369",
+       "data": "2024-07-04"
+      },
+      {
+       "desc": "Manifestação da FUFMS: resultado final exitoso por força da liminar",
+       "id": "337282437",
+       "data": "2024-09-18"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "337282441",
+       "data": "2025-06-17"
+      },
+      {
+       "desc": "Apelação da FUFMS",
+       "id": "337282442",
+       "data": "2025-06-26"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "337282447",
+       "data": "2025-09-19"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "338248977",
+       "data": "2025-10-03"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 337282441 · 17/06/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 338248977 · 03/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Mesmo edital e mesma tese de 5003360-35.2024.4.03.6000 e 5004392-75.2024.4.03.6000 (julgar juntos) · A FUFMS reconhece resultado final exitoso do impetrante obtido por força da liminar (ID 337282437) · Tema 476/STF: provimento precário não consolida a situação · A \"sentença\" ID 337282436 (02/09/2024) é baixa em diligência",
+     "assuntoDet": "Concurso do magistério superior (UFMS) — inscrição indeferida por área do doutorado",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "338248977",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  }
+ ]
+}
