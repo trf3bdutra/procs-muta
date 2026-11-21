@@ -157,3 +157,9 @@ test('Mesa: "Bloco todo" mostra a pessoa escolhida quando o grupo inteiro está 
   const pag=read('caput/designacao/index.html');
   assert.ok(pag.includes("uD=uni('d'),uC=uni('c')")&&pag.includes("(m.nome===uD?' selected':'')")&&pag.includes("(m.nome===uC?' selected':'')")&&pag.includes('.bh .bulk select.on{'),'select preenchido');
 });
+
+test('Mesa: tipos mantidos fora dos grupos (META, ED, AgInt) num grupo à parte',()=>{
+  const fs=require('fs'),path=require('path'),m=fs.readFileSync(path.join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  for(const x of ["if(x.t&&FORA[x.t])return 'F|'+x.t;","'Mantidos pela regra · '+k.slice(2)",'id="fora"',"[data-fora]","localStorage.setItem('mesa_fora'"])assert.ok(m.includes(x),x);
+  [...m.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((x)=>new (require('vm').Script)(x[1]));
+});
