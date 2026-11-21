@@ -98,3 +98,9 @@ test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.cg-cal .cc-body{background:var(--p)}.cg-cal .cc-2m>div')&&cap.includes('.cg-cal .cc-esq .cc-esq-b{top:56px!important}'),'painéis por mês');
 });
+
+test('Calendário da Chefia: hoje só com o número em pílula; nomes de feriado curtos, numa linha',()=>{
+  const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
+  assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('<span class="cc-n"><b>${dd}</b>'),'número separado');
+  const cap=r('caput/triagem/index.html'); assert.ok(cap.includes('.cg-cal .cc-hoje .cc-n b{')&&cap.includes("replace(/^Dia Nacional de Zumbi e da /, '')"),'pílula e nomes curtos');
+});
