@@ -23415,11 +23415,11 @@
    "assunto": "Progressão Funcional com Interstício de Doze Meses",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: decisão monocrática que julga prejudicado o agravo de instrumento (retratação integral, artigo 1.018, § 1º, do CPC) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Jeferson Rogério Sperling contra a decisão que, no cumprimento de sentença 5000398-52.2023.4.03.6007 contra o DNIT, afastou os honorários contra a autarquia e condenou só o exequente. Em 09/06/2026, o juízo de origem se retratou e reformou integralmente a decisão agravada. O recurso parece prejudicado.",
+   "peculiaridades": "Retratação integral na origem (ID 582199564, comunicada no ID 379299098): perda superveniente do objeto [VALIDAR]. Contrarrazões do DNIT posteriores à retratação.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -23445,7 +23445,18 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão monocrática: agravo prejudicado pela retratação na origem",
+    "materia": "Cumprimento de sentença contra autarquia federal — honorários no cumprimento individual de sentença coletiva",
+    "origem": "7º Núcleo de Justiça 4.0 (Coxim) · 5000398-52.2023.4.03.6007",
+    "decisao_agravada": "ID 569438649 (origem)",
+    "recurso": "ID 366757589 · 15/04/2026",
+    "preparo": "PagTesouro/Pix, sem STN [VALIDAR]",
+    "monocratica": "Indicada: prejudicado",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Pix/PagTesouro (não aceito): ID 366967702 · valor R$ 64,26 · pago em 16/04/2026 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5000398-52.2023.4.03.6007 · título 0024701-30.2009.4.01.3400 · sem distribuição anterior quanto ao processo de referência (informação ID 367005103) · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -23466,6 +23477,17 @@
     "ultima_informacao": "Certidão · ID 385124109 · 08/07/2026",
     "ultima_movimentacao": "03/09/2026 13:59 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Em cumprimento individual de sentença coletiva contra o DNIT (progressão funcional; título 0024701-30.2009.4.01.3400), o juízo acolheu em parte embargos de declaração do DNIT, afastou os honorários contra a autarquia e condenou só o exequente; depois, em juízo de retratação, reformou integralmente essa decisão.",
+    "inicial": "Cumprimento de sentença contra a Fazenda Pública 5000398-52.2023.4.03.6007 (7º Núcleo de Justiça 4.0, Coxim) de Jeferson Rogério Sperling contra o DNIT",
+    "decisao_recorrida": "Decisão ID 569438649 dos autos de origem, que acolheu em parte os embargos de declaração do DNIT (honorários só contra o exequente; intimação do DNIT pelo artigo 523 do CPC)",
+    "recurso": "Agravo ID 366757589 (15/04/2026): honorários contra a Fazenda Pública no cumprimento individual de sentença coletiva (Súmula 345 e Tema 973/STJ) e sucumbência recíproca.",
+    "resposta": "DNIT, contrarrazões ID 387016543 (17/07/2026): sucumbência mínima (artigo 86, parágrafo único, do CPC) e exceção do Tema 973/STJ; pelo desprovimento.",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Comprovante PagTesouro/Pix ID 366967702 (16/04/2026). Decisão de origem ID 582199564 (09/06/2026), comunicada no ID 379299098: retratação (artigo 1.018, § 1º, do CPC) com reforma integral da decisão agravada, sucumbência recíproca (Súmula 345, Temas 973 e 410/STJ) e afastamento do artigo 523 do CPC. Redistribuição à Turma Regional de MS (decisão ID 384397932). Despacho ID 385143463 (08/07/2026): intimação para contraminuta.",
+    "representacao": "Agravante: advogada Elisaline Ayres de Aguiar Penha [VALIDAR procuração]. Agravado: DNIT (PGF).",
+    "preparo": "PagTesouro/Pix, código 20466, R$ 64,26, em 16/04/2026 (ID 366967702); sem comprovante STN [VALIDAR]"
    }
   },
   {
